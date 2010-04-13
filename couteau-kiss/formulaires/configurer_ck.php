@@ -36,6 +36,7 @@ function formulaires_configurer_ck_charger_dist(){
 		'toujours_paragrapher' => $GLOBALS['toujours_paragrapher']?1:0,
 		'forcer_lang' => $GLOBALS['forcer_lang']?1:0,
 		'no_set_html_base' => defined('_SET_HTML_BASE')?(_SET_HTML_BASE==false):0,
+		'introduction_suite' => defined('_INTRODUCTION_SUITE')?_INTRODUCTION_SUITE:'&nbsp;(...)',
 
 		'cache_strategie' => (defined('_NO_CACHE') AND strlen(_NO_CACHE))?(_NO_CACHE==0?0:-1):'',
 		'derniere_modif_invalide' => $GLOBALS['derniere_modif_invalide'],
@@ -102,6 +103,7 @@ function formulaires_configurer_ck_traiter_dist(){
 	if ($v = _request('no_set_html_base') OR !_SET_HTML_BASE){
 		$code .= ck_code_constante('_SET_HTML_BASE',$v?'false':'true');
 	}
+	$code .= ck_code_constante('_INTRODUCTION_SUITE','"'._request('introduction_suite').'"');
 
 
 	// cache

@@ -37,6 +37,12 @@
 						<div class="choix"><input type="checkbox" name="forcer_lang" id="forcer_lang" value="1"[(#ENV{forcer_lang}|=={'1'}|oui)checked="checked"] /><label for="forcer_lang"><:ck:label_forcer_lang:></label></div>
 						<div class="choix"><input type="checkbox" name="no_set_html_base" id="no_set_html_base" value="1"[(#ENV{no_set_html_base}|=={'1'}|oui)checked="checked"] /><label for="no_set_html_base"><:ck:label_no_set_html_base:></label></div>
 					</li>
+					<li class="editer_introduction_suite [ (#ENV**{erreurs}|table_valeur{introduction_suite}|oui)erreur]">
+						<label><:ck:label_introduction_suite:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{introduction_suite})</span>
+						]<input type='text' class='text' name='introduction_suite' id='introduction_suite' value="#ENV{introduction_suite}" />
+						<p class="explication"><:ck:explication_introduction_suite:></p>
+					</li>
 				</ul>
 				</fieldset>
 			</li>
