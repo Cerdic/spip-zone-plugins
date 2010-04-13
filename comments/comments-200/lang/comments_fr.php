@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_url' => 'Votre site web',
 
 'saisie_texte_legend' => 'Ajoutez votre commentaire ici', /* a supprimer ? */
-'saisie_texte_info' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code&nbsp;HTML <code>&lt;del&gt; &lt;ins&gt;</code>. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
+'saisie_texte_info' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code&nbsp;HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
 
 'submit1' => 'Pr&eacute;visualiser',
 'submit2' => 'Confirmer l\'envoi',
