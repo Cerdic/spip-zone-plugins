@@ -25,11 +25,12 @@
 
 include_spip('base/pmb_tables');
 
+$rpc_client = NULL;
 
 
 function pmb_section_extraire($id_section, $url_base='') {
 	$tableau_sections = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {
 	      //récupérer les infos sur la section parent
 	      $section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
@@ -60,17 +61,17 @@ function pmb_section_extraire($id_section, $url_base='') {
 }
 function pmb_location_extraire($id_location, $url_base='') {
 	$tableau_locationsections = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {
 	      $tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
 	      //récupérer les infos sur la localisation parent
 	      $tableau_locationsections[0] = Array();
-	      $tableau_locationsections[0]['location_id'] = $tab_locations['location']->location_id;
-	      $tableau_locationsections[0]['location_caption'] = $tab_locations['location']->location_caption;
+	      $tableau_locationsections[0]['location_id'] = $tab_locations->location->location_id;
+	      $tableau_locationsections[0]['location_caption'] = $tab_locations->location->location_caption;
 
 	      $cpt = 1;
-	      if (is_array($tab_locations['sections'])) {
-		      foreach ($tab_locations['sections'] as $section) {
+	      if (is_array($tab_locations->sections)) {
+		      foreach ($tab_locations->sections as $section) {
 			    $tableau_locationsections[$cpt] = Array();
 			    $tableau_locationsections[$cpt]['section_id'] = $section->section_id;
 			    $tableau_locationsections[$cpt]['section_location'] = $section->section_location;
@@ -88,7 +89,7 @@ function pmb_location_extraire($id_location, $url_base='') {
 }
 function pmb_liste_afficher_locations($url_base) {
 	$tableau_sections = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {
 	      $tab_locations = $ws->pmbesOPACGeneric_list_locations();
 	      $cpt = 0;
@@ -102,7 +103,7 @@ function pmb_liste_afficher_locations($url_base) {
 	      }
 	} catch (Exception $e) {
 		 echo 'Exception reçue (3) : ',  $e->getMessage(), "\n";
-	} 
+	}
 	return $tableau_locations;
 }
 
@@ -112,7 +113,7 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 	$search = array();
 	$search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
 			
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {	
 			$tableau_resultat[0] = Array();
 					
@@ -121,8 +122,8 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 			$searchId=$r["searchId"];
 			$tableau_resultat[0][' '] = $r["nbResults"];
 	    
-			 //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
-			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
+			 //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf-8");
+			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
 			  $i = 1;
 			  if (is_array($r)) {
 			      foreach($r as $value) {
@@ -146,21 +147,21 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {
 	      $result = $ws->pmbesCollections_get_collection_information_and_notices($id_collection,$id_session);
 	      if ($result) {
-		  $tableau_resultat['collection_id'] = $result['information']->collection_id;
-		  $tableau_resultat['collection_name'] = $result['information']->collection_name;
-		  $tableau_resultat['collection_parent'] = $result['information']->collection_parent;
-		  $tableau_resultat['collection_issn'] = $result['information']->collection_issn;
-		  $tableau_resultat['collection_web'] = $result['information']->collection_web;
+		  $tableau_resultat['collection_id'] = $result->information->collection_id;
+		  $tableau_resultat['collection_name'] = $result->information->collection_name;
+		  $tableau_resultat['collection_parent'] = $result->information->collection_parent;
+		  $tableau_resultat['collection_issn'] = $result->information->collection_issn;
+		  $tableau_resultat['collection_web'] = $result->information->collection_web;
 		   $tableau_resultat['notice_ids'] = Array();
 
 		$liste_notices = Array();
 		  $cpt=0;
-		  if (is_array($result['notice_ids'])) {
-			      foreach($result['notice_ids'] as $cle=>$valeur) {
+		  if (is_array($result->notice_ids)) {
+			      foreach($result->notice_ids as $cle=>$valeur) {
 				if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
 				$cpt++;
 			      }
@@ -187,25 +188,25 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {
 	      $result = $ws->pmbesPublishers_get_publisher_information_and_notices($id_editeur,$id_session);
 	      if ($result) {
-		  $tableau_resultat['publisher_id'] = $result['information']->publisher_id;
-		  $tableau_resultat['publisher_name'] = $result['information']->publisher_name;
-		  $tableau_resultat['publisher_address1'] = $result['information']->publisher_address1;
-		  $tableau_resultat['publisher_address2'] = $result['information']->publisher_address2;
-		  $tableau_resultat['publisher_zipcode'] = $result['information']->publisher_zipcode;
-		  $tableau_resultat['publisher_city'] = $result['information']->publisher_city;
-		  $tableau_resultat['publisher_country'] = $result['information']->publisher_country;
-		  $tableau_resultat['publisher_web'] = $result['information']->publisher_web;
-		  $tableau_resultat['publisher_comment'] = $result['information']->publisher_comment;
+		  $tableau_resultat['publisher_id'] = $result->information->publisher_id;
+		  $tableau_resultat['publisher_name'] = $result->information->publisher_name;
+		  $tableau_resultat['publisher_address1'] = $result->information->publisher_address1;
+		  $tableau_resultat['publisher_address2'] = $result->information->publisher_address2;
+		  $tableau_resultat['publisher_zipcode'] = $result->information->publisher_zipcode;
+		  $tableau_resultat['publisher_city'] = $result->information->publisher_city;
+		  $tableau_resultat['publisher_country'] = $result->information->publisher_country;
+		  $tableau_resultat['publisher_web'] = $result->information->publisher_web;
+		  $tableau_resultat['publisher_comment'] = $result->information->publisher_comment;
 		   $tableau_resultat['notice_ids'] = Array();
 
 		  $liste_notices = Array();
 		  $cpt=0;
-		  if (is_array($result['notice_ids'])) {
-			foreach($result['notice_ids'] as $cle=>$valeur) {
+		  if (is_array($result->notice_ids)) {
+			foreach($result->notice_ids as $cle=>$valeur) {
 			  if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
 			  $cpt++;
 			}
@@ -231,35 +232,35 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {
 	      $result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,$id_session);
 	      if ($result) {
-		  $tableau_resultat['author_id'] = $result['information']->author_id;
-		  $tableau_resultat['author_type'] = $result['information']->author_type;
-		  $tableau_resultat['author_name'] = $result['information']->author_name;
-		  $tableau_resultat['author_rejete'] = $result['information']->author_rejete;
-		  if ($result['information']->author_rejete) {
+		  $tableau_resultat['author_id'] = $result->information->author_id;
+		  $tableau_resultat['author_type'] = $result->information->author_type;
+		  $tableau_resultat['author_name'] = $result->information->author_name;
+		  $tableau_resultat['author_rejete'] = $result->information->author_rejete;
+		  if ($result->information->author_rejete) {
 		      $tableau_resultat['author_nomcomplet'] =  $tableau_resultat['author_rejete'].' '.$tableau_resultat['author_name'];
 		  } else {
 		      $tableau_resultat['author_nomcomplet'] = $tableau_resultat['author_name'];
 		  }
 
-		  $tableau_resultat['author_see'] = $result['information']->author_see;
-		  $tableau_resultat['author_date'] = $result['information']->author_date;
-		  $tableau_resultat['author_web'] = $result['information']->author_web;
-		  $tableau_resultat['author_comment'] = $result['information']->author_comment;
-		  $tableau_resultat['author_lieu'] = $result['information']->author_lieu;
-		  $tableau_resultat['author_ville'] = $result['information']->author_ville;
-		  $tableau_resultat['author_pays'] = $result['information']->author_pays;
-		  $tableau_resultat['author_subdivision'] = $result['information']->author_subdivision;
-		  $tableau_resultat['author_numero'] = $result['information']->author_numero;
+		  $tableau_resultat['author_see'] = $result->information->author_see;
+		  $tableau_resultat['author_date'] = $result->information->author_date;
+		  $tableau_resultat['author_web'] = $result->information->author_web;
+		  $tableau_resultat['author_comment'] = $result->information->author_comment;
+		  $tableau_resultat['author_lieu'] = $result->information->author_lieu;
+		  $tableau_resultat['author_ville'] = $result->information->author_ville;
+		  $tableau_resultat['author_pays'] = $result->information->author_pays;
+		  $tableau_resultat['author_subdivision'] = $result->information->author_subdivision;
+		  $tableau_resultat['author_numero'] = $result->information->author_numero;
 		  $tableau_resultat['notice_ids'] = Array();
 
 		  $liste_notices = Array();
 		  $cpt=0;
-		  if (is_array($result['notice_ids'])) {
-			foreach($result['notice_ids'] as $cle=>$valeur) {
+		  if (is_array($result->notice_ids)) {
+			foreach($result->notice_ids as $cle=>$valeur) {
 			  if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
 			  $cpt++;
 			}
@@ -353,7 +354,7 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 	}
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {	
 			$tableau_resultat[0] = Array();
 					
@@ -362,13 +363,19 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 			  $r=$ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
 			/*} else if (($look_ALL)&&($id_section)&&(!$typdoc)){
 			  $r=$ws->pmbesSearch_simpleSearchLocalise($searchType,$recherche,$id_location,$id_section);
-			*/} else {
+			*/} 
+			 else {
+			 try {
 			  $r=$ws->pmbesOPACAnonymous_advancedSearch($search);
+			 }catch (Exception $e) {
+				 echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
 			}
-			$searchId=$r["searchId"];
-			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
+			 
+			}
+			$searchId=$r->searchId;
+			$tableau_resultat[0]['nb_resultats'] = $r->nbResults;
 	    
-			$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
+			$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
 			$i = 1;
 			  if (is_array($r)) {
 			      foreach($r as $value) {
@@ -390,12 +397,12 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 function pmb_recuperer_champs_recherche($langue=0) {
 	$tresultat = Array();
 	
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try {
 	     $result = $ws->pmbesSearch_getAdvancedSearchFields('opac|search_fields',$langue,true);
 	     $cpt=0;
 	     if (is_array($result)) {
-			      foreach ($result as $res) {
+			      foreach ($result as &$res) {
 					    $tresultat[$cpt] = Array();
 					    $tresultat[$cpt]['id'] = $res->id;
 					    $tresultat[$cpt]['label'] = $res->label;
@@ -404,7 +411,7 @@ function pmb_recuperer_champs_recherche($langue=0) {
 					    $tresultat[$cpt]['values'] = Array();
 					    $cpt2=0;
 					    if (is_array($res->values)) {
-						    foreach ($res->values as $value) {
+						    foreach ($res->values as &$value) {
 							$tresultat[$cpt]['values'][$cpt2]['value_id'] = $value->value_id;
 							$tresultat[$cpt]['values'][$cpt2]['value_caption'] = $value->value_caption;
 							$cpt2++;
@@ -428,94 +435,186 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 	    $indice_exemplaire = 0;
 	    $tresultat = Array();
 	    $id_notice = $value->id;
-	    if (is_array($value->f)){
-	      foreach ( $value->f as $c1=>$v1) {
-		  if (is_array($v1->item)){
-	      
-		      foreach ( $v1->item as $c2=>$v2) {
-			      if ($v2->key=="c") $dernierTypeTrouve = $v2->value;
-			      if ($v2->key=="id") $dernierIdTrouve = $v2->value;
-			      if (is_array($v2->value)){
-				  foreach ( $v2->value as $c4=>$v4) {
-							    $dernierSousTypeTrouve=$v4['c'];
-							    $texte = $v4['value'];
-							    if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $tresultat['isbn'] .= $texte;
-							    if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $tresultat['reliure'] .= $texte;
-							    if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $tresultat['prix'] .= $texte;
-							    
-							    if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $tresultat['langues'] .= $texte;
-							    
-							    if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
-							    
-							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
-							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "e")) $tresultat['soustitre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
+	    $authors_700 = array();
+	    $authors_701 = array();
+	    $authors_702 = array();
+	    
+	    if (isset($value->f) && is_array($value->f)) {
+	    	foreach($value->f as $a_field_f) {
+	    		$field_type = $a_field_f->c;
+	    		$field_id = $a_field_f->id;
+	    		
+	    		if (isset($a_field_f->s) && is_array($a_field_f->s)) {
+	    			foreach($a_field_f->s as $a_field_s) {
+	    				$field_subtype = $a_field_s->c;
+	    				$field_value = $a_field_s->value;
+	    				
+	    				switch($field_type) {
+	    					case '010': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+	    								$tresultat['isbn'] .= $field_value;
+	    								break;
+	    							}
+	    							case 'b': {
+	    								$tresultat['reliure'] .= $field_value;
+	    								break;
+	    							}
+	    							case 'd': {
+	    								$tresultat['prix'] .= $field_value;
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '101': {
+	    						 switch($field_subtype) {
+	    							case 'a': {
+	    								$tresultat['langues'] .= $field_value;
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '102': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+	    								$tresultat['pays'] .= $field_value;
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '200': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+	    								$tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
+	    								break;
+	    							}
+	    							 case 'e': {
+	    								$tresultat['soustitre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
+	    								break;
+	    							}
+	    							case 'f': {
+	    								$tresultat['auteur'] .= $field_value;
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '210': {
+	    						switch($field_subtype) {
+	    							case 'c': {
+	    								$tresultat['editeur'] .= $field_value;
+	    								break;
+	    							}
+	    							case 'a': {
+	    								$tresultat['editeur'] .= ' ('.$field_value.')';
+	    								$tresultat['id_editeur'] = $field_id;
+	    								break;
+	    							}
+	    							case 'd': {
+	    								$tresultat['annee_publication'] .= $field_value;
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '215': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+	    								$tresultat['importance'] .= $field_value;
+	    								break;
+	    							}
+	    							case 'c': {
+	    								$tresultat['presentation'] .= $field_value;
+	    								break;
+	    							}
+	    							case 'd': {
+	    								$tresultat['format'] .= $field_value;
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '225': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+	    								$tresultat['collection'] .= $field_value;
+	    								$tresultat['id_collection'] = $field_id;
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '330': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+	    								$tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
+	    								break;
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '700': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+										$tresultat['id_auteur'] = $field_id;
+										$authors_700[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
+										$tresultat['lesauteurs'] .= $field_value;
+										break;	    								
+	    							}
+	    							case 'b': {
+										$tresultat['lesauteurs'] = $field_value." ".$tresultat['lesauteurs'];
+										$tresultat['liensauteurs'] .= " ".$field_value;
+										break;	    								
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '701': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+										$tresultat['id_auteur2'] = $field_id;
+										$authors_701[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
+										$tresultat['lesauteurs2'] .= $field_value;
+										break;	    								
+	    							}
+	    							case 'b': {
+										$tresultat['lesauteurs2'] = $field_value." ".$tresultat['lesauteurs'];
+										$tresultat['liensauteurs2'] .= " ".$field_value;
+										break;	    								
+	    							}
+	    						}
+	    						break;
+	    					}
+	    					case '702': {
+	    						switch($field_subtype) {
+	    							case 'a': {
+										$tresultat['id_auteur3'] = $field_id;
+										$authors_702[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
+										$tresultat['lesauteurs3'] .= $field_value;
+										break;	    								
+	    							}
+	    							case 'b': {
+										$tresultat['lesauteurs3'] = $field_value." ".$tresultat['lesauteurs'];
+										$tresultat['liensauteurs3'] .= " ".$field_value;
+										break;	    								
+	    							}
+	    						}
+	    						break;
+	    					}
+	    				}
 
-							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
-							    
-							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
-							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['editeur'] .= ' ('.$texte.')';
-							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['id_editeur'] = $dernierIdTrouve;
-							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $tresultat['annee_publication'] .= $texte;
-							    
-							    if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $tresultat['importance'] .= $texte;
-							    if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $tresultat['presentation'] .= $texte;
-							    if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $tresultat['format'] .= $texte;
-							    
-							    if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
-							    if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
-							    
-							    if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
-							    
-							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) {
-										$tresultat['id_auteur'] = $dernierIdTrouve;
-										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
-										      $tresultat['liensauteurs'].="</a>, ";
-										}
-										$tresultat['liensauteurs'].="<a href=\"?page=author_see&amp;id=".$dernierIdTrouve."\">".$texte;
-										$tresultat['lesauteurs'] .= $texte;
-										$avantDernierTypeTrouve = $dernierTypeTrouve;
-										
-							    }
-							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) {
-										$tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
-										$tresultat['liensauteurs'] .= " ".$texte;
-							    }
-							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "a")) {
-										$tresultat['id_auteur2'] = $dernierIdTrouve;
-										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
-										      $tresultat['liensauteurs2'].="</a>, ";
-										}
-										$tresultat['liensauteurs2'].="<a href=\"?page=author_see&amp;id=".$dernierIdTrouve."\">".$texte;
-										$tresultat['lesauteurs2'] .= $texte;
-										$avantDernierTypeTrouve = $dernierTypeTrouve;
-										
-							    }
-							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "b")) {
-										$tresultat['lesauteurs2'] = $texte." ".$tresultat['lesauteurs2'];
-										$tresultat['liensauteurs2'] .= " ".$texte;
-							    }
-							    if (($dernierTypeTrouve == "702") && ($dernierSousTypeTrouve == "a")) {
-										$tresultat['id_auteur3'] = $dernierIdTrouve;
-										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
-										      $tresultat['liensauteurs3'].="</a>, ";
-										}
-										$tresultat['liensauteurs3'].="<a href=\"?page=author_see&amp;id=".$dernierIdTrouve."\">".$texte;
-										$tresultat['lesauteurs3'] .= $texte;
-										$avantDernierTypeTrouve = $dernierTypeTrouve;
-										
-							    }
-							    if (($dernierTypeTrouve == "702") && ($dernierSousTypeTrouve == "b")) {
-										$tresultat['lesauteurs3'] = $texte." ".$tresultat['lesauteurs3'];
-										$tresultat['liensauteurs3'] .= " ".$texte;
-							    }
-							    
-							    
-				  }
-			    }
-		      }
-		  }
-	     }
+	    			}
+	    		}
+	    		
+	    	}
 	    }
+	    
+	    $tresultat['liensauteurs']=implode(', ', $authors_700);
+	    $tresultat['liensauteurs2']=implode(', ', $authors_701);
+	    $tresultat['liensauteurs3']=implode(', ', $authors_702);
 	    
 	    if ($tresultat['lesauteurs'] == "")
 		  $tresultat['lesauteurs'] = $tresultat['auteur'];
@@ -525,7 +624,6 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 	     if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
 	     
 	    $tresultat['id'] = $id_notice;
-	    
 
 	  
 }
@@ -533,7 +631,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 function pmb_ws_autres_lecteurs($id_notice) {
 
 	$tresultat = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	
 	try {	
 	     if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
@@ -558,7 +656,7 @@ function pmb_ws_autres_lecteurs($id_notice) {
 function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 
 	$tresultat = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	
 	try {	
 		$r=$ws->pmbesNotices_listNoticeExplNums($id_notice, $id_session);
@@ -585,7 +683,7 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
   
 	$tresultat = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	
 	try {	
 	     $r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
@@ -621,7 +719,7 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	try {	
 	$listenotices = array(''.$id_notice);
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
+		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
 		  if (is_array($r)) {
 		      foreach($r as $value) {
 			      pmb_ws_parser_notice_array($value, $tresultat);
@@ -643,7 +741,7 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 	try {	
 	
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
+		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
 		  $cpt=0;
 		  if (is_array($r)) {
 		      foreach($r as $value) {
@@ -663,20 +761,26 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 }
 
 //charger les webservices
-function pmb_ws_charger_wsdl(&$ws, $url_base) {
-	//if (lire_config("spip_pmb/wsdl","") != "") {
-	//	    $ws=new jsonRPCClient(lire_config("spip_pmb/wsdl",""));
-	//} else {
-	//require_once 'jsonRPCClient.php';
-	//include_spip('jsonRPCClient');
-		try {
-		      $ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
-		      //$ws=new jsonRPCClient("http://cc-tulle-et-correze.reseaubibli.fr/ws/connector_out.php?source_id=2", true);
-		      
-		} catch (Exception $e) {
+function pmb_ws_charger_client(&$ws, $url_base) {
+	global $rpc_client;
+	if ($rpc_client)
+		$ws = $rpc_client;
+	try {
+		$rpc_type = lire_config("spip_pmb/rpc_type","soap");
+		if($rpc_type == "soap") {
+			ini_set("soap.wsdl_cache_enabled", "0");
+			$ws = new SoapClient(lire_config("spip_pmb/wsdl", "http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"), array("features" => SOAP_SINGLE_ELEMENT_ARRAYS, 'encoding' => 'iso8859-1'));
+		}
+		else {
+			include_spip('jsonRPCClient');
+			$ws = new jsonRPCClient(lire_config("spip_pmb/jsonrpc", ""), false);
+		}
+		$rpc_client = $ws;
+	}
+	catch (Exception $e) {
 		    echo 'Exception reçue (15) : ',  $e->getMessage(), "\n";
-		} 
-	//}
+	} 
+
 }
 function pmb_ws_liste_tri_recherche() {
 	//retourne un tableau contenant la liste des tris possibles
@@ -703,7 +807,7 @@ function pmb_ws_liste_tri_recherche() {
 	...
       )*/
 	$tresultat = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	
 	try {	
 	     $tresultat=$ws->pmbesSearch_get_sort_types();
@@ -717,7 +821,7 @@ function pmb_ws_liste_tri_recherche() {
 // retourne un tableau associatif contenant tous les champs d'une notice 
 function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
 	return $tableau_resultat;
 }
@@ -727,7 +831,7 @@ function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 function pmb_tabnotices_extraire ($tabnotices, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
 	$listenotices = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	if (is_array($tabnotices)) {
 		foreach($tabnotices as $cle=>$valeur){
 		    $listenotices[] = $valeur;
@@ -742,7 +846,7 @@ function pmb_tabnotices_extraire ($tabnotices, $url_base, $mode='auto') {
 // retourne un tableau associatif contenant les prêts en cours
 function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	try{
 	      $loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
 	      $liste_notices = Array();
@@ -788,7 +892,7 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 
 function pmb_reservations_extraire($pmb_session, $url_base) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
 	$liste_notices = Array();
 	
@@ -826,7 +930,7 @@ function pmb_reservations_extraire($pmb_session, $url_base) {
 function pmb_tester_session($pmb_session, $id_auteur, $url_base) {
 	
 	//tester si la session pmb est toujours active
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	
 
 	try {
@@ -847,7 +951,7 @@ function pmb_tester_session($pmb_session, $id_auteur, $url_base) {
 	}
 }
 function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location, $url_base) {
-	pmb_ws_charger_wsdl($ws, $url_base);
+	pmb_ws_charger_client($ws, $url_base);
 	return $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
 }
 
