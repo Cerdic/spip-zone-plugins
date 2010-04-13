@@ -26,7 +26,7 @@
 	]
 
 	<!--#navigation-->
-	[(#ENV{retour}|=={'./'}|?{[(#SET{retour,/})],[(#SET{retour,[(#VAL{/}|concat{#ENV{retour,''}})]})]})]
+	[(#ENV{retour}|=={'./'}|?{[(#SET{retour,../})],[(#SET{retour,[(#VAL{../}|concat{#ENV{retour,''}})]})]})]
 	[<a class="retour" href="[(#GET{retour,''})]"><:retour:> <span>(#ENV{retour})</span></a>]
 	[<a class="retour" href="(#GET{retour,''}|parametre_url{var_mode,inclure})"><:retour:> <span>var_mode=inclure</span></a>]	
 	<div class="cadre cadre-info">
