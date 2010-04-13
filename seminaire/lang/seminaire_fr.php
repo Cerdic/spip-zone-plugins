@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aujour'					 =>		'Les &eacute;v&eacute;nements de la journ&eacute;e',
 	'lien_tout_replier'			 =>		'Sans r&eacute;sum&eacute;',
 	'lien_tout_deplier'			 =>		'Avec r&eacute;sum&eacute;',
+	'titre_agenda'				 =>		'Agenda Scientifique',
 	//pour les groupes de mots cl&eacute;s
 	'mots_categorie_kitcnrs'	 => 	'Les mots cl&eacute;s à affecter aux articles pour que les &eacute;v&eacute;nements soient encore mieux tri&eacute;s',
 	'mots_cles_techniques_kitcnrs'=>	'Les mots cl&eacute;s pour rep&eacute;rer plus finement les diff&eacute;rents types d&rsquo;&eacute;v&eacute;nements',
