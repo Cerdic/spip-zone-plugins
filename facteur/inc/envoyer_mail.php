@@ -21,6 +21,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$message_html	= $corps['html'];
 		$message_texte	= nettoyer_caracteres_mail($corps['texte']);
 		$pieces_jointes	= $corps['pieces_jointes'];
+		$nom_envoyeur = $corps['nom_envoyeur'];
 	} else {
 		$message_texte	= nettoyer_caracteres_mail($corps);
 	}
@@ -29,6 +30,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 	if (!empty($from))
 		$facteur->From = $from;
+	if ($nom_envoyeur)
+		$facteur->FromName = $nom_envoyeur;
 	if (count($pieces_jointes)) {
 		foreach ($pieces_jointes as $piece) {
 			$facteur->AddAttachment($piece['chemin'], $piece['nom'], $piece['encodage'], $piece['mime']);
