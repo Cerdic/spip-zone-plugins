@@ -8,8 +8,16 @@ options:
       nom: 'champ_destinataires'
       label: '<:formidable:traiter_email_option_destinataires_label:>'
       explication: '<:formidable:traiter_email_option_destinataires_explication:>'
-      obligatoire: 'oui'
+      forcer_type: [destinataires]
       env: true
+  -
+    saisie: 'input'
+    options:
+      nom: 'destinataires_plus'
+      label: '<:formidable:traiter_email_option_destinataires_plus_label:>'
+      explication: '<:formidable:traiter_email_option_destinataires_plus_explication:>'
+    verifier:
+      type: 'email'
   -
     saisie: 'champ'
     options:

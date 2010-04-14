@@ -10,18 +10,33 @@ function traiter_email_dist($args, $retours){
 	$champs = saisies_lister_champs($saisies);
 	
 	// On récupère les destinataires
-	$destinataires = _request($options['champ_destinataires']);
-	if (is_array($destinataires)){
+	if ($options['champ_destinataires']){
+		$destinataires = _request($options['champ_destinataires']);
+		if (is_array($destinataires)){
+			// On récupère les mails des destinataires
+			$destinataires = array_map('intval', $destinataires);
+			$destinataires = sql_allfetsel(
+				'email',
+				'spip_auteurs',
+				sql_in('id_auteur', $destinataires)
+			);
+			$destinataires = array_map('reset', $destinataires);
+		}
+	}
+	if (!$destinataires)
+		$destinataires = array();
+	
+	// On ajoute les destinataires en plus
+	if ($options['destinataires_plus']){
+		$destinataires_plus = explode(',', $options['destinataires_plus']);
+		$destinataires_plus = array_map('trim', $destinataires_plus);
+		$destinataires = array_merge($destinataires, $destinataires_plus);
+		$destinataires = array_unique($destinataires);
+	}
+	
+	// Si on a bien des destinataires, on peut continuer
+	if ($destinataires){
 		include_spip('inc/filtres');
-		
-		// On récupère les mails des destinataires
-		$destinataires = array_map('intval', $destinataires);
-		$destinataires = sql_allfetsel(
-			'email',
-			'spip_auteurs',
-			sql_in('id_auteur', $destinataires)
-		);
-		$destinataires = array_map('reset', $destinataires);
 		
 		// On récupère le courriel de l'envoyeur
 		$courriel_envoyeur = _request($options['champ_courriel']);
