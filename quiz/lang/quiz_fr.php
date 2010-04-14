@@ -6,13 +6,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//A
 	'ajouter_reponse' => 'Ajouter une r&eacute;ponse',
-	'ajouter_reponse_question' => 'Ajouter une r&eacute;ponse &agrave; la question',
+	'ajouter_reponse_confirme' => 'Ajouter une r&eacute;ponse &agrave; la question',
 	'ajouter_question' => 'Ajouter une question &agrave; ce quiz',
 	'article_pas_question' => 'Cet article n\'est pas une question de quiz. Pour le transformer en question, ajoutez-lui simplement une r&eacute;ponse.',
 	
 	//B
 	'bouton_ajouter_reponse' => 'Ajouter une r&eacute;ponse',
 	'bouton_ajouter_question' => 'Ajouter une question',
+	'bouton_supprimer_reponse' => 'X',
 	
 	//C
 	'corrige' => 'Corrig&eacute;',
@@ -40,6 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//R 
 	'reponses_possibles' => 'Les r&eacute;ponses possibles &agrave; cette question :',
 	'reponse_juste' => 'La r&eacute;ponse juste est la r&eacute;ponse N&deg;',
+	
+	//S
+	'supprimer_reponse_confirme' => 'Supprimer la r&eacute;ponse ',
 	
 	//T
 	'transformer_question' => 'Transformer cet article en question de quiz.'

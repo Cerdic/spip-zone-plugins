@@ -5,6 +5,8 @@ dl.corrige 				{ border: 1px solid #dedede; background:#efefef; padding: 8px; }
 dd.reponse .numero 		{ font-size:1.3em; width: 24px; }
 .reponse.juste .numero 	{ background-color:green; color:white; }
 
+dd.reponse button.submit {float:right;}
+
 @media print
 {
 dl.corrige {display:none; }
