@@ -21,7 +21,7 @@
 	function exec_naviguer_export() {
 		$id_rubrique = $_REQUEST['id_rubrique'];
 
-		if (!autoriser('exporter', 'lettres')) {
+		if (!autoriser('exporterabonnes', 'lettres')) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;

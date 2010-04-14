@@ -16,13 +16,12 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('inc/presentation');
 	include_spip('lettres_fonctions');
-	include_spip('surcharges_fonctions');
 
 
 	function exec_naviguer_import() {
 		$id_rubrique = $_REQUEST['id_rubrique'];
 
-		if (!autoriser('importer', 'lettres')) {
+		if (!autoriser('importerabonnes', 'lettres')) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
@@ -32,8 +31,9 @@
 			if (!$_FILES['fichier_csv']['error']) {
 				$id_rubrique = $_POST['id_parent'];
 				$format = $_POST['format'];
+				$importer_csv = charger_fonction('importer_csv','inc');
 				$fichier = $_FILES['fichier_csv']['tmp_name'];
-				$tableau = surcharges_importer_csv($fichier);
+				$tableau = $importer_csv($fichier,false,";");
 				$tableau_emails_valides = array();
 				$tableau_emails_non_valides = array();
 				$tableau_desabonnes = array();

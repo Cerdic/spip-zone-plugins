@@ -20,8 +20,9 @@ function autoriser_lettres_dist($faire, $type, $id, $qui, $opt) {
 		case 'onglet':
 		case 'configurer':
 		case 'voir':
-		case 'exporter':
-		case 'importer':
+		case 'exporterabonnes':
+		case 'exporterdesabonnes':
+		case 'importerabonnes':
 		case 'purger':
 		case 'joindre':
 		case 'editer':
