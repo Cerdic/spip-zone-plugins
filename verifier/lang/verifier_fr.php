@@ -7,8 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_date' => 'Le format de la date n\'est pas accept&eacute;.',
-	'erreur_email' => 'L\'adresse de courriel n\'a pas un format valide.',
-	'erreur_email_nondispo' => 'L\'adresse de courriel est d&eacute;j&agrave; enregistr&eacute;.',
+	'erreur_email' => 'L\'adresse de courriel <em>@email@</em> n\'a pas un format valide.',
+	'erreur_email_nondispo' => 'L\'adresse de courriel <em>@email@</em> est d&eacute;j&agrave; utilis&eacute;e.',
 	'erreur_entier' => 'La valeur doit &ecirc;tre un entier.',
 	'erreur_entier_entre' => 'La valeur doit &ecirc;tre comprise entre @min@ et @max@.',
 	'erreur_entier_max' => 'La valeur doit &ecirc;tre inf&eacute;rieure &agrave; @max@.',
