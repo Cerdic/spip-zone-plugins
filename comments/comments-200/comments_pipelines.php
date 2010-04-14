@@ -139,7 +139,11 @@ function comments_formulaire_traiter($flux){
 			// le message est OK, il suffit de mettre une ancre !
 			$flux['data']['message_ok'] = 
 			  _T('comments:reponse_comment_ok')
-				. "<script type='text/javascript'>jQuery(function(){window.location.hash='forum$id_forum';});</script>";
+				. "<script type='text/javascript'>jQuery(function(){
+			jQuery('#formulaire_forum .reponse_formulaire').detach().appendTo(jQuery('#forum$id_forum').parent()).addClass('success');
+			jQuery('#forum$id_forum').parent().positionner();
+			//window.location.hash='forum$id_forum';
+			});</script>";
 			;
 		}
 		else {
