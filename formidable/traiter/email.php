@@ -44,18 +44,40 @@ function traiter_email_dist($args, $retours){
 		}
 		if (!$courriel_envoyeur) $courriel_envoyeur = '';
 		
-		// On récupère le nom de l'envoyeur
-		$nom_envoyeur = $options['champ_nom'] ? _request($options['champ_nom']) : $courriel_envoyeur;
-		
-		// On récupère le sujet s'il existe sinon on le construit
-		$sujet = $options['champ_sujet'] ? _request($options['champ_sujet']) : _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
-		$sujet = filtrer_entites($sujet);
-		
-		// Maintenant on parcourt les champs pour générer le tableau des valeurs
+		// On parcourt les champs pour générer le tableau des valeurs
 		$valeurs = array();
 		foreach ($champs as $champ){
 			$valeurs[$champ] = _request($champ);
 		}
+		
+		// On récupère le nom de l'envoyeur
+		if ($options['champ_nom']){
+			$a_remplacer = array();
+			if (preg_match_all('/@[\w]+@/', $options['champ_nom'], $a_remplacer)){
+				$a_remplacer = $a_remplacer[0];
+				foreach ($a_remplacer as $cle=>$val) $a_remplacer[$cle] = trim($val, '@');
+				$a_remplacer = array_flip($a_remplacer);
+				$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+				$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $GLOBALS['meta']['nom_site']));
+			}
+			$nom_envoyeur = trim(_L($options['champ_nom'], $a_remplacer));
+		}
+		if (!$nom_envoyeur) $nom_envoyeur = $GLOBALS['meta']['nom_site'];
+		
+		// On récupère le sujet s'il existe sinon on le construit
+		if ($options['champ_sujet']){
+			$a_remplacer = array();
+			if (preg_match_all('/@[\w]+@/', $options['champ_sujet'], $a_remplacer)){
+				$a_remplacer = $a_remplacer[0];
+				foreach ($a_remplacer as $cle=>$val) $a_remplacer[$cle] = trim($val, '@');
+				$a_remplacer = array_flip($a_remplacer);
+				$a_remplacer = array_intersect_key($valeurs, $a_remplacer);
+				$a_remplacer = array_merge($a_remplacer, array('nom_site_spip' => $GLOBALS['meta']['nom_site']));
+			}
+			$sujet = trim(_L($options['champ_sujet'], $a_remplacer));
+		}
+		if (!$sujet) $sujet = _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
+		$sujet = filtrer_entites($sujet);
 		
 		// On génère la vue HTML
 		$html = recuperer_fond(

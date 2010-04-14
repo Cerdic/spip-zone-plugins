@@ -14,7 +14,6 @@
 		</span>
 	</li>
 	</BOUCLE_formulaire_chemin>
-	</B_formulaire_chemin>
 </ul>
 <!--/#hierarchie-->
 
@@ -88,5 +87,10 @@
 <!--/#navigation-->
 
 <!--#extra-->
+[(#GET{configurer}|=={traitements}|oui)
+<div class="cadre cadre-e cadre_padding">
+	#INCLURE{fond=modeles/formulaire_aide_memoire, id_formulaire=#ENV{id_formulaire}}
+</div>
+]
 <!--/#extra-->
 </BOUCLE_autoriser>

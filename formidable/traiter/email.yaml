@@ -26,16 +26,14 @@ options:
       explication: '<:formidable:traiter_email_option_envoyeur_courriel_explication:>'
       env: true
   -
-    saisie: 'champ'
+    saisie: 'input'
     options:
       nom: 'champ_nom'
       label: '<:formidable:traiter_email_option_envoyeur_nom_label:>'
       explication: '<:formidable:traiter_email_option_envoyeur_nom_explication:>'
-      env: true
   -
-    saisie: 'champ'
+    saisie: 'input'
     options:
       nom: 'champ_sujet'
       label: '<:formidable:traiter_email_option_sujet_label:>'
       explication: '<:formidable:traiter_email_option_sujet_explication:>'
-      env: true

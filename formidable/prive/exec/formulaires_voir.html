@@ -36,6 +36,12 @@
 			[(#GET{traitements_disponibles}|table_valeur{#CLE}|table_valeur{titre})]<br/>
 			</BOUCLE_traitements>
 		</div>
+		[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
+		<div class="boutons_formulaire">
+			<a href="[(#URL_ECRIRE{formulaires_editer, id_formulaire=#ID_FORMULAIRE}|parametre_url{configurer,traitements})]"><:formidable:editer_menu_traitements:></a>
+		</div>
+		<div class="nettoyeur"></div>
+		]
 	</div>
 	</B_traitements>
 	
