@@ -250,8 +250,8 @@
 					$message_html	= recuperer_fond('emails/lettres_abonnements_html', $arguments);
 					$message_texte	= recuperer_fond('emails/lettres_abonnements_texte', $arguments);
 					$url_action_validation_abonnements = url_absolue(generer_url_action('validation_abonnements', $parametres, true));
-					$message_html	= ereg_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_html);
-					$message_texte	= ereg_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_texte);
+					$message_html	= str_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_html);
+					$message_texte	= str_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_texte);
 					break;
 					
 				case 'desabonnements':
@@ -259,8 +259,8 @@
 					$message_html	= recuperer_fond('emails/lettres_desabonnements_html', $arguments);
 					$message_texte	= recuperer_fond('emails/lettres_desabonnements_texte', $arguments);
 					$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
-					$message_html	= ereg_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
-					$message_texte	= ereg_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
+					$message_html	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
+					$message_texte	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
 					break;
 					
 				case 'changement_format':
@@ -268,8 +268,8 @@
 					$message_html	= recuperer_fond('emails/lettres_changement_format_html', $arguments);
 					$message_texte	= recuperer_fond('emails/lettres_changement_format_texte', $arguments);
 					$url_action_validation_changement_format = url_absolue(generer_url_action('validation_changement_format', $parametres, true));
-					$message_html	= ereg_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_html);
-					$message_texte	= ereg_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_texte);
+					$message_html	= str_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_html);
+					$message_texte	= str_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_texte);
 					break;
 					
 			}
@@ -307,15 +307,15 @@
 
 			$parametres = 'lang='.$lettre->lang.'&rubriques[]=-1&code='.$this->code.'&email='.$this->email;
 			$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
-			$message_html	= ereg_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
-			$message_texte	= ereg_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
+			$message_html	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
+			$message_texte	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
 
-			$objet			= ereg_replace("%%EMAIL%%", $this->email, $objet);
-			$message_html	= ereg_replace("%%EMAIL%%", $this->email, $message_html);
-			$message_texte	= ereg_replace("%%EMAIL%%", $this->email, $message_texte);
+			$objet			= str_replace("%%EMAIL%%", $this->email, $objet);
+			$message_html	= str_replace("%%EMAIL%%", $this->email, $message_html);
+			$message_texte	= str_replace("%%EMAIL%%", $this->email, $message_texte);
 
-			$message_html	= ereg_replace("%%CODE%%", $this->code, $message_html);
-			$message_texte	= ereg_replace("%%CODE%%", $this->code, $message_texte);
+			$message_html	= str_replace("%%CODE%%", $this->code, $message_html);
+			$message_texte	= str_replace("%%CODE%%", $this->code, $message_texte);
 
 			$objet			= lettres_remplacer_raccourci('NOM', $this->nom, $objet);
 			$message_html	= lettres_remplacer_raccourci('NOM', $this->nom, $message_html);
