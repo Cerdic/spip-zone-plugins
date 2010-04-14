@@ -20,6 +20,10 @@ function formulaires_editer_lettre_charger_dist($id_lettre,$id_rubrique,$retour)
 		unset($valeurs['id_rubrique']);
 	return $valeurs;	
 }
+// compat 2.0.x / 2.1.x
+if (version_compare($GLOBALS['spip_version_branche'],"2.0.99",">")  AND !function_exists('barre_typo')){
+	function barre_typo(){};
+}
 
 function lettres_edit_config($row){
 	global $spip_ecran, $spip_lang, $spip_display;
