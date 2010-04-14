@@ -1,0 +1,33 @@
+[(#REM) icone=forum_urbagora-32.png]
+[(#REM) titre= Parametrage des forums ]
+[(#REM) descriptif= Explications ]
+#CACHE{0}
+<form method="post">
+	[(#ENV{_cfg_}|form_hidden)]
+	<fieldset>
+		<legend>Param&eacute;trage des forums&nbsp;:</legend>
+
+		<p>
+			<label>
+			<input type="checkbox" name="afficher_heure" [checked="(#ENV{afficher_heure}?{checked})"] id="afficher_heure" />
+			Afficher l'heure des messages (et pas seulement le jour)
+			</label>
+		</p>
+		<!--
+		<p>
+			<label>
+			<input type="checkbox" name="gerer_jquery" [checked="(#ENV{gerer_jquery}?{checked})"] id="gerer_jquery" />
+			Gerer l'ouverture et la fermeture des boites de texte avec JQuery
+			</label>
+		</p>
+		-->
+		<p>
+			<label for= "longueur_titres">Longueur des titres (en nombre de caract&egrave;res)&nbsp;: </label>
+			<input type="text" name="longueur_titres" size="50" value="#ENV{longueur_titres}" />
+		</p>
+	</fieldset>
+
+	<div>
+		<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+	</div>
+</form>

@@ -1,0 +1,72 @@
+<B_forum_sommaire>
+<div id="forum">
+<h2><:forum_urbagora:forum_article:></h2>
+
+<BOUCLE_compteur(FORUMS){plat}{id_article?}{id_breve?}> </BOUCLE_compteur><p>#TOTAL_BOUCLE message[(#TOTAL_BOUCLE|forum_urbagora_pluriel)]</p></B_compteur>
+
+<BOUCLE_forum_sommaire(FORUMS){id_article?}{id_breve?}{!par date}>
+
+<BOUCLE_thread(FORUMS){id_forum}>
+<BOUCLE_premier(FORUMS){id_forum=#ID_THREAD}>
+<div class="forum_thread">
+<div class="forum_fond_<BOUCLE_fond1(FORUMS)
+	{id_parent}></BOUCLE_fond1>[(#TOTAL_BOUCLE|?{'suite','simple'})]<//B_fond1>">
+<div id="forum#ID_FORUM" class="forum-boite forum_init_box_<BOUCLE_suite1(FORUMS)
+	{id_parent}></BOUCLE_suite1>[(#TOTAL_BOUCLE|?{'suite','simple'})]<//B_suite1>">
+
+	<div class="forum-titre #EDIT{titre}">[(#TITRE|supprimer_numero|couper{#CONFIG{forum/longueur_titres}|sinon{80}})]
+	<div style="font-size: 75%;">[<:forum_urbagora:poste_le:> (#DATE|affdate)]
+	[(#CONFIG{forum/afficher_heure}|?{ <:forum_urbagora:a:> [(#DATE|heures|urbagora_forum_supprimer_le_zero)<:forum_urbagora:h:>[(#DATE|minutes)]]})]
+	[<:forum_urbagora:par:> <span class="#EDIT{nom}">(#NOM|urbagora_forum_prenom_nom)</span>]</div>
+	</div>
+	[(#REM) Les commentaires de premier niveau sont deplies par defaut - a parametrer au niveau du blog ? ]
+	<div class="forum-texte #EDIT{texte}">
+		[<div class="texte">(#TEXTE)</div>]
+		[<div class="notes">(#NOTES)</div>]
+		<div class="forum-repondre">
+			<a href="#URL_FORUM" title="<:permalien_detail_forum|propre|attribut_html:>"><:forum_urbagora:permalien:></a> |
+			[<a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a>]
+		</div><br/>
+	</div>
+
+</div>
+</div>
+
+	<BOUCLE_sommaire_enfants(FORUMS) {id_parent} {par date}>
+	<div class="forum_fond_<BOUCLE_fond2(FORUMS){id_parent=#ID_PARENT}
+		{age_relatif<0}></BOUCLE_fond2>[(#TOTAL_BOUCLE|?{'suite','simple'})]<//B_fond2>">
+	<div class="forum_<BOUCLE_suite2(FORUMS){id_parent=#ID_PARENT}
+		{age_relatif<0}></BOUCLE_suite2>[(#TOTAL_BOUCLE|?{'suite','simple'})]<//B_suite2>">
+	<div class="forum_fond_<BOUCLE_fond3(FORUMS)
+		{id_parent}></BOUCLE_fond3>[(#TOTAL_BOUCLE|?{'suite','simple'})]<//B_fond3>">
+	<div id="forum#ID_FORUM" class="forum-boite forum_box_<BOUCLE_suite3(FORUMS)
+		{id_parent=#ID_FORUM}></BOUCLE_suite3>[(#TOTAL_BOUCLE|?{'suite','simple'})]<//B_suite3>">
+		<div class="forum-titre #EDIT{titre}">[(#TITRE|supprimer_numero|couper{#CONFIG{forum/longueur_titres}|sinon{80}})]
+		<div style="font-size: 75%;">[<:forum_urbagora:poste_le:> (#DATE|affdate)]
+		[(#CONFIG{forum/afficher_heure}|?{ <:forum_urbagora:a:> [(#DATE|heures|forum_urbagora_supprimer_le_zero)<:forum_urbagora:h:>[(#DATE|minutes)]]})]
+		[<:forum_urbagora:par:> <span class="#EDIT{nom}">(#NOM|urbagora_forum_prenom_nom)</span>]</div>
+		</div>
+		<div class="forum-texte #EDIT{texte}">
+			[<div class="texte">(#TEXTE)</div>]
+			[<div class="notes">(#NOTES)</div>]
+			<div class="forum-repondre">
+				<a href="#URL_FORUM" title="<:permalien_detail_forum|propre|attribut_html:>"><:forum_urbagora:permalien:></a> |
+				[<a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a>]
+			</div><br/>
+		</div>
+	</div>
+	</div>
+	
+		<BOUCLE_descendance(boucle_sommaire_enfants)></BOUCLE_descendance>
+
+	</div>
+	</div>
+	</BOUCLE_sommaire_enfants>
+
+</div>
+</BOUCLE_premier>
+</BOUCLE_thread>
+
+</BOUCLE_forum_sommaire>
+</div>
+</B_forum_sommaire>

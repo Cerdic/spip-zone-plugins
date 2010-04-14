@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Forum urbAgora</nom>
+	<auteur>Franz &#169; 2010 - GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Forums arborescents d&eacute;velopp&eacute;s pour l'association <a href="http://urbagora.be/" class="spip_out">urbAgora</a> (Li&egrave;ge)</description>
+	<lien>http://urbagora.be/</lien>
+	<prefix>forum_urbagora</prefix>
+	<icon>forum_urbagora.png</icon>
+	<fonctions>forum_urbagora_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>forum_urbagora_pipeline.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id='cfg' version='[1.0;]' />
+</plugin>

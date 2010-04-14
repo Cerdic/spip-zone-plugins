@@ -1,0 +1,103 @@
+#forum_sommaire a {
+	text-decoration: none;
+	border: none;
+}
+
+.forum-date {
+	float: right;
+	width: 120px;
+	margin-right: 10px;
+}
+
+.forum-signature {
+	float: right;
+	width: 150px;
+}
+
+.forum-repondre {
+	text-align: right;
+}
+
+.forum-titre {
+	font-size: 120%;
+	cursor: pointer;
+}
+
+div[class] .forum-enonce {
+	height: auto;
+}
+
+/* style general d'un thread */
+.forum_thread {
+	margin-bottom: 10px;
+}
+
+/* Message de tete de thread*/
+.forum_init {
+	margin: 0;
+	padding: 0;
+	padding-left: 12px;
+}
+
+.forum_suite {
+	margin: 0;
+	padding: 0;
+	padding-left: 12px;
+	background-image: url(img/t.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+.forum_simple {
+	background-image: url(img/l.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+	margin: 0;
+	padding: 0;
+	padding-left: 12px;
+}
+
+/* fin de chaine (differencier en-tete et pas en-tete ?) */
+.forum_init_box_simple {
+	margin: 0;
+	padding: 0;
+	padding-left: 12px;
+	background-image: url(img/n.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+/* message suscitant une suite*/
+.forum_box_suite, .forum_init_box_suite {
+	margin: 0;
+	padding: 0;
+	padding-left: 15px;
+	background-image: url(img/m.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+.forum_box_simple {
+	margin: 0;
+	padding: 0;
+	padding-left: 15px;
+	background-image: url(img/c.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+.forum_fond_suite {
+	background-image: url(img/i.png);
+	background-position: top left;
+	background-repeat: repeat-y;
+}
+
+.forum-texte {
+	/* display: none; */
+	padding-left: 2em;
+}
+
+.forum-boite:hover {
+}
+
+
