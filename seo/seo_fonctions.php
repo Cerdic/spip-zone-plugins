@@ -140,7 +140,7 @@ function generer_webmaster_tools(){
 	$config = unserialize($GLOBALS['meta']['seo']);
 
 	if($config['webmaster_tools']['id']){
-		$flux .= '<meta name="verify-v1" content="'. $config['webmaster_tools']['id'] .'"/>';
+		$flux .= '<meta name="google-site-verification" content="'. $config['webmaster_tools']['id'] .'"/>';
 	}
 	
 	return $flux;
