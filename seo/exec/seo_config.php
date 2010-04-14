@@ -33,7 +33,10 @@ function exec_seo_config () {
 	$config = unserialize($GLOBALS['meta']['seo']);
 	
 	// Save it if needed
-	if (isSet($_POST['meta_tags_submit'])) {
+	if (isSet($_POST['insert_head_submit'])) {
+		$config['insert_head'] = $_POST['insert_head'];
+		ecrire_meta('seo', serialize($config));
+	} elseif (isSet($_POST['meta_tags_submit'])) {
 		$config['meta_tags'] = $_POST['meta_tags'];
 		ecrire_meta('seo', serialize($config));
 	} elseif ($_POST['webmaster_tools_submit']) {
@@ -66,6 +69,22 @@ function exec_seo_config () {
 		. creer_colonne_droite($rubrique, true)
 		. pipeline('affiche_droite', array('args'=>array('exec'=>'seo_config'),'data'=>''))
 		. debut_droite($rubrique, true)
+		;
+		
+	// Insert Head //
+	$page_result .= ''
+		. debut_cadre_trait_couleur('', true, '', _T('seo:insert_head'))
+		. '<form action="" method="post">'
+		
+		. debut_cadre_relief('', true, '', _T('seo:insert_head_descriptif'))
+		. '<input type="checkbox" value="yes" name="insert_head[activate]" '.(($config['insert_head']['activate'] == 'yes') ? "checked='checked'" : "").'/>'
+		. '<label for="statut_simple">'._T('seo:insert_head_activate').'</label>'
+		. fin_cadre_relief(true)
+				
+		// Submit button
+		. '<div style="text-align:right;"><input type="submit" name="insert_head_submit" class="fondo" value="'._T('bouton_valider').'" /></div>'
+		. '</form>'
+		. fin_cadre_trait_couleur(true)
 		;
 		
 	// Meta tag //

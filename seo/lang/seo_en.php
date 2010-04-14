@@ -13,13 +13,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'insert_head'=>"Automatic insertion in #INSERT_HEAD",
+	'insert_head_descriptif'=>"Automatic insertion of SEO configuration in &lt;header&gt;",
+	'insert_head_activate'=>"Activate automatic insertion",
+
 	'S.E.O' => 'SEO',
 	'seo' => 'Search Engine Optimisation',
 	
 	'meta_tags' => 'Meta Tags',	
 	'meta_tags_editing' => 'Meta Tags Editing',	
 	
-	'meta_tags_activate' => 'Activate meta tags insertion',
+	'meta_tags_activate' => 'Activate meta tags',
 	'meta_tags_edit_activate' => 'Activate meta tags editing in sections and articles',
 	'meta_tags_sommaire' => 'Home Page Meta Tags',
 	'meta_tags_default' => 'Defaults Meta Tag (for Articles and Sections)',
