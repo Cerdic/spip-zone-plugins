@@ -68,7 +68,7 @@
 				  icone_horizontale(_T('lettresprive:copier'), generer_action_auteur("dupliquer_lettre", $lettre->id_lettre,self()), _DIR_PLUGIN_LETTRES."prive/images/lettre-dupliquer-24.png", 'creer.gif', false)
 				  :"")
 				. icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', 'rien.gif', false)
-				. icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false)
+				. icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit',"id_rubrique=".$lettre->id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false)
 			);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
