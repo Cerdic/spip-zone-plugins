@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_description' => 'Description',
 	'formulaire_description_explication' => 'Vous pouvez utilisez les raccourcis SPIP usuels, notamment la balise  &lt;multi&gt;.',
 	'formulaire_icon' => 'Ic&ocirc;ne',
-	'formulaire_icon_explication' => 'Vous pouvez saisir le chemin relatif vers une ic&ocirc;ne (par exemple&nbsp;: <i><images/objet-liste-contenus.png</i>). Pour voir une liste d\'images install&egrave;es dans les r&eacute;pertoires les plus courants, vous pouvez <a href="../spip.php?page=icones_preview">consulter cette page</a>.',
+	'formulaire_icon_explication' => 'Vous pouvez saisir le chemin relatif vers une ic&ocirc;ne (par exemple&nbsp;: <i>images/objet-liste-contenus.png</i>). Pour voir une liste d\'images install&egrave;es dans les r&eacute;pertoires les plus courants, vous pouvez <a href="../spip.php?page=icones_preview">consulter cette page</a>.',
 	'formulaire_identifiant_deja_pris' => 'Cet identifiant est d&eacute;j&agrave; utilis&eacute;&nbsp;!',
 	'formulaire_erreur_format_identifiant' => 'L\'identifiant ne peut contenir que des minuscules sans accent, des chiffres et le caract&egrave;re _ (underscore).',
 	'formulaire_composition_mise_a_jour' => 'Composition mise &agrave; jour',
