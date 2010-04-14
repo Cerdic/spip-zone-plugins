@@ -53,6 +53,7 @@ function notifications_post_edition($x) {
  * @return array
  */
 function notifications_notifications_destinataires($flux) {
+	static $sent = array();
 	$quoi = $flux['args']['quoi'];
 
 	// publication d'article : prevenir les auteurs
@@ -110,6 +111,15 @@ function notifications_notifications_destinataires($flux) {
 		foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum']) as $m) {
 			$flux['data'][] = $m;
 		}
+	}
+
+	// noter les envois de ce forum pour ne pas doublonner
+	if (in_array($quoi,array('forumposte','forumvalide','forumprive'))
+		AND $id = $flux['args']['id']){
+		if (isset($sent[$id])){
+			$flux['data'] = array_diff($flux['data'],$sent[$id]);
+		}
+		$sent[$id] = array_merge($sent[$id],$flux['data']);
 	}
 
 	return $flux;
