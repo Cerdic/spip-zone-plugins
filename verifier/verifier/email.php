@@ -11,8 +11,8 @@ function verifier_email_dist($valeur, $options=array()){
 	
 	// Disponibilite des courriels en base AUTEURS
 	// Si l'adresse n'est pas disponible, on stoppe tout sinon on continue
-	if ($options['disponible'] and $erreur = verifier_disponibilite_email($valeur)){
-		return $erreur;
+	if ($options['disponible'] and !verifier_disponibilite_email($valeur)){
+		return _T('verifier:erreur_email_nondispo', array('email' => echapper_tags($valeur)));
 	}
 	
 	// Choix du mode de verification de la syntaxe des courriels
@@ -29,7 +29,7 @@ function verifier_email_dist($valeur, $options=array()){
 		$fonction_verif = 'verifier_email_de_maniere_stricte';
 	
 	if (!$fonction_verif($valeur))
-		return _T('verifier:erreur_email', array('email' => $valeur));
+		return _T('verifier:erreur_email', array('email' => echapper_tags($valeur)));
 	else
 		return '';
 }
@@ -66,7 +66,7 @@ function verifier_disponibilite_email($valeur){
 	include_spip('base/abstract_sql');
 
 	if(sql_getfetsel('id_auteur', 'spip_auteurs', 'email='.sql_quote($valeur)))
-		return _T('verifier:erreur_email_nondispo', array('email' => $valeur));
+		return false;
 	else
-		return '';
+		return true;
 }
