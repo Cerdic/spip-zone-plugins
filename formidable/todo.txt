@@ -2,7 +2,6 @@
 À faire :
 ---------
 + Pouvoir attacher des fichiers (et donc les envoyer par mail et les enregistrer en base comme document)
-+ Pouvoir composer soi-même le Sujet du mail avec des @truc@ pour les champs
 + Pouvoir modérer les réponses enregistrées en base
 + Appeler des fonctions de mise à jour des traitements lorsque les champs ont changé
 + Déplacer les saisies en drag-n-drop
