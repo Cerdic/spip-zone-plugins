@@ -28,11 +28,11 @@
 	function afficher_theme_boucle($row, $own) {
 		$vals = '';
 
-		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRES.'prive/images/cases_a_cocher.png', "case", '');
+		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/cases_a_cocher.png', "case", '');
 
 		$vals[] = typo($row['titre']);
 
-		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
+		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
 
 		if ($row['id_rubrique'] == 0)
 			$vals[] = _T('lettresprive:racine_du_site');
