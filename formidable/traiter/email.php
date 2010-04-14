@@ -38,8 +38,11 @@ function traiter_email_dist($args, $retours){
 	if ($destinataires){
 		include_spip('inc/filtres');
 		
-		// On récupère le courriel de l'envoyeur
-		$courriel_envoyeur = _request($options['champ_courriel']);
+		// On récupère le courriel de l'envoyeur s'il existe
+		if ($options['champ_courriel']){
+			$courriel_envoyeur = _request($options['champ_courriel']);
+		}
+		if (!$courriel_envoyeur) $courriel_envoyeur = '';
 		
 		// On récupère le nom de l'envoyeur
 		$nom_envoyeur = $options['champ_nom'] ? _request($options['champ_nom']) : $courriel_envoyeur;
@@ -67,7 +70,7 @@ function traiter_email_dist($args, $retours){
 		include_spip('classes/facteur');
 		$texte = Facteur::html2text($html);
 		
-		// horodatons
+		// Horodatons au début
 		$date = date("d/m/y");
 		$heure = date("H:i:s");
 		$contexte = "\n\n"
@@ -81,9 +84,15 @@ function traiter_email_dist($args, $retours){
 		$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 		
+		// On utilise la forme avancé de Facteur
+		$corps = array(
+			'texte' => $texte,
+			'nom_envoyeur' => $nom_envoyeur
+		);
+		
 		// On envoie enfin le message
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
-		$ok = $envoyer_mail($destinataires, $sujet, $texte, $courriel_envoyeur, "X-Originating-IP: ".$GLOBALS['ip']);
+		$ok = $envoyer_mail($destinataires, $sujet, $corps, $courriel_envoyeur, "X-Originating-IP: ".$GLOBALS['ip']);
 		
 		if ($ok){
 			$retours['message_ok'] .= "\n<br/>"._T('formidable:traiter_email_message_ok');

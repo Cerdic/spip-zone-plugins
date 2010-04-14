@@ -24,7 +24,6 @@ options:
       nom: 'champ_courriel'
       label: '<:formidable:traiter_email_option_envoyeur_courriel_label:>'
       explication: '<:formidable:traiter_email_option_envoyeur_courriel_explication:>'
-      obligatoire: 'oui'
       env: true
   -
     saisie: 'champ'
