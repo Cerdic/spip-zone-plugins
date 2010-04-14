@@ -30,7 +30,7 @@
 		$vals = '';
 
 		$url = $row['url'];
-		if (ereg('^spip\.php',$url)) {
+		if (preg_match(',^spip\.php,',$url)) {
 			$url = $GLOBALS['meta']['adresse_site'] . '/' . $url;
 		}
 
