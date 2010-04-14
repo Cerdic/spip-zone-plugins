@@ -6,15 +6,15 @@
 #SET{right,#LANG_DIR|choixsiegal{ltr,right,left}}
 #SET{fleche,#LANG_DIR|choixsiegal{ltr,#CHEMIN{images/deplierhaut.gif},#CHEMIN{images/deplierhaut_rtl.gif}}}
 
-li.fieldset.pliable h3{
+li.fieldset.pliable > fieldset > h3{
 	cursor:pointer;
 }
 
-li.fieldset.pliable h3 span{
+li.fieldset.pliable > fieldset > h3 span{
 	padding-#GET{left}:15px;
 	background:transparent url(#CHEMIN{images/deplierbas.gif}) #GET{left} center no-repeat;
 }
 
-li.fieldset.plie h3 span{
+li.fieldset.plie > fieldset > h3 span{
 	background-image:url(#GET{fleche});
 }
