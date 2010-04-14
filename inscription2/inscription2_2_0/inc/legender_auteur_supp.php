@@ -14,18 +14,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // La partie affichage du formulaire...
 function legender_auteur_supp_saisir($id_auteur){
-	
-	//$exceptions = array('id_auteur', 'bio', 'nom', 'pass', 'login', 'email' ,'statut', 'pgp', 'url_site', 'nom_site', 'logo_auteur', 'username', 'statut_nouveau', 'statut_int', 'statut_interne', 'accesrestreint' ,'password', 'affordance_form', 'reglement', 'reglement_article', 'validation_numero_international', 'pays_defaut');
 	global $spip_version_branche;
-	if($spip_version_branche>='2.1'){
-	include_spip('inc/plugin');
-	actualise_plugins_actifs();}	
+	if ($spip_version_branche>='2.1'){
+		include_spip('inc/plugin');
+		actualise_plugins_actifs();
+	}
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
-	
+
 	$corps_supp = '<li class="editer_inscription2 fieldset">';
 	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
 	$corps_supp .= '<ul>';
-	
+
 	$champs = array();
 	// Elaborer le formulaire
 	$var_user[] = 'b.id_auteur';
@@ -36,15 +35,13 @@ function legender_auteur_supp_saisir($id_auteur){
 			$champs[$cle] = '';
 		}
 	}
-	
+
 	if(is_numeric($id_auteur)){
-		spip_log("INSCRIPTION 2 : saisir les infos de l auteur= $id_auteur");
 		$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
 	}else{
-		spip_log("INSCRIPTION 2 : creation d'un auteur");
 		$query = $champs;
 	}
-	
+
 	foreach ($query as $cle => $val){
 		if(($cle!= 'id_auteur') AND !in_array($cle,$exceptions_des_champs_auteurs_elargis)){
 			if(find_in_path('prive/inscription2_champs_'.$cle.'.html')){

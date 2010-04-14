@@ -48,7 +48,11 @@ function inscription2_recuperer_champs($champs,$id_auteur){
 		return typo($resultat);
 	}
 	$resultat = sql_getfetsel($champs,"spip_auteurs_elargis a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur","a.id_auteur=$id_auteur");
-	return typo($resultat);
+	if (is_array(unserialize($resultat))){
+		return $resultat;
+	} else {
+		return typo($resultat);
+	}
 }
 
 /**
