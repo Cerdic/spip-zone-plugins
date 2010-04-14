@@ -22,9 +22,8 @@
 
 
 	function lettres_verifier_validite_email($email) {
-		if (preg_match("/(%0A|%0D|\n+|\r+)(content-type:|to:|cc:|bcc:)/i", $email))
-			return false;
-		return ereg("^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,4})$", $email);
+		include_spip('inc/filtres');
+		return email_valide($email);
 	}
 
 
