@@ -52,6 +52,7 @@ function spipicious_insert_head($flux){
 					success:function(data,status){
 						var newdata = jQuery(data+' #tags').html();
 						$('.tags_'+type+'_'+id_objet).addClass('loading').html(newdata).removeClass('loading');
+						$('body').trigger('spipicious_change');
 					}
 				});
 			}
