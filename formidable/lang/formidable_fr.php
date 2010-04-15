@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'reponse_intro' => '@auteur@ a r&eacute;pondu au formulaire @formulaire@',
 'reponse_numero' => 'R&eacute;ponse num&eacute;ro :',
+'reponse_statut' => 'Cette r&eacute;ponse est :',
 'reponse_supprimer' => 'Supprimer cette r&eacute;ponse',
 'reponse_supprimer_confirmation' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer cette r&eacute;ponse ?',
 'reponses_analyse' => 'Analyse des r&eacute;ponses',
@@ -56,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponses_auteur' => 'Utilisateur',
 'reponses_ip' => 'Adresse IP',
 'reponses_liste' => 'Liste des r&eacute;ponses',
-'reponses_liste_propose' => 'R&eacute;ponses en attente de validation',
+'reponses_liste_prop' => 'R&eacute;ponses en attente de validation',
 'reponses_liste_publie' => 'Toutes les r&eacute;ponses valid&eacute;es',
 'reponses_voir_detail' => 'Voir la r&eacute;ponse',
 'retour_aucun_traitement' => 'Votre r&eacute;ponse a bien &eacute;t&eacute; envoy&eacute;e, mais aucun traitement n\'a &eacute;t&eacute; d&eacute;fini pour ce formulaire. Il ne fait donc rien. :)',

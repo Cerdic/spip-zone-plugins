@@ -32,7 +32,7 @@ function traiter_enregistrement_dist($args, $retours){
 	if ($options['moderation'] == 'posteriori' or autoriser('instituer', 'formulaires_reponse', $id_formulaires_reponse, null, array('id_formulaire'=>$id_formulaire, 'nouveau_statut'=>'publie')))
 		$statut='publie';
 	else
-		$statut = 'propose';
+		$statut = 'prop';
 	
 	// Si ce n'est pas une modif d'une réponse existante, on crée d'abord la réponse
 	if (!$id_formulaires_reponse){

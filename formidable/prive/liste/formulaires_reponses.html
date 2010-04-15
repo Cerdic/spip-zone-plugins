@@ -20,7 +20,7 @@
 	<tbody>
 	<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{id_auteur?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="tr_liste [(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="statut"></td>
+			<td class="statut">[(#ID_FORMULAIRES_REPONSE|puce_changement_statut{#STATUT, #ID_FORMULAIRE, formulaires_reponse, true})]</td>
 			<td class="date arial1">[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]</td>
 			<td class="auteur arial1">
 				<BOUCLE_auteur(AUTEURS){id_auteur}>

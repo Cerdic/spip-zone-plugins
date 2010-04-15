@@ -24,7 +24,7 @@ function action_editer_formulaire_dist($arg=null) {
 
 	if (_request('redirect')) {
 		$redirect = parametre_url(urldecode(_request('redirect')),
-			'id_menu', $id_menu, '&') . $err;
+			'id_formulaire', $id_formulaire, '&') . $err;
 
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
