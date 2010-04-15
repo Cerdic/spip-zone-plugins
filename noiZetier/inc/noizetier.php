@@ -205,7 +205,8 @@ function noizetier_lister_pages(){
 				$dossier = str_replace($squelette, '', $chemin);
 				// Les éléments situés dans prive/contenu sont écartés
 				if (substr($dossier,-14)!='prive/contenu/')
-					$liste_pages[$page] = noizetier_charger_infos_page($dossier,$page);
+					if(count($infos_page = noizetier_charger_infos_page($dossier,$page))>0)
+						$liste_pages[$page] = $infos_page;
 			}
 		}
 		// Dans le cas de Zpip, il faut supprimer la page 'page.html'
@@ -280,13 +281,13 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 			}
 		}
 		// S'il n'y a pas de fichier XML de configuration
-		else {
+		elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML')?_NOIZETIER_LISTER_PAGES_SANS_XML:true) {
 			$infos_page['nom'] = $page;
 			$infos_page['icon'] = find_in_path('img/ic_page.png');
 		}
 		
 		// Si les blocs n'ont pas été définis, on applique les blocs par défaut
-		if (!isset($infos_page['blocs']))
+		if (count($infos_page)>0 AND !isset($infos_page['blocs']))
 			$infos_page['blocs'] = noizetier_blocs_defaut();
 		
 		// On renvoie les infos
