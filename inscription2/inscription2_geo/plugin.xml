@@ -9,7 +9,7 @@
 	Champs de g&eacute;olocalisation pour inscription2
 	</description>
 	<pipeline>
-		<nom>I2_cfg_form</nom>
+		<nom>i2_cfg_form</nom>
 		<inclure>i2_geo_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
