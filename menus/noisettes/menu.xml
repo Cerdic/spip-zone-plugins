@@ -1,6 +1,0 @@
-<noisette>
-	<nom><:menus:nom_noisette_menu:></nom>
-	<icon>images/menus-24.png</icon>
-	<parametre nom="identifiant" label="menus:label_identifiant" saisie="menu" />
-	<parametre nom="afficher_titre_menu" label="menus:label_afficher_titre_menu" saisie="oui_non" defaut="on" />
-</noisette>
