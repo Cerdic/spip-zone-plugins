@@ -434,12 +434,20 @@ function noizetier_lister_config(){
 		$liste_config = array();
 		$match = ".+[.]yaml$";
 		foreach (find_all_in_path('config_noizetier/', $match) as $fichier => $chemin) {
-			// On lit le fichier et on vérifie s'il y a un champs nom
+			// On lit le fichier, on vérifie les plugins demandé on vérifie s'il y a un champs nom
 			$config = yaml_decode_file($chemin);
-			if (isset($config['nom']))
-				$liste_config[$chemin] = _T_ou_typo($config['nom']);
-			else
-				$liste_config[$chemin] = $fichier;
+			$ok = true;
+			if (isset($config['necessite'])
+				foreach($config['necessite'] as $plugin)
+					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
+						ok = false;
+			//on vérifie s'il y a un champs nom
+			if ($ok) {
+				if (isset($config['nom']))
+					$liste_config[$chemin] = _T_ou_typo($config['nom']);
+				else
+					$liste_config[$chemin] = $fichier;
+			}
 		}
 	}
 	return $liste_config;
