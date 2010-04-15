@@ -1,9 +1,12 @@
 #CACHE{0}
 <!-- composition "quiz" -->
 
+
+<!--// le quiz = la rubrique -->
 <BOUCLE_r(RUBRIQUES){id_rubrique}{tout}>
 
 <h1 class="#EDIT{titre}">#TITRE</h1>
+[(#BOUTON_ACTION{<:quiz:bouton_exporter_txt:>, #URL_PAGE{texte_quiz, id_rubrique=#ID_RUBRIQUE}, ajax})]
 
 <!--// les questions = les articles -->
 

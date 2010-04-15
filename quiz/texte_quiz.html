@@ -1,10 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Document sans nom</title>
-</head>
+[(#HTTP_HEADER{Content-type: text[; charset=(#CHARSET)]})]<BOUCLE_quiz(RUBRIQUES){id_rubrique}>
+titre = "[(#TITRE|supprimer_numero)]";
 
-<body>
-</body>
-</html>
+lang = "[(#LANG|sinon{'fr'})]"
+
+titre_court = "[(#TITRE|supprimer_numero).swf]"
+
+tableau = [
+<BOUCLE_questions(ARTICLES corrections){id_rubrique}>
+["[(#TITRE|supprimer_numero)]",
+	<BOUCLE_juste(REPONSES}{id_reponse=#ID_JUSTE}>"[(#TEXTE|supprimer_numero)]",</BOUCLE_juste></B_juste>"erreur reponse juste",<//B_juste>
+	<BOUCLE_corrige(CORRECTIONS){id_article}>"[(#CORRIGE)]",</BOUCLE_corrige>
+	<BOUCLE_reponses(REPONSES){id_article}>"[(#TEXTE|supprimer_numero)]",</BOUCLE_reponses>
+	
+],
+</BOUCLE_questions>
+]
+
+</BOUCLE_quiz>

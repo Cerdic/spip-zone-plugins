@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_reponse' => 'Ajouter une r&eacute;ponse',
 	'bouton_ajouter_question' => 'Ajouter une question',
 	'bouton_supprimer_reponse' => 'X',
+	'bouton_exporter_txt' => 'Cr&eacute;er fichier txt',
 	
 	//C
 	'corrige' => 'Corrig&eacute;',
