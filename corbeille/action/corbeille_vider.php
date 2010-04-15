@@ -63,6 +63,8 @@ function corbeille_table_infos($table=-1){
 			"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
 		),
 	);
+	$param = pipeline('corbeille_table_infos', $param);
+	
 	if (isset($param[$table]))
 		return $param[$table];
 	if ($table==-1) 

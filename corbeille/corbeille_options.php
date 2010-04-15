@@ -24,4 +24,7 @@ function genie_optimiser($t){
 	return -(mktime(2,0,0) + rand(0, 3600*4));
 }
 
+// Déclaration du pipeline pour ajouter de nouveaux objets
+$GLOBALS['spip_pipeline']['corbeille_table_infos'] = '';
+
 ?>
