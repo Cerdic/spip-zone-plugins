@@ -1,5 +1,5 @@
 <?php
- 
+
 //
 // ajout feuille de stylle
 //
@@ -9,7 +9,7 @@ function sparkstats_insert_head($flux){
   $jsFile = find_in_path('js/jquery.sparkline.js');
   $flux .= "<script src='$jsFile' type='text/javascript'></script>";
 
-  $flux .= '<script type="text/javascript">
+  $flux .= '<script type="text/javascript"><!--
   (function($){$(function(){var fini=false;
   $(".entry-title.crayon,h1.crayon")
   .each(function() {
@@ -27,7 +27,7 @@ function sparkstats_insert_head($flux){
     }
   });
   })})(jQuery);
-  </script>
+  --></script>
   ';
 
   return $flux;
