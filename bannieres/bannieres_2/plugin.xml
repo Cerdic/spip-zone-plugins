@@ -33,8 +33,10 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/bannieres.php</inclure>
 	</pipeline>
-	
-	<!-- test iconifier -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>bannieres_autorisations.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>encart</nom>
 		<inclure>bannieres_pipelines.php</inclure>
