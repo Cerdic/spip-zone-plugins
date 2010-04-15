@@ -197,7 +197,8 @@ function noizetier_lister_pages(){
 		$match = ".+[.]html$";
 
 		// lister les fonds disponibles dans le répertoire contenu
-		$liste = find_all_in_path('contenu/', $match);
+		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'contenu/';
+		$liste = find_all_in_path($rep, $match);
 		if (count($liste)){
 			foreach($liste as $squelette=>$chemin) {
 				$page = preg_replace(',[.]html$,i', '', $squelette);
@@ -248,7 +249,8 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 		
 		// On autorise le fait que le fichier xml ne soit pas dans le même plugin que le fichier .html
 		// Au cas où le fichier .html soit surchargé sans que le fichier .xml ne le soit
-		$fichier = find_in_path("contenu/$page.xml");
+		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'contenu/';
+		$fichier = find_in_path("$rep$page.xml");
 		
 		include_spip('inc/xml');
 		include_spip('inc/texte');
