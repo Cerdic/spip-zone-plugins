@@ -5,7 +5,12 @@
 //
 function sparkstats_insert_head($flux){
   #$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('sparkstats.css').'" media="all" />';
-
+  $cfg = unserialize($GLOBALS['meta']['sparkstats']);
+  if(is_array($cfg)){
+  	$cible = $cfg['sparkstats_cible'];
+  }else{
+  	$cible = '.cartouche small,.info-publi:eq(0)';
+  }
   $jsFile = find_in_path('js/jquery.sparkline.js');
   $flux .= "<script src='$jsFile' type='text/javascript'></script>";
 
@@ -21,7 +26,7 @@ function sparkstats_insert_head($flux){
         if(e)
         $("<span style=\'padding-left:20px\'>")
         .html(e)
-        .appendTo(".cartouche small,.info-publi:eq(0)")
+        .appendTo("'.$cible.'")
         .sparkline();
       });
     }

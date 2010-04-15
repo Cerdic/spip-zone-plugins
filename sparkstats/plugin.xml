@@ -6,7 +6,7 @@
 	fil@rezo.net
 	</auteur>
 	<version>
-	0.1
+	0.1.1
 	</version>
 	<etat>
 	dev
@@ -22,8 +22,5 @@
 		<action>insert_head</action>
 		<inclure>sparkstats_fonctions.php</inclure>
 	</pipeline>
-    <icon>
-    sparkstats.png
-    </icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
