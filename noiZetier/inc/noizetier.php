@@ -197,6 +197,10 @@ function noizetier_lister_pages(){
 					$liste_pages[$page] = noizetier_charger_infos_page($dossier,$page);
 			}
 		}
+		// Dans le cas de Zpip, il faut supprimer la page 'page.html'
+		if (defined('_DIR_PLUGIN_Z'))
+			unset($liste_pages['page']);
+		
 		$liste_pages = pipeline('noizetier_lister_pages',$liste_pages);
 		
 		// On ajoute les compositions du noizetier
