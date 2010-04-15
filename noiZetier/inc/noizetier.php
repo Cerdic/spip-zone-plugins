@@ -8,14 +8,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @staticvar array $liste_noisettes
  * @param text $type
- * @param bool $informer
  * @return array
  */
-function noizetier_lister_noisettes($type='tout',$informer=true){
+function noizetier_lister_noisettes($type='tout'){
 	static $liste_noisettes = null;
 
-	if (is_null($liste_noisettes[$type][$informer])){
-		$liste_noisettes[$type][$informer] = array();
+	if (is_null($liste_noisettes[$type])){
+		$liste_noisettes[$type] = array();
 		
 		// Si $type='tout' on recherche toutes les noisettes sinon seules celles qui commencent par $type
 		if ($type=='tout')
@@ -33,22 +32,26 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 				$dossier = str_replace($squelette, '', $chemin);
 				// On ne garde que les squelettes ayant un fichier YAML de config (si yaml est activé)
 				if (file_exists("$dossier$noisette.yaml") AND defined('_DIR_PLUGIN_YAML')
-					AND (
-						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
-					)){
-					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
+					AND ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
+				){
+					$liste_noisettes[$type][$noisette] = $infos_noisette;
 				}
 				// ou les squelettes ayant un XML de config
 				elseif (file_exists("$dossier$noisette.xml")
-					AND (
-						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
-					)){
-					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
+					AND ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
+				){
+					$liste_noisettes[$type][$noisette] = $infos_noisette;
 				}
 			}
 		}
+		// supprimer de la liste les noisettes necissant un plugin qui n'est pas actif
+		foreach ($liste_noisettes[$type] as $noisette => $infos_noisette)
+			if (isset($infos_noisette['necessite']))
+				foreach ($infos_noisette['necessite'] as $plugin)
+					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
+						unset($liste_noisettes[$type][$noisette]);
 	}
-	return $liste_noisettes[$type][$informer];
+	return $liste_noisettes[$type];
 }
 
 /**
@@ -84,6 +87,13 @@ function noizetier_charger_infos_noisette_xml($noisette, $info=""){
 								'obligatoire' => $attributs['obligatoire'] == 'oui' ? 'oui' : 'non'
 							)
 						);
+					}
+				}
+				if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)){
+					$infos_noisette['necessite'] = array();
+					foreach (array_keys($necessites) as $necessite){
+						list($balise, $attributs) = spip_xml_decompose_tag($necessite);
+						$infos_noisette['necessite'][] = $attributs['id'];
 					}
 				}
 			}
