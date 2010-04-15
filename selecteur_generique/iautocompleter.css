@@ -21,6 +21,7 @@
 }
 
 .ac_results {
+	min-width:180px;
 	padding: 0px;
 	border:1px solid #FFFFFF;
 	background-color: white;
@@ -40,21 +41,20 @@
 	padding: 2px 5px;
 	cursor: default;
 	display: block;
-	/* 
-	if width will be 100% horizontal scrollbar will apear 
+	/*
+	if width will be 100% horizontal scrollbar will apear
 	when scroll mode will be used
 	*/
 	/*width: 100%;*/
 	font-size: 11px;
-	/* 
-	it is very important, if line-height not setted or setted 
+	/*
+	it is very important, if line-height not setted or setted
 	in relative units scroll will be broken in firefox
 	*/
 	line-height: inherit;
 	word-wrap:break-word;
 	margin-right:15px;
 	overflow:hidden;
-	min-width:180px;
 	white-space:nowrap;
 }
 
@@ -63,6 +63,9 @@
 	opacity:.7;
 }
 
+.ac_even{
+	background-color: #fff;
+}
 .ac_odd {
 	background-color: #eee;
 }
@@ -70,8 +73,4 @@
 .ac_over {
 	background-color: #0A246A;
 	color: white;
-}
-
-.ac_results{
-	margin-left:1px;
 }
