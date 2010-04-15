@@ -1,19 +1,41 @@
-#CACHE{0}
-#HTTP_HEADER{Content-Type:text/html}
+[(#REM)
+	Squelette d'affichage des tags d'un objet
+
+	Environnement à passer obligatoirement :
+	-* objet : le type d'objet (article,rubrique...)
+	-* id_objet : l'id de cet objet
+
+	Options :
+	-* message_aucun :
+	-** si n'est pas mis dans l'environnement, un message par défaut indiquant qu'il n'y a pas de
+	tags associés est affiché
+	-** si équivaut à "non", il n'y aura pas de message disant qu'il n'y a pas de tags associés
+	-** si est une phrase, c'est cette phrase qui sera affichée
+
+]#HTTP_HEADER{Content-Type:text/html}
 [(#SET{id_groupe,#ENV{id_groupe,#CONFIG{spipicious/groupe_mot,1}}})]
-<div class="tags[_(#ENV{objet})][_(#ENV{id_objet})] tags_liste">
 <B_motsElement>
+	<div class="tags[_(#ENV{objet})][_(#ENV{id_objet})] tags_liste">
 	<ul>
 		<BOUCLE_motsElement(SPIPICIOUS mots){id_objet}{objet}{mots.id_groupe=#GET{id_groupe}}>
 			<li><a href="#URL_MOT" title="[(#TITRE|attribut_html)]" rel="tag">#TITRE</a>
 			<BOUCLE_nb(SPIPICIOUS){id_mot}{objet}{id_objet}> </BOUCLE_nb>
-				[(#TOTAL_BOUCLE|>{1}|oui)(<abbr title="<:spipicious:title_tag_utilise_nb{nb=#COMPTEUR_BOUCLE}:>">#COMPTEUR_BOUCLE</abbr>)]
-				[(#TOTAL_BOUCLE|=={1}|oui)(<abbr title="<:spipicious:title_tag_utilise_un:>">#COMPTEUR_BOUCLE</abbr>)]
+				[(#TOTAL_BOUCLE|>{1}|oui)(<abbr title="<:spipicious:title_tag_utilise_nb{nb=[(#TOTAL_BOUCLE)]}:>">#TOTAL_BOUCLE</abbr>)]
+				[(#TOTAL_BOUCLE|=={1}|oui)(<abbr title="<:spipicious:title_tag_utilise_un:>">#TOTAL_BOUCLE</abbr>)]
 			</B_nb>
 			</li>
 		</BOUCLE_motsElement>
 	</ul>
+	</div>
 </B_motsElement>
-	<p><:spipicious:message_aucun_tags:></p>
+	[(#ENV{message_aucun}|!={non}|oui)
+	<div class="tags[_(#ENV{objet})][_(#ENV{id_objet})] tags_liste">
+		[(#ENV{message_aucun}|oui)
+			[(#ENV{message_aucun}|propre)]
+		]
+		[(#ENV{message_aucun}|non)
+			<p><:spipicious:message_aucun_tags:></p>
+		]
+	</div>
+	]
 <//B_motsElement>
-</div>
