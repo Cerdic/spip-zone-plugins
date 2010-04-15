@@ -437,10 +437,10 @@ function noizetier_lister_config(){
 			// On lit le fichier, on vérifie les plugins demandé on vérifie s'il y a un champs nom
 			$config = yaml_decode_file($chemin);
 			$ok = true;
-			if (isset($config['necessite'])
+			if (isset($config['necessite']))
 				foreach($config['necessite'] as $plugin)
 					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
-						ok = false;
+						$ok = false;
 			//on vérifie s'il y a un champs nom
 			if ($ok) {
 				if (isset($config['nom']))
