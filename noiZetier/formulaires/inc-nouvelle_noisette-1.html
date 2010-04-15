@@ -3,7 +3,6 @@
 	<li class="editer_type[(#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
 		<label><:noizetier:choisir_noisette:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{erreur_noisette})</span>]
-		<BOUCLE_test_type(CONDITION){si #ENV{type}|!={'page'}}>
 			<B_type_noisettes>
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_page{type=#ENV{type}}:></strong></div>
 			<BOUCLE_type_noisettes(POUR){tableau #ENV{_noisettes_type}}{par valeur}>
@@ -13,7 +12,6 @@
 				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
 			</div>
 			</BOUCLE_type_noisettes>
-		</BOUCLE_test_type>
 		
 		<BOUCLE_test_composition(CONDITION){si #ENV{composition}|oui}>
 			<B_composition_noisettes>
@@ -29,7 +27,7 @@
 		
 		<B_page_noisettes>
 		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_toutes_pages:></strong></div>
-		<BOUCLE_page_noisettes(POUR){tableau #ENV{_noisettes_page}}{par valeur}>
+		<BOUCLE_page_noisettes(POUR){tableau #ENV{_noisettes_toutes_pages}}{par valeur}>
 		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
 			[(#VALEUR|table_valeur{icon}|image_reduire{24})]
 			<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />

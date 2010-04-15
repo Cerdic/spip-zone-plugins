@@ -19,14 +19,14 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 		
 		// Si $type='tout' on recherche toutes les noisettes sinon seules celles qui commencent par $type
 		if ($type=='tout')
-			$prefix = '';
+			$match = "[^-]*[.]html$";
+		elseif ($type=='')
+			$match = "^[^-]*[.]html$";
 		else
-			$prefix = $type.'-';
-		
-		$match = "[^-]*[.]html$";
+			$match = $type."-[^-]*[.]html$";
 
 		// lister les noisettes disponibles
-		$liste = find_all_in_path('noisettes/', $prefix.$match);
+		$liste = find_all_in_path('noisettes/', $match);
 		if (count($liste)){
 			foreach($liste as $squelette=>$chemin) {
 				$noisette = preg_replace(',[.]html$,i', '', $squelette);

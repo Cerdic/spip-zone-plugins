@@ -30,7 +30,7 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 			$contexte['_noisettes_type'] = noizetier_lister_noisettes($contexte['type']);
 			if ($contexte['composition']!='')
 				$contexte['_noisettes_composition'] = noizetier_lister_noisettes($contexte['type'].'-'.$contexte['composition']);
-			$contexte['_noisettes_page'] = noizetier_lister_noisettes('page');
+			$contexte['_noisettes_toutes_pages'] = noizetier_lister_noisettes('');
 		}
 		// Si on a choisi une noisette
 		else{
