@@ -66,7 +66,7 @@
 	#SET{rang_suivant,(#RANG|plus{1})}
 	</BOUCLE_noisettes>
 	<li class="editer_noisette fieldset">
-		<BOUCLE_pas_demande_noisette(CONDITION){si #ENV{bloc_page_nouvelle_noisette}|non}>
+		<BOUCLE_pas_demande_noisette(CONDITION){si #ENV{bloc_page_nouvelle_noisette}|=={#ENV{bloc_page}}|non}>
 			[(#AUTORISER{configurer,noizetier}|oui)
 				[(#ENV{noisette}|non)
 					<div class="boutons">
