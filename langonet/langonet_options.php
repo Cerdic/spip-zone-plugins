@@ -74,9 +74,9 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 			$ou_fichier = $rep . '/';
 		}
 		if (is_dir($reel_dir . '/lang/')) {
-			$sel_lang .= '<optgroup label="' . str_replace('../', '', $reel_dir) . '/">' . "\n";
 			// on recupere tous les fichiers de langue directement places
 			// dans lang/ sans parcourir d'eventuels sous-repertoires
+			$opt_lang = '';
 			foreach ($fic_lang = preg_files($reel_dir . '/lang/', '.php$', 250, false) as $le_module) {
 				preg_match_all("%_(\w{2,3})(_\w{2,3})?(_\w{2,4})?$%im", str_replace('.php', '', $le_module), $matches);
 				$module = str_replace($matches[0][0].'.php', '', $le_module);
@@ -84,11 +84,15 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 				$langue = ltrim($matches[0][0], '_');
 				$ou_langue = str_replace('../', '', $reel_dir) . '/lang/';
 				$value = $rep.':'.$module.':'.$langue.':'.$ou_langue;
-				$sel_lang .= '<option value="' . $value;
-				$sel_lang .= ($value == $sel_l) ? '" selected="selected">' : '">';
-				$sel_lang .= str_replace('.php', '', str_replace($reel_dir . '/lang/', '', $le_module)) . '</option>' . "\n";
+				$opt_lang .= '<option value="' . $value;
+				$opt_lang .= ($value == $sel_l) ? '" selected="selected">' : '">';
+				$opt_lang .= str_replace('.php', '', str_replace($reel_dir . '/lang/', '', $le_module)) . '</option>' . "\n";
 			}
-			$sel_lang .= '</optgroup>' . "\n";
+			if ($opt_lang) {
+				$sel_lang .= '<optgroup label="' . str_replace('../', '', $reel_dir) . '/">' . "\n";
+				$sel_lang .= $opt_lang;
+				$sel_lang .= '</optgroup>' . "\n";
+			}
 		}
 		$sel_dossier .= '<option value="' . $ou_fichier;
 		$sel_dossier .= ($sel_d == $ou_fichier) ? '" selected="selected">' : '">';
