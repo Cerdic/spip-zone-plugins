@@ -1,7 +1,7 @@
 <ul class="nav">
-	<li class="#CONFIG{babbi/accueil}">
+	[(#CONFIG{babbi/accueil}|=={avec}|oui) <li>
 		<a href="#URL_SITE_SPIP/" title="[(#NOM_SITE_SPIP|textebrut)]"><:accueil_site:></a>
-	</li>
+	</li>]
 	<BOUCLE_exclus_sect_babbi(RUBRIQUES) {titre_mot=exclu_menu_der}{doublons exclueA}></BOUCLE_exclus_sect_babbi>
 	<BOUCLE_menus_bab(RUBRIQUES) {racine}{lang}{doublons exclueA}{par num titre, date, titre}>
 		<li><a href="#URL_RUBRIQUE" class="[(#EXPOSE{babbin,babbout})]">[(#TITRE|supprimer_numero|couper{80})]</a>
