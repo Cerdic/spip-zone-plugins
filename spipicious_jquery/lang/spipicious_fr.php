@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'add_tags' => 'Ajouter des tags',
 	'aucun_tags' => 'Aucun tag associ&eacute;.',
+	'auteur_tag_usage' => 'Cet auteur utilise @nb@ fois ce tag',
 
 	// B
 	'by' => 'Par',
@@ -32,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_tags' => 'Tags :',
+	'liste_auteurs_tag' => 'Ce tag est utilis&eacute; par :',
 
 	// M
 	'message_aucun_tags' => 'Aucun tag n\'est associ&eacute;',
