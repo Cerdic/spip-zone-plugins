@@ -63,7 +63,7 @@
 		[(#CONFIG{inscription2/longitude_obligatoire}|=={on}|oui)#SET{longitude_obl, true}]
 		[(#GET{longitude_obl}|?{<li class="obligatoire">,<li>})]
 			<label><:i2_geo:longitude:></label>
-			<input class="crayon-active text longitude[(#GET{longitude_obl}|oui) obligatoire]" name="#ENV{name_latitude}" style="width:#ENV{largeur}px;" value="[(#LONGITUDE**|entites_html)]" /> 
+			<input class="crayon-active text longitude[(#GET{longitude_obl}|oui) obligatoire]" name="#ENV{name_longitude}" style="width:#ENV{largeur}px;" value="[(#LONGITUDE**|entites_html)]" /> 
 		</li>]
 	</ul>
 </fieldset>
