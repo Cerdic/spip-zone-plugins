@@ -2,7 +2,7 @@
 <div class="cadre cadre-liste"><table width="100%" cellpadding="2" cellspacing="0" border="0">
 <BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}>
 <tr class='tr_liste'>
-	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}>
+	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}>
 		<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 		<td class="arial2"><a href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></td>
 		[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}) 
