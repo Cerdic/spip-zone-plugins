@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'adress_opac' => 'Adresse de l\'OPAC',
 'wsdl' => 'Adresse du WSDL SOAP',
 'jsonrpc' => 'Adresse du service JSON-RPC',
-'rpc_type' => 'Type de serveur'
+'rpc_type' => 'Type de serveur',
+'retour_recherche' => '&#91;Retour aux r&eacute;sultats de la recherche&#93;'
 );
 ?>

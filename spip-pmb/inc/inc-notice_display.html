@@ -1,4 +1,6 @@
 
+[<a href="(#ENV{url_ret}|urldecode)" class="lien-retour-recherche"><:pmb:retour_recherche:></a>]
+
 	[(#ENV{afficher_logo}|=={oui}|oui)
 	    [(#ENV{notice}|pmb_notice_champ{'logo_src'}|oui)
 										[(#ENV{copie_image}|=={oui}|oui)
@@ -100,5 +102,3 @@ $(document).ready(function() {
 			
 		</div>	
 	
-
-
