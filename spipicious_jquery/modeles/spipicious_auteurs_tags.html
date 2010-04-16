@@ -10,7 +10,7 @@
 	<a href="#URL_AUTEUR" title="#NOM">#LOGIN</a>
 	<BOUCLE_nb(SPIPICIOUS){id_mot}{id_auteur} />
 	#SET{total,#TOTAL_BOUCLE}
-	(<abbr title="<:spipicious:auteur_tag_usage{nb=#GET{total}}:>">#GET{total}</abbr>)
+	<span class="frequence">(<abbr title="<:spipicious:auteur_tag_usage{nb=#GET{total}}:>">#GET{total}</abbr>)</span>
 	<//B_nb>
 </BOUCLE_auteurs_tags>
 </p>
