@@ -1,4 +1,7 @@
-* 0.3.1 (11/12/2009) :
+* 0.3.2 (16/4/2010) :
+   - ajout de la transparence pour ne pas masquer des éléments utiles
+
+* 0.3.1 (1/1/2010) :
    - correction d'un nom de variable
 
 * 0.3 (11/12/2009) :

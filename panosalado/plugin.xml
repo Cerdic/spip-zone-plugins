@@ -1,10 +1,10 @@
 <plugin>
     <nom>Panosalado Modele</nom>
     <auteur>Franck Barbenoire</auteur>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
     <etat>dev</etat>
     <description>
-    Ce plugin propose un mod&egrave;le permettant d'afficher un panorama.
+    Ce plugin propose un mod&egrave;le permettant d'afficher un panorama à l'aide de Panosalado.
     </description>
     <licence>GNU/GPL</licence>
     <icon>img_pack/panosalado_logo.png</icon>

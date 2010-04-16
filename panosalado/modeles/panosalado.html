@@ -302,8 +302,9 @@ else
 
 <script type="text/javascript">
    var so = new SWFObject("#URL_SITE_SPIP/plugins/panosalado/scripts/ModuleLoader.swf?xml=<?php echo $ps_nompanoweb; ?>", "pano", "#ENV{largeur,400}", "#ENV{hauteur,250}", "9", "#000000");
-   so.addParam("allowFullScreen","<?php echo $ps_pleinecran; ?>");
-   so.addParam("allowScriptAccess","sameDomain");
+   so.addParam("allowFullScreen", "<?php echo $ps_pleinecran; ?>");
+   so.addParam("allowScriptAccess", "sameDomain");
+   so.addParam("wmode", "transparent");
    so.write("flashcontent");
 </script>
 
