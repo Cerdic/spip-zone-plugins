@@ -1,11 +1,14 @@
 <?php
-    function inc_notifier_assignation_ticket($id_ticket,$options){
-    	
-		$ancien_auteur =  
+function inc_notifier_commenter_ticket($id_ticket,$options){
+
+		$id_ticket_forum = $options['id_ticket_forum'];
+
+		//$ancien_auteur =  
 		$row = sql_select("*","spip_tickets","id_ticket=$id_ticket");
 		$datas = sql_fetch($row);
 		
-		$nom_auteur = sql_getfetsel("nom","spip_auteurs","id_auteur=".intval($datas['id_assigne']));
+		$nom_auteur = sql_getfetsel("nom","spip_auteurs","id_auteur=".intval($options['id_auteur']));
+		$texte = sql_getfetsel("texte","spip_tickets_forum","id_ticket_forum=".intval($id_ticket_forum));
 		
 		//include_spip('inc/tickets_filtres');
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
@@ -16,18 +19,15 @@
 		
 		
 		$titre = trim($datas['titre']);
-		$titre_message = "[Ticket - $nom_site] $titre - "._T('tickets:assignation_mail_titre');
+		$titre_message = "[Ticket - $nom_site] $titre - "._T('tickets:comment_mail_titre');
 		$titre_message = nettoyer_titre_email($titre_message);
 		 
+
+		 include_spip('inc/texte'); // pour couper
 		$message = "$titre_message\n
 		------------------------------------------\n"
 		._T('tickets:mail_texte_message_auto')."\n\n";
-		
-		if($nom_auteur){
-			$message .= _T('tickets:assignation_attribuee_a',array('nom'=>$nom_auteur))."\n\n";	
-		}else{
-			$message .= _T('tickets:assignation_supprimee')."\n\n";
-		}
+		$message .= couper(propre($texte),180)."\n\n";
 		
 		$message .= $url_ticket;
 		
@@ -46,7 +46,7 @@
 		while ($row_auteur = sql_fetch($query_auteurs)) {
 			$recipient = $row_auteur["email"];
 			$envoyer_mail($recipient, $titre_message, $message);
-			spip_log("notification assignation ticket envoyer mail $recipient");
+			spip_log("notification commenter ticket envoyer mail $recipient");
 		}
     }
 ?>

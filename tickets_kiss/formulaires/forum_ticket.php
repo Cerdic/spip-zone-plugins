@@ -75,9 +75,15 @@ function formulaires_forum_ticket_traiter($id_ticket=''){
 	suivre_invalideur("id='id_ticket/$id_ticket'");
 	
 	if($id_forum_ticket > 0){
+		// Notifications
+			if ($notifications = charger_fonction('notifications', 'inc')) {
+				$notifications('commenterticket', $id_ticket,
+					array('id_ticket_forum' => $id_forum_ticket, 'id_auteur' => $visiteur_session['id_auteur'])
+				);
+			}
 		include_spip('inc/headers');
 		$message['message_ok'] = _T('tickets:message_publie');
-		$message['redirect'] = self();
+		$message['redirect'] = ancre_url (parametre_url(self(),'id_forum',$id_forum_ticket,'&'),'tf'.$id_forum_ticket);
 	}
 		
 	return $message;

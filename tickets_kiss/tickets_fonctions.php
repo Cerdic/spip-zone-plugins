@@ -106,37 +106,48 @@ function tickets_bouton_block_depliable($texte,$deplie,$ids=""){
 
 // Interpretation des valeurs de certains champs de la table ticket
 function tickets_texte_severite ($niveau) {
-	if ($niveau == 1) return _T("tickets:severite_bloquant");
-	else if ($niveau == 2) return _T("tickets:severite_important");
-	else if ($niveau == 3) return _T("tickets:severite_normal");
-	else if ($niveau == 4) return _T("tickets:severite_peu_important");
+	$severite = array(
+		1 => _T("tickets:severite_bloquant"),
+		2 => _T("tickets:severite_important"),
+		3 => _T("tickets:severite_normal"),
+		4 => _T("tickets:severite_peu_important")
+		);
+	return $severite[$niveau];
 }
 function tickets_texte_type ($niveau) {
-	if ($niveau == 1) return _T("tickets:type_probleme");
-	else if ($niveau == 2) return _T("tickets:type_amelioration");
-	else if ($niveau == 3) return _T("tickets:type_tache");
+	$type = array(
+		1 => _T("tickets:type_probleme"),
+		2 => _T("tickets:type_amelioration"),
+		3 => _T("tickets:type_tache")
+		);
+	return $type[$niveau];
 }
 function tickets_texte_statut ($niveau) {
-	if ($niveau == "redac") return _T("tickets:statut_redac");
-	else if ($niveau == "ouvert") return _T("tickets:statut_ouvert");
-	else if ($niveau == "resolu")  return _T("tickets:statut_resolu");
-	else if ($niveau == "ferme")  return _T("tickets:statut_ferme");
+	$statut = array(
+		"redac" => _T("tickets:statut_redac"),
+		"ouvert" => _T("tickets:statut_ouvert"),
+		"resolu" => _T("tickets:statut_resolu"),
+		"ferme" => _T("tickets:statut_ferme")
+		);
+	return $statut[$niveau];
 }
 function tickets_icone_statut ($niveau) {
-	if ($niveau == "redac") $img = "puce-blanche.gif";
-	else if ($niveau == "ouvert") $img = "puce-orange.gif";
-	else if ($niveau == "resolu") $img = "puce-verte.gif";
-	else if ($niveau == "ferme")  $img = "puce-poubelle.gif";
-
-	return $img;
+	$icone_statut = array(
+		"redac" => "puce-blanche.gif",
+		"ouvert" => "puce-orange.gif",
+		"resolu" => "puce-verte.gif",
+		"ferme" => "puce-poubelle.gif"
+		);
+	return $icone_statut[$niveau];
 }
 function tickets_icone_severite ($niveau) {
-	if ($niveau == 1) $img = "puce-rouge-breve.gif";
-	else if ($niveau == 2) $img = "puce-orange-breve.gif";
-	else if ($niveau == 3) $img = "puce-verte-breve.gif";
-	else if ($niveau == 4)  $img = "puce-poubelle-breve.gif";
-
-	return $img;
+	$icone_severite = array(
+		1 => "puce-rouge-breve.gif",
+		2 => "puce-orange-breve.gif",
+		3 => "puce-verte-breve.gif",
+		4 => "puce-poubelle-breve.gif"
+		);
+	return $icone_severite[$niveau];
 }
 
 

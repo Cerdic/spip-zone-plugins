@@ -6,7 +6,7 @@
 		$row = sql_select("*","spip_tickets","id_ticket=$id_ticket");
 		$datas = sql_fetch($row);
 		
-		include_spip('inc/tickets_filtres');
+		//include_spip('inc/tickets_filtres');
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		
 		$nom_site = $GLOBALS["meta"]["nom_site"];

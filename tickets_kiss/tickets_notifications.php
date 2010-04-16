@@ -30,4 +30,9 @@ function notifications_assignerticket_dist($quoi, $id_ticket, $options) {
 	$notifier_assignation_ticket = charger_fonction('notifier_assignation_ticket','inc');
 	$notifier_assignation_ticket($id_ticket,$options);
 }
+function notifications_commenterticket_dist($quoi, $id_ticket, $options) {
+	
+	$notifier_commenter_ticket = charger_fonction('notifier_commenter_ticket','inc');
+	$notifier_commenter_ticket($id_ticket,$options);
+}
 ?>

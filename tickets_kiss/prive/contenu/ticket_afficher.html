@@ -9,7 +9,7 @@
 
 <BOUCLE_principale(TICKETS){id_ticket}>
 [(#REM) Bloc 1: d'information sur le ticket]
-<div class="cadre cadre-r">
+<div id="tf#ID_TICKET_FORUM" class="cadre cadre-r">
 	[(#REM) logo du plugin]
 	[<img src="(#CHEMIN{imgs/bugs.png})" class="cadre-icone" alt="" style="width: 24px; height: 24px;" />]
 
@@ -44,13 +44,13 @@
 		</div>
 		[(#REM) - Champs optionnels]
 		<br />
-		<div>
+		[<div>(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
 			[<div><:tickets:champ_projet:> : <strong>(#PROJET)</strong></div>]
 			[<div><:tickets:champ_composant:>: <strong>(#COMPOSANT)</strong></div>]
 			[<div><:tickets:champ_projet:> : <strong>(#VERSION)</strong></div>]
 			[<div><:tickets:champ_jalon:> : <strong>(#JALON)</strong></div>]
 		</div>
-		<div class="nettoyeur"></div>
+		<div class="nettoyeur"></div>]
 		
 		[(#REM) - Texte du ticket et url d'exemple]
 		[<div class="texte" style="font-size: 125%; line-height: 1.4em;">(#TEXTE|propre)</div>]
