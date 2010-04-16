@@ -2,8 +2,10 @@
 	<form action="#SELF" method="post"><div>
 		#ACTION_FORMULAIRE{#SELF}
 		<input type="hidden" id="a2a_article_orig" name="id_article" value="#ID_ARTICLE_ORIG" />
+		<br /><:a2a:rechercher_tip_articles_ids:><br />
 		<label for="recherche_a2a"><:a2a:rechercher_un_article_a_lier:> :</label>
-		<input type="text" name="recherche" id="recherche_a2a" />&nbsp;<input type="submit" name="ok" value="<:a2a:rechercher:>" />
+		<input type="text" name="recherche" id="recherche_a2a" />&nbsp;<input type="submit" name="ok" value="<:a2a:rechercher:>" /><br />
+		<input type="checkbox" name="recherche_titre" id="recherche_titre_a2a"[ (#ENV*{recherche_titre}|oui) checked="checked"]/><label for="recherche_titre_a2a"><:a2a:rechercher_seulement_titres:></label><br />
 	</div>
 	</form>
 
@@ -15,5 +17,9 @@
 		[(#SET{recherche,[(#ENV{recherche}|substr{3})]})]
 		<INCLURE{fond=formulaires/inc-recherche_id}{id_article_orig}{recherche=#GET{recherche}}{exclure=#GET{exclure}} />]
 	[(#ENV*{recherche}|match{^art\d+$}|non)
-		<INCLURE{fond=formulaires/inc-recherche_libre}{id_article_orig}{recherche}{exclure=#GET{exclure}} />]
+		[(#ENV*{recherche}|oui)
+			[(#ENV*{recherche_titre}|oui)
+				<INCLURE{fond=formulaires/inc-recherche_titre}{id_article_orig}{recherche}{exclure=#GET{exclure}} />]
+			[(#ENV*{recherche_titre}|non)
+				<INCLURE{fond=formulaires/inc-recherche_libre}{id_article_orig}{recherche}{exclure=#GET{exclure}} />]]]
 </div>

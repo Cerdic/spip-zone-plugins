@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rang_plus' => 'Descendre',
 	'rechercher' => 'Rechercher',
 	'rechercher_un_article_a_lier' => 'Rechercher un article',
+	'rechercher_seulement_titres' => 'Rechercher seulement dans les titres',
+	'rechercher_tip_articles_ids' => '(Pour afficher directement l\'article num&eacute;ro 123, entrer \'art123\'.)',
 	
 	// S
 	'supprimer_le_lien' => 'D&eacute;lier',
