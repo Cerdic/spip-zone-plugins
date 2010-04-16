@@ -2,25 +2,24 @@
 
    typo.css
    Base typographique
-   Petronille - 2010
+   Petronille - romy.tetue.net - 2010
 
 -------------------------------------------------------------- */
 
 html { font-size: 100%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
 body { background: #fff; font: 1em/1.5em sans-serif; color: #666; }
-/*body * { font-size: 100%; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: baseline; }*/
 
 /* Titraille / Intertitres */
 h1,h2,h3,h4,h5,h6,
 .h1,.h2,.h3,.h4,.h5,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
 hr { height: 1px; margin: 1.5em 0; border: 0; background: #666; color: #666; }
 
-h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: .5em; }
+/*h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: .5em; }
 h2,.h2 { font-size: 2em; margin-bottom: .75em; }
 h3,.h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
 h4,.h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
 h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
-h6,.h6 { font-size: 1em; font-weight: bold; }
+h6,.h6 { font-size: 1em; font-weight: bold; }*/
 
 /* Enrichissements typographiques */
 strong { font-weight: bold; }
