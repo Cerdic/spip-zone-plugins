@@ -221,7 +221,7 @@ function couteau_suisse_porte_plume_lien_classe_vers_icone($flux){
 	if (isset($cs_metas_pipelines['porte_plume_lien_classe_vers_icone'])) {
 		$flux['couteau_suisse_drop'] = 'couteau-19.png';
 		// chemin des icones-typo de couleur
-		_chemin(_chemin(sous_repertoire(_DIR_VAR, 'couteau-suisse')));
+		_chemin(sous_repertoire(_DIR_VAR, 'couteau-suisse'));
 		eval($cs_metas_pipelines['porte_plume_lien_classe_vers_icone']);
 	}
 	return $flux;
