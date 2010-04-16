@@ -71,7 +71,13 @@
 								.parents('li.configurable').eq('0')
 									.mouseover();
 					}
-				);
+				)
+				// Quand on clique n'importe où sur le champ, ça demande la configuration
+				.click(function(){
+					$(this).find('> div.actions > button.configurer_saisie').submit();
+					return false;
+				})
+				.css('cursor', 'pointer');
 			
 			// On lance la création des onglets
 			formulaire_configurer_onglets();

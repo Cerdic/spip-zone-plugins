@@ -1,7 +1,6 @@
 
 À faire :
 ---------
-+ Ne sortir que les réponses publiées, par défaut
 + Pouvoir attacher des fichiers (et donc les envoyer par mail et les enregistrer en base comme document)
 + Appeler des fonctions de mise à jour des traitements lorsque les champs ont changé
 + Déplacer les saisies en drag-n-drop

@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_autorisation' => 'Vous n\'avez pas le droit d\'éditer les formulaires du site.',
 'erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement.',
 'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez v&eacute;rifier votre envoi.',
+'erreur_identifiant' => 'Cet identifiant est d&eacute;j&agrave; utilis&eacute;.',
 'erreur_inexistant' => 'Le formulaire n\'exsite pas.',
 
 'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',

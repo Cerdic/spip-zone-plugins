@@ -46,6 +46,9 @@ function formulaires_editer_formulaire_charger($id_formulaire, $nouveau){
 function formulaires_editer_formulaire_verifier($id_formulaire, $nouveau){
 	$configurer_formulaire = $GLOBALS['formulaires']['editer_formulaire'];
 	$erreurs = saisies_verifier($configurer_formulaire);
+	// On vérifie l'unicité de l'identifiant
+	if (!$erreurs['identifiant'] and sql_getfetsel('id_formulaire', 'spip_formulaires', 'identifiant = '.sql_quote(_request('identifiant'))))
+		$erreurs['identifiant'] = _T('formidable:erreur_identifiant');
 	return $erreurs;
 }
 
