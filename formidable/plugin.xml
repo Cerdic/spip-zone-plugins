@@ -39,6 +39,14 @@
 		<nom>header_prive</nom>
 		<inclure>formidable_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>formidable_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>formidable_pipelines.php</inclure>
+	</pipeline>
 	
 	<bouton id="formulaires" parent="naviguer">
 		<icone>images/formulaire-24.png</icone>
