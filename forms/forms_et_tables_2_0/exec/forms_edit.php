@@ -31,17 +31,17 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 		$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
 	else
 		$link = generer_action_auteur('forms_supprime',"$id_form",($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
-	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>";
+	$out .= "<form method='post' action='$link' style='float:$spip_lang_right'>";
 	$out .= form_hidden($link);
 	$out .= "<div style='text-align:$spip_lang_right'>";
-	$out .= "&nbsp;<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo'>";
+	$out .= "&nbsp;<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo' />";
 	$out .= "</div>";
 	$out .= "</form>\n";
 
-	$out .= "<form method='POST' action='$redirect' style='float:$spip_lang_right'>\n";
+	$out .= "<form method='post' action='$redirect' style='float:$spip_lang_right'>\n";
 	$out .= form_hidden($redirect);
 	$out .= "<div style='text-align:$spip_lang_right'>";
-	$out .= "&nbsp;<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo'>";
+	$out .= "&nbsp;<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo' />";
 	$out .= "</div>";
 	$out .= "</form><br />\n";
 	$out .= "</div>";
@@ -260,7 +260,7 @@ function exec_forms_edit(){
 	/*debut_boite_info();*/
 	echo debut_boite_info(true);
 	if ($id_form>0)
-		echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_form</div>\n";
+		echo "<div style='font-size:3em;font-weight:bold;text-align:center;'>$id_form</div>\n";
 	if ($retour) {
 		echo icone_horizontale(_T('icone_retour'), $retour, _DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
 	}
@@ -323,18 +323,18 @@ function exec_forms_edit(){
 
 	$out = "";
 	if ($id_form){
-		$out .= "<div id='resume' name='resume'>";
+		$out .= "<div id='resume'>";
 		$out .= contenu_boite_resume($id_form, $row, $apercu);
 		$out .= "</div>";
 	}
 
 	// centre proprietes ---------------------------------------------------------------
-	$out .= "<div id='proprietes' name='proprietes'>";
+	$out .= "<div id='proprietes'>";
 	$out .= boite_proprietes($id_form, $row, $focus, $action_link, $redirect);
 	$out .= "</div>";
 
 	// edition des champs ---------------------------------------------------------------
-	$out .= "<div id='champs' name='champs'>";
+	$out .= "<div id='champs'>";
 	$out .= Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect);
 	$out .= "</div>\n";
 

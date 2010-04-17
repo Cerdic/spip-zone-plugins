@@ -156,32 +156,32 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 
 	if ($type != 'separateur'){
 		$checked = ($obligatoire == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_obligatoire' value='oui' id='obli_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_obligatoire' value='oui' id='obli_$champ'$checked /> ";
 		$out .= "<label for='obli_$champ'>"._T("forms:edit_champ_obligatoire")."</label>";
 		$out .= "<br />\n";
 
 		$checked = ($specifiant == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_specifiant' value='oui' id='spec_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_specifiant' value='oui' id='spec_$champ'$checked /> ";
 		$out .= "<label for='spec_$champ'>"._T("forms:champ_specifiant")."</label>";
 		$out .= "<br />\n";
 
 		$checked = ($listable_admin == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_listable_admin' value='oui' id='listadm_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_listable_admin' value='oui' id='listadm_$champ'$checked /> ";
 		$out .= "<label for='listadm_$champ'>"._T("forms:champ_listable_admin")."</label>";
 		$out .= "<br />\n";
 
 		$checked = ($listable == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_listable' value='oui' id='list_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_listable' value='oui' id='list_$champ'$checked /> ";
 		$out .= "<label for='list_$champ'>"._T("forms:champ_listable_publique")."</label>";
 		$out .= "<br />\n";
 
 		$checked = ($saisie == 'non') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_saisie' value='non' id='saisie_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_saisie' value='non' id='saisie_$champ'$checked /> ";
 		$out .= "<label for='saisie_$champ'>"._T("forms:champ_saisie_desactivee")."</label>";
 		$out .= "<br />\n";
 
 		$checked = ($public == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_public' value='oui' id='public_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_public' value='oui' id='public_$champ'$checked /> ";
 		$out .= "<label for='public_$champ'>"._T("forms:champ_public")."</label>";
 		$out .= "<br />\n";
 	}
@@ -191,7 +191,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 
 	if ($type == 'texte') {
 		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_barre_typo' value='oui' id='barre_typo_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_barre_typo' value='oui' id='barre_typo_$champ'$checked /> ";
 		$out .= "<label for='barre_typo_$champ'>"._T("forms:activer_barre_typo")."</label>";
 		$out .= "<br />\n";
 	}
@@ -211,12 +211,12 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$deci = $row['taille'];
 		if (!$deci) $deci = 0;
 		$out .= "<label for='decimales_$champ'>"._T("forms:nb_decimales")."</label> : ";
-		$out .= "<input type='text' name='taille_champ' value='$deci' id='decimales_$champ' class='fondo verdana2'>\n";
+		$out .= "<input type='text' name='taille_champ' value='$deci' id='decimales_$champ' class='fondo verdana2' />\n";
 		$out .= "<br />\n";
 	}
 	if ($type == 'url') {
 		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_verif' value='oui' id='verif_$champ'$checked> ";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_verif' value='oui' id='verif_$champ'$checked /> ";
 		$out .= "<label for='verif_$champ'>"._T("forms:verif_web")."</label>";
 		$out .= "<br />\n";
 	}
@@ -240,7 +240,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 			$focus='';
 			if ($ajout_choix == $choix) $focus='antifocus';
 			$out .= "<div class='sortableChoixItem' id='$champ-$choix'>";
-			$out .= "<img src='"._DIR_PLUGIN_FORMS."img_pack/choix-handle-16.png' class ='sortableChoixHandle' />";
+			$out .= "<img src='"._DIR_PLUGIN_FORMS."img_pack/choix-handle-16.png' class ='sortableChoixHandle' alt='' />";
 			$out .= "<input type='text' id='nom_$choix' name='$choix' value=\"".entites_html($row2['titre'])."\" ".
 				"class='fondl verdana2 $focus' size='20' />";
 
@@ -251,7 +251,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		}
 		$out .= "</div><input type='hidden' name='ordre' value='' />";
 		$ajout_choix = parametre_url($action_link,'ajout_choix', '1');
-		$out .= "<br /><input type='submit' name='ajout_choix' value=\""._T("forms:ajouter_choix")."\" class='fondo verdana2'>";
+		$out .= "<br /><input type='submit' name='ajout_choix' value=\""._T("forms:ajouter_choix")."\" class='fondo verdana2' />";
 			_T("forms:ajouter_choix")."</a>]</div>";
 		$out .= "</div>";
 
@@ -294,12 +294,12 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$taille = intval($row['extra_info']);
 		if (!$taille) $taille = '';
 		$out .= "<label for='taille_$champ'>"._T("forms:taille_max")."</label> : ";
-		$out .= "<input type='text' name='taille_champ' value='$taille' id='taille_$champ' class='fondo verdana2'>\n";
+		$out .= "<input type='text' name='taille_champ' value='$taille' id='taille_$champ' class='fondo verdana2' />\n";
 		$out .= "<br />\n";
 	}
 	if ($type == 'password') {
 		$out .= "<label for='confirmer_pass_$champ'>"._T("forms:confirmer_champ_password")."</label> : ";
-		$out .= "<input type='text' name='champ_confirmer_pass' value='$extra_info' id='confirmer_pass_$champ' class='fondo verdana2'>\n";
+		$out .= "<input type='text' name='champ_confirmer_pass' value='$extra_info' id='confirmer_pass_$champ' class='fondo verdana2' />\n";
 		$out .= "<br />\n";
 	}
 
@@ -319,7 +319,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 	$out = "";
 	if (!$id_form) return $out;
-	$out .= "<p>";
+	$out .= "<div><br />";
 	$out .= Forms_debut_cadre_formulaire('',true);
 	$out .= "<div class='verdana3'>";
 	$out .= "<strong>"._T("$prefixei18n:champs_formulaire")."</strong><br />\n";
@@ -357,20 +357,20 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		else
 			$out .= debut_cadre_enfonce("", true);
 
-		$out .= "<img src='"._DIR_PLUGIN_FORMS."img_pack/choix-handle-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;'/>";
+		$out .= "<img src='"._DIR_PLUGIN_FORMS."img_pack/choix-handle-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;' alt='' />";
 		$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
 		$out .= "<span class='boutons_ordonne'>";
 		if ($aff_min) {
 			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
 			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."' /></a>";
 			if ($aff_max)
 				$out .= " | ";
 		}
 		if ($aff_max) {
 			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
 			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."' /></a>";
 		}
 		$out .= "</span>";
 		// Supprimer un champ
@@ -378,14 +378,14 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$link = parametre_url($action_link,'supp_champ', $champ);
 		$out .= "<a href='$link#champs' class='ajaxAction confirmer' rel='$redirect' "
 		. "onclick=\"return confirmAction('$message')\">"
-		. "<img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("forms:supprimer_champ")."'></a>";
+		. "<img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("forms:supprimer_champ")."' /></a>";
 		$out .= "</div>\n";
 
 		// Modifier un champ
 		$formulaire = "";
 		$formulaire .= "<div id='forms_lang_nom_$champ'></div>";
 
-		$formulaire .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
+		$formulaire .= "<form class='ajaxAction' method='post' action='$action_link_noredir'" .
 			" style='border: 0px; margin: 0px;'><div>" .
 			form_hidden($action_link_noredir) .
 			"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
@@ -404,7 +404,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		}
 		else if ($type=='textestatique'){
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_texte")."</label>&nbsp;:<br/>";
-			$formulaire .= " &nbsp;<textarea name='nom_champ' id='nom_$champ'  class='verdana2 $focus' style='width:100%;height:5em;' />".
+			$formulaire .= " &nbsp;<textarea name='nom_champ' id='nom_$champ'  class='verdana2 $focus' style='width:100%;height:5em;' rows='4' cols='40'>".
 				entites_html($row['titre'])."</textarea><br />\n";
 			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 		}
@@ -415,16 +415,16 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 
 			$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
-			$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".
+			$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' rows='2' cols='40'>".
 				entites_html($row['aide'])."</textarea><br />\n";
 
 		}
 		$formulaire .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :";
-		$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:3em;' >".
+		$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:3em;' rows='2' cols='40'>".
 		entites_html($row['html_wrap'])."</textarea><br />\n";
 
 		$formulaire .= "<div style='text-align:$spip_lang_right'>";
-		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'>\n";
+		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2' />\n";
 		$formulaire .= "</div>\n";
 
 		$args_redir=parametre_url($redirect,'exec','','&');
@@ -468,13 +468,13 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	// Reordonner les champs ------------------------------------------------------------
 	$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 	$action_link_noredir = parametre_url($action_link,'redirect','');
-	$out .= "<form class='ajaxAction sortableChamps' method='POST' action='$action_link_noredir' style='display:none;'><div>" .
+	$out .= "<form class='ajaxAction sortableChamps' method='post' action='$action_link_noredir' style='display:none;'><div>" .
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 		"<input type='hidden' name='idtarget' value='dummy' />". // on target un div vide
 		"<input type='hidden' name='ordonne_champs' value='$id_form' />";
 	$out .= "<input type='text' name='ordre' value='' />";
-	$out .= " &nbsp; <input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'>";
+	$out .= " &nbsp; <input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' />";
 	$out .= "<div id='dummy'></div>";
 	$out .= "</div></form>\n";
 
@@ -482,9 +482,9 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$redirect = ancre_url(parametre_url($redirect,'champ_visible',''),'');
 	$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 	$action_link_noredir = parametre_url($action_link,'redirect','');
-	$out .= "<p>";
+	$out .= "<div><br />";
 	$out .= debut_cadre_enfonce("", true);
-	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir' style='border: 0px; margin: 0px;'><div>" .
+	$out .= "<form class='ajaxAction' method='post' action='$action_link_noredir' style='border: 0px; margin: 0px;'><div>" .
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 		"<input type='hidden' name='idtarget' value='champs' />"; // on target toute la boite, pas juste le div parent
@@ -493,17 +493,17 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out .= " \n";
 
 	$types = Forms_liste_types_champs();
-	$out .= "<select name='ajout_champ' value='' class='fondo'>\n";
+	$out .= "<select name='ajout_champ' class='fondo'>\n";
 	foreach ($types as $type) {
 		$out .= "<option value='$type'>".typo(Forms_nom_type_champ($type))."</option>\n";
 	}
 	$out .= "</select>\n";
-	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
+	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo' />";
 	$out .= "</div></form>\n";
 	$out .= fin_cadre_enfonce(true);
-	$out .= "</p>";
+	$out .= "</div>";
 	$out .= Forms_fin_cadre_formulaire(true);
-	$out .= "</p>";
+	$out .= "</div>";
 
 	return $out;
 }
@@ -517,14 +517,14 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$is_form = 	$prefixei18n=='form';
 
 	$out = "";
-	$out .= "<p>";
+	$out .= "<div><br />";
 	$out .= Forms_debut_cadre_formulaire('',true);
 
 	$action_link_noredir = parametre_url($action_link,'redirect','');
 	$out .= "<div class='verdana2'>";
-	//$out .= "<form method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
+	//$out .= "<form method='post' action='$action_link' style='border: 0px; margin: 0px;'>";
 	//$out .= form_hidden($action_link);
-	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
+	$out .= "<form class='ajaxAction' method='post' action='$action_link_noredir'" .
 		" style='border: 0px; margin: 0px;'><div>" .
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
@@ -542,7 +542,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 
 	$out .= "<strong><label for='desc_form'>"._T('info_descriptif')."</label></strong>";
 	$out .= "<br />";
-	$out .= "<textarea name='descriptif' id='desc_form' class='forml' rows='4' cols='40' wrap='soft'>";
+	$out .= "<textarea name='descriptif' id='desc_form' class='forml' rows='4' cols='40'>";
 	$out .= $descriptif;
 	$out .= "</textarea><br />\n";
 
@@ -569,7 +569,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
  	$out .= "<div id='texte_confirm' style='display:$display'>";
 	$out .= "<strong><label for='texte_form'>"._T('info_texte')."</label></strong>";
 	$out .= "<br />";
-	$out .= "<textarea name='texte' id='texte_form' class='formo' rows='4' cols='40' wrap='soft'>";
+	$out .= "<textarea name='texte' id='texte_form' class='formo' rows='4' cols='40'>";
 	$out .= $texte;
 	$out .= "</textarea><br />\n";
 	$out .= "</div>";
@@ -587,7 +587,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
  		$out .= "<input type='hidden' name='type_form' value='".$row['type_form']."' />";
 
 	$out .= debut_cadre_enfonce("",true);
-	$out .= "<strong><label for='modifiable'>"._T('forms:modifiable_donnees')."</label></strong>";
+	$out .= "<strong><label>"._T('forms:modifiable_donnees')."</label></strong>";
  	$out .= "<br />";
 	$out .= bouton_radio("modifiable", "oui", _T('forms:donnees_modifiable'), $row['modifiable'] == "oui", "");
 	$out .= "<br />";
@@ -596,7 +596,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= fin_cadre_enfonce(true);
 
 	$out .= debut_cadre_enfonce("",true);
-	$out .= "<strong><label for='multiple'>"._T('forms:multiple_donnees')."</label></strong>";
+	$out .= "<strong><label>"._T('forms:multiple_donnees')."</label></strong>";
  	$out .= "<br />";
 	$out .= bouton_radio("multiple", "oui", _T('forms:donnees_multiple'), $row['multiple'] == "oui", "");
 	$out .= "<br />";
@@ -605,7 +605,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= fin_cadre_enfonce(true);
 	if ($is_form){
 		$out .= debut_cadre_enfonce("",true);
-		$out .= "<strong><label for='forms_obligatoires'>"._T('forms:forms_obligatoires')."</label></strong>";
+		$out .= "<strong><label for='forms_obligatoires_form'>"._T('forms:forms_obligatoires')."</label></strong>";
 	 	$out .= "<br />";
 		$out .= "<input type='text' name='forms_obligatoires' id='forms_obligatoires_form' class='formo $focus' ".
 			"value=\"".$row['forms_obligatoires']."\" size='40' /><br />\n";
@@ -614,7 +614,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	}
 
 	$out .= debut_cadre_enfonce("",true);
-	$out .= "<strong><label for='moderation'>"._T('forms:publication_donnees')."</label></strong>";
+	$out .= "<strong><label>"._T('forms:publication_donnees')."</label></strong>";
  	$out .= "<br />";
 	$out .= bouton_radio("public", "oui", _T('forms:donnees_pub'), $row['public'] == "oui", "");
 	$out .= "<br />";
@@ -623,7 +623,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= fin_cadre_enfonce(true);
 
 	$out .= debut_cadre_enfonce("",true);
-	$out .= "<strong><label for='moderation'>"._T('forms:moderation_donnees')."</label></strong>";
+	$out .= "<strong><label>"._T('forms:moderation_donnees')."</label></strong>";
  	$out .= "<br />";
 	$out .= bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $row['moderation'] != "priori", "");
 	$out .= "<br />";
@@ -653,16 +653,16 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= fin_cadre_enfonce(true);
 
 	$out .= "<label for='wrap'>"._T("forms:html_wrapper")."</label> :";
-	$out .= " &nbsp;<textarea name='html_wrap' id='wrap'  class='verdana2' style='width:90%;height:3em;' >".
+	$out .= " &nbsp;<textarea name='html_wrap' id='wrap'  class='verdana2' style='width:90%;height:3em;' rows='2' cols='40'>".
 	entites_html($row['html_wrap'])."</textarea><br />\n";
 
 	$out .= "<div style='text-align:right'>";
-	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
+	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
 
 	$out .= "</div></form>";
 	$out .= "</div>";
 	$out .= Forms_fin_cadre_formulaire(true);
-	$out .= "</p>";
+	$out .= "</div>";
 	return $out;
 }
 ?>
