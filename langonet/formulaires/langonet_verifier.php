@@ -54,7 +54,12 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour['message_ok'] = formater_resultats($resultats, $verification);
+		if (count($resultats['item_non']) > 0) {
+			$retour['message_erreur'] = formater_resultats($resultats, $verification);
+		}
+		else {
+			$retour['message_ok'] = formater_resultats($resultats, $verification);
+		}
 	}
 	$retour['editable'] = true;
 	return $retour;
@@ -100,9 +105,9 @@ function formater_resultats($resultats, $verification='definition') {
 			$texte .= "</p>\n"; // <p> ouvert dans langonet_verifier.html
 		}
 
-		$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n<br />";
 		// Liste des items definis sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
+			$texte .= "<p class=\"reponse_formulaire reponse_formulaire_erreur\">\n<br />";
 			if (count($resultats['item_peut_etre']) == 1) {
 				$texte .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n";
 			}
@@ -116,6 +121,7 @@ function formater_resultats($resultats, $verification='definition') {
 			$texte .= "\n<p>\n";
 		}
 		else {
+			$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n<br />";
 			$texte .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module'])) . "\n";
 			// pas de </p> ici : il sera ferme dans langonet_verifier.html
 		}
@@ -143,9 +149,9 @@ function formater_resultats($resultats, $verification='definition') {
 			$texte .= "</p>\n"; // <p> ouvert dans langonet_verifier.html
 		}
 
-		$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n<br />";
 		// Liste des items utilises sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
+			$texte .= "<p class=\"reponse_formulaire reponse_formulaire_erreur\">\n<br />";
 			if (count($resultats['item_peut_etre']) == 1) {
 				$texte .= _T('langonet:message_ok_utilises_incertains_1') . "\n";
 			}
@@ -159,6 +165,7 @@ function formater_resultats($resultats, $verification='definition') {
 			$texte .= "\n<p>\n";
 		}
 		else {
+			$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n<br />";
 			$texte .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module'])) . "\n";
 			// pas de </p> ici : il sera ferme dans langonet_verifier.html
 		}
