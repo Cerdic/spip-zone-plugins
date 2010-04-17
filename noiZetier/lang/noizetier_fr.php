@@ -96,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_bloctexte' => 'Bloc de texte libre',
 	
 	'label_titre' => 'Titre&nbsp;:',
+	'label_niveau_titre' => 'Niveau du titre&nbsp;:',
 	'label_texte' => 'Texte&nbsp;:',
 	
 	'warning_noisette_plus_disponible' => 'ATTENTION&nbsp: cette noisette n\'est plus disponible.',
