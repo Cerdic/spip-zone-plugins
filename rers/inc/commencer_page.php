@@ -25,12 +25,12 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 
 	http_no_cache();
 
-//RERS    prévenir les utilisateurs qu'il faut se déconnecter
-$rerslogout =  "<small>Pour vous déconnecter, cliquez sur : </small><a href='"
-. generer_url_action("logout","logout=prive")
-. "'>Déconnecter "
-. typo($GLOBALS['visiteur_session']['nom'])
-. "</a> <small> (Fermer votre navigateur internet ne suffit pas)</small>";
+//RERS    prévenir les utilisateurs qu'il faut se déconnecter : abandonné.   
+// $rerslogout =  "<small>Pour vous déconnecter, cliquez sur : </small><a href='" 
+//. generer_url_action("logout","logout=prive")
+//. "'>Déconnecter "
+//. typo($GLOBALS['visiteur_session']['nom'])
+//. "</a> <small> (Fermer votre navigateur internet ne suffit pas)</small>";
 
 
 	return init_entete($titre, $id_rubrique, $minipres)
@@ -140,15 +140,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	$items .= "</div></li>";
 
-	// choix de la langue
-	if ($i = menu_langues('var_lang_ecrire')) {
-			$items .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
-			. (_request('lang')?$i:"<a href='".parametre_url(self(),'lang',$GLOBALS['spip_lang'])
-			."' title='".attribut_html(_T('info_langues'))."'>"
-			. traduire_nom_langue($GLOBALS['spip_lang'])
-			."</a>")
-			. "</div></li>";
-	}
+	// choix de la langue  :   RERS : choix langue supprimé
 
 	$items .= "<li id='bandeau_couleur6' class='bandeau_couleur'><div class='menu-item'>";
 
@@ -158,7 +150,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 			  generer_url_action("logout","logout=prive") .
 			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\" onfocus=\"changestyle('bandeaudeconnecter');\" onblur=\"changestyle('bandeaudeconnecter');\">" .
 			  http_img_pack("deconnecter-24.gif", "$alt", "width='26' height='20'") .
-			  "</a>";
+			  "se déconnecter</a>"; // RERS : texte ajouté
 	}
 	$items .= "</div></li>"
 	  . "</ul></div>";
