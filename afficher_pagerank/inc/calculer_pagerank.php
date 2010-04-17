@@ -79,7 +79,7 @@ function PB_PR_CheckHash($Hashnum)
 
 function pb_getpagerank($url, $racine=false) {
 	
-		$url = ereg_replace("</?[^>]*>", "", $url);
+		$url = preg_replace(",</?[^>]*>,", "", $url);
 
 
 		if ($racine) {
@@ -87,7 +87,7 @@ function pb_getpagerank($url, $racine=false) {
 			$url = $url["host"];
 		}
 
-		$url = ereg_replace("^http(s)?://", "", $url);
+		$url = preg_replace(",^http(s)?://,", "", $url);
 	
 
 		$fichier_pagerank = sous_repertoire(_DIR_VAR, 'cache-pagerank') . md5($url).".php";
