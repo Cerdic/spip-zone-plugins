@@ -484,7 +484,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$action_link_noredir = parametre_url($action_link,'redirect','');
 	$out .= "<p>";
 	$out .= debut_cadre_enfonce("", true);
-	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir' style='border: 0px; margin: 0px;'>" .
+	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir' style='border: 0px; margin: 0px;'><div>" .
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 		"<input type='hidden' name='idtarget' value='champs' />"; // on target toute la boite, pas juste le div parent
@@ -499,7 +499,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	}
 	$out .= "</select>\n";
 	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
-	$out .= "</form>\n";
+	$out .= "</div></form>\n";
 	$out .= fin_cadre_enfonce(true);
 	$out .= "</p>";
 	$out .= Forms_fin_cadre_formulaire(true);
