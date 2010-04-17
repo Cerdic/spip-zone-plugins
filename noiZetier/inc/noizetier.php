@@ -270,7 +270,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 			// Décomposition des blocs
 			if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)){
 				$infos_page['blocs'] = array();
-				foreach (array_keys($bloc) as $bloc){
+				foreach (array_keys($blocs) as $bloc){
 					list($balise, $attributs) = spip_xml_decompose_tag($bloc);
 					$infos_page['blocs'][$attributs['id']] = array(
 						'nom' => $attributs['nom'] ? _T($attributs['nom']) : $attributs['id'],
