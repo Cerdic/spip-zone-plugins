@@ -43,6 +43,7 @@ function cfg_formulaire_charger($flux){
 			'_cfg_fond' => 'formulaires/'.$form,
 			'_cfg_nom' => $form,
 			'id' => $cfg_id,
+			'_param' => $config->param,
 		);
 
 		// il faut passer les noms des champs (input et consoeurs) de CFG dans l'environnement
