@@ -386,7 +386,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= "<div id='forms_lang_nom_$champ'></div>";
 
 		$formulaire .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
-			" style='border: 0px; margin: 0px;'>" .
+			" style='border: 0px; margin: 0px;'><div>" .
 			form_hidden($action_link_noredir) .
 			"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 			"<input type='hidden' name='idtarget' value='$id_bloc' />" .
@@ -433,7 +433,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$args_redir="&".$args_redir[1];
 
 		$formulaire .= "</div>";
-		$formulaire .= "</form>";
+		$formulaire .= "</div></form>";
 		if (version_compare($GLOBALS['spip_version_code'],'1.9250','>')){
 			$formulaire =
 				bouton_block_depliable(typo($row['titre'])." (".typo(Forms_nom_type_champ($row['type'])).")",$visible,"champ_$champ")
@@ -468,7 +468,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	// Reordonner les champs ------------------------------------------------------------
 	$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 	$action_link_noredir = parametre_url($action_link,'redirect','');
-	$out .= "<form class='ajaxAction sortableChamps' method='POST' action='$action_link_noredir' style='display:none;'>" .
+	$out .= "<form class='ajaxAction sortableChamps' method='POST' action='$action_link_noredir' style='display:none;'><div>" .
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 		"<input type='hidden' name='idtarget' value='dummy' />". // on target un div vide
@@ -476,7 +476,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out .= "<input type='text' name='ordre' value='' />";
 	$out .= " &nbsp; <input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'>";
 	$out .= "<div id='dummy'></div>";
-	$out .= "</form>\n";
+	$out .= "</div></form>\n";
 
 	// Ajouter un champ ------------------------------------------------------------------
 	$redirect = ancre_url(parametre_url($redirect,'champ_visible',''),'');
@@ -525,7 +525,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	//$out .= "<form method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
 	//$out .= form_hidden($action_link);
 	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
-		" style='border: 0px; margin: 0px;'>" .
+		" style='border: 0px; margin: 0px;'><div>" .
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 		"<input type='hidden' name='idtarget' value='proprietes' />" ;
@@ -659,7 +659,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 
-	$out .= "</form>";
+	$out .= "</div></form>";
 	$out .= "</div>";
 	$out .= Forms_fin_cadre_formulaire(true);
 	$out .= "</p>";
