@@ -275,7 +275,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 					$infos_page['blocs'][$attributs['id']] = array(
 						'nom' => $attributs['nom'] ? _T($attributs['nom']) : $attributs['id'],
 						'icon' => isset($attributs['icon']) ? find_in_path($attributs['icon']) : '',
-						'description' => $attributs['description']
+						'description' => _T($attributs['description'])
 					);
 				}
 			}
