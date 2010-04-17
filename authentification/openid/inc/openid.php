@@ -21,11 +21,11 @@ function openid_login_form($texte,$contexte){
 	) {
 		$openid = preg_replace(',^http://,i','',$openid);
 		$message = _T('openid:form_login_openid_ok')  // . $openid
-		. "<br />[<a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();jQuery('.editer_password').show();return false;\">"._T('openid:form_login_openid_pass')."</a>]";
+		. "<br />[<a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();toggle_password(true);return false;\">"._T('openid:form_login_openid_pass')."</a>]";
 		$scriptopenid = "jQuery('#var_login').keyup(function(){
 			if (jQuery(this).val()!='".addslashes($login)."') {
 				jQuery('.editer_login .explication').hide();
-				jQuery('.editer_password').show();
+				toggle_password(true);
 			} else {
 				jQuery('.editer_login .explication').show();
 			}
@@ -41,8 +41,23 @@ function openid_login_form($texte,$contexte){
 	."//--></style>"
 	."<script type='text/javascript'>"
 	."/*<![CDATA[*/"
+	."var memopass='';"
+	."function toggle_password(show){
+if (show) {
+	if (memopass)
+		jQuery('#password_holder').before(memopass);
+	jQuery('#password_holder').remove();
+	memopass = '';
+	jQuery('.editer_password').show();
+}
+else {
+	jQuery('#password').after('<span id=\"password_holder\"></span>');
+	memopass = jQuery('#password').detach();
+	jQuery('.editer_password').hide();
+}
+};"
 	."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');"
-	.($scriptopenid?"if (!jQuery('.editer_password').is('.erreur')) jQuery('.editer_password').hide();":"")
+	.($scriptopenid?"if (!jQuery('.editer_password').is('.erreur')) toggle_password(false);":"")
 	."$scriptopenid});"
 	."/*]]>*/"
 	."</script>";
