@@ -259,4 +259,57 @@ function cfg_affiche_sous_arborescence($nom, $tableau){
 	return $sortie;
 }
 
+
+
+
+if (!function_exists('filtre_cle_dist')) {
+/**
+ * Cette fonction retourne une valeur dans un tableau arborescent
+ * en indiquant la cle souhaitee. On descend dans la profondeur de
+ * l'arborescence du tableau par des slash.
+ * Si on donne un chaine serialisee en entree a la place d'un tableau,
+ * la fonction tente de la deserialiser.
+ * 
+ * Exemples :
+ * $x = array("a1"=>array("b1"=>array("c1"=>3), "b2"=>4), "a2"=>8);
+ * filtre_cle_dist($x, "a2") = 8
+ * filtre_cle_dist($x, "a1") = array("b1"=>array("c1"=>3), "b2"=>4)
+ * filtre_cle_dist($x, "a1/b2") = 4
+ * filtre_cle_dist($x, "a1/b1/c1") = 3
+ *
+ * Depuis un squelette SPIP : [(#TABLEAU|cle{a1/b1/c1})]
+ *
+ * @param array/string $tab : tableau ou tableau serialise
+ * @param string $chemin : chemin d'acces a une valeur du tableau tel que "cleA/cleB/cleC"
+ * @param string $defaut : valeur a retourner par defaut, si la cle n'est pas trouvee
+ * 
+ * @return la valeur correspondant a la cle demandee, $defaut sinon
+**/
+function filtre_cle_dist($tab, $chemin, $defaut=null) {
+	if (!$tab) {
+		return $defaut;
+	}
+	if (!is_array($tab)) {
+		if (!is_string($tab)
+		or !$tab = @unserialize($tab)
+		or !is_array($tab)
+		) {
+			return $defaut;
+		}
+	}
+	$position = &$tab;
+	$chemins = explode('/', $chemin);
+	foreach ($chemins as $cle) {
+		if (!isset($position[$cle])) {
+			return $defaut;
+		}
+		$position = $position[$cle];
+	}
+	return $position;
+}
+}
+
+
+
+
 ?>

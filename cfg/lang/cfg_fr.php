@@ -7,7 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_mettre_a_jour' => 'Mettre &agrave; jour',
-
+	'bouton_reset' => 'Reset',
+	'bouton_effacer' => 'Effacer',
+	
 	// C
 	'cfg' => 'CFG',
 	'choisir_module_a_configurer' => 'Choisissez le module &agrave; configurer.',

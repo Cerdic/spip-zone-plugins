@@ -1,3 +1,9 @@
+v1.15.0 (17 04 2010)
+  * filtre |cle : #TABLEAU|cle{a/b/c, valeur par defaut}
+  * (experimental) #FORMULAIRE_CONFIGURER{xx} cree un formulaire pour CFG
+    en chargeant le contenu de "configurer/form_xx.html". Ce fichier peut
+    contenir uniquement les parametres du CFG et des saisies.
+
 v1.14.0 (26 07 2009)
   * (experimental) balise #EDIT_CONFIG{ma/config} pour permettre des 
     editions de config avec le plugin Crayons

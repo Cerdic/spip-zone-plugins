@@ -141,7 +141,14 @@ class cfg_formulaire{
 		);
 		$this->param['nom'] = $this->vue = $nom;
 		$this->param['cfg_id'] = $cfg_id;
-		
+
+		// exception flagrante : le formulaire 'configurer'
+		// si c'est un formulaire generique, le nom et l'id ne sont pas bon.
+		if ($this->vue == 'configurer') {
+			$this->param['nom'] = $cfg_id;
+			$this->param['cfg_id'] = '';
+		}
+				
 		// definition de l'alias params
 		$this->params = array(
 			'champs' => &$this->champs, 
@@ -552,9 +559,10 @@ class cfg_formulaire{
 			// sinon, ceux qui utilisent les fonds CFG avec l'API des formulaires dynamiques
 			// et mettent des [(#ENV**{editable}|oui) ... ] ne verraient pas leurs variables
 			// dans l'environnement vu que CFG ne pourrait pas lire les champs du formulaire
+
 			if ($this->depuis_cvt)
 				if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
-			
+		
 			// passer cfg_id...
 			if (!isset($contexte['cfg_id']) && $this->param['cfg_id']) {
 				$contexte['cfg_id'] = $this->param['cfg_id'];
@@ -573,9 +581,16 @@ class cfg_formulaire{
 			if (!isset($contexte['erreurs']) && $this->messages['erreurs']) {
 				$contexte['erreurs'] = $this->messages['erreurs'];
 			}
-			
-			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
 
+			// cas particulier du formulaire generique 'configurer'
+			if ($this->vue == 'configurer') {
+				if (!isset($contexte['id'])) {
+					$contexte['id'] = $this->param['nom'];
+				}
+			}
+						
+			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
+	
 			// si on est dans l'espace prive, $this->path_vue est
 			// de la forme ../plugins/mon_plugin/fonds/toto, d'ou le replace
 			$this->fond_compile = recuperer_fond(
