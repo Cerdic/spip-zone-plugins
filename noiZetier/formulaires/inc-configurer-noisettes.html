@@ -42,17 +42,17 @@
 			<div class="actions">
 				[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|oui)
 				<button name="modifier_noisette" value="#ID_NOISETTE" title="<:noizetier:formulaire_modifier_noisette:>">
-					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_modifier.png})" />]
+					[<img height="24" width="24" alt="<:noizetier:formulaire_modifier_noisette:>" src="(#CHEMIN{img/noizetier_action_modifier.png})" />]
 				</button>
 				]
 				<button name="supprimer_noisette" value="#ID_NOISETTE" title="<:noizetier:formulaire_supprimer_noisette:>">
-					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_supprimer.png})" />]
+					[<img height="24" width="24" alt="<:noizetier:formulaire_supprimer_noisette:>" src="(#CHEMIN{img/noizetier_action_supprimer.png})" />]
 				</button>
 				<button name="deplacer_noisette" value="#ID_NOISETTE-bas" title="<:noizetier:formulaire_deplacer_bas:>">
-					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_bas.png})" />]
+					[<img height="24" width="24" alt="<:noizetier:formulaire_deplacer_bas:>" src="(#CHEMIN{img/noizetier_action_bas.png})" />]
 				</button>
 				<button name="deplacer_noisette" value="#ID_NOISETTE-haut" title="<:noizetier:formulaire_deplacer_haut:>">
-					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_haut.png})" />]
+					[<img height="24" width="24" alt="<:noizetier:formulaire_deplacer_haut:>" src="(#CHEMIN{img/noizetier_action_haut.png})" />]
 				</button>
 			</div>
 			]
@@ -71,7 +71,7 @@
 				[(#ENV{noisette}|non)
 					<div class="boutons">
 					<button type="submit" class="submit" name="demander_nouvelle_noisette" value="#ENV{bloc_page}">
-						[<img src="(#CHEMIN{img/noizetier_action_ajouter.png})" />]
+						[<img src="(#CHEMIN{img/noizetier_action_ajouter.png})" alt="<:noizetier:formulaire_ajouter_noisette:>" />]
 						<:noizetier:formulaire_ajouter_noisette:>
 					</button>
 					</div>
