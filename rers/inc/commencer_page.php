@@ -140,7 +140,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	$items .= "</div></li>";
 
-	// choix de la langue  :   RERS : choix langue supprimé
+	// choix de la langue  :   RERS : choix langue supprime
 
 	$items .= "<li id='bandeau_couleur6' class='bandeau_couleur'><div class='menu-item'>";
 
@@ -150,7 +150,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 			  generer_url_action("logout","logout=prive") .
 			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\" onfocus=\"changestyle('bandeaudeconnecter');\" onblur=\"changestyle('bandeaudeconnecter');\">" .
 			  http_img_pack("deconnecter-24.gif", "$alt", "width='26' height='20'") .
-			  "se déconnecter</a>"; // RERS : texte ajouté
+			  "Se&nbsp;d&eacute;connecter</a>"; // RERS : texte ajoute
 	}
 	$items .= "</div></li>"
 	  . "</ul></div>";
