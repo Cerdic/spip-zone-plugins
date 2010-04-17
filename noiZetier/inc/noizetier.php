@@ -126,6 +126,8 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info=""){
 			if (isset($infos_noisette['icon']))
 				$infos_noisette['icon'] = find_in_path($infos_noisette['icon']);
 				
+			if (!isset($infos_noisette['parametres']))
+				$infos_noisette['parametres'] = array();
 		}
 
 		if (!$info)
