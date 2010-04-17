@@ -50,6 +50,7 @@ var { font-style: italic; }
 /* Listes */
 ul, ol, li, dl, dt, dd {}
 ul, ol, dt, dd { /*padding-left: 3.333em;*/ }
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0 }
 ol { list-style-type: decimal; }
 dl dt { font-weight: bold; }
 
@@ -65,7 +66,7 @@ tr.even td { background: #EEE; }
 tfoot { font-style: italic; }
 
 /* Paragraphes */
-p, ul, ol, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: 1.5em; }
+p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: 1.5em; }
 
 /* Liens */
 a {}
