@@ -115,11 +115,14 @@ function cfg_formulaire_traiter($flux){
 	if (!est_cvt($form)){
 		$config = cfg_instancier();
 
-		$config->traiter();	
-		$message = join('<br />', $config->messages['message_ok']);	
-		
-		// forcer l'etat editable du formulaire et retourner le message
-		$flux['data'] = array(true, $message); 
+		$config->traiter(); 
+		$message = join('<br />',$config->messages['message_ok']); 
+		$redirect = $config->messages['redirect']; 
+		$flux['data'] = array( // forcer l'etat editable du formulaire et retourner le message 
+			'editable'=>true,
+			'message_ok' => $message,
+			'redirect' => $redirect
+		);
 	}
 	return $flux;
 }
