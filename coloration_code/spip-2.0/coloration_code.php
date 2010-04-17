@@ -62,7 +62,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	//
 	// Create a GeSHi object
 	//
-	$geshi = & new GeSHi($code, $language);
+	$geshi = new GeSHi($code, $language);
 	if ($geshi->error()) {
 		return false;
 	}
