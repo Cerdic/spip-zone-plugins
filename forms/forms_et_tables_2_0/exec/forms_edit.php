@@ -298,7 +298,7 @@ function exec_forms_edit(){
 	$GLOBALS['var_mode']='calcul';
 	echo $apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 	echo "</div>";
-	echo '<a class="verdana2" href="#" onclick="$(\'#apercu_gauche\').remove();$(\'#apercu\').remove();$(this).remove();return false;">'._T('forms:desactiver')."</a>";
+	echo '<a class="verdana2" href="#" onclick="$(\'#apercu_gauche\').remove();$(this).remove();return false;">'._T('forms:desactiver')."</a>";
 
 
 
