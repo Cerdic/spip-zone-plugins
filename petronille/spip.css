@@ -30,7 +30,7 @@ p.spip {}
 p.spip_note {}
 blockquote.spip {}
 .spip_poesie {}
-.spip_poesie div { text-indent: -3.333em; margin-left: 3.333em; }
+.spip_poesie div { text-indent: -40px; margin-left: 40px; }
 .spip_code {}
 .spip_cadre {}
 

@@ -36,7 +36,7 @@ sub { vertical-align: sub;}
 
 /* Citations */
 q, blockquote { font-style: italic; }
-blockquote { margin: 1.5em 3.333em; }
+blockquote { margin: 1.5em 40px; }
 cite { background-color: #FFFCDF; font-style: italic; }
 
 address { font-style: italic; }
@@ -49,7 +49,7 @@ var { font-style: italic; }
 
 /* Listes */
 ul, ol, li, dl, dt, dd {}
-ul, ol, dt, dd { /*padding-left: 3.333em;*/ }
+ul, ol, dt, dd { /*padding-left: 40px;*/ }
 ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0 }
 ol { list-style-type: decimal; }
 dl dt { font-weight: bold; }
