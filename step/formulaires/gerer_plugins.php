@@ -13,8 +13,8 @@ function formulaires_gerer_plugins_charger_dist(){
 		include_spip('inc/step');
 		if (!_request('update_local')) {
 			include_spip('inc/plugin');
-			verif_plugin();
-			$nb = sql_countsel('spip_plugins',array('actif=' . sql_quote('oui')));
+			actualise_plugins_actifs();
+			$nb = sql_countsel('spip_plugins', array('actif=' . sql_quote('oui')));
 			$nb2 = count(step_liste_plugin_actifs());
 			$do = $nb != $nb2;
 		} else {
