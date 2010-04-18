@@ -73,6 +73,16 @@ function encodage($source,$doc_attente){
 		 * ac = le nombre de channels audio (ne provoquent pas d'erreurs mais ne passent pas)
 		 */
 		$texte = '';
+
+		if(($source['largeur'] == 0) OR ($source['hauteur'] == 0) OR ($source['audiochannels'] == 0)){
+			$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
+			$recuperer_infos($source['id_document']);
+			$source = sql_fetsel('*','spip_documents','id_document ='.intval($source['id_document']));
+			if(($source['largeur'] == 0) OR ($source['hauteur'] == 0)){
+				sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
+				return false;
+			}
+		}
 		/**
 		 * Calcul de la hauteur en fonction de la largeur souhaitée
 		 * et de la taille de la video originale
@@ -102,8 +112,6 @@ function encodage($source,$doc_attente){
 
 		$video_size = "--size ".$width_finale."x".$height_finale;
 
-		spip_log("document original ($chemin) = $width/$height - document final = $width_finale/$height_finale",'spipmotion');
-
 		/**
 		 * Définition du framerate d'encodage
 		 * - Si le framerate de la source est supérieur à celui de la configuration souhaité, on prend celui de la configuration
@@ -117,11 +125,11 @@ function encodage($source,$doc_attente){
 		$vcodec .= lire_config("spipmotion/vcodec_$extension_attente") ? "--vcodec ".lire_config("spipmotion/vcodec_$extension_attente") :'';
 
 		if(intval($source['framerate']) && (intval($source['framerate']) < lire_config("spipmotion/fps_$extension_attente","15"))){
-			$fps = $source['framerate'];
+			$fps_num = $source['framerate'];
 		}else{
-			$fps = lire_config("spipmotion/fps_$extension_attente","15");
+			$fps_num = lire_config("spipmotion/fps_$extension_attente","15");
 		}
-		$fps = "--fps $fps";
+		$fps = "--fps $fps_num";
 		/**
 		 * Définition des bitrates
 		 * On vérifie ceux de la source et on compare à ceux souhaités dans la conf
@@ -190,7 +198,8 @@ function encodage($source,$doc_attente){
 		$audiochannels = "--ac $audiochannels";
 
 		if($vcodec == '--vcodec libx264'){
-			$vpre = '--vpre default';
+			$vpre = '--vpre hq';
+			$vpre2 = '--vpre2 ipod640';
 		}
 		$fichier_texte = "$dossier$query.txt";
 
@@ -198,8 +207,14 @@ function encodage($source,$doc_attente){
 
 		/**
 		 * Encodage de la video
+		 * Si l'encodeur choisi est ffmpeg2theora et qu'il existe toujours, on l'utilise
+		 * sinon on utilise notre script pour ffmpeg
 		 */
-		$encodage = find_in_path('script_bash/spipmotion.sh')." $video_audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels $bitrate $vpre --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
+			$encodage = "ffmpeg2theora $chemin --max_size ".$width_finale."x".$height_finale." --F $fps_num --nice 9 -o $fichier_temp &> $fichier_log";
+		}else{
+			$encodage = find_in_path('script_bash/spipmotion.sh')." $video_audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels $bitrate $vpre $vpre2 --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+		}
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour);
 

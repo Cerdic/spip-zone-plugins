@@ -28,6 +28,7 @@ function genie_spipmotion_file($time)  {
 		$id_doc_attente = $doc_attente['id_spipmotion_attente'];
 		$document = sql_fetsel('*','spip_documents','id_document='.sql_quote($id_document));
 		$encoder($document,$id_doc_attente);
+		spip_log('on encode le doc '.$id_document);
 	}
 }
 ?>

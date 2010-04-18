@@ -78,6 +78,8 @@ while test -n "${1}"; do
 		shift;;
 		--vpre) vpre="-vpre ${2}"
 		shift;;
+		--vpre2) vpre2="-vpre ${2}"
+		shift;;
 		--audiobitrate) audiobitrate="-ab ${2}.kb"
 		shift;;
 		--audiofreq) audiofreq="-ar ${2}"
@@ -187,7 +189,7 @@ case "$sortie" in
   *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"
   echo "nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate $ac $vpre $audiofreq $fpre -y $sortie"
-  nice -19 $chemin -i $entree $acodec $size $vcodec $fps $bitrate $audiobitrate $ac $vpre $audiofreq $fpre -y $sortie ;;
+  nice -19 $chemin -i $entree $acodec $size $vcodec $fps $bitrate $audiobitrate $ac $vpre $vpre2 $audiofreq $fpre -y $sortie ;;
 esac
 
 echo "$succes"

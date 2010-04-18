@@ -26,6 +26,15 @@
 	]
 	<//B_array>
 	</BOUCLE_version>
+
+	<BOUCLE_siffmpeg2theora(CONDITION){si #ENV{spipmotion_ffmpeg2theora}|table_valeur{ffmpeg2theora}|oui}>
+	<h3 class="h3"><:spipmotion:ffmpeg2theora_install:></h3>
+	<BOUCLE_ffmpeg2theora(POUR){tableau #ENV{spipmotion_ffmpeg2theora}}>
+		[(#CLE|=={ffmpeg2theora}|non)
+			<p>[(#VAL{spipmotion:info_ffmpeg2theora_#CLE}|_T)] : [(#VALEUR)]</p>
+		]
+	</BOUCLE_ffmpeg2theora>
+	</BOUCLE_siffmpeg2theora>
 </div>
 </div>
 <B_formats>

@@ -48,7 +48,7 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 				$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
 				if($statut_encodage == 'en_cours'){
 					$action3 = '';
-					$texte3 = _T('spipmotion:document_dans_file_attente');
+					$texte3 = _T('spipmotion:document_en_cours_encodage');
 				}elseif ($statut_encodage == 'non'){
 					$action3 = '';
 					$texte3 = _T('spipmotion:document_dans_file_attente');

@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'codec_type_audio' => 'Audio',
 	'codec_type_soustitre' => 'Sous-titre',
 	'codec_type_video' => 'Vid&eacute;o',
+	'choix_debug_mode' => 'En mode debug, le webmestre du site re&ccedil;oit par mail des informations &agrave; chaque encodage r&eacute;ussi ou rat&eacute;',
 	'choix_encodage_auto' => 'Les fichiers seront ajout&eacute;s automatiquement dans la file d\'attente d\'encodage d&egrave;s leur insertion dans la base de donn&eacute;e',
 
 	// D
@@ -63,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_codec_son' => 'Codec audio &agrave; utiliser',
 	'label_codec_video' => 'Codec vid&eacute;o &agrave; utiliser',
+	'label_debug_mode' => 'Mode debug',
 	'label_encodage_auto' => 'Encoder automatiquement',
 	'label_encodeur' => 'Encodeur',
 	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
