@@ -9,10 +9,10 @@ function formulaires_langonet_verifier_charger() {
 function formulaires_langonet_verifier_verifier() {
 	$erreurs = array();
 	if (_request('fichier_langue') == '0') {
-		$erreurs['fichier_langue'] = _T('langonet:message_choisir_langue');
+		$erreurs['fichier_langue'] = _T('langonet:message_nok_champ_obligatoire');
 	}
 	if (_request('dossier_scan') == '0') {
-		$erreurs['dossier_scan'] = _T('langonet:message_choisir_dossier');
+		$erreurs['dossier_scan'] = _T('langonet:message_nok_champ_obligatoire');
 	}
 	return $erreurs;
 }

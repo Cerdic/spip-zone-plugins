@@ -43,20 +43,22 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 	$rep_scan = array_merge($rep_complet, $rep_normal);
 	
 	// construction des <select>
-	$sel_lang = '<li class="editer_fichier_langue obligatoire'. $err_l . '">' . "\n".
-				'<p class='.($err_l?'"erreur_message"':'"explication"').'>'.
-				"\n"._T('langonet:message_choisir_langue')."</p>\n".
+	$sel_lang = '<li class="editer_fichier_langue obligatoire'. ($err_l ? ' erreur' : '') . '">' . "\n".
+				'<label for="fichier_langue">' . _T('langonet:label_fichier_verifie') . '</label>' . "\n".
+				'<p class="explication">'._T('langonet:info_fichier_verifie')."</p>\n".
+				($err_l ? '<span class="erreur_message">' . $err_l . '</span>' . "\n" : '').
 				'<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">'."\n";
-	$sel_dossier = '<li class="editer_dossier_scan obligatoire'. $err_d . '">' . "\n".
-				'<p class='.($err_d?'"erreur_message"':'"explication"').'>'.
-				"\n"._T('langonet:message_choisir_dossier')."</p>\n".
+	$sel_dossier = '<li class="editer_dossier_scan obligatoire'. ($err_d ? ' erreur' : '') . '">' . "\n".
+				'<label for="fichier_langue">' . _T('langonet:label_arborescence_scannee') . '</label>' . "\n".
+				'<p class="explication">' . _T('langonet:info_arborescence_scannee') . "</p>\n".
+				($err_d ? '<span class="erreur_message">' . $err_d . '</span>' . "\n" : '').
 				'<select name="dossier_scan" id="dossier_scan">' . "\n";
 	$sel_lang .= '<option value="0"';
 	$sel_dossier .= '<option value="0"';
 	$sel_lang .= ($sel_l == '0') ? ' selected="selected">' : '>';
 	$sel_dossier .= ($sel_d == '0') ? ' selected="selected">' : '>';
-	$sel_lang .= _T('langonet:message_choisir_langue') . '</option>' . "\n";
-	$sel_dossier .= _T('langonet:message_choisir_dossier') . '</option>' . "\n";
+	$sel_lang .= _T('langonet:option_aucun_fichier') . '</option>' . "\n";
+	$sel_dossier .= _T('langonet:option_aucun_dossier') . '</option>' . "\n";
 
 	// la liste des options :
 	// value (fichier_langue) =>
