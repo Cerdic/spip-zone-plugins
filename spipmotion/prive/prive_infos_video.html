@@ -2,7 +2,7 @@
 <BOUCLE_document(DOCUMENTS){id_document}{tout}>
 <div id="infosdoc-#ID_DOCUMENT">
 	<div id="infos_video_haut_#ID_DOCUMENT" class="infos_video_haut">
-		<strong>[(#LOGO_DOCUMENT||image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_video_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_video_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_video_bas_#ID_DOCUMENT').slideDown(); return false;}"><:spipmotion:video_infos_techniques:></a></strong>
+		<strong>[(#LOGO_DOCUMENT||image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_video_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_video_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_video_bas_#ID_DOCUMENT').slideDown(); return false;}"><:spipmotion:info_infos_techniques:></a></strong>
 		<br class="nettoyeur" />
 
 		<div id="infos_video_bas_#ID_DOCUMENT" class="infos_video_bas">
@@ -14,7 +14,7 @@
 			<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_nom_fichier:>
+						<:spipmotion:info_nom_fichier:>
 					</td>
 					<td >
 					<strong>(#FICHIER|basename)</strong>
@@ -23,7 +23,7 @@
 
 				<tr>
 					<td class="video_left">
-						<:spipmotion:video_format:>
+						<:spipmotion:info_format:>
 					</td>
 					<td >
 					<strong>#LARGEUR/#HAUTEUR px</strong>
@@ -32,7 +32,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_duree:>
+						<:spipmotion:info_duree:>
 					</td>
 					<td >
 					<strong>(#DUREE) sec.</strong>
@@ -41,7 +41,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_framecount:>
+						<:spipmotion:info_framecount:>
 					</td>
 					<td >
 					<strong>(#FRAMECOUNT)</strong>
@@ -50,7 +50,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_framerate:>
+						<:spipmotion:info_framerate:>
 					</td>
 					<td >
 					<strong>(#FRAMERATE) img/sec</strong>
@@ -59,7 +59,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_pixelformat:>
+						<:spipmotion:info_pixelformat:>
 					</td>
 					<td >
 					<strong>(#PIXELFORMAT)</strong>
@@ -68,7 +68,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_bitrate:>
+						<:spipmotion:info_bitrate:>
 					</td>
 					<td >
 					<strong>(#BITRATE)</strong>
@@ -77,7 +77,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_videobitrate:>
+						<:spipmotion:info_videobitrate:>
 					</td>
 					<td >
 					<strong>(#VIDEOBITRATE)</strong>
@@ -86,7 +86,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_audiobitrate:>
+						<:spipmotion:info_audiobitrate:>
 					</td>
 					<td >
 					<strong>(#AUDIOBITRATE)</strong>
@@ -95,7 +95,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_audiosamplerate:>
+						<:spipmotion:info_audiosamplerate:>
 					</td>
 					<td >
 					<strong>(#AUDIOSAMPLERATE)</strong>
@@ -104,7 +104,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_videocodec:>
+						<:spipmotion:info_videocodec:>
 					</td>
 					<td >
 					<strong>(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})</strong>
@@ -113,7 +113,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_audiocodec:>
+						<:spipmotion:info_audiocodec:>
 					</td>
 					<td >
 					<strong>(#AUDIOCODEC|intval|?{[(#AUDIOCODEC|flv_audio_codec_type_to_type)],#AUDIOCODEC})</strong>
@@ -122,7 +122,7 @@
 
 				[<tr>
 					<td class="video_left">
-						<:spipmotion:video_audiochannels:>
+						<:spipmotion:info_audiochannels:>
 					</td>
 					<td >
 					<strong>(#AUDIOCHANNELS)</strong>

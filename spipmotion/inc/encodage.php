@@ -55,8 +55,15 @@ function encodage($source,$doc_attente){
 		$lancement_encodage = exec($encodage,$retour);
 		spip_log($retour,'spipmotion');
 		spip_log("l'encodage est terminé",'spipmotion');
-		if(count($retour) > 0){
+		if(filesize($fichier_temp) > 100){
 			$encodage_ok = true;
+		}else{
+			spip_log("l'encodage est en erreur",'spipmotion');
+			/**
+			 * Analyse des erreurs...
+			 * On a créé un fichier de log
+			 * $fichier_log = "$dossier$query.log";
+			 */
 		}
 	}
 

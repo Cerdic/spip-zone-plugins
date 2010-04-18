@@ -185,6 +185,7 @@ echo "$chemin"
 case "$sortie" in
   *".mp3"|*".flac"|*".ogg"|*".oga" )
   echo "On est dans un son"
+  echo "nice -19 $chemin -i $entree $acodec $audiobitrate $audiofreq $ac -y $sortie"
   nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq $ac -y $sortie ;;
   *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"

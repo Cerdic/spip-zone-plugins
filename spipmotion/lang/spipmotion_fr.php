@@ -57,6 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ffmpeg2theora_libtheora_version' => 'Version de libtheora utilis&eacute;e par ffmpeg2theora',
 	'info_ffmpeg2theora_version' => 'Version de ffmpeg2theora',
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
+	'info_infos_techniques' => 'Informations techniques...',
+	'info_nom_fichier' => 'Nom du fichier : ',
+	'info_format' => 'Format : ',
+	'info_framecount' => 'Nombre de frames : ',
+	'info_framerate' =>'Framerate : ',
+	'info_pixelformat' =>'Format de pixel : ',
+	'info_bitrate' => 'Bitrate total : ',
+	'info_videobitrate' => 'Bitrate vid&eacute;o : ',
+	'info_audiobitrate' => 'Bitrate audio : ',
+	'info_audiosamplerate' => 'Fr&eacute;quence d\'&eacute;chantillonnage audio : ',
+	'info_videocodec' => 'Codec vid&eacute;o : ',
+	'info_audiocodec' => 'Codec audio : ',
+	'info_audiochannels' => 'Nombre de canaux audios : ',
+	'info_duree' => 'Dur&eacute;e : ',
 	'install_ajout_champs_documents' => 'Ajout des champs sur spip_documents',
 	'install_creation_base' => 'Cr&eacute;ation de la base de spipmotion',
 	'install_maj_base' => 'Mise &agrave; jour de la base de spipmotion &agrave la version @version@',
@@ -71,6 +85,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
 	'lien_forcer_ffmpeg_infos' => 'Forcer la mise &agrave; de ces informations',
+
+	// M
 
 	// N
 	'non' => 'non',
@@ -133,20 +149,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'verifier_droits' => 'V&eacute;rifiez les droits du script "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 755.',
 	'version_encodee_de' => 'Ce document est une version encod&eacute;e du document @id_orig@',
-	'video_infos_techniques' => 'Informations techniques...',
-	'video_nom_fichier' => 'Nom du fichier : ',
-	'video_format' => 'Format : ',
-	'video_duree' => 'Dur&eacute;e : ',
-	'video_framecount' => 'Nombre de frames : ',
-	'video_framerate' =>'Framerate : ',
-	'video_pixelformat' =>'Format de pixel : ',
-	'video_bitrate' => 'Bitrate total : ',
-	'video_videobitrate' => 'Bitrate vid&eacute;o : ',
-	'video_audiobitrate' => 'Bitrate audio : ',
-	'video_audiosamplerate' => 'Fr&eacute;quence d\'&eacute;chantillonnage audio : ',
-	'video_videocodec' => 'Codec vid&eacute;o : ',
-	'video_audiocodec' => 'Codec audio : ',
-	'video_audiochannels' => 'Nombre de canaux audios : ',
 
 	'zzzz' => 'zzzz'
 );
