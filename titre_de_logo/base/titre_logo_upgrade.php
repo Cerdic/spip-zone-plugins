@@ -50,7 +50,7 @@ function titre_logo_install($nom_meta_base_version, $version_cible=0){
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 
-
+	return true;
 		
 	ecrire_metas();
 }
