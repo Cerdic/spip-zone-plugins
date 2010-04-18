@@ -1,3 +1,11 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{left,#LANG_DIR|choixsiegal{ltr,left,right}}
+#SET{right,#LANG_DIR|choixsiegal{ltr,right,left}}
+#SET{fleche,#LANG_DIR|choixsiegal{ltr,#CHEMIN{images/deplierhaut.gif},#CHEMIN{images/deplierhaut_rtl.gif}}}
+
 .noizetier-explications{
 	font-size:0.9em;
 	margin-bottom:20px;
@@ -18,7 +26,7 @@
 	font-size:1.5em;
 	font-weight:bold;
 	color: black;
-	padding-left:5px;
+	padding-#GET{left}:5px;
 }
 
 .formulaire_editer_noisette{
@@ -27,25 +35,26 @@
 .formulaire_editer_noisette .image_loading{
 	position:absolute;
 	top:50%;
-	left:50%;
+	#GET{left}:50%;
 }
 
 .formulaire_spip ul.noisettes{
 	clear:both;
 }
 .formulaire_spip ul.noisettes ul.noisettes{
-	border-left:1px solid #ccc;
+	border-#GET{left}:1px solid #ccc;
 	border-top:1px solid #ccc;
 }
 
 .formulaire_spip ul.noisettes li.noisette{
 	clear:both;
-	padding-left : 34px;
-	padding-right:0;
+	padding-#GET{left}: 34px;
+	padding-#GET{right}:0;
 	padding-bottom:0;
 	background-position:5px 10px;
 	background-repeat:no-repeat;
 	border-bottom:1px solid #ccc;
+	min-height: 42px;
 }
 
 .formulaire_spip ul.noisettes .ligne{
@@ -54,9 +63,9 @@
 
 .formulaire_spip ul.noisettes .actions{
 	position:absolute;
-	right:5px;
+	#GET{right}:5px;
 	top:5px;
-	text-align:right;
+	text-align:#GET{right};
 }
 
 .formulaire_spip ul.noisettes .titre{
@@ -99,8 +108,8 @@ ul.liste_noizetier_pages , ul.liste_noizetier_compositions{
 
 ul.liste_noizetier_pages li.item, ul.liste_noizetier_compositions li.item{
 	clear:both;
-	padding-left : 34px;
-	padding-right:0;
+	padding-#GET{left}: 34px;
+	padding-#GET{right}:0;
 	padding-bottom:0;
 	background-position:5px 10px;
 	background-repeat:no-repeat;
@@ -112,7 +121,7 @@ ul.liste_noizetier_pages .ligne, ul.liste_noizetier_compositions .ligne{
 }
 
 ul.liste_noizetier_pages .actions, ul.liste_noizetier_compositions .actions{
-	text-align:right;
+	text-align:#GET{right};
 }
 
 ul.liste_noizetier_pages .titre, ul.liste_noizetier_compositions .titre{
@@ -140,7 +149,7 @@ li.noisette div.saisie_textarea div.valeur {
 	display:block;
 	font-size:0.9em;
 	border: solid 1px #AAA;
-	margin-right:5px;
+	margin-#GET{right}:5px;
 	padding: 5px;
 }
 li.noisette div.afficher p {
@@ -152,15 +161,28 @@ li.noisette div.afficher ul {
 li.noisette div.afficher li.choix {
 	display:inline;
 	padding:0;
-	padding-right:5px;
-	border-right:solid 1px #AAA;
+	padding-#GET{right}:5px;
+	border-#GET{right}:solid 1px #AAA;
 }
 li.noisette div.afficher fieldset{
-	margin-right:5px;
+	margin-#GET{right}:5px;
 	margin-bottom: 5px;
 	padding-bottom:0;
 	border: solid 1px #AAA;
 }
 li.noisette div.afficher fieldset div.afficher{
 	margin:0 5px;
+}
+
+li.noisette div.titre{
+	cursor:pointer;
+}
+
+li.noisette div.titre{
+	padding-#GET{left}:15px;
+	background:transparent url(#CHEMIN{images/deplierbas.gif}) #GET{left} center no-repeat;
+}
+
+li.noisette.plie div.titre{
+	background-image:url(#GET{fleche});
 }
