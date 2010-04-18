@@ -4,7 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 
-
+include_spip('inc/plugin'); // pour spip_version_compare()
+				
 // ---------------------- LIBS -------------------------------
 
 // Faire la liste des librairies disponibles
@@ -209,13 +210,13 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 						// en attandant, si (v3 stable et v4 test) on affiche les 2
 						
 						// si version <= moi et etat <= moi, on invalide ce plugin
-						if (version_compare($r['version'],$insert['version'],'<=') and ($r['etatnum'] <= $insert['etatnum'])) {
+						if (spip_version_compare($r['version'],$insert['version'],'<=') and ($r['etatnum'] <= $insert['etatnum'])) {
 							$invalides[] = $r['id_plugin'];
 						}
 						if ($insert['actif'] != 'oui') {
 							// s'il existe un plugin en tout point mieux, je m'invalide
-							if ((version_compare($r['version'],$insert['version'],'>') and ($r['etatnum'] >= $insert['etatnum']))
-							or  (version_compare($r['version'],$insert['version'],'>=') and ($r['etatnum'] > $insert['etatnum']))
+							if ((spip_version_compare($r['version'],$insert['version'],'>') and ($r['etatnum'] >= $insert['etatnum']))
+							or  (spip_version_compare($r['version'],$insert['version'],'>=') and ($r['etatnum'] > $insert['etatnum']))
 							) {
 								$insert['obsolete'] = 'oui';
 							}
@@ -237,8 +238,8 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 					while ($r = sql_fetch($res)) {
 						// si version superieure et etat identique ou meilleur,
 						// c'est que c'est une mise a jour possible !
-						if (version_compare($r['version'],$insert['version'],'>')) {
-							if (!$insert['maj_version'] or version_compare($r['version'], $insert['maj_version'],'>')) {
+						if (spip_version_compare($r['version'],$insert['version'],'>')) {
+							if (!$insert['maj_version'] or spip_version_compare($r['version'], $insert['maj_version'],'>')) {
 								$insert['maj_version'] = $r['version'];
 							}
 						}
@@ -303,7 +304,7 @@ function step_maj_liste_plugins($id_zone, $liste) {
 						//     + on met un flag sur les locaux... (maj_version)
 						//     + on supprime les distants plus vieux
 						// - plus ancien : on le met pas...
-						if (version_compare($insert['version'], $r['version'],'>')) {
+						if (spip_version_compare($insert['version'], $r['version'],'>')) {
 							$add = true;
 							if ($r['id_zone'] == 0) {
 								sql_updateq('spip_plugins',array('maj_version'=>$insert['version']),'id_plugin='.sql_quote($r['id_plugin']));
@@ -401,12 +402,12 @@ function step_plugin_version_compatible($intervalle,$version){
 	$majeure_inc = substr($intervalle,-1)=="]";
 	#var_dump("$mineure_inc-$mineure-$majeure-$majeure_inc");
 	if (strlen($mineure)){
-		if ($mineure_inc AND version_compare($version,$mineure,'<')) return false;
-		if (!$mineure_inc AND version_compare($version,$mineure,'<=')) return false;
+		if ($mineure_inc AND spip_version_compare($version,$mineure,'<')) return false;
+		if (!$mineure_inc AND spip_version_compare($version,$mineure,'<=')) return false;
 	}
 	if (strlen($majeure)){
-		if ($majeure_inc AND version_compare($version,$majeure,'>')) return false;
-		if (!$majeure_inc AND version_compare($version,$majeure,'>=')) return false;
+		if ($majeure_inc AND spip_version_compare($version,$majeure,'>')) return false;
+		if (!$majeure_inc AND spip_version_compare($version,$majeure,'>=')) return false;
 	}
 	return true;
 }

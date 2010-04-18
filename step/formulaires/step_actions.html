@@ -5,7 +5,7 @@
 		<p>(#ENV**{erreurs}|table_valeur{actionneur_action})</p>
 	</div>]
 
-	[<div class="reponse_formulaire">(#ENV**{erreurs}|table_valeur{actionneur_actions})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_actions">(#ENV**{erreurs}|table_valeur{actionneur_actions})</div>]
 	
 	<form method='post' action='#ENV{action}'[ class="(#ENV{gogogo}|>{0}|?{ok})"]><div>
 		#ACTION_FORMULAIRE{#ENV{action}}

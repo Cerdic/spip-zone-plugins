@@ -1,5 +1,7 @@
 <?php
 
+include_spip('inc/plugin'); // pour spip_version_compare()
+
 class Decideur {
 
 	// plugins actifs en cours avant toute modification
@@ -113,7 +115,7 @@ class Decideur {
 		$res = false;
 		if ($news and count($news['p'][$prefixe]) > 0) {
 			foreach ($news['p'][$prefixe] as $new) {
-				if (version_compare($new['v'],$version,'>')) {
+				if (spip_version_compare($new['v'],$version,'>')) {
 					if (!$res or version_compare($new['v'],$res['v'],'>')) {
 						$res = $new;
 					}

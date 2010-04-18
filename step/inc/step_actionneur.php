@@ -396,7 +396,8 @@ class Actionneur {
 		if ($i['constante'] == '_DIR_PLUGINS') {
 			include_spip('inc/plugin');
 			$dossier = rtrim($i['dossier'],'/');
-			$infos = plugin_get_infos($dossier);
+			$plugin_get_infos = charger_fonction('get_infos', 'plugins');
+			$infos = $plugin_get_infos($dossier);
 			if (isset($infos['install'])){
 				// desinstaller
 				$etat = desinstalle_un_plugin($dossier, $infos);
@@ -576,7 +577,8 @@ class Actionneur {
 
 
 	function installe_plugin($dossier){
-		$infos = plugin_get_infos($dossier);
+		$plugin_get_infos = charger_fonction('get_infos', 'plugins');
+		$infos = $plugin_get_infos($dossier);
 		if (isset($infos['install'])) {
 			if (installe_un_plugin($dossier, $infos)) {
 				$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
