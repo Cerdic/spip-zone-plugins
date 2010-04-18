@@ -28,8 +28,11 @@
 			</li>
 			[(#REM) <!-- Affichage des resultats --> ]
 			<li class="fieldset">
+<!-- 
 				[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+ -->
 				[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+				[(#ENV*{message_ok})]
 			</li>
 		</ul>
 

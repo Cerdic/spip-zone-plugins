@@ -20,6 +20,12 @@
 // $verification => type de verification a effectuer
 function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification) {
 
+	// Initialisation du tableau des resultats
+	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
+	// de l'erreur dans $resultats['erreur'].
+	// Sinon, cet index n'existe pas
+	$resultats = array();
+
 	// On charge le fichier de langue a verifier
 	// si il existe dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
@@ -31,7 +37,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	}
 
 	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichier
-	$utilises_brut = array('items' => array(), 'suffixes' => array());
+	$utilises_brut = array('items' => array(), 'suffixes' => array(), 'modules' => array());
 	// On ne scanne pas dans les ultimes sous-repertoires charsets/ ,
 	// lang/ , req/ . On ne scanne que les fichiers php, html ou xml
 	// (voir le fichier regexp.txt).
@@ -46,6 +52,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 			if (preg_match_all($trouver_item, $texte, $matches)) {
 				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
 				$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
+				$utilises_brut['modules'] = array_merge($utilises_brut['modules'], $matches[1]);
+				// On collecte pour chaque item trouve les lignes et fichiers dans lequel il est utilise
 				foreach ($matches[2] as $item_val) {
 					preg_match("#.{0,18}".$item_val.".{0,10}#is", $texte, $extrait);
 					$item_tous[$item_val][$_fichier][$ligne][] = trim($extrait[0]);
@@ -55,11 +63,12 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	}
 
 	// On affine le tableau resultant en supprimant les doublons
-	$utilises = array('items' => array(), 'suffixes' => array());
+	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array());
 	foreach ($utilises_brut['items'] as $_cle => $_valeur) {
 		if (!in_array($_valeur, $utilises['items'])) {
 			$utilises['items'][] = $_valeur;
 			$utilises['suffixes'][] = (!$utilises_brut['suffixes'][$_cle]) ? false : true;
+			$utilises['modules'][] = $utilises_brut['modules'][$_cle];
 		}
 	}
 
@@ -80,13 +89,24 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 		foreach ($utilises['items'] as $_cle => $_valeur) {
 			if (!$GLOBALS[$var_source][$_valeur]) {
 				if (!$utilises['suffixes'][$_cle]) {
-					// L'item est vraiment non defini et c'est une erreur
-					$item_non[] = $_valeur;
-					if (array_key_exists($_valeur, $tous_lang)) {
-						$definition_possible[$_valeur] = $tous_lang[$_valeur];
+					if ($utilises['modules'][$_cle] == $module) {
+						// L'item est vraiment non defini et c'est une erreur
+						$item_non[] = $_valeur;
+						if (is_array($item_tous[$_valeur])) {
+							$fichier_non[$_valeur] = $item_tous[$_valeur];
+						}
 					}
-					if (is_array($item_tous[$_valeur])) {
-						$fichier_non[$_valeur] = $item_tous[$_valeur];
+					else {
+						// L'item est a priori defini dans un autre module. Ve n'est pas forcement
+						// une erreur qu'il ne soit pas defini dans le fichier e ncour de verification.
+						// On l'identifie donc a part
+						$item_non_mais[] = $_valeur;
+						if (is_array($item_tous[$_valeur])) {
+							$fichier_non_mais[$_valeur] = $item_tous[$_valeur];
+						}
+						if (array_key_exists($_valeur, $tous_lang)) {
+							$definition_possible[$_valeur] = $tous_lang[$_valeur];
+						}
 					}
 				}
 				else {
@@ -142,11 +162,12 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	$resultats['ou_fichier'] = $ou_fichier;
 	$resultats['langue'] = $ou_langue.$module.'_'.$langue.'.php';
 	$resultats['item_non'] = $item_non;
+	$resultats['item_non_mais'] = $item_non_mais;
 	$resultats['fichier_non'] = $fichier_non;
+	$resultats['fichier_non_mais'] = $fichier_non_mais;
 	$resultats['item_peut_etre'] = $item_peut_etre;
 	$resultats['fichier_peut_etre'] = $fichier_peut_etre;
 	$resultats['definition_possible'] = $definition_possible;
-	$resultats['statut'] = true;
 
 	return $resultats;
 }
