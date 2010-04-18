@@ -18,7 +18,7 @@
 function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 	include_spip('inc/plugin');
 
-	// Recuperation des repertoires plugins possedant un dossier lang/
+	// Recuperation des repertoires plugins
 	$rep_plugins = liste_plugin_files();
 	$rep_normal = array();
 	foreach ($rep_plugins as $rep) {
@@ -43,10 +43,12 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 	$rep_scan = array_merge($rep_complet, $rep_normal);
 	
 	// construction des <select>
-	$sel_lang = '<p class='.($err_l?'"erreur_message"':'"explication"').'>'.
+	$sel_lang = '<li class="editer_fichier_langue obligatoire'. $err_l . '">' . "\n".
+				'<p class='.($err_l?'"erreur_message"':'"explication"').'>'.
 				"\n"._T('langonet:message_choisir_langue')."</p>\n".
 				'<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">'."\n";
-	$sel_dossier = '<p class='.($err_d?'"erreur_message"':'"explication"').'>'.
+	$sel_dossier = '<li class="editer_dossier_scan obligatoire'. $err_d . '">' . "\n".
+				'<p class='.($err_d?'"erreur_message"':'"explication"').'>'.
 				"\n"._T('langonet:message_choisir_dossier')."</p>\n".
 				'<select name="dossier_scan" id="dossier_scan">' . "\n";
 	$sel_lang .= '<option value="0"';
@@ -99,8 +101,8 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 		$sel_dossier .= str_replace('../', '', $reel_dir) . '/</option>' . "\n";
 	}
 
-	$sel_lang .= '</select>' . "\n";
-	$sel_dossier .= '</select>' . "\n";
+	$sel_lang .= '</select>' . "\n" . '</li>' . "\n";
+	$sel_dossier .= '</select>' . "\n" . '</li>' . "\n";
 
 	return $sel_lang . $sel_dossier;
 }

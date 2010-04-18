@@ -22,9 +22,7 @@
 								<label for="verification_utilisation"><:langonet:label_verification_utilisation:></label>
 							</div>
 						</li>
-						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur][(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
-							[(#ENV{fichier_langue, 0}|langonet_creer_selects{#ENV{dossier_scan, 0}, [(#ENV{erreurs}|table_valeur{fichier_langue})], [(#ENV{erreurs}|table_valeur{dossier_scan})]})]
-						</li>
+						[(#ENV{fichier_langue, 0}|langonet_creer_selects{#ENV{dossier_scan, 0}, [(#ENV{erreurs}|table_valeur{fichier_langue})], [(#ENV{erreurs}|table_valeur{dossier_scan})]})]
 					</ul>
 				</fieldset>
 			</li>
