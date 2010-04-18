@@ -23,12 +23,12 @@
 -->]<style type="text/css">
 @font-face {
 font-family: '#ENV{family}';
-src: url('polices/hanshand.eot');
+[<!-- (#REM) src: url('polices/hanshand.eot'); -->]
 src: local(#ENV{fontname})
  [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_eot}")}
   ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_eot}")]
  [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_woff}")}
-  ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_woff}") format('woff')]
+  ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_woff}") format('woff')]
  [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_ttf}")}
   ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_ttf}") format('truetype')]
 }
