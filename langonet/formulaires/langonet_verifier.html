@@ -1,4 +1,6 @@
 <div class="formulaire_spip formulaire_langonet_verifier" id="formulaire_langonet_verifier">
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
@@ -28,11 +30,10 @@
 			</li>
 			[(#REM) <!-- Affichage des resultats --> ]
 			<li class="fieldset">
-<!-- 
-				[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
- -->
-				[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
-				[(#ENV*{message_ok})]
+				<fieldset>
+					<h3 class="legend"><:langonet:legende_resultats:></h3>
+					[(#ENV*{message_ok}|table_valeur{resultats})]
+				</fieldset>
 			</li>
 		</ul>
 

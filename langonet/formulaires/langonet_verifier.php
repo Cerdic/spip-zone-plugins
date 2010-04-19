@@ -93,47 +93,46 @@ function formater_resultats($resultats, $verification='definition') {
 	if ($verification == 'definition') {
 		// Liste des items non definis avec certitude et bien utilises avec le bon module
 		if (count($resultats['item_non']) > 0) {
-			$texte .= '<div class="results error">' . "\n" . '<p>' . "\n";
+			$texte .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non']) == 1) {
 				$texte .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
 				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
-			// on ferme le <p> ouvert car ce qui suit est un <div>
-			$texte .= "</p>\n";
+			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte .= afficher_lignes($resultats['fichier_non']);
-			$texte .= "</div>\n";
+			$texte .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<div class="results success">' . "\n" . '<p>' . "\n";
+			$texte .= '<div class="success">' . "\n";
 			$texte .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
-			$texte .= "</p></div>\n";
+			$texte .= "</div>\n";
 		}
 
 		// Liste des items non definis mais utilises avec un module different de celui 
 		// en cours de verification
 		if (count($resultats['item_non_mais']) > 0) {
-			$texte .= '<p class="results notice">' . "\n";
+			$texte .= '<div class="notice">' . "\n";
 			if (count($resultats['item_non']) == 1) {
 				$texte .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
 				$texte .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
-			// on ferme le <p> ouvert car ce qui suit est un <div>
-			$texte .= "</p>\n";
+			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible']);
+			$texte .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<p class="results success">' . "\n";
+			$texte .= '<div class="success">' . "\n";
 			$texte .= _T('langonet:message_ok_nonmais_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
-			$texte .= "</p>\n";
+			$texte .= "</div>\n";
 		}
 
 		// Liste des items definis sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
-			$texte .= '<p class="results notice">' . "\n";
+			$texte .= '<div class="notice">' . "\n";
 			if (count($resultats['item_peut_etre']) == 1) {
 				$texte .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n";
 			}
@@ -141,13 +140,14 @@ function formater_resultats($resultats, $verification='definition') {
 				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n";
 			}
 			// on ferme le <p> ouvert au-dessus car ce qui suit est un <div>
-			$texte .= "</p>\n";
+			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
+			$texte .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<p class="results success">' . "\n";
+			$texte .= '<div class="success">' . "\n";
 			$texte .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module'])) . "\n";
-			$texte .= "</p>\n";
+			$texte .= "</div>\n</div>\n";
 		}
 	}
 
@@ -210,15 +210,8 @@ function formater_resultats($resultats, $verification='definition') {
 	}
 	else {
 		// Tout s'est bien passe on renvoie le message ok et les resultats de la verification
-		$retour['message_ok'] .= '<p class="reponse_formulaire reponse_formulaire_ok">' . 
-								_T('langonet:message_ok_fichier_log', array('log_fichier' => $log_rep.$log_nom)) .
-								"</p>\n";
-		$retour['message_ok'] .= '<ul>' . "\n" .
-								'<li class="fieldset">' . "\n" .
-								'<fieldset>' . "\n" .
-								'<h3 class="legend">' . _T('langonet:legend_resultats') . '</h3>' . "\n" .
-								$texte . "\n" .
-								'</li>' . "\n" . '</fieldset>' . "\n" . '</ul>';
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_log', array('log_fichier' => $log_rep.$log_nom));
+		$retour['message_ok']['resultats'] = $texte;
 	}
 	return $retour;
 }

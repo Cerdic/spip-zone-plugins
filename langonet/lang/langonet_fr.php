@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'langonet_test1' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
 	'langonet_test2' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
 	'legende_generer' => 'G&eacute;n&eacute;ration des fichiers de langue',
+	'legende_resultats' => 'R&eacute;sultats de la v&eacute;rification',
 	'legende_verifier' => 'V&eacute;rification des items de langue',
 
 // M
