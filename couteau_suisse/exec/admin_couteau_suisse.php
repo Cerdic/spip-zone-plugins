@@ -81,7 +81,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		} elseif($cmd=='delete'){
 			spip_log("Suppression de '$_GET[pack]' par l'auteur id=$connect_id_auteur");
 			$p = preg_quote($_GET[pack],',');
-			$r = "[$]GLOBALS\['cs_installer'\]\['$p'\] *= *array *\(";
+			$r = "[$]GLOBALS\['cs_installer'\]\['$p'\] *= *";
 			cs_ecrire_config(
 				array(",$r,", ",# [^\n\r]+[\n\r]+if\(0\) {$r}[\n\r]+.*# $p #[\n\r]+,Us"),
 				array('if(0) \0', ''));
