@@ -36,7 +36,6 @@ _ Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/s
 		<inclure>base/catalogue.php</inclure>
 	</pipeline>
 
-	
 	<install>base/catalogue_upgrade.php</install>
 	
 	<fonctions>catalogue_fonctions.php</fonctions>
@@ -52,6 +51,11 @@ _ Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/s
 		<nom>autoriser</nom>
 		<inclure>catalogue_autorisations.php</inclure>
 	</pipeline>	
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>catalogue_pipelines.php</inclure>
+	</pipeline>
 	
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.0.9;]" />

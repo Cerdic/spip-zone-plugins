@@ -37,6 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'partage' => 'Chambre',
 	'partage_explications' => 'Souhaitez-vous partager votre chambre double avec une personne en particulier ? (si vous n\'avez pas choisi l\'option "single") ',
 	'partage_nom' => 'Si oui, le nom de cette personne',
+	
+	// T
+	'titre_bloc_catalogue' => 'CATALOGUE : variantes et options li&eacute;s &agrave; l\'article',
 		
 	// V
 	'votre_nom' => 'Votre nom',
