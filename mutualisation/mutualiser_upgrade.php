@@ -40,10 +40,20 @@ function mutualiser_upgrade() {
 			_L('La base de donn&#233;es a &#233;t&#233; mise &#224; jour de @old@ vers @new@',
 				array('old' => $old, 'new' => $new))
 		);
+		// Installer les plugins
+		include_spip('inc/plugin');
+		actualise_plugins_actifs();
+		effacer_meta('plugin_erreur_activation');
+		ecrire_metas();
+		installe_plugins();
 		// vider tmp et recreer tmp/meta_cache.php
 		include_spip('inc/invalideur');
 		purger_repertoire(_DIR_TMP);
 		ecrire_metas();
+		echo minipres(_T('titre_page_upgrade'),
+			_L('Aller dans <a href="@ecrire@">ecrire/</a>',
+				array('ecrire' => $GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS))
+		);
 	}
 	exit;
 }
