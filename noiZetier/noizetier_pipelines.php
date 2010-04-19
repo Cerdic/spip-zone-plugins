@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function noizetier_header_prive($flux){
 	$js = find_in_path('javascript/noizetier.js');
 	$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
-	$css = generer_url_public('css/noizetier.css');
+	$css = generer_url_public('noizetier.css');
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' />\n";
 	return $flux;
 }
