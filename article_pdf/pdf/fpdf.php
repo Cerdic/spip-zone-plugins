@@ -71,8 +71,8 @@ var $creator;            //creator
 var $AliasNbPages;       //alias for total number of pages
 var $PDFVersion;         //PDF version number
 
-var $maxLineWidth;				// ajout CM 24/09/2006
-var $îmages = array();
+var $maxLineWidth;		// ajout CM 24/09/2006
+var $îmages = array();	// ???? a priori on peut la virer !!!!
 /*******************************************************************************
 *                                                                              *
 *                               Public methods                                 *
