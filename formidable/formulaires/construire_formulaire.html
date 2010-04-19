@@ -49,7 +49,6 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			$('.formulaire_construire_formulaire li.configurable:not(.en_configuration) > .actions').hide();
 			$('.formulaire_construire_formulaire li.configurable')
 				.hover(
 					function(){
@@ -71,7 +70,33 @@
 								.parents('li.configurable').eq('0')
 									.mouseover();
 					}
-				);
+				)
+				// Quand on clique sur un cadre de champ, ça ne doit pas propager le clic aux fieldsets parents
+				.click(function(e){e.stopPropagation();})
+				.filter(':not(.en_configuration)')
+					// Quand on clique n'importe où sur le champ, ça clique sur le bouton de conf
+					.click(function(e){
+						var bouton = $(this).find('> div.actions > button.configurer_saisie');
+						var form = $(this).parents('form');
+						var hidden = $('<input type="hidden">');
+				
+						hidden.attr('name', bouton.attr('name'));
+						hidden.val(bouton.val());
+						form.append(hidden);
+						form.submit();
+					})
+					.css('cursor', 'pointer')
+					.find('input, select, textarea, label')
+						.css('cursor', 'pointer')
+					.end()
+					.find('> .actions')
+						.hide()
+					.end()
+				.end()
+				.filter('.en_configuration')
+					.css('cursor','auto')
+					.find('input, select, textarea, label')
+						.css('cursor','auto');
 			
 			// On lance la création des onglets
 			formulaire_configurer_onglets();
