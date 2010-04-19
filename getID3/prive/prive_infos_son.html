@@ -12,7 +12,7 @@
 							var div = this;
 							var widthnormale = #ENV{largeur,235};
 							var widthmax = jQuery('#audioplayer#ID_DOCUMENT').parent().width();
-							if(widthnormale > widthmax){	
+							if(widthnormale > widthmax){
 								jQuery('#audioplayer#ID_DOCUMENT').attr('width',widthmax+'px');
 							}
 							jQuery(div).hide();
@@ -24,7 +24,7 @@
 			</script>
 			[(#EXTENSION|=={mp3}|oui)
 				[(#MODELE{doc_player_getid3}{id_document}{bgcolor=#ENV{couleur_foncee}})]
-			]
+			]]
 			<table cellspacing='3' cellpadding='0'>
 				[<tr>
 					<td class="son_left">
@@ -34,7 +34,7 @@
 						<strong><abbr title="[(#FICHIER|basename)]">(#FICHIER|basename|couper{20})</abbr></strong>
 					</td>
 				</tr>]
-				
+
 				<tr>
 					<td class="son_left">
 						<:getid3:son_format:>
@@ -43,7 +43,7 @@
 						<strong>#MIME_TYPE</strong>
 					</td>
 				</tr>
-	
+
 				<tr>
 					<td class="son_left">
 						<:getid3:son_extension:>
@@ -52,7 +52,7 @@
 						<strong>#EXTENSION</strong>
 					</td>
 				</tr>
-						
+
 				[<tr>
 					<td class="son_left">
 						<:getid3:son_duree:>
@@ -61,7 +61,7 @@
 						<strong>(#DUREE)</strong>
 					</td>
 				</tr>]
-			
+
 				[<tr>
 					<td class="son_left">
 						<:getid3:son_bitrate:>
@@ -70,7 +70,7 @@
 						<strong>(#BITRATE|>{0}|oui)#BITRATE bps</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="son_left">
 						<:getid3:son_bitratemode:>
@@ -79,7 +79,7 @@
 						<strong><abbr title="[(#BITRATE_MODE|=={cbr}|?{<:getid3:son_bitrate_cbr:>})][(#BITRATE_MODE|=={vbr}|?{<:getid3:son_bitrate_vbr:>})]">(#BITRATE_MODE)</abbr></strong>
 					</td>
 				</tr>]
-			
+
 				[<tr>
 					<td class="son_left">
 						<:getid3:son_audiosamplerate:>
@@ -88,7 +88,7 @@
 						<strong>(#AUDIOSAMPLERATE|>{0}|oui)#AUDIOSAMPLERATE Hz</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="son_left">
 						<:getid3:son_bits:>
@@ -97,7 +97,7 @@
 						<strong>(#BITS|>{0}|oui)#BITS bits</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="son_left">
 						<:getid3:canaux:>

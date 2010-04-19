@@ -48,6 +48,6 @@ function inc_getid3_recuperer_infos($id_document){
 		),
 		'id_document='.intval($id_document));
 
-	return;
+	return $id3;
 }
 ?>
