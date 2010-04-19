@@ -64,8 +64,10 @@ function pack_sauve_pack_action() {
 		while(isset($GLOBALS['cs_installer']["$titre (".++$n.')']));
 	if($n) $titre = "$titre ($n)";
 	include_spip(_DIR_CS_TMP.'config');
-	$pack = "\n# Le Couteau Suisse : pack de configuration du ".date("d M Y, H:i:s")."\n\$GLOBALS['cs_installer']['$titre'] = "
-		. var_export($GLOBALS['cs_installer'][$titre0], true) . "; # $titre #\n";
+	$fct = md5($titre.time());
+	$pack = "\n# Le Couteau Suisse : pack de configuration du ".date("d M Y, H:i:s")."\n\$GLOBALS['cs_installer']['$titre'] = 'cs_$fct';
+function cs_$fct() { return "
+		. var_export($GLOBALS['cs_installer'][$titre0], true) . ";\n} # $titre #\n";
 	cs_ecrire_config(',\?'.'>\s*$,m', $pack.'?'.'>', $pack);
 }
 

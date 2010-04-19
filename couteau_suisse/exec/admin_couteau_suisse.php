@@ -11,6 +11,7 @@ include_spip('inc/autoriser');
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
+include_spip('base/cout_install');
 
 // mise a jour des donnees si envoi via formulaire
 function enregistre_modif_outils($cmd){
@@ -39,19 +40,6 @@ cs_log("INIT : enregistre_modif_outils()");
 	defined('_SPIP20100')?actualise_plugins_actifs():verif_plugin();
 
 cs_log(" FIN : enregistre_modif_outils()");
-}
-
-function cout_exec_redirige($p='', $recompiler=true) {
-	if($recompiler) {
-		ecrire_metas();
-		cs_initialisation(true);
-		include_spip('inc/invalideur');
-		suivre_invalideur("1"); # tout effacer
-		purger_repertoire(_DIR_SKELS);
-		purger_repertoire(_DIR_CACHE);
-	}
-	include_spip('inc/headers');
-	redirige_par_entete(generer_url_ecrire(_request('exec'), $p, true));
 }
 
 function exec_admin_couteau_suisse() {
@@ -87,16 +75,9 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	// installation personnalisee
 	if(isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])) {
 		if($cmd=='install'){
-			spip_log("Installation peronnalisee de '$_GET[pack]' par l'auteur id=$connect_id_auteur");
-			$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
-			effacer_meta('tweaks_actifs');
-			$metas_outils = array();
-			foreach(preg_split('%\s*[,|]\s*%', $pack['outils']) as $o) $metas_outils[trim($o)]['actif'] = 1;
-			if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $metas_vars[$i] = $v;
-			ecrire_meta('tweaks_actifs', serialize($metas_outils));
-			ecrire_meta('tweaks_variables', serialize($metas_vars));
-			// tout recompiler
-			cout_exec_redirige();
+			spip_log("Installation personnalisee de '$pack' par l'auteur id=$connect_id_auteur");
+			// installer le pack et rediriger
+			cout_install_pack($_GET['pack'], true);
 		} elseif($cmd=='delete'){
 			spip_log("Suppression de '$_GET[pack]' par l'auteur id=$connect_id_auteur");
 			$p = preg_quote($_GET[pack],',');

@@ -10,48 +10,6 @@ function cs_deferr($f) {
 	spip_log(_L("Pipeline CS : fonction '$f' non definie !"));
 }
 
-/***********
- * INSTALL *
- ***********/
-
-function couteau_suisse_install($action){
-if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
-	include_spip('inc/meta');
-	switch ($action){
-		case 'test':
-			// affichage d'un lien ici, puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
-			if(!defined('_SPIP20100') && _request('exec') == 'admin_plugin') {
-				if(!defined('_SPIP19300')) echo '<br />';
-				include_spip('inc/presentation');
-				echo debut_cadre_enfonce('', true),
-					icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false),
-					fin_cadre_enfonce(true);
-			}
-			return isset($GLOBALS['meta']['tweaks_actifs']);
-			break;
-		case 'install':
-			break;
-		case 'uninstall':
-			// effacement de toutes les metas du Couteau Suisse
-			foreach(array_keys($GLOBALS['meta']) as $meta) {
-				if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
-				if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
-			}
-			ecrire_metas(); # Pour SPIP 1.92
-			// effacement des repertoires temporaires
-			include_spip('inc/getdocument');
-			foreach(array(_DIR_CS_TMP, _DIR_VAR.'couteau-suisse') as $dir) 
-				if(@file_exists($dir)) effacer_repertoire_temporaire($dir);
-			// fichier RSS temporaire
-			include_spip('cout_define');
-			@unlink(_CS_TMP_RSS);
-			// retrait de l'inclusion eventuelle dans config/mes_options.php
-			include_spip('cout_utils');
-			cs_verif_FILE_OPTIONS(false, true);
-			break;
-	}
-}
-
 /*********
  * PRIVE *
  *********/
