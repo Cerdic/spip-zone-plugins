@@ -336,13 +336,14 @@ function cs_sauve_configuration() {
 
 	include_spip('inc/charset');
 	$nom_pack = _T('couteauprive:pack_actuel', array('date'=>cs_date()));
+	$fct_pack = md5($nom_pack.time());
 	$sauve .= $temp = "\n######## "._T('couteauprive:pack_actuel_titre')." #########\n\n// "
 		. filtrer_entites(_T('couteauprive:pack_actuel_avert')."\n\n"
-			. "\$GLOBALS['cs_installer']['".$nom_pack."'] = array(\n\n\t// "
+			. "\$GLOBALS['cs_installer']['$nom_pack'] =\t'cs_$fct_pack';\nfunction cs_$fct_pack() { return array(\n\t// "
 			. _T('couteauprive:pack_outils_defaut')."\n"
 			. "\t'outils' =>\n\t\t'".join(",\n\t\t", $actifs)."',\n"
 			. "\n\t// "._T('couteauprive:pack_variables_defaut')."\n")
-		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n); # $nom_pack #\n";
+		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);} # $nom_pack #\n";
 
 	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 	if(@$_GET['cmd']=='pack') $GLOBALS['cs_pack_actuel'] = $temp;
