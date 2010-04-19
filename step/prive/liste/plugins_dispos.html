@@ -64,7 +64,7 @@
 				$('.plugins_dispos tr.replier').removeClass('replier');
 				me = $(this);
 				if (!me.next('.step_plugin_info').is(':visible')) {
-					me.addClass('replier').find('td.info').append('<span class="image_loading right"></span>');
+					me.addClass('replier').find('td.info').append('<span class="image_loading right"></span>').animeajax();
 					$('.step_plugin_info').remove();
 					id_plugin = me.attr('id').substr(4);
 					hash = me.attr('class');

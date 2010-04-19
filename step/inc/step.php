@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 
-include_spip('inc/plugin'); // pour spip_version_compare()
+include_spip('inc/plugin'); // pour spip_version_compare(), plugin_version_compatible()
 				
 // ---------------------- LIBS -------------------------------
 
@@ -175,7 +175,29 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 	// enlever la balise doctype qui provoque une erreur "balise non fermee" lors du parsage
 	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
 	// traduire le xml en php
-	if (is_array($plugin = spip_xml_parse($xml)) and $plugin = $plugin['plugin'][0]){
+	if (is_array($plugin = spip_xml_parse($xml))) {
+		
+		// [extrait] de plugins/verifie_conformite.php
+		// chercher la declaration <plugin spip='...'> a prendre pour cette version de SPIP
+		if ($n = spip_xml_match_nodes(",^plugin(\s|$),", $plugin, $matches)){
+			// version de SPIP
+			$vspip = $GLOBALS['spip_version_branche'];
+			foreach($matches as $tag => $sous){
+				list($tagname, $atts) = spip_xml_decompose_tag($tag);
+				if ($tagname == 'plugin' AND is_array($sous)){
+					if (!isset($atts['spip'])
+						OR plugin_version_compatible($atts['spip'], $vspip))
+						// on prend la derniere declaration avec ce nom
+						$plugin = end($sous);
+				}
+			}
+			unset($sous, $tagname, $atts, $matches, $vspip, $n);
+		} else {
+			return false;
+		}
+		// [/extrait] de plugins/verifie_conformite.php
+
+		 
 		// applatir les champs du plugin (ie les balises <multi> sont des chaines...) 
 		if ($insert = step_xml_parse_plugin($plugin)) {
 			// recuperer les champs sql utiles
@@ -333,7 +355,7 @@ function step_maj_liste_plugins($id_zone, $liste) {
 // passe simplement un '[version;version]'
 function step_verifier_plugin_compatible_version_spip($version){
 	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	return step_plugin_version_compatible($version, $version_spip);
+	return plugin_version_compatible($version, $version_spip);
 }
 
 
@@ -386,30 +408,6 @@ function step_selectionner_champs_sql_plugin($p) {
 		'categorie' => $p['categorie'],
 		'tags' => $p['tags'],
 	);
-}
-
-
-
-// ----------------------- Verifications de versions
-
-// fonction de SPIP inc/plugins
-function step_plugin_version_compatible($intervalle,$version){
-	if (!strlen($intervalle)) return true;
-	if (!preg_match(',^[\[\(]([0-9.a-zRC\s]*)[;]([0-9.a-zRC\s]*)[\]\)]$,',$intervalle,$regs)) return false;
-	$mineure = $regs[1];
-	$majeure = $regs[2];
-	$mineure_inc = $intervalle{0}=="[";
-	$majeure_inc = substr($intervalle,-1)=="]";
-	#var_dump("$mineure_inc-$mineure-$majeure-$majeure_inc");
-	if (strlen($mineure)){
-		if ($mineure_inc AND spip_version_compare($version,$mineure,'<')) return false;
-		if (!$mineure_inc AND spip_version_compare($version,$mineure,'<=')) return false;
-	}
-	if (strlen($majeure)){
-		if ($majeure_inc AND spip_version_compare($version,$majeure,'>')) return false;
-		if (!$majeure_inc AND spip_version_compare($version,$majeure,'>=')) return false;
-	}
-	return true;
 }
 
 

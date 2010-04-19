@@ -1,6 +1,6 @@
 <?php
 
-include_spip('inc/plugin'); // pour spip_version_compare()
+include_spip('inc/plugin'); // pour spip_version_compare(), plugin_version_compatible()
 
 class Decideur {
 
@@ -130,7 +130,7 @@ class Decideur {
 		$news = $this->infos_courtes(array('prefixe=' . sql_quote($prefixe), 'obsolete=' . sql_quote('non')), true);
 		if ($news and count($news['p'][$prefixe]) > 0) {
 			foreach ($news['p'][$prefixe] as $new) {
-				if (step_plugin_version_compatible($version, $new['v'])) {
+				if (plugin_version_compatible($version, $new['v'])) {
 					return $new;
 				}
 			}
@@ -387,7 +387,7 @@ class Decideur {
 				// de deux choses l'une...
 				// soit la dependance est a SPIP, soit a un plugin, soit a une librairie...
 
-				$p = $n['id'];
+				$p = strtolower($n['id']);
 				$v = $n['version'];
 				
 				// si c'est a SPIP et qu'on ne valide pas, on retourne une erreur !
@@ -423,7 +423,7 @@ class Decideur {
 					// sinon on le cherche et on l'ajoute
 					if (!($ninfo = $this->sera_actif($p)
 					and !$err = $this->en_erreur($ninfo['i'])
-					and step_plugin_version_compatible($v, $ninfo['v']))) {
+					and plugin_version_compatible($v, $ninfo['v']))) {
 						
 						// absent ou erreur ou pas compatible
 						$etat = $err ? 'erreur' : ($ninfo ? 'conflit' : 'absent');
