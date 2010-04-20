@@ -7,7 +7,6 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type="hidden" name="redirect" value="#ENV{redirect}" />
 	  <ul>
 	  	#SET{name,var_lang_ecrire}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
