@@ -14,8 +14,8 @@
 			<select name="licence_defaut" id="licence_defaut">
 			<option value="0"[(#ENV{licence_defaut}|=={0}|oui) selected="selected"]><:licence:aucune_licence:></option>
 			<BOUCLE_selection(POUR){tableau #ENV{licences}}>
-				<BOUCLE_id_licence(POUR){tableau #VALEUR}{cle=id}>#SET{id_licence,#VALEUR}</BOUCLE_id_licence>
-				<BOUCLE_name_licence(POUR){tableau #VALEUR}{cle=name}>#SET{name_licence,#VALEUR}</BOUCLE_name_licence>
+				[(#SET{id_licence,[(#VALEUR|table_valeur{id})]})]
+				[(#SET{name_licence,[(#VALEUR|table_valeur{name})]})]
 				<option value="#GET{id_licence}"[(#GET{id_licence}|=={#ENV{licence_defaut}}|oui) selected="selected"]>#GET{name_licence}</option>
 			</BOUCLE_selection>
 			</select>
@@ -23,7 +23,7 @@
 	</ul>
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
-		<input type="submit" name="_cfg_delete" class="submit" value="<:fancybox:cfg_effacer:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:cfg:bouton_effacer:>" />
 	</p>
 </div></form>
 </div>
