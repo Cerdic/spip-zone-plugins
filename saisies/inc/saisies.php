@@ -9,12 +9,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * saisies_lister_par_nom()
  * saisies_lister_champs()
  * saisies_chercher()
- * saisies_chemin()
  * saisies_supprimer()
  * saisies_inserer()
+ * saisies_deplacer()
  * saisies_modifier()
  * saisies_verifier()
+ * saisies_comparer()
  * saisies_generer_html()
+ * saisies_generer_vue()
  * saisies_generer_nom()
  * saisies_inserer_html()
  * saisies_lister_disponibles()
@@ -312,6 +314,44 @@ function saisies_verifier($formulaire){
 	}
 	
 	return $erreurs;
+}
+
+/*
+ * Compare deux tableaux de saisies pour connaitre les différences
+ * @param array $saisies_anciennes Un tableau décrivant des saisies
+ * @param array $saisies_nouvelles Un autre tableau décrivant des saisies
+ * @param bool $avec_conteneur Indique si on veut prendre en compte dans la comparaison les conteneurs comme les fieldsets
+ * @return array Retourne le tableau des saisies supprimées, ajoutées et modifiées
+ */
+function saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneur=true){
+	$saisies_anciennes = saisies_lister_par_nom($saisies_anciennes, $avec_conteneur);
+	$saisies_nouvelles = saisies_lister_par_nom($saisies_nouvelles, $avec_conteneur);
+	
+	// Les saisies supprimées sont celles qui restent dans les anciennes quand on a enlevé toutes les nouvelles
+	$saisies_supprimees = array_diff_key($saisies_anciennes, $saisies_nouvelles);
+	// Les saisies ajoutées, c'est le contraire
+	$saisies_ajoutees = array_diff_key($saisies_nouvelles, $saisies_anciennes);
+	// Il reste alors les saisies qui ont le même nom
+	$saisies_restantes = array_intersect_key($saisies_anciennes, $saisies_nouvelles);
+	// Dans celles-ci, celles qui sont modifiées sont celles dont la valeurs est différentes
+	$saisies_modifiees = array_udiff($saisies_nouvelles, $saisies_restantes, 'saisies_comparer_rappel');
+	// Et enfin les saisies qui ont le même nom et la même valeur
+	$saisies_identiques = array_diff_key($saisies_restantes, $saisies_modifiees);
+	
+	return array(
+		'supprimees' => $saisies_supprimees,
+		'ajoutees' => $saisies_ajoutees,
+		'modifiees' => $saisies_modifiees,
+		'identiques' => $saisies_identiques
+	);
+}
+
+/*
+ * Compare deux saisies et indique si elles sont égales ou pas
+ */
+function saisies_comparer_rappel($a, $b){
+	if ($a === $b) return 0;
+	else return 1;
 }
 
 /*
