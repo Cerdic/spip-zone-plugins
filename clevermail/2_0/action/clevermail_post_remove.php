@@ -6,7 +6,7 @@ function action_clevermail_post_remove_dist() {
 
   include_spip('inc/autoriser');
   if (autoriser('supprimer','cm_post',$pst_id)) {
-  	$nbQueued = sql_countsel("*", "spip_cm_posts_queued", "pst_id = ".intval($pst_id));
+  	$nbQueued = sql_countsel("spip_cm_posts_queued", "pst_id = ".intval($pst_id));
   	if ($nbQueued == 0) {
 	    $post = sql_fetsel("lst_id, pst_subject", "spip_cm_posts", "pst_id = ".intval($pst_id));
 	    $lst_id = $post['lst_id'];
