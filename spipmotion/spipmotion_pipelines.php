@@ -119,12 +119,12 @@ function spipmotion_post_edition($flux){
 			$fichier = basename(get_spip_doc($document['fichier']));
 			$racine = str_replace('-encoded','',substr($fichier,0,-(strlen($document['extension'])+1)));
 			spip_log('On teste sur la racine : '.$racine,'test');
-			if(!preg_match('/-encoded/',$document['fichier']) OR !sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%'")){
+			if(!preg_match('/-encoded/',$document['fichier']) OR !($id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document"))){
 				spip_log('on l ajoute dans la file','test');
 				include_spip('action/spipmotion_ajouter_file_encodage');
 				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
 			}else{
-				spip_log('on ne l ajoute pas dans la file','test');
+				spip_log('on ne l ajoute pas dans la file :'.$id_doc,'test');
 			}
 
 			/**
