@@ -3,7 +3,7 @@
 	<script type="text/javascript">
 		countArticle = 0;
 		var	 mySlideData = new Array();
-		<BOUCLE_liste_logos(ARTICLES) {id_rubrique} {par hasard} {lang}>
+		<BOUCLE_liste_logos(ARTICLES) {id_rubrique} {logo} {par hasard} {lang}>
 			mySlideData[countArticle++] = new Array(
 				'[(#LOGO_ARTICLE||extraire_attribut{src})]',
 				'[(#URL_RUBRIQUE)]',
