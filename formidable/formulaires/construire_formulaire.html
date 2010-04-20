@@ -91,6 +91,18 @@
 					.end()
 					.find('> .actions')
 						.hide()
+						.find('.supprimer_saisie')
+							.click(function(e){
+								e.stopPropagation();
+								var bouton = $(this);
+								var form = $(this).parents('form');
+								var hidden = $('<input type="hidden">');
+								hidden.attr('name', bouton.attr('name'));
+								hidden.val(bouton.val());
+								form.append(hidden);
+								form.submit();
+							})
+						.end()
 					.end()
 				.end()
 				.filter('.en_configuration')

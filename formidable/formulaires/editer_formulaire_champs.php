@@ -33,14 +33,20 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 	$id_formulaire = intval($id_formulaire);
 	
 	// On récupère le formulaire dans la session
-	$saisies = session_get("constructeur_formulaire_formidable_$id_formulaire");
-	$saisies = serialize($saisies);
+	$saisies_nouvelles = session_get("constructeur_formulaire_formidable_$id_formulaire");
 	
-	// On l'envoie dans la table
+	// On récupère les anciennes saisies
+	$saisies_anciennes = unserialize(sql_getfetsel(
+		'saisies',
+		'spip_formulaires',
+		'id_formulaire = '.$id_formulaire
+	));
+	
+	// On envoie les nouvelles dans la table dans la table
 	$ok = sql_updateq(
 		'spip_formulaires',
 		array(
-			'saisies' => $saisies
+			'saisies' => serialize($saisies_nouvelles)
 		),
 		'id_formulaire = '.$id_formulaire
 	);

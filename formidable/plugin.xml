@@ -58,7 +58,7 @@
 		<icone>images/formulaire-16.png</icone>
 		<url>formulaires_tous</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="cfg" version="[1.14.4;]" />
 	<necessite id="spip_bonux" version="[1.9.0;]" />
 	<necessite id="saisies" version="[1.7.2;]" />
