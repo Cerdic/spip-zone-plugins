@@ -27,7 +27,7 @@ function action_converser_dist()
 		$update_session = true;
 	}
 
-	$lang = action_converser_changer_langue();
+	$lang = action_converser_changer_langue($update_session);
 	$redirect = rawurldecode(_request('redirect'));
 
 	if (!$redirect) $redirect = _DIR_RESTREINT_ABS;
