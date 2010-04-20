@@ -43,7 +43,7 @@ address { font-style: italic; }
 
 pre,code,kbd,samp,var,tt { font: 1em 'andale mono','lucida console',monospace; }
 pre { margin: 1.5em 0; white-space: pre; }
-kbd { padding: .01em .3em; background-color: #666; color: #fff; }
+kbd { background-color: #666; color: #fff; }
 samp { font-weight: bold; }
 var { font-style: italic; }
 
