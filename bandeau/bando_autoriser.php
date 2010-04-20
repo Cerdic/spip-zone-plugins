@@ -185,9 +185,4 @@ function autoriser_breve_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL,
 	return autoriser('creerbrevedans','rubrique',$id_rubrique);
 }
 
-/* Changement de langue */
-function autoriser_converser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
-
 ?>
