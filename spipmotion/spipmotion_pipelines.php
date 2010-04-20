@@ -78,6 +78,7 @@ function spipmotion_post_edition($flux){
 
 		/**
 		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette
+		 * ni ses infos.
 		 */
 		$infos_doc = sql_fetsel('fichier,mode,distant','spip_documents','id_document='.intval($id_document));
 		$mode = $infos_doc['mode'];
@@ -90,6 +91,7 @@ function spipmotion_post_edition($flux){
 			/**
 			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter,
 			 * on lui applique certains traitements
+			 * Les fichiers sonores sont gérés par le plugin getID3 pour cela
 			 */
 			if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
 				if (class_exists('ffmpeg_movie')) {
@@ -113,14 +115,15 @@ function spipmotion_post_edition($flux){
 			/**
 			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 			 */
-			if(!preg_match('/encoded/',$fichier)){
+			if($document['id_orig'] == 0){
 				include_spip('action/spipmotion_ajouter_file_encodage');
 				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
 			}
+
+			/**
+			 * On invalide le cache de cet élément si nécessaire
+			 */
 			if($invalider){
-				/**
-				 * On invalide le cache de cet élément si nécessaire
-				 */
 				include_spip('inc/invalideur');
 				suivre_invalideur("id='id_$type/$id'");
 			}
