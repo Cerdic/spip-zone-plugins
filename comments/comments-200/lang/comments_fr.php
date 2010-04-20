@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Listes des commentaires
 'comments_h' => 'Vos commentaires',
 'permalink_to' => 'Lien permanent vers le commentaire',
-'le_date_jour' => 'Le', /* verifier que ca n'existe pas deja dans SPIP */
-'a_date_heure' => '&agrave;', /* verifier que ca n'existe pas deja dans SPIP */
+'date_jour_le' => 'Le', /* verifier que ca n'existe pas deja dans SPIP */
+'date_heure_a' => '&agrave;', /* verifier que ca n'existe pas deja dans SPIP */
 
 // Formulaire de commentaires
 'forum_qui_etes_vous' => 'Qui &ecirc;tes-vous&nbsp;?', /* a corriger dans SPIP */
