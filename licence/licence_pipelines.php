@@ -1,11 +1,17 @@
 <?php
 /*
  * Plugin Licence
- * (c) 2007-2009 fanouch
+ * (c) 2007-2010 fanouch
  * Distribue sous licence GPL
  *
  */
 
+/**
+ * Insertion au centre des pages d'articles dans le privé
+ * Affiche un formulaire d'édition de la licence de l'article
+ *
+ * @param array $flux Le contexte du pipeline
+ */
 function licence_affiche_milieu($flux) {
 
 	if ($flux['args']['exec'] == 'articles'){
@@ -19,12 +25,18 @@ function licence_affiche_milieu($flux) {
 	return $flux;
 }
 
-function licence_formulaire_traiter($flux){
+/**
+ * Si création d'un nouvel article, on lui attribue la licence par défaut si
+ * on utilise correctement les fonctions internes de SPIP pour créer des articles
+ * cf : http://trac.rezo.net/trac/spip/browser/branches/spip-2.1/ecrire/action/editer_article.php#L214
+ *
+ * @param array $flux Le contexte du pipeline
+ */
+function licence_pre_insertion($flux){
 	// si creation d'un nouvel article lui attribuer la licence par defaut de la config
-	if ($flux['args']['form']=='editer_article' AND $flux['args']['args'][0]=='new') {
-		$id_article = $flux['data']['id_article'];
+	if ($flux['args']['table']=='spip_articles') {
 		$licence_defaut = lire_config('licence/licence_defaut');
-		sql_updateq('spip_articles',array('id_licence'=>$licence_defaut),'id_article='.intval($id_article));
+		$flux['data']['id_licence'] = $licence_defaut;
 	}
 	return $flux;
 }
