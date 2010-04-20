@@ -71,6 +71,5 @@ p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: 1.5em; }
 /* Liens */
 a {}
 a:hover {}
-a:focus, a:active { background-color: #000; border-color: #000; color: #FFF; outline: none; text-decoration: none; }
 
 /* end */
