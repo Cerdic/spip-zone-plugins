@@ -114,11 +114,11 @@ function formater_resultats($resultats, $verification='definition') {
 		// en cours de verification
 		if (count($resultats['item_non_mais']) > 0) {
 			$texte .= '<div class="notice">' . "\n";
-			if (count($resultats['item_non']) == 1) {
-				$texte .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+			if (count($resultats['item_non_mais']) == 1) {
+				$texte .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible']);
@@ -126,7 +126,7 @@ function formater_resultats($resultats, $verification='definition') {
 		}
 		else {
 			$texte .= '<div class="success">' . "\n";
-			$texte .= _T('langonet:message_ok_nonmais_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+			$texte .= _T('langonet:message_ok_nonmais_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			$texte .= "</div>\n";
 		}
 
@@ -197,7 +197,8 @@ function formater_resultats($resultats, $verification='definition') {
 	}
 
 	// Generation du fichier de log contenant le texte complet des resultats
-	$log_nom = md5($verification{0}.$resultats['langue'].$resultats['ou_fichier']).'.txt';
+//	$log_nom = md5($verification{0}.$resultats['langue'].$resultats['ou_fichier']).'.txt';
+	$log_nom = basename($resultats['langue'], '.php') . '_' . $verification{0} . '_' . date("Ymd_His").'.txt';
 	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
 	$log_fichier = $log_rep . $log_nom;
 	$log_texte = "langOnet : ";

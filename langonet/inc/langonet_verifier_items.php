@@ -111,7 +111,6 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 				}
 				else {
 					// L'item trouve est utilise dans un contexte variable
-					// (par exemple : _T('langonet_'.$variable))
 					// Il ne peut etre trouve directement dans le fichier de
 					// langue, donc on verifie que des items de ce "type"
 					// existent dans le fichier de langue
@@ -132,7 +131,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 		foreach ($GLOBALS[$var_source] as $_item => $_traduction) {
 			if (!in_array ($_item, $utilises['items'])) {
 				// L'item est soit non utilise, soit utilise dans un contexte
-				// variable (par exemple : _T('langonet_'.$variable))
+				// variable
 				$contexte_variable = false;
 				foreach($utilises['items'] as $_cle => $_valeur) {
 					if ($utilises['suffixes'][$_cle]) {
@@ -172,8 +171,4 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	return $resultats;
 }
 
-/*
-commentaire pour test (ne pas supprimer) :
-	_T('langonet:test_item_non_defini') TEST : Cet item de langue est bien utilise dans un fichier du repertoire scanne mais n'est pas defini dans le fichier de langue verifie.
-*/
 ?>

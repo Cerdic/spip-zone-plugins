@@ -6,7 +6,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bak_date_crea' => 'Fichier g&eacute;n&eacute;r&eacute; le @bak_date_jour@ &agrave; @bak_date_heure@.',
-	// 'bak_info' => 'Le fichier &laquo;<em><a href="@bak_fichier@">@bak_fichier@</a></em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_verifier' => 'V&eacute;rifier',
 
@@ -54,8 +53,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_definis_incertains_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans un contexte complexe et pourrait &ecirc;tre non d&eacute;fini dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; le v&eacute;rifier :',
 	'message_ok_definis_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans un contexte complexe et pourraient &ecirc;tre non d&eacute;finis dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
 	'message_ok_fichier_genere' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; correctement (voir fichier &laquo;<em>@fichier@</em>&raquo;).',
-	'message_ok_fichier_log' => 'Le fichier &laquo;<em>@log_fichier@</em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
-	'message_ok_non_definis_0' => 'Tous les items de langue du module    &laquo;<em>@module@</em>&raquo; utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; sont bien d&eacute;finis dans le fichier de langue &laquo;<em>@langue@</em>&raquo;.',
+	'message_ok_fichier_log' => 'La v&eacute;rification s\'est correctement d&eacute;roul&eacute;e. Vous pouvez consultez les r&eacute;sultats plus bas dans le formulaire.<br />Le fichier &laquo;<em>@log_fichier@</em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
+	'message_ok_nonmais_definis_0' => 'Les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; n\'utilisent aucun item de langue autre que ceux du module &laquo;<em>@module@</em>&raquo;.',
+	'message_ok_nonmais_definis_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans des fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; mais n\'est a priori pas un item du module &laquo;<em>@module@</em>&raquo;. Nous vous invitons toutefois &agrave; le v&eacute;rifier :',
+	'message_ok_nonmais_definis_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans des fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; mais ne sont a priori pas des items du module &laquo;<em>@module@</em>&raquo;. Nous vous invitons toutefois &agrave; les v&eacute;rifier un par un :',
+	'message_ok_non_definis_0' => 'Tous les items de langue du module &laquo;<em>@module@</em>&raquo; utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; sont bien d&eacute;finis dans le fichier de langue &laquo;<em>@langue@</em>&raquo;.',
 	'message_ok_non_definis_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans des fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; mais n\'est pas d&eacute;fini dans le fichier de langue &laquo;<em>@langue@</em>&raquo; :',
 	'message_ok_non_definis_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans des fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; mais ne sont pas d&eacute;finis dans le fichier de langue &laquo;<em>@langue@</em>&raquo; :',
 	'message_ok_non_utilises_0' => 'Tous les items de langue d&eacute;finis  dans le fichier de langue &laquo;<em>@langue@</em>&raquo; sont bien utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo;.',
@@ -77,9 +79,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_mode_vide' => 'Une chaine vide',
 
 // T
-	'test_item_non_utilise' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
 	'titre_onglet' => 'LangOnet',
-	'titre_page_navigateur' => 'LangOnet'
+	'titre_page_navigateur' => 'LangOnet',
+
+// Pour les tests du plugin
+	'_test_item_non_utilise_1' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
+	'_test_item_non_utilise_2' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
 
 );
 
