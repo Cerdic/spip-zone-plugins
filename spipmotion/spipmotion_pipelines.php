@@ -115,9 +115,16 @@ function spipmotion_post_edition($flux){
 			/**
 			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 			 */
-			if($document['id_orig'] == 0){
+			spip_log($document['id_orig'],'test');
+			$fichier = basename(get_spip_doc($document['fichier']));
+			$racine = str_replace('-encoded','',substr($fichier,0,-(strlen($document['extension'])+1)));
+			spip_log('On teste sur la racine : '.$racine,'test');
+			if(!preg_match('/-encoded/',$document['fichier']) OR !sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%'")){
+				spip_log('on l ajoute dans la file','test');
 				include_spip('action/spipmotion_ajouter_file_encodage');
 				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+			}else{
+				spip_log('on ne l ajoute pas dans la file','test');
 			}
 
 			/**
