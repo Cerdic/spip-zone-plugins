@@ -1,39 +1,45 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/comments/comments-200/lang/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'comment' => 'commentaire',
-'comments' => 'commentaires',
+	// C
+	'comment' => 'commentaire',
+	'comments' => 'commentaires',
+	'comments_h' => 'Vos commentaires',
 
-// Listes des commentaires
-'comments_h' => 'Vos commentaires',
-'permalink_to' => 'Lien permanent vers le commentaire',
-'date_jour_le' => 'Le', /* verifier que ca n'existe pas deja dans SPIP */
-'date_heure_a' => '&agrave;', /* verifier que ca n'existe pas deja dans SPIP */
+	// D
+	'date_heure_a' => '&agrave;',
+	'date_jour_le' => 'Le',
 
-// Formulaire de commentaires
-'forum_qui_etes_vous' => 'Qui &ecirc;tes-vous&nbsp;?', /* a corriger dans SPIP */
-'label_nom' => 'Nom',
-'label_email' => 'Courriel (non&nbsp;publi&eacute;)',
-'label_url' => 'Votre site web',
+	// F
+	'forum_longueur' => 'Longueur des messages',
+	'forum_longueur_maxi' => 'Longueur maximale',
+	'forum_longueur_mini' => 'Longueur minimale',
+	'forum_qui_etes_vous' => 'Qui &ecirc;tes-vous&nbsp;?',
 
-'saisie_texte_legend' => 'Ajoutez votre commentaire ici', /* a supprimer ? */
-'saisie_texte_info' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code&nbsp;HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
+	// L
+	'label_email' => 'Courriel (non&nbsp;publi&eacute;)',
+	'label_nom' => 'Nom',
+	'label_url' => 'Votre site web',
 
-'submit1' => 'Pr&eacute;visualiser',
-'submit2' => 'Confirmer l\'envoi',
+	// M
+	'moderation_info' => 'Attention, votre message n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; relu et approuv&eacute;.',
 
-'moderation_info' => 'Attention, votre message n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; relu et approuv&eacute;.',
-'reponse_comment_ok' => 'Merci pour votre commentaire&nbsp;!',
-'reponse_comment_modere' => 'Votre commentaire a bien &eacute;t&eacute; enregistr&eacute; et est en attente de relecture avant publication.',
+	// P
+	'permalink_to' => 'Lien permanent vers le commentaire',
 
-// Panneau CFG
-'forum_longueur' => 'Longueur des messages',
-'forum_longueur_mini' => 'Longueur minimale',
-'forum_longueur_maxi' => 'Longueur maximale',
+	// R
+	'reponse_comment_modere' => 'Votre commentaire a bien &eacute;t&eacute; enregistr&eacute; et est en attente de relecture avant publication.',
+	'reponse_comment_ok' => 'Merci pour votre commentaire&nbsp;!',
 
+	// S
+	'saisie_texte_info' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code&nbsp;HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
+	'saisie_texte_legend' => 'Ajoutez votre commentaire ici',
+	'submit1' => 'Pr&eacute;visualiser',
+	'submit2' => 'Confirmer l\'envoi'
 );
 
 ?>
