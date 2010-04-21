@@ -67,7 +67,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	foreach ($utilises_brut['items'] as $_cle => $_valeur) {
 		if (!in_array($_valeur, $utilises['items'])) {
 			$utilises['items'][] = $_valeur;
-			$utilises['suffixes'][] = (!$utilises_brut['suffixes'][$_cle]) ? false : true;
+			// Attention ne pas oublier d'exclure le |filtre qui n'est pas un suffixe !! 
+			$utilises['suffixes'][] = ((!$utilises_brut['suffixes'][$_cle]) OR (substr($utilises_brut['suffixes'][$_cle], 0, 1) == '|' )) ? false : true;
 			$utilises['modules'][] = $utilises_brut['modules'][$_cle];
 		}
 	}

@@ -11,6 +11,8 @@ function langonet_tester_definition() {
 	// -- Les items suivants n'appartiennent pas au module langonet
 	$essai = _T('info_langues');
 	$essai = _T('articles');
+	$essai = array(0 => _T('date_jour_1'));
+	$essai = array_push(_T('date_jour_2'));
 
 	// -- Les items suivants sont utilises dans un contexte complexe
 	$essai = _T('langonet:test_item_1_'.$variable);
