@@ -9,6 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_verifier' => 'V&eacute;rifier',
 
 // E
+	'entete_avertissement_nonmais' => 'AVERTISSEMENT : items n\'appartenant pas au module',
+	'entete_avertissement_peutetre_definition' => 'AVERTISSEMENT : items peut-&ecirc;tre non d&eacute;finis',
+	'entete_avertissement_peutetre_utilisation' => 'AVERTISSEMENT : items peut-&ecirc;tre non utilis&eacute;s',
+	'entete_erreur_definition' => 'ERREUR : items non d&eacute;finis',
+	'entete_erreur_utilisation' => 'ERREUR : items non utilis&eacute;s',
 	'entete_log_date_creation' => 'Fichier g&eacute;n&eacute;r&eacute; le @log_date_jour@ &agrave; @log_date_heure@.',
 
 // I
@@ -24,7 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 	'label_arborescence_scannee' => 'Arborescence &agrave; scanner',
+	'label_avertissement' => 'Avertissements',
 	'label_chemin_langue' => 'Localisation du fichier de langue',
+	'label_erreur' => 'Erreurs',
 	'label_fichier_verifie' => 'Langue &agrave; v&eacute;rifier',
 	'label_langue_cible' => 'Langue cible',
 	'label_langue_source' => 'Langue source',

@@ -90,64 +90,64 @@ function formater_resultats($verification, $resultats) {
 	// - ["message_erreur"] : le message d'erreur si on a erreur de traitement pendant l'execution
 	$retour = array();
 
-	$texte = '';
+	$texte = array('non' => '', 'non_mais' => '', 'peut_etre' => '');
 	if ($verification == 'definition') {
 		// Liste des items non definis avec certitude et bien utilises avec le bon module
 		if (count($resultats['item_non']) > 0) {
-			$texte .= '<div class="error">'  . "\n";
+			$texte['non'] .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non']) == 1) {
-				$texte .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
-			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte .= afficher_lignes($resultats['fichier_non']);
-			$texte .= "</div>\n</div>\n";
+			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
+			$texte['non'] .= afficher_lignes($resultats['fichier_non']);
+			$texte['non'] .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<div class="success">' . "\n";
-			$texte .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
-			$texte .= "</div>\n";
+			$texte['non'] .= '<div class="success">' . "\n";
+			$texte['non'] .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+			$texte['non'] .= "</div>\n";
 		}
 
 		// Liste des items non definis mais utilises avec un module different de celui 
 		// en cours de verification
 		if (count($resultats['item_non_mais']) > 0) {
-			$texte .= '<div class="notice">' . "\n";
+			$texte['non_mais'] .= '<div class="notice">' . "\n";
 			if (count($resultats['item_non_mais']) == 1) {
-				$texte .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
-			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible']);
-			$texte .= "</div>\n</div>\n";
+			$texte['non_mais'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
+			$texte['non_mais'] .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible']);
+			$texte['non_mais'] .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<div class="success">' . "\n";
-			$texte .= _T('langonet:message_ok_nonmais_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
-			$texte .= "</div>\n";
+			$texte['non_mais'] .= '<div class="success">' . "\n";
+			$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+			$texte['non_mais'] .= "</div>\n";
 		}
 
 		// Liste des items definis sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
-			$texte .= '<div class="notice">' . "\n";
+			$texte['peut_etre'] .= '<div class="notice">' . "\n";
 			if (count($resultats['item_peut_etre']) == 1) {
-				$texte .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n";
+				$texte['peut_etre'] .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n";
+				$texte['peut_etre'] .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n";
 			}
-			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
-			$texte .= "</div>\n</div>\n";
+			$texte['peut_etre'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
+			$texte['peut_etre'] .= afficher_lignes($resultats['fichier_peut_etre']);
+			$texte['peut_etre'] .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<div class="success">' . "\n";
-			$texte .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module'])) . "\n";
-			$texte .= "</div>\n</div>\n";
+			$texte['peut_etre'] .= '<div class="success">' . "\n";
+			$texte['peut_etre'] .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module'])) . "\n";
+			$texte['peut_etre'] .= "</div>\n</div>\n";
 		}
 	}
 
@@ -155,43 +155,43 @@ function formater_resultats($verification, $resultats) {
 	else {
 		// Liste des items non utilises avec certitude
 		if (count($resultats['item_non']) > 0) {
-			$texte .= '<div class="error">'  . "\n";
+			$texte['non'] .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non']) == 1) {
-				$texte .= _T('langonet:message_ok_non_utilises_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_utilises_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
-			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
+			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			asort($resultats['item_non'], SORT_STRING);
 			foreach($resultats['item_non'] as $_cle => $_item) {
-				$texte .= "<div class=\"titrem\">\n" . $_item . "</div>\n";
+				$texte['non'] .= "<div class=\"titrem\">\n" . $_item . "</div>\n";
 			}
-			$texte .= "</div>\n</div>\n";
+			$texte['non'] .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<div class="success">' . "\n";
-			$texte .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
-			$texte .= "</div>\n</div>\n";
+			$texte['non'] .= '<div class="success">' . "\n";
+			$texte['non'] .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+			$texte['non'] .= "</div>\n</div>\n";
 		}
 
 		// Liste des items non utilises sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
-			$texte .= '<div class="notice">' . "\n";
+			$texte['peut_etre'] .= '<div class="notice">' . "\n";
 			if (count($resultats['item_peut_etre']) == 1) {
-				$texte .= _T('langonet:message_ok_utilises_incertains_1') . "\n";
+				$texte['peut_etre'] .= _T('langonet:message_ok_utilises_incertains_1') . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n";
+				$texte['peut_etre'] .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n";
 			}
-			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
-			$texte .= "</div>\n</div>\n";
+			$texte['peut_etre'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
+			$texte['peut_etre'] .= afficher_lignes($resultats['fichier_peut_etre']);
+			$texte['peut_etre'] .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= '<div class="success">' . "\n";
-			$texte .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module'])) . "\n";
-			$texte .= "</div>\n</div>\n";
+			$texte['peut_etre'] .= '<div class="success">' . "\n";
+			$texte['peut_etre'] .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module'])) . "\n";
+			$texte['peut_etre'] .= "</div>\n</div>\n";
 		}
 	}
 
@@ -204,7 +204,7 @@ function formater_resultats($verification, $resultats) {
 	else {
 		// Tout s'est bien passe on renvoie le message ok et les resultats de la verification
 		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_log', array('log_fichier' => $log_fichier));
-		$retour['message_ok']['resultats'] = $texte;
+		$retour['message_ok']['resultats'] = $texte['non'] . $texte['non_mais'] . $texte['peut_etre'];
 	}
 	return $retour;
 }
@@ -261,15 +261,41 @@ function afficher_lignes($tableau, $possibles=array()) {
  * @return boolean
  */
 function creer_log($verification, $resultats, $texte, &$log_fichier) {
-	// Fichier de log sous tmp/langonet/
+	// Fichier de log dans tmp/langonet/
 	$log_nom = basename($resultats['langue'], '.php') . '_' . $verification{0} . '_' . date("Ymd_His").'.log';
 	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
 	$log_fichier = $log_rep . $log_nom;
 
-	// Texte du fichier avec une en-tete et les resultats comme formates a l'affichage (en UTF-8)
-	$log_texte = "langOnet : ";
-	$log_texte .= utf8_encode(html_entity_decode(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s')))))."\n\n";
-	$log_texte .= utf8_encode(html_entity_decode(strip_tags($texte)));
+	// Texte du fichier en UTF-8
+	// -- En-tete resumant la verification
+	$log_texte = "/* *****************************************************************************\n";
+	$log_texte .= "/* LangOnet : " . utf8_encode(html_entity_decode(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s')))))."\n";
+	$log_texte .= "/* *****************************************************************************\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:label_verification'))) . " : " . utf8_encode(html_entity_decode(_T('langonet:label_verification_'.$verification))) . "\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:label_module'))) . " : " . utf8_encode(html_entity_decode($resultats['module'])) . "\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:label_fichier_verifie'))) . " : " . utf8_encode(html_entity_decode($resultats['langue'])) . "\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:label_arborescence_scannee'))) . " : " . utf8_encode(html_entity_decode($resultats['ou_fichier'])) . "\n";
+	$log_texte .= "/* *****************************************************************************\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:label_erreur'))) . " : " . utf8_encode(html_entity_decode(count($resultats['item_non']))) . "\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:label_avertissement'))) . " : " . utf8_encode(html_entity_decode(count($resultats['item_non_mais'])+count($resultats['item_peut_etre']))) . "\n";
+	$log_texte .= "/* *****************************************************************************\n";
+	// -- Texte des resultats: erreur (non definis ou non utilises)
+	$log_texte .= "\n\n/* *****************************************************************************\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:entete_erreur_'.$verification))) . "\n";
+	$log_texte .= "/* *****************************************************************************\n";
+	$log_texte .= utf8_encode(html_entity_decode(strip_tags($texte['non'])));
+	// -- Texte des resultats: avertissement (non definis mais n'appartenant pas au module a priori)
+	if ($texte['non_mais']) {
+		$log_texte .= "\n\n/* *****************************************************************************\n";
+		$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:entete_avertissement_nonmais'))) . "\n";
+		$log_texte .= "/* *****************************************************************************\n";
+		$log_texte .= utf8_encode(html_entity_decode(strip_tags($texte['non_mais'])));
+	}
+	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
+	$log_texte .= "\n\n/* *****************************************************************************\n";
+	$log_texte .= "/* " . utf8_encode(html_entity_decode(_T('langonet:entete_avertissement_peutetre_'.$verification))) . "\n";
+	$log_texte .= "/* *****************************************************************************\n";
+	$log_texte .= utf8_encode(html_entity_decode(strip_tags($texte['peut_etre'])));
 
 	$ok = ecrire_fichier($log_fichier, $log_texte);
 	return $ok;
