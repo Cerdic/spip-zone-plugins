@@ -119,7 +119,7 @@ function formater_resultats($verification, $resultats) {
 				$texte .= _T('langonet:message_ok_nonmais_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+				$texte .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible']);
