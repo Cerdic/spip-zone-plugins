@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// B
 	'bannieres' => 'bannieres',
+	'bouton_exporter' => 'Exporter',
 
 	// C
 	'choix_rayon' => 'Choisir le type de campagne',
@@ -46,9 +47,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_position' => 'Position de la banniere dans la page(#BANNIERE{1} par exemple).',
 	'explication_rayon' => 'Choisir internationale si aucun param&egrave;tre n\'est transmis avec la balise ou pour cr&eacute;er une banni&egrave;re par d&eacute;faut. Permet d\'analyser correctement le 2eme param&egrave;tre transmis par la balise.',
 	'explications_statistiques' => 'Affiche un tableau recapitulatif des clics pour les campagnes actives et les campagnes &eacute;chues : nombre de clics par campagne, nombre de jours de diffusion et moyenne par jour',
+	'export_stats' => 'Export des statistiques',
+	'explications_export_stats' => 'Permet d\'exporter toutes les statistiques des clics sur les banni&egrave;res. On peux limiter l\'export &agrave; certaines banni&egrave;res seulement ou pour une p&eacute;riode choisie.',
+	'explication_export' => 'ID campagnes s&eacute;par&eacute;s par une virgule. Laisser vide pour tout exporter.',
+	'explications_periode_export' => 'Limite l\'export aux dates saisies. Laisser 00/00/0000 pour ne pas en tenir compte.',
+	'explication_date_export' => 'Format de date: 00/00/0000',
 	
 	// F
 	'future' => 'Campagne programm&eacute;e',
+	'format_export' => 'Format du fichier',
+	'format_virgule' => '(,) Format CSV standard',
+	'format_point_virgule' => '(;) Format excel -.xls-',
+	'format_tabulation' => '(tab) Format excel -.xls-',
 	
 	// I
 	'info_gauche_numero_banniere' => 'Campagne num&eacute;ro :',
@@ -64,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_bannieres' => 'Liste des banni&egrave;res',
 	'label_diffusion' => 'Diffusion',
 	'label_email' => 'Email',
+	'label_export_campagne' => 'Liste des campagnes',
 	'label_fin' => 'Fin',
 	'label_id' => 'Id',
 	'label_id_banniere' => 'ID',
@@ -97,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_banniere' => 'Aucune campagne',
 	'pays' => 'Pays',
 	'periode_diffusion' => 'Banni&egrave;re diffus&eacute;e du <strong>@debut@</strong> au <strong>@fin@</strong>',
+	'periode_export' => 'P&eacute;riode &agrave; exporter',
 	
 	// R
 	'regional' => 'R&eacute;gional',

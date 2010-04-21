@@ -3,7 +3,7 @@
 	<auteur>
 		Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud
 	</auteur>
-	<version>0.22</version>
+	<version>0.23</version>
 	<version_base>0.21</version_base>
 
     <licence>&#169; 2009 GNU/GPL</licence>
@@ -33,15 +33,15 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/bannieres.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>autoriser</nom>
-		<inclure>bannieres_autorisations.php</inclure>
-	</pipeline>
+	
 	<pipeline>
 		<nom>encart</nom>
 		<inclure>bannieres_pipelines.php</inclure>
 	</pipeline>
-
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>bannieres_autorisations.php</inclure>
+	</pipeline>
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
@@ -52,7 +52,7 @@
 	<!-- facilitons les champs de formulaires -->
 	<necessite id="saisies" version="[1.5.1;]" />
 	<!-- filtre |icone et boucles CONDITIONS -->
-	<necessite id="spip_bonux" version="[1.8.4;]" />
+	<necessite id="spip_bonux" version="[1.9.3;]" />
 	<!-- Pour la geolocalisation -->
 	<!--<necessite id="geographie" version="[0.2;]" />-->
 </plugin>

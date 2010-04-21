@@ -31,12 +31,12 @@ function action_visit_url() {
 	$page = $_SERVER['HTTP_REFERER'];
 	$ip=$_SERVER['REMOTE_ADDR'];
 	
-	// garde une trace dans un fichier log. A supprimmer si on ne veut pas en garder
-	$date = date('Y-m-d H:i:s');
+	// garde une trace dans un fichier log.
+	/*$date = date('Y-m-d H:i:s');
 	$suivi = $id_banniere.' '.$date.' '.$id_auteur.' '.$page;
-	spip_log($suivi,bannieres_suivi);
+	spip_log($suivi,bannieres_suivi);*/
 			
-	// autre solution : insère les données dans une table. A supprimmer si on ne veut pas les garder
+	// Insère les données dans une table. A supprimmer si on ne veut pas les garder
 	sql_insertq('spip_bannieres_suivi',
 					array(
 					'id_auteur' => $id_auteur,
