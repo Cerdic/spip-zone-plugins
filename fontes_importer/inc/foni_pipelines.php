@@ -95,6 +95,52 @@ function foni_insert_head ($flux) {
 		{
 			$result .= '<!-- squelette '.$fond.' not found! -->' . PHP_EOL;
 		}
+		
+		// verifier le bon import (experimental)
+		// @see: http://sameropensource.blogspot.com/2009/08/improved-solution-for-embedding-fonts.html
+		// @see: http://code.google.com/p/jquery-fontavailable/downloads/list
+		//
+		// En chantier ici. Le pb: Firefox/Mac oublie parfois d'appliquer
+		// la fonte. Il l'a charge, mais ne l'applique pas au css demande'.
+		// @todo: tester sans le woff ? (ffx 3.6 charge le woff ET le ttf)
+		if($f = find_in_path('javascript/jquery.fontavailable-1.1.min.js'))
+		{
+			$result .= '
+<script type="text/javascript"><!--
+' . file_get_contents($f)
+. '// --></script>
+<script type="text/javascript"><!--
+	if(window.jQuery)jQuery(document).ready(function(){
+		if ($.browser.mozilla) {
+			var loaded, reviens, maxt = 5;
+			boucle = function() {
+				loaded = $.fontAvailable("' . $family . '");
+				console.log("Fonte ' . $family . ' loaded: " + loaded);
+				maxt--;
+				if(loaded || maxt<=0) {
+					console.log("finish");
+					clearInterval(reviens);
+				}
+				else {
+					console.log("continue");
+				}
+			}
+			if(!reviens) {
+				console.log("setinterval call");
+				reviens = setInterval(function(){ boucle(); }, 1000);
+			}
+		}
+
+		/* console.log("Fonte ' . $family . ' loaded: " + $.fontAvailable("' . $family . '")); */
+		$("#tete-baseline").click(function () {  
+			console.log("Fonte ' . $family . ' loaded: " + $.fontAvailable("' . $family . '"));
+	    });
+	});
+// --></script>
+'			;
+			
+		}
+		
 		$flux .= $result;
 	}
 	return($flux);

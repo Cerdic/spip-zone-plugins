@@ -22,9 +22,9 @@
 	
 -->]<style type="text/css">
 @font-face {
-font-family: '#ENV{family}';
+font-family: "#ENV{family}";
 [<!-- (#REM) src: url('polices/hanshand.eot'); -->]
-src: local(#ENV{fontname})
+src: local("#ENV{fontname}")
  [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_eot}")}
   ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_eot}")]
  [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_woff}")}
