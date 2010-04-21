@@ -1,18 +1,18 @@
 <h1 class="grostitre"><:clevermail:administration:></h1>
 <ul class="liste_items">
-<BOUCLE_lists(spip_cm_lists){par lst_name}>
+<BOUCLE_lists(CM_LISTS){par lst_name}>
   #SET{nbPosts,0}
   #SET{posts,#ARRAY}
   <B_posts>
-  <BOUCLE_posts(spip_cm_posts){lst_id}>
+  <BOUCLE_posts(CM_POSTS){lst_id}>
     #SET{posts,#GET{posts}|push{#PST_ID}}
   </BOUCLE_posts>
     #SET{nbPosts,#TOTAL_BOUCLE}
   </B_posts>
   <//B_posts>
-  <BOUCLE_subscribers(spip_cm_lists_subscribers){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
-  <BOUCLE_posts_new(spip_cm_posts){lst_id}{pst_date_sent=0} />#SET{nbPostsNew,#TOTAL_BOUCLE}<//B_posts_new>
-  <BOUCLE_posts_queued(spip_cm_posts_queued){pst_id IN #GET{posts}}{fusion pst_id} />#SET{nbPostsQueued,#TOTAL_BOUCLE}<//B_posts_queued>
+  <BOUCLE_subscribers(CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
+  <BOUCLE_posts_new(CM_POSTS){lst_id}{pst_date_sent=0} />#SET{nbPostsNew,#TOTAL_BOUCLE}<//B_posts_new>
+  <BOUCLE_posts_queued(CM_POSTS_QUEUED){pst_id IN #GET{posts}}{fusion pst_id} />#SET{nbPostsQueued,#TOTAL_BOUCLE}<//B_posts_queued>
   #SET{nbPostsSent,#GET{nbPosts}|moins{#GET{nbPostsNew}}|moins{#GET{nbPostsQueued}}}
   <li class="item">
     <p><strong>#LST_NAME</strong> (#LST_MODERATION)</p>

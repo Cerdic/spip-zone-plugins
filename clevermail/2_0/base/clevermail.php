@@ -1,4 +1,18 @@
 <?php
+function clevermail_declarer_tables_interfaces($interface){
+	// 'spip_' dans l'index de $tables_principales
+	$interface['table_des_tables']['cm_lists']='cm_lists';
+	$interface['table_des_tables']['cm_lists_subscribers']='cm_lists_subscribers';
+	$interface['table_des_tables']['cm_pending']='cm_pending';
+	$interface['table_des_tables']['cm_posts']='cm_posts';
+	$interface['table_des_tables']['cm_posts_done']='cm_posts_done';
+	$interface['table_des_tables']['cm_posts_links']='cm_posts_links';
+	$interface['table_des_tables']['cm_posts_queued']='cm_posts_queued';
+	$interface['table_des_tables']['cm_settings']='cm_settings';
+	$interface['table_des_tables']['cm_subscribers']='cm_subscribers';
+	return $interface;
+}
+
 function clevermail_declarer_tables_principales($tables_principales) {
 	// spip_cm_lists
 	$spip_cm_lists = array(

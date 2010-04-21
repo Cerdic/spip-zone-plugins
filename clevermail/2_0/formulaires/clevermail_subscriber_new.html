@@ -34,7 +34,7 @@
            <label for="#GET{name}"><:clevermail:abonne_lettres:></label>
            [<span class='erreur_message'>(#GET{erreurs})</span>]
            <select name="#GET{name}[]" id="#GET{name}" class="select" multiple="multiple" size="4">
-             <BOUCLE_lists(spip_cm_lists){par lst_name}>
+             <BOUCLE_lists(CM_LISTS){par lst_name}>
 [(#REM) TODO   <option value="#LST_ID"[(#ENV{#GET{name}}|array_intersect{#ARRAY{#LST_ID}}|sizeof|>{0}|oui) selected="selected"]>#LST_NAME</option>]
                <option value="#LST_ID">#LST_NAME</option>
              </BOUCLE_lists>

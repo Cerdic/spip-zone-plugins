@@ -23,7 +23,7 @@
             <h1>Lettres d'information</h1>
         </div>
         
-        <BOUCLE_lid(spip_cm_posts){pst_id=#ENV{id}}>
+        <BOUCLE_lid(CM_POSTS){pst_id=#ENV{id}}>
 		[<h2>(#PST_HTML|extraire{title})</h2>]
 		<div class="lettre">
 		[(#PST_HTML|extraire{body})]

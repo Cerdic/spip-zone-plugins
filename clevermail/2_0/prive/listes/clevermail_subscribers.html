@@ -12,7 +12,7 @@
 	   </tr>
 	  </thead>
 	  <tbody>
-			<BOUCLE_subs(spip_cm_lists_subscribers spip_cm_subscribers spip_cm_lists){lst_id?}{sub_email==#ENV{filtre_email,.*}}{par sub_email}{pagination 10}>
+			<BOUCLE_subs(CM_LISTS_SUBSCRIBERS cm_subscribers cm_lists){lst_id?}{sub_email==#ENV{filtre_email,.*}}{par sub_email}{pagination 10}>
 		    <tr class="[(#COMPTEUR_BOUCLE|alterner{impair,pair})]">
 		      <td>#SUB_EMAIL</td>
           <td>#LST_NAME</td>

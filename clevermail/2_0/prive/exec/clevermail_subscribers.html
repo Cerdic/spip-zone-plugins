@@ -7,7 +7,7 @@
  	<label for="lst_id">Filtre sur la liste : </label>
  	<select id="lst_id" name="lst_id">
  	  <option value=""><:clevermail:choix_toutes_les_listes:></option>
- 	  <BOUCLE_lists(spip_cm_lists){par lst_name}>
+ 	  <BOUCLE_lists(CM_LISTS){par lst_name}>
  	    <option value="#LST_ID"[ (#LST_ID|=={#ENV{lst_id}}|oui)selected="selected"]>#LST_NAME</option>
  	  </BOUCLE_lists>
  	</select>
