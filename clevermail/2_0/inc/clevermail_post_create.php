@@ -7,9 +7,9 @@ function clevermail_post_create($lst_id) {
     }
   	$post = array('lst_id' => intval($lst_id), 'pst_date_create' => time());
 	  include_spip('inc/distant');
-	  $url_html =  $list['lst_url_html'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create);
+	  $url_html =  $list['lst_url_html'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create).'&lst_id='.intval($lst_id);
 	  $post['pst_html'] = recuperer_page($url_html);
-	  $url_text = $list['lst_url_text'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create);
+	  $url_text = $list['lst_url_text'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create).'&lst_id='.intval($lst_id);
 	  $post['pst_text'] = recuperer_page($url_text);
 	  if (trim($post['pst_html']) != '' && trim($post['pst_text']) != '') {
 		  //if (eregi("<title>(.*)</title>", $post['pst_html'], $regs)) {
