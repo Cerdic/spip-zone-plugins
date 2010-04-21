@@ -83,7 +83,6 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 							$diffusion = '';
 							
 							$data = chercher_banniere($position , $rayon , $diffusion);
-							
 							}
 				
 				}
@@ -99,6 +98,7 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 	$diffusion = '';
 	
 	$data = chercher_banniere($position , $rayon , $diffusion);
+							var_dump($data);
 	
 }
 
@@ -171,9 +171,9 @@ if ($document){
 	 
 	if ($document['extension'] == 'swf'){
 
-	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
+	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="" >
 	<object width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
-	<param name="movie" value="'._DIR_IMG.$document['fichier'].'">
+	<param name="movie" value="'._DIR_IMG.$document['fichier'].'" />
 	<embed src="'._DIR_IMG.$document['fichier'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
 	</embed>
 	</object>
@@ -185,8 +185,8 @@ if ($document){
 	//Todo : s'assurer que c'est une image
 
 	// c'est une image
-	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
-		<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0">
+	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="" >
+		<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />
 		</a>
 		';
 
@@ -204,8 +204,8 @@ if ($document){
 	list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
 
 	// si on a trouve on l'affiche
-	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
-		<img src="'.$logo['0'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0">
+	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="">
+		<img src="'.$logo['0'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />
 		</a>
 		';
 }
