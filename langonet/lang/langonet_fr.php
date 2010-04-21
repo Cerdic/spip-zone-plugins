@@ -5,12 +5,11 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
-	'bak_date_crea' => 'Fichier g&eacute;n&eacute;r&eacute; le @bak_date_jour@ &agrave; @bak_date_heure@.',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_verifier' => 'V&eacute;rifier',
 
-// D
-	'definition_possible' => '<em>d&eacute;fini dans :</em>',
+// E
+	'entete_log_date_creation' => 'Fichier g&eacute;n&eacute;r&eacute; le @log_date_jour@ &agrave; @log_date_heure@.',
 
 // I
 	'info_arborescence_scannee' => 'Choisissez le r&eacute;pertoire de base dont l\'arborescence sera scann&eacute;e',
@@ -22,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_mode' => 'Correspond &agrave; la chaine qui sera ins&eacute;r&eacute;e lors de la cr&eacute;ation d\'un nouvel item pour la langue cible.',
 	'info_module' => 'Correspond au pr&eacute;fixe du fichier de langue hors abr&eacute;viation de la langue (exemple : <em>rainette</em> pour le plugin de m&ecirc;me nom, ou <em>ecrire</em> pour SPIP)',
 	'info_verifier' => 'Cette option vous permet de v&eacute;rifier les fichiers de langue d\'un module donn&eacute; sous deux angles compl&eacute;mentaires. Il est possible, soit de v&eacute;rifier si des items de langue utilis&eacute;s dans un groupe de fichiers (un plugin, par exemple) ne sont pas d&eacute;finis dans le fichier de langue idoine, soit que certains items de langue d&eacute;finis ne sont plus utilis&eacute;s.',
-	'item_utilise_ou' => '<em>utilis&eacute; dans :</em>',
 
 // L
 	'label_arborescence_scannee' => 'Arborescence &agrave; scanner',
@@ -38,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verification_definition' => 'D&eacute;tection des d&eacute;finitions manquantes',
 	'label_verification_utilisation' => 'D&eacute;tection des d&eacute;finitions obsol&egrave;tes',
 	'label_verification' => 'Type de v&eacute;rification',
-	'langonet_test1' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
-	'langonet_test2' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
 	'legende_generer' => 'G&eacute;n&eacute;ration des fichiers de langue',
 	'legende_resultats' => 'R&eacute;sultats de la v&eacute;rification',
 	'legende_verifier' => 'V&eacute;rification des items de langue',
@@ -49,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_ecriture_fichier' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; n\'a pas &eacute;t&eacute; cr&eacute;&eacute; car une erreur s\'est produite lors de son &eacute;criture !',
 	'message_nok_fichier_langue' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; est introuvable dans le r&eacute;pertoire &laquo;<em>@dossier@</em>&raquo; !',
 	'message_nok_fichier_log' => 'Le fichier de log &laquo;<em>@log_fichier@</em>&raquo; contenant les r&eacute;sultats de la v&eacute;rification n\'a pas pu &ecric;tre cr&eacute;&eacute;!',
-	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'@module@_\'.$variable)).',
+	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe, comme par exemple, _T(\'@module@:item_\'.$variable).',
 	'message_ok_definis_incertains_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans un contexte complexe et pourrait &ecirc;tre non d&eacute;fini dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; le v&eacute;rifier :',
 	'message_ok_definis_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans un contexte complexe et pourraient &ecirc;tre non d&eacute;finis dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
 	'message_ok_fichier_genere' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; correctement (voir fichier &laquo;<em>@fichier@</em>&raquo;).',
@@ -79,12 +75,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_mode_vide' => 'Une chaine vide',
 
 // T
+	'texte_item_defini_ou' => '<em>d&eacute;fini dans :</em>',
+	'texte_item_utilise_ou' => '<em>utilis&eacute; dans :</em>',
 	'titre_onglet' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet',
 
 // Pour les tests du plugin
-	'_test_item_non_utilise_1' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
-	'_test_item_non_utilise_2' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
+	'test_item_non_utilise_1' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
+	'test_item_non_utilise_2' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
+	'test_item_1_variable' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
+	'test_item_2_variable' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
 
 );
 

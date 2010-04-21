@@ -1,4 +1,6 @@
 <div class="formulaire_spip formulaire_langonet_generer" id="formulaire_langonet_generer">
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
@@ -51,11 +53,6 @@
 						</li>
 					</ul>
 				</fieldset>
-			</li>
-			[(#REM) <!-- Affichage des resultats --> ]
-			<li class="fieldset">
-				[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
-				[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 			</li>
 		</ul>
 

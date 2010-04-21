@@ -56,18 +56,18 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour = formater_resultats($resultats, $verification);
+		$retour = formater_resultats($verification, $resultats);
 	}
 	$retour['editable'] = true;
 	return $retour;
 }
 
 /**
- * Verification de l'utilisation des items de langue
+ * Formatage des resultats pour affichage dans le formulaire
  *
- * @param string $resultats
  * @param string $verification
- * @return string
+ * @param string $resultats
+ * @return array
  */
 
 // $resultats    => tableau des resultats (9 sous-tableaux) :
@@ -76,17 +76,18 @@ function formulaires_langonet_verifier_traiter() {
 //                    ["langue"] => nom fichier de lang
 //                    ["item_non"][] => intitule item
 //                    ["fichier_non"][item][fichier utilisant][num de la ligne][] => extrait ligne
+//                    ["item_non_mais"][] => intitule item
+//                    ["fichier_non_mais"][item][fichier utilisant][num de la ligne][] => extrait ligne
 //                    ["item_peut_etre"][] => intitule partiel item
 //                    ["fichier_peut_etre"][item][fichier utilisant][num de la ligne][] => extrait ligne
 //                    ["definition_possible"][item][] =>nom fichier de lang
-//                    ["statut"] => (bool)
-// $verification => type de verification effectuee
-function formater_resultats($resultats, $verification='definition') {
+// $verification => type de verification effectuee (definition ou utilisation)
+function formater_resultats($verification, $resultats) {
 
 	// On initialise le tableau des textes resultant contenant les index:
-	// - 'message_ok' : le message de retour ok fournissant le fichier des resultats
-	// - 'message_erreur' : le message d'erreur si on a erreur de traitement pendant l'execution
-	// - 'message_resultats' : le texte des resultats correctement formate
+	// - ["message_ok"]["resume"] : le message de retour ok fournissant le fichier des resultats
+	// - ["message_ok"]["resultats"] : le texte des rŽsultats
+	// - ["message_erreur"] : le message d'erreur si on a erreur de traitement pendant l'execution
 	$retour = array();
 
 	$texte = '';
@@ -139,7 +140,6 @@ function formater_resultats($resultats, $verification='definition') {
 			else {
 				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n";
 			}
-			// on ferme le <p> ouvert au-dessus car ce qui suit est un <div>
 			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
 			$texte .= "</div>\n</div>\n";
@@ -155,63 +155,55 @@ function formater_resultats($resultats, $verification='definition') {
 	else {
 		// Liste des items non utilises avec certitude
 		if (count($resultats['item_non']) > 0) {
+			$texte .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non']) == 1) {
 				$texte .= _T('langonet:message_ok_non_utilises_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
 				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
-			// on ferme le <p> ouvert dans langonet_verifier.html
-			// car ce qui suit sont des <div>
-			$texte .= "</p>\n";
+			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			asort($resultats['item_non'], SORT_STRING);
 			foreach($resultats['item_non'] as $_cle => $_item) {
 				$texte .= "<div class=\"titrem\">\n" . $_item . "</div>\n";
 			}
+			$texte .= "</div>\n</div>\n";
 		}
 		else {
+			$texte .= '<div class="success">' . "\n";
 			$texte .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
-			$texte .= "</p>\n"; // <p> ouvert dans langonet_verifier.html
+			$texte .= "</div>\n</div>\n";
 		}
 
-		// Liste des items utilises sans certitude
+		// Liste des items non utilises sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
-			$texte .= "<p class=\"reponse_formulaire reponse_formulaire_erreur\">\n<br />";
+			$texte .= '<div class="notice">' . "\n";
 			if (count($resultats['item_peut_etre']) == 1) {
 				$texte .= _T('langonet:message_ok_utilises_incertains_1') . "\n";
 			}
 			else {
 				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n";
 			}
-			// on ferme le <p> ouvert au-dessus car ce qui suit est un <div>
-			$texte .= "\n</p>\n";
+			$texte .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
-			// on ouvre un <p> ici qui sera ferme dans langonet_verifier.html
-			$texte .= "\n<p>\n";
+			$texte .= "</div>\n</div>\n";
 		}
 		else {
-			$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n<br />";
+			$texte .= '<div class="success">' . "\n";
 			$texte .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module'])) . "\n";
-			// pas de </p> ici : il sera ferme dans langonet_verifier.html
+			$texte .= "</div>\n</div>\n";
 		}
 	}
 
 	// Generation du fichier de log contenant le texte complet des resultats
-//	$log_nom = md5($verification{0}.$resultats['langue'].$resultats['ou_fichier']).'.txt';
-	$log_nom = basename($resultats['langue'], '.php') . '_' . $verification{0} . '_' . date("Ymd_His").'.txt';
-	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
-	$log_fichier = $log_rep . $log_nom;
-	$log_texte = "langOnet : ";
-	$log_texte .= utf8_encode(html_entity_decode(_T('langonet:bak_date_crea', array('bak_date_jour' => affdate(date('Y-m-d H:i:s')), 'bak_date_heure' => date('H:i:s')))))."\n\n";
-	$log_texte .= utf8_encode(html_entity_decode(strip_tags($texte)));
-	$ok = ecrire_fichier($log_fichier, $log_texte);
+	$ok = creer_log($verification, $resultats, $texte, $log_fichier);
 	if (!$ok) {
-		$retour['message_erreur'] .= _T('langonet:message_nok_fichier_log', array('log_fichier' => $log_rep.$log_nom));
-		spip_log("echec de creation du fichier $log_nom", "langonet", $log_rep);
+		$retour['message_erreur'] .= _T('langonet:message_nok_fichier_log', array('log_fichier' => $log_fichier));
+		spip_log("echec de creation du fichier $log_fichier", "langonet");
 	}
 	else {
 		// Tout s'est bien passe on renvoie le message ok et les resultats de la verification
-		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_log', array('log_fichier' => $log_rep.$log_nom));
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_log', array('log_fichier' => $log_fichier));
 		$retour['message_ok']['resultats'] = $texte;
 	}
 	return $retour;
@@ -229,12 +221,13 @@ function formater_resultats($resultats, $verification='definition') {
 // $possibles => [item][] => fichier de langue ou item est defini
 function afficher_lignes($tableau, $possibles=array()) {
 	include_spip('inc/layer');
-	// detail des fichiers utilisant les items de langue
+
+	// Detail des fichiers utilisant les items de langue
 	ksort($tableau);
 	foreach ($tableau as $item => $detail) {
 		$liste_lignes .= bouton_block_depliable($item, false);
 		$liste_lignes .= debut_block_depliable(false);
-		$liste_lignes .= "<p style=\"padding-left:2em;\">\n  "._T('langonet:item_utilise_ou')."\n<br />";	
+		$liste_lignes .= "<p style=\"padding-left:2em;\">\n  "._T('langonet:texte_item_utilise_ou')."\n<br />";	
 		foreach ($tableau[$item] as $fichier => $ligne) {
 			$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier. "</span><br />\n";
 			foreach ($tableau[$item][$fichier] as $ligne_n => $ligne_t) {
@@ -246,7 +239,7 @@ function afficher_lignes($tableau, $possibles=array()) {
 		$liste_lignes .= "</p>";
 
 		if (is_array($possibles[$item])) {
-			$liste_lignes .= "<p style=\"padding-left:2em;\">  "._T('langonet:definition_possible')."\n<br />";
+			$liste_lignes .= "<p style=\"padding-left:2em;\">  "._T('langonet:texte_item_defini_ou')."\n<br />";
 			foreach ($possibles[$item] as $fichier_def) {
 				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
 			}
@@ -257,4 +250,29 @@ function afficher_lignes($tableau, $possibles=array()) {
 
 	return $liste_lignes;
 }
+
+/**
+ * Cree le fichier de log avec le texte des resultats
+ *
+ * @param string $verification
+ * @param array $resultats
+ * @param string $texte
+ * @param string &$log_fichier (nom du fichier cree retourne par reference)
+ * @return boolean
+ */
+function creer_log($verification, $resultats, $texte, &$log_fichier) {
+	// Fichier de log sous tmp/langonet/
+	$log_nom = basename($resultats['langue'], '.php') . '_' . $verification{0} . '_' . date("Ymd_His").'.log';
+	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
+	$log_fichier = $log_rep . $log_nom;
+
+	// Texte du fichier avec une en-tete et les resultats comme formates a l'affichage (en UTF-8)
+	$log_texte = "langOnet : ";
+	$log_texte .= utf8_encode(html_entity_decode(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s')))))."\n\n";
+	$log_texte .= utf8_encode(html_entity_decode(strip_tags($texte)));
+
+	$ok = ecrire_fichier($log_fichier, $log_texte);
+	return $ok;
+}
+
 ?>

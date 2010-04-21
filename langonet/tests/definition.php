@@ -13,7 +13,7 @@ function langonet_tester_definition() {
 	$essai = _T('articles');
 
 	// -- Les items suivants sont utilises dans un contexte complexe
-	$essai = _T('langonet:test_1_'.$variable);
-	$essai = _T('test_2_'.$variable);
+	$essai = _T('langonet:test_item_1_'.$variable);
+	$essai = _T('test_item_2_'.$variable);
 }
 ?>

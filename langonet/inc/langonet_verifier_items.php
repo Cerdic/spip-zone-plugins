@@ -97,8 +97,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 						}
 					}
 					else {
-						// L'item est a priori defini dans un autre module. Ve n'est pas forcement
-						// une erreur qu'il ne soit pas defini dans le fichier e ncour de verification.
+						// L'item est a priori defini dans un autre module. Le fait qu'il ne soit pas
+						// defini dans le fichier en cours de verification n'est pas forcement une erreur.
 						// On l'identifie donc a part
 						$item_non_mais[] = $_valeur;
 						if (is_array($item_tous[$_valeur])) {
