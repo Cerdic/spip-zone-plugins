@@ -83,6 +83,7 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 							$diffusion = '';
 							
 							$data = chercher_banniere($position , $rayon , $diffusion);
+							
 							}
 				
 				}
@@ -98,7 +99,6 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 	$diffusion = '';
 	
 	$data = chercher_banniere($position , $rayon , $diffusion);
-							var_dump($data);
 	
 }
 
@@ -171,7 +171,7 @@ if ($document){
 	 
 	if ($document['extension'] == 'swf'){
 
-	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="" >
+	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="">
 	<object width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
 	<param name="movie" value="'._DIR_IMG.$document['fichier'].'" />
 	<embed src="'._DIR_IMG.$document['fichier'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
@@ -185,7 +185,7 @@ if ($document){
 	//Todo : s'assurer que c'est une image
 
 	// c'est une image
-	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="" >
+	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="">
 		<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />
 		</a>
 		';
