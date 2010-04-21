@@ -30,7 +30,7 @@ function formulaires_abomailman_envoi_liste_charger_dist(){
 		}
 	}else{
 		$valeurs['editable'] = false;
-		$valeurs['message_erreur'] = _T('abomailman:envoi_droits_insuffisants');
+		$valeurs['message_erreur'] = _T('abomailmans:envoi_droits_insuffisants');
 	}
 	return $valeurs;
 }
