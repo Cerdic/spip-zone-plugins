@@ -202,8 +202,8 @@ function formater_resultats($resultats, $verification='definition') {
 	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
 	$log_fichier = $log_rep . $log_nom;
 	$log_texte = "langOnet : ";
-	$log_texte .= html_entity_decode(_T('langonet:bak_date_crea', array('bak_date_jour' => affdate(date('Y-m-d H:i:s')), 'bak_date_heure' => date('H:i:s'))))."\n\n";
-	$log_texte .= html_entity_decode(strip_tags($texte));
+	$log_texte .= utf8_encode(html_entity_decode(_T('langonet:bak_date_crea', array('bak_date_jour' => affdate(date('Y-m-d H:i:s')), 'bak_date_heure' => date('H:i:s')))))."\n\n";
+	$log_texte .= utf8_encode(html_entity_decode(strip_tags($texte)));
 	$ok = ecrire_fichier($log_fichier, $log_texte);
 	if (!$ok) {
 		$retour['message_erreur'] .= _T('langonet:message_nok_fichier_log', array('log_fichier' => $log_rep.$log_nom));
