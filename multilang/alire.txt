@@ -1,0 +1,23 @@
+
+Tous les champs texte et textarea sont traites dans :
+- articles
+- rubriques
+- configuration du site
+- auteurs (interessant uniquement pour le champs BIO)
+- documents dans les colonnes de gauche des pages d'edition d'articles et de rubriques
+- documents dans les parties basses des pages de presentation des articles et rubriques
+- groupe de mots cles
+- mots cles
+- sites
+- Breves
+
+Integration dans d'autres plugins :
+- Mediatheque
+	- documents
+	- documents dans popup
+- Forms et Tables. Proposer d'utiliser ce plugin pour ne pas avoir a gerer 2 js
+
+Suggestion de RastaPopoulos
+J'avais une idée supplémentaire pour que ce soit extensible : activer 
+également ce système sur tous les champs ayant une classe "multilang".
+

@@ -1,20 +1,24 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Multilang
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-		Renato Formato
-	</auteur>
-	<version>0.0.1</version>
+	<nom>Multilang</nom>
+	<auteur>Renato Formato</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.0.2</version>
 	<etat>dev</etat>
 	<description>
-	Gestione facile dei tag multi 
+		<multi>
+			[fr]Gestion des tags multi dans l'espace priv&eacute;
+			[it]Gestione facile dei tag multi
+		</multi>
 	</description>
 	<prefix>multilang</prefix>
+	<icon>images/multilang-32.png</icon>
+	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+ 	<necessite id="cfg" version="[1.12;]" />
 	<pipeline>
-		<nom>recuperer_fond</nom>
-		<inclure>
-      multilang_pipelines.php
-    </inclure>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>multilang_pipelines.php</inclure>
 	</pipeline>
 </plugin>
