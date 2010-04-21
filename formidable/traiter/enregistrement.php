@@ -97,4 +97,27 @@ function traiter_enregistrement_dist($args, $retours){
 	return $retours;
 }
 
+function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles){
+	include_spip('inc/saisies');
+	$comparaison = saisies_comparer($saisies_anciennes, $saisies_nouvelles);
+	
+	// Si des champs ont été supprimés, il faut supprimer les réponses à ces champs
+	if ($comparaison['supprimees']){
+		// On récupère les réponses du formulaire
+		$reponses = sql_allfetsel(
+			'id_formulaires_reponse',
+			'spip_formulaires_reponses',
+			'id_formulaire = '.$id_formulaire
+		);
+		$reponses = array_map('reset', $reponses);
+		
+		foreach($comparaison['supprimees'] as $nom => $saisie){
+			sql_delete(
+				'spip_formulaires_reponses_champs',
+				sql_in('id_formulaires_reponse', $reponses).' and nom = '.sql_quote($nom)
+			);
+		}
+	}
+}
+
 ?>
