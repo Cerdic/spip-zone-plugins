@@ -32,6 +32,7 @@ function formulaires_configurer_langage_charger_dist(){
 function formulaires_configurer_langage_traiter_dist(){
 	include_spip('action/converser');
 	action_converser_changer_langue(true);
+	refuser_traiter_formulaire_ajax();
 
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
