@@ -51,8 +51,8 @@ dl.spip_documents,
 .spip_doc_titre,
 .spip_doc_descriptif { margin-right: auto; margin-left: auto; }
 .spip_documents.spip_documents_center { clear: both; display: block; width: 100%; }
-.spip_documents.spip_documents_left { float: left; margin: .3em 1.5em 1.5em 0; }
-.spip_documents.spip_documents_right { float: right; margin: .3em 0 1.5em 1.5em; }
+.spip_documents.spip_documents_left { float: left; margin-right: 1.5em; }
+.spip_documents.spip_documents_right { float: right; margin-left: 1.5em; }
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 
@@ -63,7 +63,7 @@ dl.spip_documents,
 .spip_modele { float: right; display: block; width: 25%; border: 1px dotted #666; }
 
 /* Paragraphes */
-div.spip, .spip li, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents_center { margin-bottom: 1.5em; }
+div.spip, .spip li, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: 1.5em; }
 
 /* Liens de SPIP */
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
