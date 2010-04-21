@@ -20,7 +20,7 @@ function exec_ticket_args ($id_ticket) {
 	if (!$row
 	OR !autoriser('voir', 'ticket', $id_ticket)) {
 		include_spip('inc/minipres');
-		echo minipres(_T('ticket:acces_interdit'));
+		echo minipres(_T('tickets:acces_interdit'));
 	} else {
 		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
@@ -73,7 +73,7 @@ function tickets_affiche($id_ticket, $row){
 	  . debut_droite('',true);;
 
 	$actions =
-	  ($flag_editable ? bouton_modifier_tickets($id_ticket, $modif, _T('ticket:avis_projet_modifie', $modif),  find_in_path('imgs/bugs.png'), "edit.gif",$spip_lang_right) : "");
+	  ($flag_editable ? bouton_modifier_tickets($id_ticket, $modif, _T('tickets:avis_projet_modifie', $modif),  find_in_path('imgs/bugs.png'), "edit.gif",$spip_lang_right) : "");
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>"
