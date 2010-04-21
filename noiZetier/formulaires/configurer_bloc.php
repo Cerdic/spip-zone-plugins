@@ -63,7 +63,7 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	}
 	
 	// Si on a validé une noisette et qu'il y a une erreur -------------------------------
-	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
+	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')!=''){
 		$erreurs = formulaires_configurer_bloc_verifier($bloc,$page);
 		// S'il y a des erreurs
 		if(count($erreurs)>0){
