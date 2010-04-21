@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_non_utilises_0' => 'Tous les items de langue d&eacute;finis  dans le fichier de langue &laquo;<em>@langue@</em>&raquo; sont bien utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo;.',
 	'message_ok_non_utilises_1' => 'L\'item de langue ci-dessous est bien d&eacute;fini dans le fichier de langue &laquo;<em>@langue@</em>&raquo;, mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; :',
 	'message_ok_non_utilises_n' => 'Les @nberr@ items de langue ci-dessous sont bien d&eacute;finis dans le fichier de langue &laquo;<em>@langue@</em>&raquo;, mais ne sont pas utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; :',
-	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'@module@_\'.$variable)).',
+	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'@module@:item_\'.$variable)).',
 	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-&ecirc;tre utilis&eacute; dans un contexte complexe. Nous vous invitons &agrave; le v&eacute;rifier :',
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-&ecirc;tre utilis&eacute;s dans un contexte complexe. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
 

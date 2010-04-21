@@ -1,4 +1,10 @@
 <?php
+// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
+// pour les fichiers .html et .php
+define("_LANGONET_TROUVER_ITEM_HP", ",(?:<:|_[T|U]\(['\"])(?:([a-z0-9_]+):)?([a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");
+// pour les fichiers .xml
+define("_LANGONET_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
+
 /**
  * Creation des deux <select> de choix des fichiers :
  *   - le fichier de langue dont on veut verifier les items

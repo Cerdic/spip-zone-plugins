@@ -43,12 +43,6 @@ function formulaires_langonet_verifier_traiter() {
 	$ou_langue = $retour_select_langue[3];
 	$ou_fichier = _request('dossier_scan');
 
-	// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
-	// pour les fichiers .html et .php
-	define("_TROUVER_ITEM_HP", ",(?:<:|_[T|U]\(['\"])(?:([a-z0-9_]+):)?([a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");
-	// pour les fichiers .xml
-	define("_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
-
 	// Verification et formatage des resultats pour affichage
 	$retour = array();
 	$resultats = $langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification);

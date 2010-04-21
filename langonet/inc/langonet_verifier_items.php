@@ -44,10 +44,10 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	foreach (preg_files(_DIR_RACINE.$ou_fichier, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml))$') as $_fichier) {
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
 			if (strpos($_fichier, '.xml')) {
-				$trouver_item = _TROUVER_ITEM_X;
+				$trouver_item = _LANGONET_TROUVER_ITEM_X;
 			}
 			else {
-				$trouver_item = _TROUVER_ITEM_HP;
+				$trouver_item = _LANGONET_TROUVER_ITEM_HP;
 			}
 			if (preg_match_all($trouver_item, $texte, $matches)) {
 				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
