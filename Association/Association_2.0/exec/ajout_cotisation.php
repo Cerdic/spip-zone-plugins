@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	function exec_ajout_cotisation(){
 		
 		include_spip('inc/autoriser');
-		if (autoriser('configurer')) {
+		if (!autoriser('configurer')) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
