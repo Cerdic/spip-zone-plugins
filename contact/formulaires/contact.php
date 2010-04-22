@@ -265,10 +265,14 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 
 	$texte = $horodatage.$inforigine.$infos."\n\n".$posteur['texte'];
 	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
-	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
+	$texte .= "\n\n "._T('envoi_via_le_site')." ".$nom_site." ( ".$GLOBALS['meta']['adresse_site']."/ ) \n";
 
 	// Texte a envoyer par mail, sans raccourcis SPIP
 	$texte_final = propre($texte);
+	// Eviter que le facteur machouille les apostrophes
+	if ($GLOBALS['meta']['facteur_filtre_iso_8859']){
+		$texte_final = preg_replace(',&#8217;,',"'",$texte_final);
+	}
 	// Sauvegarder un soupcon de liste dans le mail
 	$texte_final = preg_replace (array('/<li>/','/<\/li>/','/<\/ul>/'), array("- ","\n","\n"), $texte_final);
 	$texte_final = supprimer_tags($texte_final);
