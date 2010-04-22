@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
+	'bouton_langonet' => 'V&eacute;rifier les langues',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_verifier' => 'V&eacute;rifier',
 
@@ -67,6 +68,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-&ecirc;tre utilis&eacute;s dans un contexte complexe. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
 
 // O
+	'onglet_generer' => 'G&eacute;n&eacute;rer une langue',
+	'onglet_lister' => 'Afficher une langue',
+	'onglet_verifier' => 'V&eacute;rifier une langue',
 	'option_aucun_fichier' => 'aucune langue s&eacute;lectionn&eacute;e',
 	'option_aucun_dossier' => 'aucune arborescence s&eacute;lectionn&eacute;e',
 	'option_mode_index' => 'Item de la langue source',
@@ -80,8 +84,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 	'texte_item_defini_ou' => '<em>d&eacute;fini dans :</em>',
 	'texte_item_utilise_ou' => '<em>utilis&eacute; dans :</em>',
-	'titre_onglet' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet',
+	'titre_page' => 'LangOnet',
 
 // Pour les tests du plugin
 	'test_item_non_utilise_1' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',

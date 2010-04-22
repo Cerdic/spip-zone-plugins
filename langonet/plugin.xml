@@ -4,22 +4,42 @@
 	<version>0.2</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
-	<icon>images/langonet-64.png</icon>
+	<icon>themes/spip/images/langonet-64.png</icon>
 	<description>
-Ce plugin permet d'op&eacute;rer des actions de v&eacute;rification et de nettoyage des fichiers de langue de SPIP, de plugins ou de squelettes.
-_ Le plugin rajoute un onglet dans la page de gestion des langues.
+Ce plugin permet d'ex&eacute;cuter des actions de v&eacute;rification et de nettoyage des fichiers de langue de SPIP, des plugins ou des squelettes.
 	</description>
 	<lien>http://www.spip-contrib.net/</lien>
 	<prefix>langonet</prefix>
-	<onglet id='langonet' parent='config_lang'>
-		<icone>images/langonet-24.png</icone>
-		<titre>langonet:titre_onglet</titre>
-	</onglet>
+
 	<options>langonet_options.php</options>
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/langonet_autoriser.php</inclure>
 	</pipeline>
+
+	<bouton id="langonet" parent="naviguer">
+		<icone>themes/spip/images/langonet-24.png</icone>
+		<titre>langonet:bouton_langonet</titre>
+		<url>langonet_verifier</url>
+	</bouton>
+	<bouton id='langonet_21' parent='bando_edition'>
+		<icone>images/langonet-16.png</icone>
+		<titre>langonet:bouton_langonet</titre>
+		<url>langonet_verifier</url>
+	</bouton>
+	<onglet id='langonet' parent='langonet'>
+		<titre>langonet:onglet_verifier</titre>
+		<url>langonet_verifier</url>
+	</onglet>
+	<onglet id='langonet_generer' parent='langonet'>
+		<titre>langonet:onglet_generer</titre>
+		<url>langonet_generer</url>
+	</onglet>	
+	<onglet id='langonet_lister' parent='langonet'>
+		<titre>langonet:onglet_lister</titre>
+		<url>langonet_lister</url>
+	</onglet>	
+
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id='spip_bonux' version='[1.0;]' />
 	<categorie>outil</categorie>

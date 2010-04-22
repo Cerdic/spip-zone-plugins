@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-function exec_langonet_dist(){
+function exec_langonet_lister_dist(){
 	global $spip_lang_right;
 	// si pas autorise : message d'erreur
 	if (!autoriser('webmestre')) {
@@ -17,14 +17,7 @@ function exec_langonet_dist(){
 
 	// entetes
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('langonet:titre_page_navigateur'), "configuration", "langues");
-	
-	// titre
-	echo "<br /><br /><br />\n"; // outch que c'est vilain !
-	echo gros_titre(_T('info_langues'),'', false);
-	
-	// barre d'onglets
-	echo barre_onglets("config_lang", "langonet");
+	echo $commencer_page(_T('langonet:titre_page_navigateur'), "naviguer", "langonet");
 	
 	// colonne gauche
 	echo debut_gauche('', true);
@@ -36,10 +29,15 @@ function exec_langonet_dist(){
 	
 	// centre
 	echo debut_droite('', true);
+	
+	// titre
+	echo gros_titre(_T('langonet:titre_page'),'', false);
+	
+	// barre d'onglets
+	echo barre_onglets("langonet", "langonet_lister");
 
 	// contenu
- 	echo recuperer_fond('prive/contenu/langonet_verifier',  array());
- 	echo recuperer_fond('prive/contenu/langonet_generer',  array());
+ 	echo recuperer_fond('prive/contenu/langonet_lister',  array());
 
 	// fin contenu
 	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'langonet'),'data'=>''));
