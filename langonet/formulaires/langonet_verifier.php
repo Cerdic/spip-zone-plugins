@@ -258,6 +258,7 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	// Fichier de log dans tmp/langonet/
 	$log_nom = basename($resultats['langue'], '.php') . '_' . $verification{0} . '_' . date("Ymd_His").'.log';
 	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
+	$log_rep = sous_repertoire($log_rep,"verification");
 	$log_fichier = $log_rep . $log_nom;
 
 	// Texte du fichier en UTF-8

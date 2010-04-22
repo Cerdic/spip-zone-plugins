@@ -17,5 +17,8 @@ function langonet_tester_definition() {
 	// -- Les items suivants sont utilises dans un contexte complexe
 	$essai = _T('langonet:test_item_1_'.$variable);
 	$essai = _T('test_item_2_'.$variable);
+	$essai = _T("langonet:$fond1");
+	$essai = _T('langonet:'.$fond2);
+	$essai = _T("langonet:".$fond3);
 }
 ?>

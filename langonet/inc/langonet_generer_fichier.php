@@ -32,6 +32,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 			$GLOBALS[$var_cible] = array();
 
 	$dir = sous_repertoire(_DIR_TMP,"langonet");
+	$dir = sous_repertoire($dir,"generation");
 	$f = $dir . $module . "_".$langue_cible . ".php";
 
 	$i = 0;

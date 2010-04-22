@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 	'info_arborescence_scannee' => 'Choisissez le r&eacute;pertoire de base dont l\'arborescence sera scann&eacute;e',
-	'info_chemin_fichier' => 'Racine de l\'arborescence des fichiers (exemple : <em>plugins/rainette/</em>, ou <em>ecrire/</em>)',
 	'info_chemin_langue' => 'Dossier dans lequel est install&eacute; le fichier de langue (exemple : <em>plugins/rainette/lang/</em>, ou <em>ecrire/lang/</em>)',
 	'info_fichier_verifie' => 'Choisissez le fichier de langue &agrave; v&eacute;rifier parmi ceux pr&eacute;sents dans le site.',
 	'info_generer' => 'Cette option vous permet de g&eacute;n&eacute;rer, &agrave; partir d\'une langue source, le fichier de langue d\'un module donn&eacute; dans une langue cible. Si le fichier cible existe d&eacute;j&agrave; son contenu est r&eacute;utilis&eacute; pour construire le nouveau fichier.',
@@ -36,9 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langue_cible' => 'Langue cible',
 	'label_langue_source' => 'Langue source',
 	'label_mode' => 'Mode de cr&eacute;ation des nouveaux items',
-	'label_mode_utilisation' => 'Mode d\'utilisation',
-	'label_mode_normal' => 'normal',
-	'label_mode_complet' => 'complet',
 	'label_module' => 'Module',
 	'label_verification_definition' => 'D&eacute;tection des d&eacute;finitions manquantes',
 	'label_verification_utilisation' => 'D&eacute;tection des d&eacute;finitions obsol&egrave;tes',
@@ -55,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe, comme par exemple, _T(\'@module@:item_\'.$variable).',
 	'message_ok_definis_incertains_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans un contexte complexe et pourrait &ecirc;tre non d&eacute;fini dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; le v&eacute;rifier :',
 	'message_ok_definis_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans un contexte complexe et pourraient &ecirc;tre non d&eacute;finis dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
-	'message_ok_fichier_genere' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; correctement (voir fichier &laquo;<em>@fichier@</em>&raquo;).',
+	'message_ok_fichier_genere' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; correctement.<br />Vous pouvez r&eacute;cup&eacute;rer le fichier &laquo;<em>@fichier@</em>&raquo;.',
 	'message_ok_fichier_log' => 'La v&eacute;rification s\'est correctement d&eacute;roul&eacute;e. Vous pouvez consultez les r&eacute;sultats plus bas dans le formulaire.<br />Le fichier &laquo;<em>@log_fichier@</em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
 	'message_ok_nonmais_definis_0' => 'Les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; n\'utilisent aucun item de langue autre que ceux du module &laquo;<em>@module@</em>&raquo;.',
 	'message_ok_nonmais_definis_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans des fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; mais n\'est a priori pas un item du module &laquo;<em>@module@</em>&raquo;. Nous vous invitons toutefois &agrave; le v&eacute;rifier :',
