@@ -9,11 +9,16 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	function exec_action_cotisations() {
-		global $connect_statut, $connect_toutes_rubriques;
 		
-		include_spip ('inc/acces_page');
+		include_spip('inc/autoriser');
+		if (autoriser('configurer')) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}
 		
 		$action=$_POST['agir'];
 		$id_auteur= intval($_POST['id']);

@@ -9,13 +9,18 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
 	function exec_ventes(){
-		global $connect_statut, $connect_toutes_rubriques;
 		
-		include_spip ('inc/acces_page');
+		include_spip('inc/autoriser');
+		if (autoriser('configurer')) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_ventes = generer_url_ecrire('ventes');

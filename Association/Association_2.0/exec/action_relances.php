@@ -9,8 +9,8 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 	include_spip ('inc/presentation');
 	include_spip ('inc/navigation_modules');
@@ -18,9 +18,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	//include_spip ('inc/charsets');
 
 	function exec_action_relances(){
-		global $connect_statut, $connect_toutes_rubriques;
 		
-		include_spip ('inc/acces_page');
+		include_spip('inc/autoriser');
+		if (autoriser('configurer')) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}
 		
 		$url_action_relances = generer_url_ecrire('action_relances','agir=send');
 		$url_retour=$_POST['url_retour'];

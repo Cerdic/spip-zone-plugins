@@ -9,16 +9,21 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
 if (!defined("_ECRIRE_INC_VERSION")) return;
+	
 
 	include_spip('inc/navigation_modules');
 	
 	function exec_adherents() {
 		
-		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
+		global  $table_prefix;
 		
-		include_spip ('inc/acces_page');
+		include_spip('inc/autoriser');
+		if (autoriser('configurer')) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}
 		$url_association = generer_url_ecrire('association');
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_ajout_cotisation = generer_url_ecrire('ajout_cotisation');

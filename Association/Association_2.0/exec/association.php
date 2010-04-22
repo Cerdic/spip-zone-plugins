@@ -9,8 +9,8 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 	//juste pour essai
 	//sql_alter("TABLE spip_auteurs_elargis ADD statut_interne TEXT  NOT NULL");
@@ -23,9 +23,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip ('inc/navigation_modules');
 	
 	function exec_association() {
-		global $connect_statut, $connect_toutes_rubriques;
 		
-		include_spip ('inc/acces_page');	
+		include_spip('inc/autoriser');
+		if (autoriser('configurer')) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}	
 		
 		$url_edit_adherent = generer_url_ecrire('edit_adherent');
 		  $commencer_page = charger_fonction('commencer_page', 'inc');
