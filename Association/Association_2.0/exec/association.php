@@ -20,7 +20,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	//fin essai
 
 	include_spip('inc/presentation');
-	include_spip('inc/gestion_base'); // obsolete semble-t-il. a confirmer.
 	include_spip ('inc/navigation_modules');
 	
 	function exec_association() {
