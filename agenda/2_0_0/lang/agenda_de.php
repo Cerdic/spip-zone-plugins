@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'participation_prise_en_compte' => 'Ihre Anmeldung wurde gespeichert',
 'participation_incertaine_prise_en_compte' => 'Ihre vorl&auml;ufige Anmeldung wurde gespeichert',
-'probleme_technique' => 'Ein technisches Problem ist aufgetreten. Bitte versuchen sie es später noch einmal.',
+'probleme_technique' => 'Ein technisches Problem ist aufgetreten. Bitte versuchen sie es sp&auml;ter noch einmal.',
 // Q
 // R
 'repetition_de' => 'Wiederholung von',
