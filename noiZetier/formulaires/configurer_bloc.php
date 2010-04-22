@@ -63,7 +63,7 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	}
 	
 	// Si on a validé une noisette et qu'il y a une erreur -------------------------------
-	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')!=''){
+	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette_modifiee'))) and _request('enregistrer')!=''){
 		$erreurs = formulaires_configurer_bloc_verifier($bloc,$page);
 		// S'il y a des erreurs
 		if(count($erreurs)>0){
@@ -100,7 +100,7 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 	
 	// Si on valide une noisette pour un bloc ------------------------------------
 	
-	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
+	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette_modifiee'))) and _request('enregistrer')){
 		$noisette = _request('noisette');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
 		// Si le plugin verifier est actif
@@ -131,7 +131,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 	
 	// Si on valide une noisette pour un bloc ------------------------------------
 	
-	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
+	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette_modifiee'))) and _request('enregistrer')!=''){
 		$rang = intval(_request('rang'));
 		$noisette = _request('noisette');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
