@@ -60,7 +60,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 				$utilises_brut['modules'] = array_merge($utilises_brut['modules'], $matches[1]);
 				// On collecte pour chaque item trouve les lignes et fichiers dans lequel il est utilise
 				foreach ($matches[2] as $item_val) {
-					preg_match("#.{0,10}".($item_val{0} != '$'?$item_val:trim($item_val,'$')).".{0,20}#is", $texte, $extrait);
+					$item_val = str_replace('$', '\$', $item_val);
+					preg_match("#.{0,8}".$item_val.".{0,20}#is", $texte, $extrait);
 					$item_tous[$item_val][$_fichier][$ligne][] = trim($extrait[0]);
 				}
 			}
