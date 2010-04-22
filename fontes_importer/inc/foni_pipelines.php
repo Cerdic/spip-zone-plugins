@@ -117,7 +117,7 @@ function foni_insert_head ($flux) {
 				loaded = $.fontAvailable("' . $family . '");
 				console.log("Fonte ' . $family . ' loaded: " + loaded);
 				maxt--;
-				if(loaded || maxt<=0) {
+				if(loaded || maxt<=0) {
 					console.log("finish");
 					clearInterval(reviens);
 				}
