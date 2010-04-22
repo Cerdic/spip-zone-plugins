@@ -1,9 +1,11 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 define('FPDF_FONTPATH','font/');
 include_spip('pdf/pdf_table');
 
-$id_evenement=$_GET['id'];
+$id_evenement=intval($_GET['id']);
 $association=lire_config('association/nom');
 
 class PDF extends PDF_Table {
