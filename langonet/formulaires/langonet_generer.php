@@ -31,13 +31,7 @@ function formulaires_langonet_generer_traiter(){
 	}
 	// Generation du fichier
 	$langonet_generer = charger_fonction('langonet_generer_fichier','inc');
-	$resultats = $langonet_generer($champs['module'], $champs['langue_source'], $champs['chemin_langue'], $champs['langue_cible'], $champs['mode']);
-	if (!$resultats['statut']) {
-		$retour['message_erreur'] = $resultats['erreur'];
-	}
-	else {
-		$retour['message_ok'] = $resultats['erreur'];
-	}
+	$retour = $langonet_generer($champs['module'], $champs['langue_source'], $champs['chemin_langue'], $champs['langue_cible'], $champs['mode']);
 	$retour['editable'] = true;
 	return $retour;
 }

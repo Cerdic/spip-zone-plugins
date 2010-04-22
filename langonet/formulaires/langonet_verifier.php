@@ -192,7 +192,7 @@ function formater_resultats($verification, $resultats) {
 	// Generation du fichier de log contenant le texte complet des resultats
 	$ok = creer_log($verification, $resultats, $texte, $log_fichier);
 	if (!$ok) {
-		$retour['message_erreur'] .= _T('langonet:message_nok_fichier_log', array('log_fichier' => $log_fichier));
+		$retour['message_erreur'] .= _T('langonet:message_nok_fichier_log');
 		spip_log("echec de creation du fichier $log_fichier", "langonet");
 	}
 	else {
@@ -256,7 +256,7 @@ function afficher_lignes($tableau, $possibles=array()) {
  */
 function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	// Fichier de log dans tmp/langonet/
-	$log_nom = basename($resultats['langue'], '.php') . '_' . $verification{0} . '_' . date("Ymd_His").'.log';
+	$log_nom = basename($resultats['langue'], '.php') . '_' . $verification[0] . '_' . date("Ymd_His").'.log';
 	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
 	$log_rep = sous_repertoire($log_rep,"verification");
 	$log_fichier = $log_rep . $log_nom;

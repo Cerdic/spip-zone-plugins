@@ -73,6 +73,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	$texte = '<?php
 // Ceci est un fichier langue de SPIP -- This is a SPIP language file
 // Produit automatiquement par le plugin LangOnet a partir de la langue source ' . $langue_source . '
+// Langue: ' . $langue_cible . '
 // Date: ' . $date . '
 // Items: ' . $i . '
 
@@ -85,14 +86,12 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 	$ok = ecrire_fichier($f, $texte);
 
 	if (!$ok) {
-		$resultats['statut'] = false;
-		$resultats['erreur'] = _T('langonet:message_nok_ecriture_fichier', 
-								array('langue' => $langue_cible, 'module' => $module));
+		$resultats['message_erreur'] = _T('langonet:message_nok_ecriture_fichier', 
+										array('langue' => $langue_cible, 'module' => $module));
 	}
 	else {
-		$resultats['statut'] = true;
-		$resultats['erreur'] = _T('langonet:message_ok_fichier_genere', 
-								array('langue' => $langue_cible, 'module' => $module, 'fichier' => $f));
+		$resultats['message_ok'] = _T('langonet:message_ok_fichier_genere', 
+									array('langue' => $langue_cible, 'module' => $module, 'fichier' => $f));
 	}
 	return $resultats;
 }
