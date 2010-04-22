@@ -99,6 +99,7 @@ function traiter_enregistrement_dist($args, $retours){
 
 function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles){
 	include_spip('inc/saisies');
+	include_spip('base/abstract_sql');
 	$comparaison = saisies_comparer($saisies_anciennes, $saisies_nouvelles);
 	
 	// Si des champs ont été supprimés, il faut supprimer les réponses à ces champs
@@ -111,12 +112,17 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
 		);
 		$reponses = array_map('reset', $reponses);
 		
-		foreach($comparaison['supprimees'] as $nom => $saisie){
-			sql_delete(
-				'spip_formulaires_reponses_champs',
-				sql_in('id_formulaires_reponse', $reponses).' and nom = '.sql_quote($nom)
-			);
-		}
+		// Tous les noms de champs à supprimer
+		$noms = array_keys($comparaison['supprimees']);
+		
+		// On supprime
+		sql_delete(
+			'spip_formulaires_reponses_champs',
+			array(
+				sql_in('id_formulaires_reponse', $reponses),
+				sql_in('nom', $noms)
+			)
+		);
 	}
 }
 
