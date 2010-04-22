@@ -34,8 +34,8 @@
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_L('asso:Ajouter une cat&eacute;gorie de cotisation'), $url_ajout_categorie, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","rien.gif",false);
-		$res.= icone_horizontale(_L('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);
+		$res=icone_horizontale(_L('Ajouter une cat&eacute;gorie de cotisation'), $url_ajout_categorie, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","rien.gif",false);
+		$res.= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);
 		        echo bloc_des_raccourcis($res);	
 		
 			

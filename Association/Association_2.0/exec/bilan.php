@@ -11,7 +11,6 @@
 	**/
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	include_spip ('inc/acces_page');
 	
 	function exec_bilan(){
 		global $connect_statut, $connect_toutes_rubriques;
