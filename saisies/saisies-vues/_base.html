@@ -11,7 +11,7 @@
 			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
 		]
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
-			[(#ENV*{valeur}|propre)]
+			[(#ENV*{valeur}|sinon{<:saisies:vue_sans_reponse:>}|propre)]
 		]
 		</div>
 	]
