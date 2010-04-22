@@ -2,6 +2,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function exec_pdf_activite()
+{
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
+
 define('FPDF_FONTPATH','font/');
 include_spip('pdf/pdf_table');
 
@@ -46,4 +54,5 @@ $prop=array(
           'padding'=>2);
 $pdf->Table("SELECT * FROM spip_asso_activites WHERE id_evenement=$id_evenement ORDER BY nom",$prop);
 $pdf->Output();
+}
 ?>

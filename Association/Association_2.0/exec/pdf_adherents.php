@@ -1,6 +1,14 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function exec_pdf_adherents()
+{
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
+
 	define('FPDF_FONTPATH','font/');
 	include_spip('pdf/pdf_table');
 	include_spip('inc/charsets');
@@ -56,4 +64,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	);
 	$pdf->Table("SELECT * FROM spip_auteurs_elargis WHERE $critere ORDER BY nom_famille,".lire_config('association/indexation'),$prop);
 	$pdf->Output();
+}
 ?>
