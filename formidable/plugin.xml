@@ -5,7 +5,7 @@
 	<version>0.1.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
-	<description>Génère des formulaires à partir de descriptions sérialisées.</description>
+	<description>Création de formulaires avec une interface graphique et configuration des traitements associés (envoyer par courriel, enregistrer les réponses, etc).</description>
 	<lien>http://www.spip-contrib.net/Formidable-le-generateur-de</lien>
 	<icon>images/formidable-64.png</icon>
 	
@@ -60,7 +60,7 @@
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="cfg" version="[1.14.4;]" />
-	<necessite id="spip_bonux" version="[1.9.0;]" />
+	<necessite id="spip_bonux" version="[1.9.3;]" />
 	<necessite id="saisies" version="[1.7.2;]" />
 	<necessite id="verifier" version="[0.1;]" />
 	<necessite id="yaml" version="[1.1;]" />

@@ -57,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponses_analyse' => 'Analyse des r&eacute;ponses',
 'reponses_anonyme' => 'Anonyme',
 'reponses_auteur' => 'Utilisateur',
+'reponses_exporter' => 'Exporter les r&eacute;ponses',
 'reponses_ip' => 'Adresse IP',
 'reponses_liste' => 'Liste des r&eacute;ponses',
 'reponses_liste_prop' => 'R&eacute;ponses en attente de validation',
