@@ -9,15 +9,18 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	//juste pour essai
-	sql_alter("TABLE spip_auteurs_elargis ADD statut_interne TEXT  NOT NULL");
-	spip_query("UPDATE spip_auteurs_elargis SET statut_interne='ok'");
-	sql_alter("TABLE spip_auteurs_elargis ADD categorie TEXT  NOT NULL");
-	sql_alter("TABLE spip_auteurs_elargis ADD validite DATE DEFAULT '2008-12-15' NOT NULL");
+	//sql_alter("TABLE spip_auteurs_elargis ADD statut_interne TEXT  NOT NULL");
+	//spip_query("UPDATE spip_auteurs_elargis SET statut_interne='ok'");
+	//sql_alter("TABLE spip_auteurs_elargis ADD categorie TEXT  NOT NULL");
+	//sql_alter("TABLE spip_auteurs_elargis ADD validite DATE DEFAULT '2008-12-15' NOT NULL");
 	//fin essai
+
 	include_spip('inc/presentation');
-	include_spip('inc/gestion_base');
+	include_spip('inc/gestion_base'); // obsolete semble-t-il. a confirmer.
 	include_spip ('inc/navigation_modules');
 	
 	function exec_association() {
@@ -75,9 +78,8 @@
 		echo '<td><strong>Portable</strong></td>';
 		echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 		echo '</tr>';
-		$query ="SELECT * FROM spip_auteurs_elargis INNER JOIN spip_auteurs ON spip_auteurs_elargis.id_auteur=spip_auteurs.id_auteur WHERE fonction !='' AND statut_interne != 'sorti' ORDER BY nom_famille ";
-		$val = spip_query (${query}) ;
-  while ($data = sql_fetch($val))
+		$query = association_auteurs_elargis_select("*", " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "fonction !='' AND statut_interne != 'sorti'", '',  "a.nom_famille");
+		while ($data = sql_fetch($query))
     {	
 			$id_auteur=$data['id_auteur'];
 			echo '<tr style="background-color: #EEEEEE;">';
@@ -97,7 +99,8 @@
 		 echo fin_gauche(), fin_page();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
-		spip_query("UPDATE spip_auteurs_elargis SET statut_interne='echu'  WHERE statut_interne = 'ok' AND validite < CURRENT_DATE() ");
-
+		 association_auteurs_elargis_updateq(
+			array("statut_interne"=> 'echu'),
+			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 	}
 ?>

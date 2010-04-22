@@ -9,6 +9,8 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
@@ -18,8 +20,8 @@
 		
 		include_spip('inc/acces_page');
 		
-		$id_auteur=$_POST['id'];
-		if (lire_config('association/indexation')=="id_asso"){ $id_asso=$_POST['id_asso'];}
+		$id_auteur=intval($_POST['id']);
+		if (lire_config('association/indexation')=="id_asso"){ $id_asso=intval($_POST['id_asso']);}
 		$categorie=$_POST['categorie'];
 		$validite=$_POST['validite'];
 		$commentaire=$_POST['commentaire'];
@@ -30,11 +32,15 @@
 		//MODIFICATION ADHERENT
 		
 		if ($action=="modifie") {
-			spip_query("UPDATE spip_auteurs_elargis SET id_asso="._q($id_asso).", commentaire="._q($commentaire).", validite="._q($validite).", categorie="._q($categorie).", statut_interne="._q($statut_interne)." WHERE id_auteur="._q($id_auteur ));
-			header ('location:'.$url_retour);
+		  association_auteurs_elargis_updateq(
+				   array("id_asso"=> $id_asso,
+					 "commentaire"=> $commentaire,
+					 "validite"=> $validite,
+					 "categorie"=> $categorie,
+					 "statut_interne"=> $statut_interne),
+				   "id_auteur=$id_auteur");
+		  header ('location:'.$url_retour);
 			exit;
-			
-			
 		}
 		
 		//SUPPRESSION PROVISOIRE ADHERENT
@@ -68,7 +74,7 @@
 			echo '<form action="#"  method="post">';
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$id = $delete_tab[$i];
-				$query = spip_query( "SELECT * FROM spip_auteurs_elargis where id_auteur='$id' " );
+				$query = association_auteurs_elargis_select("*",'', "id_auteur=$id");
 				while($data = spip_fetch_array($query)) {
 					echo '<tr>';
 					echo '<td><strong>'.$data['nom_famille'].' '.$data['prenom'].'</strong>';
@@ -95,9 +101,9 @@
 			$drop_tab=(isset($_POST["drop"])) ? $_POST["drop"]:array();
 			$count=count ($drop_tab);
 			for ( $i=0 ; $i < $count ; $i++ ) {
-				$id = $drop_tab[$i];
-				spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
-				spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
+				$id = intval($drop_tab[$i]);
+				association_auteurs_elargis_delete("id_auteur=$id");
+				spip_query("DELETE FROM spip_auteurs WHERE id_auteur=$id");
 			}
 			header ('location:'.$url_retour);
 			exit;

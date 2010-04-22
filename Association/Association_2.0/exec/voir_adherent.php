@@ -10,6 +10,8 @@
 	*  
 	**/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -23,9 +25,9 @@
 		$url_edit_pret = generer_url_ecrire('edit_pret','action=modifie');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$id_auteur= $_GET['id'];
+		$id_auteur= intval($_GET['id']);
 		$indexation = lire_config('association/indexation');
-		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE id_auteur='$id_auteur' ");
+		$query = association_auteurs_elargis_select("*",'', "id_auteur=$id_auteur");
 			while ($data = spip_fetch_array($query)) { 
 			$id_asso=$data['id_asso'];
 			$nom_famille=$data['nom_famille'];

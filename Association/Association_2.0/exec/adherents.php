@@ -10,6 +10,8 @@
 	*  
 	**/
 	
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	include_spip('inc/navigation_modules');
 	
 	function exec_adherents() {
@@ -57,7 +59,7 @@
 		echo '<div><strong>'._T('asso:adherent_liste_nombre').'</strong></div>';
 		$nombre=0;
 		foreach (array(ok,echu,relance,prospect) as $statut) {
-			$query=spip_query("SELECT * FROM spip_auteurs_elargis WHERE statut_interne='$statut'");
+			$query = association_auteurs_elargis_select("*",'', "statut_interne='$statut'");
 			$nombre=sql_count($query);
 			echo '<div style="float:right;text_align:right">'.$nombre.'</div>';
 			echo '<div>'._T('asso:adherent_liste_nombre_'.$statut).'</div>';
@@ -86,7 +88,7 @@
 		$lettre=$_GET['lettre'];
 		if ( empty ( $lettre ) ) { $lettre = "%"; }
 		
-		$query = spip_query ( "SELECT upper( substring( nom_famille, 1, 1 ) )  AS init FROM spip_auteurs_elargis GROUP BY init ORDER by nom_famille, id_auteur ");
+		$query = association_auteurs_elargis_select("upper( substring( nom_famille, 1, 1 ) )  AS init", '', '',  'init', 'nom_famille, id_auteur');
 		
 		while ($data = spip_fetch_array($query)) {
 			if($data['init']==$lettre) {
@@ -154,10 +156,10 @@
 		$debut=$_GET['debut'];
 		
 		if (empty($debut)) { $debut=0; }
-		if (!empty($lettre)) {$critere2="AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
-		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur WHERE $critere ".$critere2." ORDER BY nom_famille LIMIT $debut,$max_par_page" );
+		if (empty($lettre)) 
+			$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
+		$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere . $critere2, '', "nom_famille ", "$debut,$max_par_page" );
 		while ($data = spip_fetch_array($query)) {	
-			$id_adherent=$data['id_adherent'];
 			
 			switch($data['statut_interne'])	{
 				case "echu": $class= "impair"; break;
@@ -223,8 +225,8 @@
 		echo '<table width=100%>';
 		echo '<tr>';	
 		echo '<td>';
-		if (!empty($lettre)) {"AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
-		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE $critere ".$critere2);
+
+		$query = association_auteurs_elargis_select("*",'', $critere);
 		$nombre_selection=sql_count($query);
 		$pages=intval($nombre_selection/$max_par_page) + 1;
 		

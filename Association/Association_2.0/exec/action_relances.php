@@ -10,6 +10,8 @@
 	*  
 	**/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	include_spip ('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	include_spip ('inc/mail');
@@ -106,12 +108,14 @@
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$email = $email_tab[$i];
 				$statut = $statut_tab[$i];
-				$id = $id_tab[$i];
+				$id = intval($id_tab[$i]);
 				
-				if ( isset ( $id ) ) {
+				if ($id) {
 					envoyer_mail ( $email, $sujet, $message, $expediteur, "");
 					if ($statut=="echu"){
-						spip_query("UPDATE spip_auteurs_elargis SET statut_interne='relance' WHERE id_auteur = '$id' ");
+					  association_auteurs_elargis_updateq(
+						array("statut_interne"=> 'relance'),
+						"id_auteur=$id");
 					}
 				}
 			}

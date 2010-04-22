@@ -9,6 +9,9 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -85,7 +88,7 @@
 		echo '<td><strong>Validit&eacute;</strong></td>';
 		echo '<td><strong>Env</strong></td>';
 		echo '</tr>';
-		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur WHERE email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti' ORDER by nom_famille" );
+		$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " a.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 		while ($data = spip_fetch_array($query)) {
 			$id_auteur=$data['id_auteur'];
 			$email=$data["email"];

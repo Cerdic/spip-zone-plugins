@@ -10,6 +10,8 @@
 	*  
 	**/
 	
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	//version actuelle du plugin à changer en cas de maj
 	$GLOBALS['association_version'] = 0.64;	
 		
@@ -70,12 +72,22 @@ function association_verifier_base(){
 			}
 			
 			if ($current_version<0.64){
-				$query=spip_query("SELECT * FROM spip_auteurs_elargis");
-				if(!$query) return false;
 
-				spip_query("ALTER TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00', ADD montant float NOT NULL default '0', ADD 
-date date NOT NULL default '0000-00-00' ");
-				ecrire_meta('asso_base_version',$current_version=0.64);
+				if(_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') {
+
+				  sql_alter("TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00'");
+				  sql_alter("TABLE spip_auteurs_elargis ADD montant float NOT NULL default '0'");
+				  sql_alter("TABLE spip_auteurs_elargis ADD date date NOT NULL default '0000-00-00' ");
+				  ecrire_meta('asso_base_version',$current_version=0.64);
+				} else {
+					if (_ASSOCIATION_INSCRIPTION2) return false;
+					// Simulation provisoire
+					// Pas de chgt de numero 
+					// tant pis pour les fausses erreurs SQL
+					@sql_alter("TABLE spip_asso_adherents ADD commentaire text NOT NULL default ''");
+					@sql_alter("TABLE spip_asso_adherents ADD statut_interne text NOT NULL default '' ");
+					@sql_alter("TABLE spip_asso_adherents CHANGE COLUMN nom nom_famille text DEFAULT '' NOT NULL");
+				}
 			}
 					
 		}

@@ -9,6 +9,9 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -72,7 +75,9 @@
 		echo '<td><strong>Adresse</strong></td>';
 		echo '<td><strong>Env</strong></td>';
 		echo '</tr>';
-		$query = spip_query ("SELECT * FROM spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur WHERE statut_interne like '$statut_interne' ORDER BY nom_famille, sexe DESC" );
+		$query = association_auteurs_elargis_select("*", '', "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
+		// originale semblait contenir une vieillerie:
+		// $query = spip_query ("SELECT * FROM spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur WHERE 
 		while ($data = spip_fetch_array($query))  {
 			$id_adherent=$data['id_adherent'];
 			$sexe=$data['sexe'];

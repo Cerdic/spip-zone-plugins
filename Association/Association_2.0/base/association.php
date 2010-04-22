@@ -191,4 +191,55 @@
 		'field' => &$spip_asso_activites, 
 		'key' => &$spip_asso_activites_key
 	);
+
+// 
+	$spip_asso_adherents= array(
+  "id_adherent" => "bigint(21) NOT NULL auto_increment",
+  "nom" => "text NOT NULL",
+  "prenom" => "text NOT NULL",
+  "sexe" => "tinytext NOT NULL",
+  "fonction" => "text",
+  "email" => "tinytext NOT NULL",
+  "validite" => "date NOT NULL default '0000-00-00'",
+  "numero" => "text NOT NULL",
+  "rue" => "text NOT NULL",
+  "cp" => "text NOT NULL",
+  "ville" => "text NOT NULL",
+  "telephone" => "tinytext",
+  "portable" => "tinytext",
+  "montant" => "text NOT NULL",
+  "date" => "date NOT NULL default '0000-00-00'",
+  "statut" => "tinytext",
+  "relance" => "tinyint(4) NOT NULL default '0'",
+  "divers" => "text",
+  "remarques" => "text",
+  "vignette" => "tinytext",
+  "id_auteur" => "int(11) default NULL",
+  "id_asso" => "text NOT NULL",
+  "categorie" => "text NOT NULL",
+  "naissance" => "date NOT NULL default '0000-00-00'",
+  "profession" => "text NOT NULL",
+  "societe" => "text NOT NULL",
+  "identifiant" => "text NOT NULL",
+  "passe" => "text NOT NULL",
+  "creation" => "date NOT NULL default '0000-00-00'",
+  "maj" => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+  "utilisateur1" => "text NOT NULL",
+  "utilisateur2" => "text NOT NULL",
+  "utilisateur3" => "text NOT NULL",
+  "utilisateur4" => "text NOT NULL",
+  "secteur" => "text NOT NULL",
+  "publication" => "text NOT NULL",
+  "statut_interne" => "text NOT NULL",
+  "commentaire" => "text NOT NULL"
+				    );
+	$spip_asso_adherents_key= array(
+		"PRIMARY KEY" => "id_adherent"
+					);
+	$tables_principales['spip_asso_adherents'] = array(
+		'field' => &$spip_asso_adherents, 
+		'key' => &$spip_asso_adherents_key
+	);
+
+
 ?>
