@@ -58,8 +58,8 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
  * @param array $contenu Le contenu d'un formulaire
  * @return array Un tableau listant les noms des champs
  */
-function saisies_lister_champs($contenu){
-	$saisies = saisies_lister_par_nom($contenu);
+function saisies_lister_champs($contenu, $avec_conteneur=true){
+	$saisies = saisies_lister_par_nom($contenu, $avec_conteneur);
 	return array_keys($saisies);
 }
 
