@@ -1,5 +1,5 @@
 
-Tous les champs texte et textarea sont traites dans :
+Tous les champs input:text et textarea sauf ceux des forms .form_upload et .form_upload_icon sont traites dans :
 - articles
 - rubriques
 - configuration du site
@@ -11,13 +11,12 @@ Tous les champs texte et textarea sont traites dans :
 - sites
 - Breves
 
-Integration dans d'autres plugins :
-- Mediatheque
-	- documents
-	- documents dans popup
-- Forms et Tables. Proposer d'utiliser ce plugin pour ne pas avoir a gerer 2 js
 
-Suggestion de RastaPopoulos
-J'avais une idée supplémentaire pour que ce soit extensible : activer 
-également ce système sur tous les champs ayant une classe "multilang".
+A faire :
+- Suggestion de RastaPopoulos : J'avais une idée supplémentaire pour que ce soit extensible : activer également ce système sur tous les champs ayant une classe "multilang". Fait, a tester avec class "multilangclass"
+- Gerer le numero de titre dans un autre champ
+- F&T : pb de doublon avec forms_lang.js
+- Integration avec Porte-Plume : quand on change de langue, la previsu "Voir" ne bascule pas
+
+
 

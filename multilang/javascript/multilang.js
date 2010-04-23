@@ -54,6 +54,7 @@ function multilang_init_lang(options) {
 	if((options.page && window.location.search.indexOf(options.page)==-1) || multilang_avail_langs.length<=1) return;
 	
 	//set the root element of all processing
+
 	var root = options.root || document;
 	multilang_root = $(root);
 	
@@ -67,14 +68,16 @@ function multilang_init_lang(options) {
 	$.each(multilang_avail_langs,function() {
 		multilang_menu_lang.append($("<a>").html("["+this+"]").css(this==multilang_def_lang?multilang_css_cur_link:multilang_css_link)[0]);
 	});
+	//init fields
+	multilang_fields_selector = options.fields;
+
 	//store all the internationalized forms
-	// Modif Yffic : on exclue les form d'upload (Pour les vignettes de docs, logos...)
+	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
+
 	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
 	multilang_forms = $(multilang_forms_selector,multilang_root);
 	//create menu lang for the global form
 	if(multilang_containers.size()) forms_make_menu_lang(multilang_containers);
-	//init fields
-	multilang_fields_selector = options.fields;
 	multilang_menu_selector = options.form_menu;
 	forms_init_multi();
 }

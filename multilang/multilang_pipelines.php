@@ -16,8 +16,7 @@ function multilang_insert_head_prive($flux){
 			'auteur' => 'on',
 			'document' => 'on',
 			'motcle' => '',
-			'site' => '',
-			'formstables' => ''
+			'site' => ''
 	), $config);
 	ecrire_config('multilang', serialize($config));
 
@@ -38,19 +37,14 @@ function multilang_insert_head_prive($flux){
 		$root .= 'div.cadre-formulaire-editer' ;
 	} else if($config['document'] && ($exec=='naviguer' ||
 												 $exec=='articles')) {  // Docs dans page de presentation rubrique ou article,
-		$root .= 'div#portfolio_portfolio,div#portfolio_documents,div.formulaire_editer_document' ; //avec ou sans Mediatheque
-	} else if($config['document'] && $exec=='documents_edit') {// Mediatheque document
-		$root .= 'div.formulaire_editer_document' ;
+		$root .= 'div#portfolio_portfolio,div#portfolio_documents' ; 
 	} else if($config['site'] && $exec=='sites_edit') { // Sites
 		$root .= 'div.cadre-formulaire-editer' ;
 	} else if($config['motcle'] && ($exec=='mots_type' ||
 																 $exec=='mots_edit')) { // Mots
 		$root .= 'div.cadre-formulaire-editer' ;
-	} else if($config['formstables'] && $exec=='forms_edit'){
-		$root .= 'div#champs' ; // Création d'un formulaire
-	} else if($config['formstables'] && $exec=='donnees_edit'){
-		$root .= 'div.spip_forms' ; // Remplissage d'un formulaire
 	}
+
 	// Docs traites a part dans pages d'edition d'articles et de rubriques
 	if($config['document'] && ($exec=='rubriques_edit' || $exec=='articles_edit')){
 		$root .= ',div#liste_documents,div.formulaire_editer_document' ; // avec ou sans Mediatheque
@@ -65,17 +59,21 @@ function multilang_insert_head_prive($flux){
 			  var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
 			  multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'";
 			  jQuery(document).ready(function(){
-					function multilang_init(){';
+					function multilang_init(){
+				';
 	if($root) {
-		$flux .= 'multilang_init_lang({fields:":text,textarea",root:"'.$root.'"});';
+		$flux .= 'multilang_init_lang({fields:":text,textarea",root:"'.$root.'"});
+					';
 	}
 	// Pour toutes les forms de class multilang (pour les autres plugins)
-	$flux .= 'multilang_init_lang({fields:":text,textarea",forms:".multilangclass"});
+	$flux .= '  forms_selector = $(".multilangclass").parents("form") ;
+					multilang_init_lang({fields:".multilangclass",forms:forms_selector});
 					} // end multilang_init
 					multilang_init();
 					if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
 			  }); 
-			  </script>' ;
+			  </script>
+			  ' ;
 
 	return $flux;
 }
