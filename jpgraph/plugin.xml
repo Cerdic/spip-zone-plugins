@@ -2,7 +2,7 @@
 	<nom>JpGraph</nom>
 	<auteur>mise en plugin [erational->http://www.erational.org], Olivier Gautier</auteur>
 	<licence>QPL 1.0</licence>
-	<version>0.2</version>
+	<version>0.3</version>
 	<description>
   Bibliotheque graphique pour g&#233;n&#233;rer des graphes (requiert PHP5.1 avec l'extension GD)
   
@@ -12,7 +12,7 @@
 	<prefix>jpgraph</prefix>
 	<icon>img/jpgraph.png</icon>
 	<lien>http://www.spip-contrib.net/plugin-JpGraph</lien>
-	<necessite id="lib:jpgraph-3.0.6" src="http://hem.bredband.net/jpgraph2/jpgraph-3.0.6.tar.bz2" />
+	<necessite id="lib:jpgraph-3.0.7" src="http://hem.bredband.net/jpgraph2/jpgraph-3.0.7.tar.bz2" />
 	<fonctions>jpgraph_fonctions.php</fonctions>
 	<categorie>multimedia</categorie>
 </plugin>
