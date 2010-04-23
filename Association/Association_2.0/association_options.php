@@ -12,10 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_ASSOCIATION',(_DIR_PLUGINS.end($p)));
-
-
 function association_ajouterBoutons($boutons_admin) {
 		// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
