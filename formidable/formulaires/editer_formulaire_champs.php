@@ -87,11 +87,12 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 		));
 		
 		// Pour chaque traitements on regarde s'i y a une fonction d'update
-		foreach ($traitements as $type_traitement => $traitement){
-			if ($update = charger_fonction('update', "traiter/$type_traitement", true)){
-				$update($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles);
+		if (is_array($traitements))
+			foreach ($traitements as $type_traitement => $traitement){
+				if ($update = charger_fonction('update', "traiter/$type_traitement", true)){
+					$update($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles);
+				}
 			}
-		}
 		
 		// On redirige vers la config suivante
 		$retours['redirect'] = parametre_url(
