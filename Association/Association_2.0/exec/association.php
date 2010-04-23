@@ -44,8 +44,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo propre(_T('asso:info_doc'));  	
 		echo fin_boite_info(true);
 		
-		$res=icone_horizontale(_T('asso:Profil de l\'association'), '?exec=cfg&cfg=association', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/assoc_qui.png', 'rien.gif',false);
-			$res.=icone_horizontale(_T('asso:Cat&eacute;gories de cotisations'), generer_url_ecrire("categories"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotisation.png', '',false);
+		$res=icone_horizontale(_T('asso:profil_de_lassociation'), '?exec=cfg&cfg=association', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/assoc_qui.png', 'rien.gif',false);
+			$res.=icone_horizontale(_T('asso:categories_de_cotisations'), generer_url_ecrire("categories"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotisation.png', '',false);
 	$res.=icone_horizontale(_T('asso:plan_comptable'), generer_url_ecrire("plan"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/plan_compte.png', '',false);	
 	echo bloc_des_raccourcis($res);
 		

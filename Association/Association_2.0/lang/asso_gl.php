@@ -50,7 +50,7 @@ A oficina da Asociaci&oacute;n
 
 Gracias por non responder directamente a esta mensaxe autom&aacute;tica.
 	',
-	'Profil_de_lassociation' => 'Perfil da Asociaci&oacute;n',
+	'profil_de_lassociation' => 'Perfil da Asociaci&oacute;n',
 	
 # Adherents
  # Titres
