@@ -27,7 +27,7 @@ function action_exporter_formulaires_reponses_dist($arg=null) {
 		$reponses_completes = array();
 		
 		// La première ligne des titres
-		$titres = array(_T('date'), _T('formidable:reponses_auteur'), _T('formidable:reponses_ip'));
+		$titres = array(_T('public:date'), _T('formidable:reponses_auteur'), _T('formidable:reponses_ip'));
 		$saisies = saisies_lister_par_nom(unserialize($formulaire['saisies']), false);
 		foreach ($saisies as $nom=>$saisie){
 			$options = $saisie['options'];
