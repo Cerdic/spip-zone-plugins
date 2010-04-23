@@ -1,6 +1,6 @@
 
-[(#SET{valeur_uniquement, [(#ENV{valeur_uniquement}|=={oui}|oui)]})]
-[(#SET{enfants,[(#ENV*{saisies}|et{#ENV*{saisies}|is_array})]})]
+#SET{valeur_uniquement,#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|?{' ',''}}
+#SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
 
 [(#REM) Cas normal avec présentation ]
 [(#GET{valeur_uniquement}|non)
