@@ -25,11 +25,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$action=$_REQUEST['agir'];
-		$id_ressource=$_REQUEST['id'];
+		$id_ressource=intval($_REQUEST['id']);
+		$id_achat=intval($_POST['id_achat']);
 		$code=$_POST['code'];
 		$intitule=$_POST['intitule'];
 		$date_acquisition=$_POST['date_acquisition'];
-		$id_achat=$_POST['id_achat'];
 		$pu=$_POST['pu'];
 		$statut=$_POST['statut'];
 		$commentaire=$_POST["commentaire"];
@@ -49,7 +49,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo debut_gauche("",true);
 			
 			echo debut_boite_info(true);
-			$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource'" ) ;
+			$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource=$id_ressource" ) ;
 			while ($data = spip_fetch_array($query)) {
 				$statut=$data['statut'];
 				echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
@@ -81,21 +81,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		if ($action == "drop") {
 			
-			spip_query( "DELETE FROM spip_asso_ressources WHERE id_ressource='$id_ressource' " );
+			spip_query( "DELETE FROM spip_asso_ressources WHERE id_ressource=$id_ressource" );
 			header ('location:'.$url_retour);
 		}
 		
 		//  MODIFICATION RESSOURCE
 		
 		if ($action =="modifie") { 
-			spip_query( "UPDATE spip_asso_ressources SET code="._q($code).", intitule="._q($intitule).", date_acquisition="._q($date_acquisition).", id_achat="._q($id_achat).", pu="._q($pu).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_ressource='$id_ressource' " );
+			spip_query( "UPDATE spip_asso_ressources SET code="._q($code).", intitule="._q($intitule).", date_acquisition="._q($date_acquisition).", id_achat=".$id_achat.", pu="._q($pu).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_ressource=$id_ressource" );
 			header ('location:'.$url_retour);
 		}
 		
 		//  AJOUT RESSOURCE
 		
 		if ($action == "ajoute") {
-			spip_query( "INSERT INTO spip_asso_ressources (code, intitule, date_acquisition, id_achat, pu, statut, commentaire) VALUES ("._q($code).", "._q($intitule).", "._q($date_acquisition).", "._q($id_achat).", "._q($pu).", "._q($statut).", "._q($commentaire)." )" );
+			spip_query( "INSERT INTO spip_asso_ressources (code, intitule, date_acquisition, id_achat, pu, statut, commentaire) VALUES ("._q($code).", "._q($intitule).", "._q($date_acquisition).", ".$id_achat.", "._q($pu).", "._q($statut).", "._q($commentaire)." )" );
 			header ('location:'.$url_retour);
 		}
 	}

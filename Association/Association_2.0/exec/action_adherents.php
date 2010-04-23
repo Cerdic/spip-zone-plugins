@@ -77,7 +77,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<table>';
 			echo '<form action="#"  method="post">';
 			for ( $i=0 ; $i < $count ; $i++ ) {
-				$id = $delete_tab[$i];
+				$id = intval($delete_tab[$i]);
 				$query = association_auteurs_elargis_select("*",'', "id_auteur=$id");
 				while($data = spip_fetch_array($query)) {
 					echo '<tr>';

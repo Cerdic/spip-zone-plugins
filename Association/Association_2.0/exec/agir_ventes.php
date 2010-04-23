@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$url_agir_ventes=generer_url_ecrire('agir_ventes');
 		
-		$id_vente=$_REQUEST['id'];
+		$id_vente=intval($_REQUEST['id']);
 		$action=$_REQUEST['agir'];
 		$url_retour=$_POST['url_retour'];
 		
@@ -32,7 +32,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$article=$_POST['article'];
 		$code=$_POST['code'];
 		$acheteur=$_POST['acheteur'];
-		$id_acheteur=$_POST['id_acheteur'];
+		$id_acheteur=intval($_POST['id_acheteur']);
 		$quantite=$_POST['quantite'];
 		$date_envoi=$_POST['date_envoi'];
 		$frais_envoi=$_POST['frais_envoi'];
@@ -61,7 +61,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//MODIFICATION VENTE
 		if ($action=="modifie"){
-			spip_query( "UPDATE spip_asso_ventes SET date_vente="._q($date_vente).", article="._q($article).", code="._q($code).", acheteur="._q($acheteur).", id_acheteur="._q($id_acheteur).", quantite="._q($quantite).", date_envoi="._q($date_envoi).", frais_envoi="._q($frais_envoi).", don="._q($don).", prix_vente="._q($prix_vente).", commentaire="._q($commentaire)." WHERE id_vente='$id_vente' " );
+			spip_query( "UPDATE spip_asso_ventes SET date_vente="._q($date_vente).", article="._q($article).", code="._q($code).", acheteur="._q($acheteur).", id_acheteur="._q($id_acheteur).", quantite="._q($quantite).", date_envoi="._q($date_envoi).", frais_envoi="._q($frais_envoi).", don="._q($don).", prix_vente="._q($prix_vente).", commentaire="._q($commentaire)." WHERE id_vente=$id_vente" );
 			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_vente).", journal="._q($journal).",recette="._q($prix_vente).", depense="._q($frais_envoi).", justification="._q($justification)." WHERE id_journal=$id_vente AND imputation=".lire_config('association/pc_ventes') );
 			header ('location:'.$url_retour);
 			exit;
@@ -115,10 +115,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$count=count ($drop_tab);
 			
 			for ( $i=0 ; $i < $count ; $i++ ) {
-				$id = $drop_tab[$i];
-				spip_query("DELETE FROM spip_asso_ventes WHERE id_vente='$id' " );
+				$id = intval($drop_tab[$i]);
+				spip_query("DELETE FROM spip_asso_ventes WHERE id_vente=$id" );
 				$imputation=lire_config('association/pc_ventes');
-				spip_query("DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='$imputation'");
+				spip_query("DELETE FROM spip_asso_comptes WHERE id_journal=$id AND imputation='$imputation'");
 			}
 			header ('location:'.$url_retour);
 			exit;

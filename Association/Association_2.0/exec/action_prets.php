@@ -26,12 +26,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_action_prets=generer_url_ecrire('action_prets');
 		
 		$action=$_REQUEST['agir'];
-		$id_pret=$_REQUEST['id'];
-		$id_ressource=$_REQUEST['id_ressource'];
+		$id_pret=intval($_REQUEST['id']);
+		$id_ressource=$_REQUEST['id_ressource']; // text !
+		$id_emprunteur=$_POST['id_emprunteur']; // text !
 		$date_sortie=$_POST['date_sortie'];
 		$duree=$_POST['duree'];
 		$date_retour=$_POST['date_retour'];
-		$id_emprunteur=$_POST['id_emprunteur'];
 		$commentaire_sortie=$_POST['commentaire_sortie'];
 		$commentaire_retour=$_POST['commentaire_retour'];
 		$statut=$_POST['statut'];
@@ -55,7 +55,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo debut_boite_info(true);
 			echo association_date_du_jour();	
 			
-			$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource'" ) ;
+			$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource=" . _q($id_ressource) ) ;
 			while ($data = spip_fetch_array($query)) {
 				$statut=$data['statut'];
 				echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
@@ -90,16 +90,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		//  SUPPRESSION DEFINITIVE PRET
 		if ($action == "drop") {
 			
-			spip_query( "DELETE FROM spip_asso_prets WHERE id_pret='$id_pret' " );
-			spip_query ("DELETE FROM spip_asso_comptes WHERE id_journal='$id_pret' " );
-			spip_query( "UPDATE spip_asso_ressources SET statut='ok' WHERE id_ressource='$id_ressource' " );
+			spip_query( "DELETE FROM spip_asso_prets WHERE id_pret=$id_pret" );
+			spip_query ("DELETE FROM spip_asso_comptes WHERE id_journal=$id_pret" );
+			spip_query( "UPDATE spip_asso_ressources SET statut='ok' WHERE id_ressource=" . _q($id_ressource) );
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
 		//  MODIFICATION PRET
 		if ($action =="modifie") { 
-			spip_query( "UPDATE spip_asso_prets SET date_sortie="._q($date_sortie).", duree="._q($duree).", date_retour="._q($date_retour).", id_emprunteur="._q($id_emprunteur).", commentaire_sortie="._q($commentaire_sortie)." WHERE id_pret='$id_pret' " );
+			spip_query( "UPDATE spip_asso_prets SET date_sortie="._q($date_sortie).", duree="._q($duree).", date_retour="._q($date_retour).", id_emprunteur="._q($id_emprunteur).", commentaire_sortie="._q($commentaire_sortie)." WHERE id_pret=$id_pret" );
 			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_sortie).", journal="._q($journal).",recette="._q($montant).") " );
 			header ('location:'.$url_retour);
 			exit;

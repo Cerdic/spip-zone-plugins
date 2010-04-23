@@ -27,12 +27,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_action_dons = generer_url_ecrire('action_dons');
 		$url_retour=$_POST['url_retour'];
 		
-		$id_don = $_REQUEST['id'];		
+		$id_don = intval($_REQUEST['id']);
+		$id_adherent=intval($_POST['id_adherent']);
 		$action=$_REQUEST['agir'];
-		
 		$date_don = $_POST['date_don'];
 		$bienfaiteur= $_POST['bienfaiteur'];
-		$id_adherent=$_POST['id_adherent'];
 		$argent= $_POST['argent'];
 		$journal=$_POST['journal'];
 		$colis= $_POST['colis'];
@@ -56,7 +55,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//MODIFICATION DON
 		if ($action=="modifie"){
-			spip_query( " UPDATE spip_asso_dons SET date_don="._q($date_don).", bienfaiteur="._q($bienfaiteur).", id_adherent="._q($id_adherent).", argent="._q(argent).", colis="._q($colis).", valeur="._q($valeur).", contrepartie="._q($contrepartie).", commentaire="._q($commentaire)." WHERE id_don='$id_don' " );
+			spip_query( " UPDATE spip_asso_dons SET date_don="._q($date_don).", bienfaiteur="._q($bienfaiteur).", id_adherent="._q($id_adherent).", argent="._q($argent).", colis="._q($colis).", valeur="._q($valeur).", contrepartie="._q($contrepartie).", commentaire="._q($commentaire)." WHERE id_don=$id_don " );
 			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_don).", journal="._q($journal).",recette="._q($argent).", justification="._q($justification)."  WHERE id_journal=$id_don AND imputation=".lire_config('association/pc_dons'));
 			header ('location:'.$url_retour);
 			exit;
@@ -98,7 +97,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		//  SUPPRESSION DEFINITIVE DONS
 		if ($action=="drop") {
 			spip_query( "DELETE FROM spip_asso_dons WHERE id_don='$id_don' ");
-			spip_query( "DELETE FROM spip_asso_comptes WHERE id_journal='$id_don' AND imputation=".lire_config('association/pc_dons'));  
+			spip_query( "DELETE FROM spip_asso_comptes WHERE id_journal=$id_don AND imputation=".lire_config('association/pc_dons'));  
 			header ('location:'.$url_retour);
 			exit;
 		}

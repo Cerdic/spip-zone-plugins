@@ -73,7 +73,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			
 			echo '<form method="post" action="'.$url_action_relances.'">';
 			for ( $i=0 ; $i < $count ; $i++ ) {
-				echo '<input name="id[]" type="hidden" value="'.$id_tab[$i].'">';
+			  echo '<input name="id[]" type="hidden" value="'.intval($id_tab[$i]).'">';
 				echo '<input name="statut[]" type="hidden" value="'.$statut_tab[$i].'">';
 				echo '<input name="email[]" type="hidden" value="'.$email_tab[$i].'">';
 			}

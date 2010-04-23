@@ -111,9 +111,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//Filtre ID
 		if ( isset ($_POST['id'])) {
-			$id=$_POST['id'];
-			$critere="id_auteur='$id'";
-			if ($indexation=="id_asso") { $critere="id_asso='$id'"; }
+			$id=_q($_POST['id']);
+			$critere="id_auteur=$id";
+			if ($indexation=="id_asso") { $critere="id_asso=$id"; }
 		}
 		
 		echo '<form method="post" action="'.$url_adherent.'">';
