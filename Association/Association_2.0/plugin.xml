@@ -17,8 +17,8 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
     </lien>
     <icon>img_pack/annonce.gif</icon>
 
-    <fonctions>association_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
-	<!--<options>association_options.php</options>-->		 <!-- fichier charge a chaque hit -->
+	<!-- fichier charge a chaque hit -->
+	<options>association_options.php</options>
 
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
@@ -43,7 +43,7 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>		
-		<inclure>association_fonctions.php</inclure>
+		<inclure>association_options.php</inclure>
 	</pipeline>
 	
 	<categorie>divers</categorie>
