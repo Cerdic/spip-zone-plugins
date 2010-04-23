@@ -8,6 +8,9 @@ function formulaires_clevermail_charger_dist($lst_id_force = 0, $lsr_mode_force 
 	if ($GLOBALS['visiteur_session']['email']) {
 		$default['sub_email'] = $GLOBALS['visiteur_session']['email'];
 	}
+	if ($lsr_mode_force) {
+		$default['lsr_mode_force'] = $lsr_mode_force;
+	}	
 	if (intval($lst_id_force) != 0) {
 		if ($lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_id = ".$lst_id_force." AND lst_moderation != 'closed'")) {
 			$valeurs = $default;

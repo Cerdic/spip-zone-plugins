@@ -33,7 +33,7 @@
 		            #SET{value,0}
 		            <div class="choix">
 		              <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
-		              <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte:></label>
+		              <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte|ucfirst:></label>
 		            </div>
 		            #SET{value,1}
 		            <div class="choix">
