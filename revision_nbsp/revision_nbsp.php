@@ -16,7 +16,9 @@
 
 
 	function RevisionNbsp_revision_nbsp($letexte) {
-		if (!_DIR_RESTREINT) {
+		if (!_DIR_RESTREINT
+		AND !defined('_STOP_REVISION_NBSP')
+		) {
 			$letexte = echappe_html($letexte, '', true, ',(<img[^<]*>),Ums');
 			$letexte = str_replace('&nbsp;',
 				'<span style="border-bottom:2px solid #ccc;">&nbsp;</span>', $letexte);
@@ -52,7 +54,7 @@
 	function notes_automatiques($texte) {
 		global $nb_notes; // sale
 
-		// Attrapper les notes
+		// Attraper les notes
 		$regexp = ', *\[\[(.*?)\]\],msS';
 		if ($s = preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)
 		AND $s==1
