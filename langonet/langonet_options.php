@@ -5,26 +5,47 @@ define("_LANGONET_TROUVER_ITEM_HP", ",(?:<:|_[T|U]\(['\"])(?:([a-z0-9_]+):)?((?:
 // -- pour les fichiers .xml
 define("_LANGONET_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
 
+
 /**
- * Creation des deux <select> de choix des fichiers :
- *   - le fichier de langue dont on veut verifier les items
- *   - le repertoire dont l'arborescence sera scannee
+ * Creation du select des fichiers de langue
+ *
+ * @param string $sel_l
+ * @return string
+ */
+function langonet_creer_select_langues($sel_l='0') {
+
+	$retour = langonet_creer_selects($sel_l, '0');
+	return $retour['fichiers'];
+}
+
+/**
+ * Creation du select des arborescences a scanner
+ *
+ * @param string $sel_d
+ * @return array
+ */
+function langonet_creer_select_dossiers($sel_d='0') {
+
+	$retour = langonet_creer_selects('0', $sel_d);
+	return $retour['dossiers'];
+}
+
+/**
+ * Creation d'un tableau des selects:
+ * - des fichiers de langue
+ * - des arborescences a scanner
  *
  * @param string $sel_l
  * @param string $sel_d
- * @param string $err_l
- * @param string $err_d
- * @return string
+ * @return array
  */
 
 // $sel_l  => option du select des langues
 // $sel_d  => option du select des repertoires
-// $err_l  => affecte si pas de choix de fichier
-// $err_d  => affecte si pas de choix de repertoire
-function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
-	include_spip('inc/plugin');
-
+function langonet_creer_selects($sel_l='0',$sel_d='0') {
+	
 	// Recuperation des repertoires plugins
+	include_spip('inc/plugin');
 	$rep_plugins = liste_plugin_files();
 	$rep_normal = array();
 	foreach ($rep_plugins as $rep) {
@@ -49,21 +70,15 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 	$rep_scan = array_merge($rep_complet, $rep_normal);
 	
 	// construction des <select>
-	$sel_lang = '<li class="editer_fichier_langue obligatoire'. ($err_l ? ' erreur' : '') . '">' . "\n".
-				'<label for="fichier_langue">' . _T('langonet:label_fichier_verifie') . '</label>' . "\n".
-				'<p class="explication">'._T('langonet:info_fichier_verifie')."</p>\n".
-				($err_l ? '<span class="erreur_message">' . $err_l . '</span>' . "\n" : '').
-				'<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">'."\n";
-	$sel_dossier = '<li class="editer_dossier_scan obligatoire'. ($err_d ? ' erreur' : '') . '">' . "\n".
-				'<label for="fichier_langue">' . _T('langonet:label_arborescence_scannee') . '</label>' . "\n".
-				'<p class="explication">' . _T('langonet:info_arborescence_scannee') . "</p>\n".
-				($err_d ? '<span class="erreur_message">' . $err_d . '</span>' . "\n" : '').
-				'<select name="dossier_scan" id="dossier_scan">' . "\n";
+	// -- les fichiers de langue
+	$sel_lang = '<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">'."\n";
 	$sel_lang .= '<option value="0"';
-	$sel_dossier .= '<option value="0"';
 	$sel_lang .= ($sel_l == '0') ? ' selected="selected">' : '>';
-	$sel_dossier .= ($sel_d == '0') ? ' selected="selected">' : '>';
 	$sel_lang .= _T('langonet:option_aucun_fichier') . '</option>' . "\n";
+	// -- les racines des arborescences a scanner
+	$sel_dossier = '<select name="dossier_scan" id="dossier_scan">' . "\n";
+	$sel_dossier .= '<option value="0"';
+	$sel_dossier .= ($sel_d == '0') ? ' selected="selected">' : '>';
 	$sel_dossier .= _T('langonet:option_aucun_dossier') . '</option>' . "\n";
 
 	// la liste des options :
@@ -72,8 +87,6 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 	//     $module (prefixe fichier de langue)
 	//     $langue (index nom de langue)
 	//     $ou_lang (chemin relatif vers fichier de langue a verifier)
-	// value (dossier_scan) =>
-	//     $ou_fichier (chemin relatif vers racine de l'arborescence a verifier)
 	foreach ($rep_scan as $rep) {
 		if (in_array($rep, $rep_normal)) {
 			$reel_dir = _DIR_PLUGINS . $rep;
@@ -109,9 +122,10 @@ function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 		$sel_dossier .= str_replace('../', '', $reel_dir) . '/</option>' . "\n";
 	}
 
-	$sel_lang .= '</select>' . "\n" . '</li>' . "\n";
-	$sel_dossier .= '</select>' . "\n" . '</li>' . "\n";
+	$sel_lang .= '</select>' . "\n";
+	$sel_dossier .= '</select>' . "\n";
 
-	return $sel_lang . $sel_dossier;
+	return $retour = array('fichiers' => $sel_lang, 'dossiers' => $sel_dossier);
 }
+
 ?>

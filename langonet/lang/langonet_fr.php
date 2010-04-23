@@ -41,7 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verification_utilisation' => 'D&eacute;tection des d&eacute;finitions obsol&egrave;tes',
 	'label_verification' => 'Type de v&eacute;rification',
 	'legende_generer' => 'G&eacute;n&eacute;ration des fichiers de langue',
+	'legende_lister' => 'Affichage des items de langue',
 	'legende_resultats' => 'R&eacute;sultats de la v&eacute;rification',
+	'legende_table' => 'Table des items du fichier de langue choisi',
 	'legende_verifier' => 'V&eacute;rification des items de langue',
 
 // M

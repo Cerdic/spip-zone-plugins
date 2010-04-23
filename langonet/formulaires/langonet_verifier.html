@@ -24,7 +24,18 @@
 								<label for="verification_utilisation"><:langonet:label_verification_utilisation:></label>
 							</div>
 						</li>
-						[(#ENV{fichier_langue, 0}|langonet_creer_selects{#ENV{dossier_scan, 0}, [(#ENV{erreurs}|table_valeur{fichier_langue})], [(#ENV{erreurs}|table_valeur{dossier_scan})]})]
+						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+							<label for="fichier_langue"><:langonet:label_fichier_verifie:></label>
+							<p class="explication"><:langonet:info_fichier_verifie:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+							[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
+						</li>
+						<li class="editer_dossier_scan obligatoire[(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
+							<label for="dossier_scan"><:langonet:label_arborescence_scannee:></label>
+							<p class="explication"><:langonet:info_arborescence_scannee:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]
+							[(#ENV{dossier_scan, 0}|langonet_creer_select_dossiers)]
+						</li>
 					</ul>
 				</fieldset>
 			</li>
