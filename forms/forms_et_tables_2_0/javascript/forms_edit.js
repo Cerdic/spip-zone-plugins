@@ -66,9 +66,9 @@ jQuery.fn.ajaxAction = function() {
 		return false;
 	});
 	$('#'+id+' form.ajaxAction').each(function(){
-		var idtarget = $(this).children('input[@name=idtarget]').val();
+		var idtarget = $(this).children('input[name=idtarget]').val();
 		if (!idtarget) idtarget = $(this).parent().attr("id");
-		var redir = $(this).children('input[@name=redirect]');
+		var redir = $(this).children('input[name=redirect]');
 		var url = (($(redir).val()).split('#'))[0];
 		$(redir).val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
 		$(redir).after("<input type='hidden' name='var_ajaxcharset' value='"+ajaxcharset+"' />");
@@ -126,7 +126,7 @@ jQuery.fn.ajaxAction = function() {
 			/*containment: 'parent',*/
 			onStop : function(){
 				serial = $.SortSerialize($(this).parent().attr("id"));
-				$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
+				$(this).parent().siblings('input[name=ordre]').val(serial.hash);
 			}
 		}
 	)
@@ -147,15 +147,15 @@ jQuery.fn.ajaxAction = function() {
 				onStart : function(arg){
 					serial = $.SortSerialize($(this).parent().attr("id"));
 					var form = $(this).parent().siblings('form.sortableChamps');
-					form.children('input[@name=ordre]').val(serial.hash);
+					form.children('input[name=ordre]').val(serial.hash);
 				},
 				onStop : function(arg){
 					serial = $.SortSerialize($(this).parent().attr("id"));
 					var form = $(this).parent().siblings('form.sortableChamps');
-					var prev = $(form).children('input[@name=ordre]').val();
+					var prev = $(form).children('input[name=ordre]').val();
 					if (prev != serial.hash) {
-						$(form).children('input[@name=ordre]').val(serial.hash);
-						$(form).children('input[@type=submit]').eq(0).each(function(){ this.click(); });
+						$(form).children('input[name=ordre]').val(serial.hash);
+						$(form).children('input[type=submit]').eq(0).each(function(){ this.click(); });
 					}
 				}
 			}

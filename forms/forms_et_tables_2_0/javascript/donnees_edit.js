@@ -20,8 +20,8 @@ function init_sort_table(){
 				var url = $(this).parent().siblings('a').attr("rel");
 				//alert(serial.hash);
 				if (sort_table_serial_init!=serial.hash){
-					$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
-					$(this).parent().parent().find('input[@type=submit]').eq(0).each(function(){ this.click(); });
+					$(this).parent().siblings('input[name=ordre]').val(serial.hash);
+					$(this).parent().parent().find('input[type=submit]').eq(0).each(function(){ this.click(); });
 				}
 			}
 		}

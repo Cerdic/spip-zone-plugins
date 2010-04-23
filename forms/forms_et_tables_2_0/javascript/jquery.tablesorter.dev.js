@@ -219,13 +219,13 @@ jQuery.fn.tableSorter = function(o) {
 
 			// add buttons.
 			o.append('<div class="spip_bouton"><input type="submit" value="'+apply_string+'" class="fondo"/><input type="reset" value="'+clear_string+'" class="fondl"/></div>');
-			jQuery('input[@type="submit"]',o).click(function() {
-				var min = jQuery('input[@name="min"]',o).val();
-				var max = jQuery('input[@name="max"]',o).val();
+			jQuery('input[type="submit"]',o).click(function() {
+				var min = jQuery('input[name="min"]',o).val();
+				var max = jQuery('input[name="max"]',o).val();
 				jQuery.tableSorter.filter.applyFilter(min,max);
 			});
 
-			jQuery('input[@type="reset"]',o).click(function() {
+			jQuery('input[type="reset"]',o).click(function() {
 				jQuery.tableSorter.filter.resetFilter();
 				o.hide();
 			});

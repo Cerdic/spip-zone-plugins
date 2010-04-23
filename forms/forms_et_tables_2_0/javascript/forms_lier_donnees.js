@@ -16,13 +16,13 @@ jQuery.fn.ajaxAction = function() {
 		return false;
 	});
 	$('#'+id+' form.ajaxAction').each(function(){
-		var idtarget = $(this).children('input[@name=idtarget]').val();
+		var idtarget = $(this).children('input[name=idtarget]').val();
 		if (!idtarget) idtarget = $(this).parent().attr("id");
-		var redir = $(this).children('input[@name=redirectajax]');
+		var redir = $(this).children('input[name=redirectajax]');
 		var url = (($(redir).val()).split('#'))[0];
 		/*alert(url);
-		alert($(this).children('input[@name=redirect]').val());*/
-		$(this).children('input[@name=redirect]').val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
+		alert($(this).children('input[name=redirect]').val());*/
+		$(this).children('input[name=redirect]').val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
 		$(redir).after("<input type='hidden' name='var_ajaxcharset' value='"+ajaxcharset+"' />");
 		$(this).ajaxForm({"target":'#'+idtarget, 
 			"after":
@@ -35,7 +35,7 @@ jQuery.fn.ajaxAction = function() {
 			}
 			});
 	});
-	var script = $('input[@name=autocompleteUrl]').val();
+	var script = $('input[name=autocompleteUrl]').val();
 	$('#autocompleteMe').Autocomplete(
 		{
 			source: script,
