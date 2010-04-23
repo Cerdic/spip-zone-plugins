@@ -8,10 +8,9 @@
 ]
 
 
-
-<BOUCLE_variantes(VARIANTES){statut IN prop,publie}{id_article=#ID}{par prix_ht}>
-<dl class='fiche[(#STATUT|=={prop}|oui)prop]'>
-	<dd class="radio"><input type="radio" name="id_variante" id="variante_#ID_VARIANTE" value="#ID_VARIANTE"[ (#COMPTEUR_BOUCLE|=={1}|oui)checked='checked'] [(#STATUT|=={prop}|oui) disabled='disabled']/></dd>
+<BOUCLE_variantes(VARIANTES){statut IN prop,prepa,publie}{id_article=#ID}{par prix_ht}>
+<dl class='fiche[(#STATUT|=={publie}|non)prop]'>
+	<dd class="radio"><input type="radio" name="id_variante" id="variante_#ID_VARIANTE" value="#ID_VARIANTE" [ (#STATUT|=={publie}|oui)checked='checked'] [(#STATUT|=={publie}|non) disabled='disabled']/></dd>
 	<dd class="desc #EDIT{titre}"><label for="variante_#ID_VARIANTE">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif &agrave; la variante...'})</span>]</label></dd>
 	[<dd class="prix #EDIT{prix_ht}">(#PRIX_HT|monetaire)</dd>]
 	[<!--dd class="prix">(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)</dd-->]

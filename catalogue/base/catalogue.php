@@ -28,6 +28,7 @@ function catalogue_declarer_tables_interfaces($interface){
 	 *
 	 */
 	$interface['table_des_traitements']['TITRE'][] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['STATUT'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['DESCRIPTIF'][] = _TRAITEMENT_RACCOURCIS;
 
 	return $interface;

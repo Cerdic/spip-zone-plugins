@@ -1,0 +1,31 @@
+
+
+<BOUCLE_v(VARIANTES){id_variante}>
+
+<!--#hierarchie-->
+<ul id="chemin">
+	
+	<li>Accueil</li>
+	<li><a href="?exec=articles&id_article=#ID_ARTICLE">Retour à l'article #ID_ARTICLE</a></li>
+	<li>Editer variante</li>
+</ul>
+<!--/#hierarchie-->
+ 
+<h1><:catalogue:edition_variante:></h1>
+
+#INCLURE{fond=inc/blocs/variante,id_variante,env} 
+</BOUCLE_v>
+</B_v>
+Aucune variante trouvée
+<//B_v>
+
+
+
+<!--#navigation-->
+<div class='cadre-info'>
+<:catalogue:info_variante_edit:></div>
+<!--/#navigation-->
+ 
+<!--#extra-->
+<!-- Du contenu en plus dans la colonne extra.-->
+<!--/#extra-->

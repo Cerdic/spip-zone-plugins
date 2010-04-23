@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// I
 	'info_prix' => 'Prix d&eacute;taill&eacute;s de cette formule',
+	'info_variante_edit' => 'Cette page est en cours de d&eacute;veloppement, veuillez nous en excuser.<br /><br />Cependant vous pouvez tout &agrave; fait &eacute;diter la variante qui s\'affiche sur cette page, et ceci gr&acirc;ce aux "crayons".<br /><br />Double-cliquez sur le champ &agrave; &eacute;diter, ou cliquez sur la petite image qui apparait au survol d\'un champ modifiable.',
 	
 	// N
 	'neant' => 'n&eacute;ant',

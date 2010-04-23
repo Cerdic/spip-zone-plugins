@@ -2,23 +2,28 @@
 <!-- squelette prive/contenu/catalogue_article.html -->
 
 <div id="editer_variantes">
-	<div class="cadre carde-e">
+	<div class="cadre cadre-e">
 	
 		<img src="#CHEMIN{img/picto_catalogue_32x32.png}" class="cadre-icone" alt="" width="24" height="24" />
 		
-		<div class="titrem depliant" onmouseover="jQuery(this).depliant('#languearticle,#lier_traductions');">
-			<a href='#' onclick="return jQuery(this).depliant_clicancre('#languearticle,#lier_traductions');" class='titremancre'></a><:catalogue:titre_bloc_catalogue:>
+		<div class="titrem depliant" onmouseover="jQuery(this).depliant('#variantes_article');">
+			<a href='#' class='titremancre' onclick="return jQuery(this).depliant_clicancre('#variantes_article');" ></a><:catalogue:titre_bloc_catalogue:>
 		</div>
+		
 		<div class='cadre_padding'>
-			<div id='variante_article' class='bloc_depliable blocreplie'>
+
+			<div id='variantes_article' class='bloc_depliable blocdeplie'>
+			
+				<div class="cadre cadre-liste">
 				
-				<a id='access-i' href='#access-i' accesskey='i'></a>
-				<div class='cadre cadre-couleur' style=''>
-					<div class='cadre_padding'>
-						<div style='text-align: center;'>truc</div>
-					</div>
-				</div>
+				#INCLURE{fond=inc/listes/variantes,id_article,env}
+
+				</div>		
+				
 			</div>
 		</div>
 	</div>
 </div>
+
+</div>
+
