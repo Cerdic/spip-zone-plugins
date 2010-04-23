@@ -63,8 +63,8 @@ Date.prototype.utcTime = function() {
 (function($) {
 
 	var dstDataBase = {
-	'GMT0100':1,'GMT0200':2,'GMT0300':3,'GMT0330':3.5,'GMT0400':4,'GMT0430':4.5,'GMT0500':5,'GMT0530':5.5,'GMT0545':5.75,'GMT0600':6,'GMT0630':6.5,'GMT0700':7,'GMT0710':7/6,'GMT0730':7.5,'GMT0800':8, 'GMT0830':8.5,'GMT0900':9,'GMT0930':9.5,'GMT1000':10,'GMT1100':11,'GMT1200':12,'GMT1300':13,'GMT-0100':-1,'GMT-0200':-2,'GMT-0230':-2.5,'GMT-0300':-3,'GMT-0330':-3.5,'GMT-0400':-4,'GMT-0430':-4.5,'GMT-0500':-5,'GMT-0600':-6,'GMT-0700':-7,'GMT-0800':-8,'GMT-0900':-9,'GMT-1000':-10,'GMT-1100':-11,'GMT-1200':-12,
-	'ACDT':10.5,'ACST':9.5,'AEDT':11,'AEST':10,'AWDT':9,'AWST':8,'CDT':10.5,'CST':10.5,'CST':9.5,'CXT':7,'EDT':11,'EST':11,'EST':10,'NFT':11.5,'WDT':9,'WST':9,'WST':8,'BST':1,'CEDT':2,'CEST':2,'CET':1,'EEDT':3,'EEST':3,'EET':2,'GMT':0,'IST':1,'MESZ':2,'MEZ':1,'MSD':4,'MSK':3,'UTC':0,'WEDT':1,'WEST':1,'WET':0,'ADT':-3,'AKDT':-8,'AKST':-9,'AST':-4,'CDT':-5,'CST':-6,'EDT':-4,'EST':-5,'HAA':-3,'HAC':-5,'HADT':-9,'HAE':-4,'HAP':-7,'HAR':-6,'HAST':-10,'HAT':-2.5,'HAY':-8,'HNA':-4,'HNC':-6,'HNE':-5,'HNP':-8,'HNR':-7,'HNT':-3.5,'HNY':-9,'HST':-10,'MDT':-6,'MST':-7,'NDT':-2.5,'NST':-3.5,'PDT':-7,'PST':-8,
+	'gmt0100':1,'gmt0200':2,'gmt0300':3,'gmt0330':3.5,'gmt0400':4,'gmt0430':4.5,'gmt0500':5,'gmt0530':5.5,'gmt0545':5.75,'gmt0600':6,'gmt0630':6.5,'gmt0700':7,'gmt0710':7/6,'gmt0730':7.5,'gmt0800':8, 'gmt0830':8.5,'gmt0900':9,'gmt0930':9.5,'gmt1000':10,'gmt1100':11,'gmt1200':12,'gmt1300':13,'gmt-0100':-1,'gmt-0200':-2,'gmt-0230':-2.5,'gmt-0300':-3,'gmt-0330':-3.5,'gmt-0400':-4,'gmt-0430':-4.5,'gmt-0500':-5,'gmt-0600':-6,'gmt-0700':-7,'gmt-0800':-8,'gmt-0900':-9,'gmt-1000':-10,'gmt-1100':-11,'gmt-1200':-12,
+	'acdt':10.5,'acst':9.5,'aedt':11,'aest':10,'awdt':9,'awst':8,'cdt':10.5,'cst':10.5,'cst':9.5,'cxt':7,'edt':11,'est':11,'est':10,'nft':11.5,'wdt':9,'wst':9,'wst':8,'bst':1,'cedt':2,'cest':2,'cet':1,'eedt':3,'eest':3,'eet':2,'gmt':0,'ist':1,'mesz':2,'mez':1,'msd':4,'msk':3,'utc':0,'wedt':1,'west':1,'wet':0,'adt':-3,'akdt':-8,'akst':-9,'ast':-4,'cdt':-5,'cst':-6,'edt':-4,'est':-5,'haa':-3,'hac':-5,'hadt':-9,'hae':-4,'hap':-7,'har':-6,'hast':-10,'hat':-2.5,'hay':-8,'hna':-4,'hnc':-6,'hne':-5,'hnp':-8,'hnr':-7,'hnt':-3.5,'hny':-9,'hst':-10,'mdt':-6,'mst':-7,'ndt':-2.5,'nst':-3.5,'pdt':-7,'pst':-8,
 /*
 	Time zone changes and daylight saving time start dates between year 2010 and 2019
 	Update : 2010-04-23
@@ -151,10 +151,21 @@ $.fn.jclock = function(options) {
 		var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
 		$this.format = o.format;
 		$this.serveur_offset = o.serveur_offset;
-		$this.utc = o.utc.toUpperCase();
-		$this.utc_offset = o.utc_offset;
-		if (o.utc) $this.utc_offset = dstOffset(0, dstDataBase[$this.utc])*3600000; //gmtDataBase[$this.utc]*10000;
-		$this.town = o.town.toLowerCase();
+		$this.zone = o.zone.toLowerCase();
+		$this.utc_offset = false;
+		if($this.zone.length) switch(typeof dstDataBase[$this.zone]) {
+			case "number":
+				$this.utc_offset = dstOffset(0, dstDataBase[$this.zone])*3600000;
+				break;
+			case "undefined":
+				$this.zone = parseFloat($this.zone)
+				if(!isNaN($this.zone))
+					$this.utc_offset = dstOffset(0, $this.zone)*3600000;
+				else $this.zone='';
+				break;
+			default:
+				break;
+		}
 		$.fn.jclock.startClock($this);
 	
 	});
@@ -182,20 +193,19 @@ $.fn.jclock = function(options) {
 		// ici on veut l'horloge du serveur
 		now = new Date(now.getTime() - el.serveur_offset*1000);
 		el.format = 'H:i:s';
-	} else if(el.utc.length) {
+	} else if(el.utc_offset!==false) {
 		now = new Date(now.utcTime() + el.utc_offset - el.serveur_offset*1000);
-    } else if(el.town.length) {
+    } else if(el.zone.length) {
 		var utc = now.utcTime() - el.serveur_offset*1000
-		now = new Date(utc + dstOffset(Math.floor(utc/1000), dstDataBase[el.town])*3600000 );
+		now = new Date(utc + dstOffset(Math.floor(utc/1000), dstDataBase[el.zone])*3600000 );
 	}
  	return now.dateFormat(el.format);
   }
        
   $.fn.jclock.defaults = {
     format: 'H:i:s',
-	utc: '',
+	zone: '',
 	utc_offset: 0,
-	town: '',
 	serveur_offset:0
   };
  
