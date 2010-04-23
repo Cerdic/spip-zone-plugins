@@ -1,6 +1,11 @@
+
+[(#SET{valeur_uniquement, [(#ENV{valeur_uniquement}|=={oui}|oui)]})]
+[(#SET{enfants,[(#ENV*{saisies}|et{#ENV*{saisies}|is_array})]})]
+
+[(#REM) Cas normal avec présentation ]
+[(#GET{valeur_uniquement}|non)
 <div class="afficher afficher_#ENV{nom} saisie_#ENV{type_saisie}[ (#ENV{li_class})]">
 	[(#REM) S'il y a des enfants on inclut que la vue ]
-	#SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
 	[(#GET{enfants}|oui)
 		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
 	]
@@ -16,3 +21,20 @@
 		</div>
 	]
 </div>
+]
+
+[(#REM) Cas où on demande uniquement la valeur ]
+[(#GET{valeur_uniquement}|oui)
+	[(#REM) S'il y a des enfants on inclut que la vue ]
+	[(#GET{enfants}|oui)
+		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+	]
+	[(#GET{enfants}|non)
+		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|oui)
+			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+		]
+		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
+			[(#ENV*{valeur}|sinon{<:saisies:vue_sans_reponse:>}|propre)]
+		]
+	]
+]
