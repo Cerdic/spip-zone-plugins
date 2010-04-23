@@ -13,7 +13,7 @@
 					<p class="explication"><:langonet:info_lister:></p>
 					<ul>
 						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
-							<label for="fichier_langue"><:langonet:label_fichier:></label>
+							<label for="fichier_langue"><:langonet:label_fichier_liste:></label>
 							<p class="explication"><:langonet:info_fichier_liste:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
 							[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
@@ -25,6 +25,7 @@
 			[<li class="fieldset">
 				<fieldset>
 					<h3 class="legend"><:langonet:legende_table:></h3>
+					[<p class="explication">(#ENV*{message_ok}|table_valeur{explication})</p>]
 					(#ENV*{message_ok}|table_valeur{table})
 				</fieldset>
 			</li>]

@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 	'bouton_langonet' => 'V&eacute;rifier les langues',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
+	'bouton_lister' => 'Afficher',
 	'bouton_verifier' => 'V&eacute;rifier',
 
 // E
@@ -20,11 +21,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // I
 	'info_arborescence_scannee' => 'Choisissez le r&eacute;pertoire de base dont l\'arborescence sera scann&eacute;e',
 	'info_chemin_langue' => 'Dossier dans lequel est install&eacute; le fichier de langue (exemple : <em>plugins/rainette/lang/</em>, ou <em>ecrire/lang/</em>)',
+	'info_fichier_liste' => 'Choisissez le fichier de langue dont vous voulez afficher les items, parmi ceux pr&eacute;sents dans le site.',
 	'info_fichier_verifie' => 'Choisissez le fichier de langue &agrave; v&eacute;rifier parmi ceux pr&eacute;sents dans le site.',
 	'info_generer' => 'Cette option vous permet de g&eacute;n&eacute;rer, &agrave; partir d\'une langue source, le fichier de langue d\'un module donn&eacute; dans une langue cible. Si le fichier cible existe d&eacute;j&agrave; son contenu est r&eacute;utilis&eacute; pour construire le nouveau fichier.',
+	'info_lister' => 'Cette option vous permet de visualiser les items d\'un fichier de langue class&eacute;s par ordre alphab&eacute;tique.',
 	'info_langue' => 'Abr&eacute;viation de la langue (exemple : <em>fr</em>, <em>en</em>, <em>es</em>...)',
 	'info_mode' => 'Correspond &agrave; la chaine qui sera ins&eacute;r&eacute;e lors de la cr&eacute;ation d\'un nouvel item pour la langue cible.',
 	'info_module' => 'Correspond au pr&eacute;fixe du fichier de langue hors abr&eacute;viation de la langue (exemple : <em>rainette</em> pour le plugin de m&ecirc;me nom, ou <em>ecrire</em> pour SPIP)',
+	'info_table' => 'Vous pouvez consulter ci-dessous la liste alphab&eacute;tique des items de langue du fichier &laquo;<em>@langue@</em>&raquo; (@total@). Chaque bloc affiche les items ayant la m&ecirc;me initiale, le raccourci en gras et le texte affich&eacute; en regard. Survolez une initiale pour faire appara&icirc;tre la liste correspondante.',
 	'info_verifier' => 'Cette option vous permet de v&eacute;rifier les fichiers de langue d\'un module donn&eacute; sous deux angles compl&eacute;mentaires. Il est possible, soit de v&eacute;rifier si des items de langue utilis&eacute;s dans un groupe de fichiers (un plugin, par exemple) ne sont pas d&eacute;finis dans le fichier de langue idoine, soit que certains items de langue d&eacute;finis ne sont plus utilis&eacute;s.',
 
 // L
@@ -32,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_avertissement' => 'Avertissements',
 	'label_chemin_langue' => 'Localisation du fichier de langue',
 	'label_erreur' => 'Erreurs',
+	'label_fichier_liste' => 'Fichier de langue',
 	'label_fichier_verifie' => 'Langue &agrave; v&eacute;rifier',
 	'label_langue_cible' => 'Langue cible',
 	'label_langue_source' => 'Langue source',
@@ -65,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_non_utilises_0' => 'Tous les items de langue d&eacute;finis  dans le fichier de langue &laquo;<em>@langue@</em>&raquo; sont bien utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo;.',
 	'message_ok_non_utilises_1' => 'L\'item de langue ci-dessous est bien d&eacute;fini dans le fichier de langue &laquo;<em>@langue@</em>&raquo;, mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; :',
 	'message_ok_non_utilises_n' => 'Les @nberr@ items de langue ci-dessous sont bien d&eacute;finis dans le fichier de langue &laquo;<em>@langue@</em>&raquo;, mais ne sont pas utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; :',
+	'message_ok_table_creee' => 'La table des items du fichier de langue @langue@ a &eacute;t&eacute; correctement cr&eacute;&eacute;e.',
 	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'@module@:item_\'.$variable)).',
 	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-&ecirc;tre utilis&eacute; dans un contexte complexe. Nous vous invitons &agrave; le v&eacute;rifier :',
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-&ecirc;tre utilis&eacute;s dans un contexte complexe. Nous vous invitons &agrave; les v&eacute;rifier un par un :',

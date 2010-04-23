@@ -30,10 +30,22 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		include(_DIR_RACINE.$ou_langue.$module.'_'.$langue.'.php');
 	}
 
+	// On range la table des items en n tables, une par initiale
+	$table_brute = $GLOBALS[$var_source];
+	ksort($table_brute);
+	$initiale = '';
+	foreach ($table_brute as $_item => $_traduction) {
+		if ($initiale != $_item[0]) {
+			// Nouvelle initiale
+			$initiale = $_item[0];
+		}
+		$table[$initiale][$_item] = $_traduction;
+	}
+	
 	// On prepare le tableau des resultats
-	$table = $GLOBALS[$var_source];
-	ksort($table);
 	$resultats['table'] = $table;
+	$resultats['total'] = count($table_brute);
+	$resultats['langue'] = $ou_langue . $module . '_' . $langue . '.php';
 
 	return $resultats;
 }

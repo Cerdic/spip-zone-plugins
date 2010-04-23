@@ -18,9 +18,6 @@ function formulaires_langonet_lister_traiter() {
 	$langonet_lister_items = charger_fonction('langonet_lister_items','inc');
 
 	// Recuperation des champs du formulaire
-	//   $rep        -> nom du repertoire parent de lang/
-	//                  'langonet' pour 'langonet/lang/'
-	//                  correspond generalement au 'nom' du plugin
 	//   $module     -> prefixe du fichier de langue
 	//                  'langonet' pour 'langonet_fr.php'
 	//                  parfois different du 'nom' du plugin
@@ -50,15 +47,41 @@ function formulaires_langonet_lister_traiter() {
 
 function formater_table($resultats) {
 
+	include_spip('inc/layer');
 	// On initialise le tableau des textes resultant contenant les index:
 	// - ["message_ok"]["resume"] : le message de retour ok fournissant le fichier des resultats
 	// - ["message_ok"]["table"] : le table des items
 	// - ["message_erreur"] : le message d'erreur si on a erreur de traitement pendant l'execution
 	$retour = array();
-	$texte = 'bonjour';
+	
+	// Creation de la liste:
+	// - un bloc dŽpliable par lettre initiale
+	// - le bloc est un tableau item/traduction
+	$texte = '';
+	foreach ($resultats['table'] as $_initiale => $_table) {
+		// On demarre un nouveau bloc depliable et une nouvelle table
+		$i = 0;
+		$texte .= bouton_block_depliable(strtoupper($_initiale) . ' (' . count($_table) . ')', false);
+		$texte .= debut_block_depliable(false);
+		$texte .= '<div class="cadre_padding">' . "\n";
+		$texte .= '<table style="width: 100%;" class="spip">' . "\n";
+		$texte .= '<tbody>' . "\n";
+		// On ajoute une ligne par item
+		foreach ($_table as $_item => $_traduction) {
+			$texte.= '<tr class="' . ($i % 2 == 0 ? 'row_even' : 'row_odd') . '">' . "\n";
+			$texte.= '<td style="border: medium none;"><strong>' . $_item . '</strong></td>' . "\n";
+			$texte.= '<td style="border: medium none;">' . $_traduction . '</td>' . "\n";
+			$texte.= '</tr>' . "\n";
+			$i += 1;
+		}
+		// On ferme la table et le bloc courant
+		$texte .= '</tbody>' . "\n" . '</table>' . "\n" . '</div>' . "\n";
+		$texte .= fin_block();
+	}
 
 	// Tout s'est bien passe on renvoie le message ok et les resultats de la verification
-	$retour['message_ok']['resume'] = _T('langonet:message_ok_table_items');
+	$retour['message_ok']['resume'] = _T('langonet:message_ok_table_creee', array('langue' => $resultats['langue']));
+	$retour['message_ok']['explication'] =  _T('langonet:info_table', array('total' => $resultats['total'], 'langue' => $resultats['langue']));
 	$retour['message_ok']['table'] = $texte;
 
 	return $retour;
