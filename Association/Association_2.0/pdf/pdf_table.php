@@ -83,6 +83,10 @@ class PDF_Table extends FPDF{
 	function Table($query,$prop=array()){
 		//Exécute la requête
 		$res=spip_query($query);
+		$this->Query($res,$prop);
+	}
+
+	function Query($res, $prop=array()){
 		//Traite les propriétés
 		if(!isset($prop['width']))
 			$prop['width']=0;

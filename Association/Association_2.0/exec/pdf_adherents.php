@@ -1,4 +1,5 @@
 <?php
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_pdf_adherents()
@@ -10,6 +11,7 @@ function exec_pdf_adherents()
 	}
 
 	define('FPDF_FONTPATH','font/');
+	include_spip('association_fonctions');
 	include_spip('pdf/pdf_table');
 	include_spip('inc/charsets');
 
@@ -18,7 +20,7 @@ function exec_pdf_adherents()
 
 	switch($filtre) {
 		case "defaut": 		$critere="statut_interne IN ('ok','echu','relance')";break;
-		case "ok": 			$critere="statut_interne='ok'";break;
+		case "ok": 		$critere="statut_interne='ok'";break;
 		case "echu": 		$critere="statut_interne='echu'";break;
 		case "relance": 	$critere="statut_interne='relance'";break;
 		case "sorti": 		$critere="statut_interne='sorti'";break;	   
@@ -62,7 +64,9 @@ function exec_pdf_adherents()
 		'color2'=>array(255,255,255),
 		'padding'=>2
 	);
-	$pdf->Table("SELECT * FROM spip_auteurs_elargis WHERE $critere ORDER BY nom_famille,".lire_config('association/indexation'),$prop);
+	$order = lire_config('association/indexation');
+	$order = 'nom_famille' . ($order ? (",$order") : '');
+	$pdf->Query(association_auteurs_elargis_select('*', '', $critere, '', $order), $prop);
 	$pdf->Output();
 }
 ?>

@@ -11,7 +11,6 @@
 	**/
 	
 	function association_onglets(){
-		global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
 		
 		echo debut_onglet();
 			
