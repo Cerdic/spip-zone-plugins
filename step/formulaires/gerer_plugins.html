@@ -1,16 +1,58 @@
 <div class='formulaire_spip formulaire_#FORM'>
 
-	<h3 class='titrem'>[(#CHEMIN{images/step-paquet-24.png}|balise_img{'',cadre-icone})]<:step:paquets_liste:></h3>
-
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[<div class="ajax">(#ENV{_todo}|oui)
+	[(#ENV{_todo}|oui)
 		[(#FORMULAIRE_STEP_ACTIONS{[(#ENV*{_todo}|unserialize)]})]
-	</div>
+	]
 	<script type="text/javascript"><!--
 		(function ($){
 		$(document).ready(function() {
+			$('.cacher').hide();
+			var i = i;
+			var img_plus = '[(#CHEMIN{images/rechercher-plus-16.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>}|texte_script)]';
+			var img_moins = '[(#CHEMIN{images/replier-12.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>}|texte_script)]';
+			var text_plus = '<:step:rechercher_plus|texte_script:>';
+			var text_moins = '<:step:rechercher_moins|texte_script:>';
+			$('ul.more').each(function(){
+				i = i+1;
+				if ($(this).is('.cacher')) {
+					var action = 'plus';
+					var img = img_plus;
+					var text = text_plus;
+				}else{
+					var action = 'moins';
+					var img = img_moins;
+					var text = text_moins;
+				}
+				var append = '<li class="editer_more">';
+				append += '<label for="rechercher"> </label>';
+				append += '<button name="more' + i + '" class="button rechercher_'+action+'" title="'+text+'">';
+				append += img;
+				append += '</button></li>';
+				$(this).prev('ul').append(append);
+			});
+			$('.editer_recherche_paquet button.rechercher_plus').each(function(){
+				$(this).click(function(){
+					if ($(this).is('.rechercher_plus')) {
+						$(this).parents('ul').next('ul').slideDown();
+						$(this)
+							.removeClass('rechercher_plus')
+							.addClass('rechercher_moins')
+							.attr('title',text_moins)
+							.html(img_moins);
+					}else{
+						$(this).parents('ul').next('ul').slideUp();
+						$(this)
+							.removeClass('rechercher_moins')
+							.addClass('rechercher_plus')
+							.attr('title',text_plus)
+							.html(img_plus);
+					}
+					return false;
+				});
+			});
 			function autosubmit(){
 				go = $('.formulaire_step_actions form.ok');
 				if (go.is(':visible')) {
@@ -24,7 +66,6 @@
 		})
 		})(jQuery);
 		//--></script>
-	]
 
 	[(#REM|oui)
 		[<div class="reponse_formulaire reponse_formulaire_ok">
@@ -51,28 +92,18 @@
 
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-
 		<p class='explication'>
 			<:step:paquets_activer_info:>
 			[(#AUTORISER{telecharger, plugins})<:step:paquets_telecharger_info:>]
 		</p>
-
-
 		<BOUCLE_plugs(PLUGINS){0,1}>
-
 		<div class="editer_recherche_paquet">
 			<ul>
 				<li class="editer_recherche">
 					<label for='step_selection'><:step:rechercher:></label>
 					<input type='text' name='recherche' class='text' id='step_selection' value='#ENV{recherche}' />
+					<input type='submit' name='rechercher' class='submit' style="display:none;" value='<:info_rechercher:>' />
 				</li>
-
-
-				<li class="editer_gogogo">
-					<label for="rechercher">&nbsp;</label>
-					<input type='submit' name='rechercher' class='submit' value='<:info_rechercher:>' />
-				</li>
-
 				[(#SET{afficher,[(#ENV{actif}|!={''}
 					|ou{[(#ENV{present}|!={''})]}
 					|ou{[(#ENV{categorie}|!={''})]}
@@ -80,25 +111,20 @@
 					|ou{[(#ENV{obsolete}|!={non})]}
 					|ou{[(#ENV{superieur}|!={non})]}
 					|?{afficher,cacher})]})]
-				<li class="editer_more">
-					[(#GET{afficher}|=={cacher}|oui)
-					<label for="rechercher">&nbsp;</label>
-					<button name='more' class='button rechercher_plus' title="<:step:rechercher_plus:>" onClick="$('.editer_recherche_paquet ul.more').removeClass('cacher'); $(this).parent().html(''); return false;">
-						[(#CHEMIN{images/rechercher-plus-16.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>})]
-					</button>
-					]
-				</li>
 			</ul>
 			<ul class="more[ (#GET{afficher})]">
-
+				<B_zones_presentes>
 				<li class="editer_present">
 					<label for="step_ou"><:step:ou:></label>
+					<BOUCLE_zones_presentes(ZONES_PLUGINS){0,1}>
 					<select name="present" id="step_ou">
 						<option value=""><:step:ou_tous:></option>
 						<option value="oui"[ (#ENV{present}|=={oui}|oui)selected='selected']><:step:ou_local:></option>
 						<option value="non"[ (#ENV{present}|=={non}|oui)selected='selected']><:step:ou_distant:></option>
 					</select>
+					</BOUCLE_zones_presentes>
 				</li>
+				</B_zones_presentes>
 
 				<li class="editer_categorie">
 					#REM{
@@ -123,26 +149,14 @@
 						<option value="theme"[ (#ENV{categorie}|=={theme}|oui)selected='selected']><:tag:theme:></option>
 					</select>
 				</li>
-
-
-
-
 				[(#SET{afficher,[(#ENV{etat}
 					|ou{[(#ENV{actif}|!={''})]}
 					|ou{[(#ENV{zone}|!={''})]}
 					|ou{[(#ENV{obsolete}|!={non})]}
 					|ou{[(#ENV{superieur}|!={non})]}
 					|?{afficher,cacher})]})]
-				<li class="editer_more">
-					[(#GET{afficher}|=={cacher}|oui)
-					<label for="rechercher">&nbsp;</label>
-					<button name='more' class='button rechercher_plus' title="<:step:rechercher_plus:>" onClick="$('.editer_recherche_paquet ul.more2').removeClass('cacher'); $(this).parent().html(''); return false;">
-						[(#CHEMIN{images/rechercher-plus-16.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>})]
-					</button>
-					]
-				</li>
 			</ul>
-			<ul class="more2[ (#GET{afficher})]">
+			<ul class="more[ (#GET{afficher})]">
 
 				<li class="editer_actif">
 					<label for="step_statut"><:step:statut:></label>
@@ -163,7 +177,7 @@
 						<option value="experimental"[ (#ENV{etat}|=={experimental}|oui)selected='selected']><:step:etat_experimental:></option>
 					</select>
 				</li>
-
+				<B_zones>
 				<li class="editer_zone">
 					<label for="step_zone"><:step:zone:></label>
 					<select name="id_zone" id="step_zone">
@@ -171,6 +185,7 @@
 						<BOUCLE_zones(ZONES_PLUGINS)><option value="#ID_ZONE"[ (#ENV{id_zone}|=={#ID_ZONE}|oui)selected='selected']>#NOM</option></BOUCLE_zones>
 					</select>
 				</li>
+				</B_zones>
 
 				<li class="editer_obsolete">
 					<label for="step_obsolete"><:step:obsolete:></label>
@@ -190,23 +205,28 @@
 					</select>
 				</li>
 			</ul>
+			<p class="boutons">
+				<input type='submit' name='rechercher' class='submit' value='<:info_rechercher:>' />
+			</p>
 		</div>
 
-		<input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
-		[(#REM) supprime par javascript si present]
-		<input type="hidden" name="nojs" id='input_nojs' class='hidden' value="1" />
-		[(#REM) conserver l'affichage des recents tant que pas de recherche faite ]
-		[(#SET{recent,[(#ENV{rechercher,#ENV{recent}}|=={1}|?{1,''})]})]
-		<input type="hidden" name="recent" class='hidden' value="[(#GET{recent}|?{1,0})]" />
-		[(#SET{titre,[(#GET{recent}|=={1}|?{<:step:plugins_utilises_recemment:>,''})]})]
-		<INCLURE{fond=prive/liste/plugins_dispos}{env}{sinon=<:step:pas_de_plugin_trouve:>}{titre=#GET{titre}}{recent=#GET{recent}} />
-
+		<ul>
+			<li class="haut">
+				<input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
+				[(#REM) supprime par javascript si present]
+				<input type="hidden" name="nojs" id='input_nojs' class='hidden' value="1" />
+				[(#REM) conserver l'affichage des recents tant que pas de recherche faite ]
+				[(#SET{recent,[(#ENV{rechercher,#ENV{recent}}|=={1}|?{1,''})]})]
+				<input type="hidden" name="recent" class='hidden' value="[(#GET{recent}|?{1,0})]" />
+				[(#SET{titre,[(#GET{recent}|=={1}|?{<:step:plugins_utilises_recemment:>,''})]})]
+				<INCLURE{fond=prive/liste/plugins_dispos,sinon=<:step:pas_de_plugin_trouve:>,titre=#GET{titre},recent=#GET{recent},env} />
+			</li>
+		</ul>
 		<p class='boutons'>
-			<input type="submit" name="upgrade" value = "<:step:selectionner_maj:>" />
-			<input type="submit" name="update_local" value = "<:step:actualiser:>" />
+			<input type="submit" class="submit" name="upgrade" value="<:step:selectionner_maj:>" />
+			<input type="submit" class="submit" name="update_local" value="<:step:actualiser:>" />
 		</p>
-
 		</BOUCLE_plugs>
-		</div></form>
-
+		</div>
+	</form>
 </div>

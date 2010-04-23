@@ -1,4 +1,4 @@
-[(#SET{totodo,[(#ENV**{_todo}|unserialize)]})]<B_plugins>		
+[(#SET{totodo,[(#ENV**{_todo}|unserialize)]})]<B_plugins>
 <div class="liste-elements plugins_dispos">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:step:plugins_trouves:> : #GRAND_TOTAL})</strong></caption>]
@@ -16,10 +16,10 @@
 			[(#SET{todo,[(#GET*{totodo}|table_valeur{#ID_PLUGIN})]})]
 			<td class='logo'>
 				[(#DOSSIER|et{#CHAMP_SQL{logo}})
-					[(#CONSTANTE|constant|concat{#DOSSIER}|concat{#CHAMP_SQL{logo}}|image_reduire{36,48})]
+					[(#CONSTANTE|constant|concat{#DOSSIER}|concat{#CHAMP_SQL{logo}}|image_reduire{36,48}|inserer_attribut{alt,''})]
 				]
 			</td>
-			
+
 			<td class='nom'>
 				<div class='nom[ (#SHORTDESC|oui)desc]'>
 					<h4>#NOM</h4>[<p>(#SHORTDESC)</p>]
@@ -33,7 +33,7 @@
 						|inserer_attribut{title,<:step:plugin_upgrade_possible_version{version=#MAJ_VERSION}:>}
 						|inserer_attribut{alt,<:step:plugin_upgrade_possible_version{version=#MAJ_VERSION}:>})]]
 			</td>
-			
+
 			<td class='info'>
 				<button class='info' name='id_plugin_info' value='#ID_PLUGIN'>
 				[(#CHEMIN{images/info-12.png}
@@ -50,21 +50,22 @@
 	</tbody>
 </table>
 </div>
-		<script type="text/javascript"><!--
-		(function ($){
+<script type="text/javascript"><!--
+	(function ($){
 		$(document).ready(function() {
 			$('#input_nojs').remove();
 			// charger en ajax le descriptif si on clique le titre du plugin
 			// virer le bouton pour consultation hors js
-			
+
 			$('.plugins_dispos tbody tr td.info button').remove();
 			$('.plugins_dispos tbody').addClass('super')
 			.find('tr:not(.step_plugin_info)')
+			.css('cursor','pointer')
 			.click(function() {
 				$('.plugins_dispos tr.replier').removeClass('replier');
 				me = $(this);
 				if (!me.next('.step_plugin_info').is(':visible')) {
-					me.addClass('replier').find('td.info').append('<span class="image_loading right"></span>').animeajax();
+					me.addClass('replier').find('td.info').addClass('ajaxloading').append('<span class="image_loading right"></span>').animeajax();
 					$('.step_plugin_info').remove();
 					id_plugin = me.attr('id').substr(4);
 					hash = me.attr('class');
@@ -72,15 +73,15 @@
 						me.after(data);
 						me.find('.image_loading').remove();
 					});
-				} else {	
+				} else {
 					$('.step_plugin_info').remove();
 				}
-				return false;	
+				return false;
 			});
 		})
-		})(jQuery);
-		//--></script>
-		
+	})(jQuery);
+//--></script>
+
 </B_plugins>[
 <div class="liste-elements plugins_dispos"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_plugins>

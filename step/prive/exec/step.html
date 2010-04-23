@@ -2,7 +2,6 @@
 
 	<h1><:step:gestion_des_plugins:></h1>
 
-
 	<!--#navigation-->
 	<div class="cadre cadre-info gestion_des_plugins">
 		<:info_gauche_admin_tech:>
@@ -29,8 +28,10 @@
 	</div>
 	<!--/#navigation-->
 
-
+	<h3 class='titrem'>[(#CHEMIN{images/step-paquet-24.png}|balise_img{'',cadre-icone})]<:step:paquets_liste:></h3>
+	<div class="ajax">
 	#FORMULAIRE_GERER_PLUGINS
+	</div>
 	<br />
 	#FORMULAIRE_GERER_ZONES_PLUGINS
 
@@ -60,5 +61,4 @@
 	})
 	})(jQuery);
 	//--></script>
-	
 ]

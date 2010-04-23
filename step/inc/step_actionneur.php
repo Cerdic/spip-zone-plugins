@@ -188,7 +188,6 @@ class Actionneur {
 	}
 
 
-
 	function neutre($info, $action) {
 		$info['todo'] = $action;
 		$this->log("NEUTRE:  $info[p] $action");
@@ -235,17 +234,15 @@ class Actionneur {
 	}
 
 
-
-
 	function presenter_actions() {
 		$affiche = "";
 		if ($this->end or $this->done) {
 			$affiche .= "<ul>";
 			foreach ($this->done as $i) {
-				$affiche .= "\t<li>$i[todo] de «" . typo($i['n']) . "» ($i[v])". ($i['done'] ? " <span class='done_ok'>[ok]</span>" : " <span class='done_err'>[fail]</span>") . "</li>\n";
+				$affiche .= "\t<li>"._T('step:message_action_finale_'.$i['todo'].'_'.($i['done']?'ok':'fail'),array('plugin'=>$i[n],'version'=>$i[v]))."</li>\n";
 			}
 			foreach ($this->end as $i) {
-				$affiche .= "\t<li>$i[todo] de «" . typo($i['n']) . "» ($i[v])</li>\n";
+				$affiche .= "\t<li>"._T('step:message_action_'.$i['todo'],array('plugin'=>$i[n],'version'=>$i[v]))."</li>\n";
 			}
 			$affiche .= "</ul>\n";
 		}
@@ -731,8 +728,6 @@ class Actionneur {
 	}
 
 }
-
-
 
 // scandir pour php4
 // http://fr2.php.net/manual/fr/function.scandir.php#73062

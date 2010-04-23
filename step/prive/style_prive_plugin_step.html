@@ -13,7 +13,7 @@
 /**
  Pris dans Bonux !
 **/
- 
+
 /* Titre d'une boite */
 .titrem { font-weight: bold; }
 div.titrem,h3.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;}
@@ -93,7 +93,7 @@ h3.titrem {position:relative;}
 
 
 .plugins_dispos tbody tr.replier td,
-.plugins_dispos tbody tr.replier:hover td {background-color:#888; color:white;}
+.plugins_dispos tbody tr.replier:hover td {background-color:#GET{foncee}; color:white;}
 .plugins_dispos tbody tr.replier td div.nom p {color:white;}
 
 .plugins_dispos table.spip td.actions {padding-top:5px; padding-left:20px; background-repeat:no-repeat !important; background-position: 4px 6px !important;}
@@ -121,7 +121,7 @@ h3.titrem {position:relative;}
 .editer_recherche_paquet li.editer_present select { width:160px; }
 .editer_recherche_paquet li.editer_categorie select { width:240px; }
 .editer_recherche_paquet li.editer_more {width:20px; float:right;}
-.editer_recherche_paquet li button.rechercher_plus {padding:0px; display:block; clear:left;}
+.editer_recherche_paquet li button.rechercher_plus,.editer_recherche_paquet li button.rechercher_moins {border:none;padding:0px; display:block; clear:left;}
 .editer_recherche_paquet li input.submit { font-weight:normal; padding:1px;
 	font-size:96%; display:block; clear:left;}
 
@@ -136,12 +136,12 @@ h3.titrem {position:relative;}
 .editer_recherche_paquet ul.cacher {display:none;}
 
 /** info d'un plugin */
-.plugins_dispos table.spip tr.step_plugin_info td {vertical-align:top; background-color:#888;}
+.plugins_dispos table.spip tr.step_plugin_info td {vertical-align:top; background-color:#GET{foncee};}
 .step_plugin_info dl {overflow:auto; margin:.2em .5em .5em; padding:.6em; border:1px solid #fff; background:#fff;
-	border-radius:5px; -moz-border-radius:5px; -moz-border-radius:5px; 
+	border-radius:5px; -moz-border-radius:5px; -moz-border-radius:5px;
 }
-.step_plugin_info dt {font-weight:bold; width:35px; float:left; display:block; padding-top:2px;}
-.step_plugin_info dd {padding-top:2px; float:left; width:130px; margin-right:20px;}
+.step_plugin_info dt {font-weight:bold; width:17%; float:left; display:block; padding-top:2px;}
+.step_plugin_info dd {padding-top:2px; float:left; width:31%;margin:0 1px 0 0;}
 .step_plugin_info dd.description {clear:left; width:100%; margin:0 0 .5em 0; border-bottom:1px solid #ddd;}
 .step_plugin_info dd.description > p:first-child {margin-top:0;}
 .step_plugin_info dt.description {display:none;}
