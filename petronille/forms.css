@@ -2,10 +2,12 @@
 
    forms.css
    Base pour formulaires
-   Petronille - 2010
+   Petronille - romy.tetue.net - 2010
 
 -------------------------------------------------------------- */
 
 form * { font-size: 100%; line-height: inherit; font-family: inherit; }
+
+.spip_surligne { background-color: yellow; }
 
 /* end */
