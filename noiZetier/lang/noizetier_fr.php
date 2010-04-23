@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Texte&nbsp;:',
 	
 	'warning_noisette_plus_disponible' => 'ATTENTION&nbsp: cette noisette n\'est plus disponible.',
-	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n\'est plus accessible. Il se peut qu\'il s\'agisse d\'une noisette fournie par un plugin que vous avez d&eacute;sactiv&eacute; ou d&eacute;sinstall&eacute;.',
+	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n\'est plus accessible. Il se peut qu\'il s\'agisse d\'une noisette n&eacute;cessitant un plugin que vous avez d&eacute;sactiv&eacute; ou d&eacute;sinstall&eacute;.',
 
 );
 
