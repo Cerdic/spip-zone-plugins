@@ -95,6 +95,7 @@ function formulaires_editer_composition_noizetier_traiter($id, $nouveau){
 	include_spip('inc/autoriser');
 	$retours = array();
 	if (autoriser('configurer', 'noizetier')){
+		$nouveau = ($nouveau == 'oui') ? true : false;
 		$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
 		$type = _request('type');
 		$compo = _request('compo');
@@ -110,6 +111,21 @@ function formulaires_editer_composition_noizetier_traiter($id, $nouveau){
 		);
 		ecrire_meta('noizetier_compositions',serialize($noizetier_compositions));
 		$retours['message_ok'] = _T('noizetier:formulaire_composition_mise_a_jour');
+		
+		// S'il s'agit d'une nouvelle composition, on la préremplie avec la config de la page mère
+		if ($nouveau) {
+			include_spip('base/abstract_sql');
+			$config_mere = sql_allfetsel(
+				'rang, type, composition, bloc, noisette, parametres',
+				'spip_noisettes',
+				'type='.sql_quote($type).' AND composition=""'
+			);
+			if (count($config_mere)>0) {
+				foreach($config_mere as $cle => $noisette)
+					$config_mere[$cle]['composition'] = $compo;
+				sql_insertq_multi('spip_noisettes',$config_mere);
+			}
+		}
 		
 		// Si on est dans l'espace privé, on redirige vers la liste des compos
 		if (_request('exec') == 'noizetier_composition_editer')
