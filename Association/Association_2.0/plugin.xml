@@ -24,20 +24,11 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>inc_association.php</inclure>
 	</pipeline>
-	
-	<pipeline>	
-		<nom>affiche_milieu</nom>
-		<action>affiche_milieu</action>
-		<inclure>inc_association.php</inclure>
-	</pipeline>
-
 	
 	<pipeline>
 		<nom>I2_cfg_form</nom>
 		<action>I2_cfg_form</action>		
-		<inclure>inc_association.php</inclure>
 	</pipeline>
 		
 	<pipeline>

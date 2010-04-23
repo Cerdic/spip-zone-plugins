@@ -12,7 +12,36 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-	//Conversion de date
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_ASSOCIATION',(_DIR_PLUGINS.end($p)));
+
+
+function association_ajouterBoutons($boutons_admin) {
+		// si on est admin
+	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
+
+		$boutons_admin['naviguer']->sousmenu['association']= new Bouton(
+			"../"._DIR_PLUGIN_ASSOCIATION."/img_pack/annonce.gif",  // icone
+			_T('asso:titre_menu_gestion_association') //titre
+			);
+			
+	}
+	return $boutons_admin;
+}
+
+
+function association_ajouterOnglets($flux) {
+		$rubrique = $flux['args'];
+		return $flux;
+}
+	
+function association_I2_cfg_form($flux) {
+        $flux .= recuperer_fond('fonds/inscription2_association');
+	    return ($flux);
+}	
+	
+
+//Conversion de date
 function association_datefr($date) { 
 		$split = explode('-',$date); 
 		$annee = $split[0]; 
