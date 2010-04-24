@@ -31,28 +31,32 @@
  * @return Object
  */
 function cfg_charger_depot($args){
-	list($depot,$args) = explode('::',$args,2);
-
-	// si un seul argument, il faut trouver le depot
-	if (!$args) {
-		$args = $depot;
-		if ($args[0] == '~'){
-			$depot = 'tablepack';	
-		} elseif (
-			(list($head, $body) = explode('/',$args,2)) &&
-			(strpos($head,':') !== false)) {
-				$depot = 'tablepack';
-		} else {
-			if (strpos($args,'/') !== false)
-				$depot = 'metapack';
-			else 
-				$depot = 'meta';
-		}
+	$r = explode('::',$args,2);
+	if (count($r) > 1)
+		list($depot,$args) = $r;
+	else {
+		// si un seul argument, il faut trouver le depot
+		$depot = cfg_charger_depot_args($args);
 	}
-
 	$depot = new cfg_depot($depot);
 	$depot->charger_args($args);
 	return $depot;
+}
+
+function cfg_charger_depot_args($args){
+
+		if ($args[0] == '~'){
+			return'tablepack';	
+		} elseif (
+			(list($head, ) = explode('/',$args,2)) &&
+			(strpos($head,':') !== false)) {
+				return'tablepack';
+		} else {
+			if (strpos($args,'/') !== false)
+				return'metapack';
+			else 
+				return'meta';
+		}
 }
 
 
@@ -258,8 +262,8 @@ class cfg_depot{
  * $unserialize est mis par l'histoire, et affecte le depot 'meta'
  *
  * @param  string  $cfg          la config
- * @param  mixed   $def          un défaut optionnel
- * @param  boolean $unserialize  n'affecte que le dépôt 'meta'
+ * @param  mixed   $def          un defaut optionnel
+ * @param  boolean $unserialize  n'affecte que le depot 'meta'
  * @return string
  */
 function lire_config($cfg='', $def=null, $unserialize=true) {

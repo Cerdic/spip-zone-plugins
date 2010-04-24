@@ -90,7 +90,7 @@ class cfg_depot_metapack
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
 		$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
-		$this->_ici = &$this->monte_arbre($this->_ici, $this->param['cfg_id']);
+		$this->_ici = &$this->monte_arbre($this->_ici, isset($this->param['cfg_id']) ? $this->param['cfg_id'] : '');
 		return true;
 	}
 	
@@ -107,7 +107,7 @@ class cfg_depot_metapack
 		$ici = &$this->_ici;
     	
 		// utile ??
-		if ($this->param['cfg_id']) {
+		if (isset($this->param['cfg_id'])) {
 			$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$ici[$name] = $cles[$i];
