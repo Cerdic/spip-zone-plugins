@@ -114,6 +114,7 @@
 			</ul>
 			<ul class="more[ (#GET{afficher})]">
 				<B_zones_presentes>
+				#SET{zones,ok}
 				<li class="editer_present">
 					<label for="step_ou"><:step:ou:></label>
 					<BOUCLE_zones_presentes(ZONES_PLUGINS){0,1}>
@@ -223,7 +224,8 @@
 			</li>
 		</ul>
 		<p class='boutons'>
-			<input type="submit" class="submit" name="upgrade" value="<:step:selectionner_maj:>" />
+			[(#GET{zones}|=={ok}|oui)
+			<input type="submit" class="submit" name="upgrade" value="<:step:selectionner_maj:>" />]
 			<input type="submit" class="submit" name="update_local" value="<:step:actualiser:>" />
 		</p>
 		</BOUCLE_plugs>
