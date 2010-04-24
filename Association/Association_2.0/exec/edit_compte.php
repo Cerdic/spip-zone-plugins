@@ -23,21 +23,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		}
 		
 		$url_action_comptes =generer_url_ecrire('action_comptes');
-		
-		$action=$_REQUEST['agir'];
-		$id_compte=$_REQUEST['id'];
+
+		$id_compte= intval(_request('id'));
+		$action= _request('agir');
+		if (!preg_match('/^\w+$/', $action)) $action='';
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$query = spip_query ("SELECT * FROM spip_asso_comptes  WHERE id_compte=$id_compte") ;
-		while ($data = spip_fetch_array($query)) {
-			$imputation=$data['imputation'];
-			$date=$data['date'];
-			$recette=$data['recette'];
-			$depense=$data['depense'];
-			$journal=$data['journal'];
-			$justification=$data['justification'];
-		}
-		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('Gestion pour Association')) ;
 		
 		association_onglets();
@@ -52,9 +44,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
-		
+
+		$data = sql_fetsel('*', 'spip_asso_comptes', "id_compte=$id_compte") ;
+		if ($data) {
+		$imputation=$data['imputation'];
+		$date=$data['date'];
+		$recette=$data['recette'];
+		$depense=$data['depense'];
+		$journal=$data['journal'];
+		$justification=$data['justification'];
+
 		debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
-		
 		echo '<form action="'.$url_action_comptes.'" method="POST">';
 		
 		echo '<label for="imputation"><strong>Imputation :</strong></label>';
@@ -96,6 +96,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		  echo fin_gauche(),fin_page();
+		}
+		echo fin_gauche(),fin_page();
 	}  
 ?>
