@@ -163,9 +163,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if (empty($debut)) { $debut=0; }
 		if (empty($lettre)) 
 			$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere . $critere2, '', "nom_famille ", "$debut,$max_par_page" );
 		while ($data = spip_fetch_array($query)) {	
-			
+			$id_auteur=$data['id_auteur'];			
 			switch($data['statut_interne'])	{
 				case "echu": $class= "impair"; break;
 				case "ok": $class="valide";	break;
@@ -176,17 +177,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			
 			echo '<tr> ';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>';
-			if ($indexation=="id_asso") { echo $data["id_asso"];}
-			else { echo $data["id_auteur"];}
+			echo ($indexation=="id_asso") ? $data["id_asso"] : $id_auteur;
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
-			$logo="../IMG/auton".$data['id_auteur'];
-			$id_auteur=$data['id_auteur'];
-			if(@file('../IMG/auton'.$id_auteur.'.jpg')!=""){
-             echo '<img src="../IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
-            }else{
-            echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
-            }
+
+			$logo = $chercher_logo($id_auteur, 'id_auteur');
+			if ($logo) {
+			  echo '<img src="', $logo[0],  '" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+			}else{
+			  echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+			}
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
 			if (empty($data["email"])) { 
