@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
-	function exec_edit_pret(){
+function exec_edit_pret(){
 		
 		include_spip('inc/autoriser');
 		if (!autoriser('configurer')) {
@@ -27,30 +27,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$action=$_REQUEST['agir'];
-		if ($action=="ajoute"){$id_ressource=$_REQUEST['id'];}
-		else {$id_pret=$_REQUEST['id'];}
-		$url_retour = $_SERVER['HTTP_REFERER'];
-		
-		$query = spip_query( "SELECT * FROM spip_asso_prets WHERE id_pret='$id_pret' ");
-		while($data = spip_fetch_array($query)) {
-			$id_ressource=$data['id_ressource'];
-			$date_sortie=$data['date_sortie'];
-			$duree=$data['duree'];
-			$date_retour=$data['date_retour'];
-			$id_emprunteur=$data['id_emprunteur'];
-			$commentaire_sortie=$data['commentaire_sortie'];
-			$commentaire_retour=$data['commentaire_retour'];
+		$id_pret= intval(_request('id'));
+		if ($action=="ajoute")
+		  {$id_ressource= intval(_request('id'));}
+		else {
+		  $id_ressource=intval($data['id_ressource']);
+		  $date_sortie=$data['date_sortie'];
+		  $duree=$data['duree'];
+		  $date_retour=$data['date_retour'];
+		  $id_emprunteur=$data['id_emprunteur'];
+		  $commentaire_sortie=$data['commentaire_sortie'];
+		  $commentaire_retour=$data['commentaire_retour'];
 		}	
-		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_edition_prets')) ;
-				
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche('',true);
 		
-		debut_boite_info();
-		$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource'" ) ;
+		echo debut_boite_info(true);
+		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
 		while ($data = spip_fetch_array($query)) {
 			$statut=$data['statut'];
 			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
@@ -59,23 +56,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo $data['intitule'];
 			echo '</p>';
 		}
-		fin_boite_info();
+		echo fin_boite_info(true);
 		
 		
 		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
 		
-		debut_droite();
+		echo debut_droite('', true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_edition_prets'));
 		
-		$query = spip_query( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource' ");
+		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource");
 		while($data = spip_fetch_array($query)) {
 			$statut=$data['statut']; 
 			$pu=$data['pu'];
 		}			
 		
-		$query = spip_query( "SELECT * FROM spip_asso_comptes WHERE id_journal='$id_pret' ");
+		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_pret ");
 		while($data = spip_fetch_array($query)) {
 			$journal=$data['journal']; 
 			$montant=$data['recette'];
