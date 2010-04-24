@@ -1,0 +1,57 @@
+<div class="formulaire_spip formulaire_langonet_rechercher" id="formulaire_langonet_rechercher">
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:langonet:legende_rechercher:></h3>
+					<p class="explication"><:langonet:info_rechercher:></p>
+					<ul>
+						<li class="editer_pattern obligatoire[(#ENV{erreurs}|table_valeur{pattern}|oui) erreur]">
+							<label for="pattern"><:langonet:label_pattern:></label>
+							<p class="explication"><:langonet:info_pattern_cherche:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pattern})</span>]
+							<input type='text' name='pattern' id='pattern' value="#ENV{pattern}" class="text" />						
+						</li>
+						<li class="editer_recherche[(#ENV{erreurs}|table_valeur{recherche}|oui) erreur]">
+							<label><:langonet:label_recherche:></label>
+							<div class="choix">
+								<input type="radio" value="egal" id="recherche_egal" class="radio" name="recherche" [(#ENV{recherche, egal}|=={egal}|oui) checked="checked"] />
+								<label for="recherche_egal"><:langonet:label_recherche_egal:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" value="commence" id="recherche_commence" class="radio" name="recherche" [(#ENV{recherche, egal}|=={commence}|oui) checked="checked"] />
+								<label for="recherche_commence"><:langonet:label_recherche_commence:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" value="contient" id="recherche_contient" class="radio" name="recherche" [(#ENV{recherche, egal}|=={contient}|oui) checked="checked"] />
+								<label for="recherche_contient"><:langonet:label_recherche_contient:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:langonet:bouton_rechercher:>' />
+		</p>
+
+		[(#REM) <!-- Affichage des resultats --> ]
+		[(#SET{total_trouves, [(#ENV*{message_ok}|table_valeur{total})]})]
+		[<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:langonet:legende_trouves{total=#GET{total_trouves}}:></h3>
+					(#ENV*{message_ok}|table_valeur{trouves})
+				</fieldset>
+			</li>
+		</ul>]
+	</div></form>
+	]
+</div>
