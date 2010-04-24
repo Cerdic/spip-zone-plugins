@@ -13,7 +13,6 @@
 
 		<INCLURE{fond=prive/liste/zones_plugins}{action} />
 
-
 		<fieldset>
 			<h3 class='legend'><:step:zones_ajouter:></h3>
 			<ul>
@@ -23,13 +22,14 @@
 					<p class='explication'>
 						<:step:zones_ajouter_info:><br />
 						<:step:zones_exemple:>
-						<span onclick="$('#adresse_zone').attr('value',$(this).html()).focus();">http://files.spip.org/spip-zone/archives.xml</span>
+						<a class="spip_out" href="http://files.spip.org/spip-zone/archives.xml" onclick="$('#adresse_zone').attr('value',$(this).html()).focus();return false;">http://files.spip.org/spip-zone/archives.xml</a>
 					</p>
 					<input type="text" name="adresse_zone" class="text" value = "" id="adresse_zone" />
 				</li>
 			</ul>
 		</fieldset>
-		<p class='boutons'><input type="submit" name="ajouter_zone" value = "<:ajouter:>" /></p>
-
+		<p class='boutons'>
+			<input type="submit" name="ajouter_zone" value = "<:bouton_ajouter:>" />
+		</p>
 	</div></form>
 </div>
