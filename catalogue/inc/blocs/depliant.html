@@ -1,0 +1,38 @@
+
+<!-- squelette inc/blocs/depliant.html -->
+
+<div id='tester_depliant-#ID_ARTICLE' style="border: 2px dashed blue" class='ajax-action tester_depliant'>
+
+	<a id='access-j' href='#access-j' accesskey='j'></a>
+	
+	<div class='cadre cadre-e' style='border: 2px dashed red'>
+	
+		<img src='../prive/images/langues-24.gif' alt=""  class='cadre-icone' width='24' height='24' />
+		
+		<div class='titrem replie' onMouseOver="jQuery(this).depliant('#truc_depliant,#lier_test_depliant')	;">
+			<a href='#' onClick="return jQuery(this).depliant_clicancre('#truc_depliant,#lier_test_depliant');" class='titremancre'></a>
+			LE NOM DU BLOC D&Eacute;PLIANT
+		</div>
+		
+		<div class='cadre_padding'>
+		
+			<div id='truc_depliant' class='bloc_depliable blocreplie'>
+				<a id='access-i' href='#access-i' accesskey='i'></a>
+				<div class='cadre cadre-couleur' style=''>
+				ceci est un truc déplié...
+				</div>
+				<div class='nettoyeur'></div>
+			</div>
+			
+			<div id='lier_test_depliant' class='bloc_depliable blocreplie'>
+				ceci est un deuxième truc déplié...
+				<div class='nettoyeur'></div>
+			</div>
+			
+			<div class='nettoyeur'></div>
+
+		</div><!-- fin de cadre_padding -->
+
+	</div><!-- fin de cadre cadre-e-->
+
+</div><!-- fin de tester_depliant -->

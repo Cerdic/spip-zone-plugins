@@ -9,13 +9,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activites_type' => 'Si oui, quel type d\'activit&eacute;s ?',
 	'adresse_suite' => '(adresse suite)',
 	'ajouter_panier' => 'S\'inscrire avec cette option',
+	'ajouter_variante' => 'AJOUTER UNE VARIANTE :',
+	'ajouter_variante_question' => '&Ecirc;tes-vous sur de vouloir ajouter une variante &agrave; cet article ?',
 	'aller_fiche' => 'S\'inscrire en ligne pour cette formule',
+	
+	// B
+	'bouton_ajouter_variante' => 'Ajouter une variante',
 	
 	// C
 	'catalogue' => 'Plugin Catalogue',
 	'code_ville' => 'Code postal + Ville',
 	'contre_indication_explications' => 'Avez-vous une contre-indication quelconque (r&eacute;gime alimentaire, allergie...)',
 	'contre_indication_nature' => 'Si oui, nature de la contre-indication',
+	'creer_variante' => 'Cr&eacute;er une nouvelle variante de prix pour cet article',
 	
 	// E
 	'etape_suivante' => '&Eacute;tape suivante',
@@ -30,6 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'neant' => 'n&eacute;ant',
 	
+	// M
+	'message_aucune_variante' => '<strong>Cet article n\'est pas un article du catalogue</strong><br />Pour ajouter cet article au catalogue, il suffit d\'indiquer un prix et quelques autres informations en cliquant sur "ajouter une variante".',
+	
 	// O
 	'ok' => 'OK !',
 	'options_dispo' => 'Options disponibles',
@@ -40,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'partage_nom' => 'Si oui, le nom de cette personne',
 	
 	// T
-	'titre_bloc_catalogue' => 'CATALOGUE : variantes et options li&eacute;s &agrave; l\'article',
+	'titre_bloc_catalogue' => 'CATALOGUE : prix et options li&eacute;s &agrave; l\'article',
 		
 	// V
 	'votre_nom' => 'Votre nom',

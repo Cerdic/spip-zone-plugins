@@ -16,7 +16,12 @@
 #INCLURE{fond=inc/blocs/variante,id_variante,env} 
 </BOUCLE_v>
 </B_v>
-Aucune variante trouvée
+[(#BOUTON_ACTION{
+	<:catalogue:bouton_ajouter_variante:>,
+	[(#URL_ACTION_AUTEUR{ajouter_variante,#ID_ARTICLE}|parametre_url{redirect,#SELF})],
+	ajax,
+	<:catalogue:ajouter_variante_question:>
+})]
 <//B_v>
 
 
