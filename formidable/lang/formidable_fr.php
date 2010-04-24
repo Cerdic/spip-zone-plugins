@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_inexistant' => 'Le formulaire n\'exsite pas.',
 
 'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',
+'formulaires_introduction' => 'Cr&eacute;ez et configurez ici les formulaires de votre site.',
 'formulaires_nouveau' => 'Cr&eacute;er un nouveau formulaire',
 'formulaires_supprimer' => 'Supprimer le formulaire',
 'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les r&eacute;sultats. &Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce formulaire ?',
