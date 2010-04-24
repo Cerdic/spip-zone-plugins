@@ -27,10 +27,10 @@
 					var text = text_moins;
 				}
 				var append = '<li class="editer_more">';
-				append += '<label for="rechercher"> </label>';
+				append += '<label for="rechercher"> <\/label>';
 				append += '<button name="more' + i + '" class="button rechercher_'+action+'" title="'+text+'">';
 				append += img;
-				append += '</button></li>';
+				append += '<\/button><\/li>';
 				$(this).prev('ul').append(append);
 			});
 			$('.editer_recherche_paquet button.rechercher_plus').each(function(){
