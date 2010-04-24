@@ -26,12 +26,6 @@ function association_ajouterBoutons($boutons_admin) {
 	}
 	return $boutons_admin;
 }
-
-
-function association_ajouterOnglets($flux) {
-		$rubrique = $flux['args'];
-		return $flux;
-}
 	
 function association_I2_cfg_form($flux) {
         $flux .= recuperer_fond('fonds/inscription2_association');
