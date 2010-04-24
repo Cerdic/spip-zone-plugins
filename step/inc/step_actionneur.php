@@ -130,7 +130,9 @@ class Actionneur {
 		foreach ($this->middle as $acts) {
 			$this->end = array_merge($this->end, $acts);
 		}
-		#$this->log($this->middle);
+		$this->log("------------");
+		#$$this->log("Fin du tri :");
+		#$this->log($this->end);
 	}
 
 
@@ -144,7 +146,7 @@ class Actionneur {
 		$this->log("ON: $p $action");
 
 		// si dependance, il faut le mettre avant !
-		$in = $out = array();
+		$in = $out = $deps = $deps_all = array();
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['on'] = array_values($this->middle['on']);
 		// ajout des dependance et des librairies si besion
@@ -160,13 +162,32 @@ class Actionneur {
 				}
 			}
 		}
-		foreach ($this->middle['on'] as $inf) 	{$out[] = $inf['p'];}
+		
+		// on recupere : tous les prefix de plugin a activer (out)
+		// ie. ce plugin peut dependre d'un de ceux la
+		//
+		// ainsi que les dependences de ces plugins (deps)
+		// ie. ces plugins peuvent dependre de ce nouveau a activer.
+		foreach ($this->middle['on'] as $inf) {
+			$out[] = $inf['p'];
+			foreach ($inf['dn'] as $dep) {
+				if ($dep['id'] != 'SPIP') {
+					if (strpos($dep['id'],'lib:')!==0) {
+						$deps[$inf['p']][] = $dep['id'];
+						$deps_all[] = $dep['id'];
+					}
+				}				
+			}
+		}
 
 		if (!$in) {
+			
 			// pas de dependance, on le met en premier !
 			$this->log("- placer $p tout en haut");
 			array_unshift($this->middle['on'], $info);
+			
 		} else {
+			
 			// intersection = dependance presente aussi
 			// on place notre action juste apres la derniere dependance
 			if ($diff = array_intersect($in, $out)) {
@@ -179,6 +200,26 @@ class Actionneur {
 				} else {
 					array_splice($this->middle['on'], $key+1, 0, array($info));
 				}
+			
+			// intersection = plugin dependant de celui-ci
+			// on place notre plugin juste avant la premiere dependance a lui trouvee
+			} elseif (in_array($p, $deps_all)) {
+				foreach ($deps as $prefix=>$dep) {
+					if (in_array($p, $dep)) {
+						$key = array_search($prefix, $out);
+						$this->log("- placer $p avant $prefix qui en depend ($key)");
+						if ($key == 0) {
+							array_unshift($this->middle['on'], $info);
+						} else {
+							array_splice($this->middle['on'], $key, 0, array($info));
+						}
+						break;
+					}
+				}
+
+			// rien de particulier, il a des dependances mais les plugins
+			// ne sont pas encore la ou les dependances sont deja actives
+			// donc on le place tout en bas
 			} else {
 				$this->log("- placer $p tout en bas");
 				$this->middle['on'][] = $info;
