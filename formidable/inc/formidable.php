@@ -53,6 +53,31 @@ function traitements_charger_infos($type_traitement){
 }
 
 /*
+ * Liste tous les types d'échanges (export et import) existant pour les formulaires
+ *
+ * @return array Retourne un tableau listant les types d'échanges
+ */
+function echanges_formulaire_lister_disponibles(){
+	// On va chercher toutes les fonctions existantes
+	$liste = find_all_in_path('echanger_formulaire/', '.+[.]php$');
+	$types_echange = array('exporter'=>array(), 'importer'=>array());
+	if (count($liste)){
+		foreach ($liste as $fichier=>$chemin){
+			$type_echange = preg_replace(',[.]php$,i', '', $fichier);
+			$dossier = str_replace($fichier, '', $chemin);
+			// On ne garde que les échanges qui ont bien la fonction
+			if ($f = charger_fonction('exporter', "echanger_formulaire/$type_echange", true)){
+				$types_echange['exporter'][$type_echange] = $f;
+			}
+			if ($f = charger_fonction('importer', "echanger_formulaire/$type_echange", true)){
+				$types_echange['importer'][$type_echange] = $f;
+			}
+		}
+	}
+	return $types_echange;
+}
+
+/*
  * Génère le nom du cookie qui sera utilisé par le plugin lors d'une réponse
  * par un visiteur non-identifié.
  *

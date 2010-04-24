@@ -83,7 +83,14 @@
 <!--#extra-->
 <div class="cadre cadre-e cadre_padding">
 	<strong><:formidable:voir_exporter:></strong>
-	#FORMULAIRE_EXPORTER_FORMULAIRE{#ID_FORMULAIRE}
+	<BOUCLE_exports(POUR){tableau #VAL|echanges_formulaire_lister_disponibles|table_valeur{exporter}}>
+	<div>
+		<a href="#URL_ACTION_AUTEUR{exporter_formulaire,#ID_FORMULAIRE-#CLE}" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-exporter-24.png})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;">#CLE</span>
+		</a>
+	</div>
+	</BOUCLE_exports>
 </div>
 <!--/#extra-->
 </BOUCLE_formulaire>
