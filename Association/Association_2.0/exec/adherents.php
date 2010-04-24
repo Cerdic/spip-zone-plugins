@@ -75,9 +75,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);	
 		
 		
-		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif',false );
-		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif',false ); 
-		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/annonce.gif','rien.gif',false ); 
+		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  _DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif',false );
+		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif',false ); 
+		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION.'/img_pack/annonce.gif','rien.gif',false ); 
 			echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

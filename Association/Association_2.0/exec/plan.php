@@ -40,14 +40,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','agir=ajoute'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif',false);
+		$res=icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','agir=ajoute'), _DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif',false);
 		
 		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
 		 echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "../"._DIR_PLUGIN_ASSOCIATION."/img_pack/EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));
+		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION."/img_pack/EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));
 		
 		$classe = '%';
 		$actif = 'oui'; 
