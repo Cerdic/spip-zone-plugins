@@ -61,7 +61,7 @@ function formater_table($resultats) {
 	foreach ($resultats['table'] as $_initiale => $_table) {
 		// On demarre un nouveau bloc depliable et une nouvelle table
 		$i = 0;
-		$texte .= bouton_block_depliable(strtoupper($_initiale) . ' (' . count($_table) . ')', false);
+		$texte .= bouton_block_depliable(strtoupper($_initiale) . ' (' . count($_table) . ')', true);
 		$texte .= debut_block_depliable(true);
 		$texte .= '<div class="cadre_padding">' . "\n";
 		$texte .= '<table style="width: 100%;" class="spip">' . "\n";
