@@ -72,7 +72,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<tr>';
 		echo '<td>';
 		
-		$query = spip_query ("SELECT date_format( date_vente, '%Y' )  AS annee FROM spip_asso_ventes GROUP BY annee ORDER BY annee");
+		$query = sql_select("date_format( date_vente, '%Y' )  AS annee", "spip_asso_ventes", "", "annee", "annee");
 		while ($data = spip_fetch_array($query)) {
 			if ($data['annee']==$annee)	{echo ' <strong>'.$data['annee'].'</strong>';}
 			else {echo ' <a href="'.$url_ventes.'&annee='.$data['annee'].'">'.$data['annee'].'</a>';}

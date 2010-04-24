@@ -56,7 +56,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$annee=$_GET['annee'];
 		if(empty($annee)){$annee = date('Y');}
 		
-		$query = spip_query ("SELECT date_format( date_debut, '%Y' )  AS annee FROM spip_evenements GROUP BY annee ORDER by annee");
+		$query = sql_select("date_format( date_debut, '%Y' )  AS annee", "spip_evenements", "", "annee", "annee");
 		while ($data = spip_fetch_array($query)) {
 			if ($data['annee']==$annee) { echo ' <strong>'.$data['annee'].'</strong>'; }
 			else { echo '<a href="'.$url_activites.'&annee='.$data['annee'].'&mot='.$mot.'">'.$data['annee'].'</a>';}
