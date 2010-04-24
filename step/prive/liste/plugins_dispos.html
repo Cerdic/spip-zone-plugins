@@ -25,7 +25,6 @@
 					]
 				]
 			</td>
-
 			<td class='nom'>
 				<div class='nom[ (#SHORTDESC|oui)desc]'>
 					<h4>#NOM</h4>[<p>(#SHORTDESC)</p>]
@@ -80,7 +79,7 @@
 					hash = me.attr('class');
 					var url = document.location;
 					id = me.attr('id');
-					me.addClass('replier').find('td:last').append('<span class="image_loading"> </span>').parent().animeajax();
+					me.addClass('replier').find('td:last').append('<span class="image_loading"> <\/span>').parent().animeajax();
 					$.get('#URL_PAGE{inc_information_plugin}',{'id_plugin':id_plugin,'hash':hash},function(data){
 						me.after(data);
 						me.removeClass('loading').find('.image_loading').detach();
