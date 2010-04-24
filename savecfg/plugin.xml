@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SaveCFG</nom>
 	<auteur>Yohann Prigent (potter64) et [Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] - 2009</auteur>
-	<version>2.5</version>
+	<version>2.6</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>SaveCFG vous permet de sauvegarder des configurations de CFG puis de les restaurer à votre guise.</description>
