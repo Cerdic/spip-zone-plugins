@@ -4,26 +4,23 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-
 .liste-elements{
 	margin:1em 0;
 	font-size:.85em;
-	border-color: #dfdfdf;
+	border: 1px solid #dfdfdf;
 }
 .cadre .liste-elements{font-size:1em;}
 .liste-elements table .bouton_action_post .submit {font-size:.9em;}
 
 .liste-elements .pagination {
 	margin-top:0; padding:1px 5px;
-	background:#eee; border: 1px solid #dfdfdf;
+	background:#eee; border:none;
 }
 .liste-elements .pagination .separateur {color:#aaa;}
 
-.liste-elements table.spip {width:100%;}
+.liste-elements table.spip {width:100%; background:white; border:none; margin-bottom:0;}
 .liste-elements table.spip caption {margin:0;text-align:left;}
-.liste-elements .caption {display:block;background:#fff;color:#333;font-size:1.1em;padding:6px;padding-left:28px;background-repeat:no-repeat;background-position: top left;}
-
-.liste-elements table.spip {background:white; border:1px solid #dfdfdf;}
+#contenu .liste-elements .caption {display:block;color:#333;font-size:1.1em;padding:7px 6px 6px 30px;background:none no-repeat scroll 2px 2px #FFFFFF}
 .liste-elements table.spip tr {background:white;}
 .liste-elements table.spip tr.row_odd {background:white;}
 .liste-elements table.spip tr.row_even {background:white;}
@@ -41,13 +38,12 @@
 .liste-elements tr td.action input {font-size:0.9em;}
 .liste-elements tr td.titre .auteurs {font-size:0.85em;}
 .liste-elements tr td.titre .spip_logos {float:right;}
-.liste-elements tr td.titre .visiter {padding-left:10px;font-size:0.85em;}
+.liste-elements tr td.titre .visiter {font-size:0.85em;}
 .liste-elements tr td.syndication .etat {display:block;color:red;}
 
-
-.liste-elements.mots .caption {background-image:url(#CHEMIN{images/mot-cle-24.gif});}
-.liste-elements.rubriques .caption {background-image:url(#CHEMIN{images/rubrique-24.gif});}
-.liste-elements.articles .caption {background-image:url(#CHEMIN{images/article-24.gif});}
-.liste-elements.breves .caption {background-image:url(#CHEMIN{images/breve-24.gif});}
-.liste-elements.sites .caption {background-image:url(#CHEMIN{images/site-24.gif});}
-.liste-elements.syndic_articles .caption {background-image:url(#CHEMIN{images/site-24.gif});}
+#contenu .liste-elements.mots .caption {background-image:url(#CHEMIN{images/mot-cle-24.gif});}
+#contenu .liste-elements.rubriques .caption {background-image:url(#CHEMIN{images/rubrique-24.gif});}
+#contenu .liste-elements.articles .caption {background-image:url(#CHEMIN{images/article-24.gif});}
+#contenu .liste-elements.breves .caption {background-image:url(#CHEMIN{images/breve-24.gif});}
+#contenu .liste-elements.sites .caption {background-image:url(#CHEMIN{images/site-24.gif});}
+#contenu .liste-elements.syndic_articles .caption {background-image:url(#CHEMIN{images/site-24.gif});}

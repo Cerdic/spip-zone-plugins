@@ -11,18 +11,18 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='nom_site'>[(#TRI{nom_site,<:info_nom_site:>,ajax})]</th>
+			<th class='nom_site'>[(#TRI{nom_site,<:form_prop_nom_site:>,ajax})]</th>
 			<th class='syndication'><:info_syndication:></th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
-			<th class='id'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_syndic,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_sites(SYNDIC){id_mot?}{id_rubrique?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_SYNDIC|puce_changement_statut{#STATUT,#ID_RUBRIQUE,site})]</td>
-			<td class='titre'>[(#LOGO_SITE||image_reduire{26,20})]<a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a>
-				[<span class='visiter'>&#91;<a href='(#URL_SITE)'><:lien_visite_site:></a>&#93;</span>]
+			<td class='titre'>[(#LOGO_SITE||image_reduire{26,20})]
+				<a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a> [<span class='visiter'>&#91;<a href='(#URL_SITE)'><:lien_visite_site:></a>&#93;</span>]
 			</td>
 			<td class='syndication'>[(#SYNDICATION|match{off|sus}|oui)
 				<span class="etat #SYNDICATION">[(#CHEMIN{puce-orange-anim.gif}|tag_img|inserer_attribut{alt,<:info_panne_site_syndique:>})<:info_probleme_grave:>]</span>
