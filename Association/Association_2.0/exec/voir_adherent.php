@@ -56,7 +56,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		 echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
@@ -115,7 +115,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				}
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['inscrits'].'</td>';
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['statut'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_bouton_maj_inscription').'"></a></td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_inscription').'"></a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';
@@ -144,7 +144,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['article'].'</td>';
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['quantite'].'</td>';
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date_envoi']).'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_bouton_maj_vente').'"></a></td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_vente').'"></a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';
@@ -180,7 +180,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">';
 				if($data['date_retour']=="0000-00-00"){echo '&nbsp;';} else {echo association_datefr($data['date_retour']);}
 				echo '</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_bouton_maj_pret').'"></a></td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_pret').'"></a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';

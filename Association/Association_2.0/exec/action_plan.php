@@ -53,7 +53,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			fin_boite_info();
 			
 			debut_raccourcis();
-			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
+			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif");	
 			fin_raccourcis();
 			
 			debut_droite();

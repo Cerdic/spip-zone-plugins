@@ -12,12 +12,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'/img_pack/');
+
 function association_ajouterBoutons($boutons_admin) {
 		// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 
 		$boutons_admin['naviguer']->sousmenu['association']= new Bouton(
-			_DIR_PLUGIN_ASSOCIATION."/img_pack/annonce.gif",  // icone
+			_DIR_PLUGIN_ASSOCIATION_ICONES."annonce.gif",  // icone
 			_T('asso:titre_menu_gestion_association') //titre
 			);
 			

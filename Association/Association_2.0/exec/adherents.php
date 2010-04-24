@@ -75,9 +75,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);	
 		
 		
-		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  _DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif',false );
-		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif',false ); 
-		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION.'/img_pack/annonce.gif','rien.gif',false ); 
+		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  _DIR_PLUGIN_ASSOCIATION_ICONES.'ico_panier.png','rien.gif',false );
+		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION_ICONES.'print-24.png','rien.gif',false ); 
+		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif','rien.gif',false ); 
 			echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
@@ -185,7 +185,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			if ($logo) {
 			  echo '<img src="', $logo[0],  '" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
 			}else{
-			  echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+			  echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
 			}
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
@@ -216,10 +216,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				default :
 					$logo="adher-12.gif"; break;
 			}
-			echo '<a href="'.$url_editer_auteur.'&id_auteur='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.png" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
+			echo '<a href="'.$url_editer_auteur.'&id_auteur='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_auteur'].'></td>';
 			echo '</tr>';
 		}

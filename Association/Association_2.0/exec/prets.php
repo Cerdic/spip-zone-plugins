@@ -54,9 +54,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		
 			if ($statut=="ok") {
-			$res=icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id="'.$id_ressource.'"', _DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif',false);
+			$res=icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id="'.$id_ressource.'"', _DIR_PLUGIN_ASSOCIATION_ICONES.'livredor.png','creer.gif',false);
 		echo bloc_des_raccourcis($res);}
-		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
@@ -93,8 +93,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">';
 			if ($data['date_retour']==0) { echo '&nbsp';} else {echo association_datefr($data['date_retour']);}
 			echo '</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_prets.'&agir=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:prets_nav_editer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_prets.'&agir=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:prets_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

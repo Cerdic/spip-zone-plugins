@@ -40,7 +40,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
-			$res= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+			$res= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis ($res);
 		echo debut_droite("",true);
 		
@@ -108,9 +108,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['lieu'].'</td>';
 			$sql = spip_query("SELECT sum(inscrits) AS total FROM spip_asso_activites WHERE id_evenement=".$data['id_evenement']);
 			while ($inscrits = spip_fetch_array($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total'].'</td>'; }
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:activite_bouton_modifier_article').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/creer-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_voir_activites.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.png" title="'._T('asso:activite_bouton_voir_liste_inscriptions').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:activite_bouton_modifier_article').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'creer-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_voir_activites.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:activite_bouton_voir_liste_inscriptions').'"></a></td>';
 			echo '</tr>';
 		}
 		echo '</table>';

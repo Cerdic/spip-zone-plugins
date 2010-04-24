@@ -62,7 +62,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 	
-		$res=icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, _DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout_don.png','rien.gif',false);
+		$res=icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, _DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false);
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
@@ -110,7 +110,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['id_acheteur'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['quantite'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
+			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
 			echo '</tr>';
 		}     

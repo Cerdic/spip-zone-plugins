@@ -39,14 +39,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_boite_info(true);
 		echo '<p>'._T('asso:ressources_info').'</p>';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/puce-verte.gif"> Libre<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/puce-orange.gif"> En suspend<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/puce-rouge.gif"> R&eacute;s&eacute;rv&eacute;<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/puce-poubelle.gif"> Supprim&eacute;';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif"> Libre<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif"> En suspend<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif"> R&eacute;s&eacute;rv&eacute;<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif"> Supprim&eacute;';
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,_DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout_don.png','rien.gif',false );
+		$res=icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,_DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
 			
 		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);
@@ -70,17 +70,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				case "suspendu": $puce="orange"; break;
 				case "sorti": $puce="poubelle"; break;	   
 			}
-			echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/puce-'.$puce.'.gif"></td>';
+			echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif"></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;">'.number_format($data['pu'], 2, ',', ' ').'</td>';
 			
 			
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.png" title="'._T('asso:prets_nav_gerer').'"></a></td>';
-			//echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&agir=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:prets_nav_gerer').'"></a></td>';
+			//echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&agir=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

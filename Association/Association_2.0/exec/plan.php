@@ -40,14 +40,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','agir=ajoute'), _DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif',false);
+		$res=icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','agir=ajoute'), _DIR_PLUGIN_ASSOCIATION_ICONES.'EuroOff.gif', 'creer.gif',false);
 		
-		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
 		 echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION."/img_pack/EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));
+		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));
 		
 		$classe = '%';
 		$actif = 'oui'; 
@@ -108,8 +108,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['reference'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['date_anterieure']).'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_plan.'&agir=supprime&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_plan.'&agir=modifie&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_plan.'&agir=supprime&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_plan.'&agir=modifie&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

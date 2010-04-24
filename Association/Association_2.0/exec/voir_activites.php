@@ -59,9 +59,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:activite_bouton_ajouter_inscription'), $url_ajout_activite.'&id='.$id_evenement, _DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif',false );
-		$res.=icone_horizontale(_T('asso:activite_bouton_voir_liste_inscriptions'), $url_pdf_activite, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif",false);	
-		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		$res=icone_horizontale(_T('asso:activite_bouton_ajouter_inscription'), $url_ajout_activite.'&id='.$id_evenement, _DIR_PLUGIN_ASSOCIATION_ICONES.'panier_in.gif','rien.gif',false );
+		$res.=icone_horizontale(_T('asso:activite_bouton_voir_liste_inscriptions'), $url_pdf_activite, _DIR_PLUGIN_ASSOCIATION_ICONES."print-24.png","rien.gif",false);	
+		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
@@ -121,8 +121,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['id_adherent'].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['inscrits'].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.number_format($data['montant'], 2, ',', ' ').'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:activite_bouton_maj_inscription').'"></a>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_ajout_participation.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:activite_bouton_maj_inscription').'"></a>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_ajout_participation.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_activite'].'></td>';
 			echo '</tr>';
 			if ($data['commentaire']) {	echo '<tr><td colspan=10 style="text-align:justify;" class ='.$class.'>'.$data['commentaire'].'</td></tr>'; }
