@@ -115,7 +115,7 @@
 			[(#TOTAL_BOUCLE|>{1}|oui)
 			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display: none;'>
 			]
-			<BOUCLE_liens(spip_documents_liens){id_document}{'<br />'}>
+			<BOUCLE_liens(documents_liens){id_document}{'<br />'}>
 			[(#ID_OBJET|lien_objet{#OBJET})]
 			</BOUCLE_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
