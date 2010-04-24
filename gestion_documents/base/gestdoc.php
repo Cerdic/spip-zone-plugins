@@ -7,7 +7,6 @@
 
 function gestdoc_declarer_tables_interfaces($interface){
 	$interface['exceptions_des_tables']['documents']['media']=array('types_documents', 'media');
-	$interface['table_des_tables']['documents_liens']='documents_liens';
 	return $interface;
 }
 
