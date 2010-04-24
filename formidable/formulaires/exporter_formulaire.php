@@ -10,14 +10,14 @@ function formulaires_exporter_formulaire_charger($id_formulaire){
 	$contexte = array();
 	
 	// On va chercher toutes les fonctions d'exportation existantes
-	$liste = find_all_in_path('echanger_formulaire/', '.+[.]php$');
+	$liste = find_all_in_path('echanger/formulaire/', '.+[.]php$');
 	$types_echange = array();
 	if (count($liste)){
 		foreach ($liste as $fichier=>$chemin){
 			$type_echange = preg_replace(',[.]php$,i', '', $fichier);
 			$dossier = str_replace($fichier, '', $chemin);
 			// On ne garde que les traitements qui ont bien la fonction
-			if ($f = charger_fonction('exporter', "echanger_formulaire/$type_echange", true)){
+			if ($f = charger_fonction('exporter', "echanger/formulaire/$type_echange", true)){
 				$types_echange[$type_echange] = $type_echange;
 			}
 		}
