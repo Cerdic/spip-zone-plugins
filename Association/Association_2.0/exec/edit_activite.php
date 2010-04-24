@@ -29,7 +29,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if($action=='ajoute'){$id_evenement=$_REQUEST['id'];}
 		else {$id_activite=$_REQUEST['id'];}	
 		
-		$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_activite='$id_activite' ");
+		$query = sql_select("*", "spip_asso_activites", "id_activite='$id_activite' ");
 		while ($data = spip_fetch_array($query)){
 			$id_evenement=$data['id_evenement'];
 			$nom=$data['nom'];
@@ -46,7 +46,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$commentaire=$data['commentaires'];
 		}
 		
-		$query = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement='$id_evenement' ");
+		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ");
 		while ($data = spip_fetch_array($query)){
 			$titre=$data['titre'];
 			$date_debut=$data['date_debut'];

@@ -48,7 +48,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$id=$_REQUEST['id'];
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$query = spip_query( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id' ");
+		$query = sql_select("*", "spip_asso_ressources", "id_ressource='$id' ");
 		while($data = spip_fetch_array($query)) {
 			$id_ressource=$data['id_ressource'];
 			$code=$data['code'];

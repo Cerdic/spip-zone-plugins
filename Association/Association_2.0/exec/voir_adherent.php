@@ -106,7 +106,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				$id_evenement=$data['id_evenement'];
 				echo '<tr style="background-color: #EEEEEE;">';
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_activite'].'</td>';
-				$sql = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement=$id_evenement" );
+				$sql = sql_select("*", "spip_evenements", "id_evenement=$id_evenement" );
 				while ($evenement = spip_fetch_array($sql)) {
 					$date = substr($evenement['date_debut'],0,10);
 					//echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($date).'</td>';

@@ -59,7 +59,8 @@ function association_header_prive($flux){
 
 // Gestion de l'absence eventuelle du plugin Inscription2
 
-define('_ASSOCIATION_INSCRIPTION2', true); // false si on sait s'en passer
+if (!defined('_ASSOCIATION_INSCRIPTION2'))
+    define('_ASSOCIATION_INSCRIPTION2', true); // false si on sait s'en passer
 
 define('_ASSOCIATION_AUTEURS_ELARGIS', 
        @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1") ? 

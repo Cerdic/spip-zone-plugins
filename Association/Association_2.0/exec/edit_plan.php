@@ -49,7 +49,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Edition plan comptable'));
 		
-		$query = spip_query( "SELECT * FROM spip_asso_plan WHERE id_plan='$id_plan' ");
+		$query = sql_select("*", "spip_asso_plan", "id_plan='$id_plan' ");
 		while($data = spip_fetch_array($query)) {
 			$code=$data['code'];
 			$classe=$data['classe'];

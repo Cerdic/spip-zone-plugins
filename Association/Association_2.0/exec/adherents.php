@@ -196,7 +196,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			}
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
-			$sql=spip_query("SELECT valeur FROM spip_asso_categories WHERE id_categorie=".$data["categorie"]);
+			$sql=sql_select("valeur", "spip_asso_categories", "id_categorie=".intval($data["categorie"]));
 			$categorie=spip_fetch_array($sql);
 			echo $categorie['valeur'];			
 			echo '</td>';

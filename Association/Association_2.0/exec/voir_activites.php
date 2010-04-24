@@ -44,7 +44,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_boite_info(true);		
 		echo association_date_du_jour();	
-		$query = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement='$id_evenement' ") ;
+		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ") ;
 	 	while ($data = spip_fetch_array($query)) {
 			echo '<p><strong>'.$data['date_debut'].'<br />'.$data['titre'].'</strong></p>';
 			echo '<p>'._T('asso:activite_liste_legende').'</p>'; 	
@@ -72,7 +72,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// PAGINATION ET FILTRES
 		echo '<table width="100%">';
 		echo '<tr>';
-		$query = spip_query (" SELECT * FROM spip_evenements WHERE id_evenement='$id_evenement' ") ;
+		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ") ;
 		while ($data = spip_fetch_array($query)) {
 			$date = substr($data['date_debut'],0,10);
 			$date = association_datefr($date);

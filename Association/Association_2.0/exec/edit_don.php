@@ -27,9 +27,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$action=$_REQUEST['agir'];
-		$id_don= $_REQUEST['id'];		
+		$id_don= intval(_request('id'));
 		
-		$query = spip_query (" SELECT * FROM spip_asso_dons WHERE id_don=$id_don ");
+		$query = sql_select("*", "spip_asso_dons", "id_don=$id_don ");
 		while ($data = spip_fetch_array($query)) {
 			$date_don=$data['date_don'];
 			$bienfaiteur=$data['bienfaiteur'];

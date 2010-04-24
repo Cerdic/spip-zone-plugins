@@ -49,7 +49,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo debut_gauche("",true);
 			
 			echo debut_boite_info(true);
-			$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource=$id_ressource" ) ;
+			$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
 			while ($data = spip_fetch_array($query)) {
 				$statut=$data['statut'];
 				echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';

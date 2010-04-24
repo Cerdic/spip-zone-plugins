@@ -36,7 +36,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$id=$_REQUEST['id'];
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$query = spip_query( "SELECT * FROM spip_asso_categories WHERE id_categorie='$id' ");
+		$query = sql_select("*", "spip_asso_categories", "id_categorie='$id' ");
 		while($data = spip_fetch_array($query)) {
 			$id_categorie=$data['id_categorie'];
 			$valeur=$data['valeur'];

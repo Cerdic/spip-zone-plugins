@@ -39,7 +39,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource'" ) ;
+		$query = sql_select("*", "spip_asso_ressources", "id_ressource='$id_ressource'" ) ;
 		while ($data = spip_fetch_array($query)) {
 		
 			$statut=$data['statut'];
@@ -86,7 +86,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['id_pret'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">'.association_datefr($data['date_sortie']).'</td>';
 			$id_emprunteur=$data['id_emprunteur'];
-			$sql=spip_query( "SELECT * FROM spip_asso_adherents WHERE ".lire_config('association/indexation')."='$id_emprunteur' ");
+			$sql=sql_select("*", "spip_asso_adherents",lire_config('association/indexation')."='$id_emprunteur' ");
 			$auteur=spip_fetch_array($sql);
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['duree'].'</td>';

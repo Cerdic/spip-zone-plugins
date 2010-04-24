@@ -106,7 +106,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$heure.'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['lieu'].'</td>';
-			$sql = spip_query("SELECT sum(inscrits) AS total FROM spip_asso_activites WHERE id_evenement=".$data['id_evenement']);
+			$sql = sql_select("sum(inscrits) AS total", "spip_asso_activites", "id_evenement=".$data['id_evenement']);
 			while ($inscrits = spip_fetch_array($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total'].'</td>'; }
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:activite_bouton_modifier_article').'"></a></td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'creer-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a></td>';

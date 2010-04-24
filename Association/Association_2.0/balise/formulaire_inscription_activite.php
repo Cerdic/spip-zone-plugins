@@ -67,7 +67,7 @@
 			//$entetes .= "bcc: \n";          										// envoi en copie cachée à …
 			$sujet=_T('asso:activite_message_sujet',array('nomasso'=>$nom_asso));
 			
-			$query = spip_query( " SELECT * FROM spip_evenements WHERE id_evenement=$id_evenement " );
+			$query = sql_select("*", "spip_evenements", "id_evenement=$id_evenement " );
 			while ($data = spip_fetch_array($query)) {
 				$activite=$data['titre'];
 				$date=$data['date_debut'];

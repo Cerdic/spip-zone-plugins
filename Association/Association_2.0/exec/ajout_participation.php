@@ -44,9 +44,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
 		
-		$id_activite=preg_replace("/[^0-9]/","",$_GET['id']);
+		$id_activite=intval($_GET['id']);
 		
-		$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_activite=$id_activite ");
+		$query = sql_select("*", "spip_asso_activites", "id_activite=$id_activite ");
 		while ($data = spip_fetch_array($query)) {
 			$nom=$data['nom'];
 			$id_adherent=$data['id_adherent'];
