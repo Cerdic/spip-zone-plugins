@@ -60,7 +60,8 @@ function spipmotion_supprimer_versions($id_document){
 	}
 
 	supprimer_documents($liste);
-	sql_delete("spip_spipmotion_attentes", "id_document=".intval($args['id_document']));
+	spip_log('on supprime ce les attentes du doc '.$id_document,'test');
+	sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document));
 }
 
 /**
