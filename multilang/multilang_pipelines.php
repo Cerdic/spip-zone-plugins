@@ -57,17 +57,19 @@ function multilang_insert_head_prive($flux){
 	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
 			  <script type="text/javascript">
 			  var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
-			  multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'";
+			  multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
+			  dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
 			  jQuery(document).ready(function(){
 					function multilang_init(){
+						
 				';
 	if($root) {
-		$flux .= 'multilang_init_lang({fields:":text,textarea",root:"'.$root.'"});
+		$flux .= '      multilang_init_lang({fields:":text,textarea",root:"'.$root.'"});
 					';
 	}
 	// Pour toutes les forms de class multilang (pour les autres plugins)
-	$flux .= '  forms_selector = $(".multilangclass").parents("form") ;
-					multilang_init_lang({fields:".multilangclass",forms:forms_selector});
+	$flux .= '     forms_selector = $(".multilangclass").parents("form") ;
+					   multilang_init_lang({fields:".multilangclass",forms:forms_selector});
 					} // end multilang_init
 					multilang_init();
 					if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);

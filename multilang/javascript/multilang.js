@@ -6,10 +6,6 @@
  *   http://www.gnu.org/licenses/gpl.html
  *
  * Modif Yffic mars 2010
- * - Correction bug : si suppression du contenu d'un text area, il est remplace par undefined au basculement de langue
- *   D'ou impossibilite de vider un champs (description par exemple) => Correction partielle dans forms_set_lang
- *   Pour vider completement un champs, il faut enregistrer l'objet avec la langue par defaut, revenir en modification
- *   et vider a nouveau le champs
  * - Correction bug : Fonctionnement incoherent si plusieurs menu dans la meme page (ex : portfolio dans page de
  *   presentation d'un article)
  * - On ne rajoute pas le menu s'il existe deja (cas d'un retour Ajax)
@@ -73,7 +69,6 @@ function multilang_init_lang(options) {
 
 	//store all the internationalized forms
 	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
-
 	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
 	multilang_forms = $(multilang_forms_selector,multilang_root);
 	//create menu lang for the global form
@@ -163,48 +158,96 @@ function forms_init_field(el,lang) {
 	//if already inited just return
 	if(el.field_lang) return;
 	var langs;
-	var m = el.value.match(/(\d+\.\s+)?<multi>((?:.|\n|\s)*?)<\/multi>/);
+	// Modif Yffic : ne pas considerer comme multi les champs qui contiennent du texte
+	// en dehors des multi sauf un numero (\d+\.\s+)
+	el.value = el.value.replace(/^\s+/g,'').replace(/\s+$/g,'') ;
+	var m = el.value.match(/(\d+\.\s+)?<multi>((?:.|\n|\s)*?)<\/multi>(.*)/);
 	el.field_lang = {};
 	el.field_pre_lang = ""; //this is the 01. part of the string, the will be put outside the <multi>
 	el.titre_el = $("#titre_"+el.id);
+	// Add Yffic 30/03/2010
+	// Init the elements to treat
 	if(m!=null) {
-	  el.field_pre_lang = m[1] || "";
-		el.multi = true;
-		match_multi.lastIndex=0;
-		while((langs=match_multi.exec(m[2]))!=null) {
-			var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
-      if(text!=null) {
-        value = text[2];
-        el.field_pre_lang = text[1] || "";
-      } else {
-        value = langs[2];
-      }
-      el.field_lang[langs[1]||multilang_def_lang] = value; 
+		if( m.index || (m[3]!=undefined && m[3]!=""))
+			el.totreat=false;
+		else
+			el.totreat=true;
+		if(el.totreat) {
+			el.field_pre_lang = m[1] || "";
+			// Modif Yffic : suppress point and spaces
+			el.field_pre_lang = el.field_pre_lang.replace(/\.\s+/,'') ;
+			el.multi = true;
+			match_multi.lastIndex=0;
+			while((langs=match_multi.exec(m[2]))!=null) {
+				var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
+				if(text!=null) {
+					value = text[2];
+					// Modif Yffic : suppress point and spaces
+					el.field_pre_lang = text[1].replace(/\.\s+/,'') || "";
+				} else {
+					value = langs[2];
+				}
+				el.field_lang[langs[1]||multilang_def_lang] = value; 
+			}
+			//Put the current lang string only in the field
+			forms_set_lang(el,lang);
 		}
-		//Put the current lang string only in the field
-		forms_set_lang(el,lang);
 	} else {
 		el.multi = false;
-		el.field_lang[lang] = el.value; 		
+		el.totreat=true;
+		el.field_lang[lang] = el.value;
 	}
+
+	field_set_background(el,lang) ;
+
+	// Add Yffic 30/03/2010
+	// Add an input for the title number
+	if(el.id=='titre' || el.id.match(/^titre_document[0-9]+/)){
+		numid=el.id+'_numero';
+		$(el).parent()
+				.prepend("<div style='clear:left'></div>")
+				.prepend('<label for="titre_numero">Num : </label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" class="text"></input>');
+		$('#'+numid).totreat = false;
+	}
+	// End Add Yffic
+
+}
+
+function field_set_background(el,lang) {
+	if(el.totreat)
+		$(el).css({"background":"url("+dir_plugin+"/images/multi_"+(el.multi?lang:undefined)+".png) no-repeat right top"});
+	else
+		$(el).css({"background":"url("+dir_plugin+"/images/multi_forbidden.png) no-repeat right top"});
 }
 
 function forms_set_lang(el,lang) {
+	//Add Yffic 30/03/2010
+	if(!el.totreat) return ;
+	//End Add Yffic
+	
 	//if current lang is not setted use default lang value
 	if(el.field_lang[lang]==undefined)
-			el.field_lang[lang] = el.field_lang[multilang_def_lang];
-	el.value = el.field_pre_lang+(el.field_lang[lang]==undefined?"":el.field_lang[lang]); //show the common part (01. ) before the value
+		el.field_lang[lang] = el.field_lang[multilang_def_lang];
+	// Modif Yffic : Don't add the field_pre_lang
+	el.value = (el.field_lang[lang]==undefined?"":el.field_lang[lang]); //show the common part (01. ) before the value
 	el.titre_el.html(el.value);
+	
+	field_set_background(el,lang) ;
 }
 
 function forms_save_lang(el,lang) {
+	//Add Yffic 30/03/2010
+	if(!el.totreat) return ;
+	//End Add Yffic
+
 	//if the lang value is equal to the def lang do nothing
 	//else save value but if the field is not empty, delete lang value
 	var m = el.value.match(/^(\d+\.\s+)((?:.|\n|\s)*)/);
 	if(m!=null) {
-    el.field_pre_lang = m[1];
-    el.value = m[2];
-  }
+		// Modif Yffic : suppress point and spaces
+		el.field_pre_lang = m[1].replace(/\.\s+/,'');
+		el.value = m[2];
+	}
 	if(el.field_lang[multilang_def_lang]!=el.value) { 
 		if(!el.value) {
 			delete el.field_lang[lang];
@@ -225,15 +268,16 @@ function forms_multi_submit(params) {
 	multilang_containers.not("div.menu_lang",$(this));
 	//build the input values
 	$(multilang_fields_selector,this).each(function(){
+		//Add Yffic 30/03/2010
+		if(!this.totreat) return ;
+		//End Add Yffic
 		//save data before submit
 		forms_save_lang(this,form.form_lang || multilang_def_lang);
 		//build the string value
 		var def_value = this.field_lang[multilang_def_lang];
-		//Add Yffic 30/03/2010
-		//def_value is undefined if the field is empty now
-		//if(def_value==undefined) def_value='' ;
-		//End Add Yffic
-		if(!this.multi) this.value = this.field_pre_lang+(def_value==undefined?"":def_value);
+		if(!this.multi)
+			// Modif Yffic : Don't add the field_pre_lang now
+			this.value = (def_value==undefined?"":def_value);
 		else {
 			var value="",count=0;
 			$.each(this.field_lang,function(name){
@@ -244,8 +288,15 @@ function forms_multi_submit(params) {
 					count++;
 				}
 			});
-			this.value = this.field_pre_lang+(count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
+			// Modif Yffic : Don't add the field_pre_lang now
+			this.value = (count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 		} 
+		// Add Yffic 30/03/2010
+		// Add the title number to the final value
+		if((this.id=='titre' || this.id.match(/^titre_document[0-9]+/)) && $('#'+this.id+'_numero').val()!='')
+			this.value=$('#'+this.id+'_numero').val()+". "+this.value;
+		// End Add Yffic
+
 	});
 	//save back the params
 	if(params) $.extend(params,$(form).formToArray(false));
