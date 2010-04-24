@@ -164,7 +164,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if (empty($lettre)) 
 			$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere . $critere2, '', "nom_famille ", "$debut,$max_par_page" );
+		$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 		while ($data = spip_fetch_array($query)) {	
 			$id_auteur=$data['id_auteur'];			
 			switch($data['statut_interne'])	{

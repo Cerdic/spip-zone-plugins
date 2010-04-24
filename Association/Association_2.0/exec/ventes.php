@@ -43,12 +43,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<p>En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e</p>'; 
 		
 		// TOTAUX
-		$query = spip_query( "SELECT sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation ='".lire_config('association/pc_ventes')."' ");
+		$query = spip_query( "SELECT imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation ='".lire_config('association/pc_ventes')."' ");
 		while ($data = spip_fetch_array($query)) {
-			$somme_recettes = $data['somme_recettes'];
-			$somme_depenses = $data['somme_depenses'];
-			$solde= $somme_recettes - $somme_depenses;
-			
+			$solde= $data['somme_depenses'] + $data['somme_recettes'];
+			$imputation = $data['imputation'];
 			echo '<table width="100%">';
 			echo '<tr>';
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';

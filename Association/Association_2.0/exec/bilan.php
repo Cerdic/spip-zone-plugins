@@ -25,6 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_comptes = generer_url_ecrire('comptes');
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_action_comptes = generer_url_ecrire('action_comptes');
+		$total_actuel=$total_initial=$total_recettes=$total_depenses=$total_soldes=0;
 		
 		//debut_page(_T('Gestion pour  Association'), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
