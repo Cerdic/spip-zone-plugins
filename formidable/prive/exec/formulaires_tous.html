@@ -3,17 +3,9 @@
 	<h1>
 		<:formidable:bouton_formulaires:>
 	</h1>
-	
-	<B_tous>
-	<ul>
-	<BOUCLE_tous(FORMULAIRES)>
-		<li><a href="#URL_ECRIRE{formulaires_voir, id_formulaire=#ID_FORMULAIRE}">#TITRE</a></li>
-	</BOUCLE_tous>
-	</ul>
-	</B_tous>
-	<p><:formidable:formulaires_aucun:></p>
-	<//B_tous>
 </div>
+
+<INCLURE{fond=prive/liste/formulaires}{titre=<:formidable:bouton_formulaires:>}{ajax}>
 
 <a href="[(#URL_ECRIRE{formulaires_editer}|parametre_url{nouveau,oui})]" class="icone36" style="display:block; margin:1em auto;">
 	<img width="48" height="48" src="#CHEMIN{images/formulaire-nouveau-48.png}" />
