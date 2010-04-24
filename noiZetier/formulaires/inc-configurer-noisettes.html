@@ -38,7 +38,7 @@
 					</BOUCLE_si_pas_saisies>
 					</div>
 			</div>
-			[(#AUTORISER{configurer,noizetier}|oui)
+			[(#AUTORISER{configurer,noizetier}|et{#ENV{id_noisette}|non}|et{#ENV{bloc_page_nouvelle_noisette}|non})
 			<div class="actions">
 				[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|oui)
 				<button name="modifier_noisette" value="#ID_NOISETTE" title="<:noizetier:formulaire_modifier_noisette:>">
