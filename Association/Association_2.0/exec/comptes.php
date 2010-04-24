@@ -90,7 +90,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<tr>';
 		echo '<td>';
 		
-		$query = spip_query ("SELECT date_format( date, '%Y' )  AS annee FROM spip_asso_comptes WHERE imputation like '$imputation' GROUP BY annee ORDER by annee");
+		$query = sql_select("date_format( date, '%Y' )  AS annee", "spip_asso_comptes", "imputation like '$imputation' ", "annee", "annee");
 		
 		while ($data = spip_fetch_array($query)) {
 			if ($data['annee']==$annee)	{echo ' <strong>'.$data['annee'].' </strong>';}
