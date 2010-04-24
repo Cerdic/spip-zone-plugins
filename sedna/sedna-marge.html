@@ -1,18 +1,23 @@
+#CACHE{0}
+[(#REM|sedna_utils)]
+#SET{sedna_synchro,#EVAL{$_COOKIE['sedna_synchro']}}
+#SET{synchro,#EVAL{$_COOKIE['synchro']}}
+#SET{sedna_style,#EVAL{$_COOKIE['sedna_style']}}
 <h1><:sedna:articles_recents_court:></h1>
 <ul>
-	<li><a href="[(#SELF|parametre_url{age,''})]"
+	<li><a href="[(#SELF|parametre_url{refresh,''}|parametre_url{age,''})]"
 	class="[(#ENV{age}|=={''}|?{'selected',''})]"><:date_aujourdhui|ucfirst:></a></li>
-	<li><a href="[(#SELF|parametre_url{age,2})]"
+	<li><a href="[(#SELF|parametre_url{refresh,''}|parametre_url{age,2})]"
 	class="[(#ENV{age}|=={2}|?{'selected',''})]"><:sedna:deuxjours:></a></li>
-	<li><a href="[(#SELF|parametre_url{age,7})]"
+	<li><a href="[(#SELF|parametre_url{refresh,''}|parametre_url{age,7})]"
 	class="[(#ENV{age}|=={7}|?{'selected',''})]"><:sedna:semaine:></a></li>
-	<li><a href="[(#SELF|parametre_url{age,31})]"
+	<li><a href="[(#SELF|parametre_url{refresh,''}|parametre_url{age,31})]"
 	class="[(#ENV{age}|=={31}|?{'selected',''})]"><:sedna:mois:></a></li>
-	<li><a href="[(#SELF|parametre_url{age,365})]"
+	<li><a href="[(#SELF|parametre_url{refresh,''}|parametre_url{age,365})]"
 	class="[(#ENV{age}|=={365}|?{'selected',''})]"><:sedna:annee:></a></li>
 </ul>
 <h1>&nbsp;</h1>
-<form action="#SELF" method="get">
+<form action="[(#SELF|parametre_url{refresh,''})]" method="get">
 <div>
 	<input type="text" name="recherche" value="[(#ENV{recherche})]" size="10" />
 	<input type="hidden" name="page" value="sedna" />
@@ -25,66 +30,58 @@
 <h1><:sedna:preferences:></h1>
 
 <ul>
-<li><a class="<?=$_COOKIE['sedna_style'] == 'masquer'?'':'selected';?>" id="desc_afficher" onmousedown="style_desc('afficher'); return false;"><:sedna:aff_resume:></a></li>
-<li><a class="<?=$_COOKIE['sedna_style'] == 'masquer'?'selected':'';?>" id="desc_masquer" onmousedown="style_desc('masquer'); return false;"><:sedna:masquer_resume:></a></li>
+	<li>
+		<a class="[(#GET{sedna_style}|=={masquer}|?{'','selected'})]" id="desc_afficher" onmousedown="style_desc('afficher'); return false;"><:sedna:aff_resume:></a>
+	</li>
+	<li>
+		<a class="[(#GET{sedna_style}|=={masquer}|?{'selected',''})]" id="desc_masquer" onmousedown="style_desc('masquer'); return false;"><:sedna:masquer_resume:></a>
+	</li>
 </ul>
 
-<?php
-	// Si on se connecte on peut memoriser son cookie
-	if (isset($auteur_session['statut'])) { ?>
+[(#SESSION{statut}|oui)
+	<ul>
+	<li>
+	<a id="synchrooui"
+		class='[(#GET{sedna_synchro}|=={oui}|?{'selected',''})]'
+		onclick="sedna_synchro('oui');document.location=document.location;"
+		title="<:sedna:synchro_titre:>"
+	><:sedna:synchro:>[(#GET{synchro})]</a>
+	</li>
+	<li>
+	<a id="synchronon"
+		class='[(#GET{sedna_synchro}|!={oui}|?{'selected',''})]'
+		onclick="sedna_synchro('non');"
+	><:sedna:pas_synchro:></a>
+	</li>
+	</ul>
 
-<ul>
-<li>
-<a id="synchrooui"
-	class='<?=$_COOKIE['sedna_synchro'] == 'oui'?'selected':'';?>'
-	onclick="sedna_synchro('oui');document.location=document.location;"
-	title="<:sedna:synchro_titre:>"
-><:sedna:synchro:><?=$GLOBALS['synchro'];?></a>
-</li>
-<li>
-<a id="synchronon"
-	class='<?=$_COOKIE['sedna_synchro'] != 'oui'?'selected':''?>'
-	onclick="sedna_synchro('non');"
-><:sedna:pas_synchro:></a>
-</li>
-</ul>
-
-
-<ul>
-
-<?php
-	if ($auteur_session['statut'] == '0minirezo') {
-?>
-
-<li>
-<a href="[(#URL_ECRIRE{#ENV{id_syndic,''}|?{sites,sites_tous}}|parametre_url{id_syndic,#ENV{id_syndic,''}})]">[(#ENV{id_syndic}|?{<:ecrire:icone_modifier_site:>, <:login_acces_prive:>})]</a>
-</li>
-
-<?php } ?>
-
-<li>
-[(#REM) Ici #SELF est passe "a cote'" de #URL_LOGOUT, car il y a des
-problemes dans les deux elements au sujet des sous-repertoires]
-<a href="[(#URL_LOGOUT|#SELF)]" rel='nofollow'><:sedna:deconnexion:></a>
-</li>
-</ul>
-
-<?php } else { ?>
+	<ul>
+		[(#SESSION{statut}|=={0minirezo}|oui)
+		<li>
+		<a href="[(#URL_ECRIRE{#ENV{id_syndic,''}|?{sites,sites_tous}}|parametre_url{id_syndic,#ENV{id_syndic,''}})]">[(#ENV{id_syndic}|?{<:ecrire:icone_modifier_site:>, <:login_acces_prive:>})]</a>
+		</li>]
+		<li>
+		[(#REM) Ici #SELF est passe "a cote'" de #URL_LOGOUT, car il y a des
+		problemes dans les deux elements au sujet des sous-repertoires]
+		<a href="[(#URL_LOGOUT{[(#SELF|parametre_url{refresh,''})]})]" rel='nofollow'><:sedna:deconnexion:></a>
+		</li>
+	</ul>
+]
+[(#SESSION{id_auteur}|non)
 <ul><li>
-<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow"><:sedna:connexion:></a>
-</li></ul>
-<?php } ?>
+<a href="[(#URL_PAGE{login}|parametre_url{url,[(#SELF}|parametre_url{refresh,''})]})]" rel="nofollow"><:sedna:connexion:></a>
+</li></ul>]
 
-[(#INCLURE{fond=sedna_selecteur_couleurs}{self=#SELF})]
+[(#INCLURE{fond=sedna_selecteur_couleurs,env})]
 <h1><:sedna:sources:></h1>
 <ul>
-	<li><a href="[(#URL_PAGE{sedna}|parametre_url{age,#ENV{age,''}})]" class="[(#ENV{id_syndic}|=={''}|?{'selected',''})]"><b><:sedna:toutes:></b></a></li>
+	<li><a href="[(#URL_PAGE{sedna}|parametre_url{refresh,''}|parametre_url{age,#ENV{age,''}})]" class="[(#ENV{id_syndic}|=={''}|?{'selected',''})]"><b><:sedna:toutes:></b></a></li>
 </ul>
 
 <ul>
 <BOUCLE_sites(SITES){par nom_site}{syndication!=non}{id_rubrique?}{id_mot?}>
 <li>
-	<a href="[(#SELF|parametre_url{id_syndic,#ID_SYNDIC}|parametre_url{age,#ENV{age,''}})]"
+	<a href="[(#SELF|parametre_url{refresh,''}|parametre_url{id_syndic,#ID_SYNDIC}|parametre_url{age,#ENV{age,''}})]"
 		class="[(#ENV{id_syndic}|=={#ID_SYNDIC}|?{'selected',''})]"
 	><?php
 		if ($_COOKIE['sedna_ignore_[(#ID_SYNDIC)]']) {
@@ -107,8 +104,10 @@ problemes dans les deux elements au sujet des sous-repertoires]
 </li>
 </BOUCLE_sites>
 </ul>
-<small><a href="#URL_PAGE{opml}" rel="nofollow" style="display:inline"><img src="#CHEMIN{opml.png}" alt="" style="border:0;" /> opml</a></small>
-
+<small>
+	<a href="#URL_PAGE{opml}" rel="nofollow" style="display:inline">
+		<img src="#CHEMIN{opml.png}" alt="" style="border:0;" /> opml
+	</a>
+</small>
 [(#INCLURE{fond=sedna_galaxie})]
-
 #MENU_LANG

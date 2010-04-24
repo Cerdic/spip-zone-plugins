@@ -1,6 +1,7 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (preg_match(',&age=([0-9]+)&age=([0-9]+),',$_SERVER['REQUEST_URI'],$regs)){
 	url_de_base();
 	$url = parametre_url(self(),'age',$regs[1],'&');
@@ -8,12 +9,14 @@ if (preg_match(',&age=([0-9]+)&age=([0-9]+),',$_SERVER['REQUEST_URI'],$regs)){
 	redirige_par_entete($url);
 }
 
-if ($var_color=_request('var_color')) {
+if($var_color=_request('var_color')) {
 	include_spip('inc/cookie');
 	spip_setcookie('sedna_color', $var_color, time()+365*24*3600);
 	$_COOKIE['sedna_color'] = $var_color;
 }
+
 $GLOBALS['marqueur'].=isset($_COOKIE['sedna_color'])?(":".$_COOKIE['sedna_color']):"";
+
 function sedna_utils(){
 	$GLOBALS['forcer_lang']= true;
 
@@ -93,7 +96,7 @@ function sedna_utils(){
 		echo "	onmousedown=\"jai_lu('$id_lien');\">\n",
 #		"<small>".affdate($date,'H:i')."</small>",
 		"<abbr class='published updated'
-		title='".date_iso($date)."'>".affdate($date,'H:i')."</abbr>", 
+		title='".date_iso($date)."'>".affdate($date,'H:i')."</abbr>",
 		"<div class=\"titre\">",
 		"<a href=\"$url\"
 			title=\"$url\"
@@ -115,24 +118,21 @@ function sedna_utils(){
 			"<div class=\"$class_desc\" id=\"desc_".(++$iddesc)."\">\n",
 			"<span class=\"entry-summary\">", $desc, "</span>\n",
 			'</div></div>';
-		
+
 
 		echo "\n</li>\n";
 	}
-	
+
 	// Si synchro active il faut comparer le contenu du cookie et ce
 	// qu'on a stocke dans le champ spip_auteurs.sedna (a creer au besoin)
 	$synchro = '';
 	if ($_COOKIE['sedna_synchro'] == 'oui'
-	AND $id = $GLOBALS['auteur_session']['id_auteur']) {
+	AND $id = $GLOBALS['visiteur_session']['id_auteur']) {
 		// Recuperer ce qu'on a stocke
-		if (!$s = spip_query("SELECT sedna FROM spip_auteurs
-		WHERE id_auteur=$id")) {
+		if (!$s = sql_fetsel("sedna","spip_auteurs","id_auteur=$id")) {
 			// creer le champ sedna si ce n'est pas deja fait
-			spip_query("ALTER TABLE spip_auteurs
-			ADD sedna TEXT NOT NULL DEFAULT ''");
+			sql_alter("TABLE spip_auteurs ADD sedna TEXT NOT NULL DEFAULT ''");
 		}
-		$champ = spip_fetch_array($s);
 		$champ = $champ['sedna'];
 		// mixer avec le cookie en conservant un ordre chronologique
 		if ($_COOKIE['sedna_lu'] <> $champ) {
@@ -147,9 +147,7 @@ function sedna_utils(){
 			}
 			$lus = substr(join('-', array_keys($lus)),0,3000); # 3ko maximum
 			// Mettre la base a jour
-			spip_query("UPDATE spip_auteurs SET sedna='"
-				.addslashes($lus)."'
-				WHERE id_auteur=$id");
+			sql_updateq("spip_auteurs",array('sedna',$lus),"id_auteur=$id");
 			$synchro = ' *';
 
 			// Si le cookie n'est pas a jour, on l'update sur le brouteur
@@ -165,7 +163,7 @@ function sedna_utils(){
 	}
 	// forcer le refresh ?
 	if ($id = intval(_request('refresh'))) {
-		include_ecrire('inc_syndic');
+		include_spip('genie/syndic');
 		spip_touch(_DIR_TMP.'syndic.lock');
 		syndic_a_jour($id);
 	}

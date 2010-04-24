@@ -18,22 +18,20 @@
 		<//B_url_backend_ori2>
 	</div>
 	<BOUCLE_refresh(SITES){id_syndic=#ENV{id_syndic}}>
-		<?php
-			if ($auteur_session['statut'] == '0minirezo') { 
-				$ignore = true;
-		?>
+	[(#SESSION{statut}|=={0minirezo}|oui)
+			#SET{ignore,oui}
+
 		[(#ENV{refresh}|=={#ENV{id_syndic}}|?{' ',''}) <:sedna:syndication_fait:>]
 		[(#ENV{refresh}|=={#ENV{id_syndic}}|?{'',<!-- #SYNDICATION -->})
 			[<:sedna:derniere_syndication:>
 			(#DATE_SYNDIC|date_relative) - ]
 		<a href="[(#SELF|parametre_url{refresh,#ID_SYNDIC})]"><:sedna:syndication_ajour:></a>]
 		[- (#SYNDICATION|syndication_en_erreur)]
-	
-	<?php } ?>
+	]
 	</BOUCLE_refresh>
-	<?php
-		if (!$ignore)
-			echo "<:sedna:derniere_syndication:> "
-			.date_relative($GLOBALS['sedna_max_maj']);
-	?>
+	#SET{max_age,#EVAL{$GLOBALS['sedna_max_maj']}}
+	[(#GET{ignore}|!={oui}|oui)
+		[<:sedna:derniere_syndication:>
+		(#GET{max_age}|date_relative)]
+	]
 </div>

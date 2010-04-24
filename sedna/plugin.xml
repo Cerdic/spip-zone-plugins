@@ -1,30 +1,19 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Sedna
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
+	<nom>Sedna</nom>
+	<auteur>
  	Fil
-_ &#169; 2005-2009 - Distribu&eacute; sous licence GPL
 	</auteur>
-	<version> <!-- Version du plugin -->
-	1.1
-	</version>
+	<licence>&#169; 2005-2010 - Distribu&eacute; sous licence GPL</licence>
+	<version>1.2</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	stable
 	</etat>
-
 	<description>
 	Agr&#233;gateur RSS
-
-	Documentation: [->www.spip-contrib.net/Sedna-agregateur]
-	
 	</description>
-
+	<lien>http://www.spip-contrib.net/Sedna-agregateur</lien>
 	<icon>sedna-logo.jpg</icon>
-
-	<prefix> 
-	sedna
-	</prefix>
-	<necessite id='SPIP' version='[1.9.0;]' />
+	<prefix>sedna</prefix>
+	<necessite id='SPIP' version='[2.1.0;]' />
 	<options>sedna_options.php</options>
 </plugin>

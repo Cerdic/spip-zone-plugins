@@ -1,18 +1,17 @@
-<?php sedna_utils(); ?>
-<INCLURE{fond=sedna_header}{id_syndic}{recherche}{age}{var_color}{self=#SELF}>
+<INCLURE{fond=sedna_header,env}>
 [(#REM)
 	Microformat hAtom !
 ]
 <div class="hfeed">
-<INCLURE{fond=sedna-top}{id_syndic}>
+<INCLURE{fond=sedna-top,id_syndic}>
 <div class="marge">
-<INCLURE{fond=sedna-marge}{id_syndic}{recherche}{age}{var_color}{self=#SELF}{id_rubrique}{id_mot}>
+<INCLURE{fond=sedna-marge,env}>
 </div>
 <div class="milieu">
-<INCLURE{fond=sedna-milieu}{id_syndic}{recherche}{age}{var_color}{self=#SELF}{id_rubrique}{id_mot}>
+<INCLURE{fond=sedna-milieu,env}>
 </div>
 
-<INCLURE{fond=sedna-pied}{id_syndic=#ENV{id_syndic,''}}{refresh=#ENV{refresh}}{max_maj=#ENV{max_maj}}>
+<INCLURE{fond=sedna-pied,env}>
 </div>[(#REM) /hfeed]
 
 #SPIP_CRON
