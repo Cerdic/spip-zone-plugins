@@ -43,6 +43,10 @@ function autoriser_lettre_modifier_dist($faire, $type, $id, $qui, $opt){
 	$statut = sql_getfetsel('statut', 'spip_lettres', 'id_lettre='.intval($id));
 	if ($statut=='brouillon')
 		return autoriser('editer','lettres');
+	// cas des crayons et du controleur message
+	// on autorise les webmestre !
+	if (isset($opt['champ']) AND $opt['champ']=='message')
+		return autoriser('webmestre');
 	return false;
 }
 

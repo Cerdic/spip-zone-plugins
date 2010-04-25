@@ -3,6 +3,7 @@
 #MESSAGE_TEXTE
 (#ENV{format}|=={'texte'}|oui)]
 [
+[(#HTTP_HEADER{Content-type: text/html; charset=#CHARSET})]
 [(#ENV{edit}|oui)<div class="#EDIT{message}">]
 #MESSAGE_HTML
 [</div>(#ENV{edit}|oui)]
