@@ -1,0 +1,18 @@
+<div class="cadre cadre-e" style="margin-top: 2em;">
+	[(#VAL{langonet:titre_bloc_logs_#ENV{verification}}|_T|bouton_block_depliable{#EVAL{true}})]
+	[(#EVAL{true}|debut_block_depliable)]
+	<div class="cadre_padding">
+	<B_logs>
+		[<p>(#ENV{verification}|=={definition}|?{<:langonet:info_bloc_logs_definition:>, <:langonet:info_bloc_logs_utilisation:>})</p>]
+		<ul>
+	<BOUCLE_logs(POUR){tableau #ENV{fichiers_log}}>
+			[<li>(#BOUTON_ACTION{#CLE, #URL_ACTION_AUTEUR{langonet_telecharger,#VALEUR}})</li>]
+	</BOUCLE_logs>
+		</ul>
+	</B_logs>
+		<:langonet:message_nok_aucun_fichier_log:>
+	<//B_logs>
+		<div class="nettoyeur"></div>
+	</div>
+	[(#VAL|fin_block)]
+</div>

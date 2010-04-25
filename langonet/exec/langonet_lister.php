@@ -21,11 +21,11 @@ function exec_langonet_lister_dist(){
 	
 	// colonne gauche
 	echo debut_gauche('', true);
-	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'langonet'),'data'=>''));
+	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'langonet_lister'),'data'=>''));
 	
 	// colonne droite
 	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite', array('args'=>array('exec'=>'langonet'),'data'=>''));
+	echo pipeline('affiche_droite', array('args'=>array('exec'=>'langonet_lister'),'data'=>''));
 	
 	// centre
 	echo debut_droite('', true);
@@ -40,7 +40,7 @@ function exec_langonet_lister_dist(){
  	echo recuperer_fond('prive/contenu/langonet_lister',  array());
 
 	// fin contenu
-	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'langonet'),'data'=>''));
+	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'langonet_lister'),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 }

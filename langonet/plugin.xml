@@ -16,6 +16,10 @@ Ce plugin permet d'ex&eacute;cuter des actions de v&eacute;rification et de nett
 		<nom>autoriser</nom>
 		<inclure>inc/langonet_autoriser.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>langonet_pipelines.php</inclure>
+	</pipeline>
 
 	<bouton id="langonet" parent="naviguer">
 		<icone>themes/spip/images/langonet-24.png</icone>
@@ -27,7 +31,7 @@ Ce plugin permet d'ex&eacute;cuter des actions de v&eacute;rification et de nett
 		<titre>langonet:bouton_langonet</titre>
 		<url>langonet_verifier</url>
 	</bouton>
-	<onglet id='langonet' parent='langonet'>
+	<onglet id='langonet_verifier' parent='langonet'>
 		<icone>themes/spip/images/langonet-24.png</icone>
 		<titre>langonet:onglet_verifier</titre>
 		<url>langonet_verifier</url>

@@ -1,0 +1,18 @@
+<div class="cadre cadre-e" style="margin-top: 2em;">
+	[(#VAL{langonet:titre_bloc_lang}|_T|bouton_block_depliable{#EVAL{true}})]
+	[(#EVAL{true}|debut_block_depliable)]
+	<div class="cadre_padding">
+	<B_logs>
+		<p><:langonet:info_bloc_lang:></p>
+		<ul>
+	<BOUCLE_logs(POUR){tableau #ENV{fichiers_lang}}>
+			[<li>(#BOUTON_ACTION{#CLE, #URL_ACTION_AUTEUR{langonet_telecharger,#VALEUR}})</li>]
+	</BOUCLE_logs>
+		</ul>
+	</B_logs>
+		<:langonet:message_nok_aucun_fichier_lang:>
+	<//B_logs>
+		<div class="nettoyeur"></div>
+	</div>
+	[(#VAL|fin_block)]
+</div>
