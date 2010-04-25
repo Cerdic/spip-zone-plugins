@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 	'info_arborescence_scannee' => 'Choisissez le r&eacute;pertoire de base dont l\'arborescence sera scann&eacute;e',
+	'info_bloc_langues_generees' => 'Cliquez sur un lien ci-dessous pour t&eacute;l&eacute;charger l\'un des fichiers de langue g&eacute;n&eacute;r&eacute;s.',
 	'info_bloc_logs_definition' => 'Cliquez sur un lien ci-dessous pour t&eacute;l&eacute;charger le dernier fichier de logs de v&eacute;rification des d&eacute;finitions manquantes d\'un fichier de langue.',
 	'info_bloc_logs_utilisation' => 'Cliquez sur un lien ci-dessous pour t&eacute;l&eacute;charger le dernier fichier de logs de v&eacute;rification des d&eacute;finitions obsol&egrave;tes d\'un fichier de langue.',
 	'info_chemin_langue' => 'Dossier dans lequel est install&eacute; le fichier de langue (exemple : <em>plugins/rainette/lang/</em>, ou <em>ecrire/lang/</em>)',
@@ -65,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 	'message_nok_aucun_fichier_log' => 'Aucun fichier de log disponible au t&eacute;l&eacute;chargement',
+	'message_nok_aucune_langue_generee' => 'Aucun fichier de langue g&eacute;n&eacute;r&eacute; disponible au t&eacute;l&eacute;chargement',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
 	'message_nok_ecriture_fichier' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; n\'a pas &eacute;t&eacute; cr&eacute;&eacute; car une erreur s\'est produite lors de son &eacute;criture !',
 	'message_nok_fichier_langue' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; est introuvable dans le r&eacute;pertoire &laquo;<em>@dossier@</em>&raquo; !',
@@ -112,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 	'texte_item_defini_ou' => '<em>d&eacute;fini dans :</em>',
 	'texte_item_utilise_ou' => '<em>utilis&eacute; dans :</em>',
+	'titre_bloc_langues_generees' => 'Fichiers de langue',
 	'titre_bloc_logs_definition' => 'D&eacute;finitions manquantes',
 	'titre_bloc_logs_utilisation' => 'D&eacute;finitions obsol&egrave;tes',
 	'titre_page_navigateur' => 'LangOnet',

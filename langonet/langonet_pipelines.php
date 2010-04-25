@@ -7,17 +7,15 @@
  * @return string
  */
 function langonet_affiche_gauche($flux) {
+	include_spip('inc/langonet_utils');
 
 	$exec = $flux["args"]["exec"];
-
 	if ($exec == "langonet_verifier") {
-		include_spip('inc/langonet_utils');
-
-		$flux["data"] .= recuperer_fond('prive/navigation/bloc_fichiers_log',  array('verification' => 'definition', 'fichiers_log' => langonet_lister_fichiers_log('definition')));
-		$flux["data"] .= recuperer_fond('prive/navigation/bloc_fichiers_log',  array('verification' => 'utilisation', 'fichiers_log' => langonet_lister_fichiers_log('utilisation')));
+		$flux["data"] .= recuperer_fond('prive/navigation/bloc_fichiers_log', array('verification' => 'definition', 'fichiers_log' => langonet_lister_fichiers_log('definition')));
+		$flux["data"] .= recuperer_fond('prive/navigation/bloc_fichiers_log', array('verification' => 'utilisation', 'fichiers_log' => langonet_lister_fichiers_log('utilisation')));
 	}
 	if ($exec == "langonet_generer") {
-		$flux["data"] .= recuperer_fond('prive/navigation/bloc_fichiers_lang',  array());
+		$flux["data"] .= recuperer_fond('prive/navigation/bloc_fichiers_lang', array('fichiers_lang' => langonet_lister_fichiers_lang()));
 	}
 
 	return $flux;
