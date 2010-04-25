@@ -121,7 +121,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 		style='text-align: $spip_lang_right;'>
 		<a href='$fichier'
 		style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>" .
-		  _T('colorationcode:telecharger') .
+		  _T('bouton_telecharger') .
 				"</a></div>";
 	}
 	return $rempl.'</div>';
