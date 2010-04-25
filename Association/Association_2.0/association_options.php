@@ -14,6 +14,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'/img_pack/');
 
+// Le premier element indique un ancien membre
+$GLOBALS['association_liste_des_statuts'] =
+  array('sorti','prospect','ok','echu','relance');
+
+function request_statut_interne()
+{
+	$statut_interne = _request('statut_interne');
+	if (in_array($statut_interne, $GLOBALS['association_liste_des_statuts'] ))
+		return "statut_interne=" . sql_quote($statut_interne);
+	elseif ($statut_interne == 'tous')
+		return "statut_interne LIKE '%'";
+	else {
+		set_request('statut_interne', 'defaut');
+		$a = $GLOBALS['association_liste_des_statuts'];
+		array_shift($a);
+		return sql_in("statut_interne", $a);
+	}
+}
+
 function association_ajouterBoutons($boutons_admin) {
 		// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {

@@ -11,22 +11,8 @@ function exec_pdf_adherents()
 	}
 
 	define('FPDF_FONTPATH','font/');
-	include_spip('association_fonctions');
 	include_spip('pdf/pdf_table');
 	include_spip('inc/charsets');
-
-	if ( isset ($_REQUEST['filtre'] )) { $filtre = $_REQUEST['filtre']; }
-	else { $filtre = 'defaut'; }
-
-	switch($filtre) {
-		case "defaut": 		$critere="statut_interne IN ('ok','echu','relance')";break;
-		case "ok": 		$critere="statut_interne='ok'";break;
-		case "echu": 		$critere="statut_interne='echu'";break;
-		case "relance": 	$critere="statut_interne='relance'";break;
-		case "sorti": 		$critere="statut_interne='sorti'";break;	   
-		case "prospect": 	$critere="statut_interne='prospect'";break;
-		case "tous": 		$critere="statut_interne LIKE '%'";break;	
-	}
 
 	class PDF extends PDF_Table {
 		
@@ -66,7 +52,7 @@ function exec_pdf_adherents()
 	);
 	$order = lire_config('association/indexation');
 	$order = 'nom_famille' . ($order ? (",$order") : '');
-	$pdf->Query(association_auteurs_elargis_select('*', '', $critere, '', $order), $prop);
+	$pdf->Query(association_auteurs_elargis_select('*', '', request_statut_interne(), '', $order), $prop);
 	$pdf->Output();
 }
 ?>

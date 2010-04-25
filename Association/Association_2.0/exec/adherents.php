@@ -42,19 +42,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_gauche("",true);
 		
-		if ( isset ($_REQUEST['filtre'] )) { $filtre = $_REQUEST['filtre']; }
-		else { $filtre = 'defaut'; }
-		
-		switch($filtre) {
-			case "defaut": $critere="statut_interne IN ('ok','echu','relance')";break;
-			case "ok": $critere="statut_interne='ok'";break;
-			case "echu": $critere="statut_interne='echu'";break;
-			case "relance": $critere="statut_interne='relance'";break;
-			case "sorti": $critere="statut_interne='sorti'";break;	   
-			case "prospect": $critere="statut_interne='prospect'";break;
-			case "tous": $critere="statut_interne LIKE '%'";break;	
-		}			
-		
+		$critere = request_statut_interne(); // peut appeler set_request
+		$statut_interne = _request('statut_interne');
+
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
@@ -63,7 +53,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo '<div><strong>'._T('asso:adherent_liste_nombre').'</strong></div>';
 		$nombre=0;
-		foreach (array(ok,echu,relance,prospect) as $statut) {
+		$membres = $GLOBALS['association_liste_des_statuts'];
+		array_shift($membres); // ancien membre
+		foreach ($membres as $statut) {
 			$query = association_auteurs_elargis_select("*",'', "statut_interne='$statut'");
 			$nombre=sql_count($query);
 			echo '<div style="float:right;text_align:right">'.$nombre.'</div>';
@@ -76,8 +68,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		
 		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  _DIR_PLUGIN_ASSOCIATION_ICONES.'ico_panier.png','rien.gif',false );
-		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION_ICONES.'print-24.png','rien.gif',false ); 
-		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association.'&filtre='.$filtre,  _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif','rien.gif',false ); 
+		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&statut_interne='.$statut_interne,  _DIR_PLUGIN_ASSOCIATION_ICONES.'print-24.png','rien.gif',false ); 
+		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association,  _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif','rien.gif',false ); 
 			echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
@@ -95,16 +87,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$query = association_auteurs_elargis_select("upper( substring( nom_famille, 1, 1 ) )  AS init", '', '',  'init', 'nom_famille, id_auteur');
 		
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			if($data['init']==$lettre) {
 				echo ' <strong>'.$data['init'].'</strong>';
 			}
 			else {
-				echo ' <a href="'.$url_adherents.'&lettre='.$data['init'].'&filtre='.$filtre.'">'.$data['init'].'</a>';
+				echo ' <a href="'.$url_adherents.'&lettre='.$data['init'].'&statut_interne='.$statut_interne.'">'.$data['init'].'</a>';
 			}
 		}
 		if ($lettre == "%") { echo ' <strong>'._T('asso:adherent_entete_tous').'</strong>'; }
-		else { echo ' <a href="'.$url_adherents.'&filtre='.$filtre.'">'._T('asso:adherent_entete_tous').'</a>'; }
+		else { echo ' <a href="'.$url_adherents.'&statut_interne='.$statut_interne.'">'._T('asso:adherent_entete_tous').'</a>'; }
 		
 		// FILTRES
 		echo '<td style="text-align:right;">';
@@ -128,10 +120,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		//Filtre statut
 		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
-		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-		foreach (array(defaut,ok,echu,relance,sorti,prospect) as $statut) {
+		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
+		foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 			echo '<option value="'.$statut.'"';
-			if ($filtre==$statut) {echo ' selected="selected"';}
+			if ($statut_interne==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
 		}
 		echo '</select>';
@@ -242,7 +234,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 					echo '<strong>'.$position.' </strong>';
 				}
 				else {
-					echo '<a href="'.$url_adherents.'&lettre='.$lettre.'&debut='.$position.'&filtre='.$filtre.'">'.$position.'</a> ';
+					echo '<a href="'.$url_adherents.'&lettre='.$lettre.'&debut='.$position.'&statut_interne='.$statut_interne.'">'.$position.'</a> ';
 				}
 			}	
 		}

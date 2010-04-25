@@ -63,7 +63,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			if ($statut_interne==$var) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
 		}
-		echo '</select>'.$statut_interne;
+		echo '</select>';
 		echo '</form>';
 		echo '</td></tr>';
 		echo '</table>';
