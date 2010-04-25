@@ -43,7 +43,8 @@
 					if (lettres_verifier_validite_email($email)) {
 						if (!lettres_tester_parmi_desabonnes($email)) {
 							$abonne = new abonne(0, $email);
-							$abonne->nom	= $nom;
+							if ($nom)
+								$abonne->nom	= $nom;
 							$abonne->format = $format;
 							$abonne->enregistrer();
 							$abonne->enregistrer_abonnement($id_rubrique);

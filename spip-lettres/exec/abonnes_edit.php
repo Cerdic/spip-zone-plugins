@@ -32,11 +32,12 @@
 
 		if (!empty($_POST['enregistrer'])) {
 			if (lettres_verifier_validite_email($_POST['email'])) {
-				$abonne = new abonne($id_abonne);
+				// retrouver l'abonne deja existant par son email si c'est une creation
+				$abonne = new abonne($id_abonne, $_POST['email']);
 				$abonne->email	= $_POST['email'];
-				$abonne->nom	= $_POST['nom'];
+				if ($_POST['nom'])
+					$abonne->nom	= $_POST['nom'];
 				$abonne->format	= $_POST['format'];
-
 				$abonne->enregistrer();
 
 				if (isset($_POST['id_rubrique'])) {

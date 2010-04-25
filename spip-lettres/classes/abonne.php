@@ -49,7 +49,7 @@
 		 **/
 		function abonne($id_abonne=0, $email='') {
 			global $table_des_abonnes;
-			if ($id_abonne != 0) {
+			if (intval($id_abonne) != 0) {
 				$this->id_abonne = intval($id_abonne);
 				$spip_abonne = sql_select('*', 'spip_abonnes', 'id_abonne='.$this->id_abonne);
 				if (sql_count($spip_abonne) == 1) {
@@ -72,20 +72,19 @@
 						$this->maj			= $abo['maj'];
 					}
 				}
-			} else if (lettres_verifier_validite_email($email)) {
+			} else if ($email AND lettres_verifier_validite_email($email)) {
 				$this->email = $email;
 				foreach ($table_des_abonnes as $valeur) {
 					$spip_objets = @sql_select('*', 'spip_'.$valeur['table'], $valeur['champ_email'].'='.sql_quote($this->email));
-					if (@sql_count($spip_objets) == 1) {
-						$arr = sql_fetch($spip_objets);
+					if ($arr = sql_fetch($spip_objets)) {
+						$this->nom			= $arr[$valeur['champ_nom']];
+						$this->objet		= $valeur['table'];
+						$this->id_objet		= $arr[$valeur['champ_id']];
 						$spip_abonnes = sql_select('*', 'spip_abonnes', 'objet="'.$valeur['table'].'" AND id_objet='.$arr[$valeur['champ_id']]);
 						if (sql_count($spip_abonnes) == 1) {
 							$abo = sql_fetch($spip_abonnes);
 							$this->id_abonne	= $abo['id_abonne'];
-							$this->objet		= $valeur['table'];
-							$this->id_objet		= $arr[$valeur['champ_id']];
 							$this->code			= $abo['code'];
-							$this->nom			= $arr[$valeur['champ_nom']];
 							$this->format		= $abo['format'];
 							$this->extra		= $abo['extra'];
 							$this->maj			= $abo['maj'];
