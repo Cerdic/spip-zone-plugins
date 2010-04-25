@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement.',
 'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez v&eacute;rifier votre envoi.',
 'erreur_identifiant' => 'Cet identifiant est d&eacute;j&agrave; utilis&eacute;.',
+'erreur_importer_yaml' => 'Erreur durant l\'importation du fichier YAML',
 'erreur_inexistant' => 'Le formulaire n\'exsite pas.',
 
 'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',
@@ -49,6 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaires_supprimer' => 'Supprimer le formulaire',
 'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les r&eacute;sultats. &Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce formulaire ?',
 'formulaires_tous' => 'Tous les formulaires',
+
+'importer_formulaire' => 'Importer un formulaire',
+'importer_formulaire_fichier_label' => 'Fichier &agrave; importer',
+'importer_formulaire_format_label' => 'Format du fichier',
 
 'reponse_intro' => '@auteur@ a r&eacute;pondu au formulaire @formulaire@',
 'reponse_numero' => 'R&eacute;ponse num&eacute;ro :',

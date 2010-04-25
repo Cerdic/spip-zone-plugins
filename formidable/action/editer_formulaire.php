@@ -61,6 +61,7 @@ function insert_formulaire() {
  * @return $err
  */
 function formulaire_set($id_formulaire, $set=null) {
+	include_spip('inc/saisies');
 	$err = '';
 
 	$c = array();

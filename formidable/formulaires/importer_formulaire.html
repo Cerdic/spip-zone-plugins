@@ -1,4 +1,4 @@
-<div class="formulaire_compact formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id})]">
+<div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
@@ -9,7 +9,15 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
 		<ul>
-			#SAISIE{selection, type_export, datas=#ENV{types_echange}, cacher_option_intro=oui}
+			[(#SAISIE{selection, type_import,
+				label=<:formidable:importer_formulaire_format_label:>,
+				datas=#ENV{_types_import},
+				cacher_option_intro=oui})]
+			
+			[(#SAISIE{input, fichier,
+				label=<:formidable:importer_formulaire_fichier_label:>,
+				type=file,
+				size=6})]
 		</ul>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

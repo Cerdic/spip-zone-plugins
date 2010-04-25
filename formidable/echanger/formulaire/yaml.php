@@ -33,6 +33,47 @@ function echanger_formulaire_yaml_exporter_dist($id_formulaire){
 }
 
 function echanger_formulaire_yaml_importer_dist($fichier){
+	$yaml = '';
+	lire_fichier($fichier, $yaml);
+	// Si on a bien recupere une chaine on tente de la decoder
+	if ($yaml){
+		include_spip('inc/yaml');
+		$formulaire = yaml_decode($yaml);
+		// Si le decodage marche on importe alors le contenu
+		if (is_array($formulaire)){
+			include_spip('action/editer_formulaire');
+			// On enlève les champs inutiles
+			unset($formulaire['id_formulaire']);
+			// On vérifie que l'identifiant n'existe pas déjà
+			$deja = sql_getfetsel(
+				'id_formulaire',
+				'spip_formulaires',
+				'identifiant = '.sql_quote($formulaire['identifiant'])
+			);
+			if ($deja)
+				$formulaire['identifiant'] = $formulaire['identifiant'].'_'.time();
+			// On insère un nouveau formulaire
+			$id_formulaire = insert_formulaire();
+			// Si ça a marché on modifie les champs de base
+			if ($id_formulaire > 0 and !($erreur = formulaire_set($id_formulaire, $formulaire))){
+				// Et ensuite les saisies et les traitements
+				$ok = sql_updateq(
+					'spip_formulaires',
+					array(
+						'saisies' => serialize($formulaire['saisies']),
+						'traitements' => serialize($formulaire['traitements'])
+					)
+				);
+			}
+		}
+	}
+	
+	if ($id_formulaire and $ok){
+		return $id_formulaire;
+	}
+	else{
+		return _T('formidable:erreur_importer_yaml');
+	}
 }
 
 ?>
