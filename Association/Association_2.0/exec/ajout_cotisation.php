@@ -60,40 +60,34 @@ function ajout_cotisation($id_auteur)
 		echo fin_boite_info(true);
 		echo debut_droite("",true);
 
-		echo debut_cadre_relief(  "", false, "", _T('asso:Nouvelle cotisation'));
-		echo '<form action="'.$url_action_cotisations.'" method="POST">';
-		echo '<label for="date"><strong>'._T('asso:Date du paiement (AAAA-MM-JJ)').' :</strong></label>';
-		echo '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
-		echo '<label for="montant"><strong>'._T('asso:Montant paye (en euros)').' :</strong></label>';
+		$res = '<label for="date"><strong>'._T('asso:Date du paiement (AAAA-MM-JJ)').' :</strong></label>';
+		$res .= '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
+		$res .= '<label for="montant"><strong>'._T('asso:Montant paye (en euros)').' :</strong></label>';
 		$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));
 		$mois+=$categorie['duree'];
 		$validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
-		echo '<input name="montant" type="text" value="'.$categorie['cotisation'].'" id="montant" class="formo" />';
-		echo '<label for="journal"><strong>'._T('asso:Mode de paiement').' :</strong></label>';
-		echo '<select name="journal" type="text" id="journal" class="formo" />';
+		$res .= '<input name="montant" type="text" value="'.$categorie['cotisation'].'" id="montant" class="formo" />';
+		$res .= '<label for="journal"><strong>'._T('asso:Mode de paiement').' :</strong></label>';
+		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
 		$sql = sql_select('*', 'spip_asso_plan', "classe=". _q(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
-			echo '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
+			$res .= '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
 		}
-		echo '<option value="don"> Don </option>';
-		echo '</select>';
-		echo '<label for="validite"><strong>'._T('asso:Validite').' :</strong></label>';
-		echo '<input name="validite" type="text" value="'.$validite.'" id="validite" class="formo" />';
-		echo '<label for="justification"><strong>'._T('asso:Justification').' :</strong></label>';
-		echo '<input name="justification" type="text" value="Cotisation '.$prenom.' '.$nom_famille.'" id="justification" class="formo" />';
-		echo '<input type="hidden" name="id" value="'.$id_auteur.'">';
-		echo '<input type="hidden" name="nom_famille" value_famille="'.$nom_famille.'">';
-		echo '<input type="hidden" name="prenom" value="'.$prenom.'">';
-		echo '<input type="hidden" name="categorie" value="'.$categorie.'">';
-		echo '<input type="hidden" name="agir" value="ajoute">';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
+		$res .= '<option value="don"> Don </option>';
+		$res .= '</select>';
+		$res .= '<label for="validite"><strong>'._T('asso:Validite').' :</strong></label>';
+		$res .= '<input name="validite" type="text" value="'.$validite.'" id="validite" class="formo" />';
+		$res .= '<label for="justification"><strong>'._T('asso:Justification').' :</strong></label>';
+		$res .= '<input name="justification" type="text" value="Cotisation '.$prenom.' '.$nom_famille.'" id="justification" class="formo" />';
 		
-		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
-		else {echo _T('asso:bouton_envoyer');}
-		echo '" class="fondo" /></div>';
-		echo '</form>';
-		echo '</fieldset>';
+		$res .= '<div style="float:right;"><input name="submit" type="submit" value="';
+		if ( isset($action)) {$res .= _T('asso:bouton_'.$action);}
+		else {$res .= _T('asso:bouton_envoyer');}
+		$res .= '" class="fondo" /></div>';
+
+		echo debut_cadre_relief(  "", false, "", _T('asso:Nouvelle cotisation'));
+		echo redirige_action_post('cotisation', $id_auteur, 'voir_adherent', "id=$id_auteur", $res);
+
 		echo fin_cadre_relief(true);  
 	}
 }
