@@ -34,14 +34,15 @@ function cotisation_insert($id_auteur, $montant, $journal, $justification, $impu
 				       'recette' => $montant,
 				       'justification' => $justification,
 				       'imputation' => $imputation,
-				       'id_journal' => $id_auteur))
-		 );
+				       'id_journal' => $id_auteur)
+		    );
 	association_auteurs_elargis_updateq(
 				   array(
 					 "validite" => $validite,
 					 "date" => $date,
 					 "montant" => $montant,
-					 "statut_interne" => 'ok'));
+					 "statut_interne" => 'ok'),
+				   "id_auteur=$id_auteur");
 
 }
 ?>
