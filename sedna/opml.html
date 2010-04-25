@@ -9,18 +9,17 @@
 
 <BOUCLE_r(RUBRIQUES){par num titre, titre}>
 <B_syndic>
-<outline[ title="(#TITRE|texte_backend)"][ text="(#TITRE|texte_backend)"]>
+<outline[ text="(#TITRE|texte_backend)"]>
 <BOUCLE_syndic(SITES){tout}{syndication=oui} {id_rubrique}>
-<outline 
-	id="#ID_SYNDIC"
+<outline
 	text="[(#NOM_SITE|texte_backend)]"
 	description="[(#DESCRIPTIF|supprimer_tags|texte_backend)]"
 	title="[(#NOM_SITE|texte_backend)]"
-	type="rss" 
+	type="rss"
 	version="RSS"
 	htmlUrl="#URL_SITE"
 	<BOUCLE_lang(RUBRIQUES){id_rubrique}>[language="(#LANG)"]</BOUCLE_lang>
-	xmlUrl="#URL_SYNDIC" 
+	xmlUrl="#URL_SYNDIC"
 />
 </BOUCLE_syndic>
 </outline>
