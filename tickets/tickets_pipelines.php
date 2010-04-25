@@ -209,7 +209,7 @@ function tickets_formulaire_traiter($flux){
 		if ($notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('commenterticket', $flux['args']['args'][6],
 				array(
-					'id_auteur' => id_assigne, 
+					'id_auteur' => id_assigne,
 					'texte' => texte
 				)
 			);
@@ -221,5 +221,14 @@ function tickets_formulaire_traiter($flux){
 function tickets_forum_objets_depuis_env($objets){
 	$objets['ticket'] = id_table_objet('ticket');
 	return $objets;
+}
+
+/**
+ * Insertion dans le pipeline declarer_url_objets (ecrire/inc/urls)
+ * @param array $flux Les objets ayant des urls
+ */
+function tickets_declarer_url_objets($flux){
+	$flux[] = 'ticket';
+	return $flux;
 }
 ?>
