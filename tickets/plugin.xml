@@ -183,7 +183,7 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<chemin dir='spip21/' />
 
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.0-beta;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="saisies" version="[1.3;]" />
 	<!-- pour les boucles pour des "selections" de saisies -->
 	<necessite id="spip_bonux" version="[1.8;]" />
