@@ -31,18 +31,20 @@ function action_supprimer_formulaire_dist($arg=null) {
 			);
 			$reponses = $reponses ? array_map('reset', $reponses) : false;
 		
-			// On supprime les réponses
-			$ok = sql_delete(
-				'spip_formulaires_reponses',
-				sql_in('id_formulaires_reponse', $reponses)
-			);
-			
-			// Si c'est bon, on supprime les champs des réponses
-			if ($ok){
+			// On supprime les réponses s'il y en a
+			if ($reponses){
 				$ok = sql_delete(
-					'spip_formulaires_reponses_champs',
+					'spip_formulaires_reponses',
 					sql_in('id_formulaires_reponse', $reponses)
 				);
+			
+				// Si c'est bon, on supprime les champs des réponses
+				if ($ok){
+					$ok = sql_delete(
+						'spip_formulaires_reponses_champs',
+						sql_in('id_formulaires_reponse', $reponses)
+					);
+				}
 			}
 		}
 	}
