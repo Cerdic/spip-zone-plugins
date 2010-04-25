@@ -166,7 +166,7 @@ function formater_resultats($verification, $resultats) {
 		else {
 			$texte['non'] .= '<div class="success">' . "\n";
 			$texte['non'] .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
-			$texte['non'] .= "</div>\n</div>\n";
+			$texte['non'] .= "</div>\n";
 		}
 
 		// Liste des items non utilises sans certitude
@@ -185,7 +185,7 @@ function formater_resultats($verification, $resultats) {
 		else {
 			$texte['peut_etre'] .= '<div class="success">' . "\n";
 			$texte['peut_etre'] .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module'])) . "\n";
-			$texte['peut_etre'] .= "</div>\n</div>\n";
+			$texte['peut_etre'] .= "</div>\n";
 		}
 	}
 
