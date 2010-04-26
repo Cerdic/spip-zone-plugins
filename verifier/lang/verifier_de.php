@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_date' => 'Fromat des Datums ung&uuml;ltig',
-	'erreur_email' => 'Mailadresse ung&uuml;ltig.',
-	'erreur_email_nondispo' => 'Mailadresse wird bereits verwendet.',
+	'erreur_email' => 'Mailadresse ung&uuml;ltig.', # MODIF
+	'erreur_email_nondispo' => 'Mailadresse wird bereits verwendet.', # MODIF
 	'erreur_entier' => 'Der Wert mu&szlig; eine ganze Zahl sein.',
 	'erreur_entier_entre' => 'Der Wert mu&szlig; zwischen  @min@ und @max@ liegen.',
 	'erreur_entier_max' => 'Der Wert mu&szlig; kleiner als @max@ sein.',
@@ -27,10 +27,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'Adresse ung&uuml;ltig',
 
 	// O
+	'option_email_disponible_label' => 'Adresse disponible', # NEW
+	'option_email_disponible_label_case' => 'V&eacute;rifier que l\'adresse n\'est pas d&eacute;j&agrave; utilis&eacute;e par un utilisateur', # NEW
+	'option_email_mode_label' => 'Mode de v&eacute;rification des courriels', # NEW
+	'option_email_mode_normal' => 'V&eacute;rification normale de SPIP (respectant la norme RFC)', # NEW
+	'option_email_mode_strict' => 'V&eacute;rification moins permissive', # NEW
 	'option_entier_max_label' => 'Maximalwert',
 	'option_entier_min_label' => 'Minimalwert',
 	'option_regex_modele_label' => 'Der Wert mu&szlig; mit der folgenden Maske &uuml;bereinstimmen.',
-	'option_siren_siret_mode' => 'Que voulez-vous vérifier ?', # NEW
+	'option_siren_siret_mode_label' => 'Que voulez-vous vérifier ?', # NEW
 	'option_siren_siret_mode_siren' => 'le SIREN', # NEW
 	'option_siren_siret_mode_siret' => 'le SIRET', # NEW
 	'option_taille_max_label' => 'Maximalgr&ouml;&szlig;e',
