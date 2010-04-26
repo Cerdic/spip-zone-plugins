@@ -6,7 +6,7 @@ _ &#169; 2007-2009 - Licence GPL
 	</auteur>
 	<version>0.6.1</version>
 	<version_base>0.6</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 	<multi>
 [fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles de SPIP.
