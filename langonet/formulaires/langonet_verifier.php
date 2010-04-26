@@ -116,7 +116,7 @@ function formater_resultats($verification, $resultats) {
 				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			$texte['non_mais'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte['non_mais'] .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible']);
+			$texte['non_mais'] .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible'], $resultats['definition_ok']);
 			$texte['non_mais'] .= "</div>\n</div>\n";
 		}
 		else {
@@ -213,7 +213,7 @@ function formater_resultats($verification, $resultats) {
 
 // $tableau   => [item][fichier utilisant][num ligne][] => extrait ligne
 // $possibles => [item][] => fichier de langue ou item est defini
-function afficher_lignes($tableau, $possibles=array()) {
+function afficher_lignes($tableau, $possibles=array(), $ok=array()) {
 	include_spip('inc/layer');
 
 	// Detail des fichiers utilisant les items de langue
@@ -235,9 +235,14 @@ function afficher_lignes($tableau, $possibles=array()) {
 		if (is_array($possibles[$item])) {
 			$liste_lignes .= "<p style=\"padding-left:2em;\">  "._T('langonet:texte_item_defini_ou')."\n<br />";
 			foreach ($possibles[$item] as $fichier_def) {
-				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
+				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def ."</span><br />\n";
 			}
 			$liste_lignes .= "</p>\n";
+			if (!$ok[$item])
+				$liste_lignes .= "<p style=\"padding-left:2em; color: #8a1f11\"><strong>" . _T('langonet:texte_item_mal_defini') . "</strong></p>\n";
+		}
+		else {
+			$liste_lignes .= "<p style=\"padding-left:2em; color: #8a1f11\"><strong>" . _T('langonet:texte_item_non_defini') . "</strong></p>\n";
 		}
 		$liste_lignes .= fin_block();
 	}

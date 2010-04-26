@@ -115,6 +115,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 	'texte_item_defini_ou' => '<em>d&eacute;fini dans :</em>',
+	'texte_item_mal_defini' => '<em>=> Attention, cet item n\'est pas d&eacute;fini dans le module o&ugrave; il est utilis&eacute; !</em>',
+	'texte_item_non_defini' => '<em>=> Attention, cet item n\'est pas d&eacute;fini !</em>',
 	'texte_item_utilise_ou' => '<em>utilis&eacute; dans :</em>',
 	'titre_bloc_langues_generees' => 'Fichiers de langue',
 	'titre_bloc_logs_definition' => 'D&eacute;finitions manquantes',

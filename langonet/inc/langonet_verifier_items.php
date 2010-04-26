@@ -111,8 +111,18 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 						if (is_array($item_tous[$_valeur])) {
 							$fichier_non_mais[$_valeur] = $item_tous[$_valeur];
 						}
+						$definition_ok[$_valeur] = false;
 						if (array_key_exists($_valeur, $tous_lang)) {
 							$definition_possible[$_valeur] = $tous_lang[$_valeur];
+							foreach ($definition_possible[$_valeur] as $_fichier) {
+								preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $module_trouve);
+								if ($module_trouve[1]) {
+									$module_def = (($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) ? '' : $module_def;
+									if ($module_def == $utilises['modules'][$_cle]) {
+										$definition_ok[$_valeur] = true;
+									}
+								}
+							}
 						}
 					}
 				}
@@ -189,6 +199,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	$resultats['item_peut_etre'] = $item_peut_etre;
 	$resultats['fichier_peut_etre'] = $fichier_peut_etre;
 	$resultats['definition_possible'] = $definition_possible;
+	$resultats['definition_ok'] = $definition_ok;
 
 	return $resultats;
 }
