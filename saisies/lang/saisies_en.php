@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_visiteurs' => 'All visitors (even if not registered)',
 
 	// V
-	'vue_sans_reponse' => 'Sans réponse', # NEW
+	'vue_sans_reponse' => '<i>Sans réponse</i>', # NEW
 
 	// Z
 	'z' => 'zzz'
