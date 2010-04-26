@@ -3,6 +3,7 @@
 	<auteur>Renato Formato</auteur>
 	<licence>GNU/GLP</licence>
 	<version>0.0.2</version>
+	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>
 		<multi>
@@ -12,6 +13,7 @@
 	</description>
 	<prefix>multilang</prefix>
 	<icon>images/multilang-32.png</icon>
+	<install>base/multilang_install.php</install>
 	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
