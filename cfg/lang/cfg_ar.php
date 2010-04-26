@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Effacer', # NEW
 	'bouton_mettre_a_jour' => '&#1578;&#1581;&#1583;&#1610;&#1579;',
+	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => '&#1605;&#1581;&#1585;&#1603; &#1575;&#1604;&#1575;&#1593;&#1583;&#1575;&#1583; (CFG)',
