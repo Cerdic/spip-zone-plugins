@@ -27,7 +27,6 @@ function formulaires_editer_composition_noizetier_charger($id, $nouveau){
 				$contexte['editable'] = false;
 				$contexte['message_erreur'] = _T('spip:erreur');
 			}
-			
 		}
 		elseif (!$nouveau){
 			$contexte['editable'] = false;
@@ -58,6 +57,7 @@ function formulaires_editer_composition_noizetier_charger($id, $nouveau){
 			if ($nouveau) {
 				$contexte['_hidden'] .= '<input type="hidden" name="nouveau" value="oui" />';
 				$contexte['nouveau'] = oui;
+				$contexte['_objets_avec_compos'] = $GLOBALS['compositions_exec'];
 			}
 		}
 	}

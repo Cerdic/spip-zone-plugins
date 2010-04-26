@@ -23,11 +23,8 @@
 								<div class="explication"><:noizetier:formulaire_type_explication:></div>
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
 								<select class="select" name="#GET{name}" id="#GET{name}">
-								<BOUCLE_types(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
-									[(#CLE|noizetier_page_type|=={page}|non)
-									[(#CLE|noizetier_page_composition|non)
-									<option value="#CLE">[(#VALEUR|table_valeur{nom})]</option>
-									]]
+								<BOUCLE_types(POUR){tableau #ENV{_objets_avec_compos}}{par cle}>
+									<option value="#VALEUR">[(#NOIZETIER_LISTE_PAGES|table_valeur{#VALEUR}|table_valeur{nom})]</option>
 								</BOUCLE_types>
 								</select>
 							</li>
