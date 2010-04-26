@@ -37,6 +37,10 @@
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>styliser</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>compositions_lister_disponibles</nom>
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>

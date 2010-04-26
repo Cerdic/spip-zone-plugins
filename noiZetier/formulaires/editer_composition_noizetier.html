@@ -24,7 +24,7 @@
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
 								<select class="select" name="#GET{name}" id="#GET{name}">
 								<BOUCLE_types(POUR){tableau #ENV{_objets_avec_compos}}{par cle}>
-									<option value="#VALEUR">[(#NOIZETIER_LISTE_PAGES|table_valeur{#VALEUR}|table_valeur{nom}|sinon{#VALEUR})]</option>
+									<option value="#VALEUR">[(#VALEUR|=={page}|?{<:noizetier:page:>, [(#NOIZETIER_LISTE_PAGES|table_valeur{#VALEUR}|table_valeur{nom}|sinon{#VALEUR})]})]</option>
 								</BOUCLE_types>
 								</select>
 							</li>

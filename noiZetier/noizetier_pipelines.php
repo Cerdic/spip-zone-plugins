@@ -78,4 +78,29 @@ function noizetier_compositions_lister_disponibles($flux){
 	}
 	return $flux['data'];
 }
+
+/**
+ * Pipeline styliser pour les compositions du noizetier de type page si celles-ci sont activées
+ *
+ * @param array $flux
+ * @return array
+ */
+function noizetier_styliser($flux){
+	if(defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') AND _NOIZETIER_COMPOSITIONS_TYPE_PAGE) {
+		$squelette = $flux['data'];
+		$fond = $flux['args']['fond'];
+		$ext = $flux['args']['ext'];
+		// Si on n'a pas trouvé de squelette
+		if (!$squelette) {
+			$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+			// On vérifie qu'on n'a pas demandé une composition du noizetier de type page et qu'on appele ?page=type
+			if (isset($noizetier_compositions['page'][$fond])) {
+				$flux['data'] = substr(find_in_path("page.$ext"), 0, - strlen(".$ext"));
+				$flux['args']['composition'] = $fond;
+			}
+		}
+	}
+	return $flux;
+}
+
 ?>

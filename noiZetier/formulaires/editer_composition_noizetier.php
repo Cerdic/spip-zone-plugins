@@ -58,6 +58,8 @@ function formulaires_editer_composition_noizetier_charger($id, $nouveau){
 				$contexte['_hidden'] .= '<input type="hidden" name="nouveau" value="oui" />';
 				$contexte['nouveau'] = oui;
 				$contexte['_objets_avec_compos'] = $GLOBALS['compositions_exec'];
+				if(defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') AND _NOIZETIER_COMPOSITIONS_TYPE_PAGE)
+					$contexte['_objets_avec_compos'][''] = 'page';
 			}
 		}
 	}

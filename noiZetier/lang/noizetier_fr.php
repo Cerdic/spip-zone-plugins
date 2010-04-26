@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_icones' => 'Liste d\'icônes',
 	'oui' => 'Oui',
 	'non' => 'Non',
+	'page' => 'Page',
 	
 	'description_bloc_contenu' => 'Contenu principal de chaque page.',
 	'description_bloc_navigation' => 'Informations de navigation propres à chaque page.',

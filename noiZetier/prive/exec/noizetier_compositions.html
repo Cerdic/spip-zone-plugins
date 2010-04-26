@@ -8,7 +8,7 @@
 
 <BOUCLE_types(POUR){tableau #GET{liste_types_compos}}{par cle}>
 <B_compos>
-<h2>[(#NOIZETIER_LISTE_PAGES|table_valeur{#CLE}|table_valeur{nom}|sinon{#CLE})]</h2>
+<h2>[(#CLE|=={page}|?{<:noizetier:page:>,[(#NOIZETIER_LISTE_PAGES|table_valeur{#CLE}|table_valeur{nom}|sinon{#CLE})]})]</h2>
 <div class="formulaire_spip">
 <ul class="liste_items liste_noizetier_compositions">
 	<BOUCLE_compos(POUR){tableau #VALEUR}{par cle}>
