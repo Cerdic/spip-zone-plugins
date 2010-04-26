@@ -23,4 +23,8 @@
 		<action>insert_head_prive</action>
 		<inclure>multilang_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>multilang_pipelines.php</inclure>
+	</pipeline>
 </plugin>
