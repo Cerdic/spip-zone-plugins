@@ -33,20 +33,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$action=$_POST['agir'];
 		$url_retour=$_POST['url_retour'];
 	
-		//MODIFICATION ADHERENT
-		
-		if ($action=="modifie") {
-		  association_auteurs_elargis_updateq(
-				   array("id_asso"=> $id_asso,
-					 "commentaire"=> $commentaire,
-					 "validite"=> $validite,
-					 "categorie"=> $categorie,
-					 "statut_interne"=> $statut_interne),
-				   "id_auteur=$id_auteur");
-		  header ('location:'.$url_retour);
-			exit;
-		}
-		
 		//SUPPRESSION PROVISOIRE ADHERENT
 		  $commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('Gestion pour Association')) ;
