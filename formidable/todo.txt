@@ -1,6 +1,9 @@
 
 À faire :
 ---------
++ Améliorer l'explication pour l'identifiant
++ Afficher une URL complète pour la page où ça a été rempli afin que ce soit cliquable
++ Ajouter un lien vers l'espace privé dans le mail lorsque le traitement "enregistrement" est aussi activé
 + Importation et exportation des formulaires
 + Exportation (et importation ?) des réponses enregistrées
 + Afficher des saisies en javascript suivant des conditions

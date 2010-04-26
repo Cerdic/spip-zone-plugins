@@ -62,7 +62,8 @@ function echanger_formulaire_yaml_importer_dist($fichier){
 					array(
 						'saisies' => serialize($formulaire['saisies']),
 						'traitements' => serialize($formulaire['traitements'])
-					)
+					),
+					'id_formulaire = '.$id_formulaire
 				);
 			}
 		}

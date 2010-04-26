@@ -34,7 +34,8 @@ function action_dupliquer_formulaire_dist($arg=null) {
 				array(
 					'saisies' => $formulaire['saisies'],
 					'traitements' => $formulaire['traitements']
-				)
+				),
+				'id_formulaire = '.$id_formulaire
 			);
 			// Et on redirige vers la vue
 			$redirect = parametre_url(generer_url_ecrire('formulaires_voir'), 'id_formulaire', $id_formulaire, '&');
