@@ -143,11 +143,23 @@ function forms_init_multi(options) {
 	});
 }
 
+/**
+ * On attache nos évènements pour la validation du formulaire
+ * - sur le submit pour tous les formulaires
+ * - sur l'évènement 'form-pre-serialize' d'ajaxForms au cas où nous sommes dans
+ * un formulaire ajax
+ *
+ * @return
+ */
 function forms_attach_submit() {
-	var oldsubmit = this.onsubmit;
-	this.onsubmit = "";
-	if(oldsubmit) $(this).submit(function(){forms_multi_submit.apply(this);return oldsubmit.apply(this);})
-	else $(this).submit(forms_multi_submit);
+	if($(this).parents('.ajax').size() && $(this).find('input[name=var_ajax]')){
+		$(this).bind('form-pre-serialize',forms_multi_submit);
+	}else{
+		var oldsubmit = this.onsubmit;
+		this.onsubmit = "";
+		if(oldsubmit) $(this).submit(function(){forms_multi_submit.apply(this);return oldsubmit.apply(this);})
+		else $(this).submit(forms_multi_submit);
+	}
 }
 
 function forms_init_field(el,lang) {
