@@ -303,7 +303,9 @@ Los bloques multi se muestran siempre en el idioma solicitado por el visitante.'
 _ • [De las herramientas ocultas|Volver al aspecto inicial de esta p&aacute;gina->@hide@]
 _ • [De todo el plugin|Volver al estado inicial del plugin->@reset@]@install@
 </p>', # MODIF
-	'horloge:description' => 'Outil en cours de d&eacute;veloppement. Vous offre une horloge JavaScript . Balise : <code>#HORLOGE{format,utc,id}</code>. Mod&egrave;le : <code><horloge></code>', # NEW
+	'horloge:description' => 'Outil en cours de d&eacute;veloppement. Vous offre une horloge JavaScript . Balise : <code>#HORLOGE</code>. Mod&egrave;le : <code><horloge></code>
+
+Arguments disponibles : {zone}, {format} et/ou {id}.', # NEW
 	'horloge:nom' => 'Horloge', # NEW
 
 	// I

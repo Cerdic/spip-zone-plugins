@@ -313,7 +313,7 @@ Los bloques multi s\'amuesen siempre na llingua pid&iacute;a pol visitante.',
 _ • [De les ferramientes tapec&iacute;es|Tornar a l\'apariencia inicial d\'esta p&aacute;xina->@hide@]
 _ • [De tol plugin|Tornar a l\'est&aacute;u inicial del plugin->@reset@]@install@
 </p>', # MODIF
-	'horloge:description' => 'Ferramienta en cursu de desendolcu. Ufre un rel&oacute; JavaScript . Baliza: <code>#HORLOGE{format,utc,id}</code>. Modelu: <code><horloge></code>',
+	'horloge:description' => 'Ferramienta en cursu de desendolcu. Ufre un rel&oacute; JavaScript . Baliza: <code>#HORLOGE{format,utc,id}</code>. Modelu: <code><horloge></code>', # MODIF
 	'horloge:nom' => 'Rel&oacute;',
 
 	// I

@@ -315,7 +315,7 @@ Os bloques multi m&oacute;stranse ent&oacute;n sempre na lingua demandada polo v
 _ • [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
 _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
 </p>', # MODIF
-	'horloge:description' => 'Utilidade en desenvolvemento. Ofrece un Javascript horloge. Baliza:<code>#HORLOGE{format,utc,id}</code>. Modelo : <code><horloge></code>',
+	'horloge:description' => 'Utilidade en desenvolvemento. Ofrece un Javascript horloge. Baliza:<code>#HORLOGE{format,utc,id}</code>. Modelo : <code><horloge></code>', # MODIF
 	'horloge:nom' => 'Horloge',
 
 	// I

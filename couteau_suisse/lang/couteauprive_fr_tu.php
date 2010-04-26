@@ -57,7 +57,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Page des auteurs',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # MODIF
+	'barres_typo_edition' => 'Edition des contenus',
 	'barres_typo_forum' => 'Messages de Forum',
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Choisi ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.',
 	'basique' => 'Basique',
@@ -261,8 +261,8 @@ Cet outil peut &ecirc;tre coupl&eacute; avec  &laquo;&nbsp;[.->sommaire]&nbsp;&r
 	'erreur:probleme' => 'Probl&egrave;me sur : @pb@',
 	'erreur:traitements' => 'Le Couteau Suisse - Erreur de compilation des traitements : m&eacute;lange \'typo\' et \'propre\' interdit !',
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
-	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
-	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&eacute;fini !',
+	'erreur_mot' => 'Attention : le mot-cl&eacute; &laquo;@mot@&raquo; n\'est pas d&eacute;fini !',
 	'etendu' => '&Eacute;tendu',
 
 	// F
@@ -319,14 +319,14 @@ Les blocs multi s\'affichent alors toujours dans la langue demand&eacute;e par l
 _ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
 _ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
 </p>',
-	'horloge:description' => 'Outil en cours de d&eacute;veloppement. T\'offre une horloge JavaScript . Balise : <code>#HORLOGE{format,utc,id}</code>. Mod&egrave;le : <code><horloge></code>',
+	'horloge:description' => 'Outil en cours de d&eacute;veloppement. T\'offre une horloge JavaScript . Balise : <code>#HORLOGE{format,utc,id}</code>. Mod&egrave;le : <code><horloge></code>', # MODIF
 	'horloge:nom' => 'Horloge',
 
 	// I
-	'icone_visiter:description' => 'Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Remplace l\'image du bouton standard &laquo;<:icone_visiter_site:>&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
 
-Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.', # MODIF
-	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;', # MODIF
+Pour d&eacute;finir ce logo, rends  toi sur la page &laquo;<:titre_configuration:>&raquo; en cliquant sur le bouton &laquo;<:icone_configuration_site:>&raquo;.',
+	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;<:icone_visiter_site:>&nbsp;&raquo;',
 	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
@@ -414,7 +414,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:max_auteurs_page' => 'Auteurs par page :',
 	'label:message_travaux' => 'Ton message de maintenance :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
-	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
+	'label:mot_masquer' => 'Mot-cl&eacute; masquant les contenus :',
 	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page',
 	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page',
 	'label:paragrapher' => 'Toujours paragrapher :',
@@ -478,11 +478,11 @@ La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &a
 
 Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que tu soies oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.',
 	'maj_auto:nom' => 'Mises &agrave; jour automatiques',
-	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de tes squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&eacute; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
-Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
-	'masquer:nom' => 'Masquer du contenu', # NEW
-	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de ton squelette.',
+	'masquer:nom' => 'Masquer du contenu',
+	'meme_rubrique:description' => 'D&eacute;finis ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
 	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: ta contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si tu es identifi&eacute; et autoris&eacute; &agrave; poster directement.',
@@ -516,8 +516,8 @@ Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le cr
 	'outils_actifs' => 'Outils actifs :',
 	'outils_caches' => 'Outils cach&eacute;s :',
 	'outils_cliquez' => 'Clique sur le nom des outils ci-dessus pour afficher ici leur description.',
-	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
-	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
+	'outils_concernes' => 'Sont concern&eacute;s : ',
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ',
 	'outils_inactifs' => 'Outil inactifs :',
 	'outils_liste' => 'Liste des outils du Couteau Suisse',
 	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:',

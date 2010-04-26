@@ -310,7 +310,7 @@ Thus multi blocks are always displayed in the language requested by the visitor.
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
 _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 </p>', # MODIF
-	'horloge:description' => 'Tool in development. It offers a Javascript clock. Tag: <code>#HORLOGE{format,utc,id}</code>. Model: <code><horloge></code>',
+	'horloge:description' => 'Tool in development. It offers a Javascript clock. Tag: <code>#HORLOGE{format,utc,id}</code>. Model: <code><horloge></code>', # MODIF
 	'horloge:nom' => 'Clock',
 
 	// I
