@@ -34,17 +34,15 @@ function echanger_formulaire_forms_importer_dist($fichier){
 						// Le truc par défaut
 						$saisie = array(
 							'saisie' => 'input',
-							'options' => array()
+							'options' => array('size'=>40)
 						);
 						
 						// On essaye de traduire tous les types de champs
 						$type = trim(spip_xml_aplatit($field['type']));
 						switch ($type){
-							case 'ligne':
-								$saisie['options']['size'] = 40;
-								break;
 							case 'texte':
 								$saisie['saisie'] = 'textarea';
+								unset($saisie['options']['size']);
 								$saisie['options']['rows'] = 5;
 								$saisie['options']['cols'] = 40;
 								break;
@@ -62,7 +60,12 @@ function echanger_formulaire_forms_importer_dist($fichier){
 									'type' => 'entier'
 								);
 								if ($taille = trim(spip_xml_aplatit($field['taille'])))
-									$saisie['verifier']['options'] = array('max' => ($taille*10-1));
+									$saisie['verifier']['options'] = array('max' => (pow(10, $taille)-1));
+								break;
+							case 'email':
+								$saisie['verifier'] = array(
+									'type' => 'email'
+								);
 								break;
 							case 'telephone':
 								$saisie['verifier'] = array(
@@ -70,6 +73,7 @@ function echanger_formulaire_forms_importer_dist($fichier){
 								);
 								break;
 							case 'select':
+								unset($saisie['options']['size']);
 								$liste = trim(spip_xml_aplatit($field['extra_info']));
 								if ($liste == 'radio')
 									$saisie['saisie'] = 'radio';
@@ -78,8 +82,10 @@ function echanger_formulaire_forms_importer_dist($fichier){
 								break;
 							case 'multiple':
 								$saisie['saisie'] = 'checkbox';
+								unset($saisie['options']['size']);
 								break;
 							case 'fichier':
+							case 'separateur':
 								$saisie = null;
 						}
 						
