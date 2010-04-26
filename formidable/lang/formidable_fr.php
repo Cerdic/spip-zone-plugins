@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement.',
 'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez v&eacute;rifier votre envoi.',
 'erreur_identifiant' => 'Cet identifiant est d&eacute;j&agrave; utilis&eacute;.',
+'erreur_importer_forms' => 'Erreur durant l\'importation du formulaire Forms&amp;Tables',
 'erreur_importer_yaml' => 'Erreur durant l\'importation du fichier YAML',
 'erreur_inexistant' => 'Le formulaire n\'exsite pas.',
 
