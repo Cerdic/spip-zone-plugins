@@ -31,12 +31,16 @@ function each_jclock(diff) {
 	.cs_todo()
 	.each(function(){
 		var options = { serveur_offset: diff };
-		var opt = this.title.split('|');
+		var opt = this.title.split('||');
 		for (i=0; i<opt.length; i++) {
 			j = opt[i].indexOf('=');
 			if(j>0) options[opt[i].substr(0,j).trim()] = opt[i].substring(j+1).trim();
 		}
-		if(typeof options.id != "undefined") $(this).addClass('jclock'+options.id)
+		if(typeof options.id != "undefined") {
+			var id = 'jclock'+options.id;
+			jQuery(this).addClass(id);
+			this.id = id;
+		}
 		this.title = "";
 		$(this).jclock(options);
 	});
