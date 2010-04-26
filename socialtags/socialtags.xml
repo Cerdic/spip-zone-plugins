@@ -430,7 +430,8 @@
 <item>
 <title>Wikio</title>
 <author>wikio</author>
-<link>http://www.wikio.com/vote?newurl=%u</link><!-- @todo: CP-20090925, Ã  corriger. url ou newurl ? ne fonctionne pas -->
+<link>http://www.wikio.fr/sharethis?url=%u&amp;title=%t</link> <!-- En fait wikio a changé et ne propose en partage rien de plus qu'un clone de socialtags. Ce qu'il faudrait c'est 
+integrer un bouton de vote quand ils auront rétablis leur truc -->
 <description>Digg-like, news, en-us fr</description>
 </item>
 
