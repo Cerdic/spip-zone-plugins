@@ -55,7 +55,7 @@ function multilang_init_lang(options) {
 	multilang_root = $(root);
 	
 	//Add Yffic : S'il existe deja un menu lang sous multilang_root, return (cas Ajax)
-	if(multilang_root.find('.menu_lang').length > 0) return;
+	//if(multilang_root.find('.menu_lang').length > 0) return;
 
 	//set the main menu element
 	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $([]);
@@ -79,8 +79,8 @@ function multilang_init_lang(options) {
 
 function forms_make_menu_lang(container,target) {
 	target = target || multilang_forms;
-	$(multilang_menu_lang).clone().find("a").click(function() {forms_change_lang(this,container,target)}).end().
-	append("<div style='clear:left'></div>").appendTo(container);
+	toto=$(multilang_menu_lang).clone().find("a").click(function() {forms_change_lang(this,container,target)}).end()
+	.append("<div style='clear:left'></div>").appendTo(container);
 }
 
 function forms_change_lang(el,container,target) {
@@ -129,7 +129,7 @@ function forms_init_multi(options) {
 	init_forms.each(function() { 
 		this.form_lang = multilang_def_lang;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
-		container.prepend("<div class='menu_lang'>"); 
+		if(!container.find('.menu_lang').size()) container.prepend("<div class='menu_lang'>");
 	}); 
 	$(multilang_fields_selector,init_forms).each(function(){
 		forms_init_field(this,this.form.form_lang);
