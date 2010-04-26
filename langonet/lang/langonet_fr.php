@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_lister' => 'Afficher',
 	'bouton_rechercher' => 'Rechercher',
 	'bouton_verifier' => 'V&eacute;rifier',
+	'bulle_telecharger_fichier_log' => 'T&eacute;l&eacute;charger le log du @date@',
+	'bulle_telecharger_fichier_lang' => 'T&eacute;l&eacute;charger le fichier de langue du @date@',
 
 // E
 	'entete_avertissement_nonmais' => 'AVERTISSEMENT : items n\'appartenant pas au module',
