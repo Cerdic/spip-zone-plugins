@@ -69,6 +69,20 @@
 		</a>
 	</div>
 	</B_resultats>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+<div class="cadre cadre-e cadre_padding">
+	<strong><:titre_cadre_raccourcis:></strong>
+	[(#AUTORISER{editer, formulaire}|oui)
+	<div>
+		<a href="#URL_ACTION_AUTEUR{dupliquer_formulaire, #ID_FORMULAIRE}" class="cellule-h">
+			<img src="#CHEMIN{images/formulaire-dupliquer-24.png}" style="vertical-align:middle;" alt="" />
+			<span style="vertical-align:middle;"><:formidable:formulaires_dupliquer:></span>
+		</a>
+	</div>
+	]
 	[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
 	<div>
 		<a href="#URL_ACTION_AUTEUR{supprimer_formulaire, #ENV{id_formulaire}}" class="cellule-h" onclick="return confirm('<:formidable:formulaires_supprimer_confirmation:>');">
@@ -78,9 +92,7 @@
 	</div>
 	]
 </div>
-<!--/#navigation-->
 
-<!--#extra-->
 <div class="cadre cadre-e cadre_padding">
 	<strong><:formidable:voir_exporter:></strong>
 	<BOUCLE_exports(POUR){tableau #VAL|echanges_formulaire_lister_disponibles|table_valeur{exporter}}>
