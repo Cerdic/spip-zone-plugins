@@ -141,7 +141,7 @@ function formater_resultats($verification, $resultats) {
 		else {
 			$texte['peut_etre'] .= '<div class="success">' . "\n";
 			$texte['peut_etre'] .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module'])) . "\n";
-			$texte['peut_etre'] .= "</div>\n</div>\n";
+			$texte['peut_etre'] .= "</div>\n";
 		}
 	}
 
