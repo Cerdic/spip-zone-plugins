@@ -42,7 +42,7 @@ function zengarden_affiche_version_compatible($intervalle){
 			$version = $mineure . ($mineure_inc ? ' &le; ' : ' &lt; ') . _T('zengarden:intitule_version') . ($majeure_inc ? ' &le; ' : ' &lt; ') . $majeure;
 	}
 	else {
-		$version = _T('zengarden:version') . ($majeure_inc ? ' &le; ' : ' &lt; ') . $majeure;
+		$version = _T('zengarden:intitule_version') . ($majeure_inc ? ' &le; ' : ' &lt; ') . $majeure;
 	}	
 
 	return $version;
