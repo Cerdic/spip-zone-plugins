@@ -82,7 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tri_alpha' => '(alphab&eacute;tique)',
 	'info_tri_num' => '(num&eacute;rique)',
 
-
 	// N
 	'nom_menu_accueil' => 'Accueil',
 	'nom_menu_deconnecter' => 'Se d&eacute;connecter',
@@ -93,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Article, rubrique ou autre objet SPIP',
 	'nom_menu_page_speciale' => 'Lien vers un squelette page',
 	'nom_menu_rubriques' => 'Liste ou arborescence de rubriques',
-	'nom_menu_secteurlangue' => 'Secteurs de langue',
+	'nom_menu_secteurlangue' => 'Secteurs de langue'
 );
 
 ?>
