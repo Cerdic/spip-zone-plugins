@@ -55,7 +55,7 @@ function multilang_init_lang(options) {
 	multilang_root = $(root);
 
 	//Add Yffic : S'il existe deja un menu lang sous multilang_root, return (cas Ajax)
-	//if(multilang_root.find('.menu_lang').length > 0) return;
+	if(multilang_root.find('.menu_lang').length > 0) return;
 
 	//set the main menu element
 	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $([]);
@@ -79,8 +79,8 @@ function multilang_init_lang(options) {
 
 function forms_make_menu_lang(container,target) {
 	target = target || multilang_forms;
-	toto=$(multilang_menu_lang).clone().find("a").click(function() {forms_change_lang(this,container,target)}).end()
-	.append("<div style='clear:left'></div>").appendTo(container);
+	$(multilang_menu_lang).clone().find("a").click(function() {forms_change_lang(this,container,target)}).end().
+	append("<div style='clear:left'></div>").appendTo(container);
 }
 
 function forms_change_lang(el,container,target) {
@@ -129,7 +129,7 @@ function forms_init_multi(options) {
 	init_forms.each(function() {
 		this.form_lang = multilang_def_lang;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
-		if(!container.find('.menu_lang').size()) container.prepend("<div class='menu_lang'>");
+		container.prepend("<div class='menu_lang'>");
 	});
 	$(multilang_fields_selector,init_forms).each(function(){
 		forms_init_field(this,this.form.form_lang);
@@ -205,14 +205,20 @@ function forms_init_field(el,lang) {
 	if(el.id=='titre' || el.id.match(/^titre_document[0-9]+/)){
 		numid=el.id+'_numero';
 		$(el).parent()
-				.prepend("<div style='clear:left'></div>")
-				.prepend('<label for="titre_numero">Num : </label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" class="text"></input>');
+				.before('<li class="editer_'+numid+'"><label for="titre_numero">Num : </label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" class="text"></input></li>');
 		$('#'+numid).totreat = false;
 	}
 	// End Add Yffic
 
 }
 
+/**
+ * Change l'image de fond d'un champs pour indiquer la présence ou non de multis
+ *
+ * @param el
+ * @param lang
+ * @return
+ */
 function field_set_background(el,lang) {
 	if(el.totreat)
 		$(el).css({"background-image":"url("+dir_plugin+"/images/multi_"+(el.multi?lang:undefined)+".png)","backgroundRepeat":"no-repeat","backgroundPosition":"top right"});
@@ -220,6 +226,12 @@ function field_set_background(el,lang) {
 		$(el).css({"background":"url("+dir_plugin+"/images/multi_forbidden.png) no-repeat right top"});
 }
 
+/**
+ * Changement de la langue
+ * @param el
+ * @param lang
+ * @return
+ */
 function forms_set_lang(el,lang) {
 	//Add Yffic 30/03/2010
 	if(!el.totreat) return ;
