@@ -24,6 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'by' => 'Par',
 
+	// C
+	'cfg_description' => 'Ce plugin permet d\'ajouter ais&eacute;ment des tags aux articles.',
+
 	// E
 	'explication_ajout_tag' => 'Pour ajouter plusieurs tags &agrave; la fois, utilisez le s&eacute;parateur : "@separateur@".',
 	'explication_suppression_tag' => 'S&eacute;lectionnez vos tags dans la liste ci-dessous et validez pour les supprimer.',
@@ -52,8 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tag_deja_present' => 'Vous aviez d&eacute;j&agrave; ajout&eacute; ce tag.',
 	'tag_supprime' => 'Vous avez supprim&eacute; le tag :<br />@name@',
 	'tags' => 'Tags :',
-	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags:<br />@name@',
-	'tags_supprimes' => 'Vous avez supprim&eacute; plusieurs tags:<br />@name@',
+	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags :<br />@name@',
+	'tags_supprimes' => 'Vous avez supprim&eacute; plusieurs tags :<br />@name@',
 	'title_tag_utilise_nb' => 'Ce mot cl&eacute; est associ&eacute; par @nb@ personnes.',
 	'title_tag_utilise_un' => 'Ce mot cl&eacute; est associ&eacute; par une personne.',
 
