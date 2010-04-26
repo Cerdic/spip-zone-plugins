@@ -89,7 +89,7 @@ Descobriu en aquest plugin les vostres eines favorites: {Suprimir el n&uacute;me
 
 No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitat: SPIP v1.92x i v2.0.x',
+Compatibilitat: SPIP v1.92x i v2.0.x', # MODIF
 	'pp_blocs_bloc' => 'Inserir un bloc replegat ',
 	'pp_blocs_visible' => 'Inserir un bloc desplegat',
 	'pp_chatons_inserer' => 'Inserir el xat &laquo;&nbsp;@chaton@&nbsp;&raquo;',

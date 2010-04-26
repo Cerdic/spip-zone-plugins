@@ -89,7 +89,7 @@ W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Ziffern entfernen}, {T
 
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibel mit: SPIP 1.9x und v2.0',
+Kompatibel mit: SPIP 1.9x und v2.0', # MODIF
 	'pp_blocs_bloc' => 'Eingeklappten Block einf&uuml;gen',
 	'pp_blocs_visible' => 'Ge&ouml;ffneten Block einf&uuml;gen',
 	'pp_chatons_inserer' => 'Smiley &laquo;&nbsp;@chaton@&nbsp;&raquo; einf&uuml;gen',

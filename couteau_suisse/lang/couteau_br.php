@@ -89,7 +89,7 @@ Kavit en adveziant-ma&ntilde; un nebeud binvio&ugrave; :  {Diverka&ntilde; an ni
 
 Gallout a rit teurel ur sell war ar pennado&ugrave; titouri&ntilde; diwar-benn an advezianto&ugrave; war : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kenglotus gant : SPIP v1.92x ha v2.0.x',
+Kenglotus gant : SPIP v1.92x ha v2.0.x', # MODIF
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW

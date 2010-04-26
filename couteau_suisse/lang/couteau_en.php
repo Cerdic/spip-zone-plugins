@@ -89,7 +89,7 @@ Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Su
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x and v2.0.x',
+Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW

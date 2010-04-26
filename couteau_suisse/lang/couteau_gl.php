@@ -89,7 +89,7 @@ Descubra neste m&oacute;dulo as s&uacute;as ferramentas favoritas : {Suprimir o 
 
 Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidade : SPIP todas as versi&oacute;ns 1.9x e v2.0',
+Compatibilidade : SPIP todas as versi&oacute;ns 1.9x e v2.0', # MODIF
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW

@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'base_donnees' => 'Base de donn&eacute;es',
-	'bloc_deplier' => 'D&eacute;plier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'bloc_deplier' => 'D&eacute;plier',
+	'bloc_replier' => 'Replier',
 
 	// C
 	'colorer_fond' => 'Colorer le fond',
@@ -89,7 +89,7 @@ D&eacute;couvre dans ce plugin tes outils favoris : {Supprime le num&eacute;ro},
 
 N\'h&eacute;site pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&eacute; : SPIP v1.92x et v2.0.x',
+Compatibilit&eacute; : SPIP v1.92x et v2.0.x', # MODIF
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;',
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;',
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',

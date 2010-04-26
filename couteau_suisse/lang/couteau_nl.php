@@ -89,7 +89,7 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Verenigbaarheid: SPIP 1.92x en v2.0.x',
+Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
