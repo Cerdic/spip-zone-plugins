@@ -98,7 +98,7 @@ function association_auteurs_elargis_updateq($couples, $where='')
 
 function association_auteurs_elargis_delete($where='')
 {
-	sql_delete(_ASSOCIATION_AUTEURS_ELARGIS, $couples, $where);
+	sql_delete(_ASSOCIATION_AUTEURS_ELARGIS, $where);
 }
 
 	//-- Table des tables ----------------------------------------------------
