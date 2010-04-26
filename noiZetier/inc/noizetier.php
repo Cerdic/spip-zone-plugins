@@ -228,7 +228,10 @@ function noizetier_lister_pages(){
 						$infos_compo['nom'] = typo($infos_compo['nom']);
 						$infos_compo['description'] = propre($infos_compo['description']);
 						$infos_compo['icon'] = $infos_compo['icon']!='' ? find_in_path($infos_compo['icon']) : '';
-						$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
+						if (isset($liste_pages[$type]))
+							$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
+						else
+							$infos_compo['blocs'] = noizetier_blocs_defaut();
 						$liste_compos[$type.'-'.$compo] = $infos_compo;
 						}
 			}
