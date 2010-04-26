@@ -341,6 +341,8 @@ function balise_TRI_dist($p, $liste='true') {
  * #BOUTON_ACTION{libelle,url,ajax} pour que l'action soit ajax comme un lien class='ajax'
  * ou
  * #BOUTON_ACTION{libelle,url,ajax,message_confirmation} pour utiliser un message de confirmation
+ * ou
+ * #BOUTON_ACTION{libelle,url,ajax,'',info} pour inserer une bulle d'information
  *
  * @param unknown_type $p
  * @return unknown
@@ -357,12 +359,17 @@ function balise_BOUTON_ACTION($p){
 	if (!$_class) $_class="''";
 
 	$_confirm = interprete_argument_balise(4,$p);
-	if (!$_confirm){ $_confirm="''"; $_onclick=''; }
+	if ((!$_confirm) OR ($_confirm=="''")) { $_onclick=''; }
 	else $_onclick = " onclick=\'return confirm(\"' . attribut_html($_confirm) . '\");\'";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><div>'.form_hidden(\$u)
-.'<button type=\'submit\' class=\'submit\' $_onclick>' . $_label . '</button>'
-.'</div></form>'";
+	$_title = interprete_argument_balise(5,$p);
+	if (!$_title) $_title="''";
+	else $_title = "' title=\'' . $_title . '\''";
+
+	$p->code = "'<form class=\'bouton_action_post ' . $_class . '\' method=\'post\' action=\'' . (\$u=$_url) . '\'>'
+. '<div>' . form_hidden(\$u)
+. '<button type=\'submit\' class=\'submit\' $_onclick' . $_title . '>' . $_label . '</button>'
+. '</div></form>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
