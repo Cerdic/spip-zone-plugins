@@ -162,7 +162,7 @@ class Actionneur {
 				}
 			}
 		}
-		
+
 		// on recupere : tous les prefix de plugin a activer (out)
 		// ie. ce plugin peut dependre d'un de ceux la
 		//
@@ -176,18 +176,18 @@ class Actionneur {
 						$deps[$inf['p']][] = $dep['id'];
 						$deps_all[] = $dep['id'];
 					}
-				}				
+				}
 			}
 		}
 
 		if (!$in) {
-			
+
 			// pas de dependance, on le met en premier !
 			$this->log("- placer $p tout en haut");
 			array_unshift($this->middle['on'], $info);
-			
+
 		} else {
-			
+
 			// intersection = dependance presente aussi
 			// on place notre action juste apres la derniere dependance
 			if ($diff = array_intersect($in, $out)) {
@@ -200,7 +200,7 @@ class Actionneur {
 				} else {
 					array_splice($this->middle['on'], $key+1, 0, array($info));
 				}
-			
+
 			// intersection = plugin dependant de celui-ci
 			// on place notre plugin juste avant la premiere dependance a lui trouvee
 			} elseif (in_array($p, $deps_all)) {
@@ -280,7 +280,10 @@ class Actionneur {
 		if ($this->end or $this->done) {
 			$affiche .= "<ul>";
 			foreach ($this->done as $i) {
-				$affiche .= "\t<li>"._T('step:message_action_finale_'.$i['todo'].'_'.($i['done']?'ok':'fail'),array('plugin'=>$i[n],'version'=>$i[v]))."</li>\n";
+				if(is_string($i['done'])){
+					$ajouts_message = "<br />".$i['done'];
+				}
+				$affiche .= "\t<li>"._T('step:message_action_finale_'.$i['todo'].'_'.($i['done']?'ok':'fail'),array('plugin'=>$i[n],'version'=>$i[v])).$ajouts_message."</li>\n";
 			}
 			foreach ($this->end as $i) {
 				$affiche .= "\t<li>"._T('step:message_action_'.$i['todo'],array('plugin'=>$i[n],'version'=>$i[v]))."</li>\n";
@@ -533,8 +536,8 @@ class Actionneur {
 	function do_install($info) {
 		include_spip('inc/plugin');
 		$dossier = $info['dossier'];
-		$this->installe_plugin($dossier);
-		return true;
+		$message_install = $this->installe_plugin($dossier);
+		return $message_install;
 	}
 
 
@@ -618,13 +621,17 @@ class Actionneur {
 		$plugin_get_infos = charger_fonction('get_infos', 'plugins');
 		$infos = $plugin_get_infos($dossier);
 		if (isset($infos['install'])) {
+			ob_start();
 			if (installe_un_plugin($dossier, $infos)) {
 				$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
 				if (!$meta_plug_installes) $meta_plug_installes=array();
 				$meta_plug_installes[] = $dossier;
 				ecrire_meta('plugin_installes',serialize($meta_plug_installes), 'non');
-				return true;
+				$messages = preg_replace('/<div.*(install-plugins).*<\/div>/','',ob_get_contents());
+				ob_end_clean();
+				return $messages;
 			}
+			ob_end_clean();
 		}
 		return false;
 	}
