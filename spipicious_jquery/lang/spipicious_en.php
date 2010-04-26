@@ -1,18 +1,9 @@
 <?php
-
-/**
- * spip.icio.us
- * Gestion de tags lies aux auteurs
- *
- * Auteurs :
- * Quentin Drouet
- * Erational
- *
- * 2007-2009 - Distribue sous licence GNU/GPL
- *
- */
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -48,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_tag' => 'Keyword group associated',
 
 	// S
-	'spipicious' => "Spip.icio.us",
+	'spipicious' => 'Spip.icio.us',
 
 	// T
 	'tag_ajoute' => 'You added a tag :<br />@name@',
@@ -59,8 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tags_supprimes' => 'You deleted several tags :<br />@name@',
 	'title_tag_utilise_nb' => 'This tag has been associated by @nb@ people.',
 	'title_tag_utilise_un' => 'This tag has been associated by one people.',
-
-	'to' => "with",
+	'to' => 'with',
 	'types_utilisateurs' => 'Who has access to the form ?',
 
 	// V
@@ -68,7 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// W
 	'waiting' => 'searching for your tags'
-
-
 );
+
 ?>
