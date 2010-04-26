@@ -15,7 +15,9 @@ include_spip('base/abstract_sql');
 include_spip ('inc/ajouter_documents');
 spip_connect();
 
-charger_generer_url();
+if(function_exists(charger_generer_url)) charger_generer_url();
+/* Assurer une compat SPIP 2.1*/
+else generer_url_entite();
 
 //Le contexte indique dans quelle rubrique le visiteur peut proposer l article
 function balise_FORMULAIRE_GIS ($p) {
