@@ -242,7 +242,8 @@ function afficher_lignes($tableau, $possibles=array(), $ok=array()) {
 				$liste_lignes .= "<p style=\"padding-left:2em; color: #8a1f11\"><strong>" . _T('langonet:texte_item_mal_defini') . "</strong></p>\n";
 		}
 		else {
-			$liste_lignes .= "<p style=\"padding-left:2em; color: #8a1f11\"><strong>" . _T('langonet:texte_item_non_defini') . "</strong></p>\n";
+			if ($ok[$item]===false)
+				$liste_lignes .= "<p style=\"padding-left:2em; color: #8a1f11\"><strong>" . _T('langonet:texte_item_non_defini') . "</strong></p>\n";
 		}
 		$liste_lignes .= fin_block();
 	}
