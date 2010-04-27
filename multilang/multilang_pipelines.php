@@ -9,32 +9,37 @@
 function multilang_insert_head_prive($flux){
 	$config = lire_config('multilang');
 
-
 	// Insertion de la css
 	$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(find_in_path('css/multilang.css')).'" type="text/css" media="all" />';
-	$exec = _request('exec') ;
 	$root = '' ;
 
-	if($config['siteconfig'] && $exec=='configuration'){
+	if($config['siteconfig']){
 		$root .= 'div#configurer-accueil' ; // Config Site
-	} else if($config['article'] && $exec=='articles_edit') { // Articles
-		$root .= 'div.cadre-formulaire-editer' ;
-	} else if($config['breve'] && $exec=='breves_edit') { // Breves
-		$root .= 'div.cadre-formulaire-editer' ;
-	} else if($config['rubrique'] && $exec=='rubriques_edit') { // Rubriques
-		$root .= 'div.cadre-formulaire-editer' ;
-	} else if($config['auteur'] && $exec=='auteur_infos') { // Auteurs
-		$root .= 'div.cadre-formulaire-editer' ;
-	} else if($config['document'] && ($exec=='naviguer' || $exec=='articles')) {  // Docs dans page de presentation rubrique ou article,
-		$root .= 'div#portfolio_portfolio,div#portfolio_documents' ;
-	} else if($config['site'] && $exec=='sites_edit') { // Sites
-		$root .= 'div.cadre-formulaire-editer' ;
-	} else if($config['motcle'] && ($exec=='mots_type' || $exec=='mots_edit')) { // Mots
-		$root .= 'div.cadre-formulaire-editer' ;
+	}
+	if($config['article']) { // Articles
+		$root .= ',div.formulaire_editer_article';
+	}
+	if($config['breve']) { // Breves
+		$root .= ',div.formulaire_editer_breve';
+	}
+	if($config['rubrique']) { // Rubriques
+		$root .= ',div.formulaire_editer_rubrique';
+	}
+	if($config['auteur']) { // Auteurs
+		$root .= ',div.formulaire_editer_auteur';
+	}
+	if($config['document']) {  // Docs dans page de presentation rubrique ou article,
+		$root .= ',div#portfolio_portfolio,div#portfolio_documents' ;
+	}
+	if($config['site']) { // Sites
+		$root .= ',div.formulaire_editer_site';
+	}
+	if($config['motcle']) { // Mots
+		$root .= ',div.formulaire_editer_mot';
 	}
 
 	// Docs traites a part dans pages d'edition d'articles et de rubriques
-	if($config['document'] && ($exec=='rubriques_edit' || $exec=='articles_edit')){
+	if($config['document']){
 		$root .= ',div#liste_documents,div.formulaire_editer_document' ; // avec ou sans Mediatheque
 	}
 
@@ -42,7 +47,8 @@ function multilang_insert_head_prive($flux){
 	// - document.ready
 	// - onAjaxLoad (cas des docs et de la configuration du site)
 
-	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
+	$flux .= '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js").'"></script>
+			  <script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
 			  <script type="text/javascript">
 			  var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
 			  multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
@@ -89,7 +95,7 @@ function multilang_insert_head($flux){
 			$root .= ',div.formulaire_editer_rubrique' ;
 		}
 		if($config['auteur']) { // Auteurs
-			$root .= ',div.cadre-formulaire-editer' ;
+			$root .= ',div.formulaire_editer_auteur';
 		}
 		if($config['document']) {  // Docs dans page de presentation rubrique ou article,
 			$root .= ',div#portfolio_portfolio,div#portfolio_documents' ;
@@ -98,11 +104,11 @@ function multilang_insert_head($flux){
 			$root .= ',div.cadre-formulaire-editer' ;
 		}
 		if($config['motcle']) { // Mots
-			$root .= ',div.cadre-formulaire-editer' ;
+			$root .= ',div.formulaire_editer_groupe_mot,div.formulaire_editer_mot' ;
 		}
 
 		// Docs traites a part dans pages d'edition d'articles et de rubriques
-		if($config['document'] && ($exec=='rubriques_edit' || $exec=='articles_edit')){
+		if($config['document']){
 			$root .= ',div#liste_documents,div.formulaire_editer_document' ; // avec ou sans Mediatheque
 		}
 
@@ -110,7 +116,8 @@ function multilang_insert_head($flux){
 		// - document.ready
 		// - onAjaxLoad (cas des docs et de la configuration du site)
 
-		$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
+		$flux .= '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js").'"></script>
+				  <script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
 				  <script type="text/javascript">
 				  var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
 				  multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",

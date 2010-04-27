@@ -216,7 +216,7 @@ function forms_init_field(el,lang) {
 	if(el.id=='titre' || el.id.match(/^titre_document[0-9]+/)){
 		numid=el.id+'_numero';
 		$(el).parent()
-				.before('<li class="editer_'+numid+'"><label for="titre_numero">Num : </label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" class="text"></input></li>');
+				.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" class="text"></input></li>');
 		$('#'+numid).totreat = false;
 	}
 	// End Add Yffic

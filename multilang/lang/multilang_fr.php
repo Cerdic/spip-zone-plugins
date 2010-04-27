@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_activer' => 'Activer Multilang sur la page d\'&eacute;dition :',
 	'cfg_boite_multilang' => 'Configuration du plugin Multilang',
-	'cfg_descr_multilang' => 'Multilang : Plugin de gestion des tags multi dans l\'espace priv&eacute;',
+	'cfg_descr_multilang' => 'Multilang : Plugin de gestion des tags multi',
 	'cfg_effacer' => 'Re-initialiser',
 	'cfg_lbl_article' => 'des articles',
 	'cfg_lbl_auteur' => 'des auteurs',
@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_rubrique' => 'des rubriques',
 	'cfg_lbl_site' => 'des sites',
 	'cfg_lbl_siteconfig' => 'de la configuration du site',
-	'cfg_titre_multilang' => 'Multilang'
+	'cfg_titre_multilang' => 'Multilang',
+	'champ_numero' => 'Num&eacute;ro',
+
 );
 ?>
