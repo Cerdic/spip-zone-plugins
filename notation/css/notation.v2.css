@@ -1,12 +1,12 @@
 /**
 * Plugin Notation
 * par JEM (jean-marc.viglino@ign.fr) et b_b
-* 
+*
 * Copyright (c) 2008
 * Logiciel libre distribue sous licence GNU/GPL.
-*  
+*
 * Styles utilises par le plugin
-*  
+*
 **/
 
 /* jQuery.Rating Plugin CSS - http://www.fyneworks.com/jquery/star-rating/ */
@@ -16,7 +16,7 @@ div.rating-cancel a,div.star-rating a{display:block;width:16px;height:100%;backg
 div.star-rating-on a{background-position:0 -16px!important}
 div.star-rating-hover a{background-position:0 -32px}
 /* Read Only CSS */
-div.star-rating-readonly a{cursor:default !important}
+div.star-rating-readonly a,div.star-rating-readonly{cursor:default !important}
 /* Partial Star CSS */
 div.star-rating{background:transparent!important;overflow:hidden!important}
 /* END jQuery.Rating Plugin CSS */
