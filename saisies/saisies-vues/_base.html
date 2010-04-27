@@ -9,7 +9,7 @@
 	[(#GET{enfants}|oui)
 		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
 	]
-	[(#GET{enfants}|non)
+	[(#GET{enfants}|non|et{#ENV{type_saisie}|!={explication}})
 		[<strong>(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong>]
 		<div class="valeur">
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|oui)
