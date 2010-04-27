@@ -158,8 +158,10 @@ function forms_attach_submit() {
 	}else{
 		var oldsubmit = this.onsubmit;
 		this.onsubmit = "";
-		if(oldsubmit) $(this).submit(function(){forms_multi_submit.apply(this);return oldsubmit.apply(this);})
-		else $(this).submit(forms_multi_submit);
+		if(oldsubmit && oldsubmit != "")
+			$(this).submit(function(){forms_multi_submit.apply(this);return oldsubmit.apply(this);})
+		else
+			if(oldsubmit != "")$(this).submit(forms_multi_submit);
 	}
 }
 

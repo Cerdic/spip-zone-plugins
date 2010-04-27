@@ -18,18 +18,40 @@ A faire :
 
 - Suggestion de RastaPopoulos : J'avais une idée supplémentaire pour que ce soit extensible : activer également ce système sur tous les champs ayant une classe "multilang". Fait, a tester avec class "multilang"
 
-Un binz qui m'agace :
+Trucs a regler :
 1.-------------
 Avec Mediatheque, l'init est rappelee grace au onAjaxLoad. Et affiche bien le menu lang dans la modale. Mais un 2e menu est aussi rajoute dans le doc principal sous la modale de mediatheque... De meme quand on ferme la modale, on repasse par l'init... Et on se retrouve avec un 3e menu. J'ai donc interdit la creation d'un menu s'il en existe deja un dans la div :
 fct forms_init_multi :
 		if(!container.find('.menu_lang').size())
 			container.prepend("<div class='menu_lang'>");
+et supprime le test de la fonction d'init (qui est un peu bourrin de toute facon):
+	//if(multilang_root.find('.menu_lang').length > 0) return;
+
+Premier bug : Dans une page d'edition article ou rubrique, si on modifie le doc + enregistrer le doc, PUIS enregistrer l'article (ou la rubrique) on passe 2 fois dans le submit et les champs ont la structure multi en double
+
+Solution : 
+function forms_attach_submit() {
+	if($(this).parents('.ajax').size() && $(this).find('input[name=var_ajax]')){
+		$(this).bind('form-pre-serialize',forms_multi_submit);
+	}else{
+		var oldsubmit = this.onsubmit;
+		this.onsubmit = "";
+		if(oldsubmit && oldsubmit != "")
+			$(this).submit(function(){forms_multi_submit.apply(this);return oldsubmit.apply(this);})
+		else
+			if(oldsubmit != "")$(this).submit(forms_multi_submit);
+	}
+}
+Ca marche mais je ne pige pas bien...  En fait quand on charge la page d'edition, le this.onsubmit est undefined et on rajoute une action sur le submit : forms_multi_submit . Lors du 2e passage (onAjaxLoad), le this.onsubmit vaut "" et on rajoutait une 2e fois le forms_multi_submit... Mais pourquoi une chaine vide ?
+
+Avec ou sans mediatheque, donc maintenant ca fonctionne
 
 2.---------------
-Dans le pipeline, j'ai rajoute une 2e passage par l'init pour la suggestion de Rasta :
+Dans le pipeline, j'ai rajoute un 2e passage par l'init pour la suggestion de Rasta :
 forms_selector = $(".multilang").parents("form")
 multilang_init_lang({fields:".multilang",forms:forms_selector});
 du coup, y'a pas de root de defini, donc le multilang agit sur tout le document
 
-3.----------------
-Et ces 2 modfis en meme temps c'est le bordel... Je continue mon explication tout a l'heure ou demain
+Effet, le le menu lang s'affiche bien, mais ne fonctionne plus
+
+Bon faut tracer ce qui se passe
