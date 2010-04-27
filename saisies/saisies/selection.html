@@ -18,7 +18,7 @@
 ]
 
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
-#SET{datas, #ENV{datas}}
+#SET{datas, #ENV*{datas}}
 #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
 
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
