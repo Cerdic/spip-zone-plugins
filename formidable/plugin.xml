@@ -61,7 +61,7 @@
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="cfg" version="[1.14.4;]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
-	<necessite id="saisies" version="[1.7.2;]" />
+	<necessite id="saisies" version="[1.7.3;]" />
 	<necessite id="verifier" version="[0.1;]" />
 	<necessite id="yaml" version="[1.1;]" />
 	<necessite id="facteur" version="[1.5.3;]" />

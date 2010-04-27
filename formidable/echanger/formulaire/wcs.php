@@ -93,6 +93,11 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 							$saisie['saisie'] = 'checkbox';
 							unset($saisie['options']['size']);
 							break;
+						case 'comment':
+							$saisie['saisie'] = 'explication';
+							$saisie['options']['texte'] = $saisie['options']['label'];
+							unset($saisie['options']['label']);
+							break;
 						case 'page':
 							$saisie['saisie'] = 'fieldset';
 							unset($saisie['options']['size']);
@@ -101,7 +106,6 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 							// On remet le conteneur au niveau du formulaire
 							$conteneur =& $formulaire;
 							break;
-						case 'comment':
 						case 'subtitle':
 						case 'file':
 							$saisie = null;
@@ -121,7 +125,7 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 						}
 					
 						// Le nom
-						$saisie['options']['nom'] = saisies_generer_nom($conteneur['saisies'], $saisie['saisie']);
+						$saisie['options']['nom'] = saisies_generer_nom($formulaire['saisies'], $saisie['saisie']);
 					
 						// Obligatoire
 						if (trim(spip_xml_aplatit($field['required'])) == 'True')
