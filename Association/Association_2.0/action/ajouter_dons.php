@@ -25,7 +25,13 @@ function action_ajouter_dons() {
 	$valeur = _request('valeur');
 	$contrepartie = _request('contrepartie');
 	$commentaire = _request('commentaire');
+	don_insert($id_adherent, $argent, $valeur, $journal, $contrepartie, $date_don, $bienfaiteur, $colis, $commentaire);
+}
 
+// il faudrait retrouver id par bienfaiteur et reciproquement
+
+function don_insert($id_adherent, $argent, $valeur, $journal, $contrepartie, $date_don, $bienfaiteur='', $colis='', $commentaire='')
+{
 	include_spip('base/association');		
 	$id_don = sql_insertq('spip_asso_dons', array(
 					    'date_don' => $date_don,
@@ -42,6 +48,6 @@ function action_ajouter_dons() {
 		    'imputation' => lire_config('association/pc_dons'),
 		    'recette' => $argent,
 		    'journal' => $journal,
-		    'justification' => 'don n&deg; '.$id_don.' - '.$bienfaiteur));
+		    'justification' => "[->don$id_don] - [$bienfaiteur" . "->adherent$id_adherent]"));
 }
 ?>

@@ -79,7 +79,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_compte'].'</td>';
 			echo '<td class="arial11 border1">'.association_datefr($data['date']).'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['recette'].' &euro;</td>';
-			echo '<td class="arial11 border1">'.$data['justification'].'</td>';
+			echo '<td class="arial11 border1">'.propre($data['justification']).'</td>';
 			echo '<td class="arial11 border1">'.$data['journal'].'</td>';
 			echo '</tr>';
 		}

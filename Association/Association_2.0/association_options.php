@@ -51,6 +51,15 @@ function association_I2_cfg_form($flux) {
 	    return ($flux);
 }	
 	
+// raccourcis
+
+function generer_url_don($id, $param='', $ancre='') {
+	return  generer_url_ecrire('edit_don', "id=" . intval($id));
+}
+
+function generer_url_adherent($id, $param='', $ancre='') {
+	return  generer_url_ecrire('voir_adherent', "id=" . intval($id));
+}
 
 //Conversion de date
 function association_datefr($date) { 

@@ -25,8 +25,9 @@ function exec_edit_don(){
 		$url_action_dons = generer_url_ecrire('action_dons');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$action=$_REQUEST['agir'];
 		$id_don= intval(_request('id'));
+		$action=_request('agir');
+		if (!$action) $action = $id_don ? 'modifier' : 'ajouter';
 		
 		$data = !$id_don ? '' : sql_fetsel("*", "spip_asso_dons", "id_don=$id_don ");
 		if ($data) {
@@ -43,9 +44,9 @@ function exec_edit_don(){
 		  $bienfaiteur=$id_adherent=$argent=$colis=$valeur=$journal=$contrepartie=$commentaire='';
 		  $date_don=date('Y-m-d');
 		}
-
+		$titre = _T('Mise &agrave; jour des dons');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:association')) ;
+		echo $commencer_page($titre) ;
 		
 		association_onglets();
 		
@@ -63,7 +64,7 @@ function exec_edit_don(){
 		
 		echo debut_droite("", true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des dons'));
+		debut_cadre_relief(  "", false, "", $titre);
 
 		$res = '<label for="date_don"><strong>Date (AAAA-MM-JJ) :</strong></label>';
 		$res .= '<input name="date_don" type="text" value="'.$date_don.'" id="date_don" class="formo" />';
@@ -73,15 +74,8 @@ function exec_edit_don(){
 		$res .= '<input name="id_adherent" type="text" value="'.$id_adherent.'" id="id_adherent" class="formo" />';
 		$res .= '<label for="argent"><strong>Don financier (en &euro;) :</strong></label>';
 		$res .= '<input name="argent" type="text" value="'.$argent.'" id="argent" class="formo" />';
-		$res .= '<label for="journal"><strong>Mode de paiement :</strong></label>';
-		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
-		$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "",  "code") ;
-		while ($banque = sql_fetch($sql)) {
-			$res .= '<option value="'.$banque['code'].'" ';
-			if ($journal==$banque['code']) { $res .= ' selected="selected"'; }
-			$res .= '>'.$banque['intitule'].'</option>';
-		}
-		$res .= '</select>';
+
+		$res .= don_mode_de_paiemen($journal);
 		$res .= '<label for="colis"><strong>Colis :</strong></label>';
 		$res .= '<input name="colis" type="text" value="'.$colis.'" id="colis" class="formo" />';
 		$res .= '<label for="valeur"><strong>Contre-valeur (en &euro;) :</strong></label>';
@@ -101,5 +95,21 @@ function exec_edit_don(){
 		fin_cadre_relief();  
 		fin_page();
 	}
+}
+
+function don_mode_de_paiemen($journal)
+{
+	$res = '';
+	$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "",  "code") ;
+	while ($banque = sql_fetch($sql)) {
+		$res .= '<option value="'.$banque['code'].'" ';
+		if ($journal==$banque['code']) { $res .= ' selected="selected"'; }
+		$res .= '>'.$banque['intitule'].'</option>';
+	}
+	if (!$res) return '';
+	return '<label for="journal"><strong>' . _L('Mode de paiement&nbsp;') .'</strong></label>'
+	. '<select name="journal" type="text" id="journal" class="formo" />'
+	. $res
+	.'</select>';
 }
 ?>

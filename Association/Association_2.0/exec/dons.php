@@ -88,7 +88,7 @@ function exec_dons() {
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['argent'], 2, ',', ' ').'&nbsp;&euro;</td>';
 			echo '<td class="arial11 border1">'.$data['colis'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['valeur'], 2, ',', ' ').'&nbsp;&euro;</td>';
-			echo '<td class="arial11 border1">'.$data['contrepartie'].'</td>';
+			echo '<td class="arial11 border1">'.propre($data['contrepartie']).'</td>';
 			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_dons.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="' . _L('Supprimer le don') . '"></a></td>';
 			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_don.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="' . _L('Mettre &agrave; jour le don') . '"></a>';
 			echo '</tr>';
