@@ -36,7 +36,7 @@ function inc_geomap_script_init_dist(){
 	
 	if (function_exists('lire_config') && lire_config("geomap/custom_control") != 'non'){
 		$out .= '
-		<script type="application/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
+		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
 	}
 	
 	$out .= '
