@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$url_action_comptes=generer_url_ecrire('action_comptes');
 		
-		$id_compte=$_REQUEST['id'];
+		$id_compte= intval($_REQUEST['id']);
 		$date=$_POST['date'];
 		$imputation=$_POST['imputation'];
 		$recette=$_POST['recette'];
@@ -44,7 +44,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//MODIFICATION OPERATION
 		if ($action =="modifie") { 
-			spip_query( " UPDATE spip_asso_comptes SET date='$date', recette='$recette', depense='$depense', justification='$justification', journal='$journal' WHERE id_compte='$id_compte' " );
+			spip_query( " UPDATE spip_asso_comptes SET date='$date', recette='$recette', depense='$depense', justification='$justification', journal='$journal' WHERE id_compte=$id_compte" );
 			header ('location:'.$url_retour);
 			exit;
 		}
@@ -64,32 +64,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo association_date_du_jour();	
 			echo fin_boite_info(true);
 			
-			echo bloc_des_raccourcis(icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif"));
-
+			echo bloc_des_raccourcis(icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif", false));
 			echo debut_droite('', true);
 			
 			debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
-			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte n&deg; '.$id_compte.' !</strong></p>';
-			echo '<form action="'.$url_action_comptes.'"  method="post">';
-			echo '<input type=hidden name="agir" value="drop">';
-			echo '<input type=hidden name="id" value="'.$id_compte.'">';
-			echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
-			echo '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
+			echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte n&deg; '. $id_compte . ' !') . '</strong></p>';
+
+			$res = '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
+
+			echo redirige_action_post('supprimer_comptes', $id_compte, 'comptes', '', $res);
 			fin_cadre_relief();  
 			
 			fin_page();
-			exit;
-		}
-		
-		//---------------------------- 
-		//  SUPPRESSION DEFINITIVE OPERATION
-		//---------------------------- 		
-		if ($action == "drop") {
-			
-			$url_retour=$_POST['url_retour'];
-			
-			spip_query( "DELETE FROM spip_asso_comptes WHERE id_compte='$id_compte' " );
-			header ('location:'.$url_retour);
 			exit;
 		}
 		
