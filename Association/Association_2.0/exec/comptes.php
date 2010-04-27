@@ -35,20 +35,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if ( isset ($_REQUEST['imputation'] )) { $imputation = $_REQUEST['imputation']; }
 		else { $imputation= "%"; }
 		
-		$annee=$_GET['annee'];
+		$annee=_request('annee');
 		if(empty($annee)){$annee = date('Y');}
 		
 		association_onglets();
 		
 		echo debut_gauche("",true);
 		
-		 echo debut_boite_info(true);
+		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo '<p>En bleu : Recettes<br />En rose : D&eacute;penses</p>'; 
 		
 		// TOTAUX
-		$query = spip_query( "SELECT sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select("sum(recette) AS somme_recettes, sum(depense) AS somme_depenses", 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");
+		while ($data = sql_fetch($query)) {
 			$somme_recettes = $data['somme_recettes'];
 			$somme_depenses = $data['somme_depenses'];
 			$solde= $somme_recettes - $somme_depenses;
@@ -76,9 +76,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		
 		$res=icone_horizontale(_T('Bilan'), $url_bilan, _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif',false);
-		 echo bloc_des_raccourcis($res);
-		$res=icone_horizontale(_T('Ajouter une op&eacute;ration'), $url_ajout_compte, _DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
-		 echo bloc_des_raccourcis($res);
+		echo bloc_des_raccourcis($res);
+		$res=icone_horizontale(_L('Ajouter une op&eacute;ration'), $url_ajout_compte, _DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
+		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
 		
@@ -92,7 +92,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$query = sql_select("date_format( date, '%Y' )  AS annee", "spip_asso_comptes", "imputation like '$imputation' ", "annee", "annee");
 		
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			if ($data['annee']==$annee)	{echo ' <strong>'.$data['annee'].' </strong>';}
 			else {echo '<a href="'.$url_comptes.'&annee='.$data['annee'].'&imputation='.$imputation.'">'.$data['annee'].'</a> ';}
 		}
@@ -104,8 +104,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<option value="%" ';
 		if ($imputation=="%") { echo ' selected="selected"'; }
 		echo '>Tous</option>';
-		$sql = spip_query ("SELECT * FROM spip_asso_plan ORDER BY classe,code");
-		while ($plan = spip_fetch_array($sql)) {
+		$sql = sqL_select('*', 'spip_asso_plan','', '', "classe,code");
+		while ($plan = sql_fetch($sql)) {
 			echo '<option value="'.$plan['code'].'" ';
 			if ($imputation==$plan['code']) { echo ' selected="selected"'; }
 			echo '>'.$plan['classe'].' - '.$plan['intitule'].'</option>';
@@ -128,13 +128,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	echo '</tr>';
 
 	$max_par_page=30;
-	$debut=$_GET['debut'];
+	$debut= intval(_request('debut'));
 
-	if (empty($debut)) {$debut=0;}
+	$query = sql_select('*', "spip_asso_comptes", "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'", '',  'date DESC', "$debut,$max_par_page");
 
-	$query = spip_query ("SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ORDER BY date DESC LIMIT $debut,$max_par_page");
-
-	while ($data = spip_fetch_array($query)) {
+	while ($data = sql_fetch($query)) {
 		if ($data['recette'] >0) { $class= "pair";}
 		else { $class="impair";}	   
 		
@@ -163,7 +161,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	//SOUS-PAGINATION
 	echo '<td>';
-	$query = spip_query( "SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
+	$query = sql_select('*', 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");
 	$nombre_selection=sql_count($query);
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 
@@ -183,7 +181,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	echo '</form>';
 
 	fin_cadre_relief();  
-	  echo fin_gauche(),fin_page(); 
+	echo fin_gauche(),fin_page(); 
 }
 ?>
 
