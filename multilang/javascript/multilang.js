@@ -66,7 +66,6 @@ function multilang_init_lang(options) {
 	});
 	//init fields
 	multilang_fields_selector = options.fields;
-	console.log(multilang_fields_selector);
 	//store all the internationalized forms
 	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
 	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
