@@ -8,6 +8,8 @@ td.valide { background:#AFF5DF; }
 td.sortie { background:#E6EAC9; }
 td.prospect { background:#FFF8DC; } 
 
+border1 {border-top: 1px solid #CCCCCC;}
+
 /* Formulaires*/
 .spip_forms form label {
 	float:none;

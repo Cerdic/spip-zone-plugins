@@ -61,14 +61,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$query = spip_query ( "SELECT * FROM spip_asso_categories ORDER by id_categorie" ) ;
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['id_categorie'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['valeur'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['libelle'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['duree'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['cotisation'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['commentaires'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_categorie.'&agir=supprime&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_categorie.'&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
+			echo '<td  class="arial11 border1" style="text-align:right">'.$data['id_categorie'].'</td>';
+			echo '<td  class="arial11 border1">'.$data['valeur'].'</td>';
+			echo '<td  class="arial11 border1">'.$data['libelle'].'</td>';
+			echo '<td  class="arial11 border1" style="text-align:right">'.$data['duree'].'</td>';
+			echo '<td  class="arial11 border1" style="text-align:right">'.$data['cotisation'].'</td>';
+			echo '<td  class="arial11 border1">'.$data['commentaires'].'</td>';
+			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_categorie.'&agir=supprime&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_categorie.'&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

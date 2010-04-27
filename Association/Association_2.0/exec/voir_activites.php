@@ -112,18 +112,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			else { $class="pair"; }
 			
 			echo '<tr> ';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['id_activite'].'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.association_datefr($data['date']).'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+			echo '<td style="text-align:right;" class="'.$class. ' border1">'.$data['id_activite'].'</td>';
+			echo '<td style="text-align:right;" class="'.$class. ' border1">'.association_datefr($data['date']).'</td>';
+			echo '<td class="'.$class. ' border1">';
 			if(empty($data['email'])) { echo $data['nom']; }
 			else { echo '<a href="mailto:'.$data['email'].'">'.$data['nom'].'</a>'; }
 			echo '</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['id_adherent'].'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['inscrits'].'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.number_format($data['montant'], 2, ',', ' ').'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:activite_bouton_maj_inscription').'"></a>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_ajout_participation.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_activite'].'></td>';
+			echo '<td style="text-align:right;" class="'.$class. ' border1">'.$data['id_adherent'].'</td>';
+			echo '<td style="text-align:right;" class="'.$class. ' border1">'.$data['inscrits'].'</td>';
+			echo '<td style="text-align:right;" class="'.$class. ' border1">'.number_format($data['montant'], 2, ',', ' ').'</td>';
+			echo '<td style="text-align:center;" class="'.$class. ' border1"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:activite_bouton_maj_inscription').'"></a>';
+			echo '<td style="text-align:center;" class="'.$class. ' border1"><a href="'.$url_ajout_participation.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
+			echo '<td style="text-align:center;" class="'.$class. ' border1"><input name="delete[]" type="checkbox" value='.$data['id_activite'].'></td>';
 			echo '</tr>';
 			if ($data['commentaire']) {	echo '<tr><td colspan=10 style="text-align:justify;" class ='.$class.'>'.$data['commentaire'].'</td></tr>'; }
 		}     

@@ -86,11 +86,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
     {	
 			$id_auteur=$data['id_auteur'];
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur").'" title="Modifier l\'administrateur">'.$data['nom'].' </a></td>';
-			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;"><a href="mailto:'.$data['email'].'"title="Envoyer un email">email</a></td>';
-			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['fonction'].'</td>';
-			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['mobile'].'</td>';
-			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['telephone'].'</td>';
+			echo '<td class="arial11 border1"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur").'" title="Modifier l\'administrateur">'.$data['nom'].' </a></td>';
+			echo '<td class="arial1 border1"><a href="mailto:'.$data['email'].'"title="Envoyer un email">email</a></td>';
+			echo '<td class="arial1 border1">'.$data['fonction'].'</td>';
+			echo '<td class="arial1 border1">'.$data['mobile'].'</td>';
+			echo '<td class="arial1 border1">'.$data['telephone'].'</td>';
 			echo '</tr>';
 		}				
 		echo '</table>';

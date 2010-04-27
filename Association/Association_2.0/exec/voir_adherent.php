@@ -76,11 +76,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_auteur ORDER BY date DESC" );
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_compte'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['date']).'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['recette'].' &euro;</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['justification'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['journal'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_compte'].'</td>';
+			echo '<td class="arial11 border1">'.association_datefr($data['date']).'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.$data['recette'].' &euro;</td>';
+			echo '<td class="arial11 border1">'.$data['justification'].'</td>';
+			echo '<td class="arial11 border1">'.$data['journal'].'</td>';
 			echo '</tr>';
 		}
 		echo '</table>';
@@ -104,17 +104,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			while ($data = spip_fetch_array($query)) {
 				$id_evenement=$data['id_evenement'];
 				echo '<tr style="background-color: #EEEEEE;">';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_activite'].'</td>';
+				echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_activite'].'</td>';
 				$sql = sql_select("*", "spip_evenements", "id_evenement=$id_evenement" );
 				while ($evenement = spip_fetch_array($sql)) {
 					$date = substr($evenement['date_debut'],0,10);
-					//echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($date).'</td>';
-					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($date).'</td>';
-					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$evenement['titre'].'</td>';
+					//echo '<td class="arial11 border1">'.association_datefr($date).'</td>';
+					echo '<td class="arial11 border1">'.association_datefr($date).'</td>';
+					echo '<td class="arial11 border1">'.$evenement['titre'].'</td>';
 				}
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['inscrits'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['statut'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_inscription').'"></a></td>';
+				echo '<td class="arial11 border1" style="text-align:right;">'.$data['inscrits'].'</td>';
+				echo '<td class="arial11 border1">'.$data['statut'].'</td>';
+				echo '<td class="arial11 border1" style="text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_inscription').'"></a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';
@@ -138,12 +138,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$query = spip_query ("SELECT * FROM spip_asso_ventes WHERE ".$critere." ORDER BY date_vente DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				echo '<tr style="background-color: #EEEEEE;">';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_vente'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date_vente']).'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['article'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['quantite'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date_envoi']).'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_vente').'"></a></td>';
+				echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_vente'].'</td>';
+				echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($data['date_vente']).'</td>';
+				echo '<td class="arial11 border1">'.$data['article'].'</td>';
+				echo '<td class="arial11 border1" style="text-align:right;">'.$data['quantite'].'</td>';
+				echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($data['date_envoi']).'</td>';
+				echo '<td class="arial11 border1" style="text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_vente').'"></a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';
@@ -171,15 +171,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$query = spip_query ("SELECT * FROM spip_asso_prets LEFT JOIN spip_asso_ressources ON spip_asso_prets.id_ressource=spip_asso_ressources.id_ressource WHERE ".$critere." ORDER BY id_pret DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				echo '<tr style="background-color: #EEEEEE;">';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">';
+				echo '<td class="arial11 border1">';
 				echo '<img src="/dist/images/puce-'.$puce.'.gif"></td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_pret'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date_sortie']).'</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">';
+				echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_pret'].'</td>';
+				echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
+				echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($data['date_sortie']).'</td>';
+				echo '<td class="arial11 border1" style="text-align:right;">';
 				if($data['date_retour']=="0000-00-00"){echo '&nbsp;';} else {echo association_datefr($data['date_retour']);}
 				echo '</td>';
-				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_pret').'"></a></td>';
+				echo '<td class="arial11 border1" style="text-align:center"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_pret').'"></a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';

@@ -59,10 +59,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$depenses=$data['depenses']; 
 			$soldes=$recettes - $depenses;
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($soldes, 2, ',', ' ').'</td>';
+			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($soldes, 2, ',', ' ').'</td>';
 			echo '</tr>';
 			$total_recettes += $recettes;	
 			$total_depenses += $depenses;	
@@ -72,10 +72,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$total_depenses=number_format($total_depenses, 2, ',', ' '); 
 		$total_soldes=number_format($total_soldes, 2, ',', ' '); 
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;color:#9F1C30;"><strong>R&eacute;sultat courant</strong></td>';
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;color:#9F1C30;"><strong>'.$total_recettes.'</strong></td>'; 
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;color:#9F1C30;"><strong>'.$total_depenses.'</strong></td>';
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;color:#9F1C30;"><strong>'.$total_soldes.'</strong></td></tr>'; 
+		echo '<td class="arial11 border1" style="color:#9F1C30;"><strong>R&eacute;sultat courant</strong></td>';
+		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_recettes.'</strong></td>'; 
+		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_depenses.'</strong></td>';
+		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_soldes.'</strong></td></tr>'; 
 		echo '</tr>';
 		echo '</table>';
 		echo '</fieldset>';
@@ -98,15 +98,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$solde=$banque['solde_anterieur'];
 			$total_initial += $solde;
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$banque['intitule']; 
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($date_solde).'</td>'; 
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>'; 
+			echo '<td class="arial11 border1">'.$banque['intitule']; 
+			echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($date_solde).'</td>'; 
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>'; 
 			
 			$compte = sql_fetsel("sum( recette ) AS recettes, sum( depense ) AS depenses, date", "spip_asso_comptes", "date > '$date_solde' AND journal = '$journal'", $journal);
 			
 			if ($compte)
 				$solde += ($compte['recettes'] -$compte['depenses']);
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($solde, 2, ',', ' ').'</tr>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</tr>';
 			$total_actuel += $solde;		
 
 		}
@@ -114,10 +114,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$total_initial=number_format($total_initial, 2, ',', ' '); 
 		$total_actuel=number_format($total_actuel, 2, ',', ' '); 
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;color:#9F1C30;"><strong>Encaisse</strong></td>';
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;color:#9F1C30;"><strong>&nbsp;</strong></td>'; 
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;color:#9F1C30"><strong>'.$total_initial.'</strong></td>'; 
-		echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;color:#9F1C30"><strong>'.$total_actuel.'</strong></td></tr>'; 
+		echo '<td class="arial11 border1" style="color:#9F1C30;"><strong>Encaisse</strong></td>';
+		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>&nbsp;</strong></td>'; 
+		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30"><strong>'.$total_initial.'</strong></td>'; 
+		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30"><strong>'.$total_actuel.'</strong></td></tr>'; 
 		echo '</tr>';
 		echo '</table>';
 		

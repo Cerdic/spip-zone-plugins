@@ -172,10 +172,10 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		}
 		
 		$res .= '<tr> ';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>';
+		$res .= '<td style="text-align:right;" class="'.$class. ' border1">';
 		$res .= ($indexation=="id_asso") ? $data["id_asso"] : $id_auteur;
 		$res .= '</td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
+		$res .= '<td class="'.$class. ' border1">';
 
 		$logo = $chercher_logo($id_auteur, 'id_auteur');
 		if ($logo) {
@@ -184,20 +184,20 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		  $res .= '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
 		}
 		$res .= '</td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+		$res .= '<td class="'.$class. ' border1">';
 		if (empty($data["email"])) { 
 		$res .= $data["nom_famille"].'</td>'; 
 		} else {
 		$res .= '<a href="mailto:'.$data["email"].'">'.$data["nom_famille"].'</a></td>';
 		}
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+		$res .= '<td class="'.$class. ' border1">'.$data["prenom"].'</td>';
+		$res .= '<td class="'.$class. ' border1">';
 		$res .=sql_getfetsel("valeur", "spip_asso_categories", "id_categorie=".intval($data["categorie"]));
 		$res .= '</td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+		$res .= '<td class="'.$class. ' border1">';
 		if ($data['validite']==""){$res .= '&nbsp;';}else{$res .= association_datefr($data['validite']);}
 		$res .= '</td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+		$res .= '<td class="'.$class. ' border1">';
 		switch($data['statut'])	{
 		case "0minirezo":
 			$logo= "admin-12.gif"; break;
@@ -211,10 +211,10 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 			$logo="adher-12.gif"; break;
 		}
 		$res .= '<a href="'.$url_editer_auteur.'&id_auteur='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
-		$res .= '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_auteur'].'></td>';
+		$res .= '<td class="'.$class. ' border1"><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+		$res .= '<td class="'.$class. ' border1"><a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
+		$res .= '<td class="'.$class. ' border1"><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
+		$res .= '<td class="'.$class. ' border1"><input name="delete[]" type="checkbox" value='.$data['id_auteur'].'></td>';
 		$res .= '</tr>';
 	}
 	

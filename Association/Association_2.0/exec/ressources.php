@@ -63,7 +63,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$query = spip_query ( "SELECT * FROM spip_asso_ressources ORDER BY id_ressource" ) ;
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';		
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">';
+			echo '<td class="arial11 border1">';
 			switch($data['statut']){
 				case "ok": $puce= "verte"; break;
 				case "reserve": $puce= "rouge"; break;
@@ -71,16 +71,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				case "sorti": $puce="poubelle"; break;	   
 			}
 			echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif"></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;">'.number_format($data['pu'], 2, ',', ' ').'</td>';
+			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
+			echo '<td class="arial11 border1">'.$data['code'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:center;">'.number_format($data['pu'], 2, ',', ' ').'</td>';
 			
 			
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:prets_nav_gerer').'"></a></td>';
-			//echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&agir=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
+			echo '<td class="'.$class. ' border1"></td>';
+			echo '<td class="'.$class. ' border1"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:prets_nav_gerer').'"></a></td>';
+			//echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_ressources.'&agir=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_ressource.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

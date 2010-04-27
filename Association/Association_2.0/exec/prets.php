@@ -75,7 +75,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$query = spip_query ( "SELECT * FROM spip_asso_prets WHERE id_ressource='$id_ressource' ORDER BY date_sortie DESC" ) ;
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';	
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">';
+			echo '<td class="arial11 border1">';
 			switch($data['statut']){
 				case "ok": $puce= "verte"; break;
 				case "du": $puce= "rouge"; break;
@@ -83,18 +83,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				case "annule": $class="poubelle"; break;	   
 			}
 			echo '<img src="/dist/images/puce-'.$puce.'.gif"></td>';			
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['id_pret'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">'.association_datefr($data['date_sortie']).'</td>';
+			echo '<td class="arial11 border1">'.$data['id_pret'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right">'.association_datefr($data['date_sortie']).'</td>';
 			$id_emprunteur=$data['id_emprunteur'];
 			$sql=sql_select("*", "spip_asso_adherents",lire_config('association/indexation')."='$id_emprunteur' ");
 			$auteur=spip_fetch_array($sql);
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['duree'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">';
+			echo '<td class="arial11 border1">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.$data['duree'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right">';
 			if ($data['date_retour']==0) { echo '&nbsp';} else {echo association_datefr($data['date_retour']);}
 			echo '</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_prets.'&agir=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:prets_nav_editer').'"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_prets.'&agir=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:prets_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

@@ -81,15 +81,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$query = spip_query ("SELECT * FROM spip_asso_dons WHERE date_format( date_don, '%Y' ) = '$annee'  ORDER by id_don" ) ;
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['id_don'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['date_don']).'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['bienfaiteur'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['argent'], 2, ',', ' ').'&nbsp;&euro;</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['colis'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['valeur'], 2, ',', ' ').'&nbsp;&euro;</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['contrepartie'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_dons.'&agir=supprime&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer le don"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_don.'&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour le don"></a>';
+			echo '<td class="arial11 border1">'.$data['id_don'].'</td>';
+			echo '<td class="arial11 border1">'.association_datefr($data['date_don']).'</td>';
+			echo '<td class="arial11 border1">'.$data['bienfaiteur'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['argent'], 2, ',', ' ').'&nbsp;&euro;</td>';
+			echo '<td class="arial11 border1">'.$data['colis'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['valeur'], 2, ',', ' ').'&nbsp;&euro;</td>';
+			echo '<td class="arial11 border1">'.$data['contrepartie'].'</td>';
+			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_dons.'&agir=supprime&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer le don"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_don.'&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour le don"></a>';
 			echo '</tr>';
 		}
 		echo '</table>';

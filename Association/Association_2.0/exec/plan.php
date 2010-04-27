@@ -102,14 +102,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe LIKE '$classe' AND actif='$actif' ORDER by classe, code" );
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['classe'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['reference'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['date_anterieure']).'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_plan.'&agir=supprime&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_plan.'&agir=modifie&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.$data['classe'].'</td>';
+			echo '<td class="arial11 border1">'.$data['code'].'</td>';
+			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
+			echo '<td class="arial11 border1">'.$data['reference'].'</td>';
+			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
+			echo '<td class="arial11 border1">'.association_datefr($data['date_anterieure']).'</td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_plan.'&agir=supprime&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_plan.'&agir=modifie&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';
