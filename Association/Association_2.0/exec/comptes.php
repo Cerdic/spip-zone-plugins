@@ -30,12 +30,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_ajout_compte = generer_url_ecrire('edit_compte','agir=ajoute');
 		$url_edit_compte = generer_url_ecrire('edit_compte','agir=modifie');
 		$url_action_comptes = generer_url_ecrire('action_comptes');
-		$url_bilan = generer_url_ecrire('bilan');
 		
 		if ( isset ($_REQUEST['imputation'] )) { $imputation = $_REQUEST['imputation']; }
 		else { $imputation= "%"; }
 		
-		$annee=_request('annee');
+		$annee= intval(_request('annee'));
 		if(empty($annee)){$annee = date('Y');}
 		
 		association_onglets();
@@ -75,9 +74,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);	
 		
 		
-		$res=icone_horizontale(_T('Bilan'), $url_bilan, _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif',false);
-		echo bloc_des_raccourcis($res);
-		$res=icone_horizontale(_L('Ajouter une op&eacute;ration'), $url_ajout_compte, _DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
+		$res = icone_horizontale(_T('Bilan') . " $annee", generer_url_ecrire('bilan', "annee=$annee"), _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif',false)
+		. icone_horizontale(_L('Ajouter une op&eacute;ration'), $url_ajout_compte, _DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
+
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

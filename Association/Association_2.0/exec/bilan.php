@@ -22,14 +22,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 		
-		$url_comptes = generer_url_ecrire('comptes');
-		$url_edit_compte = generer_url_ecrire('edit_compte');
-		$url_action_comptes = generer_url_ecrire('action_comptes');
 		$total_actuel=$total_initial=$total_recettes=$total_depenses=$total_soldes=0;
 		
-		//debut_page(_T('Gestion pour  Association'), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-       echo $commencer_page(propre(_T('Gestion pour  Association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
+		echo $commencer_page(propre(_T('Gestion pour  Association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
 		association_onglets();
 		
 		echo debut_gauche("",true);
@@ -38,15 +34,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 		
-		
-		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
-		echo bloc_des_raccourcis($res);
-		
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", $titre =propre( _T('Bilans comptables')));
 		
-		$annee = date('Y');
+		if (!($annee = _request('annee'))) $annee = date('Y');
 		$class= "impair";
 		
 		//TABLEAU EXPLOITATION
@@ -60,9 +52,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td style="text-align:center;"><strong>Solde</strong></td>';
 		echo '</tr>';
 		$ac=lire_config('association/classe_banques'); 
-		$query = spip_query ("SELECT imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe FROM spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code GROUP BY code, annee HAVING annee = $annee AND classe <> $annee ORDER BY annee DESC");
+		$query = sql_select("imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe", 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', '', 'code, annee', "annee DESC", '',  "annee = $annee AND classe <> $annee");
 		
-		while ($data = spip_fetch_array ($query)) {
+		while ($data = sql_fetch($query)) {
 			$recettes=$data['recettes'];
 			$depenses=$data['depenses']; 
 			$soldes=$recettes - $depenses;
@@ -98,32 +90,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td style="text-align:center;"><strong>Avoir actuel</strong></td>';
 		echo '</tr>';
 		$clas=lire_config('association/classe_banques');
-		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe='$clas' ORDER BY code" );
+		$query = sql_select('*', 'spip_asso_plan', "classe='$clas'", '',  "code" );
 		
-		while ($banque = spip_fetch_array($query)) {
+		while ($banque = sql_fetch($query)) {
 			$date_solde=$banque['date_anterieure'];
 			$journal=$banque['code'];
 			$solde=$banque['solde_anterieur'];
+			$total_initial += $solde;
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$banque['intitule']; 
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($date_solde).'</td>'; 
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>'; 
 			
-			$sql = spip_query ( "SELECT sum( recette ) AS recettes, sum( depense ) AS depenses, date FROM spip_asso_comptes WHERE date > '$date_solde' AND journal = '$journal' GROUP BY '$journal' " );
+			$compte = sql_fetsel("sum( recette ) AS recettes, sum( depense ) AS depenses, date", "spip_asso_comptes", "date > '$date_solde' AND journal = '$journal'", $journal);
 			
-			if ($compte = spip_fetch_array($sql)) {
-				$recettes=$compte['recettes'];
-				$depenses=$compte['depenses'];
-			} 
-			else {
-				$recettes=0;
-				$depenses=0;
-			}		
-			
-			$avoir_actuel=$solde + $recettes - $depenses;
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($avoir_actuel, 2, ',', ' ').'</tr>';
-			$total_actuel += $avoir_actuel;		
-			$total_initial += $solde;
+			if ($compte)
+				$solde += ($compte['recettes'] -$compte['depenses']);
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($solde, 2, ',', ' ').'</tr>';
+			$total_actuel += $solde;		
+
 		}
 		
 		$total_initial=number_format($total_initial, 2, ',', ' '); 
@@ -137,7 +122,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '</table>';
 		
 		fin_cadre_relief();  
-		  echo fin_gauche(),fin_page();
+		echo fin_gauche(),fin_page();
 	}
 ?>
 
