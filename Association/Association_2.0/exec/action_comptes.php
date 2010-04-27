@@ -54,19 +54,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
-			debut_page(_T('Gestion pour  Association'), "", "");
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('Gestion pour Association')) ;
+
 			association_onglets();
-			debut_gauche();
+			echo debut_gauche('', true);
 			
-			debut_boite_info();
+			echo debut_boite_info(true);
 			echo association_date_du_jour();	
-			fin_boite_info();
+			echo fin_boite_info(true);
 			
-			debut_raccourcis();
-			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif");	
-			fin_raccourcis();
-			
-			debut_droite();
+			echo bloc_des_raccourcis(icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif"));
+
+			echo debut_droite('', true);
 			
 			debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
 			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte n&deg; '.$id_compte.' !</strong></p>';
@@ -99,68 +99,44 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
-			$valide_tab=(isset($_POST["valide"])) ? $_POST["valide"]:array();
-			$count=count ($valide_tab);
-			
-			debut_page(_T('Gestion pour  Association'), "", "");
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('Gestion pour Association')) ;
 			
 			association_onglets();
 			
-			debut_gauche();
+			echo debut_gauche('', true);
 			
-			debut_boite_info();
+			echo debut_boite_info(true);
 			echo association_date_du_jour();	
-			fin_boite_info();
+			echo fin_boite_info(true);
 			
-			debut_raccourcis();
-			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif");	
-			fin_raccourcis();
+			echo bloc_des_raccourcis(icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif", false));	
 			
-			debut_droite();
+			echo debut_droite('', true);
 			
-			debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
-			echo '<p>Vous vous appr&ecirc;tez &agrave; valider les op&eacute;rations  : <br>';
-			echo '<table>';
-			echo '<form action="'.$url_action_comptes.'"  method="post">';
-			for ( $i=0 ; $i < $count ; $i++ ) {	
-				$id = $valide_tab[$i];
-				$query = spip_query("SELECT * FROM spip_asso_comptes where id_compte='$id'");
-				while($data = spip_fetch_array($query)) {
-					echo '<tr>';
-					echo '<td><strong>'.association_datefr($data['date']).'</strong>';
-					echo '<td><strong>'.$data['justification'].'</strong>';
-					echo '<td>';
-					echo '<input type=checkbox name="definitif[]" value="'.$id.'" checked>';
-				}	
+			debut_cadre_relief("", false, "", $titre = _L('Op&eacute;rations comptables'));
+			echo '<p>' . _L('Vous vous appr&ecirc;tez &agrave; valider les op&eacute;rations&nbsp;:') .  '</p>';
+
+			$res = '<table>';
+			$query = sql_select('*', 'spip_asso_comptes', sql_in("id_compte", $_POST['valide']));
+			while($data = sql_fetch($query)) {
+					$res .= '<tr>';
+					$res .= '<td><strong>'.association_datefr($data['date']).'</strong>';
+					$res .= '<td><strong>'.$data['justification'].'</strong>';
+					$res .= '<td>';
+					$res .= '<input type=checkbox name="definitif[]" value="'.$data['id_compte'].'" checked="checked" />';
 			}
-			echo '</table>';
-			echo '<p>Apr&egrave;s confirmation vous ne pourrez plus modifier ces op&eacute;rations !</p>';
+			$res .= '</table>';
+			$res .= '<p>' . _L('Apr&egrave;s confirmation vous ne pourrez plus modifier ces op&eacute;rations !') . '</p>';
 			
-			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-			
-			echo '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
+			$res .= '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
+
+			// count est du bruit de fond de secu
+			echo redirige_action_post('valider_comptes', count($_POST['valide']), 'comptes', "", $res);
+
 			fin_cadre_relief();  
 			
 			fin_page();
-			exit;
-		}
-
-		//---------------------------- 
-		//  VALIDATION DEFINITIVE COMPTES
-		//---------------------------- 		
-		if (isset($_POST['definitif'])) {
-			
-			$url_retour=$_POST['url_retour'];
-			
-			$definitif_tab=(isset($_POST["definitif"])) ? $_POST["definitif"]:array();
-			$count=count ($definitif_tab);
-			
-			for ( $i=0 ; $i < $count ; $i++ ) {	
-				$id = $definitif_tab[$i];
-				spip_query( "UPDATE spip_asso_comptes SET valide='oui' WHERE id_compte='$id' " );
-			}
-			header ('location:'.$url_retour);
-			exit;
 		}
 	} 
 ?>
