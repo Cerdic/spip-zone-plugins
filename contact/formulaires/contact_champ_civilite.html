@@ -1,6 +1,13 @@
 <li class="editer_#ENV{name} saisie_#ENV{name}[ (#GET{#ENV{name}})][ (#ENV**{erreurs}|table_valeur{#ENV{name}}|oui)erreur]">
-<p class="explication"><:contact:champ_civilite:>[<span class="obligatoile">(#GET{#ENV{name}}|oui)*</span>]</p>
+<p class="explication"><:contact:champ_civilite:>[<span class="obligatoire">(#GET{#ENV{name}}|oui)*</span>]</p>
 [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#ENV{name}})</span>]
+[(#CONFIG{contact/champ_civi_mademoiselle}|=={true}|oui)
+<div class='choix'>
+<label for="#ENV{name}_mademoiselle">
+<input type='radio' class='radio' name='#ENV{name}' id='#ENV{name}_mademoiselle' value="mademoiselle"[ (#ENV{#ENV{name}}|=={mademoiselle}|oui)checked="checked"] />
+<:contact:mademoiselle:></label>
+</div>
+]
 <div class='choix'>
 <label for="#ENV{name}_madame">
 <input type='radio' class='radio' name='#ENV{name}' id='#ENV{name}_madame' value="madame"[ (#ENV{#ENV{name}}|=={madame}|oui)checked="checked"] />

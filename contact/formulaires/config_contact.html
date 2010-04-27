@@ -160,7 +160,18 @@
 			</li>
 		</ul>
 	</fieldset>
-
+    
+    <fieldset>
+		<legend><:contact:champ_civilite:></legend>
+		<ul class="decaler10 baisser10">
+			<li class="choix editer_champ">
+				<p class="explication"><:contact:champ_civi_explication:></p>
+				<input type="checkbox" name="champ_civi_mademoiselle" id="champ_civi_mademoiselle" class="checkbox" value="true" [checked="checked"(#ENV{champ_civi_mademoiselle}|=={true}|oui)] />
+				<label for="champ_civi_mademoiselle"><:contact:champ_civi_mademoiselle_ok:></label>
+			</li>
+		</ul>
+	</fieldset>
+	
 	<fieldset>
 		<legend><:contact:sauv_message:></legend>
 		<ul class="decaler10 baisser10">
@@ -171,6 +182,7 @@
 			</li>
 		</ul>
 	</fieldset>
+    
 
 	<fieldset>
 		<legend><:contact:configuration_intro:></legend>
