@@ -54,8 +54,8 @@ function multilang_init_lang(options) {
 	var root = options.root || document;
 	multilang_root = $(root);
 
-	//Add Yffic : S'il existe deja un menu lang sous multilang_root, return (cas Ajax)
-	if(multilang_root.find('.menu_lang').length > 0) return;
+	//Add Yffic : S'il existe deja un menu lang sous multilang_root, return (cas Ajax) Ca, c'est pas terrible
+	//if(multilang_root.find('.menu_lang').length > 0) return;
 
 	//set the main menu element
 	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $([]);
@@ -128,7 +128,9 @@ function forms_init_multi(options) {
 	init_forms.each(function() {
 		this.form_lang = multilang_def_lang;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
-		container.prepend("<div class='menu_lang'>");
+		// Pas de rajout s'il y en deja un
+		if(!container.find('.menu_lang').size())
+			container.prepend("<div class='menu_lang'>");
 	});
 	$(multilang_fields_selector,init_forms).each(function(){
 		forms_init_field(this,this.form.form_lang);

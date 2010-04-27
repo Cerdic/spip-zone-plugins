@@ -93,7 +93,7 @@ function multilang_inserer_head($flux,$config=array()){
 
 	// Pour toutes les forms de class multilang (pour les autres plugins)
 	$flux .= 'forms_selector = $(".multilang").parents("form") ;
-					   multilang_init_lang({fields:".multilang",forms:forms_selector});
+					   //multilang_init_lang({fields:".multilang",forms:forms_selector});
 					} // end multilang_init
 					multilang_init();
 					if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
