@@ -34,7 +34,6 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>		
-		<inclure>association_options.php</inclure>
 	</pipeline>
 	
 	<categorie>divers</categorie>
