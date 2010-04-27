@@ -10,10 +10,10 @@
 	*  
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 
-	function exec_dons() {
+function exec_dons() {
 		
 		include_spip('inc/autoriser');
 		if (!autoriser('configurer')) {
@@ -22,11 +22,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 		
-		$url_asso = generer_url_ecrire('association');	
 		$url_dons = generer_url_ecrire('dons');
-		$url_ajout_don= generer_url_ecrire('edit_don','agir=ajoute');
-		$url_edit_don =generer_url_ecrire('edit_don','agir=modifie');
-		$url_action_dons = generer_url_ecrire('action_dons');
+		$url_ajout_don= generer_url_ecrire('edit_don','agir=ajouter');
 		
 		//debut_page(_T('Gestion pour  Association'), "", "");
 		  $commencer_page = charger_fonction('commencer_page', 'inc');
@@ -52,12 +49,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<tr>';
 		echo '<td>';
 
-		$annee=$_GET['annee'];
+		$annee= intval(_request('annee'));
 		if(empty($annee)){$annee = date('Y');}
 
 		$query = sql_select("date_format( date_don, '%Y' )  AS annee", "spip_asso_dons", "", "annee", "annee" );
 
-		while ($data = spip_fetch_array($query))
+		while ($data = sql_fetch($query))
 		   {
 		 	if ($data['annee']==$annee)
 			{echo ' <strong>'.$data['annee'].'</strong>';}
@@ -78,8 +75,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>Contrepartie</strong></td>';
 		echo '<td colspan=2><strong>Action</strong></td>';
 		echo '</tr>';
-		$query = spip_query ("SELECT * FROM spip_asso_dons WHERE date_format( date_don, '%Y' ) = '$annee'  ORDER by id_don" ) ;
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select('*', "spip_asso_dons", "date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
+		while ($data = sql_fetch($query)) {
+			$id_don = $data['id_don'];
+			$url_edit_don = generer_url_ecrire('edit_don',"agir=modifier&id=$id_don");
+			$url_action_dons = generer_url_ecrire('action_dons', "id=$id_don");
+
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11 border1">'.$data['id_don'].'</td>';
 			echo '<td class="arial11 border1">'.association_datefr($data['date_don']).'</td>';
@@ -88,13 +89,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class="arial11 border1">'.$data['colis'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['valeur'], 2, ',', ' ').'&nbsp;&euro;</td>';
 			echo '<td class="arial11 border1">'.$data['contrepartie'].'</td>';
-			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_dons.'&agir=supprime&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer le don"></a></td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_don.'&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour le don"></a>';
+			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_dons.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="' . _L('Supprimer le don') . '"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_don.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="' . _L('Mettre &agrave; jour le don') . '"></a>';
 			echo '</tr>';
 		}
 		echo '</table>';
 		
 		fin_cadre_relief();  
-		  echo fin_gauche(),fin_page(); 
-	}
+		echo fin_gauche(),fin_page(); 
+}
 ?>
