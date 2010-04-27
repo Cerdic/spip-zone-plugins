@@ -11,7 +11,20 @@
 	[<em class='attention'>(#ENV*{attention})</em>]
 	[(#REM) Si 0 ou 1 destinataire possible ou si c'est tous, le destinataire est défini automatiquement ]
 	<BOUCLE_tous(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
-	<input [(#ENV{tout_afficher}|!={oui}|?{type="hidden",type="text" readonly="readonly"})] name="#ENV{nom}[]" value="#ID_AUTEUR" />
+	[(#ENV{tout_afficher}|!={oui}|oui)
+	<input type="hidden" name="#ENV{nom}&#91;&#93;" value="#ID_AUTEUR" />
+	]
+	[(#ENV{tout_afficher}|!={oui}|non)
+	<div class="choix">
+		<input
+			type="checkbox" class="checkbox"
+			readonly="readonly" checked="checked"
+			name="#ENV{nom}&#91;&#93;" id="champ_#ENV{nom}_destinataire#ID_AUTEUR"
+			value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur,#ENV*{defaut,#ARRAY}}}|oui)checked="checked"]
+		/>
+		<label for="champ_#ENV{nom}_destinataire#ID_AUTEUR">#NOM</label>
+	</div>
+	]
 	</BOUCLE_tous>
 	<input [(#ENV{tout_afficher}|!={oui}|?{type="hidden",type="text" readonly="readonly"})] name="#ENV{nom}[]" value="1" />
 	<//B_tous>
