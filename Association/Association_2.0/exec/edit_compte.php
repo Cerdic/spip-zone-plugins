@@ -10,23 +10,20 @@
 	*  
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
+include_spip('inc/autoriser');
 
-	function exec_edit_compte() {
+function exec_edit_compte() {
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
-		
-		$url_action_comptes =generer_url_ecrire('action_comptes');
+	$id_compte= intval(_request('id'));
+	$action= _request('agir');
 
-		$id_compte= intval(_request('id'));
-		$action= _request('agir');
-		if (!preg_match('/^\w+$/', $action)) $action='';
+	if (!autoriser('configurer') OR !preg_match('/^\w+$/', $action)) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
+
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -45,7 +42,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_droite("",true);
 
-		$data = sql_fetsel('*', 'spip_asso_comptes', "id_compte=$id_compte") ;
+		$data = !$id_compte ? '' :sql_fetsel('*', 'spip_asso_comptes', "id_compte=$id_compte") ;
 		if ($data) {
 		$imputation=$data['imputation'];
 		$date=$data['date'];
@@ -53,50 +50,52 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$depense=$data['depense'];
 		$journal=$data['journal'];
 		$justification=$data['justification'];
+		} else {
+		$imputation=$recette=$depense=$journal=$justification='';
+		$date = date('Y-m-d');
+		}
 
 		debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
-		echo '<form action="'.$url_action_comptes.'" method="POST">';
 		
-		echo '<label for="imputation"><strong>Imputation :</strong></label>';
-		echo '<select name="imputation" type="text" id="date" class="formo" />';
-		$sql = spip_query ("SELECT * FROM spip_asso_plan WHERE classe<>".lire_config('association/classe_banques')." ORDER BY code") ;
-		while ($banque = spip_fetch_array($sql)) {
-			echo '<option value="'.$banque['code'].'" ';
-			if ($imputation==$banque['code']) { echo ' selected="selected"'; }
-			echo '>'.$banque['intitule'].'</option>';
+		$res = '<div>';
+		$res .= '<label for="imputation"><strong>Imputation :</strong></label>';
+		$res .= '<select name="imputation" type="text" id="date" class="formo" />';
+		$sql = sql_select('*', 'spip_asso_plan', "classe<>". sql_quote(lire_config('association/classe_banques')), "", "code") ;
+		while ($banque = sql_fetch($sql)) {
+			$res .= '<option value="'.$banque['code'].'" ';
+			if ($imputation==$banque['code']) { $res .= ' selected="selected"'; }
+			$res .= '>'.$banque['intitule'].'</option>';
 		}
-		echo '</select>';
-		echo '<label for="date"><strong>Date (AAAA-MM-JJ) :</strong></label>';
-		echo '<input name="date" value="'.$date.'" type="text" id="date" class="formo" />';
-		echo '<label for="recette"><strong>Recette :</strong></label>';
-		echo '<input name="recette" value="'.$recette.'" type="text" id="recette" class="formo" />';
-		echo '<label for="depense"><strong>D&eacute;pense :</strong></label>';
-		echo '<input name="depense" value="'.$depense.'"  type="text" id="depense" class="formo" />';
-		echo '<label for="journal"><strong>Mode de paiement :</strong></label>';
-		echo '<select name="journal" type="text" id="journal" class="formo" />';
-		$sql = spip_query ("SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code") ;
-		while ($banque = spip_fetch_array($sql)) {
-			echo '<option value="'.$banque['code'].'" ';
-			if ($journal==$banque['code']) { echo ' selected="selected"'; }
-			echo '>'.$banque['intitule'].'</option>';
+		$res .= '</select>';
+		$res .= '<label for="date"><strong>Date (AAAA-MM-JJ) :</strong></label>';
+		$res .= '<input name="date" value="'.$date.'" type="text" id="date" class="formo" />';
+		$res .= '<label for="recette"><strong>Recette :</strong></label>';
+		$res .= '<input name="recette" value="'.$recette.'" type="text" id="recette" class="formo" />';
+		$res .= '<label for="depense"><strong>D&eacute;pense :</strong></label>';
+		$res .= '<input name="depense" value="'.$depense.'"  type="text" id="depense" class="formo" />';
+		$res .= '<label for="journal"><strong>Mode de paiement :</strong></label>';
+		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
+		$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "", "code") ;
+		while ($banque = sql_fetch($sql)) {
+			$res .= '<option value="'.$banque['code'].'" ';
+			if ($journal==$banque['code']) { $res .= ' selected="selected"'; }
+			$res .= '>'.$banque['intitule'].'</option>';
 		}
-		echo '</select>';
-		echo '<label for="justification"><strong>Justification :</strong></label>';
-		echo '<input name="justification" value="'.$justification.'" type="text" id="justification" class="formo" />';
+		$res .= '</select>';
+		$res .= '<label for="justification"><strong>Justification :</strong></label>';
+		$res .= '<input name="justification" value="'.$justification.'" type="text" id="justification" class="formo" />';
 		
-		echo '<input name="id" type="hidden" value="'.$id_compte.'" >';		
-		echo '<input name="agir" type="hidden" value="'.$action.'">';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		
-		echo '<div style="float:right;">';
-		echo '<input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
-		else {echo _T('asso:bouton_envoyer');}
-		echo '" class="fondo" /></div>';
-		echo '</form>';
-		
+		$res .= '<div style="float:right;">';
+		$res .= '<input type="submit" value="';
+		if ( isset($action)) {$res .= _T('asso:bouton_'.$action);}
+		else {$res .= _T('asso:bouton_envoyer');}
+		$res .= '" class="fondo" /></div>';
+		$res .= '</div>';
+
+		echo redirige_action_post($action . '_comptes', $id_compte, 'comptes', '', $res);
+
 		fin_cadre_relief();  
-		}
 		echo fin_gauche(),fin_page();
-	}  
+	}
+}
 ?>

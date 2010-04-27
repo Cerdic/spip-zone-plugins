@@ -24,7 +24,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 		
-		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_edit_activite = generer_url_ecrire('edit_activite');
 		$url_edit_pret = generer_url_ecrire('edit_pret','action=modifie');
 		$url_retour = $_SERVER['HTTP_REFERER'];

@@ -27,8 +27,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		//debut_page(_T('Gestion pour  Association'), "", "");
 		
 		$url_comptes = generer_url_ecrire('comptes');
-		$url_ajout_compte = generer_url_ecrire('edit_compte','agir=ajoute');
-		$url_edit_compte = generer_url_ecrire('edit_compte','agir=modifie');
+		$url_ajout_compte = generer_url_ecrire('edit_compte','agir=ajouter');
+		$url_edit_compte = generer_url_ecrire('edit_compte','agir=modifier');
 		$url_action_comptes = generer_url_ecrire('action_comptes');
 		
 		if ( isset ($_REQUEST['imputation'] )) { $imputation = $_REQUEST['imputation']; }
@@ -142,7 +142,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_compte'].'</td>';
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date']).'</td>';
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['imputation'].'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['justification'].'</td>';
+		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.propre($data['justification']).'</td>';
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_nbrefr($data['recette']-$data['depense']).'</td>';
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['journal'].'</td>';
 		if($data['valide']=='oui') {echo '<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>';}
