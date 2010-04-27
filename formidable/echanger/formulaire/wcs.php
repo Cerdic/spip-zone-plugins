@@ -29,8 +29,12 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 			
 			// Les champs
 			$formulaire['saisies'] = array();
+			// Par défaut le conteneur c'est le formulaire
+			$conteneur =& $formulaire;
 			foreach($form['fields'] as $fields){
 				foreach($fields['field'] as $field){
+					$changer_conteneur = false;
+					
 					// Le truc par défaut
 					$saisie = array(
 						'saisie' => 'input',
@@ -89,9 +93,16 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 							$saisie['saisie'] = 'checkbox';
 							unset($saisie['options']['size']);
 							break;
+						case 'page':
+							$saisie['saisie'] = 'fieldset';
+							unset($saisie['options']['size']);
+							$saisie['saisies'] = array();
+							$changer_conteneur = true;
+							// On remet le conteneur au niveau du formulaire
+							$conteneur =& $formulaire;
+							break;
 						case 'comment':
 						case 'subtitle':
-						case 'page':
 						case 'file':
 							$saisie = null;
 					}
@@ -110,7 +121,7 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 						}
 					
 						// Le nom
-						$saisie['options']['nom'] = saisies_generer_nom($formulaire['saisies'], $saisie['saisie']);
+						$saisie['options']['nom'] = saisies_generer_nom($conteneur['saisies'], $saisie['saisie']);
 					
 						// Obligatoire
 						if (trim(spip_xml_aplatit($field['required'])) == 'True')
@@ -121,7 +132,12 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 							$saisie['options']['explication'] = $explication;
 					
 						// On ajoute enfin la saisie
-						$formulaire['saisies'][] = $saisie;
+						$conteneur['saisies'][] = $saisie;
+						
+						// Faut-il changer de conteneur ?
+						if ($changer_conteneur){
+							$conteneur =& $conteneur['saisies'][count($conteneur['saisies'])-1];
+						}
 					}
 				}
 			}
