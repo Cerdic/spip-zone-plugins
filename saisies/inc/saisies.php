@@ -605,7 +605,8 @@ function saisies_autonomes(){
 		array(
 			'fieldset',
 			'hidden',
-			'destinataires'
+			'destinataires', 
+			'explication'
 		)
 	);
 	
