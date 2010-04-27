@@ -238,7 +238,9 @@ function field_set_background(el,lang) {
 }
 
 /**
- * Changement de la langue
+ * Action au changement de la langue
+ * Lorsque l'on clique sur une le menu de langue
+ *
  * @param el
  * @param lang
  * @return
