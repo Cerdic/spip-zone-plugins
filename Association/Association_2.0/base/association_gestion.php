@@ -96,15 +96,15 @@ function association_verifier_base(){
 
 function association_effacer_tables(){
 		include_spip('base/abstract_sql');
-		spip_query("DROP TABLE spip_asso_adherents");
-		spip_query("DROP TABLE spip_asso_activites");
-		spip_query("DROP TABLE spip_asso_categories");
-		spip_query("DROP TABLE spip_asso_comptes");
-		spip_query("DROP TABLE spip_asso_dons");
-		spip_query("DROP TABLE spip_asso_plan");
-		spip_query("DROP TABLE spip_asso_prets");
-		spip_query("DROP TABLE spip_asso_ressources");
-		spip_query("DROP TABLE spip_asso_ventes");
+		sql_drop_table("spip_asso_adherents");
+		sql_drop_table("spip_asso_activites");
+		sql_drop_table("spip_asso_categories");
+		sql_drop_table("spip_asso_comptes");
+		sql_drop_table("spip_asso_dons");
+		sql_drop_table("spip_asso_plan");
+		sql_drop_table("spip_asso_prets");
+		sql_drop_table("spip_asso_ressources");
+		sql_drop_table("spip_asso_ventes");
 		effacer_meta('asso_base_version');
 		effacer_meta('association');
 		spip_log("plugin assoc desinstallee");
@@ -129,6 +129,5 @@ function association_install($action){
 			association_effacer_tables();
 			break;
 	}
-}	
-#association_effacer_tables();
+}
 ?>
