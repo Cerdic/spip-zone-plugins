@@ -17,9 +17,6 @@ function editbox_init(){
 		var casedoc = jQuery(this).parents('div.item.document,div.item.image').eq(0);
 		jQuery(casedoc).animeajax();
 		jQuery.modalboxload(jQuery(this).attr('href'),{
-			maxWidth: 500,
-			minHeight: 600,
-			autoResize: true,
 			onClose: function (dialog) {var a = jQuery(casedoc).find('a.refresh');if (a.length) a.click();}
 		});
 		return false;

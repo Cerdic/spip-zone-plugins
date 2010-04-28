@@ -161,4 +161,6 @@ p.actions {clear:both;}
 
 .item.vu_oui {background:#f9f9f9;}
 
-[(#INCLURE{fond=modalbox/style_prive_plugin_modalbox}{env})]
+[(#PLUGIN{mediabox}|non)
+	[(#INCLURE{fond=modalbox/style_prive_plugin_modalbox}{env})]
+]
