@@ -1,0 +1,27 @@
+<plugin>
+	<nom>ColorBox</nom>
+	<auteur>
+	ColorBox par [ColorPowered->http://colorpowered.com/colorbox/]
+_ Mis en plugin par Cedric
+	</auteur>
+	<version>0.1.0</version>
+	<icon></icon>
+	<etat>test</etat>
+	<description>
+Fen&#234;tre de dialogue ou de galerie photo
+_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
+	</description>
+	<lien>http://colorpowered.com/colorbox/</lien>
+	<prefix>colorbox</prefix>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<utilise id="cfg" version="[1.9.4;]" />
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>colorbox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>colorbox_pipelines.php</inclure>
+	</pipeline>
+	<categorie>multimedia</categorie>
+</plugin>
