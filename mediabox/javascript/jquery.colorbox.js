@@ -407,14 +407,14 @@
 
 		function getWidth(){
 			settings.w = settings.w || $loaded.width();
-			settings.w = settings.mw && settings.mw < settings.w ? settings.mw : settings.w;
 			settings.w = settings.minw && settings.minw > settings.w ? settings.minw : settings.w;
+			settings.w = settings.mw && settings.mw < settings.w ? settings.mw : settings.w;
 			return settings.w;
 		}
 		function getHeight(){
 			settings.h = settings.h || $loaded.height();
-			settings.h = settings.mh && settings.mh < settings.h ? settings.mh : settings.h;
 			settings.h = settings.minh && settings.minh > settings.h ? settings.minh : settings.h;
+			settings.h = settings.mh && settings.mh < settings.h ? settings.mh : settings.h;
 			return settings.h;
 		}
 

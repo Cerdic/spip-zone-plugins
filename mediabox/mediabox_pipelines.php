@@ -17,8 +17,11 @@ function mediabox_config(){
 		'minWidth'=>'',
 		'minHeight'=>'',
 	), $config);
+
 	if (test_espace_prive()) {
 		$config = array_merge($config,array(
+		'selecteur_galerie' => '#portfolios a[type^=\'image/\']',
+		'selecteur_commun' => '.mediabox, .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
 		'skin' => 'white-shadow',
 		'maxWidth'=>'90%',
 		'maxHeight'=>'95%',
@@ -34,7 +37,7 @@ function mediabox_insert_head_css($flux){
 	if (!$done) {
 		$done = true;
 		$config = mediabox_config();
-		if ($f = find_in_path("colorbox/".$config['skin'].'/colorbox.css'))
+		if ($f = find_in_path((test_espace_prive()?"prive/":"")."colorbox/".$config['skin'].'/colorbox.css'))
 			$flux .= '<link rel="stylesheet" href="'.$f.'" type="text/css" media="all" />';
 	}
 	return $flux;
@@ -57,6 +60,8 @@ var box_settings = {traiter_toutes_images:'.($config['traiter_toutes_images'] ==
 .'",speed:"'.$config['speed']
 .'",maxWidth:"'.$config['maxWidth']
 .'",maxHeight:"'.$config['maxHeight']
+.'",minWidth:"'.$config['minWidth']
+.'",minHeight:"'.$config['minHeight']
 .'",str_slideshowStart:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStart')))
 .'",str_slideshowStop:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStop')))
 .'",str_current:"'._T('mediabox:boxstr_current')
