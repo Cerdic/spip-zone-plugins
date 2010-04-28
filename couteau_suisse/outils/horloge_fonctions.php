@@ -7,14 +7,29 @@ if(!isset($GLOBALS['cs_fonctions']) && isset($_GET['cs_dateserveur'])) {
 	exit;
 }
 
-// La balise #HORLOGE{format,utc,id}
+// La balise #HORLOGE
 function balise_HORLOGE_dist($p) {
-	$i = 1; $ar = array();
-	while(($a = interprete_argument_balise($i++,$p)) != NULL) $ar[] = $a;
-	$ar = count($ar)?join(".'||'.", $ar):"''";
-	$p->code = "'<span class=\"jclock\" title=\"'.$ar.'\">99:99</span> '";
+	$i = 1; $args = array();
+	while(($a = interprete_argument_balise($i++,$p)) != NULL) $args[] = $a;
+	$args = count($args)?join(".'||'.", $args):"''";
 	$p->interdire_scripts = false;
 	return $p;
 }
 
+function horloge_params($args) {
+	$t = array();
+	$bal = 'span'; $def='99:99';
+	$args = explode('||', $args);
+	foreach($args as $a) {
+		list($a, $b) = explode('=', $a, 2);
+		if(strlen($a)) {
+			if($a=='id') $id = 'jclock'.$b;
+			elseif($a=='defaut') $def = $b;
+			elseif($a=='balise') $bal = $b;
+			else $t[$a] = "$a=$b";
+		}
+	}
+	return "<$bal class=\"jclock" . (isset($id)?" $id\" id=\"$id":'')
+		.'" title="'.join('||',$t)."\">$def</$bal> ";
+}
 ?>

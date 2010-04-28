@@ -36,11 +36,6 @@ function each_jclock(diff) {
 			j = opt[i].indexOf('=');
 			if(j>0) options[opt[i].substr(0,j).trim()] = opt[i].substring(j+1).trim();
 		}
-		if(typeof options.id != "undefined") {
-			var id = 'jclock'+options.id;
-			jQuery(this).addClass(id);
-			this.id = id;
-		}
 		this.title = "";
 		$(this).jclock(options);
 	});
@@ -129,7 +124,7 @@ Date.prototype.utcTime = function() {
 	'tehran':{0:3.5,1269199800:4.5,1285090200:3.5,1300735800:4.5,1316626200:3.5,1332271800:4.5,1348162200:3.5,1363894200:4.5,1379784600:3.5,1395430200:4.5,1411320600:3.5,1426966200:4.5,1442856600:3.5,1458502200:4.5,1474392600:3.5,1490124600:4.5,1506015000:3.5,1521660600:4.5,1537551000:3.5,1553196600:4.5,1569087000:3.5},
 	'tokyo':9,'toronto':'atlanta','vancouver':'los angeles','vienna':'madrid',
 	'vladivostok':{0:10,1269698400:11,1288450800:10,1301148000:11,1319900400:10,1332597600:11,1351350000:10,1364652000:11,1382799600:10,1396101600:11,1414249200:10,1427551200:11,1445698800:10,1459000800:11,1477753200:10,1490450400:11,1509202800:10,1521900000:11,1540652400:10,1553954400:11,1572102000:10},
-	'warsaw':'madrid','washington dc':'atlanta','winnipeg':'houston','yangon':6.5,'zagreb':'madrid','zurich':'madrid'};
+	'warsaw':'madrid','washington dc':'atlanta','winnipeg':'houston','yangon':6.5,'zagreb':'madrid','z\u00fcrich':'madrid'};
 	
 function dstOffset(utcTime, db) {
 	if(typeof db == "string") db = dstDataBase[db];
