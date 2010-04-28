@@ -5,34 +5,34 @@
 _ Mis en plugin pour SPIP par [Cedric->http://www.yterium.com]
 	</auteur>
 	<version>0.3.0</version>
-	<icon>prive/themes/spip/images/colorbox-32.png</icon>
+	<icon>prive/themes/spip/images/mediabox-32.png</icon>
 	<etat>test</etat>
 	<description>
 Bo&icirc;te multim&eacute;dia
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 	</description>
 	<lien>http://colorpowered.com/colorbox/</lien>
-	<prefix>colorbox</prefix>
+	<prefix>mediabox</prefix>
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	<pipeline>
 		<nom>insert_head_css</nom>
-		<inclure>colorbox_pipelines.php</inclure>
+		<inclure>mediabox_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>colorbox_pipelines.php</inclure>
+		<inclure>mediabox_pipelines.php</inclure>
 	</pipeline>
 
-	<bouton id='colorbox' parent='configuration'>
-		<icone>prive/themes/spip/images/colorbox-24.png</icone>
-		<titre>colorbox:titre_menu_colorbox</titre>
-		<url>colorbox</url>
+	<bouton id='mediabox' parent='configuration'>
+		<icone>prive/themes/spip/images/mediabox-24.png</icone>
+		<titre>mediabox:titre_menu_box</titre>
+		<url>mediabox</url>
 	</bouton>
-	<bouton id='colorbox2' parent='bando_configuration'>
-		<icone>images/colorbox-16.png</icone>
-		<titre>colorbox:titre_menu_colorbox</titre>
-		<url>colorbox</url>
+	<bouton id='mediabox2' parent='bando_configuration'>
+		<icone>images/mediabox-16.png</icone>
+		<titre>mediabox:titre_menu_box</titre>
+		<url>mediabox</url>
 	</bouton>
 	<categorie>multimedia</categorie>
 </plugin>

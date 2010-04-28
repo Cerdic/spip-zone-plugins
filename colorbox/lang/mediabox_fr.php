@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
-	'titre_menu_colorbox' => 'Bo&icirc;te Multim&eacute;dia',
+	'titre_menu_box' => 'Bo&icirc;te Multim&eacute;dia',
 	'titre_page_configurer_box' => 'Configuration de la Bo&icirc;te multim&eacute;dia',
 
 	'explication_selecteur_commun' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront la bo&icirc;te. (Expression CSS ou &eacute;tendue jQuery)',

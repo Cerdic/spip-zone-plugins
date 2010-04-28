@@ -6,10 +6,10 @@
  *
  */
 
-include_spip('colorbox_pipelines');
+include_spip('mediabox_pipelines');
 
 function box_lister_skins(){
-	$skins = array('none'=>array('nom'=>_T('colorbox:label_aucun_style')));
+	$skins = array('none'=>array('nom'=>_T('mediabox:label_aucun_style')));
 
 	$maxfiles = 1000;
 	$liste_fichiers = array();
@@ -55,14 +55,14 @@ function box_choisir_skin($skins,$selected,$name='skin'){
 
 
 function formulaires_configurer_box_charger_dist(){
-	$valeurs = colorbox_config();
+	$valeurs = mediabox_config();
 	$valeurs['_skins'] = box_lister_skins();
 	
 	return $valeurs;
 }
 
 function formulaires_configurer_box_traiter_dist(){
-	$config = colorbox_config();
+	$config = mediabox_config();
 
 	include_spip('inc/meta');
 	if (_request('reinit')){

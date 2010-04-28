@@ -7,22 +7,22 @@
 	#ACTION_FORMULAIRE{SELF}
 	<ul>
 		<li class="editer_selecteur_commun[ (#ENV**{erreurs}|table_valeur{selecteur_commun}|oui)erreur]">
-			<label for="selecteur_commun"><:colorbox:label_selecteur_commun:></label>
+			<label for="selecteur_commun"><:mediabox:label_selecteur_commun:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_commun})</span>]
-			<p class="explication"><:colorbox:explication_selecteur_commun:></p>
+			<p class="explication"><:mediabox:explication_selecteur_commun:></p>
 			<input type="text" name="selecteur_commun" class="text" id="selecteur_commun" size="60" value="#ENV{selecteur_commun}" />
 		</li>
 		
 		<li class="editer_selecteur_galerie[ (#ENV**{erreurs}|table_valeur{selecteur_galerie}|oui)erreur]">
-			<label for="selecteur_galerie"><:colorbox:label_selecteur_galerie:></label>
+			<label for="selecteur_galerie"><:mediabox:label_selecteur_galerie:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_galerie})</span>]
-			<p class="explication"><:colorbox:explication_selecteur_galerie:></p>
+			<p class="explication"><:mediabox:explication_selecteur_galerie:></p>
 			<input type="text" name="selecteur_galerie" class="text" id="selecteur_galerie" size="60" value="#ENV{selecteur_galerie}" />
 		</li>
 
 		<li class="editer_traiter_toutes_images[ (#ENV**{erreurs}|table_valeur{traiter_toutes_images}|oui)erreur]">
-			<label><:colorbox:label_traiter_toutes_images:></label>
-			<p class="explication"><:colorbox:explication_traiter_toutes_images:></p>
+			<label><:mediabox:label_traiter_toutes_images:></label>
+			<p class="explication"><:mediabox:explication_traiter_toutes_images:></p>
 			<div class="choix">
 				<input type="radio" name="traiter_toutes_images" class="radio" id="traiter_images_on" value="oui" [(#ENV{traiter_toutes_images,oui}|=={oui}|oui) checked="checked"] />
 				<label for='traiter_images_on'><:oui:></label>
@@ -33,30 +33,30 @@
 			</div>
 		</li>
 
-		<li class="fieldset"><fieldset><legend><:colorbox:label_apparence:></legend>
+		<li class="fieldset"><fieldset><legend><:mediabox:label_apparence:></legend>
 		<ul>
 			[<li class="editer_skin[ (#ENV**{erreurs}|table_valeur{skin}|oui)erreur]">
-				<label for='skin'><:colorbox:label_skin:></label>
+				<label for='skin'><:mediabox:label_skin:></label>
 				(#ENV{_skins}|box_choisir_skin{#ENV{skin}}|image_reduire{200})
 			</li>]
 			<li class="editer_transition[ (#ENV**{erreurs}|table_valeur{transition}|oui)erreur]">
-				<label for='transition'><:colorbox:label_transition:></label>
+				<label for='transition'><:mediabox:label_transition:></label>
 				<select name="transition">
-					<option value="elastic"[(#ENV{transition}|=={elastic}|oui)selected="selected"]><:colorbox:label_choix_transition_elastic:></option>
-					<option value="fade"[(#ENV{transition}|=={fade}|oui)selected="selected"]><:colorbox:label_choix_transition_fade:></option>
-					<option value="none"[(#ENV{transition}|=={none}|oui)selected="selected"]><:colorbox:label_choix_transition_none:></option>
+					<option value="elastic"[(#ENV{transition}|=={elastic}|oui)selected="selected"]><:mediabox:label_choix_transition_elastic:></option>
+					<option value="fade"[(#ENV{transition}|=={fade}|oui)selected="selected"]><:mediabox:label_choix_transition_fade:></option>
+					<option value="none"[(#ENV{transition}|=={none}|oui)selected="selected"]><:mediabox:label_choix_transition_none:></option>
 				</select>
 			</li>
 			<li class="editer_speed[ (#ENV**{erreurs}|table_valeur{speed}|oui)erreur]">
-				<label for='speed'><:colorbox:label_speed:></label>
+				<label for='speed'><:mediabox:label_speed:></label>
 				<input type="text" name="speed" class="text" id="speed" size="10" value="#ENV{speed}" />
 			</li>
 			<li class="maxWidth[ (#ENV**{erreurs}|table_valeur{maxWidth}|oui)erreur]">
-				<label for='maxWidth'><:colorbox:label_maxWidth:></label>
+				<label for='maxWidth'><:mediabox:label_maxWidth:></label>
 				<input type="text" name="maxWidth" class="text" id="maxWidth" size="10" value="#ENV{maxWidth}" />
 			</li>
 			<li class="maxHeight[ (#ENV**{erreurs}|table_valeur{maxHeight}|oui)erreur]">
-				<label for='maxHeight'><:colorbox:label_maxHeight:></label>
+				<label for='maxHeight'><:mediabox:label_maxHeight:></label>
 				<input type="text" name="maxHeight" class="text" id="maxHeight" size="10" value="#ENV{maxHeight}" />
 			</li>
 		</ul></fieldset>
@@ -65,7 +65,7 @@
 
 	<p class="boutons">
 		<input style="display:none;" type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
-		<input type="submit" name="reinit" class="submit" value="<:colorbox:reinitialiser:>" />
+		<input type="submit" name="reinit" class="submit" value="<:mediabox:reinitialiser:>" />
 		<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
 	</p>
 </div></form>
