@@ -4,7 +4,7 @@
 	ColorBox par [ColorPowered->http://colorpowered.com/colorbox/]
 _ Mis en plugin pour SPIP par [Cedric->http://www.yterium.com]
 	</auteur>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<icon>prive/themes/spip/images/mediabox-32.png</icon>
 	<etat>test</etat>
 	<description>
@@ -21,6 +21,11 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
+		<inclure>mediabox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
 		<inclure>mediabox_pipelines.php</inclure>
 	</pipeline>
 

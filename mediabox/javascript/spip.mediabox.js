@@ -6,7 +6,8 @@ var mediabox_init = function() {
 		speed:box_settings.speed,
 		maxWidth:box_settings.maxWidth,
 		maxHeight:box_settings.maxHeight,
-		minWidth:'400',
+		minWidth:box_settings.minWidth,
+		minHeight:box_settings.minHeight,
 		slideshowStart:box_settings.str_slideshowStart,
 		slideshowStop:box_settings.str_slideshowStop,
 		current:box_settings.str_current,
@@ -40,3 +41,48 @@ var mediabox_init = function() {
 		;
 	}
 };
+
+;(function ($) {
+
+	/*
+	 * overlayClose:	(Boolean:false) Allow click on overlay to close the dialog?
+	 * minHeight:		(Number:200) The minimum height for the container
+	 * minWidth:		(Number:200) The minimum width for the container
+	 * maxHeight:		(Number:null) The maximum height for the container. If not specified, the window height is used.
+	 * maxWidth:		(Number:null) The maximum width for the container. If not specified, the window width is used.
+	 * autoResize:		(Boolean:false) Resize container on window resize? Use with caution - this may have undesirable side-effects.
+	 * onOpen:			(Function:null) The callback function used in place of SimpleModal's open
+	 * onShow:			(Function:null) The callback function used after the modal dialog has opened
+	 * onClose:			(Function:null) The callback function used in place of SimpleModal's close
+	 */
+	$.modalbox = function (href, options) {
+		var cbox_options = {
+			href:href,
+			overlayClose: options.overlayClose || false,
+			minHeight: options.minHeight || '',
+			maxHeight: options.maxHeight || box_settings.maxHeight,
+			minWidth: options.minWidth || box_settings.minWidth,
+			maxWidth: options.maxWidth || box_settings.maxWidth,
+			slideshowStart:box_settings.str_slideshowStart,
+			slideshowStop:box_settings.str_slideshowStop,
+			current:box_settings.str_current,
+			previous:box_settings.str_previous,
+			next:box_settings.str_next,
+			close:box_settings.str_close,
+			onOpen: options.onOpen || null,
+			onComplete: options.onShow || null,
+			onClosed: options.onClose || null
+		};
+		
+		return $.fn.colorbox(cbox_options);
+	};
+
+	$.modalboxload = function (url, options) {
+		$.modalbox(url,options);
+	};
+
+	$.modalboxclose = function () {
+		$.fn.colorbox.close();
+	};
+
+})(jQuery);

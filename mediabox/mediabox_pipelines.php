@@ -14,7 +14,18 @@ function mediabox_config(){
 		'speed'=>'200',
 		'maxWidth'=>'90%',
 		'maxHeight'=>'90%',
+		'minWidth'=>'',
+		'minHeight'=>'',
 	), $config);
+	if (test_espace_prive()) {
+		$config = array_merge($config,array(
+		'skin' => 'white-shadow',
+		'maxWidth'=>'90%',
+		'maxHeight'=>'95%',
+		'minWidth'=>'600px',
+		'minHeight'=>'300px',
+		));
+	}
 	return $config;
 }
 
