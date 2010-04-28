@@ -12,6 +12,7 @@ function balise_HORLOGE_dist($p) {
 	$i = 1; $args = array();
 	while(($a = interprete_argument_balise($i++,$p)) != NULL) $args[] = $a;
 	$args = count($args)?join(".'||'.", $args):"''";
+	$p->code = "horloge_params($args)";
 	$p->interdire_scripts = false;
 	return $p;
 }
