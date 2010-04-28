@@ -23,7 +23,7 @@ function liste_cfg($dir='') {
 			$liste = array_merge($liste, preg_files($d=$dir.'fonds/', $d.'cfg_[^/]*[.]html$'));
 		}
 	// ou seulement celui demande
-	} else {	
+	} else {
 		$dir = rtrim(rtrim($dir),'/').'/';
 		$liste = preg_files($d=$dir.'fonds/', $d.'cfg_[^/]*[.]html$');
 	}
@@ -51,7 +51,7 @@ function icone_lien_cfg($dir) {
 						width="16" height="16"
 						alt="'._T('icone_configuration_site').' '.$fonds.'"
 						title="'._T('icone_configuration_site').' '.$fonds.'"
-					/></a>';					
+					/></a>';
 		}
 	}
 
@@ -65,16 +65,16 @@ function icone_lien_cfg($dir) {
 // pour un repertoire donne (sinon tout le path)
 function lister_onglets_cfg($dir=''){
 	$onglets = array();
-	
+
 	// scruter les onglets affichables
 	if ($l = liste_cfg($dir)) {
 		foreach($l as $fonds => $cfg) {
 
-			if (!isset($onglets[$fonds])) 
+			if (!isset($onglets[$fonds]))
 				$onglets[$fonds] = array();
 			$args = array();
 			$args['afficher'] = false;
-			
+
 			// On va chercher la config cible
 			// et on regarde ses donnees pour faire l'onglet
 			// seulement si l'onglet doit etre affiche
@@ -87,25 +87,25 @@ function lister_onglets_cfg($dir=''){
 				// titre
 				if (!$args['titre'] = $tmp->form->param['titre'])
 					$args['titre'] = $fonds;
-				// icone	
-				$path = dirname(dirname($cfg));	
+				// icone
+				$path = dirname(dirname($cfg));
 				$args['icone'] = '';
 				if ($tmp->form->param['icone'])
 					$args['icone'] = $path.'/'.$tmp->form->param['icone'];
 				else
-					$args['icone'] = _DIR_PLUGIN_CFG.'images/cfg-22.png';	
-				
+					$args['icone'] = _DIR_PLUGIN_CFG.'images/cfg-22.png';
+
 				// l'afficher ?
 				if ($tmp->form->param['onglet'] == 'oui')
 					$args['afficher'] = true;
 			}
-			
+
 			$onglets[$fonds] = array_merge($args, $onglets[$fonds]); // conserver les donnees deja presentes ('enfant_actif')
 		}
 	}
-	return $onglets;	
+	return $onglets;
 }
-	
+
 
 
 
@@ -113,7 +113,7 @@ function lister_onglets_cfg($dir=''){
 class cfg
 {
 	var $form; // la classe cfg_formulaire
-	
+
 	function cfg($nom, $cfg_id = '', $opt = array()) {
 		include_spip('inc/cfg_formulaire');
 		$this->form = new cfg_formulaire($nom, $cfg_id, $opt);
@@ -121,10 +121,10 @@ class cfg
 
 	function autoriser()  {return $this->form->autoriser(); }
 	function traiter()  {return $this->form->traiter();}
-	
+
 	function get_titre(){ return $this->form->param['titre'];}
 	function get_nom()  { return $this->form->param['nom'];}
-	function get_boite(){ 
+	function get_boite(){
 		if (!(($titre = $this->form->param['titre']) && ($boite = $this->form->param['boite']))){
 			$boite=($titre)?$titre: _T('icone_configuration_site') . ' ' . $this->form->param['nom'];
 		}
@@ -134,18 +134,18 @@ class cfg
 	// m'est avis que ca devrait virer cette 'presentation=auto'...
 	// c'est comme 'rediriger', il n'y a que le plugin 'autorite' qui l'utilise
 	function get_presentation() { return $this->form->param['presentation'];	}
-	
+
 	//
 	// Affiche la boite d'info
 	// des liens vers les autres fonds CFG
 	// definis par la variable liens
 	// <!-- liens*=moncfg -->
 	// s'il y a une chaine de langue 'moncfg', le texte sera traduit
-	// 
+	//
 	// Ou
 	// <!-- liens*=prefixe_plugin:moncfg -->
 	// pour utiliser la chaine de langue de prefixe_plugin
-	// 
+	//
 	function liens()
 	{
 		$return = '';
@@ -169,20 +169,20 @@ class cfg
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
 		if (!find_in_path('fonds/cfg_'.$lien.'.html')) return "";
-		
+
 		// si c'est le lien actif, pas de <a>
-		if (_request('cfg') == $lien) 
+		if (_request('cfg') == $lien)
 			return "$nom\n";
 		else
 			return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
 	}
-	
-	
+
+
 	//
-	// Les liens multi sont appelles par 
+	// Les liens multi sont appelles par
 	// liens_multi*=nom_du_fond
 	// a condition que le fichier fonds/cfg_$lien.html existe
-	// 
+	//
 	function liens_multi(){
 		// liens multiples
 		foreach ($this->form->param['liens_multi'] as $lien) {
@@ -192,12 +192,12 @@ class cfg
 		}
 		return ($return)?"<ul>$return</ul>":'';
 	}
-	
+
 	function generer_lien_multi($lien, $nom=''){
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
 		if (!find_in_path('fonds/cfg_'.$lien.'.html')) return "";
-		
+
 		$dedans = '';
 		if (($exi = lire_config($lien)) && is_array($exi)) {
 			foreach ($exi as $compte => $info) {
@@ -214,10 +214,10 @@ class cfg
 				. "<input type='hidden' name='cfg' value='$lien' />\n"
 				. "<label for='$lien" . "_'>" . _T('cfg_compat:nouveau') . "</label>\n"
 				. "<input type='image' id='$lien" . "_' name='nouveau' value='1' "
-				. "src='".find_in_path('images/creer.gif')."' style='vertical-align: text-top;'/><br />\n" 
+				. "src='".find_in_path('images/creer.gif')."' style='vertical-align: text-top;'/><br />\n"
 				. $dedans
 				. "\n</div></form>\n";
-	
+
 	}
 
 	// changement de strategie :
@@ -241,13 +241,13 @@ class cfg
 			};
 
 				$titre = ($this->form->param['titre']) ? $this->form->param['titre'] :  $this->form->param['nom'];
-				$hierarchie .= $this->debut_hierarchie($titre, '', true);	
+				$hierarchie .= $this->debut_hierarchie($titre, '', true);
 				$hierarchie .= $this->fin_hierarchie();
-				
+
 			if ($fin_onglet) {
 				$hierarchie .= $this->fin_hierarchie();
 			}
-			
+
 		$hierarchie .= $this->fin_hierarchie();
 		$hierarchie .= "</div>";
 		return $hierarchie;
@@ -257,43 +257,43 @@ class cfg
 		$id = $id ? " id='$id'" : '';
 		$ligature = $ligature ? "<em> &gt; </em>" : "";
 		$class = $class ? " class='$class'" : "";
-		$titre = $url ? "<a $class href=" . $url . ">$titre</a>" : $titre;
+		$titre = $url ? "<a $class href='" . $url . "'>$titre</a>" : $titre;
 		return "<ul$id><li><span class='block'>$ligature$titre</span>";
 	}
-	
+
 	function fin_hierarchie() {
 		return "</li></ul>\n";
 	}
-	
+
 	//
 	// Affiche la liste des onglets de CFG
-	// 
+	//
 	// Recupere les fonds CFG et analyse ceux-ci
 	// - si onglet=oui : affiche l'onglet (valeur par defaut)
 	// - si onglet=non : n'affiche pas l'onglet
-	// - si onglet=fond_cfg_parent : n'affiche pas l'onglet, mais 'exposera' 
+	// - si onglet=fond_cfg_parent : n'affiche pas l'onglet, mais 'exposera'
 	// l'element parent indique (sous entendu que
 	// le parent n'a pas 'onglet=non' sinon rien ne sera expose...
-	// 
+	//
 	function barre_onglets(){
-		
+
 		// determiner les onglets a cacher et a mettre en surbrillance
 		if ($onglets = lister_onglets_cfg()){
 			foreach ($onglets as $fonds=>$ong){
 				$o = $ong['onglet'];
 
 				// onglet actif
-				if ($o == 'oui')	
+				if ($o == 'oui')
 					$onglets[$fonds]['actif'] = ($fonds == _request('cfg'));
 				// rendre actif un parent si l'enfant est actif (onglet=nom_du_parent
 				// (/!\ ne pas le desactiver s'il a deja ete mis actif)
 				if ($o && $o!='oui' && $o!='non'){
-					if (!isset($onglets[$o])) 
+					if (!isset($onglets[$o]))
 						$onglets[$o]=array();
-					
-					if (!isset($onglets[$o]['enfant_actif'])) 
+
+					if (!isset($onglets[$o]['enfant_actif']))
 						$onglets[$o]['enfant_actif']=false;
-						
+
 					$onglets[$o]['enfant_actif'] = ($onglets[$o]['enfant_actif'] OR $fonds == _request('cfg'));
 				}
 			}
@@ -309,22 +309,22 @@ class cfg
 					// Faire des lignes s'il y en a effectivement plus de 3
 					if (!(++$n%3) && ($n>0))
 						$res .= fin_onglet().debut_onglet();
-						
+
 					$res .= onglet(
-							$args['titre'], 
-							$args['url'], 
-							'cfg', 
-							($args['actif'] || $args['enfant_actif']), 
+							$args['titre'],
+							$args['url'],
+							'cfg',
+							($args['actif'] || $args['enfant_actif']),
 							$args['icone']);
-				}	
+				}
 			}
-			
+
 			$res .= fin_onglet();
-			
+
 		}
 		return $res;
 	}
-	
+
 	// affiche le logo du formulaire
 	function logo()  {
 		if ($logo = $this->form->param['logo']
@@ -335,38 +335,38 @@ class cfg
 			return "";
 		}
 	}
-	
+
 	// affiche le descriptif du formulaire
 	function descriptif(){
 		if ($d = $this->form->param['descriptif'])
-			return propre($d);	
+			return propre($d);
 	}
-	
+
 	// affiche le message en cas d'acces interdit
 	function acces_refuse(){
 		include_spip('inc/minipres');
-		return minipres(_T('info_acces_refuse'), 
+		return minipres(_T('info_acces_refuse'),
 			$this->form->param['refus']
 				? $this->form->param['refus']
 				: " (cfg {$this->form->param[nom]} - {$this->form->vue} - {$this->form->param[cfg_id]})");
 	}
-	
+
 	// afficher les messages de cfg
 	function messages(){
 		$m = $this->form->messages; $messages = array();
 		if (count($m['message_ok'])) 		$messages[] = join('<br />', $m['message_ok']);
 		if (count($m['message_erreur'])) 	$messages[] = join('<br />', $m['message_erreur']);
 		if (count($m['erreurs'])) 			$messages[] = join('<br />', $m['erreurs']);
-		
+
 		if ($messages = trim(join('<br />', $messages))) {
 			return propre($messages);
 		}
 		return '';
 	}
-	
+
 	// affichage du formulaire (ou a defaut du texte 'choisir le module a configurer')
 	function formulaire() {
-		$retour = "";	
+		$retour = "";
 		if (!$formulaire = $this->form->formulaire()) {
 			// Page appellee sans formulaire valable
 			$retour .= "<img src='"._DIR_PLUGIN_CFG.'images/cfg.png'."' style='float:right' alt='' />\n";
