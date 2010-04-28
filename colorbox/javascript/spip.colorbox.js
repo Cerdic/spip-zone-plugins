@@ -16,23 +16,27 @@ var colorbox_init = function() {
 	};
 	
 	// passer le portfolio en mode galerie la box
-	$(box_settings.selecteur_galerie, this)
-	.attr("onclick","") // se debarrasser du onclick de SPIP
-	.colorbox(jQuery.extend({}, options, {rel:'galerie',slideshow:true,slideshowAuto:false}))
-	.addClass("colorbox");
+	if (box_settings.selecteur_galerie){
+		$(box_settings.selecteur_galerie, this)
+		.attr("onclick","") // se debarrasser du onclick de SPIP
+		.colorbox(jQuery.extend({}, options, {rel:'galerieauto',slideshow:true,slideshowAuto:false}))
+		.addClass("hasbox");
+	}
 
 	if (box_settings.traiter_toutes_images) {
 		// selectionner tous les liens vers des images
-		$("a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']",this).not('.colorbox')
+		$("a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']",this).not('.hasbox')
 		.attr("onclick","") // se debarrasser du onclick de SPIP
 		.colorbox(options) // activer la box
-		.addClass("colorbox") // noter qu\'on l\'a vue
+		.addClass("hasbox") // noter qu\'on l\'a vue
 		;
 	}
 
 	// charger la box sur autre chose
-	$(box_settings.selecteur_commun).not('.colorbox')
-	.colorbox(options)
-	.addClass("colorbox") // noter qu\'on l\'a vue
-	;
+	if (box_settings.selecteur_commun){
+		$(box_settings.selecteur_commun).not('.hasbox')
+		.colorbox(options)
+		.addClass("hasbox") // noter qu\'on l\'a vue
+		;
+	}
 };

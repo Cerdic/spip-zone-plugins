@@ -4,23 +4,26 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
-	//C
-	'cfg_boite_nyroceros' => 'Configuration du plugin Nyroceros',
-	'cfg_descr_nyroceros' => 'Nyroceros : Plugin jQuery Nyromodal pour SPIP',
-	'cfg_inf_bgcolor' => 'Modifier la couleur de fond de la fen&ecirc;tre',
-	'cfg_inf_selecteur_commun' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront Nyromodal. (Expression CSS ou &eacute;tendue jQuery)',
-	'cfg_inf_selecteur_galerie' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront une galerie avec Nyromodal . (Expression CSS ou &eacute;tendue jQuery)',
-	'cfg_inf_traiter_toutes_images' => 'Traiter toutes les images avec Nyroceros ?',
-	'cfg_inf_preload' => 'Pr&eacute;charger les images des galeries photo',
-	'cfg_inf_installer_diapo_auto' => 'Installer le disporama automatique',
-	
-	'cfg_lbl_bgcolor' => 'Couleur de fond',
-	'cfg_lbl_selecteur_commun' => 'En g&eacute;n&eacute;ral',
-	'cfg_lbl_selecteur_galerie' => 'En galerie',
-	'cfg_lbl_installer_diapo_auto' => 'Diaporama automatique',
-	'cfg_titre_nyroceros' => 'Nyroceros',
-	'cfg_lbl_traiter_toutes_images' => 'Images',
-	'cfg_lbl_preload' => 'Pr&eacute;chargement',
+	'titre_menu_colorbox' => 'Bo&icirc;te Multim&eacute;dia',
+	'titre_page_configurer_box' => 'Configuration de la Bo&icirc;te multim&eacute;dia',
+
+	'explication_selecteur_commun' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront la bo&icirc;te. (Expression CSS ou &eacute;tendue jQuery)',
+	'explication_selecteur_galerie' => 'Indiquez la cible des &eacute;l&eacute;ments &agrave; regrouper en galerie. (Expression CSS ou &eacute;tendue jQuery)',
+	'explication_traiter_toutes_images' => 'Ins&eacute;rer une bo&icirc;te sur toutes les images ?',
+
+	'label_apparence' => 'Apparence',
+	'label_selecteur_commun' => 'En g&eacute;n&eacute;ral',
+	'label_selecteur_galerie' => 'En galerie',
+	'label_traiter_toutes_images' => 'Images',
+	'label_skin' => 'Habillage visuel',
+	'label_aucun_style' => 'N\'ins&eacute;rer aucun habillage par d&eacute;faut',
+	'label_transition' => 'Transition entre deux affichages',
+	'label_choix_transition_elastic' => 'Elastique',
+	'label_choix_transition_fade' => 'Fondu enchain&eacute;',
+	'label_choix_transition_none' => 'Sans effet de transition',
+	'label_speed' => 'Vitesse de transition (ms)',
+	'label_maxwidth' => 'Largeur Maxi (% ou px)',
+	'label_maxheight' => 'Hauteur Maxi (% ou px)',
 
 	'boxstr_slideshowStart' => 'Diaporama',
 	'boxstr_slideshowStop' => 'Arr&ecirc;ter',
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boxstr_previous' => 'Pr&eacute;c&eacute;dent',
 	'boxstr_next' => 'Suivant',
 	'boxstr_close' => 'Fermer',
+	'boxstr_zoom' => 'Zoom',
 	
 );
 ?>

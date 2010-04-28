@@ -1,14 +1,14 @@
 <plugin>
-	<nom>ColorBox</nom>
+	<nom>MediaBox</nom>
 	<auteur>
 	ColorBox par [ColorPowered->http://colorpowered.com/colorbox/]
-_ Mis en plugin par Cedric
+_ Mis en plugin pour SPIP par [Cedric->http://www.yterium.com]
 	</auteur>
-	<version>0.2.0</version>
-	<icon></icon>
+	<version>0.3.0</version>
+	<icon>prive/themes/spip/images/colorbox-32.png</icon>
 	<etat>test</etat>
 	<description>
-Fen&#234;tre de dialogue ou de galerie photo
+Bo&icirc;te multim&eacute;dia
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 	</description>
 	<lien>http://colorpowered.com/colorbox/</lien>
@@ -23,5 +23,16 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 		<nom>insert_head</nom>
 		<inclure>colorbox_pipelines.php</inclure>
 	</pipeline>
+
+	<bouton id='colorbox' parent='configuration'>
+		<icone>prive/themes/spip/images/colorbox-24.png</icone>
+		<titre>colorbox:titre_menu_colorbox</titre>
+		<url>colorbox</url>
+	</bouton>
+	<bouton id='colorbox2' parent='bando_configuration'>
+		<icone>images/colorbox-16.png</icone>
+		<titre>colorbox:titre_menu_colorbox</titre>
+		<url>colorbox</url>
+	</bouton>
 	<categorie>multimedia</categorie>
 </plugin>

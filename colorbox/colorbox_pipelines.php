@@ -2,13 +2,13 @@
 
 function colorbox_config(){
 	include_spip("inc/filtres");
-	$config = @unserialize($GLOBALS['meta']['colorbox']);
+	$config = @unserialize($GLOBALS['meta']['mediabox']);
 	if (!is_array($config))
 		$config = array();
 	$config = array_merge(array(
 		'traiter_toutes_images' => 'oui',
 		'selecteur_galerie' => '#documents_portfolio a[type=\'image/jpeg\'],#documents_portfolio a[type=\'image/png\'],#documents_portfolio a[type=\'image/gif\']',
-		'selecteur_commun' => '.spipbox',
+		'selecteur_commun' => '.mediabox',
 		'skin' => 'black-striped',
 		'transition' => 'elastic',
 		'speed'=>'200',
