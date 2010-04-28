@@ -330,7 +330,7 @@ class cfg
 		if ($logo = $this->form->param['logo']
 		or  $logo = $this->form->param['icone']) {
 			include_spip("inc/filtres_images_mini");
-			return "<div class='logo_config'>" . image_reduire(find_in_path($logo), 64) . "</div>";
+			return "<div class='logo_config'>" . inserer_attribut(image_reduire(find_in_path($logo), 64),'alt','') . "</div>";
 		} else {
 			return "";
 		}
