@@ -71,7 +71,7 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 		if ($evts) {
 			$nb_elmts= @count($evts);
 			if ($nb_elmts>1){
-				$evts = "<a href='".$evts[0]['URL']."' title='".$nb_elmts." ".utf8_encode("�v�nements")."'>".intval($jour)."</a>";
+				$evts = "<a href='".$evts[0]['URL']."' title='".$nb_elmts." ".utf8_encode(_T('agenda:evenements'))."'>".intval($jour)."</a>";
 			}
 			else{
 				$evts = "<a href='".$evts[0]['URL']."' title='".$evts[0]['SUMMARY'].
