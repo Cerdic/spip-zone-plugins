@@ -1,0 +1,99 @@
+#CACHE{0}
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=socialtags -->
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+	#ACTION_FORMULAIRE{SELF}
+	<ul>
+		<li class="editer_tags" id="sc_list">
+			<label><:socialtags:cfg_liste_site:></label>
+			<input type="hidden" name="tags[]" value="" />
+			[(#VAL|socialtags_choix)]
+			<script type='text/javascript'>
+			//<![CDATA[
+				jQuery.extend({
+					sc_cocher_decocher_tout: function(b) {
+						$('#sc_list input[type=checkbox]').attr('checked', b);
+					}
+				});
+			//]]>
+			</script>
+			<noscript>
+			SVP, veuillez activer Javascript.
+			</noscript>
+			<p>
+				<small>
+					<a href="#sc_list" onclick="$.sc_cocher_decocher_tout(true);"><:socialtags:cfg_tout_cocher:></a> /
+					<a href="#sc_list" onclick="$.sc_cocher_decocher_tout(false);"><:socialtags:cfg_tout_decocher:></a>
+				</small>
+			</p>
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<legend><:socialtags:cfg_insertion:></legend>
+				<ul>
+					<li>
+						<label for="jsselector">
+							<:socialtags:cfg_selector:>
+						</label>
+						<p class="explication"><:socialtags:cfg_inserer:></p>
+						<input type="text" class="text" name="jsselector" id="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" />
+						<div class="explication">
+							<strong><:socialtags:cfg_exemples:></strong>
+							<dl>
+								<dt><tt>#contenu</tt></dt>
+								<dd><:socialtags:cfg_en_bas:></dd>
+								<dt><tt>.page_article .cartouche:first</tt></dt>
+								<dd><:socialtags:cfg_sous_bloc:></dd>
+								<dt><tt>#socialtags</tt></dt>
+								<dd><:socialtags:cfg_sous_div:></dd>
+							</dl>
+						</div>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li class="fieldset">
+			<fieldset id="fanbadge">
+				<legend><:socialtags:cfg_badge_fb:></legend>
+				<ul>
+					<li>
+						<p class="explication">
+							<:socialtags:cfg_badge_fb_existe:>
+						</p>
+					</li>
+					<li class="editer_badge">
+						<label for="badge">
+							<:socialtags:cfg_badge_html:>
+						</label>
+						<p class="explication"><:socialtags:cfg_badge_html_ajouter_1:>
+							<code>&#35;MODELE{socialtags_badge}</code><:socialtags:cfg_badge_html_ajouter_2:>
+							<code>&lt;socialtags|badge&gt;)</code></p>
+							<textarea name="badge" id="badge" class="textarea" rows="6" cols="40">#ENV{badge}</textarea>
+					</li>
+					<li class="editer_badgejs">
+						<label for="badgejs"><:socialtags:cfg_badge_js:></label>
+						<p class="explication"><:socialtags:cfg_badge_js_1{code=?page=socialtags.js}:></p>
+						<textarea name="badgejs" id="badgejs" class="textarea" rows="8" cols="40">#ENV{badgejs}</textarea>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li>
+			<label for="ifreferer"><:socialtags:cfg_referer:></label>
+			<input type="checkbox" class="checkbox" name="ifreferer" id="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />
+		</li>
+	</ul>
+
+	<p class="boutons">
+		<input type="submit" class="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+	</p>
+	</div>
+</form>
+</div>

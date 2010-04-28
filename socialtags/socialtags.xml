@@ -5,7 +5,7 @@
 		Digg-like: idem, avec description longue
 		Blog: (éponymie)
 		Communauté: partage réservé aux membres
-		
+
 		Certains <link> sont marqués 'a corriger'
 		Si vous avez l'info, merci de completer.
 	-->
@@ -91,13 +91,6 @@
 <author>diigo</author>
 <link>http://secure.diigo.com/post?url=%u&amp;title=%t</link>
 <description>Portail, communauté, en-us</description>
-</item>
-
-<item>
-<title>DZone</title>
-<author>blogmarks</author>
-<link>http://blogmarks.net/my/new.php?mini=1&amp;url=%u&amp;title=%t</link>
-<description>Bookmarks, dev, en-us</description>
 </item>
 
 <!-- F -->
@@ -430,8 +423,8 @@
 <item>
 <title>Wikio</title>
 <author>wikio</author>
-<link>http://www.wikio.fr/sharethis?url=%u&amp;title=%t</link> <!-- En fait wikio a chang� et ne propose en partage rien de plus qu'un clone de socialtags. Ce qu'il faudrait c'est 
-integrer un bouton de vote quand ils auront r�tablis leur truc -->
+<link>http://www.wikio.fr/sharethis?url=%u&amp;title=%t</link> <!-- En fait wikio a chang� et ne propose en partage rien de plus qu'un clone de socialtags. Ce qu'il faudrait c'est
+integrer un bouton de vote quand ils auront r�tablis leur truc -->
 <description>Digg-like, news, en-us fr</description>
 </item>
 

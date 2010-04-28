@@ -16,11 +16,8 @@
 		if (!selector.length) return;
 		var socialtags = [(#CONFIG{socialtags/tags}|socialtags_json)];
 		var title = $('title').text() ||'';
-		// [@attr] style selectors removed in jQuery 1.3 (voir http://docs.jquery.com/Selectors)
-		// si besoin, rendre compatible avec anciennes versions de jQuery (SPIP 192x)
-		var jqss = (jQuery.fn.jquery <= '1.2.6') ? '@' : '';
-		var description = ($('meta['+jqss+'name=description]').attr('content') || '').substr(0,250);
-		var cano = $('link['+jqss+'rel=canonical]')[0];
+		var description = ($('meta[name=description]').attr('content') || '').substr(0,250);
+		var cano = $('link[rel=canonical]')[0];
 		var url = cano ? cano.href : document.location.href;
 		var ul = $('<ul><\/ul>');
 		var esc = function(x){return encodeURIComponent(x).replace(/\s/g,' ');};
