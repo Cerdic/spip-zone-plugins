@@ -1,7 +1,6 @@
 [(#REM)
 
 	Un galerie des images (associees ou non a un article)
-	triees par date inverse
 	
 	ENV{pas} = pagination
 	ENV{taille} = taille du carre
@@ -24,7 +23,8 @@
 	{largeur>200}{hauteur>200}
 	{doublons tof}
 	{mode=document}
-	{!par date}
+	{par num titre}
+	{par num titre,date,id_document}
 	>
 
 	[(#SET{desc,[(#TITRE*|sinon{#DESCRIPTIF*}|?{' '})]})]
