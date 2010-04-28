@@ -1,6 +1,7 @@
 // ColorBox v1.3.6 - a full featured, light-weight, customizable lightbox based on jQuery 1.3
 // c) 2009 Jack Moore - www.colorpowered.com - jack@colorpowered.com
 // Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+// amelioree pour SPIP
 
 (function ($) {
 	// Shortcuts (to increase compression)
@@ -67,6 +68,8 @@
 		initialHeight: "400",
 		maxWidth: FALSE,
 		maxHeight: FALSE,
+		minWidth: FALSE,
+		minHeight: FALSE,
 		scalePhotos: TRUE,
 		scrolling: TRUE,
 		inline: FALSE,
@@ -250,7 +253,6 @@
 	// This preps colorbox for a speedy open when clicked, and lightens the burdon on the browser by only
 	// having to run once, instead of each time colorbox is opened.
 	cboxPublic.init = function () {
-
 		// jQuery object generator to save a bit of space
 		function $div(id) {
 			return $('<div id="cbox' + id + '"/>');
@@ -406,11 +408,13 @@
 		function getWidth(){
 			settings.w = settings.w || $loaded.width();
 			settings.w = settings.mw && settings.mw < settings.w ? settings.mw : settings.w;
+			settings.w = settings.minw && settings.minw > settings.w ? settings.minw : settings.w;
 			return settings.w;
 		}
 		function getHeight(){
 			settings.h = settings.h || $loaded.height();
 			settings.h = settings.mh && settings.mh < settings.h ? settings.mh : settings.h;
+			settings.h = settings.minh && settings.minh > settings.h ? settings.minh : settings.h;
 			return settings.h;
 		}
 
@@ -564,6 +568,8 @@
 		// Sets the minimum dimensions for use in image scaling
 		settings.mw = settings.w;
 		settings.mh = settings.h;
+		settings.minw = settings.w;
+		settings.minh = settings.h;
 
 		// Re-evaluate the minimum width and height based on maxWidth and maxHeight values.
 		// If the width or height exceed the maxWidth or maxHeight, use the maximum values instead.
@@ -571,9 +577,17 @@
 			settings.mw = setSize(settings.maxWidth, 'x') - loadedWidth - interfaceWidth;
 			settings.mw = settings.w && settings.w < settings.mw ? settings.w : settings.mw;
 		}
+		if(settings.minWidth){
+			settings.minw = setSize(settings.minWidth, 'x') - loadedWidth - interfaceWidth;
+			settings.minw = settings.w && settings.w > settings.minw ? settings.w : settings.minw;
+		}
 		if(settings.maxHeight){
 			settings.mh = setSize(settings.maxHeight, 'y') - loadedHeight - interfaceHeight;
 			settings.mh = settings.h && settings.h < settings.mh ? settings.h : settings.mh;
+		}
+		if(settings.minHeight){
+			settings.minh = setSize(settings.minHeight, 'y') - loadedHeight - interfaceHeight;
+			settings.minh = settings.h && settings.h > settings.minh ? settings.h : settings.minh;
 		}
 
 		href = settings.href;
