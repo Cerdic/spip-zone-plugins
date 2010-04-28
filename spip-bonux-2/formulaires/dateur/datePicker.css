@@ -15,7 +15,7 @@ table.jCalendar td.disabled:hover { background: #e0e5ea; color: #888; }
 /* NOTE - you will probably want to style a.dp-choose-date - see how I did it in demo.css */
 
 div.dp-popup { position: relative; background: #e0e5ea; border: 1px solid #85909a; font-size: 10px; font-family: arial, sans-serif; padding: 2px; line-height: 1.2em; }
-div#dp-popup { position: absolute; z-index: 1199; }
+div#dp-popup { position: absolute; z-index: 99999; }
 div.dp-popup h2 { font-size: 12px; text-align: center; margin: 2px 0; padding: 0; color: #555; }
 a#dp-close { font-size: 11px; padding: 4px 0; text-align: center; display: block; }
 a#dp-close:hover { text-decoration: underline; }
