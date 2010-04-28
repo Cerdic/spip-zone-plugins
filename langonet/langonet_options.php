@@ -14,7 +14,7 @@ define("_LANGONET_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-
  */
 function langonet_creer_select_langues($sel_l='0') {
 
-	$retour = langonet_creer_selects($sel_l, '0');
+	$retour = creer_selects($sel_l, '0');
 	return $retour['fichiers'];
 }
 
@@ -26,7 +26,7 @@ function langonet_creer_select_langues($sel_l='0') {
  */
 function langonet_creer_select_dossiers($sel_d='0') {
 
-	$retour = langonet_creer_selects('0', $sel_d);
+	$retour = creer_selects('0', $sel_d);
 	return $retour['dossiers'];
 }
 
@@ -42,21 +42,13 @@ function langonet_creer_select_dossiers($sel_d='0') {
 
 // $sel_l  => option du select des langues
 // $sel_d  => option du select des repertoires
-function langonet_creer_selects($sel_l='0',$sel_d='0') {
+function creer_selects($sel_l='0',$sel_d='0') {
 	
-	// Recuperation des repertoires plugins
-	include_spip('inc/plugin');
-	$rep_plugins = liste_plugin_files();
-	$rep_normal = array();
-	foreach ($rep_plugins as $rep) {
-		$reel_dir = _DIR_PLUGINS . $rep;
-		$rep_normal[] = $rep;
-		if ($sous_rep = glob($reel_dir.'/*/lang', GLOB_ONLYDIR)) {
-			for ($i = 0; $i < count($sous_rep); $i++) {
-    			$rep_normal[] = str_replace(_DIR_PLUGINS, '', str_replace('/lang', '', $sous_rep[$i]));
-			}
-		}
-	}
+
+	// Recuperation des repertoires des plugins
+	$rep_plugins = lister_dossiers_plugins();
+	// Recuperation des repertoires des extensions
+	$rep_extensions = lister_dossiers_plugins(_DIR_EXTENSIONS);
 	// Recuperation des repertoires SPIP et squelettes
 	if (strlen($GLOBALS['dossier_squelettes'])) {
 		$rep_complet = explode(':', $GLOBALS['dossier_squelettes']);
@@ -67,7 +59,8 @@ function langonet_creer_selects($sel_l='0',$sel_d='0') {
 	$rep_complet[] = rtrim(_DIR_RESTREINT_ABS, '/');
 	$rep_complet[] = 'prive';
 	$rep_complet[] = 'squelettes-dist';
-	$rep_scan = array_merge($rep_complet, $rep_normal);
+	$rep_scan = array_merge($rep_complet, $rep_plugins);
+	$rep_scan = array_merge($rep_scan, $rep_extensions);
 	
 	// construction des <select>
 	// -- les fichiers de langue
@@ -88,8 +81,12 @@ function langonet_creer_selects($sel_l='0',$sel_d='0') {
 	//     $langue (index nom de langue)
 	//     $ou_lang (chemin relatif vers fichier de langue a verifier)
 	foreach ($rep_scan as $rep) {
-		if (in_array($rep, $rep_normal)) {
+		if (in_array($rep, $rep_plugins)) {
 			$reel_dir = _DIR_PLUGINS . $rep;
+			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
+		}
+		else if (in_array($rep, $rep_extensions)) {
+			$reel_dir = _DIR_EXTENSIONS . $rep;
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
 		}
 		else {
@@ -126,6 +123,24 @@ function langonet_creer_selects($sel_l='0',$sel_d='0') {
 	$sel_dossier .= '</select>' . "\n";
 
 	return $retour = array('fichiers' => $sel_lang, 'dossiers' => $sel_dossier);
+}
+
+function lister_dossiers_plugins($rep_base=null) {
+
+	$liste_rep = liste_plugin_files($rep_base);
+	if (is_null($rep_base))
+		$rep_base = _DIR_PLUGINS;
+	$dossiers = array();
+	foreach ($liste_rep as $rep) {
+		$reel_dir = $rep_base . $rep;
+		$dossiers[] = $rep;
+		if ($sous_rep = glob($reel_dir.'/*/lang', GLOB_ONLYDIR)) {
+			for ($i = 0; $i < count($sous_rep); $i++) {
+    			$dossiers[] = str_replace($rep_base, '', str_replace('/lang', '', $sous_rep[$i]));
+			}
+		}
+	}
+	return $dossiers;
 }
 
 ?>
