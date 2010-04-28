@@ -55,6 +55,7 @@ function multilang_init_lang(options) {
 	multilang_root = $(root);
 
 	//Add Yffic : S'il existe deja un menu lang sous multilang_root, return (cas Ajax) Ca, c'est pas terrible
+	// Car dans Mediatheque, le menu ne s'affichera pas
 	//if(multilang_root.find('.menu_lang').length > 0) return;
 
 	//set the main menu element
@@ -64,16 +65,20 @@ function multilang_init_lang(options) {
 	$.each(multilang_avail_langs,function() {
 		multilang_menu_lang.append($("<a>").html("["+this+"]").css(this==multilang_def_lang?multilang_css_cur_link:multilang_css_link)[0]);
 	});
+	
 	//init fields
 	multilang_fields_selector = options.fields;
 	//store all the internationalized forms
 	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
 	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
 	multilang_forms = $(multilang_forms_selector,multilang_root);
+	
 	//create menu lang for the global form
 	if(multilang_containers.size()) forms_make_menu_lang(multilang_containers);
 	multilang_menu_selector = options.form_menu;
-	forms_init_multi();
+	
+	// Modif Yffic : On va pas plus s'il n'y a pas de form
+	if(multilang_forms.size()) forms_init_multi();
 }
 
 function forms_make_menu_lang(container,target) {

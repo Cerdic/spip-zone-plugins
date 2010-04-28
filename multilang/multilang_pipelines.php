@@ -85,16 +85,11 @@ function multilang_inserer_head($flux,$config=array()){
 			  dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
 			  jQuery(document).ready(function(){
 					function multilang_init(){
-
-				';
-	if($root) {
-		$flux .= 'multilang_init_lang({fields:"textarea,input:text:not(input#id_parent,input.password,input#new_login,#titreparent,*.nomulti)",root:"'.$root.'"});';
-	}
-
-	// Pour toutes les forms de class multilang (pour les autres plugins)
-	$flux .= 'forms_selector = $(".multilang").parents("form") ;
-					   //multilang_init_lang({fields:".multilang",forms:forms_selector});
-					} // end multilang_init
+						root = "'.$root.'" ;
+						fields_selector = "textarea,input:text:not(input#id_parent,input.password,input#new_login,#titreparent,*.nomulti),.multilang" ;
+						forms_selector = ".multilang:parent,form[class!=\'form_upload\'][class!=\'form_upload_icon\']" ;
+						multilang_init_lang({fields:fields_selector,root:root,forms:forms_selector});
+					}
 					multilang_init();
 					if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
 			  });

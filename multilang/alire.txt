@@ -54,4 +54,18 @@ du coup, y'a pas de root de defini, donc le multilang agit sur tout le document
 
 Effet, le le menu lang s'affiche bien, mais ne fonctionne plus
 
-Bon faut tracer ce qui se passe
+En fait faut pas passer 2 fois dans la fonction d'init. Ce n'est pas prevu pour. Donc faut tout integrer en un appel :
+
+	jQuery(document).ready(function(){
+		function multilang_init(){
+			root = "'.$root.'" ;
+			fields_selector = "textarea,input:text:not(input#id_parent,input.password,input#new_login,#titreparent,*.nomulti),.multilang" ;
+			forms_selector = ".multilang:parent,form[class!=\'form_upload\'][class!=\'form_upload_icon\']" ;
+			multilang_init_lang({fields:fields_selector,root:root,forms:forms_selector});
+		}
+		multilang_init();
+		if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
+	});
+
+Bon donc ca marche toujours avec ou sans mediatheque... Reste plus qu'a tester avec un plugin qui veut du multilang
+	
