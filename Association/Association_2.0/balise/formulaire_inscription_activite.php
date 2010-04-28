@@ -68,7 +68,7 @@
 			$sujet=_T('asso:activite_message_sujet',array('nomasso'=>$nom_asso));
 			
 			$query = sql_select("*", "spip_evenements", "id_evenement=$id_evenement " );
-			while ($data = spip_fetch_array($query)) {
+			while ($data = sql_fetch($query)) {
 				$activite=$data['titre'];
 				$date=$data['date_debut'];
 				$lieu=$data['lieu'];

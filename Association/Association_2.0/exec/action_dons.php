@@ -45,7 +45,7 @@ function exec_action_dons() {
 			$res = '<div align="center">';
 			$res .= '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le don ') . $id_don . '.</strong></p>';
 
-			$res .= '<div style="text-align:right;"><input type="submit" value="' . _L('Confirmer') . '" class="fondo">';
+			$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
 			$res .= '</div>';		
 
 			echo redirige_action_post('supprimer_dons', $id_don, 'dons', '', $res);
