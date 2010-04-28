@@ -45,7 +45,7 @@
 	[(#GET{desc}|?{[(#SET{vignette,[(#GET{vignette}
 		|sinon{<img style="display:none;" />}
 		|inserer_attribut{longdesc,[(#VAL{#desc}|concat{#ID_DOCUMENT})]})]})]})]
-	<a href="[(#FICHIER|copie_locale|image_reduire{800}|extraire_attribut{src})]"
+	<a href="[(#FICHIER|copie_locale|image_reduire{800}|extraire_attribut{src})]" rel="galerie_carree#ID_ARTICLE"
 	type="#MIME_TYPE"[
 	title="(#TITRE|sinon{#GET{tof_titre}|supprimer_tags}|texte_backend)"]>#GET{vignette}</a>
 
