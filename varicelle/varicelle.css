@@ -1,42 +1,52 @@
+/* --------------------------------------------------------------
+
+   varicelle.css
+   Style des boutons (a, input, button)
+   romy.tetue.net - 2010
+
+-------------------------------------------------------------- */
+
 /* D'apres : http://speckyboy.com/2010/02/15/20-css3-tutorials-and-techiques-for-creating-buttons/
 et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-buttons/ */
 
-.submit, .submit:visited {
-background: #222 url(varicelle-overlay.png) repeat-x; border: 0;
-display: inline-block; 
-padding: 5px 10px 6px; 
-color: #fff; 
-text-decoration: none;
--moz-border-radius: 6px; 
--webkit-border-radius: 6px;
--moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
--webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
-text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-border-bottom: 1px solid rgba(0,0,0,0.25);
-position: relative;
-cursor: pointer
-}
+.submit { position: relative; display: inline-block; width: auto; padding: 5px 1em 6px; overflow: visible; cursor: pointer;
+background: #888 url("img/varicelle-overlay.png") repeat-x; border: 0; border-bottom: 1px solid rgba(0,0,0,0.25);
+-moz-border-radius: 5px; -webkit-border-radius: 5px; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
+.submit,.submit:visited,.submit * { color: #FFF; text-decoration: none; }
 
-.submit:hover { background-color: #111; color: #fff; }
-.submit:active { top: 1px; }
-.small.submit, .small.submit:visited { font-size: 11px}
-.submit, .submit:visited,
-.medium.submit, .medium.submit:visited { font-size: 13px; font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
+button::-moz-focus-inner { border: 0 none; padding: 0; }
 
-.large.submit, .large.submit:visited { font-size: 14px; padding: 8px 14px 9px; }
-.super.submit, .super.submit:visited { font-size: 34px; padding: 8px 14px 9px; }
+.submit:hover { background-color: #777; color: #FFF; text-decoration: none; }
+.submit:focus,
+.submit:active { -moz-transform: translateY(1px); outline: none !important; }
+.submit:active { -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); -webkit-box-shadow: none;
+/* IE only stuff */ border-bottom: 0\9; border-top: 1px solid #666\9; }
 
-.pink.submit, .magenta.submit:visited { background-color: #e22092; }
+
+/* tailles */
+.small.submit { font-size: .9em; padding: 4px 1em; font-weight: normal; }
+.big.submit { font-size: 1.2em; padding: 8px 1em 9px; }
+.super.submit { font-size: 2em; padding: 8px 1em 9px; }
+
+/* couleurs */
+.pink.submit { background-color: #e22092; }
 .pink.submit:hover { background-color: #c81e82; }
-.green.submit, .green.submit:visited { background-color: #91bd09; }
-.green.submit:hover { background-color: #749a02; }
-.red.submit, .red.submit:visited { background-color: #e62727; }
+.red.submit { background-color: #e62727; }
 .red.submit:hover { background-color: #cf2525; }
-.orange.submit, .orange.submit:visited { background-color: #ff5c00; }
-.orange.submit:hover { background-color: #d45500; }
-.blue.submit, .blue.submit:visited { background-color: #2981e4; }
+.orange.submit { background-color: #ff5c00; }
+.orange.submit:hover { background-color: #D45500; }
+.yellow.submit { background-color: #FFB515; }
+.yellow.submit:hover { background-color: #FC9200; }
+.green.submit { background-color: #91BD09; }
+.green.submit:hover { background-color: #749A02; }
+.blue.submit { background-color: #2981e4; }
 .blue.submit:hover { background-color: #2575cf; }
-.yellow.submit, .yellow.submit:visited { background-color: #ffb515; }
-.yellow.submit:hover { background-color: #fc9200; }
+.black.submit { background-color: #222; }
+.black.submit:hover { background-color: #111; }
+.gray.submit { background-color: #888; }
+.gray.submit:hover { background-color: #777; }
+.white.submit { background-color: #FFF; border: 1px solid #CCC; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
+.white.submit:hover { background-color: #EEE; }
 
 /* end */
