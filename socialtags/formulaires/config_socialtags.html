@@ -43,7 +43,7 @@
 							<:socialtags:cfg_selector:>
 						</label>
 						<p class="explication"><:socialtags:cfg_inserer:></p>
-						<input type="text" class="text" name="jsselector" id="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" />
+						<input type="text" name="jsselector" class="text" id="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" />
 						<div class="explication">
 							<strong><:socialtags:cfg_exemples:></strong>
 							<dl>
@@ -87,7 +87,7 @@
 		</li>
 		<li>
 			<label for="ifreferer"><:socialtags:cfg_referer:></label>
-			<input type="checkbox" class="checkbox" name="ifreferer" id="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />
+			<input type="checkbox" name="ifreferer"  class="checkbox" id="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />
 		</li>
 	</ul>
 
