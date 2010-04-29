@@ -93,7 +93,7 @@ function exec_edit_don(){
 		echo redirige_action_post($action . '_dons' , $id_don, 'dons', "", "<div>$res</div>");
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(), fin_page();
 	}
 }
 

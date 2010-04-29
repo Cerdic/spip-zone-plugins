@@ -27,10 +27,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_action_plan=generer_url_ecrire('action_plan');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$action=$_GET['agir'];
-		$id_plan=$_GET['id'];
+		$id_plan= intval(_request('id'));
 		
-		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('Edition plan comptable')) ;		
 		
 		association_onglets();
@@ -49,51 +48,67 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Edition plan comptable'));
 		
-		$query = sql_select("*", "spip_asso_plan", "id_plan='$id_plan' ");
-		while($data = spip_fetch_array($query)) {
+		$data = !$id_plan ? '' : sql_fetsel("*", "spip_asso_plan", "id_plan=$id_plan");
+		if ($data) {
 			$code=$data['code'];
 			$classe=$data['classe'];
 			$intitule=$data['intitule'];
 			$reference=$data['reference'];
-			$solde_anterieur=$data['solde_anterieur'];
-			$date_anterieure=$data['date_anterieure'];
 			$actif=$data['actif'];
 			$commentaire=$data["commentaire"];
+			$solde_anterieur=$data['solde_anterieur'];
+			$date_anterieure=$data['date_anterieure'];
+			$action = 'modifier';
+		} else {
+			$code=$classe=$intitule=$reference=$actif=$commentaire=$solde_anterieur='';
+			$date_anterieure= date('Y-m-d');
+			$action = 'ajouter';
 		}
-		echo '<form action="'.$url_action_plan.'" method="post">';	
-		
-		echo '<label for="code"><strong>Code :</strong></label>';
-		echo '<input name="code" type="text" value="'.$code.'" id="code" class="formo" />';
-		echo '<label for="classe"><strong>Classe :</strong></label>';
-		echo '<input name="classe" type="text" value="'.$classe.'" id="classe" class="formo" />';
-		echo '<label for="intitule"><strong>Intitul&eacute; :</strong></label>';
-		echo '<input name="intitule" type="text" value="'.$intitule.'" id="intitule" class="formo" />';
-		echo '<label for="reference"><strong>R&eacute;f&eacute;rence :</strong></label>';
-		echo '<input name="reference" type="text" value="'.$reference.'" id="reference" class="formo" />';
-		echo '<label for="solde_anterieur"><strong>Solde report&eacute; (en euros) :</strong></label>';
-		echo '<input name="solde_anterieur" type="text" value="'.$solde_anterieur.'" id="solde_anterieur" class="formo" />';
-		echo '<label for="date_anterieure"><strong>Date report (AAA-MM-JJ) :</strong></label>';
-		echo '<input name="date_anterieure" type="text" value="'.$date_anterieure.'" id="date_anterieure" class="formo" />';
-		echo '<label for="actif"><strong>Compte activ&eacute; :</strong></label>';
-		echo '<input name="actif" type="radio" value="oui" id="actif" ';
-		if ($actif=="oui" || $action=="ajoute") {echo ' checked="checked"';}
-		echo '>'._T('asso:plan_libelle_oui');
-		echo '<input name="actif" type="radio" value="non" id="actif" ';
-		if ($actif=="non") {echo ' checked="checked"';}
-		echo '>'._T('asso:plan_libelle_non');
-		echo '<br /><label for="commentaire"><strong>Commentaires :</strong></label>';
-		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
-		echo '<input type="hidden" name="agir" value="'.$action.'">';
-		echo '<input type="hidden" name="id" value="'.$id_plan.'">';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		echo '<div style="float:right;">';
-		echo '<input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
-		else {echo _T('asso:bouton_envoyer');}
-		echo '" class="fondo"></div>';
-		echo '</form>';
-		
+		$checked = ($actif=="oui" || $action=="ajouter");
+
+		$res = '<label for="code"><strong>Code :</strong></label>'
+		. '<input name="code" type="text" value="'
+		. $code
+		. '" id="code" class="formo" />'
+		. '<label for="classe"><strong>Classe :</strong></label>'
+		. '<input name="classe" type="text" value="'
+		. $classe
+		. '" id="classe" class="formo" />'
+		. '<label for="intitule"><strong>Intitul&eacute; :</strong></label>'
+		. '<input name="intitule" type="text" value="'
+		. $intitule
+		. '" id="intitule" class="formo" />'
+		. '<label for="reference"><strong>R&eacute;f&eacute;rence :</strong></label>'
+		. '<input name="reference" type="text" value="'
+		. $reference
+		. '" id="reference" class="formo" />'
+		. '<label for="solde_anterieur"><strong>Solde report&eacute; (en euros) :</strong></label>'
+		. '<input name="solde_anterieur" type="text" value="'
+		. $solde_anterieur
+		. '" id="solde_anterieur" class="formo" />'
+		. '<label for="date_anterieure"><strong>Date report (AAA-MM-JJ) :</strong></label>'
+		. '<input name="date_anterieure" type="text" value="'
+		. $date_anterieure
+		. '" id="date_anterieure" class="formo" />'
+		. '<label for="actif"><strong>Compte activ&eacute; :</strong></label>'
+		. '<input name="actif" type="radio" value="oui" id="actif" ';
+		if ($checked) {$res .= ' checked="checked"';}
+		$res .= '>'._T('asso:plan_libelle_oui')
+		. '<input name="actif" type="radio" value="non" id="actif" ';
+		if (!$checked) {$res .= ' checked="checked"';}
+		$res .= '>'._T('asso:plan_libelle_non')
+		. '<br /><label for="commentaire"><strong>Commentaires :</strong></label>'
+		. '<textarea name="commentaire" id="commentaire" class="formo" />'
+		. $commentaire
+		. '</textarea>'
+		. '<div style="float:right;">'
+		. '<input type="submit" value="'
+		. _T('asso:bouton_envoyer')
+		. '" class="fondo"></div>';
+
+		echo redirige_action_post($action . '_plans' , $id_plan, 'plan', "", "<div>$res</div>");
+
 		fin_cadre_relief();  	
-		fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>

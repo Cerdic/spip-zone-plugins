@@ -40,29 +40,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','agir=ajoute'), _DIR_PLUGIN_ASSOCIATION_ICONES.'EuroOff.gif', 'creer.gif',false);
+		$res=icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan'), _DIR_PLUGIN_ASSOCIATION_ICONES.'EuroOff.gif', 'creer.gif',false);
 		
 		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
-		 echo bloc_des_raccourcis($res);
-		
+		echo bloc_des_raccourcis($res);
+		 
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));
 		
-		$classe = '%';
-		$actif = 'oui'; 
-		if ( isset ($_REQUEST['classe'] )) { $classe = $_REQUEST['classe']; }
-		if ( isset ($_REQUEST['actif'] )) { $actif = $_REQUEST['actif']; }
+		$classe = _request('classe'); 
+		if (!$classe) $classe = '%';
+		$actif = _request('actif');
+		if (!$actif) $actif = 'oui'; 
 		
 		echo '<table width="100%">';
-		
-		// Filtre classes
 		echo '<tr>';
 		echo '<td>';
 		
-		$query = spip_query ("SELECT DISTINCT classe, actif  FROM spip_asso_plan WHERE actif='$actif' ORDER BY classe");
+		$query = sql_select('DISTINCT classe, actif', 'spip_asso_plan', "actif=". sql_quote($actif),'', "classe");
 		
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			if ($data['classe']==$class)	{echo ' <strong>'.$data['classe'].' </strong>';}
 			else {echo '<a href="'.$url_plan.'&classe='.$data['classe'].'">'.$data['classe'].'</a> ';}
 		}
@@ -85,7 +83,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '</select>';
 		echo '</form>';
 		echo '</td>';
-		
 		echo '</tr></table>';
 		
 		//Affichage de la table
@@ -99,8 +96,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>Date</strong></td>';
 		echo '<td colspan=2 style="text-align:center;"><strong>Action</strong></td>';
 		echo'  </tr>';
-		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe LIKE '$classe' AND actif='$actif' ORDER by classe, code" );
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select('*', 'spip_asso_plan', "classe LIKE " . sql_quote($classe) ." AND actif=" . sql_quote($actif),'', "classe, code" );
+		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['classe'].'</td>';
 			echo '<td class="arial11 border1">'.$data['code'].'</td>';
@@ -108,14 +105,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class="arial11 border1">'.$data['reference'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
 			echo '<td class="arial11 border1">'.association_datefr($data['date_anterieure']).'</td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_plan.'&agir=supprime&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_plan.'&agir=modifie&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_plan.'&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_plan.'&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';
 		
 		fin_cadre_relief();  
 		
-		fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>

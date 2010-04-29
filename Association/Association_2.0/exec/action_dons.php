@@ -41,7 +41,7 @@ function exec_action_dons() {
 			
 			echo debut_droite("", true);
 			
-			echo debut_cadre_relief(  "", false, "", $titre = _T('Action sur les dons'));
+			echo debut_cadre_relief(  "", false, "", $titre = _L('Action sur les dons'));
 			$res = '<div align="center">';
 			$res .= '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le don ') . $id_don . '.</strong></p>';
 
