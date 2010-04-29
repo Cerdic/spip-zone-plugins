@@ -55,28 +55,28 @@ function formater_table($resultats) {
 	$retour = array();
 	
 	// Creation de la liste:
-	// - un bloc dŽpliable par lettre initiale
+	// - un bloc dÃ©pliable par lettre initiale
 	// - le bloc est un tableau item/traduction
 	$texte = '';
 	foreach ($resultats['table'] as $_initiale => $_table) {
 		// On demarre un nouveau bloc depliable et une nouvelle table
 		$i = 0;
-		$texte .= bouton_block_depliable(strtoupper($_initiale) . ' (' . count($_table) . ')', true);
-		$texte .= debut_block_depliable(true);
-		$texte .= '<div class="cadre_padding">' . "\n";
-		$texte .= '<table style="width: 100%;" class="spip">' . "\n";
-		$texte .= '<tbody>' . "\n";
+		$texte .= bouton_block_depliable(strtoupper($_initiale) . ' (' . count($_table) . ')', true) .
+		          debut_block_depliable(true) .
+		          '<div class="cadre_padding">' . "\n" .
+		          '<table style="width:100%;" class="spip">' . "\n" .
+		          '<tbody>' . "\n";
 		// On ajoute une ligne par item
 		foreach ($_table as $_item => $_traduction) {
-			$texte.= '<tr class="' . ($i % 2 == 0 ? 'row_even' : 'row_odd') . '">' . "\n";
-			$texte.= '<td style="border: medium none;"><strong>' . $_item . '</strong></td>' . "\n";
-			$texte.= '<td style="border: medium none;">' . $_traduction . '</td>' . "\n";
-			$texte.= '</tr>' . "\n";
+			$texte.= '<tr class="' . ($i % 2 == 0 ? 'row_even' : 'row_odd') . '">' . "\n" .
+			         '<td style="border:medium none;"><strong>' . $_item . '</strong></td>' . "\n" .
+			         '<td style="border:medium none;">' . $_traduction . '</td>' . "\n" .
+			         '</tr>' . "\n";
 			$i += 1;
 		}
 		// On ferme la table et le bloc courant
-		$texte .= '</tbody>' . "\n" . '</table>' . "\n" . '</div>' . "\n";
-		$texte .= fin_block();
+		$texte .= '</tbody>' . "\n" . '</table>' . "\n" . '</div>' . "\n" .
+		          fin_block();
 	}
 
 	// Tout s'est bien passe on renvoie le message ok et les resultats de la verification

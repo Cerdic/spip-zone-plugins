@@ -9,7 +9,7 @@
  */
 
 // $pattern      => item (le raccourci) ou partie de l'item a rechercher
-// $recherche    => type de cherche, egal, commence, ou contient
+// $recherche    => type de recherche : egal, commence, ou contient
 function inc_langonet_rechercher_item($pattern, $recherche) {
 
 	// Initialisation du tableau des resultats

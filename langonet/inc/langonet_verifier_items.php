@@ -53,12 +53,14 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
 				// On traite les cas particuliers ou l'item est entierement une expression ou une variable:
 				// on duplique l'item dans le suffixe ce qui est en fait bien le cas
-				if ((substr($matches[2][0], 0, 1) == "$") OR (substr($matches[2][0], 0, 2) == "'.") OR (substr($matches[2][0], 0, 2) == '".'))
+				if ((substr($matches[2][0], 0, 1) == "$") OR (substr($matches[2][0], 0, 2) == "'.") OR (substr($matches[2][0], 0, 2) == '".')) {
 					$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[2]);
-				else
+				}
+				else {
 					$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
+				}
 				$utilises_brut['modules'] = array_merge($utilises_brut['modules'], $matches[1]);
-				// On collecte pour chaque item trouve les lignes et fichiers dans lequel il est utilise
+				// On collecte pour chaque item trouve les lignes et fichiers dans lesquels il est utilise
 				foreach ($matches[2] as $item_val) {
 					$item_val = str_replace('$', '\$', $item_val);
 					preg_match("#.{0,8}".$item_val.".{0,20}#is", $texte, $extrait);
@@ -162,8 +164,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 		// On construit la liste des items definis mais plus utilises
 		foreach ($GLOBALS[$var_source] as $_item => $_traduction) {
 			if (!in_array ($_item, $utilises['items'])) {
-				// L'item est soit non utilise, soit utilise dans un contexte
-				// variable
+				// L'item est soit non utilise, soit utilise dans un contexte variable
 				$contexte_variable = false;
 				foreach($utilises['items'] as $_cle => $_valeur) {
 					if ($utilises['suffixes'][$_cle]) {

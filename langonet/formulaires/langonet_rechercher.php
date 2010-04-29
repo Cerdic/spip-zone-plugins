@@ -41,22 +41,27 @@ function formater_recherche($recherche, $resultats) {
 	foreach ($resultats['item_trouve'] as $_pertinence => $_trouves) {
 		if ($_trouves) {
 			$total += count($_trouves);
-			// On démarre un groupe d'items trouves avec un message
+			// On d√©marre un groupe d'items trouves avec un message
 			$suffixe = (count($_trouves) == 1 ? '_1' : '_n');
-			$texte .= '<div style="margin-bottom: 20px">' . "\n";
-			$texte .= '<div class="success">' . "\n";
-			$texte .= _T('langonet:message_ok_item_trouve_' . $_pertinence . $suffixe, array('sous_total' => count($_trouves))) . "\n";
-			$texte .= '</div>' . "\n";
+			$texte .= '<div style="margin-bottom: 20px">' . "\n" .
+			          '<div class="success">' . "\n" .
+			          _T('langonet:message_ok_item_trouve_' . $_pertinence .
+			          $suffixe, array('sous_total'=>count($_trouves))) . "\n" .
+			          '</div>' . "\n";
 			foreach ($_trouves as $_item => $_infos) {
-				$texte .= bouton_block_depliable($_item . ' (' . count($_infos['fichier']) . ')', false);
-				$texte .= debut_block_depliable(false);
-				$texte .= "<p style=\"padding-left:2em;\">  "._T('langonet:texte_item_defini_ou')."\n<br />";
+				$texte .= bouton_block_depliable($_item . ' (' .
+				          count($_infos['fichier']) . ')', false) .
+				          debut_block_depliable(false) .
+				          "<p style=\"padding-left:2em;\">  " .
+				          _T('langonet:texte_item_defini_ou')."\n<br />";
 				foreach ($_infos['fichier'] as $_index => $_fichier_def) {
-					$texte .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" . $_fichier_def . "</span><br />\n";
-					$texte .= "\t<span class=\"explication\" style=\"padding-left:3em;padding-right:0.5em;\"><em>" . $_infos['traduction'][$_index] . "</em></span><br />\n";
+					$texte .= "\t" . '<span style="font-weight:bold;padding-left:2em;">' .
+					          $_fichier_def . "</span><br />\n" .
+					          "\t" . '<span class="explication" style="padding-left:3em;padding-right:0.5em;"><em>' .
+					          $_infos['traduction'][$_index] . "</em></span><br />\n";
 				}
-				$texte .= "</p>\n";
-				$texte .= fin_block();
+				$texte .= "</p>\n" .
+				          fin_block();
 			}
 			$texte .= '</div>' . "\n";
 		}

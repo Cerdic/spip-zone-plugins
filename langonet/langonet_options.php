@@ -10,7 +10,7 @@ define("_LANGONET_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-
  * Creation du select des fichiers de langue
  *
  * @param string $sel_l
- * @return string
+ * @return array
  */
 function langonet_creer_select_langues($sel_l='0') {
 
@@ -125,8 +125,18 @@ function creer_selects($sel_l='0',$sel_d='0') {
 	return $retour = array('fichiers' => $sel_lang, 'dossiers' => $sel_dossier);
 }
 
-function lister_dossiers_plugins($rep_base=null) {
+/**
+ * Lister tous les plugins
+ *
+ * @param string $rep_base
+ * @return array
+ */
 
+// $rep_base  => le repertoire de depart de l'arboresence a scanner
+function lister_dossiers_plugins($rep_base=null) {
+	include_spip('inc/plugin');
+	// liste_plugin_files() integre les repertoires supplementaires de plugins
+	// dans le cadre de la mutualisation
 	$liste_rep = liste_plugin_files($rep_base);
 	if (is_null($rep_base))
 		$rep_base = _DIR_PLUGINS;

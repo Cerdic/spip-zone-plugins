@@ -20,5 +20,6 @@ function langonet_tester_definition() {
 	$essai = _T("langonet:$fond1");
 	$essai = _T('langonet:'.$fond2);
 	$essai = _T("langonet:".$fond3);
+
 }
 ?>

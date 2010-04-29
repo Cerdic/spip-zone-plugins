@@ -57,7 +57,14 @@ function langonet_lister_fichiers_lang() {
 }
 
 
-// Formate la bulle d'information des liens de telechargement 
+/**
+ * Bulle d'information des liens de telechargement 
+ *
+ * @param string $fichier
+ * @param string $type
+ * @return array
+ */
+ 
 function langonet_cree_bulle_telecharger($fichier, $type='log') {
 
 	// Date du fichier formatee
