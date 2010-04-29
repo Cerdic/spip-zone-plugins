@@ -59,6 +59,7 @@ var mediabox_init = function() {
 		var cbox_options = {
 			href:href,
 			overlayClose: (options && options.overlayClose) || false,
+			iframe: (options && options.iframe) || false,
 			minHeight: (options && options.minHeight) || '',
 			maxHeight: (options && options.maxHeight) || box_settings.maxHeight,
 			minWidth: (options && options.minWidth) || box_settings.minWidth,
