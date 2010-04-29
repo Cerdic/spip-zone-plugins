@@ -5,6 +5,7 @@
 	* Copyright (c) 2007
 	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
+	* Version pour SPIP 2: Emmanuel Saint-James
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
@@ -12,87 +13,97 @@
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-	//version actuelle du plugin à changer en cas de maj
-	$GLOBALS['association_version'] = 0.64;	
-		
-function association_verifier_base(){			
-		$version_base = $GLOBALS['association_version'];
-		$current_version = 0.0;
-		if (   (!isset($GLOBALS['meta']['asso_base_version']) )
-		|| (($current_version = $GLOBALS['meta']['asso_base_version'])!=$version_base)) {
-			
-			include_spip('base/association');
-			if ($current_version==0.0){
-				include_spip('base/create');
-				include_spip('base/abstract_sql');
-				creer_base();
-				ecrire_meta('asso_base_version',$current_version=$version_base);
-			}
-			
-			if ($current_version<0.21){
-				spip_query("ALTER TABLE spip_asso_adherents ADD publication text NOT NULL AFTER secteur");
-				ecrire_meta('asso_base_version',$current_version=0.21);
-			}		
-			
-			if ($current_version<0.30){
-				spip_query("DROP TABLE spip_asso_bienfaiteurs");
-				spip_query("DROP TABLE spip_asso_financiers");			
-				ecrire_meta('asso_base_version',$current_version=0.30);
-			}	
-			
-			if ($current_version<0.40){
-				spip_query("ALTER TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` ");
-				ecrire_meta('asso_base_version',$current_version=0.40);
-			}
-			
-			if ($current_version<0.50){
-				spip_query("ALTER TABLE spip_asso_activites ADD membres TEXT NOT NULL AFTER accompagne, ADD non_membres TEXT NOT NULL AFTER membres ");
-				ecrire_meta('asso_base_version',$current_version=0.50);
-			}
-			
-			if ($current_version<0.60){
-				spip_query("DROP TABLE spip_asso_profil  ");
-				ecrire_meta('asso_base_version',$current_version=0.60);
-			}		
-			
-			if ($current_version<0.61){
-				spip_query("RENAME TABLE spip_asso_banques TO spip_asso_plan");
-				spip_query("DROP TABLE spip_asso_livres ");
-				ecrire_meta('asso_base_version',$current_version=0.61);
-			}	
-			
-			if ($current_version<0.62){
-				spip_query("ALTER TABLE spip_asso_plan ADD actif TEXT NOT NULL AFTER commentaires");
-				ecrire_meta('asso_base_version',$current_version=0.62);
-			}
-			
-			if ($current_version<0.63){
-				spip_query("ALTER TABLE spip_asso_ventes ADD id_acheteur BINGINT(20) NOT NULL AFTER acheteur");
-				ecrire_meta('asso_base_version',$current_version=0.63);
-			}
-			
-			if ($current_version<0.64){
+// A chaque modif de la base SQL ou ses conventions (raccourcis etc)
+// le fichier plugin.xml doit indique le numero de depot qui l'implemente sur
+// http://zone.spip.org/trac/spip-zone/timeline
 
-				if(_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') {
-
-				  sql_alter("TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00'");
-				  sql_alter("TABLE spip_auteurs_elargis ADD montant float NOT NULL default '0'");
-				  sql_alter("TABLE spip_auteurs_elargis ADD date date NOT NULL default '0000-00-00' ");
-				  ecrire_meta('asso_base_version',$current_version=0.64);
-				} else {
-					if (_ASSOCIATION_INSCRIPTION2) return false;
-					// Simulation provisoire
-					// Pas de chgt de numero 
-					// tant pis pour les fausses erreurs SQL
-					@sql_alter("TABLE spip_asso_adherents ADD commentaire text NOT NULL default ''");
-					@sql_alter("TABLE spip_asso_adherents ADD statut_interne text NOT NULL default '' ");
-					@sql_alter("TABLE spip_asso_adherents CHANGE COLUMN nom nom_famille text DEFAULT '' NOT NULL");
-				}
-			}
-					
-		}
-		return true;
+function association_version_base()
+{
+	static $version = 0;
+	if (!$version) {
+		$f = _DIR_PLUGINS . 'Association_2.0/plugin.xml';
+		if (!lire_fichier($f, &$r))
+			spip_log("fichier $f illisble");
+		elseif (preg_match("@<version>(\d+)</version>@", $r, $r))
+			$version = $r[1];
 	}
+	return $version;
+}
+
+// MAJ des tables de la base SQL
+// Retourne 0 si ok, le dernier numero de MAJ ok sinon
+
+function association_upgrade(){			
+
+	// compatibilite avec les numeros de version non entiers
+	$installee = !isset($GLOBALS['meta']['asso_base_version']) ? 
+		  0 : (($GLOBALS['meta']['asso_base_version'] > 1) ?
+			$GLOBALS['meta']['asso_base_version'] :
+			($GLOBALS['meta']['asso_base_version'] * 100));
+		
+	$courante = association_version_base();
+	$GLOBALS['association_maj_erreur'] = 0;
+	if ($courante > $installee) {
+		include_spip('base/association');
+		include_spip('base/upgrade');
+		maj_while($installee, association_version_base(), $GLOBALS['association_maj'], 'asso_base_version');
+		// signaler que les dernieres MAJ sont a refaire
+		if ($GLOBALS['association_maj_erreur']) ecrire_meta('asso_base_version', $GLOBALS['association_maj_erreur']-1);
+	}
+	return $GLOBALS['association_maj_erreur'];
+}
+
+
+function association_maj_0(){
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	creer_base();
+}
+			
+$GLOBALS['association_maj'][1] = array(array('association_maj_0'));
+
+$GLOBALS['association_maj'][21] = array(array('sql_alter',"TABLE spip_asso_adherents ADD publication text NOT NULL AFTER secteur"));
+
+$GLOBALS['association_maj'][30] = array(
+	array('sql_drop_table', "spip_asso_bienfaiteurs"),
+	array('sql_drop_table', "spip_asso_financiers")
+					);
+
+$GLOBALS['association_maj'][40] = array(
+	array('sql_alter',"TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` "));
+		
+$GLOBALS['association_maj'][50] = array(
+	array('sql_alter',"TABLE spip_asso_activites ADD membres TEXT NOT NULL AFTER accompagne, ADD non_membres TEXT NOT NULL AFTER membres "));
+		
+$GLOBALS['association_maj'][60] = array(array('sql_drop_table', "spip_asso_profil"));
+		
+$GLOBALS['association_maj'][61] = array(
+	array('spip_query',"RENAME TABLE spip_asso_banques TO spip_asso_plan"),
+	array('sql_drop_table',"spip_asso_livres")
+					);
+$GLOBALS['association_maj'][62] = array(array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL AFTER commentaires"));
+
+$GLOBALS['association_maj'][63] = array(array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BINGINT(20) NOT NULL AFTER acheteur"));
+		
+function association_maj_64(){
+
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') {
+		sql_alter("TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00'");
+		sql_alter("TABLE spip_auteurs_elargis ADD montant float NOT NULL default '0'");
+		sql_alter("TABLE spip_auteurs_elargis ADD date date NOT NULL default '0000-00-00' ");
+	} else {
+		if (_ASSOCIATION_INSCRIPTION2) {
+			if (!$GLOBALS['association_maj_erreur']) $GLOBALS['association_maj_erreur'] = 64;
+			return;
+		}
+		// Simulation provisoire
+		@sql_alter("TABLE spip_asso_adherents ADD commentaire text NOT NULL default ''");
+		@sql_alter("TABLE spip_asso_adherents ADD statut_interne text NOT NULL default '' ");
+		@sql_alter("TABLE spip_asso_adherents CHANGE COLUMN nom nom_famille text DEFAULT '' NOT NULL");
+	}
+}
+
+$GLOBALS['association_maj'][64] = array(array('association_maj_64'));
 
 function association_effacer_tables(){
 		include_spip('base/abstract_sql');
@@ -111,15 +122,14 @@ function association_effacer_tables(){
 	}	
 	
 function association_install($action){
-	$version_base = $GLOBALS['association_version'];
+	$version_base = association_version_base();
 	switch ($action){
 		case 'test':
 			return (isset($GLOBALS['meta']['asso_base_version']) 
 				AND ($GLOBALS['meta']['asso_base_version']>=$version_base));
 			break;
 		case 'install':
-			if (!association_verifier_base()) {
-				unset($GLOBALS['meta']['asso_base_version']);
+			if (association_upgrade()) {
 				echo debut_cadre_enfonce('',true);
 				echo _L('Installer les plugins cfg et Inscription2 avant d\'installer ce plugin!!!'); 
 				echo fin_cadre_enfonce(true);

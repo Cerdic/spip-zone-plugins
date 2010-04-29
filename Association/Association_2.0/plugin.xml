@@ -1,9 +1,9 @@
 <plugin>
 	<nom>Association_2</nom>
 	<auteur>												<!-- Auteur du plugin -->
-	Bernard Blazin - Fran&ccedil;ois de Montlivault 
+	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James
 	</auteur>
-	<version>0.65</version>
+	<version>37762</version>
 	<etat>test</etat>
 	<description>
 		Gestion de petites associations
