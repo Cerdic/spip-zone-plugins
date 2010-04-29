@@ -58,20 +58,20 @@ var mediabox_init = function() {
 	$.modalbox = function (href, options) {
 		var cbox_options = {
 			href:href,
-			overlayClose: options.overlayClose || false,
-			minHeight: options.minHeight || '',
-			maxHeight: options.maxHeight || box_settings.maxHeight,
-			minWidth: options.minWidth || box_settings.minWidth,
-			maxWidth: options.maxWidth || box_settings.maxWidth,
+			overlayClose: (options && options.overlayClose) || false,
+			minHeight: (options && options.minHeight) || '',
+			maxHeight: (options && options.maxHeight) || box_settings.maxHeight,
+			minWidth: (options && options.minWidth) || box_settings.minWidth,
+			maxWidth: (options && options.maxWidth) || box_settings.maxWidth,
 			slideshowStart:box_settings.str_slideshowStart,
 			slideshowStop:box_settings.str_slideshowStop,
 			current:box_settings.str_current,
 			previous:box_settings.str_previous,
 			next:box_settings.str_next,
 			close:box_settings.str_close,
-			onOpen: options.onOpen || null,
-			onComplete: options.onShow || null,
-			onClosed: options.onClose || null
+			onOpen: (options && options.onOpen) || null,
+			onComplete: (options && options.onShow) || null,
+			onClosed: (options && options.onClose) || null
 		};
 		
 		return $.fn.colorbox(cbox_options);
