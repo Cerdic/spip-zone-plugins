@@ -188,8 +188,7 @@ var arraySuffix_#ENV{lang} = ['?','?','?','?','?','?','?','?','?','?','?','?','?
  // Z : Decalage horaire en secondes - -43200 a 43200 
  fct_Z = function() {
   var intTimezone = self.getTimezoneOffset();
-  var intTimezoneAbs = Math.abs(intTimezone);
-  var strTimezone = intTimezoneAbs * 60;
+  var strTimezone = Math.abs(intTimezone) * 60;
   return (intTimezone < 0) ? strTimezone : -strTimezone ;
  }
 

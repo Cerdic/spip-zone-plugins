@@ -18,8 +18,8 @@ function jclock_init() {
 function set_jclock_ajax() {
 	$.get(cs_DateServeur, function(resultat) {
 		var local = new Date();
-		var diff = local.dateFormat("U") - $("U", resultat).text();
-//		var serveurgmt = $("O", resultat).text();
+		// difference entre l'heure locale UTC et l'heure du serveur UTC
+		var diff = local.dateFormat("U") - local.dateFormat("Z") - ($("U", resultat).text() - $("Z", resultat).text());
 		each_jclock(diff);
 		if(typeof $.cookie=='function')
 			$.cookie('cs_jclock_diff', diff);
@@ -152,7 +152,7 @@ $.fn.jclock = function(options) {
 		$this.serveur_offset = o.serveur_offset;
 		$this.zone = o.zone.toLowerCase();
 		$this.utc_offset = false;
-		if($this.zone.length) switch(typeof dstDataBase[$this.zone]) {
+		if($this.zone.length && $this.zone!='serveur') switch(typeof dstDataBase[$this.zone]) {
 			case "number":
 				$this.utc_offset = dstOffset(0, dstDataBase[$this.zone])*3600000;
 				break;
@@ -189,9 +189,11 @@ $.fn.jclock = function(options) {
   $.fn.jclock.getTime = function(el) {
     var now = new Date();
 	if(!el.format) {
-		// ici on veut l'horloge du serveur
 		now = new Date(now.getTime() - el.serveur_offset*1000);
 		el.format = 'H:i:s';
+	} else if(el.zone=='serveur') {
+		// ici on veut l'horloge du serveur
+		now = new Date(now.getTime() - el.serveur_offset*1000);
 	} else if(el.utc_offset!==false) {
 		now = new Date(now.utcTime() + el.utc_offset - el.serveur_offset*1000);
     } else if(el.zone.length) {

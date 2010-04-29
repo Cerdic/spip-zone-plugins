@@ -3,7 +3,7 @@
 if(!isset($GLOBALS['cs_fonctions']) && isset($_GET['cs_dateserveur'])) {
 	header('Content-Type: text/xml');
 	echo '<?xml version="1.0" encoding="UTF-8"?>',
-		'<curTime><O>', date("O"), '</O><U>', date("U"), '</U></curTime>';
+		'<curTime><U>', date("U"), '</U><Z>', date("Z"), '</Z></curTime>';
 	exit;
 }
 
@@ -23,6 +23,7 @@ function horloge_params($args) {
 	$args = explode('||', $args);
 	foreach($args as $a) {
 		list($a, $b) = explode('=', $a, 2);
+		if($b=="''" || $b=='""') $b = '';
 		if(strlen($a)) {
 			if($a=='id') $id = 'jclock'.$b;
 			elseif($a=='defaut') $def = $b;
