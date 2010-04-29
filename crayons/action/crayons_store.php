@@ -323,27 +323,32 @@ function vues_dist($type, $modele, $id, $content, $wid){
 //
 function crayons_update($id, $colval = array(), $type = '')
 {
+	if (!$colval OR !count($colval))
+		return false;
 	list($distant,$table) = distant_table($type);
-	if (!$colval) {
-		return false;
-	}
-	list($nom_table, $where) = table_where($type, $id);
-	if (!$nom_table) {
-		return false;
-	}
 
-	$update = $sep = '';
-	foreach ($colval as $col => $val) {
-		$update .= $sep . '`' . $col . '`=' . _q($val);
-		$sep = ', ';
+	if ($distant) {
+		list($nom_table, $where) = table_where($type, $id);
+		if (!$nom_table)
+			return false;
+
+		$update = $sep = '';
+		foreach ($colval as $col => $val) {
+			$update .= $sep . '`' . $col . '`=' . _q($val);
+			$sep = ', ';
+		}
+
+		$a = spip_query($q =
+					'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where , $distant );
+
+		#spip_log($q);
+		include_spip('inc/invalideur');
+		suivre_invalideur($cond, $modif=true);
 	}
-
-	$a = spip_query($q =
-        'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where , $distant );
-
-	#spip_log($q);
-	include_spip('inc/invalideur');
-	suivre_invalideur($cond, $modif=true);
+	else {
+		include_spip('inc/modifier');
+		$a = modifier_contenu($type, $id, array(), $colval);
+	}
 
 	return $a;
 }
