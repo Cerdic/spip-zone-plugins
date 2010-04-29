@@ -30,7 +30,7 @@ function verifier_email_dist($valeur, $options=array()){
 		$mode = $options['mode'];
 	}
 		
-	$fonctions_disponibles = array('normal' => 'email_valide', 'rfc5322' => 'verifier_email_5322', 'strict' => 'verifier_email_de_maniere_stricte');
+	$fonctions_disponibles = array('normal' => 'email_valide', 'rfc5322' => 'verifier_email_rfc5322', 'strict' => 'verifier_email_de_maniere_stricte');
 	$fonction_verif = $fonctions_disponibles[$mode];
 	
 	if (!$fonction_verif($valeur))
