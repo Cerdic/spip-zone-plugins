@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Agenda 2.0</nom>
-	<icon>img_pack/agenda-48.png</icon>
+	<icon>icon.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	[C&eacute;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net], [Julien Tessier->http://www.cahri.com]
 	</auteur>
