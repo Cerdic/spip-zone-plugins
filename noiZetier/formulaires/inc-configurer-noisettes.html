@@ -16,8 +16,6 @@
 					[(#PLUGIN{saisies}|oui)
 						[(#VOIR_SAISIES{#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres},[(#PARAMETRES|unserialize)]})]
 					]
-					Noisette : #NOISETTE
-					Param :#PARAMETRES
 					
 					<BOUCLE_si_pas_saisies(CONDITION){si #PLUGIN{saisies}|non}>
 					<BOUCLE_parametres(POUR){tableau #PARAMETRES|unserialize}>
