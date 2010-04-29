@@ -7,6 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   // A
   'article_origine' => 'Cet article est repris du site', 
+  'activer_recopie_intro' => 'Flux RSS en Articles',
+  'activer_recopie' => 'Copier les articles issus de ce flux RSS en articles SPIP',
 
   // C
   'citer_source' => 'Citer la source',
@@ -22,7 +24,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'email_alerte_email' => 'Si oui, sur quel email ? ',
   
   // I
-  'install_rssarticle' => 'Cr&eacute;ation de la table spip_articles_syndic'
+  'install_rssarticle' => 'Cr&eacute;ation de la table spip_articles_syndic',
+  
+  // M
+  'mode' => 'Mode de fonctionnement',
+  'mode_auto' => 'Mode automatique: tous les sites r&eacute;f&eacute;renc&eacute;s sont recopi&eacute;s en articles',
+  'mode_manuel' => 'Mode manuel: vous selectionnez manuellement les sites r&eacute;f&eacute;renc&eacute;s qui doivent être recopi&eacute;s en articles'  
   
 
 );

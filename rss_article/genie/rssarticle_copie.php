@@ -18,15 +18,17 @@ function genie_rssarticle_copie_dist($t){
   
   // si cfg dispo, on charge les valeurs
   if (function_exists(lire_config))  {
-        $import_statut = lire_config('rssarticle/import_statut');      
+        $import_statut = lire_config('rssarticle/import_statut');    
+        if (lire_config('rssarticle/mode')=="auto")       $mode_auto=true; else  $mode_auto=false;  
         if (lire_config('rssarticle/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
-        if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;
+        if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;        
         $email_suivi = lire_config('rssarticle/email_suivi'); 
   } else { // sinon valeur par defaut
-        $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié)      
+        $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié) 
+        $mode_auto=false;                // mode: manuel     
         $email_alerte = false;           // envoi email  ?
         $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial
-        $copie_logo = false;            // reprendre le logo du site
+        $copie_logo = false;            // reprendre le logo du site        
   }
   
   // autres valeurs

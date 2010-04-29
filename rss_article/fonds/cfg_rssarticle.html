@@ -1,5 +1,5 @@
 #CACHE{0}
-[(#REM) descriptif=Options des copies des flux RSS en articles]
+[(#REM) descriptif=Options des copies des flux RSS en articles <p><a href="http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles">Documentation</a></p>]
 [(#REM) titre=Copie RSS en articles]
 [(#REM) icone=img/rss20.png]
 
@@ -11,6 +11,14 @@
       </select>
  </fieldset>
  
+  <fieldset><legend><:rssarticle:mode:></legend>
+  <p>
+  <label><input type="radio" name="mode" value="auto" [(#ENV{mode}|=={auto}?{checked='checked',''})] /><:rssarticle:mode_auto:></label><br />
+  <label><input type="radio" name="mode" value="manuel" [(#ENV{mode}|=={manuel}?{checked='checked',''})] /><:rssarticle:mode_manuel:></label>
+  </p>
+  </fieldset>
+  
+  
 
  <fieldset><legend><:rssarticle:suivi_syndic:></legend>
   <p>       
@@ -23,14 +31,6 @@
   </p>
   </fieldset>
   
-
- 
- <fieldset><legend><:rssarticle:citer_source_oui:></legend>
-  <p>
-  <label><input type="checkbox" name="citer_source"[ checked="(#ENV{citer_source}|!={''}|?{'checked'})"] class="fondl" />
-  <:rssarticle:citer_source_oui:></label>
-  </p>
-  </fieldset>
   
   <fieldset><legend><:rssarticle:copie_logo:></legend>
   <p>
