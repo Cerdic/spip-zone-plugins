@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Proposer Evenement</nom>
+	<icon>icon.png</icon>
 	<auteur>C&eacute;dric MORIN [->http://www.yterium.net]</auteur>
 	<licence>GPL 3 - &#169; 2010</licence>
 	<version>0.1.2</version>
