@@ -1,0 +1,10 @@
+<plugin>
+<nom>Varicelle</nom>
+<icon>icon.png</icon>
+<description>Un plugin qui donne des boutons...</description>
+<version>0.1</version>
+<etat>dev</etat>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
+<prefix>varicelle</prefix>
+<necessite id="SPIP" version="[;]" />
+</plugin>
