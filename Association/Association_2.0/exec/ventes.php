@@ -28,10 +28,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_edit_vente=generer_url_ecrire('edit_vente','agir=modifie');
 		$url_ajout_vente=generer_url_ecrire('edit_vente','agir=ajoute');
 		
-		$annee=$_GET['annee'];
-		if(empty($annee)){$annee = date('Y');}
+		$annee=intval(_request('annee'));
+		if(!$annee) $annee = date('Y');
 		
-		  $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('Gestion pour Association')) ;
 		
 		association_onglets();
@@ -43,8 +43,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<p>En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e</p>'; 
 		
 		// TOTAUX
-		$query = spip_query( "SELECT imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation ='".lire_config('association/pc_ventes')."' ");
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation =". sql_quote(lire_config('association/pc_ventes')));
+		while ($data = sql_fetch($query)) {
 			$solde= $data['somme_depenses'] + $data['somme_recettes'];
 			$imputation = $data['imputation'];
 			echo '<table width="100%">';
@@ -73,7 +73,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td>';
 		
 		$query = sql_select("date_format( date_vente, '%Y' )  AS annee", "spip_asso_ventes", "", "annee", "annee");
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			if ($data['annee']==$annee)	{echo ' <strong>'.$data['annee'].'</strong>';}
 			else {echo ' <a href="'.$url_ventes.'&annee='.$data['annee'].'">'.$data['annee'].'</a>';}
 		}
@@ -94,30 +94,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td style="text-align:right"><strong>Montant</strong></td>';
 		echo '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>';
 		echo '</tr>';
-		
-		$query = spip_query ("SELECT * FROM spip_asso_ventes WHERE date_format( date_vente, '%Y' ) = '$annee'  ORDER by id_vente DESC") ;
-		while ($data = spip_fetch_array($query)) {
+		$ventes = '';
+		$query = sql_select('*', 'spip_asso_ventes', "date_format( date_vente, '%Y' )='$annee'", '',  "id_vente DESC") ;
+		while ($data = sql_fetch($query)) {
 			if(isset($data['date_envoi'])) { $class= "pair"; }
 			else {$class="impair";}   
-			echo '<tr> ';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['id_vente'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_datefr($data['date_vente']).'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['article'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['acheteur'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['id_acheteur'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['quantite'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
-			echo '</tr>';
+			$ventes .= '<tr> ';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['id_vente'].'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_datefr($data['date_vente']).'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['article'].'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['acheteur'].'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['id_acheteur'].'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['quantite'].'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
+			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
+			$ventes .= '</tr>';
 		}     
-		echo '</table>';
+		echo $ventes, '</table>';
 		
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td  style="text-align:right;">';
-		echo '<input type="submit" name="Submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
+		echo !$ventes ? '' : ('<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo">');
 		echo '</table>';
 		echo '</form>';
 		

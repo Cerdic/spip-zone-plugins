@@ -161,6 +161,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
 		switch($data['statut_interne'])	{
@@ -171,33 +172,33 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		default : $class="prospect"; break;	   
 		}
 		
-		$res .= '<tr> ';
-		$res .= '<td style="text-align:right;" class="'.$class. ' border1">';
-		$res .= ($indexation=="id_asso") ? $data["id_asso"] : $id_auteur;
-		$res .= '</td>';
-		$res .= '<td class="'.$class. ' border1">';
+		$auteurs .= '<tr> ';
+		$auteurs .= '<td style="text-align:right;" class="'.$class. ' border1">';
+		$auteurs .= ($indexation=="id_asso") ? $data["id_asso"] : $id_auteur;
+		$auteurs .= '</td>';
+		$auteurs .= '<td class="'.$class. ' border1">';
 
 		$logo = $chercher_logo($id_auteur, 'id_auteur');
 		if ($logo) {
-		  $res .= '<img src="'. $logo[0] .  '" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+		  $auteurs .= '<img src="'. $logo[0] .  '" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
 		}else{
-		  $res .= '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+		  $auteurs .= '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
 		}
-		$res .= '</td>';
-		$res .= '<td class="'.$class. ' border1">';
+		$auteurs .= '</td>';
+		$auteurs .= '<td class="'.$class. ' border1">';
 		if (empty($data["email"])) { 
-		$res .= $data["nom_famille"].'</td>'; 
+		$auteurs .= $data["nom_famille"].'</td>'; 
 		} else {
-		$res .= '<a href="mailto:'.$data["email"].'">'.$data["nom_famille"].'</a></td>';
+		$auteurs .= '<a href="mailto:'.$data["email"].'">'.$data["nom_famille"].'</a></td>';
 		}
-		$res .= '<td class="'.$class. ' border1">'.$data["prenom"].'</td>';
-		$res .= '<td class="'.$class. ' border1">';
-		$res .=sql_getfetsel("valeur", "spip_asso_categories", "id_categorie=".intval($data["categorie"]));
-		$res .= '</td>';
-		$res .= '<td class="'.$class. ' border1">';
-		if ($data['validite']==""){$res .= '&nbsp;';}else{$res .= association_datefr($data['validite']);}
-		$res .= '</td>';
-		$res .= '<td class="'.$class. ' border1">';
+		$auteurs .= '<td class="'.$class. ' border1">'.$data["prenom"].'</td>';
+		$auteurs .= '<td class="'.$class. ' border1">';
+		$auteurs .=sql_getfetsel("valeur", "spip_asso_categories", "id_categorie=".intval($data["categorie"]));
+		$auteurs .= '</td>';
+		$auteurs .= '<td class="'.$class. ' border1">';
+		if ($data['validite']==""){$auteurs .= '&nbsp;';}else{$auteurs .= association_datefr($data['validite']);}
+		$auteurs .= '</td>';
+		$auteurs .= '<td class="'.$class. ' border1">';
 		switch($data['statut'])	{
 		case "0minirezo":
 			$logo= "admin-12.gif"; break;
@@ -210,15 +211,15 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		default :
 			$logo="adher-12.gif"; break;
 		}
-		$res .= '<a href="'.$url_editer_auteur.'&id_auteur='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
-		$res .= '<td class="'.$class. ' border1"><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
-		$res .= '<td class="'.$class. ' border1"><a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
-		$res .= '<td class="'.$class. ' border1"><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
-		$res .= '<td class="'.$class. ' border1"><input name="delete[]" type="checkbox" value='.$data['id_auteur'].'></td>';
-		$res .= '</tr>';
+		$auteurs .= '<a href="'.$url_editer_auteur.'&id_auteur='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
+		$auteurs .= '<td class="'.$class. ' border1"><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+		$auteurs .= '<td class="'.$class. ' border1"><a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
+		$auteurs .= '<td class="'.$class. ' border1"><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
+		$auteurs .= '<td class="'.$class. ' border1"><input name="delete[]" type="checkbox" value='.$data['id_auteur'].'></td>';
+		$auteurs .= '</tr>';
 	}
 	
-	$res .= '</table>';
+	$res .= $auteurs . '</table>';
 	
 	//SOUS-PAGINATION
 	$res .= '<table width=100%>';
@@ -242,7 +243,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	}
 	
 	$res .= '<td  style="text-align:right;">';
-	$res .= '<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
+	$res .= !$auteurs ? '' : ('<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo">');
 	$res .= '</td>';
 	$res .= '</table>';
 

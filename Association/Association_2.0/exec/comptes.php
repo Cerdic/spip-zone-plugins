@@ -130,7 +130,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	$debut= intval(_request('debut'));
 
 	$query = sql_select('*', "spip_asso_comptes", "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'", '',  'date DESC', "$debut,$max_par_page");
-
+	$auteurs = '';
 	while ($data = sql_fetch($query)) {
 		if ($data['recette'] >0) { $class= "pair";}
 		else { $class="impair";}	   
@@ -138,22 +138,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$somme_recettes += $data['recette'];
 		$somme_depenses += $data['depense'];
 		
-		echo '<tr> ';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_compte'].'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date']).'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['imputation'].'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.propre($data['justification']).'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_nbrefr($data['recette']-$data['depense']).'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['journal'].'</td>';
-		if($data['valide']=='oui') {echo '<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>';}
+		$auteurs .= '<tr> ';
+		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_compte'].'</td>';
+		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date']).'</td>';
+		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['imputation'].'</td>';
+		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.propre($data['justification']).'</td>';
+		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_nbrefr($data['recette']-$data['depense']).'</td>';
+		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['journal'].'</td>';
+		if($data['valide']=='oui') {$auteurs .= '<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>';}
 		else {
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour"></a></td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_comptes.'&agir=supprime&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;;text-align:center"><input name="valide[]" type="checkbox" value='.$data['id_compte'].'></td>';
+			$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour"></a></td>';
+			$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_comptes.'&agir=supprime&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;;text-align:center"><input name="valide[]" type="checkbox" value='.$data['id_compte'].'></td>';
 		}
-		echo '</tr>';
+		$auteurs .= '</tr>';
 	}
-	echo '</table>';
+	echo $auteurs, '</table>';
 
 	echo '<table width="100%">';
 	echo '<tr>';
@@ -174,7 +174,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	}
 	echo '</td>';
 	echo '<td  style="text-align:right;">';
-	echo '<input type="submit" name="Submit" value="Valider" class="fondo">';
+	echo !$auteurs ? '' : ('<input type="submit" value="Valider" class="fondo">');
 	echo '</td>';
 	echo '</table>';
 	echo '</form>';
