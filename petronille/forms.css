@@ -6,8 +6,9 @@
 
 -------------------------------------------------------------- */
 
-form * { font-size: 100%; line-height: inherit; font-family: inherit; }
+input,textarea,select,button { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; }
 
 .spip_surligne { background-color: yellow; }
+
 
 /* end */
