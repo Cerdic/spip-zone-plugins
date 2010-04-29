@@ -1,7 +1,9 @@
 <plugin>
 <nom>Varicelle</nom>
 <icon>icon.png</icon>
-<description>De jolis boutons, en CSS3, pour styler d'un coup tous les boutons du site&nbsp;! Voir&nbsp;: <a href="../?page=varicelle">?page=varicelle</a></description>
+<description>Transforme d'un coup tous les boutons du site en jolis boutons, l&eacute;gers et performants (en CSS3 sans image)&nbsp;!
+D&eacute;mo&nbsp;: <a href="../?page=varicelle">?page=varicelle</a></description>
+<lien>http://www.spip-contrib.net/varicelle</lien>
 <version>0.1.5</version>
 <etat>dev</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
