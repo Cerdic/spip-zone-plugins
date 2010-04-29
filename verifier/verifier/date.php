@@ -8,6 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * TODO : introduire via les options le FORMAT de la date, pour accepter différentes écritures
  * On pourrait faire mieux, genre vérifier les jours en fonction du mois
  * Mais c'est pas très important, on reste simple
+ *
+ * @param string $valeur La valeur à vérifier.
+ * @param array $option tableau d'options [NON UTILISE].
+ * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 
 function verifier_date_dist($valeur, $options=array()){

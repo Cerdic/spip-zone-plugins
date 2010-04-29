@@ -5,6 +5,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Vérifier une taille minimale/maximale, pour un mot de passe par exemple
+ *
+ * @param string $valeur La valeur à vérifier.
+ * @param array $option Les éléments à vérifier (min, max, egal).
+ * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 
 function verifier_taille_dist($valeur, $options=array()){

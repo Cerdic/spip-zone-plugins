@@ -3,8 +3,12 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/*
- * Verifie la validite d'une adresse de courriel.
+/**
+ * Vérifie la validité d'une adresse de courriel.
+ *
+ * @param string $valeur La valeur à vérifier.
+ * @param array $option Un éventuel tableau d'options.
+ * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_email_dist($valeur, $options=array()){
 	include_spip('inc/filtres');
@@ -36,10 +40,11 @@ function verifier_email_dist($valeur, $options=array()){
 
 /**
  * Changement de la RegExp d'origine
- * Non respect des RFC beaucoup trop souples à mon sens
- * On INTERDIT les mails dont les domaines ne sont pas "valides"
- * On INTERDIT les adresses qui comportent autre chose que des tirets / tirets bas / point
- * (même si les autres caractères sont autorisés, tant pis, ils sont trop rares)
+ *
+ * Respect de la RFC5322 
+ * @link (phraseur détaillé ici : http://www.dominicsayers.com/isemail/)
+ * @param string $valeur La valeur à vérifier
+ * @return boolean Retourne true uniquement lorsque le mail est valide
  */
 function verifier_email_de_maniere_stricte($valeur){
 	// Si c'est un spammeur autant arreter tout de suite
@@ -58,6 +63,9 @@ function verifier_email_de_maniere_stricte($valeur){
 /**
  * Vérifier que le courriel utilisé n'est pas
  * déjà présent en base SPIP_AUTEURS
+ *
+ * @param string $valeur La valeur à vérifier
+ * @return boolean Retourne false lorsque le mail est déjà utilisé
  */
 function verifier_disponibilite_email($valeur){
 	include_spip('base/abstract_sql');

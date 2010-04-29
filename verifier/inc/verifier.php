@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/*
+/**
  * Fonction de base de l'API de vérification.
  * @param mixed $valeur La valeur a verifier.
  * @param string $type Le type de verification a appliquer.
@@ -40,7 +40,7 @@ function inc_verifier_dist($valeur, $type, $options=null){
 	return $erreur;
 }
 
-/*
+/**
  * Liste toutes les vérifications possibles
  *
  * @return Retourne un tableau listant les vérifications et leurs options
