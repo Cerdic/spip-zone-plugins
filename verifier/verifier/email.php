@@ -5,6 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Vérifie la validité d'une adresse de courriel.
+ * 
+ * Les contraintes du mail sont déterminées par le mode de validation
+ * En option, on contrôle aussi la disponibilité du mail dans la table des auteurs
  *
  * @param string $valeur La valeur à vérifier.
  * @param array $option Un éventuel tableau d'options.
@@ -20,17 +23,15 @@ function verifier_email_dist($valeur, $options=array()){
 	}
 	
 	// Choix du mode de verification de la syntaxe des courriels
-	if (!$options['mode'] or !in_array($options['mode'], array('strict'))){
+	if (!$options['mode'] or !in_array($options['mode'], array('normal','rfc5322','strict'))){
 		$mode = 'normal';
 	}
 	else{
 		$mode = $options['mode'];
 	}
 		
-	if ($mode == 'normal')
-		$fonction_verif = 'email_valide';
-	else
-		$fonction_verif = 'verifier_email_de_maniere_stricte';
+	$fonctions_disponibles = array('normal' => 'email_valide', 'rfc5322' => 'verifier_email_5322', 'strict' => 'verifier_email_de_maniere_stricte');
+	$fonction_verif = $fonctions_disponibles[$mode];
 	
 	if (!$fonction_verif($valeur))
 		return _T('verifier:erreur_email', array('email' => echapper_tags($valeur)));
@@ -42,11 +43,12 @@ function verifier_email_dist($valeur, $options=array()){
  * Changement de la RegExp d'origine
  *
  * Respect de la RFC5322 
+ *
  * @link (phraseur détaillé ici : http://www.dominicsayers.com/isemail/)
  * @param string $valeur La valeur à vérifier
  * @return boolean Retourne true uniquement lorsque le mail est valide
  */
-function verifier_email_de_maniere_stricte($valeur){
+function verifier_email_rfc5322($valeur){
 	// Si c'est un spammeur autant arreter tout de suite
 	if (preg_match(",[\n\r].*(MIME|multipart|Content-),i", $valeur)) {
 		spip_log("Tentative d'injection de mail : $valeur");
@@ -61,8 +63,34 @@ function verifier_email_de_maniere_stricte($valeur){
 }
 
 /**
- * Vérifier que le courriel utilisé n'est pas
- * déjà présent en base SPIP_AUTEURS
+ * Version basique du contrôle des mails
+ *
+ * Cette version impose des restrictions supplémentaires
+ * qui sont souvent utilisées pour des raison de simplification des adresses
+ * (ex. comptes utilisateurs lisibles, etc..)
+ *
+ * @param string $valeur La valeur à vérifier
+ * @return boolean Retourne true uniquement lorsque le mail est valide
+ */
+function verifier_email_de_maniere_stricte($valeur){
+	// Si c'est un spammeur autant arreter tout de suite
+	if (preg_match(",[\n\r].*(MIME|multipart|Content-),i", $valeur)) {
+		spip_log("Tentative d'injection de mail : $valeur");
+		return false;
+	}
+	foreach (explode(',', $valeur) as $adresse) {
+		// nettoyer certains formats
+		// "Marie Toto <Marie@toto.com>"
+		$adresse = trim(preg_replace(",^[^<>\"]*<([^<>\"]+)>$,i", "\\1", $v));
+		if (!preg_match('/^([A-Za-z0-9]){1}([A-Za-z0-9]|-|_|\.)*@[A-Za-z0-9]([A-Za-z0-9]|-|\.){1,}\.[A-Za-z]{2,4}$/', $adresse))
+			return false;
+	}
+	return true; 
+}
+
+/**
+ * Vérifier que le courriel à tester n'est pas
+ * déjà utilisé dans la table spip_auteurs
  *
  * @param string $valeur La valeur à vérifier
  * @return boolean Retourne false lorsque le mail est déjà utilisé
