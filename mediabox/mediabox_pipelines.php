@@ -18,7 +18,7 @@ function mediabox_config($public=null){
 		'minHeight'=>'',
 	), $config);
 
-	if ((is_null($public) AND test_espace_prive()) OR $public) {
+	if ((is_null($public) AND test_espace_prive()) OR !$public) {
 		$config = array_merge($config,array(
 		'selecteur_galerie' => '#portfolios a[type^=\'image/\']',
 		'selecteur_commun' => '.mediabox, .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
