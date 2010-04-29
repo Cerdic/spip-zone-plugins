@@ -10,5 +10,3 @@ Realise :
 - remodelage de certains points d'entree du tableau de bord et de la redaction.
 
 Todo :
-- ameliorer page=annuaire : l'affichage en tableau peut passer mais l'astuce du </tr> (cf. contenu/page-annuaire.html) n'est pas top dans le cas d'un nombre d'auteurs multiple de 4. </tr> est en doublon.
-- creer les pages de creation et d'edition des breves/sites et cie pour la partie public pour ne plus passer par l'espace prive de SPIP. => garder une unite graphique de l'outil.

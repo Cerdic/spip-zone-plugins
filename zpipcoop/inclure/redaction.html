@@ -14,7 +14,7 @@
 	
 	[(#REM) Consernant les rubriques]
 	[(#ENV{id_rubrique}|oui)[(#ENV{id_rubrique}|=={oui}|non)[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
-	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=#ID_RUBRIQUE,id_parent=[(#ID_PARENT|sinon{'0'})]}|parametre_url{retour,[(#URL_RUBRIQUE|url_absolue)]})]" class="edit" title="<:zpipcoop:editer_rubrique|attribut_html:>"><:zpipcoop:editer_groupe:></a></li>]]]
-	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_RUBRIQUE})]" class="add" title="<:zpipcoop:nouvelle_rubrique|attribut_html:>"><:zpipcoop:nouveau_groupe:></a></li>
+	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=#ID_RUBRIQUE,id_parent=[(#ID_PARENT|sinon{'0'})]}|parametre_url{retour,[(#URL_RUBRIQUE|url_absolue)]})]" class="edit" title="<:zpipcoop:editer_groupe|attribut_html:>"><:zpipcoop:editer_groupe:></a></li>]]]
+	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_RUBRIQUE})]" class="add" title="<:zpipcoop:nouveau_groupe|attribut_html:>"><:zpipcoop:nouveau_groupe:></a></li>
 	</ul>
 	</div>]

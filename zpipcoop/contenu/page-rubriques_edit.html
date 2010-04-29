@@ -1,7 +1,5 @@
 [(#REM)
-
-	Un petit descriptif ne serait pas superflu
-
+	Une page pour editer les rubriques
 ]
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
@@ -9,7 +7,7 @@
 	<B_titre><:icone_modifier_rubrique:>
 	<BOUCLE_titre(RUBRIQUES) {id_rubrique}>
 	<h1>#TITRE</h1></BOUCLE_titre></B_titre>
-	<h1><:zpipcoop:nouvelle_rubrique:></h1><//B_titre>
+	<h1><:zpipcoop:nouveau_groupe:></h1><//B_titre>
 </div>
 [(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
 #FORMULAIRE_EDITER_RUBRIQUE{#ID_RUBRIQUE,#ID_PARENT,#ENV{retour}}

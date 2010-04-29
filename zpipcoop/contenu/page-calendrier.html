@@ -1,12 +1,10 @@
-
-	<div id="content_wrap">
-		<div id="content">
-			<div id="caption">
-				<h2><:zpipcoop:agenda:></h2>
-			</div><!--#caption-->
-			<div class="post">
-				[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}{ajax}>]
-			</div><!--.post-->
-		</div><!--#content-->
-	</div><!--#content_wrap-->
-
+<div id="content_wrap">
+	<div id="content">
+		<div id="caption">
+			<h2><:zpipcoop:agenda:></h2>
+		</div><!--#caption-->
+		<div class="post">
+			[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}{ajax}>]
+		</div><!--.post-->
+	</div><!--#content-->
+</div><!--#content_wrap-->
