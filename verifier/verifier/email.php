@@ -47,12 +47,9 @@ function verifier_email_de_maniere_stricte($valeur){
 		spip_log("Tentative d'injection de mail : $valeur");
 		return false;
 	}
-	foreach (explode(',', $valeur) as $v) {
-		// nettoyer certains formats
-		// "Marie Toto <Marie@toto.com>"
-		$adresse = trim(preg_replace(",^[^<>\"]*<([^<>\"]+)>$,i", "\\1", $v));
-		// NOUVELLE REGEXP NE RESPECTANT PLUS RFC 822 MAIS MOINS TOLERANTE
-		if (!preg_match('/^([A-Za-z0-9]){1}([A-Za-z0-9]|-|_|\.)*@[A-Za-z0-9]([A-Za-z0-9]|-|\.){1,}\.[A-Za-z]{2,4}$/', $adresse))
+	include_spip('inc/is_email');
+	foreach (explode(',', $valeur) as $adresse) {
+		if (!is_email(trim($adresse)))
 			return false;
 	}
 	return true;
