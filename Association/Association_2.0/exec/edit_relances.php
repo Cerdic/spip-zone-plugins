@@ -100,15 +100,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			}
 			
 			echo '<tr> ';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">';
+			echo '<td class="'.$class. ' border1" style="text-align:right">';
 			if ($indexation=="id_asso") { echo $data["id_asso"];}
 			else { echo $data["a.id_auteur"];}
 			echo '</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data["nom_famille"].' '.$data['prenom'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['telephone'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['mobile'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['validite']).'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;">';
+			echo '<td class="'.$class. ' border1">'.$data["nom_famille"].' '.$data['prenom'].'</td>';
+			echo '<td class="'.$class. ' border1">'.$data['telephone'].'</td>';
+			echo '<td class="'.$class. ' border1">'.$data['mobile'].'</td>';
+			echo '<td class="'.$class. ' border1">'.association_datefr($data['validite']).'</td>';
+			echo '<td class="'.$class. ' border1" style="text-align:center;">';
 			echo '<input name="id[]" type="checkbox" value="'.$id_auteur.'" checked="checked" >';
 			echo '<input name="statut[]" type="hidden" value="'.$statut_interne.'">';
 			echo '<input name="email[]" type="hidden" value="'.$email.'">';

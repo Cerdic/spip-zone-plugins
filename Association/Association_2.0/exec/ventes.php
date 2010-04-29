@@ -100,16 +100,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			if(isset($data['date_envoi'])) { $class= "pair"; }
 			else {$class="impair";}   
 			$ventes .= '<tr> ';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['id_vente'].'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_datefr($data['date_vente']).'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['article'].'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['acheteur'].'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['id_acheteur'].'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['quantite'].'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
-			$ventes .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
+			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.$data['id_vente'].'</td>';
+			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.association_datefr($data['date_vente']).'</td>';
+			$ventes .= '<td class="'.$class. ' border1">'.$data['article'].'</td>';
+			$ventes .= '<td class="'.$class. ' border1">'.$data['code'].'</td>';
+			$ventes .= '<td class="'.$class. ' border1">'.$data['acheteur'].'</td>';
+			$ventes .= '<td class="'.$class. ' border1">'.$data['id_acheteur'].'</td>';
+			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.$data['quantite'].'</td>';
+			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
+			$ventes .= '<td class="'.$class. ' border1" style="text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
+			$ventes .= '<td class="'.$class. ' border1" style="text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
 			$ventes .= '</tr>';
 		}     
 		echo $ventes, '</table>';

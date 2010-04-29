@@ -139,17 +139,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$somme_depenses += $data['depense'];
 		
 		$auteurs .= '<tr> ';
-		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_compte'].'</td>';
-		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date']).'</td>';
-		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['imputation'].'</td>';
-		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.propre($data['justification']).'</td>';
-		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_nbrefr($data['recette']-$data['depense']).'</td>';
-		$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['journal'].'</td>';
+		$auteurs .= '<td class="'.$class. ' border1" style="text-align:right;">'.$data['id_compte'].'</td>';
+		$auteurs .= '<td class="'.$class. ' border1" style="text-align:right;">'.association_datefr($data['date']).'</td>';
+		$auteurs .= '<td class="'.$class. ' border1">'.$data['imputation'].'</td>';
+		$auteurs .= '<td class="'.$class. ' border1">'.propre($data['justification']).'</td>';
+		$auteurs .= '<td class="'.$class. ' border1" style="text-align:right;">'.association_nbrefr($data['recette']-$data['depense']).'</td>';
+		$auteurs .= '<td class="'.$class. ' border1">'.$data['journal'].'</td>';
 		if($data['valide']=='oui') {$auteurs .= '<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>';}
 		else {
-			$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour"></a></td>';
-			$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_comptes.'&agir=supprime&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			$auteurs .= '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;;text-align:center"><input name="valide[]" type="checkbox" value='.$data['id_compte'].'></td>';
+			$auteurs .= '<td class="'.$class. ' border1" style="text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour"></a></td>';
+			$auteurs .= '<td class="'.$class. ' border1" style="text-align:center;"><a href="'.$url_action_comptes.'&agir=supprime&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			$auteurs .= '<td class="'.$class. ' border1" style="text-align:center"><input name="valide[]" type="checkbox" value='.$data['id_compte'].'></td>';
 		}
 		$auteurs .= '</tr>';
 	}
