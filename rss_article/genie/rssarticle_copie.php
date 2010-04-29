@@ -19,17 +19,18 @@ function genie_rssarticle_copie_dist($t){
   // si cfg dispo, on charge les valeurs
   if (function_exists(lire_config))  {
         $import_statut = lire_config('rssarticle/import_statut');      
-        if (lire_config('rssarticle/citer_source')=="on") $citer_source=true; else  $citer_source=false;
         if (lire_config('rssarticle/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
         if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;
         $email_suivi = lire_config('rssarticle/email_suivi'); 
   } else { // sinon valeur par defaut
         $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié)      
-        $citer_source = true;            // citer source ?
         $email_alerte = false;           // envoi email  ?
         $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial
         $copie_logo = false;            // reprendre le logo du site
   }
+  
+  // autres valeurs
+  $accepter_forum =	substr($GLOBALS['meta']['forums_publics'],0,3);
   
   // principe de pile:
   // on boucle sur les derniers articles syndiques pour les retirer ensuite
@@ -55,9 +56,7 @@ function genie_rssarticle_copie_dist($t){
             $lang  = $a['lang'];
             $url   = $a['url'];
             $tags =  $a['tags'];
-            
-            if ($citer_source)
-                   $texte .= "\n\n\n{"._T('rssarticle:article_origine')."} [->$url]";           
+          
             if ($lang=="") 	
                 $lang = $GLOBALS['spip_lang'];    
         
@@ -66,8 +65,8 @@ function genie_rssarticle_copie_dist($t){
             $id_article = sql_insertq( 'spip_articles', array(
                                 'titre'=>$titre, 'id_rubrique'=>$id_rubrique,
                                 'texte'=>$texte, 'statut'=>$import_statut, 'id_secteur'=>$id_secteur,
-                                'date'=> $lsDate, 'accepter_forum'=>'non', 'lang'=>$lang));
-             
+                                'date'=> $lsDate, 'accepter_forum'=>$accepter_forum, 'lang'=>$lang, 'url_site'=>$url));
+                                
             // lierarticle et site
             sql_insertq( 'spip_articles_syndic', array('id_article'=>$id_article, 'id_syndic'=>$id_syndic));
                                 
