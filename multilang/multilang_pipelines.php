@@ -78,12 +78,23 @@ function multilang_inserer_head($flux,$config=array()){
 	// - onAjaxLoad (cas des docs et de la configuration du site)
 
 	$flux .= '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js").'"></script>
-			  <script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
-			  <script type="text/javascript">
-			  var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
-			  multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
-			  dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
-			  jQuery(document).ready(function(){
+			  	<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
+			  	<script type="text/javascript">
+			  	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
+			  	multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
+				multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
+			  	dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
+
+				// On trie les langues. langue principale en premier,
+				// puis langue de l environnement puis les autres en ordre alphabetique
+				multilang_avail_langs = jQuery.grep(multilang_avail_langs, function(value) {
+					 return (value != multilang_def_lang && value != multilang_lang_courante);
+				});
+				multilang_avail_langs.sort() ;
+				if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_lang_courante) ;
+				multilang_avail_langs.unshift(multilang_def_lang) ;
+				
+			  	jQuery(document).ready(function(){
 					function multilang_init(){
 						root = "'.$root.'" ;
 						fields_selector = "textarea,input:text:not(input#id_parent,input.password,input#new_login,#titreparent,*.nomulti),.multilang" ;
