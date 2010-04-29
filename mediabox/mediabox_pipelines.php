@@ -1,6 +1,6 @@
 <?php
 
-function mediabox_config(){
+function mediabox_config($public=null){
 	include_spip("inc/filtres");
 	$config = @unserialize($GLOBALS['meta']['mediabox']);
 	if (!is_array($config))
@@ -18,7 +18,7 @@ function mediabox_config(){
 		'minHeight'=>'',
 	), $config);
 
-	if (test_espace_prive()) {
+	if ((is_null($public) AND test_espace_prive()) OR $public) {
 		$config = array_merge($config,array(
 		'selecteur_galerie' => '#portfolios a[type^=\'image/\']',
 		'selecteur_commun' => '.mediabox, .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
