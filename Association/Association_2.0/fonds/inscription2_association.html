@@ -1,9 +1,6 @@
-#SET{selected,#CONFIG{inscription2/categories,'',''}}
-#SET{checked,#CONFIG{inscription2/categorie,'',''}}
-
 <div>
 <label>
-	<input type="checkbox" name="categorie" onclick="showhide(this, '#categs')" [checked="(#GET{checked}|?{checked})"] id="categorie" />
+	<input type="checkbox" name="categorie" onclick="showhide(this, '#categs')" [checked="(#CONFIG{inscription2/categorie,'',''}|?{checked})"] id="categorie" />
 	<strong><:inscription2:categorie:></strong><br /><strong></strong>
 	<:inscription2:exp_categorie:>
 	<br />
@@ -15,7 +12,7 @@
 <B_categories>
 <select name="categories[]" multiple="multiple" size="[(#TOTAL_BOUCLE|<{6}|?{ [(#TOTAL_BOUCLE|plus{1})] , 5 })]" id="categories">
 <BOUCLE_categories(ASSO_CATEGORIES)>
-	<option value="#ID_CATEGORIE"[(#ID_CATEGORIE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	<option value="#ID_CATEGORIE"[ (#ID_CATEGORIE|in_array{#CONFIG{inscription2/categories,'',''}}|?{selected="selected"})]>
 	#LIBELLE
 	</option>
 </BOUCLE_categories>
