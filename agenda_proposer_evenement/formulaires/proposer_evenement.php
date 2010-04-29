@@ -84,7 +84,9 @@ function verifier_telephone_fr($valeur, $options=array()){
 function formulaires_proposer_evenement_verifier_dist(){
 	$erreurs = array();
 
-	$oblis = array('nom','email','titre','descriptif','texte','date_debut','date_fin','id_categorie');
+	$oblis = array('nom','email','titre','descriptif','texte','date_debut','date_fin');
+	if (lire_config('propevent/proposer_thematique')=='oui')
+		$oblis[] = 'id_categorie';
 
 	$horaire = _request('horaire')=='non'?false:true;
 	if ($horaire){
