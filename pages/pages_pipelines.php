@@ -58,7 +58,7 @@ function pages_formulaire_charger($flux){
 	if (is_array($flux) and $flux['args']['form'] == 'editer_article'){
 	
 		// Si on est dans un article de type page
-		if (_request('type') == 'page' or $flux['data']['page']){
+		if (_request('type') == 'page' or ($flux['data']['page'] and _request('type') != 'article')){
 		
 			$flux['data']['type'] = 'page';
 		
@@ -130,6 +130,11 @@ function pages_pre_edition_ajouter_page($flux){
 			$flux['data']['id_rubrique'] = '-1';
 		
 		}
+		
+		// si l'id_parent est supérieur à 0 on pense à vider le champ "page"
+		if (_request('id_parent') > 0){
+			$flux['data']['page'] = '';
+		}
 	
 	}
 	
@@ -137,15 +142,25 @@ function pages_pre_edition_ajouter_page($flux){
 
 }
 
-// Ajouter un lien pour transformer une article normal en page
+// Ajouter un lien pour transformer une article normal en page ou l'inverse
 function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article'){
-		$flux['data'] .= '<div>
-		<a href="'.parametre_url(parametre_url(generer_url_ecrire('articles_edit'), 'id_article', $flux['args']['id']), 'type', 'page').'" class="cellule-h">
-			<img src="'.find_in_path('images/page-24.png').'" style="vertical-align:middle;" alt="" />
-			<span style="vertical-align:middle;">'._T('pages:convertir_page').'</span>
-		</a>
-	</div>';
+		if ($flux['args']['row']['page'] == ''){
+			$flux['data'] .= '<div>
+				<a href="'.parametre_url(parametre_url(generer_url_ecrire('articles_edit'), 'id_article', $flux['args']['id']), 'type', 'page').'" class="cellule-h">
+					<img src="'.find_in_path('images/page-24.png').'" style="vertical-align:middle;" alt="" />
+					<span style="vertical-align:middle;">'._T('pages:convertir_page').'</span>
+				</a>
+			</div>';
+		}
+		else{
+			$flux['data'] .= '<div>
+				<a href="'.parametre_url(parametre_url(generer_url_ecrire('articles_edit'), 'id_article', $flux['args']['id']), 'type', 'article').'" class="cellule-h">
+					<img src="'.find_in_path('images/article-24.gif').'" style="vertical-align:middle;" alt="" />
+					<span style="vertical-align:middle;">'._T('pages:convertir_article').'</span>
+				</a>
+			</div>';
+		}
 	}
 	return $flux;
 }
