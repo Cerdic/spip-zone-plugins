@@ -8,7 +8,6 @@
 
 // TODO
 // - gerer les mots-clés hors enclosure ?
-// - gerer le nombre d'import (15 ou +) via cfg ?
 include_spip("inc/mail");
 include_spip('inc/filtres'); 
 include_spip('inc/distant');
@@ -40,20 +39,24 @@ function genie_rssarticle_copie_dist($t){
   $log = "";
   $log_c = 0;
   
-  $s = sql_select("*", "spip_syndic_articles", "statut='publie'","","maj DESC","15");    // faire le contraire ? boucler plutot sur les sites ?
-  while ($a = sql_fetch($s)) {
-		$titre =  $a['titre'];
-    $id_syndic_article = $a['id_syndic_article']; 	
-				
-	  // article avec mm titre existe ?
-	  if (!$row = sql_fetsel("id_article","spip_articles","titre=".sql_quote($titre))) {        
-        $id_syndic = $a['id_syndic'];
-        
-        // uniquement sur les sites publies
-        if ($row2 = sql_fetsel("id_rubrique,id_secteur","spip_syndic","id_syndic=$id_syndic AND statut='publie'")) {  
-            $id_rubrique = $row2['id_rubrique'];
-            $id_secteur = $row2['id_secteur'];
-                        
+  // boucle sur les sites publies 
+  if ($mode_auto) $u = sql_select("id_syndic,id_rubrique,id_secteur","spip_syndic","statut='publie'");   // tous
+          else    $u = sql_select("id_syndic,id_rubrique,id_secteur","spip_syndic","statut='publie' AND rssarticle='oui'");
+  
+  while ($b = sql_fetch($u)) {
+       $id_syndic = $b['id_syndic'];
+       $id_rubrique = $b['id_rubrique'];
+       $id_secteur = $b['id_secteur'];
+  
+       // sur chaque site copie les derniers syndication
+       $s = sql_select("*", "spip_syndic_articles", "statut='publie' AND id_syndic='$id_syndic'","","maj ASC","10");  // par flot de 15 articles / site pour limiter la charge
+       while ($a = sql_fetch($s)) {
+       		$titre =  $a['titre'];
+          $id_syndic_article = $a['id_syndic_article']; 
+                    
+          // article avec mm titre existe ? (test doublons)
+	        if (!$row = sql_fetsel("id_article","spip_articles","titre=".sql_quote($titre))) {        
+            
             $texte = $a['descriptif'];
             $lang  = $a['lang'];
             $url   = $a['url'];
@@ -115,16 +118,16 @@ function genie_rssarticle_copie_dist($t){
             }
                                                        		
         		$log_c++;
-        		$log .= "\n - $titre";             
-        } 
-    }
+        		$log .= "\n - $titre";  
+            
+             // on "depublie" l'article syndique qui vient d'etre copie
+            sql_update("spip_syndic_articles", array('statut' => '"refuse"'), "id_syndic_article=$id_syndic_article");                 
+                  
+          }  // test doublons
+       }  
+  } // FIN PILE
     
-    // on depublie les articles syndiques qui ont scannes  (mm pour les sites non publies)
-    sql_update("spip_syndic_articles", array('statut' => '"refuse"'), "id_syndic_article=$id_syndic_article");
-  
-
-	} // FIN PILE
-	
+ 	
 	// log et alerte email
   $log .= "\n\n---------\nPlugin Copie RSS en Articles: $log_c articles copies\n";
   spip_log($log);
