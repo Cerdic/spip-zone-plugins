@@ -100,7 +100,7 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 	
 	// Si on valide une noisette pour un bloc ------------------------------------
 	
-	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette_modifiee'))) and _request('enregistrer')){
+	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette_modifiee',$_POST))) and _request('enregistrer')){
 		$noisette = _request('noisette');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
 		// Si le plugin verifier est actif
@@ -131,7 +131,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 	
 	// Si on valide une noisette pour un bloc ------------------------------------
 	
-	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette_modifiee'))) and _request('enregistrer')!=''){
+	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette_modifiee = intval(_request('id_noisette_modifiee',$_POST))) and _request('enregistrer')!=''){
 		$rang = intval(_request('rang'));
 		$noisette = _request('noisette');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
@@ -139,7 +139,6 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 		foreach ($infos_param as $nom=>$parametre)
 			$parametres_envoyes[$nom] = _request($nom);
 		spip_desinfecte($parametres_envoyes);
-
 		
 		// Enregistrement de la noisette
 		if ($bloc_page) {
@@ -166,13 +165,13 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 			suivre_invalideur($cle_invalidation);
 		}
 		// Mise à jour de la noisette
-		if ($id_noisette) {
+		if ($id_noisette_modifiee) {
 			$id_noisette = sql_updateq(
 				'spip_noisettes',
 				array(
 					'parametres' => serialize($parametres_envoyes)
 				),
-				'id_noisette='.$id_noisette
+				'id_noisette='.$id_noisette_modifiee
 			);
 			// On invalide le cache
 			include_spip('inc/invalideur');
