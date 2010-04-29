@@ -49,4 +49,8 @@ button::-moz-focus-inner { border: 0 none; padding: 0; }
 .white.submit { background-color: #FFF; border: 1px solid #CCC; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
 .white.submit:hover { background-color: #EEE; }
 
+/* styles */
+.metal.submit { background: #FFF url("img/varicelle-metal.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); color: #555 !important; text-shadow:0 1px 1px rgba(255, 255, 255, 0.5); }
+.metal.submit:hover { background-color: #EEE; border-color: #999; color: #444 !important; }
+
 /* end */
