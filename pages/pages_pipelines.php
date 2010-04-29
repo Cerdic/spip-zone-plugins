@@ -144,7 +144,7 @@ function pages_pre_edition_ajouter_page($flux){
 
 // Ajouter un lien pour transformer une article normal en page ou l'inverse
 function pages_boite_infos($flux){
-	if ($flux['args']['type'] == 'article'){
+	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
 		if ($flux['args']['row']['page'] == ''){
 			$flux['data'] .= '<div>
 				<a href="'.parametre_url(parametre_url(generer_url_ecrire('articles_edit'), 'id_article', $flux['args']['id']), 'type', 'page').'" class="cellule-h">
