@@ -84,6 +84,9 @@ function multilang_init_lang(options) {
 function forms_make_menu_lang(container,target) {
 	target = target || multilang_forms;
 	$(multilang_menu_lang).clone().find("a").click(function() {forms_change_lang(this,container,target)}).end().
+	append("<div style='float:left;margin:2px 5px'>&nbsp;-&nbsp;</div>").
+	// Pour pouvoir desactiver le multilang
+	append($("<a>").html("[No Multilang]").attr("href", document.location+"&nomultilang").css(multilang_css_link)[0]).
 	append("<div style='clear:left'></div>").appendTo(container);
 }
 
