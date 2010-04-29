@@ -116,10 +116,10 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 						$definition_ok[$_valeur] = false;
 						if (array_key_exists($_valeur, $tous_lang)) {
 							$definition_possible[$_valeur] = $tous_lang[$_valeur];
-							foreach ($definition_possible[$_valeur] as $_fichier) {
+							while ((list($_index, $_fichier) = each($definition_possible[$_valeur])) AND !$definition_ok[$_valeur])  {
 								preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $module_trouve);
 								if ($module_trouve[1]) {
-									$module_def = (($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) ? '' : $module_def;
+									$module_def = (($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) ? '' : $module_trouve[1];
 									if ($module_def == $utilises['modules'][$_cle]) {
 										$definition_ok[$_valeur] = true;
 									}
