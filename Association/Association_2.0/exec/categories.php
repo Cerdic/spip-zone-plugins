@@ -41,7 +41,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$res=icone_horizontale(_L('Ajouter une cat&eacute;gorie de cotisation'), $url_ajout_categorie, _DIR_PLUGIN_ASSOCIATION_ICONES."calculatrice.gif","rien.gif",false);
 		$res.= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);
-		        echo bloc_des_raccourcis($res);	
+		echo bloc_des_raccourcis($res);	
 		
 			
 		echo debut_droite("",true);
@@ -58,8 +58,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>Commentaires</strong></td>';
 		echo '<td colspan=2 style="text-align:center;"><strong>Action</strong></td>';
 		echo'  </tr>';
-		$query = spip_query ( "SELECT * FROM spip_asso_categories ORDER by id_categorie" ) ;
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select('*', 'spip_asso_categories', '', "id_categorie" ) ;
+		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td  class="arial11 border1" style="text-align:right">'.$data['id_categorie'].'</td>';
 			echo '<td  class="arial11 border1">'.$data['valeur'].'</td>';
@@ -67,13 +67,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td  class="arial11 border1" style="text-align:right">'.$data['duree'].'</td>';
 			echo '<td  class="arial11 border1" style="text-align:right">'.$data['cotisation'].'</td>';
 			echo '<td  class="arial11 border1">'.$data['commentaires'].'</td>';
-			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_categorie.'&agir=supprime&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_categorie.'&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
 			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_categorie.'&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';
 		
-		 echo fin_cadre_relief(true);  		
-		fin_page();
+		echo fin_cadre_relief(true);  		
+		echo fin_gauche(), fin_page();
 	}
 ?>
