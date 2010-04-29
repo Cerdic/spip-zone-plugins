@@ -64,12 +64,12 @@ function noizetier_compositions_lister_disponibles($flux){
 				$noizetier_compositions[$t][$c] = 1;
 			}
 	
-	if ($type=='') {
+	if ($type=='' AND count($noizetier_compositions)>0) {
 		if (!is_array($flux['data']))
 			$flux['data'] = array();
 		$flux['data'] = array_merge($flux['data'],$noizetier_compositions);
 	}
-	else {
+	elseif (count($noizetier_compositions[$type])>0) {
 		if (!is_array($flux['data'][$type]))
 			$flux['data'][$type] = array();
 		if (!is_array($noizetier_compositions[$type]))
