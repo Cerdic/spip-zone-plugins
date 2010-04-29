@@ -39,9 +39,13 @@ function gestdoc_post_edition($flux){
 	return $flux;
 }
 
+// liste des exec avec la colonne document
+$GLOBALS['gestdoc_exec_colonne_document'][] = 'articles_edit';
+$GLOBALS['gestdoc_exec_colonne_document'][] = 'breves_edit';
+$GLOBALS['gestdoc_exec_colonne_document'][] = 'rubriques_edit';
+
 function gestdoc_affiche_gauche($flux){
-	
-	if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit'))
+	if (in_array($flux['args']['exec'],$GLOBALS['gestdoc_exec_colonne_document'])
 		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
 		AND $type = objet_type($table)
 		AND $id_table_objet = id_table_objet($type)
