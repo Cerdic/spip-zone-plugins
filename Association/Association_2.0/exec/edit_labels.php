@@ -94,17 +94,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		     }
 			
 			echo '<tr> ';
-			echo '<td style="vertical-align:top;border-top: 1px solid #CCCCCC;" class ='.$class.' style="text-align:right">';
+			echo '<td style="text-align:right;vertical-align:top;" class="'.$class. ' border1">';
 			if ($indexation=="id_asso") { echo $data["id_asso"];}
 			else { echo $data["id_adherent"];}
 			echo '</td>';
-			echo '<td style="vertical-align:top;border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+			echo '<td style="vertical-align:top;" class="'.$class. ' border1">';
 			if ($sexe=='H'){ echo 'M.'; }
 			elseif ($sexe=='F'){ echo 'Mme'; }
 				else { echo '&nbsp;'; }
 			echo ' '.$data['prenom'].' '.$data["nom_famille"].'</td>';
-			echo '<td style="vertical-align:top;border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data['adresse'].'<br />'.$data['code_postal'].' '.$data['ville'].'</td>';
-			echo '<td style="vertical-align:top;border-top: 1px solid #CCCCCC;" class ='.$class.' style="text-align:center;">';
+			echo '<td style="vertical-align:top;" class="'.$class. ' border1">'.$data['adresse'].'<br />'.$data['code_postal'].' '.$data['ville'].'</td>';
+			echo '<td style="text-align:center;;vertical-align:top;" class="'.$class. ' border1">';
 			echo '<input name="label[]" type="checkbox" value="'.$data['id'].'" checked="checked" />';
 			echo '</td>';
 			echo '</tr>';
