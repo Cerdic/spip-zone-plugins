@@ -6,13 +6,13 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.3.0
+		0.3.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		test
 	</etat>
 	<icon>
-		images/page.png
+		images/page-128.png
 	</icon>
 	<description><multi>
 [fr]
@@ -37,7 +37,7 @@ This allows the creation of pages of legal information, about, contact, etc..
 	<version_base>1.0</version_base>
 		
 	<bouton id='pages_tous' parent='naviguer'>
-		<icone>images/article-24.gif</icone>
+		<icone>images/page-24.png</icone>
 		<titre>Pages uniques</titre>
 	</bouton>
 	
@@ -49,6 +49,10 @@ This allows the creation of pages of legal information, about, contact, etc..
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>affiche_milieu_ajouter_page</action>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boite_infos</nom>
 		<inclure>pages_pipelines.php</inclure>
 	</pipeline>
 	

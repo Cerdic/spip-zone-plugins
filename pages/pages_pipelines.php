@@ -96,12 +96,11 @@ function pages_editer_contenu_objet($flux){
 	
 	if ($args['type'] == 'article' and $args['contexte']['type'] == 'page'){
 	
-		//echo "<pre>"; var_dump($flux); echo "</pre>"; exit;
 		// On cherche et remplace l'édition de la rubrique
 		$cherche = "/<li[^>]*class=('|\")editer_parent.*?<\/li>/is";
 		$remplace = '<li class="editer_page obligatoire'.($erreurs['page'] ? ' erreur' : '').'">';
-		$remplace .= '<input type="hidden" name="id_parent" value="'.$args['contexte']['id_parent'].'" />';
-		$remplace .= '<input type="hidden" name="id_rubrique" value="'.$args['contexte']['id_parent'].'" />';
+		$remplace .= '<input type="hidden" name="id_parent" value="-1" />';
+		$remplace .= '<input type="hidden" name="id_rubrique" value="-1" />';
 		$remplace .= '<input type="hidden" name="type" value="page" />';
     	$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
     	if ($erreurs['page'])
@@ -127,6 +126,8 @@ function pages_pre_edition_ajouter_page($flux){
 		
 			// Et on l'ajoute à ce qu'il faut mettre à jour
 			$flux['data']['page'] = $page;
+			// Et on force l'id_rubrique à -1
+			$flux['data']['id_rubrique'] = '-1';
 		
 		}
 	
@@ -134,6 +135,19 @@ function pages_pre_edition_ajouter_page($flux){
 	
 	return $flux;
 
+}
+
+// Ajouter un lien pour transformer une article normal en page
+function pages_boite_infos($flux){
+	if ($flux['args']['type'] == 'article'){
+		$flux['data'] .= '<div>
+		<a href="'.parametre_url(parametre_url(generer_url_ecrire('articles_edit'), 'id_article', $flux['args']['id']), 'type', 'page').'" class="cellule-h">
+			<img src="'.find_in_path('images/page-24.png').'" style="vertical-align:middle;" alt="" />
+			<span style="vertical-align:middle;">'._T('pages:convertir_page').'</span>
+		</a>
+	</div>';
+	}
+	return $flux;
 }
 
 ?>
