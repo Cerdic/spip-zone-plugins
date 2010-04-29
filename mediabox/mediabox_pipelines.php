@@ -21,7 +21,7 @@ function mediabox_config($public=null){
 	if ((is_null($public) AND test_espace_prive()) OR !$public) {
 		$config = array_merge($config,array(
 		'selecteur_galerie' => '#portfolios a[type^=\'image/\']',
-		'selecteur_commun' => '.mediabox, .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
+		'selecteur_commun' => '.mediabox:not(body), .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
 		'skin' => 'white-shadow',
 		'maxWidth'=>'90%',
 		'maxHeight'=>'95%',
