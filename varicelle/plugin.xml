@@ -1,8 +1,8 @@
 <plugin>
 <nom>Varicelle</nom>
 <icon>icon.png</icon>
-<description>De jolis boutons, en CSS3, pour styler d'un coup tous les boutons du site&nbsp;! Voir&nbsp;: <a HREF="../?page=varicelle">?page=varicelle</a></description>
-<version>0.1.4</version>
+<description>De jolis boutons, en CSS3, pour styler d'un coup tous les boutons du site&nbsp;! Voir&nbsp;: <a href="../?page=varicelle">?page=varicelle</a></description>
+<version>0.1.5</version>
 <etat>dev</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>varicelle</prefix>

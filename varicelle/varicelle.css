@@ -53,4 +53,13 @@ button::-moz-focus-inner { border: 0 none; padding: 0; }
 .metal.submit { background: #FFF url("img/varicelle-metal.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); color: #555 !important; text-shadow:0 1px 1px rgba(255, 255, 255, 0.5); }
 .metal.submit:hover { background-color: #EEE; border-color: #999; color: #444 !important; }
 
+.spip.submit { background-color: #75507B; }
+.spip.submit:hover { background-color: purple; }
+.spip.submit:focus, .submit.spip:active { background-color: #F57900 !important; border-color: #F57900 !important; }
+
+/* boutons d'admin SPIP */
+.spip-admin .submit { padding: 3px 9px; background-color: #75507B; border: 0; font-size: .9em; font-weight: normal; }
+.spip-admin .submit:hover { background-color: purple; }
+.spip-admin .submit:focus, .spip-admin .submit:active { background-color: #F57900 !important; border-color: #F57900 !important; }
+
 /* end */
