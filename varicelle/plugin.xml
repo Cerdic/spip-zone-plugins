@@ -2,9 +2,13 @@
 <nom>Varicelle</nom>
 <icon>icon.png</icon>
 <description>Un plugin qui donne des boutons...</description>
-<version>0.1</version>
+<version>0.1.1</version>
 <etat>dev</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>varicelle</prefix>
+<pipeline>
+	<nom>insert_head_css</nom>
+	<inclure>varicelle_pipelines.php</inclure>
+</pipeline>
 <necessite id="SPIP" version="[;]" />
 </plugin>
