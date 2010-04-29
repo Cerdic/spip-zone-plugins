@@ -6,9 +6,9 @@
 		<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 		<td class="arial2"><a href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></td>
 		[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}) 
-		[<td width="30">(#BOUTON_ACTION{[<img height="24" width="24" src="(#CHEMIN{images/a2a_action_haut.png})" />],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/moins,#SELF},ajax})</td>]
-		[<td width="30">(#BOUTON_ACTION{[<img height="24" width="24" src="(#CHEMIN{images/a2a_action_bas.png})" />],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/plus,#SELF},ajax})</td>]
-		[<td width="30">(#BOUTON_ACTION{[<img height="24" width="24" src="(#CHEMIN{images/a2a_action_supprimer.png})" />],#URL_ACTION_AUTEUR{a2a,supprimer_lien/#ID_ARTICLE/#ID_ARTICLE_ORIG,#SELF},ajax})</td>]
+		[<td width="30">(#BOUTON_ACTION{[<img height="24" width="24" src="(#CHEMIN{images/a2a_action_haut.png})" alt="<:a2a:rang_moins:>" />],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/moins,#SELF},ajax})</td>]
+		[<td width="30">(#BOUTON_ACTION{[<img height="24" width="24" src="(#CHEMIN{images/a2a_action_bas.png})" alt="<:a2a:rang_plus:>" />],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/plus,#SELF},ajax})</td>]
+		[<td width="30">(#BOUTON_ACTION{[<img height="24" width="24" src="(#CHEMIN{images/a2a_action_supprimer.png})" alt="<:a2a:supprimer_le_lien:>" />],#URL_ACTION_AUTEUR{a2a,supprimer_lien/#ID_ARTICLE/#ID_ARTICLE_ORIG,#SELF},ajax})</td>]
 		]
 	</BOUCLE_lesArticlesLies>
 </tr>	
