@@ -14,7 +14,7 @@ function mediabox_config(){
 		'speed'=>'200',
 		'maxWidth'=>'90%',
 		'maxHeight'=>'90%',
-		'minWidth'=>'',
+		'minWidth'=>'400px',
 		'minHeight'=>'',
 	), $config);
 
