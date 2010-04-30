@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'editer_descriptif' => 'Descriptif',
 'editer_descriptif_explication' => 'Une explication du formulaire destin&eacute;e &agrave; l\'espace priv&eacute;.',
-'editer_identifiant_explication' => 'Cet identifiant unique vous permettra d\'appeler plus facilement votre formulaire.',
+'editer_identifiant_explication' => 'Donnez un identifiant textuel unique qui vous permettra d\'appeler plus facilement le formulaire.',
 'editer_identifiant' => 'Identifiant',
 'editer_menu_champs' => 'Configurer les champs',
 'editer_menu_formulaire' => 'Configurer le formulaire',
