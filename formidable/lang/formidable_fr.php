@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traiter_email_option_envoyeur_nom_label' => 'Nom de l\'envoyeur',
 'traiter_email_option_sujet_explication' => 'Construisez le sujet &agrave; l\'aide des @raccourcis@. Si vous ne mettez rien, le sujet sera construit automatiquement.',
 'traiter_email_option_sujet_label' => 'Sujet du message',
-'traiter_email_page' => 'Depuis la page : @url@',
+'traiter_email_page' => '<a href="@url@">Depuis cette page</a>.',
 'traiter_email_sujet' => '@nom@ vous a &eacute;crit.',
 'traiter_email_titre' => 'Envoyer par courriel',
 'traiter_enregistrement_description' => 'Enregistre les r&eacute;sultats du formulaire dans la base de donn&eacute;es',

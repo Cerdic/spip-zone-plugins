@@ -88,26 +88,27 @@ function traiter_email_dist($args, $retours){
 			)
 		);
 		
+		// Horodatons au début
+		$date = date('d/m/y');
+		$heure = date('H:i:s');
+		$contexte = '<p>'
+			._T('formidable:traiter_email_horodatage', array('formulaire'=>_T_ou_typo($formulaire['titre']), 'date'=>$date, 'heure'=>$heure))
+			.'<br/>'
+			._T('formidable:traiter_email_page', array('url'=>url_absolue(self('&', true))))
+			.'</p>';
+		$html = $contexte.$html;
+		
+		// On finit par le nom du site
+		$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+		$html .= '<p>-- '._T('envoi_via_le_site').' <a href="'.$GLOBALS['meta']['adresse_site'].'">'.$nom_site.'</a> --</p>';
+		
 		// On génère le texte brut
 		include_spip('classes/facteur');
 		$texte = Facteur::html2text($html);
 		
-		// Horodatons au début
-		$date = date("d/m/y");
-		$heure = date("H:i:s");
-		$contexte = "\n\n"
-			._T('formidable:traiter_email_horodatage', array('formulaire'=>_T_ou_typo($formulaire['titre']), 'date'=>$date, 'heure'=>$heure))
-			."\n"
-			._T('formidable:traiter_email_page', array('url'=>url_absolue(self('&', true))))
-			."\n\n";
-		$texte = $contexte.$texte;
-		
-		// On finit par le nom du site
-		$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
-		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
-		
 		// On utilise la forme avancé de Facteur
 		$corps = array(
+			'html' => $html,
 			'texte' => $texte,
 			'nom_envoyeur' => $nom_envoyeur
 		);
