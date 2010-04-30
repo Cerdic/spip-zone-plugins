@@ -211,9 +211,17 @@ function noizetier_lister_pages(){
 						$liste_pages[$page] = $infos_page;
 			}
 		}
+		
 		// Dans le cas de Zpip, il faut supprimer la page 'page.html'
 		if (defined('_DIR_PLUGIN_Z'))
 			unset($liste_pages['page']);
+		
+		// supprimer de la liste les pages necissant un plugin qui n'est pas actif
+		foreach ($liste_pages as $page => $infos_page)
+			if (isset($infos_page['necessite']))
+				foreach ($infos_page['necessite'] as $plugin)
+					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
+						unset($liste_pages[$page]);
 		
 		$liste_pages = pipeline('noizetier_lister_pages',$liste_pages);
 		
@@ -282,6 +290,13 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 						'icon' => isset($attributs['icon']) ? find_in_path($attributs['icon']) : '',
 						'description' => _T($attributs['description'])
 					);
+				}
+			}
+			if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)){
+				$infos_page['necessite'] = array();
+				foreach (array_keys($necessites) as $necessite){
+					list($balise, $attributs) = spip_xml_decompose_tag($necessite);
+					$infos_page['necessite'][] = $attributs['id'];
 				}
 			}
 		}
