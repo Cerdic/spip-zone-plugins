@@ -35,14 +35,17 @@ function formulaires_editer_rssarticle_verifier_dist($id_syndic='new', $retour='
 function formulaires_editer_rssarticle_traiter_dist($id_syndic='new', $retour=''){
 	
   $message = array('editable'=>true, 'message_ok'=>'');
-	
-	
-	sql_updateq('spip_syndic',array(
-      'rssarticle'=>_request('rssarticle'),
-      'resume'=>'non',
-      'oubli'=>'oui'  
-  ),'id_syndic='.intval($id_syndic));
   
+  if (_request('rssarticle')=='oui') {
+    	sql_updateq('spip_syndic',array(
+        'rssarticle'=> 'oui',
+        'resume'=>'non',
+        'oubli'=>'oui'
+       ),'id_syndic='.intval($id_syndic));  
+  } else {
+     	sql_updateq('spip_syndic',array('rssarticle'=> 'non'),'id_syndic='.intval($id_syndic)); 
+  }
+	
   include_spip('inc/headers');
   $message .= redirige_par_entete("./?exec=sites&id_syndic=$id_syndic");
 

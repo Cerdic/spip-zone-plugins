@@ -40,7 +40,7 @@ function genie_rssarticle_copie_dist($t){
   $log_c = 0;
   
   // boucle sur les sites publies 
-  if ($mode_auto) $u = sql_select("id_syndic,id_rubrique,id_secteur","spip_syndic","statut='publie'");   // tous
+  if ($mode_auto) $u = sql_select("id_syndic,id_rubrique,id_secteur","spip_syndic","statut='publie'");   // tous 
           else    $u = sql_select("id_syndic,id_rubrique,id_secteur","spip_syndic","statut='publie' AND rssarticle='oui'");
   
   while ($b = sql_fetch($u)) {
@@ -49,7 +49,7 @@ function genie_rssarticle_copie_dist($t){
        $id_secteur = $b['id_secteur'];
   
        // sur chaque site copie les derniers syndication
-       $s = sql_select("*", "spip_syndic_articles", "statut='publie' AND id_syndic='$id_syndic'","","maj ASC","10");  // par flot de 15 articles / site pour limiter la charge
+       $s = sql_select("*", "spip_syndic_articles", "statut='publie' AND id_syndic='$id_syndic'","","maj DESC","10");  // par flot de 10 articles / site pour limiter la charge
        while ($a = sql_fetch($s)) {
        		$titre =  $a['titre'];
           $id_syndic_article = $a['id_syndic_article']; 
@@ -72,7 +72,7 @@ function genie_rssarticle_copie_dist($t){
                                 'texte'=>$texte, 'statut'=>$import_statut, 'id_secteur'=>$id_secteur,
                                 'date'=> $lsDate, 'accepter_forum'=>$accepter_forum, 'lang'=>$lang, 'url_site'=>$url));
                                 
-            // lierarticle et site
+            // lier article et site
             sql_insertq( 'spip_articles_syndic', array('id_article'=>$id_article, 'id_syndic'=>$id_syndic));
                                 
             // gestion auteur            
@@ -137,9 +137,9 @@ function genie_rssarticle_copie_dist($t){
                   envoyer_mail($email_suivi,"Copie RSS en Articles", $log);
               
 	// maintenance generale
-  // on efface les syndic_articles de plus de 2 mois pour soulager le systeme (cf genie/syndic) 
-  // attention: ici pour effacer sur l'ensemble des sites syndiques		 
-	sql_delete('spip_syndic_articles', "maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH)");
+  // mode auto: on efface les syndic_articles de plus de 2 mois pour soulager le systeme (cf genie/syndic) 
+  // attention: on efface sur l'ensemble des sites syndiques ss tenir compte de l'option		
+	if ($mode_auto) sql_delete('spip_syndic_articles', "maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH)");
  
 	return 1;
 }
