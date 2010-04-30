@@ -10,19 +10,17 @@
 et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-buttons/ */
 
 .submit { position: relative; display: inline-block; width: auto; padding: 5px 1em 6px; overflow: visible; cursor: pointer;
-background: #888 url("img/varicelle-overlay.png") repeat-x; border: 0; border-bottom: 1px solid rgba(0,0,0,0.25);
--moz-border-radius: 5px; -webkit-border-radius: 5px; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+background: #888 url("img/varicelle-overlay.png") repeat-x; box-shadow: 0 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+border: 0; border-bottom: 1px solid rgba(0,0,0,0.25); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
 font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
 .submit,.submit:visited,.submit * { color: #FFF; text-decoration: none; }
-
-button::-moz-focus-inner { border: 0 none; padding: 0; }
 
 .submit:hover { background-color: #777; color: #FFF; text-decoration: none; }
 .submit:focus,
 .submit:active { -moz-transform: translateY(1px); outline: none !important; }
-.submit:active { -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); -webkit-box-shadow: none;
+.submit:active { box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); -webkit-box-shadow: none;
 /* IE only stuff */ border-bottom: 0\9; border-top: 1px solid #666\9; }
-
+.submit::-moz-focus-inner { border: 0 none; padding: 0; }
 
 /* tailles */
 .small.submit { font-size: .9em; padding: 4px 1em; font-weight: normal; }
@@ -50,7 +48,7 @@ button::-moz-focus-inner { border: 0 none; padding: 0; }
 .white.submit:hover { background-color: #EEE; }
 
 /* styles */
-.metal.submit { background: #FFF url("img/varicelle-metal.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); color: #555 !important; text-shadow:0 1px 1px rgba(255, 255, 255, 0.5); }
+.metal.submit { background: #FFF url("img/varicelle-metal.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
 .metal.submit:hover { background-color: #EEE; border-color: #999; color: #444 !important; }
 
 .spip.submit { background-color: #75507B; }
