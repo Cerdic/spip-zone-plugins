@@ -19,6 +19,8 @@ function verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs){
 	include_spip('inc/filtres');
 	$date = _request("date_$suffixe").($horaire?' '.trim(_request("heure_$suffixe")).':00':'');
 	$date = recup_date($date);
+	if (!$date)
+		return '';
 	$ret = null;
 	if (!$ret=mktime(0,0,0,$date[1],$date[2],$date[0]))
 		$erreurs["date_$suffixe"] = _T('spip_bonux:erreur_date');
