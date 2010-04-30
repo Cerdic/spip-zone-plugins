@@ -1,0 +1,27 @@
+<h1 class="h1">Recherche par mots</h1>
+#SET{FiltreGroupes,#ARRAY}
+<BOUCLE_FiltreGroupes(GROUPES_MOTS){titre==^[^_]}>
+#SET{FiltreGroupes,
+       #GET{FiltreGroupes}|push{#ID_GROUPE}}
+</BOUCLE_FiltreGroupes>
+<div class="ajax">
+[(#FORMULAIRE_RECHERCHE_PAR_MOTS{#GET{FiltreGroupes},#SELF})]
+</div>
+
+<B_recherche_par>
+<div classe="liste">
+	<h1 class="postDetailTitle h1"><:resultats_recherche:></h1>
+	
+	<ul class="liste-items">
+	<BOUCLE_recherche_par(ARTICLES){mots_selon_id}{!par date}{pagination 5}>
+		<li class="item">
+			<a href="#URL_ARTICLE">#TITRE</a>
+		</li>
+	</BOUCLE_recherche_par>
+	</ul>
+<p id="pagination" class="clearfix pagination nettoyeur">
+	#PAGINATION
+</p><!-- #pagination -->
+</div>
+
+</B_recherche_par>
