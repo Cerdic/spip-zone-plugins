@@ -10,4 +10,9 @@
 
 #VOIR_SAISIES{#ENV*{saisies}, #ENV*{valeurs}}
 
-<p>-- <:envoi_via_le_site:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a> --</p>
+---
+<p><:envoi_via_le_site:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a></p>
+[(#ENV*{traitements}|table_valeur{enregistrement}|oui)
+#SET{url, #URL_ECRIRE{formulaires_reponses}|parametre_url{id_formulaire, #ENV{id_formulaire}}|url_absolue}
+<p><:formidable:traiter_email_url_enregistrement{url=#GET{url}}:></p>
+]

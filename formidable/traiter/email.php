@@ -7,6 +7,7 @@ function traiter_email_dist($args, $retours){
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
+	$traitements = unserialize($formulaire['traitements']);
 	$champs = saisies_lister_champs($saisies);
 	
 	// On récupère les destinataires
@@ -91,6 +92,7 @@ function traiter_email_dist($args, $retours){
 			array(
 				'id_formulaire' => $formulaire['id_formulaire'],
 				'titre' => _T_ou_typo($formulaire['titre']),
+				'traitements' => $traitements,
 				'saisies' => $saisies,
 				'valeurs' => $valeurs
 			)

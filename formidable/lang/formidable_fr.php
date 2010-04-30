@@ -96,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traiter_email_page' => '<a href="@url@">Depuis cette page</a>.',
 'traiter_email_sujet' => '@nom@ vous a &eacute;crit.',
 'traiter_email_titre' => 'Envoyer par courriel',
+'traiter_email_url_enregistrement' => 'Vous pouvez gérer les réponses <a href="@url@">sur cette page</a>.',
 'traiter_enregistrement_description' => 'Enregistre les r&eacute;sultats du formulaire dans la base de donn&eacute;es',
 'traiter_enregistrement_erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement en base de donn&eacute;es',
 'traiter_enregistrement_erreur_deja_repondu' => 'Vous avez d&eacute;j&agrave; r&eacute;pondu &agrave; ce formulaire.',
