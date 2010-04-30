@@ -98,7 +98,7 @@ function traiter_email_dist($args, $retours){
 		$contexte = "\n\n"
 			._T('formidable:traiter_email_horodatage', array('formulaire'=>_T_ou_typo($formulaire['titre']), 'date'=>$date, 'heure'=>$heure))
 			."\n"
-			._T('formidable:traiter_email_page', array('url'=>self()))
+			._T('formidable:traiter_email_page', array('url'=>url_absolue(self('&', true))))
 			."\n\n";
 		$texte = $contexte.$texte;
 		

@@ -10,7 +10,8 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 		'options' => array(
 			'nom' => 'titre',
 			'label' => '<:formidable:editer_titre:>',
-			'obligatoire' => 'oui'
+			'obligatoire' => 'oui',
+			'class' => 'multilang'
 		)
 	),
 	array(
@@ -35,7 +36,8 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 			'label' => '<:formidable:editer_message_ok:>',
 			'explication' => '<:formidable:editer_message_ok_explication:>',
 			'rows' => 5,
-			'li_class' => 'editer_texte'
+			'li_class' => 'editer_texte',
+			'class' => 'multilang'
 		)
 	),
 	array(
@@ -44,7 +46,8 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 			'nom' => 'descriptif',
 			'label' => '<:formidable:editer_descriptif:>',
 			'explication' => '<:formidable:editer_descriptif_explication:>',
-			'rows' => 5
+			'rows' => 5,
+			'class' => 'multilang'
 		)
 	)
 );
