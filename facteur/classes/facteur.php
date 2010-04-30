@@ -229,24 +229,27 @@ class Facteur extends PHPMailer {
 		while (list($key,) = each($image_types))
 			$extensions[] = $key;
 
-		preg_match_all('/["\'](([^"\']+)\.('.implode('|', $extensions).'))["\']/Ui', $this->Body, $images, PREG_SET_ORDER);
+		preg_match_all('/["\'](([^"\']+)\.('.implode('|', $extensions).'))([?][^"\']+)?["\']/Ui', $this->Body, $images, PREG_SET_ORDER);
 
 		$html_images = array();
 		foreach($images as $im){
 			if (!preg_match(",^[a-z0-9]+://,i",$im[1])
+			 AND ($src = $im[1].$im[4])
 			 AND (
 			      file_exists($f=$im[1]) // l'image a ete generee depuis le meme cote que l'envoi
 			      OR (_DIR_RACINE AND file_exists($f=_DIR_RACINE.$im[1])) // l'image a ete generee dans le public et on est dans le prive
 			      OR (!_DIR_RACINE AND strncmp($im[1],"../",3)==0 AND file_exists($f=substr($im[1],3))) // l'image a ete generee dans le prive et on est dans le public
 			     )
-			 AND !isset($html_images[$f])){
+			 AND !isset($html_images[$src])){
 
 				$extension = strtolower($im[3]);
 				$header_extension = $image_types[$extension];
 				$cid = md5($f); // un id unique pour un meme fichier
-				$this->AddEmbeddedImage($f, $cid, basename($f),'base64',$header_extension);
-				$this->Body = str_replace($im[1], "cid:$cid", $this->Body);
-				$html_images[$f] = $cid; // marquer l'image comme traitee, inutile d'y revenir
+				// l'ajouter si pas deja present (avec un autre ?...)
+				if (!in_array($cid,$html_images))
+					$this->AddEmbeddedImage($f, $cid, basename($f),'base64',$header_extension);
+				$this->Body = str_replace($src, "cid:$cid", $this->Body);
+				$html_images[$src] = $cid; // marquer l'image comme traitee, inutile d'y revenir
 			}
 		}
 	}
