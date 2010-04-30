@@ -14,7 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // A chaque modif de la base SQL ou ses conventions (raccourcis etc)
-// le fichier plugin.xml doit indique le numero de depot qui l'implemente sur
+// le fichier plugin.xml doit indiquer le numero de depot qui l'implemente sur
 // http://zone.spip.org/trac/spip-zone/timeline
 
 function association_version_base()
@@ -35,32 +35,38 @@ function association_version_base()
 
 function association_upgrade(){			
 
+	$courante = association_version_base();
+
+	if (!isset($GLOBALS['meta']['asso_base_version']))
+		return association_maj_0($courante, 'asso_base_version');
+	else {
 	// compatibilite avec les numeros de version non entiers
-	$installee = !isset($GLOBALS['meta']['asso_base_version']) ? 
-		  0 : (($GLOBALS['meta']['asso_base_version'] > 1) ?
+		$installee = (($GLOBALS['meta']['asso_base_version'] > 1) ?
 			$GLOBALS['meta']['asso_base_version'] :
 			($GLOBALS['meta']['asso_base_version'] * 100));
 		
-	$courante = association_version_base();
-	$GLOBALS['association_maj_erreur'] = 0;
-	if ($courante > $installee) {
-		include_spip('base/association');
-		include_spip('base/upgrade');
-		maj_while($installee, association_version_base(), $GLOBALS['association_maj'], 'asso_base_version');
-		// signaler que les dernieres MAJ sont a refaire
-		if ($GLOBALS['association_maj_erreur']) ecrire_meta('asso_base_version', $GLOBALS['association_maj_erreur']-1);
+		$GLOBALS['association_maj_erreur'] = 0;
+		if ($courante > $installee) {
+			include_spip('base/association');
+			include_spip('base/upgrade');
+			maj_while($installee, association_version_base(), $GLOBALS['association_maj'], 'asso_base_version');
+			// signaler que les dernieres MAJ sont a refaire
+			if ($GLOBALS['association_maj_erreur']) ecrire_meta('asso_base_version', $GLOBALS['association_maj_erreur']-1);
+		}
+		return $GLOBALS['association_maj_erreur'];
 	}
-	return $GLOBALS['association_maj_erreur'];
 }
 
-
-function association_maj_0(){
-	include_spip('base/create');
+function association_maj_0($version, $meta){
+	global $association_tables_principales;
+	include_spip('base/association');
 	include_spip('base/abstract_sql');
-	creer_base();
+	foreach($association_tables_principales as $table => $desc)
+		sql_create($table, $desc['field'], $desc['key'], true, false);
+	ecrire_meta($meta, $version);
+	return 0; // Reussite (supposee !)
 }
 			
-$GLOBALS['association_maj'][1] = array(array('association_maj_0'));
 
 $GLOBALS['association_maj'][21] = array(array('sql_alter',"TABLE spip_asso_adherents ADD publication text NOT NULL AFTER secteur"));
 
@@ -83,7 +89,7 @@ $GLOBALS['association_maj'][61] = array(
 					);
 $GLOBALS['association_maj'][62] = array(array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL AFTER commentaires"));
 
-$GLOBALS['association_maj'][63] = array(array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BINGINT(20) NOT NULL AFTER acheteur"));
+$GLOBALS['association_maj'][63] = array(array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BIGINT(20) NOT NULL AFTER acheteur"));
 		
 function association_maj_64(){
 
@@ -106,20 +112,16 @@ function association_maj_64(){
 $GLOBALS['association_maj'][64] = array(array('association_maj_64'));
 
 function association_effacer_tables(){
-		include_spip('base/abstract_sql');
-		sql_drop_table("spip_asso_adherents");
-		sql_drop_table("spip_asso_activites");
-		sql_drop_table("spip_asso_categories");
-		sql_drop_table("spip_asso_comptes");
-		sql_drop_table("spip_asso_dons");
-		sql_drop_table("spip_asso_plan");
-		sql_drop_table("spip_asso_prets");
-		sql_drop_table("spip_asso_ressources");
-		sql_drop_table("spip_asso_ventes");
-		effacer_meta('asso_base_version');
-		effacer_meta('association');
-		spip_log("plugin assoc desinstallee");
-	}	
+	include_spip('base/abstract_sql');
+	include_spip('base/association');
+	foreach ($GLOBALS['association_tables_principales'] as $k=>$v) {
+		spip_log("table $k detruite");
+		sql_drop_table($k);
+	}
+	effacer_meta('asso_base_version');
+	effacer_meta('association');
+	spip_log("plugin assoc desinstallee");
+}
 	
 function association_install($action){
 	$version_base = association_version_base();
