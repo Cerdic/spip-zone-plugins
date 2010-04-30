@@ -8,7 +8,7 @@ include_spip('inc/saisies');
 include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 
-function formulaires_formidable_charger($id_formulaire){
+function formulaires_formidable_charger($id_formulaire, $valeurs=array()){
 	$contexte = array();
 	
 	// On peut donner soit un id soit un identifiant
@@ -33,6 +33,11 @@ function formulaires_formidable_charger($id_formulaire){
 		
 			$contexte['id'] = $formulaire['id_formulaire'];
 			$contexte['_hidden'] = '<input type="hidden" name="id_formulaire" value="'.$contexte['id'].'"/>';
+			
+			// S'il y a des valeurs par défaut dans l'appel, alors on pré-remplit
+			if ($valeurs and is_array($valeurs)){
+				$contexte = array_merge($contexte, $valeurs);
+			}
 			
 			// Si multiple = non mais que c'est modifiable, alors on va chercher la dernière réponse si elle existe
 			if ($options = $traitements['enregistrement']
@@ -69,7 +74,7 @@ function formulaires_formidable_charger($id_formulaire){
 	return $contexte;
 }
 
-function formulaires_formidable_verifier($id_formulaire){
+function formulaires_formidable_verifier($id_formulaire, $valeurs=array()){
 	$erreurs = array();
 	
 	// Sale bête !
@@ -87,7 +92,7 @@ function formulaires_formidable_verifier($id_formulaire){
 	return $erreurs;
 }
 
-function formulaires_formidable_traiter($id_formulaire){
+function formulaires_formidable_traiter($id_formulaire, $valeurs=array()){
 	$retours = array();
 	// Par défaut le formulaire se remet en route à la fin
 	$retours['editable'] = true;
