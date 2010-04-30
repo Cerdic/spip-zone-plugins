@@ -40,7 +40,7 @@ function multilang_insert_head($flux){
 function multilang_inserer_head($flux,$config=array()){
 
 	// Pour desactiver le traitement et pouvoir copier le contenu des champs
-	if(isset($_GET['nomultilang'])) return $flux;
+	if(_request('nomultilang')) return $flux;
 	
 	// Insertion de la css
 	$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(find_in_path('css/multilang.css')).'" type="text/css" media="all" />';
