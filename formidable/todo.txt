@@ -2,6 +2,7 @@
 À faire :
 ---------
 + Ajouter un lien vers l'espace privé dans le mail lorsque le traitement "enregistrement" est aussi activé
++ Afficher une boite listant les formulaires disponibles dans l'édition d'un article
 + Afficher des saisies en javascript suivant des conditions
 + Utiliser le plugin CVT multi-pages de Cédric
 + Afficher des pages suivant des conditions (scénarios)

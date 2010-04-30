@@ -79,28 +79,22 @@ function traiter_email_dist($args, $retours){
 		if (!$sujet) $sujet = _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
 		$sujet = filtrer_entites($sujet);
 		
-		// On génère la vue HTML
+		// Mais quel va donc être le fond ?
+		if (find_in_path('notifications/formulaire_'.$formulaire['identifiant'].'_email.html'))
+			$notification = 'notifications/formulaire_'.$formulaire['identifiant'].'_email';
+		else
+			$notification = 'notifications/formulaire_email';
+		
+		// On génère le mail avec le fond
 		$html = recuperer_fond(
-			'inclure/voir_saisies',
+			$notification,
 			array(
+				'id_formulaire' => $formulaire['id_formulaire'],
+				'titre' => _T_ou_typo($formulaire['titre']),
 				'saisies' => $saisies,
 				'valeurs' => $valeurs
 			)
 		);
-		
-		// Horodatons au début
-		$date = date('d/m/y');
-		$heure = date('H:i:s');
-		$contexte = '<p>'
-			._T('formidable:traiter_email_horodatage', array('formulaire'=>_T_ou_typo($formulaire['titre']), 'date'=>$date, 'heure'=>$heure))
-			.'<br/>'
-			._T('formidable:traiter_email_page', array('url'=>url_absolue(self('&', true))))
-			.'</p>';
-		$html = $contexte.$html;
-		
-		// On finit par le nom du site
-		$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
-		$html .= '<p>-- '._T('envoi_via_le_site').' <a href="'.$GLOBALS['meta']['adresse_site'].'">'.$nom_site.'</a> --</p>';
 		
 		// On génère le texte brut
 		include_spip('classes/facteur');

@@ -1,0 +1,13 @@
+
+<p>
+	#SET{date, #VAL{d/m/Y}|date}
+	#SET{heure, #VAL{H:i:s}|date}
+	<:formidable:traiter_email_horodatage{formulaire=#ENV*{titre}, date=#GET{date}, heure=#GET{heure}}:>
+	<br/>
+	#SET{url, #SELF{&,true}|url_absolue}
+	<:formidable:traiter_email_page{url=#GET{url}}:>
+</p>
+
+#VOIR_SAISIES{#ENV*{saisies}, #ENV*{valeurs}}
+
+<p>-- <:envoi_via_le_site:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a> --</p>
