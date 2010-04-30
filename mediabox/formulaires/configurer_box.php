@@ -73,7 +73,8 @@ function formulaires_configurer_box_traiter_dist(){
 	}
 	else {
 		foreach ($config as $k=>$v){
-			$config[$k] = _request($k);
+			if (!is_null(_request($k)))
+				$config[$k] = _request($k);
 		}
 		ecrire_meta('mediabox',serialize($config));
 	}
