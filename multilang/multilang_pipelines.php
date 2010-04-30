@@ -86,7 +86,7 @@ function multilang_inserer_head($flux,$config=array()){
 			  	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
 			  	multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
 				multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
-			  	dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
+			  	multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
 
 				// On trie les langues. langue principale en premier,
 				// puis langue de l environnement puis les autres en ordre alphabetique
