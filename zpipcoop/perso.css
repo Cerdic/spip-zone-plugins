@@ -1,7 +1,19 @@
 /* Couleurs des liens de SPIP */ 
 a.spip_out {color: #009; background:url(img/out.gif) no-repeat right; padding-right:16px} /* liens sortants */ 
 
+/* Documents */
+.logo_document {float:left; margin:0 11px 0 0;}
+.document {background:#FFFFFF none repeat scroll 0 0;margin-top:15px;padding: 10px 15px 10px;}
+.document p {padding:10px 0 0 0;}
+
+/* Edit */
+.add {background: url(img/add.png) no-repeat;padding:1px 0 0 20px;}
+
 /* News feed */
+#content .post ul#feed {list-style: none;}
+ul#feed li {margin-bottom:.5em;background:none;padding:2px 0;border-bottom:1px solid #e9e9e9;color:#777;}
+ul#feed li em {font-size:.82em;font-style:normal;padding:3px 0 3px 25px;margin-right:1em;}
+ul#feed li small {font-size:.82em;}
 .file em {background:url(img/page.png) no-repeat;}
 .com em {background:url(img/comment.png) no-repeat;}
 .mes em {background:url(img/page_white_text.png) no-repeat;}
@@ -16,8 +28,6 @@ a.spip_out {color: #009; background:url(img/out.gif) no-repeat right; padding-ri
 /* Login (menu) */
 #login {font-size: 11px;color: #8F8F8F;}
 
-/* Edit */
-.add {background: url(img/add.png) no-repeat;padding:1px 0 0 20px;}
 .edit {background: url(img/edit.png) no-repeat;padding:1px 0 0 20px;}
 
 /*------------------------*/
