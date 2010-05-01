@@ -6,11 +6,28 @@ function clevermail_post_create($lst_id) {
       $last_create = 60*60*24; // On se place le 2 janvier 1970, SPIP n'aime pas epoc avec le critere "age"
     }
   	$post = array('lst_id' => intval($lst_id), 'pst_date_create' => time());
-	  include_spip('inc/distant');
-	  $url_html =  $list['lst_url_html'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create).'&lst_id='.intval($lst_id);
-	  $post['pst_html'] = recuperer_page($url_html);
-	  $url_text = $list['lst_url_text'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create).'&lst_id='.intval($lst_id);
-	  $post['pst_text'] = recuperer_page($url_text);
+	  if ( strpos($list['lst_url_html'], 'http://') !== false ) {
+		  include_spip('inc/distant');
+		  $url_html =  $list['lst_url_html'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create).'&lst_id='.intval($lst_id);
+		  $post['pst_html'] = recuperer_page($url_html);
+	  } else {
+		  $contexte = array(
+				'date' => date("Y-m-d",$last_create),
+				'lst_id' => intval($lst_id),
+			);
+		  $post['pst_html'] = recuperer_fond($list['lst_url_html'], $contexte);
+	  }
+	  if ( strpos($list['lst_url_text'], 'http://') !== false ) {
+		  include_spip('inc/distant');
+		  $url_text = $list['lst_url_text'].(strpos($list['lst_url_text'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create).'&lst_id='.intval($lst_id);
+		  $post['pst_text'] = recuperer_page($url_text);
+	  } else {
+		  $contexte = array(
+				'date' => date("Y-m-d",$last_create),
+				'lst_id' => intval($lst_id),
+			);
+		  $post['pst_text'] = recuperer_fond($list['lst_url_text'], $contexte);
+	  }
 	  if (trim($post['pst_html']) != '' && trim($post['pst_text']) != '') {
 		  //if (eregi("<title>(.*)</title>", $post['pst_html'], $regs)) {
 		  if (preg_match(",<title>(.*)</title>,", $post['pst_html'], $regs)) {

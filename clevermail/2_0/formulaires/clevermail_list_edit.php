@@ -1,18 +1,44 @@
 <?php
 function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
+	// Ces define sont mis ici car dans clevermail_options.php, il etait impossible de surcharger avec un plugin ayant :
+	// 	<utilise id="clevermail" version="[2.5.0;]" />
+	// Pour proposer une URL complète (true) ou juste le chemin du squelette (false) à la création d'une nouvelle lettre
+	@define("_CLEVERMAIL_DISTANT", true);
+	@define("_CLEVERMAIL_NOUVEAUTES_HTML", 'clevermail_nouveautes_html');
+	// _CLEVERMAIL_NOUVEAUTES_HTML_OPTION est facultatif. Il permet de completer l'url amorcee avec _CLEVERMAIL_NOUVEAUTES_HTML.
+	// define("_CLEVERMAIL_NOUVEAUTES_HTML_OPTION", 'cat=mot&sujet=1&pied=1&entete=1');
+	@define("_CLEVERMAIL_NOUVEAUTES_TEXT", 'clevermail_nouveautes_text');
+	// _CLEVERMAIL_NOUVEAUTES_TEXT_OPTION est facultatif. Il permet de completer l'url amorcee avec _CLEVERMAIL_NOUVEAUTES_TEXT.
+	// define("_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION", 'cat=mot&sujet=1&pied=1&entete=1');
 	if ($valeurs = sql_fetsel('*', 'spip_cm_lists', 'lst_id='.intval($lst_id))) {
 		$valeurs['lst_auto_week_days'] = explode(',', $valeurs['lst_auto_week_days']);
 	} else {
     $cm_mail_admin = sql_getfetsel('set_value', 'spip_cm_settings', 'set_name="CM_MAIL_ADMIN"');
     	if (defined('_CLEVERMAIL_NOUVEAUTES_HTML_OPTION')) {
-			$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML,_CLEVERMAIL_NOUVEAUTES_HTML_OPTION);
+			if (_CLEVERMAIL_DISTANT) {
+				$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML,_CLEVERMAIL_NOUVEAUTES_HTML_OPTION);
+			} else {
+				$url_html = _CLEVERMAIL_NOUVEAUTES_HTML;
+			}
 		} else {
-			$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML);
+			if (_CLEVERMAIL_DISTANT) {
+				$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML);
+			} else {
+				$url_html = _CLEVERMAIL_NOUVEAUTES_HTML;
+			}
 		}
 		if (defined('_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION')) {
-			$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT,_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION);
+			if (_CLEVERMAIL_DISTANT) {
+				$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT,_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION);
+			} else {
+				$url_text = _CLEVERMAIL_NOUVEAUTES_TEXT;
+			}
 		} else {
-			$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT);
+			if (_CLEVERMAIL_DISTANT) {
+				$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT);
+			} else {
+				$url_text = _CLEVERMAIL_NOUVEAUTES_TEXT;
+			}
 		}
 		$valeurs = array(
 			'lst_id' => -1,
