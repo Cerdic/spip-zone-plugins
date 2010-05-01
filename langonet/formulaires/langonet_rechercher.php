@@ -57,8 +57,9 @@ function formater_recherche($recherche, $resultats) {
 				foreach ($_infos['fichier'] as $_index => $_fichier_def) {
 					$texte .= "\t" . '<span style="font-weight:bold;padding-left:2em;">' .
 					          $_fichier_def . "</span><br />\n" .
-					          "\t" . '<span class="explication" style="padding-left:3em;padding-right:0.5em;"><em>' .
-					          $_infos['traduction'][$_index] . "</em></span><br />\n";
+					          "\t" . '<span style="padding-left:3em;padding-right:0.5em;"><em>' .
+							  '<span style="color: #aaa">&#10078;</span> ' . $_infos['traduction'][$_index] . ' <span style="color: #aaa">&#10077;</span>' .
+							  "</em></span><br />\n";
 				}
 				$texte .= "</p>\n" .
 				          fin_block();
