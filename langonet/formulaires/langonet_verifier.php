@@ -100,7 +100,7 @@ function formater_resultats($verification, $resultats) {
 				$texte['non'] .= _T('langonet:message_ok_non_definis_n', array('module' => $resultats['module'], 'nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte['non'] .= afficher_lignes($resultats['fichier_non']);
+			$texte['non'] .= afficher_lignes('non', $resultats['fichier_non']);
 			$texte['non'] .= "</div>\n</div>\n";
 		}
 		else {
@@ -120,7 +120,7 @@ function formater_resultats($verification, $resultats) {
 				$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_n', array('nberr' => count($resultats['item_non_mais_nok']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			$texte['non_mais_nok'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte['non_mais_nok'] .= afficher_lignes($resultats['fichier_non_mais_nok'], $resultats['definition_non_mais_nok']);
+			$texte['non_mais_nok'] .= afficher_lignes('non_mais_nok', $resultats['fichier_non_mais_nok'], $resultats['definition_non_mais_nok']);
 			$texte['non_mais_nok'] .= "</div>\n</div>\n";
 		}
 
@@ -135,7 +135,7 @@ function formater_resultats($verification, $resultats) {
 				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			$texte['non_mais'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte['non_mais'] .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_non_mais']);
+			$texte['non_mais'] .= afficher_lignes('non_mais', $resultats['fichier_non_mais'], $resultats['definition_non_mais']);
 			$texte['non_mais'] .= "</div>\n</div>\n";
 		}
 		if ((count($resultats['item_non_mais'])+count($resultats['item_non_mais_nok'])) == 0) {
@@ -154,7 +154,7 @@ function formater_resultats($verification, $resultats) {
 				$texte['peut_etre'] .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n";
 			}
 			$texte['peut_etre'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte['peut_etre'] .= afficher_lignes($resultats['fichier_peut_etre']);
+			$texte['peut_etre'] .= afficher_lignes('peut_etre', $resultats['fichier_peut_etre']);
 			$texte['peut_etre'] .= "</div>\n</div>\n";
 		}
 		else {
@@ -198,7 +198,7 @@ function formater_resultats($verification, $resultats) {
 				$texte['peut_etre'] .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n";
 			}
 			$texte['peut_etre'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte['peut_etre'] .= afficher_lignes($resultats['fichier_peut_etre']);
+			$texte['peut_etre'] .= afficher_lignes('peut_etre', $resultats['fichier_peut_etre']);
 			$texte['peut_etre'] .= "</div>\n</div>\n";
 		}
 		else {
@@ -225,14 +225,16 @@ function formater_resultats($verification, $resultats) {
 /**
  * Formate une liste de resultats
  *
+ * @param string $type
  * @param array $tableau
  * @param array $possibles
  * @return string
  */
 
+// $type	  => le type de resultats (non, non_mais, non_mais_nok, peut_etre)
 // $tableau   => [item][fichier utilisant][num ligne][] => extrait ligne
 // $possibles => [item][] => fichier de langue ou item est defini
-function afficher_lignes($tableau, $possibles=array()) {
+function afficher_lignes($type, $tableau, $possibles=array()) {
 
 	include_spip('inc/layer');
 
@@ -254,12 +256,16 @@ function afficher_lignes($tableau, $possibles=array()) {
 		$liste_lignes .= "</p>";
 
 		if (is_array($possibles[$item])) {
-			$liste_lignes .= "<p style=\"padding-left:2em;\">  "._T('langonet:texte_item_defini_ou')."\n<br />";
+			$liste_lignes .= "<p style=\"padding-left:2em;\">  " . (($type=='non_mais_nok') ? _T('langonet:texte_item_mal_defini') : _T('langonet:texte_item_defini_ou')) . "\n<br />";
 			foreach ($possibles[$item] as $fichier_def) {
 				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
 			}
 			$liste_lignes .= "</p>\n";
 		}
+		else
+			if ($type == 'non_mais_nok') {
+				$liste_lignes .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "\n<br />";
+			}
 		$liste_lignes .= fin_block();
 	}
 
