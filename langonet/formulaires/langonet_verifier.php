@@ -70,12 +70,14 @@ function formulaires_langonet_verifier_traiter() {
 //                    ["langue"] => nom fichier de lang
 //                    ["item_non"][] => intitule item
 //                    ["fichier_non"][item][fichier utilisant][num de la ligne][] => extrait ligne
+//                    ["item_non_mais_nok"][] => intitule item
+//                    ["fichier_non_mais_nok"][item][fichier utilisant][num de la ligne][] => extrait ligne
+//                    ["definition_non_mais_nok"][item][] => nom fichier de lang
 //                    ["item_non_mais"][] => intitule item
 //                    ["fichier_non_mais"][item][fichier utilisant][num de la ligne][] => extrait ligne
+//                    ["definition_non_mais"][item][] => nom fichier de lang
 //                    ["item_peut_etre"][] => intitule partiel item
 //                    ["fichier_peut_etre"][item][fichier utilisant][num de la ligne][] => extrait ligne
-//                    ["definition_possible"][item][] => nom fichier de lang
-//                    ["definition_ok"] => 
 // $verification => type de verification effectuee (definition ou utilisation)
 function formater_resultats($verification, $resultats) {
 
@@ -85,16 +87,17 @@ function formater_resultats($verification, $resultats) {
 	// - ["message_erreur"] : le message d'erreur si on a erreur de traitement pendant l'execution
 	$retour = array();
 
-	$texte = array('non' => '', 'non_mais' => '', 'peut_etre' => '');
+	$texte = array('non' => '', 'non_mais' => '', 'non_mais_nok' => '', 'peut_etre' => '');
 	if ($verification == 'definition') {
-		// Liste des items non definis avec certitude et bien utilises avec le bon module
+		// Liste des items du module en cours de verification
+		// et non definis avec certitude dans le fichier idoine
 		if (count($resultats['item_non']) > 0) {
 			$texte['non'] .= '<div class="error">'  . "\n";
 			if (count($resultats['item_non']) == 1) {
-				$texte['non'] .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_definis_1', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte['non'] .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+				$texte['non'] .= _T('langonet:message_ok_non_definis_n', array('module' => $resultats['module'], 'nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non'] .= afficher_lignes($resultats['fichier_non']);
@@ -106,8 +109,23 @@ function formater_resultats($verification, $resultats) {
 			$texte['non'] .= "</div>\n";
 		}
 
-		// Liste des items non definis mais utilises avec un module different de celui 
-		// en cours de verification
+		// Liste des items n'appartenant pas au module en cours de verification 
+		// et non definis avec certitude dans le fichier idoine
+		if (count($resultats['item_non_mais_nok']) > 0) {
+			$texte['non_mais_nok'] .= '<div class="error">'  . "\n";
+			if (count($resultats['item_non_mais_nok']) == 1) {
+				$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+			}
+			else {
+				$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_n', array('nberr' => count($resultats['item_non_mais_nok']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+			}
+			$texte['non_mais_nok'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
+			$texte['non_mais_nok'] .= afficher_lignes($resultats['fichier_non_mais_nok'], $resultats['definition_non_mais_nok']);
+			$texte['non_mais_nok'] .= "</div>\n</div>\n";
+		}
+
+		// Liste des items n'appartenant pas au module en cours de verification 
+		// mais definis dans le module idoine
 		if (count($resultats['item_non_mais']) > 0) {
 			$texte['non_mais'] .= '<div class="notice">' . "\n";
 			if (count($resultats['item_non_mais']) == 1) {
@@ -117,16 +135,16 @@ function formater_resultats($verification, $resultats) {
 				$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_n', array('nberr' => count($resultats['item_non_mais']), 'ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			}
 			$texte['non_mais'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
-			$texte['non_mais'] .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_possible'], $resultats['definition_ok']);
+			$texte['non_mais'] .= afficher_lignes($resultats['fichier_non_mais'], $resultats['definition_non_mais']);
 			$texte['non_mais'] .= "</div>\n</div>\n";
 		}
-		else {
+		if ((count($resultats['item_non_mais'])+count($resultats['item_non_mais_nok'])) == 0) {
 			$texte['non_mais'] .= '<div class="success">' . "\n";
 			$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			$texte['non_mais'] .= "</div>\n";
 		}
 
-		// Liste des items definis sans certitude
+		// Liste des items non definis sans certitude car utilises dans un contexte variable
 		if (count($resultats['item_peut_etre']) > 0) {
 			$texte['peut_etre'] .= '<div class="notice">' . "\n";
 			if (count($resultats['item_peut_etre']) == 1) {
@@ -199,7 +217,7 @@ function formater_resultats($verification, $resultats) {
 	else {
 		// Tout s'est bien passe on renvoie le message ok et les resultats de la verification
 		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_log', array('log_fichier' => $log_fichier));
-		$retour['message_ok']['resultats'] = $texte['non'] . $texte['non_mais'] . $texte['peut_etre'];
+		$retour['message_ok']['resultats'] = $texte['non'] . $texte['non_mais_nok'] . $texte['non_mais'] . $texte['peut_etre'];
 	}
 	return $retour;
 }
@@ -209,14 +227,12 @@ function formater_resultats($verification, $resultats) {
  *
  * @param array $tableau
  * @param array $possibles
- * @param array $ok
  * @return string
  */
 
 // $tableau   => [item][fichier utilisant][num ligne][] => extrait ligne
 // $possibles => [item][] => fichier de langue ou item est defini
-// $ok        => 
-function afficher_lignes($tableau, $possibles=array(), $ok=array()) {
+function afficher_lignes($tableau, $possibles=array()) {
 
 	include_spip('inc/layer');
 
@@ -238,17 +254,11 @@ function afficher_lignes($tableau, $possibles=array(), $ok=array()) {
 		$liste_lignes .= "</p>";
 
 		if (is_array($possibles[$item])) {
-			$liste_lignes .= '<p style="padding-left:2em;">  '._T('langonet:texte_item_defini_ou')."\n<br />";
+			$liste_lignes .= "<p style=\"padding-left:2em;\">  "._T('langonet:texte_item_defini_ou')."\n<br />";
 			foreach ($possibles[$item] as $fichier_def) {
-				$liste_lignes .= "\t" . '<span style="font-weight:bold;padding-left:2em;">' .$fichier_def ."</span><br />\n";
+				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
 			}
 			$liste_lignes .= "</p>\n";
-			if (!$ok[$item])
-				$liste_lignes .= '<p style="padding-left:2em; color: #8a1f11"><strong>' . _T('langonet:texte_item_mal_defini') . "</strong></p>\n";
-		}
-		else {
-			if ($ok[$item]===false)
-				$liste_lignes .= '<p style="padding-left:2em; color: #8a1f11"><strong>' . _T('langonet:texte_item_non_defini') . "</strong></p>\n";
 		}
 		$liste_lignes .= fin_block();
 	}
@@ -282,24 +292,31 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	"/* " . entite2utf(_T('langonet:label_fichier_verifie')) . " : " . entite2utf($resultats['langue']) . "\n" .
 	"/* " . entite2utf(_T('langonet:label_arborescence_scannee')) . " : " . entite2utf($resultats['ou_fichier']) . "\n" .
 	"/* *****************************************************************************\n" .
-	"/* " . entite2utf(_T('langonet:label_erreur')) . " : " . entite2utf(count($resultats['item_non'])) . "\n" .
-	"/* " . entite2utf(_T('langonet:label_avertissement')) . " : " . entite2utf(count($resultats['item_non_mais'])+count($resultats['item_peut_etre'])) . "\n" .
+	"/* " . entite2utf(_T('langonet:label_erreur')) . " : " . strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok'])) . "\n" .
+	"/* " . entite2utf(_T('langonet:label_avertissement')) . " : " . strval(count($resultats['item_non_mais'])+count($resultats['item_peut_etre'])) . "\n" .
 	"/* *****************************************************************************\n" .
 	// -- Texte des resultats: erreur (non definis ou non utilises)
 	"\n\n/* *****************************************************************************\n" .
-	"/* " . entite2utf(_T('langonet:entete_erreur_'.$verification)) . "\n" .
+	"/* " . entite2utf(_T('langonet:entete_log_erreur_'.$verification)) . "\n" .
 	"/* *****************************************************************************\n" .
 	entite2utf(strip_tags($texte['non']));
-	// -- Texte des resultats: avertissement (non definis mais n'appartenant pas au module a priori)
+	// -- Texte des resultats: erreur (non definis mais n'appartenant pas au module en cours de verification)
+	if ($texte['non_mais_nok']) {
+		$log_texte .= "\n\n/* *****************************************************************************\n" .
+		"/* " . entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) . "\n" .
+		"/* *****************************************************************************\n" .
+		entite2utf(strip_tags($texte['non_mais_nok']));
+	}
+	// -- Texte des resultats: avertissement (definis mais dans un autre module)
 	if ($texte['non_mais']) {
 		$log_texte .= "\n\n/* *****************************************************************************\n" .
-		"/* " . entite2utf(_T('langonet:entete_avertissement_nonmais')) . "\n" .
+		"/* " . entite2utf(_T('langonet:entete_log_avertissement_nonmais')) . "\n" .
 		"/* *****************************************************************************\n" .
 		entite2utf(strip_tags($texte['non_mais']));
 	}
 	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
 	$log_texte .= "\n\n/* *****************************************************************************\n" .
-	"/* " . entite2utf(_T('langonet:entete_avertissement_peutetre_'.$verification)) . "\n" .
+	"/* " . entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . "\n" .
 	"/* *****************************************************************************\n" .
 	entite2utf(strip_tags($texte['peut_etre']));
 

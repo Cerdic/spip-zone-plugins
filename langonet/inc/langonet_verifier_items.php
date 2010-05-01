@@ -109,22 +109,35 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 						// L'item est a priori defini dans un autre module. Le fait qu'il ne soit pas
 						// defini dans le fichier en cours de verification n'est pas forcement une erreur.
 						// On l'identifie donc a part
-						$item_non_mais[] = $_valeur;
-						if (is_array($item_tous[$_valeur])) {
-							$fichier_non_mais[$_valeur] = $item_tous[$_valeur];
-						}
-						$definition_ok[$_valeur] = false;
+						$definition_ok = false;
+						$definitions = array();
 						if (array_key_exists($_valeur, $tous_lang)) {
-							$definition_possible[$_valeur] = $tous_lang[$_valeur];
-							while ((list($_index, $_fichier) = each($definition_possible[$_valeur])) AND !$definition_ok[$_valeur])  {
+							$definitions = $tous_lang[$_valeur];
+							while ((list($_index, $_fichier) = each($definitions)) AND !$definition_ok)  {
 								preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $module_trouve);
 								if ($module_trouve[1]) {
 									$module_def = (($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) ? '' : $module_trouve[1];
 									if ($module_def == $utilises['modules'][$_cle]) {
-										$definition_ok[$_valeur] = true;
+										$definition_ok = true;
 									}
 								}
 							}
+						}
+						if ($definition_ok) {
+							$item_non_mais[] = $_valeur;
+							if (is_array($item_tous[$_valeur])) {
+								$fichier_non_mais[$_valeur] = $item_tous[$_valeur];
+							}
+							if ($definitions)
+								$definition_non_mais[$_valeur] = $definitions;
+						}
+						else {
+							$item_non_mais_nok[] = $_valeur;
+							if (is_array($item_tous[$_valeur])) {
+								$fichier_non_mais_nok[$_valeur] = $item_tous[$_valeur];
+							}
+							if ($definitions)
+								$definition_non_mais_nok[$_valeur] = $definitions;
 						}
 					}
 				}
@@ -195,12 +208,14 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	$resultats['langue'] = $ou_langue.$module.'_'.$langue.'.php';
 	$resultats['item_non'] = $item_non;
 	$resultats['item_non_mais'] = $item_non_mais;
+	$resultats['item_non_mais_nok'] = $item_non_mais_nok;
 	$resultats['fichier_non'] = $fichier_non;
 	$resultats['fichier_non_mais'] = $fichier_non_mais;
+	$resultats['fichier_non_mais_nok'] = $fichier_non_mais_nok;
+	$resultats['definition_non_mais'] = $definition_non_mais;
+	$resultats['definition_non_mais_nok'] = $definition_non_mais_nok;
 	$resultats['item_peut_etre'] = $item_peut_etre;
 	$resultats['fichier_peut_etre'] = $fichier_peut_etre;
-	$resultats['definition_possible'] = $definition_possible;
-	$resultats['definition_ok'] = $definition_ok;
 
 	return $resultats;
 }
