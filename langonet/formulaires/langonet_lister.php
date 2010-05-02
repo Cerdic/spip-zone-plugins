@@ -14,9 +14,6 @@ function formulaires_langonet_lister_verifier() {
 
 function formulaires_langonet_lister_traiter() {
 
-	// Determination du type de verification et appel de la fonction idoine
-	$langonet_lister_items = charger_fonction('langonet_lister_items','inc');
-
 	// Recuperation des champs du formulaire
 	//   $module     -> prefixe du fichier de langue
 	//                  'langonet' pour 'langonet_fr.php'
@@ -25,12 +22,13 @@ function formulaires_langonet_lister_traiter() {
 	//                  'fr' pour 'langonet_fr.php'
 	//   $ou_langue  -> chemin vers le fichier de langue a verifier
 	//                  'plugins/auto/langonet/lang'
-	//   $ou_fichier -> racine de l'arborescence a verifier
-	//                  'plugins/auto/langonet'
 	$retour_select_langue = explode(':', _request('fichier_langue'));
 	$module = $retour_select_langue[1];
 	$langue = $retour_select_langue[2];
 	$ou_langue = $retour_select_langue[3];
+
+	// Chargement de la fonction d'affichage
+	$langonet_lister_items = charger_fonction('langonet_lister_items','inc');
 
 	// Recuperation des items du fichier et formatage des resultats pour affichage
 	$retour = array();

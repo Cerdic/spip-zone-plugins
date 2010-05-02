@@ -2,6 +2,7 @@
 
 function formulaires_langonet_rechercher_charger() {
 	return array('pattern' => _request('pattern'),
+				'correspondance' => _request('correspondance'),
 				'recherche' => _request('recherche'));
 }
 
@@ -18,22 +19,23 @@ function formulaires_langonet_rechercher_traiter() {
 	// Recuperation des champs du formulaire
 	$pattern = _request('pattern');
 	$recherche = _request('recherche');
+	$correspondance = _request('correspondance');
 	$langonet_rechercher_item = charger_fonction('langonet_rechercher_item','inc');
 
-	// Verification et formatage des resultats pour affichage
+	// Verification et formatage des resultats de la recherche
 	$retour = array();
-	$resultats = $langonet_rechercher_item($pattern, $recherche);
+	$resultats = $langonet_rechercher_item($pattern, $correspondance);
 	if ($resultats['erreur']) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour = formater_recherche($recherche, $resultats);
+		$retour = formater_recherche($resultats);
 	}
 	$retour['editable'] = true;
 	return $retour;
 }
 
-function formater_recherche($recherche, $resultats) {
+function formater_recherche($resultats) {
 	include_spip('inc/layer');
 	
 	$texte = '';

@@ -4,13 +4,13 @@
  * Vérification de l'utilisation des items de langue
  *
  * @param string $pattern
- * @param string $recherche
+ * @param string $correspondance
  * @return array
  */
 
-// $pattern      => item (le raccourci) ou partie de l'item a rechercher
-// $recherche    => type de recherche : egal, commence, ou contient
-function inc_langonet_rechercher_item($pattern, $recherche) {
+// $pattern      	=> item (le raccourci) ou partie de l'item a rechercher
+// $correspondance  => type de correspondance : egal, commence, ou contient
+function inc_langonet_rechercher_item($pattern, $correspondance) {
 
 	// Initialisation du tableau des resultats
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
@@ -33,9 +33,9 @@ function inc_langonet_rechercher_item($pattern, $recherche) {
 	}
 	ksort($tous_lang);
 
-	// On cherche le pattern en fonction du type de recherche
+	// On cherche le pattern en fonction du type de correspondance
 	$trouve= array();
-	if ($recherche == 'egal') {
+	if ($correspondance == 'egal') {
 		if ($tous_lang[$pattern]) {
 			$trouve['egal'][$pattern]['fichier'] = $tous_lang[$pattern];
 			$trouve['egal'][$pattern]['traduction'] = $tous_trad[$pattern];
@@ -46,7 +46,7 @@ function inc_langonet_rechercher_item($pattern, $recherche) {
 		while (list($_item, $_fichiers) = each($tous_lang)) {
 			$commence_par = (substr($_item, 0, strlen($pattern)) == $pattern);
 			$contient = false;
-			if ($recherche == 'contient')
+			if ($correspondance == 'contient')
 				$contient = (strpos($_item, $pattern) !== false);
 
 			if ($_item == $pattern) {

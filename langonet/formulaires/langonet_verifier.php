@@ -19,29 +19,31 @@ function formulaires_langonet_verifier_verifier() {
 
 function formulaires_langonet_verifier_traiter() {
 
-	// Determination du type de verification et appel de la fonction idoine
-	$verification = _request('verification');
-	$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
-
 	// Recuperation des champs du formulaire
-	//   $rep        -> nom du repertoire parent de lang/
-	//                  'langonet' pour 'langonet/lang/'
-	//                  correspond generalement au 'nom' du plugin
-	//   $module     -> prefixe du fichier de langue
-	//                  'langonet' pour 'langonet_fr.php'
-	//                  parfois different du 'nom' du plugin
-	//   $langue     -> index du nom de langue
-	//                  'fr' pour 'langonet_fr.php'
-	//   $ou_langue  -> chemin vers le fichier de langue a verifier
-	//                  'plugins/auto/langonet/lang'
-	//   $ou_fichier -> racine de l'arborescence a verifier
-	//                  'plugins/auto/langonet'
+	//   $verification -> type de verification
+	//                   'definition' ou 'utilisation'
+	//   $rep          -> nom du repertoire parent de lang/
+	//                    'langonet' pour 'langonet/lang/'
+	//                    correspond generalement au 'nom' du plugin
+	//   $module       -> prefixe du fichier de langue
+	//                    'langonet' pour 'langonet_fr.php'
+	//                    parfois different du 'nom' du plugin
+	//   $langue       -> index du nom de langue
+	//                    'fr' pour 'langonet_fr.php'
+	//   $ou_langue    -> chemin vers le fichier de langue a verifier
+	//                    'plugins/auto/langonet/lang'
+	//   $ou_fichier   -> racine de l'arborescence a verifier
+	//                    'plugins/auto/langonet'
+	$verification = _request('verification');
 	$retour_select_langue = explode(':', _request('fichier_langue'));
 	$rep = $retour_select_langue[0];
 	$module = $retour_select_langue[1];
 	$langue = $retour_select_langue[2];
 	$ou_langue = $retour_select_langue[3];
 	$ou_fichier = _request('dossier_scan');
+
+	// Chargement de la fonction de verification
+	$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
 
 	// Verification et formatage des resultats pour affichage
 	$retour = array();

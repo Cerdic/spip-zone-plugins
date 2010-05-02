@@ -18,19 +18,19 @@
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pattern})</span>]
 							<input type='text' name='pattern' id='pattern' value="#ENV{pattern}" class="text" />						
 						</li>
-						<li class="editer_recherche[(#ENV{erreurs}|table_valeur{recherche}|oui) erreur]">
-							<label><:langonet:label_recherche:></label>
+						<li class="editer_correspondance[(#ENV{erreurs}|table_valeur{correspondance}|oui) erreur]">
+							<label><:langonet:label_correspondance:></label>
 							<div class="choix">
-								<input type="radio" value="egal" id="recherche_egal" class="radio" name="recherche" [(#ENV{recherche, egal}|=={egal}|oui) checked="checked"] />
-								<label for="recherche_egal"><:langonet:label_recherche_egal:></label>
+								<input type="radio" value="egal" id="correspondance_egal" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={egal}|oui) checked="checked"] />
+								<label for="correspondance_egal"><:langonet:label_correspondance_egal:></label>
 							</div>
 							<div class="choix">
-								<input type="radio" value="commence" id="recherche_commence" class="radio" name="recherche" [(#ENV{recherche, egal}|=={commence}|oui) checked="checked"] />
-								<label for="recherche_commence"><:langonet:label_recherche_commence:></label>
+								<input type="radio" value="commence" id="correspondance_commence" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={commence}|oui) checked="checked"] />
+								<label for="correspondance_commence"><:langonet:label_correspondance_commence:></label>
 							</div>
 							<div class="choix">
-								<input type="radio" value="contient" id="recherche_contient" class="radio" name="recherche" [(#ENV{recherche, egal}|=={contient}|oui) checked="checked"] />
-								<label for="recherche_contient"><:langonet:label_recherche_contient:></label>
+								<input type="radio" value="contient" id="correspondance_contient" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={contient}|oui) checked="checked"] />
+								<label for="correspondance_contient"><:langonet:label_correspondance_contient:></label>
 							</div>
 						</li>
 					</ul>
