@@ -1,0 +1,9 @@
+V 0.1.1 : Version d'origine de minimalteck
+Voir la doc http://minimalteck.fr/dev-web/plugin-spip-diaporama-avec-jquery
+
+V 0.2 : Evolutions Yffic Avril 2010
+- Ajout de la possiblite de desactiver les fonctions fancy et tooltip dans la config du plugin
+pour une compatibilite avec le plugin FancyBox de b_b
+- Init de la config dans sjcycle_insert_head
+- Si effet fade, pas la peine d'inclure le gros js
+- Traduction anglaise

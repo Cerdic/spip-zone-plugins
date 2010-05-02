@@ -1,0 +1,119 @@
+	[(#SET{mon_tableau, [(#ENV{docs}|explode{','})]})]
+	<B_img>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		[(#CONFIG{sjcycle/sjcycle_tooltip}|=={1}|oui)
+			$('.infobulle').tooltip({ 
+					bodyHandler: function() {
+						return $($(this).children(".textinfobulle")).html();
+					},
+					track: true, 
+					delay: 0, 
+					showURL: false, 
+					opacity: 1, 
+					fixPNG: true,
+					extraClass: "pretty", 
+					top: -15, 
+					left: 5 
+			});
+		]
+	});
+	</script>
+	[(#REM) diaporama documents images conteneur jquery cycle ]
+	<div class="dsjcycle" style='[float:(#ENV{align}|match{left|right});margin:[(#CONFIG{sjcycle/sjcycle_margin})]px;]'>
+	<BOUCLE_img(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{id_document IN #GET{mon_tableau}}{par num titre, date}{doublons}>
+		<div class="infobulle" style="width:#CONFIG{sjcycle/sjcycle_img_width}px;
+      										height:#CONFIG{sjcycle/sjcycle_img_height}px;
+                                    padding:0px;
+                                    margin:[(#CONFIG{sjcycle/sjcycle_img_margin})]px;">
+         [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+            <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE" 
+                                         class="fancybox"
+                                         rel="fancybox"
+                                         title="[(#TITRE|supprimer_numero|attribut_html)]"
+                                         style="display:block;padding:0px;margin:0px;">
+         ]
+         [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
+                                   #CONFIG{sjcycle/sjcycle_img_height}}
+                   |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
+                                   #CONFIG{sjcycle/sjcycle_img_height},
+                                   #CONFIG{sjcycle/sjcycle_img_position},
+                                   #CONFIG{sjcycle/sjcycle_img_background}}
+                   |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
+                   |inserer_attribut{style,"display:block;"})]
+         [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+         	</a>
+         ]
+         [(#CONFIG{sjcycle/sjcycle_tooltip}|=={1}|oui)
+            <div class="textinfobulle" style="display:none;text-align:left;">
+               [<h4>(#TITRE|supprimer_numero)</h4>]
+               [(#DESCRIPTIF)<br/ >]
+               [(#CONFIG{sjcycle/sjcycle_tooltip_carac}|=={1}|oui)
+               	<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]
+               ]
+            </div>
+         ]
+		</div> <!-- .infobulle -->
+	</BOUCLE_img>
+	</div><!-- .sjcycle-->
+	</B_img>
+   
+	<B_img2>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		[(#CONFIG{sjcycle/sjcycle_tooltip}|=={1}|oui)
+			$('.infobulle').tooltip({ 
+					bodyHandler: function() {
+						return $($(this).children(".textinfobulle")).html();
+					},
+					track: true, 
+					delay: 0, 
+					showURL: false, 
+					opacity: 1, 
+					fixPNG: true,
+					extraClass: "pretty", 
+					top: -15, 
+					left: 5 
+			});
+		]
+	});
+	</script>
+	[(#REM) diaporama documents images conteneur jquery cycle ]
+	<div class="dsjcycle" style='[float:(#ENV{align}|match{left|right});margin:[(#CONFIG{sjcycle/sjcycle_margin})]px;]'>
+	<BOUCLE_img2(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{par num titre, date}{doublons}>
+		<div class="infobulle" style="width:#CONFIG{sjcycle/sjcycle_img_width}px;
+      										height:#CONFIG{sjcycle/sjcycle_img_height}px;
+                                    padding:0px;
+                                    margin:[(#CONFIG{sjcycle/sjcycle_img_margin})]px;">
+         [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+            <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE" 
+                                         class="fancybox"
+                                         rel="fancybox"
+                                         title="[(#TITRE|supprimer_numero|attribut_html)]"
+                                         style="display:block;padding:0px;margin:0px;">
+         ]
+         [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
+                                   #CONFIG{sjcycle/sjcycle_img_height}}
+                   |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
+                                   #CONFIG{sjcycle/sjcycle_img_height},
+                                   #CONFIG{sjcycle/sjcycle_img_position},
+                                   #CONFIG{sjcycle/sjcycle_img_background}}
+                   |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
+                   |inserer_attribut{style,"display:block;"})]
+         [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+         	</a>
+         ]
+         [(#CONFIG{sjcycle/sjcycle_tooltip}|=={1}|oui)
+            <div class="textinfobulle" style="display:none;text-align:left;">
+               [<h4>(#TITRE|supprimer_numero)</h4>]
+               [(#DESCRIPTIF)<br/ >]
+               [(#CONFIG{sjcycle/sjcycle_tooltip_carac}|=={1}|oui)
+               	<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]
+               ]
+            </div>
+         ]
+		</div> <!-- .infobulle -->
+	</BOUCLE_img2>
+	</div><!--end of #sjcycle-->
+	</B_img2>
+	<//B_img>

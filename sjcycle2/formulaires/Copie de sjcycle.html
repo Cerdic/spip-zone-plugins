@@ -1,0 +1,183 @@
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	$("#form_cfg_sjcycle img.aide").toggle(
+	function(){
+	   $($(this).parents("li").children(".explication")).fadeIn(300);
+	 },
+	function(){
+	   $($(this).parents("li").children(".explication")).fadeOut(500);
+	});
+});
+</script>
+<form method="post" action="#ENV{action}#page" id="form_cfg_sjcycle">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+<fieldset><legend>Fancy & Tooltip</<legend>
+               <ul>
+                  [(#SAISIE{oui_non,sjcycle_fancy,
+                     label="Fancy",
+                     defaut=on}
+                  )]
+                  [(#SAISIE{oui_non,sjcycle_tooltip,
+                     label="Tooltip",
+                     defaut=on}
+                  )]
+					</ul>
+</fieldset>
+<fieldset><legend><:sjcycle:sjcycle_jsparams_legend:></<legend>
+<ul>
+		<li>
+			<label class="configuration" for="sjcycle_fx"><:sjcycle:sjcycle_fx:> <img src="../prive/images/aide.gif" alt="aide" class="aide"/> :</label>
+			<select name="sjcycle_fx" class="select configuration">	
+				<option value="blindX"[(#ENV{sjcycle_fx}|choixsiegal{'blindX', ' selected="selected"', ''})]>blindX</option>
+				<option value="blindY"[(#ENV{sjcycle_fx}|choixsiegal{'blindY', ' selected="selected"', ''})]>blindY</option>
+				<option value="blind"[(#ENV{sjcycle_fx}|choixsiegal{'blindZ', ' selected="selected"', ''})]>blindZ</option>
+				<option value="cover"[(#ENV{sjcycle_fx}|choixsiegal{'cover', ' selected="selected"', ''})]>cover</option>
+				<option value="curtain"[(#ENV{sjcycle_fx}|choixsiegal{'curtainX', ' selected="selected"', ''})]>curtainX</option>
+				<option value="curtainY"[(#ENV{sjcycle_fx}|choixsiegal{'curtainY', ' selected="selected"', ''})]>curtainY</option>
+				<option value="fade"[(#ENV{sjcycle_fx}|=={"fade"}|oui) selected="selected"]>fade</option>
+				<option value="fadeZoom"[(#ENV{sjcycle_fx}|choixsiegal{'fadeZoom', ' selected="selected"', ''})]>fadeZoom</option>
+				<option value="grow"[(#ENV{sjcycle_fx}|choixsiegal{'growX', ' selected="selected"', ''})]>growX</option>
+				<option value=grow""[(#ENV{sjcycle_fx}|choixsiegal{'growY', ' selected="selected"', ''})]>growY</option>
+				<option value="scrollU"[(#ENV{sjcycle_fx}|choixsiegal{'scrollUp', ' selected="selected"', ''})]>scrollUp</option>
+				<option value="scrollDown"[(#ENV{sjcycle_fx}|choixsiegal{'scrollDown', ' selected="selected"', ''})]>scrollDown</option>
+				<option value="scrollLeft"[(#ENV{sjcycle_fx}|choixsiegal{'scrollLeft', ' selected="selected"', ''})]>scrollLeft</option>
+				<option value="scrollRight"[(#ENV{sjcycle_fx}|choixsiegal{'scrollRight', ' selected="selected"', ''})]>scrollRight</option>
+				<option value="scrollHorz"[(#ENV{sjcycle_fx}|choixsiegal{'scrollHorz', ' selected="selected"', ''})]>scrollHorz</option>
+				<option value="scrollVert"[(#ENV{sjcycle_fx}|choixsiegal{'scrollVert', ' selected="selected"', ''})]>scrollVert</option>
+				<option value="shuffle"[(#ENV{sjcycle_fx}|choixsiegal{'shuffle', ' selected="selected"', ''})]>shuffle</option>
+				<option value="slideX"[(#ENV{sjcycle_fx}|choixsiegal{'slideX', ' selected="selected"', ''})]>slideX</option>
+				<option value="slideY"[(#ENV{sjcycle_fx}|choixsiegal{'slideY', ' selected="selected"', ''})]>slideY</option>
+				<option value="tos"[(#ENV{sjcycle_fx}|choixsiegal{'toss', ' selected="selected"', ''})]>toss</option>
+				<option value="turnU"[(#ENV{sjcycle_fx}|choixsiegal{'turnUp', ' selected="selected"', ''})]>turnUp</option>
+				<option value="turnDown"[(#ENV{sjcycle_fx}|choixsiegal{'turnDown', ' selected="selected"', ''})]>turnDown</option>
+				<option value="turnLeft"[(#ENV{sjcycle_fx}|choixsiegal{'turnLeft', ' selected="selected"', ''})]>turnLeft</option>
+				<option value="turnRigh"[(#ENV{sjcycle_fx}|choixsiegal{'turnRight', ' selected="selected"', ''})]>turnRight</option>
+				<option value="uncover"[(#ENV{sjcycle_fx}|choixsiegal{'uncover', ' selected="selected"', ''})]>uncover</option>
+				<option value="wipe"[(#ENV{sjcycle_fx}|choixsiegal{'wipe', ' selected="selected"', ''})]>wipe</option>
+				<option value="zoom"[(#ENV{sjcycle_fx}|choixsiegal{'zoom', ' selected="selected"', ''})]>zoom</option>
+			</select>
+			<p class="explication"><:sjcycle:explication_fx:></p>
+		</li>
+		<li>
+		<label class="configuration" for="sjcycle_sync"><:sjcycle:sjcycle_sync:> <img src="../prive/images/aide.gif" alt="aide" class="aide"/> :</label>
+			<div class="config_radio">
+			<input type="radio" name="sjcycle_sync" class="radio" id="sjcycle_sync_on" value="1" [(#ENV{sjcycle_sync}|=={"1"}|oui) checked="checked"] /><label for='sjcycle_sync_on' class="config_radio"><:oui:></label>
+			<input type="radio" name="sjcycle_sync" class="radio" id="sjcycle_sync_off" value="0" [(#ENV{sjcycle_sync}|=={"0"}|oui) checked="checked"] /><label for='sjcycle_sync_off' class="config_radio"><:non:></label>
+			</div>
+		<p class="explication"><:sjcycle:explication_sync:></p>
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_speed}}
+		<li class="editer_sjcycle_speed obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_speed"><:sjcycle:sjcycle_speed:>  <img src="../prive/images/aide.gif" alt="aide" class="aide"/> :</label>
+		<input type="text" name="sjcycle_speed" class="text configuration" value="#ENV{sjcycle_speed}" />
+		<p class="explication"><:sjcycle:explication_speed:></p>
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_timeout}}
+		<li class="editer_sjcycle_timeout obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_timeout"><:sjcycle:sjcycle_timeout:> <img src="../prive/images/aide.gif" alt="aide" class="aide"/> :</label>
+		<input type="text" name="sjcycle_timeout" class="text configuration" value="#ENV{sjcycle_timeout}" />
+		<p class="explication"><:sjcycle:explication_timeout:></p>
+		</li>
+		<li>
+		<label class="configuration" for="sjcycle_pause"><:sjcycle:sjcycle_pause:> <img src="../prive/images/aide.gif" alt="aide" class="aide"/> :</label>
+		<div class="config_radio">
+			<input type="radio" name="sjcycle_pause" class="radio" id="sjcycle_pause_on" value="1" [(#ENV{sjcycle_pause}|=={"1"}|oui) checked="checked"] /><label for='sjcycle_pause_on' class="config_radio"><:oui:></label>
+			<input type="radio" name="sjcycle_pause" class="radio" id="sjcycle_pause_off" value="0" [(#ENV{sjcycle_pause}|=={"0"}|oui) checked="checked"] /><label for='sjcycle_pause_off' class="config_radio"><:non:></label>
+		</div>
+		<p class="explication"><:sjcycle:explication_pause:></p>
+		</li>
+		<li>
+		<label class="configuration" for="sjcycle_random"><:sjcycle:sjcycle_random:> <img src="../prive/images/aide.gif" alt="aide" class="aide"/> :</label>
+		<div class="config_radio">
+			<input type="radio" name="sjcycle_random" class="radio" id="sjcycle_random_on" value="1" [(#ENV{sjcycle_random}|=={"1"}|oui) checked="checked"] /><label for='sjcycle_random_on' class="config_radio"><:oui:></label>
+			<input type="radio" name="sjcycle_random" class="radio" id="sjcycle_random_off" value="0" [(#ENV{sjcycle_random}|=={"0"}|oui) checked="checked"] /><label for='sjcycle_random_off' class="config_radio"><:non:></label>
+		</div>
+		<p class="explication"><:sjcycle:explication_random:></p>
+		</li>
+</ul>
+</fieldset>
+<fieldset><legend><:sjcycle:sjcycle_cssparams_legend:><legend>
+<ul>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_class}}
+		<li class="editer_sjcycle_class obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+			<label class="configuration" for="sjcycle_class"><:sjcycle:sjcycle_class:> :</label>
+			<input type="text" name="sjcycle_class" class="text configuration" value="#ENV{sjcycle_class}" />
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_margin}}
+		<li class="editer_sjcycle_margin obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_margin"><:sjcycle:sjcycle_margin:> :<span class="note"><br />(<:sjcycle:sjcycle_valeur_px:>)</span></label>
+		<input type="text" name="sjcycle_margin" class="text configuration" value="#ENV{sjcycle_margin}" />
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_img_margin}}
+		<li class="editer_sjcycle_img_margin obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_img_margin"><:sjcycle:sjcycle_img_margin:> :<span class="note"><br />(<:sjcycle:sjcycle_valeur_px:>)</span></label>
+		<input type="text" name="sjcycle_img_margin" class="text configuration" value="#ENV{sjcycle_img_margin}" />
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_background}}
+		<li class="editer_sjcycle_background obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_background"><:sjcycle:sjcycle_background:> : #<span class="note"><br />(<:sjcycle:sjcycle_valeur_hex:>)</span></label>
+		<input type="text" name="sjcycle_background" class="text configuration" value="#ENV{sjcycle_background}" />
+		</li>
+</ul>
+
+</fieldset>
+
+<fieldset><legend><:sjcycle:sjcycle_imgparams_legend:></<legend>
+<ul>
+		
+		<li>
+			<p class="configuration" for="sjcycle_img_recadre"><:sjcycle:sjcycle_img_recadre:> <img src="../prive/images/aide.gif" alt="aide" class="aide"/></p>
+			<p class="explication"><:sjcycle:explication_img_recadre:></p>
+		</li>
+		<li>
+			<label class="configuration" for="sjcycle_img_position"><:sjcycle:sjcycle_img_position:> :</label>
+			<select name="sjcycle_img_position" class="select configuration">
+				<option value="left top">left top</option>
+				<option value="left center">left center</option>
+				<option value="left bottom">left bottom</option>
+				<option value="center top">enter top</option>
+				<option value="center"[(#ENV{sjcycle_img_position}|=={"center"}|oui) selected="selected"]>center</option>
+				<option value="center bottom">enter bottom</option>
+				<option value="right top">right top</option>
+				<option value="right center">right center</option>
+				<option value="right bottom">right bottom</option>
+			</select>
+   
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_img_width}}
+		<li class="editer_sjcycle_img_width obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_img_width"><:sjcycle:sjcycle_img_width:> :<span class="note"><br />(<:sjcycle:sjcycle_valeur_px:>)</span></label>
+		<input type="text" name="sjcycle_img_width" class="text configuration" value="#ENV{sjcycle_img_width}" />
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_img_height}}
+		<li class="editer_sjcycle_img_height obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_img_height"><:sjcycle:sjcycle_img_height:> :<span class="note"><br />(<:sjcycle:sjcycle_valeur_px:>)</span></label>
+		<input type="text" name="sjcycle_img_height" class="text configuration" value="#ENV{sjcycle_img_height}" />
+		</li>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{sjcycle_img_background}}
+		<li class="editer_sjcycle_img_background obligatoire [(#GET{erreurs}|oui) erreur]">
+		[<span class='erreur_message'>(#GET{erreurs})<br /></span>]
+		<label class="configuration" for="sjcycle_img_background"><:sjcycle:sjcycle_img_background:> : #<span class="note"><br />(<:sjcycle:sjcycle_valeur_hex:>)</span></label>
+		<input type="text" name="sjcycle_img_background" class="text configuration" value="#ENV{sjcycle_img_background}" />
+		</li>
+</ul>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="Sauver la configuration" />
+<input type="submit" name="_cfg_delete" value="Valeurs par défaut" />
+</div></form>
+<?php
+/*echo "<pre>";
+print_r(lire_config('sjcycle'));
+echo "</pre>";*/
+?>
