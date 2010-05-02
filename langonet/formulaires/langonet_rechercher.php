@@ -2,8 +2,7 @@
 
 function formulaires_langonet_rechercher_charger() {
 	return array('pattern' => _request('pattern'),
-				'correspondance' => _request('correspondance'),
-				'recherche' => _request('recherche'));
+				'correspondance' => _request('correspondance'));
 }
 
 function formulaires_langonet_rechercher_verifier() {
@@ -18,7 +17,6 @@ function formulaires_langonet_rechercher_traiter() {
 
 	// Recuperation des champs du formulaire
 	$pattern = _request('pattern');
-	$recherche = _request('recherche');
 	$correspondance = _request('correspondance');
 	$langonet_rechercher_item = charger_fonction('langonet_rechercher_item','inc');
 
