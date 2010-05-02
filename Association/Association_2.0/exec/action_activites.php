@@ -113,8 +113,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$count=count ($drop_tab);
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$id = intval($drop_tab[$i]);
-				spip_query("DELETE FROM spip_asso_activites WHERE id_activite=$id");
-				spip_query("DELETE FROM spip_asso_comptes WHERE id_journal=$id AND imputation=".lire_config('association/pc_activites'));
+				sql_delete('spip_asso_activites', "id_activite=$id");
+				sql_delete('spip_asso_comptes', "id_journal=$id AND imputation=".lire_config('association/pc_activites'));
 			}
 			header ('location:'.$url_retour);
 			exit;

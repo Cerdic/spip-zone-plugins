@@ -90,8 +90,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		//  SUPPRESSION DEFINITIVE PRET
 		if ($action == "drop") {
 			
-			spip_query( "DELETE FROM spip_asso_prets WHERE id_pret=$id_pret" );
-			spip_query ("DELETE FROM spip_asso_comptes WHERE id_journal=$id_pret" );
+			sql_delete('spip_asso_prets', "id_pret=$id_pret" );
+			sql_delete('spip_asso_comptes', "id_journal=$id_pret" );
 			spip_query( "UPDATE spip_asso_ressources SET statut='ok' WHERE id_ressource=" . _q($id_ressource) );
 			header ('location:'.$url_retour);
 			exit;
