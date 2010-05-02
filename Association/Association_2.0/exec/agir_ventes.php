@@ -45,8 +45,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		//AJOUT VENTE
 		if ($action=="ajoute"){
 			spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, id_acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ("._q($date_vente).", "._q($article).", "._q($code).", "._q($acheteur).", "._q($id_acheteur).", "._q($quantite).", "._q($date_envoi).", "._q($frais_envoi).", "._q($don).", "._q($recette).", "._q($commentaire)." )");
-			$query=spip_query( "SELECT MAX(id_vente) AS id_vente FROM spip_asso_ventes");
-			while ($data = spip_fetch_array($query)) {
+			$query=sql_select('MAX(id_vente) AS id_vente', "spip_asso_ventes");
+			while ($data = sql_fetch($query)) {
 				$id_vente=$data['id_vente'];
 				$justification='vente n&deg; '.$id_vente.' - '.$article;
 			}

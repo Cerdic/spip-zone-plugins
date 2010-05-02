@@ -47,7 +47,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$id_activite=intval($_GET['id']);
 		
 		$query = sql_select("*", "spip_asso_activites", "id_activite=$id_activite ");
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			$nom=$data['nom'];
 			$id_adherent=$data['id_adherent'];
 			$membres=$data['membres'];
@@ -74,8 +74,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />';
 		echo '<label for="journal"><strong>'._T('asso:activite_libelle_mode_paiement').' :</strong></label>';
 		echo '<select name="journal" type="text" id="journal" class="formo" />';
-		$sql = sql_select("*", "spip_asso_plan ", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
-		while ($banque = spip_fetch_array($sql)) {
+		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
+		while ($banque = sql_fetch($sql)) {
 			echo '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
 		}
 		echo '</select>';

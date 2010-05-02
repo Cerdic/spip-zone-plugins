@@ -88,7 +88,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>Env</strong></td>';
 		echo '</tr>';
 		$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " a.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			$id_auteur=$data['id_auteur'];
 			$email=$data["email"];
 			//$statut_interne=$data['statut_interne'];

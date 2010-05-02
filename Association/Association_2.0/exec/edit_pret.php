@@ -48,7 +48,7 @@ function exec_edit_pret(){
 		
 		echo debut_boite_info(true);
 		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			$statut=$data['statut'];
 			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
 			echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
@@ -67,13 +67,13 @@ function exec_edit_pret(){
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_edition_prets'));
 		
 		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource");
-		while($data = spip_fetch_array($query)) {
+		while($data = sql_fetch($query)) {
 			$statut=$data['statut']; 
 			$pu=$data['pu'];
 		}			
 		
 		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_pret ");
-		while($data = spip_fetch_array($query)) {
+		while($data = sql_fetch($query)) {
 			$journal=$data['journal']; 
 			$montant=$data['recette'];
 		}
@@ -110,7 +110,7 @@ function exec_edit_pret(){
 		echo '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').' :</strong></label>';
 		echo '<select name="journal" type="text" id="journal" class="formo" />';
 		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
-		while ($banque = spip_fetch_array($sql)) {
+		while ($banque = sql_fetch($sql)) {
 			echo '<option value="'.$banque['code'].'" ';
 			if ($journal==$banque['code']) { echo ' selected="selected"'; }
 			echo '>'.$banque['intitule'].'</option>';

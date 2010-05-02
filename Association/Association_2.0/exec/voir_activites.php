@@ -45,14 +45,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo debut_boite_info(true);		
 		echo association_date_du_jour();	
 		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ") ;
-	 	while ($data = spip_fetch_array($query)) {
+	 	while ($data = sql_fetch($query)) {
 			echo '<p><strong>'.$data['date_debut'].'<br />'.$data['titre'].'</strong></p>';
 			echo '<p>'._T('asso:activite_liste_legende').'</p>'; 	
 		}
 			
 		// TOTAUX
-		$query = spip_query ( "SELECT sum(inscrits) AS inscrits, sum(montant) AS encaisse FROM spip_asso_activites WHERE id_evenement='$id_evenement' AND statut ='ok' " );
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select("sum(inscrits) AS inscrits, sum(montant) AS encaisse ", "spip_asso_activites", "id_evenement='$id_evenement' AND statut ='ok' " );
+		while ($data = sql_fetch($query)) {
 			echo '<p><font color="blue"><strong>'._T('asso:activite_liste_nombre_inscrits',array('total' => $data['inscrits'])).'</strong></font><br />';
 			echo '<font color="#9F1C30"><strong>'._T('asso:activite_liste_total_participations',array('total' => number_format($data['encaisse'], 2, ',', ' '))).'</strong></font><br/></p>';	
 		}
@@ -73,7 +73,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<table width="100%">';
 		echo '<tr>';
 		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ") ;
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			$date = substr($data['date_debut'],0,10);
 			$date = association_datefr($date);
 			$titre = $data['titre'];
@@ -104,9 +104,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<th><strong>'._T('asso:activite_entete_montant').'</strong></th>';
 		echo '<th colspan="3"><strong>'._T('asso:activite_entete_action').'</strong></th>';
 		echo '</tr>';
-		$query = sql_select("*", "spip_asso_activites ", "id_evenement='$id_evenement' AND statut like '$statut'  ", '', "id_activite") ;
+		$query = sql_select("*", "spip_asso_activites", "id_evenement='$id_evenement' AND statut like '$statut'  ", '', "id_activite") ;
 	 
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			
 			if($data['statut']=="ok") { $class= "valide"; }
 			else { $class="pair"; }

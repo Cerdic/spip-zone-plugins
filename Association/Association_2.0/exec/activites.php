@@ -57,7 +57,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if(empty($annee)){$annee = date('Y');}
 		
 		$query = sql_select("date_format( date_debut, '%Y' )  AS annee", "spip_evenements", "", "annee", "annee");
-		while ($data = spip_fetch_array($query)) {
+		while ($data = sql_fetch($query)) {
 			if ($data['annee']==$annee) { echo ' <strong>'.$data['annee'].'</strong>'; }
 			else { echo '<a href="'.$url_activites.'&annee='.$data['annee'].'&mot='.$mot.'">'.$data['annee'].'</a>';}
 		}
@@ -68,8 +68,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<option value="%"';
 		if ($mot=="%") { echo ' selected="selected"'; }
 		echo '> Toutes</option>';
-		$query = spip_query("SELECT * FROM spip_mots WHERE type='Evènements'");
-		while($data = spip_fetch_array($query)) {
+		$query = sql_select("*", "spip_mots", "type='Evènements'");
+		while($data = sql_fetch($query)) {
 			echo '<option value="'.$data["titre"].'"';
 			if ($mot==$data["titre"]) { echo ' selected="selected"'; }
 			echo '> '.$data["titre"].'</option>';
@@ -106,7 +106,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['lieu'].'</td>';
 			$sql = sql_select("sum(inscrits) AS total", "spip_asso_activites", "id_evenement=".$data['id_evenement']);
-			while ($inscrits = spip_fetch_array($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total'].'</td>'; }
+			while ($inscrits = sql_fetch($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total'].'</td>'; }
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:activite_bouton_modifier_article').'"></a></td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'creer-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a></td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_voir_activites.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:activite_bouton_voir_liste_inscriptions').'"></a></td>';
@@ -119,7 +119,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//SOUS-PAGINATION
 		echo '<td>';
-		$query = spip_query("SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
+		$query = sql_select("*", "spip_asso_comptes", "date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
 		$nombre_selection=sql_count($query);
 		$pages=intval($nombre_selection/$max_par_page) + 1;
 		

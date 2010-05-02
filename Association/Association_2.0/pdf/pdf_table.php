@@ -114,7 +114,7 @@ class PDF_Table extends FPDF{
 		$this->SetFont('Arial','',8);
 		$this->ColorIndex=0;
 		$this->ProcessingTable=true;
-		while($row=spip_fetch_array($res))
+		while($row=sql_fetch($res))
 			$this->Row($row);
 		$this->ProcessingTable=false;
 		$this->cMargin=$cMargin;

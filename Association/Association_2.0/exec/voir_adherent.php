@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$id_auteur= intval($_GET['id']);
 		$indexation = lire_config('association/indexation');
 		$query = association_auteurs_elargis_select("*",'', "id_auteur=$id_auteur");
-			while ($data = spip_fetch_array($query)) { 
+			while ($data = sql_fetch($query)) { 
 			$id_asso=$data['id_asso'];
 			$nom_famille=$data['nom_famille'];
 			$prenom=$data['prenom'];
@@ -73,8 +73,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>'._T('asso:adherent_entete_journal').'</strong></td>';
 		echo '</tr>';
 		
-		$query = sql_select("*", "spip_asso_comptes ", "id_journal=$id_auteur ", '', "date DESC" );
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_auteur ", '', "date DESC" );
+		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_compte'].'</td>';
 			echo '<td class="arial11 border1">'.association_datefr($data['date']).'</td>';
@@ -100,13 +100,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '</tr>';
 			$critere='id_adherent='.$id_auteur;
 			if($indexation=='id_asso'){$critere='id_adherent='._q($id_asso);} 
-			$query = sql_select("*", "spip_asso_activites ", $critere." ", '', "date DESC" );			
-			while ($data = spip_fetch_array($query)) {
+			$query = sql_select("*", "spip_asso_activites", $critere, '', "date DESC" );			
+			while ($data = sql_fetch($query)) {
 				$id_evenement=$data['id_evenement'];
 				echo '<tr style="background-color: #EEEEEE;">';
 				echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_activite'].'</td>';
 				$sql = sql_select("*", "spip_evenements", "id_evenement=$id_evenement" );
-				while ($evenement = spip_fetch_array($sql)) {
+				while ($evenement = sql_fetch($sql)) {
 					$date = substr($evenement['date_debut'],0,10);
 					//echo '<td class="arial11 border1">'.association_datefr($date).'</td>';
 					echo '<td class="arial11 border1">'.association_datefr($date).'</td>';
@@ -135,8 +135,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '</tr>';
 			$critere='id_acheteur='.$id_auteur;
 			if($indexation=='id_asso'){$critere='id_acheteur='._q($id_asso);} 
-			$query = sql_select("*", "spip_asso_ventes ", $critere." ", '', "date_vente DESC" );			
-			while ($data = spip_fetch_array($query)) {
+			$query = sql_select("*", "spip_asso_ventes", $critere, '', "date_vente DESC" );			
+			while ($data = sql_fetch($query)) {
 				echo '<tr style="background-color: #EEEEEE;">';
 				echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_vente'].'</td>';
 				echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($data['date_vente']).'</td>';
@@ -168,8 +168,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_auteur);}
-			$query = sql_select("*", "spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource ", $critere, '', "id_pret DESC" );			
-			while ($data = spip_fetch_array($query)) {
+			$query = sql_select("*", "spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource", $critere, '', "id_pret DESC" );			
+			while ($data = sql_fetch($query)) {
 				echo '<tr style="background-color: #EEEEEE;">';
 				echo '<td class="arial11 border1">';
 				echo '<img src="/dist/images/puce-'.$puce.'.gif"></td>';

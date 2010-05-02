@@ -28,8 +28,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$id_vente= $_REQUEST['id'];		
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$query = spip_query ("SELECT * FROM spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal WHERE id_vente=$id_vente AND imputation='".lire_config('association/pc_ventes')."' ");	
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation='".lire_config('association/pc_ventes')."' ");	
+		while ($data = sql_fetch($query)) {
 			$date_vente=$data['date_vente'];
 			$article=$data['article'];
 			$code=$data['code'];
@@ -86,7 +86,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<label for="journal"><strong>Mode de paiement :</strong></label>';
 		echo '<select name="journal" type="text" id="journal" class="formo" />';
 		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote(lire_config('association/classe_banques')), '', "code") ;
-		while ($banque = spip_fetch_array($sql)) {
+		while ($banque = sql_fetch($sql)) {
 			echo '<option value="'.$banque['code'].'" ';
 			if ($journal==$banque['code']) { echo ' selected="selected"'; }
 			echo '>'.$banque['intitule'].'</option>';

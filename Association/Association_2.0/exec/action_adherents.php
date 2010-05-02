@@ -53,7 +53,7 @@ function supprimer_adherents($delete_tab)
 	foreach ($delete_tab as $id) {
 		$id = intval($id);
 		$query = association_auteurs_elargis_select("*",'', "id_auteur=$id");
-		while($data = spip_fetch_array($query)) {
+		while($data = sql_fetch($query)) {
 			$res .='<tr><td><strong>'.$data['nom_famille'].' '.$data['prenom'].'</strong><td><input type=checkbox name="drop[]" value="'.$id.'" checked="checked" /></td></tr>';
 		}
 	}

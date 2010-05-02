@@ -81,8 +81,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '</tr>';
 		$query = association_auteurs_elargis_select("*", '', "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
 		// originale semblait contenir une vieillerie:
-		// $query = spip_query ("SELECT * FROM spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur WHERE 
-		while ($data = spip_fetch_array($query))  {
+		//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
+		while ($data = sql_fetch($query))  {
 			$id_adherent=$data['id_adherent'];
 			$sexe=$data['sexe'];
 			

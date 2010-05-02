@@ -28,7 +28,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_edit_pret=generer_url_ecrire('edit_pret','agir=modifie');
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
-		$id_ressource=$_REQUEST['id'];
+		$id_ressource=intval($_REQUEST['id']);
 		
 		
 	
@@ -39,8 +39,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		$query = sql_select("*", "spip_asso_ressources", "id_ressource='$id_ressource'" ) ;
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
+		while ($data = sql_fetch($query)) {
 		
 			$statut=$data['statut'];
 			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
@@ -54,7 +54,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		
 			if ($statut=="ok") {
-			$res=icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id="'.$id_ressource.'"', _DIR_PLUGIN_ASSOCIATION_ICONES.'livredor.png','creer.gif',false);
+			$res=icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id='.$id_ressource, _DIR_PLUGIN_ASSOCIATION_ICONES.'livredor.png','creer.gif',false);
 		echo bloc_des_raccourcis($res);}
 		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
@@ -72,8 +72,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>'._T('asso:prets_entete_date_retour').'</strong></td>';
 		echo '<td colspan="2" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
 		echo'  </tr>';
-		$query = sql_select("*", "spip_asso_prets ", "id_ressource='$id_ressource' ", '', "date_sortie DESC" ) ;
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select("*", "spip_asso_prets", "id_ressource=$id_ressource", '', "date_sortie DESC" ) ;
+		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';	
 			echo '<td class="arial11 border1">';
 			switch($data['statut']){
@@ -87,7 +87,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td class="arial11 border1" style="text-align:right">'.association_datefr($data['date_sortie']).'</td>';
 			$id_emprunteur=$data['id_emprunteur'];
 			$sql=sql_select("*", "spip_asso_adherents",lire_config('association/indexation')."='$id_emprunteur' ");
-			$auteur=spip_fetch_array($sql);
+			$auteur=sql_fetch($sql);
 			echo '<td class="arial11 border1">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['duree'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right">';

@@ -30,7 +30,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		else {$id_activite=$_REQUEST['id'];}	
 		
 		$query = sql_select("*", "spip_asso_activites", "id_activite='$id_activite' ");
-		while ($data = spip_fetch_array($query)){
+		while ($data = sql_fetch($query)){
 			$id_evenement=$data['id_evenement'];
 			$nom=$data['nom'];
 			$id_adherent=$data['id_adherent'];
@@ -47,7 +47,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		}
 		
 		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ");
-		while ($data = spip_fetch_array($query)){
+		while ($data = sql_fetch($query)){
 			$titre=$data['titre'];
 			$date_debut=$data['date_debut'];
 			$lieu=$data['lieu'];

@@ -56,7 +56,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo association_date_du_jour();	
 			
 			$query = sql_select("*", "spip_asso_ressources", "id_ressource=" . _q($id_ressource) ) ;
-			while ($data = spip_fetch_array($query)) {
+			while ($data = sql_fetch($query)) {
 				$statut=$data['statut'];
 				echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
 				echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
@@ -109,8 +109,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if ($action == "ajoute") {
 			$query=spip_query( "INSERT INTO spip_asso_prets (id_ressource, date_sortie, duree, date_retour, id_emprunteur, commentaire_sortie, commentaire_retour) VALUES ("._q($id_ressource).", "._q($date_sortie).", "._q($duree).", "._q($date_retour).", "._q($id_emprunteur).", "._q($commentaire_sortie).", "._q($commentaire_retour)." )" );
 			if($query){
-				$sql=spip_query( "SELECT MAX(id_pret) AS id_pret FROM spip_asso_prets");
-				while ($data = spip_fetch_array($sql)){
+			  $sql=sql_select('MAX(id_pret) AS id_pret', "spip_asso_prets");
+				while ($data = sql_fetch($sql)){
 					$id_pret=$data['id_pret'];
 					$justification='Pr&ecirc;t n&deg;'.$id_ressource.'/'.$id_pret;
 				}
