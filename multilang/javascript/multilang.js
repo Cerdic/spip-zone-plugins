@@ -72,6 +72,7 @@ function multilang_init_lang(options) {
 	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
 	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
 	multilang_forms = $(multilang_forms_selector,multilang_root);
+	//multilang_forms = $(multilang_forms_selector,root);
 	
 	//create menu lang for the global form
 	if(multilang_containers.size()) multilang_make_menu_lang(multilang_containers);
@@ -212,15 +213,19 @@ function multilang_init_field(el,lang) {
 				}
 				el.field_lang[langs[1]||multilang_def_lang] = value;
 			}
-			//Put the current lang string only in the field
-			multilang_set_lang(el,lang);
 		}
 	} else {
 		el.multi = false;
 		el.totreat=true;
-		el.field_lang[lang] = el.value;
+		
+		var n = el.value.match(/(\d+\.\s+)?(.*)/);
+		el.field_pre_lang = n[1] || "";
+		el.field_pre_lang = el.field_pre_lang.replace(/\.\s+/,'') ;
+		el.field_lang[lang] = n[2];
 	}
 
+	//Put the current lang string only in the field
+	multilang_set_lang(el,lang);
 	multilang_field_set_background(el,lang) ;
 
 	// Add Yffic 30/03/2010
@@ -331,7 +336,7 @@ function multilang_multi_submit(params) {
 		// Add Yffic 30/03/2010
 		// Add the title number to the final value
 		if((this.id=='titre' || this.id.match(/^titre_document[0-9]+/)) && $('#'+this.id+'_numero').val()!='')
-			this.value=$('#'+this.id+'_numero').val()+". "+this.value;
+			this.value= $('#'+this.id+'_numero').val().replace(/\.\s+/,'') + ". " + this.value;
 		// End Add Yffic
 
 	});
