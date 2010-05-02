@@ -58,8 +58,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$query = sql_select("date_format( date_debut, '%Y' )  AS annee", "spip_evenements", "", "annee", "annee");
 		while ($data = sql_fetch($query)) {
-			if ($data['annee']==$annee) { echo ' <strong>'.$data['annee'].'</strong>'; }
-			else { echo '<a href="'.$url_activites.'&annee='.$data['annee'].'&mot='.$mot.'">'.$data['annee'].'</a>';}
+			if ($data['annee']==$annee) { echo ' <strong>'.$data['annee'].'</strong> '; }
+			else { echo '<a href="'.$url_activites.'&annee='.$data['annee'].'&mot='.$mot.'">'.$data['annee'].'</a> ';}
 		}
 		echo '</td>';
 		echo '<td style="text-align:right;">';
@@ -119,16 +119,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//SOUS-PAGINATION
 		echo '<td>';
-		$query = sql_select("*", "spip_asso_comptes", "date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
-		$nombre_selection=sql_count($query);
-		$pages=intval($nombre_selection/$max_par_page) + 1;
+		$nombre_selection=sql_countsel("spip_evenements", "date_format( date_debut, '%Y' ) = $annee");
+
+		$pages=ceil($nombre_selection/$max_par_page);
 		
 		if ($pages == 1) { echo ''; }
 		else {
 			for ($i=0;$i<$pages;$i++) { 
 				$position= $i * $max_par_page;
-				if ($position == $debut) { echo '<strong>'.$position.' </strong>'; }
-				else { echo '<a href="'.$url_comptes.'&annee='.$annee.'&debut='.$position.'&imputation='.$imputation.'">'.$position.'</a> '; }
+				if ($position == $debut) 
+				  { echo ' <strong>'.$position.' </strong> '; }
+				else { echo '<a href="'.$url_activites.'&annee='.$annee.'&debut='.$position.'&imputation='.$imputation.'">'.$position.'</a>  '; }
 			}
 		}
 		echo '</td>';
@@ -138,4 +139,3 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		 echo fin_gauche(),fin_page(); 
 	}
 ?>
-

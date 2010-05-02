@@ -45,8 +45,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_retour=$_POST['url_retour'];
 		
 		//AJOUT INSCRIPTION
-		if ($action=="ajoute"){
-			spip_query( "INSERT INTO spip_asso_activites (date, id_evenement, nom, id_adherent, membres, non_membres, inscrits, email, telephone, adresse, montant, commentaire) VALUES ("._q($date).", "._q($id_evenement).", "._q($nom).", "._q($id_membre).", "._q($membres).", "._q($non_membres).", "._q($inscrits).", "._q($email).", "._q($telephone).", "._q($adresse).", "._q($montant).", "._q($commentaire)." )" );
+		if ($action=="ajoute") {
+			$n = activites_insert($date, $id_evenement, $non_membres, $inscrits, $email, $telephone, $adresse, $montant, $commentaire);
+			spip_log("insertion activite numero: $n");
 			header ('location:'.$url_retour);
 		}
 		
@@ -59,9 +60,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//AJOUT PAIEMENT
 		if ($action=="paie") {
-			spip_query("UPDATE spip_asso_activites SET nom="._q($nom).", id_adherent="._q($id_membre).", membres="._q($membres).", non_membres="._q($non_membres).", inscrits="._q($inscrits).", montant="._q($montant).", date_paiement="._q($date_paiement).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_activite=$id_activite");
-			$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
-			spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ("._q($date_paiement).","._q($journal).","._q($montant).","._q($justification).",".lire_config('association/pc_activites').","._q($id_activite).")");
+			$n = activites_paiement_insert($date_paiement, $journal, $montant, $id_activite, $nom, $commentaire, $statut, $inscrits, $nom_membres, $membres, $id_membre);
+			spip_log("insertion paiement activite numero: $n");
 			header ('location:'.$url_retour);
 			exit;
 		}	
@@ -73,7 +73,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$count=count ($delete_tab);
 			
 			$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association')) ;
+			echo $commencer_page(_L('Gestion pour Association')) ;
 			association_onglets();
 			
 			debut_gauche();
@@ -120,4 +120,36 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 	}
+
+function activites_paiement_insert($date_paiement, $journal, $montant, $id_activite, $nom, $commentaire, $statut, $inscrits, $nom_membres, $membres, $id_membre)
+{
+	spip_query("UPDATE spip_asso_activites SET nom="._q($nom).", id_adherent="._q($id_membre).", membres="._q($membres).", non_membres="._q($non_membres).", inscrits="._q($inscrits).", montant="._q($montant).", date_paiement="._q($date_paiement).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_activite=$id_activite");
+
+	$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
+
+	return sql_insertq('spip_asso_comptes', array(
+		'date' => $date_paiement,
+		'journal' => $journal,
+		'recette' => $montant,
+		'justification' => $justification,
+		'imputation' => lire_config('association/pc_activites'),
+		'id_journal' => $id_activite));
+}
+
+function activites_insert()
+{
+	return sql_insertq('spip_asso_activites', array(
+		'date' => $date,
+		'id_evenement' => $id_evenement,
+		'nom' => $nom,
+		'id_adherent' => $id_membre,
+		'membres' => $membres,
+		'non_membres' => $non_membres,
+		'inscrits' => $inscrits,
+		'email' => $email,
+		'telephone' => $telephone,
+		'adresse' => $adresse,
+		'montant' => $montant,
+		'commentaire' => $commentaire));
+}
 ?>

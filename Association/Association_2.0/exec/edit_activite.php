@@ -26,11 +26,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
 		$action=$_REQUEST['agir'];
-		if($action=='ajoute'){$id_evenement=$_REQUEST['id'];}
-		else {$id_activite=$_REQUEST['id'];}	
+		$id = intval(_request('id'));
+		if($action=='ajoute'){$id_evenement=$id;}
+		else {$id_activite=$id;}	
 		
-		$query = sql_select("*", "spip_asso_activites", "id_activite='$id_activite' ");
-		while ($data = sql_fetch($query)){
+		$data = !$id ? '' : sql_fetsel("*", "spip_asso_activites", "id_activite=$id");
+		if ($data){
 			$id_evenement=$data['id_evenement'];
 			$nom=$data['nom'];
 			$id_adherent=$data['id_adherent'];
@@ -44,17 +45,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$date=$data['date'];
 			$statut=$data['statut'];
 			$commentaire=$data['commentaires'];
-		}
-		
-		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ");
-		while ($data = sql_fetch($query)){
+		} else $date = date('Y-m-d');
+		if ($id_evenement) {
+		  if ($data = sql_fetsel("*", "spip_evenements", "id_evenement=$id_evenement")) {
 			$titre=$data['titre'];
 			$date_debut=$data['date_debut'];
 			$lieu=$data['lieu'];
+		  }
 		}
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions')) ;
-		
 		
 		association_onglets();
 		
@@ -70,8 +70,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);	
 		
 		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+
 		
 		echo debut_droite("",true);
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_mise_a_jour_inscriptions'));

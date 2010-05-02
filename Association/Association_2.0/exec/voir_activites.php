@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 		
-		$id_evenement=$_REQUEST['id'];		
+		$id_evenement= intval(_request('id'));
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_activites = generer_url_ecrire('activites');
@@ -44,7 +44,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_boite_info(true);		
 		echo association_date_du_jour();	
-		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ") ;
+		$query = sql_select("*", "spip_evenements", "id_evenement=$id_evenement") ;
 	 	while ($data = sql_fetch($query)) {
 			echo '<p><strong>'.$data['date_debut'].'<br />'.$data['titre'].'</strong></p>';
 			echo '<p>'._T('asso:activite_liste_legende').'</p>'; 	
@@ -72,12 +72,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// PAGINATION ET FILTRES
 		echo '<table width="100%">';
 		echo '<tr>';
-		$query = sql_select("*", "spip_evenements", "id_evenement='$id_evenement' ") ;
-		while ($data = sql_fetch($query)) {
-			$date = substr($data['date_debut'],0,10);
-			$date = association_datefr($date);
-			$titre = $data['titre'];
-		}
+		$data = sql_fetsel("*", "spip_evenements", "id_evenement=$id_evenement") ;
+		$date = substr($data['date_debut'],0,10);
+		$date = association_datefr($date);
+		$titre = $data['titre'];
+
 		echo '<td style="text-align:right;">';
 		echo '<form method="post" action="'.$url_voir_activites.'">';
 		echo '<input type="hidden" name="id" value="'.$id_evenement.'">';
@@ -104,7 +103,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<th><strong>'._T('asso:activite_entete_montant').'</strong></th>';
 		echo '<th colspan="3"><strong>'._T('asso:activite_entete_action').'</strong></th>';
 		echo '</tr>';
-		$query = sql_select("*", "spip_asso_activites", "id_evenement='$id_evenement' AND statut like '$statut'  ", '', "id_activite") ;
+		$query = sql_select("*", "spip_asso_activites", "id_evenement=$id_evenement AND statut like '$statut'  ", '', "id_activite") ;
 	 
 		while ($data = sql_fetch($query)) {
 			
@@ -132,7 +131,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td  style="text-align:right;">';
-		echo '<input type="submit" name="Submit" value="'._T('asso:activite_bouton_supprimer').'" class="fondo">';
+		echo '<input type="submit" value="'._T('asso:activite_bouton_supprimer').'" class="fondo">';
 		echo '</table>';
 		echo '</form>';
 		

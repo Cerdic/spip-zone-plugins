@@ -84,13 +84,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
-		echo '<input name="action" type="hidden" value="paie">';
+		echo '<input name="agir" type="hidden" value="paie">';
 		echo '<input name="id_activite" type="hidden" value="'.$id_activite.'">';
 		echo '<input name="id_evenement" type="hidden" value="'.$id_evenement.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;">';
-		echo '<input name="" type="submit" value="'._T('asso:bouton_ajoute').'" class="fondo" /></div>';
+		echo '<input type="submit" value="'._T('asso:bouton_ajoute').'" class="fondo" /></div>';
 		echo '</form>';
 
 		fin_cadre_relief();  
@@ -98,4 +98,3 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	}
 
 ?>
-
