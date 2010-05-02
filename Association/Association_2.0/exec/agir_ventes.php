@@ -36,27 +36,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$quantite=$_POST['quantite'];
 		$date_envoi=$_POST['date_envoi'];
 		$frais_envoi=$_POST['frais_envoi'];
+		$don=$_POST['don'];
 		$prix_vente=$_POST['prix_vente'];
 		$journal=$_POST['journal'];
 		$justification='vente n&deg; '.$id_vente.' - '.$article;
 		$commentaire=$_POST['commentaire'];
 		$recette=$quantite*$prix_vente;
-		
+
 		//AJOUT VENTE
 		if ($action=="ajoute"){
-			spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, id_acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ("._q($date_vente).", "._q($article).", "._q($code).", "._q($acheteur).", "._q($id_acheteur).", "._q($quantite).", "._q($date_envoi).", "._q($frais_envoi).", "._q($don).", "._q($recette).", "._q($commentaire)." )");
-			$query=sql_select('MAX(id_vente) AS id_vente', "spip_asso_ventes");
-			while ($data = sql_fetch($query)) {
-				$id_vente=$data['id_vente'];
-				$justification='vente n&deg; '.$id_vente.' - '.$article;
-			}
-			$query=spip_query( "INSERT INTO spip_asso_comptes (date,journal,recette,depense,justification,imputation,id_journal) VALUES ("._q($date_vente).","._q($journal).","._q($recette).","._q($frais_envoi).","._q($justification).","._q(lire_config('association/pc_ventes')).","._q($id_vente).")" );
-			if(!$query){
-				die('Requ&egrave;te invalide : ' . mysql_error());
-				exit;
-			}
-			header ('location:'.$url_retour);
-			exit;
+		  if (!ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette, $depense))
+
+			die('Requ&egrave;te invalide : ' . mysql_error());
+		  else { 
+		    header ('location:'.$url_retour);
+		    exit;
+		  }
 		}
 		
 		//MODIFICATION VENTE
@@ -124,4 +119,37 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 	} 
+
+function ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette, $depense)
+{
+	$id_vente = sql_insertq('spip_asso_ventes', array(
+		'date_vente' => $date_vente,
+		'article' => $article,
+		'code' => $code,
+		'acheteur' => $acheteur,
+		'id_acheteur' => $id_acheteur,
+		'quantite' => $quantite,
+		'date_envoi' => $date_envoi,
+		'frais_envoi' => $frais_envoi,
+		'don' => $don,
+		'prix_vente' => $prix_vente,
+		'commentaire' => $commentaire));
+
+	if ($id_vente) {
+		$justification='vente n&deg; '.$id_vente.' - '.$article;
+
+		if (sql_insertq('spip_asso_comptes', array(
+			'date' => $date_vente,
+			'journal' => $journal,
+			'recette' => $recette,
+			'depense' => $depense,
+			'justification' => $justification,
+			'imputation' => lire_config('association/pc_ventes'),
+			'id_journal' => $id_vente)))
+		  return true;
+	}
+	return false;
+}
+
+
 ?>

@@ -43,7 +43,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<p>En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e</p>'; 
 		
 		// TOTAUX
-		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation =". sql_quote(lire_config('association/pc_ventes')));
+		$critere = lire_config('association/pc_ventes');
+		if ($critere) $critere = " AND imputation=". sql_quote($critere);
+		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) ='$annee'$critere");
 		while ($data = sql_fetch($query)) {
 			$solde= $data['somme_depenses'] + $data['somme_recettes'];
 			$imputation = $data['imputation'];

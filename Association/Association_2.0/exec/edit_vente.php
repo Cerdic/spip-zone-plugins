@@ -25,11 +25,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_agir_ventes = generer_url_ecrire('agir_ventes');
 		
 		$action=$_REQUEST['agir'];
-		$id_vente= $_REQUEST['id'];		
+		$id_vente= intval(_request('id'));
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$query = sql_select("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation='".lire_config('association/pc_ventes')."' ");	
-		while ($data = sql_fetch($query)) {
+		$data = !$id_vente ? '' : sql_fetsel("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation=" . sql_quote(lire_config('association/pc_ventes')));
+
+		if ($data) {
 			$date_vente=$data['date_vente'];
 			$article=$data['article'];
 			$code=$data['code'];
@@ -42,8 +43,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$date_envoi=$data['date_envoi'];
 			$frais_envoi=$data['frais_envoi'];
 			$commentaire=$data['commentaire'];
-		}	
-		
+		} else {
+			$date_envoi=$date_vente=date('Y-m-d');
+			$article=$code=$acheteur=$id_acheteur=$quantite=$prix_vente=$journal=$don=$frais_envoi=$commentaire='';
+		}
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page() ;
 		
@@ -52,17 +56,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:vente_libelle_numero').'<br />';
-		echo '<span class="spip_xx-large">';
-		echo $id_vente;
-		echo '</span></div>';
-		echo '<br /><div>'.association_date_du_jour().'</div>';	
+		if ($id_vente) {
+			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:vente_libelle_numero').'<br />';
+			echo '<span class="spip_xx-large">';
+			echo $id_vente;
+			echo '</span></div><br />';
+		}
+		echo '<div>'.association_date_du_jour().'</div>';	
 		
 		echo fin_boite_info(true);	
-		
-	
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
+
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 		
 		echo debut_droite("",true);
 		
