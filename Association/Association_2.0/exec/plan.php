@@ -40,9 +40,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan'), _DIR_PLUGIN_ASSOCIATION_ICONES.'EuroOff.gif', 'creer.gif',false);
+		$res=association_icone(_T('asso:plan_nav_ajouter'),  generer_url_ecrire('edit_plan'), 'EuroOff.gif',  'creer.gif');
 		
-		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
+		$res.=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
 		echo bloc_des_raccourcis($res);
 		 
 		echo debut_droite("",true);

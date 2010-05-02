@@ -60,9 +60,9 @@ function exec_adherents() {
 		echo fin_boite_info(true);	
 		
 		
-		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  _DIR_PLUGIN_ASSOCIATION_ICONES.'ico_panier.png','rien.gif',false );
-		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&statut_interne='.$statut_interne,  _DIR_PLUGIN_ASSOCIATION_ICONES.'print-24.png','rien.gif',false ); 
-		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association,  _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif','rien.gif',false ); 
+		$res=association_icone(_T('asso:menu2_titre_relances_cotisations'),  $url_edit_relances, 'ico_panier.png');
+		$res.=association_icone(_T('asso:bouton_impression'),  $url_pdf_adherents.'&statut_interne='.$statut_interne, 'print-24.png'); 
+		$res.=association_icone(_T('Param&egrave;tres'),  $url_association, 'annonce.gif'); 
 			echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

@@ -38,7 +38,7 @@ function exec_action_comptes(){
 			echo association_date_du_jour();	
 			echo fin_boite_info(true);
 			
-			echo bloc_des_raccourcis(icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif", false));
+			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 			echo debut_droite('', true);
 			
 			debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
@@ -71,7 +71,7 @@ function exec_action_comptes(){
 			echo association_date_du_jour();	
 			echo fin_boite_info(true);
 			
-			echo bloc_des_raccourcis(icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif", false));	
+			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));	
 			
 			echo debut_droite('', true);
 			

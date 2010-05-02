@@ -33,7 +33,7 @@ function exec_action_adherents() {
 		echo fin_boite_info(true);
 	
 		$url_retour = generer_url_ecrire('adherents');
-		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
+		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

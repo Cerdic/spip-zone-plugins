@@ -54,9 +54,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		
 			if ($statut=="ok") {
-			$res=icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id='.$id_ressource, _DIR_PLUGIN_ASSOCIATION_ICONES.'livredor.png','creer.gif',false);
+			$res=association_icone(_T('asso:prets_nav_ajouter'),  $url_ajout_pret.'&id='.$id_ressource, 'livredor.png', 'creer.gif');
 		echo bloc_des_raccourcis($res);}
-		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
+		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

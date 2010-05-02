@@ -12,11 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'/img_pack/');
-
 // Le premier element indique un ancien membre
 $GLOBALS['association_liste_des_statuts'] =
   array('sorti','prospect','ok','echu','relance');
+
+define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'/img_pack/');
+
+function association_icone($texte, $lien, $image, $sup='rien.gif')
+{
+	return icone_horizontale($texte, $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
+}
 
 function request_statut_interne()
 {

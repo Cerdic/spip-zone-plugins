@@ -37,7 +37,7 @@ function exec_dons() {
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:Ajouter un don'), $url_ajout_don, _DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
+		$res=association_icone(_T('asso:Ajouter un don'),  $url_ajout_don, 'ajout_don.png');
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

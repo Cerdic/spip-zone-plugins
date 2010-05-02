@@ -42,7 +42,7 @@ function exec_ressources(){
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,_DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
+		$res=association_icone(_T('asso:ressources_nav_ajouter'),  $url_ajout_ressource, 'ajout_don.png');
 			
 		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);

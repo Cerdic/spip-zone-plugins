@@ -59,9 +59,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 		
-		$res=icone_horizontale(_T('asso:activite_bouton_ajouter_inscription'), $url_ajout_activite.'&id='.$id_evenement, _DIR_PLUGIN_ASSOCIATION_ICONES.'panier_in.gif','rien.gif',false );
-		$res.=icone_horizontale(_T('asso:activite_bouton_voir_liste_inscriptions'), $url_pdf_activite, _DIR_PLUGIN_ASSOCIATION_ICONES."print-24.png","rien.gif",false);	
-		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION_ICONES."retour-24.png","rien.gif",false);	
+		$res=association_icone(_T('asso:activite_bouton_ajouter_inscription'),  $url_ajout_activite.'&id='.$id_evenement, 'panier_in.gif');
+		$res.=association_icone(_T('asso:activite_bouton_voir_liste_inscriptions'),  $url_pdf_activite, "print-24.png");	
+		$res.=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
