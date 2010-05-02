@@ -37,3 +37,15 @@ options:
       nom: 'champ_sujet'
       label: '<:formidable:traiter_email_option_sujet_label:>'
       explication: '<:formidable:traiter_email_option_sujet_explication:>'
+  -
+    saisie: 'case'
+    options:
+      nom: 'activer_accuse'
+      label: '<:formidable:traiter_email_option_activer_accuse_label:>'
+      label_case: '<:formidable:traiter_email_option_activer_accuse_label_case:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'sujet_accuse'
+      label: '<:formidable:traiter_email_option_sujet_accuse_label:>'
+      explication: '<:formidable:traiter_email_option_sujet_explication:>'
