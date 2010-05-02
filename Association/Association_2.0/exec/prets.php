@@ -72,7 +72,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>'._T('asso:prets_entete_date_retour').'</strong></td>';
 		echo '<td colspan="2" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
 		echo'  </tr>';
-		$query = spip_query ( "SELECT * FROM spip_asso_prets WHERE id_ressource='$id_ressource' ORDER BY date_sortie DESC" ) ;
+		$query = sql_select("*", "spip_asso_prets ", "id_ressource='$id_ressource' ", '', "date_sortie DESC" ) ;
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';	
 			echo '<td class="arial11 border1">';

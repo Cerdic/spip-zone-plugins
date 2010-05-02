@@ -91,12 +91,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '</tr>';
 		
 		$max_par_page=30;
-		$debut=$_GET['debut'];
+		$debut=intval($_GET['debut']);
+		if (!$debut) { $debut=0; }
 		
-		if (empty($debut)) { $debut=0; }
-		
-		$query = spip_query ("SELECT *, spip_evenements.id_evenement, spip_evenements.titre AS intitule, spip_mots.titre AS motact  FROM ".$table_prefix."_evenements LEFT JOIN spip_mots_evenements ON  spip_mots_evenements.id_evenement=spip_evenements.id_evenement LEFT JOIN spip_mots ON spip_mots_evenements.id_mot=spip_mots.id_mot WHERE date_format( date_debut, '%Y' ) = $annee AND (spip_mots.titre like '$mot' OR spip_mots.titre IS NULL) ORDER BY date_debut DESC LIMIT $debut,$max_par_page");
-		while ($data = spip_fetch_array($query)) {
+		$query = sql_select('*, E.id_evenement, E.titre AS intitule, M.titre AS motact', 'spip_evenements AS E LEFT JOIN spip_mots_evenements AS A ON  A.id_evenement=E.id_evenement LEFT JOIN spip_mots AS M ON A.id_mot=M.id_mot', "date_format( date_debut, '%Y' ) = $annee AND (M.titre like '$mot' OR M.titre IS NULL)", '', "date_debut DESC",  "$debut,$max_par_page");
+		while ($data = sql_fetch($query)) {
 			$date = substr($data['date_debut'],0,10);
 			$heure = substr($data['date_debut'],10,6);
 			echo '<tr style="background-color: #EEEEEE;">';

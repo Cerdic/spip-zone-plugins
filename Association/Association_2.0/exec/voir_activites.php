@@ -104,7 +104,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<th><strong>'._T('asso:activite_entete_montant').'</strong></th>';
 		echo '<th colspan="3"><strong>'._T('asso:activite_entete_action').'</strong></th>';
 		echo '</tr>';
-		$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_evenement='$id_evenement' AND statut like '$statut'  ORDER by id_activite") ;
+		$query = sql_select("*", "spip_asso_activites ", "id_evenement='$id_evenement' AND statut like '$statut'  ", '', "id_activite") ;
 	 
 		while ($data = spip_fetch_array($query)) {
 			

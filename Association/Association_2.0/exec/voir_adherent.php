@@ -73,7 +73,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>'._T('asso:adherent_entete_journal').'</strong></td>';
 		echo '</tr>';
 		
-		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_auteur ORDER BY date DESC" );
+		$query = sql_select("*", "spip_asso_comptes ", "id_journal=$id_auteur ", '', "date DESC" );
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_compte'].'</td>';
@@ -100,7 +100,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '</tr>';
 			$critere='id_adherent='.$id_auteur;
 			if($indexation=='id_asso'){$critere='id_adherent='._q($id_asso);} 
-			$query = spip_query ("SELECT * FROM spip_asso_activites WHERE ".$critere." ORDER BY date DESC" );			
+			$query = sql_select("*", "spip_asso_activites ", $critere." ", '', "date DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				$id_evenement=$data['id_evenement'];
 				echo '<tr style="background-color: #EEEEEE;">';
@@ -135,7 +135,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '</tr>';
 			$critere='id_acheteur='.$id_auteur;
 			if($indexation=='id_asso'){$critere='id_acheteur='._q($id_asso);} 
-			$query = spip_query ("SELECT * FROM spip_asso_ventes WHERE ".$critere." ORDER BY date_vente DESC" );			
+			$query = sql_select("*", "spip_asso_ventes ", $critere." ", '', "date_vente DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				echo '<tr style="background-color: #EEEEEE;">';
 				echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_vente'].'</td>';
@@ -168,7 +168,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_auteur);}
-			$query = spip_query ("SELECT * FROM spip_asso_prets LEFT JOIN spip_asso_ressources ON spip_asso_prets.id_ressource=spip_asso_ressources.id_ressource WHERE ".$critere." ORDER BY id_pret DESC" );			
+			$query = sql_select("*", "spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource ", $critere, '', "id_pret DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				echo '<tr style="background-color: #EEEEEE;">';
 				echo '<td class="arial11 border1">';

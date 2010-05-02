@@ -85,7 +85,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<input name="prix_vente"  type="text" value="'.$prix_vente.'" id="prix_vente" class="formo" />';
 		echo '<label for="journal"><strong>Mode de paiement :</strong></label>';
 		echo '<select name="journal" type="text" id="journal" class="formo" />';
-		$sql = spip_query ("SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code") ;
+		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = spip_fetch_array($sql)) {
 			echo '<option value="'.$banque['code'].'" ';
 			if ($journal==$banque['code']) { echo ' selected="selected"'; }

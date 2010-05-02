@@ -74,7 +74,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />';
 		echo '<label for="journal"><strong>'._T('asso:activite_libelle_mode_paiement').' :</strong></label>';
 		echo '<select name="journal" type="text" id="journal" class="formo" />';
-		$sql = spip_query ("SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code") ;
+		$sql = sql_select("*", "spip_asso_plan ", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = spip_fetch_array($sql)) {
 			echo '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
 		}
