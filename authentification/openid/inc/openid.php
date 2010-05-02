@@ -270,14 +270,7 @@ function demander_authentification_openid($url_openid, $retour){
 			// pas d'erreur : affichage du formulaire et arret du script
 			else {
 				openid_log("Affichage du formulaire de redirection", 3);
-				$page_contents = array(
-				   "<html><head><title>",
-				   "OpenID transaction in progress",
-				   "</title></head>",
-				   "<body onload='document.getElementById(\"".$form_id."\").submit()'>",
-				   $form_html,
-				   "</body></html>");
-				echo implode("\n", $page_contents);
+				echo openid_redirige_post($form_html,$form_id);
 				exit;
 			}
 		}
@@ -291,6 +284,41 @@ function demander_authentification_openid($url_openid, $retour){
 	
 }
 
+/**
+ * Redirection en post : il faut passer par un formulaire que l'on soumet
+ * en javascript, en distinguant le cas ou l'on a ete poste en ajax et il ne
+ * faut pas renvoyer une page html complete
+ *
+ * @param string $form
+ * @param string $id
+ * @return string
+ */
+function openid_redirige_post($form,$id){
+	$out = "";
+	if (!_AJAX
+	  AND !headers_sent()
+	  AND !_request('var_ajax')) {
+		$out =
+		 "<html><head><title>"
+		 . "OpenID transaction in progress"
+		 . "</title></head>"
+		 . "<body onload='document.getElementById(\"".id."\").submit()'>"
+		 . _T('navigateur_pas_redirige')
+		 . $form
+		 . "</body></html>";
+	}
+	else {
+		$out =
+		  "<div class='formulaire_spip'>"
+		  . _T('navigateur_pas_redirige')
+		  . $form
+		  . "</div>"
+			. "<script type='text/javascript'>"
+		  . "if (window.jQuery) jQuery(document).ready(function(){jQuery('#$id').animeajax().get(0).submit();});"
+		  .	"</script>";
+	}
+	return $out;
+}
 
 /**
  * Finir l'authentification apres le retour depuis le serveur openID
