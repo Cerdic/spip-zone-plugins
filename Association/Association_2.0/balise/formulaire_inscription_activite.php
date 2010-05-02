@@ -1,19 +1,18 @@
 <?php
 
-	if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-	include_spip('base/abstract_sql');
-	include_spip('inc/mail');
-	include_spip('inc/charsets');
-	include_spip('inc/lang');
-	include_spip('inc/headers');
-	include_spip('public/assembler');
-	include_spip('balise/formulaire_adherent');
+include_spip('base/abstract_sql');
+include_spip('inc/charsets');
+include_spip('inc/lang');
+include_spip('inc/headers');
+include_spip('public/assembler');
+include_spip('balise/formulaire_adherent');
 
 	// Balise independante du contexte ici
-	function balise_FORMULAIRE_INSCRIPTION_ACTIVITE ($p) {
+function balise_FORMULAIRE_INSCRIPTION_ACTIVITE ($p) {
 		return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION_ACTIVITE', array());
-	}
+}
 
 	//function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_stat($args, $filtres) {
 		// Si le moteur n'est pas active, pas de balise
@@ -25,83 +24,68 @@
 		  //return array($filtres[0], $args[0]);
 	//}
 	 
-	// Balise de traitement des données du formulaire
-	function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
+// Balise de traitement des données du formulaire
+function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
 		
 		//On récupère les champs
-		$id_evenement=_request('id_evenement');
-		$nom=_request('nom');
-		$id_adherent=_request('id_adherent');
-		$membres=_request('membres');
-		$non_membres=_request('non_membres');
-		$inscrits=_request('inscrits');
-		$email=_request('email');
-		$telephone=_request('telephone');
-		$adresse=_request('adresse');
-		$montant=_request('montant');
-		$commentaire=_request('commentaire');
-		$bouton=_request('bouton');
+	$id_evenement= intval(_request('id_evenement'));
+	$id_adherent=_request('id_adherent');
+	$nom=_request('nom');
+	$membres=_request('membres');
+	$non_membres=_request('non_membres');
+	$inscrits=_request('inscrits');
+	$email=_request('email');
+	$adresse=_request('adresse');
+	$telephone=_request('telephone');
+	$montant=_request('montant');
+	$commentaire=_request('commentaire');
+
+	$bouton=_request('bouton');
 		
-		if ($bouton=='Confirmer'){		
+	if ($bouton=='Confirmer'){		
 			
-			//enregistrement dans la table
-			spip_query ( " INSERT INTO spip_asso_activites (id_evenement, nom, id_adherent, membres, non_membres, inscrits, email, date, adresse, telephone, montant, commentaire) VALUES ("._q($id_evenement).","._q($nom).", "._q($id_adherent).", "._q($membres).", "._q($non_membres).", "._q($inscrits).", "._q($email).", NOW(), "._q($adresse).", "._q($telephone).", "._q($montant).", "._q($commentaire).") ");
+		//enregistrement dans la table
+		$n = activites_insert($id_evenement,$id_adherent,$nom,$membres,$non_membres,$inscrits,$email,$adresse,$telephone,$montant,$commentaire);
 			
-			//on envoit des emails
+		spip_log($n ? "enregistre activite $n" : "actvite non inseree");
+
+		// envoi des emails
 			
-			$nom_asso=lire_config('association/nom');
-			$email_asso=lire_config('association/email');
-			$expediteur=$nom_asso.'<'.$email_asso.'>';		
-			$entete .= "Reply-To: ".$email_asso."\n";     					 // réponse automatique à Association
-			$entete .= "MIME-Version: 1.0\n";
-			$entete .= "Content-Type: text/plain; charset=$charset\n";	// Type Mime pour un message au format HTML
-			$entete .= "Content-Transfer-Encoding: 8bit\n";
-			$entete .= "X-Mailer: PHP/" . phpversion();         			// mailer
-			//$entetes.= "Content-Type: text/html; charset=iso-8859-1\n"; 
-			//$entetes.= "X-Sender: < ".$data['mail'].">\n";   } 
-			//$entetes .= "X-Priority: 1\n";                							// Message urgent ! 
-			//$entetes .= "X-MSMail-Priority: High\n";         					// définition de la priorité
-			//$entetes .= "Return-Path: < webmaster@ >\n"; 					// En cas d' erreurs 
-			//$entetes .= "Errors-To: < webmaster@ >\n";    					// En cas d' erreurs 
-			//$entetes .= "cc:  \n"; 											// envoi en copie à …
-			//$entetes .= "bcc: \n";          										// envoi en copie cachée à …
-			$sujet=_T('asso:activite_message_sujet',array('nomasso'=>$nom_asso));
-			
-			$query = sql_select("*", "spip_evenements", "id_evenement=$id_evenement " );
-			while ($data = sql_fetch($query)) {
-				$activite=$data['titre'];
-				$date=$data['date_debut'];
-				$lieu=$data['lieu'];
-			}
-			
-			//au webmaster
-			$message = _T('asso:activite_message_webmaster',array(
+		$data = sql_fetsel("*", "spip_evenements", "id_evenement=$id_evenement " );
+		$activite=$data['titre'];
+		$date=$data['date_debut'];
+		$lieu=$data['lieu'];
+		
+		$nom_asso=lire_config('association/nom');
+		$email_asso=lire_config('association/email');
+		$expediteur=$nom_asso.' <'.$email_asso.'>';		
+		$sujet=_T('asso:activite_message_sujet',array('nomasso'=>$nom_asso));
+
+		//au webmaster
+		$message = _T('asso:activite_message_webmaster',array(
 				'nom' => $nom, 
 				'activite' => $activite, 
 				'inscrits' => $inscrits, 
 				'commentaire'=>$commentaire
 			));
-			envoyer_mail ( $email_asso, $sujet, $message, $from = $expediteur, $headers = $entetes );
+		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+		$envoyer_mail($email_asso, $sujet, $message, $expediteur);
 			
-			//au demandeur
-			$adresse= $email;
-			$message= _T('asso:activite_message_confirmation_inscription',array(
-				'activite'=>$activite,
-				'date'=>association_datefr($date),
-				'lieu'=>$lieu,
-				'nom'=>$nom,
-				'id_adherent'=>$id_adherent,
-				'membres'=>$membres,
-				'non_membres'=>$non_membres,
-				'inscrits'=>$inscrits,
-				'email'=>$email,
-				'telephone'=>$telephone,
-				'adresse'=>$adresse,
-				'montant'=>$montant,
-				'commentaire'=>$commentaire,
-				'nomasso'=>$nom_asso
+		//au demandeur
+		$message= _T('asso:activite_message_confirmation_inscription',
+				array(
+				'activite'=> $activite,
+				'date'=> association_datefr($date),
+				'lieu'=> $lieu,
+				'nom'=> $nom,
+				'id_adherent'=> $id_adherent,
+				'membres'=> $membres,
+				'non_membres'=> $non_membres,
+				'inscrits'=> $inscrits,
+				'montant'=> $montant,
+				'nomasso'=> $nom_asso
 			));
-			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );	
+			$envoyer_mail($email, $sujet, $message, $expediteur);	
 			
 		}
 		else {
@@ -111,12 +95,12 @@
 				$bouton='Confirmer';	 // si pas d'erreur
 				
 				//email invalide
-				if ( $email != email_valide($email) || empty($email) ){
+				if (!email_valide($email)){
 					$erreur_email='Adresse courriel invalide !';
 					$bouton='Soumettre';
 				}
 				//donnees manquantes
-				if ( empty($nom) ){
+ 				if ( empty($nom) ){
 					$erreur_nom='Nom et prénom manquants !';
 					$bouton='Soumettre';
 				}
@@ -172,4 +156,22 @@
 			);
 		
 	}
+
+function activites_insert()
+{
+	return sql_insertq('spip_asso_activites', array(
+		'id_evenement' => $id_evenement,
+		'id_adherent' => $id_adherent,
+		'nom' => $nom,
+		'membres' => $membres,
+		'non_membres' => $non_membres,
+		'inscrits' => $inscrits,
+		'email' => $email,
+		'adresse' => $adresse,
+		'telephone' => $telephone,
+		'montant' => $montant,
+		'commentaire' => $commentaire,
+		'date' => 'NOW()'));
+}		
+
 ?>
