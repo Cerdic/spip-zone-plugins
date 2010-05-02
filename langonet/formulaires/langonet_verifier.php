@@ -264,7 +264,7 @@ function afficher_lignes($type, $tableau, $possibles=array()) {
 		}
 		else
 			if ($type == 'non_mais_nok') {
-				$liste_lignes .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "\n<br />";
+				$liste_lignes .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "</p>\n<br />\n";
 			}
 		$liste_lignes .= fin_block();
 	}
