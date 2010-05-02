@@ -53,12 +53,20 @@ function association_I2_cfg_form($flux) {
 	
 // raccourcis
 
-function generer_url_don($id, $param='', $ancre='') {
+function generer_url_asso_don($id, $param='', $ancre='') {
 	return  generer_url_ecrire('edit_don', "id=" . intval($id));
 }
 
-function generer_url_adherent($id, $param='', $ancre='') {
+function generer_url_don($id, $param='', $ancre='') {
+	return  array('asso_don', $id);
+}
+
+function generer_url_asso_adherent($id, $param='', $ancre='') {
 	return  generer_url_ecrire('voir_adherent', "id=" . intval($id));
+}
+
+function generer_url_adherent($id, $param='', $ancre='') {
+	return  array('asso_adherent', $id);
 }
 
 //Conversion de date
@@ -112,7 +120,7 @@ function association_auteurs_elargis_delete($where='')
 
 	//-- Table des tables ----------------------------------------------------
 
-	global $table_des_tables;
+global $table_des_tables, $table_titre;
 	$table_des_tables['asso_dons'] = 'asso_dons';
 	$table_des_tables['asso_ventes'] = 'asso_ventes';
 	$table_des_tables['asso_comptes'] = 'asso_comptes';
@@ -122,5 +130,8 @@ function association_auteurs_elargis_delete($where='')
 	$table_des_tables['asso_prets'] = 'asso_prets';
 	$table_des_tables['asso_activites'] = 'asso_activites';
 	$table_des_tables['asso_adherents'] = 'asso_adherents';
+
+$table_titre['asso_adherents']= "nom_famille AS titre, '' AS lang";
+$table_titre['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
 
 ?>
