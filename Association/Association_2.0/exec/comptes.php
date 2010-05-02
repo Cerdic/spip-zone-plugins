@@ -73,8 +73,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo fin_boite_info(true);	
 		
-		
-		$res = icone_horizontale(_T('Bilan') . " $annee", generer_url_ecrire('bilan', "annee=$annee"), _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif',false)
+		$url_bilan = generer_url_ecrire('bilan', "annee=$annee");		
+		$res = icone_horizontale(_T('Bilan') . " $annee", $url_bilan, _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif',false)
 		. icone_horizontale(_L('Ajouter une op&eacute;ration'), $url_ajout_compte, _DIR_PLUGIN_ASSOCIATION_ICONES.'ajout_don.png','rien.gif',false );
 
 		echo bloc_des_raccourcis($res);

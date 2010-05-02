@@ -22,7 +22,7 @@ function exec_action_plan(){
 		echo minipres();
 	} else {
 		
-		$id_plan=inval(_request('id');
+		$id_plan=intval(_request('id'));
 		$code=$_POST['code'];
 		$intitule=$_POST['intitule'];
 		$classe=$_POST['classe'];
