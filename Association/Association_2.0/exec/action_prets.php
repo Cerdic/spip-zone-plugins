@@ -11,22 +11,21 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_action_prets(){
+function exec_action_prets(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
 			include_spip('inc/minipres');
 			echo minipres();
-			exit;
-		}
+	} else {
 		
 		$url_action_prets=generer_url_ecrire('action_prets');
 		
 		$action=$_REQUEST['agir'];
-		$id_pret=intval($_REQUEST['id']);
+		$id_pret=intval($_REQUEST['id_pret']);
 		$id_ressource=$_REQUEST['id_ressource']; // text !
 		$id_emprunteur=$_POST['id_emprunteur']; // text !
 		$date_sortie=$_POST['date_sortie'];
@@ -107,18 +106,39 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//  AJOUT PRET
 		if ($action == "ajoute") {
-			$query=spip_query( "INSERT INTO spip_asso_prets (id_ressource, date_sortie, duree, date_retour, id_emprunteur, commentaire_sortie, commentaire_retour) VALUES ("._q($id_ressource).", "._q($date_sortie).", "._q($duree).", "._q($date_retour).", "._q($id_emprunteur).", "._q($commentaire_sortie).", "._q($commentaire_retour)." )" );
-			if($query){
-			  $sql=sql_select('MAX(id_pret) AS id_pret', "spip_asso_prets");
-				while ($data = sql_fetch($sql)){
-					$id_pret=$data['id_pret'];
-					$justification='Pr&ecirc;t n&deg;'.$id_ressource.'/'.$id_pret;
-				}
-				spip_query( "INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ("._q($date_sortie).", "._q($journal).", "._q($montant).", "._q($justification).", "._q($imputation).", "._q($id_pret)." )" );
-				spip_query( "UPDATE spip_asso_ressources SET statut='reserve' " );
-			}
+			activites_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour);
 			header ('location:'.$url_retour);
 			exit;
 		}
 	}
+}
+
+
+function activites_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour)
+{
+	$id_pret = sql_insertq('spip_asso_prets', array(
+		'id_ressource' => $id_ressource,
+		'date_sortie' => $date_sortie,
+		'duree' => $duree,
+		'date_retour' => $date_retour,
+		'id_emprunteur' => $id_emprunteur,
+		'commentaire_sortie' => $commentaire_sortie,
+		'commentaire_retour' => $commentaire_retour));
+
+	if ($id_pret)
+		$id_pret = sql_insertq('spip_asso_comptes', array(
+			'date' => $date_sortie,
+			'journal' => $journal,
+			'recette' => $montant,
+			'justification' => 'Pr&ecirc;t n&deg;'.$id_ressource.'/'.$id_pret,
+			'imputation' => $imputation,
+			'id_journal' => $id_pret));
+
+	if ($id_pret)
+		sql_updateq('spip_asso_ressources',
+			    array('statut' => 'reserve'),
+			    "id_ressource=$id_ressource");
+	spip_log("activites_insert: $id_pret");
+}
+
 ?>

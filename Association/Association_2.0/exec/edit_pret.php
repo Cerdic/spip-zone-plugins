@@ -27,18 +27,22 @@ function exec_edit_pret(){
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$action=$_REQUEST['agir'];
-		$id_pret= intval(_request('id'));
-		if ($action=="ajoute")
-		  {$id_ressource= intval(_request('id'));}
-		else {
-		  $id_ressource=intval($data['id_ressource']);
-		  $date_sortie=$data['date_sortie'];
-		  $duree=$data['duree'];
-		  $date_retour=$data['date_retour'];
-		  $id_emprunteur=$data['id_emprunteur'];
-		  $commentaire_sortie=$data['commentaire_sortie'];
-		  $commentaire_retour=$data['commentaire_retour'];
-		}	
+		$id_pret= intval(_request('id_pret'));
+		$data = !$id_pret ? '' : sql_fetsel('*', 'spip_asso_prets', "id_pret=$id_pret");
+		if ($data) {
+			$id_ressource=intval($data['id_ressource']);
+			$duree=$data['duree'];
+			$id_emprunteur=$data['id_emprunteur'];
+			$commentaire_sortie=$data['commentaire_sortie'];
+			$commentaire_retour=$data['commentaire_retour'];
+			$date_retour=$data['date_retour'];
+			$date_sortie=$data['date_sortie'];
+		} else {
+
+			$id_ressource= $id_pret;
+			$date_retour=$date_sortie=date('Y-m-d');
+		}
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_edition_prets')) ;
 		
@@ -120,12 +124,12 @@ function exec_edit_pret(){
 		echo '<textarea name="commentaire_retour" id="commentaire_retour" class="formo" />'.$commentaire_retour.'</textarea>';
 		echo '</fieldset>';
 		
-		echo '<input name="id" type="text" value="'.$id_pret.'" />';
+		echo '<input name="id_pret" type="text" value="'.$id_pret.'" />';
 		echo '<input name="id_ressource" type="text" value="'.$id_ressource.'" />';		
 		echo '<input name="url_retour" type="text" value="'.$url_retour.'">';
 		echo '<input name="agir" type="text" value="'.$action.'">';
 		
-		echo '<div style="float:right;"><input name="submit" type="submit" value="';
+		echo '<div style="float:right;"><input type="submit" value="';
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';

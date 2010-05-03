@@ -179,7 +179,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				echo '<td class="arial11 border1" style="text-align:right;">';
 				if($data['date_retour']=="0000-00-00"){echo '&nbsp;';} else {echo association_datefr($data['date_retour']);}
 				echo '</td>';
-				echo '<td class="arial11 border1" style="text-align:center"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_pret').'"></a></td>';
+				echo '<td class="arial11 border1" style="text-align:center"><a href="'.$url_edit_pret.'&id_pret='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_pret').'"></a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';
