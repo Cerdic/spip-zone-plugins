@@ -160,7 +160,6 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 			$saisie = array_replace_recursive($saisie, $defaut);
 		}
 		$formulaire_actuel = saisies_inserer($formulaire_actuel, $saisie);
-		$retours['configurer_saisie'] = $nom;
 	}
 	
 	// Si on demande à supprimer une saisie
@@ -325,7 +324,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 			.'<li class="boutons">
 				<input type="hidden" name="enregistrer_saisie" value="'.$nom.'" />
 				<button type="submit" class="submit link" name="enregistrer_saisie" value="">'._T('bouton_annuler').'</button>
-				<input type="submit" class="submit" name="enregistrer" value="'._T('bouton_enregistrer').'" />
+				<input type="submit" class="submit" name="enregistrer" value="'._T('bouton_valider').'" />
 			</li>'
 			.'</ul></div>',
 			'fin'
