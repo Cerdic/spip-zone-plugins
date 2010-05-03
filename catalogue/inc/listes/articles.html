@@ -1,0 +1,25 @@
+
+<!-- squelette inc/listes/articles -->
+
+[(#REM)
+	Affiche tous les articles du catalogue.
+]
+<B_a>
+#PAGINATION
+
+<table class="spip catalogue">
+<thead>
+<tr class="row-first">
+	<th>ID</th>
+	<th>TITRE</th>
+</tr>
+</thead>
+<tbody>
+<BOUCLE_a(ARTICLES variantes){id_variante!=0}{pagination}>
+<tr>
+	<td>#ID_ARTICLE</td>
+	<td><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#TITRE</a></td>
+<tr>
+</BOUCLE_a>
+</tbody>
+</table>

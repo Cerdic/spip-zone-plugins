@@ -4,7 +4,6 @@
  * Licence GPL (c) 2009-2010 - Ateliers CYM
  */
 
-// echo '<script type="text/javascript">alert("catalogue pipelines");</script>';
 
 function catalogue_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
