@@ -2,7 +2,7 @@
 	<nom>Formidable, générateur de formulaires</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.0</version>
+	<version>0.5.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>Création de formulaires avec une interface graphique et configuration des traitements associés (envoyer par courriel, enregistrer les réponses, etc).</description>
@@ -59,7 +59,6 @@
 		<url>formulaires_tous</url>
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;]" />
-	<necessite id="cfg" version="[1.14.4;]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
 	<necessite id="saisies" version="[1.7.3;]" />
 	<necessite id="verifier" version="[0.1;]" />

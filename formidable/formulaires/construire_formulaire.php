@@ -147,10 +147,11 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	
 	// Si on demande à ajouter une saisie
 	if ($ajouter_saisie = _request('ajouter_saisie')){
+		$nom = saisies_generer_nom($formulaire_actuel, $ajouter_saisie);
 		$saisie = array(
 			'saisie' => $ajouter_saisie,
 			'options' => array(
-				'nom' => saisies_generer_nom($formulaire_actuel, $ajouter_saisie)
+				'nom' => $nom
 			)
 		);
 		// S'il y a des valeurs par défaut pour ce type de saisie, on les ajoute
@@ -159,6 +160,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 			$saisie = array_replace_recursive($saisie, $defaut);
 		}
 		$formulaire_actuel = saisies_inserer($formulaire_actuel, $saisie);
+		$retours['configurer_saisie'] = $nom;
 	}
 	
 	// Si on demande à supprimer une saisie
