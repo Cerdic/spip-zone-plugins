@@ -7,7 +7,7 @@
 <B_a>
 #PAGINATION
 
-<table class="spip catalogue">
+<table class="spip catalogue" style="width:100%">
 <thead>
 <tr class="row-first">
 	<th>ID</th>
@@ -16,7 +16,7 @@
 </thead>
 <tbody>
 <BOUCLE_a(ARTICLES variantes){id_variante!=0}{pagination}>
-<tr>
+<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
 	<td>#ID_ARTICLE</td>
 	<td><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#TITRE</a></td>
 <tr>
