@@ -4,17 +4,29 @@
 
 <!--#hierarchie-->
 <ul id="chemin">
-	
-	<li>Accueil</li>
-	<li><a href="?exec=articles&id_article=#ID_ARTICLE">Retour à l'article #ID_ARTICLE</a></li>
-	<li>Editer variante</li>
+	<li><span class="bloc"><a href="?exec=naviguer&id_rubrique=0">Racine du site</a></li>
+	<li><span class="bloc"><em> &gt; </em><a href="?exec=catalogue"><:catalogue:catalogue:></a></span></li>
+	<li><span class="bloc"><em> &gt; </em><a href="?exec=articles&id_article=#ID_ARTICLE"><:catalogue:retour_article:>#ID_ARTICLE</a></span></li>
 </ul>
 <!--/#hierarchie-->
  
-<h1><:catalogue:edition_variante:></h1>
 
+<!--#navigation-->
+<div class='cadre-info'>
+<:catalogue:info_variante_edit:></div>
+<!--/#navigation-->
+ 
+<!--#extra-->
+<!-- Du contenu en plus dans la colonne extra.-->
+<!--/#extra-->
+
+
+<h1><:catalogue:edition_variante:></h1>
 #INCLURE{fond=inc/blocs/variante,id_variante,env} 
+#FORMULAIRE_EDITION_VARIANTE
+
 </BOUCLE_v>
+
 </B_v>
 [(#BOUTON_ACTION{
 	<:catalogue:bouton_ajouter_variante:>,
@@ -25,12 +37,3 @@
 <//B_v>
 
 
-
-<!--#navigation-->
-<div class='cadre-info'>
-<:catalogue:info_variante_edit:></div>
-<!--/#navigation-->
- 
-<!--#extra-->
-<!-- Du contenu en plus dans la colonne extra.-->
-<!--/#extra-->

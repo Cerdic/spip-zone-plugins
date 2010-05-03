@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_variante' => 'Cr&eacute;er une nouvelle variante de prix pour cet article',
 	
 	// E
+	'edition_variante' => '&Eacute;dition variante',
 	'etape_suivante' => '&Eacute;tape suivante',
 	
 	// G
@@ -50,6 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'partage' => 'Chambre',
 	'partage_explications' => 'Souhaitez-vous partager votre chambre double avec une personne en particulier ? (si vous n\'avez pas choisi l\'option "single") ',
 	'partage_nom' => 'Si oui, le nom de cette personne',
+	
+	// R
+	'retour_article' => 'Retour &agrave; l\'article ',
 	
 	// T
 	'titre_bloc_catalogue' => 'CATALOGUE : prix et options li&eacute;s &agrave; l\'article',
