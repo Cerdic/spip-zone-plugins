@@ -12,9 +12,9 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $options){
 	else return false;
 }
 
-// Seuls les admins peuvent éditer les formulaires
+// Admins et rédacteurs peuvent voir les formulaires existants
 function autoriser_formulaires_bouton_dist($faire, $type, $id, $qui, $options){
-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
+	if (isset($qui['statut']) and $qui['statut'] <= '1comite') return true;
 	else return false;
 }
 
