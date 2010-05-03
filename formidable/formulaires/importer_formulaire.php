@@ -13,7 +13,7 @@ function formulaires_importer_formulaire_charger(){
 	$types_echange = echanges_formulaire_lister_disponibles();
 	$types_import = array();
 	foreach ($types_echange['importer'] as $type=>$fonction){
-		$types_import[$type] = $type;
+		$types_import[$type] = _T("formidable:echanger_formulaire_${type}_importer");
 	}
 	
 	$contexte['_types_import'] = $types_import;

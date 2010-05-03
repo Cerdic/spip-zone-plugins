@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'construire_verifications_aucune' => 'Aucune',
 'construire_verifications_label' => 'Type de vérification à effectuer',
 
+'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
+'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
+'echanger_formulaire_yaml_importer' => 'Formidable (.yaml)',
 'editer_descriptif' => 'Descriptif',
 'editer_descriptif_explication' => 'Une explication du formulaire destin&eacute;e &agrave; l\'espace priv&eacute;.',
 'editer_identifiant_explication' => 'Donnez un identifiant textuel unique qui vous permettra d\'appeler plus facilement le formulaire.',
