@@ -284,7 +284,7 @@ function spip2odt_imagedraw($dir,$img,$align='left',$titre="",$descriptif="",$hr
 		  . '</draw:frame>';
 		  
 		if ($href){
-			$insert = '<draw:a xlink:type="simple" xlink:href="'.$href.'" office:name="'.$title.'">'
+			$insert = '<draw:a xlink:type="simple" xlink:href="'.str_replace("&","&amp;",$href).'" office:name="'.$title.'">'
 			 . $insert
 			 . '</draw:a>';
 		}
