@@ -204,6 +204,12 @@ function demarrer_site($site = '', $options = array()) {
 			require_once dirname(__FILE__).'/mutualiser_upgrade.php';
 			mutualiser_upgrade();
 		}
+		// Si un upgrade des plugins est demande dans le site fils, et securise par md5
+		// depuis le panneau de controle, le faire directement
+		if (_request('upgradeplugins') == 'oui') {
+			require_once dirname(__FILE__).'/mutualiser_upgradeplugins.php';
+			mutualiser_upgradeplugins();
+		}
 	}
 	
 	

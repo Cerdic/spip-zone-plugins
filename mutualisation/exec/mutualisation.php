@@ -76,6 +76,7 @@ function exec_mutualisation_dist() {
 			// Pour cela, on cree un bouton avec un secret, que mutualiser.php
 			// va intercepter (pas terrible ?)
 			$erreur = test_upgrade_site($meta);
+			$adminplugin = adminplugin_site($meta);
 			$version_installee = ' <em><small>'.$meta['version_installee'].'</small></em>';
 		}
 		else {
@@ -89,7 +90,7 @@ function exec_mutualisation_dist() {
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
 			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
-			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
+			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small>$adminplugin</td>
 			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
@@ -173,6 +174,22 @@ function test_upgrade_site($meta) {
 EOF;
 	}
 }
+
+function adminplugin_site($meta) {
+	$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
+	$secret = md5($secret);
+	return <<<EOF
+<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
+<div>
+<input type='hidden' name='secret' value='$secret' />
+<input type='hidden' name='exec' value='mutualisation' />
+<input type='hidden' name='upgradeplugins' value='oui' />
+<input type='submit' value='Upgrade plugins' />
+</div>
+</form>
+EOF;
+}
+
 
 function date_creation_repertoire_site ($v) {
 	return (date("d/M/y", @filectime('../'.$GLOBALS['mutualisation_dir'].'/'.$v."/config/connect.php"))) ;	
