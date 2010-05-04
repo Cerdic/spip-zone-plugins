@@ -9,7 +9,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+if(!function_exists('generer_url_cfg')){
+	function generer_url_cfg($lien){
+		return generer_url_ecrire('configurer','cfg='.$lien);
+	}
+}
 
 // Renvoie la liste des configurations disponibles dans le path
 // ou dans le dossier donne en argument
@@ -83,7 +87,7 @@ function lister_onglets_cfg($dir=''){
 
 			if ($tmp->autoriser()){
 				$args['onglet'] = $tmp->form->param['onglet'];
-				$args['url'] = generer_url_ecrire('configurer', 'cfg='.$fonds);
+				$args['url'] = generer_url_cfg($fonds);
 				// titre
 				if (!$args['titre'] = $tmp->form->param['titre'])
 					$args['titre'] = $fonds;
@@ -105,9 +109,6 @@ function lister_onglets_cfg($dir=''){
 	}
 	return $onglets;
 }
-
-
-
 
 // la classe cfg represente une page de configuration
 class cfg
@@ -174,7 +175,7 @@ class cfg
 		if (_request('cfg') == $lien)
 			return "$nom\n";
 		else
-			return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
+			return "<a href='" . generer_url_cfg($lien) . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
 	}
 
 
@@ -235,7 +236,7 @@ class cfg
 				$tmp = new cfg($onglet);
 				if ($tmp->autoriser()){
 					$parent = ($tmp->form->param['titre']) ? $tmp->form->param['titre'] :  $tmp->form->param['nom'];
-					$hierarchie .= $this->debut_hierarchie($parent, generer_url_ecrire('configurer', 'cfg=' . $onglet), true);
+					$hierarchie .= $this->debut_hierarchie($parent, generer_url_cfg($onglet), true);
 					$fin_onglet = true;
 				}
 			};
