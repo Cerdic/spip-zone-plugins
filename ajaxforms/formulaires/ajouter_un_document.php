@@ -1,7 +1,36 @@
 <?php
 
+/**
+ * Formulaire #AJOUTER_UN_DOCUMENT
+ *
+ * Ce formulaire permet de telecharger UN document (un zip ne sera pas decompresse).
+ * - En dehors d'une boucle, le document est simplement ajoute a la table spip_document
+ * - Dans une boucle, il sera ajoute et lie a l'objet de la boucle.
+ * - il est possible de passer les parametres objet et id : #FORMULAIRE_AJOUTER_UN_DOCUMENT{article,1}
+ *
+ * Note 1) document ou image ?
+ * 	Les documents sont ajoutes en mode 'choix', c'est a dire que c'est SPIP qui
+ * 	place le document en type 'image' ou 'document' selon le profil du fichier envoye.
+ * 	Par defaut, une image de plus de 400px sera consideree comme un document.
+ *
+ * Note 2) afficher les documents
+ * 	Pour afficher une liste de documents qui s'actualise quand on ajoute un element,
+ * 	il faut soit ne pas utiliser l'ajax, soit inserer la liste des documents
+ * 	a la suite du formulaire en utilisant le pipeline charger des
+ * 	formulaires CVT pour inserer ce contenu.
+ *
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Chargement du formulaire
+ *
+ *
+ * @param string $objet        Objet SPIP auquel sera lie le document (ex. article)
+ * @param integer $id_objet    Identifiant de l'objet
+ * @param string $mode         Voir la note 1) ci-dessus
+ * @return Array
+ */
 function formulaires_ajouter_un_document_charger_dist($objet, $id_objet, $mode='choix'){
 	$res = array(
 		'editable' => ' ',
@@ -13,7 +42,7 @@ function formulaires_ajouter_un_document_charger_dist($objet, $id_objet, $mode='
 		'mode'=>$mode
 	);
 
-	// si l'on vien juste de poster le formlaire et qu'il a ete valide
+	// si l'on vient juste de poster le formulaire et qu'il a ete valide
 	// on veut pouvoir recommencer a poster 
 	// on ne prend du coup pas les anciennes valeurs dans l'environnement
 	// pour ne pas polluer le nouveau formulaire
@@ -23,6 +52,17 @@ function formulaires_ajouter_un_document_charger_dist($objet, $id_objet, $mode='
 	return $res;
 }
 
+/**
+ * Verification de l'upload
+ *
+ * Il s'agit uniquement de signaler si une erreur d'upload a eu lieu
+ * Pas de controle sur le type et les autorisations qui sont geres par ajouter_document
+ *
+ * @param string $objet
+ * @param integer $id_objet
+ * @param string $mode
+ * @return Array
+ */
 function formulaires_ajouter_un_document_verifier_dist($objet, $id_objet, $mode='choix'){
 	$erreurs = array();	
 	
@@ -38,10 +78,17 @@ function formulaires_ajouter_un_document_verifier_dist($objet, $id_objet, $mode=
 	return $erreurs;
 }
 
-/*
+/**
+ * Traitement de l'upload
+ *
  * La fonction de traitement pour l'instant ne prend pas en compte :
  * - les documents distants
  * - les autres modes de documents ('choix' par defaut)
+ *
+ * @param string $objet
+ * @param integer $id_objet
+ * @param string $mode
+ * @return Array
  */
 function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet, $mode='choix'){
 	$res = array('editable'=>' ', 'message_ok'=>'');

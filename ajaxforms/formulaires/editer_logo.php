@@ -1,7 +1,27 @@
 <?php
-
+/**
+ * Formulaire #EDITER_LOGO
+ *
+ * Ce formulaire ajoute, modifie ou supprime des logos sur les objets de SPIP.
+ * - En dehors d'une boucle, ce formulaire modifie le logo du site.
+ * - Dans une boucle, il modifie le logo de la table selectionnee.
+ * Pensez juste que l'appel de #LOGO_{TYPE} s'appuie sur le nom de la cle primaire et non sur le
+ * nom de l'objet reel. Par exemple on ecrira #LOGO_GROUPE (et non #LOGO_GROUPEMOTS) pour afficher
+ * un logo issu du formulaire mis dans une boucle GROUPES_MOTS
+ * - il est possible de lui passer les parametres objet et id : #FORMULAIRE_EDITER_LOGO{article,1}
+ * - il est possible de spécifier une url de redirection apres traitement :
+ * ex. #FORMULAIRE_EDITER_LOGO{article,1,#URL_ARTICLE}
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Chargement du formulaire
+ *
+ * @param string $objet        Objet SPIP auquel sera lie le document (ex. article)
+ * @param integer $id_objet    Identifiant de l'objet
+ * @param string $retour       Url de redirection apres traitement
+ * @return Array               Variables d'environnement pour le fond
+ */
 function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour=''){
 	$res = array(
 		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : ''),
@@ -24,7 +44,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour=''){
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$etats = $res['logo_survol'] ? array('on','off') : array('on');
 	foreach($etats as $etat) {
-		if ($logo = $chercher_logo($id_objet, $_id_objet, $etat)){
+		$logo = $chercher_logo($id_objet, $_id_objet, $etat);
+		if ($logo){
 			$res['logo_'.$etat] = $logo[0];
 		}
 	}
@@ -35,10 +56,22 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour=''){
 	return $res;
 }
 
+/**
+ * Verification avant traitement
+ *
+ * On verifie que l'upload s'est bien passe et
+ * que le document recu est une image (d'apres son extension)
+ *
+ * @param string $objet
+ * @param integer $id_objet
+ * @param string $retour
+ * @return Array Tableau des erreurs
+ */
 function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour=''){
 	$erreurs = array();
 	// verifier les extensions
-	foreach(formulaire_editer_logo_get_sources() as $etat=>$file) {
+	$sources = formulaire_editer_logo_get_sources();
+	foreach($sources as $etat=>$file) {
 		// seulement si une reception correcte a eu lieu
 		if ($file AND $file['error'] == 0) {
 			if (!in_array(strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)),array('jpg','png','gif','jpeg')))
@@ -48,6 +81,17 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour=''){
 	return $erreurs;
 }
 
+/**
+ * Traitement de l'upload d'un logo
+ *
+ * Il est affecte au site si la balise n'est pas dans une boucle,
+ * sinon a l'objet concerne par la boucle ou indiquee par les parametres d'appel
+ *
+ * @param string $objet
+ * @param integer $id_objet
+ * @param string $retour
+ * @return Array
+ */
 function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
 	$res = array('editable'=>' ');
 	
@@ -65,8 +109,10 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
 	$chercher_logo = charger_fonction('chercher_logo','inc');
 	
 	// effectuer la suppression si demandee d'un logo
-	if (($on = _request('supprimer_logo_on')) OR (_request('supprimer_logo_off'))){
-		if ($logo = $chercher_logo($id_objet, $_id_objet, $on ? 'on' : 'off'))
+	$on = _request('supprimer_logo_on');
+	if ($on OR _request('supprimer_logo_off')){
+		$logo = $chercher_logo($id_objet, $_id_objet, $on ? 'on' : 'off');
+		if ($logo)
 			spip_unlink($logo[0]);
 		$res['message_ok'] = _T('ajaxform:confirmer_suppression');
 	}
@@ -75,9 +121,11 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
 	else {
 		include_spip('action/iconifier');
 		$ajouter_image = charger_fonction('spip_image_ajouter','action');
-		foreach(formulaire_editer_logo_get_sources() as $etat=>$file) {
-			if ($file and $file['error']==0)	{
-				if ($logo = $chercher_logo($id_objet, $_id_objet, $etat))
+		$sources = formulaire_editer_logo_get_sources();
+		foreach($sources as $etat=>$file) {
+			if ($file and $file['error']==0) {
+				$logo = $chercher_logo($id_objet, $_id_objet, $etat);
+				if ($logo)
 					spip_unlink($logo[0]);
 				$ajouter_image($type.$etat.$id_objet," ",$file);
 				$res['message_ok'] = _T('ajaxform:logo_maj');
@@ -94,6 +142,12 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
 }
 
 
+/**
+ * Extraction des sources des fichiers uploades correspondant aux 2 logos (normal + survol)
+ * si leur upload s'est bien passé
+ *
+ * @return Array
+ */
 function formulaire_editer_logo_get_sources(){
 	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 	if (!is_array($_FILES)) return array();
