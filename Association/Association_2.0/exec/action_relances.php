@@ -117,7 +117,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				if ($id) {
 					envoyer_mail ( $email, $sujet, $message, $expediteur, "");
 					if ($statut=="echu"){
-					  association_auteurs_elargis_updateq(
+					  sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
 						array("statut_interne"=> 'relance'),
 						"id_auteur=$id");
 					}

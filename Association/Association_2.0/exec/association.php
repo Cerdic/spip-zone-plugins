@@ -102,7 +102,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		 echo fin_gauche(), fin_page();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
-		 association_auteurs_elargis_updateq(
+		 sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
 			array("statut_interne"=> 'echu'),
 			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 	}

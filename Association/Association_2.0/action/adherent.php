@@ -28,7 +28,7 @@ function action_adherent() {
 function adherent_update($id_auteur, $id_asso, $commentaire, $categorie, $statut_interne, $validite)
 {
 	include_spip('base/association');
-	association_auteurs_elargis_updateq(
+	sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
 				   array("id_asso"=> $id_asso,
 					 "commentaire"=> $commentaire,
 					 "validite"=> $validite,

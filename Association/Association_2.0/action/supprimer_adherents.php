@@ -16,7 +16,7 @@ function action_supprimer_adherents() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 	$where = sql_in('id_auteur', $_POST["drop"]);
-	association_auteurs_elargis_delete($where);
+	sql_delete(_ASSOCIATION_AUTEURS_ELARGIS, $where);
 	sql_delete('spip_auteurs', $where);
 }
 ?>

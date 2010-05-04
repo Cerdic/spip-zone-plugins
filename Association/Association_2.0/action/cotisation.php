@@ -36,7 +36,7 @@ function cotisation_insert($id_auteur, $montant, $journal, $justification, $impu
 				       'imputation' => $imputation,
 				       'id_journal' => $id_auteur)
 		    );
-	association_auteurs_elargis_updateq(
+	sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
 				   array(
 					 "validite" => $validite,
 					 "date" => $date,
