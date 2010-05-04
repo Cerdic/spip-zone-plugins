@@ -25,9 +25,9 @@ function exec_dons() {
 		$url_dons = generer_url_ecrire('dons');
 		$url_ajout_don= generer_url_ecrire('edit_don','agir=ajouter');
 		
-		//debut_page(_T('Gestion pour  Association'), "", "");
+		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		  $commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association')) ;
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
 		
 		echo debut_gauche("",true);
@@ -37,7 +37,7 @@ function exec_dons() {
 		echo fin_boite_info(true);
 		
 		
-		$res=association_icone(_T('asso:Ajouter un don'),  $url_ajout_don, 'ajout_don.png');
+		$res=association_icone(_T('Ajouter un don'),  $url_ajout_don, 'ajout_don.png');
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//debut_page(_T(''), "", "");
 		 $commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Cat&eacute;gories de cotisation')) ;
+		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
 		 echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
@@ -46,7 +46,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			
 		echo debut_droite("",true);
 		
-		 echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."calculatrice.gif", false, "", $titre = _T('Cat&eacute;gories de cotisation'));
+		 echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."calculatrice.gif", false, "", $titre = _T('asso:categories_de_cotisations'));
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr bgcolor='#DBE1C5'>";

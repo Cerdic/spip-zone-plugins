@@ -23,8 +23,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association')) ;
-		//debut_page(_T('Gestion pour  Association'), "", "");
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		$url_comptes = generer_url_ecrire('comptes');
 		$url_ajout_compte = generer_url_ecrire('edit_compte','agir=ajouter');

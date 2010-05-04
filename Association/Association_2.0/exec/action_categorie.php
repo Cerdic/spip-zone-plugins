@@ -36,7 +36,7 @@ function exec_action_categorie(){
 		$url_retour = $_SERVER['HTTP_REFERER'];
 			
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Cat&eacute;gories de cotisation')) ;
+		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
 		echo debut_gauche("",true);
 			
 		echo debut_boite_info(true);

@@ -17,9 +17,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 	function exec_edit_relances(){
 		
-		//debut_page(_T('Gestion pour Association'), "", "");
+		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		 $commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association')) ;
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		$url_asso = generer_url_ecrire('association');
 		$url_action_relances = generer_url_ecrire('action_relances','agir=confirm');
 		$url_edit_relances = generer_url_ecrire('edit_relances');

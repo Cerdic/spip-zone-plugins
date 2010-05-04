@@ -24,7 +24,7 @@ function exec_action_adherents() {
 	} else {
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association')) ;
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
 		echo debut_gauche("",true);
 		

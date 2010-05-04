@@ -38,7 +38,7 @@ function exec_edit_categorie(){
 		}
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Cat&eacute;gories de cotisation')) ;
+		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
 		association_onglets();
 		
 		echo debut_gauche("",true);
@@ -52,7 +52,7 @@ function exec_edit_categorie(){
 		
 		echo debut_droite("",true);
 		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('Cat&eacute;gories de cotisation'));
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:categories_de_cotisations'));
 
 		$res = '<label for="valeur"><strong>Cat&eacute;gorie :</strong></label>'
 		. '<input name="valeur" type="text" value="'

@@ -60,7 +60,7 @@ function ajout_cotisation($id_auteur)
 		echo fin_boite_info(true);
 		echo debut_droite("",true);
 
-		$res = '<label for="date"><strong>'._T('asso:Date du paiement (AAAA-MM-JJ)').' :</strong></label>';
+		$res = '<label for="date"><strong>'._T('Date du paiement (AAAA-MM-JJ)').' :</strong></label>';
 		$res .= '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
 		$res .= '<label for="montant"><strong>'._T('asso:Montant paye (en euros)').' :</strong></label>';
 		$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));

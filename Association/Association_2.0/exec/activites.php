@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association')) ;
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		
 		association_onglets();
 		

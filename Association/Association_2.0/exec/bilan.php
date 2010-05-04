@@ -25,7 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$total_actuel=$total_initial=$total_recettes=$total_depenses=$total_soldes=0;
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(propre(_T('Gestion pour  Association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
+		echo $commencer_page(propre(_T('asso:titre_gestion_pour_association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
 		association_onglets();
 		
 		echo debut_gauche("",true);

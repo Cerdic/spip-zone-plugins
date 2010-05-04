@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_action_plan=generer_url_ecrire('action_plan');
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Plan comptable')) ;
+		echo $commencer_page(_T('asso:plan_comptable')) ;
 		
 		association_onglets();
 		
