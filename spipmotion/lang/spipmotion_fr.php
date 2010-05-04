@@ -124,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'select_all' => 'Tout s&eacute;lectionner',
 	'spipmotion_boite' => 'Configuration de SPIPmotion',
-	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la vol&eacute;e des vid&eacute;os au format FLV depuis les formats MP4/MPG/AVI/MOV... Pour l\'instant on se contente de la vid&eacute;o... on verra plus tard pour le reste...',
+	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la vol&eacute;e des documents audios et vid&eacute;os.',
 	'spipmotion_liens'=>'Liens compl&eacute;mentaires : ',
 
 	// T
