@@ -13,13 +13,14 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 background: #888 url("img/varicelle-overlay.png") repeat-x; box-shadow: 0 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 border: 0; border-bottom: 1px solid rgba(0,0,0,0.25); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
 font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
+* html .submit { background-image: none; border: none; color: #FFF !important; font-size: 100%; } /*IE6*/
 .submit,.submit:visited,.submit * { color: #FFF; text-decoration: none; }
 
 .submit:hover { background-color: #777; color: #FFF; text-decoration: none; }
 .submit:focus,
 .submit:active { -moz-transform: translateY(1px); outline: none !important; }
 .submit:active { box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); -webkit-box-shadow: none;
-/* IE only stuff */ border-bottom: 0\9; border-top: 1px solid #666\9; }
+ /*IE*/ border-bottom: 0\9; border-top: 1px solid #666\9; }
 .submit::-moz-focus-inner { border: 0 none; padding: 0; }
 
 /* tailles */
