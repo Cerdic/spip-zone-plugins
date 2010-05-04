@@ -49,7 +49,13 @@ function exec_mutualisation_dist() {
 		else
 			$alias[$v] = $v;
 	}
-
+	
+	// Recuperer la liste des plugins connus de l'instance SPIP en cours (celle qui est appelee par ecrire/?exec=mutualisation)
+	include_spip('inc/plugin');
+	$liste_plug = liste_plugin_files();
+	$liste_plug_compat = liste_plugin_valides($liste_plug);
+	$liste_plug_compat = $liste_plug_compat[0];
+	
 	foreach ($sites as $v) {
 		$nom_site=$stats=$plugins=$erreur=$version_installee="";
 
@@ -76,7 +82,7 @@ function exec_mutualisation_dist() {
 			// Pour cela, on cree un bouton avec un secret, que mutualiser.php
 			// va intercepter (pas terrible ?)
 			$erreur = test_upgrade_site($meta);
-			$adminplugin = adminplugin_site($meta);
+			$adminplugin = adminplugin_site($meta, $liste_plug_compat);
 			$version_installee = ' <em><small>'.$meta['version_installee'].'</small></em>';
 		}
 		else {
@@ -90,7 +96,7 @@ function exec_mutualisation_dist() {
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
 			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
-			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small>$adminplugin</td>
+			<td>$adminplugin<a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
 			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
@@ -175,10 +181,15 @@ EOF;
 	}
 }
 
-function adminplugin_site($meta) {
-	$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
-	$secret = md5($secret);
-	return <<<EOF
+function adminplugin_site($meta, $liste_plug_compat) {
+	if ($cfg = @unserialize($meta['plugin'])) {
+		$plugins = array_keys($cfg);
+		ksort($plugins);
+		foreach ($plugins as $plugin) {
+			if ($cfg[$plugin]['version'] <> $liste_plug_compat[$plugin]['version']) {
+				$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
+				$secret = md5($secret);
+				return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
 <div>
 <input type='hidden' name='secret' value='$secret' />
@@ -188,6 +199,10 @@ function adminplugin_site($meta) {
 </div>
 </form>
 EOF;
+			}
+		}
+	} 
+	return '';
 }
 
 
