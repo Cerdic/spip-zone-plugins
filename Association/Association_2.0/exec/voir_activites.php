@@ -52,8 +52,8 @@ function exec_voir_activites(){
 		// TOTAUX
 		$query = sql_select("sum(inscrits) AS inscrits, sum(montant) AS encaisse ", "spip_asso_activites", "id_evenement='$id_evenement' AND statut ='ok' " );
 		while ($data = sql_fetch($query)) {
-			echo '<p><font color="blue"><strong>'._T('asso:activite_liste_nombre_inscrits',array('total' => $data['inscrits'])).'</strong></font><br />';
-			echo '<font color="#9F1C30"><strong>'._T('asso:activite_liste_total_participations',array('total' => number_format($data['encaisse'], 2, ',', ' '))).'</strong></font><br/></p>';	
+		  echo '<p><strong style="color:blue">'._T('asso:activite_liste_nombre_inscrits',array('total' => $data['inscrits'])).'</strong><br />';
+			echo '<strong style="color: #9F1C30">'._T('asso:activite_liste_total_participations',array('total' => number_format($data['encaisse'], 2, ',', ' '))).'</strong><br/></p>';	
 		}
 		echo fin_boite_info(true);
 		

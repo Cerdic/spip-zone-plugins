@@ -53,7 +53,7 @@ function exec_ventes(){
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><font color="#9F1C30"><strong>Solde :</strong></td>';
+			echo '<td><strong style="color: #9F1C30">Solde :</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';

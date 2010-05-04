@@ -36,16 +36,16 @@ function exec_bilan(){
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", $titre =propre( _T('Bilans comptables')));
+		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", propre( _T('Bilans comptables')));
 		
 		if (!($annee = _request('annee'))) $annee = date('Y');
 		$class= "impair";
 		
 		//TABLEAU EXPLOITATION
-		echo '<fieldset>';
-		echo '<legend>R&eacute;sultat courant '.$annee.'</strong></legend>';
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr bgcolor="#DBE1C5">';
+		echo "\n<fieldset>";
+		echo '<legend><strong>R&eacute;sultat courant '.$annee.'</strong></legend>';
+		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo '<tr style="background-color: #DBE1C5">';
 		echo '<td><strong>&nbsp;</strong></td>';
 		echo '<td style="text-align:center;"><strong>Recettes</strong></td>';
 		echo '<td style="text-align:center;"><strong>D&eacute;penses</strong></td>';
@@ -76,7 +76,6 @@ function exec_bilan(){
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_recettes.'</strong></td>'; 
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_depenses.'</strong></td>';
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_soldes.'</strong></td></tr>'; 
-		echo '</tr>';
 		echo '</table>';
 		echo '</fieldset>';
 		

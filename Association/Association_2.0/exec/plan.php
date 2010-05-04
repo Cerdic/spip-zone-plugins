@@ -85,7 +85,7 @@ function exec_plan(){
 		echo '</tr></table>';
 		
 		//Affichage de la table
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td><strong>Classe</strong></td>';
 		echo '<td><strong>Code</strong></td>';

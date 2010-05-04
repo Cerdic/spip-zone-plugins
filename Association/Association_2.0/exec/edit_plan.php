@@ -90,10 +90,10 @@ function exec_edit_plan(){
 		. $date_anterieure
 		. '" id="date_anterieure" class="formo" />'
 		. '<label for="actif"><strong>Compte activ&eacute; :</strong></label>'
-		. '<input name="actif" type="radio" value="oui" id="actif" ';
+		. '<input name="actif" type="radio" value="oui" id="actif"';
 		if ($checked) {$res .= ' checked="checked"';}
 		$res .= ' />'._T('asso:plan_libelle_oui')
-		. '<input name="actif" type="radio" value="non" id="actif" ';
+		. '<input name="actif" type="radio" value="non"';
 		if (!$checked) {$res .= ' checked="checked"';}
 		$res .= ' />'._T('asso:plan_libelle_non')
 		. '<br /><label for="commentaire"><strong>Commentaires :</strong></label>'

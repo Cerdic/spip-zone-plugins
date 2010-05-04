@@ -56,15 +56,15 @@ function exec_comptes() {
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><font color="blue"><strong>Entr&eacute;es :</strong></td>';
+			echo '<td><strong style="color:blue">Entr&eacute;es :</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><font color="blue"><strong>Sorties :</strong></td>';
+			echo '<td><strong style="color:blue">Sorties :</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><font color="#9F1C30"><strong>Solde :</strong></td>';
+			echo '<td><strong style="color:#9F1C30">Solde :</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
