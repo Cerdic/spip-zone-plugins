@@ -41,14 +41,7 @@
 	<fonctions>
 		op_fonctions.php
 	</fonctions>
-	<!-- indispensable lorsque aucun plugin ne viens ce brancher. renvoie une chaine vide
-	     ce n'est pas propre ... mais bon. -->
-	<pipeline>
-		<nom>OP_squelette</nom>
-		<action>OP_squelette</action>
-		<inclure>op_fonctions.php</inclure>
-	</pipeline>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id='cfg' version='[1.14.1;]' />
-	<necessite id='extras' version='[1.0;]' />
+	<necessite id='cextras' version='[1.0;]' />
 </plugin>
