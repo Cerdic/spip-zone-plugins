@@ -43,9 +43,10 @@
 						[(#CONFIG{spip_thelia/liens_produits_panier_spip_thelia}|=={"oui"}|oui)</a>]
 					</td>
 					<td>THELIA-PRIXU&nbsp;&euro; </td>
-    					<form action="[(#URL_PAGE{panier,lang=#LANG}|ancre_url{panier})]" method="post" id="formpanierTHELIA-ARTICLE">
-                			<td>
-						<input type="hidden" name="article" value="THELIA-ARTICLE" />
+    					<td>
+					[(#CONFIG{spip_thelia/quantite_produit_select_spip_thelia}|=={"non"}|non)
+					<form action="[(#URL_PAGE{panier,lang=#LANG}|ancre_url{panier})]" method="post" id="formpanierTHELIA-ARTICLE">
+                				<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<input type="hidden" name="thelia_action" value="modifier" />
                 				<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<select name="quantite" size="1" class="zoneDeSaisie" onchange="$('#formpanierTHELIA-ARTICLE').submit()">
@@ -54,11 +55,21 @@
 						</THELIA_quantite>
 						</select>
 						
-						<noscript><input type="image" src="#CHEMIN{img_pack/recur.png}" class="bouton-actualiser" value="[<:spipthelia:actualiser:>]" /></noscript>
-					</td>
+						<noscript><input type="image" src="#CHEMIN{img_pack/recur.png}" class="bouton-actualiser" value="<:spipthelia:actualiser:>" /></noscript>
 					</form>
+					]
+					[(#CONFIG{spip_thelia/quantite_produit_select_spip_thelia}|=={"non"}|oui)
+					    THELIA-QUANTITE
+					]
+					</td>
 					<td>THELIA-TOTAL&nbsp;&euro;</td>
-					<td><a href="[(#URL_PAGE{panier,thelia_action=supprimer&thelia_article=THELIA-ARTICLE}|ancre_url{panier})]" title="<:spipthelia:supprimer:>"><img src="#CHEMIN{img_pack/trash.png}" width="16" height="16" alt="<:spipthelia:supprimer:>" /></a></td>
+					<td> 
+						  [(#CONFIG{spip_thelia/quantite_produit_select_spip_thelia}|=={"non"}|oui)
+						    <a href="THELIA-PLUSURL"><img src="#CHEMIN{img_pack/plus.png}" alt="+" /></a>
+						    <a href="THELIA-MOINSURL"><img src="#CHEMIN{img_pack/moins.png}" alt="-" /></a>
+						  ]
+						  <a href="[(#URL_PAGE{panier,thelia_action=supprimer&thelia_article=THELIA-ARTICLE}|ancre_url{panier})]" title="<:spipthelia:supprimer:>"><img src="#CHEMIN{img_pack/trash.png}" width="16" height="16" alt="<:spipthelia:supprimer:>" /></a>
+					</td>
 				</tr>
   	  			</THELIA_CONTENU_PANIER>
 			
