@@ -35,10 +35,10 @@ function exec_ressources(){
 		
 		echo debut_boite_info(true);
 		echo '<p>'._T('asso:ressources_info').'</p>';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif"> Libre<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif"> En suspend<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif"> R&eacute;s&eacute;rv&eacute;<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif"> Supprim&eacute;';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt=" " /> Libre<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif" alt=" " /> En suspend<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt=" " /> R&eacute;s&eacute;rv&eacute;<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt=" " /> Supprim&eacute;';
 		echo fin_boite_info(true);
 		
 		

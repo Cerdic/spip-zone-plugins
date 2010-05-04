@@ -71,7 +71,7 @@ function exec_edit_vente() {
 		
 		echo debut_cadre_relief(  "", false, "", _T('asso:ressources_titre_mise_a_jour'));
 		
-		echo '<form method="post" action="'.$url_agir_ventes.'">';	
+		echo '<form method="post" action="'.$url_agir_ventes.'"><div>';	
 		echo '<label for="date_vente"><strong>Date (AAAA-MM-JJ) :</strong></label>';
 		echo '<input name="date_vente" type="text" value="'.$date_vente.'" id="date_vente" class="formo" />';
 		echo '<label for="article"><strong>Article :</strong></label>';
@@ -87,7 +87,7 @@ function exec_edit_vente() {
 		echo '<label for="prix_vente"><strong>Prix de vente(en &euro;) :</strong></label>';
 		echo '<input name="prix_vente"  type="text" value="'.$prix_vente.'" id="prix_vente" class="formo" />';
 		echo '<label for="journal"><strong>Mode de paiement :</strong></label>';
-		echo '<select name="journal" type="text" id="journal" class="formo" />';
+		echo '<select name="journal" id="journal" class="formo" />';
 		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
 			echo '<option value="'.$banque['code'].'" ';
@@ -109,12 +109,12 @@ function exec_edit_vente() {
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;">';
-		echo '<input name="submit" type="submit" value="';
+		echo '<input type="submit" value="';
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		
-		echo '</form>';
+		echo '</div></form>';
 		
 		fin_cadre_relief();  
 		 echo fin_gauche(),fin_page(); 

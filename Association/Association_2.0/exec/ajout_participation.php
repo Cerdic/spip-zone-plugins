@@ -55,7 +55,7 @@ function exec_ajout_participation() {
 			$commentaire=$data['commentaire'];
 		}
 		
-		echo '<form action="'.$url_action_activites.'" method="POST">';
+		echo '<form action="'.$url_action_activites.'" method="post"><div>';
 		echo '<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet').' :</strong></label>';
 		echo '<input name="nom"  type="text" size="40" value="'.$nom.'" id="nom" class="formo" />';
 		echo '<label for="id_membre"><strong>'._T('asso:activite_libelle_adherent').' :</strong></label>';
@@ -71,12 +71,12 @@ function exec_ajout_participation() {
 		echo '<label for="date_paiemen"><strong>'._T('asso:activite_libelle_date_paiement').' :</strong></label>';
 		echo '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />';
 		echo '<label for="journal"><strong>'._T('asso:activite_libelle_mode_paiement').' :</strong></label>';
-		echo '<select name="journal" type="text" id="journal" class="formo" />';
+		$res = '';
 		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
-			echo '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
+			$res .= '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
 		}
-		echo '</select>';
+		echo "<select name='journal' id='journal' class='formo'>$res</select>";
 		echo '<label for="statut"><strong>'._T('asso:activite_libelle_statut').' ok :</strong></label>';
 		echo '<input name="statut"  type="checkbox" value="ok" unchecked id="statut" /><br />';
 		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires').' :</strong></label>';
@@ -89,7 +89,7 @@ function exec_ajout_participation() {
 		
 		echo '<div style="float:right;">';
 		echo '<input type="submit" value="'._T('asso:bouton_ajoute').'" class="fondo" /></div>';
-		echo '</form>';
+		echo '</div></form>';
 
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();

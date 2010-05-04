@@ -35,7 +35,7 @@ function exec_plan(){
 		echo debut_boite_info(true);
 		
 		echo association_date_du_jour();	
-		echo'<p>'.propre(_T('asso:plan_info')).'</p>';
+		echo propre(_T('asso:plan_info'));
 		echo fin_boite_info(true);
 		
 		
@@ -70,8 +70,8 @@ function exec_plan(){
 		echo '<td style="text-align:right;">';
 		
 		//Filtre actif
-		echo '<form method="post" action="'.$url_plan.'">';
-		echo '<input type="hidden" name="classe" value="'.$classe.'">';
+		echo '<form method="post" action="'.$url_plan.'"><div>';
+		echo '<input type="hidden" name="classe" value="'.$classe.'" />';
 		echo '<select name ="actif" class="fondl" onchange="form.submit()">';
 		echo '<option value="oui" ';
 		if ($actif=='oui') {echo ' selected="selected"';}
@@ -80,7 +80,7 @@ function exec_plan(){
 		if ($actif=='non') {echo ' selected="selected"';}
 			echo '> '._T('asso:plan_libelle_comptes_desactives').'</option>';
 		echo '</select>';
-		echo '</form>';
+		echo '</div></form>';
 		echo '</td>';
 		echo '</tr></table>';
 		

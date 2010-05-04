@@ -92,10 +92,10 @@ function exec_edit_plan(){
 		. '<label for="actif"><strong>Compte activ&eacute; :</strong></label>'
 		. '<input name="actif" type="radio" value="oui" id="actif" ';
 		if ($checked) {$res .= ' checked="checked"';}
-		$res .= '>'._T('asso:plan_libelle_oui')
+		$res .= ' />'._T('asso:plan_libelle_oui')
 		. '<input name="actif" type="radio" value="non" id="actif" ';
 		if (!$checked) {$res .= ' checked="checked"';}
-		$res .= '>'._T('asso:plan_libelle_non')
+		$res .= ' />'._T('asso:plan_libelle_non')
 		. '<br /><label for="commentaire"><strong>Commentaires :</strong></label>'
 		. '<textarea name="commentaire" id="commentaire" class="formo" />'
 		. $commentaire
@@ -103,7 +103,7 @@ function exec_edit_plan(){
 		. '<div style="float:right;">'
 		. '<input type="submit" value="'
 		. _T('asso:bouton_envoyer')
-		. '" class="fondo"></div>';
+		. '" class="fondo" /></div>';
 
 		echo redirige_action_post($action . '_plans' , $id_plan, 'plan', "", "<div>$res</div>");
 

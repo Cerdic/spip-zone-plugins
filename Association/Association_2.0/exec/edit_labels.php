@@ -53,8 +53,8 @@ function exec_edit_labels(){
 		echo '<tr>';
 		// Menu de sélection
 		echo '<td style="text-align:right;">';
-		echo '<form method="post" action="#">';
-		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
+		echo '<form method="post" action="#"><div>';
+		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
 		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
 		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
 			echo '<option value="'.$var.'"';
@@ -62,7 +62,7 @@ function exec_edit_labels(){
 			echo '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
 		}
 		echo '</select>';
-		echo '</form>';
+		echo '</div></form>';
 		echo '</td></tr>';
 		echo '</table>';
 		
