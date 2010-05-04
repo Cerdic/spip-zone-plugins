@@ -12,13 +12,12 @@ function exec_getid3_infos_dist()
 	$script = _request("script"); // generalisation a tester
 	$id_document= _request('show_infos_docs');
 	exec_getid3_infos_args($id, $type, $id_document, $script);
-	spip_log('exec_getid3_infos_dist');
 }
 
 function exec_getid3_infos_args($id_article, $type,$id_document,$script) {
 		include_spip('inc/actions');
 		$infos_videos = charger_fonction('infos_son', 'inc');
-		if(_request("iframe")=="iframe") { 
+		if(_request("iframe")=="iframe") {
 			$res = $infos_videos($id, $id_document,$type,$script, 'ajax').
 			  $infos_videos($id, $id_document,$type,$script, 'ajax');
 			ajax_retour("<div class='upload_answer upload_document_added'>".$res."</div>",false);

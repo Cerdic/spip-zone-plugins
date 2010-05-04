@@ -12,7 +12,7 @@ function recuperer_id3_doc($id_document,$info = "", $mime = "",$retour='oui'){
 			if(preg_match('/cover/',$cle)){
 				$output .= ($val) ? '<img src='.$val.' /><br />' : '';
 			}else{
-				$output .= ($val) ? _T('getid3:'.$cle).' : '.$val.'<br />' : '';
+				$output .= ($val) ? _T('getid3:info_'.$cle).' : '.$val.'<br />' : '';
 			}
 		}
 	}

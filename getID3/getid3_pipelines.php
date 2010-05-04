@@ -1,7 +1,11 @@
 <?php
-
-include_spip("inc/getid3");
-				
+/**
+ * Insertion dans le pipeline editer_contenu_objet
+ * Ajout d'informations dans le bloc des documents si le document est sonore
+ *
+ * @param array $flux Le contexte du pipeline
+ * @return $flux le $flux modifié
+ */
 function getid3_editer_contenu_objet($flux){
 	$id_document = $flux['args']['id'];
 	if($flux['args']['type']=='case_document'){
@@ -18,6 +22,13 @@ function getid3_editer_contenu_objet($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline post_edition
+ * Récupération d'informations sur le document lors de son insertion en base
+ *
+ * @param array $flux Le contexte du pipeline
+ * @return $flux le $flux modifié
+ */
 function getid3_post_edition($flux){
 	$id_document = $flux['args']['id_objet'];
 	if($flux['args']['operation'] == 'ajouter_document'){
@@ -29,7 +40,6 @@ function getid3_post_edition($flux){
 			$infos = $recuperer_infos($id_document);
 		}
 	}
-
 	return $flux;
 }
 ?>
