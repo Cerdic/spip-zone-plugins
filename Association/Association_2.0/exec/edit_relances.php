@@ -43,7 +43,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres &agrave; relancer'));
+		debut_cadre_relief(  "", false, "", $titre = _L('Tous les membres &agrave; relancer'));
 		
 		echo '<form method="post" action="'.$url_action_relances.'">';
 		

@@ -30,14 +30,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		//debut_page(_T(''), "", "");
-		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
-		 echo debut_gauche("",true);
+		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
-		
 		
 		$res=association_icone(_L('Ajouter une cat&eacute;gorie de cotisation'),  $url_ajout_categorie, "calculatrice.gif");
 		$res.= association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");
@@ -46,7 +45,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			
 		echo debut_droite("",true);
 		
-		 echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."calculatrice.gif", false, "", $titre = _T('asso:categories_de_cotisations'));
+		echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."calculatrice.gif", false, "", _T('asso:toutes_categories_de_cotisations'));
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr bgcolor='#DBE1C5'>";

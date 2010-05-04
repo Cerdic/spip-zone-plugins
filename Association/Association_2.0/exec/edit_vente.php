@@ -70,7 +70,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_droite("",true);
 		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des ventes').' '.$action);
+		echo debut_cadre_relief(  "", false, "", _T('asso:ressources_titre_mise_a_jour'));
 		
 		echo '<form method="post" action="'.$url_agir_ventes.'">';	
 		echo '<label for="date_vente"><strong>Date (AAAA-MM-JJ) :</strong></label>';

@@ -62,7 +62,7 @@ function exec_adherents() {
 		
 		$res=association_icone(_T('asso:menu2_titre_relances_cotisations'),  $url_edit_relances, 'ico_panier.png');
 		$res.=association_icone(_T('asso:bouton_impression'),  $url_pdf_adherents.'&statut_interne='.$statut_interne, 'print-24.png'); 
-		$res.=association_icone(_T('Param&egrave;tres'),  $url_association, 'annonce.gif'); 
+		$res.=association_icone(_T('asso:parametres'),  $url_association, 'annonce.gif'); 
 			echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

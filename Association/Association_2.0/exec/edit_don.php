@@ -44,7 +44,7 @@ function exec_edit_don(){
 		  $bienfaiteur=$id_adherent=$argent=$colis=$valeur=$journal=$contrepartie=$commentaire='';
 		  $date_don=date('Y-m-d');
 		}
-		$titre = _T('Mise &agrave; jour des dons');
+		$titre = _T('asso:dons_titre_mise_a_jour');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($titre) ;
 		

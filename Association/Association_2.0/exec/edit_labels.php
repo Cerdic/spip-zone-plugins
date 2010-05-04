@@ -47,7 +47,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_droite("",true);
 		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('Toutes les &eacute;tiquettes &agrave; g&eacute;n&eacute;rer'));
+		echo debut_cadre_relief(  "", false, "", $titre = _L('Toutes les &eacute;tiquettes &agrave; g&eacute;n&eacute;rer'));
 		
 		$statut_interne= "ok";
 		if ( isset ($_POST['statut_interne'] )) { $statut_interne = $_POST['statut_interne']; } 

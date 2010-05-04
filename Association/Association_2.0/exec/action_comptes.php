@@ -41,7 +41,7 @@ function exec_action_comptes(){
 			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 			echo debut_droite('', true);
 			
-			debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
+			debut_cadre_relief(  "", false, "",  _T('asso:operations_comptables'));
 			echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte n&deg; '. $id_compte . '&nbsp;:') . '</strong></p>';
 
 			$res = action_comptes_ligne("id_compte=$id_compte");
@@ -75,7 +75,7 @@ function exec_action_comptes(){
 			
 			echo debut_droite('', true);
 			
-			debut_cadre_relief("", false, "", $titre = _L('Op&eacute;rations comptables'));
+			debut_cadre_relief("", false, "",  _T('asso:operations_comptables'));
 			echo '<p>' . _L('Vous vous appr&ecirc;tez &agrave; valider les op&eacute;rations&nbsp;:') .  '</p>';
 
 			$res = action_comptes_ligne(sql_in("id_compte", $_POST['valide']));

@@ -62,6 +62,7 @@
 			'bouton_impression' => 'Impression',
 	
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
+	'toutes_categories_de_cotisations' => 'Toutes les cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
 	'gestion_association' => 'Gestion d\'une Association',
 	'gestion_des_banques' => 'Gestion des banques',
@@ -164,6 +165,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_bouton_modifier_membre' => 'Modifier le membre',
 	'adherent_bouton_maj_operation' => 'Mettre &agrave; jour l\'op&eacute;ration',
 	'adherent_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
+	'parametres' => 'Param&egrave;tres',
 
 	# Label
 	'adherent_label_modifier_visiteur' => 'Modifier le visiteur',
@@ -299,6 +301,7 @@ Commentaire: @commentaire@
 			'vente_entete_quantites' => 'Quantit&eacute;',
 			'vente_entete_date_envoi' => 'Date d\'envoi',
 			
+			'dons_titre_mise_a_jour' => 'Mise &agrave; jour des dons',
 	# RESSOURCES
 		
 		#Messages
@@ -310,6 +313,7 @@ Commentaire: @commentaire@
 			'ressources_titre_edition_ressources' => 'Edition de ressource',
 			'ressources_titre_suppression_ressources' => 'Suppression de ressource',
 			'ressources_titre_liste_ressources' => 'Liste des ressources',
+			'ressources_titre_mise_a_jour' => 'Mise &agrave; jour des ventes',
 		
 		# En-tete
 			'ressources_entete_intitule' => 'Article',
@@ -388,6 +392,7 @@ Commentaire: @commentaire@
 		
 		# Navigation
 			'plan_nav_ajouter' => 'Ajouter une r&eacute;f&eacute;rence comptable',
+			'operations_comptables' => 'Op&eacute;rations comptables',
 		
 		#Libelle
 			'plan_libelle_comptes_actifs' => 'Comptes actifs',

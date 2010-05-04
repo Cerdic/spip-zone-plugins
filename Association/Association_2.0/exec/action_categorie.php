@@ -49,7 +49,7 @@ function exec_action_categorie(){
 			
 		echo debut_droite("",true);
 			
-		echo debut_cadre_relief(  "", false, "", $titre = _T('Toutes les cat&eacute;gories de cotisation'));
+		echo debut_cadre_relief(  "", false, "",  _T('asso:categories_de_cotisations'));
 			
 		echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie n&deg; ') .$id_categorie.' !</strong></p>';
 		$res = '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';

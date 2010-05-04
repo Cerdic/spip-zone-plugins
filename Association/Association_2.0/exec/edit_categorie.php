@@ -52,7 +52,7 @@ function exec_edit_categorie(){
 		
 		echo debut_droite("",true);
 		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:categories_de_cotisations'));
+		echo debut_cadre_relief(  "", false, "", _T('asso:categories_de_cotisations'));
 
 		$res = '<label for="valeur"><strong>Cat&eacute;gorie :</strong></label>'
 		. '<input name="valeur" type="text" value="'
