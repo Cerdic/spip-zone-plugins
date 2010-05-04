@@ -1,0 +1,162 @@
+#CACHE{0}
+
+<style type="text/css">
+	input, textarea {width:100%;}
+	input.radio, #choix_AuteurSpip input, input.spip_bouton {width:auto;}
+</style>
+
+<form action="[(#ENV{url})]" method="post" name="formulaire_article" enctype="multipart/form-data">
+
+	<input type="hidden" name="id_article" value="[(#ENV**{id_article})]" >
+	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]" >
+
+	[(#ENV*{formulaire_article_previsu})]
+
+	[<center><p style="color:red;"><b>(#ENV*{mess_error})</b></p></center>]
+
+	[(#CONFIG{op/Logo,''}|=={yes}?{[<p>
+	<fieldset><legend><b><:opconfig:logo_article:></b></legend>
+		<p>(#ENV**{id_article}|logo_article)</p>
+		<input name='sup_logo' type='submit' VALUE='<:opconfig:sup_logo:>' CLASS='spip_bouton'>
+	</fieldset>
+	</p>]})]
+	#SET{id,#ENV**{id_article}}
+
+	<B_document>
+	<p>
+	<fieldset><legend><b><:opconfig:documents_lies:></b></legend>
+
+	<p><:opconfig:expliq_balise:></p>
+
+
+	<BOUCLE_document(DOCUMENTS){id_article=#GET{id}}{tout}>
+		#SET{ratio_x,#LARGEUR|div{115}}
+		#SET{ratio_y,#HAUTEUR|div{115}}
+		#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+
+		<div style="float:left;">
+			
+			<center>
+			[(#TITRE)<br />]
+			[(#DESCRIPTIF)<br />]
+			[(#MODE|=={image}|?{
+				[<a href="#URL_DOCUMENT">(#FICHIER|image_reduire_par{#GET{ratio}}|image_recadre{115,115,center})</a>]<br />
+				<<code>img</code>#ID_DOCUMENT<code>|left</code>><br />
+				<<code>img</code>#ID_DOCUMENT<code>|center</code>><br />
+				<<code>img</code>#ID_DOCUMENT<code>|right</code>><br />
+				,
+				[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<br />
+				<<code>doc</code>#ID_DOCUMENT<code>|left</code>><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|center</code>><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|right</code>><br />
+			})]
+			</center>
+		</div>
+	</BOUCLE_document>
+	</fieldset>
+	</B_document>
+
+	<p>
+	<fieldset><legend><b><:opconfig:publie_rubrique:></b></legend>
+
+			<p><select name="id_rubrique" value="[(#ENV**{id_rubrique})]">
+				<BOUCLE_rubrique(RUBRIQUES){openPublishing}{tout}>
+					[(#ENV**{id_rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
+				</BOUCLE_rubrique>
+			</select></p>
+
+	</fieldset>
+	</p>
+
+	[(#CONFIG{op/SurTitre,''}|=={yes}?{
+	<p>
+	<fieldset><legend><b><:opconfig:publie_surtitre:>&nbsp;(<:opconfig:optionel:>)</b></legend>
+		<p><input type="text" name="surtitre" value="[(#ENV**{surtitre})]"  size="70" maxlength="80"></p>
+		<p><:opconfig:explication_surtitre:></p>
+	</fieldset>
+	</p>
+	})]
+
+	<p>
+	<fieldset><legend><b><:opconfig:publie_titre:>&nbsp;[<:opconfig:obligatoire:>]</b></legend>
+		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="70" maxlength="80"></p>
+	</fieldset>
+	</p>
+
+	[(#CONFIG{op/SousTitre,''}|=={yes}?{
+	<p>
+	<fieldset><legend><b><:opconfig:publie_soustitre:>&nbsp;(<:opconfig:optionel:>)</b></legend>
+		<p><input type="text" name="soustitre" value="[(#ENV**{soustitre})]"  size="70" maxlength="80"></p>
+		<p><:opconfig:explication_soustitre:></p>
+	</fieldset>
+	</p>
+	})]
+
+	[(#CONFIG{op/Descriptif,''}|=={yes}?{
+	<p>
+	<fieldset><legend><b><:opconfig:publie_descriptif:>&nbsp;(<:opconfig:optionel:>)</b></legend>
+		<p><textarea cols="62" rows="5" name="descriptif">[(#ENV**{descriptif})]</textarea></p>
+		<p><:opconfig:explication_descriptif:></p>
+	</fieldset>
+	</p>
+	})]
+
+
+	[(#CONFIG{op/Chapo,''}|=={yes}?{
+	<p>
+	<fieldset><legend><b><:opconfig:publie_chapo:>&nbsp;(<:opconfig:optionel:>)</b></legend>
+		<p><textarea cols="62" rows="5" name="chapo">[(#ENV**{chapo})]</textarea></p>
+		<p><:opconfig:explication_chapo:></p>
+	</fieldset>
+	</p>
+	})]
+
+
+	<p>
+	<fieldset><legend><b><:opconfig:publie_texte:></b></legend>
+		<p>[(#ENV**{texte}|barre_article{30,62})]</p>
+	</fieldset>
+	</p>
+
+	[(#CONFIG{op/PostScriptum,''}|=={yes}?{
+	<p>
+	<fieldset><legend><b><:opconfig:publie_ps:>&nbsp;(<:opconfig:optionel:>)</b></legend>
+		<p><textarea cols="62" rows="5" name="ps">[(#ENV**{ps})]</textarea></p>
+		<p><:opconfig:explication_ps:></p>
+	</fieldset>
+	</p>
+	})]
+
+
+	[<p>(#ENV*{formulaire_motclefs})</p>]
+
+
+	[<p>(#ENV*{formulaire_documents})</p>]
+
+
+	[<p>(#ENV*{formulaire_agenda})</p>]
+
+	#PIPELINE{OP_squelette,#ENV*}
+
+	[(#CONFIG{op/Authentification,''}|=={yes}?{		
+	<p>
+	<fieldset><legend><b><:opconfig:identification:>&nbsp;(<:opconfig:optionel:>)</b></legend>
+		<p>
+		<:opconfig:votre_nom:> : <br />
+		<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="35"><br />
+		<:opconfig:votre_mail:> : <br />
+		<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="35"><br />
+		</p>
+	</fieldset>
+	</p>
+	})]
+
+	[(#ENV*{formulaire_auteurspip})]
+
+	<p>
+		<input type="submit" name="previsualiser" class="spip_bouton" value="<:opconfig:previsualiser:>" />
+		<input type='submit' name='valider' class='spip_bouton' value="#ENV*{bouton}" />
+		<input type="submit" name="abandonner" class="spip_bouton" value="<:opconfig:abandonner:>" />
+	</p>
+
+</form>

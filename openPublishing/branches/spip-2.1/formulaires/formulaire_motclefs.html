@@ -1,0 +1,25 @@
+#CACHE{0}
+
+<B_groupes>
+
+<fieldset><legend><b><:opconfig:publie_motscles:></b></legend>
+
+	<p><:opconfig:publie_motscles_explique:></p>
+
+	<BOUCLE_groupes(GROUPES_MOTS){openKey}>	
+		<div style="float:left;display:block;">
+		<h4>[(#TITRE|majuscules)]</h4>
+		<BOUCLE_mots(MOTS){par titre}{id_groupe}>
+			<input type="checkbox" name='mots[]' value="#ID_MOT"
+			[(#ENV*{mots_#ID_MOT}|=={yes}|?{checked="yes"})]>#TITRE</input><br />
+		</BOUCLE_mots>
+		</div>
+	</BOUCLE_groupes>
+	
+</fieldset>
+
+</B_groupes>
+
+<p><:opconfig:expliq_groupes_absent:></p>
+
+<//B_groupes>

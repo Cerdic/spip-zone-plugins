@@ -1,0 +1,227 @@
+<!-- descriptif=
+<a name="haut"></a>
+&nbsp;&nbsp;<b>Navigation</b>
+<br />
+- <a href="#rubriques"><:opconfig:gestion_rubrique:></a>
+- <a href="#anonyme"><:opconfig:gestion_auteur:></a>
+- <a href="#composition"><:opconfig:composition_article:></a>
+- <a href="#options"><:opconfig:options_dispos:></a>
+- <a href="#agenda"><:opconfig:gestion_agenda:></a>
+- <a href="#statut"><:opconfig:statut_article:></a>
+- <a href="#postTraitement"><:opconfig:post_traitement:></a>
+- <a href="#renvois"><:opconfig:gestion_renvois:></a>
+-->
+<!-- titre=Publication Ouverte-->
+
+<!-- boite=Configuration de la publication ouverte-->
+<!-- nom=op-->
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<p><:opconfig:description_plugin:></p>
+
+<a name="rubriques"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_rubrique_op:></b></legend>
+<B_rubrique>
+
+<p><a href="?exec=rubriques_edit&new=oui&retour=nav"><:opconfig:creer_rubrique:></a></p>
+<p style="background:#fff; border: 1px dotted #000;">
+<BOUCLE_rubrique(RUBRIQUES){tout}{par titre}>
+<input type="checkbox" name="op_#ID_RUBRIQUE" value="openPublishing" [(#ENV{op_#ID_RUBRIQUE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
+</BOUCLE_rubrique>
+</p>
+
+<p><:opconfig:expliq_rubrique_op:></p>
+<b><:opconfig:attention_minimum:></b>
+
+<p><:opconfig:expliq_rubrique_squelette:></p>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</B_rubrique>
+<p><:opconfig:expliq_rubrique_absent:></p>
+<a href="?exec=rubriques_edit&new=oui&retour=nav"><:opconfig:creer_rubrique:></a>
+<//B_rubrique>
+
+</fieldset>
+
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+<a name="anonyme"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_auteur_anonyme:></b></legend>
+<p><:opconfig:expliq_auteur_anonyme:></p>
+<p><a href="?exec=auteur_infos&new=oui"><:opconfig:creer_auteur:></a></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<select name="IDAuteur" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
+<BOUCLE_auteur(AUTEURS){tout}{par nom}>
+	<option value="#ID_AUTEUR" [(#ENV{IDAuteur}|=={#ID_AUTEUR}|?{selected="selected"})]>#NOM</option>
+</BOUCLE_auteur>
+</select>
+</p>
+
+<p><:opconfig:expliq_auteur_squelette:></p>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+<a name="composition"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_composition_article:></b></legend>
+<p><:opconfig:expliq_composition_article:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="SurTitre" value="yes" [(#ENV{SurTitre}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_surtitre:><br />
+<input type="checkbox" name="SousTitre" value="yes" [(#ENV{SousTitre}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_soustitre:><br />
+<input type="checkbox" name="Chapo" value="yes" [(#ENV{Chapo}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_chapo:><br />
+<input type="checkbox" name="Descriptif" value="yes" [(#ENV{Descriptif}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_descriptif:><br />
+<input type="checkbox" name="PostScriptum" value="yes" [(#ENV{PostScriptum}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_ps:><br />
+</p>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+<a name="options"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_options:></b></legend>
+<p><:opconfig:expliq_options:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="MotCle" value="yes"  [(#ENV{MotCle}|=={yes}|?{checked="yes"})] /><:opconfig:option_motclef:><br />
+<input type="checkbox" name="DocInc" value="yes"  [(#ENV{DocInc}|=={yes}|?{checked="yes"})] /><:opconfig:option_document:><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#PUCE<input type="checkbox" name="DocImage" value="yes"  [(#ENV{DocImage}|=={yes}|?{checked="yes"})] /><:opconfig:option_docimage:><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#PUCE<input type="checkbox" name="DocDocument" value="yes"  [(#ENV{DocDocument}|=={yes}|?{checked="yes"})] /><:opconfig:option_docdocument:><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#PUCE<input type="checkbox" name="Logo" value="yes" [(#ENV{Logo}|=={yes}|?{checked="yes"})] /><:opconfig:option_logo:><br />
+
+<input type="checkbox" name="DocIncAuto" value="yes"  [(#ENV{DocIncAuto}|=={yes}|?{checked="yes"})] /><:opconfig:option_docauto:><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#PUCE<select name="DocAuto" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
+	<option value="image" [(#ENV{DocAuto}|=={#ID_RUBRIQUE}|?{selected="selected"})]>Image</option>
+	<option value="document" [(#ENV{DocAuto}|=={#ID_RUBRIQUE}|?{selected="selected"})]>Document</option>
+	<option value="logo" [(#ENV{DocAuto}|=={#ID_RUBRIQUE}|?{selected="selected"})]>Logo</option>
+</select><br />
+
+
+<input type="checkbox" name="DocDistant" value="yes" [(#ENV{DocDistant}|=={yes}|?{checked="yes"})] /><:opconfig:option_doc_distant:><br />
+<input type="checkbox" name="Authentification" value="yes" [(#ENV{Authentification}|=={yes}|?{checked="yes"})] /><:opconfig:option_authentification:><br />
+<input type="checkbox" name="AuteurSpip" value="yes"  [(#ENV{AuteurSpip}|=={yes}|?{checked="yes"})] /><:opconfig:option_auteur_spip:><br />
+</p>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+
+<a name="groupes"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_groupes:></b></legend>
+<p><:opconfig:expliq_groupes:></p>
+<p style="background:#fff; border: 1px dotted #000;">
+<BOUCLE_groupe(GROUPES_MOTS){par titre}>
+<input type="checkbox" name="groupe_#ID_GROUPE" value="openPublishing" [(#ENV{groupe_#ID_GROUPE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
+</BOUCLE_groupe>
+<:opconfig:expliq_groupes_absent:>
+<//B_groupe>
+</p>
+<p><a href="?exec=mots_type&new=oui"><:opconfig:creer_groupe:></a></p>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+<a name="agenda"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_agenda_op:></b></legend>
+<p><:opconfig:expliq_agenda:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="AgendaBreve" value="yes"  [(#ENV{AgendaBreve}|=={yes}|?{checked="yes"})]
+/><label><:opconfig:utiliser_agenda_breve:></label><br />
+<input type="checkbox" name="AgendaArticle" value="yes" [(#ENV{AgendaArticle}|=={yes}|?{checked="yes"})]
+/><label><:opconfig:utiliser_agenda_article:></label><br />
+<br />
+<label><:opconfig:choix_agenda:></label><br />
+<select name="RubAgenda" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
+<BOUCLE_rubag(RUBRIQUES){tout}{par titre}>
+	<option value="#ID_RUBRIQUE" [(#ENV{RubAgenda}|=={#ID_RUBRIQUE}|?{selected="selected"})]>#TITRE</option>
+</BOUCLE_rubag>
+</select>
+</p>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+<a name="statut"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_statut_op:></b></legend>
+<p><:opconfig:expliq_statut:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<select name="StatutArt" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
+<option value="redac" [(#ENV{StatutArt}|=={redac}|?{selected="selected"})]><:opconfig:statut_en_redaction:></option>
+<option value="prop" [(#ENV{StatutArt}|=={prop}|?{selected="selected"})]><:opconfig:statut_proposer:></option>
+<option value="publie" [(#ENV{StatutArt}|=={publie}|?{selected="selected"})]><:opconfig:statut_valide:></option>
+</select>
+</p>
+<p>
+<input type="checkbox" name="Notification" value="yes"  [(#ENV{Notification}|=={yes}|?{checked="yes"})] /><:opconfig:post_notification:><br />
+</p>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+<a name="postTraitement"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_posttraitement:></b></legend>
+<p><:opconfig:expliq_posttraitement:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="Pipeline" value="yes"  [(#ENV{Pipeline}|=={yes}|?{checked="yes"})] /><:opconfig:post_pipeline:><br />
+<input type="checkbox" name="TitreMaj" value="yes"  [(#ENV{TitreMaj}|=={yes}|?{checked="yes"})] /><:opconfig:post_majuscule:><br />
+<input type="checkbox" name="AntiSpam" value="yes"  [(#ENV{AntiSpam}|=={yes}|?{checked="yes"})] /><:opconfig:post_antispam:><br />
+<:opconfig:post_taille_min:>&nbsp;<input type="text" name="TitreMin" value="#ENV{TitreMin}" size="2" />&nbsp;<:opconfig:post_char:><br />
+</p>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
+<a name="renvois"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_renvois:></b></legend>
+<p><:opconfig:expliq_renvois:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+#PUCE<label><:opconfig:renvois_url_validation:></label>
+<input type="text" name="UrlValidation" value="#ENV{UrlValidation}" size="30" />
+<br />
+#PUCE<label><:opconfig:renvois_url_abandon:></label>
+<input type="text" name="UrlAbandon" value="#ENV{UrlAbandon}" size="30" />
+<br />
+#PUCE<label><:opconfig:renvois_texte_validation:></label><br />
+<textarea name="TextValidation" cols="50" rows="6">#ENV{TextValidation}</textarea>
+<br />
+#PUCE<label><:opconfig:renvois_texte_abandon:></label><br />
+<textarea name="TextAbandon" cols="50" rows="6">#ENV{TextAbandon}</textarea>
+<br />
+#PUCE<label><:opconfig:renvois_temps:></label>
+<input type="text" name="TempsAtt" value="#ENV{TempsAtt}" size="3" />
+<br />
+</p>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+
+</fieldset>
+<a href="#haut"><:opconfig:revenir_haut:></a>
+
+</form>
