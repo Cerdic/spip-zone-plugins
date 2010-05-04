@@ -122,7 +122,7 @@ function pages_pre_edition_ajouter_page($flux){
 	if (is_array($flux) and $flux['args']['type'] == 'article'){
 	
 		// Si elle existe on récupère la page dans ce qui a été posté
-		if (($page = _request('page')) != ''){
+		if ((($page = _request('page')) != '') AND ($page != 'article')){
 		
 			// Et on l'ajoute à ce qu'il faut mettre à jour
 			$flux['data']['page'] = $page;
