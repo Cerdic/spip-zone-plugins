@@ -85,7 +85,108 @@
 				<p><:spipthelia:panier_vide:></p>
 			<//T_CONTENU_PANIER>
 				<br /><a href="#URL_SITE_SPIP" class="lien-thelia lien-thelia-precedent"><:spipthelia:retour_boutique:></a>
-				
-		
 
-	
+
+			<br class="nettoyeur" />
+			<div class="contenus-associes">
+			<ul>
+			<THELIA_autrepanier type="PANIER">
+				  
+				  
+				  <THELIA_accessoires type="ACCESSOIRE" produit="THELIA-ID">    	
+				  
+					<THELIA_prodaccessoire type="PRODUIT" id="THELIA-ACCESSOIRE">
+					  
+					      <li 
+					      <THELIA_testproduitpanier type="PANIER" ref="THELIA-REF">
+					      class="invisible"
+					      </THELIA_testproduitpanier>
+					      > 
+						    <:spipthelia:nous_vous_suggerons:>
+						      <form action="#URL_PAGE{panier}" method="post">
+						      <input type="hidden" name="thelia_action" value="ajouter" />
+						      <input type="hidden" name="ref" value="THELIA-REF" />
+						      <div class="ficheProduit">
+							      <div class="titreProduit">
+								      [(#CONFIG{spip_thelia/liens_produits_panier_spip_thelia}|=={"oui"}|oui)<a href="#URL_PAGE{produit,ref=THELIA-REF}">]
+									  THELIA-TITRE
+								      [(#CONFIG{spip_thelia/liens_produits_panier_spip_thelia}|=={"oui"}|oui)</a>]
+									
+							      </div>
+							       
+							      <div class="declinaisonProduit">
+							      <THELIA_listedeclinaisons type="DECLINAISON" rubrique="THELIA-RUBRIQUE" produit="THELIA-ID">
+										      <label for="declinaisonTHELIA-ID">THELIA-TITRE :</label> 
+										      <select name="declinaisonTHELIA-ID" id="declinaisonTHELIA-ID">
+											      <THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
+												      <option value="THELIA-ID">THELIA-TITRE</option>
+											      </THELIA_decldisp> 
+										      
+										      </select>
+										      <br class="nettoyeur" />
+										      
+													      
+							      </THELIA_listedeclinaisons>
+									      
+							      </div>
+								
+							      <div class="prixProduit">
+								      <THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">
+									      <span class="thelia_promo">THELIA-PRIX2 &euro;</span> <:spipthelia:au_lieu_de:> THELIA-PRIX &euro;
+								      </THELIA_produitpromo>
+								      <THELIA_produitpaspromo type="PRODUIT" ref="THELIA-REF" promo="0">
+									           THELIA-PRIX &euro;
+								      </THELIA_produitpaspromo>
+							      </div>
+
+							      
+							      
+							      
+							      <br class="nettoyeur" /><input type="submit" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" />
+							      
+
+
+						      </div> 
+						      <br class="nettoyeur" />
+						      </form>
+						      
+						      
+
+						      <br class="nettoyeur" />
+						      
+					      
+					      </li>
+					
+					 </THELIA_prodaccessoire>
+				  
+				</THELIA_accessoires>
+				  
+			    
+				
+			</THELIA_autrepanier>
+			</ul>
+			<br class="nettoyeur" />
+			</div>
+			
+			
+				
+[(#REM)
+
+
+
+							      
+							      <div class="prixProduit">
+								      <T_produitpromo#ID_ARTICLE>
+								      <THELIA_produitpromo#ID_ARTICLE type="PRODUIT" ref="THELIA-REF" promo="1">
+									      <span class="thelia_promo">THELIA-PRIX2 &euro;</span> <:spipthelia:au_lieu_de:> THELIA-PRIX &euro;
+								      </THELIA_produitpromo#ID_ARTICLE>
+								      </T_produitpromo#ID_ARTICLE>
+									      THELIA-PRIX &euro;
+								      <//T_produitpromo#ID_ARTICLE>
+							      </div>
+							      
+
+ 
+
+					      
+]
