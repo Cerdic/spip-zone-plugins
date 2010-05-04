@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 function exec_edit_adherent() {
 		
 	$id_auteur= intval($_GET['id']);
-	$data = sql_fetch(association_auteurs_elargis_select("*",'', "id_auteur=$id_auteur"));
+	$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
 
 	include_spip('inc/autoriser');
 	if (!autoriser('configurer') OR !$data) {

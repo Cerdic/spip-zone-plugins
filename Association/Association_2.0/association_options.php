@@ -107,22 +107,6 @@ define('_ASSOCIATION_AUTEURS_ELARGIS',
        @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1") ? 
        'spip_auteurs_elargis' : 'spip_asso_adherents');
 
-function association_auteurs_elargis_select($select, $from='', $where='', $group='', $order='', $limit='')
-{
-	return sql_select($select, _ASSOCIATION_AUTEURS_ELARGIS . $from, $where, $group, $order, $limit);
-}
-
-function association_auteurs_elargis_updateq($couples, $where='')
-{
-	include_spip('base/association'); // pour avoir la description
-	sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, $couples, $where);
-}
-
-function association_auteurs_elargis_delete($where='')
-{
-	sql_delete(_ASSOCIATION_AUTEURS_ELARGIS, $where);
-}
-
 	//-- Table des tables ----------------------------------------------------
 
 global $table_des_tables, $table_titre;

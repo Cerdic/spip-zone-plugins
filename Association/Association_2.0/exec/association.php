@@ -81,7 +81,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>Portable</strong></td>';
 		echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 		echo '</tr>';
-		$query = association_auteurs_elargis_select("*", " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "fonction !='' AND statut_interne != 'sorti'", '',  "a.nom_famille");
+		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "fonction !='' AND statut_interne != 'sorti'", '',  "a.nom_famille");
 		while ($data = sql_fetch($query))
     {	
 			$id_auteur=$data['id_auteur'];

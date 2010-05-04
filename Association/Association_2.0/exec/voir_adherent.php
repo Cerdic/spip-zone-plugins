@@ -30,7 +30,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		$id_auteur= intval($_GET['id']);
 		$indexation = lire_config('association/indexation');
-		$query = association_auteurs_elargis_select("*",'', "id_auteur=$id_auteur");
+		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
 			while ($data = sql_fetch($query)) { 
 			$id_asso=$data['id_asso'];
 			$nom_famille=$data['nom_famille'];

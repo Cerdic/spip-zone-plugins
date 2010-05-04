@@ -79,7 +79,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>Adresse</strong></td>';
 		echo '<td><strong>Env</strong></td>';
 		echo '</tr>';
-		$query = association_auteurs_elargis_select("*", '', "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
+		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
 		// originale semblait contenir une vieillerie:
 		//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
 		while ($data = sql_fetch($query))  {

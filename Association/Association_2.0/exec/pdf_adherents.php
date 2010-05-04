@@ -52,7 +52,7 @@ function exec_pdf_adherents()
 	);
 	$order = lire_config('association/indexation');
 	$order = 'nom_famille' . ($order ? (",$order") : '');
-	$pdf->Query(association_auteurs_elargis_select('*', '', request_statut_interne(), '', $order), $prop);
+	$pdf->Query(sql_select('*',_ASSOCIATION_AUTEURS_ELARGIS, request_statut_interne(), '', $order), $prop);
 	$pdf->Output();
 }
 ?>

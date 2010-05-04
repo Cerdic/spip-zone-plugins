@@ -39,7 +39,7 @@ function ajout_cotisation($id_auteur)
 	$url_action_cotisations = generer_url_ecrire('action_cotisations');
 	$url_retour = $_SERVER['HTTP_REFERER'];
 			
-	$data = sql_fetch(association_auteurs_elargis_select("*",'', "id_auteur=$id_auteur"));
+	$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
 	
 	if ($data) {
 

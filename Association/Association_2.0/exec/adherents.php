@@ -49,7 +49,7 @@ function exec_adherents() {
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // ancien membre
 		foreach ($membres as $statut) {
-			$query = association_auteurs_elargis_select("*",'', "statut_interne='$statut'");
+			$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne='$statut'");
 			$nombre=sql_count($query);
 			echo '<div style="float:right;text_align:right">'.$nombre.'</div>';
 			echo '<div>'._T('asso:adherent_liste_nombre_'.$statut).'</div>';
@@ -78,7 +78,7 @@ function exec_adherents() {
 		$lettre= _request('lettre');
 		if ( empty ( $lettre ) ) { $lettre = "%"; }
 		
-		$query = association_auteurs_elargis_select("upper( substring( nom_famille, 1, 1 ) )  AS init", '', '',  'init', 'nom_famille, id_auteur');
+		$query = sql_select("upper( substring( nom_famille, 1, 1 ) )  AS init", _ASSOCIATION_AUTEURS_ELARGIS, '',  'init', 'nom_famille, id_auteur');
 		
 		while ($data = sql_fetch($query)) {
 			if($data['init']==$lettre) {
@@ -160,7 +160,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	if (empty($lettre)) 
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = association_auteurs_elargis_select("*", " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
@@ -226,7 +226,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	$res .= '<tr>';	
 	$res .= '<td>';
 
-	$query = association_auteurs_elargis_select("*",'', $critere);
+	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, $critere);
 	$nombre_selection=sql_count($query);
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 	
