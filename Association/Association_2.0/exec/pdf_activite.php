@@ -2,40 +2,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('FPDF_FONTPATH','font/');
-include_spip('pdf/pdf_table');
-
-class PDF extends PDF_Table {
-
-	function PDF(){
-		$this->FPDF('L', 'mm', 'A4');
-	}
-	
-	function Header(){
-		//Titre
-		$this->SetFont('Arial','',10);
-		$this->Cell(0,6,'Association '.$association,0,1,'L');
-		$this->SetFont('Arial','B',14);
-		$this->Cell(0,6,_T('asso:activite_titre_inscriptions_activites'),0,1,'C');
-		$this->Ln(10);
-		//Imprime l'en-tête du tableau si nécessaire
-		parent::Header();
-	}
-}
+include_spip('pdf/extends');
 
 function exec_pdf_activite()
 {
 	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$id_evenement=intval($_GET['id']);
-	$association=lire_config('association/nom');
 
 	$pdf=new PDF();	
-
+	$pdf->titre = _T('asso:activite_titre_inscriptions_activites');
 	$pdf->Open();
 	$pdf->AddPage();
 	//On définit les colonnes (champs,largeur,intitulé,alignement)
@@ -54,5 +33,6 @@ function exec_pdf_activite()
           'padding'=>2);
 	$pdf->Table("SELECT * FROM spip_asso_activites WHERE id_evenement=$id_evenement ORDER BY nom",$prop);
 	$pdf->Output();
+	}
 }
 ?>

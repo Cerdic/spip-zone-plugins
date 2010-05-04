@@ -2,38 +2,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('pdf/extends');
+
 function exec_pdf_adherents()
 {
 	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
-
-	define('FPDF_FONTPATH','font/');
-	include_spip('pdf/pdf_table');
-	include_spip('inc/charsets');
-
-	class PDF extends PDF_Table {
-		
-		function PDF(){
-			$this->FPDF('L', 'mm', 'A4');
-		}
-		
-		function Header(){
-			//Titre
-			$this->SetFont('Arial','',10);
-			$this->Cell(0,6,lire_config('association/nom'),0,1,'L');
-			$this->SetFont('Arial','B',14);
-			$this->Cell(0,6,_T('asso:adherent_titre_liste_actifs').' ('.$filtre.')',0,1,'C');
-			$this->Ln(10);
-			//Imprime l'en-tête du tableau si nécessaire
-			parent::Header();
-		}
-	}
+	} else {
 
 	$pdf=new PDF();	
 
+	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
 	$pdf->Open();
 	$pdf->AddPage();
 	//On définit les colonnes (champs,largeur,intitulé,alignement)
@@ -54,5 +34,6 @@ function exec_pdf_adherents()
 	$order = 'nom_famille' . ($order ? (",$order") : '');
 	$pdf->Query(sql_select('*',_ASSOCIATION_AUTEURS_ELARGIS, request_statut_interne(), '', $order), $prop);
 	$pdf->Output();
+	}
 }
 ?>
