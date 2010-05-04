@@ -151,7 +151,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_entete_statut' => 'Statut',
 	'adherent_entete_statut_defaut' => 'Actifs',
 	'adherent_entete_statut_ok' => '&Agrave; jour',
-	'adherent_entete_statut_echu' => '&Agrave relancer',
+	'adherent_entete_statut_echu' => '&Agrave; relancer',
 	'adherent_entete_statut_relance' => 'Relanc&eacute;s',
 	'adherent_entete_statut_sorti' => 'D&eacute;sactiv&eacute;s',
 	'adherent_entete_statut_erreur_bank' => 'Paiement refus&eacute;',
@@ -183,7 +183,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
 	
 	# Liste
-	'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br>En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
+	'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br />En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
 	'adherent_liste_nombre' => 'Nombre de membres',
 	'adherent_liste_nombre_ok' => 'A jour : ',
 	'adherent_liste_nombre_echu' => 'Echus : ',
