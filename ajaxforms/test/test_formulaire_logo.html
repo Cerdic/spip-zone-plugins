@@ -11,26 +11,26 @@
 <body>
 	<h1>Test des formulaires de logo</h1>
 	<h2>Formulaire a l'exterieur d'une boucle</h2>
-	#FORMULAIRE_LOGO
+	#FORMULAIRE_EDITER_LOGO
 	
 	<h2>Dans boucle article</h2>
 	<BOUCLE_art1(ARTICLES){!par date}{0,1}>
-	#FORMULAIRE_LOGO
+	#FORMULAIRE_EDITER_LOGO
 	</BOUCLE_art1>
 	
 	<h2>Dans boucle rubrique</h2>
 	<BOUCLE_rub1(RUBRIQUES){!par date}{0,1}>
-	#FORMULAIRE_LOGO
+	#FORMULAIRE_EDITER_LOGO
 	</BOUCLE_rub1>	
 	
 	<h2>Dans boucle groupemots (objet non prevu a la base)</h2>
 	<BOUCLE_gr1(GROUPES_MOTS)>
-	#FORMULAIRE_LOGO
+	#FORMULAIRE_EDITER_LOGO
 	<br />#LOGO_GROUPE
 	</BOUCLE_gr1>	
 		
 	<h2>Avec parametres</h2>
-	#FORMULAIRE_LOGO{article,12}
+	#FORMULAIRE_EDITER_LOGO{article,12}
 	
 </body>
 </html>
