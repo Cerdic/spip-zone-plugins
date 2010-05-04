@@ -56,8 +56,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//MODIFICATION VENTE
 		if ($action=="modifie"){
-			spip_query( "UPDATE spip_asso_ventes SET date_vente="._q($date_vente).", article="._q($article).", code="._q($code).", acheteur="._q($acheteur).", id_acheteur="._q($id_acheteur).", quantite="._q($quantite).", date_envoi="._q($date_envoi).", frais_envoi="._q($frais_envoi).", don="._q($don).", prix_vente="._q($prix_vente).", commentaire="._q($commentaire)." WHERE id_vente=$id_vente" );
-			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_vente).", journal="._q($journal).",recette="._q($prix_vente).", depense="._q($frais_envoi).", justification="._q($justification)." WHERE id_journal=$id_vente AND imputation=".lire_config('association/pc_ventes') );
+			ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $id_vente, $journal, $justification);
 			header ('location:'.$url_retour);
 			exit;
 		}
@@ -118,7 +117,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			header ('location:'.$url_retour);
 			exit;
 		}
-	} 
+	}
+
+function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $id_vente, $journal, $justification)
+{
+	sql_updateq('spip_asso_ventes', array(
+		"date_vente" => $date_vente,
+		"article" => $article,
+		"code" => $code,
+		"acheteur" => $acheteur,
+		"id_acheteur" => $id_acheteur,
+		"quantite" => $quantite,
+		"date_envoi" => $date_envoi,
+		"frais_envoi" => $frais_envoi,
+		"don" => $don,
+		"prix_vente" => $prix_vente,
+		"commentaire" => $commentaire),
+		    "id_vente=$id_vente" );
+
+	sql_update('spip_asso_comptes', array(
+		"date" => $date_vente,
+		"journal" => $journal,
+		"recette" => $prix_vente,
+		"depense" => $frais_envoi,
+		"justification" => $justification),
+		   "id_journal=$id_vente AND imputation=".sql_quote(lire_config('association/pc_ventes')));
+
+}
 
 function ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette, $depense)
 {
@@ -150,6 +175,5 @@ function ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $q
 	}
 	return false;
 }
-
 
 ?>

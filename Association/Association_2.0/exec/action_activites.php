@@ -13,14 +13,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
-	function exec_action_activites(){
+function exec_action_activites(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		} 
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_action_activites=generer_url_ecrire('action_activites');
 		
@@ -53,7 +52,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		//MODIFICATION INSCRIPTION
 		if ($action=="modifie") {
-			spip_query("UPDATE spip_asso_activites SET date="._q($date).", id_evenement="._q($id_evenement).", nom="._q($nom).", id_adherent="._q($id_membre).", membres="._q($membres).", non_membres="._q($non_membres).", inscrits="._q($inscrits).", email="._q($email).", telephone="._q($telephone).", adresse="._q($adresse).", montant="._q($montant).", date_paiement="._q($date_paiement).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_activite=$id_activite");
+		  sql_updateq('spip_asso_activites',array(
+			"date" => $date,
+			"id_evenement" => $id_evenement,
+			"nom" => $nom,
+			"id_adherent" => $id_membre,
+			"membres" => $membres,
+			"non_membres" => $non_membres,
+			"inscrits" => $inscrits,
+			"email" => $email,
+			"telephone" => $telephone,
+			"adresse" => $adresse,
+			"montant" => $montant,
+			"date_paiement" => $date_paiement,
+			"statut" => $statut,
+			"commentaire" => $commentaire),
+			     "id_activite=$id_activite");
 			header ('location:'.$url_retour);
 			exit;
 		}
@@ -120,10 +134,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			exit;
 		}
 	}
+}
 
 function activites_paiement_insert($date_paiement, $journal, $montant, $id_activite, $nom, $commentaire, $statut, $inscrits, $nom_membres, $membres, $id_membre)
 {
-	spip_query("UPDATE spip_asso_activites SET nom="._q($nom).", id_adherent="._q($id_membre).", membres="._q($membres).", non_membres="._q($non_membres).", inscrits="._q($inscrits).", montant="._q($montant).", date_paiement="._q($date_paiement).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_activite=$id_activite");
+	sql_updateq('spip_asso_activites', array(
+		"nom" => $nom,
+		"id_adherent" => $id_membre,
+		"membres" => $membres,
+		"non_membres" => $non_membres,
+		"inscrits" => $inscrits,
+		"montant" => $montant,
+		"date_paiement" => $date_paiement,
+		"statut" => $statut,
+		"commentaire" => $commentaire),
+		   "id_activite=$id_activite");
 
 	$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
 
@@ -136,7 +161,7 @@ function activites_paiement_insert($date_paiement, $journal, $montant, $id_activ
 		'id_journal' => $id_activite));
 }
 
-function activites_insert()
+function activites_insert($date, $id_evenement, $non_membres, $inscrits, $email, $telephone, $adresse, $montant, $commentaire)
 {
 	return sql_insertq('spip_asso_activites', array(
 		'date' => $date,
