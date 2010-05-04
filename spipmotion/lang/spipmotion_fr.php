@@ -10,10 +10,16 @@
  */
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// B
+	'bitrate' => 'Bitrate vid&eacute;o de la sortie en Kbps : ',
+	'bitrate_audio' => 'Bitrate audio de la sortie en Kbps : ',
+	'bouton_encoder' => 'Encoder',
+
 	// C
 	'caption_avfilter_geres' => 'Filtres vid&eacute;os (avfilters) g&eacute;r&eacute;s',
 	'caption_codecs_geres' => 'Codecs pris en charge',
 	'caption_formats_geres' => 'Formats pris en charge',
+	'chemin_executable' => 'Chemin de l\'ex&eacute;cutable FFmpeg sur le serveur :',
 	'codec_type_audio' => 'Audio',
 	'codec_type_soustitre' => 'Sous-titre',
 	'codec_type_video' => 'Vid&eacute;o',
@@ -24,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'document_dans_file_attente' => 'Ce document est dans la file d\'attente pour l\'encodage',
 
 	// E
+	'encodage_en_cours' => 'ENCODAGE EN COURS...',
 	'encoder_video' => '(R&eacute;)encoder cette vid&eacute;o',
 	'encoder_son' => '(R&eacute;)encoder ce son',
 	'explication_encodeur' => 'Si vous choisissez l\'encodeur ffmpeg2theora pour vos fichiers Ogg vid&eacute;os, les choix de codecs vid&eacute;o et audios deviennent inutiles.',
@@ -35,12 +42,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'ffmpeg2theora_install' => 'FFMpeg2Theora sur votre serveur :',
+	'framerate' => 'Nombre d\'images par seconde : ',
+	'frequence_audio' => 'Fr&eacute;quence d\'&eacute;chantillonage audio : ',
 
 	// G
 	'gestion_format_entree' => 'Gestion des formats d\'entr&eacute;e',
 	'gestion_format_sortie' => 'Gestion des formats de sortie',
 
+	// H
+	'height_video' => 'Hauteur de la sortie en px : ',
+
 	// I
+	'info_audiobitrate' => 'Bitrate audio : ',
+	'info_audiocodec' => 'Codec audio : ',
+	'info_audiochannels' => 'Nombre de canaux audios : ',
+	'info_audiosamplerate' => 'Fr&eacute;quence d\'&eacute;chantillonnage audio : ',
+	'info_bitrate' => 'Bitrate total : ',
 	'info_compiler_avfilter-support' => 'Compil&eacute; avec le support des filtres vid&eacute;os (anciennement vhook)',
 	'info_compiler_build_date_timestamp' => 'Date de compilation',
 	'info_compiler_configuration' => 'Variables de compilation',
@@ -54,23 +71,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_compiler_libavcodec_build_number' => 'Num&eacute;ro de version de libavcodec &agrave; la compilation',
 	'info_compiler_libavcodec_version_number' => 'Num&eacute;ro de version de libavcodec utilis&eacute;',
 	'info_compiler_vhook-support' => 'Compil&eacute; avec le support des vhooks',
+	'info_duree' => 'Dur&eacute;e : ',
 	'info_ffmpeg2theora_libtheora_version' => 'Version de libtheora utilis&eacute;e par ffmpeg2theora',
 	'info_ffmpeg2theora_version' => 'Version de ffmpeg2theora',
-	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
-	'info_infos_techniques' => 'Informations techniques...',
-	'info_nom_fichier' => 'Nom du fichier : ',
 	'info_format' => 'Format : ',
 	'info_framecount' => 'Nombre de frames : ',
 	'info_framerate' =>'Framerate : ',
+	'info_infos_techniques' => 'Informations techniques...',
+	'info_installer_encoder_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .AVI, .MPG, .MP4 ou .MOV dans le dossier "tmp/upload" pour ensuite les encoder au format FLV ici.',
+	'info_nom_fichier' => 'Nom du fichier : ',
+	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
 	'info_pixelformat' =>'Format de pixel : ',
-	'info_bitrate' => 'Bitrate total : ',
+	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
 	'info_videobitrate' => 'Bitrate vid&eacute;o : ',
-	'info_audiobitrate' => 'Bitrate audio : ',
-	'info_audiosamplerate' => 'Fr&eacute;quence d\'&eacute;chantillonnage audio : ',
 	'info_videocodec' => 'Codec vid&eacute;o : ',
-	'info_audiocodec' => 'Codec audio : ',
-	'info_audiochannels' => 'Nombre de canaux audios : ',
-	'info_duree' => 'Dur&eacute;e : ',
 	'install_ajout_champs_documents' => 'Ajout des champs sur spip_documents',
 	'install_creation_base' => 'Cr&eacute;ation de la base de spipmotion',
 	'install_maj_base' => 'Mise &agrave; jour de la base de spipmotion &agrave la version @version@',
@@ -84,6 +98,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
+	'lien_ffmpeg_mac'=>'Installer FFmpeg sur Mac OSX',
+	'lien_ffmpeg_linux'=>'Installer FFmpeg sur Linux',
+	'lien_flvtool'=>'Installer FLVTool2',
 	'lien_forcer_ffmpeg_infos' => 'Forcer la mise &agrave; de ces informations',
 
 	// M
@@ -92,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non' => 'non',
 
 	// O
+	'options_config' => 'Configuration de l\'encodage',
 	'oui' => 'oui',
 
 	// P
@@ -105,6 +123,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'select_all' => 'Tout s&eacute;lectionner',
+	'spipmotion_boite' => 'Configuration de SPIPmotion',
+	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la vol&eacute;e des vid&eacute;os au format FLV depuis les formats MP4/MPG/AVI/MOV... Pour l\'instant on se contente de la vid&eacute;o... on verra plus tard pour le reste...',
+	'spipmotion_liens'=>'Liens compl&eacute;mentaires : ',
 
 	// T
 	'titre_page_ffmpeg_infos' => 'Informations sur FFMpeg',
@@ -119,37 +140,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'unselect_all' => 'Tout d&eacute;s&eacute;lectionner',
 
-	// CFG
-	'titre' => 'SPIPmotion',
-	'spipmotion_boite' => 'Configuration de SPIPmotion',
-	'titrepage' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
-	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la vol&eacute;e des vid&eacute;os au format FLV depuis les formats MP4/MPG/AVI/MOV... Pour l\'instant on se contente de la vid&eacute;o... on verra plus tard pour le reste...',
-	'spipmotion_liens'=>'Liens compl&eacute;mentaires : ',
-	'lien_ffmpeg_mac'=>'Installer FFmpeg sur Mac OSX',
-	'lien_ffmpeg_linux'=>'Installer FFmpeg sur Linux',
-	'lien_flvtool'=>'Installer FLVTool2',
-	'gros_titre' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
-	'chemin_executable' => 'Chemin de l\'ex&eacute;cutable FFmpeg sur le serveur :',
-	'width_video' => 'Largeur de la sortie en px : ',
-	'height_video' => 'Hauteur de la sortie en px : ',
-	'bitrate' => 'Bitrate vid&eacute;o de la sortie en Kbps : ',
-	'framerate' => 'Nombre d\'images par seconde : ',
-	'bitrate_audio' => 'Bitrate audio de la sortie en Kbps : ',
-	'frequence_audio' => 'Fr&eacute;quence d\'&eacute;chantillonage audio : ',
-	'options_config' => 'Configuration de l\'encodage',
-	'bouton_ajouter_videos' => 'AJOUTER UNE VID&Eacute;O',
-	'info_installer_encoder_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .AVI, .MPG, .MP4 ou .MOV dans le dossier "tmp/upload" pour ensuite les encoder au format FLV ici.',
-	'info_installer_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .FLV dans le dossier "tmp/upload" pour ensuite les ins&eacute;rer dans vos articles ici.',
-	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
-	'info_selectionner_video' => 'Vous pouvez insérer une des vid&eacute;os suivantes :',
-	'bouton_encoder' => 'Encoder',
-	'bouton_encoder_videos' => 'VID&Eacute;OS &Agrave; ENCODER',
-	'encodage_en_cours' => 'ENCODAGE EN COURS...',
-
 	// V
 	'verifier_droits' => 'V&eacute;rifiez les droits du script "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 755.',
 	'version_encodee_de' => 'Ce document est une version encod&eacute;e du document @id_orig@',
 
-	'zzzz' => 'zzzz'
+	//W
+	'width_video' => 'Largeur de la sortie en px : ',
 );
 ?>
