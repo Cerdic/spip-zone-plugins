@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS['association_liste_des_statuts'] =
   array('sorti','prospect','ok','echu','relance');
 
-define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'/img_pack/');
+define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
 function association_icone($texte, $lien, $image, $sup='rien.gif')
 {
