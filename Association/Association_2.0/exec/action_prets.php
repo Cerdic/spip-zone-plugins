@@ -43,10 +43,8 @@ function exec_action_prets(){
 		if ($action == "supprime") {
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
-			
-			
-			 $commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:prets_titre_suppression_prets')) ;
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('asso:prets_titre_suppression_prets')) ;
 			association_onglets();
 			
 			echo debut_gauche("",true);
@@ -54,20 +52,16 @@ function exec_action_prets(){
 			echo debut_boite_info(true);
 			echo association_date_du_jour();	
 			
-			$query = sql_select("*", "spip_asso_ressources", "id_ressource=" . _q($id_ressource) ) ;
-			while ($data = sql_fetch($query)) {
-				$statut=$data['statut'];
-				echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
-				echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
-				echo '<p>'._T('asso:ressources_libelle_code').': '.$data['code'].'<br />';
-				echo $data['intitule'];
-				echo '</p>';
-			}
+			$data = sql_fetsel("*", "spip_asso_ressources", "id_ressource=" . _q($id_ressource) ) ;
+			$statut=$data['statut'];
+			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
+			echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
+			echo '<p>'._T('asso:ressources_libelle_code').': '.$data['code'].'<br />';
+			echo $data['intitule'];
+			echo '</p>';
 			echo fin_boite_info(true);
-			
 		
-			$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-			echo bloc_des_raccourcis($res);
+			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 			
 			echo debut_droite("",true);
 			
@@ -78,41 +72,48 @@ function exec_action_prets(){
 			echo '<input type=hidden name="id_pret" value="'.$id_pret.'">';
 			echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
 			
-			echo '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
+			echo '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
 			echo '</form>';
 			
 			fin_cadre_relief();  
 			echo fin_gauche(), fin_page();
-			exit;
-		}
-		
-		//  SUPPRESSION DEFINITIVE PRET
-		if ($action == "drop") {
+
+		} elseif ($action == "drop") {
 			
 			sql_delete('spip_asso_prets', "id_pret=$id_pret" );
 			sql_delete('spip_asso_comptes', "id_journal=$id_pret" );
-			spip_query( "UPDATE spip_asso_ressources SET statut='ok' WHERE id_ressource=" . _q($id_ressource) );
+			sql_update('spip_asso_ressources',
+				   array('statut'=>'ok'),
+				   "id_ressource=" . _q($id_ressource) );
 			header ('location:'.$url_retour);
-			exit;
-		}
-		
-		//  MODIFICATION PRET
-		if ($action =="modifie") { 
-			spip_query( "UPDATE spip_asso_prets SET date_sortie="._q($date_sortie).", duree="._q($duree).", date_retour="._q($date_retour).", id_emprunteur="._q($id_emprunteur).", commentaire_sortie="._q($commentaire_sortie)." WHERE id_pret=$id_pret" );
-			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_sortie).", journal="._q($journal).",recette="._q($montant).") " );
+
+		} elseif ($action =="modifie") { 
+			activites_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant);
 			header ('location:'.$url_retour);
-			exit;
-		}
-		
-		//  AJOUT PRET
-		if ($action == "ajoute") {
+
+		} elseif ($action == "ajoute") {
 			activites_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour);
 			header ('location:'.$url_retour);
-			exit;
 		}
 	}
 }
 
+function activites_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant)
+{
+	sql_updateq('spip_asso_prets', array(
+		"duree" => $duree,
+		"date_sortie" => $date_sortie,
+		"date_retour" => $date_retour,
+		"id_emprunteur" => $id_emprunteur,
+		"commentaire_sortie" => $commentaire_sortie),
+			"id_pret=$id_pret" );
+
+	sql_updateq('spip_asso_comptes', array(
+		"journal" => $journal,
+		"recette" => $montant,
+		"date" => $date_sortie),
+			"id_journal=$id_pret");
+}
 
 function activites_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour)
 {
