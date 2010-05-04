@@ -11,18 +11,16 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_voir_adherent(){
+function exec_voir_adherent(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_edit_activite = generer_url_ecrire('edit_activite');
 		$url_edit_pret = generer_url_ecrire('edit_pret','action=modifie');
@@ -187,6 +185,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		}
 		
 		echo fin_cadre_relief(true);
-		 echo fin_gauche(), fin_page();
+		echo fin_gauche(), fin_page();
 	} 
+}
 ?>

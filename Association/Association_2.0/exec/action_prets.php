@@ -88,17 +88,17 @@ function exec_action_prets(){
 			header ('location:'.$url_retour);
 
 		} elseif ($action =="modifie") { 
-			activites_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant);
+			prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant);
 			header ('location:'.$url_retour);
 
 		} elseif ($action == "ajoute") {
-			activites_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour);
+			prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour);
 			header ('location:'.$url_retour);
 		}
 	}
 }
 
-function activites_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant)
+function prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant)
 {
 	sql_updateq('spip_asso_prets', array(
 		"duree" => $duree,
@@ -115,7 +115,7 @@ function activites_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, 
 			"id_journal=$id_pret");
 }
 
-function activites_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour)
+function prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour)
 {
 	$id_pret = sql_insertq('spip_asso_prets', array(
 		'id_ressource' => $id_ressource,
@@ -139,7 +139,7 @@ function activites_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $
 		sql_updateq('spip_asso_ressources',
 			    array('statut' => 'reserve'),
 			    "id_ressource=$id_ressource");
-	spip_log("activites_insert: $id_pret");
+	spip_log("prets_insert: $id_pret");
 }
 
 ?>

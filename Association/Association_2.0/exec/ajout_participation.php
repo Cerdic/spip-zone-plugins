@@ -13,21 +13,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
-	function exec_ajout_participation() {
+function exec_ajout_participation() {
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_action_activites=generer_url_ecrire('action_activites');
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		
 		association_onglets();
 		
 		echo debut_gauche("",true);
@@ -96,5 +94,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();
 	}
-
+}
 ?>

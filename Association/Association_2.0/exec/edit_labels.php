@@ -11,18 +11,16 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
-
-	function exec_edit_labels(){
+function exec_edit_labels(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_action_labels = generer_url_ecrire('action_labels');
@@ -118,4 +116,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();
 	}
+}
 ?>

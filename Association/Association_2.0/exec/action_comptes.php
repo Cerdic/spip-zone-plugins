@@ -51,12 +51,11 @@ function exec_action_comptes(){
 			fin_cadre_relief();  
 			
 			fin_page();
-			exit;
 		}
 		
 		//---------------------------- 
 		//VALIDATION PROVISOIRE COMPTE		
-		if (isset($_POST['valide'])) {
+		elseif (isset($_POST['valide'])) {
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			

@@ -10,18 +10,17 @@
 	*  
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_comptes() {
-		global  $table_prefix;
+function exec_comptes() {
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+
+	} else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
@@ -181,5 +180,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	fin_cadre_relief();  
 	echo fin_gauche(),fin_page(); 
+	}
 }
 ?>

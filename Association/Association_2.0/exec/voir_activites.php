@@ -11,16 +11,15 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-	include_spip ('inc/navigation_modules');
+include_spip ('inc/navigation_modules');
 	
-	function exec_voir_activites(){
+function exec_voir_activites(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$id_evenement= intval(_request('id'));
 		
@@ -138,4 +137,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();
 	}
+}
 ?>

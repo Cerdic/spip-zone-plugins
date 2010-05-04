@@ -10,17 +10,17 @@
 	*  
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_bilan(){
+function exec_bilan(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$total_actuel=$total_initial=$total_recettes=$total_depenses=$total_soldes=0;
 		
@@ -124,5 +124,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		fin_cadre_relief();  
 		echo fin_gauche(),fin_page();
 	}
+}
 ?>
-

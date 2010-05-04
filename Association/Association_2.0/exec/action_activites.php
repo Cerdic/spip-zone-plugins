@@ -69,19 +69,13 @@ function exec_action_activites(){
 			"commentaire" => $commentaire),
 			     "id_activite=$id_activite");
 			header ('location:'.$url_retour);
-			exit;
-		}
-		
-		//AJOUT PAIEMENT
-		if ($action=="paie") {
+
+		} elseif ($action=="paie") {
 			$n = activites_paiement_insert($date_paiement, $journal, $montant, $id_activite, $nom, $commentaire, $statut, $inscrits, $nom_membres, $membres, $id_membre);
 			spip_log("insertion paiement activite numero: $n");
 			header ('location:'.$url_retour);
-			exit;
-		}	
-		
-		//SUPPRESSION PROVISOIRE INSCRIPTIONS
-		if (isset($_POST['delete'])) {
+
+		} elseif (isset($_POST['delete'])) {
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			$delete_tab=(isset($_POST["delete"])) ? $_POST["delete"]:array();
 			$count=count ($delete_tab);
@@ -122,7 +116,7 @@ function exec_action_activites(){
 		}
 		
 		//  SUPPRESSION DEFINITIVE INSCRIPTIONS
-		if (isset($_POST['drop'])) {
+		elseif (isset($_POST['drop'])) {
 			$drop_tab=(isset($_POST["drop"])) ? $_POST["drop"]:array();
 			$count=count ($drop_tab);
 			for ( $i=0 ; $i < $count ; $i++ ) {
@@ -131,7 +125,6 @@ function exec_action_activites(){
 				sql_delete('spip_asso_comptes', "id_journal=$id AND imputation=".lire_config('association/pc_activites'));
 			}
 			header ('location:'.$url_retour);
-			exit;
 		}
 	}
 }

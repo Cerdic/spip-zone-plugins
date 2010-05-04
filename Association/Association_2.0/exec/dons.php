@@ -15,12 +15,11 @@ include_spip ('inc/navigation_modules');
 
 function exec_dons() {
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_dons = generer_url_ecrire('dons');
 		$url_ajout_don= generer_url_ecrire('edit_don','agir=ajouter');
@@ -97,5 +96,6 @@ function exec_dons() {
 		
 		fin_cadre_relief();  
 		echo fin_gauche(),fin_page(); 
+	}
 }
 ?>

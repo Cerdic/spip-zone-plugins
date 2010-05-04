@@ -13,14 +13,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
-	function exec_agir_ventes(){
+function exec_agir_ventes(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_agir_ventes=generer_url_ecrire('agir_ventes');
 		
@@ -48,27 +47,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		  if (!ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette, $depense))
 
 			die('Requ&egrave;te invalide : ' . mysql_error());
-		  else { 
-		    header ('location:'.$url_retour);
-		    exit;
-		  }
+		  else  header ('location:'.$url_retour);
 		}
 		
 		//MODIFICATION VENTE
-		if ($action=="modifie"){
+		else if ($action=="modifie"){
 			ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $id_vente, $journal, $justification);
 			header ('location:'.$url_retour);
-			exit;
 		}
 		
 		//SUPPRESSION PROVISOIRE VENTES
-		if (isset($_POST['delete'])) {
+		elseif (isset($_POST['delete'])) {
 		
 			$delete_tab=(isset($_POST["delete"])) ? $_POST["delete"]:array();
 			$count=count ($delete_tab);
 			
 			$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+			echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 			association_onglets();
 			echo debut_gauche("",true);
 			
@@ -102,7 +97,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		}
 		
 		//  SUPPRESSION DEFINITIVE VENTES	
-		if (isset($_POST['drop'])) {
+		elseif (isset($_POST['drop'])) {
 			
 			$url_retour = generer_url_ecrire('ventes');
 			$drop_tab=(isset($_POST['drop'])) ? $_POST['drop']:array();
@@ -115,9 +110,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				sql_delete('spip_asso_comptes', "id_journal=$id AND imputation='$imputation'");
 			}
 			header ('location:'.$url_retour);
-			exit;
 		}
 	}
+}
 
 function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $id_vente, $journal, $justification)
 {

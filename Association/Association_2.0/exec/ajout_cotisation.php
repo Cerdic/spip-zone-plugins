@@ -17,12 +17,11 @@ include_spip ('inc/navigation_modules');
 
 function exec_ajout_cotisation(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		} else {
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 			$commencer_page = charger_fonction('commencer_page', 'inc');
 			echo $commencer_page(_T('Ajout de cotisation')) ;
@@ -30,7 +29,7 @@ function exec_ajout_cotisation(){
 			echo debut_gauche("",true);
 			ajout_cotisation(intval(_request('id')));
 			echo fin_gauche(), fin_page();
-		}
+	}
 }
 	
 function ajout_cotisation($id_auteur)

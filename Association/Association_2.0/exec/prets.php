@@ -11,17 +11,16 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_prets(){
+function exec_prets(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_prets = generer_url_ecrire('prets');
 		$url_ajout_pret=generer_url_ecrire('edit_pret','agir=ajoute');
@@ -102,4 +101,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();
 	}
+}
 ?>

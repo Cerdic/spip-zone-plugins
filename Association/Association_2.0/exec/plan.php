@@ -10,17 +10,16 @@
 	*  
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 
-	function exec_plan(){
+function exec_plan(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_plan = generer_url_ecrire('plan');
 		$url_edit_plan=generer_url_ecrire('edit_plan');
@@ -115,4 +114,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo fin_gauche(), fin_page();
 	}
+}
 ?>

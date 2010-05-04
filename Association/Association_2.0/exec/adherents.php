@@ -16,12 +16,11 @@ include_spip('inc/navigation_modules');
 	
 function exec_adherents() {
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		$url_association = generer_url_ecrire('association');
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_edit_relances=generer_url_ecrire('edit_relances');
@@ -129,6 +128,7 @@ function exec_adherents() {
 		echo adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $indexation);
 		echo fin_cadre_relief(true);  
 		echo fin_gauche(), fin_page();
+	}
 }
 
 function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation)

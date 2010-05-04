@@ -11,17 +11,16 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_categories(){
+function exec_categories(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_categories = generer_url_ecrire('categories');
 		$url_ajout_categorie=generer_url_ecrire('edit_categorie','agir=ajoute');
@@ -75,4 +74,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_cadre_relief(true);  		
 		echo fin_gauche(), fin_page();
 	}
+}
 ?>

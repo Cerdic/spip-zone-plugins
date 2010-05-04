@@ -11,25 +11,16 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-	//juste pour essai
-	//sql_alter("TABLE spip_auteurs_elargis ADD statut_interne TEXT  NOT NULL");
-	//spip_query("UPDATE spip_auteurs_elargis SET statut_interne='ok'");
-	//sql_alter("TABLE spip_auteurs_elargis ADD categorie TEXT  NOT NULL");
-	//sql_alter("TABLE spip_auteurs_elargis ADD validite DATE DEFAULT '2008-12-15' NOT NULL");
-	//fin essai
-
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_association() {
+function exec_association() {
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}	
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 		
 		$url_edit_adherent = generer_url_ecrire('edit_adherent');
 		  $commencer_page = charger_fonction('commencer_page', 'inc');
@@ -45,9 +36,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo fin_boite_info(true);
 		
 		$res=association_icone(_T('asso:profil_de_lassociation'),  '?exec=cfg&cfg=association', 'assoc_qui.png');
-			$res.=association_icone(_T('asso:categories_de_cotisations'),  generer_url_ecrire("categories"), 'cotisation.png',  '');
-	$res.=association_icone(_T('asso:plan_comptable'),  generer_url_ecrire("plan"), 'plan_compte.png',  '');	
-	echo bloc_des_raccourcis($res);
+		$res.=association_icone(_T('asso:categories_de_cotisations'),  generer_url_ecrire("categories"), 'cotisation.png',  '');
+		$res.=association_icone(_T('asso:plan_comptable'),  generer_url_ecrire("plan"), 'plan_compte.png',  '');	
+
+		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);	
 		
@@ -96,14 +88,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '</table>';
 		
 		fin_cadre_relief();	
-		
-		
-		
-		 echo fin_gauche(), fin_page();
+		echo fin_gauche(), fin_page();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
-		 sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
+		sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
 			array("statut_interne"=> 'echu'),
 			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 	}
+}
 ?>

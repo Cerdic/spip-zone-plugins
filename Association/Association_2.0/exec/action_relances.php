@@ -12,19 +12,18 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-	include_spip ('inc/presentation');
-	include_spip ('inc/navigation_modules');
-	include_spip ('inc/mail');
-	//include_spip ('inc/charsets');
+include_spip ('inc/presentation');
+include_spip ('inc/navigation_modules');
+include_spip ('inc/mail');
+//include_spip ('inc/charsets');
 
-	function exec_action_relances(){
+function exec_action_relances(){
 		
 		include_spip('inc/autoriser');
 		if (!autoriser('configurer')) {
 			include_spip('inc/minipres');
 			echo minipres();
-			exit;
-		}
+		} else {
 		
 		$url_action_relances = generer_url_ecrire('action_relances','agir=send');
 		$url_retour=$_POST['url_retour'];
@@ -42,8 +41,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		// CONFIRMATION
 		if ($action=="confirm") {
 
-			 $commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 			
 			association_onglets();
 			
@@ -87,12 +86,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			//spip_query("UPDATE spip_auteurs_elargis SET regle_le='relance',date_jour=NOW() WHERE id_ad=$id");	
 			
 			fin_cadre_relief();  
-			  echo fin_gauche(),fin_page(); 
-			exit;
+			echo fin_gauche(),fin_page(); 
 		}
 		
 		//ENVOI
-		if ($action=="send") {
+		elseif ($action=="send") {
 			//On prépare le mail et on envoi! On peut modifier le $headers à  sa guise
 			$nomasso=lire_config('association/nom');
 			$adresse=lire_config('association/email');
@@ -124,7 +122,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				}
 			}
 			header ('location:'.$url_retour);
-			exit;
 		}
 	} 
+}
 ?>
