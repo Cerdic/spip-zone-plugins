@@ -1,11 +1,8 @@
 [(#REM)
-// modeles/doc_player.html
+	Modele pour <doc|player> modifié pour pour MP3 et FLV par le plugin Lecteur multimedia
+	http://spip-zone.info/spip.php?article18
 
-Modele pour <doc|player> modifié pour pour MP3 et FLV par le plugin Lecteur multimedia
-http://spip-zone.info/spip.php?article18
-
-Si les fichiers ne sont pas MP3 ou FLV, utiliser le comportement normal.
-
+	Si les fichiers ne sont pas MP3 ou FLV, utiliser le comportement normal.
 ]
 
 [(#REM) Definir les lecteurs utilisés par ENV ou par CONFIG ]
@@ -15,19 +12,35 @@ Si les fichiers ne sont pas MP3 ou FLV, utiliser le comportement normal.
 
 <BOUCLE_doc(DOCUMENTS) {id_document}>
 [(#REM) Document MP3 ? ]
-[(#TYPE_DOCUMENT|=={MP3}|oui)
-	<INCLURE{fond=#GET{player}}{id_document}{download}>
-]
+[(#EXTENSION|=={mp3}|oui)
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+[(#ID_VIGNETTE|oui)
+	<dt>
+	<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
+	<img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' /></a>
+	</dt>]
+[<dt class='spip_doc_titre #EDIT{titre}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>]
+[<dd class='spip_doc_descriptif #EDIT{descriptif}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
+</dd>]
+<dt>
+	<INCLURE{fond=#GET{player},id_document,env}>
+</dt>[(#ENV{download}|!={non}|oui)
+<dd class='spip_doc_download'><a href="#FICHIER" type="#MIME_TYPE" class="inline-exclude [(#ENV{lien_class})]" title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
+<img src='[(#CHEMIN{players/download.png})]' width='16' height='16' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' style="vertical-align: text-top;" /> <:bouton_download:></a></dd>
+]</dl>
+</dl>]
 
 [(#REM) Document FLV ? ]
-[(#TYPE_DOCUMENT|=={Flash Video}|oui)
-	<INCLURE{fond=#GET{player_video}}{id_document}>
-]
+[(#EXTENSION|=={flv}|oui)
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dt class='spip_doc_titre'>
+	<INCLURE{fond=#GET{player_video},id_document,env}>
+</dt>[
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>
+]</dl>]
 
 
-[(#TYPE_DOCUMENT|in_any{#ARRAY{0,'MP3',1,'Flash Video'}}|non)
-
-#MODELE{doc}
-
+[(#EXTENSION|in_array{#ARRAY{0,mp3,1,flv}}|non)
+	#MODELE{doc}
 ]
 </BOUCLE_doc>
