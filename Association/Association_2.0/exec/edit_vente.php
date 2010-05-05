@@ -72,21 +72,21 @@ function exec_edit_vente() {
 		echo debut_cadre_relief(  "", false, "", _T('asso:ressources_titre_mise_a_jour'));
 		
 		echo '<form method="post" action="'.$url_agir_ventes.'"><div>';	
-		echo '<label for="date_vente"><strong>Date (AAAA-MM-JJ) :</strong></label>';
+		echo '<label for="date_vente"><strong>' . _L('Date (AAAA-MM-JJ) :') . '</strong></label>';
 		echo '<input name="date_vente" type="text" value="'.$date_vente.'" id="date_vente" class="formo" />';
-		echo '<label for="article"><strong>Article :</strong></label>';
+		echo '<label for="article"><strong>' . _L('Article :') . '</strong></label>';
 		echo '<input name="article"  type="text" value="'.$article.'" id="article" class="formo" />';
 		echo '<label for="code"><strong>Code de l\'article :</strong></label>';
 		echo '<input name="code"  type="text" value="'.$code.'" id="code" class="formo" />';
 		echo '<label for="acheteur"><strong>Nom de l\'acheteur :</strong></label>';
 		echo '<input name="acheteur" type="text" value="'.$acheteur.'" id="acheteur" class="formo" />';
-		echo '<label for="id_acheteur"><strong>N&deg; de membre :</strong></label>';
+		echo '<label for="id_acheteur"><strong>' . _L('N&deg; de membre :') . '</strong></label>';
 		echo '<input name="id_acheteur" type="text" value="'.$id_acheteur.'" id="id_acheteur" class="formo" />';
-		echo '<label for="quantite"><strong>Quantit&eacute; achet&eacute;e :</strong></label>';
+		echo '<label for="quantite"><strong>' . _L('Quantit&eacute; achet&eacute;e :') . '</strong></label>';
 		echo '<input name="quantite"  type="text" value="'.$quantite.'" id="quantite" class="formo" />';
-		echo '<label for="prix_vente"><strong>Prix de vente(en &euro;) :</strong></label>';
+		echo '<label for="prix_vente"><strong>' . _L('Prix de vente(en &euro;) :') . '</strong></label>';
 		echo '<input name="prix_vente"  type="text" value="'.$prix_vente.'" id="prix_vente" class="formo" />';
-		echo '<label for="journal"><strong>Mode de paiement :</strong></label>';
+		echo '<label for="journal"><strong>' . _L('Mode de paiement :') . '</strong></label>';
 		$res = '';
 		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
@@ -95,13 +95,13 @@ function exec_edit_vente() {
 			$res .= '>'.$banque['intitule'].'</option>';
 		}
 		if ($res) echo '<select name="journal" id="journal" class="formo" />', $res, '</select>';
-		echo '<label for="don"><strong>Don :</strong></label>';
+		echo '<label for="don"><strong>' . _L('Don :') . '</strong></label>';
 		echo '<input name="don" type="text" value="'.$don.'" id="don" class="formo" />';
-		echo '<label for="date_envoi"><strong>Envoy&eacute; le (AAAA-MM-JJ) :</strong></label>';
+		echo '<label for="date_envoi"><strong>' . _L('Envoy&eacute; le (AAAA-MM-JJ) :') . '</strong></label>';
 		echo '<input name="date_envoi"  type="text" value="'.$date_envoi.'" id="date_envoi" class="formo" />';
 		echo '<label for="frais_envoi"><strong>Frais d\'envoi (en &euro;) :</strong></label>';
 		echo '<input name="frais_envoi" type="text" value="'.$frais_envoi.'" id="frais_envoi" class="formo" />';
-		echo '<label for="commentaire"><strong>Commentaires :</strong></label>';
+		echo '<label for="commentaire"><strong>' . _L('Commentaires :') . '</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
 		echo '<input name="id" type="hidden" value="'.$id_vente.'" >';		

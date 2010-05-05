@@ -58,7 +58,7 @@ function exec_edit_compte() {
 		debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
 		
 		$res = '<div>';
-		$res .= '<label for="imputation"><strong>Imputation :</strong></label>';
+		$res .= '<label for="imputation"><strong>' . _L('Imputation :') . '</strong></label>';
 		$res .= '<select name="imputation" type="text" id="date" class="formo" />';
 		$sql = sql_select('*', 'spip_asso_plan', "classe<>". sql_quote(lire_config('association/classe_banques')), "", "code") ;
 		while ($banque = sql_fetch($sql)) {
@@ -67,13 +67,13 @@ function exec_edit_compte() {
 			$res .= '>'.$banque['intitule'].'</option>';
 		}
 		$res .= '</select>';
-		$res .= '<label for="date"><strong>Date (AAAA-MM-JJ) :</strong></label>';
+		$res .= '<label for="date"><strong>' . _L('Date (AAAA-MM-JJ) :') . '</strong></label>';
 		$res .= '<input name="date" value="'.$date.'" type="text" id="date" class="formo" />';
-		$res .= '<label for="recette"><strong>Recette :</strong></label>';
+		$res .= '<label for="recette"><strong>' . _L('Recette :') . '</strong></label>';
 		$res .= '<input name="recette" value="'.$recette.'" type="text" id="recette" class="formo" />';
-		$res .= '<label for="depense"><strong>D&eacute;pense :</strong></label>';
+		$res .= '<label for="depense"><strong>' . _L('D&eacute;pense :') . '</strong></label>';
 		$res .= '<input name="depense" value="'.$depense.'"  type="text" id="depense" class="formo" />';
-		$res .= '<label for="journal"><strong>Mode de paiement :</strong></label>';
+		$res .= '<label for="journal"><strong>' . _L('Mode de paiement :') . '</strong></label>';
 		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
 		$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "", "code") ;
 		while ($banque = sql_fetch($sql)) {
@@ -82,7 +82,7 @@ function exec_edit_compte() {
 			$res .= '>'.$banque['intitule'].'</option>';
 		}
 		$res .= '</select>';
-		$res .= '<label for="justification"><strong>Justification :</strong></label>';
+		$res .= '<label for="justification"><strong>' . _L('Justification :') . '</strong></label>';
 		$res .= '<input name="justification" value="'.$justification.'" type="text" id="justification" class="formo" />';
 		
 		$res .= '<div style="float:right;">';

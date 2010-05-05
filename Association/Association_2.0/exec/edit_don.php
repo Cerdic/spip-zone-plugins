@@ -66,23 +66,23 @@ function exec_edit_don(){
 		
 		debut_cadre_relief(  "", false, "", $titre);
 
-		$res = '<label for="date_don"><strong>Date (AAAA-MM-JJ) :</strong></label>';
+		$res = '<label for="date_don"><strong>' . _L('Date (AAAA-MM-JJ) :') . '</strong></label>';
 		$res .= '<input name="date_don" type="text" value="'.$date_don.'" id="date_don" class="formo" />';
-		$res .= '<label for="bienfaiteur"><strong>Nom du bienfaiteur :</strong></label>';
+		$res .= '<label for="bienfaiteur"><strong>' . _L('Nom du bienfaiteur :') . '</strong></label>';
 		$res .= '<input name="bienfaiteur" type="text" value="'.$bienfaiteur.'" id="bienfaiteur" class="formo" />';
-		$res .= '<label for="id_adherent"><strong>N&deg; de membre :</strong></label>';
+		$res .= '<label for="id_adherent"><strong>' . _L('N&deg; de membre :') . '</strong></label>';
 		$res .= '<input name="id_adherent" type="text" value="'.$id_adherent.'" id="id_adherent" class="formo" />';
-		$res .= '<label for="argent"><strong>Don financier (en &euro;) :</strong></label>';
+		$res .= '<label for="argent"><strong>' . _L('Don financier (en &euro;) :') . '</strong></label>';
 		$res .= '<input name="argent" type="text" value="'.$argent.'" id="argent" class="formo" />';
 
 		$res .= don_mode_de_paiemen($journal);
-		$res .= '<label for="colis"><strong>Colis :</strong></label>';
+		$res .= '<label for="colis"><strong>' . _L('Colis :') . '</strong></label>';
 		$res .= '<input name="colis" type="text" value="'.$colis.'" id="colis" class="formo" />';
-		$res .= '<label for="valeur"><strong>Contre-valeur (en &euro;) :</strong></label>';
+		$res .= '<label for="valeur"><strong>' . _L('Contre-valeur (en &euro;) :') . '</strong></label>';
 		$res .= '<input name="valeur" type="text" value="'.$valeur.'" id="valeur" class="formo" />';
 		$res .= '<label for="contrepartie"><strong>Geste de l\'association :</strong></label>';
 		$res .= '<input name="contrepartie" type="text" size="50" value="'.$contrepartie.'" id="contrepartie" class="formo" />';
-		$res .= '<label for="commentaire"><strong>Remarques :</strong></label>';
+		$res .= '<label for="commentaire"><strong>' . _L('Remarques :') . '</strong></label>';
 		$res .= '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
 		$res .= '<div style="float:right;"><input name="submit" type="submit" value="';
