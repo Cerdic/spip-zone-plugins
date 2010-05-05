@@ -1,11 +1,12 @@
 <plugin>
 <nom>Varicelle</nom>
 <icon>icon.png</icon>
-<description>Transforme d'un coup tous les boutons du site en jolis boutons, l&eacute;gers et performants (en CSS3 sans image)&nbsp;!
+<description>De jolis boutons&nbsp;: s&eacute;duisants, l&eacute;gers et performants (en CSS3 sans image), pour styler d'un coup tous les appels &agrave; l'action du site. S'applique &agrave; tout ce qui porte le s&eacute;lecteur .submit (notamment&nbsp;: button, input, a).
+
 D&eacute;mo&nbsp;: <a href="../?page=varicelle">?page=varicelle</a></description>
 <lien>http://www.spip-contrib.net/varicelle</lien>
 <version>0.1.5</version>
-<etat>dev</etat>
+<etat>stable</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>varicelle</prefix>
 <pipeline>
