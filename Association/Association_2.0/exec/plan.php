@@ -87,13 +87,13 @@ function exec_plan(){
 		//Affichage de la table
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr style="background-color: #DBE1C5">';
-		echo '<td><strong>Classe</strong></td>';
-		echo '<td><strong>Code</strong></td>';
-		echo '<td><strong>Intitul&eacute;</strong></td>';
-		echo '<td><strong>R&eacute;f&eacute;rence</strong></td>';
-		echo '<td style="text-align:right;"><strong>Solde initial</strong></td>';
-		echo '<td><strong>Date</strong></td>';
-		echo '<td colspan=2 style="text-align:center;"><strong>Action</strong></td>';
+		echo '<td><strong>' . _L('Classe') . '</strong></td>';
+		echo '<td><strong>' . _L('Code') . '</strong></td>';
+		echo '<td><strong>' . _L('Intitul&eacute;') . '</strong></td>';
+		echo '<td><strong>' . _L('R&eacute;f&eacute;rence') . '</strong></td>';
+		echo '<td style="text-align:right;"><strong>' . _L('Solde initial') . '</strong></td>';
+		echo '<td><strong>' . _L('Date') . '</strong></td>';
+		echo '<td colspan=2 style="text-align:center;"><strong>' . _L('Action') . '</strong></td>';
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_plan', "classe LIKE " . sql_quote($classe) ." AND actif=" . sql_quote($actif),'', "classe, code" );
 		while ($data = sql_fetch($query)) {

@@ -73,9 +73,9 @@ function exec_edit_labels(){
 		if ($indexation=="id_asso") { echo _T('asso:adherent_libelle_id_asso');}
 		else { echo _T('asso:adherent_libelle_id_adherent');} 
 		echo '<strong></td>';
-		echo '<td><strong>Nom</strong></td>';
-		echo '<td><strong>Adresse</strong></td>';
-		echo '<td><strong>Env</strong></td>';
+		echo '<td><strong>' . _L('Nom') . '</strong></td>';
+		echo '<td><strong>' . _L('Adresse') . '</strong></td>';
+		echo '<td><strong>' . _L('Env') . '</strong></td>';
 		echo '</tr>';
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
 		// originale semblait contenir une vieillerie:

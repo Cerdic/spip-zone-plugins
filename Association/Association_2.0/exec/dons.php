@@ -65,14 +65,14 @@ function exec_dons() {
 		//TABLEAU
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
-		echo '<td><strong>ID</strong></td>';
-		echo '<td><strong>Date</strong></td>';
-		echo '<td><strong>NOM</strong></td>';
-		echo '<td style="text-align:right;"><strong>Argent</strong></td>';
-		echo '<td><strong>Colis</strong></td>';
-		echo '<td style="text-align:right;"><strong>Valeur</strong></td>';
-		echo '<td><strong>Contrepartie</strong></td>';
-		echo '<td colspan=2><strong>Action</strong></td>';
+		echo '<td><strong>' . _L('ID') . '</strong></td>';
+		echo '<td><strong>' . _L('Date') . '</strong></td>';
+		echo '<td><strong>' . _L('NOM') . '</strong></td>';
+		echo '<td style="text-align:right;"><strong>' . _L('Argent') . '</strong></td>';
+		echo '<td><strong>' . _L('Colis') . '</strong></td>';
+		echo '<td style="text-align:right;"><strong>' . _L('Valeur') . '</strong></td>';
+		echo '<td><strong>' . _L('Contrepartie') . '</strong></td>';
+		echo '<td colspan=2><strong>' . _L('Action') . '</strong></td>';
 		echo '</tr>';
 		$query = sql_select('*', "spip_asso_dons", "date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
 		while ($data = sql_fetch($query)) {

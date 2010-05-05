@@ -56,15 +56,15 @@ function exec_comptes() {
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:blue">Entr&eacute;es :</strong></td>';
+			echo '<td><strong style="color:blue">' . _L('Entr&eacute;es :') . '</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:blue">Sorties :</strong></td>';
+			echo '<td><strong style="color:blue">' . _L('Sorties :') . '</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:#9F1C30">Solde :</strong></td>';
+			echo '<td><strong style="color:#9F1C30">' . _L('Solde :') . '</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
@@ -116,12 +116,12 @@ function exec_comptes() {
 	echo '<form method="post" action="'.$url_action_comptes.'">';
 	echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 	echo '<tr bgcolor="#DBE1C5">';
-	echo '<td style="text-align:right;"><strong>ID</strong></td>';
-	echo '<td style="text-align:right;"><strong>Date</strong></td>';
-	echo '<td><strong>Compte</strong></td>';
-	echo '<td><strong>Justification</strong></td>';
-	echo '<td style="text-align:right;"><strong>Montant</strong></td>';
-	echo '<td><strong>Financier</strong></td>';
+	echo '<td style="text-align:right;"><strong>' . _L('ID') . '</strong></td>';
+	echo '<td style="text-align:right;"><strong>' . _L('Date') . '</strong></td>';
+	echo '<td><strong>' . _L('Compte') . '</strong></td>';
+	echo '<td><strong>' . _L('Justification') . '</strong></td>';
+	echo '<td style="text-align:right;"><strong>' . _L('Montant') . '</strong></td>';
+	echo '<td><strong>' . _L('Financier') . '</strong></td>';
 	echo '<td colspan="3" style="text-align:center;"><strong>&nbsp;</strong></td>';
 	echo '</tr>';
 

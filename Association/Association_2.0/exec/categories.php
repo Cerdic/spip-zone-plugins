@@ -48,13 +48,13 @@ function exec_categories(){
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr bgcolor='#DBE1C5'>";
-		echo '<td><strong>ID</strong></td>';
-		echo '<td><strong>Cat&eacute;gorie</strong></td>';
-		echo '<td><strong>Libell&eacute; complet</strong></td>';
-		echo '<td><strong>Dur&eacute;e (mois)</strong></td>';
-		echo '<td><strong>Montant</strong></td>';
-		echo '<td><strong>Commentaires</strong></td>';
-		echo '<td colspan=2 style="text-align:center;"><strong>Action</strong></td>';
+		echo '<td><strong>' . _L('ID') . '</strong></td>';
+		echo '<td><strong>' . _L('Cat&eacute;gorie') . '</strong></td>';
+		echo '<td><strong>' . _L('Libell&eacute; complet') . '</strong></td>';
+		echo '<td><strong>' . _L('Dur&eacute;e (mois)') . '</strong></td>';
+		echo '<td><strong>' . _L('Montant') . '</strong></td>';
+		echo '<td><strong>' . _L('Commentaires') . '</strong></td>';
+		echo '<td colspan=2 style="text-align:center;"><strong>' . _L('Action') . '</strong></td>';
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_categories', '', "id_categorie" ) ;
 		while ($data = sql_fetch($query)) {
