@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'agenda' => 'Agenda',
 'annuaire' => 'Annuaire',
 'antispam_champ_vide' => 'Antispam champ vide',
+'aucune_breve' => 'Aucune br&egrave;ve',
 'aucun_document' => 'Aucun document',
 'aucun_message' => 'Aucun message',
 
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter_document' => 'Ajouter un document',
 'bouton_radio_modere_priori' => 'Mod&ecute;r&ecute; &agrave; priori',
 'bouton_telecharger' => 'T&ecute;l&ecute;charger',
+'breves' => 'Br&egrave;ves',
 
 //C
 'categories' => 'Cat&ecute;gories',
@@ -28,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'documents' => 'Documents',
 
 //E
+'editer_breve' => '&Eacute;diter la br&egrave;ve',
 'editer_groupe' => '&Eacute;diter le groupe',
 'editer_message' => '&Eacute;diter le message',
 'editer_site' => '&Eacute;diter le site',
@@ -40,8 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //H
 
 //I
-'info_cours_edition' => 'Vos messages en cours de r&eacute;daction',
-'info_cours_prop' => 'Vos messages propos&eacute; &agrave la publication',
+'info_breves_prop' => 'Les br&egrave;ves propos&eacute;s &agrave la publication',
+'info_breves_publies' => 'Vos br&egrave;ves publi&eacute;s',
+'info_messages_edition' => 'Vos messages en cours de r&eacute;daction',
+'info_messages_prop' => 'Vos messages propos&eacute;s &agrave la publication',
 'info_messages_publies' => 'Vos messages publi&eacute;s',
 
 //L
@@ -56,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveau_groupe' => 'Nouveau groupe',
 'nouveau_message' => 'Nouveau message',
 'nouveau_site' => 'Nouveau site',
+'nouvelle_breve' => 'Nouvelle br&egrave;ve',
 
 //P
 'pas_le_droit_ecrire' => 'Vous n\'avez pas d\'autorisation en &eacute;crire',
@@ -67,6 +73,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sites' => 'Sites',
 
 //T
+'texte_modifier_breve' => 'Modifier la br&egrave;ve :',
+'toutes_les_breves' => 'Toutes les br&egrave;ves',
 'tous_les_sites' => 'Tous les sites',
 'tous_vos_messages' => 'Tous vos messages',
 

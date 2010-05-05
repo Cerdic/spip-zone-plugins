@@ -1,0 +1,23 @@
+[(#REM)
+
+  Squelette Presentation d'une breve dans une liste
+  (c) 2009 Zpip
+  Distribue sous licence GPL
+
+]
+<BOUCLE_breves(BREVES) {id_breve} {statut?}>
+<li class="item hentry">
+	<h3 class="h3 entry-title"><a href="#URL_BREVE" rel="bookmark">#TITRE</a></h3>
+	[(#PLUGIN{notation}|oui)#FORMULAIRE_NOTATION]
+	<div class="info-publi">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>]</div>
+	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
+		<div class="meta-publi">
+		<a class="lire-la-suite" href="#URL_BREVE"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>#TITRE</em></span></a>
+		<BOUCLE_nb_commentaires(FORUMS) {id_breve}{plat} />   [(#TOTAL_BOUCLE|oui)
+			<span class="sep">|</span>
+				<a[ href="(#URL_BREVE|ancre_url{forum})"] class="nb_commentaires">[(#TOTAL_BOUCLE)]&nbsp;[(#TOTAL_BOUCLE|=={1}|?{<:zpip:commentaire:>,<:zpip:commentaires:>})]</a>
+			]
+		<//B_nb_commentaires>
+	</div>
+</li>
+</BOUCLE_breves>
