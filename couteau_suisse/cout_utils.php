@@ -374,8 +374,8 @@ function cs_initialise_includes($count_metas_outils) {
 					// module a inclure
 					if(find_in_path("outils/$inc.php"))
 						$infos_pipelines[$pipe2]['inclure'][] = "outils/$inc";
-					if(isset($outil['distant']) && find_in_path("lib/$inc/distant_".basename($outil['distant'])))
-						$infos_pipelines[$pipe2]['inclure'][] = "lib/$inc/distant_".basename($outil['distant'],'.php');
+					if(isset($outil['distant_pipelines']) && find_in_path("lib/$inc/distant_".basename($outil['distant_pipelines'])))
+						$infos_pipelines[$pipe2]['inclure'][] = "lib/$inc/distant_".basename($outil['distant_pipelines'],'.php');
 					// fonction a appeler
 					$infos_pipelines[$pipe2]['fonction'][] = $fonc;
 				} elseif(is_pipeline_outil_inline($pipe, $pipe2)) {
@@ -692,7 +692,7 @@ function cs_installe_outils() {
 		include_spip('outils/'.$nom);
 		if(function_exists($f = $nom.'_installe')) {
 			$f();
-cs_log(" -- $f() : OK !");
+if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 		}
 	}
 	ecrire_metas();

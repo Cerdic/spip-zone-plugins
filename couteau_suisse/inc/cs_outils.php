@@ -94,7 +94,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
 	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=switch&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
-	if(strlen($temp = cs_action_fichiers_distant($outil) . cs_action_rapide($outil_id, $actif))) 
+	if(strlen($temp = cs_action_fichiers_distants($outil) . cs_action_rapide($outil_id, $actif))) 
 		$s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	$s .= propre($descrip);
 
@@ -226,29 +226,33 @@ function cs_action_rapide($outil_id, $actif=true) {
 }
 
 // gere les fichiers distants d'un outil
-function cs_action_fichiers_distant(&$outil, $force=false) {
+function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	if(!isset($outil['fichiers_distants'])) return '';
 	$lib = sous_repertoire(_DIR_PLUGIN_COUTEAU_SUISSE, 'lib');
 	$a = array();
 	foreach($outil['fichiers_distants'] as $i) {
 		$erreur = false;
 		$dir = sous_repertoire($lib, $outil['id']);
-		$f = $i . '_' . basename($outil[$i]);
+		$f = 'distant_' . basename($outil[$i]);
 		$file = $dir.$f;
-		$size = ($force || @(!file_exists($file)) ? 0 : filesize($file));
+		$size = ($forcer || @(!file_exists($file)) ? 0 : filesize($file));
 		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
-		elseif($outil['actif'] || $force) {
+		elseif($outil['actif'] || $forcer) {
 			include_spip('inc/distant');
 			if($distant = recuperer_page($outil[$i])) {
-				$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
-				if(!@eval("return true; $test")) $distant = false;
-				else $distant = ecrire_fichier($file, '<'."?php\n\n".trim($test)."\n\n?".'>');
+				if(preg_match(',\.php\d?$,', $file)) {
+					$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
+					if(!@eval("return true; $test")) $distant = false;
+					else $distant = ecrire_fichier($file, '<'."?php\n\n".trim($test)."\n\n?".'>');
+				} else
+					$distant = ecrire_fichier($file, $distant);
 			}
 			if($distant) $statut = '<span style="color:green">'._T('couteauprive:distant_charge').'</span>';
 			else $erreur = $statut = '<span style="color:red">'._T('couteauprive:distant_echoue').'</span>';
 		} else $erreur = $statut = _T('couteauprive:distant_inactif');
 		$a[] = "[{$f}->{$outil[$i]}]\n_ $statut";
 	}
+	if($tester) return $a;
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
 	$b = ($outil['actif'] || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
 	$b = $b?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["

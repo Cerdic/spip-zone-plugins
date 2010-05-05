@@ -43,7 +43,7 @@ cs_log(" FIN : exec_action_rapide_dist() - Appel maintenant de ajax_retour() pou
 				include_spip('inc/cs_outils');
 				cs_initialisation_d_un_outil($outil, charger_fonction('description_outil', 'inc'), false);
 				// mise a jour forcee
-				$res = cs_action_fichiers_distant($outils[$outil], true);
+				$res = cs_action_fichiers_distants($outils[$outil], true);
 			}
 cs_log(" FIN : exec_action_rapide_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de '$outil'");	
 			ajax_retour($res);

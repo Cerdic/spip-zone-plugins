@@ -238,7 +238,7 @@ add_outil( array(
 	'pipeline:pre_boucle' => 'previsu_redac_pre_boucle',
 	'pipeline:boite_infos' => 'previsu_redac_boite_infos',
 	// fichier distant pour les pipelines
-	'distant' => 'http://zone.spip.org/trac/spip-zone/export/32230/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
+	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/32230/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
 	'version-min' => '1.9300',
 ));
 
@@ -255,7 +255,7 @@ add_outil( array(
 	'auteur' => 'Nicolas Hoizey, St&eacute;phanie Caron',
 	'pipeline:pre_boucle' => 'masquer_pre_boucle',
 	// fichier distant pour le pipeline
-	'distant' => 'http://zone.spip.org/trac/spip-zone/export/35809/_plugins_/masquer/masquer_pipelines.php',
+	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/35809/_plugins_/masquer/masquer_pipelines.php',
 	'code:options' => "%%mot_masquer%%",
 	'code:fonctions' => 'if (!function_exists("critere_tout_voir_dist")){
   function critere_tout_voir_dist($idb, &$boucles, $crit) {
@@ -1073,7 +1073,13 @@ add_outil( array(
 	'jquery'	=> 'oui',
 	'contrib'	=> 2987,
 	'code:options' => "%%jcorner_classes%%",
-	'pipelinecode:insert_head' => 'if(%%jcorner_plugin%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.corner.js").\'" type="text/javascript"></script>\'."\n";}',
+	// fichier distant pour le plugin jQuery : http://github.com/malsup/corner/commits/
+	'distant' => defined('_SPIP20100')
+		// version 2.09 (11-MAR-2010), jQuery v1.3.2 mini 
+		?'http://github.com/malsup/corner/raw/ca8d745fdfe054e1bb62fbd22eca9850c1353e03/jquery.corner.js'
+		// version 2.03 (05-DEC-2009) 
+		:'http://github.com/malsup/corner/raw/46bbbc8706853c879c9224b7ebf5f284f726314d/jquery.corner.js',
+	'pipelinecode:insert_head' => 'if(%%jcorner_plugin%%) {$flux.=\'<script src="\'.find_in_path("lib/jcorner/distant_jquery.corner.js").\'" type="text/javascript"></script>\'."\n";}',
 	'pipeline:insert_head' => 'jcorner_insert_head',
 	// jcorner_init() n'est disponible qu'en partie publique
 	'code:jq_init' => 'if(typeof jcorner_init=="function") jcorner_init.apply(this);',
