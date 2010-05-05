@@ -87,14 +87,14 @@ function exec_edit_vente() {
 		echo '<label for="prix_vente"><strong>Prix de vente(en &euro;) :</strong></label>';
 		echo '<input name="prix_vente"  type="text" value="'.$prix_vente.'" id="prix_vente" class="formo" />';
 		echo '<label for="journal"><strong>Mode de paiement :</strong></label>';
-		echo '<select name="journal" id="journal" class="formo" />';
+		$res = '';
 		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
-			echo '<option value="'.$banque['code'].'" ';
-			if ($journal==$banque['code']) { echo ' selected="selected"'; }
-			echo '>'.$banque['intitule'].'</option>';
+			$res .= '<option value="'.$banque['code'].'" ';
+			if ($journal==$banque['code']) { $res .= ' selected="selected"'; }
+			$res .= '>'.$banque['intitule'].'</option>';
 		}
-		echo '</select>';
+		if ($res) echo '<select name="journal" id="journal" class="formo" />', $res, '</select>';
 		echo '<label for="don"><strong>Don :</strong></label>';
 		echo '<input name="don" type="text" value="'.$don.'" id="don" class="formo" />';
 		echo '<label for="date_envoi"><strong>Envoy&eacute; le (AAAA-MM-JJ) :</strong></label>';

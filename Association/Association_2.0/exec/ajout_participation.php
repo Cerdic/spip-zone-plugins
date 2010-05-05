@@ -76,7 +76,7 @@ function exec_ajout_participation() {
 		while ($banque = sql_fetch($sql)) {
 			$res .= '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
 		}
-		echo "<select name='journal' id='journal' class='formo'>$res</select>";
+		if ($res) echo "<select name='journal' id='journal' class='formo'>$res</select>";
 		echo '<label for="statut"><strong>'._T('asso:activite_libelle_statut').' ok :</strong></label>';
 		echo '<input name="statut"  type="checkbox" value="ok" unchecked id="statut" /><br />';
 		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires').' :</strong></label>';

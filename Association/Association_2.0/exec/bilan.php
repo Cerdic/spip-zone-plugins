@@ -47,10 +47,10 @@ function exec_bilan(){
 		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr style="background-color: #DBE1C5">';
 		echo '<td><strong>&nbsp;</strong></td>';
-		echo '<td style="text-align:center;"><strong>Recettes</strong></td>';
-		echo '<td style="text-align:center;"><strong>D&eacute;penses</strong></td>';
-		echo '<td style="text-align:center;"><strong>Solde</strong></td>';
-		echo '</tr>';
+		echo "<td style='text-align:center;'><strong>\n" . 'Recettes</strong></td>';
+		echo "<td style='text-align:center;'><strong>\n" . 'D&eacute;penses</strong></td>';
+		echo "<td style='text-align:center;'><strong>\n" . 'Solde</strong></td>';
+		echo "</tr>\n";
 		$ac=lire_config('association/classe_banques'); 
 		$query = sql_select("imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe", 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', '', 'code, annee', "annee DESC", '',  "annee = $annee AND classe <> $annee");
 		
@@ -59,7 +59,7 @@ function exec_bilan(){
 			$depenses=$data['depenses']; 
 			$soldes=$recettes - $depenses;
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
+			echo "<td class='arial11 border1'>\n".$data['intitule'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($soldes, 2, ',', ' ').'</td>';
@@ -72,21 +72,21 @@ function exec_bilan(){
 		$total_depenses=number_format($total_depenses, 2, ',', ' '); 
 		$total_soldes=number_format($total_soldes, 2, ',', ' '); 
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo '<td class="arial11 border1" style="color:#9F1C30;"><strong>R&eacute;sultat courant</strong></td>';
-		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_recettes.'</strong></td>'; 
-		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_depenses.'</strong></td>';
-		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>'.$total_soldes.'</strong></td></tr>'; 
+		echo "\n<td class='arial11 border1' style='color:#9F1C30;'><strong>" . 'R&eacute;sultat courant</strong></td>';
+		echo "\n<td class='arial11 border1' style='text-align:right;color:#9F1C30;'><strong>".$total_recettes.'</strong></td>'; 
+		echo "\n<td class='arial11 border1' style='text-align:right;color:#9F1C30;'><strong>".$total_depenses.'</strong></td>';
+		echo "\n<td class='arial11 border1' style='text-align:right;color:#9F1C30;'><strong>".$total_soldes.'</strong></td></tr>'; 
 		echo '</table>';
 		echo '</fieldset>';
 		
 		//TABLEAU ENCAISSE
-		echo '<fieldset>';
-		echo '<legend>Encaisse '.$annee.'</strong></legend>';
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr bgcolor="#DBE1C5">';
-		echo '<td><strong>&nbsp;</strong></td>';
-		echo '<td style="text-align:center;" colspan="2"><strong>Avoir initial</strong></td>';
-		echo '<td style="text-align:center;"><strong>Avoir actuel</strong></td>';
+		echo "\n<fieldset>";
+		echo '<legend><strong>' . _L('Encaisse') .$annee.'</strong></legend>';
+		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo '<tr style="bgcolor: #DBE1C5">';
+		echo "\n<td><strong>&nbsp;</strong></td>";
+		echo '<td style="text-align:center;" colspan="2"><strong>', _L('Avoir initial') . "</strong></td>\n";
+		echo "<td style='text-align:center;'><strong>\n" . _L('Avoir actuel') . "</strong></td>\n";
 		echo '</tr>';
 		$clas=lire_config('association/classe_banques');
 		$query = sql_select('*', 'spip_asso_plan', "classe='$clas'", '',  "code" );
@@ -97,15 +97,15 @@ function exec_bilan(){
 			$solde=$banque['solde_anterieur'];
 			$total_initial += $solde;
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11 border1">'.$banque['intitule']; 
-			echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($date_solde).'</td>'; 
-			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>'; 
+			echo "\n<td class='arial11 border1'>".$banque['intitule']; 
+			echo "\n<td class='arial11 border1' style='text-align:right;'>".association_datefr($date_solde).'</td>'; 
+			echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($solde, 2, ',', ' ').'</td>'; 
 			
 			$compte = sql_fetsel("sum( recette ) AS recettes, sum( depense ) AS depenses, date", "spip_asso_comptes", "date > '$date_solde' AND journal = '$journal'", $journal);
 			
 			if ($compte)
 				$solde += ($compte['recettes'] -$compte['depenses']);
-			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</tr>';
+			echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($solde, 2, ',', ' ').'</tr>';
 			$total_actuel += $solde;		
 
 		}
@@ -113,13 +113,12 @@ function exec_bilan(){
 		$total_initial=number_format($total_initial, 2, ',', ' '); 
 		$total_actuel=number_format($total_actuel, 2, ',', ' '); 
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo '<td class="arial11 border1" style="color:#9F1C30;"><strong>Encaisse</strong></td>';
+		echo "\n<td class='arial11 border1' style='color:#9F1C30;'><strong>" . _L('Encaisse') . "</strong></td>\n";
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>&nbsp;</strong></td>'; 
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30"><strong>'.$total_initial.'</strong></td>'; 
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30"><strong>'.$total_actuel.'</strong></td></tr>'; 
-		echo '</tr>';
 		echo '</table>';
-		
+		echo '</fieldset>';
 		fin_cadre_relief();  
 		echo fin_gauche(),fin_page();
 	}

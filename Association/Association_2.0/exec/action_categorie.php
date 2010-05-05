@@ -33,8 +33,6 @@ function exec_action_categorie(){
 		$montant=$_POST['montant'];
 		$commentaires=$_POST['commentaires'];
 		
-		$url_retour = $_SERVER['HTTP_REFERER'];
-			
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
 		echo debut_gauche("",true);
@@ -43,7 +41,6 @@ function exec_action_categorie(){
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 		
-			
 		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
 		echo bloc_des_raccourcis($res);
 			
@@ -52,7 +49,7 @@ function exec_action_categorie(){
 		echo debut_cadre_relief(  "", false, "",  _T('asso:categories_de_cotisations'));
 			
 		echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie n&deg; ') .$id_categorie.' !</strong></p>';
-		$res = '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
+		$res = '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
 		echo redirige_action_post('supprimer_categories', $id_categorie, 'categories', '', $res);
 
 		fin_cadre_relief();  
