@@ -1,0 +1,19 @@
+<plugin>
+    <nom><multi>[fr]Copier coller facile[en]Easy copy / paste</multi></nom>
+    <auteur>Quentin Drouet</auteur>
+    <licence>&#169; 2010 GNU/GPL</licence>
+    <version>0.1</version>
+    <etat>dev</etat>
+    <description>
+
+    </description>
+    <prefix>zeroclipboard</prefix>
+	<options>zeroclipboard_options.php</options>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>zeroclipboard_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="pcltar" version="[0.1;]" />
+	<necessite id="lib:zeroclipboard" src="http://zeroclipboard.googlecode.com/files/zeroclipboard-1.0.7.tar.gz" />
+</plugin>

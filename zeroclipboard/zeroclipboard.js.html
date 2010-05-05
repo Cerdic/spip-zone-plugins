@@ -1,0 +1,51 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+
+ZeroClipboard.setMoviePath('#EVAL{_DIR_LIB_ZEROCLIPBOARD}ZeroClipboard.swf');
+
+var clip = null;
+
+;(function($){
+
+$(function(){
+	clip = new ZeroClipboard.Client();
+	clip.setHandCursor(true);
+	clip.addEventListener('mouseOver',function(client){});
+	clip.addEventListener('complete',clipcomplete);
+
+	function clipcomplete(client,text){
+		$(client.domElement)
+			.html('<:zeroclipboard:link_text_copied:>')
+			.removeClass('copypaste_link')
+			.addClass('copypaste_copied')
+			.attr('title','<:zeroclipboard:link_title_copied:>');
+
+		$('.copypaste_copied').not($(client.domElement)[0]).each(function(){
+			$(this)
+				.html('<:zeroclipboard:link_text_copy:>')
+				.toggleClass('copypaste_copied','copypaste_link')
+				.attr('title','<:zeroclipboard:link_title_copy:>');
+		});
+	}
+
+	$('.copypaste').each(function(){
+		$(this).before('<div class="copypaste_container" style="position:relative"><a title="<:zeroclipboard:link_title_copy:>" class="copypaste_link"><:zeroclipboard:link_text_copy:></a></div>');
+		$(this).prev('div').find('a').mouseover( function() {
+				clip.setText($(this).parent().next('.copypaste').val());
+
+				// reposition the movie over our element
+				// or create it if this is the first time
+				if (clip.div) {
+					clip.receiveEvent('mouseout', null);
+					clip.reposition(this);
+				}
+				else clip.glue(this);
+
+				// gotta force these events due to the Flash movie
+				// moving all around.  This insures the CSS effects
+				// are properly updated.
+				clip.receiveEvent('mouseover', null);
+			} );
+	});
+});
+})(jQuery);
