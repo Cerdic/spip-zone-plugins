@@ -90,7 +90,9 @@ function inscription2_post_edition($flux){
 		$id_auteur = $flux['args']['id_objet'];
 		foreach(lire_config('inscription2',array()) as $cle => $val){
 			$cle = preg_replace("/_(obligatoire|fiche|table).*/", "", $cle);
-			if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle)){
+			if($val=='on'
+			AND !in_array($cle,$exceptions_des_champs_auteurs_elargis)
+			AND !preg_match('/^(categories|zone|newsletter)/', $cle)) {
 				$var_user[$cle] = _request($cle);
 				if(is_array(_request($cle))){
 					spip_log($var_user[$cle]);
