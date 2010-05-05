@@ -8,7 +8,7 @@
 	<div class="pmb-exemplaires">
 		<h2><:pmb:exemplaires:></h2>
 		<table class='spip exemplaires'>
-		    <tr class="row_first"><th class='expl_header_expl_cb'><:pmb:code_barre:></th><th class='expl_header_expl_cote'><:pmb:cote:> </th><th class='expl_header_tdoc_libelle'><:pmb:support:></th><th class='expl_header_location_libelle'><:pmb:localisation:></th><th class='expl_header_section_libelle'><:pmb:section:></th><th><abbr title="<:pmb:disponiblite:>"><:pmb:disponiblite_abbr:></abbr></th><th></th></tr>
+		    <tr class="row_first"><th class='expl_header_expl_cb'><:pmb:code_barre:></th><th class='expl_header_expl_cote'><:pmb:cote:> </th><th class='expl_header_tdoc_libelle'><:pmb:support:></th><th class='expl_header_location_libelle'><:pmb:localisation:></th><th class='expl_header_section_libelle'><:pmb:section:></th><th><abbr title="<:pmb:disponiblite:>"><:pmb:disponiblite_abbr:></abbr></th></tr>
 
 		    <BOUCLE_tab_exemplaires(POUR){tableau #GET{tab_exemplaires}}>
 			  <tr class="[(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})]">
@@ -18,17 +18,7 @@
 				    <td class='location_libelle'><a href="[(#URL_PAGE{catalogue}|parametre_url{connect,''}|parametre_url{id_location,[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, location_id})]})]">[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, location_caption})]</a></td>
 				    <td class='section_libelle'><a href="[(#URL_PAGE{catalogue}|parametre_url{connect,''}|parametre_url{id_section,[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, section_id})]}|parametre_url{id_location_memo,[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, location_id})]})]">[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, section_caption})]</a></td>
 				    <td class='expl_situation'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, situation})]</td>
-				    <td>
-				    <B_auteurpmb>
-				    <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
-						[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, situation}|=={Disponible}|oui)
-						    [(#PMB_SESSION|oui)
-						      <a href="[(#URL_PAGE{notice_display}|parametre_url{id,#ENV{id}}|parametre_url{reserver,1}|parametre_url{location_reserver,[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, location_id})]})]#compte-lecteur"><:pmb:reserver_ouvrage:></a>
-						    ]
-						]
-				    </BOUCLE_auteurpmb>
-				    </B_auteurpmb>
-				    </td>
+				    
 				
 			  </tr>
 

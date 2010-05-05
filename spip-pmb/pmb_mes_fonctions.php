@@ -952,7 +952,48 @@ function pmb_tester_session($pmb_session, $id_auteur, $url_base) {
 }
 function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location, $url_base) {
 	pmb_ws_charger_client($ws, $url_base);
-	return $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
+	$result= Array();
+
+	$result = $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
+
+	if (!$result->success) {
+	    if ($result->error == "no_session_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas de session";
+
+	    else if ($result->error == "no_empr_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas d'id emprunteur";
+	    else if ($result->error == "check_empr_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : id emprunteur inconnu";
+	    else if ($result->error == "check_notice_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : Notice inconnue";
+	    else if ($result->error == "check_quota") return "La réservation n'a pas pu être réalisée pour la raison suivante : violation de quotas: Voir message complémentaire";
+	    else if ($result->error == "check_resa_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document déjà réservé par ce lecteur";
+	    else if ($result->error == "check_allready_loaned") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document déjà emprunté par ce lecteur";
+	    else if ($result->error == "check_statut") return "La réservation n'a pas pu être réalisée pour la raison suivante : Pas de document prêtable";
+	    else if ($result->error == "check_doc_dispo") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document disponible, mais non réservable";
+	    else if ($result->error == "check_localisation_expl") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document non réservable dans les localisations autorisées";
+	    else if ($result->error == "resa_no_create") return "La réservation n'a pas pu être réalisée pour la raison suivante : échec de l'enregistrement de la résevation";
+	    else return "La réservation n'a pas pu être réalisée pour la raison suivante : ".$result->error;
+	} else return "Votre réservation a été enregistrée";
+/* Description des entrées:
+
+      session_id type string        Le numéro de session
+      notice_id type integer        l'id de la notice
+      bulletin_id type integer        l'id du bulletin
+      location type integer        la localisation de retrait ni applicable
+      Description des retours:
+
+      success type boolean        Un boolean indiquant le succès éventuel de l'opération
+      error type string        Code d'erreur si la réservation n'est pas effectuée:
+      no_session_id (pas de session)
+      no_empr_id (pas d'id emprunteur)
+      check_empr_exists (id emprunteur inconnu)
+      check_notice_exists (Notice inconnue)
+      check_quota (violation de quotas: Voir message complémentaire)
+      check_resa_exists (Document déjà réservé par ce lecteur)
+      check_allready_loaned (Document déjà emprunté par ce lecteur)
+      check_statut (Pas de document prêtable)
+      check_doc_dispo (Document disponible, mais non réservable)
+      check_localisation_expl (Document non réservable dans les localisations autorisées)
+      resa_no_create (échec de l'enregistrement de la résevation)
+      message type string        Message d'information complémentaire
+*/
 }
 
 function pmb_notice_champ ($tableau_resultat, $champ) {
