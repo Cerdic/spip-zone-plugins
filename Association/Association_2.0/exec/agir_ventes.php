@@ -44,10 +44,11 @@ function exec_agir_ventes(){
 
 		//AJOUT VENTE
 		if ($action=="ajoute"){
-		  if (!ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette, $depense))
+			if (!ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette, $depense)) {
 
-			die('Requ&egrave;te invalide : ' . mysql_error());
-		  else  header ('location:'.$url_retour);
+				include_spip('inc/minipres');
+				echo minipres(_T('avis_operation_impossible'));
+			} else 	header ('location:'.$url_retour);
 		}
 		
 		//MODIFICATION VENTE
