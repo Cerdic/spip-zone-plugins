@@ -17,9 +17,8 @@ include_spip('inc/autoriser');
 function exec_edit_compte() {
 		
 	$id_compte= intval(_request('id'));
-	$action= _request('agir');
 
-	if (!autoriser('configurer') OR !preg_match('/^\w+$/', $action)) {
+	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -57,8 +56,7 @@ function exec_edit_compte() {
 
 		debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
 		
-		$res = '<div>';
-		$res .= '<label for="imputation"><strong>' . _L('Imputation :') . '</strong></label>';
+		$res = '<label for="imputation"><strong>' . _L('Imputation :') . '</strong></label>';
 		$res .= '<select name="imputation" type="text" id="date" class="formo" />';
 		$sql = sql_select('*', 'spip_asso_plan', "classe<>". sql_quote(lire_config('association/classe_banques')), "", "code") ;
 		while ($banque = sql_fetch($sql)) {
@@ -74,25 +72,30 @@ function exec_edit_compte() {
 		$res .= '<label for="depense"><strong>' . _L('D&eacute;pense :') . '</strong></label>';
 		$res .= '<input name="depense" value="'.$depense.'"  type="text" id="depense" class="formo" />';
 		$res .= '<label for="journal"><strong>' . _L('Mode de paiement :') . '</strong></label>';
-		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
+
+		$sel = '';
 		$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "", "code") ;
 		while ($banque = sql_fetch($sql)) {
-			$res .= '<option value="'.$banque['code'].'" ';
-			if ($journal==$banque['code']) { $res .= ' selected="selected"'; }
-			$res .= '>'.$banque['intitule'].'</option>';
+			$sel .= '<option value="'.$banque['code'].'" ';
+			if ($journal==$banque['code']) { $sel .= ' selected="selected"'; }
+			$sel .= '>'.$banque['intitule'].'</option>';
 		}
-		$res .= '</select>';
-		$res .= '<label for="justification"><strong>' . _L('Justification :') . '</strong></label>';
-		$res .= '<input name="justification" value="'.$justification.'" type="text" id="justification" class="formo" />';
-		
-		$res .= '<div style="float:right;">';
-		$res .= '<input type="submit" value="';
-		if ( isset($action)) {$res .= _T('asso:bouton_'.$action);}
-		else {$res .= _T('asso:bouton_envoyer');}
-		$res .= '" class="fondo" /></div>';
-		$res .= '</div>';
+		if ($sel) 
+			$res .= '<select name="journal" type="text" id="journal" class="formo" />' . $sel . '</select>';
 
-		echo redirige_action_post($action . '_comptes', $id_compte, 'comptes', '', $res);
+		$action = ($id_compte ? 'modifier' : 'ajouter');
+
+		$res .= '<label for="justification"><strong>'
+		. _L('Justification :')
+		. '</strong></label>'
+		. '<input name="justification" value="'
+		. $justification
+		. '" type="text" id="justification" class="formo" />'
+		. '<div style="float:right;"><input type="submit" value="'
+		. _T('asso:bouton_'. $action)
+		. '" class="fondo" /></div>';
+
+		echo redirige_action_post($action . '_comptes', $id_compte, 'comptes', '', "<div>$res</div>");
 
 		fin_cadre_relief();  
 		echo fin_gauche(),fin_page();

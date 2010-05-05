@@ -29,13 +29,13 @@ function exec_voir_adherent(){
 		$id_auteur= intval($_GET['id']);
 		$indexation = lire_config('association/indexation');
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
-			while ($data = sql_fetch($query)) { 
+		while ($data = sql_fetch($query)) { 
 			$id_asso=$data['id_asso'];
 			$nom_famille=$data['nom_famille'];
 			$prenom=$data['prenom'];
 			$validite=$data['validite'];
 		}
-		  $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		//debut_page(_T(), "", "");
 		

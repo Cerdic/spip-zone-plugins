@@ -16,18 +16,26 @@ include_spip ('inc/navigation_modules');
 
 function exec_edit_adherent() {
 		
-	$id_auteur= intval($_GET['id']);
-	$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
+	$id_auteur= intval(_request('id'));
 
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer') OR !$data) {
+	if (!autoriser('configurer')) {
 			include_spip('inc/minipres');
 			echo minipres();
-	} else {
+	} else exec_edit_adherent_args($id_auteur);
+}
 		
+function exec_edit_adherent_args($id_auteur)
+{
+	$data = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
+	if (!$data) {
+		include_spip('inc/minipres');
+		echo minipres(_T('zxml_inconnu_id') . $id_auteur);
+	} else {
 		$url_retour = $_SERVER['HTTP_REFERER'];
-
 		$indexation = lire_config('association/indexation');
+
+		$data = sql_fetch($query);
 		$id_adherent=$data['id_adherent'];
 		$id_asso=$data['id_asso'];
 		$nom_famille=$data['nom_famille'];

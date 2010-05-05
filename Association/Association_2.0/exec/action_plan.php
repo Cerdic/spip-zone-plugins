@@ -51,7 +51,7 @@ function exec_action_plan(){
 		debut_cadre_relief(  "", false, "", $titre = _T('Suppression de compte'));
 		echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le compte ').$id_plan.' !</strong></p>';
 
-		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
+		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
 		echo redirige_action_post('supprimer_plans', $id_plan, 'plan', '', $res);
 		fin_cadre_relief();  
 			
