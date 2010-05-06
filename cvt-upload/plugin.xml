@@ -1,0 +1,32 @@
+<plugin>
+	<nom>CVT Upload</nom>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Fournit des outils pour aider à charger des fichiers proprement depuis un formulaire CVT.</description>
+	
+	<prefix>cvt_upload</prefix>
+	<options>cvt_upload_options.php</options>
+	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>cvt_upload_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>cvt_upload_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>cvt_upload_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_cvt_upload</nom>
+		<inclure>cvt_upload_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<categorie>outil</categorie>
+</plugin>
+

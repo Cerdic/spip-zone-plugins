@@ -1,0 +1,79 @@
+<div class="formulaire_spip formulaire_#ENV{form}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			#SET{name,tromperie}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{obli,'obligatoire'}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">Si c'est rempli, on se trompe</label>
+				[<span class="erreur_message">(#GET{erreurs})</span>]
+				<input type="input" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+			</li>
+			
+			#SET{name,seul}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{obli,'obligatoire'}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">Un fichier tout seul</label>
+				[(#GET{erreurs}|non)
+				<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="40" />
+				]
+				[(#GET{erreurs}|oui)
+				[(#GET{erreurs}|table_valeur{vignette}|image_reduire{32})]
+				[(#GET{erreurs}|table_valeur{nom})]
+				<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;nom&#93;" value="[(#GET{erreurs}|table_valeur{nom})]" />
+				<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;extension&#93;" value="[(#GET{erreurs}|table_valeur{extension})]" />
+				<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;vignette&#93;" value="[(#GET{erreurs}|table_valeur{vignette})]" />
+				<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;mime&#93;" value="[(#GET{erreurs}|table_valeur{mime})]" />
+				]
+			</li>
+			
+			#SET{name,plusieurs}
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{obli,'obligatoire'}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>Plusieurs fichiers dans le même champ</label>
+				<div class="choix">
+					[(#GET{erreurs}|table_valeur{0}|non)
+					<input type="file" class="file" name="#GET{name}&#91;0&#93;" id="#GET{name}" size="40" />
+					]
+					[(#GET{erreurs}|table_valeur{0}|oui)
+					[(#GET{erreurs}|table_valeur{0}|table_valeur{vignette}|image_reduire{32})]
+					[(#GET{erreurs}|table_valeur{0}|table_valeur{nom})]
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;0&#93;&#91;nom&#93;" value="[(#GET{erreurs}|table_valeur{0}|table_valeur{nom})]" />
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;0&#93;&#91;extension&#93;" value="[(#GET{erreurs}|table_valeur{0}|table_valeur{extension})]" />
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;0&#93;&#91;vignette&#93;" value="[(#GET{erreurs}|table_valeur{0}|table_valeur{vignette})]" />
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;0&#93;&#91;mime&#93;" value="[(#GET{erreurs}|table_valeur{0}|table_valeur{mime})]" />
+					]
+				</div>
+				<div class="choix">
+					[(#GET{erreurs}|table_valeur{1}|non)
+					<input type="file" class="file" name="#GET{name}&#91;1&#93;" id="#GET{name}" size="40" />
+					]
+					[(#GET{erreurs}|table_valeur{1}|oui)
+					[(#GET{erreurs}|table_valeur{1}|table_valeur{vignette}|image_reduire{32})]
+					[(#GET{erreurs}|table_valeur{1}|table_valeur{nom})]
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;1&#93;&#91;nom&#93;" value="[(#GET{erreurs}|table_valeur{1}|table_valeur{nom})]" />
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;1&#93;&#91;extension&#93;" value="[(#GET{erreurs}|table_valeur{1}|table_valeur{extension})]" />
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;1&#93;&#91;vignette&#93;" value="[(#GET{erreurs}|table_valeur{1}|table_valeur{vignette})]" />
+					<input type="hidden" name="_infos_fichiers&#91;#GET{name}&#93;&#91;1&#93;&#91;mime&#93;" value="[(#GET{erreurs}|table_valeur{1}|table_valeur{mime})]" />
+					]
+				</div>
+			</li>
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_telecharger:>" /></p>
+	</div></form>
+	]
+</div>
