@@ -1,13 +1,21 @@
 <plugin>
-	<nom>Lecteur Multimedia v2</nom>
+	<nom>
+		<multi>
+			[fr]Lecteur Multimedia v2
+			[en]Media Player v2
+		</multi>
+	</nom>
 	<auteur>BoOz, kent1</auteur>
-	<version>0.2</version>
+	<version>0.2.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>lm2</prefix>
 	<icon>images/lecteur_multimedia-128.png</icon>
 	<description>
-	Permet la lecture de sons et de vidéos avec SPIP par l'utilisation de la librairie [Soundmanager 2->http://www.schillmania.com/projects/soundmanager2/]
+		<multi>
+			[fr]Permet la lecture de sons et de vidéos avec SPIP par l'utilisation de la librairie [Soundmanager 2->http://www.schillmania.com/projects/soundmanager2/]
+			[en]Allows playback of audio and video with SPIP using the [Soundmanager 2->http://www.schillmania.com/projects/soundmanager2/] library
+		</multi>
 	</description>
 	<fonctions>lm2_fonctions.php</fonctions>
 	<options>lm2_options.php</options>
@@ -22,7 +30,6 @@
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="lib:soundmanagerv295b-20100323" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv295b-20100323.zip" />
-	<necessite id="lib:jquery-ui-1.7.2.custom" src="http://jqueryui.com/download/jquery-ui-1.7.2.custom.zip" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<categorie>multimedia</categorie>
 </plugin>
