@@ -112,12 +112,14 @@ function notifications_notifications_destinataires($flux) {
 			$flux['data'][] = $m;
 		}
 	}
-
+	
 	// noter les envois de ce forum pour ne pas doublonner
 	if (in_array($quoi,array('forumposte','forumvalide','forumprive'))
 		AND $id = $flux['args']['id']){
 		if (isset($sent[$id])){
 			$flux['data'] = array_diff($flux['data'],$sent[$id]);
+		} else {
+			$sent[$id] = array();
 		}
 		$sent[$id] = array_merge($sent[$id],$flux['data']);
 	}
