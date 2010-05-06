@@ -22,7 +22,6 @@ function exec_ventes(){
 	} else {
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_ventes = generer_url_ecrire('ventes');
 		$url_agir_ventes = generer_url_ecrire('agir_ventes');
 		$url_edit_vente=generer_url_ecrire('edit_vente','agir=modifie');
 		$url_ajout_vente=generer_url_ecrire('edit_vente','agir=ajoute');
@@ -39,12 +38,12 @@ function exec_ventes(){
 		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
-		echo '<p>En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e</p>'; 
+		echo '<p>', _L('En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e') . '</p>'; 
 		
 		// TOTAUX
 		$critere = lire_config('association/pc_ventes');
 		if ($critere) $critere = " AND imputation=". sql_quote($critere);
-		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) ='$annee'$critere");
+		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) =$annee$critere");
 		while ($data = sql_fetch($query)) {
 			$solde= $data['somme_depenses'] + $data['somme_recettes'];
 			$imputation = $data['imputation'];
@@ -75,8 +74,9 @@ function exec_ventes(){
 		
 		$query = sql_select("date_format( date_vente, '%Y' )  AS annee", "spip_asso_ventes", "", "annee", "annee");
 		while ($data = sql_fetch($query)) {
-			if ($data['annee']==$annee)	{echo ' <strong>'.$data['annee'].'</strong>';}
-			else {echo ' <a href="'.$url_ventes.'&annee='.$data['annee'].'">'.$data['annee'].'</a>';}
+			$a = $data['annee'];
+			if ($a==$annee)	{echo ' <strong>'.$a.'</strong>';}
+			else {echo ' <a href="'. generer_url_ecrire('ventes','annee='.$a).'">'.$a.'</a>';}
 		}
 		echo '</td>';
 		echo '</table>';
@@ -96,7 +96,7 @@ function exec_ventes(){
 		echo '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>';
 		echo '</tr>';
 		$ventes = '';
-		$query = sql_select('*', 'spip_asso_ventes', "date_format( date_vente, '%Y' )='$annee'", '',  "id_vente DESC") ;
+		$query = sql_select('*', 'spip_asso_ventes', "date_format( date_vente, '%Y' )=$annee", '',  "id_vente DESC") ;
 		while ($data = sql_fetch($query)) {
 			if(isset($data['date_envoi'])) { $class= "pair"; }
 			else {$class="impair";}   
@@ -109,7 +109,7 @@ function exec_ventes(){
 			$ventes .= '<td class="'.$class. ' border1">'.$data['id_acheteur'].'</td>';
 			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.$data['quantite'].'</td>';
 			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
-			$ventes .= '<td class="'.$class. ' border1" style="text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
+			$ventes .= '<td class="'.$class. ' border1" style="text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="' . _L('Mettre &agrave; jour la vente') . '"></a>';
 			$ventes .= '<td class="'.$class. ' border1" style="text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
 			$ventes .= '</tr>';
 		}     
