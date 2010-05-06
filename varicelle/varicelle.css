@@ -45,12 +45,12 @@ font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba
 .black.submit:hover { background-color: #111; }
 .gray.submit { background-color: #888; }
 .gray.submit:hover { background-color: #777; }
-.white.submit { background-color: #FFF; border: 1px solid #CCC; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
+.white.submit { background-color: #FFF; border: 1px solid #CCC; color: #666; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
 .white.submit:hover { background-color: #EEE; }
 
 /* styles */
 .metal.submit { background: #FFF url("img/varicelle-metal.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
-.metal.submit:hover { background-color: #EEE; border-color: #999; color: #444 !important; }
+.metal.submit:hover { background-color: #EEE; border-color: #999; color: #444; }
 
 .spip.submit { background-color: #75507B; }
 .spip.submit:hover { background-color: purple; }
