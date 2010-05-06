@@ -53,7 +53,23 @@ function cvt_upload_formulaire_verifier($flux){
 }
 
 function cvt_upload_formulaire_traiter($retours){
-	
+	// On supprime tous les fichiers maintenant de les traitements sont faits
+	if ($champs_fichiers = _request('_champs_fichiers') and is_array($champs_fichiers)){
+		$repertoire = _DIR_TMP.'cvt_upload/'._request('hash').'/';
+		if (is_dir($repertoire)){
+			$infos_fichiers = _request('_infos_fichiers');
+			foreach ($champs_fichiers as $champ){
+				if ($infos_fichiers[$champ]['nom']){
+					unlink($repertoire.$infos_fichiers[$champ]['nom']);
+				}
+				else foreach ($infos_fichiers[$champ] as $fichier){
+					unlink($repertoire.$fichier['nom']);
+				}
+			}
+			// On supprime le répertoire
+			rmdir($repertoire);
+		}
+	}
 	
 	return $retours;
 }
