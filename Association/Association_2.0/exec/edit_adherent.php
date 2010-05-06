@@ -62,10 +62,8 @@ function exec_edit_adherent_args($id_auteur)
 		echo '<br /><div>'.association_date_du_jour().'</div>';	
 		echo fin_boite_info(true);
 		
-		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis ($res);
-		
+		echo bloc_des_raccourcis (association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+	
 		echo debut_droite("",true);
 		
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
@@ -79,7 +77,7 @@ function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_inte
 {
 	$res = '';
 	if (lire_config('association/indexation')=="id_asso"){
-			$res .= '<label for="id_asso"><strong>N&deg; d\'adh&eacute;rent :</strong></label>';
+	  $res .= '<label for="id_asso"><strong>' . _L('N&deg; d\'adh&eacute;rent :') . '</strong></label>';
 			$res .= '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
 	}
 

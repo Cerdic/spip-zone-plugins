@@ -32,12 +32,10 @@ function exec_edit_ressource(){
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		echo '<p>Gestion des emprunts et des pr&ecirc;ts</p>';
+		echo '<p>', _L('Gestion des emprunts et des pr&ecirc;ts') . '</p>';
 		echo fin_boite_info(true);
-		
-		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
+	
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 		
 		echo debut_droite("",true);
 		

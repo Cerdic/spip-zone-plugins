@@ -37,14 +37,12 @@ function exec_ressources(){
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt=" " /> Libre<br />';
 		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif" alt=" " /> En suspend<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt=" " /> R&eacute;s&eacute;rv&eacute;<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt=" " /> Supprim&eacute;';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt=" " />', _L('R&eacute;s&eacute;rv&eacute;'), '<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt=" " />', _L('Supprim&eacute;');
 		echo fin_boite_info(true);
 		
-		
-		$res=association_icone(_T('asso:ressources_nav_ajouter'),  $url_ajout_ressource, 'ajout_don.png');
-			
-		echo bloc_des_raccourcis($res);
+		echo bloc_des_raccourcis(association_icone(_T('asso:ressources_nav_ajouter'),  $url_ajout_ressource, 'ajout_don.png'));
+
 		echo debut_droite("",true);
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_liste_ressources'));
 		

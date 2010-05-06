@@ -59,11 +59,11 @@ function exec_action_relances(){
 			echo debut_droite("",true);
 			
 			debut_cadre_relief(  "", false, "", $titre = _T('Relance de cotisations'));
-			echo '<p><strong> Vous vous appr&ecirc;tez &agrave; envoyer '.$count;
+			echo '<p><strong>', _L('Vous vous appr&ecirc;tez &agrave; envoyer ') .$count;
 			if ($count==1)
-			{ echo ' relance';}
+			  { echo _L(' relance');}
 			else
-			{ echo ' relances';}
+			  { echo _L(' relances');}
 			echo '</strong></p>';
 			echo '<p>'.$sujet.'</p>';
 			echo '<fieldset>';
@@ -72,15 +72,15 @@ function exec_action_relances(){
 			
 			echo '<form method="post" action="'.$url_action_relances.'">';
 			for ( $i=0 ; $i < $count ; $i++ ) {
-			  echo '<input name="id[]" type="hidden" value="'.intval($id_tab[$i]).'">';
-				echo '<input name="statut[]" type="hidden" value="'.$statut_tab[$i].'">';
+				echo '<input name="id[]" type="hidden" value="'.intval($id_tab[$i]).'" />';
+				echo '<input name="statut[]" type="hidden" value="'.$statut_tab[$i].'" />';
 				echo '<input name="email[]" type="hidden" value="'.$email_tab[$i].'">';
 			}
-			echo '<input name="sujet" type="hidden" value="'.$sujet.'">';
-			echo '<input name="message" type="hidden" value="'.$message.'">';
-			echo '<input name="agir" type="hidden" value="send">';
-			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-			echo '<div style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_envoyer').'" class="fondo" /></div>';
+			echo '<input name="sujet" type="hidden" value="'.$sujet.'" />';
+			echo '<input name="message" type="hidden" value="'.$message.'" />';
+			echo '<input name="agir" type="hidden" value="send" />';
+			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'" />';
+			echo '<div style="float:right;"><input type="submit" value="'._T('asso:bouton_envoyer').'" class="fondo" /></div>';
 			echo '</form>';	
 			//remettre le champ 0 à  1 et réactualiser la date
 			//spip_query("UPDATE spip_auteurs_elargis SET regle_le='relance',date_jour=NOW() WHERE id_ad=$id");	

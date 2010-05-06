@@ -72,25 +72,23 @@ function exec_agir_ventes(){
 			echo association_date_du_jour();	
 			echo fin_boite_info(true);
 			
-			
-			$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-			echo bloc_des_raccourcis($res);
+			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 			
 			echo debut_droite("",true);
 			
 			echo debut_cadre_relief(  "", false, "", $titre = _T('Action sur les ventes associatives'));
 			
-			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer '.$count;
-			if ($count==1){echo ' vente !';} else {echo ' ventes !';}
+			echo '<p><strong>', _L('Vous vous appr&ecirc;tez &agrave; effacer ') .$count;
+			if ($count==1){echo _L(' vente !');} else {echo _L(' ventes !');}
 			echo '</strong></p>';
 			echo '<table>';
 			echo '<form action="'.$url_agir_ventes.'"  method="post">';
 			for ( $i=0 ; $i < $count ; $i++ ) {	
 				$id = $delete_tab[$i];
-				echo '<input type="hidden" name="drop[]" value="'.$id.'" checked>';
-			}	
+				echo '<input type="hidden" name="drop[]" value="'.$id.'" checked="checked" />' ; "\n";
+			}
 			echo '<tr>';
-			echo '<td><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></td></tr>';	
+			echo '<td><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></td></tr>';	
 			echo '</form>';  
 			echo '</table>'; 
 			fin_cadre_relief();  

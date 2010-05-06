@@ -39,7 +39,7 @@ function exec_comptes() {
 		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
-		echo '<p>En bleu : Recettes<br />En rose : D&eacute;penses</p>'; 
+		echo '<p>', _L('En bleu : Recettes<br />En rose : D&eacute;penses'), '</p>'; 
 		
 		// TOTAUX
 		$query = sql_select("sum(recette) AS somme_recettes, sum(depense) AS somme_depenses", 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");

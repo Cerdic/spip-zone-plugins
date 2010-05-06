@@ -53,8 +53,8 @@ function ajout_cotisation($id_auteur)
 
 		echo debut_boite_info(true);
 		echo '<p>';
-		echo 'Adh&eacute;rent :<strong>'.$nom_famille.' '.$prenom.'</strong><br />';
-		echo 'Cat&eacute;gorie :<strong>'.$categorie.'</strong></p>';
+		echo _L('Adh&eacute;rent&nbsp;:') . '<strong>'.$nom_famille.' '.$prenom.'</strong><br />';
+		echo _L('Cat&eacute;gorie&nbsp;:') . '<strong>'.$categorie.'</strong></p>';
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 		echo debut_droite("",true);
