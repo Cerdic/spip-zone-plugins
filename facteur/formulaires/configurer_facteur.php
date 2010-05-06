@@ -40,8 +40,18 @@ function formulaires_configurer_facteur_verifier_dist(){
 	if (_request('facteur_smtp')=='oui'){
 		if (!($h=_request('facteur_smtp_host')))
 			$erreurs['facteur_smtp_host'] = _T('info_obligatoire');
-		elseif(!preg_match(';^([^.\s/?:]+[.]){0,2}[^.\s/?:]+$;',$h))
-			$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');
+		else {
+			$long = ip2long($h); // cas ou on a rentre une ip directe
+			if ($long == false OR $long == -1){ // ce n'est pas une IP
+				if(!preg_match(';^([^.\s/?:]+[.]){0,2}[^.\s/?:]+$;',$h)
+				  OR gethostbyname($h)==$h)
+					$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');
+			}
+			else {
+				if (gethostbyaddr($h)==$h)
+					$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');				
+			}
+		}
 		if (!($p=_request('facteur_smtp_port')))
 			$erreurs['facteur_smtp_port'] = _T('info_obligatoire');
 		elseif(!preg_match(';^[0-9]+$;',$p) OR !intval($p))
