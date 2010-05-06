@@ -41,12 +41,12 @@ function table_amap_lister_paysan()
   {
     $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
     $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-    $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit")." '>\n";
+    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit", "ecrire")." '>\n";
     $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['id_produit']."</center>\n";
     $out .= "\t\t\t\t</a>\n";
     $out .= "\t\t\t</td>\n";
     $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-    $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit")." '>\n";
+    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit", "ecrire")." '>\n";
 
     // on recherche le nom du paysan dans la table amap_personne...
     $txtQuery = "SELECT prenom, nom FROM amap_personne ";
@@ -62,7 +62,7 @@ function table_amap_lister_paysan()
     $out .= "\t\t\t</td>\n";
 
     $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-    $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit")." '>\n";
+    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit", "ecrire")." '>\n";
     $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['label_produit']."</center>\n";
     $out .= "\t\t\t\t</a>\n";
     $out .= "\t\t\t</td>\n";
@@ -141,7 +141,7 @@ function table_amap_getmodif_paysan()
  
     $hiddens .= "\t<input type='hidden' name='id_ligne' value='".$_GET['id_ligne']."' />\n";
 
-    return generer_url_post_ecrire('amap_config', "table=amap_produit&action=maj")
+    return generer_url_entite('amap_config', "table=amap_produit&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin  while ($tabUnEnregistrement_1 = sql_fetch($sqlResult))
@@ -192,7 +192,7 @@ function table_amap_get_paysan()
   $out .= "\t\t</td>\n";
   $out .= "\t</tr>\n";
 
-  return generer_url_post_ecrire('amap_config', "table=amap_produit&action=add")
+  return generer_url_entite('amap_config', "table=amap_produit&action=add","post_ecrire")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

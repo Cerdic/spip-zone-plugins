@@ -37,19 +37,19 @@ function table_amap_lister_variete($idProduit, $idFamille)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$idFamille."&idVariete=".$tabUnEnregistrement['id_variete']."&table=varietes")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$idFamille."&idVariete=".$tabUnEnregistrement['id_variete']."&table=varietes","ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['id_variete']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$idFamille."&idVariete=".$tabUnEnregistrement['id_variete']."&table=varietes")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$idFamille."&idVariete=".$tabUnEnregistrement['id_variete']."&table=varietes","ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['label_variete']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_paniers', "action=suppr&idProduit=".$idProduit."&idFamille=".$idFamille."&idVariete=".$tabUnEnregistrement['id_variete']."&table=varietes")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=suppr&idProduit=".$idProduit."&idFamille=".$idFamille."&idVariete=".$tabUnEnregistrement['id_variete']."&table=varietes","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -151,7 +151,7 @@ function table_amap_getmodif_variete()
   $hiddens .= "\t<input type='hidden' name='ancIdVariete' value='".$_GET['idVariete']."' />\n";
   $hiddens .= "\t<input type='hidden' name='table' value='varietes' />\n";
  
-  return generer_url_post_ecrire('amap_paniers', "action=maj")
+  return generer_url_entite('amap_paniers', "action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -181,7 +181,7 @@ function table_amap_get_variete($idProduit, $idFamille)
     $hiddens .= "\t<input type='hidden' name='idFamille' value='".$idFamille."' />\n";
     $hiddens .= "\t<input type='hidden' name='table' value='varietes' />\n";
 
-    return generer_url_post_ecrire('amap_paniers', "action=add")
+    return generer_url_entite('amap_paniers', "action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin   if ( isset($idSaison) && isset($idDistrib) && isset($idProduit) )

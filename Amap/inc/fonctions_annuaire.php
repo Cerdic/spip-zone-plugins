@@ -55,37 +55,37 @@ function table_amap_lister_annuaire($statut)
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'])." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'],"ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['prenom']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'])." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'],"ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['nom']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'])." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'],"ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['fixe']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'])." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'],"ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['portable']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'])." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_annuaire', "action=modif&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'],"ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['adhesion']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_annuaire', "action=suppr&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'])." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_annuaire', "action=suppr&statut=".$statut."&idPersonne=".$tabUnEnregistrement['id_personne'],"ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -145,8 +145,8 @@ function table_amap_getmodif_annuaire()
   $hiddens .= "\t<input type='hidden' name='statut' value='".$_GET['statut']."' />\n";
   $hiddens .= "\t<input type='hidden' name='idPersonne' value='".$_GET['idPersonne']."' />\n";
 
-  return generer_url_post_ecrire("amap_annuaire"
-                           , "&action=maj")
+  return generer_url_entite("amap_annuaire"
+                           , "&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -209,8 +209,8 @@ function table_amap_get_annuaire($statut)
 
   $hiddens .= "\t<input type='hidden' name='statut' value='".$statut."' />\n";
 
-  return generer_url_post_ecrire("amap_annuaire"
-                           , "&action=add")
+  return generer_url_entite("amap_annuaire"
+                           , "&action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

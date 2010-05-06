@@ -48,13 +48,13 @@ function table_amap_lister_liste_contrat($idSaison, $idProduit)
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit)." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit,"ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['prenom']." ".$tabUnEnregistrement['nom']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit)." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit,"ecrire")." '>\n";
       if ($tabUnEnregistrement['demi_panier'] == 1)
         $out .= "\t\t\t\t\t<center>oui</center>\n";
       else
@@ -63,25 +63,25 @@ function table_amap_lister_liste_contrat($idSaison, $idProduit)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit)." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit,"ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['label_type']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit)." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit,"ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['dateEvenement']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit)." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit,"ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['nb_distribution']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=suppr&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit)." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=suppr&idContrat=".$tabUnEnregistrement['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit,"ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -218,7 +218,7 @@ function table_amap_getmodif_liste_contrat()
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$_GET['idProduit']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
  
-    return generer_url_post_ecrire('amap_contrats', "action=maj")
+    return generer_url_entite('amap_contrats', "action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -318,7 +318,7 @@ function table_amap_get_liste_contrat($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    return generer_url_post_ecrire('amap_contrats', "action=add")
+    return generer_url_entite('amap_contrats', "action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if ( ($idSaison!=0) && ($idProduit!=0) )

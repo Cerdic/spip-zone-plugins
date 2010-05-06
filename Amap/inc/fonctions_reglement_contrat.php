@@ -43,31 +43,31 @@ function table_amap_lister_reglement_contrat($idSaison, $idProduit, $idContrat)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['id_cheque']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['label_banque']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['ref_cheque']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['montant_euros']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=suppr&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=suppr&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -203,7 +203,7 @@ function table_amap_getmodif_reglement_contrat()
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idCheque' value='".$_GET['idCheque']."' />\n";
 
-    return generer_url_post_ecrire('amap_contrats', "table=reglement&action=maj")
+    return generer_url_entite('amap_contrats', "table=reglement&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -262,7 +262,7 @@ function table_amap_get_reglement_contrat($idSaison, $idProduit, $idContrat)
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$idContrat."' />\n";
 
-    return generer_url_post_ecrire('amap_contrats', "table=reglement&action=add")
+    return generer_url_entite('amap_contrats', "table=reglement&action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

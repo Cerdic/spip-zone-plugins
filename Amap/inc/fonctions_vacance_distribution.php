@@ -49,17 +49,17 @@ function table_amap_lister_vacance_distribution($idSaison, $idProduit)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances")." '>\n";
+     $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['dateEvenement']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['cPrenom']." ".$tabUnEnregistrement_1['cNom']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
 
 
       $txtQuery = "SELECT p.id_personne, p.prenom, p.nom";
@@ -88,13 +88,13 @@ function table_amap_lister_vacance_distribution($idSaison, $idProduit)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['remplacant_ext']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
       if ($tabUnEnregistrement_1['paye'] == 1)
         $out .= "\t\t\t\t\t<center>oui</center>\n";
       else
@@ -103,7 +103,7 @@ function table_amap_lister_vacance_distribution($idSaison, $idProduit)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=suppr&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=suppr&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -255,7 +255,7 @@ function table_amap_getmodif_vacance_distribution()
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idEvenement' value='".$_GET['idEvenement']."' />\n";
 
-    return generer_url_post_ecrire('amap_distributions', "table=vacances&action=maj")
+    return generer_url_entite('amap_distributions', "table=vacances&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if ($tabUnEnregistrement_1 = sql_fetch($sqlResult_1))
@@ -382,7 +382,7 @@ function table_amap_get_vacance_distribution($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    return generer_url_post_ecrire('amap_distributions', "table=vacances&action=add")
+    return generer_url_entite('amap_distributions', "table=vacances&action=add","post_ecrire")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

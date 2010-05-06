@@ -42,13 +42,13 @@ function table_amap_lister_produit_distributions($idSaison)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['dateEvenement']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits","ecrire")." '>\n";
 
       // on recherche le label du produit
       $txtQuery = "SELECT label_produit FROM amap_produit ";
@@ -64,7 +64,7 @@ function table_amap_lister_produit_distributions($idSaison)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=suppr&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=suppr&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -136,7 +136,7 @@ function table_amap_getmodif_produit_distribution()
   $hiddens .= "\t<input type='hidden' name='idDistrib' value='".$_GET['idDistrib']."' />\n";
   $hiddens .= "\t<input type='hidden' name='ancIdProduit' value='".$_GET['idProduit']."' />\n";
 
-  return generer_url_post_ecrire('amap_distributions', "table=produits&action=maj")
+  return generer_url_entite('amap_distributions', "table=produits&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -203,7 +203,7 @@ function table_amap_get_produit_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
 
-    return generer_url_post_ecrire('amap_distributions', "table=produits&action=add")
+    return generer_url_entite('amap_distributions', "table=produits&action=add","post_ecrire")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

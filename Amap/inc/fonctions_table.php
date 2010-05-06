@@ -94,11 +94,11 @@ function affiche_tableamap($table, $tabLesEnregistrements, $max_par_page, $nombr
                 echo "<b>$j</b>";
             else if ($j > 0)
               echo "<a href='"
-                    , generer_url_ecrire($page,"debut=".$j."&table=".$table)
+                    , generer_url_entite($page,"debut=".$j."&table=".$table,"ecrire")
                     , "'>$j</a>";
             else
               echo "<a href='"
-                    , generer_url_ecrire($page,"table=".$table)
+                    , generer_url_entite($page,"table=".$table,"ecrire")
                     , "'>0</a>";
 
             if ($debut > $j  AND $debut < $j+$max_par_page)
@@ -128,8 +128,8 @@ function affiche_tableamap($table, $tabLesEnregistrements, $max_par_page, $nombr
         if ($debut > 0)
         {
             $debut_prec = max($debut - $max_par_page, 0);
-            echo generer_url_post_ecrire($page
-                                 ,"&debut=".$debut_prec."&table=".$table),
+            echo generer_url_entite($page
+                                 ,"&debut=".$debut_prec."&table=".$table,"post_ecrire"),
               "\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />",
               $visiteurs,
               "\n</form>";
@@ -139,7 +139,7 @@ function affiche_tableamap($table, $tabLesEnregistrements, $max_par_page, $nombr
 
         if ($debut_suivant < $nombre_Enregistrements)
         {
-            echo generer_url_post_ecrire($page,"tri=".$tri."&debut=".$debut_suivant."&table=".$table),
+            echo generer_url_entite($page,"tri=".$tri."&debut=".$debut_suivant."&table=".$table,"post_ecrire"),
               "\n<input type='submit' value='&gt;&gt;&gt;' class='fondo' />",
               $visiteurs,
               "\n</form>";
@@ -211,7 +211,7 @@ function afficher_n_enregistrements_amap($tabLesEnregistrements, $table)
 
             echo "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
             echo "\t\t\t<a href='"
-                       ,generer_url_ecrire($page, "action=edit&id_ligne=".$idLigne."&table=".$table)  // limitation 1
+                       ,generer_url_entite($page, "action=edit&id_ligne=".$idLigne."&table=".$table,"ecrire")  // limitation 1
                 ,"'>\n";
             echo "\t\t\t\t",$txtValeur,"\n" ;
             echo "\t\t\t</a>\n";
@@ -347,9 +347,9 @@ function table_amap_getmodif($table, $serveur, $field, $key , $idLigne)
                 $total .= "<tr><td>$k</td>\n$s</tr>\n";
           }
         }
-        return generer_url_post_ecrire($page
+        return generer_url_entite($page
                                , "table=".$table."&serveur=".$serveur
-                                   ."&mode=".$mode."&action=maj&id_ligne=".$idLigne)
+                                   ."&mode=".$mode."&action=maj&id_ligne=".$idLigne,"post_ecrire")
                                  ."<table>\n".$debut.$total
                                  ."</table>".$hiddens."<input type='submit'/></form>";
     } // if ($nombre_Enregistrements>0)
@@ -449,8 +449,8 @@ function table_amap_get($table, $serveur, $field, $key)
             $total .= "<tr><td>$k</td>\n$s</tr>\n";
       } // fin if (array_search
   } // fin foreach
-  return generer_url_post_ecrire($page
-                           , "table=".$table."&serveur=".$serveur."&mode=".$mode)
+  return generer_url_entite($page
+                           , "table=".$table."&serveur=".$serveur."&mode=".$mode,"post_ecrire")
                              ."<table>\n".$debut.$total
                              ."</table>$hiddens<input type='submit'/></form>";
 

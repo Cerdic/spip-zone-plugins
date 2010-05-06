@@ -44,13 +44,13 @@ function table_amap_lister_evenement_distribution($idSaison)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'])."&idSaison=".$idSaison." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['dateEvenement']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'])."&idSaison=".$idSaison." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
       $txtQuery = "SELECT nom_lieu";
       $txtQuery .= " FROM amap_lieu";
       $txtQuery .= " WHERE id_lieu=".$tabUnEnregistrement_1['id_lieu'];
@@ -63,7 +63,7 @@ function table_amap_lister_evenement_distribution($idSaison)
       $out .= "\t\t\t</td>\n";
 
      $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'])."&idSaison=".$idSaison." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
 
       // on recherche le nom de la première personne dans la table amap_personne...
       $txtQuery = "SELECT prenom, nom FROM amap_personne ";
@@ -78,7 +78,7 @@ function table_amap_lister_evenement_distribution($idSaison)
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'])."&idSaison=".$idSaison." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
 
       // on recherche le nom de la deuxième personne dans la table amap_personne...
       $txtQuery = "SELECT prenom, nom FROM amap_personne ";
@@ -93,7 +93,7 @@ function table_amap_lister_evenement_distribution($idSaison)
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'])."&idSaison=".$idSaison." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
 
       // on recherche le nom de la troisième personne dans la table amap_personne...
       $txtQuery = "SELECT prenom, nom FROM amap_personne ";
@@ -109,7 +109,7 @@ function table_amap_lister_evenement_distribution($idSaison)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_distributions', "action=suppr&idEvenement=".$tabUnEnregistrement_1['id_evenement'])."&idSaison=".$idSaison." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=suppr&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -248,7 +248,7 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idEvenement' value='".$idEvenement."' />\n";
  
-    return generer_url_post_ecrire('amap_distributions', "action=maj")
+    return generer_url_entite('amap_distributions', "action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -286,7 +286,7 @@ function table_amap_getAgendaUpdate_evenement_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
  
-    return generer_url_post_ecrire('amap_distributions', "action=agenda_update")
+    return generer_url_entite('amap_distributions', "action=agenda_update","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))
@@ -393,7 +393,7 @@ function table_amap_get_evenement_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
  
-    return generer_url_post_ecrire('amap_distributions', "action=add")
+    return generer_url_entite('amap_distributions', "action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))

@@ -41,19 +41,19 @@ function table_amap_lister_tarif_contrat($idSaison, $idProduit)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idType=".$tabUnEnregistrement['id_type']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=tarifs")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idType=".$tabUnEnregistrement['id_type']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=tarifs","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['label_type']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=modif&idType=".$tabUnEnregistrement['id_type']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=tarifs")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idType=".$tabUnEnregistrement['id_type']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=tarifs","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['prix_distribution']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_ecrire('amap_contrats', "action=suppr&idType=".$tabUnEnregistrement['id_type']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=tarifs")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=suppr&idType=".$tabUnEnregistrement['id_type']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=tarifs","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -116,7 +116,7 @@ function table_amap_getmodif_tarif_contrat()
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$_GET['idProduit']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idType' value='".$_GET['idType']."' />\n";
 
-    return generer_url_post_ecrire('amap_contrats', "table=tarifs&action=maj")
+    return generer_url_entite('amap_contrats', "table=tarifs&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -165,7 +165,7 @@ function table_amap_get_tarif_contrat($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    return generer_url_post_ecrire('amap_contrats', "table=tarifs&action=add")
+    return generer_url_entite('amap_contrats', "table=tarifs&action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
