@@ -16,41 +16,42 @@ include_spip ('inc/navigation_modules');
 
 function exec_action_dons() {
 		
-	$id_don = intval(_request('id'));
-	// A ameliorer: redecrire le don
-	$data = !$id_don ? '' : sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
-	$url_retour = $_SERVER['HTTP_REFERER'];
-				
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer') OR !$data) {
+	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
+	} else exec_action_dons_args(intval(_request('id')));
+}
+
+
+function exec_action_dons_args($id_don) {
+	// A ameliorer: redecrire le don
+	$data = !$id_don ? '' : sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
+	if (!$data) {
+		include_spip('inc/minipres');
+		echo minipres(_T('zxml_inconnu_id') . $id_don);
 	} else {
+
+		$url_retour = $_SERVER['HTTP_REFERER'];
+				
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-			association_onglets();
-			
-			echo debut_gauche("",true);
-			
-			echo debut_boite_info(true);
-			echo association_date_du_jour();	
-			echo fin_boite_info(true);
-		
-			$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-			echo bloc_des_raccourcis($res);
-			
-			echo debut_droite("", true);
-			
-			echo debut_cadre_relief(  "", false, "", $titre = _L('Action sur les dons'));
-			$res = '<div align="center">';
-			$res .= '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le don ') . $id_don . '.</strong></p>';
+		association_onglets();
+		echo debut_gauche("",true);
+		echo debut_boite_info(true);
+		echo association_date_du_jour();	
+		echo fin_boite_info(true);
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+		echo debut_droite("", true);
+		echo debut_cadre_relief(  "", false, "", $titre = _L('Action sur les dons'));
+		$res = '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le don ') . $id_don . '.</strong></p>';
 
-			$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
-			$res .= '</div>';		
+		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
 
-			echo redirige_action_post('supprimer_dons', $id_don, 'dons', '', $res);
-			fin_cadre_relief();  
-			echo fin_gauche(),fin_page(); 
+		echo redirige_action_post('supprimer_dons', $id_don, 'dons', '', "<div>$res</div>");
+		fin_cadre_relief();  
+		echo fin_gauche(),fin_page(); 
 	}
 } 
 ?>
