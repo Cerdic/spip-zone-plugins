@@ -76,9 +76,9 @@ function exec_edit_vente() {
 		echo '<input name="date_vente" type="text" value="'.$date_vente.'" id="date_vente" class="formo" />';
 		echo '<label for="article"><strong>' . _L('Article :') . '</strong></label>';
 		echo '<input name="article"  type="text" value="'.$article.'" id="article" class="formo" />';
-		echo '<label for="code"><strong>Code de l\'article :</strong></label>';
+		echo '<label for="code"><strong>', _L('Code de l\'article :'), '</strong></label>';
 		echo '<input name="code"  type="text" value="'.$code.'" id="code" class="formo" />';
-		echo '<label for="acheteur"><strong>Nom de l\'acheteur :</strong></label>';
+		echo '<label for="acheteur"><strong>', _L('Nom de l\'acheteur :'), '</strong></label>';
 		echo '<input name="acheteur" type="text" value="'.$acheteur.'" id="acheteur" class="formo" />';
 		echo '<label for="id_acheteur"><strong>' . _L('N&deg; de membre :') . '</strong></label>';
 		echo '<input name="id_acheteur" type="text" value="'.$id_acheteur.'" id="id_acheteur" class="formo" />';
@@ -99,14 +99,14 @@ function exec_edit_vente() {
 		echo '<input name="don" type="text" value="'.$don.'" id="don" class="formo" />';
 		echo '<label for="date_envoi"><strong>' . _L('Envoy&eacute; le (AAAA-MM-JJ) :') . '</strong></label>';
 		echo '<input name="date_envoi"  type="text" value="'.$date_envoi.'" id="date_envoi" class="formo" />';
-		echo '<label for="frais_envoi"><strong>Frais d\'envoi (en &euro;) :</strong></label>';
+		echo '<label for="frais_envoi"><strong>', _L('Frais d\'envoi (en &euro;) :'), '</strong></label>';
 		echo '<input name="frais_envoi" type="text" value="'.$frais_envoi.'" id="frais_envoi" class="formo" />';
 		echo '<label for="commentaire"><strong>' . _L('Commentaires :') . '</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
-		echo '<input name="id" type="hidden" value="'.$id_vente.'" >';		
-		echo '<input name="agir" type="hidden" value="'.$action.'">';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
+		echo '<input name="id" type="hidden" value="'.$id_vente.'" />';		
+		echo '<input name="agir" type="hidden" value="'.$action.'" />';
+		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'" />';
 		
 		echo '<div style="float:right;">';
 		echo '<input type="submit" value="';

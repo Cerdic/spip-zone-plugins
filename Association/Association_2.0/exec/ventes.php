@@ -23,7 +23,6 @@ function exec_ventes(){
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_agir_ventes = generer_url_ecrire('agir_ventes');
-		$url_edit_vente=generer_url_ecrire('edit_vente','agir=modifie');
 		$url_ajout_vente=generer_url_ecrire('edit_vente','agir=ajoute');
 		
 		$annee=intval(_request('annee'));
@@ -82,8 +81,8 @@ function exec_ventes(){
 		echo '</table>';
 		
 		//TABLEAU
-		echo '<form action="'.$url_agir_ventes.'" method="POST">';
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo '<form action="'.$url_agir_ventes.'" method="post">';
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td style="text-align:right"><strong>' . _L('ID') . '</strong></td>';
 		echo '<td style="text-align:right"><strong>' . _L('Date') . '</strong></td>';
@@ -98,20 +97,25 @@ function exec_ventes(){
 		$ventes = '';
 		$query = sql_select('*', 'spip_asso_ventes', "date_format( date_vente, '%Y' )=$annee", '',  "id_vente DESC") ;
 		while ($data = sql_fetch($query)) {
-			if(isset($data['date_envoi'])) { $class= "pair"; }
-			else {$class="impair";}   
-			$ventes .= '<tr> ';
-			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.$data['id_vente'].'</td>';
-			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.association_datefr($data['date_vente']).'</td>';
-			$ventes .= '<td class="'.$class. ' border1">'.$data['article'].'</td>';
-			$ventes .= '<td class="'.$class. ' border1">'.$data['code'].'</td>';
-			$ventes .= '<td class="'.$class. ' border1">'.$data['acheteur'].'</td>';
-			$ventes .= '<td class="'.$class. ' border1">'.$data['id_acheteur'].'</td>';
-			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.$data['quantite'].'</td>';
-			$ventes .= '<td class="'.$class. ' border1" style="text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
-			$ventes .= '<td class="'.$class. ' border1" style="text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="' . _L('Mettre &agrave; jour la vente') . '"></a>';
-			$ventes .= '<td class="'.$class. ' border1" style="text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
-			$ventes .= '</tr>';
+			$class = " class='border1 " . ($data['date_envoi'] ? "pair" : "impair") . "'";
+			$id = $data['id_vente'];
+			$q = $data['quantite'];
+			$ventes .= '<tr> '
+			. "\n<td$class style='text-align:right'>".$id.'</td>'
+			. "\n<td$class style='text-align:right'>"
+			. association_datefr($data['date_vente']).'</td>'
+			. "\n<td$class>".$data['article'].'</td>'
+			. "\n<td$class>".$data['code'].'</td>'
+			. "\n<td$class>".$data['acheteur'].'</td>'
+			. "\n<td$class>".$data['id_acheteur'].'</td>'
+			. "\n<td$class style='text-align:right'>".$q.'</td>'
+			. "\n<td$class style='text-align:right'>"
+			. association_nbrefr($q*$data['prix_vente']).'</td>'
+			. "\n<td$class style='text-align:center'><a href='"
+			. generer_url_ecrire('edit_vente',"agir=modifie&id=$id")
+			. "'><img src='"._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif\' title="' . _L('Mettre &agrave; jour la vente') . '"></a>'
+			."\n<td$class style='text-align:center'><input name='delete[]' type='checkbox' value='$id' /></td>"
+			.'</tr>';
 		}     
 		echo $ventes, '</table>';
 		
