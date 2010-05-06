@@ -1,4 +1,6 @@
 <BOUCLE_doc (DOCUMENTS) {id_document}>
+[(#SET{largeur,#ENV{largeur,#LARGEUR}})][
+(#SET{hauteur,#ENV{hauteur,#HAUTEUR}})]
 [(#REM) Document Flash (.flv) ?
 	Documentation:
 	- player_flv_js.swf -> http://flv-player.net/players/js/documentation/
@@ -7,11 +9,11 @@
 	- player_flv.swf -> http://flv-player.net/players/normal/documentation/
 	- player_flv_mini.swf -> http://flv-player.net/players/mini/documentation/
 ]
-<object type="application/x-shockwave-flash" data="[(#CHEMIN{flash/player_flv_maxi.swf}|url_absolue)]" width="[(#LARGEUR|sinon{400})]" height="[(#HAUTEUR|sinon{300})]">
+<object type="application/x-shockwave-flash" data="[(#CHEMIN{flash/player_flv_maxi.swf}|url_absolue)]" width="[(#GET{largeur,400})]" height="[(#GET{hauteur,300})]">
 <param name="movie" value="[(#CHEMIN{flash/player_flv_maxi.swf}|url_absolue)]" />
 <param
  name="FlashVars"
- value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|sinon{400})]&amp;height=[(#HAUTEUR|sinon{300})]&amp;flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|sinon{400})]&amp;height=[(#HAUTEUR|sinon{300})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)][(#LOGO_DOCUMENT||extraire_attribut{src}|match{flv.png$}|?{'',' '})&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})][&amp;srturl=(#ENV{srturl})]"/>
+ value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#GET{largeur,400})]&amp;height=[(#GET{hauteur,300})]&amp;flv=[(#URL_DOCUMENT|url_absolue)]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1[&amp;title=(#TITRE|urlencode)][(#LOGO_DOCUMENT|extraire_attribut{src}|match{flv.png$}|?{'',' '})&amp;startimage=[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})][&amp;srturl=(#ENV{srturl})]" />
 <param name="wmode" value="transparent" />
 <param name="allowFullScreen" value="true" />[
 <strong>(#TITRE)</strong>][
