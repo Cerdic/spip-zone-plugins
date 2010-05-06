@@ -146,10 +146,6 @@ function typoenluminee_pre_propre($texte) {
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
-	// remplace les fausses listes a puce par de vraies
-	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
-	// $texte =  preg_replace('/^-\s+/m','-* ',$texte); # deja fait dans post_propre
-
 	return $texte;
 }
 
@@ -204,15 +200,18 @@ function typoenluminee_pre_typo($texte) {
 	global $debut_italique, $fin_italique;
 	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
+	if(!$texte) return $texte;
 
-	if ($local_barre_typo_pas_de_fausses_puces===NULL){
-		// remplace les fausses listes a puce par de vraies
+	if ($local_barre_typo_pas_de_fausses_puces===null){
+		// remplace les fausses listes a puce par de vraies ?
 		// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
-		// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
-		if (!function_exists('lire_config')) {
+		// Mettre $GLOBALS['barre_typo_pas_de_fausses_puces'] = true; dans mes_options.php pour avoir ce comportement
+		if (isset($GLOBALS['barre_typo_pas_de_fausses_puces'])) {
 			$local_barre_typo_pas_de_fausses_puces = $GLOBALS['barre_typo_pas_de_fausses_puces'];
 		} else {
-			$local_barre_typo_pas_de_fausses_puces = (lire_config('bte/puces','Non') == 'Oui')?true:false;
+			if (function_exists('lire_config')) {
+				$local_barre_typo_pas_de_fausses_puces = (lire_config('bte/puces','Non') == 'Oui')?true:false;
+			}
 		}
 		tester_variable('debut_italique', "<i$class_spip>");
 		tester_variable('fin_italique', '</i>');
@@ -247,8 +246,6 @@ function typoenluminee_pre_typo($texte) {
 			/* 22 */ 	"&hellip;",
 		);
 	}
-	if(!$texte) return $texte;
-
 	if ($local_barre_typo_pas_de_fausses_puces === true) {
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 	}

@@ -13,7 +13,7 @@
 
 <fieldset><legend><:enlumtypo:cfg_puces:></legend>
 	<?php if (isset($GLOBALS['barre_typo_pas_de_fausses_puces'])) { ?>
-	<p>Configuré dans le mes_options par 'barre_typo_pas_de_fausses_puces'</p>
+	<p>Configuré dans le mes_options par 'barre_typo_pas_de_fausses_puces'&nbsp;:<br /><?php if ($GLOBALS['barre_typo_pas_de_fausses_puces'] === true) { ?>Remplacement<?php } else { ?>Conserver le traitement par défaut de SPIP<?php } ?></p>
 	<?php } else { ?>
 	<label for="sc_puces">Remplacement des fausses puces de SPIP (- en début de ligne) par de vraies listes à puces (-* en début de ligne)&nbsp;:</label>
 	<select name="puces" id="sc_puces" class="forml">
