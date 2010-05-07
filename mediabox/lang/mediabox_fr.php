@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_box' => 'Bo&icirc;te Multim&eacute;dia',
 	'titre_page_configurer_box' => 'Configuration de la Bo&icirc;te multim&eacute;dia',
 
-	'explication_selecteur_commun' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront la bo&icirc;te. (Expression CSS ou &eacute;tendue jQuery)',
+	'explication_selecteur' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront la bo&icirc;te. (Expression CSS ou &eacute;tendue jQuery)',
 	'explication_selecteur_galerie' => 'Indiquez la cible des &eacute;l&eacute;ments &agrave; regrouper en galerie. (Expression CSS ou &eacute;tendue jQuery)',
 	'explication_traiter_toutes_images' => 'Ins&eacute;rer une bo&icirc;te sur toutes les images ?',
 
