@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/**
 	* Plugin Association
 	*
@@ -67,8 +67,8 @@ function exec_edit_labels(){
 		echo '</table>';
 		
 		echo '<form method="post" action="'.$url_action_labels.'">';
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr bgcolor="#DBE1C5">';
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo '<tr style="background-color: #DBE1C5">';
 		echo '<td><strong>';
 		if ($indexation=="id_asso") { echo _T('asso:adherent_libelle_id_asso');}
 		else { echo _T('asso:adherent_libelle_id_adherent');} 
@@ -102,13 +102,13 @@ function exec_edit_labels(){
 				else { echo '&nbsp;'; }
 			echo ' '.$data['prenom'].' '.$data["nom_famille"].'</td>';
 			echo '<td style="vertical-align:top;" class="'.$class. ' border1">'.$data['adresse'].'<br />'.$data['code_postal'].' '.$data['ville'].'</td>';
-			echo '<td style="text-align:center;;vertical-align:top;" class="'.$class. ' border1">';
+			echo '<td style="text-align:center;vertical-align:top;" class="'.$class. ' border1">';
 			echo '<input name="label[]" type="checkbox" value="'.$data['id'].'" checked="checked" />';
 			echo '</td>';
 			echo '</tr>';
 		}
 		echo '<tr> ';
-		echo '<td colspan="4" style="text-align:right;"><input type="submit" name="Submit" value="Etiquettes" class="fondo"></td>';
+		echo '<td colspan="4" style="text-align:right;"><input type="submit" value="Etiquettes" class="fondo" /></td>';
 		echo '</tr>';
 		echo '</table>';
 		echo '</form>';

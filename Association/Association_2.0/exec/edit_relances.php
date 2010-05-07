@@ -85,7 +85,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		echo '<td><strong>' . _L('T&eacute;l&eacute;phone') . '</strong></td>';
 		echo '<td><strong>' . _L('Portable') . '</strong></td>';
 		echo '<td><strong>' . _L('Validit&eacute;') . '</strong></td>';
-		echo '<td><strong>' . _L('Env') . '</strong></td>';
+		echo '<td><strong>' . _L('Envoi') . '</strong></td>';
 		echo '</tr>';
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " a.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 		while ($data = sql_fetch($query)) {
