@@ -122,9 +122,9 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'utiliser_descriptif' => 'Utiliser le champ Descriptif',
 'utiliser_ps' => 'Utiliser le champ Post-Scriptum',
 'utiliser_agenda_breve' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme de br&egrave;ves).',
-'utiliser_agenda_article' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme d\'articles).'
+'utiliser_agenda_article' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme d\'articles).',
 
-/**
+
 // v 0.4
 
 // A
@@ -440,7 +440,6 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'votre_mail' => 'Votre email',
 'votre_groupe' => 'Votre groupe &eacute;ventuel',
 'votre_phone' => 'Votre num&eacute;ro de tel'
-**/
 );
 
 ?>
