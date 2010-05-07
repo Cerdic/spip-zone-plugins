@@ -42,7 +42,7 @@ function exec_action_comptes(){
 			echo debut_droite('', true);
 			
 			debut_cadre_relief(  "", false, "",  _T('asso:operations_comptables'));
-			echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte n&deg; '. $id_compte . '&nbsp;:') . '</strong></p>';
+			echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte'). ' ' . $id_compte . '</strong></p>';
 
 			$res = action_comptes_ligne("id_compte=$id_compte");
 			$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
@@ -78,7 +78,7 @@ function exec_action_comptes(){
 			echo '<p>' . _L('Vous vous appr&ecirc;tez &agrave; valider les op&eacute;rations&nbsp;:') .  '</p>';
 
 			$res = action_comptes_ligne(sql_in("id_compte", $_POST['valide']));
-			$res .= '<p>' . _L('Apr&egrave;s confirmation vous ne pourrez plus modifier ces op&eacute;rations !') . '</p>';
+			$res .= '<p>' . _L('Apr&egrave;s confirmation vous ne pourrez plus modifier ces op&eacute;rations.') . '</p>';
 			
 			$res .= '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
 

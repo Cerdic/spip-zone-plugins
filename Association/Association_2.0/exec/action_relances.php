@@ -59,11 +59,11 @@ function exec_action_relances(){
 			echo debut_droite("",true);
 			
 			debut_cadre_relief(  "", false, "", $titre = _T('Relance de cotisations'));
-			echo '<p><strong>', _L('Vous vous appr&ecirc;tez &agrave; envoyer ') .$count;
+			echo '<p><strong>', _L('Vous vous appr&ecirc;tez &agrave; envoyer') . " $count ";
 			if ($count==1)
-			  { echo _L(' relance');}
+			  { echo _L('relance');}
 			else
-			  { echo _L(' relances');}
+			  { echo _L('relances');}
 			echo '</strong></p>';
 			echo '<p>'.$sujet.'</p>';
 			echo '<fieldset>';

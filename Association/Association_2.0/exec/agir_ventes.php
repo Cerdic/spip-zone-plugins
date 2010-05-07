@@ -78,8 +78,7 @@ function exec_agir_ventes(){
 			
 			echo debut_cadre_relief(  "", false, "", $titre = _T('Action sur les ventes associatives'));
 			
-			echo '<p><strong>', _L('Vous vous appr&ecirc;tez &agrave; effacer ') .$count;
-			if ($count==1){echo _L(' vente !');} else {echo _L(' ventes !');}
+			echo '<p><strong>', _L('Vous vous appr&ecirc;tez &agrave; effacer') . " $count " . (($count==1) ? _L('vente') : _L('ventes'));
 			echo '</strong></p>';
 			echo '<table>';
 			echo '<form action="'.$url_agir_ventes.'"  method="post">';
