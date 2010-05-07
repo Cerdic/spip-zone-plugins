@@ -22,7 +22,7 @@ function association_version_base()
 	static $version = 0;
 	if (!$version) {
 		$f = _DIR_PLUGINS . 'Association_2.0/plugin.xml';
-		if (!lire_fichier($f, &$r))
+		if (!lire_fichier($f, $r))
 			spip_log("fichier $f illisble");
 		elseif (preg_match("@<version>(\d+)</version>@", $r, $r))
 			$version = $r[1];
