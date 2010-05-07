@@ -234,6 +234,21 @@
 
 		$this.each(function () {
 			var data = $.extend({}, $(this).data(colorbox) ? $(this).data(colorbox) : defaults, options);
+			var eltclass = $(this).attr('class');
+			
+			if (eltclass.indexOf("boxWidth-")!==-1) {
+				var w = eltclass.match(/boxWidth-([^\s'">]*)/);
+				w = w[1].replace(/pc/,'%'); // % not allowed in html attribute ; use 100pc instead of 100%
+				data = $.extend(data,{width:w});
+			}
+			if (eltclass.indexOf("boxHeight-")!==-1) {
+				var h = eltclass.match(/boxHeight-([^\s'">]*)/);
+				h = h[1].replace(/pc/,'%'); // % not allowed in html attribute ; use 100pc instead of 100%
+				data = $.extend(data,{height:h});
+			}
+			if (eltclass.indexOf("boxIframe")!==-1) {
+				data = $.extend(data,{iframe:true});
+			}
 
 			$(this).data(colorbox, data).addClass("cboxElement");
 

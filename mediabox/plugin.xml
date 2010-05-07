@@ -1,15 +1,26 @@
 <plugin>
 	<nom>MediaBox</nom>
 	<auteur>
-	ColorBox par [ColorPowered->http://colorpowered.com/colorbox/]
+	[ColorPowered->http://colorpowered.com/colorbox/] pour la ColorBox
 _ Mis en plugin pour SPIP par [Cedric->http://www.yterium.com]
 	</auteur>
-	<version>0.5.4</version>
+	<version>0.5.6</version>
 	<icon>prive/themes/spip/images/mediabox-32.png</icon>
 	<etat>test</etat>
 	<description>
 Bo&icirc;te multim&eacute;dia
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
+
+Par d&eacute;faut, tous les liens vers des images (avec un attribut type d&eacute;crivant le mime/type de l'image) ainsi que
+les liens avec la classe <code>.mediabox</code> sont enrichis par la bo&icirc;te multimedia.
+
+Il est possible de configurer la boite avec des classes supplémentaires :
+-* <code>boxIframe</code> permet de demander à ouvrir le lien dans une bo&icirc;te en iframe ;
+-* <code>boxWidth-350px</code> permet de spécifier une largeur de 350px pour la boite ;
+-* <code>boxHeight-90pc</code> permet de spécifier une hauteur de 90% pour la boite ;
+
+Un panneau de configuration vous permet de modifier ces r&eacute;glages &agrave; votre convenance,
+ainsi que l'aspect de la bo&icirc;te parmi les habillages disponibles.
 	</description>
 	<lien>http://colorpowered.com/colorbox/</lien>
 	<prefix>mediabox</prefix>
@@ -32,12 +43,12 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	<bouton id='mediabox' parent='configuration'>
 		<icone>prive/themes/spip/images/mediabox-24.png</icone>
 		<titre>mediabox:titre_menu_box</titre>
-		<url>mediabox</url>
+		<url>config_mediabox</url>
 	</bouton>
 	<bouton id='mediabox2' parent='bando_configuration'>
 		<icone>images/mediabox-16.png</icone>
 		<titre>mediabox:titre_menu_box</titre>
-		<url>mediabox</url>
+		<url>config_mediabox</url>
 	</bouton>
 	<categorie>multimedia</categorie>
 </plugin>

@@ -21,7 +21,7 @@ function mediabox_config($public=null){
 	if ((is_null($public) AND test_espace_prive()) OR $public===false) {
 		$config = array_merge($config,array(
 		'selecteur_galerie' => '#portfolios a[type^=\'image/\']',
-		'selecteur_commun' => '.mediabox:not(body), .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
+		'selecteur_commun' => '.mediabox, .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
 		'skin' => 'white-shadow',
 		'maxWidth'=>'90%',
 		'maxHeight'=>'95%',
@@ -53,19 +53,19 @@ function mediabox_insert_head($flux){
 <script src="'.find_in_path('javascript/spip.mediabox.js').'" type="text/javascript"></script>';
 
 	$flux .='<script type="text/javascript">/* <![CDATA[ */
-var box_settings = {traiter_toutes_images:'.($config['traiter_toutes_images'] == 'oui'?'true':'false')
-.',selecteur_galerie:"'.$config['selecteur_galerie']
-.'",selecteur_commun:"'.$config['selecteur_commun']
-.'",transition:"'.$config['transition']
+var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'false')
+.',sel_g:"'.$config['selecteur_galerie']
+.'",sel_c:"'.$config['selecteur_commun']
+.'",trans:"'.$config['transition']
 .'",speed:"'.$config['speed']
-.'",maxWidth:"'.$config['maxWidth']
-.'",maxHeight:"'.$config['maxHeight']
-.'",minWidth:"'.$config['minWidth']
-.'",minHeight:"'.$config['minHeight']
-.'",str_slideshowStart:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStart')))
-.'",str_slideshowStop:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStop')))
-.'",str_current:"'._T('mediabox:boxstr_current')
-.'",str_previous:"'._T('mediabox:boxstr_previous')
+.'",maxW:"'.$config['maxWidth']
+.'",maxH:"'.$config['maxHeight']
+.'",minW:"'.$config['minWidth']
+.'",minH:"'.$config['minHeight']
+.'",str_ssStart:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStart')))
+.'",str_ssStop:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStop')))
+.'",str_cur:"'._T('mediabox:boxstr_current')
+.'",str_prev:"'._T('mediabox:boxstr_previous')
 .'",str_next:"'._T('mediabox:boxstr_next')
 .'",str_close:"'._T('mediabox:boxstr_close')
 .'"};

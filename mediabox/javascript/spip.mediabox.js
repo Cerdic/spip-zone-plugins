@@ -2,29 +2,29 @@
 // and "the ajaxed element" when called because of onAjaxLoad
 var mediabox_init = function() {
 	var options = {
-		transition:box_settings.transition,
+		transition:box_settings.trans,
 		speed:box_settings.speed,
-		maxWidth:box_settings.maxWidth,
-		maxHeight:box_settings.maxHeight,
-		minWidth:box_settings.minWidth,
-		minHeight:box_settings.minHeight,
-		slideshowStart:box_settings.str_slideshowStart,
-		slideshowStop:box_settings.str_slideshowStop,
-		current:box_settings.str_current,
-		previous:box_settings.str_previous,
+		maxWidth:box_settings.maxW,
+		maxHeight:box_settings.maxH,
+		minWidth:box_settings.minW,
+		minHeight:box_settings.minH,
+		slideshowStart:box_settings.str_ssStart,
+		slideshowStop:box_settings.str_ssStop,
+		current:box_settings.str_cur,
+		previous:box_settings.str_prev,
 		next:box_settings.str_next,
 		close:box_settings.str_close
 	};
 	
-	// passer le portfolio en mode galerie la box
-	if (box_settings.selecteur_galerie){
-		$(box_settings.selecteur_galerie, this)
+	// passer le portfolio de la dist en mode galerie
+	if (box_settings.sel_g){
+		$(box_settings.sel_g, this)
 		.attr("onclick","") // se debarrasser du onclick de SPIP
 		.colorbox(jQuery.extend({}, options, {rel:'galerieauto',slideshow:true,slideshowAuto:false}))
 		.addClass("hasbox");
 	}
 
-	if (box_settings.traiter_toutes_images) {
+	if (box_settings.tt_img) {
 		// selectionner tous les liens vers des images
 		$("a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']",this).not('.hasbox')
 		.attr("onclick","") // se debarrasser du onclick de SPIP
@@ -34,8 +34,8 @@ var mediabox_init = function() {
 	}
 
 	// charger la box sur autre chose
-	if (box_settings.selecteur_commun){
-		$(box_settings.selecteur_commun).not('.hasbox')
+	if (box_settings.sel_c){
+		$(box_settings.sel_c).not('.hasbox')
 		.colorbox(options)
 		.addClass("hasbox") // noter qu\'on l\'a vue
 		;
@@ -55,19 +55,19 @@ var mediabox_init = function() {
 	 * onShow:			(Function:null) The callback function used after the modal dialog has opened
 	 * onClose:			(Function:null) The callback function used in place of SimpleModal's close
 	 */
-	$.modalbox = function (href, options) {
+	$.mediabox = function (href, options) {
 		var cbox_options = {
 			href:href,
 			overlayClose: (options && options.overlayClose) || false,
 			iframe: (options && options.iframe) || false,
 			minHeight: (options && options.minHeight) || '',
-			maxHeight: (options && options.maxHeight) || box_settings.maxHeight,
-			minWidth: (options && options.minWidth) || box_settings.minWidth,
-			maxWidth: (options && options.maxWidth) || box_settings.maxWidth,
-			slideshowStart:box_settings.str_slideshowStart,
-			slideshowStop:box_settings.str_slideshowStop,
-			current:box_settings.str_current,
-			previous:box_settings.str_previous,
+			maxHeight: (options && options.maxHeight) || box_settings.maxH,
+			minWidth: (options && options.minWidth) || box_settings.minW,
+			maxWidth: (options && options.maxWidth) || box_settings.maxW,
+			slideshowStart:box_settings.str_ssStart,
+			slideshowStop:box_settings.str_ssStop,
+			current:box_settings.str_cur,
+			previous:box_settings.str_prev,
 			next:box_settings.str_next,
 			close:box_settings.str_close,
 			onOpen: (options && options.onOpen) || null,
@@ -77,13 +77,13 @@ var mediabox_init = function() {
 		
 		return $.fn.colorbox(cbox_options);
 	};
+	$.mediaboxClose = function () {$.fn.colorbox.close();};
 
+	// api modalbox
+	$.modalbox = $.mediabox;
 	$.modalboxload = function (url, options) {
 		$.modalbox(url,options);
 	};
-
-	$.modalboxclose = function () {
-		$.fn.colorbox.close();
-	};
+	$.modalboxclose = $.mediaboxClose;
 
 })(jQuery);
