@@ -365,9 +365,9 @@ function exec_amap_paniers()
       echo fin_cadre_trait_couleur(true);
 
           echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
-										." de la saison ".$_POST['idSaison']
-										." pour la distribution ".$_POST['idDistrib']
-										." de produit ".$_POST['idProduit']);
+										._T('amap:choix_contrat_saison').$_POST['idSaison']
+										._T('amap:choix_contrat_distribution').$_POST['idDistrib']
+										._T('amap:choix_contrat_produit2').$_POST['idProduit']);
       echo table_amap_lister_panier($_POST['idSaison'], $_POST['idDistrib'], $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
@@ -410,9 +410,9 @@ function exec_amap_paniers()
           echo fin_cadre_trait_couleur(true);
 
               echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
-										." de la saison ".$_GET['idSaison']
-										." pour la distribution ".$_GET['idDistrib']
-										." de produit ".$_GET['idProduit']);
+										._T('amap:choix_contrat_saison').$_GET['idSaison']
+										._T('amap:choix_contrat_distribution').$_GET['idDistrib']
+										._T('amap:choix_contrat_produit2').$_GET['idProduit']);
           echo table_amap_lister_panier($_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
@@ -436,9 +436,9 @@ function exec_amap_paniers()
           echo fin_cadre_trait_couleur(true);
 
               echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
-										." de la saison ".$_GET['idSaison']
-										." pour la distribution ".$_GET['idDistrib']
-										." de produit ".$_GET['idProduit']);
+										._T('amap:choix_contrat_saison').$_GET['idSaison']
+										._T('amap:choix_contrat_distribution').$_GET['idDistrib']
+										._T('amap:choix_contrat_produit2').$_GET['idProduit']);
           echo table_amap_lister_panier($_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 

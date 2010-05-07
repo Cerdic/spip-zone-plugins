@@ -644,14 +644,14 @@ function exec_amap_contrats()
       echo fin_cadre_trait_couleur(true);
 
         echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
-											."pour le produit ".$_REQUEST['idProduit']
-											." de la saison ".$_REQUEST['idSaison']);
+											.('amap:choix_contrat_produit').$_REQUEST['idProduit']
+											._T('amap:choix_contrat_saison').$_REQUEST['idSaison']);
       echo table_amap_lister_liste_contrat($_REQUEST['idSaison'], $_REQUEST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
         echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2
-											."pour le produit ".$_REQUEST['idProduit']
-											." de la saison ".$_REQUEST['idSaison']);
+											.('amap:choix_contrat_produit').$_REQUEST['idProduit']
+											._T('amap:choix_contrat_saison').$_REQUEST['idSaison']);
       echo table_amap_get_liste_contrat($_REQUEST['idSaison'], $_REQUEST['idProduit']);
       echo fin_cadre_trait_couleur(true);
     }  // if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -686,14 +686,14 @@ function exec_amap_contrats()
           echo fin_cadre_trait_couleur(true);
 
             echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
-											."pour le produit ".$_REQUEST['idProduit']
-											." de la saison ".$_REQUEST['idSaison']);
+											.('amap:choix_contrat_produit').$_REQUEST['idProduit']
+											._T('amap:choix_contrat_saison').$_REQUEST['idSaison']);
           echo table_amap_lister_liste_contrat($_REQUEST['idSaison'], $_REQUEST['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
             echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2
-											."pour le produit ".$_REQUEST['idProduit']
-											." de la saison ".$_REQUEST['idSaison']);
+											.('amap:choix_contrat_produit').$_REQUEST['idProduit']
+											._T('amap:choix_contrat_saison').$_REQUEST['idSaison']);
           echo table_amap_get_liste_contrat($_REQUEST['idSaison'], $_REQUEST['idProduit']);
           echo fin_cadre_trait_couleur(true);
           break;
@@ -709,14 +709,14 @@ function exec_amap_contrats()
           echo fin_cadre_trait_couleur(true);
 
             echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
-											."pour le produit ".$_REQUEST['idProduit']
-											." de la saison ".$_REQUEST['idSaison']);
+											._T('amap:choix_contrat_produit').$_REQUEST['idProduit']
+											._T('amap:choix_contrat_saison').$_REQUEST['idSaison']);
           echo table_amap_lister_liste_contrat($_REQUEST['idSaison'], $_REQUEST['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
             echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2
-											."pour le produit ".$_REQUEST['idProduit']
-											." de la saison ".$_REQUEST['idSaison']);
+											._T('amap:choix_contrat_produit').$_REQUEST['idProduit']
+											._T('amap:choix_contrat_saison').$_REQUEST['idSaison']);
           echo table_amap_get_liste_contrat($_REQUEST['idSaison'], $_REQUEST['idProduit']);
           echo fin_cadre_trait_couleur(true);
           break;
