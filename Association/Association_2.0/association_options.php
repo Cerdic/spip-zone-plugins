@@ -29,7 +29,7 @@ function association_bouton($texte, $image, $script, $args='')
 	. generer_url_ecrire($script, $args)
 	. '"><img src="'
 	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image 
-	. '" title="'
+	. '" alt=" " title="'
 	. $texte
 	. '" /></a>';
 }
