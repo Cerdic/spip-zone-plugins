@@ -91,7 +91,7 @@ function exec_mutualisation_dist() {
 			$plugins = '-';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background-image: url(${url}spip.php?action=cron&amp;renouvelle_alea=yo);'>
+			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)'>
 			<td style='text-align:right;'>$v$erreur$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
@@ -166,7 +166,7 @@ function exec_mutualisation_dist() {
 function test_upgrade_site($meta) {
 	if ($GLOBALS['spip_version_base']
 	!= str_replace(',','.',$meta['version_installee'])) {
-		$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
+		$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
 		$secret = md5($secret);
 		return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
@@ -187,7 +187,7 @@ function adminplugin_site($meta, $liste_plug_compat) {
 		ksort($plugins);
 		foreach ($plugins as $plugin) {
 			if ($cfg[$plugin]['version'] <> $liste_plug_compat[$plugin]['version']) {
-				$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
+				$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
 				$secret = md5($secret);
 				return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>

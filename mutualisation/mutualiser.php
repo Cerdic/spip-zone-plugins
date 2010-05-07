@@ -210,6 +210,14 @@ function demarrer_site($site = '', $options = array()) {
 			require_once dirname(__FILE__).'/mutualiser_upgradeplugins.php';
 			mutualiser_upgradeplugins();
 		}
+		if (_request('renouvelle_alea') == 'yo') {
+		    include_spip('inc/headers');
+		    http_status(204); // No Content
+		    header("Connection: close");
+		    include_spip('inc/acces');
+		    renouvelle_alea();
+		    die;
+		}
 	}
 	
 	
