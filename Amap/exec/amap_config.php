@@ -43,7 +43,7 @@ function exec_amap_config()
   pipeline('exec_init',array('args'=>array('exec'=>'amap_config'),'data'=>''));
 
   $commencer_page = charger_fonction('commencer_page', 'inc');
-  echo $commencer_page("Configuration du module", "configuration", "amap_config");
+  echo $commencer_page(_T('amap:configuration_du_plugin'), "configuration", "amap_config");
 
   echo "<br /><br /><br />\n";
   echo gros_titre(_T('amap:configuration_du_plugin'),'',false);
@@ -159,7 +159,7 @@ function exec_amap_config()
       case "edit" :
         // avec action=maj
         //  ==> Affichage formulaire de modification
-        echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table ".$table);
+        echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table').$table);
         if ($table == 'amap_produit')
           echo "<div class='verdana2' style='text-align: justify'>"
              .table_amap_getmodif_paysan()."</div>";
@@ -191,8 +191,9 @@ function exec_amap_config()
   echo pipeline('affiche_milieu',array('args'=>array('exec'=>'amap_config'),'data'=>''));
   echo "\n<br/><br/><hr/>\n"
           ,"<center><i class='arial1' >"
-          ,"Plugin Amap v1.1 par St&eacute;phane Moulinet -dadaprod.org - <br/>"
-          ,"pour la gestion des 'tables amap'."
+          ,"Plugin Amap v1.1 par St&eacute;phane Moulinet - dadaprod.org - <br/>"
+          ,"pour la gestion des 'tables amap'.<br/>"
+          ,"Adaptation v1.2 par E-cosystems - e-cosystems.org - <br/>"
           ,"</i></center>\n<hr/>\n" ;
   echo fin_gauche().fin_page();
 }

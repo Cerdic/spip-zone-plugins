@@ -45,10 +45,10 @@ function exec_amap_contrats()
   pipeline('exec_init',array('args'=>array('exec'=>'amap_contrats'),'data'=>''));
 
   $commencer_page = charger_fonction('commencer_page', 'inc');
-  echo $commencer_page("Gestion des contrats", "contrats", "amap_contrats");
+  echo $commencer_page(_T('amap:gestion_contrats'), "contrats", "amap_contrats");
 
   echo "<br /><br /><br />\n";
-  echo gros_titre("Gestion des contrats",'',false);
+  echo gros_titre(_T('amap:gestion_contrats'),'',false);
   echo barre_onglets("amap", "contrats");
 
   echo debut_gauche("", true);
@@ -97,8 +97,8 @@ function exec_amap_contrats()
 
 
   if ($table == 'tarifs') { // Page tarif
-    $msg_presentation_1 = "Liste des tarifs possibles pour la saison ";
-    $msg_presentation_2 = "Enregistrement d'un tarif suppl&eacute;mentaire pour la saison ";
+    $msg_presentation_1 = _T('amap:tarifs_enregistres');
+    $msg_presentation_2 = _T('amap:tarifs_enregistrement');
 
    // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -168,7 +168,7 @@ function exec_amap_contrats()
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_prix");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_prix'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_tarif_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -176,7 +176,7 @@ function exec_amap_contrats()
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_prix");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_prix'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_suppr_tarif_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -226,8 +226,8 @@ function exec_amap_contrats()
 
   } // fin if ($page == 'tarifs')
   else if ($table == 'reglement') { // Page reglement
-    $msg_presentation_1 = "Liste des ch&egrave;ques d&eacute;pos&eacute;s pour la saison ";
-    $msg_presentation_2 = "Enregistrement d'un ch&egrave;que suppl&eacute;mentaire pour la saison ";
+    $msg_presentation_1 = _T('amap:cheques_enregistres');
+    $msg_presentation_2 = _T('amap:cheques_enregistrement');
 
    // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -285,7 +285,7 @@ function exec_amap_contrats()
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_prix");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_prix'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_reglement_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -293,7 +293,7 @@ function exec_amap_contrats()
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_prix");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_prix'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_suppr_reglement_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -356,8 +356,8 @@ function exec_amap_contrats()
   } // fin if ($page == 'reglement')
   else if ($table == 'sorties') 
   { // Page des sorties
-    $msg_presentation_1 = "Liste des sorties à la ferme organis&eacute;es pour la saison ";
-    $msg_presentation_2 = "Enregistrement d'une nouvelle sortie à la ferme pour la saison ";
+    $msg_presentation_1 = _T('amap:sorties_enregistres');
+    $msg_presentation_2 = _T('amap:sorties_enregistrement');
 
    // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -427,7 +427,7 @@ function exec_amap_contrats()
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_sortie");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_sorties'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_sortie_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -435,7 +435,7 @@ function exec_amap_contrats()
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_sortie");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_sorties'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_suppr_sortie_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -486,8 +486,8 @@ function exec_amap_contrats()
   } // fin if ($page == 'sorties')
   else if ($table == 'participation') 
   { // Page des sorties
-    $msg_presentation_1 = "Liste des participants aux sorties organis&eacute;es pour la saison ";
-    $msg_presentation_2 = "Enregistrement d'une nouvelle participation ";
+    $msg_presentation_1 = _T('amap:liste_sorties_enregistres');
+    $msg_presentation_2 = _T('amap:liste_sorties_enregistrement');
 
    // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -549,7 +549,7 @@ function exec_amap_contrats()
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_participation_sortie");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_participation_sorties'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_participation_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -608,8 +608,8 @@ function exec_amap_contrats()
   } // fin if ($page == 'participation')
   else 
   { // page liste des contrats
-    $msg_presentation_1 = "Liste des contrats ";
-    $msg_presentation_2 = "Enregistrement d'un nouveau contrat ";
+    $msg_presentation_1 = _T('amap:liste_contrat');
+    $msg_presentation_2 = _T('amap:enregistrement_contrat');
 
     // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -663,7 +663,7 @@ function exec_amap_contrats()
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_contrat");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_contrat'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_liste_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -671,7 +671,7 @@ function exec_amap_contrats()
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_contrat");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_contrat'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_suppr_liste_contrat()."</div>";
           echo fin_cadre_trait_couleur(true);

@@ -43,10 +43,10 @@ function exec_amap_distributions()
   pipeline('exec_init',array('args'=>array('exec'=>'amap_distributions'),'data'=>''));
 
   $commencer_page = charger_fonction('commencer_page', 'inc');
-  echo $commencer_page("Gestion des distributions", "distributions", "amap_distributions");
+  echo $commencer_page(_T('amap:gestion_distributions'), "distributions", "amap_distributions");
 
   echo "<br /><br /><br />\n";
-  echo gros_titre("Gestion des distributions",'',false);
+  echo gros_titre(_T('amap:gestion_distributions'),'',false);
   echo barre_onglets("amap", "distributions");
 
   echo debut_gauche("", true);
@@ -84,8 +84,8 @@ function exec_amap_distributions()
 
 
 if ($table == 'vacances') { // Page vacances
-    $msg_presentation_1 = "Liste des vacances de la saison ";
-    $msg_presentation_2 = "Enregistrement une nouvelle vacance pour la saison ";
+    $msg_presentation_1 = _T('amap:liste_vacance');
+    $msg_presentation_2 = _T('amap:enregistrement_vacance');
 
     // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -135,7 +135,7 @@ if ($table == 'vacances') { // Page vacances
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_resp_distribution");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_resp_distribution'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_vacance_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -143,7 +143,7 @@ if ($table == 'vacances') { // Page vacances
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_resp_distribution");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_resp_distribution'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_suppr_vacance_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -190,8 +190,8 @@ if ($table == 'vacances') { // Page vacances
   } // fin if ($page == 'vacances')
   else if ($table == 'produits') 
   { // Page produits
-    $msg_presentation_1 = "Liste des produits présents aux distributions de la saison ";
-    $msg_presentation_2 = "Enregistrement d'un produit suppl&eacute;mentaire pour la saison ";
+    $msg_presentation_1 = _T('amap:liste_distribution_enregistres');
+    $msg_presentation_2 = _T('amap:liste_distribution_enregistrement');
 
     // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -245,7 +245,7 @@ if ($table == 'vacances') { // Page vacances
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_produit_distribution");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_produit_distribution'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_suppr_produit_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -284,9 +284,9 @@ if ($table == 'vacances') { // Page vacances
   } // fin if ($page == 'produits')
   else 
   { // page évènements
-    $msg_presentation_1 = "Liste des diff&eacute;rents &eacute;v&egrave;nements de distributions de la saison ";
-    $msg_presentation_3 = "Mis à jour des &eacute;v&egrave;nements à partir de l'agenda pour la saison ";
-    $msg_presentation_4 = "Enregistrement d'un nouvel &eacute;v&egrave;nement pour la saison ";
+    $msg_presentation_1 = _T('amap:liste_evenement_distribution');
+    $msg_presentation_3 = _T('amap:maj_evenement_distribution');
+    $msg_presentation_4 = _T('amap:enregistrement_evenement_distribution');
 
     // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -353,7 +353,7 @@ if ($table == 'vacances') { // Page vacances
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification dans la table amap_evenements");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_evenements'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_evenement_distribution($_REQUEST['idSaison'],$_GET['idEvenement'])."</div>";
           echo fin_cadre_trait_couleur(true);
@@ -361,7 +361,7 @@ if ($table == 'vacances') { // Page vacances
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "suppression dans la table amap_evenements");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:suppression_table_amap_evenements'));
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_suppr_evenement_distribution($_REQUEST['idSaison'],$_GET['idEvenement'])."</div>";
           echo fin_cadre_trait_couleur(true);

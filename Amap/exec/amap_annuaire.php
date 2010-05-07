@@ -42,10 +42,10 @@ function exec_amap_annuaire()
   pipeline('exec_init',array('args'=>array('exec'=>'amap_annuaire'),'data'=>''));
 
   $commencer_page = charger_fonction('commencer_page', 'inc');
-  echo $commencer_page("Gestion de l'annuaire", "configuration", "amap_annuaire");
+  echo $commencer_page(_T('amap:gestion_annuaire'), "configuration", "amap_annuaire");
 
   echo "<br /><br /><br />\n";
-  echo gros_titre("Gestion de l'annuaire",'',false);
+  echo gros_titre(_T('amap:gestion_annuaire'),'',false);
   echo barre_onglets("amap", "annuaire");
 
   echo debut_gauche("", true);
@@ -67,8 +67,8 @@ function exec_amap_annuaire()
   echo "<br />&nbsp;<br />";
 
 
-  $msg_presentation_1 = "Liste des personnes avec un statut ";
-  $msg_presentation_2 = "Enregistrement d'une nouvelle personne ";
+  $msg_presentation_1 = _T('amap:liste_enregistres');
+  $msg_presentation_2 = _T('amap:liste_enregistrement');
 
   // CHOIX DE L'ACTION A REALISER => de l'affichage
 
@@ -114,7 +114,7 @@ function exec_amap_annuaire()
       case "modif" :
         // avec action=maj
         //  ==> Affichage formulaire de modification
-        echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification dans la table amap_personne");
+        echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_personne'));
         echo "<div class='verdana2' style='text-align: justify'>"
              .table_amap_getmodif_annuaire()."</div>";
         echo fin_cadre_trait_couleur(true);
@@ -122,7 +122,7 @@ function exec_amap_annuaire()
       case "suppr" :
         // avec action=maj
         //  ==> Affichage formulaire de modification
-        echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "suppression dans la table amap_personne");
+        echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:suppression_table_amap_personne'));
         echo "<div class='verdana2' style='text-align: justify'>"
              .table_amap_suppr_annuaire()."</div>";
         echo fin_cadre_trait_couleur(true);
