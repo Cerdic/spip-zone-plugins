@@ -45,7 +45,7 @@ function exec_edit_labels(){
 		
 		echo debut_droite("",true);
 		
-		echo debut_cadre_relief(  "", false, "", $titre = _L('Toutes les &eacute;tiquettes &agrave; g&eacute;n&eacute;rer'));
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:toutes_les_etiquettes_a_generer'));
 		
 		$statut_interne= "ok";
 		if ( isset ($_POST['statut_interne'] )) { $statut_interne = $_POST['statut_interne']; } 
@@ -73,9 +73,9 @@ function exec_edit_labels(){
 		if ($indexation=="id_asso") { echo _T('asso:adherent_libelle_id_asso');}
 		else { echo _T('asso:adherent_libelle_id_adherent');} 
 		echo '<strong></td>';
-		echo '<td><strong>' . _L('Nom') . '</strong></td>';
-		echo '<td><strong>' . _L('Adresse') . '</strong></td>';
-		echo '<td><strong>' . _L('Env') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:nom') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:adresse') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:env') . '</strong></td>';
 		echo '</tr>';
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
 		// originale semblait contenir une vieillerie:

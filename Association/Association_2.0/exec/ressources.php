@@ -37,8 +37,8 @@ function exec_ressources(){
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt=" " /> Libre<br />';
 		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif" alt=" " /> En suspend<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt=" " />', _L('R&eacute;s&eacute;rv&eacute;'), '<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt=" " />', _L('Supprim&eacute;');
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt=" " />', _T('asso:reserve'), '<br />';
+		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt=" " />', _T('asso:supprime');
 		echo fin_boite_info(true);
 		
 		echo bloc_des_raccourcis(association_icone(_T('asso:ressources_nav_ajouter'),  $url_ajout_ressource, 'ajout_don.png'));

@@ -37,7 +37,7 @@ function exec_categories(){
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 		
-		$res=association_icone(_L('Ajouter une cat&eacute;gorie de cotisation'),  $url_ajout_categorie, "calculatrice.gif");
+		$res=association_icone(_T('asso:ajouter_une_categorie_de_cotisation'),  $url_ajout_categorie, "calculatrice.gif");
 		$res.= association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");
 		echo bloc_des_raccourcis($res);	
 		
@@ -48,13 +48,13 @@ function exec_categories(){
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr bgcolor='#DBE1C5'>";
-		echo '<td><strong>' . _L('ID') . '</strong></td>';
-		echo '<td><strong>' . _L('Cat&eacute;gorie') . '</strong></td>';
-		echo '<td><strong>' . _L('Libell&eacute; complet') . '</strong></td>';
-		echo '<td><strong>' . _L('Dur&eacute;e (mois)') . '</strong></td>';
-		echo '<td><strong>' . _L('Montant') . '</strong></td>';
-		echo '<td><strong>' . _L('Commentaires') . '</strong></td>';
-		echo '<td colspan=2 style="text-align:center;"><strong>' . _L('Action') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:id') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:categorie') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:libelle_complet') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:duree_mois') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:montant') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:commentaires') . '</strong></td>';
+		echo '<td colspan=2 style="text-align:center;"><strong>' . _T('asso:action') . '</strong></td>';
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_categories', '', "id_categorie" ) ;
 		while ($data = sql_fetch($query)) {

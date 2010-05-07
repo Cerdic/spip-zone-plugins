@@ -131,7 +131,7 @@ function prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date
 			'date' => $date_sortie,
 			'journal' => $journal,
 			'recette' => $montant,
-			'justification' => _L('Pr&ecirc;t n&deg;').$id_ressource.'/'.$id_pret,
+			'justification' => _T('asso:pret_nd').$id_ressource.'/'.$id_pret,
 			'imputation' => $imputation,
 			'id_journal' => $id_pret));
 

@@ -43,12 +43,12 @@ function exec_bilan(){
 		
 		//TABLEAU EXPLOITATION
 		echo "\n<fieldset>";
-		echo '<legend><strong>', _L('R&eacute;sultat courant') .$annee.'</strong></legend>';
+		echo '<legend><strong>', _T('asso:resultat_courant') .$annee.'</strong></legend>';
 		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr style="background-color: #DBE1C5">';
 		echo '<td><strong>&nbsp;</strong></td>';
 		echo "<td style='text-align:center;'><strong>\n" . 'Recettes</strong></td>';
-		echo "<td style='text-align:center;'><strong>\n" . _L('D&eacute;penses') . '</strong></td>';
+		echo "<td style='text-align:center;'><strong>\n" . _T('asso:depenses') . '</strong></td>';
 		echo "<td style='text-align:center;'><strong>\n" . 'Solde</strong></td>';
 		echo "</tr>\n";
 		$ac=lire_config('association/classe_banques'); 
@@ -72,7 +72,7 @@ function exec_bilan(){
 		$total_depenses=number_format($total_depenses, 2, ',', ' '); 
 		$total_soldes=number_format($total_soldes, 2, ',', ' '); 
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo "\n<td class='arial11 border1' style='color:#9F1C30;'><strong>" . _L('R&eacute;sultat courant') . '</strong></td>';
+		echo "\n<td class='arial11 border1' style='color:#9F1C30;'><strong>" . _T('asso:resultat_courant') . '</strong></td>';
 		echo "\n<td class='arial11 border1' style='text-align:right;color:#9F1C30;'><strong>".$total_recettes.'</strong></td>'; 
 		echo "\n<td class='arial11 border1' style='text-align:right;color:#9F1C30;'><strong>".$total_depenses.'</strong></td>';
 		echo "\n<td class='arial11 border1' style='text-align:right;color:#9F1C30;'><strong>".$total_soldes.'</strong></td></tr>'; 
@@ -81,12 +81,12 @@ function exec_bilan(){
 		
 		//TABLEAU ENCAISSE
 		echo "\n<fieldset>";
-		echo '<legend><strong>' . _L('Encaisse') .$annee.'</strong></legend>';
+		echo '<legend><strong>' . _T('asso:encaisse') .$annee.'</strong></legend>';
 		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr style="bgcolor: #DBE1C5">';
 		echo "\n<td><strong>&nbsp;</strong></td>";
-		echo '<td style="text-align:center;" colspan="2"><strong>', _L('Avoir initial') . "</strong></td>\n";
-		echo "<td style='text-align:center;'><strong>\n" . _L('Avoir actuel') . "</strong></td>\n";
+		echo '<td style="text-align:center;" colspan="2"><strong>', _T('asso:avoir_initial') . "</strong></td>\n";
+		echo "<td style='text-align:center;'><strong>\n" . _T('asso:avoir_actuel') . "</strong></td>\n";
 		echo '</tr>';
 		$clas=lire_config('association/classe_banques');
 		$query = sql_select('*', 'spip_asso_plan', "classe='$clas'", '',  "code" );
@@ -113,7 +113,7 @@ function exec_bilan(){
 		$total_initial=number_format($total_initial, 2, ',', ' '); 
 		$total_actuel=number_format($total_actuel, 2, ',', ' '); 
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo "\n<td class='arial11 border1' style='color:#9F1C30;'><strong>" . _L('Encaisse') . "</strong></td>\n";
+		echo "\n<td class='arial11 border1' style='color:#9F1C30;'><strong>" . _T('asso:encaisse') . "</strong></td>\n";
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30;"><strong>&nbsp;</strong></td>'; 
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30"><strong>'.$total_initial.'</strong></td>'; 
 		echo '<td class="arial11 border1" style="text-align:right;color:#9F1C30"><strong>'.$total_actuel.'</strong></td></tr>'; 

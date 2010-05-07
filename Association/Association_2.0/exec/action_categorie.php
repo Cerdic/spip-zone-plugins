@@ -48,7 +48,7 @@ function exec_action_categorie(){
 			
 		echo debut_cadre_relief(  "", false, "",  _T('asso:categories_de_cotisations'));
 			
-		echo '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie') .$id_categorie.'</strong></p>';
+		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_le_categorie') .$id_categorie.'</strong></p>';
 		$res = '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
 		echo redirige_action_post('supprimer_categories', $id_categorie, 'categories', '', $res);
 

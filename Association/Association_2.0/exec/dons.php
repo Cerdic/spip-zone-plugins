@@ -64,14 +64,14 @@ function exec_dons() {
 		//TABLEAU
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr style="background-color: #DBE1C5">';
-		echo '<td><strong>' . _L('ID') . "</strong></td>\n";
-		echo '<td><strong>' . _L('Date') . "</strong></td>\n";
-		echo '<td><strong>' . _L('Nom') . "</strong></td>\n";
-		echo '<td style="text-align:right;"><strong>' . _L('Argent') . "</strong></td>\n";
-		echo '<td><strong>' . _L('Colis') . "</strong></td>\n";
-		echo '<td style="text-align:right;"><strong>' . _L('Valeur') . "</strong></td>\n";
-		echo '<td><strong>' . _L('Contrepartie') . "</strong></td>\n";
-		echo '<td colspan="2"><strong>' . _L('Action') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:id') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:date') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:nom') . "</strong></td>\n";
+		echo '<td style="text-align:right;"><strong>' . _T('asso:argent') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:colis') . "</strong></td>\n";
+		echo '<td style="text-align:right;"><strong>' . _T('asso:valeur') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:contrepartie') . "</strong></td>\n";
+		echo '<td colspan="2"><strong>' . _T('asso:action') . "</strong></td>\n";
 		echo '</tr>';
 		$query = sql_select('*', "spip_asso_dons", "date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
 		while ($data = sql_fetch($query)) {
@@ -85,8 +85,8 @@ function exec_dons() {
 			echo '<td class="arial11 border1">'.$data['colis']."</td>\n";
 			echo '<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['valeur']).'&nbsp;&euro;</td>';
 			echo '<td class="arial11 border1">'.propre($data['contrepartie'])."</td>\n";
-			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_L('Supprimer le don'), 'poubelle-12.gif', 'action_dons', "id=$id_don") . "</td>\n";
-			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_L('Mettre &agrave; jour le don'), 'edit-12.gif', 'edit_dons', "agir=modifier&id=$id_don") . "</td>\n";;
+			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:supprimer_le_don'), 'poubelle-12.gif', 'action_dons', "id=$id_don") . "</td>\n";
+			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:mettre_a_jour_le_don'), 'edit-12.gif', 'edit_dons', "agir=modifier&id=$id_don") . "</td>\n";;
 			echo '</tr>';
 		}
 		echo '</table>';

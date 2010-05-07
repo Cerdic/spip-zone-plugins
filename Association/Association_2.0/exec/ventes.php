@@ -37,7 +37,7 @@ function exec_ventes(){
 		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
-		echo '<p>', _L('En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e') . '</p>'; 
+		echo '<p>', _T('asso:en_rose_vente_enregistree_en_bleu_vente_expediee') . '</p>'; 
 		
 		// TOTAUX
 		$critere = lire_config('association/pc_ventes');
@@ -51,7 +51,7 @@ function exec_ventes(){
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color: #9F1C30">' . _L('Solde :') . '</strong></td>';
+			echo '<td><strong style="color: #9F1C30">' . _T('asso:solde') . '</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
@@ -84,14 +84,14 @@ function exec_ventes(){
 		echo '<form action="'.$url_agir_ventes.'" method="post">';
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
-		echo '<td style="text-align:right"><strong>' . _L('ID') . '</strong></td>';
-		echo '<td style="text-align:right"><strong>' . _L('Date') . '</strong></td>';
-		echo '<td><strong>' . _L('Article') . '</strong></td>';
-		echo '<td><strong>' . _L('Code') . '</strong></td>';
-		echo '<td><strong>' . _L('Acheteur') . '</strong></td>';
-		echo '<td><strong>' . _L('Membre') . '</strong></td>';
-		echo '<td style="text-align:right"><strong>' . _L('Qt&eacute;') . '</strong></td>';
-		echo '<td style="text-align:right"><strong>' . _L('Montant') . '</strong></td>';
+		echo '<td style="text-align:right"><strong>' . _T('asso:id') . '</strong></td>';
+		echo '<td style="text-align:right"><strong>' . _T('asso:date') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:article') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:code') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:acheteur') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:membre') . '</strong></td>';
+		echo '<td style="text-align:right"><strong>' . _T('asso:qte') . '</strong></td>';
+		echo '<td style="text-align:right"><strong>' . _T('asso:montant') . '</strong></td>';
 		echo '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>';
 		echo '</tr>';
 		$ventes = '';
@@ -113,7 +113,7 @@ function exec_ventes(){
 			. association_nbrefr($q*$data['prix_vente']).'</td>'
 			. "\n<td$class style='text-align:center'><a href='"
 			. generer_url_ecrire('edit_vente',"agir=modifie&id=$id")
-			. "'><img src='"._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif\' title="' . _L('Mettre &agrave; jour la vente') . '"></a>'
+			. "'><img src='"._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif\' title="' . _T('asso:mettre_a_jour_la_vente') . '"></a>'
 			."\n<td$class style='text-align:center'><input name='delete[]' type='checkbox' value='$id' /></td>"
 			.'</tr>';
 		}     

@@ -150,7 +150,7 @@ function exec_voir_adherent(){
 		// FICHE HISTORIQUE DONS
 		if (lire_config('association/dons')=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>';
-			echo _L('A d&eacute;velopper');
+			echo _T('asso:a_developper');
 			echo '</fieldset>';
 		}
 		// FICHE HISTORIQUE PRETS

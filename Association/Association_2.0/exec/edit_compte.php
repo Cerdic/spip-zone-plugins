@@ -56,7 +56,7 @@ function exec_edit_compte() {
 
 		debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
 		
-		$res = '<label for="imputation"><strong>' . _L('Imputation :') . '</strong></label>';
+		$res = '<label for="imputation"><strong>' . _T('asso:imputation') . '</strong></label>';
 		$res .= '<select name="imputation" type="text" id="date" class="formo" />';
 		$sql = sql_select('*', 'spip_asso_plan', "classe<>". sql_quote(lire_config('association/classe_banques')), "", "code") ;
 		while ($banque = sql_fetch($sql)) {
@@ -65,11 +65,11 @@ function exec_edit_compte() {
 			$res .= '>'.$banque['intitule'].'</option>';
 		}
 		$res .= '</select>';
-		$res .= '<label for="date"><strong>' . _L('Date (AAAA-MM-JJ) :') . '</strong></label>';
+		$res .= '<label for="date"><strong>' . _T('asso:date_aaaa_mm_jj') . '</strong></label>';
 		$res .= '<input name="date" value="'.$date.'" type="text" id="date" class="formo" />';
-		$res .= '<label for="recette"><strong>' . _L('Recette :') . '</strong></label>';
+		$res .= '<label for="recette"><strong>' . _T('asso:recette') . '</strong></label>';
 		$res .= '<input name="recette" value="'.$recette.'" type="text" id="recette" class="formo" />';
-		$res .= '<label for="depense"><strong>' . _L('D&eacute;pense :') . '</strong></label>';
+		$res .= '<label for="depense"><strong>' . _T('asso:depense') . '</strong></label>';
 		$res .= '<input name="depense" value="'.$depense.'"  type="text" id="depense" class="formo" />';
 		$res .= '<label for="journal"><strong>'._T('asso:Mode de paiement').'&nbsp;:</strong></label>';
 
@@ -86,7 +86,7 @@ function exec_edit_compte() {
 		$action = ($id_compte ? 'modifier' : 'ajouter');
 
 		$res .= '<label for="justification"><strong>'
-		. _L('Justification')
+		. _T('asso:justification')
 		. '&nbsp;:</strong></label>'
 		. '<input name="justification" value="'
 		. $justification

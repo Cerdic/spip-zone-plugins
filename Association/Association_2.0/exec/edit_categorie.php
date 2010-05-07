@@ -54,23 +54,23 @@ function exec_edit_categorie(){
 		
 		echo debut_cadre_relief(  "", false, "", _T('asso:categories_de_cotisations'));
 
-		$res = '<label for="valeur"><strong>' . _L('Cat&eacute;gorie')
+		$res = '<label for="valeur"><strong>' . _T('asso:categorie')
 		. '&nbsp;:</strong></label>'
 		. '<input name="valeur" type="text" value="'
 		. $valeur.'" id="valeur" class="formo" />'
-		. '<label for="libelle"><strong>' . _L('Libell&eacute; complet')
+		. '<label for="libelle"><strong>' . _T('asso:libelle_complet')
 		. '&nbsp;:</strong></label>'
 		. '<input name="libelle" type="text" value="'
 		. $libelle.'" id="libelle" class="formo" />'
-		. '<label for="duree"><strong>' . _L('Dur&eacute;e (en mois)')
+		. '<label for="duree"><strong>' . _T('asso:duree_en_mois')
 		. '&nbsp;:</strong></label>'
 		. '<input name="duree" type="text" value="'
 		. $duree.'" id="duree" class="formo" />'
-		. '<label for="montant"><strong>' . _L('Montant (en euros)')
+		. '<label for="montant"><strong>' . _T('asso:montant_en_euros')
 		. '&nbsp;:</strong></label>'
 		. '<input name="montant" type="text" value="'
 		. $cotisation.'" id="montant" class="formo" />'
-		. '<label for="commentaires"><strong>' . _L('Commentaires') . '&nbsp;:</strong></label>'
+		. '<label for="commentaires"><strong>' . _T('asso:commentaires') . '&nbsp;:</strong></label>'
 		. '<textarea name="commentaires" id="commentaires" class="formo" />'
 		. $commentaires.'</textarea>'
 		. '<div style="float:right;">'

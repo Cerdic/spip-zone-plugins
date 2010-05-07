@@ -39,7 +39,7 @@ function exec_comptes() {
 		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
-		echo '<p>', _L('En bleu : Recettes<br />En rose : D&eacute;penses'), '</p>'; 
+		echo '<p>', _T('asso:en_bleu_recettes_en_rose_depenses'), '</p>'; 
 		
 		// TOTAUX
 		$query = sql_select("sum(recette) AS somme_recettes, sum(depense) AS somme_depenses", 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");
@@ -53,15 +53,15 @@ function exec_comptes() {
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:blue">' . _L('Entr&eacute;es :') . '</strong></td>';
+			echo '<td><strong style="color:blue">' . _T('asso:entrees') . '</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:blue">' . _L('Sorties :') . '</strong></td>';
+			echo '<td><strong style="color:blue">' . _T('asso:sorties') . '</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:#9F1C30">' . _L('Solde :') . '</strong></td>';
+			echo '<td><strong style="color:#9F1C30">' . _T('asso:solde') . '</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
@@ -71,7 +71,7 @@ function exec_comptes() {
 		
 		$url_bilan = generer_url_ecrire('bilan', "annee=$annee");		
 		$res = association_icone(_T('Bilan') . " $annee",  $url_bilan, 'finances.jpg')
-		. association_icone(_L('Ajouter une op&eacute;ration'),  generer_url_ecrire('edit_compte'), 'ajout_don.png');
+		. association_icone(_T('asso:ajouter_une_operation'),  generer_url_ecrire('edit_compte'), 'ajout_don.png');
 
 		echo bloc_des_raccourcis($res);
 		
@@ -117,15 +117,15 @@ function exec_comptes() {
 
 	$table = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 	. '<tr style="background-color: #DBE1C5">'
-	. '<td style="text-align:right;"><strong>' . _L('ID')
+	. '<td style="text-align:right;"><strong>' . _T('asso:id')
 	. "</strong></td>\n"
-	. '<td style="text-align:right;"><strong>' . _L('Date')
+	. '<td style="text-align:right;"><strong>' . _T('asso:date')
 	. "</strong></td>\n"
-	. '<td><strong>' . _L('Compte') . "</strong></td>\n"
-	. '<td><strong>' . _L('Justification') . "</strong></td>\n"
-	. '<td style="text-align:right;"><strong>' . _L('Montant')
+	. '<td><strong>' . _T('asso:compte') . "</strong></td>\n"
+	. '<td><strong>' . _T('asso:justification') . "</strong></td>\n"
+	. '<td style="text-align:right;"><strong>' . _T('asso:montant')
 	. "</strong></td>\n"
-	. '<td><strong>' . _L('Financier') . "</strong></td>\n"
+	. '<td><strong>' . _T('asso:financier') . "</strong></td>\n"
 	. '<td colspan="3" style="text-align:center;"><strong>&nbsp;</strong></td>'
 	. '</tr>'
 	. $auteurs
@@ -189,11 +189,11 @@ function comptes_while($annee, $imputation, $debut, $max_par_page)
 		  {$auteurs .= '<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>';}
 		else {
 			$url = generer_url_ecrire('edit_compte','id='.$data['id_compte']);
-			$auteurs .= "<td class='$class border1' style='text-align:center'><a href='$url'><img src='"._DIR_PLUGIN_ASSOCIATION_ICONES."edit-12.gif' title='". _L('Mettre &agrave; jour') . "' alt='' /></a></td>\n";
+			$auteurs .= "<td class='$class border1' style='text-align:center'><a href='$url'><img src='"._DIR_PLUGIN_ASSOCIATION_ICONES."edit-12.gif' title='". _T('asso:mettre_a_jour') . "' alt='' /></a></td>\n";
 
 			$url = generer_url_ecrire('action_comptes', 'agir=supprime&id='.$data['id_compte']);
 
-			$auteurs .= '<td class="'.$class. ' border1" style="text-align:center;"><a href="'.$url_action_comptes.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="' . _L('Supprimer') . '" alt="" /></a></td>';
+			$auteurs .= '<td class="'.$class. ' border1" style="text-align:center;"><a href="'.$url_action_comptes.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="' . _T('asso:supprimer') . '" alt="" /></a></td>';
 
 			$auteurs .= "\n<td class='".$class. " border1' style='text-align:center'><input name='valide[]' type='checkbox' value='".$data['id_compte']. "' /></td>\n";
 		}

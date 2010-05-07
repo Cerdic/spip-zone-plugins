@@ -60,7 +60,7 @@ function exec_edit_activite(){
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', _L('Activit&eacute; n&deg;') . '<br />';
+		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', _T('asso:activite_nd') . '<br />';
 		echo '<span class="spip_xx-large">';
 		echo $id_evenement;
 		echo '</span></div>';

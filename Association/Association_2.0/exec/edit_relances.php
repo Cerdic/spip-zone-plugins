@@ -43,7 +43,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _L('Tous les membres &agrave; relancer'));
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:tous_les_membres_a_relancer'));
 		
 		echo '<form method="post" action="'.$url_action_relances.'">';
 		
@@ -81,11 +81,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if ($indexation=="id_asso") { echo _T('asso:adherent_libelle_id_asso');}
 		else { echo _T('asso:adherent_libelle_id_adherent');} 
 		echo '</strong></td>';
-		echo '<td><strong>' . _L('Nom') . '</strong></td>';
-		echo '<td><strong>' . _L('T&eacute;l&eacute;phone') . '</strong></td>';
-		echo '<td><strong>' . _L('Portable') . '</strong></td>';
-		echo '<td><strong>' . _L('Validit&eacute;') . '</strong></td>';
-		echo '<td><strong>' . _L('Envoi') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:nom') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:telephone') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:portable') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:validite') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:envoi') . '</strong></td>';
 		echo '</tr>';
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " a.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 		while ($data = sql_fetch($query)) {

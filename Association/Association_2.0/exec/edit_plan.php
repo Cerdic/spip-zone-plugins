@@ -65,38 +65,38 @@ function exec_edit_plan(){
 		}
 		$checked = ($actif=="oui" || $action=="ajouter");
 
-		$res = '<label for="code"><strong>' . _L('Code :') . '</strong></label>'
+		$res = '<label for="code"><strong>' . _T('asso:code') . '</strong></label>'
 		. '<input name="code" type="text" value="'
 		. $code
 		. '" id="code" class="formo" />'
-		. '<label for="classe"><strong>' . _L('Classe') . '&nbsp;:</strong></label>'
+		. '<label for="classe"><strong>' . _T('asso:classe') . '&nbsp;:</strong></label>'
 		. '<input name="classe" type="text" value="'
 		. $classe
 		. '" id="classe" class="formo" />'
-		. '<label for="intitule"><strong>' . _L('Intitul&eacute;') . '&nbsp;;</strong></label>'
+		. '<label for="intitule"><strong>' . _T('asso:intitule') . '&nbsp;;</strong></label>'
 		. '<input name="intitule" type="text" value="'
 		. $intitule
 		. '" id="intitule" class="formo" />'
-		. '<label for="reference"><strong>' . _L('R&eacute;f&eacute;rence') . '&nbsp;:</strong></label>'
+		. '<label for="reference"><strong>' . _T('asso:reference') . '&nbsp;:</strong></label>'
 		. '<input name="reference" type="text" value="'
 		. $reference
 		. '" id="reference" class="formo" />'
-		. '<label for="solde_anterieur"><strong>' . _L('Solde report&eacute; (en euros) :') . '</strong></label>'
+		. '<label for="solde_anterieur"><strong>' . _T('asso:solde_reporte_en_euros') . '</strong></label>'
 		. '<input name="solde_anterieur" type="text" value="'
 		. $solde_anterieur
 		. '" id="solde_anterieur" class="formo" />'
-		. '<label for="date_anterieure"><strong>' . _L('Date report (AAA-MM-JJ) :') . '</strong></label>'
+		. '<label for="date_anterieure"><strong>' . _T('asso:date_report_aaa_mm_jj') . '</strong></label>'
 		. '<input name="date_anterieure" type="text" value="'
 		. $date_anterieure
 		. '" id="date_anterieure" class="formo" />'
-		. '<label for="actif"><strong>' . _L('Compte activ&eacute; :') . '</strong></label>'
+		. '<label for="actif"><strong>' . _T('asso:compte_active') . '</strong></label>'
 		. '<input name="actif" type="radio" value="oui" id="actif"';
 		if ($checked) {$res .= ' checked="checked"';}
 		$res .= ' />'._T('asso:plan_libelle_oui')
 		. '<input name="actif" type="radio" value="non"';
 		if (!$checked) {$res .= ' checked="checked"';}
 		$res .= ' />'._T('asso:plan_libelle_non')
-		. '<br /><label for="commentaire"><strong>' . _L('Commentaires') . '&nbsp;:</strong></label>'
+		. '<br /><label for="commentaire"><strong>' . _T('asso:commentaires') . '&nbsp;:</strong></label>'
 		. '<textarea name="commentaire" id="commentaire" class="formo" />'
 		. $commentaire
 		. '</textarea>'

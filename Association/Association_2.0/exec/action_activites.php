@@ -81,7 +81,7 @@ function exec_action_activites(){
 			$count=count ($delete_tab);
 			
 			$commencer_page = charger_fonction('commencer_page', 'inc');
-			echo $commencer_page(_L('Gestion pour Association')) ;
+			echo $commencer_page(_T('asso:gestion_pour_association')) ;
 			association_onglets();
 			
 			debut_gauche();

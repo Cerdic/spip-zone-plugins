@@ -44,8 +44,8 @@ function exec_action_dons_args($id_don) {
 		echo fin_boite_info(true);
 		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 		echo debut_droite("", true);
-		echo debut_cadre_relief(  "", false, "", $titre = _L('Action sur les dons'));
-		$res = '<p><strong>' . _L('Vous vous appr&ecirc;tez &agrave; effacer le don') . $id_don . '</strong></p>';
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:action_sur_les_dons'));
+		$res = '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_le_don') . $id_don . '</strong></p>';
 
 		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
 
