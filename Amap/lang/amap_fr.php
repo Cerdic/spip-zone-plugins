@@ -8,11 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attention' => 'ATTENTION !',
 	'attention_modifications' => 'Les modifications effectuées dans ces pages influent notablement sur le fonctionnement du module AMAP.',
-	'configuration_amap'  => 'Configuration',
 	'annuaire_amap'  => 'Annuaire',
-	'distributions_amap'  => 'Distributions',
-	'contrats_amap'  => 'Contrats',
-	'paniers_amap'  => 'Paniers',
     	
 	// B
 	'banques' => 'Banques',
@@ -20,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'banques_enregistrement' => "Enregistrement d'une banque supplémentaire",
 
 	// C
+	'configuration_amap'  => 'Configuration',
+	'contrats_amap'  => 'Contrats',
 	'configuration_du_plugin' => 'Configuration du plugin',
 	'choix_statut' => 'Choix du statut',
 	'choix_saison' => 'Choix de la saison',
@@ -27,11 +25,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_distribution' => 'Choix de la distribution',
 	'contrats_enregistres' => "Liste des types de contrats possibles",
 	'contrats_enregistrement' => "Enregistrement d'un type de contrat supplémentaire",
+	'cheques_enregistres' => "Liste des chèques déposés pour la saison ",
+	'cheques_enregistrement' => "Enregistrement d'un chèque supplémentaire pour la saison ",
 
 	// D
+	'distributions_amap'  => 'Distributions',
 
 	// E
 	'evenements' => 'Événement',
+	'enregistrement_contrat' => "Enregistrement d'un nouveau contrat ",
+	'enregistrement_vacance' => "Enregistrement une nouvelle vacance pour la saison ",
+	'enregistrement_evenement_distribution' => "Enregistrement d'un nouvel évènement pour la saison ",
 
 	// F
 	'familles_produits' => 'Familles de produits',
@@ -53,25 +57,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_enregistres' => "Liste des personnes avec un statut",
 	'liste_enregistrement' => "Enregistrement d'une nouvelle personne",
 	'liste_contrat' => 'Liste des contrats ',
-	'enregistrement_contrat' => "Enregistrement d'un nouveau contrat ",
-	'tarifs_enregistres' => "Liste des tarifs possibles pour la saison",
-	'tarifs_enregistrement' => "Enregistrement d'un tarif suppl&eacute;mentaire pour la saison",
-	'sorties_enregistres' => "Liste des sorties à la ferme organisées pour la saison ",
-	'sorties_enregistrement' => "Enregistrement d'une nouvelle sortie à la ferme pour la saison ",
 	'liste_sorties_enregistres' => "Liste des participants aux sorties organisées pour la saison ",
 	'liste_sorties_enregistrement' => "Enregistrement d'une nouvelle participation ",
 	'liste_vacance' => "Liste des vacances de la saison ",
-	'enregistrement_vacance' => "Enregistrement une nouvelle vacance pour la saison ",
-	'cheques_enregistres' => "Liste des chèques déposés pour la saison ",
-	'cheques_enregistrement' => "Enregistrement d'un chèque supplémentaire pour la saison ",
 	'liste_distribution_enregistres' => "Liste des produits présents aux distributions de la saison ",
 	'liste_distribution_enregistrement' => "Enregistrement d'un produit supplémentaire pour la saison ",
 	'liste_famille_enregistres' => "Liste des familles de produits ",
 	'liste_famille_enregistrement' => "Enregistrement d'une nouvelle famille de produits ",
-	'liste_variete_famille_enregistres' => "Liste des variétés dans une familles ",
+	'liste_variete_famille_enregistres' => "Liste des variétés dans une famille ",
 	'liste_variete_famille_enregistrement' => "Enregistrement d'une nouvelle variété ",
 	'liste_composition_enregistres' => "Composition du panier ",
 	'liste_composition_enregistrement' => "Enregistrement d'une variété supplémentaire au panier",
+	'liste_evenement_distribution' => "Liste des différents évènements de distributions de la saison ",
 
 	// M
 	'modification_table_amap_personne' => "modification dans la table amap_personne",
@@ -79,7 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modification_table_amap_sorties' => "modification de la table amap_sortie",
 	'modification_table_amap_contrat' => "modification de la table amap_contrat",
 	'modification_table_amap_evenements' => "modification dans la table amap_evenements",
-	'suppression_table_amap_evenements' => "suppression dans la table amap_evenements",
 	'modification_table_amap_participation_sorties' => "modification de la table amap_participation_sortie",
 	'modification_table' => "modification de la table ",
 	'modification_table_amap_resp_distribution' => "modification de la table amap_resp_distribution",
@@ -87,11 +83,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modification_table_variete' => "modification de la table amap_variete",
 	'modification_table_amap_panier' => "modification de la table amap_panier",
 	'modification_table_amap_produit_distribution' => "modification de la table amap_produit_distribution",
-	'liste_evenement_distribution' => "Liste des différents évènements de distributions de la saison ",
-	'maj_evenement_distribution' => "Mis à jour des évènements à partir de l'agenda pour la saison ",
-	'enregistrement_evenement_distribution' => "Enregistrement d'un nouvel évènement pour la saison ",
+	'maj_evenement_distribution' => "Mise à jour des évènements à partir de l'agenda pour la saison ",
 
 	// P
+	'paniers_amap'  => 'Paniers',
 	'produits' => 'Produits',
 	'paniers' => 'Paniers',
 	'paysan' => 'Paysan',
@@ -106,10 +101,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisons_enregistrement' => "Enregistrement d'une saison supplémentaire",
 	'sorties_ferme' => 'Sorties à la ferme',
 	'suppression_table_amap_personne' => "suppression dans la table amap_personne",
+	'sorties_enregistres' => "Liste des sorties à la ferme organisées pour la saison ",
+	'sorties_enregistrement' => "Enregistrement d'une nouvelle sortie à la ferme pour la saison ",
+	'suppression_table_amap_evenements' => "suppression dans la table amap_evenements",
 
 	// T
 	'tarif_contrat' => 'Tarif des contrats',
 	'types_de_contrat' => 'Types de contrat',
+	'tarifs_enregistres' => "Liste des tarifs possibles pour la saison",
+	'tarifs_enregistrement' => "Enregistrement d'un tarif suppl&eacute;mentaire pour la saison",
 
 	// V
 	'vacances' => 'Vacances',
