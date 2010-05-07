@@ -74,7 +74,7 @@ function exec_edit_vente() {
 		echo '<form method="post" action="'.$url_agir_ventes.'"><div>';	
 		echo '<label for="date_vente"><strong>' . _L('Date (AAAA-MM-JJ) :') . '</strong></label>';
 		echo '<input name="date_vente" type="text" value="'.$date_vente.'" id="date_vente" class="formo" />';
-		echo '<label for="article"><strong>' . _L('Article :') . '</strong></label>';
+		echo '<label for="article"><strong>' . _L('Article') . '&nbsp;:</strong></label>';
 		echo '<input name="article"  type="text" value="'.$article.'" id="article" class="formo" />';
 		echo '<label for="code"><strong>', _L('Code de l\'article :'), '</strong></label>';
 		echo '<input name="code"  type="text" value="'.$code.'" id="code" class="formo" />';
@@ -86,7 +86,8 @@ function exec_edit_vente() {
 		echo '<input name="quantite"  type="text" value="'.$quantite.'" id="quantite" class="formo" />';
 		echo '<label for="prix_vente"><strong>' . _L('Prix de vente(en &euro;) :') . '</strong></label>';
 		echo '<input name="prix_vente"  type="text" value="'.$prix_vente.'" id="prix_vente" class="formo" />';
-		echo '<label for="journal"><strong>' . _L('Mode de paiement :') . '</strong></label>';
+		echo '<label for="journal"><strong>'._T('asso:Mode de paiement').'&nbsp;:</strong></label>';
+
 		$res = '';
 		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
@@ -101,7 +102,7 @@ function exec_edit_vente() {
 		echo '<input name="date_envoi"  type="text" value="'.$date_envoi.'" id="date_envoi" class="formo" />';
 		echo '<label for="frais_envoi"><strong>', _L('Frais d\'envoi (en &euro;) :'), '</strong></label>';
 		echo '<input name="frais_envoi" type="text" value="'.$frais_envoi.'" id="frais_envoi" class="formo" />';
-		echo '<label for="commentaire"><strong>' . _L('Commentaires :') . '</strong></label>';
+		echo '<label for="commentaire"><strong>' . _L('Commentaires') . '&nbsp;:</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
 		echo '<input name="id" type="hidden" value="'.$id_vente.'" />';		

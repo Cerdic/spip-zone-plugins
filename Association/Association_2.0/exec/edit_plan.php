@@ -69,15 +69,15 @@ function exec_edit_plan(){
 		. '<input name="code" type="text" value="'
 		. $code
 		. '" id="code" class="formo" />'
-		. '<label for="classe"><strong>' . _L('Classe :') . '</strong></label>'
+		. '<label for="classe"><strong>' . _L('Classe') . '&nbsp;:</strong></label>'
 		. '<input name="classe" type="text" value="'
 		. $classe
 		. '" id="classe" class="formo" />'
-		. '<label for="intitule"><strong>' . _L('Intitul&eacute; :') . '</strong></label>'
+		. '<label for="intitule"><strong>' . _L('Intitul&eacute;') . '&nbsp;;</strong></label>'
 		. '<input name="intitule" type="text" value="'
 		. $intitule
 		. '" id="intitule" class="formo" />'
-		. '<label for="reference"><strong>' . _L('R&eacute;f&eacute;rence :') . '</strong></label>'
+		. '<label for="reference"><strong>' . _L('R&eacute;f&eacute;rence') . '&nbsp;:</strong></label>'
 		. '<input name="reference" type="text" value="'
 		. $reference
 		. '" id="reference" class="formo" />'
@@ -96,7 +96,7 @@ function exec_edit_plan(){
 		. '<input name="actif" type="radio" value="non"';
 		if (!$checked) {$res .= ' checked="checked"';}
 		$res .= ' />'._T('asso:plan_libelle_non')
-		. '<br /><label for="commentaire"><strong>' . _L('Commentaires :') . '</strong></label>'
+		. '<br /><label for="commentaire"><strong>' . _L('Commentaires') . '&nbsp;:</strong></label>'
 		. '<textarea name="commentaire" id="commentaire" class="formo" />'
 		. $commentaire
 		. '</textarea>'

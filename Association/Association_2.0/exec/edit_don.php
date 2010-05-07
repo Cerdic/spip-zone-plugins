@@ -76,7 +76,7 @@ function exec_edit_don(){
 		$res .= '<input name="argent" type="text" value="'.$argent.'" id="argent" class="formo" />';
 
 		$res .= don_mode_de_paiemen($journal);
-		$res .= '<label for="colis"><strong>' . _L('Colis :') . '</strong></label>';
+		$res .= '<label for="colis"><strong>' . _L('Colis') . '&nbsp;:</strong></label>';
 		$res .= '<input name="colis" type="text" value="'.$colis.'" id="colis" class="formo" />';
 		$res .= '<label for="valeur"><strong>' . _L('Contre-valeur (en &euro;) :') . '</strong></label>';
 		$res .= '<input name="valeur" type="text" value="'.$valeur.'" id="valeur" class="formo" />';
@@ -107,7 +107,7 @@ function don_mode_de_paiemen($journal)
 		$res .= '>'.$banque['intitule'].'</option>';
 	}
 	if (!$res) return '';
-	return '<label for="journal"><strong>' . _L('Mode de paiement&nbsp;') .'</strong></label>'
+	return '<label for="journal"><strong>'._T('asso:Mode de paiement').'&nbsp;:</strong></label>'
 	. '<select name="journal" type="text" id="journal" class="formo" />'
 	. $res
 	.'</select>';

@@ -65,7 +65,7 @@ function ajout_cotisation($id_auteur)
 		$mois+=$categorie['duree'];
 		$validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
 		$res .= '<input name="montant" type="text" value="'.$categorie['cotisation'].'" id="montant" class="formo" />';
-		$res .= '<label for="journal"><strong>'._T('asso:Mode de paiement').' :</strong></label>';
+		$res .= '<label for="journal"><strong>'._T('asso:Mode de paiement').'&nbsp;:</strong></label>';
 		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
 		$sql = sql_select('*', 'spip_asso_plan', "classe=". _q(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
