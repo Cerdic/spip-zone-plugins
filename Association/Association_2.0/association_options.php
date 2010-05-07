@@ -23,6 +23,17 @@ function association_icone($texte, $lien, $image, $sup='rien.gif')
 	return icone_horizontale($texte, $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
 }
 
+function association_bouton($texte, $image, $script, $args='')
+{
+	return '<a href="'
+	. generer_url_ecrire($script, $args)
+	. '"><img src="'
+	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image 
+	. '" title="'
+	. $texte
+	. '" /></a>';
+}
+
 function request_statut_interne()
 {
 	$statut_interne = _request('statut_interne');

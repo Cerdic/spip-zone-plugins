@@ -217,21 +217,11 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		.'">'
 		. http_img_pack($logo,'','', _T('asso:adherent_label_modifier_visiteur'))
 		."</a></td>\n"
-		. '<td class="'.$class. ' border1"><a href="'
-		.generer_url_ecrire('ajout_cotisation','id='.$id_auteur)
-		.'">'
-		. http_img_pack('cotis-12.gif','','', _T('asso:adherent_label_ajouter_cotisation'))
-		."</a></td>\n"
-		. '<td class="'.$class. ' border1"><a href="'
-		.generer_url_ecrire('edit_adherent','id='.$id_auteur)
-		.'">'
-		. http_img_pack('edit-12.gif','','', _T('asso:adherent_label_modifier_membre'))
-		."</a></td>\n"
-		. '<td class="'.$class. ' border1"><a href="'
-		.generer_url_ecrire('voir_adherent','id='.$id_auteur)
-		.'">'
-		. http_img_pack('voir-12.png', '','', _T('asso:adherent_label_voir_membre'))
-		."</a></td>\n"
+		. '<td class="'.$class. ' border1">'
+		. association_bouton(_T('asso:adherent_label_ajouter_cotisation'), 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur)
+		. association_bouton(_T('asso:adherent_label_modifier_membre'), 'edit-12.gif', 'edit_adherent','id='.$id_auteur)
+		. association_bouton(_T('asso:adherent_label_voir_membre'), 'voir-12.png', 'voir_adherent','id='.$id_auteur)
+		."</td>\n"
 		. '<td class="'.$class. ' border1"><input name="delete[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. '</tr>';
 	}
