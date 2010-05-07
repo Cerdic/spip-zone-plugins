@@ -104,6 +104,11 @@ function association_date_du_jour($heure=false) {
 		return '<p>'.($heure ? _T('asso:date_du_jour_heure') : _T('asso:date_du_jour')).'</p>';
 	}
 	
+function association_flottant($s)
+{
+	return number_format(floatval($s), 2, ',', ' ');
+}
+
 function association_header_prive($flux){
 		$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('association.css')).'" />';
 		return $flux;
