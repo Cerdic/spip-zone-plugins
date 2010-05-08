@@ -16,6 +16,7 @@ function mediabox_config($public=null){
 		'maxHeight'=>'90%',
 		'minWidth'=>'400px',
 		'minHeight'=>'',
+		'slideshow_speed' => '2500',
 	), $config);
 
 	if ((is_null($public) AND test_espace_prive()) OR $public===false) {
@@ -43,14 +44,21 @@ function mediabox_insert_head_css($flux){
 	return $flux;
 }
 
+
+function mediabox_timestamp($fichier){
+	if ($m = filemtime($fichier))
+		return "$fichier?$m";
+	return $fichier;
+}
+
 function mediabox_insert_head($flux){
 	$config = mediabox_config();
 
 	$flux = mediabox_insert_head_css($flux); // au cas ou il n'est pas implemente
 
 	$flux .='
-<script src="'.find_in_path('javascript/jquery.colorbox.js').'" type="text/javascript"></script>
-<script src="'.find_in_path('javascript/spip.mediabox.js').'" type="text/javascript"></script>';
+<script src="'.mediabox_timestamp(find_in_path('javascript/jquery.colorbox.js')).'" type="text/javascript"></script>
+<script src="'.mediabox_timestamp(find_in_path('javascript/spip.mediabox.js')).'" type="text/javascript"></script>';
 
 	$flux .='<script type="text/javascript">/* <![CDATA[ */
 var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'false')
@@ -58,6 +66,7 @@ var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'
 .'",sel_c:"'.$config['selecteur_commun']
 .'",trans:"'.$config['transition']
 .'",speed:"'.$config['speed']
+.'",ssSpeed:"'.$config['slideshow_speed']
 .'",maxW:"'.$config['maxWidth']
 .'",maxH:"'.$config['maxHeight']
 .'",minW:"'.$config['minWidth']

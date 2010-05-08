@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_speed' => 'Vitesse de transition (ms)',
 	'label_maxwidth' => 'Largeur Maxi (% ou px)',
 	'label_maxheight' => 'Hauteur Maxi (% ou px)',
+	'label_slideshow_speed' => 'Temps d\'exposition des photos du diaporama (ms)',
 
 	'boxstr_slideshowStart' => 'Diaporama',
 	'boxstr_slideshowStop' => 'Arr&ecirc;ter',

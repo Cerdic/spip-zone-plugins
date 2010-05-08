@@ -8,6 +8,7 @@ var mediaboxInit = function() {
 		maxHeight:box_settings.maxH,
 		minWidth:box_settings.minW,
 		minHeight:box_settings.minH,
+		slideshowSpeed:box_settings.ssSpeed,
 		slideshowStart:box_settings.str_ssStart,
 		slideshowStop:box_settings.str_ssStop,
 		current:box_settings.str_cur,
