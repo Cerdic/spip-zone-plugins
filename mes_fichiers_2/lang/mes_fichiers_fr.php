@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne_actions' => '&nbsp;',
 
 // E
+'erreur_aucun_fichier_sauver' => 'Il n\'y a aucun fichier &agrave; sauvegarder',
 'erreur_droits_insuffisants' => 'Vous ne disposez pas de droits suffisants pour r&eacute;aliser une sauvegarde.',
 'erreur_repertoire_trop_grand' => 'Ce r&eacute;pertoire d&eacute;passe la limite de @taille_max@ MB et ne peut &ecirc;tre sauvegard&eacute;.',
 'explication_cfg_notif_mail' => 'Ces emails s\'ajoutent &agrave; celui du webmestre du site. Ils doivent &ecirc;tre s&eacute;par&eacute;s par des virgules ",".',

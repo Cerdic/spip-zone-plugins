@@ -62,7 +62,7 @@ function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
 			echo $erreur_texte;
 		}
 	}else{
-		$erreur_texte = _T('mes_fichiers:erreur_aucun_fichier_sauver','mes_fichiers');
+		$erreur_texte = _T('mes_fichiers:erreur_aucun_fichier_sauver');
 	}
 
 	/**

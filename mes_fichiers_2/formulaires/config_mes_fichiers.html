@@ -36,11 +36,11 @@
 							[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={oui}|oui)
 							<li class="editer_frequence">
 								<label for="frequence"><:mes_fichiers:label_cfg_frequence:></label>
-								<input type="text" name="frequence" class="text" id="frequence" value="[(#ENV{frequence,1})]" style="width: 30px;"> <:mes_fichiers:jours:>
+								<input type="text" name="frequence" class="text" id="frequence" value="[(#ENV{frequence,1})]" style="width: 30px;" /> <:mes_fichiers:jours:>
 							</li>
 							<li class="editer_duree_sauvegarde">
 								<label for="duree_sauvegarde"><:mes_fichiers:label_cfg_duree_sauvegarde:></label>
-								<input type="text" name="duree_sauvegarde" class="text" id="duree_sauvegarde" value="[(#ENV{duree_sauvegarde,15})]" style="width: 30px;"> <:mes_fichiers:jours:>
+								<input type="text" name="duree_sauvegarde" class="text" id="duree_sauvegarde" value="[(#ENV{duree_sauvegarde,15})]" style="width: 30px;" /> <:mes_fichiers:jours:>
 							</li>]
 						</ul>
 					</fieldset>
@@ -72,7 +72,7 @@
 			</ul>
 			<p class="boutons">
 				<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
-				<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+				<input type="submit" name="_cfg_delete" class="reset" value="<:cfg:bouton_effacer:>" />
 			</p>
 		</div>
 	</form>
