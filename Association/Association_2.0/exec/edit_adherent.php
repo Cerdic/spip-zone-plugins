@@ -77,7 +77,7 @@ function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_inte
 {
 	$res = '';
 	if (lire_config('association/indexation')=="id_asso"){
-	  $res .= '<label for="id_asso"><strong>' . _L('N&deg; d\'adh&eacute;rent :') . '</strong></label>';
+	  $res .= '<label for="id_asso"><strong>' . _T('association:nd_d_adherent') . '&nbsp;:</strong></label>';
 			$res .= '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
 	}
 
