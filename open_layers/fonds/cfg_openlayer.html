@@ -7,6 +7,12 @@
 
 <div class="formulaire_spip formulaire_editer formulaire_cfg">
 <div id="formMap" name="formMap" style="width: 470px; height: 350px;margin:10px auto;"></div>
+<form action="#" onsubmit="geocode($('#address').attr('value'),map); return false">
+	<p>
+		<input size="50" name="address" id="address" value="" type="text" />
+		<input value="<:geomap:rechercher:>" type="submit" />
+	</p>
+</form>
 <script type="text/javascript">
 /*<![CDATA[*/
 	var map = null;
@@ -73,20 +79,6 @@
 		map.addControl(click);
 		click.activate();
 
-	}
-	function showAddress(address) {
-		//no funciona con el servidor de geonames da un error XMLHttpRequest
-		var lon = "";
-		var lat = "";
-		$.getJSON("http://ws.geonames.org/searchJSON?maxRows=1&q='" + address + "'", function(data){
-			$.each(data.geonames, function(i,geoname){
-				lon = geoname.lng;
-				lat = geoname.lat;
-			});
-		});
-		var lonlat = new OpenLayers.LonLat(lon, lat);
-		map.setCenter(lonlat);
-		return false;
 	}
 	$(document).ready(function(){
 		init();

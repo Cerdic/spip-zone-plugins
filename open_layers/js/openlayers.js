@@ -86,3 +86,16 @@ OpenLayers.LonLat = OpenLayers.Class(OpenLayers.LonLat, {
 	}
 			
 });
+
+function geocode(address,map) {
+	var lon = "";
+	var lat = "";
+	$.getJSON("http://ws.geonames.org/searchJSON?maxRows=1&q='" + address + "'", function(data){
+		$.each(data.geonames, function(i,geoname){
+			lon = geoname.lng;
+			lat = geoname.lat;
+		});
+		var lonlat = new OpenLayers.LonLat(lon, lat);
+		map.setCenter(lonlat.fromDataToDisplay());
+	});
+}

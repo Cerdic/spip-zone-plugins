@@ -92,22 +92,13 @@ function inc_openlayer_append_moveend_map_dist($target_id, $map_wms_name, $map_w
             click.activate();
 
         }
-        function showAddress(address) {
-        	//no funciona con el servidor de geonames da un error XMLHttpRequest
-        	var lon = "";
-        	var lat = "";
-        	$.getJSON("http://ws.geonames.org/searchJSON?maxRows=1&q=\'" + address + "\'", function(data){
-          		$.each(data.geonames, function(i,geoname){
-          			lon = geoname.lng;
-          			lat = geoname.lat;
-          		});
-        	});
-        	var lonlat = new OpenLayers.LonLat(lon, lat);
-        	map.setCenter(lonlat);
-        	return false;
-        }
         $(document).ready(function(){
         	init();
+			$("form#formulaire_address").submit(function(){
+				var address = $("#map_address").attr("value");
+				geocode(address,map);
+				return false;
+    		});
         });
     </script>';
     return $out;
