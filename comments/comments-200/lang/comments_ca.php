@@ -17,9 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_le' => 'El',
 
 	// F
-	'forum_longueur' => 'Llargada dels missatges',
-	'forum_longueur_maxi' => 'Llargada m&agrave;xima',
-	'forum_longueur_mini' => 'Llargada m&iacute;nima',
+	'cfg_forum_longueur' => 'Llargada dels missatges',
+	'cfg_forum_longueur_maxi' => 'Llargada m&agrave;xima',
+	'cfg_forum_longueur_mini' => 'Llargada m&iacute;nima',
 	'forum_qui_etes_vous' => 'Qui ets?',
 
 	// L

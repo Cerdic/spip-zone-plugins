@@ -12,15 +12,15 @@
 <div class="formulaire_spip">
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 	<fieldset>
-    	<legend><:comments:forum_longueur:></legend>
+    	<legend><:comments:cfg_forum_longueur:></legend>
 		<ul>
-			<li class="comments_forum_longueur_mini">
-				<label for="forum_longueur_mini"><:comments:forum_longueur_mini:></label>
-				<input type="text" class="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
+			<li class="cfg_forum_longueur_mini">
+				<label for="cfg_forum_longueur_mini"><:comments:cfg_forum_longueur_mini:></label>
+				<input type="text" class="text" name="cfg_forum_longueur_mini"[ value="(#ENV{cfg_forum_longueur_mini}|sinon{10})"] id="cfg_forum_longueur_mini" style="width: 4em;" disabled="disabled" />
 			</li>
-			<li class="comments_forum_longueur_maxi">
-				<label for="forum_longueur_maxi"><:comments:forum_longueur_maxi:></label>
-				<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" disabled="disabled" />
+			<li class="cfg_forum_longueur_maxi">
+				<label for="cfg_forum_longueur_maxi"><:comments:cfg_forum_longueur_maxi:></label>
+				<input type="text" class="text" name="cfg_forum_longueur_maxi"[ value="(#ENV{cfg_forum_longueur_maxi}|sinon{1500})"] id="cfg_forum_longueur_maxi" style="width: 4em;" disabled="disabled" />
 			</li>
 		</ul>
 	</fieldset>
