@@ -146,7 +146,7 @@ function exec_comptes() {
 		}	
 	}
 
-	$table2 = "\n<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="Valider" class="fondo" /></td></table>';
+	$table2 = "\n<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="Valider" class="fondo" /></td></tr></table>';
 
 	echo generer_form_ecrire('action_comptes', $table . $table2);
 	fin_cadre_relief();  

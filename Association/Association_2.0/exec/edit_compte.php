@@ -36,8 +36,7 @@ function exec_edit_compte() {
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);	
 		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 		
 		echo debut_droite("",true);
 
@@ -56,29 +55,43 @@ function exec_edit_compte() {
 
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:modification_des_comptes'));
 		
-		$res = '<label for="imputation"><strong>' . _T('asso:imputation') . '</strong></label>';
-		$res .= '<select name="imputation" type="text" id="date" class="formo" />';
-		$sql = sql_select('*', 'spip_asso_plan', "classe<>". sql_quote(lire_config('association/classe_banques')), "", "code") ;
+		$sql = sql_select('code,intitule', 'spip_asso_plan', "classe<>". sql_quote(lire_config('association/classe_banques')), "", "code") ;
+		$res = '';
 		while ($banque = sql_fetch($sql)) {
-			$res .= '<option value="'.$banque['code'].'" ';
-			if ($imputation==$banque['code']) { $res .= ' selected="selected"'; }
-			$res .= '>'.$banque['intitule'].'</option>';
+			$code = $banque['code'];
+			$s = ($imputation==$code) ? ' selected="selected"' : '';
+			$opt .= "\n<option value='$code'$s>".$banque['intitule'].'</option>';
 		}
-		$res .= '</select>';
-		$res .= '<label for="date"><strong>' . _T('asso:date_aaaa_mm_jj') . '</strong></label>';
-		$res .= '<input name="date" value="'.$date.'" type="text" id="date" class="formo" />';
-		$res .= '<label for="recette"><strong>' . _T('asso:recette') . '</strong></label>';
-		$res .= '<input name="recette" value="'.$recette.'" type="text" id="recette" class="formo" />';
-		$res .= '<label for="depense"><strong>' . _T('asso:depense') . '</strong></label>';
-		$res .= '<input name="depense" value="'.$depense.'"  type="text" id="depense" class="formo" />';
-		$res .= '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').'&nbsp;:</strong></label>';
+		if ($res)
+			$res = '<label for="imputation"><strong>' 
+			. _T('asso:imputation')
+			. '</strong></label>'
+			. '<select name="imputation" id="date" class="formo">'
+			. $res
+			. '</select>';
+
+		$res .= '<label for="date"><strong>' 
+		. _T('asso:date_aaaa_mm_jj') . '</strong></label>'
+		. '<input name="date" value="'
+		. $date.'" type="text" id="date" class="formo" />'
+		. '<label for="recette"><strong>' 
+		. _T('asso:recette') . '</strong></label>'
+		. '<input name="recette" value="'
+		. $recette.'" type="text" id="recette" class="formo" />'
+		. '<label for="depense"><strong>' 
+		. _T('asso:depense') . '</strong></label>'
+		. '<input name="depense" value="'
+		. $depense.'"  type="text" id="depense" class="formo" />'
+		. '<label for="journal"><strong>'
+		. _T('asso:prets_libelle_mode_paiement')
+		. '&nbsp;:</strong></label>';
 
 		$sel = '';
-		$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "", "code") ;
+		$sql = sql_select('code,intitule', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "", "code") ;
 		while ($banque = sql_fetch($sql)) {
-			$sel .= '<option value="'.$banque['code'].'" ';
-			if ($journal==$banque['code']) { $sel .= ' selected="selected"'; }
-			$sel .= '>'.$banque['intitule'].'</option>';
+			$code = $banque['code'];
+			$s = ($journal==$code) ? ' selected="selected"' : '';
+			$opt .= "\n<option value='$code'$s>".$banque['intitule'].'</option>';
 		}
 		if ($sel) 
 			$res .= '<select name="journal" type="text" id="journal" class="formo" />' . $sel . '</select>';

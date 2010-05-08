@@ -22,7 +22,6 @@ function exec_ventes(){
 	} else {
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_agir_ventes = generer_url_ecrire('agir_ventes');
 		$url_ajout_vente=generer_url_ecrire('edit_vente','agir=ajoute');
 		
 		$annee=intval(_request('annee'));
@@ -46,7 +45,7 @@ function exec_ventes(){
 		while ($data = sql_fetch($query)) {
 			$solde= $data['somme_depenses'] + $data['somme_recettes'];
 			$imputation = $data['imputation'];
-			echo '<table width="100%">';
+			echo "\n<table width='100%'>";
 			echo '<tr>';
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
@@ -67,9 +66,7 @@ function exec_ventes(){
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:toutes_les_ventes'));
 		
 		// PAGINATION ET FILTRES
-		echo '<table>';
-		echo '<tr>';
-		echo '<td>';
+		echo "\n<table><tr><td>";
 		
 		$query = sql_select("date_format( date_vente, '%Y' )  AS annee", "spip_asso_ventes", "", "annee", "annee");
 		while ($data = sql_fetch($query)) {
@@ -77,23 +74,9 @@ function exec_ventes(){
 			if ($a==$annee)	{echo ' <strong>'.$a.'</strong>';}
 			else {echo ' <a href="'. generer_url_ecrire('ventes','annee='.$a).'">'.$a.'</a>';}
 		}
-		echo '</td>';
-		echo '</table>';
+		echo "</td></tr></table>\n";
 		
 		//TABLEAU
-		echo '<form action="'.$url_agir_ventes.'" method="post">';
-		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr bgcolor="#DBE1C5">';
-		echo '<td style="text-align:right"><strong>' . _T('asso:id') . '</strong></td>';
-		echo '<td style="text-align:right"><strong>' . _T('asso:date') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:article') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:code') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:acheteur') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:membre') . '</strong></td>';
-		echo '<td style="text-align:right"><strong>' . _T('asso:qte') . '</strong></td>';
-		echo '<td style="text-align:right"><strong>' . _T('asso:montant') . '</strong></td>';
-		echo '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>';
-		echo '</tr>';
 		$ventes = '';
 		$query = sql_select('*', 'spip_asso_ventes', "date_format( date_vente, '%Y' )=$annee", '',  "id_vente DESC") ;
 		while ($data = sql_fetch($query)) {
@@ -111,23 +94,32 @@ function exec_ventes(){
 			. "\n<td$class style='text-align:right'>".$q.'</td>'
 			. "\n<td$class style='text-align:right'>"
 			. association_nbrefr($q*$data['prix_vente']).'</td>'
-			. "\n<td$class style='text-align:center'><a href='"
-			. generer_url_ecrire('edit_vente',"agir=modifie&id=$id")
-			. "'><img src='"._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif\' title="' . _T('asso:mettre_a_jour_la_vente') . '"></a>'
+			. "\n<td$class style='text-align:center'>"
+			. association_bouton(_T('asso:mettre_a_jour_la_vente'), 'edit-12.gif', 'edit_vente',"agir=modifie&id=$id") . '</td>'
 			."\n<td$class style='text-align:center'><input name='delete[]' type='checkbox' value='$id' /></td>"
 			.'</tr>';
 		}     
-		echo $ventes, '</table>';
-		
-		echo '<table width="100%">';
-		echo '<tr>';
-		echo '<td  style="text-align:right;">';
-		echo !$ventes ? '' : ('<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo">');
-		echo '</table>';
-		echo '</form>';
-		
+	
+		if ($ventes) {
+			echo '<form action="', generer_url_ecrire('agir_ventes').'" method="post">';
+			echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+			echo '<tr style="backgroun-color: #DBE1C5">';
+			echo '<td style="text-align:right"><strong>' . _T('asso:id') . '</strong></td>';
+			echo '<td style="text-align:right"><strong>' . _T('asso:date') . '</strong></td>';
+			echo '<td><strong>' . _T('asso:article') . '</strong></td>';
+			echo '<td><strong>' . _T('asso:code') . '</strong></td>';
+			echo '<td><strong>' . _T('asso:acheteur') . '</strong></td>';
+			echo '<td><strong>' . _T('asso:membre') . '</strong></td>';
+			echo '<td style="text-align:right"><strong>' . _T('asso:qte') . '</strong></td>';
+			echo '<td style="text-align:right"><strong>' . _T('asso:montant') . '</strong></td>';
+			echo '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>';
+			echo '</tr>';
+			echo $ventes, "</table>\n";
+			echo '<table width="100%"><tr><td  style="text-align:right;"><input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" /></table>';
+			echo '</form>';
+		}
 		fin_cadre_relief();  
-		 echo fin_gauche(),fin_page(); 
+		echo fin_gauche(),fin_page(); 
 	}
 }
 ?>
