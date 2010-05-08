@@ -1,8 +1,11 @@
 <B_sel>
-<ul class='liste_items themes'>
+<ul class='liste-items themes'>
 <BOUCLE_sel(POUR){tableau #ENV{themes}}{cle=#ENV{selection}}>
 <li class='item on'>
-[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left}|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
+[(#VALEUR|table_valeur{icon}|oui)
+[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left}|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]]
+[(#VALEUR|table_valeur{icon}|non)
+[(#CHEMIN{img_pack/icon_theme_defaut.jpg}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left}|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]]
 <h2><:zengarden:theme_actif:></h2>
 <h3>[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
 <div class='descriptif'>[(#VALEUR|table_valeur{description}|propre)]</div>

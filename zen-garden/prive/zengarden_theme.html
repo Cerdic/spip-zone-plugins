@@ -6,32 +6,38 @@
 <BOUCLE_themes(POUR){tableau #GET{themes}}{cle!=#ENV{selection}}{par chemin_tri}{pagination 20}>
 	<li class='theme'>
 		<div class="qTip target_leftMiddle tooltip_rightMiddle">
-		[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}
-		|image_reduire{100,75}
-		|inserer_attribut{class,''}
-		|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
+		[(#VALEUR|table_valeur{icon}|oui)
+			[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}
+			|image_reduire{100,75}
+			|inserer_attribut{class,''}
+			|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]]
+		[(#VALEUR|table_valeur{icon}|non)
+			[(#CHEMIN{img_pack/icon_theme_defaut.jpg}
+			|image_reduire{100,75}
+			|inserer_attribut{class,''}
+			|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]]
 		<h3 class="">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
 		</div>
 		<div class="qTipContent">
 		<div class='descriptif'>[(#VALEUR|table_valeur{description}|propre)]</div>
 		<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR|table_valeur{auteur}|propre|PtoBR}})]</div>
 		<div class='licence'>[<:intitule_licence:> (#VALEUR|table_valeur{licence}|propre|PtoBR)]</div>
-		
+
 		<B_squelettes>
 			<div class='squelette'>
 				<:zengarden:intitule_compatiblite_squelette:>
 				<ul>
 				<BOUCLE_squelettes(POUR){tableau #VALEUR|table_valeur{utilise}}>[(#VALEUR|table_valeur{id}|=={Z}|non)[
-							<li>
-								(#VALEUR|table_valeur{name}|propre|PtoBR)
-								[: (#VALEUR|table_valeur{version}|zengarden_affiche_version_compatible|propre|PtoBR)]
-							</li>
+					<li>
+						(#VALEUR|table_valeur{name}|propre|PtoBR)
+						[: (#VALEUR|table_valeur{version}|zengarden_affiche_version_compatible|propre|PtoBR)]
+					</li>
 				]]</BOUCLE_squelettes>
 				</ul>
 			</div>
 			<br class="nettoyeur" />
 		</B_squelettes>
-		
+
 		[<div class='bandeau'>(#VALEUR|table_valeur{bandeau}|?{<:zengarden:bandeau_personalisable:>})</div>]
 		</div>
 		<p class='actions'>
@@ -44,6 +50,6 @@
 <br class="nettoyeur" />
 [<p class='pagination'>(#PAGINATION)</p>]
 
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.qtip-1.0.0-rc3.js}" ></script>
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.qtip.activate.js}" ></script>
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.qtip-1.0.0-rc3.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.qtip.activate.js})"></script>]
 </B_themes>
