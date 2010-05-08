@@ -8,10 +8,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define ('_DEBUG_AUTORISER', false);
-if (!function_exists('spip_version_compare') OR 
-	$GLOBALS['spip_version_code'] < 15375) {
-	define ('_ID_WEBMESTRES', '1'); // '1:5:90' a regler dans mes_options
-}
 $GLOBALS['autorite'] = @unserialize($GLOBALS['meta']['autorite']);
 $autorite_erreurs = array();
 
@@ -61,6 +57,14 @@ if ($GLOBALS['autorite']['statut_ignorer_admins_restreints'] == 'oui') {
 
 // Charger les versions *_dist des fonctions
 include_once _DIR_RESTREINT.'inc/autoriser.php';
+// si ca n'a pas ete fait et que l'on est dans une version ancienne de spip
+// definir _ID_WEBMESTRES
+if (!defined('_ID_WEBMESTRES')
+	AND include_spip('inc/plugin')
+	AND (!function_exists('spip_version_compare') OR
+	spip_version_compare($GLOBALS['spip_version_branche'],"2.1.0-rc","<"))) {
+	define ('_ID_WEBMESTRES', '1'); // '1:5:90' a regler dans mes_options
+}
 
 
 //
