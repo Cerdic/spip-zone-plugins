@@ -36,7 +36,7 @@
 		<ul>
 			[<li class="editer_skin[ (#ENV**{erreurs}|table_valeur{skin}|oui)erreur]">
 				<label for='skin'><:mediabox:label_skin:></label>
-				(#ENV{_skins}|box_choisir_skin{#ENV{skin}}|image_reduire{200})
+				(#ENV{_skins}|box_choisir_skin{#ENV{skin}}|image_reduire{130})
 			</li>]
 			<li class="editer_transition[ (#ENV**{erreurs}|table_valeur{transition}|oui)erreur]">
 				<label for='transition'><:mediabox:label_transition:></label>
@@ -72,5 +72,5 @@
 <style type="text/css">
 	.editer_skin .choix input {float:left;}
 	.editer_skin .choix label img {float:left;}
-	.editer_skin .choix {overflow:hidden;margin-top:10px;}
+	.editer_skin .choix {overflow:hidden;margin-top:10px;width:160px;margin-right:10px;float:left;}
 </style>
