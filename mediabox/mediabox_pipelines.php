@@ -69,7 +69,7 @@ var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'
 .'",str_next:"'._T('mediabox:boxstr_next')
 .'",str_close:"'._T('mediabox:boxstr_close')
 .'"};
-if (window.jQuery) (function($){ if(typeof onAjaxLoad == "function") onAjaxLoad(mediabox_init); $(mediabox_init); })(jQuery);
+if (window.jQuery) (function($){ if(typeof onAjaxLoad == "function") onAjaxLoad(mediaboxInit); $(mediaboxInit); })(jQuery);
 /* ]]> */</script>'."\n";
 
 	return $flux;
