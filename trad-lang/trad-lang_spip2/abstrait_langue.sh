@@ -72,7 +72,7 @@ for i in $*
 do
 sed -f $c $i > /tmp/x.php
 php /tmp/x.php > /dev/null
-if [ $? -eq 0 ]
+if [ $? -eq 0 ]
 then
 	mv /tmp/x.php $i
 else	
