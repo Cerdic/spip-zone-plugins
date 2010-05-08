@@ -1,15 +1,24 @@
 <plugin>
-	<nom>Mes fichiers 2</nom>
+	<nom>
+		<multi>
+			[fr]Mes fichiers 2
+			[en]My files 2
+		</multi>
+	</nom>
 	<auteur>_Eric_, Quentin, d'apr&egrave;s la version initiale de James</auteur>
 	<version>0.3.1</version>
 	<etat>dev</etat>
 	<licence>GPL 3</licence>
 	<icon>themes/spip/images/mes_fichiers-64.png</icon>
-	<description>
-Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
+	<description><multi>
+[fr]Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
 Le fichier d'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
 
 Il est aussi possible de lancer une sauvegarde journali&egrave;re automatique de tous les fichiers de personnalisation.
+[en]This plugin makes an archive file containing the customization datas of the site as the last database dump, the skeleton(s) file(s), the images folder...
+The archive file is created in <code>tmp/mes_fichiers/</code> and is called <code>mf2_aaaammjj_hhmmss.zip</code>.
+
+It is also possible to initiate an automatic daily backup of all customization files.</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Mes-Fichiers-2</lien>
 

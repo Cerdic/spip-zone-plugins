@@ -28,8 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // I
 'info_sauver' => 'Cette option fabrique un fichier d\'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
 	Le fichier d\'archives est cr&eacute;&eacute; dans <i>tmp/mes_fichiers/</i> et se nomme <i>@prefixe@_aaaammjj_hhmmss.zip</i>.
-	La liste exhaustive des fichiers et dossiers pouvant &ecirc;tre sauvegard&eacute;s est affich&eacute;e ci-dessous:',
-'info_telecharger' => 'Cette option permet de t&eacute;l&eacute;charger un des fichiers d\'archives disponibles parmi la liste affich&eacute;e ci-dessous:',
+	La liste exhaustive des fichiers et dossiers pouvant &ecirc;tre sauvegard&eacute;s est affich&eacute;e ci-dessous :',
+'info_telecharger' => 'Cette option permet de t&eacute;l&eacute;charger un des fichiers d\'archives disponibles parmi la liste affich&eacute;e ci-dessous :',
 
 // J
 'jours' => 'jours',
