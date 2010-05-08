@@ -76,9 +76,9 @@ function exec_agir_ventes(){
 			
 			echo debut_droite("",true);
 			
-			echo debut_cadre_relief(  "", false, "", $titre = _T('association:action_sur_les_ventes_associatives'));
+			echo debut_cadre_relief(  "", false, "", $titre = _T('asso:action_sur_les_ventes_associatives'));
 			
-			echo '<p><strong>', _T('association:vous_vous_appretez_a_effacer')
+			echo '<p><strong>', _T('asso:vous_vous_appretez_a_effacer')
 			  . " $count "
 			  . (($count==1) ? _T('asso:vente') : _T('asso:ventes'));
 			echo '</strong></p>';

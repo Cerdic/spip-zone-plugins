@@ -36,7 +36,7 @@ function exec_bilan(){
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", propre( _T('association:bilans_comptables')));
+		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", propre( _T('asso:bilans_comptables')));
 		
 		if (!($annee = _request('annee'))) $annee = date('Y');
 		$class= "impair";

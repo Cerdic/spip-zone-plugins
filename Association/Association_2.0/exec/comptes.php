@@ -77,7 +77,7 @@ function exec_comptes() {
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('association:informations_comptables'));
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:informations_comptables'));
 		
 		echo "\n<table width='100%'>";
 		

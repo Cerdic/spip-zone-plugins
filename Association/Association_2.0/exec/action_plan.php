@@ -48,7 +48,7 @@ function exec_action_plan(){
 
 		echo debut_droite('',true);
 			
-		debut_cadre_relief(  "", false, "", $titre = _T('association:suppression_de_compte'));
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:suppression_de_compte'));
 		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_le_compte').$id_plan.'</strong></p>';
 
 		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';

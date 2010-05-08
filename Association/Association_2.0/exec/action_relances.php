@@ -58,7 +58,7 @@ function exec_action_relances(){
 			
 			echo debut_droite("",true);
 			
-			debut_cadre_relief(  "", false, "", $titre = _T('association:relance_de_cotisations'));
+			debut_cadre_relief(  "", false, "", $titre = _T('asso:relance_de_cotisations'));
 			echo '<p><strong>', _T('asso:vous_vous_appretez_a_envoyer') . " $count ";
 			if ($count==1)
 			  { echo _T('asso:relance');}

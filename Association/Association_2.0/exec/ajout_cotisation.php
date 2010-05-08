@@ -24,7 +24,7 @@ function exec_ajout_cotisation(){
 	} else {
 		
 			$commencer_page = charger_fonction('commencer_page', 'inc');
-			echo $commencer_page(_T('association:ajout_de_cotisation')) ;
+			echo $commencer_page(_T('asso:ajout_de_cotisation')) ;
 			association_onglets();
 			echo debut_gauche("",true);
 			ajout_cotisation(intval(_request('id')));
@@ -58,14 +58,14 @@ function ajout_cotisation($id_auteur)
 		echo fin_boite_info(true);
 		echo debut_droite("",true);
 
-		$res = '<label for="date"><strong>'._T('association:date_du_paiement_AAAA-MM-JJ').' :</strong></label>';
+		$res = '<label for="date"><strong>'._T('asso:date_du_paiement_AAAA-MM-JJ').' :</strong></label>';
 		$res .= '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
-		$res .= '<label for="montant"><strong>'._T('association:montant_paye_en_euros').' :</strong></label>';
+		$res .= '<label for="montant"><strong>'._T('asso:montant_paye_en_euros').' :</strong></label>';
 		$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));
 		$mois+=$categorie['duree'];
 		$validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
 		$res .= '<input name="montant" type="text" value="'.$categorie['cotisation'].'" id="montant" class="formo" />';
-		$res .= '<label for="journal"><strong>'._T('association:prets_libelle_mode_paiement').'&nbsp;:</strong></label>';
+		$res .= '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').'&nbsp;:</strong></label>';
 		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
 		$sql = sql_select('*', 'spip_asso_plan', "classe=". _q(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
@@ -83,7 +83,7 @@ function ajout_cotisation($id_auteur)
 		else {$res .= _T('asso:bouton_envoyer');}
 		$res .= '" class="fondo" /></div>';
 
-		echo debut_cadre_relief(  "", false, "", _T('association:nouvelle_cotisation'));
+		echo debut_cadre_relief(  "", false, "", _T('asso:nouvelle_cotisation'));
 		echo redirige_action_post('cotisation', $id_auteur, 'voir_adherent', "id=$id_auteur", $res);
 
 		echo fin_cadre_relief(true);  
