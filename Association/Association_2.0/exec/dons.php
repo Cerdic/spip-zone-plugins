@@ -35,12 +35,12 @@ function exec_dons() {
 		echo fin_boite_info(true);
 		
 		
-		$res=association_icone(_T('Ajouter un don'),  $url_ajout_don, 'ajout_don.png');
+		$res=association_icone(_T('association:ajouter_un_don'),  $url_ajout_don, 'ajout_don.png');
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('Tous les dons'));
+		debut_cadre_relief(  "", false, "", $titre = _T('association:tous_les_dons'));
 
 		// PAGINATION ET FILTRES
 		echo '<table width="100%">';

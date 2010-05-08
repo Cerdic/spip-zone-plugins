@@ -107,7 +107,7 @@ function don_mode_de_paiemen($journal)
 		$res .= '>'.$banque['intitule'].'</option>';
 	}
 	if (!$res) return '';
-	return '<label for="journal"><strong>'._T('asso:Mode de paiement').'&nbsp;:</strong></label>'
+	return '<label for="journal"><strong>'._T('association:prets_libelle_mode_paiement').'&nbsp;:</strong></label>'
 	. '<select name="journal" type="text" id="journal" class="formo" />'
 	. $res
 	.'</select>';

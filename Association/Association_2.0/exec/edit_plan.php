@@ -29,7 +29,7 @@ function exec_edit_plan(){
 		$id_plan= intval(_request('id'));
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Edition plan comptable')) ;		
+		echo $commencer_page(_T('association:edition_plan_comptable')) ;		
 		
 		association_onglets();
 		
@@ -45,7 +45,7 @@ function exec_edit_plan(){
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('Edition plan comptable'));
+		debut_cadre_relief(  "", false, "", $titre = _T('association:edition_plan_comptable'));
 		
 		$data = !$id_plan ? '' : sql_fetsel("*", "spip_asso_plan", "id_plan=$id_plan");
 		if ($data) {

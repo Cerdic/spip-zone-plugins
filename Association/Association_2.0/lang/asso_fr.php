@@ -496,5 +496,21 @@ Commentaire: @commentaire@
 'relance' => 'relance',
 'relances' => 'relances',
 'ventes' => 'ventes',
+
+'action_sur_les_ventes_associatives' => 'Action sur les ventes associatives',
+'ajout_de_cotisation' => 'Ajout de cotisation',
+'ajouter_un_don' => 'Ajouter un don',
+'ajouter_une_vente' => 'Ajouter une vente',
+'bilans_comptables' => 'Bilans comptables',
+'date_du_paiement_AAAA-MM-JJ' => 'Date du paiement (AAAA-MM-JJ)',
+'edition_plan_comptable' => 'Edition plan comptable',
+'informations_comptables' => 'Informations comptables',
+'modification_des_comptes' => 'Modification des comptes',
+'relance_de_cotisations' => 'Relance de cotisations',
+'suppression_de_compte' => 'Suppression de compte',
+'tous_les_dons' => 'Tous les dons',
+'toutes_les_ventes' => 'Toutes les ventes',
+'montant_paye_en_euros' => 'Montant pay&eacute; (en euros)',
+'nouvelle_cotisation' => 'Nouvelle cotisation',
 );
 ?>

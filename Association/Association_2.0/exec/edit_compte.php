@@ -54,7 +54,7 @@ function exec_edit_compte() {
 		$date = date('Y-m-d');
 		}
 
-		debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
+		debut_cadre_relief(  "", false, "", $titre = _T('association:modification_des_comptes'));
 		
 		$res = '<label for="imputation"><strong>' . _T('asso:imputation') . '</strong></label>';
 		$res .= '<select name="imputation" type="text" id="date" class="formo" />';
@@ -71,7 +71,7 @@ function exec_edit_compte() {
 		$res .= '<input name="recette" value="'.$recette.'" type="text" id="recette" class="formo" />';
 		$res .= '<label for="depense"><strong>' . _T('asso:depense') . '</strong></label>';
 		$res .= '<input name="depense" value="'.$depense.'"  type="text" id="depense" class="formo" />';
-		$res .= '<label for="journal"><strong>'._T('asso:Mode de paiement').'&nbsp;:</strong></label>';
+		$res .= '<label for="journal"><strong>'._T('association:prets_libelle_mode_paiement').'&nbsp;:</strong></label>';
 
 		$sel = '';
 		$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "", "code") ;
