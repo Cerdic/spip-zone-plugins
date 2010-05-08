@@ -6,8 +6,7 @@
 
 <form method="post" action="#ENV{action}">
 <div>
-#ACTION_FORMULAIRE{#ENV{action}}
-
+	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
 		<legend><:contact:configuration_destinataires:></legend>
 		<ul class="decaler">
@@ -38,7 +37,7 @@
 					<label for="tous_et"><:contact:configuration_destinataires_tous_et:></label>
 				</div>
 				</div>
-				
+
 				<div class="bord">
 				<div class="non par">
 					<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
@@ -53,7 +52,7 @@
 					<label for="un_et"><:contact:configuration_destinataires_un_et:></label>
 				</div>
 				</div>
-				
+
 				<div class="bord top">
 				<div class="plus par">
 					<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
@@ -160,7 +159,7 @@
 			</li>
 		</ul>
 	</fieldset>
-    
+
     <fieldset>
 		<legend><:contact:champ_civilite:></legend>
 		<ul class="decaler10 baisser10">
@@ -171,7 +170,7 @@
 			</li>
 		</ul>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend><:contact:sauv_message:></legend>
 		<ul class="decaler10 baisser10">
@@ -182,14 +181,14 @@
 			</li>
 		</ul>
 	</fieldset>
-    
+
 
 	<fieldset>
 		<legend><:contact:configuration_intro:></legend>
 		<ul>
 			<li class="editer_texte">
 				<p class="explication"><:contact:configuration_intro_explication:></p>
-				<textarea name="texte" id="texte" rows="10">#ENV{texte}</textarea>
+				<textarea name="texte" id="texte" rows="10" cols="40">#ENV{texte}</textarea>
 			</li>
 		</ul>
 	</fieldset>
@@ -206,18 +205,18 @@
 		$('div.selection').each(function(){
 			if ($('div.non input.radio').is(':checked'))
 				$(this).hide();
-		});		
+		});
 		$('div.enf').hide();
-		
+
 		$('div.enf input.radio:checked').each(function(){
 		 		$(this).parent('div').show();
-		 		$(this).parent('div').siblings('div.enf').show();		 		
+		 		$(this).parent('div').siblings('div.enf').show();
 		 });
-		
+
 		$('div.par input.radio:checked').each(function(){
-		 		$(this).parent('div').siblings('div.enf').show();		 		
+		 		$(this).parent('div').siblings('div.enf').show();
 		 });
-		 
+
 		$('div div.par input.radio')
 			.click(function(){
 				if ($(this).is(':checked'))
@@ -226,14 +225,14 @@
 					$('div div.par input.radio').not(':checked').parent('.par').siblings('div.enf')
 						.slideUp();
 		});
-										
+
 		$('div.plus input.radio')
 			.click(function(){
 				if ($(this).is(':checked'))
 					$('div.selection')
 						.slideDown();
 						});
-						
+
 		$('div.non input.radio')
 			.click(function(){
 				if ($(this).is(':checked'))
