@@ -14,7 +14,7 @@
 				</BOUCLE_sous_menu_test>
 				[(#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{refuser_sous_menu}|non)
 				<button name="demander_sous_menu" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_ajouter_sous_menu:>">
-					[<img height="24" width="24" src="(#CHEMIN{images/menus-24.png})" />]
+					[<img height="24" width="24" src="(#CHEMIN{images/menus-24.png})" alt="" />]
 				</button>
 				]
 				<//B_sous_menu_test>
@@ -52,11 +52,11 @@
 			<div class="boutons">
 			[(#ENV{sous_menu}|non)<span class="image_loading"></span>]
 			[<button type="submit" class="submit link" name="supprimer_menu" value="#ENV{id_menu}">
-				[<img src="(#CHEMIN{images/menus_action_supprimer.png})" />]
+				[<img src="(#CHEMIN{images/menus_action_supprimer.png})" alt="" />]
 				(#ENV{sous_menu}|?{<:menus:formulaire_supprimer_sous_menu:>,''})
 			</button>]
 			<button type="submit" class="submit" name="demander_nouvelle_entree" value="#ENV{id_menu}">
-				[<img src="(#CHEMIN{images/menus_action_ajouter.png})" />]
+				[<img src="(#CHEMIN{images/menus_action_ajouter.png})" alt="" />]
 				<:menus:formulaire_ajouter_entree:>
 			</button>
 			</div>
