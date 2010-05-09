@@ -11,119 +11,116 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
-	function exec_edit_relances(){
+function exec_edit_relances(){
 		
-		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
-		 $commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		$url_asso = generer_url_ecrire('association');
-		$url_action_relances = generer_url_ecrire('action_relances','agir=confirm');
-		$url_edit_relances = generer_url_ecrire('edit_relances');
-		$url_edit_labels = generer_url_ecrire('edit_labels');
-		$indexation = lire_config('association/indexation');
-		$url_retour = $_SERVER["HTTP_REFERER"];
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+
+	$url_edit_labels = generer_url_ecrire('edit_labels');
+	$url_retour = $_SERVER["HTTP_REFERER"];
+	$indexation = lire_config('association/indexation');		
+
+	association_onglets();
 		
-		association_onglets();
+	echo debut_gauche("",true);
 		
-		echo debut_gauche("",true);
+	echo debut_boite_info(true);
+	echo association_date_du_jour();	
+	echo fin_boite_info(true);
 		
-		echo debut_boite_info(true);
-		echo association_date_du_jour();	
-		echo fin_boite_info(true);
-		
-		
-		$res=association_icone(_T('asso:bouton_impression'),  $url_edit_labels, "print-24.png");
+	$res=association_icone(_T('asso:bouton_impression'),  $url_edit_labels, "print-24.png");
 			
-		$res.=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		 echo bloc_des_raccourcis($res);
+	$res.=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
+	echo bloc_des_raccourcis($res);
 		
-		echo debut_droite("",true);
+	echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:tous_les_membres_a_relancer'));
+	debut_cadre_relief(  "", false, "", $titre = _T('asso:tous_les_membres_a_relancer'));
 		
-		echo '<form method="post" action="'.$url_action_relances.'">';
+	$statut_interne = _request('statut_interne');
+	if (!$statut_interne) $statut_interne= "echu";
+
+	$corps = '';
+	foreach (array('ok','echu','relance','sorti','prospect') as $var) {
+			$corps .= '<option value="'.$var.'"';
+			if ($statut_interne==$var) {$corps .= ' selected="selected"';}
+			$corps .= '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
+	}
+
+	if ($corps) {
+		$corps = '<div><select name ="statut_interne" class="fondl" onchange="form.submit()">' . $corps . '</select></div>';
+		echo generer_form_ecrire('edit_relances', $corps, 'method="get"', '');
+	}
 		
-		//MESSAGE
-		echo '<fieldset>';
-		echo '<legend>Message de relance</legend>';
-		echo '<label for="sujet"><strong>'._T('asso:Sujet').' :</strong></label>';
-		echo '<input name="sujet" type="text" value="'.stripslashes(_T('asso:titre_relance')).'" id="sujet" class="formo" />';
-		echo '<label for="message"><strong>'._T('asso:Message').' :</strong></label>';
-		echo '<textarea name="message" rows="15" id="message" class="formo" />'.stripslashes(_T('asso:message_relance')).'</textarea>';
-		echo '</fieldset>';
-		
-		// FILTRES
-		if ( isset ($_POST['statut_interne'] )) { $statut = $_POST['statut_interne']; }
-		else { $statut_interne= "echu"; }
-		
-		echo '<table width="100%">';
-		echo '<tr>';
-		echo '<td style="text-align:right;">';
-		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
-		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
-		foreach (array(ok,echu,relance,sorti,prospect) as $var) {
-			echo '<option value="'.$var.'"';
-			if ($var==$statut) {echo ' selected="selected"';}
-			echo '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
-		}
-		echo '</select>';
-		echo '</td></tr>';
-		echo '</table>';
-		
-		//TABLEAU
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr bgcolor="#DBE1C5">';
-		echo '<td><strong>';
-		if ($indexation=="id_asso") { echo _T('asso:adherent_libelle_id_asso');}
-		else { echo _T('asso:adherent_libelle_id_adherent');} 
-		echo '</strong></td>';
-		echo '<td><strong>' . _T('asso:nom') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:telephone') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:portable') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:validite') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:envoi') . '</strong></td>';
-		echo '</tr>';
-		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " a.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
-		while ($data = sql_fetch($query)) {
-			$id_auteur=$data['id_auteur'];
-			$email=$data["email"];
-			//$statut_interne=$data['statut_interne'];
-			switch($data['statut_interne']) {
+	$corps = relances_while($indexation, $statut_interne);
+
+	if ($corps) {
+
+		$corps = '<fieldset>'
+			. '<legend>Message de relance</legend>'
+			. '<label for="sujet"><strong>'._T('asso:Sujet').' :</strong></label>'
+			. '<input name="sujet" type="text" value="'.stripslashes(_T('asso:titre_relance')).'" id="sujet" class="formo" />'
+			. '<label for="message"><strong>'._T('asso:Message').' :</strong></label>'
+			. '<textarea name="message" rows="15" id="message" class="formo">'.stripslashes(_T('asso:message_relance'))."</textarea>\n"
+			. '</fieldset>'
+			. "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
+			. '<tr style="background-gcolor: #DBE1C5">'
+			. '<td><strong>'
+			. (($indexation=="id_asso") ? _T('asso:adherent_libelle_id_asso') : _T('asso:adherent_libelle_id_adherent'))
+			. "</strong></td>\n"
+			. '<td><strong>' . _T('asso:nom') . "</strong></td>\n"
+			. '<td><strong>' . _T('asso:telephone') . "</strong></td>\n"
+			. '<td><strong>' . _T('asso:portable') . "</strong></td>\n"
+			. '<td><strong>' . _T('asso:validite') . "</strong></td>\n"
+			. '<td><strong>' . _T('asso:envoi') . "</strong></td>\n"
+			. '</tr>'
+			.  $corps 
+			. '</table>'
+			. '<input name="url_retour" type="hidden" value="'.$url_retour.'" />'
+			. '<input name="agir" type="hidden" value="confirm" />';
+
+		$bouton = isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer');
+
+		echo generer_form_ecrire('action_relances', $corps, '', $bouton);
+	}
+	fin_cadre_relief();  
+	echo fin_gauche(),fin_page(); 
+}
+
+function relances_while($indexation, $statut_interne)
+{
+	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " a.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
+
+	$res = '';
+	while ($data = sql_fetch($query)) {
+		$id_auteur=$data['id_auteur'];
+		$email=$data["email"];
+		//$statut_interne=$data['statut_interne'];
+		switch($data['statut_interne']) {
 				case "echu": $class= "impair"; break;
 				case "ok": $class="valide"; break;
 				case "relance": $class="pair"; break;
 				case "prospect": $class="prospect"; break;	   
-			}
-			
-			echo '<tr> ';
-			echo '<td class="'.$class. ' border1" style="text-align:right">';
-			if ($indexation=="id_asso") { echo $data["id_asso"];}
-			else { echo $data["a.id_auteur"];}
-			echo '</td>';
-			echo '<td class="'.$class. ' border1">'.$data["nom_famille"].' '.$data['prenom'].'</td>';
-			echo '<td class="'.$class. ' border1">'.$data['telephone'].'</td>';
-			echo '<td class="'.$class. ' border1">'.$data['mobile'].'</td>';
-			echo '<td class="'.$class. ' border1">'.association_datefr($data['validite']).'</td>';
-			echo '<td class="'.$class. ' border1" style="text-align:center;">';
-			echo '<input name="id[]" type="checkbox" value="'.$id_auteur.'" checked="checked" >';
-			echo '<input name="statut[]" type="hidden" value="'.$statut_interne.'">';
-			echo '<input name="email[]" type="hidden" value="'.$email.'">';
-			echo '</td>';
-			echo '</tr>';
 		}
-		echo '</table>';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
-		else {echo _T('asso:bouton_envoyer');}
-		echo '" class="fondo" /></div>';
-		echo '</form>';	
-		
-		fin_cadre_relief();  
-		  echo fin_gauche(),fin_page(); 
+
+		$res .= '<tr> '
+		.'<td class="'.$class. ' border1" style="text-align:right">'
+		.(($indexation=="id_asso") ? $data["id_asso"]: $data["a.id_auteur"])
+		."</td>\n"
+		.'<td class="'.$class. ' border1">'.$data["nom_famille"].' '.$data['prenom']."</td>\n"
+		.'<td class="'.$class. ' border1">'.$data['telephone']."</td>\n"
+		.'<td class="'.$class. ' border1">'.$data['mobile']."</td>\n"
+		.'<td class="'.$class. ' border1">'.association_datefr($data['validite'])."</td>\n"
+		.'<td class="'.$class. ' border1" style="text-align:center;">'
+		.'<input name="id[]" type="checkbox" value="'.$id_auteur.'" checked="checked" />'
+		.'<input name="statut[]" type="hidden" value="'.$statut_interne.'" />'
+		.'<input name="email[]" type="hidden" value="'.$email.'" />'
+		."</td>\n"
+		.'</tr>';
 	}
+	return $res;
+}
 ?>
