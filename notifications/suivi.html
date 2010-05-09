@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-<title><:notifications:Notifications:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<title><:notifications:notifications:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <INCLURE{fond=inc-head}>
 <meta name="robots" content="none" />
 </head>
@@ -18,12 +18,12 @@
     
         [(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
-            &gt; <strong class="on"><:notifications:Notifications:></strong>
+            &gt; <strong class="on"><:notifications:notifications:></strong>
 
         </div><!--#hierarchie-->
 
         <div class="cartouche">
-            <h1><:notifications:Notifications:></h1>
+            <h1><:notifications:notifications:></h1>
 
 			<div class="chapo">
 			<p><:notifications:suivis_public_votre_page:></p>
@@ -38,9 +38,9 @@
 			<dl>
 			<dt>
 			<div style="float:#LANG_RIGHT;" class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{64}|sinon{charger un logo})]</div>
-			<:info_nom:></dt>
+			<dt><:info_nom:></dt>
 			<dd class="#EDIT{nom}"> #NOM</dd>
-			<dt><:info_email:></dt>
+			<dt><:notifications:suivis_public_info_email:></dt>
 			<dd class="#EDIT{email}"> #EMAIL</dd>
 			</dl>
 

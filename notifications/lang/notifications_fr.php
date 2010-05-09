@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'suivis_public_changer_email' => 'TODO: changer d\'email',
 'suivis_public_vos_forums' => 'Vos forums',
 'suivis_public_vos_forums_date' => 'Vos forums, par date',
+'suivis_public_info_email' => 'Adresse email',
 
 // Mails de suivis
 // à venir
