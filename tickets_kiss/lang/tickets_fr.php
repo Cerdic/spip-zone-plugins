@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_jalon' => 'Tickets par jalon',
 	'classement_termine' => 'Tickets termin&eacute;s',
 	'classement_type' => 'Tickets par type',
+	'comment_mail_titre' => 'Commentaire sur ce ticket',
 	'commenter_ticket' => 'Commenter ce ticket',
 	'creer_ticket' => 'Cr&eacute;er un ticket',
 	
@@ -90,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'ticket' => 'Ticket',
 	'tickets' => 'Tickets',
+	'ticket_enregistre' => 'Ticket enregistr&eacute;',
 	'titre' => 'Tickets, suivi de bugs',
 	'titre_liste' => 'Liste des tickets',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',
