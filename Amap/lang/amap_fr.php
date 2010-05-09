@@ -54,6 +54,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_produit' => 'ID produit',
 
 	// L
+	'label_choice_contract' => "Choisissez un contrat...",
+	'label_trip_date' => "Entrez une date de sortie...",
+	'label_tarif' => "Entrez un tarif...",
+	'label_date' => "Entrez une date...",
+	'label_quantite' => "Entrez une quantité ou un poids",
+	'label_variete' => "Entrez un label de variété",
+	'label_famille' => 'Entrez un label de famille...',
 	'label_produit' => 'Label produit',
 	'lieux' => 'Lieux',
 	'lieux_enregistres' => "Liste des lieux possibles",
