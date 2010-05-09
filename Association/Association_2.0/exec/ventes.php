@@ -101,22 +101,30 @@ function exec_ventes(){
 		}     
 	
 		if ($ventes) {
-			echo '<form action="', generer_url_ecrire('agir_ventes').'" method="post">';
-			echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-			echo '<tr style="backgroun-color: #DBE1C5">';
-			echo '<td style="text-align:right"><strong>' . _T('asso:id') . '</strong></td>';
-			echo '<td style="text-align:right"><strong>' . _T('asso:date') . '</strong></td>';
-			echo '<td><strong>' . _T('asso:article') . '</strong></td>';
-			echo '<td><strong>' . _T('asso:code') . '</strong></td>';
-			echo '<td><strong>' . _T('asso:acheteur') . '</strong></td>';
-			echo '<td><strong>' . _T('asso:membre') . '</strong></td>';
-			echo '<td style="text-align:right"><strong>' . _T('asso:qte') . '</strong></td>';
-			echo '<td style="text-align:right"><strong>' . _T('asso:montant') . '</strong></td>';
-			echo '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>';
-			echo '</tr>';
-			echo $ventes, "</table>\n";
-			echo '<table width="100%"><tr><td  style="text-align:right;"><input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" /></table>';
-			echo '</form>';
+			$corps =  "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
+			. '<tr style="backgroun-color: #DBE1C5">'
+			. '<td style="text-align:right"><strong>'
+			. _T('asso:id') . "</strong></td>\n"
+			. '<td style="text-align:right"><strong>'
+			. _T('asso:date') . "</strong></td>\n"
+			. '<td><strong>'
+			. _T('asso:article') . "</strong></td>\n"
+			. '<td><strong>'
+			. _T('asso:code') . "</strong></td>\n"
+			. '<td><strong>'
+			. _T('asso:acheteur') . "</strong></td>\n"
+			. '<td><strong>'
+			. _T('asso:membre') . "</strong></td>\n"
+			. '<td style="text-align:right"><strong>'
+			. _T('asso:qte') . "</strong></td>\n"
+			. '<td style="text-align:right"><strong>'
+			. _T('asso:montant') . "</strong></td>\n"
+			. '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>'
+			. '</tr>'
+			. $ventes
+			. "</table>\n";
+
+			echo generer_form_ecrire('agir_ventes', $corps, '', _T('asso:bouton_supprimer'));
 		}
 		fin_cadre_relief();  
 		echo fin_gauche(),fin_page(); 

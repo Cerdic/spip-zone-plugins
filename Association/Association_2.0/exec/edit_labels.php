@@ -23,7 +23,6 @@ function exec_edit_labels(){
 	} else {
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_action_labels = generer_url_ecrire('action_labels');
 		$url_edit_relances = generer_url_ecrire('edit_relances');		
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$indexation = lire_config('association/indexation');
@@ -39,82 +38,87 @@ function exec_edit_labels(){
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);	
 		
-		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
 		
 		echo debut_droite("",true);
 		
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:toutes_les_etiquettes_a_generer'));
 		
-		$statut_interne= "ok";
-		if ( isset ($_POST['statut_interne'] )) { $statut_interne = $_POST['statut_interne']; } 
-		echo '<table>';
-		echo '<tr>';
-		// Menu de sélection
-		echo '<td style="text-align:right;">';
-		echo '<form method="post" action="#"><div>';
-		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
-		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
-		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
-			echo '<option value="'.$var.'"';
-			if ($statut_interne==$var) {echo ' selected="selected"';}
-			echo '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
+		$statut_interne = _request('statut_interne');
+		if (!$statut_interne) $statut_interne= "ok";
+
+
+
+		$corps = '';
+		foreach (array('ok','echu','relance','sorti',lire_config('inscription2/statut_interne')) as $var) {
+			$corps .= '<option value="'.$var.'"';
+			if ($statut_interne==$var) {$corps .= ' selected="selected"';}
+			$corps .= '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
 		}
-		echo '</select>';
-		echo '</div></form>';
-		echo '</td></tr>';
-		echo '</table>';
-		
-		echo '<form method="post" action="'.$url_action_labels.'">';
-		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr style="background-color: #DBE1C5">';
-		echo '<td><strong>';
-		if ($indexation=="id_asso") { echo _T('asso:adherent_libelle_id_asso');}
-		else { echo _T('asso:adherent_libelle_id_adherent');} 
-		echo '<strong></td>';
-		echo '<td><strong>' . _T('asso:nom') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:adresse') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:env') . '</strong></td>';
-		echo '</tr>';
-		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
-		// originale semblait contenir une vieillerie:
-		//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
-		while ($data = sql_fetch($query))  {
-			$id_adherent=$data['id_adherent'];
-			$sexe=$data['sexe'];
-			
-			switch($data['statut_interne']) {
-				case "echu": $class= "impair"; break;
-				case "ok": $class="valide"; break;
-				case "relance": $class="pair"; break;
-				case "prospect": $class="prospect"; break;	   
-		     }
-			
-			echo '<tr> ';
-			echo '<td style="text-align:right;vertical-align:top;" class="'.$class. ' border1">';
-			if ($indexation=="id_asso") { echo $data["id_asso"];}
-			else { echo $data["id_adherent"];}
-			echo '</td>';
-			echo '<td style="vertical-align:top;" class="'.$class. ' border1">';
-			if ($sexe=='H'){ echo 'M.'; }
-			elseif ($sexe=='F'){ echo 'Mme'; }
-				else { echo '&nbsp;'; }
-			echo ' '.$data['prenom'].' '.$data["nom_famille"].'</td>';
-			echo '<td style="vertical-align:top;" class="'.$class. ' border1">'.$data['adresse'].'<br />'.$data['code_postal'].' '.$data['ville'].'</td>';
-			echo '<td style="text-align:center;vertical-align:top;" class="'.$class. ' border1">';
-			echo '<input name="label[]" type="checkbox" value="'.$data['id'].'" checked="checked" />';
-			echo '</td>';
-			echo '</tr>';
+
+		if ($corps) {
+			$corps = '<div><select name ="statut_interne" class="fondl" onchange="form.submit()">' . $corps . '</select></div>';
+			echo generer_form_ecrire('edit_labels', $corps, 'method="get"', '');
 		}
-		echo '<tr> ';
-		echo '<td colspan="4" style="text-align:right;"><input type="submit" value="Etiquettes" class="fondo" /></td>';
-		echo '</tr>';
-		echo '</table>';
-		echo '</form>';
-		
+
+		$corps = labels_adherents($indexation, $statut_interne);
+
+		if ($corps) {
+			$corps = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
+			.'<tr style="background-color: #DBE1C5">'
+			.'<td><strong>'
+			. (($indexation=="id_asso")
+			 ? _T('asso:adherent_libelle_id_asso')
+			 : _T('asso:adherent_libelle_id_adherent'))
+			.'</strong></td>'
+			.'<td><strong>' . _T('asso:nom') . '</strong></td>'
+			.'<td><strong>' . _T('asso:adresse') . '</strong></td>'
+			.'<td><strong>' . _T('asso:env') . '</strong></td>'
+			.'</tr>'
+			. $corps
+			.'</table>';
+
+			echo generer_form_ecrire('action_labels', $corps, '', _T('asso:Etiquettes'));
+		}
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();
 	}
+}
+
+function labels_adherents($indexation, $statut_interne)
+{
+	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
+	// originale semblait contenir une vieillerie:
+	//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
+
+	$res = '';
+	while ($data = sql_fetch($query))  {
+		$id_adherent=$data['id_adherent'];
+		$sexe=$data['sexe'];
+			
+		switch($data['statut_interne']) {
+			case "echu": $class= "impair"; break;
+			case "ok": $class="valide"; break;
+			case "relance": $class="pair"; break;
+			case "prospect": $class="prospect"; break;	   
+		}
+			
+		$res .= '<tr> ';
+		$res .= '<td style="text-align:right;vertical-align:top;" class="'.$class. ' border1">';
+		if ($indexation=="id_asso") { $res .= $data["id_asso"];}
+		else { $res .= $id_adherent;}
+		$res .= '</td>';
+		$res .= '<td style="vertical-align:top;" class="'.$class. ' border1">';
+		if ($sexe=='H'){ $res .= 'M.'; }
+		elseif ($sexe=='F'){ $res .= 'Mme'; }
+		else { $res .= '&nbsp;'; }
+		$res .= ' '.$data['prenom'].' '.$data["nom_famille"].'</td>';
+		$res .= '<td style="vertical-align:top;" class="'.$class. ' border1">'.$data['adresse'].'<br />'.$data['code_postal'].' '.$data['ville'].'</td>';
+		$res .= '<td style="text-align:center;vertical-align:top;" class="'.$class. ' border1">';
+		$res .= '<input name="label[]" type="checkbox" value="'.$data['id'].'" checked="checked" />';
+		$res .= '</td>';
+		$res .= "</tr>\n";
+	}
+	return $res;
 }
 ?>
