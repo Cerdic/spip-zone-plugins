@@ -214,6 +214,8 @@ function queue_schedule($force_jobs = null){
 		$now = date('Y-m-d H:i:s',$time);
 		$cond = 'date<'.sql_quote($now);
 	}
+
+	register_shutdown_function('queue_error_handler'); // recuperer les erreurs auant que possible
 	$res = sql_select('*','spip_jobs',$cond,'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
 	do {
 		if ($row = sql_fetch($res)){
@@ -223,15 +225,11 @@ function queue_schedule($force_jobs = null){
 				#spip_log("JQ schedule job ".$nbj." OK",'jq');
 
 	
-				// ouvrir un tampon avec une fonction fall back en cas d'erreur fatale
-				ob_start('queue_error_handler');
-				// et stocker le job en cours dans une globale
+				// stocker le job en cours dans une globale
 				$GLOBALS['queue_current_job'] = $row;
 				// on a la main sur le job :
 				// l'executer
 				$result = queue_start_job($row);
-				ob_end_clean();
-				unset($GLOBALS['queue_current_job']);
 
 				// purger ses liens eventuels avec des objets
 				sql_delete("spip_jobs_liens","id_job=".intval($row['id_job']));
@@ -248,6 +246,7 @@ function queue_schedule($force_jobs = null){
 						// relancer avec la periode prevue
 						queue_genie_replan_job($row['fonction'],$periode,$time);
 				}
+				unset($GLOBALS['queue_current_job']);
 			}
 		}
 		#spip_log("JQ schedule job end time ".$time,'jq');
@@ -264,10 +263,10 @@ function queue_schedule($force_jobs = null){
 
 }
 
-function queue_error_handler($output){
-	// on est ici, donc un job est mort pour cause d'erreur ou timeout?
-	// finir proprement
-	if ($row = $GLOBALS['queue_current_job']){
+function queue_error_handler(){
+	// on est ici, donc un job est mort pour cause d'erreur
+	// finir proprement autant que possible
+	if (isset($GLOBALS['queue_current_job']) AND $row = $GLOBALS['queue_current_job']){
 		// purger ses liens eventuels avec des objets
 		sql_delete("spip_jobs_liens","id_job=".intval($row['id_job']));
 		$time = time();
@@ -275,12 +274,12 @@ function queue_error_handler($output){
 		if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
 			// relancer avec les nouveaux arguments de temps
 			include_spip('inc/genie');
-			if ($result<0)
-				// relancer avec la periode prevue
-				queue_genie_replan_job($row['fonction'],$periode,$time);
+			// relancer avec la periode prevue
+			queue_genie_replan_job($row['fonction'],$periode,$time);
 		}
+		unset($GLOBALS['queue_current_job']);
 	}
-	return $output;
+	#return $output;
 }
 
 
