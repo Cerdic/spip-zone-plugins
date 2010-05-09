@@ -316,7 +316,9 @@ if ($table == 'vacances') { // Page vacances
           else
           {
     echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez une date...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_date');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;

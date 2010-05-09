@@ -101,7 +101,9 @@ function exec_amap_paniers()
           else
           {
     echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez un label de famille...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_famille');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -118,7 +120,9 @@ function exec_amap_paniers()
           else
           {
     echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez un label de famille...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_famille');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }          
           break;
@@ -213,7 +217,9 @@ function exec_amap_paniers()
           else
           {
     echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez un label de vari&eacute;t&eacute;</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_variete');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -230,7 +236,9 @@ function exec_amap_paniers()
           else
           {
     echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez un label de vari&eacute;t&eacute;</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_variete');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -347,7 +355,9 @@ function exec_amap_paniers()
           else
           {
     echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez une quantit&eacute; ou un poids</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_quantite');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;

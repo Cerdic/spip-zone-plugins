@@ -120,7 +120,9 @@ function exec_amap_contrats()
           else
           {
             echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez un tarif...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_tarif');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -137,7 +139,9 @@ function exec_amap_contrats()
           else
           {
             echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez un tarif...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_tarif');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -379,7 +383,9 @@ function exec_amap_contrats()
           else
           {
             echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez une date de sortie...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_trip_date');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -396,7 +402,9 @@ function exec_amap_contrats()
           else
           {
             echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>entrez une date de sortie...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_trip_date');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -518,7 +526,9 @@ function exec_amap_contrats()
           else
           {
             echo   debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>choisissez un contrat...</div>";
+            echo "<div class='verdana2' style='text-align: justify'>";
+		echo _T('amap:label_trip_date');
+	    echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
