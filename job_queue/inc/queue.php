@@ -222,9 +222,16 @@ function queue_schedule($force_jobs = null){
 			if (sql_delete('spip_jobs','id_job='.intval($row['id_job']))){
 				#spip_log("JQ schedule job ".$nbj." OK",'jq');
 
+	
+				// ouvrir un tampon avec une fonction fall back en cas d'erreur fatale
+				ob_start('queue_error_handler');
+				// et stocker le job en cours dans une globale
+				$GLOBALS['queue_current_job'] = $row;
 				// on a la main sur le job :
 				// l'executer
 				$result = queue_start_job($row);
+				ob_end_clean();
+				unset($GLOBALS['queue_current_job']);
 
 				// purger ses liens eventuels avec des objets
 				sql_delete("spip_jobs_liens","id_job=".intval($row['id_job']));
@@ -256,6 +263,26 @@ function queue_schedule($force_jobs = null){
 		queue_update_next_job_time();
 
 }
+
+function queue_error_handler($output){
+	// on est ici, donc un job est mort pour cause d'erreur ou timeout?
+	// finir proprement
+	if ($row = $GLOBALS['queue_current_job']){
+		// purger ses liens eventuels avec des objets
+		sql_delete("spip_jobs_liens","id_job=".intval($row['id_job']));
+		$time = time();
+		// est-ce une tache cron qu'il faut relancer ?
+		if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
+			// relancer avec les nouveaux arguments de temps
+			include_spip('inc/genie');
+			if ($result<0)
+				// relancer avec la periode prevue
+				queue_genie_replan_job($row['fonction'],$periode,$time);
+		}
+	}
+	return $output;
+}
+
 
 /**
  * Test if a job in queue is periodic cron
