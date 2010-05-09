@@ -83,7 +83,7 @@ function queue_upgrade($nom_meta_base_version,$version_cible){
 			while ($row = sql_fetch($res)){
 				sql_updateq('spip_jobs', array('md5args'=>md5($row['args'])),"id_job=".intval($row['id_job']));
 			}
-			#ecrire_meta($nom_meta_base_version,$current_version="0.3.0",'non');
+			ecrire_meta($nom_meta_base_version,$current_version="0.3.0",'non');
 		}
 
 	}
