@@ -1,8 +1,7 @@
-
 #SET{rang_suivant,1}
 <ul id="menu-#ENV{id_menu}" class="menus_entrees">
 	<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
-	<li class="entree"[ style="background-image:url((#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}))"]>
+	<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}))"]>
 		<BOUCLE_test_modifier(CONDITION){si #ENV{erreurs}|table_valeur{id_menus_entree}|=={#ID_MENUS_ENTREE}|non}>
 		<div class="ligne">
 			<div class="description arial2">
@@ -20,16 +19,16 @@
 				]
 				<//B_sous_menu_test>
 				<button name="modifier_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_modifier_entree:>">
-					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_modifier.png})" />]
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_modifier.png})" alt="" />]
 				</button>
 				<button name="supprimer_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_supprimer_entree:>">
-					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_supprimer.png})" />]
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_supprimer.png})" alt="" />]
 				</button>
 				<button name="deplacer_entree" value="#ID_MENUS_ENTREE-bas" title="<:menus:formulaire_deplacer_bas:>">
-					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_bas.png})" />]
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_bas.png})" alt="" />]
 				</button>
 				<button name="deplacer_entree" value="#ID_MENUS_ENTREE-haut" title="<:menus:formulaire_deplacer_haut:>">
-					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_haut.png})" />]
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_haut.png})" alt="" />]
 				</button>
 			</div>
 			<div class="nettoyeur"></div>
@@ -37,7 +36,7 @@
 		</BOUCLE_test_modifier>
 		#INCLURE{fond=formulaires/inc-nouvelle_entree-2, env, id_menus_entree=#ID_MENUS_ENTREE}
 		<//B_test_modifier>
-		
+
 		[(#REM) Est-ce qu'il y a un sous-menu ?)]
 		<BOUCLE_sous_menu(MENUS){id_menus_entree}>
 			#INCLURE{fond=formulaires/inc-menus_entrees, env, id_menu, sous_menu=oui}

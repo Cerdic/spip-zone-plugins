@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_identifiant_forme' => 'Identifier must contain only letters, digits or underscores.',
 	'erreur_menu_inexistant' => 'Menu number @id@ doesn\'t exist.',
 	'erreur_mise_a_jour' => 'An error occured during database update.',
+	'erreur_parametres' => 'There is an error in the page parameters',
 	'erreur_type_menu' => 'Vous devez choisir un type de menu', # NEW
 
 	// F

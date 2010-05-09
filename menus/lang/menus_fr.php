@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_identifiant_forme' => 'L\'identifiant ne doit contenir que des lettres, des chiffres ou le caract&egrave;re soulign&eacute;.',
 	'erreur_menu_inexistant' => 'Le menu demand&eacute; num&eacute;ro @id@ n\'existe pas.',
 	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise &agrave; jour de la base de donn&eacute;e.',
+	'erreur_parametres' => 'Il y a une erreur dans les param&egrave;tres de la page',
 	'erreur_type_menu' => 'Vous devez choisir un type de menu',
 
 	// F

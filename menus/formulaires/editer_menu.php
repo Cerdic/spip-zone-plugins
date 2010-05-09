@@ -39,7 +39,7 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 		}
 		elseif (!$nouveau){
 			$contexte['editable'] = false;
-			$contexte['message_erreur'] = 'erreur parametres';
+			$contexte['message_erreur'] = _T('menus:erreur_parametres');
 		}
 
 		// Si on peut bien éditer le menu, on déclare ce qu'il faut
@@ -52,16 +52,10 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 			$contexte['css'] = '';
 			$contexte['import'] = '';
 
-			// Si le menu existe on prérempli
-			if ($id_menu){
-				$menu = sql_fetsel(
-					'titre, identifiant, css',
-					'spip_menus',
-					'id_menu='.$id_menu
-				);
-				$contexte = array_merge($contexte, $menu);
-			}
-			
+			$valeurs = formulaires_editer_objet_charger('menu',$id_menu,0,0,'', '', '', '');
+
+			$contexte = array_merge($contexte, $valeurs);
+
 			// Déclarer l'action pour SPIP 2.0
 			$contexte['_action'] = array('editer_menu', $id_menu);
 			// On sait toujours si on est sur un menu déjà créé ou pas
