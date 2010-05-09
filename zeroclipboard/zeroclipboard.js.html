@@ -1,4 +1,4 @@
-#CACHE{0}
+#CACHE{36*3600}
 #HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
 
 ZeroClipboard.setMoviePath('#EVAL{_DIR_LIB_ZEROCLIPBOARD}ZeroClipboard.swf');
@@ -19,7 +19,7 @@ $(function(){
 			.removeClass('copypaste_link')
 			.addClass('copypaste_copied')
 			.attr('title','<:zeroclipboard:link_title_copied:>');
-
+		$(client.domElement).parent().next('.copypaste').focus().select();
 		$('.copypaste_copied').not($(client.domElement)[0]).each(function(){
 			$(this)
 				.html('<:zeroclipboard:link_text_copy:>')
