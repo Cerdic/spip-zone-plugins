@@ -16,41 +16,38 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // A chaque modif de la base SQL ou ses conventions (raccourcis etc)
 // le fichier plugin.xml doit indiquer le numero de depot qui l'implemente sur
 // http://zone.spip.org/trac/spip-zone/timeline
+// Ce numero est fourni automatiquement par la fonction spip_plugin_install
+// lors de l'appel des fonctions de ce fichier.
 
-function association_version_base()
-{
-	static $version = 0;
-	$get_infos = charger_fonction('get_infos','plugins');
-	if (!$version) {
-		$version = $get_infos('Association_2.0');
-		$version = isset($version['version_base'])
-		? $version['version_base'] : $version['version'];
-	}
-	return $version;
+// Compatibilite: le nom de la meta donnant le numero de version n'etait pas std
+
+if (isset($GLOBALS['meta']['asso_base_version'])
+    AND !isset($GLOBALS['meta']['association_base_version'])) {
+	$GLOBALS['meta']['association_base_version'] = $GLOBALS['meta']['asso_base_version'];
+	effacer_meta('asso_base_version');
 }
 
 // MAJ des tables de la base SQL
 // Retourne 0 si ok, le dernier numero de MAJ ok sinon
 
-function association_upgrade(){			
-
-	$courante = association_version_base();
-
-	if (!isset($GLOBALS['meta']['asso_base_version']))
-		return association_maj_0($courante, 'asso_base_version');
+function association_upgrade($meta, $courante)
+{
+	spip_log("association upgrade: $meta = $courante");
+	if (!isset($GLOBALS['meta'][$meta]))
+		return association_maj_0($courante, $meta);
 	else {
 	// compatibilite avec les numeros de version non entiers
-		$installee = (($GLOBALS['meta']['asso_base_version'] > 1) ?
-			$GLOBALS['meta']['asso_base_version'] :
-			($GLOBALS['meta']['asso_base_version'] * 100));
-		
+		$installee = (($GLOBALS['meta'][$meta] > 1) ?
+			$GLOBALS['meta'][$meta] :
+			($GLOBALS['meta'][$meta] * 100));
 		$GLOBALS['association_maj_erreur'] = 0;
 		if ($courante > $installee) {
 			include_spip('base/association');
 			include_spip('base/upgrade');
-			maj_while($installee, association_version_base(), $GLOBALS['association_maj'], 'asso_base_version');
+			$n = maj_while($installee, $courante, $GLOBALS['association_maj'], $meta);
+			$n = $n ? $n[0] : $GLOBALS['association_maj_erreur'];
 			// signaler que les dernieres MAJ sont a refaire
-			if ($GLOBALS['association_maj_erreur']) ecrire_meta('asso_base_version', $GLOBALS['association_maj_erreur']-1);
+			if ($n) ecrire_meta($meta, $n-1);
 		}
 		return $GLOBALS['association_maj_erreur'];
 	}
@@ -110,35 +107,33 @@ function association_maj_64(){
 
 $GLOBALS['association_maj'][64] = array(array('association_maj_64'));
 
-function association_effacer_tables(){
+function association_maj_38067()
+{
+	global $association_tables_auxiliaires;
+
+	include_spip('base/association');
+	include_spip('base/abstract_sql');
+	if (sql_create('spip_asso_metas', 
+		$association_tables_auxiliaires['spip_asso_metas']['field'],
+		$association_tables_auxiliaires['spip_asso_metas']['key'],
+		false, false)) {
+		foreach(lire_config('association') as $k => $v) {
+			ecrire_meta($k, $v, 'oui', 'asso_metas');
+		}
+	} else spip_log("maj_38067: echec de  la creation de spip_asso_metas");
+}
+
+$GLOBALS['association_maj'][37767] = array(array('association_maj_38067'));
+
+function association_vider_tables($nom_meta){
 	include_spip('base/abstract_sql');
 	include_spip('base/association');
 	foreach ($GLOBALS['association_tables_principales'] as $k=>$v) {
 		spip_log("table $k detruite");
 		sql_drop_table($k);
 	}
-	effacer_meta('asso_base_version');
+	effacer_meta($nom_meta);
 	effacer_meta('association');
-	spip_log("plugin assoc desinstallee");
-}
-	
-function association_install($action){
-	$version_base = association_version_base();
-	switch ($action){
-		case 'test':
-			return (isset($GLOBALS['meta']['asso_base_version']) 
-				AND ($GLOBALS['meta']['asso_base_version']>=$version_base));
-			break;
-		case 'install':
-			if (association_upgrade()) {
-				echo debut_cadre_enfonce('',true);
-				echo _L('Installer les plugins cfg et Inscription2 avant d\'installer ce plugin!!!'); 
-				echo fin_cadre_enfonce(true);
-			}
-			break;
-	case 'uninstall':
-			association_effacer_tables();
-			break;
-	}
+	spip_log("plugin association desinstallee ($nom_meta)");
 }
 ?>
