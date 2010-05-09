@@ -20,12 +20,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function association_version_base()
 {
 	static $version = 0;
+	$get_infos = charger_fonction('get_infos','plugins');
 	if (!$version) {
-		$f = _DIR_PLUGINS . 'Association_2.0/plugin.xml';
-		if (!lire_fichier($f, $r))
-			spip_log("fichier $f illisble");
-		elseif (preg_match("@<version>(\d+)</version>@", $r, $r))
-			$version = $r[1];
+		$version = $get_infos('Association_2.0');
+		$version = isset($version['version_base'])
+		? $version['version_base'] : $version['version'];
 	}
 	return $version;
 }

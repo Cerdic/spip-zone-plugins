@@ -3,7 +3,8 @@
 	<auteur>												<!-- Auteur du plugin -->
 	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James
 	</auteur>
-	<version>37762</version>
+	<version>0.65</version>
+	<version_base>37762</version_base>
 	<etat>test</etat>
 	<description>
 		Gestion de petites associations
