@@ -1,0 +1,92 @@
+<BOUCLE_article(ARTICLES){id_article}>
+
+[(#PDF_CREER_DOCUMENT{
+        fichier='simpleTexteCellInTheMiddle#ID_ARTICLE.pdf',
+        doc_titre='#TITRE',
+		doc_sujet='#SURTITRE',
+		doc_auteur=''[(#LESAUTEURS|supprimer_tags)]'',
+		doc_mots_cles='Spip2Pdf Création',
+		marges='20 70 20'		
+})]
+
+#PDF_LANG_DIR{dir='#LANG_DIR'}
+
+#PDF_AJOUTER_FONT{nom='tahoma',taille='10',style=''}
+
+[(#PDF_HEADER{
+	font='times',
+	style='B',
+	taille='16',
+	couleur='#0006ff',
+	texte='#TITRE',
+	aligner='left',
+	marge='20',
+})]
+
+[(#PDF_HEADER_TEXTE{
+	texte='#TITRE',
+	aligner='right',
+	taille='18',
+	font='tahoma',
+	style='',
+	couleur='#ff007e',
+})]
+
+[(#PDF_HEADER_LOGO{logo='[(#LOGO_SITE|fichier)]',taille='50',aligner='right'})]
+
+#PDF_PAGE
+
+[(#PDF_MULTICOLONNE{nombre=4,espacement=5})]
+
+[(#PDF_ECRIRE_HTML{texte='[(#TEXTE)]',aligner='justify'})]
+
+
+
+[(#REM) Sur cette page on refait un header plus complexe]
+
+[(#PDF_DESACTIVE_HEADER)]
+
+#PDF_PAGE
+
+#PDF_FONT{nom='tahoma',taille=25}
+
+#PDF_POSITION{x=40,y=10}
+
+#PDF_FILL_COLOR{couleur='#0006ff'}
+
+#PDF_TEXT_COLOR{couleur='#ff007e'}
+
+[(#PDF_CELLULE{largeur=80, aligner='left', a_la_ligne=1, hauteur=30, bordure=1,texte='Le Post Scriptum',remplir=1})]
+
+#PDF_POSITION{x=115,y=20}
+
+[(#PDF_AJOUTER_IMAGE{fichier='[(#LOGO_ARTICLE|fichier)]',taille=30})]
+
+#PDF_POSITION{x=150,y=10}
+
+[(#PDF_MULTI_CELLULE{texte='Important for this article !',largeur=50, hauteur=10})]
+
+#PDF_POSITION{x=20,y=70}
+
+#PDF_FONT{nom='freeserifbi',taille='15',style='I'}
+
+#PDF_TEXT_COLOR{couleur='0 0 0'}
+
+[(#PDF_MULTICOLONNE{nombre=2,espacement=5})]
+
+#PDF_FONT{nom='times',taille='15',style='I'}
+
+[(#PDF_ECRIRE_HTML{texte='[(#PS)]',aligner='left'})]
+
+#PDF_REACTIVE_HEADER
+
+#PDF_PAGE
+
+#PDF_SORTIR_DOCUMENT
+
+<?php 
+ $redirect = "#URL_SITE_SPIP/IMG/PDF/simpleTexteCellInTheMiddle#ID_ARTICLE.pdf";
+ header("Location: $redirect"); 
+?>
+
+</BOUCLE_article>

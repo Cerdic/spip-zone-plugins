@@ -1,0 +1,66 @@
+<BOUCLE_article(ARTICLES){id_article}>
+
+[(#PDF_CREER_DOCUMENT{
+        fichier='simpleTexteImageReduire#ID_ARTICLE.pdf',
+        doc_titre='#TITRE',
+		doc_sujet='#SURTITRE',
+		doc_auteur=''[(#LESAUTEURS|supprimer_tags)]'',
+		doc_mots_cles='Spip2Pdf Création',
+		marges='20 70 20'		
+})]
+
+#PDF_LANG_DIR{dir='#LANG_DIR'}
+
+#PDF_AJOUTER_FONT{nom='times',taille='10',style=''}
+
+[(#PDF_HEADER{
+	font='times',
+	style='B',
+	taille='16',
+	couleur='#0006ff',
+	texte='#TITRE',
+	aligner='right',
+	marge='20',
+})]
+
+[(#PDF_HEADER_TEXTE{
+	texte='#TITRE',
+	aligner='right',
+	taille='18',
+	font='times',
+	style='',
+	couleur='#ff007e',
+})]
+
+[(#PDF_HEADER_LOGO{logo='[(#LOGO_SITE|fichier)]',taille='50',aligner='left'})]
+
+[(#REM|testing a page with image_reduire, to make thing simple choose an article with a simple big image)]
+
+#PDF_PAGE
+
+[(#PDF_MULTICOLONNE{nombre=1,espacement=5})]
+
+[(#PDF_ECRIRE_HTML{texte='[(#TEXTE|image_reduire{300})]',aligner='justify'})]
+
+[(#REM|check the difference without image reduire)]
+
+#PDF_PAGE
+
+[(#PDF_MULTICOLONNE{nombre=1,espacement=5})]
+
+[(#PDF_ECRIRE_HTML{texte='[(#TEXTE)]',aligner='justify'})]
+
+
+
+#PDF_SORTIR_DOCUMENT
+
+
+
+
+
+<?php 
+ $redirect = "#URL_SITE_SPIP/IMG/PDF/simpleTexteImageReduire#ID_ARTICLE.pdf";
+ header("Location: $redirect"); 
+?>
+
+</BOUCLE_article>

@@ -1,0 +1,57 @@
+<BOUCLE_article(ARTICLES){id_article}>
+
+[(#PDF_CREER_DOCUMENT{
+        fichier='simpleTexteChangeInTheMiddle#ID_ARTICLE.pdf',
+        doc_titre='#TITRE',
+		doc_sujet='#SURTITRE',
+		doc_auteur=''[(#LESAUTEURS|supprimer_tags)]'',
+		doc_mots_cles='Spip2Pdf Création',
+		marges='20 70 20'		
+})]
+
+#PDF_AJOUTER_FONT{nom='tahoma',taille='10',style=''}
+
+[(#PDF_HEADER{
+	font='times',
+	style='B',
+	taille='16',
+	couleur='#0006ff',
+	texte='#TITRE',
+	aligner='left',
+	marge='20',
+})]
+
+[(#PDF_HEADER_TEXTE{
+	texte='#TITRE',
+	aligner='left',
+	taille='18',
+	font='tahoma',
+	style='',
+	couleur='#ff007e',
+})]
+
+[(#PDF_HEADER_LOGO{logo='[(#LOGO_SITE|fichier)]',taille='50',aligner='left'})]
+
+#PDF_PAGE
+
+[(#PDF_MULTICOLONNE{nombre=4,espacement=5})]
+
+[(#PDF_ECRIRE_HTML{texte='[(#TEXTE)]',aligner='justify'})]
+
+#PDF_PAGE
+
+#PDF_FONT{nom='freeserifbi',taille='15',style='I'}
+
+[(#PDF_MULTICOLONNE{nombre=2,espacement=5})]
+
+[(#PDF_ECRIRE_HTML{texte='[(#PS)]',aligner='left'})]
+
+#PDF_SORTIR_DOCUMENT
+
+
+<?php 
+ $redirect = "#URL_SITE_SPIP/IMG/PDF/simpleTexteChangeInTheMiddle#ID_ARTICLE.pdf";
+ header("Location: $redirect"); 
+?>
+
+</BOUCLE_article>

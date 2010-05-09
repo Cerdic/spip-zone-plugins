@@ -1,0 +1,58 @@
+<BOUCLE_article(ARTICLES){id_article}>
+
+[(#PDF_CREER_DOCUMENT{
+        fichier='drawCell#ID_ARTICLE.pdf',
+        doc_titre='#TITRE',
+		doc_sujet='#SURTITRE',
+		doc_auteur=''[(#LESAUTEURS|supprimer_tags)]'',
+		doc_mots_cles='Spip2Pdf dessine une cellule',
+		marges='20 70 20'		
+})]
+
+#PDF_LANG_DIR{dir='#LANG_DIR'}
+
+
+[(#PDF_HEADER{
+	font='times',
+	style='B',
+	taille='16',
+	couleur='#0006ff',
+	texte='#TITRE',
+	aligner='left',
+	marge='20',
+})]
+
+[(#PDF_HEADER_TEXTE{
+	texte='#TITRE',
+	aligner='right',
+	taille='18',
+	font='tahoma',
+	style='',
+	couleur='#ff007e',
+})]
+
+#PDF_PAGE
+
+[(#REM) On dessine deux cellules, une avec #PDF_CELLULE et l'autre avec #PDF_MULTI_CELLULE]
+
+#PDF_POSITION{x=40,y=100}
+
+#PDF_FILL_COLOR{couleur='#0006ff'}
+
+#PDF_TEXT_COLOR{couleur='#ff007e'}
+
+[(#PDF_CELLULE{largeur=80, aligner='left', a_la_ligne=1, hauteur=30, bordure=1,texte='#TITRE',remplir=1})]
+
+#PDF_POSITION{x=80,y=150}
+
+#PDF_MULTI_CELLULE{texte='#TITRE', hauteur=4, aligner='left'}
+
+#PDF_SORTIR_DOCUMENT
+
+
+<?php 
+ $redirect = "#URL_SITE_SPIP/IMG/PDF/drawCell#ID_ARTICLE.pdf";
+ header("Location: $redirect"); 
+?>
+
+</BOUCLE_article>

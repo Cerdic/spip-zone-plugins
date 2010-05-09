@@ -1,0 +1,16 @@
+<plugin>
+	<nom>
+		Spip2PDF
+	</nom>
+	<auteur>[Michael Courcy->http://blog.netapsys.fr/index.php/author/michael_courcy]</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Conversion d'un article au format pdf pour telechargement
+		Necessite GD2 sur votre serveur
+		Inserez la balise #ARTICLE_PDF dans votre squelette pour avoir un lien de telechargement de l'article au format PDF
+	</description>
+	<options>spip2pdf_mes_options.php</options>
+	<fonctions>spip2pdf_mes_fonctions.php</fonctions>
+	<prefix>spip2pdf</prefix>
+</plugin>

@@ -1,0 +1,42 @@
+<BOUCLE_article(ARTICLES){id_article}>
+
+[(#PDF_CREER_DOCUMENT{
+        fichier='creerDocAvecHeader#ID_ARTICLE.pdf',
+        doc_titre='#TITRE',
+		doc_sujet='#SURTITRE',
+		doc_auteur=''[(#LESAUTEURS|supprimer_tags)]'',
+		doc_mots_cles='Spip2Pdf Création',
+		marges='20 40 20'		
+})]
+
+[(#PDF_HEADER{
+	font='times',
+	style='B',
+	taille='16',
+	couleur='#0006ff',
+	texte='#TITRE',
+	aligner='left',
+	marge='20',
+})]
+
+[(#PDF_HEADER_TEXTE{
+	texte='#TITRE',
+	aligner='left',
+	taille='18',
+	font='tahoma',
+	style='',
+	couleur='#ff007e',
+})]
+
+[(#PDF_HEADER_LOGO{logo='[(#LOGO_SITE|fichier)]',taille='50',aligner='left'})]
+
+
+#PDF_SORTIR_DOCUMENT
+
+
+<?php 
+ $redirect = "#URL_SITE_SPIP/IMG/PDF/creerDocAvecHeader#ID_ARTICLE.pdf";
+ header("Location: $redirect"); 
+?>
+
+</BOUCLE_article>

@@ -1,0 +1,60 @@
+<p class="spip">Cet article est un article en français qui a pour but de tester le rendu d’un pdf en français avec spip.</p>
+
+<p class="spip">Voici une série de caractères accentués : à ù é è  É À œ Œ €</p>
+
+<p class="spip">Nous intégrons en plus une&nbsp;</p>
+
+<p class="spip"><img src="http://localhost/spip/local/cache-vignettes/L368xH278/elephant-5a610.jpg" style="height: 278px; width: 368px;" class="" align="middle" height="278" width="368"></p>
+
+<p class="spip">Fort belle de deux hommes avec un éléphant.</p>
+
+<p class="spip">Et une image plus petite <a href="http://wikipedia/elephant/">d’éléphant</a></p>
+
+<p class="spip"><img src="http://localhost/spip/local/cache-vignettes/L150xH100/elephant_petit-e5e44.jpg" style="height: 100px; width: 150px;" class="" align="left" height="100" width="150"></p>
+
+<p class="spip">Tous les ans en <a href="http://wikipedia/inde/">inde</a> se tient le dernier marché des éléphants de l’Inde, 200 a 300 éléphants venus de toute l’inde y sont vendus chaque année. c’est aussi une fête religieuse importante "la victoire de l’éléphant sur le crocodile", c’est aussi un des lieux de l’inde ou se font des exorcismes, ou les travestis dansent avec les enfants, ou il y a des crémations au son du tambour, c’est aussi un immense marché aux bovidés et aux chevaux de l’inde. un endroit du bout du Monde en Inde profonde avec une authenticité séculaire, c ’est l’Inde insolite , l’inde religieuse et l’inde païenne et le seul marché actuel des éléphants de l’inde. Un marché qui dure 4 jours pour les éléphnats et un mois pour les autres animaux.</p>
+
+<h3 class="spip">elephants</h3>
+<p class="spip"><img src="local/cache-vignettes/L8xH11/puce-68c92.gif" alt="-" style="height: 11px; width: 8px;" class="" height="11" width="8">&nbsp;fete religieuse - chevaux - travestis - exorcisme - cremations</p>
+
+<p class="spip">200 a 300 éléphants venus de toute l’inde y sont vendus chaque année, ils viennent des régions éloignées de l’Assam ou du Sud de l’Inde, et sont vendus pour les cérémonies religieuses des temples ou a de riches indiens qui les élèvent dans leurs fermes</p>
+
+<p class="spip">Leurs cornacs qui sont souvent vendus avec l’animal, passent leur journée à les laver, a les faire briller ou les peindre de différents dessins pour leur plus grand avantage.</p>
+
+<p class="spip">Is sont étroitement imbriqués dans la foule des pèlerins qui les vénèrent et les admirent</p>
+
+<p class="spip">Après le bain, ils sont alignés comme pour la parade et souvent décorés de sujets floraux, et attendent leur futur acheteur. Ceux ci viennent souvent accompagnés d’un vétérinaire qui examine la bête, la fait courir, examine les pieds, la peau, et la docilité de l’animal avec l’aide du cornac. les transactions commencent ensuite et peuvent durer plusieurs jours.</p>
+
+<p class="spip">LA FETE RELIGIEUSE
+	 
+  300.000 pèlerins y viennent chaque année pour la pleine lune et prennent un bain purificateur dans l’un des bras du Gange sacré. foule immense et recueillie qui prie et se rend dans un temple sacré avec un pot en terre de l’eau du Gange et les cassent dans le temple sur une statue de Vishnou (l’éléphant) pour avoir du bonheur et protection toute l’année</p>
+
+<p class="spip">ces milliers de personnes viennent de l’Inde profonde des petits villages, beaucoup sont des agriculteurs. La foule s’échelonne sur 2 kms le long de la rivière , ils dorment dans la paille, mangent et prient sur les rives.</p>
+
+<p class="spip">OFFRANDES et SADHOUS</p>
+
+<p class="spip"><img src="local/cache-vignettes/L8xH11/puce-68c92.gif" alt="-" style="height: 11px; width: 8px;" class="" height="11" width="8">&nbsp;Des centaines de sadhous (saints hommes) y viennent pour participer à la fête, ce sont souvent des "renonçants",
+<br><img src="local/cache-vignettes/L8xH11/puce-68c92.gif" alt="-" style="height: 11px; width: 8px;" class="" height="11" width="8">&nbsp;qui ont quitté tous les bien matériels de leur vie et vont de pèlerinage en pèlerinage pour recevoir les bienfaits des Dieux, 
+<br><img src="local/cache-vignettes/L8xH11/puce-68c92.gif" alt="-" style="height: 11px; width: 8px;" class="" height="11" width="8">&nbsp;souvent accompagnés d’un disciple.</p>
+
+<p class="spip">LES TRAVESTIS</p>
+
+<p class="spip">une coutume très rarement visible dans les fêtes religieuses, de travestis accompagnés d’un petit orchestre, viennent pour prendre les jeunes enfants dans leurs bras, danser et chanter en tournant avec eux pour "prendre les péchés de l’enfant sur eux" afin que l’enfant soit purifié, au son de petits harmoniums et tambours.</p>
+
+<p class="spip">DE L’AUTRE COTE DU FLEUVE....
+  	  	
+EXORCISMES</p>
+
+<p class="spip">sur l’autre rive, des "Jagats" des exorcistes d’une caste particulière. Les " patients" malades mentaux ou en rupture avec la famille, y sont amenés par les parents pour être soignés par les exorcistes. Ceux ci les frappent avec des baguettes, les font chanter et prier avec des incantations particulières.
+  	  	 
+Ils les immergent vivement dans la rivière, leur font avaler du sable et des cailloux , et essaient "d’extirper d’eux les démons qu’ils ont dans le corps" à la demande des parents ou des maris . en général le patient et l’exorciste rentrent en transes et le "malade "doit tourner dans l’eau en hurlant des noms de démons et se soumettre à l’exorciste, tout cela rythmé par des tambours rapides et des chants sacrés...</p>
+
+<p class="spip">Ces scènes sont assez violentes et impressionnantes mais font partie entièrement de la tradition indienne...</p>
+
+<p class="spip">Au bas de le rivière sur la plage dans un lieu isolé, les personnes décédées pendant la fête amenées sur des brancards de bambous, et sont incinérés sur des bûchers</p>
+
+<p class="spip">la personne la plus proche dans la famille du mort, se fait raser la tête par des brahmanes, et achète le "droit de la flamme" au responsable local des crémations (caste des Doms, un intouchable) qui fixe le prix de la flamme suivant la richesse du mort. Le parent, tourne ensuite autour du bûcher avec une torche de paille pour l’allumer.</p>
+
+<p class="spip">La fête des éléphants est aussi la fête des chevaux. Par centaine, les plus beaux chevaux de selle de la région sont amenés et bichonnés, leur propriétaire ou jockey font des présentations dans des petites courses pour montrer les qualités et la beauté de l’animal dans le but de le vendre. de nombreux acheteurs font le déplacement.</p>
+
+<p class="spip">la fête se termine, les villageois s’en retournent...</p>

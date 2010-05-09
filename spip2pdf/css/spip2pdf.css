@@ -1,0 +1,53 @@
+@charset "windows-1250";
+/* CSS Document */
+
+body{
+	color:#333333;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;	
+}
+
+#page {
+	width: 80em;
+	text-align: left;
+	float: left;
+	margin-right: auto;
+}
+ 
+#page #main 
+{	float: left;
+	width: 54em; 
+	text-align: left;
+}  
+
+#page #navigation {
+	float: right;
+	width: 20em;
+	border: 1px solid #333333;
+	background-color:#EEE;
+	text-align: left; 
+	padding-left:1em;
+}
+
+
+table{
+	width:50em;
+	font-size:11px;
+	
+}
+
+th {
+	font-weight:bold;
+	padding:20px 0 4px 10px;
+	text-align:left; 
+	background-color:#FFF;
+}
+td {
+	padding:5px 10px;
+	border-top: 1px solid #333333;
+	text-align:left;  
+}
+tr.odd td {background-color:#EEEEDD;}	
+tr.even td {background-color:#FFFFCC;}	 
+
+li.on {font-weight:bold}
