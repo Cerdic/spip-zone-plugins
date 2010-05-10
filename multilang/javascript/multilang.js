@@ -167,10 +167,14 @@ function multilang_make_menu_lang(container,target) {
 	$(multilang_menu_lang).clone().find("a").click(function() {
 		if($(this).is('.change_lang') && !$(this).is('.on')){
 			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
+			$(this).parents('form > .menu_lang').find('.message').detach();
+			$(this).parents('form').find('li.editer_titre_numero').show();
 			$(this).addClass('on');
 			multilang_change_lang(this,container,target);
 		}else if(!$(this).is('.on') && $(this).is('.recover_lang')){
 			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
+			$(this).parents('form > .menu_lang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
+			$(this).parents('form').find('li.editer_titre_numero').hide();
 			$(this).addClass('on');
 			multilang_multi_recover(this,container,target,'submit');
 		}
@@ -222,9 +226,6 @@ function multilang_change_lang(el,container,target) {
 	//change current lang
 	target.each(function(){this.form_lang = lang});
 
-	$(el).parents('form > .menu_lang').find('.message').detach();
-	$(el).parents('form').find('li.editer_titre_numero').show();
-
 	//reinit fields to current lang
 	multilang_forms_fields[target_id].each(function(){multilang_set_lang(this,lang)});
 }
@@ -239,9 +240,6 @@ function multilang_change_lang(el,container,target) {
  * @return
  */
 function multilang_multi_recover(el,container,target,event){
-	$(el).parents('form > .menu_lang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
-	$(el).parents('form').find('li.editer_titre_numero').hide();
-
 	if(target[0].isfull){
 		return true;
 	}
