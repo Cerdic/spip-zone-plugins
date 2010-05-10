@@ -22,5 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_multilang' => 'Multilang',
 	'champ_numero' => 'Number',
 
+	// L
+	'lien_desactiver' => 'All',
+
+	// M
+	'message_champs_readonly' => 'The multilingual fields are in read only mode, choose a language to modify them',
 );
 ?>

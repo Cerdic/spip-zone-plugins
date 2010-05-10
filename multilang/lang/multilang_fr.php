@@ -22,5 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_multilang' => 'Multilang',
 	'champ_numero' => 'Num&eacute;ro',
 
+	// L
+	'lien_desactiver' => 'Tout',
+
+	// M
+	'message_champs_readonly' => 'Les champs multilingue sont en lecture seule, choisissez une langue pour les modifier',
+
 );
 ?>

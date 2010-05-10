@@ -5,3 +5,16 @@
 	background-color:none;
 }
 
+.menu_lang .langues{
+	overflow:auto;
+}
+
+.menu_lang .langues a{
+	cursor:pointer;
+	font-weight:normal;
+	margin-right:2px;
+}
+
+.menu_lang .message{
+	clear:both;
+}
