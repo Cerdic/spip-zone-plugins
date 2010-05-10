@@ -133,6 +133,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page' => 'LangOnet',
 
 // Pour les tests du plugin
+	'test' => 'TEST&nbsp;: Cet item de langue sert pour la recherche de raccourci et est &eacute;gal &agrave; test.',
+	'z_test' => 'TEST&nbsp;: Cet item de langue sert pour la recherche de raccourci et contient test.',
 	'test_item_1_variable' => 'TEST&nbsp;: Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
 	'test_item_2_variable' => 'TEST&nbsp;: Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
 	'test_item_non_utilise_1' => 'TEST&nbsp;: Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',

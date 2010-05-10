@@ -40,12 +40,16 @@ function inc_langonet_rechercher_texte($pattern, $correspondance) {
 	foreach ($spip_trad as $_module => $_traductions) {
 		$fichier = '../ecrire/lang/' . $_module . '_' . $langue . '.php';
 		foreach ($_traductions as $_item => $_texte) {
-			$commence_par = (substr(strtolower($_texte), 0, strlen($pattern)) == strtolower($pattern));
+			$egal = (strtolower($_texte) == strtolower($pattern));
+			$commence_par = false;
 			$contient = false;
-			if ($correspondance == 'contient')
-				$contient = (strpos(strtolower($_texte), strtolower($pattern)) !== false);
+			if (!$egal AND ($correspondance != 'egal')) {
+				$commence_par = (substr(strtolower($_texte), 0, strlen($pattern)) == strtolower($pattern));
+				if (!$commence_par AND ($correspondance == 'contient'))
+					$contient = (strpos(strtolower($_texte), strtolower($pattern)) !== false);
+			}
 		
-			if (strtolower($_texte) == strtolower($pattern)) {
+			if ($egal) {
 				$trouve['egal'][$_item]['fichier'][] = $fichier;
 				$trouve['egal'][$_item]['traduction'][] = $_texte;
 			}
