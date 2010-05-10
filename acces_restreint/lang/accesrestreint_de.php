@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre' => 'Titel',
-	'titre_ajouter_zone' => 'zum Bereich zuf&uuml;gen',
+	'titre_ajouter_zone' => 'Bereich zuf&uuml;gen',
 	'titre_cadre_modifier_zone' => 'Bereich &auml;ndern',
 	'titre_table' => 'Alle zugangsbeschr&auml;nkten Bereiche',
 	'titre_zones_acces' => 'Bereiche mit Zugangsbeschr&auml;nkung',
