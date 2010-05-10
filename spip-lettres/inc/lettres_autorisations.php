@@ -35,6 +35,13 @@ function autoriser_lettres_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
+/**
+ * Creer une nouvelle lettre : admin ou admins restreints dans leurs rubriques
+ */
+function autoriser_rubrique_creerlettredans($faire,$quoi,$id,$qui,$opts){
+	return autoriser('publierdans','rubrique',$id);
+}
+
 function autoriser_lettre_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	return autoriser_rubrique_editermots_dist($faire,'lettre',0,$qui,$opts);
 }
