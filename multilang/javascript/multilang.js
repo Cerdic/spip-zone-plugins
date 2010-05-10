@@ -155,13 +155,17 @@ function multilang_init_multi(options) {
 function multilang_make_menu_lang(container,target) {
 	target = target || multilang_forms;
 	$(multilang_menu_lang).clone().find("a").click(function() {
-		if($(this).is('.change_lang')){
+		if($(this).is('.change_lang') && !$(this).is('.on')){
+			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
+			$(this).addClass('on');
 			multilang_change_lang(this,container,target);
-		}else if($(this).is('.recover_lang')){
-			multilang_multi_recover(this,container,target,'submit');
+		}else if(!$(this).is('.on') && $(this).is('.recover_lang')){
+			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
+			$(this).addClass('on');
+			multilang_multi_recover(this,container,target,'test');
 		}
 		return false;
-	}).end().appendTo(container);
+	}).appendTo(container);
 }
 
 /**
@@ -229,7 +233,10 @@ function multilang_multi_recover(el,container,target,event){
 	$(el).parents('form > .menu_lang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
 	$(el).parents('form').find('li.editer_titre_numero').hide();
 
-	if(!target.isfull || (event == 'submit')){
+	if(target.isfull){
+		return true;
+	}
+	if(!target.isfull || (event == 'submit' || 'test')){
 		target.isfull = true;
 		if(typeof(el) == "object"){
 			var text = $(el).html();
@@ -283,8 +290,8 @@ function multilang_multi_recover(el,container,target,event){
 			// End Add Yffic
 
 		});
+		return true;
 	}
-	return true;
 }
 
 /**
@@ -429,6 +436,7 @@ function multilang_set_lang(el,lang) {
 	// Modif Yffic : Don't add the field_pre_lang
 	el.value = (el.field_lang[lang] == undefined ? "" : el.field_lang[lang]); //show the common part (01. ) before the value
 	el.titre_el.html(el.value);
+
 	multilang_field_set_background(el,lang) ;
 }
 
@@ -461,6 +469,7 @@ function multilang_save_lang(el,lang) {
 		}
 		el.multi = true;
 		el.field_lang[lang] = el.value;
+		console.log(el.value);
 	}
 }
 
