@@ -208,7 +208,6 @@ function multilang_change_lang(el,container,target) {
 		$(this).css("fontWeight",lang==this.innerHTML?"bold":"normal");
 	}).end();
 	lang = lang.slice(1,-1);
-
 	if(target[0].isfull){
 		multilang_forms_fields[target_id].each(function(){
 			multilang_save_lang(this,this.form.form_lang);
@@ -333,9 +332,7 @@ function multilang_attach_submit() {
 function multilang_init_field(el,lang,force) {
 	if(el.field_lang && !force) return;
 	var langs;
-	if(force){
-		el.value = (el.field_lang['full'] == undefined ? '' : el.field_lang['full']);
-	}
+
 	// Modif Yffic : ne pas considerer comme multi les champs qui contiennent du texte
 	// en dehors des multi sauf un numero (\d+\.\s+)
 	el.value = el.value.replace(/^\s+/g,'').replace(/\s+$/g,'');
