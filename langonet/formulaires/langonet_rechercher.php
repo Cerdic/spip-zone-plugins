@@ -1,11 +1,19 @@
 <?php
 
-function formulaires_langonet_rechercher_charger() {
-	return array('pattern' => _request('pattern'),
+function formulaires_langonet_rechercher_charger($type) {
+	$legende = _T('langonet:legende_rechercher_'.$type);
+	$explication = _T('langonet:info_rechercher_'.$type);
+	$info_pattern = _T('langonet:info_pattern_'.$type.'_cherche');
+
+	return array('type' => $type,
+				'_legende' => $legende,
+				'_explication' => $explication,
+				'_info_pattern' => $info_pattern,
+				'pattern' => _request('pattern'),
 				'correspondance' => _request('correspondance'));
 }
 
-function formulaires_langonet_rechercher_verifier() {
+function formulaires_langonet_rechercher_verifier($type) {
 	$erreurs = array();
 	if (!_request('pattern')) {
 		$erreurs['pattern'] = _T('langonet:message_nok_champ_obligatoire');
@@ -13,16 +21,16 @@ function formulaires_langonet_rechercher_verifier() {
 	return $erreurs;
 }
 
-function formulaires_langonet_rechercher_traiter() {
+function formulaires_langonet_rechercher_traiter($type) {
 
 	// Recuperation des champs du formulaire
 	$pattern = _request('pattern');
 	$correspondance = _request('correspondance');
-	$langonet_rechercher_item = charger_fonction('langonet_rechercher_item','inc');
+	$langonet_rechercher = charger_fonction('langonet_rechercher_'.$type,'inc');
 
 	// Verification et formatage des resultats de la recherche
 	$retour = array();
-	$resultats = $langonet_rechercher_item($pattern, $correspondance);
+	$resultats = $langonet_rechercher($pattern, $correspondance);
 	if ($resultats['erreur']) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}

@@ -66,7 +66,7 @@ function inc_langonet_rechercher_item($pattern, $correspondance) {
 
 	// On prepare le tableau des resultats
 	if (!$trouve)
-		$resultats['erreur'] = _T('langonet:message_nok_item_trouve');;
+		$resultats['erreur'] = _T('langonet:message_nok_item_trouve');
 	$resultats['item_trouve']['egal'] = $trouve['egal'];
 	$resultats['item_trouve']['commence'] = $trouve['commence'];
 	$resultats['item_trouve']['contient'] = $trouve['contient'];
