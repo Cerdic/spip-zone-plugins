@@ -268,17 +268,17 @@ function multilang_multi_recover(el,container,target,event){
 			else {
 				var value="",count=0;
 				$.each(this.field_lang,function(name){
-					if(name != 'full'){
+					if((name != 'full') && (this.length > 0)){
 						//save default lang value and other lang values if different from
 						//the default one
-						if(this!=def_value || name==multilang_def_lang) {
+						if(this!=def_value || name == multilang_def_lang) {
 							value += "["+name+"]"+this;
 							count++;
 						}
 					}
 				});
 				// Modif Yffic : Don't add the field_pre_lang now
-				this.value = (count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
+				this.value = (count > 1 ? "<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 			}
 			// Add Yffic 30/03/2010
 			// Add the title number to the final value
