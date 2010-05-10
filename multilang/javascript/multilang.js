@@ -93,6 +93,12 @@ function multilang_init_lang(options) {
 	if(multilang_forms.size()) multilang_init_multi();
 }
 
+/**
+ * Initialisation des champs multi sur les formulaires
+ *
+ * @param options
+ * @return
+ */
 function multilang_init_multi(options) {
 	var target = options ? options.target : null;
 	var init_forms;
@@ -113,6 +119,7 @@ function multilang_init_multi(options) {
 	//init the value of the field to current lang
 	//add a container for the language menu inside the form
 	init_forms.each(function() {
+		this.isfull = false;
 		this.form_lang = multilang_def_lang;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
 		// Pas de rajout s'il y en deja un
@@ -162,10 +169,10 @@ function multilang_make_menu_lang(container,target) {
 		}else if(!$(this).is('.on') && $(this).is('.recover_lang')){
 			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
 			$(this).addClass('on');
-			multilang_multi_recover(this,container,target,'test');
+			multilang_multi_recover(this,container,target,'submit');
 		}
 		return false;
-	}).appendTo(container);
+	}).end().appendTo(container);
 }
 
 /**
@@ -177,7 +184,6 @@ function multilang_make_menu_lang(container,target) {
  *
  */
 function multilang_change_lang(el,container,target) {
-
 	var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
 	// Modif Yffic : pas trop bien compris, mais avec le test, ca ne fonctionne pas bien dans le cas ou il y a plusieurs
 	// menu_lang dans la meme page, par ex des docs dans la page de presentation d'article
@@ -196,19 +202,20 @@ function multilang_change_lang(el,container,target) {
 	}).end();
 	lang = lang.slice(1,-1);
 
-	if(target.isfull){
-		target.isfull = false;
+	if(target[0].isfull){
 		multilang_forms_fields[target_id].each(function(){
 			multilang_save_lang(this,this.form.form_lang);
 			multilang_init_field(this,lang,true);
 		});
+	}else{
+		//store the fields inputs for later use (usefull for select)
+		//save the current values
+		multilang_forms_fields[target_id].each(function(){
+			multilang_save_lang(this,this.form.form_lang);
+		});
 	}
 
-	//store the fields inputs for later use (usefull for select)
-	//save the current values
-	multilang_forms_fields[target_id].each(function(){
-		multilang_save_lang(this,this.form.form_lang);
-	});
+	target[0].isfull = false;
 	//change current lang
 	target.each(function(){this.form_lang = lang});
 
@@ -229,15 +236,13 @@ function multilang_change_lang(el,container,target) {
  * @return
  */
 function multilang_multi_recover(el,container,target,event){
-
 	$(el).parents('form > .menu_lang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
 	$(el).parents('form').find('li.editer_titre_numero').hide();
 
-	if(target.isfull){
+	if(target[0].isfull){
 		return true;
 	}
-	if(!target.isfull || (event == 'submit' || 'test')){
-		target.isfull = true;
+	if(event == 'submit'){
 		if(typeof(el) == "object"){
 			var text = $(el).html();
 			container.find("a").each(function(){
@@ -247,46 +252,41 @@ function multilang_multi_recover(el,container,target,event){
 		lang = 'full';
 		var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
 		multilang_forms_fields[target_id] = $(multilang_fields_selector,target);
+		target[0].isfull = true;
 		multilang_forms_fields[target_id].each(function(){
-			multilang_field_set_background(this,'full');
 			//Add Yffic 30/03/2010
 			if(!this.totreat) return ;
 			//End Add Yffic
 			//save data before submit
 			multilang_save_lang(this,this.form.form_lang);
 			//build the string value
-			if(this.form.form_lang != 'full'){
-				var def_value = this.field_lang[multilang_def_lang];
-				if(!this.multi)
-					// Modif Yffic : Don't add the field_pre_lang now
-					this.value = (def_value==undefined?"":def_value);
-				else {
-					var value="",count=0;
-					$.each(this.field_lang,function(name){
-						if(name != 'full'){
-							//save default lang value and other lang values if different from
-							//the default one
-							if(this!=def_value || name==multilang_def_lang) {
-								value += "["+name+"]"+this;
-								count++;
-							}
+			multilang_field_set_background(this,'full');
+			var def_value = this.field_lang[multilang_def_lang];
+			if(!this.multi)
+				// Modif Yffic : Don't add the field_pre_lang now
+				this.value = (def_value==undefined?"":def_value);
+			else {
+				var value="",count=0;
+				$.each(this.field_lang,function(name){
+					if(name != 'full'){
+						//save default lang value and other lang values if different from
+						//the default one
+						if(this!=def_value || name==multilang_def_lang) {
+							value += "["+name+"]"+this;
+							count++;
 						}
-					});
-					// Modif Yffic : Don't add the field_pre_lang now
-					this.value = (count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
-				}
+					}
+				});
+				// Modif Yffic : Don't add the field_pre_lang now
+				this.value = (count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 			}
 			// Add Yffic 30/03/2010
 			// Add the title number to the final value
-			multilang_save_lang(this,'full');
+			//multilang_save_lang(this,'full');
 			if((this.id=='titre' || this.id.match(/^titre_document[0-9]+/)) && ($('#'+this.id+'_numero').val() != ''))
 				this.value= $('#'+this.id+'_numero').val().replace(/\.\s+/,'') + ". " + this.value;
 
-			if((event == undefined) || (event != 'submit')){
-				target.each(function(){
-					this.form_lang = lang;
-				});
-			}
+
 			// End Add Yffic
 
 		});
@@ -462,21 +462,21 @@ function multilang_save_lang(el,lang) {
 		el.field_pre_lang = m[1].replace(/\.\s+/,'');
 		el.value = m[2];
 	}
-	if(el.field_lang[multilang_def_lang]!=$(el).val()) {
-		if(!$(el).val()) {
+
+	if(el.field_lang[multilang_def_lang]!= el.value) {
+		if(!el.value) {
 			delete el.field_lang[lang];
 			return;
 		}
 		el.multi = true;
 		el.field_lang[lang] = el.value;
-		console.log(el.value);
 	}
 }
 
 //This func receives the form that is going to be submitted
 function multilang_multi_submit(params) {
 	if(multilang_avail_langs.length<=1) return;
-	var form = this;
+	var form = $(this);
 	//remove the current form from the list of forms
 	multilang_forms.not(this);
 	//remove the current menu lang container from the list
