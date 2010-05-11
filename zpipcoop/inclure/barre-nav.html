@@ -5,6 +5,7 @@
 	<li class="menu-entree[(#ENV{page}|=={calendrier}|?{' on',' '})]"><a href="#URL_PAGE{calendrier}" title="<:zpipcoop:agenda|attribut_html:>"><:zpipcoop:agenda:></a></li>
 	<li class="menu-entree[(#ENV{page}|=={documents}|?{' on',' '})]"><a href="#URL_PAGE{documents}" title="<:zpipcoop:documents|attribut_html:>"><:zpipcoop:documents:></a></li>
 	<li class="menu-entree[(#ENV{page}|=={annuaire}|?{' on',' '})]"><a href="#URL_PAGE{annuaire}" title="<:zpipcoop:annuaire|attribut_html:>"><:zpipcoop:annuaire:></a></li>
-	[(#PLUGIN{spiplistes}|ou{#PLUGIN{clevermail}}|oui) <li class="menu-entree[(#ENV{page}|=={abonnement}|?{' on',' '})]"><a href="#URL_PAGE{abonnement}" title="<:zpipcoop:abonnement|attribut_html:>"><:zpipcoop:abonnement:></a></li>]
+	[(#PLUGIN{spiplistes}|ou{#PLUGIN{clevermail}}|oui)<li class="menu-entree[(#ENV{page}|=={abonnement}|?{' on',' '})]"><a href="#URL_PAGE{abonnement}" title="<:zpipcoop:abonnement|attribut_html:>"><:zpipcoop:abonnement:></a></li>]
+	[(#PLUGIN{tickets}|oui)<li class="menu-entree[(#ENV{page}|=={tickets_page}|?{' on',' '})]"><a href="#URL_PAGE{tickets_page}" title="<:zpipcoop:tickets|attribut_html:>"><:zpipcoop:tickets:></a></li>]
 </ul>
 </div>

@@ -1,0 +1,20 @@
+[(#REM) <!-- Affichage des jalon non planifie dans la page afaire (a priori vide)
+--> ]
+<B_non_planifie>
+<div id="jalon_non_planifie" class="portfolio">
+	<a name="ancre_jalon_non_planifie"></a>
+	<h2 class="jalon"><:zpipcoop:afaire_non_planifies:></h2>
+	<div class="description">
+		<table class="spip" summary="<:zpipcoop:afaire_non_planifies:>">
+			#INCLURE{fond=inclure/afaire/inc_afaire_table_entete}
+			<tbody>
+			<BOUCLE_non_planifie(TICKETS){par severite}{par type}{!par date_modif}{!par date}{statut IN redac,ouvert}{jalon=''}>
+				<INCLURE{fond=inclure/afaire/inc_afaire_table_ligne}
+					{id_ticket=#ID_TICKET}
+					{compteur_boucle=#COMPTEUR_BOUCLE}>
+			</BOUCLE_non_planifie>
+			</tbody>
+		</table>
+	</div> <!-- description -->
+</div> <!-- portfolio jalon -->
+</B_non_planifie>

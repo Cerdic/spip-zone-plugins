@@ -1,0 +1,19 @@
+[(#REM) <!-- Affichage d'une ligne de la table des afaire de la page afaire
+	- compteur_boucle: numero de la boucle en cours
+--> ]
+<BOUCLE_ticket(TICKETS){id_ticket}>
+	<tr[ class="(#ENV{compteur_boucle}|alterner{row_even,row_odd})"]>
+		<td><img src="[(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})]"[ alt="(#STATUT)"] /></td>
+		<td>[(#AUTORISER{ecrire, ticket}|oui)<a href="[(#URL_PAGE{tickets,id_ticket=#ID_TICKET})]">]
+			<b>##ID_TICKET</b>
+		[(#AUTORISER{ecrire, ticket}|oui)</a>]</td>
+		<td>#TITRE</td>
+		<td>[(#TYPE|tickets_texte_type)]</td>
+		<td><img src="#CHEMIN{images/severite_#SEVERITE.gif}"[ alt="(#SEVERITE)"] /></td>
+		<td>[(#SEVERITE|tickets_texte_severite)]</td>
+		<td><BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}>
+			<a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">#NOM</a>
+			</BOUCLE_assigne></td>
+		<td>[(#DATE_MODIF|affdate_court|sinon{#DATE|affdate_court})]</td>
+	</tr>
+</BOUCLE_ticket>

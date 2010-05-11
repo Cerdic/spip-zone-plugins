@@ -1,0 +1,60 @@
+[(#REM) <!-- Pour chaque jalon on affiche les listes:
+	- des Tickets termines
+	- des Tickets ouverts et assignes (donc en cours de traitement)
+	- des Tickets ouverts ou en redac mais non assignes (donc en cours d'analyse)
+--> ]
+#SET{jalon_vide, 1}
+<div class="portfolio">
+	<a name="#ENV{ancre}"></a>
+	<h2 class="jalon"><:zpipcoop:afaire_colonne_jalon:>&nbsp;&#171;&nbsp;#ENV{jalon}&nbsp;&#187;</h2>
+	<div class="description">
+		[(#REM) <!-- Tickets termines --> ]
+		<B_termines>
+		<table class="spip"[ summary="<:zpipcoop:afaire_colonne_jalon:>(#ENV{jalon}) - <:zpipcoop:afaire_tickets_termines:>"]>
+			[(#INCLURE{fond=inclure/afaire/inc_afaire_table_entete}{caption=<:zpipcoop:afaire_tickets_termines:>})]
+			<tbody>
+			<BOUCLE_termines(TICKETS){par severite}{par type}{!par date_modif}{!par date}{statut IN resolu,ferme}{jalon=#ENV{jalon}}>
+				<INCLURE{fond=inclure/afaire/inc_afaire_table_ligne}
+					{id_ticket=#ID_TICKET}
+					{compteur_boucle=#COMPTEUR_BOUCLE}>
+			</BOUCLE_termines>
+			</tbody>
+		</table>
+		#SET{jalon_vide, 0}
+		</B_termines>
+
+		[(#REM) <!-- Tickets en cours de traitement --> ]
+		<B_en_traitement>
+		[(#GET{jalon_vide}|non)<br />]
+		<table class="spip"[ summary="<:zpipcoop:afaire_colonne_jalon:>(#ENV{jalon}) - <:zpipcoop:afaire_tickets_en_traitement:>"]>
+			[(#INCLURE{fond=inclure/afaire/inc_afaire_table_entete}{caption=<:zpipcoop:afaire_tickets_en_traitement:>})]
+			<tbody>
+			<BOUCLE_en_traitement(TICKETS){par severite}{par type}{!par date_modif}{!par date}{statut IN redac,ouvert}{id_assigne>0}{jalon=#ENV{jalon}}>
+				<INCLURE{fond=inclure/afaire/inc_afaire_table_ligne}
+					{id_ticket=#ID_TICKET}
+					{compteur_boucle=#COMPTEUR_BOUCLE}>
+			</BOUCLE_en_traitement>
+			</tbody>
+		</table>
+		#SET{jalon_vide, 0}
+		</B_en_traitement>
+
+		[(#REM) <!-- Tickets en cours d'analyse --> ]
+		<B_en_analyse>
+		[(#GET{jalon_vide}|non)<br />]
+		<table class="spip"[ summary="<:zpipcoop:afaire_colonne_jalon:>(#ENV{jalon}) - <:zpipcoop:afaire_tickets_en_analyse:>"]>
+			[(#INCLURE{fond=inclure/afaire/inc_afaire_table_entete}{caption=<:zpipcoop:afaire_tickets_en_analyse:>})]
+			<tbody>
+			<BOUCLE_en_analyse(TICKETS){par severite}{par type}{!par date_modif}{!par date}{statut IN redac,ouvert}{id_assigne=0}{jalon=#ENV{jalon}}>
+				<INCLURE{fond=inclure/afaire/inc_afaire_table_ligne}
+					{id_ticket=#ID_TICKET}
+					{compteur_boucle=#COMPTEUR_BOUCLE}>
+			</BOUCLE_en_analyse>
+			</tbody>
+		</table>
+		#SET{jalon_vide, 0}
+		</B_en_analyse>
+
+		[(#GET{jalon_vide}|oui)<p><:zpipcoop:afaire_msg_0_ticket_jalon:></p>]
+	</div> <!-- description -->
+</div> <!-- portfolio jalon -->

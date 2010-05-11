@@ -10,6 +10,7 @@
 	Un plugin compatible avec le concept Z. Un squelette avec un acc&eacute;s enti&egrave;rement restreint.
 	</description>
 	<prefix>zpipcoop</prefix>
+	<fonctions>zpipcoop_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="Z" version="[1.5.1;]" />
 	<utilise id="autorite" version='[0.9.6;]' />
@@ -20,5 +21,6 @@
 	<utilise id="slogan" version='[2.0.2;]' />
 	<utilise id="spiplistes" version="[2.0135;]" />
 	<utilise id="thumbsites" version='[0.3;]' />
+	<utilise id="tickets" version='[1.6;]' />
 	<utilise id="zengarden" version="[1.0.1;]" />
 </plugin>
