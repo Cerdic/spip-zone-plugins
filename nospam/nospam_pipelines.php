@@ -9,6 +9,7 @@
 // pour verifier le nobot et le jeton sur un formulaire, l'ajouter a cette globale
 $GLOBALS['formulaires_no_spam'][] = 'forum';
 $GLOBALS['formulaires_no_spam'][] = 'ecrire_auteur';
+$GLOBALS['formulaires_no_spam'][] = 'signature';
 
 
 /**
@@ -112,6 +113,30 @@ function nospam_formulaire_verifier($flux){
 				// si le texte contient plus de trois liens = spam !
 				if ($infos_texte['nombre_liens'] >= 3)
 					$flux['data']['texte_message_auteur'] = _T('nospam:erreur_spam');
+			}
+		}
+	}
+	if ($form=='signature'){
+		if (!isset($flux['data']['message'])){
+			include_spip("inc/nospam");
+			include_spip("inc/texte");
+			// regarder si il y a du contenu en dehors des liens !
+			$message = _request('message');
+			$caracteres = compter_caracteres_utiles($message);
+			if ($caracteres < 10){
+				$flux['data']['message_erreur'] = _T('forum_attention_dix_caracteres');
+				unset($flux['data']['previsu']);
+			}
+			// on analyse le texte
+			$infos_texte = analyser_spams($message);
+			if ($infos_texte['nombre_liens'] > 0) {
+				// si un lien a un titre de moins de 3 caracteres = spam !
+				if ($infos_texte['caracteres_texte_lien_min'] < 3) {
+					$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
+				}
+				// si le texte contient plus de trois liens = spam !
+				if ($infos_texte['nombre_liens'] >= 2)
+					$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
 			}
 		}
 	}
