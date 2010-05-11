@@ -14,9 +14,8 @@
 
 
 var multilang_containers={}, //menu containers
-    multilang_forms_fields={},
-    multilang_forms, //forms to be processed (jQuery object)
-    multilang_menu_lang; //template of the menu (jQuery object)
+    multilang_forms_fields={};
+
 /*
 (?:\[([a-z_]+)\]|^[\s\n]*)
 [lang] or white space
@@ -33,16 +32,14 @@ all chars not greedy
  *
  */
 var multilang_match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n|\s)*?)(?=\[[a-z_]+\]|$)/ig;
-var multilang_css_link,
-    multilang_css_cur_link={},
-    multilang_root, //root of the search (jQuery object)
+var multilang_root, //root of the search (jQuery object)
     multilang_root_opt,
     multilang_fields_selector,
     multilang_menu_selector,
     multilang_containers,
+    multilang_forms, //forms to be processed (jQuery object)
+    multilang_menu_lang, //template of the menu (jQuery object)
     multilang_forms_selector; //selector of the forms to be processed (string)
-multilang_css_link = {};
-$.extend(multilang_css_cur_link,multilang_css_link,{fontWeight:"bold"});
 
 /**
  * options is a hash having the following values:
@@ -69,16 +66,20 @@ function multilang_init_lang(options) {
 	//set the main menu element
 	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $([]);
 
-	//create menu lang template
+	/**
+	 * On crée le modèle du menu de langue
+	 * C'est ce modèle qui est cloné au début de chaque formulaire
+	 */
 	multilang_menu_lang = $("<div class='langues'>");
 	$.each(multilang_avail_langs,function() {
-		multilang_menu_lang.append($("<a class='change_lang'>").html("["+this+"]").css(this==multilang_def_lang?multilang_css_cur_link:multilang_css_link)[0]);
+		multilang_menu_lang.append($("<a class='change_lang "+this+"'>").html("["+this+"]"));
 	});
 	// Pour pouvoir desactiver le multilang
-	multilang_menu_lang.append($("<a class='recover_lang' href='#'>").html("["+multilang_lang.lien_desactiver+"]").css(this==multilang_def_lang?multilang_css_cur_link:multilang_css_link)[0]);
+	multilang_menu_lang.append($("<a class='recover_lang' href='#'>").html("["+multilang_lang.lien_desactiver+"]"));
 
 	//init fields
 	multilang_fields_selector = options.fields;
+
 	//store all the internationalized forms
 	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
 	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
@@ -180,53 +181,7 @@ function multilang_make_menu_lang(container,target) {
 		}
 		return false;
 	}).end().appendTo(container);
-}
-
-/**
- * Action au click sur une langue du menu de langue
- *
- * @param el Le lien cliqué sur le menu
- * @param container Le conteneur du formulaire
- * @param target Le formulaire lui même
- *
- */
-function multilang_change_lang(el,container,target) {
-	var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
-	// Modif Yffic : pas trop bien compris, mais avec le test, ca ne fonctionne pas bien dans le cas ou il y a plusieurs
-	// menu_lang dans la meme page, par ex des docs dans la page de presentation d'article
-	//if(!multilang_forms_fields[target_id])
-	multilang_forms_fields[target_id] = $(multilang_fields_selector,target);
-
-	var lang = el.innerHTML;
-
-	/**
-	 * Gestion des styles des liens
-	 * - on met en gras la langue sélectionnée
-	 * - on remet en normal les autres éléments du meny
-	 */
-	container.find("a").each(function(){
-		$(this).css("fontWeight",lang==this.innerHTML?"bold":"normal");
-	}).end();
-	lang = lang.slice(1,-1);
-	if(target[0].isfull){
-		multilang_forms_fields[target_id].each(function(){
-			multilang_save_lang(this,this.form.form_lang);
-			multilang_init_field(this,lang,true);
-		});
-	}else{
-		//store the fields inputs for later use (usefull for select)
-		//save the current values
-		multilang_forms_fields[target_id].each(function(){
-			multilang_save_lang(this,this.form.form_lang);
-		});
-	}
-
-	target[0].isfull = false;
-	//change current lang
-	target.each(function(){this.form_lang = lang});
-
-	//reinit fields to current lang
-	multilang_forms_fields[target_id].each(function(){multilang_set_lang(this,lang)});
+	$(target).find('.menu_lang .langues a').eq(0).addClass('on');
 }
 
 /**
@@ -243,12 +198,6 @@ function multilang_multi_recover(el,container,target,event){
 		return true;
 	}
 	if(event == 'submit'){
-		if(typeof(el) == "object"){
-			var text = $(el).html();
-			container.find("a").each(function(){
-				$(this).css("fontWeight",text==$(this).html()?"bold":"normal");
-			}).end();
-		}
 		lang = 'full';
 		var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
 		multilang_forms_fields[target_id] = $(multilang_fields_selector,target);
@@ -260,7 +209,7 @@ function multilang_multi_recover(el,container,target,event){
 			//save data before submit
 			multilang_save_lang(this,this.form.form_lang);
 			//build the string value
-			multilang_field_set_background(this,'full');
+			multilang_field_set_background(this,lang);
 			var def_value = this.field_lang[multilang_def_lang];
 			if(!this.multi)
 				// Modif Yffic : Don't add the field_pre_lang now
@@ -282,36 +231,10 @@ function multilang_multi_recover(el,container,target,event){
 			}
 			// Add Yffic 30/03/2010
 			// Add the title number to the final value
-			//multilang_save_lang(this,'full');
 			if((this.id=='titre' || this.id.match(/^titre_document[0-9]+/)) && ($('#'+this.id+'_numero').val() != ''))
 				this.value= $('#'+this.id+'_numero').val().replace(/\.\s+/,'') + ". " + this.value;
-
-
-			// End Add Yffic
-
 		});
 		return true;
-	}
-}
-
-/**
- * On attache nos évènements pour la validation du formulaire
- * - sur le submit pour tous les formulaires
- * - sur l'évènement 'form-pre-serialize' d'ajaxForms au cas où nous sommes dans
- * un formulaire ajax
- *
- * @return
- */
-function multilang_attach_submit() {
-	if($(this).parents('.ajax').size() && $(this).find('input[name=var_ajax]')){
-		$(this).bind('form-pre-serialize',multilang_multi_submit);
-	}else{
-		var oldsubmit = this.onsubmit;
-		this.onsubmit = "";
-		if(oldsubmit && oldsubmit != "")
-			$(this).submit(function(){multilang_multi_submit.apply(this);return oldsubmit.apply(this);});
-		else if(oldsubmit != "")
-			$(this).submit(multilang_multi_submit);
 	}
 }
 
@@ -373,12 +296,11 @@ function multilang_init_field(el,lang,force) {
 		var n = el.value.match(/(\d+\.\s+)?(.*)/);
 		el.field_pre_lang = n[1] || "";
 		el.field_pre_lang = el.field_pre_lang.replace(/\.\s+/,'') ;
-		el.field_lang[lang] = n[2];
+		el.field_lang[multilang_def_lang] = n[2];
 	}
 
 	//Put the current lang string only in the field
 	multilang_set_lang(el,lang);
-	multilang_field_set_background(el,lang) ;
 
 	/**
 	 * Si le champ est un titre, on ajoute un champ facultatif "numéro" au formulaire permettant
@@ -394,24 +316,49 @@ function multilang_init_field(el,lang,force) {
 }
 
 /**
- * Change l'image de fond d'un champ pour indiquer la présence ou non de multis
+ * Action au click sur une langue du menu de langue
  *
- * @param el
- * @param lang
- * @return
+ * @param el Le lien cliqué sur le menu
+ * @param container Le conteneur du formulaire
+ * @param target Le formulaire lui même
+ *
  */
-function multilang_field_set_background(el,lang) {
-	if(lang != 'full'){
-		if(el.totreat){
-			$(el).removeAttr('readonly');
-			$(el).css({"background-image":"url("+multilang_dir_plugin+"/images/multi_"+(el.multi?lang:undefined)+".png)","backgroundRepeat":"no-repeat","backgroundPosition":"top right"});
-		}
-		else
-			$(el).css({"background":"url("+multilang_dir_plugin+"/images/multi_forbidden.png) no-repeat right top"});
+function multilang_change_lang(el,container,target) {
+	var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
+
+	multilang_forms_fields[target_id] = $(multilang_fields_selector,target);
+	var lang = el.innerHTML;
+
+	lang = lang.slice(1,-1);
+
+	if(target[0].isfull){
+		multilang_forms_fields[target_id].each(function(){
+			var me = $(this);
+			if(me.parents(root_opt).size()>0){
+		        if(me.is(forms_selector_opt)){
+		        	multilang_init_field(this,lang,true);
+		        }
+		    }else{
+		    	//multilang_save_lang(this,this.form.form_lang);
+		    	multilang_init_field(this,lang,true);
+		    }
+		});
+		target[0].isfull = false;
 	}else{
-		$(el).attr('readonly','readonly');
-		$(el).css({"backgroundImage":""});
+		//store the fields inputs for later use (usefull for select)
+		//save the current values
+		multilang_forms_fields[target_id].each(function(){
+			multilang_save_lang(this,this.form.form_lang);
+		});
 	}
+
+	//change current lang
+	target.each(function(){this.form_lang = lang});
+
+	//reinit fields to current lang
+	multilang_forms_fields[target_id].each(function(){
+		multilang_set_lang(this,lang);
+	});
 }
 
 /**
@@ -435,7 +382,45 @@ function multilang_set_lang(el,lang) {
 	el.value = (el.field_lang[lang] == undefined ? "" : el.field_lang[lang]); //show the common part (01. ) before the value
 	el.titre_el.html(el.value);
 
-	multilang_field_set_background(el,lang) ;
+	multilang_field_set_background(el,lang);
+}
+
+/**
+ * Change la class multi_lang_* d'un champ pour indiquer la présence ou non de multis
+ * - multi_lang_(lang) si une langue particulière est disponible
+ * - multi_lang_no_multi si pas de multis pour le champ
+ *
+ * @param el
+ * @param lang
+ * @return
+ */
+function multilang_field_set_background(el,lang) {
+	if(lang != 'full'){
+		if(el.totreat){
+			$(el).removeAttr('readonly');
+			$($(el).attr('class').split(" ")).each(function(){
+				var m = this.match(/^multi_lang_*/);
+				if(m!=null)
+					$(el).removeClass(m.input).addClass('multi_lang_'+lang);
+			});
+			$(el).addClass('multi_lang_'+(el.multi?lang:'no_multi'));
+		}
+		else{
+			$($(el).attr('class').split(" ")).each(function(){
+				var m = this.match(/^multi_lang_*/);
+				if(m!=null)
+					$(el).removeClass(m.input);
+			});
+			$(el).css({"background":"url("+multilang_dir_plugin+"/images/multi_forbidden.png) no-repeat right top"});
+		}
+	}else{
+		$(el).attr('readonly','readonly');
+		$($(el).attr('class').split(" ")).each(function(){
+			var m = this.match(/^multi_lang_*/);
+			if(m!=null)
+				$(el).removeClass(m.input);
+		});
+	}
 }
 
 /**
@@ -448,6 +433,7 @@ function multilang_set_lang(el,lang) {
  */
 function multilang_save_lang(el,lang) {
 	//Add Yffic 30/03/2010
+
 	if(!el.totreat) return ;
 	//End Add Yffic
 
@@ -468,6 +454,13 @@ function multilang_save_lang(el,lang) {
 		}
 		el.multi = true;
 		el.field_lang[lang] = el.value;
+	}else{
+		el.field_lang[lang] = el.field_lang[multilang_def_lang];
+		$.each(el.field_lang,function(index, value){
+			if((index != multilang_def_lang) && (value == el.field_lang[multilang_def_lang])){
+				delete el.field_lang[index];
+			}
+		});
 	}
 }
 
@@ -483,6 +476,27 @@ function multilang_multi_submit(params) {
 	multilang_multi_recover('','',form,'submit');
 	//save back the params
 	if(params) $.extend(params,$(form).formToArray(false));
+}
+
+/**
+ * On attache nos évènements pour la validation du formulaire
+ * - sur le submit pour tous les formulaires
+ * - sur l'évènement 'form-pre-serialize' d'ajaxForms au cas où nous sommes dans
+ * un formulaire ajax
+ *
+ * @return
+ */
+function multilang_attach_submit() {
+	if($(this).parents('.ajax').size() && $(this).find('input[name=var_ajax]')){
+		$(this).bind('form-pre-serialize',multilang_multi_submit);
+	}else{
+		var oldsubmit = this.onsubmit;
+		this.onsubmit = "";
+		if(oldsubmit && oldsubmit != "")
+			$(this).submit(function(){multilang_multi_submit.apply(this);return oldsubmit.apply(this);});
+		else if(oldsubmit != "")
+			$(this).submit(multilang_multi_submit);
+	}
 }
 
 jQuery.fn.in_set = function(set) {

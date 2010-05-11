@@ -43,7 +43,7 @@ function multilang_inserer_head($flux,$config=array()){
 	if(_request('nomultilang')=='1') return $flux;
 
 	// Insertion de la css
-	$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(find_in_path('css/multilang.css')).'" type="text/css" media="all" />';
+	$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
 	$root = '' ;
 
 	if($config['siteconfig']){
@@ -100,7 +100,7 @@ function multilang_inserer_head($flux,$config=array()){
 			  	jQuery(document).ready(function(){
 					function multilang_init(){
 						root = "'.$root.'";
-						fields_selector = "textarea,input:text:not(input#new_login,*.nomulti),.multilang";
+						fields_selector = "textarea,input:text:not(input#new_login,#titreparent,.ac_input,#url_syndic,*.nomulti),.multilang";
 						forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 						root_opt = "div:has(> form:has(.multilang))";
 						forms_selector_opt = ".multilang";

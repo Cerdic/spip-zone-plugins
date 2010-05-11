@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Multilang</nom>
 	<auteur>Renato Formato</auteur>
-	<licence>GNU/GLP</licence>
+	<licence>GNU/GPL</licence>
 	<version>0.0.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>
 		<multi>
-			[fr]Gestion des tags multi dans l'espace priv&eacute;
+			[fr]Gestion des tags multi
 			[it]Gestione facile dei tag multi
 		</multi>
 	</description>
