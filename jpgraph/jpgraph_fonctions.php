@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
-define('_DIR_JPGRAPH_LIB', _DIR_LIB . 'jpgraph-3.0.6/');
+define('_DIR_JPGRAPH_LIB', _DIR_LIB . 'jpgraph-3.0.7/');
 
 
 //
