@@ -39,7 +39,8 @@ var multilang_root, //root of the search (jQuery object)
     multilang_containers,
     multilang_forms, //forms to be processed (jQuery object)
     multilang_menu_lang, //template of the menu (jQuery object)
-    multilang_forms_selector; //selector of the forms to be processed (string)
+    multilang_forms_selector, //selector of the forms to be processed (string)
+    multilang_init = false;
 
 /**
  * options is a hash having the following values:
@@ -51,6 +52,7 @@ var multilang_root, //root of the search (jQuery object)
  * - form_menu (optional): a jQuery selector to set the container for the form menus.
  */
 function multilang_init_lang(options) {
+
 	//Detect if we're on the right page and if multilinguism is activated. If not return.
 	if((options.page && window.location.search.indexOf(options.page)==-1) || multilang_avail_langs.length<=1) return;
 
@@ -59,12 +61,14 @@ function multilang_init_lang(options) {
 	var root = options.root || document;
 	multilang_root = $(root+','+root_opt);
 	multilang_root_opt = $(root_opt);
-	//Add Yffic : S'il existe deja un menu lang sous multilang_root, return (cas Ajax) Ca, c'est pas terrible
-	// Car dans Mediatheque, le menu ne s'affichera pas
-	//if(multilang_root.find('.menu_lang').length > 0) return;
 
-	//set the main menu element
+	/**
+	 * set the main menu element
+	 * Plus utilisé pour l'instant
+	 */
 	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $([]);
+
+	multilang_forms_toadd = $([]);
 
 	/**
 	 * On crée le modèle du menu de langue
@@ -75,7 +79,6 @@ function multilang_init_lang(options) {
 		var title = 'multilang_lang.title_lien_multi_'+this;
 		multilang_menu_lang.append($("<a class='change_lang "+this+"' title='"+eval(title)+"'>").html("["+this+"]"));
 	});
-	// Pour pouvoir desactiver le multilang
 	multilang_menu_lang.append($("<a class='recover_lang' href='#'>").html("["+multilang_lang.lien_desactiver+"]"));
 
 	//init fields
@@ -84,15 +87,23 @@ function multilang_init_lang(options) {
 	//store all the internationalized forms
 	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
 	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
+
+	if(multilang_init){
+		multilang_forms_toadd = $(multilang_forms_selector,multilang_root).not($(multilang_forms));
+	}
 	multilang_forms = $(multilang_forms_selector,multilang_root);
+	if(!multilang_init){
+		multilang_forms_toadd = multilang_forms;
+	}
 
 	//create menu lang for the global form
 	if(multilang_containers.size())
 		multilang_make_menu_lang(multilang_containers);
 	multilang_menu_selector = options.form_menu;
 
+	multilang_init = true;
 	// Modif Yffic : On va pas plus s'il n'y a pas de form
-	if(multilang_forms.size()) multilang_init_multi();
+	if(multilang_forms_toadd.size()) multilang_init_multi();
 }
 
 /**
@@ -113,8 +124,8 @@ function multilang_init_multi(options) {
 		multilang_forms.add(init_forms.each(multilang_attach_submit).get());
 	} else {
 		//attach multi processing to submit event
-		init_forms = multilang_forms;
-		multilang_forms.each(multilang_attach_submit);
+		init_forms = multilang_forms_toadd;
+		multilang_forms_toadd.each(multilang_attach_submit);
 	}
 	multilang_forms_fields = {};
 	multilang_forms_fields["undefined"] = $(multilang_fields_selector,multilang_forms);
@@ -140,7 +151,7 @@ function multilang_init_multi(options) {
 	$(multilang_fields_selector,init_forms).each(function(){
 	    var me = $(this);
 	    if($(multilang_fields_selector).parents(root_opt).size()>0){
-	        if(me.is(forms_selector_opt)){
+	        if(me.is(fields_selector_opt)){
 	        	multilang_init_field(this,this.form.form_lang);
 	        }
 	    }else{
@@ -336,7 +347,7 @@ function multilang_change_lang(el,container,target) {
 		multilang_forms_fields[target_id].each(function(){
 			var me = $(this);
 			if(me.parents(root_opt).size()>0){
-		        if(me.is(forms_selector_opt)){
+		        if(me.is(fields_selector_opt)){
 		        	multilang_init_field(this,lang,true);
 		        }
 		    }else{
