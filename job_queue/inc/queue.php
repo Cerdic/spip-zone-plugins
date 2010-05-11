@@ -327,7 +327,7 @@ function queue_update_next_job_time($next_time=null){
 
 	// traiter les jobs morts au combat (pending depuis plus de 180s)
 	// pour cause de timeout ou autre erreur fatale
-	$res = sql_select("*","spip_jobs","status='pending' AND date<".sql_quote(date('Y-m-d H:i:s'),$time-180));
+	$res = sql_select("*","spip_jobs","status='pending' AND date<".sql_quote(date('Y-m-d H:i:s',$time-180)));
 	while ($row = sql_fetch($res))
 		queue_close_job($row,$time);
 
@@ -339,7 +339,7 @@ function queue_update_next_job_time($next_time=null){
 	else {
 		if ($next_time){
 			if (is_null($nb_jobs_scheduled))
-				$nb_jobs_scheduled = sql_countsel('spip_jobs',"status='scheduled' AND date<".sql_quote(date('Y-m-d H:i:s'),$time));
+				$nb_jobs_scheduled = sql_countsel('spip_jobs',"status='scheduled' AND date<".sql_quote(date('Y-m-d H:i:s',$time)));
 			elseif ($next_time<=time())
 				$nb_jobs_scheduled++;
 			// si trop de jobs en attente, on force la purge en fin de hit
