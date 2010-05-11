@@ -271,15 +271,17 @@ function multilang_init_field(el,lang,force) {
 	// Modif Yffic : ne pas considerer comme multi les champs qui contiennent du texte
 	// en dehors des multi sauf un numero (\d+\.\s+)
 	el.value = el.value.replace(/^\s+/g,'').replace(/\s+$/g,'');
-	var m = el.value.match(/(\d+\.\s+)?<multi>((?:.|\n|\s)*?)<\/multi>(.*)/);
+	var m = el.value.match(/(\d+\.\s+)?<multi>((?:.|\n|\s)*?)<\/multi>(.|\n*)/);
 	el.field_lang = {};
 	el.field_pre_lang = ""; //this is the 01. part of the string, the will be put outside the <multi>
 	el.titre_el = $("#titre_"+el.id);
 	// Add Yffic 30/03/2010
 	// Init the elements to treat
 	if(m!=null) {
-		if( m.index || (m[3]!=undefined && m[3]!=""))
+		if( m.index || (m[3]!=undefined && m[3]!="")){
+			$(el).addClass('multi_lang_broken');
 			el.totreat=false;
+		}
 		else
 			el.totreat=true;
 		if(el.totreat) {
