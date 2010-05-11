@@ -100,7 +100,7 @@ function multilang_inserer_head($flux,$config=array()){
 			  	jQuery(document).ready(function(){
 					function multilang_init(){
 						root = "'.$root.'";
-						fields_selector = "textarea,input.text:text:not(input#new_login,*.nomulti),.multilang";
+						fields_selector = "textarea,input:text:not(input#new_login,*.nomulti),.multilang";
 						forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 						root_opt = "div:has(> form:has(.multilang))";
 						forms_selector_opt = ".multilang";
