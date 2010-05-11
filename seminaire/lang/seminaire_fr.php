@@ -2,6 +2,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//pour le formulaire de s&eacute;minaires
+	'titre_evenement'			 =>		'Titre à préciser',
 	'evenement_titre'			 =>		'Titre de l&rsquo;expos&eacute;',
 	'name'						 => 	'Nom de l&rsquo;intervenant (Name)',
 	'origin'					 => 	'Institut d&rsquo;origine de l&rsquo;intervenant',

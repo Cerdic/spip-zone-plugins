@@ -15,8 +15,8 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 
 	if (!$valeurs['id_article'])
 		$valeurs['id_article'] = $id_article;
-	if (!$valeurs['titre'])
-		$valeurs['titre'] = sql_getfetsel('titre','spip_articles','id_article='.intval($valeurs['id_article']));
+	if (!$valeurs['TBA'])
+		$valeurs['titre'] = _T('seminaire:titre_evenement');
 	$valeurs['id_parent'] = $valeurs['id_article'];
 	unset($valeurs['id_article']);
 	// pour le selecteur d'article(s) optionnel
