@@ -4,28 +4,26 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'alphabet' =>	"ABCDEFGHIJKLMNOPQRSTUVWXYZ-",
-'aucun_jeu'	=> 'Kein Spiel',
-'votre_choix'    => "Ihre Wahl: ",
-'votre_reponse' => "Ihre Antwort: ",
-'corriger'        => "Korrigieren",
+'votre_choix'    => "Deine Antwort: ",
+'votre_reponse' => "Deine Antwort: ",
+'corriger'        => "Antwort",
 'verifier'         => '&#220;berpr&#252;fen',
 'verifier_validite'     => 'Validit&#228;t &#252;berpr&#252;fen ',
 
 'afficher_solution'     =>'L&#246;sung anzeigen',
 'solution'        =>'L&#246;sung',
 'reponse'        =>'Antwort',
-'indices'        => 'Hinweise',
+'indices'        => 'Tipps zum Ausf&#252;llen',
 'score'            => 'Ergebnis:',
 
-'point' => "&nbsp;Pkt",
-'points' => "&nbsp;Pkte",
+'point' => "&nbsp;Punkt",
+'points' => "&nbsp;Punkte",
 
 'ligne_n'        =>'Zeile @n@',
 'colonne_n'        =>'Spalte @n@',
 
-'reinitialiser'        => 'zur&uuml;cksetzen',
-'recommencer'        => 'Neu starten',
+'reinitialiser'        => 'Neuer Versuch',
+'recommencer'        => 'Neuer Versuch',
 'rejouer'        => 'Nochmals spielen',
 'reset'        => 'zur&uuml;cksetzen',
 
@@ -82,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jeu_vide' => 'LEER',
 
 'derniere_modif' => 'Letzte &Auml;nderung',
+/* 'rapport' => 'von', */
 'resultat' => 'Ergebnis',
 'resultats' => 'Ergebnisse',
 'resultats_auteur' => 'Die Ergebnisse von @nom@',
@@ -93,21 +92,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_resultats' => 'Ergebnisse verwalten',
 'gerer_ses_resultats' => 'Eigene Ergebnisse verwalten',
 'voir_resultats' => 'Ergebnisse ansehen',
-'type_resultat' => 'Type de r&eacute;sultats',
-'cfg_type_resultat' => 'Enregistrement des scores&nbsp;:',
-'cfg_donner_solution' => 'Donner les bonnes r&eacute;ponses',
-'cfg_introduction'=> 'Les param&egrave;tres regroup&eacute;s ici correspondent &agrave; la configuration par d&eacute;faut de l\'ensemble des jeux du site. Ils peuvent &ecirc;tre surcharg&eacute;es au cas par cas gr&acirc;ce &agrave; la configuration interne des jeux (s&eacute;parateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des param&egrave;tres list&eacute;s ci-dessous.',
-'cfg_scores' => "Les scores du jeu",
-'cfg_correction' => "La correction du jeu",
-'configuration_defaut' => 'Configuration par d&eacute;faut&nbsp;:',
-'cfg_affichage' => 'L\'affichage du jeu',
-'cfg_donner_indices' => 'Afficher des indices',
-'cfg_donner_reponse' => 'Afficher la r&eacute;ponse',
-
+'type_resultat' => 'Enregistrement des scores&nbsp;:',
 'gerer_resultats_jeu' => 'Ergebnisse von Spiel no. @id@ (@nom@) verwalten',
 'aucun_resultat' => 'Kein Ergebnis',
 
-'supprimer_tout_tout' => 'ALLE Ergebnisse löschen',
+'supprimer_tout_tout' => 'ALLE Ergebnisse l&ouml;schen',
 'supprimer_tout_jeu' => 'Effacer TOUS les r&eacute;sultats du jeu',
 'supprimer_tout_auteur' => "ALLE Ergebnisse von Autor l&#8217; l&ouml;schen",
 'supprimer_confirmer' => 'L&ouml;schen der Ergebnisse bet&auml;tigen',
@@ -129,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_jeu' => "Pardon, dieses Spiel existiert nicht!",
 'pas_d_auteur' => "Pardon, dieser Autor ist nicht bekannt!",
 'inserer_jeu' => "Spiele einf&uuml;gen",
-'inserer_jeu_explication' =>"Sie können Spiele einf&uuml;gen, indem Sie &#60;jeuXXX&#62; schreiben,  XXX id die Nummer des SPiels",
+'inserer_jeu_explication' =>"Sie k&ouml;nnen Spiele einf&uuml;gen, indem Sie &#60;jeuXXX&#62; schreiben,  XXX id die Nummer des Spiels",
 
 'compacter_tout_tout' => 'ALlE Ergebnisse komprimieren',
 'compacter_tout_jeu' => 'ALLE Ergebnisse des Spiels komprimieren',
@@ -143,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'compacter_confirmer' => 'Komprimieren der Ergebnisse best&auml;tigen',
 'statut_jeu'  	=> 'Status des Spiels: ',
 'titres_jeu'  	=> 'Titre(s) du jeu&nbsp;: ',
-'configuration_interne' => 'Configuration interne du jeu&nbsp;: ',
+'configuration_interne' => 'Configuration interne&nbsp;: ',
 'configuration_generale' => 'Configuration g&eacute;n&eacute;rale du plugin',
 
 'resultat_defaut' => 'Par d&eacute;faut',
@@ -153,7 +142,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'resultat_meilleur' => 'Le meilleur',
 'resultat_meilleurs' => 'Les meilleurs',
 'resultat_tous' => 'Tous',
-'resultat2_' => 'Non d&eacute;fini ?',
 'resultat2_defaut' => 'Selon la configuration g&eacute;n&eacute;rale du plugin',
 'resultat2_aucun' => 'Pas d\'enregistrement',
 'resultat2_premier' => 'Pour chaque auteur, le premier r&eacute;sultat uniquement',
