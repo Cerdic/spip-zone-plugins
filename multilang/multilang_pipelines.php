@@ -80,7 +80,7 @@ function multilang_inserer_head($flux,$config=array()){
 	// - document.ready
 	// - onAjaxLoad (cas des docs et de la configuration du site)
 
-	$flux .= '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js").'"></script>
+	$flux .= '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
 			  	<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
 			  	<script type="text/javascript">
 			  	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
