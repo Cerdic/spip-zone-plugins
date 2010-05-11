@@ -72,7 +72,8 @@ function multilang_init_lang(options) {
 	 */
 	multilang_menu_lang = $("<div class='langues'>");
 	$.each(multilang_avail_langs,function() {
-		multilang_menu_lang.append($("<a class='change_lang "+this+"'>").html("["+this+"]"));
+		var title = 'multilang_lang.title_lien_multi_'+this;
+		multilang_menu_lang.append($("<a class='change_lang "+this+"' title='"+eval(title)+"'>").html("["+this+"]"));
 	});
 	// Pour pouvoir desactiver le multilang
 	multilang_menu_lang.append($("<a class='recover_lang' href='#'>").html("["+multilang_lang.lien_desactiver+"]"));

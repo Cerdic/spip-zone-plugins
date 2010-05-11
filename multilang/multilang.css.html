@@ -28,14 +28,14 @@
 #SET{langues,#EVAL{$GLOBALS["meta"]["langues_multilingue"]}}
 <BOUCLE_langues(POUR){tableau #GET{langues}|explode{','}}>
 .multi_lang_#VALEUR {
-	background-position:right top;
+	background-position:right 1px;
 	background-repeat:no-repeat;
-	background-image:url([(#VAL{Multi #VALEUR}|image_typo{taille=12,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
+	background-image:url([(#VAL{Multi #VALEUR}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
 }
 </BOUCLE_langues>
 
 .multi_lang_no_multi {
-	background-position:right top;
+	background-position:right 1px;
 	background-repeat:no-repeat;
-	background-image:url([(#VAL{No multi}|image_typo{taille=12,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
+	background-image:url([(#VAL{No multi}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
 }
