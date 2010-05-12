@@ -1,4 +1,4 @@
-	[(#AUTORISER{ecrire}|ou{#AUTORISER{activer_sites}}|ou{#AUTORISER{activer_breves}}|ou{#PLUGINS{tickets}})
+	[(#AUTORISER{ecrire}|ou{#AUTORISER{activer_sites}}|ou{#AUTORISER{activer_breves}}|ou{#PLUGIN{tickets}})
 	<div class="liste">
 	<h2 class="h2"><:zpipcoop:redaction:></h2>
 	<ul class="liste-items">
@@ -23,7 +23,7 @@
 	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_RUBRIQUE})]" class="add" title="<:zpipcoop:nouveau_groupe|attribut_html:>"><:zpipcoop:nouveau_groupe:></a></li>
 
 	[(#REM) Cree un ticket]
-	[(#PLUGINS{tickets}|oui)
+	[(#PLUGIN{tickets}|oui)
 	<li class="item"><a href="[(#URL_PAGE{tickets_edit,id_ticket=news}|parametre_url{retour,tickets_edit})]" class="add" title="<:zpipcoop:nouveau_ticket|attribut_html:>"><:zpipcoop:nouveau_ticket:></a></li>]
 
 	</ul>
