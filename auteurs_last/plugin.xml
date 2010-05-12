@@ -10,7 +10,7 @@
 	 -->
 	<nom>Auteurs Last (AuLa)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>1.00</version>
+	<version>1.01</version>
 	<icon>images/aula-64.png</icon>
 	<etat>stable</etat>
 
@@ -20,6 +20,7 @@ connexion, jamais connect&eacute;).
 	</description>
 
 	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Lister-les-auteurs-avec-date-de]</lien>
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	
 	<prefix>aula</prefix>
 
