@@ -21,9 +21,6 @@ function exec_ajout_participation() {
 		echo minipres();
 	} else {
 		
-		$url_action_activites=generer_url_ecrire('action_activites');
-		$url_retour = $_SERVER["HTTP_REFERER"];
-		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
@@ -40,58 +37,54 @@ function exec_ajout_participation() {
 		
 		echo debut_droite("",true);
 		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
+		echo debut_cadre_relief("", true, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
 		
 		$id_activite=intval($_GET['id']);
 		
-		$query = sql_select("*", "spip_asso_activites", "id_activite=$id_activite ");
-		while ($data = sql_fetch($query)) {
-			$nom=$data['nom'];
-			$id_adherent=$data['id_adherent'];
-			$membres=$data['membres'];
-			$non_membres=$data['non_membres'];
-			$inscrits=$data['inscrits'];
-			$montant=$data['montant'];
-			$commentaire=$data['commentaire'];
-		}
+		$data = sql_fetsel("*", "spip_asso_activites", "id_activite=$id_activite ");
+		$nom=$data['nom'];
+		$id_adherent=$data['id_adherent'];
+		$membres=$data['membres'];
+		$non_membres=$data['non_membres'];
+		$inscrits=$data['inscrits'];
+		$montant=$data['montant'];
+		$commentaire=$data['commentaire'];
 		
-		echo '<form action="'.$url_action_activites.'" method="post"><div>';
-		echo '<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet').' :</strong></label>';
-		echo '<input name="nom"  type="text" size="40" value="'.$nom.'" id="nom" class="formo" />';
-		echo '<label for="id_membre"><strong>'._T('asso:activite_libelle_adherent').' :</strong></label>';
-		echo '<input name="id_membre" type="text" value="'.$id_adherent.'" id="id_membre" class="formo" />';
-		echo '<label for="membres"><strong>'._T('asso:activite_libelle_membres').' :</strong></label>';
-		echo '<input name="membres"  type="text" size="40" value="'.$membres.'" id="membres" class="formo" />';
-		echo '<label for="non_membres"><strong>'._T('asso:activite_libelle_non_membres').' :</strong></label>';
-		echo '<input name="non_membres"  type="text" size="40" value="'.$non_membres.'" id="non_membres" class="formo" />';
-		echo '<label for="inscrits"><strong>'._T('asso:activite_libelle_nombre_inscrit').' :</strong></label>';
-		echo '<input name="inscrits"  type="text" value="'.$inscrits.'" id="inscrits" class="formo" />';
-		echo '<label for="montant"><strong>'._T('asso:activite_libelle_montant_inscription').' :</strong></label>';
-		echo '<input name="montant"  type="text" value="'.$montant.'" id="montant" class="formo" />';
-		echo '<label for="date_paiemen"><strong>'._T('asso:activite_libelle_date_paiement').' :</strong></label>';
-		echo '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />';
-		echo '<label for="journal"><strong>'._T('asso:activite_libelle_mode_paiement').' :</strong></label>';
-		$res = '';
-		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
-		while ($banque = sql_fetch($sql)) {
-			$res .= '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
-		}
-		if ($res) echo "<select name='journal' id='journal' class='formo'>$res</select>";
-		echo '<label for="statut"><strong>'._T('asso:activite_libelle_statut').' ok :</strong></label>';
-		echo '<input name="statut"  type="checkbox" value="ok" unchecked id="statut" /><br />';
-		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires').' :</strong></label>';
-		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
-		
-		echo '<input name="agir" type="hidden" value="paie">';
-		echo '<input name="id_activite" type="hidden" value="'.$id_activite.'">';
-		echo '<input name="id_evenement" type="hidden" value="'.$id_evenement.'">';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		
-		echo '<div style="float:right;">';
-		echo '<input type="submit" value="'._T('asso:bouton_ajoute').'" class="fondo" /></div>';
-		echo '</div></form>';
+		$res = '<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet')." :</strong></label>\n"
+		. '<input name="nom"  type="text" size="40" value="'.$nom.'" id="nom" class="formo" />'
+		. '<label for="id_membre"><strong>'._T('asso:activite_libelle_adherent')." :</strong></label>\n"
+		. '<input name="id_membre" type="text" value="'.$id_adherent.'" id="id_membre" class="formo" />'
+		. '<label for="membres"><strong>'._T('asso:activite_libelle_membres')." :</strong></label>\n"
+		. '<input name="membres"  type="text" size="40" value="'.$membres.'" id="membres" class="formo" />'
+		. '<label for="non_membres"><strong>'._T('asso:activite_libelle_non_membres')." :</strong></label>\n"
+		. '<input name="non_membres"  type="text" size="40" value="'.$non_membres.'" id="non_membres" class="formo" />'
+		. '<label for="inscrits"><strong>'._T('asso:activite_libelle_nombre_inscrit')." :</strong></label>\n"
+		. '<input name="inscrits"  type="text" value="'.$inscrits.'" id="inscrits" class="formo" />'
+		. '<label for="montant"><strong>'._T('asso:activite_libelle_montant_inscription')." :</strong></label>\n"
+		. '<input name="montant"  type="text" value="'.$montant.'" id="montant" class="formo" />'
+		. '<label for="date_paiemen"><strong>'._T('asso:activite_libelle_date_paiement')." :</strong></label>\n"
+		. '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />';
 
-		fin_cadre_relief();  
+		$sel = '';
+		$sql = sql_select("code, intitule", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
+		while ($banque = sql_fetch($sql)) {
+			$sel .= '<option value="'.$banque['code'].'"> '.$banque['intitule']."</option>\n";
+		}
+		if ($sel) $res .= '<label for="journal"><strong>'._T('asso:activite_libelle_mode_paiement')." :</strong></label>\n<select name='journal' id='journal' class='formo'>$sel</select>";
+
+		$res .= '<label for="statut"><strong>'._T('asso:activite_libelle_statut').' ok :</strong></label>'
+		. '<input name="statut"  type="checkbox" value="ok" id="statut" /><br />'
+		. '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires')." :</strong></label>\n"
+		. '<textarea rows="4" cols="80" name="commentaire" id="commentaire" class="formo">'.$commentaire.'</textarea>'
+		
+		. '<input name="agir" type="hidden" value="paie" />'
+		. '<input name="id_activite" type="hidden" value="'.$id_activite."\" />\n"
+		. '<input name="id_evenement" type="hidden" value="'.$id_evenement."\" />\n"
+		. '<input name="url_retour" type="hidden" value="'. str_replace('&', '&amp;', $_SERVER["HTTP_REFERER"]) . "\" />\n";
+
+		echo generer_form_ecrire('action_activites', "\n<div>$res</div>", '', _T('asso:bouton_ajoute'));
+
+		echo fin_cadre_relief(true);  
 		echo fin_gauche(), fin_page();
 	}
 }
