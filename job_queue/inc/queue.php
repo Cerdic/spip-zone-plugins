@@ -69,6 +69,13 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 			'status'=>'scheduled',
 		));
 
+	if (defined('_JQ_INSERT_CHECK_ARGS') AND $id_job) {
+		$args = sql_getfetsel('args', 'spip_jobs', 'id_job='.intval($id_job));
+		if ($args!==$arguments) {
+			spip_log('arguments job errones / longueur '.strlen($args)." vs ".strlen($arguments).' / valeur : '.var_export($arguments,true),'queue');
+		}
+	}
+
 	if ($id_job){
 		queue_update_next_job_time($time);
 	}
