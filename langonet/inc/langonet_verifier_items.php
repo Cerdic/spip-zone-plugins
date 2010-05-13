@@ -116,9 +116,11 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 							while ((list($_index, $_fichier) = each($definitions)) AND !$definition_ok)  {
 								preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $module_trouve);
 								if ($module_trouve[1]) {
-									$module_def = (($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) ? '' : $module_trouve[1];
-									if ($module_def == $utilises['modules'][$_cle]) {
+									if ($module_trouve[1] == $utilises['modules'][$_cle]) {
 										$definition_ok = true;
+									}
+									else {
+										$definition_ok = ((($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) AND ($utilises['modules'][$_cle] == ''));
 									}
 								}
 							}
