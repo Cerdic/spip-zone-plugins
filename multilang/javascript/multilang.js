@@ -243,11 +243,20 @@ function multilang_multi_recover(el,container,target,event){
 			}
 			// Add Yffic 30/03/2010
 			// Add the title number to the final value
-			if((this.id=='titre' || this.id.match(/^titre_document[0-9]+/)) && ($('#'+this.id+'_numero').val() != ''))
-				this.value= $('#'+this.id+'_numero').val().replace(/\.\s+/,'') + ". " + this.value;
+			if(multilang_is_title(this.id) && ($('#'+this.id+'_numero').val() != ''))
+				this.value= $('#'+this.id+'_numero').val().replace(/\.|\s+/,'') + ". " + this.value;
 		});
 		return true;
 	}
+}
+
+/**
+* Défini si un id de champ correspond a un champ "numerotable"
+*
+* @param id chaine correspondant a l'id du champ
+*/
+function multilang_is_title(id) {
+	return (id=='titre' || id.match(/^titre_document[0-9]+/)!=null)
 }
 
 /**
@@ -287,16 +296,17 @@ function multilang_init_field(el,lang,force) {
 		if(el.totreat) {
 			el.field_pre_lang = m[1] || "";
 			// Modif Yffic : suppress point and spaces
-			el.field_pre_lang = el.field_pre_lang.replace(/\.\s+/,'') ;
+			el.field_pre_lang = el.field_pre_lang.replace(/\.|\s+/,'') ;
 			el.multi = true;
 			multilang_match_multi.lastIndex=0;
 			el.field_lang['full'] = el.value;
 			while((langs=multilang_match_multi.exec(m[2]))!=null) {
 				var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
-				if(text!=null) {
+				// Suppression du numero uniquement pour les titres
+				if(multilang_is_title(el.id) && text!=null) {
 					value = text[2];
 					// Modif Yffic : suppress point and spaces
-					el.field_pre_lang = text[1].replace(/\.\s+/,'') || "";
+					el.field_pre_lang = text[1].replace(/\.|\s+/,'') || "";
 				} else {
 					value = langs[2];
 				}
@@ -307,10 +317,15 @@ function multilang_init_field(el,lang,force) {
 		el.multi = false;
 		el.totreat=true;
 
-		var n = el.value.match(/(\d+\.\s+)?(.*)/);
-		el.field_pre_lang = n[1] || "";
-		el.field_pre_lang = el.field_pre_lang.replace(/\.\s+/,'') ;
-		el.field_lang[multilang_def_lang] = n[2];
+		// Suppression du numero uniquement pour les titres
+		if(multilang_is_title(el.id)) {
+			var n = el.value.match(/(\d+\.\s+)?(.*)/);
+			el.field_pre_lang = n[1] || "";
+			el.field_pre_lang = el.field_pre_lang.replace(/\.|\s+/,'') ;
+			el.field_lang[multilang_def_lang] = n[2];
+		} else {
+			el.field_lang[multilang_def_lang] = el.value;
+		}
 	}
 
 	//Put the current lang string only in the field
@@ -446,21 +461,21 @@ function multilang_field_set_background(el,lang) {
  * @return
  */
 function multilang_save_lang(el,lang) {
-	//Add Yffic 30/03/2010
 
 	if(!el.totreat) return ;
-	//End Add Yffic
 
+	// Suppression du numero uniquement pour les titres
+	if(multilang_is_title(el.id)) {
+		var m = el.value.match(/^(\d+\.\s+)((?:.|\n|\s)*)/);
+		if(m!=null) {
+			// Modif Yffic : suppress point and spaces
+			el.field_pre_lang = m[1].replace(/\.|\s+/,'');
+			el.value = m[2];
+		}
+	}
+	
 	//if the lang value is equal to the def lang do nothing
 	//else save value but if the field is not empty, delete lang value
-	var m = el.value.match(/^(\d+\.\s+)((?:.|\n|\s)*)/);
-
-	if(m!=null) {
-		// Modif Yffic : suppress point and spaces
-		el.field_pre_lang = m[1].replace(/\.\s+/,'');
-		el.value = m[2];
-	}
-
 	if(el.field_lang[multilang_def_lang]!= el.value) {
 		if(!el.value) {
 			delete el.field_lang[lang];
