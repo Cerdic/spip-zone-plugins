@@ -23,7 +23,7 @@ function queue_declarer_tables_principales($tables_principales){
 		"id_job" 	=> "bigint(21) NOT NULL",
 		"descriptif"	=> "text DEFAULT '' NOT NULL",
 		"fonction" 	=> "varchar(255) NOT NULL", //nom de la fonction
-		"args"=> "longtext binary DEFAULT '' NOT NULL", // arguments
+		"args"=> "longblob DEFAULT '' NOT NULL", // arguments
 		"md5args"=> "char(32) NOT NULL default ''", // signature des arguments
 		"inclure" => "varchar(255) NOT NULL", // fichier a inclure ou path/ pour charger_fonction
 		"priorite" 	=> "smallint(6) NOT NULL default 0",
@@ -34,6 +34,7 @@ function queue_declarer_tables_principales($tables_principales){
 	$spip_jobs_key = array(
 		"PRIMARY KEY" 	=> "id_job",
 		"KEY date" => "date",
+		"KEY status" => "status",
 	);
 
 	$tables_principales['spip_jobs'] = array(
@@ -86,9 +87,13 @@ function queue_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version,$current_version="0.3.0",'non');
 		}
 		if (version_compare($current_version,"0.3.1",'<')){
-			sql_alter("table spip_jobs change args args longtext binary DEFAULT '' NOT NULL");
 			sql_alter("table spip_jobs change md5args md5args char(32) NOT NULL default ''");
 			ecrire_meta($nom_meta_base_version,$current_version="0.3.1",'non');
+		}
+		if (version_compare($current_version,"0.3.2",'<')){
+			sql_alter("table spip_jobs change args args longblob DEFAULT '' NOT NULL");
+			sql_alter("table spip_jobs add index status (status)");
+			ecrire_meta($nom_meta_base_version,$current_version="0.3.2",'non');
 		}
 
 	}
