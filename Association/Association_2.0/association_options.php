@@ -34,6 +34,11 @@ function association_bouton($texte, $image, $script, $args='')
 	. '" /></a>';
 }
 
+function association_retour()
+{
+	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), "retour-24.png"));
+}
+
 function request_statut_interne()
 {
 	$statut_interne = _request('statut_interne');

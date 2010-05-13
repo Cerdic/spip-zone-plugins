@@ -22,7 +22,6 @@ function exec_edit_categorie(){
 			echo minipres();
 	} else {
 		$id=intval(_request('id'));
-		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$data = !$id ? '' : sql_fetsel("*", "spip_asso_categories", "id_categorie=$id");
 		if ($data) {
@@ -47,8 +46,7 @@ function exec_edit_categorie(){
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);	
 		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
+		echo association_retour();
 		
 		echo debut_droite("",true);
 		

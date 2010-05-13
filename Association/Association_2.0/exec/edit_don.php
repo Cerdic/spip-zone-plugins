@@ -23,7 +23,6 @@ function exec_edit_don(){
 	} else {
 		
 		$url_action_dons = generer_url_ecrire('action_dons');
-		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_don= intval(_request('id'));
 		$action=_request('agir');
@@ -59,8 +58,7 @@ function exec_edit_don(){
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		
-		$res= association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis ($res);
+		echo association_retour();
 		
 		echo debut_droite("", true);
 		

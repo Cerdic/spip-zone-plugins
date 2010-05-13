@@ -76,7 +76,7 @@ function exec_action_activites(){
 			header ('location:'.$url_retour);
 
 		} elseif (isset($_POST['delete'])) {
-			$url_retour = $_SERVER['HTTP_REFERER'];
+
 			$delete_tab=(isset($_POST["delete"])) ? $_POST["delete"]:array();
 			$count=count ($delete_tab);
 			
@@ -91,8 +91,7 @@ function exec_action_activites(){
 			fin_boite_info();
 			
 			
-			$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-			echo bloc_des_raccourcis($res);
+			echo association_retour();
 			
 			debut_droite();
 			

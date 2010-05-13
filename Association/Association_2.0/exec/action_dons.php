@@ -32,9 +32,6 @@ function exec_action_dons_args($id_don) {
 		echo minipres(_T('zxml_inconnu_id') . $id_don);
 	} else {
 
-		$url_retour = $_SERVER['HTTP_REFERER'];
-				
-
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
@@ -42,7 +39,7 @@ function exec_action_dons_args($id_don) {
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
-		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+		echo association_retour();
 		echo debut_droite("", true);
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:action_sur_les_dons'));
 		$res = '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_le_don') . $id_don . '</strong></p>';

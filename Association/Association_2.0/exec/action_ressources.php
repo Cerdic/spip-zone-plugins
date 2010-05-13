@@ -23,7 +23,6 @@ function exec_action_ressources(){
 			echo minipres();
 
 	} else {
-		$url_retour=$_SERVER['HTTP_REFERER'];
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:ressources_titre_suppression_ressources')) ;
 			
@@ -44,9 +43,8 @@ function exec_action_ressources(){
 			echo fin_boite_info(true);
 			
 			
-			$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-			echo bloc_des_raccourcis($res);
-			
+			echo association_retour();
+
 			echo debut_droite("",true);
 			
 			echo debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_suppression_ressources'));

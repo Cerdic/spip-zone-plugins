@@ -35,8 +35,8 @@ function exec_ajout_participation() {
 		echo fin_boite_info(true);	
 		
 		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
+		echo association_retour();
+
 		
 		echo debut_droite("",true);
 		

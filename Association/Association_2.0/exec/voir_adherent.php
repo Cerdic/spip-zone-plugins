@@ -24,8 +24,6 @@ function exec_voir_adherent(){
 		
 		$url_edit_activite = generer_url_ecrire('edit_activite');
 		$url_edit_pret = generer_url_ecrire('edit_pret','action=modifie');
-		$url_retour = $_SERVER['HTTP_REFERER'];
-		
 		$id_auteur= intval($_GET['id']);
 		$indexation = lire_config('association/indexation');
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
@@ -53,9 +51,8 @@ function exec_voir_adherent(){
 		 echo fin_boite_info(true);
 		
 		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
-		
+		 echo association_retour();
+
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_historique_membre'));

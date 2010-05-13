@@ -23,7 +23,6 @@ function exec_edit_ressource(){
 	} else {
 		
 		$url_action_ressources=generer_url_ecrire('action_ressources');
-		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:ressources_titre_edition_ressources')) ;
@@ -35,7 +34,7 @@ function exec_edit_ressource(){
 		echo '<p>', _T('asso:gestion_des_emprunts_et_des_prets') . '</p>';
 		echo fin_boite_info(true);
 	
-		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+		echo association_retour();
 		
 		echo debut_droite("",true);
 		

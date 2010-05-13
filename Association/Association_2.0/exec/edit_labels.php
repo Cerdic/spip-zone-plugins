@@ -24,7 +24,6 @@ function exec_edit_labels(){
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_edit_relances = generer_url_ecrire('edit_relances');		
-		$url_retour = $_SERVER['HTTP_REFERER'];
 		$indexation = lire_config('association/indexation');
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -38,7 +37,7 @@ function exec_edit_labels(){
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);	
 		
-		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+		echo association_retour();
 		
 		echo debut_droite("",true);
 		

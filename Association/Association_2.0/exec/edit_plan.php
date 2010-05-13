@@ -24,25 +24,17 @@ function exec_edit_plan(){
 		$url_asso = generer_url_ecrire('association');
 		$url_plan = generer_url_ecrire('plan');
 		$url_action_plan=generer_url_ecrire('action_plan');
-		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_plan= intval(_request('id'));
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:edition_plan_comptable')) ;		
-		
 		association_onglets();
-		
 		echo debut_gauche("",true);
-		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
-		
-		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
-		
+		echo association_retour();
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:edition_plan_comptable'));

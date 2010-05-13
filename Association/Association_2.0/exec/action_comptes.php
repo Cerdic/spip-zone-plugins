@@ -26,8 +26,6 @@ function exec_action_comptes(){
 		//SUPPRESSION PROVISOIRE OPERATION
 		if (_request('agir') == "supprime") {
 			
-			$url_retour = $_SERVER['HTTP_REFERER'];
-			
 			$commencer_page = charger_fonction('commencer_page', 'inc');
 			echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 
@@ -38,7 +36,7 @@ function exec_action_comptes(){
 			echo association_date_du_jour();	
 			echo fin_boite_info(true);
 			
-			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+			echo association_retour();
 			echo debut_droite('', true);
 			
 			debut_cadre_relief(  "", false, "",  _T('asso:operations_comptables'));
@@ -57,8 +55,6 @@ function exec_action_comptes(){
 		//VALIDATION PROVISOIRE COMPTE		
 		elseif (isset($_POST['valide'])) {
 			
-			$url_retour = $_SERVER['HTTP_REFERER'];
-			
 			$commencer_page = charger_fonction('commencer_page', 'inc');
 			echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 			
@@ -70,7 +66,7 @@ function exec_action_comptes(){
 			echo association_date_du_jour();	
 			echo fin_boite_info(true);
 			
-			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));	
+			echo association_retour();	
 			
 			echo debut_droite('', true);
 			

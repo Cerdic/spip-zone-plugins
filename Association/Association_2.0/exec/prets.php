@@ -26,18 +26,15 @@ function exec_prets(){
 		$url_ajout_pret=generer_url_ecrire('edit_pret','agir=ajoute');
 		$url_edit_pret=generer_url_ecrire('edit_pret','agir=modifie');
 		$url_action_prets=generer_url_ecrire('action_prets');
-		$url_retour = $_SERVER['HTTP_REFERER'];
 		$id_ressource=intval($_REQUEST['id']);
-		
-		
 	
-		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_liste_reservations')) ;
 		association_onglets();
 		
 		echo debut_gauche("",true);
-		
 		echo debut_boite_info(true);
+
 		$data = sql_fetsel("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
 		
 		$statut=$data['statut'];
@@ -52,9 +49,8 @@ function exec_prets(){
 			$res=association_icone(_T('asso:prets_nav_ajouter'),  $url_ajout_pret.'&id_pret='.$id_ressource, 'livredor.png', 'creer.gif');
 			echo bloc_des_raccourcis($res);
 		}
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
-		
+		echo association_retour();
+
 		echo debut_droite("",true);
 		echo debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
 		

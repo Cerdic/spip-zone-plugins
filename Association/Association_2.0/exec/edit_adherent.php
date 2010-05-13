@@ -27,15 +27,14 @@ function exec_edit_adherent() {
 		
 function exec_edit_adherent_args($id_auteur)
 {
-	$data = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
+	$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
 	if (!$data) {
 		include_spip('inc/minipres');
 		echo minipres(_T('zxml_inconnu_id') . $id_auteur);
 	} else {
-		$url_retour = $_SERVER['HTTP_REFERER'];
+
 		$indexation = lire_config('association/indexation');
 
-		$data = sql_fetch($query);
 		$id_adherent=$data['id_adherent'];
 		$id_asso=$data['id_asso'];
 		$nom_famille=$data['nom_famille'];
@@ -62,7 +61,7 @@ function exec_edit_adherent_args($id_auteur)
 		echo '<br /><div>'.association_date_du_jour().'</div>';	
 		echo fin_boite_info(true);
 		
-		echo bloc_des_raccourcis (association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+		echo association_retour();
 	
 		echo debut_droite("",true);
 		

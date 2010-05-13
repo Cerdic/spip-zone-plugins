@@ -42,7 +42,6 @@ function exec_action_prets(){
 		//SUPPRESSION PROVISOIRE PRET
 		if ($action == "supprime") {
 			
-			$url_retour = $_SERVER['HTTP_REFERER'];
 			$commencer_page = charger_fonction('commencer_page', 'inc');
 			echo $commencer_page(_T('asso:prets_titre_suppression_prets')) ;
 			association_onglets();
@@ -61,7 +60,7 @@ function exec_action_prets(){
 			echo '</p>';
 			echo fin_boite_info(true);
 		
-			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
+			echo association_retour();
 			
 			echo debut_droite("",true);
 			

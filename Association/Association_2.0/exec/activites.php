@@ -26,7 +26,6 @@ function exec_activites(){
 		$url_ajout_activite = generer_url_ecrire('edit_activite','agir=ajoute');
 		$url_edit_activites = generer_url_ecrire('edit_activite','agir=modifie');
 		$url_voir_activites = generer_url_ecrire('voir_activites');
-		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
@@ -38,8 +37,7 @@ function exec_activites(){
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
-			$res= association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis ($res);
+		echo association_retour();
 		echo debut_droite("",true);
 		
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_toutes_activites'));
