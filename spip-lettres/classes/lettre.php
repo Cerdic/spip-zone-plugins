@@ -195,7 +195,7 @@
 				} else {
 					$id_clic = sql_insertq('spip_clics', array('id_lettre' => $this->id_lettre, 'url' => html_entity_decode($url)));
 				}
-				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', false);
+				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', false, true);
 				return 'href="'.$url_clic.'"';
 			} else {
 				return 'href="'.$url.'"';
@@ -213,7 +213,7 @@
 				} else {
 					$id_clic = sql_insertq('spip_clics', array('id_lettre' => $this->id_lettre, 'url' => html_entity_decode($url)));
 				}
-				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', true);
+				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', true, true);
 				return $url_clic;
 			} else {
 				return $url;
