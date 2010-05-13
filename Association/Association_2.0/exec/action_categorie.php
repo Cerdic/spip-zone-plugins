@@ -23,7 +23,6 @@ function exec_action_categorie(){
 	} else {
 		
 		$url_action_categorie=generer_url_ecrire('action_categorie');
-		$url_retour = $_POST['url_retour'];
 		
 		$id_categorie=intval(_request('id'));
 		
@@ -41,9 +40,8 @@ function exec_action_categorie(){
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 		
-		$res=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
-			
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $_POST['url_retour'], "retour-24.png"));
+
 		echo debut_droite("",true);
 			
 		echo debut_cadre_relief(  "", false, "",  _T('asso:categories_de_cotisations'));

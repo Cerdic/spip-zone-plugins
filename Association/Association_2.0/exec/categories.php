@@ -21,52 +21,41 @@ function exec_categories(){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		
-		$url_categories = generer_url_ecrire('categories');
-		$url_ajout_categorie=generer_url_ecrire('edit_categorie','agir=ajoute');
-		$url_edit_categorie=generer_url_ecrire('edit_categorie','agir=modifie');
-		$url_action_categorie=generer_url_ecrire('action_categorie');
-		$url_retour = $_SERVER['HTTP_REFERER'];
-		
-		//debut_page(_T(''), "", "");
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
 		echo debut_gauche("",true);
-		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 		
-		$res=association_icone(_T('asso:ajouter_une_categorie_de_cotisation'),  $url_ajout_categorie, "calculatrice.gif");
-		$res.= association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");
+		$res=association_icone(_T('asso:ajouter_une_categorie_de_cotisation'),  generer_url_ecrire('edit_categorie','agir=ajoute'), "calculatrice.gif");
+		$res.= association_icone(_T('asso:bouton_retour'), str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), "retour-24.png");
 		echo bloc_des_raccourcis($res);	
-		
-			
 		echo debut_droite("",true);
 		
 		echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."calculatrice.gif", false, "", _T('asso:toutes_categories_de_cotisations'));
 		
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr bgcolor='#DBE1C5'>";
-		echo '<td><strong>' . _T('asso:id') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:categorie') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:libelle_complet') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:duree_mois') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:montant') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:commentaires') . '</strong></td>';
-		echo '<td colspan=2 style="text-align:center;"><strong>' . _T('asso:action') . '</strong></td>';
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo "<tr style='background-color: #DBE1C5'>";
+		echo '<td><strong>' . _T('asso:id') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:categorie') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:libelle_complet') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:duree_mois') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:montant') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:commentaires') . "</strong></td>\n";
+		echo '<td colspan="2" style="text-align:center;"><strong>' . _T('asso:action') . "</strong></td>\n";
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_categories', '', "id_categorie" ) ;
 		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td  class="arial11 border1" style="text-align:right">'.$data['id_categorie'].'</td>';
-			echo '<td  class="arial11 border1">'.$data['valeur'].'</td>';
-			echo '<td  class="arial11 border1">'.$data['libelle'].'</td>';
-			echo '<td  class="arial11 border1" style="text-align:right">'.$data['duree'].'</td>';
-			echo '<td  class="arial11 border1" style="text-align:right">'.$data['cotisation'].'</td>';
-			echo '<td  class="arial11 border1">'.$data['commentaires'].'</td>';
-			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_action_categorie.'&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td  class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_categorie.'&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
+			echo '<td  class="arial11 border1" style="text-align:right">'.$data['id_categorie']."</td>\n";
+			echo '<td  class="arial11 border1">'.$data['valeur']."</td>\n";
+			echo '<td  class="arial11 border1">'.$data['libelle']."</td>\n";
+			echo '<td  class="arial11 border1" style="text-align:right">'.$data['duree']."</td>\n";
+			echo '<td  class="arial11 border1" style="text-align:right">'.$data['cotisation']."</td>\n";
+			echo '<td  class="arial11 border1">'.$data['commentaires']."</td>\n";
+			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:bouton_supprimer'), 'poubelle-12.gif', 'action_categorie','&id='.$data['id_categorie']). "</td>\n";
+			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:bouton_modifier'), 'edit-12.gif', 'edit_categorie','&id='.$data['id_categorie']). "</td>\n";
 			echo'  </tr>';
 		}     
 		echo'</table>';

@@ -38,7 +38,7 @@ function exec_edit_ressource(){
 		
 		echo debut_droite("",true);
 		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_edition_ressources'));
+		echo debut_cadre_relief("", true, "", $titre = _T('asso:ressources_titre_edition_ressources'));
 		
 		$id = intval(_request('id'));
 		
@@ -60,50 +60,50 @@ function exec_edit_ressource(){
 
 		$res = '<label for="code"><strong>'
 		._T('asso:ressources_libelle_code')
-		.' :</strong></label>'
+		." :</strong></label>\n"
 		. '<input name="code" type="text" value="'
 		.$code
 		.'" id="code" class="formo" />'
 		. '<label for="intitule"><strong>'
 		._T('asso:ressources_libelle_intitule')
-		.' :</strong></label>'
+		." :</strong></label>\n"
 		. '<input name="intitule" type="text" value="'
 		.$intitule
 		.'" id="intitule" class="formo" />'
 		. '<label for="date_acquisition"><strong>'
 		._T('asso:ressources_libelle_date_acquisition')
-		.' :</strong></label>'
+		." :</strong></label>\n"
 		. '<input name="date_acquisition" type="text" value="'
 		.$date_acquisition
 		.'" id="date_acquisition" class="formo" />'
 		. '<label for="pu"><strong>'
 		._T('asso:ressources_libelle_prix_location')
-		.' :</strong></label>'
+		." :</strong></label>\n"
 		. '<input name="pu" type="text" value="'
 		.$pu
 		.'" id="pu" class="formo" />'	
 		. '<label for="statut"><strong>'
 		. _T('asso:ressources_libelle_statut')
-		.' :</strong></label><br />';
+		. " :</strong></label><br id='statut' />\n";
 
 		foreach ( array('ok','reserve','suspendu','sorti') as $var) {
-			$res .= '<input name="statut" type="radio" name="statut" value="'.$var.'"';
+			$res .= '<input type="radio" name="statut" value="'.$var.'"';
 			if ($statut==$var) {$res .= ' checked="checked" ';}
-			$res .= ' id="statut" /> '._T('asso:ressources_libelle_statut_'.$var);
+			$res .= " />\n"._T('asso:ressources_libelle_statut_'.$var);
 		}
-		$res .= '<br /><label for="commentaire"><strong>'
+		$res .= "\n<br /><label for='commentaire'><strong>"
 		. _T('asso:ressources_libelle_commentaires')
-		.' :</strong></label>'
-		. '<textarea name="commentaire" id="commentaire" class="formo" />'
-		.$commentaire
-		.'</textarea>'
-		. '<div style="float:right;"><input name="submit" type="submit" value="'
+		. " :</strong></label>\n"
+		. '<textarea name="commentaire" id="commentaire" class="formo">'
+		. $commentaire
+		. "</textarea>\n"
+		. '<div style="float:right;"><input  type="submit" value="'
 		. _T('asso:bouton_envoyer')
-		. '" class="fondo" />';
+		. "\" class='fondo' />\n";
 
-		echo redirige_action_post($action . '_ressources', $id, 'ressources', '', "<div>$res</div>");
+		echo redirige_action_post($action . '_ressources', $id, 'ressources', '', "\n<div>$res</div>\n");
 		
-		fin_cadre_relief();  
+		echo fin_cadre_relief(true);
 		echo fin_gauche(), fin_page();
 	}
 }

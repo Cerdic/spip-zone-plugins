@@ -79,10 +79,7 @@ function exec_edit_compte() {
 		. '<label for="depense"><strong>' 
 		. _T('asso:depense') . '</strong></label>'
 		. '<input name="depense" value="'
-		. $depense.'"  type="text" id="depense" class="formo" />'
-		. '<label for="journal"><strong>'
-		. _T('asso:prets_libelle_mode_paiement')
-		. '&nbsp;:</strong></label>';
+		. $depense.'"  type="text" id="depense" class="formo" />';
 
 		$sel = '';
 		$sql = sql_select('code,intitule', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "", "code") ;
@@ -92,7 +89,9 @@ function exec_edit_compte() {
 			$opt .= "\n<option value='$code'$s>".$banque['intitule'].'</option>';
 		}
 		if ($sel) 
-			$res .= '<select name="journal" type="text" id="journal" class="formo" />' . $sel . '</select>';
+			$res .= '<label for="journal"><strong>'
+			. _T('asso:prets_libelle_mode_paiement')
+			. '&nbsp;:</strong></label><select name="journal" type="text" id="journal" class="formo" />' . $sel . '</select>';
 
 		$action = ($id_compte ? 'modifier' : 'ajouter');
 

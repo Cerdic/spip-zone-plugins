@@ -38,12 +38,8 @@ function exec_plan(){
 		echo propre(_T('asso:plan_info'));
 		echo fin_boite_info(true);
 		
-		
-		$res=association_icone(_T('asso:plan_nav_ajouter'),  generer_url_ecrire('edit_plan'), 'EuroOff.gif',  'creer.gif');
-		
-		$res.=association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png");	
-		echo bloc_des_raccourcis($res);
-		 
+		echo bloc_des_raccourcis(association_icone(_T('asso:plan_nav_ajouter'),  generer_url_ecrire('edit_plan'), 'EuroOff.gif',  'creer.gif'));
+
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));
@@ -87,13 +83,13 @@ function exec_plan(){
 		//Affichage de la table
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr style="background-color: #DBE1C5">';
-		echo '<td><strong>' . _T('asso:classe') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:code') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:intitule') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:reference') . '</strong></td>';
-		echo '<td style="text-align:right;"><strong>' . _T('asso:solde_initial') . '</strong></td>';
-		echo '<td><strong>' . _T('asso:date') . '</strong></td>';
-		echo '<td colspan=2 style="text-align:center;"><strong>' . _T('asso:action') . '</strong></td>';
+		echo '<td><strong>' . _T('asso:classe') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:code') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:intitule') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:reference') . "</strong></td>\n";
+		echo '<td style="text-align:right;"><strong>' . _T('asso:solde_initial') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:date') . "</strong></td>\n";
+		echo '<td colspan="2" style="text-align:center;"><strong>' . _T('asso:action') . "</strong></td>\n";
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_plan', "classe LIKE " . sql_quote($classe) ." AND actif=" . sql_quote($actif),'', "classe, code" );
 		while ($data = sql_fetch($query)) {

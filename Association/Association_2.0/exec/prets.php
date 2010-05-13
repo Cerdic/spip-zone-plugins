@@ -54,8 +54,8 @@ function exec_prets(){
 		echo debut_droite("",true);
 		echo debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
 		
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr bgcolor='#DBE1C5'>";
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo "<tr style='background-color: #DBE1C5'>";
 		echo '<td>&nbsp;</td>';
 		echo '<td>'._T('asso:entete_id').'</td>';
 		echo '<td><strong>'._T('asso:prets_entete_date_sortie').'</strong></td>';

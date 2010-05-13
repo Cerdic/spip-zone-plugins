@@ -59,8 +59,8 @@ function exec_voir_adherent(){
 		
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr bgcolor="#DBE1C5">';
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo "<tr style='background-gcolor: #DBE1C5'>\n";
 		echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_entete_date').'</strong></td>';
 		echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_paiement').'</strong></td>';
