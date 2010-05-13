@@ -2,7 +2,7 @@
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
   <version>0.4.1</version>
-  <version_base>0.3.0</version_base>
+  <version_base>0.3.1</version_base>
   <etat>test</etat>
   <description>Gestion d'une queue de Jobs</description>
   <icon>img_pack/job_queue_48.png</icon>

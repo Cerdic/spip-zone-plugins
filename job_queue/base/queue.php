@@ -23,8 +23,8 @@ function queue_declarer_tables_principales($tables_principales){
 		"id_job" 	=> "bigint(21) NOT NULL",
 		"descriptif"	=> "text DEFAULT '' NOT NULL",
 		"fonction" 	=> "varchar(255) NOT NULL", //nom de la fonction
-		"args"=> "text DEFAULT '' NOT NULL", // arguments
-		"md5args"=> "varchar(32) NOT NULL default ''", // signature des arguments
+		"args"=> "longtext binary DEFAULT '' NOT NULL", // arguments
+		"md5args"=> "char(32) NOT NULL default ''", // signature des arguments
 		"inclure" => "varchar(255) NOT NULL", // fichier a inclure ou path/ pour charger_fonction
 		"priorite" 	=> "smallint(6) NOT NULL default 0",
 		"date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // date au plus tot
@@ -84,6 +84,11 @@ function queue_upgrade($nom_meta_base_version,$version_cible){
 				sql_updateq('spip_jobs', array('md5args'=>md5($row['args'])),"id_job=".intval($row['id_job']));
 			}
 			ecrire_meta($nom_meta_base_version,$current_version="0.3.0",'non');
+		}
+		if (version_compare($current_version,"0.3.1",'<')){
+			sql_alter("table spip_jobs change args args longtext binary DEFAULT '' NOT NULL");
+			sql_alter("table spip_jobs change md5args md5args char(32) NOT NULL default ''");
+			ecrire_meta($nom_meta_base_version,$current_version="0.3.1",'non');
 		}
 
 	}
