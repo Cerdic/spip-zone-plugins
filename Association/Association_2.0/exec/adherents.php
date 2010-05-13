@@ -234,7 +234,6 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	. '</table>';
 	
 	//SOUS-PAGINATION
-	$res .= "<table width='100%'><tr><td>";
 
 	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, $critere);
 	$nombre_selection=sql_count($query);
@@ -253,10 +252,9 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		}	
 	}
 	
-	$res .= "\n<td style='text-align:right;'>\n"
-	.  !$auteurs ? '' : ('<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" />')
-	.  '</td>'
-	.  '</table>';
+	$res .= "\n<div style='float:right;'>\n"
+	.  (!$auteurs ? '' : ('<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" />'))
+	.  '</div>';
 
 	return 	generer_form_ecrire('action_adherents', $res);
 
