@@ -24,19 +24,12 @@ function exec_ajout_participation() {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
-		
 		echo debut_gauche("",true);
-		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);	
-		
-		
 		echo association_retour();
-
-		
 		echo debut_droite("",true);
-		
 		echo debut_cadre_relief("", true, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
 		
 		$id_activite=intval($_GET['id']);
@@ -77,7 +70,7 @@ function exec_ajout_participation() {
 		. '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires')." :</strong></label>\n"
 		. '<textarea rows="4" cols="80" name="commentaire" id="commentaire" class="formo">'.$commentaire.'</textarea>'
 		
-		. '<input name="agir" type="hidden" value="paie" />'
+		. '<input name="agir" type="hidden" value="ajoute" />'
 		. '<input name="id_activite" type="hidden" value="'.$id_activite."\" />\n"
 		. '<input name="id_evenement" type="hidden" value="'.$id_evenement."\" />\n"
 		. '<input name="url_retour" type="hidden" value="'. str_replace('&', '&amp;', $_SERVER["HTTP_REFERER"]) . "\" />\n";
