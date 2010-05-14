@@ -55,9 +55,9 @@ function liste_cfg($dir='') {
  * @param string $dir
  * @return string
  */
-function icone_lien_cfg($dir) {
+function icone_lien_cfg($dir, $script='cfg') {
 	$ret = '';
-	if ($onglets = lister_onglets_cfg($dir)){
+	if ($onglets = lister_onglets_cfg($dir, $script)){
 		foreach ($onglets as $fonds=>$ong){
 			if ($ong['afficher'])
 				$ret .= '<a href="'.$ong['url'].'">'
@@ -82,7 +82,7 @@ function icone_lien_cfg($dir) {
  * @param string $dir
  * @return string
  */
-function lister_onglets_cfg($dir=''){
+function lister_onglets_cfg($dir='', $script='cfg'){
 	$onglets = array();
 	
 	// scruter les onglets affichables
@@ -102,7 +102,7 @@ function lister_onglets_cfg($dir=''){
 
 			if ($tmp->autoriser()){
 				$args['onglet'] = $tmp->form->param['onglet'];
-				$args['url'] = generer_url_ecrire('cfg', 'cfg='.$fonds);
+				$args['url'] = generer_url_ecrire($script, 'cfg='.$fonds);
 				// titre
 				if (!$args['titre'] = $tmp->form->param['titre'])
 					$args['titre'] = $fonds;
