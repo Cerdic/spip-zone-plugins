@@ -22,7 +22,6 @@ function exec_activites(){
 	} else {
 		
 		$url_articles = generer_url_ecrire('articles');
-		$url_activites = generer_url_ecrire('activites');
 		$url_ajout_activite = generer_url_ecrire('edit_activite','agir=ajoute');
 		$url_edit_activites = generer_url_ecrire('edit_activite','agir=modifie');
 		$url_voir_activites = generer_url_ecrire('voir_activites');
@@ -55,11 +54,11 @@ function exec_activites(){
 		$query = sql_select("date_format( date_debut, '%Y' )  AS annee", "spip_evenements", "", "annee", "annee");
 		while ($data = sql_fetch($query)) {
 			if ($data['annee']==$annee) { echo ' <strong>'.$data['annee'].'</strong> '; }
-			else { echo '<a href="'.$url_activites.'&annee='.$data['annee'].'&mot='.$mot.'">'.$data['annee'].'</a> ';}
+			else { echo '<a href="'. generer_url_ecrire('activites','annee='.$data['annee'].'&mot='.$mot).'">'.$data['annee'].'</a> ';}
 		}
-		echo '</td>';
+		echo "</td>\n";
 		echo '<td style="text-align:right;">';
-		echo '<form method="post" action="'.$url_activites.'">';
+		echo '<form method="post" action="activites"><div>';
 		echo '<select name ="mot" class="fondl" onchange="form.submit()">';
 		echo '<option value="%"';
 		if ($mot=="%") { echo ' selected="selected"'; }
@@ -68,22 +67,22 @@ function exec_activites(){
 		while($data = sql_fetch($query)) {
 			echo '<option value="'.$data["titre"].'"';
 			if ($mot==$data["titre"]) { echo ' selected="selected"'; }
-			echo '> '.$data["titre"].'</option>';
+			echo '> '.$data["titre"]."</option>\n";
 		}
 		echo '</select>';
-		echo '</form>';
-		echo '</table>';
+		echo '</div></form>';
+		echo "</td></tr></table>\n";
 		
 		//TABLEAU
-		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr bgcolor="#DBE1C5">';
-		echo '<td style="text-align:right;"><strong>' . _T('asso:id') . '</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_date').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_heure').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_intitule').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_lieu').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_inscrits').'</strong></td>';
-		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:activite_entete_action').'</strong></td>';
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+		echo "\n<tr style='background-color: #DBE1C5'>";
+		echo '<td style="text-align:right;"><strong>' . _T('asso:id') . "</strong></td>";
+		echo '<td><strong>'._T('asso:activite_entete_date')."</strong></td>";
+		echo '<td><strong>'._T('asso:activite_entete_heure')."</strong></td>";
+		echo '<td><strong>'._T('asso:activite_entete_intitule')."</strong></td>";
+		echo '<td><strong>'._T('asso:activite_entete_lieu')."</strong></td>";
+		echo '<td><strong>'._T('asso:activite_entete_inscrits')."</strong></td>";
+		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:activite_entete_action')."</strong></td>";
 		echo '</tr>';
 		
 		$max_par_page=30;
@@ -95,22 +94,22 @@ function exec_activites(){
 			$date = substr($data['date_debut'],0,10);
 			$heure = substr($data['date_debut'],10,6);
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_evenement'].'</td>';
-			//echo '<td >'.$jour.'-'.$mois. '-'.$annee.'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($date).'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$heure.'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['lieu'].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_evenement']."</td>\n";
+			//echo '<td >'.$jour.'-'.$mois. '-'.$annee."</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($date)."</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$heure."</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['intitule']."</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;">'.$data['lieu']."</td>\n";
 			$sql = sql_select("sum(inscrits) AS total", "spip_asso_activites", "id_evenement=".$data['id_evenement']);
-			while ($inscrits = sql_fetch($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total'].'</td>'; }
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:activite_bouton_modifier_article').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'creer-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_voir_activites.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:activite_bouton_voir_liste_inscriptions').'"></a></td>';
+			while ($inscrits = sql_fetch($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total']."</td>\n"; }
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_modifier_article'), 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . "</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'creer-12.gif', 'edit_activite', 'agir=modifie&id_article='.$data['id_article']) . "</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_voir_liste_inscriptions'), 'voir-12.png', 'voir_activite', 'id='.$data['id_evenement']) . "</td>\n";
 			echo '</tr>';
 		}
 		echo '</table>';
 		
-		echo '<table width="100%">';
+		echo "\n<table width='100%'>\n";
 		echo '<tr>';
 		
 		//SOUS-PAGINATION
@@ -125,10 +124,10 @@ function exec_activites(){
 				$position= $i * $max_par_page;
 				if ($position == $debut) 
 				  { echo ' <strong>'.$position.' </strong> '; }
-				else { echo '<a href="'.$url_activites.'&annee='.$annee.'&debut='.$position.'&imputation='.$imputation.'">'.$position.'</a>  '; }
+				else { echo '<a href="'.generer_url_ecrire('activites','annee='.$annee.'&debut='.$position.'&imputation='.$imputation).'">'.$position.'</a>  '; }
 			}
 		}
-		echo '</td>';
+		echo "</td>\n";
 		echo '</table>';
 		
 		fin_cadre_relief();  
