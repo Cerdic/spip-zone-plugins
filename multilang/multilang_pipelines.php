@@ -101,8 +101,9 @@ function multilang_inserer_head($flux,$config=array()){
 					function multilang_init(){
 						root = "'.$root.'";
 						fields_selector = "textarea,input:text:not(input#new_login,#titreparent,.ac_input,#url_syndic,*.nomulti),.multilang";
+						// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
 						forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
-						root_opt = "div:has(> form:has(.multilang))";
+						root_opt = "form:has(.multilang)";
 						fields_selector_opt = ".multilang";
 						multilang_init_lang({fields:fields_selector,root:root,forms:forms_selector});
 					}

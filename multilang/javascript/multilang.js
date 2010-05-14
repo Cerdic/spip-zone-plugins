@@ -59,7 +59,7 @@ function multilang_init_lang(options) {
 	//set the root element of all processing
 
 	var root = options.root || document;
-	multilang_root = $(root+','+root_opt);
+	multilang_root = $(root).add($(root_opt).parent());
 	multilang_root_opt = $(root_opt);
 
 	/**
@@ -85,8 +85,7 @@ function multilang_init_lang(options) {
 	multilang_fields_selector = options.fields;
 
 	//store all the internationalized forms
-	// Modif Yffic : on exclue aussi les form d'upload (Pour les vignettes de docs, logos...)
-	multilang_forms_selector = options.forms || "form[class!='form_upload'][class!='form_upload_icon']";
+	multilang_forms_selector = options.forms || "form";
 
 	if(multilang_init){
 		multilang_forms_toadd = $(multilang_forms_selector,multilang_root).not($(multilang_forms));
@@ -102,7 +101,7 @@ function multilang_init_lang(options) {
 	multilang_menu_selector = options.form_menu;
 
 	multilang_init = true;
-	// Modif Yffic : On va pas plus s'il n'y a pas de form
+	// Modif Yffic : On va pas plus loin s'il n'y a pas de form
 	if(multilang_forms_toadd.size()) multilang_init_multi();
 }
 
@@ -114,7 +113,7 @@ function multilang_init_lang(options) {
  */
 function multilang_init_multi(options) {
 	var target = options ? options.target : null;
-	var init_forms;
+	var init_forms, forms_opt_size;
 	//Update the list of form if this is an update
 	if(target) {
 		//Verify the target is really a form to be internationalized (in case of an ajax request fired by onAjaxLoad)
@@ -148,9 +147,10 @@ function multilang_init_multi(options) {
 	 * les éléments qui on la class optionnelle) sinon on prend tous les champs qui
 	 * matchent
 	 */
+	forms_opt_size = $(multilang_fields_selector).parents(root_opt).size() ;
 	$(multilang_fields_selector,init_forms).each(function(){
 	    var me = $(this);
-	    if($(multilang_fields_selector).parents(root_opt).size()>0){
+	    if(forms_opt_size>0){
 	        if(me.is(fields_selector_opt)){
 	        	multilang_init_field(this,this.form.form_lang);
 	        }
