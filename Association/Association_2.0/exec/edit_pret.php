@@ -23,7 +23,7 @@ function exec_edit_pret(){
 			exit;
 		}
 		
-		$url_action_prets=generer_url_ecrire('action_prets');
+
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$action=$_REQUEST['agir'];
@@ -37,10 +37,14 @@ function exec_edit_pret(){
 			$commentaire_retour=$data['commentaire_retour'];
 			$date_retour=$data['date_retour'];
 			$date_sortie=$data['date_sortie'];
+			$action = 'modifier';
+			$texte = _T('asso:bouton_modifie');
 		} else {
-
+			$action = 'ajouter';
 			$id_ressource= $id_pret;
+			$texte = _T('asso:bouton_ajoute');
 			$date_retour=$date_sortie=date('Y-m-d');
+			$id_emprunteur=$commentaire_sortie=$commentaire_retour='';
 		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -61,20 +65,14 @@ function exec_edit_pret(){
 			echo '</p>';
 		}
 		echo fin_boite_info(true);
-		
-		
 		echo association_retour();
-
-		
 		echo debut_droite('', true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_edition_prets'));
 		
-		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource");
-		while($data = sql_fetch($query)) {
-			$statut=$data['statut']; 
-			$pu=$data['pu'];
-		}			
+		$data = sql_fetsel("pu,statut", "spip_asso_ressources", "id_ressource=$id_ressource");
+		$statut=$data['statut']; 
+		$pu=$data['pu'];
 		
 		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_pret ");
 		while($data = sql_fetch($query)) {
@@ -82,60 +80,73 @@ function exec_edit_pret(){
 			$montant=$data['recette'];
 		}
 		
-		if( $action=="ajoute" ){ 
+		if( $action=="ajouter" ){ 
 			$montant=$pu; 
 			$date_sortie=date('Y-m-d');
 		} 
 		
-		echo '<form action="'.$url_action_prets.'" method="post">';			
-		
 		// Cadre Réservation
-		echo '<fieldset>';
-		echo '<legend>'._T('asso:prets_entete_reservation').'</legend>';
-		echo '<label for="date_sortie"><strong>'._T('asso:prets_libelle_date_sortie').' :</strong></label>';
-		echo '<input name="date_sortie" type="text" value="'.$date_sortie.'" id="date_sortie" class="formo" />';
-		echo '<label for="duree"><strong>'._T('asso:prets_libelle_duree').' :</strong></label>';
-		echo '<input name="duree" type="text" value="'.$duree.'" id="duree" class="formo" />';
-		echo '<label for="id_emprunteur"><strong>'._T('asso:prets_libelle_num_emprunteur').' :</strong></label>';
-		echo '<input name="id_emprunteur" type="text" value="'.$id_emprunteur.'" id="id_emprunteur" class="formo" />';
-		echo '<label for="commentaire_sortie"><strong>'._T('asso:prets_libelle_commentaires').' :</strong></label>';
-		echo '<textarea name="commentaire_sortie" id="commentaire_sortie" class="formo" />'.$commentaire_sortie.'</textarea>';
-		echo '</fieldset>';
+		$res = '<fieldset>'
+		. '<legend>'._T('asso:prets_entete_reservation').'</legend>'
+		. '<label for="date_sortie"><strong>'
+		. _T('asso:prets_libelle_date_sortie')." :</strong></label>\n"
+		. '<input name="date_sortie" type="text" value="'
+		. $date_sortie.'" id="date_sortie" class="formo" />'
+		. '<label for="duree"><strong>'
+		. _T('asso:prets_libelle_duree')." :</strong></label>\n"
+		. '<input name="duree" type="text" value="'
+		. $duree.'" id="duree" class="formo" />'
+		. '<label for="id_emprunteur"><strong>'
+		. _T('asso:prets_libelle_num_emprunteur')
+		. " :</strong></label>\n"
+		. '<input name="id_emprunteur" type="text" value="'
+		. $id_emprunteur.'" id="id_emprunteur" class="formo" />'
+		. '<label for="commentaire_sortie"><strong>'
+		. _T('asso:prets_libelle_commentaires')." :</strong></label>\n"
+		. '<textarea name="commentaire_sortie" id="commentaire_sortie" class="formo">'
+		. $commentaire_sortie.'</textarea>'
+		. '</fieldset>';
 		
 		//Cadre retour
-		echo '<fieldset>';
-		echo '<legend>'. _T('asso:prets_entete_retour').'</legend>';
-		echo '<label for="date_retour"><strong>'._T('asso:prets_libelle_date_retour').' :</strong></label>';
-		echo '<input name="date_retour" type="text" value="';
-		if ($date_retour==0) { echo '&nbsp';} else {echo $date_retour;}
-		echo '" id="date_retour" class="formo" />';
-		echo '<label for="montant"><strong>'._T('asso:prets_libelle_montant').' :</strong></label>';
-		echo '<input name="montant" type="text" value="'.$montant.'" id="montant" class="formo" />';
-		echo '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').' :</strong></label>';
-		echo '<select name="journal" type="text" id="journal" class="formo" />';
+		$res .= '<fieldset>'
+		. '<legend>'. _T('asso:prets_entete_retour').'</legend>'
+		. '<label for="date_retour"><strong>'
+		. _T('asso:prets_libelle_date_retour')." :</strong></label>\n"
+		. '<input name="date_retour" type="text" value="'
+		. $date_retour
+		. '" id="date_retour" class="formo" />'
+		. '<label for="montant"><strong>'
+		. _T('asso:prets_libelle_montant')." :</strong></label>\n"
+		. '<input name="montant" type="text" value="'
+		. $montant.'" id="montant" class="formo" />'
+		. '<label for="journal"><strong>'
+		. _T('asso:prets_libelle_mode_paiement')." :</strong></label>\n"
+		. '<select name="journal" id="journal" class="formo">';
+
 		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
-			echo '<option value="'.$banque['code'].'" ';
-			if ($journal==$banque['code']) { echo ' selected="selected"'; }
-			echo '>'.$banque['intitule'].'</option>';
+			$c = $banque['code'];
+			$res .= "<option value='$c'" .
+			  (($journal==$c) ? ' selected="selected"' : '')
+			  . '>' . $banque['intitule'] ."</option>\n";
 		}
-		echo '</select>';
-		echo '<label for="commentaire_retour"><strong>'._T('asso:prets_libelle_commentaires').' :</strong></label>';
-		echo '<textarea name="commentaire_retour" id="commentaire_retour" class="formo" />'.$commentaire_retour.'</textarea>';
-		echo '</fieldset>';
-		
-		echo '<input name="id_pret" type="text" value="'.$id_pret.'" />';
-		echo '<input name="id_ressource" type="text" value="'.$id_ressource.'" />';		
-		echo '<input name="url_retour" type="text" value="'.$url_retour.'">';
-		echo '<input name="agir" type="text" value="'.$action.'">';
-		
-		echo '<div style="float:right;"><input type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
-		else {echo _T('asso:bouton_envoyer');}
-		echo '" class="fondo" /></div>';
-		echo '</form>';	
-		
+
+		$res .= "</select>\n"
+		. '<label for="commentaire_retour"><strong>'
+		. _T('asso:prets_libelle_commentaires')." :</strong></label>\n"
+		. '<textarea name="commentaire_retour" id="commentaire_retour" class="formo">'
+		. $commentaire_retour."</textarea>\n"
+		. '</fieldset>'
+		. '<input name="id_pret" type="hidden" value="'.$id_pret.'" />'
+		. '<input name="id_ressource" type="hidden" value="'.$id_ressource.'" />'
+		. '<input name="url_retour" type="hidden" value="'.$url_retour.'" />'
+		. '<input name="agir" type="hidden" value="'.$action.'" />'
+		. '<div style="float:right;"><input type="submit" value="'
+		. $texte
+		. '" class="fondo" /></div>';
+
+		echo redirige_action_auteur($action .'_prets', $id_pret, 'prets', "id=$id_ressource", $res);
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>

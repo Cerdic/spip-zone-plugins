@@ -21,13 +21,8 @@ function exec_prets(){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		
-		$url_prets = generer_url_ecrire('prets');
-		$url_ajout_pret=generer_url_ecrire('edit_pret','agir=ajoute');
-		$url_edit_pret=generer_url_ecrire('edit_pret','agir=modifie');
-		$url_action_prets=generer_url_ecrire('action_prets');
+
 		$id_ressource=intval($_REQUEST['id']);
-	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_liste_reservations')) ;
 		association_onglets();
@@ -44,13 +39,13 @@ function exec_prets(){
 		echo $data['intitule'];
 		echo '</p>';
 		echo fin_boite_info(true);
-		
-		if ($statut=="ok") {
-			$res=association_icone(_T('asso:prets_nav_ajouter'),  $url_ajout_pret.'&id_pret='.$id_ressource, 'livredor.png', 'creer.gif');
-			echo bloc_des_raccourcis($res);
+
+#		if ($statut=="ok")
+ {
+			echo bloc_des_raccourcis(association_icone(_T('asso:prets_nav_ajouter'), generer_url_ecrire('edit_pret','agir=ajoute&id_pret='.$id_ressource), 'livredor.png', 'creer.gif'));
+			
 		}
 		echo association_retour();
-
 		echo debut_droite("",true);
 		echo debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
 		
@@ -80,7 +75,7 @@ function exec_prets(){
 			echo http_img_pack('puce-'.$puce.'.gif', $s), '</td>';			
 			echo '<td class="arial11 border1">'.$data['id_pret'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right">'.association_datefr($data['date_sortie']).'</td>';
-			$id_emprunteur=$data['id_emprunteur'];
+			$id_emprunteur=intval($data['id_emprunteur']);
 
 			$auteur=sql_fetsel("*", "spip_asso_adherents", "$index=$id_emprunteur");
 			echo '<td class="arial11 border1">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
@@ -88,8 +83,8 @@ function exec_prets(){
 			echo '<td class="arial11 border1" style="text-align:right">';
 			if ($data['date_retour']==0) { echo '&nbsp';} else {echo association_datefr($data['date_retour']);}
 			echo '</td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_prets.'&agir=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_pret.'&id_pret='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:prets_nav_editer').'"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;">'. association_bouton(_T('asso:prets_nav_annuler'), 'poubelle-12.gif', 'action_prets', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) . "</td>\n";
+			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:prets_nav_editer'), 'edit-12.gif', 'edit_pret', 'id_pret='.$data['id_pret']) . "</td>\n"; 
 			echo'  </tr>';
 		}     
 		echo'</table>';
