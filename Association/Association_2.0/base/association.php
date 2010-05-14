@@ -238,7 +238,26 @@ $association_tables_principales['spip_asso_adherents'] = array(
 	'key' => &$spip_asso_adherents_key
 );
 
+global $association_tables_auxiliaires;
+
+$spip_asso_metas = array(
+		"nom"	=> "VARCHAR (255) NOT NULL",
+		"valeur"	=> "text DEFAULT ''",
+		"impt"	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
+		"maj"	=> "TIMESTAMP");
+
+$spip_asso_metas_key = array(
+		"PRIMARY KEY"	=> "nom");
+
+$association_tables_auxiliaires['spip_asso_metas'] = array(
+	'field' => &$spip_asso_metas, 
+	'key' => &$spip_asso_metas_key
+);
 global $tables_principales;
 include_spip('base/serial');
 $tables_principales = array_merge($tables_principales,  $association_tables_principales);
+
+global $tables_auxiliaires;
+include_spip('base/auxiliaires');
+$tables_auxiliaires = array_merge($tables_auxiliaires,  $association_tables_auxiliaires);
 ?>

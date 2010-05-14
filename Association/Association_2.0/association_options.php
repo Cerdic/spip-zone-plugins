@@ -67,29 +67,16 @@ function association_ajouterBoutons($boutons_admin) {
 	return $boutons_admin;
 }
 	
+function association_configuration($nom) {
+  // ceci ne marche pas
+  //	return lire_config('table::' . 'asso_metas@nom:' . $nom . '/valeur');
+	return $GLOBALS['asso_metas'][$nom];
+}
+
 function association_I2_cfg_form($flux) {
-        $flux .= recuperer_fond('fonds/inscription2_association');
-	    return ($flux);
+	return ($flux . recuperer_fond('fonds/inscription2_association'));
 }	
 	
-// raccourcis
-
-function generer_url_asso_don($id, $param='', $ancre='') {
-	return  generer_url_ecrire('edit_don', "id=" . intval($id));
-}
-
-function generer_url_don($id, $param='', $ancre='') {
-	return  array('asso_don', $id);
-}
-
-function generer_url_asso_adherent($id, $param='', $ancre='') {
-	return  generer_url_ecrire('voir_adherent', "id=" . intval($id));
-}
-
-function generer_url_adherent($id, $param='', $ancre='') {
-	return  array('asso_adherent', $id);
-}
-
 //Conversion de date
 function association_datefr($date) { 
 		$split = explode('-',$date); 
@@ -128,20 +115,49 @@ define('_ASSOCIATION_AUTEURS_ELARGIS',
        @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1") ? 
        'spip_auteurs_elargis' : 'spip_asso_adherents');
 
-	//-- Table des tables ----------------------------------------------------
+// Pour ne pas avoir a ecrire le prefixe "spip_" dans les squelettes etc
+// (cf trouver_table)
+global $table_des_tables;
+$table_des_tables['asso_dons'] = 'asso_dons';
+$table_des_tables['asso_ventes'] = 'asso_ventes';
+$table_des_tables['asso_comptes'] = 'asso_comptes';
+$table_des_tables['asso_categories'] = 'asso_categories';
+$table_des_tables['asso_plan'] = 'asso_plan';
+$table_des_tables['asso_ressources'] = 'asso_ressources';
+$table_des_tables['asso_prets'] = 'asso_prets';
+$table_des_tables['asso_activites'] = 'asso_activites';
+$table_des_tables['asso_adherents'] = 'asso_adherents';
+$table_des_tables['asso_metas'] = 'asso_metas';
 
-global $table_des_tables, $table_titre;
-	$table_des_tables['asso_dons'] = 'asso_dons';
-	$table_des_tables['asso_ventes'] = 'asso_ventes';
-	$table_des_tables['asso_comptes'] = 'asso_comptes';
-	$table_des_tables['asso_categories'] = 'asso_categories';
-	$table_des_tables['asso_plan'] = 'asso_plan';
-	$table_des_tables['asso_ressources'] = 'asso_ressources';
-	$table_des_tables['asso_prets'] = 'asso_prets';
-	$table_des_tables['asso_activites'] = 'asso_activites';
-	$table_des_tables['asso_adherents'] = 'asso_adherents';
-
+// Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
+global $table_titre;
 $table_titre['asso_adherents']= "nom_famille AS titre, '' AS lang";
 $table_titre['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
 
+// Toujours charger la description des tables (a ameliorer)
+include _DIR_PLUGIN_ASSOCIATION . 'base/association.php';
+
+// Raccourcis
+// Les tables ayant 2 prefixes ("spip_asso_")
+// le raccouci "don" implique de declarer le raccourci "asso_don" etc.
+
+function generer_url_asso_don($id, $param='', $ancre='') {
+	return  generer_url_ecrire('edit_don', "id=" . intval($id));
+}
+
+function generer_url_don($id, $param='', $ancre='') {
+	return  array('asso_don', $id);
+}
+
+function generer_url_asso_adherent($id, $param='', $ancre='') {
+	return  generer_url_ecrire('voir_adherent', "id=" . intval($id));
+}
+
+function generer_url_adherent($id, $param='', $ancre='') {
+	return  array('asso_adherent', $id);
+}
+
+// charger les metas donnees
+$inc_meta = charger_fonction('meta', 'inc'); // inc_version l'a deja chargee
+$inc_meta('asso_metas'); 
 ?>

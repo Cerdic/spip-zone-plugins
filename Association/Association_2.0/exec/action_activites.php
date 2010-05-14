@@ -125,7 +125,7 @@ function activites_paiement_insert($date_paiement, $journal, $montant, $id_activ
 		'journal' => $journal,
 		'recette' => $montant,
 		'justification' => $justification,
-		'imputation' => lire_config('association/pc_activites'),
+		'imputation' => $GLOBALS['asso_metas']['pc_activites'],
 		'id_journal' => $id_activite));
 }
 

@@ -17,7 +17,7 @@ function exec_pdf_adherents()
 	$pdf->Open();
 	$pdf->AddPage();
 	//On définit les colonnes (champs,largeur,intitulé,alignement)
-	$pdf->AddCol(lire_config('association/indexation'),15,_T('asso:adherent_libelle_'.lire_config('association/indexation')),'R');
+	$pdf->AddCol($GLOBALS['asso_metas']['indexation'],15,_T('asso:adherent_libelle_'.$GLOBALS['asso_metas']['indexation']),'R');
 	$pdf->AddCol('nom_famille',50,_T('asso:adherent_libelle_nom'),'L');
 	$pdf->AddCol('prenom',40,_T('asso:adherent_libelle_prenom'),'L');
 	$pdf->AddCol('ville',50,_T('asso:adherent_libelle_ville'),'L');
@@ -30,7 +30,7 @@ function exec_pdf_adherents()
 		'color2'=>array(255,255,255),
 		'padding'=>2
 	);
-	$order = lire_config('association/indexation');
+	$order = $GLOBALS['asso_metas']['indexation'];
 	$order = 'nom_famille' . ($order ? (",$order") : '');
 	$pdf->Query(sql_select('*',_ASSOCIATION_AUTEURS_ELARGIS, request_statut_interne(), '', $order), $prop);
 	$pdf->Output();

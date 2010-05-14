@@ -123,7 +123,7 @@ function exec_edit_pret(){
 		. _T('asso:prets_libelle_mode_paiement')." :</strong></label>\n"
 		. '<select name="journal" id="journal" class="formo">';
 
-		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
+		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
 			$c = $banque['code'];
 			$res .= "<option value='$c'" .

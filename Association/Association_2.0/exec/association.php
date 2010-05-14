@@ -31,7 +31,7 @@ function exec_association() {
 		echo propre(_T('asso:info_doc'));  	
 		echo fin_boite_info(true);
 		
-		$res=association_icone(_T('asso:profil_de_lassociation'),  '?exec=cfg&amp;cfg=association', 'assoc_qui.png');
+		$res=association_icone(_T('asso:profil_de_lassociation'),  '?exec=configurer_association', 'assoc_qui.png');
 		$res.=association_icone(_T('asso:categories_de_cotisations'),  generer_url_ecrire("categories"), 'cotisation.png',  '');
 		$res.=association_icone(_T('asso:plan_comptable'),  generer_url_ecrire("plan"), 'plan_compte.png',  '');	
 
@@ -40,15 +40,15 @@ function exec_association() {
 		echo debut_cadre_formulaire("",true);
 		echo gros_titre(_T('asso:votre_asso'),'',false);
 		echo "<br />\n";		
-		echo '<strong>'.lire_config('association/nom').'</strong><br/>';
-		echo lire_config('association/rue')."<br />\n";
-		echo lire_config('association/cp').'&nbsp;';
-		echo lire_config('association/ville')."<br />\n";
-		echo lire_config('association/telephone')."<br />\n";
-		echo lire_config('association/email')."<br />\n";
-		echo lire_config('association/siret')."<br />\n";
-		echo lire_config('association/declaration')."<br />\n";
-		echo lire_config('association/prefet')."<br />\n";
+		echo '<strong>'.$GLOBALS['asso_metas']['nom'].'</strong><br/>';
+		echo $GLOBALS['asso_metas']['rue']."<br />\n";
+		echo $GLOBALS['asso_metas']['cp'].'&nbsp;';
+		echo $GLOBALS['asso_metas']['ville']."<br />\n";
+		echo $GLOBALS['asso_metas']['telephone']."<br />\n";
+		echo $GLOBALS['asso_metas']['email']."<br />\n";
+		echo $GLOBALS['asso_metas']['siret']."<br />\n";
+		echo $GLOBALS['asso_metas']['declaration']."<br />\n";
+		echo $GLOBALS['asso_metas']['prefet']."<br />\n";
 		fin_cadre_formulaire(true);
 		
 		/* Provisoirement supprimé en attendant 1.9.3*/

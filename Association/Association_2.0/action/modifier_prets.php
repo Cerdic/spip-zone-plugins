@@ -26,7 +26,7 @@ function action_modifier_prets() {
 		$statut=$_REQUEST['statut'];
 		$montant=$_REQUEST['montant'];
 		$journal=$_REQUEST['journal'];
-		$imputation=lire_config('association/pc_prets');
+		$imputation=$GLOBALS['asso_metas']['pc_prets'];
 
 	include_spip('base/association');
 	prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant);

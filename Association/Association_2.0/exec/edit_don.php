@@ -98,7 +98,7 @@ function exec_edit_don(){
 function don_mode_de_paiemen($journal)
 {
 	$res = '';
-	$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote(lire_config('association/classe_banques')), "",  "code") ;
+	$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), "",  "code") ;
 	while ($banque = sql_fetch($sql)) {
 		$res .= '<option value="'.$banque['code'].'" ';
 		if ($journal==$banque['code']) { $res .= ' selected="selected"'; }

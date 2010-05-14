@@ -32,7 +32,7 @@ function exec_action_prets(){
 		$statut=$_POST['statut'];
 		$montant=$_POST['montant'];
 		$journal=$_POST['journal'];
-		$imputation=lire_config('association/pc_prets');
+		$imputation=$GLOBALS['asso_metas']['pc_prets'];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_suppression_prets')) ;

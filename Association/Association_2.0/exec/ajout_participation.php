@@ -59,7 +59,7 @@ function exec_ajout_participation() {
 		. '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />';
 
 		$sel = '';
-		$sql = sql_select("code, intitule", "spip_asso_plan", "classe=".sql_quote(lire_config('association/classe_banques')), '', "code") ;
+		$sql = sql_select("code, intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
 			$sel .= '<option value="'.$banque['code'].'"> '.$banque['intitule']."</option>\n";
 		}

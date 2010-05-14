@@ -90,8 +90,8 @@ function exec_action_relances(){
 		//ENVOI
 		elseif ($action=="send") {
 			//On prépare le mail et on envoi! On peut modifier le $headers à  sa guise
-			$nomasso=lire_config('association/nom');
-			$adresse=lire_config('association/email');
+			$nomasso=$GLOBALS['asso_metas']['nom'];
+			$adresse=$GLOBALS['asso_metas']['email'];
 			$expediteur=$nomasso.'<'.$adresse.'>'; 
 			$expediteur=$nomasso.'<'.$adresse.'>';      					//expéditeur Association
 			//$entetes .= "X-Mailer: PHP/" . phpversion();         			// mailer

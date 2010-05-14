@@ -56,8 +56,8 @@ function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
 		$date=$data['date_debut'];
 		$lieu=$data['lieu'];
 		
-		$nom_asso=lire_config('association/nom');
-		$email_asso=lire_config('association/email');
+		$nom_asso=$GLOBALS['asso_metas']['nom'];
+		$email_asso=$GLOBALS['asso_metas']['email'];
 		$expediteur=$nom_asso.' <'.$email_asso.'>';		
 		$sujet=_T('asso:activite_message_sujet',array('nomasso'=>$nom_asso));
 

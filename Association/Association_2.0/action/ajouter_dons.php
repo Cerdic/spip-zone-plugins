@@ -45,7 +45,7 @@ function don_insert($id_adherent, $argent, $valeur, $journal, $contrepartie, $da
 
 	sql_insertq('spip_asso_comptes', array(
 		    'date' => $date_don,
-		    'imputation' => lire_config('association/pc_dons'),
+		    'imputation' => $GLOBALS['asso_metas']['pc_dons'],
 		    'recette' => $argent,
 		    'journal' => $journal,
 		    'justification' => "[->don$id_don] - [$bienfaiteur" . "->adherent$id_adherent]"));

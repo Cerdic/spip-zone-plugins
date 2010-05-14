@@ -66,7 +66,7 @@ function ajout_cotisation($id_auteur)
 		$res .= '<input name="montant" type="text" value="'.$categorie['cotisation'].'" id="montant" class="formo" />';
 		$res .= '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').'&nbsp;:</strong></label>';
 		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
-		$sql = sql_select('*', 'spip_asso_plan', "classe=". _q(lire_config('association/classe_banques')), '', "code") ;
+		$sql = sql_select('*', 'spip_asso_plan', "classe=". _q($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
 			$res .= '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
 		}

@@ -19,7 +19,7 @@ function action_cotisation() {
 	$journal= $_POST['journal'];
 	$montant= $_POST['montant'];
 	$justification =$_POST['justification'];
-	$imputation=lire_config('association/pc_cotisations');
+	$imputation=$GLOBALS['asso_metas']['pc_cotisations'];
 	$validite =$_POST['validite'];
 
 	cotisation_insert($id_auteur, $montant, $journal, $justification, $imputation, $date, $validite);

@@ -39,7 +39,7 @@ function exec_ventes(){
 		echo '<p>', _T('asso:en_rose_vente_enregistree_en_bleu_vente_expediee') . '</p>'; 
 		
 		// TOTAUX
-		$critere = lire_config('association/pc_ventes');
+		$critere = $GLOBALS['asso_metas']['pc_ventes'];
 		if ($critere) $critere = " AND imputation=". sql_quote($critere);
 		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) =$annee$critere");
 		while ($data = sql_fetch($query)) {

@@ -16,7 +16,7 @@ class PDF extends PDF_Table {
 	function Header(){
 		//Titre
 		$this->SetFont('Arial','',10);
-		$this->Cell(0,6,lire_config('association/nom'),0,1,'L');
+		$this->Cell(0,6,$GLOBALS['asso_metas']['nom'],0,1,'L');
 		$this->SetFont('Arial','B',14);
 		$this->Cell(0,6,unicode2charset(html2unicode($this->titre)),0,1,'C');
 		$this->Ln(10);

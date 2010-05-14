@@ -24,7 +24,7 @@ function exec_voir_adherent(){
 		
 		$url_edit_activite = generer_url_ecrire('edit_activite');
 		$id_auteur= intval($_GET['id']);
-		$indexation = lire_config('association/indexation');
+		$indexation = $GLOBALS['asso_metas']['indexation'];
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
 		while ($data = sql_fetch($query)) { 
 			$id_asso=$data['id_asso'];
@@ -81,7 +81,7 @@ function exec_voir_adherent(){
 		echo '</fieldset>';
 		
 		// FICHE HISTORIQUE ACTIVITES	
-		if (lire_config('association/activites')=="on"){
+		if ($GLOBALS['asso_metas']['activites']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_activites').'</legend>';
 			echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo '<tr bgcolor="#DBE1C5">';
@@ -116,7 +116,7 @@ function exec_voir_adherent(){
 		}
 		
 		// FICHE HISTORIQUE VENTES
-		if (lire_config('association/ventes')=="on"){
+		if ($GLOBALS['asso_metas']['ventes']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>';
 			echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo '<tr bgcolor="#DBE1C5">';
@@ -144,13 +144,13 @@ function exec_voir_adherent(){
 			echo '</fieldset>';
 		}
 		// FICHE HISTORIQUE DONS
-		if (lire_config('association/dons')=="on"){
+		if ($GLOBALS['asso_metas']['dons']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>';
 			echo _T('asso:a_developper');
 			echo '</fieldset>';
 		}
 		// FICHE HISTORIQUE PRETS
-		if (lire_config('association/prets')=="on"){
+		if ($GLOBALS['asso_metas']['prets']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_prets').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "\n<tr style='background-color: #DBE1C5'>";

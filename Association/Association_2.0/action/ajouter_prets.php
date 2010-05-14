@@ -26,7 +26,7 @@ function action_ajouter_prets() {
 	$statut=$_POST['statut'];
 	$montant=$_POST['montant'];
 	$journal=$_POST['journal'];
-	$imputation=lire_config('association/pc_prets');
+	$imputation=$GLOBALS['asso_metas']['pc_prets'];
 
 	prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour);
 }

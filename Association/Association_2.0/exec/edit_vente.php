@@ -27,7 +27,7 @@ function exec_edit_vente() {
 		$id_vente= intval(_request('id'));
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$data = !$id_vente ? '' : sql_fetsel("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation=" . sql_quote(lire_config('association/pc_ventes')));
+		$data = !$id_vente ? '' : sql_fetsel("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation=" . sql_quote($GLOBALS['asso_metas']['pc_ventes']));
 
 		if ($data) {
 			$date_vente=$data['date_vente'];
@@ -89,7 +89,7 @@ function exec_edit_vente() {
 		echo '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').'&nbsp;:</strong></label>';
 
 		$res = '';
-		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote(lire_config('association/classe_banques')), '', "code") ;
+		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
 			$res .= '<option value="'.$banque['code'].'" ';
 			if ($journal==$banque['code']) { $res .= ' selected="selected"'; }

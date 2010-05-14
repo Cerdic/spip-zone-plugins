@@ -20,7 +20,7 @@ function action_adherent() {
 	$commentaire=$_POST['commentaire'];
 	$statut_interne=$_POST['statut_interne'];
 
-	$id_asso = (lire_config('association/indexation')=="id_asso") ? intval($_POST['id_asso']) : 0;
+	$id_asso = ($GLOBALS['asso_metas']['indexation']=="id_asso") ? intval($_POST['id_asso']) : 0;
 
 	adherent_update($id_auteur, $id_asso, $commentaire, $categorie, $statut_interne, $validite);
 }
