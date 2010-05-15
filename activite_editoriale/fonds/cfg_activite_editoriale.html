@@ -1,0 +1,22 @@
+<div class="formulaire_spip">
+<!-- titre=<:activite_editoriale:cfg:> -->
+	<form action="#SELF" method="post">
+    [<div>(#ENV{_cfg_}|form_hidden)</div>]
+        
+        <ul>
+            <li>
+                <label for="champ"><:activite_editoriale:cfg_champ:></label>
+                <select name="champ" id="champ">
+                    <option value="maj_rubrique" [(#ENV{champ}|=={maj_rubrique}|oui) selected="selected"]><:activite_editoriale:cfg_maj_rubrique:></option>
+                    <option value="date_modif_branche" [(#ENV{champ}|=={date_modif_branche}|oui) selected="selected"]><:activite_editoriale:cfg_date_modif_branche:></option>
+                    <option value="date_modif_rubrique" [(#ENV{champ}|=={date_modif_rubrique}|oui) selected="selected"]><:activite_editoriale:cfg_date_modif_rubrique:></option>
+                    
+                </select>
+            </li>
+        
+        </ul>
+    <p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	</p>
+	</form>
+</div>
