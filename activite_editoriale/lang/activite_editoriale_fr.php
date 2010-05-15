@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//R
 	'responsables'             =>  'Responsables',
 	'rubrique_doit_maj'        => 'Une rubrique doit être mise a jour',
-	'rubrique_pas_maj'         => "Attention, la rubrique @titre n'a pas ete mise a jour depuis @jours jours",
+	'rubrique_pas_maj'         => "Attention, la rubrique @titre@ n'a pas ete mise a jour depuis @jours@ jours",
 	
 	//CFG
 	
