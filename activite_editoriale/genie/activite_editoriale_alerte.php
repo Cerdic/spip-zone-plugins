@@ -2,7 +2,7 @@
 
 function genie_activite_editoriale_alerte_dist() {
     if (function_exists('lire_config')){
-        $config_champ = lire_config('activite_editoriale/champ');
+        $config_champ = lire_config('activite_editoriale/champ','maj_rubrique');
     
     }
     'activite_tester_'.$config_champ();
