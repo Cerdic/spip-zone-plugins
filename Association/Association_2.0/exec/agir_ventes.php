@@ -21,7 +21,6 @@ function exec_agir_ventes(){
 		echo minipres();
 	} else {
 		
-		$url_agir_ventes=generer_url_ecrire('agir_ventes');
 		
 		$id_vente=intval($_REQUEST['id']);
 		$action=$_REQUEST['agir'];
@@ -76,40 +75,25 @@ function exec_agir_ventes(){
 			
 			echo debut_droite("",true);
 			
-			echo debut_cadre_relief(  "", false, "", $titre = _T('asso:action_sur_les_ventes_associatives'));
+			echo debut_cadre_relief(  "", true, "", $titre = _T('asso:action_sur_les_ventes_associatives'));
 			
-			echo '<p><strong>', _T('asso:vous_vous_appretez_a_effacer')
+			$res = '<div><strong>'
+			  . _T('asso:vous_vous_appretez_a_effacer')
 			  . " $count "
-			  . (($count==1) ? _T('asso:vente') : _T('asso:ventes'));
-			echo '</strong></p>';
-			echo '<table>';
-			echo '<form action="'.$url_agir_ventes.'"  method="post">';
+			  . (($count==1) ? _T('asso:vente') : _T('asso:ventes'))
+			  . "</strong>\n";
+
 			for ( $i=0 ; $i < $count ; $i++ ) {	
 				$id = $delete_tab[$i];
-				echo '<input type="hidden" name="drop[]" value="'.$id.'" checked="checked" />' ; "\n";
+				$res .= '<input type="hidden" name="drop[]" value="'.$id.'" checked="checked" />' . "\n";
 			}
-			echo '<tr>';
-			echo '<td><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></td></tr>';	
-			echo '</form>';  
-			echo '</table>'; 
+			$res .= '</div>'
+			. '<div style="text-align:right"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></div>';	
+
+			echo redirige_action_auteur('supprimer_ventes', $count, 'ventes', '', $res, '  method="post"');
+
 			fin_cadre_relief();  
 			echo fin_gauche(), fin_page();
-		}
-		
-		//  SUPPRESSION DEFINITIVE VENTES	
-		elseif (isset($_POST['drop'])) {
-			
-			$url_retour = generer_url_ecrire('ventes');
-			$drop_tab=(isset($_POST['drop'])) ? $_POST['drop']:array();
-			$count=count ($drop_tab);
-			
-			for ( $i=0 ; $i < $count ; $i++ ) {
-				$id = intval($drop_tab[$i]);
-				sql_delete('spip_asso_ventes', "id_vente=$id" );
-				$imputation=$GLOBALS['asso_metas']['pc_ventes'];
-				sql_delete('spip_asso_comptes', "id_journal=$id AND imputation='$imputation'");
-			}
-			header ('location:'.$url_retour);
 		}
 	}
 }
@@ -130,7 +114,7 @@ function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, 
 		"commentaire" => $commentaire),
 		    "id_vente=$id_vente" );
 
-	sql_update('spip_asso_comptes', array(
+	sql_updateq('spip_asso_comptes', array(
 		"date" => $date_vente,
 		"journal" => $journal,
 		"recette" => $prix_vente,

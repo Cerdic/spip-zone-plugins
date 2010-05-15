@@ -7,7 +7,7 @@
 	<version_base>38192</version_base>
 	<meta>asso_metas</meta>
 	<etat>test</etat>
-	<description>Gestion dassociations</description>
+	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
 	<config>association_configurer</config>
@@ -31,5 +31,5 @@
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>
