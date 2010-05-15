@@ -194,6 +194,25 @@ function multilang_make_menu_lang(container,target) {
 		return false;
 	}).end().appendTo(container);
 	$(target).find('.menu_lang .langues a').eq(0).addClass('on');
+		
+	var target_id = multilang_init_target_id(target);
+	multilang_forms_fields[target_id].each(function(){
+		multilang_save_lang(this,this.form.form_lang);
+	});
+	// Maj du menu de langues
+	multilang_mark_empty_langs(container,target)
+}
+
+/**
+ * Initialise target_id
+ *
+ * @param target Le formulaire
+ * @return
+ */
+function multilang_init_target_id(target){
+	var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
+	multilang_forms_fields[target_id] = $(multilang_fields_selector,target);
+	return(target_id);
 }
 
 /**
@@ -211,37 +230,30 @@ function multilang_multi_recover(el,container,target,event){
 	}
 	if(event == 'submit'){
 		lang = 'full';
-		var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
-		multilang_forms_fields[target_id] = $(multilang_fields_selector,target);
+		var target_id = multilang_init_target_id(target);
 		target[0].isfull = true;
 		multilang_forms_fields[target_id].each(function(){
-			//Add Yffic 30/03/2010
 			if(!this.totreat) return ;
-			//End Add Yffic
 			//save data before submit
 			multilang_save_lang(this,this.form.form_lang);
 			//build the string value
 			multilang_field_set_background(this,lang);
 			var def_value = this.field_lang[multilang_def_lang];
 			if(!this.multi)
-				// Modif Yffic : Don't add the field_pre_lang now
 				this.value = (def_value==undefined?"":def_value);
 			else {
 				var value="",count=0;
 				$.each(this.field_lang,function(name){
 					if((name != 'full') && (this.length > 0)){
-						//save default lang value and other lang values if different from
-						//the default one
+						//save default lang value and other lang values if different from the default one
 						if(this!=def_value || name == multilang_def_lang) {
 							value += "["+name+"]"+this;
 							count++;
 						}
 					}
 				});
-				// Modif Yffic : Don't add the field_pre_lang now
 				this.value = (count > 1 ? "<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 			}
-			// Add Yffic 30/03/2010
 			// Add the title number to the final value
 			if(multilang_is_title(this.id) && ($('#'+this.id+'_numero').val() != ''))
 				this.value= $('#'+this.id+'_numero').val().replace(/\.|\s+/,'') + ". " + this.value;
@@ -295,7 +307,7 @@ function multilang_init_field(el,lang,force) {
 			el.totreat=true;
 		if(el.totreat) {
 			el.field_pre_lang = m[1] || "";
-			// Modif Yffic : suppress point and spaces
+			// Suppress point and spaces
 			el.field_pre_lang = el.field_pre_lang.replace(/\.|\s+/,'') ;
 			el.multi = true;
 			multilang_match_multi.lastIndex=0;
@@ -305,7 +317,7 @@ function multilang_init_field(el,lang,force) {
 				// Suppression du numero uniquement pour les titres
 				if(multilang_is_title(el.id) && text!=null) {
 					value = text[2];
-					// Modif Yffic : suppress point and spaces
+					// Suppress point and spaces
 					el.field_pre_lang = text[1].replace(/\.|\s+/,'') || "";
 				} else {
 					value = langs[2];
@@ -353,14 +365,15 @@ function multilang_init_field(el,lang,force) {
  *
  */
 function multilang_change_lang(el,container,target) {
-	var target_id = target != multilang_forms ? jQuery.data(target[0]) : "undefined";
-
-	multilang_forms_fields[target_id] = $(multilang_fields_selector,target);
+	var added_lang="";
+	var target_id = multilang_init_target_id(target);
 	var lang = el.innerHTML;
 
 	lang = lang.slice(1,-1);
 
 	if(target[0].isfull){
+		// Maj du menu de langues avant multilang_init_field
+		multilang_mark_empty_langs(container,target)
 		multilang_forms_fields[target_id].each(function(){
 			var me = $(this);
 			if(me.parents(root_opt).size()>0){
@@ -368,7 +381,6 @@ function multilang_change_lang(el,container,target) {
 		        	multilang_init_field(this,lang,true);
 		        }
 		    }else{
-		    	//multilang_save_lang(this,this.form.form_lang);
 		    	multilang_init_field(this,lang,true);
 		    }
 		});
@@ -379,6 +391,8 @@ function multilang_change_lang(el,container,target) {
 		multilang_forms_fields[target_id].each(function(){
 			multilang_save_lang(this,this.form.form_lang);
 		});
+		// Maj du menu de langues apres multilang_save_lang
+		multilang_mark_empty_langs(container,target)
 	}
 
 	//change current lang
@@ -387,6 +401,46 @@ function multilang_change_lang(el,container,target) {
 	//reinit fields to current lang
 	multilang_forms_fields[target_id].each(function(){
 		multilang_set_lang(this,lang);
+	});
+
+
+}
+
+/**
+ * Marquer dans le menu des langues, celles pour lesquelles
+ * au moins un champ multi du formulaire n'est pas renseigne
+ *
+ * @param container Le conteneur du formulaire
+ *
+ */
+function multilang_mark_empty_langs(container,target) {
+
+	var langs_empty = [];
+	var target_id = multilang_init_target_id(target);
+	
+	multilang_forms_fields[target_id].each(function(){
+		
+		// Trouver les elements non communs entre le tableau des langues availables et pour chaque champ,
+		// celui des langues renseignees, si ce champ est multi
+		if(this.multi) {
+			var field_langs = [];
+			// Mise sous forme de tableau
+			$.each(this.field_lang,function(name,value){
+				field_langs.push(name);
+			});
+			// Comparaison des tableaux
+			$.each(multilang_avail_langs,function(i,name){
+				if (jQuery.inArray(name, field_langs) == -1)
+					if(jQuery.inArray(name, langs_empty) == -1)
+						langs_empty.push(name);
+			});
+		}
+	});
+
+	// On indique dans le menu de langue, celles qui ont au moins un champ non renseigne
+	container.find('a[class~=change_lang]').removeClass('empty') ;
+	$.each(langs_empty,function(i,name){
+		container.find('a[class~='+name+']').addClass('empty') ;
 	});
 }
 
@@ -400,15 +454,15 @@ function multilang_change_lang(el,container,target) {
  * @return
  */
 function multilang_set_lang(el,lang) {
-	//Add Yffic 30/03/2010
-	if(!el.totreat) return ;
-	//End Add Yffic
+
+	if(!el.totreat) return;
 
 	//if current lang is not setted use default lang value
-	if(el.field_lang[lang]==undefined)
+	if(el.field_lang[lang]==undefined) {
 		el.field_lang[lang] = el.field_lang[multilang_def_lang];
-	// Modif Yffic : Don't add the field_pre_lang
-	el.value = (el.field_lang[lang] == undefined ? "" : el.field_lang[lang]); //show the common part (01. ) before the value
+	}
+
+	el.value = (el.field_lang[lang] == undefined ? "" : el.field_lang[lang]);
 	el.titre_el.html(el.value);
 
 	multilang_field_set_background(el,lang);
@@ -468,7 +522,7 @@ function multilang_save_lang(el,lang) {
 	if(multilang_is_title(el.id)) {
 		var m = el.value.match(/^(\d+\.\s+)((?:.|\n|\s)*)/);
 		if(m!=null) {
-			// Modif Yffic : suppress point and spaces
+			// Suppress point and spaces
 			el.field_pre_lang = m[1].replace(/\.|\s+/,'');
 			el.value = m[2];
 		}
