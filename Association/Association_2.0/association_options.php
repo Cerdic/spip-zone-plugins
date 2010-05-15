@@ -12,9 +12,24 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Gestion de l'absence eventuelle du plugin Inscription2
+
+if (!defined('_ASSOCIATION_INSCRIPTION2'))
+    define('_ASSOCIATION_INSCRIPTION2', true); // false si on sait s'en passer
+
+define('_ASSOCIATION_AUTEURS_ELARGIS', 
+       @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1") ? 
+       'spip_auteurs_elargis' : 'spip_asso_adherents');
+
 // Le premier element indique un ancien membre
 $GLOBALS['association_liste_des_statuts'] =
   array('sorti','prospect','ok','echu','relance');
+
+// Est-il normal d'avoir deux listes de statuts ? 
+$GLOBALS['association_liste_des_statuts2'] =
+	!_ASSOCIATION_INSCRIPTION2 
+	? $GLOBALS['association_liste_des_statuts']
+	: array('sorti','ok','echu','relance', lire_config('inscription2/statut_interne'));
 
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 

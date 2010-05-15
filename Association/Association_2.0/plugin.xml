@@ -7,10 +7,7 @@
 	<version_base>38192</version_base>
 	<meta>asso_metas</meta>
 	<etat>test</etat>
-	<description>
-		Gestion de petites associations
-_ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
-	</description>
+	<description>Gestion dassociations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
 	<config>association_configurer</config>

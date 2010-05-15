@@ -49,10 +49,11 @@ function exec_edit_labels(){
 
 
 		$corps = '';
-		foreach (array('ok','echu','relance','sorti',lire_config('inscription2/statut_interne')) as $var) {
+		foreach ($GLOBALS['association_liste_des_statuts2'] as $var) {
 			$corps .= '<option value="'.$var.'"';
 			if ($statut_interne==$var) {$corps .= ' selected="selected"';}
-			$corps .= '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
+			$corps .= '> '._T('asso:adherent_entete_statut_'.$var)
+			  ."</option>\n";
 		}
 
 		if ($corps) {

@@ -89,7 +89,7 @@ function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_inte
 	while ($var = sql_fetch($sql)) {
 			$res .= '<option value="'.$var['id_categorie'].'"';
 			if($categorie== $var['id_categorie']){$res .= ' selected="selected"';}
-			$res .= '> '.$var['libelle'].'</option>';
+			$res .= '> '.$var['libelle']."</option>\n";
 	}
 	$res .= '</select>';
 
@@ -104,22 +104,23 @@ function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_inte
 	. ' :</strong></label>';
 
 	$res .= '<select name ="statut_interne" id="statut_interne" class="formo" />';
-	foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
+	foreach ($GLOBALS['association_liste_des_statuts2'] as $var) {
 		$res .= '<option value="'.$var.'"';
 		if ($statut_interne==$var) {$res .= ' selected="selected"';}
-		$res .= '>'._T('asso:adherent_entete_statut_'.$var).'</option>';
+		$res .= '>'._T('asso:adherent_entete_statut_'.$var)."</option>\n";
 	}
 	$res .= '</select>';
 
-	$res .= '<label for="commentaire"><strong>'._T('asso:adherent_libelle_remarques').' :</strong></label>'
+	$res .= '<label for="commentaire"><strong>'
+	. _T('asso:adherent_libelle_remarques').' :</strong></label>'
 	. '<textarea name="commentaire" id="commentaire" class="formo" />'
 	. $commentaire
 	. '</textarea>'
 	. '<input name="id" type="hidden" value="'
 	. $id_auteur
 	. '" >'
-	. '<div style="float:right;">'
-	. '<input name="bouton" type="submit" value="'
+	. "\n<div style='float:right;'>"
+	. '<input type="submit" value="'
 	.  _T('asso:bouton_modifie')
 	. '" class="fondo" /></div>';
 

@@ -44,10 +44,10 @@ function exec_edit_relances(){
 	if (!$statut_interne) $statut_interne= "echu";
 
 	$corps = '';
-	foreach (array('ok','echu','relance','sorti','prospect') as $var) {
+	foreach ($GLOBALS['association_liste_des_statuts'] as $var) {
 			$corps .= '<option value="'.$var.'"';
 			if ($statut_interne==$var) {$corps .= ' selected="selected"';}
-			$corps .= '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
+			$corps .= '> '._T('asso:adherent_entete_statut_'.$var)."</option>\n";
 	}
 
 	if ($corps) {
@@ -61,9 +61,11 @@ function exec_edit_relances(){
 
 		$corps = '<fieldset>'
 			. '<legend>Message de relance</legend>'
-			. '<label for="sujet"><strong>'._T('asso:Sujet').' :</strong></label>'
+			. '<label for="sujet"><strong>'._T('asso:Sujet')
+			. " :</strong></label>\n"
 			. '<input name="sujet" type="text" value="'.stripslashes(_T('asso:titre_relance')).'" id="sujet" class="formo" />'
-			. '<label for="message"><strong>'._T('asso:Message').' :</strong></label>'
+			. '<label for="message"><strong>'._T('asso:Message')
+			. " :</strong></label>\n"
 			. '<textarea name="message" rows="15" id="message" class="formo">'.stripslashes(_T('asso:message_relance'))."</textarea>\n"
 			. '</fieldset>'
 			. "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
