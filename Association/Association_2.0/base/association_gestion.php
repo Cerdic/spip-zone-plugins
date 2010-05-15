@@ -31,6 +31,28 @@ if (!isset($GLOBALS['asso_metas']['base_version'])) {
 	$GLOBALS['asso_metas']['base_version'] = $n;
 }
 
+// Configuration
+
+function association_configurer($f)
+{
+	$url = generer_url_ecrire('configurer_association');
+	$alt = _T('icone_configuration_site').' '. 'association';
+	$img = http_img_pack('cfg-16.png', $alt, ' width="16" height="16"', $alt);
+	return "<div class='cfg_link'><a href='$url'>$img</a></div>";
+}
+
+// desinstatllatin
+
+function association_vider_tables($nom_meta, $table){
+	include_spip('base/abstract_sql');
+	include_spip('base/association');
+	foreach ($GLOBALS['association_tables_principales'] as $k=>$v) {
+		spip_log("table $k detruite");
+		sql_drop_table($k);
+	}
+	spip_log("plugin association desinstallee ($nom_meta)");
+}
+
 // MAJ des tables de la base SQL
 // Retourne 0 si ok, le dernier numero de MAJ ok sinon
 
@@ -112,8 +134,9 @@ function association_maj_64(){
 $GLOBALS['association_maj'][64] = array(array('association_maj_64'));
 
 // Recopie des metas geree par CFG dans la table asso_meta
+// Il faut charger a la main ses fichiers puisque plugin.xml ne le demande plus
 
-function association_maj_38190()
+function association_maj_38192()
 {
 	global $association_tables_auxiliaires;
 
@@ -123,27 +146,19 @@ function association_maj_38190()
 		$association_tables_auxiliaires['spip_asso_metas']['field'],
 		$association_tables_auxiliaires['spip_asso_metas']['key'],
 		false, false)) {
+		include _DIR_PLUGINS . 'cfg/inc/cfg.php';
 		if (is_array($c = lire_config('association'))) {
 			foreach($c as $k => $v) {
 				ecrire_meta($k, $v, 'oui', 'asso_metas');
 			}
+			// effacer les vieilles meta
+			effacer_meta('association');
 			effacer_meta('asso_base_version');
 			effacer_meta('association_base_version');
 		}
 	} else spip_log("maj_38190: echec de  la creation de spip_asso_metas");
 }
 
-$GLOBALS['association_maj'][38190] = array(array('association_maj_38190'));
+$GLOBALS['association_maj'][38192] = array(array('association_maj_38192'));
 
-function association_vider_tables($nom_meta, $table){
-	include_spip('base/abstract_sql');
-	include_spip('base/association');
-	foreach ($GLOBALS['association_tables_principales'] as $k=>$v) {
-		spip_log("table $k detruite");
-		sql_drop_table($k);
-	}
-	effacer_meta($nom_meta, $table);
-	effacer_meta('association'); // toujours dans la table principale
-	spip_log("plugin association desinstallee ($nom_meta)");
-}
 ?>

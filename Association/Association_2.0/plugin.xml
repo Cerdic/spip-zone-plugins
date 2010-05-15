@@ -4,7 +4,7 @@
 	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James
 	</auteur>
 	<version>0.65</version>
-	<version_base>38190</version_base>
+	<version_base>38192</version_base>
 	<meta>asso_metas</meta>
 	<etat>test</etat>
 	<description>
@@ -13,7 +13,7 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 	</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
-	<config>configurer_association</config>
+	<config>association_configurer</config>
 	<lien>
          [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
     </lien>
@@ -29,16 +29,10 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 	</pipeline>
 	
 	<pipeline>
-		<nom>I2_cfg_form</nom>
-		<action>I2_cfg_form</action>		
-	</pipeline>
-		
-	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>		
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	<necessite id="cfg" version="[1.10.1;]" />
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>

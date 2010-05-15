@@ -67,16 +67,6 @@ function association_ajouterBoutons($boutons_admin) {
 	return $boutons_admin;
 }
 	
-function association_configuration($nom) {
-  // ceci ne marche pas
-  //	return lire_config('table::' . 'asso_metas@nom:' . $nom . '/valeur');
-	return $GLOBALS['asso_metas'][$nom];
-}
-
-function association_I2_cfg_form($flux) {
-	return ($flux . recuperer_fond('fonds/inscription2_association'));
-}	
-	
 //Conversion de date
 function association_datefr($date) { 
 		$split = explode('-',$date); 
@@ -102,8 +92,9 @@ function association_flottant($s)
 }
 
 function association_header_prive($flux){
-		$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('association.css')).'" />';
-		return $flux;
+	$c = direction_css(find_in_path('association.css'));
+	return "$flux\n<link rel='stylesheet' type='text/css' href='$c' />";
+		
 	}
 
 // Gestion de l'absence eventuelle du plugin Inscription2
