@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Activit&eacute; &eacute;ditoriale</nom>
-	<auteur>Stéphanie Caron de [Clever Age->http://www.clever-age.com/]</auteur>
+	<auteur>Stéphanie Caron de [Clever Age->http://www.clever-age.com/] et Maïeul ROUQUETTE (amélioration)</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<description>Ce plugin a pour objectif de compl&eacute;ter les fonctionnalit&eacute;s de suivi de l'activit&eacute; &eacute;ditoriale de SPIP.
 
