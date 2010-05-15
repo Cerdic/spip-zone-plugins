@@ -1,6 +1,7 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+    //A
+    'activite_editoriale'   =>'Activité éditoriale',
 	//D
 	'delai' => 'D&eacute;lai',
 	'delai_precisions' => '(en nombre de jours)',
@@ -21,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'responsables'             =>  'Responsables',
 	'rubrique_doit_maj'        => 'Une rubrique doit être mise a jour',
 	'rubrique_pas_maj'         => "Attention, la rubrique @titre@ n'a pas ete mise a jour depuis @jours@ jours",
+	'rubriques_pas_a_jour'     =>"Rubriques n'ayant pas été mises à jour à temps",
 	
 	//CFG
 	

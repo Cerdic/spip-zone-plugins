@@ -6,6 +6,6 @@
 			<BOUCLE_auteurs(AUTEURS) {id_auteur IN #GET{liste_auteur}}{tout}{", "}><a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs>
 		</td>
 		<td style="text-align: right">#EXTRAS_DELAI <:activite_editoriale:jours:></td>
-		<td style="text-align: right">[(#MAJ|affdate)]</td>
+		<td style="text-align: right">[(#ENV{maj}|affdate)]</td>
 	</tr>
 </BOUCLE_rubrique>

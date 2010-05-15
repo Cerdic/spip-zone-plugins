@@ -1,8 +1,8 @@
 #CACHE{0}
-<h1>Activité éditoriale</h1>
+<h1><:activite_editoriale:activite_editoriale:></h1>
 
 <div>
-  <h2>Rubriques n'ayant pas été mises à jour à temps</h2>
+  <h2><:activite_editoriale:rubriques_pas_a_jour:></h2>
 	<div class='cadre cadre-liste' style='margin-top: 20px;'>
 		<table width='100%' cellpadding='2' cellspacing='0' border='0'>
 		  <thead>
@@ -10,14 +10,25 @@
 		      <th><:rubrique:></th>
 		      <th><:activite_editoriale:responsables:></th>
 		      <th><:activite_editoriale:delai:></th>
-		      <th><:activite_editoriale:derniere_maj:>/th>
+		      <th><:activite_editoriale:derniere_maj:></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 	      <BOUCLE_rubriques(RUBRIQUES){tout}{par maj}>
+	      	[(#CONFIG{activite_editoriale/champ,maj_rubrique}|=={maj_rubrique}|oui)
+	      	#SET{maj,#MAJ}
+	      	]
+	      	[(#CONFIG{activite_editoriale/champ,maj_rubrique}|=={date_modif_branche}|oui)
+	      	#SET{maj,#INCLURE{fond=inclure/maj_branche}{id_rubrique}}
+	      	]
+	      	[(#CONFIG{activite_editoriale/champ,maj_rubrique}|=={date_modif_rubrique}|oui)
+	      	#SET{maj,#INCLURE{fond=inclure/maj_rubrique}{id_rubrique}}
+	      	]
 	      	[(#EXTRAS_DELAI|!={''}|oui)
-	      		[(#MAJ|age_rubrique|>={#EXTRAS_DELAI}|oui)
-	          	<INCLURE{fond=prive/exec/activite_editoriale_rubrique}{id_rubrique}>
+	      	    
+	      	    
+	      		[(#GET{maj}|age_rubrique|>={#EXTRAS_DELAI}|oui)
+	          	<INCLURE{fond=prive/exec/activite_editoriale_rubrique}{id_rubrique}{maj=#GET{maj}}>
 	        	]
 	      	]
 	      </BOUCLE_rubriques>
