@@ -15,12 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'identifiants_precisions' => '(id_auteur s&eacute;par&eacute;s par des ",")',
 	
 	//J
-	'jours'        =>'jour(s)'
+	'jours'        =>'jour(s)',
 	
 	//R
 	'responsables'             =>  'Responsables',
 	'rubrique_doit_maj'        => 'Une rubrique doit être mise a jour',
-	'rubrique_pas_maj'         => "Attention, la rubrique @titre n'a pas ete mise a jour depuis @jours jours".
+	'rubrique_pas_maj'         => "Attention, la rubrique @titre n'a pas ete mise a jour depuis @jours jours"
 	
 
 );
