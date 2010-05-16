@@ -58,7 +58,7 @@ function exec_edit_pret(){
 		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
 		while ($data = sql_fetch($query)) {
 			$statut=$data['statut'];
-			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
+			echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
 			echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
 			echo '<p>'._T('asso:ressources_libelle_code').': '.$data['code'].'<br />';
 			echo $data['intitule'];
@@ -118,34 +118,38 @@ function exec_edit_pret(){
 		. '<label for="montant"><strong>'
 		. _T('asso:prets_libelle_montant')." :</strong></label>\n"
 		. '<input name="montant" type="text" value="'
-		. $montant.'" id="montant" class="formo" />'
-		. '<label for="journal"><strong>'
-		. _T('asso:prets_libelle_mode_paiement')." :</strong></label>\n"
-		. '<select name="journal" id="journal" class="formo">';
+		. $montant.'" id="montant" class="formo" />';
 
+		$sel = '';
 		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
 		while ($banque = sql_fetch($sql)) {
 			$c = $banque['code'];
-			$res .= "<option value='$c'" .
+			$sel .= "<option value='$c'" .
 			  (($journal==$c) ? ' selected="selected"' : '')
 			  . '>' . $banque['intitule'] ."</option>\n";
 		}
 
-		$res .= "</select>\n"
-		. '<label for="commentaire_retour"><strong>'
+		if ($sel) {
+			$res .= '<label for="journal"><strong>'
+			  . _T('asso:prets_libelle_mode_paiement')." :</strong></label>\n"
+			  . '<select name="journal" id="journal" class="formo">'
+			  . $sel
+			  . "</select>\n";
+		}
+
+		$res .= '<label for="commentaire_retour"><strong>'
 		. _T('asso:prets_libelle_commentaires')." :</strong></label>\n"
 		. '<textarea name="commentaire_retour" id="commentaire_retour" class="formo">'
 		. $commentaire_retour."</textarea>\n"
 		. '</fieldset>'
 		. '<input name="id_pret" type="hidden" value="'.$id_pret.'" />'
 		. '<input name="id_ressource" type="hidden" value="'.$id_ressource.'" />'
-		. '<input name="url_retour" type="hidden" value="'.$url_retour.'" />'
 		. '<input name="agir" type="hidden" value="'.$action.'" />'
 		. '<div style="float:right;"><input type="submit" value="'
 		. $texte
 		. '" class="fondo" /></div>';
 
-		echo redirige_action_auteur($action .'_prets', $id_pret, 'prets', "id=$id_ressource", $res);
+		echo redirige_action_post($action .'_prets', $id_pret, 'prets', "id=$id_ressource", $res);
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();
 	}
