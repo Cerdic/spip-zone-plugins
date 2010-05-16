@@ -21,8 +21,6 @@ function exec_voir_adherent(){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		
-		$url_edit_activite = generer_url_ecrire('edit_activite');
 		$id_auteur= intval($_GET['id']);
 		$indexation = $GLOBALS['asso_metas']['indexation'];
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
@@ -106,9 +104,9 @@ function exec_voir_adherent(){
 					echo '<td class="arial11 border1">'.association_datefr($date)."</td>\n";
 					echo '<td class="arial11 border1">'.$evenement['titre']."</td>\n";
 				}
-				echo '<td class="arial11 border1" style="text-align:right;">'.$data['inscrits']."</td>\n";
+				echo '<td class="arial11 border1" style="text-align: right;">'.$data['inscrits']."</td>\n";
 				echo '<td class="arial11 border1">'.$data['statut']."</td>\n";
-				echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:adherent_bouton_maj_inscription').'"></a></td>';
+				echo '<td class="arial11 border1" style="text-align: center;">', association_bouton(_T('asso:adherent_bouton_maj_inscription'), 'edit-12.gif', 'edit_activite', 'id='.$data['id_activite']), "</td>\n";
 				echo '</tr>';
 			}
 			echo '</table>';

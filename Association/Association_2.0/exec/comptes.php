@@ -188,10 +188,10 @@ function comptes_while($annee, $imputation, $debut, $max_par_page)
 		. $data['journal']
 		. '</td>'
 		. (($data['valide']=='oui') ?
-			('<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>')
-		   :  ("<td class='$class border1' style='text-align:center'>" . association_bouton(_T('asso:mettre_a_jour'), 'edit-12.gif', 'edit_compte', 'id='.$id) . "</td>\n"
-			. "<td class='$class border1' style='text-align:center;'>" . association_bouton(_T('asso:supprimer'), 'poubelle.gif', 'action_comptes', 'id='.$id) . "</td>\n"
-		       . "\n<td class='".$class. " border1' style='text-align:center'><input name='valide[]' type='checkbox' value='".$data['id_compte']. "' /></td>\n"))
+			("<td class='$class' colspan='3' style='border-top: 1px solid #CCCCCC;'>&nbsp;</td>\n")
+		   :  ("<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:mettre_a_jour'), 'edit-12.gif', 'edit_compte', 'id='.$id) . "</td>\n"
+			. "<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:supprimer'), 'poubelle.gif', 'action_comptes', 'id='.$id) . "</td>\n"
+		       . "<td class='$class border1' style='text-align: center;'><input name='valide[]' type='checkbox' value='".$data['id_compte']. "' /></td>\n"))
 		 . '</tr>';
 	}
 	return $auteurs;

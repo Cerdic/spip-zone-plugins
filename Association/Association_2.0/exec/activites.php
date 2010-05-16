@@ -104,7 +104,7 @@ function exec_activites(){
 			while ($inscrits = sql_fetch($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total']."</td>\n"; }
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_modifier_article'), 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . "</td>\n";
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'creer-12.gif', 'edit_activite', 'agir=modifie&id_article='.$data['id_article']) . "</td>\n";
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_voir_liste_inscriptions'), 'voir-12.png', 'voir_activite', 'id='.$data['id_evenement']) . "</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_voir_liste_inscriptions'), 'voir-12.png', 'voir_activites', 'id='.$data['id_evenement']) . "</td>\n";
 			echo '</tr>';
 		}
 		echo '</table>';

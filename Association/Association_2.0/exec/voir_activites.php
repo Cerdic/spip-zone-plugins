@@ -107,18 +107,18 @@ function exec_voir_activites(){
 			if(empty($data['email'])) { echo $data['nom']; }
 			else { echo '<a href="mailto:'.$data['email'].'">'.$data['nom'].'</a>'; }
 			echo "</td>\n";
-			echo '<td style="text-align:right;" class="'.$class. ' border1">'.$data['id_adherent']."</td>\n";
-			echo '<td style="text-align:right;" class="'.$class. ' border1">'.$data['inscrits']."</td>\n";
-			echo '<td style="text-align:right;" class="'.$class. ' border1">'.number_format($data['montant'], 2, ',', ' ')."</td>\n";
-			echo '<td style="text-align:center;" class="'.$class. ' border1"><a href="'.generer_url_ecrire('edit_activite','agir=modifie'.'&id='.$data['id_activite']).'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" alt=" " title="'._T('asso:activite_bouton_maj_inscription'). "\" /></a></td>\n";
-			echo '<td style="text-align:center;" class="'.$class. ' border1"><a href="'.generer_url_ecrire('ajout_participation', '&id='.$data['id_activite']).'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'cotis-12.gif" alt=" " title="'._T('asso:activite_bouton_ajouter_inscription'). "\" /></a></td>\n";
-			echo '<td style="text-align:center;" class="'.$class. ' border1"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
+			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$data['id_adherent']."</td>\n";
+			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$data['inscrits']."</td>\n";
+			echo '<td style="text-align: right;" class="'.$class. ' border1">'.number_format($data['montant'], 2, ',', ' ')."</td>\n";
+			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton(_T('asso:activite_bouton_maj_inscription'), 'edit-12.gif', 'edit_activite','agir=modifie&id='.$data['id_activite']), "</td>\n";
+			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'cotis-12.gif', 'ajout_participation', 'id='.$data['id_activite']), "</td>\n";
+			echo '<td style="text-align: center;" class="'.$class. ' border1"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
 			echo '</tr>';
-			if ($data['commentaire']) {	echo '<tr><td colspan=10 style="text-align:justify;" class ='.$class.'>'.$data['commentaire']."</td></tr>\n"; }
+			if ($data['commentaire']) {	echo '<tr><td colspan="10" style="text-align: justify;" class ='.$class.'>'.$data['commentaire']."</td></tr>\n"; }
 		}     
 		echo '</table>';
 
-		echo "\n<table width='100%'><tr><td style='text-align:right;'>";
+		echo "\n<table width='100%'><tr><td style='text-align: right;'>";
 		echo '<input type="submit" value="'._T('asso:activite_bouton_supprimer').'" class="fondo" />';
 		echo "</td></tr></table>\n";
 		echo '</form>';
