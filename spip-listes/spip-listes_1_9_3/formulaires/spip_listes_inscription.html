@@ -10,14 +10,14 @@
 	<input type="hidden" name="format_abo" checked="checked" value="html" />
 	<ul>
 		<li class="editer_email">
-			<label for="email"><:spiplistes:votre_email:></label>
+			<label for="email"><:spiplistes:votre_email_:></label>
 			<input type="text" name="email" id="email" value="#ENV{email}" class="text" />
 		</li>
 		[(#ENV{id_liste}|non)
 		[(#INCLURE{fond=formulaires/inc-liste_des_listes}{env})]
 		]
 	</ul>
-	<p class="boutons">
+	<p class="boutons spip_bouton">
 		<input type="submit" class="submit" name="ok" value="ok" />
 	</p>
 </form>]
