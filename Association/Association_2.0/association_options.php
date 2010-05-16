@@ -83,7 +83,7 @@ function association_ajouterBoutons($boutons_admin) {
 }
 	
 
-function association_mode_de_paiement($label)
+function association_mode_de_paiement($journal, $label)
 {
 	$sel = '';
 	$sql = sql_select("code,intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
