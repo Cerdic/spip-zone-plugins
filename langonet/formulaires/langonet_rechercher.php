@@ -24,7 +24,7 @@ function formulaires_langonet_rechercher_verifier($type) {
 function formulaires_langonet_rechercher_traiter($type) {
 
 	// Recuperation des champs du formulaire
-	$pattern = _request('pattern');
+	$pattern = htmlentities(_request('pattern'), ENT_COMPAT, 'UTF-8');
 	$correspondance = _request('correspondance');
 	$langonet_rechercher = charger_fonction('langonet_rechercher_'.$type,'inc');
 

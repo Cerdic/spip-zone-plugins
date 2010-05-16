@@ -9,27 +9,22 @@
  * @param string $mode [optional]
  * @return 
  */
-function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index') {
+function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='html') {
 	$resultats = array();
 
 	include_spip('inc/traduire');
 	$var_source = "i18n_".$module."_".$langue_source;
-	if (empty($GLOBALS[$var_source]))
-		if (find_in_path($module.'_'.$langue_source.'.php',  $ou_langue))
-			charger_langue($langue_source, $module);
-		else {
-			$resultats['statut'] = false;
-			$resultats['erreur'] = _T('langonet:message_nok_fichier_langue', 
-									array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue));
-			return $resultats;
-		}
+	if (empty($GLOBALS[$var_source])) {
+		$GLOBALS['idx_lang'] = $var_source;
+		include(_DIR_RACINE.$ou_langue.$module.'_'.$langue_source.'.php');
+	}
 	
 	$var_cible = "i18n_".$module."_".$langue_cible;
-	if (empty($GLOBALS[$var_cible]))
-		if (find_in_path($module.'_'.$langue_cible.'.php', ou_langue))
-			charger_langue($langue_cible, $module);
-		else
-			$GLOBALS[$var_cible] = array();
+	if (empty($GLOBALS[$var_cible])) {
+		$GLOBALS['idx_lang'] = $var_cible;
+		if ( file_exists($cible = _DIR_RACINE.$ou_langue.$module.'_'.$langue_cible.'.php'))
+			include($cible);
+	}
 
 	$dir = sous_repertoire(_DIR_TMP,"langonet");
 	$dir = sous_repertoire($dir,"generation");
@@ -83,6 +78,12 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 '. $texte .'
 );
 ?>';
+
+	if ($encodage == 'utf8') {
+		include_spip('inc/langonet_utils');
+		$texte = entite2utf($texte);
+	}
+	
 	$ok = ecrire_fichier($f, $texte);
 
 	if (!$ok) {

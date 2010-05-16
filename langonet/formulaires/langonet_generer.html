@@ -51,6 +51,17 @@
 								<option value="pas_item" [(#ENV{mode, index}|=={pas_item}|oui) selected="selected"]><:langonet:option_mode_pas_item:></option>
 							</select>
 						</li>
+<!-- 
+						<li class="editer_encodage[(#ENV{erreurs}|table_valeur{encodage}|oui) erreur]">
+							<label for="encodage"><:langonet:label_encodage:></label>
+							<p class="explication"><:langonet:info_encodage:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{encodage})</span>]
+							<select name="encodage" id="encodage">
+								<option value="html" [(#ENV{mode, html}|=={html}|oui) selected="selected"]><:langonet:option_encodage_html:></option>
+								<option value="utf8" [(#ENV{mode, html}|=={utf8}|oui) selected="selected"]><:langonet:option_encodage_utf8:></option>
+							</select>
+						</li>
+ -->
 					</ul>
 				</fieldset>
 			</li>

@@ -2,7 +2,7 @@
 
 function formulaires_langonet_generer_charger(){
 	$valeurs = array();
-	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode');
+	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode', 'encodage');
 	foreach($champs as $_champ){
 		$valeurs[$_champ] = _request($_champ);
 	}
@@ -22,7 +22,7 @@ function formulaires_langonet_generer_verifier(){
 
 function formulaires_langonet_generer_traiter(){
 	// Recuperation des champs du formulaire
-	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode');
+	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode', 'encodage');
 	foreach($champs as $_champ){
 		$champs[$_champ] = _request($_champ);
 	}
@@ -31,7 +31,7 @@ function formulaires_langonet_generer_traiter(){
 	}
 	// Generation du fichier
 	$langonet_generer = charger_fonction('langonet_generer_fichier','inc');
-	$retour = $langonet_generer($champs['module'], $champs['langue_source'], $champs['chemin_langue'], $champs['langue_cible'], $champs['mode']);
+	$retour = $langonet_generer($champs['module'], $champs['langue_source'], $champs['chemin_langue'], $champs['langue_cible'], $champs['mode'], $champs['encodage']);
 	$retour['editable'] = true;
 	return $retour;
 }

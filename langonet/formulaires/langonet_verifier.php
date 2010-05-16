@@ -291,6 +291,7 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	$log_fichier = $log_rep . $log_nom;
 
 	// Texte du fichier en UTF-8
+	include_spip('inc/langonet_utils');
 	// -- En-tete resumant la verification
 	$log_texte = "/* *****************************************************************************\n" .
 	"/* LangOnet : " . entite2utf(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s'))))."\n" .
@@ -330,12 +331,6 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 
 	$ok = ecrire_fichier($log_fichier, $log_texte);
 	return $ok;
-}
-
-// fonction purement utilitaire
-function entite2utf($sujet) {
-	if (!$sujet) return;
-	return utf8_encode(html_entity_decode($sujet));
 }
 
 ?>

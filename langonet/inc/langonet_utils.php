@@ -75,4 +75,10 @@ function langonet_cree_bulle_telecharger($fichier, $type='log') {
 	return $bulle;
 }
 
+// fonction purement utilitaire
+function entite2utf($sujet) {
+	if (!$sujet) return;
+	return utf8_encode(html_entity_decode($sujet));
+}
+
 ?>
