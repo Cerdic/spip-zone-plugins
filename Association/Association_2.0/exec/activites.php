@@ -75,7 +75,7 @@ function exec_activites(){
 		
 		//TABLEAU
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "\n<tr style='background-color: #DBE1C5'>";
+		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td style="text-align:right;"><strong>' . _T('asso:id') . "</strong></td>";
 		echo '<td><strong>'._T('asso:activite_entete_date')."</strong></td>";
 		echo '<td><strong>'._T('asso:activite_entete_heure')."</strong></td>";

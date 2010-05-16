@@ -60,7 +60,7 @@ function exec_association() {
 		echo debut_cadre_relief(true);
 		
 		echo '<table border="0" cellpadding="2" cellspacing="0" width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
-		echo '<tr style="background-color: #DBE1C5">';
+		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td><strong>' . _T('asso:nom') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:email') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:fonction') . "</strong></td>\n";

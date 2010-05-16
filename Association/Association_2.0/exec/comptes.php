@@ -53,15 +53,18 @@ function exec_comptes() {
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:blue">' . _T('asso:entrees') . '</strong></td>';
+			echo '<td><strong style="color:blue;">';
+			echo  _T('asso:entrees') . '</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:blue">' . _T('asso:sorties') . '</strong></td>';
+			echo '<td><strong style="color:blue;">';
+			echo _T('asso:sorties') . '</strong></td>';
 			echo '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color:#9F1C30">' . _T('asso:solde') . '</strong></td>';
+			echo '<td><strong style="color: #9F1C30;">';
+			echo _T('asso:solde') . '</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
@@ -116,17 +119,17 @@ function exec_comptes() {
 	if ($auteurs) {
 
 	$table = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
-	. '<tr style="background-color: #DBE1C5">'
-	. '<td style="text-align:right;"><strong>' . _T('asso:id')
+	. "<tr style='background-color: #DBE1C5;'>\n"
+	. '<td style="text-align: right;"><strong>' . _T('asso:id')
 	. "</strong></td>\n"
-	. '<td style="text-align:right;"><strong>' . _T('asso:date')
+	. '<td style="text-align: right;"><strong>' . _T('asso:date')
 	. "</strong></td>\n"
 	. '<td><strong>' . _T('asso:compte') . "</strong></td>\n"
 	. '<td><strong>' . _T('asso:justification') . "</strong></td>\n"
-	. '<td style="text-align:right;"><strong>' . _T('asso:montant')
+	. '<td style="text-align: right;"><strong>' . _T('asso:montant')
 	. "</strong></td>\n"
 	. '<td><strong>' . _T('asso:financier') . "</strong></td>\n"
-	. '<td colspan="3" style="text-align:center;"><strong>&nbsp;</strong></td>'
+	. '<td colspan="3" style="text-align: center;"><strong>&nbsp;</strong></td>'
 	. '</tr>'
 	. $auteurs
 	. "</table>\n";

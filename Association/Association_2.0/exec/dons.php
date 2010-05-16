@@ -63,7 +63,7 @@ function exec_dons() {
 
 		//TABLEAU
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr style="background-color: #DBE1C5">';
+		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td><strong>' . _T('asso:id') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:date') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:nom') . "</strong></td>\n";

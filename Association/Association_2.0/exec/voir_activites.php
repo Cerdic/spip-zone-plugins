@@ -44,8 +44,11 @@ function exec_voir_activites(){
 		// TOTAUX
 		$query = sql_select("sum(inscrits) AS inscrits, sum(montant) AS encaisse ", "spip_asso_activites", "id_evenement='$id_evenement' AND statut ='ok' " );
 		while ($data = sql_fetch($query)) {
-		  echo '<p><strong style="color:blue">'._T('asso:activite_liste_nombre_inscrits',array('total' => $data['inscrits'])).'</strong><br />';
-			echo '<strong style="color: #9F1C30">'._T('asso:activite_liste_total_participations',array('total' => number_format($data['encaisse'], 2, ',', ' '))).'</strong><br/></p>';	
+			echo '<p><strong style="color:blue;">';
+			echo _T('asso:activite_liste_nombre_inscrits',array('total' => $data['inscrits'])).'</strong><br />';
+			echo '<strong style="color: #9F1C30;">';
+			echo _T('asso:activite_liste_total_participations',array('total' => number_format($data['encaisse'], 2, ',', ' ')));
+			echo '</strong><br/></p>';	
 		}
 		echo fin_boite_info(true);
 		
@@ -81,7 +84,7 @@ function exec_voir_activites(){
 	//TABLEAU
 		echo '<form action="'.generer_url_ecrire('action_activites').'" method="post">';
 		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr style='background-color:#DBE1C5'>\n";
+		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<th><strong>'._T('asso:activite_entete_id')."</strong></th>\n";
 		echo '<th><strong>'._T('asso:activite_entete_date')."</strong></th>\n";
 		echo '<th><strong>'._T('asso:activite_entete_nom')."</strong></th>\n";

@@ -220,7 +220,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	else { $t = _T('asso:adherent_libelle_id_adherent');} 
 
 	$res = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
-	. "<tr style='background-color: #DBE1C5'>\n"
+	. "<tr style='background-color: #DBE1C5;'>\n"
 	. "<td><strong>$t</strong></td>\n"
 	. "<td><strong>"._T('asso:adherent_libelle_photo')."</strong></td>\n"
 	. "<td><strong>"._T('asso:adherent_libelle_nom')."</strong></td>\n"

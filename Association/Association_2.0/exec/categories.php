@@ -36,26 +36,26 @@ function exec_categories(){
 		echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."calculatrice.gif", false, "", _T('asso:toutes_categories_de_cotisations'));
 		
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr style='background-color: #DBE1C5'>";
+		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td><strong>' . _T('asso:id') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:categorie') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:libelle_complet') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:duree_mois') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:montant') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:commentaires') . "</strong></td>\n";
-		echo '<td colspan="2" style="text-align:center;"><strong>' . _T('asso:action') . "</strong></td>\n";
+		echo '<td colspan="2" style="text-align: center;"><strong>' . _T('asso:action') . "</strong></td>\n";
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_categories', '', "id_categorie" ) ;
 		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td  class="arial11 border1" style="text-align:right">'.$data['id_categorie']."</td>\n";
-			echo '<td  class="arial11 border1">'.$data['valeur']."</td>\n";
-			echo '<td  class="arial11 border1">'.$data['libelle']."</td>\n";
-			echo '<td  class="arial11 border1" style="text-align:right">'.$data['duree']."</td>\n";
-			echo '<td  class="arial11 border1" style="text-align:right">'.$data['cotisation']."</td>\n";
-			echo '<td  class="arial11 border1">'.$data['commentaires']."</td>\n";
-			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:bouton_supprimer'), 'poubelle-12.gif', 'action_categorie','&id='.$data['id_categorie']). "</td>\n";
-			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:bouton_modifier'), 'edit-12.gif', 'edit_categorie','&id='.$data['id_categorie']). "</td>\n";
+			echo '<td class="arial11 border1" style="text-align: right;">'.$data['id_categorie']."</td>\n";
+			echo '<td class="arial11 border1">'.$data['valeur']."</td>\n";
+			echo '<td class="arial11 border1">'.$data['libelle']."</td>\n";
+			echo '<td class="arial11 border1" style="text-align: right;">'.$data['duree']."</td>\n";
+			echo '<td class="arial11 border1" style="text-align: right;">'.$data['cotisation']."</td>\n";
+			echo '<td class="arial11 border1">'.$data['commentaires']."</td>\n";
+			echo '<td class="arial11 border1" style="text-align: center;">' . association_bouton(_T('asso:bouton_supprimer'), 'poubelle-12.gif', 'action_categorie','&id='.$data['id_categorie']). "</td>\n";
+			echo '<td class="arial11 border1" style="text-align: center;">' . association_bouton(_T('asso:bouton_modifier'), 'edit-12.gif', 'edit_categorie','&id='.$data['id_categorie']). "</td>\n";
 			echo'  </tr>';
 		}     
 		echo'</table>';

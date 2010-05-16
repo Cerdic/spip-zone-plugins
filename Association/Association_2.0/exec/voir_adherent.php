@@ -59,7 +59,7 @@ function exec_voir_adherent(){
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr style='background-color: #DBE1C5'>\n";
+		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_entete_date').'</strong></td>';
 		echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_paiement').'</strong></td>';
@@ -83,8 +83,8 @@ function exec_voir_adherent(){
 		// FICHE HISTORIQUE ACTIVITES	
 		if ($GLOBALS['asso_metas']['activites']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_activites').'</legend>';
-			echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-			echo '<tr style="background-color: #DBE1C5">';
+			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+			echo "<tr style='background-color: #DBE1C5;'>\n";
 			echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id')."</strong></td>\n";
 			echo '<td><strong>'._T('asso:adherent_entete_date')."</strong></td>\n";
 			echo '<td><strong>'._T('asso:adherent_entete_activite')."</strong></td>\n";
@@ -118,8 +118,8 @@ function exec_voir_adherent(){
 		// FICHE HISTORIQUE VENTES
 		if ($GLOBALS['asso_metas']['ventes']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>';
-			echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-			echo '<tr style="background-color: #DBE1C5">';
+			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+			echo "<tr style='background-color: #DBE1C5;'>\n";
 			echo '<td style="text-align:right;"><strong>'._T('asso:vente_entete_id')."</strong></td>\n";
 			echo '<td><strong>'._T('asso:vente_entete_date')."</strong></td>\n";
 			echo '<td><strong>'._T('asso:vente_entete_article')."</strong></td>\n";
@@ -153,7 +153,7 @@ function exec_voir_adherent(){
 		if ($GLOBALS['asso_metas']['prets']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_prets').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-			echo "\n<tr style='background-color: #DBE1C5'>";
+			echo "<tr style='background-color: #DBE1C5;'>\n";
 			echo '<td>&nbsp;</td>';
 			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_id')."</strong></td>\n";
 			echo '<td><strong>'._T('asso:pret_entete_article')."</strong></td>\n";

@@ -50,7 +50,8 @@ function exec_ventes(){
 			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color: #9F1C30">' . _T('asso:solde') . '</strong></td>';
+			echo '<td><strong style="color: #9F1C30;">';
+			echo  _T('asso:solde') . '</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
@@ -94,15 +95,15 @@ function exec_ventes(){
 			. "\n<td$class style='text-align:right'>".$q.'</td>'
 			. "\n<td$class style='text-align:right'>"
 			. association_nbrefr($q*$data['prix_vente']).'</td>'
-			. "\n<td$class style='text-align:center'>"
+			. "\n<td$class style='text-align:center;'>"
 			. association_bouton(_T('asso:mettre_a_jour_la_vente'), 'edit-12.gif', 'edit_vente',"agir=modifie&id=$id") . '</td>'
-			."\n<td$class style='text-align:center'><input name='delete[]' type='checkbox' value='$id' /></td>"
+			."\n<td$class style='text-align:center;'><input name='delete[]' type='checkbox' value='$id' /></td>"
 			.'</tr>';
 		}     
 	
 		if ($ventes) {
 			$corps =  "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
-			. '<tr style="backgroun-color: #DBE1C5">'
+			. "<tr style='background-color: #DBE1C5;'>\n"
 			. '<td style="text-align:right"><strong>'
 			. _T('asso:id') . "</strong></td>\n"
 			. '<td style="text-align:right"><strong>'
@@ -119,7 +120,7 @@ function exec_ventes(){
 			. _T('asso:qte') . "</strong></td>\n"
 			. '<td style="text-align:right"><strong>'
 			. _T('asso:montant') . "</strong></td>\n"
-			. '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>'
+			. '<td colspan="2" style="text-align:center;"><strong>&nbsp;</strong></td>'
 			. '</tr>'
 			. $ventes
 			. "</table>\n";

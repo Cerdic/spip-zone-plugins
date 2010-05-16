@@ -82,7 +82,7 @@ function exec_plan(){
 		
 		//Affichage de la table
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo '<tr style="background-color: #DBE1C5">';
+		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td><strong>' . _T('asso:classe') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:code') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:intitule') . "</strong></td>\n";
