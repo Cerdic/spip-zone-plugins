@@ -27,13 +27,15 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
+include_spip('inc/spiplistes_api_presentation');
 
 // adaptation de aide_index.php
 spiplistes_log(_SPIPLISTES_EXEC_AIDE." <<");
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function aide_spiplistes_erreur() {
 	echo minipres(_T('forum_titre_erreur'),
