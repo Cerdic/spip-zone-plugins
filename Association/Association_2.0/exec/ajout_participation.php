@@ -56,16 +56,9 @@ function exec_ajout_participation() {
 		. '<label for="montant"><strong>'._T('asso:activite_libelle_montant_inscription')." :</strong></label>\n"
 		. '<input name="montant"  type="text" value="'.$montant.'" id="montant" class="formo" />'
 		. '<label for="date_paiemen"><strong>'._T('asso:activite_libelle_date_paiement')." :</strong></label>\n"
-		. '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />';
-
-		$sel = '';
-		$sql = sql_select("code, intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
-		while ($banque = sql_fetch($sql)) {
-			$sel .= '<option value="'.$banque['code'].'"> '.$banque['intitule']."</option>\n";
-		}
-		if ($sel) $res .= '<label for="journal"><strong>'._T('asso:activite_libelle_mode_paiement')." :</strong></label>\n<select name='journal' id='journal' class='formo'>$sel</select>";
-
-		$res .= '<label for="statut"><strong>'._T('asso:activite_libelle_statut').' ok :</strong></label>'
+		. '<input name="date_paiement" value="'.date('Y-m-d').'" type="text" id="date_paiemen" class="formo" />'
+		  . association_mode_de_paiement('', _T('asso:prets_libelle_mode_paiement'))
+		. '<label for="statut"><strong>'._T('asso:activite_libelle_statut').' ok :</strong></label>'
 		. '<input name="statut"  type="checkbox" value="ok" id="statut" /><br />'
 		. '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires')." :</strong></label>\n"
 		. '<textarea rows="4" cols="80" name="commentaire" id="commentaire" class="formo">'.$commentaire.'</textarea>'

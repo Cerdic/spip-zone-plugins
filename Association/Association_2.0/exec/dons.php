@@ -21,10 +21,7 @@ function exec_dons() {
 		echo minipres();
 	} else {
 		
-		$url_ajout_don= generer_url_ecrire('edit_don','agir=ajouter');
-		
-		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
-		  $commencer_page = charger_fonction('commencer_page', 'inc');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
 		
@@ -35,9 +32,8 @@ function exec_dons() {
 		echo fin_boite_info(true);
 		
 		
-		$res=association_icone(_T('asso:ajouter_un_don'),  $url_ajout_don, 'ajout_don.png');
-		echo bloc_des_raccourcis($res);
-		
+		echo bloc_des_raccourcis(association_icone(_T('asso:ajouter_un_don'), generer_url_ecrire('edit_don','agir=ajouter'), 'ajout_don.png'));
+
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:tous_les_dons'));
@@ -86,7 +82,7 @@ function exec_dons() {
 			echo '<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['valeur']).'&nbsp;&euro;</td>';
 			echo '<td class="arial11 border1">'.propre($data['contrepartie'])."</td>\n";
 			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:supprimer_le_don'), 'poubelle-12.gif', 'action_dons', "id=$id_don") . "</td>\n";
-			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:mettre_a_jour_le_don'), 'edit-12.gif', 'edit_dons', "agir=modifier&id=$id_don") . "</td>\n";;
+			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:mettre_a_jour_le_don'), 'edit-12.gif', 'edit_don', "agir=modifier&id=$id_don") . "</td>\n";;
 			echo '</tr>';
 		}
 		echo '</table>';

@@ -71,19 +71,17 @@ function exec_edit_don(){
 		$res .= '<label for="id_adherent"><strong>' . _T('asso:nd_de_membre') . '</strong></label>';
 		$res .= '<input name="id_adherent" type="text" value="'.$id_adherent.'" id="id_adherent" class="formo" />';
 		$res .= '<label for="argent"><strong>' . _T('asso:don_financier_en_e__') . '</strong></label>';
-		$res .= '<input name="argent" type="text" value="'.$argent.'" id="argent" class="formo" />';
-
-		$res .= don_mode_de_paiemen($journal);
-		$res .= '<label for="colis"><strong>' . _T('asso:colis') . '&nbsp;:</strong></label>';
-		$res .= '<input name="colis" type="text" value="'.$colis.'" id="colis" class="formo" />';
-		$res .= '<label for="valeur"><strong>' . _T('asso:contre_valeur_en_e__') . '</strong></label>';
-		$res .= '<input name="valeur" type="text" value="'.$valeur.'" id="valeur" class="formo" />';
-		$res .= '<label for="contrepartie"><strong>Geste de l\'association :</strong></label>';
-		$res .= '<input name="contrepartie" type="text" size="50" value="'.$contrepartie.'" id="contrepartie" class="formo" />';
-		$res .= '<label for="commentaire"><strong>' . _T('asso:remarques') . '</strong></label>';
-		$res .= '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
-		
-		$res .= '<div style="float:right;"><input name="submit" type="submit" value="';
+		$res .= '<input name="argent" type="text" value="'.$argent.'" id="argent" class="formo" />'
+		. association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'))
+		. '<label for="colis"><strong>' . _T('asso:colis') . '&nbsp;:</strong></label>'
+		. '<input name="colis" type="text" value="'.$colis.'" id="colis" class="formo" />'
+		. '<label for="valeur"><strong>' . _T('asso:contre_valeur_en_e__') . '</strong></label>'
+		. '<input name="valeur" type="text" value="'.$valeur.'" id="valeur" class="formo" />'
+		. '<label for="contrepartie"><strong>Geste de l\'association :</strong></label>'
+		. '<input name="contrepartie" type="text" size="50" value="'.$contrepartie.'" id="contrepartie" class="formo" />'
+		. '<label for="commentaire"><strong>' . _T('asso:remarques') . '</strong></label>'
+		. '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>'
+		. '<div style="float:right;"><input name="submit" type="submit" value="';
 		if ( isset($action)) {$res .= _L($action);}
 		else {$res .= _T('asso:bouton_envoyer');}
 		$res .= '" class="fondo" /></div>';
@@ -95,19 +93,4 @@ function exec_edit_don(){
 	}
 }
 
-function don_mode_de_paiemen($journal)
-{
-	$res = '';
-	$sql = sql_select('*', 'spip_asso_plan', "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), "",  "code") ;
-	while ($banque = sql_fetch($sql)) {
-		$res .= '<option value="'.$banque['code'].'" ';
-		if ($journal==$banque['code']) { $res .= ' selected="selected"'; }
-		$res .= '>'.$banque['intitule'].'</option>';
-	}
-	if (!$res) return '';
-	return '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').'&nbsp;:</strong></label>'
-	. '<select name="journal" type="text" id="journal" class="formo" />'
-	. $res
-	.'</select>';
-}
 ?>

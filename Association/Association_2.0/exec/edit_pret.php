@@ -118,26 +118,9 @@ function exec_edit_pret(){
 		. '<label for="montant"><strong>'
 		. _T('asso:prets_libelle_montant')." :</strong></label>\n"
 		. '<input name="montant" type="text" value="'
-		. $montant.'" id="montant" class="formo" />';
-
-		$sel = '';
-		$sql = sql_select("*", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
-		while ($banque = sql_fetch($sql)) {
-			$c = $banque['code'];
-			$sel .= "<option value='$c'" .
-			  (($journal==$c) ? ' selected="selected"' : '')
-			  . '>' . $banque['intitule'] ."</option>\n";
-		}
-
-		if ($sel) {
-			$res .= '<label for="journal"><strong>'
-			  . _T('asso:prets_libelle_mode_paiement')." :</strong></label>\n"
-			  . '<select name="journal" id="journal" class="formo">'
-			  . $sel
-			  . "</select>\n";
-		}
-
-		$res .= '<label for="commentaire_retour"><strong>'
+		. $montant.'" id="montant" class="formo" />'
+		. association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'))
+		. '<label for="commentaire_retour"><strong>'
 		. _T('asso:prets_libelle_commentaires')." :</strong></label>\n"
 		. '<textarea name="commentaire_retour" id="commentaire_retour" class="formo">'
 		. $commentaire_retour."</textarea>\n"

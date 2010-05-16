@@ -86,17 +86,7 @@ function exec_edit_vente() {
 		echo '<input name="quantite"  type="text" value="'.$quantite.'" id="quantite" class="formo" />';
 		echo '<label for="prix_vente"><strong>' . _T('asso:prix_de_vente_en_e__') . '</strong></label>';
 		echo '<input name="prix_vente"  type="text" value="'.$prix_vente.'" id="prix_vente" class="formo" />';
-
-		$res = '';
-		$sql = sql_select("*", "spip_asso_plan ", "classe=". sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
-		while ($banque = sql_fetch($sql)) {
-			$res .= '<option value="'.$banque['code'].'" ';
-			if ($journal==$banque['code']) { $res .= ' selected="selected"'; }
-			$res .= '>'.$banque['intitule'].'</option>';
-		}
-
-		if ($res) echo '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').'&nbsp;:</strong></label><select name="journal" id="journal" class="formo">', $res, "</select>\n";
-
+		echo association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'));
 		echo '<label for="don"><strong>' . _T('asso:don') . '</strong></label>';
 		echo '<input name="don" type="text" value="'.$don.'" id="don" class="formo" />';
 		echo '<label for="date_envoi"><strong>' . _T('asso:envoye_le_aaaa_mm_jj') . '</strong></label>';

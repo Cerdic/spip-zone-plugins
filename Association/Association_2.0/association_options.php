@@ -82,6 +82,26 @@ function association_ajouterBoutons($boutons_admin) {
 	return $boutons_admin;
 }
 	
+
+function association_mode_de_paiement($label)
+{
+	$sel = '';
+	$sql = sql_select("code,intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
+	while ($banque = sql_fetch($sql)) {
+		$c = $banque['code'];
+		$sel .= "<option value='$c'"
+		. (($journal==$c) ? ' selected="selected"' : '')
+		. '>' . $banque['intitule'] ."</option>\n";
+	}
+
+	return '<label for="journal"><strong>'
+	  . $label
+	  . "&nbsp;:</strong></label>\n"
+	  . (!$sel 
+	      ? "<input name='journal' id='journal' class='formo' />"
+	      : "<select name='journal' id='journal' class='formo'>$sel</select>\n");
+}
+
 //Conversion de date
 function association_datefr($date) { 
 		$split = explode('-',$date); 
