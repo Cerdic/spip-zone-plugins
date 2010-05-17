@@ -1,0 +1,6 @@
+<BOUCLE_resultats(JEUX_RESULTATS){id_auteur}{0,1}>
+[(#VAL{1}|debut_boite_info)]
+<BOUCLE_a(AUTEURS){tous}{id_auteur}><strong>#NOM</strong><br/></BOUCLE_a>
+<:jeux:voir_ses_resultats|icone_horizontale{#URL_ECRIRE{jeux_resultats_auteur,id_auteur=#ID_AUTEUR},#CHEMIN{img/jeu-laurier.png},'',0}:>
+[(#VAL{1}|fin_boite_info)]
+</BOUCLE_resultats>

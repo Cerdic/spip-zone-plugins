@@ -68,9 +68,7 @@ function boite_info_jeux_edit(){
 
 // boite pour le pipeline affiche_droite
 function boite_infos_spip_auteur($id_auteur) {
-	return debut_boite_info(true)
-	. icone_horizontale(_T('jeux:voir_ses_resultats'),generer_url_ecrire('jeux_resultats_auteur',"id_auteur=$id_auteur"),find_in_path('img/jeu-laurier.png'),'',false)
-	. fin_boite_info(true);
+	return recuperer_fond('fonds/resultats_auteur_lien', array('id_auteur' => $id_auteur));
 }	
 
 ?>
