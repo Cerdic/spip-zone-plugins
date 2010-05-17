@@ -19,108 +19,59 @@ include_spip ('inc/mail');
 
 function exec_action_relances(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
+	include_spip('inc/autoriser');
+	if (!autoriser('configurer')) {
 			include_spip('inc/minipres');
 			echo minipres();
-		} else {
+	} else {
 		
-		$url_action_relances = generer_url_ecrire('action_relances','agir=send');
 		$url_retour=$_POST['url_retour'];
 		
 		//On récupère les données globales
-		$action=$_REQUEST['agir'];
+
 		$sujet=$_POST['sujet'];
 		$message=$_POST['message'] ;
-		$statut=$_POST['statut'];
 		$email_tab=(isset($_POST["email"])) ? $_POST["email"]:array();
-		$statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array();
 		$id_tab=(isset($_POST["id"])) ? $_POST["id"]:array();
 		$count=count ($email_tab);
-		
-		// CONFIRMATION
-		if ($action=="confirm") {
 
-			$commencer_page = charger_fonction('commencer_page', 'inc');
-			echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+		association_onglets();
+		echo debut_gauche("",true);
+		echo debut_boite_info(true);
+		echo association_date_du_jour();	
+		echo fin_boite_info(true);
+		echo association_retour();
+		echo debut_droite("",true);
 			
-			association_onglets();
-			
-			echo debut_gauche("",true);
-			
-			echo debut_boite_info(true);
-			echo association_date_du_jour();	
-			echo fin_boite_info(true);
-			
-			echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  $url_retour, "retour-24.png"));
-
-			echo debut_droite("",true);
-			
-			debut_cadre_relief(  "", false, "", $titre = _T('asso:relance_de_cotisations'));
-			echo '<p><strong>', _T('asso:vous_vous_appretez_a_envoyer') . " $count ";
-			if ($count==1)
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:relance_de_cotisations'));
+		echo '<p><strong>', _T('asso:vous_vous_appretez_a_envoyer') . " $count ";
+		if ($count==1)
 			  { echo _T('asso:relance');}
-			else
+		else
 			  { echo _T('asso:relances');}
-			echo '</strong></p>';
-			echo '<p>'.$sujet.'</p>';
-			echo '<fieldset>';
-			echo nl2br($message);
-			echo '</fieldset>';
-			
-			echo '<form method="post" action="'.$url_action_relances.'">';
-			for ( $i=0 ; $i < $count ; $i++ ) {
-				echo '<input name="id[]" type="hidden" value="'.intval($id_tab[$i]).'" />';
-				echo '<input name="statut[]" type="hidden" value="'.$statut_tab[$i].'" />';
-				echo '<input name="email[]" type="hidden" value="'.$email_tab[$i].'">';
-			}
-			echo '<input name="sujet" type="hidden" value="'.$sujet.'" />';
-			echo '<input name="message" type="hidden" value="'.$message.'" />';
-			echo '<input name="agir" type="hidden" value="send" />';
-			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'" />';
-			echo '<div style="float:right;"><input type="submit" value="'._T('asso:bouton_envoyer').'" class="fondo" /></div>';
-			echo '</form>';	
-			//remettre le champ 0 à  1 et réactualiser la date
-			//spip_query("UPDATE spip_auteurs_elargis SET regle_le='relance',date_jour=NOW() WHERE id_ad=$id");	
-			
-			fin_cadre_relief();  
-			echo fin_gauche(),fin_page(); 
-		}
+		echo '</strong></p>';
+		echo '<p>'.$sujet.'</p>';
+		echo '<fieldset>';
+		echo nl2br($message);
+		echo '</fieldset>';
 		
-		//ENVOI
-		elseif ($action=="send") {
-			//On prépare le mail et on envoi! On peut modifier le $headers à  sa guise
-			$nomasso=$GLOBALS['asso_metas']['nom'];
-			$adresse=$GLOBALS['asso_metas']['email'];
-			$expediteur=$nomasso.'<'.$adresse.'>'; 
-			$expediteur=$nomasso.'<'.$adresse.'>';      					//expéditeur Association
-			//$entetes .= "X-Mailer: PHP/" . phpversion();         			// mailer
-			//$entetes .= "X-Sender: < ".$adresse.">\n";
-			//$entetes .= "X-Priority: 1\n";                					// Message urgent ! 
-			//$entetes .= "X-MSMail-Priority: High\n";        				// définition de la priorité
-			//$entetes .= "Return-Path: <".$adresse.">\n"; 									// En cas d' erreurs 
-			//$entetes .= "Errors-To: < ".$adresse.">\n";    									// En cas d' erreurs 
-			//$entetes .= "cc:  \n"; 													// envoi en copie à
-			//$entetes .= "bcc: \n";          												// envoi en copie cachée à
-			
-			//On envoit le mail aux destinataires sélectionnés et on change le statut de relance
-			
-			for ( $i=0 ; $i < $count ; $i++ ) {
-				$email = $email_tab[$i];
-				$statut = $statut_tab[$i];
-				$id = intval($id_tab[$i]);
-				
-				if ($id) {
-					envoyer_mail ( $email, $sujet, $message, $expediteur, "");
-					if ($statut=="echu"){
-					  sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
-						array("statut_interne"=> 'relance'),
-						"id_auteur=$id");
-					}
-				}
-			}
-			header ('location:'.$url_retour);
+		$res = '';
+
+		for ( $i=0 ; $i < $count ; $i++ ) {
+			$res .= '<input name="id[]" type="hidden" value="'.intval($id_tab[$i]).'" />';
+			$res .= '<input name="statut[]" type="hidden" value="'.$statut_tab[$i].'" />';
+			$res .= '<input name="email[]" type="hidden" value="'.$email_tab[$i].'">';
 		}
-	} 
-}
+		$res .= '<input name="sujet" type="hidden" value="'.$sujet.'" />';
+		$res .= '<input name="message" type="hidden" value="'.$message.'" />';
+		$res .= '<div style="float:right;"><input type="submit" value="'._T('asso:bouton_envoyer').'" class="fondo" /></div>';
+
+		echo redirige_action_post('modifier_relances', $count, 'adherents', '', "\n<div>$res</div>\n");
+
+		fin_cadre_relief();  
+		echo fin_gauche(),fin_page(); 
+	}
+} 
 ?>

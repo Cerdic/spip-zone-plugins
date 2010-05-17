@@ -80,9 +80,7 @@ function exec_edit_relances(){
 			. '<td><strong>' . _T('asso:envoi') . "</strong></td>\n"
 			. '</tr>'
 			.  $corps 
-			. '</table>'
-			. '<input name="url_retour" type="hidden" value="'.$url_retour.'" />'
-			. '<input name="agir" type="hidden" value="confirm" />';
+			. '</table>';
 
 		$bouton = isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer');
 
