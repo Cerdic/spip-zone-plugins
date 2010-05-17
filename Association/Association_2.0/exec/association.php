@@ -49,7 +49,7 @@ function exec_association() {
 		echo $GLOBALS['asso_metas']['siret']."<br />\n";
 		echo $GLOBALS['asso_metas']['declaration']."<br />\n";
 		echo $GLOBALS['asso_metas']['prefet']."<br />\n";
-		fin_cadre_formulaire(true);
+		echo fin_cadre_formulaire(true);
 		
 		/* Provisoirement supprimé en attendant 1.9.3*/
 		
@@ -57,9 +57,9 @@ function exec_association() {
 		echo gros_titre(_T('asso:votre_equipe'),'',false);		
 		echo '<br />';	
 		
-		echo debut_cadre_relief(true);
+		echo debut_cadre_relief('', true);
 		
-		echo '<table border="0" cellpadding="2" cellspacing="0" width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
+		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td><strong>' . _T('asso:nom') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:email') . "</strong></td>\n";
@@ -72,7 +72,7 @@ function exec_association() {
     {	
 			$id_auteur=$data['id_auteur'];
 			echo "\n<tr style='background-color: #EEEEEE;'>\n";
-			echo '<td class="arial11 border1"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur"). "\"\ntitle=\"" . _L('Modifier l\'administrateur') . '">'.$data['nom']. "</a></td>\n";
+			echo '<td class="arial11 border1"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur"). "\"\ntitle=\"" . _L('Modifier l\'administrateur') . '">'.htmlspecialchars($data['nom']). "</a></td>\n";
 			echo '<td class="arial1 border1"><a href="mailto:'.$data['email']. "\"\ntitle=\"" . _L('Envoyer un email') . "\">email</a></td>\n";
 			echo '<td class="arial1 border1">'.$data['fonction'].'</td>';
 			echo '<td class="arial1 border1">'.$data['mobile'].'</td>';
@@ -81,7 +81,7 @@ function exec_association() {
 		}
 		echo '</table>';
 		
-		fin_cadre_relief();	
+		echo fin_cadre_relief(true);	
 		echo fin_gauche(), fin_page();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"

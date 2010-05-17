@@ -53,7 +53,7 @@ function exec_edit_adherent_args($id_auteur)
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
+		echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
 		echo '<span class="spip_xx-large">';
 		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
 		echo '</span></div>';
@@ -80,36 +80,45 @@ function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_inte
 			$res .= '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
 	}
 
-	$res .= '<label for="categorie"><strong>'
-	. _T('asso:adherent_libelle_categorie').' :</strong></label>';
-
-	$res .= '<select name="categorie" id="categorie" class="formo" />';
-
+	$sel = '';
 	$sql = sql_select('*', 'spip_asso_categories', '','', "id_categorie") ;
 	while ($var = sql_fetch($sql)) {
-			$res .= '<option value="'.$var['id_categorie'].'"';
-			if($categorie== $var['id_categorie']){$res .= ' selected="selected"';}
-			$res .= '> '.$var['libelle']."</option>\n";
+			$sel .= '<option value="'.$var['id_categorie'].'"';
+			if($categorie== $var['id_categorie']){$sel .= ' selected="selected"';}
+			$sel .= '> '.$var['libelle']."</option>\n";
 	}
-	$res .= '</select>';
+
+	if ($sel) {
+		$res .= '<label for="categorie"><strong>'
+		. _T('asso:adherent_libelle_categorie').' :</strong></label>'
+		. '<select name="categorie" id="categorie" class="formo">'
+		. $sel
+		. "</select>\n";
+	}
 
 	$res .= '<label for="validite"><strong>'
 	. _T('asso:adherent_libelle_validite')
 	. ' :</strong></label>'
 	. '<input name="validite" value="'
 	. $validite
-	. '" type="text" id="validite" class="formo" />'
-	. '<label for="statut_interne"><strong>'
-	. _T('asso:adherent_libelle_statut')
-	. ' :</strong></label>';
+	. '" type="text" id="validite" class="formo" />';
 
-	$res .= '<select name ="statut_interne" id="statut_interne" class="formo" />';
+	$sel = '';
 	foreach ($GLOBALS['association_liste_des_statuts2'] as $var) {
-		$res .= '<option value="'.$var.'"';
-		if ($statut_interne==$var) {$res .= ' selected="selected"';}
-		$res .= '>'._T('asso:adherent_entete_statut_'.$var)."</option>\n";
+		$sel .= '<option value="'.$var.'"';
+		if ($statut_interne==$var) {$sel .= ' selected="selected"';}
+		$sel .= '>'._T('asso:adherent_entete_statut_'.$var)."</option>\n";
 	}
-	$res .= '</select>';
+
+	if ($sel) {
+
+		$res .= '<label for="statut_interne"><strong>'
+		  . _T('asso:adherent_libelle_statut')
+		  . ' :</strong></label>'
+		  . '<select name ="statut_interne" id="statut_interne" class="formo">'
+		  . $sel
+		  . '</select>';
+	}
 
 	$res .= '<label for="commentaire"><strong>'
 	. _T('asso:adherent_libelle_remarques').' :</strong></label>'

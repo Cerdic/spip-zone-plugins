@@ -24,7 +24,6 @@ function exec_ressources(){
 		
 		$url_ressources = generer_url_ecrire('ressources');
 		$url_ajout_ressource=generer_url_ecrire('edit_ressource');
-		$url_prets=generer_url_ecrire('prets');
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:ressources_titre_liste_ressources')) ;
@@ -70,10 +69,10 @@ function exec_ressources(){
 			echo '<td class="arial11 border1" style="text-align:center;">'.number_format($data['pu'], 2, ',', ' ')."</td>\n";
 			
 			echo '<td class="arial11 border1"></td>';
-			echo '<td class="arial11 border1"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'voir-12.png" title="'._T('asso:prets_nav_gerer').'" alt=" " /></a></td>';
+			echo '<td class="arial11 border1">', association_bouton(_T('asso:prets_nav_gerer'), 'voir-12.png', generer_url_ecrire('prets', 'id='.$data['id_ressource'])), "</td>\n";
 
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'. generer_url_ecrire('action_ressources', 'id='.$data['id_ressource']) . '"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'" alt=" " /></a></td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.generer_url_ecrire('edit_ressource', 'id='.$data['id_ressource']).'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="'._T('asso:ressources_nav_editer').'" alt=" " /></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:ressources_nav_supprimer'), 'poubelle-12.png', generer_url_ecrire('action_ressources', 'id='.$data['id_ressource'])), "</td>\n";
+			echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:ressources_nav_editer'), 'edit-12.png', generer_url_ecrire('edit_ressource', 'id='.$data['id_ressource'])), "</td>\n";
 			echo'  </tr>';
 		}     
 		echo'</table>';
