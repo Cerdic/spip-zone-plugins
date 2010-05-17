@@ -1,9 +1,13 @@
-<h1 class="grostitre"><:clevermail:administration:></h1>
+<!--#hierarchie-->
+<ul id="chemin">
+  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+</ul>
+<!--/#hierarchie-->
 <BOUCLE_post(CM_POSTS){pst_id=#ENV{pst_id}}>
   <BOUCLE_list(CM_LISTS){lst_id}>
-    <h2>Liste « #LST_NAME »</h2>
+    <h1>Liste « #LST_NAME »</h1>
   </BOUCLE_list>
-  <h3><:clevermail:modifier_message:></h3>
+  <h2><:clevermail:modifier_message:></h2>
   [(#REM)<div class="ajax">]
     #FORMULAIRE_CLEVERMAIL_POST_EDIT{#ENV{pst_id}}
   [(#REM)</div>]

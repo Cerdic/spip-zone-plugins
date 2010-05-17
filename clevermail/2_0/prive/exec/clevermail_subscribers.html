@@ -1,5 +1,9 @@
-<h1 class="grostitre"><:clevermail:administration:></h1>
-[(#REM) <h2>#LST_NAME</a></h2> ? ]
+<!--#hierarchie-->
+<ul id="chemin">
+  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+</ul>
+<!--/#hierarchie-->
+<h1><:clevermail:abonnes_majuscule:></h1>
 <form action="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{filtre_email,#ENV{filtre_email}}|parametre_url{lst_id,#ENV{lst_id}}|parametre_url{ok,#ENV{ok}})]" method="get">
   <input type="hidden" id="exec" name="exec" value="clevermail_subscribers" />
  	<label for="filtre_email">Filtre sur l'adresse e-mail : </label>

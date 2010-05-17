@@ -1,9 +1,13 @@
-<h1 class="grostitre"><:clevermail:administration:></h1>
+<!--#hierarchie-->
+<ul id="chemin">
+  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+</ul>
+<!--/#hierarchie-->
 [(#ENV{lst_id,-1}|=={-1}|oui)
-  <h2><:clevermail:creer_lettre:></h2>
+  <h1><:clevermail:creer_lettre:></h1>
 ]
 [(#ENV{lst_id,-1}|=={-1}|non)
-  <h2><:clevermail:editer_lettre:></h2>
+  <h1><:clevermail:editer_lettre:></h1>
 ]
 [(#REM)<div class="ajax">]
   #FORMULAIRE_CLEVERMAIL_LIST_EDIT{#ENV{lst_id,-1}}
