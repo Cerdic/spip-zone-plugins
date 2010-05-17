@@ -27,6 +27,9 @@ function agenda_declarer_tables_interfaces($interface){
 		
 	$interface['table_date']['evenements'] = 'date_debut';
 
+	// des titres pour certains jeux d’URL (propre, arborescent...)
+	$interface['table_titre']['evenements']  = 'titre, "" AS lang';	
+	
 	return $interface;
 }
 
