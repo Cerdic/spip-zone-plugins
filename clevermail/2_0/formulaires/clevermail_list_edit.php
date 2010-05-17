@@ -14,7 +14,7 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 		$valeurs['lst_auto_week_days'] = explode(',', $valeurs['lst_auto_week_days']);
 	} else {
     $cm_mail_admin = sql_getfetsel('set_value', 'spip_cm_settings', 'set_name="CM_MAIL_ADMIN"');
-    	if (defined('_CLEVERMAIL_NOUVEAUTES_HTML_OPTION')) {
+  	if (defined('_CLEVERMAIL_NOUVEAUTES_HTML_OPTION')) {
 			if (_CLEVERMAIL_DISTANT) {
 				$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML,_CLEVERMAIL_NOUVEAUTES_HTML_OPTION);
 			} else {

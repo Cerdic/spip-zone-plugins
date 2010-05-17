@@ -37,7 +37,7 @@
               #SET{mode,email}
               <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_email:></option>
               #SET{mode,mod}
-              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_mod:></option>
+              <!-- pas encore géré <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_mod:></option> -->
               #SET{mode,closed}
               <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_closed:></option>
             </select>
