@@ -16,7 +16,8 @@ Insere des devinettes ou charades dans vos articles !
 separateurs obligatoires : [devinette] ou [charade]
 separateurs optionnels   : [reponse], [titre], [texte], [config]
 parametres de configurations par defaut :
-	reponse=oui	// Afficher la reponse ?
+	reponse=oui	// afficher la reponse ?
+	envers=oui // retourner la reponse ?
 	taille=10	// taille de la police utilisee
 attention : module GD obligatoire pour obtenir ses reponses
 affichees a l'envers.
@@ -64,7 +65,8 @@ function devinettes_reponse($texte, $id) {
  if (!jeux_config('reponse')) return '';
  include_spip('inc/filtrer');
  $image = image_typo($texte, 'taille='.jeux_config('taille'));
- $image = filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image));
+ if (jeux_config('envers'))
+ 	$image = filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image));
  if (function_exists('image_graver')) $image = filtrer('image_graver', $image);
  $image = inserer_attribut($image, 'align', 'right', false, true);
  $image = aligner_droite(inserer_attribut($image, 'class', 'no_image_filtrer', false, true));
@@ -75,7 +77,8 @@ function devinettes_reponse($texte, $id) {
 // configuration par defaut : jeu_{mon_jeu}_init()
 function jeux_devinettes_init() {
 	return "
-		reponse=oui	// Afficher la reponse ?
+		reponse=oui	// afficher la reponse ?
+		envers=oui // retourner la reponse ?
 		taille=10	// taille de la police utilisee
 	";
 }
