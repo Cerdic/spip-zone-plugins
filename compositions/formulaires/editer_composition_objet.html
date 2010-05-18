@@ -21,7 +21,7 @@
 	  	#SET{name,composition}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	  	[(#AUTORISER{webmestre}|ou{#ENV{composition_lock}|non}|oui)
 	    [<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<p>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</p>
+	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				(#INCLURE{fond=formulaires/inc-selecteur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions})
 	    </li>#SET{lockable,' '}]
