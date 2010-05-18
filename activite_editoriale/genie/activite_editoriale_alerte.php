@@ -5,6 +5,7 @@ function genie_activite_editoriale_alerte_dist() {
         $config_champ = lire_config('activite_editoriale/champ','maj_rubrique');
     
     }
+    
     'activite_tester_'.$config_champ();
 
 
@@ -55,7 +56,7 @@ function activite_editoriale_envoyer_mail($list){
     $subject = _T('activite_editoriale:rubrique_doit_maj');
     include_spip('activite_editoriale_fonctions');
     $url = $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=naviguer&id_rubrique='.$list['id_rubrique'];
-    $body = _T('activite_editoriale:rubrique_pas_maj',array('titre'=>$list['titre'],'jour'=>age_rubrique($list['maj'])))."\n\n";
+    $body = _T('activite_editoriale:rubrique_pas_maj',array('titre'=>$list['titre'],'jours'=>age_rubrique($list['maj'])))."\n\n";
     $body = $body._T('activite_editoriale:gestionnaire')."\n\n";
     $body = $body.$url;
     if ($auteurLists = sql_select("*", "spip_auteurs", "id_auteur in (".$list['extras_identifiants'].")")) {
