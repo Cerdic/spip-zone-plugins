@@ -21,7 +21,6 @@ function exec_edit_activite(){
 		echo minipres();
 	} else {
 		
-		$url_action_activites = generer_url_ecrire('action_activites');
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
 		$action=$_REQUEST['agir'];
@@ -75,7 +74,7 @@ function exec_edit_activite(){
 		echo debut_droite("",true);
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_mise_a_jour_inscriptions'));
 		
-		echo '<form method="post" action="'.$url_action_activites.'"><div>';
+		echo '<form method="post" action="'. generer_url_ecrire('action_activites').'"><div>';
 		echo '<label for="date"><strong>'._T('asso:activite_libelle_date')." (AAAA-MM-JJ) :</strong></label>\n";
 		echo '<input name="date" type="text" value="'.$date.'" id="date" class="formo" />';
 		echo '<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet')." :</strong></label>\n";
@@ -108,7 +107,7 @@ function exec_edit_activite(){
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'" />';
 		
 		echo '<div style="float:right;">';
-		echo '<input name="submit" type="submit" value="';
+		echo '<input type="submit" value="';
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';

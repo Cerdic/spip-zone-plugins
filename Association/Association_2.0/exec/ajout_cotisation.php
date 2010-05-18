@@ -45,10 +45,16 @@ function ajout_cotisation($id_auteur)
 		$prenom=$data['prenom'];
 		$categorie=$data['categorie'];
 		$validite=$data['validite'];
-		$split = explode("-",$validite); 
-		$annee = $split[0]; 
-		$mois = $split[1]; 
-		$jour = $split[2]; 
+		list($annee, $mois, $jour) = explode("-",$validite); 
+
+		$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));
+
+		if ($jour==0 OR $mois==0 OR $annee==0)
+		  list($annee, $mois, $jour) = explode("-",date('Y-m-d'));
+		$mois+=$categorie['duree'];
+		$validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
+
+		$justification = _L('Cotisation') . ' ' . $nom . ' ' . $prenom;
 
 		echo debut_boite_info(true);
 		echo '<strong>'.$nom_famille.' '.$prenom.'</strong><br />';
@@ -60,9 +66,6 @@ function ajout_cotisation($id_auteur)
 		$res = '<label for="date"><strong>'._T('asso:date_du_paiement_AAAA-MM-JJ').' :</strong></label>';
 		$res .= '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
 		$res .= '<label for="montant"><strong>'._T('asso:montant_paye_en_euros').' :</strong></label>';
-		$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));
-		$mois+=$categorie['duree'];
-		$validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
 		$res .= '<input name="montant" type="text" value="'.$categorie['cotisation'].'" id="montant" class="formo" />';
 		$res .= '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').'&nbsp;:</strong></label>';
 		$res .= '<select name="journal" type="text" id="journal" class="formo" />';
@@ -75,7 +78,7 @@ function ajout_cotisation($id_auteur)
 		$res .= '<label for="validite"><strong>'._T('asso:Validite').' :</strong></label>';
 		$res .= '<input name="validite" type="text" value="'.$validite.'" id="validite" class="formo" />';
 		$res .= '<label for="justification"><strong>'._T('asso:Justification').' :</strong></label>';
-		$res .= '<input name="justification" type="text" value="Cotisation '.$prenom.' '.$nom_famille.'" id="justification" class="formo" />';
+		$res .= '<input name="justification" type="text" value="'. htmlspecialchars($justification) . '" id="justification" class="formo" />';
 		
 		$res .= '<div style="float:right;"><input name="submit" type="submit" value="';
 		if ( isset($action)) {$res .= _T('asso:bouton_'.$action);}
