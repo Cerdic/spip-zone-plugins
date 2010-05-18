@@ -4,7 +4,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include(dirname(__FILE__).'/../spiptospip_fonctions.php');
+include_once(dirname(__FILE__).'/../spiptospip_fonctions.php');
 include_spip('inc/presentation');
 
 //------------------------------- 
