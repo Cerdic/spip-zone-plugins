@@ -6,11 +6,20 @@ function genie_activite_editoriale_alerte_dist() {
     
     }
     
-    'activite_tester_'.$config_champ();
-
-
+    switch ($config_champ){
+        case 'maj_rubrique':
+            activite_tester_maj_rubrique();
+            break;
+        case 'date_modif_branche':
+            activite_tester_date_modif_branche();
+            break;
+        case 'date_modif_rubrique':
+            activite_tester_date_modif_rubrique();
+            break;
+        }    
 	return 0;
 }
+
 function activite_tester_maj_rubrique(){
     if ($rubLists = sql_select("*", "spip_rubriques", "`extras_delai` != '' and TO_DAYS(NOW()) - TO_DAYS(maj) >= `extras_delai`")) {
 		while($list = sql_fetch($rubLists)) {
