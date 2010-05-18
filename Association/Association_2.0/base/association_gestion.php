@@ -84,6 +84,7 @@ function association_upgrade($meta, $courante, $table='meta')
 }
 
 function association_maj_0($version, $meta, $table){
+	global $association_tables_principales;
 	foreach($association_tables_principales as $table => $desc)
 		sql_create($table, $desc['field'], $desc['key'], true, false);
 	ecrire_meta($meta, $version, $table);
