@@ -92,10 +92,10 @@ function labels_adherents($indexation, $statut_interne)
 	//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
 
 	$res = '';
+	if ($indexation !=="id_asso") $indexation = 'id_auteur'; // superflu ?
 	while ($data = sql_fetch($query))  {
-		$id_adherent=$data['id_adherent'];
 		$sexe=$data['sexe'];
-			
+		$id = $data[$indexation];
 		switch($data['statut_interne']) {
 			case "echu": $class= "impair"; break;
 			case "ok": $class="valide"; break;
@@ -105,8 +105,7 @@ function labels_adherents($indexation, $statut_interne)
 			
 		$res .= '<tr> ';
 		$res .= '<td style="text-align:right;vertical-align:top;" class="'.$class. ' border1">';
-		if ($indexation=="id_asso") { $res .= $data["id_asso"];}
-		else { $res .= $id_adherent;}
+		$res .= $id;
 		$res .= '</td>';
 		$res .= '<td style="vertical-align:top;" class="'.$class. ' border1">';
 		if ($sexe=='H'){ $res .= 'M.'; }
@@ -115,7 +114,7 @@ function labels_adherents($indexation, $statut_interne)
 		$res .= ' '.$data['prenom'].' '.$data["nom_famille"].'</td>';
 		$res .= '<td style="vertical-align:top;" class="'.$class. ' border1">'.$data['adresse'].'<br />'.$data['code_postal'].' '.$data['ville'].'</td>';
 		$res .= '<td style="text-align:center;vertical-align:top;" class="'.$class. ' border1">';
-		$res .= '<input name="label[]" type="checkbox" value="'.$data['id'].'" checked="checked" />';
+		$res .= '<input name="label[]" type="checkbox" value="'.$id.'" checked="checked" />';
 		$res .= '</td>';
 		$res .= "</tr>\n";
 	}

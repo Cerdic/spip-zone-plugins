@@ -35,7 +35,6 @@ function exec_edit_adherent_args($id_auteur)
 
 		$indexation = $GLOBALS['asso_metas']['indexation'];
 
-		$id_adherent=$data['id_adherent'];
 		$id_asso=$data['id_asso'];
 		$nom_famille=$data['nom_famille'];
 		$prenom=$data['prenom'];
@@ -122,12 +121,9 @@ function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_inte
 
 	$res .= '<label for="commentaire"><strong>'
 	. _T('asso:adherent_libelle_remarques').' :</strong></label>'
-	. '<textarea name="commentaire" id="commentaire" class="formo" />'
+	. '<textarea name="commentaire" id="commentaire" class="formo">'
 	. $commentaire
 	. '</textarea>'
-	. '<input name="id" type="hidden" value="'
-	. $id_auteur
-	. '" >'
 	. "\n<div style='float:right;'>"
 	. '<input type="submit" value="'
 	.  _T('asso:bouton_modifie')

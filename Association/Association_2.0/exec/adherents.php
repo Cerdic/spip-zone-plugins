@@ -47,8 +47,7 @@ function exec_adherents() {
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // ancien membre
 		foreach ($membres as $statut) {
-			$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne='$statut'");
-			$nombre=sql_count($query);
+			$nombre=sql_countsel(_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne='$statut'");
 			echo '<div style="float:right;text_align:right">'.$nombre.'</div>';
 			echo '<div>'._T('asso:adherent_liste_nombre_'.$statut).'</div>';
 			$nombre_total += $nombre;
@@ -235,8 +234,8 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	
 	//SOUS-PAGINATION
 
-	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, $critere);
-	$nombre_selection=sql_count($query);
+	$nombre_selection=sql_countsel(_ASSOCIATION_AUTEURS_ELARGIS, $critere);
+
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 	
 	if ($pages != 1)	{

@@ -19,7 +19,7 @@ if (!defined('_ASSOCIATION_INSCRIPTION2'))
 
 define('_ASSOCIATION_AUTEURS_ELARGIS', 
        @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1") ? 
-       'spip_auteurs_elargis' : 'spip_asso_adherents');
+       'spip_auteurs_elargis' : 'spip_asso_membres');
 
 // Le premier element indique un ancien membre
 $GLOBALS['association_liste_des_statuts'] =
@@ -132,15 +132,6 @@ function association_header_prive($flux){
 		
 	}
 
-// Gestion de l'absence eventuelle du plugin Inscription2
-
-if (!defined('_ASSOCIATION_INSCRIPTION2'))
-    define('_ASSOCIATION_INSCRIPTION2', true); // false si on sait s'en passer
-
-define('_ASSOCIATION_AUTEURS_ELARGIS', 
-       @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1") ? 
-       'spip_auteurs_elargis' : 'spip_asso_adherents');
-
 // Pour ne pas avoir a ecrire le prefixe "spip_" dans les squelettes etc
 // (cf trouver_table)
 global $table_des_tables;
@@ -152,12 +143,12 @@ $table_des_tables['asso_plan'] = 'asso_plan';
 $table_des_tables['asso_ressources'] = 'asso_ressources';
 $table_des_tables['asso_prets'] = 'asso_prets';
 $table_des_tables['asso_activites'] = 'asso_activites';
-$table_des_tables['asso_adherents'] = 'asso_adherents';
+$table_des_tables['asso_membres'] = 'asso_membres';
 $table_des_tables['asso_metas'] = 'asso_metas';
 
 // Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
 global $table_titre;
-$table_titre['asso_adherents']= "nom_famille AS titre, '' AS lang";
+$table_titre['asso_membres']= "nom_famille AS titre, '' AS lang";
 $table_titre['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
 
 // Toujours charger la description des tables (a ameliorer)
@@ -175,12 +166,12 @@ function generer_url_don($id, $param='', $ancre='') {
 	return  array('asso_don', $id);
 }
 
-function generer_url_asso_adherent($id, $param='', $ancre='') {
+function generer_url_asso_membre($id, $param='', $ancre='') {
 	return  generer_url_ecrire('voir_adherent', "id=" . intval($id));
 }
 
-function generer_url_adherent($id, $param='', $ancre='') {
-	return  array('asso_adherent', $id);
+function generer_url_membre($id, $param='', $ancre='') {
+	return  array('asso_membre', $id);
 }
 
 // charger les metas donnees

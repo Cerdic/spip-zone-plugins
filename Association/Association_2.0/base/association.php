@@ -10,6 +10,8 @@
 	*  
 	**/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Declaration des tables
 
 global $association_tables_principales;
@@ -190,52 +192,30 @@ $association_tables_principales['spip_asso_activites'] = array(
 );
 
 // 
-$spip_asso_adherents= array(
-  "id_adherent" => "bigint(21) NOT NULL auto_increment",
+$spip_asso_membres= array(
+  "id_auteur" => "bigint(21) NOT NULL auto_increment",
+  "id_asso" => "text NOT NULL",
   "nom_famille" => "text NOT NULL",
   "prenom" => "text NOT NULL",
   "sexe" => "tinytext NOT NULL",
   "fonction" => "text",
   "email" => "tinytext NOT NULL",
-  "validite" => "date NOT NULL default '0000-00-00'",
-  "numero" => "text NOT NULL",
-  "rue" => "text NOT NULL",
-  "cp" => "text NOT NULL",
+  "adresse" => "text NOT NULL",
+  "code_postal" => "tinytext NOT NULL",
   "ville" => "text NOT NULL",
   "telephone" => "tinytext",
-  "portable" => "tinytext",
-  "montant" => "text NOT NULL",
-  "date" => "date NOT NULL default '0000-00-00'",
-  "statut" => "tinytext",
-  "relance" => "tinyint(4) NOT NULL default '0'",
-  "divers" => "text",
-  "remarques" => "text",
-  "vignette" => "tinytext",
-  "id_auteur" => "int(11) default NULL",
-  "id_asso" => "text NOT NULL",
+  "mobile" => "tinytext",
   "categorie" => "text NOT NULL",
-  "naissance" => "date NOT NULL default '0000-00-00'",
-  "profession" => "text NOT NULL",
-  "societe" => "text NOT NULL",
-  "identifiant" => "text NOT NULL",
-  "passe" => "text NOT NULL",
-  "creation" => "date NOT NULL default '0000-00-00'",
-  "maj" => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
-  "utilisateur1" => "text NOT NULL",
-  "utilisateur2" => "text NOT NULL",
-  "utilisateur3" => "text NOT NULL",
-  "utilisateur4" => "text NOT NULL",
-  "secteur" => "text NOT NULL",
-  "publication" => "text NOT NULL",
   "statut_interne" => "text NOT NULL",
-  "commentaire" => "text NOT NULL"
+  "commentaire" => "text NOT NULL",
+  "validite" => "date NOT NULL default '0000-00-00'"
 			    );
-$spip_asso_adherents_key= array(
-	"PRIMARY KEY" => "id_adherent"
+$spip_asso_membres_key= array(
+	"PRIMARY KEY" => "id_auteur"
 				);
-$association_tables_principales['spip_asso_adherents'] = array(
-	'field' => &$spip_asso_adherents, 
-	'key' => &$spip_asso_adherents_key
+$association_tables_principales['spip_asso_membres'] = array(
+	'field' => &$spip_asso_membres, 
+	'key' => &$spip_asso_membres_key
 );
 
 global $association_tables_auxiliaires;

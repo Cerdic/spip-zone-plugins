@@ -13,6 +13,10 @@
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+global $association_tables_principales;
+include_spip('base/association');
+include_spip('base/abstract_sql');
+
 // A chaque modif de la base SQL ou ses conventions (raccourcis etc)
 // le fichier plugin.xml doit indiquer le numero de depot qui l'implemente sur
 // http://zone.spip.org/trac/spip-zone/timeline
@@ -80,9 +84,6 @@ function association_upgrade($meta, $courante, $table='meta')
 }
 
 function association_maj_0($version, $meta, $table){
-	global $association_tables_principales;
-	include_spip('base/association');
-	include_spip('base/abstract_sql');
 	foreach($association_tables_principales as $table => $desc)
 		sql_create($table, $desc['field'], $desc['key'], true, false);
 	ecrire_meta($meta, $version, $table);
@@ -140,8 +141,6 @@ function association_maj_38192()
 {
 	global $association_tables_auxiliaires;
 
-	include_spip('base/association');
-	include_spip('base/abstract_sql');
 	if (sql_create('spip_asso_metas', 
 		$association_tables_auxiliaires['spip_asso_metas']['field'],
 		$association_tables_auxiliaires['spip_asso_metas']['key'],
@@ -161,4 +160,8 @@ function association_maj_38192()
 
 $GLOBALS['association_maj'][38192] = array(array('association_maj_38192'));
 
+$GLOBALS['association_maj'][38258] = array(array('sql_create','spip_asso_membres',
+		$association_tables_principales['spip_asso_membres']['field'],
+	      $association_tables_principales['spip_asso_membres']['key'])
+					);
 ?>
