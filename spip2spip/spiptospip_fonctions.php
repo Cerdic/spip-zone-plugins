@@ -23,7 +23,7 @@ function spip2spip_ajouterBoutons($boutons_admin) {
 // a terme peut etre utile pour recuperer le numero de version
 function is_spip2spip_backend($str) {  
 	// Chercher un numero de version
-	if (ereg('(spip2spip)[[:space:]](([^>]*[[:space:]])*)version[[:space:]]*=[[:space:]]*[\'"]([-_a-zA-Z0-9\.]+)[\'"]', $str, $regs)) 
+	if (preg_match('/(spip2spip)[[:space:]](([^>]*[[:space:]])*)version[[:space:]]*=[[:space:]]*[\'"]([-_a-zA-Z0-9\.]+)[\'"]/', $str, $regs)) 
 	     return true;
     	 return false;
 }
@@ -341,7 +341,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                 
     // si cfg dispo, on charge les valeurs
     if (function_exists(lire_config))  {
-        $import_statut = lire_config('spip2spip/import_statut');      
+        if (lire_config('spip2spip/import_statut')=="publie") $import_statut = "publie";  else $import_statut = "prop";
         if (lire_config('spip2spip/citer_source')=="on") $citer_source=true; else  $citer_source=false;
         if (lire_config('spip2spip/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
         $email_suivi = lire_config('spip2spip/email_suivi'); 
