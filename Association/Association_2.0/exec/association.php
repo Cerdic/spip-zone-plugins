@@ -62,21 +62,28 @@ function exec_association() {
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td><strong>' . _T('asso:nom') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:email') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:fonction') . "</strong></td>\n";
 		echo '<td><strong>' . _T('asso:portable') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:telephone') . "</strong></td>\n";
+		echo '<td><strong>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</strong></td>\n";
 		echo '</tr>';
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "fonction !='' AND statut_interne != 'sorti'", '',  "a.nom_famille");
 		while ($data = sql_fetch($query))
     {	
 			$id_auteur=$data['id_auteur'];
+			$mob = print_tel($data['mobile']);
+			$tel = print_tel($data['telephone']);
+			if ($email = $data['email'])
+			  $tel = "<a href='mailto:$email' title='"
+			    . _L('Ecrire &agrave') . ' ' . $email . "'>"
+			    . ($tel ? $tel : 'mail')
+			    . '</a>';
+
 			echo "\n<tr style='background-color: #EEEEEE;'>\n";
 			echo '<td class="arial11 border1"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur"). "\"\ntitle=\"" . _L('Modifier l\'administrateur') . '">'.htmlspecialchars($data['nom']). "</a></td>\n";
-			echo '<td class="arial1 border1"><a href="mailto:'.$data['email']. "\"\ntitle=\"" . _L('Envoyer un email') . "\">email</a></td>\n";
-			echo '<td class="arial1 border1">'.$data['fonction'].'</td>';
-			echo '<td class="arial1 border1">'.$data['mobile'].'</td>';
-			echo '<td class="arial1 border1">'.$data['telephone'].'</td>';
+
+			echo '<td class="arial1 border1">'.htmlspecialchars($data['fonction']).'</td>';
+			echo '<td class="arial1 border1">'.$mobile.'</td>';
+			echo '<td class="arial1 border1" style="text-align:center">'.$tel.'</td>';
 			echo "</tr>\n";
 		}
 		echo '</table>';
@@ -90,4 +97,12 @@ function exec_association() {
 			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 	}
 }
+
+function print_tel($n)
+{
+	$n = preg_replace('/\D/', '', $n);
+	if (!intval($n)) return '';
+	return preg_replace('/(\d\d)/', '\1&nbsp;', $n);
+}
+
 ?>
