@@ -104,4 +104,11 @@ function puce_statut_formulaires_reponse_dist($id, $statut, $id_rubrique, $type=
 	. '</span>';
 }
 
+
+if (!function_exists('array_fill_keys')){
+	function array_fill_keys($keys, $value){
+		array_combine($keys,array_fill(0,count($keys),$value));
+	}
+}
+
 ?>
