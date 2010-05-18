@@ -3,21 +3,20 @@
 //---------------------------------------
 // Fonctions
 //---------------------------------------
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_SPIP2SPIP',(_DIR_PLUGINS.end($p)));
 
- // ajout bouton 
+// ajout bouton 
 function spip2spip_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		  // on voit le bouton dans la barre "naviguer"
-		  $boutons_admin['naviguer']->sousmenu['spip2spip']= new Bouton(
-			"../"._DIR_PLUGIN_SPIP2SPIP."/img_pack/icon.png",  // icone
-			_T("spiptospip:titre")	// titre
-			);
+		  $boutons_admin['naviguer']->sousmenu['spip2spip']= 
+      new Bouton(_DIR_PLUGIN_SPIP2SPIP."/img_pack/icon.png", _T("spiptospip:titre"));
 		}
 		return $boutons_admin;
 }
+// FIXME migrer ds la nlle ecriture: 
+//http://programmer.spip.org/ajouter_boutons 
+
 
 //
 // verifie s'il s'agit du bon format de backend
