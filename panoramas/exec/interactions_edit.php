@@ -59,11 +59,11 @@ function exec_interactions_edit(){
 		$redirect = parametre_url($redirect,"retour",urlencode($retour));
 		
 	//
-	// Affichage de la page
+	// Affichage de la page 	
 	//
 	if ($id_interaction){
-		$result = spip_query("SELECT * FROM spip_visites_virtuelles_interactions WHERE id_interaction="._q($id_interaction));
-		if ($row = spip_fetch_array($result)) {
+		$result = sql_select('*', 'spip_visites_virtuelles_interactions', "id_interaction="._q($id_interaction));
+		if ($row = sql_fetch($result)) {
 			$id_lieu = $row['id_lieu'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
@@ -108,7 +108,9 @@ function exec_interactions_edit(){
 	}
 			
 	
-	debut_page("&laquo; $titre &raquo;", "documents", "interactions","");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page("&laquo; $titre &raquo;","documents","interactions");
+	
 
 	// Recupere les donnees ---------------------------------------------------------------
 	if ($new == 'oui' && !$titre) {
@@ -153,13 +155,13 @@ function exec_interactions_edit(){
 	}
 	
 	// gauche raccourcis ---------------------------------------------------------------
-	debut_gauche();
+	echo debut_gauche('', true);
 	
-	debut_boite_info();
+	echo debut_boite_info(true);
 	if ($id_lieu>0)
 		echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_lieu</div>\n";
 	//if ($retour) {
-		icone_horizontale(_T('icone_retour'), "?exec=interactions_toutes&id_lieu=".$id_lieu."&id_visite=".$id_visite, "../"._DIR_PLUGIN_PANORAMAS."img_pack/house_gabrielle_nowicki_.png", "rien.gif",'right');
+		echo icone_horizontale(_T('icone_retour'), "?exec=interactions_toutes&id_lieu=".$id_lieu."&id_visite=".$id_visite, "../"._DIR_PLUGIN_PANORAMAS."img_pack/house_gabrielle_nowicki_.png", "rien.gif",'', false);
 	//}
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
@@ -172,14 +174,14 @@ function exec_interactions_edit(){
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('interactions_edit')));
 		}
 		echo "<p>";
-		icone_horizontale(_T("panoramas:supprimer_interaction"), "?exec=interactions_edit&id_interaction=".$id_intercation."&supp_interaction=".$id_interaction."&retour=".$retour, "../"._DIR_PLUGIN_PANORAMAS."img_pack/supprimer-24.png", "rien.gif");
+		echo icone_horizontale(_T("panoramas:supprimer_interaction"), "?exec=interactions_edit&id_interaction=".$id_interaction."&supp_interaction=".$id_interaction."&retour=".$retour, "../"._DIR_PLUGIN_PANORAMAS."img_pack/supprimer-24.png", "rien.gif", '', false);
 		echo "</p>";
 	}
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
 	// droite ---------------------------------------------------------------
-	creer_colonne_droite();
-	debut_droite();
+	echo creer_colonne_droite(true);
+	echo debut_droite('', true);
 
 	if (!$new){
 		echo gros_titre($row['titre'],'',false);
@@ -446,7 +448,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 
 	$out .= "</fieldset>";
 	
-	//sélection du mode transition
+	//sï¿½lection du mode transition
 	$out .= "<fieldset id='infos-transition'><legend>"._T("panoramas:informations_transition")."</legend>";
 	
 	$out .= "<strong><label for='images_transition_interaction' id='images_transition_interaction_label'>"._T("panoramas:images_transition")."</label></strong> ";
@@ -511,7 +513,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 						y2: initialy2
 				});
 
-				//affichage des zones à renseigner en fonction du type choisi
+				//affichage des zones ï¿½ renseigner en fonction du type choisi
 				$('#type_interaction').bind('change', function () {
 					switch_infos_cible();
 					

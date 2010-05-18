@@ -47,50 +47,48 @@ function Interactions_update($id_interaction){
 
 	// creation
 	if ($id_interaction == 'new' && $titre) {
-		spip_query("INSERT INTO spip_visites_virtuelles_interactions (titre) VALUES ("._q($titre).")");
-		$id_interaction = spip_insert_id();
+		$id_interaction = sql_insertq('spip_visites_virtuelles_interactions', array('titre' => _q($titre)));
 	}
 	// maj
 	if (intval($id_interaction) && $titre) {
-		$query = "UPDATE spip_visites_virtuelles_interactions SET ".
-			"titre="._q($titre).", ".
-			"descriptif="._q($descriptif).", ".
-			"x1="._q($x1).", ".
-			"x2="._q($x2).", ".
-			"y1="._q($y1).", ".
-			"y2="._q($y2).", ".
-			"id_image_fond="._q($id_image_fond).", ".
-			"id_image_fond_survol="._q($id_image_fond_survol).", ".
-			"type="._q($type).", ".
-			"x_lieu_cible="._q($x_lieu_cible).", ".
-			"id_article_cible="._q($id_article_cible).", ".
-			"id_lieu_cible="._q($id_lieu_cible).", ".
-			"id_document_cible="._q($id_document_cible).", ".
-			"id_visite_cible="._q($id_visite_cible).", ".
-			"url_cible="._q($url_cible).", ".
-			"id_objet_activation="._q($id_objet_activation).", ".
-			"id_jeu_activation="._q($id_jeu_activation).", ".
-			"id_lieu_activation="._q($id_lieu_activation).", ".
-			"id_rubrique_cible="._q($id_rubrique_cible).", ".
-			"id_jeu_cible="._q($id_jeu_cible).", ".
-			"id_objet_recompense="._q($id_objet_recompense).", ".
-			"texte_avant_activation="._q($texte_avant_activation).", ".
-			"texte_apres_activation="._q($texte_apres_activation).", ".
-			"id_audio_avant_activation="._q($id_audio_avant_activation).", ".
-			"id_audio_apres_activation="._q($id_audio_apres_activation).", ".
-			"id_objet_apres_activation="._q($id_objet_apres_activation).", ".
-			"images_transition="._q($images_transition).", ".
-			"images_transition_delai="._q($images_transition_delai).", ".
-			"id_film_transition="._q($id_film_transition).", ".
-			"film_transition_duree="._q($film_transition_duree).", ".
-			"nb_points_objet="._q($nb_points_objet).", ".
-			"id_lieu="._q($id_lieu).", ".
-			"id_visite="._q($id_visite).
-		" WHERE id_interaction="._q($id_interaction);
-		$result = spip_query($query);
+		$result = sql_update('spip_visites_virtuelles_interactions', array(
+			'titre' => _q($titre), 
+			'descriptif' => _q($descriptif), 
+			'x1' => _q($x1),
+			'x2' => _q($x2),
+			'y1' => _q($y1),
+			'y2' => _q($y2),
+			'id_image_fond' => _q($id_image_fond),
+			'id_image_fond_survol' => _q($id_image_fond_survol),
+			'type' => _q($type),
+			'x_lieu_cible' => _q($x_lieu_cible),
+			'id_article_cible' => _q($id_article_cible),
+			'id_lieu_cible' => _q($id_lieu_cible),
+			'id_document_cible' => _q($id_document_cible),
+			'id_visite_cible' => _q($id_visite_cible),
+			'url_cible' => _q($url_cible),
+			'id_objet_activation' => _q($id_objet_activation),
+			'id_jeu_activation' => _q($id_jeu_activation),
+			'id_lieu_activation' => _q($id_lieu_activation),
+			'id_rubrique_cible' => _q($id_rubrique_cible),
+			'id_jeu_cible' => _q($id_jeu_cible),
+			'id_objet_recompense' => _q($id_objet_recompense),
+			'texte_avant_activation' => _q($texte_avant_activation),
+			'texte_apres_activation' => _q($texte_apres_activation),
+			'id_audio_avant_activation' => _q($id_audio_avant_activation),
+			'id_audio_apres_activation' => _q($id_audio_apres_activation),
+			'id_objet_apres_activation' => _q($id_objet_apres_activation),
+			'images_transition' => _q($images_transition),
+			'images_transition_delai' => _q($images_transition_delai),
+			'id_film_transition' => _q($id_film_transition),
+			'film_transition_duree' => _q($film_transition_duree),
+			'nb_points_objet' => _q($nb_points_objet),
+			'id_lieu' => _q($id_lieu),
+			'id_visite' => _q($id_visite)),
+			"id_interaction="._q($id_interaction));
 	}
 	// lecture
-	$result = spip_query("SELECT * FROM spip_visites_virtuelles_interactions WHERE id_interaction="._q($id_interaction));
+	$result = sql_select('*', 'spip_visites_virtuelles_interactions', "id_interaction="._q($id_interaction));
 	if ($row = spip_fetch_array($result)) {
 		$id_interaction = $row['id_interaction'];
 		$titre = $row['titre'];

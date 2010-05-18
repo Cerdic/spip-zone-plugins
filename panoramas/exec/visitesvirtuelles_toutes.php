@@ -7,19 +7,18 @@ function exec_visitesvirtuelles_toutes_dist()
  	include_spip("inc/presentation");
 	include_spip('public/assembler');
 
-	debut_page(_T("panoramas:visite_virtuelle"), "Visite virtuelle", "Visite virtuelle");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T("panoramas:visite_virtuelle"),_T("panoramas:visite_virtuelle"),_T("panoramas:visite_virtuelle"));
 
-	
-
-	debut_gauche();
-	debut_boite_info();
+	echo debut_gauche('', true);
+	echo debut_boite_info(true);
 	echo _T("panoramas:boite_info");
 	echo "<p>";
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
 	creer_colonne_droite();
 	
-	debut_droite();
+	echo debut_droite('', true);
 	
 	echo recuperer_fond("fonds/visitesvirtuelles_toutes");
 	
@@ -31,14 +30,15 @@ function exec_visitesvirtuelles_toutes_dist()
 		echo "<div align='right'>";
 		$link=generer_url_ecrire('visitesvirtuelles_edit', 'new=oui');
 		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-		icone(_T("panoramas:icone_creer_visitevirtuelle"), $link, "../"._DIR_PLUGIN_PANORAMAS. "img_pack/planet_costea_bogdan_r.png", "creer.gif");
+		echo icone(_T("panoramas:icone_creer_visitevirtuelle"), $link, "../"._DIR_PLUGIN_PANORAMAS. "img_pack/planet_costea_bogdan_r.png", "creer.gif");
 		echo "</div>";
 	}
-	
+
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	
 	echo fin_page();
+
 
 
 }

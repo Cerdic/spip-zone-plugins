@@ -14,8 +14,8 @@ function action_lieux_supprime(){
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
 		if (autoriser('supprimer','lieu',$id_lieu)){
-			$result = spip_query("DELETE FROM spip_visites_virtuelles_lieux WHERE id_lieu="._q($id_lieu));
-			$result = spip_query("DELETE FROM spip_visites_virtuelles_interactions WHERE id_lieu="._q($id_lieu));
+			$result = sql_delete('spip_visites_virtuelles_lieux', "id_lieu="._q($id_lieu));
+			$result = sql_delete('spip_visites_virtuelles_interactions', "id_lieu="._q($id_lieu));
 		}
 	}
 	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));

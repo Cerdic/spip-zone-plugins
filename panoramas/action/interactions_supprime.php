@@ -14,7 +14,7 @@ function action_interactions_supprime(){
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
 		if (autoriser('supprimer','interaction',$id_interaction)){
-			$result = spip_query("DELETE FROM spip_visites_virtuelles_interactions WHERE id_interaction="._q($id_interaction));
+			$result = sql_delete('spip_visites_virtuelles_interactions', "id_interaction="._q($id_interaction));
 		}
 	}
 	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));

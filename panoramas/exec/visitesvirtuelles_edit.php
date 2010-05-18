@@ -59,7 +59,7 @@ function exec_visitesvirtuelles_edit(){
 
 	$nb_lieux = 0;
 	if ($id_visite)
-		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_visites_virtuelles_lieux WHERE id_visite="._q($id_visite))))
+		if ($row = sql_fetch(spip_query("SELECT COUNT(*) AS num FROM spip_visites_virtuelles_lieux WHERE id_visite="._q($id_visite))))
 			$nb_lieux = $row['num'];
 
 	
@@ -71,8 +71,8 @@ function exec_visitesvirtuelles_edit(){
 	// Affichage de la page
 	//
 	if ($id_visite){
-		$result = spip_query("SELECT * FROM spip_visites_virtuelles WHERE id_visite="._q($id_visite));
-		if ($row = spip_fetch_array($result)) {
+		$result = sql_query("SELECT * FROM spip_visites_virtuelles WHERE id_visite="._q($id_visite));
+		if ($row = sql_fetch($result)) {
 			$id_visite = $row['id_visite'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
@@ -90,8 +90,10 @@ function exec_visitesvirtuelles_edit(){
 	}
 		
 	
-	debut_page("&laquo; $titre &raquo;", "documents", "visitesvirtuelles","");
-
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page("&laquo; $titre &raquo;","documents","visitesvirtuelles");
+	
+	
 	// Recupere les donnees ---------------------------------------------------------------
 	if ($new == 'oui' && !$titre) {
 		
@@ -104,13 +106,13 @@ function exec_visitesvirtuelles_edit(){
 	}
 	
 	// gauche raccourcis ---------------------------------------------------------------
-	debut_gauche();
+	echo debut_gauche('', true);
 	
-	debut_boite_info();
+	echo debut_boite_info(true);
 	if ($id_visite>0)
 		echo "<div class=\"verdana1 spip_xx-small\" style=\"font-weight: bold; text-align: center; text-transform: uppercase;\">"._T("panoramas:visite_numero")."<div align='center' style='font-size:3em;font-weight:bold;'>$id_visite</div></div>\n";
 	if ($retour) {
-		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_PANORAMAS."img_pack/logo_panoramas.png", "rien.gif",'right');
+		echo icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_PANORAMAS."img_pack/logo_panoramas.png", '', false);
 	}
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
@@ -122,15 +124,14 @@ function exec_visitesvirtuelles_edit(){
 		if (!$retour) {
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('visitesvirtuelles_edit')));
 		}
-		echo "<p>";
-		icone_horizontale(_T("panoramas:supprimer_visite"), "?exec=visitesvirtuelles_edit&supp_visite=".$id_visite, "../"._DIR_PLUGIN_PANORAMAS."img_pack/supprimer-24.png", "rien.gif");
-		echo "</p>";
+		echo icone_horizontale(_T("panoramas:supprimer_visite"), "?exec=visitesvirtuelles_edit&supp_visite=".$id_visite, "../"._DIR_PLUGIN_PANORAMAS."img_pack/supprimer-24.png", '', false);
+			
 	}
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
 	// droite ---------------------------------------------------------------
-	creer_colonne_droite();
-	debut_droite();
+	echo creer_colonne_droite(true);
+	echo debut_droite('', true);
 
 	if (!$new){
 		echo gros_titre($row['titre'],'',false);

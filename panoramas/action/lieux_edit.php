@@ -29,32 +29,31 @@ function Lieux_update($id_lieu){
 
 	// creation
 	if ($id_lieu == 'new' && $titre) {
-		spip_query("INSERT INTO spip_visites_virtuelles_lieux (titre) VALUES ("._q($titre).")");
-		$id_lieu = spip_insert_id();
+		$id_lieu = sql_insertq('spip_visites_virtuelles_lieux', array('titre' => _q($titre)));
 	}
 	// maj
 	if (intval($id_lieu) && $titre) {
-		$query = "UPDATE spip_visites_virtuelles_lieux SET ".
-			"titre="._q($titre).", ".
-			"descriptif="._q($descriptif).", ".
-			"boucler="._q($boucler).", ".
-			"id_photo="._q($id_photo).", ".
-			"id_audio="._q($id_audio).", ".
-			"audio_repeter="._q($audio_repeter).", ".
-			"position_x_carte="._q($position_x_carte).", ".
-			"position_y_carte="._q($position_y_carte).", ".
-			"url_carte="._q($url_carte).", ".
-			"icone_carte="._q($icone_carte).", ".
-			"acces_carte="._q($acces_carte).", ".
-			"decalage_x="._q($decalage_x).", ".
-			"documents_associes="._q($documents_associes).", ".
-			"nb_points_lieu="._q($nb_points_lieu).", ".
-			"id_visite="._q($id_visite).
-		" WHERE id_lieu="._q($id_lieu);
-		$result = spip_query($query);
+		
+		$result = sql_update('spip_visites_virtuelles_lieux', array(
+			'titre' => _q($titre), 
+			'descriptif' => _q($descriptif), 
+			'boucler' => _q($boucler),
+			'id_photo' => _q($id_photo),
+			'id_audio' => _q($id_audio),
+			'audio_repeter' => _q($audio_repeter),
+			'position_x_carte' => _q($position_x_carte),
+			'position_y_carte' => _q($position_y_carte),
+			'url_carte' => _q($url_carte),
+			'icone_carte' => _q($icone_carte),
+			'acces_carte' => _q($acces_carte),
+			'decalage_x' => _q($decalage_x),
+			'documents_associes' => _q($documents_associes),
+			'nb_points_lieu' => _q($nb_points_lieu),
+			'id_visite' => _q($id_visite)), 
+			"id_lieu="._q($id_lieu));
 	}
 	// lecture
-	$result = spip_query("SELECT * FROM spip_visites_virtuelles_lieux WHERE id_lieu="._q($id_lieu));
+	$result = sql_select('*', 'spip_visites_virtuelles_lieux', "id_lieu="._q($id_lieu));
 	if ($row = spip_fetch_array($result)) {
 		$id_visite = $row['id_visite'];
 		$titre = $row['titre'];

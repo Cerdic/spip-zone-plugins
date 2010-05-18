@@ -99,8 +99,9 @@ function exec_lieux_edit(){
 	}
 			
 	
-	debut_page("&laquo; $titre &raquo;", "documents", "lieux","");
-
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page("&laquo; $titre &raquo;", "documents", "lieux");
+	
 	// Recupere les donnees ---------------------------------------------------------------
 	if ($new == 'oui' && !$titre) {
 		
@@ -113,13 +114,13 @@ function exec_lieux_edit(){
 	}
 	
 	// gauche raccourcis ---------------------------------------------------------------
-	debut_gauche();
+	echo debut_gauche('', true);
 	
-	debut_boite_info();
+	echo debut_boite_info(true);
 	if ($id_lieu>0)
 		echo "<div class=\"verdana1 spip_xx-small\" style=\"font-weight: bold; text-align: center; text-transform: uppercase;\">"._T("panoramas:lieu_numero")."<div align='center' style='font-size:3em;font-weight:bold;'>$id_lieu</div></div>\n";
 	//if ($retour) {
-		icone_horizontale(_T('icone_retour'), "?exec=lieux_tous&id_visite=".$id_visite, "../"._DIR_PLUGIN_PANORAMAS."img_pack/planet_costea_bogdan_r.png", "rien.gif",'right');
+		echo icone_horizontale(_T('icone_retour'), "?exec=lieux_tous&id_visite=".$id_visite, "../"._DIR_PLUGIN_PANORAMAS."img_pack/planet_costea_bogdan_r.png", "rien.gif",'', false);
 	//}
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
@@ -131,15 +132,14 @@ function exec_lieux_edit(){
 		if (!$retour) {
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('lieux_edit')));
 		}
-		echo "<p>";
-		icone_horizontale(_T("panoramas:supprimer_lieu"), "?exec=lieux_edit&id_lieu=".$id_lieu."&supp_lieu=".$id_lieu, "../"._DIR_PLUGIN_PANORAMAS."img_pack/supprimer-24.png", "rien.gif");
-		echo "</p>";
+		echo icone_horizontale(_T("panoramas:supprimer_lieu"), "?exec=lieux_edit&id_lieu=".$id_lieu."&supp_lieu=".$id_lieu, "../"._DIR_PLUGIN_PANORAMAS."img_pack/supprimer-24.png", "rien.gif", '', false);
+		
 	}
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
 	// droite ---------------------------------------------------------------
-	creer_colonne_droite();
-	debut_droite();
+	echo creer_colonne_droite();
+	echo debut_droite('', true);
 
 	if (!$new){
 		echo gros_titre($row['titre'],'',false);

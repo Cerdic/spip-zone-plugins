@@ -17,34 +17,35 @@ function Visitesvirtuelles_update($id_visite){
 	$liste_objets_jeu = _request('liste_objets_jeu');
 	$message_fin_jeu = _request('message_fin_jeu');
 	$url_fin_jeu = _request('url_fin_jeu');
+	
 	//
 	// Modifications des donnees de base de la visite virtuelle
 	//
 
 	// creation
 	if ($id_visite == 'new' && $titre) {
-		spip_query("INSERT INTO spip_visites_virtuelles (titre) VALUES ("._q($titre).")");
-		$id_visite = spip_insert_id();
+		$id_visite = sql_insertq('spip_visites_virtuelles', array('titre' => _q($titre)));
+
 	}
 	// maj
 	if (intval($id_visite) && $titre) {
-		$query = "UPDATE spip_visites_virtuelles SET ".
-			"titre="._q($titre).", ".
-			"descriptif="._q($descriptif).", ".
-			"id_lieu_depart="._q($id_lieu_depart).", ".
-			"id_carte="._q($id_carte).", ".
-			"largeur="._q($largeur).", ".
-			"hauteur="._q($hauteur).", ".
-			"mode_jeu="._q($mode_jeu).", ".
-			"liste_objets_jeu="._q($liste_objets_jeu).", ".
-			"message_fin_jeu="._q($message_fin_jeu).", ".
-			"url_fin_jeu="._q($url_fin_jeu).
-		" WHERE id_visite="._q($id_visite);
-		$result = spip_query($query);
+		$result = sql_update('spip_visites_virtuelles', array(
+			'titre' => _q($titre), 
+			'descriptif' => _q($descriptif), 
+			'id_lieu_depart' => _q($id_lieu_depart),
+			'id_carte' => _q($id_carte), 
+			'largeur' => _q($largeur),
+			'hauteur' => _q($hauteur), 
+			'mode_jeu' => _q($mode_jeu), 
+			'liste_objets_jeu' => _q($liste_objets_jeu), 
+			'message_fin_jeu' => _q($message_fin_jeu),
+			'url_fin_jeu' => _q($url_fin_jeu)), 
+			"id_visite="._q($id_visite));
 	}
 	// lecture
-	$result = spip_query("SELECT * FROM spip_visites_virtuelles WHERE id_visite="._q($id_visite));
-	if ($row = spip_fetch_array($result)) {
+	//$result = sql_query("SELECT * FROM spip_visites_virtuelles WHERE id_visite="._q($id_visite));
+	$result = sql_select('*', 'spip_visites_virtuelles', "id_visite="._q($id_visite));
+	if ($row = sql_fetch($result)) {
 		$id_visite = $row['id_visite'];
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
