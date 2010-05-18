@@ -48,6 +48,6 @@ function don_insert($id_adherent, $argent, $valeur, $journal, $contrepartie, $da
 		    'imputation' => $GLOBALS['asso_metas']['pc_dons'],
 		    'recette' => $argent,
 		    'journal' => $journal,
-		    'justification' => "[->don$id_don] - [$bienfaiteur" . "->adherent$id_adherent]"));
+		    'justification' => "[->don$id_don] - [$bienfaiteur" . "->membre$id_adherent]"));
 }
 ?>

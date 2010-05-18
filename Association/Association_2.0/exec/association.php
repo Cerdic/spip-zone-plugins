@@ -74,7 +74,7 @@ function exec_association() {
 			$tel = print_tel($data['telephone']);
 			if ($email = $data['email'])
 			  $tel = "<a href='mailto:$email' title='"
-			    . _L('Ecrire &agrave') . ' ' . $email . "'>"
+			    . _L('Ecrire &agrave;') . ' ' . $email . "'>"
 			    . ($tel ? $tel : 'mail')
 			    . '</a>';
 

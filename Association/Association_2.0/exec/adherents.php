@@ -193,7 +193,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		. $mail . "</td>\n"
 		. '<td class="'.$class. ' border1">'.$data["prenom"]."</td>\n"
 		. '<td class="'.$class. ' border1">'
-		. sql_getfetsel("valeur", "spip_asso_categories", "id_categorie=".intval($data["categorie"]))
+		. affiche_categorie($data["categorie"])
 		. "</td>\n"
 		. '<td class="'.$class. ' border1">' . $valide . "</td>\n"
 		. '<td class="'.$class. ' border1">'
@@ -257,5 +257,12 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 
 	return 	generer_form_ecrire('action_adherents', $res);
 
+}
+
+function affiche_categorie($c)
+{
+  return is_numeric($c) 
+    ? sql_getfetsel("valeur", "spip_asso_categories", "id_categorie=$c")
+    : $c;
 }
 ?>
