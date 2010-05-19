@@ -18,11 +18,11 @@
 				[(#TYPE|=={'visite'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{visite,id_visite=#ID_VISITE_CIBLE}" class="interaction#ID_INTERACTION type-visite" alt="#TITRE" />]
 				[(#TYPE|=={'url'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_CIBLE" class="interaction#ID_INTERACTION type-url" alt="#TITRE" />]
 				[(#TYPE|=={'descriptif'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{descriptif_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-descriptif thickbox" alt="#TITRE" />]
-				<BOUCLE_documentimagepointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN jpg,JPG}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_DOCUMENT" class="interaction#ID_INTERACTION type-document thickbox" alt="[<b>(#TITRE|htmlspecialchars)</b>][<br />(#DESCRIPTIF|htmlspecialchars)]" />]</BOUCLE_documentimagepointe>
-				<BOUCLE_documentmp3pointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN mp3,MP3}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-audio thickbox" alt="#TITRE" />]</BOUCLE_documentmp3pointe>
-				<BOUCLE_documentvideopointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN flv,FLV,swf,SWF}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-video thickbox" alt="#TITRE" />]</BOUCLE_documentvideopointe>
+				<BOUCLE_documentimagepointe(DOCUMENTS){tous}{id_document=#ID_DOCUMENT_CIBLE}{extension IN jpg,JPG}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_DOCUMENT" class="interaction#ID_INTERACTION type-document thickbox" alt="[<b>(#TITRE|htmlspecialchars)</b>][<br />(#DESCRIPTIF|htmlspecialchars)]" />]</BOUCLE_documentimagepointe>
+				<BOUCLE_documentmp3pointe(DOCUMENTS){tous}{id_document=#ID_DOCUMENT_CIBLE}{extension IN mp3,MP3}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-audio thickbox" alt="#TITRE" />]</BOUCLE_documentmp3pointe>
+				<BOUCLE_documentvideopointe(DOCUMENTS){tous}{id_document=#ID_DOCUMENT_CIBLE}{extension IN flv,FLV,swf,SWF}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-video thickbox" alt="#TITRE" />]</BOUCLE_documentvideopointe>
 				[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'jeu'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{jeu_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-jeu thickbox" alt="#TITRE" />]]
-				<BOUCLE_objetetpersonnage(DOCUMENTS){id_document=#ID_IMAGE_FOND}>[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'objet'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-objet type-objet#ID_DOCUMENT" alt="#TITRE" />][(#TYPE|=={'personnage'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-personnage type-personnage#ID_DOCUMENT" alt="#TITRE" />]]</BOUCLE_objetetpersonnage>
+				<BOUCLE_objetetpersonnage(DOCUMENTS){tous}{id_document=#ID_IMAGE_FOND}>[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'objet'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-objet type-objet#ID_DOCUMENT" alt="#TITRE" />][(#TYPE|=={'personnage'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-personnage type-personnage#ID_DOCUMENT" alt="#TITRE" />]]</BOUCLE_objetetpersonnage>
 		</BOUCLE_interactions>
 		
 	</map>
@@ -34,7 +34,7 @@
                  	control_display: 'yes',
 			viewport_width: <BOUCLE_visiteparent(VISITES_VIRTUELLES){id_visite}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent>[,
 			start_position: (#DECALAGE_X)][,
-			mode_360: (#BOUCLER|=={'oui'}|?{1,0})]<BOUCLE_recherchelargeurimage(DOCUMENTS){id_document=#ID_PHOTO}>[,
+			mode_360: (#BOUCLER|=={'oui'}|?{1,0})]<BOUCLE_recherchelargeurimage(DOCUMENTS){tous}{id_document=#ID_PHOTO}>[,
 			speed: (#LARGEUR|mult{8})]</BOUCLE_recherchelargeurimage>
 
 	         });
@@ -104,11 +104,11 @@
 
 
 
-<BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
+<BOUCLE_carte(DOCUMENTS){tous}{id_document=#ID_CARTE}>
 $(document).ready(function(){
 	[(#MODE_JEU|=={'oui'}|?{' ',''})if (!$.cookie('objets_ramasses')) 
 		$.cookie('objets_ramasses',' ');]
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte icone-carte#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})icone-carte-courant]' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan lien-plan#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})lien-plan-courant]' style='[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{'margin-top: -1em;','display: none;'}) ][left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'>[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})Vous&nbsp;&ecirc;tes&nbsp;ici&nbsp;:&nbsp;<br />][(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte icone-carte#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})icone-carte-courant]' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){tous}{id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan lien-plan#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})lien-plan-courant]' style='[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{'margin-top: -1em;','display: none;'}) ][left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'>[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})Vous&nbsp;&ecirc;tes&nbsp;ici&nbsp;:&nbsp;<br />][(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
 	
 	$('.panorama-viewport a.icone-carte').bind('mouseover', function(){
 		if ($(this).next().css('display') == 'none') {
@@ -172,14 +172,14 @@ $(document).ready(function(){
 		<BOUCLE_toutesinteractions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 			
 			[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
-			<BOUCLE_imagedefondcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
+			<BOUCLE_imagedefondcourante(DOCUMENTS){tous}{id_document=#ID_IMAGE_FOND}>
 				$('.interaction#_toutesinteractions:ID_INTERACTION').append("<img src='#URL_DOCUMENT' width='"+$('.interaction#_toutesinteractions:ID_INTERACTION').css('width')+"' height='"+$('.interaction#_toutesinteractions:ID_INTERACTION').css('height')+"' style='position: absolute; top: 0; left: 0;'/>").css('opacity',1).css('border','none').css('background','none');
 				$('.interaction#_toutesinteractions:ID_INTERACTION').bind('click', function() {
 								return true;
 							});
 					
 				[ (#REM) interactions qui ont précisé une image de fond au survol : ajouter l'image dans le cadre ]
-				<BOUCLE_imagedefondsurvolcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND_SURVOL}>
+				<BOUCLE_imagedefondsurvolcourante(DOCUMENTS){tous}{id_document=#ID_IMAGE_FOND_SURVOL}>
 					$('.interaction#_toutesinteractions:ID_INTERACTION img').bind('mouseover', function(){
 						$(this).attr('src', '#URL_DOCUMENT');
 					}).bind('mouseout', function(){
@@ -192,7 +192,7 @@ $(document).ready(function(){
 			
 
 			[ (#REM) interactions avec les objets : ajouter l'image de l'objet et gérer le drag and drop dans le panier ]
-			<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
+			<BOUCLE_objetcourant(DOCUMENTS){tous}{id_document=#ID_IMAGE_FOND}>
 				[(#MODE_JEU|=={'oui'}|?{' ',''})	
 				[(#TYPE|=={'objet'}|?{' ',''})
 					$('.type-objet#ID_DOCUMENT').bind('click', function() {
@@ -224,7 +224,7 @@ $(document).ready(function(){
 			
 
 			[ (#REM) interactions qui requi�rent un objet pour �tre actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
-			<BOUCLE_objetactivationobjet(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
+			<BOUCLE_objetactivationobjet(DOCUMENTS){tous}{id_document=#ID_OBJET_ACTIVATION}>
 				if (mode_jeu) {
 				$('.interaction#ID_INTERACTION')
 					.unbind('click')
@@ -245,7 +245,7 @@ $(document).ready(function(){
 								texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 								alert_panorama(texte_apres_activation);]
 						      
-							<BOUCLE_documentobjetapresactivationobjet(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
+							<BOUCLE_documentobjetapresactivationobjet(DOCUMENTS){tous}{id_document=#ID_OBJET_APRES_ACTIVATION}>
 								$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 								$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 								$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
@@ -304,7 +304,7 @@ $(document).ready(function(){
 										texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 										alert_panorama(texte_apres_activation);]
 
-										<BOUCLE_documentobjetapresactivationlieu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
+										<BOUCLE_documentobjetapresactivationlieu(DOCUMENTS){tous}{id_document=#ID_OBJET_APRES_ACTIVATION}>
 											$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 											$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 											$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
@@ -339,7 +339,7 @@ $(document).ready(function(){
 
 
 			[(#REM) Transistion de type film avant d'activer l'interaction ]
-			<BOUCLE_filmtransitionstd(DOCUMENTS){id_document=#ID_FILM_TRANSITION}>
+			<BOUCLE_filmtransitionstd(DOCUMENTS){tous}{id_document=#ID_FILM_TRANSITION}>
 				$('.interaction#ID_INTERACTION').bind('click', function(){
 					setTimeout(function(){
 						document.location.href=$('.interaction#ID_INTERACTION').attr('href');
@@ -415,7 +415,7 @@ $(document).ready(function(){
 <B_documentsassocies>
 <div class="documents-lieu">
 <h2><:panoramas:documents_associes:></h2>
-<BOUCLE_documentsassocies(DOCUMENTS)>[(#ID_DOCUMENT|inclusdans{#GET**{docs}}|?{' ',''})
+<BOUCLE_documentsassocies(DOCUMENTS){tous}>[(#ID_DOCUMENT|inclusdans{#GET**{docs}}|?{' ',''})
 		<a href="#URL_DOCUMENT" class="thickbox">[(#LOGO_DOCUMENT||image_reduire{0,100})]</a>
 	]</BOUCLE_documentsassocies>
 </div>
@@ -431,7 +431,7 @@ imgLoader.src = "#CHEMIN{img_pack/ajax-loader.gif}";
 <BOUCLE_interactionstransitions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 
 	[ (#REM) pr�chargement des images de fond de survol ]
-	<BOUCLE_imagedefondsurvolprechargement(DOCUMENTS){id_document=#ID_IMAGE_FOND_SURVOL}>
+	<BOUCLE_imagedefondsurvolprechargement(DOCUMENTS){tous}{id_document=#ID_IMAGE_FOND_SURVOL}>
 		<img src="#URL_DOCUMENT"  width="0" height="0" alt="" />				
 	</BOUCLE_imagedefondsurvolprechargement>
 
@@ -440,7 +440,7 @@ imgLoader.src = "#CHEMIN{img_pack/ajax-loader.gif}";
 <div class="images-transition-interaction#ID_INTERACTION" style="display: none; position: absolute; top: 0; left: 0;">
 <ul class="innerfade">
 	
-<BOUCLE_imagestransition(DOCUMENTS)>[(#ID_DOCUMENT|inclusdans{#GET**{transition}}|?{' ',''})
+<BOUCLE_imagestransition(DOCUMENTS){tous}>[(#ID_DOCUMENT|inclusdans{#GET**{transition}}|?{' ',''})
 		<li>[<img src="(#FICHIER)" height="#_visites:HAUTEUR" />]</li>
 	]</BOUCLE_imagestransition>
 </ul>
@@ -523,7 +523,7 @@ $(document).ready(function(){
 		if ($.cookie('objets_ramasses_memo')) {
 			tableau_objets_ramasses_memo = $.cookie('objets_ramasses_memo').split(','); 
 			<BOUCLE_objets(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}{type=objet}>
-			<BOUCLE_imageobjet(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
+			<BOUCLE_imageobjet(DOCUMENTS){tous}{id_document=#ID_IMAGE_FOND}>
 			if (tableau_objets_ramasses_memo.indexOf('#ID_DOCUMENT')>=0) {
 				//l'objet a déjà été ramassé
 				$('.interaction#ID_INTERACTION').remove();

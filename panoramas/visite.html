@@ -9,56 +9,11 @@
 <INCLURE{fond=inc-head}>
 </head>
 
-<body class="page_article">
-<div id="page">
+<body class="page_visite">
+	<div id="page">
+		[(#MODELE{visite}{id_visite=#ID_VISITE})]
+	</div>
 
-	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}>
-
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_visiteparent(VISITES_VIRTUELLES){id_visite=#ID_VISITE}> &gt; <a href="#URL_PAGE{visite,id_visite=#ID_VISITE}">[(#TITRE|couper{80})]</a></BOUCLE_visiteparent>[ &gt; (#TITRE|couper{80})]</div>
-
-
-	<div id="conteneur">
-
-		[(#REM) Contenu principal : contenu de l'article ]
-		<div id="contenu">
-
-			<div class="cartouche">
-				#DEBUT_SURLIGNE
-				<h1 class="#EDIT{titre} titre">#TITRE</h1>
-				#FIN_SURLIGNE
-
-				
-			</div>
-			#DEBUT_SURLIGNE
-			[<div class="#EDIT{chapo} chapo">(#DESCRIPTIF)</div>]
-			<br class="nettoyeur" />
-			#FIN_SURLIGNE
-
-			[(#MODELE{visite}{id_visite=#ID_VISITE})]
-
-			
-			
-
-		</div><!-- fin contenu -->
-
-
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
-
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}>
-
-
-		</div><!-- fin navigation -->
-
-	</div><!-- fin conteneur -->
-
-	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
-
-</div><!-- fin page -->
 </body>
 </html>
 </BOUCLE_visite_principal>

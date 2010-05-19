@@ -1,0 +1,38 @@
+[ (#REM) interactions qui requi�rent d'avoir r�ussi un questionnaire avant ]
+			<BOUCLE_objetactivationjeu(JEUX){id_jeu=#ID_JEU_ACTIVATION}>
+				if (mode_jeu) {
+				$('.interaction#ID_INTERACTION')
+					.unbind('click')
+					.bind('click', function() {
+								if($.cookie('jeux_reussis')) {
+									var tableau_jeux_visites = $.cookie('jeux_reussis').split(','); 
+									if (tableau_jeux_visites.indexOf('#ID_JEU')>=0) {
+										[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
+										texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+										alert_panorama(texte_apres_activation);]
+										<BOUCLE_documentobjetapresactivationjeu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
+											$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT'  style='max-height: 100px; margin-left: 10px;' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+											$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
+											$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+							
+											//mis � jour des cookies
+											var objets_ramasses = $('div.panorama-panier ul').html();
+											$.cookie('objets_ramasses', objets_ramasses);
+							
+											//v�rifier si on a trouv� tous les objets du jeu. Si oui, on affiche un message de f�licitation et la partie est termin�e
+											verifier_objets_ramasses();
+										</BOUCLE_documentobjetapresactivationjeu>
+									} else {
+										[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
+										texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+										alert_panorama(texte_avant_activation);]
+									}
+								} else	{
+									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
+									texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+									alert_panorama(texte_avant_activation);]
+								}
+								return false;
+							});
+				}[(#REM) fin mode_jeu ]
+			</BOUCLE_objetactivationjeu>

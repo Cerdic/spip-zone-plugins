@@ -276,16 +276,16 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= $descriptif;
 	$out .= "</textarea><br />\n";
 
-	$resultlieu = spip_query("SELECT * FROM spip_visites_virtuelles_lieux WHERE id_lieu="._q($id_lieu));
+	$resultlieu = sql_query("SELECT * FROM spip_visites_virtuelles_lieux WHERE id_lieu="._q($id_lieu));
 		if ($rowlieu = spip_fetch_array($resultlieu)) {
 			$id_photo = $rowlieu['id_photo'];
-			$resultdocument = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($id_photo));
-			if ($rowdocument = spip_fetch_array($resultdocument)) {
+			$resultdocument = sql_query("SELECT * FROM spip_documents WHERE id_document="._q($id_photo));
+			if ($rowdocument = sql_fetch($resultdocument)) {
 				$fichier = $rowdocument['fichier'];
 				$largeur = $rowdocument['largeur'];
 				$hauteur = $rowdocument['hauteur'];
 				$out .= "<div>
-					<img id='panorama-selection-interaction' src='../".$fichier."' width='".$largeur."' height='".$hauteur."' />
+					<img id='panorama-selection-interaction' src='../IMG/".$fichier."' width='".$largeur."' height='".$hauteur."' />
 				</div>
 				";
 			}
