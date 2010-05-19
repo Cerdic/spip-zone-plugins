@@ -6,8 +6,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_recherche_a2a_charger($id_article){
 	$recherche = _request('recherche');
 	$recherche_titre = _request('recherche_titre');
-	// par defaut chercher seulement dans le titre:
-	if (is_null($recherche_titre) && strlen($recherche) == 0) $recherche_titre = 'oui';
 	$id_article_orig = $id_article;
 
 	return 

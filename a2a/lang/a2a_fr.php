@@ -5,7 +5,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_lies' => 'Lier des articles',
+	'articles_lies' => 'ARTICLES LI&Eacute;S',
+	
+	// E
+	'explication_navigateur' => 'Cliquez sur [Ajouter] pour naviguer dans l\'arborescence du site afin de s&eacute;lectionner les articles &agrave; lier.',
 	
 	// L
 	'lier_cet_article' => 'Lier',
@@ -17,10 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'rang_moins' => 'Monter',
 	'rang_plus' => 'Descendre',
+	'recherche_arbo' => 'Recherche arborescente',
+	'recherche_texte' => 'Recherche textuelle',
 	'rechercher' => 'Rechercher',
 	'rechercher_un_article_a_lier' => 'Rechercher un article',
 	'rechercher_seulement_titres' => 'Rechercher seulement dans les titres',
-	'rechercher_tip_articles_ids' => '(Pour afficher directement l\'article num&eacute;ro 123, entrer \'art123\'.)',
+	'rechercher_tip_articles_ids' => 'Pour afficher directement l\'article num&eacute;ro 123, entrer \'art123\'.',
 	
 	// S
 	'supprimer_le_lien' => 'D&eacute;lier',

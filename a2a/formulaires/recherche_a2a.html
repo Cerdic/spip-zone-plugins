@@ -1,13 +1,25 @@
-<div class="ajax" id="formulaire_recherche_a2a">
-	<form action="#SELF" method="post"><div>
-		#ACTION_FORMULAIRE{#SELF}
-		<input type="hidden" id="a2a_article_orig" name="id_article" value="#ID_ARTICLE_ORIG" />
-		<br /><:a2a:rechercher_tip_articles_ids:><br />
-		<label for="recherche_a2a"><:a2a:rechercher_un_article_a_lier:> :</label>
-		<input type="text" name="recherche" id="recherche_a2a" />&nbsp;<input type="submit" name="ok" value="<:a2a:rechercher:>" /><br />
-		<input type="checkbox" name="recherche_titre" id="recherche_titre_a2a"[ (#ENV*{recherche_titre}|oui) checked="checked"]/><label for="recherche_titre_a2a"><:a2a:rechercher_seulement_titres:></label><br />
+<div class="formulaire_spip formulaire_recherche_a2a ajax" id="formulaire_recherche_a2a">
+<br class='bugajaxie' />
+<form method='post' action='#ENV{action}#formulaire_recherche_a2a' enctype='multipart/form-data'>
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="recherche_a2a">
+				<input type="hidden" id="a2a_article_orig" name="id_article" value="#ID_ARTICLE_ORIG" />
+				<label for="recherche_a2a"><:a2a:rechercher_un_article_a_lier:> :</label>
+				<p class="explication"><:a2a:rechercher_tip_articles_ids:></p>
+				<input type="text" class="text" name="recherche" id="recherche_a2a" />
+			</li>
+			<li class="">
+				<div class='choix'>
+					<input type="checkbox" name="recherche_titre" id="recherche_titre_a2a"[ (#ENV*{recherche_titre}|oui) checked="checked"]/>
+					<label for="recherche_titre_a2a"><:a2a:rechercher_seulement_titres:></label>
+				</div>
+			</li>
+		</ul>
+		<p class='boutons'><input type="submit" name="ok" value="<:a2a:rechercher:>" /></p>
 	</div>
-	</form>
+</form>
 
 	#SET{exclure,#ARRAY{0,#ID_ARTICLE_ORIG}}
 	<BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}>

@@ -8,7 +8,8 @@ function a2a_affiche_milieu($flux){
 	if ($flux['args']['exec'] == "articles"){
 		$contexte['id_article_orig'] = $flux["args"]["id_article"];
 		$flux['data'] .= "<div id='pave_a2a'>";
-		$flux['data'] .= debut_cadre_enfonce("", true, "", _T('a2a:articles_lies'));
+		$bouton = bouton_block_depliable(_T('a2a:articles_lies'), "replie", "pave_a2a_depliable");
+		$flux['data'] .= debut_cadre_enfonce(find_in_path('images/a2a-22.png'), true, "", $bouton);
 		$flux['data'] .= recuperer_fond('fonds/a2a_interface', $contexte);
 		$flux['data'] .= fin_cadre_enfonce(true);
 		$flux['data'] .= "</div>";

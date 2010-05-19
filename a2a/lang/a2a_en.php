@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher' => 'Search',
 	'rechercher_un_article_a_lier' => 'Search for an article',
 	'rechercher_seulement_titres' => 'Search only in titles',
-	'rechercher_tip_articles_ids' => '(To find article number 123 directly, type \'art123\'.)',
+	'rechercher_tip_articles_ids' => 'To find article number 123 directly, type \'art123\'.',
 	
 	// S
 	'supprimer_le_lien' => 'Unlink',

@@ -1,3 +1,4 @@
+<div id="editer_articles_lies-#ID_ARTICLE_ORIG" class="ajax-action nom_action">
 <B_LesLie>
 <div class="cadre cadre-liste"><table width="100%" cellpadding="2" cellspacing="0" border="0">
 <BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}>
@@ -17,5 +18,24 @@
 </B_LesLie>
 <:a2a:pas_articles_lies:>
 <//B_LesLie>
-
-#FORMULAIRE_RECHERCHE_A2A{#ID_ARTICLE_ORIG}
+<div id="pave_a2a_depliable" class="bloc_depliable blocreplie">
+	<p id="type_recherche_a2a">
+		<a href="#" id="recherche_texte" class="on"><:a2a:recherche_texte:></a> | 
+		<a href="#" id="recherche_arbo"><:a2a:recherche_arbo:></a>
+	</p>
+	#FORMULAIRE_RECHERCHE_A2A{#ID_ARTICLE_ORIG}
+	#FORMULAIRE_NAVIGATEUR_A2A{#ID_ARTICLE_ORIG}
+</div>
+<script type="text/javascript">
+(function($){
+	$(function(){
+		$('#formulaire_navigateur_a2a').hide();
+		$('#type_recherche_a2a a').click(function(){
+			$('#pave_a2a_depliable .formulaire_spip').toggle('slow');
+			$('#type_recherche_a2a a').toggleClass('on');
+			return false;
+		});
+	});
+})(jQuery);
+</script>
+</div>

@@ -1,0 +1,13 @@
+<div class="formulaire_spip formulaire_navigateur_a2a ajax" id="formulaire_navigateur_a2a">
+<br class='bugajaxie' />
+<form method='post' action='#ENV{action}#formulaire_recherche_a2a' enctype='multipart/form-data'>
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="cadre_padding">
+			<p class="explication"><:a2a:explication_navigateur:></p>
+			<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents}}{name=parents}{articles=1}>
+		</div>
+		<p class='boutons'><input type="submit" name="ok" value="<:a2a:lier_cet_article:>" /></p>
+	</div>
+</form>
+</div>
