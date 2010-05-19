@@ -18,7 +18,7 @@ function genie_chaud_dist($last) {
 	return 1;
 }
 
-function microblog_taches_generales_cron($taches_generales){
+function chaud_taches_generales_cron($taches_generales){
 #	if ($cfg = @unserialize($GLOBALS['meta']['chaud'])
 #	AND $cfg['notifier']) {
 		// surveiller toutes les heures les publications chaudes

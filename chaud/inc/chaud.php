@@ -8,7 +8,9 @@
 
 
 function chaud_notifier() {
+spip_log('notification', 'chaud');
 	if ($a = chaud_articles(1.5)) {
+spip_log(var_export($a, true), 'chaud');
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		$envoyer_mail($GLOBALS['meta']['email_webmaster'],
 			_L('Articles chauds'),
