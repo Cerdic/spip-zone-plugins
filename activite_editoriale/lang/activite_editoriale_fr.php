@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//CFG
 	
-	'Cfg'                      =>'Configurer le plugin Activité éditoriale',
+	'cfg'                      =>'Configurer le plugin Activité éditoriale',
 	'cfg_champ'                =>'Quel est le champ analysé pour savoir la MAJ ?',
 	'cfg_maj_rubrique'         =>'Le champ MAJ de la rubrique',
 	'cfg_date_modif_branche'   =>'Le champ DATE_MODIF des articles (breves) de la branche',
