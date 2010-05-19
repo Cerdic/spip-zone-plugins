@@ -140,7 +140,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 
 	$max_par_page=30;
 
-	if (empty($lettre)) 
+	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
