@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recherche_arbo' => 'Recherche arborescente',
 	'recherche_texte' => 'Recherche textuelle',
 	'rechercher' => 'Rechercher',
-	'rechercher_un_article_a_lier' => 'Rechercher un article',
+	'rechercher_un_article_a_lier' => 'Rechercher un article&nbsp;:',
 	'rechercher_seulement_titres' => 'Rechercher seulement dans les titres',
 	'rechercher_tip_articles_ids' => 'Pour afficher directement l\'article num&eacute;ro 123, entrer \'art123\'.',
 	

@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rang_moins' => 'Abajo',
 	'rang_plus' => 'Arriba',
 	'rechercher' => 'Buscar',
-	'rechercher_un_article_a_lier' => 'Buscar un art&iacute;culo',
+	'rechercher_un_article_a_lier' => 'Buscar un art&iacute;culo:',
 	
 	// S
 	'supprimer_le_lien' => 'Desconectar',
