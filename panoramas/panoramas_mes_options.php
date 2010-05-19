@@ -1,6 +1,6 @@
 <?php
 
-$spip_pipeline[insert_head] = str_replace('|f_jQuery', '' , $spip_pipeline[insert_head]); 
+//$spip_pipeline[insert_head] = str_replace('|f_jQuery', '' , $spip_pipeline[insert_head]); 
 
 
 if (!defined('_DIR_PLUGIN_PANORAMAS')){

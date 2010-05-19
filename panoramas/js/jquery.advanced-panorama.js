@@ -27,7 +27,7 @@
 			var mapId = panoImg.attr('usemap');
 			var areaId = 0;
 						
-			$('map[@name='+mapId+']').find('area').each(
+			$('map[name='+mapId+']').find('area').each(
 				function() {
 					switch ($(this).attr("shape").toLowerCase()) {
 						case 'rect' : 	
