@@ -1,0 +1,8 @@
+<BOUCLE_a(ARTICLES){id_article=#ENV{id}}>
+<tr>
+	<td><a href="?exec=articles&amp;id_article=#ID_ARTICLE">#ID_ARTICLE</a></td>
+	<td>#ENV{score}</td>
+	<td><a href="#URL_ARTICLE">#TITRE</a></td>
+	<td>[(#DATE_MODIF|affdate_court)]</td>
+</tr>
+</BOUCLE_a>

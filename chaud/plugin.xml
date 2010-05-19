@@ -1,0 +1,29 @@
+<plugin>
+	<nom>C'est chaud</nom>
+	<auteur>
+	Fil
+	&#169; 2010 - GNU/LGPL
+	</auteur>
+	<version>0.0.1</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Informer le webmestre dès qu'un article est "chaud", c'est-à-dire dès qu'il a une popularité importante qui ne vient pas du fait qu'il est récent.
+	</description>
+	<lien></lien>
+	<prefix>
+	chaud
+	</prefix>
+	<icon>
+	images/chaud.png
+	</icon>
+
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/chaud.php</inclure>
+	</pipeline>
+
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0;]" />
+</plugin>
