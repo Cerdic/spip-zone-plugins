@@ -78,16 +78,16 @@ function encodage($source,$doc_attente){
 					$bitrate_final = $bitrate;
 				}
 			}
-			$audiobitrate = $bitrate_final;
+			$abitrate = $bitrate_final;
 		}else{
-			$audiobitrate = $source['audiobitrate'];
+			$abitrate = $source['audiobitrate'];
 		}
 	}else{
-		$audiobitrate = lire_config("spipmotion/bitrate_audio_$extension_attente","64");
+		$abitrate = lire_config("spipmotion/bitrate_audio_$extension_attente","64");
 	}
 
-	$texte .= "ab=".$audiobitrate."000\n";
-	$audiobitrate = "--audiobitrate ".$audiobitrate;
+	$texte .= "ab=".$abitrate."000\n";
+	$audiobitrate = "--audiobitrate ".$abitrate;
 
 	/**
 	 * Vérification des samplerates
@@ -101,15 +101,15 @@ function encodage($source,$doc_attente){
 					$audiosamplerate_final = $samplerate;
 				}
 			}
-			$audiosamplerate = $audiosamplerate_final;
+			$samplerate = $audiosamplerate_final;
 		}else{
-			$audiosamplerate = $source['audiosamplerate'];
+			$samplerate = $source['audiosamplerate'];
 		}
 	}else{
-		$audiosamplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
+		$samplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
 	}
-	$audiofreq = "--audiofreq ".$audiosamplerate;
-	$texte .= "ar=$audiosamplerate\n";
+	$audiofreq = "--audiofreq ".$samplerate;
+	$texte .= "ar=$samplerate\n";
 
 	/**
 	 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
@@ -217,13 +217,13 @@ function encodage($source,$doc_attente){
 		 * Si la source est inférieure, on utilise ceux de la source
 		 */
 		if(intval($source['videobitrate']) && (intval($source['videobitrate']) < lire_config("spipmotion/bitrate_$extension_attente","448"))){
-			$bitrate = $source['videobitrate'];
+			$vbitrate = $source['videobitrate'];
 		}else{
-			$bitrate = lire_config("spipmotion/bitrate_$extension_attente","448");
+			$vbitrate = lire_config("spipmotion/bitrate_$extension_attente","448");
 		}
 
-		$texte .= "vb=".$bitrate."000\n";
-		$bitrate = "--bitrate ".$bitrate;
+		$texte .= "vb=".$vbitrate."000\n";
+		$bitrate = "--bitrate ".$vbitrate;
 
 		if($vcodec == '--vcodec libx264'){
 			$vpre = '--vpre hq';
@@ -239,7 +239,7 @@ function encodage($source,$doc_attente){
 		 * sinon on utilise notre script pour ffmpeg
 		 */
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
-			$encodage = "ffmpeg2theora $chemin --max_size ".$width_finale."x".$height_finale." --F $fps_num --nice 9 -o $fichier_temp &> $fichier_log";
+			$encodage = "ffmpeg2theora $chemin -v 8 -V $vbitrate -A $abitrate -H $samplerate --max_size ".$width_finale."x".$height_finale." -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
 		}else{
 			$encodage = find_in_path('script_bash/spipmotion.sh')." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels $bitrate $vpre $vpre2 --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 		}
