@@ -60,6 +60,11 @@
 		<nom>declarer_url_objets</nom>
 		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
+	<!-- pour permettre des boucles de recherche sur les evenements -->
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>agenda_pipelines.php</inclure>
+	</pipeline>
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
@@ -77,5 +82,7 @@
   </bouton>
  	<necessite id='SPIP' version='[2.0.3;]' />
 	<necessite id='spip_bonux' version='[1.9.1;]' />
+<!-- si le plugin fulltext est actif, il faut qu'agenda soit pris en compte avant lui pour le pipeline rechercher_liste_des_champs -->
+	<utilise id='Fulltext' version='[0.2;]' />
 	<categorie>date</categorie>
 </plugin>

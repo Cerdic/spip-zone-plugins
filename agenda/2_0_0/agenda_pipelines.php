@@ -145,7 +145,15 @@ function agenda_afficher_nombre_objets_associes_a($flux){
 	}
 	return $flux;
 }
-
+function agenda_rechercher_liste_des_champs($tables){
+	$tables['evenement'] = array(
+				'titre' => 8, 
+				'descriptif' => 5,
+				'lieu' => 5,
+				'adresse' => 3			
+			);
+	return $tables;
+}
 /**
  * Declarer evenement comme un objet interpretable dans les url
  * ?evenement12
