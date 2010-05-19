@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'articles_lies' => 'Link to an article',
 	
+	// E
+	'explication_navigateur' => 'Click on [Add] to navigate through the site and select the article(s) to link.',
+	
 	// L
 	'lier_cet_article' => 'Link',
 	
@@ -17,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'rang_moins' => 'Up',
 	'rang_plus' => 'Down',
+	'recherche_arbo' => 'Tree navigation',
+	'recherche_texte' => 'Textual search',
 	'rechercher' => 'Search',
 	'rechercher_un_article_a_lier' => 'Search for an article',
 	'rechercher_seulement_titres' => 'Search only in titles',
