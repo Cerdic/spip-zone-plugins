@@ -29,7 +29,7 @@ function activite_tester_maj_rubrique(){
 }
 
 function activite_tester_date_modif_branche(){
-    if ($rubLists = sql_select(array('id_rubrique','extras_delai','extras_identifiants'), "spip_rubriques", "`extras_delai` != ''")){
+    if ($rubLists = sql_select(array('id_rubrique','extras_delai','extras_identifiants','titre'), "spip_rubriques", "`extras_delai` != ''")){
         include_spip('inc/utils');
         while($list = sql_fetch($rubLists)){
             
@@ -45,7 +45,7 @@ function activite_tester_date_modif_branche(){
 }
 
 function activite_tester_date_modif_rubrique(){
-    if ($rubLists = sql_select(array('id_rubrique','extras_delai','extras_identifiants'), "spip_rubriques", "`extras_delai` != ''")){
+    if ($rubLists = sql_select(array('id_rubrique','extras_delai','extras_identifiants','titre'), "spip_rubriques", "`extras_delai` != ''")){
         include_spip('inc/utils');
         while($list = sql_fetch($rubLists)){
             
