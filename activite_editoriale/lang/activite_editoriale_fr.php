@@ -21,12 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//R
 	'responsables'             =>  'Responsables',
 	'rubrique_doit_maj'        => 'Une rubrique doit être mise a jour',
-	'rubrique_pas_maj'         => "Attention, la rubrique @titre@ n'a pas ete mise a jour depuis @jours@ jours",
+	'rubrique_pas_maj'         => "Attention, la rubrique “ @titre@ ” n'a pas été mise à jour depuis @jours@ jours",
 	'rubriques_pas_a_jour'     =>"Rubriques n'ayant pas été mises à jour à temps",
 	
 	//CFG
 	
-	'cfg'                      =>'Configurer le plugin Activité éditoriale',
+	'Cfg'                      =>'Configurer le plugin Activité éditoriale',
 	'cfg_champ'                =>'Quel est le champ analysé pour savoir la MAJ ?',
 	'cfg_maj_rubrique'         =>'Le champ MAJ de la rubrique',
 	'cfg_date_modif_branche'   =>'Le champ DATE_MODIF des articles (breves) de la branche',

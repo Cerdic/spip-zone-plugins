@@ -33,9 +33,10 @@ function activite_tester_date_modif_branche(){
         include_spip('inc/utils');
         while($list = sql_fetch($rubLists)){
             
-            $date_modif = strtotime(trim(recuperer_fond('inclure/maj_rubrique',array('id_rubrique'=>$list['id_rubrique']))));
-
+            $date_modif = trim(recuperer_fond('inclure/maj_rubrique',array('id_rubrique'=>$list['id_rubrique'])));
+            
                 if (age_rubrique($date_modif)>$list['extras_delai']){
+                    $list['maj'] = $date_modif;
                     activite_editoriale_envoyer_mail($list);
                     //echo "s;";
                 }
@@ -49,9 +50,10 @@ function activite_tester_date_modif_rubrique(){
         include_spip('inc/utils');
         while($list = sql_fetch($rubLists)){
             
-            $date_modif = strtotime(trim(recuperer_fond('inclure/maj_rubrique',array('id_rubrique'=>$list['id_rubrique']))));
+            $date_modif = trim(recuperer_fond('inclure/maj_rubrique',array('id_rubrique'=>$list['id_rubrique'])));
 
                 if (age_rubrique($date_modif)>$list['extras_delai']){
+                    $list['maj'] = $date_modif;
                     activite_editoriale_envoyer_mail($list);
 
                 }
