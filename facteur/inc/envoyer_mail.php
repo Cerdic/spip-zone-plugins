@@ -27,6 +27,14 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	}
 	$sujet = nettoyer_titre_email($sujet);
 
+	// mode TEST : forcer l'email
+	if (defined('_TEST_EMAIL_DEST')) {
+		if (!_TEST_EMAIL_DEST)
+			return false;
+		else
+			$destinataire = _TEST_EMAIL_DEST;
+	}
+
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 	if (!empty($from))
 		$facteur->From = $from;
