@@ -1,0 +1,21 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID}{mode=document} {tout}>
+
+<!-- "Video For Everybody" v0.4 by Kroc Camen of Camen Design <http://camendesign.com/code/video_for_everybody> -->
+<!-- first try HTML5 playback. if serving as XML, expand `controls` to `controls="controls"` and autoplay likewise       -->
+<video poster="[(#LOGO_DOCUMENT|fichier)]" controls="controls">
+	<source src="#URL_DOCUMENT" type="#MIME_TYPE" />
+	<BOUCLE_alt (DOCUMENTS types_documents) {id_document=#ENV{alt}}{mode=document} {tout}>
+	<source src="#URL_DOCUMENT" type="#MIME_TYPE" />
+	</BOUCLE_alt>
+	<!-- fallback to Flash -->
+	<object  type="application/x-shockwave-flash"
+		data="#CHEMIN{player.swf}?image=../../[(#LOGO_DOCUMENT|fichier)]&amp;file=../../#URL_DOCUMENT" width="#LARGEUR" height="#HAUTEUR">
+		<!-- Firefox uses the `data` attribute above, IE/Safari uses the param below -->
+		<param name="movie" value="#CHEMIN{player.swf}?image=../../[(#LOGO_DOCUMENT|fichier)]&amp;file=../../#URL_DOCUMENT" />
+		<!-- fallback image. note the title field below, put the title of the video there -->
+		<img src="[(#LOGO_DOCUMENT|fichier)]"  alt="#TITRE" />
+	</object>
+</video>
+<!-- you *must* offer a download link as they may be able to play the file locally. customise this bit all you want -->
+<p>Si la vidéo ne s'affiche pas, <a href="#URL_DOCUMENT">cliquez ici</a>.</p>
+</BOUCLE_tous>
