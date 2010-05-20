@@ -345,7 +345,7 @@ function exec_spiplistes_courrier_edit(){
 	$page_result .= ''
 		. '<label for="texte_courrier">'._T('spiplistes:texte_courrier').'</label>'
 		. afficher_barre('document.formulaire_courrier_edit.message')
-		. '<textarea id="texte_courrier" name="message" '.$GLOBALS['browser_caret'].' class="barre_inserer formo" rows="20" cols="40" wrap=soft>'.$eol
+		. '<textarea id="texte_courrier" name="message" '.$GLOBALS['browser_caret'].' class="porte_plume_partout barre_inserer formo" rows="20" cols="40" wrap=soft>'.$eol
 		. $texte
 		. '</textarea>'.$eol
 		. (!$id_courrier ? '<input type="hidden" name="new" value="oui" />'.$eol : '')
