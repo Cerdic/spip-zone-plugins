@@ -26,6 +26,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
 
+	// Certains define prennent le pas sur le reste (mode TEST)
+	if (defined('_TEST_MICROBLOG_SERVICE')) {
+		if (_TEST_MICROBLOG_SERVICE == '') {
+			spip_log('microblog desactive par _TEST_MICROBLOG_SERVICE');
+			return false;
+		}
+		else
+			$service = _TEST_MICROBLOG_SERVICE;
+	}
+	if (defined('_TEST_MICROBLOG_USER')) $user = _TEST_MICROBLOG_USER;
+	if (defined('_TEST_MICROBLOG_PASS')) $pass = _TEST_MICROBLOG_PASS;
+
+
 	// services connus
 	$apis = array(
 		'spipo' => 'http://%user%:%pass%@spip.org/api/statuses/update.xml',
