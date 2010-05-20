@@ -34,8 +34,12 @@ function Fastcache_affichage_final($texte) {
 				"header('Vary: Cookie, Accept-Encoding');\n";
 
 			foreach ($page['entetes'] as $x => $v)
-				if ($x !== 'X-Spip-Cache')
-					$head .= "header('$x: ".addslashes($v)."');\n";
+				if ($x !== 'X-Spip-Cache') {
+					if (strlen($v))
+						$head .= "header('$x: ".addslashes($v)."');\n";
+					else
+						$head .= "header('$x');\n";
+				}
 
 			// entetes pour les stats
 			foreach(array('id_article', 'id_breve', 'id_rubrique') as $id)
