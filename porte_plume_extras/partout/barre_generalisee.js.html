@@ -9,6 +9,7 @@ $(document).ready(function(){
 	[(#CONFIG{ppp/configuration_description_ppp,on}|oui)$('#descriptif_site')
 		.barre_outils('edition');]
 	[(#CONFIG{ppp/hauteurtexte_ppp,on}|oui)$('#text_area').height(($(window).height()/2.2)+'px');]
+   $('textarea[class~=porte_plume_partout]').barre_outils('edition');
 	}
 	addbarre();
 	onAjaxLoad(addbarre);
