@@ -49,8 +49,9 @@
 			{date_fin >= #GET{'borne_debut_mois'}}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
 				#DESCRIPTIF,#LIEU,
-				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
+				[(#ENV{self}|parametre_url{#ENV{var_date},courante})]})
 			]</BOUCLE_calendrier>
+			[(#REM) le "courante" ci-dessus peut etre remplace par "debut" pour retrouver l'ancien comportement]
 			
 			[(#REM) Puis on les affiche dans un agenda]
 			[(#ENV{#ENV{var_date},#ENV{date}}|agenda_mini)]

@@ -7,7 +7,7 @@
  */
 
 /**
- * Afficher une date de facon textuelle les dates de debut et fin en fonction des cas
+ * Afficher de facon textuelle les dates de debut et fin en fonction des cas
  * - Le lundi 20 fevrier a 18h
  * - Le 20 fevrier de 18h a 20h
  * - Du 20 au 23 fevrier
@@ -117,14 +117,40 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 	while (($ts_startday1<=$ts_date_fin)&&($maxdays-->0))
 	{
 		$day=date('Y-m-d H:i:s',$ts_startday1);
-		$agenda[$cal][(date_anneemoisjour($day))][] =  array(
-			'CATEGORIES' => $cal,
-			'DTSTART' => $idatedeb,
-			'DTEND' => $idatefin,
-			'DESCRIPTION' => $descriptif,
-			'SUMMARY' => $titre,
-			'LOCATION' => $lieu,
-			'URL' => $url);
+		$d1 = date('Y-m-d', strtotime($date_deb));
+		$d2 = date('Y-m-d', $ts_startday1);
+		$newurl = $url;
+		// On remplace les dates nommees:
+		$newurl = str_replace("date=courante","date=$d2","$newurl");
+		$newurl = str_replace("date=debut","date=$d1","$newurl");
+		// element a ajouter:
+		$a2 = array (
+			     'CATEGORIES' => $cal,
+			     'DTSTART' => $idatedeb,
+			     'DTEND' => $idatefin,
+			     'DESCRIPTION' => $descriptif,
+			     'SUMMARY' => $titre,
+			     'LOCATION' => $lieu,
+			     'URL' => $newurl);
+		//DEBUG echo "\n<!-- ";
+		//DEBUG echo "" . sprintf("d1=%s d2=%s",$d1,$d2) . "";
+		// On extrait la bonne liste:
+		$tab = (array)$agenda[$cal][(date_anneemoisjour($day))];
+		// si la date de debut de l'élément est exactement la
+		// date du jour courant ET qu'il y a deja des
+		// evenements, on met l'element a ajouter en premier
+		// dans la liste; sinon on l'ajoute a la fin comme
+		// d'habitude:
+		if( $d1 == $d2 && count($tab)>0 ) {
+		  //DEBUG echo " a2a1 ";
+		  array_unshift($tab,$a2);
+		} else {
+		  //DEBUG echo " a1a2 ";
+		  $tab[] = $a2;
+		}
+		// On remplace par la nouvelle liste:
+		$agenda[$cal][(date_anneemoisjour($day))] = $tab;
+		//DEBUG echo " -->";
 		$ts_startday1 += 26*3600; // le jour suivant : +26 h pour gerer les changements d'heure
 		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1), 
 		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure	
