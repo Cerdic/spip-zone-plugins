@@ -66,14 +66,14 @@ function generer_meta_tags(){
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
 	
-	if (count($GLOBALS['contexte']) == 0) {
-		$type_object = 'sommaire';
-	} elseif (isSet($GLOBALS['contexte']['id_article'])) {
+	if (isSet($GLOBALS['contexte']['id_article'])) {
 		$id_object   = $GLOBALS['contexte']['id_article'];
 		$type_object = 'article';
 	} elseif (isSet($GLOBALS['contexte']['id_rubrique'])) {
 		$id_object   = $GLOBALS['contexte']['id_rubrique'];
 		$type_object = 'rubrique';
+	} else{
+		$type_object = 'sommaire';
 	}
 
 	/* META TAGS */
