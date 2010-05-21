@@ -1,7 +1,13 @@
 #CACHE{0}
+<!-- squelette catalogue/transaction.html -->
 [(#REM) 
 	On récupère le titre de la variante, la liste des options et le prix.
 	Plutot que de passer ces variables en POST, on les passe en variables de session.
+
+	L'objectif de ce squelette est donc d'initialiser un certain nombre de variables par des SET
+	avant d'appeler l'article qui contient la fiche d'inscription
+	
+	On a fait une version simplifiée pour la fiche en une seule passe.
 ]
 
 [(#REM) On récupère le numéro de la variante depuis le formulaire "fiche" ]
@@ -57,4 +63,4 @@
 [(#SESSION_SET{liste_options, [(#GET{liste_options, <:catalogue:neant:>})]})]
 
 [(#REM) Maintenant qu'on a toutes les variables, on appelle la fiche d'inscription... ]
-[(#INCLURE{fond=article,id_article=94,env})]
+[(#INCLURE{fond=article,id_article=79,env})]
