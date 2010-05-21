@@ -63,7 +63,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 		}
 		if ($api_carte) {
 			$gis_append_view_map = charger_fonction($api_carte.'_append_view_map','inc');
-			$mapa = '<div id="viewMap" style="width: 477px; height: 100px; border:1px solid #000"></div>';
+			$mapa = '<div id="viewMap" style="width:477px;height:100px;border:1px solid #000;overflow:hidden;"></div>';
 		  	$mapa .= $gis_append_view_map('viewMap',$glat,$glonx,$zoom,array(array('lonx'=>$glonx,'lat'=>$glat)),$gicon);
 		} else {
 			$mapa = '<div>' . _T('gis:falta_plugin') . '</div>';
