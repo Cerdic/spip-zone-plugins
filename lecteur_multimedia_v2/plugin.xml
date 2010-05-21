@@ -6,7 +6,7 @@
 		</multi>
 	</nom>
 	<auteur>BoOz, kent1</auteur>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>lm2</prefix>
@@ -26,10 +26,15 @@
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>lm2_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>pre_liens</nom>
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="lib:soundmanagerv295b-20100323" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv295b-20100323.zip" />
+	<necessite id="lib:soundmanagerv296a-20100520" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv296a-20100520.zip" />
 	<necessite id="cfg" version="[1.14.1;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<categorie>multimedia</categorie>
 </plugin>

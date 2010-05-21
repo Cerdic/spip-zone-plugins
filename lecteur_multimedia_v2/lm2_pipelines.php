@@ -1,8 +1,15 @@
 <?php
+
+function lm2_jquery_plugins($plugins){
+	if(!test_espace_prive()){
+		$plugins[] = _DIR_LIB_SM.'script/soundmanager2.js';
+	}
+	return $plugins;
+}
+
 function lm2_insert_head($flux){
 	$config_inline = lire_config('lecteur_multimedia/inlineplayer');
 	$inline_player = $config_inline ? recuperer_fond('lm2_'.$config_inline) : '';
-	$flux .= '<script type="text/javascript" src="'.find_in_path(_DIR_LIB_SM.'script/soundmanager2.js').'"></script>'."\n";
 	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/lm2_playlist_jquery.js').'"></script>'."\n";
 	$flux .= '<link rel="stylesheet" href="'.generer_url_public('lm2_player.css').'" type="text/css" media="all" />'."\n";
 	$flux .= '<script type="text/javascript" src="'.generer_url_public('lm2_config.js').'"></script>'."\n";
@@ -34,7 +41,7 @@ function lm2_pre_liens($texte) {
 		}else{
 			$l = "<a href='$reg[4]' rel='enclosure'>".couper($reg[4],50)."</a>";
 		}
-		$p = $reg[0] ;
+		$p = $reg[0];
 		$texte = str_replace($p,$l,$texte);
 		}
 	}
