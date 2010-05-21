@@ -2,6 +2,6 @@
  <nom>Video HTML5</nom>
   <version>2010.05.20</version>
  <prefix>html5_video</prefix>
- <auteur>Pierre Rudloff ([contact->mailto:jdupont@monsite.net])</auteur>
+ <auteur>Pierre Rudloff</auteur>
  <description>Ce plugin remplace la balise &lt;video&gt; par un lecteur en HTML5.</description>
 </plugin>
