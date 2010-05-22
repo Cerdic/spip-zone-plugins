@@ -62,13 +62,9 @@ function exec_ajout_participation() {
 		. '<input name="statut"  type="checkbox" value="ok" id="statut" /><br />'
 		. '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires')." :</strong></label>\n"
 		. '<textarea rows="4" cols="80" name="commentaire" id="commentaire" class="formo">'.$commentaire.'</textarea>'
-		
-		. '<input name="agir" type="hidden" value="ajoute" />'
-		. '<input name="id_activite" type="hidden" value="'.$id_activite."\" />\n"
-		. '<input name="id_evenement" type="hidden" value="'.$id_evenement."\" />\n"
-		. '<input name="url_retour" type="hidden" value="'. str_replace('&', '&amp;', $_SERVER["HTTP_REFERER"]) . "\" />\n";
+		. '<input name="id_activite" type="hidden" value="'.$id_activite."\" />\n";
 
-		echo generer_form_ecrire('action_activites', "\n<div>$res</div>", '', _T('asso:bouton_ajoute'));
+		echo redirige_action_post('ajouter_participations', $id_evenement, 'voir_activites', '', "\n<div>$res</div>", '', _T('asso:bouton_ajoute'));
 
 		echo fin_cadre_relief(true);  
 		echo fin_gauche(), fin_page();

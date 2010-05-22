@@ -21,24 +21,15 @@ function exec_activites(){
 		echo minipres();
 	} else {
 		
-		$url_articles = generer_url_ecrire('articles');
-		$url_ajout_activite = generer_url_ecrire('edit_activite','agir=ajoute');
-		$url_edit_activites = generer_url_ecrire('edit_activite','agir=modifie');
-		$url_voir_activites = generer_url_ecrire('voir_activites');
-		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		
 		association_onglets();
-		
 		echo debut_gauche("",true);
-		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite("",true);
-		
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_toutes_activites'));
 		
 		// FILTRES
@@ -63,7 +54,7 @@ function exec_activites(){
 		echo '<option value="%"';
 		if ($mot=="%") { echo ' selected="selected"'; }
 		echo '> Toutes</option>';
-		$query = sql_select("*", "spip_mots", "type='Evènements'");
+		$query = sql_select("titre", "spip_mots", "type='Evènements'");
 		while($data = sql_fetch($query)) {
 			echo '<option value="'.$data["titre"].'"';
 			if ($mot==$data["titre"]) { echo ' selected="selected"'; }
@@ -103,7 +94,7 @@ function exec_activites(){
 			$sql = sql_select("sum(inscrits) AS total", "spip_asso_activites", "id_evenement=".$data['id_evenement']);
 			while ($inscrits = sql_fetch($sql)) { echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total']."</td>\n"; }
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_modifier_article'), 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . "</td>\n";
-			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'creer-12.gif', 'edit_activite', 'agir=modifie&id_article='.$data['id_article']) . "</td>\n";
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . "</td>\n";
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_voir_liste_inscriptions'), 'voir-12.png', 'voir_activites', 'id='.$data['id_evenement']) . "</td>\n";
 			echo '</tr>';
 		}

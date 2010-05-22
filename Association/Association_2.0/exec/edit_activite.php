@@ -23,12 +23,11 @@ function exec_edit_activite(){
 		
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$action=$_REQUEST['agir'];
-		$id = intval(_request('id'));
-		if($action=='ajoute'){$id_evenement=$id;}
-		else {$id_activite=$id;}	
-		
-		$data = !$id ? '' : sql_fetsel("*", "spip_asso_activites", "id_activite=$id");
+		$id_activite = intval(_request('id'));
+		$id_evenement= intval(_request('id_evenement'));
+
+		$data = !$id_activite ? '' : sql_fetsel("*", "spip_asso_activites", "id_activite=$id_activite");
+
 		if ($data){
 			$id_evenement=$data['id_evenement'];
 			$nom=$data['nom'];
@@ -44,77 +43,72 @@ function exec_edit_activite(){
 			$statut=$data['statut'];
 			$commentaire=$data['commentaires'];
 		} else $date = date('Y-m-d');
-		if ($id_evenement) {
-		  if ($data = sql_fetsel("*", "spip_evenements", "id_evenement=$id_evenement")) {
+
+		$data = !$id_evenement ? '' : sql_fetsel("*", "spip_evenements", "id_evenement=$id_evenement");
+		if (!$data) {
+			include_spip('inc/minipres');
+			echo minipres();
+		} else {
+		  
 			$titre=$data['titre'];
 			$date_debut=$data['date_debut'];
 			$lieu=$data['lieu'];
-		  }
-		}
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions')) ;
+			$statut = ($statut=='ok') ? ' checked="checked"' : '';
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions')) ;
 		
-		association_onglets();
+			association_onglets();
+			echo debut_gauche("",true);
+			echo debut_boite_info(true);
+			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', _T('asso:activite_nd') . '<br />';
+			echo '<span class="spip_xx-large">';
+			echo $id_evenement;
+			echo '</span></div>';
+			echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$titre.'</div>';
+			echo '<br /><div>'.association_date_du_jour().'</div>';		
+			echo fin_boite_info(true);	
+			echo association_retour();
+			echo debut_droite("",true);
+			echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_mise_a_jour_inscriptions'));
 		
-		echo debut_gauche("",true);
-		
-		echo debut_boite_info(true);
-		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', _T('asso:activite_nd') . '<br />';
-		echo '<span class="spip_xx-large">';
-		echo $id_evenement;
-		echo '</span></div>';
-		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$titre.'</div>';
-		echo '<br /><div>'.association_date_du_jour().'</div>';		
-		echo fin_boite_info(true);	
-		
-		
-		echo association_retour();
+			$res = ''
+		.'<label for="date"><strong>'._T('asso:activite_libelle_date')." (AAAA-MM-JJ) :</strong></label>\n"
+		.'<input name="date" type="text" value="'.$date.'" id="date" class="formo" />'
+		.'<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet')." :</strong></label>\n"
+		.'<input name="nom"  type="text" value="'.$nom.'" id="nom" class="formo" />'
+		.'<label for="id_membre"><strong>'._T('asso:activite_libelle_adherent')." :</strong></label>\n"
+		.'<input name="id_membre" type="text" value="'.$id_adherent.'" id="id_membre" class="formo" />'
+		.'<label for="membres"><strong>'._T('asso:activite_libelle_membres')." :</strong></label>\n"
+		.'<input name="membres"  type="text" value="'.$membres.'" id="membres" class="formo" />'
+		.'<label for="non_membres"><strong>'._T('asso:activite_libelle_non_membres')." :</strong></label>\n"
+		.'<input name="non_membres"  type="text" size="40" value="'.$non_membres.'" id="non_membrese" class="formo" />'
+		.'<label for="inscrits"><strong>'._T('asso:activite_libelle_nombre_inscrit')." :</strong></label>\n"
+		.'<input name="inscrits"  type="text" value="'.$inscrits.'" id="inscrits" class="formo" />'
+		.'<label for="email"><strong>'._T('asso:activite_libelle_email')." :</strong></label>\n"
+		.'<input name="email"  type="text" value="'.$email.'" id="email" class="formo" />'
+		.'<label for="telephone"><strong>'._T('asso:activite_libelle_telephone').' :</strong></label>'
+		.'<input name="telephone" type="text" value="'.$telephone.'" id="telephone" class="formo" />'
+		.'<label for="adresse"><strong>'._T('asso:activite_libelle_adresse_complete').' :</strong></label>'
+		.'<textarea name="adresse" id="adresse" class="formo">'.$adresse."</textarea>\n"
+		.'<label for="montant"><strong>'._T('asso:activite_libelle_montant_inscription'). " :</strong></label>\n"
+		.'<input name="montant"  type="text" value="'.$montant.'" id="montant" class="formo" />'
+		.'<label for="statut"><strong>'._T('asso:activite_libelle_statut'). " ok :</strong></label>\n"
+		.'<input name="statut"  type="checkbox" value="ok"' 
+		. $statut
+		. " id='statut' /><br />\n"
+		.'<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires')." :</strong></label>\n"
+		."<textarea name='commentaire' id='commentaire' class='formo'>".$commentaire."</textarea>\n"
+		.'<input name="id_evenement" type="hidden" value="'.$id_evenement.'" />'
+		.'<div style="float:right">'
+		.'<input type="submit" value="'
+		. _T('asso:bouton_' . ($id_activite ? 'modifie' : 'ajoute'))
+		. '" class="fondo" /></div>';
 
-		
-		echo debut_droite("",true);
-		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_mise_a_jour_inscriptions'));
-		
-		echo '<form method="post" action="'. generer_url_ecrire('action_activites').'"><div>';
-		echo '<label for="date"><strong>'._T('asso:activite_libelle_date')." (AAAA-MM-JJ) :</strong></label>\n";
-		echo '<input name="date" type="text" value="'.$date.'" id="date" class="formo" />';
-		echo '<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet')." :</strong></label>\n";
-		echo '<input name="nom"  type="text" value="'.$nom.'" id="nom" class="formo" />';
-		echo '<label for="id_membre"><strong>'._T('asso:activite_libelle_adherent')." :</strong></label>\n";
-		echo '<input name="id_membre" type="text" value="'.$id_adherent.'" id="id_membre" class="formo" />';
-		echo '<label for="membres"><strong>'._T('asso:activite_libelle_membres')." :</strong></label>\n";
-		echo '<input name="membres"  type="text" value="'.$membres.'" id="membres" class="formo" />';
-		echo '<label for="non_membres"><strong>'._T('asso:activite_libelle_non_membres')." :</strong></label>\n";
-		echo '<input name="non_membres"  type="text" size="40" value="'.$non_membres.'" id="non_membrese" class="formo" />';
-		echo '<label for="inscrits"><strong>'._T('asso:activite_libelle_nombre_inscrit')." :</strong></label>\n";
-		echo '<input name="inscrits"  type="text" value="'.$inscrits.'" id="inscrits" class="formo" />';
-		echo '<label for="email"><strong>'._T('asso:activite_libelle_email')." :</strong></label>\n";
-		echo '<input name="email"  type="text" value="'.$email.'" id="email" class="formo" />';
-		echo '<label for="telephone"><strong>'._T('asso:activite_libelle_telephone').' :</strong></label>';
-		echo '<input name="telephone" type="text" value="'.$telephone.'" id="telephone" class="formo" />';
-		echo '<label for="adresse"><strong>'._T('asso:activite_libelle_adresse_complete').' :</strong></label>';
-		echo '<textarea name="adresse" id="adresse" class="formo">'.$adresse."</textarea>\n";
-		echo '<label for="montant"><strong>'._T('asso:activite_libelle_montant_inscription'). " :</strong></label>\n";
-		echo '<input name="montant"  type="text" value="'.$montant.'" id="montant" class="formo" />';
-		echo '<label for="statut"><strong>'._T('asso:activite_libelle_statut'). " ok :</strong></label>\n";
-		echo '<input name="statut"  type="checkbox" value="ok"';
-		if ($statut=='ok') { echo ' checked="checked"'; }
-		echo " id='statut' /><br />\n";
-		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires')." :</strong></label>\n";
-		echo "<textarea name='commentaire' id='commentaire' class='formo'>".$commentaire."</textarea>\n";
-		echo '<input name="agir" type="hidden" value="'.$action."\" />\n";
-		echo '<input name="id_evenement" type="hidden" value="'.$id_evenement.'" />';
-		echo '<input name="id_activite" type="hidden" value="'.$id_activite.'" />';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'" />';
-		
-		echo '<div style="float:right;">';
-		echo '<input type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
-		else {echo _T('asso:bouton_envoyer');}
-		echo '" class="fondo" /></div>';
-		echo '</div></form>';
-		
-		fin_cadre_relief();  
-		 echo fin_gauche(),fin_page(); 
+			echo redirige_action_post(($id_activite ? 'modifier_activites' : 'ajouter_activites'), $id_activite, 'voir_activites', '', "\n<div>$res</div>", ' method="post"');
+
+			fin_cadre_relief();  
+			echo fin_gauche(),fin_page(); 
+		}
 	}  
 }
 ?>

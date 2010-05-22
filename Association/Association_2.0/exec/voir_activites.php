@@ -53,7 +53,7 @@ function exec_voir_activites(){
 		echo fin_boite_info(true);
 		
 		
-		$res=association_icone(_T('asso:activite_bouton_ajouter_inscription'),  generer_url_ecrire('edit_activite','agir=ajoute'.'&id='.$id_evenement), 'panier_in.gif');
+		$res=association_icone(_T('asso:activite_bouton_ajouter_inscription'),  generer_url_ecrire('edit_activite', 'id_evenement='.$id_evenement), 'panier_in.gif');
 		$res.=association_icone(_T('asso:activite_bouton_voir_liste_inscriptions'),  generer_url_ecrire('pdf_activite','id='.$id_evenement), "print-24.png");	
 
 		echo bloc_des_raccourcis($res);
@@ -85,32 +85,35 @@ function exec_voir_activites(){
 		echo '<form action="'.generer_url_ecrire('action_activites').'" method="post">';
 		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<th><strong>'._T('asso:activite_entete_id')."</strong></th>\n";
-		echo '<th><strong>'._T('asso:activite_entete_date')."</strong></th>\n";
-		echo '<th><strong>'._T('asso:activite_entete_nom')."</strong></th>\n";
-		echo '<th><strong>'._T('asso:activite_entete_adherent')."</strong></th>\n";
-		echo '<th><strong>'._T('asso:activite_entete_inscrits')."</strong></th>\n";
-		echo '<th><strong>'._T('asso:activite_entete_montant')."</strong></th>\n";
-		echo '<th colspan="3"><strong>'._T('asso:activite_entete_action')."</strong></th>\n";
+		echo '<th style="text-align: center;">'._T('asso:activite_entete_id')."</th>\n";
+		echo '<th style="text-align: center;">'._T('asso:activite_entete_date')."</th>\n";
+		echo '<th style="text-align: center;">'._T('asso:activite_entete_nom')."</th>\n";
+		echo '<th style="text-align: center;">'._T('asso:activite_entete_adherent')."</th>\n";
+		echo '<th style="text-align: center;">'._T('asso:activite_entete_inscrits')."</th>\n";
+		echo '<th style="text-align: center;">'._T('asso:activite_entete_montant')."</th>\n";
+		echo '<th colspan="3" style="text-align: center;"><strong>'._T('asso:activite_entete_action')."</th>\n";
 		echo '</tr>';
 		$query = sql_select("*", "spip_asso_activites", "id_evenement=$id_evenement AND statut like '$statut'  ", '', "id_activite") ;
 	 
 		while ($data = sql_fetch($query)) {
 			
+			$id = $data['id_adherent'];
+			$adh = !$id ? 'X' : 
+			  ("<a href='" .generer_url_ecrire('voir_adherent', "id=$id") . "'>$id</a>");
 			if($data['statut']=="ok") { $class= "valide"; }
 			else { $class="pair"; }
 			
 			echo "\n<tr>";
 			echo '<td style="text-align:right;" class="'.$class. ' border1">'.$data['id_activite']."</td>\n";
-			echo '<td style="text-align:right;" class="'.$class. ' border1">'.association_datefr($data['date'])."</td>\n";
+			echo '<td style="text-align: center;;" class="'.$class. ' border1">'.association_datefr($data['date'])."</td>\n";
 			echo '<td class="'.$class. ' border1">';
 			if(empty($data['email'])) { echo $data['nom']; }
 			else { echo '<a href="mailto:'.$data['email'].'">'.$data['nom'].'</a>'; }
 			echo "</td>\n";
-			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$data['id_adherent']."</td>\n";
+			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$adh."</td>\n";
 			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$data['inscrits']."</td>\n";
 			echo '<td style="text-align: right;" class="'.$class. ' border1">'.number_format($data['montant'], 2, ',', ' ')."</td>\n";
-			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton(_T('asso:activite_bouton_maj_inscription'), 'edit-12.gif', 'edit_activite','agir=modifie&id='.$data['id_activite']), "</td>\n";
+			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton(_T('asso:activite_bouton_maj_inscription'), 'edit-12.gif', 'edit_activite','id='.$data['id_activite']), "</td>\n";
 			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'cotis-12.gif', 'ajout_participation', 'id='.$data['id_activite']), "</td>\n";
 			echo '<td style="text-align: center;" class="'.$class. ' border1"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
 			echo '</tr>';

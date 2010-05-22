@@ -153,10 +153,10 @@ function exec_voir_adherent(){
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
 			echo '<td>&nbsp;</td>';
-			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_id')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:pret_entete_article')."</strong></td>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_date_sortie')."</strong></td>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_date_retour')."</strong></td>\n";
+			echo '<td style="text-align:right;"><strong>'._T('asso:entete_id')."</strong></td>\n";
+			echo '<td><strong>'._T('asso:vente_entete_article')."</strong></td>\n";
+			echo '<td style="text-align:right;"><strong>'._T('asso:prets_entete_date_sortie')."</strong></td>\n";
+			echo '<td style="text-align:right;"><strong>'._T('asso:prets_entete_date_retour')."</strong></td>\n";
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_auteur);}
@@ -177,7 +177,7 @@ function exec_voir_adherent(){
 				echo '<td class="arial11 border1" style="text-align:right;">';
 				if($data['date_retour']=="0000-00-00"){echo '&nbsp;';} else {echo association_datefr($data['date_retour']);}
 				echo "</td>\n";
-				echo '<td class="arial11 border1" style="text-align:center">' . association_bouton(_L('adherent_bouton_maj_pret'), 'edit-12.gif', 'edit_pret', 'agir=modifie&id_pret='.$data['id_pret']) . "</td>\n";
+				echo '<td class="arial11 border1" style="text-align:center">' . association_bouton(_T('asso:adherent_bouton_maj_operation'), 'edit-12.gif', 'edit_pret', 'agir=modifie&id_pret='.$data['id_pret']) . "</td>\n";
 				echo '</tr>';
 			}
 			echo '</table>';
