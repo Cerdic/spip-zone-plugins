@@ -156,10 +156,10 @@ function queue_unlink_job($id_job){
 function queue_start_job($row){
 
 // deserialiser les arguments
-	$arguments = unserialize($row['args']);
-	if ($arguments===false){
+	$args = unserialize($row['args']);
+	if ($args===false){
 		spip_log('arguments job errones '.var_export($row,true),'queue');
-		$arguments = array();
+		$args = array();
 	}
 
 	$fonction = $row['fonction'];
@@ -178,7 +178,22 @@ function queue_start_job($row){
 		return false;
 	}
 
-	return call_user_func_array($fonction, $arguments);
+	switch (count($args)) {
+		case 0:	$res = $fonction(); break;
+		case 1:	$res = $fonction($args[0]); break;
+		case 2:	$res = $fonction($args[0],$args[1]); break;
+		case 3:	$res = $fonction($args[0],$args[1], $args[2]); break;
+		case 4:	$res = $fonction($args[0],$args[1], $args[2], $args[3]); break;
+		case 5:	$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4]); break;
+		case 6:	$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4], $args[5]); break;
+		case 7:	$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4], $args[5], $args[6]); break;
+		case 8:	$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7]); break;
+		case 9:	$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8]); break;
+		case 10:$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9]); break;
+		default:
+			$res = call_user_func_array($fonction, $args);
+	}
+	return $res;
 
 }
 
