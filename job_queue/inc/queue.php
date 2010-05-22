@@ -344,6 +344,17 @@ function queue_is_cron_job($function,$inclure){
  */
 function queue_update_next_job_time($next_time=null){
 	static $nb_jobs_scheduled = null;
+	static $deja_la = false;
+	// prendre le min des $next_time que l'on voit passer ici, en cas de reentrance
+	static $next = null;
+	if (!is_null($next_time)){
+		if (is_null($next) OR $next>$next_time)
+			$next = $next_time;
+	}
+	// queue_close_job peut etre reentrant ici
+	if ($deja_la) return;
+	$deja_la = true;
+
 	include_spip('base/abstract_sql');
 	$time = time();
 
@@ -353,25 +364,26 @@ function queue_update_next_job_time($next_time=null){
 	while ($row = sql_fetch($res))
 		queue_close_job($row,$time);
 
-
-	if (is_null($next_time) OR !isset($GLOBALS['meta']['queue_next_job_time'])){
+	// chercher la date du prochain job si pas connu
+	if (is_null($next) OR !isset($GLOBALS['meta']['queue_next_job_time'])){
 		$date = sql_getfetsel('date','spip_jobs',"status='scheduled'",'','date','0,1');
 		$next_time = strtotime($date);
 	}
 	else {
-		if ($next_time){
+		if ($next){
 			if (is_null($nb_jobs_scheduled))
 				$nb_jobs_scheduled = sql_countsel('spip_jobs',"status='scheduled' AND date<".sql_quote(date('Y-m-d H:i:s',$time)));
-			elseif ($next_time<=time())
+			elseif ($next<=$time)
 				$nb_jobs_scheduled++;
 			// si trop de jobs en attente, on force la purge en fin de hit
 			// pour assurer le coup
 			if ($nb_jobs_scheduled>_JQ_NB_JOBS_OVERFLOW)
 				define('_DIRECT_CRON_FORCE',true);
 		}
-		$next_time = min($GLOBALS['meta']['queue_next_job_time'],$next_time);
+		$next_time = min($GLOBALS['meta']['queue_next_job_time'],$next);
 	}
 	include_spip('inc/meta');
 	ecrire_meta('queue_next_job_time',$next_time);
+	$deja_la = false;
 }
 ?>
