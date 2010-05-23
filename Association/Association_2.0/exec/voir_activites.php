@@ -91,7 +91,7 @@ function exec_voir_activites(){
 		echo '<th style="text-align: center;">'._T('asso:activite_entete_adherent')."</th>\n";
 		echo '<th style="text-align: center;">'._T('asso:activite_entete_inscrits')."</th>\n";
 		echo '<th style="text-align: center;">'._T('asso:activite_entete_montant')."</th>\n";
-		echo '<th colspan="3" style="text-align: center;"><strong>'._T('asso:activite_entete_action')."</th>\n";
+		echo '<th colspan="3" style="text-align: center;">'._T('asso:activite_entete_action')."</th>\n";
 		echo '</tr>';
 		$query = sql_select("*", "spip_asso_activites", "id_evenement=$id_evenement AND statut like '$statut'  ", '', "id_activite") ;
 	 

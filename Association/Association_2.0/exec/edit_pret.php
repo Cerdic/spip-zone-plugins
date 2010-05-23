@@ -20,13 +20,8 @@ function exec_edit_pret(){
 		if (!autoriser('configurer')) {
 			include_spip('inc/minipres');
 			echo minipres();
-			exit;
-		}
-		
+		} else {		
 
-		$url_retour = $_SERVER['HTTP_REFERER'];
-		
-		$action=$_REQUEST['agir'];
 		$id_pret= intval(_request('id_pret'));
 		$data = !$id_pret ? '' : sql_fetsel('*', 'spip_asso_prets', "id_pret=$id_pret");
 		if ($data) {
@@ -54,17 +49,17 @@ function exec_edit_pret(){
 		
 		echo debut_gauche('',true);
 		
-		echo debut_boite_info(true);
-		$query = sql_select("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
-		while ($data = sql_fetch($query)) {
+		$data = sql_fetsel("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
+		if ($data) {
+			echo debut_boite_info(true);
 			$statut=$data['statut'];
 			echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
 			echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
 			echo '<p>'._T('asso:ressources_libelle_code').': '.$data['code'].'<br />';
 			echo $data['intitule'];
 			echo '</p>';
+			echo fin_boite_info(true);
 		}
-		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite('', true);
 		
@@ -103,7 +98,7 @@ function exec_edit_pret(){
 		. $id_emprunteur.'" id="id_emprunteur" class="formo" />'
 		. '<label for="commentaire_sortie"><strong>'
 		. _T('asso:prets_libelle_commentaires')." :</strong></label>\n"
-		. '<textarea name="commentaire_sortie" id="commentaire_sortie" class="formo">'
+		. '<textarea name="commentaire_sortie" id="commentaire_sortie" class="formo" rows="3" cols="80" >'
 		. $commentaire_sortie.'</textarea>'
 		. '</fieldset>';
 		
@@ -122,7 +117,7 @@ function exec_edit_pret(){
 		. association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'))
 		. '<label for="commentaire_retour"><strong>'
 		. _T('asso:prets_libelle_commentaires')." :</strong></label>\n"
-		. '<textarea name="commentaire_retour" id="commentaire_retour" class="formo">'
+		. '<textarea name="commentaire_retour" id="commentaire_retour" class="formo" rows="3" cols="80">'
 		. $commentaire_retour."</textarea>\n"
 		. '</fieldset>'
 		. '<input name="id_pret" type="hidden" value="'.$id_pret.'" />'
@@ -135,5 +130,6 @@ function exec_edit_pret(){
 		echo redirige_action_post($action .'_prets', $id_pret, 'prets', "id=$id_ressource", $res);
 		fin_cadre_relief();  
 		echo fin_gauche(), fin_page();
+		}
 	}
 ?>

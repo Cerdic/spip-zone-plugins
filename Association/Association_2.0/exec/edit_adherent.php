@@ -121,7 +121,7 @@ function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_inte
 
 	$res .= '<label for="commentaire"><strong>'
 	. _T('asso:adherent_libelle_remarques').' :</strong></label>'
-	. '<textarea name="commentaire" id="commentaire" class="formo">'
+	. '<textarea name="commentaire" id="commentaire" class="formo" rows="3" cols="80" >'
 	. $commentaire
 	. '</textarea>'
 	. "\n<div style='float:right;'>"

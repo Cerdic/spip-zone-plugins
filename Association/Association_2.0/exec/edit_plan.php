@@ -89,9 +89,9 @@ function exec_edit_plan(){
 		if (!$checked) {$res .= ' checked="checked"';}
 		$res .= ' />'._T('asso:plan_libelle_non')
 		. '<br /><label for="commentaire"><strong>' . _T('asso:commentaires') . '&nbsp;:</strong></label>'
-		. '<textarea name="commentaire" id="commentaire" class="formo" />'
+		. '<textarea name="commentaire" id="commentaire" class="formo" rows="4" cols="80">'
 		. $commentaire
-		. '</textarea>'
+		. "</textarea>\n"
 		. '<div style="float:right;">'
 		. '<input type="submit" value="'
 		. _T('asso:bouton_envoyer')

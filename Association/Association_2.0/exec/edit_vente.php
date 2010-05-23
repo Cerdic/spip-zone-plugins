@@ -94,7 +94,7 @@ function exec_edit_vente() {
 		echo '<label for="frais_envoi"><strong>', _T('asso:frais_d_envoi_en_e__'), '</strong></label>';
 		echo '<input name="frais_envoi" type="text" value="'.$frais_envoi.'" id="frais_envoi" class="formo" />';
 		echo '<label for="commentaire"><strong>' . _T('asso:commentaires') . '&nbsp;:</strong></label>';
-		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
+		echo '<textarea name="commentaire" id="commentaire" class="formo" rows="3" cols="80">'.$commentaire.'</textarea>';
 		
 		echo '<input name="id" type="hidden" value="'.$id_vente.'" />';		
 		echo '<input name="agir" type="hidden" value="'.$action.'" />';

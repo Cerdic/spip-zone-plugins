@@ -7,7 +7,7 @@
 		<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
 		<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class='formo'/>
 		<label for="rue"><strong><:asso:config_libelle_rue:></strong></label>
-		<textarea name="rue" id="rue"  class='formo'/>[(#ENV{rue})]</textarea>
+		<textarea name="rue" id="rue" rows="3" cols="80" class='formo'>[(#ENV{rue})]</textarea>
 		<label for="cp"><strong><:asso:config_libelle_codepostal:></strong></label>
 		<input type="text" name="cp" [value="(#ENV{cp})"] id="cp"  class='formo'/>
 		<label for="ville"><strong><:asso:config_libelle_ville:></strong></label>
@@ -107,9 +107,9 @@
 		<//B_pc_prets>
 		</p>
 		<p>
-		<label for="indexation"><strong><:asso:config_libelle_indexation:></strong></label>
-		<input type="radio" name="indexation" value="id_auteur" [(#ENV{indexation}|=={id_auteur}|?{checked="checked"})] id="indexation" /><:asso:config_libelle_id_adherent:> (id_auteur)
-		<input type="radio" name="indexation" value="id_asso" [(#ENV{indexation}|=={id_asso}|?{checked="checkted"})] id="indexation" /><:asso:config_libelle_id_asso:> (id_asso)<br />
+		<label><strong><:asso:config_libelle_indexation:></strong></label>
+		<input type="radio" name="indexation" value="id_auteur" [(#ENV{indexation}|=={id_auteur}|?{checked="checked"})] /><:asso:config_libelle_id_adherent:> (id_auteur)
+		<input type="radio" name="indexation" value="id_asso" [(#ENV{indexation}|=={id_asso}|?{checked="checkted"})] /><:asso:config_libelle_id_asso:> (id_asso)<br />
 		</p>
 	</fieldset>
 

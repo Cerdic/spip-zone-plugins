@@ -73,14 +73,14 @@ function exec_edit_don(){
 		$res .= '<label for="argent"><strong>' . _T('asso:don_financier_en_e__') . '</strong></label>';
 		$res .= '<input name="argent" type="text" value="'.$argent.'" id="argent" class="formo" />'
 		. association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'))
-		. '<label for="colis"><strong>' . _T('asso:colis') . '&nbsp;:</strong></label>'
-		. '<input name="colis" type="text" value="'.$colis.'" id="colis" class="formo" />'
-		. '<label for="valeur"><strong>' . _T('asso:contre_valeur_en_e__') . '</strong></label>'
+		. "<label for='colis'><strong>" . _T('asso:colis') . "&nbsp;:</strong></label>\n"
+		. "<input name='colis' type='text' value='$colis' id='colis' class='formo' />\n"
+		. '<label for="valeur"><strong>' . _T('asso:contre_valeur_en_e__') . "</strong></label>\n"
 		. '<input name="valeur" type="text" value="'.$valeur.'" id="valeur" class="formo" />'
 		. '<label for="contrepartie"><strong>Geste de l\'association :</strong></label>'
 		. '<input name="contrepartie" type="text" size="50" value="'.$contrepartie.'" id="contrepartie" class="formo" />'
-		. '<label for="commentaire"><strong>' . _T('asso:remarques') . '</strong></label>'
-		. '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>'
+		. '<label for="commentaire"><strong>' . _T('asso:remarques') . "</strong></label>\n"
+		. '<textarea name="commentaire" id="commentaire" class="formo" rows="3" cols="80">'.$commentaire."</textarea>\n"
 		. '<div style="float:right;"><input name="submit" type="submit" value="';
 		if ( isset($action)) {$res .= _L($action);}
 		else {$res .= _T('asso:bouton_envoyer');}

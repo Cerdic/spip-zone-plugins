@@ -91,15 +91,16 @@ function exec_edit_ressource(){
 			if ($statut==$var) {$res .= ' checked="checked" ';}
 			$res .= " />\n"._T('asso:ressources_libelle_statut_'.$var);
 		}
+
 		$res .= "\n<br /><label for='commentaire'><strong>"
 		. _T('asso:ressources_libelle_commentaires')
 		. " :</strong></label>\n"
-		. '<textarea name="commentaire" id="commentaire" class="formo">'
+		. '<textarea name="commentaire" id="commentaire" class="formo" rows="3" cols="80">'
 		. $commentaire
 		. "</textarea>\n"
 		. '<div style="float:right;"><input  type="submit" value="'
 		. _T('asso:bouton_envoyer')
-		. "\" class='fondo' />\n";
+		. "\" class='fondo' /></div>\n";
 
 		echo redirige_action_post($action . '_ressources', $id, 'ressources', '', "\n<div>$res</div>\n");
 		
