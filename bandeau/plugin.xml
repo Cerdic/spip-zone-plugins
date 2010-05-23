@@ -93,6 +93,11 @@
 		<titre>titre_liens_entrants</titre>
 		<url>statistiques_referers</url>
 	</bouton>
+	<bouton id="repartition" parent="bando_reactions">
+		<icone>images/statistique-16.png</icone>
+		<titre>spip:icone_repartition_visites</titre>
+		<url>statistiques_repartition</url>
+	</bouton>
 	<bouton id='forum_reactions' parent='bando_reactions'>
 		<icone>images/forum-16.png</icone>
 		<titre>icone_suivi_forums</titre>
