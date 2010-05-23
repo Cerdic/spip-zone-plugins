@@ -47,11 +47,10 @@ function exec_ventes(){
 			$imputation = $data['imputation'];
 			echo "\n<table width='100%'>";
 			echo '<tr>';
-			echo '<td colspan="2"><strong>Totaux '.$imputation.' '.$annee.' :</strong></td>';
+			echo '<td colspan="2"><strong>' . _L('Totaux '.$imputation.' '.$annee).' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td><strong style="color: #9F1C30;">';
-			echo  _T('asso:solde') . '</strong></td>';
+			echo '<td><strong style="color: #9F1C30;">' .  _T('asso:solde') . '</strong></td>';
 			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
@@ -104,22 +103,14 @@ function exec_ventes(){
 		if ($ventes) {
 			$corps =  "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 			. "<tr style='background-color: #DBE1C5;'>\n"
-			. '<td style="text-align:right"><strong>'
-			. _T('asso:id') . "</strong></td>\n"
-			. '<td style="text-align:right"><strong>'
-			. _T('asso:date') . "</strong></td>\n"
-			. '<td><strong>'
-			. _T('asso:article') . "</strong></td>\n"
-			. '<td><strong>'
-			. _T('asso:code') . "</strong></td>\n"
-			. '<td><strong>'
-			. _T('asso:acheteur') . "</strong></td>\n"
-			. '<td><strong>'
-			. _T('asso:membre') . "</strong></td>\n"
-			. '<td style="text-align:right"><strong>'
-			. _T('asso:qte') . "</strong></td>\n"
-			. '<td style="text-align:right"><strong>'
-			. _T('asso:montant') . "</strong></td>\n"
+			. '<th style="text-align:right">' . _T('asso:id') . "</th>\n"
+			. '<th style="text-align:right">' . _T('asso:date') . "</th>\n"
+			. '<th>' . _T('asso:article') . "</th>\n"
+			. '<th>' . _T('asso:code') . "</th>\n"
+			. '<th>' . _T('asso:acheteur') . "</th>\n"
+			. '<th>'. _T('asso:membre') . "</th>\n"
+			. '<th style="text-align:right">' . _T('asso:qte') . "</th>\n"
+			. '<th style="text-align:right">' . _T('asso:montant') . "</th>\n"
 			. '<td colspan="2" style="text-align:center;"><strong>&nbsp;</strong></td>'
 			. '</tr>'
 			. $ventes

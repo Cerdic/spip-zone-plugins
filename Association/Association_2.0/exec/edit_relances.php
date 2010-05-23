@@ -73,11 +73,11 @@ function exec_edit_relances(){
 			. '<td><strong>'
 			. (($indexation=="id_asso") ? _T('asso:adherent_libelle_id_asso') : _T('asso:adherent_libelle_id_adherent'))
 			. "</strong></td>\n"
-			. '<td><strong>' . _T('asso:nom') . "</strong></td>\n"
-			. '<td><strong>' . _T('asso:telephone') . "</strong></td>\n"
-			. '<td><strong>' . _T('asso:portable') . "</strong></td>\n"
-			. '<td><strong>' . _T('asso:validite') . "</strong></td>\n"
-			. '<td><strong>' . _T('asso:envoi') . "</strong></td>\n"
+			. '<th>' . _T('asso:nom') . "</th>\n"
+			. '<th>' . _T('asso:telephone') . "</th>\n"
+			. '<th>' . _T('asso:portable') . "</th>\n"
+			. '<th>' . _T('asso:validite') . "</th>\n"
+			. '<th>' . _T('asso:envoi') . "</th>\n"
 			. '</tr>'
 			.  $corps 
 			. '</table>';

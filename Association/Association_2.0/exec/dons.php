@@ -60,14 +60,14 @@ function exec_dons() {
 		//TABLEAU
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<td><strong>' . _T('asso:id') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:date') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:nom') . "</strong></td>\n";
-		echo '<td style="text-align:right;"><strong>' . _T('asso:argent') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:colis') . "</strong></td>\n";
-		echo '<td style="text-align:right;"><strong>' . _T('asso:valeur') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:contrepartie') . "</strong></td>\n";
-		echo '<td colspan="2"><strong>' . _T('asso:action') . "</strong></td>\n";
+		echo '<th>' . _T('asso:id') . "</th>\n";
+		echo '<th>' . _T('asso:date') . "</th>\n";
+		echo '<th>' . _T('asso:nom') . "</th>\n";
+		echo '<th style="text-align:right;">' . _T('asso:argent') . "</th>\n";
+		echo '<th>' . _T('asso:colis') . "</th>\n";
+		echo '<th style="text-align:right;">' . _T('asso:valeur') . "</th>\n";
+		echo '<th>' . _T('asso:contrepartie') . "</th>\n";
+		echo '<th colspan="2">' . _T('asso:action') . "</th>\n";
 		echo '</tr>';
 		$query = sql_select('*', "spip_asso_dons", "date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
 		while ($data = sql_fetch($query)) {

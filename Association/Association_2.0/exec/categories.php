@@ -37,13 +37,13 @@ function exec_categories(){
 		
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<td><strong>' . _T('asso:id') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:categorie') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:libelle_complet') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:duree_mois') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:montant') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:commentaires') . "</strong></td>\n";
-		echo '<td colspan="2" style="text-align: center;"><strong>' . _T('asso:action') . "</strong></td>\n";
+		echo '<th>' . _T('asso:id') . "</th>\n";
+		echo '<th>' . _T('asso:categorie') . "</th>\n";
+		echo '<th>' . _T('asso:libelle_complet') . "</th>\n";
+		echo '<th>' . _T('asso:duree_mois') . "</th>\n";
+		echo '<th>' . _T('asso:montant') . "</th>\n";
+		echo '<th>' . _T('asso:commentaires') . "</th>\n";
+		echo '<th colspan="2" style="text-align: center;">' . _T('asso:action') . "</th>\n";
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_categories', '', "id_categorie" ) ;
 		while ($data = sql_fetch($query)) {

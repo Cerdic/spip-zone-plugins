@@ -61,10 +61,10 @@ function exec_association() {
 		
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<td><strong>' . _T('asso:nom') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:fonction') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:portable') . "</strong></td>\n";
-		echo '<td><strong>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</strong></td>\n";
+		echo '<th>' . _T('asso:nom') . "</th>\n";
+		echo '<th>' . _T('asso:fonction') . "</th>\n";
+		echo '<th>' . _T('asso:portable') . "</th>\n";
+		echo '<th>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</th>\n";
 		echo '</tr>';
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "fonction !='' AND statut_interne != 'sorti'", '',  "a.nom_famille");
 		while ($data = sql_fetch($query))

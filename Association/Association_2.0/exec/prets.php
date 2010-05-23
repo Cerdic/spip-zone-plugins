@@ -53,11 +53,11 @@ function exec_prets(){
 		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td>&nbsp;</td>';
 		echo '<td>'._T('asso:entete_id').'</td>';
-		echo '<td><strong>'._T('asso:prets_entete_date_sortie').'</strong></td>';
-		echo '<td><strong>'._T('asso:prets_entete_nom').'</strong></td>';
-		echo '<td><strong>'._T('asso:prets_entete_duree').'</strong></td>';
-		echo '<td><strong>'._T('asso:prets_entete_date_retour').'</strong></td>';
-		echo '<td colspan="2" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
+		echo '<th>'._T('asso:prets_entete_date_sortie').'</th>';
+		echo '<th>'._T('asso:prets_entete_nom').'</th>';
+		echo '<th>'._T('asso:prets_entete_duree').'</th>';
+		echo '<th>'._T('asso:prets_entete_date_retour').'</th>';
+		echo '<th colspan="2" style="text-align:center;">'._T('asso:entete_action').'</th>';
 		echo'  </tr>';
 		$index = $GLOBALS['asso_metas']['indexation'];
 		if (!$index) $index = "id_auteur";

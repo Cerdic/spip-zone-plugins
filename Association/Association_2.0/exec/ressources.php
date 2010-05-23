@@ -48,10 +48,10 @@ function exec_ressources(){
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<td>&nbsp;</td>';
-		echo '<td><strong>'._T('asso:ressources_entete_intitule').'</strong></td>';
-		echo '<td><strong>'._T('asso:ressources_entete_code').'</strong></td>';
-		echo '<td><strong>'._T('asso:ressources_entete_montant').'</strong></td>';
-		echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
+		echo '<th>'._T('asso:ressources_entete_intitule').'</th>';
+		echo '<th>'._T('asso:ressources_entete_code').'</th>';
+		echo '<th>'._T('asso:ressources_entete_montant').'</th>';
+		echo '<th colspan="4" style="text-align:center;">'._T('asso:entete_action').'</th>';
 		echo "</tr>\n";
 		$query = sql_select('*', 'spip_asso_ressources', '','',  "id_ressource" ) ;
 		while ($data = sql_fetch($query)) {

@@ -67,13 +67,13 @@ function exec_activites(){
 		//TABLEAU
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<td style="text-align:right;"><strong>' . _T('asso:id') . "</strong></td>";
-		echo '<td><strong>'._T('asso:activite_entete_date')."</strong></td>";
-		echo '<td><strong>'._T('asso:activite_entete_heure')."</strong></td>";
-		echo '<td><strong>'._T('asso:activite_entete_intitule')."</strong></td>";
-		echo '<td><strong>'._T('asso:activite_entete_lieu')."</strong></td>";
-		echo '<td><strong>'._T('asso:activite_entete_inscrits')."</strong></td>";
-		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:activite_entete_action')."</strong></td>";
+		echo '<th style="text-align:right;">' . _T('asso:id') . "</th>";
+		echo '<th>'._T('asso:activite_entete_date')."</th>";
+		echo '<th>'._T('asso:activite_entete_heure')."</th>";
+		echo '<th>'._T('asso:activite_entete_intitule')."</th>";
+		echo '<th>'._T('asso:activite_entete_lieu')."</th>";
+		echo '<th>'._T('asso:activite_entete_inscrits')."</th>";
+		echo '<th colspan="3" style="text-align:center;">'._T('asso:activite_entete_action')."</th>";
 		echo '</tr>';
 		
 		$max_par_page=30;

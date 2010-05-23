@@ -221,13 +221,13 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	$res = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 	. "<tr style='background-color: #DBE1C5;'>\n"
 	. "<td><strong>$t</strong></td>\n"
-	. "<td><strong>"._T('asso:adherent_libelle_photo')."</strong></td>\n"
-	. "<td><strong>"._T('asso:adherent_libelle_nom')."</strong></td>\n"
-	. "<td><strong>"._T('asso:adherent_libelle_prenom')."</strong></td>\n"
-	. "<td><strong>"._T('asso:adherent_libelle_categorie')."</strong></td>\n"
-	. "<td><strong>"._T('asso:adherent_libelle_validite')."</strong></td>\n"
-	. '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_action')."</strong></td>\n"
-	. "<td><strong>"._T('asso:adherent_entete_supprimer_abrev')."</strong></td>\n"
+	. "<th>"._T('asso:adherent_libelle_photo')."</th>\n"
+	. "<th>"._T('asso:adherent_libelle_nom')."</th>\n"
+	. "<th>"._T('asso:adherent_libelle_prenom')."</th>\n"
+	. "<th>"._T('asso:adherent_libelle_categorie')."</th>\n"
+	. "<th>"._T('asso:adherent_libelle_validite')."</th>\n"
+	. '<th colspan="4" style="text-align:center;">'._T('asso:adherent_entete_action')."</th>\n"
+	. "<th>"._T('asso:adherent_entete_supprimer_abrev')."</th>\n"
 	. '</tr>'
 	. $auteurs
 	. '</table>';

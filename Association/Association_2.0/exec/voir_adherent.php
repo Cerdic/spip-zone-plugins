@@ -58,11 +58,11 @@ function exec_voir_adherent(){
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id').'</strong></td>';
-		echo '<td><strong>'._T('asso:adherent_entete_date').'</strong></td>';
-		echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_paiement').'</strong></td>';
-		echo '<td><strong>'._T('asso:adherent_entete_justification').'</strong></td>';
-		echo '<td><strong>'._T('asso:adherent_entete_journal').'</strong></td>';
+		echo '<th style="text-align:right;">'._T('asso:adherent_entete_id').'</th>';
+		echo '<th>'._T('asso:adherent_entete_date').'</th>';
+		echo '<th style="text-align:right;">'._T('asso:adherent_entete_paiement').'</th>';
+		echo '<th>'._T('asso:adherent_entete_justification').'</th>';
+		echo '<th>'._T('asso:adherent_entete_journal').'</th>';
 		echo '</tr>';
 		
 		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_auteur ", '', "date DESC" );
@@ -83,11 +83,11 @@ function exec_voir_adherent(){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_activites').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:adherent_entete_date')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:adherent_entete_activite')."</strong></td>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_inscrits')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:adherent_entete_statut')."</strong></td>\n";
+			echo '<th style="text-align:right;">'._T('asso:adherent_entete_id')."</th>\n";
+			echo '<th>'._T('asso:adherent_entete_date')."</th>\n";
+			echo '<th>'._T('asso:adherent_entete_activite')."</th>\n";
+			echo '<th style="text-align:right;">'._T('asso:adherent_entete_inscrits')."</th>\n";
+			echo '<th>'._T('asso:adherent_entete_statut')."</th>\n";
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			$critere='id_adherent='.$id_auteur;
@@ -118,11 +118,11 @@ function exec_voir_adherent(){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:vente_entete_id')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:vente_entete_date')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:vente_entete_article')."</strong></td>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:vente_entete_quantites')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:vente_entete_date_envoi')."</strong></td>\n";
+			echo '<th style="text-align:right;">'._T('asso:vente_entete_id')."</th>\n";
+			echo '<th>'._T('asso:vente_entete_date')."</th>\n";
+			echo '<th>'._T('asso:vente_entete_article')."</th>\n";
+			echo '<th style="text-align:right;">'._T('asso:vente_entete_quantites')."</th>\n";
+			echo '<th>'._T('asso:vente_entete_date_envoi')."</th>\n";
 			echo "<td><strong>&nbsp;</strong></td>\n";
 			echo '</tr>';
 			$critere='id_acheteur='.$id_auteur;
@@ -153,10 +153,10 @@ function exec_voir_adherent(){
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
 			echo '<td>&nbsp;</td>';
-			echo '<td style="text-align:right;"><strong>'._T('asso:entete_id')."</strong></td>\n";
-			echo '<td><strong>'._T('asso:vente_entete_article')."</strong></td>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:prets_entete_date_sortie')."</strong></td>\n";
-			echo '<td style="text-align:right;"><strong>'._T('asso:prets_entete_date_retour')."</strong></td>\n";
+			echo '<th style="text-align:right;">'._T('asso:entete_id')."</th>\n";
+			echo '<th>'._T('asso:vente_entete_article')."</th>\n";
+			echo '<th style="text-align:right;">'._T('asso:prets_entete_date_sortie')."</th>\n";
+			echo '<th style="text-align:right;">'._T('asso:prets_entete_date_retour')."</th>\n";
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_auteur);}

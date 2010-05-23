@@ -71,9 +71,9 @@ function exec_edit_labels(){
 			 ? _T('asso:adherent_libelle_id_asso')
 			 : _T('asso:adherent_libelle_id_adherent'))
 			.'</strong></td>'
-			.'<td><strong>' . _T('asso:nom') . '</strong></td>'
-			.'<td><strong>' . _T('asso:adresse') . '</strong></td>'
-			.'<td><strong>' . _T('asso:env') . '</strong></td>'
+			.'<th>' . _T('asso:nom') . '</th>'
+			.'<th>' . _T('asso:adresse') . '</th>'
+			.'<th>' . _T('asso:env') . '</th>'
 			.'</tr>'
 			. $corps
 			.'</table>';
