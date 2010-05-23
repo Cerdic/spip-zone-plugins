@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //Insertion du diapo
 	'sjcycle_boite_info' =>'Recopiez l\'un de ces raccourcis et ins&eacute;rez-le &agrave; l’int&eacute;rieur de la case «&nbsp;Texte&nbsp;», l&agrave; o&ugrave; vous d&eacute;sirez situer le diaporama dans votre article.<br /><br />
-		Cliquer sur <a href="../plugins/sjcycle/doc.php?art=@art@" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="<:sjcycle:sjcycle_nouvelle_fenetre:>" onclick="javascript:window.open(\'../plugins/sjcycle/doc.php?art=@art@\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="../prive/images/aide.gif" alt="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" class="aide" title="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" /></a> pour consulter l\'aide en ligne.',
+		Cliquer sur <a href="../plugins/sjcycle/doc.php?art=@art@" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="<:sjcycle:sjcycle_nouvelle_fenetre:>" onclick="javascript:window.open(\'../plugins/sjcycle2/doc.php?art=@art@\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="../prive/images/aide.gif" alt="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" class="aide" title="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" /></a> pour consulter l\'aide en ligne.',
 		'sjcycle_nouvelle_fenetre' =>'Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre'
 );
 ?>
