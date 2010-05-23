@@ -371,6 +371,14 @@ function crayons_update_article($id_article, $c = false) {
 	instituer_article($id_article, $c);
 }
 
+function revision_meta($a, $c = false) {
+	if (isset($c['valeur'])) {
+		spip_log("meta '$a' = '$c[valeur]'", 'crayons');
+		ecrire_meta($a, $c['valeur']);
+	}
+}
+
+
 // TODO:
 // Ce modele est cense enregistrer les tags sous forme de ??
 // une ligne dans un champ spip_articles.tags, et/ou des mots-cles...
