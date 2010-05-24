@@ -1,0 +1,132 @@
+<!-- titre=<:vu:cfg_titre:> -->
+<!-- icone=img_pack/vu_logo_24.png -->
+
+<!-- descriptif=<:vu:cfg_descriptif:> -->
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+
+<h3><:vu:cfg_soustitre1:></h3>
+<p><:vu:cfg_explication1:></p>
+<fieldset>
+<table>
+	<tr>
+		<td><:vu:cfg_label_annonce:></td>
+		<td>	
+			<label><input type="radio" name="objet_annonce" class="radio" [(#ENV{objet_annonce}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="objet_annonce" class="radio" [(#ENV{objet_annonce}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_evenement:></td>
+		<td>	
+			<label><input type="radio" name="objet_evenement" class="radio" [(#ENV{objet_evenement}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="objet_evenement" class="radio" [(#ENV{objet_evenement}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_publication:></td>
+		<td>	
+			<label><input type="radio" name="objet_publication" class="radio" [(#ENV{objet_publication}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="objet_publication" class="radio" [(#ENV{objet_publication}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+</table>
+</fieldset>
+
+<h3><:vu:cfg_soustitre2:></h3>
+<p><:vu:cfg_explication2:></p>
+<fieldset>
+<legend><:vu:cfg_concernant_annonce:></legend>
+<table>
+	<tr>
+		<td><:vu:cfg_label_type:></td>
+		<td>	
+			<label><input type="radio" name="type_annonce" class="radio" [(#ENV{type_annonce}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="type_annonce" class="radio" [(#ENV{type_annonce}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_descriptif:></td>
+		<td>
+			<label><input type="radio" name="descriptif_annonce" class="radio" [(#ENV{descriptif_annonce}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="descriptif_annonce" class="radio" [(#ENV{descriptif_annonce}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_source:></td>
+		<td>
+			<label><input type="radio" name="source_annonce" class="radio" [(#ENV{source_annonce}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="source_annonce" class="radio" [(#ENV{source_annonce}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset>
+<legend><:vu:cfg_concernant_evenement:></legend>
+<table>
+	<tr>
+		<td><:vu:cfg_label_type:></td>
+		<td>	
+			<label><input type="radio" name="type_evenement" class="radio" [(#ENV{type_evenement}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="type_evenement" class="radio" [(#ENV{type_evenement}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_descriptif:></td>
+		<td>
+			<label><input type="radio" name="descriptif_evenement" class="radio" [(#ENV{descriptif_evenement}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="descriptif_evenement" class="radio" [(#ENV{descriptif_evenement}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_source:></td>
+		<td>
+			<label><input type="radio" name="source_evenement" class="radio" [(#ENV{source_evenement}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="source_evenement" class="radio" [(#ENV{source_evenement}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset>
+<legend><:vu:cfg_concernant_publication:></legend>
+<table>
+	<tr>
+		<td><:vu:cfg_label_type:></td>
+		<td>	
+			<label><input type="radio" name="type_publication" class="radio" [(#ENV{type_publication}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="type_publication" class="radio" [(#ENV{type_publication}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_descriptif:></td>
+		<td>
+			<label><input type="radio" name="descriptif_publication" class="radio" [(#ENV{descriptif_publication}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="descriptif_publication" class="radio" [(#ENV{descriptif_publication}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_source:></td>
+		<td>
+			<label><input type="radio" name="source_publication" class="radio" [(#ENV{source_publication}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="source_publication" class="radio" [(#ENV{source_publication}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+	<tr>
+		<td><:vu:cfg_label_langue:></td>
+		<td>
+			<label><input type="radio" name="langue_publication" class="radio" [(#ENV{langue_publication}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="langue_publication" class="radio" [(#ENV{langue_publication}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+</table>
+</fieldset>
+
+<div style="text-align:#LANG_RIGHT;">
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondo" />
+</div>
+
+</div></form>

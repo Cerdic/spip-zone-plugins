@@ -1,0 +1,12 @@
+<BOUCLE_afficher_contenu(VU_EVENEMENTS){id_evenement=#ENV{id}}>
+        [<div class='type_objet'>(#TYPE)</div>]
+	<div class='titre_objet'>#TITRE</div>
+	[<span class='source_objet'> (<:vu:apercu_source:><a href='#SOURCE_LIEN' title='#SOURCE_LIEN'>(#SOURCE_NOM)</a>)</span>]
+
+	<p>
+		[(#LIEU_EVENEMENT)][(#DATE_EVENEMENT|?{", ","."})][(#LIEU_EVENEMENT|?{" le ","Le "})][(#DATE_EVENEMENT|affdate_jourcourt)][(#ORGANISATEUR|?{", ","."})][<:vu:apercu_lien_evenement:>(#ORGANISATEUR).]
+		[<br /><:vu:apercu_informations:><a href='#LIEN' title='#LIEN'>(#LIEN|couper{50})</a>.]
+	</p>
+	
+	[<p>(#DESCRIPTIF)</p>]
+</BOUCLE_afficher_contenu>

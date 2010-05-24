@@ -1,0 +1,22 @@
+#CACHE{3600}
+<BOUCLE_publication(VU_PUBLICATIONS){id_publication}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+		<link>[(#LIEN|?{[(#LIEN|texte_backend)],[(#SOURCE_LIEN|texte_backend)]})]</link>
+		[<guid isPermaLink="true">(#LIEN|?{[(#LIEN|texte_backend)],[(#SOURCE_LIEN|texte_backend)]})</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		<dc:language></dc:language>
+		<category>Vu !</category>
+
+		<description>
+		<:vu:rss_objet_publication:>[ &lt;i&gt;((#TYPE))&lt;/i&gt;][ <:vu:rss_apercu_du:>(#DATE_PUBLICATION|affdate_jourcourt|texte_backend).]
+		</description>
+		<content:encoded>
+			[<:vu:apercu_de:>(#AUTEUR|texte_backend). ]<:vu:rss_apercu_publie:>[<:vu:apercu_chez:>&lt;a href='[(#LIEN|texte_backend)]' title=''&gt;(#EDITEUR|texte_backend)&lt;/a&gt;, ][<:vu:apercu_le:>(#DATE_PUBLICATION|affdate_jourcourt|texte_backend)].
+			[&lt;br /&gt;<:vu:rss_apercu_informations:>&lt;a href='[(#LIEN|texte_backend)]' title=''&gt;(#LIEN|couper{50}|texte_backend)&lt;/a&gt;.]	
+			[&lt;p&gt;(#DESCRIPTIF|texte_backend)&lt;/p&gt;]
+		</content:encoded>
+
+	</item>
+</BOUCLE_publication>
