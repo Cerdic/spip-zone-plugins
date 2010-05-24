@@ -23,33 +23,33 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 
 	[(#REM) Mélange savant de boucles différentes, pour un affichage antéchoronologique imbriqué 
 		Voir ici pour le principe : http://www.spip-contrib.net/Melanger-et-trier-des-elements ]
-	<BOUCLE_annonces(VU_ANNONCES) {branche ?}{id_mot ?} {age<60} {!par date} {unique}>
+	<BOUCLE_annonces(VU_ANNONCES) {branche ?}{id_mot ?} {age<60} {age>=0} {!par date} {unique}>
 
-		<BOUCLE_evenements(VU_EVENEMENTS) {branche ?}{id_mot ?} {age<60} {age_relatif<0} {!par date} {doublons}>
+		<BOUCLE_evenements(VU_EVENEMENTS) {branche ?}{id_mot ?} {age<60} {age>=0} {age_relatif<0} {!par date} {doublons}>
 
-			<BOUCLE_publications(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age<60} {age_relatif<0} {!par date_publication} {doublons}>
+			<BOUCLE_publications(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age<60} {age>=0} {age_relatif<0} {!par date_publication} {doublons}>
 				<INCLURE{fond=inc-rss-item-vu-publication}{id_publication}>
 			</BOUCLE_publications>
 
 			<INCLURE{fond=inc-rss-item-vu-evenement}{id_evenement}>
 		</BOUCLE_evenements>
 
-		<BOUCLE_publications-reste(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age<60} {age_relatif<0} {!par date_publication} {doublons}>
+		<BOUCLE_publications-reste(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age<60} {age>=0} {age_relatif<0} {!par date_publication} {doublons}>
 			<INCLURE{fond=inc-rss-item-vu-publication}{id_publication}>
 		</BOUCLE_publications-reste>
 
 		<INCLURE{fond=inc-rss-item-vu-annonce}{id_annonce}> 
 	</BOUCLE_annonces>
 
-	<BOUCLE_evenements-suite(VU_EVENEMENTS) {branche ?}{id_mot ?} {!par date} {age<60} {unique}>
-		<BOUCLE_publications-suite(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age<60} {age_relatif<0} {!par date_publication} {doublons}>
+	<BOUCLE_evenements-suite(VU_EVENEMENTS) {branche ?}{id_mot ?} {age>=0} {!par date} {age<60} {unique}>
+		<BOUCLE_publications-suite(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age>=0} {age<60} {age_relatif<0} {!par date_publication} {doublons}>
 			<INCLURE{fond=inc-rss-item-vu-publication}{id_publication}>
 		</BOUCLE_publications-suite>
 
 		<INCLURE{fond=inc-rss-item-vu-evenement}{id_evenement}>
 	</BOUCLE_evenements-suite>
 
-	<BOUCLE_publications-fin(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age<60} {!par date_publication} {unique}>
+	<BOUCLE_publications-fin(VU_PUBLICATIONS) {branche ?}{id_mot ?} {age<60} {age>=0} {!par date_publication} {unique}>
 		<INCLURE{fond=inc-rss-item-vu-publication}{id_publication}>
 	</BOUCLE_publications-fin>
 

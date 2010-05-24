@@ -91,12 +91,23 @@
 		<inclure>vu_pipelines.php</inclure>
 	</pipeline>   
 
-	<!-- Pipeline : compatibilité avec plugin champs extras 2 -->
+	<!-- Pipeline : compatibilite avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
 		<inclure>vu_pipelines.php</inclure>
 	</pipeline>
 
+	<!-- Pipeline : integration dans la page d'accueil : le cartouche d'info -->
+	<pipeline>
+		<nom>accueil_informations</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : integration dans la page d'accueil : en attente de validation -->
+	<pipeline>
+		<nom>accueil_encours</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
 
 	<necessite id="spip" version="[2.0.0;]" />
 	<utilise id='CFG' version='[1.0;]' /> 

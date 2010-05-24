@@ -140,12 +140,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spiplistes_info_veille' => 'info_veille',
 
 // T
+	'titre_enattente_annonces' => 'Annonces propos&eacute;es (Vu !)',
+	'titre_enattente_evenements' => '&Eacute;v&eacute;nements propos&eacute;s (Vu !)',
+	'titre_enattente_publications' => 'Publications propos&eacute;es (Vu !)',
 	'titre_nouvelle_evenement' => 'Nouvel &eacute;v&eacute;nement',
 	'titre_nouvelle_annonce' => 'Nouvelle annonce',
 	'titre_nouvelle_publication' => 'Nouvelle publication',
 	'titre_page_annonces_edit' => '&Eacute;diter une annonce',
 	'titre_page_evenements_edit' => '&Eacute;diter un &eacute;v&eacute;nement',
 	'titre_page_publications_edit' => '&Eacute;diter une publication',
+	'titre_cartouche_accueil_annonces' => 'Annonces (Vu !)',
+	'titre_cartouche_accueil_evenements' => '&Eacute;v&eacute;nements (Vu !)',
+	'titre_cartouche_accueil_publications' => 'Publications (Vu !)',
 
 
 // Compatibilite plugin Corbeille
