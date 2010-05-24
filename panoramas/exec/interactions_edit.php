@@ -1,5 +1,8 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/presentation');
 include_spip('inc/panoramas_edit');
 	
 
@@ -308,14 +311,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<input type='text' name='y2' id='y2_interaction' class='formo $focus' ".
 		"value=\"".$y2."\" size='5' /><br />\n";
 
-	$out .= "<strong><label for='id_image_fond_interaction'>"._T("panoramas:id_image_fond")."</label></strong> ";
-	$out .= "<input type='text' name='id_image_fond' id='id_image_fond_interaction' class='formo $focus' ".
-		"value=\"".$id_image_fond."\" size='5' /><br />\n";
-
-	$out .= "<strong><label for='id_image_fond_survol_interaction'>"._T("panoramas:id_image_fond_survol")."</label></strong> ";
-	$out .= "<input type='text' name='id_image_fond_survol' id='id_image_fond_survol_interaction' class='formo $focus' ".
-		"value=\"".$id_image_fond_survol."\" size='5' /><br />\n";
-
+	$out .= panorama_afficher_bloc_document("id_image_fond", "interaction", $id_image_fond);
+	
+	$out .= panorama_afficher_bloc_document("id_image_fond_survol", "interaction", $id_image_fond_survol);
+	
 	$out .= "<strong><label for='type_interaction'>"._T("panoramas:type")."</label></strong> ";
 	$out .= "<select name='type' id='type_interaction' class='formo $focus' ".
 		"value=\"".$type."\" >";

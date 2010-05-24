@@ -28,16 +28,16 @@
 	<span class='#EDIT{titre}'>#TITRE</span>
 </td>
 <td class="arial12">
-<a href="?exec=lieux_edit&id_lieu=#ID_LIEU&id_visite=#ID_VISITE&retour=#SELF"><:panoramas:parametres:></a>
+<a href="?exec=lieux_edit&id_lieu=#ID_LIEU&id_visite=#ID_VISITE"><:panoramas:parametres:></a>
 </td>
 <td class="arial12">
-<a href="?exec=interactions_toutes&id_lieu=#ID_LIEU&id_visite=#ID_VISITE&retour=#SELF"><:panoramas:interactions_associees:></a>
+<a href="?exec=interactions_toutes&id_lieu=#ID_LIEU&id_visite=#ID_VISITE"><:panoramas:interactions_associees:></a>
 </td>
 <td class="arial12">
 id=#ID_LIEU
 </td>
 <td class="arial12">
-<a href="#URL_PAGE{lieu,id_lieu=#ID_LIEU}"><img src="#CHEMIN{img_pack/apercu.png}" alt="<:panoramas:apercu:>" /></a>
+<a href="#URL_PAGE{lieu,id_lieu=#ID_LIEU&amp;var_mode=recalcul}"><img src="#CHEMIN{img_pack/apercu.png}" alt="<:panoramas:apercu:>" /></a>
 </td>
 </tr>
 </BOUCLE_lieux>

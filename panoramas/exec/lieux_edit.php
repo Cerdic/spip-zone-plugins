@@ -1,4 +1,7 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/presentation');
 
 include_spip('inc/panoramas_edit');
 	
@@ -177,9 +180,9 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$descriptif = entites_html($row['descriptif']);
 	$boucler = $row['boucler'];	
 	$audio_repeter = $row['audio_repeter'];	
-	$id_photo =  intval($row['id_photo']);
-	$id_audio =  intval($row['id_audio']);
-	$position_x_carte =  intval($row['position_x_carte']);
+	$id_photo = intval($row['id_photo']);
+ 	$id_audio = intval($row['id_audio']);
+ 	$position_x_carte =  intval($row['position_x_carte']);
 	$position_y_carte =  intval($row['position_y_carte']);
 	$acces_carte =  $row['acces_carte'];
 	$url_carte =  $row['url_carte'];
@@ -226,9 +229,8 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 
 	$out .= " >"._T("panoramas:non")."</option>
 		</select><br />\n";
-	$out .= "<strong><label for='id_photo_lieu'>"._T("panoramas:id_photo")."</label></strong> ";
-	$out .= "<input type='text' name='id_photo' id='id_photo_lieu' class='formo $focus' ".
-		"value=\"".$id_photo."\" size='5' /><br />\n";
+	
+	$out .= panorama_afficher_bloc_document("id_photo", "lieu", $id_photo);
 
 	$out .= "<strong><label for='decalage_x_lieu'>"._T("panoramas:decalage_x")."</label></strong> ";
 	$out .= "<input type='text' name='decalage_x' id='decalage_x_lieu' class='formo $focus' ".
@@ -251,10 +253,8 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 		</select><br />\n";
 	
 
-	$out .= "<strong><label for='id_audio_lieu'>"._T("panoramas:id_audio")."</label></strong> ";
-	$out .= "<input type='text' name='id_audio' id='id_audio_lieu' class='formo $focus' ".
-		"value=\"".$id_audio."\" size='5' /><br />\n";
-
+	$out .= panorama_afficher_bloc_document("id_audio", "lieu", $id_audio);
+	
 	$out .= "<strong><label for='position_x_carte_lieu'>"._T("panoramas:position_x_carte")."</label></strong> ";
 	$out .= "<input type='text' name='position_x_carte' id='position_x_carte_lieu' class='formo $focus' ".
 		"value=\"".$position_x_carte."\" size='5' /><br />\n";
@@ -290,9 +290,7 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= "<input type='text' name='url_carte' id='url_carte_lieu' class='formo $focus' ".
 		"value=\"".$url_carte."\" size='5' /><br />\n";
 
-	$out .= "<strong><label for='icone_carte_lieu'>"._T("panoramas:icone_carte")."</label></strong> ";
-	$out .= "<input type='text' name='icone_carte' id='icone_carte_lieu' class='formo $focus' ".
-		"value=\"".$icone_carte."\" size='5' /><br />\n";
+	$out .= panorama_afficher_bloc_document("icone_carte", "lieu", $icone_carte);
 
 	$out .= "<strong><label for='documents_associes_lieu'>"._T("panoramas:documents_associes")."</label></strong> ";
 	$out .= "<input type='text' name='documents_associes' id='documents_associes_lieu' class='formo $focus' ".
@@ -315,5 +313,6 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 
 
 }
+
 
 ?>

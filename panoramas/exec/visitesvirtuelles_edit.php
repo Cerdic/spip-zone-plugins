@@ -1,5 +1,8 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/presentation');
 include_spip('inc/panoramas_edit');
 	
 
@@ -59,7 +62,7 @@ function exec_visitesvirtuelles_edit(){
 
 	$nb_lieux = 0;
 	if ($id_visite)
-		if ($row = sql_fetch(spip_query("SELECT COUNT(*) AS num FROM spip_visites_virtuelles_lieux WHERE id_visite="._q($id_visite))))
+		if ($row = sql_fetch(sql_query("SELECT COUNT(*) AS num FROM spip_visites_virtuelles_lieux WHERE id_visite="._q($id_visite))))
 			$nb_lieux = $row['num'];
 
 	
@@ -214,10 +217,8 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= "<input type='text' name='id_lieu_depart' id='id_lieu_depart_visite' class='formo $focus' ".
 		"value=\"".$id_lieu_depart."\" size='5' /><br />\n";
 	
-	$out .= "<strong><label for='id_carte_visite'>"._T("panoramas:id_carte")."</label></strong> ";
-	$out .= "<input type='text' name='id_carte' id='id_carte_visite' class='formo $focus' ".
-		"value=\"".$id_carte."\" size='5' /><br />\n";
-	
+	$out .= panorama_afficher_bloc_document("id_carte", "visite", $id_carte);
+
 	$out .= "<strong><label for='mode_jeu_visite'>"._T("panoramas:mode_jeu")."</label></strong> ";
 	$out .= "<select name='mode_jeu' id='mode_jeu_visite' class='formo $focus' ".
 		"value=\"".$mode_jeu."\" >

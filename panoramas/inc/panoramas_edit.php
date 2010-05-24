@@ -54,6 +54,45 @@ EOF;
 	."<div id='documents'>". $documenter($id, $type, 'documents', $flag_editable)."</div>"
 	. $res;
 }
+function panorama_afficher_bloc_document($intitule_document, $element_panorama="lieu", $id_document=0) {
+	if (!sql_fetch(sql_select('*', 'spip_documents', "id_document=".$id_document))) $id_document = 0;
+ 	$out = '';
+	$out .= "<strong><label for='".$intitule_document."_lieu'>"._T("panoramas:".$intitule_document)."</label></strong> ";
+	
+	if ($id_document) $out .= "[<a href='#' id='".$intitule_document."_lieu_changer'>"._T("panoramas:associer_autre_document")."</a>]
+	<script type='text/javascript'>
+	      $(document).ready(function(){
+		  $('#".$intitule_document."_lieu_changer').bind('click', function(){
+			  $('#".$intitule_document."_lieu').removeClass('invisible');
+			  $('#".$intitule_document."_lieu').val('0');
+			  $('#".$intitule_document."_lieu_galerie').remove();
+			  return false;
+		  });
+	      });
+	</script>
+
+	";
+	$out .= "<br class='nettoyeur' />";
+	
+	$out .= "<input ";
+	
+	if ($id_document) $out .= "class='invisible'";
+      
+	$out .= "type='text' name='".$intitule_document."' id='".$intitule_document."_lieu' class='formo $focus' ".
+		"value=\"".$id_document."\" size='5' /><br />\n";
+	
+	
+	if ($id_document) {
+	    $out .= "<div id='".$intitule_document."_lieu_galerie'>";
+	    $out.= "<div class='invisible'>".formulaire_recherche('portfolio')."</div>";
+	    $contexte = array_merge(array('id_document'=>$id_document),$_GET);
+	    $out .= recuperer_fond('prive/inc-panorama-galerie',$contexte);
+	    $out .= "</div>";
+	}
+	
+	$out .= "<br class='nettoyeur' />";
+	return $out;
+}
 
 
 ?>
