@@ -255,6 +255,24 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 
 	$out .= panorama_afficher_bloc_document("id_audio", "lieu", $id_audio);
 	
+	
+
+	$resultvisite = sql_query("SELECT * FROM spip_visites_virtuelles WHERE id_visite="._q($id_visite));
+		if ($rowvisite = sql_fetch($resultvisite)) {
+			$id_carte = $rowvisite['id_carte'];
+			$resultdocument = sql_query("SELECT * FROM spip_documents WHERE id_document="._q($id_carte));
+			if ($rowdocument = sql_fetch($resultdocument)) {
+				$fichier = $rowdocument['fichier'];
+				$ratio = $rowvisite['hauteur'] / $rowdocument['hauteur'];
+				$largeur = $ratio * $rowdocument['largeur'];
+				$out .= "<div>
+					<img id='panorama-selection-carte' src='../IMG/".$fichier."' width='".$largeur."' height='".$rowvisite['hauteur']."' />
+				</div>
+				";
+			}
+			
+		}
+
 	$out .= "<strong><label for='position_x_carte_lieu'>"._T("panoramas:position_x_carte")."</label></strong> ";
 	$out .= "<input type='text' name='position_x_carte' id='position_x_carte_lieu' class='formo $focus' ".
 		"value=\"".$position_x_carte."\" size='5' /><br />\n";
@@ -304,6 +322,45 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= "</form>";
 	$out .= "</div>";
 	
+	$largeur_icone_carte = 32;
+	$hauteur_icone_carte = 32;
+	$resulticonecarte = sql_select('*','spip_documents','id_document='._q($icone_carte));
+		if ($rowiconecarte = sql_fetch($resulticonecarte)) {
+			$largeur_icone_carte = $rowiconecarte['largeur'];
+			$hauteur_icone_carte = $rowiconecarte['hauteur'];
+			
+			
+		}
+	$out .= "<script type='text/javascript'>  
+			function selectionEnd(img, selection) { 
+				$('#position_x_carte_lieu').val(selection.x1);
+				$('#position_y_carte_lieu').val(selection.y1);
+				
+
+			}
+			$(document).ready(function () { 
+				var initialx1 = parseInt($('#position_x_carte_lieu').val());
+				var initialy1 = parseInt($('#position_y_carte_lieu').val());
+				var initialx2 = initialx1+".$largeur_icone_carte.";
+				var initialy2 = initialy1+".$hauteur_icone_carte.";
+				
+				$('img#panorama-selection-carte').imgAreaSelect({
+						selectionColor: 'blue', 
+						onSelectEnd: selectionEnd, 
+						aspectRatio : '".$largeur_icone_carte.":".$hauteur_icone_carte."',
+						handles: true,
+						minWidth: ".$largeur_icone_carte.",
+						minHeight: ".$hauteur_icone_carte.",
+						maxWidth: ".$largeur_icone_carte.",
+						maxHeight: ".$hauteur_icone_carte.",
+						x1: initialx1, 
+						y1: initialy1, 
+						x2: initialx2, 
+						y2: initialy2
+				});
+			}); 
+		
+		</script>";
 
 	$out .= Panoramas_fin_cadre_formulaire(true);
 	$out .= "</p>";

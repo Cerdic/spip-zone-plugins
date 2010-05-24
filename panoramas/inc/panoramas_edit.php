@@ -62,7 +62,7 @@ function panorama_afficher_bloc_document($intitule_document, $element_panorama="
  	$out = '';
 	$out .= "<strong><label for='".$intitule_document."_lieu'>"._T("panoramas:".$intitule_document)."</label></strong> ";
 	
-	if ($liste_documents) $out .= "[<a href='#' id='".$intitule_document."_lieu_changer'>"._T("panoramas:associer_autre_document")."</a>]
+	/*if ($liste_documents) $out .= "[<a href='#' id='".$intitule_document."_lieu_changer'>"._T("panoramas:associer_autre_document")."</a>]
 	<script type='text/javascript'>
 	      $(document).ready(function(){
 		  $('#".$intitule_document."_lieu_changer').bind('click', function(){
@@ -74,7 +74,7 @@ function panorama_afficher_bloc_document($intitule_document, $element_panorama="
 	      });
 	</script>
 
-	";
+	";*/
 	$out .= "<br class='nettoyeur' />";
 	
 	$out .= "<input ";
