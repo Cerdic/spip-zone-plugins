@@ -216,6 +216,7 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= "<strong><label for='id_lieu_depart_visite'>"._T("panoramas:id_lieu_depart")."</label></strong> ";
 	$out .= "<input type='text' name='id_lieu_depart' id='id_lieu_depart_visite' class='formo $focus' ".
 		"value=\"".$id_lieu_depart."\" size='5' /><br />\n";
+
 	
 	$out .= panorama_afficher_bloc_document("id_carte", "visite", $id_carte);
 
@@ -236,15 +237,20 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= " >"._T("panoramas:non")."</option>
 		</select><br />\n";
 	
-	$out .= panorama_afficher_bloc_document("liste_objets_jeu", "visite", $liste_objets_jeu);
-	
-	$out .= "<strong><label for='message_fin_jeu_visite'>"._T("panoramas:message_fin_jeu")."</label></strong> ";
-	$out .= "<input type='text' name='message_fin_jeu' id='message_fin_jeu_visite' class='formo $focus' ".
-		"value=\"".$message_fin_jeu."\" size='5' /><br />\n";
-	
-	$out .= "<strong><label for='url_fin_jeu_visite'>"._T("panoramas:url_fin_jeu")."</label></strong> ";
-	$out .= "<input type='text' name='url_fin_jeu' id='url_fin_jeu_visite' class='formo $focus' ".
-		"value=\"".$url_fin_jeu."\" size='5' /><br />\n";
+	if ($mode_jeu == "oui") {
+	      $out .= "<fieldset>";
+	      $out .= panorama_afficher_bloc_document("liste_objets_jeu", "visite", $liste_objets_jeu);
+	      
+	      $out .= "<strong><label for='message_fin_jeu_visite'>"._T("panoramas:message_fin_jeu")."</label></strong> ";
+	      $out .= "<input type='text' name='message_fin_jeu' id='message_fin_jeu_visite' class='formo $focus' ".
+		      "value=\"".$message_fin_jeu."\" size='5' /><br />\n";
+	      
+	      $out .= "<strong><label for='url_fin_jeu_visite'>"._T("panoramas:url_fin_jeu")."</label></strong> ";
+	      $out .= "<input type='text' name='url_fin_jeu' id='url_fin_jeu_visite' class='formo $focus' ".
+		      "value=\"".$url_fin_jeu."\" size='5' /><br />\n";
+
+	      $out .= "</fieldset>";
+	}
 	
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

@@ -256,10 +256,11 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= panorama_afficher_bloc_document("id_audio", "lieu", $id_audio);
 	
 	
-
+	$mode_jeu = "non";
 	$resultvisite = sql_query("SELECT * FROM spip_visites_virtuelles WHERE id_visite="._q($id_visite));
 		if ($rowvisite = sql_fetch($resultvisite)) {
 			$id_carte = $rowvisite['id_carte'];
+			$mode_jeu = $rowvisite['mode_jeu'];
 			$resultdocument = sql_query("SELECT * FROM spip_documents WHERE id_document="._q($id_carte));
 			if ($rowdocument = sql_fetch($resultdocument)) {
 				$fichier = $rowdocument['fichier'];
@@ -312,9 +313,11 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 
 	$out .= panorama_afficher_bloc_document("documents_associes", "lieu", $documents_associes);
 	
-	$out .= "<strong><label for='nb_points_lieu_lieu'>"._T("panoramas:nb_points_lieu")."</label></strong> ";
-	$out .= "<input type='text' name='nb_points_lieu' id='nb_points_lieu_lieu' class='formo $focus' ".
+	if ($mode_jeu=="oui") {
+	  $out .= "<strong><label for='nb_points_lieu_lieu'>"._T("panoramas:nb_points_lieu")."</label></strong> ";
+	  $out .= "<input type='text' name='nb_points_lieu' id='nb_points_lieu_lieu' class='formo $focus' ".
 		"value=\"".$nb_points_lieu."\" size='5' /><br />\n";
+	}
 
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
@@ -333,8 +336,8 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 		}
 	$out .= "<script type='text/javascript'>  
 			function selectionEnd(img, selection) { 
-				$('#position_x_carte_lieu').val(selection.x1);
-				$('#position_y_carte_lieu').val(selection.y1);
+				$('#position_x_carte_lieu').val(parseInt(selection.x1));
+				$('#position_y_carte_lieu').val(parseInt(selection.y1));
 				
 
 			}
