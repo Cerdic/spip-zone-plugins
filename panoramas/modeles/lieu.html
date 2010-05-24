@@ -6,7 +6,8 @@
 	
 	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){tous}{id_document=#ID_PHOTO}>
-		<img src="#URL_DOCUMENT" unselectable="on" style="-moz-user-select: none; visibility: hidden;" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR"  
+		[(#SET{ratio,[(#HAUTEUR|div{#_visites:HAUTEUR})]})]
+		<img src="#URL_DOCUMENT" unselectable="on" style="-moz-user-select: none; visibility: hidden;" class="panorama#ID_LIEU" width="[(#LARGEUR|div{#GET{ratio}})]" height="#_visites:HAUTEUR"  
 	</BOUCLE_photo>
 	 alt="[(#_lieux:TITRE|texte_backend)]" usemap="map#ID_LIEU" />
 	<B_interactions>
@@ -35,7 +36,7 @@
 			viewport_width: <BOUCLE_visiteparent(VISITES_VIRTUELLES){id_visite}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent>[,
 			start_position: (#DECALAGE_X)][,
 			mode_360: (#BOUCLER|=={'oui'}|?{1,0})]<BOUCLE_recherchelargeurimage(DOCUMENTS){tous}{id_document=#ID_PHOTO}>[,
-			speed: (#LARGEUR|mult{8})]</BOUCLE_recherchelargeurimage>
+			speed: (#_visites:HAUTEUR|mult{20})]</BOUCLE_recherchelargeurimage>
 
 	         });
 	});
