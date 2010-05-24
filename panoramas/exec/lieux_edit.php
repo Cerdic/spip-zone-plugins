@@ -292,10 +292,8 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 
 	$out .= panorama_afficher_bloc_document("icone_carte", "lieu", $icone_carte);
 
-	$out .= "<strong><label for='documents_associes_lieu'>"._T("panoramas:documents_associes")."</label></strong> ";
-	$out .= "<input type='text' name='documents_associes' id='documents_associes_lieu' class='formo $focus' ".
-		"value=\"".$documents_associes."\" size='5' /><br />\n";
-
+	$out .= panorama_afficher_bloc_document("documents_associes", "lieu", $documents_associes);
+	
 	$out .= "<strong><label for='nb_points_lieu_lieu'>"._T("panoramas:nb_points_lieu")."</label></strong> ";
 	$out .= "<input type='text' name='nb_points_lieu' id='nb_points_lieu_lieu' class='formo $focus' ".
 		"value=\"".$nb_points_lieu."\" size='5' /><br />\n";

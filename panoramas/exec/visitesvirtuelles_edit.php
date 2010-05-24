@@ -236,9 +236,7 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= " >"._T("panoramas:non")."</option>
 		</select><br />\n";
 	
-	$out .= "<strong><label for='liste_objets_jeu_visite'>"._T("panoramas:liste_objets_jeu")."</label></strong> ";
-	$out .= "<input type='text' name='liste_objets_jeu' id='liste_objets_jeu_visite' class='formo $focus' ".
-		"value=\"".$liste_objets_jeu."\" size='5' /><br />\n";
+	$out .= panorama_afficher_bloc_document("liste_objets_jeu", "visite", $liste_objets_jeu);
 	
 	$out .= "<strong><label for='message_fin_jeu_visite'>"._T("panoramas:message_fin_jeu")."</label></strong> ";
 	$out .= "<input type='text' name='message_fin_jeu' id='message_fin_jeu_visite' class='formo $focus' ".
