@@ -187,7 +187,7 @@
 		
 		function callback_clic_html($matches) {
 			$url = $matches[2];
-			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%') != 0) {
+			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%') !== FALSE) {
 				$verification = sql_select('id_clic', 'spip_clics', 'url='.sql_quote($url).' AND id_lettre='.intval($this->id_lettre));
 				if (sql_count($verification) == 1) {
 					$arr = sql_fetch($verification);
@@ -205,7 +205,7 @@
 		
 		function callback_clic_texte($matches) {
 			$url = $matches[0];
-			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%') != 0) {
+			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%') !== FALSE) {
 				$verification = sql_select('id_clic', 'spip_clics', 'url='.sql_quote($url).' AND id_lettre='.intval($this->id_lettre));
 				if (sql_count($verification) == 1) {
 					$arr = sql_fetch($verification);
