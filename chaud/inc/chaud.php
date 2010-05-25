@@ -33,6 +33,7 @@ function chaud_articles($seuil = 1.0) {
 		* SQRT( ( select count(*) from spip_articles where statut='publie' ) )
 			as s
 		FROM spip_articles
+		WHERE statut='publie'
 		ORDER BY s DESC
 		LIMIT 50")
 	) {

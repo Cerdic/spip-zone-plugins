@@ -4,12 +4,12 @@
 	Fanny, Fil
 	&#169; 2010 - GNU/LGPL
 	</auteur>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<etat>
 	dev
 	</etat>
 	<description>
-	Informer le webmestre dès qu'un article est "chaud", c'est-à-dire dès qu'il a une popularité importante qui ne vient pas du fait qu'il est récent.
+	Informer le webmestre dès qu'un article publié est "chaud", c'est-à-dire dès qu'il a une popularité importante qui ne vient pas du fait qu'il est récent.
 	</description>
 	<lien></lien>
 	<prefix>
