@@ -33,15 +33,27 @@
                                          title="[(#TITRE|supprimer_numero|attribut_html)]"
                                          style="display:block;padding:0px;margin:0px;">
          ]
-         [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
-                                   #CONFIG{sjcycle/sjcycle_img_height}}
-                   |image_alpha{0}
-                   |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
-                                   #CONFIG{sjcycle/sjcycle_img_height},
-                                   #CONFIG{sjcycle/sjcycle_img_position},
-                                   #CONFIG{sjcycle/sjcycle_img_background}}
-                   |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
-                   |inserer_attribut{style,"display:block;"})]
+         [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|oui)
+            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height}}
+                      |image_alpha{0}
+                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height},
+                                      #CONFIG{sjcycle/sjcycle_img_position},
+                                      #CONFIG{sjcycle/sjcycle_img_background}}
+                      |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
+                      |inserer_attribut{style,"display:block;"})]
+         ]
+         [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|non)
+            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height}}
+                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height},
+                                      #CONFIG{sjcycle/sjcycle_img_position},
+                                      #CONFIG{sjcycle/sjcycle_img_background}}
+                      |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
+                      |inserer_attribut{style,"display:block;"})]
+         ]
          [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
          	</a>
          ]
@@ -93,15 +105,27 @@
                                          title="[(#TITRE|supprimer_numero|attribut_html)]"
                                          style="display:block;padding:0px;margin:0px;">
          ]
-         [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
-                                   #CONFIG{sjcycle/sjcycle_img_height}}
-                   |image_alpha{0}
-                   |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
-                                   #CONFIG{sjcycle/sjcycle_img_height},
-                                   #CONFIG{sjcycle/sjcycle_img_position},
-                                   #CONFIG{sjcycle/sjcycle_img_background}}
-                   |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
-                   |inserer_attribut{style,"display:block;"})]
+         [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|oui)
+            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height}}
+                      |image_alpha{0}
+                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height},
+                                      #CONFIG{sjcycle/sjcycle_img_position},
+                                      #CONFIG{sjcycle/sjcycle_img_background}}
+                      |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
+                      |inserer_attribut{style,"display:block;"})]
+         ]
+         [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|non)
+            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height}}
+                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
+                                      #CONFIG{sjcycle/sjcycle_img_height},
+                                      #CONFIG{sjcycle/sjcycle_img_position},
+                                      #CONFIG{sjcycle/sjcycle_img_background}}
+                      |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
+                      |inserer_attribut{style,"display:block;"})]
+         ]
          [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
          	</a>
          ]
