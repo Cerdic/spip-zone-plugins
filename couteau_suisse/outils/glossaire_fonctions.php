@@ -209,7 +209,7 @@ function cs_rempl_glossaire($texte) {
 	}
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	// remplacement final des balises posees ci-dessus
-	$GLOBALS['gl_i']=0;
+	$GLOBALS['gl_i'] = 0;
 	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", $glossaire_generer_mot, echappe_retour($texte, 'GLOSS'));
 }
 

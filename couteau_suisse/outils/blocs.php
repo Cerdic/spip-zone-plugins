@@ -23,7 +23,7 @@ function blocs_raccourcis() {
 function blocs_callback($matches) {
 	list($titre, $corps) = preg_split(',(\n\n|\r\n\r\n|\r\r),', trim($matches[3]), 2);
 	// pas de corps !
-	if(!strlen($corps=trim($corps))) {
+	if(!strlen($corps = trim($corps))) {
 		$corps = $titre;
 		$titre = preg_replace(',[\n\r]+,s', ' ', couper(propre($titre), 30));
 	}
@@ -51,7 +51,7 @@ function blocs_callback($matches) {
 		:''; // valeur par defaut geree en JS
 	return "<div class='cs_blocs$b'><"._BLOC_TITRE_H." class='blocs_titre$h blocs_click'><a href='javascript:;'>$titre</a></"._BLOC_TITRE_H.">"
 		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>":"")
-		."<div class='blocs_destination$d'>\n".blocs_rempl($corps)."\n</div>$title</div>";
+		."<div class='blocs_destination$d'>\n".blocs_rempl($corps)."\n\n</div>$title</div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
