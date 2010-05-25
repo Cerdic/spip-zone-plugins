@@ -296,8 +296,8 @@
 			$res.='</ul>';
 		}
 		if (autoriser('previsualiser','lettre',$lettre->id_lettre)) {
-			$res.=icone_horizontale(_T('lettresprive:previsualiser_html'), generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_html'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview'), "racine-24.gif", '', false,' target="_blank"');
-			$res.=icone_horizontale(_T('lettresprive:previsualiser_texte'), generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_texte'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview'), "racine-24.gif", '', false,' target="_blank"');
+			$res.=icone_horizontale(_T('lettresprive:previsualiser_html'), generer_url_public('lettre_preview', 'format=html&id_lettre='.$lettre->id_lettre.'&var_mode=preview'), "racine-24.gif", '', false,' target="_blank"');
+			$res.=icone_horizontale(_T('lettresprive:previsualiser_texte'), generer_url_public('lettre_preview', 'format=texte&id_lettre='.$lettre->id_lettre.'&var_mode=preview'), "racine-24.gif", '', false,' target="_blank"');
 		}
 		if (autoriser('tester','lettre',$lettre->id_lettre)) {
 			$res.=icone_horizontale(_T('lettresprive:tester'), generer_action_auteur('tester_lettre', $lettre->id_lettre, self()), _DIR_PLUGIN_LETTRES."prive/images/lettre-tester-24.png", '', false);
