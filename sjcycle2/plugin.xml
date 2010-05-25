@@ -13,7 +13,7 @@
 	test
 </etat>
 <description>
-	<h3>Plugin Spip jQuery Cycle : sjcycle</h3>
+	<h3>Plugin Spip jQuery Cycle Version 2: sjcycle 2</h3>
 	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Diaporama paramétrable pour Spip basé sur la librairie javascript <a href="http://jquery.com/" style="color:#999;text-decoration:underline;" title="Site officiel de jQuery">jQuery</a> et les plugins :
 	<ul>
 		<li><a href="http://malsup.com/jquery/cycle/" style="color:#999;text-decoration:underline;" title="Site officiel du jQuery Cycle Plugin">jQuery Cycle Plugin</a>;</li>

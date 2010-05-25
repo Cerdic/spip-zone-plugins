@@ -17,11 +17,11 @@ function init_sjcycle_default($choice='fieldsname_list'){
 							array('fieldname' => 'sjcycle_height', 'default_value' => 400,'preg_match_rule'=>null,"obligatoire"=>false),
 							array('fieldname' => 'sjcycle_margin', 'default_value' => 0,'preg_match_rule'=>'`^0*([0-9]{1,2})$`',"obligatoire"=>true),
 							array('fieldname' => 'sjcycle_img_margin', 'default_value' => 0,'preg_match_rule'=>'`^0*([0-9]{1,2})$`',"obligatoire"=>true),
-							array('fieldname' => 'sjcycle_background', 'default_value' => 'ffffff','preg_match_rule'=>'`^#?([a-f0-9]{6})$`i',"obligatoire"=>true),
+							array('fieldname' => 'sjcycle_background', 'default_value' => 'ffffff','preg_match_rule'=>'`^#?([a-f0-9]{6}|transparent)$`i',"obligatoire"=>true),
 							array('fieldname' => 'sjcycle_img_position', 'default_value' => 'center','preg_match_rule'=>null,"obligatoire"=>true),
 							array('fieldname' => 'sjcycle_img_width', 'default_value' => 400,'preg_match_rule'=>'`^0*([0-9]{1,3})$`',"obligatoire"=>true),
 							array('fieldname' => 'sjcycle_img_height', 'default_value' => 400,'preg_match_rule'=>'`^0*([0-9]{1,3})$`',"obligatoire"=>true),
-							array('fieldname' => 'sjcycle_img_background', 'default_value' => 'ffffff','preg_match_rule'=>'`^#?([a-f0-9]{6})$`i',"obligatoire"=>true)
+							array('fieldname' => 'sjcycle_img_background', 'default_value' => 'ffffff','preg_match_rule'=>'`^#?([a-f0-9]{6}|transparent)$`i',"obligatoire"=>true)
 						);
 		$lenght_sjcycle_default = count($sjcycle_default);
 		$return = array();

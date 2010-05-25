@@ -30,6 +30,7 @@ function sjcycle_insert_head($flux){
 padding:0px;
 margin:auto;
 background:#'.$conf_jcycle["sjcycle_background"].';/* diaporama documents images cycle */
+background:'.($conf_jcycle["sjcycle_background"]=="transparent"?"":"#").$conf_jcycle["sjcycle_background"].';
 width:'.$conf_jcycle["sjcycle_width"].'px;
 height:'.$conf_jcycle["sjcycle_height"].'px;
 display:block;

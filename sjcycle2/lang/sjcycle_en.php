@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sjcycle_img_background' => 'Background color',
 
 //CFG/CVT FORM INFO
-	'sjcycle_valeur_hex' => 'Hexadecimal value',
+	'sjcycle_valeur_hex' => 'Hexadecimal value or "transparent"',
 	'sjcycle_valeur_px' => 'Value in pixels',
 
 //CFG/CVT ERRORS & MESSAGES
