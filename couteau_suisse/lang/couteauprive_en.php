@@ -610,10 +610,16 @@ The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
 	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
 	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links
 
-List here the sequences you wish to prohibit separating them with spaces. [[%spam_mots%]]
-• Expressions containing spaces should be placed within inverted commas.
-• To specify a whole word, place it in brackets. For example: {(asses)}.
-_ • To use a regular expression, first check the syntax, then place it between slashes and inverted commas. Example:~{<html>"/@test\\.(com|fr)/"</html>}.', # MODIF
+@puce@ List here the sequences you wish to prohibit separating them with spaces. [[%spam_mots%]]
+<q1>&bull; Expressions containing spaces should be placed within inverted commas.
+_ &bull; To specify a whole word, place it in brackets. For example: {(asses)}.
+_ &bull; To use a regular expression, first check the syntax, then place it between slashes and inverted commas.
+_ Example:~{<html>"/@test\\.(com|fr)/"</html>}.
+_ &bull; Pour une expression r&eacute;guli&egrave;re devant agir sur des caract&egrave;res HTML, placez le test entre &laquo;&#&raquo; et &laquo;;&raquo;.
+_ Example:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
+
+@puce@ Certaines adresses IP peuvent &eacute;galement &ecirc;tre bloqu&eacute;es &agrave; la source. Sachez toutefois que derri&egrave;re ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un r&eacute;seau entier.[[%spam_ips%]]
+<q1>&bull; Utilisez le caract&egrave;re &laquo;*&raquo; pour plusieurs chiffres, &laquo;?&raquo; pour un seul et les crochets pour des classes de chiffres.</q1>', # MODIF
 	'spam:nom' => 'Fight against SPAM',
 	'spam_ip' => 'Blocage IP de @ip@ :', # NEW
 	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',
