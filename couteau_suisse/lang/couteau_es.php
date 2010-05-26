@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'En espera de confirmaci&oacute;n',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'base_donnees' => '<NEW>Base de datos',
+	'bloc_deplier' => '<NEW>Desplegar',
+	'bloc_replier' => '<NEW>Replegar',
 
 	// C
-	'colorer_fond' => 'Colorer le fond', # NEW
-	'colorer_texte' => 'Colorer le texte', # NEW
+	'colorer_fond' => '<NEW>Colorear el fondo',
+	'colorer_texte' => '<NEW>Colorear el texto',
 	'configurer' => 'Configurar la Navaja Suiza',
 	'connections' => 'Conexiones',
 
@@ -33,18 +33,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Cuidado: has utilizado balizas, caracteres o palabras prohibidas.<br /><br />&iexcl;Vuelve atr&aacute;s!',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => '<NEW>Ejecute la prueba!',
 	'lutte_spam' => 'Lucha contra el SPAM',
 
 	// M
-	'maj_actu' => 'Forcer l\'actualisation', # MODIF
-	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :', # NEW
-	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;', # NEW
-	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].', # NEW
-	'maj_rev' => 'R&eacute;v.&nbsp;@revision@', # NEW
-	'maj_rev_ko' => 'La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.', # NEW
-	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].', # NEW
-	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].', # NEW
+	'maj_actu' => '<MODIF>Forzar la actualisaci&oacute;n',
+	'maj_liste' => '<NEW>Lista de plugins detectda:',
+	'maj_maj' => '<NEW>Actualice el plugin seleccionado',
+	'maj_ok' => '<NEW>Este [plugin->@zip@] parece [actualizado->@url@].',
+	'maj_rev' => '<NEW>Rev.&nbsp;@revision@',
+	'maj_rev_ko' => '<NEW>La [revisi&oacute;n remota->@url@] no se pudo encontrar.',
+	'maj_rev_ok' => '<NEW>La revisi&oacute;n [@revision@->@url@] est&aacute; [disponible->@zip@].',
+	'maj_svn' => '<NEW>Este plugin SVN parece [actualizado->@url@].',
 	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :', # NEW
 	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.', # NEW
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW

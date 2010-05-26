@@ -79,17 +79,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'P&aacute;gina endavant',
 	'plug_actifs' => 'Plugins actius ',
 	'plug_inactifs' => 'Plugins inactius',
-	'plugin_xml' => 'Reuneix en un &uacute;nic plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
+	'plugin_xml' => 'Reuneix en un &uacute;nic connector (plugin) una llista de petites noves funcionalitats i eines que milloren la gesti&oacute; del vostre lloc SPIP.
 
-Cadascuna d\'aquestes eines pot ser activada o no per l\'usuari a [la p&agrave;gina d\'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: fer un clic a {{Configuraci&oacute;}}, despr&eacute;s escolliu la pestanya {{El Ganivet Su&iacute;s}}.
+Cadascuna d\'aquestes eines pot ser activada o no per l\'usuari a [la p&agrave;gina d\'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: feu un clic a {{Configuraci&oacute;}}, despr&eacute;s escolliu la pestanya {{El Ganivet Su&iacute;s}}.
 
 Les categories disponibles s&oacute;n: Administraci&oacute;, Millores tipogr&agrave;fiques, Dreceres tipogr&agrave;fiques, Visualitzaci&oacute; p&uacute;blica, Etiquetes, filtres, criteris.
 
-Descobriu en aquest plugin les vostres eines favorites: {Suprimir el n&uacute;mero}, {Format dels URLs}, {Exponents tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols gr&agrave;fics}, {Lluita contra l\'SPAM}, {Encriptaci&oacute; del correu electr&ograve;nic}, {Bonics URLs}, {SPIP i els enlla&ccedil;os... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en p&agrave;gines i pestanyes}, etc., etc.
+Descobriu en aquest connector les vostres eines favorites: {Suprimir el n&uacute;mero}, {Format dels URLs}, {Exponents tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols gr&agrave;fics}, {Lluita contra l\'SPAM}, {Encriptaci&oacute; del correu electr&ograve;nic}, {Bonics URLs}, {SPIP i els enlla&ccedil;os... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en p&agrave;gines i pestanyes}, etc., etc.
 
-No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+No dubteu a consultar els articles de la documentaci&oacute; del connector publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitat: SPIP v1.92x i v2.0.x', # MODIF
+Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x',
 	'pp_blocs_bloc' => 'Inserir un bloc replegat ',
 	'pp_blocs_visible' => 'Inserir un bloc desplegat',
 	'pp_chatons_inserer' => 'Inserir el xat &laquo;&nbsp;@chaton@&nbsp;&raquo;',

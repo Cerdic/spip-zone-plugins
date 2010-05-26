@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'En espera de confirmaci&oacute;n',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'base_donnees' => 'Base de datos',
+	'bloc_deplier' => 'Despregar',
+	'bloc_replier' => 'Repregar',
 
 	// C
-	'colorer_fond' => 'Colorer le fond', # NEW
-	'colorer_texte' => 'Colorer le texte', # NEW
+	'colorer_fond' => 'Colorear o fondo',
+	'colorer_texte' => 'Colorear o texto',
 	'configurer' => 'Configurar A Navalla Su&iacute;za',
 	'connections' => 'Conexi&oacute;ns',
 
@@ -33,11 +33,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Atenci&oacute;n : vostede utilizou balizas, caracteres ou palabras prohibidas.<br /><br />Volva atr&aacute;s !',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => 'Iniciar o test!',
 	'lutte_spam' => 'Loita contra o SPAM',
 
 	// M
-	'maj_actu' => 'Forzar a actualizaci&oacute;n', # MODIF
+	'maj_actu' => 'Forzar a actualizaci&oacute;n remota',
 	'maj_liste' => 'Lista de m&oacute;dulos detectados :',
 	'maj_maj' => 'Actualizar o m&oacute;dulo selecccionado',
 	'maj_ok' => 'Este [m&oacute;dulo->@zip@] parece [actualizado->@url@].',
@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'Este m&oacute;dulo SVN parece [actualizado->@url@].',
 	'maj_verif' => 'Verifique previamente o arquivo que corresponda :',
 	'maj_verif2' => 'Atenci&oacute;n : despois de ter premido sobre o bot&oacute;n seguinte, comprobe que o arquivo descargado corresponde co m&oacute;dulo que c&oacute;mpre actualizar.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_zip_ko' => 'O ficheiro .zip remoto non puido ser identificado.',
+	'msg_publies' => 'Unicamente as mensaxes publicadas',
 
 	// N
 	'nom_email_forum' => 'Grazas por especificar o seu nome ou o seu correo !',
@@ -83,32 +83,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Cada unha destas ferramentas pode ser activada ou non polo usuario en  [p&aacute;xina de administraci&oacute;n do m&oacute;dulo->./?exec=admin_couteau_suisse] e xestionar un certo n&uacute;mero de variables : Premer en {{Configuraci&oacute;n}}, logo escoller o separador {{A Navalla Su&iacute;za}}.
 
-As categor&iacute;as dispo&ntilde;ibles son : Administraci&oacute;n, melloras tipogr&aacute;ficas, atallos tipogr&aacute;ficos, presentaci&oacute;n p&uacute;blica, balizas, filtros, criterios.
+As categor&iacute;as dispo&ntilde;ibles son : Administraci&oacute;n, Melloras tipogr&aacute;ficas, Atallos tipogr&aacute;ficos, Presentaci&oacute;n p&uacute;blica, Balizas, Filtros, Criterios.
 
 Descubra neste m&oacute;dulo as s&uacute;as ferramentas favoritas : {Suprimir o num&eacute;ro}, {Formato dos URL}, {Super&iacute;ndices  tipogr&aacute;ficos}, {V&iacute;rgulas tipogr&aacute;ficas}, {Vi&ntilde;etas fermosas}, {Loita contra o SPAM}, {URL fermosos} {Mailcrypt}, {SPIP e as ligaz&oacute;ns... externas}, {Emoticonas}, {Un sumario para os seus artigos}, {Partir en p&aacute;xinas e separadores}, etc., etc.
 
 Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidade : SPIP todas as versi&oacute;ns 1.9x e v2.0', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
+Compatibilidade : SPIP todas as versi&oacute;ns 1.9x, v2.0 e v2.1.x',
+	'pp_blocs_bloc' => 'Inserir un bloque repregado',
+	'pp_blocs_visible' => 'Inserir un bloque despregado',
+	'pp_chatons_inserer' => 'Inserir &laquo;&nbsp;@chaton@&nbsp;&raquo;',
+	'pp_chatons_inserer_drop' => 'Inserir un chat&oacute;n no seu texto',
+	'pp_couleur_fond' => 'Fondo @couleur@',
+	'pp_couleur_icone_fond' => 'F',
+	'pp_couleur_icone_texte' => 'T',
+	'pp_couleur_texte' => 'Texto @couleur@',
+	'pp_couteau_suisse_drop' => 'Usar unha ferramenta da Navalla Su&iacute;za',
+	'pp_decoration_inserer' => 'Decoraci&oacute;n &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;',
+	'pp_decoration_inserer_drop' => 'Aplicarlle ao texto  &laquo;&nbsp;d&eacute;coration&nbsp;&raquo;  personalizada',
+	'pp_decoupe_onglets' => 'Inserir un sistema de separadores',
+	'pp_decoupe_separateur' => 'Inserir un separador de p&aacute;xina ou de xanela',
+	'pp_filets_inserer' => 'Inserir un filete de estilo &laquo;&nbsp;@filet@&nbsp;&raquo;',
+	'pp_filets_inserer_drop' => 'Inserir un filete de separaci&oacute;n',
+	'pp_smileys_inserer' => 'Inserir un @smiley@',
+	'pp_un_titre' => 'Un t&iacute;tulo',
+	'pp_votre_texte' => 'Sit&uacute;e o seu texto aqu&iacute;',
+	'pp_votre_titre' => 'T&iacute;tulo @nb@',
 
 	// S
 	'smileys_dispos' => 'Cari&ntilde;as (emoticon) dispo&ntilde;ibles :',
@@ -119,8 +119,8 @@ Compatibilidade : SPIP todas as versi&oacute;ns 1.9x e v2.0', # MODIF
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&aacute;s&nbsp;@h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
-	'test_manuel' => 'Test manuel', # NEW
+	'test_base' => 'Proba da base de datos',
+	'test_manuel' => 'Proba manual',
 	'texte_formatspip' => 'TEXTO ORIXINAL EN FORMATO SPIP',
 	'textes_formatspip' => 'TEXTOS ORIXINAIS EN FORMATO SPIP',
 	'titre' => 'A navalla su&iacute;za',
