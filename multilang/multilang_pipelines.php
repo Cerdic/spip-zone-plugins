@@ -39,9 +39,6 @@ function multilang_insert_head($flux){
  */
 function multilang_inserer_head($flux,$config=array()){
 
-	// Pour desactiver le traitement et pouvoir copier le contenu des champs
-	if(_request('nomultilang')=='1') return $flux;
-
 	// Insertion de la css
 	$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
 	$root = '' ;
