@@ -8,6 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'cfg_forum_longueur' => 'Longueur des messages', # NEW
+	'cfg_forum_longueur_maxi' => 'Longueur maximale', # NEW
+	'cfg_forum_longueur_mini' => 'Longueur minimale', # NEW
 	'comment' => 'commentaire',
 	'comments' => 'commentaires',
 	'comments_h' => 'Tes commentaires',
@@ -17,9 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_le' => 'Le',
 
 	// F
-	'cfg_forum_longueur' => 'Longueur des messages',
-	'cfg_forum_longueur_maxi' => 'Longueur maximale',
-	'cfg_forum_longueur_mini' => 'Longueur minimale',
 	'forum_qui_etes_vous' => 'Qui es-tu&nbsp;?',
 
 	// L
