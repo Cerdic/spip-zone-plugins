@@ -37,9 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jour' => 'day',
 
 	// L
-	'latitude' => 'latitude', # NEW
+	'latitude' => 'latitude',
 	'lever_soleil' => 'sunrise',
-	'longitude' => 'longitude', # NEW
+	'longitude' => 'longitude',
 
 	// M
 	'meteo' => 'weather',
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_16' => 'snow',
 	'meteo_17' => 'hail',
 	'meteo_18' => 'sleet',
-	'meteo_19' => 'dust', # MODIF
+	'meteo_19' => 'dust',
 	'meteo_2' => 'hurricane',
 	'meteo_20' => 'foggy',
 	'meteo_21' => 'haze',
@@ -70,8 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_30' => 'partly cloudy (day)',
 	'meteo_31' => 'clear (night)',
 	'meteo_32' => 'sunny',
-	'meteo_33' => 'fair (night)', # MODIF
-	'meteo_34' => 'fair (day)', # MODIF
+	'meteo_33' => 'fair (night)',
+	'meteo_34' => 'fair (day)',
 	'meteo_35' => 'mixed rain and hail',
 	'meteo_36' => 'hot',
 	'meteo_37' => 'isolated thunderstorms',
@@ -82,22 +82,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_41' => 'heavy snow',
 	'meteo_42' => 'scattered snow showers',
 	'meteo_43' => 'heavy snow',
-	'meteo_44' => 'partly cloudy', # MODIF
+	'meteo_44' => 'partly cloudy',
 	'meteo_45' => 'thundershowers',
 	'meteo_46' => 'snow showers',
 	'meteo_47' => 'isolated thundershowers',
 	'meteo_5' => 'mixed rain and snow',
-	'meteo_6' => 'mixed rain and sleet', # MODIF
+	'meteo_6' => 'mixed rain and sleet',
 	'meteo_7' => 'mixed snow and sleet',
 	'meteo_8' => 'freezing drizzle',
 	'meteo_9' => 'drizzle',
 	'meteo_conditions' => 'current conditions',
-	'meteo_consultation' => 'Consultez la m&eacute;t&eacute;o de @ville@', # NEW
-	'meteo_de' => 'M&eacute;t&eacute;o de @ville@', # NEW
+	'meteo_consultation' => '@ville@ Weather',
+	'meteo_de' => '@ville@ weather',
 	'meteo_na' => 'unknown',
 	'meteo_previsions' => 'forecast conditions',
-	'meteo_previsions_aujourdhui' => 'pr&eacute;visions pour aujourd\'hui', # NEW
-	'meteo_previsions_n_jours' => 'pr&eacute;visions &agrave; @nbj@ jours', # NEW
+	'meteo_previsions_aujourdhui' => 'today forecast',
+	'meteo_previsions_n_jours' => '@nbj@-days forecast',
 
 	// N
 	'nuit' => 'night',
