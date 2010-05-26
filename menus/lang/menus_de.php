@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Nummer des Schlagworts',
 	'entree_id_objet' => 'Nummer',
 	'entree_id_rubrique' => 'Nummer der &uuml;bergeordeneten Rubrik',
-	'entree_infini' => 'Unendlich', # MODIF
+	'entree_infini' => 'Unendlich',
 	'entree_mapage' => 'Meine eigene Seite',
 	'entree_niveau' => 'Tiefe der Unterrubriken',
 	'entree_nombre_articles' => 'Maximale Anzahl Artikel (Standardwert 0)',
@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_identifiant_forme' => 'Die Bezeichnung darf nur Buchstaben, Ziffern und den Unterstrich enthalten.',
 	'erreur_menu_inexistant' => 'Das angeforderte Men&uuml; existiert nicht.',
 	'erreur_mise_a_jour' => 'Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten.',
+	'erreur_parametres' => 'Il y a une erreur dans les param&egrave;tres de la page', # NEW
 	'erreur_type_menu' => 'Sie m&uuml;ssen einen Men&uuml;typ w&auml;hlen',
 
 	// F

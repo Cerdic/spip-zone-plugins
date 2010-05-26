@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'N&uacute;mero de la paraula clau',
 	'entree_id_objet' => 'N&uacute;mero',
 	'entree_id_rubrique' => 'N&uacute;mero de la secci&oacute; pare',
-	'entree_infini' => 'Fins l\'infinit', # MODIF
+	'entree_infini' => 'Fins l\'infinit',
 	'entree_mapage' => 'La meva p&agrave;gina personal',
 	'entree_niveau' => 'Nivell de les subseccions',
 	'entree_nombre_articles' => 'N&uacute;mero d\'articles com a m&agrave;xim (0 per defecte)',
@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_identifiant_forme' => 'L\'identificador nom&eacute;s pot contenir lletres, xifres o el car&agrave;cter subratllat.',
 	'erreur_menu_inexistant' => 'El men&uacute; demanat n&uacute;mero @id@ no existeix.',
 	'erreur_mise_a_jour' => 'S\'ha produ&iuml;t un error durant l\'actualitzaci&oacute; de la base de dades .',
+	'erreur_parametres' => 'Il y a une erreur dans les param&egrave;tres de la page', # NEW
 	'erreur_type_menu' => 'Has d\'escollir un tipus de men&uacute;',
 
 	// F
