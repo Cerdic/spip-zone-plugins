@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'M\'ajouter les droits d\'acc&egrave;s &agrave; cette zone',
+	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'auteurs',
 
 	// B
@@ -16,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
+	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => 'Es-tu s&ucirc;r de vouloir retirer cet auteur de la zone ?',
 	'confirmer_retirer_auteurs' => 'Es-tu s&ucirc;r de vouloir retirer tous les auteurs de cette zone ?',
 	'confirmer_supprimer_zone' => 'Es-tu s&ucirc;r de vouloir supprimer cette zone ?',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titre',
 	'titre_ajouter_zone' => 'Rejoindre la zone',
 	'titre_cadre_modifier_zone' => 'Modifier une zone',
+	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
 	'titre_table' => 'Toutes les zones d\'acc&egrave;s',
 	'titre_zones_acces' => 'Zones d\'acc&egrave;s restreint',
 	'toutes' => 'Toutes',

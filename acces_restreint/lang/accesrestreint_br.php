@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Ouzhpenna&ntilde; gwirio&ugrave; moned din-me evit an takad-ma&ntilde;',
+	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'skridaozerien',
 
 	// B
@@ -16,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Niv.',
+	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => 'Ha sur oc\'h e fell deoc\'h lemel kuit an aozer-ma&ntilde; eus an takad ?',
 	'confirmer_retirer_auteurs' => 'Ha sur oc\'h e fell deoc\'h lemel kuit an holl aozerien eus an takad ?',
 	'confirmer_supprimer_zone' => 'Ha sur oc\'h e fell deoc\'h diverka&ntilde; an takad ?',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titl',
 	'titre_ajouter_zone' => 'Tizhout an takad',
 	'titre_cadre_modifier_zone' => 'Kemma&ntilde; un takad',
+	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
 	'titre_table' => 'An holl dakado&ugrave; moned',
 	'titre_zones_acces' => 'Takad bevennet ar moned outa&ntilde;',
 	'toutes' => 'An holl',

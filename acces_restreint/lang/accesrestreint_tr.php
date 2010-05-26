@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Bana, bu b&ouml;lgeye eri&#351;im haklar&#305;n&#305; ver',
+	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'yazar',
 
 	// B
@@ -16,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Say&#305;',
+	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => 'Bu yazar&#305; bu b&ouml;l&uuml;mden (Zone) &ccedil;ekmek istedi&#287;inizden emin misiniz ?',
 	'confirmer_retirer_auteurs' => 'T&uuml;m yazarlar&#305; bu b&ouml;l&uuml;mden (Zone) &ccedil;ekmek istedi&#287;inizden emin misiniz ?',
 	'confirmer_supprimer_zone' => 'Bu b&ouml;lgeyi silmek istedi&#287;inizden emin misiniz ?',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Ba&#351;l&#305;k',
 	'titre_ajouter_zone' => 'B&ouml;lgeye gir',
 	'titre_cadre_modifier_zone' => 'Bir b&ouml;l&uuml;m&uuml; (Zone) de&#287;i&#351;tir',
+	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
 	'titre_table' => 'T&uuml;m eri&#351;im b&ouml;lgeleri',
 	'titre_zones_acces' => 'K&#305;s&#305;tl&#305; eri&#351;im b&ouml;lgeleri',
 	'toutes' => 'Hepsi',

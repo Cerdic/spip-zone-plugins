@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Axuntame a los que tienen permit&iacute;o entrar n\'esta estaya',
+	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'autores',
 
 	// B
@@ -16,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
+	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => '&iquest;Tas seguru de que qui&eacute;s retirar esti autor de la zona?',
 	'confirmer_retirer_auteurs' => '&iquest;Tas seguru de que qui&eacute;s retirar toos los autores d\'esta zona?',
 	'confirmer_supprimer_zone' => '&iquest;Tas seguru que quies desaniciar esta zona?',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'T&iacute;tulu',
 	'titre_ajouter_zone' => 'Amestar la estaya',
 	'titre_cadre_modifier_zone' => 'Iguar una zona',
+	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
 	'titre_table' => 'Toes les estayes d\'accesu',
 	'titre_zones_acces' => 'Estayes d\'accesu torg&aacute;o',
 	'toutes' => 'Toes',

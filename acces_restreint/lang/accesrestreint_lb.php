@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Mir Rechter fir d&euml;s Zone ginn',
+	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'Auteuren',
 
 	// B
@@ -16,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
+	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => '&Ecirc;tes vous s&ucirc;r de vouloir retirer cet auteur de la zone ?', # NEW
 	'confirmer_retirer_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir retirer tous les auteurs de cette zone ?', # NEW
 	'confirmer_supprimer_zone' => '&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette zone ?', # NEW
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'Bei d\'Zone derb&auml;i kommen',
 	'titre_cadre_modifier_zone' => 'Modifier une zone', # NEW
+	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
 	'titre_table' => 'All Zougangs-Zonen',
 	'titre_zones_acces' => 'Zonen mat limit&eacute;iertem Zougang',
 	'toutes' => 'Toutes', # NEW

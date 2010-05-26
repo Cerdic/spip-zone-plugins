@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Adaug&#259;-mi drepturile de acces la aceast&#259; zon&#259;',
+	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'autori',
 
 	// B
@@ -16,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
+	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => 'Sunte&#355;i sigur ca vre&#355;i s&#259; scoate&#355;i autorul din aceast&#259; zon&#259; ?',
 	'confirmer_retirer_auteurs' => 'Sunte&#355;i sigur c&#259; vre&#355;i s&#259; retrage&#355;i to&#355;i autorii din aceast&#259; zon&#259; ?',
 	'confirmer_supprimer_zone' => 'Sunte&#355;i sigur c&#259; vre&#355;i s&#259; suprima&#355;i aceast&#259; zon&#259; ?',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titlu',
 	'titre_ajouter_zone' => 'Reg&#259;si&#355;i zona',
 	'titre_cadre_modifier_zone' => 'Modifica&#355;i o zon&#259;',
+	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
 	'titre_table' => 'Toate zonele de acces',
 	'titre_zones_acces' => 'Zonele de acces restr&acirc;ns',
 	'toutes' => 'Toate',
