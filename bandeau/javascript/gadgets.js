@@ -15,6 +15,21 @@ function focus_zone(selecteur){
 	return false;
 }
 jQuery(document).ready(function(){
+	var is_open = 0;
+	jQuery.fn.menuItemOpen = function(){
+		jQuery(this)
+			.addClass('actif')
+			.parents('li').addClass('actif');
+		jQuery(this).siblings('li').removeClass('actif_tempo');
+		is_open = true;
+		return this;
+	}
+	jQuery.fn.menuItemClose = function(){
+		jQuery(this)
+			.removeClass('actif_tempo');
+		is_open = (jQuery(this).parents('ul').eq(0).find('li.actif').length>0);
+		return this;
+	}
 	// deplier le menu au focus clavier,
 	// enlever ce depliement si passage a la souris,
 	// delai de fermeture.
@@ -22,23 +37,32 @@ jQuery(document).ready(function(){
 		jQuery(this)
 		// le replier si un hover de souris sur un autre onglet,
 		// timer sur la fermeture des onglets pour ne pas que ca aille trop vite
+		// timer sur l'ouverture des onglets pour ne tolerer les derapages
 		.hover(
 			function(){
-				if (this.timer)
-						clearTimeout(this.timer);
-				this.timer = null;
-				/*jQuery(this).parents('ul').find('>li.actif').removeClass('actif');*/
-				jQuery(this)
-					.addClass('actif')
-					.parents('li').addClass('actif');
-				jQuery(this).siblings('li').removeClass('actif_tempo');
+				if (this.timerout)
+					clearTimeout(this.timerout);
+				this.timerout = null;
+				if (is_open)
+					jQuery(this).menuItemOpen();
+				else {
+					var me = jQuery(this);
+					this.timerin= setTimeout(function(){
+						me.menuItemOpen(null);
+					}, 300);
+				}
 			}
 			,
 			function(){
-				var me = jQuery(this).removeClass('actif').addClass('actif_tempo');
-				this.timer = setTimeout(function(){
-					me.removeClass('actif_tempo');
-				}, 400);
+				if (this.timerin)
+						clearTimeout(this.timerin);
+				this.timerin = null;
+				if (is_open){
+					var me = jQuery(this).removeClass('actif').addClass('actif_tempo');
+					this.timerout = setTimeout(function(){
+						me.menuItemClose();
+					}, 400);
+				}
 			}
 		)
 		// navigation au clavier :
