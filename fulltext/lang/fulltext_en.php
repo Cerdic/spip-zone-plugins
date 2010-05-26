@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sequence_exacte' => 'the exact phrase',
-	'soit' => '/',
+	'soit' => 'OR',
 	'supprimer' => 'Delete',
 
 	// T

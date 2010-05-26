@@ -8,31 +8,31 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Accents werden nicht ber&uuml;cksichtigt (&laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo; oder &laquo;&nbsp;deja&nbsp;&raquo; ergeben das gleiche Resultat wie &laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo;, &laquo;&nbsp;dej&agrave;&nbsp;&raquo;, &laquo;&nbsp;d&eacute;ja&nbsp;&raquo;...)',
+	'accents_pas_pris' => 'Akzente werden nicht ber&uuml;cksichtigt, es werden die selben Ausdr&uuml;cke gefunden, egal ob Sie &laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo; oder &laquo;&nbsp;deja&nbsp;&raquo; eingeben.',
 	'asie' => 'Asien',
-	'asterisque_terminale' => 'ergibt nichts: Der Asterisk * mu&szlig; am Ende stehen.',
+	'asterisque_terminale' => 'kein Ausdruck wird gefunden: Das Sternchen * mu&szlig; am Ende stehen.',
 	'aussi' => 'auch',
 
 	// C
-	'casse_indifferente' => 'Gro&szlig;- und Kleinschreibung der gesuchten Wort spielt keine Rolle.',
+	'casse_indifferente' => 'Gro&szlig;- und Kleinschreibung der gesuchten Begriffe spielt keine Rolle.',
 	'convertir_myisam' => 'Nach MyISAM konvertieren',
 	'convertir_toutes' => 'Alle Tabellen nach MyISAM konvertieren',
 	'convertir_utf8' => 'nach UTF-8 konvertieren um Koh&auml;renz der Daten wieder herzustellen',
 	'creer_tous' => 'Alle vorgeschlagenen FULLTEXT Indexe anlegen',
 
 	// E
-	'enfan' => 'enfan', # NEW
-	'enfance' => 'enfance', # NEW
-	'enfant' => 'enfant', # NEW
-	'enfanter' => 'enfanter', # NEW
-	'enfantillage' => 'enfantillage', # NEW
-	'enfants' => 'enfants', # NEW
+	'enfan' => 'Kin',
+	'enfance' => 'Kindheit',
+	'enfant' => 'Kind',
+	'enfanter' => 'Kinder kriegen',
+	'enfantillage' => 'Kinderei',
+	'enfants' => 'Kinder',
 	'et' => 'UND',
-	'etranger' => '&eacute;tranger', # NEW
+	'etranger' => 'Fremder',
 	'exemples' => 'Anwendungsbeispiele',
 
 	// F
-	'fant' => 'fant', # NEW
+	'fant' => 'ind',
 	'fonctionnement_recherche' => 'Funktionsweise der Suchmaschine dieser Website',
 	'fulltext_cree' => 'FULLTEXT angelegt',
 
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_supprime' => 'Index gel&ouml;scht',
 
 	// L
-	'liste_tables_connues' => 'Dies ist die Liste aller der Suchfunktion bekannter Tabellen. Sie k&ouml;nnen ihnen FULLTEXT-Elemente hinzuf&uuml;gen. Siehe die Dokumenation unter der Adresse',
+	'liste_tables_connues' => 'Hier sind alle bei der Suche ber&uuml;cksichtigten Tabellen aufgef&uuml;hrt. Sie k&ouml;nnen weitere FULLTEXT-Elemente hinzuf&uuml;gen. Siehe die Dokumenation unter folgender Adresse: ',
 
 	// M
 	'mais_pas' => 'aber NICHT',
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'Kein FULLTEXT-Index',
-	'premier_soit' => 'SOIT', # NEW
+	'premier_soit' => 'ENTWEDER',
 
 	// R
 	'regenerer_tous' => 'Alle FULLTEXT-Indexe neu erzeugen',
@@ -64,14 +64,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sequence_exacte' => 'Genaue Wortfolge',
-	'soit' => 'SOIT', # NEW
+	'soit' => 'ODER',
 	'supprimer' => 'L&ouml;schen',
 
 	// T
 	'table_convertie' => 'Tabelle nach MyISAM konvertiert',
 	'table_format' => 'Diese Tabelle ist im Format',
 	'table_non_reconnue' => 'Tabelle nicht erkannt',
-	'textes_premier' => 'sondern zeigt als erstes die Texte, welche folgendes enthalten:',
+	'textes_premier' => 'sondern zeigt als erstes die Texte, die folgendes enthalten:',
 
 	// U
 	'utiliser_operateurs_logiques' => 'Die Suche funktioniert mit den bekanntesten Operatoren.'

@@ -8,8 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Accentele nu sunt luate &icirc;n considerare (&laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo; sau &laquo;&nbsp;deja&nbsp;&raquo;, vor avea ca rezultat: &laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo;, &laquo;&nbsp;dej&agrave;&nbsp;&raquo;, &laquo;&nbsp;d&eacute;ja&nbsp;&raquo;...)',
-	'asie' => 'asie', # NEW
+	'accents_pas_pris' => 'Accentele nu sunt luate &icirc;n considerare (&laquo;&nbsp;&icirc;n&#355;elegere&nbsp;&raquo; sau &laquo;&nbsp;intelegere&nbsp;&raquo;, vor avea ca rezultat: &laquo;&nbsp;&icirc;n&#355;elegere&nbsp;&raquo;, &laquo;&nbsp;in&#355;elegere&nbsp;&raquo;, &laquo;&nbsp;&icirc;ntelegere&nbsp;&raquo;...)',
+	'asie' => 'asia',
 	'asterisque_terminale' => 'nu va &icirc;ntoarce nimic: asteriscul * trebuie s&#259; fie la final',
 	'aussi' => 'de asemenea',
 
@@ -21,18 +21,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'Crea&#355;i to&#355;i indec&#351;ii FULLTEXT sugera&#355;i',
 
 	// E
-	'enfan' => 'enfan', # NEW
-	'enfance' => 'enfance', # NEW
-	'enfant' => 'enfant', # NEW
-	'enfanter' => 'enfanter', # NEW
-	'enfantillage' => 'enfantillage', # NEW
-	'enfants' => 'enfants', # NEW
+	'enfan' => 'cop',
+	'enfance' => 'copil&#259;rie',
+	'enfant' => 'copil',
+	'enfanter' => 'copiii',
+	'enfantillage' => 'copil&#259;resc',
+	'enfants' => 'copii',
 	'et' => '&#350;I',
-	'etranger' => '&eacute;tranger', # NEW
+	'etranger' => 'str&#259;in',
 	'exemples' => 'Exemple de utilizare',
 
 	// F
-	'fant' => 'fant', # NEW
+	'fant' => 'pil',
 	'fonctionnement_recherche' => 'Func&#355;ionarea motorului de c&#259;utare a acestui site',
 	'fulltext_cree' => 'FULLTEXT creat',
 
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'trebuie MyISAM',
 	'incoherence_charset' => 'O incoeren&#355;&#259; intre charset-ul site-ului &#351;i cel al tabelelor din baza de date risc&#259; s&#259; dea rezultate de c&#259;utare false &icirc;n cazul caracterelor accentuate:',
 	'index_regenere' => 'index-ul tabelei regenerat',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s', # NEW
+	'index_reinitialise' => 'Documentele &icirc;n eroare au fost resetate',
 	'index_supprime' => 'index &#351;ters',
 
 	// L
@@ -54,17 +54,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'F&#259;r&#259; index FULLTEXT',
-	'premier_soit' => 'SOIT', # NEW
+	'premier_soit' => 'FIE',
 
 	// R
 	'regenerer_tous' => 'Regenera&#355;i to&#355;i indec&#351;ii FULLTEXT',
-	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur', # NEW
+	'reinitialise_index_doc' => 'Reseta&#355;i indexarea documentelor &icirc;n eroare',
 	'reserve_webmestres' => 'Pagin&#259; rezervat&#259; webmaster-ilor',
 	'retourne' => '&Icirc;ntoarce textele care con&#355;in',
 
 	// S
 	'sequence_exacte' => 'exact secven&#355;a de cuvinte',
-	'soit' => 'A&#350;ADAR',
+	'soit' => 'SAU',
 	'supprimer' => '&#350;terge&#355;i',
 
 	// T
