@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_adresse' => 'Postanschrift',
+	'champ_civi_explication' => 'R&eacute;glages avanc&eacute;es du champ civilit&eacute;', # NEW
+	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilit&eacute;', # NEW
 	'champ_civilite' => 'Anrede',
 	'champ_code_postal' => 'Postleitzahl',
 	'champ_etat' => 'Staat',
@@ -89,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'madame' => 'Frau',
+	'mademoiselle' => 'Mademoiselle', # NEW
 	'monsieur' => 'Herr',
 	'msg_accueil' => 'Hier finden Sie die Kontaktdaten Nachrichten, die Sie erhalten haben.',
 	'msg_contact' => 'Kontakt Botschaft',
