@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'option_email_disponible_label' => 'Adresse disponible',
 	'option_email_disponible_label_case' => 'V&eacute;rifier que l\'adresse n\'est pas d&eacute;j&agrave; utilis&eacute;e par un utilisateur',
-	'option_email_mode_label' => 'Mode de v&eacute;rification des courriels',
 	'option_email_mode_5322' => 'V&eacute;rification la plus conforme aux standards disponibles',
+	'option_email_mode_label' => 'Mode de v&eacute;rification des courriels',
 	'option_email_mode_normal' => 'V&eacute;rification normale de SPIP',
 	'option_email_mode_strict' => 'V&eacute;rification moins permissive',
 	'option_entier_max_label' => 'Valeur maximum',

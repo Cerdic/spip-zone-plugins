@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_date' => 'El format de la data no &eacute;s correcte.',
-	'erreur_email' => 'El format de l\'adre&ccedil;a de correu electr&ograve;nic no &eacute;s v&agrave;lid.', # MODIF
-	'erreur_email_nondispo' => 'Aquest adre&ccedil;a de correu electr&ograve;nic ja est&agrave; registrada.', # MODIF
+	'erreur_email' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> no t&eacute; un format v&agrave;lid.',
+	'erreur_email_nondispo' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> ja s\'utilitza.',
 	'erreur_entier' => 'El valor ha de ser un nombre enter.',
 	'erreur_entier_entre' => 'El valor ha d\'estar compr&egrave;s entre @min@ i @max@.',
 	'erreur_entier_max' => 'El valor ha de ser inferior a @max@.',
@@ -27,15 +27,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'L\'adre&ccedil;a no &eacute;s v&agrave;lida.',
 
 	// O
-	'option_email_disponible_label' => 'Adresse disponible', # NEW
-	'option_email_disponible_label_case' => 'V&eacute;rifier que l\'adresse n\'est pas d&eacute;j&agrave; utilis&eacute;e par un utilisateur', # NEW
-	'option_email_mode_label' => 'Mode de v&eacute;rification des courriels', # NEW
-	'option_email_mode_normal' => 'V&eacute;rification normale de SPIP (respectant la norme RFC)', # NEW
-	'option_email_mode_strict' => 'V&eacute;rification moins permissive', # NEW
+	'option_email_disponible_label' => 'Adre&ccedil;a disponible',
+	'option_email_disponible_label_case' => 'Verificar que l\'adre&ccedil;a no l\'utilitzi ja un altre usuari',
+	'option_email_mode_5322' => 'V&eacute;rification la plus conforme aux standards disponibles', # NEW
+	'option_email_mode_label' => 'Mitj&agrave; de verificaci&oacute; dels correus electr&ograve;nics',
+	'option_email_mode_normal' => 'Verificaci&oacute; normal d\'SPIP (respectant la norma RFC)', # MODIF
+	'option_email_mode_strict' => 'Verificaci&oacute; menys permissiva',
 	'option_entier_max_label' => 'Valor m&agrave;xim',
 	'option_entier_min_label' => 'Valor m&iacute;nim',
 	'option_regex_modele_label' => 'El valor ha de coincidir amb la m&agrave;scara de la seg&uuml;ent',
-	'option_siren_siret_mode_label' => 'Que voulez-vous vérifier ?', # NEW
+	'option_siren_siret_mode_label' => 'Qu&egrave; voleu verificar?',
 	'option_siren_siret_mode_siren' => 'el SIREN',
 	'option_siren_siret_mode_siret' => 'el SIRET',
 	'option_taille_max_label' => 'Mida m&agrave;xima',

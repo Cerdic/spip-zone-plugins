@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_date' => 'Fromat des Datums ung&uuml;ltig',
-	'erreur_email' => 'Mailadresse ung&uuml;ltig.', # MODIF
-	'erreur_email_nondispo' => 'Mailadresse wird bereits verwendet.', # MODIF
+	'erreur_email' => 'Die Mailadresse  <em>@email@</em> hat einen Syntaxfehler.',
+	'erreur_email_nondispo' => 'Die Mailadresse <em>@email@</em>  wird bereits verwendet.',
 	'erreur_entier' => 'Der Wert mu&szlig; eine ganze Zahl sein.',
 	'erreur_entier_entre' => 'Der Wert mu&szlig; zwischen  @min@ und @max@ liegen.',
 	'erreur_entier_max' => 'Der Wert mu&szlig; kleiner als @max@ sein.',
-	'erreur_entier_min' => 'Der Wert mu&szlig; gr&ouml;&szlig;er als @min@ sein.', # MODIF
+	'erreur_entier_min' => 'Der Wert mu&szlig; gr&ouml;&szlig;er als @min@ sein.',
 	'erreur_numerique' => 'Zahlenformat ung&uuml;ltig',
 	'erreur_regex' => 'Zeichenkettenformat ung&uuml;ltig',
 	'erreur_siren' => 'SIREN Nummer ung&uuml;ltig',
@@ -27,17 +27,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'Adresse ung&uuml;ltig',
 
 	// O
-	'option_email_disponible_label' => 'Adresse disponible', # NEW
-	'option_email_disponible_label_case' => 'V&eacute;rifier que l\'adresse n\'est pas d&eacute;j&agrave; utilis&eacute;e par un utilisateur', # NEW
-	'option_email_mode_label' => 'Mode de v&eacute;rification des courriels', # NEW
-	'option_email_mode_normal' => 'V&eacute;rification normale de SPIP (respectant la norme RFC)', # NEW
-	'option_email_mode_strict' => 'V&eacute;rification moins permissive', # NEW
+	'option_email_disponible_label' => 'Adresse verf&uuml;gbar',
+	'option_email_disponible_label_case' => '&Uuml;berpr&uuml;fen, ob die Adresse bereits verwendet wird.',
+	'option_email_mode_5322' => 'V&eacute;rification la plus conforme aux standards disponibles', # NEW
+	'option_email_mode_label' => 'Art der Mailpr&uuml;fung',
+	'option_email_mode_normal' => 'Standardpr&uuml;fung durch SPIP (entspricht dem RFC)', # MODIF
+	'option_email_mode_strict' => 'Strengere Pr&uuml;fung',
 	'option_entier_max_label' => 'Maximalwert',
 	'option_entier_min_label' => 'Minimalwert',
 	'option_regex_modele_label' => 'Der Wert mu&szlig; mit der folgenden Maske &uuml;bereinstimmen.',
-	'option_siren_siret_mode_label' => 'Que voulez-vous vérifier ?', # NEW
-	'option_siren_siret_mode_siren' => 'le SIREN', # NEW
-	'option_siren_siret_mode_siret' => 'le SIRET', # NEW
+	'option_siren_siret_mode_label' => 'Was m&ouml;chten sie &uuml;berpr&uuml;fen?',
+	'option_siren_siret_mode_siren' => 'SIREN (frz. Unternehmens ID)',
+	'option_siren_siret_mode_siret' => 'SIRET (frz. geographische Unternehmens ID)',
 	'option_taille_max_label' => 'Maximalgr&ouml;&szlig;e',
 	'option_taille_min_label' => 'Minimalgr&ouml;&szlig;e',
 
@@ -52,12 +53,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_entier_description' => '&Uuml;berpr&uuml;ft ob der Wert eine Ganzzahl ist; bietet die M&ouml;glichkeit, einen Bereich zwischen zwei Zahlen anzugeben.',
 	'type_regex' => 'Regul&auml;rer Ausdruck',
 	'type_regex_description' => 'Pr&uuml;ft ob der Wert mit der vorgegebenen Maske &uuml;bereinstimmt. Zur Verwendung der Masken <a href="http://www.php.net/manual/de/reference.pcre.pattern.syntax.php">lesen sie bitte die PHP Dokumentation</a>.',
-	'type_siren_siret' => 'SIREN ou SIRET', # NEW
-	'type_siren_siret_description' => 'V&eacute;rifie que la valeur est un num&eacute;ro valide du <a href="http://fr.wikipedia.org/wiki/SIREN">Syst&egrave;me d&rsquo;Identification du R&eacute;pertoire des ENtreprises</a> fran&ccedil;ais.', # NEW
+	'type_siren_siret' => 'SIREN oder SIRET',
+	'type_siren_siret_description' => 'Pr&uuml;ft ob der Wert eine g&uuml;ltige Nummer des <a href="http://fr.wikipedia.org/wiki/SIREN">Syst&egrave;me d’Identification du R&eacute;pertoire des Entreprises</a> ist.',
 	'type_taille' => 'Gr&ouml;&szlig;e',
 	'type_taille_description' => '&Uuml;berpr&uuml;ft ob der Wert zum geforderten Minimal- oder Maximalwert pa&szlig;t.',
-	'type_telephone' => 'Num&eacute;ro de t&eacute;l&eacute;phone', # NEW
-	'type_telephone_description' => 'V&eacute;rifie que le num&eacute;ro de t&eacute;l&eacute;phone correspond &agrave; un sch&eacute;ma reconnu.', # NE
+	'type_telephone' => 'Telefonnummer',
+	'type_telephone_description' => 'Pr&uuml;ft ob die Telefonnummer einem bekannten Schema entspricht.'
 );
 
 ?>
