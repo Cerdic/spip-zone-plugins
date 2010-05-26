@@ -317,7 +317,9 @@ Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant
 _ • [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
 _ • [De tot el connector|Tornar a l\'estat inicial del connector->@reset@]@install@
 </p>',
-	'horloge:description' => 'Eina en curs de desenvolupament. Us ofereix un rellotge JavaScript. Etiqueta: <code>#HORLOGE{format,utc,id}</code>. Model: <code><horloge></code>', # MODIF
+	'horloge:description' => 'Eina en curs de desenvolupament. Us ofereix un rellotge JavaScript. Etiqueta: <code>#HORLOGE</code> Model: <code><horloge></code>
+
+Arguments disponibles: {zona}, {format} i/o {id}.',
 	'horloge:nom' => 'Rellotge',
 
 	// I
