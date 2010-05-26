@@ -65,8 +65,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_checkbox_titre' => 'Caselles a marcar',
 	'saisie_destinataires_explication' => 'Permet escollir un o diversos destinataris entre els autors seleccionats pr&egrave;viament.',
 	'saisie_destinataires_titre' => 'Destinataris',
+	'saisie_explication_explication' => 'Un texte explicatif g&eacute;n&eacute;ral.', # NEW
+	'saisie_explication_titre' => 'Explication', # NEW
 	'saisie_fieldset_explication' => 'Un quadre que podr&agrave; englobar diversos camps.',
 	'saisie_fieldset_titre' => 'Grup de camps',
+	'saisie_hidden_explication' => 'Un champ pr&eacute;-rempli que l\'utilisateur ne pourra pas voir.', # NEW
+	'saisie_hidden_titre' => 'Champ cach&eacute;', # NEW
 	'saisie_input_explication' => 'Una simple l&iacute;nia de text, que podr&agrave; ser visible o estar amagada (contrasenya).',
 	'saisie_input_titre' => 'L&iacute;nia de text',
 	'saisie_oui_non_explication' => 'Si o no, est&agrave; clar? :)',
@@ -87,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_visiteurs' => 'Tots els visitants (fins i tot els no registrats)',
 
 	// V
-	'vue_sans_reponse' => 'Sense resposta', # MODIF
+	'vue_sans_reponse' => '<i>Sense resposta</i>',
 
 	// Z
 	'z' => 'zzz'

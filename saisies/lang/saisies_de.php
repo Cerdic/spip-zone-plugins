@@ -65,8 +65,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_checkbox_titre' => 'K&auml;stchen zum Abhaken',
 	'saisie_destinataires_explication' => 'Erm&ouml;glicht mehrere Empf&auml;nger aus den vorgeschlagenen Autoren auszuw&auml;hlen',
 	'saisie_destinataires_titre' => 'Empf&auml;nger',
+	'saisie_explication_explication' => 'Un texte explicatif g&eacute;n&eacute;ral.', # NEW
+	'saisie_explication_titre' => 'Explication', # NEW
 	'saisie_fieldset_explication' => 'Ein Rahmen, der mehrere Felder enthalten kann',
 	'saisie_fieldset_titre' => 'Feldgruppe',
+	'saisie_hidden_explication' => 'Un champ pr&eacute;-rempli que l\'utilisateur ne pourra pas voir.', # NEW
+	'saisie_hidden_titre' => 'Champ cach&eacute;', # NEW
 	'saisie_input_explication' => 'Eine einfache Textzeile, kann angezeigt oder ausgeblendet werden (Passwort)',
 	'saisie_input_titre' => 'Textzeile',
 	'saisie_oui_non_explication' => 'Ja oder nein, alle klar ? :)',
@@ -87,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_visiteurs' => 'Alle Besucher (auch nicht eingeschriebene)',
 
 	// V
-	'vue_sans_reponse' => 'Ohne Antwort', # MODIF
+	'vue_sans_reponse' => '<i>Ohne Antwort</i>',
 
 	// Z
 	'z' => 'Zzz'
