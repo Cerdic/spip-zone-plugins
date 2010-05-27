@@ -107,7 +107,7 @@ function effacer_meta($nom, $table='meta') {
 
 // http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
-
+	$trace = $GLOBALS['meta']['plugin'];
 	static $touch = array();
 	if (!$nom) return;
 	include_spip('base/abstract_sql');
@@ -132,6 +132,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 		$log = date('Y-m-d H:i:s');
 		$log .= " ".$GLOBALS['ip']." [Auteur".$GLOBALS['visiteur_session']['id_auteur']."]";
 		$log .= ' (pid '.@getmypid().')'."\n".serialize($r)."\n";
+		$log .= '_GLOBAL[meta][plugin]:'.var_export($trace,true)."\n";
 		$log .= '_SERVER:'.var_export($_SERVER,true)."\n";
 		$log .= '_POST:'.var_export($_POST,true)."\n";
 		ob_start();
