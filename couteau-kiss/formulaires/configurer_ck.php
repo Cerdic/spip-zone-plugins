@@ -25,11 +25,46 @@ function ck_recupere_dossier_squelette($d,$raw=false){
 }
 
 /**
+ * Produire le fichier PHP et une copie en meta
+ *
+ * @param string $code
+ * @return string
+ */
+function ck_produire_options($code){
+	// appliquer et verifier que ca ne plante pas !
+	eval($code);
+
+	// et enregistrer dans le fichier le cas echeant
+	$file = _DIR_TMP."ck_options.php";
+	ecrire_fichier($file, "<"."?php\n$code\n?>");
+
+	// sauvegarder dans une meta pour recuperer les options apres vidage de tmp/
+	include_spip('inc/meta');
+	ecrire_meta('ck_options',$code);
+	return $file;
+}
+
+/**
+ * Verifier l'existence du fichier PHP, et sinon le restaurer avec la copie en meta
+ */
+function ck_verifier_options(){
+	if (!file_exists($f=((defined('_ROOT_CWD')?_ROOT_CWD:'')._DIR_TMP."ck_options.php"))
+	  AND isset($GLOBALS['meta']['ck_options'])) {
+		// vider la meta auparavant, au cas ou le code php serait corrompu
+		// si le code est valide, il sera remis dans la meta
+		$code = $GLOBALS['meta']['ck_options'];
+		include_spip('inc/meta');
+		effacer_meta('ck_options');
+		ck_produire_options($code);
+	}
+}
+
+/**
  *
  * @return array
  */
 function formulaires_configurer_ck_charger_dist(){
-
+	ck_verifier_options();
 	$valeurs = array(
 		'dossier_squelettes' => ck_recupere_dossier_squelette($GLOBALS['dossier_squelettes']),
 		'supprimer_numero' => preg_match(",supprimer_numero,",reset($GLOBALS['table_des_traitements']['TITRE']))?1:0,
@@ -145,12 +180,7 @@ function formulaires_configurer_ck_traiter_dist(){
 	if (!$t = _request('inhiber_javascript_ecrire'))
 		$code .= ck_code_globale('filtrer_javascript',1);
 
-	// appliquer et verifier que ca ne plante pas !
-	eval($code);
-
-	// et enregistrer dans le fichier le cas echeant
-	$file = _DIR_TMP."ck_options.php";
-	ecrire_fichier($file, "<"."?php\n$code\n?>");
+	$file = ck_produire_options($code);
 
 	$res = array('editable'=>true,'message_ok'=>_T('ck:message_ok',array('file'=>joli_repertoire($file))));
 	return $res;

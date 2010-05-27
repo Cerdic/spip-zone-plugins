@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>KISS Knife[fr]Couteau KISS[ca]El Ganivet KISS[nl]Het KISS Mes[gl]A navalla KISS[es]La Navaja KISS[de]KISS Taschenmesser[br]Ar Gontell KISS[pt_br]Canivete KISS[ast]La Navaya KISS[gl]A navalla KISS[it]Coltellino KISS</multi></nom>
 	<icon>images/pocket-knife-32.png</icon>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<auteur>&#169; 2010 C&eacute;dric MORIN</auteur>
 	<licence>GPL</licence>
 	<etat>stable</etat>
@@ -17,6 +17,13 @@ une unique page de configuration pour les r&eacute;glages cach&eacute;s de SPIP.
 		<titre>ck:titre_page_couteau</titre>
 		<url>couteau</url>
 	</onglet>
-	
+
+	<bouton id="ck21" parent="bando_configuration">
+		<icone>images/pocket-knife-16.png</icone>
+		<titre>ck:titre_page_couteau</titre>
+		<url>couteau</url>
+	</bouton>
+
+
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
