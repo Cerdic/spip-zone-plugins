@@ -239,8 +239,10 @@ function joindre_decrire_contenu_zip($zip) {
 	foreach ($list as $file) {
 		if (accepte_fichier_upload($f = $file['stored_filename']))
 			$fichiers[$f] = $file;
-		else 
-			$erreurs[] = _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$f));
+		else
+			// pas de message pour les dossiers et fichiers caches
+			if (substr($f,-1)!=='/' AND substr(basename($f),0,1)!=='.')
+				$erreurs[] = _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$f));
 	}
 	ksort($fichiers);
 	return array($fichiers,$erreurs);
