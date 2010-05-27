@@ -127,15 +127,20 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
 	$r = array('nom' => $nom, 'valeur' => $valeur);
 
-	// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
-	$log = date('Y-m-d H:i:s');
-	$log .= ' (pid '.@getmypid().') '.serialize($r);
-	ob_start();
-	debug_print_backtrace();
-	$log .= ob_get_contents();
-	ob_end_clean();
-	$log .= "\n\n";
-	ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
+	if (preg_match(',^plugin,i',$nom)){
+		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
+		$log = date('Y-m-d H:i:s');
+		$log .= " ".$GLOBALS['ip']." [Auteur".$GLOBALS['visiteur_session']['id_auteur']."]";
+		$log .= ' (pid '.@getmypid().')'."\n".serialize($r)."\n";
+		$log .= '_SERVER:'.var_export($_SERVER,true)."\n";
+		$log .= '_POST:'.var_export($_POST,true)."\n";
+		ob_start();
+		debug_print_backtrace();
+		$log .= ob_get_contents();
+		ob_end_clean();
+		$log .= "\n\n";
+		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
+	}
 
 	// Gaffe aux tables sans impt (vieilles versions de SPIP notamment)
 	if ($importable AND isset($res['impt'])) $r['impt'] = $importable;
