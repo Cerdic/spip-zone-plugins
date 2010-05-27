@@ -263,7 +263,7 @@ function joindre_deballer_lister_zip($path,$tmp_dir) {
 		$fichiers = reset($contenu);		
 		foreach($fichiers as $fichier){
 			$f = basename($fichier['filename']);
-			$files[] = array('tmp_name'=>$tmp_dir. $f,'name'=>$f,'titrer'=>_request('options_deballe_zip_titrer'));
+			$files[] = array('tmp_name'=>$tmp_dir. $f,'name'=>$f,'titrer'=>_request('options_deballe_zip_titrer'),'mode'=>_request('options_deballe_zip_mode_document')?'document':null);
 		}
 		return $files;
 	}

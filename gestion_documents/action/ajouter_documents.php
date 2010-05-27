@@ -69,6 +69,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	$file['name'] = strtolower(translitteration($file['name']));
 
 	$titrer = isset($file['titrer'])?$file['titrer']:false;
+	$mode = ((isset($file['mode']) AND $file['mode'])?$file['mode']:$mode);
 
 	include_spip('inc/modifier');
 	if (isset($file['distant']) AND $file['distant'] AND $mode=='vignette') {

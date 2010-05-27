@@ -128,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'une_utilisation'=>'1 utilisation',
 	'upload_info_mode_document' => 'D&eacute;poser dans le portfolio',
 	'upload_info_mode_image' => 'Retirer du portfolio',
+	'upload_zip_mode_document' => 'D&eacute;poser toutes les images dans le portfolio',
 	
 	//
 	'verifier_documents_brises' => 'V&eacute;rifier les fichiers manquants',
