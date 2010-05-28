@@ -7,6 +7,7 @@
 	<etat>test</etat>
 	<description>Utiliser facilement les WebFonts</description>
 	<prefix>webfonts</prefix>
+	<lien>http://www.spip-contrib.net/Webfonts</lien>
 	<categorie>outils</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<pipeline>
