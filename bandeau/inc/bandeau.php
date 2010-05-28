@@ -209,8 +209,9 @@ function bando_identite(){
 	  generer_url_ecrire("infos_perso")
 	  ."'>"
 	  . "<strong class='nom'>$moi</strong>"
-	  . " <img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"
-	  . "| "
+	  //. " <img alt='"._T('icone_informations_personnelles')."' src='$img_info'/>"
+	  . "</a>"
+	  . " | "
 	  . "<a class='menu_lang' href='$url_lang' title='"._T('bando:titre_config_langage')."'><img alt='"._T('bando:titre_config_langage')."' src='$img_langue'/>".traduire_nom_langue($GLOBALS['spip_lang'])."</a>"
 	  . " | "
 	  . "<a class='aide' onclick=\"window.open('$url_aide', 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580');return false;\" href='$url_aide'>"._T('icone_aide_ligne')."</a>"
@@ -223,7 +224,8 @@ function bando_identite(){
 	$res .= "<p class='nom_site_spip'>"
 	  . "<a class='info' title='Informations sur ".textebrut($nom_site)."' href='$url_config_identite'>"
 	  . "<strong class='nom'> $nom_site </strong>"
-	  . "<img alt='Informations sur ".textebrut($nom_site)."' src='$img_info' /></a>"
+	  //. "<img alt='Informations sur ".textebrut($nom_site)."' src='$img_info' />"
+	  ."</a>"
 	  . "| "
 	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('bando:icone_visiter_site')."</a>"
 	  . "</p>";
