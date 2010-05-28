@@ -31,12 +31,9 @@ function balise_ENREGISTRER_VISITE_AUTEUR($p) {
 }
 
 function balise_ENREGISTRER_VISITE_AUTEUR_stat($args, $context_compil) {
-	spip_log($args,'test');
-	spip_log($filtres,'test');
-	// Pas d'id_article ? Erreur de squelette
-
 	$_objet     = objet_type($context_compil[5]);
 
+	// Pas d'id_objet ? Erreur de squelette
 	if (!$args[0])
 		return erreur_squelette(
 			_T('zbug_champ_hors_motif',
@@ -48,7 +45,6 @@ function balise_ENREGISTRER_VISITE_AUTEUR_stat($args, $context_compil) {
 }
 
 function balise_ENREGISTRER_VISITE_AUTEUR_dyn($objet,$id_objet) {
-	spip_log($objet.', '.$id_objet,'test');
 	if (!($id_auteur = intval($GLOBALS['visiteur_session']['id_auteur'])))
 		return;
 
