@@ -85,7 +85,7 @@ function bigbrother_enregistrer_l_entree_d_un_article($id_article, $id_auteur){
 // Enregistre la sortie d'un article
 function bigbrother_enregistrer_la_sortie_d_un_article($id_article, $id_auteur, $date_debut){
 
-	if(!intval($id_article) OR !intval($id_auteur)){
+	if(!intval($id_article) OR !intval($id_auteur))
 		return false;
 
 	$date_fin = date('Y-m-d H:i:s', time());
@@ -111,5 +111,4 @@ function bigbrother_enregistrer_la_sortie_d_un_article($id_article, $id_auteur, 
 	return $date_fin;
 
 }
-
 ?>
