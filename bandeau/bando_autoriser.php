@@ -45,7 +45,7 @@ function autoriser_synchro_bouton_dist($faire, $type='', $id=0, $qui = NULL, $op
 	return true;
 }
 function autoriser_forum_interne_suivi_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
+	return $GLOBALS['meta']['forum_prive']!=='non';
 }
 function autoriser_forum_admin_suivi_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	return $GLOBALS['visiteur_session']['statut']=='0minirezo';
@@ -54,10 +54,10 @@ function autoriser_suivi_revisions_bouton_dist($faire, $type='', $id=0, $qui = N
 	return true;
 }
 function autoriser_messagerie_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
+	return $GLOBALS['meta']['messagerie_agenda']!=='non';
 }
 function autoriser_calendrier_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
+	return $GLOBALS['meta']['messagerie_agenda']!=='non';
 }
 
 
