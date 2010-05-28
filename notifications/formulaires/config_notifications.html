@@ -117,6 +117,21 @@
 				</select>
 			</li>
 
+			[(#REM) ------------------------ INSCRIPTIONS ------------------------ ]
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:notifications:inscription:></h3>
+					<ul>
+						<li>
+							<div class="choix">
+								<input type="checkbox" name="inscription" [checked="(#ENV{inscription}?{checked})"] id="inscription" class="checkbox" />
+								<label for="inscription"><:notifications:inscription_label:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />

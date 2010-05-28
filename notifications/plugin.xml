@@ -36,6 +36,12 @@
 		<action>post_edition</action>
 		<inclure>notifications_pipelines.php</inclure>
 	</pipeline>
+	
+	<pipeline>
+		<nom>post_insertion</nom>
+		<action>post_insertion</action>
+		<inclure>notifications_pipelines.php</inclure>
+	</pipeline>
 
 	<pipeline>
 		<nom>notifications_destinataires</nom>
