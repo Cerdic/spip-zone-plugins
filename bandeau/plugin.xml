@@ -2,7 +2,7 @@
   <nom>Bandeau 2.1</nom>
   <auteur>Collectif spip-dev</auteur>
   <licence>(c) 2009 GPL</licence>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 	<icon>bandeau-32.png</icon>
   <etat>test</etat>
   <description>Revisitons la barre de nav de SPIP</description>
@@ -29,6 +29,10 @@
 		<url>navigation</url>
 		<args>menu=bando_edition</args>
 	</bouton>
+	<bouton id='auteurs' parent="bando_edition">
+		<icone>images/auteur-16.png</icone>
+		<titre>icone_auteurs</titre>
+	</bouton>
 	<bouton id='rubriques' parent="bando_edition">
 		<icone>images/rubrique-16.png</icone>
 		<titre>info_rubriques</titre>		
@@ -38,10 +42,6 @@
 		<icone>images/article-16.png</icone>
 		<titre>icone_tous_articles</titre>		
 		<url>articles_page</url>
-	</bouton>
-	<bouton id='auteurs' parent="bando_edition">
-		<icone>images/auteur-16.png</icone>
-		<titre>icone_auteurs</titre>
 	</bouton>
 	<bouton id='breves' parent="bando_edition">
 		<icone>images/breve-16.png</icone>
