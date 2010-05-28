@@ -1,7 +1,7 @@
 <?php
 
 function agenda_ajouter_onglets($flux) {
-	if($flux['args']=='calendrier'){
+	if($flux['args']=='calendrier' AND !defined('_DIR_PLUGIN_BANDO')){
 		$flux['data']['agenda']= new Bouton(
 														 _DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:agenda'),
 														generer_url_ecrire("calendrier","type=semaine"));

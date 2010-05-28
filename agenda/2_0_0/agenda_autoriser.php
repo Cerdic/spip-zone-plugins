@@ -9,6 +9,12 @@
 /* pour que le pipeline ne rale pas ! */
 function agenda_autoriser(){}
 
+function autoriser_evenement_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	if (isset($opt['id_article']))
+		return autoriser('creerevenementdant','article',$opt['id_article'],$qui);
+	return true;
+}
+
 /**
  * Autorisation d'ajout d'un evenement a un article
  *
