@@ -14,9 +14,9 @@ function journal_visite_entree($opt){
 			array(
 				'infos' => serialize(array('date_fin' => $opt['date_fin']))
 			),
-			'action='.$opt['faire'].' AND id_auteur='.$opt['id_auteur'].'
-			AND objet='.$opt['objet'].' AND id_objet='.$opt['id_objet'].'
-			AND date_debut='.$opt['date_debut']
+			'action='.sql_quote($opt['faire']).' AND id_auteur='.$opt['qui'].'
+			AND objet='.sql_quote($opt['quoi']).' AND id_objet='.$opt['id'].'
+			AND date='.sql_quote($opt['date_debut'])
 		);
 	}
 	/**

@@ -1,3 +1,8 @@
 <h1><:bigbrother:titre_page_stats:></h1>
 
-#INCLURE{fond=prive/journal/journal_defaut,env,ajax}
+[(#CHEMIN{prive/journal/journal_#ENV{journal_action}.html}|oui)
+	#INCLURE{fond=prive/journal/journal_#ENV{journal_action},env,ajax}
+]
+[(#CHEMIN{prive/journal/journal_#ENV{journal_action}.html}|non)
+	#INCLURE{fond=prive/journal/journal_defaut,env,ajax}
+]

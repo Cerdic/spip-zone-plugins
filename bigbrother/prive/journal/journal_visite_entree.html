@@ -1,23 +1,28 @@
 <div class="cadre cadre-r">
 	<div class="cadre_padding">
-		<p><:bigbrother:explication_page_stats:></p>
+		#ENV{journal_action}
 
+		#SET{id_journals,#ARRAY}
+		<BOUCLE_journal_stats_valide(JOURNAL){par date}{objet ?}{id_objet ?}{id_auteur ?}{action = #ENV{journal_action}}{inverse}>
+			[(#INFOS|unserialize|table_valeur{date_fin}|oui)
+				#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}]
+		</BOUCLE_journal_stats_valide>
 		<B_journal_stats>
-
 		#ANCRE_PAGINATION
 		<table class="bigbrother">
 			<thead>
 				<tr class="row_first">
 					<th><:bigbrother:thead_id_journal:></th>
 					<th><:bigbrother:thead_id_auteur:></th>
-					<th><:bigbrother:thead_action:></th>
 					<th><:bigbrother:thead_objet:></th>
 					<th><:bigbrother:thead_id_objet:></th>
-					<th><:bigbrother:thead_date:></th>
+					<th><:bigbrother:thead_date_entree:></th>
+					<th><:bigbrother:thead_date_sortie:></th>
+					<th><:bigbrother:thead_duree:></th>
 				</tr>
 			</thead>
 			<tbody class="ajax">
-		<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{pagination #ENV{pagination,10}}>
+		<BOUCLE_journal_stats(JOURNAL){id_journal IN #GET{id_journals}}{par date}{inverse}{pagination #ENV{pagination,10}}>
 			<tr class="tr_liste">
 				<td>##ID_JOURNAL</td>
 				<td>[(#ID_AUTEUR|is_numeric|oui)
@@ -25,10 +30,11 @@
 					[(#ID_AUTEUR|is_numeric|non)
 					#ID_AUTEUR]
 				</td>
-				<td><a href="[(#SELF|parametre_url{journal_action,#ACTION})]">#ACTION</a></td>
 				<td>#OBJET</td>
 				<td>[(#ID_OBJET|intval|oui)#ID_OBJET]</td>
 				<td>[(#DATE)]</td>
+				<td>[(#INFOS|unserialize|table_valeur{date_fin})]</td>
+				<td>[(#DATE|bigbrother_duree{[(#INFOS|unserialize|table_valeur{date_fin})],horaire})]</td>
 			</tr>
 		</BOUCLE_journal_stats>
 			</tbody>

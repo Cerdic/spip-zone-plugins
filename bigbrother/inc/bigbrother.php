@@ -49,9 +49,7 @@ function bigbrother_tester_la_visite_du_site(){
 		else{
 			session_set('date_visite', time());
 		}
-
 	}
-
 }
 
 /**
