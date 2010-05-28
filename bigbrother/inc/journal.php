@@ -23,17 +23,21 @@ function inc_journal_dist($phrase, $opt = array()) {
 	 */
 	$config = unserialize($GLOBALS['meta']['bigbrother']);
 	if(isset($config[$opt['faire']]) && ($config[$opt['faire']] == 'oui')){
-		sql_insertq(
-			'spip_journal',
-			array(
-				'id_auteur' => $opt['qui'],
-				'action' => $opt['faire'],
-				'id_objet' => $opt['id'],
-				'objet' => $opt['quoi'],
-				'infos' => $opt['infos'],
-				'date' => $opt['date'] ? $opt['date'] : date('Y-m-d H:i:s', time())
-			)
-		);
+		if($f = charger_fonction($opt['faire'],'journal',true)){
+			$f($opt);
+		}else{
+			sql_insertq(
+				'spip_journal',
+				array(
+					'id_auteur' => $opt['qui'],
+					'action' => $opt['faire'],
+					'id_objet' => $opt['id'],
+					'objet' => $opt['quoi'],
+					'infos' => $opt['infos'],
+					'date' => $opt['date'] ? $opt['date'] : date('Y-m-d H:i:s', time())
+				)
+			);
+		}
 	}
 	spip_log($phrase, 'journal');
 }

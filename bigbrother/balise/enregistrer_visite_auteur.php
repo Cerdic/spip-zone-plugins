@@ -48,7 +48,7 @@ function balise_ENREGISTRER_VISITE_AUTEUR_dyn($objet,$id_objet) {
 	if (!($id_auteur = intval($GLOBALS['visiteur_session']['id_auteur'])))
 		return;
 
-	find_in_path('bigbrother.php', 'inc/', true);
+	include_spip('inc/bigbrother');
 
 	// On enregistre l'entrée dans l'article
 	$date_debut = bigbrother_enregistrer_entree($objet,$id_objet, $id_auteur);
@@ -59,7 +59,7 @@ function balise_ENREGISTRER_VISITE_AUTEUR_dyn($objet,$id_objet) {
 		$(window).unload(function(){
 			$.get(
 				"'.generer_url_public('bigbrother_enregistrer_sortie').'",
-				{objet: '.$objet.', id_objet: '.$id_objet.', date_debut: \''.$date_debut.'\'}
+				{objet: \''.$objet.'\', id_objet: '.$id_objet.', date_debut: \''.$date_debut.'\'}
 			);
 		});
 	});
