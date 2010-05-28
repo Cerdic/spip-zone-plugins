@@ -27,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_statistiques' => '"id_article" ou "id_auteur" manquant',
 	'explication_page_stats' => 'Cette page liste les &eacute;v&egrave;nements qui ont eu lieu sur le site',
 
+	// N
+	'naviguer_journal_stats' => '&Eacute;v&egrave;nements du site',
 	// T
 	'temps_median' => 'Temps m&eacute;dian',
 	'temps_moyen' => 'Temps moyen',
@@ -36,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_date' => 'Date',
 	'thead_id_auteur' => 'Utilisateur',
 	'thead_id_journal' => 'Entr&eacute;e du journal',
-	'thead_id_objet' => 'Num&eacute;ro de l\'objet',
+	'thead_id_objet' => 'Id',
 	'thead_objet' => 'Objet',
 	'titre_page_stats' => '&Eacute;v&egrave;nements sur le site',
 

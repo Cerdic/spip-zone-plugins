@@ -54,6 +54,12 @@
 		<inclure>bigbrother_pipelines.php</inclure>
 	</pipeline>
 
-	<!-- Big brother nécessite les plugins suivant -->
+	<bouton id='journal_stats' parent="statistiques_visites">
+		<icone>images/bigbrother-24.png</icone>
+		<titre>bigbrother:naviguer_journal_stats</titre>
+		<url>journal_stats</url>
+	</bouton>
+
 	<necessite id='cfg' version="[1.10.5;]" />
+	<necessite id='SPIP' version="[2.1.0;]" />
 </plugin>

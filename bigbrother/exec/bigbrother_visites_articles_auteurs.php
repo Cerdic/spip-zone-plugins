@@ -13,50 +13,46 @@ find_in_path('minipres.php', 'inc/', true);
 
 
 function exec_bigbrother_visites_articles_auteurs_dist(){
-	
+
 	$id_article = intval(_request('id_article'));
 	$id_auteur = intval(_request('id_auteur'));
-	
+
 	if ($id_article <= 0 and $id_auteur <= 0)
 		echo minipres(_T('bigbrother:erreur_statistiques'));
 	else{
-	
+
 		// On vérifie si l'auteur exsite
 		if ($id_auteur > 0){
-	
-			find_in_path('abstract_sql.php', 'base/', true);
 			// On récupère l'auteur
 			$auteur = sql_fetsel(
 				'id_auteur, nom',
 				'spip_auteurs',
 				'id_auteur = '.$id_auteur
 			);
-		
+
 			if (!$auteur){
 				echo minipres(_T('public:aucun_auteur'));
 				return;
 			}
-	
+
 		}
-		
+
 		// On vérifie si l'article existe
 		if ($id_article > 0){
-	
-			find_in_path('abstract_sql.php', 'base/', true);
 			// On récupère l'auteur
 			$article = sql_fetsel(
 				'id_article, titre',
 				'spip_articles',
 				'id_article = '.$id_article
 			);
-		
+
 			if (!$article){
 				echo minipres(_T('public:aucun_article'));
 				return;
 			}
-	
+
 		}
-		
+
 		// Si tout s'est bien passé on affiche les stats
 		if ($id_auteur > 0 and $id_article > 0)
 			echo bigbrother_visites_article_auteur($article, $auteur);
@@ -64,9 +60,9 @@ function exec_bigbrother_visites_articles_auteurs_dist(){
 			echo bigbrother_visites_auteur($auteur);
 		elseif ($id_article > 0)
 			echo bigbrother_visites_article($article);
-	
+
 	}
-	
+
 }
 
 
@@ -75,11 +71,11 @@ function bigbrother_visites_article_auteur($article, $auteur){
 
 	pipeline('exec_init',array('args'=>array('exec'=>'bigbrother_visites_articles_auteurs','id_auteur'=>$auteur['id_auteur'], 'id_article' => $article['id_article']),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	
+
 	echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
-	
+
 	echo debut_gauche('', true);
-	
+
 	echo debut_boite_info(true);
 	echo icone_horizontale(
 		_T('bigbrother:voir_statistiques_auteur'),
@@ -96,7 +92,7 @@ function bigbrother_visites_article_auteur($article, $auteur){
 		false
 	);
 	echo fin_boite_info(true);
-	
+
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
 		array('args' => array(
@@ -118,9 +114,9 @@ function bigbrother_visites_article_auteur($article, $auteur){
 		)
 	);
 	echo fin_cadre_relief(true);
-	
+
 	echo fin_gauche(), fin_page();
-	
+
 }
 
 
@@ -131,11 +127,11 @@ function bigbrother_visites_auteur($auteur){
 
 	pipeline('exec_init',array('args'=>array('exec'=>'bigbrother_visites_articles_auteurs','id_auteur'=>$auteur['id_auteur']),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	
+
 	echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
-	
+
 	echo debut_gauche('', true);
-	
+
 	echo debut_boite_info(true);
 	echo icone_horizontale(
 		_T('lien_voir_auteur'),
@@ -145,7 +141,7 @@ function bigbrother_visites_auteur($auteur){
 		false
 	);
 	echo fin_boite_info(true);
-	
+
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
 		array('args' => array(
@@ -165,9 +161,9 @@ function bigbrother_visites_auteur($auteur){
 		)
 	);
 	echo fin_cadre_relief(true);
-	
+
 	echo fin_gauche(), fin_page();
-	
+
 }
 
 
@@ -179,11 +175,11 @@ function bigbrother_visites_article($article){
 
 	pipeline('exec_init',array('args'=>array('exec'=>'bigbrother_visites_articles_auteurs','id_article'=>$article['id_article']),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	
+
 	echo $commencer_page($article['titre'],"articles","redacteurs");
-	
+
 	echo debut_gauche('', true);
-	
+
 	echo debut_boite_info(true);
 	echo icone_horizontale(
 		_T('icone_modifier_article'),
@@ -193,7 +189,7 @@ function bigbrother_visites_article($article){
 		false
 	);
 	echo fin_boite_info(true);
-	
+
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
 		array('args' => array(
@@ -213,9 +209,9 @@ function bigbrother_visites_article($article){
 		)
 	);
 	echo fin_cadre_relief(true);
-	
+
 	echo fin_gauche(), fin_page();
-	
+
 }
 
 ?>

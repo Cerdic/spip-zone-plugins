@@ -45,15 +45,15 @@ function balise_ENREGISTRER_VISITE_AUTEUR_dyn($id_article) {
 	find_in_path('bigbrother.php', 'inc/', true);
 
 	// On enregistre l'entrée dans l'article
-	$date_debut = bigbrother_enregistrer_l_entree_d_un_article($id_article, $id_auteur);
+	$date_debut = bigbrother_enregistrer_entree('article',$id_article, $id_auteur);
 
 	// On insère un script qui enregistrera la sortie
 	echo '<script type="text/javascript">
 	$(function(){
 		$(window).unload(function(){
 			$.get(
-				"'.generer_url_public('bigbrother_enregistrer_la_sortie_d_un_article').'",
-				{id_article: '.$id_article.', date_debut: \''.$date_debut.'\'}
+				"'.generer_url_public('bigbrother_enregistrer_sortie').'",
+				{objet: article, id_objet: '.$id_article.', date_debut: \''.$date_debut.'\'}
 			);
 		});
 	});

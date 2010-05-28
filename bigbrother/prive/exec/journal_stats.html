@@ -1,36 +1,3 @@
 <h1><:bigbrother:titre_page_stats:></h1>
 
-<p><:bigbrother:explication_page_stats:></p>
-
-<B_journal_stats>
-#ANCRE_PAGINATION
-<table class="bigbrother">
-	<thead>
-		<tr class="row_first">
-			<th><:bigbrother:thead_id_journal:></th>
-			<th><:bigbrother:thead_id_auteur:></th>
-			<th><:bigbrother:thead_action:></th>
-			<th><:bigbrother:thead_objet:></th>
-			<th><:bigbrother:thead_id_objet:></th>
-			<th><:bigbrother:thead_date:></th>
-		</tr>
-	</thead>
-	<tbody>
-<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{pagination #ENV{pagination,10}}>
-	<tr class="tr_liste">
-		<td>##ID_JOURNAL</td>
-		<td>[(#ID_AUTEUR|is_numeric|oui)
-			<a href="#URL_AUTEUR{#ID_AUTEUR}">#INFO_NOM{auteur,#ID_AUTEUR}</a>]
-			[(#ID_AUTEUR|is_numeric|non)
-			#ID_AUTEUR]
-		</td>
-		<td>#ACTION</td>
-		<td>#OBJET</td>
-		<td>[(#ID_OBJET|intval|oui)#ID_OBJET]</td>
-		<td>[(#DATE)]</td>
-	</tr>
-</BOUCLE_journal_stats>
-	</tbody>
-</table>
-[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
-</B_journal_stats>
+#INCLURE{fond=prive/journal/journal_defaut,env,ajax}
