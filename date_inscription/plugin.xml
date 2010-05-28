@@ -8,7 +8,7 @@
 	<description>
 	Un champ suppl&eacute;mentaire pour la table auteurs : date_inscription
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Date-d-inscription</lien>
 	<licence>GPL</licence>
 	<icon></icon>
 	<install>base/date_inscription.php</install>
