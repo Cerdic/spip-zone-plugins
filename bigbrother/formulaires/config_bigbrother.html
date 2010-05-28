@@ -1,0 +1,49 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=bigbrother -->
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="editer_journaliser">
+				<label><:bigbrother:configuration_journalisation_base:></label>
+				<div class="choix">
+					<input type="checkbox" name="visite" id="visite" value="oui"[ checked="checked"(#ENV{visite}|=={oui}|oui)] />
+					<label for="visite"><:bigbrother:configuration_enregistrer_visite:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="visite_entree" id="visite_entree" value="oui"[ checked="checked"(#ENV{visite_entree}|=={oui}|oui)] />
+					<label for="visite_entree"><:bigbrother:configuration_enregistrer_visite_article:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="inserer" id="inserer" value="oui"[ checked="checked"(#ENV{inserer}|=={oui}|oui)] />
+					<label for="inserer"><:bigbrother:configuration_enregistrer_insertions:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="modifier" id="modifier" value="oui"[ checked="checked"(#ENV{modifier}|=={oui}|oui)] />
+					<label for="modifier"><:bigbrother:configuration_enregistrer_modifications:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="instituer" id="instituer" value="oui"[ checked="checked"(#ENV{instituer}|=={oui}|oui)] />
+					<label for="modifier"><:bigbrother:configuration_enregistrer_institutions:></label>
+				</div>
+				<BOUCLE_pipeline(POUR){tableau #PIPELINE{bigbrother_journaliser,#ARRAY}}>
+				<div class="choix">
+					<input type="checkbox" name="#CLE" id="#CLE" value="oui"[ checked="checked"(#ENV{#CLE}|=={oui}|oui)] />
+					<label for="#CLE">#VALEUR</label>
+				</div>
+				</BOUCLE_pipeline>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+			<input type="submit" name="_cfg_delete" value="<:cfg:reset:>" class="submit" />
+		</p>
+	</div>
+</form>
+</div>

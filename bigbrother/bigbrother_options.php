@@ -5,8 +5,13 @@
 #  Licence : GPL                                    #
 #------------------------------------------------- -#
 
+/**
+ * Déclaration des pipelines du plugin
+ */
+$GLOBALS['spip_pipeline']['bigbrother_journaliser']="";
+
 // Chargement de la librairie de fonctions
-find_in_path('bigbrother.php', 'inc/', true);
+include_spip('inc/bigbrother');
 
 
 // Si la config est ok, à chaque hit, on teste s'il faut enregistrer la visite ou pas

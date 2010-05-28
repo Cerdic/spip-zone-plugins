@@ -6,8 +6,11 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.3
+		0.3.1
 	</version>
+	<version_base>
+		0.2
+	</version_base>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		dev
 	</etat>
@@ -16,7 +19,7 @@
 		Ce plugin permet de garder en m&eacute;moire les visites de toutes les personnes ayant un compte.
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Big-Brother</lien> <!-- URI de documentation -->
-	<prefix> 
+	<prefix>
 		bigbrother
 	</prefix>
 	<options>bigbrother_options.php</options>
@@ -42,7 +45,15 @@
 		<nom>header_prive</nom>
 		<inclure>bigbrother_pipelines.php</inclure>
 	</pipeline>
-	
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_insertion</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+
 	<!-- Big brother nécessite les plugins suivant -->
 	<necessite id='cfg' version="[1.10.5;]" />
 </plugin>

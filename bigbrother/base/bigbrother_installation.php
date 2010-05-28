@@ -6,72 +6,41 @@
 #------------------------------------------------- -#
 
 // La fonction de base appelée par le gestionnaire de plugins
-function bigbrother_install($install){
-	
-	//recupère les informations de plugin.xml
-	include_spip('inc/plugin');
-	$infos = plugin_get_infos(_DIR_PLUGIN_BIGBROTHER);
-	$version_du_plugin = $infos['version'];
-	
-	switch($install) {
-		case 'test':
-			return isset($GLOBALS['meta']['bigbrother_version_base']) AND ($GLOBALS['meta']['bigbrother_version_base']>=$version_du_plugin);
-		case 'install':
-			bigbrother_maj();
-			break;
-		case 'uninstall':
-			bigbrother_vider_tables();
-			break;
+function bigbrother_upgrade($nom_meta_base_version,$version_cible){
+	include_spip('inc/meta');
+	include_spip('base/abstract_sql');
+	$current_version = 0.0;
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
+		|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+
+		if (version_compare($current_version,'0.0','<=')){
+			include_spip('base/create');
+			// A la première installation on crée les tables
+			creer_base();
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+		}
+		if (version_compare($current_version,'0.1','<')){
+			include_spip('base/create');
+			// A la première installation on crée les tables
+			creer_base();
+			ecrire_meta($nom_meta_base_version,$current_version=0.1,'non');
+		}
+		if (version_compare($current_version,'0.2','<')){
+			include_spip('base/create');
+			// A la première installation on crée les tables
+			creer_base();
+			ecrire_meta($nom_meta_base_version,$current_version=0.2,'non');
+		}
 	}
-	
 }
 
 // Supprimer les tables du plugin
-function bigbrother_vider_tables() {
+function bigbrother_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_query("DROP TABLE spip_visites_auteurs");
 	sql_query("DROP_TABLE spip_visites_articles_auteurs");
-	effacer_meta('bigbrother_version_base');
-}
-
-// Met à jour le numéro de version dans les métas
-function bigbrother_maj_version(&$v1, $v2) {
-	echo "MAJ Big Brother : $v1 =&gt; $v2<br />";
-	ecrire_meta('bigbrother_version_base', $v1=$v2, 'non');
-}
-
-// Là où se trouver les mises à jour
-function bigbrother_maj(){
-	
-	//recupère les informations de plugin.xml
-	include_spip('inc/plugin');
-	$infos = plugin_get_infos(_DIR_PLUGIN_BIGBROTHER);
-	$version_du_plugin = $infos['version'];
-	$version_en_cours = isset($GLOBALS['meta']['bigbrother_version_base'])
-		?$GLOBALS['meta']['bigbrother_version_base']
-		:0.0;
-	
-	// On met à jour seulement si les versions sont différentes
-	if ($version_en_cours != $version_du_plugin){
-		
-		include_spip('base/create');
-		include_spip('base/abstract_sql');
-				
-		if ($version_en_cours == 0.0){
-			// A la première installation on crée les tables
-			creer_base();
-			bigbrother_maj_version($version_en_cours, 0.1);
-		}
-		
-/*
-		if ($version_en_cours < ($version_de_test = 0.11)){
-			//$desc = $showtable("spip_jeux", true);
-			
-			bigbrother_maj_version($version_en_cours, $version_de_test);
-		}
-*/
-
-	}
+	sql_query("DROP TABLE spip_journal");
+	effacer_meta($nom_meta_base_version);
 }
 
 ?>
