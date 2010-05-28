@@ -1,0 +1,30 @@
+[(#REM)
+
+  Squelette #FORMULAIRE_CONFIGURER_WEBFONTS
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	  <ul>
+			<li class="editer_googlefonts_api obligatoire[ (#ENV**{erreurs}|table_valeur{googlefonts_api}|oui)erreur]">
+				<label for="nom"><:webfonts:label_googlefonts_api:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{googlefonts_api})</span>
+				]<p class="explication"><:webfonts:explication_googlefonts_api:></p>
+				<textarea name='googlefonts_api' id='googlefonts_api'>#ENV{googlefonts_api}</textarea>
+			</li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

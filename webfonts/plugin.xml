@@ -1,0 +1,32 @@
+<plugin>
+	<nom>WebFonts</nom>
+	<auteur>[C&eacute;dric Morin->http://www.yterium.net]</auteur>
+	<icon>images/webfonts-32.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>Utiliser facilement les WebFonts</description>
+	<prefix>webfonts</prefix>
+	<categorie>outils</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>webfonts_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head_css</action>
+		<inclure>webfonts_pipeline.php</inclure>
+	</pipeline>
+
+	<bouton id='webfonts' parent='configuration'>
+		<icone>prive/themes/spip/images/webfonts-24</icone>
+		<titre>webfonts:titre_menu_webfonts</titre>
+		<url>webfonts</url>
+	</bouton>
+	<bouton id='webfonts2' parent='bando_configuration'>
+		<icone>images/webfonts-16.png</icone>
+		<titre>webfonts:titre_menu_webfonts</titre>
+		<url>webfonts</url>
+	</bouton>
+</plugin>
