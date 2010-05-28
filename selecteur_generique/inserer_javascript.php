@@ -142,7 +142,7 @@ function SelecteurGenerique_inserer_rubrique() {
 		'quoi=rubrique'),
 		'id_article', _request('id_article'), '\\x26');
 	$ac = generer_url_ecrire('selecteur_generique');
-	
+
 	return <<<EOS
 (function($) {
 	var appliquer_selecteur_cherche_rubrique = function() {
@@ -152,7 +152,7 @@ function SelecteurGenerique_inserer_rubrique() {
 		me.each(function(){
 			var inp = this;
 			var id_groupe = jQuery(this).parents('form').find('input[name=select_groupe]').val();
-			
+
 			jQuery(inp).focus(function(){
 				$(this).val('');
 			});
@@ -201,7 +201,7 @@ function SelecteurGenerique_inserer_javascript($flux) {
 	OR _request('exec') == 'auteurs') {
 		$js .= SelecteurGenerique_inserer_auteur();
 	}
-	
+
 	if (_request('exec') == 'articles'
 	OR _request('exec') == 'naviguer'
 	OR _request('exec') == 'breves_voir'
@@ -221,7 +221,7 @@ function SelecteurGenerique_inserer_javascript($flux) {
 		. "\n"
 
 		. '<link rel="stylesheet" type="text/css" '
-		. 'href="'.find_in_path('iautocompleter.css').'" />'
+		. 'href="'.find_in_path('iautocompleter.css').'" media="all" />'
 		. "\n"
 
 		. '<script type="text/javascript"><!--'
