@@ -1,0 +1,107 @@
+<!-- descriptif=
+<h4>
+Ici vous pouvez configurer le plugin Cooliris.
+</h4>
+-->
+
+<!-- titre=Cooliris-->
+<!-- icone=images/3D.png-->
+
+#CACHE{0}
+
+<form method="post" action="#SELF">[<div>(#ENV{_cfg_}|form_hidden)</div>]
+<fieldset><legend>Animation</legend>
+<p>
+<label for="cooliris_width">
+<input type="text" name="largeur" class="type_txt" id="largeur" size="5"
+	value="#ENV{largeur,600}" />Largeur (px)</label>
+<br />
+<label for="cooliris_height">
+<input type="text" name="hauteur" class="type_txt" id="hauteur" size="5"
+	value="#ENV{hauteur,450}" />Hauteur (px)</label>
+<br />
+<label for="numrows">
+     <select name="numrows" id="numrows">
+      <option value="1"[(#ENV{numrows}|=={1}|?{' selected="selected"'})]>1</option>
+      <option value="2"[(#ENV{numrows}|=={2}|?{' selected="selected"'})]>2</option>
+	  <option value="3"[(#ENV{numrows}|=={3}|?{' selected="selected"'})]>3</option>
+	  <option value="4"[(#ENV{numrows}|=={4}|?{' selected="selected"'})]>4</option>
+	  <option value="5"[(#ENV{numrows}|=={5}|?{' selected="selected"'})]>5</option>
+      </select>Nombre de lignes du mur</label>
+<br />
+<label for="style">
+     <select name="style" id="style">
+      <option value="black"[(#ENV{style}|=={black}|?{' selected="selected"'})]>black</option>
+      <option value="dark"[(#ENV{style}|=={dark}|?{' selected="selected"'})]>dark</option>
+	  <option value="light"[(#ENV{style}|=={light}|?{' selected="selected"'})]>light</option>
+	  <option value="white"[(#ENV{style}|=={white}|?{' selected="selected"'})]>white</option>
+      </select>Style du mur</label>
+<br />
+<label for="intro">
+     <select name="intro" id="intro">
+      <option value="scrollLeft"[(#ENV{intro}|=={light}|?{' selected="selected"'})]>scrollLeft</option>
+	  <option value="zoomIn"[(#ENV{intro}|=={black}|?{' selected="selected"'})]>zoomIn</option>
+      <option value="appear"[(#ENV{intro}|=={dark}|?{' selected="selected"'})]>appear</option>
+      </select> Animation de l'intro.</label>
+</p>
+</fieldset>
+
+<fieldset><legend> Background Setting</legend>
+<p>
+<label><input type="text" name="backgroundalpha" value="[(#ENV{backgroundalpha,1})]" size="7" class="fondl" /> Opacité du fond, valeur entre 0.0 et 1.0</label>
+<br />
+<label><input type="text" name="backgroundcolor" value="[(#ENV{backgroundcolor,#000000})]" size="3" class="fondl" /> Couleur de fond</label>
+<br />
+<label><input type="text" name="backgroundimage" value="[(#ENV{backgroundimage})]" class="fondl" /> Background image URL</label>
+<br />
+<label><input type="text" name="backgroundmusic" value="[(#ENV{backgroundmusic})]" class="fondl" /> Background music URL</label>
+<br />
+<label><input type="text" name="defaultvolume" value="[(#ENV{defaultvolume,70})]" size="3" class="fondl" /> Volume : 0-100</label>
+</p>
+</fieldset>
+
+<fieldset><legend>Controls</legend>
+<p>
+<label><input type="checkbox" name="showembed" [checked="(#ENV{showembed}|!={''}|?{'checked'})"] class="fondl" /> Share Buttons</label>
+<br />
+<label><input type="checkbox" name="showsearch" [checked="(#ENV{showsearch}|!={''}|?{'checked'})"] class="fondl" /> Search Button</label>
+<br />
+<label>
+<input type="checkbox" name="showchrome" [checked="(#ENV{showchrome}|!={''}|?{'checked'})"] class="fondl" /> Opaque Toolbar</label>
+<br />
+<label>
+<input type="checkbox" name="shownavarrows" [checked="(#ENV{shownavarrows}|!={''}|?{'checked'})"] class="fondl" /> Show Nav Arrows</label>
+</p>
+</fieldset>
+
+<fieldset><legend>Contenu</legend>
+<p>
+<label for="showdescription">
+<input type="checkbox" name="showdescription" [checked="(#ENV{showdescription}|!={''}|?{'checked'})"] class="fondl" /> Affiche la description de l'item sélectionné</label>
+<br />
+<label for="showdescription">
+<input type="checkbox" name="showreflections" [checked="(#ENV{showreflections}|!={''}|?{'checked'})"] class="fondl" /> Affiche un reflet sous les items</label>
+<br />
+<label for="cellborder">
+<input type="text" name="cellborder" class="type_txt" id="cellborder" size="1"
+	value="#ENV{cellborder,0}" /> Taille de la bordure blanche autour des items du mur</label>
+<br />
+<label for="cell_width">
+<input type="text" name="celllargeur" class="type_txt" id="celllargeur" size="5"
+	value="#ENV{celllargeur,430}" /> Largeur de l'item selectionné</label>
+<br />
+<label for="cell_height">
+<input type="text" name="cellhauteur" class="type_txt" id="cellhauteur" size="5"
+	value="#ENV{cellhauteur,300}" /> Hauteur de l'item selectionné</label>
+<br />
+<label><input type="text" name="glowcolor" value="[(#ENV{glowcolor,#FFFFFF})]" size="7" class="fondl" /> Couleur de la bordure de l'item sélectionné</label>
+<br />
+</p>
+</fieldset>
+<div>
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+	<input type="reset" value="<:reset:>" class="fondo" />
+	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+

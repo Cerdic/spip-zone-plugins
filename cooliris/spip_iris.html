@@ -1,0 +1,15 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+      <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"
+      xmlns:atom="http://www.w3.org/2005/Atom">
+      <channel>
+		  <BOUCLE_images(DOCUMENTS){id_article ?}{id_rubriques ?}{extension==(png|jpg|gif)}>
+          <item>
+		  <title>[(#TITRE|texte_backend)]</title>
+               <media:description>[(#TITRE|#DESCRIPTION|texte_backend)]</media:description>
+               <link>#URL_DOCUMENT</link>
+               <media:thumbnail url="[(#LOGO_DOCUMENT||extraire_attribut{src}|url_absolue)]"/>
+               <media:content url="[(#URL_DOCUMENT|url_absolue)]"/>
+          </item>
+		  </BOUCLE_images>
+      </channel>
+      </rss>

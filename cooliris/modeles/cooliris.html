@@ -1,0 +1,56 @@
+<object id="o" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+      width="[(#CONFIG{cooliris/largeur}|sinon{"600"})]" height="[(#CONFIG{cooliris/hauteur}|sinon{"450"})]">
+    <param name="movie" value="http://apps.cooliris.com/embed/cooliris.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="allowScriptAccess" value="always" />
+    <param name="flashvars" value="feed=[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]
+[&intro=(#CONFIG{cooliris/intro})]
+[&style=(#CONFIG{cooliris/style})]
+[&numrows=(#CONFIG{cooliris/numrows})]
+[&backgroundAlpha=(#CONFIG{cooliris/backgroundalpha})]
+[&backgroundColor=(#CONFIG{cooliris/backgroundcolor})]
+[&backgroundimage=(#CONFIG{cooliris/backgroundimage})]
+[&showEmbed=(#CONFIG{cooliris/showembed}|=={on}|?{'true','false'})]
+[&showNavArrows=(#CONFIG{cooliris/shownavarrows}|=={on}|?{'true','false'})]
+[&showChrome=(#CONFIG{cooliris/showchrome}|=={on}|?{'true','false'})]
+[&showSearch=(#CONFIG{cooliris/showsearch}|=={on}|?{'true','false'})]
+[&showReflections=(#CONFIG{cooliris/showReflections})]
+[&cellBorder=(#CONFIG{cooliris/cellborder})]
+[&cellWidth=(#CONFIG{cooliris/celllargeur})]
+[&cellHeight=(#CONFIG{cooliris/cellhauteur})]
+[&glowColor=(#CONFIG{cooliris/glowcolor})]
+[&showDescription=(#CONFIG{cooliris/showdescription}|=={on}|?{'true','false'})]
+[&showReflections=(#CONFIG{cooliris/showreflections}|=={on}|?{'true','false'})]
+"
+ />
+	<param name="wmode" value="transparent" />
+    <embed type="application/x-shockwave-flash"
+      src="http://apps.cooliris.com/embed/cooliris.swf"
+      flashvars="feed=[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]
+[&intro=(#CONFIG{cooliris/intro})]
+[&style=(#CONFIG{cooliris/style})]
+[&numrows=(#CONFIG{cooliris/numrows})]
+[&backgroundAlpha=(#CONFIG{cooliris/backgroundalpha})]
+[&backgroundColor=(#CONFIG{cooliris/backgroundcolor})]
+[&backgroundimage=(#CONFIG{cooliris/backgroundimage})]
+[&showEmbed=(#CONFIG{cooliris/showembed}|=={on}|?{'true','false'})]
+[&showNavArrows=(#CONFIG{cooliris/shownavarrows}|=={on}|?{'true','false'})]
+[&showChrome=(#CONFIG{cooliris/showchrome}|=={on}|?{'true','false'})]
+[&showSearch=(#CONFIG{cooliris/showsearch}|=={on}|?{'true','false'})]
+[&showReflections=(#CONFIG{cooliris/showReflections})]
+[&cellBorder=(#CONFIG{cooliris/cellborder})]
+[&cellWidth=(#CONFIG{cooliris/celllargeur})]
+[&cellHeight=(#CONFIG{cooliris/cellhauteur})]
+[&glowColor=(#CONFIG{cooliris/glowcolor})]
+[&showDescription=(#CONFIG{cooliris/showdescription}|=={on}|?{'true','false'})]
+[&showReflections=(#CONFIG{cooliris/showreflections}|=={on}|?{'true','false'})]
+"
+      width="[(#CONFIG{cooliris/largeur}|sinon{"600"})]" 
+      height="[(#CONFIG{cooliris/hauteur}|sinon{"450"})]"
+      allowFullScreen="true"
+      allowScriptAccess="always"
+	  wmode="transparent"
+	  >
+    </embed>
+</object>
+[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]

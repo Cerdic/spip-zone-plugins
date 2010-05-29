@@ -1,0 +1,11 @@
+<plugin>
+	<nom>Cooliris pour SPIP</nom>
+	<auteur>Phil</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Affiche le mur d'image Cooliris</description>
+	<lien></lien>
+	<icon>images/3D.png</icon>
+	<prefix>spipiris</prefix>
+</plugin>
