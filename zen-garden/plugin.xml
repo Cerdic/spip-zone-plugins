@@ -21,7 +21,7 @@
 		<icone>img_pack/themes-24.png</icone>
 		<url>zengarden</url>
 	</bouton>
-	<bouton id='theme21' parent='bando_configuration'>
+	<bouton id='theme21' parent='bando_squelette'>
 		<titre>zengarden:themes</titre>
 		<icone>images/themes-16.png</icone>
 		<url>zengarden</url>
@@ -47,7 +47,7 @@
 		<icone>img_pack/themes-24.png</icone>
 		<url>zengarden</url>
 	</bouton>
-	<bouton id='theme21' parent='bando_configuration'>
+	<bouton id='theme21' parent='bando_squelette'>
 		<titre>zengarden:themes</titre>
 		<icone>images/themes-16.png</icone>
 		<url>zengarden</url>
