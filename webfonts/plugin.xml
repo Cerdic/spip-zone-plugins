@@ -25,7 +25,7 @@
 		<titre>webfonts:titre_menu_webfonts</titre>
 		<url>webfonts</url>
 	</bouton>
-	<bouton id='webfonts2' parent='bando_configuration'>
+	<bouton id='webfonts2' parent='bando_squelette'>
 		<icone>images/webfonts-16.png</icone>
 		<titre>webfonts:titre_menu_webfonts</titre>
 		<url>webfonts</url>
