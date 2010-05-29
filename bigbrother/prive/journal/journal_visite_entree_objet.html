@@ -50,6 +50,7 @@
 ]
 
 <B_visites_par_auteurs>
+	<h3><:bigbrother:titre_visites_par_auteurs:></h3>
 	#ANCRE_PAGINATION
 	<table class="bigbrother">
 		<thead>
@@ -81,6 +82,7 @@
 	<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{#GET{auteurs}|count}|bigbrother_duree{0, horaire})]</p>
 </B_visites_par_auteurs>
 <B_visites_par_id_objets>
+	<h3><:bigbrother:titre_visites_par_id_objet:></h3>
 	#ANCRE_PAGINATION
 	<table class="bigbrother">
 		<thead>

@@ -52,11 +52,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_titre' => 'Titre',
 	'title_afficher_uniquement_objet' => 'N\'afficher que les r&eacute;sultats concernant les objets &laquo;@objet@&raquo;',
 	'title_afficher_uniquement_user' => 'N\'afficher que les r&eacute;sultats concernant l\'utilisateur @user@',
-	'titre_liste_entrees_journal' => 'Liste des entr&eacute;es du journal',
 	'titre_compilation_resultats' => 'Compilation des r&eacute;sultats',
+	'titre_liste_entrees_journal' => 'Liste des entr&eacute;es du journal',
+	'titre_page_stats' => '&Eacute;v&egrave;nements sur le site',
 	'titre_statistiques_visites_id_objet' => 'Statitiques de visites de &laquo; @titre@ &raquo; (@objet@ #@id_objet@)',
 	'titre_statistiques_visites_objet' => 'Statitiques de visites des objets de type &laquo; @objet@ &raquo;',
-	'titre_page_stats' => '&Eacute;v&egrave;nements sur le site',
+	'titre_visites_par_auteurs' => 'Par utilisateurs',
+	'titre_visites_par_id_objet' => 'Par ID num&eacute;riques des objets',
 
 	// V
 	'visites_article_auteur' => 'Visites de @nom@ sur l\'article <em>@titre@</em>',
