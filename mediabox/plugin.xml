@@ -45,7 +45,7 @@ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEA
 		<titre>mediabox:titre_menu_box</titre>
 		<url>config_mediabox</url>
 	</bouton>
-	<bouton id='mediabox2' parent='bando_configuration'>
+	<bouton id='mediabox2' parent='bando_squelette'>
 		<icone>images/mediabox-16.png</icone>
 		<titre>mediabox:titre_menu_box</titre>
 		<url>config_mediabox</url>
