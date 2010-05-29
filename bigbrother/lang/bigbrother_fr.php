@@ -28,8 +28,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_page_stats' => 'Cette page liste les &eacute;v&egrave;nements qui ont eu lieu sur le site',
 
 	// I
+	'info_aucun_filtre' => 'Les r&eacute;sultats ne sont pas filtr&eacute;s',
+	'info_aucun_resultat' => 'Aucun r&eacute;sultat ne correspond &agrave; votre s&eacute;lection.',
 	'info_stats_id_objet_visite_auteurs_nb' => 'L\'objet de type "@objet@" num&eacute;ro @id_objet@ a &eacute;t&eacute; consult&eacute; par @nb@ utilisateur (s) pour un nombre de visites total de @nb_visites@.',
 	'info_stats_objet_visite_auteurs_nb' => 'Les objets de type &laquo; @objet@ &raquo; ont &eacute;t&eacute; consult&eacute;s par @nb@ utilisateur (s) pour un nombre de visites total de @nb_visites@.',
+
+	// L
+	'label_date_debut' => 'Date de d&eacute;but',
+	'label_date_fin' => 'Date de fin',
 
 	// N
 	'naviguer_journal_stats' => '&Eacute;v&egrave;nements du site',
@@ -52,7 +58,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_titre' => 'Titre',
 	'title_afficher_uniquement_objet' => 'N\'afficher que les r&eacute;sultats concernant les objets &laquo;@objet@&raquo;',
 	'title_afficher_uniquement_user' => 'N\'afficher que les r&eacute;sultats concernant l\'utilisateur @user@',
+	'title_supprimer_filtre' => 'Supprimer ce filtre',
 	'titre_compilation_resultats' => 'Compilation des r&eacute;sultats',
+	'titre_filtres_utilises' => 'Filtres actuels',
+	'titre_limiter_temps' => 'Limiter l\'intervalle de temps',
 	'titre_liste_entrees_journal' => 'Liste des entr&eacute;es du journal',
 	'titre_page_stats' => '&Eacute;v&egrave;nements sur le site',
 	'titre_statistiques_visites_id_objet' => 'Statitiques de visites de &laquo; @titre@ &raquo; (@objet@ #@id_objet@)',

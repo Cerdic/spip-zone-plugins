@@ -1,8 +1,55 @@
 <h1><:bigbrother:titre_page_stats:></h1>
 
 [(#CHEMIN{prive/journal/journal_#ENV{journal_action}.html}|oui)
-	#INCLURE{fond=prive/journal/journal_#ENV{journal_action},env,ajax}
+	#INCLURE{fond=prive/journal/journal_#ENV{journal_action},action=#ENV{journal_action},env,ajax}
 ]
 [(#CHEMIN{prive/journal/journal_#ENV{journal_action}.html}|non)
-	#INCLURE{fond=prive/journal/journal_defaut,env,ajax}
+	#INCLURE{fond=prive/journal/journal_defaut,action=#ENV{journal_action},env,ajax}
 ]
+
+<!--#navigation-->
+<div class='cadre cadre-info'>
+	<h3><:bigbrother:titre_filtres_utilises:></h3>
+	<div>
+		[(#ENV{date_debut}|oui)
+			#SET{filtre,oui}
+			<p>
+				<strong><:bigbrother:label_date_debut:></strong>
+				<a href="[(#SELF|parametre_url{date_debut,''})]" title="<:bigbrother:title_supprimer_filtre:>">#ENV{date_debut}</a>
+			</p>]
+		[(#ENV{date_fin}|oui)
+			#SET{filtre,oui}
+			<p>
+				<strong><:bigbrother:label_date_fin:></strong>
+				<a href="[(#SELF|parametre_url{date_fin,''})]" title="<:bigbrother:title_supprimer_filtre:>">#ENV{date_fin}</a>
+			</p>]
+		[(#ENV{journal_action}|oui)
+			#SET{filtre,oui}
+			<p>
+				<strong><:bigbrother:thead_action:> : </strong>
+				<a href="[(#SELF|parametre_url{journal_action,''})]" title="<:bigbrother:title_supprimer_filtre:>">#ENV{journal_action}</a></p>]
+		[(#ENV{id_auteur}|oui)
+			#SET{filtre,oui}
+			<p>
+				<strong><:bigbrother:thead_id_auteur:> : </strong>
+				<a href="[(#SELF|parametre_url{id_auteur,''})]" title="<:bigbrother:title_supprimer_filtre:>">#ENV{id_auteur}</a></p>]
+		[(#ENV{objet}|oui)
+			#SET{filtre,oui}
+			<p>
+				<strong><:bigbrother:thead_objet:> : </strong>
+				<a href="[(#SELF|parametre_url{objet,''})]" title="<:bigbrother:title_supprimer_filtre:>">#ENV{objet}</a></p>]
+		[(#ENV{id_objet}|oui)
+			#SET{filtre,oui}
+			<p>
+				<strong><:bigbrother:thead_id_objet:> : </strong>
+				<a href="[(#SELF|parametre_url{id_objet,''})]" title="<:bigbrother:title_supprimer_filtre:>">#ENV{id_objet}</a></p>]
+		[(#GET{filtre}|=={oui}|non)
+			<p><:bigbrother:info_aucun_filtre:></p>
+		]
+	</div>
+	<h3><:bigbrother:titre_limiter_temps:></h3>
+	<div>
+	#FORMULAIRE_DATER_ENVIRONNEMENT
+	</div>
+</div>
+<!--/#navigation-->

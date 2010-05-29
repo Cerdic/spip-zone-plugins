@@ -1,9 +1,7 @@
 <div class="cadre cadre-r">
 	<div class="cadre_padding">
 		<p><:bigbrother:explication_page_stats:></p>
-
 		<B_journal_stats>
-
 		#ANCRE_PAGINATION
 		<table class="bigbrother">
 			<thead>
@@ -17,15 +15,19 @@
 				</tr>
 			</thead>
 			<tbody class="ajax">
-		<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{pagination #ENV{pagination,10}}>
+
+		<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}{id_auteur ?}{action like #ENV{action,%}}{pagination #ENV{pagination,10}}>
 			<tr class="tr_liste">
 				<td>##ID_JOURNAL</td>
-				<td>[(#ID_AUTEUR|is_numeric|oui)
-					<a href="#URL_AUTEUR{#ID_AUTEUR}">#INFO_NOM{auteur,#ID_AUTEUR}</a>]
-					[(#ID_AUTEUR|is_numeric|non)
-					#ID_AUTEUR]
+				<td>
+					<a href="[(#SELF|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{debut_journal_stats,''})]">
+						[(#ID_AUTEUR|is_numeric|oui)
+							#INFO_NOM{auteur,#ID_AUTEUR}]
+						[(#ID_AUTEUR|is_numeric|non)
+							#ID_AUTEUR]
+					</a>
 				</td>
-				<td><a href="[(#SELF|parametre_url{journal_action,#ACTION})]">#ACTION</a></td>
+				<td><a href="[(#SELF|parametre_url{journal_action,#ACTION}|parametre_url{debut_journal_stats,''})]">#ACTION</a></td>
 				<td>#OBJET</td>
 				<td>[(#ID_OBJET|intval|oui)#ID_OBJET]</td>
 				<td>[(#DATE)]</td>
@@ -35,5 +37,7 @@
 		</table>
 		[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 		</B_journal_stats>
+		<p><:bigbrother:info_aucun_resultat:></p>
+		<//B_journal_stats>
 	</div>
 </div>

@@ -8,7 +8,7 @@
 				<h1><:bigbrother:titre_statistiques_visites_objet{objet=#ENV{objet}}:></h1>]
 		]
 		#SET{id_journals,#ARRAY}
-		<BOUCLE_journal_stats_valide(JOURNAL){par date}{objet ?}{id_objet ?}{id_auteur ?}{action = #ENV{journal_action}}{inverse}>
+		<BOUCLE_journal_stats_valide(JOURNAL){par date}{date>#ENV{date_debut,0}}{objet ?}{id_objet ?}{id_auteur ?}{action = #ENV{journal_action}}{inverse}>
 			[(#INFOS|unserialize|table_valeur{date_fin}|oui)
 				#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}]
 		</BOUCLE_journal_stats_valide>
@@ -28,7 +28,7 @@
 				</tr>
 			</thead>
 			<tbody class="ajax">
-		<BOUCLE_journal_stats(JOURNAL){id_journal IN #GET{id_journals}}{par date}{inverse}{pagination #ENV{pagination,10}}>
+		<BOUCLE_journal_stats(JOURNAL){id_journal IN #GET{id_journals}}{date>#ENV{date_debut,0}}{par date}{inverse}{pagination #ENV{pagination,10}}>
 			<tr class="tr_liste">
 				<td>##ID_JOURNAL</td>
 				<td>

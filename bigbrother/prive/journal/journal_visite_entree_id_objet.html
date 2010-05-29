@@ -1,6 +1,6 @@
 #SET{temps, #ARRAY}
 #SET{auteurs,#ARRAY}
-<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{objet}{id_objet}{id_auteur ?}{action = #ENV{journal_action}}>
+<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{date>#ENV{date_debut,0}}{objet}{id_objet}{id_auteur ?}{action = #ENV{journal_action}}>
 	#SET{
 		temps,
 		#GET{temps}|array_merge{

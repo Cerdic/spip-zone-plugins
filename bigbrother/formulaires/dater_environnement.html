@@ -1,0 +1,29 @@
+<div class="formulaire_spip formulaire_#ENV{form}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+				<label for="date_debut"><:bigbrother:label_date_debut:></label>
+				<input type='text' class='text date' name='date_debut' id='date_debut' value="[(#ENV{date_debut})]" />
+				<span class='afficher_horaire'>
+					<input type='text' class='text heure' name='heure_debut' id='heure_debut' value="[(#ENV{heure_debut})]" />
+				</span>
+				<label for="date_fin" class='date_fin'><:bigbrother:label_date_fin:></label>
+				<input type='text' class='text date' name='date_fin' id='date_fin' value="[(#ENV{date_fin})]" />
+				<span class='afficher_horaire'>
+					<input type='text' class='text heure' name='heure_fin' id='heure_fin' value="[(#ENV{heure_fin})]" />
+				</span>
+			</li>
+		</ul>
+		#INCLURE{fond=formulaires/dateur/inc-dateur}
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
