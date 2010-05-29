@@ -2,7 +2,7 @@
   <nom>Bandeau 2.1</nom>
   <auteur>Collectif spip-dev</auteur>
   <licence>(c) 2009 GPL</licence>
-  <version>1.0.3</version>
+  <version>1.1.0</version>
 	<icon>bandeau-32.png</icon>
   <etat>test</etat>
   <description>Revisitons la barre de nav de SPIP</description>
@@ -115,6 +115,12 @@
 		<args>statut=!1comite,0minirezo,nouveau</args>
 	</bouton>
 	
+	<bouton id="bando_squelette">
+		<icone>images/squelette-48.png</icone>
+		<titre>bando:icone_squelette</titre>
+		<url>navigation</url>
+		<args>menu=bando_squelette</args>
+	</bouton>
 	
 	<bouton id="bando_administration">
 		<icone>images/administration-48.png</icone>

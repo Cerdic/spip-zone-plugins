@@ -7,13 +7,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_accueil' => 'Accueil',
-	'icone_administration' => 'Administration',
+	'icone_administration' => 'Outils',
 	'icone_configuration' => 'Configuration',
 	'icone_edition' => '&Eacute;dition',
 	'icone_langage' => 'Ma langue',
 	'icone_mes_infos' => 'Mes informations',
 	'icone_preferences' => 'Mes pr&eacute;f&eacute;rences',
 	'icone_reactions' => 'Activit&eacute;',
+	'icone_squelette' => 'Squelette',
 	'icone_suivi_edito' => 'Publication',
 	'icone_suivi_publication' => 'Suivi de la publication',
 	'icone_visiter_site' => 'Voir le site public',
