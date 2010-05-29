@@ -1,8 +1,11 @@
 <div class="cadre cadre-r">
 	<div class="cadre_padding">
-		[(#ENV{objet}|et{ENV{titre}}|oui)
-			[(#SET{titre,[(#INFO_TITRE{#ENV{objet},#ENV{id_objet}})]})]
-			<h1><:bigbrother:titre_statistiques_visites_objet{objet=#ENV{objet},id_objet=#ENV{id_objet},titre=#GET{titre}}:></h1>
+		[(#ENV{objet}|oui)
+			[(#ENV{id_objet}|is_numeric|oui)
+				[(#SET{titre,[(#INFO_TITRE{#ENV{objet},#ENV{id_objet}})]})]
+				<h1><:bigbrother:titre_statistiques_visites_id_objet{objet=#ENV{objet},id_objet=#ENV{id_objet},titre=#GET{titre}}:></h1>]
+			[(#ENV{id_objet}|is_numeric|non)
+				<h1><:bigbrother:titre_statistiques_visites_objet{objet=#ENV{objet}}:></h1>]
 		]
 		#SET{id_journals,#ARRAY}
 		<BOUCLE_journal_stats_valide(JOURNAL){par date}{objet ?}{id_objet ?}{id_auteur ?}{action = #ENV{journal_action}}{inverse}>
@@ -37,7 +40,13 @@
 						#GET{auteur}
 					</a>
 				</td>
-				<td><a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''})]" title="<:bigbrother:title_afficher_uniquement_objet{objet=#OBJET}:>">#OBJET</a></td>
+				<td>
+					[(#ENV{objet}|et{#ENV{id_objet}|non}|non)#SET{link_objet,oui}]
+					[(#GET{link_objet}|oui)
+					<a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''})]" title="<:bigbrother:title_afficher_uniquement_objet{objet=#OBJET}:>">]
+						#OBJET
+					[(#GET{link_objet}|oui)</a>]
+				</td>
 				<td>
 					[(#ENV{objet}|et{#ENV{id_objet}}|non)#SET{link_id_objet,oui}]
 					[(#GET{link_id_objet}|oui)
@@ -54,61 +63,12 @@
 		[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 		</B_journal_stats>
 
-		#SET{temps, #ARRAY}
-		#SET{auteurs,#ARRAY}
-		<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #GET{id_journals}}{objet}{id_objet}{id_auteur ?}{action = #ENV{journal_action}}>
-			#SET{
-				temps,
-				#GET{temps}|array_merge{
-					#ARRAY{
-						aut#ID_AUTEUR,
-						#GET{temps}|table_valeur{aut#ID_AUTEUR,0}|plus{#DATE|bigbrother_duree{#INFOS|table_valeur{date_fin},secondes}}
-					}
-				}
-			}
-			#SET{auteurs,#GET{auteurs}|push{#ID_AUTEUR}}
-		</BOUCLE_journal_stats_total>
-		<div>
-		#SET{auteurs,#GET{auteurs}|array_unique}
-		#SET{nb_users,#GET{auteurs}|count}
-		#SET{nb_visites,#TOTAL_BOUCLE}
-		<h2><:bigbrother:titre_compilation_resultats:></h2>
-		[(#ENV{id_auteur}|non)
-			<p><:bigbrother:info_stats_objet_visite_auteurs_nb{nb=#GET{nb_users},nb_visites=#GET{nb_visites},objet=#ENV{objet},id_objet=#ENV{id_objet}}:></p>
+		[(#ENV{objet}|et{#ENV{id_objet}|is_numeric}|oui)
+			<INCLURE{fond=prive/journal/journal_visite_entree_id_objet,id_journals=#GET{id_journals},env,ajax}>
+		]
+		[(#ENV{objet}|et{#ENV{id_objet}|is_numeric|non}|oui)
+			<INCLURE{fond=prive/journal/journal_visite_entree_objet,id_journals=#GET{id_journals},env,ajax}>
 		]
 
-		<B_visites_par_auteurs>
-			#ANCRE_PAGINATION
-			<table class="bigbrother">
-				<thead>
-					<tr class="row_first">
-						<th><:bigbrother:thead_id_auteur:></th>
-						<th class="temps"><:bigbrother:temps_passe:></th>
-					</tr>
-				</thead>
-				<tbody>
-			<BOUCLE_visites_par_auteurs(POUR){tableau #GET{auteurs}}{pagination #ENV{pagination,0}}>
-				<tr class="tr_liste">
-					<td>
-						<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_auteur,#VALEUR})]">
-							[(#VALEUR|is_numeric|oui)
-								#INFO_NOM{auteur,#VALEUR}]
-							[(#VALEUR|is_numeric|non)
-								#VALEUR]
-						</a>
-					</td>
-					[<td class="temps">(#GET{temps}|table_valeur{aut#VALEUR}|bigbrother_duree{0,horaire})</td>]
-				</tr>
-			</BOUCLE_visites_par_auteurs>
-				</tbody>
-			</table>
-			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
-
-			<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps}|array_sum|bigbrother_duree{0, horaire})]</p>
-			<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
-			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps}|array_sum|div{#GET{auteurs}|count}|bigbrother_duree{0, horaire})]</p>
-		</B_visites_par_auteurs>
-		</div>
-		</B_journal_stats_total>
 	</div>
 </div>

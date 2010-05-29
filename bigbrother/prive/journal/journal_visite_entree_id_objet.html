@@ -1,0 +1,56 @@
+#SET{temps, #ARRAY}
+#SET{auteurs,#ARRAY}
+<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{objet}{id_objet}{id_auteur ?}{action = #ENV{journal_action}}>
+	#SET{
+		temps,
+		#GET{temps}|array_merge{
+			#ARRAY{
+				aut#ID_AUTEUR,
+				#GET{temps}|table_valeur{aut#ID_AUTEUR,0}|plus{#DATE|bigbrother_duree{#INFOS|table_valeur{date_fin},secondes}}
+			}
+		}
+	}
+	#SET{auteurs,#GET{auteurs}|push{#ID_AUTEUR}}
+</BOUCLE_journal_stats_total>
+<div>
+#SET{auteurs,#GET{auteurs}|array_unique}
+#SET{nb_users,#GET{auteurs}|count}
+#SET{nb_visites,#TOTAL_BOUCLE}
+<h2><:bigbrother:titre_compilation_resultats:></h2>
+[(#ENV{id_auteur}|non)
+	<p><:bigbrother:info_stats_id_objet_visite_auteurs_nb{nb=#GET{nb_users},nb_visites=#GET{nb_visites},objet=#ENV{objet},id_objet=#ENV{id_objet}}:></p>
+]
+
+<B_visites_par_auteurs>
+	#ANCRE_PAGINATION
+	<table class="bigbrother">
+		<thead>
+			<tr class="row_first">
+				<th><:bigbrother:thead_id_auteur:></th>
+				<th class="temps"><:bigbrother:temps_passe:></th>
+			</tr>
+		</thead>
+		<tbody>
+	<BOUCLE_visites_par_auteurs(POUR){tableau #GET{auteurs}}{pagination #ENV{pagination,0}}>
+		<tr class="tr_liste">
+			<td>
+				<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_auteur,#VALEUR})]">
+					[(#VALEUR|is_numeric|oui)
+						#INFO_NOM{auteur,#VALEUR}]
+					[(#VALEUR|is_numeric|non)
+						#VALEUR]
+				</a>
+			</td>
+			[<td class="temps">(#GET{temps}|table_valeur{aut#VALEUR}|bigbrother_duree{0,horaire})</td>]
+		</tr>
+	</BOUCLE_visites_par_auteurs>
+		</tbody>
+	</table>
+	[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+
+	<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps}|array_sum|bigbrother_duree{0, horaire})]</p>
+	<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
+	<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps}|array_sum|div{#GET{auteurs}|count}|bigbrother_duree{0, horaire})]</p>
+</B_visites_par_auteurs>
+</div>
+</B_journal_stats_total>
