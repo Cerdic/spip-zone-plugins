@@ -56,7 +56,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				if ($parent AND isset($boutons_admin[$parent])){
 					if (!is_array($boutons_admin[$parent]->sousmenu))
 						$boutons_admin[$parent]->sousmenu = array();
-					$position = $infos['position']?$infos['position']:count($boutons_admin[$parent]->sousmenu);
+					$position = (strlen($infos['position'])?intval($infos['position']):count($boutons_admin[$parent]->sousmenu));
 					$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
 					+ array($id=> new Bouton(
 					  ($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
