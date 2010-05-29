@@ -5,7 +5,9 @@ function init_gadgets(url_toutsite,url_navrapide,url_agenda,html_messagerie){
 						url: url_toutsite,
 						success: function(c){
 							jQuery('#boutonbandeautoutsite').siblings('ul').remove();
-							jQuery('#boutonbandeautoutsite').after(c);
+							jQuery('#boutonbandeautoutsite')
+							  .after(c)
+								.parent().find('li').menuFocus();
 						}
 					});
 	});
@@ -27,7 +29,7 @@ jQuery(document).ready(function(){
 	jQuery.fn.menuItemClose = function(){
 		jQuery(this)
 			.removeClass('actif_tempo');
-		is_open = (jQuery(this).parents('ul').eq(0).find('li.actif').length>0);
+		is_open = (jQuery(this).parents('ul').eq(-1).find('li.actif').length>0);
 		return this;
 	}
 	// deplier le menu au focus clavier,
@@ -43,6 +45,7 @@ jQuery(document).ready(function(){
 				if (this.timerout)
 					clearTimeout(this.timerout);
 				this.timerout = null;
+				this.timerin = null;
 				if (is_open)
 					jQuery(this).menuItemOpen();
 				else {
