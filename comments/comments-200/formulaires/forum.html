@@ -129,7 +129,7 @@ function cookie_formulaire_forum(){
 }
 if (window.jQuery)(function($){
 	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',function(){
-		cookie_formulaire_forum();
+		setTimeout(cookie_formulaire_forum,100);
 		$(window)
 		.bind('unload', function(){
 			if (saveauto){
