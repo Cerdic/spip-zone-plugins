@@ -20,6 +20,10 @@ function autoriser_skeleditor_dist($faire, $type, $id, $qui, $opt){
 	include_spip('inc/skeleditor');
   return (skeleditor_path_editable() AND autoriser('webmestre','','',$qui));
 }
+function autoriser_skeleditor21_dist($faire, $type, $id, $qui, $opt){
+	include_spip('inc/skeleditor');
+  return (skeleditor_path_editable() AND autoriser('webmestre','','',$qui));
+}
 
 // autorisation des boutons
 function autoriser_skeleditor_ajout_bouton_dist($faire, $type, $file, $qui, $opt) {
