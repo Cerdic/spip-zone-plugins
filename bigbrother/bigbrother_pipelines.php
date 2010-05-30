@@ -113,4 +113,10 @@ function bigbrother_post_insertion($flux){
 		);
 	}
 }
+
+function bigbrother_jquery_plugins($array){
+	$array[] = _DIR_LIB_FLOT.'/jquery.flot.js';
+	$array[] = 'javascript/flot_extras.js';
+	return $array;
+}
 ?>

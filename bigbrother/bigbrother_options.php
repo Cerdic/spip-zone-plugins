@@ -18,4 +18,7 @@ include_spip('inc/bigbrother');
 if (lire_config('bigbrother/enregistrer_visite') == 'oui')
 	bigbrother_tester_la_visite_du_site();
 
+if(!defined('_DIR_LIB_FLOT')){
+	define('_DIR_LIB_FLOT','lib/flot');
+}
 ?>

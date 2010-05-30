@@ -18,3 +18,16 @@ div.pagination_bigbrother{
 	border-top:none;
 	text-align:center;
 }
+
+#bigbrother_tooltip{
+	position: absolute;
+	display: none;
+	color:#fff;
+	padding: 5px;
+	background-color: #000;
+	opacity: 0.80;
+	font-size:11px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}

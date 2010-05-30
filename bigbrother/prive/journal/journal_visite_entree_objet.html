@@ -16,7 +16,7 @@
 #SET{id_objets,#ARRAY}
 #SET{temps_objets, #ARRAY}
 #SET{objets_def, #ARRAY}
-<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{objet ?}{id_auteur ?}{date>#ENV{date_debut,0}}{action = #ENV{journal_action}}>
+<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{objet ?}{id_auteur ?}{par objet,id_objet}{date>#ENV{date_debut,0}}{action = #ENV{journal_action}}>
 	#SET{
 		temps_auteurs,
 		#GET{temps_auteurs}|array_merge{
@@ -110,7 +110,7 @@
 		<div class="cadre_padding">
 			<h3><:bigbrother:titre_visites_par_id_objet:></h3>
 			#ANCRE_PAGINATION
-			<table class="bigbrother">
+			<table class="bigbrother" id="graph_visites_id_objets_table">
 				<thead>
 					<tr class="row_first">
 						<th><:bigbrother:thead_id_objet:></th>
@@ -124,18 +124,23 @@
 				[(#SET{id_objet,[(#GET{objets_def}|table_valeur{#VALEUR}|table_valeur{id_objet})]})]
 				[(#SET{objet,[(#GET{objets_def}|table_valeur{#VALEUR}|table_valeur{objet})]})]
 				<tr class="tr_liste">
-					<td>
+					<td class="id_objet">
 						<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_objet,#GET{id_objet}}|parametre_url{objet,#GET{objet}})]">
 							[(#GET{id_objet})]
 						</a>
 					</td>
-					[(#ENV{objet}|non)<td><a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{objet,#GET{objet}})]">#GET{objet}</a></td>]
-					<td>
+					[(#ENV{objet}|non)
+					<td class="objet">
+						<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{objet,#GET{objet}})]">#GET{objet}</a>
+					</td>]
+					<td class="titre">
 						<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_objet,#GET{id_objet}}|parametre_url{objet,#GET{objet}})]">
 							#INFO_TITRE{#GET{objet},#GET{id_objet}}
 						</a>
 					</td>
-					[<td class="temps">(#GET{temps_objets}|table_valeur{#VALEUR}|bigbrother_duree{0,horaire})</td>]
+					[<td class="temps">
+						<abbr title="[(#GET{temps_objets}|table_valeur{#VALEUR}|mult{1000})]">(#GET{temps_objets}|table_valeur{#VALEUR}|bigbrother_duree{0,horaire})</abbr>
+					</td>]
 				</tr>
 			</BOUCLE_visites_par_id_objets>
 				</tbody>
@@ -145,6 +150,61 @@
 			<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_objets}|array_sum|bigbrother_duree{0, horaire})]</p>
 			<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_objets}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
 			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_objets}|array_sum|div{[(#GET{id_objets}|count)]}|round|bigbrother_duree{0, horaire})]</p>
+			<div id="graph_visites_id_objets" style="width:100%;height:300px"></div>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					var visites = [];
+					var visites_labels = [];
+					var visites_ticks = [];
+
+					i=0;
+					$('#graph_visites_id_objets_table tr.tr_liste').each(function(){
+						var temps = $(this).find('.temps abbr').attr('title');
+						visites.push([i,temps]);
+						var label = plot_trim($(this).find('.titre').text());
+						visites_labels.push(label);
+						var tick = $(this).find('.objet') ? plot_trim($(this).find('.objet a').text()) : '';
+						tick += ' '+plot_trim($(this).find('.id_objet a').text());
+						visites_ticks.push([i,tick]);
+						i++;
+					});
+
+					var data = [{ data: visites }];
+					var options = {
+						points : {show:true},
+						lines : {show:true},
+						yaxis : {mode:'time'},
+						xaxis : {ticks:visites_ticks},
+						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+					};
+
+					$.plot($("#graph_visites_id_objets"), data, options);
+
+					var previousPoint = null;
+					$("#graph_visites_id_objets").bind("plothover", function (event, pos, item) {
+						if (item) {
+							if (previousPoint != item.dataIndex) {
+								previousPoint = item.dataIndex;
+								$("#bigbrother_tooltip").remove();
+								var x = item.datapoint[0].toFixed(2),
+									y = item.datapoint[1].toFixed(2);
+
+								var index = item.dataIndex;
+								content = visites_labels[index];
+								content += '<br />'+plot_ms_to_timereadable(item.datapoint[1]);
+								plot_showtooltip(
+									item.pageX,
+									item.pageY,
+									content,'bigbrother_tooltip');
+							}
+						}
+						else {
+							$("#bigbrother_tooltip").remove();
+							previousPoint = null;
+						}
+					});
+				});
+			</script>
 		</div>
 	</div>
 </B_visites_par_id_objets>
