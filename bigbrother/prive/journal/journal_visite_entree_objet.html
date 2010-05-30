@@ -101,7 +101,7 @@
 
 			<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_auteurs}|array_sum|bigbrother_duree{0, horaire})]</p>
 			<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_auteurs}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
-			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{#GET{auteurs}|count}|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{[(#GET{auteurs}|count)]}|round|bigbrother_duree{0, horaire})]</p>
 
 			<div id="graph_visites_id_auteurs" class="bigbrother_graphs"></div>
 			<script type="text/javascript">
@@ -207,26 +207,26 @@
 
 			<div id="graph_visites_id_objets" class="bigbrother_graphs"></div>
 			<script type="text/javascript">
-				jQuery(document).ready(function(){
-					var visites = [];
-					var visites_labels = [];
-					var visites_ticks = [];
+					jQuery(document).ready(function(){
+						var visites = [];
+						var visites_labels = [];
+						var visites_ticks = [];
 
-					i=0;
-					$('#graph_visites_id_objets_table tr.tr_liste').each(function(){
-						var temps = $(this).find('.temps abbr').attr('title');
-						visites.push([i,temps]);
-						var label = plot_trim($(this).find('.titre').text());
-						visites_labels.push(label);
-						var tick = $(this).find('.objet') ? plot_trim($(this).find('.objet a').text()) : '';
-						tick += ' '+plot_trim($(this).find('.id_objet a').text());
-						visites_ticks.push([i,tick]);
-						i++;
-					});
+						i=0;
+						$('#graph_visites_id_objets_table tr.tr_liste').each(function(){
+							var temps = $(this).find('.temps abbr').attr('title');
+							visites.push([i,temps]);
+							var label = plot_trim($(this).find('.titre').text());
+							visites_labels.push(label);
+							var tick = $(this).find('.objet') ? plot_trim($(this).find('.objet a').text()) : '';
+							tick += ' '+plot_trim($(this).find('.id_objet a').text());
+							visites_ticks.push([i,tick]);
+							i++;
+						});
 
-					var data = [{ data: visites }];
-					var options = {
-						points : {show:true},
+						var data = [{ data: visites }];
+						var options = {
+							points : {show:true},
 						lines : {show:true},
 						yaxis : {mode:'time'},
 						xaxis : {ticks:visites_ticks},
