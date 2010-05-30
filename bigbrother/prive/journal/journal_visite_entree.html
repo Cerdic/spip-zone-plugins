@@ -14,6 +14,8 @@
 		</BOUCLE_journal_stats_valide>
 		<h2><:bigbrother:titre_liste_entrees_journal:></h2>
 		<B_journal_stats>
+		#SET{total,#GRAND_TOTAL}
+		<p><:bigbrother:info_nombre_resultat{nb=#GET{total}}:></p>
 		#ANCRE_PAGINATION
 		<table class="bigbrother">
 			<thead>
@@ -28,7 +30,7 @@
 				</tr>
 			</thead>
 			<tbody class="ajax">
-		<BOUCLE_journal_stats(JOURNAL){id_journal IN #GET{id_journals}}{date>#ENV{date_debut,0}}{par date}{inverse}{pagination #ENV{pagination,10}}>
+		<BOUCLE_journal_stats(JOURNAL){id_journal IN #GET{id_journals}}{par date}{inverse}{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}{id_auteur ?}{objet ?}{id_objet ?}{action like #ENV{action,%}}{pagination #ENV{pagination,10}}>
 			<tr class="tr_liste">
 				<td>##ID_JOURNAL</td>
 				<td>
@@ -36,16 +38,15 @@
 						#SET{auteur,#INFO_NOM{auteur,#ID_AUTEUR}}]
 					[(#ID_AUTEUR|is_numeric|non)
 						#SET{auteur,#ID_AUTEUR}]
-					<a href="[(#SELF|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:bigbrother:title_afficher_uniquement_user{user=#GET{auteur}}:>">
+					[(#ENV{id_auteur}|non)<a href="[(#SELF|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:bigbrother:title_afficher_uniquement_user{user=#GET{auteur}}:>">]
 						#GET{auteur}
-					</a>
+					[(#ENV{id_auteur}|non)</a>]
 				</td>
 				<td>
-					[(#ENV{objet}|et{#ENV{id_objet}|non}|non)#SET{link_objet,oui}]
-					[(#GET{link_objet}|oui)
+					[(#ENV{objet}|non)
 					<a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''})]" title="<:bigbrother:title_afficher_uniquement_objet{objet=#OBJET}:>">]
 						#OBJET
-					[(#GET{link_objet}|oui)</a>]
+					[(#ENV{objet}|non)</a>]
 				</td>
 				<td>
 					[(#ENV{objet}|et{#ENV{id_objet}}|non)#SET{link_id_objet,oui}]
@@ -66,7 +67,7 @@
 		[(#ENV{objet}|et{#ENV{id_objet}|is_numeric}|oui)
 			<INCLURE{fond=prive/journal/journal_visite_entree_id_objet,id_journals=#GET{id_journals},env,ajax}>
 		]
-		[(#ENV{objet}|et{#ENV{id_objet}|is_numeric|non}|oui)
+		[(#ENV{objet}|et{#ENV{id_objet}}|non)
 			<INCLURE{fond=prive/journal/journal_visite_entree_objet,id_journals=#GET{id_journals},env,ajax}>
 		]
 

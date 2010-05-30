@@ -30,7 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_aucun_filtre' => 'Les r&eacute;sultats ne sont pas filtr&eacute;s',
 	'info_aucun_resultat' => 'Aucun r&eacute;sultat ne correspond &agrave; votre s&eacute;lection.',
-	'info_stats_id_objet_visite_auteurs_nb' => 'L\'objet de type "@objet@" num&eacute;ro @id_objet@ a &eacute;t&eacute; consult&eacute; par @nb@ utilisateur (s) pour un nombre de visites total de @nb_visites@.',
+	'info_nombre_resultat' => 'Il y a @nb@ entr&eacute;e(s) dans le journal correspondant aux crit&egrave;res.',
+	'info_stats_id_objet_visite_auteurs_nb' => 'L\'objet de type &laquo; @objet@ &raquo; num&eacute;ro @id_objet@ a &eacute;t&eacute; consult&eacute; par @nb@ utilisateur(s) pour un nombre de visites total de @nb_visites@.',
+	'info_stats_visite_auteurs_nb' => 'L\'ensemble des objets du site ont &eacute;t&eacute; consult&eacute;s par @nb@ utilisateur (s) pour un nombre de visites total de @nb_visites@.',
 	'info_stats_objet_visite_auteurs_nb' => 'Les objets de type &laquo; @objet@ &raquo; ont &eacute;t&eacute; consult&eacute;s par @nb@ utilisateur (s) pour un nombre de visites total de @nb_visites@.',
 
 	// L

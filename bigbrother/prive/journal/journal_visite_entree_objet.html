@@ -15,7 +15,8 @@
 #SET{temps_auteurs, #ARRAY}
 #SET{id_objets,#ARRAY}
 #SET{temps_objets, #ARRAY}
-<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{objet}{id_auteur ?}{date>#ENV{date_debut,0}}{action = #ENV{journal_action}}>
+#SET{objets_def, #ARRAY}
+<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{objet ?}{id_auteur ?}{date>#ENV{date_debut,0}}{action = #ENV{journal_action}}>
 	#SET{
 		temps_auteurs,
 		#GET{temps_auteurs}|array_merge{
@@ -25,17 +26,33 @@
 			}
 		}
 	}
+
+	[(#SET{duree,[(#DATE|bigbrother_duree{[(#INFOS|table_valeur{date_fin})],secondes})]})]
+	[(#SET{id,obj[(#ID_OBJET)][(#OBJET)]})]
+
 	#SET{
 		temps_objets,
 		#GET{temps_objets}|array_merge{
 			#ARRAY{
-				obj#ID_OBJET,
-				#GET{temps_objets}|table_valeur{obj#ID_OBJET,0}|plus{#DATE|bigbrother_duree{#INFOS|table_valeur{date_fin},secondes}}
+				#GET{id},
+				#GET{temps_objets}|table_valeur{#GET{id},0}|plus{#GET{duree}}
 			}
 		}
 	}
+
+	#SET{
+		objets_def,
+		#GET{objets_def}|array_merge{
+			#ARRAY{
+				#GET{id},
+				#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}
+			}
+		}
+	}
+
 	#SET{auteurs,#GET{auteurs}|push{#ID_AUTEUR}}
-	#SET{id_objets,#GET{id_objets}|push{#ID_OBJET}}
+	#SET{id_objets,#GET{id_objets}|push{#GET{id}}}
+
 </BOUCLE_journal_stats_total>
 <div>
 #SET{auteurs,#GET{auteurs}|array_unique}
@@ -46,75 +63,90 @@
 
 <h2><:bigbrother:titre_compilation_resultats:></h2>
 [(#ENV{id_auteur}|non)
-	<p><:bigbrother:info_stats_objet_visite_auteurs_nb{nb=#GET{nb_users},nb_visites=#GET{nb_visites},objet=#ENV{objet},id_objet=#ENV{id_objet}}:></p>
+	[(#ENV{objet}|oui)
+	<p><:bigbrother:info_stats_objet_visite_auteurs_nb{nb=#GET{nb_users},nb_visites=#GET{nb_visites},objet=#ENV{objet},id_objet=#ENV{id_objet}}:></p>]
+	[(#ENV{objet}|non)
+	<p><:bigbrother:info_stats_visite_auteurs_nb{nb=#GET{nb_users},nb_visites=#GET{nb_visites}}:></p>]
 ]
 
 <B_visites_par_auteurs>
-	<h3><:bigbrother:titre_visites_par_auteurs:></h3>
-	#ANCRE_PAGINATION
-	<table class="bigbrother">
-		<thead>
-			<tr class="row_first">
-				<th><:bigbrother:thead_id_auteur:></th>
-				<th class="temps"><:bigbrother:temps_passe:></th>
-			</tr>
-		</thead>
-		<tbody>
-	<BOUCLE_visites_par_auteurs(POUR){tableau #GET{auteurs}}{pagination #ENV{pagination,0}}>
-		<tr class="tr_liste">
-			<td>
-				<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_auteur,#VALEUR})]">
-					[(#VALEUR|is_numeric|oui)
-						#INFO_NOM{auteur,#VALEUR}]
-					[(#VALEUR|is_numeric|non)
-						#VALEUR]
-				</a>
-			</td>
-			[<td class="temps">(#GET{temps_auteurs}|table_valeur{aut#VALEUR}|bigbrother_duree{0,horaire})</td>]
-		</tr>
-	</BOUCLE_visites_par_auteurs>
-		</tbody>
-	</table>
-	[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+	<div class="cadre-r cadre">
+		<div class="cadre_padding">
+			<h3><:bigbrother:titre_visites_par_auteurs:></h3>
+			#ANCRE_PAGINATION
+			<table class="bigbrother">
+				<thead>
+					<tr class="row_first">
+						<th><:bigbrother:thead_id_auteur:></th>
+						<th class="temps"><:bigbrother:temps_passe:></th>
+					</tr>
+				</thead>
+				<tbody>
+			<BOUCLE_visites_par_auteurs(POUR){tableau #GET{auteurs}}{pagination #ENV{pagination,0}}>
+				<tr class="tr_liste">
+					<td>
+						[(#ENV{id_auteur}|non)<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_auteur,#VALEUR})]">]
+							[(#VALEUR|is_numeric|oui)
+								#INFO_NOM{auteur,#VALEUR}]
+							[(#VALEUR|is_numeric|non)
+								#VALEUR]
+						[(#ENV{id_auteur}|non)</a>]
+					</td>
+					[<td class="temps">(#GET{temps_auteurs}|table_valeur{aut#VALEUR}|bigbrother_duree{0,horaire})</td>]
+				</tr>
+			</BOUCLE_visites_par_auteurs>
+				</tbody>
+			</table>
+			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 
-	<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_auteurs}|array_sum|bigbrother_duree{0, horaire})]</p>
-	<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_auteurs}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
-	<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{#GET{auteurs}|count}|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_auteurs}|array_sum|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_auteurs}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{#GET{auteurs}|count}|bigbrother_duree{0, horaire})]</p>
+		</div>
+	</div>
 </B_visites_par_auteurs>
 <B_visites_par_id_objets>
-	<h3><:bigbrother:titre_visites_par_id_objet:></h3>
-	#ANCRE_PAGINATION
-	<table class="bigbrother">
-		<thead>
-			<tr class="row_first">
-				<th><:bigbrother:thead_id_objet:></th>
-				<th><:bigbrother:thead_titre:></th>
-				<th class="temps"><:bigbrother:thead_temps_consultation:></th>
-			</tr>
-		</thead>
-		<tbody>
-	<BOUCLE_visites_par_id_objets(POUR){tableau #GET{id_objets}}{pagination #ENV{pagination,0}}>
-		<tr class="tr_liste">
-			<td>
-				<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_objet,#VALEUR})]">
-					#VALEUR
-				</a>
-			</td>
-			<td>
-				<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_objet,#VALEUR})]">
-					#INFO_TITRE{#ENV{objet},#VALEUR}
-				</a>
-			</td>
-			[<td class="temps">(#GET{temps_objets}|table_valeur{obj#VALEUR}|bigbrother_duree{0,horaire})</td>]
-		</tr>
-	</BOUCLE_visites_par_id_objets>
-		</tbody>
-	</table>
-	[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+	<div class="cadre-r cadre">
+		<div class="cadre_padding">
+			<h3><:bigbrother:titre_visites_par_id_objet:></h3>
+			#ANCRE_PAGINATION
+			<table class="bigbrother">
+				<thead>
+					<tr class="row_first">
+						<th><:bigbrother:thead_id_objet:></th>
+						[(#ENV{objet}|non)<th><:bigbrother:thead_objet:></th>]
+						<th><:bigbrother:thead_titre:></th>
+						<th class="temps"><:bigbrother:thead_temps_consultation:></th>
+					</tr>
+				</thead>
+				<tbody>
+			<BOUCLE_visites_par_id_objets(POUR){tableau #GET{id_objets}}{pagination #ENV{pagination,0}}>
+				[(#SET{id_objet,[(#GET{objets_def}|table_valeur{#VALEUR}|table_valeur{id_objet})]})]
+				[(#SET{objet,[(#GET{objets_def}|table_valeur{#VALEUR}|table_valeur{objet})]})]
+				<tr class="tr_liste">
+					<td>
+						<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_objet,#GET{id_objet}}|parametre_url{objet,#GET{objet}})]">
+							[(#GET{id_objet})]
+						</a>
+					</td>
+					[(#ENV{objet}|non)<td><a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{objet,#GET{objet}})]">#GET{objet}</a></td>]
+					<td>
+						<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_objet,#GET{id_objet}}|parametre_url{objet,#GET{objet}})]">
+							#INFO_TITRE{#GET{objet},#GET{id_objet}}
+						</a>
+					</td>
+					[<td class="temps">(#GET{temps_objets}|table_valeur{#VALEUR}|bigbrother_duree{0,horaire})</td>]
+				</tr>
+			</BOUCLE_visites_par_id_objets>
+				</tbody>
+			</table>
+			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 
-	<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_objets}|array_sum|bigbrother_duree{0, horaire})]</p>
-	<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_objets}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
-	<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_objets}|array_sum|div{#GET{id_objets}|count}|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_objets}|array_sum|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_objets}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_objets}|array_sum|div{[(#GET{id_objets}|count)]}|round|bigbrother_duree{0, horaire})]</p>
+		</div>
+	</div>
 </B_visites_par_id_objets>
 </div>
 </B_journal_stats_total>
