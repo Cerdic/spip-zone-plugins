@@ -69,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_statistiques_visites_id_objet' => 'Statitiques de visites de &laquo; @titre@ &raquo; (@objet@ #@id_objet@)',
 	'titre_statistiques_visites_objet' => 'Statitiques de visites des objets de type &laquo; @objet@ &raquo;',
 	'titre_visites_par_auteurs' => 'Par utilisateurs',
+	'titre_visites_par_date' => 'Par journ&eacute;es',
 	'titre_visites_par_id_objet' => 'Par ID num&eacute;riques des objets',
 
 	// V

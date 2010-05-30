@@ -3,19 +3,21 @@
 	Compilation des résultats pour les visites sur un type d'objet particulier
 	sans que son id numérique ne soit spécifié
 
-	Doit recevoir dans l'environnement :
+	Doit absolument recevoir dans l'environnement :
 	-* Un array de d'id_journal #ENV{id_journals}
-	-* Un type d'objet
 
 	On crée deux tableaux différents de compilation :
-	-* Par id_objet
+	-* Par objet/id_objet
 	-* Par id_auteur
+	-* Par journée
 ]
 #SET{auteurs,#ARRAY}
 #SET{temps_auteurs, #ARRAY}
 #SET{id_objets,#ARRAY}
 #SET{temps_objets, #ARRAY}
 #SET{objets_def, #ARRAY}
+#SET{dates, #ARRAY}
+#SET{temps_date,#ARRAY}
 <BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{objet ?}{id_auteur ?}{par objet,id_objet}{date>#ENV{date_debut,0}}{action = #ENV{journal_action}}>
 	#SET{
 		temps_auteurs,
@@ -40,6 +42,18 @@
 		}
 	}
 
+	[(#SET{date_new,[(#DATE|affdate{Y-m-d})]})]
+
+	#SET{
+		temps_date,
+		#GET{temps_date}|array_merge{
+			#ARRAY{
+				#GET{date_new},
+				#GET{temps_date}|table_valeur{#GET{date_new},0}|plus{#GET{duree}}
+			}
+		}
+	}
+
 	#SET{
 		objets_def,
 		#GET{objets_def}|array_merge{
@@ -52,10 +66,11 @@
 
 	#SET{auteurs,#GET{auteurs}|push{#ID_AUTEUR}}
 	#SET{id_objets,#GET{id_objets}|push{#GET{id}}}
-
+	#SET{dates,#GET{dates}|push{#GET{date_new}}}
 </BOUCLE_journal_stats_total>
 <div>
 #SET{auteurs,#GET{auteurs}|array_unique}
+#SET{dates,#GET{dates}|array_unique}
 #SET{id_objets,#GET{id_objets}|array_unique}
 #SET{nb_users,#GET{auteurs}|count}
 #SET{nb_objets,#GET{id_objets}|count}
@@ -263,5 +278,94 @@
 		</div>
 	</div>
 </B_visites_par_id_objets>
+<B_visites_par_date>
+	<div class="cadre-r cadre">
+		<div class="cadre_padding">
+			<h3><:bigbrother:titre_visites_par_date:></h3>
+			#ANCRE_PAGINATION
+			<table class="bigbrother" id="graph_visites_dates_table">
+				<thead>
+					<tr class="row_first">
+						<th><:bigbrother:thead_date:></th>
+						<th class="temps"><:bigbrother:thead_temps_consultation:></th>
+					</tr>
+				</thead>
+				<tbody>
+			<BOUCLE_visites_par_date(POUR){tableau #GET{dates}}{pagination #ENV{pagination,0}}{par valeur}>
+				<tr class="tr_liste">
+					<td class="date">
+						<abbr title="#VALEUR">
+							[(#VALEUR|affdate)]
+						</abbr>
+					</td>
+					[<td class="temps">
+						<abbr title="[(#GET{temps_date}|table_valeur{#VALEUR}|mult{1000})]">(#GET{temps_date}|table_valeur{#VALEUR}|bigbrother_duree{0,horaire})</abbr>
+					</td>]
+				</tr>
+			</BOUCLE_visites_par_date>
+				</tbody>
+			</table>
+			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+
+			<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_date}|array_sum|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_date}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
+			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_date}|array_sum|div{[(#GET{dates}|count)]}|round|bigbrother_duree{0, horaire})]</p>
+
+			<div id="graph_visites_dates" class="bigbrother_graphs"></div>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					var dates = [];
+					var dates_labels = [];
+					var dates_ticks = [];
+
+					i=0;
+					$('#graph_visites_dates_table tr.tr_liste').each(function(){
+						var temps = $(this).find('.temps abbr').attr('title');
+						dates.push([i,temps]);
+						var label = plot_trim($(this).find('.date').text());
+						dates_labels.push(label);
+						var tick = plot_trim($(this).find('.date abbr').attr('title'));
+						dates_ticks.push([i,tick]);
+						i++;
+					});
+
+					var data = [{ data: dates }];
+					var options = {
+						bars : {show:true},
+						yaxis : {mode:'time'},
+						xaxis : {ticks:dates_ticks},
+						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+					};
+
+					$.plot($("#graph_visites_dates"), data, options);
+
+					var previousPoint = null;
+					$("#graph_visites_dates").bind("plothover", function (event, pos, item) {
+						if (item) {
+							if (previousPoint != item.dataIndex) {
+								previousPoint = item.dataIndex;
+								$("#bigbrother_tooltip").remove();
+								var x = item.datapoint[0].toFixed(2),
+									y = item.datapoint[1].toFixed(2);
+
+								var index = item.dataIndex;
+								content = dates_labels[index];
+								content += '<br />'+plot_ms_to_timereadable(item.datapoint[1]);
+								plot_showtooltip(
+									item.pageX,
+									item.pageY,
+									content,'bigbrother_tooltip');
+							}
+						}
+						else {
+							$("#bigbrother_tooltip").remove();
+							previousPoint = null;
+						}
+					});
+				});
+			</script>
+		</div>
+	</div>
+</B_visites_par_date>
 </div>
 </B_journal_stats_total>
