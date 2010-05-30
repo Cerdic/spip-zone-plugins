@@ -30,4 +30,10 @@ div.pagination_bigbrother{
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
+	max-width:250px;
+}
+
+.bigbrother_graphs{
+	width:100%;
+	height:300px;
 }
