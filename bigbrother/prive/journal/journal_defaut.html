@@ -1,5 +1,9 @@
 <div class="cadre cadre-r">
 	<div class="cadre_padding">
+		#SET{id_journals,#ARRAY}
+		<BOUCLE_journal_stats_valide(JOURNAL){par date}{date>#ENV{date_debut,0}}{objet ?}{id_objet ?}{id_auteur ?}{action like #ENV{action,%}}{inverse}>
+			#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}
+		</BOUCLE_journal_stats_valide>
 		<p><:bigbrother:explication_page_stats:></p>
 		<B_journal_stats>
 		#SET{total,#GRAND_TOTAL}
@@ -17,7 +21,7 @@
 				</tr>
 			</thead>
 			<tbody class="ajax">
-		<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}{id_auteur ?}{objet ?}{id_objet ?}{action like #ENV{action,%}}{pagination #ENV{pagination,10}}>
+		<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{id_journal IN #GET{id_journals}}{pagination #ENV{pagination,10}}>
 			<tr class="tr_liste">
 				<td>##ID_JOURNAL</td>
 				<td>
@@ -54,6 +58,9 @@
 			</tbody>
 		</table>
 		[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+		[(#ENV{id_auteur}|oui)
+			<INCLURE{fond=prive/journal/journal_defaut_id_auteur,id_journals=#GET{id_journals},env,ajax}>
+		]
 		</B_journal_stats>
 		<p><:bigbrother:info_aucun_resultat:></p>
 		<//B_journal_stats>

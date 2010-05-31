@@ -1,0 +1,246 @@
+#SET{actions,#ARRAY}
+#SET{dates,#ARRAY}
+<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{par objet,id_objet}>
+	#SET{actions,
+		#GET{actions}|push{#ACTION}
+	}
+
+	#SET{action_#ACTION,
+		#GET{action_#ACTION,#ARRAY}|push{
+			#ARRAY{id_journal,#ID_JOURNAL,date,#DATE}
+		}
+	}
+
+	#SET{date,#DATE|affdate{Y-m-d}}
+	#SET{dates,#GET{dates}|push{#GET{date}}}
+
+	[(#SET{action_date_[(#ACTION)]_[(#GET{date})],[(#GET{action_date_[(#ACTION)]_[(#GET{date})],0}|plus{1})]})]
+</BOUCLE_journal_stats_total>
+[(#SET{actions_uniques,[(#GET{actions}|array_unique)]})]
+[(#SET{dates_uniques,[(#GET{dates}|array_unique)]})]
+
+[(#GET{dates_unique}|foreach)]
+<h2><:bigbrother:titre_compilation_resultats:></h2>
+
+<B_actions_par_auteurs>
+	<div class="cadre-r cadre">
+		<div class="cadre_padding">
+			[(#ENV{id_auteur}|is_numeric|oui)
+				#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
+			][(#ENV{id_auteur}|is_numeric|non)
+				#SET{auteur,#ENV{id_auteur}}
+			]
+			<h3><:bigbrother:titre_actions_nombre_par_auteur{auteur=#GET{auteur}}:></h3>
+			#ANCRE_PAGINATION
+			<table class="bigbrother" id="graph_actions_auteurs_table">
+				<thead>
+					<tr class="row_first">
+						<th><:bigbrother:thead_action:></th>
+						<th class="nombre"><:bigbrother:thead_nombre:></th>
+					</tr>
+				</thead>
+				<tbody>
+			<BOUCLE_actions_par_auteurs(POUR){tableau #GET{actions_uniques}}{par valeur}{pagination #ENV{pagination,0}}>
+				<tr class="tr_liste">
+					<td class="action">
+						#VALEUR
+					</td>
+					<td class="nombre">
+						[(#GET{action_[(#VALEUR)]}|count)]
+					</td>
+				</tr>
+			</BOUCLE_actions_par_auteurs>
+				</tbody>
+			</table>
+			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+
+			<div id="graph_actions_id_auteurs" class="bigbrother_graphs"></div>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					var actions = [];
+					var actions_labels = [];
+					var actions_ticks = [];
+
+					i=0;
+					$('#graph_actions_auteurs_table tr.tr_liste').each(function(){
+						var nombre = parseFloat(plot_trim($(this).find('.nombre').text()));
+						actions.push([i,nombre]);
+						var label = plot_trim($(this).find('.action').text());
+						actions_labels.push(label);
+						actions_ticks.push([i,label]);
+						i++;
+					});
+
+					var data_actions = [{ data: actions }];
+					var options = {
+						points : {show:true},
+						lines : {show:true},
+						yaxis : {},
+						xaxis : {ticks:actions_ticks},
+						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+					};
+
+					$.plot($("#graph_actions_id_auteurs"), data_actions, options);
+
+					var previousPoint = null;
+					$("#graph_actions_id_auteurs").bind("plothover", function (event, pos, item) {
+						if (item) {
+							if (previousPoint != item.dataIndex) {
+								previousPoint = item.dataIndex;
+								$("#bigbrother_tooltip").remove();
+								var x = item.datapoint[0].toFixed(2),
+									y = item.datapoint[1].toFixed(2);
+
+								var index = item.dataIndex;
+								content = actions_labels[index];
+								content += '<br />'+item.datapoint[1];
+								plot_showtooltip(
+									item.pageX,
+									item.pageY,
+									content,'bigbrother_tooltip');
+							}
+						}
+						else {
+							$("#bigbrother_tooltip").remove();
+							previousPoint = null;
+						}
+					});
+				});
+			</script>
+		</div>
+	</div>
+</B_actions_par_auteurs>
+<B_actions_par_auteurs_date>
+	<div class="cadre-r cadre">
+		<div class="cadre_padding">
+			[(#ENV{id_auteur}|is_numeric|oui)
+				#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
+			][(#ENV{id_auteur}|is_numeric|non)
+				#SET{auteur,#ENV{id_auteur}}
+			]
+			<h3><:bigbrother:titre_actions_nombre_par_auteur_date{auteur=#GET{auteur}}:></h3>
+			#ANCRE_PAGINATION
+			<table class="bigbrother" id="graph_actions_date_auteurs_table">
+				<thead>
+					<tr class="row_first">
+						<th><:bigbrother:thead_date:></th>
+						<th><:bigbrother:thead_action:></th>
+						<th class="nombre"><:bigbrother:thead_nombre:></th>
+					</tr>
+				</thead>
+				<tbody>
+			<BOUCLE_actions_par_auteurs_date(POUR){tableau #GET{dates_uniques}}{par valeur}{pagination #ENV{pagination,0}}>
+				#SET{date,#VALEUR}
+				<BOUCLE_chaque_actions_par_auteur_date(POUR){tableau #GET{actions_uniques}}>
+				<tr class="tr_liste">
+					<td class="date">
+						#GET{date}
+					</td>
+					<td class="action action_#VALEUR">
+						#VALEUR
+					</td>
+					<td class="nombre">
+						[(#GET{action_date_[(#VALEUR)]_[(#GET{date})]}|sinon{0})]
+					</td>
+				</tr>
+				</BOUCLE_chaque_actions_par_auteur_date>
+			</BOUCLE_actions_par_auteurs_date>
+				</tbody>
+			</table>
+			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+
+			<div id="graph_actions_date_id_auteurs" class="bigbrother_graphs"></div>
+			<div id="choices"></div>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					var serie_actions = [];
+					var options = {
+						points : {show:true},
+						lines : {show:true},
+						yaxis : {},
+						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+					};
+					<BOUCLE_series(POUR){tableau #GET{actions_uniques}}{par valeur}>
+					var actions_date_#VALEUR = [];
+					var actions_date_labels_#VALEUR = [];
+					var actions_date_ticks_#VALEUR = [];
+
+					i=0;
+					$('#graph_actions_date_auteurs_table tr.tr_liste').has('.action_#VALEUR').each(function(){
+						var nombre = parseFloat(plot_trim($(this).find('.nombre').text()));
+						var label = plot_trim($(this).find('.action').text());
+						var tick = plot_trim($(this).find('.date').text());
+						actions_date_#VALEUR.push([i,nombre]);
+						actions_date_labels_#VALEUR.push(label);
+						actions_date_ticks_#VALEUR.push([i,tick]);
+						i++;
+					});
+
+					options.xaxis = {ticks:actions_date_ticks_#VALEUR};
+					var action_#VALEUR = {label:'#VALEUR',data:actions_date_#VALEUR, content:actions_date_labels_#VALEUR};
+					serie_actions.push(action_#VALEUR);
+					</BOUCLE_series>
+
+					$.plot($("#graph_actions_date_id_auteurs"), serie_actions, options);
+
+					// hard-code color indices to prevent them from shifting as
+				    // countries are turned on/off
+				    var i = 0;
+				    $.each(serie_actions, function(key, val) {
+				        val.color = i;
+				        ++i;
+				    });
+
+				    // insert checkboxes
+				    var choiceContainer = $("#choices");
+				    $.each(serie_actions, function(key, val) {
+				        choiceContainer.append('<br/><input type="checkbox" name="' + key +
+				                               '" checked="checked" id="id' + key + '">' +
+				                               '<label for="id' + key + '">'
+				                                + val.label + '</label>');
+				    });
+				    choiceContainer.find("input").click(plotAccordingToChoices);
+
+
+				    function plotAccordingToChoices() {
+				        var data = [];
+
+				        choiceContainer.find("input:checked").each(function () {
+				            var key = $(this).attr("name");
+				            if (key && serie_actions[key])
+				                data.push(serie_actions[key]);
+				        });
+
+
+						$.plot($("#graph_actions_date_id_auteurs"), data,options);
+				    }
+
+					var previousPoint = null;
+					$("#graph_actions_date_id_auteurs").bind("plothover", function (event, pos, item) {
+						if (item) {
+							if (previousPoint != item.dataIndex) {
+								previousPoint = item.dataIndex;
+								$("#bigbrother_tooltip").remove();
+								var x = item.datapoint[0].toFixed(2),
+									y = item.datapoint[1].toFixed(2);
+
+								var index = item.dataIndex;
+								content = '';
+								content = item.series.content[index];
+								content += '<br />'+item.datapoint[1];
+								plot_showtooltip(
+									item.pageX,
+									item.pageY,
+									content,'bigbrother_tooltip');
+							}
+						}
+						else {
+							$("#bigbrother_tooltip").remove();
+							previousPoint = null;
+						}
+					});
+				});
+			</script>
+		</div>
+	</div>
+</B_actions_par_auteurs_date>
