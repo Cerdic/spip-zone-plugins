@@ -36,7 +36,6 @@ function bigbrother_enregistrer_la_visite_du_site(){
 // Teste s'il faut enregistrer la visite ou pas
 function bigbrother_tester_la_visite_du_site(){
 	global $visiteur_session;
-	//spip_log($_SERVER['HTTP_USER_AGENT'],'test');
 	/**
 	 * Ne pas prendre en compte les bots
 	 */
@@ -55,26 +54,19 @@ function bigbrother_tester_la_visite_du_site(){
 		include_spip('inc/filtres');
 		$time = 0;
 		if($ouvert && !$visiteur_session){
-			spip_log('on cherche une date avec notre ip','test');
 			$time_sql = sql_getfetsel('date','spip_journal','id_auteur='.sql_quote($GLOBALS['ip']));
-			spip_log($time_sql,'test');
 			if(is_array(recup_date($time_sql))){
 				list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date($time_sql);
 				$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
-				spip_log($time,'test');
 			}
 		}
 
 		// Si la "connexion" n'existe pas on la crée et on enregistre
 		if(!$visiteur_session['date_visite']){
-			spip_log('pas de session','test');
 			/**
 			 * Cas des crons qui ne gardent pas de cookies donc pas de session
 			 */
 			if($ouvert && !$visiteur_session){
-				spip_log('on compare les dates','test');
-				spip_log($time,'test');
-				spip_log(time()-(30*60),'test');
 				if($time < (time()-(30*60))){
 					bigbrother_enregistrer_la_visite_du_site();
 				}
@@ -85,7 +77,6 @@ function bigbrother_tester_la_visite_du_site(){
 		}
 		// Sinon si la dernière visite est plus vieille que 30min
 		elseif ((time() - $visiteur_session['date_visite']) > (30*60)){
-			spip_log('session expiree','test');
 			// On met à jour et en enregistre
 			bigbrother_enregistrer_la_visite_du_site();
 		}
@@ -131,7 +122,7 @@ function bigbrother_enregistrer_entree($objet, $id_objet, $id_auteur){
 
 	$journal(
 		_T('bigbrother:action_entree_objet',array('qui' => $qui, 'type' => $objet, 'id' => $id_objet)),
-		array('qui' => $qui_ou_ip,'faire' => 'visite_entree','quoi' => $objet,'date' => $date_debut,'id' => $id_objet)
+		array('qui' => $qui_ou_ip,'faire' => 'visite_entree','quoi' => $objet,'date' => $date_debut,'id' => $id_objet,'infos' => $infos)
 	);
 
 	return $date_debut;
@@ -152,7 +143,7 @@ function bigbrother_enregistrer_entree($objet, $id_objet, $id_auteur){
  * @param $date_debut datetime La date de la visite à terminer
  */
 function bigbrother_enregistrer_sortie($id_objet,$objet, $id_auteur, $date_debut){
-	spip_log("chiotte",'test');
+
 	if(!intval($id_objet) OR (!intval($id_auteur) && (lire_config('bigbrother/enregistrer_connexion_anonyme') != 'oui')))
 		return false;
 

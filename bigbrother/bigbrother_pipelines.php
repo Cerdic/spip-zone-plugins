@@ -121,8 +121,6 @@ function bigbrother_jquery_plugins($array){
 }
 
 function bigbrother_affichage_final($flux){
-	// Chargement de la librairie de fonctions
-	spip_log('affichage_final','test');
 	// Si la config est ok, à chaque hit, on teste s'il faut enregistrer la visite ou pas
 	if (lire_config('bigbrother/visite') == 'oui')
 		bigbrother_tester_la_visite_du_site();

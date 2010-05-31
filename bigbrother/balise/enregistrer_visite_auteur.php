@@ -56,10 +56,14 @@ function balise_ENREGISTRER_VISITE_AUTEUR_dyn($objet,$id_objet) {
 	echo '<script type="text/javascript">
 	$(function(){
 		$(window).unload(function(){
-			$.get(
-				"'.generer_url_public('bigbrother_enregistrer_sortie').'",
-				{objet: \''.$objet.'\', id_objet: '.$id_objet.', date_debut: \''.$date_debut.'\'}
-			);
+			jQuery.ajax({
+				async:false,
+				cache: false,
+        		dataType: "script",
+				type: "GET",
+				url: "'.generer_url_public('bigbrother_enregistrer_sortie').'",
+				data: {objet: \''.$objet.'\', id_objet: '.$id_objet.', date_debut: \''.$date_debut.'\'}
+			});
 		});
 	});
 	</script>';

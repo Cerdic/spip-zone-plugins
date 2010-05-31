@@ -1,2 +1,4 @@
 #CACHE{0}
-[(#ENV{id_objet}|bigbrother_enregistrer_sortie{#ENV{objet},#SESSION{id_auteur},#ENV{date_debut}})]
+#HTTP_HEADER{Content-Type: text/html; charset=iso-8859-15}
+#SET{id_auteur,#SESSION{id_auteur}|intval|>{0}|?{#SESSION{id_auteur},#EVAL{$GLOBALS['ip']}}}
+[(#ENV{id_objet}|bigbrother_enregistrer_sortie{#ENV{objet},#GET{id_auteur},#ENV{date_debut}})]
