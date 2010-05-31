@@ -39,9 +39,9 @@ Ici vous pouvez configurer le plugin Cooliris.
 <br />
 <label for="intro">
      <select name="intro" id="intro">
-      <option value="scrollLeft"[(#ENV{intro}|=={light}|?{' selected="selected"'})]>scrollLeft</option>
-	  <option value="zoomIn"[(#ENV{intro}|=={black}|?{' selected="selected"'})]>zoomIn</option>
-      <option value="appear"[(#ENV{intro}|=={dark}|?{' selected="selected"'})]>appear</option>
+      <option value="scrollLeft"[(#ENV{intro}|=={scrollLeft}|?{' selected="selected"'})]>scrollLeft</option>
+	  <option value="zoomIn"[(#ENV{intro}|=={zoomIn}|?{' selected="selected"'})]>zoomIn</option>
+      <option value="appear"[(#ENV{intro}|=={appear}|?{' selected="selected"'})]>appear</option>
       </select> Animation de l'intro.</label>
 </p>
 </fieldset>
@@ -98,6 +98,7 @@ Ici vous pouvez configurer le plugin Cooliris.
 <br />
 </p>
 </fieldset>
+
 <div>
 	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
 	<input type="reset" value="<:reset:>" class="fondo" />
