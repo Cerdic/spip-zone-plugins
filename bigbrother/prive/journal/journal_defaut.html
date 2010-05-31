@@ -2,7 +2,13 @@
 	<div class="cadre_padding">
 		#SET{id_journals,#ARRAY}
 		<BOUCLE_journal_stats_valide(JOURNAL){par date}{date>#ENV{date_debut,0}}{objet ?}{id_objet ?}{id_auteur ?}{action like #ENV{action,%}}{inverse}>
-			#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}
+			[(#ACTION|=={visite_entree}|oui)
+				[(#INFOS|unserialize|table_valeur{date_fin}|oui)
+					#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}]
+			]
+			[(#ACTION|=={visite_entree}|non)
+				#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}
+			]
 		</BOUCLE_journal_stats_valide>
 		<p><:bigbrother:explication_page_stats:></p>
 		<B_journal_stats>

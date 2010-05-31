@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configuration_description' => 'Permet de configurer ce que l\'on d&eacute;sire enregistrer ou pas.',
+	'configuration_enregistrer_connexion_anonyme' => 'Enregistrer les connexions anonymes (utilisateurs non identifi&eacute;s)',
 	'configuration_enregistrer_insertions' => 'Journaliser les insertions d\'objets',
 	'configuration_enregistrer_institutions' => 'Journaliser les modifications de statuts des objets',
 	'configuration_enregistrer_ip' => 'Toujours enregistrer l\'adresse ip',

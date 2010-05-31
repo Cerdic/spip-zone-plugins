@@ -57,6 +57,10 @@
 		<nom>jquery_plugins</nom>
 		<inclure>bigbrother_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
 
 	<bouton id='journal_stats' parent="statistiques_visites">
 		<icone>images/bigbrother-24.png</icone>

@@ -9,42 +9,45 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_ENREGISTRER_VISITE_AUTEUR($p) {
-
 	$i_boucle  = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	$_id_objet = $p->boucles[$i_boucle]->primary;
-
 
     // Si c'est pas configuré pour, on arrête
     if (lire_config('bigbrother/visite_entree') != 'oui')
     	return null;
 
-    return calculer_balise_dynamique(
-    	$p,
-    	'ENREGISTRER_VISITE_AUTEUR',array(
-    		'ENREGISTRER_VISITE_TYPE_BOUCLE',
-			$_id_objet
-		)
-    );
-
+    if(!$i_boucle){
+		spip_log($GLOBALS['contexte'],'test');
+		spip_log($GLOBALS['page'],'test');
+    }else{
+	    return calculer_balise_dynamique(
+	    	$p,
+	    	'ENREGISTRER_VISITE_AUTEUR',array(
+	    		'ENREGISTRER_VISITE_TYPE_BOUCLE',
+				$_id_objet
+			)
+	    );
+    }
 }
 
 function balise_ENREGISTRER_VISITE_AUTEUR_stat($args, $context_compil) {
 	// Pas d'id_objet ? Erreur de squelette
-	if (!$args[0] OR !$args[1])
+	if (!$args[0] OR !$args[1]){
 		return erreur_squelette(
 			_T('zbug_champ_hors_motif',
 				array ('champ' => '#ENREGISTRER_VISITE_AUTEUR',
 					'motif' => 'ARTICLES')), '');
-
+	}
 	return array($args[0],$args[1]);
 
 }
 
 function balise_ENREGISTRER_VISITE_AUTEUR_dyn($objet,$id_objet) {
-	if (!($id_auteur = intval($GLOBALS['visiteur_session']['id_auteur'])))
+	if ((!intval($GLOBALS['visiteur_session']['id_auteur'])) && (lire_config('bigbrother/enregistrer_connexion_anonyme') != 'oui'))
 		return;
 
-	include_spip('inc/bigbrother');
+	$objet = objet_type($objet);
+	$id_auteur = intval($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
 
 	// On enregistre l'entrée dans l'article
 	$date_debut = bigbrother_enregistrer_entree($objet,$id_objet, $id_auteur);

@@ -6,17 +6,20 @@
 #------------------------------------------------- -#
 
 include_spip('inc/session');
+include_spip('base/abstract_sql');
 
 // Met à jour la session et enregistre dans la base
 function bigbrother_enregistrer_la_visite_du_site(){
 	session_set('date_visite', time());
-	sql_insertq(
-		"spip_visites_auteurs",
-		array(
-			'date' => date('Y-m-d H:i:s', session_get('date_visite')),
-			'id_auteur' => $GLOBALS['visiteur_session']['id_auteur']
-		)
-	);
+	if($GLOBALS['visiteur_session']['id_auteur']){
+		sql_insertq(
+			"spip_visites_auteurs",
+			array(
+				'date' => date('Y-m-d H:i:s', session_get('date_visite')),
+				'id_auteur' => $GLOBALS['visiteur_session']['id_auteur']
+			)
+		);
+	}
 
 	$journal = charger_fonction('journal','inc');
 
@@ -33,15 +36,56 @@ function bigbrother_enregistrer_la_visite_du_site(){
 // Teste s'il faut enregistrer la visite ou pas
 function bigbrother_tester_la_visite_du_site(){
 	global $visiteur_session;
+	//spip_log($_SERVER['HTTP_USER_AGENT'],'test');
+	/**
+	 * Ne pas prendre en compte les bots
+	 */
+	if (_IS_BOT) return;
+
+	// Ne pas tenir compte des tentatives de spam des forums
+	if ($_SERVER['REQUEST_METHOD'] !== 'GET'
+	OR $_GET['page'] == 'forum')
+		return;
+
+	if (isset($_SERVER['HTTP_REFERER'])) $referer = $_SERVER['HTTP_REFERER'];
+	else if (isset($GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"])) $referer = $GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"];
+
 	// On fait seulement si qqn est connecté
-	if($visiteur_session['id_auteur'] > 0){
+	if(($visiteur_session['id_auteur'] > 0) OR ($ouvert = (lire_config('bigbrother/enregistrer_connexion_anonyme') == 'oui'))){
+		include_spip('inc/filtres');
+		$time = 0;
+		if($ouvert && !$visiteur_session){
+			spip_log('on cherche une date avec notre ip','test');
+			$time_sql = sql_getfetsel('date','spip_journal','id_auteur='.sql_quote($GLOBALS['ip']));
+			spip_log($time_sql,'test');
+			if(is_array(recup_date($time_sql))){
+				list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date($time_sql);
+				$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
+				spip_log($time,'test');
+			}
+		}
 
 		// Si la "connexion" n'existe pas on la crée et on enregistre
 		if(!$visiteur_session['date_visite']){
-			bigbrother_enregistrer_la_visite_du_site();
+			spip_log('pas de session','test');
+			/**
+			 * Cas des crons qui ne gardent pas de cookies donc pas de session
+			 */
+			if($ouvert && !$visiteur_session){
+				spip_log('on compare les dates','test');
+				spip_log($time,'test');
+				spip_log(time()-(30*60),'test');
+				if($time < (time()-(30*60))){
+					bigbrother_enregistrer_la_visite_du_site();
+				}
+			}else{
+				bigbrother_enregistrer_la_visite_du_site();
+			}
+
 		}
 		// Sinon si la dernière visite est plus vieille que 30min
 		elseif ((time() - $visiteur_session['date_visite']) > (30*60)){
+			spip_log('session expiree','test');
 			// On met à jour et en enregistre
 			bigbrother_enregistrer_la_visite_du_site();
 		}
@@ -66,7 +110,7 @@ function bigbrother_enregistrer_entree($objet, $id_objet, $id_auteur){
 
 	$date_debut = date('Y-m-d H:i:s', time());
 
-	if($objet == 'article'){
+	if($objet == 'article' && intval($id_auteur)){
 		sql_insertq(
 			"spip_visites_articles_auteurs",
 			array(
@@ -81,6 +125,9 @@ function bigbrother_enregistrer_entree($objet, $id_objet, $id_auteur){
 
 	$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
 	$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
+
+	$infos = array();
+	$infos['lang'] = $GLOBALS['contexte']['lang'];
 
 	$journal(
 		_T('bigbrother:action_entree_objet',array('qui' => $qui, 'type' => $objet, 'id' => $id_objet)),
@@ -105,8 +152,8 @@ function bigbrother_enregistrer_entree($objet, $id_objet, $id_auteur){
  * @param $date_debut datetime La date de la visite à terminer
  */
 function bigbrother_enregistrer_sortie($id_objet,$objet, $id_auteur, $date_debut){
-
-	if(!intval($id_objet) OR !intval($id_auteur))
+	spip_log("chiotte",'test');
+	if(!intval($id_objet) OR (!intval($id_auteur) && (lire_config('bigbrother/enregistrer_connexion_anonyme') != 'oui')))
 		return false;
 
 	$date_fin = date('Y-m-d H:i:s', time());

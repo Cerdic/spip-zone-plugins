@@ -8,7 +8,7 @@
 				<h1><:bigbrother:titre_statistiques_visites_objet{objet=#ENV{objet}}:></h1>]
 		]
 		#SET{id_journals,#ARRAY}
-		<BOUCLE_journal_stats_valide(JOURNAL){par date}{date>#ENV{date_debut,0}}{objet ?}{id_objet ?}{id_auteur ?}{action = #ENV{journal_action}}{inverse}>
+		<BOUCLE_journal_stats_valide(JOURNAL){action = 'visite_entree'}{par date}{inverse}{date>#ENV{date_debut,0}}{objet ?}{id_objet ?}{id_auteur ?}>
 			[(#INFOS|unserialize|table_valeur{date_fin}|oui)
 				#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}]
 		</BOUCLE_journal_stats_valide>
