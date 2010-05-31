@@ -12,35 +12,31 @@ function balise_ENREGISTRER_VISITE_AUTEUR($p) {
 
 	$i_boucle  = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	$_id_objet = $p->boucles[$i_boucle]->primary;
-	$_type     = $p->boucles[$i_boucle]->id_table;
+
 
     // Si c'est pas configuré pour, on arrête
-    if (lire_config('bigbrother/enregistrer_visite_article') != 'oui')
+    if (lire_config('bigbrother/visite_entree') != 'oui')
     	return null;
-
-    $obtenir = array(
-		$_id_objet
-	);
 
     return calculer_balise_dynamique(
     	$p,
-    	'ENREGISTRER_VISITE_AUTEUR',$obtenir,
-    	array("'$_type'")
+    	'ENREGISTRER_VISITE_AUTEUR',array(
+    		'ENREGISTRER_VISITE_TYPE_BOUCLE',
+			$_id_objet
+		)
     );
 
 }
 
 function balise_ENREGISTRER_VISITE_AUTEUR_stat($args, $context_compil) {
-	$_objet     = objet_type($context_compil[5]);
-
 	// Pas d'id_objet ? Erreur de squelette
-	if (!$args[0])
+	if (!$args[0] OR !$args[1])
 		return erreur_squelette(
 			_T('zbug_champ_hors_motif',
 				array ('champ' => '#ENREGISTRER_VISITE_AUTEUR',
 					'motif' => 'ARTICLES')), '');
 
-	return array($_objet,$args[0]);
+	return array($args[0],$args[1]);
 
 }
 
@@ -66,4 +62,9 @@ function balise_ENREGISTRER_VISITE_AUTEUR_dyn($objet,$id_objet) {
 	</script>';
 }
 
+function balise_ENREGISTRER_VISITE_TYPE_BOUCLE($p){
+	$type = $p->boucles[$p->id_boucle]->id_table;
+	$p->code = $type ? $type : '';
+	return $p;
+}
 ?>
