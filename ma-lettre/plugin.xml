@@ -2,10 +2,10 @@
 	<nom>Ma lettre</nom>
 	<auteur>
 	[erational->http://www.erational.org]
-_ &copy; 2006-2009 - Distribu&eacute; sous licence GNU/GPL v.3
+_ &copy; 2006-2010 - Distribu&eacute; sous licence GNU/GPL v.3
 	</auteur>
 	<version>2.1</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 	[fr] Permet de composer une lettre en s&eacute;lectionnant manuellement les articles que l'on d&eacute;sire ajouter  pour l'envoyer 
