@@ -22,7 +22,6 @@ Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme
 	<lien>http://www.spip-contrib.net/gravatar</lien>
 	<prefix>gravatar</prefix>
 	<fonctions>inc/gravatar.php</fonctions>
-	<config>config_gravatar</config>
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<action>affiche_gauche</action>
@@ -32,13 +31,13 @@ Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme
 	<bouton id='gravatar' parent='configuration'>
 		<icone>prive/themes/spip/images/gravatar-16.png</icone>
 		<titre>gravatar:cfg_titre_gravatar</titre>
-		<url>config_gravatar</url>
+		<url>configurer_gravatar</url>
 	</bouton>
 
 	<bouton id='gravatar21' parent='bando_squelette'>
 		<icone>images/gravatar-16.png</icone>
 		<titre>gravatar:cfg_titre_gravatar</titre>
-		<url>config_gravatar</url>
+		<url>configurer_gravatar</url>
 	</bouton>
 
 	<necessite id="SPIP" version="[2.0.0;]" />
