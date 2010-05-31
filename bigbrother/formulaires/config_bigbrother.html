@@ -39,6 +39,13 @@
 				</div>
 				</BOUCLE_pipeline>
 			</li>
+			<li class="editer_journaliser">
+				<label><:bigbrother:configuration_options:></label>
+				<div class="choix">
+					<input type="checkbox" name="enregistrer_ip" id="enregistrer_ip" value="oui"[ checked="checked"(#ENV{enregistrer_ip}|=={oui}|oui)] />
+					<label for="enregistrer_ip"><:bigbrother:configuration_enregistrer_ip:></label>
+				</div>
+			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />

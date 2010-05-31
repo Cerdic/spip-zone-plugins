@@ -23,9 +23,14 @@ function inc_journal_dist($phrase, $opt = array()) {
 	 */
 	$config = unserialize($GLOBALS['meta']['bigbrother']);
 	if(isset($config[$opt['faire']]) && ($config[$opt['faire']] == 'oui')){
+		if((lire_config('bigbrother/enregistrer_ip') == 'oui') && !$opt['infos']['ip']){
+			$opt['infos']['ip'] = $GLOBALS['ip'];
+		}
 		if($f = charger_fonction($opt['faire'],'journal',true)){
 			$f($opt);
 		}else{
+			if(is_array($opt['infos']))
+				$opt['infos'] = serialize($opt['infos']);
 			sql_insertq(
 				'spip_journal',
 				array(

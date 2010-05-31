@@ -12,10 +12,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_description' => 'Permet de configurer ce que l\'on d&eacute;sire enregistrer ou pas.',
 	'configuration_enregistrer_insertions' => 'Journaliser les insertions d\'objets',
 	'configuration_enregistrer_institutions' => 'Journaliser les modifications de statuts des objets',
+	'configuration_enregistrer_ip' => 'Toujours enregistrer l\'adresse ip',
 	'configuration_enregistrer_modifications' => 'Journaliser les modifications des objets',
 	'configuration_enregistrer_visite' => 'Enregistrer toutes les visites des personnes ayant un compte',
 	'configuration_enregistrer_visite_article' => 'Enregistrer le temps passé sur un article des personnes ayant un compte',
 	'configuration_journalisation_base' => 'Les actions &agrave; journaliser en base',
+	'configuration_options' => 'Options',
 	'configuration_titre' => 'Configuration de Big Brother',
 
 	// D
