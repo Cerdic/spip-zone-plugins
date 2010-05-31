@@ -12,29 +12,6 @@ function agenda_ajouter_onglets($flux) {
 	return $flux;
 }
 
-// Calcul d'une hierarchie
-// (liste des id_rubrique contenants une rubrique donnee)
-function calcul_hierarchie_in($id) {
-
-	// normaliser $id qui a pu arriver comme un array
-	$id = is_array($id)
-		? join(',', array_map('sql_quote', $id))
-		: $id;
-
-	// Notre branche commence par la rubrique de depart
-	$hier = $id;
-
-	// On ajoute une generation (les filles de la generation precedente)
-	// jusqu'a epuisement
-	while ($parents = sql_allfetsel('id_parent', 'spip_rubriques',
-	sql_in('id_rubrique', $id))) {
-		$id = join(',', array_map('reset', $parents));
-		$hier .= ',' . $id;
-	}
-
-	return $hier;
-}
-
 function agenda_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
 	
@@ -79,18 +56,8 @@ function agenda_affiche_milieu($flux) {
 	}
 	elseif ($exec=='articles'){
 		$id_article = $flux['args']['id_article'];
-		$afficher = true;
-		// un article avec des evenements a toujours le bloc
-		if (!sql_countsel('spip_evenements','id_article='.intval($id_article))){
-			// si au moins une rubrique a le flag agenda
-			if (sql_countsel('spip_rubriques','agenda=1')){
-				// alors il faut le flag agenda dans cette branche !
-				$afficher = false;
-				include_spip('inc/rubriques');
-				$in = calcul_hierarchie_in(sql_getfetsel('id_rubrique','spip_articles','id_article='.intval($id_article)));
-				$afficher = sql_countsel('spip_rubriques',sql_in('id_rubrique',$in)." AND agenda=1");
-			}
-		}
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+		$afficher = autoriser('creerevenementdans','article',$id_article,$id_auteur);
 		if ($afficher) {
 			$contexte = array();
 			foreach($_GET as $key=>$val)
