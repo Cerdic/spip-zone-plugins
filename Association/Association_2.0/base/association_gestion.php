@@ -35,16 +35,6 @@ if (!isset($GLOBALS['asso_metas']['base_version'])) {
 	$GLOBALS['asso_metas']['base_version'] = $n;
 }
 
-// Configuration
-
-function association_configurer($f)
-{
-	$url = generer_url_ecrire('configurer_association');
-	$alt = _T('icone_configuration_site').' '. 'association';
-	$img = http_img_pack('cfg-16.png', $alt, ' width="16" height="16"', $alt);
-	return "<div class='cfg_link'><a href='$url'>$img</a></div>";
-}
-
 // desinstatllatin
 
 function association_vider_tables($nom_meta, $table){

@@ -10,7 +10,6 @@
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
-	<config>association_configurer</config>
 	<lien>
          [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
     </lien>
