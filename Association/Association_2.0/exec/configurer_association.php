@@ -23,18 +23,12 @@ function exec_configurer_association() {
 	} else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:association')) ;
-		
-		//		association_onglets();
-		
 		echo debut_gauche("",true);
 		echo debut_boite_info(true);
 		echo propre(_T('asso:info_doc'));  	
 		echo fin_boite_info(true);
 		echo debut_droite('', true);
-		$liste = preg_files(_DIR_PLUGIN_ASSOCIATION . 'fonds/', $d.'cfg_[^/]*[.]html$');
-		include_spip('public/assembler');
-		$s = str_replace('.html','', $liste[0]);
-		echo recuperer_fond($s);
+		echo recuperer_fond(_DIR_PLUGIN_ASSOCIATION . 'fonds/configurer_association');
 		echo fin_gauche(), fin_page();
 	}
 }
