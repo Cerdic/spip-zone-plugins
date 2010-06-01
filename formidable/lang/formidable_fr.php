@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_importer_forms' => 'Erreur durant l\'importation du formulaire Forms&amp;Tables',
 'erreur_importer_wcs' => 'Erreur durant l\'importation du formulaire W.C.S',
 'erreur_importer_yaml' => 'Erreur durant l\'importation du fichier YAML',
-'erreur_inexistant' => 'Le formulaire n\'exsite pas.',
+'erreur_inexistant' => 'Le formulaire n\'existe pas.',
 
 'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',
 'formulaires_dupliquer' => 'Dupliquer le formulaire',
