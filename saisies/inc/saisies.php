@@ -271,6 +271,37 @@ function saisies_transformer_noms($saisies, $masque, $remplacement){
 	return $saisies;
 }
 
+
+
+/*
+ * Transforme les noms d'une liste de saisie pour qu'ils soient
+ * uniques dans le formulaire donne.
+ *
+ * @param array $formulaire Le formulaire à analyser 
+ * @param array $saisies Un tableau décrivant les saisies.
+ * @return array Retourne le tableau modifié des saisies
+ */
+function saisies_transformer_noms_auto($formulaire, $saisies){
+
+	if (is_array($saisies)){
+		foreach ($saisies as $cle => $saisie){
+			$saisies[$cle]['options']['nom'] = saisies_generer_nom($formulaire, $saisie['saisie']);
+			// il faut prendre en compte dans $formulaire les saisies modifiees
+			// sinon on aurait potentiellement 2 champs successifs avec le meme nom.
+			// on n'ajoute pas les saisies dont les noms ne sont pas encore calculees.
+			$new = $saisies[$cle];
+			unset($new['saisies']);
+			$formulaire[] = $new;
+			
+			if (is_array($saisie['saisies']))
+				$saisies[$cle]['saisies'] = saisies_transformer_noms_auto($formulaire, $saisie['saisies']);
+		}
+	}
+
+	return $saisies;
+}
+
+
 /*
  * Vérifier tout un formulaire tel que décrit avec les Saisies
  *
