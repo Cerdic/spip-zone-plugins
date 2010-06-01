@@ -163,6 +163,34 @@ function saisies_inserer($saisies, $saisie, $chemin=array()){
 	return $saisies;
 }
 
+
+
+/*
+ * Duplique une saisie (ou groupe de saisie)
+ * en placant la copie a la suite de la saisie d'origine.
+ * Modifie automatiquement les identifiants des saisies
+ *
+ * @param array $saisies Un tableau décrivant les saisies
+ * @param unknown_type $nom_ou_chemin Le nom ou le chemin de la saisie a dupliquer
+ * @return array Retourne le tableau modifié des saisies
+ */
+function saisies_dupliquer($saisies, $nom_ou_chemin){
+	// On récupère le contenu de la saisie à déplacer
+	$saisie = saisies_chercher($saisies, $nom_ou_chemin);
+	if ($saisie) {
+		list($clone) = saisies_transformer_noms_auto($saisies, array($saisie));
+		// insertion apres quoi ?
+		$chemin_validation = saisies_chercher($saisies, $nom_ou_chemin, true);
+		// 1 de plus pour mettre APRES le champ trouve
+		$chemin_validation[count($chemin_validation)-1]++;
+
+		$saisies = saisies_inserer($saisies, $clone, $chemin_validation);
+	}
+
+	return $saisies;
+}
+
+
 /*
  * Déplace une saisie existante autre part
  *
