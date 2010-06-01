@@ -27,7 +27,7 @@ $GLOBALS['association_liste_des_statuts'] =
 
 // Est-il normal d'avoir deux listes de statuts ? 
 $GLOBALS['association_liste_des_statuts2'] =
-	!_ASSOCIATION_INSCRIPTION2 
+	!(_ASSOCIATION_INSCRIPTION2 AND function_exists('lire_config'))
 	? $GLOBALS['association_liste_des_statuts']
 	: array('sorti','ok','echu','relance', lire_config('inscription2/statut_interne'));
 
