@@ -11,3 +11,9 @@
 + Ajouter une saisie directement au bon endroit en drag-n-drop
 + Améliorer le texte brut généré à partir du HTML
 
+Idées :
+-------
++ Permettre de dupliquer un champ de formulaire
++ Permettre des messages différents lors de la réédition d'un formulaire (avant et après modification)
++ Permettre de prévisualiser avant soumission le formulaire
++ Premettre d'afficher un formulaire en fonction du statut du visiteur
