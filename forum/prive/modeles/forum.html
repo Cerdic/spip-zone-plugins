@@ -23,7 +23,7 @@
 <//B_art>
 </div>
 [(#REM) Le corps ---------------------------------------------------------]
-[<div class='texte'>(#TEXTE|lignes_longues)</div>]
+[<div class='#EDIT{texte} texte'>(#TEXTE|lignes_longues)</div>]
 [<div class='site'><a href='#URL_SITE'>(#NOM_SITE|sinon{#URL_SITE}|lignes_longues)</a></div>]
 [<div 
 class="urls">(#TITRE|extraire_balises{a}|extraire_attribut{href}|implode{", "}|textebrut|nl2br)</div>]
