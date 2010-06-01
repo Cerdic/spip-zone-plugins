@@ -49,7 +49,7 @@
 		<titre>noizetier:editer_noizetier_titre</titre>
 		<icone>img/noizetier-24.png</icone>
 	</bouton>
-	<bouton id='bando_noizetier' parent="bando_configuration">
+	<bouton id='bando_noizetier' parent="bando_squelette">
 		<url>noizetier</url>
 		<titre>noizetier:editer_noizetier_titre</titre>
 		<icone>img/noizetier-16.png</icone>
