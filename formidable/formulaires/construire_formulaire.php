@@ -164,23 +164,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 
 	// Si on demande à dupliquer une saisie
 	if ($dupliquer_saisie = _request('dupliquer_saisie')) {
-		$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
-		$noms_autorises = array_keys($saisies_actuelles);
-		if (in_array($dupliquer_saisie, $noms_autorises)) {
-			// la saisie a dupliquer
-			$saisie = $saisies_actuelles[$dupliquer_saisie];
-			// la saisie future
-			list($clone) = saisies_transformer_noms_auto($formulaire_actuel, array($saisie));
-			// insertion apres quoi ?
-			$chemin_validation = saisies_chercher($formulaire_actuel, $dupliquer_saisie, true);
-			// 1 de plus pour mettre APRES le champ trouve
-			$chemin_validation[count($chemin_validation)-1]++;
-
-			$formulaire_actuel = saisies_inserer($formulaire_actuel, $clone, $chemin_validation);
-		} else {
-			// Erreur : saisie a dupliquer inconnue
-		}
-		
+		$formulaire_actuel = saisies_dupliquer($formulaire_actuel, $dupliquer_saisie);	
 	}
 	
 	// Si on demande à supprimer une saisie
