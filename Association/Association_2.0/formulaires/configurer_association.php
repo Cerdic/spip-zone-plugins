@@ -16,12 +16,32 @@ function formulaires_configurer_association_charger_dist(){
 	return $GLOBALS['asso_metas'];
 }
 
-// ce serait plus sympa d'enlever les specificites CVT,
-// mais comme ca c'est hyper-lisible
-
 function formulaires_configurer_association_traiter_dist(){
-	foreach ($_POST as $k => $v)
-		if ($k) ecrire_meta($k, $v, 'oui', 'asso_metas');
+	foreach (array(
+		       "activites",
+		       "classe_banques",
+		       "comptes",
+		       "cp",
+		       "declaration",
+		       "dons",
+		       "email",
+		       "indexation",
+		       "nom",
+		       "pc_activites",
+		       "pc_cotisations",
+		       "pc_dons",
+		       "pc_prets",
+		       "pc_ventes",
+		       "prefet",
+		       "prets",
+		       "rue",
+		       "siret",
+		       "telephone",
+		       "ventes",
+		       "ville") as $k) {
+		$v = _request($k);
+		ecrire_meta($k, $v, 'oui', 'asso_metas');
+  }
 	return array('redirect' => generer_url_ecrire('association'));
 }
 ?>
