@@ -1,6 +1,6 @@
 <?php if ($auteur_session) { ?>
 <BOUCLE_principale_rubrique(RUBRIQUES){id_rubrique}>
-<INCLURE{fond=structure}{env}{type=rubrique}{composition} />
+<INCLURE{fond=structure}{env}{id_secteur=#ID_SECTEUR}{type=rubrique}{composition} />
 </BOUCLE_principale_rubrique>
 <?php } else { ?>
 <INCLURE{fond=structure}{env}{type=page}{composition=login_public} />

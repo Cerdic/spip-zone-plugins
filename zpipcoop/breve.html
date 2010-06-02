@@ -1,6 +1,6 @@
 <?php if ($auteur_session) { ?>
 <BOUCLE_breve_principal(BREVES) {id_breve}>
-<INCLURE{fond=structure}{env}{id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE}}{type=breve}{composition} />
+<INCLURE{fond=structure}{env}{id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE}}{id_secteur=#ID_SECTEUR}{type=breve}{composition} />
 </BOUCLE_breve_principal>
 <?php } else { ?>
 <INCLURE{fond=structure}{env}{type=page}{composition=login_public} />
