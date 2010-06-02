@@ -20,7 +20,7 @@ function action_joindre_dist()
 {
 	global $redirect;
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+  $arg = $securiser_action();
 
 	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',$arg,$r)) {
 		spip_log("action_joindre_dist incompris: " . $arg);
@@ -61,14 +61,19 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
   if (isset($_SERVER['HTTP_X_FILE_NAME']) && isset($_SERVER['CONTENT_LENGTH'])) {  
     if($_SERVER['CONTENT_LENGTH']>0) {
       $uploadedContent = file_get_contents("php://input");
-      file_put_contents(
-      	$tmp_dir = tempnam(_DIR_TMP, 'tmp_upload'), 
-      	base64_decode(substr($uploadedContent,strpos($uploadedContent,",")))
-      );
+      //detect data URI
+      if (preg_match("/^data:[^;]+(;charset=\"[^\"]+\")?(;base64)?,/",$uploadedContent,$m)) {
+        if($m[2]) //base64 encoded -> decode data
+          $uploadedContent = base64_decode(substr($uploadedContent,strlen($m[0])));
+        else //no decode, just strip headers
+          $uploadedContent = substr($uploadedContent,strlen($m[0]));
+      }
+      file_put_contents($tmp_dir = tempnam(_DIR_TMP, 'tmp_upload'),$uploadedContent);
       $path = array(
         array("name" => $_SERVER['HTTP_X_FILE_NAME'], "tmp_name" => $tmp_dir, "error" => 0)
       );
     } else {
+      spip_log("file upload error");
       $path = array(array("error" => 4));    
     }
 	} else {
