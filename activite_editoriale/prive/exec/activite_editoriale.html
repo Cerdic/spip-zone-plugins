@@ -2,6 +2,7 @@
 <h1><:activite_editoriale:activite_editoriale:></h1>
 
 <div>
+
   <h2><:activite_editoriale:rubriques_pas_a_jour:></h2>
 	<div class='cadre cadre-liste' style='margin-top: 20px;'>
 		<table width='100%' cellpadding='2' cellspacing='0' border='0'>
@@ -36,6 +37,43 @@
 		</table>
 	</div>
 </div>
+
+    <div>
+  <h2><:activite_editoriale:rubriques_a_suivre:></h2>
+	<div class='cadre cadre-liste' style='margin-top: 20px;'>
+		<table width='100%' cellpadding='2' cellspacing='0' border='0'>
+		  <thead>
+		    <tr>
+		      <th><:rubrique:></th>
+		      <th><:activite_editoriale:responsables:></th>
+		      <th><:activite_editoriale:delai:></th>
+		      <th><:activite_editoriale:derniere_maj:></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	      <BOUCLE_rubriques2(RUBRIQUES){tout}{par maj}>
+	      	[(#CONFIG{activite_editoriale/champ,maj_rubrique}|=={maj_rubrique}|oui)
+	      	#SET{maj,#MAJ}
+	      	]
+	      	[(#CONFIG{activite_editoriale/champ,maj_rubrique}|=={date_modif_branche}|oui)
+	      	#SET{maj,#INCLURE{fond=inclure/maj_branche}{id_rubrique}}
+	      	]
+	      	[(#CONFIG{activite_editoriale/champ,maj_rubrique}|=={date_modif_rubrique}|oui)
+	      	#SET{maj,#INCLURE{fond=inclure/maj_rubrique}{id_rubrique}}
+	      	]
+	      	[(#EXTRAS_DELAI|!={''}|oui)
+	      	    
+	      	    
+	      		[(#GET{maj}|age_rubrique|<{#EXTRAS_DELAI}|oui)
+	          	<INCLURE{fond=prive/exec/activite_editoriale_rubrique}{id_rubrique}{maj=#GET{maj}}>
+	        	]
+	      	]
+	      </BOUCLE_rubriques2>
+		  </tbody>
+		</table>
+	</div>
+</div>
+
 
 
 <!--#navigation-->
