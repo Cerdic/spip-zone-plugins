@@ -1,0 +1,14 @@
+[(#REM) affichage de l'article aa ]
+<div class="">			
+	<BOUCLE_truc(ARTICLES){id_article=(#CONFIG{aa/id_aa})}>
+		<div class="cartouche">
+			#DEBUT_SURLIGNE
+			[(#CONFIG{aa/logo}|=={on}|?{[(#LOGO_ARTICLE||image_reduire{200,200})],''})]
+			[(#CONFIG{aa/titre}|=={on}|?{[<h1 class="#EDIT{titre} titre">(#TITRE)</h1>],''})]
+			[(#CONFIG{aa/soustitre}|=={on}|?{[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>],''})]
+			[(#CONFIG{aa/chapo}|=={on}|?{[<p class="#EDIT{chapo} chapo">(#CHAPO)</p>],''})]
+			#FIN_SURLIGNE
+		</div>
+		[(#CONFIG{aa/texte}|=={on}|?{[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>],''})]		 		
+	</BOUCLE_truc>
+</div>

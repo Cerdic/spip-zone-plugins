@@ -1,42 +1,43 @@
 <plugin>
-        <nom> <!-- Nom du plugin -->
-          <multi>
-					[fr]Article accueil
-					[en]Article summary
-					</multi>
+        <nom>
+			<multi>
+			[fr]Article accueil
+			[en]Article summary
+			</multi>
         </nom>
-        <auteur>        <!-- Auteur du plugin -->
-          <multi>
-					[fr]					cy_altern
-_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
-					[en]cy_altern - distributed under GNU/GPL licence
-					</multi>
+        <auteur>cy_altern
+_ &#169; 2010 - Distribu&#233; sous licence GNU/LGPL
+			</multi>
         </auteur>
         <version>
-          0.2
+          1.0
         </version>
         <etat>
           dev
         </etat>
         <description>
-        <multi>
-					[fr]Un exemple de plugin pour apprendre &#223; utiliser cfg
-          [en]An example to learn cfg.
-          </multi>
-        </description>
-		    <lien>
-              [Documentation sur ->http://www.spip-contrib.net/?article1605],
-		      et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=aa]
-		    </lien>
+			<multi>
+			[fr]Affiche un article sur la page de sommaire du site. 
+_ Les &#233;l&#233;ments de l'article choisi dans [l'interface de configuration->?exec=cfg&amp;cfg=aa] seront affich&#233;s sur la page sommaire du site:
+-* dans une balise {{&lt;div id="aa"&gt;}} si il en existe une dans le squelette {{sommaire.html}}.
+-* sinon, pour le squelette Z ou le squelette par d&#233;faut (dist), juste avant la liste des derniers articles .
+_ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il faut ajouter la balise {{&lt;div id="aa"&gt;}} dans {{sommaire.html}}
+        	</multi>
+		</description>
+	    <lien>
+            [Documentation sur ->http://www.spip-contrib.net/?article1605],
+	      et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=aa]
+	    </lien>
         <icon>plugin-24.gif</icon>
-        <prefix>
-          aa
-        </prefix>
+        <prefix>aa</prefix>
         <pipeline>
-        		<nom>ajouter_boutons</nom>
+        	<nom>ajouter_boutons</nom>
             <inclure>aa_pipelines.php</inclure>
-        </pipeline>	
-	<necessite id="SPIP" version="[1.9.0;]" />
-				<necessite id="cfg" version="[1.0.0;]" />
-				<chemin dir='' />
+        </pipeline>
+        <pipeline>
+			<nom>affichage_final</nom>
+			<inclure>aa_pipelines.php</inclure>
+        </pipeline>
+		<necessite id="SPIP" version="[2.0.0;]" />
+		<necessite id="cfg" version="[1.0.0;]" />
 </plugin>
