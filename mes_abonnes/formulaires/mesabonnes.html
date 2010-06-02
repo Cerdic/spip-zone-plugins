@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_mesabonnes">
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+<form action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+	  #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_nom}}
+		<li class="editer_mesabos_nom[ (#GET{erreurs}|oui)erreur]">
+			<label for="mesabos_nom"><:nom:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<input type='text' name='mesabos_nom' id='mesabos_nom' value="#ENV{mesabos_nom}" class="text" />
+		</li>
+		
+    #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_email}}
+		<li class="editer_mesabos_email obligatoire[ (#GET{erreurs}|oui)erreur]">
+			<label for="mesabos_email"><:email:></label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<input type='text' name='mesabos_email' id='mesabos_email' value="#ENV{mesabos_email}" class="text" />
+		</li>
+		
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_subscribe}}
+		<li class="editer_mesabos_sub">		
+      	[<span class='erreur_message'>(#GET{erreurs})</span>]				
+			<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="text" />
+			<label for="mesabos_subscribe"><:mesabonnes:subscribe:></label>
+			<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="text" />
+			<label for="mesabos_subscribe"><:mesabonnes:unsubscribe:></label>
+		</li>	
+	
+	</ul>
+	<input type="hidden" class="mesabos_lang" value="#LANG" />	
+	<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+</div></form>
+</div>
