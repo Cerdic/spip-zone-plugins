@@ -145,7 +145,7 @@ jQuery.fn.ddUpload = function(success) {
   		self.removeClass("ddUploadover");
   		var files = e.originalEvent.dataTransfer.files;
   		if(!files) {
-  			return true;
+          return true;
   		}
   		
   		
@@ -219,9 +219,8 @@ jQuery.fn.ddUpload = function(success) {
     return false;
   }).
   bind("dragover",function(e){
-    //se il drop  è sulla form allora blocco ,perché è ff
-    return false;
-    return !$(e.target).is("form");  
+    //cancel default action 
+    return $.browser.safari || $.browser.msie || $.browser.opera;
   }).
   bind("dragleave",function(){
     $(this).removeClass("ddUploadover");
