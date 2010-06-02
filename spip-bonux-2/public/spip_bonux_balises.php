@@ -63,13 +63,16 @@ function balise_URL_ECRIRE($p) {
 	}
 
 	$code = interprete_argument_balise(1,$p);
-	if (preg_match("/^'[^']*'$/", $code))
-		$fonc = $code;
-	else {$code = "(\$f = $code)"; $fonc = '$f';}
-	$args = interprete_argument_balise(2,$p);
-	if ($args != "''" && $args!==NULL)
-		$fonc .= ',' . $args;
-
+	if (!$code)
+		$fonc = "''";
+	else{
+		if (preg_match("/^'[^']*'$/", $code))
+			$fonc = $code;
+		else {$code = "(\$f = $code)"; $fonc = '$f';}
+		$args = interprete_argument_balise(2,$p);
+		if ($args != "''" && $args!==NULL)
+			$fonc .= ',' . $args;
+	}
 	if (function_exists('tester_url_ecrire'))
 		$p->code = '(tester_url_ecrire(' . $code . ') ? generer_url_ecrire(' . $fonc .') : "")';
 	else
