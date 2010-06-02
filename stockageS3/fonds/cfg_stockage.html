@@ -1,5 +1,5 @@
 [(#REM) titre=Gestion Documents Stockage]
-[(#REM) autor iser=webmestre ]
+[(#REM) autoriser=webmestre ]
 
 
 <!-- descriptif=
@@ -17,6 +17,13 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site
 	Stockage Amazon S3
 </legend>
 <p><:gestdoc:envoyer_explication:>:</p>
+
+<select name="provider">
+	<option value="s3">Amazon S3</option>
+	<option value="gs"[
+		(#ENV{provider}|=={gs}|?{selected="selected"})
+		]>Google Storage</option>
+</select>
 
 
 <p><label><:gestdoc:cle_publique:>: <small><i>Cf.</i> <a href="http://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key">http://aws-portal.amazon.com/gp/...</a></small>
@@ -38,6 +45,16 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site
 
 <br /><small>Cette valeur est utile si vous voulez h&#233;berger les fichiers de plusieurs sites sous le m&#234;me bucket.</small>
 </label>
+
+
+Pour Amazon S3, choisir la zone g&#233;ographique du bucket&nbsp;:
+<select name="location">
+	<option value="us">US (Etats-Unis)</option>
+	<option value="eu"[
+		(#ENV{location}|=={eu}|?{selected="selected"})
+		]>EU (Europe)</option>
+</select>
+
 </p>
 
 
@@ -47,7 +64,7 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site
 <label><:gestdoc:url_s3:>:
 <br />
 <select name="s3baseurl">
-	<option value="">http://s3.amazonaws.com/[(#ENV{s3bucket}|sinon{$bucket$})][/(#ENV{s3path})]/</option>
+	<option value="">http://commondatastorage.googleapis.com/[(#ENV{s3bucket}|sinon{$bucket$})][/(#ENV{s3path})]/</option>
 [
 	<option value="http://(#ENV{s3bucket})/"[
 		(#ENV{s3baseurl}|=={http://[(#ENV{s3bucket})]/}|?{selected="selected"})

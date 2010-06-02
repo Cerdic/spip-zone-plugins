@@ -5,7 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 		
 	// E
-	'envoyer_s3' => 'Enviar a S3',
+	'envoyer_s3' => 'Enviar a @provider@',
 
 );
 ?>

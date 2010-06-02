@@ -544,7 +544,11 @@ class RequestCore
 			// Determine what's what.
 			$header_size = curl_getinfo($this->curl_handle, CURLINFO_HEADER_SIZE);
 			$this->response_headers = substr($this->response, 0, $header_size);
-			$this->response_body = substr($this->response, $header_size);
+
+			# don't explode memory
+			if (strlen($this->response) < 100*1024)
+				$this->response_body = substr($this->response, $header_size);
+
 			$this->response_code = curl_getinfo($this->curl_handle, CURLINFO_HTTP_CODE);
 			$this->response_info = curl_getinfo($this->curl_handle);
 
@@ -594,13 +598,11 @@ class RequestCore
 	{
 		$curl_handle = $this->prep_request();
 		$this->response = curl_exec($curl_handle);
-		$parsed_response = $this->process_response($curl_handle, $this->response);
-
 		curl_close($curl_handle);
 
 		if ($parse)
 		{
-			return $parsed_response;
+			return $this->process_response($curl_handle, $this->response);
 		}
 
 		return $this->response;

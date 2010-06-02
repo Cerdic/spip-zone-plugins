@@ -12,7 +12,7 @@ function action_stockageS3_envoyer_dist($arg=null) {
 		$securiser_action = charger_fonction('securiser_action','inc');
 		$arg = $securiser_action();
 	}
-	
+
 	if ($id_document = intval($arg)
 		AND autoriser('stocker','document',$id_document)
 		AND $t = sql_fetsel('*','spip_documents','id_document='.intval($id_document))
@@ -20,13 +20,23 @@ function action_stockageS3_envoyer_dist($arg=null) {
 		){
 
 		$cfg = @unserialize($GLOBALS['meta']['stockage']);
-
 		if (strlen($cfg['s3publickey'])
 		  AND strlen($cfg['s3secretkey'])
 		  AND strlen($cfg['s3bucket'])) {
 
 			$BUCKET = $cfg['s3bucket'];
 			$PATH = $cfg['s3path'] ? $cfg['s3path'].'/' : '';
+			$LOCATION = $cfg['location'];
+
+			switch ($cfg['provider']) {
+				case 'gs':
+					define('S3_DEFAULT_URL', 'commondatastorage.googleapis.com');
+					break;
+				case 's3':
+				default:
+					define('S3_DEFAULT_URL', 's3.amazonaws.com');
+					break;
+			}
 
 			// charger la librairie Amazon S3
 			// http://code.google.com/p/php-aws/source
@@ -35,7 +45,7 @@ function action_stockageS3_envoyer_dist($arg=null) {
 
 			// Creer le bucket s'il n'existe pas deja
 			if (!$s3->if_bucket_exists($BUCKET)) {
-				if (!$s3->create_bucket($BUCKET)) {
+				if (!$s3->create_bucket($BUCKET, $LOCATION)) {
 					echo ("Something went wrong! We couldn't create a new bucket for ".htmlspecialchars($BUCKET)."!");
 					var_dump($s3->getBuckets());
 					exit;
@@ -53,21 +63,17 @@ function action_stockageS3_envoyer_dist($arg=null) {
 			
 			$src_site =  $GLOBALS['meta']['adresse_site']. "/" .substr(get_spip_doc($t['fichier']),strlen(_DIR_RACINE));
 			$src =  get_spip_doc($t['fichier']);
-			$dest =  $size_image. "-id" .$id_document. "-" .time(). "." .$path_info['extension'];
+			$dest =  $PATH . $size_image. "-id" .$id_document. "-" .time(). "." .$path_info['extension'];
 
 			// on l'envoie
-			$s3_url = $s3->store_remote_file($src_site, $BUCKET, $dest);
-			
-			
-			/*echo "path spip".$GLOBALS['PATH_SPIP']."<br>";
-			echo "src_site: $src_site <br>";
-			echo "src: $src <br>";
-			echo "bucket: $BUCKET <br>";
-			echo "dest: $dest <br>";
-			echo "enviado $s3_url";
-			*/
-			if ($s3_url != ""){
+			if ($s3_url = $s3->store_remote_file($src_site, $BUCKET, $dest)) {
 
+				// gs est gentil mais il passe en https
+				$s3_url = preg_replace(',^https,', 'http', $s3_url);
+				// gs est gentil mais il transforme / en %2F
+				$s3_url = str_replace('%2F', '/', $s3_url);
+
+				spip_log("Stockage document $id_document ".$t['fichier']." => ".$s3_url, 'stockage');
 				$url_distante = $s3_url;
 				include_spip('action/editer_document');
 				rename (get_spip_doc($t['fichier']), _DIR_RACINE.fichier_copie_locale($url_distante));
@@ -76,7 +82,9 @@ function action_stockageS3_envoyer_dist($arg=null) {
 					'distant' => 'oui'
 				));
 				//echo "<br><br>$src => $url_distante => ../".fichier_copie_locale($url_distante);
-			}			
+			} else {
+				spip_log("Erreur upload stockage ($id_document)", 'stockage');
+			}
 		}
 	}
 

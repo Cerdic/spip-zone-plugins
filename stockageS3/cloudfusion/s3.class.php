@@ -1867,7 +1867,7 @@ class AmazonS3 extends CloudFusion
 			// If we have a virtual host value, use that instead of Amazon's hostname. There are better ways of doing this, but it works for now.
 			if ($this->vhost)
 			{
-				$url = str_ireplace('http://', '', $url);
+				$url = preg_replace(',https?://,i', '', $url);
 				$url = explode('/', $url);
 				$url[0] = $this->vhost;
 				$url = 'http://' . implode('/', $url);
@@ -1956,7 +1956,7 @@ class AmazonS3 extends CloudFusion
 				return 'http://' . $this->vhost . $data['filename'] . ((!$torrent) ? '?' : '&') . 'AWSAccessKeyId=' . $data['key'] . '&Expires=' . $data['expires'] . '&Signature=' . rawurlencode($data['signature']);
 			}
 
-			return 'http://' . $data['bucket'] . '.s3.amazonaws.com' . $data['filename'] . ((!$torrent) ? '?' : '&') . 'AWSAccessKeyId=' . $data['key'] . '&Expires=' . $data['expires'] . '&Signature=' . rawurlencode($data['signature']);
+			return 'http://' . $data['bucket'] . '.'.S3_DEFAULT_URL . $data['filename'] . ((!$torrent) ? '?' : '&') . 'AWSAccessKeyId=' . $data['key'] . '&Expires=' . $data['expires'] . '&Signature=' . rawurlencode($data['signature']);
 		}
 		else
 		{
@@ -1966,7 +1966,7 @@ class AmazonS3 extends CloudFusion
 				return 'http://' . $this->vhost . '/' . $filename . (($torrent) ? '?torrent' : '');
 			}
 
-			return 'http://' . $bucket . '.s3.amazonaws.com/' . $filename . (($torrent) ? '?torrent' : '');
+			return 'http://' . $bucket . '.'. S3_DEFAULT_URL. '/' . $filename . (($torrent) ? '?torrent' : '');
 		}
 	}
 

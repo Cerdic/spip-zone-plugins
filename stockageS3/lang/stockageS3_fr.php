@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'envoyer_explication' => 'Pour envoyer vos fichiers sur Amazon S3 veuillez indiquer ci-dessous',
-	'envoyer_s3' => 'Envoyer sur S3',	 
+	'envoyer_s3' => 'Envoyer sur @provider@',	 
 		
 	//R
 	'registre_cname_erreur' => 'n\'a pas d\'enregistrement',
