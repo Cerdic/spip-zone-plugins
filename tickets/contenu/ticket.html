@@ -9,7 +9,7 @@
 	]
 		<h1 class="titre"><:tickets:ticket:> <small>##ID_TICKET</small></h1>
 	</div>
-	
+
 	[(#REM) Statut, severite, assignement]
 	<div class="infos">
 		<dl>
@@ -18,14 +18,14 @@
 			<dt><:tickets:assigne_a:></dt><dd>#NOM</dd>
 			</BOUCLE_assigne>
 			[<dt><:tickets:champ_severite:> :</dt><dd>(#SEVERITE|tickets_texte_severite)</dd>]
-			[<dt><:tickets:champ_type:> :</dt><dd>(#TYPE|tickets_texte_type)</dd>]		
-			[<dt><:tickets:champ_date:> :</dt><dd>(#DATE|affdate_court)</dd>]		
-			<B_auteur><dt>Créé par :</dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd>#NOM</dd></BOUCLE_auteur>
+			[<dt><:tickets:champ_type:> :</dt><dd>(#TYPE|tickets_texte_type)</dd>]
+			[<dt><:tickets:champ_date:> :</dt><dd>(#DATE|affdate_court)</dd>]
+			<B_auteur><dt><:tickets:cree_par:> :</dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd>#NOM</dd></BOUCLE_auteur>
 			[<dt><:tickets:champ_projet:> :</dt><dd>(#PROJET)</dd>]
 			[<dt><:tickets:champ_composant:> :</dt><dd>(#COMPOSANT)</dd>]
 			[<dt><:tickets:champ_projet:> :</dt><dd>(#VERSION)</dd>]
 			[<dt><:tickets:champ_jalon:> :</dt><dd>(#JALON)</dd>]
-		</dl>			
+		</dl>
 		[(#REM) Bloc de choix du statut et de l'assignation]
 		[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
 			#FORMULAIRE_STATUT_TICKET{#ID_TICKET}
@@ -34,7 +34,7 @@
 			#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET}
 		]
 	</div>
-	
+
 
 	<h2 class="titre">[(#TITRE|typo)]</h2>
 
@@ -50,7 +50,7 @@
 
 <div class="ticket_commentaires">
 	<h3>Commentaires</h3>
-	
+
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]
 	<B_messages>
 	<ul class="forum">
@@ -62,11 +62,11 @@
 					Post&eacute; par <strong><a href="#URL_AUTEUR">#NOM</a></strong>
 					</BOUCLE_auteur_message>
 					le [(#DATE|affdate_court)]
-					
+
 				</div>
 				<div class="#EDIT{texte} forum-texte">
 					[(#TEXTE)]
-				</div>			
+				</div>
 			</div>
 		</li>
 		</BOUCLE_messages>
@@ -81,9 +81,9 @@
 		<p><:tickets:tickets_sur_inscription:>
 			[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
 		</p>
-		
+
 		<h2 class='titre'><:tickets:titre_identification:></h2>
-		[(#FORMULAIRE_LOGIN{#SELF})]	
+		[(#FORMULAIRE_LOGIN{#SELF})]
 	]
 </div>
 </BOUCLE_ticket_contenu>
