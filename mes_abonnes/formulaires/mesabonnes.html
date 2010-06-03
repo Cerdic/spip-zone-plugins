@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_mesabonnes">
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-<form action="#ENV{action}" method="post"><div>
+[(#EDITABLE|oui)<form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 	  #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_nom}}
@@ -30,5 +30,5 @@
 	</ul>
 	<input type="hidden" class="mesabos_lang" value="#LANG" />	
 	<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
-</div></form>
+</div></form>]
 </div>
