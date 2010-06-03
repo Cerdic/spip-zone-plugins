@@ -22,10 +22,11 @@ define('_EXTRAIRE_SAISIES',
 
 function formulaires_configurer_association_traiter_dist(){
 
-	$form = _DIR_PLUGINS . 'Association_2.0'.'/formulaires/configurer_association.html';
-	$form = $form ? file_get_contents($form) : '';
-	if (!$form) spip_log('configurer_association sans formulaire');
-	if (preg_match_all(_EXTRAIRE_SAISIES, $form, $r, PREG_SET_ORDER)) {
+	$form = _request('formulaire_action');
+	$f = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/');
+	$formulaire = $f ? file_get_contents($f) : '';
+	if (!$formulaire) spip_log("formulaire '$form' introuvable");
+	if (preg_match_all(_EXTRAIRE_SAISIES, $formulaire, $r, PREG_SET_ORDER)) {
 		foreach($r as $regs) {
 			$k = $regs[3];
 			$v = _request($k);
