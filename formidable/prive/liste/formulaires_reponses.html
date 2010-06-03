@@ -23,7 +23,7 @@
 			<td class="statut">[(#ID_FORMULAIRES_REPONSE|puce_changement_statut{#STATUT, #ID_FORMULAIRE, formulaires_reponse, true})]</td>
 			<td class="date arial1">[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]</td>
 			<td class="auteur arial1">
-				<BOUCLE_auteur(AUTEURS){id_auteur}>
+				<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
 				</BOUCLE_auteur>
 				<:formidable:reponses_anonyme:>
