@@ -24,7 +24,7 @@ function exec_adherents() {
 		$url_association = generer_url_ecrire('association');
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_edit_relances=generer_url_ecrire('edit_relances');
-		$indexation = $GLOBALS['asso_metas']['indexation'];
+		$indexation = $GLOBALS['association_metas']['indexation'];
 		
 		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		$commencer_page = charger_fonction('commencer_page', 'inc');

@@ -21,7 +21,7 @@ function exec_edit_relances(){
 
 	$url_edit_labels = generer_url_ecrire('edit_labels');
 	$url_retour = $_SERVER["HTTP_REFERER"];
-	$indexation = $GLOBALS['asso_metas']['indexation'];		
+	$indexation = $GLOBALS['association_metas']['indexation'];		
 
 	association_onglets();
 		

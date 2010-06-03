@@ -120,7 +120,7 @@ function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, 
 		"recette" => $prix_vente,
 		"depense" => $frais_envoi,
 		"justification" => $justification),
-		   "id_journal=$id_vente AND imputation=".sql_quote($GLOBALS['asso_metas']['pc_ventes']));
+		   "id_journal=$id_vente AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']));
 
 }
 
@@ -148,7 +148,7 @@ function ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $q
 			'recette' => $recette,
 			'depense' => $depense,
 			'justification' => $justification,
-			'imputation' => $GLOBALS['asso_metas']['pc_ventes'],
+			'imputation' => $GLOBALS['association_metas']['pc_ventes'],
 			'id_journal' => $id_vente)))
 		  return true;
 	}

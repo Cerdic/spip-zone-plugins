@@ -22,19 +22,19 @@ function association_onglets(){
 	$link7= generer_url_ecrire('ressources');
 	
 	echo onglet(_T('asso:menu2_titre_gestion_membres'), $link1, '', 'Membres', _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif','rien.gif' );  
-	if ($GLOBALS['asso_metas']['dons']) {
+	if ($GLOBALS['association_metas']['dons']) {
 		echo onglet(_T('asso:menu2_titre_gestion_dons'), $link2, '', 'Dons', _DIR_PLUGIN_ASSOCIATION_ICONES.'dons.gif','rien.gif' ); 
 	}
-	if ($GLOBALS['asso_metas']['ventes']) {
+	if ($GLOBALS['association_metas']['ventes']) {
 		echo onglet(_T('asso:menu2_titre_ventes_asso'), $link4, '', 'Ventes', _DIR_PLUGIN_ASSOCIATION_ICONES.'ventes.gif','rien.gif' ); 
 	}
-	if ($GLOBALS['asso_metas']['activites']) {
+	if ($GLOBALS['association_metas']['activites']) {
 		echo onglet(_T('asso:menu2_titre_gestion_activites'), $link5, '', 'Activites', _DIR_PLUGIN_ASSOCIATION_ICONES.'activites.gif','rien.gif' ); 
 	}
-	if ($GLOBALS['asso_metas']['prets']) {
+	if ($GLOBALS['association_metas']['prets']) {
 		echo onglet(_T('asso:menu2_titre_gestion_prets'), $link7, '', 'Prets', _DIR_PLUGIN_ASSOCIATION_ICONES.'pret1.gif','rien.gif' ); 
 	}
-	if ($GLOBALS['asso_metas']['comptes']) {
+	if ($GLOBALS['association_metas']['comptes']) {
 		echo onglet(_T('asso:menu2_titre_livres_comptes'), $link6, '', 'Comptes', _DIR_PLUGIN_ASSOCIATION_ICONES.'comptes.gif','rien.gif' ); 
 	}
 	

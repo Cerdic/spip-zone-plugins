@@ -33,7 +33,7 @@ function exec_edit_adherent_args($id_auteur)
 		echo minipres(_T('zxml_inconnu_id') . $id_auteur);
 	} else {
 
-		$indexation = $GLOBALS['asso_metas']['indexation'];
+		$indexation = $GLOBALS['association_metas']['indexation'];
 
 		$id_asso=$data['id_asso'];
 		$nom_famille=$data['nom_famille'];
@@ -74,7 +74,7 @@ function exec_edit_adherent_args($id_auteur)
 function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_interne, $commentaire)
 {
 	$res = '';
-	if ($GLOBALS['asso_metas']['indexation']=="id_asso"){
+	if ($GLOBALS['association_metas']['indexation']=="id_asso"){
 	  $res .= '<label for="id_asso"><strong>' . _T('asso:nd_d_adherent') . '&nbsp;:</strong></label>';
 			$res .= '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
 	}

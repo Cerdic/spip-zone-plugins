@@ -59,7 +59,7 @@ function exec_prets(){
 		echo '<th>'._T('asso:prets_entete_date_retour').'</th>';
 		echo '<th colspan="2" style="text-align:center;">'._T('asso:entete_action').'</th>';
 		echo'  </tr>';
-		$index = $GLOBALS['asso_metas']['indexation'];
+		$index = $GLOBALS['association_metas']['indexation'];
 		if (!$index) $index = "id_auteur";
 		$query = sql_select("*", "spip_asso_prets", "id_ressource=$id_ressource", '', "date_sortie DESC" ) ;
 		while ($data = sql_fetch($query)) {

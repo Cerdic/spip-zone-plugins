@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_configurer_association_charger_dist(){
-	return $GLOBALS['asso_metas'];
+	return $GLOBALS['association_metas'];
 }
 
 // version amelioree de la RegExp de cfg_formulaire.
@@ -30,7 +30,7 @@ function formulaires_configurer_association_traiter_dist(){
 		foreach($r as $regs) {
 			$k = $regs[3];
 			$v = _request($k);
-			ecrire_meta($k, $v, 'oui', 'asso_metas');
+			ecrire_meta($k, $v, 'oui', 'association_metas');
 		}
 	}
 	return array('redirect' => generer_url_ecrire('association'));

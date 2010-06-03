@@ -51,7 +51,7 @@ function exec_bilan(){
 		echo "<td style='text-align:center;'><strong>\n" . _T('asso:depenses') . '</strong></td>';
 		echo "<td style='text-align:center;'><strong>\n" . 'Solde</strong></td>';
 		echo "</tr>\n";
-		$ac=$GLOBALS['asso_metas']['classe_banques']; 
+		$ac=$GLOBALS['association_metas']['classe_banques']; 
 		$query = sql_select("imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe", 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', '', 'code, annee', "annee DESC", '',  "annee = $annee AND classe <> $annee");
 		
 		while ($data = sql_fetch($query)) {
@@ -88,7 +88,7 @@ function exec_bilan(){
 		echo '<td style="text-align:center;" colspan="2"><strong>', _T('asso:avoir_initial') . "</strong></td>\n";
 		echo "<td style='text-align:center;'><strong>\n" . _T('asso:avoir_actuel') . "</strong></td>\n";
 		echo '</tr>';
-		$clas=$GLOBALS['asso_metas']['classe_banques'];
+		$clas=$GLOBALS['association_metas']['classe_banques'];
 		$query = sql_select('*', 'spip_asso_plan', "classe='$clas'", '',  "code" );
 		
 		while ($banque = sql_fetch($query)) {

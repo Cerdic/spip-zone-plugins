@@ -24,7 +24,7 @@ function exec_edit_labels(){
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_edit_relances = generer_url_ecrire('edit_relances');		
-		$indexation = $GLOBALS['asso_metas']['indexation'];
+		$indexation = $GLOBALS['association_metas']['indexation'];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;

@@ -32,7 +32,7 @@ function action_modifier_dons() {
 		    'recette' => $argent,
 		    'journal' => $journal,
 		    'justification' => "[->don$id_don] [->membre$id_adherent]"),
-		    "id_journal=$id_don AND imputation=".sql_quote($GLOBALS['asso_metas']['pc_dons']));
+		    "id_journal=$id_don AND imputation=".sql_quote($GLOBALS['association_metas']['pc_dons']));
 	sql_updateq('spip_asso_dons', array(
 			'date_don' => $date_don,
 			'bienfaiteur' => $bienfaiteur,

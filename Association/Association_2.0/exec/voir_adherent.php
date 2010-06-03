@@ -22,7 +22,7 @@ function exec_voir_adherent(){
 		echo minipres();
 	} else {
 		$id_auteur= intval($_GET['id']);
-		$indexation = $GLOBALS['asso_metas']['indexation'];
+		$indexation = $GLOBALS['association_metas']['indexation'];
 		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
 		while ($data = sql_fetch($query)) { 
 			$id_asso=$data['id_asso'];
@@ -79,7 +79,7 @@ function exec_voir_adherent(){
 		echo '</fieldset>';
 		
 		// FICHE HISTORIQUE ACTIVITES	
-		if ($GLOBALS['asso_metas']['activites']=="on"){
+		if ($GLOBALS['association_metas']['activites']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_activites').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
@@ -114,7 +114,7 @@ function exec_voir_adherent(){
 		}
 		
 		// FICHE HISTORIQUE VENTES
-		if ($GLOBALS['asso_metas']['ventes']=="on"){
+		if ($GLOBALS['association_metas']['ventes']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
@@ -142,13 +142,13 @@ function exec_voir_adherent(){
 			echo '</fieldset>';
 		}
 		// FICHE HISTORIQUE DONS
-		if ($GLOBALS['asso_metas']['dons']=="on"){
+		if ($GLOBALS['association_metas']['dons']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>';
 			echo _T('asso:a_developper');
 			echo '</fieldset>';
 		}
 		// FICHE HISTORIQUE PRETS
-		if ($GLOBALS['asso_metas']['prets']=="on"){
+		if ($GLOBALS['association_metas']['prets']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_prets').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";

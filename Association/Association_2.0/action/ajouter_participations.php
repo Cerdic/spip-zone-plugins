@@ -53,7 +53,7 @@ function activites_paiement_insert($date_paiement, $journal, $montant, $id_activ
 		'journal' => $journal,
 		'recette' => $montant,
 		'justification' => $justification,
-		'imputation' => $GLOBALS['asso_metas']['pc_activites'],
+		'imputation' => $GLOBALS['association_metas']['pc_activites'],
 		'id_journal' => $id_activite));
 
 	spip_log("participation_insert: $id");

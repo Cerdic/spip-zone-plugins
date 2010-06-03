@@ -24,8 +24,8 @@ function action_modifier_relances() {
 	$statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array();
 	$id_tab=(isset($_POST["id"])) ? $_POST["id"]:array();
 
-	$adresse=$GLOBALS['asso_metas']['email'];
-	$exp=$GLOBALS['asso_metas']['nom'].'<'.$adresse.'>'; 
+	$adresse=$GLOBALS['association_metas']['email'];
+	$exp=$GLOBALS['association_metas']['nom'].'<'.$adresse.'>'; 
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 
 	for ( $i=0 ; $i < $count ; $i++ ) {

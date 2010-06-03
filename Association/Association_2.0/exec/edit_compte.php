@@ -53,7 +53,7 @@ function exec_edit_compte() {
 
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:modification_des_comptes'));
 		
-		$sql = sql_select('code,intitule', 'spip_asso_plan', "classe<>". sql_quote($GLOBALS['asso_metas']['classe_banques']), "", "code") ;
+		$sql = sql_select('code,intitule', 'spip_asso_plan', "classe<>". sql_quote($GLOBALS['association_metas']['classe_banques']), "", "code") ;
 		$res = '';
 		while ($banque = sql_fetch($sql)) {
 			$code = $banque['code'];

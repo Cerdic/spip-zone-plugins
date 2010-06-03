@@ -23,18 +23,6 @@ include_spip('base/abstract_sql');
 // Ce numero est fourni automatiquement par la fonction spip_plugin_install
 // lors de l'appel des fonctions de ce fichier.
 
-// Compatibilite: le nom de la meta donnant le numero de version n'etait pas std
-// puis est partie dans une autre table
-
-if (!isset($GLOBALS['asso_metas']['base_version'])) {
-	if (isset($GLOBALS['meta']['asso_base_version'])) {
-		$n = $GLOBALS['meta']['asso_base_version'];
-	} elseif (isset($GLOBALS['meta']['association_base_version'])) {
-		$n = $GLOBALS['meta']['association_base_version'];
-	} else $n = 0;
-	$GLOBALS['asso_metas']['base_version'] = $n;
-}
-
 // desinstatllatin
 
 function association_vider_tables($nom_meta, $table){
@@ -52,14 +40,26 @@ function association_vider_tables($nom_meta, $table){
 
 function association_upgrade($meta, $courante, $table='meta')
 {
-	spip_log("association upgrade: $table $meta = $courante");
-	if (!isset($GLOBALS[$table][$meta]))
-	  return association_maj_0($courante, $meta, $table);
+
+  // Compatibilite: le nom de la meta donnant le numero de version
+  // n'etait pas std puis est parti dans une autre table puis encore une autre
+
+	if (!isset($GLOBALS['association_metas']['base_version'])) {
+		lire_metas('asso_metas');
+		if (isset($GLOBALS['asso_metas']['base_version'])) {
+			$n = $GLOBALS['asso_metas']['base_version'];
+		} elseif (isset($GLOBALS['meta']['association_base_version'])) {
+			$n = $GLOBALS['meta']['association_base_version'];
+		} else $n = 0;
+		$GLOBALS['association_metas']['base_version'] = $n;
+	} else $n = $GLOBALS['association_metas']['base_version'];
+
+	spip_log("association upgrade: $table $meta = $n =>> $courante");
+	if (!$n)
+		return association_maj_0($courante, $meta, $table);
 	else {
 	// compatibilite avec les numeros de version non entiers
-		$installee = (($GLOBALS[$table][$meta] > 1) ?
-			$GLOBALS[$table][$meta] :
-			($GLOBALS[$table][$meta] * 100));
+		$installee = ($n > 1) ? $n : ($n * 100);
 		$GLOBALS['association_maj_erreur'] = 0;
 		if ($courante > $installee) {
 			include_spip('base/association');
@@ -139,7 +139,7 @@ function association_maj_38192()
 		include _DIR_PLUGINS . 'cfg/inc/cfg.php';
 		if (is_array($c = lire_config('association'))) {
 			foreach($c as $k => $v) {
-				ecrire_meta($k, $v, 'oui', 'asso_metas');
+				ecrire_meta($k, $v, 'oui', 'association_metas');
 			}
 			// effacer les vieilles meta
 			effacer_meta('association');
@@ -155,4 +155,6 @@ $GLOBALS['association_maj'][38258] = array(array('sql_create','spip_asso_membres
 		$association_tables_principales['spip_asso_membres']['field'],
 	      $association_tables_principales['spip_asso_membres']['key'])
 					);
+$GLOBALS['association_maj'][38578] = array(
+	array('spip_query', 'rename table spip_asso_metas TO spip_association_metas'));
 ?>

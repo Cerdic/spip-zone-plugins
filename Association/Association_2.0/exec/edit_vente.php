@@ -27,7 +27,7 @@ function exec_edit_vente() {
 		$id_vente= intval(_request('id'));
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$data = !$id_vente ? '' : sql_fetsel("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation=" . sql_quote($GLOBALS['asso_metas']['pc_ventes']));
+		$data = !$id_vente ? '' : sql_fetsel("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_ventes']));
 
 		if ($data) {
 			$date_vente=$data['date_vente'];

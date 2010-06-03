@@ -4,8 +4,8 @@
 	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James
 	</auteur>
 	<version>0.65</version>
-	<version_base>38258</version_base>
-	<meta>asso_metas</meta>
+	<version_base>38578</version_base>
+	<meta>association_metas</meta>
 	<etat>test</etat>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	

@@ -19,6 +19,6 @@ function action_supprimer_ventes() {
 	$w = sql_in('id_vente', $_REQUEST['drop']);
 	sql_delete('spip_asso_ventes', $w);
 	$w = sql_in('id_journal', $_REQUEST['drop']);
-	sql_delete('spip_asso_comptes', $w . " AND imputation=".sql_quote($GLOBALS['asso_metas']['pc_ventes']));
+	sql_delete('spip_asso_comptes', $w . " AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']));
 }
 ?>
