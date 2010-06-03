@@ -108,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traiter_enregistrement_description' => 'Enregistre les r&eacute;sultats du formulaire dans la base de donn&eacute;es',
 'traiter_enregistrement_erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement en base de donn&eacute;es',
 'traiter_enregistrement_erreur_deja_repondu' => 'Vous avez d&eacute;j&agrave; r&eacute;pondu &agrave; ce formulaire.',
+'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La r&eacute;ponse &agrave; &eacute;diter est introuvable.',
 'traiter_enregistrement_option_moderation_label' => 'Mod&eacute;ration',
 'traiter_enregistrement_option_modifiable_explication' => 'Les visiteurs pourront-ils modifier leurs r&eacute;ponses apr&egrave;s coup ?',
 'traiter_enregistrement_option_modifiable_label' => 'R&eacute;ponses modifiables',

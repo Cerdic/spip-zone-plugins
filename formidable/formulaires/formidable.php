@@ -8,7 +8,19 @@ include_spip('inc/saisies');
 include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 
-function formulaires_formidable_charger($id_formulaire, $valeurs=array()){
+/**
+ * Formulaire CVT de Formidable.
+ * Genere le formulaire dont l'identifiant (numerique ou texte est indique)
+ *
+ * @param mixed $id_formulaire identifiant numerique ou textuel
+ * @param array $valeurs valeurs par defauts passes au contexte du formulaire
+ *        exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+ * @param int $id_formulaires_reponse identifiant d'une reponse
+ *        pour forcer la reedition de cette reponse specifique
+ * 
+ * @return array $contexte : le contexte envoye au squelette HTML du formulaire.
+**/
+function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
 	$contexte = array();
 	
 	// On peut donner soit un id soit un identifiant
@@ -38,27 +50,33 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array()){
 			if ($valeurs and is_array($valeurs)){
 				$contexte = array_merge($contexte, $valeurs);
 			}
-			
-			// Si multiple = non mais que c'est modifiable, alors on va chercher la dernière réponse si elle existe
-			if ($options = $traitements['enregistrement']
-				and !$options['multiple']
-				and $options['modifiable']
-				and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'])
-			){
-				$id_formulaires_reponse = array_pop($reponses);
-				// On va chercher tous les champs
-				$champs = sql_allfetsel(
-					'nom, valeur',
-					'spip_formulaires_reponses_champs',
-					'id_formulaires_reponse = '.$id_formulaires_reponse
-				);
-				// On remplit le contexte avec
-				foreach ($champs as $champ){
-					$test_array = unserialize($champ['valeur']);
-					$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
+
+			// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
+			if ($id_formulaires_reponse = intval($id_formulaires_reponse)) {
+				$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
+				if ($ok) {
+					// On ajoute un hidden pour dire que c'est une modif
+					$contexte['_hidden'] .= "\n".'<input type="hidden" name="deja_enregistre_'.$formulaire['id_formulaire'].'" value="'.$id_formulaires_reponse.'"/>';
+				} else {
+					$contexte['editable'] = false;
+					$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_edition_reponse_inexistante');
 				}
-				// On ajoute un hidden pour dire que c'est une modif
-				$contexte['_hidden'] .= "\n".'<input type="hidden" name="deja_enregistre_'.$formulaire['id_formulaire'].'" value="'.$id_formulaires_reponse.'"/>';
+			} else {
+				
+				// Si multiple = non mais que c'est modifiable, alors on va chercher
+				// la dernière réponse si elle existe
+				if ($options = $traitements['enregistrement']
+					and !$options['multiple']
+					and $options['modifiable']
+					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'])
+				){
+					$id_formulaires_reponse = array_pop($reponses);
+					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok = true);
+
+					// On ajoute un hidden pour dire que c'est une modif
+					$contexte['_hidden'] .= "\n".'<input type="hidden" name="deja_enregistre_'.$formulaire['id_formulaire'].'" value="'.$id_formulaires_reponse.'"/>';
+				}
+				
 			}
 		}
 		else{
@@ -74,7 +92,8 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array()){
 	return $contexte;
 }
 
-function formulaires_formidable_verifier($id_formulaire, $valeurs=array()){
+
+function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
 	$erreurs = array();
 	
 	// Sale bête !
@@ -92,7 +111,8 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs=array()){
 	return $erreurs;
 }
 
-function formulaires_formidable_traiter($id_formulaire, $valeurs=array()){
+
+function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
 	$retours = array();
 	// Par défaut le formulaire se remet en route à la fin
 	$retours['editable'] = true;
@@ -122,6 +142,36 @@ function formulaires_formidable_traiter($id_formulaire, $valeurs=array()){
 	}
 	
 	return $retours;
+}
+
+
+
+/**
+ * Ajoute dans le contexte les elements
+ * donnes par une reponse de formulaire indiquee 
+ *
+ * @param array $contexte Contexte pour le squelette HTML du formulaire
+ * @param int $id_formulaires_reponse Identifiant de reponse
+ * @param bool &$ok La reponse existe bien ?
+ * @return array $contexte Contexte complete des nouvelles informations
+ * 
+**/
+function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, &$ok) {
+	// On va chercher tous les champs
+	$champs = sql_allfetsel(
+		'nom, valeur',
+		'spip_formulaires_reponses_champs',
+		'id_formulaires_reponse = '.$id_formulaires_reponse
+	);
+	$ok = count($champs) ? true : false;
+	
+	// On remplit le contexte avec
+	foreach ($champs as $champ){
+		$test_array = unserialize($champ['valeur']);
+		$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
+	}
+
+	return $contexte;
 }
 
 ?>
