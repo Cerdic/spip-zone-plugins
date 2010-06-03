@@ -29,7 +29,7 @@ function SelecteurGenerique_inserer_auteur() {
 				},
 				formatResult: function(data, i, n, value) {
 					return data[1];
-				},
+				}
 			}
 		);
 		me.result(function(event, data, formatted) {
