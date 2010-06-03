@@ -8,6 +8,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_stockageS3_envoyer_dist($arg=null) {
+
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action','inc');
 		$arg = $securiser_action();
@@ -40,14 +41,15 @@ function action_stockageS3_envoyer_dist($arg=null) {
 
 			// charger la librairie Amazon S3
 			// http://code.google.com/p/php-aws/source
-			require_once find_in_path('cloudfusion/cloudfusion.class.php');			
-			$s3 = new AmazonS3($cfg['s3publickey'], $cfg['s3secretkey']);
+			include_spip('lib/S3');
+			$s3 = new S3($cfg['s3publickey'], $cfg['s3secretkey'], $useSSL = false, S3_DEFAULT_URL);
 
-			// Creer le bucket s'il n'existe pas deja
-			if (!$s3->if_bucket_exists($BUCKET)) {
-				if (!$s3->create_bucket($BUCKET, $LOCATION)) {
+			// Creer le bucket (en mode public) s'il n'existe pas deja
+			if (!$buckets = $s3->listBuckets()
+			OR !in_array($BUCKET, $buckets)) {
+				if (!$s3->putbucket($BUCKET, S3::ACL_PUBLIC_READ, $LOCATION)) {
 					echo ("Something went wrong! We couldn't create a new bucket for ".htmlspecialchars($BUCKET)."!");
-					var_dump($s3->getBuckets());
+					var_dump($s3->listBuckets());
 					exit;
 				}
 			}
@@ -55,7 +57,7 @@ function action_stockageS3_envoyer_dist($arg=null) {
 			include_spip('inc/documents');
 			include_spip('inc/distant');
 			
-			//Size image, for future thumbnails. Now set "original"			
+			// Size image, for future thumbnails. Now set "original"			
 			$size_image= "original";
 
 			// Ou doit-on deposer notre fichier ?
@@ -66,16 +68,13 @@ function action_stockageS3_envoyer_dist($arg=null) {
 			$dest =  $PATH . $size_image. "-id" .$id_document. "-" .time(). "." .$path_info['extension'];
 
 			// on l'envoie
-			if ($s3_url = $s3->store_remote_file($src_site, $BUCKET, $dest)) {
-
-				// gs est gentil mais il passe en https
-				$s3_url = preg_replace(',^https,', 'http', $s3_url);
-				// gs est gentil mais il transforme / en %2F
-				$s3_url = str_replace('%2F', '/', $s3_url);
+			if ($s3->putObjectFile(get_spip_doc($t['fichier']), $BUCKET, $dest, $acl = S3::ACL_PUBLIC_READ /*, $metaHeaders = array(), $contentType = 'image/jpeg' */)) {
+				$s3_url = 'http://'.$BUCKET.'.'.S3_DEFAULT_URL.'/'.$dest;
 
 				spip_log("Stockage document $id_document ".$t['fichier']." => ".$s3_url, 'stockage');
 				$url_distante = $s3_url;
 				include_spip('action/editer_document');
+
 				rename (get_spip_doc($t['fichier']), _DIR_RACINE.fichier_copie_locale($url_distante));
 				document_set($id_document, array(
 					'fichier' => $url_distante,

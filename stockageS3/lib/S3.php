@@ -1,4 +1,8 @@
 <?php
+/*
+ * Original URL http://code.google.com/p/amazon-s3-php-class/
+ */
+
 /**
 * $Id: S3.php 47 2009-07-20 01:25:40Z don.schonknecht $
 *
@@ -55,10 +59,11 @@ class S3 {
 	* @param boolean $useSSL Enable SSL
 	* @return void
 	*/
-	public function __construct($accessKey = null, $secretKey = null, $useSSL = true) {
+	public function __construct($accessKey = null, $secretKey = null, $useSSL = true, $endpoint='s3.amazonaws.com') {
 		if ($accessKey !== null && $secretKey !== null)
 			self::setAuth($accessKey, $secretKey);
 		self::$useSSL = $useSSL;
+		define('S3_ENDPOINT', $endpoint);
 	}
 
 
@@ -752,7 +757,7 @@ class S3 {
 		$expires = time() + $lifetime;
 		$uri = str_replace('%2F', '/', rawurlencode($uri)); // URI should be encoded (thanks Sean O'Dea)
 		return sprintf(($https ? 'https' : 'http').'://%s/%s?AWSAccessKeyId=%s&Expires=%u&Signature=%s',
-		$hostBucket ? $bucket : $bucket.'.s3.amazonaws.com', $uri, self::$__accessKey, $expires,
+		$hostBucket ? $bucket : $bucket.'.'.S3_ENDPOINT, $uri, self::$__accessKey, $expires,
 		urlencode(self::__getHash("GET\n\n\n{$expires}\n/{$bucket}/{$uri}")));
 	}
 
@@ -823,7 +828,7 @@ class S3 {
 	public static function createDistribution($bucket, $enabled = true, $cnames = array(), $comment = '') {
 		self::$useSSL = true; // CloudFront requires SSL
 		$rest = new S3Request('POST', '', '2008-06-30/distribution', 'cloudfront.amazonaws.com');
-		$rest->data = self::__getCloudFrontDistributionConfigXML($bucket.'.s3.amazonaws.com', $enabled, $comment, (string)microtime(true), $cnames);
+		$rest->data = self::__getCloudFrontDistributionConfigXML($bucket.'.'.S3_ENDPOINT, $enabled, $comment, (string)microtime(true), $cnames);
 		$rest->size = strlen($rest->data);
 		$rest->setHeader('Content-Type', 'application/xml');
 		$rest = self::__getCloudFrontResponse($rest);
@@ -1131,16 +1136,16 @@ final class S3Request {
 	* @param string $uri Object URI
 	* @return mixed
 	*/
-	function __construct($verb, $bucket = '', $uri = '', $defaultHost = 's3.amazonaws.com') {
+	function __construct($verb, $bucket = '', $uri = '') {
 		$this->verb = $verb;
 		$this->bucket = strtolower($bucket);
 		$this->uri = $uri !== '' ? '/'.str_replace('%2F', '/', rawurlencode($uri)) : '/';
 
 		if ($this->bucket !== '') {
-			$this->headers['Host'] = $this->bucket.'.'.$defaultHost;
+			$this->headers['Host'] = $this->bucket.'.'.S3_ENDPOINT;
 			$this->resource = '/'.$this->bucket.$this->uri;
 		} else {
-			$this->headers['Host'] = $defaultHost;
+			$this->headers['Host'] = S3_ENDPOINT;
 			//$this->resource = strlen($this->uri) > 1 ? '/'.$this->bucket.$this->uri : $this->uri;
 			$this->resource = $this->uri;
 		}
@@ -1296,7 +1301,7 @@ final class S3Request {
 
 		// Parse body into XML
 		if ($this->response->error === false && isset($this->response->headers['type']) &&
-		$this->response->headers['type'] == 'application/xml' && isset($this->response->body)) {
+		preg_match(',application/xml,', $this->response->headers['type']) && isset($this->response->body)) {
 			$this->response->body = simplexml_load_string($this->response->body);
 
 			// Grab S3 errors
