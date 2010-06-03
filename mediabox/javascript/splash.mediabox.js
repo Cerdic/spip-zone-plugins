@@ -2,7 +2,7 @@
 	$(function(){
 		// poser le cookie au callback de la box chargee
 		var set_cookie = function() {
-			$.cookie("modalsplash", "vu", { expires: 7 });
+			$.cookie("modalsplash", box_settings.splash_url, { expires: 7 });
 		}
 
 		$.modalboxsplash = function(href, options) {
@@ -13,7 +13,7 @@
 			},options));
 		};
 		// ouvrir la splash page si pas deja vue
-		if (!$.cookie("modalsplash"))
+		if ($.cookie("modalsplash") != box_settings.splash_url)
 			$.modalboxsplash(box_settings.splash_url);
 
 	});
