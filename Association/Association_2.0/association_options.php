@@ -86,7 +86,7 @@ function association_ajouterBoutons($boutons_admin) {
 function association_mode_de_paiement($journal, $label)
 {
 	$sel = '';
-	$sql = sql_select("code,intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['asso_metas']['classe_banques']), '', "code") ;
+	$sql = sql_select("code,intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['association_metas']['classe_banques']), '', "code") ;
 	while ($banque = sql_fetch($sql)) {
 		$c = $banque['code'];
 		$sel .= "<option value='$c'"
@@ -144,7 +144,7 @@ $table_des_tables['asso_ressources'] = 'asso_ressources';
 $table_des_tables['asso_prets'] = 'asso_prets';
 $table_des_tables['asso_activites'] = 'asso_activites';
 $table_des_tables['asso_membres'] = 'asso_membres';
-$table_des_tables['asso_metas'] = 'asso_metas';
+$table_des_tables['association_metas'] = 'association_metas';
 
 // Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
 global $table_titre;

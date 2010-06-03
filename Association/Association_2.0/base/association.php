@@ -229,7 +229,7 @@ $spip_asso_metas = array(
 $spip_asso_metas_key = array(
 		"PRIMARY KEY"	=> "nom");
 
-$association_tables_auxiliaires['spip_asso_metas'] = array(
+$association_tables_auxiliaires['spip_association_metas'] = array(
 	'field' => &$spip_asso_metas, 
 	'key' => &$spip_asso_metas_key
 );
