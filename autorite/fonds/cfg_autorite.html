@@ -107,7 +107,7 @@
 <select name="editer_mots">
 	<option value="0"><:autorite:admin_complets:></option>
 	<option value="1"[ selected="(#ENV{editer_mots}|=={1}|?{selected})"]><:autorite:admin_tous:></option>
-	<option value="2"[ selected="(#ENV{editer_mots}|=={2}|?{selected})"]>Tous les r&#233;dacteurs</option>
+	<option value="2"[ selected="(#ENV{editer_mots}|=={2}|?{selected})"]><:autorite:redac_tous:></option>
 </select>
 </label>
 </p>
@@ -117,14 +117,20 @@
 <:autorite:redacteur_lire_stats:>
 </label>
 </p>
-</fieldset>
 
+<p>
+<label>
+<input type="checkbox" name="redacteurs_ecrire" [checked="(#ENV{redacteurs_ecrire}?{checked})"] />
+<:autorite:pas_acces_espace_prive:>
+</label>
+</p>
+</fieldset>
 
 [(#REM) -------------------- CRAYONS -------------------------]
 [(#REM) : On teste si le plugin crayons est présent pour afficher les fonctions relatives]
 [(#PLUGIN{crayons}|oui)
 <fieldset>
-	<legend>Crayons</legend>
+	<legend><:autorite:crayons:></legend>
 <:autorite:attention_crayons:>
 
 [(#REM)
@@ -435,12 +441,11 @@
 </label>
 </p>
 
-
 </fieldset>
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
-<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondo" />
 <!--
 <input type="reset" value="<:Reset:>" class="fondo" />
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />

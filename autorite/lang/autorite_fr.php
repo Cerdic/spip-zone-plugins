@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_site' => 'Configuration du site',
 'config_site_qui' => 'Qui peut <strong>modifier la configuration</strong> du site ?',
 'config_plugin_qui' => 'Qui peut <strong>modifier la configuration</strong> des plugins (activation...) ?',
-
+'crayons' => 'Crayons',
 //D
 'descriptif_1' => 'Cette page de configuration est r&#233;serv&#233;e aux webmestres du site :',
 'descriptif_2' => "<hr />
@@ -108,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 //P
+'pas_acces_espace_prive' => '<strong>Pas d\'acc&egrave;s &agrave; l\'espace priv&eacute :</strong> les r&#233;dacteurs n\'ont pas acc&egrave;s &agrave; l\'espace priv&eacute;.',
 'personne' => 'Personne',
 'petitions_qui' => '<strong>Signatures :</strong> qui peut modifier les signatures des p&#233;titions :',
 'publication' => 'Publication',

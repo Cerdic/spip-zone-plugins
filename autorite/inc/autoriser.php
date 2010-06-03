@@ -554,6 +554,24 @@ function autoriser_detruire($faire, $type, $id, $qui, $opt) {
 	$autorite_erreurs[] = 'autoriser_detruire';
 }
 
+##
+## autoriser_ecrire
+##
+if ($GLOBALS['autorite']['redacteurs_ecrire']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_ecrire')) {
+function autoriser_ecrire($faire, $type, $id, $qui, $opt) {
+    return
+        $GLOBALS['autorite']['redacteurs_ecrire']
+            ? $qui['statut'] == '0minirezo'
+            : in_array($qui['statut'], array('0minirezo', '1comite'));
+}
+} else
+    $autorite_erreurs[] = 'autoriser_ecrire';
+}
+
 if ($autorite_erreurs) $GLOBALS['autorite_erreurs'] = $autorite_erreurs;
+
 
 ?>
