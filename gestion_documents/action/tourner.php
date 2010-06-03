@@ -48,6 +48,7 @@ function action_tourner_post($id_document,$angle)
 		spip_log("rotation $var_rot $src : $dest");
 
 		include_spip('inc/filtres');
+		include_spip('public/parametrer'); // charger les fichiers fonctions #bugfix spip 2.1.0
 		$res = filtrer('image_rotation',$src,$var_rot);
 		$res = filtrer('image_format',$res,$row['extension']);
 
