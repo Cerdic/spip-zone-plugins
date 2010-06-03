@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'explication_selecteur' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront la bo&icirc;te. (Expression CSS ou &eacute;tendue jQuery)',
 	'explication_selecteur_galerie' => 'Indiquez la cible des &eacute;l&eacute;ments &agrave; regrouper en galerie. (Expression CSS ou &eacute;tendue jQuery)',
+	'explication_splash_url' => 'Indiquez l\'url du m&eacute;dia &agrave; afficher automatiquement dans une bo&icirc;te lors de la premi&egrave;re visite sur le site public.',
 	'explication_traiter_toutes_images' => 'Ins&eacute;rer une bo&icirc;te sur toutes les images ?',
 
 	'label_apparence' => 'Apparence',
@@ -25,6 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_maxwidth' => 'Largeur Maxi (% ou px)',
 	'label_maxheight' => 'Hauteur Maxi (% ou px)',
 	'label_slideshow_speed' => 'Temps d\'exposition des photos du diaporama (ms)',
+	'label_splash' => 'Splash Bo&icirc;te',
+	'label_splash_url' => 'URL à afficher',
 
 	'boxstr_slideshowStart' => 'Diaporama',
 	'boxstr_slideshowStop' => 'Arr&ecirc;ter',

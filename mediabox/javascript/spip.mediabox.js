@@ -14,7 +14,8 @@ var mediaboxInit = function() {
 		current:box_settings.str_cur,
 		previous:box_settings.str_prev,
 		next:box_settings.str_next,
-		close:box_settings.str_close
+		close:box_settings.str_close,
+		splash_url:box_settings.splash_url
 	};
 
 	// passer le portfolio de la dist en mode galerie

@@ -64,6 +64,17 @@
 			</li>
 		</ul></fieldset>
 		</li>
+		
+		<li class="fieldset"><fieldset><legend><:mediabox:label_splash:></legend>
+		<ul>
+			<li class="editer_splash_url[ (#ENV**{erreurs}|table_valeur{splash_url}|oui)erreur]">
+				<label for="splash_url"><:mediabox:label_splash_url:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{splash_url})</span>]
+				<p class="explication"><:mediabox:explication_splash_url:></p>
+				<input type="text" name="splash_url" class="text" id="splash_url" size="60" value="#ENV*{splash_url}" />
+			</li>
+		</ul></fieldset>
+		</li>
 	</ul>
 
 	<p class="boutons">

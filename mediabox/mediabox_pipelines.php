@@ -9,6 +9,7 @@ function mediabox_config($public=null){
 		'traiter_toutes_images' => 'oui',
 		'selecteur_galerie' => '#documents_portfolio a[type=\'image/jpeg\'],#documents_portfolio a[type=\'image/png\'],#documents_portfolio a[type=\'image/gif\']',
 		'selecteur_commun' => '.mediabox',
+		'splash_url' => '',
 		'skin' => 'black-striped',
 		'transition' => 'elastic',
 		'speed'=>'200',
@@ -23,6 +24,7 @@ function mediabox_config($public=null){
 		$config = array_merge($config,array(
 		'selecteur_galerie' => '#portfolios a[type^=\'image/\']',
 		'selecteur_commun' => '.mediabox, .iconifier a[href$=jpg],.iconifier a[href$=png],.iconifier a[href$=gif]',
+		'splash_url' => '',
 		'skin' => 'white-shadow',
 		'maxWidth'=>'90%',
 		'maxHeight'=>'95%',
@@ -77,9 +79,13 @@ var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'
 .'",str_prev:"'._T('mediabox:boxstr_previous')
 .'",str_next:"'._T('mediabox:boxstr_next')
 .'",str_close:"'._T('mediabox:boxstr_close')
+.'",splash_url:"'.$config['splash_url']
 .'"};
 if (window.jQuery) (function($){ if(typeof onAjaxLoad == "function") onAjaxLoad(mediaboxInit); $(mediaboxInit); })(jQuery);
 /* ]]> */</script>'."\n";
+	
+	if ($config['splash_url'])
+		$flux .='<script src="'.mediabox_timestamp(find_in_path('javascript/splash.mediabox.js')).'" type="text/javascript"></script>';
 
 	return $flux;
 }
