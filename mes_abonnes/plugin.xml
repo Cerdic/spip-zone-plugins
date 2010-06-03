@@ -5,14 +5,14 @@
 	<version>0.1</version>
 	<etat>test</etat>
 	<description>module d'abonnement pour logiciels de publipostages de type MaxBulker Mailer</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Mes-abonnes</lien>
 	<prefix>mesabonnes</prefix>
 	<icon>images/logo_mesabonnes_48.png</icon>
 	<install>base/mesabonnes_upgrade.php</install>
-	<necessite id="SPIP" version="[2.1;]" />
-	<categorie>communication</categorie>
+	<necessite id="SPIP" version="[2.1;]" />	
 	<pipeline>
 		<nom>ajouter_boutons</nom>		
 		<inclure>mesabonnes_fonctions.php</inclure>
 	</pipeline>
+	<categorie>communication</categorie>
 </plugin>
