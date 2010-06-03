@@ -106,7 +106,7 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 	}
 
 	if(_request("iframe") == 'iframe') {
-		$redirect = parametre_url(urldecode($iframe_redirect),"show_docs",join(',',$documents_actifs),'&')."&iframe=iframe";
+		$redirect = parametre_url(urldecode($iframe_redirect),"show_docs",join(',',$documents_actifs),'&')."&iframe=iframe&var_noajax=1";
 	}
 	return $redirect;
 }

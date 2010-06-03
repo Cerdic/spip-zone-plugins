@@ -63,7 +63,7 @@ function async_upload_article_edit(res,s,jForm){
 			} else {
 	      //add a class to new documents
 	      res.
-	      find(">div[class]")
+	      children("div[class]")
 	      .addClass("documents_added")
 	      .css("display","none");
 	      if (jForm.find("input[name='arg']").val().search("/0/image")!=-1){
@@ -98,7 +98,7 @@ function async_upload_article_edit(res,s,jForm){
 function async_upload_icon(res,s,jForm) {
   res = iframeHandler(res,jForm);
   if(!res) return true;
-  res.find(">div").each(function(){
+  res.children("div").each(function(){
     var cont = jQuery("#"+this.id);
     verifForm(cont.html(jQuery(this).html()));
     jQuery("form.form_upload_icon",cont).async_upload(async_upload_icon);
@@ -114,9 +114,9 @@ function async_upload_portfolio_documents(res,s,jForm){
 
   // on dirait que ca passe mieux sur Safari avec un setTimeout cf #1408
   setTimeout(function() {
-  res.find(">div").each(function(){
+  res.children("div").each(function(){
     // this.id = documenter--id_article ou documenter-id_article
-    var cont = jQuery("#"+this.id);
+    var cont = jQuery(this.id?"#"+this.id:[]);
     var self = jQuery(this);
     if(!cont.size()) {
       cont = jQuery(this.id.search(/--/)!=-1 ? "#portfolio":"#documents")
@@ -176,12 +176,12 @@ jQuery.fn.ddUpload = function(success) {
           };            
           //if not present add the iframe input
           if(!self.find("input[name=iframe]").length)
-          self.append("<input type='hidden' name='iframe' value='iframe'>");
+            self.append("<input type='hidden' name='iframe' value='iframe'>");
           //reset the redirect input
           self
           .find("input[name='redirect']")
           .val("");
-          var submit = self.find(":submit");
+          var submit = self.find(":submit:eq(0)");
   				var url = self.attr("action")+"&"+self.formSerialize()+"&"+submit.attr("name")+"="+submit.val();
   				xhr.open("POST", url);  
           xhr.setRequestHeader("If-Modified-Since", "Mon, 26 Jul 1997 05:00:00 GMT");
@@ -220,7 +220,7 @@ jQuery.fn.ddUpload = function(success) {
   }).
   bind("dragover",function(e){
     //cancel default action 
-    return $.browser.safari || $.browser.msie || $.browser.opera;
+    return !!($.browser.safari || $.browser.msie || $.browser.opera);
   }).
   bind("dragleave",function(){
     $(this).removeClass("ddUploadover");
