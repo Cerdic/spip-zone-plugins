@@ -239,8 +239,10 @@ jQuery.fn.ddUpload = function(success) {
     if($(e.target).is(".ddArea") || $(e.target).closest(".ddArea").length) { 
       if(!!($.browser.safari || $.browser.msie || $.browser.opera)==false) {
         e.originalEvent.dataTransfer.dropEffect = undefined;
+        return false;
+      } else {
+        return true;
       }
-      return true;
     } else {
       e.originalEvent.dataTransfer.dropEffect = 'none';
     }
