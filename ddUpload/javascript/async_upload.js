@@ -143,11 +143,11 @@ jQuery.fn.ddUpload = function(success) {
   var drop = function(e) {
   	try {
   		self.removeClass("ddUploadover");
+  		ddArea.hide();
   		var files = e.originalEvent.dataTransfer.files;
   		if(!files) {
           return true;
   		}
-  		
   		
   		$.each(files,function(i,file){
   			var upload = function(data) {
@@ -163,15 +163,19 @@ jQuery.fn.ddUpload = function(success) {
   					 progress_text.text(Math.round(percentage*100)+"%"); 
   					}  
   				};  
-  				 
-  				xhr.upload.onload = function(e){
+  				
+          var onload = function(e){
   					progress_bar.width(width);
   					progress_text.text("100%");
   				};
+           
+  				xhr.upload.onload = onload;
           xhr.onreadystatechange = function (aEvt) {  
            if (xhr.readyState == 4) {  
-              if(xhr.status == 200)  
-               success(xhr.responseText,xhr.status,self);  
+              if(xhr.status == 200) { 
+               onload();
+               success(xhr.responseText,xhr.status,self);
+              }  
            }  
           };            
           //if not present add the iframe input
@@ -212,22 +216,39 @@ jQuery.fn.ddUpload = function(success) {
   	}
   
   }
+  //build d&d area
+  var ddArea = $("<div class='ddArea'><input type='file' style='width:100%;height:100%;opacity:0' /></div>").css({height:"50px",position:'relative',backgroundColor:"#A7DFB4"});
+  $("<div>Drag &amp; drop files here</div>").css({position:'absolute',top:'18px',left:0,right:0,fontSize:'14px',textAlign:'center'}).prependTo(ddArea);
+  ddArea.hide().insertBefore(self.find(":file"));
   //binds dd events for ff and chrome
-  this.
-  bind("dragenter",function(){
-    $(this).addClass("ddUploadover");
+  
+  $(window).
+  bind("dragenter",function(e){
+    self.addClass("ddUploadover");
+    ddArea.show();
+    return false;
+  }).
+  bind("dragleave",function(e){
+    if(!e.screenX && !e.screenY) {
+      self.removeClass("ddUploadover");
+      ddArea.hide();
+    };
     return false;
   }).
   bind("dragover",function(e){
-    //cancel default action 
-    return !!($.browser.safari || $.browser.msie || $.browser.opera);
-  }).
-  bind("dragleave",function(){
-    $(this).removeClass("ddUploadover");
-  }).
+    if($(e.target).is(".ddArea") || $(e.target).closest(".ddArea").length) { 
+      if(!!($.browser.safari || $.browser.msie || $.browser.opera)==false) {
+        e.originalEvent.dataTransfer.dropEffect = undefined;
+      return true;
+    } else {
+      e.originalEvent.dataTransfer.dropEffect = 'none';
+    }
+    return false; //to allow dropEffect
+  });
+  ddArea.
   bind("drop",drop).
   //binds dd events for safari
   find(":file").change(function(e){
     drop({originalEvent:{dataTransfer:{files:e.target.files}}});
-  });  
+  }); 
 }
