@@ -22,9 +22,9 @@ function action_stockageS3_envoyer_dist($arg=null) {
 
 		include_spip('inc/s3');
 
-
 		include_spip('inc/documents');
 		include_spip('inc/distant');
+		include_spip('inc/modifier');
 
 		// Size image, for future thumbnails. Now set "original"
 		$size_image= "original";
@@ -36,15 +36,17 @@ function action_stockageS3_envoyer_dist($arg=null) {
 		$src =  get_spip_doc($t['fichier']);
 		$dest =  $PATH . $size_image. "-id" .$id_document. "-" .time(). "." .$path_info['extension'];
 
+		// envoi du fichier
 		if ($s3_url = stockage_sendfile(get_spip_doc($t['fichier']), $dest)) {
 			spip_log("Stockage document $id_document ".$t['fichier']." => ".$s3_url, 'stockage');
-			$url_distante = $s3_url;
-			include_spip('action/editer_document');
 
-			rename (get_spip_doc($t['fichier']), _DIR_RACINE.fichier_copie_locale($url_distante));
-			include_spip('inc/modifier');
+			// ici on pourrait supprimer le fichier source, si c'est par exemple
+			// un mp3 ou film, on n'a pas besoin d'en conserver la copie locale
+			// pour une photo en revanche ca peut servir...
+			rename (get_spip_doc($t['fichier']), _DIR_RACINE.fichier_copie_locale($s3_url));
+
 			modifier_contenu('document', $id_document, $options=null, array(
-				'fichier' => $url_distante,
+				'fichier' => $s3_url,
 				'distant' => 'oui'
 			));
 		} else

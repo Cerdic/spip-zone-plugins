@@ -8,7 +8,7 @@
 
 [(#REM) Reponse une fois le fichier envoye ]
 <BOUCLE_envoye(DOCUMENTS){id_document=#ENV{envoye}}{tous}>
-<strong>Document envoy&#233; :</strong> <a href=#URL_DOCUMENT">#FICHIER</a>
+<strong>Document envoy&#233; :</strong> <a href="#URL_DOCUMENT">#FICHIER</a>
 </BOUCLE_envoye>
 
 
@@ -20,7 +20,7 @@
 
 <li>[(#FICHIER|joli_repertoire)]
 [(#FICHIER|file_exists|?{
-<a href="[(#URL_ACTION_AUTEUR{stockageS3_envoyer,#ID_DOCUMENT,[(#SELF|parametre_url{envoye,#ID_DOCUMENT})]})]">envoyer sur S3</a>
+<a href="[(#URL_ACTION_AUTEUR{stockageS3_envoyer,#ID_DOCUMENT,[(#SELF|parametre_url{envoye,#ID_DOCUMENT})]})]">envoyer sur [(#CONFIG{stockage/provider}|s3_provider)]</a>
 ,
  (Fichier manquant)
 })]
