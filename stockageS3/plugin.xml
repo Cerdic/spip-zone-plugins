@@ -21,6 +21,11 @@
 	</pipeline>
 	<fonctions>inc/s3.php</fonctions>
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<necessite id="gestdoc" version="[1.2.0;]" />
+	<!-- necessite id="gestdoc" version="[1.2.0;]" / -->
 	<categorie>maintenance</categorie>
+
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>stockageS3_pipeline.php</inclure>
+	</pipeline>
 </plugin>

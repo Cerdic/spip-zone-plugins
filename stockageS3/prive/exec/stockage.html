@@ -1,0 +1,38 @@
+<!-- titre=Stockage S3 -->
+<!-- icone=#CHEMIN{stockageS3.png} -->
+
+#CACHE{0}
+
+<h1 class="grostitre">Stockage S3</h1>
+<div>
+
+[(#REM) Reponse une fois le fichier envoye ]
+<BOUCLE_envoye(DOCUMENTS){id_document=#ENV{envoye}}{tous}>
+<strong>Document envoy&#233; :</strong> <a href=#URL_DOCUMENT">#FICHIER</a>
+</BOUCLE_envoye>
+
+
+<B_gros>
+[<p class="pagination">(#PAGINATION)</p>]
+
+<ul>
+<BOUCLE_gros(DOCUMENTS){distant=non}{pagination 50}{tous}>
+
+<li>[(#FICHIER|joli_repertoire)]
+[(#FICHIER|file_exists|?{
+<a href="[(#URL_ACTION_AUTEUR{stockageS3_envoyer,#ID_DOCUMENT,[(#SELF|parametre_url{envoye,#ID_DOCUMENT})]})]">envoyer sur S3</a>
+,
+ (Fichier manquant)
+})]
+
+</li>
+
+</BOUCLE_gros>
+</ul>
+</B_gros>
+
+Il n'y a pas de document &#224; envoyer sur S3.
+
+<//B_gros>
+
+</div>

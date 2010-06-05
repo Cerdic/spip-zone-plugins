@@ -42,7 +42,8 @@ function action_stockageS3_envoyer_dist($arg=null) {
 			include_spip('action/editer_document');
 
 			rename (get_spip_doc($t['fichier']), _DIR_RACINE.fichier_copie_locale($url_distante));
-			document_set($id_document, array(
+			include_spip('inc/modifier');
+			modifier_contenu('document', $id_document, $options=null, array(
 				'fichier' => $url_distante,
 				'distant' => 'oui'
 			));
