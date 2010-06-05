@@ -1,7 +1,6 @@
 [(#REM) titre=Gestion Documents Stockage]
 [(#REM) autoriser=webmestre ]
 
-
 <!-- descriptif=
 Cette page de configuration est r&#233;serv&#233;e au webmestre du site
 -->
@@ -19,10 +18,13 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site
 <p><:gestdoc:envoyer_explication:>:</p>
 
 <select name="provider">
-	<option value="s3">Amazon S3</option>
-	<option value="gs"[
+	<option value="amazon">Amazon S3</option>
+	<option value="google"[
 		(#ENV{provider}|=={gs}|?{selected="selected"})
 		]>Google Storage</option>
+<!--	<option value="archiveorg"[
+		(#ENV{provider}|=={archiveorg}|?{selected="selected"})
+		]>archive.org</option> -->
 </select>
 
 
@@ -64,7 +66,7 @@ Pour Amazon S3, choisir la zone g&#233;ographique du bucket&nbsp;:
 <label><:gestdoc:url_s3:>:
 <br />
 <select name="s3baseurl">
-	<option value="">http://commondatastorage.googleapis.com/[(#ENV{s3bucket}|sinon{$bucket$})][/(#ENV{s3path})]/</option>
+	<option value="">[http://(#ENV{provider}|s3_endpoint)/][(#ENV{s3bucket}|sinon{$bucket$})][/(#ENV{s3path})]/</option>
 [
 	<option value="http://(#ENV{s3bucket})/"[
 		(#ENV{s3baseurl}|=={http://[(#ENV{s3bucket})]/}|?{selected="selected"})
