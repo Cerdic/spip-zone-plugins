@@ -3,7 +3,7 @@
     <param name="movie" value="http://apps.cooliris.com/embed/cooliris.swf" />
     <param name="allowFullScreen" value="true" />
     <param name="allowScriptAccess" value="always" />
-    <param name="flashvars" value="feed=[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]
+    <param name="flashvars" value="feed=[(#ENV{feed}|?{api://#ENV{feed},[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]})]
 [&intro=(#CONFIG{cooliris/intro})]
 [&style=(#CONFIG{cooliris/style})]
 [&numrows=(#CONFIG{cooliris/numrows})]
@@ -26,7 +26,7 @@
 	<param name="wmode" value="transparent" />
     <embed type="application/x-shockwave-flash"
       src="http://apps.cooliris.com/embed/cooliris.swf"
-      flashvars="feed=[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]
+      flashvars="feed=[(#ENV{feed}|?{api://#ENV{feed},[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]})]
 [&intro=(#CONFIG{cooliris/intro})]
 [&style=(#CONFIG{cooliris/style})]
 [&numrows=(#CONFIG{cooliris/numrows})]

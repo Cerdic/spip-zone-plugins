@@ -6,7 +6,7 @@
           <item>
 		  <title>[(#TITRE|texte_backend)]</title>
                <media:description>[(#DESCRIPTION|texte_backend)]</media:description>
-               <link>#URL_DOCUMENT</link>
+               [(#CONFIG{cooliris/link}|=={on}|?{<link>#URL_DOCUMENT</link>,<link></link>})]
                <media:thumbnail url="[(#LOGO_DOCUMENT||extraire_attribut{src}|url_absolue)]"/>
                <media:content url="[(#URL_DOCUMENT|url_absolue)]"/>
           </item>
