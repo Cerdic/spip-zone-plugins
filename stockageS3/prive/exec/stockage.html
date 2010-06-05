@@ -7,8 +7,29 @@
 <div>
 
 [(#REM) Reponse une fois le fichier envoye ]
-<BOUCLE_envoye(DOCUMENTS){id_document=#ENV{envoye}}{tous}>
-<strong>Document envoy&#233; :</strong> <a href="#URL_DOCUMENT">#FICHIER</a>
+<BOUCLE_envoye(DOCUMENTS){id_document}{tous}>
+[(#DISTANT|=={oui}|?{
+	<strong>Document envoy&#233; :</strong> <a href="#URL_DOCUMENT">#FICHIER</a>
+
+	[(#FICHIER|copie_locale{test}|?{
+		<a href="[(#URL_ACTION_AUTEUR{stockageS3_supprimer_copie_locale,#ID_DOCUMENT,[(#SELF|parametre_url{id_document,#ID_DOCUMENT}|parametre_url{var_hasard,#EVAL{uniqid('x')}})]})]">supprimer la copie locale</a>
+	,
+		ce document n'a pas de copie locale
+	})]
+,
+
+<b>Document #ID_DOCUMENT [(#EXTENSION)]</b> [(#DATE|date_relative)]
+[(#TITRE|sinon{[(#FICHIER|basename)]})] [ - (#TAILLE|taille_en_octets)]
+
+
+[(#FICHIER|file_exists|?{
+<a href="[(#URL_ACTION_AUTEUR{stockageS3_envoyer,#ID_DOCUMENT,[(#SELF|parametre_url{id_document,#ID_DOCUMENT})]})]">envoyer sur [(#CONFIG{stockage/provider}|s3_provider)]</a>
+,
+ <img src="[(#CHEMIN{prive/images/warning-24.gif})]" alt="!" title="Fichier manquant" />
+})]
+
+
+})]
 </BOUCLE_envoye>
 
 
@@ -18,13 +39,8 @@
 <ul>
 <BOUCLE_gros(DOCUMENTS){distant=non}{pagination 50}{tous}>
 
-<li>[(#FICHIER|joli_repertoire)]
-[(#FICHIER|file_exists|?{
-<a href="[(#URL_ACTION_AUTEUR{stockageS3_envoyer,#ID_DOCUMENT,[(#SELF|parametre_url{envoye,#ID_DOCUMENT})]})]">envoyer sur [(#CONFIG{stockage/provider}|s3_provider)]</a>
-,
- (Fichier manquant)
-})]
-
+<li>
+<b><a href="[(#SELF|parametre_url{id_document,#ID_DOCUMENT})]">Document #ID_DOCUMENT</a> [(#EXTENSION)]</b> [(#DATE|date_relative)]  [(#TITRE|sinon{[(#FICHIER|basename)]})] [ - (#TAILLE|taille_en_octets)]
 </li>
 
 </BOUCLE_gros>
