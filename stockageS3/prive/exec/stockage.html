@@ -37,7 +37,7 @@
 [<p class="pagination">(#PAGINATION)</p>]
 
 <ul>
-<BOUCLE_gros(DOCUMENTS){distant=non}{pagination 50}{tous}>
+<BOUCLE_gros(DOCUMENTS){distant=non}{pagination 50}{tous}{! par taille}>
 
 <li>
 <b><a href="[(#SELF|parametre_url{id_document,#ID_DOCUMENT})]">Document #ID_DOCUMENT</a> [(#EXTENSION)]</b> [(#DATE|date_relative)]  [(#TITRE|sinon{[(#FICHIER|basename)]})] [ - (#TAILLE|taille_en_octets)]
