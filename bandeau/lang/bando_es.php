@@ -8,15 +8,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'icone_accueil' => 'Inicio',
-	'icone_administration' => 'Administraci&oacute;n',
+	'icone_accueil' => 'Mis tareas',
+	'icone_administration' => 'Administraci&oacute;n', # MODIF
 	'icone_configuration' => 'Configuraci&oacute;n',
 	'icone_edition' => 'Edici&oacute;n',
 	'icone_langage' => 'Mi lengua',
 	'icone_mes_infos' => 'Mis informaciones',
 	'icone_preferences' => 'Mis preferencias',
 	'icone_reactions' => 'Actividad',
-	'icone_squelette' => 'Esqueletos',
+	'icone_squelette' => 'Squelettes', # NEW
 	'icone_suivi_edito' => 'Publicaci&oacute;n',
 	'icone_suivi_publication' => 'Seguir la publicaci&oacute;n',
 	'icone_visiter_site' => 'Ver el sitio p&uacute;blico',

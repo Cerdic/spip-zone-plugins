@@ -8,15 +8,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'icone_accueil' => 'Home',
-	'icone_administration' => 'Administration',
+	'icone_accueil' => 'Launch pad',
+	'icone_administration' => 'Administration', # MODIF
 	'icone_configuration' => 'Configuration',
 	'icone_edition' => 'Site edit',
 	'icone_langage' => 'My language',
 	'icone_mes_infos' => 'My informations',
 	'icone_preferences' => 'My preferences',
-	'icone_reactions' => 'Feedback',
-	'icone_squelette' => 'Skeletons',
+	'icone_reactions' => 'Activity',
+	'icone_squelette' => 'Squelettes', # NEW
 	'icone_suivi_edito' => 'Publication',
 	'icone_suivi_publication' => 'To follow the publication',
 	'icone_visiter_site' => 'Visit',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte_et_icones_page' => 'Page display',
 
 	// T
-	'titre_config_langage' => 'Configure your language',
+	'titre_config_langage' => 'Configurer la langue',
 	'titre_configurer_preferences' => 'Configure your preferences',
 	'titre_identite_site' => 'Site\'s identity'
 );

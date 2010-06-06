@@ -9,13 +9,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_accueil' => 'Inici',
-	'icone_administration' => 'Administraci&oacute;',
+	'icone_administration' => 'Administraci&oacute;', # MODIF
 	'icone_configuration' => 'Configuraci&oacute;',
 	'icone_edition' => 'Edici&oacute;',
 	'icone_langage' => 'La meva llengua ',
 	'icone_mes_infos' => 'Les meves informacions',
 	'icone_preferences' => 'Les meves prefer&egrave;ncies',
 	'icone_reactions' => 'Activitat',
+	'icone_squelette' => 'Squelettes', # NEW
 	'icone_suivi_edito' => 'Publicaci&oacute;',
 	'icone_suivi_publication' => 'Seguiment de la publicaci&oacute;',
 	'icone_visiter_site' => 'Veure el lloc p&uacute;blic',
