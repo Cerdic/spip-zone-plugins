@@ -212,9 +212,11 @@ function noizetier_lister_pages(){
 			}
 		}
 		
-		// Dans le cas de Zpip, il faut supprimer la page 'page.html'
-		if (defined('_DIR_PLUGIN_Z'))
+		// Dans le cas de Zpip, il faut supprimer la page 'page.html' et la page 'z_apl.html'
+		if (defined('_DIR_PLUGIN_Z')) {
 			unset($liste_pages['page']);
+			unset($liste_pages['z_apl']);
+		}
 		
 		// supprimer de la liste les pages necissant un plugin qui n'est pas actif
 		foreach ($liste_pages as $page => $infos_page)
