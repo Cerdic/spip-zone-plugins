@@ -20,11 +20,11 @@
 				maj_tables('spip_rubriques'); 
 				ecrire_meta('agenda_base_version',$current_version=$version_base,'non');
 			}
-			if ($current_version<0.11){
+			if (version_compare($current_version,"0.11","<")){
 				sql_alter("TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`");
 				ecrire_meta('agenda_base_version',$current_version=0.11,'non');
 			}
-			if ($current_version<0.12){
+			if (version_compare($current_version,"0.12","<")){
 				sql_alter("TABLE spip_evenements ADD `id_article` bigint(21) DEFAULT '0' NOT NULL AFTER `id_evenement`");
 				sql_alter("TABLE spip_evenements ADD INDEX ( `id_article` )");
 				$res = sql_select("*", "spip_evenements_articles");
@@ -36,13 +36,13 @@
 				sql_drop_table("spip_evenements_articles");
 				ecrire_meta('agenda_base_version',$current_version=0.12,'non');
 			}
-			if ($current_version<0.13){
+			if (version_compare($current_version,"0.13","<")){
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
 				ecrire_meta('agenda_base_version',$current_version=0.13,'non');
 			}
-			if ($current_version<0.18){
+			if (version_compare($current_version,"0.18","<")){
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
@@ -50,19 +50,19 @@
 				sql_alter("TABLE spip_groupes_mots DROP evenements");
 				ecrire_meta('agenda_base_version',$current_version=0.18,'non');
 			}
-			if ($current_version<0.20){
+			if (version_compare($current_version,"0.20","<")){
 				include_spip('base/abstract_sql');
 				sql_alter("TABLE spip_rubriques ADD agenda tinyint(1) DEFAULT 0 NOT NULL");
 				ecrire_meta('agenda_base_version',$current_version=0.20,'non');
 			}
-			if ($current_version<0.21){
+			if (version_compare($current_version,"0.21","<")){
 				include_spip('base/abstract_sql');
 				sql_alter("TABLE spip_evenements ADD adresse text NOT NULL");
 				sql_alter("TABLE spip_evenements ADD inscription text NOT NULL");
 				sql_alter("TABLE spip_evenements ADD places text NOT NULL");
 				ecrire_meta('agenda_base_version',$current_version=0.21,'non');
 			}
-			if ($current_version<0.22){
+			if (version_compare($current_version,"0.22","<")){
 				include_spip('base/abstract_sql');
 				include_spip('base/create');
 				include_spip('base/auxiliaires');
@@ -85,7 +85,7 @@
 		$version_base = $GLOBALS['agenda_base_version'];
 		switch ($action){
 			case 'test':
-				return (isset($GLOBALS['meta']['agenda_base_version']) AND ($GLOBALS['meta']['agenda_base_version']>=$version_base));
+				return (isset($GLOBALS['meta']['agenda_base_version']) AND (version_compare($GLOBALS['meta']['agenda_base_version'],$version_base,">=")));
 				break;
 			case 'install':
 				agenda_verifier_base();
