@@ -9,14 +9,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_accueil' => 'Home',
-	'icone_administration' => 'Tools',
+	'icone_administration' => 'Administration',
 	'icone_configuration' => 'Configuration',
 	'icone_edition' => 'Site edit',
 	'icone_langage' => 'My language',
 	'icone_mes_infos' => 'My informations',
 	'icone_preferences' => 'My preferences',
 	'icone_reactions' => 'Feedback',
-	'icone_squelette' => 'Skeleton',
+	'icone_squelette' => 'Skeletons',
 	'icone_suivi_edito' => 'Publication',
 	'icone_suivi_publication' => 'To follow the publication',
 	'icone_visiter_site' => 'Visit',
