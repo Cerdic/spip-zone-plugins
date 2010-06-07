@@ -71,12 +71,11 @@ function inc_getid3_recuperer_infos($id_document){
 			supprimer_fichier($fichier);
 		}
 	}
-
 	sql_updateq('spip_documents',
 		array(
 			'titre'=>$document['titre'],
 			'descriptif'=>$document['descriptif'],
-			'duree'=> $id3['duree'],
+			'duree'=> $id3['duree_secondes'],
 			'bitrate' => $id3['bitrate'],
 			'bitrate_mode'=>$id3['bitrate_mode'],
 			'audiosamplerate'=>$id3['audiosamplerate'],
