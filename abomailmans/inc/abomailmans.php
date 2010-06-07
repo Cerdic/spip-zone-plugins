@@ -42,7 +42,7 @@ function abomailman_traiter_liste($id_liste,$abonnement){
 		}
 		$sujet=isset($sujet)?$sujet:$liste_email;
 		$quoifait=!empty($abonnement)?_T("abomailmans:veut_s_abonner"):_T("abomailmans:veut_se_desabonner");
-		$body="$nom - $email $quoifait"."\n ".$titre."(".$liste_data['email'].") \n "._T("abomailmans:envoi_vers")." $liste_email";
+		$body="$quoifait"."\n ".$titre."(".$liste_data['email'].") \n "._T("abomailmans:envoi_vers")." $liste_email";
 
 		
 		return array($titre,$proprio_email,$liste_email, $sujet, $body,$headers);
