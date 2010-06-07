@@ -34,10 +34,9 @@ function mediabox_config($public=null){
 	}
 	
 	// charger la config du theme uniquement dans le public
-	if (!test_espace_prive()) {
-		include_spip("colorbox/".$config['skin']."/mediabox_config_theme");
-		if ($config_theme = mediabox_config_theme())
-			$config = array_merge($config, $config_theme);
+	if (!test_espace_prive() AND include_spip("colorbox/".$config['skin']."/mediabox_config_theme")) {
+		$config_theme = mediabox_config_theme();
+		$config = array_merge($config, $config_theme);
 	}
 	
 	return $config;	
