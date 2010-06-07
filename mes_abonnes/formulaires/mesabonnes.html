@@ -1,7 +1,8 @@
 <div class="formulaire_spip formulaire_mesabonnes">
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-[(#EDITABLE|oui)<form action="#ENV{action}" method="post"><div>
+[(#EDITABLE|oui)
+<form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 	  #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_nom}}
@@ -21,9 +22,9 @@
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_subscribe}}
 		<li class="editer_mesabos_sub">		
       	[<span class='erreur_message'>(#GET{erreurs})</span>]				
-			<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="text" />
+			<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="radio" />
 			<label for="mesabos_subscribe"><:mesabonnes:subscribe:></label>
-			<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="text" />
+			<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="radio" />
 			<label for="mesabos_subscribe"><:mesabonnes:unsubscribe:></label>
 		</li>	
 	

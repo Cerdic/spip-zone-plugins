@@ -10,6 +10,7 @@
       "nom"             => "text DEFAULT '' NOT NULL",         
 	  	"email"           => "text DEFAULT '' NOT NULL",
 	  	"lang"            => "tinytext DEFAULT '' NOT NULL",
+	  	"email"           => "text DEFAULT '' NOT NULL",
 	  	"date_modif"	    => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 	  	"liste"	          => "text DEFAULT '' NOT NULL",              // pas utilise pour l'instant, gestion multi-liste ?
 	  	"statut"	        => "varchar(6)  DEFAULT '0' NOT NULL");

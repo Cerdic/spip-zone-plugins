@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
     // B
-    'bye' => 'Bye !',
+    'bye' => '@email@ has been removed. Bye !',
     
     // E
     'export_abonnes' => 'Export subcribers :',
@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // M
     'mes_abonnes' => 'Subscribers',
-    'merci' => 'Thank you !',
+    'merci' => 'The address @email@ has been added. Thank you ! ',
     
     // S
     'subscribe' => 'subscribe',

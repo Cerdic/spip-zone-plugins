@@ -5,6 +5,10 @@
 // TODO possible
 // avoir une option de confirmation par email
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/actions');
+include_spip('inc/editer');
+
 // Charger
 function formulaires_mesabonnes_charger_dist(){
 	$valeurs = array();  // fixme multilingue ?
@@ -56,7 +60,7 @@ function formulaires_mesabonnes_traiter_dist(){
                                   'date_modif'=>"$date_motif",
                                   'liste'=>"$liste",
                                   'statut'=>"$statut"));
-      $message = _T('mesabonnes:merci');
+      $message = _T('mesabonnes:merci',array('email'=>"$email"));
   }
 
   // deabonnement
@@ -64,7 +68,7 @@ function formulaires_mesabonnes_traiter_dist(){
      // pour l'instant on efface vraiment de la base 
      // alternative: faire un update et jouer sur le statut (poubelle) 
      sql_delete('spip_mesabonnes', "email = '$email'");
-     $message = _T('mesabonnes:bye');
+     $message = _T('mesabonnes:bye',array('email'=>"$email"));
   }  
 
 	
