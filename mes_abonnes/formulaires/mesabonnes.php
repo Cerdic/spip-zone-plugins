@@ -10,9 +10,11 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 // Charger
-function formulaires_mesabonnes_charger_dist(){
-	$valeurs = array();  // fixme multilingue ?
-	
+function formulaires_mesabonnes_charger_dist($type_abonnement="subscribe"){
+	$valeurs = array(  
+	    "mesabos_nom" => '',
+      "type_abonnement" => $type_abonnement 
+	);
 	return $valeurs;
 }
 
@@ -26,10 +28,14 @@ function formulaires_mesabonnes_verifier_dist(){
         else if (!email_valide(_request('mesabos_email')))
 		    $erreurs['mesabos_email'] = _T('form_prop_indiquer_email');
   
-		    
+	if (_request('mesabos_nom')) 	 
+	        set_request("mesabos_nom", _request('mesabos_nom'));
+        
 	// opt-in
 	 if (!_request('mesabos_subscribe')) 
 	       $erreurs['mesabos_subscribe'] = _T('info_obligatoire_02');
+	    else  
+        set_request("type_abonnement", _request('mesabos_subscribe'));
 	
 	if (count($erreurs))
 		$erreurs['message_erreur'] = '';

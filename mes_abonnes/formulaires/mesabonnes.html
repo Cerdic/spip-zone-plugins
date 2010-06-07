@@ -22,9 +22,9 @@
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_subscribe}}
 		<li class="editer_mesabos_sub">		
       	[<span class='erreur_message'>(#GET{erreurs})</span>]				
-			<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="radio" />
+			<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="radio"[(#ENV{type_abonnement}|=={subscribe}|oui) checked="checked"]/>
 			<label for="mesabos_subscribe"><:mesabonnes:subscribe:></label>
-			<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="radio" />
+			<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="radio"[(#ENV{type_abonnement}|=={unsubscribe}|oui) checked="checked"]/>
 			<label for="mesabos_subscribe"><:mesabonnes:unsubscribe:></label>
 		</li>	
 	
