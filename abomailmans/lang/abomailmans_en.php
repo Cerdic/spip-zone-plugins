@@ -27,8 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emailliste_abomailman'			=> 'The email address of the list',
 	'emailliste_abosympa'           => 'The email address of the Sympa admin',
 	'email'							=> 'Email address',
+	'emailliste_subscribe' => 'Subscribe',
+	'emailliste_unsubscribe' => 'Unsubscribe',
 	'email_abonnement'				=> 'Your email address',
 	'email_envoye'					=> 'The email has been sent to the list : @liste@.',
+	'envoi_vers'=> 'send to',
 	'email_oublie'					=> 'You forgot your email address',
 	'envoi_apercu'					=> 'Previsualization',
 	'envoi_confirmer'				=> 'Confirm and send',
@@ -37,6 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_mailmans'				=> 'Select the template and his content',
 	'erreur_email_liste_oublie'		=> 'The email address of the list is mandatory',
 	'explication_email_sympa'		=> 'If this field is filled in, the list is considered as a "Sympa" list, if not, as a "Mailman" list.',
+	'explication_email_subscribe'		=> 'Email for subscribe, something like <code>suffix+subscribe@exemple.org</code>',
+	'explication_email_unsubscribe'		=> 'Email for unsubscribe',
 
 // I
 	'icone_ajouter_liste'			=> 'Add a new list',
@@ -91,6 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toute_liste'					=> 'All mailing lists',
 
 // V
+	'veut_s_abonner'=>'want to subscribe',
+	'veut_se_desabonner'=>'want to unsubscribe',
 	'verifier_formulaire'			=> 'Please verify the filling of the form.',
 	'votre_email'					=> 'Your email',
 

@@ -28,7 +28,7 @@ function formulaires_abomailman_creation_liste_charger_dist($id_abomailman = "")
 		unset($valeurs['lang']);
 	}else{
 		$valeurs['editable'] = false;
-		$valeurs['message_erreur'] = _T('abomailman:creation_droits_insuffisants');
+		$valeurs['message_erreur'] = _T('abomailmans:creation_droits_insuffisants');
 	}
 	return $valeurs;
 }
@@ -43,6 +43,8 @@ function formulaires_abomailman_creation_liste_verifier_dist($id_abomailman = ""
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$email = _request('email');
+	$email_sympa = _request('email_subscribe');
+	$email_sympa = _request('email_unsubscribe');
 	$email_sympa = _request('email_sympa');
 	$desactive = _request('desactive');
 	$lang = _request('lang');
@@ -83,6 +85,8 @@ function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman = "")
 	$datas['titre'] = _request('titre');
 	$datas['descriptif'] = _request('descriptif');
 	$datas['email'] = _request('email');
+	$datas['email_subscribe'] = _request('email_subscribe');
+	$datas['email_unsubscribe'] = _request('email_unsubscribe');
 	$datas['email_sympa'] = _request('email_sympa');
 	$datas['desactive'] = _request('desactive');
 	$datas['lang'] = _request('langue');

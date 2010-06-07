@@ -26,7 +26,8 @@ function formulaires_abomailman_envoi_liste_charger_dist(){
 		foreach($liste_templates as $titre_option) {
 			$titre_option = basename($titre_option,".html");
 			$value_option = "templates/$titre_option";
-			$valeurs['templates'] .= "<option value='".$value_option."'>".$titre_option."</option>\n";
+			$selected =_request('template')=="'$value_option'"?" selected='selected' ":"";
+			$valeurs['templates'] .= "<option value='".$value_option."' ".$selected .">".$titre_option."</option>\n";
 		}
 	}else{
 		$valeurs['editable'] = false;
@@ -94,12 +95,10 @@ function abomailmain_inclure_previsu($sujet, $message, $template, $date, $id_mot
 }
 
 function formulaires_abomailman_envoi_liste_traiter_dist(){
-    $message = '';
-	$message['editable'] = true;
     
 	$datas = array();
     
-    // Récupération des données
+    // Recuperation des donnees
 	$datas['sujet'] = _request('sujet');
 	$datas['template'] = str_replace('\'','',_request('template'));
 	$datas['message'] = _request('message');
@@ -115,14 +114,18 @@ function formulaires_abomailman_envoi_liste_traiter_dist(){
 	$datas['nomsite'] = lire_meta("nom_site");
 	$datas['email_webmaster'] = lire_meta("email_webmaster");
 	spip.log($datas['texte_template']);
-	if (abomailman_mail($datas['nomsite'], $datas['email_webmaster'], "", $datas['email_liste'], $datas['sujet'], $datas['texte_template'], true, $datas['charset'])) {
-		$message['message_ok'] = _T('abomailman:email_envoye',array('liste'=>$datas['email_liste']));
+
+	$body = array(
+	'html'=>$datas['texte_template']
+	);
+	
+	if (abomailman_mail($datas['nomsite'], $datas['email_webmaster'], "", $datas['email_liste'], $datas['sujet'], $body, true, $datas['charset'])) {
+		$message = _T('abomailmans:email_envoye',array('liste'=>$datas['email_liste']));
 	}
 
-	$message['editable'] = false;
-	$message['redirect'] = self();
+	else $message = _T('pass_erreur_probleme_technique');
 
-    return $message;
+    return array('message_ok'=>$message);
 }
 
 ?>

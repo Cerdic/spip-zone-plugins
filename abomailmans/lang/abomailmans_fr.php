@@ -6,7 +6,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 //A
 	'abomailmans' 					=> 'Mailmans',
-	'abonne'						=> 'Je m\'abonne',
+	'abonne'					=> 'Je m\'abonne',
 	'active'                        => 'Active',
 	'aucune_langue'					=> 'Aucune sp&eacute;cifique',
 
@@ -27,8 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emailliste_abomailman'			=> 'L\'adresse e-mail de la liste',
 	'emailliste_abosympa'           => 'L\'adresse e-mail de l\'administrateur Sympa',
 	'email'							=> 'E-mail',
+	'emailliste_subscribe' => 'Abonnement',
+	'emailliste_unsubscribe' => 'Desabonnement',
 	'email_abonnement'				=> 'Votre adresse e-mail',
 	'email_envoye'					=> 'L\'e-mail a &eacute;t&eacute; envoy&eacute; &agrave; la liste de diffusion : @liste@.',
+	'envoi_vers'=> 'envoi vers',
 	'email_oublie'					=> 'Vous avez oubli&eacute; votre adresse e-mail',
 	'envoi_apercu'					=> 'Aper&ccedil;u',
 	'envoi_confirmer'				=> 'Confirmer et envoyer',
@@ -37,7 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_mailmans'				=> 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu',
 	'erreur_email_liste_oublie'		=> 'L\'adresse email de la liste est obligatoire',
 	'explication_email_sympa'		=> 'Si ce champ est renseign&eacute;, la liste est consid&eacute;r&eacute;e comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman".',
-
+	'explication_email_subscribe'		=> 'Email d\'abonnement, de style <code>suffixe+subscribe@exemple.org</code>',
+	'explication_email_unsubscribe'		=> 'Email de desabonnement',
+	
 //I
 	'icone_ajouter_liste'			=> 'Ajouter une nouvelle liste',
 	'icone_envoyer_mail_liste'		=> 'Envoyer un e-mail aux lettres &agrave; partir du contenu de ce site',
@@ -91,6 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toute_liste'					=> 'Toutes les listes de diffusions',
 
 //V
+	'veut_s_abonner'=>'veut s\'abonner',
+	'veut_se_desabonner'=>'veut se desabonner',
 	'verifier_formulaire'			=>	'V&eacute;rifiez le remplissage du formulaire.',
 	'votre_email'					=> 'Votre email',
 );

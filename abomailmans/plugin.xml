@@ -1,13 +1,13 @@
 <plugin>
-	<nom> <!-- Nom du plugin --><multi>[fr]
+	<nom><multi>[fr]
 	Abonnement &#224; des listes de diff. mailman et sympa
 	[de]Mailinglisten
 	</multi></nom>
 	<icon>img_pack/mailman.jpg</icon>
-	<auteur>	<!-- Auteur du plugin -->
+	<auteur>
 	MaZiaR [NetAktiv->http://www.netaktiv.com]
 	</auteur>
-	<version>0.4</version>
+	<version>0.5</version>
 	<etat>dev</etat>
 	<description><multi>
 	[fr]
@@ -19,16 +19,17 @@
 	Dem Adminstrator steht ein Interface zur Verwaltung dieser Listen zur Verf&uuml;gung.
 		</multi>
 	</description>
-	<lien>[Spip-Contrib->http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des]</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
+	<lien>[Spip-Contrib->http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des]</lien>
+	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="facteur" version="[1.1;]" />
+	<options>
 		abomailmans_options.php
 	</options>
-	<fonctions> <!-- fichier charge a chaque hit -->
+	<fonctions>
 		abomailmans_fonctions.php
 	</fonctions>
 	<prefix>abomailmans</prefix>
 	<install>base/abomailmans_upgrade.php</install>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>abomailmans_interface.php</inclure>
@@ -41,6 +42,5 @@
 		<icone>images/abomailman-16.png</icone>
 		<titre>abomailmans:bouton_listes_diffusion</titre>
 	</bouton>
-	<necessite id="SPIP" version="[2.0.0;]" />
 	<categorie>communication</categorie>
 </plugin>

@@ -28,7 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emailliste_abosympa'           => 'E-Mail Adresse des Sympa-Administrators',
 	'email'							=> 'E-Mail',
 	'email_abonnement'				=> 'Ihre E-Mail Adresse',
+	'emailliste_subscribe' => 'Subscribe',
+	'emailliste_unsubscribe' => 'Unsubscribe',
 	'email_envoye'					=> 'Die E-Mail wurde an die Mailingliste verschickt: @liste@.',
+	'envoi_vers'=> 'send to',
 	'email_oublie'					=> 'Sie haben ihre E-Mail Adresse vergessen',
 	'envoi_apercu'					=> 'Vorschau',
 	'envoi_confirmer'				=> 'Best&auml;tigen und absenden',
@@ -38,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_liste_oublie'		=> 'Die E-Mail Adresse ist obligatorisch.',
 	'explication_email_sympa'		=> 'Wenn dieses Feld ausgef&uuml;llt ist, wird von einer Sympa-Liste ausgegangen,
 							anderenfalls von einer Mailman-Liste.',
+	'explication_email_subscribe'		=> 'Email for subscribe, something like <code>suffix+subscribe@exemple.org</code>',
+	'explication_email_unsubscribe'		=> 'Email for unsubscribe',
 
 //I
 	'icone_ajouter_liste'			=> 'Neue Liste hinzuf&uuml;gen',
@@ -92,6 +97,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toute_liste'					=> 'ALle Mailinglisten',
 
 //V
+	'veut_s_abonner'=>'want to subscribe',
+	'veut_se_desabonner'=>'want to unsubscribe',
 	'verifier_formulaire'			=>	'&Uuml;berpr&uuml;fen sie den Inhalt des Formulars.',
 	'votre_email'					=> 'Ihre E-Mail',
 );

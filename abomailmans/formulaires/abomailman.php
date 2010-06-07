@@ -5,44 +5,44 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
 
 // chargement des valeurs par defaut des champs du formulaire
-function formulaires_abomailman_charger_dist(){
+//une seule liste = [(#FORMULAIRE_ABOMAILMAN{1})]  
+function formulaires_abomailman_charger_dist($id_abomailman = ""){
 	global $visiteur_session;
 
 	//initialise les variables d'environnement pas défaut
 	$valeurs = array();
 
-	// Si le visiteur est logué au site on utilise ses informations de connection par défaut
+	// Si le visiteur est logue au site on utilise ses informations de connexion par défaut
 	$valeurs['email'] = _request('email') ? _request('email') : $visiteur_session['email'];
 	$valeurs['nom'] = _request('nom') ? _request('nom') : $visiteur_session['nom'];
-	$valeurs['listes'] = _request('listes');
-
+	
+	//si id_abomailman est renseigne, on envoie qu'une liste
+	if($id_abomailman){
+	$valeurs['id_abomailman'] = $id_abomailman;
+	$ok=sql_getfetsel('id_abomailman','spip_abomailmans','id_abomailman ='.intval($id_abomailman).' AND desactive = 0');
+	}
+	else {
+		$valeurs['listes'] = _request('listes');
 	// on verifie s'il existe des listes disponibles
-	$nb_listes = sql_count(sql_select('id_abomailman','spip_abomailmans'));
+	$ok=sql_count(sql_select('id_abomailman','spip_abomailmans'));
+	}
 
-	if($nb_listes>0){
-		$valeurs['editable'] = true;
-	}
-	else{
-		$valeurs['editable'] = false;
-	}
+	if ($ok)
 	return $valeurs;
 }
 
 
-function formulaires_abomailman_verifier_dist(){
+function formulaires_abomailman_verifier_dist($id_abomailman = ""){
+	
+	//initialise le tableau des erreurs
+	$erreurs = array();
 
-	// récupération des valeurs du formulaire
+	// recuperation des valeurs du formulaire
 	$nom = _request('nom');
 	$email = _request('email');
 	$listes = _request('listes', true);
 	$abonnement = _request('abonnement');
 	$desabonnement = _request('desabonnement');
-
-	//charge la fonction de controle du login et mail
-	//$test_inscription = charger_fonction('test_inscription');
-
-	//initialise le tableau des erreurs
-	$erreurs = array();
 
 	// Faire une fonction de verif sur le mail pour validite
 
@@ -56,6 +56,8 @@ function formulaires_abomailman_verifier_dist(){
 		}
 		else{
 			spip_log("Email = $email;","abomailman");
+			//TODO
+			// stocker l'email dans un fichier ou la session, histoire de ne pas se pr�senter 2 fois
 		}
 	}
 
@@ -63,17 +65,18 @@ function formulaires_abomailman_verifier_dist(){
 		$erreurs['listes'] = _T("abomailmans:choisir_liste");
 	}
 
-    //message d'erreur genéralisé
+    //message d'erreur generalise
     if (count($erreurs)) {
         $erreurs['message_erreur'] .= _T('abomailmans:verifier_formulaire');
     }
 
-    return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
+    return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera ressoumis
 }
 
-function formulaires_abomailman_traiter_dist(){
+function formulaires_abomailman_traiter_dist($id_abomailman = ""){
 	// Pour l'envoi de l'email
 	include_spip('inc/abomailmans');
+	
 
 	$nom = _request('nom');
 	$email = _request('email');
@@ -81,44 +84,41 @@ function formulaires_abomailman_traiter_dist(){
 	$abonnement = _request('abonnement');
 	$desabonnement = _request('desabonnement');
 
-	$message = '';
+	$message = null;
 
 	$message_listes = "<ul>";
 
 	$nb_listes = 0;
-	foreach($listes as $liste) {
+	foreach($listes as $id_abomailman) {
 		$nb_listes++;
-		$listes_datas = sql_fetsel("*","spip_abomailmans","id_abomailman = $liste");
+	
+	//on initialise l'envoi
+	// on traite chaque liste via une fonction reutilisable ailleurs
+	$traiter=abomailman_traiter_liste($id_abomailman,$abonnement);
+	$titre = $traiter[0];
+	$proprio_email=$traiter[1];
+	$liste_email=$traiter[2];
+	$sujet=$traiter[3];
+	$body=$traiter[4];
+	$headers=$traiter[5];
+	
+// si on veut ajouter un mail de notification ou de test
+/*
+$liste_email = array(
+	$liste_email,"verif@exemple.com"
+);
+*/
 
-		// 1er cas : c'est une liste MAILMAN
-		if($listes_datas['email_sympa'] == '') {
-			$liste_email = explode ("@", $listes_datas['email']);
-			// cas de l'abonnement : on rajoute -join dans l'email de la liste
-			if(!empty($abonnement)){
-				$liste_email = $liste_email[0]."-join@".$liste_email[1];
-			}
-			// sinon pour le désabonnement on rajoute -leave
-			else{
-				$liste_email = $liste_email[0]."-leave@".$liste_email[1];
-			}
-			if (abomailman_mail ($nom, $email, $liste_email, $liste_email)) {
-				$message_listes  .= "<li><strong>". $listes_datas['titre'] ."</strong> (".$listes_datas['email'].")</li>";
-			}
+		if (abomailman_mail($nom, $email, $proprio_email,$liste_email, $sujet, $body,$headers)){
+		$message_listes  .= "<li><strong>$titre</strong></li>";
+		}else{
+		$message_listes .= "<li><strong>". _T('pass_erreur_probleme_technique')."</strong></li>";
+		$probleme=true;
 		}
-
-		// 2eme cas : c'est une liste SYMPA (présence de deux @ à suivre)
-		else {
-			spip_log("on s'abonne à sympa","abomailmans");
-			$proprio_email = $listes_datas['email_sympa'];
-			$sujet = (empty($abonnement)) ? 'UNSUBSCRIBE ' : 'SUBSCRIBE ';
-			$sujet .= $listes_datas['email'].' ';
-			$sujet .= (empty($desabonnement)) ? $nom : '';
-			if (abomailman_mail($nom, $email, $listes_datas['titre'], $proprio_email, $sujet)) {
-				$message_listes .= "<li><strong>".$listes_datas['titre']."</strong> (". $listes_datas['email'] .")</li>";
+		
 			}
-		}
-	}
-	$message_listes .= "</ul>";
+		 
+	$message_listes .= "</ul><br class='nettoyeur' />";
 
 	if($abonnement){
 		if($nb_listes>1){
@@ -137,6 +137,8 @@ function formulaires_abomailman_traiter_dist(){
 	$message .= $message_listes;
 	$message .= "<p>" . _T("abomailmans:message_confirm_suite") . "</p>";
 
+	if ($probleme==false)
 	return $message;
+	else return $message_listes;
 }
 ?>

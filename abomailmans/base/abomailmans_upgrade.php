@@ -7,7 +7,7 @@
  * $Id$
 */
 	
-	$GLOBALS['abomailmans_base_version'] = 0.31;
+	$GLOBALS['abomailmans_base_version'] = 0.32;
 	function abomailmans_upgrade(){
 		$version_base = $GLOBALS['abomailmans_base_version'];
 		$current_version = 0.0;
@@ -21,9 +21,15 @@
 				creer_base();
 				ecrire_meta('abomailmans_base_version',$current_version=$version_base);
 			}
-			else if ($current_version==0.30){
+			if ($current_version==0.30){
 				sql_alter("TABLE spip_abomailmans ADD `lang` varchar(10) DEFAULT ' ' NOT NULL AFTER `email_sympa`");
 				ecrire_meta('abomailmans_base_version',$current_version=0.31,'non');
+				echo 'Upgrade de la base abomailmans';
+			}
+			if ($current_version==0.31){
+				sql_alter("TABLE spip_abomailmans ADD `email_unsubscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
+				sql_alter("TABLE spip_abomailmans ADD `email_subscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
+				ecrire_meta('abomailmans_base_version',$current_version=0.32,'non');
 				echo 'Upgrade de la base abomailmans';
 			}
 			ecrire_metas();

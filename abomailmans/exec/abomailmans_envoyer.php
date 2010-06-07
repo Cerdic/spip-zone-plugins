@@ -21,8 +21,9 @@ function exec_abomailmans_envoyer(){
 
 	echo debut_gauche("",true);
 	echo debut_boite_info(true);
-		echo icone_horizontale (_T("abomailmans:icone_ajouter_liste"), generer_url_ecrire("abomailmans_tous",""), "../"._DIR_PLUGIN_ABOMAILMANS."/img_pack/configure_mail.png", "",false);
-	echo fin_boite_info(true);
+		echo icone_horizontale(_T("icone_retour"), generer_url_ecrire("abomailmans_tous",""), _DIR_PLUGIN_ABOMAILMANS."/img_pack/mailman.gif", "",false);
+
+		echo fin_boite_info(true);
 
 	echo debut_droite("",true);
 	

@@ -22,6 +22,18 @@
 				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{email})</p>]
 				<input type="text" class="text" id="email" name="email" value="[(#ENV**{email})]" size="50" />
 			</li>
+			<li class="editer_email_subscribe[ (#ENV**{erreurs}|table_valeur{email_subscribe}|oui)erreur]">
+				<label for="email_subscribe"><:abomailmans:emailliste_subscribe:></label>
+				<p class="explication"><:abomailmans:explication_email_subscribe:></p>
+				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{email_subscribe})</p>]
+				<input type="text" class="text" id="email_subscribe" name="email_subscribe" value="[(#ENV**{email_subscribe})]" size="50" />
+			</li>
+			<li class="editer_email_unsubscribe[ (#ENV**{erreurs}|table_valeur{email_unsubscribe}|oui)erreur]">
+				<label for="email_unsubscribe"><:abomailmans:emailliste_unsubscribe:></label>
+				<p class="explication"><:abomailmans:explication_email_unsubscribe:></p>
+				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{email_unsubscribe})</p>]
+				<input type="text" class="text" id="email_unsubscribe" name="email_unsubscribe" value="[(#ENV**{email_unsubscribe})]" size="50" />
+			</li>
 			<li class="editer_email_sympa[ (#ENV**{erreurs}|table_valeur{email_sympa}|oui)erreur]">
 				<label for="email_sympa"><:abomailmans:emailliste_abosympa:></label>
 				<p class="explication"><:abomailmans:explication_email_sympa:></p>

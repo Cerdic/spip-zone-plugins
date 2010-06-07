@@ -32,13 +32,18 @@ function exec_abomailmans_edit(){
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "documents", "abomailmans", "");
 	echo debut_gauche("",true);
+	echo debut_boite_info(true);
+		echo icone_horizontale(_T("icone_retour"), generer_url_ecrire("abomailmans_tous",""), _DIR_PLUGIN_ABOMAILMANS."/img_pack/mailman.gif", "",false);
+		echo icone_horizontale(_T("abomailmans:icone_ajouter_liste"), generer_url_ecrire("abomailmans_tous",""), _DIR_PLUGIN_ABOMAILMANS."img_pack/configure_mail.png", "",false);
+		
+	echo fin_boite_info(true);
 	echo debut_droite("",true);
 	
 	//
 	// Icones retour
 	//
 	if ($retour) {
-		$icone_retour = icone_inline(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_ABOMAILMANS."/img_pack/mailman.gif", "rien.gif",'right');
+		$icone_retour = icone_inline(_T('icone_retour'), $retour, _DIR_PLUGIN_ABOMAILMANS."img_pack/mailman.gif", "rien.gif",'right');
 	}
 
 	//
