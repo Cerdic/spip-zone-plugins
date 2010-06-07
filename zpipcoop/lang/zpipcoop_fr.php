@@ -91,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //R
 'redaction' => 'R&eacute;daction',
+'repondre_site' => 'R&eacute;pondre &agrave; ce site',
 'retour' => 'Retour',
 
 //S
@@ -98,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //T
 'texte_modifier_breve' => 'Modifier la br&egrave;ve :',
+'tickets' => 'Tickets',
 'toutes_les_breves' => 'Toutes les br&egrave;ves',
 'tous_les_sites' => 'Tous les sites',
 'tous_les_tickets' => 'Tous les tickets',

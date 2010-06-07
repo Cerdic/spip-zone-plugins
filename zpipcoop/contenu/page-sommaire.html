@@ -11,15 +11,14 @@
 				<BOUCLE_breves(BREVES) {!par date} {doublons} {date>#DATE} {lang}{0,5}>
 				<li class="item breves"><em><:zpipcoop:breves:></em>&nbsp;[<a href="#URL_BREVE">(#TITRE)</a>][<small> | (#DATE|affdate_court)</small>]</li>
 				</BOUCLE_breves>
+				<BOUCLE_sites(SITES) {!par date} {doublons} {date>#DATE} {0,5}>
+				<li class="item sites"><em><:zpipcoop:sites:></em>&nbsp;[<a href="[(#ID_SYNDIC|generer_url_entite{site})]">(#NOM_SITE)</a>][<small> | (#DATE|affdate_court)</small>]</li>
+				</BOUCLE_sites>
 				<BOUCLE_documents2(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
 				<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
 				</BOUCLE_documents2>
 				<li class="item com"><em><:zpipcoop:commentaires:></em>&nbsp;[<a href="#URL_FORUM">(#TITRE)</a>][<small>, <:par_auteur:></small> <a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">(#NOM)</a>][<small> | (#DATE|affdate_court)</small>]</li>
 			</BOUCLE_forums>
-
-			<BOUCLE_sites(SITES) {!par date} {doublons} {0,5}>
-				<li class="item sites"><em><:zpipcoop:sites:></em>&nbsp;[<a href="[(#ID_SYNDIC|generer_url_entite{site})]">(#NOM_SITE)</a>][<small> | (#DATE|affdate_court)</small>]</li>
-			</BOUCLE_sites>
 
 			<BOUCLE_article_fin(ARTICLES) {!par date} {doublons} {lang}{0,5}>
 				<BOUCLE_documents_fin1(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
