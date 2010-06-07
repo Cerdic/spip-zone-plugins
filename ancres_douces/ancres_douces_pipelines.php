@@ -6,10 +6,11 @@ $flux .= '<script src="'.url_absolue(find_in_path("js/jquery.scrollto.js")).'" t
 $flux .= '<script src="'.url_absolue(find_in_path("js/jquery.localscroll.js")).'" type="text/javascript"></script>';
 
 // Code d'init
-$flux .= '<script type="text/javascript"><!--
-if(window.jQuery)jQuery(document).ready(function(){
-if(typeof jQuery.localScroll=="function")jQuery.localScroll({hash:true})});
-// --></script>';
+$flux .= '<script type="text/javascript">/* <![CDATA[ */
+function ancre_douce_init() {if(typeof jQuery.localScroll=="function")jQuery.localScroll({hash:true});}
+if(window.jQuery)jQuery(document).ready(ancre_douce_init);
+onAjaxLoad(ancre_douce_init);
+/* ]]> */</script>';
 
 return $flux;
 }

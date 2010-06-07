@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Ancres Douces</nom>
 	<auteur>SarkASmeL, d'apr&egrave;s une id&eacute;e originale Fil</auteur>
-	<version>1.2</version>
+	<version>1.3</version>
 	<etat>stable</etat>
 	<description>
 Ce plugin permet un d&eacute;filement continu de la page lorsque le visiteur clique sur un lien pointant vers une ancre de l'article en cours de lecture.
