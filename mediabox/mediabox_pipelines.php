@@ -32,10 +32,13 @@ function mediabox_config($public=null){
 		'minHeight'=>'300px',
 		));
 	}
-	// charger la config du theme
-	include_spip("colorbox/".$config['skin']."/mediabox_config_theme");
-	if ($config_theme = mediabox_config_theme())
-		$config = array_merge($config, $config_theme);
+	
+	// charger la config du theme uniquement dans le public
+	if (!test_espace_prive()) {
+		include_spip("colorbox/".$config['skin']."/mediabox_config_theme");
+		if ($config_theme = mediabox_config_theme())
+			$config = array_merge($config, $config_theme);
+	}
 	
 	return $config;	
 }
