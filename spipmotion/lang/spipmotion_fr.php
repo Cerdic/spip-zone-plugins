@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_framerate' =>'Framerate : ',
 	'info_infos_techniques' => 'Informations techniques...',
 	'info_installer_encoder_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .AVI, .MPG, .MP4 ou .MOV dans le dossier "tmp/upload" pour ensuite les encoder au format FLV ici.',
+	'info_mime' => 'Type mime : ',
 	'info_nom_fichier' => 'Nom du fichier : ',
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
 	'info_pixelformat' =>'Format de pixel : ',

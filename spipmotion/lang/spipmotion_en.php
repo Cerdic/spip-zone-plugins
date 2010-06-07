@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_framerate' =>'Framerate : ',
 	'info_infos_techniques' => 'Technical informations',
 	'info_installer_encoder_ftp' => 'As Administrator, you can install (with FTP) .AVI .MPG .MP4 or .MOV files in the directory "tmp/upload" for encoding these files here.',
+	'info_mime' => 'Mime type : ',
 	'info_nom_fichier' => 'File name : ',
 	'info_page_ffmpeg_infos' => 'This page is only available for information. It shows the complete configuration of the FFMpeg installation on your system.',
 	'info_pixelformat' =>'Pixel format : ',
