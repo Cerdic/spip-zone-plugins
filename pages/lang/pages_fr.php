@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_page' => 'Cr&eacute;er une nouvelle page',
 'input_page' => 'une_page',
 'modifier_page' => 'Modifier la page :',
+'pages_uniques' => 'Pages uniques',
 'titre_page' => 'Page',
 'toutes_les_pages' => 'Toutes les pages'
 

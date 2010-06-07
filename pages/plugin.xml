@@ -38,7 +38,12 @@ This allows the creation of pages of legal information, about, contact, etc..
 		
 	<bouton id='pages_tous' parent='naviguer'>
 		<icone>images/page-24.png</icone>
-		<titre>Pages uniques</titre>
+		<titre>pages:pages_uniques</titre>
+	</bouton>
+	<bouton id='bando_pages_tous' parent='bando_edition'>
+		<url>pages_tous</url>
+		<icone>images/page-16.png</icone>
+		<titre>pages:pages_uniques</titre>
 	</bouton>
 	
 	<pipeline>
