@@ -259,5 +259,22 @@ function critere_evenement_en_cours_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $where;
 }
 
+function agenda_date_a_venir($date_test,$date_ref=null){
+	if (is_null($date_ref))
+		$date_ref = $_SERVER['REQUEST_TIME'];
+	else
+		$date_ref = strtotime($date_ref);
+
+	return (strtotime($date_test)>$date_ref)?' ':'';
+}
+
+function agenda_date_passee($date_test,$date_ref=null){
+	if (is_null($date_ref))
+		$date_ref = $_SERVER['REQUEST_TIME'];
+	else
+		$date_ref = strtotime($date_ref);
+
+	return (strtotime($date_test)<$date_ref)?' ':'';
+}
 
 ?>
