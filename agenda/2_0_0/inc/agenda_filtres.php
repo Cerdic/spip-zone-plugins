@@ -31,6 +31,8 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 	
 	$abbr = '';
 	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
+	$affdate = "affdate_jourcourt";
+	if (strpos($forme,'annee')!==false) $affdate = 'affdate';
 	
 	$dtstart = $dtend = $dtabbr = "";
 	if (strpos($forme,'hcal')!==false) {
@@ -51,7 +53,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 	$s = "";
 	if ($d==$f)
 	{ // meme jour
-		$s = ucfirst(nom_jour($d,$abbr))." ".affdate_jourcourt($d);
+		$s = ucfirst(nom_jour($d,$abbr))." ".$affdate($d);
 		if ($h)
 			$s .= " $hd";
 		$s = "$dtstart$s$dtabbr";
@@ -61,20 +63,20 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 	{ // meme annee et mois, jours differents
 		if ($h){
 			$s = $du . $dtstart . affdate_jourcourt($d) . " $hd" . $dtabbr;
-			$s .= $au . $dtend . affdate_jourcourt($f);
+			$s .= $au . $dtend . $affdate($f);
 			if ($hd!=$hf) $s .= " $hf";
 			$s .= $dtabbr;
 		}
 		else {
 			$s = $du . $dtstart . jour($d) . $dtabbr;
-			$s .= $au . $dtend . affdate_jourcourt($f) . $dtabbr;
+			$s .= $au . $dtend . $affdate($f) . $dtabbr;
 		}
 	}
 	else if ((date("Y",$date_debut))==date("Y",$date_fin))
 	{ // meme annee, mois et jours differents
 		$s = $du . $dtstart . affdate_jourcourt($d);
 		if ($h) $s .= " $hd";
-		$s .= $dtabbr . $au . $dtend . affdate_jourcourt($f);
+		$s .= $dtabbr . $au . $dtend . $affdate($f);
 		if ($h) $s .= " $hf";
 		$s .= $dtabbr;
 	}
@@ -136,7 +138,7 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 		//DEBUG echo "" . sprintf("d1=%s d2=%s",$d1,$d2) . "";
 		// On extrait la bonne liste:
 		$tab = (array)$agenda[$cal][(date_anneemoisjour($day))];
-		// si la date de debut de l'élément est exactement la
+		// si la date de debut de l'ï¿½lï¿½ment est exactement la
 		// date du jour courant ET qu'il y a deja des
 		// evenements, on met l'element a ajouter en premier
 		// dans la liste; sinon on l'ajoute a la fin comme
