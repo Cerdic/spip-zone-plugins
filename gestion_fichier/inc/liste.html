@@ -1,0 +1,94 @@
+  <div class="liste-articles">
+     <h2><a name="edit">S&eacute;lection / Edition /Impression</a></h2>
+  </div>
+
+<div class="liste-rub">
+  <div class="extrait">
+    
+ <div style="float:right;width:400px;">
+   [Cotisation: (#STATUT_ECOLO|=={M}|?{' ',''})<a href="[(#SELF|parametre_url{cotisation,[(#DATE|annee|moins{1})]}|parametre_url{debut_donnees,0})]" class="ajax">Voir les membres qui ne sont pas en ordre</a>.]
+   Etiquettes: <a href="[(#URL_PAGE{gestion_fichier_etiquettes}|parametre_url{statut_ecolo,#STATUT_ECOLO}|parametre_url{cotisation,#ENV{cotisation}}|parametre_url{lettre,#ENV{lettre}})]#stat">Imprimer pour cette s&eacute;lection.</a>
+</div>
+
+    <div style="float:left; margin-top:15px;">Par statut:</div>
+    <ul>
+    <li>
+      <a href="[(#SELF|parametre_url{statut_ecolo,M})][&lettre=(#ENV{lettre})]" title="Membres" class="ajax[ (#ENV{statut_ecolo}|=={M}|?{'on',''})]">Membres</a>
+    </li>
+    <li>
+    <a href="[(#SELF|parametre_url{statut_ecolo,C})][&lettre=(#ENV{lettre})]" title="Candidats" class="ajax[ (#ENV{statut_ecolo}|=={C}|?{'on',''})]">Candidats</a>
+    </li>
+    <li>
+    <a href="[(#SELF|parametre_url{statut_ecolo,S})][&lettre=(#ENV{lettre})]" title="Sympathisants" class="ajax[ (#ENV{statut_ecolo}|=={S}|?{'on',''})]">Sympathisants</a>
+    </li>
+    <li>
+    <a href="[(#SELF|parametre_url{statut_ecolo,L})][&lettre=(#ENV{lettre})]" title="Locaux" class="ajax[ (#ENV{statut_ecolo}|=={L}|?{'on',''})]">Locaux</a>
+    </li>
+    <li>
+    <a href="[(#SELF|parametre_url{statut_ecolo,E})][&lettre=(#ENV{lettre})]" title="Exterieurs" class="ajax[ (#ENV{statut_ecolo}|=={E}|?{'on',''})]">Exterieurs</a>
+    </li>
+    <li>
+    <a href="[(#SELF|parametre_url{statut_ecolo,A})][&lettre=(#ENV{lettre})]" title="Anciens" class="ajax[ (#ENV{statut_ecolo}|=={A}|?{'on',''})]">Anciens membres</a>
+    </li>
+    <li>
+    <a href="[(#SELF|parametre_url{statut_ecolo,''})]" title="Tout" class="ajax[ (#ENV{statut_ecolo}|?{'','on'})]">Tout voir</a>
+    </li>
+  </ul>
+
+<B_alpha>
+  <div style="float:left;">Par initiale:</div>
+  <ul>
+<BOUCLE_alpha(fichiers){tout} {statut_ecolo?}{par nom_ecolo} {fusion LEFT(nom_ecolo,1)}>
+  [<li><a href='[(#SELF|parametre_url{lettre, [(#NOM_ECOLO|substr{0,1})]}|parametre_url{debut_donnees,0})]' class="ajax[ (#ENV{lettre}|=={#NOM_ECOLO|substr{0,1}}|?{'on',''})]">
+  (#NOM_ECOLO|substr{0,1})
+  </a></li>]
+</BOUCLE_alpha>
+<li><a href="[(#SELF|parametre_url{lettre,''})]" class="ajax[ (#ENV{lettre}|?{'','on'})]">
+  Tout voir
+  </a></li>
+  </ul>
+</B_alpha>
+  
+</div>
+
+  <B_donnees>    #ANCRE_PAGINATION
+<table style="font-size:0.7em; border: dotted 1px; width:100%;">
+<tr style="text-align:center;"><td>Sta-<br />tut</td><td>Cotis.</td><td>Num.<br /> ECOLO</td><td>Nom</td><td>Pr&eacute;nom</td><td>Sexe</td>
+<td>Adresse postale</td><td>CP</td><td>Localite</td><td>Tel</td><td>GSM</td><td>Pseudo</td><td>e-mail</td>
+<td>Acc&egrave;s<br/>Membre</td><td>EDIT</td>
+</tr>
+<BOUCLE_donnees(fichiers){par nom_ecolo}{par no_fichier}{pagination 25}{statut_ecolo?}{cotisation?}{nom_ecolo LIKE %#ENV{recherche}%}{nom_ecolo==^(#ENV{lettre})}>
+<tr>
+<td style="border: dotted 1px;"><span  class="#EDIT{statut_ecolo}">[(#STATUT_ECOLO|?{#STATUT_ECOLO,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{cotisation}">[(#COTISATION|?{#COTISATION,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{no_fichier}">[(#NO_FICHIER|?{#NO_FICHIER,'++'})]</span></td>
+
+<td style="border: dotted 1px;"><span  class="#EDIT{nom_ecolo}">[(#NOM_ECOLO|?{#NOM_ECOLO,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{prenom}">[(#PRENOM|?{#PRENOM,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{sexe}">[(#SEXE|?{#SEXE,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{adresse_postale}">[(#ADRESSE_POSTALE|?{#ADRESSE_POSTALE,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{code_postal}">[(#CODE_POSTAL|?{#CODE_POSTAL,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{localite}">[(#LOCALITE|?{#LOCALITE,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{telephone}">[(#TELEPHONE|?{#TELEPHONE,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{gsm}">[(#GSM|?{#GSM,'++'})]</span></td>
+<BOUCLE_fichier(AUTEURS){id_auteur}{tout}>
+<td style="text-align:center;">[(#NOM|?{#NOM,'-'})]</td>
+<td style="text-align:center;">[(#EMAIL|?{'OK','-'})]</td>
+<td style="text-align:center;"><BOUCLE_acces_restreint(ZONES){id_auteur}{tout}>[(#TITRE|=={Espace Membres}|?{'OK','-'})]</BOUCLE_acces_restreint></td>
+<td style="border: dotted 1px; text-align:center;"><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR#nom">EP</a></td>
+</BOUCLE_fichier>
+</tr>
+</BOUCLE_donnees>
+
+</table>
+<p class="pagination">#PAGINATION</p>
+
+ <ul>
+  <li>Affichage: #TOTAL_BOUCLE enregistrements. [Total: #GRAND_TOTAL.]</li>
+  <li>Statuts : Membre: "M" | Candidat Membre: "C" | Sympathisant: "S" | Local: "L" | Ext&eacute;rieurs: "E" | Anciens membres: "A"</li>
+</ul>
+
+</B_donnees>
+Pas d'enregistrement correspondant aux critères
+<//B_donnees>
+

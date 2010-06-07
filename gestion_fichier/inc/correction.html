@@ -1,0 +1,56 @@
+#CACHE{5}
+<div class="liste-articles">
+     <h2><a name="correct">Anomalies / Corrections</a></h2>
+  </div>
+
+
+  <div class="liste-rub">
+    <div class="extrait">  
+<ul>Non-membres avec acc&egrave;s &agrave; l'Espace Membres:
+<BOUCLE_aut_zone(zones_auteurs){id_zone=1}>
+<BOUCLE_anomalies(fichiers){id_auteur}{par id_auteur}{!statut_ecolo=='M'}><li><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR">#PRENOM
+#NOM_ECOLO</a></li></BOUCLE_anomalies>
+</BOUCLE_aut_zone><br>
+</ul>
+<ul>Non-membres abonn&eacute;s &agrave; la lettre des membres:
+<BOUCLE_aut_liste2(auteurs_listes){id_liste=1}>
+<BOUCLE_anomalies4(fichiers){id_auteur}{par id_auteur}{!statut_ecolo=='M'}><li><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR">#PRENOM
+#NOM_ECOLO</a></li></BOUCLE_anomalies4>
+</BOUCLE_aut_liste2>
+</ul>
+<ul>Non-membres r&eacute;dacteurs:
+<BOUCLE_aut2(AUTEURS){statut IN '0minirezo' , '1comite'}{tout}>
+<BOUCLE_anomalies6(fichiers){id_auteur}{par id_auteur}{!statut_ecolo=='M'}><li><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR&edit=oui">#PRENOM
+#NOM_ECOLO</a></li></BOUCLE_anomalies6>
+</BOUCLE_aut2>
+</ul>
+
+<ul>Membres sans adresse email:
+<BOUCLE_membres(fichiers){statut_ecolo="M"}><BOUCLE_aut_email(AUTEURS){id_auteur}{tout}{email}><li><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR&edit=oui">#PRENOM
+#NOM_ECOLO</a></li><BOUCLE_pas_mail(fichiers){id_auteur}{doublons pas_mail}></BOUCLE_pas_mail>
+</BOUCLE_aut_email>
+</BOUCLE_membres>
+</ul>
+<ul>Membres avec mail non abonn&eacute;s &agrave; la lettre des membres:
+<BOUCLE_aut_liste(auteurs_listes){id_liste=1}>
+<BOUCLE_anomalies3(fichiers){id_auteur}{doublons anomalies2}></BOUCLE_anomalies3>
+</BOUCLE_aut_liste>
+<BOUCLE_pov_exclus2(fichiers){statut_ecolo="M"}{doublons anomalies2}{doublons pas_mail}><li><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR">#PRENOM
+#NOM_ECOLO</a></li></BOUCLE_pov_exclus2>
+</ul>
+<ul>Membres sans acc&egrave;s &agrave; l'Espace Membres:
+<BOUCLE_aut_zone2(zones_auteurs){id_zone=1}>
+<BOUCLE_anomalies2(fichiers){id_auteur}{doublons anomalies}></BOUCLE_anomalies2>
+</BOUCLE_aut_zone2>
+<BOUCLE_pov_exclus(fichiers){statut_ecolo="M"}{doublons anomalies}><li><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR">#PRENOM
+#NOM_ECOLO</a></li></BOUCLE_pov_exclus>
+</ul>
+<ul>Membres non r&eacute;dacteurs:
+<BOUCLE_aut(AUTEURS){!statut IN '0minirezo' , '1comite'}{tout}>
+<BOUCLE_anomalies5(fichiers){id_auteur}{statut_ecolo="M"}><li><a href="ecrire/?exec=auteur_infos&id_auteur=#ID_AUTEUR&edit=oui">#PRENOM
+#NOM_ECOLO</a></li></BOUCLE_anomalies5>
+</BOUCLE_aut>
+</ul>
+</div>
+</div>
+

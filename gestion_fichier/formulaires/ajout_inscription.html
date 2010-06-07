@@ -1,0 +1,92 @@
+<div class="formulaire_ajout_inscription ajax" id="formulaire_ajout_inscription">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		[(#REM) on affiche plus ce message en cas d'erreur pour eviter d'allonger trop le formulaire]
+		[(#ENV*{message_erreur}|non)
+		<legend>Ajout au fichier</legend>
+		<p class='explication'>Ajouter quelqu'un au fichier</p>
+		]
+		<ul class="non_spip">
+			<li style="display:inline;" class='saisie_nom_ecolo_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_ecolo_inscription}|oui)erreur]' >
+				<label for="nom_ecolo_inscription">Nom</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_ecolo_inscription})</span>]
+				<input type="text" class="text" name="nom_ecolo_inscription" id="nom_ecolo_inscription" value="#ENV{nom_ecolo_inscription}" size="25" />
+			</li>
+			<li style="display:inline; " class='saisie_prenom_inscription [ (#ENV*{erreurs}|table_valeur{prenom_inscription}|oui)erreur]'>
+				<label for="prenom_inscription">Pr&eacute;nom</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{prenom_inscription})</span>]
+				<input type="text" class="text" name="prenom_inscription" id="prenom_inscription" value="#ENV{prenom_inscription}" size="25" />
+			</li>
+			<li style="display:inline; " class='saisie_sexe_inscription [ (#ENV*{erreurs}|table_valeur{sexe_inscription}|oui)erreur]'>
+				<label for="sexe_inscription">Sexe</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{sexe_inscription})</span>]
+				<input type="text" class="text" name="sexe_inscription" id="sexe_inscription" value="#ENV{sexe_inscription}" size="1" />
+			</li>
+			<li style="display:inline; " class='saisie_no_ecolo_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{no_ecolo_inscription}|oui)erreur]'>
+				<label for="no_ecolo_inscription">No ECOLO</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{no_ecolo_inscription})</span>]
+				<input type="text" class="text" name="no_ecolo_inscription" id="no_ecolo_inscription" value="#ENV{no_ecolo_inscription}" size="6" />
+			</li>
+</ul><ul>
+			<li style="display:inline; " class='saisie_adresse_postale_inscription [ (#ENV*{erreurs}|table_valeur{adresse_postale_inscription}|oui)erreur]'>
+				<label for="adresse_postale_inscription">Adresse et no</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{adresse_postale_inscription})</span>]
+				<input type="text" class="text" name="adresse_postale_inscription" id="adresse_postale_inscription" value="#ENV{adresse_postale_inscription}" size="25" />
+			</li>
+			<li style="display:inline; " class='saisie_cp_inscription [ (#ENV*{erreurs}|table_valeur{cp_inscription}|oui)erreur]'>
+				<label for="cp_inscription">Code postal</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{cp_inscription})</span>]
+				<input type="text" class="text" name="cp_inscription" id="cp_inscription" value="#ENV{cp_inscription}" size="4" />
+			</li>
+			<li style="display:inline; " class='saisie_localite_inscription [ (#ENV*{erreurs}|table_valeur{localite_inscription}|oui)erreur]'>
+				<label for="localite_inscription">Localit&eacute;</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{localite_inscription})</span>]
+				<input type="text" class="text" name="localite_inscription" id="localite_inscription" value="#ENV{localite_inscription}" size="20" />
+			</li>
+</ul><ul>	
+			<li style="display:inline; " class='saisie_statut_ecolo_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{statut_ecolo_inscription}|oui)erreur]'>
+				<label for="statut_ecolo_inscription">Statut ECOLO</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{statut_ecolo_inscription})</span>]
+				<input type="text" class="text" name="statut_ecolo_inscription" id="statut_ecolo_inscription" value="#ENV{statut_ecolo_inscription}" size="1" />
+			</li>
+			<li style="display:inline; " class='saisie_cotisation_inscription [ (#ENV*{erreurs}|table_valeur{cotisation_inscription}|oui)erreur]'>
+				<label for="cotisation_inscription">Cotisation</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{cotisation_inscription})</span>]
+				<input type="text" class="text" name="cotisation_inscription" id="cotisation_inscription" value="#ENV{cotisation_inscription}" size="4" />
+			</li>
+			<li style="display:inline; " class='saisie_tel_inscription [ (#ENV*{erreurs}|table_valeur{tel_inscription}|oui)erreur]'>
+				<label for="tel_inscription">T&eacute;l&eacute;phone</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{tel_inscription})</span>]
+				<input type="text" class="text" name="tel_inscription" id="tel_inscription" value="#ENV{tel_inscription}" size="20" />
+			</li>
+			<li style="display:inline; " class='saisie_gsm_inscription [ (#ENV*{erreurs}|table_valeur{gsm_inscription}|oui)erreur]'>
+				<label for="gsm_inscription">GSM</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{gsm_inscription})</span>]
+				<input type="text" class="text" name="gsm_inscription" id="gsm_inscription" value="#ENV{gsm_inscription}" size="20" />
+			</li>
+		</ul>
+<ul>
+			<li style="display:inline; " class='saisie_email_inscription [ (#ENV*{erreurs}|table_valeur{email_inscription}|oui)erreur]'>
+				<label for="email_inscription">Adresse e-mail</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email_inscription})</span>]
+				<input type="text" class="text" name="email_inscription" id="email_inscription" value="#ENV{email_inscription}" size="50" />
+			</li>
+			
+		</ul>
+	</fieldset>
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+ </form>
+[<script type="text/javascript"><!--
+document.getElementById('(#ENV{focus})').focus();
+--></script>]
+
+</div>]

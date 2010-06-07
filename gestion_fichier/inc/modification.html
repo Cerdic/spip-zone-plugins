@@ -1,0 +1,13 @@
+<B_fic>
+<div class="liste-articles">
+#ANCRE_PAGINATION
+<h2><a name="modifs">Derni&egrave;res modifications</a></h2>
+<ul>
+  <BOUCLE_fic(fichiers){tout}{par maj}{inverse}{pagination 20}{maj>0}>
+<li> [(#MAJ|jour)] [(#MAJ|nom_mois)] [(#MAJ|annee)] - [(#MAJ|heures)]:[(#MAJ|minutes)]: [(#NOM_ECOLO)] #PRENOM, #SEXE - #STATUT_ECOLO, 
+#COTISATION, #NO_FICHIER -  #ADRESSE_POSTALE, #CODE_POSTAL #LOCALITE - #TELEPHONE ,  #GSM</li>
+ </BOUCLE_fic>
+#PAGINATION
+</ul>
+</div>
+</B_fic>

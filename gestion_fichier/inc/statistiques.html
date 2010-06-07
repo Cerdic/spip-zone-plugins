@@ -1,0 +1,32 @@
+<div class="liste-articles">
+
+<B_statut>
+<h2><a name="stats">Statistiques</a></h2><table><tr><td>
+<BOUCLE_statut(fichiers){tout}{par statut_ecolo}{inverse}{fusion statut_ecolo}>
+[(#REM) en ligne plutot que colonne...]
+<div style="float: left; display: block;"><h3>statut: #STATUT_ECOLO</h3>
+<BOUCLE_compte(fichiers){tout}{statut_ecolo}>
+  </BOUCLE_compte>#SET{total,#TOTAL_BOUCLE}
+ <ul>      Total:  #TOTAL_BOUCLE
+  </B_compte>
+
+<BOUCLE_sexe_F(fichiers){tout}{statut_ecolo}{sexe=="F"}{doublons sexe}>
+  </BOUCLE_sexe_F>
+       <li>sexe F:  #TOTAL_BOUCLE - [(#TOTAL_BOUCLE|div{#GET{total}}|mult{100}|intval) %]</li>
+  </B_sexe_F>
+<BOUCLE_sexe_M(fichiers){tout}{statut_ecolo}{sexe=="M"}{doublons sexe}>
+  </BOUCLE_sexe_M>
+       <li>sexe H:  #TOTAL_BOUCLE - [(#TOTAL_BOUCLE|div{#GET{total}}|mult{100}|intval) %]</li>
+  </B_sexe_M>
+<BOUCLE_autres_sexes(fichiers){tout}{statut_ecolo}{doublons sexe}>
+  </BOUCLE_autres_sexes>
+       <li>sexe ind.:  #TOTAL_BOUCLE - [(#TOTAL_BOUCLE|div{#GET{total}}|mult{100}|intval) %]</li>
+</B_autres_sexes>
+</ul>
+</div>
+</BOUCLE_statut>
+</td></tr></table></div>
+</B_statut>
+
+</div>
+
