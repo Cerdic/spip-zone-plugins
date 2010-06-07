@@ -1,0 +1,15 @@
+<plugin>
+	<nom><multi>[fr]Gestion fichier</multi></nom>
+	<auteur>Suske, cy_altern</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<prefix>fichier</prefix>
+	<icon>images/fichier.gif</icon>
+	<description><multi>
+	[fr]Gestion d'un fichier de membres, sympathisants,...
+	</multi></description>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="Crayons" version="[1.6.3;]" />
+	<categorie>divers</categorie>
+</plugin>

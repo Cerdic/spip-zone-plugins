@@ -1,0 +1,40 @@
+-- phpMyAdmin SQL Dump
+-- http://www.phpmyadmin.net
+--
+-- Serveur: localhost
+-- Généré le : Lun 07 Juin 2010 à 11:31
+-- Version du serveur: 5.0.51
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de données: `base_donnees`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fichiers`
+--
+
+CREATE TABLE IF NOT EXISTS `fichiers` (
+  `id_fichier` bigint(21) NOT NULL auto_increment,
+  `id_auteur` bigint(21) NOT NULL,
+  `maj` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `no_fichier` bigint(21) NOT NULL,
+  `adresse_postale` tinytext NOT NULL,
+  `code_postal` text NOT NULL,
+  `localite` tinytext NOT NULL,
+  `telephone` varchar(100) NOT NULL,
+  `gsm` varchar(100) NOT NULL,
+  `prenom` tinytext NOT NULL,
+  `nom_ecolo` tinytext NOT NULL,
+  `sexe` varchar(1) NOT NULL,
+  `cotisation` varchar(4) NOT NULL,
+  `statut_ecolo` varchar(1) NOT NULL,
+  PRIMARY KEY  (`id_fichier`),
+  KEY `statut_ecolo` (`statut_ecolo`),
+  KEY `id_auteur` (`id_auteur`),
+  KEY `no_fichier` (`no_fichier`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+

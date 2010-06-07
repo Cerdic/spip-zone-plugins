@@ -1,0 +1,57 @@
+[(#SESSION{statut}|=={0minirezo}|?{""," "})<?php header("location:spip.php?page=404"); ?>]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{5}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<head>
+<title>#NOM_SITE_SPIP - Gestion du fichier</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="noindex, nofollow" />
+</head>
+
+
+
+<body dir="#LANG_DIR">
+<INCLURE{fond=entete}>
+
+<!-- menu -->
+
+<INCLURE{fond=menu}>
+
+
+<!-- Contenu : liste membres -->
+
+<div class="contenu" id="principal" style="width:99%;">
+
+  <div id="intro" class="coins_ronds">
+     <div class="maj">Vous &ecirc;tes ici: &nbsp;<a href="/">Accueil</a>&nbsp;>&nbsp;<a href="spip.php?page=fichier">Gestion du fichier</a>
+  </div>
+
+  <div class="liste-articles">
+     <h2>Gestion du fichier</h2>
+  </div>
+
+  <div class="liste-rub">
+    <div class="extrait">  
+<ul>
+  <li[ class="(#ENV{choix}|=={selection}|oui)on"]><a href="[(#SELF|parametre_url{choix,selection})]#liste" >S&eacute;lection / Edition / Impression</a> </li>
+    <li[ class="(#ENV{choix}|=={correction}|oui)on"]> <a href="[(#SELF|parametre_url{choix,correction})]#liste" >Membres : Anomalies / Corrections</a></li>
+<li[ class="(#ENV{choix}|=={inscription}|oui)on"]><a href="[(#SELF|parametre_url{choix,inscription})]#liste" >Nouvelle inscription</a></li>
+<li[ class="(#ENV{choix}|non)on"]><a href="[(#URL_PAGE{fichier})]#liste">Derni&egrave;res modifications</a></li>
+<li[ class="(#ENV{choix}|=={statistiques}|oui)on"]><a href="[(#SELF|parametre_url{choix,statistiques})]#liste">Statistiques</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="liste" class="coins_ronds">
+  [(#REM) par defaut, les derniers modifs pour eviter de refaire le boulot deja fait  ]
+  [(#ENV{choix}|=={selection}|oui)<INCLURE{fond=inc/liste}{env}{ajax}>]
+  [(#ENV{choix}|=={correction}|oui)<INCLURE{fond=inc/correction}{env}{ajax}>]
+  [(#ENV{choix}|=={inscription}|oui)<INCLURE{fond=inc/inscription}{env}{ajax}>]
+  [(#ENV{choix}|non)<INCLURE{fond=inc/modification}{env}{ajax}>]  
+  [(#ENV{choix}|=={statistiques}|oui)<INCLURE{fond=inc/statistiques}{env}>]  
+  </div>
+</div>
+</body>
+</html>
+
