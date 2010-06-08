@@ -59,7 +59,7 @@ La version {Kiss} ({Keep it simple, stupid!}) est moins param&eacute;trable que 
 	</pipeline>
 
 	<bouton id='tickets' parent='bando_publication'>
-		<icone>images/ticket-16.png</icone>
+		<icone>imgs/bugs.png</icone>
 		<titre>tickets:titre</titre>
 		<url>tickets</url>
 	</bouton>
