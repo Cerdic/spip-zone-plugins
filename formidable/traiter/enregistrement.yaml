@@ -19,6 +19,16 @@ options:
   -
     saisie: 'radio'
     options:
+      nom: 'identification'
+      label: '<:formidable:traiter_enregistrement_option_identification_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_identification_explication:>'
+      datas:
+        cookie: '<:formidable:identification_par_cookie:>'
+        id_auteur: '<:formidable:identification_par_id_auteur:>'
+      defaut: 'cookie'
+  -
+    saisie: 'radio'
+    options:
       nom: 'moderation'
       label: '<:formidable:traiter_enregistrement_option_moderation_label:>'
       datas:

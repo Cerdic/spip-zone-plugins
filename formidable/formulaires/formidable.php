@@ -68,7 +68,7 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 				if ($options = $traitements['enregistrement']
 					and !$options['multiple']
 					and $options['modifiable']
-					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'])
+					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'])
 				){
 					$id_formulaires_reponse = array_pop($reponses);
 					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok = true);

@@ -59,6 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les r&eacute;sultats. &Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce formulaire ?',
 'formulaires_tous' => 'Tous les formulaires',
 
+'identification_par_cookie' => 'Par cookie',
+'identification_par_id_auteur' => "Par l'identifiant (id_auteur) de la personne authentifi&eacute;e",
 'importer_formulaire' => 'Importer un formulaire',
 'importer_formulaire_fichier_label' => 'Fichier &agrave; importer',
 'importer_formulaire_format_label' => 'Format du fichier',
@@ -114,6 +116,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traiter_enregistrement_option_modifiable_label' => 'R&eacute;ponses modifiables',
 'traiter_enregistrement_option_multiple_explication' => 'Une m&ecirc;me personne peut-elle r&eacute;pondre plusieurs fois au formulaire ?',
 'traiter_enregistrement_option_multiple_label' => 'R&eacute;ponses multiples',
+'traiter_enregistrement_option_identification_label' => 'Identification',
+'traiter_enregistrement_option_identification_explication' => "Si les réponses sont modifiables, quel procédé utiliser en priorité pour connaitre la réponse à modifier ?",
 'traiter_enregistrement_titre' => 'Enregistrer les r&eacute;sultats',
 
 'voir_exporter' => 'Exporter le formulaire',

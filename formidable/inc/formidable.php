@@ -92,19 +92,34 @@ function formidable_generer_nom_cookie($id_formulaire){
  * Vérifie si le visiteur a déjà répondu à un formulaire
  *
  * @param int $id_formulaire L'identifiant du formulaire
+ * @param string $choix_identification Comment verifier une reponse. Priorite sur 'cookie' ou sur 'id_auteur'
  * @return unknown_type Retourne un tableau contenant les id des réponses si elles existent, sinon false
  */
-function formidable_verifier_reponse_formulaire($id_formulaire){
+function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification='cookie'){
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 	$cookie = $_COOKIE[formidable_generer_nom_cookie($id_formulaire)];
-	
-	if ($cookie)
-		$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
-	elseif ($id_auteur)
-		$where = 'id_auteur='.intval($id_auteur);
-	else
+
+	// ni cookie ni id, on ne peut rien faire
+	if (!$cookie and !$id_auteur) {
 		return false;
+	}
+	
+	// priorite sur le cookie
+	if ($choix_identification == 'cookie' or !$choix_identification) {
+		if ($cookie)
+			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
+		else
+			$where = 'id_auteur='.intval($id_auteur);
+	}
+	
+	// sinon sur l'id_auteur
+	else {
+		if ($id_auteur)
+			$where = 'id_auteur='.intval($id_auteur);		
+		else
+			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
+	}
 	
 	$reponses = sql_allfetsel(
 		'id_formulaires_reponse',
