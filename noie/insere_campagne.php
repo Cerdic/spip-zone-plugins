@@ -13,6 +13,12 @@ function noie_affichage_final(&$page) {
   
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 	$campagne = recuperer_fond('noie', array('lang'=>$GLOBALS['spip_lang']));
+
+	// si un <body> se trouve dans la campagne, c'est anormal (plugin en travaux ?)
+	// on ne fait rien
+	if (strpos($campagne,'<body')!==FALSE)
+		return $page;
+
 	preg_match(',<div id=[\'"]noie[\'"].*?>,', $page, $regs)
 	|| preg_match(',<body\b.*?>,i', $page, $regs);
 
