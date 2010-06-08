@@ -13,7 +13,7 @@
 <param name="movie" value="[(#CHEMIN{flash/player_flv_maxi.swf}|url_absolue)]" />
 <param
  name="FlashVars"
- value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#GET{largeur,400})]&amp;height=[(#GET{hauteur,300})]&amp;flv=[(#URL_DOCUMENT|url_absolue)]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1[&amp;title=(#TITRE|urlencode)][(#LOGO_DOCUMENT|extraire_attribut{src}|match{flv.png$}|?{'',' '})&amp;startimage=[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})][&amp;srturl=(#ENV{srturl})]" />
+ value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#GET{largeur,400})]&amp;height=[(#GET{hauteur,300})]&amp;flv=[(#URL_DOCUMENT|url_absolue)]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1[&amp;title=(#TITRE|urlencode)][(#LOGO_DOCUMENT|extraire_attribut{src}|match{flv.png$}|non)&amp;startimage=[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})][&amp;srturl=(#ENV{srturl})]" />
 <param name="wmode" value="transparent" />
 <param name="allowFullScreen" value="true" />[
 <strong>(#TITRE)</strong>][

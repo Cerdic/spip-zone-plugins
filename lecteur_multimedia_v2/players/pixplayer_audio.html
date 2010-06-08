@@ -1,16 +1,16 @@
 <BOUCLE_doc(DOCUMENTS) {id_document}>
-<object type='application/x-shockwave-flash' data='[(#CHEMIN{flash/pixplayer.swf}|url_absolue)]' id='audioplayer#ID_DOCUMENT' height='[(#ENV{height,24})]' width='[(#ENV{width,290})]'>
+<object type="application/x-shockwave-flash" data="[(#CHEMIN{flash/pixplayer.swf}|url_absolue)]" id="audioplayer#ID_DOCUMENT" height="[(#ENV{height,24})]" width="[(#ENV{width,290})]">
 	<param name="wmode" value="transparent" />
-	<param name='movie' value='[(#CHEMIN{flash/pixplayer.swf}|url_absolue)]' />
-	<param name='FlashVars' value='playerID=#ID_DOCUMENT&amp;bg=0x[(#ENV{bg,f8f8f8})]&amp;leftbg=0x[(#ENV{leftbg,eeeeee})]&amp;lefticon=0x[(#ENV{lefticon,666666})]&amp;rightbg=0x[(#ENV{rightbg,cccccc})]&amp;rightbghover=0x[(#ENV{rightbghover,999999})]&amp;righticon=0x[(#ENV{righticon,666666})]&amp;righticonhover=0x[(#ENV{righticonhover,FFFFFF})]&amp;text=0x[(#ENV{text,666666})]&amp;slider=0x[(#ENV{slider,666666})]&amp;track=0x[(#ENV{track,FFFFFF})]&amp;border=0x[(#ENV{border,666666})]&amp;loader=0x[(#ENV{loader,9FFFB8})]&amp;soundFile=[(#URL_DOCUMENT|url_absolue)]' />
-	<param name='quality' value='high' />
-	<param name='menu' value='false' />
-	<param name='bgcolor' value='[(#ENV{bgcolor,#FFFFFF})]' />
-	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
+	<param name="movie" value="[(#CHEMIN{flash/pixplayer.swf}|url_absolue)]" />
+	<param name="FlashVars" value="playerID=#ID_DOCUMENT&amp;bg=0x[(#ENV{bg,f8f8f8})]&amp;leftbg=0x[(#ENV{leftbg,eeeeee})]&amp;lefticon=0x[(#ENV{lefticon,666666})]&amp;rightbg=0x[(#ENV{rightbg,cccccc})]&amp;rightbghover=0x[(#ENV{rightbghover,999999})]&amp;righticon=0x[(#ENV{righticon,666666})]&amp;righticonhover=0x[(#ENV{righticonhover,FFFFFF})]&amp;text=0x[(#ENV{text,666666})]&amp;slider=0x[(#ENV{slider,666666})]&amp;track=0x[(#ENV{track,FFFFFF})]&amp;border=0x[(#ENV{border,666666})]&amp;loader=0x[(#ENV{loader,9FFFB8})]&amp;soundFile=[(#URL_DOCUMENT|url_absolue)]" />
+	<param name="quality" value="high" />
+	<param name="menu" value="false" />
+	<param name="bgcolor" value="[(#ENV{bgcolor,#FFFFFF})]" />
+	[<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
 </object>
 <script type="text/javascript">
 	if(typeof(ap_instances) == "undefined"){
-		if (typeof(jQuery) == 'function') {
+		if (typeof(jQuery) == "function") {
 			jQuery.getScript("[(#CHEMIN{javascript/audio-player.js}|url_absolue)]");
 		}else{
 			document.write(unescape("%3Cscript src='[(#CHEMIN{javascript/audio-player.js}|url_absolue)]' type='text/javascript'%3E%3C/script%3E"));
