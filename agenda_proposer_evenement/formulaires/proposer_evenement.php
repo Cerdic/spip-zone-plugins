@@ -151,7 +151,7 @@ function formulaires_proposer_evenement_traiter_dist(){
 	$res = array();
 	$set_article = array(
 		'titre' => _request('titre'),
-		'chapo' => _request('descriptif'),
+		#'chapo' => _request('descriptif'),
 		'texte' => _request('texte'),
 		'statut' => lire_config('propevent/etat_contribution'),
 	);
@@ -202,6 +202,7 @@ function formulaires_proposer_evenement_traiter_dist(){
 
 			$set['date_debut'] = date('Y-m-d H:i:s',$date_debut);
 			$set['date_fin'] = date('Y-m-d H:i:s',$date_fin);
+			$set['descriptif'] = _request('descriptif');
 
 			$set['mots'] = _request('mots');
 			action_evenement_set($id_evenement,$set);

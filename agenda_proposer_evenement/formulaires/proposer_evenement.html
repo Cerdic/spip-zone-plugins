@@ -17,17 +17,17 @@
 			<li class="fieldset vous"><fieldset><legend><:propevent:label_qui_etes_vous:></legend>
 				<ul>
 					<li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
-						<label for="nom"><:propevent:label_votre_nom:></label>[
+						<label for="nom"><:propevent:label_votre_nom:> <:info_obligatoire_02:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
 						]<input type='text' class='text' name='nom' id='nom' value="#ENV{nom}" />
 					</li>
-					<li class="editer_prenom obligatoire[ (#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
-						<label for="prenom"><:propevent:label_votre_prenom:></label>[
+					<li class="editer_prenom[ (#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
+						<label for="prenom"><:propevent:label_votre_prenom:> </label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{prenom})</span>
 						]<input type='text' class='text' name='prenom' id='prenom' value="#ENV{prenom}" />
 					</li>
 					<li class="editer_email obligatoire[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
-						<label for="email"><:propevent:label_votre_email:></label>[
+						<label for="email"><:propevent:label_votre_email:> <:info_obligatoire_02:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
 						]<input type='text' class='text' name='email' id='email' value="#ENV{email}" />
 					</li>
@@ -41,13 +41,13 @@
 			<li class="fieldset vous"><fieldset><legend><:propevent:label_evenement_propose:></legend>
 				<ul>
 					<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-						<label for="titre"><:agenda:evenement_titre:></label>[
+						<label for="titre"><:agenda:evenement_titre:> <:info_obligatoire_02:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 						]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
 					</li>
 					[(#CONFIG{propevent/proposer_thematique}|=={oui}|oui)
 					<li class="editer_id_categorie obligatoire[ (#ENV**{erreurs}|table_valeur{id_categorie}|oui)erreur]">
-						<label for="id_categorie"><:propevent:label_id_categorie:></label>[
+						<label for="id_categorie"><:propevent:label_id_categorie:> <:info_obligatoire_02:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_categorie})</span>]
 						[(#INCLURE{fond=formulaires/inc-select-categories}{id_rubrique}{id_categorie})]
 					</li>
@@ -62,7 +62,7 @@
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 						]<textarea name='texte' rows='15' id='texte' class="no_barre">[(#ENV{texte})]</textarea>
 					</li>
-					<li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
+					<li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:> <:info_obligatoire_02:></legend>
 						<ul>
 							<li class="editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
 								<label for="horaire"><:agenda:evenement_horaire:></label>[

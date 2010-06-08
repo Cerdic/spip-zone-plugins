@@ -3,7 +3,7 @@
 	<icon>icon.png</icon>
 	<auteur>C&eacute;dric MORIN [->http://www.yterium.net]</auteur>
 	<licence>GPL 3 - &#169; 2010</licence>
-	<version>0.1.2</version>
+	<version>0.1.3</version>
 	<etat>test</etat>
 	<description>Permettre la proposition d'&eacute;v&eacute;nements sur le site public</description>
 	<lien></lien>
