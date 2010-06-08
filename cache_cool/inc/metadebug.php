@@ -31,12 +31,12 @@ function inc_meta_dist($table='meta')
 	AND $meta = @unserialize($metaf))
 		$GLOBALS[$table] = $meta;
 
-	if (!count($GLOBALS[$table]['plugin'])){
+	if (!isset($GLOBALS[$table]['plugin']) OR !unserialize($GLOBALS[$table]['plugin'])){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
 		$log = "Lecture cache table $table vide\n".date('Y-m-d H:i:s');
 		$log .= ' (pid '.@getmypid().')'."\n";
-		$log .= "cache:$cache\nmetaf : $metaf\n";
-		$log .= '_GLOBAL[meta]:'.var_export($GLOBALS[$table],true)."\n";
+		$log .= "new:$new\ncache:$cache\nmetaf : $metaf\n";
+		$log .= 'lecture _GLOBAL[meta]:'.var_export($GLOBALS[$table],true)."\n";
 		ob_start();
 		debug_print_backtrace();
 		$log .= ob_get_contents();
@@ -54,7 +54,7 @@ function inc_meta_dist($table='meta')
 	// les plugins sont vides a l'ecriture !
 	$log = date('Y-m-d H:i:s');
 	$log .= ' (pid '.@getmypid().')'."\n";
-	$log .= '_GLOBAL[meta]:'.var_export($GLOBALS[$table],true)."\n";
+	$log .= 'lecture _GLOBAL[meta]:'.var_export($GLOBALS[$table],true)."\n";
 	ob_start();
 	debug_print_backtrace();
 	$log .= ob_get_contents();
@@ -137,7 +137,7 @@ function effacer_meta($nom, $table='meta') {
 
 // http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
-	$trace = $GLOBALS['meta'];
+	$trace = $GLOBALS[$table];
 	static $touch = array();
 	if (!$nom) return;
 	include_spip('base/abstract_sql');
@@ -145,6 +145,16 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	// table pas encore installee, travailler en php seulement
 	if (!$res) {
 		$GLOBALS[$table][$nom] = $valeur;
+		$log = "Ecriture meta sans SQL\n".date('Y-m-d H:i:s');
+		$log .= ' (pid '.@getmypid().')'."\n".serialize($r)."\n";
+		$log .= "_GLOBAL[meta][$nom]=$valeur\n";
+		$log .= '_GLOBAL[meta]:'.var_export($trace,true)."\n";
+		ob_start();
+		debug_print_backtrace();
+		$log .= ob_get_contents();
+		ob_end_clean();
+		$log .= "\n\n";
+		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
 		return;
 	}
 	$res = sql_fetch($res);
@@ -162,8 +172,8 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 		$log = date('Y-m-d H:i:s');
 		$log .= ' (pid '.@getmypid().')'."\n".serialize($r)."\n";
 		$log .= '_GLOBAL[meta]:'.var_export($trace,true)."\n";
-		$log .= 'lecture initiale _GLOBAL[meta]:'.var_export($GLOBALS['_db_meta_lecture'],true)."\n";
 		$log .= '_SERVER:'.var_export($_SERVER,true)."\n";
+		$log .= "----\nlecture initiale _GLOBAL[meta]:\n".$GLOBALS['_db_meta_lecture']."\n----\n";
 		ob_start();
 		debug_print_backtrace();
 		$log .= ob_get_contents();
