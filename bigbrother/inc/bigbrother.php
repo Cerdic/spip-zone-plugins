@@ -168,8 +168,5 @@ function bigbrother_enregistrer_sortie($id_objet,$objet, $id_auteur, $date_debut
 		_T('bigbrother:action_sortie_objet',array('qui' => $qui, 'type' => $objet, 'id' => $id_objet)),
 		array('qui' => $qui_ou_ip,'faire' => 'visite_entree','quoi' => $objet,'date_debut' => $date_debut,'date_fin' => $date_fin,'id' => $id_objet)
 	);
-
-	return $date_fin;
-
 }
 ?>
