@@ -27,15 +27,45 @@ function inc_meta_dist($table='meta')
 
 	if ((_request('exec')!=='install' OR !test_espace_prive())
 	AND $new = jeune_fichier($cache, _META_CACHE_TIME)
-	AND lire_fichier_securise($cache, $meta)
-	AND $meta = @unserialize($meta))
+	AND lire_fichier_securise($cache, $metaf)
+	AND $meta = @unserialize($metaf))
 		$GLOBALS[$table] = $meta;
 
+	if (!count($GLOBALS[$table]['plugin'])){
+		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
+		$log = "Lecture cache table $table vide\n".date('Y-m-d H:i:s');
+		$log .= ' (pid '.@getmypid().')'."\n";
+		$log .= "cache:$cache\nmetaf : $metaf\n";
+		$log .= '_GLOBAL[meta]:'.var_export($GLOBALS[$table],true)."\n";
+		ob_start();
+		debug_print_backtrace();
+		$log .= ob_get_contents();
+		ob_end_clean();
+		$log .= "\n\n";
+		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
+	}
 	if (isset($GLOBALS[$table]['touch']) 
 	AND ($GLOBALS[$table]['touch']<time()-_META_CACHE_TIME))
 		$GLOBALS[$table] = array();
 	// sinon lire en base
 	if (!$GLOBALS[$table]) $new = !lire_metas($table);
+
+	// loger la lecture des meta, pour la ressortir au moment ou on constate que
+	// les plugins sont vides a l'ecriture !
+	$log = date('Y-m-d H:i:s');
+	$log .= ' (pid '.@getmypid().')'."\n";
+	$log .= '_GLOBAL[meta]:'.var_export($GLOBALS[$table],true)."\n";
+	ob_start();
+	debug_print_backtrace();
+	$log .= ob_get_contents();
+	ob_end_clean();
+	$log .= "\n\n";
+	$GLOBALS['_db_meta_lecture'] = $log;
+	if (!count($GLOBALS[$table]['plugin'])){
+		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
+		$log = "Lecture en base table $table vide\n$log";
+		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
+	}
 
 	// renouveller l'alea general si trop vieux ou sur demande explicite
 	if ((test_espace_prive() || isset($_GET['renouvelle_alea']))
@@ -107,7 +137,7 @@ function effacer_meta($nom, $table='meta') {
 
 // http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
-	$trace = $GLOBALS['meta']['plugin'];
+	$trace = $GLOBALS['meta'];
 	static $touch = array();
 	if (!$nom) return;
 	include_spip('base/abstract_sql');
@@ -130,11 +160,10 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	if (preg_match(',^plugin,i',$nom)){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
 		$log = date('Y-m-d H:i:s');
-		$log .= " ".$GLOBALS['ip']." [Auteur".$GLOBALS['visiteur_session']['id_auteur']."]";
 		$log .= ' (pid '.@getmypid().')'."\n".serialize($r)."\n";
-		$log .= '_GLOBAL[meta][plugin]:'.var_export($trace,true)."\n";
+		$log .= '_GLOBAL[meta]:'.var_export($trace,true)."\n";
+		$log .= 'lecture initiale _GLOBAL[meta]:'.var_export($GLOBALS['_db_meta_lecture'],true)."\n";
 		$log .= '_SERVER:'.var_export($_SERVER,true)."\n";
-		$log .= '_POST:'.var_export($_POST,true)."\n";
 		ob_start();
 		debug_print_backtrace();
 		$log .= ob_get_contents();
