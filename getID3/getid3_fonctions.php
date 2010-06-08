@@ -32,9 +32,9 @@ function getid3_duree($temps_secondes){
 	$temps_secondes -= $diff_minutes * 60;
 	$diff_minutes = (($diff_minutes > 0) && ($diff_minutes < 10)) ? '0'.$diff_minutes : $diff_minutes;
 
-	$temps_secondes = (($temps_secondes > 0) && ($temps_secondes < 10)) ? '0'.$temps_secondes : $temps_secondes;
+		$temps_secondes = (($temps_secondes > 0) && ($temps_secondes < 10)) ? '0'.floor($temps_secondes) : floor($temps_secondes);
 
-	$str = (($diff_hours > 0) ? $diff_hours.':':'').(($diff_minutes > 0) ? $diff_minutes:'00').':'.floor($temps_secondes);
+	$str = (($diff_hours > 0) ? $diff_hours.':':'').(($diff_minutes > 0) ? $diff_minutes:'00').':'.$temps_secondes;
 
 	return $str;
 }
