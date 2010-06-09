@@ -38,7 +38,7 @@
 		<legend><:guestbook:note_message:></legend>
 		<ul>
 			<li class="note [(#ENV**{erreurs}|table_valeur{note-erreur})]">
-				<label for="note"><:guestbook:note:> <em>(<:guestbook:obligatoire:>)</em></label>
+				<label for="note"><:guestbook:note:> <em><:info_obligatoire_02:></em></label>
 				<select id="note" name="note">
 					<option value="10"[ (#ENV{note}|=={10}|oui)selected="selected"]>10</option>
 					<option value="9"[ (#ENV{note}|=={9}|oui)selected="selected"]>9</option>

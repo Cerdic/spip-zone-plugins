@@ -12,8 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //A
 	'aucun_message_livre' => 'Aucun message dans le livre',
 // C
-	'captcha' => 'Veuillez remplir les caract&egrave;res dans le champ en respectant la casse',
-	'captcha_invalide' => 'CAPTCHA invalide, recommencez',
 	'champs_obligatoires' => 'Vous n\'avez pas rempli des champs obligatoires et/ou votre saisie contient des erreurs',
 	'continuer_moderation' => 'Vous pouvez continuer la mod&eacute;ration des messages',
 	'courriel' => 'Courriel',
