@@ -189,13 +189,14 @@ function adminplugin_site($meta, $liste_plug_compat) {
 			if ($cfg[$plugin]['version'] <> $liste_plug_compat[$plugin]['version']) {
 				$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
 				$secret = md5($secret);
+				$vplugin = $cfg[$plugin]['version'] . '&rarr;' . $liste_plug_compat[$plugin]['version'];
 				return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
 <div>
 <input type='hidden' name='secret' value='$secret' />
 <input type='hidden' name='exec' value='mutualisation' />
 <input type='hidden' name='upgradeplugins' value='oui' />
-<input type='submit' value='Upgrade plugins' />
+<input type='submit' value='Upgrade plugins ($plugin $vplugin)' />
 </div>
 </form>
 EOF;
