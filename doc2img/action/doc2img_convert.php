@@ -5,27 +5,28 @@
  *
  */
 
-/*! \brief ensemble des actions necessaires à la conversion d'un 
+/*! \brief ensemble des actions necessaires Ã  la conversion d'un
  *
  *  Traite juste l'action :
- *  - Récupere l'id_document
- *  - Retourne vers la page demandée ou à defaut la page appelante
- *  
+ *  - RÃ©cupere l'id_document
+ *  - Retourne vers la page demandÃ©e ou Ã  defaut la page appelante
+ *
  *  \param $redirect url de redirection (obetnue via _request())
- *  \param $id_document id_document fournit par le contexte (via _request())      
- */    
+ *  \param $id_document id_document fournit par le contexte (via _request())
+ */
+
 function action_doc2img_convert_dist(){
 
     //on charge les fonctions de conversion
     include_spip('inc/doc2img_convertir');
 
-    //on lance la conversion du document 
+    //on lance la conversion du document
     $id_document = intval(_request('id_document'));
     if ($id_document) {
-        convertir_document($id_document);    
+        convertir_document($id_document);
     }
 
-    //charge la page donéne par $redirect à defaut la page appelante
+    //charge la page donnÃ©e par $redirect Ã  defaut la page appelante
 #    if (empty($redirect)) {
         $redirect = $_SERVER['HTTP_REFERER'];
 #    } else {

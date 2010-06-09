@@ -1,54 +1,34 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-    <!-- Nom du plugin -->
-    <nom>doc2img</nom>
-
-    <!-- Auteur du plugin -->
-    <auteur>Camille Lafitte</auteur>
-    <version>0.91</version>
-    <etat>dev</etat>
-    <icon></icon>
-    <description> Ce plugin permet de convertir &#224; la vol&egrave;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle .</description>
-    <!-- URI de documentation -->
+	<nom>doc2img</nom>
+	<auteur>Camille Lafitte</auteur>
+	<version>0.92</version>
+	<etat>dev</etat>
+    <description> Ce plugin permet de convertir &#224; la vol&egrave;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle.</description>
     <lien>http://www.spip-contrib.net/doc2img</lien>
 
-    <!-- precise le prefixe utilis+ pour toutes les fonctions du plugin, en general le nom du plugin -->
     <prefix>doc2img</prefix>
-
-    <!-- Chemin du fichier d'installation et de mise à jour -->
-    <install>base/doc2img_install.php</install>
-
-   <!-- précise les dependances vis-a-vis de d'autres plugins -->
-    <necessite id="SPIP" version="[1.9.0;]" />
-    <necessite id="cfg" version="[1.9;]" />
-
-    <!-- mes options -->
-    <options>doc2img_options.php</options>
-
-    <!-- mes fonctions -->
+	<install>base/doc2img_install.php</install>
     <fonctions>doc2img_fonctions.php</fonctions>
+	<version_base>0.92</version_base>
 
-    <!-- appelle les pipelines -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/doc2img.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/doc2img.php</inclure>
+	</pipeline>
     <pipeline>
-       <!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
        <nom>affiche_gauche</nom>
-       <!-- nom de la fonction a appelé sans son prefixe -->
-       <action>affiche_gauche</action>
-       <!-- chemin du fichier contenant la fonction -->
-       <inclure>pipeline.php</inclure>
+       <inclure>doc2img_pipeline.php</inclure>
+   </pipeline>
+    <pipeline>
+       <nom>post_edition</nom>
+       <inclure>doc2img_pipeline.php</inclure>
    </pipeline>
 
-    <pipeline>
-       <!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
-       <nom>post_edition</nom>
-       <!-- nom de la fonction a appelé sans son prefixe -->
-       <action>post_edition</action>
-       <!-- chemin du fichier contenant la fonction -->
-       <inclure>pipeline.php</inclure>
-   </pipeline>   
-    
-   <chemin dir='.' type="prive"/>    
-   <chemin dir='.' type="public"/>   
-   <chemin dir='./prive' type="prive"/>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="cfg" version="[1.9;]" />
    <categorie>edition</categorie>
 </plugin>

@@ -1,26 +1,26 @@
 <?php
 
 /*! \file pipeline.php
- *  \brief Tous les appels pipeline sont centralisés ici
+ *  \brief Tous les appels pipeline sont centralisï¿½s ici
  *
- *  Les appels pipeline sont centralisé ici et renvoi en fonction des demandes vers la fonction necessaire.
- */    
+ *  Les appels pipeline sont centralisï¿½ ici et renvoi en fonction des demandes vers la fonction necessaire.
+ */
 
 /*! \brief surcharge de affiche_gauche
  *
- *  Pipeline gérant l'affichage gauche de l'espace privé
- *    
+ *  Pipeline gï¿½rant l'affichage gauche de l'espace privï¿½
+ *
  *  \param $flux flux html de la partie gauche
- *  \return renvoi le flux html completé  
- */  
+ *  \return renvoi le flux html completï¿½
+ */
 function doc2img_affiche_gauche($flux) {
 
     spip_log('pipeline affiche gauche','doc2img');
 
     spip_log('pipeline :'.$flux['args']['exec'],'doc2img');
-	//determine la page demandée 
+	//determine la page demandï¿½e
 	switch ($flux['args']['exec']) {
-		//la page articles est demandée
+		//la page articles est demandï¿½e
 		case "articles" :
 			//charge les fonctions necessaire
 			include_once('inc/doc2img_espace_prive.php');
@@ -36,20 +36,17 @@ function doc2img_affiche_gauche($flux) {
 
 /*! \brief surcharge de post_edition
  *
- *  Pipeline gérant la conversion à la volée des documents
- *    
+ *  Pipeline gï¿½rant la conversion ï¿½ la volï¿½e des documents
+ *
  *  \param $flux flux html de la partie gauche
- *  \return $flux renvoi le flux html complété  
- */  
+ *  \return $flux renvoi le flux html complï¿½tï¿½
+ */
 function doc2img_post_edition($flux) {
-    spip_log('document (tele)chargé','doc2img');
-
     $id_document = $flux['args']['id_objet'];
-    spip_log('id_document'.$id_document,'doc2img');
 
 	include_spip('inc/doc2img_convertir');
 
-    if (($flux['args']['operation'] == 'ajouter_document') 
+    if (($flux['args']['operation'] == 'ajouter_document')
             && (can_doc2img($id_document) == true)
             && (is_doc2img($id_document) == false)
             && (lire_config('doc2img/conversion_auto') == "on"))  {
