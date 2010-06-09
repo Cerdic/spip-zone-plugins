@@ -33,13 +33,12 @@ function doc2img_affiche_gauche($flux) {
 	return $flux;
 }
 
-
-/*! \brief surcharge de post_edition
+/**
+ * Insertion dans le pipeline post-edition
+ * Converti automatiquement les fichiers autorisés si possible
  *
- *  Pipeline g�rant la conversion � la vol�e des documents
- *
- *  \param $flux flux html de la partie gauche
- *  \return $flux renvoi le flux html compl�t�
+ * @param $flux Le contexte du pipeline
+ * @return $flux Le contexte du pipeline modifié
  */
 function doc2img_post_edition($flux) {
     $id_document = $flux['args']['id_objet'];
