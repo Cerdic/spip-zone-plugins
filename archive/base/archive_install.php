@@ -5,8 +5,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
     function archive_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
+	
 	//recupére les informations de plugin.xml
-	$infos = plugin_get_infos('archive');
+	//MaRRocK : Mise à jour pour du spip 2.1 car la fonction plugin_get_infos() n'existe plus.
+	if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$infos = $get_infos('archive');
+	}
+	/*else { //MaRRocK : Sinon appelle de la fonction presente dans les versions antérieures à spip 2
+		$infos = plugin_get_infos('archive');
+	} 	*/
+	
+	$version = $infos['version']; //MaRRocK : remise en place pour l'insertion de la valeur du champ "archive_version" dans la meta
 	$version_base = $infos['version_base'];    
     spip_log("upgrade","archive");
     spip_log("meta base version".$GLOBALS['meta'][$nom_meta_base_version],'archive');
@@ -22,6 +32,7 @@ include_spip('inc/meta');
 		maj_tables(array('spip_articles','spip_rubriques'));
 
 		ecrire_meta($nom_meta_base_version,$current_version=$version_base,'non');
+		ecrire_meta('archive_version',$version,'non'); //MaRRocK : remise en place pour l'insertion de la valeur du champ "archive_version" dans la meta
 	}
 	
 	ecrire_metas();
@@ -33,6 +44,7 @@ function archive_vider_tables($nom_meta_base_version) {
     sql_alter('TABLE spip_rubriques DROP archive');
     sql_alter('TABLE spip_rubriques DROP archive_date');        
 	effacer_meta($nom_meta_base_version);
+	effacer_meta('archive_version'); //MaRRocK : remise en place pour l'insertion de la valeur du champ "archive_version" dans la meta
 }
 
 /*
