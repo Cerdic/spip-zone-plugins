@@ -31,7 +31,11 @@ function inc_meta_dist($table='meta')
 	AND $meta = @unserialize($metaf))
 		$GLOBALS[$table] = $meta;
 
-	if (!isset($GLOBALS[$table]['plugin']) OR !unserialize($GLOBALS[$table]['plugin'])){
+	if (!$new){
+		$log = "Cache table $table obsolete\n".date('Y-m-d H:i:s');
+		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
+	}
+	elseif (!isset($GLOBALS[$table]['plugin']) OR !unserialize($GLOBALS[$table]['plugin'])){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
 		$log = "Lecture cache table $table vide\n".date('Y-m-d H:i:s');
 		$log .= ' (pid '.@getmypid().')'."\n";
@@ -61,7 +65,7 @@ function inc_meta_dist($table='meta')
 	ob_end_clean();
 	$log .= "\n\n";
 	$GLOBALS['_db_meta_lecture'] = $log;
-	if (!count($GLOBALS[$table]['plugin'])){
+	if (!isset($GLOBALS[$table]['plugin']) OR !unserialize($GLOBALS[$table]['plugin'])){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
 		$log = "Lecture en base table $table vide\n$log";
 		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
@@ -169,7 +173,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 
 	if (preg_match(',^plugin,i',$nom)){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
-		$log = date('Y-m-d H:i:s');
+		$log = "Ecriture meta\n".date('Y-m-d H:i:s');
 		$log .= ' (pid '.@getmypid().')'."\n".serialize($r)."\n";
 		$log .= '_GLOBAL[meta]:'.var_export($trace,true)."\n";
 		$log .= '_SERVER:'.var_export($_SERVER,true)."\n";
