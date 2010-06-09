@@ -11,10 +11,10 @@
 		<p class='explication'>Ajouter quelqu'un au fichier</p>
 		]
 		<ul class="non_spip">
-			<li style="display:inline;" class='saisie_nom_ecolo_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_ecolo_inscription}|oui)erreur]' >
-				<label for="nom_ecolo_inscription">Nom</label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_ecolo_inscription})</span>]
-				<input type="text" class="text" name="nom_ecolo_inscription" id="nom_ecolo_inscription" value="#ENV{nom_ecolo_inscription}" size="25" />
+			<li style="display:inline;" class='saisie_nom_adherent_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_adherent_inscription}|oui)erreur]' >
+				<label for="nom_adherent_inscription">Nom</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_adherent_inscription})</span>]
+				<input type="text" class="text" name="nom_adherent_inscription" id="nom_adherent_inscription" value="#ENV{nom_adherent_inscription}" size="25" />
 			</li>
 			<li style="display:inline; " class='saisie_prenom_inscription [ (#ENV*{erreurs}|table_valeur{prenom_inscription}|oui)erreur]'>
 				<label for="prenom_inscription">Pr&eacute;nom</label>
@@ -26,10 +26,10 @@
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{sexe_inscription})</span>]
 				<input type="text" class="text" name="sexe_inscription" id="sexe_inscription" value="#ENV{sexe_inscription}" size="1" />
 			</li>
-			<li style="display:inline; " class='saisie_no_ecolo_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{no_ecolo_inscription}|oui)erreur]'>
-				<label for="no_ecolo_inscription">No ECOLO</label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{no_ecolo_inscription})</span>]
-				<input type="text" class="text" name="no_ecolo_inscription" id="no_ecolo_inscription" value="#ENV{no_ecolo_inscription}" size="6" />
+			<li style="display:inline; " class='saisie_no_adherent_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{no_adherent_inscription}|oui)erreur]'>
+				<label for="no_adherent_inscription">No ADHERENT</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{no_adherent_inscription})</span>]
+				<input type="text" class="text" name="no_adherent_inscription" id="no_adherent_inscription" value="#ENV{no_adherent_inscription}" size="6" />
 			</li>
 </ul><ul>
 			<li style="display:inline; " class='saisie_adresse_postale_inscription [ (#ENV*{erreurs}|table_valeur{adresse_postale_inscription}|oui)erreur]'>
@@ -48,10 +48,10 @@
 				<input type="text" class="text" name="localite_inscription" id="localite_inscription" value="#ENV{localite_inscription}" size="20" />
 			</li>
 </ul><ul>	
-			<li style="display:inline; " class='saisie_statut_ecolo_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{statut_ecolo_inscription}|oui)erreur]'>
-				<label for="statut_ecolo_inscription">Statut ECOLO</label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{statut_ecolo_inscription})</span>]
-				<input type="text" class="text" name="statut_ecolo_inscription" id="statut_ecolo_inscription" value="#ENV{statut_ecolo_inscription}" size="1" />
+			<li style="display:inline; " class='saisie_statut_adherent_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{statut_adherent_inscription}|oui)erreur]'>
+				<label for="statut_adherent_inscription">Statut ADHERENT</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{statut_adherent_inscription})</span>]
+				<input type="text" class="text" name="statut_adherent_inscription" id="statut_adherent_inscription" value="#ENV{statut_adherent_inscription}" size="1" />
 			</li>
 			<li style="display:inline; " class='saisie_cotisation_inscription [ (#ENV*{erreurs}|table_valeur{cotisation_inscription}|oui)erreur]'>
 				<label for="cotisation_inscription">Cotisation</label>

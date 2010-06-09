@@ -13,10 +13,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_ajout_inscription_charger_dist() {
-	$valeurs = array('nom_ecolo_inscription'=>'', 'prenom_inscription'=>'',
+	$valeurs = array('nom_adherent_inscription'=>'', 'prenom_inscription'=>'',
 'adresse_postale_inscription'=>'', 'cp_inscription'=>'1070',
-'localite_inscription'=>'Anderlecht', 'no_ecolo_inscription'=>'',
-'statut_ecolo_inscription'=>'S', 'cotisation_inscription'=>'',
+'localite_inscription'=>'Anderlecht', 'no_adherent_inscription'=>'',
+'statut_adherent_inscription'=>'S', 'cotisation_inscription'=>'',
 'sexe_inscription'=>'', 'tel_inscription'=>'', 'gsm_inscription'=>'', 'email_inscription'=>'');
 
 	return $valeurs;
@@ -28,8 +28,8 @@ function formulaires_ajout_inscription_verifier_dist() {
 	$erreurs = array();
 	include_spip('inc/filtres');	
 
-	if (!$nom = _request('nom_ecolo_inscription'))
-		$erreurs['nom_ecolo_inscription'] = _T("info_obligatoire");
+	if (!$nom = _request('nom_adherent_inscription'))
+		$erreurs['nom_adherent_inscription'] = _T("info_obligatoire");
 	
 	return $erreurs;
 
@@ -40,22 +40,22 @@ function formulaires_ajout_inscription_traiter_dist() {
 
 	$res = array('message_erreur'=>_T('titre_probleme_technique'));
 
-	$nom_ecolo = _request('nom_ecolo_inscription');
+	$nom_adherent = _request('nom_adherent_inscription');
 	$prenom = _request('prenom_inscription');
 	$adresse_postale = _request('adresse_postale_inscription');
 	$code_postal = _request('cp_inscription');
 	$localite = _request('localite_inscription');
-	$no_fichier = _request ('no_ecolo_inscription');
-	$statut_ecolo = _request ('statut_ecolo_inscription');
+	$no_fichier = _request ('no_adherent_inscription');
+	$statut_adherent = _request ('statut_adherent_inscription');
 	$cotisation = _request ('cotisation_inscription');
 	$sexe = _request ('sexe_inscription');
 	$tel = _request ('tel_inscription');
 	$gsm = _request ('gsm_inscription');
         $email = _request ('email_inscription');
-        $pseudo = $prenom .' '. $nom_ecolo;
+        $pseudo = $prenom .' '. $nom_adherent;
 	$login = test_login($pseudo, $email);
 
-if ($statut_ecolo =="M") $statut="1comite"; else $statut="6forum";
+if ($statut_adherent =="M") $statut="1comite"; else $statut="6forum";
 
 
 	include_spip('base/abstract_sql');
@@ -71,13 +71,13 @@ if ($statut_ecolo =="M") $statut="1comite"; else $statut="6forum";
 		if ($id_fichier = sql_insertq('fichiers', array(
 
 'id_auteur' => sql_getfetsel('id_auteur','spip_auteurs','nom='.sql_quote($pseudo)),
-'nom_ecolo' => $nom_ecolo,
+'nom_adherent' => $nom_adherent,
 'prenom' => $prenom,
 'adresse_postale' => $adresse_postale,
 'code_postal' => $code_postal,
 'localite' => $localite,
 'no_fichier' => $no_fichier,
-'statut_ecolo' => $statut_ecolo,
+'statut_adherent' => $statut_adherent,
 'cotisation' => $cotisation,
 'sexe' => $sexe, 
 'telephone' => $tel,

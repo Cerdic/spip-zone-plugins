@@ -6,41 +6,41 @@
   <div class="extrait">
     
  <div style="float:right;width:400px;">
-   [Cotisation: (#STATUT_ECOLO|=={M}|?{' ',''})<a href="[(#SELF|parametre_url{cotisation,[(#DATE|annee|moins{1})]}|parametre_url{debut_donnees,0})]" class="ajax">Voir les membres qui ne sont pas en ordre</a>.]
-   Etiquettes: <a href="[(#URL_PAGE{gestion_fichier_etiquettes}|parametre_url{statut_ecolo,#STATUT_ECOLO}|parametre_url{cotisation,#ENV{cotisation}}|parametre_url{lettre,#ENV{lettre}})]#stat">Imprimer pour cette s&eacute;lection.</a>
+   [Cotisation: (#STATUT_ADHERENT|=={M}|?{' ',''})<a href="[(#SELF|parametre_url{cotisation,[(#DATE|annee|moins{1})]}|parametre_url{debut_donnees,0})]" class="ajax">Voir les membres qui ne sont pas en ordre</a>.]
+   Etiquettes: <a href="[(#URL_PAGE{gestion_fichier_etiquettes}|parametre_url{statut_adherent,#STATUT_ADHERENT}|parametre_url{cotisation,#ENV{cotisation}}|parametre_url{lettre,#ENV{lettre}})]#stat">Imprimer pour cette s&eacute;lection.</a>
 </div>
 
     <div style="float:left; margin-top:15px;">Par statut:</div>
     <ul>
     <li>
-      <a href="[(#SELF|parametre_url{statut_ecolo,M})][&lettre=(#ENV{lettre})]" title="Membres" class="ajax[ (#ENV{statut_ecolo}|=={M}|?{'on',''})]">Membres</a>
+      <a href="[(#SELF|parametre_url{statut_adherent,M})][&lettre=(#ENV{lettre})]" title="Membres" class="ajax[ (#ENV{statut_adherent}|=={M}|?{'on',''})]">Membres</a>
     </li>
     <li>
-    <a href="[(#SELF|parametre_url{statut_ecolo,C})][&lettre=(#ENV{lettre})]" title="Candidats" class="ajax[ (#ENV{statut_ecolo}|=={C}|?{'on',''})]">Candidats</a>
+    <a href="[(#SELF|parametre_url{statut_adherent,C})][&lettre=(#ENV{lettre})]" title="Candidats" class="ajax[ (#ENV{statut_adherent}|=={C}|?{'on',''})]">Candidats</a>
     </li>
     <li>
-    <a href="[(#SELF|parametre_url{statut_ecolo,S})][&lettre=(#ENV{lettre})]" title="Sympathisants" class="ajax[ (#ENV{statut_ecolo}|=={S}|?{'on',''})]">Sympathisants</a>
+    <a href="[(#SELF|parametre_url{statut_adherent,S})][&lettre=(#ENV{lettre})]" title="Sympathisants" class="ajax[ (#ENV{statut_adherent}|=={S}|?{'on',''})]">Sympathisants</a>
     </li>
     <li>
-    <a href="[(#SELF|parametre_url{statut_ecolo,L})][&lettre=(#ENV{lettre})]" title="Locaux" class="ajax[ (#ENV{statut_ecolo}|=={L}|?{'on',''})]">Locaux</a>
+    <a href="[(#SELF|parametre_url{statut_adherent,L})][&lettre=(#ENV{lettre})]" title="Locaux" class="ajax[ (#ENV{statut_adherent}|=={L}|?{'on',''})]">Locaux</a>
     </li>
     <li>
-    <a href="[(#SELF|parametre_url{statut_ecolo,E})][&lettre=(#ENV{lettre})]" title="Exterieurs" class="ajax[ (#ENV{statut_ecolo}|=={E}|?{'on',''})]">Exterieurs</a>
+    <a href="[(#SELF|parametre_url{statut_adherent,E})][&lettre=(#ENV{lettre})]" title="Exterieurs" class="ajax[ (#ENV{statut_adherent}|=={E}|?{'on',''})]">Exterieurs</a>
     </li>
     <li>
-    <a href="[(#SELF|parametre_url{statut_ecolo,A})][&lettre=(#ENV{lettre})]" title="Anciens" class="ajax[ (#ENV{statut_ecolo}|=={A}|?{'on',''})]">Anciens membres</a>
+    <a href="[(#SELF|parametre_url{statut_adherent,A})][&lettre=(#ENV{lettre})]" title="Anciens" class="ajax[ (#ENV{statut_adherent}|=={A}|?{'on',''})]">Anciens membres</a>
     </li>
     <li>
-    <a href="[(#SELF|parametre_url{statut_ecolo,''})]" title="Tout" class="ajax[ (#ENV{statut_ecolo}|?{'','on'})]">Tout voir</a>
+    <a href="[(#SELF|parametre_url{statut_adherent,''})]" title="Tout" class="ajax[ (#ENV{statut_adherent}|?{'','on'})]">Tout voir</a>
     </li>
   </ul>
 
 <B_alpha>
   <div style="float:left;">Par initiale:</div>
   <ul>
-<BOUCLE_alpha(fichiers){tout} {statut_ecolo?}{par nom_ecolo} {fusion LEFT(nom_ecolo,1)}>
-  [<li><a href='[(#SELF|parametre_url{lettre, [(#NOM_ECOLO|substr{0,1})]}|parametre_url{debut_donnees,0})]' class="ajax[ (#ENV{lettre}|=={#NOM_ECOLO|substr{0,1}}|?{'on',''})]">
-  (#NOM_ECOLO|substr{0,1})
+<BOUCLE_alpha(fichiers){tout} {statut_adherent?}{par nom_adherent} {fusion LEFT(nom_adherent,1)}>
+  [<li><a href='[(#SELF|parametre_url{lettre, [(#NOM_ADHERENT|substr{0,1})]}|parametre_url{debut_donnees,0})]' class="ajax[ (#ENV{lettre}|=={#NOM_ADHERENT|substr{0,1}}|?{'on',''})]">
+  (#NOM_ADHERENT|substr{0,1})
   </a></li>]
 </BOUCLE_alpha>
 <li><a href="[(#SELF|parametre_url{lettre,''})]" class="ajax[ (#ENV{lettre}|?{'','on'})]">
@@ -53,17 +53,17 @@
 
   <B_donnees>    #ANCRE_PAGINATION
 <table style="font-size:0.7em; border: dotted 1px; width:100%;">
-<tr style="text-align:center;"><td>Sta-<br />tut</td><td>Cotis.</td><td>Num.<br /> ECOLO</td><td>Nom</td><td>Pr&eacute;nom</td><td>Sexe</td>
+<tr style="text-align:center;"><td>Sta-<br />tut</td><td>Cotis.</td><td>Num.<br /> ADHERENT</td><td>Nom</td><td>Pr&eacute;nom</td><td>Sexe</td>
 <td>Adresse postale</td><td>CP</td><td>Localite</td><td>Tel</td><td>GSM</td><td>Pseudo</td><td>e-mail</td>
 <td>Acc&egrave;s<br/>Membre</td><td>EDIT</td>
 </tr>
-<BOUCLE_donnees(fichiers){par nom_ecolo}{par no_fichier}{pagination 25}{statut_ecolo?}{cotisation?}{nom_ecolo LIKE %#ENV{recherche}%}{nom_ecolo==^(#ENV{lettre})}>
+<BOUCLE_donnees(fichiers){par nom_adherent}{par no_fichier}{pagination 25}{statut_adherent?}{cotisation?}{nom_adherent LIKE %#ENV{recherche}%}{nom_adherent==^(#ENV{lettre})}>
 <tr>
-<td style="border: dotted 1px;"><span  class="#EDIT{statut_ecolo}">[(#STATUT_ECOLO|?{#STATUT_ECOLO,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{statut_adherent}">[(#STATUT_ADHERENT|?{#STATUT_ADHERENT,'++'})]</span></td>
 <td style="border: dotted 1px;"><span  class="#EDIT{cotisation}">[(#COTISATION|?{#COTISATION,'++'})]</span></td>
 <td style="border: dotted 1px;"><span  class="#EDIT{no_fichier}">[(#NO_FICHIER|?{#NO_FICHIER,'++'})]</span></td>
 
-<td style="border: dotted 1px;"><span  class="#EDIT{nom_ecolo}">[(#NOM_ECOLO|?{#NOM_ECOLO,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{nom_adherent}">[(#NOM_ADHERENT|?{#NOM_ADHERENT,'++'})]</span></td>
 <td style="border: dotted 1px;"><span  class="#EDIT{prenom}">[(#PRENOM|?{#PRENOM,'++'})]</span></td>
 <td style="border: dotted 1px;"><span  class="#EDIT{sexe}">[(#SEXE|?{#SEXE,'++'})]</span></td>
 <td style="border: dotted 1px;"><span  class="#EDIT{adresse_postale}">[(#ADRESSE_POSTALE|?{#ADRESSE_POSTALE,'++'})]</span></td>

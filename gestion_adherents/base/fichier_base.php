@@ -17,15 +17,15 @@
 		"telephone" => "varchar(100) NOT NULL",
 		"gsm" => "varchar(100) NOT NULL",
 		"prenom" => "tinytext NOT NULL",
-		"nom_ecolo" => "tinytext NOT NULL",
+		"nom_adherent" => "tinytext NOT NULL",
 		"sexe" => "varchar(1) NOT NULL",
 		"cotisation" => "varchar(4) NOT NULL",
-		"statut_ecolo" => "varchar(1) NOT NULL",
+		"statut_adherent" => "varchar(1) NOT NULL",
 	);
 
 	$spip_fichiers_key = array(
 		"PRIMARY KEY" => "id_fichier",
-		"KEY" => "statut_ecolo",
+		"KEY" => "statut_adherent",
 		"KEY" => "id_auteur",
 		"KEY" => "no_fichier"
 	);
