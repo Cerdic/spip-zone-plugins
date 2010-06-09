@@ -37,6 +37,8 @@ function balise_FORMULAIRE_EDITER_LOGO_stat($args,$filtres) {
 	// si on demande en plus une redirection 
 	// #FORMULAIRE_EDITER_LOGO{article,12,#URL_AUTEUR{12}}
 	$retour = isset($args[2])?$args[2]:"";
+	// tableau d'options
+	$options = isset($args[3])?$args[3]:array();
 	// pas dans une boucle ? formulaire pour le logo du site
 	// dans ce cas, il faut chercher un 'siteon0.ext'
 	if ($objet == 'balise_hors_boucle') {
@@ -47,7 +49,7 @@ function balise_FORMULAIRE_EDITER_LOGO_stat($args,$filtres) {
 		$objet = table_objet($objet);
 		#$_id_objet = id_table_objet($objet); // calcule dans le CVT
 	}
-	return array($objet, $id_objet, $retour);
+	return array($objet, $id_objet, $retour, $options);
 }
 
 ?>

@@ -20,14 +20,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $objet        Objet SPIP auquel sera lie le document (ex. article)
  * @param integer $id_objet    Identifiant de l'objet
  * @param string $retour       Url de redirection apres traitement
+ * @param Array $options       Tableau d'option (exemple : image_reduire => 50)
  * @return Array               Variables d'environnement pour le fond
  */
-function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour=''){
+function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $options=array()){
 	$res = array(
 		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : ''),
 		'logo_survol'=>($GLOBALS['meta']['activer_logos_survol'] == 'oui' ? ' ' : ''),
 		'objet'=>$objet,
-		'id_objet'=>$id_objet
+		'id_objet'=>$id_objet,
+		'_options'=>$options
 	);
 
 	// pas dans une boucle ? formulaire pour le logo du site

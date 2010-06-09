@@ -10,7 +10,7 @@
 	  <ul>
 	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 				<label for="logo_on"><:ajaxform:logo:></label>[
-				<div class="spip_logos">(#ENV{logo_on}|image_reduire{50})</div>][
+				<div class="spip_logos">(#ENV{logo_on}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{50})]})</div>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
 				]<input type='file' class='file' name='logo_on' size="15" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
 				[(#ENV{logo_on}|oui)
@@ -25,7 +25,7 @@
 		[(#ENV{logo_survol}|oui)
 	    <li class="editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
 				<label for="logo_off"><:ajaxform:logo_survol:></label>[
-				<div class="spip_logos">(#ENV{logo_off}|image_reduire{50})</div>][
+				<div class="spip_logos">(#ENV{logo_off}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{50})]})</div>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
 				]<input type='file' class='file' name='logo_off' size="15" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
 				[(#ENV{logo_off}|oui)
