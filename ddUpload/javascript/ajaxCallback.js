@@ -315,10 +315,11 @@ jQuery.fn.ddUpload = function(success) {
   if(!xhr.upload)
     return this;
 
-  var progress = $("<div class='ddUploadprogress'><div class='ddUploadprogress_bar'></div><span class='ddUploadprogress_text'></span></div>");
-  progress.css({textAlign:"center",height:"15px"});
-  progress.find("div.ddUploadprogress_bar").css({backgroundColor:"#FF0000",height:"15px",position:"absolute",zIndex:"0"});
-  progress.find("span.ddUploadprogress_text").css({position:"relative",zIndex:"1"});
+  var progress = $("<div class='ddUploadprogress'><div class='ddUploadprogress_bar'></div><div class='ddUploadprogress_filename'></div><div class='ddUploadprogress_text'></div></div>");
+  progress.css({textAlign:"center",height:"30px",position:"relative"});
+  progress.find("div.ddUploadprogress_bar").css({backgroundColor:"#FF0000",top:0,height:"30px",position:"absolute",zIndex:"0"});
+  progress.find("div.ddUploadprogress_filename").css({position:"relative",zIndex:"1",lineHeight:"15px"});
+  progress.find("div.ddUploadprogress_text").css({position:"relative",zIndex:"1",lineHeight:"15px"});
   
   return this.each(function(){
     var self = $(this);
@@ -336,18 +337,19 @@ jQuery.fn.ddUpload = function(success) {
       		var fileProgress = progress.clone().insertAfter(self.find(":file:not(.ddAreaInput)"));
       		var width = fileProgress.width();
       		var progress_bar = fileProgress.find("div.ddUploadprogress_bar");
-      		var progress_text = fileProgress.find("span.ddUploadprogress_text");
+      		fileProgress.find("div.ddUploadprogress_filename").text(file.name);
+          var progress_text = fileProgress.find("div.ddUploadprogress_text");
   				xhr.upload.onprogress = function(e) {  
   					if (e.lengthComputable) {  
   					 var percentage = e.loaded / e.total;  
   					 progress_bar.width(Math.round(width*percentage));
-  					 progress_text.text(Math.round(percentage*100)+"%"); 
+  					 progress_text.text(Math.round(percentage*100)+"% ("+e.loaded+"/"+e.total+")"); 
   					}  
   				};  
   				
           var onload = function(e){
   					progress_bar.width(width);
-  					progress_text.text("100%");
+  					progress_text.text("100% ("+file.size+"/"+file.size+")");
   				};
            
   				xhr.upload.onload = onload;
