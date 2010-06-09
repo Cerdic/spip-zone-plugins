@@ -9,18 +9,18 @@
 	<lien>[Documentation->http://www.spip-contrib.net/Guestbook]</lien>
 	<prefix>guestbook</prefix>
 	<fonctions>guestbook_fonctions.php</fonctions>
-	<install>base/guestbook.php</install>
+	<install>base/guestbook_upgrade.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/guestbook_install.php</inclure>
+		<inclure>base/guestbook.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/guestbook_install.php</inclure>
+		<inclure>base/guestbook.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/guestbook_install.php</inclure>
+		<inclure>base/guestbook.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head_css</nom>
