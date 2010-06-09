@@ -1,20 +1,29 @@
 #CACHE{0}
 
-<h1 style="text-align:center" class="verdana2">doc2img</h1>
+<h3>doc2img</h3>
 
-<B_doc2img>
-  Choisissez le document ([(#CONFIG{doc2img/format_document})]) <br/>
-  &agrave; convertir en image :
-    <form method="post" enctype="multipart/form-data" action="#URL_ACTION{doc2img_convert}">
-        <input type="hidden" name="redirect" value="#SELF" />
-        <select name="id_document"><br/>
-    <BOUCLE_doc2img(DOCUMENTS) {id_article} {tout} {extension IN #CONFIG{doc2img/format_document}|spip_explode{','}}>
-        <option value=#ID_DOCUMENT>#ID_DOCUMENT - [(#TITRE|?{#TITRE,#FICHIER})]</option>
-    </BOUCLE_doc2img>
-        </select>
-        <br/>
-        <input type="submit" class="fondo" value="Convertir"/>
+<div class="formulaire_spip">
+    <form method="post" action="#URL_ACTION{doc2img_convert}">
+    	<div>
+	    	<input type="hidden" name="redirect" value="#SELF" />
+	    	<ul>
+	    		<li class="editer editer_id_document">
+					<label for="id_document"><:doc2img:formulaire_label_choix_doc{formats=#CONFIG{doc2img/format_document}}:></label>
+					<B_doc2img>
+					<select name="id_document" id="id_document">
+						<BOUCLE_doc2img(DOCUMENTS) {id_article} {tout} {extension IN #CONFIG{doc2img/format_document}|explode{','}}>
+						    <option value=#ID_DOCUMENT>#ID_DOCUMENT - [(#TITRE|?{#TITRE,[(#FICHIER|basename)]})]</option>
+						</BOUCLE_doc2img>
+					</select>
+					</B_doc2img>
+					    <span class="erreur_message"><:doc2img:formulaire_erreur_pas_doc:></span>
+					<//B_doc2img>
+				</li>
+			</ul>
+			<p class="boutons">
+	        	<input type="submit" class="submit" value="<:doc2img:bouton_convertir:>" />
+			</p>
+		</div>
     </form>
-</B_doc2img>
-    Desolé aucun document pour cet article
-<//B_doc2img>
+</div>
+

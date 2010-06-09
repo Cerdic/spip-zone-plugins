@@ -1,26 +1,19 @@
 <?php
 
-/*! \file pipeline.php
- *  \brief Tous les appels pipeline sont centralis�s ici
- *
- *  Les appels pipeline sont centralis� ici et renvoi en fonction des demandes vers la fonction necessaire.
+/**
+ * Plugin Doc2img
+ * Fichier contenant les appels aux pipelines de SPIP
  */
 
-/*! \brief surcharge de affiche_gauche
+/**
+ * Insertion dans le pipeline affiche_gauche
  *
- *  Pipeline g�rant l'affichage gauche de l'espace priv�
- *
- *  \param $flux flux html de la partie gauche
- *  \return renvoi le flux html complet�
+ * @param $flux flux html de la partie gauche
+ * @return $flux le flux html completé
  */
 function doc2img_affiche_gauche($flux) {
-
-    spip_log('pipeline affiche gauche','doc2img');
-
-    spip_log('pipeline :'.$flux['args']['exec'],'doc2img');
-	//determine la page demand�e
 	switch ($flux['args']['exec']) {
-		//la page articles est demand�e
+		//la page articles est demandée
 		case "articles" :
 			//charge les fonctions necessaire
 			include_once('inc/doc2img_espace_prive.php');
@@ -29,7 +22,6 @@ function doc2img_affiche_gauche($flux) {
 			$flux['data'] .= affiche_liste_doc($id_article);
 			break;
 	}
-	//retourne l'affichage complet
 	return $flux;
 }
 
