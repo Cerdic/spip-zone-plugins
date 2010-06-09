@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');   // for spip presentation functions
-include_spip('inc/config');   		// for spip presentation functions
+include_spip('inc/config');   		// for spip config functions
 include_spip('inc/layer');          // for spip layer functions
 include_spip('inc/utils');          // for _request function
 include_spip('inc/plugin');         // xml function
@@ -25,9 +25,9 @@ function archive_ajout_option($id_article) {
 
 	//genere le div à inserer dans le flux
 	$flux = "";
-	$flux .= debut_cadre('r');
+	$flux .= debut_cadre('e'); //MaRRocK : changement pour le style du cadre-e 
 		$flux .= '<form action="'.generer_url_ecrire("archive_update", "objet_nature=article&id_objet=".$id_article).'" method="post">';
-			$flux .= "Article archiv&eacute; : ";
+			$flux .= "<strong>Article archiv&eacute; : </strong>"; //MaRRocK : ajout de la balise <strong></strong>
 			$flux .= bouton_radio("archiver", true,"oui",$archive,"
 				if ($(this).attr('CHECKED')== 'CHECKED') {
 					$('#valider_archive').css('visibility','hidden');
@@ -46,7 +46,7 @@ function archive_ajout_option($id_article) {
 			$flux .= "<input type=\"submit\" class=\"fondo\" value=\"Valider\"/>";
 			$flux .= "</span>";
 		$flux .= "</form>";
-	$flux .= fin_cadre('r');
+	$flux .= fin_cadre('e'); //MaRRocK : changement pour le style du cadre-e 
 
 	return $flux;
 }
