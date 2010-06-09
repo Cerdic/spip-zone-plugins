@@ -1,10 +1,12 @@
 #CACHE{0}
-<B_listed2c>
-    Liste des #GRAND_TOTAL documents
-<BOUCLE_listed2c(DOC2IMG) {fusion id_document} > 
-    <a href=#URL_PAGE{doc2img,id_document=#ID_DOCUMENT}> #ID_DOCUMENT </a>
-</BOUCLE_listed2c>
 
+<B_listed2c>
+Liste des #GRAND_TOTAL documents
+<BOUCLE_listed2c(DOC2IMG) {fusion id_document}>
+    <a href=#URL_PAGE{prive/doc2img_liste,id_document=#ID_DOCUMENT}> #ID_DOCUMENT </a>
+</BOUCLE_listed2c>
+    La table est vide
+<//B_listed2c>
 <B_d2c>
     <p class="pagination">#PAGINATION{page_precedent_suivant}</p>
 <BOUCLE_d2c(DOC2IMG) {id_document} {pagination 1} >
@@ -13,5 +15,3 @@
     <p>Ce document poss&eacute;de #GRAND_TOTAL page(s)</p>
     <p class="pagination">#PAGINATION{page_precedent_suivant}</p>
 </B_d2c>
-    table vide
-<//B_d2c>
