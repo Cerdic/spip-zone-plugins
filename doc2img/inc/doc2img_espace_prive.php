@@ -19,7 +19,7 @@ function affiche_liste_doc($id_article) {
 	// définition du contexte
 	$contexte = array("id_article" => $id_article);
 	// chargement du fond demandé
-	$flux .= recuperer_fond("squelette/doc2img",$contexte);
+	$flux .= recuperer_fond("prive/doc2img",$contexte);
 
 	$flux .= fin_cadre('r');
     return $flux;
