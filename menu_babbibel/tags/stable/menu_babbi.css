@@ -56,6 +56,7 @@ line-height:1.85em; 	/*hauteur des lignes du sous menu*/
 }
 
 .nav li ul a{
+position:relative;
 width:19em; /*doit etre egale au .nav ul {width: }*/
 height:auto;
 float:left;
