@@ -84,96 +84,107 @@
 	<p><:bigbrother:info_stats_visite_auteurs_nb{nb=#GET{nb_users},nb_visites=#GET{nb_visites}}:></p>]
 ]
 
-<B_visites_par_auteurs>
-	<div class="cadre-r cadre">
-		<div class="cadre_padding">
-			<h3><:bigbrother:titre_visites_par_auteurs:></h3>
-			#ANCRE_PAGINATION
-			<table class="bigbrother" id="graph_visites_auteurs_table">
-				<thead>
-					<tr class="row_first">
-						<th><:bigbrother:thead_id_auteur:></th>
-						<th class="temps"><:bigbrother:temps_passe:></th>
+[(#REM)
+	Un auteur dans le contexte, pas besoin du tableau spécifique à cet auteur
+	ni de son graphique
+]
+<BOUCLE_auteur_contexte(CONDITION){si #ENV{id_auteur}}> </BOUCLE_auteur_contexte>
+</B_auteur_contexte>
+	[(#REM)
+		Si pas d'id_auteur dans le contexte on affiche pour tous les auteurs
+	]
+	<B_visites_par_auteurs>
+		<div class="cadre-r cadre">
+			<div class="cadre_padding">
+				<h3><:bigbrother:titre_visites_par_auteurs:></h3>
+				#ANCRE_PAGINATION
+				<table class="bigbrother" id="graph_visites_auteurs_table">
+					<thead>
+						<tr class="row_first">
+							<th><:bigbrother:thead_id_auteur:></th>
+							<th class="temps"><:bigbrother:temps_passe:></th>
+						</tr>
+					</thead>
+					<tbody>
+				<BOUCLE_visites_par_auteurs(POUR){tableau #GET{auteurs}}{pagination #ENV{pagination,0}}>
+					<tr class="tr_liste">
+						<td class="nom">
+							[(#ENV{id_auteur}|non)<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_auteur,#VALEUR})]">]
+								[(#VALEUR|is_numeric|oui)
+									#INFO_NOM{auteur,#VALEUR}]
+								[(#VALEUR|is_numeric|non)
+									#VALEUR]
+							[(#ENV{id_auteur}|non)</a>]
+						</td>
+						[<td class="temps"><abbr title="[(#GET{temps_auteurs}|table_valeur{aut#VALEUR}|mult{1000})]">(#GET{temps_auteurs}|table_valeur{aut#VALEUR}|bigbrother_duree{0,horaire})</abbr></td>]
 					</tr>
-				</thead>
-				<tbody>
-			<BOUCLE_visites_par_auteurs(POUR){tableau #GET{auteurs}}{pagination #ENV{pagination,0}}>
-				<tr class="tr_liste">
-					<td class="nom">
-						[(#ENV{id_auteur}|non)<a title="<:bigbrother:detail:>" href="[(#SELF|parametre_url{id_auteur,#VALEUR})]">]
-							[(#VALEUR|is_numeric|oui)
-								#INFO_NOM{auteur,#VALEUR}]
-							[(#VALEUR|is_numeric|non)
-								#VALEUR]
-						[(#ENV{id_auteur}|non)</a>]
-					</td>
-					[<td class="temps"><abbr title="[(#GET{temps_auteurs}|table_valeur{aut#VALEUR}|mult{1000})]">(#GET{temps_auteurs}|table_valeur{aut#VALEUR}|bigbrother_duree{0,horaire})</abbr></td>]
-				</tr>
-			</BOUCLE_visites_par_auteurs>
-				</tbody>
-			</table>
-			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+				</BOUCLE_visites_par_auteurs>
+					</tbody>
+				</table>
+				[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 
-			<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_auteurs}|array_sum|bigbrother_duree{0, horaire})]</p>
-			<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_auteurs}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
-			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{[(#GET{auteurs}|count)]}|round|bigbrother_duree{0, horaire})]</p>
+				<p><strong><:bigbrother:temps_total:></strong> : [(#GET{temps_auteurs}|array_sum|bigbrother_duree{0, horaire})]</p>
+				<p><strong><:bigbrother:temps_median:></strong> : [(#GET{temps_auteurs}|bigbrother_mediane|floor|bigbrother_duree{0, horaire})]</p>
+				<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{[(#GET{auteurs}|count)]}|round|bigbrother_duree{0, horaire})]</p>
 
-			<div id="graph_visites_id_auteurs" class="bigbrother_graphs"></div>
-			<script type="text/javascript">
-				jQuery(document).ready(function(){
-					var auteurs = [];
-					var auteurs_labels = [];
-					var auteurs_ticks = [];
+				<div id="graph_visites_id_auteurs" class="bigbrother_graphs"></div>
+				<script type="text/javascript">
+					jQuery(document).ready(function(){
+						var auteurs = [];
+						var auteurs_labels = [];
+						var auteurs_ticks = [];
 
-					i=0;
-					$('#graph_visites_auteurs_table tr.tr_liste').each(function(){
-						var temps = $(this).find('.temps abbr').attr('title');
-						auteurs.push([i,temps]);
-						var label = plot_trim($(this).find('.nom').text());
-						auteurs_labels.push(label);
-						auteurs_ticks.push([i,label]);
-						i++;
-					});
+						i=0;
+						$('#graph_visites_auteurs_table tr.tr_liste').each(function(){
+							var temps = $(this).find('.temps abbr').attr('title');
+							auteurs.push([i,temps]);
+							var label = plot_trim($(this).find('.nom').text());
+							auteurs_labels.push(label);
+							auteurs_ticks.push([i,label]);
+							i++;
+						});
 
-					var data_auteurs = [{ data: auteurs }];
-					var options = {
-						points : {show:true},
-						lines : {show:true},
-						yaxis : {mode:'time'},
-						xaxis : {ticks:auteurs_ticks},
-						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
-					};
+						var data_auteurs = [{ data: auteurs }];
+						var options = {
+							points : {show:true},
+							lines : {show:true},
+							yaxis : {mode:'time'},
+							xaxis : {ticks:auteurs_ticks},
+							grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+						};
 
-					$.plot($("#graph_visites_id_auteurs"), data_auteurs, options);
+						$.plot($("#graph_visites_id_auteurs"), data_auteurs, options);
 
-					var previousPoint = null;
-					$("#graph_visites_id_auteurs").bind("plothover", function (event, pos, item) {
-						if (item) {
-							if (previousPoint != item.dataIndex) {
-								previousPoint = item.dataIndex;
-								$("#bigbrother_tooltip").remove();
-								var x = item.datapoint[0].toFixed(2),
-									y = item.datapoint[1].toFixed(2);
+						var previousPoint = null;
+						$("#graph_visites_id_auteurs").bind("plothover", function (event, pos, item) {
+							if (item) {
+								if (previousPoint != item.dataIndex) {
+									previousPoint = item.dataIndex;
+									$("#bigbrother_tooltip").remove();
+									var x = item.datapoint[0].toFixed(2),
+										y = item.datapoint[1].toFixed(2);
 
-								var index = item.dataIndex;
-								content = auteurs_labels[index];
-								content += '<br />'+plot_ms_to_timereadable(item.datapoint[1]);
-								plot_showtooltip(
-									item.pageX,
-									item.pageY,
-									content,'bigbrother_tooltip');
+									var index = item.dataIndex;
+									content = auteurs_labels[index];
+									content += '<br />'+plot_ms_to_timereadable(item.datapoint[1]);
+									plot_showtooltip(
+										item.pageX,
+										item.pageY,
+										content,'bigbrother_tooltip');
+								}
 							}
-						}
-						else {
-							$("#bigbrother_tooltip").remove();
-							previousPoint = null;
-						}
+							else {
+								$("#bigbrother_tooltip").remove();
+								previousPoint = null;
+							}
+						});
 					});
-				});
-			</script>
+				</script>
+			</div>
 		</div>
-	</div>
-</B_visites_par_auteurs>
+	</B_visites_par_auteurs>
+<//B_auteur_contexte>
+
 <B_visites_par_id_objets>
 	<div class="cadre-r cadre">
 		<div class="cadre_padding">
@@ -243,7 +254,9 @@
 						var options = {
 							points : {show:true},
 						lines : {show:true},
-						yaxis : {mode:'time'},
+						yaxis : {
+							tickFormatter:function(val, axis){return plot_ms_to_timereadable(val);}
+						},
 						xaxis : {ticks:visites_ticks},
 						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
 					};
@@ -332,7 +345,9 @@
 					var data = [{ data: dates }];
 					var options = {
 						bars : {show:true},
-						yaxis : {mode:'time'},
+						yaxis : {
+							tickFormatter:function(val, axis){return plot_ms_to_timereadable(val);}
+						},
 						xaxis : {ticks:dates_ticks},
 						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
 					};

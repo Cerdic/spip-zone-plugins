@@ -1,7 +1,7 @@
 <?php
 /*
  *   +----------------------------------+
- *    Nom du Filtre : duree   
+ *    Nom du Filtre : duree
  *   +----------------------------------+
  *    date : 2008.01.10
  *    auteur :  erational - http://www.erational.org
@@ -10,7 +10,7 @@
  *   +-------------------------------------+
  *
  *    retourne la duree entre 2 dates
- *    
+ *
  *    parametres type_affichage
  *    - court   : 5 jours (par defaut)
  *    - etendu  : 4 semaines 3 jours 23 heures 2 minutes
@@ -18,15 +18,15 @@
  *    - minute  : 124 (minutes cumulees)
  *    - iso8601 : P18Y9W4DT11H9M8S   ref. http://fr.wikipedia.org/wiki/ISO_8601#Dur.C3.A9e
  *    - ical    : P18Y9W4DT11H9M8S   ref. http://tools.ietf.org/html/rfc2445#page-37 (mm chose que iso)
- *         
- *    pour sortir une valeur uniquement (i18n)    
+ *
+ *    pour sortir une valeur uniquement (i18n)
  *    - Y       : (an)
  *    - W       : (semaine)
- *    - D       : (jour) 
+ *    - D       : (jour)
  *    - H       : (heure)
  *    - M       : (minute)
- *    - S       : (s) 
- *                                  
+ *    - S       : (s)
+ *
 */
 
 // On le préfixe tout de même, pour être sûr de pas faire de conflits
@@ -35,7 +35,7 @@ function bigbrother_duree($date_debut,$date_fin,$type_affichage='court') {
 	// Si ce n'est QUE une suite de chiffres, c'est un timestamp direct
 	$date_debut = preg_match('/^[0123456789]+$/', $date_debut) ? intval($date_debut) : strtotime($date_debut);
 	$date_fin = preg_match('/^[0123456789]+$/', $date_fin) ? intval($date_fin) : strtotime($date_fin);
-	
+
 	// S'il n'y a pas de date de debut, on ne fait rien
 	if (!$date_debut)
 		return "";
@@ -48,30 +48,30 @@ function bigbrother_duree($date_debut,$date_fin,$type_affichage='court') {
 
 	if ($diff_seconds<0)
 		return "";
-	
+
 	// Si on demande la durée en secondes, on quitte tout de suite
 	if ($type_affichage == "secondes")
 		return $diff_seconds;
-	
+
 	$diff_years    = floor($diff_seconds/31536000);
 	$diff_seconds -= $diff_years   * 31536000;
-	
+
 	$diff_weeks    = floor($diff_seconds/604800);
 	$diff_seconds -= $diff_weeks   * 604800;
-	
+
 	$diff_days     = floor($diff_seconds/86400);
 	$diff_seconds -= $diff_days    * 86400;
-	
+
 	$diff_hours    = floor($diff_seconds/3600);
 	$diff_seconds -= $diff_hours   * 3600;
-	
+
 	$diff_minutes  = floor($diff_seconds/60);
-	$diff_seconds -= $diff_minutes * 60;  
-	
+	$diff_seconds -= $diff_minutes * 60;
+
 	$str = "";
-	
+
 	switch ($type_affichage) {
-	
+
 		case "court" :
 			if ($diff_years>1) $str = "$diff_years ans";
 			else if ($diff_years>0) $str = "$diff_years an";
@@ -123,44 +123,44 @@ function bigbrother_duree($date_debut,$date_fin,$type_affichage='court') {
 		case "Y":
 			$str = $diff_years;
 			break;
-		
+
 		case "W":
 			$str = $diff_weeks;
 			break;
-		
+
 		case "D":
 			$str = $diff_days;
 			break;
-		
+
 		case "H":
 			$str = $diff_hours;
 			break;
-		
+
 		case "M":
 			$str = $diff_minutes;
 			break;
-		
+
 		case "Y":
 			$str = $diff_years;
 			break;
-		                      
+
 		case "S":
 			$str = $diff_seconds;
 			break;
 
 		default:
 			break;
-	
-	}   
+
+	}
 
 	return $str;
-	
+
 }
 
 
 // Calculer la médiane d'un ensemble de nombres
 function bigbrother_mediane(){
-	
+
     $args = func_get_args();
 
     switch(func_num_args())
@@ -181,7 +181,7 @@ function bigbrother_mediane(){
             }
 
             sort($args);
-           
+
             $n = count($args);
             $h = intval($n / 2);
 
@@ -193,9 +193,9 @@ function bigbrother_mediane(){
 
             break;
     }
-   
+
     return $median;
-    
+
 }
 
 ?>

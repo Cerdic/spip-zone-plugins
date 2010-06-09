@@ -1,11 +1,27 @@
 <div class="cadre cadre-r">
 	<div class="cadre_padding">
+		[(#ENV{id_auteur}|intval|oui)
+		#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
+		]
+		[(#ENV{id_auteur}|intval|non)
+			#SET{auteur,#ENV{id_auteur}}
+		]
 		[(#ENV{objet}|oui)
+			<h1>
 			[(#ENV{id_objet}|is_numeric|oui)
 				[(#SET{titre,[(#INFO_TITRE{#ENV{objet},#ENV{id_objet}})]})]
-				<h1><:bigbrother:titre_statistiques_visites_id_objet{objet=#ENV{objet},id_objet=#ENV{id_objet},titre=#GET{titre}}:></h1>]
+				[(#ENV{id_auteur}|oui)
+					<:bigbrother:titre_statistiques_visites_id_objet_id_auteur{objet=#ENV{objet},id_objet=#ENV{id_objet},titre=#GET{titre},auteur=#GET{auteur}}:>]
+				[(#ENV{id_auteur}|non)
+					<:bigbrother:titre_statistiques_visites_id_objet{objet=#ENV{objet},id_objet=#ENV{id_objet},titre=#GET{titre}}:>]
+			]
 			[(#ENV{id_objet}|is_numeric|non)
-				<h1><:bigbrother:titre_statistiques_visites_objet{objet=#ENV{objet}}:></h1>]
+				[(#ENV{id_auteur}|oui)
+					<:bigbrother:titre_statistiques_visites_objet_id_auteur{objet=#ENV{objet},auteur=#GET{auteur}}:>]
+				[(#ENV{id_auteur}|non)
+					<:bigbrother:titre_statistiques_visites_objet{objet=#ENV{objet}}:>]
+			]
+			</h1>
 		]
 		#SET{id_journals,#ARRAY}
 		<BOUCLE_journal_stats_valide(JOURNAL){action = 'visite_entree'}{par date}{inverse}{date>#ENV{date_debut,0}}{objet ?}{id_objet ?}{id_auteur ?}>
@@ -21,7 +37,7 @@
 			<thead>
 				<tr class="row_first">
 					<th><:bigbrother:thead_id_journal:></th>
-					<th><:bigbrother:thead_id_auteur:></th>
+					[(#ENV{id_auteur}|non)<th><:bigbrother:thead_id_auteur:></th>]
 					<th><:bigbrother:thead_objet:></th>
 					<th><:bigbrother:thead_id_objet:></th>
 					<th><:bigbrother:thead_date_entree:></th>
@@ -33,7 +49,7 @@
 		<BOUCLE_journal_stats(JOURNAL){id_journal IN #GET{id_journals}}{par date}{inverse}{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}{id_auteur ?}{objet ?}{id_objet ?}{action like #ENV{action,%}}{pagination #ENV{pagination,10}}>
 			<tr class="tr_liste">
 				<td>##ID_JOURNAL</td>
-				<td>
+				[(#ENV{id_auteur}|non)<td>
 					[(#ID_AUTEUR|is_numeric|oui)
 						#SET{auteur,#INFO_NOM{auteur,#ID_AUTEUR}}]
 					[(#ID_AUTEUR|is_numeric|non)
@@ -41,7 +57,7 @@
 					[(#ENV{id_auteur}|non)<a href="[(#SELF|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:bigbrother:title_afficher_uniquement_user{user=#GET{auteur}}:>">]
 						#GET{auteur}
 					[(#ENV{id_auteur}|non)</a>]
-				</td>
+				</td>]
 				<td>
 					[(#ENV{objet}|non)
 					<a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''})]" title="<:bigbrother:title_afficher_uniquement_objet{objet=#OBJET}:>">]
