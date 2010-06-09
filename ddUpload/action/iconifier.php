@@ -55,16 +55,34 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 	if (!$sousaction2) {
     if (isset($_SERVER['HTTP_X_FILE_NAME']) && isset($_SERVER['CONTENT_LENGTH'])) {  
       if($_SERVER['CONTENT_LENGTH']>0) {
-        $uploadedContent = file_get_contents("php://input");
-        //detect data URI
-        if (preg_match("/^data:[^;]+(;charset=\"[^\"]+\")?(;base64)?,/",$uploadedContent,$m)) {
-          if($m[2]) //base64 encoded -> decode data
-            $uploadedContent = base64_decode(substr($uploadedContent,strlen($m[0])));
-          else //no decode, just strip headers
-            $uploadedContent = substr($uploadedContent,strlen($m[0]));
+        $handle = fopen("php://input","rb");
+        $block = fread($handle,4096);
+        $blocklen = strlen($block);
+        $base64 = false;
+        $dest = tempnam(_DIR_TMP, 'tmp_upload');
+        $handle_dest = fopen($dest,"ab"); 
+        if (preg_match("/^data:[^;]+(;charset=\"[^\"]+\")?(;base64)?,/",$block,$m)) {
+          //data uri
+          $base64 = $m[2];
+          $block = substr($block,strlen($m[0]));
+          if($base64) {
+            $blocklen -= $m[0];
+            $blockleft = $blocklen % 4;
+            if($blockleft) {
+              $block .= fread($handle,$blockleft);
+            }
+            $block = base64_decode($block);
+          }  
         }
-        file_put_contents($tmp_dir = tempnam(_DIR_TMP, 'tmp_upload'),$uploadedContent);
-        $source = array("name" => $_SERVER['HTTP_X_FILE_NAME'], "tmp_name" => $tmp_dir, "error" => 0);
+        fwrite($handle_dest,$block);
+        while($block = fread($handle,4096)) {
+          if($base64)
+            $block = base64_decode($block);
+          fwrite($handle_dest,$block);
+        }
+        fclose($handle);
+        fclose($handle_dest);
+        $source = array("name" => $_SERVER['HTTP_X_FILE_NAME'], "tmp_name" => $dest, "error" => 0);
       } else {
         spip_log("file upload error");
         $source = array("error" => 4);    
@@ -135,5 +153,8 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 		}
 	
 	}
+
+  if($dest)
+    @unlink(@dest);	
 }
 ?>

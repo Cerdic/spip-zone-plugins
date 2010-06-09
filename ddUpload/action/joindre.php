@@ -102,7 +102,10 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 	$sousaction = charger_fonction('joindre' . $sousaction, 'inc');
 	$type_image = $sousaction($path, $mode, $type, $id, $id_document, 
 		 $hash, $redirect, $documents_actifs, $iframe_redirect);
-
+  
+  if($dest)
+    @unlink($dest);
+  
 	$redirect = urldecode($redirect);
 	if ($documents_actifs) {
 		$redirect = parametre_url($redirect,'show_docs',join(',',$documents_actifs),'&');
