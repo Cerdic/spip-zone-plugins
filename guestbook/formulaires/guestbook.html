@@ -1,27 +1,26 @@
 #CACHE{200} 
 <div class="guestform formulaire_guestbook ajax">
-<form action='#SELF' method='post'>
+[(#ENV*{message_ok}|non)<form action='#SELF' method='post'>
 	#ACTION_FORMULAIRE{#SELF}
 	[<p class="message_erreur">(#ENV*{message_erreur})</p>]
 	<fieldset>
 		<legend><:guestbook:infos_perso:></legend>
 		<p><:guestbook:rentrez_infos_perso:></p>
-		#SET{'captcha', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
-		#SET{'captcha', #GET{'captcha'}|captch_it}
 		<ul>
 			<li class="courriel[ (#ENV**{erreurs}|table_valeur{email-erreur})]">
-				<label for="courriel"><:guestbook:courriel:>[ (#ENV**{erreurs}|table_valeur{email-ob}|sinon{ <em><:info_obligatoire_02:></em>})]</label>
-				<input type="hidden" name="verif" value="#GET{captcha}" />
+				<label for="courriel"><:guestbook:courriel:> <em><:info_obligatoire_02:></em></label>
 				<input type="text" class="text" name="email" id="courriel" value="#ENV{email}" />
-				[<p>(#ENV**{erreurs}|table_valeur{email})</p>]
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</p>]
 			</li>
 			<li class="ville[ (#ENV**{erreurs}|table_valeur{ville-erreur})]">
-				<label for="ville"><:guestbook:ville:>[ (#ENV**{erreurs}|table_valeur{ville-ob}|sinon{ <em><:info_obligatoire_02:></em>})]</label>
+				<label for="ville"><:guestbook:ville:> <em><:info_obligatoire_02:></em></label>
 				<input type="text" class="text" name="ville" id="ville" value="#ENV{ville}" />
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{ville})</p>]
 			</li>
 			<li class="pseudo[ (#ENV**{erreurs}|table_valeur{pseudo-erreur})]">
-				<label for="pseudo"><:guestbook:pseudo:>[ (#ENV**{erreurs}|table_valeur{pseudo-ob}|sinon{ <em><:info_obligatoire_02:></em>})]</label>
+				<label for="pseudo"><:guestbook:pseudo:> <em><:info_obligatoire_02:></em></label>
 				<input type="text" class="text" name="pseudo" id="pseudo" value="#ENV{pseudo}" />
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pseudo})</p>]
 			</li>
 			<li class="nom[ (#ENV**{erreurs}|table_valeur{nom-erreur})]">
 				<label for="nom"><:ecrire:info_nom:></label>
@@ -32,17 +31,6 @@
 				<label for="prenom"><:guestbook:prenom:></label>
 				<input type="text" class="text" name="prenom" id="prenom" value="#ENV{prenom}" />
 				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{prenom})</p>]
-			</li>
-			<li>
-				<label for="prenom"><:guestbook:prenom:></label>
-				<input type="text" class="text" name="prenom" id="prenom" value="#ENV{prenom}" />
-				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{prenom})</p>]
-			</li>
-			<li class="captcha[ (#ENV**{erreurs}|table_valeur{captcha-erreur})]">
-				<label for="captcha"><:guestbook:captcha:>[ (#ENV**{erreurs}|table_valeur{captcha-ob}|sinon{ <em><:info_obligatoire_02:></em>})]</label>
-				<input type="text" class="text" name="captcha" id="captcha" value="" />
-				[(#GET{'captcha'}|image_typo{police=1550.ttf}|image_flou{2})]
-				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{captcha})</p>]
 			</li>
 			</ul>
 			</fieldset>
@@ -65,8 +53,9 @@
 					<option value="0"[ (#ENV{note}|=={0}|oui)selected="selected"]>0</option>
 				</select>
 			</li>
-			<li class="message [(#ENV**{erreurs}|table_valeur{message-erreur})]">
-				<label for="message"><:guestbook:message:>[ (#ENV**{erreurs}|table_valeur{message}|sinon{ <em><:info_obligatoire_02:></em>})]</label>
+			<li class="message[ (#ENV**{erreurs}|table_valeur{message-erreur})]">
+				<label for="message"><:guestbook:message:> <em><:info_obligatoire_02:></em></label>
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{message})</p>]
 				<textarea id="message" name="message" cols="60" rows="5">#ENV{message}</textarea>
 			</li>
 		</ul>
@@ -74,7 +63,7 @@
 	<p class="boutons">
 		<input type="submit" class="submit" value="<:guestbook:poster:>" />
 	</p>
-</form>
+</form>]
 
 [<p class="message_ok">(#ENV*{message_ok})</p>]
 

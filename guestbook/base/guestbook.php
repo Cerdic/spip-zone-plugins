@@ -2,53 +2,34 @@
 	/**
 	 * GuestBook
 	 *
-	 * Copyright (c) 2008 - 2009
+	 * Copyright (c) 2008 - 2010
 	 * Yohann Prigent (potter64)
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-function guestbook_install($action){
-	switch ($action){
-		case 'test':
-			guestbook_upgrade('guestbook_base_version',2.1);
-		break;
-		case 'install':
-			guestbook_upgrade('guestbook_base_version',2.1);
-		break;
-		case 'uninstall':
-			guestbook_vider_tables();
-		break;
-	}
-}
+	 
+include_spip('inc/meta');
+include_spip('base/create');
+
 function guestbook_upgrade($nom_meta_base_version,$version_cible){
-	include_spip('inc/meta');
 	$current_version = 0.0;
+	if (isset($GLOBALS['meta'][$nom_meta_base_version])) {
+		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
+	}
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version])) || (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		if ($current_version==0.0){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			include_spip('base/guestbook_install');
 			creer_base();
-			ecrire_meta($nom_meta_base_version,$version_cible,'non');
+			ecrire_meta($nom_meta_base_version, $version_cible,'non');
 		}
 		if (version_compare($current_version,'2.0','<')){
-			sql_alter('TABLE spip_guestbook ADD prenom TEXT NOT NULL AFTER nom');
-			sql_alter('TABLE spip_guestbook ADD pseudo TEXT NOT NULL AFTER prenom');
-			sql_updateq("spip_guestbook", array("statut" => "off"), "statut='HL'");
-			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_reponse` `id_reponse` MEDIUMINT( 5 ) NOT NULL AUTO_INCREMENT");
-			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_message` `id_message` MEDIUMINT( 5 ) NOT NULL");
-			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_auteur` `id_auteur` MEDIUMINT( 5 ) NOT NULL");
+			maj_tables('spip_guestbook');
+			maj_tables('spip_guestbook_reponses');
 			ecrire_meta($nom_meta_base_version,$current_version='2.0');
 		}
 		if (version_compare($current_version,'2.1','<')){
-			sql_alter("TABLE `spip_guestbook` CHANGE `id_message` `id_message` INT(10) NOT NULL AUTO_INCREMENT");
-			sql_alter("TABLE `spip_guestbook` CHANGE `ip` `ip` VARCHAR(15) NOT NULL");
-			sql_alter("TABLE `spip_guestbook` CHANGE `note` `note` INT(2) NOT NULL");
-			sql_alter("TABLE `spip_guestbook` CHANGE `nom` `nom` VARCHAR(100) NOT NULL");
-			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_reponse` `id_reponse` INT(10) NOT NULL AUTO_INCREMENT");
-			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_message` `id_message` INT(10) NOT NULL");
-			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_auteur` `id_auteur` INT(10) NOT NULL");
+			maj_tables('spip_guestbook');
+			maj_tables('spip_guestbook_reponses');
 			ecrire_meta($nom_meta_base_version,$current_version='2.1');
 		}
 		ecrire_metas();

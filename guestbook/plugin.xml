@@ -1,7 +1,7 @@
 <plugin>
 	<nom>GuestBook</nom>
-	<auteur>Yohann Prigent (potter64) - Avril-Mai 2009</auteur>
-	<version>2.22</version>
+	<auteur>Yohann Prigent (potter64) - 2010</auteur>
+	<version>2.5</version>
 	<version_base>2.1</version_base>
 	<icon>prive/images/guestbook_logo.png</icon>
 	<etat>stable</etat>
@@ -23,10 +23,11 @@
 		<inclure>base/guestbook_install.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>insert_head</nom>
+		<nom>insert_head_css</nom>
 		<inclure>guestbook_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.1.0;]' />
+	<utilise id="nospam" version='[0.8;]' />
 	<bouton id='livredor' parent='forum'>
 		<icone>prive/images/guestbook.png</icone>
 		<titre>Livre d'or</titre>

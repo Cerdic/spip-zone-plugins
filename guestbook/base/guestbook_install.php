@@ -2,7 +2,7 @@
 	/**
 	 * GuestBook
 	 *
-	 * Copyright (c) 2008 - 2009
+	 * Copyright (c) 2008 - 2010
 	 * Yohann Prigent (potter64)
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
@@ -11,11 +11,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function guestbook_declarer_tables_interfaces($interface){
-	$interface['table_des_tables']['guestbook']='guestbook';
-	$interface['table_des_tables']['guestbook_reponses']='guestbook_reponses';
+	$interface['table_des_tables']['guestbook'] = 'guestbook';
+	$interface['table_des_tables']['guestbook_reponses'] = 'guestbook_reponses';
 	return $interface;
 }
+
 function guestbook_declarer_tables_principales($tables_principales){
+	// TABLE spip_guestbook
 	$spip_guestbook = array(
 		"id_message" 	=> "INT(10) NOT NULL AUTO_INCREMENT",
 		"message" 	=> "text NOT NULL",
@@ -39,6 +41,7 @@ function guestbook_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 function guestbook_declarer_tables_auxiliaires($tables_auxiliaires){
+	// TABLE spip_guestbook_reponses
 	$spip_guestbook_reponses = array(
 		"id_reponse" => "INT(10) NOT NULL AUTO_INCREMENT",
 		"id_message" => "INT(10) NOT NULL",
