@@ -4,75 +4,75 @@
 
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
+
     <form method="post" action="#ENV{action}">
         <div>
         #ACTION_FORMULAIRE{#ENV{action}}
         <ul>
             <li class="fieldset">
                 <fieldset>
-                    <h3 class="legend">Format d'entrée</h3>
-                    <p>Utilisez la , pour séparer les formats</p>
+                    <h3 class="legend"><:doc2img:cfg_legende_formats_entree:></h3>
                     <ul>
-                        <li class="editer_format_document[ (#ENV**{erreurs}|table_valeur{format_document}|oui)erreur]">		               
-		                    <label for="format_document">Extensions à traiter (pdf, tiff, ...) :</label>
-		                    <input type="text" name="format_document" id="format_document" value="#ENV{format_document}"/>
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{format_document})</span>]			                    
-	                    </ul>
+                        <li class="editer_format_document[ (#ENV**{erreurs}|table_valeur{format_document}|oui)erreur]">
+		                    <label for="format_document"><:doc2img:cfg_label_format:></label>
+							<p class="explication"><:doc2img:cfg_explication_format:></p>
+		                    <input type="text" name="format_document" id="format_document" value="#ENV{format_document}" class="text" />
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{format_document})</span>]
+						</li>
+					</ul>
                 </fieldset>
             </li>
             <li class="fieldset">
                 <fieldset>
-                    <h3 class="legend">Les sorties</h3>
+                    <h3 class="legend"><:doc2img:cfg_legende_formats_sortie:></h3>
                     <ul>
 		                <li class="editer_repertoire_cible[ (#ENV**{erreurs}|table_valeur{repertoire_cible}|oui)erreur]">
-			                <label for="repertoire_cible">Répertoire par défaut : </label>
-			                <input type="text" name="repertoire_cible" id="repertoire_cible" value="#ENV{repertoire_cible}"/>
+			                <label for="repertoire_cible"><:doc2img:cfg_label_repertoire_sortie:></label>
+			                <input type="text" name="repertoire_cible" id="repertoire_cible" value="#ENV{repertoire_cible}" class="text" />
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{repertoire_cible})</span>]
 		                </li>
-		                <li clas="editer_format_cible[ (#ENV**{erreurs}|table_valeur{format_cible}|oui)erreur]">
-			                <label for="format_cible">Le format de sortie par défaut :</label>
+		                <li class="editer_format_cible[ (#ENV**{erreurs}|table_valeur{format_cible}|oui)erreur]">
+			                <label for="format_cible"><:doc2img:cfg_label_format_sortie:></label>
 			                <B_typedoc>
-			                <select name="format_cible">
+			                <select name="format_cible" id="format_cible">
 			                <BOUCLE_typedoc(TYPES_DOCUMENTS) {mime_type==^image} {titre!=djvu}>
                                 <option value="#EXTENSION" [(#ENV{format_cible}|=={#EXTENSION}|?{selected="selected",''})]>#TITRE</option>
                             </BOUCLE_typedoc>
                             </select>
                             </B_typedoc>
                             [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_cible})</span>]
-		                </li>		
+		                </li>
 		                <li class="editer_largeur[ (#ENV**{erreurs}|table_valeur{largeur}|oui)erreur]">
-			                <label for="largeur">Largeur par défaut :</label>
-			                <input type="text" name="largeur" id="largeur" value="#ENV{largeur}"/> px
+			                <label for="largeur"><:doc2img:cfg_label_largeur:></label>
+			                <input type="text" name="largeur" id="largeur" value="#ENV{largeur}" class="text" style="width:5em;" /> px
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{largeur})</span>]
 		                </li>
 		                <li class="editer_hauteur[ (#ENV**{erreurs}|table_valeur{hauteur}|oui)erreur]">
-			                <label for="hauteur">Hauteur par défaut :</label>
-			                <input type="text" name="hauteur" id="hauteur" value="#ENV{hauteur}"/> px
+			                <label for="hauteur"><:doc2img:cfg_label_hauteur:></label>
+			                <input type="text" name="hauteur" id="hauteur" value="#ENV{hauteur}" class="text" style="width:5em;"/> px
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{hauteur})</span>]
-		                </li>		
+		                </li>
 		                <li class="editer_proportion[ (#ENV**{erreurs}|table_valeur{proportion}|oui)erreur]">
-			                <label for="proportion">Conserver les proportions :</label>
-			                <input type="checkbox" name="proportion" id="proportion" [checked="(#ENV{proportion})"]/>
+			                <label for="proportion"><:doc2img:cfg_label_proportions:></label>
+			                <input type="checkbox" name="proportion" id="proportion"[(#ENV{proportion}|=={on}|oui)checked="checked"]/>
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{proportion})</span>]
-		                </li>		
+		                </li>
 		                <li class="editer_agrandir[ (#ENV**{erreurs}|table_valeur{agrandir}|oui)erreur]">
-			                <label for="agrandir">Autoriser les agrandissements :</label>
-			                <input type="checkbox" name="agrandir" id="agrandir" [checked="(#ENV{agrandir})"]/>
+			                <label for="agrandir"><:doc2img:cfg_label_agrandissements:></label>
+			                <input type="checkbox" name="agrandir" id="agrandir"[(#ENV{agrandir}|=={on}|oui)checked="checked"]/>
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{agrandir})</span>]
-		                </li>		
+		                </li>
 		                <li class="editer_conversion_auto[ (#ENV**{erreurs}|table_valeur{conversion_auto}|oui)erreur]">
-			                <label for="conversion_auto">Conversion automatique lorsque qu'un document est joint :</label>
-			                <input type="checkbox" name="conversion_auto" id="conversion_auto" [checked="(#ENV{conversion_auto})"]/>
+			                <label for="conversion_auto"><:doc2img:cfg_label_conversion_auto:></label>
+			                <input type="checkbox" name="conversion_auto" id="conversion_auto"[(#ENV{conversion_auto}|=={on}|oui)checked="checked"]/>
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conversion_auto})</span>]
-		                </li>				
-                   </div>
+		                </li>
+                   </ul>
                 </fieldset>
             </li>
         </ul>        <p class="boutons">
-            <input type="submit" name="_cfg_ok" value="<:oK:>" class="submit" />
-            <input type="reset" value="<:reset:>" class="reset" />
-            <input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
+            <input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+            <input type="submit" name="_cfg_delete" value="<:cfg:bouton_effacer:>" class="submit" />
         </p>
         </div>
     </form>
