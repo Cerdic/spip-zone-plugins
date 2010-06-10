@@ -170,34 +170,43 @@ function exec_malettre(){
 							
 					  // affichage ?
 					  if (!$errorFlag) {
-						  echo "<form method='post' action='?exec=malettre'><fieldset>\n"; 
-              echo "<input type='hidden' name='lang_select' value='$lang' />"; 
-						  echo "<input type='hidden' name='agir' value='letter_send' />\n";
-              echo "<h4>"._T('malettre:expediteur')."</h4>\n";
-              echo "<select name='expediteur'>\n";
+						  $str = "<form method='post' action='?exec=malettre'><fieldset>\n"; 
+              $str .= "<input type='hidden' name='lang_select' value='$lang' />"; 
+						  $str .= "<input type='hidden' name='agir' value='letter_send' />\n";
+              $str .= "<h4>"._T('malettre:expediteur')."</h4>\n";
+              $str .= "<select name='expediteur'>\n";
 							foreach ($expediteurs as $expediteur=>$val){
-                  echo "<option value=\"$expediteur\" />".htmlentities($expediteur)." &lt;".htmlentities($val)."&gt;</option>";
+                  $str .= "<option value=\"$expediteur\" />".htmlentities($expediteur)." &lt;".htmlentities($val)."&gt;</option>";
               } 
-              echo "</select>\n";   
-              echo "<br />"._T('malettre:autre')." <input type='text' name='expediteur_more' />("._T('malettre:email_seulement').")\n" ;  
-                   
-             	echo "<h4>"._T('malettre:destinataires')."</h4>\n";
-							foreach ($adresses as $adresse=>$val){
-                  echo "<input type='checkbox' value=\"$val\"' name='desti[]' />$adresse &lt;$val&gt;<br />";
+              $str .= "</select>\n";   
+              $str .= "<br />"._T('malettre:autre')." <input type='text' name='expediteur_more' />("._T('malettre:email_seulement').")\n" ;  
+               
+              // destinataires                
+             	$str .= "<h4>"._T('malettre:destinataires')."</h4>\n";
+             	// connection plugin abonnes s'il existe
+              if (isset($GLOBALS['meta']['mesabonnes_base_version'])) {
+                  $inscrits =  sql_countsel("spip_mesabonnes");
+                  $str .= "<input type='checkbox' value='oui' name='mes_abonnes' /><strong>"._T('malettre:mes_abonnes',array('inscrits'=>"$inscrits"))."</strong><br />";
               }
-              echo "autre: <input type='text' name='desti_more' /> ("._T('malettre:email_seulement').")<br /><br />\n";
-
-              echo "<input type='submit' name='sub' value='Envoyer la lettre' /> \n";
-              echo "<input type='button' name='sub' value='Ecrire une nouvelle lettre' onclick=\"javascript:document.location.href='?exec=malettre'\"  /> ";
+							foreach ($adresses as $adresse=>$val){
+                  $str .= "<input type='checkbox' value=\"$val\"' name='desti[]' />$adresse &lt;$val&gt;<br />";
+              }              
+              $str .= _T('malettre:autre')." <input type='text' name='desti_more' /> ("._T('malettre:email_seulement').")<br /><br />\n";
               
-							echo "<h4>"._T('malettre:apercu')."</h4>\n";
-							echo "Sujet: <input type='text' size='55' name='lettre_title' value=\"".$lettre_title."\" /><br />\n";
-              echo "<iframe width=\"750\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
-							echo "<h4>"._T('malettre:version_html')."</h4>\n";
-							echo "<textarea cols='70' rows='20'>$sourceHTML</textarea>";
-							echo "<h4>"._T('malettre:version_txt')."</h4>\n";
-							echo "<textarea cols='70' rows='20'>$sourceTXT</textarea>";
-							echo "</fieldset></form>\n";
+              // fin formulaire
+              $str .= "<input type='submit' name='sub' value='Envoyer la lettre' /> \n";
+              $str .= "<input type='button' name='sub' value='Ecrire une nouvelle lettre' onclick=\"javascript:document.location.href='?exec=malettre'\"  /> ";
+              
+							$str .= "<h4>"._T('malettre:apercu')."</h4>\n";
+							$str .= "Sujet: <input type='text' size='55' name='lettre_title' value=\"".$lettre_title."\" /><br />\n";
+              $str .= "<iframe width=\"750\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
+							$str .= "<h4>"._T('malettre:version_html')."</h4>\n";
+							$str .= "<textarea cols='70' rows='20'>$sourceHTML</textarea>";
+							$str .= "<h4>"._T('malettre:version_txt')."</h4>\n";
+							$str .= "<textarea cols='70' rows='20'>$sourceTXT</textarea>";
+							$str .= "</fieldset></form>\n";
+							
+							echo $str;
 						} 					
 						
    } else if ($agir=='letter_send') {
@@ -245,7 +254,7 @@ function exec_malettre(){
             fclose($fr);
             $recup_txt = str_replace("{URL_MALETTRE}",$url_lettre_archive,$recup_txt);
             
-            // envoi lettre
+            // recup  expediteur
             $exp_email = _request('expediteur_more');
             if ($exp_email=="") {
                 $expediteur = _request('expediteur');                
@@ -255,15 +264,30 @@ function exec_malettre(){
                 }  else  die("expediteur inconnu");
             } else {
               $exp_name = $exp_mail;
-            }            
-           
+            }  
+                 
+            // recup destinataire
             $desti = _request('desti');
             $desti_more = _request('desti_more'); 
             if ($desti_more!="") $desti[] = $desti_more;
             
+            if (_request('mes_abonnes')=='oui') {
+                if ($resultats = sql_select('email', 'spip_mesabonnes')) {
+                	while ($res = sql_fetch($resultats)) 
+                		            $desti[] = $res['email'];                	
+                }
+            } 
+            
+            
             echo "<h3>"._T('malettre:envoi')." <i style='color:#999;'>$sujet</i></h3>\n";
             echo "<div style='border:1px solid;background:#eee;margin:10px 0;padding:10px;font-family:arial,sans-serif;font-size:0.9em;'>";
-                       
+            
+            // envoi lettre
+            // a ameliorer grandement flood
+            // utiliser une methode ajax pour temporiser l'envoi par flot
+            // ou tout simple deleger a facteur ? 
+            $i = 0;
+            $j = 0;          
             if (is_array($desti)) {
               foreach ($desti as $k=>$adresse) { // envoi a tous les destinataires
                 $mail = new PHPMailer();
@@ -272,6 +296,7 @@ function exec_malettre(){
                 $mail->FromName = "$exp_name";
                 $mail->AddReplyTo("$exp_email");
                 $mail->AddAddress($adresse,$adresse);
+                $i++;
                                 
                 $mail->WordWrap = 50;           // set word wrap
                 $mail->IsHTML(true);            // send as HTML
@@ -283,18 +308,20 @@ function exec_malettre(){
                              
                 if(!$mail->Send()) {
                     $msg = "<div style='color:red'><strong>$adresse</strong> - "._T('malettre:erreur_envoi')."</div>";  
-                    $msg .="Mailer Error: " . $mail->ErrorInfo; 
+                    //$msg .="Mailer Error: " . $mail->ErrorInfo; 
                     $success_flag = false;
+                    $j++;
                 } else {  
                     $msg = "<div style='color:green'><strong>$adresse</strong> - <span style='color:green'>"._T('malettre:succes_envoi')."</span></div>";         
                 }
-                 
                 echo $msg;
               }
             } else {
               echo "<div style='color:red'>"._T('malettre:erreur_no_dest')."</div>";
             }
             echo "</div>";
+            
+            echo "<div> $i / $j </div>";
             
             // archivage de la lettre en dur
             echo "<div style=\"margin:15px 0;\">"._T('malettre:archives_placer');
