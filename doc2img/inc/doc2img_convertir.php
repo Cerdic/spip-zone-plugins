@@ -203,7 +203,7 @@ function is_doc2img($id_document) {
  */
 function can_doc2img($id_document = NULL) {
     $info_document = sql_fetsel(
-        'extension,mode',
+        'extension,mode,distant',
         'spip_documents',
         'id_document = '.$id_document
     );
@@ -212,7 +212,9 @@ function can_doc2img($id_document = NULL) {
     $types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
 
     //on controle si le document est convertible ou non
-    if (($info_document['mode'] != 'distant') && in_array($info_document['extension'],$types_autorises)) {
+    if (($info_document['mode'] != 'vignette')
+    	&& ($info_document['distant'] != 'oui')
+    	&& in_array($info_document['extension'],$types_autorises)) {
         return true;
     } else {
         return false;

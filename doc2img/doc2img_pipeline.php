@@ -33,13 +33,19 @@ function doc2img_affiche_gauche($flux) {
 function doc2img_post_edition($flux) {
     $id_document = $flux['args']['id_objet'];
 
-    if (($flux['args']['operation'] == 'ajouter_document')
-            && (can_doc2img($id_document) == true)
-            && (is_doc2img($id_document) == false)
-            && (lire_config('doc2img/conversion_auto') == "on"))  {
-	    spip_log('document '.$id_document.' en conversion automatique','doc2img');
-	    $convertir = charger_fonction('doc2img_convertir','inc');
-	    $convertir($id_document);
+    if (in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))
+            && (sql_countsel('spip_doc2img','id_document='.intval($id_document)) == 0)
+            && (lire_config('doc2img/conversion_auto') == "on")){
+
+            	$infos_doc = sql_fetsel('extension,mode,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
+            	$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
+
+            	if(($infos_doc['mode'] != 'vignette')
+            		&& ($infos_doc['distant'] == 'non')
+            		&& in_array($infos_doc['extension'],$types_autorises)){
+			    		$convertir = charger_fonction('doc2img_convertir','inc');
+			    		$convertir($id_document);
+            	}
     }
 	return $flux;
 }
