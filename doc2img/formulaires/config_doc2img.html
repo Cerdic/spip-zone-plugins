@@ -74,14 +74,27 @@
 			                <input type="checkbox" name="agrandir" id="agrandir"[(#ENV{agrandir}|=={on}|oui)checked="checked"]/>
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{agrandir})</span>]
 		                </li>
-		                <li class="editer_conversion_auto[ (#ENV**{erreurs}|table_valeur{conversion_auto}|oui)erreur]">
+                   </ul>
+                </fieldset>
+            </li>
+			<li class="fieldset">
+                <fieldset>
+                    <h3 class="legend"><:doc2img:cfg_legende_relation_original:></h3>
+					<ul>
+						<li class="editer_conversion_auto[ (#ENV**{erreurs}|table_valeur{conversion_auto}|oui)erreur]">
 			                <label for="conversion_auto"><:doc2img:cfg_label_conversion_auto:></label>
 			                <input type="checkbox" name="conversion_auto" id="conversion_auto"[(#ENV{conversion_auto}|=={on}|oui)checked="checked"]/>
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conversion_auto})</span>]
 		                </li>
-                   </ul>
-                </fieldset>
-            </li>
+						<li class="editer_logo_auto[ (#ENV**{erreurs}|table_valeur{logo_auto}|oui)erreur]">
+			                <label for="logo_auto"><:doc2img:cfg_label_logo_auto:></label>
+							<p class="explication"><:doc2img:cfg_explication_logo_auto:></p>
+			                <input type="checkbox" name="logo_auto" id="logo_auto"[(#ENV{logo_auto}|=={on}|oui)checked="checked"]/>
+			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_auto})</span>]
+		                </li>
+					</ul>
+				<fieldset>
+			</li>
         </ul>        <p class="boutons">
             <input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
             <input type="submit" name="_cfg_delete" value="<:cfg:bouton_effacer:>" class="submit" />

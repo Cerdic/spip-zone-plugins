@@ -204,9 +204,10 @@ function convertir_document($id_document) {
 	        $version = '2.x';
 	        $image = new Imagick($document['source_url']['absolute'].$document['fullname']);
 	        $identify = $image->identifyImage();
+	        $identify2 = $image->getImageProperties();
 	        $nb_pages = $image->getNumberImages();
 	        spip_log($identify,'doc2img');
-	        spip_log($nb_pages,'doc2img');
+	        spip_log($identify2,'doc2img');
 	        $image->clear();
 	        $image->destroy();
 	    } else {
@@ -281,6 +282,13 @@ function convertir_document($id_document) {
 	            return "erreur base de donnée";
 	        }
 
+	        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($config['format_cible'],array('png','jpg'))){
+	        	if(($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)){
+		        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+					$x = $ajouter_documents($document['cible_url']['absolute'].$document['frame'], $document['cible_url']['absolute'].$document['frame'],
+							    'document', $id, 'vignette', $id_document, $actifs);
+	        	}
+	        }
 	        //on libère la frame
 	        if ($version == '0.9') {
 	            imagick_free($handle_frame);
