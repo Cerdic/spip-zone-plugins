@@ -68,7 +68,7 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
 		    );
 			ecrire_meta($nom_meta_base_version,$current_version='0.9','non');
 		}
-		if (version_compare($current_version,'0.91','<')){
+		if (version_compare($current_version,'0.92','<')){
             sql_alter(
                 "TABLE spip_doc2img
                     ADD largeur INT"
@@ -81,7 +81,7 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
                 "TABLE spip_doc2img
                     ADD taille INT"
             );
-			ecrire_meta($nom_meta_base_version,$current_version='0.91','non');
+			ecrire_meta($nom_meta_base_version,$current_version='0.92','non');
 		}
 	}
 }
