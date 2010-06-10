@@ -1,147 +1,6 @@
 <?php
 
 /**
- * Fonction qui indique si le document a deja été converti
- *
- * @param $id_document identifiant du document à controler
- * @return booleen true / false : true document déjà converti, false sinon
- */
-function is_doc2img($id_document) {
-    $pages = intval(sql_countsel('spip_doc2img','id_document='.$id_document));
-    if ($pages > 0) {
-        return true;
-    } else  {
-        return false;
-    }
-}
-
-
-/**
- * Fonction controlant que le document founi peut être converti :
- * - Son extension figure parmi ceux de la configuration
- * - Ce n'est pas un document distant
- *
- *  @param $id_document identifiant du document à controler
- *  @return booleen true/false : true document convertible, false si non
- */
-function can_doc2img($id_document = NULL) {
-    $info_document = sql_fetsel(
-        'extension,mode',
-        'spip_documents',
-        'id_document = '.$id_document
-    );
-
-    //on liste les extensions autorisées depuis CFG
-    $types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
-
-    //on controle si le document est convertible ou non
-    if (($info_document['mode'] != 'distant') && in_array($info_document['extension'],$types_autorises)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
- * Calcul les ratios de taille de l'image finale
- *
- * Vérifie que le document donné en paramètre est bien listé dans les types de documents
- * autorisés à la conversion via CFG
- *
- * @param $id_document identifiant du document à controler
- * @return booleen $resultat : true document convertible, false sinon
- */
-function doc2img_ratio(&$handle,$version='0.9',$config=array()) {
-
-    $ratio['largeur'] = $ratio['hauteur'] = 1;
-
-    /**
-     * Récupération des dimensions du document d'origine
-     */
-    if($version == '0.9'){
-    	$dimensions['largeur'] = imagick_getwidth($handle);
-    	$dimensions['hauteur'] = imagick_getheight($handle);
-    }else{
-		$dimensions['largeur'] = $handle->getImageWidth();
-    	$dimensions['hauteur'] = $handle->getImageHeight();
-    }
-
-    //si une largeur seuil a été définie
-    if ($largeur = $config['largeur']) {
-        $ratio['largeur'] = $largeur / $dimensions['largeur'];
-    }
-
-    //si une hauteur seuil a été définie
-    if ($hauteur = $config['hauteur']) {
-        $ratio['hauteur'] = $hauteur / $dimensions['hauteur'];
-    }
-
-
-    /**
-     * Ajustement des ratios si proportion demandée
-     * Si agrandissement demandé on prend le plus grand ratio,
-     * sinon le plus petit
-     */
-    if ($config['proportion'] == "on") {
-        $ratio['largeur'] = ($config['agrandir'] == 'on') ? max($ratio['hauteur'], $ratio['largeur']) : min($ratio['hauteur'], $ratio['largeur']);
-        $ratio['hauteur'] = $ratio['largeur'];
-    }
-
-    /**
-     * Définition des dimensions définitives
-     */
-    $dimensions['largeur'] = $ratio['largeur'] * $dimensions['largeur'];
-    $dimensions['hauteur'] = $ratio['hauteur'] * $dimensions['hauteur'];
-
-    return $dimensions;
-}
-
-
-/**
- * Fonction pour connaitre les infos fichiers du document
- *
- *  Calcul un tableau :
- *  - avec informations sur le documents (nom, repertoire, nature)
- *  - determine les informations des documents finaux (nom, respertoire, extension)
- *
- * @param $id_document identifiant du document à convertir
- * @return $document : liste de données caractérisant le document
- */
-function doc2img_document($id_document) {
-
-    //on recupere l'url du document
-    $fichier = sql_getfetsel(
-        'fichier',
-        'spip_documents',
-        'id_document='.$id_document
-    );
-
-    //chemin relatif du fichier
-    $fichier = get_spip_doc($fichier);
-
-    //nom complet du fichier : recherche ce qui suit le dernier / et retire ce dernier
-    // $resultat[0] = $resultat[1]/$resultat[2].$resultat[3]
-    preg_match('/(.*)\/(.*)\.(.\w*)/i', $fichier, $result);
-
-    //url relative du repertoire contenant le fichier , on retire aussi le / en fin
-    $document['source_url']['relative'] = $result[1].'/';
-    $document['source_url']['absolute'] = $racine_site.$document['source_url']['relative'];
-
-    //information sur le nom du fichier
-    $document['extension'] = $result[3];
-    $document['name'] = $result[2];
-    $document['fullname'] = $result[2].'.'.$result[3];
-
-    //creation du repertoire cible
-    //url relative du repertoire cible
-    $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
-    $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
-
-    return $document;
-}
-
-
-/**
  * Fonction autonome convertissant un document donné en paramètre
  *
  *  Ensemble des actions necessaires à la conversion d'un document en image :
@@ -154,7 +13,7 @@ function doc2img_document($id_document) {
  *
  * @param $id_document identifiant du document à convertir
  */
-function convertir_document($id_document) {
+function inc_doc2img_convertir($id_document) {
 
 	if(function_exists('imagick_readimage') OR class_exists('Imagick')){
 	    // NOTE : les repertoires doivent se finir par un /
@@ -316,6 +175,146 @@ function convertir_document($id_document) {
 	}else{
 		return false;
 	}
+}
+
+/**
+ * Fonction qui indique si le document a deja été converti
+ *
+ * @param $id_document identifiant du document à controler
+ * @return booleen true / false : true document déjà converti, false sinon
+ */
+function is_doc2img($id_document) {
+    $pages = intval(sql_countsel('spip_doc2img','id_document='.$id_document));
+    if ($pages > 0) {
+        return true;
+    } else  {
+        return false;
+    }
+}
+
+
+/**
+ * Fonction controlant que le document founi peut être converti :
+ * - Son extension figure parmi ceux de la configuration
+ * - Ce n'est pas un document distant
+ *
+ *  @param $id_document identifiant du document à controler
+ *  @return booleen true/false : true document convertible, false si non
+ */
+function can_doc2img($id_document = NULL) {
+    $info_document = sql_fetsel(
+        'extension,mode',
+        'spip_documents',
+        'id_document = '.$id_document
+    );
+
+    //on liste les extensions autorisées depuis CFG
+    $types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
+
+    //on controle si le document est convertible ou non
+    if (($info_document['mode'] != 'distant') && in_array($info_document['extension'],$types_autorises)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Calcul les ratios de taille de l'image finale
+ *
+ * Vérifie que le document donné en paramètre est bien listé dans les types de documents
+ * autorisés à la conversion via CFG
+ *
+ * @param $id_document identifiant du document à controler
+ * @return booleen $resultat : true document convertible, false sinon
+ */
+function doc2img_ratio(&$handle,$version='0.9',$config=array()) {
+
+    $ratio['largeur'] = $ratio['hauteur'] = 1;
+
+    /**
+     * Récupération des dimensions du document d'origine
+     */
+    if($version == '0.9'){
+    	$dimensions['largeur'] = imagick_getwidth($handle);
+    	$dimensions['hauteur'] = imagick_getheight($handle);
+    }else{
+		$dimensions['largeur'] = $handle->getImageWidth();
+    	$dimensions['hauteur'] = $handle->getImageHeight();
+    }
+
+    //si une largeur seuil a été définie
+    if ($largeur = $config['largeur']) {
+        $ratio['largeur'] = $largeur / $dimensions['largeur'];
+    }
+
+    //si une hauteur seuil a été définie
+    if ($hauteur = $config['hauteur']) {
+        $ratio['hauteur'] = $hauteur / $dimensions['hauteur'];
+    }
+
+
+    /**
+     * Ajustement des ratios si proportion demandée
+     * Si agrandissement demandé on prend le plus grand ratio,
+     * sinon le plus petit
+     */
+    if ($config['proportion'] == "on") {
+        $ratio['largeur'] = ($config['agrandir'] == 'on') ? max($ratio['hauteur'], $ratio['largeur']) : min($ratio['hauteur'], $ratio['largeur']);
+        $ratio['hauteur'] = $ratio['largeur'];
+    }
+
+    /**
+     * Définition des dimensions définitives
+     */
+    $dimensions['largeur'] = $ratio['largeur'] * $dimensions['largeur'];
+    $dimensions['hauteur'] = $ratio['hauteur'] * $dimensions['hauteur'];
+
+    return $dimensions;
+}
+
+
+/**
+ * Fonction pour connaitre les infos fichiers du document
+ *
+ *  Calcul un tableau :
+ *  - avec informations sur le documents (nom, repertoire, nature)
+ *  - determine les informations des documents finaux (nom, respertoire, extension)
+ *
+ * @param $id_document identifiant du document à convertir
+ * @return $document : liste de données caractérisant le document
+ */
+function doc2img_document($id_document) {
+
+    //on recupere l'url du document
+    $fichier = sql_getfetsel(
+        'fichier',
+        'spip_documents',
+        'id_document='.$id_document
+    );
+
+    //chemin relatif du fichier
+    $fichier = get_spip_doc($fichier);
+
+    //nom complet du fichier : recherche ce qui suit le dernier / et retire ce dernier
+    // $resultat[0] = $resultat[1]/$resultat[2].$resultat[3]
+    preg_match('/(.*)\/(.*)\.(.\w*)/i', $fichier, $result);
+
+    //url relative du repertoire contenant le fichier , on retire aussi le / en fin
+    $document['source_url']['relative'] = $result[1].'/';
+    $document['source_url']['absolute'] = $racine_site.$document['source_url']['relative'];
+
+    //information sur le nom du fichier
+    $document['extension'] = $result[3];
+    $document['name'] = $result[2];
+    $document['fullname'] = $result[2].'.'.$result[3];
+
+    //creation du repertoire cible
+    //url relative du repertoire cible
+    $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
+    $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
+
+    return $document;
 }
 
 ?>

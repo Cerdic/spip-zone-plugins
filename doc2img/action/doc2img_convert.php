@@ -1,38 +1,34 @@
 <?php
 
-/*! \file doc2img_convert.php
- *  \brief tout ce qui concerne le traitement des documents
- *
+/**
+ * Action doc2img_convert.php
  */
 
-/*! \brief ensemble des actions necessaires à la conversion d'un
+/**
+ * Action nécessaire à la conversion d'un document
  *
- *  Traite juste l'action :
- *  - Récupere l'id_document
- *  - Retourne vers la page demandée ou à defaut la page appelante
+ * Traite juste l'action :
+ * - Récupère l'id_document
+ * - Retourne vers la page demandée ou à defaut la page appelante
  *
- *  \param $redirect url de redirection (obetnue via _request())
- *  \param $id_document id_document fournit par le contexte (via _request())
+ * @param $redirect url de redirection (obtenue via _request())
+ * @param $id_document id_document fourni par le contexte (via _request())
  */
 
 function action_doc2img_convert_dist(){
 
-    //on charge les fonctions de conversion
-    include_spip('inc/doc2img_convertir');
-
     //on lance la conversion du document
-    $id_document = intval(_request('id_document'));
-    if ($id_document) {
-        convertir_document($id_document);
+    if ($id_document = intval(_request('id_document'))) {
+    	$convertir = charger_fonction('doc2img_convertir','inc');
+    	$convertir($id_document);
     }
 
     //charge la page donnée par $redirect à defaut la page appelante
 #    if (empty($redirect)) {
         $redirect = $_SERVER['HTTP_REFERER'];
 #    } else {
-#        $redirect = "ecrire/".rawurldecode(_request('redirect'));
+#        $redirect = rawurldecode(_request('redirect'));
 #    }
-    spip_log("redirection : ". $redirect,"doc2img");
     redirige_par_entete($redirect);
 }
 ?>

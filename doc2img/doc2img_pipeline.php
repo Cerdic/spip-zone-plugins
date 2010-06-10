@@ -35,16 +35,14 @@ function doc2img_affiche_gauche($flux) {
 function doc2img_post_edition($flux) {
     $id_document = $flux['args']['id_objet'];
 
-	include_spip('inc/doc2img_convertir');
-
     if (($flux['args']['operation'] == 'ajouter_document')
             && (can_doc2img($id_document) == true)
             && (is_doc2img($id_document) == false)
             && (lire_config('doc2img/conversion_auto') == "on"))  {
 	    spip_log('document '.$id_document.' en conversion automatique','doc2img');
-	    convertir_document($id_document);
+	    $convertir = charger_fonction('doc2img_convertir','inc');
+	    $convertir($id_document);
     }
-
 	return $flux;
 }
 
