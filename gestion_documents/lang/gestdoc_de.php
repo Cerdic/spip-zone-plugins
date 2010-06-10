@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_attacher_document' => 'Anh&auml;ngen',
 	'bouton_enlever_document' => 'Entfernen',
 	'bouton_enlever_supprimer_document' => 'L&ouml;schen',
+	'bouton_enlever_supprimer_document_confirmation' => 'Wollen sie dieses Dokument wirklich l&ouml;schen?',
 	'bouton_modifier_document' => 'Bearbeiten',
 	'bouton_parcourir' => 'Durchsuchen...',
 	'bouton_refresh_document' => 'Dokument neu laden',
