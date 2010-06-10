@@ -23,12 +23,13 @@ function action_doc2img_convert_dist(){
     	$convertir($id_document);
     }
 
+    $redirect = _request('redirect');
     //charge la page donnée par $redirect à defaut la page appelante
-#    if (empty($redirect)) {
+	if (!$redirect){
         $redirect = $_SERVER['HTTP_REFERER'];
-#    } else {
-#        $redirect = rawurldecode(_request('redirect'));
-#    }
+	}else {
+		$redirect = rawurldecode(_request('redirect'));
+	}
     redirige_par_entete($redirect);
 }
 ?>

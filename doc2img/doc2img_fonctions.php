@@ -1,5 +1,4 @@
 <?php
-
 /**
  * doc2img_fonctions.php
  * Liste des fonctions chargées à chaque appel d'une page publique ou privée
@@ -51,7 +50,6 @@ function generer_url_doc2img($id) {
 
 /**
  * Fournir un #URL_DOC2IMG adapté au contexte ou bien #URL_DOC2IMG{unid} pour un id_doc2img donné
- *
  */
 function balise_URL_DOC2IMG_dist($p) {
 

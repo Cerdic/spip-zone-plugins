@@ -13,13 +13,11 @@
  */
 function doc2img_affiche_gauche($flux) {
 	switch ($flux['args']['exec']) {
-		//la page articles est demandée
 		case "articles" :
-			//charge les fonctions necessaire
-			include_once('inc/doc2img_espace_prive.php');
 			$id_article = $flux['args']['id_article'];
-			//recupere le complement d'affichage
-			$flux['data'] .= affiche_liste_doc($id_article);
+			$flux['data'] .= debut_cadre('r');
+			$flux['data'] .= recuperer_fond("prive/doc2img",array('id_article'=>$id_article));
+			$flux['data'] .= fin_cadre('r');
 			break;
 	}
 	return $flux;
