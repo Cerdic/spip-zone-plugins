@@ -87,6 +87,7 @@ function bigbrother_post_edition($flux){
 			array('qui' => $qui_ou_ip,'faire' => $faire,'quoi' => $quoi,'id' => $flux['args']['id_objet'])
 		);
 	}
+	return $flux;
 }
 
 /**
