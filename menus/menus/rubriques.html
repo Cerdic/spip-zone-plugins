@@ -28,7 +28,7 @@
 				#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
 				<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 					<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
-					<BOUCLE_test_niveau2(CONDITION){si #GET{niveau_actuel}|!={#GET{niveau}}}>
+					<BOUCLE_test_niveau2(CONDITION){si #GET{niveau}|>={#GET{niveau_actuel}}}>
 					<BOUCLE_sous_sous(BOUCLE_sous_rubriques)></BOUCLE_sous_sous>
 					</BOUCLE_test_niveau2>
 				</li>
