@@ -1,10 +1,10 @@
 <?php
 
-/*! \brief fonction qui indique si le document a deja été converti
+/**
+ * Fonction qui indique si le document a deja été converti
  *
- *
- *  \param $id_document identifiant du document à controler
- *  \return booleen $resultat : true document converti, false sinon
+ * @param $id_document identifiant du document à controler
+ * @return booleen true / false : true document déjà converti, false sinon
  */
 function is_doc2img($id_document) {
     $pages = intval(sql_countsel('spip_doc2img','id_document='.$id_document));
@@ -16,16 +16,17 @@ function is_doc2img($id_document) {
 }
 
 
-/*! \brief fonction controlant que le document founit est convertible
+/**
+ * Fonction controlant que le document founi peut être converti :
+ * - Son extension figure parmi ceux de la configuration
+ * - Ce n'est pas un document distant
  *
- *  Vérifie que le document donné en paramètre est bien listé dans les types de documents autorisés à la conversion via CFG
- *
- *  \param $id_document identifiant du document à controler
- *  \return booleen $resultat : true document convertible, false sinon
+ *  @param $id_document identifiant du document à controler
+ *  @return booleen true/false : true document convertible, false si non
  */
 function can_doc2img($id_document = NULL) {
-    $extension = sql_getfetsel(
-        'extension',
+    $info_document = sql_fetsel(
+        'extension,mode',
         'spip_documents',
         'id_document = '.$id_document
     );
@@ -34,29 +35,29 @@ function can_doc2img($id_document = NULL) {
     $types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
 
     //on controle si le document est convertible ou non
-    if (in_array($extension,$types_autorises)) {
+    if (($info_document['mode'] != 'distant') && in_array($info_document['extension'],$types_autorises)) {
         return true;
     } else {
         return false;
     }
 }
 
-/*! \brief calcul les ratios de taille de l'image finale
+/**
+ * Calcul les ratios de taille de l'image finale
  *
- *  Vérifie que le document donn� en param�tre est bien list� dans les types de documents autoris�s � la conversion via CFG
+ * Vérifie que le document donné en paramètre est bien listé dans les types de documents
+ * autorisés à la conversion via CFG
  *
- *  \param $id_document identifiant du document � controler
- *  \return booleen $resultat : true document convertible, false sinon
+ * @param $id_document identifiant du document à controler
+ * @return booleen $resultat : true document convertible, false sinon
  */
-function doc2img_ratio(&$handle,$version='0.9') {
+function doc2img_ratio(&$handle,$version='0.9',$config=array()) {
 
-    //on determine les dimensions des frames
-    $proportion = (lire_config('doc2img/proportion'));
-
-    //par défaut le ratio faut 1
     $ratio['largeur'] = $ratio['hauteur'] = 1;
 
-    //dimensions du document d'origine
+    /**
+     * Récupération des dimensions du document d'origine
+     */
     if($version == '0.9'){
     	$dimensions['largeur'] = imagick_getwidth($handle);
     	$dimensions['hauteur'] = imagick_getheight($handle);
@@ -66,24 +67,29 @@ function doc2img_ratio(&$handle,$version='0.9') {
     }
 
     //si une largeur seuil a été définie
-    if ($largeur = lire_config('doc2img/largeur')) {
+    if ($largeur = $config['largeur']) {
         $ratio['largeur'] = $largeur / $dimensions['largeur'];
     }
 
     //si une hauteur seuil a été définie
-    if ($hauteur = lire_config('doc2img/hauteur')) {
+    if ($hauteur = $config['hauteur']) {
         $ratio['hauteur'] = $hauteur / $dimensions['hauteur'];
     }
 
 
-    //ajustement des ratio si proportion demandée
-    if (lire_config('doc2img/proportion') == "on") {
-        //si agrandiessement demandée on prend le plus grand ratio, sinon le plus petit
-        $ratio['largeur'] = (lire_config('doc2img/agrandir')) ? max($ratio['hauteur'], $ratio['largeur']) : min($ratio['hauteur'], $ratio['largeur']);
+    /**
+     * Ajustement des ratios si proportion demandée
+     * Si agrandissement demandé on prend le plus grand ratio,
+     * sinon le plus petit
+     */
+    if ($config['proportion'] == "on") {
+        $ratio['largeur'] = ($config['agrandir'] == 'on') ? max($ratio['hauteur'], $ratio['largeur']) : min($ratio['hauteur'], $ratio['largeur']);
         $ratio['hauteur'] = $ratio['largeur'];
     }
 
-    //defini les nouvelles dimensions
+    /**
+     * Définition des dimensions définitives
+     */
     $dimensions['largeur'] = $ratio['largeur'] * $dimensions['largeur'];
     $dimensions['hauteur'] = $ratio['hauteur'] * $dimensions['hauteur'];
 
@@ -142,6 +148,10 @@ function doc2img_document($id_document) {
  *  - recupère les informations sur le documents (nom, repertoire, nature)
  *  - determine les informatsions sur le documents finals (nom, respertoire, extension)
  *
+ *  Documentation intéressante :
+ *  - http://valokuva.org/?p=7
+ *  - http://valokuva.org/?p=7#comment-19198
+ *
  * @param $id_document identifiant du document à convertir
  */
 function convertir_document($id_document) {
@@ -149,14 +159,15 @@ function convertir_document($id_document) {
 	if(function_exists('imagick_readimage') OR class_exists('Imagick')){
 	    // NOTE : les repertoires doivent se finir par un /
 
-	    include_spip('cfg_options');
 	    include_spip('inc/documents');
 	    include_spip('inc/flock');
+
+	    $config = lire_config('doc2img');
 
 	    ecrire_config('php::doc2img/'.$id_document.'/statut','encours');
 
 	    //racine du site c'est a dire url_site/
-	    //une action se repere � la racine du site
+	    //une action se repere à la racine du site
 	    $racine_site = _DIR_RACINE;
 
 	    $document = doc2img_document($id_document);
@@ -183,18 +194,22 @@ function convertir_document($id_document) {
 	        return "erreur impossible de creer le repertoire";
 	    }
 
-	    //charge le document dans imagick
-	    //determine le nombre de pages dans le document
+	    /**
+	     * Chargement du document en mémoire
+	     * On détermine le nombre de pages du document
+	     * On libère la ressource automatiquement si on utilise la class
+	     * car on réouvre chaque page par la suitre
+	     */
 	    if (class_exists('Imagick')) {
-	        //version 2.x
-	        spip_log('version 2.X de imagick','doc2img');
 	        $version = '2.x';
 	        $image = new Imagick($document['source_url']['absolute'].$document['fullname']);
+	        $identify = $image->identifyImage();
 	        $nb_pages = $image->getNumberImages();
-	        spip_log($document['source_url']['absolute'].$document['fullname'].' -> '.$nb_pages,'doc2img');
-
+	        spip_log($identify,'doc2img');
+	        spip_log($nb_pages,'doc2img');
+	        $image->clear();
+	        $image->destroy();
 	    } else {
-	        //version 0.9
 	        $version = '0.9';
 	        $handle = imagick_readimage($document['source_url']['absolute'].$document['fullname']);
 	        $nb_pages = imagick_getlistsize($handle);
@@ -202,13 +217,10 @@ function convertir_document($id_document) {
 
 	    ecrire_config('php::doc2img/'.$id_document.'/pages',$nb_pages);
 
-	    //determine l'extension � utiliser
-	    $extension = lire_config('doc2img/format_cible');
-
-
 	    $frame = 0;
 
-	    //chaque page est un fichier qu'on sauve dans la table doc2img ind�x� par son num�ro de page
+	    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
+	    // par son numéro de page
 	    do {
 	        //charge la premiere image
 	        spip_log($id_document.'-'.$frame,'doc2img');
@@ -218,16 +230,23 @@ function convertir_document($id_document) {
 	            imagick_goto($handle, $frame);
 	            $handle_frame = @imagick_getimagefromlist($handle);
 	        } else {
-	            $image_frame = new imagick($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
-	            spip_log($document['source_url']['absolute'].$document['fullname'].'['.$frame.']','doc2img');
+	        	$image_frame = new Imagick();
+	        	if(is_numeric($config['resolution']) && ($config['resolution'] <= '600') && ($config['resolution'] > $identify['resolution']['x'])){
+		        	$image_frame->setResolution($config['resolution'],$config['resolution']);
+	        	}
+				$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+				$image_frame->setImageFormat($config['format_cible']);
+				if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
+					$image_frame->setImageCompressionQuality($config['compression']);
+				}
 	            $handle_frame = $image_frame;
 	        }
 
 	        //calcule des dimensions
-	        $dimensions = doc2img_ratio($handle_frame,$version);
+	        $dimensions = doc2img_ratio($handle_frame,$version,$config);
 
 	        //nom du fichier cible, c'est à dire la frame (image) indexée
-	        $document['frame'] = $document['name'].'-'.$frame.'.'.$extension;
+	        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
 
 	        //on sauvegarde la page
 	        if ($version == '0.9') {
@@ -235,19 +254,18 @@ function convertir_document($id_document) {
 		        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
 	            imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
 	            $taille = filesize($document['cible_url']['absolute'].$document['frame']);
-	            $largeur = imagick_getwidth($handle_frame);
-	            $hauteur = imagick_getheight($handle_frame);
 
 	        } else {
-	        	$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
-	            $image_frame->setImageFormat($extension);
+	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
 	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
 	            $taille = $image_frame->getImageLength();
-	            $largeur = $dimensions['largeur'];
-	            $hauteur = $dimensions['hauteur'];
 	            spip_log('ecriture frame '.$frame,'doc2img');
 	        }
-	        //sauvegarde les donnees dans la base
+
+	        $largeur = $dimensions['largeur'];
+			$hauteur = $dimensions['hauteur'];
+
+			//sauvegarde les donnees dans la base
 	        if (!sql_insertq(
 	            "spip_doc2img",
 	            array(
@@ -262,7 +280,6 @@ function convertir_document($id_document) {
 	            spip_log("erreur sql","doc2img");
 	            return "erreur base de donnée";
 	        }
-	        spip_log('injection bd','doc2img');
 
 	        //on libère la frame
 	        if ($version == '0.9') {
@@ -270,20 +287,15 @@ function convertir_document($id_document) {
 	        } else {
 	            $image_frame->clear();
 	            $image_frame->destroy();
-	            spip_log('liberation ressources frame','doc2img');
 	        }
-
 	        $frame++;
-
 	    } while($frame < $nb_pages );
 
-	    //on libère les ressources
+	    /**
+	     * Libération de la ressource pour les anciennes versions
+	     */
 	    if ($version == '0.9') {
 	        imagick_free($handle);
-	    } else {
-	        $image->clear();
-	        $image->destroy();
-	        spip_log('liberation image','doc2img');
 	    }
 
 	    // libération du verrou
@@ -294,10 +306,8 @@ function convertir_document($id_document) {
 
 	    return true;
 	}else{
-		spip_log('php-imagick non présent','doc2img');
 		return false;
 	}
-
 }
 
 ?>

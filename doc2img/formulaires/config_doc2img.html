@@ -19,6 +19,12 @@
 		                    <input type="text" name="format_document" id="format_document" value="#ENV{format_document}" class="text" />
                             [<span class="erreur_message">(#ENV{erreurs}|table_valeur{format_document})</span>]
 						</li>
+						<li class="editer_resolution[ (#ENV**{erreurs}|table_valeur{resolution}|oui)erreur]">
+			                <label for="resolution"><:doc2img:cfg_label_resolution:></label>
+							<p class="explication"><:doc2img:cfg_explication_resolution:></p>
+			                <input type="text" name="resolution" id="resolution" value="#ENV{resolution}" class="text" style="width:5em;"/> dpi
+			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{resolution})</span>]
+		                </li>
 					</ul>
                 </fieldset>
             </li>
@@ -51,6 +57,12 @@
 			                <label for="hauteur"><:doc2img:cfg_label_hauteur:></label>
 			                <input type="text" name="hauteur" id="hauteur" value="#ENV{hauteur}" class="text" style="width:5em;"/> px
 			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{hauteur})</span>]
+		                </li>
+						<li class="editer_compression[ (#ENV**{erreurs}|table_valeur{compression}|oui)erreur]">
+			                <label for="compression"><:doc2img:cfg_label_compression:></label>
+							<p class="explication"><:doc2img:cfg_explication_compression:></p>
+			                <input type="text" name="compression" id="compression" value="#ENV{compression}" class="text" style="width:3em;"/> %
+			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{compression})</span>]
 		                </li>
 		                <li class="editer_proportion[ (#ENV**{erreurs}|table_valeur{proportion}|oui)erreur]">
 			                <label for="proportion"><:doc2img:cfg_label_proportions:></label>
