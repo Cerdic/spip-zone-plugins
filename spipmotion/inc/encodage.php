@@ -93,11 +93,11 @@ function encodage($source,$doc_attente){
 	 * Vérification des samplerates
 	 */
 	if(intval($source['audiosamplerate']) && (intval($source['audiosamplerate']) < lire_config("spipmotion/frequence_audio_$extension_attente","22050"))){
-		$audiosamplerates = array('11025','22050','44100','48000');
+		$audiosamplerates = array('11025','16000','22050','44100','48000');
 		if(!in_array($source['audiosamplerate'],$audiosamplerates)){
 			$audiosamplerate_final = '11025';
 			foreach($audiosamplerates as $samplerate){
-				if($source['audiosamplerate'] > $samplerate){
+				if($source['audiosamplerate'] >= $samplerate){
 					$audiosamplerate_final = $samplerate;
 				}
 			}
@@ -226,8 +226,8 @@ function encodage($source,$doc_attente){
 		$bitrate = "--bitrate ".$vbitrate;
 
 		if($vcodec == '--vcodec libx264'){
-			$vpre = '--vpre hq';
-			$vpre2 = '--vpre2 ipod640';
+			$vpre2 = '--vpre2 hq';
+			$vpre = '--vpre ipod640';
 		}
 		$fichier_texte = "$dossier$query.txt";
 
@@ -243,7 +243,7 @@ function encodage($source,$doc_attente){
 		}else{
 			$encodage = find_in_path('script_bash/spipmotion.sh')." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels $bitrate $vpre $vpre2 --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 		}
-		spip_log("$encodage",'spipmotion');
+		spip_log($encodage,'spipmotion');
 		$lancement_encodage = exec($encodage,$retour);
 
 		spip_log($retour,'spipmotion');
