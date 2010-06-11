@@ -191,7 +191,9 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
 	$r = array('nom' => $nom, 'valeur' => $valeur);
 
-	if (preg_match(',^plugin,i',$nom) OR !unserialize($GLOBALS['meta']['plugin'])){
+	if (preg_match(',^plugin,i',$nom) 
+			OR !($u=unserialize($GLOBALS['meta']['plugin']))
+			OR !count($u)){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
 		$log = date('Y-m-d H:i:s');
 		$log .= ' (pid '.@getmypid().') ';
