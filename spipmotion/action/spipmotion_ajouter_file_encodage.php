@@ -76,7 +76,7 @@ function spipmotion_supprimer_versions($id_document){
 		if($version['id_vignette'] > 0){
 			$liste[] = $version['id_vignette'];
 			$fichier = sql_getfetsel('fichier','spip_documents','id_document='.$version['id_vignette']);
-			if (@file_exists($f = get_spip_doc($version['fichier']))) {
+			if (@file_exists($f = get_spip_doc($fichier))) {
 				supprimer_fichier($f);
 			}
 		}
