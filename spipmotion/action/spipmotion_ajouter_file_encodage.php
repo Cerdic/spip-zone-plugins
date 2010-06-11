@@ -57,7 +57,6 @@ function spipmotion_supprimer_versions($id_document){
 	 * Pour chaque version du document original
 	 */
 	while($version = sql_fetch($v)){
-		spip_log('suppression de ','test');spip_log($version,'test');
 		/**
 		 * On ajoute l'id_document dans la liste des documents
 		 * à supprimer de la base
@@ -76,7 +75,6 @@ function spipmotion_supprimer_versions($id_document){
 		if($version['id_vignette'] > 0){
 			$liste[] = $version['id_vignette'];
 			$fichier = sql_getfetsel('fichier','spip_documents','id_document='.$version['id_vignette']);
-			spip_log('suppression du fichier '.$fichier,'test');
 			if (@file_exists($f = get_spip_doc($fichier))) {
 				supprimer_fichier($f);
 			}
@@ -84,7 +82,6 @@ function spipmotion_supprimer_versions($id_document){
 
 	}
 	if(is_array($liste)){
-		spip_log($liste,'test');
 		$in = sql_in('id_document', $liste);
 		sql_delete("spip_documents", $in);
 		sql_delete("spip_documents_liens", $in);
