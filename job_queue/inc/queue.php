@@ -308,6 +308,9 @@ function queue_close_job(&$row,$time,$result=0){
  * en terminant la gestion de la queue
  */
 function queue_error_handler(){
+	// se remettre dans le bon dossier, car Apache le change parfois (toujours?)
+	chdir(_ROOT_CWD);
+
 	queue_update_next_job_time();
 }
 
