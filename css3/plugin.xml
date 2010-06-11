@@ -1,0 +1,15 @@
+<plugin>
+<nom>CSS3</nom>
+<icon>icon.png</icon>
+<description>Le CSS3, c'est bon, mangez-en !</description>
+<lien>http://zone.spip.org/trac/spip-zone/changeset/38745/_plugins_/css3</lien>
+<version>0.0.1</version>
+<etat>dev</etat>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
+<prefix>css3</prefix>
+<pipeline>
+	<nom>insert_head_css</nom>
+	<inclure>css3_pipelines.php</inclure>
+</pipeline>
+<necessite id="SPIP" version="[;]" />
+</plugin>
