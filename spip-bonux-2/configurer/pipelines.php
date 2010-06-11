@@ -129,4 +129,86 @@ function spip_bonux_formulaires_configurer_recense($form){
 	return $valeurs;
 }
 
+
+
+/**
+ * Lecture de la configuration
+ *
+ * lire_config() permet de recuperer une config depuis le php<br>
+ * memes arguments que la balise (forcement)<br>
+ * $cfg: la config, lire_config('montruc') est un tableau<br>
+ * lire_config('/table/champ') lit le valeur de champ dans la table des meta 'table'<br>
+ * lire_config('montruc/sub') est l'element "sub" de cette config equivalent a lire_config('/meta/montruc/sub')<br>
+ *
+ * $unserialize est mis par l'histoire
+ *
+ * @param  string  $cfg          la config
+ * @param  mixed   $def          un défaut optionnel
+ * @param  boolean $unserialize  n'affecte que le dépôt 'meta'
+ * @return string
+ */
+function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
+	static $store = array();
+
+	// lire le stockage sous la forme /table/valeur
+	// ou valeur qui est en fait implicitement /meta/valeur
+	// ou conteneur/valeur qui est en fait implicitement /meta/conteneur/valeur
+
+	// par defaut, sur la table des meta
+	$table = 'meta';
+	$cfg = explode('/',$cfg);
+	// si le premier argument est vide, c'est une syntaxe /table/
+	if (!reset($cfg)) {
+		array_shift($cfg);
+		$table = array_shift($cfg);
+		if (!isset($GLOBALS[$table]))
+			lire_metas($table);
+		if (!isset($GLOBALS[$table]))
+			return $def;
+	}
+
+	$r = $GLOBALS[$table];
+	// si on a demande #CONFIG{/meta,'',0} il faut serializer
+	if (!count($cfg) AND !$unserialize)
+		$r = serialize($r);
+	while($conteneur = array_shift($cfg)) {
+		$r = isset($r[$conteneur])?$r[$conteneur]:null;
+		// deserializer tant que c'est necessaire
+		if ($r  AND is_string($r) AND (count($cfg) OR $unserialize))
+			$r = unserialize($r);
+	}
+
+	if (is_null($r)) return $def;
+	return $r;
+}
+
+
+if (!function_exists('balise_CONFIG')) {
+/**
+ * #CONFIG retourne lire_config()
+ *
+ * Le 3eme argument permet de controler la serialisation du resultat
+ * (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
+ *
+ * ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
+ *
+ * Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
+ * #CONFIG{/tablemeta/champ,defaut} lit la valeur de 'champ' dans la table des meta 'tablemeta'
+ *
+ * @param  Object $p  Arbre syntaxique du compilo
+ * @return Object
+ */
+function balise_CONFIG($p) {
+	if (!$arg = interprete_argument_balise(1,$p)) {
+		$arg = "''";
+	}
+	$sinon = interprete_argument_balise(2,$p);
+	$unserialize = sinon(interprete_argument_balise(3,$p),"false");
+
+	$p->code = 'spip_bonux_lire_config(' . $arg . ',' .
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . $unserialize . ')';
+
+	return $p;
+}
+}
 ?>
