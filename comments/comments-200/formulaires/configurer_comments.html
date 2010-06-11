@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF"><div>
+	#ACTION_FORMULAIRE{SELF}
+	<fieldset>
+		<legend><:comments:cfg_forum_longueur:></legend>
+		<ul>
+			<li class="comments_forum_longueur_mini[ (#ENV**{erreurs}|table_valeur{forum_longueur_mini}|oui)erreur]">
+				<label for="forum_longueur_mini"><:comments:cfg_forum_longueur_mini:></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_mini})</span>
+				]<input type="text" class="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
+				<p class="explication">La longueur minimale des messages n'est pas encore param&egrave;trable dans SPIP qui n&eacute;cessite des messages d'au moins 10&nbsp;caract&egrave;res.</p>
+			</li>
+			<li class="comments_forum_longueur_maxi[ (#ENV**{erreurs}|table_valeur{forum_longueur_maxi}|oui)erreur]">
+				<label for="forum_longueur_maxi"><:comments:cfg_forum_longueur_maxi:></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_maxi})</span>
+				]<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" />
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend>Liste ou thread ?</legend>
+		<ul>
+			<li class="comments_fil[ (#ENV**{erreurs}|table_valeur{comments_fil}|oui)erreur]">
+				<label for="comments_fil">Pr&eacute;sentation du&nbsp;fil de discussion</label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
+				]<select name="comments_fil" id="comments_fil">
+						<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
+						<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend>Permalien</legend>
+		<ul>
+			<li class="comments_permalink[ (#ENV**{erreurs}|table_valeur{comments_permalink}|oui)erreur]">
+				<label for="permalink">Apparence du lien permanent vers le commentaire</label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
+				]<select name="permalink" id="permalink" style="width: 12em;">
+					<option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
+					<option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
+					<option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
+					<option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	<p class="boutons">
+		<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
+	</p>
+</div></form>
+</div>
