@@ -32,13 +32,18 @@ function inc_meta_dist($table='meta')
 		$GLOBALS[$table] = $meta;
 
 	if (!$new){
-		$log = "Cache table $table obsolete\n".date('Y-m-d H:i:s');
+		$log = date('Y-m-d H:i:s');
+		$log .= ' (pid '.@getmypid().') ';
+		$log .= "Cache table $table obsolete"."\n";
 		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
 	}
-	elseif (!isset($GLOBALS[$table]['plugin']) OR !unserialize($GLOBALS[$table]['plugin'])){
+	elseif (!isset($GLOBALS[$table]['plugin']) 
+		OR !unserialize($GLOBALS[$table]['plugin'])
+		OR isset($GLOBALS[$table]['touch'])){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
-		$log = "Lecture cache table $table vide\n".date('Y-m-d H:i:s');
-		$log .= ' (pid '.@getmypid().')'."\n";
+		$log = date('Y-m-d H:i:s');
+		$log .= ' (pid '.@getmypid().') ';
+		$log .= (isset($GLOBALS[$table]['touch'])?"Lecture cache table $table touch\n":"Lecture cache table $table vide\n");
 		$log .= "new:$new\ncache:$cache\nmetaf : $metaf\n";
 		$log .= 'lecture _GLOBAL[meta]:'.var_export($GLOBALS[$table],true)."\n";
 		ob_start();
@@ -122,6 +127,21 @@ function touch_meta($antidate= false, $table='meta'){
 		//unset($r['secret_du_site']);
 		if ($antidate) $r['touch']= $antidate;
 		ecrire_fichier_securise($file, serialize($r));
+		
+		$log = date('Y-m-d H:i:s');
+		$log .= ' (pid '.@getmypid().') ';
+		$log .= "Touch table $table\n";
+		if (!unserialize($GLOBALS['meta']['plugin'])){
+			$log .= '_GLOBAL[meta]:'.var_export($GLOBALS['meta'],true)."\n";
+			$log .= '_SERVER:'.var_export($_SERVER,true)."\n";
+			$log .= "----\nlecture initiale _GLOBAL[meta]:\n".$GLOBALS['_db_meta_lecture']."\n----\n";
+			ob_start();
+			debug_print_backtrace();
+			$log .= ob_get_contents();
+			ob_end_clean();
+			$log .= "\n\n";
+		}
+		ecrire_fichier(_DIR_TMP."ecriremeta.log", $log, true, false);
 	}
 }
 
@@ -171,10 +191,11 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
 	$r = array('nom' => $nom, 'valeur' => $valeur);
 
-	if (preg_match(',^plugin,i',$nom)){
+	if (preg_match(',^plugin,i',$nom) OR !unserialize($GLOBALS['meta']['plugin'])){
 		// loger tout ce que l'on fait sur les metas pour trouver qui desactive les plugins
-		$log = "Ecriture meta\n".date('Y-m-d H:i:s');
-		$log .= ' (pid '.@getmypid().')'."\n".serialize($r)."\n";
+		$log = date('Y-m-d H:i:s');
+		$log .= ' (pid '.@getmypid().') ';
+		$log .= "Ecriture meta :" . serialize($r)."\n";
 		$log .= '_GLOBAL[meta]:'.var_export($trace,true)."\n";
 		$log .= '_SERVER:'.var_export($_SERVER,true)."\n";
 		$log .= "----\nlecture initiale _GLOBAL[meta]:\n".$GLOBALS['_db_meta_lecture']."\n----\n";
