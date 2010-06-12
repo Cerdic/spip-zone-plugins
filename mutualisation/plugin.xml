@@ -30,7 +30,7 @@
 	<prefix>
 		  Mutualisation
 	</prefix>
-	<necessite id='spip' version='[1.9.2;]' />
+	<necessite id='spip' version='[2.0.0;]' />
 
 	<chemin dir='' type='aucun' />
 	<categorie>maintenance</categorie>
