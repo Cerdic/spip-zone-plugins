@@ -119,13 +119,21 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 	$incHead = <<<EOH
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
-<script src="{$jsFile}" type="text/javascript"></script>
-<script type="text/javascript"><!--
-    var configCrayons = new cQuery.prototype.cfgCrayons({$config});
+<script type="text/javascript">/* <![CDATA[ */
+	var cr = document.createElement('script');
+	cr.type = 'text/javascript'; cr.async = true;
+	cr.src = '{$jsFile}';
+	cr.text = "startCrayons();";
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(cr, s);
+
+	var configCrayons;
+	function startCrayons() {
+    configCrayons = new cQuery.prototype.cfgCrayons({$config});
     ( window.jQuery ? jQuery : cQuery )(document).ready(cQuery.fn.crayonsstart);
     // cQuery.ready() plante le jQuery.ready() sous MSIE
-//-->
-</script>
+	}
+/* ]]> */</script>
 EOH;
 
 	// Est-ce que PortePlume est la ?
