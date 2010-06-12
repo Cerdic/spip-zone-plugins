@@ -3,7 +3,7 @@
 	<icon>img/z5.png</icon>
 	<auteur>davux</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.1</version>
+	<version>1.1.1</version>
 	<etat>test</etat>
 	<description>Apporte du balisage HTML5 au squelette ZPIP-dist. Les choix de balisage ne sont pas encore fixés à 100%, n'hésitez pas à faire vos commentaires.
 	</description>
