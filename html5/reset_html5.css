@@ -1,0 +1,12 @@
+/* Éléments modifiés ou ajoutés en HTML5. Ces styles par défaut
+   sont principalement suggérés par http://dev.w3.org/html5/markup/
+   Pour hr et small, comparer avec http://www.w3.org/TR/CSS2/sample.html
+*/
+
+article,aside,canvas,command,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary { display: block; }
+datalist { display: none; }
+hr { margin: 0.5em auto; } 
+menu { list-style-type: disc; margin: 1em 0; padding-start: 40px; }
+progress { display: inline-block; height: 1em; width: 10em; vertical-align: -0.2em; }
+ruby,rt { text-indent: 0; line-height: normal; }
+small { font-size: smaller; }
