@@ -51,7 +51,7 @@ function action_crud_dist($action=null,$table=null,$id=null,$set = array()){
 		// tolerer un appel avec type plutot que table
 		AND (!$table = table_objet($table) OR !include_spip("crud/$table")))
 		$er = _L("CRUD table $table inconnue");
-	elseif (!function_exists($f="$table_$action"))
+	elseif (!function_exists($f="$table"._."$action"))
 		$er = _L("CRUD action $action inconnue pour table $table");
 	if ($er)
 		return array($id,'',$er);
