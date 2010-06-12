@@ -31,6 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param  Object $p  Arbre syntaxique du compilo
  * @return Object
  */
+if (!function_exists('balise_CONFIG')) {
 function balise_CONFIG($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
 		$arg = "''";
@@ -42,6 +43,7 @@ function balise_CONFIG($p) {
 		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . $unserialize . ')';
 
 	return $p;
+}
 }
 
 # CFG_CHEMIN
