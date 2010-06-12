@@ -15,13 +15,15 @@ function sparkstats_insert_head($flux){
   $flux .= "<script src='$jsFile' type='text/javascript'></script>";
 
   $flux .= '<script type="text/javascript"><!--
-  (function($){$(function(){var fini=false;
+  (function($){
+  var sparkstats_done=false;
+  var sparkstats = function() {
   $(".entry-title.crayon,h1.crayon")
   .each(function() {
-    if (fini) return;
+    if (sparkstats_done) return;
     var m;
     if ((m = $(this).attr("className").match(/article-titre-(\d+)/)) && (m=m[1])) {
-      fini=true;
+      sparkstats_done = true;
       $.get("'.generer_url_public('sparkstats','id_article=', '&').'"+m, function(e){
         if(e)
         $("<span style=\'padding-left:20px\'>")
@@ -31,7 +33,10 @@ function sparkstats_insert_head($flux){
       });
     }
   });
-  })})(jQuery);
+  };
+  sparkstats();
+  onAjaxLoad(sparkstats);
+  })(jQuery);
   --></script>
   ';
 
