@@ -18,7 +18,7 @@ include_spip('action/editer_rubrique');
  */
 function rubriques_create($dummy,$set=null){
 	if ($id = insert_rubrique($set['id_parent']))
-		list($e,$ok) = insert_rubrique($id,$set);
+		list($e,$ok) = revisions_rubriques($id,$set);
 	else
 		$e = _L('create error');
 	return array($id,$ok,$e);
