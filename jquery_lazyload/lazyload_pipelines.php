@@ -14,16 +14,14 @@ function lazyload_insert_head($flux){
 		
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_LAZYLOAD.'javascript/jquery.lazyload.js"></script>';
 		$flux .= '<script type="text/javascript">
-					(function($){
-						$(function(){
-							$("'.$selecteur.'").lazyload({
-								threshold : '.$distance.',
-								placeholder : "'._DIR_PLUGIN_LAZYLOAD.'images/grey.gif",
-								'.$event.'
-								'.$effect.'
-							});
+					$(function(){
+						$("'.$selecteur.'").lazyload({
+							threshold : '.$distance.',
+							placeholder : "'._DIR_PLUGIN_LAZYLOAD.'images/grey.gif",
+							'.$event.'
+							'.$effect.'
 						});
-					})(jQuery);
+					});
 				</script>';
 	}
 	return $flux;
