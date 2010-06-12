@@ -9,7 +9,7 @@
  * Project home:
  *   http://www.appelsiini.net/projects/lazyload
  *
- * Version:  1.4.0
+ * Version:  1.5.0
  *
  */
 (function($) {
@@ -31,9 +31,13 @@
         var elements = this;
         if ("scroll" == settings.event) {
             $(settings.container).bind("scroll", function(event) {
+                
                 var counter = 0;
                 elements.each(function() {
-                    if (!$.belowthefold(this, settings) &&
+                    if ($.abovethetop(this, settings) ||
+                        $.leftofbegin(this, settings)) {
+                            /* Nothing. */
+                    } else if (!$.belowthefold(this, settings) &&
                         !$.rightoffold(this, settings)) {
                             $(this).trigger("appear");
                     } else {
@@ -50,13 +54,22 @@
             });
         }
         
-        return this.each(function() {
+        this.each(function() {
             var self = this;
-            /* TODO: use .data() instead of .attr() */
-            $(self).attr("original", $(self).attr("src"));
-            if ("scroll" != settings.event 
-                         || $.belowthefold(self, settings) 
-                         || $.rightoffold(self, settings)) {
+            
+            /* Save original only if it is not defined in HTML. */
+            if (undefined == $(self).attr("original")) {
+                $(self).attr("original", $(self).attr("src"));     
+            }
+
+            if ("scroll" != settings.event || 
+                    undefined == $(self).attr("src") || 
+                    settings.placeholder == $(self).attr("src") || 
+                    ($.abovethetop(self, settings) ||
+                     $.leftofbegin(self, settings) || 
+                     $.belowthefold(self, settings) || 
+                     $.rightoffold(self, settings) )) {
+                        
                 if (settings.placeholder) {
                     $(self).attr("src", settings.placeholder);      
                 } else {
@@ -92,6 +105,11 @@
                 });
             }
         });
+        
+        /* Force initial check if images should appear. */
+        $(settings.container).trigger(settings.event);
+        
+        return this;
 
     };
 
@@ -101,8 +119,7 @@
     $.belowthefold = function(element, settings) {
         if (settings.container === undefined || settings.container === window) {
             var fold = $(window).height() + $(window).scrollTop();
-        }
-        else {
+        } else {
             var fold = $(settings.container).offset().top + $(settings.container).height();
         }
         return fold <= $(element).offset().top - settings.threshold;
@@ -111,13 +128,29 @@
     $.rightoffold = function(element, settings) {
         if (settings.container === undefined || settings.container === window) {
             var fold = $(window).width() + $(window).scrollLeft();
-        }
-        else {
+        } else {
             var fold = $(settings.container).offset().left + $(settings.container).width();
         }
         return fold <= $(element).offset().left - settings.threshold;
     };
+        
+    $.abovethetop = function(element, settings) {
+        if (settings.container === undefined || settings.container === window) {
+            var fold = $(window).scrollTop();
+        } else {
+            var fold = $(settings.container).offset().top;
+        }
+        return fold >= $(element).offset().top + settings.threshold  + $(element).height();
+    };
     
+    $.leftofbegin = function(element, settings) {
+        if (settings.container === undefined || settings.container === window) {
+            var fold = $(window).scrollLeft();
+        } else {
+            var fold = $(settings.container).offset().left;
+        }
+        return fold >= $(element).offset().left + settings.threshold + $(element).width();
+    };
     /* Custom selectors for your convenience.   */
     /* Use as $("img:below-the-fold").something() */
 
