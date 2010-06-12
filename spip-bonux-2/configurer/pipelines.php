@@ -60,20 +60,7 @@ function spip_bonux_formulaire_traiter($flux){
 				$store[$k] = _request($k);
 		}
 
-		// stocker en base
-		// par defaut, dans un conteneur serialize dans spip_meta (idem CFG)
-		$conteneur = false;
-		$table = 'meta';
-		if (isset($valeurs['_meta_table'])) {
-			$table = $valeurs['_meta_table'];
-			$conteneur = (isset($valeurs['_meta_conteneur'])?$valeurs['_meta_conteneur']:false);
-		}
-		if ($conteneur)
-			$store = array($conteneur => serialize($store));
-
-		foreach($store as $k=>$v){
-			ecrire_meta($k, $v, true, $table);
-		}
+		spip_bonux_configurer_stocker($form,$valeurs,$store);
 
 		$flux['data'] = array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 	}
@@ -98,15 +85,6 @@ function spip_bonux_formulaires_configurer_recense($form){
 	if ($f = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/')
 		AND lire_fichier($f, $contenu)) {
 
-		// par defaut dans la table des meta de SPIP
-		$valeurs['_meta_table'] = 'meta';
-		// valeurs serializee dans un conteneur homonyme au formulaire
-		$valeurs['_meta_conteneur'] = substr($form,11);
-
-		$meta = unserialize($GLOBALS['meta'][$valeurs['_meta_conteneur']]);
-		if (!$meta)
-			$meta = array();
-
 		for ($i=0;$i<2;$i++) {
 			// a la seconde iteration, evaluer le fond avec les valeurs deja trouvees
 			// permet de trouver aussi les name="#GET{truc}"
@@ -120,16 +98,92 @@ function spip_bonux_formulaires_configurer_recense($form){
 				if ($n = extraire_attribut($b, 'name')
 					AND preg_match(",^(\w+)(\[\w*\])?$,",$n,$r)
 					AND !in_array($n,array('formulaire_action','formulaire_action_args'))
-					AND extraire_attribut($b,'type')!=='submit')
-						$valeurs[$r[1]] = (isset($meta[$r[1]])?$meta[$r[1]]:'');
+					AND extraire_attribut($b,'type')!=='submit') {
+						$valeurs[$r[1]] = '';
+						// recuperer les valeurs _meta_xx qui peuvent etre fournies
+						// en input hidden dans le squelette
+						if (strncmp($r[1],'_meta_',6)==0)
+							$valeurs[$r[1]] = extraire_attribut($b,'value');
+					}
 			}
 		}
 	}
 
+	spip_bonux_configurer_lire_meta($form,&$valeurs);
 	return $valeurs;
 }
 
+/**
+ * Definir la regle de conteneur, en fonction de la presence
+ * des 
+ * _meta_table : nom de la table meta ou stocker (par defaut 'meta')
+ * _meta_conteneur : nom du conteneur dans lequel serializer (par defaut xx de formulaire_configurer_xx)
+ * _meta_prefixe : prefixer les meta (alternative au conteneur) dans la table des meta (par defaur rien)
+ * 
+ * @param string $form 
+ * @param array $valeurs
+ */
+function spip_bonux_definir_configurer_conteneur($form,$valeurs) {
+		// stocker en base
+		// par defaut, dans un conteneur serialize dans spip_meta (idem CFG)
+		$conteneur = substr($form,11);
+		$table = 'meta';
+		$prefixe = '';
 
+		// si on indique juste une table, il faut vider les autres proprietes
+		// car par defaut on utilise ni conteneur ni prefixe dans ce cas
+		if (isset($valeurs['_meta_table'])) {
+			$table = $valeurs['_meta_table'];
+			$conteneur = (isset($valeurs['_meta_conteneur'])?$valeurs['_meta_conteneur']:'');
+			$prefixe = (isset($valeurs['_meta_prefixe'])?$valeurs['_meta_prefixe']:'');
+		}
+		else {
+			if(isset($valeurs['_meta_conteneur']))
+				$conteneur = $valeurs['_meta_conteneur'];
+			if(isset($valeurs['_meta_prefixe']))
+				$prefixe = $valeurs['_meta_prefixe'];
+		}
+
+		return array($table,$conteneur,$prefixe);
+}
+
+/**
+ * Stocker les metas
+ * @param <type> $form
+ * @param <type> $valeurs
+ * @param <type> $store
+ */
+function spip_bonux_configurer_stocker($form,$valeurs,$store) {
+	list($table,$conteneur,$prefixe) = spip_bonux_definir_configurer_conteneur($form,$valeurs);
+	// stocker en base
+	// par defaut, dans un conteneur serialize dans spip_meta (idem CFG)
+
+	if ($conteneur)
+		$store = array($conteneur => serialize($store));
+
+	$prefixe = ($prefixe?$prefixe.'_':'');
+	foreach($store as $k=>$v){
+		ecrire_meta($prefixe.$k, $v, true, $table);
+	}
+}
+
+function spip_bonux_configurer_lire_meta($form,&$valeurs) {
+	list($table,$conteneur,$prefixe) = spip_bonux_definir_configurer_conteneur($form,$valeurs);
+
+	if (!isset($GLOBALS[$table]))
+		lire_metas($table);
+	$meta = &$GLOBALS[$table];
+	if ($conteneur) {
+		$meta = unserialize($meta[($prefixe?$prefixe.'_':'').$conteneur]);
+		$prefixe = '';
+	}
+
+	$prefixe = ($prefixe?$prefixe.'_':'');
+	foreach($valeurs as $k=>$v){
+		if (substr($k,0,1)!=='_')
+		$valeurs[$k] = (isset($meta[$prefixe.$k])?$meta[$prefixe.$k]:'');
+	}
+}
 
 /**
  * Lecture de la configuration
@@ -148,8 +202,6 @@ function spip_bonux_formulaires_configurer_recense($form){
  * @return string
  */
 function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
-	static $store = array();
-
 	// lire le stockage sous la forme /table/valeur
 	// ou valeur qui est en fait implicitement /meta/valeur
 	// ou conteneur/valeur qui est en fait implicitement /meta/conteneur/valeur
