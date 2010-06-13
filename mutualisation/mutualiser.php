@@ -187,12 +187,37 @@ function demarrer_site($site = '', $options = array()) {
 		($e . _NOM_TEMPORAIRES_ACCESSIBLES)
 	);	
 
+	/*
+	 *Traiter l'exec=mutualisation
+	 */
+	mutualisation_traiter_exec($site) ;
 
 	/*
-	 * Ajouter le chemin vers l'exec=mutualisation pour le site maitre
-	 * et seulement pour lui (pour en mettre plusieurs, les separer par
-	 * des virgules).
+	 * Gestion des url d'images courtes
+	 * sites/nom/IMG/image.jpg -> IMG/image.jpg
+	 * 
+	 * Ne fonctionne que pour de la mutualisation 
+	 * sur des noms de domaines.
+	 * 
+	 * Une mutualisation de repertoire
+	 * ne pourra fonctionner car les fichiers
+	 * .htaccess de /IMG et /local n'ont pas
+	 * connaissance du nom du repertoire.
+	 *
+	 * A mettre au debut du pipe pour compatibilite avec fastcache
 	 */
+	if ($options['url_img_courtes']) {
+		$GLOBALS['spip_pipeline']['affichage_final']
+			= '|mutualisation_url_img_courtes'
+			. $GLOBALS['spip_pipeline']['affichage_final'];
+	}
+}
+
+
+// Ajouter le chemin vers l'exec=mutualisation pour le site maitre
+// et seulement pour lui (pour en mettre plusieurs, les separer par
+// des virgules) Voit le fichier mes_options.php
+function mutualisation_traiter_exec($site) {
 	if (_request('exec') === 'mutualisation') {
 		if (!defined('_SITES_ADMIN_MUTUALISATION')
 		OR in_array($site, explode(',',_SITES_ADMIN_MUTUALISATION)))
@@ -218,27 +243,6 @@ function demarrer_site($site = '', $options = array()) {
 		    renouvelle_alea();
 		    die;
 		}
-	}
-	
-	
-	/*
-	 * Gestion des url d'images courtes
-	 * sites/nom/IMG/image.jpg -> IMG/image.jpg
-	 * 
-	 * Ne fonctionne que pour de la mutualisation 
-	 * sur des noms de domaines.
-	 * 
-	 * Une mutualisation de repertoire
-	 * ne pourra fonctionner car les fichiers
-	 * .htaccess de /IMG et /local n'ont pas
-	 * connaissance du nom du repertoire.
-	 *
-	 * A mettre au debut du pipe pour compatibilite avec fastcache
-	 */
-	if ($options['url_img_courtes']) {
-		$GLOBALS['spip_pipeline']['affichage_final']
-			= '|mutualisation_url_img_courtes'
-			. $GLOBALS['spip_pipeline']['affichage_final'];
 	}
 }
 
