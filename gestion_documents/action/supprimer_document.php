@@ -38,11 +38,11 @@ function action_supprimer_document_dist($id_document=0) {
 		action_supprimer_document_dist($doc['id_vignette']);
 		sql_delete('spip_documents_liens', 'id_document='.$doc['id_vignette']);
 	}
-	
+
 	// dereferencer dans la base
 	sql_delete('spip_documents', 'id_document='.intval($id_document));
 
-	
+
 	// Supprimer le fichier si le doc est local,
 	// et la copie locale si le doc est distant
 	if ($doc['distant'] == 'oui') {
@@ -53,7 +53,16 @@ function action_supprimer_document_dist($id_document=0) {
 	else
 		spip_unlink(get_spip_doc($doc['fichier']));
 
-
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'operation' => 'supprimer_document',
+				'table' => 'spip_documents',
+				'id_objet' => $id_document
+			),
+			'data' => null
+		)
+	);
 }
 
 ?>

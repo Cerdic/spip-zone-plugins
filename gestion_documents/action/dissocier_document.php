@@ -42,6 +42,19 @@ function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = fa
 	// Si c'est une vignette, l'eliminer du document auquel elle appartient
 	sql_updateq("spip_documents", array('id_vignette' => 0), "id_vignette=".$id_document);
 
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'operation' => 'delier_document',
+				'table' => 'spip_documents',
+				'id_objet' => $id_document
+				'objet' => $objet,
+				'id' => $id_objet
+			),
+			'data' => null
+		)
+	);
+
 	if ($check) {
 		// si demande, on verifie que ses documents vus sont bien lies !
 		$spip_table_objet = table_objet_sql($objet);
@@ -72,7 +85,7 @@ function dissocier_document($document, $objet, $id_objet, $supprime = false, $ch
 
 		$obj = "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet);
 
-		$s = sql_select('docs.id_document', 
+		$s = sql_select('docs.id_document',
 			"spip_documents AS docs LEFT JOIN spip_documents_liens AS l ON l.id_document=docs.id_document",
 			"$obj AND vu='non' AND docs.mode=".sql_quote($mode)." AND $typdoc");
 		while ($t = sql_fetch($s)) {
