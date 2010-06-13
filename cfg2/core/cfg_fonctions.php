@@ -3,28 +3,30 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-# CONFIG 
+# CONFIG
 
 
 // #CONFIG retourne lire_config()
-// 
+//
 // Le 3eme argument permet de controler la serialisation du resultat
 // (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
 // ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
 // Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
 // car du moment qu'il y a un /, c'est le depot 'metapack' qui est appelle.
 //
-function balise_CONFIG($p) {
-	if (!$arg = interprete_argument_balise(1,$p)) {
-		$arg = "''";
+if (!function_exists('balise_CONFIG')) {
+	function balise_CONFIG($p) {
+		if (!$arg = interprete_argument_balise(1,$p)) {
+			$arg = "''";
+		}
+		$sinon = interprete_argument_balise(2,$p);
+		$unserialize = sinon(interprete_argument_balise(3,$p),"false");
+
+		$p->code = 'lire_config(' . $arg . ',' .
+			($sinon && $sinon != "''" ? $sinon : 'null') . ',' . $unserialize . ')';
+
+		return $p;
 	}
-	$sinon = interprete_argument_balise(2,$p);
-	$unserialize = sinon(interprete_argument_balise(3,$p),"false");
-
-	$p->code = 'lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . $unserialize . ')';	
-
-	return $p;
 }
 
 
@@ -42,10 +44,10 @@ function balise_CFG_CHEMIN_dist($p) {
 		$arg = "''";
 	}
 	$sinon = interprete_argument_balise(2,$p);
-	
-	$p->code = '($l = lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ')) ? _DIR_IMG . $l : null';		
-	
+
+	$p->code = '($l = lire_config(' . $arg . ',' .
+		($sinon && $sinon != "''" ? $sinon : 'null') . ')) ? _DIR_IMG . $l : null';
+
 	return $p;
 }
 
@@ -145,7 +147,7 @@ if (!function_exists('filtre_cle_dist')) {
  * l'arborescence du tableau par des slash.
  * Si on donne un chaine serialisee en entree a la place d'un tableau,
  * la fonction tente de la deserialiser.
- * 
+ *
  * Exemples :
  * $x = array("a1"=>array("b1"=>array("c1"=>3), "b2"=>4), "a2"=>8);
  * filtre_cle_dist($x, "a2") = 8
@@ -158,7 +160,7 @@ if (!function_exists('filtre_cle_dist')) {
  * @param array/string $tab : tableau ou tableau serialise
  * @param string $chemin : chemin d'acces a une valeur du tableau tel que "cleA/cleB/cleC"
  * @param string $defaut : valeur a retourner par defaut, si la cle n'est pas trouvee
- * 
+ *
  * @return la valeur correspondant a la cle demandee, $defaut sinon
 **/
 function filtre_cle_dist($tab, $chemin, $defaut=null) {
