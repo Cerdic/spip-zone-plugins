@@ -50,7 +50,7 @@ function action_spipmotion_ajouter_file_encodage_post($r){
  */
 function spipmotion_supprimer_versions($id_document){
 
-	$v = sql_select("id_document,id_vignette,fichier","spip_documents","id_document=".intval($id_document));
+	$v = sql_select("id_document,id_vignette,fichier","spip_documents","id_orig=".intval($id_document));
 
 	include_spip('inc/documents');
 	/**
@@ -87,6 +87,9 @@ function spipmotion_supprimer_versions($id_document){
 		sql_delete("spip_documents_liens", $in);
 		sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document));
 	}
+
+	include_spip('inc/invalideur');
+	suivre_invalideur(1);
 }
 
 /**
@@ -104,7 +107,7 @@ function spipmotion_genere_file($id_document,$type,$id){
 	/**
 	 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
 	 */
-	if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array())) && (!intval($id_orig))){
+	if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array())) && ($id_orig == 0)){
 		spip_log("l'id_orig est $id_orig et l'id_document est $id_document","spipmotion");
 		foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $extension_sortie){
 			$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");

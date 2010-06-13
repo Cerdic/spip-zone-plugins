@@ -122,8 +122,10 @@ function encodage($source,$doc_attente){
 		$audiochannels = $source['audiochannels'];
 	}
 
-	$texte .= "ac=$audiochannels\n";
-	$audiochannels = "--ac $audiochannels";
+	if(intval($audiochannels) >= 1){
+		$texte .= "ac=$audiochannels\n";
+		$audiochannels = "--ac $audiochannels";
+	}
 
 	/**
 	 * Cas d'un fichier audio
