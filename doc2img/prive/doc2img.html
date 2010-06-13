@@ -2,28 +2,5 @@
 
 <h3>doc2img</h3>
 
-<div class="formulaire_spip">
-    <form method="post" action="#URL_ACTION{doc2img_convert}">
-    	<div>
-	    	<input type="hidden" name="redirect" value="#SELF" />
-	    	<ul>
-	    		<li class="editer editer_id_document">
-					<label for="id_document"><:doc2img:formulaire_label_choix_doc{formats=#CONFIG{doc2img/format_document}}:></label>
-					<B_doc2img>
-					<select name="id_document" id="id_document">
-						<BOUCLE_doc2img(DOCUMENTS) {id_article} {tout} {extension IN #CONFIG{doc2img/format_document}|explode{','}}>
-						    <option value=#ID_DOCUMENT>#ID_DOCUMENT - [(#TITRE|?{#TITRE,[(#FICHIER|basename)]})]</option>
-						</BOUCLE_doc2img>
-					</select>
-					</B_doc2img>
-					    <span class="erreur_message"><:doc2img:formulaire_erreur_pas_doc:></span>
-					<//B_doc2img>
-				</li>
-			</ul>
-			<p class="boutons">
-	        	<input type="submit" class="submit" value="<:doc2img:bouton_convertir:>" />
-			</p>
-		</div>
-    </form>
-</div>
+#FORMULAIRE_DOC2IMG_CONVERTIR_DOCUMENT{#ENV{id_article},#SELF}
 

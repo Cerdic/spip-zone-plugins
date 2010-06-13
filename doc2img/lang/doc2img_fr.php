@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_formats_sortie' => 'Les sorties',
 	'cfg_legende_relation_original' => 'Relations avec le document original',
 
+	// E
+	'erreur_autorisation' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; convertir ce document',
+
 	// F
 	'formulaire_erreur_pas_doc' => 'Aucun document ne correspond pour cet article',
 	'formulaire_label_choix_doc' => 'Choisissez le document (@formats@) &agrave; convertir en image'
