@@ -28,7 +28,11 @@ function exec_saveauto_args($contexte=array()){
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'saveauto', 'type'=>$type),'data'=>''));
 
 	echo debut_droite('', true);
-	$rep_bases = _DIR_RACINE.lire_config('saveauto/rep_bases','');
+	if(defined('_DIR_SITE')){
+		$rep_bases = _DIR_SITE.lire_config('saveauto/rep_bases','');
+	}else{
+		$rep_bases = _DIR_RACINE.lire_config('saveauto/rep_bases','');
+	}
 	$prefixe = lire_config('saveauto/prefixe_save','');
 
 	$contexte['sauvegardes'] = preg_files($rep_bases,"$prefixe.+[.](zip|sql)$");

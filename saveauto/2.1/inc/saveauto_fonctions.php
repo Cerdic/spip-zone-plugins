@@ -41,6 +41,11 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
         return false;
     }
 	if(!defined('_DIR_PLUGIN_FACTEUR')){
+		if(defined('_DIR_SITE')){
+			$racine = _DIR_SITE;
+		}else{
+			$racine = _DIR_RACINE;
+		}
 		$from = $reply = lire_config('email_webmaster');
 
 		$limite = "_parties_".md5(uniqid (rand()));
@@ -73,7 +78,7 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
 
 			$attachement .= "\n\n\n------=$limite\n";
 		}else{
-			$fichier = str_replace(_DIR_RACINE,'',$fichier);
+			$fichier = str_replace($racine,'',$fichier);
 			$texte .= _T('saveauto:mail_fichier_lourd',array('fichier'=>$fichier));
 		}
 
@@ -98,7 +103,7 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
 			);
 		}else{
 			$corps = $message;
-			$fichier = str_replace(_DIR_RACINE,'',$fichier);
+			$fichier = str_replace($racine,'',$fichier);
 			$corps .= _T('saveauto:mail_fichier_lourd',array('fichier'=>$fichier));
 		}
 		$envoyer_mail($to, $sujet, $corps, $from = "", $headers = "");
