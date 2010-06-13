@@ -28,7 +28,12 @@ function inc_saveauto_dist(){
      * Faut-il sauver?
      * Vérifier l'existence du répertoire de destination
      */
-    $rep_bases = _DIR_RACINE.$rep_bases;
+    if(defined('_DIR_SITE')){
+    	$racine = _DIR_SITE;
+   	}else{
+   		$racine = _DIR_RACINE;
+   	}
+    $rep_bases = $racine.$rep_bases;
     if (!is_dir($rep_bases)) {
         $err .= _T('saveauto:erreur_repertoire_inexistant',array('rep' => $rep_bases));
     }
@@ -192,7 +197,6 @@ function inc_saveauto_dist(){
 	        $i++;
 	    }
 	    $contenu .= "# -------"._T('saveauto:fin_fichier')."------------"."\n";
-
 		$ok = ecrire_fichier($chemin_fichier, $contenu);
 
 		if(!$ok){
