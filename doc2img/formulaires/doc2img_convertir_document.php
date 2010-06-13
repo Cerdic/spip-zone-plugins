@@ -33,8 +33,8 @@ function formulaires_doc2img_convertir_document_traiter($id_article,$redirect=''
 	if(($infos_doc['mode'] != 'vignette')
 		&& ($infos_doc['distant'] == 'non')
 		&& in_array($infos_doc['extension'],$types_autorises)){
-    	//$convertir = charger_fonction('doc2img_convertir','inc');
-    	//$convertir($id_document);
+    	$convertir = charger_fonction('doc2img_convertir','inc');
+    	$convertir($id_document);
 	}
 	if($redirect){
 		spip_log($redirect,'test');
