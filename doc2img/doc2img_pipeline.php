@@ -47,6 +47,24 @@ function doc2img_post_edition($flux) {
 			    		$convertir($id_document);
             	}
     }
+	if($flux['args']['operation'] == 'supprimer_document'){
+
+		$v = sql_select("id_doc2img,fichier","spip_doc2img","id_document=".intval($flux['args']['id_objet']));
+
+		include_spip('inc/documents');
+
+		while($version = sql_fetch($v)){
+			$liste[] = $version['id_doc2img'];
+			spip_log('suppression de '.$version['fichier'],'test');
+			if (@file_exists($f = get_spip_doc($version['fichier']))) {
+				supprimer_fichier($f);
+			}
+		}
+		if(is_array($liste)){
+			$in = sql_in('id_doc2img', $liste);
+			sql_delete("spip_doc2img", $in);
+		}
+	}
 	return $flux;
 }
 
