@@ -6,7 +6,7 @@ function html5_insert_head($flux, $lang) {
 	$javascript_ie = find_in_path('javascript/html5-ie.js');
 	$flux .= html5_insert_head_css('')
 		. "<!--[if IE]>\n"
-		. "[<script src='$javascript_ie' type='text/javascript'></script>]\n"
+		. "<script src='$javascript_ie' type='text/javascript'></script>\n"
 		. "<![endif]-->\n";
 	return $flux;
 }
