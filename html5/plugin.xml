@@ -3,12 +3,12 @@
 	<auteur>davux</auteur>
 	<icon>html5.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.2</version>
+	<version>0.2.0</version>
 	<etat>dev</etat>
-	<description>Ce plugin pose les bases pour faire un site en HTML5 sans se poser de questions sur l'impl&eacute;mentation par les navigateurs. Il fournit actuellement:
--* un petit déconstipant javascript pour IE, afin que celui-ci "voie" dans le DOM les nouvelles balises,
--* un style CSS par d&eacute;faut (reset) pour les balises nouvelles et modifi&eacute;es.
-	</description>
+        <description>Ce plugin pose les bases pour faire un site en HTML5. Il fournit actuellement:
+-* un sol commun pratique : reset CSS et un petit fichier javascript pour faire "voir" les balises &agrave; Internet Explorer
+-* une surcharge du formulaire de recherche de SPIP en HTML5
+        </description>
 	<prefix>html5</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
