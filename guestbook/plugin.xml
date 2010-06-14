@@ -1,7 +1,7 @@
 <plugin>
 	<nom>GuestBook</nom>
 	<auteur>Yohann Prigent (potter64) - 2010</auteur>
-	<version>2.5</version>
+	<version>2.5.1</version>
 	<version_base>2.1</version_base>
 	<icon>prive/images/guestbook_logo.png</icon>
 	<etat>stable</etat>
@@ -24,6 +24,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>insert_head_css</nom>
+		<inclure>guestbook_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
 		<inclure>guestbook_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version='[2.1.0;]' />

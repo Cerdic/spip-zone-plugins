@@ -1,5 +1,5 @@
 <?php
-function spip_suggest_complete ($q) {
+function spip_suggest_complete($q) {
 	define('_MYSQL_DIR', '/var/lib/mysql/');
 	// lire la base de donnees
 	$s = lire_config('spip_suggest/db_name');
@@ -28,11 +28,21 @@ function spip_suggest_complete ($q) {
 		arsort($res);
 	}
 	foreach ($res as $key=>$value) {
-	  $w .= strtolower($key).'|'.$value."\n";
+		$w .= strtolower($key).'|'.$value."\n";
 	}
 	return $w;
 }
-function spip_suggest_insert_head ($flux) {
+function spip_suggest_insert_head_css($flux) {
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		$flux .= '<link rel="stylesheet" href="'.find_in_path("javascript/jquery.autocomplete.css").'" type="text/css" media="all" />';
+	}
+	return $flux;
+}
+
+function spip_suggest_insert_head($flux) {
+	$flux .= guestbook_insert_head_css($flux); // au cas ou il n'est pas implemente
 	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery.autocomplete.js").'"></script>';
 	$flux .= '
 <script type="text/javascript">
@@ -53,7 +63,6 @@ function spip_suggest_insert_head ($flux) {
 		}); 
 	});
 </script>';
-  $flux .= '<link rel="stylesheet" href="'.find_in_path("javascript/jquery.autocomplete.css").'" type="text/css" media="all" />';
-  return $flux;
+	return $flux;
 }
 ?>
