@@ -47,18 +47,33 @@ function recuperer_passage_wissen($livre,$ref,$wissen,$lang){
 	   $code = supprimer_intertitre($n,$code);
 	   $n++;
 	}
-			
+	$resultat = array();		
 	$code = strip_tags($code,'<span>');
+	$tableau_chapitre = preg_split('!<span class="chapter">([0-9]*)</span> !',$code);
+	preg_match_all('!<span class="chapter">([0-9]*)</span> !',$code,$liste_chapitre);
+	$index = 0;
+	array_shift($tableau_chapitre);
 	
-	$code = str_replace('<span class="chapter">','<br /><strong>',$code);
-	$code = str_replace('</span> ','</strong>',$code);
-	$code = str_replace('<span class="verse">','<br /><sup>',$code);
-	$code = str_replace('</span>&nbsp;','</sup>',$code);
-	$code = strip_tags($code,'<br><sup><strong>');
-	$code = str_replace('</strong><br />','</strong>',$code);
-	$code = preg_replace('#^<br />#','',$code);
-	$code = preg_replace("#</sup>#"," </sup>",$code);
-	return $code;
+	foreach ($liste_chapitre[1] as $chapitre){
+		
+		$tableau_verset = preg_split('!<span class="verse">([0-9]*)</span>!',$tableau_chapitre[$index]);
+		array_shift($tableau_verset);
+
+		preg_match_all('!<span class="verse">([0-9]*)</span>!',$tableau_chapitre[$index],$liste_verset);
+		$index2 = 0;
+
+
+		$resultat[$liste_chapitre[$index]] = array();
+		foreach($liste_verset[1] as $verset){
+				$resultat[$liste_chapitre[1][$index]][$verset] = trim(str_replace('&nbsp;',' ',strip_tags($tableau_verset[$index2])));
+				$index2++;	
+		}
+				
+		$index ++;		
+	}
+	
+
+	return $resultat;
 	}
 function supprimer_intertitre($n, $code){
     if(preg_match('#<h'.$n.'>#',$code)){

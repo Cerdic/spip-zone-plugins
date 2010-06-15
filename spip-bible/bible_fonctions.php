@@ -136,8 +136,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
     $lang = $tableau_traduction[$traduction]['lang'];
     $langues_originales = bible_tableau('original');
     $lang_original = $lang;
-	$separateur = $tableau_separateur[$lang];
-	
+		
 	
 	//si langue originel
 	foreach ($langues_originales as $i=>$dir){
@@ -151,6 +150,8 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		}
 	
 	}
+	$separateur = $tableau_separateur[$lang];
+
     $tableau_analyse = bible_analyser_ref($passage,$traduction);
     if (!is_array($tableau_analyse)){
         return $tableau_analyse;
@@ -187,7 +188,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	else if ($wissen){
 		$isaie == true ? $passage = str_replace('Es','Is',$passage) : $passage = $passage;
 		include_spip('traduction/wissen');
-		$texte = '<quote>'.recuperer_passage_wissen($livre,$passage,$wissen,$lang);
+		$tableau = recuperer_passage_wissen($livre,$passage,$wissen,$lang);
 		
 		}
 	
