@@ -109,7 +109,7 @@ function spip_bonux_formulaires_configurer_recense($form){
 		}
 	}
 
-	spip_bonux_configurer_lire_meta($form,&$valeurs);
+	spip_bonux_configurer_lire_meta($form,$valeurs);
 	return $valeurs;
 }
 
