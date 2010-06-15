@@ -42,9 +42,10 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 	
 	$texte = '';
 	$i = $chapitre_debut;
-	
+	$resultat = array();
 	while ($i<=$chapitre_fin){
 		// recuperer le fichier
+		
 		
 		$url = 'http://www.biblegateway.com/passage/?book_id='.$livre.'&version='.$id_trad.'&chapter='.$i;
         	
@@ -74,10 +75,11 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 		$code = str_replace('</span>',' </sup>',$code);
 		$code = strip_tags($code,'<sup><br>');
 		
+		$code = supprimer_note($code);
 		
 		if ($verset_fin!=''){
 		//selection des verset
-		    $sup = '<sup>'.$verset_debut.'</sup>';
+		   $sup = '<sup>'.$verset_debut.'</sup>';
 		   
            
             //suprresion des attributs html dans les sup
@@ -86,17 +88,17 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
            $code = preg_replace("#value='[0-9]*'#",'',$code);
            $code = preg_replace('#  id="'.$lang.'-'.$nom_trad.'-[0-9]*"#','',$code);
            
-            
+           
            
              
-            $tableau 	= explode($sup,$code);
+            $tableau = explode($sup,$code);
 			
 			
-			$code  		=  '<sup>'.$verset_debut.'</sup>'.$tableau[1];
+			$code	=  '<sup>'.$verset_debut.'</sup>'.$tableau[1];
 			
 			if ($i == $chapitre_fin){
 				$v = $verset_fin+1;
-				 $sup = '<sup>'.$v.'</sup>';
+				$sup = '<sup>'.$v.'</sup>';
 				$tableau 	= explode($sup,$code);
 				
 				$code  		= trim($tableau[0]);
@@ -106,22 +108,27 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 			
 			
 		}
+		$versets = array();
+		$array = array();
+		$code = preg_replace("#<br />#","",$code);
+		$code = preg_replace("*&nbsp;*"," ",$code);
+		preg_match_all("#<sup>([0-9]*)</sup>#",$code,$versets);
+		$texte_verset = preg_split('#<sup>([0-9]*)</sup>#',$code);
+		if ($texte_verset[0] == ''){
+			array_shift($texte_verset);	
+		}
+		$j  = 0;
+		foreach ($versets[1] as $verset){
+			$array[$verset] = trim($texte_verset[$j]);
+			$j++;	
+		}
+		$resultat[$i] = $array; 
 		
-		$texte .= '<strong>'.$i.'</strong>'.$code;
 
 		$i++;
 		}
     
-    /*dernier fignolage cosmétique*/
-    
-    $texte = str_replace('&nbsp;','',$texte);      //suppresion des espaces insécables, spip les remettra
-    
-    $texte = supprimer_note($texte);
-    $texte = str_replace("  <br />",'',$texte);
-    
-    $texte = traiter_sup($texte,$nom_trad,$lang);
-    $texte = preg_replace("#<br /><br />#","<br />",$texte);
-    return $texte;
+    return $resultat;
 	
 }
 
@@ -152,13 +159,10 @@ function supprimer_intertitre($code){
         
         if (count ($tableau2)==2){  //important de tester que le tableau contient bien deux entrées, pour le cas où on est avant l'intertitre
             $tableau[$i]=$tableau2[1];
-        
-        
-        
+  
         }
         else{
-            $tableau[$i]=$tableau2[0];
-        
+            $tableau[$i]=$tableau2[0];        
         
         }
         
@@ -171,11 +175,13 @@ function supprimer_intertitre($code){
     return $code;
 }
 function traiter_sup($code,$abreviation,$lang){
-    
+  
     $code = preg_replace(" #class=\"versenum\"#i","",$code);
     $code = preg_replace('# id="'.$lang.'-'.$abreviation.'-[0-9]*"#',"",$code);
     $code = str_replace("</sup>"," </sup>",$code);
     
     return $code;
 }
+
+
 ?>

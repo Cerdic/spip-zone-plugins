@@ -194,7 +194,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	else if ($gateway){
 		
 		include_spip('traduction/gateway');
-		$texte = '<quote>'.recuperer_passage_gateway($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);
+		$tableau = recuperer_passage_gateway($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);
 		
 	}
 	
