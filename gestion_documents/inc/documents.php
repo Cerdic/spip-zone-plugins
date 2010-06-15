@@ -35,7 +35,7 @@ function get_spip_doc($fichier) {
 	// gestion d'erreurs, fichier=''
 	if (!strlen($fichier))
 		return false;
-	
+
 	$fichier = (strpos($fichier, _DIR_IMG) === false)
 		? _DIR_IMG . $fichier
 		: $fichier ;
@@ -69,7 +69,7 @@ function contenu_document($arg, $charset='')
 	}
 
 	$r = spip_file_get_contents($f);
-	
+
 	if ($charset) {
 		include_spip('inc/charset');
 		if ($charset !== 'auto') {
@@ -92,7 +92,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 	$f = $r['fichier'];
 
-	if ($r['distant'] == 'oui') 
+	if ($r['distant'] == 'oui')
 		// on passe quand meme par get_spip_doc car un document distant
 		// peut avoir une url locale suite a une rotation
 		return get_spip_doc($f);
@@ -107,7 +107,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 	include_spip('inc/securiser_action');
 
 	// cette action doit etre publique !
-	return generer_url_action('acceder_document', 
+	return generer_url_action('acceder_document',
 		$args . ($args ? "&" : '')
 			. 'arg='.$id_document
 			. ($ancre ? "&ancre=$ancre" : '')
@@ -118,7 +118,9 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 //
 // Vignette pour les documents lies
-//
+// Fonction rendue surchargeable dans inc/vignette
+// Laissée pour compatibilité SPIP < 2.1.0 rev 15773
+// Appelé dans public/quete
 
 // http://doc.spip.org/@vignette_par_defaut
 function vignette_par_defaut($ext, $size=true, $loop = true) {
@@ -132,7 +134,7 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 	if (
 	# installation dans un dossier /vignettes personnel, par exemple /squelettes/vignettes
 	!@file_exists($v = find_in_path("vignettes/".$ext.".png"))
-	AND !@file_exists($v = find_in_path("vignettes/".$ext.".gif"))	
+	AND !@file_exists($v = find_in_path("vignettes/".$ext.".gif"))
 	# dans /icones (n'existe plus)
 	AND !@file_exists($v = _DIR_IMG_ICONES . $ext.'.png')
 	AND !@file_exists($v = _DIR_IMG_ICONES . $ext.'.gif')
@@ -198,7 +200,8 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 				$img = image_reduire($img);
 		}
 		else{
-			$img = vignette_par_defaut($e, false);
+			$f = charger_fonction('vignette','inc');
+			$img = $f($e, false);
 			$size = @getimagesize($img);
 			$img = "<img src='$img' ".$size[3]." />";
 		}
@@ -232,9 +235,9 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 	return "<a href='$lien' type='$mime' title='$titre'>$img</a>";
 }
 // Trouve une image caracteristique d'un document.
-// Si celui-ci est une image et que les outils graphiques sont dispos, 
+// Si celui-ci est une image et que les outils graphiques sont dispos,
 // retourner le document (en exploitant sa copie locale s'il est distant).
-// Autrement retourner la vignette fournie par SPIP pour ce type MIME 
+// Autrement retourner la vignette fournie par SPIP pour ce type MIME
 // Resultat: un fichier local existant
 // TO BE DELETED // utilise par vignette_automatique() ci-dessus
 function image_du_document($document)
@@ -245,7 +248,7 @@ function image_du_document($document)
 	  AND $document['fichier']) {
 		if ($document['distant'] == 'oui') {
 			$image = _DIR_RACINE.copie_locale($document['fichier']);
-		} 
+		}
 		else
 			$image = get_spip_doc($document['fichier']);
 		if (@file_exists($image)) return $image;
@@ -260,7 +263,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	$extension = $document['extension'];
 	$vignette = $document['id_vignette'];
 
-	if ($vignette) 
+	if ($vignette)
 		$vignette = sql_fetsel("*", "spip_documents", "id_document = ".$vignette);
 	if ($vignette) {
 		include_spip('inc/filtres');
@@ -295,7 +298,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	}
 
 	if (!$image) {
-		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
+		$f = charger_fonction('vignette','inc');
+		list($fichier, $largeur, $hauteur) = $f($extension);
 		$image = "<img src='$fichier'\n\theight='$hauteur' style='' width='$largeur' alt=' ' />";
 	} else $image = inserer_attribut($image, 'alt', ' ');
 
@@ -319,7 +323,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$GLOBALS['gestdoc_exec_colonne_document'][] = _request('exec');
 	return "";
 	include_spip('inc/autoriser');
-	
+
 	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
 	if (!autoriser('joindredocument',$type,$id))
 		return "";
@@ -340,7 +344,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	OR $GLOBALS['meta']["documents_$type"]=='non') {
 
 	// Ajouter nouvelle image
-	$ret = "<div id='images'>\n" 
+	$ret = "<div id='images'>\n"
 		. $joindre(array(
 			'cadre' => 'relief',
 			'icone' => 'image-24.gif',
@@ -404,7 +408,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	//// Documents associes
 	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type)
 	. ((!_INTERFACE_DOCUMENTS)
-		? " AND D.mode='document'"	
+		? " AND D.mode='document'"
     	: " AND D.mode IN ('image','document')"
 	), "", "D.mode, D.id_document");
 
@@ -416,7 +420,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$ret .= http_script('', "async_upload.js")
 		  . http_script('$("form.form_upload").async_upload(async_upload_article_edit)');
 	}
-    
+
 	return $ret;
 }
 
@@ -427,7 +431,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 // http://doc.spip.org/@affiche_raccourci_doc
 function affiche_raccourci_doc($doc, $id, $align) {
 	static $num = 0;
-	
+
 	if ($align) {
 		$pipe = "|$align";
 
@@ -436,7 +440,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 	} else {
 		$align='center';
 	}
-	
+
 	return
 	  ((++$num > 1) ? "" : http_script('',  "spip_barre.js"))
 		. "\n<div style='text-align: $align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
@@ -460,7 +464,7 @@ function est_inclus($id_document) {
 // TO BE DELETED
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
-	
+
 	$document = sql_fetsel("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document", "L.id_objet=".intval($id)." AND objet=".sql_quote($type)." AND L.id_document=".sql_quote($id_document));
 
 	if (!$document) return "";
@@ -504,7 +508,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 			// Bouton permettant de copier en local le fichier
 			include_spip('inc/tourner');
 			$dist .= bouton_copier_local($document, $type, $id, $id_document, $script);
-			
+
 			$dist .="</div>\n";
 		} else {
 			$dist = '';
@@ -518,7 +522,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		. document_et_vignette($document, $url, true)
 		. '</div>'
 		. "\n<div class='verdana1' style='text-align: center; color: black;'>\n"
-		. ($type_titre ? $type_titre : 
+		. ($type_titre ? $type_titre :
 		      ( _T('info_document').' '.majuscules($extension)))
 		. "</div>";
 
@@ -535,7 +539,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 			. affiche_raccourci_doc('doc', $id_document, 'center')
 			. affiche_raccourci_doc('doc', $id_document, 'right')
 			. "</div>\n";
-	
+
 			if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				$raccourci .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
 				$raccourci .= "<b>"._T('info_inclusion_directe')."</b><br />";
@@ -561,7 +565,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	//
 	// Afficher une image inserable dans l'article
 	//
-	
+
 	  $ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),20), "document$id_document");
 
 		//
@@ -597,7 +601,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 		$legender = charger_fonction('legender', 'inc');
 		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
-		
+
 		$ret .= fin_cadre_relief(true);
 	}
 	return "<div>$ret</div>"; // on encapsule chaque document dans un container pour permettre son remplacement en ajax
@@ -636,7 +640,7 @@ function lister_les_documents_orphelins() {
 
  */
 
-// Supprimer les documents de la table spip_documents, 
+// Supprimer les documents de la table spip_documents,
 // ainsi que les fichiers correspondants dans IMG/
 // Fonction a n'appeler que sur des documents orphelins
 // http://doc.spip.org/@supprimer_documents
