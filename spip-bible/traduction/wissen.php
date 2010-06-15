@@ -1,7 +1,9 @@
 <?php
 
 
-function recuperer_passage_wissen($livre,$ref,$wissen,$lang){
+function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang){
+	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,false)));
+
 	$param_cache = array('ref'=>$ref,'wissen'=>$wissen);
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
