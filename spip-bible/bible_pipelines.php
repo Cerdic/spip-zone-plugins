@@ -7,7 +7,7 @@ function bible_insert_head($flux){
 }
 
 function bible_affiche_droite($flux){
-    global $spip_version_affichee;
+
     
     /* on n'affiche le presse-papier bible que si on est sur une page d'édition*/
     if (preg_match('/edit/',$flux['args']['exec'])==false){

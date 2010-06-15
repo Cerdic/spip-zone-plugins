@@ -1,8 +1,9 @@
 <?php
 
-function formulaires_bible_reference_charger_dist($lang='fr'){
+function formulaires_bible_reference_charger_dist($lang='fr',$cadre=true){
     
 	$valeurs = array(
+		'cadre'=>$cadre,
 	   'action'    => $script,
 	   'version'      =>  lire_config('bible/traduction_'.$lang),
 	   'lang'      =>$lang,
@@ -42,7 +43,7 @@ function formulaires_bible_reference_traiter_dist(){
     $retour     = _request('retour');
     $ref        = _request('ref');
     include_spip('bible_fonctions');
-    $resultat = bible($passage,$version,!$retour ? 'non' : $retour,!$numeros ? 'non' : $numeros,!$ref ? 'non' : $ref);
+    $resultat = bible($passage,$version,!$retour ? 'non' : $retour,!$numeros ? 'non' : $numeros,!$ref ? 'non' : $ref,false,$modele);
 
 
     return array('message_ok'=>array('resultat'   =>  $resultat,

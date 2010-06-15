@@ -46,7 +46,7 @@
     <div class="formulaire_spip formulaire_editer">
     <ul>
     
-    [<li> <textarea rows="10" name="bible_resultat" id="bible_resultat">(#ENV*{message_ok}|table_valeur{resultat})</textarea></li>]
+    [<li> [(#ENV{cadre}|oui)<textarea rows="10" name="bible_resultat" id="bible_resultat">](#ENV*{message_ok}|table_valeur{resultat})[(#ENV{cadre}|oui)</textarea>]</li>]
     
     <li[ class="erreur"(#ENV{erreurs}|table_valeur{erreur}|oui)]>
         <label for="passage"><:bible:form_passage:></label>
