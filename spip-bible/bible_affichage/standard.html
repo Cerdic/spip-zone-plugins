@@ -1,5 +1,7 @@
 <blockquote class="spip"[(#ENV{spip_lang}|!={#ENV{lang}}|oui)lang="#ENV{lang}"]>
+[<div dir="(#VAL{original}|bible_tableau|table_valeur{#ENV{lang_original}})" lang="#ENV{lang_original}">]
 <INCLURE{fond=bible_affichage/texte_standard}{passage_texte=#ENV{passage_texte}}{retour=#ENV{retour}}{numeros=#ENV{numeros}}>
+[(#VAL{original}|bible_tableau|table_valeur{#ENV{lang_original}}|oui)</div>]
 
 
 [(#ENV{ref}|=={oui}|oui)<p>[(#ENV{passage}|table_valeur{0}|afficher_references{

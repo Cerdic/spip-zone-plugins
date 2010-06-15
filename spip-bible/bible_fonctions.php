@@ -205,7 +205,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
 	}
 	include_spip('inc/utils');
-	return recuperer_fond('bible_affichage/standard',array('passage_texte'=>$tableau,'numeros'=>$numeros,'retour'=>$retour,'ref'=>$ref,'traduction'=>$traduction,'passage'=>$tableau_analyse,'lang'=>$lang,'spip_lang'=>$spip_lang,'lang_original'=>$lang_original,'separateur'=>$separateur));
+	return recuperer_fond('bible_affichage/standard',array('passage_texte'=>$tableau,'numeros'=>$numeros,'retour'=>$retour,'ref'=>$ref,'traduction'=>$traduction,'passage'=>$tableau_analyse,'lang'=>$lang,'spip_lang'=>$spip_lang,'lang_original'=>$lang_original,'separateur'=>$separateur,'dir'=>$dir));
 	
 	}
 function livre_long($i,$lang=''){
