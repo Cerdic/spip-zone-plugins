@@ -116,7 +116,7 @@ function bible_analyser_ref($passage,$traduction){
     return  array($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
 }
 
-function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non',$mode_test=false,$modele='standard'){
+function bible($passage,$traduction='jerusalem',$mode_test=false){
 
 	
 	$tableau_traduction = bible_tableau('traduction');
@@ -157,7 +157,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
         return $tableau_analyse;
     }
     if ($mode_test){
-	   return;
+	   return ;
 	}
 	
 	
@@ -205,7 +205,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		$tableau = recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
 	}
 	include_spip('inc/utils');
-	return recuperer_fond('bible_affichage/standard'.$modele,array('passage_texte'=>$tableau,'numeros'=>$numeros,'retour'=>$retour,'ref'=>$ref,'traduction'=>$traduction,'passage'=>$tableau_analyse,'lang'=>$lang,'spip_lang'=>$spip_lang,'lang_original'=>$lang_original,'separateur'=>$separateur,'dir'=>$dir));
+	return (array('passage_texte'=>$tableau,'passage'=>$tableau_analyse,'lang_original'=>$lang_original,'spip_lang'=>$spip_lang,'lang'=>$lang,'separateur'=>$separateur));
 	
 	}
 function livre_long($i,$lang=''){
@@ -234,19 +234,19 @@ function filtre_ref($i){
 }
 
 function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad=true){
-	//var_dump($livre,$cd,$vd,$cf,$vf);
+
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
-	$trad = $tableau_traduction[$trad]['traduction'];
+	$trad = $tableau_traduction[strtolower($trad)]['traduction'];
 	
 	$livre_long = $tableau_livres[$lang][$livre] ;
 	
 	$livre = str_replace('1','1 ',$livre);
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
-	//var_dump($nommer_trad);
+
 	$nommer_trad == true ? $bloc_fin = ' (<i>'.$trad.'</i>)' : $bloc_fin = '';
-	//var_dump($bloc_fin);
+
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
 		return '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$bloc_fin;
@@ -258,9 +258,7 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 		return '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.$bloc_fin;
 	
 	}
-	
-	
-	
+
 	$chaine = '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$separateur." ".$vd;
 	
 	if ($cd!=$cf){

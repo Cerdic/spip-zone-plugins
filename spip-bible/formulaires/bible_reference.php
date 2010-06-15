@@ -21,7 +21,7 @@ function formulaires_bible_reference_verifier_dist(){
     $retour     = _request('retour');
     $ref        = _request('ref');
     include_spip('bible_fonctions');
-    $resultat = bible($passage,$version,$retour,$numeros,$ref,true);
+    $resultat = bible($passage,$version,true);
 
     if ($resultat == _T('bible:pas_livre')){
         return array('erreur'   =>  _T('bible:form_ref_incorrecte'),
@@ -43,7 +43,9 @@ function formulaires_bible_reference_traiter_dist(){
     $retour     = _request('retour');
     $ref        = _request('ref');
     include_spip('bible_fonctions');
-    $resultat = bible($passage,$version,!$retour ? 'non' : $retour,!$numeros ? 'non' : $numeros,!$ref ? 'non' : $ref,false,$modele);
+    include_spip('inc/utils');
+    $resultat = recuperer_fond('modeles/bible',array('passage'=>$passage,'traduction'=>$version,'retour'=>!$retour ? 'non' : $retour,'numeros'=>!$numeros ? 'non' : $numeros,'ref'=>!$ref ? 'non' : $ref));
+    
 
 
     return array('message_ok'=>array('resultat'   =>  $resultat,
