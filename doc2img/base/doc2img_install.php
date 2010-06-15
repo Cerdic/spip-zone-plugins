@@ -33,25 +33,29 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
             @mkdir($dir_doc2img);
 
             // Insertion d'une première configuration
-            $cfg = array(
-                "format_document" => "pdf",
-                "repertoire_cible" => "doc2img",
-                "format_cible" => "png",
-                "proportion" => "on"
-            );
-			ecrire_meta('doc2img',serialize($cfg));
+            if(!is_array(lire_config('doc2img'))){
+	            $cfg = array(
+	                "format_document" => "pdf",
+	                "repertoire_cible" => "doc2img",
+	                "format_cible" => "png",
+	                "proportion" => "on"
+	            );
+				ecrire_meta('doc2img',serialize($cfg));
+            }
 
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 		if (version_compare($current_version,'0.3','<')){
             //définition des paramètres de base
-            $cfg = array(
-                "format_document" => "pdf",
-                "repertoire_cible" => "doc2img",
-                "format_cible" => "png",
-                "proportion" => "on"
-            );
-			ecrire_meta('doc2img',serialize($cfg));
+			if(!is_array(lire_config('doc2img'))){
+	            $cfg = array(
+	                "format_document" => "pdf",
+	                "repertoire_cible" => "doc2img",
+	                "format_cible" => "png",
+	                "proportion" => "on"
+	            );
+				ecrire_meta('doc2img',serialize($cfg));
+			}
 			ecrire_meta($nom_meta_base_version,$current_version='0.3','non');
 		}
 		if (version_compare($current_version,'0.5','<')){
