@@ -27,7 +27,7 @@ function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitr
     include_spip("inc/distant");
 	include_spip("inc/charsets");
 	
-	$texte = '';
+	$tableau = array();
 	
 	
 	
@@ -46,18 +46,13 @@ function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitr
 	       $code = importer_charset(recuperer_page($url,'utf-8'));
 	       
 	       $code = selectionner_passage($code);
-	       
-	       $texte = $texte."<strong>".$i."</strong>".$code;
-	       $i == $chapitre_fin ? $texte = $texte : $texte = $texte."<br />";
-	       
+	       $tableau[$i] = $code;  
 	       $i++;
+	       
     
     
     }
-	//fignolage cosmètique
-	$texte = str_replace('</strong><br />','</strong>',$texte);
-	
-	return $texte;
+	return $tableau;
 }
 
 function selectionner_passage($code){
@@ -67,8 +62,7 @@ function selectionner_passage($code){
     $post_bdo = array_pop($tableau);
     $code = implode("</bdo>",$tableau);
     
-    
-    
+ 
     // traitement de ce qu'il y après le </bdo>
     
     $tableau = explode("</tr>",$post_bdo);
@@ -77,18 +71,29 @@ function selectionner_passage($code){
     //on ne prend qu'après le 2nd <bdo dir='ltr'> (pas celui du chapitre)
     
     $tableau = explode("<bdo dir='ltr'>",$code);
-    $bidon = array_shift($tableau); //on n'a pas besoins de cela, mais je sais pas manipuler bien les tableau, faudrait que je me plonge dans de la doc
-    $bidon = array_shift($tableau);
+    
+    array_shift($tableau); //on n'a pas besoins de cela, mais je sais pas manipuler bien les tableau, faudrait que je me plonge dans de la doc
+    array_shift($tableau);
+    
     
     
     $code = "<bdo dir='ltr'>".implode("<bdo dir='ltr'>",$tableau);
-    
+
     $code = strip_tags($code,"<bdo>");
-    $code = str_replace("</bdo>.&nbsp;"," </sup>",$code);
-    $code = str_replace("</bdo>&nbsp;"," </sup>",$code);
-    $code = str_replace("<bdo dir='ltr'>","<br /><sup>",$code); 
- 
-    return $code;
+    $code = str_replace('</bdo>.&nbsp;','</bdo>',$code);
+	preg_match_all("!<bdo dir='ltr'>([0-9]*)</bdo>!",$code,$numeros_verset); 
+	$tableau_verset = preg_split("!<bdo dir='ltr'>([0-9]*)</bdo>!",$code);
+	array_shift($tableau_verset);
+ 	//var_dump($numeros_verset);
+ 	$tableau = array();
+ 	$i = 0;
+ 	foreach ($numeros_verset[1] as $numero){
+ 		$tableau[$numero]= trim($tableau_verset[$i]);
+ 		$i++;
+ 	}
+
+    //var_dump($tableau);
+    return $tableau;
 }
 
 

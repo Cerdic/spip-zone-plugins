@@ -181,7 +181,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	else if ($unbound){
 		include_spip('traduction/unbound');
-		$texte = '<quote>'.recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang);
+		$tableau = recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang);
 	}
 		
 		
@@ -202,7 +202,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	else{
 	
 		include_spip('traduction/'.$traduction);
-		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
+		$tableau = recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
 	}
 	include_spip('inc/utils');
 	return recuperer_fond('bible_affichage/standard',array('passage_texte'=>$tableau,'numeros'=>$numeros,'retour'=>$retour,'ref'=>$ref,'traduction'=>$traduction,'passage'=>$tableau_analyse,'lang'=>$lang,'spip_lang'=>$spip_lang,'lang_original'=>$lang_original,'separateur'=>$separateur,'dir'=>$dir));
