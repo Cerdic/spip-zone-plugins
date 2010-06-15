@@ -4,6 +4,8 @@
 	id_article : id de l'article dont on souhaite afficher la licence
 	lien : si non n'affiche pas le lien vers la description de la licence
 	logo : si non n'affiche pas le logo de la licence
+	largeur_logo : int la largeur maximale du logo (passer un entier uniquement)
+	hauteur_logo : int la hauteur maximale du logo (passer un entier uniquement)
 	nom_licence : force l'affichage du nom de la licence dans le lien
 	même si un logo est présent
 ]
@@ -24,8 +26,20 @@
 	[(#ENV{logo}|=={non}|oui)
 		#SET{icon_licence,''}
 	]
-	[<a href="(#GET{link_licence})" class="spip_out" rel="external">]
-		[<img (#GET{icon_licence}|oui) src="#CHEMIN{img_pack/#GET{icon_licence}}" [title="(#GET{desc_licence}|attribut_html)"] [alt="(#GET{name_licence}|attribut_html)"]/>]
+	#SET{logo,''}
+	[(#GET{icon_licence}|oui)
+		[(#ENV{largeur_logo}|ou{#ENV{hauteur_logo}}|oui)
+			[(#SET{logo,[(#CHEMIN{img_pack/[(#GET{icon_licence})]}
+							|image_passe_partout{[(#ENV{largeur_logo,''})],[(#ENV{hauteur_logo,''})]}
+							|inserer_attribut{title,[(#GET{desc_licence}|attribut_html)]}
+							|inserer_attribut{alt,[(#GET{name_licence}|attribut_html)]})]})]
+		]
+		[(#ENV{largeur_logo}|ou{#ENV{hauteur_logo}}|non)
+			[(#SET{logo,[<img (#GET{icon_licence}|oui) src="#CHEMIN{img_pack/#GET{icon_licence}}" [title="(#GET{desc_licence}|attribut_html)"] [alt="(#GET{name_licence}|attribut_html)"]/>]})]
+		]
+	]
+	[<a href="(#GET{link_licence})" class="spip_out" rel="external" [title="(#GET{desc_licence}|attribut_html)"]>]
+		[(#GET{logo})]
 		[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}})#GET{name_licence}]
 	[</a>(#GET{link_licence}|oui)]
 </BOUCLE_selection>
