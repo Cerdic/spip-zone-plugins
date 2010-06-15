@@ -28,6 +28,7 @@
 			if ($liste['SPIP_BONUX']){
 			     bible_initialise_pp();
 			}
+			
 				
 				}
 			break;

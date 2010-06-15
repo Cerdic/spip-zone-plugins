@@ -1,6 +1,15 @@
 <?php
 function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$gateway,$lang){
-	
+	$param_cache=array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapotre_fin'=>$chapitre_fin,'$verset_fin'=>$verset_fin,'gateway'=>$gateway);
+	//Vérifions qu'on a pas en cache
+	if (_NO_CACHE == 0){
+		include_spip('inc/bible_cache');
+		$cache = bible_lire_cache($param_cache);
+		if ($cache){
+			return $cache;	
+		}
+	}
+
 	$id_trad = $gateway[0];
 	$nom_trad = $gateway[1];
 	
@@ -42,6 +51,7 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 	
 	$texte = '';
 	$i = $chapitre_debut;
+	
 	$resultat = array();
 	while ($i<=$chapitre_fin){
 		// recuperer le fichier
@@ -53,10 +63,12 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 		
 		
 		$code = importer_charset(recuperer_page($url,'utf-8'));
+		
 		$tableau = explode('<div class="result-text-style-normal">',$code);
 		$code=$tableau[1];
 		$tableau = explode('</div',$code);
 		$code=$tableau[0];
+		
 		
 		
 		$tableau=explode('</h4>',$code);
@@ -77,16 +89,18 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 		
 		$code = supprimer_note($code);
 		
+		//suprresion des attributs html dans les sup
+           
+         $code = preg_replace('#class="versenum"#','',$code);
+         $code = preg_replace("#value='[0-9]*'#",'',$code);
+         $code = preg_replace('#  id="'.$lang.'-'.$nom_trad.'-[0-9]*"#','',$code);
+		
 		if ($verset_fin!=''){
 		//selection des verset
 		   $sup = '<sup>'.$verset_debut.'</sup>';
 		   
            
-            //suprresion des attributs html dans les sup
-           
-           $code = preg_replace('#class="versenum"#','',$code);
-           $code = preg_replace("#value='[0-9]*'#",'',$code);
-           $code = preg_replace('#  id="'.$lang.'-'.$nom_trad.'-[0-9]*"#','',$code);
+
            
            
            
@@ -108,15 +122,18 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 			
 			
 		}
+		
 		$versets = array();
 		$array = array();
 		$code = preg_replace("#<br />#","",$code);
 		$code = preg_replace("*&nbsp;*"," ",$code);
+		
 		preg_match_all("#<sup>([0-9]*)</sup>#",$code,$versets);
 		$texte_verset = preg_split('#<sup>([0-9]*)</sup>#',$code);
-		if ($texte_verset[0] == ''){
-			array_shift($texte_verset);	
-		}
+	
+		array_shift($texte_verset);	
+
+		//var_dump($texte_verset);
 		$j  = 0;
 		foreach ($versets[1] as $verset){
 			$array[$verset] = trim($texte_verset[$j]);
@@ -127,7 +144,9 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 
 		$i++;
 		}
-    
+    if (_NO_CACHE == 0){
+		bible_ecrire_cache($param_cache,$resultat);
+	}
     return $resultat;
 	
 }

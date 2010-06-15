@@ -1,6 +1,15 @@
 <?php
 
 function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang){
+	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'unbound'=>$unbound);
+	//Vérifions qu'on a pas en cache
+	if (_NO_CACHE == 0){
+		include_spip('inc/bible_cache');
+		$cache = bible_lire_cache($param_cache);
+		if ($cache){
+			return $cache;	
+		}
+	}
 	
 	if ($verset_debut=='' ){
 		$verset_debut=1;
@@ -52,6 +61,10 @@ function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitr
     
     
     }
+    //mettons en cache
+    if (_NO_CACHE == 0){
+		bible_ecrire_cache($param_cache,$tableau);
+	}
 	return $tableau;
 }
 

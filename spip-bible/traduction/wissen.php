@@ -2,7 +2,16 @@
 
 
 function recuperer_passage_wissen($livre,$ref,$wissen,$lang){
-	
+	$param_cache = array('ref'=>$ref,'wissen'=>$wissen);
+	//Vérifions qu'on a pas en cache
+	if (_NO_CACHE == 0){
+		include_spip('inc/bible_cache');
+		$cache = bible_lire_cache($param_cache);
+		if ($cache){
+			return $cache;	
+		}
+	}
+
 	include_spip('inc/bible_tableau');
 	$livre_gateways = bible_tableau('gateway');
 	$livre_lang = $livre_gateways[$lang][$livre];
@@ -71,7 +80,9 @@ function recuperer_passage_wissen($livre,$ref,$wissen,$lang){
 				
 		$index ++;		
 	}
-	
+	if (_NO_CACHE == 0){
+		bible_ecrire_cache($param_cache,$resultat);
+	}
 
 	return $resultat;
 	}
