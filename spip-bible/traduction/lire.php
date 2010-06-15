@@ -25,7 +25,7 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 	include_spip('inc/bible_tableau');
 	$tableau = bible_tableau('lire_la_bible');
 	$livre =  $tableau[$livre];
-
+	$tableau_resulat = array();
 	
 		//recuperation du passage
 	include_spip("inc/distant");
@@ -45,15 +45,12 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 		$verset_fin =='' and $i==$chapitre_fin ? $debut=1 : $debut=$debut;		
 		$fin == '' ? $fin ='' : $fin =$fin +1; 
 		
-		$code = recuperer_versets(lire_traiter_code(importer_charset(recuperer_page($url,'utf-8'))),$debut,$fin);
+		$tableau_resultat[$i] = recuperer_versets(lire_traiter_code(importer_charset(recuperer_page($url,'utf-8'))),$debut,$fin);
 		
-		
-		$i == $chapitre_debut ? $texte.= "<strong>".$i.'</strong>'.$code : $texte.= "<br /><strong>".$i.'</strong>'.$code ;
 		$i++;
 	}
-	
-	$texte = str_replace("</sup>"," </sup>",$texte); //important pour l'option de suppression de numero
-	return $texte;
+
+	return $tableau_resultat;
 }
 
 function lire_traiter_code($code){
@@ -77,22 +74,37 @@ function lire_traiter_code($code){
 		
 		$i++;
 	} 
-	
+
 	return $code;
 	
 }
 
 function recuperer_versets($code,$vd,$vf){
 	
-	
+	$resultat = array();
 	$tableau = explode('<sup>'.$vd.'</sup>',$code);
 	
 	$code = '<sup>'.$vd.'</sup>'.$tableau[1];
 	
 	$tableau = explode('<sup>'.$vf.'</sup>',$code);
-	$code = $tableau[0];
-	
-	return $code;
+
+	$code = str_replace('<br />','',$tableau[0]);
+	$versets = array();
+	preg_match_all("#<sup>([0-9]*)</sup>#",$code,$versets);
+
+		
+	$texte_verset = preg_split('#<sup>([0-9]*)</sup>#',$code);
+	if ($texte_verset[0] == ''){
+		array_shift($texte_verset);	
+	}
+
+	$i = 0;
+	foreach ($versets[1] as $verset){
+		$resultat[$verset] = trim($texte_verset[$i]);
+		$i++;	
+	}
+
+	return $resultat;
 
 }
 

@@ -7,7 +7,7 @@
     Licence : GPL3
     </auteur>
     <version>
-    1.8.2
+    2.0
     </version>
     <etat>
     stable
@@ -15,6 +15,7 @@
     <install>base/bible_install.php</install>
 	<necessite id="SPIP" version="[1.9.0;]" />
     <necessite id='CFG' version="[1.0;]" />
+    <necessite id="spip_bonux" />
     <icon>
     bible.jpg
     </icon>
@@ -44,7 +45,7 @@ Ces options sont :
 	
 		 
 	</description>
-	<utilise id="spip_bonux" />
+
     <prefix>
     bible
     </prefix>

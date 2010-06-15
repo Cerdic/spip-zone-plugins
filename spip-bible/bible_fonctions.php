@@ -4,24 +4,14 @@ Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
 include_spip('inc/bible_tableau');
+
 function bible_supprimer_retour($texte){
    
     $texte = preg_replace("#\t#",'',$texte);
-    $texte = preg_replace("#1[\s]*<br />#",'<br />',$texte);
-    $texte = preg_replace("#[\s]*<sup>#",'<sup>',$texte);
     
     $texte = preg_replace("# {2,}#",'',$texte);
-
-
     $texte = preg_replace("#[\r|\n][\r|\n]#",'',$texte);
-  
-
-    $texte = preg_replace("#\n<br />#i","<br />",$texte);
-    $texte = preg_replace("#<quote>#","<quote>\n",$texte);
-    $texte = preg_replace("#<br />#i","<br />\n",$texte);
-    $texte = preg_replace("#</quote>#","\n\n</quote>",$texte);
-    $texte = preg_replace("#(<p>|</p>)#i","\n\n",$texte);
-    #$texte = preg_replace("#</p>#i","\n\n",$texte);
+    
  return $texte;
 }
 function traduire_abreviation($abrev,$lang_original,$lang_traduction){
@@ -130,6 +120,8 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 
 	
 	$tableau_traduction = bible_tableau('traduction');
+	$tableau_separateur = bible_tableau('separateur');
+	
     global $spip_lang;
 	
 	$traduction = strtolower($traduction);
@@ -144,7 +136,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
     $lang = $tableau_traduction[$traduction]['lang'];
     $langues_originales = bible_tableau('original');
     $lang_original = $lang;
-	
+	$separateur = $tableau_separateur[$lang];
 	
 	
 	//si langue originel
@@ -168,7 +160,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	}
 	
 	
-    //var_dump($tableau_analyse);
+
     $livre = $tableau_analyse[0];
     $chapitre_debut = $tableau_analyse[1];
     $verset_debut = $tableau_analyse[2];
@@ -183,7 +175,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	if ($lire){
 		include_spip('traduction/lire');
-		$texte = '<quote>'.recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
+		$tableau = recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
 	}
 	
 	else if ($unbound){
@@ -211,36 +203,10 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		include_spip('traduction/'.$traduction);
 		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
 	}
+	include_spip('inc/utils');
+	return recuperer_fond('bible_affichage/standard',array('passage_texte'=>$tableau,'numeros'=>$numeros,'retour'=>$retour,'ref'=>$ref,'traduction'=>$traduction,'passage'=>$tableau_analyse,'lang'=>$lang,'spip_lang'=>$spip_lang,'lang_original'=>$lang_original,'separateur'=>$separateur));
 	
-	//les options du modèles
-	if ($numeros=='non'){
-		$texte = preg_replace('#<sup>[0-9]+ </sup>#','',$texte);
-		$texte = preg_replace('#<strong>[0-9]+</strong>#','',$texte);
 	}
-	
-	
-	if ($retour=='non'){
-		$texte = str_replace('<br />','',$texte);
-	}
-	
-	if ($ref!='non'){
-		if ($original){
-			$texte .= '<div lang="'.$lang.'" dir="'.lang_dir($lang).'">'.afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$separateur,$lang).'</div>';
-
-			}
-		
-		else{
-			$texte .= afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$separateur,$lang);
-			}
-		}
-	$texte = bible_supprimer_retour(str_replace('&nbsp;&nbsp;  <sup>','<sup>',$texte));
-	if ($spip_lang == $lang_original) {
-		return $texte.'</quote>';
-		}
-	else
-		{return '<div lang="'.$lang_original.'" dir="'.$dir.'">'.$texte.'</quote></div>';
-	}
-}
 function livre_long($i,$lang=''){
 	global $spip_lang;
 	$lang =='' ? $lang = $spip_lang : $lang=$lang;
@@ -281,23 +247,23 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 	
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
-		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.' (<i>'.$trad.'</i>)';
+		return '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.' (<i>'.$trad.'</i>)';
 	
 	}
 	
 	if ($vd=='' and $vf==''){
 		
-		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.' (<i>'.$trad.'</i>)</p>';
+		return '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.' (<i>'.$trad.'</i>)</p>';
 	
 	}
 	
 	
 	
-	$chaine = '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$separateur.$vd;
+	$chaine = '<accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$separateur." ".$vd;
 	
 	if ($cd!=$cf){
 			
-		$chaine .= '-'.$cf.', '.$vf;
+		$chaine .= '-'.$cf.$separateur.' '.$vf;
 	
 	}
 	elseif ($vd!=$vf) {
@@ -308,7 +274,7 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 	
 	$chaine.= ' (<i>'.$trad.'</i>)';
 	
-	return $chaine.'</p>';
+	return $chaine;
 
 }
 function traduction_longue($i){
