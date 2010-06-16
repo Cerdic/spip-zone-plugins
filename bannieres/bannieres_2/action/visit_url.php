@@ -12,15 +12,13 @@
 // securité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-function action_visit_url() {
+function action_visit_url($url) {
 	$id_banniere=$_GET['banniere'];
+	$url=$_GET['url'];
 	
 	// compteur de clics > +1clic à chaque fois
 	$query = sql_update ("spip_bannieres", array('clics' => "clics+1"), "id_banniere=$id_banniere") ;
 
-	// rechercher l'url de destination
-	$url = sql_getfetsel ('site', 'spip_bannieres', 'id_banniere='.$id_banniere);
-	
 	// si le visiteur est connecté, on cherche qui il est sinon : visiteur
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	if($id_auteur =='') {

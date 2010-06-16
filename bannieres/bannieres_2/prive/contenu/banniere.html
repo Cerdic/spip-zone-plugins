@@ -2,7 +2,7 @@
 
 <BOUCLE_afficher_contenu(BANNIERES){id_banniere=#ENV{id}}{tout}>
 		<BOUCLE_document(spip_documents spip_documents_liens){id_objet=#ID_BANNIERE}{objet=banniere}>
-		[(#EXTENSION|=={swf}|?{#MODELE{emb},<a href="#URL_DOCUMENT">[(#MODELE{img}|image_reduire{515}|#URL_DOCUMENT)]</a>})]
+		[(#EXTENSION|=={swf}|?{#MODELE{emb},<a href="#URL_DOCUMENT">[(#MODELE{img}|image_reduire{515})]</a>})]
 		
 		<div dir='#LANG_DIR' class='#EDIT{titre} titre'>
 			<p><small><:bannieres:alt:> : #TITRE</small></p>
