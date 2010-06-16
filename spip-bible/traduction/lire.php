@@ -64,7 +64,7 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 }
 
 function lire_traiter_code($code){
-	$code = supprimer_interitre($code);
+	$code = lire_supprimer_interitre($code);
 	$tableau = explode('<div class="styletxt">',$code);
 	$tableau = explode('</div>',$tableau[1]);
 	
@@ -118,7 +118,7 @@ function recuperer_versets($code,$vd,$vf){
 
 }
 
-function supprimer_interitre($texte){
+function lire_supprimer_interitre($texte){
    
     $texte = preg_replace("#<p></p>#","",$texte); 
     if (preg_match('#p class="titre4"#',$texte) == false){ // c'est ton jamais, des fois qu'il n'y auarit pas d'intertitre ce serait gentils

@@ -193,9 +193,9 @@ function bible($passage,$traduction='jerusalem',$mode_test=false){
 		}
 	
 	else if ($gateway){
-		
 		include_spip('traduction/gateway');
 		$tableau = recuperer_passage_gateway($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);
+
 		
 	}
 	
@@ -205,6 +205,7 @@ function bible($passage,$traduction='jerusalem',$mode_test=false){
 		$tableau = recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
 	}
 	include_spip('inc/utils');
+	
 	return (array('passage_texte'=>$tableau,'passage'=>$tableau_analyse,'lang_original'=>$lang_original,'spip_lang'=>$spip_lang,'lang'=>$lang,'separateur'=>$separateur));
 	
 	}

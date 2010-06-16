@@ -79,7 +79,7 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 		}
 		
 		//suppression des intertitres
-		$code = supprimer_intertitre($code);
+		$code = gateway_supprimer_intertitre($code);
 		
 		//supprerssion des balises
 		$code = str_replace('<p />','<br />',$code);
@@ -168,7 +168,7 @@ function supprimer_note($texte){
 
 }
 
-function supprimer_intertitre($code){
+function gateway_supprimer_intertitre($code){
     
     $tableau = explode('<h5>',$code); // on fait un tableau
     $i = 0;

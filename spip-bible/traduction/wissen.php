@@ -55,7 +55,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	//suppression des intertitres
 	$n = 1;
 	while (preg_match('#<h[1-7]>#',$code)){
-	   $code = supprimer_intertitre($n,$code);
+	   $code = wissen_supprimer_intertitre($n,$code);
 	   $n++;
 	}
 	$resultat = array();		
@@ -88,7 +88,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 
 	return $resultat;
 	}
-function supprimer_intertitre($n, $code){
+function wissen_supprimer_intertitre($n, $code){
     if(preg_match('#<h'.$n.'>#',$code)){
 			$tableau = explode('<h'.$n.'>',$code);
 			
