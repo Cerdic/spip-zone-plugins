@@ -6,8 +6,16 @@ return $flux;
 }
 
 // Insertion des css de Rainette
+function rainette_insert_head_css($flux){
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_RAINETTE.'styles/rainette.css" type="text/css" media="all" />';
+	}
+	return $flux;
+}
 function rainette_insert_head($flux){
-$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_RAINETTE.'styles/rainette.css" type="text/css" media="all" />';
-return $flux;
+	$flux .= rainette_insert_head_css($flux); // au cas ou il n'est pas implemente
+	return $flux;
 }
 ?>
