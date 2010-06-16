@@ -1,0 +1,22 @@
+#SET{tableau1,#ENV{passage}}
+#SET{tableau2,#ENV{passage}}
+
+#SET{tableau1,#GET{tableau1}|bible{#ENV{trad1}}}
+
+#SET{tableau2,#GET{tableau2}|bible{#ENV{trad2}}}
+<B_chapitre>
+<table class="spip">
+<tr class="row_first"><th scope="col">Verset</th><th scope="col">[(#ENV{trad1}|strtolower|traduction_longue)]</th><th scope="col">[(#ENV{trad2}|strtolower|traduction_longue)]</th></tr>
+<BOUCLE_chapitre(POUR){tableau #GET{tableau1}|table_valeur{passage_texte}}>	
+	<tr class="row_first"><td colspan="3"> Chapitre #CLE </td></tr>
+	
+	<BOUCLE_verset(POUR){tableau #VALEUR}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+		<th scope="row">#CLE</th>
+		<td[ dir="(#VAL{original}|bible_tableau|table_valeur{#GET{tableau1}|table_valeur{lang_original}})"] [lang="(#GET{tableau1}|table_valeur{lang_original}|sinon{#GET{tableau1}|table_valeur{lang}})"]>[(#GET{tableau1}|table_valeur{passage_texte}|table_valeur{#_chapitre:CLE}|table_valeur{#CLE})]</td>
+		<td[ dir="(#VAL{original}|bible_tableau|table_valeur{#GET{tableau2}|table_valeur{lang_original}})"] [lang="(#GET{tableau2}|table_valeur{lang_original}|sinon{#GET{tableau2}|table_valeur{lang}})"]>[(#GET{tableau2}|table_valeur{passage_texte}|table_valeur{#_chapitre:CLE}|table_valeur{#CLE})]</td>
+	</tr>
+	</BOUCLE_verset>
+</BOUCLE_chapitre>
+</table>
+</B_chapitre>
