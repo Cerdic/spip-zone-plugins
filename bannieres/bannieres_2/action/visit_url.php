@@ -12,7 +12,7 @@
 // securité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-function action_visit_url($url) {
+function action_visit_url() {
 	$id_banniere=$_GET['banniere'];
 	$url=$_GET['url'];
 	
