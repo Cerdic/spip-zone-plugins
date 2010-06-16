@@ -27,6 +27,7 @@ Essayez le fichier {rainette_demo.html} pour des exemples d'utilisation et consu
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
+		<action>insert_head_css</action>
 		<inclure>rainette_pipelines.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
