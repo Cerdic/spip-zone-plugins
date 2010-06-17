@@ -51,6 +51,37 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
 	return $saisies;
 }
 
+
+
+/*
+ * Prend la description complète du contenu d'un formulaire et retourne
+ * les saisies "à plat" classées par type de saisie.
+ * $saisie['input']['input_1'] = $saisie
+ *
+ * @param array $contenu Le contenu d'un formulaire
+ * @return array Un tableau avec uniquement les saisies
+ */
+function saisies_lister_par_type($contenu) {
+	$saisies = array();
+	
+	if (is_array($contenu)){
+		foreach ($contenu as $ligne){
+			if (is_array($ligne)){
+				if (array_key_exists('saisie', $ligne) and (!is_array($ligne['saisies']))){
+					$saisies[ $ligne['saisie'] ][ $ligne['options']['nom'] ] = $ligne;
+				}
+				if (is_array($ligne['saisies'])){
+					$saisies = array_merge($saisies, saisies_lister_par_type($ligne['saisies']));
+				}
+			}
+		}
+	}
+	
+	return $saisies;	
+}
+
+
+
 /*
  * Prend la description complète du contenu d'un formulaire et retourne
  * une liste des noms des champs du formulaire.
@@ -346,7 +377,7 @@ function saisies_verifier($formulaire){
 		$obligatoire = $saisie['options']['obligatoire'];
 		$champ = $saisie['options']['nom'];
 		$verifier = $saisie['verifier'];
-		
+
 		// Si le nom du champ est un tableau indexé, il faut parser !
 		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)){
 			$valeur = _request($separe[1]);
