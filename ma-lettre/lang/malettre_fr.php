@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'lettre_txt_unsub' => 'Modifier son abonnement: ',
   'lettre_html_unsub' => 'se d&eacute;sinscrire de la lettre',
   'lien' => 'Lien',
+  'lire_en_ligne' => 'Lire l\'article en ligne',
 
   // M
   'ma_lettre'=>'Ma lettre',
