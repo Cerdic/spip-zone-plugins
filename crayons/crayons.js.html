@@ -5,7 +5,7 @@
 ]
 #HTTP_HEADER{'Content-Type: text/javascript'}
 
-[(#ENV**{debug_crayons}|?{
+[(#EVAL**{_DEBUG_CRAYONS}|?{
 	#CACHE{0}
 ,
 	#CACHE{7*24*3600,cache-client}
@@ -31,5 +31,7 @@ cQuery.noConflict();
 /* Executer le js d'amorcage
 http://www.stevesouders.com/blog/2008/12/27/coupling-async-scripts/
 */
-var script = cQuery('script[src$=page=crayons.js]');
+
+var script = cQuery('script[src$=page=crayons.js[(#EVAL{_DEBUG_CRAYONS}|?{&amp;debug_crayons=1})]]');
+
 if (script.length) eval( script.get(0).innerHTML );
