@@ -147,7 +147,7 @@ function openid_log($data, $niveau=1){
 function init_auth_openid() {
 	// libs
 	@define('_DIR_LIB', _DIR_RACINE . 'lib/');
-	@define('_DIR_OPENID_LIB', _DIR_LIB . 'php-openid-2.1.3/');
+	@define('_DIR_OPENID_LIB', _DIR_LIB . 'openid-php-openid-782224d/');
 	@define('Auth_OpenID_RAND_SOURCE', null); // a priori...
 
 	session_start();

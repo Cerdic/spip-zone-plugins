@@ -12,7 +12,7 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<version_base>0.3</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
@@ -27,7 +27,7 @@
 	<options>openid_options.php</options>
 	<lien>http://www.spip-contrib.net/Plugin-d-authentification-OpenID</lien><!-- URI de documentation -->
 	<necessite id='SPIP' version='[2.0.0;2.1.0)' />
-	<necessite id="lib:php-openid-2.1.3" src="http://openidenabled.com/files/php-openid/packages/php-openid-2.1.3.zip" />
+	<necessite id="lib:openid-php-openid-782224d" src="http://download.github.com/openid-php-openid-2.2.2-0-ga287b2d.zip" />
 	<chemin dir="./" />
 	<chemin dir="spip_2_0" />
 	<prefix>openid</prefix>
@@ -82,7 +82,7 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
@@ -96,7 +96,7 @@
 	</description>
 	<options>openid_options.php</options>
 	<lien>http://www.spip-contrib.net/Plugin-d-authentification-OpenID</lien>
-	<necessite id="lib:php-openid-2.1.3" src="http://openidenabled.com/files/php-openid/packages/php-openid-2.1.3.zip" />
+	<necessite id="lib:openid-php-openid-782224d" src="http://download.github.com/openid-php-openid-2.2.2-0-ga287b2d.zip" />
 	<chemin dir="./" />
 	<chemin dir="spip_2_1" />
 	<prefix>openid</prefix>
