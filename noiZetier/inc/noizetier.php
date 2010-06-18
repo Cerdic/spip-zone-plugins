@@ -361,7 +361,7 @@ function noizetier_blocs_defaut(){
 function supprimer_noisettes_page_noizetier($page) {
 	$type_compo = explode ('-',$page,2);
 	$type = $type_compo[0];
-	$page = $type_compo[1];
+	$composition = $type_compo[1];
 	
 	sql_delete('spip_noisettes','type='.sql_quote($type).'and composition='.sql_quote($composition));
 
