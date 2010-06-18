@@ -59,7 +59,7 @@ function spipmotion_editer_contenu_objet($flux){
  * @param array $taches_generales Un array des tâches du cron de SPIP
  */
 function spipmotion_taches_generales_cron($taches_generales){
-	$taches_generales['spipmotion_file'] = 60;
+	$taches_generales['spipmotion_file'] = 3*60;
 	return $taches_generales;
 }
 

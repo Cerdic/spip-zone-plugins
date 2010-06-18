@@ -1,11 +1,15 @@
 <!-- nom=spipmotion -->
 <!-- autoriser=configurer -->
 <!-- refus=<:cfg:refus_configuration_administrateur:> -->
+#CACHE{0}
 
 <div class="formulaire_spip formulaire_configurer_spipmotion">
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#CONFIG{spipmotion_casse}|=={oui}|oui)
+	#SET{erreur_chemin,true}
+	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_chemin_ffmpeg:></p>]
 
 [(#REM) un mot pour dire que le script doit etre executable ... ]
 [(#SET{script,[(#VAL{#EVAL{_DIR_PLUGIN_SPIPMOTION}script_bash/spipmotion.sh})]})]
@@ -27,9 +31,10 @@
 					[(#SAISIE{case,debug_mode,
 						label=<:spipmotion:label_debug_mode:>,
 						label_case=<:spipmotion:choix_debug_mode:>})]
-					[(#SAISIE{input,chemin}
-						{label=<:spipmotion:chemin_executable:>}
-						{defaut=/usr/local/bin/ffmpeg})]
+					<li class="editer editer_chemin[(#ENV{erreur}|table_valeur{chemin}|ou{#GET{erreur_chemin}}|oui)erreur]">
+						<label for="champ_chemin"><:spipmotion:chemin_executable:></label>
+						<input type="text" name="chemin" value="#ENV{chemin}" id="champ_chemin" class="text" />
+					</li>
 				</ul>
 			</fieldset>
 		</li>
