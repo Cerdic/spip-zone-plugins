@@ -154,7 +154,8 @@ class cfg
 		foreach ($this->form->param['liens'] as $lien) {
 			$nom = _T($lien);
 			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
-			$return .= ($l = $this->generer_lien($lien, $nom)) ? "<li>$l</li>\n" : "";
+			$class = (_request('cfg') == $lien) ? " class='on'" : "";
+			$return .= ($l = $this->generer_lien($lien, $nom)) ? "<li$class>$l</li>\n" : "";
 		}
 		return ($return)?"<ul>$return</ul>":'';
 	}
