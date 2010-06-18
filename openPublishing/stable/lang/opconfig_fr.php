@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'descriptif_doc' => 'Descriptif',
 'description_plugin' => 'Le plugin <b>Publication Ouverte</b> permet la publication d\'articles par les visiteurs de votre site depuis l\'espace publique, sans qu\'il soit n&eacute;cessaire de s\'identifier. Les options ci-dessous permettent d\'adapter le fonctionnement du plugin &agrave; votre site.',
 'document_explique' => 'Cette option permet de charger des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", vous pourrez alors inclure votre image directement dans le texte de votre article. Si vous choisissez l\'option "document", vous pourrez alors inclure votre document sous forme de vignette cliquable directement dans le texte de votre article.',
+'document_joint' => 'Joindre un document ou une image',
 'documents_lies' => 'Les documents attach&eacute;s &agrave; votre article',
 
 // E
