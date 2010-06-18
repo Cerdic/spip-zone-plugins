@@ -1,11 +1,11 @@
 #CACHE{0}
 
 <style type="text/css">
-	input, textarea {width:100%;}
+	.formulaire_article input, .formulaire_article textarea {width:100%;}
 	input.radio, #choix_AuteurSpip input, input.spip_bouton {width:auto;}
 </style>
 
-<form action="[(#ENV{url})]" method="post" name="formulaire_article" enctype="multipart/form-data">
+<form class="formulaire_article" action="[(#ENV{url})]" method="post" name="formulaire_article" enctype="multipart/form-data">
 
 	<input type="hidden" name="id_article" value="[(#ENV**{id_article})]" >
 	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]" >
