@@ -1,4 +1,4 @@
-.guestform { width: 50em; margin: 2em auto; line-height: 1.4em; font: .625em/1em Verdana,Geneva,Sans,sans-serif; color: #444; text-align: left; }
+.guestform { width: 50em; margin: 2em auto; line-height: 1.4em; font: 1em Verdana,Geneva,Sans,sans-serif; color: #444; text-align: left; }
 .guestform fieldset { margin-bottom: 2em; border: 0; }
 .guestform fieldset legend { margin: 0; padding: 0; font-weight: bold; color: #333; }
 
