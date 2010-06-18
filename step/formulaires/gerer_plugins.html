@@ -3,7 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#ENV{_todo}|oui)
+	[(#ENV*{_todo}|unserialize|count|=={0}|non)
 		[(#FORMULAIRE_STEP_ACTIONS{[(#ENV*{_todo}|unserialize)]})]
 	]
 	<script type="text/javascript"><!--

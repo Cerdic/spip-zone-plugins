@@ -20,12 +20,12 @@
 		[(#ENV**{erreurs}|table_valeur{actionneur_action}|non)
 			<p class='boutons'>
 				<input type="submit" class="submit on" name="applicateur" value="<:step:appliquer_actions:>" />
-				<input type="submit" class="submit" name="annuler" value="<:step:annuler:>" onClick="document.location.href='#SELF'; return false;" />
+				<input type="submit" class="submit" name="annuler" value="<:step:annuler:>" onclick="document.location.href='#SELF'; return false;" />
 			</p>
 		]
 		[(#ENV**{erreurs}|table_valeur{actionneur_action}|et{[(#ENV{gogogo}|non)]})
 			<p class='boutons'>
-				<input type="submit" class="submit" name="recharger" value="<:step:recharger_la_page:>" onClick="document.location.href='#SELF'; return false;" />
+				<input type="submit" class="submit" name="recharger" value="<:step:recharger_la_page:>" onclick="document.location.href='#SELF'; return false;" />
 			</p>
 		]
 	</div></form>

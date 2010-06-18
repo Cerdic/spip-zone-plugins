@@ -28,7 +28,7 @@ function formulaires_gerer_plugins_charger_dist(){
 			sql_delete('spip_resultats');
 		}
 	}
-	$_todo = _request('_todo')?_request('_todo'):serialize(array());
+	$_todo = _request('_todo') ? _request('_todo') : serialize(array());
 
 	return array(
 		'recent' => 1,
