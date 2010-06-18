@@ -117,34 +117,34 @@ function spip_bonux_formulaires_configurer_recense($form){
  * Definir la regle de conteneur, en fonction de la presence
  * des 
  * _meta_table : nom de la table meta ou stocker (par defaut 'meta')
- * _meta_conteneur : nom du conteneur dans lequel serializer (par defaut xx de formulaire_configurer_xx)
- * _meta_prefixe : prefixer les meta (alternative au conteneur) dans la table des meta (par defaur rien)
+ * _meta_casier : nom du casier dans lequel serializer (par defaut xx de formulaire_configurer_xx)
+ * _meta_prefixe : prefixer les meta (alternative au casier) dans la table des meta (par defaur rien)
  * 
  * @param string $form 
  * @param array $valeurs
  */
 function spip_bonux_definir_configurer_conteneur($form,$valeurs) {
 		// stocker en base
-		// par defaut, dans un conteneur serialize dans spip_meta (idem CFG)
-		$conteneur = substr($form,11);
+		// par defaut, dans un casier serialize dans spip_meta (idem CFG)
+		$casier = substr($form,11);
 		$table = 'meta';
 		$prefixe = '';
 
 		// si on indique juste une table, il faut vider les autres proprietes
-		// car par defaut on utilise ni conteneur ni prefixe dans ce cas
+		// car par defaut on utilise ni casier ni prefixe dans ce cas
 		if (isset($valeurs['_meta_table'])) {
 			$table = $valeurs['_meta_table'];
-			$conteneur = (isset($valeurs['_meta_conteneur'])?$valeurs['_meta_conteneur']:'');
+			$casier = (isset($valeurs['_meta_casier'])?$valeurs['_meta_casier']:'');
 			$prefixe = (isset($valeurs['_meta_prefixe'])?$valeurs['_meta_prefixe']:'');
 		}
 		else {
-			if(isset($valeurs['_meta_conteneur']))
-				$conteneur = $valeurs['_meta_conteneur'];
+			if(isset($valeurs['_meta_casier']))
+				$casier = $valeurs['_meta_casier'];
 			if(isset($valeurs['_meta_prefixe']))
 				$prefixe = $valeurs['_meta_prefixe'];
 		}
 
-		return array($table,$conteneur,$prefixe);
+		return array($table,$casier,$prefixe);
 }
 
 /**
@@ -154,12 +154,29 @@ function spip_bonux_definir_configurer_conteneur($form,$valeurs) {
  * @param <type> $store
  */
 function spip_bonux_configurer_stocker($form,$valeurs,$store) {
-	list($table,$conteneur,$prefixe) = spip_bonux_definir_configurer_conteneur($form,$valeurs);
+	list($table,$casier,$prefixe) = spip_bonux_definir_configurer_conteneur($form,$valeurs);
 	// stocker en base
-	// par defaut, dans un conteneur serialize dans spip_meta (idem CFG)
+	// par defaut, dans un casier serialize dans spip_meta (idem CFG)
+	if (!isset($GLOBALS[$table]))
+		lire_metas($table);
 
-	if ($conteneur)
-		$store = array($conteneur => serialize($store));
+	// le casier peut etre de la forme casierprincipal/sous/casier
+	// on ecrit donc au bon endroit sans perdre les autres sous casier freres
+	if ($casier) {
+		$c = explode('/',$casier);
+		$casier_principal = array_shift($c);
+		$st = isset($GLOBALS[$table][$casier_principal])?$GLOBALS[$table][$casier_principal]:array();
+		$sc = &$st;
+		while (count($c) AND $cc=reset($c)) {
+			// creer l'entree si elle n'existe pas
+			if (!isset($sc[$cc]))
+				$sc[$cc] = array();
+			$sc = &$sc[$cc];
+			array_shift($c);
+		}
+		$sc = $store;
+		$store = array($casier_principal => serialize($st));
+	}
 
 	$prefixe = ($prefixe?$prefixe.'_':'');
 	foreach($store as $k=>$v){
@@ -168,17 +185,17 @@ function spip_bonux_configurer_stocker($form,$valeurs,$store) {
 }
 
 function spip_bonux_configurer_lire_meta($form,&$valeurs) {
-	list($table,$conteneur,$prefixe) = spip_bonux_definir_configurer_conteneur($form,$valeurs);
-
-	if (!isset($GLOBALS[$table]))
-		lire_metas($table);
-	$meta = &$GLOBALS[$table];
-	if ($conteneur) {
-		$meta = unserialize($meta[($prefixe?$prefixe.'_':'').$conteneur]);
-		$prefixe = '';
-	}
+	list($table,$casier,$prefixe) = spip_bonux_definir_configurer_conteneur($form,$valeurs);
 
 	$prefixe = ($prefixe?$prefixe.'_':'');
+	if ($casier) {
+		$meta = spip_bonux_lire_config("/$table/$prefixe$casier");
+		$prefixe = '';
+	}
+	else {
+		$meta = spip_bonux_lire_config("/$table");
+	}
+
 	foreach($valeurs as $k=>$v){
 		if (substr($k,0,1)!=='_')
 		$valeurs[$k] = (isset($meta[$prefixe.$k])?$meta[$prefixe.$k]:'');
@@ -204,7 +221,7 @@ function spip_bonux_configurer_lire_meta($form,&$valeurs) {
 function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
 	// lire le stockage sous la forme /table/valeur
 	// ou valeur qui est en fait implicitement /meta/valeur
-	// ou conteneur/valeur qui est en fait implicitement /meta/conteneur/valeur
+	// ou casier/valeur qui est en fait implicitement /meta/casier/valeur
 
 	// par defaut, sur la table des meta
 	$table = 'meta';
@@ -223,8 +240,8 @@ function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
 	// si on a demande #CONFIG{/meta,'',0} il faut serializer
 	if (!count($cfg) AND !$unserialize)
 		$r = serialize($r);
-	while($conteneur = array_shift($cfg)) {
-		$r = isset($r[$conteneur])?$r[$conteneur]:null;
+	while($casier = array_shift($cfg)) {
+		$r = isset($r[$casier])?$r[$casier]:null;
 		// deserializer tant que c'est necessaire
 		if ($r  AND is_string($r) AND (count($cfg) OR $unserialize))
 			$r = unserialize($r);
