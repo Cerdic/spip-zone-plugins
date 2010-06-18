@@ -16,9 +16,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_groupe' => 'Cr&eacute;er un nouveau groupe.',
 'composition_article' => 'Composition d\'un article',
 'choix_agenda' => 'Choix de la rubrique Agenda',
+'choix_auteur_spip' => 'Publier de mani&egrave;re anonyme.',
 
 // D
+'description_document' => 'D&eacute;crivez votre document',
+'descriptif_doc' => 'Descriptif',
 'description_plugin' => 'Le plugin <b>Publication Ouverte</b> permet la publication d\'articles par les visiteurs de votre site depuis l\'espace publique, sans qu\'il soit n&eacute;cessaire de s\'identifier. Les options ci-dessous permettent d\'adapter le fonctionnement du plugin &agrave; votre site.',
+'document_explique' => 'Cette option permet de charger des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", vous pourrez alors inclure votre image directement dans le texte de votre article. Si vous choisissez l\'option "document", vous pourrez alors inclure votre document sous forme de vignette cliquable directement dans le texte de votre article.',
+'documents_lies' => 'Les documents attach&eacute;s &agrave; votre article',
 
 // E
 
@@ -31,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'expliq_agenda' => 'Si vous cochez l\'une des options "gestion de Agenda du plugin Publication Ouverte", le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda.<br />Il s\'agit en r&eacute;alit&eacute; soit de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique, soit de publier  l\'article dans une rubrique sp&eacute;cifique sans transformation en br&egrave;ve.<br /> La premi&egrave;re m&eacute;thode correspond au m&eacute;canisme des version pr&eacute;c&eacute;dente du plugin, la seconde permet de transf&eacute;rer rapidement un &eacute;venement de l\'agenda vers une autre rubrique.',
 'expliq_auteur_anonyme' =>'L\'auteur "anonyme" est l\'auteur au nom du quel les r&eacute;dacteurs publieront leurs articles. Cr&eacute;ez cet auteur dans votre liste d\'auteur (remplissez uniquement le champ "Signature" et laissez son statut en "r&eacute;dacteur"), puis s&eacute;lectionnez le ci-dessous.',
 'expliq_auteur_squelette' => 'Afin de r&eacute;cup&eacute;rer les donn&eacute;es d\'identification du r&eacute;dacteur, vous pouvez utiliser dans une boucle ARTICLES la balise EXTRA avec le filtre OP_pseudo ou OP_mail.',
+'expliq_spip_auteur' => 'Vous &ecirc;tes actuellement logg&eacute;. Si vous voulez publier cet article de mani&egrave;re anonyme, cochez la case ci-dessous.',
 'expliq_groupes_absent' => 'Attention, aucun groupe de mot-cl&eacute; n\'est d&eacute;fini. Veuillez ajouter des groupes de mots-cl&eacute;s (activez les mot-cl&eacute;s puis cr&eacute;ez les groupes necessaires. N\'oubliez pas de cr&eacute;er des mots-cl&eacute;s dans ces nouveaux groupes.).',
 'expliq_groupes' => 'Si vous avez activ&eacute; l\'option "permettre aux r&eacute;dacteurs de choisir leurs mots-cl&eacute;s", vous pouvez alors choisir les diff&eacute;rents groupes de mot-cl&eacute;s qui leur serons propos&eacute;s. Cochez ou d&eacute;cochez les groupes de mots-cl&eacute;s i-dessous.',
 'expliq_rubrique_absent' => 'Attention, aucune rubrique n\'est d&eacute;finie. Veuillez ajouter des rubriques (Menu "Edition" de votre interface priv&eacute;e).',
@@ -55,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gestion_renvois' => 'Gestion des renvois',
 
 // I
+'identification' => 'Identification',
 'info_motclefs' => 'Mots-cl&eacute;s : ',
 'info_rubrique' => 'Rubrique : ',
 
@@ -105,6 +112,8 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'statut_valide' => 'Valid&eacute;',
 
 // T
+'telecharger_document' => 'T&eacute;l&eacute;chargez votre document',
+'titre_doc' => 'Titre',
 'titre_rubrique_op' => 'Gestion des rubriques "Publication Ouverte"',
 'titre_auteur_anonyme' => 'L\'auteur "anonyme"',
 'titre_composition_article' => 'Composition d\'un article',
@@ -122,7 +131,11 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'utiliser_descriptif' => 'Utiliser le champ Descriptif',
 'utiliser_ps' => 'Utiliser le champ Post-Scriptum',
 'utiliser_agenda_breve' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme de br&egrave;ves).',
-'utiliser_agenda_article' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme d\'articles).'
+'utiliser_agenda_article' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme d\'articles).',
+
+// V
+'votre_nom' => 'Votre nom ou pseudo',
+'votre_mail' => 'Votre email',
 
 /**
 // v 0.4
