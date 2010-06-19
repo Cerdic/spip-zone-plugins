@@ -9,9 +9,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_journal_supprimer_dist(){
 	global $visiteur_session;
+
 	include_spip('inc/autoriser');
 	if(!autoriser('supprimer','journal','',$visiteur_session)){
-		spip_log('pas autorisé à supprimer','journal');
 		return false;
 	}
 
@@ -45,12 +45,8 @@ function action_journal_supprimer_dist(){
 		$where .= ' date < '.sql_quote($date_fin);
 		$cond = true;
 	}
-	spip_log("La condition where = $where",'journal');
-	$nombre = sql_countsel('spip_journal',$where);
-	spip_log("On supprime $nombre resultats de la base","journal");
 
 	$retour = sql_delete('spip_journal',$where);
-	spip_log($retour,"journal");
 
 	if($redirect = _request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));

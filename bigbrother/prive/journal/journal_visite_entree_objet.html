@@ -128,7 +128,7 @@
 				<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_auteurs}|array_sum|div{[(#GET{auteurs}|count)]}|round|bigbrother_duree{0, horaire})]</p>
 
 				<div id="graph_visites_id_auteurs" class="bigbrother_graphs"></div>
-				<script type="text/javascript">
+				<script type="text/javascript"><!--
 					jQuery(document).ready(function(){
 						var auteurs = [];
 						var auteurs_labels = [];
@@ -179,7 +179,7 @@
 							}
 						});
 					});
-				</script>
+				//--></script>
 			</div>
 		</div>
 	</B_visites_par_auteurs>
@@ -232,7 +232,7 @@
 			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_objets}|array_sum|div{[(#GET{id_objets}|count)]}|round|bigbrother_duree{0, horaire})]</p>
 
 			<div id="graph_visites_id_objets" class="bigbrother_graphs"></div>
-			<script type="text/javascript">
+			<script type="text/javascript"><!--
 					jQuery(document).ready(function(){
 						var visites = [];
 						var visites_labels = [];
@@ -287,7 +287,7 @@
 						}
 					});
 				});
-			</script>
+			//--></script>
 		</div>
 	</div>
 </B_visites_par_id_objets>
@@ -325,7 +325,7 @@
 			<p><strong><:bigbrother:temps_moyen:></strong> : [(#GET{temps_date}|array_sum|div{[(#GET{dates}|count)]}|round|bigbrother_duree{0, horaire})]</p>
 
 			<div id="graph_visites_dates" class="bigbrother_graphs"></div>
-			<script type="text/javascript">
+			<script type="text/javascript"><!--
 				jQuery(document).ready(function(){
 					var dates = [];
 					var dates_labels = [];
@@ -378,7 +378,7 @@
 						}
 					});
 				});
-			</script>
+			//--></script>
 		</div>
 	</div>
 </B_visites_par_date>

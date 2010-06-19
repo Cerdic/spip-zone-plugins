@@ -55,7 +55,7 @@
 			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 
 			<div id="graph_actions_id_auteurs" class="bigbrother_graphs"></div>
-			<script type="text/javascript">
+			<script type="text/javascript"><!--
 				jQuery(document).ready(function(){
 					var actions = [];
 					var actions_labels = [];
@@ -106,7 +106,7 @@
 						}
 					});
 				});
-			</script>
+			// --></script>
 		</div>
 	</div>
 </B_actions_par_auteurs>
@@ -151,7 +151,7 @@
 
 			<div id="graph_actions_date_id_auteurs" class="bigbrother_graphs"></div>
 			<div id="choices"></div>
-			<script type="text/javascript">
+			<script type="text/javascript"><!--
 				jQuery(document).ready(function(){
 					var serie_actions = [];
 					var options = {
@@ -226,7 +226,7 @@
 								var index = item.dataIndex;
 								content = '';
 								content = item.series.content[index];
-								content += '<br />'+item.datapoint[1];
+								content += '<br \/>'+item.datapoint[1];
 								plot_showtooltip(
 									item.pageX,
 									item.pageY,
@@ -239,7 +239,7 @@
 						}
 					});
 				});
-			</script>
+			// --></script>
 		</div>
 	</div>
 </B_actions_par_auteurs_date>
