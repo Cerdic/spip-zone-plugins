@@ -13,7 +13,7 @@ $GLOBALS['gestdoc_liste_champs'][] = 'chapo';
  
 // http://doc.spip.org/@marquer_doublons_documents
 function inc_marquer_doublons_doc_dist($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
-	$champs_a_parcourir=array();
+	$champs_selection=array();
 		foreach ($GLOBALS['gestdoc_liste_champs'] as &$champs_choisis) {
 			if ( isset($champs[$champs_choisis]) )
 			array_push($champs_selection,$champs_choisis);
