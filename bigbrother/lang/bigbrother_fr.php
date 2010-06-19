@@ -44,6 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_date_debut' => 'Date de d&eacute;but',
 	'label_date_fin' => 'Date de fin',
+	'label_suppression_journal_criteres' => 'Suppression des entr&eacute;es li&eacute;es &agrave; vos crit&egrave;res',
+
+	// M
+	'message_suppression_journal_definitives' => 'La suppression de ces donn&eacute;es sera d&eacute;finitive',
 
 	// N
 	'naviguer_journal_stats' => '&Eacute;v&egrave;nements du site',

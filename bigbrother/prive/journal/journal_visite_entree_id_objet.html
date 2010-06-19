@@ -2,7 +2,7 @@
 #SET{auteurs,#ARRAY}
 #SET{dates, #ARRAY}
 #SET{temps_date,#ARRAY}
-<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{date>#ENV{date_debut,0}}{objet}{id_objet}{id_auteur ?}{action = #ENV{journal_action}}>
+<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}{objet}{id_objet}{id_auteur ?}{action = #ENV{journal_action}}>
 
 	[(#SET{duree,[(#DATE|bigbrother_duree{[(#INFOS|table_valeur{date_fin})],secondes})]})]
 
