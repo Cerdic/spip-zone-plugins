@@ -33,6 +33,7 @@
 		]
 		#SET{acodecs_possibles,#ARRAY|push{vorbis}|push{libvorbis}|push{libspeex}|push{flac}}
 		#SET{vcodecs_possibles,#ARRAY|push{libtheora}|push{libdirac}}
+		#SET{vorbis,oui}
 	</BOUCLE_ogg>
 	<BOUCLE_flv(CONDITION){si #ENV{valeur}|=={flv}|oui}>
 		[(#REM)
@@ -88,7 +89,27 @@
 				22050,22050 Hz,
 				44100,44100 Hz,
 				48000,48000 Hz}})]
-
+		[(#GET{vorbis}|=={oui}|oui)
+			[(#SAISIE{selection,qualite_audio_#ENV{valeur},
+			label=<:spipmotion:label_vorbis_qualite:>,
+			explication=<:spipmotion:explication_vorbis_qualite:>,
+			defaut=4,
+			cacher_option_intro=oui,
+			datas=#ARRAY{
+				-1,-1,
+				0,0,
+				1,1,
+				2,2,
+				3,3,
+				4,4,
+				5,5,
+				6,6,
+				7,7,
+				8,8,
+				9,9,
+				10,10
+			}})]
+		]
 		[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
 			label=<:spipmotion:bitrate_audio:>,
 			defaut=64,

@@ -70,7 +70,7 @@ while test -n "${1}"; do
 		shift;;
 		--size) size="-s ${2}"
 		shift;;
-		--bitrate) bitrate="-vb ${2}.kb"
+		--bitrate) bitrate="-vb ${2}.k"
 		shift;;
 		--acodec) acodec="-acodec ${2}"
 		shift;;
@@ -80,7 +80,9 @@ while test -n "${1}"; do
 		shift;;
 		--vpre2) vpre2="-vpre ${2}"
 		shift;;
-		--audiobitrate) audiobitrate="-ab ${2}.kb"
+		--audiobitrate) audiobitrate_quality="-ab ${2}.k"
+		shift;;
+		--audioquality) audiobitrate_quality="-aq ${2}"
 		shift;;
 		--audiofreq) audiofreq="-ar ${2}"
 		shift;;
@@ -111,12 +113,12 @@ case "$chemin" in
 esac
 
 ########### Arguments pour audio
-case "$audiobitrate" in
+case "$audiobitrate_quality" in
   "")
   case "$sortie" in
-  	*".mp3") audiobitrate="-ab 128.kb" ;;
-  	*".flv") audiobitrate="-ab 64.kb" ;;
-  	*".ogg"|*".oga"|*".ogv") audiobitrate="-aq 50" ;;
+  	*".mp3") audiobitrate_quality="-ab 128.k" ;;
+  	*".flv") audiobitrate_quality="-ab 64.k" ;;
+  	*".ogg"|*".oga"|*".ogv") audiobitrate_quality="-aq 50" ;;
   esac
 esac
 
@@ -185,12 +187,12 @@ echo "$chemin"
 case "$sortie" in
   *".mp3"|*".flac"|*".ogg"|*".oga" )
   echo "On est dans un son"
-  echo "nice -19 $chemin -i $entree $acodec $audiobitrate $audiofreq $ac -y $sortie"
-  nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq $ac -y $sortie ;;
+  echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie"
+  nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie ;;
   *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"
-  echo "nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate $ac $vpre $audiofreq $fpre -y $sortie"
-  nice -19 $chemin -i $entree $acodec $size $vcodec $fps $bitrate $audiobitrate $ac $vpre $vpre2 $audiofreq $fpre -y $sortie ;;
+  echo "nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate_quality $ac $vpre $audiofreq $fpre -y $sortie"
+  nice -19 $chemin -i $entree $acodec $size $vcodec $fps $bitrate $audiobitrate_quality $ac $vpre $vpre2 $audiofreq $fpre -y $sortie ;;
 esac
 
 echo "$succes"

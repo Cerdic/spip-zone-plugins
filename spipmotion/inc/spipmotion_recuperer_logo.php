@@ -24,7 +24,6 @@ function inc_spipmotion_recuperer_logo($id_document){
 	$document = sql_fetsel("docs.id_document,docs.fichier", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 	$chemin_court = $document['fichier'];
 	$chemin = get_spip_doc($chemin_court);
-
 	$movie = new ffmpeg_movie($chemin,0);
 	if($movie->hasVideo()){
 		$frame1 = $movie->getFrame(100);
@@ -47,6 +46,6 @@ function inc_spipmotion_recuperer_logo($id_document){
 			unlink($img_finale);
 		}
 	}
-	return;
+	return $x;
 }
 ?>

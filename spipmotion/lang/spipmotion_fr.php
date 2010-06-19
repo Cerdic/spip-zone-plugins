@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explications_extensions_prises_en_charge' => 'Les formats pris en charge sont l\'ensemble des formats de fichiers qui seront trait&eacute;s par SPIPmotion pour r&eacute;cup&eacute;rer diverses informations (longueur, taille, vignette...)',
 	'explications_extensions_prises_en_charge_encodage' => 'Ces formats sont ceux qui seront transcod&eacute;s automatiquement ou &agrave; la demande',
 	'explications_extensions_sortie' => 'Ces extensions sont les formats vers lesquels les fichiers seront encod&eacute;s, vous pouvez en choisir plusieurs par type (attention &agrave; la lourdeur pour le serveur cependant).',
+	'explication_vorbis_qualite' => 'Le codec vorbis (ou libvorbis) n\'utilisent pas de bit rate constant mais variable, il est donc pr&eacute;f&eacute;rable de sp&eacute;cifier la qualit&eacute; non pas par un bit rate mais par un niveau de qualit&eacute; souhait&eacute;.',
 	'extensions_audio' => 'Formats audios',
 	'extensions_video' => 'Formats vid&eacute;os',
 
@@ -100,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
+	'label_vorbis_qualite' => 'Qualit&eacute; d\'encodage (Vorbis uniquement)',
 	'lien_ffmpeg_mac'=>'Installer FFmpeg sur Mac OSX',
 	'lien_ffmpeg_linux'=>'Installer FFmpeg sur Linux',
 	'lien_flvtool'=>'Installer FLVTool2',

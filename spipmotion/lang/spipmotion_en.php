@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explications_extensions_prises_en_charge' => 'The supported formats are all file formats which will be treated by SPIPmotion to retrieve various information (length, size, screenshots ...)',
 	'explications_extensions_prises_en_charge_encodage' => 'These formats are those who will be transcoded automatically or on demand',
 	'explications_extensions_sortie' => 'These extensions are the formats to which the files are encoded, you can choose several types (attention to the use of the server though).',
+	'explication_vorbis_qualite' => 'Vorbis codec (or libvorbis) don\'t use constant bit rate but variable, it is preferable to specify the quality not by a bit rate but with a quality level.',
 	'extensions_audio' => 'Audio formats',
 	'extensions_video' => 'Video formats',
 
@@ -99,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge_encodage' => 'Supported formats for encoding',
 	'label_extensions_prises_en_charge' => 'Formats supported',
 	'label_extensions_sortie' => 'Encoding formats',
+	'label_vorbis_qualite' => 'Encoding quality (Only Vorbis audio)',
 	'lien_ffmpeg_mac'=>'Install FFmpeg on Mac OSX',
 	'lien_ffmpeg_linux'=>'Install FFmpeg on Linux',
 	'lien_flvtool'=>'Install FLVTool2',

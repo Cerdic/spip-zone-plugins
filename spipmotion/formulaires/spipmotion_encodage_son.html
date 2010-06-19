@@ -13,8 +13,9 @@
 
 	#SET{acodecs_existants,#EVAL{$GLOBALS['meta']['spipmotion_codecs_audio_encode']}}
 
-	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}}|oui}>
+	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{oga}}|oui}>
 		#SET{acodecs_possibles,#ARRAY|push{libvorbis}|push{vorbis}|push{libspeex}|push{flac}}
+		#SET{vorbis,oui}
 	</BOUCLE_ogg>
 
 	#SET{acodecs,#GET{acodecs_possibles,#ARRAY}|array_intersect{#GET{acodecs_existants,#ARRAY}|unserialize}}
@@ -27,6 +28,27 @@
 			datas=#GET{acodecs}})]
 	]
 
+	[(#GET{vorbis}|oui)
+		[(#SAISIE{selection,qualite_audio_#ENV{valeur},
+		label=<:spipmotion:label_vorbis_qualite:>,
+		explication=<:spipmotion:explication_vorbis_qualite:>,
+		defaut=4,
+		cacher_option_intro=oui,
+		datas=#ARRAY{
+			-1,-1,
+			0,0,
+			1,1,
+			2,2,
+			3,3,
+			4,4,
+			5,5,
+			6,6,
+			7,7,
+			8,8,
+			9,9,
+			10,10
+		}})]
+	]
 	[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
 		label=<:spipmotion:bitrate_audio:>,
 		defaut=64,
