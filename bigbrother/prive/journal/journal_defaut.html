@@ -62,7 +62,8 @@
 				[(#ID_OBJET|oui)
 					[(#ENV{objet}|et{#ENV{id_objet}}|non)#SET{link_id_objet,oui}]
 					[(#GET{link_id_objet}|oui)
-						<a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]" title="<:bigbrother:title_afficher_uniquement_id_objet{id=#ID_OBJET}:>">]
+						#SET{objet,#OBJET}
+						<a href="[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]" title="<:bigbrother:title_afficher_uniquement_id_objet{id=#ID_OBJET,objet=#GET{objet}}:>">]
 						#ID_OBJET
 					[(#GET{link_id_objet}|oui)</a>]
 				]</td>

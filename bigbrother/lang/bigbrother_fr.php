@@ -69,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thead_objet' => 'Objet',
 	'thead_temps_consultation' => 'Dur&eacute;e de consultation',
 	'thead_titre' => 'Titre',
+	'title_afficher_uniquement_id_objet' => 'N\'afficher que les r&eacute;sultats concernant l\'objet &laquo;@objet@&raquo; num&eacute;ro @id@',
 	'title_afficher_uniquement_objet' => 'N\'afficher que les r&eacute;sultats concernant les objets &laquo;@objet@&raquo;',
 	'title_afficher_uniquement_user' => 'N\'afficher que les r&eacute;sultats concernant l\'utilisateur @user@',
 	'title_supprimer_filtre' => 'Supprimer ce filtre',
