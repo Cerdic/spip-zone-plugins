@@ -1,13 +1,7 @@
 <?php
 
 function bigbrother_affiche_droite($flux){
-	/*if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit','mots_edit'))){
-	include_spip('exec/inc_boites_infos');
-	$flux['data'] .= boite_info_jeux_edit();
-	}*/
-
 	if ($flux['args']['exec'] == 'auteur_infos'){
-
 		$boite = debut_boite_info(true)
 			. icone_horizontale(
 				_T('bigbrother:voir_statistiques_auteur'),
@@ -17,12 +11,9 @@ function bigbrother_affiche_droite($flux){
 				false
 			)
 			. fin_boite_info(true);
-
 		$flux['data'] .= $boite;
-
 	}
 	elseif ($flux['args']['exec'] == 'articles'){
-
 		$boite = debut_boite_info(true)
 			. icone_horizontale(
 				_T('bigbrother:voir_statistiques_article'),
@@ -32,27 +23,20 @@ function bigbrother_affiche_droite($flux){
 				false
 			)
 			. fin_boite_info(true);
-
 		$flux['data'] .= $boite;
-
 	}
-
 	return $flux;
 }
 
 
 function bigbrother_insert_head($flux){
-
 	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />';
 	return $flux;
-
 }
 
 function bigbrother_header_prive($flux){
-
 	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />';
 	return $flux;
-
 }
 
 /**
@@ -68,17 +52,31 @@ function bigbrother_post_edition($flux){
 		$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
 
 		$quoi = $flux['args']['type'];
+		if(!$quoi){
+			$table = $flux['args']['table'];
+			$quoi = objet_type($table);
+		}
+
 		if($flux['args']['action'] == 'instituer'){
-			if(!$quoi){
-				$table = $flux['args']['table'];
-				$quoi = objet_type($table);
-			}
 			$faire = 'instituer';
 			$texte = 'bigbrother:action_instituer_objet';
-		}else{
+		}else if(!isset($flux['args']['action']) && isset($flux['args']['operation'])){
+			if($flux['args']['operation'] == 'ajouter_document'){
+				$faire = 'inserer';
+				$texte = "bigbrother:action_".$flux['args']['operation'];
+			}else{
+				$faire = $flux['args']['operation'];
+				$texte = "bigbrother:action_$faire";
+			}
+
+			spip_log($flux,'journal');
+		}
+		else{
+			spip_log($flux,'journal');
 			$faire = 'modifier';
 			$texte = 'bigbrother:action_modifier_objet';
 		}
+
 
 		$texte_infos = array('qui'=>$qui,'type'=> $quoi,'id'=>$flux['args']['id_objet']);
 

@@ -1,9 +1,9 @@
 <div class="cadre cadre-r">
 	<div class="cadre_padding">
-		[(#ENV{id_auteur}|intval|oui)
-		#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
+		[(#ENV{id_auteur}|is_numeric|oui)
+			#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
 		]
-		[(#ENV{id_auteur}|intval|non)
+		[(#ENV{id_auteur}|is_numeric|non)
 			#SET{auteur,#ENV{id_auteur}}
 		]
 		[(#ENV{objet}|oui)

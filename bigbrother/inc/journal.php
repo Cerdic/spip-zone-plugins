@@ -44,7 +44,8 @@ function inc_journal_dist($phrase, $opt = array()) {
 			);
 		}
 	}
-	spip_log($phrase, 'journal');
+	include_spip('inc/filtres');
+	spip_log(filtrer_entites($phrase), 'journal');
 }
 
 ?>

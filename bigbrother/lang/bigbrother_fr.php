@@ -4,9 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
+	'action ajouter document' => '@qui@ a ajout&eacute; le document @id@',
+	'action_entree_objet' => '@qui@ est entr&eacute; sur la page de l\'objet "@type@" num&eacute;ro @id@',
 	'action_inserer_objet' => '@qui@ a cr&eacute;&eacute; l\'objet "@type@" num&eacute;ro @id@',
 	'action_instituer_objet' => '@qui@ a modifi&eacute; le statut de l\'objet "@type@" num&eacute;ro @id@',
 	'action_modifier_objet' => '@qui@ a modifi&eacute; l\'objet "@type@" num&eacute;ro @id@',
+	'action_sortie_objet' => '@qui@ est sorti de la page de l\'objet "@type@" num&eacute;ro @id@',
 
 	// C
 	'configuration_description' => 'Permet de configurer ce que l\'on d&eacute;sire enregistrer ou pas.',
@@ -72,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_limiter_temps' => 'Limiter l\'intervalle de temps',
 	'titre_liste_entrees_journal' => 'Liste des entr&eacute;es du journal',
 	'titre_page_stats' => '&Eacute;v&egrave;nements sur le site',
+	'titre_page_stats_id_auteur' => '&Eacute;v&egrave;nements concernant l\'utilisateur @auteur@',
 	'titre_statistiques_visites_id_objet' => 'Statitiques de visites de &laquo; @titre@ &raquo; (@objet@ #@id_objet@)',
 	'titre_statistiques_visites_id_objet_id_auteur' => 'Statitiques de visites de &laquo; @titre@ &raquo; (@objet@ #@id_objet@) de l\'utilisateur @auteur@',
 	'titre_statistiques_visites_objet' => 'Statitiques de visites des objets de type &laquo; @objet@ &raquo;',

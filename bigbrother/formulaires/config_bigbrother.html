@@ -30,7 +30,7 @@
 				</div>
 				<div class="choix">
 					<input type="checkbox" name="instituer" id="instituer" value="oui"[ checked="checked"(#ENV{instituer}|=={oui}|oui)] />
-					<label for="modifier"><:bigbrother:configuration_enregistrer_institutions:></label>
+					<label for="instituer"><:bigbrother:configuration_enregistrer_institutions:></label>
 				</div>
 				<BOUCLE_pipeline(POUR){tableau #PIPELINE{bigbrother_journaliser,#ARRAY}}>
 				<div class="choix">

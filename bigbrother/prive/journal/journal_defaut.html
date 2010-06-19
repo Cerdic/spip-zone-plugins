@@ -10,6 +10,14 @@
 				#SET{id_journals,#GET{id_journals}|push{#ID_JOURNAL}}
 			]
 		</BOUCLE_journal_stats_valide>
+		[(#ENV{id_auteur}|oui)
+			[(#ENV{id_auteur}|is_numeric|oui)
+				#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
+			][(#ENV{id_auteur}|is_numeric|non)
+				#SET{auteur,#ENV{id_auteur}}
+			]
+			<h1><:bigbrother:titre_page_stats_id_auteur{auteur=#GET{auteur}}:></h1>
+		]
 		<p><:bigbrother:explication_page_stats:></p>
 		<B_journal_stats>
 		#SET{total,#GRAND_TOTAL}
