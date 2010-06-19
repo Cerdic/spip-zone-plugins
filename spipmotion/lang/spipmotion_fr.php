@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'height_video' => 'Hauteur de la sortie en px : ',
 
 	// I
+	'info_aucun_resultat_attente' => 'Aucun document n\'est en attente d\'encodage.',
 	'info_audiobitrate' => 'Bitrate audio : ',
 	'info_audiocodec' => 'Codec audio : ',
 	'info_audiochannels' => 'Nombre de canaux audios : ',
@@ -83,6 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_encoder_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .AVI, .MPG, .MP4 ou .MOV dans le dossier "tmp/upload" pour ensuite les encoder au format FLV ici.',
 	'info_mime' => 'Type mime : ',
 	'info_nom_fichier' => 'Nom du fichier : ',
+	'info_nombre_encodes' => '@nb@ fichiers ont &eacute;t&eacute; correctement encod&eacute;s.',
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
 	'info_pixelformat' =>'Format de pixel : ',
 	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
@@ -102,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
 	'label_vorbis_qualite' => 'Qualit&eacute; d\'encodage (Vorbis uniquement)',
+	'lien_enlever_previsu' => 'Enlever la pr&eacute;visualisation',
 	'lien_ffmpeg_mac'=>'Installer FFmpeg sur Mac OSX',
 	'lien_ffmpeg_linux'=>'Installer FFmpeg sur Linux',
 	'lien_flvtool'=>'Installer FLVTool2',
@@ -132,7 +135,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipmotion_liens'=>'Liens compl&eacute;mentaires : ',
 
 	// T
+	'thead_date' => 'Date',
+	'thead_id_auteur' => 'Utilisateur',
+	'thead_id_file' => 'Id dans la file',
+	'thead_id_origine_doc' => 'Id du document original',
+	'thead_nombre' => 'Nombre',
+	'thead_objet_attache' => 'Attach&eacute; &agrave; l\'objet',
 	'titre_page_ffmpeg_infos' => 'Informations sur FFMpeg',
+	'titre_page_file' => 'File d\'attente d\'encodage',
+	'titre_page_file_attente' => 'Documents en attente d\'encodage',
+	'titre_page_file_encodes' => 'Liste des encodages termin&eacute;s',
+	'titre_page_file_encodes_jour' => 'Encodages par date',
+	'titre_previsu' => 'Pr&eacute;visualisation',
 	'th_avfilter_description' => 'Description',
 	'th_avfilter_nom' => 'Nom',
 	'th_format_decode' => 'D&eacute;code',

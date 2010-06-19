@@ -1,0 +1,39 @@
+
+table.spipmotion{
+	margin:1em 0;
+	width:100%;
+	border-spacing:0;
+}
+
+table.spipmotion th, table.spipmotion td{
+	margin:0;
+	padding:2px;
+}
+
+table.spipmotion .temps{
+	text-align:right;
+}
+
+div.pagination_spipmotion{
+	border-top:none;
+	text-align:center;
+}
+
+#spipmotion_tooltip{
+	position: absolute;
+	display: none;
+	color:#fff;
+	padding: 5px;
+	background-color: #000;
+	opacity: 0.80;
+	font-size:11px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	max-width:250px;
+}
+
+.spipmotion_graphs{
+	width:100%;
+	height:300px;
+}

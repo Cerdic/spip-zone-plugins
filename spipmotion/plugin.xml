@@ -7,7 +7,7 @@
 	Quentin Drouet (kent1)
 	</auteur>
 	<version>
-	0.4.3
+	0.4.4
 	</version>
 	<version_base>0.7.2</version_base>
 	<etat>
@@ -28,6 +28,7 @@
 	<prefix>
 	spipmotion
 	</prefix>
+
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<action>editer_contenu_objet</action>
@@ -50,11 +51,26 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+
 	<install>base/spipmotion_upgrade.php</install>
+
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
 	<necessite id='cfg' version='[1.13;]' />
 	<necessite id='saisies' version='[1.0;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
 	<necessite id='getid3' version='[0.2;]' />
 	<necessite id='queue' version='[0.3.1;]' />
+	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.6.zip" />
 </plugin>

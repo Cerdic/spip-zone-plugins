@@ -133,4 +133,23 @@ function spipmotion_post_edition($flux){
 	}
 	return $flux;
 }
+
+function spipmotion_insert_head($flux){
+	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('spipmotion.css', 'css/', false).'" />';
+	return $flux;
+}
+
+function spipmotion_header_prive($flux){
+	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('spipmotion.css', 'css/', false).'" />';
+	return $flux;
+}
+
+function spipmotion_jquery_plugins($array){
+	if(!in_array(_DIR_LIB_FLOT.'/jquery.flot.js',$array)){
+		$array[] = _DIR_LIB_FLOT.'/jquery.flot.js';
+	}
+	$array[] = 'javascript/spipmotion_flot_extras.js';
+	return $array;
+}
+
 ?>

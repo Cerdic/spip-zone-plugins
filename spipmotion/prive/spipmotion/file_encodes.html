@@ -1,0 +1,147 @@
+[(#REM)
+	On crée deux arrays pour compter les encodages par jour
+	=> troisième boucle
+]
+#SET{dates, #ARRAY}
+#SET{nombre_date,#ARRAY}
+<BOUCLE_spipmotion_encodes_total(SPIPMOTION_ATTENTES){par id_spipmotion_attente}{inverse}{encode = oui}>
+	[(#SET{date_new,[(#MAJ|affdate{Y-m-d})]})]
+	#SET{
+		nombre_date,
+		#GET{nombre_date}|array_merge{
+			#ARRAY{
+				#GET{date_new},
+				#GET{nombre_date}|table_valeur{#GET{date_new},0}|plus{1}
+			}
+		}
+	}
+	#SET{dates,#GET{dates}|push{#GET{date_new}}}
+</BOUCLE_spipmotion_encodes_total>
+#SET{dates,#GET{dates}|array_unique}
+
+<h1><:spipmotion:titre_page_file_encodes:></h1>
+<B_spipmotion_encodes>
+#SET{total,#GRAND_TOTAL}
+<p><:spipmotion:info_nombre_encodes{nb=#GET{total}}:></p>
+[(#ENV{id_document}|et{#PLUGIN{html5_player}}|oui)
+	<h3><:spipmotion:titre_previsu:></h3>
+	<p><a href="[(#SELF|parametre_url{id_document,''})]" class="ajax"><:spipmotion:lien_enlever_previsu:></a></p>
+	[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=non,largeur=400,infos=non})]
+]
+#ANCRE_PAGINATION
+<table class="spipmotion">
+	<thead>
+		<tr class="row_first">
+			<th><:spipmotion:thead_id_file:></th>
+			<th><:spipmotion:thead_id_origine_doc:></th>
+			<th><:spipmotion:thead_id_auteur:></th>
+			<th><:spipmotion:thead_objet_attache:></th>
+			<th><:spipmotion:thead_date:></th>
+		</tr>
+	</thead>
+	<tbody class="ajax">
+<BOUCLE_spipmotion_encodes(SPIPMOTION_ATTENTES){encode = oui}{par id_spipmotion_attente}{inverse}{pagination #ENV{pagination,20}}>
+	<tr class="tr_liste">
+		<td>##ID_SPIPMOTION_ATTENTE</td>
+		<td>
+			<a href="[(#SELF|parametre_url{id_document,#ID_DOCUMENT})]" title="<:spipmotion:titre_previsu:>" class="ajax">
+			#ID_DOCUMENT
+			</a>
+		</td>
+		<td>
+			#INFO_NOM{auteur,#ID_AUTEUR}
+		</td>
+		<td>
+			#OBJET ##ID_OBJET
+		</td>
+		<td>[(#MAJ)]</td>
+	</tr>
+</BOUCLE_spipmotion_encodes>
+	</tbody>
+</table>
+[<div class="pagination pagination_spipmotion">(#PAGINATION{page_precedent_suivant})</div>]
+</B_spipmotion_encodes>
+<p><:spipmotion:info_aucun_resultat_attente:></p>
+<//B_spipmotion_encodes>
+
+<B_spipmotion_encodes_jours>
+<h1><:spipmotion:titre_page_file_encodes_jour:></h1>
+#SET{total,#GRAND_TOTAL}
+#ANCRE_PAGINATION
+<table class="spipmotion" id="graph_encodages_dates_table">
+	<thead>
+		<tr class="row_first">
+			<th><:spipmotion:thead_date:></th>
+			<th><:spipmotion:thead_nombre:></th>
+		</tr>
+	</thead>
+	<tbody class="ajax">
+	<BOUCLE_spipmotion_encodes_jours(POUR){tableau #GET{dates}}{pagination #ENV{pagination,15}}{par valeur}{inverse}>
+		<tr class="tr_liste">
+			<td class="date">
+				<abbr title="#VALEUR">
+					[(#VALEUR|affdate)]
+				</abbr>
+			</td>
+			[<td class="nombre">
+				<abbr title="[(#GET{nombre_date}|table_valeur{#VALEUR})]">(#GET{nombre_date}|table_valeur{#VALEUR})</abbr>
+			</td>]
+		</tr>
+	</BOUCLE_spipmotion_encodes_jours>
+	</tbody>
+</table>
+[<div class="pagination pagination_spipmotion">(#PAGINATION{page_precedent_suivant})</div>]
+<div id="graph_encodages_dates" class="bigbrother_graphs"></div>
+<script type="text/javascript"><!--
+	jQuery(document).ready(function(){
+		var dates = [];
+		var dates_labels = [];
+		var dates_ticks = [];
+
+		i=0;
+		$('#graph_encodages_dates_table tr.tr_liste').each(function(){
+			var temps = $(this).find('.nombre abbr').attr('title');
+			dates.push([i,temps]);
+			var label = spipmotion_plot_trim($(this).find('.date').text());
+			dates_labels.push(label);
+			var tick = spipmotion_plot_trim($(this).find('.date abbr').attr('title'));
+			dates_ticks.push([i,tick]);
+			i++;
+		});
+
+		var data = [{ data: dates }];
+		var options = {
+			bars : {show:true},
+			yaxis : {},
+			xaxis : {ticks:dates_ticks},
+			grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+		};
+
+		$.plot($("#graph_encodages_dates"), data, options);
+
+		var previousPoint = null;
+		$("#graph_encodages_dates").bind("plothover", function (event, pos, item) {
+			if (item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+					$("#spipmotion_tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					var index = item.dataIndex;
+					content = dates_labels[index];
+					content += '<br />'+item.datapoint[1];
+					spipmotion_plot_showtooltip(
+						item.pageX,
+						item.pageY,
+						content,'spipmotion_tooltip');
+				}
+			}
+			else {
+				$("#spipmotion_tooltip").remove();
+				previousPoint = null;
+			}
+		});
+	});
+//--></script>
+</B_spipmotion_encodes_jours>

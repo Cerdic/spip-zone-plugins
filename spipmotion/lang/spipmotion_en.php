@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'height_video' => 'Height of the output in px : ',
 
 	// I
+	'info_aucun_resultat_attente' => 'No documents awaiting encoding.',
 	'info_audiobitrate' => 'Audio bitrate : ',
 	'info_audiocodec' => 'Audio codec : ',
 	'info_audiochannels' => 'Audio channels number : ',
@@ -82,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_encoder_ftp' => 'As Administrator, you can install (with FTP) .AVI .MPG .MP4 or .MOV files in the directory "tmp/upload" for encoding these files here.',
 	'info_mime' => 'Mime type : ',
 	'info_nom_fichier' => 'File name : ',
+	'info_nombre_encodes' => '@nb@ files have been properly encoded.',
 	'info_page_ffmpeg_infos' => 'This page is only available for information. It shows the complete configuration of the FFMpeg installation on your system.',
 	'info_pixelformat' =>'Pixel format : ',
 	'info_selectionner_fichier_encoder' => 'You can encode one of the following files',
@@ -101,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge' => 'Formats supported',
 	'label_extensions_sortie' => 'Encoding formats',
 	'label_vorbis_qualite' => 'Encoding quality (Only Vorbis audio)',
+	'lien_enlever_previsu' => 'Remove the preview',
 	'lien_ffmpeg_mac'=>'Install FFmpeg on Mac OSX',
 	'lien_ffmpeg_linux'=>'Install FFmpeg on Linux',
 	'lien_flvtool'=>'Install FLVTool2',
@@ -129,7 +132,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipmotion_liens'=>'Additional links : ',
 
 	// T
+	'thead_date' => 'Date',
+	'thead_id_auteur' => 'User',
+	'thead_id_file' => 'Id in the queue',
+	'thead_id_origine_doc' => 'Id of the original document',
+	'thead_nombre' => 'Amount',
+	'thead_objet_attache' => 'Attached to the object',
 	'titre_page_ffmpeg_infos' => 'FFMpeg informations',
+	'titre_page_file' => 'Encoding queue',
+	'titre_page_file_attente' => 'Documents waiting for encoding',
+	'titre_page_file_encodes' => 'List of realized encodings',
+	'titre_page_file_encodes_jour' => 'Encodings by date',
+	'titre_previsu' => 'Preview',
 	'th_avfilter_description' => 'Description',
 	'th_avfilter_nom' => 'Name',
 	'th_format_decode' => 'Decode',
