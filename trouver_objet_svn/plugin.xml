@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Trouver objet</nom>
+	<icon>loupe.png</icon>
+	<auteur>Anne-lise Martenot [->http://elastick.net]</auteur>
+	<licence>GPL 3 - &#169; 2010</licence>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Champ input pour trouver un objet SPIP, renvoie vers la page de l'objet s'il existe 
+	Necessite Le plugin Grappes. Plugin de demo pour adapter generiquement</description>
+	<lien></lien>
+	<prefix>trouver_objet</prefix>
+ 	<necessite id='SPIP' version='[2.0.9;]' />
+	<necessite id='grappes' version='[0.2.3;]' />
+	<categorie>recherche</categorie>
+</plugin>

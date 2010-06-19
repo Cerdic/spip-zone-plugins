@@ -1,0 +1,30 @@
+[(#REM) #FORMULAIRE_TROUVER_OBJET{'mot','groupes_mots',#ID_GROUPE,trouver_mots_#ID_GROUPE,mot_du_groupe,id_mot}
+]
+<div class="trouver_objet #ENV{ajax}" id="trouver_#ENV{objet}_#ID_SOURCE">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		
+		
+	[(#REM) Rechercher un objet ]
+	[(#ENV{editable})
+	<div class="formulaire_trouver_objet">
+	<form action="#ENV{action}" method="post">
+	[(#ENV{action}|form_hidden)]
+	[(#ENV{redirect}|form_hidden)]
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class="nom_objet [ (#ENV**{erreurs}|table_valeur{nom_objet}|oui)erreur]">
+				<label for="nom_objet"><:grappes:bouton_chercher:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_objet})</span>]
+				<input type='text' class='text' name='nom_objet' id='nom_objet' value="#ENV{nom_objet}" onclick="jQuery(this).val(''); jQuery('[#(#ENV{selecteur})] [#(#ENV{pid})]').val('');" />
+		<input type="hidden" name="#ENV{pid}" id="#ENV{pid}" value="" />
+				<input type='submit' class='submit' value='<:trouver:>' />
+			</li>
+		</ul>
+	</form>
+	</div>]
+
+</div>
+ 
