@@ -31,5 +31,16 @@
 		<action>ajouter_onglets</action>
         <inclure>pipelines/seo_ajouter_onglets.php</inclure>
 	</pipeline>
+		
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>pipelines/seo_autoriser.php</inclure>
+	</pipeline>
+
+	<bouton id="seo" parent="bando_configuration">
+	<icone>img_pack/seo-24.png</icone>
+	<titre>seo:seo</titre>	
+	<url>seo_config</url>	
+</bouton>
 	<categorie>statistique</categorie>
 </plugin>
