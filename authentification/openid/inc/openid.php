@@ -249,8 +249,9 @@ function demander_authentification_openid($url_openid, $retour){
 			else {
 				openid_log("Redirection par entete", 3);
 				include_spip('inc/headers');
-				#redirige_par_entete($redirect);
-				echo redirige_formulaire($redirect);
+				echo "<div class='formulaire_spip'>"
+				. redirige_formulaire($redirect)
+				. "</div>";
 				exit;
 			}
 		}
