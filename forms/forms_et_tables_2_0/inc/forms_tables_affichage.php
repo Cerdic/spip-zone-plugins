@@ -363,10 +363,10 @@ function affichage_donnee_edit($type_form){
 
 		$retour = urlencode(self());
 		echo icone_horizontale(_T("$prefix:telecharger_reponses"),
-			generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
+			generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), _DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
 		if (defined('_DIR_PLUGIN_CSVIMPORT')){
 			echo icone_horizontale(_T("$prefix:importer_donnees_csv"),
-				generer_url_ecrire("csvimport_import","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-importer-24.png", "rien.gif",false);
+				generer_url_ecrire("csvimport_import","id_form=$id_form&retour=$retour"), _DIR_PLUGIN_FORMS. "img_pack/donnees-importer-24.png", "rien.gif",false);
 		}
 	}
 	/*fin_boite_info();*/
