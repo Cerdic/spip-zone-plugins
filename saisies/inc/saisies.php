@@ -569,7 +569,7 @@ function saisies_generer_vue($saisie, $env=array()){
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
 	
 	// On regarde en priorité s'il y a un tableau listant toutes les valeurs
-	if ($env['valeurs'] and is_array($env['valeurs']) and $env['valeurs'][$contexte['nom']]){
+	if ($env['valeurs'] and is_array($env['valeurs']) and isset($env['valeurs'][$contexte['nom']])){
 		$contexte['valeur'] = $env['valeurs'][$contexte['nom']];
 	}
 	// Si le nom du champ est un tableau indexé, il faut parser !
