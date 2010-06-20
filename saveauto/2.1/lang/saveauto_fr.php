@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse' => ' a l\'adresse : ',
 	'config_inadaptee' => 'Plugin saveauto : configuration non-adaptee,',
 	'mail_absent' => ' votre serveur n\'assure pas les fonctions d\'envoi de mail !',
-	'mail_fichier_lourd' => 'Le fichier de sauvegarde est trop lourd pour &ecirc;tre envoy&eacute; par mail. Vous pouvez le r&eacute;cup&eacute;rer par FTP en suivant le chemin : @fichier@',
+	'mail_fichier_lourd' => 'Le fichier de sauvegarde est trop lourd pour &ecirc;tre envoy&eacute; par mail. Vous pouvez le r&eacute;cup&eacute;rer depuis votre interface d\'administration ou par FTP en suivant le chemin : @fichier@',
 
 	// cfg_saveauto.php
 	'config_saveauto' => 'Sauvegarde automatis&eacute;e de la base de donn&eacute;es',

@@ -1,4 +1,8 @@
-[(#CHEMIN{img_pack/saveauto-24.png}|debut_cadre_trait_couleur{1, "", <:saveauto:titre_boite_historique:>})]
+#SET{racine,#EVAL{_DIR_SITE}|?{#EVAL{_DIR_SITE},#EVAL{_DIR_RACINE}}}
+#SET{rep_base,#GET{racine}#CONFIG{saveauto/rep_bases}}
+#SET{regexp,#CONFIG{saveauto/prefixe_save}.+[.](zip|sql)$}
+#SET{sauvegardes,#GET{rep_base}|preg_files{#GET{regexp}}}
+
 <B_historique>
 <table id="saveauto_telecharger" class="spip" summary="<:saveauto:resume_table_telecharger:>">
 	<thead>
@@ -6,14 +10,16 @@
 			<th><:saveauto:colonne_nom:></th>
 			<th><:saveauto:colonne_taille_octets:></th>
 			<th><:saveauto:colonne_date:></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_historique(POUR){tableau #ENV**{sauvegardes}}>
+<BOUCLE_historique(POUR){tableau #GET{sauvegardes}}{par valeur}{inverse}>
 		<tr id="#zip_#COMPTEUR_BOUCLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
 			<td>[<label[ for="zip_(#CLE)"]>(#VALEUR|basename)</label>]</td>
 			<td style="text-align: right">[(#VALEUR|filesize|taille_en_octets)]</td>
 			<td>[(#VAL{Y-m-d H:i:s}|date{[(#VALEUR|filemtime)]}|affdate_heure{'Y-m-d H:i:s'})]</td>
+			<td>[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{saveauto_telecharger,#VALEUR,#SELF}})]</td>
 		</tr>
 </BOUCLE_historique>
 	</tbody>
@@ -25,4 +31,3 @@
 	</div>
 </div>
 <//B_historique>
-[(#VAL{1}|fin_cadre_trait_couleur)]

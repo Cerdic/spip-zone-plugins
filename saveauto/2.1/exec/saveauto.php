@@ -15,7 +15,7 @@ function exec_saveauto_args($contexte=array()){
 	pipeline('exec_init', array('args'=>array('exec'=>'saveauto'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('saveauto:titre_page_saveauto'), "administration", "administration");
+	echo $commencer_page(_T('saveauto:titre_page_saveauto'), "configuration", "base");
 
 	echo "<br /><br />\n"; // outch que c'est vilain !
 	echo gros_titre(_T('titre_admin_tech'),'', false);
@@ -23,23 +23,20 @@ function exec_saveauto_args($contexte=array()){
 
 	echo debut_gauche('', true);
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'saveauto', 'type'=>$type),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'saveauto'),'data'=>''));
 	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'saveauto', 'type'=>$type),'data'=>''));
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'saveauto'),'data'=>''));
 
 	echo debut_droite('', true);
-	if(defined('_DIR_SITE')){
-		$rep_bases = _DIR_SITE.lire_config('saveauto/rep_bases','');
-	}else{
-		$rep_bases = _DIR_RACINE.lire_config('saveauto/rep_bases','');
-	}
-	$prefixe = lire_config('saveauto/prefixe_save','');
+	echo debut_cadre_trait_couleur(find_in_path('img_pack/saveauto-24.png'),true, "", _T('saveauto:titre_boite_sauver'));
+	echo recuperer_fond('prive/contenu/saveauto');
+	echo fin_cadre_trait_couleur(true);
 
-	$contexte['sauvegardes'] = preg_files($rep_bases,"$prefixe.+[.](zip|sql)$");
-	echo recuperer_fond('prive/contenu/saveauto',$contexte);
-	echo recuperer_fond('prive/contenu/saveauto_historique',$contexte);
+	echo debut_cadre_trait_couleur(find_in_path('img_pack/saveauto-24.png'),true, "", _T('saveauto:titre_boite_historique'));
+	echo recuperer_fond('prive/contenu/saveauto_historique');
+	echo fin_cadre_trait_couleur(true);
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'saveauto', 'type'=>$type),'data'=>''));
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'saveauto'),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 }
