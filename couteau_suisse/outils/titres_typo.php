@@ -1,4 +1,5 @@
 <?php
+if(defined('_SPIP20100')) include_spip('images_fonctions');
 
 // Fonction de pipeline
 function titres_typo_pre_typo($texte) {
