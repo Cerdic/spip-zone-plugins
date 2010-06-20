@@ -18,10 +18,10 @@
 <BOUCLE_rep(FORMS_DONNEES){id_form}{statut IN (prepa,prop,publie)}></BOUCLE_rep>#SET{donnees,#TOTAL_BOUCLE}<//B_rep>
 #SET{lien_edite,''}
 [(#REM|sinon{structurer}|autoriser{form,#ID_FORM}|?{' '}) #SET{lien_edite,#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode}} ]
-#SET{lien_affiche,(#URL_ECRIRE{(#TYPE_FORM|match{(^$|^sondage$)}|?{donnees_tous,donnees_tous}),id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
+#SET{lien_affiche,(#URL_ECRIRE{donnees_tous,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
 [(#GET{donnees}|?{'',' '})
 	[(#TYPE_FORM|match{(^$|^sondage$)}|?{' ',''}) #SET{lien_affiche,''}]
-	[(#TYPE_FORM|match{(^$|^sondage$)}|?{'',' '}) 
+	[(#TYPE_FORM|match{(^$|^sondage$)}|?{'',' '})
 		#SET{lien_affiche,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode} }
 	]
 ]
