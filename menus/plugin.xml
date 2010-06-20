@@ -39,7 +39,7 @@
 		<titre>menus:editer_menus_titre</titre>
 		<icone>images/menus-24.png</icone>
 	</bouton>
-	<bouton id='bando_menus_tous' parent="bando_configuration">
+	<bouton id='bando_menus_tous' parent="bando_squelette">
 		<url>menus_tous</url>
 		<titre>menus:editer_menus_titre</titre>
 		<icone>images/menus-16.png</icone>
