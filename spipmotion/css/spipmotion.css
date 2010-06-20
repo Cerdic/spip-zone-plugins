@@ -37,3 +37,7 @@ div.pagination_spipmotion{
 	width:100%;
 	height:300px;
 }
+
+.tr_liste{background-color:#eee;}
+.tr_liste_over,.tr_liste:hover{background-color:#fff;}
+.tr_liste td,.tr_liste:hover td,.tr_liste_over td{border-bottom:1px solid #ddd;}
