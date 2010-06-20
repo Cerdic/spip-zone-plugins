@@ -47,4 +47,20 @@ function saveauto_mes_fichiers_a_sauver($flux){
     return $flux;
 }
 
+/**
+ * On s'insère dans le cron de SPIP
+ * Par défaut une fois par jour (peut être modifié dans la conf)
+ *
+ * @param array $taches_generales
+ */
+function saveauto_taches_generales_cron($taches_generales){
+	if ($cfg = @unserialize($GLOBALS['meta']['saveauto'])){
+		$taches_generales['saveauto'] = $cfg['frequence_maj']*24*3600;
+		//$taches_generales['saveauto'] = $cfg['frequence_maj']*60; #pour debug
+	}else{
+		$taches_generales['saveauto'] = 24*3600;
+	}
+	return $taches_generales;
+}
+
 ?>

@@ -11,7 +11,7 @@
 [it]cy_altern, _Eric_ - basato su un contrib di Silicium (silicium@japanim.net)
 		</multi>
 	</auteur>
-	<version>0.7.0</version>
+	<version>0.7.1</version>
 	<version_base>0.1.0</version_base>
 	<etat>dev</etat>
 	<prefix>saveauto</prefix>
@@ -50,16 +50,15 @@ vengono automaticamente cancellati.
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
-		<inclure>genie/saveauto.php</inclure>
+		<inclure>saveauto_pipelines.php</inclure>
 	</pipeline>
 	<onglet id='saveauto' parent='administration'>
 		<icone>img_pack/saveauto-24.png</icone>
 		<titre>saveauto:saveauto_titre</titre>
 	</onglet>
 	<install>base/saveauto_installer.php</install>
-	<necessite id="SPIP" version="[2.1.0-rc;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="cfg" version="[1.14.4;]" />
 	<necessite id="spip_bonux" version="[1.9.1;]" />
-	<chemin dir='' type='prive' />
 	<categorie>maintenance</categorie>
 </plugin>
