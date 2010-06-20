@@ -2,24 +2,24 @@
 
 /**
  * Insertion dans le pipeline insert_head
- * 
+ *
  * @param object $flux
- * @return 
+ * @return
  */
-function piwik_insert_head($flux){	
+function piwik_insert_head($flux){
 	if(lire_config('piwik/mode_insertion') == 'pipeline'){
 		$options['type'] = 'public';
 		$flux .= piwik_head_js($options);
 	}
-	
+
 	return $flux;
 }
 
 /**
  * Insertion dans le pipeline header_prive
- * 
+ *
  * @param object $flux
- * @return 
+ * @return
  */
 function piwik_header_prive($flux){
 	if(lire_config('piwik/piwik_prive')){
@@ -37,17 +37,18 @@ function piwik_header_prive($flux){
 
 /**
  * La fonction de génération du code du tracker javascript
- * 
+ *
  * @param object $options [optional]
- * @return 
+ * @return
  */
 function piwik_head_js($options=array()){
-	$id_piwik=lire_config('piwik/idpiwik');
-	$url_piwik=lire_config('piwik/urlpiwik');
+	$config = lire_config('piwik');
+	$id_piwik = $config['idpiwik'];
+	$url_piwik = $config['piwik/urlpiwik'];
 	$afficher_js = true;
-	
+
 	$ret = '';
-	
+
 	if($url_piwik && $id_piwik){
 		if($options['statut_restreint']){
 			$statut = $GLOBALS['visiteur_session']['statut'];
@@ -58,7 +59,7 @@ function piwik_head_js($options=array()){
 				}
 			};
 		}
-		
+
 		if($afficher_js){
 			$ret .= '
 				<script type="text/javascript">
@@ -74,7 +75,7 @@ function piwik_head_js($options=array()){
 				</script>';
 		}
 	}
-		
+
 	return $ret;
 }
 ?>
