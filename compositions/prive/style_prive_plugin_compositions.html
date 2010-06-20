@@ -15,6 +15,7 @@
 
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
+<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
@@ -30,14 +31,18 @@
 #composition .formulaire_editer_composition_objet {border:0;}
 
 #composition .accueil {padding:5px;}
+#composition .formulaire_spip.formulaire_editer_composition_objet label{font-weight:bold;width:auto;}
+#composition .descriptif{font-style:italic;margin-left:-20px;}
+
+.editer_composition_lock .choix{clear:both;}
 
 .formulaire_editer_composition_objet .editer_id_article_accueil .explication {display:block;text-align:#GET{right};}
 
-.formulaire_editer_composition_objet .editer_composition .choix label {font-weight:bold;}
+#composition .formulaire_spip.formulaire_editer_composition_objet .choix label {font-weight:normal;}
 .formulaire_editer_composition_objet .editer_composition .choix {padding-#GET{left}:20px;}
 .formulaire_editer_composition_objet .editer_composition .choix input {margin-#GET{left}:-20px;display:inline;position:relative;float:#GET{left};}
 
 .formulaire_editer_composition_objet .editer_composition .choix img.logo {float:#GET{right};}
-.formulaire_editer_composition_objet .editer_composition .choix {clear:#GET{right};}
+.formulaire_editer_composition_objet .editer_composition .choix {clear:both;}
 
 .formulaire_editer_composition_objet .informer_composition em {font-size:0.9em;display:block;margin-top:1em;}
