@@ -5,11 +5,12 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//A
 	'action_creer_site' => 'Cr&eacute;er le site',
-	
+
 	//C
+	'cfg_description_piwik' => 'Ici vous pouvez indiquer votre identifiant piwik, ainsi que l\'adresse du serveur g&eacute;rant vos statistiques.',
 	'cfg_erreur_token' => 'Votre token d\'identification est invalide',
 	'cfg_erreur_recuperation_data' => 'Il y a une erreur de communication avec le serveur, veuillez v&eacute;rifier l\'adresse et le token',
-	
+
 	//E
 	'explication_adresse_serveur' => 'Entrez l\'adresse sans "http://" ni "https://" ni slash final',
 	'explication_creer_site' => 'Le lien ci-dessous vous permet de cr&eacute;er un site sur le serveur Piwik qui sera disponible ensuite dans la liste. V&eacute;rifiez que vous avez bien configur&eacute; l\'adresse et le nom de votre site SPIP avant de cliquer, ce sont ces informations qui seront utilis&eacute;es.',
@@ -19,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_restreindre_statut_public' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans la partie publique',
 	'explication_restreindre_statut_prive' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans l\'espace priv&eacute;',
 	'explication_token' => 'Le token d\'identification est disponible dans vos pr&eacute;f&eacute;rences personnelles ou dans la partie API de votre serveur Piwik',
-	
+
 	//L
 	'label_adresse_serveur' => 'Adresse URL du serveur (https:// ou http://)',
 	'label_comptabiliser_prive' => 'Comptabiliser les visites de l\'espace priv&eacute;',
@@ -32,11 +33,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_restreindre_statut_public' => 'Restreindre certains statuts d\'utilisateurs dans la partie publique',
 	'label_restreindre_statut_prive' => 'Restreindre certains statuts d\'utilisateurs dans l\'espace priv&eacute;',
 	'label_token' => 'Token d\'identification sur le serveur',
-	
+
 	//M
 	'mode_insertion_pipeline' => 'Insertion automatique par le pipeline "insert_head"',
 	'mode_insertion_balise' => 'Insertion par la balise #PIWIK (modification n&eacute;cessaire de vos squelettes)',
-	
+
+	// P
+	'piwik' => 'Piwik',
+
 	//T
 	'textes_url_piwik' => 'Votre serveur piwik',
 	'texte_votre_identifiant' => 'Votre identifiant',

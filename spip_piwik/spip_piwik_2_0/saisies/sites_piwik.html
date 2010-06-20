@@ -1,4 +1,4 @@
-[(#REM) 
+[(#REM)
 
   Parametres :
   - class : classe(s) css ajoutes au select
@@ -6,14 +6,14 @@
   	Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
     (seulement si non multiple)
-  
+
   Exemple d'appel :
 	[(#SAISIE{sites_piwik,idpiwik,
 		label=<:piwik:label_identifiant_site:>
-	})] 
+	})]
 ]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"]>
-	<option value="">[(#ENV{option_intro})]</option>
+	[<option value="">(#ENV{option_intro})</option>]
 	<BOUCLE_selection(POUR){tableau #CONFIG{piwik_sites_dispo}}>
 		#SET{id_site,''}
 		#SET{name,''}

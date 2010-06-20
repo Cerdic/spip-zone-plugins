@@ -5,7 +5,7 @@
 
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
-	
+
 	<form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{SELF}
 		<ul>
@@ -40,35 +40,35 @@
 						pipeline,<:piwik:mode_insertion_pipeline:>,
 						balise,<:piwik:mode_insertion_balise:>
 				}})]
-				
+
 				[(#CONFIG{piwik/mode_insertion}|=={balise}|oui)
-				
+
 					[(#SAISIE{statuts_auteurs, restreindre_statut_public,
 						label=<:piwik:label_restreindre_statut_public:>,
 						explication=<:piwik:explication_restreindre_statut_public:>,
 						multiple=oui})]
-					
+
 					[(#SAISIE{auteurs, restreindre_auteurs_public,
 						label=<:piwik:label_restreindre_auteurs_public:>,
 						multiple=oui})]
-						
+
 					[(#SAISIE{input,exclure_ips,
 						label=<:piwik:label_exclure_ips:>,
 						explication=<:piwik:explication_exclure_ips:>,
 						size=50
 					})]
 				]
-				
+
 				[(#SAISIE{case, piwik_prive,
 					label=<:piwik:label_comptabiliser_prive:>
 				})]
-				
+
 				[(#CONFIG{piwik/piwik_prive}|=={on}|oui)
 					[(#SAISIE{statuts_auteurs, restreindre_statut_prive,
 						label=<:piwik:label_restreindre_statut_prive:>,
 						explication=<:piwik:explication_restreindre_statut_prive:>,
 						multiple=oui})]
-					
+
 					[(#SAISIE{auteurs, restreindre_auteurs_prive,
 						label=<:piwik:label_restreindre_auteurs_prive:>,
 						multiple=oui})]
@@ -76,9 +76,8 @@
 			]
 		</ul>
 		<p class="boutons">
-			<input type="submit" name="_cfg_ok" value="<:ok:>" class="submit" />
-			<input type="reset" value="<:reset:>" class="submit" />
-			<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+			<input type="submit" name="_cfg_delete" value="<:cfg:bouton_effacer:>" class="submit" />
 		</p>
 	</div></form>
 </div>
