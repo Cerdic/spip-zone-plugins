@@ -79,7 +79,7 @@ function icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher=
 		$icone .= "<span>$texte</span>";
 	}
 
-	// cas d'ajax_action_auteur: faut defaire le boulot 
+	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
 	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
 	  list($x,$lien,$atts,$texte)= $r;
@@ -121,7 +121,7 @@ function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_
 	$prefix = forms_prefixi18n($type_form);
 	$contexte = array('type_form'=>$type_form,'prefix'=>$prefix,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	$out .= recuperer_fond($fond,$contexte);
-	
+
 	if (autoriser('creer','form') && ($link!==false)) {
 	  $icone = find_in_path("img_pack/".($type_form?$type_form:'form')."-24.png");
 	  if (!$icone)
@@ -143,9 +143,9 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type){
 		include_spip('inc/autoriser_compat');
 
 	_Forms_install();
-	
+
 	/*debut_page($titre_page, "documents", "forms");*/
-	$commencer_page = charger_fonction("commencer_page", "inc") ; 
+	$commencer_page = charger_fonction("commencer_page", "inc") ;
  	echo $commencer_page($titre_page, "documents", "forms") ;
 	/*debut_gauche();*/
 	echo debut_gauche('', true);
@@ -154,12 +154,12 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type){
 	echo _T("forms:boite_info");
 	/*fin_boite_info();*/
 	echo fin_boite_info(true);
-	
+
 	/*creer_colonne_droite();*/
 	echo creer_colonne_droite('',true);
 	if (include_spip('inc/snippets'))
 		echo boite_snippets($titre_type,_DIR_PLUGIN_FORMS."img_pack/$type_form-24.gif",'forms','forms');
-	
+
 	/*debut_droite();*/
 	echo debut_droite('',true);
 	$out = "";
@@ -177,7 +177,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type){
 		$out .= afficher_tables_tous_corps($type_form);
 	}
 	echo forms_inserer_crayons($out);
-	
+
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	echo fin_page();
@@ -217,7 +217,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	}
 	if (_request('champ')) $defaut_cont['champ'] = _request('champ');
 	$contexte = array_merge($contexte,$defaut_cont);
-	
+
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)
   	$icone = _DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
@@ -227,35 +227,35 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		$out .=  icone(_T('icone_retour'), urldecode($retour), $icone, "rien.gif","",false);
 		$out .=  "</div>";
 	}
-	
+
 	if (autoriser('administrer','form',$id_form)) {
 		$retour = urlencode(self());
-		
+
 		$url_edit = generer_url_ecrire('donnees_edit',"id_form=$id_form&retour=$retour");
 		$out .=  "<div style='float:$spip_lang_left;'>";
 		$out .=  icone(_T("$prefix:icone_ajouter_donnees"), $url_edit, $icone, "creer.gif","",false);
 		$out .=  "</div>";
-		
+
 		//$url_suivi = icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
 		//, _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
 		$url_suivi = generer_url_ecrire(in_array($row['type_form'],array('','sondage'))?'forms_reponses':'donnees_tous',"id_form=$id_form");
 		$out .=  "<div style='float:$spip_lang_left;'>";
 		$out .=  icone(_T("$prefix:suivi_reponses"), $url_suivi, _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif","",false);
 		$out .=  "</div>";
-		
+
 		// verifier si il y a des donnees
 		$in = "statut IN (".implode(',',array_map('_q',$contexte['statuts'])).")";
 		$res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE $in AND id_form="._q($id_form));
 		if ($row2 = spip_fetch_array($res2)){
 			$out .=  "<div style='float:$spip_lang_left;'>";
 			$out .=  icone(_T("$prefix:telecharger_reponses"),
-				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif","",false);
+				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), _DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif","",false);
 			$out .=  "</div>";
 		}
 		if (defined('_DIR_PLUGIN_CSVIMPORT')){
 			$out .=  "<div style='float:$spip_lang_left;'>";
 			$out .=  icone(_T("$prefix:importer_donnees_csv"),
-				generer_url_ecrire("csvimport_import","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-importer-24.png", "rien.gif","",false);
+				generer_url_ecrire("csvimport_import","id_form=$id_form&retour=$retour"), _DIR_PLUGIN_FORMS. "img_pack/donnees-importer-24.png", "rien.gif","",false);
 			$out .=  "</div>";
 		}
 	}
@@ -267,21 +267,21 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	  $recherche_aff = _T('info_rechercher');
 	  $onfocus = "this.value='';";
 	}
-	$out .= "<div style='width:10em;float:$spip_lang_left'><form method='get' style='margin: 0px;' action='" . self() . "' class='verdana2' ><div>";
+	$out .= "<div style='float:$spip_lang_left'><form method='get' style='margin: 20px 0px;' action='" . self() . "' class='verdana2' ><div>";
 	$out .= form_hidden(self());
-	$out .= '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '" />';
+	$out .= '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '" style="width:10em;" />';
 	if ($recherche)
 		$out .= "<br /><a href='".parametre_url(self(),'recherche','')."'>"._T('info_tout_afficher')."</a>";
 	$out .= "</div></form></div>";
 
-	
+
 	$out .=  '<div style="clear:left;text-align:center">';
 	$out .=  gros_titre($titre_page,'',false);
 	$out .=  '</div>';
-	
+
 	$out .=  recuperer_fond($fond,$contexte);
 	$out = forms_inserer_crayons($out);
-	
+
 	$out .=  "</td></tr></table><br />\n";
 	return $out;
 }
@@ -293,7 +293,7 @@ function affichage_donnees_tous($type_form,$c=NULL){
 		include_spip('inc/autoriser_compat');
 	if (!autoriser('voir','donnee',0,null,array('id_form'=>$id_form,'type_form'=>$type_form))) {
 		/*echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");*/
-		$commencer_page = charger_fonction("commencer_page", "inc") ; 
+		$commencer_page = charger_fonction("commencer_page", "inc") ;
  		echo $commencer_page("&laquo; $titre &raquo;", "documents", "forms") ;
 		echo _T('acces_interdit');
 		echo fin_page();
@@ -304,7 +304,7 @@ function affichage_donnees_tous($type_form,$c=NULL){
 	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
 	$titre_page = $row['titre'];
 	/*echo debut_page($titre_page, "documents", "forms");*/
-	$commencer_page = charger_fonction("commencer_page", "inc") ; 
+	$commencer_page = charger_fonction("commencer_page", "inc") ;
  	echo $commencer_page($titre_page, "documents", "forms") ;
 	if (!$retour = _request('retour')){
 		if (find_in_path("exec/{$type_form}s_tous"))
@@ -331,7 +331,7 @@ function affichage_donnee_edit($type_form){
   if (!$icone)
   	$icone = _DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
   $titre_page = _T("$prefix:type_des_tables");
-  
+
   $id_form = intval(_request('id_form'));
   $id_donnee = intval(_request('id_donnee'));
   $res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
@@ -340,14 +340,14 @@ function affichage_donnee_edit($type_form){
 		$id_form = $row['id_form'];
   }
   $statut = $row['statut'];
-  
+
 	$contexte = array('id_form'=>$id_form,'id_donnee'=>$id_donnee,'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	$formulaire = recuperer_fond("modeles/form",$contexte);
 	$row = spip_fetch_array(spip_query("SELECT COUNT(id_donnee) AS n FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut!='poubelle'"));
 	$nb_reponses = intval($row['n']);
-	
+
 	/*debut_page($titre_page, "documents", "forms");*/
-	$commencer_page = charger_fonction("commencer_page", "inc") ; 
+	$commencer_page = charger_fonction("commencer_page", "inc") ;
  	echo $commencer_page($titre_page, "documents", "forms") ;
 	/*debut_gauche();*/
 	echo debut_gauche('', true);
@@ -360,7 +360,7 @@ function affichage_donnee_edit($type_form){
 		$prefix = forms_prefixi18n($type_form);
 		echo icone_horizontale(_T("$prefix:suivi_reponses")."<br />".(($nb_reponses==0)?_T("$prefix:aucune_reponse"):(($nb_reponses==1)?_T("$prefix:une_reponse"):_T("$prefix:nombre_reponses",array('nombre'=>$nb_reponses)))),
 			generer_url_ecrire('donnees_tous',"id_form=$id_form".(strpos($retour,"exec=donnees_tous")===FALSE?"&retour=$retour":"")), _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
-			
+
 		$retour = urlencode(self());
 		echo icone_horizontale(_T("$prefix:telecharger_reponses"),
 			generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
@@ -371,7 +371,7 @@ function affichage_donnee_edit($type_form){
 	}
 	/*fin_boite_info();*/
 	echo fin_boite_info(true);
-	
+
  	$res = spip_query("SELECT documents FROM spip_forms WHERE id_form="._q($id_form));
  	$row = spip_fetch_array($res);
  	if ($row['documents']=='oui'){
@@ -391,18 +391,18 @@ function affichage_donnee_edit($type_form){
 			echo afficher_documents_colonne(0-$GLOBALS['auteur_session']['id_auteur'], "donnee", _request('exec'));
 		}
  	}
-	
+
 	/*creer_colonne_droite();*/
 	echo creer_colonne_droite('',true);
 	if ($id_donnee){
 		$table_donnee_deplace = charger_fonction('table_donnee_deplace','inc');
-		echo ajax_action_auteur('table_donnee_deplace',"$id_form-$id_donnee",'donnees_edit', "id_form=$id_form&id_donnee=$id_donnee", 
-			$table_donnee_deplace($id_donnee,$id_form));		
+		echo ajax_action_auteur('table_donnee_deplace',"$id_form-$id_donnee",'donnees_edit', "id_form=$id_form&id_donnee=$id_donnee",
+			$table_donnee_deplace($id_donnee,$id_form));
 	}
-	
+
 	/*if (include_spip('inc/snippets'))
 		echo boite_snippets($titre_type,_DIR_PLUGIN_FORMS."img_pack/$type_form-24.gif",'forms','forms');*/
-	
+
 	/*debut_droite();*/
 	echo debut_droite('',true);
 	if ($id_donnee){
@@ -413,7 +413,7 @@ function affichage_donnee_edit($type_form){
 	}
 
 	echo "<div class='verdana2'>$formulaire</div>";
-	
+
 	if ($id_donnee) {
 
 		if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
@@ -448,16 +448,16 @@ function affichage_donnee_edit($type_form){
 
 	// donnees liantes
 	list($out,$les_donnees,$nombre_donnees) = Forms_afficher_liste_donnees_liees(
-		"donnee_liee", 
-		$id_donnee, 
+		"donnee_liee",
+		$id_donnee,
 		"donnee",
-		"", 
-		"forms_donnees_liantes", 
-		"forms_donnees_liantes", 
-		"id_donnee=$id_donnee", 
+		"",
+		"forms_donnees_liantes",
+		"forms_donnees_liantes",
+		"id_donnee=$id_donnee",
 		self());
 	echo "<div id='forms_donnees_liantes'>$out</div>";
-	
+
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	echo fin_page();
