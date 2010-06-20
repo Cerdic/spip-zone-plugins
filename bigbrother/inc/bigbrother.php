@@ -39,7 +39,8 @@ function bigbrother_tester_la_visite_du_site(){
 	/**
 	 * Ne pas prendre en compte les bots
 	 */
-	if (_IS_BOT) return;
+	if (_IS_BOT)
+		return;
 
 	// Ne pas tenir compte des tentatives de spam des forums
 	if ($_SERVER['REQUEST_METHOD'] !== 'GET'

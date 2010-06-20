@@ -148,7 +148,9 @@
 						var options = {
 							points : {show:true},
 							lines : {show:true},
-							yaxis : {mode:'time'},
+							yaxis : {
+								tickFormatter:function(val, axis){return plot_ms_to_timereadable(val);}
+							},
 							xaxis : {ticks:auteurs_ticks},
 							grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
 						};

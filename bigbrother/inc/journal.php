@@ -12,6 +12,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param array $opt
  */
 function inc_journal_dist($phrase, $opt = array()) {
+	if (_IS_BOT)
+		return;
+
 	if (!strlen($phrase))
 		return;
 	if ($opt)
