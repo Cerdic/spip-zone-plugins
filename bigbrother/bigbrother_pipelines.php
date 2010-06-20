@@ -75,6 +75,13 @@ function bigbrother_post_edition($flux){
 			spip_log($flux,'journal');
 			$faire = 'modifier';
 			$texte = 'bigbrother:action_modifier_objet';
+			/**
+			 * Les actions de modifications passent un array à $flux['data'] des champs modifiés
+			 * On le serialize pour son insertion future en base
+			 */
+			if(is_array($flux['data'])){
+				$infos['modifs'] = serialize($flux['data']);
+			}
 		}
 
 
@@ -82,7 +89,7 @@ function bigbrother_post_edition($flux){
 
 		$journal(
 			_T($texte,$texte_infos),
-			array('qui' => $qui_ou_ip,'faire' => $faire,'quoi' => $quoi,'id' => $flux['args']['id_objet'])
+			array('qui' => $qui_ou_ip,'faire' => $faire,'quoi' => $quoi,'id' => $flux['args']['id_objet'],'infos' => $infos)
 		);
 	}
 	return $flux;
