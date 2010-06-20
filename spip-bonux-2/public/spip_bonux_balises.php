@@ -73,10 +73,10 @@ function balise_URL_ECRIRE($p) {
 		if ($args != "''" && $args!==NULL)
 			$fonc .= ',' . $args;
 	}
+	$p->code = 'generer_url_ecrire(' . $fonc .')';
 	if (function_exists('tester_url_ecrire'))
-		$p->code = '(tester_url_ecrire(' . $code . ') ? generer_url_ecrire(' . $fonc .') : "")';
-	else
-		$p->code = 'generer_url_ecrire(' . $fonc .')';
+		if ($code) 
+			$p->code = "(tester_url_ecrire($code) ?" . $p->code .'  : "")';
 	#$p->interdire_scripts = true;
 	return $p;
 }
