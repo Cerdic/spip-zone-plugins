@@ -26,7 +26,7 @@ function notifications_saveauto_save_dist($quoi, $id, $options){
 		else{
 			include_spip('inc/saveauto_fonctions');
 			$tous = $cfg['destinataire_save'];
-			$msg_mail = _T('saveauto:sauvegarde_ok_mail')."\n\r"._T('saveauto:base').$cfg['base']."\n\r"._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n\r"._T('saveauto:date').date('d/m/Y H:i');
+			$msg_mail = _T('saveauto:sauvegarde_ok_mail')."\n\r"._T('saveauto:base').$cfg['base']."\n\r"._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n\r"._T('saveauto:date').date('d/m/Y H:i')."\n\r";
 	        $sujet_mail = "[".nettoyer_titre_email($GLOBALS['meta']['nom_site'])."] "._T('saveauto:saveauto')." "._T('saveauto:base').$cfg['base'];
 	        $destinataires = pipeline('notifications_destinataires',
 				array(

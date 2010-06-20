@@ -40,12 +40,12 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
         echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br />';
         return false;
     }
+	if(defined('_DIR_SITE')){
+		$racine = _DIR_SITE;
+	}else{
+		$racine = _DIR_RACINE;
+	}
 	if(!defined('_DIR_PLUGIN_FACTEUR')){
-		if(defined('_DIR_SITE')){
-			$racine = _DIR_SITE;
-		}else{
-			$racine = _DIR_RACINE;
-		}
 		$from = $reply = lire_config('email_webmaster');
 
 		$limite = "_parties_".md5(uniqid (rand()));
