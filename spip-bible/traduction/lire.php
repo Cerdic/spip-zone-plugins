@@ -2,7 +2,7 @@
 
 function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
 	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'lire'=>$lire);
-	if ($livre='Ct'){
+	if ($livre=='Ct'){
 		$param_cache['version'] = 1;	
 	}
 	//Vérifions qu'on a pas en cache
