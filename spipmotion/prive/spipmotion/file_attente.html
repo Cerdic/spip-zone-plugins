@@ -11,6 +11,7 @@
 			<th><:spipmotion:thead_id_auteur:></th>
 			<th><:spipmotion:thead_objet_attache:></th>
 			<th><:spipmotion:thead_date:></th>
+			<th><:spipmotion:thead_statut:></th>
 		</tr>
 	</thead>
 	<tbody class="ajax">
@@ -27,6 +28,15 @@
 			#OBJET ##ID_OBJET
 		</td>
 		<td>[(#MAJ)]</td>
+		<td>[(#ENCODE|=={erreur}|oui)
+				[(#AUTORISER{configurer}|oui)
+					[(#BOUTON_ACTION{[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)],#URL_ACTION_AUTEUR{spipmotion_relancer_encodage,#ID_SPIPMOTION_ATTENTE,#SELF}})]]
+				[(#AUTORISER{configurer}|non)[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)]]
+			]
+			[(#ENCODE|=={erreur}|non)
+				[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)]
+			]
+		</td>
 	</tr>
 </BOUCLE_spipmotion_file>
 	</tbody>
