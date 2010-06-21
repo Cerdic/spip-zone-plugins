@@ -50,7 +50,7 @@
     
     <li[ class="erreur"(#ENV{erreurs}|table_valeur{erreur}|oui)]>
         <label for="passage"><:bible:form_passage:></label>
-        <input type="text" class="text" size="25" name="passage" id="passage" value="[(#ENV{erreurs}|table_valeur{erreur})]"/>
+        <input type="text" class="text" size="25" name="passage" id="passage" value="[(#ENV{erreurs}|table_valeur{erreur}|sinon{#ENV{message_ok}|table_valeur{passage}})]"/>
         
     </li>
     <li>

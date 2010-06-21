@@ -49,6 +49,7 @@ function formulaires_bible_reference_traiter_dist(){
 
 
     return array('message_ok'=>array('resultat'   =>  $resultat,
+    			'passage'	=> $passage,
                 'numeros'   =>  $numeros,
                 'retour'    =>  $retour,
                 'ref'       =>  $ref,
