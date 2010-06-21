@@ -88,4 +88,15 @@ function accesrestreint_page_indisponible($contexte){
 	}
 	return $contexte;
 }
+
+/**
+ * Permettre l'ajout de champs extras via le plugin Champs Extras 2 
+ *
+ * @param 
+ * @return 
+**/
+function accesrestreint_objets_extensibles($objets){
+		return array_merge($objets, array('zone' => _T('accesrestreint:titre_zones_acces')));
+}
+
 ?>
