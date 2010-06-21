@@ -1,21 +1,45 @@
-#SET{tableau1,#ENV{passage}}
-#SET{tableau2,#ENV{passage}}
+#SET{tableau_traduction,#ENV{traductions}|strtolower|explode{;}}
 
-#SET{tableau1,#GET{tableau1}|bible{#ENV{trad1}}}
 
-#SET{tableau2,#GET{tableau2}|bible{#ENV{trad2}}}
+
+#SET{passages,#ARRAY}
+
+
+<BOUCLE_remplissage(POUR){tableau #GET{tableau_traduction}}>
+
+
+
+#SET{passages,#GET{passages}|array_merge{#ARRAY{#VALEUR,#ENV{passage}|bible_traduire_abreviation{#ENV{lang},#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}}|bible{#VALEUR}}}}
+</BOUCLE_remplissage>
+
+
 <B_chapitre>
+
 <table class="spip">
-<tr class="row_first"><th scope="col">Verset</th><th scope="col">[(#ENV{trad1}|strtolower|traduction_longue)]</th><th scope="col">[(#ENV{trad2}|strtolower|traduction_longue)]</th></tr>
-<BOUCLE_chapitre(POUR){tableau #GET{tableau1}|table_valeur{passage_texte}}>	
-	<tr class="row_first"><td colspan="3"> Chapitre #CLE </td></tr>
+<caption>[(#ENV{passage}|bible_afficher_references_direct{[(#LANG|traduction_defaut)],#LANG,false})]</caption>
+<B_entete>
+<tr class="row_first">
+<th scope="col"><:bible:verset:></th>
+<BOUCLE_entete(POUR){tableau #GET{tableau_traduction}}>
+<th scope="col">[(#VALEUR|traduction_longue)]</th>
+</BOUCLE_entete>
+</tr>
+</B_entete>
+<BOUCLE_chapitre(POUR){tableau #GET{passages}|current|table_valeur{passage_texte}}>	
+	<tr class="row_first"><td colspan="[(#GET{tableau_traduction}|count|plus{1})]"> <:bible:chapitre:> #CLE </td></tr>
 	
 	<BOUCLE_verset(POUR){tableau #VALEUR}>
+	<B_affichage_passage>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<th scope="row">#CLE</th>
-		<td[ dir="(#VAL{original}|bible_tableau|table_valeur{#GET{tableau1}|table_valeur{lang_original}})"] [lang="(#GET{tableau1}|table_valeur{lang_original}|sinon{#GET{tableau1}|table_valeur{lang}})"]>[(#GET{tableau1}|table_valeur{passage_texte}|table_valeur{#_chapitre:CLE}|table_valeur{#CLE})]</td>
-		<td[ dir="(#VAL{original}|bible_tableau|table_valeur{#GET{tableau2}|table_valeur{lang_original}})"] [lang="(#GET{tableau2}|table_valeur{lang_original}|sinon{#GET{tableau2}|table_valeur{lang}})"]>[(#GET{tableau2}|table_valeur{passage_texte}|table_valeur{#_chapitre:CLE}|table_valeur{#CLE})]</td>
+	<BOUCLE_affichage_passage(POUR){tableau #GET{passages}}>
+	
+		
+		<td[ dir=(#INFO_BIBLE_TRADUCTION{#CLE,lang_abrev}|lang_dir|!={#LANG_DIR}|oui)["(#INFO_BIBLE_TRADUCTION{#CLE,lang_abrev}|lang_dir)]"][ lang=(#INFO_BIBLE_TRADUCTION{#CLE,lang_abrev}|!={#ENV{lang}}|oui)["(#INFO_BIBLE_TRADUCTION{#CLE,lang_abrev})]"]>[(#VALEUR|table_valeur{passage_texte}|table_valeur{#_chapitre:CLE}|table_valeur{#_verset:CLE})]</td>
+		
+	</BOUCLE_affichage_passage>
 	</tr>
+	</B_affichage_passage>
 	</BOUCLE_verset>
 </BOUCLE_chapitre>
 </table>

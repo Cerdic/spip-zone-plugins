@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'historique'=>'Historique',
 	'version_dispo'=>'Traductions de la Bible disponibles',
 	'neccessitesvn'=>'Cette page nécéssite une site sous SPIP 2.0 et le plugin Spip 2.0 Bonux',
+	'verset'		=>'Verset',
+	'chapitre'		=>'Chapitre',
 	//la config
 	'cfg'               =>  'Spip-Bible',
 	'cfg_descriptif'    =>  'Page de configuration générale de Spip-Bible. Vous pouvez aussi configurer celle du [presse-papier->?exec=cfg&cfg=bible_pp].',

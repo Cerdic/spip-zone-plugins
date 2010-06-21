@@ -5,6 +5,7 @@ Spip-Bible
 */
 include_spip('inc/bible_tableau');
 
+
 function bible_supprimer_retour($texte){
    
     $texte = preg_replace("#\t#",'',$texte);
@@ -14,8 +15,14 @@ function bible_supprimer_retour($texte){
     
  return $texte;
 }
-function traduire_abreviation($abrev,$lang_original,$lang_traduction){
+function bible_traduire_abreviation($abrev,$lang_original,$lang_traduction){
 	$tableau_gateway = bible_tableau("gateway");
+	$tableau_originales = bible_tableau('original');
+	if (array_key_exists($lang_traduction,$tableau_originales)){
+		return $abrev;	
+		
+	}
+
 	$livre = livre_seul($abrev);
 	
 	$numero = $tableau_gateway[$lang_original][$livre];
@@ -233,9 +240,14 @@ function filtre_ref($i){
 	
 	
 }
-
+function bible_afficher_references_direct($ref,$traduction,$lang,$nommer_trad=true){
+	$t = bible_analyser_ref($ref,$traduction);
+	$tableau_separateur = bible_tableau('separateur');
+	$lang_version 		= info_bible_version($traduction,'lang_abrev');
+	$separateur = $tableau_separateur[$lang_version];
+	return afficher_references($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
+}
 function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad=true){
-
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
 	$trad = $tableau_traduction[strtolower($trad)]['traduction'];
@@ -246,7 +258,7 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 
-	$nommer_trad == true ? $bloc_fin = ' (<i>'.$trad.'</i>)' : $bloc_fin = '';
+	$nommer_trad == true and $nommer_trad!='false' ? $bloc_fin = ' (<i>'.$trad.'</i>)' : $bloc_fin = '';
 
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
