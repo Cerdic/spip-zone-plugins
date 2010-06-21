@@ -49,7 +49,7 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 		$url = $url_base."&reference=".$livre."+".$i;
 		
 	
-		echo $url;
+		
 		$i == $chapitre_debut ? $debut = $verset_debut : $debut=1;
 		$i == $chapitre_fin ? $fin = $verset_fin : $fin = '';
 		$verset_debut =='' and $i==$chapitre_debut ? $debut=1 : $debut=$debut;
