@@ -27,7 +27,7 @@
 	<options>openid_options.php</options>
 	<lien>http://www.spip-contrib.net/Plugin-d-authentification-OpenID</lien><!-- URI de documentation -->
 	<necessite id='SPIP' version='[2.0.0;2.1.0)' />
-	<necessite id="lib:openid-php-openid-782224d" src="http://download.github.com/openid-php-openid-2.2.2-0-ga287b2d.zip" />
+	<necessite id="lib:openid-php-openid-782224d" src="http://www.spip-contrib.net/IMG/zip/openid-php-openid-2.2.2-0-ga287b2d.zip" />
 	<chemin dir="./" />
 	<chemin dir="spip_2_0" />
 	<prefix>openid</prefix>
@@ -96,7 +96,7 @@
 	</description>
 	<options>openid_options.php</options>
 	<lien>http://www.spip-contrib.net/Plugin-d-authentification-OpenID</lien>
-	<necessite id="lib:openid-php-openid-782224d" src="http://download.github.com/openid-php-openid-2.2.2-0-ga287b2d.zip" />
+	<necessite id="lib:openid-php-openid-782224d" src="http://www.spip-contrib.net/IMG/zip/openid-php-openid-2.2.2-0-ga287b2d.zip" />
 	<chemin dir="./" />
 	<chemin dir="spip_2_1" />
 	<prefix>openid</prefix>
