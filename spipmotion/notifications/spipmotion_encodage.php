@@ -1,0 +1,79 @@
+<?php
+/**
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
+
+/**
+ * Notification à la fin de l'encodage
+ *
+ * @param unknown_type $quoi
+ * @param unknown_type $id
+ * @param unknown_type $options
+ */
+function notifications_spipmotion_encodage_dist($quoi, $id, $options){
+	spip_log('notif encodage','spipmotion');
+	$en_cours = sql_countsel('spip_spipmotion_attentes','id_document = '.intval($options['source']['id_document']).' AND encode IN ("non","en_cours","erreur")');
+	$infos_encodage = sql_fetsel('*','spip_spipmotion_attentes','id_spipmotion_attente ='.intval($id));
+
+	$options['encodage_restant'] = $en_cours;
+
+	if(lire_config('spipmotion/debug_mode') == 'on'){
+		/**
+		 * Il reste des versions à encoder
+		 * On ne notifie que le webmestre si spipmotion est en mode debug
+		 * On lui envoie le log également si possible
+		 */
+		$infos_encodage = sql_fetsel('*','spip_spipmotion_attentes','id_spipmotion_attente ='.intval($id));
+		$options['encodage_statut'] = $infos_encodage['encode'];
+
+		$tous = array();
+		$result = sql_select("email","spip_auteurs","webmestre='oui'");
+
+		while ($qui = sql_fetch($result)) {
+			if ($qui['email'])
+				$tous[] = $qui['email'];
+		}
+
+		$destinataires = pipeline('notifications_destinataires',
+			array(
+				'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options)
+			,
+				'data'=>$tous)
+		);
+		$msg_mail = recuperer_fond('notifications/spipmotion_encodage_webmestre',array('id_spipmotion_attente'=>$id,'fichier_log'=>$options['fichier_log']));
+	}
+	if($en_cours == 0){
+		$msg_mail = recuperer_fond('notifications/spipmotion_encodage_termine',array('id_spipmotion_attente'=>$id));
+
+		$tous = array();
+		$tous[] = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($infos_encodage['id_auteur']));
+		$webmestres = sql_select("email","spip_auteurs","webmestre='oui'");
+
+		while ($qui = sql_fetch($webmestres)) {
+			if ($qui['email'])
+				$tous[] = $qui['email'];
+		}
+
+		$destinataires = pipeline('notifications_destinataires',
+			array(
+				'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options)
+			,
+				'data'=>$tous)
+		);
+	}
+
+	/**
+	 * Nettoyage de la liste d'emails en vérifiant les doublons
+	 * et la validité des emails
+	 */
+	notifications_nettoyer_emails($destinataires);
+
+	notifications_envoyer_mails($destinataires, $msg_mail,$sujet_mail);
+}
+?>

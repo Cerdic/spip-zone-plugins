@@ -46,5 +46,6 @@ function genie_spipmotion_file($time)  {
 	}else if(lire_config('spipmotion_casse') == 'oui'){
 		spip_log('Attention, problème dans la configuration','spipmotion');
 	}
+	return 1;
 }
 ?>

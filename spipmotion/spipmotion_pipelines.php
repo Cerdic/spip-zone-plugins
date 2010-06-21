@@ -43,7 +43,9 @@ function spipmotion_editer_contenu_objet($flux){
 					$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
 				}
 				$infos_audios = charger_fonction('spipmotion_infos_audios', 'inc');
+				$flux['data'] .= '<div id="spipmotion_infos-'.$id_document.'">';
 				$flux['data'] .= $infos_audios($id,$id_document,$type);
+				$flux['data'] .= '</div>';
 			}
 		}
 	}
@@ -60,6 +62,7 @@ function spipmotion_editer_contenu_objet($flux){
  */
 function spipmotion_taches_generales_cron($taches_generales){
 	$taches_generales['spipmotion_file'] = 3*60;
+	$taches_generales['spipmotion_taches_generales'] = 3*60;
 	return $taches_generales;
 }
 

@@ -92,7 +92,7 @@ function encodage($source,$doc_attente){
 		 * ffmpeg a besoin d'une valeur entre -10 et 100 alors que ffmpeg2theora respecte libvobis
 		 * de -1 à 10
 		 */
-		$texte .= "aq=".$qualite."\n";
+		//$texte .= "aq=".$qualite."\n";
 		$audiobitrate_ffmpeg2theora = "--audioquality $qualite";
 		$audiobitrate_ffmpeg = "--audioquality ".$qualite;
 	}else{
@@ -331,9 +331,19 @@ function encodage($source,$doc_attente){
 			suivre_invalideur("0",true);
 		}
 	}else{
-		sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
+		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur'),"id_spipmotion_attente=".intval($doc_attente));
 	}
 
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		spip_log('notifications?','spipmotion');
+		$notifications('spipmotion_encodage', intval($doc_attente),
+			array(
+				'id_document' => $x,
+				'source' => $source,
+				'fichier_log' => $fichier_log,
+			)
+		);
+	}
 	return $x;
 }
 ?>

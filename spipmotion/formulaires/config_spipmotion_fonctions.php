@@ -21,32 +21,11 @@ function cfg_config_spipmotion_post_traiter(&$cfg){
 		include_spip('inc/metas');
 		$valeurs = $cfg->val;
 		spip_log($valeurs,'spipmotion');
-		if($valeurs['chemin'] != ''){
-			exec($valeurs['chemin'],$retour,$retour_int);
-			if($retour_int != 1){
-				ecrire_config('spipmotion_casse', 'oui');
-				$erreur = true;
-			}else if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
-				effacer_config('spipmotion_casse');
-			}
-		}else{
-			exec('ffmpeg',$retour,$retour_int);
-			if($retour_int != 1){
-				ecrire_config('spipmotion_casse', 'oui');
-				$erreur = true;
-			}else{
-				$config = lire_config('spipmotion');
-				$config['chemin'] = 'ffmpeg';
-				ecrire_meta('spipmotion',serialize($config));
-				spip_log($config,'spipmotion');
-				spip_log('on met juste "ffmpeg" comme chemin pour ffmpeg','spipmotion');
-				if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
-					effacer_config('spipmotion_casse');
-				}
-			}
-		}
 
-		if(!$erreur){
+		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
+		$erreurs = $verifier_binaires($valeurs);
+
+		if(!in_array('ffmpeg',$erreurs){
 			/**
 			 * On récupère les informations du nouveau ffmpeg
 			 */

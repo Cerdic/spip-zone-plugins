@@ -1,0 +1,26 @@
+[(#REM)
+
+	Plugin SPIPmotion
+	Squelette de notification d'encodage
+	(c) 2010
+ 	Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_attente(SPIPMOTION_ATTENTES){id_spipmotion_attente}{tout}><BOUCLE_document(DOCUMENTS){id_document}{tout}>
+[[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - [(#VAL{spipmotion:message_encodage_sujet_[(#_attente:ENCODE)]}|_T|nettoyer_titre_email|filtrer_entites|trim)] : ##_attente:ID_SPIPMOTION_ATTENTE
+#SET{id_document,#ID_DOCUMENT} #SET{extension,#_attente:EXTENSION}
+[(#_attente:ENCODE|=={oui}|oui)
+<:spipmotion:message_encodage_unique_oui{id_document=#GET{id_document},extension=#GET{extension}}:>][(#_attente:ENCODE|=={erreur}|oui)
+<:spipmotion:message_encodage_unique_erreur{id_document=#GET{id_document},extension=#GET{extension}}:>]
+#SET{objet,#_attente_:OBJET} #SET{id_objet,#_attente:ID_OBJET} [(#SET{url,[(#_attente:ID_OBJET|generer_url_entite{#_attente:OBJET})]})]
+<:spipmotion:message_encodage_objet_lie{objet=#GET{objet},id_objet=#GET{id_objet}}:>
+#INFO_TITRE{#_attente:OBJET,#_attente:ID_OBJET}&nbsp;-&nbsp;[(#GET{url}|url_absolue)]
+
+[(#ENCODE|=={erreur}|oui)
+-----------------
+<:spipmotion:message_encodage_erreur_log:>
+-----------------
+
+[(#ENV{fichier_log}|spip_file_get_contents)]
+]</BOUCLE_document></BOUCLE_attente>
+#FILTRE{supprimer_tags|trim}

@@ -26,9 +26,17 @@ function inc_spipmotion_recuperer_infos($id_document){
 
 	/**
 	 * Si c'est un flv on lui applique les metadatas pour éviter les problèmes
+	 * Si c'est un mov ou MP4 on applique qt-faststart
 	 */
-	if($document['extension'] == 'flv'){
+	if(($document['extension'] == 'flv') && !$GLOBALS['meta']['spipmotion_flvtool_casse']){
 		$metadatas = @shell_exec("flvtool2 -xUP $movie_chemin");
+	}
+	if(in_array($document['extension'],array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
+		exec("qt-faststart $movie_chemin $movie_chemin._temp",$retour,$retour_int);
+		spip_log($retour,'spipmotion');
+		if(file_exists($movie_chemin.'._temp')){
+			rename($movie_chemin.'._temp',$movie_chemin);
+		}
 	}
 
 	$movie = new ffmpeg_movie($movie_chemin, 0);

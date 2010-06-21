@@ -12,12 +12,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
-
+include_spip('inc/presentation');
 function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ignore_flag = false) {
-	if(_AJAX){
-		include_spip('public/assembler');
-		include_spip('inc/presentation');
-	}
+	spip_log('inc_spipmotion_infos_videos_dist','spipmotion');
 	$corps = recuperer_fond('prive/prive_infos_video', $contexte=array('id_document'=>$id_document));
 
 	// Si on a le droit de modifier les documents, on affiche les icones pour récupérer les infos et le logo
@@ -34,7 +31,7 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 			$redirect = str_replace('&amp;','&',$redirect);
 			$action = generer_action_auteur('spipmotion_logo', "$id/$type/$id_document", $redirect);
 			$action = "<a href='$action'>$texte</a>";
-			$action2 = ajax_action_auteur('spipmotion_infos', "$id/$type/$id_document", $script, "type=$type&id_$type=$id&show_infos_docs=$id_document#infosdoc-$id_document", array($texte2));
+			$action2 = ajax_action_auteur('spipmotion_infos', "$id/$type/$id_document", $script, "type=$type&id_$type=$id&show_infos_docs=$id_document#spipmotion_infos_plus-$id_document", array($texte2));
 
 			/**
 			 * On vérifie si le document est tout d'abord transcodable (les flvs et mp3 ne sont pas forcément nécessaires)
@@ -77,7 +74,6 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 				$corps .= $texte3;
 		}
 	}
-	//return ajax_action_greffe("spipmotion", $id_document, $corps);
-	return $corps;
+	return ajax_action_greffe("spipmotion_infos_plus", $id_document, $corps);
 }
 ?>
