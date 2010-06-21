@@ -2,6 +2,13 @@
 
 
 function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang){
+	include_spip('inc/bible_tableau');
+	$livre_gateways = bible_tableau('gateway');
+	$livre_lang = $livre_gateways[$lang][$livre];
+	$livre_al	= array_flip($livre_gateways['de']);
+	$livre_or = $livre;
+	$livre		= $livre_al[$livre_lang];
+	
 	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,false)));
 
 	$param_cache = array('ref'=>$ref,'wissen'=>$wissen);
@@ -14,12 +21,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 		}
 	}
 
-	include_spip('inc/bible_tableau');
-	$livre_gateways = bible_tableau('gateway');
-	$livre_lang = $livre_gateways[$lang][$livre];
-	$livre_al	= array_flip($livre_gateways['de']);
-	$livre_or = $livre;
-	$livre		= $livre_al[$livre_lang];
+
 	
 	//petit livre ?
 	$petit_livre=bible_tableau('petit_livre','de');
@@ -32,7 +34,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 		$ref = str_replace($livre_or,$livre,$ref);
 	}
 		
-	
+	//var_dump($petit_livre);
 	//recuperation du passage
 	
 	
