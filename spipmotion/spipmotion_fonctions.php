@@ -35,9 +35,12 @@ function flv_audio_codec_type_to_type($type=null){
 	$trans = array(
 		'0'=>'Uncompressed',
 		'1'=>'ADPCM',
-		'2'=>'mp3',
+		'2'=>'Mp3',
+		'4'=>'Nellymoser 16kHz Mono',
 		'5'=>'Nellymoser 8kHz Mono',
-		'6'=>'Nellymoser'
+		'6'=>'Nellymoser',
+		'10'=>'AAC',
+		'11'=>'Speex'
 	);
 	return $trans[$type] ? $trans[$type] : $type;
 }

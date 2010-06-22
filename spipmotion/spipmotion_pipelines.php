@@ -62,7 +62,7 @@ function spipmotion_editer_contenu_objet($flux){
  */
 function spipmotion_taches_generales_cron($taches_generales){
 	$taches_generales['spipmotion_file'] = 3*60;
-	$taches_generales['spipmotion_taches_generales'] = 3*60;
+	$taches_generales['spipmotion_taches_generales'] = 24*60*60;
 	return $taches_generales;
 }
 
