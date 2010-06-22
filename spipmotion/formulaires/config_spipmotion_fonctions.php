@@ -25,7 +25,7 @@ function cfg_config_spipmotion_post_traiter(&$cfg){
 		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
 		$erreurs = $verifier_binaires($valeurs);
 
-		if(!in_array('ffmpeg',$erreurs){
+		if(!in_array('ffmpeg',$erreurs)){
 			/**
 			 * On récupère les informations du nouveau ffmpeg
 			 */
