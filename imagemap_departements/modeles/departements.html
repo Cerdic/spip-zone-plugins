@@ -1,8 +1,8 @@
 [(#REM) modele pour afficher une carte de France des departements avec une image map pour avoir un lien sur chaque departement 
 	parametres:
 		|redim= : le facteur de redimensionnement de la carte (par defaut 1, ce qui correspond a une carte de 479x434 pixels)
-		|url_base= : l'url des liens sur les departements (par defaut #SELF)
-		|url_param= : le parametre de l'url pour passer le numero de departement (par defaut "depart" : ...?depart=...)
+		|lien_base= : l'url des liens sur les departements (par defaut #SELF)
+		|lien_param= : le parametre de l'url pour passer le numero de departement (par defaut "depart" : ...?depart=...)
 		|mono=1 si on souhaite la carte en monoteinte
 		|aff_region=1 si on souhaite afficher la région en plus du nom du departement dans l'info-bulle affichee au survol
 		|bullehtml=1 si on préfère l'info-bulle native HTML à celle generee en javascript (non-accessible lors de la navigation au clavier...)
@@ -30,7 +30,7 @@
 		<area shape="poly" class="infobulle"
 			title="#NOM[(#BULLEHTML|!={1}|oui)|][ (#AFF_REGION|=={1}|oui)[[(#BULLEHTML|=={1}|oui)- ](#REGION)]]"
 			alt="#NOM[ (#AFF_REGION|=={1}|oui)[ - (#REGION)]]" 
-			href="[(#URL_BASE|sinon{[(#SELF)]}|parametre_url{[(#URL_PARAM|sinon{depart})],[(#PARAM|=={nom}|?{#NOM_WEB,#NUM_DEPARTEMENT})]})]"
+			href="[(#LIEN_BASE|sinon{[(#SELF)]}|parametre_url{[(#LIEN_PARAM|sinon{depart})],[(#PARAM|=={nom}|?{#NOM_WEB,#NUM_DEPARTEMENT})]})]"
 			coords="[(#COORDONNEES|agrandir{[(#REDIM|replace{',','.'}|sinon{1})]})]"/>
 	</BOUCLE_departs>
 	</map>
