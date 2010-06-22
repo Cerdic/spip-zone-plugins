@@ -1,7 +1,6 @@
-<h1><:spipmotion:titre_page_file_attente:></h1>
 <B_spipmotion_file>
 #SET{total,#GRAND_TOTAL}
-<p><:spipmotion:info_nombre_resultat{nb=#GET{total}}:></p>
+<p><:spipmotion:info_nombre_encodage_attente{nb=#GET{total}}:></p>
 #ANCRE_PAGINATION
 <table class="spipmotion">
 	<thead>
@@ -10,6 +9,7 @@
 			<th><:spipmotion:thead_id_origine_doc:></th>
 			<th><:spipmotion:thead_id_auteur:></th>
 			<th><:spipmotion:thead_objet_attache:></th>
+			<th><:spipmotion:thead_format:></th>
 			<th><:spipmotion:thead_date:></th>
 			<th><:spipmotion:thead_statut:></th>
 		</tr>
@@ -26,6 +26,9 @@
 		</td>
 		<td>
 			#OBJET ##ID_OBJET
+		</td>
+		<td>
+			#EXTENSION
 		</td>
 		<td>[(#MAJ)]</td>
 		<td>[(#ENCODE|=={erreur}|oui)

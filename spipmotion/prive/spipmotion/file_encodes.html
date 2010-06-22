@@ -19,7 +19,6 @@
 </BOUCLE_spipmotion_encodes_total>
 #SET{dates,#GET{dates}|array_unique}
 
-<h1><:spipmotion:titre_page_file_encodes:></h1>
 <B_spipmotion_encodes>
 #SET{total,#GRAND_TOTAL}
 <p><:spipmotion:info_nombre_encodes{nb=#GET{total}}:></p>
@@ -36,6 +35,7 @@
 			<th><:spipmotion:thead_id_origine_doc:></th>
 			<th><:spipmotion:thead_id_auteur:></th>
 			<th><:spipmotion:thead_objet_attache:></th>
+			<th><:spipmotion:thead_format:></th>
 			<th><:spipmotion:thead_date:></th>
 		</tr>
 	</thead>
@@ -52,7 +52,18 @@
 			#INFO_NOM{auteur,#ID_AUTEUR}
 		</td>
 		<td>
+			#SET{url,''}
+			[(#INFO_STATUT{#OBJET,#ID_OBJET}|=={publie}|oui)
+			#SET{url,#ID_OBJET|generer_url_entite{#OBJET}}]
+			[(#GET{url}|oui)
+			<a href="#GET{url}" title="#INFO_TITRE{#OBJET,#ID_OBJET}">]
+			[(#GET{url}|non)
+			<abbr title="<:spipmotion:info_statut_non_publie:>">]
 			#OBJET ##ID_OBJET
+			[(#GET{url}|?{</a>,</abbr>})]
+		</td>
+		<td>
+			#EXTENSION
 		</td>
 		<td>[(#MAJ)]</td>
 	</tr>

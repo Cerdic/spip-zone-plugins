@@ -85,6 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_encoder_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .AVI, .MPG, .MP4 ou .MOV dans le dossier "tmp/upload" pour ensuite les encoder au format FLV ici.',
 	'info_mime' => 'Type mime : ',
 	'info_nom_fichier' => 'Nom du fichier : ',
+	'info_nombre_encodage_attente' => 'Il y a @nb@ document(s) en attente d\'encodage',
 	'info_nombre_encodes' => '@nb@ fichiers ont &eacute;t&eacute; correctement encod&eacute;s.',
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
 	'info_pixelformat' =>'Format de pixel : ',
@@ -93,6 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_encode_erreur' => 'En erreur',
 	'info_statut_encode_oui' => 'Encod&eacute;',
 	'info_statut_encode_non' => 'En attente',
+	'info_statut_non_publie' => 'Cet objet n\'est pas publi&eacute;',
 	'info_videobitrate' => 'Bitrate vid&eacute;o : ',
 	'info_videocodec' => 'Codec vid&eacute;o : ',
 	'install_ajout_champs_documents' => 'Ajout des champs sur spip_documents',
@@ -155,6 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'thead_date' => 'Date',
+	'thead_format' => 'Format',
 	'thead_id_auteur' => 'Utilisateur',
 	'thead_id_file' => 'Id dans la file',
 	'thead_id_origine_doc' => 'Id du document original',

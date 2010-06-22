@@ -84,6 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_encoder_ftp' => 'As Administrator, you can install (with FTP) .AVI .MPG .MP4 or .MOV files in the directory "tmp/upload" for encoding these files here.',
 	'info_mime' => 'Mime type : ',
 	'info_nom_fichier' => 'File name : ',
+	'info_nombre_encodage_attente' => 'There are 3 document(s) waiting for encoding',
 	'info_nombre_encodes' => '@nb@ files have been properly encoded.',
 	'info_page_ffmpeg_infos' => 'This page is only available for information. It shows the complete configuration of the FFMpeg installation on your system.',
 	'info_pixelformat' =>'Pixel format : ',
@@ -92,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_encode_erreur' => 'Error',
 	'info_statut_encode_oui' => 'Encoded',
 	'info_statut_encode_non' => 'Waiting',
+	'info_statut_non_publie' => 'This object is not published',
 	'info_videobitrate' => 'Video bitrate : ',
 	'info_videocodec' => 'Video codec : ',
 	'install_ajout_champs_documents' => 'Adding fields on the spip_documents database table',
@@ -154,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'thead_date' => 'Date',
+	'thead_format' => 'Format',
 	'thead_id_auteur' => 'User',
 	'thead_id_file' => 'Id in the queue',
 	'thead_id_origine_doc' => 'Id of the original document',
