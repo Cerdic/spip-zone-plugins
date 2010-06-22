@@ -71,7 +71,7 @@
 						<:spipmotion:info_bitrate:>
 					</td>
 					<td >
-					<strong>(#BITRATE)</strong>
+					<strong>(#BITRATE|div{1000}|floor) kb/s</strong>
 					</td>
 				</tr>]
 
@@ -80,7 +80,7 @@
 						<:spipmotion:info_videobitrate:>
 					</td>
 					<td >
-					<strong>(#VIDEOBITRATE)</strong>
+					<strong>(#VIDEOBITRATE|div{1000}|floor) kb/s</strong>
 					</td>
 				</tr>]
 
@@ -89,7 +89,7 @@
 						<:spipmotion:info_audiobitrate:>
 					</td>
 					<td >
-					<strong>(#AUDIOBITRATE)</strong>
+					<strong>(#AUDIOBITRATE|div{1000}|floor) kb/s</strong>
 					</td>
 				</tr>]
 
@@ -98,7 +98,7 @@
 						<:spipmotion:info_audiosamplerate:>
 					</td>
 					<td >
-					<strong>(#AUDIOSAMPLERATE)</strong>
+					<strong>(#AUDIOSAMPLERATE) hz</strong>
 					</td>
 				</tr>]
 
