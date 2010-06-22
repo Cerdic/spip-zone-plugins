@@ -64,6 +64,7 @@ function devinettes_charade($texte) {
 function devinettes_reponse($texte, $id) {
  if (!jeux_config('reponse')) return '';
  include_spip('inc/filtrer');
+ include_spip('images_fonctions'); // image_typo pour SPIP 2.1
  $image = image_typo($texte, 'taille='.jeux_config('taille'));
  if (jeux_config('envers'))
  	$image = filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image));
