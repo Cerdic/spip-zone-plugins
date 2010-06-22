@@ -127,6 +127,7 @@ function couleur_teinter ($coul, $val=30) {
  */
 function couleur_inverserluminosite($coul,$pourcentage=20, $intensifier=false) {
 	include_spip("inc/filtres_images");
+	include_spip('filtres/images_complements');
 	$couleurs = couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
