@@ -4,6 +4,22 @@
 <!-- icone=images/spipmotion-24.png -->
 <!-- logo=images/spipmotion.png -->
 <!-- descriptif= <p><:spipmotion:spipmotion_descriptif:></p>
+<B_profils_son>
+<h4><:spipmotion:info_profils_son:></h4>
+<ul>
+<BOUCLE_profils_son(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
+	<li><a href="#encodage_#VALEUR">#VALEUR</a></li>
+</BOUCLE_profils_son>
+</ul>
+</B_profils_son>
+<B_profils_video>
+<h4><:spipmotion:info_profils_video:></h4>
+<ul>
+<BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
+	<li><a href="#encodage_#VALEUR">#VALEUR</a></li>
+</BOUCLE_profils_video>
+</ul>
+</B_profils_video>
 <p><:spipmotion:spipmotion_liens:></p>
 <ul>
 <li><a href="http://kent1.sklunk.net/LINUX-Compiler-FFmpeg"><:spipmotion:lien_ffmpeg_linux:></a></li>

@@ -11,8 +11,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
-	'bitrate' => 'Video bitrate of the output in Kbps : ',
-	'bitrate_audio' => 'Audio bitrate of the output in Kbps : ',
+	'bitrate' => 'Video bitrate of the output in kb/s : ',
+	'bitrate_audio' => 'Audio bitrate of the output in kb/s : ',
 	'bouton_encoder' => 'Encode',
 
 	// C
@@ -87,6 +87,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_encodage_attente' => 'There are 3 document(s) waiting for encoding',
 	'info_nombre_encodes' => '@nb@ files have been properly encoded.',
 	'info_page_ffmpeg_infos' => 'This page is only available for information. It shows the complete configuration of the FFMpeg installation on your system.',
+	'info_profils_son' => 'Audio encoding profile(s)',
+	'info_profils_video' => 'Video encoding profile(s)',
 	'info_pixelformat' =>'Pixel format : ',
 	'info_selectionner_fichier_encoder' => 'You can encode one of the following files',
 	'info_statut_encode_en_cours' => 'Ongoing',
@@ -109,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge_encodage' => 'Supported formats for encoding',
 	'label_extensions_prises_en_charge' => 'Formats supported',
 	'label_extensions_sortie' => 'Encoding formats',
+	'label_format_final' => 'Desired format',
 	'label_vorbis_qualite' => 'Encoding quality (Only Vorbis audio)',
 	'lien_enlever_previsu' => 'Remove the preview',
 	'lien_ffmpeg_mac'=>'Install FFmpeg on Mac OSX',

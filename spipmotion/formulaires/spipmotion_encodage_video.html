@@ -1,3 +1,4 @@
+<div id="encodage_#VALEUR" class="spipmotion_profil">
 <h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
 <ul>
 	[(#SAISIE{input,width_#ENV{valeur},
@@ -20,6 +21,10 @@
 		defaut=15,
 		size=4})]
 
+	#SET{acodecs_possibles,#ARRAY}
+	#SET{vcodecs_possibles,#ARRAY}
+	#SET{vorbis,''}
+	#SET{formats_possibles,#ARRAY}
 	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{ogv}}|oui}>
 		[(#CONFIG{spipmotion_ffmpeg2theora/version}|>{0}|oui)
 			[(#SAISIE{selection,encodeur_#ENV{valeur},
@@ -31,7 +36,7 @@
 					ffmpeg2theora,ffmpeg2theora,
 					ffmpeg,ffmpeg}})]
 		]
-		#SET{acodecs_possibles,#ARRAY|push{vorbis}|push{libvorbis}|push{libspeex}|push{flac}}
+		#SET{acodecs_possibles,#ARRAY|push{vorbis}|push{libvorbis}}
 		#SET{vcodecs_possibles,#ARRAY|push{libtheora}|push{libdirac}}
 		#SET{vorbis,oui}
 	</BOUCLE_ogg>
@@ -44,9 +49,10 @@
 		#SET{acodecs_possibles,#ARRAY|push{libmp3lame}|push{aac}|push{libfaac}|push{libspeex}}
 		#SET{vcodecs_possibles,#ARRAY|push{flv}|push{libx264}}
 	</BOUCLE_flv>
-	<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{mov}|push{mp4}}|oui}>
-		#SET{acodecs_possibles,#ARRAY|push{libmp3lame}|push{aac}|push{libfaac}}
-		#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{libxvid}|push{mpeg4}|}
+	<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{mov}|push{mp4}|push{m4v}}|oui}>
+		#SET{acodecs_possibles,#ARRAY|push{libfaac}|push{aac}|push{libmp3lame}}
+		#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{libxvid}|push{mpeg4}}
+		#SET{formats_possibles,#ARRAY|push{ipod}|push{psp}|push{mp4}|push{m4v}}
 	</BOUCLE_mp4>
 	<//B_flv>
 	<//B_ogg>
@@ -66,6 +72,13 @@
 	#SET{vcodec_defaut,#GET{vcodec}|table_valeur{0}}
 
 	[(#GET{vcodecs}|count|>{0}|oui)
+		[(#GET{formats_possibles}|count|>{0}|oui)
+			[(#SAISIE{selection_valeur,format_#ENV{valeur},
+				label=<:spipmotion:label_format_final:>,
+				defaut=ipod,
+				cacher_option_intro=oui,
+				datas=#GET{formats_possibles}})]
+		]
 		[(#SAISIE{selection_valeur,vcodec_#ENV{valeur},
 			label=<:spipmotion:label_codec_video:>,
 			cacher_option_intro=oui,
@@ -89,10 +102,11 @@
 				22050,22050 Hz,
 				44100,44100 Hz,
 				48000,48000 Hz}})]
+
+		[(#REM)explication=<:spipmotion:explication_vorbis_qualite:>,]
 		[(#GET{vorbis}|=={oui}|oui)
 			[(#SAISIE{selection,qualite_audio_#ENV{valeur},
 			label=<:spipmotion:label_vorbis_qualite:>,
-			explication=<:spipmotion:explication_vorbis_qualite:>,
 			defaut=4,
 			cacher_option_intro=oui,
 			datas=#ARRAY{
@@ -110,16 +124,19 @@
 				10,10
 			}})]
 		]
-		[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
-			label=<:spipmotion:bitrate_audio:>,
-			defaut=64,
-			cacher_option_intro=oui,
-			datas=#ARRAY{
-				32,32 kbps,
-				64,64 kbps,
-				96,96 kbps,
-				128,128 kbps,
-				192,192 kbps,
-				256,256 kbps}})]
+		[(#GET{vorbis}|=={oui}|non)
+			[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
+				label=<:spipmotion:bitrate_audio:>,
+				defaut=64,
+				cacher_option_intro=oui,
+				datas=#ARRAY{
+					32,32 kbps,
+					64,64 kbps,
+					96,96 kbps,
+					128,128 kbps,
+					192,192 kbps,
+					256,256 kbps}})]
+		]
 	]
 </ul>
+</div>

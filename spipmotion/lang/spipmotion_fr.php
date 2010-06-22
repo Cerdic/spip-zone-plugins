@@ -11,8 +11,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
-	'bitrate' => 'Bitrate vid&eacute;o de la sortie en Kbps : ',
-	'bitrate_audio' => 'Bitrate audio de la sortie en Kbps : ',
+	'bitrate' => 'Bitrate vid&eacute;o de la sortie en kb/s : ',
+	'bitrate_audio' => 'Bitrate audio de la sortie en kb/s : ',
 	'bouton_encoder' => 'Encoder',
 
 	// C
@@ -89,6 +89,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_encodes' => '@nb@ fichiers ont &eacute;t&eacute; correctement encod&eacute;s.',
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
 	'info_pixelformat' =>'Format de pixel : ',
+	'info_profils_son' => 'Profil(s) d\'encodage son',
+	'info_profils_video' => 'Profil(s) d\'encodage vid&eacute;o',
 	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
 	'info_statut_encode_en_cours' => 'En cours',
 	'info_statut_encode_erreur' => 'En erreur',
@@ -110,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
+	'label_format_final' => 'Format d&eacute;sir&eacute;',
 	'label_vorbis_qualite' => 'Qualit&eacute; d\'encodage (Vorbis uniquement)',
 	'lien_enlever_previsu' => 'Enlever la pr&eacute;visualisation',
 	'lien_ffmpeg_mac'=>'Installer FFmpeg sur Mac OSX',
