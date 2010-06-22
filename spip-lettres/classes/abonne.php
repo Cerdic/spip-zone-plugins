@@ -293,6 +293,8 @@
 
 
 		function envoyer_lettre($id_lettre) {
+			if (!$this->existe)
+				return;
 			global $champs_extra;
 
 			// le verrouillage est fait en amont, par la gestion des queue
