@@ -4,17 +4,20 @@
 		|url_base= : l'url des liens sur les departements (par defaut #SELF)
 		|url_param= : le parametre de l'url pour passer le numero de departement (par defaut "depart" : ...?depart=...)
 		|mono=1 si on souhaite la carte en monoteinte
-		|aff_region=1 si on souhaite afficher la région en plus du nom du département dans l'info-bulle au survol
+		|aff_region=1 si on souhaite afficher la région en plus du nom du departement dans l'info-bulle affichee au survol
+		|bullehtml=1 si on préfère l'info-bulle native HTML à celle generee en javascript (non-accessible lors de la navigation au clavier...)
 ]
 [(#REM) pour les options d'affichage de l'info-bulle voir http://plugins.learningjquery.com/cluetip/ ]
 <B_departs>
-[<script src="(#CHEMIN{cluetip/jquery.cluetip.js})" type="text/javascript"></script>
-<script type="text/javascript" language="Javascript">
-jQuery(document).ready(function() {
-	jQuery("area.infobulle").cluetip({ splitTitle: '|', width: 180, arrows: true, positionBy: 'bottomTop', cluetipClass: 'jtip' });
-});
-</script>]
-[<link rel="stylesheet" href="(#CHEMIN{cluetip/jquery.cluetip.css})" type="text/css" media="all" />]
+[(#BULLEHTML|!={1}|oui)
+	[<script src="(#CHEMIN{cluetip/jquery.cluetip.js})" type="text/javascript"></script>
+	<script type="text/javascript" language="Javascript">
+	jQuery(document).ready(function() {
+		jQuery("area.infobulle").cluetip({ splitTitle: '|', width: 180, arrows: true, positionBy: 'bottomTop', cluetipClass: 'jtip' });
+	});
+	</script>]
+	[<link rel="stylesheet" href="(#CHEMIN{cluetip/jquery.cluetip.css})" type="text/css" media="all" />]
+]
 <div style="width: [(#REDIM|replace{',','.'}|sinon{1}|mult{479}|plus{30}|round)]px; height: [(#REDIM|replace{',','.'}|sinon{1}|mult{434}|plus{15}|round)]px; padding: 0;">
 	<img alt="Departements"
 		usemap="#departements"
@@ -25,7 +28,7 @@ jQuery(document).ready(function() {
 	<map name="departements">
 	<BOUCLE_departs(IMAP_DEPARTEMENTS){par id_departement}>
 		<area shape="poly" class="infobulle"
-			title="#NOM |[ (#AFF_REGION|=={1}|oui)[(#REGION)]]"
+			title="#NOM[(#BULLEHTML|!={1}|oui)|][ (#AFF_REGION|=={1}|oui)[[(#BULLEHTML|=={1}|oui)- ](#REGION)]]"
 			alt="#NOM[ (#AFF_REGION|=={1}|oui)[ - (#REGION)]]" 
 			href="[(#URL_BASE|sinon{[(#SELF)]}|parametre_url{[(#URL_PARAM|sinon{depart})],#NUM_DEPARTEMENT})]"
 			coords="[(#COORDONNEES|agrandir{[(#REDIM|replace{',','.'}|sinon{1})]})]"/>
