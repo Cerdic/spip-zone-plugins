@@ -9,12 +9,12 @@ _ &#169; 2010   Distribu&#233; sous licence GNU/GPL
 	<etat>dev</etat>
 	<description>
 	    Propose un mod&#233;le pour afficher une carte de France avec une imagemap des d&#233;partements:
-_ &lt;departements|url_base=truc&gt; ou &#91;(#MODELE&#123;departements&#125;&#123;url_base=truc&#125;)&#93;
+_ &lt;departements|lien_base=truc&gt; ou &#91;(#MODELE&#123;departements&#125;&#123;lien_base=truc&#125;)&#93;
 qui accepte les param&#232;tres suivants:
 -* |redim= : le facteur de redimensionnement de la carte (par d&#233;faut = 1, ce qui correspond &#224; une carte de 479x434 pixels)
--* |url_base= : l'url des liens sur les d&#233;partements (par d&#233;faut #SELF donc la page en cours)
--* |url_param= : le param&#232;tre de l'url pour passer le num&#233;ro de d&#233;partement (par d&#233;faut "depart" : ...?depart=...)
--* |param=nom : pour passer le nom du d&#233;partement &#224; la place de son num&#233;ro comme valeur du param&#232;tre |url_param
+-* |lien_base= : l'url des liens sur les d&#233;partements (par d&#233;faut #SELF donc la page en cours)
+-* |lien_param= : le param&#232;tre de l'url pour passer le num&#233;ro de d&#233;partement (par d&#233;faut "depart" : ...?depart=...)
+-* |param=nom : pour passer le nom du d&#233;partement &#224; la place de son num&#233;ro comme valeur du param&#232;tre |lien_param
 -* |mono=1 si on souhaite la carte en monoteinte
 -* |aff_region=1 si on souhaite afficher la r&#233;gion en plus du nom du d&#233;partement dans l'info-bulle au survol
 -* |bullehtml=1 si on pr&#233;fere l'info-bulle native HTML &#224; celle g&#233;n&#233;r&#233;e en javascript (non-accessible lors de la navigation au clavier...)
