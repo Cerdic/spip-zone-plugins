@@ -11,15 +11,18 @@ _ &#169; 2010   Distribu&#233; sous licence GNU/GPL
 	    Propose un mod&#233;le pour afficher une carte de France avec une imagemap des d&#233;partements:
 _ &lt;departements|url_base=truc&gt; ou &#91;(#MODELE&#123;departements&#125;&#123;url_base=truc&#125;)&#93;
 qui accepte les param&#232;tres suivants:
--* |redim= : le facteur de redimensionnement de la carte (par defaut = 1, ce qui correspond a une carte de 479x434 pixels)
--* |url_base= : l'url des liens sur les departements (par defaut #SELF donc la page en cours)
--* |url_param= : le parametre de l'url pour passer le numero de departement (par defaut "depart" : ...?depart=...)
+-* |redim= : le facteur de redimensionnement de la carte (par d&#233;faut = 1, ce qui correspond &#224; une carte de 479x434 pixels)
+-* |url_base= : l'url des liens sur les d&#233;partements (par d&#233;faut #SELF donc la page en cours)
+-* |url_param= : le param&#232;tre de l'url pour passer le num&#233;ro de d&#233;partement (par d&#233;faut "depart" : ...?depart=...)
+-* |param=nom : pour passer le nom du d&#233;partement &#224; la place de son num&#233;ro comme valeur du param&#232;tre |url_param
 -* |mono=1 si on souhaite la carte en monoteinte
--* |aff_region=1 si on souhaite afficher la région en plus du nom du département dans l'info-bulle au survol
+-* |aff_region=1 si on souhaite afficher la r&#233;gion en plus du nom du d&#233;partement dans l'info-bulle au survol
+-* |bullehtml=1 si on pr&#233;fere l'info-bulle native HTML &#224; celle g&#233;n&#233;r&#233;e en javascript (non-accessible lors de la navigation au clavier...)
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Plugin-image-map-des-departements</lien>
 	<icon>imapdepart.png</icon>
 	<install>base/imapdepart_install.php</install>
 	<options>imapdepart_options.php</options><!-- gere l'appel de base/imapdepart_base.php -->
 	<fonctions>imapdepart_fonctions.php</fonctions>
+	<categorie>divers</categorie>
 </plugin>

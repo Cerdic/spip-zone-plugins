@@ -30,7 +30,7 @@
 		<area shape="poly" class="infobulle"
 			title="#NOM[(#BULLEHTML|!={1}|oui)|][ (#AFF_REGION|=={1}|oui)[[(#BULLEHTML|=={1}|oui)- ](#REGION)]]"
 			alt="#NOM[ (#AFF_REGION|=={1}|oui)[ - (#REGION)]]" 
-			href="[(#URL_BASE|sinon{[(#SELF)]}|parametre_url{[(#URL_PARAM|sinon{depart})],#NUM_DEPARTEMENT})]"
+			href="[(#URL_BASE|sinon{[(#SELF)]}|parametre_url{[(#URL_PARAM|sinon{depart})],[(#PARAM|=={nom}|?{#NOM_WEB,#NUM_DEPARTEMENT})]})]"
 			coords="[(#COORDONNEES|agrandir{[(#REDIM|replace{',','.'}|sinon{1})]})]"/>
 	</BOUCLE_departs>
 	</map>
