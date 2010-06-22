@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace ecrire
 	'config_desc' => '<strong>Palette</strong> permet d\'ajouter automatiquement
 		un s&eacute;lecteur de couleurs &agrave; un champ input,
 		simplement en lui donnant la classe CSS &laquo;palette&raquo;',
+  'config_exemple' => 'Exemple :',
 	
 );
 

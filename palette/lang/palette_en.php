@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace ecrire
 	'palette_ecrire' => "Activate Palette for private area",
 	'config_desc' => '<strong>Palette</strong> adds automatically a color picker wheel to an input field,
 		if you add to it a CSS class &laquo;palette&raquo;',
-	
+	'config_exemple' => 'Sample :',
 );
 
 ?>
