@@ -1,0 +1,25 @@
+<plugin>
+	<prefix>imapdepart</prefix>
+	<nom>Image map des d&#233;partements</nom>
+	<auteur>
+	    cy_altern - la carte avec son imagemap est aimablement fournie par Lionel Delvarre (http://www.lion1906.com/)
+_ &#169; 2010   Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<version>0.2.0</version>
+	<etat>dev</etat>
+	<description>
+	    Propose un mod&#233;le pour afficher une carte de France avec une imagemap des d&#233;partements:
+_ &lt;departements|url_base=truc&gt; ou &#91;(#MODELE&#123;departements&#125;&#123;url_base=truc&#125;)&#93;
+qui accepte les param&#232;tres suivants:
+-* |redim= : le facteur de redimensionnement de la carte (par defaut = 1, ce qui correspond a une carte de 479x434 pixels)
+-* |url_base= : l'url des liens sur les departements (par defaut #SELF donc la page en cours)
+-* |url_param= : le parametre de l'url pour passer le numero de departement (par defaut "depart" : ...?depart=...)
+-* |mono=1 si on souhaite la carte en monoteinte
+-* |aff_region=1 si on souhaite afficher la région en plus du nom du département dans l'info-bulle au survol
+	</description>
+	<lien></lien>
+	<icon>imapdepart.png</icon>
+	<install>base/imapdepart_install.php</install>
+	<options>imapdepart_options.php</options><!-- gere l'appel de base/imapdepart_base.php -->
+	<fonctions>imapdepart_fonctions.php</fonctions>
+</plugin>

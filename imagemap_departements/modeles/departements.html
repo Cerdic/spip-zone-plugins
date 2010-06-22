@@ -1,0 +1,35 @@
+[(#REM) modele pour afficher une carte de France des departements avec une image map pour avoir un lien sur chaque departement 
+	parametres:
+		|redim= : le facteur de redimensionnement de la carte (par defaut 1, ce qui correspond a une carte de 479x434 pixels)
+		|url_base= : l'url des liens sur les departements (par defaut #SELF)
+		|url_param= : le parametre de l'url pour passer le numero de departement (par defaut "depart" : ...?depart=...)
+		|mono=1 si on souhaite la carte en monoteinte
+		|aff_region=1 si on souhaite afficher la région en plus du nom du département dans l'info-bulle au survol
+]
+[(#REM) pour les options d'affichage de l'info-bulle voir http://plugins.learningjquery.com/cluetip/ ]
+<B_departs>
+[<script src="(#CHEMIN{cluetip/jquery.cluetip.js})" type="text/javascript"></script>
+<script type="text/javascript" language="Javascript">
+jQuery(document).ready(function() {
+	jQuery("area.infobulle").cluetip({ splitTitle: '|', width: 180, arrows: true, positionBy: 'bottomTop', cluetipClass: 'jtip' });
+});
+</script>]
+[<link rel="stylesheet" href="(#CHEMIN{cluetip/jquery.cluetip.css})" type="text/css" media="all" />]
+<div style="width: [(#REDIM|replace{',','.'}|sinon{1}|mult{479}|plus{30}|round)]px; height: [(#REDIM|replace{',','.'}|sinon{1}|mult{434}|plus{15}|round)]px; padding: 0;">
+	<img alt="Departements"
+		usemap="#departements"
+		src="[(#CHEMIN{[(#MONO|=={1}|?{france_departements_mono.png,france_departements.png})]})]"
+		style="border: 0; text-align: left; width: [(#REDIM|replace{',','.'}|sinon{1}|mult{479}|round)]px; height: [(#REDIM|replace{',','.'}|sinon{1}|mult{434}|round)]px;"
+		class="no_image_filtrer"/>
+		
+	<map name="departements">
+	<BOUCLE_departs(IMAP_DEPARTEMENTS){par id_departement}>
+		<area shape="poly" class="infobulle"
+			title="#NOM |[ (#AFF_REGION|=={1}|oui)[(#REGION)]]"
+			alt="#NOM[ (#AFF_REGION|=={1}|oui)[ - (#REGION)]]" 
+			href="[(#URL_BASE|sinon{[(#SELF)]}|parametre_url{[(#URL_PARAM|sinon{depart})],#NUM_DEPARTEMENT})]"
+			coords="[(#COORDONNEES|agrandir{[(#REDIM|replace{',','.'}|sinon{1})]})]"/>
+	</BOUCLE_departs>
+	</map>
+</div>
+</B_departs>
