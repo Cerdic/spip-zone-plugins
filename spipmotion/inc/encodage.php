@@ -87,12 +87,6 @@ function encodage($source,$doc_attente){
 	 */
 	if(in_array(lire_config("spipmotion/acodec_$extension_attente",''),array('vorbis','libvorbis'))){
 		$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
-		spip_log('qualite = '.$qualite,'spipmotion');
-		/**
-		 * ffmpeg a besoin d'une valeur entre -10 et 100 alors que ffmpeg2theora respecte libvobis
-		 * de -1 à 10
-		 */
-		//$texte .= "aq=".$qualite."\n";
 		$audiobitrate_ffmpeg2theora = "--audioquality $qualite";
 		$audiobitrate_ffmpeg = "--audioquality ".$qualite;
 	}else{
@@ -174,13 +168,6 @@ function encodage($source,$doc_attente){
 		spip_log($retour,'spipmotion');
 		if(filesize($fichier_temp) > 100){
 			$encodage_ok = true;
-		}else{
-			spip_log("l'encodage est en erreur",'spipmotion');
-			/**
-			 * Analyse des erreurs...
-			 * On a créé un fichier de log
-			 * $fichier_log = "$dossier$query.log";
-			 */
 		}
 	}
 
@@ -260,9 +247,38 @@ function encodage($source,$doc_attente){
 		$texte .= "vb=".$vbitrate."000\n";
 		$bitrate = "--bitrate ".$vbitrate;
 
+		/**
+		 * Paramètres supplémentaires pour encoder en h264
+		 */
 		if($vcodec == '--vcodec libx264'){
-			$vpre2 = '--vpre2 hq';
-			$vpre = '--vpre ipod640';
+			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'hq');
+			/**
+			 * Encodage pour Ipod
+			 * http://rob.opendot.cl/index.php/useful-stuff/ipod-video-guide/
+			 */
+			if(lire_config("spipmotion/format_$extension_attente",'ipod') == 'ipod'){
+				$infos_sup .= "-vpre $preset_quality";
+				$infos_sup .= ' -vpre ipod640';
+			}
+			/**
+			 * Encodage pour PSP
+			 * http://rob.opendot.cl/index.php/useful-stuff/psp-video-guide/
+			 */
+			if(lire_config("spipmotion/format_$extension_attente",'ipod') == 'psp'){
+				$infos_sup .= "-vpre $preset_quality";
+				$infos_sup .= ' -vpre main';
+				$infos_sup .= ' -level 21';
+				$infos_sup .= ' -refs 2';
+			}
+			/**
+			 * Si on n'est pas dans un de ces 2 formats on encode en hq
+			 */
+			if(!$infos_sup){
+				$infos_sup .= "-vpre $preset_quality";
+			}
+			$infos_sup .= " -aspect $width_finale:$height_finale";
+			$infos_sup .= ' -threads 0';
+			$infos_sup .= ' -f '.lire_config("spipmotion/format_$extension_attente",'ipod');
 		}
 		$fichier_texte = "$dossier$query.txt";
 
@@ -273,10 +289,13 @@ function encodage($source,$doc_attente){
 		 * Si l'encodeur choisi est ffmpeg2theora et qu'il existe toujours, on l'utilise
 		 * sinon on utilise notre script pour ffmpeg
 		 */
+		if($infos_sup){
+			$infos_sup = "--params_supp \"$infos_sup\"";
+		}
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			$encodage = "ffmpeg2theora $chemin -v 8 -V $vbitrate $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
 		}else{
-			$encodage = find_in_path('script_bash/spipmotion.sh')." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels_ffmpeg $bitrate $vpre $vpre2 --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+			$encodage = find_in_path('script_bash/spipmotion.sh')." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels_ffmpeg $bitrate $infos_sup --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 		}
 		spip_log($encodage,'spipmotion');
 		$lancement_encodage = exec($encodage,$retour,$retour_int);
@@ -330,12 +349,16 @@ function encodage($source,$doc_attente){
 			include_spip('inc/invalideur');
 			suivre_invalideur("0",true);
 		}
-	}else{
+	}
+	/**
+	 * Si l'encodage n'est pas ok ...
+	 * On donne un statut "erreur" dans la file afin de ne pas la bloquer
+	 */
+	else{
 		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur'),"id_spipmotion_attente=".intval($doc_attente));
 	}
 
 	if ($notifications = charger_fonction('notifications', 'inc')) {
-		spip_log('notifications?','spipmotion');
 		$notifications('spipmotion_encodage', intval($doc_attente),
 			array(
 				'id_document' => $x,

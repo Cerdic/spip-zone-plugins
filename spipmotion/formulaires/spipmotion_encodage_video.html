@@ -25,6 +25,7 @@
 	#SET{vcodecs_possibles,#ARRAY}
 	#SET{vorbis,''}
 	#SET{formats_possibles,#ARRAY}
+	#SET{presets_qualite,#ARRAY}
 	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{ogv}}|oui}>
 		[(#CONFIG{spipmotion_ffmpeg2theora/version}|>{0}|oui)
 			[(#SAISIE{selection,encodeur_#ENV{valeur},
@@ -48,11 +49,13 @@
 		]
 		#SET{acodecs_possibles,#ARRAY|push{libmp3lame}|push{aac}|push{libfaac}|push{libspeex}}
 		#SET{vcodecs_possibles,#ARRAY|push{flv}|push{libx264}}
+		#SET{presets_qualite,#ARRAY|push{hq}|push{normal}|push{medium}|push{placebo}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}}
 	</BOUCLE_flv>
 	<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{mov}|push{mp4}|push{m4v}}|oui}>
 		#SET{acodecs_possibles,#ARRAY|push{libfaac}|push{aac}|push{libmp3lame}}
 		#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{libxvid}|push{mpeg4}}
 		#SET{formats_possibles,#ARRAY|push{ipod}|push{psp}|push{mp4}|push{m4v}}
+		#SET{presets_qualite,#ARRAY|push{hq}|push{normal}|push{medium}|push{placebo}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}}
 	</BOUCLE_mp4>
 	<//B_flv>
 	<//B_ogg>
@@ -84,6 +87,13 @@
 			cacher_option_intro=oui,
 			defaut=#GET{vcodec_defaut},
 			datas=#GET{vcodecs}})]
+		[(#GET{presets_qualite}|count|>{0}|oui)
+			[(#SAISIE{selection_valeur,vpreset_#ENV{valeur},
+				label=<:spipmotion:label_presets_qualite:>,
+				explication=<:spipmotion:explication_presets_qualite:>,
+				cacher_option_intro=oui,
+				datas=#GET{presets_qualite}})]
+		]
 	]
 
 	[(#GET{acodecs}|count|>{0}|oui)

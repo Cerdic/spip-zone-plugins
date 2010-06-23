@@ -7,7 +7,7 @@
 #
 # Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
 
-VERSION="0.3"
+VERSION="0.3.1"
 
 ################ LOCALISATION #####################
 messageaide="
@@ -33,7 +33,7 @@ Exemples :
 ## Voir http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg1 ##
 #########################################################################################
 "
-		formatsortie="SPIPmotion : le fichier de sortie doit se terminer par une extension reconnue : flv flac ogg ogv oga mp3 mp4"
+		formatsortie="SPIPmotion : le fichier de sortie doit se terminer par une extension reconnue : flv flac ogg ogv oga mp3 mp4 mov m4v"
 		mauvaisarg="SPIPmotion : argument ${1} non reconnu
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 		pasfichierentree="SPIPmotion : aucun fichier source n'a été spécifié
@@ -63,7 +63,7 @@ while test -n "${1}"; do
 		shift;;
 		--s) sortie="${2}"
 			case "$sortie" in
-			*".mp3"|*".flac"|*".flv"|*".mp4"|*".ogg"*|".oga"|*".ogv");;
+			*".mp3"|*".flac"|*".flv"|*".mp4"|*".ogg"*|".oga"|*".ogv"|*".m4v"|*".mov");;
 			*) echo "$formatsortie";
 			exit 1;;
 			esac
@@ -76,9 +76,7 @@ while test -n "${1}"; do
 		shift;;
 		--vcodec) vcodec="-vcodec ${2}"
 		shift;;
-		--vpre) vpre="-vpre ${2}"
-		shift;;
-		--vpre2) vpre2="-vpre ${2}"
+		--params_supp) params_sup=" ${2}"
 		shift;;
 		--audiobitrate) audiobitrate_quality="-ab ${2}.k"
 		shift;;
@@ -101,7 +99,7 @@ done
 ########## TRAITEMENT DES ARGUMENTS ###############
 
 case "$entree" in
-  "") echo "$pasfichierentree"; exit 0;;
+  "") echo "$pasfichierentree"; exit 1;;
 esac
 
 case "$sortie" in
@@ -116,7 +114,7 @@ esac
 case "$audiobitrate_quality" in
   "")
   case "$sortie" in
-  	*".mp3") audiobitrate_quality="-ab 128.k" ;;
+  	*".mov"|*".mp4"|*".m4v"|*".mp3") audiobitrate_quality="-ab 128.k" ;;
   	*".flv") audiobitrate_quality="-ab 64.k" ;;
   	*".ogg"|*".oga"|*".ogv") audiobitrate_quality="-aq 50" ;;
   esac
@@ -126,6 +124,7 @@ case "$acodec" in
 	"")
 	case "$sortie" in
   		*".mp3"|*".flv") acodec="-acodec libmp3lame" ;;
+  		*".mov"|*".mp4"|*".m4v") acodec="-acodec libfaac";;
   		*".flac") acodec="-acodec flac" ;;
   		*".ogg"|*".oga"|*".ogv") acodec="-acodec vorbis" ;;
   	esac
@@ -147,8 +146,8 @@ esac
 
 case "$vcodec" in
 	"libx264")
-	case "$vpre" in
-  		"") vpre="-vpre default" ;;
+	case "$params_sup" in
+  		"") params_sup="-vpre default" ;;
   	esac
   	shift;;
 	"")
@@ -182,17 +181,19 @@ fi
 
 ############# ON UTILISE FFMPEG ################
 
-echo "$chemin"
-
 case "$sortie" in
   *".mp3"|*".flac"|*".ogg"|*".oga" )
-  echo "On est dans un son"
-  echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie"
-  nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie ;;
-  *".flv"|*".mp4"|*".ogv" )
-  echo "on est dans une video"
-  echo "nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate_quality $ac $vpre $audiofreq $fpre -y $sortie"
-  nice -19 $chemin -i $entree $acodec $size $vcodec $fps $bitrate $audiobitrate_quality $ac $vpre $vpre2 $audiofreq $fpre -y $sortie ;;
+  	echo "On est dans un son"
+  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie"
+  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie ;;
+  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v" )
+  	echo "SPIPmotion v$VERSION
+
+On encode une video
+
+"
+  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $size $vcodec $fps $bitrate $params_sup $fpre -y $sortie"
+  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $size $vcodec $fps $bitrate $params_sup $fpre -y $sortie ;;
 esac
 
-echo "$succes"
+exit $?
