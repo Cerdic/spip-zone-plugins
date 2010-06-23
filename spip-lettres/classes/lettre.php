@@ -187,7 +187,7 @@
 		
 		function callback_clic_html($matches) {
 			$url = $matches[2];
-			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')||strncmp($url, 'mailto:',7) == 0)
+			if ((strncmp($url, 'mailto:',7) == 0)||(strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')== 0))
 			return 'href="'.$url.'"';
 			else
 			{
@@ -206,7 +206,7 @@
 		
 		function callback_clic_texte($matches) {
 			$url = $matches[0];
-			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')||strncmp($url, 'mailto:',7) == 0)
+			if ((strncmp($url, 'mailto:',7) == 0)||(strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')== 0))
 			return $url;
 			else {
 				$verification = sql_select('id_clic', 'spip_clics', 'url='.sql_quote($url).' AND id_lettre='.intval($this->id_lettre));
