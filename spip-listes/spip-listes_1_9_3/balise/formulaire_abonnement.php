@@ -346,7 +346,7 @@ function spiplistes_formulaire_abonnement (
 			//spiplistes_log("pas de demande, afficher formulaire de modif au complet", _SPIPLISTES_LOG_DEBUG);
 			$reponse_formulaire = ""
 				. "<span class='nom'>" . $abonne['nom'] . "</span>\n"
-				. "<span class='souhait'>" . _T('spiplistes:effectuez_modif_validez'). "</span>\n"
+				. "<span class='souhait'>" . _T('spiplistes:effectuez_modif_validez', array('s'=>$abonne['nom'])). "</span>\n"
 				;
 		}
 		
