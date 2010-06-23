@@ -38,7 +38,7 @@ var mediaboxInit = function() {
 	// charger la box sur autre chose
 	if (box_settings.sel_c){
 		jQuery(box_settings.sel_c).not('.hasbox')
-		.colorbox(options)
+		.colorbox(jQuery.extend({}, options, {slideshow:true,slideshowAuto:false}))
 		.addClass("hasbox") // noter qu\'on l\'a vue
 		;
 	}

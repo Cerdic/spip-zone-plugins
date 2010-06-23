@@ -320,9 +320,9 @@
 
 		// Add rollover event to navigation elements
 		$content.children()
-		.bind('mouseover mouseout', function(){
-			$(this).toggleClass(hover);
-		}).addClass(hover);
+		.bind('mouseover', function(){ $(this).addClass(hover); })
+		.bind('mouseout', function(){ $(this).removeClass(hover); })
+		.addClass(hover);
 
 		// Cache values needed for size calculations
 		interfaceHeight = $topBorder.height() + $bottomBorder.height() + $content.outerHeight(TRUE) - $content.height();//Subtraction needed for IE6
