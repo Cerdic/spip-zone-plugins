@@ -8,12 +8,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // chargement des valeurs par defaut des champs du formulaire
-function formulaires_trouver_objet_charger($objet, $source, $id_source, $identifiant,$paramselecteur='',$pid="id"){
+function formulaires_trouver_objet_charger($objet, $source, $id_source, $identifiant,$paramselecteur=''){
  // on considere objet au singulier + s
 	return 
 		array(
 			'objet' => $objet."s",
-			'pid' =>$pid,
 			'source' => $source,
 			'id_source' => $id_source,
 			id_table_objet($source) => $id_source,
@@ -24,29 +23,31 @@ function formulaires_trouver_objet_charger($objet, $source, $id_source, $identif
 		);
 }
 
-function formulaires_trouver_objet_verifier($objet, $source, $id_source, $identifiant,$paramselecteur='',$pid="id"){
+function formulaires_trouver_objet_verifier($objet, $source, $id_source, $identifiant,$paramselecteur=''){
 	// si pas d'id, le selecteur generique n'a pas fonctionne
 	// on fait comment alors ??
+	$id_koi ="id_".$objet;
 
-	if (!_request($pid)) {
+	if (!_request('pid_objet')) {
 		return array(
 		'message_erreur' => _T('grappes:pas_de_identifiant'),
 			);
 	}
 }
 
-function formulaires_trouver_objet_traiter($objet, $source, $id_source, $identifiant,$paramselecteur='',$pid="id"){
+function formulaires_trouver_objet_traiter($objet, $source, $id_source, $identifiant,$paramselecteur=''){
 	
   // Empecher le traitement en AJAX car on sait que le formulaire va rediriger autre part
      refuser_traiter_formulaire_ajax();
      
-     $id_objet = _request($pid);
+     $id_objet = _request('pid_objet');
+     $id_koi ="id_".$objet;
    
     // Valeurs de retours
     return array(
     	'ajax' => ' ',
     	//'editable' => false,
-        'redirect'=> generer_url_public($objet,"$pid=$id_objet")
+        'redirect'=> generer_url_public($objet,"$id_koi=$id_objet")
 
 	    );
 
