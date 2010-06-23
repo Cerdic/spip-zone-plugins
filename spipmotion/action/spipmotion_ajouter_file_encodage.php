@@ -113,10 +113,8 @@ function spipmotion_genere_file($id_document,$type,$id){
 			$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
 			if(!$en_file){
 				$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-				if($document['extension'] != $extension_sortie){
-					$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
-					spip_log("on ajoute une video dans la file d'attente : $id_doc_attente","spipmotion");
-				}
+				$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
+				spip_log("on ajoute une video dans la file d'attente : $id_doc_attente","spipmotion");
 			}
 			else{
 				spip_log("Cette video existe deja dans la file d'attente","spipmotion");
@@ -133,10 +131,8 @@ function spipmotion_genere_file($id_document,$type,$id){
 			$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
 			if(!$en_file){
 				$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-				if($document['extension'] != $extension_sortie){
-					$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
-					spip_log("on ajoute un son dans la file d'attente : $id_doc_attente","spipmotion");
-				}
+				$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
+				spip_log("on ajoute un son dans la file d'attente : $id_doc_attente","spipmotion");
 			}
 			else{
 				spip_log("Ce son existe deja dans la file d'attente","spipmotion");
