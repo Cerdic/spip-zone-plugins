@@ -15,18 +15,25 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$message_html	= '';
 	$message_texte	= '';
 
-	// $corps peut etre une chaine -> compat avec la fonction native SPIP :
-	// ou un tableau -> fonctionnalites etendues
+	// si $corps est un tableau -> fonctionnalites etendues
+	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur
 	if (is_array($corps)) {
 		$message_html	= $corps['html'];
 		$message_texte	= nettoyer_caracteres_mail($corps['texte']);
 		$pieces_jointes	= $corps['pieces_jointes'];
 		$nom_envoyeur = $corps['nom_envoyeur'];
-	} else {
-		$message_texte	= nettoyer_caracteres_mail($corps);
+	} 
+	// si $corps est une chaine -> compat avec la fonction native SPIP
+	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
+	else {
+		if (preg_match(',Content-Type:\s*text/html,ims',$headers)){
+			$message_html	= $corps;
+		}
+		else {
+			$message_texte	= nettoyer_caracteres_mail($corps);
+		}
 	}
 	$sujet = nettoyer_titre_email($sujet);
-
 	// mode TEST : forcer l'email
 	if (defined('_TEST_EMAIL_DEST')) {
 		if (!_TEST_EMAIL_DEST)
