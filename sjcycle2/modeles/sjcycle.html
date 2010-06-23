@@ -1,4 +1,9 @@
-	[(#SET{mon_tableau, [(#ENV{docs}|explode{','})]})]
+	[(#SET{mon_tableau,[(#ENV{docs}|explode{','})]})]
+	[(#SET{id_diapo,   [(#ENV{id_diapo, 0})]})]
+   [(#SET{width,      [(#ENV{width,     #CONFIG{sjcycle/sjcycle_img_width}})]})]
+   [(#SET{height,     [(#ENV{height,    #CONFIG{sjcycle/sjcycle_img_height}})]})]
+   [(#SET{position,   [(#ENV{position,  #CONFIG{sjcycle/sjcycle_img_position}})]})]
+   [(#SET{background, [(#ENV{background,#CONFIG{sjcycle/sjcycle_img_background}})]})]
 	<B_img>
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -17,13 +22,27 @@
 					left: 5 
 			});
 		]
+		$("#dsjcycle_#GET{id_diapo}").cycle({ 
+			 fx:			"#CONFIG{sjcycle/sjcycle_fx}",
+			 timeout:	"#CONFIG{sjcycle/sjcycle_timeout}",
+			 speed:		"#CONFIG{sjcycle/sjcycle_speed}",
+			 sync:		"#CONFIG{sjcycle/sjcycle_sync}",
+			 pause:		"#CONFIG{sjcycle/sjcycle_pause}",
+			 cleartype: 1
+			 [,(#ENV{opt}|html_entity_decode)]
+			 });
 	});
+
+
 	</script>
-	[(#REM) diaporama documents images conteneur jquery cycle ]
-	<div class="dsjcycle" style='[float:(#ENV{align}|match{left|right});margin:[(#CONFIG{sjcycle/sjcycle_margin})]px;]'>
+	[(#REM) diaporama documents images conteneur jquery cycle 
+   revoir critere cond pour eviter la duplication de code dans les 2 boucles]
+
+	<div class="#CONFIG{sjcycle/sjcycle_class}" id="dsjcycle_#GET{id_diapo}" style='[float:(#ENV{align}|match{left|right});margin:[(#CONFIG{sjcycle/sjcycle_margin})]px;][width:(#ENV{width})px;][height:(#ENV{height})px;]'>
+
 	<BOUCLE_img(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{id_document IN #GET{mon_tableau}}{par num titre, date}{doublons}>
-		<div class="infobulle" style="width:#CONFIG{sjcycle/sjcycle_img_width}px;
-      										height:#CONFIG{sjcycle/sjcycle_img_height}px;
+		<div class="infobulle" style="width:#GET{width}px;
+      										height:#GET{height}px;
                                     padding:0px;
                                     margin:[(#CONFIG{sjcycle/sjcycle_img_margin})]px;">
          [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
@@ -34,23 +53,23 @@
                                          style="display:block;padding:0px;margin:0px;">
          ]
          [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|oui)
-            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height}}
+            [(#FICHIER|image_reduire{ #GET{width},
+                                      #GET{height}}
                       |image_alpha{0}
-                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height},
-                                      #CONFIG{sjcycle/sjcycle_img_position},
-                                      #CONFIG{sjcycle/sjcycle_img_background}}
+                      |image_recadre{ #GET{width},
+                                      #GET{height},
+                                      #GET{position},
+                                      #GET{background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
          [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|non)
-            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height}}
-                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height},
-                                      #CONFIG{sjcycle/sjcycle_img_position},
-                                      #CONFIG{sjcycle/sjcycle_img_background}}
+            [(#FICHIER|image_reduire{ #GET{width},
+                                      #GET{height}}
+                      |image_recadre{ #GET{width},
+                                      #GET{height},
+                                      #GET{position},
+                                      #GET{background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
@@ -68,9 +87,9 @@
          ]
 		</div> <!-- .infobulle -->
 	</BOUCLE_img>
-	</div><!-- .sjcycle-->
+	</div><!-- sjcycle-->
 	</B_img>
-   
+
 	<B_img2>
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -89,13 +108,28 @@
 					left: 5 
 			});
 		]
+		$("#dsjcycle_#GET{id_diapo}").cycle({ 
+			 fx:			"#CONFIG{sjcycle/sjcycle_fx}",
+			 timeout:	"#CONFIG{sjcycle/sjcycle_timeout}",
+			 speed:		"#CONFIG{sjcycle/sjcycle_speed}",
+			 sync:		"#CONFIG{sjcycle/sjcycle_sync}",
+			 pause:		"#CONFIG{sjcycle/sjcycle_pause}",
+			 cleartype: 1
+			 [,(#ENV{opt}|html_entity_decode)]
+			 });
 	});
+
+
 	</script>
-	[(#REM) diaporama documents images conteneur jquery cycle ]
-	<div class="dsjcycle" style='[float:(#ENV{align}|match{left|right});margin:[(#CONFIG{sjcycle/sjcycle_margin})]px;]'>
+	[(#REM) diaporama documents images conteneur jquery cycle 
+   revoir critere cond
+   possibilite de changer width et height localement]
+
+	<div class="#CONFIG{sjcycle/sjcycle_class}" id="dsjcycle_#GET{id_diapo}" style='[float:(#ENV{align}|match{left|right});margin:[(#CONFIG{sjcycle/sjcycle_margin})]px;][width:(#ENV{width})px;][height:(#ENV{height})px;]'>
+
 	<BOUCLE_img2(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{par num titre, date}{doublons}>
-		<div class="infobulle" style="width:#CONFIG{sjcycle/sjcycle_img_width}px;
-      										height:#CONFIG{sjcycle/sjcycle_img_height}px;
+		<div class="infobulle" style="width:#GET{width}px;
+      										height:#GET{height}px;
                                     padding:0px;
                                     margin:[(#CONFIG{sjcycle/sjcycle_img_margin})]px;">
          [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
@@ -106,23 +140,23 @@
                                          style="display:block;padding:0px;margin:0px;">
          ]
          [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|oui)
-            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height}}
+            [(#FICHIER|image_reduire{ #GET{width},
+                                      #GET{height}}
                       |image_alpha{0}
-                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height},
-                                      #CONFIG{sjcycle/sjcycle_img_position},
-                                      #CONFIG{sjcycle/sjcycle_img_background}}
+                      |image_recadre{ #GET{width},
+                                      #GET{height},
+                                      #GET{position},
+                                      #GET{background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
          [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|non)
-            [(#FICHIER|image_reduire{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height}}
-                      |image_recadre{ #CONFIG{sjcycle/sjcycle_img_width},
-                                      #CONFIG{sjcycle/sjcycle_img_height},
-                                      #CONFIG{sjcycle/sjcycle_img_position},
-                                      #CONFIG{sjcycle/sjcycle_img_background}}
+            [(#FICHIER|image_reduire{ #GET{width},
+                                      #GET{height}}
+                      |image_recadre{ #GET{width},
+                                      #GET{height},
+                                      #GET{position},
+                                      #GET{background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
@@ -140,6 +174,6 @@
          ]
 		</div> <!-- .infobulle -->
 	</BOUCLE_img2>
-	</div><!--end of #sjcycle-->
+	</div><!-- sjcycle-->
 	</B_img2>
 	<//B_img>

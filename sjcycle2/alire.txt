@@ -7,3 +7,9 @@ pour une compatibilite avec le plugin FancyBox de b_b
 - Init de la config dans sjcycle_insert_head
 - Si effet fade, pas la peine d'inclure le gros js
 - Traduction anglaise
+
+V 0.3 : Ajout de plusieurs fonctionnalites :
+- Afficher plusieurs diapos dans un meme article
+- Redefinir sur un diapo les largeurs et hauteurs des parametres definis dans la page de configuration du plugin
+- Possibilite d'utiliser les options du plugin jquery jcycle definies ici : http://malsup.com/jquery/cycle/options.html
+- Mise a jour du plugin jquery jcycle : 2.88 (08-JUN-2010)

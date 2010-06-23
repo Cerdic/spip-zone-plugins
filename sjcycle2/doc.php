@@ -15,7 +15,8 @@ if (isset($_GET['art']) && is_numeric($_GET['art'])) {
 <h3 style="padding:10px 2px;margin:0px;background:#fff;font-size:0.9em;text-align:center;border-bottom:5px solid #ddd;">1. D&eacute;cryptage de la syntaxe et param&egrave;tres du raccourci typographique "sjcycle"</h3>
 <div style="padding:0px;font-size:0.8em;margin:10px;">
 	<p style="background:#eee;color:#666;padding:10px;font-weight:700">Le raccourci typographique "sjcycle" permet d'ins&eacute;rer facilement un ou plusieurs diaporamas au sein d'un article : il vous suffit de le recopier &agrave; l’int&eacute;rieur de la case « Texte » de l'article, l&agrave; vous d&eacute;sirez situer le diaporama.
-	<br /><br />Ce raccourci comporte jusqu'&agrave; 3 param&egrave;tres, ordonn&eacute;s et s&eacute;par&eacute;s par le caract&egrave;re "|".</p>
+	<br /><br />
+	Ce raccourci comporte plusieurs param&egrave;tres s&eacute;par&eacute;s par le caract&egrave;re "|".</p>
 					<ol style="font-size:11px">
 						<li style="padding:10px 5px;margin:10px 0px;background:white;">
 							<h4 style="margin:0px;color:#666">&lt;sjcycle<span style="color:red">N</span>&gt;</h4>
@@ -53,6 +54,38 @@ if (isset($_GET['art']) && is_numeric($_GET['art'])) {
 							<p style="background:#eee;color:#666;padding:10px;font-weight:700">
 								<img src="./images/star.gif" align="absmiddle" alt="Astuce">Astuce : Vous pouvez utiliser le raccourci en ne passant qu'un seul num&eacute;ro d'image au param&egrave;tre "<em>|docs=</em>" afin de b&eacute;n&eacute;ficier de l'effet "FancyBox" : un clic sur l'image redimensionnée du diaporama permet d'afficher l'image originale en superposition.
 							</p>
+						</li>
+						<li style="padding:10px 5px;margin:10px 0px;background:white;">
+							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">opt=p1:v1,p2:v2</span>&gt;</h4>
+							<strong>Quatrième param&egrave;tre, "<span style="color:#666">|opt=p1:v1,p2:v2,[...],px:vx</span>", optionnel :</strong>
+						  <br />
+							Permet d'utiliser les options du script jcycle.
+							La liste complète est définie sur le site du plugin jquery jcycle <a href="http://malsup.com/jquery/cycle/options.html" target="_blank">par ici</a><br />
+							Ces valeurs écrasent 
+							celles définies dans la page de configuration du plugin.<br />
+							Les options possibles correspondent à celles de la version utilisée dans ce plugin spip et non à celles proposées sur la page citée ci-dessus. Actuellement, c'est la version 2.88 (08-JUN-2010) qui est utilisée
+							<br />
+							<strong>Exemple :</strong><br />
+						   &lt;sjcycle16|center|opt=autostop:1,autostopCount:5&gt; : diaporama sur toutes les images de l'article 16 mais qui s'arrêtera à la cinquième image<br />
+						   &lt;sjcycle16|center|opt=fx:'fade'&gt; : diaporama sur toutes les images de l'article 16 avec un effet de transition &quot;fade&quot; qui remplace celui défini globalement pour le site entier<br />
+						</li>
+						<li style="padding:10px 5px;margin:10px 0px;background:white;">
+							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">id_diapo=X</span>&gt;</h4>
+							<strong>Cinquième param&egrave;tre, "<span style="color:#666">|id_diapo=X</span>", optionnel :</strong>
+							<br />
+							Permet d'afficher plusieurs diaporamas dans le même article, chacun devant avoir un id_diapo différent
+							<br />
+							<strong>Exemple :</strong><br />
+						   &lt;sjcycle16|center|docs=101,102,103,104|id_diapo=1&gt;<br />
+						   &lt;sjcycle16|center|docs=105,106,107,108,109|id_diapo=2|opt=fx:'shuffle',timeout:2000&gt;<br />						   
+						   Ceci affiche 2 diaporamas dans le même article, le premier sur 4 images avec les paramètres par défaut du site et le second sur 5 images, avec des paramètres différents de ceux par défaut.<br />
+						</li>
+						<li style="padding:10px 5px;margin:10px 0px;background:white;">
+							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">width=XXX</span>&gt; / &lt;sjcycleN|ALIGN|<span style="color:red">heigth=XXX</span>&gt;</h4>
+							<strong>Sixième param&egrave;tre, &quot;<span style="color:#666">|width=XXX</span>&quot; et/ou &quot;<span style="color:#666">|heigth=XXX</span>&quot;, optionnel :</strong>
+							<br />
+							Ecrase la valeur width et/ou heigth
+							 définie dans la page de configuration du plugin.<br />
 						</li>
 					</ol>
 </div>

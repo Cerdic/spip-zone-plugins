@@ -11,12 +11,8 @@ function sjcycle_insert_head($flux){
 	$conf_jcycle = array_merge(init_sjcycle_default('default_value_list'),$conf_jcycle) ;
 	ecrire_config('sjcycle', serialize($conf_jcycle));
 
-	// Modif Yffic : Si effet fade, pas la peine d'inclure le gros js
-	if($conf_jcycle["sjcycle_fx"]=='fade') {
-		$javascript = find_in_path('javascript/jquery.cycle.lite.min.js');
-	} else {
-		$javascript = find_in_path('javascript/jquery.cycle.all.min.js');
-	}
+	$javascript = find_in_path('javascript/jquery.cycle.all.min.js');
+
 	
 	$flux .="\n".'<script src="'.url_absolue($javascript).'" type="text/javascript"></script>';
 	$flux .="\n".'<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/sjcycle.css')).'" type="text/css" media="screen" />';

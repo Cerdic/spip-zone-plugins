@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //Insertion du diapo
 	'sjcycle_boite_info' =>'Recopy one of these shortcuts and insert it inside the box "Text", where you wish to locate the slideshow in your article.<br /><br />
-		Click on <a href="../plugins/sjcycle/doc.php?art=@art@" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="<:sjcycle:sjcycle_nouvelle_fenetre:>" onclick="javascript:window.open(\'../plugins/sjcycle/doc.php?art=@art@\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="../prive/images/aide.gif" alt="Click to consult the help in a new window" class="aide" title="Click to consult the help in a new window" /></a> to consult the inline help.',
+		Click on <a href="../plugins/sjcycle/doc.php?art=@art@" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="<:sjcycle:sjcycle_nouvelle_fenetre:>" onclick="javascript:window.open(\'../plugins/sjcycle/doc.php?art=@art@\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="../prive/images/aide.gif" alt="Click to consult the help in a new window" class="aide" title="Click to consult the help and the different parameters in a new window" /></a> to consult the inline help.',
 		'sjcycle_nouvelle_fenetre' =>'Click to consult the help in a new window'
 );
 ?>
