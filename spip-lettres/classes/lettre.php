@@ -187,10 +187,7 @@
 		
 		function callback_clic_html($matches) {
 			$url = $matches[2];
-			if ((strncmp($url, 'mailto:',7) == 0)||(strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')== 0))
-			return 'href="'.$url.'"';
-			else
-			{
+			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')!=0 AND strncmp($url, 'mailto:',7)!=0)	{
 				$verification = sql_select('id_clic', 'spip_clics', 'url='.sql_quote($url).' AND id_lettre='.intval($this->id_lettre));
 				if (sql_count($verification) == 1) {
 					$arr = sql_fetch($verification);
@@ -201,14 +198,15 @@
 				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', false, true);
 				return 'href="'.$url_clic.'"';
 			}
+			else {		
+					return 'href="'.$url.'"';
+			}
 		}
 		
 		
 		function callback_clic_texte($matches) {
 			$url = $matches[0];
-			if ((strncmp($url, 'mailto:',7) == 0)||(strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')== 0))
-			return $url;
-			else {
+			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')!=0 AND strncmp($url, 'mailto:',7)!=0)	{
 				$verification = sql_select('id_clic', 'spip_clics', 'url='.sql_quote($url).' AND id_lettre='.intval($this->id_lettre));
 				if (sql_count($verification) == 1) {
 					$arr = sql_fetch($verification);
@@ -218,6 +216,9 @@
 				}
 				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', true, true);
 				return $url_clic;
+			}
+			else {
+				return $url;
 			}
 		}
 		
