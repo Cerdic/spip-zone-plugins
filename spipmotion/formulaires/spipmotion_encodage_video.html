@@ -40,6 +40,7 @@
 		#SET{acodecs_possibles,#ARRAY|push{vorbis}|push{libvorbis}}
 		#SET{vcodecs_possibles,#ARRAY|push{libtheora}|push{libdirac}}
 		#SET{vorbis,oui}
+		#SET{2_passes,non}
 	</BOUCLE_ogg>
 	<BOUCLE_flv(CONDITION){si #ENV{valeur}|=={flv}|oui}>
 		[(#REM)
@@ -50,12 +51,14 @@
 		#SET{acodecs_possibles,#ARRAY|push{libmp3lame}|push{aac}|push{libfaac}|push{libspeex}}
 		#SET{vcodecs_possibles,#ARRAY|push{flv}|push{libx264}}
 		#SET{presets_qualite,#ARRAY|push{hq}|push{normal}|push{medium}|push{placebo}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}}
+		#SET{2_passes,oui}
 	</BOUCLE_flv>
 	<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{mov}|push{mp4}|push{m4v}}|oui}>
 		#SET{acodecs_possibles,#ARRAY|push{libfaac}|push{aac}|push{libmp3lame}}
 		#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{libxvid}|push{mpeg4}}
 		#SET{formats_possibles,#ARRAY|push{ipod}|push{psp}|push{mp4}|push{m4v}}
 		#SET{presets_qualite,#ARRAY|push{hq}|push{normal}|push{medium}|push{placebo}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}}
+		#SET{2_passes,oui}
 	</BOUCLE_mp4>
 	<//B_flv>
 	<//B_ogg>
@@ -93,6 +96,12 @@
 				explication=<:spipmotion:explication_presets_qualite:>,
 				cacher_option_intro=oui,
 				datas=#GET{presets_qualite}})]
+		]
+		[(#GET{2_passes}|=={oui}|oui)
+			[(#SAISIE{selection,passes_#ENV{valeur},
+				label=<:spipmotion:label_passes_encodage:>,
+				cacher_option_intro=oui,
+				datas=#ARRAY{1,<:spipmotion:label_passes_1_encodage:>,2,<:spipmotion:label_passes_2_encodage:>}})]
 		]
 	]
 

@@ -7,7 +7,7 @@
 	Quentin Drouet (kent1)
 	</auteur>
 	<version>
-	0.4.5
+	0.4.6
 	</version>
 	<version_base>0.7.2</version_base>
 	<etat>
@@ -66,7 +66,7 @@
 
 	<install>base/spipmotion_upgrade.php</install>
 
-	<necessite id="SPIP" version="[2.1.0-rc;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id='cfg' version='[1.13;]' />
 	<necessite id='saisies' version='[1.0;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />

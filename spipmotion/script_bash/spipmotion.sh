@@ -68,6 +68,8 @@ while test -n "${1}"; do
 			exit 1;;
 			esac
 		shift;;
+		--pass) pass="-pass ${2}"
+		shift;;
 		--size) size="-s ${2}"
 		shift;;
 		--bitrate) bitrate="-vb ${2}.k"
@@ -108,26 +110,6 @@ esac
 
 case "$chemin" in
   "") chemin="/usr/local/bin/ffmpeg"
-esac
-
-########### Arguments pour audio
-case "$audiobitrate_quality" in
-  "")
-  case "$sortie" in
-  	*".mov"|*".mp4"|*".m4v"|*".mp3") audiobitrate_quality="-ab 128.k" ;;
-  	*".flv") audiobitrate_quality="-ab 64.k" ;;
-  	*".ogg"|*".oga"|*".ogv") audiobitrate_quality="-aq 50" ;;
-  esac
-esac
-
-case "$acodec" in
-	"")
-	case "$sortie" in
-  		*".mp3"|*".flv") acodec="-acodec libmp3lame" ;;
-  		*".mov"|*".mp4"|*".m4v") acodec="-acodec libfaac";;
-  		*".flac") acodec="-acodec flac" ;;
-  		*".ogg"|*".oga"|*".ogv") acodec="-acodec vorbis" ;;
-  	esac
 esac
 
 ########### Arguments spécifiques aux videos
@@ -183,17 +165,19 @@ fi
 
 case "$sortie" in
   *".mp3"|*".flac"|*".ogg"|*".oga" )
-  	echo "On est dans un son"
+  	echo "SPIPmotion v$VERSION
+
+On encode un son
+"
   	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie"
   	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie ;;
   *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v" )
   	echo "SPIPmotion v$VERSION
 
 On encode une video
-
 "
-  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $size $vcodec $fps $bitrate $params_sup $fpre -y $sortie"
-  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $size $vcodec $fps $bitrate $params_sup $fpre -y $sortie ;;
+  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie"
+  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie ;;
 esac
 
 exit $?

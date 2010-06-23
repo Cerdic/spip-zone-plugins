@@ -257,28 +257,20 @@ function encodage($source,$doc_attente){
 			 * http://rob.opendot.cl/index.php/useful-stuff/ipod-video-guide/
 			 */
 			if(lire_config("spipmotion/format_$extension_attente",'ipod') == 'ipod'){
-				$infos_sup .= "-vpre $preset_quality";
-				$infos_sup .= ' -vpre ipod640';
+				$infos_sup_normal .= ' -vpre ipod640';
 			}
 			/**
 			 * Encodage pour PSP
 			 * http://rob.opendot.cl/index.php/useful-stuff/psp-video-guide/
 			 */
 			if(lire_config("spipmotion/format_$extension_attente",'ipod') == 'psp'){
-				$infos_sup .= "-vpre $preset_quality";
-				$infos_sup .= ' -vpre main';
-				$infos_sup .= ' -level 21';
-				$infos_sup .= ' -refs 2';
+				$infos_sup_normal .= ' -vpre main';
+				$infos_sup_normal .= ' -level 21';
+				$infos_sup_normal .= ' -refs 2';
 			}
-			/**
-			 * Si on n'est pas dans un de ces 2 formats on encode en hq
-			 */
-			if(!$infos_sup){
-				$infos_sup .= "-vpre $preset_quality";
-			}
-			$infos_sup .= " -aspect $width_finale:$height_finale";
-			$infos_sup .= ' -threads 0';
-			$infos_sup .= ' -f '.lire_config("spipmotion/format_$extension_attente",'ipod');
+			$infos_sup_normal .= " -aspect $width_finale:$height_finale";
+			$infos_sup_normal .= ' -threads 0';
+			$infos_sup_normal .= ' -f '.lire_config("spipmotion/format_$extension_attente",'ipod');
 		}
 		$fichier_texte = "$dossier$query.txt";
 
@@ -289,19 +281,46 @@ function encodage($source,$doc_attente){
 		 * Si l'encodeur choisi est ffmpeg2theora et qu'il existe toujours, on l'utilise
 		 * sinon on utilise notre script pour ffmpeg
 		 */
-		if($infos_sup){
-			$infos_sup = "--params_supp \"$infos_sup\"";
-		}
+		$passes = lire_config("spipmotion/passes_$extension_attente",'1');
+		spip_log("Nombre de passes : $passes",'spipmotion');
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
-			$encodage = "ffmpeg2theora $chemin -v 8 -V $vbitrate $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
+			if($passes == 2)
+				$deux_passes = '--two-pass';
+			$encodage = "ffmpeg2theora $chemin -v 8 -V $vbitrate $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
+			spip_log($encodage,'spipmotion');
+			$lancement_encodage = exec($encodage,$retour,$retour_int);
+			spip_log($retour_int,'spipmotion');
 		}else{
-			$encodage = find_in_path('script_bash/spipmotion.sh')." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels_ffmpeg $bitrate $infos_sup --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+			if(($passes == "2") && (($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv')){
+				spip_log('on encode en 2 passes','spipmotion');
+				$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
+				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 $infos_sup_normal\"";
+				$encodage_1 = find_in_path('script_bash/spipmotion.sh')." --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+				spip_log($encodage_1,'spipmotion');
+				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
+				spip_log($retour_int_1,'spipmotion');
+				$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal" : $infos_sup_normal;
+				if($infos_sup_normal){
+					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
+				}
+				$encodage = find_in_path('script_bash/spipmotion.sh')." --pass 2 $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+				spip_log($encodage,'spipmotion');
+				$lancement_encodage = exec($encodage,$retour,$retour_int);
+				spip_log($retour_int,'spipmotion');
+			}else{
+				spip_log('on encode en 1 passe','spipmotion');
+				$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
+				if($infos_sup_normal){
+					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
+				}
+				$encodage = find_in_path('script_bash/spipmotion.sh')." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+				spip_log($encodage,'spipmotion');
+				$lancement_encodage = exec($encodage,$retour,$retour_int);
+				spip_log($retour_int,'spipmotion');
+			}
 		}
-		spip_log($encodage,'spipmotion');
-		$lancement_encodage = exec($encodage,$retour,$retour_int);
-		spip_log($retour_int,'spipmotion');
 
-		if(filesize($fichier_temp) > 100){
+		if($retour_int == 0){
 			$encodage_ok = true;
 		}else{
 			spip_log("l'encodage est en erreur",'spipmotion');
@@ -328,7 +347,6 @@ function encodage($source,$doc_attente){
 		 * le pipeline post-edition appelé par l'ajout du document
 		 */
 		$mode = 'document';
-		$invalider = true;
 
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 		$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $id_objet, $mode, '', $actif,'','','');
@@ -342,13 +360,7 @@ function encodage($source,$doc_attente){
 			spip_log('Il y a une erreur, le fichier n est pas copié','spipmotion');
 		}
 
-		/**
-		 * Invalidation du cache
-		 */
-		if ($invalider) {
-			include_spip('inc/invalideur');
-			suivre_invalideur("0",true);
-		}
+
 	}
 	/**
 	 * Si l'encodage n'est pas ok ...
@@ -357,6 +369,12 @@ function encodage($source,$doc_attente){
 	else{
 		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur'),"id_spipmotion_attente=".intval($doc_attente));
 	}
+
+	/**
+	 * Invalidation du cache
+	 */
+		include_spip('inc/invalideur');
+		suivre_invalideur("0",true);
 
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('spipmotion_encodage', intval($doc_attente),

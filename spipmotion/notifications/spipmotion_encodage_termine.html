@@ -10,7 +10,7 @@
 [[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - <:spipmotion:message_encodage_sujet_termine|nettoyer_titre_email|filtrer_entites|trim:>
 <:spipmotion:message_encodage_oui{id_document=#ID_DOCUMENT}:>
 
-#SET{objet,#_attente:OBJET} #SET{id_objet,#_attente:ID_OBJET} [(#SET{url,[(#_attente:ID_OBJET|generer_url_entite{#_attente:OBJET})]})]
+#SET{objet,#_attente:OBJET} #SET{id_objet,#_attente:ID_OBJET} [(#OBJET|=={article}|oui)[(#SET{url,[(#URL_ARTICLE{#_attente:ID_OBJET})]})]][(#OBJET|=={rubrique}|oui)[(#SET{url,[(#URL_RUBRIQUE{#_attente:ID_OBJET})]})]]
 <:spipmotion:message_encodage_objet_lie{objet=#GET{objet},id_objet=#GET{id_objet}}:>
 #INFO_TITRE{#_attente:OBJET,#_attente:ID_OBJET}&nbsp;-&nbsp;[(#GET{url}|url_absolue)]
 </BOUCLE_document></BOUCLE_attente>
