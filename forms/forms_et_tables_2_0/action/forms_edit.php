@@ -67,7 +67,7 @@ function Forms_update_edition_champ($id_form,$champ) {
 		if ($type == 'select' || $type == 'multiple') {
 			$res2 = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 			while ($row2 = spip_fetch_array($res2)){
-				if ($titre = _request($row2['choix']))
+				if (($titre = _request($row2['choix'])) !== FALSE)
 					spip_query("UPDATE spip_forms_champs_choix SET titre="._q($titre)." WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($row2['choix']));
 			}
 			if (strlen($ordre = _request('ordre'))){
@@ -132,7 +132,7 @@ function Forms_update($id_form){
 		//adapatation SPIP2
 		//spip_query("INSERT INTO spip_forms (titre) VALUES ("._q($titre).")");
 		//$id_form = spip_insert_id();
-		
+
 		$id_form = sql_insertq('spip_forms',array('titre'=>_q($titre)));
 	}
 	// maj
@@ -257,10 +257,10 @@ function action_forms_edit(){
 			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ);
 			if ($redirect && $ajout_choix) $redirect = parametre_url($redirect,"ajout_choix",$ajout_choix);
 		}
-	}	
-	
+	}
+
 	// JES adaptation du plugin à SPIP2, suppression de la fonction urldecode sur le parametre 'redirect'
-	
+
 	if ($redirect)
 		redirige_par_entete(str_replace("&amp;","&",$redirect));
 }
