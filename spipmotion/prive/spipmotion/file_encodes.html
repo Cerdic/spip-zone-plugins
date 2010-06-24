@@ -36,6 +36,7 @@
 			<th><:spipmotion:thead_id_auteur:></th>
 			<th><:spipmotion:thead_objet_attache:></th>
 			<th><:spipmotion:thead_format:></th>
+			<th><:spipmotion:thead_duree_encodage:></th>
 			<th><:spipmotion:thead_date:></th>
 		</tr>
 	</thead>
@@ -64,6 +65,12 @@
 		</td>
 		<td>
 			#EXTENSION
+		</td>
+		<td>
+			[(#INFOS|table_valeur{debut_encodage}|is_numeric|et{#INFOS|table_valeur{fin_encodage}|is_numeric}|oui)
+				#SET{duree,#INFOS|table_valeur{fin_encodage}|moins{#INFOS|table_valeur{debut_encodage}}}
+				[(#VAL{H:i:s}|gmdate{#GET{duree}})]
+			]
 		</td>
 		<td>[(#MAJ)]</td>
 	</tr>

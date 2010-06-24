@@ -165,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'thead_date' => 'Date',
+	'thead_duree_encodage' => 'Encoding duration',
 	'thead_format' => 'Format',
 	'thead_id_auteur' => 'User',
 	'thead_id_file' => 'Id in the queue',
