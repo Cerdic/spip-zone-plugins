@@ -81,10 +81,10 @@ if (isset($_GET['art']) && is_numeric($_GET['art'])) {
 						   Ceci affiche 2 diaporamas dans le même article, le premier sur 4 images avec les paramètres par défaut du site et le second sur 5 images, avec des paramètres différents de ceux par défaut.<br />
 						</li>
 						<li style="padding:10px 5px;margin:10px 0px;background:white;">
-							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">width=XXX</span>&gt; / &lt;sjcycleN|ALIGN|<span style="color:red">heigth=XXX</span>&gt;</h4>
-							<strong>Sixième param&egrave;tre, &quot;<span style="color:#666">|width=XXX</span>&quot; et/ou &quot;<span style="color:#666">|heigth=XXX</span>&quot;, optionnel :</strong>
+							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">width=XXX</span>&gt; / &lt;sjcycleN|ALIGN|<span style="color:red">height=XXX</span>&gt;</h4>
+							<strong>Sixième param&egrave;tre, &quot;<span style="color:#666">|width=XXX</span>&quot; et/ou &quot;<span style="color:#666">|height=XXX</span>&quot;, optionnel :</strong>
 							<br />
-							Ecrase la valeur width et/ou heigth
+							Ecrase la valeur width et/ou height
 							 définie dans la page de configuration du plugin.<br />
 						</li>
 					</ol>
