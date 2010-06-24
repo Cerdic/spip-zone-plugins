@@ -80,11 +80,14 @@ function glossaire_accents_callback($matches) {
 	return '(?:'.join('|', $a).')';
 }
 function glossaire_echappe_balises_callback($matches) {
- return cs_code_echappement($matches[0], 'GLOSS');
+ global $gloss_ech, $gloss_ech_id;
+ $gloss_ech[] = $matches[0];
+ return '@@E'.$gloss_ech_id++.'@@';
 }
 function glossaire_echappe_mot_callback($matches) {
- global $gloss_id;
- return "@@GLOSS".cs_code_echappement($matches[0], 'GLOSS')."#{$gloss_id}@@";
+ global $gloss_mots, $gloss_mots_id, $gloss_id;
+ $gloss_mots[] = $matches[0];
+ return '@@M'.$gloss_mots_id++.'#'.$gloss_id.'@@';
 }
 
 function glossaire_safe($texte) {
@@ -151,7 +154,7 @@ function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
-	global $gloss_id;
+	global $gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id;
 	// si [!glossaire] est trouve on sort
 	if(strpos($texte, _CS_SANS_GLOSSAIRE)!==false)
 		return str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
@@ -163,12 +166,15 @@ function cs_rempl_glossaire($texte) {
 		$glossaire_generer_url = function_exists('glossaire_generer_url')?'glossaire_generer_url':'glossaire_generer_url_dist';
 		$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 		$glossaire_generer_mot = function_exists('glossaire_generer_mot')
-			?'glossaire_generer_mot(\'\\2\', \'\\1\')':'\'\\1\''; // 'glossaire_generer_mot_dist(\'\\2\', \'\\1\')';
+			?'glossaire_generer_mot(\'\\2\', $GLOBALS[\'gloss_mots\'][\\1])':'$GLOBALS[\'gloss_mots\'][\\1]'; // 'glossaire_generer_mot_dist(\'\\2\', $GLOBALS[\'gloss_mots\'][\\1])';
 		$glossaire_generer_mot = '"<a $table1[\\2]_".$GLOBALS["gl_i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>".'.$glossaire_generer_mot.'."</span>$table2[\\2]</a>"';
 	}
 	$unicode = false;
 	$mem = $GLOBALS['toujours_paragrapher'];
 	$GLOBALS['toujours_paragrapher'] = false;
+	// initialisation des globales d'echappement
+	$gloss_ech = $gloss_mots = array();
+	$gloss_ech_id = $gloss_mots_id = 0;
 	// prudence 1 : protection des liens SPIP
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
@@ -208,9 +214,14 @@ function cs_rempl_glossaire($texte) {
 		}
 	}
 	$GLOBALS['toujours_paragrapher'] = $mem;
+	// remplacement des echappements
+	$texte = preg_replace(",@@E(\d+)@@,e", '$GLOBALS[\'gloss_ech\'][\\1]', $texte);
 	// remplacement final des balises posees ci-dessus
 	$GLOBALS['gl_i'] = 0;
-	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", $glossaire_generer_mot, echappe_retour($texte, 'GLOSS'));
+	$texte = preg_replace(",@@M(\d+)#(\d+)@@,e", $glossaire_generer_mot, $texte);
+	// nettoyage
+	unset($gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id);
+	return $texte;
 }
 
 function cs_glossaire($texte) {
