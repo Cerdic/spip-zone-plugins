@@ -24,6 +24,10 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			creer_base();
 			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
 			$ffmpeg_infos(true);
+
+			$ffmpeg_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
+			$ffmpeg_binaires('',true);
+
 			echo '<p>'._T('spipmotion:install_creation_base').'</p>';
 			echo '<p>'._T('spipmotion:install_ajout_champs_documents').'</p>';
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
@@ -73,6 +77,24 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			 */
 			sql_alter("TABLE spip_documents CHANGE `pixelformat` `pixelformat` VARCHAR(255) DEFAULT '' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version='0.7.2');
+		}
+		if (version_compare($current_version,'0.7.3','<')){
+			/**
+			 * On récupère les informations de spipmotion si possible
+			 */
+			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+			$ffmpeg_infos(true);
+
+			$ffmpeg_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
+			$ffmpeg_binaires('',true);
+
+			maj_tables('spip_spipmotion_attentes');
+			/**
+			 * On invalide le cache
+			 */
+			include_spip('inc/invalideur');
+			suivre_invalideur("1");
+			ecrire_meta($nom_meta_base_version,$current_version='0.7.3');
 		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/

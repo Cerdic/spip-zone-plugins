@@ -27,19 +27,19 @@
 function genie_spipmotion_file($time)  {
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log("Il y a $nb_encodages vidéo(s) à encoder","spipmotion");
-	if(($nb_encodages>0) && (lire_config('spipmotion_casse') != 'oui')){
-		$doc_attente = sql_fetsel("*","spip_spipmotion_attentes","encode='non'","","maj DESC","1");
+	$en_cours = sql_getfetsel('id_spipmotion_attente','spip_spipmotion_attentes',"encode='en_cours'");
+	spip_log("L'id $en_cours de la file d'attente est en cours d'encodage",'spipmotion');
+	if(($nb_encodages>0) && (lire_config('spipmotion_casse') != 'oui') && !$en_cours){
+		$doc_attente = sql_fetsel("*","spip_spipmotion_attentes","encode='non'","","id_spipmotion_attente ASC","1");
 		$id_document = $doc_attente['id_document'];
 		$id_doc_attente = $doc_attente['id_spipmotion_attente'];
 		$document = sql_fetsel('*','spip_documents','id_document='.sql_quote($id_document));
 		if($document['id_document']){
+			spip_log('on encode le doc '.$id_document,'spipmotion');
 			$encoder = charger_fonction('encodage','inc');
 			$encoder($document,$id_doc_attente);
-			spip_log('on encode le doc '.$id_document,'spipmotion');
 		}else{
-			spip_log("Le document $id_document n'existe plus",'spipmotion');
 			sql_delete('spip_spipmotion_attentes','id_document='.sql_quote($id_document));
-			spip_log("On relance la file","spipmotion");
 			genie_spipmotion_file($time);
 		}
 

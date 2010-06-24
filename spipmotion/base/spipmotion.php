@@ -20,6 +20,7 @@ function spipmotion_declarer_tables_principales($tables_principales){
 		"id_auteur" => "BIGINT(21) NOT NULL DEFAULT '0'",
 		"extension"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"encode"	=> "VARCHAR(21)", // Peut être oui,non,en_cours
+		"infos" => "TEXT DEFAULT '' NOT NULL", // infos serialisées
 		"maj" => "TIMESTAMP"
 	);
 	$spip_spipmotion_attentes_key = array(

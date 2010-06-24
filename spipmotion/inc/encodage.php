@@ -34,7 +34,8 @@ function encodage($source,$doc_attente){
 	 * - changer les messages sur le site (ce media est en cours d'encodage par exemple)
 	 * - indiquer si nécessaire le statut
 	 */
-	sql_updateq("spip_spipmotion_attentes",array('encode'=>'en_cours'),"id_spipmotion_attente=".intval($doc_attente));
+	$infos_encodage = array('debut_encodage' => time());
+	sql_updateq("spip_spipmotion_attentes",array('encode'=>'en_cours','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 
 	$attente = sql_fetsel("*","spip_spipmotion_attentes","id_spipmotion_attente=".intval($doc_attente));
 	$extension_attente = $attente['extension'];
@@ -294,14 +295,14 @@ function encodage($source,$doc_attente){
 			if(($passes == "2") && (($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv')){
 				spip_log('on encode en 2 passes','spipmotion');
 				$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
-				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 $infos_sup_normal\"";
+				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $query $infos_sup_normal\"";
 				$encodage_1 = find_in_path('script_bash/spipmotion.sh')." --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
 				spip_log($retour_int_1,'spipmotion');
 				$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal" : $infos_sup_normal;
 				if($infos_sup_normal){
-					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
+					$infos_sup_normal = "--params_supp \"-passlogfile $query $infos_sup_normal\"";
 				}
 				$encodage = find_in_path('script_bash/spipmotion.sh')." --pass 2 $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 				spip_log($encodage,'spipmotion');
@@ -353,7 +354,8 @@ function encodage($source,$doc_attente){
 
 		if(intval($x) > 1){
 			unlink($fichier_temp);
-			sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui'),"id_spipmotion_attente=".intval($doc_attente));
+			$infos_encodage['fin_encodage'] = time();
+			sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 			sql_updateq("spip_documents",array('id_orig'=>$attente['id_document']),'id_document='.intval($x));
 		}else{
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
@@ -367,7 +369,9 @@ function encodage($source,$doc_attente){
 	 * On donne un statut "erreur" dans la file afin de ne pas la bloquer
 	 */
 	else{
-		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur'),"id_spipmotion_attente=".intval($doc_attente));
+		$infos_encodage['fin_encodage'] = time();
+		$infos_encodage['log'] = spip_file_get_contents($fichier_log);
+		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 	}
 
 	/**
