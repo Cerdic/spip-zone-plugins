@@ -47,6 +47,7 @@ function notifications_spipmotion_encodage_dist($quoi, $id, $options){
 				'data'=>$tous)
 		);
 		$msg_mail = recuperer_fond('notifications/spipmotion_encodage_webmestre',array('id_spipmotion_attente'=>$id,'fichier_log'=>$options['fichier_log']));
+
 		/**
 		 * Nettoyage de la liste d'emails en vérifiant les doublons
 		 * et la validité des emails
