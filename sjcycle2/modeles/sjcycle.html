@@ -1,9 +1,11 @@
-	[(#SET{id_diapo,   [(#ENV{id_diapo, 0})]})]
-   [(#SET{width,      [(#ENV{width,     #CONFIG{sjcycle/sjcycle_img_width}})]})]
-   [(#SET{height,     [(#ENV{height,    #CONFIG{sjcycle/sjcycle_img_height}})]})]
-   [(#SET{position,   [(#ENV{position,  #CONFIG{sjcycle/sjcycle_img_position}})]})]
-   [(#SET{background, [(#ENV{background,#CONFIG{sjcycle/sjcycle_img_background}})]})]
-	<B_img>
+[(#SET{id_diapo,   [(#ENV{id_diapo, 0})]})]
+[(#SET{width,      [(#ENV{width,     #CONFIG{sjcycle/sjcycle_img_width}})]})]
+[(#SET{height,     [(#ENV{height,    #CONFIG{sjcycle/sjcycle_img_height}})]})]
+[(#SET{position,   [(#ENV{position,  #CONFIG{sjcycle/sjcycle_img_position}})]})]
+[(#SET{background, [(#ENV{background,#CONFIG{sjcycle/sjcycle_img_background}})]})]
+[(#SET{cssfancybox, [(#EVAL{8}|randomString)]})]
+   
+<B_img>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		[(#CONFIG{sjcycle/sjcycle_tooltip}|=={1}|oui)
@@ -19,6 +21,11 @@
 					extraClass: "pretty", 
 					top: -15, 
 					left: 5 
+			});
+		]
+		[(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+			$("a.#GET{cssfancybox}").fancybox({
+				'hideOnContentClick': false
 			});
 		]
 		$("#dsjcycle_#GET{id_diapo}").cycle({ 
@@ -48,8 +55,8 @@
                                     margin:[(#CONFIG{sjcycle/sjcycle_img_margin})]px;">
          [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE" 
-                                         class="fancybox"
-                                         rel="fancybox"
+                                         class="#GET{cssfancybox}"
+                                         rel="#GET{cssfancybox}"
                                          title="[(#TITRE|supprimer_numero|attribut_html)]"
                                          style="display:block;padding:0px;margin:0px;">
          ]
@@ -89,4 +96,4 @@
 		</div> <!-- .infobulle -->
 	</BOUCLE_img>
 	</div><!-- sjcycle-->
-	</B_img>
+</B_img>
