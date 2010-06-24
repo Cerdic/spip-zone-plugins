@@ -40,7 +40,7 @@
 		#SET{acodecs_possibles,#ARRAY|push{vorbis}|push{libvorbis}}
 		#SET{vcodecs_possibles,#ARRAY|push{libtheora}|push{libdirac}}
 		#SET{vorbis,oui}
-		#SET{2_passes,non}
+		#SET{2_passes,oui}
 	</BOUCLE_ogg>
 	<BOUCLE_flv(CONDITION){si #ENV{valeur}|=={flv}|oui}>
 		[(#REM)

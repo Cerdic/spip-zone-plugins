@@ -87,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nom_fichier' => 'File name : ',
 	'info_nombre_encodage_attente' => 'There are 3 document(s) waiting for encoding',
 	'info_nombre_encodes' => '@nb@ files have been properly encoded.',
+	'info_objet_non_publie' => 'Not published',
 	'info_page_ffmpeg_infos' => 'This page is only available for information. It shows the complete configuration of the FFMpeg installation on your system.',
 	'info_profils_son' => 'Audio encoding profile(s)',
 	'info_profils_video' => 'Video encoding profile(s)',
