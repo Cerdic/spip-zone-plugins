@@ -10,11 +10,11 @@ if(!defined("_ECRIRE_INC_VERSION")) return;
 // Ici se definissent les constantes du Couteau Suisse
 
 // RSS de trac
-@define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');
+@define('_CS_RSS_SOURCE', 'http://zone.spip.org/log/_plugins_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');
 // Doc de spip-contrib.net
 @define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 // Revisions du CS
-@define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
+@define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
 // On met a jour le flux rss toutes les 2 heures
 define('_CS_RSS_UPDATE', 2*3600);
 define('_CS_RSS_COUNT', 15);

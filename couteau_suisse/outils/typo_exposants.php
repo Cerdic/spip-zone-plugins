@@ -4,7 +4,7 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1564
 
 // TODO : raccourci pour les exposants et indices (Pouce^2 ou Pouce^2^, H_2O ou H_2_O ou H,,2,,O
-// exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
+// exemple : http://zone.spip.org/wiki/WikiFormatting
 
 include_spip('inc/charsets');
 @define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');

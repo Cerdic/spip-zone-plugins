@@ -238,7 +238,7 @@ add_outil( array(
 	'pipeline:pre_boucle' => 'previsu_redac_pre_boucle',
 	'pipeline:boite_infos' => 'previsu_redac_boite_infos',
 	// fichier distant pour les pipelines
-	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/32230/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
+	'distant_pipelines' => 'http://zone.spip.org/export/32230/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
 	'version-min' => '1.9300',
 ));
 
@@ -255,7 +255,7 @@ add_outil( array(
 	'auteur' => 'Nicolas Hoizey, St&eacute;phanie Caron',
 	'pipeline:pre_boucle' => 'masquer_pre_boucle',
 	// fichier distant pour le pipeline
-	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/35809/_plugins_/masquer/masquer_pipelines.php',
+	'distant_pipelines' => 'http://zone.spip.org/export/35809/_plugins_/masquer/masquer_pipelines.php',
 	'code:options' => "%%mot_masquer%%",
 	'code:fonctions' => 'if (!function_exists("critere_tout_voir_dist")){
   function critere_tout_voir_dist($idb, &$boucles, $crit) {

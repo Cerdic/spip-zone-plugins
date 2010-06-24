@@ -9,7 +9,7 @@ include_spip('inc/distant');
 define('_MAJ_SVN_FILE', 'file:///home/svn/repository/spip-zone/');
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
 define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
-define('_MAJ_LOG_DEBUT', 'http://zone.spip.org/trac/spip-zone/log/');
+define('_MAJ_LOG_DEBUT', 'http://zone.spip.org/log/');
 define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
 
