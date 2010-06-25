@@ -10,6 +10,5 @@
 	<lien></lien>
 	<prefix>trouver_objet</prefix>
  	<necessite id='SPIP' version='[2.0.9;]' />
-	<necessite id='grappes' version='[0.2.3;]' />
 	<categorie>recherche</categorie>
 </plugin>
