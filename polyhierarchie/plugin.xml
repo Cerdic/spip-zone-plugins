@@ -1,12 +1,11 @@
 <plugin>
 	<nom>PolyHierarchie</nom>
 	<icon>images/polyhier-128.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
- 	[Cedric Morin->http://www.yterium.com]
-_ &#169; 2009
+	<auteur>[Cedric Morin->http://www.yterium.com]
+_ &#169; 2009-2010
 	</auteur>
 	<licence>GPL</licence>
-	<version>0.1</version>
+	<version>0.3.0</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
 	<description>
@@ -26,11 +25,15 @@ _ &#169; 2009
 		<inclure>polyhier_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_droite</nom>
+		<nom>affiche_enfants</nom>
 		<inclure>polyhier_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_droite</nom>
+		<nom>objet_compte_enfants</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_rubriques</nom>
 		<inclure>polyhier_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -53,10 +56,13 @@ _ &#169; 2009
 		<nom>pre_edition</nom>
 		<inclure>polyhier_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
 
 
 
- 	<categorie>navigation</categorie>
- 	<necessite id='SPIP' version='[2.0.7;]' />
+ 	<necessite id='SPIP' version='[2.0.10;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
 </plugin>
