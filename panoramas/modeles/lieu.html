@@ -7,7 +7,7 @@
 	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){tous}{id_document=#ID_PHOTO}>
 		[(#SET{ratio,[(#HAUTEUR|div{#_visites:HAUTEUR})]})]
-		<img src="#URL_DOCUMENT" unselectable="on" style="-moz-user-select: none; visibility: hidden;" class="panorama#ID_LIEU" width="[(#LARGEUR|div{#GET{ratio}})]" height="#_visites:HAUTEUR"  
+		<img src="#URL_DOCUMENT" style="visibility: hidden;" class="panorama#ID_LIEU" width="[(#LARGEUR|div{#GET{ratio}})]" height="#_visites:HAUTEUR"  
 	</BOUCLE_photo>
 	 alt="[(#_lieux:TITRE|texte_backend)]" usemap="map#ID_LIEU" />
 	<B_interactions>
@@ -28,11 +28,15 @@
 		
 	</map>
 	</B_interactions>
+
+	[(#REM) documents joints au lieu ]
+	
+
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("img.panorama#ID_LIEU").panorama({
 	                auto_start: 0,
-                 	control_display: 'yes',
+                 	control_display: 'none',
 			viewport_width: <BOUCLE_visiteparent(VISITES_VIRTUELLES){id_visite}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent>[,
 			start_position: (#DECALAGE_X)][,
 			mode_360: (#BOUCLER|=={'oui'}|?{1,0})]<BOUCLE_recherchelargeurimage(DOCUMENTS){tous}{id_document=#ID_PHOTO}>[,
@@ -561,7 +565,8 @@ $(document).ready(function(){
 		$('.panorama#ID_LIEU').css('visibility','visible');
 		$('.panorama-fond-demarrer').fadeOut(3000);
 
-					
+			
+		$('.panorama-viewport').mousedown(function(){return false;}).bind('contextmenu',function(){return false;});
 			
 	});
 function trim (myString)
