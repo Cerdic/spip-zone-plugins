@@ -14,7 +14,7 @@ $GLOBALS['gestdoc_liste_champs'][] = 'chapo';
 // http://doc.spip.org/@marquer_doublons_documents
 function inc_marquer_doublons_doc_dist($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
 	$champs_selection=array();
-		foreach ($GLOBALS['gestdoc_liste_champs'] as &$champs_choisis) {
+		foreach ($GLOBALS['gestdoc_liste_champs'] as $champs_choisis) {
 			if ( isset($champs[$champs_choisis]) )
 			array_push($champs_selection,$champs_choisis);
 		}
@@ -28,12 +28,12 @@ function inc_marquer_doublons_doc_dist($champs,$id,$type,$id_table_objet,$table_
 	// charger le champ manquant en cas de modif partielle de l	'objet
 	// seulement si le champ existe dans la table demande
 	
-		foreach ($champs_selection as &$champs_a_parcourir) {
-		if (isset($desc['field'][$champs_a_parcourir])) {
-		$load = $champs_a_parcourir;
-		$champs_a_traiter .= $champs[$champs_a_parcourir];
-		}
-	}	
+		foreach ($champs_selection as $champs_a_parcourir) {
+			if (isset($desc['field'][$champs_a_parcourir])) {
+			$load = $champs_a_parcourir;
+			$champs_a_traiter .= $champs[$champs_a_parcourir];
+			}
+		}	
 
 	if ($load){
 		$champs[$load] = "";
