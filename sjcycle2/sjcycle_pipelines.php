@@ -31,6 +31,7 @@ width:'.$conf_jcycle["sjcycle_width"].'px;
 height:'.$conf_jcycle["sjcycle_height"].'px;
 display:block;
 /*overflow: hidden;*/ /* Modif Yffic*/
+clear:both;
 }
 </style>
 <script type="text/javascript">
