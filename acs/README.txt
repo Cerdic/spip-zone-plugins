@@ -1,12 +1,12 @@
 
              Assistant de Configuration du Site
 
-Version : 0.5
+Version : 0.6
 
 Documentation : http:// acs.geomaticien.org
 Licence: cf LICENCES.txt
 ________________________________________________________________________________
-Dernière mise à jour de ce document le: 16-05-2009
+Dernière mise à jour de ce document le: 21-06-2010
 Par: Daniel FAIVRE
 ________________________________________________________________________________
 
@@ -30,7 +30,7 @@ de l'espace privé de SPIP et de n'importe quel plugin installé.
 ________________________________________________________________________________
 
 Installation:
-1) Copier le dossier acs dans le dossier plugins de la racine du site SPIP ou utiliser l'installation automatique des plugins (SPIP 2).
+1) Utiliser la procédure d'installation automatique de plugins de spip 2, ou copier le dossier acs dans le dossier plugins de la racine du site SPIP.
 2) Se connecter à l'espace ecrire en tant qu'auteur n°1 (qui doit être administrateur).
 3) Choisir l'option "Configurer le site" du menu "Configuration" de SPIP.
 

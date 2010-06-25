@@ -3,14 +3,10 @@
   <nom>Recherche</nom>
 
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
-  <version>0.5</version>
-  <necessite id='acs' version='[0.5;]' />
+  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
+  <version>0.6</version>
+  <necessite id='acs' version='[0.6;]' />
 
-  <param>
-    <nom>optionnel</nom>
-    <valeur>activer_moteur</valeur>
-  </param>
   <param>
     <nom>preview</nom>
     <valeur>68</valeur>

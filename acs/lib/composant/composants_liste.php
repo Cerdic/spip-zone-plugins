@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -35,7 +35,7 @@ function lecture_composants_liste() {
   if (isset($GLOBALS['meta']['acsSqueletteOverACS']) && $GLOBALS['meta']['acsSqueletteOverACS']) {
     $tas = explode(':', $GLOBALS['meta']['acsSqueletteOverACS']);
     foreach($tas as $dir) {
-      $dirc = _DIR_RACINE.$dir.'/composants';
+      $dirc = _ACS_DIR_SITE_ROOT.$dir.'/composants';
       $cl = array_merge($cl, lit_liste_composants($dirc, $dir));
     }
   }

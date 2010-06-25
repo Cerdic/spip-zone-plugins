@@ -3,6 +3,6 @@
 // ACS component specific - spécifique au composant ACS
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'keyword' => 'Encart', /* Keyword to put articles in Encart */
+'keyword' => '_Encart', /* Keyword to put articles in Encart */
 );
 ?>

@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 define('_SPIP_DIST_DIR', _DIR_RACINE.'dist');
@@ -32,9 +32,8 @@ function pages_du_site() {
   // Ordre d'override : over 1 > ...> over n > modèle ACS actif > plugins actifs > spip (dist)
 
   $tas = explode(':', $GLOBALS['meta']['acsSqueletteOverACS']);
-  $dir_site = (_DIR_SITE != '_DIR_SITE') ? _DIR_SITE : _DIR_RACINE;
   foreach($tas as $dir) {
-    $squelettes['over'.$numover] = $dir_site.$dir;
+    $squelettes['over'.$numover] = _ACS_DIR_SITE_ROOT.$dir;
     $numover += 1;
   }
   // Squelettes du modele ACS actif:

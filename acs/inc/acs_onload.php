@@ -23,8 +23,12 @@ else {
 	$dir_site = _DIR_RACINE;
 	$dir_site_absolu = '';
 }
+
+// Racine des dossiers du site :
+define('_ACS_DIR_SITE_ROOT', $dir_site);
+
 // Dossier du cache ACS (par defaut: tmp/cache/acs)
-define('_ACS_TMP_DIR', $dir_site._NOM_TEMPORAIRES_INACCESSIBLES.'cache/acs/');
+define('_ACS_TMP_DIR', _ACS_DIR_SITE_ROOT._NOM_TEMPORAIRES_INACCESSIBLES.'cache/acs/');
 
 // Modèle ACS par defaut - Default ACS model
 $GLOBALS['meta']['acsModel'] = isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat';
@@ -44,8 +48,8 @@ $dossiers_squelettes_avant_override = explode(':', $GLOBALS['dossier_squelettes'
 if (isset($GLOBALS['meta']['acsSqueletteOverACS']) && $GLOBALS['meta']['acsSqueletteOverACS']) {
   $tas = explode(':', $GLOBALS['meta']['acsSqueletteOverACS']);
   foreach($tas as $dir) {
-    @include(_DIR_RACINE.$dir.'/mes_options.php');
-    @include(_DIR_RACINE.$dir.'/mes_fonctions.php');
+    @include(_ACS_DIR_SITE_ROOT.$dir.'/mes_options.php');
+    @include(_ACS_DIR_SITE_ROOT.$dir.'/mes_fonctions.php');
     if (in_array($dir_site_absolu.$dir, $dossiers_squelettes_avant_override))
       continue;
     if (isset($GLOBALS['dossier_squelettes']) && $GLOBALS['dossier_squelettes'])

@@ -205,7 +205,7 @@ class AdminComposant {
 			  ecrire_meta("acsDerniereModif", time());
 			  ecrire_metas(); // SPIP ecrit en BDD
 			  lire_metas(); // SPIP relit toutes les metas en BDD
-			  touch_meta(); // Force la reecriture du cache SPIP des metas
+			  touch_meta(false); // Force la reecriture du cache SPIP des metas
 			  unset($updated);
 			}
 		}

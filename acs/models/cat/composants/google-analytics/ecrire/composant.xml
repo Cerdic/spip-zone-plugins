@@ -2,9 +2,9 @@
   <!-- Nom du composant -->
   <nom>Google-analytics</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
-  <version>0.5</version>
-  <necessite id='acs' version='[0.5;]' />
+  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
+  <version>0.6</version>
+  <necessite id='acs' version='[0.6;]' />
 
   <variable>
     <nom>UA</nom>

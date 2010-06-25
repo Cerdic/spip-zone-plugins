@@ -3,7 +3,7 @@
 // ACS component specific
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'keyword' => 'Edito', /* Keyword to set an article as Editorial */
+'keyword' => '_Edito', /* Keyword to set an article as Editorial */
 'edito' => 'Editorial',
 'previous' => 'Previous editorials'
 );

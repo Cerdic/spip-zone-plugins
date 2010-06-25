@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 // Choix de couleur - Color choice
@@ -16,13 +16,13 @@ function ctlColor($composant, $nic, $nom, $couleur, $param, $wid) {
 function ctlImg($composant, $nic, $nom, $image, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   $path = $GLOBALS['ACS_CHEMIN'].'/'.$param['chemin'];
-  mkdir_recursive(_DIR_RACINE.$path);
+  mkdir_recursive(_ACS_DIR_SITE_ROOT.$path);
   $s = @getimagesize('../'.$path.'/'.$image);
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
   if ($param['label'] != 'non')
     $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
   $r .= '<td><input type="text" name="'.$var.'_'.$wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml" /></td>';
-  $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'], document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'].value, \''.$path.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
+  $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'], document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'].value, \''.$path.'\', \''._ACS_DIR_SITE_ROOT.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
   return $r;
 }
 
@@ -104,7 +104,7 @@ function ctlFontFamily($composant, $nic, $nom, $style='sans-serif', $param, $wid
 // Choix de valeur, avec + / - (todo)
 function ctlNombre($composant, $nic, $nom, $nombre=0, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table>';
+	return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table></div>';
 }
 
 // Saisie d'un texte

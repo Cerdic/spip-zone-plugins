@@ -11,6 +11,11 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Requis à partir de spip 2.1
+if (!is_callable('ajax_retour'))
+	include_spip('inc/actions');
+
+
 function exec_composant_get_trad() {
   $c = _request('c');
   $trcmp = _request('trcmp');
