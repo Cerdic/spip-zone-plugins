@@ -14,4 +14,4 @@
 [(#REM) Si la valeur est un tableau, le plugin sait le transformer en chaine, plutôt que d'afficher "Array" ]
 #SET{valeur, #ENV{valeur,#ENV{defaut}}}
 #SET{valeur, #GET{valeur}|is_array|?{(#GET{valeur}|saisies_tableau2chaine), #GET{valeur}}}
-<textarea name="#ENV{nom}"[ class="(#ENV{class})"] id="champ_#ENV{nom}" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]"[ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>#GET{valeur}</textarea>
+<textarea name="#ENV{nom}"[ class="(#ENV{class})"] id="champ_#ENV{nom}" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]"[ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"]>#GET{valeur}</textarea>

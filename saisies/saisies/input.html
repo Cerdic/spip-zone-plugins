@@ -17,4 +17,4 @@
 
 
 #SET{type,#ENV{type,text}}
-<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
