@@ -41,3 +41,21 @@ div.pagination_spipmotion{
 .tr_liste{background-color:#eee;}
 .tr_liste_over,.tr_liste:hover{background-color:#fff;}
 .tr_liste td,.tr_liste:hover td,.tr_liste_over td{border-bottom:1px solid #ddd;}
+
+.spipmotion_info_log{
+	margin:10px 0;
+}
+
+cadre, .cadre{
+	background:none repeat scroll 0 0 #FAFAFA;
+	border-color:#CCCCCC #CCCCCC #CCCCCC #888888;
+	border-style:solid;
+	border-width:1px 1px 1px 2px;
+	color:#666666;
+	display:block;
+	font:500 90%/1.5em 'Lucida Console','Courier New',Monospace;
+	margin:5px 0 10px;
+	overflow:auto;
+	padding:5px;
+	text-align:left;
+}
