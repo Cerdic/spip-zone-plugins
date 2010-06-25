@@ -48,7 +48,12 @@
 <script type="text/javascript" src="#CHEMIN{js/cvi_text_lib.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.advanced-panorama.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.flipv.js}"></script>
+<script type="text/javascript" src="#CHEMIN{js/jquery-ui-1.8.2.custom.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{js/jquery.swfobject.1-0-9.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{js/jquery.multimedia-portfolio-2.0.js}"></script>
+
 <script type="text/javascript" src="#CHEMIN{js/jquery.fancybox-1.3.1.pack.js}"></script>
+
 <script type="text/javascript">
 	if(!Array.indexOf){
 		    Array.prototype.indexOf = function(obj){
@@ -423,19 +428,11 @@ $(document).ready(function(){
 
 
 
-#SET{docs, #DOCUMENTS_ASSOCIES}
-<B_documentsassocies>
-<div class="documents-lieu">
-<h2><:panoramas:documents_associes:></h2>
-<BOUCLE_documentsassocies(DOCUMENTS){tous}>[(#ID_DOCUMENT|inclusdans{#GET**{docs}}|?{' ',''})
-		<a href="#URL_DOCUMENT" class="thickbox">[(#LOGO_DOCUMENT||image_reduire{0,100})]</a>
-	]</BOUCLE_documentsassocies>
-</div>
-</B_documentsassocies>
+
 
 <BOUCLE_interactionstransitions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 
-	[ (#REM) pr�chargement des images de fond de survol ]
+	[ (#REM) préchargement des images de fond de survol ]
 	<BOUCLE_imagedefondsurvolprechargement(DOCUMENTS){tous}{id_document=#ID_IMAGE_FOND_SURVOL}>
 		<img src="#URL_DOCUMENT"  width="0" height="0" alt="" />				
 	</BOUCLE_imagedefondsurvolprechargement>
@@ -590,6 +587,36 @@ function rafraichir_panier() {
 setTimeout("rafraichir_panier()", 1000);
 </script>
 
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("ul.multimedia-portfolio").multimedia_portfolio({width: <BOUCLE_visiteparent3(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent3>, baseDir: '/squelettes/', nbelem: 4});
+		$('.fermer-documents').click(function(){
+			$('.documents-lieu').hide();
+			$('.voir-documents').show();
+			return false;
+		});
+		$('.voir-documents a').click(function(){
+			$('.documents-lieu').show();
+			$('.voir-documents').hide();
+			return false;
+		});
+	});
+</script>
+
+#SET{docs, #DOCUMENTS_ASSOCIES}
+<B_documentsassocies>
+<div class="voir-documents"><a href="#"><:panoramas:afficher_les_documents:></a></div>
+<div class="documents-lieu" style="display: none;">
+<h2><:panoramas:documents_associes:></h2>
+<a href="#" class="fermer-documents"><:panoramas:masquer_les_documents:></a>
+<ul class="multimedia-portfolio">
+<BOUCLE_documentsassocies(DOCUMENTS){tous}>[(#ID_DOCUMENT|inclusdans{#GET**{docs}}|?{' ',''})
+		<li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT||image_reduire{0,200}|inserer_attribut{class,}|inserer_attribut{style,})]</a></li>
+	]</BOUCLE_documentsassocies>
+</ul>
+</div>
+</B_documentsassocies>
 </BOUCLE_visites>
 </BOUCLE_lieux>
 

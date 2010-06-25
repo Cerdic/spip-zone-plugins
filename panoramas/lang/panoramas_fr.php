@@ -50,6 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom_joueur' => 'Inscris ton nom',
 'nom_obligatoire' => 'Il faut d\'abord inscrire ton nom pour pouvoir jouer',
 'apercu' => 'Aper&ccedil;u',
-'fermer_carte' => 'Fermer la carte'
+'fermer_carte' => 'Fermer la carte',
+'afficher_les_documents' => 'Afficher les documents associ&eacute;s &agrave; ce lieu',
+'masquer_les_documents' => 'Masquer les documents',
 );
 ?>

@@ -11,7 +11,20 @@
 
 <body class="page_visite">
 <div class="lieu-container">	
-		[(#MODELE{visite}{id_visite=#ID_VISITE})]
+		<BOUCLE_visite(VISITES_VIRTUELLES){id_visite}>
+		[(#ID_LIEU_DEPART|oui)
+			[(#MODELE{lieu}{id_lieu=#ID_LIEU_DEPART})]
+			
+		]
+		    <BOUCLE_lieuxvisite(VISITES_VIRTUELLES_LIEUX){id_visite}{0,1}>
+		    [(#ID_LIEU_DEPART|non)
+			    [(#MODELE{lieu}{id_lieu=#ID_LIEU})]
+		    
+		    ]
+		    </BOUCLE_lieuxvisite>
+		[<p class="descriptif-visite">(#DESCRIPTIF)</p>]
+
+		</BOUCLE_visite>
 	
 </div>
 </body>

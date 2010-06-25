@@ -168,8 +168,12 @@ h2.panorama-carte a, h2.panorama-panier a {
 .droppable-hover {
 	background: yellow;
 }
-.fermer-carte { position: absolute; top: 0; left: 0; background: #F60; color: white; font-size: 1.4em; text-decoration: none; padding: 0.1em 0.3em; opacity: .8;}
-.fermer-carte:hover { color: white; text-decoration: none; }
+.fermer-carte, .fermer-documents { position: absolute; top: 0; left: 0; background: #F60; color: white; font-size: 1.4em; text-decoration: none; padding: 0.1em 0.3em; opacity: .8;}
+.fermer-carte:hover, .fermer-documents:hover, .voir-documents a:hover { color: white; text-decoration: none; }
 
-
+.documents-lieu { position: absolute; bottom: 0; left: 0; text-align: left; background: white; }
+.documents-lieu h2 { display: none; color: #666; text-transform: uppercase; font-family: sans-serif; padding: 5px; } 
+.fermer-documents { position: relative; display: block; margin-bottom: 5px; opacity: 1; }
+.voir-documents { position: absolute; bottom: 0; left: 0; padding: 0.1em 0; width: 100%; display: block; text-align: left;  opacity: .7; background: #666; }
+.voir-documents a { margin-left: 1em; text-decoration: none; color: white; font-size: 1.4em; }
 
