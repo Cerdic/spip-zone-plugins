@@ -1,7 +1,7 @@
 [(#REM) dans la page monstyle.html  et en première ligne ]
 #HTTP_HEADER{'Content-Type: text/html'}
 
-<BOUCLE_codepostaux(SPIP_GEO_COMMUNES){code_postal LIKE (#ENV{q})%}{0,20}{par multi code_postal}>
+<BOUCLE_codepostaux(spip_geo_communes){code_postal LIKE (#ENV{q})%}{0,20}{par multi code_postal}>
 [(#CODE_POSTAL|unique)]
 
 </BOUCLE_codepostaux>
