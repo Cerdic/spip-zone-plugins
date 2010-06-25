@@ -1,7 +1,7 @@
 #HTTP_HEADER{'Content-Type: text/html'}
 
 [(#REM) Chercher les communes correspondant a la requete ]
-<BOUCLE_s(GEO_COMMUNES)
+<BOUCLE_s(SPIP_GEO_COMMUNES)
 {code_postal=#ENV{code_postal}}
 {nom LIKE %(#ENV{q})%}{0,20}{par multi nom}>
 [(#NOM|textebrut)]

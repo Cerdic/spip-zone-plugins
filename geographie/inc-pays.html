@@ -4,7 +4,7 @@
 [(#REM) Chercher les pays correspondant a la requete ]
 <B_s>
 France
-<BOUCLE_s(GEO_PAYS)
+<BOUCLE_s(SPIP_GEO_PAYS)
 {nom LIKE %(#ENV{q}|strtolower)%}{0,20}{par multi nom}{nom!=france}>
 [(#NOM|textebrut)]
 </BOUCLE_s>
