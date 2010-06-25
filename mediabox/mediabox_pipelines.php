@@ -48,7 +48,7 @@ function mediabox_insert_head_css($flux){
 		$done = true;
 		$config = mediabox_config();
 		if ($f = find_in_path((test_espace_prive()?"prive/":"")."colorbox/".$config['skin'].'/colorbox.css'))
-			$flux .= '<link rel="stylesheet" href="'.$f.'" type="text/css" media="all" />';
+			$flux .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="all" />';
 	}
 	return $flux;
 }

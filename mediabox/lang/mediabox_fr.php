@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_maxheight' => 'Hauteur Maxi (% ou px)',
 	'label_slideshow_speed' => 'Temps d\'exposition des photos du diaporama (ms)',
 	'label_splash' => 'Splash Bo&icirc;te',
-	'label_splash_url' => 'URL à afficher',
+	'label_splash_url' => 'URL &agrave; afficher',
 
 	'boxstr_slideshowStart' => 'Diaporama',
 	'boxstr_slideshowStop' => 'Arr&ecirc;ter',
