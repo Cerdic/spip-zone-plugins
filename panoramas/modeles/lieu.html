@@ -114,7 +114,7 @@
 $(document).ready(function(){
 	[(#MODE_JEU|=={'oui'}|?{' ',''})if (!$.cookie('objets_ramasses')) 
 		$.cookie('objets_ramasses',' ');]
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte icone-carte#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})icone-carte-courant]' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){tous}{id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan lien-plan#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})lien-plan-courant]' style='[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{'margin-top: -1em;','display: none;'}) ][left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'>[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})Vous&nbsp;&ecirc;tes&nbsp;ici&nbsp;:&nbsp;<br />][(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte icone-carte#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})icone-carte-courant]' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){tous}{id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan lien-plan#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})lien-plan-courant]' style='[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{'margin-top: -1em;','display: none;'}) ][left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'>[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})Vous&nbsp;&ecirc;tes&nbsp;ici&nbsp;:&nbsp;<br />][(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'>[(#LOGO_DOCUMENT||image_reduire{150,0})]</a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div><a href='#' style='display: none;' class='fermer-carte'><:panoramas:fermer_carte:></a></div>");
 	
 	$('.panorama-viewport a.icone-carte').bind('mouseover', function(){
 		if ($(this).next().css('display') == 'none') {
@@ -127,8 +127,14 @@ $(document).ready(function(){
 								$('.panorama-viewport .lien-plan').css('z-index', 50);
 								$(this).css('z-index', 60);
 							});
-	$('.panorama-onglets h2.panorama-carte a').flipv().bind('click', function() { 
-				$('div.panorama-carte').toggle();
+	$('.panorama-onglets h2.panorama-carte a, .panorama-onglets a.fermer-carte').bind('click', function() { 
+				if ($('div.panorama-carte').css('display') != 'none') {
+				  $('div.panorama-carte, .panorama-onglets a.fermer-carte').hide();
+				  $('.panorama-onglets h2.panorama-carte a').show();
+				} else {
+				  $('.panorama-onglets h2.panorama-carte a').hide();
+				  $('div.panorama-carte, .panorama-onglets a.fermer-carte').show();
+				}
 				[(#MODE_JEU|=={'oui'}|?{' ',''})if ($('div.panorama-carte').css('display') != 'none') 
 					$('h2.panorama-panier').hide();
 				else

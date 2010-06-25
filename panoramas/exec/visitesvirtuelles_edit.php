@@ -83,6 +83,7 @@ function exec_visitesvirtuelles_edit(){
 			$hauteur = $row['hauteur'];
 			$id_lieu_depart = $row['id_lieu_depart'];
 			$id_carte = $row['id_carte'];
+			$id_miniature_carte = $row['id_miniature_carte'];
 			$mode_jeu = $row['mode_jeu'];
 			$liste_objets_jeu = $row['liste_objets_jeu'];
 			$message_fin_jeu = $row['message_fin_jeu'];
@@ -184,6 +185,7 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$largeur = intval($row['largeur']);	
 	$hauteur = intval($row['hauteur']);
 	$id_carte = intval($row['id_carte']);	
+	$id_miniature_carte = intval($row['id_miniature_carte']);	
 	if ($largeur==0) $largeur=600;	
 	if ($hauteur==0) $hauteur=400;	
 	$id_lieu_depart = intval($row['id_lieu_depart']);	
@@ -219,6 +221,8 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 
 	
 	$out .= panorama_afficher_bloc_document("id_carte", "visite", $id_carte);
+
+	$out .= panorama_afficher_bloc_document("id_miniature_carte", "visite", $id_miniature_carte);
 
 	$out .= "<strong><label for='mode_jeu_visite'>"._T("panoramas:mode_jeu")."</label></strong> ";
 	$out .= "<select name='mode_jeu' id='mode_jeu_visite' class='formo $focus' ".

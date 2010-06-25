@@ -138,6 +138,7 @@ div.panorama-panier ul {
 	padding-top: 3px;
 	padding-bottom: 3px;
 }
+.panorama-onglets-titres h2.panorama-carte { background: none; opacity: .8;}
 .panorama-onglets-titres h2.panorama-panier {
 	background: gray;
 }
@@ -167,5 +168,8 @@ h2.panorama-carte a, h2.panorama-panier a {
 .droppable-hover {
 	background: yellow;
 }
+.fermer-carte { position: absolute; top: 0; left: 0; background: #F60; color: white; font-size: 1.4em; text-decoration: none; padding: 0.1em 0.3em; opacity: .8;}
+.fermer-carte:hover { color: white; text-decoration: none; }
+
 
 
