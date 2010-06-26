@@ -1,11 +1,11 @@
 <?php
 /**
-* Plugin Notation 
+* Plugin Notation
 * par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
-* 
+*
 * Copyright (c) 2008
 * Logiciel libre distribue sous licence GNU/GPL.
-*  
+*
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -28,27 +28,27 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	// si le visiteur a une session, on regarde s'il a deja vote
 	// sinon, non (la verification serieuse en cas de vote deja effectue
 	// se faisant dans verifier() )
-	if ($GLOBALS['visiteur_session'] AND session_get('a_vote')) {
+	if ($GLOBALS['visiteur_session'] OR session_get('a_vote')) {
 
 		// on recupere l'id de l'auteur connecte, sinon ip
 		if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
 			$id_auteur = 0;
 			$ip	= $_SERVER['REMOTE_ADDR'];
 		}
-	
+
 		$where = array(
 			"objet=" . sql_quote(objet_type($objet)),
 			"id_objet=" . sql_quote($id_objet),
 			);
-		if ($id_auteur) 
+		if ($id_auteur)
 			$where[] = "id_auteur=" . sql_quote($id_auteur);
-		else 
+		else
 			$where[] = "ip=" . sql_quote($ip);
 		$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
 		if ($id_notation){
 			$valeurs['id_notation'] = $id_notation;
 		}
-	
+
 
 	}
 	// peut voter ou modifier son vote ?
@@ -63,15 +63,15 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 
 function formulaires_notation_verifier_dist($objet, $id_objet){
 	$erreurs = array();
-	
+
 	//  s'assurer que l'objet existe bien
 	// et que le champ robot n'est pas rempli
 	$trouver_table = charger_fonction('trouver_table','base');
 	$table_objet = $trouver_table($objet);
 	$_id_objet = id_table_objet($table_objet['table']);
-	
+
 	if (!sql_countsel($table_objet['table'], "$_id_objet=" . sql_quote($id_objet))
-		OR (_request('content')!="")) { 
+		OR (_request('content')!="")) {
 		$erreurs['message_erreur'] = ' ';
 	// note dans la bonne fourchette
 	} else {
@@ -83,7 +83,7 @@ function formulaires_notation_verifier_dist($objet, $id_objet){
 	}
 	return $erreurs;
 }
-	
+
 function formulaires_notation_traiter_dist($objet, $id_objet){
 
 	// indiquer dans sa session que ce visiteur a vote
@@ -102,7 +102,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 		$id_auteur = 0;
 	}
 	$ip	= $_SERVER['REMOTE_ADDR'];
-	
+
 	// recuperation des champs
 	$note = intval(_request("notation-$objet$id_objet"));
 	$id_donnees	= _request('notation_id_donnees'); // ne sert a rien ?
@@ -146,7 +146,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 			);
 			modifier_notation($id_notation,$c);
 		}
-	
+
 		// mettre a jour les stats
 		//
 		// cette action est presque devenue inutile
@@ -162,7 +162,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	}
 
 	$res = array("editable"=>true,"message_ok"=>_T("notation:jainote"),'id_notation'=>$id_notation);
-	
+
 	// peut il modifier son vote ?
 	include_spip('inc/autoriser');
 	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
