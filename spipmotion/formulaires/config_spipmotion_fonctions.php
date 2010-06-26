@@ -17,22 +17,23 @@
  */
 function cfg_config_spipmotion_post_traiter(&$cfg){
 	$modifs = $cfg->log_modif;
-	if(preg_match('/chemin/', $modifs, $matches)){
-		include_spip('inc/metas');
-		$valeurs = $cfg->val;
-		spip_log($valeurs,'spipmotion');
+	include_spip('inc/metas');
+	$valeurs = $cfg->val;
+	spip_log($valeurs,'spipmotion');
 
-		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
-		$erreurs = $verifier_binaires($valeurs);
+	$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
+	$erreurs = $verifier_binaires($valeurs);
+	spip_log($erreurs,'test');
 
-		if(!in_array('ffmpeg',$erreurs)){
-			/**
-			 * On récupère les informations du nouveau ffmpeg
-			 */
-			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
-			$ffmpeg_infos(true);
-		}
+	if(!in_array('ffmpeg',$erreurs) && preg_match('/chemin/', $modifs, $matches)){
+		/**
+		 * On récupère les informations du nouveau ffmpeg
+		 */
+		$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+		$ffmpeg_infos(true);
+	}
 
+	if(count($erreurs) > 0){
 		include_spip('inc/invalideur');
 		suivre_invalideur('1');
 

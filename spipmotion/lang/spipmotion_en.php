@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'encoder_video' => '(Re)encode this video',
 	'encoder_son' => '(Re)encode this sound',
 	'erreur_chemin_ffmpeg' => 'No encoding can be performed because the path does not work.',
+	'erreur_verifier_droits' => 'The encoding script "script_bash/spipmotion.sh" is not executable.',
 	'explication_encodeur' => 'If you choose the ffmpeg2theora encoder to your Ogg video, the choice of audio and video codecs become useless.',
 	'explications_extensions_prises_en_charge' => 'The supported formats are all file formats which will be treated by SPIPmotion to retrieve various information (length, size, screenshots ...)',
 	'explications_extensions_prises_en_charge_encodage' => 'These formats are those who will be transcoded automatically or on demand',
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_passes_encodage' => 'Number of passes for encoding',
 	'label_presets_qualite' => 'Encoding quality (libx264 only)',
 	'label_relancer_encodage' => 'Re encoding',
+	'label_verifier_logiciels' => 'Verify the softwares again',
 	'label_vorbis_qualite' => 'Encoding quality (Only Vorbis audio)',
 	'lien_enlever_previsu' => 'Remove the preview',
 	'lien_ffmpeg_mac'=>'Install FFmpeg on Mac OSX',
@@ -194,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unselect_all' => 'Deselect all',
 
 	// V
-	'verifier_droits' => 'Verify the right of "script_bash/spipmotion.sh". Right on this files have to be in 755.',
 	'version_encodee_de' => 'This document is an encoded version of the document ID @id_orig@',
 
 	//W

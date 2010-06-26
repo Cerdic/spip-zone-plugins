@@ -26,7 +26,7 @@ function encodage($source,$doc_attente){
 	 * Si le chemin vers le binaire FFMpeg n'existe pas,
 	 * la configuration du plugin crée une meta spipmotion_casse
 	 */
-	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
+	if(($GLOBALS['meta']['spipmotion_casse'] == 'oui') OR ($GLOBALS['meta']['spipmotion_spipmotionsh_casse'] == 'oui'))
 		return;
 
 	/**

@@ -11,12 +11,7 @@
 	#SET{erreur_chemin,true}
 	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_chemin_ffmpeg:></p>]
 
-[(#REM) un mot pour dire que le script doit etre executable ... ]
-[(#SET{script,[(#VAL{#EVAL{_DIR_PLUGIN_SPIPMOTION}script_bash/spipmotion.sh})]})]
-[(#SET{scriptperms,[(#VAL{%o}|sprintf{[(#GET{script}|fileperms)]})]})]
-
-<BOUCLE_script_perms(CONDITION){si #GET{scriptperms}|substr{-4}|>={700}|oui}>
-<BOUCLE_script_lisible(CONDITION){si #GET{script}|is_readable|oui}>
+<BOUCLE_script_perms(CONDITION){si #CONFIG{spipmotion_spipmotionsh_casse}|!={oui}|oui}>
 <form method="post" action="#ENV{action}">
 <div>
 	#ACTION_FORMULAIRE{#ENV{action}}
@@ -124,7 +119,6 @@
 	</p>
 </div>
 </form>
-</div>
 <script type="text/javascript"><!--
 jQuery(document).ready(function(){
 	jQuery('a.select_all').click(function(){
@@ -137,9 +131,8 @@ jQuery(document).ready(function(){
 	});
 });
 // --></script>
-</BOUCLE_script_lisible>
-<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:verifier_droits:></p>
-<//B_script_lisible>
 </BOUCLE_script_perms>
-<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:verifier_droits:></p>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_verifier_droits:></p>
+[(#BOUTON_ACTION{<:spipmotion:label_verifier_logiciels:>,#URL_ACTION_AUTEUR{spipmotion_verifier_binaires,1,#SELF}})]
 <//B_script_perms>
+</div>

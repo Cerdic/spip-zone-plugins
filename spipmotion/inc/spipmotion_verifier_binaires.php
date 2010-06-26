@@ -15,6 +15,7 @@
  * -* ffmpeg2theora
  * -* flvtool2
  * -* qt-faststart
+ * -* le script spipmotion.sh
  *
  * Note : Les codes de retour normaux d'une application sont :
  * -* 0 en cas de réussite
@@ -86,12 +87,23 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	/**
 	 * Tester qt-faststart
 	 */
-	exec('qt-faststart',$retour_flvtool,$retour_flvtool_int);
-	if($retour_flvtool_int != 0){
+	exec('qt-faststart',$retour_qt_faststart,$retour_qt_faststart_int);
+	if($retour_qt_faststart_int != 0){
 		ecrire_config('spipmotion_qt-faststart_casse', 'oui');
 		$erreurs[] = 'qt-faststart';
 	}else{
 		effacer_config('spipmotion_qt-faststart_casse');
+	}
+
+	/**
+	 * Tester le script spipmotion.sh présent dans script_bash/
+	 */
+	exec(find_in_path('script_bash/spipmotion.sh').' --help',$retour_spipmotionsh,$retour_spipmotionsh_int);
+	if($retour_spipmotionsh_int != 0){
+		ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
+		$erreurs[] = 'spipmotion.sh';
+	}else{
+		effacer_config('spipmotion_spipmotionsh_casse');
 	}
 
 	if($notif){
