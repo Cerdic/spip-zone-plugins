@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_chemin_ffmpeg' => 'No encoding can be performed because the path does not work.',
 	'erreur_verifier_droits' => 'The encoding script "script_bash/spipmotion.sh" is not executable.',
 	'explication_encodeur' => 'If you choose the ffmpeg2theora encoder to your Ogg video, the choice of audio and video codecs become useless.',
+	'explication_framerate' => 'Leave this field blank to keep the same framerate than the original',
 	'explications_extensions_prises_en_charge' => 'The supported formats are all file formats which will be treated by SPIPmotion to retrieve various information (length, size, screenshots ...)',
 	'explications_extensions_prises_en_charge_encodage' => 'These formats are those who will be transcoded automatically or on demand',
 	'explications_extensions_sortie' => 'These extensions are the formats to which the files are encoded, you can choose several types (attention to the use of the server though).',
@@ -45,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'ffmpeg2theora_install' => 'FFMpeg2Theora on your server :',
-	'framerate' => 'Image per second : ',
+	'framerate' => 'Frame rate : ',
 	'frequence_audio' => 'Audio frequency : ',
 
 	// G

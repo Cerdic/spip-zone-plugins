@@ -1,8 +1,8 @@
 <BOUCLE_log(SPIPMOTION_ATTENTES){id_spipmotion_attente=#ENV{log}}{encode=erreur}>
-<div class="spipmotion_info_log">
+[<div class="spipmotion_info_log">
 	<p><strong><:spipmotion:titre_fichier_log{id=#ID_SPIPMOTION_ATTENTE}:></strong></p>
-	[(#INFOS|table_valeur{log}|coloration_code_color{bash})]
-</div>
+	(#INFOS|table_valeur{log}|coloration_code_color{bash})
+</div>]
 </BOUCLE_log>
 <B_spipmotion_file>
 #SET{total,#GRAND_TOTAL}
@@ -41,7 +41,7 @@
 				[(#AUTORISER{configurer}|oui)
 					[(#BOUTON_ACTION{[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)],#URL_ACTION_AUTEUR{spipmotion_relancer_encodage,#ID_SPIPMOTION_ATTENTE,#SELF},'','',<:spipmotion:label_relancer_encodage|attribut_html:>})]]
 				[(#AUTORISER{configurer}|non)[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)]]
-				<a href="[(#SELF|parametre_url{log,#ID_SPIPMOTION_ATTENTE})]" class="ajax"><:spipmotion:info_voir_log_erreur:></a>
+				[(#INFOS|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_SPIPMOTION_ATTENTE})]" class="ajax"><:spipmotion:info_voir_log_erreur:></a>]
 			]
 			[(#ENCODE|=={erreur}|non)
 				[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)]

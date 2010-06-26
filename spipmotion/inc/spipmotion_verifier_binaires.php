@@ -16,6 +16,7 @@
  * -* flvtool2
  * -* qt-faststart
  * -* le script spipmotion.sh
+ * -* la class ffmpeg-php
  *
  * Note : Les codes de retour normaux d'une application sont :
  * -* 0 en cas de réussite
@@ -35,14 +36,11 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	 */
 	if($valeurs['chemin'] != ''){
 		exec($valeurs['chemin'].' --help',$retour,$retour_int);
-		spip_log($valeurs['chemin'],'test_binaires');
-		spip_log($retour,'test_binaires');
-		spip_log($retour_int,'test_binaires');
 		if($retour_int != 0){
-			ecrire_config('spipmotion_casse', 'oui');
+			ecrire_config('spipmotion_ffmpeg_casse', 'oui');
 			$erreurs[] = 'ffmpeg';
-		}else if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
-			effacer_config('spipmotion_casse');
+		}else{
+			effacer_config('spipmotion_ffmpeg_casse');
 		}
 	}else{
 		exec('ffmpeg --help',$retour,$retour_int);
@@ -104,6 +102,19 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		$erreurs[] = 'spipmotion.sh';
 	}else{
 		effacer_config('spipmotion_spipmotionsh_casse');
+	}
+
+	if (!class_exists('ffmpeg_movie')) {
+		ecrire_config('spipmotion_ffmpeg-php_casse', 'oui');
+		$erreurs[] = 'ffmpeg-php';
+	}else{
+		effacer_config('spipmotion_ffmpeg-php_casse');
+	}
+
+	if(count($erreurs) > 0){
+		ecrire_config('spipmotion_casse', 'oui');
+	}else{
+		effacer_config('spipmotion_casse');
 	}
 
 	if($notif){

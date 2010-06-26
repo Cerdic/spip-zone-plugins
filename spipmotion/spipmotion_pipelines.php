@@ -29,7 +29,7 @@ function spipmotion_editer_contenu_objet($flux){
 		$type = $document['objet'];
 		$id = $document['id_objet'];
 		if($document['distant'] !== 'distant'){
-			if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
+			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
 				if($document['id_orig'] > 0){
 					$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
 				}
@@ -38,7 +38,7 @@ function spipmotion_editer_contenu_objet($flux){
 					$flux['data'] .= $infos_videos($id,$id_document,$type);
 				}
 			}
-			if(in_array($extension,lire_config('spipmotion/fichiers_audios',array()))){
+			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_audios',array()))){
 				if($document['id_orig'] > 0){
 					$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
 				}
@@ -96,23 +96,21 @@ function spipmotion_post_edition($flux){
 			 * on lui applique certains traitements
 			 * Les fichiers sonores sont gérés par le plugin getID3 pour cela
 			 */
-			if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
-				if (class_exists('ffmpeg_movie')) {
 
-					/**
-					 * Récupération des informations de la vidéo
-					 */
-					$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
-					$infos = $recuperer_infos($id_document);
+			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
+				/**
+				 * Récupération des informations de la vidéo
+				 */
+				$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
+				$infos = $recuperer_infos($id_document);
 
-					/**
-					 * Récupération d'un logo de la vidéo
-					 */
-					$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
-					$logo = $recuperer_logo($id_document);
+				/**
+				 * Récupération d'un logo de la vidéo
+				 */
+				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
+				$logo = $recuperer_logo($id_document);
 
-					$invalider = true;
-				}
+				$invalider = true;
 			}
 
 			/**
@@ -120,7 +118,7 @@ function spipmotion_post_edition($flux){
 			 */
 			$fichier = basename(get_spip_doc($document['fichier']));
 			$racine = str_replace('-encoded','',substr($fichier,0,-(strlen($document['extension'])+1)));
-			if(!preg_match('/-encoded/',$document['fichier']) OR !($id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document"))){
+			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !($id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document"))){
 				include_spip('action/spipmotion_ajouter_file_encodage');
 				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
 			}

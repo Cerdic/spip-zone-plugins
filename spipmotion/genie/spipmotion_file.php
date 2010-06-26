@@ -28,8 +28,7 @@ function genie_spipmotion_file($time)  {
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log("Il y a $nb_encodages vidéo(s) à encoder","spipmotion");
 	$en_cours = sql_getfetsel('id_spipmotion_attente','spip_spipmotion_attentes',"encode='en_cours'");
-	spip_log("L'id $en_cours de la file d'attente est en cours d'encodage",'spipmotion');
-	if(($nb_encodages>0) && (lire_config('spipmotion_casse') != 'oui') && !$en_cours){
+	if(($nb_encodages>0) && ($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !intval($en_cours)){
 		$doc_attente = sql_fetsel("*","spip_spipmotion_attentes","encode='non'","","id_spipmotion_attente ASC","1");
 		$id_document = $doc_attente['id_document'];
 		$id_doc_attente = $doc_attente['id_spipmotion_attente'];
@@ -45,6 +44,8 @@ function genie_spipmotion_file($time)  {
 
 	}else if(lire_config('spipmotion_casse') == 'oui'){
 		spip_log('Attention, problème dans la configuration','spipmotion');
+	}else if(intval($en_cours)){
+		spip_log("L'id $en_cours de la file d'attente est en cours d'encodage",'spipmotion');
 	}
 	return 1;
 }

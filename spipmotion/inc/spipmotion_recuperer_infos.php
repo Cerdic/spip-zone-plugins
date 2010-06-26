@@ -15,9 +15,8 @@
  */
 function inc_spipmotion_recuperer_infos($id_document){
 	spip_log("SPIPMOTION : recuperation des infos du document $id_document","spipmotion");
-	if(!intval($id_document)){
-		return;
-	}
+	if(!intval($id_document) OR ($GLOBALS['meta']['spipmotion_casse'] == 'oui'))
+		return false;
 
 	include_spip('inc/documents');
 	$document = sql_fetsel("docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
@@ -54,6 +53,8 @@ function inc_spipmotion_recuperer_infos($id_document){
 		$infos['videobitrate'] = $movie->getVideoBitRate();
 		$infos['framerate'] = $movie->getFrameRate();
 		$infos['hasvideo'] = 'oui';
+	}else{
+		$infos['hasvideo'] = 'non';
 	}
 	if($movie->hasAudio()){
 		$infos['hasaudio'] = 'oui';
@@ -61,8 +62,9 @@ function inc_spipmotion_recuperer_infos($id_document){
 		$infos['audiobitrate'] = $movie->getAudioBitRate();
 		$infos['audiosamplerate'] = $movie->getAudioSampleRate();
 		$infos['audiochannels'] = $movie->getAudioChannels();
+	}else{
+		$infos['hasaudio'] = 'non';
 	}
-
 	if((($infos['videobitrate'] == 0)||($infos['audiobitrate'] == 0)|| ($infos['videocodec'] == 'flv')) && ($document['extension'] == 'flv')){
 		include_spip('inc/xml');
 		$arbre = spip_xml_parse($metadatas);
