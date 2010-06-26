@@ -27,7 +27,19 @@ Autres agrégateurs
     #EXPRESSION{MIN(id_article)} = 1 - minimum des id_article de statut publie
     #EXPRESSION{MAX(id_article)} = 9 - maximum des id_article de statut publie
 
+
 Exemple d'usage de la balise #EXPRESSION avec tri
+
+Trier les articles en fonction de leur nombre de mots clés :
+
+<ul>
+<BOUCLE_articles(ARTICLES spip_mots_articles){id_mot >0}{fusion articles.id_article}{!par compteur_mots}{0,10}>
+	<li>#ID_ARTICLE - [(#EXPRESSION{COUNT(id_mot),compteur_mots})] mots-clés</li>
+</BOUCLE_articles>
+</ul>
+
+
+Trier les rubriques en fonction de leur nombre d'articles, et faire un commentaire en fonction du nombre d'articles :
 
 <BOUCLE_art(ARTICLES){fusion id_rubrique}{!par nombre_articles}>
 Rubrique : #EXPRESSION{COUNT(id_article), nombre_articles} art.
@@ -40,11 +52,6 @@ Rubrique 1 : 1 art.
     Evaluation littérale : one 
     
 
-Trier les articles en fonction de leur nombre de mots clés :
-
-<BOUCLE_articles(ARTICLES spip_mots_breves){statut ==.}{id_secteur = 1064}{id_mot >0}{fusion articles.id_article}{!par compteur_mots}>
-#ID_ARTICLE - [(#EXPRESION{(COUNT(id_mot,compteur_mots))})] mots-clés
-</BOUCLE_articles>
 
  
  
