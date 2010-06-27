@@ -45,7 +45,13 @@ La nouvelle balise &#35;EXPRESSION{<i>expression</i>} permet d'ajouter des expre
 </BOUCLE_articles>
 </ul>
 
+<p>ou encore :</p>
 
+<ul>
+<BOUCLE_articles(FORUMS spip_articles){articles.id_article >0}{fusion forum.id_article}{!par compteur_messages}{0,10}>
+	<li>[(#EXPRESSION{L1.titre})] - [(#EXPRESSION{COUNT(id_forum),compteur_messages})] commentaires</li>
+</BOUCLE_articles>
+</ul>
 
 <p>
 &lt;BOUCLE_art(ARTICLES){fusion id_rubrique}{!par nombre_articles}&gt;<br />

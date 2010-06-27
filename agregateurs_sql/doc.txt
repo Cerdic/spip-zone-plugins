@@ -86,3 +86,10 @@ LIMIT 0,10
 
 Ce qui ne permet pas d'arriver au résultat voulu.
 
+en revanche on peut le faire dans l'autre sens :
+
+<ul>
+<BOUCLE_articles(FORUMS spip_articles){articles.id_article >0}{fusion forum.id_article}{!par compteur_messages}{0,10}>
+	<li>[(#EXPRESSION{L1.titre})] - [(#EXPRESSION{COUNT(id_forum),compteur_messages})] commentaires</li>
+</BOUCLE_articles>
+</ul>
