@@ -90,8 +90,9 @@ function couleurs_creer_icone_barre($texte, $color) {
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function couleurs_raccourcis() {
+	$couleurs = cs_lire_data_outil('decoration');
 	return _T('couteauprive:couleurs:aide', array(
-		'liste' => $GLOBALS['meta']['cs_couleurs_racc'],
+		'liste' => $couleurs['racc'],
 		'fond' => _COULEURS_FONDS==1?_T('couteauprive:couleurs_fonds'):'',
 	));
 }
@@ -158,8 +159,7 @@ function couleurs_pre_typo($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function couleurs_BarreTypo($tr) {
-	// le tableau des couleurs est present dans les metas
-	$couleurs = cs_lire_meta_outil('couleurs');
+	$couleurs = cs_lire_data_outil('couleurs');
 	$r1 = $r2 = array(); 
 	foreach($couleurs[2] as $i=>$v)
 		$r1[] = "<a title=\"$i\" href=\"javascript:barre_raccourci('[$i]','[/$i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">A</span></a>";
@@ -174,8 +174,7 @@ function couleurs_BarreTypo($tr) {
 
 // les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function couleurs_PP_pre_charger($flux) {
-	// le tableau des couleurs est present dans les metas
-	$couleurs = cs_lire_meta_outil('couleurs');
+	$couleurs = cs_lire_data_outil('couleurs');
 	$r1 = $r2 = array();
 	foreach($couleurs[2] as $i=>$v) {
 		$id = 'couleur_texte_'.str_replace(' ','_',$i);
@@ -225,8 +224,7 @@ function couleurs_PP_pre_charger($flux) {
 	return $flux;
 }
 function couleurs_PP_icones($flux) {
-	// le tableau des couleurs est present dans les metas
-	$couleurs = cs_lire_meta_outil('couleurs');
+	$couleurs = cs_lire_data_outil('couleurs');
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
 	$flux['cs_couleur_texte'] = couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_texte'), '00BFFF');
 	$flux['cs_couleur_fond'] = couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_fond'), '00BFFF');
@@ -235,8 +233,7 @@ function couleurs_PP_icones($flux) {
 }
 
 function couleurs_nettoyer_raccourcis($texte) {
-	// le tableau des couleurs est present dans les metas
-	$couleurs = cs_lire_meta_outil('couleurs');
+	$couleurs = cs_lire_data_outil('couleurs');
 	$couleurs = _COULEURS_SET===0?"$couleurs[0]|$couleurs[1]":$couleurs[0];
 	return preg_replace(",\[/?(bg|fond)?\s*($couleurs|couleur|color)\],i", '', $texte);
 }

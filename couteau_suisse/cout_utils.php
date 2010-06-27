@@ -688,13 +688,19 @@ function cs_optimise_if($code, $root=true) {
 // dans le fichier outils/monoutil.php
 function cs_installe_outils() {
 	global $metas_outils;
+	$datas = array();
 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) {
 		include_spip('outils/'.$nom);
 		if(function_exists($f = $nom.'_installe')) {
-			$f();
+			if(($tmp=$f())!==NULL) $datas[$nom] = $tmp;
 if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 		}
 	}
+	$datas = array('code_outils' => array(
+		"function cs_data_outils() {\nreturn "
+		. var_export($datas, true)
+		. ";\n}"));
+	ecrire_fichier_en_tmp($datas, 'outils');
 	ecrire_metas();
 }
 

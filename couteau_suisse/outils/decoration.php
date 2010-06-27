@@ -58,12 +58,10 @@ cs_log("decoration_installe()");
 		}
 	// liste des balises disponibles
 	$aide = array_merge($aide, $auto_balises);
-	// sauvegarde en meta : aide
-	ecrire_meta('cs_decoration_racc', '<b>'.join('</b>, <b>', $aide).'</b>');
 	// protection $auto_balises pour la future regExpr
 	array_walk($auto_balises, 'cs_preg_quote');
-	// sauvegarde en meta : decoration
-	ecrire_meta('cs_decoration', serialize(array(
+	// renvoi des donnees compilees
+	return array(
 		// balises fixes a trouver
 		$trouve, 
 		// remplacement des balises fixes
@@ -74,14 +72,16 @@ cs_log("decoration_installe()");
 		$auto_remplace,
 		// balises disponibles
 		$BT,
-	)));
-	ecrire_metas();
+		// aide
+		'racc' => $aide,
+	);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function decoration_raccourcis() {
-	return _T('couteauprive:decoration:aide', array('liste' => $GLOBALS['meta']['cs_decoration_racc']));
+	$balises = cs_lire_data_outil('decoration');
+	return _T('couteauprive:decoration:aide', array('liste' => '<b>'.join('</b>, <b>', $balises['racc']).'</b>'));
 }
 
 function decoration_callback($matches) {
@@ -111,7 +111,7 @@ function decoration_pre_typo($texte) {
 	// pour les callbacks
 	global $deco_balises;
 	// lecture des balises et des remplacements
-	$deco_balises = cs_lire_meta_outil('decoration');
+	$deco_balises = cs_lire_data_outil('decoration');
 	// on remplace apres echappement
 	$texte = cs_echappe_balises('', 'decoration_rempl', $texte);
 	// menage
@@ -121,8 +121,7 @@ function decoration_pre_typo($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function decoration_BarreTypo($tr) {
-	// le tableau des decorations est present dans les metas
-	$balises = cs_lire_meta_outil('decoration');
+	$balises = cs_lire_data_outil('decoration');
 	$res = array(); 
 	foreach($balises[4] as $v) {
 		$tmp = $v[1]?"('<$v[0]>','</$v[0]>'":"_etendu('<$v[0]>','</$v[0]>','<$v[0]/>'";
@@ -134,8 +133,7 @@ function decoration_BarreTypo($tr) {
 
 // les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function decoration_PP_pre_charger($flux) {
-	// le tableau des decorations est present dans les metas
-	$balises = cs_lire_meta_outil('decoration');
+	$balises = cs_lire_data_outil('decoration');
 	$max = count($balises[4]);
 	$r = array();
 	foreach($balises[4] as $b) {
@@ -171,8 +169,7 @@ function decoration_PP_pre_charger($flux) {
 	return $flux;
 }
 function decoration_PP_icones($flux){
-	// le tableau des decorations est present dans les metas
-	$balises = cs_lire_meta_outil('decoration');
+	$balises = cs_lire_data_outil('decoration');
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
 	$flux['cs_decoration_drop'] = 'decoration_div.png';
 	foreach($balises[4] as $b) {

@@ -20,15 +20,13 @@ cs_log("jcorner_installe()");
 			if (strlen($a)) $code[] = "jQuery(\"$a\", this).not('.jc_done').addClass('jc_done').corner();";
 		}
 	}
-	// sauvegarde en meta : le code jQuery
-	ecrire_meta('cs_jcorner', join("\n\t", $code));
-	ecrire_metas();
-//print_r($classes); print_r($code);
+	// en retour : le code jQuery
+	return join("\n\t", $code);
 }
 
 
 function jcorner_insert_head($flux) {
-	return $flux . "<script type=\"text/javascript\"><!--\nfunction jcorner_init() {\n\tif(typeof jQuery.fn.corner!='function') return;\n\t" . cs_lire_meta_outil('jcorner', '', false) . "\n}\n// --> </script>\n";
+	return $flux . "<script type=\"text/javascript\"><!--\nfunction jcorner_init() {\n\tif(typeof jQuery.fn.corner!='function') return;\n\t".cs_lire_data_outil('jcorner')."\n}\n// --> </script>\n";
 }
 
 ?>

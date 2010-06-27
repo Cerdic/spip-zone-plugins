@@ -229,11 +229,25 @@ function cs_pp_liste_barres($outil=false) {
 	return $sets;
 }
 
-// renvoie la meta d'un outil
+// renvoie la meta d'un outil (fonction obsolete)
 function cs_lire_meta_outil($outil, $meta='', $unserialize=true) {
 	if(!$meta) $meta = 'cs_'.$outil;
-	if (!isset($GLOBALS['meta'][$meta])) { $f=$outil='_installe'; $f(); }
+	if (!isset($GLOBALS['meta'][$meta])) { $f = $outil.'_installe'; $f(); }
 	return $unserialize?unserialize($GLOBALS['meta'][$meta]):$GLOBALS['meta'][$meta];
+}
+
+// renvoie les donnees precompilees d'un outil
+function cs_lire_data_outil($outil) {
+	static $datas;
+	if(!isset($datas)) {
+		if(!$GLOBALS['cs_outils']) include_spip(_DIR_CS_TMP . 'mes_outils');
+		if(function_exists('cs_data_outils')) $datas = cs_data_outils();
+	}
+	if(!isset($datas[$outil])) {
+		$f = $outil.'_installe';
+		$datas[$outil] = $f();
+	}
+	return $datas[$outil];
 }
 
 function rep_icones_barre(&$icones_barre) {

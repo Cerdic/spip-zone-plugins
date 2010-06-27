@@ -20,13 +20,12 @@
 function filets_sep_installe() {
 //cs_log('filets_sep_installe()');
 	include_spip('inc/texte');
-	$liste = $filets = array();
+	$filets = array();
 	$bt = defined('_DIR_PLUGIN_PORTE_PLUME');
 	$path = find_in_path('img/filets');
 	$dossier = opendir($path);
 	if($path) while ($image = readdir($dossier)) {
 		if (preg_match(',^(([a-z0-9_-]+)'._FILETS_REG_EXT.'),', $image, $reg)) {
-			$liste[] = '<b>__'.$reg[1].'__</b>';
 			$filets[0][] = '__'.$reg[1].'__';
 			$filets[2][] = $reg[2];
 			list(,$haut) = @getimagesize($path.'/'.$reg[1]);
@@ -39,16 +38,15 @@ function filets_sep_installe() {
 	}
 	if($bt) for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
 		$filets[5]['filet_'.$i] = $i;
-	ecrire_meta('cs_filets_sep_racc', join(', ', $liste));
-	ecrire_meta('cs_filets_sep', serialize($filets));
-	ecrire_metas();
+	return $filets;
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function filets_sep_raccourcis() {
-	return _T('couteauprive:filets_sep:aide',
-		array('liste' => $GLOBALS['meta']['cs_filets_sep_racc'], 'max'=>_FILETS_SEP_MAX_CSS));
+	$filets = cs_lire_data_outil('filets_sep');
+	return _T('couteauprive:filets_sep:aide', 
+		array('liste' => '<b>'.join('</b>, <b>', $filets[0]).'</b>', 'max'=>_FILETS_SEP_MAX_CSS));
 }
 
 // Fonction pour generer des filets de separation selon les balises presentes dans le texte fourni.
@@ -80,8 +78,7 @@ function filets_sep($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function filets_sep_BarreTypo($tr) {
-	// le tableau des filets est present dans les metas
-	$filets = cs_lire_meta_outil('filets_sep');
+	$filets = cs_lire_data_outil('filets_sep');
 	$res = array();
 	for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
 		$res[] = "<a title=\"__{$i}__\" href=\"javascript:barre_inserer('\\n\\n__{$i}__\\n\\n',@@champ@@)\"><span class=\"cs_BT\">CSS {$i}</span></a>";
@@ -94,8 +91,7 @@ function filets_sep_BarreTypo($tr) {
 
 // les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function filets_PP_pre_charger($flux) {
-	// le tableau des filets est present dans les metas
-	$filets = cs_lire_meta_outil('filets_sep');
+	$filets = cs_lire_data_outil('filets_sep');
 	$max = count($filets[0]);
 	$r = array();
 	for ($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++) {
@@ -129,8 +125,7 @@ function filets_PP_pre_charger($flux) {
 	return $flux;
 }
 function filets_PP_icones($flux) {
-	// le tableau des filets est present dans les metas
-	$filets = cs_lire_meta_outil('filets_sep');
+	$filets = cs_lire_data_outil('filets_sep');
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
 	$flux['cs_filets_drop'] = filets_creer_icone_barre(find_in_path('img/filets/ornement.png'));
 	$path = find_in_path('img/filets').'/';
