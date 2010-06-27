@@ -12,6 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/notation');
 include_spip('inc/notation_autorisations');
 include_spip('base/abstract_sql');
+include_spip('inc/session');
 
 function formulaires_notation_charger_dist($objet, $id_objet){
 
@@ -33,7 +34,7 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		// on recupere l'id de l'auteur connecte, sinon ip
 		if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
 			$id_auteur = 0;
-			$ip	= $_SERVER['REMOTE_ADDR'];
+			$ip	= $GLOBALS['ip'];
 		}
 
 		$where = array(
@@ -89,7 +90,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	// indiquer dans sa session que ce visiteur a vote
 	// grace a ce cookie on dira a charger() qu'il faut regarder
 	// de plus pres ce qu'il en est dans la base
-	include_spip('inc/session');
+
 	session_set('a_vote', true);
 
 	// invalider les caches
@@ -101,7 +102,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	} else {
 		$id_auteur = 0;
 	}
-	$ip	= $_SERVER['REMOTE_ADDR'];
+	$ip	= $GLOBALS['ip'];
 
 	// recuperation des champs
 	$note = intval(_request("notation-$objet$id_objet"));
