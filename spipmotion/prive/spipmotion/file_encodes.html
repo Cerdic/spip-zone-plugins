@@ -19,14 +19,26 @@
 </BOUCLE_spipmotion_encodes_total>
 #SET{dates,#GET{dates}|array_unique}
 
-<B_spipmotion_encodes>
-#SET{total,#GRAND_TOTAL}
-<p><:spipmotion:info_nombre_encodes{nb=#GET{total}}:></p>
+<BOUCLE_doc_previsu(DOCUMENTS){id_document=#ENV{id_document}}{tout}>
 [(#ENV{id_document}|et{#PLUGIN{html5_player}}|oui)
 	<h3><:spipmotion:titre_previsu:></h3>
 	<p><a href="[(#SELF|parametre_url{id_document,''})]" class="ajax"><:spipmotion:lien_enlever_previsu:></a></p>
 	[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=non,largeur=400,infos=non})]
 ]
+</BOUCLE_doc_previsu>
+</B_doc_previsu>
+[(#ENV{id_document}|oui)
+	<h3><:spipmotion:titre_previsu:></h3>
+	<p><a href="[(#SELF|parametre_url{id_document,''})]" class="ajax"><:spipmotion:lien_enlever_previsu:></a></p>
+	<div class="formulaire_spip">
+		<p class="reponse_formulaire reponse_formulaire_erreur">
+			<:spipmotion:erreur_document_plus_disponible:>
+		</p>
+	</div>]
+<//B_doc_previsu>
+<B_spipmotion_encodes>
+#SET{total,#GRAND_TOTAL}
+<p><:spipmotion:info_nombre_encodes{nb=#GET{total}}:></p>
 #ANCRE_PAGINATION
 <table class="spipmotion">
 	<thead>
