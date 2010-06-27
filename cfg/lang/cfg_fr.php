@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Aucun champs trouv&eacute; dans @nom@',
+	'pas_de_champs_dans' => 'Aucun champ trouv&eacute; dans @nom@',
 	'pas_de_changement' => 'Pas de changement dans <b>@nom@</b>',
 
 	// R
