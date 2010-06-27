@@ -85,7 +85,7 @@ function spipmotion_supprimer_versions($id_document){
 		$in = sql_in('id_document', $liste);
 		sql_delete("spip_documents", $in);
 		sql_delete("spip_documents_liens", $in);
-		//sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document));
+		sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document).' AND encode != '.sql_quote('oui'));
 	}
 
 	include_spip('inc/invalideur');
