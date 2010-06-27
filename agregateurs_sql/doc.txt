@@ -38,6 +38,13 @@ Trier les articles en fonction de leur nombre de mots clés :
 </BOUCLE_articles>
 </ul>
 
+Trier les articles en fonction de leur nombre de commentaires :
+
+<ul>
+<BOUCLE_articles(FORUMS){fusion id_article}{!par compteur_messages}{0,10}>
+	<li><BOUCLE_article(ARTICLES){id_article}>#TITRE</BOUCLE_article> - [(#EXPRESSION{COUNT(id_forum),compteur_messages})] commentaires</li>
+</BOUCLE_articles>
+</ul>
 
 Trier les rubriques en fonction de leur nombre d'articles, et faire un commentaire en fonction du nombre d'articles :
 
@@ -50,10 +57,32 @@ Rubrique 3 : 7 art.
     Evaluation littérale : more
 Rubrique 1 : 1 art.
     Evaluation littérale : one 
-    
-
-
- 
- 
-    
+   
+Voir tous les agregateurs possibles :    
 http://dev.mysql.com/doc/refman/5.1/en/control-flow-functions.html
+
+
+Note : Le cas du tri des articles par nombre de commentaires.
+
+Contre toute attente, la boucle
+
+<BOUCLE_articles(articles spip_forum){id_forum >0}{articles.id_article=L2.id_article}{fusion articles.id_article}{!par compteur_messages}{0,10}>
+    <li>#ID_ARTICLE - #EXPRESSION{COUNT(id_forum),compteur_messages} commentaires</li>
+</BOUCLE_articles>
+
+génère
+
+SELECT articles.id_article, COUNT(id_forum) as compteur_messages, articles.lang, articles.titre
+FROM spip_articles AS `articles`  
+INNER JOIN spip_auteurs_articles AS L1 ON ( L1.id_article = articles.id_article ) 
+INNER JOIN spip_forum AS L2 ON ( L2.id_auteur = L1.id_auteur )
+WHERE (articles.statut = 'publie')
+	AND (articles.date < '2037-11-12 20:23:40')
+	AND (L2.id_forum > 0)
+	AND (articles.id_article = 'L2.id_article')
+GROUP BY articles.id_article,articles.id_article
+ORDER BY compteur_messages DESC
+LIMIT 0,10
+
+Ce qui ne permet pas d'arriver au résultat voulu.
+

@@ -29,6 +29,23 @@ La nouvelle balise &#35;EXPRESSION{<i>expression</i>} permet d'ajouter des expre
 
 <h2>Exemple d'usage de la balise &#35;EXPRESSION avec tri</h2>
 
+<p>Trier les articles en fonction de leur nombre de mots clés :</p>
+
+<ul>
+<BOUCLE_articles(ARTICLES spip_mots_articles){id_mot >0}{fusion articles.id_article}{!par compteur_mots}{0,10}>
+	<li>#ID_ARTICLE - [(#EXPRESSION{COUNT(id_mot),compteur_mots})] mots-clés</li>
+</BOUCLE_articles>
+</ul>
+
+<p>Trier les articles en fonction de leur nombre de commentaires :</p>
+
+<ul>
+<BOUCLE_articles(FORUMS){fusion id_article}{!par compteur_messages}{0,10}>
+	<li><BOUCLE_article(ARTICLES){id_article}>#TITRE</BOUCLE_article> - [(#EXPRESSION{COUNT(id_forum),compteur_messages})] commentaires</li>
+</BOUCLE_articles>
+</ul>
+
+
 
 <p>
 &lt;BOUCLE_art(ARTICLES){fusion id_rubrique}{!par nombre_articles}&gt;<br />
@@ -42,12 +59,4 @@ Evaluation littérale : &#35;EXPRESSION{CASE COUNT(id_article) WHEN 1 THEN 'one'
 <dd>Evaluation littérale : #EXPRESSION{CASE COUNT(id_article) WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END}</dd>
 </BOUCLE_arti>
 </dl>
-
-<p>Trier les articles en fonction de leur nombre de mots clés :</p>
-
-<ul>
-<BOUCLE_articles(ARTICLES spip_mots_articles){id_mot >0}{fusion articles.id_article}{!par compteur_mots}{0,10}>
-	<li>#ID_ARTICLE - [(#EXPRESSION{COUNT(id_mot),compteur_mots})] mots-clés</li>
-</BOUCLE_articles>
-</ul>
 
