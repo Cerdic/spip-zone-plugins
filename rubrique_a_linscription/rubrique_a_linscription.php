@@ -12,7 +12,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		sql_insertq('spip_auteurs_rubriques', array(
 		'id_auteur' => $id_auteur,
 		'id_rubrique' => $id_rubrique));
-		spip_log('Création de la rubrique pour l\'auteur '.$nom_inscription.' ( '.$mail.' )','rubrique_a_linscription');
+		spip_log('Création de la rubrique '.$id_rubrique.' pour l\'auteur '.$nom_inscription.' ( '.$mail.' )','rubrique_a_linscription');
 	}
 	return $flux;	
 }
