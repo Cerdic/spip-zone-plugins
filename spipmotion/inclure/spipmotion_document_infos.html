@@ -1,0 +1,91 @@
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+<div>
+	[<p>
+		<strong>
+			<:spipmotion:info_nom_fichier:>
+		</strong>
+		<a href="#FICHIER" title="[(#TITRE|supprimer_numero|attribut_html|sinon{[(#FICHIER|basename)]})]">
+			(#FICHIER|basename)
+		</a>
+	</p>]
+	[<p>
+		<strong><:spipmotion:info_poid_fichier:></strong> : (#TAILLE|taille_en_octets)
+	</p>]
+	[<p>
+		<strong><:spipmotion:info_mime:></strong> (#MIME_TYPE)
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_duree:>
+		</strong>
+		[(#DUREE|getid3_duree)] ((#DUREE|floor) sec.)
+	</p>]
+	<p>
+		<strong>
+			<:spipmotion:info_format:>
+		</strong>
+		#LARGEUR/#HAUTEUR px
+	</p>
+	[<p>
+		<strong>
+			<:spipmotion:info_framecount:>
+		</strong>
+		(#FRAMECOUNT)
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_pixelformat:>
+		</strong>
+		(#PIXELFORMAT)
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_framerate:>
+		</strong>
+		(#FRAMERATE) img/sec
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_bitrate:>
+		</strong>
+		(#BITRATE|div{1000}|floor) kb/s.
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_videobitrate:>
+		</strong>
+		(#VIDEOBITRATE|div{1000}|floor) kb/s.
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_videocodec:>
+		</strong>
+		(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})
+	</p>]
+
+	[<p>
+		<strong>
+			<:spipmotion:info_audiocodec:>
+		</strong>
+		(#AUDIOCODEC|intval|?{[(#AUDIOCODEC|flv_audio_codec_type_to_type)],#AUDIOCODEC})
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_audiobitrate:>
+		</strong>
+		(#AUDIOBITRATE|div{1000}|floor) kb/s.
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_audiosamplerate:>
+		</strong>
+		(#AUDIOSAMPLERATE) hz.
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_audiochannels:>
+		</strong>
+		(#AUDIOCHANNELS)
+	</p>]
+</div>
+</BOUCLE_doc>
