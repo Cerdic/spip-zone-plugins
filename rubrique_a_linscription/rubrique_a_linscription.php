@@ -1,7 +1,8 @@
 <?php
 
 function rubrique_a_linscription_formulaire_traiter($flux){
-	if ($flux['args']['form']=='inscription'){
+	if ($flux['args']['form']=='inscription' and $flux['args']['args'][0]=='0minirezo'){
+		
 		$mail = _request('mail_inscription');
 		$nom_inscription = str_replace('@',' (chez) ',_request('nom_inscription'));
 		include_spip('base/abstract_sql');
@@ -11,7 +12,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		sql_insertq('spip_auteurs_rubriques', array(
 		'id_auteur' => $id_auteur,
 		'id_rubrique' => $id_rubrique));
-		spip_log('Création de la rubrique pour l\'auteur '.$mail,'rubrique_a_linscription');
+		spip_log('Création de la rubrique pour l\'auteur '.$nom_inscription.' ( '.$mail.' )','rubrique_a_linscription');
 	}
 	return $flux;	
 }
