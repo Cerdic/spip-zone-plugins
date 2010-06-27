@@ -14,10 +14,10 @@
 <:spipmotion:message_encodage_unique_erreur{id_document=#GET{id_document},extension=#GET{extension}}:>][
 (#SET{objet,[(#_attente:OBJET)]})][
 (#SET{id_objet,[(#_attente:ID_OBJET)]})][
-(#GET{objet}|=={article}|oui)#SET{url,#URL_ARTICLE{#GET{id_objet}}}][
-(#GET{objet}|=={rubrique}|oui)#SET{url,#URL_RUBRIQUE{#GET{id_objet}}}]
+(#GET{objet}|=={article}|oui)#SET{url,#URL_ARTICLE{#_attente:ID_OBJET}}][
+(#GET{objet}|=={rubrique}|oui)#SET{url,#URL_RUBRIQUE{#_attente:ID_OBJET}}]
 <:spipmotion:message_encodage_objet_lie{objet=#GET{objet},id_objet=#GET{id_objet}}:>
-#INFO_TITRE{#GET{objet},#GET{id_objet}}&nbsp;-&nbsp;[(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|oui)[#URL_SITE_SPIP/(#GET{url})]][(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|non)<:spipmotion:info_objet_non_publie:>]
+[(#INFO_TITRE{#GET{objet},#GET{id_objet}}|sinon{<:info_sans_titre:>})]&nbsp;-&nbsp;[(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|oui)[#URL_SITE_SPIP/(#GET{url})]][(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|non)<:spipmotion:info_objet_non_publie:>]
 
 
 [(#ENCODE|=={erreur}|oui)
