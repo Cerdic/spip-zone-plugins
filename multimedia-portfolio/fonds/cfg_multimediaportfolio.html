@@ -1,0 +1,37 @@
+#CACHE{0}
+[(#REM) titre=Portfolio Multim&eacute;dia]
+[(#REM) icone=img_pack/logo_multimediaportfolio_petit.png]
+<!-- descriptif=
+<p>
+</p>
+-->
+<form method="post" action="#SELF">
+	<div>[(#ENV{_cfg_}|form_hidden)]</div>
+	<p></p>
+	<fieldset>
+		<label for="largeur">Largeur :</label>
+		<input type="text" name="largeur" id="largeur" value="[(#ENV{largeur,500})]" />
+		<br />
+		<label for="nb">Nombre d'&eacute;l&eacute;ments :</label>
+		<input type="text" name="nb" id="nb" value="[(#ENV{nb,2})]" />
+	</fieldset>
+
+	<fieldset>
+		<label for="docs_pdf">Associer les documents pdf :</label>	
+		<select name="docs_pdf" id="docs_pdf">
+			<option value="non" [(#ENV{docs_pdf}|=={"non"}|?{selected="selected",})]>non</option>		
+			<option value="oui" [(#ENV{docs_pdf}|=={"oui"}|?{selected="selected",})]>oui</option>		
+		</select>
+		<br />
+		<label for="remplacer">Remplacer automatiquement le portfolio de SPIP :</label>	
+		<select name="remplacer" id="remplacer">
+			<option value="non" [(#ENV{remplacer}|=={"non"}|?{selected="selected",})]>non</option>		
+			<option value="oui" [(#ENV{remplacer}|=={"oui"}|?{selected="selected",})]>oui</option>		
+		</select>
+	</fieldset>
+	<div>
+		<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+		<input type="reset" value="<:reset:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+	</div>
+</form>
