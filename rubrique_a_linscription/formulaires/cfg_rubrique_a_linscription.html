@@ -1,0 +1,40 @@
+<!-- titre=Rubrique à l'inscription-->
+<div class="formulaire_spip formulaire_editer formulaire_editer_rubrique_a_linscription" id="formulaire_editer_rubrique_a_linscription">
+<form action="#ENV{action}" method="post">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p class="explication">Ce plugin propose de créer automatiquement une rubrique lorsqu'une personne s'inscrit sur le site. La personne inscrite reçoit les droits d'administrations sur cette rubrique</p>
+	<fieldset>
+		<legend>Configuration générale</legend>
+		
+		<ul>
+			[<li class="editer_rubrique_mere obligatoire">
+				<label for="rubrique_mere">Rubrique mère des rubriques créées à l'inscription</label>
+				(#VAL|chercher_rubrique{#ENV{id_parent},#ENV{id_parent},rubrique})
+			
+			</li>]
+			<p class="explication">Attention : si vous modifiez ce paramètre, les rubriques déja créées ne changeront pas de place pour autant.</p>
+		</ul>
+		
+	</fieldset>
+	
+	<fieldset>
+		<legend>Envoyer un mail au nouvel inscrit avec :</legend>
+		<ul>
+			<li class="editer_mail_public">
+				
+				<input type="checkbox" class="checkbox" name="mail_public"[ checked="checked"(#ENV{mail_public}|oui)]>
+				<label for="mail_public">L'adresse public de la rubrique</label>
+				
+			</li>
+			
+			<li class="editer_mail_prive">
+				
+				<input type="checkbox" class="checkbox" name="mail_prive"[ checked="checked"(#ENV{mail_prive}|oui)]>
+				<label for="mail_prive">L'adresse public de la rubrique</label>
+				
+			</li>
+		</ul>
+	<p class="boutons"><input type="submit" name="ok" value="<:OK:>" /></p>
+   
+</form>
+</div>
