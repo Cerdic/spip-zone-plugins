@@ -38,7 +38,7 @@ function filets_sep_installe() {
 	}
 	if($bt) for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
 		$filets[5]['filet_'.$i] = $i;
-	return $filets;
+	return array('filets_sep' => $filets);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
@@ -66,8 +66,8 @@ function filets_sep_rempl($texte) {
 
 	// On remplace les balises filets images dans le texte par le code HTML correspondant.
 	// le resultat est protege pour eviter que la typo de SPIP y touche
-	$filets_rempl = unserialize($GLOBALS['meta']['cs_filets_sep']);
-	return str_replace($filets_rempl[0], $filets_rempl[1], $texte);
+	$filets = cs_lire_data_outil('filets_sep');
+	return str_replace($filets[0], $filets[1], $texte);
 }
 
 // fonction pipeline pre_typo

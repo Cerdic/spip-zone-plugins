@@ -6,8 +6,7 @@ include_spip('inc/actions');
 
 function spam_filtre_de_test($texte) {
 	if (!strlen($texte)) return '';
-	if (!isset($GLOBALS['meta']['cs_spam_mots'])) { include_spip('outils/spam'); spam_installe(); }
-	$spam = unserialize($GLOBALS['meta']['cs_spam_mots']);
+	$spam = cs_lire_data_outil('spam');
 	$test = false;
 	return cs_test_spam($spam, $texte, $test)?'ko':'ok';
 }
@@ -16,8 +15,7 @@ function spam_filtre_de_test_ip($texte, $liste=false) {
 	if (!strlen($texte)) return '';
 	if(!preg_match_all(',\d+\.\d+\.\d+\.\d+,', $texte, $regs, PREG_PATTERN_ORDER)) return '';
 	$res = array();
-	if (!isset($GLOBALS['meta']['cs_spam_mots'])) { include_spip('outils/spam'); spam_installe(); }
-	$spam = unserialize($GLOBALS['meta']['cs_spam_mots']);
+	$spam = cs_lire_data_outil('spam');
 	foreach($regs[0] as $r) {
 		$test = $spam[3]?preg_match($spam[3], "$r"):false;
 		if(!$liste) { if($test) return 'ko'; }

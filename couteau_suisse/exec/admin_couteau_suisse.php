@@ -11,7 +11,7 @@ include_spip('inc/autoriser');
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
-include_spip('base/cout_install');
+include_spip('base/cout_upgrade');
 
 // mise a jour des donnees si envoi via formulaire
 function enregistre_modif_outils($cmd){
@@ -138,15 +138,17 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	if(isset($GLOBALS['meta']['plugin'])) {
 		$t = unserialize($GLOBALS['meta']['plugin']);
 		$dir = $t['COUTEAU_SUISSE']['dir'];
-		$cs_version = $t['COUTEAU_SUISSE']['version'];
+		$dir_type = $t['COUTEAU_SUISSE']['dir_type'];
 		$bt_dir = $t['BARRETYPOENRICHIE']['dir'];
 		$bt_version = $t['BARRETYPOENRICHIE']['version'];
-		unset($t);
 	}
 	if(!strlen($dir)) $dir = 'couteau_suisse';
 	if(!strlen($bt_dir)) $bt_dir = 'barre_typo_v2';
 	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
-	if(!strlen($cs_version)) { $cs_version = $get_infos($dir); $cs_version = $cs_version['version']; }
+	$t = $get_infos($dir); $cs_version_base = $t['version_base']; $cs_version = $t['version'];
+	// mises a jour eventuelles de la base
+	installe_un_plugin($dir, $t, $dir_type);
+	unset($t);
 	if(!strlen($bt_version)) { $bt_version = $get_infos($bt_dir); $bt_version = $bt_version['version']; }
 	
 	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t,$r)))
@@ -161,7 +163,6 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	gros_titre(_T('couteauprive:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
 	echo '<div style="font-size:85%">';
-//echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire('admin_couteau_suisse_old'), '">par ici</a></p>';
 // verification d'une base venant de SPIP 1.8
 $res = spip_query("DESCRIBE spip_meta valeur");
 $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);

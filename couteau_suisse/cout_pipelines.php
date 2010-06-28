@@ -202,7 +202,7 @@ function couteau_suisse_pre_description_outil($flux) {
 
 // callback pour la fonction cs_compile_pipe()
 function cs_compile_header_callback($matches) {
-if(defined('_LOG_CS')) cs_log(" -- compilation d'un header. Code CSS : $matches[1]");
+if(defined('_LOG_CS')) cs_log(" -- compilation d'un header. Code CSS : ".couper($matches[1], 150));
 	return cs_recuperer_code($matches[1]);
 }
 

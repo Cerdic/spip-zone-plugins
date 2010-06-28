@@ -27,8 +27,7 @@ function spam_installe() {
 	$spam_mots = defined('_spam_IPS')?spam_liste_mots(_spam_IPS):array();
 	array_walk($spam_mots, 'spam_walk');
 	$t[3] = count($spam_mots)?'/^(?:' . join('|', $spam_mots) . ')$/':'';
-	ecrire_meta('cs_spam_mots', serialize($t));
-	ecrire_metas();
+	return array('spam' => $t);
 }
 
 function spam_walk(&$item) {

@@ -86,8 +86,6 @@ if($log) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : S
 			unset($metas_outils[$nom]);
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	ecrire_metas();
-	// nettoyage des versions anterieures
-	cs_compatibilite_ascendante();
 	// stocker les types de variables declarees
 	global $cs_variables;
 	$metas_vars['_chaines'] = $cs_variables['_chaines'];
@@ -237,17 +235,19 @@ function cs_lire_meta_outil($outil, $meta='', $unserialize=true) {
 }
 
 // renvoie les donnees precompilees d'un outil
-function cs_lire_data_outil($outil) {
-	static $datas;
-	if(!isset($datas)) {
+function cs_lire_data_outil($outil, $casier='') {
+	static $datas = array();
+	if(!$casier) $casier = $outil;
+	if(!isset($datas[$casier])) {
 		if(!$GLOBALS['cs_outils']) include_spip(_DIR_CS_TMP . 'mes_outils');
-		if(function_exists('cs_data_outils')) $datas = cs_data_outils();
+		if(function_exists($f='cs_data_'.$casier)) $datas[$casier] = $f();
 	}
-	if(!isset($datas[$outil])) {
+	if(!isset($datas[$casier])) {
+		include_spip('outils/'.$outil);
 		$f = $outil.'_installe';
-		$datas[$outil] = $f();
+		$datas[$casier] = $f();
 	}
-	return $datas[$outil];
+	return $datas[$casier];
 }
 
 function rep_icones_barre(&$icones_barre) {

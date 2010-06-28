@@ -25,42 +25,6 @@ $cs_variables['_chaines'] = $cs_variables['_nombres'] = array();
 define('_format_CHAINE', 10);
 define('_format_NOMBRE', 20);
 
-/*****************/
-/* COMPATIBILITE */
-/*****************/
-
-function cs_suppr_metas_var($meta, $new = false) {
- global $metas_vars;
- if(!isset($metas_vars[$meta])) return;
- if($new) {
- 	if(preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]*=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $metas_vars[$meta], $reg)) $metas_vars[$new] = $reg[1];
-	else $metas_vars[$new] = $metas_vars[$meta];
- }
- unset($metas_vars[$meta]);
-}
-
-// on actualise/supprime de vieilles variables creees par les version anterieures du Couteau Suisse
-function cs_compatibilite_ascendante() {
-	cs_suppr_metas_var('set_options');
-	cs_suppr_metas_var('radio_set_options3');
-	cs_suppr_metas_var('radio_set_options', 'radio_set_options4');
-	cs_suppr_metas_var('radio_type_urls', 'radio_type_urls3');
-	cs_suppr_metas_var('radio_type_urls2', 'radio_type_urls3');
-	cs_suppr_metas_var('radio_filtrer_javascript', 'radio_filtrer_javascript3');
-	cs_suppr_metas_var('radio_filtrer_javascript2', 'radio_filtrer_javascript3');
-	cs_suppr_metas_var('radio_suivi_forums', 'radio_suivi_forums3');
-	cs_suppr_metas_var('desactive_cache');
-	cs_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
-	cs_suppr_metas_var('target_blank');
-	cs_suppr_metas_var('url_glossaire_externe', 'url_glossaire_externe2');
-	cs_suppr_metas_var('');
-	effacer_meta('cs_decoupe');
-	if(defined('_SPIP19300')) {
-		if(@$metas_vars['radio_desactive_cache3']==1) $metas_vars['radio_desactive_cache4']=-1;
-		cs_suppr_metas_var('radio_desactive_cache3');
-	}
-}
-
 /*************/
 /* FONCTIONS */
 /*************/
@@ -692,14 +656,12 @@ function cs_installe_outils() {
 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) {
 		include_spip('outils/'.$nom);
 		if(function_exists($f = $nom.'_installe')) {
-			if(($tmp=$f())!==NULL) $datas[$nom] = $tmp;
+			if(($tmp=$f())!==NULL) foreach($tmp as $i=>$v)
+				$datas[$i] = "function cs_data_$i() { return " . var_export($v, true) . ";\n}";
 if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 		}
 	}
-	$datas = array('code_outils' => array(
-		"function cs_data_outils() {\nreturn "
-		. var_export($datas, true)
-		. ";\n}"));
+	$datas = array('code_outils' => $datas);
 	ecrire_fichier_en_tmp($datas, 'outils');
 	ecrire_metas();
 }

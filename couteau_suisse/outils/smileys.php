@@ -55,7 +55,8 @@ cs_log("smileys_installe() : $path");
 	 '|)'	=> 'rouge.png',
 	 ':/'	=> 'mouais.png',
 	);
-
+	
+	$aide = array();
 	foreach ($smileys as $smy=>$val) {
 		$espace = strlen($smy)==2?' ':'';
 		$smileys2[0][] = $espace.$smy;
@@ -64,7 +65,7 @@ cs_log("smileys_installe() : $path");
 		$smileys2[1][] = cs_code_echappement($espace."<img alt=\"$smy\" title=\"$smy\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>", 'SMILE');
 		$smileys2[2][] = $val;
 		// aide : liste des smileys disponibles
-		$smileys2['racc'][] = $smy;
+		$aide[] = $smy;
 	}
 
 	if(defined('_DIR_PLUGIN_PORTE_PLUME')) {
@@ -73,14 +74,14 @@ cs_log("smileys_installe() : $path");
 		for ($i=0; $i<$max; $i++)
 			$smileys2[4]['smiley_'.str_replace('.png','',$sm[2][$i])] = $sm[2][$i];
 	}
-	return $smileys2;
+	return array('smileys'=>$smileys2, 'smileys_racc'=>$aide);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function smileys_raccourcis() {
-	$smileys = cs_lire_data_outil('smileys');
-	return _T('couteauprive:smileys:aide', array('liste' => '<b>'.join('</b>, <b>', $smileys['racc']).'</b>'));
+	$racc = cs_lire_data_outil('smileys_racc');
+	return _T('couteauprive:smileys:aide', array('liste' => '<b>'.join('</b>, <b>', $racc).'</b>'));
 }
 
 function smileys_echappe_balises_callback($matches) {

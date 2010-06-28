@@ -21,7 +21,7 @@ cs_log("jcorner_installe()");
 		}
 	}
 	// en retour : le code jQuery
-	return join("\n\t", $code);
+	return array('jcorner' => join("\n\t", $code));
 }
 
 

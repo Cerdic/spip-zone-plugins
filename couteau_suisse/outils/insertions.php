@@ -27,8 +27,7 @@ cs_log("insertions_installe()");
 			$str[0][] = $a; $str[1][] = $b;
 		}
 	}
-	ecrire_meta('cs_insertions', serialize(array($str, $preg)));
-	ecrire_metas();
+	return array('insertions' => array($str, $preg));
 }
 
 ?>

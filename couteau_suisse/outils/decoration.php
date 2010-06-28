@@ -61,7 +61,7 @@ cs_log("decoration_installe()");
 	// protection $auto_balises pour la future regExpr
 	array_walk($auto_balises, 'cs_preg_quote');
 	// renvoi des donnees compilees
-	return array(
+	return array( 'decoration'=> array(
 		// balises fixes a trouver
 		$trouve, 
 		// remplacement des balises fixes
@@ -71,17 +71,17 @@ cs_log("decoration_installe()");
 		// association pour les balises automatiques
 		$auto_remplace,
 		// balises disponibles
-		$BT,
+		$BT),
 		// aide
-		'racc' => $aide,
+		'decoration_racc' => $aide,
 	);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function decoration_raccourcis() {
-	$balises = cs_lire_data_outil('decoration');
-	return _T('couteauprive:decoration:aide', array('liste' => '<b>'.join('</b>, <b>', $balises['racc']).'</b>'));
+	$racc = cs_lire_data_outil('decoration', 'decoration_racc');
+	return _T('couteauprive:decoration:aide', array('liste' => '<b>'.join('</b>, <b>', $racc).'</b>'));
 }
 
 function decoration_callback($matches) {

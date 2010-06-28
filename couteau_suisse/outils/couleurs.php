@@ -38,7 +38,7 @@ cs_log("couleurs_installe()");
 	if (_COULEURS_SET===1) {
 		$perso = preg_replace('^\s*(=|,)\s*^','\1', trim(_COULEURS_PERSO));
 		$perso = explode(',', $perso);
-		$couleurs_perso = $aide = array();
+		$couleurs_perso = array();
 		foreach($perso as $p) {
 			list($a, $b) = explode('=', $p, 2);
 			$b = isset($html[$b])?'#'.$html[$b]:$b;
@@ -52,9 +52,9 @@ cs_log("couleurs_installe()");
 		}
 		$couleurs[2] = $couleurs_perso;
 		$couleurs[0] = join('|', array_keys($couleurs_perso));
-		$aide = '<b>'.join('</b>, <b>', array_keys($couleurs_perso)).'</b>';
+		$aide = array_keys($couleurs_perso);
 	} else {
-		$aide = '<b>'.join('</b>, <b>', array_merge($couleurs[0], $couleurs[1])).'</b>';
+		$aide = array_merge($couleurs[0], $couleurs[1]);
 		$couleurs[0] = join('|', $couleurs[0]);
 		$couleurs[1] = join('|', $couleurs[1]);
 	}
@@ -69,12 +69,7 @@ cs_log("couleurs_installe()");
 			}
 		}
 	}
-
-	// sauvegarde en meta : aide
-	ecrire_meta('cs_couleurs_racc', $aide);
-	// sauvegarde en meta : couleurs
-	ecrire_meta('cs_couleurs', serialize($couleurs));
-	ecrire_metas();
+	return array('couleurs'=>$couleurs, 'couleurs_racc'=>$aide);
 }
 
 // creation d'icone pour le plugin porte-plume
@@ -90,9 +85,9 @@ function couleurs_creer_icone_barre($texte, $color) {
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function couleurs_raccourcis() {
-	$couleurs = cs_lire_data_outil('decoration');
+	$racc = cs_lire_data_outil('couleurs', 'couleurs_racc');
 	return _T('couteauprive:couleurs:aide', array(
-		'liste' => $couleurs['racc'],
+		'liste' => '<b>'.join('</b>, <b>', $racc).'</b>',
 		'fond' => _COULEURS_FONDS==1?_T('couteauprive:couleurs_fonds'):'',
 	));
 }

@@ -8,8 +8,6 @@ if ( count($_POST)
 	&& !isset($_POST['action'])
 	) {
 
-	if (!isset($GLOBALS['meta']['cs_spam_mots'])) { include_spip('outils/spam'); spam_installe(); }
-
 	// champs du formulaire a visiter
 	//	un message en forum : texte, titre, auteur
 	//	un message a un auteur : texte_message_auteur_XX, sujet_message_auteur_XX, email_message_auteur_XX
@@ -21,9 +19,9 @@ if ( count($_POST)
 	foreach (array_keys($_POST) as $key)
 		if (preg_match($spam_POST_reg, $key) && strpos($key, 'password')===false)
 			$spam_POST_compile[] = $key;
-	// boucle de censure
 
-	$spam_mots = unserialize($GLOBALS['meta']['cs_spam_mots']);
+	include_spip('cout_lancement');
+	$spam_mots = cs_lire_data_outil('spam');
 	// test IP compatible avec l'outil 'no_IP'
 	$test = $spam_mots[3]?preg_match($spam_mots[3], $ip_):false;
 	foreach ($spam_POST_compile as $var) if(!$test)

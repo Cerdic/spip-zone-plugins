@@ -7,19 +7,17 @@
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function cs_rempl_chatons($texte) {
 	if (strpos($texte, ':')===false) return $texte;
-	$chatons_rempl = unserialize($GLOBALS['meta']['cs_chatons']);
-	return str_replace($chatons_rempl[0], $chatons_rempl[1], $texte);
+	$chatons = cs_lire_data_outil('chatons');
+	return str_replace($chatons[0], $chatons[1], $texte);
 }
 
 function chatons_pre_typo($texte) {
 	if (strpos($texte, ':')===false) return $texte;
-	if (!isset($GLOBALS['meta']['cs_chatons'])) chatons_installe();
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_chatons', $texte);
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function chatons_installe() {
-//cs_log('chatons_installe()');
 	$chatons = array();
 	$path = find_in_path('img/chatons');
 	$dossier = opendir($path);
@@ -32,7 +30,7 @@ function chatons_installe() {
 			if($bt)	$chatons[4]['chaton_'.$reg[1]] = $reg[1].'.'.$reg[2];
 		}
 	}
-	return $chatons;
+	return array('chatons' => $chatons);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
