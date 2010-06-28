@@ -32,11 +32,12 @@ function genie_spipmotion_file($time)  {
 		$doc_attente = sql_fetsel("*","spip_spipmotion_attentes","encode='non'","","id_spipmotion_attente ASC","1");
 		$id_document = $doc_attente['id_document'];
 		$id_doc_attente = $doc_attente['id_spipmotion_attente'];
+		$format = $doc_attente['extension'];
 		$document = sql_fetsel('*','spip_documents','id_document='.sql_quote($id_document));
 		if($document['id_document']){
 			spip_log('on encode le doc '.$id_document,'spipmotion');
 			$encoder = charger_fonction('encodage','inc');
-			$encoder($document,$id_doc_attente);
+			$encoder($document,$id_doc_attente,$format);
 		}else{
 			sql_delete('spip_spipmotion_attentes','id_document='.sql_quote($id_document));
 			genie_spipmotion_file($time);

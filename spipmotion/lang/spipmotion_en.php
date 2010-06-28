@@ -30,8 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'document_dans_file_attente' => 'This document is in the encoding queue',
 
 	// E
-	'encoder_video' => '(Re)encode this video',
 	'encoder_son' => '(Re)encode this sound',
+	'encoder_son_version' => '(Re)encode this sound only in @version@',
+	'encoder_video' => '(Re)encode this video',
+	'encoder_video_version' => '(Re)encode this video only in @version@',
 	'erreur_chemin_ffmpeg' => 'No encoding can be performed because the path does not work.',
 	'erreur_document_plus_disponible' => 'This document is not available on the website anymore',
 	'erreur_verifier_droits' => 'The encoding script "script_bash/spipmotion.sh" is not executable.',
@@ -102,6 +104,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_encode_oui' => 'Encoded',
 	'info_statut_encode_non' => 'Waiting',
 	'info_statut_non_publie' => 'This object is not published',
+	'info_version' => '@version@ version',
+	'info_version_original' => 'Original',
 	'info_videobitrate' => 'Video bitrate : ',
 	'info_videocodec' => 'Video codec : ',
 	'info_voir_log_erreur' => 'Show log',
@@ -133,6 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_forcer_ffmpeg_infos' => 'Force the update of these informations',
 
 	// M
+	'message_document_encours_encodage_version' => 'This document is currently awaiting encoding in @version@.',
 	'message_encodage_erreur_log' => 'The log file is as follows :',
 	'message_encodage_objet_lie' => 'It is associated with the object @objet@ #@id_objet@ :',
 	'message_encodage_objet_lie_plusieurs' => 'These documents are associated  width the object @objet@ #@id_objet@ :',

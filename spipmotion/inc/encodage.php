@@ -11,8 +11,54 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_encodage_dist($source,$attente){
-	  return encodage($source,$attente);
+function inc_encodage_dist($source,$attente,$format=''){
+	/**
+	 * On vérifie que l'on n'a pas déjà une version dans le format souhaité
+	 * Si oui on la supprime avant de la réencoder
+	 */
+	if($id_document = sql_getfetsel('id_document','spip_documents','id_orig='.intval($source['id_document']).' AND extension='.sql_quote($format))){
+		spip_log("Il faut supprimer $id_document",'spipmotion');
+		$v = sql_fetsel("id_document,id_vignette,fichier","spip_documents","id_document=".intval($id_document));
+
+		include_spip('inc/documents');
+		/**
+		 * On ajoute l'id_document dans la liste des documents
+		 * à supprimer de la base
+		 * On supprime le fichier correspondant
+		 */
+		$liste[] = $v['id_document'];
+		if (@file_exists($f = get_spip_doc($v['fichier']))) {
+			supprimer_fichier($f);
+		}
+
+		/**
+		 * Si le document a une vignette :
+		 * - On ajoute l'id_document dans la liste à supprimer
+		 * - On supprime le fichier correspondant à la vignette
+		 */
+		if($v['id_vignette'] > 0){
+			spip_log("on supprime sa vignette également","spipmotion");
+			$liste[] = $v['id_vignette'];
+			$fichier = sql_getfetsel('fichier','spip_documents','id_document='.$v['id_vignette']);
+			if (@file_exists($f = get_spip_doc($fichier))) {
+				supprimer_fichier($f);
+			}
+		}
+
+		if(is_array($liste)){
+			$in = sql_in('id_document', $liste);
+			sql_delete("spip_documents", $in);
+			sql_delete("spip_documents_liens", $in);
+			sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document).' AND encode != '.sql_quote('oui'));
+		}
+
+		include_spip('inc/invalideur');
+		suivre_invalideur(1);
+	}
+	/**
+	 * Puis on lance l'encodage
+	 */
+	return encodage($source,$attente);
 }
 
 /**
