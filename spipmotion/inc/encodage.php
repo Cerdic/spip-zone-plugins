@@ -215,7 +215,10 @@ function encodage($source,$doc_attente){
 		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
 		 * le format choisi est vorbis (l'encodeur vorbis de ffmpeg ne gère pas le mono)
 		 */
-		if(($source['audiochannels'] > 2) OR (in_array($extension_attente,array('ogg','ogv','oga')) && ($source['audiochannels'] < 2))){
+		if(($source['audiochannels'] > 2)
+			OR (in_array($extension_attente,array('ogg','ogv','oga'))
+				&& ($source['audiochannels'] < 2)
+				&& (lire_config("spipmotion/encodeur_$extension_attente",'') != 'ffmpeg2theora'))){
 			spip_log('on passe en deux canaux','spipmotion');
 			$audiochannels = 2;
 		}else{
