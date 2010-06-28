@@ -114,11 +114,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_sauvegarde_intro' => 'Le message d\'erreur est le suivant :',
 	'erreur_repertoire_inaccessible' => 'Le r&eacute;pertoire @rep@ est inaccessible en &eacute;criture.',
 	'erreur_repertoire_inexistant' => 'Le r&eacute;pertoire @rep@ est inexistant. Veuillez v&eacute;rifier votre configuration.',
+	'erreurs_config' => 'Erreur(s) dans la configuration',
 	'message_aucune_sauvegarde' => 'Il n\'y a aucune sauvegarde.',
 	'saveauto_titre' => 'Sauvegarde SQL',
 	'sauvegarde_erreur_mail' => 'Le plugin "saveauto" a rencontr&eacute; une erreur lors de la sauvegarde de la base de donn&eacute;e.',
 	'titre_boite_historique' => 'Historique des sauvegardes',
-	'titre_boite_sauver' => 'Sauvegarder la base de donn&eacute;e',
+	'titre_boite_sauver' => 'Plugin Saveauto: sauvegarde SQL de la base de donn&eacute;e',
 	'titre_page_saveauto' => 'Sauvegarde de base de donn&eacute;e'
 
 );

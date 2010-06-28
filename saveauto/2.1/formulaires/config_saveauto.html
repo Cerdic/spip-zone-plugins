@@ -19,6 +19,7 @@
 					<label for="rep_bases"><:saveauto:repertoire_stockage:></label>
 					<p class="explication"><:saveauto:help_rep:></p>
 					<input type="text" name="rep_bases" class="text" id="rep_bases" value="[(#ENV{rep_bases}|sinon{tmp/})]" />
+					[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV**{erreurs}|table_valeur{rep_bases})</p>]
 				</li>
 				<li class="editer_prefixe_save">
 					<label for="prefixe_save"><:saveauto:prefixe_sauvegardes:></label>

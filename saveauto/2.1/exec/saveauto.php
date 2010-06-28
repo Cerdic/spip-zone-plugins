@@ -29,7 +29,7 @@ function exec_saveauto_args($contexte=array()){
 
 	echo debut_droite('', true);
 	echo debut_cadre_trait_couleur(find_in_path('img_pack/saveauto-24.png'),true, "", _T('saveauto:titre_boite_sauver'));
-	echo recuperer_fond('prive/contenu/saveauto');
+	echo recuperer_fond('prive/contenu/saveauto', array('err'=>_request('err')));
 	echo fin_cadre_trait_couleur(true);
 
 	echo debut_cadre_trait_couleur(find_in_path('img_pack/saveauto-24.png'),true, "", _T('saveauto:titre_boite_historique'));
