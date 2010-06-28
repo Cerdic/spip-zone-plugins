@@ -23,10 +23,16 @@
 			<option value="oui" [(#ENV{docs_pdf}|=={"oui"}|?{selected="selected",})]>oui</option>		
 		</select>
 		<br />
-		<label for="remplacer">Remplacer automatiquement le portfolio de SPIP :</label>	
-		<select name="remplacer" id="remplacer">
-			<option value="non" [(#ENV{remplacer}|=={"non"}|?{selected="selected",})]>non</option>		
-			<option value="oui" [(#ENV{remplacer}|=={"oui"}|?{selected="selected",})]>oui</option>		
+		<label for="remplacer_portfolio">Remplacer automatiquement le portfolio de SPIP :</label>	
+		<select name="remplacer_portfolio" id="remplacer_portfolio">
+			<option value="non" [(#ENV{remplacer_portfolio}|=={"non"}|?{selected="selected",})]>non</option>		
+			<option value="oui" [(#ENV{remplacer_portfolio}|=={"oui"}|?{selected="selected",})]>oui</option>		
+		</select>
+		<br />
+		<label for="remplacer_docsjoints">Remplacer automatiquement la liste des documents joints de SPIP :</label>	
+		<select name="remplacer_docsjoints" id="remplacer_docsjoints">
+			<option value="non" [(#ENV{remplacer_docsjoints}|=={"non"}|?{selected="selected",})]>non</option>		
+			<option value="oui" [(#ENV{remplacer_docsjoints}|=={"oui"}|?{selected="selected",})]>oui</option>		
 		</select>
 	</fieldset>
 	<div>
