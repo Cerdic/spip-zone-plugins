@@ -137,13 +137,10 @@ function couleurs_rempl($texte) {
 
 function couleurs_pre_typo($texte) {
 	if (strpos($texte, '[')===false || strpos($texte, '/')===false) return $texte;
-	// les raccoucis de couleur sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_couleurs']))
-		couleurs_installe();
 	// pour les callbacks
 	global $outil_couleurs;
 	// lecture des raccoucis de couleur
-	$outil_couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+	$outil_couleurs = cs_lire_data_outil('couleurs');
 	// appeler couleurs_rempl() une fois que certaines balises ont ete protegees
 	$texte = cs_echappe_balises('', 'couleurs_rempl', $texte);
 	// menage

@@ -80,7 +80,7 @@ cs_log("smileys_installe() : $path");
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function smileys_raccourcis() {
-	$racc = cs_lire_data_outil('smileys_racc');
+	$racc = cs_lire_data_outil('smileys', 'smileys_racc');
 	return _T('couteauprive:smileys:aide', array('liste' => '<b>'.join('</b>, <b>', $racc).'</b>'));
 }
 
@@ -92,7 +92,7 @@ function smileys_echappe_balises_callback($matches) {
 // les balises suivantes sont protegees : html|code|cadre|frame|script|acronym|cite
 function cs_rempl_smileys($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-	$smileys_rempl = unserialize($GLOBALS['meta']['cs_smileys']);
+	$smileys_rempl = cs_lire_data_outil('smileys');
 	// protection des images, on ne sait jamais...
 	$texte = preg_replace_callback(',(<img .*?/>),ms', 'smileys_echappe_balises_callback', $texte);
 	// smileys a probleme :
@@ -108,7 +108,6 @@ function cs_rempl_smileys($texte) {
 // fonction principale (pipeline pre_typo)
 function cs_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-	if (!isset($GLOBALS['meta']['cs_smileys']))	smileys_installe();
 	// appeler cs_rempl_smileys() une fois que certaines balises ont ete protegees
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_smileys', $texte);
 }

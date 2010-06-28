@@ -50,7 +50,7 @@ if(typeof mozWrap!='function') { function mozWrap(txtarea, open, close) {
 }}
 /*]]>*/</script>\n";
 	// le tableau des smileys est present dans les metas
-	$smileys = unserialize($GLOBALS['meta']['cs_smileys']);
+	$smileys = cs_lire_data_outil('smileys');;
 	// valeurs par defaut
 	$nb_col = 8;
 	$titre = _T('couteau:smileys_dispos');
