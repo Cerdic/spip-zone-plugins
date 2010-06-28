@@ -80,10 +80,10 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 			cout_install_pack($pack, true);
 		} elseif($cmd=='delete'){
 			spip_log("Suppression de '$pack' par l'auteur id=$connect_id_auteur");
-			$p = preg_quote($pack,',');
+			$p = preg_quote($pack,'/');
 			$r = "[$]GLOBALS\['cs_installer'\]\['$p'\] *=";
 			cs_ecrire_config(
-				array(",$r,", ",# [^\n\r]+[\n\r]+if\(0\) {$r}[\n\r]+.*# $p #[\n\r]+,Us"),
+				array("/$r/", "/# [^\\n\\r]+[\\n\\r]+if\(0\) {$r}.*?# $p #[\\n\\r]+/s"),
 				array('if(0) \0', ''));
 			// simplement prendre en compte la supression
 			cout_exec_redirige('cmd=pack', false);
