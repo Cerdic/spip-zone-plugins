@@ -14,12 +14,12 @@
 
 	<onglet id="rubriquelinscription" parent="configuration">
 		<icone>prive/images/admin-12.gif</icone>
-		<titre>Rubrique à l'inscription</titre>
+		<titre>rubrique_a_linscription:rubrique_a_linscription</titre>
 		<url>rubrique_a_linscription</url>
 	</onglet>
 	<bouton id='rubriquelinscription' parent="bando_configuration">
 		<icone>prive/images/admin-12.gif</icone>
-		<titre>Rubrique à l'inscription</titre>		
+		<titre>rubrique_a_linscription:rubrique_a_linscription</titre>		
 		<url>rubrique_a_linscription</url>
 	</bouton>
     <pipeline>
