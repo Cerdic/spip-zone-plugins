@@ -25,7 +25,7 @@ function exec_rubrique_a_linscription_dist(){
 	// centre
 	echo debut_droite('', true);
 
-	echo recuperer_fond('fonds/rubrique_a_linscription',array()).'ss';
+	echo recuperer_fond('fonds/rubrique_a_linscription',array());
 	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'rubrique_a_linscription'),'data'=>''));
 
 	//echo fin_gauche(), fin_page();
