@@ -54,7 +54,7 @@ function bigbrother_tester_la_visite_du_site(){
 	if(($visiteur_session['id_auteur'] > 0) OR ($ouvert = (lire_config('bigbrother/enregistrer_connexion_anonyme') == 'oui'))){
 		include_spip('inc/filtres');
 		$time = 0;
-		if($ouvert && !$visiteur_session){
+		if($ouvert && !intval($visiteur_session['id_auteur'])){
 			$time_sql = sql_getfetsel('date','spip_journal','id_auteur='.sql_quote($GLOBALS['ip']));
 			if(is_array(recup_date($time_sql))){
 				list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date($time_sql);
@@ -67,7 +67,7 @@ function bigbrother_tester_la_visite_du_site(){
 			/**
 			 * Cas des crons qui ne gardent pas de cookies donc pas de session
 			 */
-			if($ouvert && !$visiteur_session){
+			if($ouvert && !intval($visiteur_session['id_auteur'])){
 				if($time < (time()-(30*60))){
 					bigbrother_enregistrer_la_visite_du_site();
 				}
@@ -82,7 +82,7 @@ function bigbrother_tester_la_visite_du_site(){
 			bigbrother_enregistrer_la_visite_du_site();
 		}
 		// Sinon on ne met que à jour la session
-		else{
+		elseif((time() - $visiteur_session['date_visite']) > 5){
 			session_set('date_visite', time());
 		}
 	}
