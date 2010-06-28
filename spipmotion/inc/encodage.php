@@ -49,7 +49,7 @@ function inc_encodage_dist($source,$attente,$format=''){
 			$in = sql_in('id_document', $liste);
 			sql_delete("spip_documents", $in);
 			sql_delete("spip_documents_liens", $in);
-			sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document).' AND encode != '.sql_quote('oui'));
+			sql_delete("spip_spipmotion_attentes", "id_document=".intval($id_document).' AND encode != '.sql_quote('oui').' AND extension='.sql_quote($format).' AND id_spipmotion_attente!='.intval($attente));
 		}
 
 		include_spip('inc/invalideur');
