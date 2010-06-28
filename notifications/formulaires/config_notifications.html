@@ -18,6 +18,14 @@
 								<input type="checkbox" name="prevenir_auteurs_articles" [checked="(#ENV{prevenir_auteurs_articles}?{checked})"] id="prevenir_auteurs_articles" class="checkbox" />
 								<label for="prevenir_auteurs_articles"><:notifications:article_prive_auteurs:></label>
 							</div>
+							
+						</li>
+						<li>
+							<div class="choix">
+								<input type="checkbox" name="prevenir_admins_restreints" [checked="(#ENV{prevenir_admins_restreints}?{checked})"] id="prevenir_admins_restreints" class="checkbox" />
+								<label for="prevenir_admins_restreints"><:notifications:article_prive_admins_restreints:></label>
+							</div>
+							
 						</li>
 					</ul>
 				</fieldset>

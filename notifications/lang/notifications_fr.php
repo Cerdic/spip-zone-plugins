@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'evenement_notification' => 'Les &#233;v&#233;nements suivants peuvent d&#233;clencher une notification par email.',
 'article_prive' => 'Articles espace priv&eacute;',
 'article_prive_auteurs' => '<strong>Auteurs</strong>&nbsp;: les auteurs re&#231;oivent les notifications lors de la publication de leur(s) article(s)',
+'article_prive_admins_restreints' => '<strong>Administrateurs</strong>&nbsp;: Les administrateurs restreints re&#231;oivent les notifications lors de proposition d\'articles dans leur rubrique',
 'forums_public' => 'Forums publics',
 'forums_public_auteurs' => '<strong>Auteurs</strong>&nbsp;: les auteurs re&#231;oivent les notifications des forums post&#233;s sous leurs articles dans le site public.',
 'forums_public_thread' => '<strong>Fil de discussion</strong>&nbsp;: les participants au m&#234;me fil de discussion re&#231;oivent les notifications des forums (publics).',

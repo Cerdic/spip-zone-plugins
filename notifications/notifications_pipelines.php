@@ -55,12 +55,45 @@ function notifications_post_edition($x) {
 function notifications_notifications_destinataires($flux) {
 	static $sent = array();
 	$quoi = $flux['args']['quoi'];
+	$options = $flux['args']['options'];
 
+	// proposition d'article prevenir les admins restreints
+	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_admins_restreints']
+		AND $options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie' // ligne a commenter si vous voulez prevenir de la publication
+		){ 
+	
+		$id_article = $flux['args']['id']; 
+		include_spip('base/abstract_sql'); 
+		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=".intval($id_article));
+		$id_rubrique=$t['id_rubrique'];
+		 
+	while ($id_rubrique) { 
+		$hierarchie[]=$id_rubrique;
+		$res = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
+		if (!$res){  // rubrique inexistante
+			$id_rubrique = 0;
+			break;
+		} 
+		$id_parent = $res['id_parent']; 
+		$id_rubrique = $id_parent;
+	}
+	spip_log("Prop article > admin restreint de ".join(',', $hierarchie),'notifications');
+ 
+		//les admins de la rub et de ses parents 
+		$result_email = sql_select("auteurs.email,auteurs.id_auteur,lien.id_rubrique", "spip_auteurs AS auteurs, spip_auteurs_rubriques AS lien", "lien.id_rubrique IN (" . join(',', $hierarchie) . ") AND auteurs.id_auteur=lien.id_auteur AND auteurs.statut='0minirezo'");
+
+		while ($qui = sql_fetch($result_email)) {
+			spip_log($options['statut']." article > admin restreint ".$qui['id_auteur']." de la rubrique".$qui['id_rubrique']." prevenu",'notifications');
+			$flux['data'][] = $qui['email'];
+		}
+
+	}
+	
 	// publication d'article : prevenir les auteurs
 	if ($quoi=='instituerarticle'
 	  AND $GLOBALS['notifications']['prevenir_auteurs_articles']){
 		$id_article = $flux['args']['id'];
-		$options = $flux['args']['options'];
+		 
 
 		include_spip('base/abstract_sql');
 
@@ -79,7 +112,7 @@ function notifications_notifications_destinataires($flux) {
 	  ){
 
 		$id_forum = $flux['args']['id'];
-		$options = $flux['args']['options'];
+		
 		if ($t = $options['forum']
 			OR $t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum))){
 
