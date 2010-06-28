@@ -1,0 +1,44 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Portfolio multim&eacute;dia
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Arnault PACHOT 
+ 	[OpenStudio->http://www.openstudio.fr]
+_ &#169; 2010 - Licence GPL
+	</auteur>
+	<version>2</version>
+	<etat>stable</etat>
+	<icon>img_pack/logo_multimediaportfolio.png</icon>
+ 	
+	<description>
+		Ce plugin introduit un nouveau mod&eacute;le pour afficher les documents d'un article sous la forme d'un portfolio multim&eacute;dia
+		<br />Impl&eacute;mente jquery multimedia portfolio 2
+		<br />Supporte de nombreux formats : photos, vid&eacute;os (fichiers flv et liens youtube), mp3 et pdf
+		<br />Le plugin va d&eacute;tecter automatiquement le type de fichier cible et appliquer le viewer adapt&eacute;.
+		<br />Exemple : &lt;multimedia_portfolio123&gt; affichera les documents joints &agrave; l'article 123
+	</description>
+	<lien>http://www.openstudio.fr/jquery-multimedia-portfolio/</lien> <!-- URI de documentation -->
+	<pipeline>
+  		<nom>insert_head</nom>
+  		<action>insertion_in_head</action>
+  		<inclure>multimediaportfolio_pipelines.php</inclure>
+ 	</pipeline>
+	<pipeline>
+  		<nom>header_prive</nom>
+  		<action>insertion_in_header_prive</action>
+  		<inclure>multimediaportfolio_pipelines.php</inclure>
+ 	</pipeline>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix>multimediaportfolio</prefix>
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[2.1.0;]" />
+ 	<necessite id="CFG" version="[1.0;]" />
+	<categorie>multimedia</categorie>
+</plugin>
