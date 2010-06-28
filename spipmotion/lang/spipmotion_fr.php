@@ -31,9 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'encoder_son' => '(R&eacute;)encoder ce son',
-	'encoder_son_version' => '(R&eacute;)encoder ce son uniquement en @version@',
+	'encoder_son_version' => '(R&eacute;)encoder uniquement la version @version@ de ce son',
 	'encoder_video' => '(R&eacute;)encoder cette vid&eacute;o',
-	'encoder_video_version' => '(R&eacute;)encoder cette vid&eacute;o uniquement en @version@',
+	'encoder_video_version' => '(R&eacute;)encoder uniquement la version @version@ de cette vid&eacute;o',
 	'erreur_chemin_ffmpeg' => 'Aucun encodage ne pourra &ecirc;tre effectu&eacute; car le chemin ne fonctionne pas.',
 	'erreur_document_plus_disponible' => 'Ce document n\'est plus disponible sur le site',
 	'erreur_verifier_droits' => 'Le script d\'encodage "script_bash/spipmotion.sh" n\'est pas executable.',
