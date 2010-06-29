@@ -107,7 +107,7 @@ $.fn.multimedia_portfolio = function(options) {
 				    mousewheelposition = (elements.length * ui.value /100);
 				    caroussel_portfolio_vue(mousewheelposition, portfolio, elements, settings, ratio_largeur, true);
 		      }});
-		      portfolio_container..mousewheel(function(event, delta) {
+		      portfolio_container.mousewheel(function(event, delta) {
 						      if (delta > 0) { mousewheelposition+=.3; if(mousewheelposition>elements.length) mousewheelposition = elements.length;
 						      } else if (delta < 0) { mousewheelposition-=.3; if(mousewheelposition<0) mousewheelposition = 0;
 						      }

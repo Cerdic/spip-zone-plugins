@@ -3,11 +3,11 @@
 <BOUCLE_documentsassocies(DOCUMENTS){id_article=#ENV{id}}{doublons}{tous}>
     [(#EXTENSION|strtolower|=={pdf}|oui)
 	    [(#CONFIG{multimediaportfolio/docs_pdf}|=={oui})
-		    <li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT||image_reduire{0,250})]</a></li>
+		    <li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT)]</a></li>
 	    ]
     ]
     [(#EXTENSION|strtolower|=={pdf}|non)
-	<li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT||image_reduire{0,250})]</a></li>
+	<li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT)]</a></li>
     ]
 </BOUCLE_documentsassocies>
 </ul>
