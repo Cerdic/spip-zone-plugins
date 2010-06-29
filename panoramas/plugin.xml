@@ -29,6 +29,11 @@ _ &#169; 2008 - Licence GPL
   		<inclure>panoramas_pipelines.php</inclure>
  	</pipeline>
 	<pipeline>
+  		<nom>insert_head_css</nom>
+  		<action>insertion_in_head_css</action>
+  		<inclure>panoramas_pipelines.php</inclure>
+ 	</pipeline>
+	<pipeline>
   		<nom>header_prive</nom>
   		<action>insertion_in_header_prive</action>
   		<inclure>panoramas_pipelines.php</inclure>
