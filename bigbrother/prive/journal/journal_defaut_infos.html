@@ -258,10 +258,12 @@
 				<tbody>
 			<BOUCLE_actions_par_auteurs_date(POUR){tableau #GET{dates_uniques}}{par valeur}{inverse}{pagination #ENV{pagination_date,7}}>
 				#SET{date,#VALEUR}
+				#SET{date_nb,0}
 				<BOUCLE_chaque_actions_par_auteur_date(POUR){tableau #GET{actions_uniques}}>
-				<tr class="tr_liste">
+				#SET{date_nb,#GET{date_nb}|plus{1}}
+				<tr class="tr_liste"[(#GET{action_date_[(#VALEUR)]_[(#GET{date})]}|non)style="display:none"]>
 					<td class="date">
-						#GET{date}
+						<abbr[(#GET{date_nb}|=={1}|non)style="display:none"]>#GET{date}</abbr>
 					</td>
 					<td class="action action_#VALEUR">
 						[(#ENV{journal_action}|!={#VALEUR}|oui)<a href="[(#SELF|parametre_url{journal_action,#VALEUR})]" title="<:bigbrother:filtrer_par_action{action=#VALEUR}:>">]

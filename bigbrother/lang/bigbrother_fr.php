@@ -33,6 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_statistiques' => '"id_article" ou "id_auteur" manquant',
 	'explication_page_stats' => 'Cette page liste les &eacute;v&egrave;nements qui ont eu lieu sur le site',
 
+	// F
+	'filtrer_par_action' => 'Filtrer uniquement l\'action &laquo;@action@&raquo;',
+
 	// I
 	'info_aucun_filtre' => 'Les r&eacute;sultats ne sont pas filtr&eacute;s',
 	'info_aucun_resultat' => 'Aucun r&eacute;sultat ne correspond &agrave; votre s&eacute;lection.',
