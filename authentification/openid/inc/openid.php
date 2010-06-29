@@ -306,7 +306,7 @@ function openid_redirige_post($form,$id){
 		 "<html><head><title>"
 		 . "OpenID transaction in progress"
 		 . "</title></head>"
-		 . "<body onload='document.getElementById(\"".id."\").submit()'>"
+		 . "<body onload='document.getElementById(\"".$id."\").submit()'>"
 		 . _T('navigateur_pas_redirige')
 		 . $form
 		 . "</body></html>";
