@@ -43,20 +43,23 @@
 		<B_journal_stats>
 		#SET{total,#GRAND_TOTAL}
 		<p><:bigbrother:info_nombre_resultat{nb=#GET{total}}:></p>
+
+		[(#GET{nb_users}|plus{#GET{nb_dates}}|plus{#GET{nb_actions}}|>{3}|oui)
 		<div>
 			<p><:bigbrother:info_donnees_concernant:> :</p>
 			<ul>
-				<li>
+				[(#GET{nb_users}|>{1}|oui)<li>
 					<:bigbrother:info_donnees_users{nb=#GET{nb_users}}:>
-				</li>
-				<li>
+				</li>]
+				[(#GET{nb_dates}|>{1}|oui)<li>
 					<:bigbrother:info_donnees_dates{nb=#GET{nb_dates}}:>
-				</li>
-				<li>
+				</li>]
+				[(#GET{nb_actions}|>{1}|oui)<li>
 					<:bigbrother:info_donnees_actions{nb=#GET{nb_actions}}:>
-				</li>
+				</li>]
 			</ul>
-		</div>
+		</div>]
+
 		#ANCRE_PAGINATION
 		<table class="bigbrother">
 			<thead>
@@ -108,23 +111,7 @@
 			</tbody>
 		</table>
 		[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
-		[(#ENV{id_auteur}|oui)
-			<INCLURE{fond=prive/journal/journal_defaut_id_auteur,id_journals=#GET{id_journals},env,ajax}>
-		]
-		<BOUCLE_actions_nb(CONDITION){si #GET{nb_actions}|>{1}}>
-			<div>
-				<h4><:bigbrother:titre_filtrer_action:></h4>
-				<ul class="liste-items">
-					<BOUCLE_actions(POUR){tableau #GET{actions}}{par valeur}>
-					<li class="item">
-						<a href="[(#SELF|parametre_url{journal_action,#VALEUR})]">
-							#VALEUR
-						</a>
-					</li>
-					</BOUCLE_actions>
-				</ul>
-			</div>
-		</BOUCLE_actions_nb>
+		<INCLURE{fond=prive/journal/journal_defaut_infos,id_journals=#GET{id_journals},env,ajax}>
 		</B_journal_stats>
 		<p><:bigbrother:info_aucun_resultat:></p>
 		<//B_journal_stats>

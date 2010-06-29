@@ -1,16 +1,30 @@
 #SET{actions,#ARRAY}
 #SET{dates,#ARRAY}
+#SET{auteurs,#ARRAY}
+#SET{actions_auteurs,#ARRAY}
 <BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{par objet,id_objet}>
 	#SET{actions,
 		#GET{actions}|push{#ACTION}
 	}
 
+	#SET{
+		actions_auteurs,
+		#GET{actions_auteurs}|array_merge{
+			#ARRAY{
+				action#ACTION_aut#ID_AUTEUR,
+				#GET{actions_auteurs}|table_valeur{action#ACTION_aut#ID_AUTEUR,0}|plus{1},
+				action_aut#ID_AUTEUR,
+				#GET{actions_auteurs}|table_valeur{action_aut#ID_AUTEUR,0}|plus{1}
+			}
+		}
+	}
 	#SET{action_#ACTION,
 		#GET{action_#ACTION,#ARRAY}|push{
 			#ARRAY{id_journal,#ID_JOURNAL,date,#DATE}
 		}
 	}
 
+	#SET{auteurs,#GET{auteurs}|push{#ID_AUTEUR}}
 	#SET{date,#DATE|affdate{Y-m-d}}
 	#SET{dates,#GET{dates}|push{#GET{date}}}
 
@@ -18,10 +32,12 @@
 </BOUCLE_journal_stats_total>
 [(#SET{actions_uniques,[(#GET{actions}|array_unique)]})]
 [(#SET{dates_uniques,[(#GET{dates}|array_unique)]})]
-
-[(#GET{dates_unique}|foreach)]
+[(#SET{auteurs_uniques,[(#GET{auteurs}|array_unique)]})]
+#SET{nb_actions,#GET{actions_uniques}|count}
+#SET{nb_auteurs,#GET{auteurs_uniques}|count}
 <h2><:bigbrother:titre_compilation_resultats:></h2>
 
+<BOUCLE_plusieurs_actions(CONDITION){si #GET{nb_actions}|>{1}}>
 <B_actions_par_auteurs>
 	<div class="cadre-r cadre">
 		<div class="cadre_padding">
@@ -30,7 +46,10 @@
 			][(#ENV{id_auteur}|is_numeric|non)
 				#SET{auteur,#ENV{id_auteur}}
 			]
-			<h3><:bigbrother:titre_actions_nombre_par_auteur{auteur=#GET{auteur}}:></h3>
+			[(#ENV{id_auteur}|oui)
+			<h3><:bigbrother:titre_actions_nombre_par_auteur{auteur=#GET{auteur}}:></h3>]
+			[(#ENV{id_auteur}|non)
+			<h3><:bigbrother:titre_actions_nombre:></h3>]
 			#ANCRE_PAGINATION
 			<table class="bigbrother" id="graph_actions_auteurs_table">
 				<thead>
@@ -43,7 +62,9 @@
 			<BOUCLE_actions_par_auteurs(POUR){tableau #GET{actions_uniques}}{par valeur}{pagination #ENV{pagination,0}}>
 				<tr class="tr_liste">
 					<td class="action">
+						[(#ENV{journal_action}|!={#VALEUR}|oui)<a href="[(#SELF|parametre_url{journal_action,#VALEUR})]" title="<:bigbrother:filtrer_par_action{action=#VALEUR}:>">]
 						#VALEUR
+						[(#ENV{journal_action}|!={#VALEUR}|oui)</a>]
 					</td>
 					<td class="nombre">
 						[(#GET{action_[(#VALEUR)]}|count)]
@@ -54,7 +75,7 @@
 			</table>
 			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 
-			<div id="graph_actions_id_auteurs" class="bigbrother_graphs"></div>
+			<div id="graph_actions_nombre" class="bigbrother_graphs"></div>
 			<script type="text/javascript"><!--
 				jQuery(document).ready(function(){
 					var actions = [];
@@ -80,10 +101,10 @@
 						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
 					};
 
-					$.plot($("#graph_actions_id_auteurs"), data_actions, options);
+					$.plot($("#graph_actions_nombre"), data_actions, options);
 
 					var previousPoint = null;
-					$("#graph_actions_id_auteurs").bind("plothover", function (event, pos, item) {
+					$("#graph_actions_nombre").bind("plothover", function (event, pos, item) {
 						if (item) {
 							if (previousPoint != item.dataIndex) {
 								previousPoint = item.dataIndex;
@@ -110,6 +131,109 @@
 		</div>
 	</div>
 </B_actions_par_auteurs>
+</BOUCLE_plusieurs_actions>
+<BOUCLE_plusieurs_auteurs(CONDITION){si #GET{nb_auteurs}|>{1}}>
+<B_action_par_auteur>
+	<div class="cadre-r cadre">
+		<div class="cadre_padding">
+			[(#ENV{id_auteur}|is_numeric|oui)
+				#SET{auteur,#INFO_NOM{auteur,#ENV{id_auteur}}
+			][(#ENV{id_auteur}|is_numeric|non)
+				#SET{auteur,#ENV{id_auteur}}
+			]
+			[(#ENV{id_auteur}|oui)
+			<h3><:bigbrother:titre_actions_nombre_par_auteur{auteur=#GET{auteur}}:></h3>]
+			[(#ENV{id_auteur}|non)
+			<h3><:bigbrother:titre_actions_nombre_par_auteurs:></h3>]
+			#ANCRE_PAGINATION
+			<table class="bigbrother" id="graph_action_auteurs_table">
+				<thead>
+					<tr class="row_first">
+						<th><:bigbrother:thead_action:></th>
+						<th class="nombre"><:bigbrother:thead_nombre:></th>
+					</tr>
+				</thead>
+				<tbody>
+			<BOUCLE_action_par_auteur(POUR){tableau #GET{auteurs_uniques}}{par valeur}{pagination #ENV{pagination,0}}>
+				<tr class="tr_liste">
+					[(#VALEUR|is_numeric|oui)
+						#SET{auteur,#INFO_NOM{auteur,#VALEUR}
+					][(#VALEUR|is_numeric|non)
+						#SET{auteur,#VALEUR}
+					]
+					<td class="auteur">
+						[(#ENV{id_auteur}|!={#VALEUR}|oui)<a href="[(#SELF|parametre_url{id_auteur,#VALEUR})]" title="<:bigbrother:filtrer_par_auteur{auteur=#GET{auteur}}:>">]
+						#GET{auteur}
+						[(#ENV{id_auteur}|!={#VALEUR}|oui)</a>]
+					</td>
+					<td class="nombre">
+						[(#GET{actions_auteurs}|table_valeur{action_aut#VALEUR})]
+					</td>
+				</tr>
+			</BOUCLE_action_par_auteur>
+				</tbody>
+			</table>
+			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
+
+			<div id="graph_actions_auteur" class="bigbrother_graphs"></div>
+			<script type="text/javascript"><!--
+				jQuery(document).ready(function(){
+					var auteurs = [];
+					var auteurs_labels = [];
+					var auteurs_ticks = [];
+
+					i=0;
+					$('#graph_action_auteurs_table tr.tr_liste').each(function(){
+						var nombre = parseFloat(plot_trim($(this).find('.nombre').text()));
+						auteurs.push([i,nombre]);
+						var label = plot_trim($(this).find('.auteur').text());
+						auteurs_labels.push(label);
+						auteurs_ticks.push([i,label]);
+						i++;
+					});
+
+					var data_auteurs = [{ data: auteurs }];
+					var options = {
+						points : {show:true},
+						lines : {show:true},
+						yaxis : {},
+						xaxis : {ticks:auteurs_ticks},
+						grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+					};
+
+					$.plot($("#graph_actions_auteur"), data_auteurs, options);
+
+					var previousPoint = null;
+					$("#graph_actions_auteur").bind("plothover", function (event, pos, item) {
+						if (item) {
+							if (previousPoint != item.dataIndex) {
+								previousPoint = item.dataIndex;
+								$("#bigbrother_tooltip").remove();
+								var x = item.datapoint[0].toFixed(2),
+									y = item.datapoint[1].toFixed(2);
+
+								var index = item.dataIndex;
+								content = auteurs_labels[index];
+								content += '<br />'+item.datapoint[1];
+								plot_showtooltip(
+									item.pageX,
+									item.pageY,
+									content,'bigbrother_tooltip');
+							}
+						}
+						else {
+							$("#bigbrother_tooltip").remove();
+							previousPoint = null;
+						}
+					});
+				});
+			// --></script>
+		</div>
+	</div>
+</B_action_par_auteur>
+</BOUCLE_plusieurs_auteurs>
+<//B_plusieurs_actions>
+
 <B_actions_par_auteurs_date>
 	<div class="cadre-r cadre">
 		<div class="cadre_padding">
@@ -118,7 +242,10 @@
 			][(#ENV{id_auteur}|is_numeric|non)
 				#SET{auteur,#ENV{id_auteur}}
 			]
-			<h3><:bigbrother:titre_actions_nombre_par_auteur_date{auteur=#GET{auteur}}:></h3>
+			[(#ENV{id_auteur}|oui)
+			<h3><:bigbrother:titre_actions_nombre_par_auteur_date{auteur=#GET{auteur}}:></h3>]
+			[(#ENV{id_auteur}|non)
+			<h3><:bigbrother:titre_actions_nombre_date:></h3>]
 			#ANCRE_PAGINATION
 			<table class="bigbrother" id="graph_actions_date_auteurs_table">
 				<thead>
@@ -129,7 +256,7 @@
 					</tr>
 				</thead>
 				<tbody>
-			<BOUCLE_actions_par_auteurs_date(POUR){tableau #GET{dates_uniques}}{par valeur}{pagination #ENV{pagination,0}}>
+			<BOUCLE_actions_par_auteurs_date(POUR){tableau #GET{dates_uniques}}{par valeur}{inverse}{pagination #ENV{pagination_date,7}}>
 				#SET{date,#VALEUR}
 				<BOUCLE_chaque_actions_par_auteur_date(POUR){tableau #GET{actions_uniques}}>
 				<tr class="tr_liste">
@@ -137,7 +264,9 @@
 						#GET{date}
 					</td>
 					<td class="action action_#VALEUR">
+						[(#ENV{journal_action}|!={#VALEUR}|oui)<a href="[(#SELF|parametre_url{journal_action,#VALEUR})]" title="<:bigbrother:filtrer_par_action{action=#VALEUR}:>">]
 						#VALEUR
+						[(#ENV{journal_action}|!={#VALEUR}|oui)</a>]
 					</td>
 					<td class="nombre">
 						[(#GET{action_date_[(#VALEUR)]_[(#GET{date})]}|sinon{0})]
@@ -149,7 +278,7 @@
 			</table>
 			[<div class="pagination pagination_bigbrother">(#PAGINATION{page_precedent_suivant})</div>]
 
-			<div id="graph_actions_date_id_auteurs" class="bigbrother_graphs"></div>
+			<div id="graph_actions_date_nombre" class="bigbrother_graphs"></div>
 			<div id="choices"></div>
 			<script type="text/javascript"><!--
 				jQuery(document).ready(function(){
@@ -181,7 +310,7 @@
 					serie_actions.push(action_#VALEUR);
 					</BOUCLE_series>
 
-					$.plot($("#graph_actions_date_id_auteurs"), serie_actions, options);
+					$.plot($("#graph_actions_date_nombre"), serie_actions, options);
 
 					// hard-code color indices to prevent them from shifting as
 				    // countries are turned on/off
@@ -192,6 +321,7 @@
 				    });
 
 				    // insert checkboxes
+					[(#ENV{journal_action}|non)
 				    var choiceContainer = $("#choices");
 				    $.each(serie_actions, function(key, val) {
 				        choiceContainer.append('<br/><input type="checkbox" name="' + key +
@@ -199,7 +329,7 @@
 				                               '<label for="id' + key + '">'
 				                                + val.label + '</label>');
 				    });
-				    choiceContainer.find("input").click(plotAccordingToChoices);
+					choiceContainer.find("input").click(plotAccordingToChoices);]
 
 
 				    function plotAccordingToChoices() {
@@ -211,11 +341,11 @@
 				                data.push(serie_actions[key]);
 				        });
 
-						$.plot($("#graph_actions_date_id_auteurs"), data,options);
+						$.plot($("#graph_actions_date_nombre"), data,options);
 				    }
 
 					var previousPoint = null;
-					$("#graph_actions_date_id_auteurs").bind("plothover", function (event, pos, item) {
+					$("#graph_actions_date_nombre").bind("plothover", function (event, pos, item) {
 						if (item) {
 							if (previousPoint != item.dataIndex) {
 								previousPoint = item.dataIndex;
