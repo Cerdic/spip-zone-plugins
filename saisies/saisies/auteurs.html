@@ -1,4 +1,4 @@
-[(#REM) 
+[(#REM)
 
   Parametres :
   - class : classe(s) css ajoutes au select
@@ -9,12 +9,12 @@
   - option_statut: si quelque chose est passe on insere un bonhomme de statut a cote du nom, sinon rien
     (defaut = rien)
   - cacher_option_intro : pas de premier option vide  (defaut:"")
-	 
+
   Exemple d'appel :
 	[(#SAISIE{auteurs,auteurs_site,
 		label=<:plugin:auteurs_du_site:>,
 		multiple=oui
-		statut=0minirezo})] 
+		statut=0minirezo})]
 ]
 [(#ENV{option_statut}|oui)
 	#SET{bonhomme_statut, #ARRAY{0minirezo, admin-12.gif, 1comite, redac-12.gif, 6forum, visit-12.gif}}
@@ -25,8 +25,8 @@
 	<BOUCLE_auteurs(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{tout}>
 		#SET{image_statut, #GET{bonhomme_statut}|table_valeur{#STATUT}}
 		[(#ENV{multiple}|oui)
-		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"][ style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]>#NOM</option>]
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
 		[(#ENV{multiple}|non)
-		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"][ style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]>#NOM</option>]
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
 	</BOUCLE_auteurs>
 </select>
