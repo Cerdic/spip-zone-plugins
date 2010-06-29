@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_enregistrer_visite_article' => 'Enregistrer le temps passé sur un article des personnes ayant un compte',
 	'configuration_journalisation_base' => 'Les actions &agrave; journaliser en base',
 	'configuration_options' => 'Options',
-	'configuration_titre' => 'Configuration de Big Brother',
+	'configuration_titre' => 'Big Brother',
 
 	// D
 	'date_debut' => 'Entr&eacute;e',
@@ -36,6 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_aucun_filtre' => 'Les r&eacute;sultats ne sont pas filtr&eacute;s',
 	'info_aucun_resultat' => 'Aucun r&eacute;sultat ne correspond &agrave; votre s&eacute;lection.',
+	'info_donnees_actions' => '@nb@ actions diff&eacute;rentes',
+	'info_donnees_concernant' => 'Ces donn&eacute;es concernent',
+	'info_donnees_dates' => '@nb@ jours diff&eacute;rents',
+	'info_donnees_users' => '@nb@ utilisateurs uniques diff&eacute;rents',
 	'info_nombre_resultat' => 'Il y a @nb@ entr&eacute;e(s) dans le journal correspondant aux crit&egrave;res.',
 	'info_stats_id_objet_visite_auteurs_nb' => 'L\'objet de type &laquo; @objet@ &raquo; num&eacute;ro @id_objet@ a &eacute;t&eacute; consult&eacute; par @nb@ utilisateur(s) pour un nombre de visites total de @nb_visites@.',
 	'info_stats_visite_auteurs_nb' => 'L\'ensemble des objets du site ont &eacute;t&eacute; consult&eacute;s par @nb@ utilisateur (s) pour un nombre de visites total de @nb_visites@.',
@@ -76,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_actions_nombre_par_auteur' => 'Nombre d\'actions effectu&eacute;es par &laquo; @auteur@ &raquo;',
 	'titre_actions_nombre_par_auteur_date' => 'Nombre d\'actions effectu&eacute;es par &laquo; @auteur@ &raquo; par date',
 	'titre_compilation_resultats' => 'Compilation des r&eacute;sultats',
+	'titre_filtrer_action' => 'Filtrer par action',
 	'titre_filtres_utilises' => 'Filtres actuels',
 	'titre_limiter_temps' => 'Limiter l\'intervalle de temps',
 	'titre_liste_entrees_journal' => 'Liste des entr&eacute;es du journal',
