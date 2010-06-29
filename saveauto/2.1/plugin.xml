@@ -3,15 +3,17 @@
 		<multi>
 [fr]Sauvegarde automatique
 [it]Salvataggio automatico
+[en]Automatic backup
 		</multi>
 	</nom>
 	<auteur>
 		<multi>
 [fr]cy_altern, _Eric_, kent1 d'apr&#232;s une contrib de Silicium (silicium@japanim.net)
 [it]cy_altern, _Eric_, kent1 - basato su un contrib di Silicium (silicium@japanim.net)
+[en]cy_altern, _Eric_, kent1 from a contribution of Silicium (silicium@japanim.net)
 		</multi>
 	</auteur>
-	<version>0.7.2</version>
+	<version>0.7.3</version>
 	<version_base>0.1.0</version_base>
 	<etat>dev</etat>
 	<prefix>saveauto</prefix>
@@ -33,6 +35,12 @@ e pu&ograve; essere inviato per posta elettronica.
 
 I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
 vengono automaticamente cancellati.
+
+[en]Makes a backup of the entire database used by SPIP.
+The .gz or .sql file obtained is stored in a directory (default /tmp, but configurable) and can be sent automatically by email.
+
+The backup is triggered by a cron job (the frequency is configurable).
+The stored backups considered obsolete (according to the corresponding config setting) are automatically destroyed.
 		</multi>
 	</description>
 	<lien>[->http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde]</lien>

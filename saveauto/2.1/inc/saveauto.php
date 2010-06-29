@@ -80,7 +80,7 @@ function inc_saveauto_dist(){
 	    $sql1 = "SHOW TABLES";
 	    $res = sql_query($sql1);
 	    if (!$res) {
-	        $err .= _T('saveauto:impossible_liste_tables')."<br>";
+	        $err .= _T('saveauto:erreur_impossible_liste_tables')."<br>";
 	        return $err;
 	    }
 	    $num_rows = sql_count($res);
@@ -104,19 +104,19 @@ function inc_saveauto_dist(){
 	     * - La liste des plugins SPIP installés
 	     * - Un commentaire
 	     */
-	    $contenu .= "# "._T('saveauto:fichier_genere');
+	    $contenu .= "# "._T('saveauto:info_sql_fichier_genere');
 	    if ($base) {
-	        $contenu .= "# "._T('saveauto:base').$base."\n";
+	        $contenu .= "# "._T('saveauto:info_sql_base').$base."\n";
 	    }
-	    $contenu .= "# "._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n";
-	    $contenu .= "# "._T('saveauto:date').$jour."/".$mois."/".$annee." ".$heure."h".$minutes."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_serveur').$_SERVER['SERVER_NAME']."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_date').$jour."/".$mois."/".$annee." ".$heure."h".$minutes."\n";
 	    if (defined('PHP_OS') && preg_match('/win/i', PHP_OS)) $os_serveur = "Windows";
 	    else $os_serveur = "Linux/Unix";
-	    $contenu .= "# "._T('saveauto:os').$os_serveur."\n";
-	    $contenu .= "# "._T('saveauto:phpversion').phpversion()."\n";
-	    $contenu .= "# "._T('saveauto:mysqlversion').saveauto_mysql_version()."\n";
-	    $contenu .= "# "._T('saveauto:ipclient').$GLOBALS['ip']."\n";
-	    $contenu .= "# "._T('saveauto:spip_version').$spip_version_affichee."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_os').$os_serveur."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_phpversion').phpversion()."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_mysqlversion').saveauto_mysql_version()."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_ipclient').$GLOBALS['ip']."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_spip_version').$spip_version_affichee."\n";
 
 	    /**
 	     * Lister les plugins activés
@@ -131,13 +131,13 @@ function inc_saveauto_dist(){
 		}
 		if ($lsplugs) {
 			$cntplugins = count($lsplugs);
-			$message_plugin = "# "._T('saveauto:plugins_utilises',array('nb'=>$cntplugins))."\n";
+			$message_plugin = "# "._T('saveauto:info_sql_plugins_utilises',array('nb'=>$cntplugins))."\n";
 			foreach ($lsplugs as $plugin => $c)
 				$message_plugin .= "# - $plugin (".$versionplug[$plugin].")"."\n";
 		}
 		$contenu .= $message_plugin."\n";
-	    $contenu .= "# "._T('saveauto:compatible_phpmyadmin')."\n"."\n";
-	    $contenu .= "# -------"._T('saveauto:debut_fichier')."----------"."\n";
+	    $contenu .= "# "._T('saveauto:info_sql_compatible_phpmyadmin')."\n"."\n";
+	    $contenu .= "# -------"._T('saveauto:info_sql_debut_fichier')."----------"."\n";
 
 	    while ($i < $num_rows) {
 	        $tablename = mysql_tablename($res, $i);
@@ -149,7 +149,7 @@ function inc_saveauto_dist(){
 	            AND (empty($eviter) OR !(saveauto_trouve_table($tablename, $tab_eviter)))) {
 	            //sauve la structure
 	            if ($structure) {
-	                $contenu .= "\n# "._T('saveauto:structure_table').$tablename."\n";
+	                $contenu .= "\n# "._T('saveauto:info_sql_structure_table',array('table'=>$tablename))."\n";
 	                $contenu .= "DROP TABLE IF EXISTS `$tablename`;\n"."\n";
 	                // requete de creation de la table
 	                $query = "SHOW CREATE TABLE $tablename";
@@ -160,11 +160,11 @@ function inc_saveauto_dist(){
 	            }
 	            // sauve les donnees
 	            if ($donnees) {
-	                $contenu .= "# "._T('saveauto:donnees_table').$tablename."\n";
+	                $contenu .= "# "._T('saveauto:info_sql_donnees_table',array('table'=>$tablename))."\n";
 	                $resData = sql_select('*',$tablename);
 	                //peut survenir avec la corruption d'une table, on previent
 	                if ($connect_statut == "0minirezo" && (!$resData)) {
-	                    $err .= _T('probleme_donnees').$tablename._T('saveauto:corruption')."<br />";
+	                    $err .= _T('saveauto:erreur_probleme_donnees_corruption',array('table'=>$tablename))."<br />";
 	                }
 	                else {
 	                    if (sql_count($resData) > 0) {
@@ -196,11 +196,11 @@ function inc_saveauto_dist(){
 	        }
 	        $i++;
 	    }
-	    $contenu .= "# -------"._T('saveauto:fin_fichier')."------------"."\n";
+	    $contenu .= "# -------"._T('saveauto:info_sql_fin_fichier')."------------"."\n";
 		$ok = ecrire_fichier($chemin_fichier, $contenu);
 
 		if(!$ok){
-	    	$err .= _T('saveauto:impossible_creer').$nom_fichier._T('saveauto:verifier_ecriture').$rep_bases."<br />";
+	    	$err .= _T('saveauto:erreur_impossible_creer_verifier',array('fichier'=>$nom_fichier,'rep_bases' => $nom_fichier))"<br />";
 		}
 
 	    /**

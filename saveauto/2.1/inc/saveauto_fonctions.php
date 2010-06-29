@@ -37,7 +37,7 @@ function saveauto_trouve_table($table, $tableau_tables) {
  */
 function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $reply="", $from="") {
     if (!function_exists('mail')) {
-        echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br />';
+        echo _T('saveauto:erreur_config_inadaptee_mail').'<br />';
         return false;
     }
 	if(defined('_DIR_SITE')){
@@ -56,7 +56,7 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
 		$mail_mime .= " boundary=\"----=$limite\"\n\n";
 
 		// Le message en texte simple pour les navigateurs qui n'acceptent pas le HTML
-		$texte = _T('saveauto:message_MIME')."\n";
+		$texte = _T('saveauto:info_mail_message_mime')."\n";
 		$texte .= "------=$limite\n";
 		$texte .= "Content-Type: text/plain; charset=\"iso-8859-1\"\n";
 		$texte .= "Content-Transfer-Encoding: 32bit\n\n";
@@ -79,7 +79,7 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
 			$attachement .= "\n\n\n------=$limite\n";
 		}else{
 			$fichier = str_replace($racine,'',$fichier);
-			$texte .= _T('saveauto:mail_fichier_lourd',array('fichier'=>$fichier));
+			$texte .= _T('saveauto:erreur_mail_fichier_lourd',array('fichier'=>$fichier));
 		}
 
 		if (! empty($reply)) $entete = "Reply-to: $reply\n";
@@ -104,7 +104,7 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
 		}else{
 			$corps = $message;
 			$fichier = str_replace($racine,'',$fichier);
-			$corps .= _T('saveauto:mail_fichier_lourd',array('fichier'=>$fichier));
+			$corps .= _T('saveauto:erreur_mail_fichier_lourd',array('fichier'=>$fichier));
 		}
 		$envoyer_mail($to, $sujet, $corps, $from = "", $headers = "");
 	}
