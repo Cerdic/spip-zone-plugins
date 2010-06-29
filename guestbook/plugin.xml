@@ -37,5 +37,10 @@
 		<titre>Livre d'or</titre>
 		<url>controle_guestbook</url>
 	</bouton>
+	<bouton id='livredor' parent='edition'>
+		<icone>prive/images/guestbook.png</icone>
+		<titre>Livre d'or</titre>
+		<url>controle_guestbook</url>
+	</bouton>
 	<categorie>communication</categorie>
 </plugin>
