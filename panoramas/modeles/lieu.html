@@ -48,11 +48,7 @@
 <script type="text/javascript" src="#CHEMIN{js/cvi_text_lib.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.advanced-panorama.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.flipv.js}"></script>
-<script type="text/javascript" src="#CHEMIN{js/jquery-ui-1.8.2.custom.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{js/jquery.swfobject.1-0-9.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{js/jquery.multimedia-portfolio-2.0.js}"></script>
 
-<script type="text/javascript" src="#CHEMIN{js/jquery.fancybox-1.3.1.pack.js}"></script>
 
 <script type="text/javascript">
 	if(!Array.indexOf){
@@ -578,7 +574,6 @@ function rafraichir_panier() {
 		$('div.panorama-panier ul').html($.cookie('objets_ramasses')); 
 		verifier_objets_ramasses();
 		$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
-							
       }
   } 	
   setTimeout("rafraichir_panier()", 1000);
@@ -590,7 +585,7 @@ setTimeout("rafraichir_panier()", 1000);
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("ul.multimedia-portfolio").multimedia_portfolio({width: <BOUCLE_visiteparent3(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent3>, baseDir: '/squelettes/', nbelem: 4});
+		$("ul.multimedia-portfolio").multimedia_portfolio({width: <BOUCLE_visiteparent3(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent3>, baseDir: '[(#CHEMIN{player_mp3_maxi.swf}|dirname)]/', nbelem: 4});
 		$('.fermer-documents').click(function(){
 			$('.documents-lieu').hide();
 			$('.voir-documents').show();
@@ -606,10 +601,10 @@ setTimeout("rafraichir_panier()", 1000);
 
 #SET{docs, #DOCUMENTS_ASSOCIES}
 <B_documentsassocies>
-<div class="voir-documents"><a href="#"><:panoramas:afficher_les_documents:></a></div>
+<div class="voir-documents"><a href="#" style="background-image: url(#CHEMIN{img_pack/fleche-top.png});"><:panoramas:afficher_les_documents:></a></div>
 <div class="documents-lieu" style="display: none;">
 <h2><:panoramas:documents_associes:></h2>
-<a href="#" class="fermer-documents"><:panoramas:masquer_les_documents:></a>
+<a href="#" class="fermer-documents" style="background-image: url(#CHEMIN{img_pack/fleche-bottom.png});"><:panoramas:masquer_les_documents:></a>
 <ul class="multimedia-portfolio">
 <BOUCLE_documentsassocies(DOCUMENTS){tous}>[(#ID_DOCUMENT|inclusdans{#GET**{docs}}|?{' ',''})
 		<li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT||image_reduire{0,200}|inserer_attribut{class,}|inserer_attribut{style,})]</a></li>
