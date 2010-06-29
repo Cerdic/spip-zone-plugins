@@ -200,7 +200,7 @@ function inc_saveauto_dist(){
 		$ok = ecrire_fichier($chemin_fichier, $contenu);
 
 		if(!$ok){
-	    	$err .= _T('saveauto:erreur_impossible_creer_verifier',array('fichier'=>$nom_fichier,'rep_bases' => $nom_fichier))"<br />";
+	    	$err .= _T('saveauto:erreur_impossible_creer_verifier',array('fichier'=>$nom_fichier,'rep_bases' => $nom_fichier))."<br />";
 		}
 
 	    /**
