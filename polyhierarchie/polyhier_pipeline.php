@@ -270,4 +270,7 @@ function polyhier_calculer_rubriques($flux) {
 	return $flux;
 }
 
+/* pour que le pipeline ne rale pas ! */
+function polyhier_autoriser(){}
+
 ?>
