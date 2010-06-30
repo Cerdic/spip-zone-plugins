@@ -1,12 +1,14 @@
 <BOUCLE_article(ARTICLES){id_article}>
 
+#SET{fichier,drawCell#ID_ARTICLE.pdf}
+
 [(#PDF_CREER_DOCUMENT{
-        fichier='drawCell#ID_ARTICLE.pdf',
+        fichier='#GET{fichier}',
         doc_titre='#TITRE',
 		doc_sujet='#SURTITRE',
 		doc_auteur=''[(#LESAUTEURS|supprimer_tags)]'',
 		doc_mots_cles='Spip2Pdf dessine une cellule',
-		marges='20 70 20'		
+		marges='20 70 20'
 })]
 
 #PDF_LANG_DIR{dir='#LANG_DIR'}
@@ -50,9 +52,6 @@
 #PDF_SORTIR_DOCUMENT
 
 
-<?php 
- $redirect = "#URL_SITE_SPIP/IMG/PDF/drawCell#ID_ARTICLE.pdf";
- header("Location: $redirect"); 
-?>
-
+#SET{url,#VAL{#EVAL{_DIR_PDF}#GET{fichier}}|url_absolue}}
+#HTTP_HEADER{Location: #GET{url}}
 </BOUCLE_article>

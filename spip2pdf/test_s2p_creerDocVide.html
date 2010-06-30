@@ -1,13 +1,14 @@
 <BOUCLE_article(ARTICLES){id_article}>
 
+#SET{fichier,creerDocVide#ID_ARTICLE.pdf}
 
 [(#PDF_CREER_DOCUMENT{
-        fichier='creerDocVide#ID_ARTICLE.pdf',
+        fichier='#GET{fichier}',
         doc_titre='#TITRE',
 		doc_sujet='#SURTITRE',
 		doc_auteur='[(#LESAUTEURS|supprimer_tags)]',
 		doc_mots_cles='Spip2Pdf Création',
-		marges='23 20 23'		
+		marges='23 20 23'
 })]
 
 #PDF_SORTIR_DOCUMENT
@@ -18,15 +19,6 @@
 	squelette='test_s2p_creerDocVide&id_article=#ID_ARTICLE',
 })]
 
-
-<?php 
- $redirect = "#URL_SITE_SPIP/IMG/PDF/creerDocVide#ID_ARTICLE.pdf";
- header("Location: $redirect"); 
-?>
-
+#SET{url,#VAL{#EVAL{_DIR_PDF}#GET{fichier}}|url_absolue}}
+#HTTP_HEADER{Location: #GET{url}}
 </BOUCLE_article>
-	
-
-
-</body>
-</html>
