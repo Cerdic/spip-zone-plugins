@@ -20,16 +20,15 @@ function balise_TOTAL_HT_dist($p) {
 }
 
 function calculer_balise_TOTAL_HT($id_facture) {
+    $table_lignes_facture = "spipmine_lignes_facture"; 
 	$total_ht = 0;
-	$sql = "SELECT (prix_unitaire_ht * quantite) AS total_ligne FROM `cym_lignes_facture` WHERE id_facture = (SELECT id_facture FROM `cym_factures` WHERE id_facture ='$id_facture')";
-	$query = spip_query($sql);
-	while ($lignes = spip_fetch_array($query)){
-		$total_ligne = $lignes['total_ligne'];
-		$total_ht = $total_ht + $total_ligne;
-	}
+	$total_ht = sql_getfetsel(
+	    "SUM(quantite * prix_unitaire_ht)",
+	    $table_lignes_facture,
+	    "id_facture=1"
+	);
 	
-	
-	if ($total_ht) {return "$total_ht";} else {return NULL;}
+	return $total_ht ? $total_ht : NULL;
 
 }
 ?>
