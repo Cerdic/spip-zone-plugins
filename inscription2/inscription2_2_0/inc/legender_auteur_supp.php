@@ -36,9 +36,10 @@ function legender_auteur_supp_saisir($id_auteur){
 		}
 	}
 
-	if(is_numeric($id_auteur)){
+	// id_auteur numerique et different de '0' !
+	if (is_numeric($id_auteur) and $id_auteur){
 		$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
-	}else{
+	} else {
 		$query = $champs;
 	}
 
