@@ -1,0 +1,29 @@
+[(#REM)
+	Squelette du formulaire #FORMULAIRE_BIGBROTHER_PAGINATION
+	Permet de changer le nombre d'éléments dans une pagination d'une boucle
+	en passant un paramètre dans l'url
+]
+
+<div class="formulaire_spip formulaire_menu_pagination" id="formulaire_menu_pagination_#ENV{nom}">
+	<form method='post' action='#ENV{action}'><div><ul>
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<li>
+			<label for="#ENV{nom}"><:bigbrother:label_nombre_pagination:></label>
+			<BOUCLE_type_form(CONDITION){si #ENV{type_form}|=={select}|oui}>
+			<select name="#ENV{nom}" id="#ENV{nom}" onchange="$(this).parents('form').submit()">
+				<option value=""> - </option>
+				<BOUCLE_test12(POUR){tableau #ENV{pas}:+#ENV{pas}:#ENV{max}}>
+				<option value="#VALEUR"[(#ENV{defaut}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+				</BOUCLE_test12>
+				[(#ENV{afficher_tout}|oui)
+					<option value="#ENV{total}"[(#ENV{defaut}|=={#ENV{total}}|oui)selected="selected"]><:mediaspip_core:pagination_tout_afficher:></option>]
+			</select>
+			</BOUCLE_type_form>
+			</B_type_form>
+			<input type="text" class="text" name="#ENV{nom}" id="#ENV{nom}" size="5" />
+			<//B_type_form>
+			</li>
+		</ul>
+		<noscript><p class="boutons"><input type="submit" class="submit" value="&gt;&gt;" /></p></noscript>
+	</div></form>
+</div>

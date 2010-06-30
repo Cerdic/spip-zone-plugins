@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_date_debut' => 'Date de d&eacute;but',
 	'label_date_fin' => 'Date de fin',
+	'label_nombre_pagination' => 'Paginer par :',
 	'label_suppression_journal_criteres' => 'Suppression des entr&eacute;es li&eacute;es &agrave; vos crit&egrave;res',
 
 	// M
