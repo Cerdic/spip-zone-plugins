@@ -10,9 +10,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function sm_factures_declarer_tables_auxiliaires($tables_auxiliaires){
 
-	// structure de la table spipmine_lignes_factures
+	// structure de la table spipmine_lignes_facture
 	// liée à la table spipmine_factures
-	$spipmine_lignes_factures = array(
+	$spipmine_lignes_facture = array(
 		"id_ligne"				=>	"int(11) NOT NULL auto_increment",
 		"id_facture"			=>	"int(11) default NULL",
 		"position"				=>	"int(11) default NULL",
@@ -22,14 +22,14 @@ function sm_factures_declarer_tables_auxiliaires($tables_auxiliaires){
 		"prix_unitaire_ht"		=>	"int(11) default NULL",
 		"commentaire"			=>	"mediumtext"
 	);
-	$spipmine_lignes_factures_key = array(
+	$spipmine_lignes_facture_key = array(
 		"PRIMARY KEY"			=>	"id_ligne",
 		"KEY id_facture"		=>	"id_facture"
 	);
 
-	$tables_auxiliaires['spipmine_lignes_factures'] = array(
-		'field' => &$spipmine_lignes_factures,
-		'key' => &$spipmine_lignes_factures_key
+	$tables_auxiliaires['spipmine_lignes_facture'] = array(
+		'field' => &$spipmine_lignes_facture,
+		'key' => &$spipmine_lignes_facture_key
 	);
 
 	// structure de la table spipmine_types_facturation
