@@ -85,19 +85,20 @@ function multilang_inserer_head($flux,$config=array()){
 					multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
 				  	multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
 
-					// On trie les langues. langue principale en premier,
-					// puis langue de l environnement puis les autres en ordre alphabetique
+					// On trie les langues. Langue de l environnement en premier,
+					// puis langue principale du site puis les autres en ordre alphabetique
+					// Un utilisateur de langue anglaise souhaite logiquement traduire en anglais
 					multilang_avail_langs = jQuery.grep(multilang_avail_langs, function(value) {
 						 return (value != multilang_def_lang && value != multilang_lang_courante);
 					});
 					multilang_avail_langs.sort() ;
-					if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_lang_courante) ;
-					multilang_avail_langs.unshift(multilang_def_lang) ;
+					if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang) ;
+					multilang_avail_langs.unshift(multilang_lang_courante) ;
 
 				  	jQuery(document).ready(function(){
 						function multilang_init(){
 							root = "'.$root.'";
-							fields_selector = "textarea,input:text:not(input#new_login,#titreparent,.ac_input,#url_syndic,*.nomulti),.multilang";
+							fields_selector = "textarea,input:text:not(input#new_login,input#email,#titreparent,.ac_input,#url_syndic,*.nomulti),.multilang";
 							// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
 							forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 							root_opt = "form:has(.multilang)";
