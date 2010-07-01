@@ -1,4 +1,9 @@
 <?php
+/**
+ * Plugin Comptes & Contacts pour Spip 2.0
+ * Licence GPL (c) 2010 - Apsulis
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
@@ -36,3 +41,4 @@ function accepter_auteur_comptes($comptes){
 	}	
 	return false;
 }
+?>

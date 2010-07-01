@@ -1,4 +1,8 @@
 <?php
+/**
+ * Plugin Comptes & Contacts pour Spip 2.0
+ * Licence GPL (c) 2010 - Ateliers-CYM - Apsulis
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
@@ -79,3 +83,5 @@ function exporter_table_csv($table_ou_vue){
 
 	return true;
 }
+
+?>

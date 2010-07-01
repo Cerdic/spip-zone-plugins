@@ -1,10 +1,7 @@
 <?php
 /**
  * Plugin Comptes & Contacts pour Spip 2.0
- * Licence GPL
- * Auteur Cyril Marion - Ateliers CYM
- *
+ * Licence GPL (c) 2009 - 2010 - Ateliers CYM
  */
-
 
 ?>
