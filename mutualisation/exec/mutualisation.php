@@ -186,7 +186,8 @@ function adminplugin_site($meta, $liste_plug_compat) {
 		$plugins = array_keys($cfg);
 		ksort($plugins);
 		foreach ($plugins as $plugin) {
-			if ($cfg[$plugin]['version'] <> $liste_plug_compat[$plugin]['version']) {
+			if ($cfg[$plugin]['version'] != $liste_plug_compat[$plugin]['version']
+			AND !is_null($liste_plug_compat[$plugin]['version'])) {
 				$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
 				$secret = md5($secret);
 				$vplugin = $cfg[$plugin]['version'] . '&rarr;' . $liste_plug_compat[$plugin]['version'];
