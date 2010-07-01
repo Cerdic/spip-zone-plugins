@@ -1,20 +1,21 @@
 <plugin>
 
-	<nom>Comptes &amp; Contacts - Extension des auteurs SPIP</nom>
+	<nom>Comptes &amp; Contacts</nom>
 
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 
 	<prefix>comptes</prefix>
 	
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 
-	<version_base>1.0.1</version_base>
+	<version_base>1.0.2</version_base>
 
 	<etat>dev</etat>
 
 	<description>
 		<multi>
-			[Fr] Ce plugin permet la gestion de Comptes et de Contacts pour les inscriptions, les r&eacute;servations, les achats. Utilise et &eacute;tend la structure des auteurs SPIP.
+			[fr]&Eacute;tend les auteurs SPIP; ajoute des champs uniques (pr&eacute;nom, date de naissance;...) et multiples (adresses m&egrave;l, num&eacute;ros de t&eacute;l&eacute;phone, adresses postales...); permet la gestion de groupes de contacts.
+			[en]Extends the SPIP authors table; inserts unique fields (firstname, date of birth...) and multipple fields (mail address, postal address...); allows the management of groups of contacts.
 		</multi>
 	</description>
 
