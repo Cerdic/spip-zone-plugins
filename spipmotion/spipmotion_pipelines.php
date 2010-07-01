@@ -22,30 +22,53 @@
  * @return $flux Le contexte du pipeline complété
  */
 function spipmotion_editer_contenu_objet($flux){
-	if(is_array($flux['args']) && ($flux['args']['type'] == 'case_document')){
-		$id_document = $flux['args']['id'];
+	$type_form = $flux['args']['type'];
+	$id_document = $flux['args']['id'];
+	if(is_array($flux['args']) && (in_array($type_form,array('illustrer_document','case_document','document')))){
 		$document = sql_fetsel("docs.id_document, docs.id_orig, docs.extension,docs.mode,docs.distant, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
-		if($document['distant'] !== 'distant'){
-			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
-				if($document['id_orig'] > 0){
-					$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
+		if(in_array($type_form,array('case_document','document'))){
+			if($document['distant'] !== 'distant'){
+				$ajouts = '';
+				if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
+					if($document['id_orig'] > 0){
+						$ajouts .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
+					}
+					if(extension_loaded('ffmpeg')){
+						$infos_videos = charger_fonction('spipmotion_infos_videos', 'inc');
+						$ajouts .= $infos_videos($id,$id_document,$type);
+					}
 				}
-				if(extension_loaded('ffmpeg')){
-					$infos_videos = charger_fonction('spipmotion_infos_videos', 'inc');
-					$flux['data'] .= $infos_videos($id,$id_document,$type);
+				if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_audios',array()))){
+					if($document['id_orig'] > 0){
+						$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
+					}
+					$infos_audios = charger_fonction('spipmotion_infos_audios', 'inc');
+					$ajouts .= '<div id="spipmotion_infos-'.$id_document.'">';
+					$ajouts .= $infos_audios($id,$id_document,$type);
+					$ajouts .= '</div>';
+				}
+				if($type_form == 'case_document'){
+					$flux['data'] .= $ajouts;
+				}else{
+					if(preg_match(",<li [^>]*class=[\"']editer_infos.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
+						$infos_doc = recuperer_fond('prive/prive_infos_video', $contexte=array('id_document'=>$id_document));
+						$flux['data'] = preg_replace(",($regs[1]),Uims","\\1".$infos_doc,$flux['data']);
+					}
 				}
 			}
-			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_audios',array()))){
-				if($document['id_orig'] > 0){
-					$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
+		}
+		else if(in_array($type_form,array('illustrer_document'))){
+			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
+				if(preg_match(",<div [^>]*id=[\"'](formulaire_illustrer_document.*)[\"'].*>(.*)<\/div>,Uims",$flux['data'],$regs)){
+					$redirect = ancre_url(self(),$regs[1]);
+					$url_action = generer_action_auteur('spipmotion_logo', "$id/$type/$id_document", $redirect);
+					$texte = _T('spipmotion:lien_recuperer_logo_fichier');
+					$recuperer_vignette = " | <a href='$url_action'>$texte</a>";
+					$flux['data'] = preg_replace(",(<div [^>]*class=[\"']sourceup.*>(.*)<\/div>),Uims","\\2".$recuperer_vignette,$flux['data']);
 				}
-				$infos_audios = charger_fonction('spipmotion_infos_audios', 'inc');
-				$flux['data'] .= '<div id="spipmotion_infos-'.$id_document.'">';
-				$flux['data'] .= $infos_audios($id,$id_document,$type);
-				$flux['data'] .= '</div>';
 			}
 		}
 	}

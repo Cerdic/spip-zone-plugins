@@ -31,7 +31,7 @@ function action_infos_video_post($r){
 
 	// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_$type/$id'");
+	suivre_invalideur("id='id_document/$id_document'");
 	return $x;
 }
 
