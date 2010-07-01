@@ -1156,6 +1156,11 @@ add_variable( array(
 ));
 
 add_outil( array(
+	'id' => 'balise_set',
+	'categorie' => 'spip',
+));
+
+add_outil( array(
 	'id' => 'corbeille',
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
