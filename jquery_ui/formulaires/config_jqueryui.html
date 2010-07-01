@@ -1,0 +1,62 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=jqueryui -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_jqueryui">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+	
+	[(#SAISIE{checkbox,plugins,
+		label=<:jqueryui:cfg_lbl_plugins:>,
+		explication=<:jqueryui:cfg_explication_plugins:>,
+		datas=#ARRAY{
+			jquery-ui-1.8.2.custom,<:jqueryui:cfg_val_complete:>,
+			jquery.ui.core,<:jqueryui:cfg_val_ui_core:>,
+			jquery.ui.widget,<:jqueryui:cfg_val_ui_widget:>,
+			jquery.ui.mouse,<:jqueryui:cfg_val_ui_mouse:>,
+			jquery.ui.position,<:jqueryui:cfg_val_ui_position:>,
+			jquery.ui.draggable,<:jqueryui:cfg_val_ui_draggable:>,
+			jquery.ui.droppable,<:jqueryui:cfg_val_ui_droppable:>,	
+			jquery.ui.resizable,<:jqueryui:cfg_val_ui_resizable:>,
+			jquery.ui.selectable,<:jqueryui:cfg_val_ui_selectable:>,			
+			jquery.ui.sortable,<:jqueryui:cfg_val_ui_sortable:>,
+			jquery.ui.accordion,<:jqueryui:cfg_val_ui_accordion:>,
+			jquery.ui.autocomplete,<:jqueryui:cfg_val_ui_autocomplete:>,
+			jquery.ui.button,<:jqueryui:cfg_val_ui_button:>,
+			jquery.ui.dialog,<:jqueryui:cfg_val_ui_dialog:>,
+			jquery.ui.slider,<:jqueryui:cfg_val_ui_slider:>,
+			jquery.ui.tabs,<:jqueryui:cfg_val_ui_tabs:>,
+			jquery.ui.datepicker,<:jqueryui:cfg_val_ui_datepicker:>,
+			jquery.ui.progressbar,<:jqueryui:cfg_val_ui_progressbar:>,
+			jquery.effects.core,<:jqueryui:cfg_val_effects_core:>,
+			jquery.effects.blind,<:jqueryui:cfg_val_effects_blind:>,
+			jquery.effects.bounce,<:jqueryui:cfg_val_effects_bounce:>,
+			jquery.effects.clip,<:jqueryui:cfg_val_effects_clip:>,
+			jquery.effects.drop,<:jqueryui:cfg_val_effects_drop:>,
+			jquery.effects.explode,<:jqueryui:cfg_val_effects_explode:>,
+			jquery.effects.fold,<:jqueryui:cfg_val_effects_fold:>,
+			jquery.effects.highlight,<:jqueryui:cfg_val_effects_highlight:>,
+			jquery.effects.pulsate,<:jqueryui:cfg_val_effects_pulsate:>,
+			jquery.effects.scale,<:jqueryui:cfg_val_effects_scale:>,
+			jquery.effects.shake,<:jqueryui:cfg_val_effects_shake:>,
+			jquery.effects.slide,<:jqueryui:cfg_val_effects_slide:>,
+			jquery.effects.transfer,<:jqueryui:cfg_val_effects_transfer:>}
+	})]
+			
+	</ul>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:jqueryui:cfg_effacer:>" />
+	</p>
+</div></form>
+#CFG_ARBO{jqueryui}
+</div>
