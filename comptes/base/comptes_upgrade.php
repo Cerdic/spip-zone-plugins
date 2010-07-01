@@ -24,7 +24,7 @@ function comptes_upgrade($nom_meta_base_version, $version_cible){
 	
 	if ($current_version=="0.0") {
 		creer_base();
-		peupler_base();
+		peupler_base_comptes();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 	if (version_compare($current_version,"1.0.1","<")){

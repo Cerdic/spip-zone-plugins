@@ -6,7 +6,7 @@
  * 
  */
 
-function peupler_base() {
+function peupler_base_comptes() {
 	// Attention, specifier le NOM des TABLES et non le nom des BOUCLES !
 	sql_insertq_multi('spip_contacts', array(
 		array(
