@@ -8,11 +8,10 @@ include_spip('inc/meta');
 include_spip('base/create');
 include_spip('base/peupler_base');
 
-
 function comptes_upgrade($nom_meta_base_version, $version_cible){
 	/**
 	 *
-	 *  11/01/2009 : ajout table spips_emails, version 1.0.1
+	 *  11/01/2009 : ajout table spip_emails, version 1.0.1
 	 *
 	 */
 	 
@@ -25,7 +24,7 @@ function comptes_upgrade($nom_meta_base_version, $version_cible){
 		peupler_base_comptes();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-	if (version_compare($current_version,"1.0.1","<")){
+	if (version_compare($current_version,"1.0.2","<")){
 		maj_tables('spip_comptes');
 		maj_tables('spip_contacts');
 		maj_tables('spip_comptes_contacts');
@@ -38,7 +37,7 @@ function comptes_upgrade($nom_meta_base_version, $version_cible){
 		maj_tables('spip_champs');
 		maj_tables('spip_champs_liens');
 		
-		ecrire_meta($nom_meta_base_version,$current_version="1.0.1");
+		ecrire_meta($nom_meta_base_version,$current_version="1.0.2");
 	}
 }
 
