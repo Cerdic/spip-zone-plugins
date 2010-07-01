@@ -8,7 +8,7 @@
  *
  */
 
-function peupler_base() {
+function peupler_base_pays() {
 
 	sql_insertq_multi('spip_pays', array(
 		array('id_pays'=>'1','code'=>'AF','nom'=>'<multi>[fr]Afghanistan[en]Afghanistan[de]Afghanistan[es]Afganistán[it]Afghanistan[nl]Afghanistan[pt]Afeganistão</multi>'),
