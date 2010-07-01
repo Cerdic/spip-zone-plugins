@@ -24,17 +24,18 @@ function formulaires_illustrer_document_charger_dist($id_document){
 	$valeurs['vignette'] = get_spip_doc($vignette['fichier']);
 	$valeurs['hauteur'] = $vignette['hauteur'];
 	$valeurs['largeur'] = $vignette['largeur'];
-	
+	$valeurs['_pipeline'] = array('editer_contenu_objet',array('type'=>'illustrer_document','id'=>$id_document));
+
 	return $valeurs;
 }
 
 function formulaires_illustrer_document_verifier_dist($id_document){
 	$erreurs = array();
 	if (_request('supprimer')){
-		
+
 	}
 	else {
-		
+
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 		$verifier = charger_fonction('verifier','formulaires/joindre_document');
 		$erreurs = $verifier($id_vignette,0,'','vignette');
@@ -53,28 +54,28 @@ function formulaires_illustrer_document_traiter_dist($id_document){
 	}
 	else {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-	
+
 		include_spip('inc/joindre_document');
 		$files = joindre_trouver_fichier_envoye();
-	
+
 		$ajoute = action_ajouter_documents_dist($id_vignette,$files,'',0,'vignette');
-	
-		
+
+
 		if (is_int(reset($ajoute))){
 			$id_vignette = reset($ajoute);
 			include_spip('action/editer_document');
 			document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
 			$res['message_ok'] = _T('gestdoc:document_installe_succes');
 		}
-		else 
+		else
 			$res['message_erreur'] = reset($ajoute);
 	}
 
-	// todo : 
+	// todo :
 	// generer les case docs si c'est necessaire
 	// rediriger sinon
 	return $res;
-	
+
 }
 
 ?>
