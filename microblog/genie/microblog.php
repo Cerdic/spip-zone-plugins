@@ -1,8 +1,10 @@
 <?php
 /*
- * Plugin microblog
- * (c) 2009
- * Distribue sous licence GPL
+ * Plugin spip|microblog
+ * (c) Fil 2009-2010
+ *
+ * envoyer des micromessages depuis SPIP vers twitter ou laconica
+ * distribue sous licence GNU/LGPL
  *
  */
 

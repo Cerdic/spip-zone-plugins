@@ -90,7 +90,7 @@
 									(#ENV{evt_publierarticles}|?{checked="checked"})] id="evt_publierarticles" />
 								<label for="evt_publierarticles"><:microblog:publier_articles:></label>
 								[(#CONFIG{post_dates}|=={non}|oui)
-								<div id="synchro_evt"[(#ENV{evt_publierarticles}|non)style="display:none;"]>
+								<div id="evt_publierarticles_options"[(#ENV{evt_publierarticles}|non)style="display:none;"]>
 									<div class="choix">
 										<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_validation" value="validation"[
 											(#ENV{evt_publierarticlesfutur}|=={publication}|?{'',checked="checked"})] />
@@ -101,13 +101,18 @@
 											(#ENV{evt_publierarticlesfutur}|=={publication}|?{checked="checked"})] />
 										<label for="evt_publierarticlesfutur_publication"><:microblog:publier_articles_futurs_visibles:></label>
 									</div>
+									<div class="choix">
+										<input type="checkbox" name="short_url" id="short_url" value="1"[
+											(#ENV{short_url,''}|oui)checked="checked"] />
+										<label for="short_url"><:microblog:publier_articles_shorturl:></label>
+									</div>
 								</div>
 								<script type="text/javascript">
 									function affiche_bloc_synchro(){
 										if (jQuery("#evt_publierarticles").attr("checked"))
-											jQuery("#synchro_evt").show('fast');
+											jQuery("#evt_publierarticles_options").show('fast');
 										else
-											jQuery("#synchro_evt").hide('fast');
+											jQuery("#evt_publierarticles_options").hide('fast');
 									}
 									jQuery(document).ready(function(){
 										jQuery("#evt_publierarticles").click(affiche_bloc_synchro);

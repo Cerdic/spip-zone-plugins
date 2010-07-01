@@ -1,13 +1,12 @@
 <?php
-
-/*****************************************************************\
- * spip|microblog
- *                      (c) Fil 2009
+/*
+ * Plugin spip|microblog
+ * (c) Fil 2009-2010
  *
  * envoyer des micromessages depuis SPIP vers twitter ou laconica
  * distribue sous licence GNU/LGPL
  *
-\*****************************************************************/
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
