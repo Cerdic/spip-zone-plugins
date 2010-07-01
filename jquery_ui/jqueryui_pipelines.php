@@ -7,7 +7,7 @@ function jqueryui_jquery_plugins($plugins){
 		$config['plugins'] = array();
 	
 	foreach ($config['plugins'] as $val) {
-		$plugins[] = _DIR_JQUERYUI."ui/".$val.".js";
+		$plugins[] = _DIR_JQUERYUI_JS.$val.".js";
 	}
 	
 	return $plugins;
