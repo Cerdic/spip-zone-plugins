@@ -1,20 +1,26 @@
 <plugin>
 
-	<nom>Catalogue - Vos produits, &eacute;v&egrave;nements, goodies en ligne !</nom>
+	<nom>Catalogue</nom>
 
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 
-	<version>1.2.1</version>
-	<version_base>1.2.1</version_base>
+	<version>1.0.3</version>
+	<version_base>1.6</version_base>
 	<etat>dev</etat>
 	<description>
-		Ce plugin permet la gestion simple d'un catalogue de produits, en ajoutant des cat&eacute;gories et des variantes aux articles SPIP.
-_ Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/spip-zone/comptes.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des choix d'articles du catalogue.
+	<multi>
+		[fr] Transforme les articles SPIP en articles de catalogue. Permet de saisir plusieurs variantes d'un m&ecirc;me produit. Permet d'indiquer des prix HT ou TTC, et permet d'ajouter des options.
+		
+		Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/spip-zone/comptes.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des s&eacute;lections d'articles.
+		[en]Transforms SPIP articles in catalogue articles. Allows to edit several variants of a product. Allows to indicate prices with or without taxes, and add options.
+		
+		This plugin requires [Comptes &amp; Contacts->http://files.spip.org/spip-zone/comptes.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
+	</multi>
 	</description>
 
 	<lien>[Un exemple de conf&eacute;rence en ligne->http://events.concurrences.com/article2.html?var_mode=recalcul]</lien>
 	
-	<lien>[Un exemple de voyage en ligne->http://www.tunisiasalsacongress.com/spip.php?page=transaction&env]</lien>
+	<lien>[Un exemple de voyage en ligne->http://tsc.cym.fr/spip.php?page=transaction&env]</lien>
 
 	<icon>img/picto_catalogue_128x128.png</icon>
 

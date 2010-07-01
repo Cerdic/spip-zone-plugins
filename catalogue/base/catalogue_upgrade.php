@@ -20,14 +20,14 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		catalogue_peupler_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-	if (version_compare($current_version,"1.6","<")){
+	if (version_compare($current_version,"1.3","<")){
 		maj_tables('spip_variantes');
 		maj_tables('spip_options');
 		maj_tables('spip_options_articles');
 		maj_tables('spip_transactions');
 		maj_tables('spip_lignes_transactions');
 				
-		ecrire_meta($nom_meta_base_version,$current_version="1.6");
+		ecrire_meta($nom_meta_base_version,$current_version="1.3");
 	}
 }
 
