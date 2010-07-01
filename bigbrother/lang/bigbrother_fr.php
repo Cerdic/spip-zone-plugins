@@ -60,6 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'naviguer_journal_stats' => '&Eacute;v&egrave;nements du site',
 
+	// P
+	'pagination_tout_afficher' => 'Tout afficher',
 	// T
 	'temps_median' => 'Temps m&eacute;dian',
 	'temps_moyen' => 'Temps moyen',

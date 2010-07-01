@@ -59,7 +59,7 @@
 				</li>]
 			</ul>
 		</div>]
-
+		#FORMULAIRE_BIGBROTHER_PAGINATION
 		#ANCRE_PAGINATION
 		<table class="bigbrother">
 			<thead>
@@ -73,7 +73,7 @@
 				</tr>
 			</thead>
 			<tbody class="ajax">
-		<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{id_journal IN #GET{id_journals}}{pagination #ENV{pagination,10}}>
+		<BOUCLE_journal_stats(JOURNAL){par date}{inverse}{id_journal IN #GET{id_journals}}{pagination #ENV{pagination_journal_stats,10}}>
 			<tr class="tr_liste">
 				<td>##ID_JOURNAL</td>
 				<td>

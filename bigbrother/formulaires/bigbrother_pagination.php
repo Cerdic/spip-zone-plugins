@@ -20,13 +20,24 @@
  */
 function formulaires_bigbrother_pagination_charger_dist($boucle,$total_elements,$ancre='',$type='select',$pas='10',$min='1',$max='50',$afficher_tout = false){
 	$lien = self();
+	$editable = true;
+
 	$pagination_actuel = _request('pagination'.$boucle) ? _request('pagination'.$boucle) : $pas;
-	$max_new = (floor($total_elements/$pas) * $pas);
+
 	if(($total_elements > 0) && ($total_elements < $max)){
 		$afficher_tout = true;
 	}
+
+	if($total_elements < $max){
+		$max = (floor($total_elements/$pas) * $pas);
+		if($max < $pas){
+			$editable = false;
+		}
+	}
+
 	return
 		array(
+			'editable' => $editable,
 			'action' => $lien,
 			'defaut' => $pagination_actuel,
 			'type_form' => $type,

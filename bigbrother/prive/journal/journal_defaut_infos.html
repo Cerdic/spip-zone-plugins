@@ -145,6 +145,7 @@
 			<h3><:bigbrother:titre_actions_nombre_par_auteur{auteur=#GET{auteur}}:></h3>]
 			[(#ENV{id_auteur}|non)
 			<h3><:bigbrother:titre_actions_nombre_par_auteurs:></h3>]
+			#FORMULAIRE_BIGBROTHER_PAGINATION{'graph_action_auteurs_table'}
 			#ANCRE_PAGINATION
 			<table class="bigbrother" id="graph_action_auteurs_table">
 				<thead>
@@ -154,7 +155,7 @@
 					</tr>
 				</thead>
 				<tbody>
-			<BOUCLE_action_par_auteur(POUR){tableau #GET{auteurs_uniques}}{par valeur}{pagination #ENV{pagination,0}}>
+			<BOUCLE_action_par_auteur(POUR){tableau #GET{auteurs_uniques}}{par valeur}{pagination #ENV{pagination_action_par_auteur,0}}>
 				<tr class="tr_liste">
 					[(#VALEUR|is_numeric|oui)
 						#SET{auteur,#INFO_NOM{auteur,#VALEUR}
@@ -246,6 +247,7 @@
 			<h3><:bigbrother:titre_actions_nombre_par_auteur_date{auteur=#GET{auteur}}:></h3>]
 			[(#ENV{id_auteur}|non)
 			<h3><:bigbrother:titre_actions_nombre_date:></h3>]
+			#FORMULAIRE_BIGBROTHER_PAGINATION{'graph_actions_date_auteurs_table','select',7}
 			#ANCRE_PAGINATION
 			<table class="bigbrother" id="graph_actions_date_auteurs_table">
 				<thead>
@@ -256,7 +258,7 @@
 					</tr>
 				</thead>
 				<tbody>
-			<BOUCLE_actions_par_auteurs_date(POUR){tableau #GET{dates_uniques}}{par valeur}{inverse}{pagination #ENV{pagination_date,7}}>
+			<BOUCLE_actions_par_auteurs_date(POUR){tableau #GET{dates_uniques}}{par valeur}{inverse}{pagination #ENV{pagination_actions_par_auteurs_date,7}}>
 				#SET{date,#VALEUR}
 				#SET{date_nb,0}
 				<BOUCLE_chaque_actions_par_auteur_date(POUR){tableau #GET{actions_uniques}}>
