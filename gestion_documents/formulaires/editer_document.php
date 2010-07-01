@@ -18,7 +18,7 @@ include_spip('inc/documents');
 
 function formulaires_editer_document_charger_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
-	
+
 	// relier les parents
 	$valeurs['parents'] = array();
 	$valeurs['_hidden'] = "";
@@ -26,7 +26,7 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	foreach($parents as $p){
 		if (in_array($p['objet'],array('article','rubrique')) AND $p['id_objet']>0)
 			$valeurs['parents'][] = $p['objet'].'|'.$p['id_objet'];
-		else 
+		else
 			$valeurs['_hidden'] .= "<input type='hidden' name='parents[]' value='".$p['objet'].'|'.$p['id_objet']."' />";
 	}
 
@@ -34,7 +34,7 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	$valeurs['saisie_heure'] = affdate($valeurs['date'],'H:i');
 	// en fonction du format
 	$valeurs['_editer_dimension'] = autoriser('tailler','document',$id_document)?' ':'';
-	
+
 	// type du document
 	$valeurs['type_document'] = sql_getfetsel('titre as type_document','spip_types_documents','extension='.sql_quote($valeurs['extension']));
 	if (in_array($valeurs['extension'],array('jpg','gif','png'))){
@@ -46,9 +46,10 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	if ($valeurs['distant']!=='oui'){
 		include_spip('inc/renseigner_document');
 		$infos = renseigner_taille_dimension_image(get_spip_doc($valeurs['fichier']),$valeurs['extension']);
+		spip_log($infos,'test');
 		if ($infos['taille']!=$valeurs['taille']
-			OR $infos['largeur']!=$valeurs['largeur']
-			OR $infos['hauteur']!=$valeurs['hauteur']){
+			OR ($infos['type_image'] && ($infos['largeur']!=$valeurs['largeur']))
+			OR ($infos['type_image'] && ($infos['hauteur']!=$valeurs['hauteur']))){
 			$valeurs['_taille_modif'] = $infos['taille'];
 			$valeurs['_largeur_modif'] = $infos['largeur'];
 			$valeurs['_hauteur_modif'] = $infos['hauteur'];
