@@ -7,11 +7,10 @@
 
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
 <BOUCLE_attente(SPIPMOTION_ATTENTES){id_spipmotion_attente}{tout}><BOUCLE_document(DOCUMENTS){id_document}{tout}>
-[[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - <:spipmotion:message_encodage_sujet_termine|nettoyer_titre_email|filtrer_entites|trim:>
+[[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - <:spipmotion:message_encodage_sujet_termine|nettoyer_titre_email|filtrer_entites|trim:> : ##ID_SPIPMOTION_ATTENTE
 <:spipmotion:message_encodage_oui{id_document=#ID_DOCUMENT}:>
 
-#SET{objet,#_attente:OBJET} #SET{id_objet,#_attente:ID_OBJET} [(#OBJET|=={article}|oui)[(#SET{url,[(#URL_ARTICLE{#_attente:ID_OBJET})]})]][(#OBJET|=={rubrique}|oui)[(#SET{url,[(#URL_RUBRIQUE{#_attente:ID_OBJET})]})]]
-<:spipmotion:message_encodage_objet_lie{objet=#GET{objet},id_objet=#GET{id_objet}}:>
-[(#INFO_TITRE{#_attente:OBJET,#_attente:ID_OBJET}|sinon{<:info_sans_titre:>})]&nbsp;-&nbsp;[(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|oui)[#URL_SITE_SPIP/(#GET{url})]][(#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie}|non)<:spipmotion:info_objet_non_publie:>]
-</BOUCLE_document></BOUCLE_attente>
+#SET{objet,#_attente:OBJET} #SET{id_objet,#_attente:ID_OBJET} [(#OBJET|=={article}|oui)[(#SET{url,[(#URL_ARTICLE{#GET{id_objet}})]})]][(#OBJET|=={rubrique}|oui)[(#SET{url,[(#URL_RUBRIQUE{#GET{id_objet}})]})]]
+<:spipmotion:message_encodage_objet_lie{objet=#GET{objet},id_objet=#GET{id_objet}}:></BOUCLE_document>
+[(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})]&nbsp;-&nbsp;[(#INFO_STATUT{#OBJET,#ID_OBJET}|=={publie}|oui)[#URL_SITE_SPIP/(#GET{url})]][(#INFO_STATUT{#OBJET,#ID_OBJET}|=={publie}|non)<:spipmotion:info_objet_non_publie:>]</BOUCLE_attente>
 #FILTRE{supprimer_tags|trim}
