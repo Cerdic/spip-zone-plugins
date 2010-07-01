@@ -1,0 +1,37 @@
+<plugin>
+	<nom>Pays - ISO 3166</nom>
+	
+	<auteur>Cyril MARION</auteur>
+	
+	<icon>img/iso_32x29.png</icon>
+	
+	<licence>GNU/GPL</licence>
+	
+	<version>1.0</version>
+	
+	<version_base>1.0</version_base>
+	
+	<etat>dev</etat>
+	
+	<description>
+	Fournit la liste officielle des pays &eacute;labor&eacute;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La base comporte un champ num&eacute;rique id_pays, le code ISO3166 et le nom en fran&ccedil;ais 
+	</description>
+	
+	<prefix>pays</prefix>
+	
+	<install>base/pays_upgrade.php</install>
+	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/pays_tables.php</inclure>
+	</pipeline>	
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/pays_tables.php</inclure>
+	</pipeline>
+	
+	<fonctions>pays_options.php</fonctions>
+	
+	<necessite id="SPIP" version="[2.0.9;]" />
+</plugin>
