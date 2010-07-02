@@ -1,9 +1,9 @@
 <plugin>
-	<nom>Pays - ISO 3166</nom>
+	<nom>Pays - ISO 3166-1</nom>
 	
 	<auteur>Cyril MARION</auteur>
 	
-	<icon>img/iso_32x29.png</icon>
+	<icon>img/pays_32x32.png</icon>
 	
 	<licence>GNU/GPL</licence>
 	
@@ -11,10 +11,13 @@
 	
 	<version_base>1.0</version_base>
 	
-	<etat>dev</etat>
+	<etat>stable</etat>
 	
 	<description>
-	Fournit la liste officielle des pays &eacute;labor&eacute;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La base comporte un champ num&eacute;rique id_pays, le code ISO3166 et le nom en fran&ccedil;ais 
+	<multi>
+	[fr] Fournit la liste officielle des pays &eacute;labor&eacute;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La base comporte un champ num&eacute;rique id_pays, le code ISO3166-1 et le nom en fran&ccedil;ais.
+	[en] Includes the official list of countries provided by the [International Orgnisation for Standardization->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. The fields are an integer as primary key, ISO 3166-1 2 character code as key, and name of the country in different languages.
+	</multi>
 	</description>
 	
 	<prefix>pays</prefix>
