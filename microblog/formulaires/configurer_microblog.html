@@ -89,8 +89,8 @@
 								<input type="checkbox" name="evt_publierarticles"[
 									(#ENV{evt_publierarticles}|?{checked="checked"})] id="evt_publierarticles" />
 								<label for="evt_publierarticles"><:microblog:publier_articles:></label>
-								[(#CONFIG{post_dates}|=={non}|oui)
 								<div id="evt_publierarticles_options"[(#ENV{evt_publierarticles}|non)style="display:none;"]>
+								[(#CONFIG{post_dates}|=={non}|oui)
 									<div class="choix">
 										<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_validation" value="validation"[
 											(#ENV{evt_publierarticlesfutur}|=={publication}|?{'',checked="checked"})] />
@@ -101,6 +101,7 @@
 											(#ENV{evt_publierarticlesfutur}|=={publication}|?{checked="checked"})] />
 										<label for="evt_publierarticlesfutur_publication"><:microblog:publier_articles_futurs_visibles:></label>
 									</div>
+								]
 									<div class="choix">
 										<input type="checkbox" name="short_url" id="short_url" value="1"[
 											(#ENV{short_url,''}|oui)checked="checked"] />
@@ -118,7 +119,6 @@
 										jQuery("#evt_publierarticles").click(affiche_bloc_synchro);
 									});
 								</script>
-								]
 							</div>
 						</li>
 					</ul>
