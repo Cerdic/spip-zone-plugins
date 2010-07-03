@@ -1,8 +1,9 @@
-<?php function bible_install($action){
-	
+<?php 
+function bible_install($action){
+
 	switch($action){
+
 		case 'install':
-			
 			if (function_exists('ecrire_config')){
 				
 				ecrire_config('bible/numeros','oui');
@@ -23,44 +24,35 @@
 				ecrire_config('bible/traduction_fi','pr92');
 				ecrire_config('bible/traduction_ru','вж');
 				ecrire_config('bible/traduction_bg','bb');
-            include_spip('inc/plugin');
-            $liste=liste_plugin_actifs();
-			if ($liste['SPIP_BONUX']){
-			     bible_initialise_pp();
-			}
+				bible_initialise_pp();
 			
 				
 				}
-			break;
+			return;
 			
 		case 'uninstall':
 			
 			if (function_exists('effacer_config')){
-				effacer_config('bible/numeros');
-				effacer_config('bible/retour');
-				effacer_config('bible/ref');
-				effacer_config('bible/traduction');
-				effacer_config('bible/traduction_fr');
-				effacer_config('bible/traduction_en');
-				effacer_config('bible/traduction_de');
-				effacer_config('bible/traduction_es');
-				effacer_config('bible/traduction_it');
-				effacer_config('bible/traduction_pl');
-				effacer_config('bible/traduction_pt');
-				effacer_config('bible/traduction_ht');
-				effacer_config('bible/traduction_da');
-				effacer_config('bible/traduction_nl');
-				effacer_config('bible/traduction_no');
-				effacer_config('bible/traduction_sv');
-				effacer_config('bible/traduction_fi');
-				effacer_config('bible/traduction_ru');
-				effacer_config('bible/traduction_bg');
-				effacer_config('bible_pp/trad_prop');
+				effacer_config('bible');
+				effacer_config('bible_pp');
 			}
+
 			break;
-			
+		case 'test':
+			//	spip_log('on passe icicfg','bible');
+			if (function_exists('lire_config')){
+				
+				if (lire_config('bible')&lire_config('bible_pp')){
+					
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			return true;
 	}
-	return true;
+		
 }
 function bible_initialise_pp(){
     $tableau = array_keys(bible_tableau('traduction'));

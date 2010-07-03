@@ -36,7 +36,7 @@
             <li>
             <label for="#VALEUR">[(#VALEUR|info_bible_version{traduction})]</label>
             
-            <input type="checkbox" name="trad_prop[]"  id="#VALEUR" [checked="(#VALEUR|in_array{#ENV{trad_prop}})"]  value="#VALEUR" />
+            <input type="checkbox" name="trad_prop[]" id="#VALEUR" value="#VALEUR"  [checked="(#VALEUR|in_array{#ENV{trad_prop,#ARRAY}})"] />
             </li>
         </BOUCLE_versions>
         </ul>
