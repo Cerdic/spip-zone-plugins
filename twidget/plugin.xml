@@ -3,12 +3,15 @@
 	<auteur>[C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<icon>prive/themes/spip/images/twidget-32.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.0</version>
-	<etat>test</etat>
+	<version>0.3.0</version>
+	<etat>stable</etat>
 	<description>Un widget Twitter facile a installer
 _ Ajoutez une inclusion dans vos squelettes pour afficher un widget twitter :
 _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}</code>
  ou <code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title='Suivez twitter',subject='SPIP'}</code>
+
+ Le plugin fait office de proxy afin qu'aucune requ&ecirc;te ne soit faite par vos visiteurs vers twitter
+ et &eacute;viter tout tra&ccedil;age possible de leur activit&eacute;
 	</description>
 	<prefix>twidget</prefix>
 	<lien></lien>
