@@ -22,8 +22,9 @@ La pr&eacute;sente version a &eacute;t&eacute; d&eacute;velopp&eacute;e dans le 
 	
 	<install>base/quiz_upgrade.php</install>
 	
-	<bouton id='comptes' parent='naviguer'>
+	<bouton id='quiz' parent='naviguer'>
 		<icone>img/quiz_32x32.png</icone>
+		<url>quiz_tous</url>
 		<titre>quiz:nom_bouton_plugin</titre>
 	</bouton>
 	

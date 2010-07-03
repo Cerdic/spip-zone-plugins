@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cliquez_editer_question' => 'Double-cliquez pour &eacute;diter cette question',
 	
 	//E
+	'editer_nouveau' => 'Cr&eacute;er un quiz',
 	'edition_question' => 'Edition d\'une question de quiz',
 	'erreur_article_manquant' => 'Le num&eacute;ro de l\'article n\'est pas pass&eacute; dans le formulaire.',
 	
@@ -34,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'oui' => 'Oui',
 
 	//P
+	'page_tous_explication' => 'Voici la liste de tous les quiz du site, c\'est &agrave; dire toutes les rubriques contenant des articles de type r&eacute;ponse.',
 	'pas_reponse_article' => 'Pas encore de r&eacute;ponse pour l\'article ',
 	'pas_reponse_question' => 'Pas encore de r&eacute;ponse pour la question ',
 	
@@ -50,7 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_reponse_confirme' => 'Supprimer la r&eacute;ponse ',
 	
 	//T
-	'transformer_question' => 'Transformer cet article en question de quiz.'
+	'transformer_question' => 'Transformer cet article en question de quiz.',
+	'tous_les_quiz' => 'Tous les quiz du site',
 	
 
 );
