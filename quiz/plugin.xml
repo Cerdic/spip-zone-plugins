@@ -2,9 +2,11 @@
 
     <nom>SPIP Quiz - R&eacute;aliser de vrais quiz sous SPIP</nom>
 	
-	<version>0.1</version>
+	<version>0.2</version>
 	
 	<prefix>quiz</prefix>
+	
+	<icon>img/quiz_32x32.png</icon>
 	
 	<auteur>Cyril MARION - Ateliers CYM</auteur>
 	
@@ -19,7 +21,14 @@ La pr&eacute;sente version a &eacute;t&eacute; d&eacute;velopp&eacute;e dans le 
 	<version_base>0.1</version_base>
 	
 	<install>base/quiz_upgrade.php</install>
-		
+	
+	<bouton id='comptes' parent='naviguer'>
+		<icone>img/quiz_32x32.png</icone>
+		<titre>quiz:nom_bouton_plugin</titre>
+	</bouton>
+	
+	<lien>[Le plugin SPIP Quiz sur la zone->http://www.spip-contrib.net/Des-quiz-SPIP-exportables]</lien>
+
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/quiz_tables.php</inclure>

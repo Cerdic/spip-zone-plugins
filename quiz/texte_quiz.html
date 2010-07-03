@@ -1,14 +1,15 @@
-[(#HTTP_HEADER{Content-type: text[; charset=(#CHARSET)]})]<BOUCLE_quiz(RUBRIQUES){id_rubrique}>
-titre = "[(#TITRE|supprimer_numero)]";
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]<BOUCLE_quiz(RUBRIQUES){id_rubrique}>titre = "[(#TITRE|supprimer_numero)]";
 
 lang = "[(#LANG|sinon{'fr'})]"
 
-titre_court = "[(#TITRE|supprimer_numero).swf]"
+titre_court = "[(#TITRE|generer_url_propre).swf]"
+
+Autre titre = "[(#TITRE|urls_propres_dist)]"
 
 tableau = [
 <BOUCLE_questions(ARTICLES corrections){id_rubrique}>
 ["[(#TITRE|supprimer_numero)]",
-	<BOUCLE_juste(REPONSES}{id_reponse=#ID_JUSTE}>"[(#TEXTE|supprimer_numero)]",</BOUCLE_juste></B_juste>"erreur reponse juste",<//B_juste>
+	<BOUCLE_juste(REPONSES}{id_reponse=#ID_JUSTE}>"[(#TEXTE|supprimer_numero)]",</BOUCLE_juste></B_juste>"erreur pour trouver reponse juste",<//B_juste>
 	<BOUCLE_corrige(CORRECTIONS){id_article}>"[(#CORRIGE)]",</BOUCLE_corrige>
 	<BOUCLE_reponses(REPONSES){id_article}>"[(#TEXTE|supprimer_numero)]",</BOUCLE_reponses>
 	

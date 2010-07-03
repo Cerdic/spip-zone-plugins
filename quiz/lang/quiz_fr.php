@@ -27,6 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//I
 	'indiquer_reponse_juste' => 'Indiquer la r&eacute;ponse juste',
 	
+	// N
+	'nom_bouton_plugin' => 'Les quiz',
+	
 	//O
 	'oui' => 'Oui',
 
