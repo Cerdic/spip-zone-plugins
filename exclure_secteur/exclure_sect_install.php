@@ -6,11 +6,23 @@ function exclure_sect_install($action){
                 ecrire_config('secteur/exclure_sect',array());
                 }
 
-            break;
+            return;
         
+    	 case "uninstall":
+            if (lire_config('secteur')){
+                effacer_config('secteur');
+                }
+
+            return;
+    	case 'test':
+       		if(lire_config('secteur')){
+    			return true;	
+    		}
+    		else {
+    			return false;
+    		}
     }
-
-
+	return ;
 }
 
 
