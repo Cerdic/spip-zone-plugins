@@ -2,7 +2,7 @@
 
 // menu_lang plat sans URL sur la langue en cours
 // Voir http://www.spip-contrib.net/Formulaire-menu-lang-plat-sans-URL et FORUM
-function traductions_page_lang_plat ($langues) {
+function lang_plat ($langues) {
     include_spip('inc/charsets');
     $list_lang = '';
     $tab_langues = explode(",",$langues);
