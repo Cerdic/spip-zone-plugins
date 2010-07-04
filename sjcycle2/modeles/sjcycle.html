@@ -1,14 +1,22 @@
-[(#SET{id_diapo,   [(#ENV{id_diapo, 0})]})]
-[(#SET{width,      [(#ENV{width,     #CONFIG{sjcycle/sjcycle_img_width}})]})]
-[(#SET{height,     [(#ENV{height,    #CONFIG{sjcycle/sjcycle_img_height}})]})]
-[(#SET{position,   [(#ENV{position,  #CONFIG{sjcycle/sjcycle_img_position}})]})]
-[(#SET{background, [(#ENV{background,#CONFIG{sjcycle/sjcycle_img_background}})]})]
-[(#SET{cssfancybox, [(#EVAL{8}|randomString)]})]
-   
+[(#SET{id_diapo,   	  [(#ENV{id_diapo, 0})]})]
+[(#SET{img_width,      [(#ENV{width,     		 #CONFIG{sjcycle/img_width}})]})]
+[(#SET{img_height,     [(#ENV{height,    		 #CONFIG{sjcycle/img_height}})]})]
+[(#SET{img_position,   [(#ENV{position,  		 #CONFIG{sjcycle/img_position}})]})]
+[(#SET{img_background, [(#ENV{background,		 #CONFIG{sjcycle/img_background}})]})]
+[(#SET{div_background, [(#ENV{border_color,   #CONFIG{sjcycle/div_background}})]})]
+[(#SET{div_margin,     [(#ENV{div_margin,   	 #CONFIG{sjcycle/div_margin}})]})]
+[(#SET{img_bordure,    [(#ENV{border_width,   #CONFIG{sjcycle/img_bordure}})]})]
+
+[(#REM) largeur div = largeur image + 2*bordure ]
+[(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
+[(#SET{div_height, #GET{img_bordure}|mult{2}|plus{#GET{img_height}} })]
+
+[(#SET{cssfancybox, 	  [(#EVAL{8}|randomString)]})]
+
 <B_img>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		[(#CONFIG{sjcycle/sjcycle_tooltip}|=={1}|oui)
+		[(#CONFIG{sjcycle/tooltip}|=={1}|oui)
 			$('.infobulle').tooltip({ 
 					bodyHandler: function() {
 						return $($(this).children(".textinfobulle")).html();
@@ -23,17 +31,17 @@
 					left: 5 
 			});
 		]
-		[(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+		[(#CONFIG{sjcycle/fancy}|=={1}|oui)
 			$("a.#GET{cssfancybox}").fancybox({
 				'hideOnContentClick': false
 			});
 		]
 		$("#dsjcycle_#GET{id_diapo}").cycle({ 
-			 fx:			"#CONFIG{sjcycle/sjcycle_fx}",
-			 timeout:	"#CONFIG{sjcycle/sjcycle_timeout}",
-			 speed:		"#CONFIG{sjcycle/sjcycle_speed}",
-			 sync:		"#CONFIG{sjcycle/sjcycle_sync}",
-			 pause:		"#CONFIG{sjcycle/sjcycle_pause}",
+			 fx:			"#CONFIG{sjcycle/fx}",
+			 timeout:	"#CONFIG{sjcycle/timeout}",
+			 speed:		"#CONFIG{sjcycle/speed}",
+			 sync:		"#CONFIG{sjcycle/sync}",
+			 pause:		"#CONFIG{sjcycle/pause}",
 			 cleartype: 1
 			 [,(#ENV{opt}|html_entity_decode)]
 			 });
@@ -41,54 +49,53 @@
 
 
 	</script>
-	[(#REM) diaporama documents images conteneur jquery cycle 
-   revoir critere cond pour eviter la duplication de code dans les 2 boucles]
+	[(#REM) diaporama documents images conteneur jquery cycle ]
 
-	<div class="#CONFIG{sjcycle/sjcycle_class}" id="dsjcycle_#GET{id_diapo}" style='[float:(#ENV{align}|match{left|right});margin:[(#CONFIG{sjcycle/sjcycle_margin})]px;][width:(#ENV{width})px;][height:(#ENV{height})px;]'>
+	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height})px;][background:(#GET{div_background})]'>
 
 	[(#REM) Solution de denisb pour eviter de dupliquer le code Cf http://article.gmane.org/gmane.comp.web.spip.zone/18622 ]
-   
+
 	<BOUCLE_img(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
-		<div class="infobulle" style="width:#GET{width}px;
-      										height:#GET{height}px;
+		<div class="infobulle" style="width:#GET{img_width}px;
+      										height:#GET{img_height}px;
                                     padding:0px;
-                                    margin:[(#CONFIG{sjcycle/sjcycle_img_margin})]px;">
-         [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+                                    margin:[(#GET{img_bordure})]px;">
+         [(#CONFIG{sjcycle/fancy}|=={1}|oui)
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE" 
                                          class="#GET{cssfancybox}"
                                          rel="#GET{cssfancybox}"
                                          title="[(#TITRE|supprimer_numero|attribut_html)]"
                                          style="display:block;padding:0px;margin:0px;">
          ]
-         [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|oui)
-            [(#FICHIER|image_reduire{ #GET{width},
-                                      #GET{height}}
+         [(#GET{img_background}|=={'transparent'}|oui)
+            [(#FICHIER|image_reduire{ #GET{img_width},
+                                      #GET{img_height}}
                       |image_alpha{0}
-                      |image_recadre{ #GET{width},
-                                      #GET{height},
-                                      #GET{position},
-                                      #GET{background}}
+                      |image_recadre{ #GET{img_width},
+                                      #GET{img_height},
+                                      #GET{img_position},
+                                      #GET{img_background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
-         [(#CONFIG{sjcycle/sjcycle_img_background}|=={'transparent'}|non)
-            [(#FICHIER|image_reduire{ #GET{width},
-                                      #GET{height}}
-                      |image_recadre{ #GET{width},
-                                      #GET{height},
-                                      #GET{position},
-                                      #GET{background}}
+         [(#GET{img_background}|=={'transparent'}|non)
+            [(#FICHIER|image_reduire{ #GET{img_width},
+                                      #GET{img_height}}
+                      |image_recadre{ #GET{img_width},
+                                      #GET{img_height},
+                                      #GET{img_position},
+                                      #GET{img_background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
-         [(#CONFIG{sjcycle/sjcycle_fancy}|=={1}|oui)
+         [(#CONFIG{sjcycle/fancy}|=={1}|oui)
          	</a>
          ]
-         [(#CONFIG{sjcycle/sjcycle_tooltip}|=={1}|oui)
+         [(#CONFIG{sjcycle/tooltip}|=={1}|oui)
             <div class="textinfobulle" style="display:none;text-align:left;">
                [<h4>(#TITRE|supprimer_numero)</h4>]
                [(#DESCRIPTIF)<br/ >]
-               [(#CONFIG{sjcycle/sjcycle_tooltip_carac}|=={1}|oui)
+               [(#CONFIG{sjcycle/tooltip_carac}|=={1}|oui)
                	<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]
                ]
             </div>

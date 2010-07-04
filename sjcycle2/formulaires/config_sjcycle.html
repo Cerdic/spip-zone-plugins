@@ -1,0 +1,281 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=sjcycle -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_sjcycle">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   <form name="formulaire_config_sjcycle" method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+
+      <ul>
+         <li class="fieldset">
+            <fieldset>
+               <ul>
+                  [(#SAISIE{fieldset,ftooltipfancy,env,
+                     label=<:sjcycle:tooltipfancy_legend:>,
+                     saisies=#ARRAY{
+                     	0, #ARRAY{
+                        	saisie, oui_non,
+                           options, #ARRAY{
+                           	nom, tooltip,
+                              label, <:sjcycle:tooltip:>,
+                              explication, <:sjcycle:explication_tooltip:>,
+                              obligatoire, oui,
+                              defaut,
+                           }
+                        },
+                     	1, #ARRAY{
+                        	saisie, oui_non,
+                           options, #ARRAY{
+                           	nom, tooltip_carac,
+                              label, <:sjcycle:tooltip_carac:>,
+                              explication, <:sjcycle:explication_tooltip_carac:>,
+                              obligatoire, oui,
+                              defaut, 
+                           }
+                        },
+                     	2, #ARRAY{
+                        	saisie, oui_non,
+                           options, #ARRAY{
+                           	nom, fancy,
+                              label, <:sjcycle:fancy:>,
+                              explication, <:sjcycle:explication_fancy:>,
+                              obligatoire, oui,
+                              defaut, 
+                           }
+                        }
+                     }
+                  })]
+
+                  [(#SAISIE{fieldset,fjavascriptjcyle,env,
+                     label=<:sjcycle:jsparams_legend:>,
+                     saisies=#ARRAY{
+                     	0, #ARRAY{
+                        	saisie, selection,
+                           options, #ARRAY{
+                           	nom, fx,
+                              label, <:sjcycle:fx:>,
+                              explication, <:sjcycle:explication_fx:>,
+                              obligatoire, oui,
+                              defaut,fade,
+                              datas,#ARRAY{
+                                    blindX, blindX,
+                                    blindY, blindY,
+                                    blindZ, blindZ,
+                                    cover, cover,
+                                    curtainX, curtainX,
+                                    curtainY, curtainY,
+                                    fade, fade,
+                                    fadeZoom, fadeZoom,
+                                    growX, growX,
+                                    growY, growY,
+                                    scrollUp, scrollUp,
+                                    scrollDown, scrollDown,
+                                    scrollLeft, scrollLeft,
+                                    scrollRight, scrollRight,
+                                    scrollHorz, scrollHorz,
+                                    scrollVert, scrollVert,
+                                    shuffle, shuffle,
+                                    slideX, slideX,
+                                    slideY, slideY,
+                                    toss, toss,
+                                    turnUp, turnUp,
+                                    turnDown, turnDown,
+                                    turnLeft, turnLeft,
+                                    turnRigh, turnRigh,
+                                    uncover, uncover,
+                                    wipe, wipe,
+                                    zoom, zoom
+                                     }
+                              }
+
+                        },
+                     	1, #ARRAY{
+                        	saisie, oui_non,
+                           options, #ARRAY{
+                           	nom, sync,
+                              label, <:sjcycle:sync:>,
+                              explication, <:sjcycle:explication_sync:>,
+                              obligatoire, oui,
+                              defaut, on
+                           }
+                        },
+                     	2, #ARRAY{
+                        	saisie, input,
+                           options, #ARRAY{
+                           	nom, speed,
+                              label, <:sjcycle:speed:>,
+                              defaut, 2000,
+                              obligatoire, oui,
+                              explication, <:sjcycle:explication_speed:>
+                           },
+                           verifier, #ARRAY{
+                           	type, email
+                           }
+                        },
+                     	3, #ARRAY{
+                        	saisie, input,
+                           options, #ARRAY{
+                           	nom, timeout,
+                              label, <:sjcycle:timeout:>,
+                              defaut, 4000,
+                              obligatoire, oui,
+                              explication, <:sjcycle:explication_timeout:>
+                           },
+                           verifier, #ARRAY{
+                           	type, entier
+                           }
+                        },
+                     	4, #ARRAY{
+                        	saisie, oui_non,
+                           options, #ARRAY{
+                           	nom, pause,
+                              label, <:sjcycle:pause:>,
+                              explication, <:sjcycle:explication_pause:>,
+                              obligatoire, oui,
+                              defaut,
+                           }
+                        },
+                     	5, #ARRAY{
+                        	saisie, oui_non,
+                           options, #ARRAY{
+                           	nom, random,
+                              label, <:sjcycle:random:>,
+                              explication, <:sjcycle:explication_random:>,
+                              obligatoire, oui,
+                              defaut,
+                           }
+                        }
+                     }
+                  })]
+
+                  [(#SAISIE{fieldset,fstylessjcyle,env,
+                     label=<:sjcycle:cssparams_legend:>,
+                     saisies=#ARRAY{
+                     	0, #ARRAY{
+                        	saisie, input,
+                           options, #ARRAY{
+                           	nom, div_class,
+                              defaut, dsjcycle,
+                              obligatoire, oui,
+                              label, <:sjcycle:div_class:>
+                           }
+                        },
+                     	1, #ARRAY{
+                        	saisie, input,
+                           options, #ARRAY{
+                           	nom, div_margin,
+                              defaut, 0,
+                              obligatoire, oui,
+                              label, <:sjcycle:div_margin:>
+                           },
+                           verifier, #ARRAY{
+                           	type, entier
+                           }
+                        },
+                     	2, #ARRAY{
+                        	saisie, input,
+                           options, #ARRAY{
+                           	nom, img_bordure,
+                              defaut, 0,
+                              obligatoire, oui,
+                              label, <:sjcycle:img_bordure:>
+                           },
+                           verifier, #ARRAY{
+                           	type, entier
+                           }
+                        },
+                     	3, #ARRAY{
+                        	saisie, couleur,
+                           options, #ARRAY{
+                           	nom, div_background,
+                              defaut, #ffffff,
+                              obligatoire, oui,
+                              label, <:sjcycle:div_background:>
+                           }
+                        }
+                     }
+                  })]
+
+                  [(#SAISIE{fieldset,fimgparam,env,
+                     label=<:sjcycle:imgparams_legend:>,
+                     saisies=#ARRAY{
+                     	0, #ARRAY{
+                        	saisie, explication,
+                           options, #ARRAY{
+                              texte, <:sjcycle:img_recadre:> - <:sjcycle:explication_img_recadre:>
+                           }
+                        },
+                     	1, #ARRAY{
+                        	saisie, selection,
+                           options, #ARRAY{
+                           	nom, img_position,
+                              label, <:sjcycle:img_position:>,
+                              obligatoire, oui,
+                              defaut,center,
+                              datas,#ARRAY{
+                                    left top, left top,
+                                    left center, left center,
+                                    left bottom, left bottom,
+                                    center top, center top,
+                                    center, center,
+                                    center bottom, center bottom,
+                                    right top, right top,
+                                    right center, right center,
+                                    right bottom, right bottom
+                                     }
+                              }
+
+                        },
+                     	2, #ARRAY{
+                        	saisie, input,
+                           options, #ARRAY{
+                           	nom, img_width,
+                              label, <:sjcycle:img_width:>,
+                              defaut, 400,
+                              obligatoire, oui
+                           },
+                           verifier, #ARRAY{
+                           	type, entier
+                           }
+                        },
+                      	3, #ARRAY{
+                        	saisie, input,
+                           options, #ARRAY{
+                           	nom, img_height,
+                              label, <:sjcycle:img_height:>,
+                              defaut, 400,
+                              obligatoire, oui
+                           },
+                           verifier, #ARRAY{
+                           	type, entier
+                           }
+                        },
+                     	4, #ARRAY{
+                        	saisie, couleur,
+                           options, #ARRAY{
+                           	nom, img_background,
+                              label, <:sjcycle:img_background:>,
+                              explication, <:sjcycle:explication_img_background:>,
+                              defaut, #ffffff,
+                              obligatoire, oui
+                           }
+                        }
+                     }
+                  })]
+
+               </ul>
+            </fieldset>
+         </li>
+      </ul>
+
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>

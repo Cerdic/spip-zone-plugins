@@ -14,13 +14,13 @@ if (isset($_GET['art']) && is_numeric($_GET['art'])) {
 <div style="padding:0px;margin:10px auto;width:570px;border:5px solid #ddd;background:#eee;">
 <h3 style="padding:10px 2px;margin:0px;background:#fff;font-size:0.9em;text-align:center;border-bottom:5px solid #ddd;">1. D&eacute;cryptage de la syntaxe et param&egrave;tres du raccourci typographique "sjcycle"</h3>
 <div style="padding:0px;font-size:0.8em;margin:10px;">
-	<p style="background:#eee;color:#666;padding:10px;font-weight:700">Le raccourci typographique "sjcycle" permet d'ins&eacute;rer facilement un ou plusieurs diaporamas au sein d'un article : il vous suffit de le recopier &agrave; l’int&eacute;rieur de la case « Texte » de l'article, l&agrave; vous d&eacute;sirez situer le diaporama.
+	<p style="background:#eee;color:#666;padding:10px;font-weight:700">Le raccourci typographique "sjcycle" permet d'ins&eacute;rer facilement un ou plusieurs diaporamas au sein d'un article : il vous suffit de le recopier &agrave; l’int&eacute;rieur de la case « Texte » de l'article, l&agrave; vous d&eacute;sirez situer le diaporama. Exemples d'utilisation par ici.
 	<br /><br />
 	Ce raccourci comporte plusieurs param&egrave;tres s&eacute;par&eacute;s par le caract&egrave;re "|".</p>
 					<ol style="font-size:11px">
 						<li style="padding:10px 5px;margin:10px 0px;background:white;">
 							<h4 style="margin:0px;color:#666">&lt;sjcycle<span style="color:red">N</span>&gt;</h4>
-							<strong>Premier param&egrave;tre, "<span style="color:#666">N</span>",  <span style="color:red">obligatoire</span> :</strong>
+							<strong>Param&egrave;tre "<span style="color:#666">N</span>",  <span style="color:red">obligatoire</span> :</strong>
 							<br />Correspond au num&eacute;ro de l'article en cours<?php echo $text; ?>.
 							<br />Il permet de cibler les images li&eacute;es &agrave; un unique article.
 							<p style="background:#eee;color:#666;padding:10px;font-weight:700">
@@ -29,7 +29,7 @@ if (isset($_GET['art']) && is_numeric($_GET['art'])) {
 						</li>
 						<li style="padding:10px 5px;margin:10px 0px;background:white;">
 							<h4 style="margin:0px;color:#666">&lt;sjcycleN<span style="color:red">|ALIGN</span>&gt;</h4>
-							<strong>Second param&egrave;tre, "<span style="color:#666">|ALIGN</span>", optionnel :</strong>
+							<strong>Param&egrave;tre "<span style="color:#666">ALIGN</span>", optionnel :</strong>
 							<br />Permet de sp&eacute;cifier l'alignement du diaporama au sein du texte.
 							<br />S'il n'est pas pr&eacute;cis&eacute;, l'alignement  est "center".
 							<br /><strong>Les options de l'alignement :</strong>
@@ -41,7 +41,7 @@ if (isset($_GET['art']) && is_numeric($_GET['art'])) {
 						</li>
 						<li style="padding:10px 5px;margin:10px 0px;background:white;">
 							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">docs=n1,n2</span>&gt;</h4>
-							<strong>Troisi&egrave;me param&egrave;tre, "<span style="color:#666">|docs=n1,n2,[...],nx</span>", optionnel :</strong>
+							<strong>Param&egrave;tre "<span style="color:#666">docs=n1,n2,[...],nx</span>", optionnel :</strong>
 							<br />Permet de sp&eacute;cifier la liste d'images &agrave; afficher dans le diaporama.
 							<br />Ainsi, on peut afficher plusieurs diaporamas dans au sein d'un même texte, isoler des images.
 							<br />S'il n'est pas pr&eacute;cis&eacute;, l'ensemble des images sont s&eacute;lectionn&eacute;es par d&eacute;faut.
@@ -56,37 +56,45 @@ if (isset($_GET['art']) && is_numeric($_GET['art'])) {
 							</p>
 						</li>
 						<li style="padding:10px 5px;margin:10px 0px;background:white;">
-							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">opt=p1:v1,p2:v2</span>&gt;</h4>
-							<strong>Quatrième param&egrave;tre, "<span style="color:#666">|opt=p1:v1,p2:v2,[...],px:vx</span>", optionnel :</strong>
-						  <br />
-							Permet d'utiliser les options du script jcycle.
+						  <h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">id_diapo=X</span>&gt;</h4>
+                    <strong>Param&egrave;tre &quot;<span style="color:#666">id_diapo=X</span>&quot;, optionnel :</strong> <br />
+Permet d'afficher plusieurs diaporamas dans le même article, chacun devant avoir un id_diapo différent <br />
+<strong>Exemple :</strong><br />
+&lt;sjcycle16|center|docs=101,102,103,104|id_diapo=1&gt;<br />
+&lt;sjcycle16|center|docs=105,106,107,108,109|id_diapo=2|opt=fx:'shuffle',timeout:2000&gt;<br />
+Ceci affiche 2 diaporamas dans le même article, le premier sur 4 images avec les paramètres par défaut du site et le second sur 5 images, avec des paramètres différents de ceux par défaut.<br />
+						</li>
+						<li style="padding:10px 5px;margin:10px 0px;background:white;">
+						  <h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">opt=p1:v1,p2:v2</span>&gt;</h4>
+                    <strong>Param&egrave;tre &quot;<span style="color:#666">opt=p1:v1,p2:v2,[...],px:vx</span>&quot;, optionnel :</strong> <br />
+Permet d'utiliser les options du script jcycle.
 							La liste complète est définie sur le site du plugin jquery jcycle <a href="http://malsup.com/jquery/cycle/options.html" target="_blank">par ici</a><br />
-							Ces valeurs écrasent 
+Ces valeurs écrasent 
 							celles définies dans la page de configuration du plugin.<br />
-							Les options possibles correspondent à celles de la version utilisée dans ce plugin spip et non à celles proposées sur la page citée ci-dessus. Actuellement, c'est la version 2.88 (08-JUN-2010) qui est utilisée
-							<br />
-							<strong>Exemple :</strong><br />
-						   &lt;sjcycle16|center|opt=autostop:1,autostopCount:5&gt; : diaporama sur toutes les images de l'article 16 mais qui s'arrêtera à la cinquième image<br />
-						   &lt;sjcycle16|center|opt=fx:'fade'&gt; : diaporama sur toutes les images de l'article 16 avec un effet de transition &quot;fade&quot; qui remplace celui défini globalement pour le site entier<br />
+Les options possibles correspondent à celles de la version utilisée dans ce plugin spip et non à celles proposées sur la page citée ci-dessus. Actuellement, c'est la version 2.88 (08-JUN-2010) qui est utilisée <br />
+<strong>Exemple :</strong><br />
+&lt;sjcycle16|center|opt=autostop:1,autostopCount:5&gt; : diaporama sur toutes les images de l'article 16 mais qui s'arrêtera à la cinquième image<br />
+&lt;sjcycle16|center|opt=fx:'fade'&gt; : diaporama sur toutes les images de l'article 16 avec un effet de transition &quot;fade&quot; qui remplace celui défini globalement pour le site entier<br />
 						</li>
-						<li style="padding:10px 5px;margin:10px 0px;background:white;">
-							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">id_diapo=X</span>&gt;</h4>
-							<strong>Cinquième param&egrave;tre, "<span style="color:#666">|id_diapo=X</span>", optionnel :</strong>
-							<br />
-							Permet d'afficher plusieurs diaporamas dans le même article, chacun devant avoir un id_diapo différent
-							<br />
-							<strong>Exemple :</strong><br />
-						   &lt;sjcycle16|center|docs=101,102,103,104|id_diapo=1&gt;<br />
-						   &lt;sjcycle16|center|docs=105,106,107,108,109|id_diapo=2|opt=fx:'shuffle',timeout:2000&gt;<br />						   
-						   Ceci affiche 2 diaporamas dans le même article, le premier sur 4 images avec les paramètres par défaut du site et le second sur 5 images, avec des paramètres différents de ceux par défaut.<br />
-						</li>
-						<li style="padding:10px 5px;margin:10px 0px;background:white;">
-							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">width=XXX</span>&gt; / &lt;sjcycleN|ALIGN|<span style="color:red">height=XXX</span>&gt;</h4>
-							<strong>Sixième param&egrave;tre, &quot;<span style="color:#666">|width=XXX</span>&quot; et/ou &quot;<span style="color:#666">|height=XXX</span>&quot;, optionnel :</strong>
-							<br />
-							Ecrase la valeur width et/ou height
-							 définie dans la page de configuration du plugin.<br />
-						</li>
+					  <li style="padding:10px 5px;margin:10px 0px;background:white;">
+							<h4  style="margin:0px;color:#666">&lt;sjcycleN|ALIGN|<span style="color:red">param=valeur</span>&gt;<br />
+                     </h4>
+							<strong>Autres param&egrave;tres  optionnels :</strong>
+				      <br />
+							Ces paramètres écrasent localement 
+							 les valeurs définies dans la page de configuration du plugin :
+                      <ul>
+							 	<li><em>width</em> : largeur  en pixels des images recadrées</li>
+							 	<li><em>height</em> : hauteur   en pixels des images recadrées</li>
+							 	<li><em>position</em> : position de l'image de d'origine dans l'image recadrée (left top, left center, left bottom, center top, center, center bottom, right top, right center, right bottom)</li>
+							 	<li><em>background</em> : couleur de fond des images recadrées (au format #FF0000)</li>
+							 	<li><em>border_color</em> : couleur de la bordure des images recadrées (au format #FF0000)</li>
+							 	<li><em>border_width</em> : largeur en pixels de la bordure</li>
+						  	   <li><em>div_margin</em> : marge en pixels autour des images recadrées</li>
+                      </ul>
+                      <br />
+							  <img src="images/exemple_sjcyle2.png" width="300" height="300" alt="exemple" /><br />
+					  </li>
 					</ol>
 </div>
 </div>

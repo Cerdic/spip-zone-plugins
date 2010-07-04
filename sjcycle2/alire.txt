@@ -13,3 +13,9 @@ V 0.3 : Ajout de plusieurs fonctionnalites :
 - Redefinir sur un diapo les largeurs et hauteurs des parametres definis dans la page de configuration du plugin
 - Possibilite d'utiliser les options du plugin jquery jcycle definies ici : http://malsup.com/jquery/cycle/options.html
 - Mise a jour du plugin jquery jcycle : 2.88 (08-JUN-2010)
+
+
+V 0.4 : Nettoyage
+- Refonte de la page de config du plugin en utilisant les plugins SAISIES, PALETTE, VERIFIER
+- Suppression de l'écrasement du meta taille_preview
+- Ajout de la possibilite de surcharger localement dans un article les parametres generaux du plugin

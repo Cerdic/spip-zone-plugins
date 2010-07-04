@@ -1,57 +1,68 @@
 <?xml version="1.0"?>
 <plugin>
-<nom>
-	Spip jQuery Cycle Plugin : sjcycle2
-</nom>
-<auteur>
-	<a href="http://www.minimalteck.fr/" style="color:#999;text-decoration:underline;" title="Minimalteck : http://www.minimalteck.fr/">Minimalteck</a>
-</auteur>
-<version>
-	0.3
-</version>
-<etat>
-	test
-</etat>
-<description>
-	<h3>Plugin Spip jQuery Cycle Version 2: sjcycle 2</h3>
-	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Diaporama paramétrable pour Spip basé sur la librairie javascript <a href="http://jquery.com/" style="color:#999;text-decoration:underline;" title="Site officiel de jQuery">jQuery</a> et les plugins :
-	<ul>
-		<li><a href="http://malsup.com/jquery/cycle/" style="color:#999;text-decoration:underline;" title="Site officiel du jQuery Cycle Plugin">jQuery Cycle Plugin</a>;</li>
-		<li>FancyBox (via le <a href="http://www.spip-contrib.net/FancyBox,3020" style="color:#999;text-decoration:underline;" title="Plugin fancybox pour Spip">plugin fancybox pour spip</a>);</li>
-		<li><a href="http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/" style="color:#999;text-decoration:underline;" title="Site officiel du jQuery Tooltip Plugin">Tooltip</a>.</li>
-	</ul>
-	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Int&eacute;gration pour Spip [2.0.x] 
-	<ul>
-		<li>basée sur les formulaires <a href="http://www.spip.net/fr_article3800.html" style="color:#999;text-decoration:underline;" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;</li>
-		<li>utilisant le moteur de configuration <a href="http://www.spip-contrib.net/Config-cfg" style="color:#999;text-decoration:underline;" title="CFG sur Spip-Contrib">CFG</a> [1.10].</li>
-	</ul>
-</description>
-<icon>
-	images/sjcycle-32.png
-</icon>
-<lien>
-	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Aide (succinte) à l'<a href="../plugins/sjcycle2/doc.php" target="_blank" style="color:#999;text-decoration:underline;" title="Aide" onclick="javascript:window.open('../plugins/sjcycle/doc.php', 'aide', 'scrollbars=yes,resizable=yes,width=740,height=580');; return false;">utilisation de Spip jQuery Cycle "sjcycle"</a>
-</lien>
-<lien>
-	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Configuration via <a href=".?exec=cfg&amp;cfg=sjcycle" style="color:#999;text-decoration:underline;" title="Configuration du plugin Spip jQuery Cycle (sjcycle) via CFG">CFG</a>
-</lien>
-<prefix>
-	sjcycle
-</prefix>
-<fonctions>sjcycle_fonctions.php</fonctions>
-<pipeline>
-	<nom>insert_head</nom>
-	<inclure>sjcycle_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>header_prive</nom>
-	<action>insert_head</action>
-	<inclure>sjcycle_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-  	<nom>affiche_gauche</nom>
-  	<inclure>sjcycle_prive_pipelines.php</inclure>
-</pipeline>
+	<nom>Spip jQuery Cycle Plugin : sjcycle2</nom>
+	<auteur>
+		<a href="http://www.minimalteck.fr/" style="color:#999;text-decoration:underline;" title="Minimalteck : http://www.minimalteck.fr/">Minimalteck</a>. Port&eacute; pour spip 2 par Yffic
+	</auteur>
+	<version>0.4</version>
+	<version_base>0.3</version_base>
+	<etat>test</etat>
+	<description>
+		<h3>Plugin Spip jQuery Cycle Version 2: sjcycle 2</h3>
+		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />
+		&nbsp;Diaporama paramétrable pour Spip basé sur la librairie javascript 
+		<a href="http://jquery.com/" style="color:#999;text-decoration:underline;" title="Site officiel de jQuery">jQuery</a>
+		 et les plugins :
+		<ul>
+			<li><a href="http://malsup.com/jquery/cycle/" style="color:#999;text-decoration:underline;" 
+				    title="Site officiel du jQuery Cycle Plugin">jQuery Cycle Plugin</a>;</li>
+			<li>FancyBox (via le <a href="http://www.spip-contrib.net/FancyBox,3020"
+				 style="color:#999;text-decoration:underline;" title="Plugin fancybox pour Spip">plugin fancybox pour spip</a>);</li>
+			<li><a href="http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/"
+				 style="color:#999;text-decoration:underline;" title="Site officiel du jQuery Tooltip Plugin">Tooltip</a>.</li>
+		</ul>
+		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Int&eacute;gration pour Spip [2.0.x] 
+		<ul>
+			<li>basée sur les formulaires <a href="http://www.spip.net/fr_article3800.html"
+			     style="color:#999;text-decoration:underline;" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;</li>
+			<li>utilisant le moteur de configuration <a href="http://www.spip-contrib.net/Config-cfg" 
+					style="color:#999;text-decoration:underline;" title="CFG sur Spip-Contrib">CFG</a> [1.10].</li>
+		</ul>
+	</description>
+	<icon>images/sjcycle-32.png</icon>
+	<lien>
+		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />
+		&nbsp;Aide (succinte) à l'<a href="../plugins/sjcycle2/doc.php" target="_blank" 
+			style="color:#999;text-decoration:underline;" title="Aide"
+			onclick="javascript:window.open('../plugins/sjcycle/doc.php', 'aide', 
+					  'scrollbars=yes,resizable=yes,width=740,height=580');; return false;">
+		utilisation de Spip jQuery Cycle "sjcycle"</a>
+	</lien>
+	<lien>
+		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />
+			&nbsp;Configuration via <a href=".?exec=cfg&amp;cfg=sjcycle" style="color:#999;text-decoration:underline;" 
+			title="Configuration du plugin Spip jQuery Cycle (sjcycle) via CFG">CFG</a>
+	</lien>
+	<prefix>sjcycle</prefix>
+	<install>base/sjcycle_install.php</install>
+	<fonctions>sjcycle_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>sjcycle_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>sjcycle_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>sjcycle_prive_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="cfg" version="[1.10;]" />
 	<necessite id="SPIP" version="[2.0.x;]" />
-	<utilise id="cfg" version="[1.10;]" />
+	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<utilise id="palette" version="[1.2.2;]" />
+	<utilise id="verifier" version="[0.1;]" />
 </plugin>
