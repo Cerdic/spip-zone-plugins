@@ -1067,7 +1067,7 @@
 												AND B.id_formulaire='.intval($this->formulaire->id_formulaire).'
 												AND R.id_application='.intval($this->id_application), '', '1');
 						if (sql_count($resD) == 1) {
-							$t = sql_fetch($resC);
+							$t = sql_fetch($resD);
 							$notification->AddReplyTo($t['email']);
 						}
 					}
