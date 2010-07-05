@@ -51,6 +51,7 @@
 	<bouton id='catalogue' parent='naviguer'>
 		<icone>img/picto_catalogue_32x32.png</icone>
 		<titre>catalogue:catalogue</titre>
+		<url>catalogue</url>
 	</bouton>
 
 	<pipeline>

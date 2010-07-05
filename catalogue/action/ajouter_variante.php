@@ -16,7 +16,8 @@ function action_ajouter_variante_dist() {
 	
 	sql_insertq('spip_variantes', array(
 		'id_article' => $id_article,
-		'date' => date("Y-m-d H:i:s")
+		'date' => date("Y-m-d H:i:s"),
+		'statut' => 'prepa'
 		)
 	);
 

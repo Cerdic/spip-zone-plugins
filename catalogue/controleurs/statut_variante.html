@@ -12,7 +12,7 @@
 
 <BOUCLE_a(VARIANTES){id_variante}{statut==.}>
 #SET{id,#STATUT}
-<select class="crayon-active" name="#ENV{name_statut}"
+<select class="crayon-active" name="#ENV{name_statut_variante}"
  style="width:#ENV{largeur}px;">
 	<option value="publie"[
 		(#GET{id}|=={publie}?{selected})="selected"]>publi&#233;</option>

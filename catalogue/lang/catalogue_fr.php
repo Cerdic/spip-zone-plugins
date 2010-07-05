@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// M
 	'message_aucune_variante' => '<strong>Cet article n\'est pas un article du catalogue</strong><br />Pour ajouter cet article au catalogue, il suffit d\'indiquer un prix et quelques autres informations en cliquant sur "ajouter une variante".',
+	'modifier' => 'Modifier',
 	
 	// O
 	'ok' => 'OK !',
@@ -54,6 +55,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// R
 	'retour_article' => 'Retour &agrave; l\'article ',
+	
+	// S
+	'supprimer' => 'Supprimer',
 	
 	// T
 	'titre_bloc_catalogue' => 'CATALOGUE : prix et options li&eacute;s &agrave; l\'article',
