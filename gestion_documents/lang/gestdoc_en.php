@@ -31,7 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_document' => 'Replace this document',
 	'bouton_remplacer_image_document' => 'Replace by an image or a document',
 	'bouton_supprimer' => 'Delete',
-	
+	'bouton_upload' => 'Upload',
+
 	
 	// D
 	'documents'=> 'Media library',
