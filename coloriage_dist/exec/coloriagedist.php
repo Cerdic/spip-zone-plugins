@@ -1,14 +1,11 @@
 <?php
 // ---------------------------------------------------------
 //  Coloriage
-// 
-//  avertissement: code approximatif ... juste pour le plaisir de tester la fonction
-//
-//  version:  2.0
-//  date:     2006.11.23
-//  author:   erational <http://www.erational.org>
-//  licence:  GPL
-// ---------------------------------------------------------
+// --------------------------------------------------------- 
+
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/presentation');
 
 include(dirname(__FILE__).'/../coloriagedist_fonctions.php');
 
@@ -19,11 +16,7 @@ include(dirname(__FILE__).'/../coloriagedist_fonctions.php');
 function exec_coloriagedist(){  
   global $connect_statut;
   include_spip('inc/invalideur');
-  
-  
-  $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__file__))));
-  define('_DIR_PLUGIN_COLORIAGEDIST',(_DIR_PLUGINS.end($p)));
-  $path_plugin = dirname(__file__)."/../";
+
   
   // donnees CSS --------------------------------------------
   $css_data = array( 
@@ -38,13 +31,15 @@ function exec_coloriagedist(){
   
   
   // main ------------------------------------------------------  
-  debut_page(_T('coloriagedist:change_fond')); 
+  $commencer_page = charger_fonction('commencer_page', 'inc');
+  echo $commencer_page(_T('coloriagedist:change_fond'), "editer", "editer");
+  
 
 	if ($connect_statut == "0minirezo") {
 	  // Action
 	  $flag = false;
 	  foreach ($css_data as $css_part=>$val) {
-	  	if (isset($_POST["$css_part"])) {
+	    if (_request($css_part)) {	  	
 	  	    $flag = true;	  	    
           $value = substr($_POST["$css_part"],0,7); // verif minimale: #couleur FF6600 (chaine de 7)
     	    ecrire_meta($css_part, $value);
@@ -54,21 +49,21 @@ function exec_coloriagedist(){
 	  if ($flag) { 	
       // FIXME : supprimer uniquement trouver le fichier squelette CSS, cf inc/invalideur	   	
       //purger_repertoire(_DIR_CACHE, 0); // bourrin: on vide tout le cache
-       suivre_invalideur("page LIKE '%css_coloriage'"); // syntaxte correcte ? 
+       suivre_invalideur("page LIKE '%css_coloriage'"); // syntaxe correcte ? 
     }
 	
-	  // HTML output 
-	  gros_titre(_T('coloriagedist:change_fond'));
-    debut_gauche();
-    
-  
-    debut_boite_info();
+
+	  echo gros_titre(_T('coloriagedist:change_fond'),'', false);
+
+    // colonne gauche
+    echo debut_gauche('', true);  
+    echo  debut_boite_info(true);
     echo _T('coloriagedist:info');
-    fin_boite_info();
+    echo fin_boite_info(true);
     echo "<div id=\"picker\"></div>";
 
-    
-    debut_droite();	    
+    // centre
+    echo debut_droite('', true); 
     echo "<form method='post'><input type='hidden' name='exec' value='change_fond' />";
     $str1 = "";
     $str2 = "";

@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'change_fond'=>'Colorazione dello squelette',
   
   // I
-  'info' => "Questa pagina permette di cambiare i colori dello squelette di defaultt del tuo sito pubblico (squelette dist). <p>Clicca nei riquadri per scegliere i tuoi nuovi colori</p>
+  'info' => "Questa pagina permette di cambiare i colori dello squelette di defaultt del tuo sito pubblico (./squelettes-dist/). <p>Clicca nei riquadri per scegliere i tuoi nuovi colori</p>
             <p>Per ritornare ai colori normali, disattiva il plugin</p>",
     
   
