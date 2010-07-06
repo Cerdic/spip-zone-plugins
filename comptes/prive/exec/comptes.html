@@ -26,9 +26,5 @@
 <h1><:comptes:titre_page_gestion:></h1>
 <INCLURE{fond=prive/listes/contacts,env}/>
 <INCLURE{fond=prive/listes/comptes,env}/>
-<h2>Suivi du d&eacute;veloppement du plugin</h2>
-<h3>le 1er juillet 2010</h3>
-<p>On commence par ajouter le champ pr&eacute;nom dans la fiche auteur. Permet d'&eacute;tablir la proc&eacute;dure g&eacute;n&eacute;rale d'ajout d'un champ, y compris sa gestion (modif, suppression). </p>
-<p>Ensuite, dans la foul&eacute;e, on ajoute les champs NOM (de famille) et date de naissance; &agrave; noter : ces 2 champs sont des champs de type &quot;unique&quot; c'est &agrave; dire un seul nom de famille, une seule date de naissance par personne (physique); &agrave; noter aussi, on bosse dans la partie &quot;spip_contacts&quot; car naissance et nom sont des attributs de contacts; les attributs correspondant de Comptes seraient SIRET ou date de cr&eacute;ation dans la table &quot;spip_comptes&quot;. </p>
-<p>Toujours &agrave; la suite, on ajoute cette fois un ou plusieurs champs de type email; voir la gestion des questions dans le plugin &quot;quiz&quot;.</p>
-<p>On va a voir a g&eacute;rer la &quot;joinction&quot; entre un compte/contact et un auteur SPIP; vois quelquechose qui aurait un peu l'ergonomie de la m&eacute;diath&egrave;que. </p>
+
+<INCLURE{fond=dev/suivi_dev}/>

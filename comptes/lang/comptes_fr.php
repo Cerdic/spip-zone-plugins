@@ -8,6 +8,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_bouton_plugin' => 'Comptes &amp; Contacts',
+	'nom_famille' => 'Nom de famille',
+	
+	// P
+	'prenom' => 'Pr&eacute;nom',
 	
 	// T
 	'titre_page_gestion' => 'Page de gestion du plugin Comptes &amp; contacts',
