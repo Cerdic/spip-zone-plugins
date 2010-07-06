@@ -38,7 +38,7 @@ if (defined('_SPIP19300')) {
 
 function remplace_points_de_suite($texte, $id, $racc) {
 	if (strpos($texte, _INTRODUCTION_CODE) === false) return $texte;
-	// precaution sur le tout paragrapher de SPIP 2.0 !
+	// precaution sur le tout paragrapher de SPIP >= 2.0 !
 	$mem = $GLOBALS['toujours_paragrapher'];  
 	$GLOBALS['toujours_paragrapher'] = false;  
 	// des points de suite bien propres
@@ -46,9 +46,11 @@ function remplace_points_de_suite($texte, $id, $racc) {
 	$intro_suite = propre(_INTRODUCTION_SUITE);
 	// si les points de suite sont cliquables
 	if ($id && _INTRODUCTION_LIEN == 1) {
+		$url = (defined('_SPIP19300') && test_espace_prive())
+			?generer_url_entite_absolue($id, $racc, '', '', true):"$racc$id";
 		if (substr($intro_suite, 0, 6) == '<br />') 
-			$intro_suite = propre("<br />[".substr($intro_suite, 6)."->$racc$id]");
-			else $intro_suite = propre("&nbsp;[{$intro_suite}->$racc$id]");
+			$intro_suite = propre("<br />[".substr($intro_suite, 6)."->$url]");
+			else $intro_suite = propre("&nbsp;[{$intro_suite}->$url]");
 		$intro_suite = inserer_attribut($intro_suite, 'class', extraire_attribut($intro_suite,'class') . ' pts_suite');
 	}
 	$GLOBALS['toujours_paragrapher'] = $mem; 
