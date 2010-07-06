@@ -2,8 +2,8 @@
 	<nom>Comptes &amp; Contacts</nom>
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 	<prefix>comptes</prefix>
-	<version>1.0.2</version>
-	<version_base>1.0.3</version_base>
+	<version>1.0.3</version>
+	<version_base>1.0.2</version_base>
 	<etat>dev</etat>
 	<description>
 		<multi>
