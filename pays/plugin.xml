@@ -13,6 +13,8 @@
 	
 	<etat>stable</etat>
 	
+	<lien>http://www.spip-contrib.net/Liste-des-pays-avec-codes-ISO-3166-1?var_mode=calcul</lien>
+	
 	<description>
 	<multi>
 	[fr] Fournit la liste officielle des pays &eacute;labor&eacute;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La base comporte le champ num&eacute;rique id_pays issu du plugin spip_geographie, le code ISO3166-1 et le nom en multi-lingue.
