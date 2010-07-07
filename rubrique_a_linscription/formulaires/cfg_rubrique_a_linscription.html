@@ -9,7 +9,7 @@
 		<ul>
 			[<li class="editer_rubrique_mere obligatoire">
 				<label for="rubrique_mere"><:rubrique_a_linscription:cfg_id_parent:></label>
-				(#VAL|chercher_rubrique{'',#ENV{id_parent},'rubrique','',''})
+				(#VAL|chercher_rubrique{0,#ENV{id_parent},'rubrique','',''})
 			
 			</li>]
 			<p class="explication"><:rubrique_a_linscription:cfg_avertissement_changement:></p>
