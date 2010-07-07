@@ -35,6 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_oublie'					=> 'You forgot your email address',
 	'envoi_apercu'					=> 'Previsualization',
 	'envoi_confirmer'				=> 'Confirm and send',
+	'envoi_regulier'				=> 'Automatics mail',
+	'envoi_regulier_info'			=> 'Keep empty if you do not want to send automatically',
+	'envoi_regulier_tous_les'			=> 'Send each',
+	'envoi_liste_parametres'	=>'List of parameters [Facultatif]',
+	'periodicite'			=> ' days.',
 	'envoyer_courier'				=> 'Send an email',
 	'envoyer_courier_liste'			=> 'Send this content to this list :',
 	'envoyer_mailmans'				=> 'Select the template and his content',
@@ -91,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 	'template'						=> 'Choose a template and his content',
+	'template_defaut'			=> 'Default template',
 	'titre_abomailman'				=> 'Title of the list',
 	'titre_liste_obligatoire'		=> 'The title of the list is mandatory',
 	'toute_liste'					=> 'All mailing lists',

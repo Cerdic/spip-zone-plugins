@@ -37,6 +37,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_confirmer'				=> 'Best&auml;tigen und absenden',
 	'envoyer_courier'				=> 'Mail senden',
 	'envoyer_courier_liste'			=> 'Mail an diese Mailingliste senden:',
+	'envoi_regulier'				=> 'Automatics mail',
+	'envoi_regulier_info'			=> 'Keep empty if you do not want to send automatically',
+	'envoi_regulier_tous_les'			=> 'Send each',
+	'envoi_liste_parametres' => 'Parameterliste',
+	'periodicite'			=> ' days.',
 	'envoyer_mailmans'				=> 'Modell und Inhalt ausw&auml;hlen',
 	'erreur_email_liste_oublie'		=> 'Die E-Mail Adresse ist obligatorisch.',
 	'explication_email_sympa'		=> 'Wenn dieses Feld ausgef&uuml;llt ist, wird von einer Sympa-Liste ausgegangen,
@@ -92,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //T
 	'template'						=> 'Modell und Inhalte ausw&auml;hlen',
+	'template_defaut'			=> 'Default template',
 	'titre_abomailman'				=> 'Bezeichnung der Liste',
 	'titre_liste_obligatoire'		=> 'Die Liste muss eine Bezeichnung erhalten',
 	'toute_liste'					=> 'ALle Mailinglisten',

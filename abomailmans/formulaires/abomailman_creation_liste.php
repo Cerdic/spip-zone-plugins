@@ -6,12 +6,9 @@ include_spip('base/abstract_sql');
 
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_abomailman_creation_liste_charger_dist($id_abomailman = ""){
-	global $visiteur_session;
-
-	if($visiteur_session['statut'] == '0minirezo'){
 		//initialise les variables d'environnement pas défaut
 		$valeurs = array();
-		$valeurs['editable'] = true;
+		$valeurs['editable'] = true; 
 
 		// On verifie que la liste existe
 		if ($id_abomailman){
@@ -21,15 +18,17 @@ function formulaires_abomailman_creation_liste_charger_dist($id_abomailman = "")
 				$valeurs['editable'] = false;
 				$valeurs['message_erreur'] = _T('abomailmans:liste_non_existante');
 			}
-		}
+		}	 
+		
 		if(!$valeurs['langue']){
 			$valeurs['langue'] = lang_select();
 		}
 		unset($valeurs['lang']);
-	}else{
-		$valeurs['editable'] = false;
-		$valeurs['message_erreur'] = _T('abomailmans:creation_droits_insuffisants');
-	}
+		
+		$recuptemplate = explode('&',$valeurs['modele_defaut']);
+		$valeurs['template'] = $recuptemplate[0];
+		$valeurs['envoi_liste_parametres']=recup_param($valeurs['modele_defaut']);
+	 
 	return $valeurs;
 }
 
@@ -46,6 +45,10 @@ function formulaires_abomailman_creation_liste_verifier_dist($id_abomailman = ""
 	$email_sympa = _request('email_subscribe');
 	$email_sympa = _request('email_unsubscribe');
 	$email_sympa = _request('email_sympa');
+	$valeurs['template'] = str_replace('\'','',_request('template'));
+	$valeurs['envoi_liste_parametres'] = _request('envoi_liste_parametres');
+	//if($valeurs['template']) $valeurs['template'];
+	$valeurs['periodicite'] = _request('periodicite');
 	$desactive = _request('desactive');
 	$lang = _request('lang');
 
@@ -78,6 +81,7 @@ function formulaires_abomailman_creation_liste_verifier_dist($id_abomailman = ""
 function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman = ""){
     $message = '';
 	$message['editable'] = true;
+	$valeurs['envoi_liste_parametres'] = _request('envoi_liste_parametres');
 
 	$datas = array();
 
@@ -89,6 +93,8 @@ function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman = "")
 	$datas['email_unsubscribe'] = _request('email_unsubscribe');
 	$datas['email_sympa'] = _request('email_sympa');
 	$datas['desactive'] = _request('desactive');
+	$datas['modele_defaut'] = str_replace('\'','',_request('template'))."".$valeurs['envoi_liste_parametres'];
+	$datas['periodicite'] = _request('periodicite');
 	$datas['lang'] = _request('langue');
 
     // on récupère les données de la liste

@@ -1,46 +1,61 @@
 <plugin>
-	<nom><multi>[fr]
-	Abonnement &#224; des listes de diff. mailman et sympa
-	[de]Mailinglisten
+	<nom><multi>
+	[fr]Abonnement &#224; des listes de diff. mailman et sympa[de]Mailinglisten
 	</multi></nom>
-	<icon>img_pack/mailman.jpg</icon>
+	<icon>img_pack/mailman.gif</icon>
 	<auteur>
 	MaZiaR [NetAktiv->http://www.netaktiv.com]
 	</auteur>
-	<version>0.5</version>
+	<version>0.6</version>
+	<version_base>0.32</version_base>
+	<prefix>abomailmans</prefix>
 	<etat>dev</etat>
 	<description><multi>
-	[fr]
-	Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d&rsquo;afficher un formulaire d&rsquo;abonnement &agrave; l&rsquo;ensemble des listes renseign&eacute;es Mailman.
+	[fr]Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d&rsquo;afficher un formulaire d&rsquo;abonnement &agrave; l&rsquo;ensemble des listes renseign&eacute;es Mailman.
 	Cette inscription se fait via l&rsquo;interface priv&eacute;e de SPIP par le menu &laquo; Edition &gt; Abomailmans &gt; les listes de diffusions mailman &raquo;
 	Ensuite il vous est possible de s&eacute;lectionner des articles de votre SPIP, par des crit&egrave;res de date, de rubrique et/ou de mot cl&eacute; et envoyer leurs contenus &agrave; ces listes, en utilisant des squelettes de mise en page du contenu.
     Le lien avec les listes Mailman et Sympa se fait par des envois d&rsquo;e-mail.
 	[de]Dieses Plugin ermöglich mit dem TAG  #FORMULAIRE_ABOMAILMAN das Abnonnieren von Mailinglisten.
 	Dem Adminstrator steht ein Interface zur Verwaltung dieser Listen zur Verf&uuml;gung.
-		</multi>
-	</description>
+	</multi></description>
 	<lien>[Spip-Contrib->http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des]</lien>
-	<necessite id="SPIP" version="[2.0.3;]" />
-	<necessite id="facteur" version="[1.1;]" />
-	<options>
-		abomailmans_options.php
-	</options>
-	<fonctions>
-		abomailmans_fonctions.php
-	</fonctions>
-	<prefix>abomailmans</prefix>
-	<install>base/abomailmans_upgrade.php</install>
+	<fonctions>abomailmans_fonctions.php</fonctions>
+	<install>base/abomailmans.php</install>
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<inclure>abomailmans_interface.php</inclure>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/abomailmans.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/abomailmans.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>abomailmans_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>abomailmans</nom>
+		<!-- action vide pour provoquer l'inclusion de abomailmans.php -->
+		<action>go</action>
+		<inclure>abomailmans_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>abomailmans_interface.php</inclure>
+		<inclure>abomailmans_pipelines.php</inclure>
+	</pipeline> 
+	<pipeline>  
+	<nom>autoriser</nom>
+	<inclure>abomailmans_pipelines.php</inclure>
 	</pipeline>
-	<bouton id='abomailmans_tous' parent='bando_edition'>
-		<icone>images/abomailman-16.png</icone>
+	<bouton id='abomailmans_tous' parent="naviguer">
+		<icone>img_pack/mailman.gif</icone>
 		<titre>abomailmans:bouton_listes_diffusion</titre>
+		<url>abomailmans_tous</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args></args>
 	</bouton>
+	
+	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="facteur" version="[1.1;]" />
 	<categorie>communication</categorie>
 </plugin>

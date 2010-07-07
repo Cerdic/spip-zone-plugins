@@ -7,123 +7,87 @@ include_spip('inc/distant');
 
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_abomailman_envoi_liste_charger_dist(){
-	global $visiteur_session;
-	
-	if($visiteur_session['statut'] == '0minirezo'){
 		//initialise les variables d'environnement pas défaut
-		$valeurs = array();
-		$valeurs['editable'] = true;
-		
+		$valeurs = array(); 
+	if (autoriser('modifier','abomailman')) {
+	  $valeurs['editable']=true;
+	} else return $valeurs['editable']=false;
+	
+		//$valeurs['id_abomailman'] = _request('id_abomailman');
 		$valeurs['sujet'] = _request('sujet');
 		$valeurs['template'] = _request('template');
 		$valeurs['message'] = _request('message');
 		$valeurs['date'] = _request('date');
 		$valeurs['id_rubrique'] = _request('id_rubrique');
 		$valeurs['id_mot'] = _request('id_mot');
-		$valeurs['templates'] = "";
-		
-		$liste_templates = find_all_in_path("templates/","[.]html$");
-		foreach($liste_templates as $titre_option) {
-			$titre_option = basename($titre_option,".html");
-			$value_option = "templates/$titre_option";
-			$selected =_request('template')=="'$value_option'"?" selected='selected' ":"";
-			$valeurs['templates'] .= "<option value='".$value_option."' ".$selected .">".$titre_option."</option>\n";
-		}
-	}else{
-		$valeurs['editable'] = false;
-		$valeurs['message_erreur'] = _T('abomailmans:envoi_droits_insuffisants');
-	}
+
 	return $valeurs;
 }
 
 function formulaires_abomailman_envoi_liste_verifier_dist(){
-
-	//charge la fonction de controle du login et mail
-	//$test_inscription = charger_fonction('test_inscription');
-
+ 	
 	//initialise le tableau des erreurs
 	$erreurs = array();
-
-	$valeurs['sujet'] = _request('sujet');
-	$valeurs['template'] = str_replace('\'','',_request('template'));
-	$valeurs['message'] = _request('message');
-	$valeurs['date'] = _request('date');
-	$valeurs['id_rubrique'] = _request('id_rubrique');
-	$valeurs['id_mot'] = _request('id_mot');
 	
-	if(!$valeurs['sujet']){
-		$erreurs['sujet'] = _T('abomailmans:sujet_obligatoire');
-	}
+		//$valeurs['id_abomailman'] = _request('id_abomailman');
+		$valeurs['sujet'] = _request('sujet');
+		$valeurs['template'] = _request('template');
+		$valeurs['message'] = _request('message');
+		$valeurs['date'] = _request('date');
+		$valeurs['id_rubrique'] = _request('id_rubrique');
+		$valeurs['id_mot'] = _request('id_mot');
 
-    //message d'erreur genéralisé
+   if(!$valeurs['sujet']){ 
+		$erreurs['sujet'] = _T('abomailmans:sujet_obligatoire');  
+    }
+   
     if (count($erreurs)) {
+    	refuser_traiter_formulaire_ajax();
         $erreurs['message_erreur'] .= _T('abomailmans:verifier_formulaire');
     }
+ 
 	if (!count($erreurs) AND !_request('confirmer_previsu_abomailman')){
-		if ($afficher_texte != 'non') {
-			$previsu = abomailmain_inclure_previsu($valeurs['sujet'], $valeurs['message'], $valeurs['template'], $valeurs['date'], $valeurs['id_mot'], $valeurs['id_rubrique']);
+			$previsu = abomailmain_inclure_previsu($valeurs);
 			$erreurs['previsu'] = $previsu;
-		}
 	}
-    return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
+ 
+ return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
 
-function abomailmain_inclure_previsu($sujet, $message, $template, $date, $id_mot, $id_rubrique){
-	$bouton = _T('abomailmans:envoi_confirmer');
-	include_spip('public/assembler');
-	$datas =  array(
-			'sujet' => $sujet,
-			'message' => $message,
-			'template' => $template,
-			'id_mot' => $id_mot,
-		    'id_rubrique' => $id_rubrique,
-		    'date' => $date,
-			'erreur' => $erreur,
-			'bouton' => $bouton
-			);
-	$texte_template = generer_url_public('abomailman_template').'&'.abomailman_http_build_query($datas,"","&");
-	$datas['texte_template'] = recuperer_page($texte_template,true);
-	// supprimer les <form> de la previsualisation
-	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
-	return preg_replace("@<(/?)form\b@ism",
-			    '<\1div',
-		inclure_balise_dynamique(array('formulaires/inc-previsu_mail',
-		      0,
-		      $datas
-			),
-		false));
+function abomailmain_inclure_previsu($datas){
+	$datas['bouton'] = _T('abomailmans:envoi_confirmer');
+	$datas['texte_template'] = recuperer_fond('abomailman_template',$datas);
+	return recuperer_fond('formulaires/inc-previsu_mail',$datas);
 }
 
 function formulaires_abomailman_envoi_liste_traiter_dist(){
-    
+    	refuser_traiter_formulaire_ajax();
+    	
 	$datas = array();
+	$nom_site = lire_meta("nom_site");
+	$email_webmaster = lire_meta("email_webmaster");
+	$charset = lire_meta('charset');
+	$email_receipt = _request('email_liste');
+	$sujet = _request('sujet');
     
     // Recuperation des donnees
-	$datas['sujet'] = _request('sujet');
-	$datas['template'] = str_replace('\'','',_request('template'));
-	$datas['message'] = _request('message');
-	$datas['date'] = _request('date');
-	$datas['id_rubrique'] = _request('id_rubrique');
-	$datas['id_mot'] = _request('id_mot');
-	$datas['charset'] = lire_meta('charset');
+		//$query['id_abomailman'] = _request('id_abomailman'); 
+		$query['template'] = _request('template');
+		$query['message'] = _request('message');
+		$query['date'] = _request('date');
+		$query['id_rubrique'] = _request('id_rubrique');
+		$query['id_mot'] = _request('id_mot');
 	
-	$texte_template = generer_url_public('abomailman_template').'&'.abomailman_http_build_query($datas,"","&");
-	$datas['texte_template'] = recuperer_page($texte_template,true);
-	
-	$datas['email_liste'] = _request('email_liste');
-	$datas['nomsite'] = lire_meta("nom_site");
-	$datas['email_webmaster'] = lire_meta("email_webmaster");
-	spip.log($datas['texte_template']);
-
+	$fond = recuperer_fond('abomailman_template',$query); 
 	$body = array(
-	'html'=>$datas['texte_template']
+	'html'=>$fond,
 	);
 	
-	if (abomailman_mail($datas['nomsite'], $datas['email_webmaster'], "", $datas['email_liste'], $datas['sujet'], $body, true, $datas['charset'])) {
-		$message = _T('abomailmans:email_envoye',array('liste'=>$datas['email_liste']));
-	}
-
-	else $message = _T('pass_erreur_probleme_technique');
+	if (strlen($fond) > 10) {
+	if (abomailman_mail($nom_site, $email_webmaster, "", $email_receipt, $sujet,$body, true, $charset)) {
+	$message = _T('abomailmans:email_envoye',array('liste'=>$email_receipt));
+	} else $message = _T('pass_erreur_probleme_technique');
+	} else $message = _T('abomailmans:contenu_insuffisant');
 
     return array('message_ok'=>$message);
 }

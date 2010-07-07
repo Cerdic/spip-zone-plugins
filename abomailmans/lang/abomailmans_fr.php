@@ -7,13 +7,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //A
 	'abomailmans' 					=> 'Mailmans',
 	'abonne'					=> 'Je m\'abonne',
-	'active'                        => 'Active',
+	'activation'					=>'Activation',#NEW
+	'active'                       			=> 'Active',
 	'aucune_langue'					=> 'Aucune sp&eacute;cifique',
 
 //B
 	'bouton_listes_diffusion'		=> 'Les listes de diffusion',
 	'btn_abonnement'                => 'S\'abonner',
 	'btn_desabonnement'             => 'Se d&eacute;sabonner',
+	'emails_a_renseigner' =>'Emails &agrave; renseigner',
 
 //C
 	'choisir_liste'					=> 'Vous devez choisir une liste.',
@@ -22,19 +24,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //D
 	'desactive'                     => 'D&eacute;sactiv&eacute;e',
+	'destinataire'                     => 'Destinataire',#NEW
 
 //E
 	'emailliste_abomailman'			=> 'L\'adresse e-mail de la liste',
 	'emailliste_abosympa'           => 'L\'adresse e-mail de l\'administrateur Sympa',
 	'email'							=> 'E-mail',
 	'emailliste_subscribe' => 'Abonnement',
-	'emailliste_unsubscribe' => 'Desabonnement',
+	'emailliste_unsubscribe' => 'Desabonnement',                                          
 	'email_abonnement'				=> 'Votre adresse e-mail',
 	'email_envoye'					=> 'L\'e-mail a &eacute;t&eacute; envoy&eacute; &agrave; la liste de diffusion : @liste@.',
 	'envoi_vers'=> 'envoi vers',
 	'email_oublie'					=> 'Vous avez oubli&eacute; votre adresse e-mail',
 	'envoi_apercu'					=> 'Aper&ccedil;u',
 	'envoi_confirmer'				=> 'Confirmer et envoyer',
+	'envoi_regulier'				=> 'Envois automatiques',#NEW
+	'envoi_regulier_info'				=> 'Laisser vide pour ne pas avoir d\'envois automatiques',#NEW
+	'envoi_regulier_tous_les'			=> 'Envoi tous les',#NEW
+	'envoi_parametres' 				=> 'Param&eacute;tres',#NEW
+	'envoi_liste_parametres'			=>'Liste des param&egrave;tres [Facultatif]',#NEW
+	'periodicite'					=> ' jours.',#NEW
 	'envoyer_courier'				=> 'Envoyer un courrier',
 	'envoyer_courier_liste'			=> 'Envoyer ce courrier &agrave; cette liste de diffusion :',
 	'envoyer_mailmans'				=> 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu',
@@ -87,11 +96,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet'							=> 'Sujet du courrier',
 	'sujet_obligatoire'				=> 'Le sujet est obligatoire.',
 	'supprimer'						=> 'Supprimer',
+	'suppression_definitive' 	=>'Suppression d&eacute;finitive !',#NEW
 	'sympa_message_confirmation'	=> 'Un email de validation a &eacute;t&eacute; envoy&eacute; &agrave l\'adresse : ',
 
 //T
-	'template'						=> 'Choisissez le mod&egrave;le et son contenu',
-	'titre_abomailman'				=> 'Titre de la liste',
+	'template'				=> 'Choisissez le mod&egrave;le et son contenu',
+	'template_defaut'			=> 'Mod&egrave;le par defaut',#NEW
+	'texte_descriptif'			=>'Descriptif',#NEW
+	'titre_abomailman'			=> 'Titre de la liste',
 	'titre_liste_obligatoire'		=> 'Le titre de la liste est obligatoire',
 	'toute_liste'					=> 'Toutes les listes de diffusions',
 
@@ -99,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veut_s_abonner'=>'veut s\'abonner',
 	'veut_se_desabonner'=>'veut se desabonner',
 	'verifier_formulaire'			=>	'V&eacute;rifiez le remplissage du formulaire.',
+	'voir_modele_depuis'			=>'Voir un exemple du mod&eacute;le avec', #NEW
 	'votre_email'					=> 'Votre email',
 );
 ?>

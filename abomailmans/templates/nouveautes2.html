@@ -11,7 +11,9 @@
 *  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
 * Inspire du plugin Spip-Listes
 * $Id: nouveautes.html 31032 2009-08-20 20:46:24Z pierrekuhn82@gmail.com $
-***********************************************************/]
+***********************************************************/
+]
+<B_articlesDate>
 <style>
 /* CSS Document */
 body {
@@ -31,8 +33,7 @@ a:hover {
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
 
-a img {
-	border:0;}
+a img { border:0;}
 
 p.spip {
 	margin:0 0 1em 0 !important;
@@ -84,7 +85,8 @@ h3.spip {
 
 .logo {
 	float:left;
-	margin:12px 0.5em 0 0;}
+	margin:0.2em 1em 0 0;
+}
 
 p {
 	font-size:12px;
@@ -110,19 +112,22 @@ hr { padding:0; height:1px;
 
 .logo {
 	float:left;
-	margin:12px 0.5em 0 0;}
-
-h3 {
-	font-weight:normal;
-	font-size:12px;
-	margin:0;
-	padding:0;
-	color:#000000;}
+	margin:0 0.5em 0 0;
+	padding:0 0.5em 0 0;
+}
 
 h2 {
 	font-weight:normal;
 	font-size:15px;
-	margin:0;
+	font-weight:bold;
+	margin:1.5em 2em 1em 0;
+	padding:0;
+}
+	
+h3 {
+	font-weight:normal;
+	font-size:12px;
+	margin:1.5em 2em 0 1.5em;
 	padding:0;
 	color:#000000;}
 
@@ -141,11 +146,11 @@ h4 {
 <div class="header">
 	<a href="#URL_SITE_SPIP">
 	<img
-	[src="(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)"]
+	[src="(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{src}|url_absolue)"]
 	[height="(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{height})"]
 	[width="(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{width})"]
 	class="Logosite"
-	alt="#NOM_SITE_SPIP"
+	alt=""
 	/>	
 	</a>
 	 
@@ -153,8 +158,7 @@ h4 {
 	<div class="NomSite">[(#NOM_SITE_SPIP)][&nbsp;|&nbsp;(#DESCRIPTIF_SITE_SPIP)]</div>
 	<br class="nettoyeur" />
 </div>
-
-		<B_articlesDate>
+ 
 		<div class="items">
 
 		[<h2>(#ENV{sujet})</h2>]
@@ -162,21 +166,18 @@ h4 {
 		<hr /> 
 		
 			<BOUCLE_articlesDate(ARTICLES){age_relatif< 0}{id_rubrique ?}{id_mot ?}{par date}{inverse}>
-				<!-- Affiche logo si pas vidéo -->
-				<BOUCLE_agenda(MOTS){titre=AGENDA}{id_article}>#SET{type, agenda}</BOUCLE_agenda>
-				<!-- SI agenda -->
-				[(#GET{type}|!={'agenda'}|?{'',' '})
-					[<div class="jour">[(#DATE_REDAC|nom_jour)] (#DATE_REDAC|affdate_jourcourt)[ - (#DATE_REDAC|affdate{'H:i'})]</div>]
-				]
-				[<h3>(#SURTITRE|texte_backend|supprimer_numero) :</h3>]
-				 <h2>[(#TITRE|texte_backend|supprimer_numero)]</h2>
-				[(#LOGO_ARTICLE||image_reduire{150, 0}|liens_absolus|inserer_attribut{class,logo})]
-				[<p>(#CHAPO|liens_absolus|sinon{[(#INTRODUCTION|liens_absolus)]})</p>]
-				<!-- SI PAS agenda -->
-				[(#GET{type}|=={'agenda'}|?{'',' '})<p class="date">[(#DATE|affdate)]</p>]
+				[<h3>(#SURTITRE|supprimer_numero) :</h3>]
+				 <h2>[(#TITRE|supprimer_numero)]</h2>
+				[<div class="logo">(#LOGO_ARTICLE||image_reduire{150,0}|liens_absolus)</div>]
+				[<p>(#CHAPO|couper{300}|liens_absolus|sinon{[(#INTRODUCTION|couper{300}|liens_absolus)]})</p>]
+				 <p class="date">[(#DATE|affdate)]</p>
 				<a href="[(#URL_ARTICLE|url_absolue)]" class="Suite"><:abomailmans:lire_article:></a>
 				<hr />
 			</BOUCLE_articlesDate>	 
-			</div>
-			</B_articlesDate>
+		</div> 
+			
+			<BOUCLE_desabo(ABOMAILMANS){id_abomailman}>
+			<small>Pour vous d&eacute;sabonner de "#TITRE" envoyer un mail &agrave; <a mailto="#EMAIL_UNSUBSCRIBE">#EMAIL_UNSUBSCRIBE</a></small>
+			</BOUCLE_desabo>
 </div>
+</B_articlesDate>

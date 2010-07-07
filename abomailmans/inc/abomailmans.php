@@ -10,12 +10,12 @@
 */
 
 // a utiliser dans le form de son choix ...
-function abomailman_traiter_liste($id_liste,$abonnement){
+function abomailman_traiter_abonnement($id_liste,$abonnement){
 	$liste_data = sql_fetsel("*","spip_abomailmans","id_abomailman = $id_liste");
 	$sujet=null;
 	$dowhat=null;
-	$titre=$liste_data['titre'];
-//Si on a les 2 emails
+		$titre=$liste_data['titre'];
+		//Si on a les 2 emails
 		if(isset($liste_data['email_subscribe']) AND isset($liste_data['email_unsubscribe'])){
 			spip_log("Liste defini par mails","abomailmans");
 			$liste_email = !empty($abonnement)?$liste_data['email_subscribe']:$liste_data['email_unsubscribe'];
@@ -47,19 +47,7 @@ function abomailman_traiter_liste($id_liste,$abonnement){
 		
 		return array($titre,$proprio_email,$liste_email, $sujet, $body,$headers);
 }
-
-
-	// Fonction utilitaires
-	function abomailmans_abomailman_editable($id_abomailman = 0) {
-		global $connect_statut;
-		return $connect_statut == '0minirezo';
-	}
-	
-	function abomailmans_abomailman_administrable($id_abomailman = 0) {
-		global $connect_statut;
-		spip_log('connect_statut ='.$connect_statut);
-		return $connect_statut == '0minirezo';
-	}
+ 
 
 	//* Envoi de mail via facteur
 	function abomailman_mail($nom, $email, $to_nom, $to_email, $sujet="", $body="", $html="", $headers="") {	
@@ -69,32 +57,5 @@ function abomailman_traiter_liste($id_liste,$abonnement){
 		else return false;
 	}
 
-	function abomailman_http_build_query($data,$prefix=null,$sep='',$key=''){
-		if(!function_exists('http_build_query')) {
-		    function http_build_query($data,$prefix=null,$sep='',$key='') {
-				$ret = array();
-				foreach((array)$data as $k => $v) {
-	                $k = urlencode($k);
-	                if(is_int($k) && $prefix != null) {
-						$k = $prefix.$k;
-					};
-					if(!empty($key)) {
-						$k = $key."[".$k."]";
-					};
-					if(is_array($v) || is_object($v)) {
-						array_push($ret,http_build_query($v,"",$sep,$k));
-					}
-	                else {
-	                    array_push($ret,$k."=".urlencode($v));
-	                };
-				};
-		
-		        if(empty($sep)) {
-		            $sep = ini_get("arg_separator.output");
-		        };
-		        return implode($sep, $ret);
-		    };
-		};
-		return http_build_query($data);
-	}
+	
 ?>

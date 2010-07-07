@@ -13,6 +13,7 @@
 * Inspire du plugin Spip-Listes
 * $Id$
 ***********************************************************/]
+<B_articlesDate>
 <style>
 /* CSS Document */
 body {
@@ -163,8 +164,7 @@ h4 {
 		<h2>#ENV{sujet}</h2>
 		<p><b>#ENV{message}</b></p>
 		<div class="ligne">&nbsp;</div>
-
-		<B_articlesDate>
+ 
 			<BOUCLE_articlesDate(ARTICLES){age_relatif< 0}{id_rubrique ?}{id_mot ?}{par date}{inverse}>
 				<!-- Affiche logo si pas vidéo -->
 				<BOUCLE_agenda(MOTS){titre=AGENDA}{id_article}>#SET{type, agenda}</BOUCLE_agenda>
@@ -182,8 +182,9 @@ h4 {
 				<br class="nettoyeur" />
 				<div class="ligne">&nbsp;</div>
 			</BOUCLE_articlesDate>
-		</B_articlesDate>
-		<//B_articlesDate>
+		
+		 
 	</td>
   </tr>
 </table>
+</B_articlesDate>

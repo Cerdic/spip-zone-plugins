@@ -1,4 +1,6 @@
 <div class="formulaire_spip formulaire_abomailman_envoi_liste ajax" id="formulaire_abomailman_envoi_liste">
+[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -8,7 +10,7 @@
 		Si on valide la previsu, on n'envoie pas en ajax 
 	
 	][<form action="#ENV{action}#formulaire_abomailman_envoi_liste" method="post" class="noajax">
-		<div>
+		<div style="border:4px solid #ccc">
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<input type="hidden" name="template" value="#ENV*{template}" />
 		<input type="hidden" name="sujet" value="#ENV*{sujet}" />
@@ -26,7 +28,7 @@
 				<label for="template"><:abomailmans:template:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{template})</span>]
 				<select name="template">
-					[(#ENV*{templates}|html_entity_decode)]
+					<INCLURE{fond=prive/listes/abomailman_templates}{id_abomailman}{erreurs}{env}>
 				</select>
 			</li>
 			<li class="choisir_date[ (#ENV**{erreurs}|table_valeur{date}|oui)erreur]" style="overflow:visible">

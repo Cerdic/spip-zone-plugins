@@ -55,7 +55,7 @@ function formulaires_abomailman_verifier_dist($id_abomailman = ""){
 			$erreurs['email'] = _T("form_email_non_valide");
 		}
 		else{
-			spip_log("Email = $email;","abomailman");
+			spip_log("Email = $email;","abomailmans");
 			//TODO
 			// stocker l'email dans un fichier ou la session, histoire de ne pas se présenter 2 fois
 		}
@@ -94,7 +94,7 @@ function formulaires_abomailman_traiter_dist($id_abomailman = ""){
 	
 	//on initialise l'envoi
 	// on traite chaque liste via une fonction reutilisable ailleurs
-	$traiter=abomailman_traiter_liste($id_abomailman,$abonnement);
+	$traiter=abomailman_traiter_abonnement($id_abomailman,$abonnement);
 	$titre = $traiter[0];
 	$proprio_email=$traiter[1];
 	$liste_email=$traiter[2];

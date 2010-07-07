@@ -1,27 +1,26 @@
-#CACHE{0}
 <div class='cadre-formulaire-editer'>
 	<BOUCLE_liste(ABOMAILMANS){id_abomailman}>
 	<div class="entete-formulaire">
 		#ENV**{icone_retour}
 		<h1>[(#TITRE|supprimer_numero)]</h1>
-		<div class="explications" style="margin-top:20px">
-			[<div>
-				<p><strong class='verdana2'><:info_descriptif:></strong></p>
-				(#DESCRIPTIF)
-			</div>]
-			[<div>
-				<p><strong class='verdana2'><:abomailmans:emailliste_abomailman:></strong></p>
-				<p>(#EMAIL)</p>
-			</div>]
+		<br class="nettoyeur" />
+		<div class="explications">
+			[<p><strong><:abomailmans:texte_descriptif:></strong></p>
+			<p>(#DESCRIPTIF)</p>
+			]
+			[<p><strong><:abomailmans:emailliste_abomailman:></strong></p>
+			<p>(#EMAIL)</p>
+			]
 			
-			[<div>
-				<p><strong class='verdana2'><:abomailmans:emailliste_abosympa:></strong></p>
-				<p>(#EMAIL_SYMPA)</p>
-			</div>]
-			<div>
-				<p><strong class='verdana2'><:abomailmans:langue_liste:></strong>
-				<p>[(#LANG|traduire_nom_langue|sinon{<:abomailmans:aucune_langue:>})]
-			</div>
+			[<p><strong><:abomailmans:emailliste_abosympa:></strong></p>
+			<p>(#EMAIL_SYMPA)</p>
+			]
+			[<p><strong><:abomailmans:envoi_regulier:></strong></p>
+			<p><:abomailmans:envoi_regulier_tous_les:> (#PERIODICITE) <:abomailmans:periodicite:></p>
+			]
+			
+			<p><strong><:abomailmans:langue_liste:></strong>[ (#LANG|traduire_nom_langue|sinon{<:abomailmans:aucune_langue:>})]</p>
+			
 		</div>
 	</div>
 	</BOUCLE_liste>

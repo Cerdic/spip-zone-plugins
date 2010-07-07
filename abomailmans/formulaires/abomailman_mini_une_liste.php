@@ -25,11 +25,11 @@ function formulaires_abomailman_mini_une_liste_charger_dist($id_abomailman = "")
 	// On verifie que la liste est bien accessible
 	if (sql_getfetsel('id_abomailman','spip_abomailmans','id_abomailman ='.intval($id_abomailman).' AND desactive = 0')) {
 		$ok = true;
-		spip_log("La liste existe, on peut charger le formulaire","abomailman");
+		spip_log("La liste existe, on peut charger le formulaire","abomailmans");
 	}
 	else{
 		$ok = false;
-		spip_log("Le numero de liste n'est pas valable","abomailman");
+		spip_log("Le numero de liste n'est pas valable","abomailmans");
 	}
 	if ($ok)
 	return $valeurs;
@@ -47,16 +47,16 @@ function formulaires_abomailman_mini_une_liste_verifier_dist($id_abomailman = ""
 	
 	if($email == ''){
 		$erreurs['erreur_email'] = _T("abomailmans:email_oublie");
-		spip_log("Aucun email n'est insere","abomailman");
+		spip_log("Aucun email n'est insere","abomailmans");
 	}
 	else{
 		include_spip('inc/filtres'); # pour email_valide()
 		if (!email_valide($email)){
 			$erreurs['erreur_email'] = _T("abomailmans:email_valide");
-			spip_log("Email non valide $email","abomailman");
+			spip_log("Email non valide $email","abomailmans");
 		}
 		else{
-			spip_log("Email = $email;","abomailman");
+			spip_log("Email = $email;","abomailmans");
 		}
 	}
 
@@ -79,7 +79,7 @@ function formulaires_abomailman_mini_une_liste_traiter_dist($id_abomailman = "")
     	//on initialise l'envoi
 	// on traite chaque liste via une fonction reutilisable ailleurs
 	//on passe abonnement ˆ true d'office
-	$traiter=abomailman_traiter_liste($id_abomailman,true);
+	$traiter=abomailman_traiter_abonnement($id_abomailman,true);
 	$titre = $traiter[0];
 	$proprio_email=$traiter[1];
 	$liste_email=$traiter[2];
