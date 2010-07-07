@@ -18,6 +18,7 @@ function action_supprimer_document_dist($id_document=0) {
 		$securiser_action = charger_fonction('securiser_action','inc');
 		$id_document = $securiser_action();
 	}
+	include_spip('inc/autoriser');
 	if (!autoriser('supprimer','document',$id_document))
 		return false;
 
