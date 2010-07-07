@@ -104,7 +104,7 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 		$noisette = _request('noisette');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
 		// Si le plugin verifier est actif
-		if(true){
+		if (defined('_DIR_PLUGIN_VERIFIER')){
 			$verifier = charger_fonction('verifier','inc',true);
 			foreach ($infos_param as $nom=>$parametre){
 				if (isset($parametre['verifier'])){
