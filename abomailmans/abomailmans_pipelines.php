@@ -4,7 +4,7 @@
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
  * Printemps 2007 - 2009
- * $Id$
+ * $Id: abomailmans_interface.php 31752 2009-09-23 00:09:48Z kent1@arscenic.info $
 */
 
 function abomailmans_ajouter_boutons($flux) {
@@ -34,6 +34,25 @@ function abomailmans_header_prive($flux) {
 		$flux .= "<link rel=\"stylesheet\" href=\"" ._DIR_PLUGIN_ABOMAILMANS . "css/datePicker.css\" type=\"text/css\" />\n";}
 	$flux .="<!-- / PLUGIN ABOMAILMANS -->\n\n";
 	return $flux;
+}
+
+/**
+ * 
+ * Declarer la tache cron de abomailman lente (messagerie de l'espace prive)
+ * @param array $taches_generales
+ * @return array 
+ */
+function abomailmans_taches_generales_cron($taches_generales){
+	$taches_generales['abomailmans'] = 60 * 10; // toutes les 10 minutes
+	return $taches_generales;
+}
+
+
+// Initialise les reglages sous forme de tableau
+function abomailmans_go($x) {
+	if (!is_array($GLOBALS['abomailmans']	= @unserialize($GLOBALS['meta']['abomailmans'])))
+		$GLOBALS['abomailmans'] = array();
+	return $x;
 }
 
 ?>
