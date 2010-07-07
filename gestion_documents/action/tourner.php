@@ -99,4 +99,30 @@ function action_tourner_post($id_document,$angle)
 
 }
 
+// Appliquer l'EXIF orientation
+// cf. http://trac.rezo.net/trac/spip/ticket/1494
+// http://doc.spip.org/@tourner_selon_exif_orientation
+function tourner_selon_exif_orientation($id_document, $fichier) {
+
+	if (function_exists('exif_read_data')
+	AND $exif = exif_read_data($fichier)
+	AND (
+		$ort = $exif['IFD0']['Orientation']
+		OR $ort = $exif['Orientation'])
+	) {
+	spip_log("rotation: $ort");
+		$rot = null;
+		switch ($ort) {
+			case 3:
+				$rot = 180;
+			case 6:
+				$rot = 90;
+			case 8:
+				$rot = -90;
+		}
+		if ($rot)
+			action_tourner_post(array(null,$id_document, $rot));
+	}
+}
+
 ?>
