@@ -2,13 +2,13 @@
 	<version>0.5.4.0</version>
 	<nom>
 		<multi>
-			[en]SpipBB: Management of SPIP 2.0 forums
-			[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 2.0
-			[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 2.0
-			[tr]SpipBB : SPIP 2.0 forumlar&#305;n&#305;n y&ouml;netimi
-			[nl]SpipBB: Beleid van de SPIP 2.0 forums
-			[gl]SpipBB : xesti&oacute;n de foros de SPIP 2.0
-			[fr]SpipBB : Gestion des forums de SPIP 2.0
+			[en]SpipBB: Management of SPIP 2.1 forums
+			[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 2.1
+			[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 2.1
+			[tr]SpipBB : SPIP 2.1 forumlar&#305;n&#305;n y&ouml;netimi
+			[nl]SpipBB: Beleid van de SPIP 2.1 forums
+			[gl]SpipBB : xesti&oacute;n de foros de SPIP 2.1
+			[fr]SpipBB : Gestion des forums de SPIP 2.1
 		</multi>
 	</nom>
 	<auteur>
@@ -169,6 +169,10 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/spipbb.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>spipbb_fonctions.php</inclure>
+	</pipeline>
 	<!-- chargement des notifications facon spipbb -->
 	<pipeline> 
 		<nom>notifications</nom> 
@@ -178,7 +182,7 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 	</pipeline> 
 
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="cfg" version="[1.0.0;]" />
 	<categorie>communication</categorie>
 </plugin>

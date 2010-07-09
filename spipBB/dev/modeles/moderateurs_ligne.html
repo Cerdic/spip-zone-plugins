@@ -8,7 +8,7 @@ c: 12/9/8 par defaut l'id 1 est admin de tout !]
 </BOUCLE_modo_art>
 
 <BOUCLE_art_rub(ARTICLES){id_article}>
-	<BOUCLE_rub_admin(AUTEURS_RUBRIQUES){id_auteur !IN #GET{modos}}{id_rubrique=#ID_RUBRIQUE}>
+	<BOUCLE_rub_admin(auteurs_rubriques){id_auteur !IN #GET{modos}}{id_rubrique=#ID_RUBRIQUE}>
 		<BOUCLE_aut_admin(AUTEURS){id_auteur}>
 		#SET{modos,#GET{modos}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#_aut_admin:ID_AUTEUR}}}
 		</BOUCLE_aut_admin>

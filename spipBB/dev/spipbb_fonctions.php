@@ -253,4 +253,44 @@ function spipbb_calc_visites($id_forum=NULL) {
 
 } // spipbb_calc_visites
 
+function spipbb_styliser($flux){
+	$spipbb_meta = unserialize($GLOBALS['meta']['spipbb']);
+	// si article ou rubrique
+	if (($fond = $flux['args']['fond'])
+	AND in_array($fond, array('article','rubrique'))) {
+		
+		$ext = $flux['args']['ext'];
+		// [...]
+		if ($id_rubrique = $flux['args']['id_rubrique']) {
+			// calcul du secteur
+			$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
+			// comparaison du secteur avec la config de spipBB
+			if ($spipbb_meta['id_secteur'] = $id_secteur) {
+				// si un squelette $fond_spipclear existe
+				if ($squelette = test_squelette_spipBB($fond, $ext)) {
+					$flux['data'] = $squelette;
+				}
+			}
+		}
+	}
+	return $flux;
+}
+// retourne un squelette s'il existe
+function test_squelette_spipBB($fond, $ext) {
+	$spipbb_meta = unserialize($GLOBALS['meta']['spipbb']);
+
+	switch($fond) {
+		case 'article' :
+			if ($squelette = find_in_path($spipbb_meta['squelette_filforum'])) {
+				return substr($squelette, 0, -strlen(".$ext"));
+			}
+		break;
+		case 'rubrique' :
+			if ($squelette = find_in_path($spipbb_meta['squelette_groupeforum'])) {
+				return substr(find_in_path($spipbb_meta['squelette_groupeforum']), 0, -strlen(".$ext"));;
+			}
+		break;
+	}
+	return false;
+}
 ?>
