@@ -1,11 +1,25 @@
 <?php
 // insert le css et le js externes pour boutonstexte dans le <head> du document (#INSERT_HEAD)
+function boutonstexte_insert_head_css($flux) 
+{
+	static $done = false;
+	if (!$done) {
+		$metacfg = array(
+			'cssFile' => 'boutonstexte',
+		);
+		meta_boutonstexte($metacfg);
+		$cssFile = $metacfg['cssFile'];
+		$done = true;
+		$flux .= '<link rel="stylesheet" href="spip.php?page='.$cssFile.'.css" type="text/css" media="all" /><link rel="stylesheet" href="spip.php?page='.$cssFile.'-print.css" type="text/css" media="print" />';
+	}
+	return $flux;
+}
+
 function boutonstexte_insert_head($flux)
 {
 	$metacfg = array(
 		'selector' => '#contenu .texte',
 		'jsFile' => 'boutonstexte.js',
-		'cssFile' => 'boutonstexte',
 		'imgPath' => 'images/fontsizeup.png',
 		'txtOnly' => 'boutonstexte:texte_seulement',
 		'txtBackSpip' => 'boutonstexte:retour_a_spip',
@@ -16,7 +30,6 @@ function boutonstexte_insert_head($flux)
 	
 	$selector = $metacfg['selector'];
 	$jsFile = find_in_path($metacfg['jsFile']);
-	$cssFile = $metacfg['cssFile'];
 	$imgPath = dirname(find_in_path($metacfg['imgPath']));
 
 	$txtOnly = txt_boutonstexte($metacfg['txtOnly']);
@@ -24,9 +37,8 @@ function boutonstexte_insert_head($flux)
 	$txtSizeUp = txt_boutonstexte($metacfg['txtSizeUp']);
 	$txtSizeDown = txt_boutonstexte($metacfg['txtSizeDown']);
 
-	$incHead = <<<EOH
-<link rel="stylesheet" href="spip.php?page={$cssFile}.css" type="text/css" media="all" />
-<link rel="stylesheet" href="spip.php?page={$cssFile}-print.css" type="text/css" media="print" />
+	$flux .= boutonstexte_insert_head_css($flux);
+	$flux .= <<<EOH
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript"><!--
 	var boutonstexte = new boutonsTexte({
@@ -40,8 +52,7 @@ function boutonstexte_insert_head($flux)
 //-->
 </script >
 EOH;
-
-	return preg_replace('#(</head>)?$#i', $incHead . "\$1\n", $flux, 1);
+	return $flux;
 }
 	
 function txt_boutonstexte($txt)

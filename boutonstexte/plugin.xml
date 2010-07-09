@@ -7,7 +7,7 @@
 _ &#169; 2006 - <multi>[fr]Distribue sous licence LGPL[en]Distributed under LGPL license[ar]&#1605;&#1608;&#1586;&#1593; &#1576;&#1578;&#1585;&#1582;&#1610;&#1589; LGPL</multi>
   </auteur>
   <version>
-	0.3.1
+	0.3.2
   </version> <!-- Version du plugin -->
   <etat>
 	stable
@@ -27,6 +27,10 @@ _ <multi>[fr]ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> 
   </prefix>
 	<icon>images/fontsizeup.png</icon>
 	<options>boutonstexte_options.php</options>
+  <pipeline>
+	  <nom>insert_head_css</nom>
+	  <inclure>boutonstexte_pipelines.php</inclure>
+  </pipeline>
   <pipeline>
 	  <nom>insert_head</nom>
 	  <inclure>boutonstexte_pipelines.php</inclure>
