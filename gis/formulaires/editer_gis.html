@@ -30,7 +30,7 @@
 							$("#region").val(place.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName);
 						if (place.AddressDetails.Accuracy > 3)
 							$("#ville").val(place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName);
-						if (place.AddressDetails.Accuracy > 4)
+						if (place.AddressDetails.Accuracy > 5)
 							$("#code_postal").val(place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber);
 					}
 				}
