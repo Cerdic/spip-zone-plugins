@@ -52,6 +52,9 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$facteur->AddAttachment($piece['chemin'], $piece['nom'], $piece['encodage'], $piece['mime']);
 		}
 	}
+	$head = $facteur->CreateHeader();
+	spip_log("mail via facteur\n$head\n",'mail');
+	spip_log("mail\n$head\n",'facteur');
 	return $facteur->Send();
 }
 
