@@ -281,13 +281,13 @@ function test_squelette_spipBB($fond, $ext) {
 
 	switch($fond) {
 		case 'article' :
-			if ($squelette = find_in_path($spipbb_meta['squelette_filforum'])) {
+			if ($squelette = find_in_path($spipbb_meta['squelette_filforum'].'.'.$ext)) {
 				return substr($squelette, 0, -strlen(".$ext"));
 			}
 		break;
 		case 'rubrique' :
-			if ($squelette = find_in_path($spipbb_meta['squelette_groupeforum'])) {
-				return substr(find_in_path($spipbb_meta['squelette_groupeforum']), 0, -strlen(".$ext"));;
+			if ($squelette = find_in_path($spipbb_meta['squelette_groupeforum'].'.'.$ext)) {
+				return substr($squelette, 0, -strlen(".$ext"));
 			}
 		break;
 	}
