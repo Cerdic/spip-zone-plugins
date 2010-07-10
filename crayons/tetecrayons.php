@@ -85,7 +85,7 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 
 	$jsFile = generer_url_public('crayons.js');
 	if (_DEBUG_CRAYONS)
-		$jsFile = parametre_url($jsFile,'debug_crayons',1);
+		$jsFile = parametre_url($jsFile,'debug_crayons',1,'&');
 	include_spip('inc/filtres'); // rien que pour direction_css() :(
 	$cssFile = direction_css(find_in_path('crayons.css'));
 
