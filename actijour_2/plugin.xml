@@ -22,12 +22,12 @@
 		[Documentation->http://www.koakidi.com/spip.php?article205]
 	</lien>
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>actijour_pipe.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>actijour_pipe.php</inclure>
 	</pipeline>
+	<bouton id="actijour_pg20" parent="statistiques_visites">
+		<icone>img_pack/activ_jour.gif</icone>
+		<titre>acjr:activite_du_jour</titre>
+		<url>actijour_pg</url>
+	</bouton>
 </plugin>
