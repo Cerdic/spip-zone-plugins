@@ -30,4 +30,5 @@
 		<titre>acjr:activite_du_jour</titre>
 		<url>actijour_pg</url>
 	</bouton>
+	<categorie>statistique</categorie>
 </plugin>
