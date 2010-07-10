@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Artikel, Rubrik oder anderes SPIP-Objekt',
 	'nom_menu_page_speciale' => 'Link zu einer HTML-Vorlage',
 	'nom_menu_rubriques' => 'Liste oder Baumansicht der Rubriken',
+	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques', # NEW
 	'nom_menu_secteurlangue' => 'Hauptrubriken nach Sprache'
 );
 

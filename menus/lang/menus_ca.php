@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_identifiant_forme' => 'L\'identificador nom&eacute;s pot contenir lletres, xifres o el car&agrave;cter subratllat.',
 	'erreur_menu_inexistant' => 'El men&uacute; demanat n&uacute;mero @id@ no existeix.',
 	'erreur_mise_a_jour' => 'S\'ha produ&iuml;t un error durant l\'actualitzaci&oacute; de la base de dades .',
-	'erreur_parametres' => 'Il y a une erreur dans les param&egrave;tres de la page', # NEW
+	'erreur_parametres' => 'Hi ha un error en els par&agrave;metres de la p&agrave;gina',
 	'erreur_type_menu' => 'Has d\'escollir un tipus de men&uacute;',
 
 	// F
@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Article, secci&oacute; o un altre objecte SPIP',
 	'nom_menu_page_speciale' => 'Enlla&ccedil; cap a una p&agrave;gina esquelet',
 	'nom_menu_rubriques' => 'Llista o arboresc&egrave;ncia de seccions',
+	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques', # NEW
 	'nom_menu_secteurlangue' => 'Sectors de llengua'
 );
 
