@@ -8,9 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_forum_longueur' => 'Longueur des messages', # NEW
-	'cfg_forum_longueur_maxi' => 'Longueur maximale', # NEW
-	'cfg_forum_longueur_mini' => 'Longueur minimale', # NEW
+	'cfg_forum_longueur' => 'Llargada dels missatges',
+	'cfg_forum_longueur_maxi' => 'Llargada m&agrave;xima',
+	'cfg_forum_longueur_mini' => 'Llargada m&iacute;nima',
 	'comment' => 'comentari',
 	'comments' => 'comentaris',
 	'comments_h' => 'Els teus comentaris',
@@ -41,7 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_texte_info' => 'Aquest formulari accepta les dreceres SPIP <code>[-&gt;url] {{italique}} {italique} &lt;quote&gt; &lt;code&gt;</code> i el codi HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Per crear par&agrave;grafs, deixeu simplement l&iacute;nies buides.',
 	'saisie_texte_legend' => 'Afegeix el comentari aqu&iacute;',
 	'submit1' => 'Visualitzaci&oacute; pr&egrave;via',
-	'submit2' => 'Confirmar l\'enviament'
+	'submit2' => 'Confirmar l\'enviament',
+
+	// T
+	'titre_comments' => 'Comments', # NE
 );
 
 ?>

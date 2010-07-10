@@ -41,7 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_texte_info' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code&nbsp;HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour cr&eacute;er des paragraphes, laisse simplement des lignes vides.',
 	'saisie_texte_legend' => 'Ajoute ton commentaire ici',
 	'submit1' => 'Pr&eacute;visualiser',
-	'submit2' => 'Confirmer l\'envoi'
+	'submit2' => 'Confirmer l\'envoi',
+
+	// T
+	'titre_comments' => 'Comments', # NE
 );
 
 ?>
