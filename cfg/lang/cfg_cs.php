@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'V @nom@ nebyla nalezena &#382;&aacute;dn&aacute; polo&#382;ka',
+	'pas_de_champs_dans' => 'V @nom@ nebyla nalezena &#382;&aacute;dn&aacute; polo&#382;ka', # MODIF
 	'pas_de_changement' => 'V <b>@nom@</b> nebyly nalezeny &#382;&aacute;dn&eacute; zm&#283;ny',
 
 	// R

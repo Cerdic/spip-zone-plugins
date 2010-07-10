@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'Mat eo',
 
 	// P
-	'pas_de_champs_dans' => 'Maezienn ebet kavet e @nom@',
+	'pas_de_champs_dans' => 'Maezienn ebet kavet e @nom@', # MODIF
 	'pas_de_changement' => 'Kemm ebet e <b>@nom@</b>',
 
 	// R
