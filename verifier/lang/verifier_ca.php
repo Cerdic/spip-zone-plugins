@@ -29,9 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'option_email_disponible_label' => 'Adre&ccedil;a disponible',
 	'option_email_disponible_label_case' => 'Verificar que l\'adre&ccedil;a no l\'utilitzi ja un altre usuari',
-	'option_email_mode_5322' => 'V&eacute;rification la plus conforme aux standards disponibles', # NEW
+	'option_email_mode_5322' => 'Verificaci&oacute; la m&eacute;s compatible amb els est&agrave;ndards disponibles ',
 	'option_email_mode_label' => 'Mitj&agrave; de verificaci&oacute; dels correus electr&ograve;nics',
-	'option_email_mode_normal' => 'Verificaci&oacute; normal d\'SPIP (respectant la norma RFC)', # MODIF
+	'option_email_mode_normal' => 'Verificaci&oacute; normal d\'SPIP',
 	'option_email_mode_strict' => 'Verificaci&oacute; menys permissiva',
 	'option_entier_max_label' => 'Valor m&agrave;xim',
 	'option_entier_min_label' => 'Valor m&iacute;nim',
