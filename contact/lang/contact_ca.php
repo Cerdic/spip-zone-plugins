@@ -16,8 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_adresse' => 'Adre&ccedil;a',
-	'champ_civi_explication' => 'R&eacute;glages avanc&eacute;es du champ civilit&eacute;', # NEW
-	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilit&eacute;', # NEW
+	'champ_civi_explication' => 'Opcions avan&ccedil;ades del camp civilitat',
+	'champ_civi_mademoiselle_ok' => 'Proposar una tria &laquo;Senyoreta&raquo; al camp civilitat',
 	'champ_civilite' => 'Tractament',
 	'champ_code_postal' => 'Codi postal',
 	'champ_etat' => 'Estat',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'madame' => 'Senyora',
-	'mademoiselle' => 'Mademoiselle', # NEW
+	'mademoiselle' => 'Senyoreta',
 	'monsieur' => 'Senyor',
 	'msg_accueil' => 'Trobareu aqu&iacute; els missatges de contacte que heu rebut.',
 	'msg_contact' => 'Missatge de contacte',
