@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Afegir-me els drets d\'acc&eacute;s a aquesta zona',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => 'Cap zona',
 	'auteurs' => 'autors',
 
 	// B
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'N&uacute;m',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
+	'confirmer_ajouter_auteurs' => 'Esteu segurs de voler afegir aquest autor a la zona?',
 	'confirmer_retirer_auteur_zone' => 'Est&agrave;s segur que vols retirar aquest autor de la zona?',
 	'confirmer_retirer_auteurs' => 'Est&agrave;s segur que vols retirar tots els autors d\'aquesta zona?',
 	'confirmer_supprimer_zone' => 'Est&agrave;s segur que vols suprimir aquesta zona?',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'T&iacute;tol',
 	'titre_ajouter_zone' => 'Tornar a la zona',
 	'titre_cadre_modifier_zone' => 'Modificar una zona',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_page_config' => 'Configuraci&oacute; de l\'acc&eacute;s',
 	'titre_table' => 'Totes les zones d\'acc&eacute;s',
 	'titre_zones_acces' => 'Zones d\'acc&eacute;s restringit',
 	'toutes' => 'Totes',
