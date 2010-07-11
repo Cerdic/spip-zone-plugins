@@ -27,20 +27,20 @@
 		doivent tous &ecirc;tre logu&eacute;s.
 	</description>
 	<lien>
-		[Site de l'&eacute;diteur->http://www.chambredesecrets.net]
+		[MM sur Contrib->http://www.spip-contrib.net/Moderation-Moderee]
 	</lien>
 	<prefix>
 		moderation
 	</prefix>
-    <pipeline>
-        <nom>pre_edition</nom>
-        <action>vip</action>
-        <inclure>fonctions_mod.php</inclure>
-    </pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<action>vip</action>
+		<inclure>fonctions_mod.php</inclure>
+	</pipeline>
 	<necessite id='SPIP' version='[2.0.0;]' />
 	<bouton id='moderation' parent='forum'>
-      <icone>img_pack/icone.png</icone>
-      <titre>Mod&eacute;ration Mod&eacute;r&eacute;e</titre>
-    </bouton>
+		<icone>img_pack/icone.png</icone>
+		<titre>Mod&eacute;ration Mod&eacute;r&eacute;e</titre>
+	</bouton>
 	<categorie>communication</categorie>
 </plugin>
