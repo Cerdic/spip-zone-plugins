@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cssparams_legend' => 'Param&egrave;tres styles SjCycle',
 	'div_class' => 'Nom de classe css',
 	'div_margin' => 'Marge externe',
-	'img_bordure' => 'Bordure',
+	'img_bordure' => 'Largeur de la bordure',
 	'div_background' => 'Couleur de bordure',
 	
 //fieldset <:sjcycle:imgparams_legend:>	

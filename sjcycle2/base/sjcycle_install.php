@@ -13,7 +13,7 @@ include_spip('inc/meta');
  * @param string $version_cible
  */
 function sjcycle_upgrade($nom_meta_base_version,$version_cible){
-	$current_version = 0.4;
+	$current_version = 0.5;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		$config = lire_config('sjcycle');
@@ -42,7 +42,7 @@ function sjcycle_upgrade($nom_meta_base_version,$version_cible){
 				'img_background' => 'ffffff'
 		), $config);
 		ecrire_meta('sjcycle', serialize($config));
-		ecrire_meta($nom_meta_base_version,$current_version='0.4','non');
+		ecrire_meta($nom_meta_base_version,$current_version='0.5','non');
 	}
 }
 

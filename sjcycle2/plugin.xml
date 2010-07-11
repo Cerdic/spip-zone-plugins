@@ -30,14 +30,7 @@
 		</ul>
 	</description>
 	<icon>images/sjcycle-32.png</icon>
-	<lien>
-		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />
-		&nbsp;Aide (succinte) à l'<a href="../plugins/sjcycle2/doc.php" target="_blank" 
-			style="color:#999;text-decoration:underline;" title="Aide"
-			onclick="javascript:window.open('../plugins/sjcycle/doc.php', 'aide', 
-					  'scrollbars=yes,resizable=yes,width=740,height=580');; return false;">
-		utilisation de Spip jQuery Cycle "sjcycle"</a>
-	</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Spip-jQuery-Cycle-2</lien>
 	<lien>
 		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />
 			&nbsp;Configuration via <a href=".?exec=cfg&amp;cfg=sjcycle" style="color:#999;text-decoration:underline;" 
@@ -64,5 +57,4 @@
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="palette" version="[1.2.2;]" />
-	<utilise id="verifier" version="[0.1;]" />
 </plugin>
