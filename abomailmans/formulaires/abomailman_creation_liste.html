@@ -2,14 +2,13 @@
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input">
 				<label for="titre" class="obligatoire"><:texte_titre_obligatoire:></label>
-				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{titre})</p>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 				<input type="text"  id="titre" name="titre" value="[(#ENV**{titre})]" size="50" />
 			</li>
 			 <li class='editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
@@ -23,30 +22,30 @@
 			<li class="editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 				<label for="email" class="obligatoire"><:abomailmans:destinataire:></label>
 				<p class="explication"><:abomailmans:emailliste_abomailman:></p>
-				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{email})</p>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
 				<input type="text"  id="email" name="email" value="[(#ENV**{email})]" size="50" />
 			</li>
 			<li class="editer_email_subscribe[ (#ENV**{erreurs}|table_valeur{email_subscribe}|oui)erreur]">
 				<label for="email_subscribe"><:abomailmans:emailliste_subscribe:></label>
 				<p class="explication"><:abomailmans:explication_email_subscribe:></p>
-				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{email_subscribe})</p>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_subscribe})</span>]
 				<input type="text"  id="email_subscribe" name="email_subscribe" value="[(#ENV**{email_subscribe})]" size="50" />
 			</li>
 			<li class="editer_email_unsubscribe[ (#ENV**{erreurs}|table_valeur{email_unsubscribe}|oui)erreur]">
 				<label for="email_unsubscribe"><:abomailmans:emailliste_unsubscribe:></label>
 				<p class="explication"><:abomailmans:explication_email_unsubscribe:></p>
-				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{email_unsubscribe})</p>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_unsubscribe})</span>]
 				<input type="text"  id="email_unsubscribe" name="email_unsubscribe" value="[(#ENV**{email_unsubscribe})]" size="50" />
 			</li>
 			<li class="editer_email_sympa[ (#ENV**{erreurs}|table_valeur{email_sympa}|oui)erreur]">
 				<label for="email_sympa"><:abomailmans:emailliste_abosympa:></label>
 				<p class="explication"><:abomailmans:explication_email_sympa:></p>
-				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{email_sympa})</p>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_sympa})</span>]
 				<input type="text"  id="email_sympa" name="email_sympa" value="[(#ENV**{email_sympa})]" size="50" />
 			</li>
 			[<li class="editer_langue[ (#ENV**{erreurs}|table_valeur{langue}|oui)erreur]">
 				<label for="langue"><:abomailmans:langue_liste:></label>
-				[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{langue})</p>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{langue})</span>]
 				<select name="langue" id="langue">
 					<option value=""><:abomailmans:aucune_langue:></option>
 					(#VAL{changer_lang}|liste_options_langues{#ENV*{langue}})

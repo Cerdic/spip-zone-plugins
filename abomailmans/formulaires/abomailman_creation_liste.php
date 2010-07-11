@@ -98,7 +98,7 @@ function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman = "")
 	$datas['lang'] = _request('langue');
 
     // on récupère les données de la liste
-    if($id_abomailman){
+    if(intval($id_abomailman)){
     	if($datas['desactive'] == '2'){
     		sql_delete("spip_abomailmans","id_abomailman = $id_abomailman");
     		$message['message_ok'] = _T('abomailmans:liste_supprimee',array("id"=>$id_abomailman,"titre"=> $datas['titre']));

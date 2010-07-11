@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
 
 // chargement des valeurs par defaut des champs du formulaire
-//une seule liste = [(#FORMULAIRE_ABOMAILMAN{1})]  
+//une seule liste = [(#FORMULAIRE_ABOMAILMAN{1})]
 function formulaires_abomailman_charger_dist($id_abomailman = ""){
 	global $visiteur_session;
 
@@ -15,16 +15,16 @@ function formulaires_abomailman_charger_dist($id_abomailman = ""){
 	// Si le visiteur est logue au site on utilise ses informations de connexion par d√©faut
 	$valeurs['email'] = _request('email') ? _request('email') : $visiteur_session['email'];
 	$valeurs['nom'] = _request('nom') ? _request('nom') : $visiteur_session['nom'];
-	
+
 	//si id_abomailman est renseigne, on envoie qu'une liste
-	if($id_abomailman){
-	$valeurs['id_abomailman'] = $id_abomailman;
-	$ok=sql_getfetsel('id_abomailman','spip_abomailmans','id_abomailman ='.intval($id_abomailman).' AND desactive = 0');
+	if(intval($id_abomailman)){
+		$valeurs['id_abomailman'] = $id_abomailman;
+		$ok=sql_getfetsel('id_abomailman','spip_abomailmans','id_abomailman ='.intval($id_abomailman).' AND desactive = 0');
 	}
 	else {
 		$valeurs['listes'] = _request('listes');
-	// on verifie s'il existe des listes disponibles
-	$ok=sql_count(sql_select('id_abomailman','spip_abomailmans'));
+		// on verifie s'il existe des listes disponibles
+		$ok=sql_count(sql_select('id_abomailman','spip_abomailmans'));
 	}
 
 	if ($ok)
@@ -33,7 +33,7 @@ function formulaires_abomailman_charger_dist($id_abomailman = ""){
 
 
 function formulaires_abomailman_verifier_dist($id_abomailman = ""){
-	
+
 	//initialise le tableau des erreurs
 	$erreurs = array();
 
@@ -57,7 +57,7 @@ function formulaires_abomailman_verifier_dist($id_abomailman = ""){
 		else{
 			spip_log("Email = $email;","abomailmans");
 			//TODO
-			// stocker l'email dans un fichier ou la session, histoire de ne pas se présenter 2 fois
+			// stocker l'email dans un fichier ou la session, histoire de ne pas se presenter 2 fois
 		}
 	}
 
@@ -76,7 +76,7 @@ function formulaires_abomailman_verifier_dist($id_abomailman = ""){
 function formulaires_abomailman_traiter_dist($id_abomailman = ""){
 	// Pour l'envoi de l'email
 	include_spip('inc/abomailmans');
-	
+
 
 	$nom = _request('nom');
 	$email = _request('email');
@@ -91,33 +91,31 @@ function formulaires_abomailman_traiter_dist($id_abomailman = ""){
 	$nb_listes = 0;
 	foreach($listes as $id_abomailman) {
 		$nb_listes++;
-	
-	//on initialise l'envoi
-	// on traite chaque liste via une fonction reutilisable ailleurs
-	$traiter=abomailman_traiter_abonnement($id_abomailman,$abonnement);
-	$titre = $traiter[0];
-	$proprio_email=$traiter[1];
-	$liste_email=$traiter[2];
-	$sujet=$traiter[3];
-	$body="$nom - $email ".$traiter[4];
-	$headers=$traiter[5];
-	
-// si on veut ajouter un mail de notification ou de test
-/*
-$liste_email = array(
-	$liste_email,"verif@exemple.com"
-);
-*/
 
-		if (abomailman_mail($nom, $email, $proprio_email,$liste_email, $sujet, $body,$headers)){
-		$message_listes  .= "<li><strong>$titre</strong></li>";
+		//on initialise l'envoi
+		// on traite chaque liste via une fonction reutilisable ailleurs
+		$traiter=abomailman_traiter_abonnement($id_abomailman,$abonnement);
+		$titre = $traiter[0];
+		$proprio_email=$traiter[1];
+		$liste_email=$traiter[2];
+		$sujet=$traiter[3];
+		$body="$nom - $email ".$traiter[4];
+		$headers=$traiter[5];
+
+		// si on veut ajouter un mail de notification ou de test
+		/*
+		$liste_email = array(
+			$liste_email,"verif@exemple.com"
+		);
+		*/
+		if (abomailman_mail($nom, $email, $proprio_email,$liste_email, $sujet, $body,'',$headers)){
+			$message_listes  .= "<li><strong>$titre</strong></li>";
 		}else{
-		$message_listes .= "<li><strong>". _T('pass_erreur_probleme_technique')."</strong></li>";
-		$probleme=true;
+			$message_listes .= "<li><strong>". _T('pass_erreur_probleme_technique')."</strong></li>";
+			$probleme=true;
 		}
-		
-			}
-		 
+	}
+
 	$message_listes .= "</ul><br class='nettoyeur' />";
 
 	if($abonnement){
@@ -138,7 +136,8 @@ $liste_email = array(
 	$message .= "<p>" . _T("abomailmans:message_confirm_suite") . "</p>";
 
 	if ($probleme==false)
-	return $message;
-	else return $message_listes;
+		return $message;
+	else
+		return $message_listes;
 }
 ?>
