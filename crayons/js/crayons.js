@@ -137,7 +137,6 @@ $.fn.opencrayon = function(evt, percent) {
 				function (c) {
 					try {
 						c = $.parseJSON(c);
-//						eval('c = '+c); // $.parseJSON() refuse cause utf-8
 					} catch(e) {
 						c = {'$erreur': 'erreur de communication :' + '  ' + e.message, '$html':''};
 					}
