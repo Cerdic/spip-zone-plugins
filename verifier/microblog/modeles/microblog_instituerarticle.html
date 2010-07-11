@@ -1,0 +1,12 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+<BOUCLE_art(ARTICLES){id_article}{statut?}{tout}>
+	#SET{url,(#ID_ARTICLE|generer_url_microblog{article,'','',#STATUT|=={publie}|?{#EVAL{true}}})}
+	[(#SET{len,#VAL{120}|moins{#GET{url}|strlen}})]
+	[(#TITRE|concat{[, par (#LESAUTEURS)]}|couper{#GET{len}}|concat{' ',#GET{url}})]
+</BOUCLE_art>
