@@ -1,6 +1,6 @@
 (function($){
 /*
- *	crayons.js (c) Fil, toggg, 2006-2008 -- licence GPL
+ *	crayons.js (c) Fil, toggg, 2006-2010-- licence GPL
  */
 
 // le prototype configuration de Crayons
@@ -136,7 +136,8 @@ $.fn.opencrayon = function(evt, percent) {
 				params,
 				function (c) {
 					try {
-						eval('c = '+c); // JSON
+						c = $.parseJSON(c);
+//						eval('c = '+c); // $.parseJSON() refuse cause utf-8
 					} catch(e) {
 						c = {'$erreur': 'erreur de communication :' + '  ' + e.message, '$html':''};
 					}

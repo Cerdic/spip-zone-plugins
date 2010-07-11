@@ -17,9 +17,7 @@ define('_CRAYONS_TABLES_EXTERNES', true);
 // Autorisations non prevues par le core
 include_spip('inc/autoriser');
 
-if (include_spip('inc/json', true)) {
-	include_spip('inc/json');
-}
+include_spip('inc/json');
 
 // table spip_meta, non ; sauf quelques-uns qu'on teste autoriser(configurer)
 // Attention sur les SPIP < 11515 inc/autoriser passe seulement
@@ -422,69 +420,6 @@ function valeur_colonne_table($table, $col, $id) {
 	OR function_exists($f = $table.'_valeur_colonne_table')
 	OR $f = 'valeur_colonne_table_dist')
 		return $f($table, $col, $id);
-}
-
-/**
-    * Transform a variable into its javascript equivalent (recursive)
-    * @access private
-    * @param mixed the variable
-    * @return string js script | boolean false if error
-    */
-if (!function_exists('var2js')) {
-	function var2js($var) {
-		$asso = false;
-		switch (true) {
-			case is_null($var) :
-				return 'null';
-			case is_string($var) :
-			// saut de ligne unicode http://www.fileformat.info/info/unicode/char/2028/index.htm
-			$var = str_replace(chr(226).chr(128).chr(168), "\n", $var);
-				return '"' . str_replace('&', '\x26', addcslashes($var, "\"\\\n\r")) . '"';
-			case is_bool($var) :
-				return $var ? 'true' : 'false';
-			case is_scalar($var) :
-				return $var;
-			case is_object( $var) :
-				$var = get_object_vars($var);
-				$asso = true;
-			case is_array($var) :
-				$keys = array_keys($var);
-				$ikey = count($keys);
-				while (!$asso && $ikey--) {
-					$asso = $ikey !== $keys[$ikey];
-				}
-				$sep = '';
-				if ($asso) {
-					$ret = '{';
-					foreach ($var as $key => $elt) {
-						$ret .= $sep . '"' . $key . '":' . var2js($elt);
-						$sep = ',';
-					}
-					return $ret ."}\n";
-				} else {
-					$ret = '[';
-					foreach ($var as $elt) {
-						$ret .= $sep . var2js($elt);
-						$sep = ',';
-					}
-					return $ret ."]\n";
-				}
-		}
-		return false;
-	}
-}
-
-if (!function_exists('json_export')) {
-	function json_export($var) {
-		$var = var2js($var);
-
-		// flag indiquant qu'on est en iframe et qu'il faut proteger nos
-		// donnees dans un <textarea> ; attention $_FILES a ete vide par array_pop
-		if (defined('FILE_UPLOAD'))
-			return "<textarea>".htmlspecialchars($var)."</textarea>";
-		else
-			return $var;
-	}
 }
 
 function return_log($var) {
