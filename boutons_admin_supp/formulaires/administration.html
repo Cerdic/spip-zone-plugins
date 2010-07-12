@@ -95,88 +95,121 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	<?php
  	if($GLOBALS['auteur_session']['statut'] == '0minirezo'){
 	// Editer la rubrique en cours
-		echo("
-		<span".$cacher_le_bouton["editer_rubrique"].">
-			[<a href='ecrire/?exec=rubriques_edit&amp;id_rubrique=#ENV{id_rubrique}' class='spip-admin-boutons'>
-				<:basupp:editer:> ((#ENV{id_rubrique}))
-			</a>]
-		</span>");
-	// Editer l'article en cours
-		echo("
-		<span".$cacher_le_bouton["editer_article"].">
-			[<a href='ecrire/?exec=articles_edit&amp;id_article=#ENV{id_article}' class='spip-admin-boutons'>
-				<:basupp:editer:> ((#ENV{id_article}))
-			</a>]
-		</span>");
+		$texte=$cacher_le_bouton["editer_rubrique"];
+        echo("
+            [<span".$texte.">
+                <a href='ecrire/?exec=rubriques_edit&amp;id_rubrique=#ENV{id_rubrique}' class='spip-admin-boutons'>
+                    <:basupp:editer:> ((#ENV{id_rubrique}))
+                </a>
+            </span>]
+        ");
+	// Editer article en cours
+		$texte=$cacher_le_bouton["editer_article"];
+        echo("
+            [<span".$texte.">
+                <a href='ecrire/?exec=articles_edit&amp;id_article=#ENV{id_article}' class='spip-admin-boutons'>
+                    <:basupp:editer:> ((#ENV{id_article}))
+                </a>
+            </span>]
+        ");
 	// Editer la breve en cours
+		$texte=$cacher_le_bouton["editer_breve"];
 		echo("
-		<span".$cacher_le_bouton["editer_breve"].">
-			[<a href='ecrire/?exec=breves_edit&amp;id_breve=#ENV{id_breve}' class='spip-admin-boutons'>
-				<:basupp:editer:> ((#ENV{id_breve}))
-			</a>]
-		</span>");
-	// Editer l'auteur en cours
+            [<span".$texte.">
+                <a href='ecrire/?exec=breves_edit&amp;id_breve=#ENV{id_breve}' class='spip-admin-boutons'>
+                    <:basupp:editer:> ((#ENV{id_breve}))
+                </a>
+            </span>]
+        ");
+	// Editer auteur en cours
+		$texte=$cacher_le_bouton["editer_auteur"];
 		echo("
-		<span".$cacher_le_bouton["editer_auteur"].">
-			[<a href='". parametre_url('[(#ENV{voir_auteur})]', 'edit', 'oui') . "' class='spip-admin-boutons'>
-				<:basupp:editer:> ((#ENV{id_auteur}))
-			</a>]
-		</span>");
+            [<span".$texte.">
+                <a href='". parametre_url('[(#ENV{voir_auteur})]', 'edit', 'oui') . "' class='spip-admin-boutons'>
+                    <:basupp:editer:> ((#ENV{id_auteur}))
+                </a>
+            </span>]
+        ");
 	// Modifier la breve en cours
+   		$texte = $cacher_le_bouton["modifier_breve"];
 		echo("
-		<span".$cacher_le_bouton["modifier_breve"].">
-			[<a href='[(#ENV{voir_breve})]' class='spip-admin-boutons'>
-				<:admin_modifier_breve:> ((#ENV{id_breve}))
-			</a>]
-		</span>");
+            [<span".$texte.">
+                <a href='[(#ENV{voir_breve})]' class='spip-admin-boutons'>
+                    <:admin_modifier_breve:> ((#ENV{id_breve}))
+                </a>
+            </span>]
+        ");
 	// Modifier la rubrique en cours
+   		$texte = $cacher_le_bouton["modifier_rubrique"];
 		echo("
-		<span".$cacher_le_bouton["modifier_rubrique"].">
-			[<a href='[(#ENV{voir_rubrique})]' class='spip-admin-boutons'>
-				<:admin_modifier_rubrique:> ((#ENV{id_rubrique}))
-			</a>]
-		</span>");
-	// Modifier l'article en cours
+            [<span".$texte.">
+                <a href='[(#ENV{voir_rubrique})]' class='spip-admin-boutons'>
+                    <:admin_modifier_rubrique:> ((#ENV{id_rubrique}))
+                </a>
+            </span>]
+        ");
+	// Modifier article en cours
+   		$texte = $cacher_le_bouton["modifier_article"];
 		echo("
-		<span".$cacher_le_bouton["modifier_article"].">
-			[<a href='[(#ENV{voir_article})]' class='spip-admin-boutons'>
-				<:admin_modifier_article:> ((#ENV{id_article}))
-			</a>]
-		</span>");
+            [<span".$texte.">
+                <a href='[(#ENV{voir_article})]' class='spip-admin-boutons'>
+                    <:admin_modifier_article:> ((#ENV{id_article}))
+                </a>
+            </span>]
+        ");
 	// Modifier et editer le mot-clef en cours
+   		$texte = $cacher_le_bouton["modifier_mot"];
 		echo("
-		<span".$cacher_le_bouton["modifier_mot"].">
-			[<a href='[(#ENV{voir_mot})]' class='spip-admin-boutons'>
-				<:admin_modifier_mot:> ((#ENV{id_mot}))
-			</a>]
-		</span>");
+            [<span".$texte.">
+                <a href='[(#ENV{voir_mot})]' class='spip-admin-boutons'>
+                    <:admin_modifier_mot:> ((#ENV{id_mot}))
+                </a>
+            </span>]
+         ");
 	// Modifier le site reference en cours
+   		$texte = $cacher_le_bouton["modifier_site"];
 		echo("
-		<span".$cacher_le_bouton["modifier_site"].">
-			[<a href='[(#ENV{voir_site})]' class='spip-admin-boutons'>
-				<:icone_modifier_site:> ((#ENV{id_syndic}))
-			</a>]
-		</span>");
-	// Modifier l'auteur en cours
+            [<span".$texte.">
+                <a href='[(#ENV{voir_site})]' class='spip-admin-boutons'>
+                    <:icone_modifier_site:> ((#ENV{id_syndic}))
+                </a>
+            </span>]
+         ");
+	// Modifier auteur en cours
+   		$texte = $cacher_le_bouton["modifier_auteur"];
 		echo("
-		<span".$cacher_le_bouton["modifier_auteur"].">
-			[<a href='[(#ENV{voir_auteur})]' class='spip-admin-boutons'>
-				<:admin_modifier_auteur:> ((#ENV{id_auteur}))
-			</a>]</span>");
+            [<span".$texte.">
+                <a href='[(#ENV{voir_auteur})]' class='spip-admin-boutons'>
+                    <:admin_modifier_auteur:> ((#ENV{id_auteur}))
+                </a>
+            </span>]
+        ");
 	}
+
+	 // Bouton de previsualisation 
+   	 	$texte = $cacher_le_bouton["previsualisation"];
+		echo("
+            [<span".$texte.">
+                <a href='(#ENV{preview})' class='spip-admin-boutons'>
+                    <:previsualisation:>
+                </a>
+            </span>]
+          ");
+
+	 // Acces aux statistiques
+   	 	$texte = $cacher_le_bouton["statistiques"];
+		echo("
+            [<span".$texte.">
+                <a href='(#ENV{statistiques})' class='spip-admin-boutons'>
+					[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]
+                </a>
+            </span>]
+          ");
 	?>
 
-	[(#REM) Bouton de previsualisation ]
-	<span<?php echo $cacher_le_bouton["previsualisation"]?>>
-		[<a href="(#ENV{preview})" class="spip-admin-boutons">
-			<:previsualisation:>
-		</a>]
-	</span>
-
-	[(#REM) Acces aux statistiques ]
-	<span<?php echo $cacher_le_bouton["statistiques"]?>>
-		[<a href='(#ENV{statistiques})' class='spip-admin-boutons'>
-			[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]
+	[(#REM)  ]
+	<span<?php echo $cacher_le_bouton[""]?>>
+		[<a href='(#ENV{})' class='spip-admin-boutons'>
 		</a>]
 	</span>
 
