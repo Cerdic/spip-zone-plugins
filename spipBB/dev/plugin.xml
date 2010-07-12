@@ -1,5 +1,6 @@
 <plugin>
-	<version>0.5.4.0</version>
+	<version>0.5.6</version>
+	<version_base>1.0</version_base>
 	<nom>
 		<multi>
 			[en]SpipBB: Management of SPIP 2.1 forums
@@ -130,6 +131,11 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 	<options>spipbb_options.php</options>
 	<install>base/spipbb_upgrade.php</install>
 	<prefix>spipbb</prefix>
+	<bouton id="spipbb" parent="forum">
+		<icone>img_pack/spipbb-24.png</icone>
+		<titre>spipbb:titre_spipbb</titre>	
+		<url>spipbb_admin</url>	
+	</bouton>
 	<pipeline>
 		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
 		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
@@ -140,20 +146,7 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouter_boutons</action>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-		<pipeline>
-		<nom>header_prive</nom>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>taches_generales_cron</nom>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<!-- chryjs 16/10/9 declarations des tables façon SPIP 2.0 -->
@@ -171,6 +164,10 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 	</pipeline>
 	<pipeline>
 		<nom>styliser</nom>
+		<inclure>spipbb_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
 		<inclure>spipbb_fonctions.php</inclure>
 	</pipeline>
 	<!-- chargement des notifications facon spipbb -->

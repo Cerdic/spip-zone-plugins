@@ -20,44 +20,6 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#
-# bouton interface spip
-#
-function spipbb_ajouter_boutons($boutons_admin) {
-	// si on est admin ou admin restreint
-	if ($GLOBALS['connect_statut'] == "0minirezo") {
-		// on voit le bouton dans la barre "statistiques"
-		$boutons_admin['forum']->sousmenu["spipbb_admin"]= new Bouton(
-		"../"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-24.png",  // icone
-		_T('spipbb:titre_spipbb')	// titre
-		);
-## h. un seul bouton suffit !!
-		/*
-		$boutons_admin['configuration']->sousmenu["spipbb_admin_configuration"]= new Bouton(
-		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
-		_T('spipbb:admin_forums_configuration')	// titre
-		);
-		*/
-	}
-	return $boutons_admin;
-}
-
-#
-# js + css prive
-#
-function spipbb_header_prive($flux) {
-	$exec = _request('exec');
-	if(strpos($exec, '^(spipbb_).*')!==false) { 
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SPIPBB.'img_pack/spipbb_styles.css" />'."\n";
-	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_vueavatar.js"></script>'."\n";
-	}
-	if($exec=="spipbb_formpost") {
-	$flux.='<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_js_formpost.js"></script>'."\n";
-	}
-	return $flux;
-}
-
 #
 # bouton interface spip col. droite sur exec/naviguer (rubrique)
 #
@@ -65,38 +27,29 @@ function spipbb_affiche_droite($flux)
 {
 	// [fr] Peut etre ajouter un controle d acces
 	// [en] Todo : maybe add access control
-
-	if ( ($flux['args']['exec']=='naviguer') AND (!empty($flux['args']['id_rubrique'])) )
-	{ // AND (!empty($GLOBALS['meta']['spipbb']))
+	if ( ($flux['args']['exec']=='naviguer') AND (intval($flux['args']['id_rubrique']) > 0)  )
+	{
 		include_spip('inc/spipbb_util'); // pour spipbb_is_configured
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
 		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
-		if ( !spipbb_is_configured()
-			OR ($GLOBALS['spipbb']['configure']!='oui')
-			OR (empty($GLOBALS['spipbb']['id_secteur'])) ) {
+		if ((lire_config('spipbb/activer_spipbb', '') != 'on')
+			OR (intval(lire_config('spipbb/secteur_spipbb', '')) < 0)) {
 		// [fr] configuration pas terminee -> lien vers la config
 			$url_lien = generer_url_ecrire('spipbb_configuration',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
-			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" ;
-			$flux['data'] .= _T('spipbb:admin_titre') . " :</b>\n";
-			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
-			$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
-			$flux['data'] .= "<img src='"._DIR_PLUGIN_SPIPBB ."img_pack/spipbb-24.png' width='24' alt='";
-			$flux['data'] .= _T('spipbb:admin_titre') . "' /></span></a></td>\n" ;
-			$flux['data'] .= "<td class='cellule-h-lien'><a href='$url_lien' class='cellule-h'>" ;
-			$flux['data'] .= _T('spipbb:config_spipbb') . "</a></td></tr></table>\n</div>\n" ;
+			$flux['data'] .= "<div style='font-size: x-small'><h3>" . _T('spipbb:admin_titre') . " :</h3>\n";
+			$flux['data'] .= "<img src='".chemin('img_pack/spipbb-24.png')."' width='24' alt='"._T('spipbb:admin_surtitre')."' />";
+			$flux['data'] .= "<a href='$url_lien' style='font-size: 1.2em;'>"._T('spipbb:config_spipbb')."</a>";
+			$flux['data'] .= "</div>";
 			$flux['data'] .= fin_cadre_relief(true);
-		} elseif (is_array($r) AND ($r['id_secteur']!=$GLOBALS['meta']['spipbb']['id_secteur'])) {
+		} elseif (is_array($r) AND ($r['id_secteur']!=lire_config('spipbb/secteur_spipbb'))) {
 		// [fr] configuration Ok et on est dans la rubrique forum
 			$url_lien = generer_url_ecrire('spipbb_admin',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
-			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('spipbb:admin_titre') . " :</b>\n";
-			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
-			$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
-			$flux['data'] .= "<img src='"._DIR_PLUGIN_SPIPBB ."img_pack/spipbb-24.png' width='24' alt='";
-			$flux['data'] .= _T('spipbb:admin_surtitre') . "' /></span></a></td>\n" ;
-			$flux['data'] .= "<td class='cellule-h-lien'><a href='$url_lien' class='cellule-h'>" ;
-			$flux['data'] .= _T('spipbb:admin_sous_titre') . "</a></td></tr></table>\n</div>\n" ;
+			$flux['data'] .= "<div style='font-size: x-small'><h3>" . _T('spipbb:admin_titre') . " :</h3>\n";
+			$flux['data'] .= "<img src='".chemin('img_pack/spipbb-24.png')."' width='24' alt='"._T('spipbb:admin_surtitre')."' />";
+			$flux['data'] .= "<a href='$url_lien' style='font-size: 1.2em;'>"._T('spipbb:admin_sous_titre')."</a>";
+			$flux['data'] .= "</div>";
 			$flux['data'] .= fin_cadre_relief(true);
 		}
 	}
@@ -127,15 +80,5 @@ function spipbb_taches_generales_cron($taches_generales){
 	$taches_generales['statvisites'] = _SPIPBB_DELAIS_CRON ;
 	return $taches_generales;
 } // spipbb_taches_generales_cron
-
-#
-# Onglet dans la page de configuration
-#
-function spipbb_ajouter_onglets($flux){
-	// si on est admin...
-	if ($flux['args']=='configuration' && spipbb_autoriser())
-		$flux['data']['spipbb']= new Bouton(find_in_path('img_pack/spipbb-24.png'), _T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'));
-	return $flux;
-}
 
 ?>

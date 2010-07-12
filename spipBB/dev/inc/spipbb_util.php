@@ -34,34 +34,32 @@ spipbb_log('included',2,__FILE__);
 // [en] Checks that spipbb is configured and uptodate
 //----------------------------------------------------------------------------
 function spipbb_is_configured() {
-	if (defined('SPIPBB_SPIP19200')) return false; // Pas la bonne version du plugin
-	# pas de spipbb
-	if (!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=array();
-	if (!isset($GLOBALS['meta']['spipbb'])) return false;
-	if(!$GLOBALS['spipbb']) $GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']);
-	# desactivation de spipbb
-	if($GLOBALS['spipbb']['configure']=='non') return false;
-	# prem. vers. spipbb chrys -> maj
-	if(empty($GLOBALS['spipbb']['version'])) return false;
-	# les metas suivant DOIVENT etre =='oui' pour le minimum de config
-	if($GLOBALS['spipbb']['config_id_secteur']=='non'
-		OR $GLOBALS['spipbb']['config_groupe_mots']=='non'
-		OR $GLOBALS['spipbb']['config_mot_cles']=='non') return false;
-	# nouvelle version -> maj
-	if (!isset($GLOBALS['spipbb_plug_version']))
-	{
-        if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
-            $get_infos = charger_fonction('get_infos','plugins');
-            $infos = $get_infos(_DIR_PLUGIN_SPIPBB);
-        }
-        else {
-            $infos = plugin_get_infos(_DIR_PLUGIN_SPIPBB);
-        }
-		$GLOBALS['spipbb_plug_version'] = $infos['version'];
-	}
-	if(version_compare($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version'],'<')) return false;
-	# sinon
-	return true;
+	$etat = true;
+	// La, on dit direct que c'est pas bon
+	if (lire_config('spipbb/activer_spipbb', '') != 'on')
+		$etat = false;
+	
+	// Verifier si le secteur est defini
+	if (!(lire_config('spipbb/secteur_spipbb', '') > 0))
+		$etat = false;
+		
+	// Verifier si le groupe est defini
+	if (!(lire_config('spipbb/groupe_spipbb', '') > 0))
+		$etat = false;
+	
+	// Verifier si ferme est defini
+	if (!(lire_config('spipbb/mot_ferme', '') > 0))
+		$etat = false;
+		
+	// Verifier si annonce est defini
+	if (!(lire_config('spipbb/mot_annonce', '') > 0))
+		$etat = false;
+		
+	// Verifier si postit est defini
+	if (!(lire_config('spipbb/mot_postit', '') > 0))
+		$etat = false;
+spip_log($etat, 'spipbb_test');
+	return $etat;
 } // spipbb_is_configured
 
 
