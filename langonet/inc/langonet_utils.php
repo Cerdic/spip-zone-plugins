@@ -8,7 +8,7 @@
  * @return array
  */
  
-// $verification  => type de verification demandee ('definition' / 'utilisation')
+// $verification  => type de verification demandee ('definition' / 'utilisation' / 'fonction_l')
 // $mode  => mode de calul de la liste:
 // 				- 'recent' pour la liste des derniers logs de chaque langue
 // 				- 'tous' pour la liste de tous les logs
@@ -16,11 +16,17 @@ function langonet_lister_fichiers_log($verification, $mode='recent') {
 
 	// On cherche le dernier fichier de log de chaque fichier de langue
 	$liste_tous = array();
-	$logs = preg_files(_DIR_TMP . "langonet/verification/$verification", '[^/]*_' . $verification[0] .'_[^/]*.log$');
+	$logs = preg_files(_DIR_TMP . "langonet/verification/$verification", '[^/]*[_%]' . $verification[0] .'_[^/]*.log$');
 	foreach ($logs as $_fichier) {
-		preg_match(',([^/]*)_' . $verification[0] .'_[^/]*.log$,i', $_fichier, $matches);
+		preg_match(',([^/]*)[_%]' . $verification[0] .'_[^/]*.log$,i', $_fichier, $matches);
 		if ($matches[1]) {
-			$cle = ($verification != 'fonction_l') ? $matches[1] : str_replace("_", "/", $matches[1]) . "/";
+			if ($verification != 'fonction_l') {
+				$cle = $matches[1];
+			}
+			else {
+				preg_match(",[^%]+$,i", $matches[1], $retour);
+				$cle = $retour[0] . "/";
+			}
 			$liste_tous[$cle][] = $_fichier;
 		}
 	}

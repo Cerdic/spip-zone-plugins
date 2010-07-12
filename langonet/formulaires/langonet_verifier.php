@@ -327,7 +327,7 @@ function afficher_lignes($type, $tableau, $extra=array()) {
  */
 function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	// Fichier de log dans tmp/langonet/
-	$log_prefixe = ($verification == 'fonction_l') ? str_replace("/", "_", $resultats['ou_fichier']) : basename($resultats['langue'], '.php') . '_';
+	$log_prefixe = ($verification == 'fonction_l') ? str_replace("/", "%", $resultats['ou_fichier']) : basename($resultats['langue'], '.php') . '_';
 	$log_nom = $log_prefixe . $verification[0] . '_' . date("Ymd_His").'.log';
 	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
 	$log_rep = sous_repertoire($log_rep, "verification");
