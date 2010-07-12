@@ -1,7 +1,9 @@
 <?php
 // Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
-// -- pour les fichiers .html et .php
-define("_LANGONET_TROUVER_ITEM_HP", ",(?:<:|_[LTU]\(['\"])(?:([a-z0-9_]+):)?((?:\\$|[\"\']\s*\.\s*\\$*)?[a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");
+// -- pour les fichiers .html et .php sans detection de _L
+define("_LANGONET_TROUVER_ITEM_HP", ",(?:<:|_[TU]\(['\"])(?:([a-z0-9_]+):)?((?:\\$|[\"\']\s*\.\s*\\$*)?[a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");
+// -- pour les fichiers .php et la detection de _L
+define("_LANGONET_TROUVER_FONCTION_L_P", "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm");
 // -- pour les fichiers .xml
 define("_LANGONET_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
 
@@ -97,7 +99,7 @@ function creer_selects($sel_l='0',$sel_d='0') {
 			// on recupere tous les fichiers de langue directement places
 			// dans lang/ sans parcourir d'eventuels sous-repertoires
 			$opt_lang = '';
-			foreach ($fic_lang = preg_files($reel_dir . '/lang/', '.php$', 250, false) as $le_module) {
+			foreach ($fic_lang = preg_files($reel_dir . '/lang/', '_[a-z]{2,3}\.php$', 250, false) as $le_module) {
 				preg_match_all("%_(\w{2,3})(_\w{2,3})?(_\w{2,4})?$%im", str_replace('.php', '', $le_module), $matches);
 				$module = str_replace($matches[0][0].'.php', '', $le_module);
 				$module = str_replace($reel_dir . '/lang/', '', $module);

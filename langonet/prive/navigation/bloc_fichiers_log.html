@@ -3,7 +3,10 @@
 	[(#EVAL{true}|debut_block_depliable)]
 	<div class="cadre_padding">
 	<B_logs>
-		[<p>(#ENV{verification}|=={definition}|?{<:langonet:info_bloc_logs_definition:>, <:langonet:info_bloc_logs_utilisation:>})</p>]
+		[<p>(#ENV{verification}|=={definition}|?{
+			<:langonet:info_bloc_logs_definition:>, 
+			[(#ENV{verification}|=={utilisation}|?{<:langonet:info_bloc_logs_utilisation:>,<:langonet:info_bloc_logs_fonction_l:>})]
+		})</p>]
 		<ul>
 	<BOUCLE_logs(POUR){tableau #ENV{fichiers_log}}>
 			[(#SET{bulle, #VALEUR|langonet_cree_bulle_telecharger{log}})]

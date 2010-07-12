@@ -23,8 +23,12 @@
 								<input type="radio" value="utilisation" id="verification_utilisation" class="radio" name="verification" [(#ENV{verification, definition}|=={utilisation}|oui) checked="checked"] />
 								<label for="verification_utilisation"><:langonet:label_verification_utilisation:></label>
 							</div>
+							<div class="choix">
+								<input type="radio" value="fonction_l" id="verification_fonction_l" class="radio" name="verification" [(#ENV{verification, definition}|=={fonction_l}|oui) checked="checked"] />
+								<label for="verification_fonction_l"><:langonet:label_verification_fonction_l:></label>
+							</div>
 						</li>
-						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]" id="option_fichier_langue">
 							<label for="fichier_langue"><:langonet:label_fichier_verifie:></label>
 							<p class="explication"><:langonet:info_fichier_verifie:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
@@ -57,3 +61,22 @@
 	</div></form>
 	]
 </div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{verification, definition}|=={fonction_l}|oui)
+			jQuery("#option_fichier_langue").hide();
+		]
+		jQuery("input[name='verification']").change(function() {
+			if (jQuery("input[name='verification']:checked").val() == 'fonction_l') {
+				jQuery("#option_fichier_langue").hide();
+			}
+			else {
+				jQuery("#option_fichier_langue").show();
+			}
+			jQuery(this).blur();
+		});	
+	});
+//]]>
+</script>
