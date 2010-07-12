@@ -17,7 +17,7 @@ function balise_PIWIK_stat($args, $filtres) {
 }
 function balise_PIWIK_dyn() {
 	global $visiteur_session;
-	$config = lire_config('piwik');
+	$config = lire_config('piwik',array());
 	if(!empty($config['urlpiwik']) && is_numeric($config['idpiwik']) && ($config['mode_insertion'] == 'balise')){
 		if(in_array($visiteur_session['statut'],lire_config('piwik/restreindre_statut_public',array()))||in_array($visiteur_session['id_auteur'],lire_config('piwik/restreindre_auteurs_public',array()))){
 			return;

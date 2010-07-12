@@ -42,9 +42,9 @@ function piwik_header_prive($flux){
  * @return
  */
 function piwik_head_js($options=array()){
-	$config = lire_config('piwik');
+	$config = lire_config('piwik',array());
 	$id_piwik = $config['idpiwik'];
-	$url_piwik = $config['piwik/urlpiwik'];
+	$url_piwik = $config['urlpiwik'];
 	$afficher_js = true;
 
 	$ret = '';

@@ -6,10 +6,10 @@
 	jsb, kent1
 	</auteur>
 	<version>
-	0.4.1
+	0.4.2
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 	Ajoute le script piwik (analyseur de trafic web) dans l'espace public en ins&eacute;rant le code perso de piwik dans l'espace priv&eacute;
