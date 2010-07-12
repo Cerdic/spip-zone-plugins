@@ -26,19 +26,21 @@
 	#SET{vorbis,''}
 	#SET{formats_possibles,#ARRAY}
 	#SET{presets_qualite,#ARRAY}
-	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{ogv}}|oui}>
-		[(#CONFIG{spipmotion_ffmpeg2theora/version}|>{0}|oui)
-			[(#SAISIE{selection,encodeur_#ENV{valeur},
-				label=<:spipmotion:label_encodeur:>,
-				explication=<:spipmotion:explication_encodeur:>,
-				defaut=ffmpeg2theora,
-				cacher_option_intro=oui,
-				datas=#ARRAY{
-					ffmpeg2theora,ffmpeg2theora,
-					ffmpeg,ffmpeg}})]
+	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{ogv}|push{webm}}|oui}>
+		[(#ENV{valeur}|=={webm}|non)
+			[(#CONFIG{spipmotion_ffmpeg2theora/version}|>{0}|oui)
+				[(#SAISIE{selection,encodeur_#ENV{valeur},
+					label=<:spipmotion:label_encodeur:>,
+					explication=<:spipmotion:explication_encodeur:>,
+					defaut=ffmpeg2theora,
+					cacher_option_intro=oui,
+					datas=#ARRAY{
+						ffmpeg2theora,ffmpeg2theora,
+						ffmpeg,ffmpeg}})]
+			]
+			#SET{vcodecs_possibles,#ARRAY|push{libtheora}|push{libdirac}}
 		]
 		#SET{acodecs_possibles,#ARRAY|push{vorbis}|push{libvorbis}}
-		#SET{vcodecs_possibles,#ARRAY|push{libtheora}|push{libdirac}}
 		#SET{vorbis,oui}
 		#SET{2_passes,oui}
 	</BOUCLE_ogg>
@@ -97,12 +99,13 @@
 				cacher_option_intro=oui,
 				datas=#GET{presets_qualite}})]
 		]
-		[(#GET{2_passes}|=={oui}|oui)
-			[(#SAISIE{selection,passes_#ENV{valeur},
-				label=<:spipmotion:label_passes_encodage:>,
-				cacher_option_intro=oui,
-				datas=#ARRAY{1,<:spipmotion:label_passes_1_encodage:>,2,<:spipmotion:label_passes_2_encodage:>}})]
-		]
+	]
+
+	[(#GET{2_passes}|=={oui}|oui)
+		[(#SAISIE{selection,passes_#ENV{valeur},
+			label=<:spipmotion:label_passes_encodage:>,
+			cacher_option_intro=oui,
+			datas=#ARRAY{1,<:spipmotion:label_passes_1_encodage:>,2,<:spipmotion:label_passes_2_encodage:>}})]
 	]
 
 	[(#GET{acodecs}|count|>{0}|oui)
