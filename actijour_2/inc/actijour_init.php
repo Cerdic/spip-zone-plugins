@@ -15,9 +15,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 # lire version plugin.xml
-#
-if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
-$infos=plugin_get_infos(_DIR_PLUGIN_ACTIJOUR);
+# la fonction plugin_get_infos n'exsite plus à partir de spip 2.1, on teste donc la version de spip pour savoir quelle fonction utiliser 
+
+if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+   $get_infos = charger_fonction('get_infos','plugins');
+   $infos = $get_infos(_DIR_PLUGIN_ACTIJOUR);
+}
+else {
+   $infos = plugin_get_infos(_DIR_PLUGIN_ACTIJOUR);
+}
 $GLOBALS['actijour_plug_version'] = $infos['version'];
 
 #
