@@ -117,7 +117,9 @@ function nospam_formulaire_verifier($flux){
 		}
 	}
 	if ($form=='signature'){
-		if (!isset($flux['data']['message'])){
+		$id_article = $flux['args']['args'][0];
+		$row = sql_fetsel('*', 'spip_petitions', "id_article=".intval($id_article));
+		if ((!isset($flux['data']['message'])) && ($row['message']  == "oui")){
 			include_spip("inc/nospam");
 			include_spip("inc/texte");
 			// regarder si il y a du contenu en dehors des liens !
