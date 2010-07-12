@@ -95,7 +95,7 @@ function derniere_maj_articles($date) {
 function nombre_posts_forum($date) {
 	$q=sql_select("id_forum 
 					FROM spip_forum 
-					WHERE DATE_FORMAT(date_heure,'%Y-%m-%d') = '$date' AND statut !='perso");
+					WHERE DATE_FORMAT(date_heure,'%Y-%m-%d') = '$date' AND statut !='perso'");
 	return $nbr=sql_count($q);
 }
 
