@@ -1,11 +1,10 @@
 <?php
-/**
-* saveauto : plugin de sauvegarde automatique de la base de donnees de SPIP
-*
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-*
-**/
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/saveauto/2.1/lang/
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
 	'attention' => 'Attention :',
 
@@ -38,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_obsolete' => 'D&eacute;termine &agrave; partir de combien de jours une archive est consid&eacute;r&eacute;e comme obsol&egrave;te et automatiquement supprim&eacute;e du serveur.
 	 								 		Mettez -1 pour d&eacute;sactiver cette fonctionnalit&eacute;',
 	'help_prefixe' => 'Optionnel : mettre un pr&eacute;fixe au nom du fichier de sauvegarde',
+	'help_rep' => 'R&eacute;pertoire o&ugrave; stocker les fichiers (chemin &agrave; partir de la <strong>racine</strong> du SPIP, tmp/data/ par ex). <strong>DOIT</strong> se terminer par un /.',
 	'help_restauration' => '<strong>Attention !!!</strong> les sauvegardes r&eacute;alis&eacute;es ne sont <strong>pas au format de celles de SPIP</strong> :
    										 		Inutile d\'essayer de les utiliser avec l\'outil d\'administration de Spip.<br /><br />
 													Pour toute restauration il faut utiliser l\'interface <strong>phpmyadmin</strong> de votre
@@ -47,7 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 													Les sauvegardes <strong>xxxx.gz</strong> ou <strong>xxx.sql</strong> contiennent un fichier au format SQL avec les commandes
 													permettant d\'<strong>effacer</strong> les tables existantes du SPIP et de les <strong>remplacer</strong> par les
 													donn&eacute;es archiv&eacute;es. Les donn&eacute;es <strong>plus r&eacute;centes</strong> que celles de la sauvegarde seront donc <strong>PERDUES</strong>!',
-	'help_rep' => 'R&eacute;pertoire o&ugrave; stocker les fichiers (chemin &agrave; partir de la <strong>racine</strong> du SPIP, tmp/data/ par ex). <strong>DOIT</strong> se terminer par un /.',
 	'help_titre' => 'Cette page vous permet de configurer les options de sauvegarde automatique de la base.',
 
 	// I
@@ -71,8 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_adresse' => '&Agrave; l\'adresse : ',
 	'label_compression_gz' => 'Zipper le fichier de sauvegarde : ',
-	'label_donnees_ignorees' => 'Donn&eacute;es ignor&eacute;es : ',
 	'label_donnees' => 'Donn&eacute;es des tables : ',
+	'label_donnees_ignorees' => 'Donn&eacute;es ignor&eacute;es : ',
 	'label_frequence' => 'Fr&eacute;quence de la sauvegarde : tous les ',
 	'label_mail_max_size' => 'Taille maximale des fichiers &agrave; attacher aux mails (en Mo) :',
 	'label_message_succes' => 'Affiche un message de succ&egrave;s si sauvegarde OK : ',
@@ -102,8 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'valeur_jours' => ' jours',
-	'valeur_oui' => 'oui',
 	'valeur_non' => 'non',
-
+	'valeur_oui' => 'oui'
 );
+
 ?>
