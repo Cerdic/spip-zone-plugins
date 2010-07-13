@@ -72,12 +72,12 @@ function langonet_lister_fichiers_lang() {
  * @return array
  */
  
-function langonet_cree_bulle_telecharger($fichier, $type='log') {
+function langonet_creer_bulle_fichier($fichier, $type='log', $action='telecharger') {
 
 	// Date du fichier formatee
 	$date = affdate_heure(date('Y-m-d H:i:s', filemtime($fichier)), 'Y-m-d H:i:s');
 	// Bulle d'information suivant le type de fichier (log ou langue)
-	$bulle = _T('langonet:bulle_telecharger_fichier_'.$type, array('date' => $date));
+	$bulle = _T('langonet:bulle_' . $action . '_fichier_' . $type, array('date' => $date));
 
 	return $bulle;
 }

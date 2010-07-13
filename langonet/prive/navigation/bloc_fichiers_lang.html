@@ -6,7 +6,7 @@
 		<p><:langonet:info_bloc_langues_generees:></p>
 		<ul style="margin: 5px 0 5px; padding-left: 20px;">
 	<BOUCLE_logs(POUR){tableau #ENV{fichiers_lang}}>
-			[(#SET{bulle, #VALEUR|langonet_cree_bulle_telecharger{lang}})]
+			[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{lang, telecharger}})]
 			[<li>(#BOUTON_ACTION{#CLE, #URL_ACTION_AUTEUR{langonet_telecharger,#VALEUR}, '', '', #GET{bulle}})</li>]
 	</BOUCLE_logs>
 		</ul>
