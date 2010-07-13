@@ -60,15 +60,16 @@ function calculer_critere_suivant_precedent_dist($idb, &$boucles, $crit, $type) 
 	// ajouter la cle primaire dans le select
 	// sauf si pas de primaire, ou si primaire composee
 	// dans ce cas, on ne sait pas gerer une pagination indirecte
-#
-# A GARDER ? je sais pas à quoi ça sert...
-#
+	// : il faut id_xx dans le select pour la fonction quete_position_primary()
 	$t = $boucle->id_table . '.' . $primary;
 	if ($boucle->primary
 		AND !preg_match('/[,\s]/',$primary)
-		AND !in_array($t, $boucle->select))
+		AND !in_array($t, $boucle->select)) {
 	  $boucle->select[]= $t;
+	}
 
+	// forcer le compilo à ne pas prendre en static a cause du $where fluctuant
+	$boucle->where[]= array("'='","'1'","sql_quote(1)");
 	  
 }
 
@@ -77,13 +78,17 @@ function calculer_critere_suivant_precedent_dist($idb, &$boucles, $crit, $type) 
 function quete_position_primary($primary, $valeur, $trouver, $res, $serveur=''){
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
-	if (!$primary OR preg_match('/[,\s]/',$primary))
+	spip_log('quete_position_primary','csp');
+	spip_log("$primary = $valeur * $trouver ..." ,'csp');
+	if (!$primary OR preg_match('/[,\s]/', $primary))
 		return false;
 
 	$pos = 0;
 	while ($row = sql_fetch($res, $serveur) AND $row[$primary]!=$valeur){
+		spip_log("$pos = $row[$primary] * $valeur ..." ,'csp');
 		$pos++;
 	}
+	spip_log("$pos = $row[$primary] * $valeur ..." ,'csp');
 	// si on a pas trouve
 	if ($row[$primary]!=$valeur)
 		return false;
