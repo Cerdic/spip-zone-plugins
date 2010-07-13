@@ -10,10 +10,12 @@
 		<ul style="margin: 5px 0 5px; padding-left: 20px;">
 	<BOUCLE_logs(POUR){tableau #ENV{fichiers_log}}>
 			[(#SET{bulle, #VALEUR|langonet_cree_bulle_telecharger{log}})]
-			[(#ENV{mode, telechargement}|=={telechargement}|?{
-				[<li>(#BOUTON_ACTION{#CLE, #URL_ACTION_AUTEUR{langonet_telecharger,#VALEUR}, '', '', #GET{bulle}})</li>],
-				[<li><a href="#URL_ACTION_AUTEUR{langonet_afficher,#VALEUR}" class="mediabox" title="#GET{bulle}">(#CLE)</a></li>]
-			})]
+			[<li>
+				(#BOUTON_ACTION{#CLE, #URL_ACTION_AUTEUR{langonet_telecharger,#VALEUR}, '', '', #GET{bulle}})
+				[(#PLUGIN{MEDIABOX}|oui)
+					<span style="float: right;"><a href="#URL_ACTION_AUTEUR{langonet_afficher,#VALEUR}" class="mediabox" title="#GET{bulle}"><img width="12" heigh="12" src="#CHEMIN{themes/spip/images/afficher.png}" /></a></span>
+				]
+			</li>]
 	</BOUCLE_logs>
 		</ul>
 	</B_logs>
