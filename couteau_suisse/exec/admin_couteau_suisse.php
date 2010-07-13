@@ -145,7 +145,12 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	if(!strlen($dir)) $dir = 'couteau_suisse';
 	if(!strlen($bt_dir)) $bt_dir = 'barre_typo_v2';
 	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
-	$t = $get_infos($dir, false, constant($dir_type)); $cs_version_base = $t['version_base']; $cs_version = $t['version'];
+	if (isset($dir_type)) {
+		$t = $get_infos($dir, false, constant($dir_type));
+	} else {
+		$t = $get_infos($dir);
+	}
+	$cs_version_base = $t['version_base']; $cs_version = $t['version'];
 	// mises a jour eventuelles de la base
 	installe_un_plugin($dir, $t, $dir_type);
 	unset($t);
