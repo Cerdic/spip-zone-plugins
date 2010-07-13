@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Critères Suivant / Précédent</nom>
+	
+	<version>1.0.0</version>
+	
+	<etat>test</etat>
+
+	<description>
+	Ajoute des critères de boucles {suivant} et {precedent}
+	</description>
+	
+	<auteur>Matthieu Marcillaud</auteur>
+	<licence>GNU/GPL</licence>
+	
+	<prefix>csp</prefix>
+	
+	<fonctions>public/csp_criteres.php</fonctions>
+	
+	<necessite id="SPIP" version="[2.1;]" />	
+</plugin>

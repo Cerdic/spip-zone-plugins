@@ -1,0 +1,98 @@
+
+<BOUCLE_article_principal(ARTICLES){id_article ?}{par id_article}{0,1}>
+<h1>Critere {suivant}{par id_article}</h1>
+
+<ul>
+	<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+		<B_article_suivant>
+		<ul>
+		<BOUCLE_article_suivant(ARTICLES){suivant}{par id_article}>
+			<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+				<B_article_encore_suivant>
+				<ul>
+				<BOUCLE_article_encore_suivant(ARTICLES){suivant}{par id_article}>
+					<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL</li>
+				</BOUCLE_article_encore_suivant>
+				</ul>
+				</B_article_encore_suivant>
+			</li>
+		</BOUCLE_article_suivant>
+		</ul>
+		</B_article_suivant>
+	</li>
+</ul>
+
+
+
+<h1>Critere {precedent}{par id_article}</h1>
+
+<ul>
+	<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+		<B_article_precedent>
+		<ul>
+		<BOUCLE_article_precedent(ARTICLES){precedent}{par id_article}>
+			<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+				<B_article_encore_precedent>
+				<ul>
+				<BOUCLE_article_encore_precedent(ARTICLES){precedent}{par id_article}>
+					<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL</li>
+				</BOUCLE_article_encore_precedent>
+				</ul>
+				</B_article_encore_precedent>
+			</li>
+		</BOUCLE_article_precedent>
+		</ul>
+		</B_article_precedent>
+	</li>
+</ul>
+
+
+
+
+<h1>Critere {suivant}{!par date}{id_rubrique?}</h1>
+
+<ul>
+	<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+		<B_article_suivant_date>
+		<ul>
+		<BOUCLE_article_suivant_date(ARTICLES){suivant}{!par date}{id_rubrique?}>
+			<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+				<B_article_encore_suivant_date>
+				<ul>
+				<BOUCLE_article_encore_suivant_date(ARTICLES){suivant}{!par date}{id_rubrique?}>
+					<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL</li>
+				</BOUCLE_article_encore_suivant_date>
+				</ul>
+				</B_article_encore_suivant_date>
+			</li>
+		</BOUCLE_article_suivant_date>
+		</ul>
+		</B_article_suivant_date>
+	</li>
+</ul>
+
+
+
+<h1>Critere {precedent}{!par date}{id_rubrique?}</h1>
+
+<ul>
+	<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+		<B_article_precedent_date>
+		<ul>
+		<BOUCLE_article_precedent_date(ARTICLES){precedent}{!par date}{id_rubrique?}>
+			<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL
+				<B_article_encore_precedent_date>
+				<ul>
+				<BOUCLE_article_encore_precedent_date(ARTICLES){precedent}{!par date}{id_rubrique?}>
+					<li>#ID_ARTICLE - #ID_RUBRIQUE - [(#TITRE|couper{20})] - #TOTAL_BOUCLE - #GRAND_TOTAL</li>
+				</BOUCLE_article_encore_precedent_date>
+				</ul>
+				</B_article_encore_precedent_date>
+			</li>
+		</BOUCLE_article_precedent_date>
+		</ul>
+		</B_article_precedent_date>
+	</li>
+</ul>
+
+</BOUCLE_article_principal>
