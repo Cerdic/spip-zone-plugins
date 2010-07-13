@@ -78,17 +78,14 @@ function calculer_critere_suivant_precedent_dist($idb, &$boucles, $crit, $type) 
 function quete_position_primary($primary, $valeur, $trouver, $res, $serveur=''){
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
-	spip_log('quete_position_primary','csp');
-	spip_log("$primary = $valeur * $trouver ..." ,'csp');
 	if (!$primary OR preg_match('/[,\s]/', $primary))
 		return false;
 
 	$pos = 0;
 	while ($row = sql_fetch($res, $serveur) AND $row[$primary]!=$valeur){
-		spip_log("$pos = $row[$primary] * $valeur ..." ,'csp');
 		$pos++;
 	}
-	spip_log("$pos = $row[$primary] * $valeur ..." ,'csp');
+
 	// si on a pas trouve
 	if ($row[$primary]!=$valeur)
 		return false;
