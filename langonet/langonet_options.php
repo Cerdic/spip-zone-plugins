@@ -53,16 +53,15 @@ function creer_selects($sel_l='0',$sel_d='0') {
 	$rep_extensions = lister_dossiers_plugins(_DIR_EXTENSIONS);
 	// Recuperation des repertoires SPIP et squelettes
 	if (strlen($GLOBALS['dossier_squelettes'])) {
-		$rep_complet = explode(':', $GLOBALS['dossier_squelettes']);
+		$rep_perso = explode(':', $GLOBALS['dossier_squelettes']);
 	}
 	else {
-		$rep_complet[] = 'squelettes';
+		$rep_perso[] = 'squelettes';
 	}
-	$rep_complet[] = rtrim(_DIR_RESTREINT_ABS, '/');
-	$rep_complet[] = 'prive';
-	$rep_complet[] = 'squelettes-dist';
-	$rep_scan = array_merge($rep_complet, $rep_plugins);
-	$rep_scan = array_merge($rep_scan, $rep_extensions);
+	$rep_spip[] = rtrim(_DIR_RESTREINT_ABS, '/');
+	$rep_spip[] = 'prive';
+	$rep_spip[] = 'squelettes-dist';
+	$rep_scan = array_merge($rep_perso, $rep_extensions, $rep_plugins, $rep_spip);
 	
 	// construction des <select>
 	// -- les fichiers de langue

@@ -338,48 +338,48 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	include_spip('inc/langonet_utils');
 	// -- En-tete resumant la verification
 	$log_texte = "/* *****************************************************************************\n" .
-	"/* LangOnet : " . entite2utf(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s'))))."\n" .
-	"/* *****************************************************************************\n" .
-	"/* " . entite2utf(_T('langonet:label_verification')) . " : " . entite2utf(_T('langonet:label_verification_'.$verification)) . "\n";
+	" * LangOnet : " . entite2utf(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s'))))."\n" .
+	" * *****************************************************************************\n" .
+	" * " . entite2utf(_T('langonet:label_verification')) . " : " . entite2utf(_T('langonet:label_verification_'.$verification)) . "\n";
 	if ($verification != 'fonction_l') {
-		$log_texte .= "/* " . entite2utf(_T('langonet:label_module')) . " : " . entite2utf($resultats['module']) . "\n" .
-		"/* " . entite2utf(_T('langonet:label_fichier_verifie')) . " : " . entite2utf($resultats['langue']) . "\n";
+		$log_texte .= " * " . entite2utf(_T('langonet:label_module')) . " : " . entite2utf($resultats['module']) . "\n" .
+		" * " . entite2utf(_T('langonet:label_fichier_verifie')) . " : " . entite2utf($resultats['langue']) . "\n";
 	}
-	$log_texte .= "/* " . entite2utf(_T('langonet:label_arborescence_scannee')) . " : " . entite2utf($resultats['ou_fichier']) . "\n" .
-	"/* *****************************************************************************\n" .
-	"/* " . entite2utf(_T('langonet:label_erreur')) . " : " . strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok'])) . "\n";
+	$log_texte .= " * " . entite2utf(_T('langonet:label_arborescence_scannee')) . " : " . entite2utf($resultats['ou_fichier']) . "\n" .
+	" * *****************************************************************************\n" .
+	" * " . entite2utf(_T('langonet:label_erreur')) . " : " . strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok'])) . "\n";
 	if ($verification != 'fonction_l') {
-		$log_texte .= "/* " . entite2utf(_T('langonet:label_avertissement')) . " : " . strval(count($resultats['item_non_mais'])+count($resultats['item_peut_etre'])) . "\n";
+		$log_texte .= " * " . entite2utf(_T('langonet:label_avertissement')) . " : " . strval(count($resultats['item_non_mais'])+count($resultats['item_peut_etre'])) . "\n";
 	}
-	$log_texte .= "/* *****************************************************************************\n";
+	$log_texte .= " * *****************************************************************************/\n";
 
 	// -- Texte des resultats: erreur (non definis ou non utilises)
 	$log_texte .= "\n\n/* *****************************************************************************\n" .
-	"/* " . entite2utf(_T('langonet:entete_log_erreur_'.$verification)) . "\n" .
-	"/* *****************************************************************************\n" .
+	" * " . entite2utf(_T('langonet:entete_log_erreur_'.$verification)) . "\n" .
+	" * *****************************************************************************/\n" .
 	entite2utf(strip_tags($texte['non']));
 
 	// -- Texte des resultats: erreur (non definis mais n'appartenant pas au module en cours de verification)
 	if ($verification == 'definition') {
 		$log_texte .= "\n\n/* *****************************************************************************\n" .
-		"/* " . entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) . "\n" .
-		"/* *****************************************************************************\n" .
+		" * " . entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) . "\n" .
+		" * *****************************************************************************/\n" .
 		entite2utf(strip_tags($texte['non_mais_nok']));
 	}
 
 	// -- Texte des resultats: avertissement (definis mais dans un autre module)
 	if ($verification == 'definition') {
 		$log_texte .= "\n\n/* *****************************************************************************\n" .
-		"/* " . entite2utf(_T('langonet:entete_log_avertissement_nonmais')) . "\n" .
-		"/* *****************************************************************************\n" .
+		" * " . entite2utf(_T('langonet:entete_log_avertissement_nonmais')) . "\n" .
+		" * *****************************************************************************/\n" .
 		entite2utf(strip_tags($texte['non_mais']));
 	}
 
 	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
 	if ($verification != 'fonction_l') {
 		$log_texte .= "\n\n/* *****************************************************************************\n" .
-		"/* " . entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . "\n" .
-		"/* *****************************************************************************\n" .
+		" * " . entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . "\n" .
+		" * *****************************************************************************/\n" .
 		entite2utf(strip_tags($texte['peut_etre']));
 	}
 
