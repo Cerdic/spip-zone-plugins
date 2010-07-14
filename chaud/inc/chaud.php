@@ -9,16 +9,31 @@
 
 function chaud_notifier() {
 	spip_log('notification', 'chaud');
-	if ($a = chaud_articles(1.5)) {
-		spip_log(var_export($a, true), 'chaud');
-		$chauds = recuperer_fond('notification_chauds', array('chauds' => array_keys($a)));
-		if ($chauds) {
-			spip_log($chauds, 'chaud');
-			$envoyer_mail = charger_fonction('envoyer_mail','inc');
-			$envoyer_mail($GLOBALS['meta']['email_webmaster'],
-				_L('Articles chauds'),
-				$chauds
-			);
+
+	$old = (array) @unserialize($GLOBALS['meta']['chauds_articles']);
+
+	$a = chaud_articles(1.5);
+	
+	include_spip('inc/meta');
+	ecrire_meta('chauds_articles', serialize($a));
+
+	if ($a) {
+		$b = array();
+		foreach ($a as $id => $v)
+			if ($v > $old[$id])
+				$b[] = $id;
+
+		if ($b) {
+			spip_log(var_export($a, true), 'chaud');
+			$chauds = recuperer_fond('notification_chauds', array('chauds' => $b));
+			if ($chauds) {
+				spip_log($chauds, 'chaud');
+				$envoyer_mail = charger_fonction('envoyer_mail','inc');
+				$envoyer_mail($GLOBALS['meta']['email_webmaster'],
+					_L('Articles chauds'),
+					$chauds
+				);
+			}
 		}
 	}
 }
