@@ -78,8 +78,8 @@ function pages_formulaire_verifier($flux){
 	if (is_array($flux) and $flux['args']['form'] == 'editer_article'){
 	
 		// Si on est dans un article de type page mais que le champ "page" est vide
-		if (_request('type') == 'page' and !_request('page'))
-			$flux['data']['page'] .= _T('info_obligatoire');
+		if (_request('type') == 'page' and !_request('champ_page'))
+			$flux['data']['champ_page'] .= _T('info_obligatoire');
 	
 	}
 	
@@ -98,14 +98,14 @@ function pages_editer_contenu_objet($flux){
 	
 		// On cherche et remplace l'édition de la rubrique
 		$cherche = "/<li[^>]*class=('|\")editer_parent.*?<\/li>/is";
-		$remplace = '<li class="editer_page obligatoire'.($erreurs['page'] ? ' erreur' : '').'">';
+		$remplace = '<li class="editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
 		$remplace .= '<input type="hidden" name="id_parent" value="-1" />';
 		$remplace .= '<input type="hidden" name="id_rubrique" value="-1" />';
 		$remplace .= '<input type="hidden" name="type" value="page" />';
     	$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
-    	if ($erreurs['page'])
-    		$remplace .= '<span class="erreur_message">'.$erreurs['page'].'</span>';
-    	$remplace .= '<input type="text" class="text" name="page" id="id_page" value="'.$args['contexte']['page'].'" />';
+    	if ($erreurs['champ_page'])
+    		$remplace .= '<span class="erreur_message">'.$erreurs['champ_page'].'</span>';
+    	$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$args['contexte']['page'].'" />';
     	$remplace .= '</li>';
 		$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
 	
@@ -122,7 +122,7 @@ function pages_pre_edition_ajouter_page($flux){
 	if (is_array($flux) and $flux['args']['type'] == 'article'){
 	
 		// Si elle existe on récupère la page dans ce qui a été posté
-		if ((($page = _request('page')) != '') AND ($page != 'article')){
+		if ((($page = _request('champ_page')) != '') AND ($page != 'article')){
 		
 			// Et on l'ajoute à ce qu'il faut mettre à jour
 			$flux['data']['page'] = $page;
