@@ -1,12 +1,13 @@
 [(#REM)
 	Modele licence, parametres :
-	id_licence : id de la licence a afficher
-	id_article : id de l'article dont on souhaite afficher la licence
-	lien : si non n'affiche pas le lien vers la description de la licence
-	logo : si non n'affiche pas le logo de la licence
-	largeur_logo : int la largeur maximale du logo (passer un entier uniquement)
-	hauteur_logo : int la hauteur maximale du logo (passer un entier uniquement)
-	nom_licence : force l'affichage du nom de la licence dans le lien
+	-* id_licence : id de la licence a afficher
+	-* id_article : id de l'article dont on souhaite afficher la licence
+	-* lien : si non n'affiche pas le lien vers la description de la licence
+	-* logo : si non n'affiche pas le logo de la licence
+	-* largeur_logo : int la largeur maximale du logo (passer un entier uniquement)
+	-* hauteur_logo : int la hauteur maximale du logo (passer un entier uniquement)
+	-* nom_licence : force l'affichage du nom de la licence dans le lien
+	-* modele_type : la seule valeur possible est mrss, permet d'afficher la licence pour l'inclure dans un feed mrss
 	même si un logo est présent
 ]
 
@@ -38,9 +39,14 @@
 			[(#SET{logo,[<img (#GET{icon_licence}|oui) src="#CHEMIN{img_pack/#GET{icon_licence}}" [title="(#GET{desc_licence}|attribut_html)"] [alt="(#GET{name_licence}|attribut_html)"]/>]})]
 		]
 	]
-	[<a href="(#GET{link_licence})" class="spip_out" rel="external" [title="(#GET{desc_licence}|attribut_html)"]>]
-		[(#GET{logo})]
-		[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}})#GET{name_licence}]
-	[</a>(#GET{link_licence}|oui)]
+	[(#ENV{modele_type}|=={mrss}|oui)
+	[<media:license type="text/html"[ href="(#GET{link_licence})"]>(#GET{name_licence})</media:license>]
+	]
+	[(#ENV{modele_type}|=={mrss}|non)
+		[<a href="(#GET{link_licence})" class="spip_out" rel="external" [title="(#GET{desc_licence}|attribut_html)"]>]
+			[(#GET{logo})]
+			[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}})#GET{name_licence}]
+		[</a>(#GET{link_licence}|oui)]
+	]
 </BOUCLE_selection>
 [(#GET{name_licence}|non)<:licence:sans_licence:>]
