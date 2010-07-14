@@ -17,6 +17,7 @@ function comptes_affiche_milieu($flux){
 #		$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 #		$legender_auteur_supp = recuperer_fond('prive/inscription2_fiche',array('id_auteur'=>$flux['args']['id_auteur'],'exceptions'=>$exceptions_des_champs_auteurs_elargis));
 		$flux['data'] .= recuperer_fond('prive/listes/adresses',array('id_auteur'=>$flux['args']['id_auteur']));
+		$flux['data'] .= recuperer_fond('prive/listes/numeros',array('id_auteur'=>$flux['args']['id_auteur']));
 	}
 	return $flux;
 }
