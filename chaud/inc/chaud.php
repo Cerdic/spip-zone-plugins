@@ -30,7 +30,8 @@ function chaud_notifier() {
 				spip_log($chauds, 'chaud');
 				$envoyer_mail = charger_fonction('envoyer_mail','inc');
 				$envoyer_mail($GLOBALS['meta']['email_webmaster'],
-					_L('Articles chauds'),
+					_L('Articles chauds sur @site@',
+					array('site' => textebrut($GLOBALS['meta']['nom_site']))),
 					$chauds
 				);
 			}
