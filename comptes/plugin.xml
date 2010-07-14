@@ -24,7 +24,12 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
-		<inclure>comptes_fonctions.php</inclure>
+		<inclure>comptes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+		<inclure>comptes_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
