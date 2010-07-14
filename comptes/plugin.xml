@@ -27,6 +27,11 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<inclure>comptes_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<action>editer_contenu_objet</action>
+		<inclure>comptes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
 		<inclure>comptes_pipelines.php</inclure>

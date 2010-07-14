@@ -22,6 +22,39 @@ function comptes_affiche_milieu($flux){
 	return $flux;
 }
 
+/**
+ *
+ * Insertion dans le pipeline editer_contenu_objet
+ * Ajoute les champs I2 sur le formulaire CVT editer_auteur
+ *
+ * @return array Le $flux complété
+ * @param array $flux
+ */
+function comptes_editer_contenu_objet($flux){
+	if ($flux['args']['type']=='auteur') {
+		include_spip('public/assembler');
+		include_spip('inc/legender_auteur_supp');
+		/**
+		 *
+		 * Insertion des champs dans le formulaire aprs le textarea PGP
+		 *
+		 */
+		$adresses = "<li class='editer_adresses fieldset'>\n"
+					."<fieldset>"
+					."<h3 class='legend'>Adresses :</h3>"
+					.recuperer_fond('prive/listes/adresses',array('id_auteur'=>$flux['args']['contexte']['id_auteur']))
+					."</fieldset>"
+					."</li>";
+		$numeros = "<li class='editer_numeros fieldset'>\n"
+					."<fieldset>"
+					."<h3 class='legend'>Numeros :</h3>"
+					.recuperer_fond('prive/listes/numeros',array('id_auteur'=>$flux['args']['contexte']['id_auteur']))
+					."</fieldset>"
+					."</li>";
+		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$adresses.$numeros, $flux['data']);
+	}
+	return $flux;
+}
 
 
 
