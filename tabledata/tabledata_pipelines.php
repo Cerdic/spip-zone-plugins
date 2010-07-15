@@ -24,7 +24,7 @@ function tabledata_ajouterBoutons($boutons_admin)
     if (autoriser('administrer','zone')) {
       // on voit le bouton dans la barre "naviguer"
         $boutons_admin['configuration']->sousmenu['tabledata']= new Bouton(
-        "../"._DIR_PLUGIN_TABLEDATA."img_pack/tabledata.gif",  // icone
+        _DIR_PLUGIN_TABLEDATA."img_pack/tabledata.gif",  // icone
         _T('tabledata:tabledata'));
     }
     return $boutons_admin;
