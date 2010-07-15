@@ -7,6 +7,7 @@
 	-* largeur_logo : int la largeur maximale du logo (passer un entier uniquement)
 	-* hauteur_logo : int la hauteur maximale du logo (passer un entier uniquement)
 	-* nom_licence : force l'affichage du nom de la licence dans le lien
+	-* cacher_defaut : si la valeur est oui, on n'affiche pas de texte par défaut si aucune licence
 	-* modele_type : la seule valeur possible est mrss, permet d'afficher la licence pour l'inclure dans un feed mrss
 	même si un logo est présent
 ]
@@ -49,4 +50,4 @@
 		[</a>(#GET{link_licence}|oui)]
 	]
 </BOUCLE_selection>
-[(#GET{name_licence}|non)<:licence:sans_licence:>]
+[(#GET{name_licence}|ou{#ENV{cacher_defaut}|=={oui}}|non)<:licence:sans_licence:>]
