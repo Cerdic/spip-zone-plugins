@@ -7,7 +7,7 @@
 	
 	<licence>GNU/GPL</licence>
 	
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	
 	<version_base>1.0</version_base>
 	
@@ -36,7 +36,6 @@
 		<inclure>base/pays_tables.php</inclure>
 	</pipeline>
 	
-	<fonctions>pays_options.php</fonctions>
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
 </plugin>

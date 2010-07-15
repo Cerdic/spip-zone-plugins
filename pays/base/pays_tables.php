@@ -10,7 +10,7 @@
 
 function pays_declarer_tables_interfaces($interface){
 
-	$interface['table_des_tables']['spip_pays'] = 'pays';
+	$interface['table_des_tables']['pays'] = 'pays';
 	$interface['table_des_traitements']['NOM'][] = _TRAITEMENT_RACCOURCIS;
 
 	return $interface;
