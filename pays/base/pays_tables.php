@@ -11,6 +11,7 @@
 function pays_declarer_tables_interfaces($interface){
 
 	$interface['table_des_tables']['pays'] = 'pays';
+	$interface['table_des_tables']['geo_pays'] = 'pays'; // en attendant une meilleure collaboration avec 'geographie'
 	$interface['table_des_traitements']['NOM'][] = _TRAITEMENT_RACCOURCIS;
 
 	return $interface;
