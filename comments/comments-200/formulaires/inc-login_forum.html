@@ -8,15 +8,15 @@
 ]
 <fieldset class="qui[ (#SESSION{auth}|?{session_qui,saisie_qui})]">
 	<legend><:comments:forum_qui_etes_vous:></legend>
-[(#SESSION{auth}|?{' '})
+[(#SESSION{auth}|oui)
 	[<p><:comments:label_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]	
 ]
-[(#SESSION{auth}|?{'',' '})
+[(#SESSION{auth}|non)
 	<ul>
 		<li class='saisie_session_nom'>
 			<label for="session_nom"><:comments:label_nom:></label>
 			<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" />
-			[(#CONFIG{accepter_inscriptions}|=={oui}|?{' '})
+			[(#CONFIG{accepter_inscriptions}|=={oui}|oui)
 			<span class="details">&#91;<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow"><:lien_connecter:></a>&#93;</span>
 			]
 		</li>
