@@ -1,0 +1,34 @@
+
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_adresse,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_adresse' value='#ENV{id_adresse}' />
+			<input type='hidden' name='objet' value='#ENV{objet}' />
+			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
+			<ul>
+				[(#SAISIE{input, numero, label=<:cop:label_numero:>})]
+				[(#SAISIE{input, voie, label=<:cop:label_voie:>})]
+				[(#SAISIE{input, complement, label=<:cop:label_complement:>})]
+				[(#SAISIE{input, boite_postale, label=<:cop:label_boite_postale:>})]
+				[(#SAISIE{input, code_postal, label=<:cop:label_code_postal:>})]
+				[(#SAISIE{input, ville, label=<:cop:label_ville:>})]
+				[(#SAISIE{pays, pays, label=<:cop:label_pays:>,defaut=70})]
+								
+				[(#SAISIE{input, type_adresse,
+					label=<:cop:label_type_adresse:>,
+					explication=<:cop:explication_type_adresse:>})]
+			</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+			
+		</div></form>
+	]
+</div>

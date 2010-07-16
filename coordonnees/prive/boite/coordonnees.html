@@ -1,0 +1,45 @@
+[(#SET{identifiant,[(#VAL{cop_#ENV{objet}_#ENV{id_objet}})]})]
+[(#SET{icone,[(#CHEMIN{images/addressbook-24.png}|url_absolue)]})]
+[(#SET{plie,0})]
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:cop:titre_coordonnees:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+
+	[(#INCLURE{fond=prive/liste/coordonnees, objet, id_objet, ajax})]
+
+[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
+
+
+	[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}})
+
+			[(#BOUTON_ACTION{[(#CHEMIN{images/adresse-add-24.png}
+				|balise_img{<:cop:ajouter_adresse:>}
+				|concat{' ',<:cop:ajouter_adresse:>})],
+				[(#URL_ECRIRE{adresse_edit}
+					|parametre_url{objet,#ENV{objet}}
+					|parametre_url{id_objet,#ENV{id_objet}}
+					|parametre_url{id_adresse,new}
+					|parametre_url{retour,#SELF})]})]
+
+			[(#BOUTON_ACTION{[(#CHEMIN{images/telephone-add-24.png}
+				|balise_img{<:cop:ajouter_telephone:>}
+				|concat{' ',<:cop:ajouter_telephone:>})],
+				[(#URL_ECRIRE{numero_edit}
+					|parametre_url{objet,#ENV{objet}}
+					|parametre_url{id_objet,#ENV{id_objet}}
+					|parametre_url{id_numero,new}
+					|parametre_url{retour,#SELF})]})]
+
+			[(#BOUTON_ACTION{[(#CHEMIN{images/email-add-24.png}
+				|balise_img{<:cop:ajouter_email:>}
+				|concat{' ',<:cop:ajouter_email:>})],
+				[(#URL_ECRIRE{email_edit}
+					|parametre_url{objet,#ENV{objet}}
+					|parametre_url{id_objet,#ENV{id_objet}}
+					|parametre_url{id_email,new}
+					|parametre_url{retour,#SELF})]})]
+		
+	]
+
+[(#GET{plie}|fin_block)]
+
+[(#VAL{e}|fin_cadre)]
+
