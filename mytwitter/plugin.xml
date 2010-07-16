@@ -11,7 +11,7 @@
 
  	 <etat>dev</etat>
 
- 	 <description>Le plugin fournit un bloc de présentation de votre compte twitter. <br/>Les pramètres de personnalisation et de réglage sont accessible via un formulaire cfg (paramétrage du compte et des options, réglage de l'affichage)<br/>le bloc est accessible via l'insertion d'un modèle (qui offre la possibilité de passer en paramètre un autre compte que celui décrit par cfg) ou via une page dédié pour les tuilisateurs de squelette de type Z (page=mytwitter)</description>
+ 	 <description>Le plugin fournit un bloc de présentation de votre compte twitter. <br/>Les pramètres de personnalisation et de réglage sont accessible via un formulaire cfg (paramétrage du compte et des options, réglage de l'affichage)<br/>le bloc est accessible via l'insertion d'un modèle (qui offre la possibilité de passer en paramètre un autre compte que celui décrit par cfg) ou via une page dédié pour les utilisateurs de squelette de type Z (page=mytwitter)</description>
 
 	<lien>http://www.spip-contrib.net/Plugin-Mytwitter</lien>
 
