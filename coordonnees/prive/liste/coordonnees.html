@@ -1,6 +1,6 @@
 <B_adresses>
 #ANCRE_PAGINATION
-<div class="liste-elements adresses">
+<div id='adresses_#ENV{objet}_#ENV{id_objet}' class="liste-elements adresses">
 <table class='spip liste'>
 <caption><strong class="caption"><:cop:adresses:></strong></caption>
 	<tbody>
@@ -22,7 +22,7 @@
 					|balise_img{<:cop:modifier_adresse:>})],
 					[(#URL_ECRIRE{adresse_edit}
 						|parametre_url{id_adresse,#ID_ADRESSE}
-						|parametre_url{retour,#SELF})]})]
+						|parametre_url{retour,#SELF})],ajax})]
 						
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:cop:supprimer_adresse:>})],
@@ -43,7 +43,7 @@
 
 <B_telephones>
 #ANCRE_PAGINATION
-<div class="liste-elements numeros">
+<div id='telephones_#ENV{objet}_#ENV{id_objet}' class="liste-elements numeros">
 <table class='spip liste'>
 <caption><strong class="caption"><:cop:numeros:></strong></caption>
 	<tbody>
@@ -57,7 +57,7 @@
 					|balise_img{<:cop:modifier_numero:>})],
 					[(#URL_ECRIRE{numero_edit}
 						|parametre_url{id_numero,#ID_NUMERO}
-						|parametre_url{retour,#SELF})]})]
+						|parametre_url{retour,#SELF})],ajax})]
 						
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:cop:supprimer_numero:>})],
@@ -78,7 +78,7 @@
 
 <B_mails>
 #ANCRE_PAGINATION
-<div class="liste-elements emails">
+<div id='emails_#ENV{objet}_#ENV{id_objet}' class="liste-elements emails">
 <table class='spip liste'>
 <caption><strong class="caption"><:cop:emails:></strong></caption>
 	<tbody>
@@ -92,7 +92,7 @@
 					|balise_img{<:cop:modifier_email:>})],
 					[(#URL_ECRIRE{email_edit}
 						|parametre_url{id_email,#ID_EMAIL}
-						|parametre_url{retour,#SELF})]})]
+						|parametre_url{retour,#SELF})],ajax})]
 						
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:cop:supprimer_email:>})],

@@ -7,8 +7,8 @@
 	<lien></lien>
 	<icon>images/addressbook-128.png</icon>
 	
-	<version>1.0.0</version>
-	<etat>dev</etat>
+	<version>1.1.0</version>
+	<etat>test</etat>
 	
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>

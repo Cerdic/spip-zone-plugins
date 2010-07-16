@@ -12,7 +12,7 @@ function cop_affiche_milieu($flux) {
 				'objet' => 'auteur',
 				'id_objet' => $id_auteur
 			);
-			$flux['data'] .= recuperer_fond('prive/boite/coordonnees', $contexte);
+			$flux['data'] .= recuperer_fond('prive/boite/coordonnees', $contexte, array('ajax'=>true));
 		}
 	}
 	return $flux;
