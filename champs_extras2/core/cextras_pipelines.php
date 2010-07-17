@@ -69,9 +69,10 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 // Calcule des elements pour le contexte de compilation
 // des squelettes de champs extras
 // en fonction des parametres donnes dans la classe ChampExtra
-function cextras_creer_contexte($c, $contexte_flux) {
+function cextras_creer_contexte($c, $contexte_flux, $prefixe='') {
 	$contexte = array();
-	$contexte['champ_extra'] = $c->champ;
+	$nom_champ = $prefixe . $c->champ;
+	$contexte['champ_extra'] = $nom_champ;
 	$contexte['label_extra'] = _T($c->label);
 	$contexte['precisions_extra'] = _T($c->precisions);
 	if (isset($c->saisie_parametres['explication']) and $c->saisie_parametres['explication'])
@@ -79,13 +80,13 @@ function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte['obligatoire_extra'] = $c->obligatoire ? 'obligatoire' : '';
 	$contexte['verifier_extra'] = $c->verifier;
 	$contexte['verifier_options_extra'] = $c->verifier_options;
-	$contexte['valeur_extra'] = $contexte_flux[$c->champ];
+	$contexte['valeur_extra'] = $contexte_flux[$nom_champ];
 	$contexte['enum_extra'] = $c->enum;
 	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
 	if (isset($contexte_flux['erreurs'])
 	and is_array($contexte_flux['erreurs'])
-	and array_key_exists($c->champ, $contexte_flux['erreurs'])) {
-		$contexte['erreur_extra'] = $contexte_flux['erreurs'][$c->champ];
+	and array_key_exists($nom_champ, $contexte_flux['erreurs'])) {
+		$contexte['erreur_extra'] = $contexte_flux['erreurs'][$nom_champ];
 	}
 
 	return array_merge($contexte_flux, $contexte);
@@ -93,17 +94,17 @@ function cextras_creer_contexte($c, $contexte_flux) {
 
 
 // recuperation d'une saisie interne
-function ce_calculer_saisie_interne($c, $contexte) {
+function ce_calculer_saisie_interne($c, $contexte, $prefixe='') {
 	// le contexte possede deja l'entree SQL,
 	// calcule par le pipeline formulaire_charger.
-	$contexte = cextras_creer_contexte($c, $contexte);
+	$contexte = cextras_creer_contexte($c, $contexte, $prefixe);
 
 	// calculer le bon squelette et l'ajouter
 	if (!find_in_path(
 	($f = 'extra-saisies/'.$c->type).'.html')) {
 		// si on ne sait pas, on se base sur le contenu
 		// pour choisir ligne ou bloc
-		$f = strstr($contexte[$c->champ], "\n")
+		$f = strstr($contexte[$prefixe . $c->champ], "\n")
 			? 'extra-saisies/bloc'
 			: 'extra-saisies/ligne';
 	}
@@ -112,13 +113,14 @@ function ce_calculer_saisie_interne($c, $contexte) {
 
 
 // en utilisant le plugin "saisies"
-function ce_calculer_saisie_externe($c, $contexte) {
-
-	$contexte['nom'] = $c->champ;
+function ce_calculer_saisie_externe($c, $contexte, $prefixe='') {
+	
+	$nom_champ = $prefixe . $c->champ;
+	$contexte['nom'] = $nom_champ;
 	$contexte['type_saisie'] = $c->type;
 	$contexte['label'] = _T($c->label);
-	if (isset($contexte[$c->champ]) and $contexte[$c->champ]) {
-		$contexte['valeur'] = $contexte[$c->champ];
+	if (isset($contexte[$nom_champ]) and $contexte[$nom_champ]) {
+		$contexte['valeur'] = $contexte[$nom_champ];
 	}
 
 	$params = $c->saisie_parametres;
@@ -193,6 +195,22 @@ function cextras_editer_contenu_objet($flux){
 		// les saisies a ajouter seront mises dedans.
 		$inserer_saisie = '';
 
+		// Il peut arriver qu'un prefixe soit appliqué sur les noms de champs de formulaire
+		// (mais pas en base) ceci pour permettre d'inserer les champs de formulaire d'un objet dans
+		// le formulaire d'un autre objet, en prefixant tous ses champs, par exemple
+		// pour spip_auteurs_elargis et spip_auteurs. Dans ce cas il ne pourra pas y avoir
+		// conflits si spip_auteurs a un champ extra 'nom' et spip_auteurs_elargis aussi.
+		// La contrainte est que le formulaire inseré doit appeler le pipeline 'editer_contenu_objet'
+		// en lui indiquant quel est le prefixe utilisé d'une part, et d'autre part
+		// il faut qu'il s'occupe lui même d'ajouter les données via
+		// le pipeline formulaire_charger de spip_auteurs (pour cet exemple) avec les bons prefixe.
+		if (isset($flux['args']['prefixe_champs_extras']) and $prefixe = $flux['args']['prefixe_champs_extras']) {
+			$inserer_saisie .= "<input type='hidden' name='prefixe_champs_extras_".$c->type."' value='$prefixe' />\n";
+		} else {
+			$prefixe = '';
+		}
+
+		
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la saisie est autorisee
@@ -205,16 +223,20 @@ function cextras_editer_contenu_objet($flux){
 			{
 
 				if ($c->saisie_externe) {
-					list($f, $contexte) = ce_calculer_saisie_externe($c, $flux['args']['contexte']);
+					list($f, $contexte) = ce_calculer_saisie_externe($c, $flux['args']['contexte'], $prefixe);
 				} else {
-					list($f, $contexte) = ce_calculer_saisie_interne($c, $flux['args']['contexte']);
+					list($f, $contexte) = ce_calculer_saisie_interne($c, $flux['args']['contexte'], $prefixe);
 				}
+				// Si un prefixe de champ est demande par le pipeline
+				// par exemple pour afficher et completer un objet différent dans
+				// le formulaire d'un premier objet (ex: spip_auteurs_etendus et spip_auteurs)
+				// l'indiquer !
 				$saisie = recuperer_fond($f, $contexte);
 
 				// Signaler a cextras_pre_edition que le champ est edite
 				// (cas des checkbox multiples quand on renvoie vide
 				//  qui n'envoient rien de rien, meme pas un array vide)
-				$saisie .= '<input type="hidden" name="cextra_'.$c->champ.'" value="1" />';
+				$saisie .= '<input type="hidden" name="cextra_' . $prefixe . $c->champ.'" value="1" />';
 
 				// ajouter la saisie.
 				$inserer_saisie .= $saisie;
@@ -236,12 +258,18 @@ function cextras_pre_edition($flux){
 
 	// recuperer les champs crees par les plugins
 	if ($extras = cextras_get_extras_match($flux['args']['table'])) {
+		// recherchons un eventuel prefixe utilise pour poster les champs
+		$type = objet_type(table_objet($flux['args']['table']));
+		$prefixe = _request('prefixe_champs_extras_' . $type);
+		if (!$prefixe) {
+			$prefixe = '';
+		}
 		foreach ($extras as $c) {
-			if (_request('cextra_'.$c->champ)) {
-				$extra = _request($c->champ);
+			if (_request('cextra_' . $prefixe . $c->champ)) {
+				$extra = _request($prefixe . $c->champ);
 				if (is_array($extra))
 					$extra = join(',',$extra);
-				$flux['data'][$c->champ] = corriger_caracteres($extra);
+				$flux['data'][$prefixe . $c->champ] = corriger_caracteres($extra);
 			}
 		}
 	}
@@ -299,7 +327,16 @@ function cextras_formulaire_verifier($flux){
 		
 		// des champs extras correspondent ?
 		if ($extras = cextras_get_extras_match($type)) {
-		
+
+			// Il peut arriver qu'un prefixe soit appliqué sur les noms de champs de formulaire
+			// La contrainte est que le formulaire inseré doit appeler le pipeline 'formulaire_verifier'
+			// avec le bon type d'objet (en indiquant le prefixe) et concaténer ainsi les résultats
+			if (isset($flux['args']['prefixe_champs_extras'])
+			and $prefixe = $flux['args']['prefixe_champs_extras']) {
+			} else {
+				$prefixe = '';
+			}
+					
 			include_spip('inc/autoriser');
 
 			// si le plugin "verifier" est actif, on tentera dans
@@ -328,10 +365,10 @@ function cextras_formulaire_verifier($flux){
 					'id_objet' => $id_objet)))
 				{	
 					if ($c->obligatoire AND !_request($c->champ)) {
-						$flux['data'][$c->champ] = _T('info_obligatoire');
+						$flux['data'][$prefixe . $c->champ] = _T('info_obligatoire');
 					} elseif ($c->verifier AND $verifier) {
-						if ($erreur = $verifier(_request($c->champ), $c->verifier, $c->verifier_options)) {
-							$flux['data'][$c->champ] = $erreur;
+						if ($erreur = $verifier(_request($prefixe . $c->champ), $c->verifier, $c->verifier_options)) {
+							$flux['data'][$prefixe . $c->champ] = $erreur;
 						}
 					}
 				}
