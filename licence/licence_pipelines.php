@@ -41,4 +41,41 @@ function licence_pre_insertion($flux){
 	return $flux;
 }
 
+
+/**
+ * Insertion dans le pipeline editer_contenu_objet
+ *
+ * Affiche les boutons supplémentaires de :
+ * - changement de la valeur de podcast
+ * - changement de la valeur de explicit
+ *
+ * @param array $flux Le contexte du pipeline
+ * @return $flux Le contexte du pipeline complété
+ */
+function licence_editer_contenu_objet($flux){
+	$type_form = $flux['args']['type'];
+	$id_document = $flux['args']['id'];
+	if(in_array($type_form,array('document'))){
+		if(preg_match(",<li [^>]*class=[\"']editer_credits.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
+			include_spip('inc/licence');
+			$ajouts .= recuperer_fond('prive/licence_document_saisies',array('id_document'=>$id_document,'licences' => $GLOBALS['licence_licences']));
+			$flux['data'] = preg_replace(",($regs[1]),Uims","\\1".$ajouts,$flux['data']);
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline pre_edition
+ * Récupération de l'id_licence lors de la validation du formulaire de documents
+ *
+ * @param array $flux Le contexte du pipeline
+ * @return $flux Le contexte du pipeline complété
+ */
+function licence_pre_edition($flux){
+	if(($flux['args']['type'] == 'document') && ($flux['args']['action'] == 'modifier') && _request('id_licence')){
+		$flux['data']['id_licence'] = _request('id_licence');
+	}
+	return $flux;
+}
 ?>
