@@ -294,7 +294,7 @@ function afficher_lignes($type, $tableau, $extra=array()) {
 			foreach ($tableau[$item][$fichier] as $ligne_n => $ligne_t) {
 				$L = intval($ligne_n+1);
 				$T = '... '.htmlentities($ligne_t[0]).' ...';
-				$liste_lignes .= "\t\t" . '<span style="padding-left:4em;text-indent: -5em;">L.'. sprintf("%04s", $L) .':</span><span style="padding-left:1em;">'.$T. "</span><br />\n";
+				$liste_lignes .= "\t\t" . '<code class="spip"><span style="padding-left:4em;text-indent: -5em;">L.'. sprintf("%04s", $L) .':</span><span style="padding-left:1em;">'.$T. "</span></code><br />\n";
 			}
 		}
 		$liste_lignes .= "</p>";
@@ -357,14 +357,14 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	$log_texte .= "\n\n/* *****************************************************************************\n" .
 	" * " . entite2utf(_T('langonet:entete_log_erreur_'.$verification)) . "\n" .
 	" * *****************************************************************************/\n" .
-	entite2utf(strip_tags($texte['non']));
+	texte2log($texte['non']);
 
 	// -- Texte des resultats: erreur (non definis mais n'appartenant pas au module en cours de verification)
 	if ($verification == 'definition') {
 		$log_texte .= "\n\n/* *****************************************************************************\n" .
 		" * " . entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) . "\n" .
 		" * *****************************************************************************/\n" .
-		entite2utf(strip_tags($texte['non_mais_nok']));
+		texte2log($texte['non_mais_nok']);
 	}
 
 	// -- Texte des resultats: avertissement (definis mais dans un autre module)
@@ -372,7 +372,7 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 		$log_texte .= "\n\n/* *****************************************************************************\n" .
 		" * " . entite2utf(_T('langonet:entete_log_avertissement_nonmais')) . "\n" .
 		" * *****************************************************************************/\n" .
-		entite2utf(strip_tags($texte['non_mais']));
+		texte2log($texte['non_mais']);
 	}
 
 	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
@@ -380,11 +380,21 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 		$log_texte .= "\n\n/* *****************************************************************************\n" .
 		" * " . entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . "\n" .
 		" * *****************************************************************************/\n" .
-		entite2utf(strip_tags($texte['peut_etre']));
+		texte2log($texte['peut_etre']);
 	}
 
 	$ok = ecrire_fichier($log_fichier, $log_texte);
 	return $ok;
+}
+
+// fonction purement utilitaire
+function texte2log($texte) {
+	// On vire les tags
+	$texte_log = strip_tags($texte);
+	// On passe en utf-8
+	$texte_log = entite2utf($texte_log);
+
+	return $texte_log;
 }
 
 ?>
