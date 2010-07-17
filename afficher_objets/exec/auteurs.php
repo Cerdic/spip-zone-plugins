@@ -84,7 +84,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 		echo  $trouve, "<div class='nettoyeur'></div>";
 
 		$contexte = $_GET;
-		$contexte = array('nb'=>MAX_AUTEURS_PAR_PAGE);
+		$contexte['nb'] = MAX_AUTEURS_PAR_PAGE;
 		if (substr($statut,0,1)!=='!')
 			$contexte['statut'] = explode(',',$statut);
 		else {
