@@ -313,9 +313,9 @@ function balise_TRI_dist($p, $liste='true') {
 	}
 
 	$_champ = interprete_argument_balise(1,$p);
-	// si pas de champ, rien a faire !
+	// si pas de champ, renvoyer le critere de tri utilise
 	if (!$_champ){
-		$p->code = "''";
+		$p->code = $boucle->modificateur['tri_champ'];
 		return $p;
 	}
 
@@ -332,7 +332,7 @@ function balise_TRI_dist($p, $liste='true') {
 	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
 	$_on = "\$s?(".$boucle->modificateur['tri_sens']."==$_sens".'):('.$boucle->modificateur['tri_champ']."==$_champ)";
 
-	$p->code = "aoustrong($_url,$_libelle,$_on".($_class?",$_class":"").")";
+	$p->code = "lien_ou_expose($_url,$_libelle,$_on".($_class?",$_class":"").")";
 	//$p->code = "''";
 	$p->interdire_scripts = false;
 	return $p;
