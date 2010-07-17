@@ -227,7 +227,10 @@ function balise_SET_MERGE_dist($p){
  * @return unknown
  */
 function balise_COMPTEUR_dist($p) {
-	return calculer_balise_criteres('compteur', $p);
+	calculer_balise_criteres('compteur', $p);
+	if ($p->code=="''")
+		calculer_balise_criteres('compteur', $p, "compteur_left");
+	return $p;
 }
 
 /** Balise #SOMME associee au critere somme */
@@ -266,12 +269,12 @@ function balise_STATS_dist($p) {
 	return $p;
 }
 
-function calculer_balise_criteres($nom, $p, $balise="") {
-	$p->code = '';
-	$balise = $balise ? $balise : $nom;
+function calculer_balise_criteres($nom, $p, $motif="") {
+	$p->code = "''";
+	$motif = $motif ? $motif : $nom;
 	if (isset($p->param[0][1][0])
 	AND $champ = ($p->param[0][1][0]->texte)) {
-		return rindex_pile($p, $nom."_$champ", $balise);
+		return rindex_pile($p, $nom."_$champ", $motif);
 	}
   return $p;
 }
