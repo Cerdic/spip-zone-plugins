@@ -30,7 +30,7 @@ function get_liste_administrateurs() {
 	$s = spip_query("SELECT * FROM spip_auteurs WHERE statut='0minirezo'");
 	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array'; // compatibilite SPIP 1.92
 	while ($qui = $fetch($s)) {
-		$nom = typo($qui['nom']." (id_auteur=$qui[id_auteur])");
+		$nom = '<a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$qui[id_auteur]").'">'.typo($qui['nom']."</a> (id_auteur=$qui[id_auteur])");
 		if(autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
 		else if(autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
 	}
