@@ -86,6 +86,8 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 		$contexte = array('nb'=>MAX_AUTEURS_PAR_PAGE);
 		if ($cherche)
 			$contexte['recherche'] = $cherche;
+		if (_request('tri_liste_aut'))
+			$contexte['tri_liste_aut'] = _request('tri_liste_aut');
 		if (substr($statut,0,1)!=='!')
 			$contexte['statut'] = explode(',',$statut);
 		else {
@@ -95,7 +97,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 			$contexte['statut'] = array_map('reset',$statut);
 		}
 		$lister_objets = charger_fonction('lister_objets','inc');
-		#echo $lister_objets('auteurs',$contexte);
+		echo $lister_objets('auteurs',$contexte);
 
 		echo "<div id='auteurs'>", $recherche, "</div>";
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));

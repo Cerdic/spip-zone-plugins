@@ -19,7 +19,7 @@ function filtre_test_syndic_article_miroir($id){
 function critere_where_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if (isset($crit->param[0]))
-		$_where = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+		$_where = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 	else
 		$_where = '@$Pile[0]["where"]';
 
