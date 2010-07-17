@@ -294,7 +294,7 @@ function afficher_lignes($type, $tableau, $extra=array()) {
 			foreach ($tableau[$item][$fichier] as $ligne_n => $ligne_t) {
 				$L = intval($ligne_n+1);
 				$T = '... '.htmlentities($ligne_t[0]).' ...';
-				$liste_lignes .= "\t\t" . '<code class="spip"><span style="padding-left:4em;text-indent: -5em;">L.'. sprintf("%04s", $L) .':</span><span style="padding-left:1em;">'.$T. "</span></code><br />\n";
+				$liste_lignes .= "\t\t" . '<code><span style="padding-left:4em;text-indent: -5em;">L.'. sprintf("%04s", $L) .':</span><span style="padding-left:1em;">'.$T. "</span></code><br />\n";
 			}
 		}
 		$liste_lignes .= "</p>";
