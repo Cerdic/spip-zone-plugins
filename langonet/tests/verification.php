@@ -31,5 +31,10 @@ function langonet_tester_definition() {
 	$essai = _T('langonet:'.$fond2);
 	$essai = _T("langonet:".$fond3);
 
+	// VERIFICATION _L() : Erreurs
+	$essai = _L('Test 1 _L() de langonet');
+	$essai = _L("Test 2 _L() de langonet");
+	$essai = _L("Test 3 _L()", $fond4);
+	$essai = _L('Test 4 _L()' . $fond5);
 }
 ?>
