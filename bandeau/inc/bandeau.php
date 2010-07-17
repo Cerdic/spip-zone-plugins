@@ -263,11 +263,13 @@ function bando_outils_rapides($boutons, $contexte = array()){
 	$res .= "<div id='rapides'>";
 
 	// la barre de raccourcis collaboratifs
-	if (isset($boutons['outils_collaboratifs']))
+	if (isset($boutons['outils_collaboratifs'])) {
+		$sous_menu = bando_lister_sous_menu($boutons['outils_collaboratifs']->sousmenu,$contexte,'bouton',true);
+		if ($sous_menu)
 			$res .= "<ul class='rapides collaborer'>"
-				. bando_lister_sous_menu($boutons['outils_collaboratifs']->sousmenu,$contexte,'bouton',true)
+				. $sous_menu
 				. "</ul>";
-
+	}
 	$res .= formulaire_recherche("recherche")."</div>";
 
 	return "<div id='bando_outils'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
