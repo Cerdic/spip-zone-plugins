@@ -2,6 +2,7 @@
 	Modele licence, parametres :
 	-* id_licence : id de la licence a afficher
 	-* id_article : id de l'article dont on souhaite afficher la licence
+	-* id_document : id du document dont on souhaite afficher la licence
 	-* lien : si non n'affiche pas le lien vers la description de la licence
 	-* logo : si non n'affiche pas le logo de la licence
 	-* largeur_logo : int la largeur maximale du logo (passer un entier uniquement)
@@ -13,7 +14,10 @@
 ]
 
 #SET{id_licence,#ENV{id_licence}}
-<BOUCLE_article(ARTICLES){id_article}>[(#SET{id_licence,[(#ID_LICENCE|=={0}|?{#GET{id_licence},#ID_LICENCE})]})]</BOUCLE_article>
+<BOUCLE_article(ARTICLES){id_article}{tout}>[(#SET{id_licence,[(#ID_LICENCE|=={0}|?{#GET{id_licence},#ID_LICENCE})]})]</BOUCLE_article>
+</B_article>
+<BOUCLE_document(DOCUMENTS){id_document}{tout}>[(#SET{id_licence,[(#ID_LICENCE|=={0}|?{#GET{id_licence},#ID_LICENCE})]})]</BOUCLE_document>
+<//B_article>
 #SET{licences,#EVAL{$GLOBALS['licence_licences']}}
 
 <BOUCLE_selection(POUR){tableau #GET{licences}}{cle=#GET{id_licence}}>
