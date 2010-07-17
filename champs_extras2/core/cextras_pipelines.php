@@ -205,7 +205,7 @@ function cextras_editer_contenu_objet($flux){
 		// il faut qu'il s'occupe lui même d'ajouter les données via
 		// le pipeline formulaire_charger de spip_auteurs (pour cet exemple) avec les bons prefixe.
 		if (isset($flux['args']['prefixe_champs_extras']) and $prefixe = $flux['args']['prefixe_champs_extras']) {
-			$inserer_saisie .= "<input type='hidden' name='prefixe_champs_extras_".$c->type."' value='$prefixe' />\n";
+			$inserer_saisie .= "<input type='hidden' name='prefixe_champs_extras_" . $flux['args']['type'] . "' value='$prefixe' />\n";
 		} else {
 			$prefixe = '';
 		}
@@ -269,7 +269,7 @@ function cextras_pre_edition($flux){
 				$extra = _request($prefixe . $c->champ);
 				if (is_array($extra))
 					$extra = join(',',$extra);
-				$flux['data'][$prefixe . $c->champ] = corriger_caracteres($extra);
+				$flux['data'][$c->champ] = corriger_caracteres($extra);
 			}
 		}
 	}
@@ -286,7 +286,6 @@ function cextras_afficher_contenu_objet($flux){
 
 		$contexte = cextra_quete_valeurs_extras($extras, $flux['args']['type'], $flux['args']['id_objet']);
 		$contexte = array_merge($flux['args']['contexte'], $contexte);
-
 		foreach($extras as $c) {
 
 			// on affiche seulement les champs dont la vue est autorisee
@@ -364,7 +363,7 @@ function cextras_formulaire_verifier($flux){
 					'type' => $c->table,
 					'id_objet' => $id_objet)))
 				{	
-					if ($c->obligatoire AND !_request($c->champ)) {
+					if ($c->obligatoire AND !_request($prefixe . $c->champ)) {
 						$flux['data'][$prefixe . $c->champ] = _T('info_obligatoire');
 					} elseif ($c->verifier AND $verifier) {
 						if ($erreur = $verifier(_request($prefixe . $c->champ), $c->verifier, $c->verifier_options)) {
