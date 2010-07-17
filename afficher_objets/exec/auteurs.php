@@ -50,7 +50,7 @@ function exec_auteurs_dist()
 
 // http://doc.spip.org/@exec_auteurs_args
 function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $cherche='')
-{
+{/*
 	if ($recherche !=='') {
 		list($auteurs, $lettre, $nombre_auteurs, $debut) =
 		  lettres_d_auteurs(requete_auteurs($tri, $statut, $recherche), $debut, MAX_AUTEURS_PAR_PAGE, $tri);
@@ -70,7 +70,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 	if (_AJAX) {
 		ajax_retour($recherche); //ecrire en id='auteurs' ci-dessous
 	} else {
-
+*/
 		pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
 		$visiteurs = !statut_min_redac($statut);
@@ -96,10 +96,10 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 		$lister_objets = charger_fonction('lister_objets','inc');
 		echo $lister_objets('auteurs',$contexte);
 
-		echo "<div id='auteurs'>", $recherche, "</div>";
+#		echo "<div id='auteurs'>", $recherche, "</div>";
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 		echo fin_gauche(), fin_page();
-	}
+#	}
 }
 
 // http://doc.spip.org/@bandeau_auteurs

@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut'=>'Statut',
+	'nb_articles' => '@nb@ articles',
 );
 
 ?>
