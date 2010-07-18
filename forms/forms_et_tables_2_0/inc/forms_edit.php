@@ -31,7 +31,7 @@ function Forms_nouveau_champ($id_form,$type){
 	$n = 1;
 	$champ = $type.'_'.strval($n);
 	while ($row = spip_fetch_array($res)){
-		$lenumero = split('_', $row['champ'] );
+		$lenumero = explode('_', $row['champ'] );
 		$lenumero = intval(end($lenumero));
 		if ($lenumero>= $n) $n=$lenumero+1;
 	}
@@ -59,7 +59,7 @@ function Forms_nouveau_choix($id_form,$champ){
 	$n = 1;
 	$res = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 	while ($row = spip_fetch_array($res)){
-		$lenumero = split('_', $row['choix']);
+		$lenumero = explode('_', $row['choix']);
 		$lenumero = intval(end($lenumero));
 		if ($lenumero>= $n) $n=$lenumero+1;
 	}

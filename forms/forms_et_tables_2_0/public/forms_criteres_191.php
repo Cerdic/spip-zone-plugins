@@ -928,7 +928,7 @@ function trouver_cles_table($keys)
     if (!strpos($v,","))
       $res[$v]=1; 
     else {
-      foreach (split(" *, *", $v) as $k) {
+      foreach (explode(" *, *", $v) as $k) {
 	$res[$k]=1;
       }
     }
