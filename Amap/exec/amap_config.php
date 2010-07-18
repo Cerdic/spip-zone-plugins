@@ -20,8 +20,7 @@ include_spip('inc/config');
 include(_DIR_PLUGIN_AMAP."/inc/fonctions_table.php");
 include(_DIR_PLUGIN_AMAP."/inc/fonctions_paysan.php");
 
-function exec_amap_config()
-{
+function exec_amap_config(){
 
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right, $changer_config, $spip_display;
   global $debut, $visiteurs, $connect_id_auteur, $table_prefix;
@@ -55,10 +54,10 @@ function exec_amap_config()
   echo debut_cadre_relief("", true);
   echo "<b><div class='verdana2'>";
   $res = icone_horizontale(_T('amap:saisons'), generer_url_ecrire("amap_config"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:produits'), generer_url_ecrire("amap_config", "table=amap_produit"),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:banques'), generer_url_ecrire("amap_config", "table=amap_banque"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:types_de_contrat'), generer_url_ecrire("amap_config", "table=amap_type_contrat"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:lieux'), generer_url_ecrire("amap_config", "table=amap_lieu"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
+       .icone_horizontale(_T('amap:produits'), generer_url_ecrire("amap_config", "table=spip_amap_produit"),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:banques'), generer_url_ecrire("amap_config", "table=spip_amap_banque"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:types_de_contrat'), generer_url_ecrire("amap_config", "table=spip_amap_type_contrat"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:lieux'), generer_url_ecrire("amap_config", "table=spip_amap_lieu"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
   echo $res . "</div></b>";
   echo fin_cadre_relief("", true);
 

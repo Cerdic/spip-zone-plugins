@@ -56,26 +56,11 @@ function exec_amap_contrats()
   // Affichage du sous-menu de configuration
   debut_cadre_relief();
   echo "<b><div class='verdana2'>";
-  $res = icone_horizontale(_T('amap:liste_contrat'), generer_url_ecrire("amap_contrats", "
-				&idSaison=".$_REQUEST['idSaison']."
-				&idProduit=".$_REQUEST['idProduit']."
-					"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-        .icone_horizontale(_T('amap:tarif_contrat'), generer_url_ecrire("amap_contrats", "table=tarifs
-				&idSaison=".$_REQUEST['idSaison']."
-				&idProduit=".$_REQUEST['idProduit']."
-					"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:reglement'), generer_url_ecrire("amap_contrats", "table=reglement
-				&idSaison=".$_REQUEST['idSaison']."
-				&idProduit=".$_REQUEST['idProduit']."
-					"),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:sorties_ferme'), generer_url_ecrire("amap_contrats", "table=sorties
-				&idSaison=".$_REQUEST['idSaison']."
-				&idProduit=".$_REQUEST['idProduit']."
-					"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:participation_sorties'), generer_url_ecrire("amap_contrats
-				&idSaison=".$_REQUEST['idSaison']."
-				&idProduit=".$_REQUEST['idProduit']."
-					", "table=participation"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
+  $res = icone_horizontale(_T('amap:liste_contrat'), generer_url_ecrire("amap_contrats", "&idSaison=".$_REQUEST['idSaison']."&idProduit=".$_REQUEST['idProduit'].""), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+        .icone_horizontale(_T('amap:tarif_contrat'), generer_url_ecrire("amap_contrats", "table=spip_tarifs&idSaison=".$_REQUEST['idSaison']."&idProduit=".$_REQUEST['idProduit'].""), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:reglement'), generer_url_ecrire("amap_contrats", "table=spip_reglement&idSaison=".$_REQUEST['idSaison']."&idProduit=".$_REQUEST['idProduit'].""),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:sorties_ferme'), generer_url_ecrire("amap_contrats", "table=spip_sorties&idSaison=".$_REQUEST['idSaison']."&idProduit=".$_REQUEST['idProduit'].""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:participation_sorties'), generer_url_ecrire("amap_contrats", "table=spip_participation&idSaison=".$_REQUEST['idSaison']."&idProduit=".$_REQUEST['idProduit']."", ""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
   echo $res . "</div>";
   fin_cadre_relief();
 

@@ -281,8 +281,8 @@ function amap_declarer_tables_principales($tables_principales){
 		'id_contrat'  => 'BIGINT(20) NOT NULL',
 		'id_evenement'  => 'BIGINT(20) NOT NULL',
 		'id_remplacant'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'remplacant_ext'  => 'VARCHAR(150) DEFAULT NULL',
-		'paye'  => 'BIGINT(20) DEFAUT NULL'
+		'remplacant_ext'  => 'VARCHAR(150) DEFAULT "0" NOT NULL',
+		'paye'  => 'BIGINT(20) DEFAUT "0" NOT NULL'
 		);
 	$spip_amap_vacance_key = array(
 		'PRIMARY KEY'   => 'id_vacance,id_contrat,id_evenement'
