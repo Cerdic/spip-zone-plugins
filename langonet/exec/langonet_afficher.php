@@ -24,7 +24,7 @@ function exec_langonet_afficher_dist(){
 	$contexte = array('log' => file_get_contents($file_name));
 
 	// contenu de la popup de mediabox
- 	echo recuperer_fond('prive/contenu/langonet_afficher',  $contexte);
+ 	ajax_retour(recuperer_fond('prive/contenu/langonet_afficher',  $contexte));
 }
 
 ?>
