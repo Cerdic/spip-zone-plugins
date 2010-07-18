@@ -115,4 +115,41 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 	return $res;
 }
 
+/**
+ * Calculer l'url vers la messagerie :
+ * - si l'auteur accepte les messages internes et que la messagerie est activee
+ * et qu'il est en ligne, on propose le lien vers la messagerie interne
+ * - sinon on propose un lien vers un email si possible
+ * - sinon rien
+ *
+ * @staticvar string $time
+ * @param int $id_auteur
+ * @param date $en_ligne
+ * @param string $statut
+ * @param string $imessage
+ * @param string $email
+ * @return string
+ */
+function auteur_lien_messagerie($id_auteur,$en_ligne,$statut,$imessage,$email){
+	static $time = null;
+	if (!in_array($statut, array('0minirezo', '1comite')))
+		return '';
+
+	if (is_null($time))
+		$time = time();
+	$parti = (($time-strtotime($en_ligne))>15*60);
+
+	if ($imessage != 'non' AND !$parti AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
+		return generer_action_auteur("editer_message","normal/$id_auteur");
+	
+	elseif (strlen($email) AND autoriser('voir', 'auteur', $id_auteur))
+		return 'mailto:' . $email;
+
+	else
+		return '';
+
+	return "<a href='$href' title=\""
+	  .  _T('info_envoyer_message_prive')
+	  . "\" class='message'>&nbsp;</a>";
+}
 ?>
