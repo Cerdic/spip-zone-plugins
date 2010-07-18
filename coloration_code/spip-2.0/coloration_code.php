@@ -94,6 +94,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 		$geshi->set_tab_width(PLUGIN_COLORATION_CODE_TAB_WIDTH);
 	}
 		
+	include_spip('inc/texte');
 	$code = echappe_retour($code);
 
 	$telecharge = ($englobant == 'div')
