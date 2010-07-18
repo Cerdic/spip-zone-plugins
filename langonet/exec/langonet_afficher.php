@@ -12,7 +12,7 @@ function exec_langonet_afficher_dist(){
 		die();
 	}
 
-	$file_name = _request('log');
+	$file_name = _request('fichier');
 	if (!@is_readable($file_name)) {
 		spip_log("*** LANGONET (action_langonet_afficher_dist) ERREUR: $file_name pas accessible en lecture");
 		include_spip('inc/minipres');
@@ -21,7 +21,12 @@ function exec_langonet_afficher_dist(){
 	}
 
 	// Lecture du fichier de log (.log) ou de langue (.php)
-	$contexte = array('log' => file_get_contents($file_name));
+	$infos = pathinfo($file_name);
+	$extension = $infos['extension'];
+	if ($extension == 'log')
+		$contexte = array('fichier' => file_get_contents($file_name));
+	else
+		$contexte = array('fichier' => htmlentities(file_get_contents($file_name)));
 
 	// contenu de la popup de mediabox
  	ajax_retour(recuperer_fond('prive/contenu/langonet_afficher',  $contexte));

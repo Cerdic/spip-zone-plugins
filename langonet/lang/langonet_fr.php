@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rechercher' => 'Rechercher',
 	'bouton_verifier' => 'V&eacute;rifier',
 	'bulle_afficher_fichier_log' => 'Afficher le log du @date@',
-	'bulle_telecharger_fichier_lang' => 'T&eacute;l&eacute;charger le fichier de langue du @date@',
+	'bulle_afficher_fichier_lang' => 'Afficher le fichier de langue g&eacute;n&eacute;r&eacute; le @date@',
+	'bulle_telecharger_fichier_lang' => 'T&eacute;l&eacute;charger le fichier de langue g&eacute;n&eacute;r&eacute; le @date@',
 	'bulle_telecharger_fichier_log' => 'T&eacute;l&eacute;charger le log du @date@',
 
 // E
