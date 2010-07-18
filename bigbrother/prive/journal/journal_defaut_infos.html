@@ -299,10 +299,10 @@
 					var actions_date_ticks_#VALEUR = [];
 
 					i=0;
-					$('#graph_actions_date_auteurs_table tr.tr_liste').has('.action_#VALEUR').each(function(){
-						var nombre = parseFloat(plot_trim($(this).find('.nombre').text()));
-						var label = plot_trim($(this).find('.action').text());
-						var tick = plot_trim($(this).find('.date').text());
+					$('#graph_actions_date_auteurs_table tr.tr_liste .action_#VALEUR').each(function(){
+						var nombre = parseFloat(plot_trim($(this).parent().find('.nombre').text()));
+						var label = plot_trim($(this).parent().find('.action').text());
+						var tick = plot_trim($(this).parent().find('.date').text());
 						actions_date_#VALEUR.push([i,nombre]);
 						actions_date_labels_#VALEUR.push(label);
 						actions_date_ticks_#VALEUR.push([i,tick]);
