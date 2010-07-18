@@ -83,7 +83,7 @@ function exec_amap_distributions()
 
 
 
-if ($table == 'vacances') { // Page vacances
+if ($table == 'spip_amap_vacances') { // Page vacances
     $msg_presentation_1 = _T('amap:liste_vacance');
     $msg_presentation_2 = _T('amap:enregistrement_vacance');
 
@@ -188,7 +188,7 @@ if ($table == 'vacances') { // Page vacances
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   } // fin if ($page == 'vacances')
-  else if ($table == 'produits') 
+  else if ($table == 'spip_amap_produits') 
   { // Page produits
     $msg_presentation_1 = _T('amap:liste_distribution_enregistres');
     $msg_presentation_2 = _T('amap:liste_distribution_enregistrement');
@@ -411,11 +411,6 @@ if ($table == 'vacances') { // Page vacances
 
 
   echo pipeline('affiche_milieu',array('args'=>array('exec'=>'amap_distributions'),'data'=>''));
-  echo "\n<br/><br/><hr/>\n"
-          ,"<center><i class='arial1' >"
-          ,"Plugin Amap v1.1 par St&eacute;phane Moulinet -dadaprod.org - <br/>"
-          ,"pour la gestion des 'tables amap'."
-          ,"</i></center>\n<hr/>\n" ;
   echo fin_gauche(), fin_page();
 }
 ?>

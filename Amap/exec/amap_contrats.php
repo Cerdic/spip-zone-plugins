@@ -96,7 +96,7 @@ function exec_amap_contrats()
   echo "<br />&nbsp;<br />";
 
 
-  if ($table == 'tarifs') { // Page tarif
+  if ($table == 'spip_amap_tarifs') { // Page tarif
     $msg_presentation_1 = _T('amap:tarifs_enregistres');
     $msg_presentation_2 = _T('amap:tarifs_enregistrement');
 
@@ -229,7 +229,7 @@ function exec_amap_contrats()
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   } // fin if ($page == 'tarifs')
-  else if ($table == 'reglement') { // Page reglement
+  else if ($table == 'spip_amap_reglement') { // Page reglement
     $msg_presentation_1 = _T('amap:cheques_enregistres');
     $msg_presentation_2 = _T('amap:cheques_enregistrement');
 
@@ -358,7 +358,7 @@ function exec_amap_contrats()
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
  
   } // fin if ($page == 'reglement')
-  else if ($table == 'sorties') 
+  else if ($table == 'spip_amap_sorties') 
   { // Page des sorties
     $msg_presentation_1 = _T('amap:sorties_enregistres');
     $msg_presentation_2 = _T('amap:sorties_enregistrement');
@@ -492,7 +492,7 @@ function exec_amap_contrats()
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
  
   } // fin if ($page == 'sorties')
-  else if ($table == 'participation') 
+  else if ($table == 'spip_amap_participation') 
   { // Page des sorties
     $msg_presentation_1 = _T('amap:liste_sorties_enregistres');
     $msg_presentation_2 = _T('amap:liste_sorties_enregistrement');
@@ -737,11 +737,6 @@ function exec_amap_contrats()
 
 
   echo pipeline('affiche_milieu',array('args'=>array('exec'=>'amap_contrats'),'data'=>''));
-  echo "\n<br/><br/><hr/>\n"
-          ,"<center><i class='arial1' >"
-          ,"Plugin Amap v1.1 par St&eacute;phane Moulinet -dadaprod.org - <br/>"
-          ,"pour la gestion des 'tables amap'."
-          ,"</i></center>\n<hr/>\n" ;
   echo fin_gauche(), fin_page();
 }
 ?>

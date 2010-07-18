@@ -77,7 +77,7 @@ function exec_amap_paniers()
   echo "<br />&nbsp;<br />";
 
 
-  if ($table == 'familles') { // Page familles de produits
+  if ($table == 'spip_amap_familles') { // Page familles de produits
     $msg_presentation_1 = _T('amap:liste_famille_enregistres');
     $msg_presentation_2 = _T('amap:liste_famille_enregistrement');
 
@@ -192,7 +192,7 @@ function exec_amap_paniers()
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
  
   } // fin if ($page == 'familles')
-  else if ($table == 'varietes') 
+  else if ($table == 'spip_amap_varietes') 
   { // Page variétés de produits
     $msg_presentation_1 = _T('amap:liste_variete_famille_enregistres');
     $msg_presentation_2 = _T('amap:liste_variete_famille_enregistrement');
@@ -462,11 +462,6 @@ function exec_amap_paniers()
   } // fin else du if ($page
 
   echo pipeline('affiche_milieu',array('args'=>array('exec'=>'amap_paniers'),'data'=>''));
-  echo "\n<br/><br/><hr/>\n"
-          ,"<center><i class='arial1' >"
-          ,"Plugin Amap v1.1 par St&eacute;phane Moulinet -dadaprod.org - <br/>"
-          ,"pour la gestion de 'tables amap'."
-          ,"</i></center>\n<hr/>\n" ;
   echo fin_gauche(), fin_page();
 }
 ?>

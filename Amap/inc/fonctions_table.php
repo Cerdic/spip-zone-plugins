@@ -169,7 +169,7 @@ function requete_tableamap($table , $field, $key, $idWhere = false)
          $boolBesoinSeparateur = false ;
     }
 
-    foreach ($field as $cle=>$txtChamp)
+    if($field) foreach ($field as $cle=>$txtChamp)
     {
         if ($key['PRIMARY KEY']!=$cle) $txtQuery .= ($boolBesoinSeparateur?", ":"")."`".$cle."`";
         $boolBesoinSeparateur = true;
@@ -367,7 +367,7 @@ function table_amap_get($table, $serveur, $field, $key)
   $total = '';
   $hiddens = '';
 
-  foreach ($field as $k => $v)
+  if($field) foreach ($field as $k => $v)
   {
       if (array_search($k, $key) == "PRIMARY KEY")
       {

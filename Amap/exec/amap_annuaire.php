@@ -159,11 +159,6 @@ function exec_amap_annuaire()
   } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   echo pipeline('affiche_milieu',array('args'=>array('exec'=>'amap_annuaire'),'data'=>''));
-  echo "\n<br/><br/><hr/>\n"
-          ,"<center><i class='arial1' >"
-          ,"Plugin Amap v1.1 par St&eacute;phane Moulinet -dadaprod.org - <br/>"
-          ,"pour la gestion des 'tables amap'."
-          ,"</i></center>\n<hr/>\n" ;
   echo fin_gauche(), fin_page();
 } // function exec_amap_annuaire
 ?>
