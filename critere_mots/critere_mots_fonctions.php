@@ -44,10 +44,10 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 }
 
 function critere_mots_selon_id_dist($idb, &$boucles, $crit){
-    critere_mots_dist($idb, &$boucles, $crit,'id');
+    critere_mots_dist($idb, $boucles, $crit,'id');
 }
 function critere_mots_selon_titre_dist($idb, &$boucles, $crit){
-    critere_mots_dist($idb, &$boucles, $crit,'titre');
+    critere_mots_dist($idb, $boucles, $crit,'titre');
 }
 
 
