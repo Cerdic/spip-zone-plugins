@@ -71,6 +71,11 @@
 		<titre>bigbrother:naviguer_journal_stats</titre>
 		<url>journal_stats</url>
 	</bouton>
+	<bouton id="journal_stats_21" parent="bando_reactions">
+		<icone>images/bigbrother-24.png</icone>
+		<titre>bigbrother:naviguer_journal_stats</titre>
+		<url>journal_stats</url>
+	</bouton>
 
 	<necessite id='cfg' version="[1.10.5;]" />
 	<necessite id='spip_bonux' version='[1.9.1;]' />
