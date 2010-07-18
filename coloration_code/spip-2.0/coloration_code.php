@@ -47,8 +47,15 @@ if (!defined('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP')) {
 }
 
 
-function coloration_code_color($code, $language, $cadre='cadre') {
+function coloration_code_color($code, $language, $cadre='cadre', $englobant='div') {
 
+	// On ajoute une argument a la fonction pour permettre d'afficher du code dans des <span>
+	// plutot que dans un <div>. Par contre, cette option de span est a utiliser avec la balise <code>
+	// et pas <cadre> pour des raisons de validite et de presentation.
+	// En outre, le bouton telecharger n'est pas affiche.
+	if ($cadre == 'cadre')
+		$englobant = 'div';
+		
 	// Supprime le premier et le dernier retour chariot
 	$code = preg_replace("/^(\r\n|\n|\r)/m", "", $code);
 	$code = preg_replace("/(\r\n|\n|\r)$/m", "", $code);
@@ -89,8 +96,8 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 		
 	$code = echappe_retour($code);
 
-	$telecharge = 
-		(PLUGIN_COLORATION_CODE_TELECHARGE || in_array('telechargement', $params))
+	$telecharge = ($englobant == 'div')
+	 &&	(PLUGIN_COLORATION_CODE_TELECHARGE || in_array('telechargement', $params))
 	 && (strpos($code, "\n") !== false) && !in_array('sans_telechargement', $params);
 	if ($telecharge) {
 		// Gerer le fichier contenant le code au format texte
@@ -114,7 +121,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	//
 	// And echo the result!
 	//
-	$rempl = $stylecss . '<div class="coloration_code"><div class="spip_'.$language.' '.$cadre.'">'.$geshi->parse_code().'</div>';
+	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_'.$language.' '.$cadre.'">'.$geshi->parse_code().'</' . $englobant . '>';
 
 	if ($telecharge) {
 		$rempl .= "<div class='" . $cadre . "_download'
@@ -124,7 +131,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 		  _T('bouton_telecharger') .
 				"</a></div>";
 	}
-	return $rempl.'</div>';
+	return $rempl.'</' . $englobant . '>';
 }
 
 function cadre_ou_code($regs) {
