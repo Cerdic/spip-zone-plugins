@@ -16,7 +16,13 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	$var_source = "i18n_".$module."_".$langue_source;
 	if (empty($GLOBALS[$var_source])) {
 		$GLOBALS['idx_lang'] = $var_source;
-		include(_DIR_RACINE.$ou_langue.$module.'_'.$langue_source.'.php');
+		if ( file_exists($source = _DIR_RACINE.$ou_langue.$module.'_'.$langue_source.'.php'))
+			include($source);
+		else {
+			$resultats['message_erreur'] = _T('langonet:message_nok_fichier_langue', 
+										array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue));
+			return $resultats;
+		}
 	}
 	
 	$var_cible = "i18n_".$module."_".$langue_cible;
