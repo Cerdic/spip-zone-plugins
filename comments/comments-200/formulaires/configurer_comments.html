@@ -30,6 +30,7 @@
 				]<select name="comments_fil" id="comments_fil">
 						<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
 						<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
+						<option value="one-thread"[(#ENV{comments_fil,list}|=={one-thread}|oui) selected="selected"]>Commentaire &agrave; un niveau</option>
 				</select>
 			</li>
 		</ul>
