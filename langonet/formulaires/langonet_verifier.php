@@ -145,6 +145,11 @@ function formater_resultats($verification, $resultats) {
 			$texte['non_mais_nok'] .= afficher_lignes('non_mais_nok', $resultats['fichier_non_mais_nok'], $resultats['definition_non_mais_nok'], $f_coloriser);
 			$texte['non_mais_nok'] .= "</div>\n</div>\n";
 		}
+		else {
+			$texte['non_mais_nok'] .= '<div class="success">' . "\n";
+			$texte['non_mais_nok'] .= _T('langonet:message_ok_nonmaisnok_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
+			$texte['non_mais_nok'] .= "</div>\n";
+		}
 
 		// Liste des items n'appartenant pas au module en cours de verification 
 		// mais definis dans le module idoine
@@ -160,7 +165,7 @@ function formater_resultats($verification, $resultats) {
 			$texte['non_mais'] .= afficher_lignes('non_mais', $resultats['fichier_non_mais'], $resultats['definition_non_mais'], $f_coloriser);
 			$texte['non_mais'] .= "</div>\n</div>\n";
 		}
-		if ((count($resultats['item_non_mais'])+count($resultats['item_non_mais_nok'])) == 0) {
+		else {
 			$texte['non_mais'] .= '<div class="success">' . "\n";
 			$texte['non_mais'] .= _T('langonet:message_ok_nonmais_definis_0', array('ou_fichier' => $resultats['ou_fichier'], 'module' => $resultats['module'])) . "\n";
 			$texte['non_mais'] .= "</div>\n";
