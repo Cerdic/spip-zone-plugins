@@ -73,4 +73,5 @@
 	<necessite id='getid3' version='[0.2;]' />
 	<necessite id='queue' version='[0.3.1;]' />
 	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.6.zip" />
+	<utilise id='podcast' />
 </plugin>
