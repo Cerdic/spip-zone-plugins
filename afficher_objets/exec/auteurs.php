@@ -93,6 +93,16 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 			$statut = sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT'));
 			$contexte['statut'] = array_map('reset',$statut);
 		}
+
+		if ($GLOBALS['visiteur_session']['statut']=='0minirezo'){
+			// n'exclure que les articles a la poubelle des compteurs
+			$contexte['filtre_statut_articles'] = array('poubelle');
+		}
+		else {
+			// exclure les articles a la poubelle, en redac ou refuse des compteurs
+			$contexte['filtre_statut_articles'] = array('prepa','poubelle','refuse');
+		}
+
 		$lister_objets = charger_fonction('lister_objets','inc');
 		echo $lister_objets('auteurs',$contexte);
 
