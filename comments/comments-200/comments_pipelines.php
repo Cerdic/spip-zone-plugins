@@ -170,7 +170,7 @@ function comments_formulaire_traiter($flux){
 
 function comments_insert_head ($flux) {
 	if (lire_config('comments/comments_fil') == 'one-thread')
-		$flux .= '<script type="text/javascript" src="'.chemin('javascript/thread-move.js').'"></script>';
+		$flux .= '<script type="text/javascript">'.recuperer_fond('javascript/thread-move.js').'</script>';
 	return $flux;
 }
 ?>
