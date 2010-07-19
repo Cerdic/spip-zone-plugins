@@ -1,0 +1,46 @@
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<fieldset><legend><:galuse:caracteristiques_images:></legend>
+  <label><:galuse:hauteur_max:></label><input type="text" name="hauteur" id="hauteur" value="[(#ENV{hauteur,800})]" style="width: 30px;" /> <:spip:info_pixels:><br />
+  <label><:galuse:largeur_max:></label><input type="text" name="largeur" id="largeur" value="[(#ENV{largeur,500})]" style="width: 30px;" /> <:spip:info_pixels:><br />
+  <label><:galuse:poids:></label><input type="text" name="poids" id="poids" value="[(#ENV{poids,300000})]" style="width: 50px;" /> <:galuse:octets:><br />
+  <label><:galuse:types_images:></label>
+  #SET{liste,#ARRAY{2,jpeg,1,gif,3,png,6}}
+  #SET{selected,#CONFIG{galuse/extensions,#ARRAY}}
+  <select name="types_image" multiple="multiple" size="5" id="types_image">
+  <BOUCLE_liste_ext(POUR){tableau #GET{liste}}>
+    <option value="#CLE"[(#VALEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>#VALEUR</option>
+  </BOUCLE_liste_ext>
+  </select>
+</fieldset>
+<fieldset><legend><:galuse:redim_auto:></legend>
+  <label><:galuse:hauteur_redim:></label><input type="text" name="hauteur_redim" id="hauteur_redim" value="[(#ENV{hauteur_redim,800})]" style="width: 30px;" /> <:spip:info_pixels:><br />
+  <label><:galuse:largeur_redim:></label><input type="text" name="largeur_redim" id="largeur_redim" value="[(#ENV{largeur_redim,500})]" style="width: 30px;" /> <:spip:info_pixels:><br />
+  <label><:galuse:compression_jpg:></label><input type="text" name="compression" id="compression" value="[(#ENV{compression,85})]" style="width: 30px;" /> %<br />
+</fieldset>
+<fieldset><legend><:galuse:autorisation:></legend>
+    <label><:galuse:fonctionnement:></label>
+    [(#SET{liste,#ARRAY{0,<:galuse:publi_imed:>,1,<:galuse:moderation:>}})]
+    [(#SET{selected,#CONFIG{galuse/moderation,#ARRAY}})]
+    <select name="moderation" size="2" id="moderation">
+    <BOUCLE_liste_fct(POUR){tableau #GET{liste}}>
+        <option value="#CLE" [(#VALEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>#VALEUR</option>
+    </BOUCLE_liste_fct>
+    </select><br />
+    [(#SET{selected,#CONFIG{galuse/statut_auteur,#ARRAY}})]
+    [(#SET{liste,#ARRAY{1,<:galuse:webmestre:>,3,<:ecrire:info_administrateurs:>,7,<:galuse:admin_restreints:>,15,<:ecrire:info_redacteurs:>,31,<:galuse:visiteurs_enregistres:>,63,<:galuse:tout_monde:>}})]
+    <label><:galuse:qui_ajouter:></label>
+    <select name="statut_auteur" size="5" id="statut_auteur">
+    <BOUCLE_liste_fct2(POUR){tableau #GET{liste}}>
+        <option value="#CLE" [(#VALEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>#VALEUR</option>
+    </BOUCLE_liste_fct2>
+    </select><br />
+    <br />
+    <input type="checkbox" id="autoriser_article" name="autoriser_article" value="1" [(#CONFIG{galuse/autoriser_article}|?{' ',''}) checked="checked"] /><label><:galuse:autoriser_article:></label><br />
+    <input type="checkbox" id="autoriser_rubrique" name="autoriser_rubrique" value="1" [(#CONFIG{galuse/autoriser_rubrique}|?{' ',''}) checked="checked"] /><label><:galuse:autoriser_rubrIQUE:></label><br />
+    <input type="checkbox" id="autoriser_auteur" name="autoriser_auteur" value="1" [(#CONFIG{galuse/autoriser_auteur}|?{' ',''}) checked="checked"] /><label><:galuse:autoriser_auteur:></label><br />
+    
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+[(#REM)<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />]
+</form>

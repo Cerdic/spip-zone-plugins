@@ -1,0 +1,33 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Galeries Utilisateurs
+	</nom>
+	<auteur>Thom</auteur>
+	<version>1.0</version>
+	<etat>test</etat>
+	<icon>img_pack/clap.png</icon>
+	<description>
+	    Un gestionnaire de galerie de photos permettant l'upload en partie publique.
+    </description>
+	<prefix>galuse</prefix>
+	<install>base/galuse_gestion.php</install>
+    <bouton id='galuse' parent='naviguer'>
+        <icone>img_pack/icone.png</icone>
+        <titre>Galerie Utilisateur</titre>
+    </bouton>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>galuse_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>galuse_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/galuse_autoriser.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;]" />
+    <utilise id="cfg" version="[1.15.1;]" />
+	<fonctions>galuse_options.php</fonctions>
+</plugin>

@@ -1,0 +1,24 @@
+#CACHE{0}
+[(#SESSION{id_auteur}|?{'',' '}) <fieldset>
+	<legend><:galuse:zone_abonnement:></legend>
+	<p class="explication"><:galuse:galerie_vous_enregistrer:></p>
+	<p class="retour">
+		&#91;<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:login:></a>&#93;
+		&#91;<a href="#URL_PAGE{identifiants,mode=6forum}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=340'); return false;"><:login_sinscrire:></a>&#93;
+	</p>
+</fieldset>]
+[(#SESSION{id_auteur}|?{' ',''}) #FORMULAIRE_PHOTOS]
+<div id="ImagesUpload">
+    <B_photos>
+        <ul>
+            <BOUCLE_photos(spip_photos)>
+                    <BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}>
+                    <li>
+                        <a href='[(#CHEMIN{vignettes/#_photos:FICHIER})]' target="_blank" class="thickbox" rel="galerie-images" title="#_photos:ALT_PHOTO envoyé par: #NOM">
+                        [(#CHEMIN{vignettes/#_photos:FICHIER}|imageFichier|image_reduire{150,150}|vider_attribut{alt}|inserer_attribut{alt,#_photos:ALT_PHOTO envoyé par: #NOM})]</a>
+                    </li>
+                </BOUCLE_auteur>
+            </BOUCLE_photos>
+        </ul>
+    </B_photos>
+</div>

@@ -1,0 +1,94 @@
+[(#REM)#SET{liste,#ARRAY{1,<:galuse:webmestre:>,3,<:ecrire:info_administrateurs:>,7,<:galuse:admin_restreints:>,15,<:ecrire:info_redacteurs:>,31,<:galuse:visiteurs_enregistres:>,63,<:galuse:tout_monde:>}}]
+
+[(#REM) ajouter la vérification du statut, pour l'instant valide pour 31 (visiteur enregistrés)]
+[(#REM) rajouter la verification du type d'objet (article, rubrique, auteur)]
+
+[(#ENV{id_auteur}|{' ',''})#SET{objet,auteur}#SET{id,#ENV{id_auteur}}]
+[(#ENV{id_rubrique}|{' ',''})#SET{objet,rubrique}#SET{id,#ENV{id_rubrique}}]
+[(#ENV{id_article}|{' ',''})#SET{objet,article}#SET{id,#ENV{id_article}}]
+
+<BOUCLE_test0(CONDITION){si #GET{id}}>
+</B_test>
+<BOUCLE_test(CONDITION){si #AUTORISER{joindreimage,#ENV{type_objet},#ENV{id_objet},[(#SESSION{id_auteur}|sinon{0})]}}>
+    <div id="galuse">
+        <form enctype="multipart/form-data" action="#SELF&amp;mode=calcul" method="POST">
+            <br />
+            <input type="hidden" name="posted" value="1" />
+            <input type="hidden" name="id_auteur" value="[(#SESSION{id_auteur}|sinon{0}]" />
+            <input type="hidden" name="id_objet" value="#GET{id}" />
+            <input type="hidden" name="objet" value="#GET{objet}" />
+            <input type="hidden" name="distant" id="distant" value="non" />
+            <fieldset>
+                <legend><:spip:bouton_ajouter_image:> (<:galuse:extensions_supportees:>,<:galuse:taille_max:> #CONFIG{galuse/largeur}<:galuse:px:> X #CONFIG{galuse/hauteur}<:galuse:px:> et #CONFIG{galuse/poids}|div{1024} <:galuse:ko:>)</legend>
+                <label for="titre"><:spip:entree_titre_image:></label><input name="titre" type="text" size="60" value="" />
+                <label for="description"><:spip:info_description:></label><textarea name="description" cols="60" rows="3" value="" />
+                <label for="credits"><:galuse:credits:></label><input name="credits" type="text" size="60" value="" />
+                <div id="tele_ordi">
+                <label for="fichier"><:spip:info_telecharger_ordinateur:></label><input name="fichier" type="file" />
+                depuis : mon ordinateur | <a href="#" onclick="document.GetElementById('distant').value='oui';document.GetElementById('tele_ordi').style.display='none';document.GetElementById('tele_net').style.display='block';">internet</a>
+                </div>
+                <div id="tele_net" style="display:none;">
+                <label for="internet"><:ecrire:info_referencer_doc_distant:></label><input name="url" type="text" size="60" value="http://" />
+                depuis : <a href="#" onclick="document.GetElementById('distant').value='oui';document.GetElementById('tele_net').style.display='none';document.GetElementById('tele_ordi').style.display='block';">mon ordinateur</a> | internet
+                </div>
+                
+                <input type="submit" value="<:spip:bouton_download:>" /></legend>
+            </fieldset>
+        </form> 
+    </div><!--galuse-->
+</BOUCLE_test>
+</B_test>
+<:galuse:pas_droit:>
+<//B_test>
+</BOUCLE_test0>
+
+[(#REM)
+
+		<div class='joindre_mode_choix_new' id='joindre_upload_choix_new'>
+	<ul>
+		<li class='editer_fichier_upload'>
+			<label for='fichier_upload_choix_new'>T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:</label><input class='file multi' type="file" name="fichier_upload[]" value='' id="fichier_upload_choix_new" size='14' />
+
+		</li>
+	</ul>
+	<div class='sourceup'>
+		depuis&nbsp;:
+		mon ordinateur
+		 
+		| <a href='#' onclick="if (jQuery('#joindre_media_choix_new').is(':hidden')) {jQuery('div.joindre_mode_choix_new:visible').slideUp('fast');jQuery('#joindre_media_choix_new').slideDown('fast');}return false;">la mediath&egrave;que</a>
+		 
+		| <a href='#' onclick="if (jQuery('#joindre_ftp_choix_new').is(':hidden')) {jQuery('div.joindre_mode_choix_new:visible').slideUp('fast');jQuery('#joindre_ftp_choix_new').slideDown('fast');}return false;">le serveur</a>
+		| <a href='#' onclick="if (jQuery('#joindre_distant_choix_new').is(':hidden')) {jQuery('div.joindre_mode_choix_new:visible').slideUp('fast');jQuery('#joindre_distant_choix_new').slideDown('fast');}return false;">internet</a>
+
+	</div>
+	<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="T&eacute;l&eacute;charger"/></p>
+</div> 
+<div class='joindre_mode_choix_new' id='joindre_media_choix_new'>
+	<ul>
+		<li class='editer_refdoc_joindre'>
+			<label for='refdoc_joindre_choix_new'>Document num&eacute;ro</label><input class='text' type="text" name="refdoc_joindre" value='' id="refdoc_joindre_choix_new"/>
+		</li>
+	</ul>
+
+	<p class='boutons'><input class='submit' type="button" name="parcourir" value="Parcourir..."
+		onclick="jQuery.modalboxload(
+			'http://terreapied.asso.st/ecrire/?exec=portfolio&amp;selectfunc=mediaselect_choix_new',
+			{autoResize: true}
+		);"
+	/></p>
+	<script type="text/javascript">
+		function mediaselect_choix_new(id){
+			jQuery.modalboxclose();
+			jQuery("#refdoc_joindre_choix_new").attr('value','doc'+id).focus();
+		};
+	</script>
+	<div class='sourceup'>
+		depuis&nbsp;:
+		<a href='#' onclick="if (jQuery('#joindre_upload_choix_new').is(':hidden')) {jQuery('div.joindre_mode_choix_new:visible').slideUp('fast');jQuery('#joindre_upload_choix_new').slideDown('fast');}return false;">mon ordinateur</a>
+		| la mediath&egrave;que
+		 
+		| <a href='#' onclick="if (jQuery('#joindre_ftp_choix_new').is(':hidden')) {jQuery('div.joindre_mode_choix_new:visible').slideUp('fast');jQuery('#joindre_ftp_choix_new').slideDown('fast');}return false;">le serveur</a>
+
+		| <a href='#' onclick="if (jQuery('#joindre_distant_choix_new').is(':hidden')) {jQuery('div.joindre_mode_choix_new:visible').slideUp('fast');jQuery('#joindre_distant_choix_new').slideDown('fast');}return false;">internet</a>
+	</div>
+]
