@@ -76,7 +76,7 @@ function acronymes_ajouter($chaine,$replacenb=-1)
   	if (!count($acro_patterns)){
 			#definition des remplacements
 			$set = array();
-
+			
 			#Recuperation des mots et des definitions dans une table des acronymes
 			if (count($liste)){
 				include_spip('forms_fonctions');
@@ -84,13 +84,15 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 		  	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut='publie'");
 		  	while ($row = spip_fetch_array($res)){
 		  		$accro=str_replace(".","",forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'ligne_1', $id_form,' ', true));
-		  		$desc = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'texte_1', $id_form,' ', true);
-		  		$balise = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'select_1', $id_form,' ', true);
-		  		$lang = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'select_2', $id_form,' ', true);
-					$acro_patterns[] = $accro;
-					$acro_replacements[] = $desc;
-					$acro_balise[] = $balise;
-					$set[$accro] = 1;
+				if (strlen($accro)) {
+					$desc = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'texte_1', $id_form,' ', true);
+					$balise = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'select_1', $id_form,' ', true);
+					$lang = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'select_2', $id_form,' ', true);
+						$acro_patterns[] = $accro;
+						$acro_replacements[] = $desc;
+						$acro_balise[] = $balise;
+						$set[$accro] = 1;
+				}
 		  	}
 			}
 			#Recuperation des mots et des definitions dans une rubrique locale
