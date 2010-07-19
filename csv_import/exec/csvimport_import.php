@@ -16,7 +16,7 @@ include_spip('public/assembler');
 
 function csvimport_visu_extrait($nombre,$import_mode,$table,$id_form){
 	// Extrait de la table en commençant par les dernieres maj
-	if ($import_mode!='form')
+        if ($import_mode!='form')
 		return csvimport_table_visu_extrait($table,$nombre);
 	else {
 		$contexte = array('id_form'=>$id_form,'total'=>$nombre);
@@ -29,7 +29,7 @@ function csvimport_table_fields($mode,$table,$id_form){
 	$table_fields = array();
 	if ($mode=='table'){
 		$csvimport_tables_auth = csvimport_tables_auth();
-		if (isset($csvimport_tables_auth[$table]['field']))
+                if (isset($csvimport_tables_auth[$table]['field']))
 			$table_fields=$csvimport_tables_auth[$table]['field'];
 		else
 			$table_fields=array_keys($GLOBALS['tables_principales'][$table]['field']);
@@ -37,7 +37,7 @@ function csvimport_table_fields($mode,$table,$id_form){
 		foreach ($table_fields as $key=>$value) {
 			$table_fields[$key] = $key;
 		}
-		return $table_fields;
+                return $table_fields;
 	}
 	if ($mode=='form' && $id_form){
 		include_spip('inc/forms');
@@ -80,16 +80,16 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 	
 	if ($step==3){
 		if (($remplacer)&&(_request('annule_remplace')))
-		  $step--;
+			$step--;
 		else if (($ajouter)&&(_request('annule_ajoute')))
-		  $step--;
+			$step--;
 		else if ($apercu!=NULL)
 		  	$step--;
 		else if (($remplacer)&&(!isset($csvimport_replace_actif)))
 		  	$step--;
 		else if (($ajouter)&&(!isset($csvimport_add_actif)))
 		  	$step--;
-  }
+	}
 
 	if ($step==3){
 		if ( (!$file_name)||(!$tmp_name)||(!$size)||(!$type) )
@@ -411,8 +411,8 @@ function exec_csvimport_import(){
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
 		$is_importable = autoriser('administrer','form',$id_form);
-	  $csvimport_replace_actif = true;
-	  $csvimport_add_actif = true;
+		$csvimport_replace_actif = true;
+		$csvimport_add_actif = true;
 	}
 	else {
 		$import_mode='table';
@@ -422,9 +422,9 @@ function exec_csvimport_import(){
 		$is_importable = csvimport_table_importable($table,$titre,$operations);
 	
 		if (in_array('replaceall',$operations))
-		  $csvimport_replace_actif = true;
+			$csvimport_replace_actif = true;
 		if (in_array('add',$operations))
-		  $csvimport_add_actif = true;
+			$csvimport_add_actif = true;
 	}
 	$clean_link = $import_link;
 	

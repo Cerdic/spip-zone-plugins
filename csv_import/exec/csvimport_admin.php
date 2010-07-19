@@ -208,8 +208,8 @@ function exec_csvimport_admin(){
 	$res = sql_showbase();
 	$liste_des_tables_spip=array();
 	$liste_des_tables_autres=array();
-	while ($row=spip_fetch_array($res,SPIP_NUM)){
-		$table = $row[0];
+	while ($row=sql_fetch($res)){
+		$table = array_shift($row);
 		// on ne retient que les tables prefixees par spip_
 		// evite les melanges sur une base avec plusieurs spip installes
 		if (substr($table,0,strlen($table_prefix))==$table_prefix){

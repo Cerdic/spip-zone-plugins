@@ -28,7 +28,7 @@ function exec_csvimport_telecharger(){
 	$titre = _T("csvimport:export_table",array('table'=>$table));
 	$is_importable = csvimport_table_importable($table,$titre,$operations);
 	if (in_array('export',$operations))
-	  $csvimport_export_actif = true;
+		$csvimport_export_actif = true;
 	
 	
 	if ((!$delim)&&($csvimport_export_actif)){
@@ -104,10 +104,10 @@ function exec_csvimport_telecharger(){
 		while ($row=sql_fetch($result)){
 			$ligne=array();
 			foreach($tablefield as $key)
-			  if (isset($row[$key]))
-			    $ligne[]=$row[$key];
+				if (isset($row[$key]))
+					$ligne[]=$row[$key];
 				else
-				  $ligne[]="";
+					$ligne[]="";
 			$output .= csvimport_csv_ligne($ligne,$delim);
 		}
 
