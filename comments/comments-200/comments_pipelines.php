@@ -170,13 +170,9 @@ function comments_formulaire_traiter($flux){
 
 function comments_insert_head ($flux) {
 	if (lire_config('comments/comments_fil') == 'one-thread') {
-		$flux .= '<script type="text/javascript" src="'.chemin('javascript/thread-move.js').'"></script>';
+		$flux .= '<script type="text/javascript" src="'.chemin('javascript/thread-move.js').'">var chaine = "'._T('public:repondre_message').'";</script>';
 		$flux .= '<script type="text/javascript">';
-		$flux .= '$(document).ready(function(){';
-		$flux .= '$("p.repondre").click(function(){';
-		$flux .= '$(".comment-form h2").replaceWith("<h2>'._T('public:repondre_message').'</h2>")';
-		$flux .= '});';
-		$flux .= '});;';
+		$flux .= 'var chaine = "'._T('public:repondre_message').'";';
 		$flux .= '</script>';
 	}
 	return $flux;
