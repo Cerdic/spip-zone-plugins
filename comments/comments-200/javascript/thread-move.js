@@ -21,7 +21,6 @@
 			var url = connect.attr('href').match(/url=([^&"']*)/);
 			url = escape(unescape(url[1]).replace(/#.*/, "")+"#reply"+id_thread);
 			connect.attr('href',connect.attr('href').replace(/url=([^&"']*)/,"url="+url));
-			$('.comment-form h2').replaceWith('<h2><:repondre_message:></h2>');
 		}
 	}
 	function hash_reply(){
