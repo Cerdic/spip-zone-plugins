@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_once _ROOT_RESTREINT . "inc/afficher_objets.php";
 
 /**
  * affichage des liste d'objets
@@ -74,7 +75,6 @@ function inc_afficher_objets($type, $titre,$requete,$formater='', $force=false){
 
 	// pas de skel pour cet objet,
 	// on se rabat sur le core
-	include_once _ROOT_RESTREINT . "inc/afficher_objets.php";
 	return inc_afficher_objets($type, $titre, $requete, $formater, $force);
 
 }
