@@ -25,6 +25,11 @@ function notifications_inscription_dist($quoi, $id_auteur, $options) {
 	
 	$query = sql_select("email","spip_auteurs","statut = '0minirezo'");
 
+	// notifier uniquement les webmestres ?
+	if ($GLOBALS['notifications']['inscription'] == 'webmestres') {
+		$query = sql_select("email","spip_auteurs","statut = '0minirezo' AND webmestre = 'oui'");
+	}
+
 	while ($row = sql_fetch($query)) {
 		$destinataires[] = $row["email"];
 	}

@@ -131,15 +131,17 @@
 					<h3 class="legend"><:notifications:inscription:></h3>
 					<ul>
 						<li>
-							<div class="choix">
-								<input type="checkbox" name="inscription" [checked="(#ENV{inscription}?{checked})"] id="inscription" class="checkbox" />
-								<label for="inscription"><:notifications:inscription_label:></label>
-							</div>
+							<label for="inscription"><:notifications:inscription_label:></label>
+							<p class="explication"><:notifications:inscription_explication:></p>
+							<select name="inscription" id="inscription">
+								<option value=""><:notifications:inscription_statut_aucun:></option>
+								<option value="webmestres"[ selected="(#ENV{inscription}|=={webmestres}|?{selected})"]><:notifications:inscription_statut_webmestres:></option>
+								<option value="admins"[ selected="(#ENV{inscription}|=={admins}|?{selected})"]><:notifications:inscription_admins:></option>
+							</select>
 						</li>
 					</ul>
 				</fieldset>
 			</li>
-
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
