@@ -6,7 +6,7 @@
 	Goetsu	&#169; 2008 - GNU/GPL
 	</auteur>
 	<version>
-	0.3
+	0.4
 	</version>
 	<etat>
 	dev
@@ -21,6 +21,7 @@
 	<icon>img_pack/wcag1AAA.png
 	</icon>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<utilise id="gestdoc" version="[1.1.2;]" />
 	<categorie>navigation</categorie>
 </plugin>

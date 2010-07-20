@@ -1,49 +1,33 @@
-<BOUCLE_doc (DOCUMENTS) {id_document}>
+<BOUCLE_doc (DOCUMENTS) {id_document} {tout}>
 [(#REM)
 
 	Modele pour <doc> en dl/dt/dd
 	cf. http://pompage.net/pompe/listesdefinitions/
-	si le document à un titre ou une legende sinon meme modele que
-	pour les images. De plus le titre peut etre en dt ou en dd en fonction
-	de la presence ou non d'un descriptif
+
 	La largeur de la legende est egale a la largeur de l'image
 	avec un minimum de 120px, et un maximum de 350px.
 
 	Dans le cas d'une simple image (mode=image), on affiche
 	le document lui-meme, sans lien de telechargement
-	
-	Si une code de langue est passe #ENV{langue} ex: <img12|langue=en>
-	on ajoute l'attribut lang la balise img et eventuellement sur la balise a
-	
-	le contenu de l'attribut alt et title se construit selon le schema
-	que dans le modele img
-	
-	le contenu du titre affiche en dessous de l'image se construit 
-	selon le schema suivant : 
-	- prend la valeur de titre passe en environnement par le biais 
-	d'un parametre sur la balise ex: <doc12|titre=xxx>
-	- sinon on prend #TITRE
-	
-	le contenu du descriptif affiche en dessous de l'image se construit 
-	selon le schema suivant : 
-	- prend la valeur de legende passe en environnement par le biais 
-	d'un parametre sur la balise ex: <doc12|legende=xxx>
-	- sinon on prend #DESCRIPTIF
-
-	
 ]
-[(#MODE|=={image}|?{' '})
+[(#MODE|=={image}|oui)
 	#SET{fichier,#URL_DOCUMENT}
 	#SET{width,#LARGEUR}
 	#SET{height,#HAUTEUR}
 	#SET{url,#ENV{lien}}
 ]
-[(#MODE|=={image}|?{'',' '})
-	[(#SET{fichier,[(#LOGO_DOCUMENT||extraire_attribut{src})]})]
-	[(#SET{width,[(#LOGO_DOCUMENT||extraire_attribut{width})]})]
-	[(#SET{height,[(#LOGO_DOCUMENT||extraire_attribut{height})]})]
+[(#MODE|=={image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
 	#SET{url,#ENV{lien,#URL_DOCUMENT}}
 ]
+
+
+
+
+
+[(#REM) qd titre ou descriptif on utilise le modele en dl sinon modele <img> Ã  base de span]
 
 [(#TITRE|!={''}|?{' '})
 	#SET{dl,'true'}
@@ -54,10 +38,24 @@
 	#SET{desc,'true'}
 ]
 
-
 [(#GET{dl}|=={'true'}|?{' '})
-<dl class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ style="float:(#ENV{align}|match{left|right});"]>
-<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',' - '})]})]][(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ lang="(#ENV{langue})"]>]<img src="#GET{fichier}" width="#GET{width}" height="#GET{height}"[ lang="(#ENV{langue})"] alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})[(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',' - '})]})]][(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]})]" />[(#GET{url}|?{</a>})]</dt>
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|min{350}|max{120})]px;']>
+<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"]
+[(#MODE|=={image}|non)
+[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|non)[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|oui)<:accessibilite:voir_grand:>]"]
+]
+ [(#MODE|=={image}|oui)
+[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})"]
+]
+[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]
+[ lang="(#ENV{langue})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'
+[(#MODE|=={image}|non)
+ alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|non)[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|oui)<:accessibilite:voir_grand:>]]"
+ ]
+ [(#MODE|=={image}|oui)
+ alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
+ ]
+[ lang="(#ENV{langue})"] />[(#GET{url}|?{</a>})]</dt>
 [(#GET{desc}|=={'true'}|?{' '})
 [<dt class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dt>]
 ]
@@ -65,11 +63,37 @@
 [<dd class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dd>]
 ]
 [<dd class="#EDIT{descriptif} spip_doc_descriptif"[ style="width:(#GET{width}|min{350}|max{120})px;"]>(#ENV*{legende}|propre|PtoBR|sinon{#DESCRIPTIF|PtoBR})[(#NOTES|PtoBR)]</dd>]
-</dl>]
-
-[(#GET{dl}|=={''}|?{' '})
-<span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ style="float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]"]>
-[<a href="(#GET{url})" title="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{#MODE|=={image}|?{'',<:info_document:>}}}})[(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',' - '})]})]][(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]})]" [ class="(#ENV{lien_class})"][ lang="(#ENV{langue})"][ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src="#GET{fichier}" width="#GET{width}" height="#GET{height}"[ lang="(#ENV{langue})"] alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{#MODE|=={image}|?{'',<:info_document:>}}}})[(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',' - '})]})]][(#MODE|=={image}|?{'',[(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]})]" />[(#GET{url}|?{</a>})]</span>
+</dl>
 ]
 
+[(#GET{dl}|=={''}|?{' '})
+<span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ 
+	style="float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]"]>[
+	<a href="(#GET{url})" 
+	[ class="(#ENV{lien_class})"]
+	[ lang="(#ENV{langue})"]
+	[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]	
+	[(#MODE|=={image}|non)
+[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|non)[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|oui)<:accessibilite:voir_grand:>]"]
+]
+ [(#MODE|=={image}|oui)
+[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})"]
+]>]
+	<img src="#GET{fichier}"
+	 width="#GET{width}" height="#GET{height}"
+	 [ lang="(#ENV{langue})"]
+	  [(#MODE|=={image}|non)
+ alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|non)[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|oui)<:accessibilite:voir_grand:>]]"
+ ]
+ [(#MODE|=={image}|oui)
+ alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
+ ]
+ [(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
+	  [(#GET{url}|?{</a>})]</span>
+]
 </BOUCLE_doc>
+
+
+
+
+
