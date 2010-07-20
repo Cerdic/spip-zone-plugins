@@ -29,6 +29,16 @@ function inc_journal_dist($phrase, $opt = array()) {
 		if((lire_config('bigbrother/enregistrer_ip') == 'oui') && !$opt['infos']['ip']){
 			$opt['infos']['ip'] = $GLOBALS['ip'];
 		}
+		// Envoyer aux plugins
+		$champs = pipeline('pre_edition',
+			array(
+				'args' => array(
+					'table' => 'spip_journal',
+					'action'=>'inserer'
+				),
+				'data' => $champs
+			)
+		);
 		if($f = charger_fonction($opt['faire'],'journal',true)){
 			$f($opt);
 		}else{
