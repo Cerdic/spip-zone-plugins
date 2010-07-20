@@ -82,20 +82,6 @@ function amap_declarer_tables_principales($tables_principales){
 		'join' => array('id_saison'=>'id_saison','id_lieu'=>'id_lieu','id_personne1'=>'id_personne','id_personne2'=>'id_personne','id_personne3'=>'id_personne1')
 		);
 
-	//-- Table evenements_participants -------------------
-	$spip_amap_evenements_participants = array(
-		'id_evenement'  => 'BIGINT(20) NOT NULL',
-		'id_evenement'  => 'BIGINT(20) NOT NULL',
-		);
-	$spip_amap_evenements_participants_key = array(
-		'PRIMARY KEY'   => 'id_evenement,id_evenement'
-		);
-	$tables_principales['spip_amap_evenements_participants'] = array(
-		'field' => &$spip_amap_evenements_participants,
-		'key' => &$spip_amap_evenements_participants_key,
-		'join' => array('id_evenement'=>'id_evenement','id_evenement'=>'id_evenement')
-		);
-
 	//-- Table famille_variete -------------------
 	$spip_amap_famille_variete = array(
 		'id_famille'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
