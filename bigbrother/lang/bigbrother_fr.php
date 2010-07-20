@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_statistiques' => '"id_article" ou "id_auteur" manquant',
+	'explication_exclure_auteurs' => 'Les auteurs s&eacute;lectionn&eacute;s seront exclus des r&eacute,sultats visibles mais seront quand m&ecirc;me enregistr&eacute; en base pour les cas o&ugrave; l\'on souhaite revenir en arri&egrave;re.',
 	'explication_page_stats' => 'Cette page liste les &eacute;v&egrave;nements qui ont eu lieu sur le site',
 
 	// F
@@ -51,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_date_debut' => 'Date de d&eacute;but',
 	'label_date_fin' => 'Date de fin',
+	'label_exclure_auteurs' => 'Exclure certains auteurs',
 	'label_nombre_pagination' => 'Paginer par :',
 	'label_suppression_journal_criteres' => 'Suppression des entr&eacute;es li&eacute;es &agrave; vos crit&egrave;res',
 

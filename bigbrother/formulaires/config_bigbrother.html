@@ -50,6 +50,10 @@
 					<label for="enregistrer_connexion_anonyme"><:bigbrother:configuration_enregistrer_connexion_anonyme:></label>
 				</div>
 			</li>
+			[(#SAISIE{auteurs,exclure_auteurs,
+				label=<:bigbrother:label_exclure_auteurs:>,
+				explication=<:bigbrother:explication_exclure_auteurs:>,
+				multiple=oui})]
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />

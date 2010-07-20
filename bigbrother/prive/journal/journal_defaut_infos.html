@@ -2,7 +2,7 @@
 #SET{dates,#ARRAY}
 #SET{auteurs,#ARRAY}
 #SET{actions_auteurs,#ARRAY}
-<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{par objet,id_objet}>
+<BOUCLE_journal_stats_total(JOURNAL){id_journal IN #ENV{id_journals}}{id_auteur !IN #CONFIG{bigbrother/exclure_auteurs,#ARRAY}}{par objet,id_objet}>
 	#SET{actions,
 		#GET{actions}|push{#ACTION}
 	}

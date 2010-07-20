@@ -5,7 +5,7 @@
 		#SET{dates, #ARRAY}
 		#SET{temps_date,#ARRAY}
 		#SET{auteurs,#ARRAY}
-		<BOUCLE_journal_stats_valide(JOURNAL){par date}{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}{objet ?}{id_objet ?}{id_auteur ?}{action like #ENV{action,%}}{inverse}>
+		<BOUCLE_journal_stats_valide(JOURNAL){par date}{date>#ENV{date_debut,0}}{date<#ENV{date_fin,#ENV{date}}}{objet ?}{id_objet ?}{id_auteur ?}{action like #ENV{action,%}}{id_auteur !IN #CONFIG{bigbrother/exclure_auteurs,#ARRAY}}{inverse}>
 			[(#SET{date_new,''})]
 			[(#ACTION|in_array{#GET{actions}}|non)
 				#SET{actions,#GET{actions}|push{#ACTION}}
