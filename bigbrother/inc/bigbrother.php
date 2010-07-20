@@ -10,27 +10,28 @@ include_spip('base/abstract_sql');
 
 // Met à jour la session et enregistre dans la base
 function bigbrother_enregistrer_la_visite_du_site(){
-	session_set('date_visite', time());
-	if($GLOBALS['visiteur_session']['id_auteur']){
-		sql_insertq(
-			"spip_visites_auteurs",
-			array(
-				'date' => date('Y-m-d H:i:s', session_get('date_visite')),
-				'id_auteur' => $GLOBALS['visiteur_session']['id_auteur']
-			)
+	if(($time < ($GLOBALS['visiteur_session']['date_visite'])) OR !($GLOBALS['visiteur_session']['date_visite'])){
+		session_set('date_visite', time());
+		if($GLOBALS['visiteur_session']['id_auteur']){
+			sql_insertq(
+				"spip_visites_auteurs",
+				array(
+					'date' => date('Y-m-d H:i:s', session_get('date_visite')),
+					'id_auteur' => $GLOBALS['visiteur_session']['id_auteur']
+				)
+			);
+		}
+
+		$journal = charger_fonction('journal','inc');
+
+		$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
+		$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
+
+		$journal(
+			_T('bigbrother:action_visite',array('qui' => $qui)),
+			array('qui' => $qui_ou_ip,'faire' => 'visite','date' => date('Y-m-d H:i:s', session_get('date_visite')))
 		);
 	}
-
-	$journal = charger_fonction('journal','inc');
-
-	$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
-	$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
-
-	$journal(
-		_T('bigbrother:action_visite',array('qui' => $qui)),
-		array('qui' => $qui_ou_ip,'faire' => 'visite','date' => date('Y-m-d H:i:s', session_get('date_visite')))
-	);
-
 }
 
 // Teste s'il faut enregistrer la visite ou pas
