@@ -425,12 +425,20 @@ function encodage($source,$doc_attente){
 			$infos_encodage['fin_encodage'] = time();
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 			sql_updateq("spip_documents",array('id_orig'=>$attente['id_document']),'id_document='.intval($x));
+			/**
+			 * Tentative de récupération d'un logo du document original
+			 */
+			if($source['id_vignette'] > 0){
+				$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
+				$fichier_vignette = get_spip_doc($vignette['fichier']);
+				$string_tmp = basename(get_spip_doc($vignette['fichier'])).'-'.date();
+				$nom_vignette = md5($string_tmp).'.'.$vignette['extension'];
+				$x2 = $ajouter_documents($fichier_vignette, $nom_vignette, '', '', 'vignette', $x, $actif,'','','');
+			}
 		}else{
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
 			spip_log('Il y a une erreur, le fichier n est pas copié','spipmotion');
 		}
-
-
 	}
 	/**
 	 * Si l'encodage n'est pas ok ...
@@ -448,8 +456,8 @@ function encodage($source,$doc_attente){
 	/**
 	 * Invalidation du cache
 	 */
-		include_spip('inc/invalideur');
-		suivre_invalideur("0",true);
+	include_spip('inc/invalideur');
+	suivre_invalideur("0",true);
 
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('spipmotion_encodage', intval($doc_attente),
