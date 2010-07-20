@@ -5,7 +5,7 @@
 	<version_base>0.1</version_base>
 
 	<licence>Distribu&eacute; sous licence GNU/GPL</licence>
-	<etat>test</etat>
+	<etat>dev</etat>
 
     <description>
 	Ce plugin active ou d&eacute;sactive le module AMAP (qui permet de g&eacute;rer aux mieux une Association de Maintien de l'Agriculture Paysanne).
