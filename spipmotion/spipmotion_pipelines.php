@@ -136,14 +136,25 @@ function spipmotion_post_edition($flux){
 				$invalider = true;
 			}
 
+
 			/**
 			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 			 */
 			$fichier = basename(get_spip_doc($document['fichier']));
 			$racine = str_replace('-encoded','',substr($fichier,0,-(strlen($document['extension'])+1)));
-			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !($id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document"))){
+			$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
+			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
 				include_spip('action/spipmotion_ajouter_file_encodage');
 				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+			}
+			/**
+			 * Tentative de récupération d'un logo du document original
+			 */
+			if($id_doc){
+				$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_doc));
+				if(!$logo && is_numeric($id_vignette) && ($id_vignette > 0)){
+					sql_updateq('spip_documents',array('id_vignette'=>$id_vignette),'id_document='.intval($id_document));
+				}
 			}
 
 			/**
