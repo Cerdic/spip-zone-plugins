@@ -6,6 +6,8 @@
  *
  */
 
+@define('_JQ_SCHEDULED',1);
+@define('_JQ_PENDING',0);
 
 /**
  * Add a job to the queue. The function added will be called in the order it
@@ -47,7 +49,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 			$no_duplicate
 		AND
 			sql_countsel('spip_jobs',
-				'status=\'scheduled\' AND fonction='.sql_quote($function)
+				'status='.intval(_JQ_SCHEDULED).' AND fonction='.sql_quote($function)
 				.(($no_duplicate==='function_only')?'':
 				 ' AND md5args='.sql_quote($md5args).' AND inclure='.sql_quote($file)))
 		)
@@ -66,7 +68,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 			'inclure'=>$file,
 			'priorite'=>max(-10,min(10,intval($priority))),
 			'date'=>$date,
-			'status'=>'scheduled',
+			'status'=>_JQ_SCHEDULED,
 		));
 
 	if (defined('_JQ_INSERT_CHECK_ARGS') AND $id_job) {
@@ -234,10 +236,10 @@ function queue_schedule($force_jobs = null){
 	// lorsqu'un job cron n'a pas fini, sa priorite est descendue
 	// pour qu'il ne bloque pas les autres jobs en attente
 	if (is_array($force_jobs) AND count($force_jobs))
-		$cond = "status='scheduled' AND ".sql_in("id_job", $force_jobs);
+		$cond = "status=".intval(_JQ_SCHEDULED)." AND ".sql_in("id_job", $force_jobs);
 	else {
 		$now = date('Y-m-d H:i:s',$time);
-		$cond = "status='scheduled' AND date<".sql_quote($now);
+		$cond = "status=".intval(_JQ_SCHEDULED)." AND date<".sql_quote($now);
 	}
 
 	register_shutdown_function('queue_error_handler'); // recuperer les erreurs auant que possible
@@ -246,10 +248,10 @@ function queue_schedule($force_jobs = null){
 		if ($row = sql_fetch($res)){
 			$nbj++;
 			// il faut un verrou, a base de sql_delete
-			if (sql_delete('spip_jobs',"status='scheduled' AND id_job=".intval($row['id_job']))){
+			if (sql_delete('spip_jobs',"id_job=".intval($row['id_job']."AND status=".intval(_JQ_SCHEDULED)))){
 				#spip_log("JQ schedule job ".$nbj." OK",'jq');
-				// on reinsert dans la base aussitot avec un status='pending'
-				$row['status'] = 'pending';
+				// on reinsert dans la base aussitot avec un status=_JQ_PENDING
+				$row['status'] = _JQ_PENDING;
 				$row['date'] = $time;
 				sql_insertq('spip_jobs', $row);
 	
@@ -276,7 +278,7 @@ function queue_schedule($force_jobs = null){
 }
 
 /**
- * Terminer un job au status 'pending' :
+ * Terminer un job au status _JQ_PENDING :
  *  - le reprogrammer si c'est un cron
  *  - supprimer ses liens
  *  - le detruire en dernier
@@ -361,21 +363,21 @@ function queue_update_next_job_time($next_time=null){
 	include_spip('base/abstract_sql');
 	$time = time();
 
-	// traiter les jobs morts au combat (pending depuis plus de 180s)
+	// traiter les jobs morts au combat (_JQ_PENDING depuis plus de 180s)
 	// pour cause de timeout ou autre erreur fatale
-	$res = sql_select("*","spip_jobs","status='pending' AND date<".sql_quote(date('Y-m-d H:i:s',$time-180)));
+	$res = sql_select("*","spip_jobs","status=".intval(_JQ_PENDING)." AND date<".sql_quote(date('Y-m-d H:i:s',$time-180)));
 	while ($row = sql_fetch($res))
 		queue_close_job($row,$time);
 
 	// chercher la date du prochain job si pas connu
 	if (is_null($next) OR !isset($GLOBALS['meta']['queue_next_job_time'])){
-		$date = sql_getfetsel('date','spip_jobs',"status='scheduled'",'','date','0,1');
+		$date = sql_getfetsel('date','spip_jobs',"status=".intval(_JQ_SCHEDULED),'','date','0,1');
 		$next = strtotime($date);
 	}
 	else {
 		if ($next){
 			if (is_null($nb_jobs_scheduled))
-				$nb_jobs_scheduled = sql_countsel('spip_jobs',"status='scheduled' AND date<".sql_quote(date('Y-m-d H:i:s',$time)));
+				$nb_jobs_scheduled = sql_countsel('spip_jobs',"status=".intval(_JQ_SCHEDULED)." AND date<".sql_quote(date('Y-m-d H:i:s',$time)));
 			elseif ($next<=$time)
 				$nb_jobs_scheduled++;
 			// si trop de jobs en attente, on force la purge en fin de hit

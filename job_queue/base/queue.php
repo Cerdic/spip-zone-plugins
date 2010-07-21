@@ -28,7 +28,7 @@ function queue_declarer_tables_principales($tables_principales){
 		"inclure" => "varchar(255) NOT NULL", // fichier a inclure ou path/ pour charger_fonction
 		"priorite" 	=> "smallint(6) NOT NULL default 0",
 		"date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // date au plus tot
-		"status" => "varchar(15) NOT NULL default 'scheduled'",
+		"status" => "tinyint NOT NULL default 1",
 		);
 
 	$spip_jobs_key = array(
@@ -94,6 +94,27 @@ function queue_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("table spip_jobs change args args longblob DEFAULT '' NOT NULL");
 			sql_alter("table spip_jobs add index status (status)");
 			ecrire_meta($nom_meta_base_version,$current_version="0.3.2",'non');
+		}
+		if (version_compare($current_version,"0.3.3",'<')){
+			include_spip('inc/queue'); // define _JQ_PENDING
+			// virer d'abord l'index existant
+			sql_alter("table spip_jobs drop index status");
+			// ne pas refaire un update si la migration a deja eu lieu
+			if (!sql_countsel('spip_jobs', 'status=1')){
+				// renommer le champ le temps de la migration
+				sql_alter("table spip_jobs change status status_old varchar(15) NOT NULL default 'scheduled'");
+				// ajouter le nouveau status avec un nom provisoire
+				sql_alter("table spip_jobs add status_new tinyint NOT NULL default 1");
+				// synchroniser les deux status
+				sql_update('spip_jobs',array('status_new'=>intval(_JQ_PENDING)),"status_old='pending'");
+			}
+			// renommer le status
+			sql_alter("table spip_jobs change status_new status tinyint NOT NULL default 1");
+			// placer un index dessus
+			sql_alter("table spip_jobs add index status (status)");
+			// virer le vieux status
+			sql_alter("table spip_jobs drop status_old");
+			ecrire_meta($nom_meta_base_version,$current_version="0.3.3",'non');
 		}
 
 	}

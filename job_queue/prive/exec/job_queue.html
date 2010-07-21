@@ -12,8 +12,8 @@
 	[<p class="pagination">(#PAGINATION)</p>]
 	<ul class="liste_items">
 		<BOUCLE_jobs(JOBS){par date}{pagination 20}>
-			<li class="item #STATUS">
-				<div class="date">[(#DATE|date_relative)][ (#STATUS|=={pending}|oui)(en cours)]</div>
+			<li class="item[ (#STATUS|?{'scheduled','pending'})]">
+				<div class="date">[(#DATE|date_relative)][ (#STATUS|non)(en cours)]</div>
 				[<strong class="description">(#DESCRIPTIF|PtoBR)</strong>]
 				[<span class="small">| #FONCTION((#ARGS|unserialize|implode{','}))</span>]
 				[(#AUTORISER{'annuler','job',#ID_JOB}|oui)
