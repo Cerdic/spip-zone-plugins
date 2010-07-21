@@ -96,6 +96,14 @@ function noizetier_charger_infos_noisette_xml($noisette, $info=""){
 						$infos_noisette['necessite'][] = $attributs['id'];
 					}
 				}
+				// Décomposition informations du contexte a utiliser
+				if (spip_xml_match_nodes(',^contexte,', $xml, $contextes)){
+					$infos_noisette['contexte'] = array();
+					foreach (array_keys($contextes) as $contexte){
+						list($balise, $attributs) = spip_xml_decompose_tag($contexte);
+						$infos_noisette['contexte'][] = $attributs['nom'];
+					}
+				}
 			}
 		}
 		if (!$info)
@@ -128,6 +136,15 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info=""){
 				
 			if (!isset($infos_noisette['parametres']))
 				$infos_noisette['parametres'] = array();
+				
+			// contexte
+			if (!isset($infos_noisette['contexte'])) {
+				$infos_noisette['contexte'] = array();
+			}
+			if (is_string($infos_noisette['contexte'])) {
+				$infos_noisette['contexte'] = array($infos_noisette['contexte']);
+			}
+
 		}
 
 		if (!$info)
@@ -153,6 +170,24 @@ function noizetier_charger_parametres_noisette($noisette){
 	}
 	return $params_noisettes[$noisette];
 }
+
+/**
+ * Charger les informations des contexte pour une noisette
+ *
+ * @param string $noisette
+ * @staticvar array $params_noisettes
+ * @return array
+ */
+function noizetier_charger_contexte_noisette($noisette){
+	static $contexte_noisettes = null;
+
+	if (is_null($contexte_noisettes[$noisette])){
+		$noisettes = noizetier_lister_noisettes();
+		$contexte_noisettes[$noisette] =  $noisettes[$noisette]['contexte'];
+	}
+	return $contexte_noisettes[$noisette];
+}
+
 
 /**
  * Transforme un tableau au format du plugin saisies en un tableau de parametres dont les clés sont les noms des paramètres

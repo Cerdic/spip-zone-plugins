@@ -14,7 +14,7 @@ function noizetier_upgrade($nom_meta_version_base, $version_cible){
 		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
 	){
 		
-		if (version_compare($version_actuelle,'0.0','=')){
+		if (version_compare($version_actuelle,'0.0','=')) {
 			// Création des tables
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
@@ -24,6 +24,13 @@ function noizetier_upgrade($nom_meta_version_base, $version_cible){
 			
 			echo _T('noizetier:installation_tables');
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
+		if (version_compare($version_actuelle,'0.2','<')) {
+			// Ajout du champ 'contexte'
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			maj_tables('spip_noisettes');
+			ecrire_meta($nom_meta_version_base, $version_actuelle='0.2', 'non');
 		}
 		
 		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');

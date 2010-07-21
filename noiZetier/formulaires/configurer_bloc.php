@@ -135,6 +135,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 		$rang = intval(_request('rang'));
 		$noisette = _request('noisette');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
+		$contexte = noizetier_charger_contexte_noisette($noisette);
 		$parametres_envoyes = array();
 		foreach ($infos_param as $nom=>$parametre)
 			$parametres_envoyes[$nom] = _request($nom);
@@ -154,7 +155,8 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 					'composition' => $composition,
 					'rang' => $rang,
 					'noisette' => $noisette,
-					'parametres' => serialize($parametres_envoyes)
+					'parametres' => serialize($parametres_envoyes),
+					'contexte' => serialize($contexte) 
 				)
 			);
 			// On invalide le cache
@@ -169,7 +171,8 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 			$id_noisette = sql_updateq(
 				'spip_noisettes',
 				array(
-					'parametres' => serialize($parametres_envoyes)
+					'parametres' => serialize($parametres_envoyes),
+					'contexte' => serialize($contexte) // mise a jour du contexte de la noisette
 				),
 				'id_noisette='.$id_noisette_modifiee
 			);

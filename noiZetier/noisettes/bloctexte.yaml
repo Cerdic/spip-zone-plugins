@@ -24,3 +24,4 @@ parametres:
       nom: 'texte'
       label: '<:noizetier:label_texte:>'
       obligatoire: 'oui'
+contexte: aucun
