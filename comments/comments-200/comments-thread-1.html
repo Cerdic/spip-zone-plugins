@@ -1,17 +1,17 @@
 [(#REM) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#PARAMETRES_FORUM|?{''})]
 <B_comments-list>
-<div class="comments-thread">
+<div class="comments-list comments-thread comments-thread-1">
 	<h2 class="h2"><:comments:comments_h:></h2>
 	[<div class="pagination">(#PAGINATION)</div>]
 	<ul class="comments-ul">
 		<BOUCLE_comments-list(FORUMS){id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {!par date_thread}{pagination 10}>
-		<li class="comment-li [(#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=modeles/comment}{id_forum}{compteur=#COMPTEUR_BOUCLE}{thread=oui}>
 			<B_comments-fils>
 			<ul class="comments-ul">
 				<BOUCLE_comments-fils(FORUMS){id_thread}{id_forum!=#_comments-list:ID_FORUM}{par date}>
-				<li class="comment-li[(#COMPTEUR_BOUCLE|=={1}|oui)first][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
+				<li class="comment-li[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
 					<INCLURE{fond=modeles/comment}{id_forum}{thread=oui}>
 				</li>
 				</BOUCLE_comments-fils>
