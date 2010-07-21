@@ -158,23 +158,4 @@ function comments_formulaire_traiter($flux){
 	return $flux;
 
 }
-
-/**
- * Inserer le code javascript pour placer le formulaire de reponde ou il faut
- *
- * On inclut seulement si on est dans le mode one-thread
- *
- * @param <type> $flux
- * @return <type>
- */
-
-function comments_insert_head ($flux) {
-	if (lire_config('comments/comments_fil') == 'one-thread') {
-		$flux .= '<script type="text/javascript" src="'.chemin('javascript/thread-move.js').'">var chaine = "'._T('public:repondre_message').'";</script>';
-		$flux .= '<script type="text/javascript">';
-		$flux .= 'var chaine = "'._T('public:repondre_message').'";';
-		$flux .= '</script>';
-	}
-	return $flux;
-}
 ?>

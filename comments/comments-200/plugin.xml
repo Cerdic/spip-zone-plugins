@@ -22,10 +22,6 @@
 	<nom>formulaire_traiter</nom>
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>
-<pipeline>
-	<nom>insert_head</nom>
-	<inclure>comments_pipelines.php</inclure>
-</pipeline>
 <necessite id="SPIP" version="[2.0.9;]" />
 <utilise id='Z' version="[;]" />
 <categorie>communication</categorie>
