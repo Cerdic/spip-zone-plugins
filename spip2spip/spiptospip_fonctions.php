@@ -35,7 +35,7 @@ function analyser_backend_spip2spip($rss){
   include_spip("inc_texte.php"); # pour couper()
 	include_spip("inc_filtres.php"); # pour filtrer_entites()
 		
-	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','evenements', 'lang','logo','keyword','licence','documents'); 
+	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','evenements', 'lang','logo','keyword','mots','licence','documents'); 
 	
 	$syndic_regexp = array(
 				'item'           => ',<item[>[:space:]],i',
@@ -54,13 +54,14 @@ function analyser_backend_spip2spip($rss){
         'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
         'logo'           => ',<logo[^>]*>(.*?)</logo[^>]*>,ims',
         'keyword'        => ',<keyword[^>]*>(.*?)</keyword[^>]*>,ims',
+        'mots'           => ',<mots[^>]*>(.*?)</mots[^>]*>,ims',
         'licence'        => ',<licence[^>]*>(.*?)</licence[^>]*>,ims',
         'documents'      => ',<documents[^>]*>(.*?)</documents[^>]*>,ims',
 		
 	);
 	
-	$xml_doc_tags = array('id','url','titre','desc');
-	
+	// documents
+	$xml_doc_tags = array('id','url','titre','desc');	
 	$document_regexp = array(		
   			'document'       => ',<document[>[:space:]],i',
 				'documentfin'    => '</document>',
@@ -71,8 +72,18 @@ function analyser_backend_spip2spip($rss){
 				'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
 	);
 	
+	// mots
+	$xml_mot_tags = array('groupe','titre');	
+	$mot_regexp = array(		
+  			'mot'       => ',<mot[>[:space:]],i',
+				'motfin'    => '</mot>',
+        	
+				'groupe'    => ',<groupe[^>]*>(.*?)</groupe[^>]*>,ims',
+				'titre'     => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+	);
+	
+	// evenements
 	$xml_event_tags = array('idevent','datedeb','datefin','titre','desc','lieu','adresse','horaire','idsource');
-
 	$evenement_regexp = array(		
   			'evenement'        => ',<evenement[>[:space:]],i',
 				'evenementfin'     => '</evenement>',
@@ -176,9 +187,8 @@ function analyser_backend_spip2spip($rss){
 	
 		                                                  
 
-	// On parse le noeud evenement
-    if ($data['evenements'] != "") {         
-          
+	  // On parse le noeud evenement
+    if ($data['evenements'] != "") {
           $evenements = array();
           if (preg_match_all($evenement_regexp['evenement'],$data['evenements'],$r3, PREG_SET_ORDER))
           	foreach ($r3 as $regs) {
@@ -204,8 +214,38 @@ function analyser_backend_spip2spip($rss){
      
               $data['evenements'] =  serialize($agenda); 
           }       
+    }
+    
+    // On parse le noeud mots
+    if ($data['mots'] != "") {        
+          $mots = array();
+          spip_log(".......debug: on trouve des mots");
+          if (preg_match_all($mot_regexp['mot'],$data['mots'],$r2, PREG_SET_ORDER))
+          	foreach ($r2 as $regs) {
+          		$debut_item = strpos($data['mots'],$regs[0]);
+          		$fin_item = strpos($data['mots'],
+          		$mot_regexp['motfin'])+strlen($mot_regexp['motfin']);
+          		$mots[] = substr($data['mots'],$debut_item,$fin_item-$debut_item);
+          		$debut_texte = substr($data['mots'], "0", $debut_item);
+          		$fin_texte = substr($data['mots'], $fin_item, strlen($data['mots']));
+          		$data['mots'] = $debut_texte.$fin_texte;
+          }
+          
+          $motcle = array();
+          if (count($mots)) {          
+              foreach ($mots as $mot) {                 
+                 $data_node = array();
+                 foreach ($xml_mot_tags as $xml_mot_tag) {
+                    if (preg_match($mot_regexp[$xml_mot_tag],$mot,$match)) $data_node[$xml_mot_tag] = $match[1]; 
+  				                                                            else $data_node[$xml_mot_tag] = "";
+  				       } 
+                $motcle[] = $data_node;                                                     
+              }             
+              $data['mots'] =  serialize($motcle);
+          }       
     }	
-	
+	  
+	  
 		// Nettoyer les donnees et remettre les CDATA en place
 		foreach ($data as $var => $val) {
 			$data[$var] = filtrer_entites($data[$var]);
@@ -316,13 +356,14 @@ function spip2spip_update_mode_document($id_document,$mode="vignette") {
    sql_updateq('spip_documents', array("mode"=>$mode), "id_document=$id_document");
 }
 
-//
-// function principale: spip2spip_syndique
+//---------------------------------------
+// fonction principale: spip2spip_syndique
 //
 // effectue la syndication d'un site donnee
 // - id_site
 // - mode: cron (silencieux avec spip_log) 
 //         html (log bavard)
+//---------------------------------------
 function spip2spip_syndiquer($id_site, $mode='cron') {
     include_spip("inc/distant"); 
     include_spip("inc/syndic"); 
@@ -508,7 +549,19 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                             }
                       }
                       
-                      // etape 3 - traitement des evenements (a finir de porter) FIXME
+                      // etape 3 - traitement des mots de l'article
+                      $_mots = $article['mots']; 
+                      if ($_mots!="") {
+                        $_mots = unserialize($_mots);                  
+                        foreach($_mots as $_mot) {                    
+                            $groupe = $_mot['groupe'];                            
+                            $titre  = $_mot['titre']; 
+                            spip_log(">...mot: $titre (groupe: $groupe)");                   
+                        }
+                      }
+                            
+                      
+                      // etape 4 - traitement des evenements (a finir de porter) FIXME
                       $_evenements = $article['evenements'];
     				          $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
                       if ($_evenements!="") {

@@ -5,7 +5,8 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
   
   Vous pouvez modifier ce fichier selon vos besoins (exclure des rubriques, ...)
 
-]<!-- backend utilisant SPIP2SPIP --><spip2spip version="1.8">
+]#SET{which_groupe,#CONFIG{spip2spip/export_mot_groupe,#ARRAY{0,-1}}}
+<!-- backend utilisant SPIP2SPIP --><spip2spip version="1.8">
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>	
   <!-- thématiques proposées --><BOUCLE_thema(MOTS){type=- spip2spip -}>
@@ -36,6 +37,10 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
 		 <lang>#LANG</lang>
 		 [<logo>(#URL_SITE_SPIP/#LOGO_ARTICLE|fichier)</logo>]
      <BOUCLE_list_mot(MOTS){id_article}{type=- spip2spip -}{0,1}>[<keyword>(#TITRE|supprimer_numero|texte_backend)</keyword>]</BOUCLE_list_mot>
+     [(#CONFIG{spip2spip/export_mot_article}|oui)
+        [(#GET{which_groupe}|find{-1}|oui)<INCLURE{fond=inclure/spip2spip_mot_article}{id_article} />]
+        [(#GET{which_groupe}|find{-1}|non)<INCLURE{fond=inclure/spip2spip_mot_article_restreint}{id_article} />]
+     ]
      <B_licence><licence><BOUCLE_licence(MOTS){id_article}{type=licence}{0,1}>[(#TITRE|supprimer_numero|texte_backend)]</BOUCLE_licence></licence></B_licence>		
 		</item>
 	</BOUCLE_synchro_article>
