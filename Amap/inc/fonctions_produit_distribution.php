@@ -23,9 +23,9 @@ function table_amap_lister_produit_distributions($idSaison)
 
   if ($idSaison!=0)
   { // on affiche l'ensemble des distributions de la saison
-    // 1er boucle sur la table amap_produit_distribution
+    // 1er boucle sur la table spip_amap_produit_distribution
     $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement, d.id_evenement, d.id_produit";
-    $txtQuery .= " FROM amap_produit_distribution d, amap_evenements e";
+    $txtQuery .= " FROM spip_amap_produit_distribution d, spip_amap_evenements e";
     $txtQuery .= " WHERE e.id_evenement=d.id_evenement";
     $txtQuery .= " AND e.id_saison=".$idSaison;
     $txtQuery .= " ORDER BY e.date_evenement";
@@ -42,16 +42,16 @@ function table_amap_lister_produit_distributions($idSaison)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=spip_amap_produit","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['dateEvenement']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=spip_amap_produit","ecrire")." '>\n";
 
       // on recherche le label du produit
-      $txtQuery = "SELECT label_produit FROM amap_produit ";
+      $txtQuery = "SELECT label_produit FROM spip_amap_produit ";
       $txtQuery .= "WHERE id_produit=".$tabUnEnregistrement_1['id_produit'];
       $sqlResult_2 = sql_query($txtQuery);
 
@@ -64,7 +64,7 @@ function table_amap_lister_produit_distributions($idSaison)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=suppr&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=produits","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=suppr&idDistrib=".$tabUnEnregistrement_1['id_evenement']."&idSaison=".$idSaison."&idProduit=".$tabUnEnregistrement_1['id_produit']."&table=spip_amap_produit","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -116,8 +116,8 @@ function table_amap_getmodif_produit_distribution()
   $out .= "\t\t</td>\n";
   $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-  // boucle sur la table amap_produit
-  $txtQuery = "SELECT * FROM amap_produit";
+  // boucle sur la table spip_amap_produit
+  $txtQuery = "SELECT * FROM spip_amap_produit";
   $sqlResult = sql_query($txtQuery);
 
   $out .= "\t\t\t<select name='nouvIdProduit'>\n";
@@ -136,7 +136,7 @@ function table_amap_getmodif_produit_distribution()
   $hiddens .= "\t<input type='hidden' name='idDistrib' value='".$_GET['idDistrib']."' />\n";
   $hiddens .= "\t<input type='hidden' name='ancIdProduit' value='".$_GET['idProduit']."' />\n";
 
-  return generer_url_entite('amap_distributions', "table=produits&action=maj","post_ecrire")
+  return generer_url_entite('amap_distributions', "table=spip_amap_produit&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -159,14 +159,14 @@ function table_amap_get_produit_distribution($idSaison)
     $out .= "\t\t</td>\n";
     $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-    // boucle sur la table amap_evenements
-    $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement, e.id_evenement FROM amap_evenements e";
+    // boucle sur la table spip_amap_evenements
+    $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement, e.id_evenement FROM spip_amap_evenements e";
     $txtQuery .= " WHERE e.id_saison=".$idSaison;
     $txtQuery .= " AND e.id_evenement NOT IN (";
-    $txtQuery .= "  SELECT id_evenement FROM amap_produit_distribution";
+    $txtQuery .= "  SELECT id_evenement FROM spip_amap_produit_distribution";
     $txtQuery .= "  GROUP BY id_evenement";
     $txtQuery .= "  HAVING count(id_produit) = (";
-    $txtQuery .= "    SELECT count(id_produit) FROM amap_produit";
+    $txtQuery .= "    SELECT count(id_produit) FROM spip_amap_produit";
     $txtQuery .= "  ) ";
     $txtQuery .= ") ";
     $txtQuery .= " ORDER BY e.date_evenement";
@@ -188,8 +188,8 @@ function table_amap_get_produit_distribution($idSaison)
     $out .= "\t\t</td>\n";
     $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-   // boucle sur la table amap_produit
-    $txtQuery = "SELECT * FROM amap_produit";
+   // boucle sur la table spip_amap_produit
+    $txtQuery = "SELECT * FROM spip_amap_produit";
     $sqlResult = sql_query($txtQuery);
 
     $out .= "\t\t\t<select name='idProduit'>\n";
@@ -203,7 +203,7 @@ function table_amap_get_produit_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
 
-    return generer_url_entite('amap_distributions', "table=produits&action=add","post_ecrire")
+    return generer_url_entite('amap_distributions', "table=spip_amap_produit&action=add","post_ecrire")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -221,14 +221,14 @@ function table_amap_get_produit_distribution($idSaison)
 //
 function table_amap_modif_post_produit_distribution()
 {
-  $txtQuery = "UPDATE amap_produit_distribution SET ";
+  $txtQuery = "UPDATE spip_amap_produit_distribution SET ";
   $txtQuery .= "id_produit='".$_POST['nouvIdProduit']."' ";
   $txtQuery .= " WHERE id_evenement=".$_POST['idDistrib'];
   $txtQuery .= " AND id_produit=".$_POST['ancIdProduit'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_produit_distribution " .
+  return "Mise à jour dans la table spip_amap_produit_distribution " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idDistrib'].", ".$_POST['ancIdProduit'].") "));
 } //function table_amap_modif_post_produit_distribution
 
@@ -238,13 +238,13 @@ function table_amap_modif_post_produit_distribution()
 //
 function table_amap_post_produit_distribution()
 {
-  $txtQuery = "INSERT INTO amap_produit_distribution VALUES (";
+  $txtQuery = "INSERT INTO spip_amap_produit_distribution VALUES (";
   $txtQuery .= "'".$_POST['idDistrib']."', ";
   $txtQuery .= "'".$_POST['idProduit']."')";
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Insertion dans la table amap_produit_distribution " .
+  return "Insertion dans la table spip_amap_produit_distribution " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idDistrib'].", ".$_POST['idProduit'].") "));
 } //function table_amap_post_produit_distribution
 
@@ -253,13 +253,13 @@ function table_amap_post_produit_distribution()
 //
 function table_amap_suppr_produit_distribution()
 {
-  $txtQuery = "DELETE FROM amap_produit_distribution";
+  $txtQuery = "DELETE FROM spip_amap_produit_distribution";
   $txtQuery .= " WHERE id_evenement=".$_GET['idDistrib'];
   $txtQuery .= " AND id_produit=".$_GET['idProduit'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_produit_distribution " .
+  return "Suppression dans la table spip_amap_produit_distribution " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_GET['idDistrib'].", ".$_GET['idProduit'].") "));
 } //function table_amap_suppr_produit_distribution
 

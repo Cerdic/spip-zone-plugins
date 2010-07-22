@@ -24,7 +24,7 @@ function table_amap_lister_reglement_contrat($idSaison, $idProduit, $idContrat)
   if ( ($idSaison!=0) && ($idProduit!=0) && isset($idContrat) )
   { // on affiche l'ensemble des reglement disponible pour une saison et un produit donné
     $txtQuery = "SELECT r.id_cheque, b.label_banque, r.montant_euros, r.ref_cheque";
-    $txtQuery .= " FROM amap_reglement r, amap_banque b";
+    $txtQuery .= " FROM spip_amap_reglement r, spip_amap_banque b";
     $txtQuery .= " WHERE r.id_banque=b.id_banque";
     $txtQuery .= " AND r.id_contrat=".$idContrat;
     $txtQuery .= " ORDER BY r.id_cheque";
@@ -43,31 +43,31 @@ function table_amap_lister_reglement_contrat($idSaison, $idProduit, $idContrat)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=spip_amap_reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['id_cheque']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=spip_amap_reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['label_banque']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=spip_amap_reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['ref_cheque']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=spip_amap_reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['montant_euros']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=suppr&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=reglement","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=suppr&idCheque=".$tabUnEnregistrement['id_cheque']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idContrat=".$idContrat."&table=spip_amap_reglement","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -77,7 +77,7 @@ function table_amap_lister_reglement_contrat($idSaison, $idProduit, $idContrat)
     } // fin while ($tabUnEnregistrement = sql_fetch($sqlResult))
 
     $txtQuery = "SELECT SUM(r.montant_euros) As total, c.nb_distribution, p.prix_distribution";
-    $txtQuery .= " FROM amap_reglement r, amap_contrat c, amap_prix p";
+    $txtQuery .= " FROM spip_amap_reglement r, spip_amap_contrat c, spip_amap_prix p";
     $txtQuery .= " WHERE r.id_contrat=".$idContrat;
     $txtQuery .= " AND c.id_contrat=".$idContrat;
     $txtQuery .= " AND c.id_produit=".$idProduit;
@@ -131,7 +131,7 @@ function table_amap_getmodif_reglement_contrat()
   $hiddens = '';
 
   // on affiche l'ensemble des reglement disponible pour une saison et un produit donné
-  $txtQuery = "SELECT id_banque, montant_euros, ref_cheque FROM amap_reglement";
+  $txtQuery = "SELECT id_banque, montant_euros, ref_cheque FROM spip_amap_reglement";
   $txtQuery .= " WHERE id_contrat=".$_GET['idContrat'];
   $txtQuery .= " AND id_cheque=".$_GET['idCheque'];
   $sqlResult_1 = sql_query($txtQuery);
@@ -164,7 +164,7 @@ function table_amap_getmodif_reglement_contrat()
 
     $out .= "\t\t\t<select name='idBanque'>\n";
     // deuxième boucle pour afficher les label des banques
-    $txtQuery = "SELECT * FROM amap_banque";
+    $txtQuery = "SELECT * FROM spip_amap_banque";
     $sqlResult_2 = sql_query($txtQuery);
 
     while($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -203,7 +203,7 @@ function table_amap_getmodif_reglement_contrat()
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idCheque' value='".$_GET['idCheque']."' />\n";
 
-    return generer_url_entite('amap_contrats', "table=reglement&action=maj","post_ecrire")
+    return generer_url_entite('amap_contrats', "table=spip_amap_reglement&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -229,7 +229,7 @@ function table_amap_get_reglement_contrat($idSaison, $idProduit, $idContrat)
 
     $out .= "\t\t\t<select name='idBanque'>\n";
     // deuxième boucle pour afficher les label des banques
-    $txtQuery = "SELECT * FROM amap_banque";
+    $txtQuery = "SELECT * FROM spip_amap_banque";
     $sqlResult = sql_query($txtQuery);
 
     while($tabUnEnregistrement = sql_fetch($sqlResult))
@@ -262,7 +262,7 @@ function table_amap_get_reglement_contrat($idSaison, $idProduit, $idContrat)
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$idContrat."' />\n";
 
-    return generer_url_entite('amap_contrats', "table=reglement&action=add","post_ecrire")
+    return generer_url_entite('amap_contrats', "table=spip_amap_reglement&action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -288,7 +288,7 @@ function table_amap_get_reglement_contrat($idSaison, $idProduit, $idContrat)
 //
 function table_amap_modif_post_reglement_contrat()
 {
-  $txtQuery = "UPDATE amap_reglement SET";
+  $txtQuery = "UPDATE spip_amap_reglement SET";
   $txtQuery .= " id_banque='".$_POST['idBanque']."', ";
   $txtQuery .= " ref_cheque='".$_POST['ref']."', ";
   $txtQuery .= " montant_euros='".$_POST['montant']."' ";
@@ -296,7 +296,7 @@ function table_amap_modif_post_reglement_contrat()
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_reglement " .
+  return "Mise à jour dans la table spip_amap_reglement " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idCheque'].") "));
 } //function table_amap_modif_post_reglement_contrat
 
@@ -306,14 +306,14 @@ function table_amap_modif_post_reglement_contrat()
 //
 function table_amap_post_reglement_contrat()
 {
-  $txtQuery = "INSERT INTO amap_reglement(id_contrat, id_banque, ref_cheque, montant_euros) VALUES (";
+  $txtQuery = "INSERT INTO spip_amap_reglement(id_contrat, id_banque, ref_cheque, montant_euros) VALUES (";
   $txtQuery .= "'".$_POST['idContrat']."', ";
   $txtQuery .= "'".$_POST['idBanque']."', ";
   $txtQuery .= "'".$_POST['ref']."', ";
   $txtQuery .= "'".$_POST['montant']."')";
   $sqlResult = sql_query($txtQuery);
 
-  return "Insertion dans la table amap_reglement " .
+  return "Insertion dans la table spip_amap_reglement " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: () "));
 } //function table_amap_post_reglement_contrat
 
@@ -322,12 +322,12 @@ function table_amap_post_reglement_contrat()
 //
 function table_amap_suppr_reglement_contrat()
 {
-  $txtQuery = "DELETE FROM amap_reglement";
+  $txtQuery = "DELETE FROM spip_amap_reglement";
   $txtQuery .= " WHERE id_cheque=".$_GET['idCheque'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_reglement " .
+  return "Suppression dans la table spip_amap_reglement " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_GET['idCheque'].") "));
 } //function table_amap_suppr_reglement_contrat
 

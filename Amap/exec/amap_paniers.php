@@ -55,8 +55,8 @@ function exec_amap_paniers()
   debut_cadre_relief();
   echo "<b><div class='verdana2'>";
   $res = icone_horizontale(_T('amap:paniers'), generer_url_ecrire("amap_paniers"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:familles_produits'), generer_url_ecrire("amap_paniers", "table=spip_amap_famille_variete"),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:variete_famille'), generer_url_ecrire("amap_paniers", "table=spip_amap_variete"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
+       .icone_horizontale(_T('amap:familles_produits'), generer_url_ecrire("amap_paniers", "table=spip_amap_produit"),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:variete_famille'), generer_url_ecrire("amap_paniers", "table=spip_amap_famille_variete"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
   echo $res . "</div>";
   fin_cadre_relief();
 
@@ -192,7 +192,7 @@ function exec_amap_paniers()
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
  
   } // fin if ($page == 'familles')
-  else if ($table == 'spip_amap_varietes') 
+  else if ($table == 'spip_amap_famille_variete') 
   { // Page variétés de produits
     $msg_presentation_1 = _T('amap:liste_variete_famille_enregistres');
     $msg_presentation_2 = _T('amap:liste_variete_famille_enregistrement');

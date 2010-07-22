@@ -23,9 +23,9 @@ function table_amap_lister_vacance_distribution($idSaison, $idProduit)
 
   if ( isset($idSaison) && isset($idProduit) )
   { // on affiche l'ensemble des distributions de la saison
-    // 1er boucle sur la table amap_vacance
+    // 1er boucle sur la table spip_amap_vacance
     $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement, v.id_contrat, v.id_evenement, c.id_personne, p1.prenom As cPrenom, p1.nom As cNom, v.id_remplacant, v.remplacant_ext, v.paye";
-    $txtQuery .= " FROM amap_vacance v, amap_contrat c, amap_evenements e, amap_personne p1";
+    $txtQuery .= " FROM spip_amap_vacance v, spip_amap_contrat c, spip_amap_evenements e, spip_amap_personne p1";
     $txtQuery .= " WHERE e.id_evenement=v.id_evenement";
     $txtQuery .= " AND v.id_contrat=c.id_contrat";
     $txtQuery .= " AND e.id_saison=".$idSaison;
@@ -49,29 +49,29 @@ function table_amap_lister_vacance_distribution($idSaison, $idProduit)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-     $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
+     $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=spip_amap_vacance","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['dateEvenement']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=spip_amap_vacance","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['cPrenom']." ".$tabUnEnregistrement_1['cNom']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=spip_amap_vacance","ecrire")." '>\n";
 
 
       $txtQuery = "SELECT p.id_personne, p.prenom, p.nom";
-      $txtQuery .= ", (SELECT count(c.id_contrat) FROM amap_contrat c";
+      $txtQuery .= ", (SELECT count(c.id_contrat) FROM spip_amap_contrat c";
       $txtQuery .= "   WHERE c.id_personne=p.id_personne";
       $txtQuery .= "   GROUP BY c.id_personne";
       $txtQuery .= " ) As NbContrat";
-      $txtQuery .= ", (SELECT count(o.id_produit) FROM amap_produit o";
+      $txtQuery .= ", (SELECT count(o.id_produit) FROM spip_amap_produit o";
       $txtQuery .= "   WHERE o.id_paysan=p.id_personne";
       $txtQuery .= "   GROUP BY o.id_paysan";
       $txtQuery .= " ) As NbProduit";
-      $txtQuery .= " FROM amap_personne p";
+      $txtQuery .= " FROM spip_amap_personne p";
       $txtQuery .= " WHERE p.id_personne=".$tabUnEnregistrement_1['id_remplacant'];
 
       $sqlResult_2 = sql_query($txtQuery);
@@ -88,13 +88,13 @@ function table_amap_lister_vacance_distribution($idSaison, $idProduit)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=spip_amap_vacance","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['remplacant_ext']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=spip_amap_vacance","ecrire")." '>\n";
       if ($tabUnEnregistrement_1['paye'] == 1)
         $out .= "\t\t\t\t\t<center>oui</center>\n";
       else
@@ -103,7 +103,7 @@ function table_amap_lister_vacance_distribution($idSaison, $idProduit)
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=suppr&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=vacances","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=suppr&idContrat=".$tabUnEnregistrement_1['id_contrat']."&idSaison=".$idSaison."&idProduit=".$idProduit."&idEvenement=".$tabUnEnregistrement_1['id_evenement']."&table=spip_amap_vacance","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -136,7 +136,7 @@ function table_amap_getmodif_vacance_distribution()
   $hiddens = '';
 
  $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement, c.id_personne, p1.prenom As cPrenom, p1.nom As cNom, v.id_remplacant, po.label_produit, v.remplacant_ext, v.paye";
-  $txtQuery .= " FROM amap_vacance v, amap_contrat c, amap_evenements e, amap_personne p1, amap_produit po";
+  $txtQuery .= " FROM spip_amap_vacance v, spip_amap_contrat c, spip_amap_evenements e, spip_amap_personne p1, spip_amap_produit po";
   $txtQuery .= " WHERE e.id_evenement=v.id_evenement";
   $txtQuery .= " AND v.id_contrat=c.id_contrat";
   $txtQuery .= " AND e.id_saison=".$_GET['idSaison'];
@@ -193,22 +193,22 @@ function table_amap_getmodif_vacance_distribution()
     $out .= "\t\t</td>\n";
     $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-    // boucle sur la table amap_personne
+    // boucle sur la table spip_amap_personne
     $txtQuery = "SELECT p.id_personne, p.prenom, p.nom";
-    $txtQuery .= ", (SELECT count(c.id_contrat) FROM amap_contrat c";
+    $txtQuery .= ", (SELECT count(c.id_contrat) FROM spip_amap_contrat c";
     $txtQuery .= "   WHERE c.id_personne=p.id_personne";
     $txtQuery .= "   GROUP BY c.id_personne";
     $txtQuery .= " ) As NbContrat";
-    $txtQuery .= ", (SELECT count(o.id_produit) FROM amap_produit o";
+    $txtQuery .= ", (SELECT count(o.id_produit) FROM spip_amap_produit o";
     $txtQuery .= "   WHERE o.id_paysan=p.id_personne";
     $txtQuery .= "   GROUP BY o.id_paysan";
     $txtQuery .= " ) As NbProduit";
-    $txtQuery .= ", (SELECT count(po.id_produit) FROM amap_produit po";
+    $txtQuery .= ", (SELECT count(po.id_produit) FROM spip_amap_produit po";
     $txtQuery .= "   WHERE po.id_paysan=p.id_personne";
     $txtQuery .= "   AND po.id_produit=".$_GET['idProduit'];
     $txtQuery .= "   GROUP BY po.id_paysan";
     $txtQuery .= " ) As SonProduit";
-    $txtQuery .= " FROM amap_personne p";
+    $txtQuery .= " FROM spip_amap_personne p";
     $txtQuery .= " WHERE p.id_personne!=".$tabUnEnregistrement_1['id_personne'];
     $txtQuery .= " ORDER BY p.nom";
 
@@ -255,7 +255,7 @@ function table_amap_getmodif_vacance_distribution()
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idEvenement' value='".$_GET['idEvenement']."' />\n";
 
-    return generer_url_entite('amap_distributions', "table=vacances&action=maj","post_ecrire")
+    return generer_url_entite('amap_distributions', "table=spip_amap_vacance&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if ($tabUnEnregistrement_1 = sql_fetch($sqlResult_1))
@@ -281,7 +281,7 @@ function table_amap_get_vacance_distribution($idSaison, $idProduit)
 
     // on recherche les dates de distributions correspondant à la saison et au produit donné
     $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement, e.id_evenement";
-    $txtQuery .= " FROM amap_evenements e, amap_produit_distribution d";
+    $txtQuery .= " FROM spip_amap_evenements e, amap_produit_distribution d";
     $txtQuery .= " WHERE e.id_saison=".$idSaison;
     $txtQuery .= " AND d.id_evenement=e.id_evenement";
     $txtQuery .= " AND d.id_produit=".$idProduit;
@@ -304,7 +304,7 @@ function table_amap_get_vacance_distribution($idSaison, $idProduit)
     $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
 
     // on recherche tous les contrats de la saison et du produit donné
-    $txtQuery = "SELECT c.id_contrat, p.prenom, p.nom FROM amap_contrat c, amap_personne p";
+    $txtQuery = "SELECT c.id_contrat, p.prenom, p.nom FROM spip_amap_contrat c, spip_amap_personne p";
     $txtQuery .= " WHERE c.id_personne=p.id_personne";
     $txtQuery .= " AND c.id_produit=".$idProduit;
     $txtQuery .= " AND c.id_saison=".$idSaison;
@@ -326,22 +326,22 @@ function table_amap_get_vacance_distribution($idSaison, $idProduit)
     $out .= "\t\t</td>\n";
     $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-    // boucle sur la table amap_personne
+    // boucle sur la table spip_amap_personne
     $txtQuery = "SELECT p.id_personne, p.prenom, p.nom";
-    $txtQuery .= ", (SELECT count(c.id_contrat) FROM amap_contrat c";
+    $txtQuery .= ", (SELECT count(c.id_contrat) FROM spip_amap_contrat c";
     $txtQuery .= "   WHERE c.id_personne=p.id_personne";
     $txtQuery .= "   GROUP BY c.id_personne";
     $txtQuery .= " ) As NbContrat";
-    $txtQuery .= ", (SELECT count(o.id_produit) FROM amap_produit o";
+    $txtQuery .= ", (SELECT count(o.id_produit) FROM spip_amap_produit o";
     $txtQuery .= "   WHERE o.id_paysan=p.id_personne";
     $txtQuery .= "   GROUP BY o.id_paysan";
     $txtQuery .= " ) As NbProduit";
-    $txtQuery .= ", (SELECT count(po.id_produit) FROM amap_produit po";
+    $txtQuery .= ", (SELECT count(po.id_produit) FROM spip_amap_produit po";
     $txtQuery .= "   WHERE po.id_paysan=p.id_personne";
     $txtQuery .= "   AND po.id_produit=".$idProduit;
     $txtQuery .= "   GROUP BY po.id_paysan";
     $txtQuery .= " ) As SonProduit";
-    $txtQuery .= " FROM amap_personne p";
+    $txtQuery .= " FROM spip_amap_personne p";
     $txtQuery .= " ORDER BY p.nom";
 
     $sqlResult = sql_query($txtQuery);
@@ -382,7 +382,7 @@ function table_amap_get_vacance_distribution($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    return generer_url_entite('amap_distributions', "table=vacances&action=add","post_ecrire")
+    return generer_url_entite('amap_distributions', "table=spip_amap_vacance&action=add","post_ecrire")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -404,7 +404,7 @@ function table_amap_get_vacance_distribution($idSaison, $idProduit)
 //
 function table_amap_modif_post_vacance_distribution()
 {
-  $txtQuery = "UPDATE amap_vacance SET ";
+  $txtQuery = "UPDATE spip_amap_vacance SET ";
   if ( ($_POST['idRemplacant']) && ($_POST['idRemplacant']!='') )
   {
     $txtQuery .= "id_remplacant='".$_POST['idRemplacant']."', ";
@@ -427,7 +427,7 @@ function table_amap_modif_post_vacance_distribution()
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_vacance " .
+  return "Mise à jour dans la table spip_amap_vacance " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idContrat'].", ".$_POST['idEvenement'].") "));
 } //function table_amap_modif_post_vacance_distribution
 
@@ -438,14 +438,14 @@ function table_amap_modif_post_vacance_distribution()
 function table_amap_post_vacance_distribution()
 {
   // on recherche l'identifiant de la personne du contrat
-  $txtQuery = "SELECT id_personne FROM amap_contrat";
+  $txtQuery = "SELECT id_personne FROM spip_amap_contrat";
   $txtQuery .= " WHERE id_contrat=".$_POST['idContrat'];
 
   $sqlResult = sql_query($txtQuery);
   if (	  ($tabUnEnregistrement = sql_fetch($sqlResult))
        && ($tabUnEnregistrement['id_personne'] != $_POST['idRemplacant']) )
    {
-  $txtQuery = "INSERT INTO amap_vacance VALUES (";
+  $txtQuery = "INSERT INTO spip_amap_vacance VALUES (";
   $txtQuery .= "'".$_POST['idContrat']."', ";
   $txtQuery .= "'".$_POST['idEvenement']."', ";
   if ( ($_POST['idRemplacant']) && ($_POST['idRemplacant']!='') )
@@ -469,7 +469,7 @@ function table_amap_post_vacance_distribution()
   }
   $sqlResult = sql_query($txtQuery);
 
-  return "Insertion dans la table amap_vacance " .
+  return "Insertion dans la table spip_amap_vacance " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idContrat'].", ".$_POST['idEvenement'].") "));
   }
   else
@@ -481,13 +481,13 @@ function table_amap_post_vacance_distribution()
 //
 function table_amap_suppr_vacance_distribution()
 {
-  $txtQuery = "DELETE FROM amap_vacance";
+  $txtQuery = "DELETE FROM spip_amap_vacance";
   $txtQuery .= " WHERE id_contrat=".$_GET['idContrat'];
   $txtQuery .= " AND id_evenement=".$_GET['idEvenement'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_vacance " .
+  return "Suppression dans la table spip_amap_vacance " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_GET['idContrat'].", ".$_GET['idEvenement'].") "));
 } //function table_amap_suppr_vacance_distribution
 

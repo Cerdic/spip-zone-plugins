@@ -20,8 +20,8 @@ function table_amap_lister_choix_saison($idSaison, $table, $page)
   $hiddens = '';
   
   // on affiche le formulaire de sélection de la saison
-  // boucle sur la table amap_saison
-  $txtQuery = "SELECT id_saison FROM amap_saison ";
+  // boucle sur la table spip_amap_saison
+  $txtQuery = "SELECT id_saison FROM spip_amap_saison ";
   $sqlResult = sql_query($txtQuery);
 
   $out .= "\t choix <select name='idSaison'>\n";
@@ -54,8 +54,8 @@ function table_amap_lister_choix_produit($idSaison, $idProduit, $table, $page)
   if ( isset($idSaison) && ($idSaison != 0) )
   {
     // on affiche le formulaire de sélection de la saison
-    // boucle sur la table amap_produit
-    $txtQuery = "SELECT id_produit, label_produit FROM amap_produit";
+    // boucle sur la table spip_amap_produit
+    $txtQuery = "SELECT id_produit, label_produit FROM spip_amap_produit";
     $sqlResult = sql_query($txtQuery);
 
     $out .= "\t choix <select name='idProduit'>\n";
@@ -93,8 +93,8 @@ function table_amap_lister_choix_distribution($idSaison, $idProduit, $idDistrib,
   if ( (isset($idSaison)) && (isset($idProduit)) && ($idSaison != 0) )
   {
     // on affiche le formulaire de sélection de la saison
-    // boucle sur la table amap_date_dsitribution
-    $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateDebut, e.id_evenement FROM amap_evenements e, amap_produit_distribution p";
+    // boucle sur la table spip_amap_date_dsitribution
+    $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateDebut, e.id_evenement FROM spip_amap_evenements e, spip_amap_produit_distribution p";
     $txtQuery .= " WHERE e.id_saison=".$idSaison;
     $txtQuery .= " AND p.id_produit=".$idProduit;
     $txtQuery .= " AND p.id_evenement=e.id_evenement";
@@ -139,8 +139,8 @@ function table_amap_lister_choix_contrat($idSaison, $idProduit, $idContrat, $tab
   if ( isset($idSaison) && isset($idProduit) && ($idSaison != 0) && ($idProduit != 0) )
   {
     // on affiche le formulaire de sélection de la saison
-    // boucle sur la table amap_produit
-    $txtQuery = "SELECT c.id_contrat, p.prenom, p.nom FROM amap_contrat c, amap_personne p";
+    // boucle sur la table spip_amap_produit
+    $txtQuery = "SELECT c.id_contrat, p.prenom, p.nom FROM spip_amap_contrat c, spip_amap_personne p";
     $txtQuery .= " WHERE c.id_personne=p.id_personne";
     $txtQuery .= " AND c.id_produit=".$idProduit;
     $txtQuery .= " AND c.id_saison=".$idSaison;
@@ -185,8 +185,8 @@ function table_amap_lister_choix_famille($idProduit, $idFamille, $table, $page)
   if ( isset($idProduit) )
   {
     // on affiche le formulaire de sélection de la saison
-    // boucle sur la table amap_produit
-    $txtQuery = "SELECT id_famille, label_famille FROM amap_famille_variete";
+    // boucle sur la table spip_amap_produit
+    $txtQuery = "SELECT id_famille, label_famille FROM spip_amap_famille_variete";
     $txtQuery .= " WHERE id_produit=".$idProduit;
     $sqlResult = sql_query($txtQuery);
 

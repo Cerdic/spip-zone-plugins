@@ -20,8 +20,8 @@ function table_amap_lister_famille_variete($idProduit)
 
   if ( isset($idProduit) )
   {
-    // boucle sur la table amap_famille_variete
-    $txtQuery = "SELECT id_famille, label_famille FROM amap_famille_variete";
+    // boucle sur la table spip_amap_famille_variete
+    $txtQuery = "SELECT id_famille, label_famille FROM spip_amap_famille_variete";
     $txtQuery .= " WHERE id_produit=".$idProduit;
     $txtQuery .= " ORDER BY id_famille";
     $sqlResult = sql_query($txtQuery);
@@ -37,19 +37,19 @@ function table_amap_lister_famille_variete($idProduit)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$tabUnEnregistrement['id_famille']."&table=familles","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$tabUnEnregistrement['id_famille']."&table=spip_amap_famille_variete","ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['id_famille']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$tabUnEnregistrement['id_famille']."&table=familles","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idProduit=".$idProduit."&idFamille=".$tabUnEnregistrement['id_famille']."&table=spip_amap_famille_variete","ecrire")." '>\n";
       $out .= "\t\t\t\t\t".$tabUnEnregistrement['label_famille']."\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=suppr&idProduit=".$idProduit."&idFamille=".$tabUnEnregistrement['id_famille']."&table=familles","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=suppr&idProduit=".$idProduit."&idFamille=".$tabUnEnregistrement['id_famille']."&table=spip_amap_famille_variete","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -76,8 +76,8 @@ function table_amap_getmodif_famille_variete()
   $out = '';
   $hiddens = '';
 
-  // boucle sur la table amap_famille_variete
-  $txtQuery = "SELECT label_famille FROM amap_famille_variete";
+  // boucle sur la table spip_amap_famille_variete
+  $txtQuery = "SELECT label_famille FROM spip_amap_famille_variete";
   $txtQuery .= " WHERE id_produit=".$_GET['idProduit'];
   $txtQuery .= " AND id_famille=".$_GET['idFamille'];
   $sqlResult_1 = sql_query($txtQuery);
@@ -91,7 +91,7 @@ function table_amap_getmodif_famille_variete()
     $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
 
     // deuxième boucle pour afficher le label de la famille
-    $txtQuery = "SELECT label_produit FROM amap_produit";
+    $txtQuery = "SELECT label_produit FROM spip_amap_produit";
     $txtQuery .= " WHERE id_produit=".$_GET['idProduit'];
     $sqlResult_2 = sql_query($txtQuery);
 
@@ -172,14 +172,14 @@ function table_amap_get_famille_variete($idProduit)
 //
 function table_amap_modif_post_famille_variete()
 {
-  $txtQuery = "UPDATE amap_famille_variete SET ";
+  $txtQuery = "UPDATE spip_amap_famille_variete SET ";
   $txtQuery .= "label_famille='".$_POST['labelFamille']."' ";
   $txtQuery .= " WHERE id_produit=".$_POST['idProduit'];
   $txtQuery .= " AND id_famille=".$_POST['idFamille'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_famille_variete " .
+  return "Mise à jour dans la table spip_amap_famille_variete " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idProduit'].", ".$_POST['idFamille'].") "));
 } //function table_amap_modif_post_famille_variete
 
@@ -199,7 +199,7 @@ function table_amap_post_famille_variete()
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 
-  return "Insertion dans la table amap_famille_variete " .
+  return "Insertion dans la table spip_amap_famille_variete " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$sqlResult." "));
 
 } //function table_amap_post_famille_variete
@@ -209,13 +209,13 @@ function table_amap_post_famille_variete()
 //
 function table_amap_suppr_famille_variete()
 {
-  $txtQuery = "DELETE FROM amap_famille_variete";
+  $txtQuery = "DELETE FROM spip_amap_famille_variete";
   $txtQuery .= " WHERE id_produit=".$_GET['idProduit'];
   $txtQuery .= " AND id_famille=".$_GET['idFamille'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_famille_variete " .
+  return "Suppression dans la table spip_amap_famille_variete " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_GET['idProduit'].", ".$_GET['idFamille'].") "));
 } //function table_amap_suppr_famille_variete
 

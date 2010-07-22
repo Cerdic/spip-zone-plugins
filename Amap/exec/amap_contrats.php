@@ -81,7 +81,7 @@ function exec_amap_contrats()
   echo "<br />&nbsp;<br />";
 
 
-  if ($table == 'spip_amap_tarifs') { // Page tarif
+  if ($table == 'spip_amap_prix') { // Page tarif
     $msg_presentation_1 = _T('amap:tarifs_enregistres');
     $msg_presentation_2 = _T('amap:tarifs_enregistrement');
 
@@ -343,7 +343,7 @@ function exec_amap_contrats()
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
  
   } // fin if ($page == 'reglement')
-  else if ($table == 'spip_amap_sorties') 
+  else if ($table == 'spip_amap_sortie') 
   { // Page des sorties
     $msg_presentation_1 = _T('amap:sorties_enregistres');
     $msg_presentation_2 = _T('amap:sorties_enregistrement');
@@ -477,7 +477,7 @@ function exec_amap_contrats()
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
  
   } // fin if ($page == 'sorties')
-  else if ($table == 'spip_amap_participation') 
+  else if ($table == 'spip_amap_participation_sortie') 
   { // Page des sorties
     $msg_presentation_1 = _T('amap:liste_sorties_enregistres');
     $msg_presentation_2 = _T('amap:liste_sorties_enregistrement');

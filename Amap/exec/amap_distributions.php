@@ -55,8 +55,8 @@ function exec_amap_distributions()
   debut_cadre_relief();
   echo "<b><div class='verdana2'>";
   $res = icone_horizontale(_T('amap:evenements'), generer_url_ecrire("amap_distributions", "&idSaison=".$_REQUEST['idSaison']), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:produits'), generer_url_ecrire("amap_distributions", "table=spip_produits&idSaison=".$_REQUEST['idSaison'].""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
-       .icone_horizontale(_T('amap:vacances'), generer_url_ecrire("amap_distributions", "table=spip_vacances&idSaison=".$_REQUEST['idSaison'].""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
+       .icone_horizontale(_T('amap:produits'), generer_url_ecrire("amap_distributions", "table=spip_amap_produit&idSaison=".$_REQUEST['idSaison'].""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+       .icone_horizontale(_T('amap:vacances'), generer_url_ecrire("amap_distributions", "table=spip_amap_vacance&idSaison=".$_REQUEST['idSaison'].""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
   echo $res . "</div>";
   fin_cadre_relief();
 
@@ -78,7 +78,7 @@ function exec_amap_distributions()
 
 
 
-if ($table == 'spip_amap_vacances') { // Page vacances
+if ($table == 'spip_amap_vacance') { // Page vacances
     $msg_presentation_1 = _T('amap:liste_vacance');
     $msg_presentation_2 = _T('amap:enregistrement_vacance');
 
@@ -183,7 +183,7 @@ if ($table == 'spip_amap_vacances') { // Page vacances
     } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   } // fin if ($page == 'vacances')
-  else if ($table == 'spip_amap_produits') 
+  else if ($table == 'spip_amap_produit') 
   { // Page produits
     $msg_presentation_1 = _T('amap:liste_distribution_enregistres');
     $msg_presentation_2 = _T('amap:liste_distribution_enregistrement');
@@ -232,7 +232,7 @@ if ($table == 'spip_amap_vacances') { // Page vacances
         case "modif" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table amap_produit_distribution");
+            echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table spip_amap_produit_distribution");
           echo "<div class='verdana2' style='text-align: justify'>"
                .table_amap_getmodif_produit_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);

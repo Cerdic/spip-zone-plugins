@@ -24,7 +24,7 @@ function table_amap_lister_liste_contrat($idSaison, $idProduit)
   if ( ($idSaison!=0) && ($idProduit!=0) )
   { // on affiche l'ensemble des contrats de la saison pour un produit donné
     $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement, c.id_contrat, c.id_personne, c.demi_panier, c.nb_distribution, p.prenom, p.nom, t.label_type";
-    $txtQuery .= " FROM amap_contrat c, amap_personne p, amap_type_contrat t, amap_evenements e";
+    $txtQuery .= " FROM spip_amap_contrat c, spip_amap_personne p, spip_amap_type_contrat t, spip_amap_evenements e";
     $txtQuery .= " WHERE c.id_personne=p.id_personne";
     $txtQuery .= " AND c.id_saison=".$idSaison;
     $txtQuery .= " AND c.id_produit=".$idProduit;
@@ -113,7 +113,7 @@ function table_amap_getmodif_liste_contrat()
   $hiddens = '';
   $idLieu = 0;
 
-  $txtQuery = "SELECT c.debut_contrat, c.id_contrat, c.id_personne, c.demi_panier, c.nb_distribution, p.prenom, p.nom, c.id_type FROM amap_contrat c, amap_personne p";
+  $txtQuery = "SELECT c.debut_contrat, c.id_contrat, c.id_personne, c.demi_panier, c.nb_distribution, p.prenom, p.nom, c.id_type FROM spip_amap_contrat c, spip_amap_personne p";
   $txtQuery .= " WHERE c.id_personne=p.id_personne";
   $txtQuery .= " AND c.id_saison=".$_GET ['idSaison'];
   $txtQuery .= " AND c.id_produit=".$_GET['idProduit'];
@@ -134,12 +134,12 @@ function table_amap_getmodif_liste_contrat()
 
     // on fait une boucle de recherche sur les différentes personnes
     $txtQuery = "SELECT p.id_personne, p.prenom, p.nom";
-    $txtQuery .= ", (SELECT count(po.id_produit) FROM amap_produit po";
+    $txtQuery .= ", (SELECT count(po.id_produit) FROM spip_amap_produit po";
     $txtQuery .= "   WHERE po.id_paysan=p.id_personne";
     $txtQuery .= "   AND po.id_produit=".$_GET['idProduit'];
     $txtQuery .= "   GROUP BY po.id_paysan";
     $txtQuery .= " ) As SonProduit";
-    $txtQuery .= " FROM amap_personne p";
+    $txtQuery .= " FROM spip_amap_personne p";
     $sqlResult_2 = sql_query($txtQuery);
 
     while ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -170,7 +170,7 @@ function table_amap_getmodif_liste_contrat()
     $out .= "\t\t\t<select name='idType' >\n";
 
     // on fait une boucle de recherche sur les différentes personnes
-    $txtQuery = "SELECT * FROM amap_type_contrat";
+    $txtQuery = "SELECT * FROM spip_amap_type_contrat";
     $sqlResult_2 = sql_query($txtQuery);
 
     while ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -191,7 +191,7 @@ function table_amap_getmodif_liste_contrat()
 
     // boucle sur les amap_evenements
     $txtQuery = "SELECT e.id_evenement, DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement";
-    $txtQuery .= " FROM amap_evenements e, amap_produit_distribution d";
+    $txtQuery .= " FROM spip_amap_evenements e, spip_amap_produit_distribution d";
     $txtQuery .= " WHERE d.id_evenement=e.id_evenement";
     $txtQuery .= " AND e.id_saison=".$_GET ['idSaison'];
     $txtQuery .= " AND d.id_produit=".$_GET['idProduit'];
@@ -243,14 +243,14 @@ function table_amap_get_liste_contrat($idSaison, $idProduit)
 
     // on fait une boucle de recherche sur les différentes personnes
     $txtQuery = "SELECT p1.id_personne, p1.prenom, p1.nom";
-    $txtQuery .= ", (SELECT count(po.id_produit) FROM amap_produit po";
+    $txtQuery .= ", (SELECT count(po.id_produit) FROM spip_amap_produit po";
     $txtQuery .= "   WHERE po.id_paysan=p1.id_personne";
     $txtQuery .= "   AND po.id_produit=".$idProduit;
     $txtQuery .= "   GROUP BY po.id_paysan";
     $txtQuery .= " ) As SonProduit";
-    $txtQuery .= " FROM amap_personne p1";
+    $txtQuery .= " FROM spip_amap_personne p1";
     $txtQuery .= " WHERE p1.id_personne NOT IN (";
-    $txtQuery .= "   SELECT p2.id_personne FROM amap_personne p2, amap_contrat c";
+    $txtQuery .= "   SELECT p2.id_personne FROM spip_amap_personne p2, spip_amap_contrat c";
     $txtQuery .= "   WHERE p2.id_personne=c.id_personne";
     $txtQuery .= "   AND c.id_saison=".$idSaison;
     $txtQuery .= "   AND c.id_produit=".$idProduit;
@@ -277,7 +277,7 @@ function table_amap_get_liste_contrat($idSaison, $idProduit)
     $out .= "\t\t\t<select name='idType' >\n";
 
     // on fait une boucle de recherche sur les différentes personnes
-    $txtQuery = "SELECT * FROM amap_type_contrat";
+    $txtQuery = "SELECT * FROM spip_amap_type_contrat";
     $sqlResult = sql_query($txtQuery);
 
     while ($tabUnEnregistrement = sql_fetch($sqlResult))
@@ -295,7 +295,7 @@ function table_amap_get_liste_contrat($idSaison, $idProduit)
 
     // boucle sur les amap_evenements
     $txtQuery = "SELECT e.id_evenement, DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement";
-    $txtQuery .= " FROM amap_evenements e, amap_produit_distribution d";
+    $txtQuery .= " FROM spip_amap_evenements e, spip_amap_produit_distribution d";
     $txtQuery .= " WHERE d.id_evenement=e.id_evenement";
     $txtQuery .= " AND e.id_saison=".$idSaison;
     $txtQuery .= " AND d.id_produit=".$idProduit;
@@ -338,7 +338,7 @@ function table_amap_get_liste_contrat($idSaison, $idProduit)
 //
 function table_amap_modif_post_liste_contrat()
 {
-  $txtQuery = "UPDATE amap_contrat SET ";
+  $txtQuery = "UPDATE spip_amap_contrat SET ";
   $txtQuery .= "id_personne='".$_POST['idPersonne']."', ";
   if ($_POST['panier'] == 'on')
     $txtQuery .= "demi_panier='1', ";
@@ -353,7 +353,7 @@ function table_amap_modif_post_liste_contrat()
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_contrat " .
+  return "Mise à jour dans la table spip_amap_contrat " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$_POST['idContrat']." "));
 } //function table_amap_modif_post_liste_contrat
 
@@ -378,7 +378,7 @@ function table_amap_post_liste_contrat()
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 
-  return "Insertion dans la table amap_contrat " .
+  return "Insertion dans la table spip_amap_contrat " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$sqlResult." "));
 } //function table_amap_post_liste_contrat
 
@@ -387,12 +387,12 @@ function table_amap_post_liste_contrat()
 //
 function table_amap_suppr_liste_contrat()
 {
-  $txtQuery = "DELETE FROM amap_contrat";
+  $txtQuery = "DELETE FROM spip_amap_contrat";
   $txtQuery .= " WHERE id_contrat=".$_GET['idContrat'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_contrat " .
+  return "Suppression dans la table spip_amap_contrat " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_GET['idContrat'].") "));
 } //function table_amap_suppr_liste_contrat
 

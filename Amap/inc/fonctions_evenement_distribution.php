@@ -23,9 +23,9 @@ function table_amap_lister_evenement_distribution($idSaison)
 
   if ($idSaison!=0)
   { // on affiche l'ensemble des distributions de la saison
-    // 1er boucle sur la table amap_evenements
+    // 1er boucle sur la table spip_amap_evenements
     $txtQuery = "SELECT DATE_FORMAT(date_evenement, '%d-%m-%Y') As dateEvenement, id_evenement, id_lieu, id_personne1, id_personne2, id_personne3";
-    $txtQuery .= " FROM amap_evenements";
+    $txtQuery .= " FROM spip_amap_evenements";
     $txtQuery .= " WHERE id_saison=".$idSaison;
     $txtQuery .= " ORDER BY date_evenement";
     $sqlResult_1 = sql_query($txtQuery);
@@ -52,7 +52,7 @@ function table_amap_lister_evenement_distribution($idSaison)
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
       $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
       $txtQuery = "SELECT nom_lieu";
-      $txtQuery .= " FROM amap_lieu";
+      $txtQuery .= " FROM spip_amap_lieu";
       $txtQuery .= " WHERE id_lieu=".$tabUnEnregistrement_1['id_lieu'];
       $sqlResult_2 = sql_query($txtQuery);
       if ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -65,8 +65,8 @@ function table_amap_lister_evenement_distribution($idSaison)
      $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
       $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
 
-      // on recherche le nom de la première personne dans la table amap_personne...
-      $txtQuery = "SELECT prenom, nom FROM amap_personne ";
+      // on recherche le nom de la première personne dans la table spip_amap_personne...
+      $txtQuery = "SELECT prenom, nom FROM spip_amap_personne ";
       $txtQuery .= "WHERE id_personne=".$tabUnEnregistrement_1['id_personne1'];
       $sqlResult_2 = sql_query($txtQuery);
 
@@ -80,8 +80,8 @@ function table_amap_lister_evenement_distribution($idSaison)
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
       $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
 
-      // on recherche le nom de la deuxième personne dans la table amap_personne...
-      $txtQuery = "SELECT prenom, nom FROM amap_personne ";
+      // on recherche le nom de la deuxième personne dans la table spip_amap_personne...
+      $txtQuery = "SELECT prenom, nom FROM spip_amap_personne ";
       $txtQuery .= "WHERE id_personne=".$tabUnEnregistrement_1['id_personne2'];
       $sqlResult_2 = sql_query($txtQuery);
 
@@ -95,8 +95,8 @@ function table_amap_lister_evenement_distribution($idSaison)
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
       $out .= "\t\t\t\t<a href='".generer_url_entite('amap_distributions', "action=modif&idEvenement=".$tabUnEnregistrement_1['id_evenement'],"ecrire")."&idSaison=".$idSaison." '>\n";
 
-      // on recherche le nom de la troisième personne dans la table amap_personne...
-      $txtQuery = "SELECT prenom, nom FROM amap_personne ";
+      // on recherche le nom de la troisième personne dans la table spip_amap_personne...
+      $txtQuery = "SELECT prenom, nom FROM spip_amap_personne ";
       $txtQuery .= "WHERE id_personne=".$tabUnEnregistrement_1['id_personne3'];
       $sqlResult_2 = sql_query($txtQuery);
 
@@ -138,9 +138,9 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
 
   if ( isset($idSaison) && isset($idEvenement) )
   {
-    // 1er boucle sur la table amap_evenements
+    // 1er boucle sur la table spip_amap_evenements
     $txtQuery = "SELECT DATE_FORMAT(date_evenement, '%d-%m-%Y') As dateEvenement, id_lieu, id_personne1, id_personne2, id_personne3";
-    $txtQuery .= " FROM amap_evenements";
+    $txtQuery .= " FROM spip_amap_evenements";
     $txtQuery .= " WHERE id_saison=".$idSaison;
     $txtQuery .= " AND id_evenement=".$idEvenement;
     $sqlResult_1 = sql_query($txtQuery);
@@ -160,7 +160,7 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
       $out .= "\t\t\t<select name='idLieu' >\n";
 
       // on fait une boucle de recherche des lieux possibles
-      $txtQuery = "SELECT id_lieu, nom_lieu FROM amap_lieu";
+      $txtQuery = "SELECT id_lieu, nom_lieu FROM spip_amap_lieu";
       $sqlResult_2 = sql_query($txtQuery);
 
       while ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -180,8 +180,8 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
       $out .= "\t\t</td>\n";
       $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-      // boucle sur la table amap_personne
-      $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne";
+      // boucle sur la table spip_amap_personne
+      $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne";
       $sqlResult_2 = sql_query($txtQuery);
 
       $out .= "\t\t\t<select name='idPersonne1'>\n";
@@ -203,8 +203,8 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
       $out .= "\t\t</td>\n";
       $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-      // boucle sur la table amap_personne
-      $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne";
+      // boucle sur la table spip_amap_personne
+      $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne";
       $sqlResult_2 = sql_query($txtQuery);
 
       $out .= "\t\t\t<select name='idPersonne2'>\n";
@@ -226,8 +226,8 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
       $out .= "\t\t</td>\n";
       $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-     // boucle sur la table amap_personne
-     $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne";
+     // boucle sur la table spip_amap_personne
+     $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne";
      $sqlResult_2 = sql_query($txtQuery);
 
       $out .= "\t\t\t<select name='idPersonne3'>\n";
@@ -273,7 +273,7 @@ function table_amap_getAgendaUpdate_evenement_distribution($idSaison)
     $out .= "\t\t\t\t<option value=''>------</option>\n";
 
     // on fait une boucle de recherche des lieux possibles
-    $txtQuery = "SELECT id_lieu, nom_lieu FROM amap_lieu";
+    $txtQuery = "SELECT id_lieu, nom_lieu FROM spip_amap_lieu";
     $sqlResult = sql_query($txtQuery);
 
     while ($tabUnEnregistrement = sql_fetch($sqlResult))
@@ -320,7 +320,7 @@ function table_amap_get_evenement_distribution($idSaison)
       $out .= "\t\t\t<select name='idLieu' >\n";
 
       // on fait une boucle de recherche des lieux possibles
-      $txtQuery = "SELECT id_lieu, nom_lieu FROM amap_lieu";
+      $txtQuery = "SELECT id_lieu, nom_lieu FROM spip_amap_lieu";
       $sqlResult_2 = sql_query($txtQuery);
 
       while ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -337,8 +337,8 @@ function table_amap_get_evenement_distribution($idSaison)
       $out .= "\t\t</td>\n";
       $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-      // boucle sur la table amap_personne
-      $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne";
+      // boucle sur la table spip_amap_personne
+      $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne";
       $sqlResult_2 = sql_query($txtQuery);
 
       $out .= "\t\t\t<select name='idPersonne1'>\n";
@@ -357,8 +357,8 @@ function table_amap_get_evenement_distribution($idSaison)
       $out .= "\t\t</td>\n";
       $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-      // boucle sur la table amap_personne
-      $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne";
+      // boucle sur la table spip_amap_personne
+      $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne";
       $sqlResult_2 = sql_query($txtQuery);
 
       $out .= "\t\t\t<select name='idPersonne2'>\n";
@@ -377,8 +377,8 @@ function table_amap_get_evenement_distribution($idSaison)
       $out .= "\t\t</td>\n";
       $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
  
-     // boucle sur la table amap_personne
-     $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne";
+     // boucle sur la table spip_amap_personne
+     $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne";
      $sqlResult_2 = sql_query($txtQuery);
 
       $out .= "\t\t\t<select name='idPersonne3'>\n";
@@ -415,7 +415,7 @@ function table_amap_modif_post_evenement_distribution()
          ) 
      )
   {
-    $txtQuery = "UPDATE amap_evenements SET ";
+    $txtQuery = "UPDATE spip_amap_evenements SET ";
     $txtQuery .= "id_lieu='".$_POST['idLieu']."', ";
     if ($_POST['idPersonne1'] == '')
       $txtQuery .= "id_personne1=null, ";
@@ -433,11 +433,11 @@ function table_amap_modif_post_evenement_distribution()
 
     $sqlResult = sql_query($txtQuery);
 
-    return "Mise à jour dans la table amap_evenements " .
+    return "Mise à jour dans la table spip_amap_evenements " .
       (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$_POST['idEvenement']." "));
   }
   else
-    return "Mise à jour dans la table amap_evenements : Erreur!!<br/><b>Vous avez deux fois la m&ecirc;me personne comme responsables de la distribution</b>";
+    return "Mise à jour dans la table spip_amap_evenements : Erreur!!<br/><b>Vous avez deux fois la m&ecirc;me personne comme responsables de la distribution</b>";
 } //function table_amap_modif_post_evenement_distribution
 
 
@@ -451,7 +451,7 @@ function table_amap_add_post_evenement_distribution()
        || ( ($_POST['idPersonne2'] == $_POST['idPersonne3'])  && ($_POST['idPersonne2'] != '') )
      ) 
   {
-    return "Insertion dans la table amap_evenements : Erreur!!<br/><b>Vous avez deux fois la m&ecirc;me personne comme responsables de la distribution</b>";
+    return "Insertion dans la table spip_amap_evenements : Erreur!!<br/><b>Vous avez deux fois la m&ecirc;me personne comme responsables de la distribution</b>";
   }
   else
   {
@@ -469,7 +469,7 @@ function table_amap_add_post_evenement_distribution()
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 
-    return "Insertion dans la table amap_evenements " .
+    return "Insertion dans la table spip_amap_evenements " .
       (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$sqlResult." "));
   }
 
@@ -481,7 +481,7 @@ function table_amap_add_post_evenement_distribution()
 //
 function table_amap_agenda_update_evenement_distribution()
 {
-  $txtQuery = "SELECT id_evenement, date_debut FROM amap_saison s, spip_evenements e";
+  $txtQuery = "SELECT id_evenement, date_debut FROM spip_amap_saison s, spip_evenements e";
   $txtQuery .= " WHERE s.id_agenda=e.id_article";
   $txtQuery .= " AND s.id_saison=".$_POST['idSaison'];
   $txtQuery .= " ORDER BY date_debut";
@@ -491,7 +491,7 @@ function table_amap_agenda_update_evenement_distribution()
 
   while ($tabUnEnregistrement_1 = sql_fetch($sqlResult_1))
   {
-    $txtQuery = "SELECT count(id_evenement) As nbEvenement FROM amap_evenements";
+    $txtQuery = "SELECT count(id_evenement) As nbEvenement FROM spip_amap_evenements";
     $txtQuery .= " WHERE DATE_FORMAT(date_evenement, '%Y-%m-%d')=DATE_FORMAT('".$tabUnEnregistrement_1['date_debut']."', '%Y-%m-%d')";
     $txtQuery .= " GROUP BY id_evenement";
     $sqlResult_2 = sql_query($txtQuery);
@@ -499,7 +499,7 @@ function table_amap_agenda_update_evenement_distribution()
 //echo "<p>".$txtQuery."</p>";
     if ($tabUnEnregistrement_2['nbEvenement'] > 0)
     {
-      $txtQuery = "UPDATE amap_evenements SET ";
+      $txtQuery = "UPDATE spip_amap_evenements SET ";
       if ($_POST['idLieu'])
         $txtQuery .= "id_lieu='".$_POST['idLieu']."', ";
       $txtQuery .= "id_evenement='".$tabUnEnregistrement_1['id_evenement']."', ";
@@ -526,7 +526,7 @@ function table_amap_agenda_update_evenement_distribution()
     if ($sqlResult_3) { $res[]=$tabUnEnregistrement_1['id_evenement']; }
   }
 
-  return "Mise à jour dans la table amap_evenements " .
+  return "Mise à jour dans la table spip_amap_evenements " .
     (!$sqlResult_3 ? ': erreur !!' : ("sous les numeros: (".join(', ', $res).") "));
 } //function table_amap_agenda_update_evenement_distribution
 
@@ -535,12 +535,12 @@ function table_amap_agenda_update_evenement_distribution()
 //
 function table_amap_suppr_evenement_distribution()
 {
-  $txtQuery = "DELETE FROM amap_evenements";
+  $txtQuery = "DELETE FROM spip_amap_evenements";
   $txtQuery .= " WHERE id_evenement=".$_GET['idEvenement'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_evenements " .
+  return "Suppression dans la table spip_amap_evenements " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$_GET['idEvenement']." "));
 } //function table_amap_suppr_evenement_distribution
 

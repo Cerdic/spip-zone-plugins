@@ -23,7 +23,7 @@ function table_amap_lister_sortie_contrat($idSaison, $idProduit)
 
   if ( ($idSaison!=0) && ($idProduit!=0) )
   { // on affiche l'ensemble des sorties disponible pour une saison et un produit donné
-    $txtQuery = "SELECT id_sortie, DATE_FORMAT(date_sortie, '%d-%m-%Y') As dateSortie FROM amap_sortie";
+    $txtQuery = "SELECT id_sortie, DATE_FORMAT(date_sortie, '%d-%m-%Y') As dateSortie FROM spip_amap_sortie";
     $txtQuery .= " WHERE id_produit=".$idProduit;
     $txtQuery .= " AND id_saison=".$idSaison;
     $txtQuery .= " ORDER BY id_sortie";
@@ -40,19 +40,19 @@ function table_amap_lister_sortie_contrat($idSaison, $idProduit)
     {
       $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idSortie=".$tabUnEnregistrement['id_sortie']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=sorties","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idSortie=".$tabUnEnregistrement['id_sortie']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=spip_amap_sortie","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['id_sortie']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idSortie=".$tabUnEnregistrement['id_sortie']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=sorties","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=modif&idSortie=".$tabUnEnregistrement['id_sortie']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=spip_amap_sortie","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement['dateSortie']."</center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
 
       $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=suppr&idSortie=".$tabUnEnregistrement['id_sortie']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=sorties","ecrire")." '>\n";
+      $out .= "\t\t\t\t<a href='".generer_url_entite('amap_contrats', "action=suppr&idSortie=".$tabUnEnregistrement['id_sortie']."&idSaison=".$idSaison."&idProduit=".$idProduit."&table=spip_amap_sortie","ecrire")." '>\n";
       $out .= "\t\t\t\t\t<center><img src='"._DIR_PLUGIN_AMAP."img_pack/b_drop.png' /></center>\n";
       $out .= "\t\t\t\t</a>\n";
       $out .= "\t\t\t</td>\n";
@@ -85,7 +85,7 @@ function table_amap_getmodif_sortie_contrat()
   $hiddens = '';
 
   // on affiche l'ensemble des sorties disponible pour une saison et un produit donné
-  $txtQuery = "SELECT date_sortie FROM amap_sortie";
+  $txtQuery = "SELECT date_sortie FROM spip_amap_sortie";
   $txtQuery .= " WHERE id_sortie=".$_GET['idSortie'];
   $sqlResult_1 = sql_query($txtQuery);
 
@@ -107,7 +107,7 @@ function table_amap_getmodif_sortie_contrat()
     $out .= "\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
 
     // recherche du label du produit
-    $txtQuery = "SELECT label_produit FROM amap_produit";
+    $txtQuery = "SELECT label_produit FROM spip_amap_produit";
     $txtQuery .= " WHERE id_produit=".$_GET['idProduit'];
     $sqlResult_2 = sql_query($txtQuery);
 
@@ -140,7 +140,7 @@ function table_amap_getmodif_sortie_contrat()
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$_GET['idProduit']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idSortie' value='".$_GET['idSortie']."' />\n";
 
-    return generer_url_entite('amap_contrats', "table=sorties&action=maj","post_ecrire")
+    return generer_url_entite('amap_contrats', "table=spip_amap_sortie&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -170,7 +170,7 @@ function table_amap_get_sortie_contrat($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    return generer_url_entite('amap_contrats', "table=sorties&action=add","post_ecrire")
+    return generer_url_entite('amap_contrats', "table=spip_amap_sortie&action=add","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -192,13 +192,13 @@ function table_amap_get_sortie_contrat($idSaison, $idProduit)
 //
 function table_amap_modif_post_sortie_contrat()
 {
-  $txtQuery = "UPDATE amap_sortie SET ";
+  $txtQuery = "UPDATE spip_amap_sortie SET ";
   $txtQuery .= "date_sortie='".$_POST['dateSortie']."' ";
   $txtQuery .= " WHERE id_sortie=".$_POST['idSortie'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_sortie " .
+  return "Mise à jour dans la table spip_amap_sortie " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idSortie'].") "));
 } //function table_amap_modif_post_sortie_contrat
 
@@ -219,7 +219,7 @@ function table_amap_post_sortie_contrat()
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 
-  return "Insertion dans la table amap_sortie " .
+  return "Insertion dans la table spip_amap_sortie " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$sqlResult." "));
 } //function table_amap_post_sortie_contrat
 
@@ -228,12 +228,12 @@ function table_amap_post_sortie_contrat()
 //
 function table_amap_suppr_sortie_contrat()
 {
-  $txtQuery = "DELETE FROM amap_sortie";
+  $txtQuery = "DELETE FROM spip_amap_sortie";
   $txtQuery .= " WHERE id_sortie=".$_GET['idSortie'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_sortie " .
+  return "Suppression dans la table spip_amap_sortie " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_GET['idSortie'].") "));
 } //function table_amap_suppr_sortie_contrat
 

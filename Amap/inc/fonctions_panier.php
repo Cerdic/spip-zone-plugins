@@ -22,8 +22,8 @@ function table_amap_lister_panier($idSaison, $idDistrib, $idProduit)
 
   if ( isset($idSaison) && isset($idDistrib) && isset($idProduit) )
   {
-    // boucle sur la table amap_panier
-    $txtQuery = "SELECT id_element, id_famille, id_variete, quantite, poids FROM amap_panier";
+    // boucle sur la table spip_amap_panier
+    $txtQuery = "SELECT id_element, id_famille, id_variete, quantite, poids FROM spip_amap_panier";
     $txtQuery .= " WHERE id_evenement=".$idDistrib;
     $txtQuery .= " AND id_produit=".$idProduit;
     $txtQuery .= " ORDER BY id_element";
@@ -45,7 +45,7 @@ function table_amap_lister_panier($idSaison, $idDistrib, $idProduit)
       $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idSaison=".$idSaison."&idDistrib=".$idDistrib."&idProduit=".$idProduit."&idElement=".$tabUnEnregistrement_1['id_element'],"ecrire")." '>\n";
 
       // début deuxième boucle pour rechercher le label de la famille
-      $txtQuery = "SELECT label_famille FROM amap_famille_variete";
+      $txtQuery = "SELECT label_famille FROM spip_amap_famille_variete";
       $txtQuery .= " WHERE id_produit=".$idProduit;
       $txtQuery .= " AND id_famille=".$tabUnEnregistrement_1['id_famille'];
       $sqlResult_2 = sql_query($txtQuery);
@@ -66,7 +66,7 @@ function table_amap_lister_panier($idSaison, $idDistrib, $idProduit)
       $out .= "\t\t\t\t<a href='".generer_url_entite('amap_paniers', "action=modif&idSaison=".$idSaison."&idDistrib=".$idDistrib."&idProduit=".$idProduit."&idElement=".$tabUnEnregistrement_1['id_element'],"ecrire")." '>\n";
 
       // début troisième boucle pour rechercher le label de la variété
-      $txtQuery = "SELECT label_variete FROM amap_variete";
+      $txtQuery = "SELECT label_variete FROM spip_amap_variete";
       $txtQuery .= " WHERE id_famille=".$tabUnEnregistrement_1['id_famille'];
       $txtQuery .= " AND id_variete=".$tabUnEnregistrement_1['id_variete'];
       $sqlResult_2 = sql_query($txtQuery);
@@ -121,8 +121,8 @@ function table_amap_getmodif_panier()
   $out = '';
   $hiddens = '';
 
-  // boucle sur la table amap_panier
-  $txtQuery = "SELECT id_famille, id_variete, quantite, poids FROM amap_panier";
+  // boucle sur la table spip_amap_panier
+  $txtQuery = "SELECT id_famille, id_variete, quantite, poids FROM spip_amap_panier";
   $txtQuery .= " WHERE id_evenement=".$_GET['idDistrib'];
   $txtQuery .= " AND id_produit=".$_GET['idProduit'];
   $txtQuery .= " AND id_element=".$_GET['idElement'];
@@ -138,7 +138,7 @@ function table_amap_getmodif_panier()
     $out .= "\t\t\t<select name='idFamille'>\n";
 
     // deuxième boucle pour afficher le label de la famille
-    $txtQuery = "SELECT id_famille, label_famille FROM amap_famille_variete";
+    $txtQuery = "SELECT id_famille, label_famille FROM spip_amap_famille_variete";
     $txtQuery .= " WHERE id_produit=".$_GET['idProduit'];
     $sqlResult_2 = sql_query($txtQuery);
 
@@ -164,7 +164,7 @@ function table_amap_getmodif_panier()
     $out .= "\t\t\t\t<option value=''>------</option>\n";
 
     // troisième boucle pour afficher le label de la variété
-    $txtQuery = "SELECT id_variete, label_variete FROM amap_variete";
+    $txtQuery = "SELECT id_variete, label_variete FROM spip_amap_variete";
     $txtQuery .= " WHERE id_famille=".$tabUnEnregistrement_1['id_famille'];
 
     $sqlResult_2 = sql_query($txtQuery);
@@ -231,7 +231,7 @@ function table_amap_get_panier($idSaison, $idDistrib, $idProduit)
     $out .= "\t\t\t<select name='idFamille' onChange='this.form.submit()'>\n";
 
     // deuxième boucle pour afficher le label de la famille
-    $txtQuery = "SELECT id_famille, label_famille FROM amap_famille_variete";
+    $txtQuery = "SELECT id_famille, label_famille FROM spip_amap_famille_variete";
     $txtQuery .= " WHERE id_produit=".$idProduit;
     $sqlResult = sql_query($txtQuery);
  
@@ -261,7 +261,7 @@ function table_amap_get_panier($idSaison, $idDistrib, $idProduit)
     $out .= "\t\t\t\t<option value=''>------</option>\n";
 
     // troisième boucle pour afficher le label de la variété
-    $txtQuery = "SELECT id_variete, label_variete FROM amap_variete";
+    $txtQuery = "SELECT id_variete, label_variete FROM spip_amap_famille_variete";
     $txtQuery .= " WHERE id_famille=".$_POST['idFamille'];
 
     $sqlResult = sql_query($txtQuery);
@@ -313,7 +313,7 @@ function table_amap_get_panier($idSaison, $idDistrib, $idProduit)
 //
 function table_amap_modif_post_panier()
 {
-  $txtQuery = "UPDATE amap_panier SET ";
+  $txtQuery = "UPDATE spip_amap_panier SET ";
   $txtQuery .= "id_famille='".$_POST['idFamille']."', ";
   if ($_POST['idVariete'])
     $txtQuery .= "id_variete='".$_POST['idVariete']."', ";
@@ -333,7 +333,7 @@ function table_amap_modif_post_panier()
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_panier " .
+  return "Mise à jour dans la table spip_amap_panier " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_POST['idProduit'].", ".$_POST['idDistrib'].", ".$_POST['idElement'].") "));
 } //function table_amap_modif_post_panier
 
@@ -345,7 +345,7 @@ function table_amap_post_panier()
 {
   $nbElement = 0;
   // on calcule la position d'insertion dans la table
-  $txtQuery = "SELECT count(id_element) As NbElement FROM amap_panier 
+  $txtQuery = "SELECT count(id_element) As NbElement FROM spip_amap_panier 
 		WHERE id_produit=".$_POST['idProduit']."
 		AND id_evenement=".$_POST['idDistrib'];
   $sqlResult_1 = sql_query($txtQuery);
@@ -354,7 +354,7 @@ function table_amap_post_panier()
   {
     $nbElement = $tabUnEnregistrement_1['NbElement'] + 1;
 
-    $txtQuery = "INSERT INTO amap_panier VALUES (";
+    $txtQuery = "INSERT INTO spip_amap_panier VALUES (";
     $txtQuery .= "'".$_POST['idProduit']."', ";
     $txtQuery .= "'".$_POST['idDistrib']."', ";
     $txtQuery .= "'".$nbElement."', ";
@@ -374,7 +374,7 @@ function table_amap_post_panier()
 
     $sqlResult_2 = sql_query($txtQuery);
 
-    return "Insertion dans la table amap_panier " .
+    return "Insertion dans la table spip_amap_panier " .
       (!$sqlResult_2 ? ': erreur !!' : ("sous le numero: (".$_POST['idProduit'].", ".$_POST['idDistrib'].", ".$nbElement.") "));
   }
 } //function table_amap_post_panier
@@ -384,14 +384,14 @@ function table_amap_post_panier()
 //
 function table_amap_suppr_panier()
 {
-  $txtQuery = "DELETE FROM amap_panier";
+  $txtQuery = "DELETE FROM spip_amap_panier";
   $txtQuery .= " WHERE id_evenement=".$_GET['idDistrib'];
   $txtQuery .= " AND id_produit=".$_GET['idProduit'];
   $txtQuery .= " AND id_element=".$_GET['idElement'];
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_panier " .
+  return "Suppression dans la table spip_amap_panier " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: (".$_GET['idProduit'].", ".$_GET['idDistrib'].", ".$_GET['idElement'].") "));
 } //function table_amap_suppr_panier
 

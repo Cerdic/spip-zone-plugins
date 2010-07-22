@@ -22,8 +22,8 @@ function table_amap_lister_paysan()
   pipeline('exec_init',array('args'=>array('exec'=>'amap_distributions'),'data'=>''));
 
   // on affiche l'ensemble des distributions de la saison
-  // 1er boucle sur la table amap_produit_distribution
-  $txtQuery = "SELECT * FROM amap_produit";
+  // 1er boucle sur la table spip_amap_produit_distribution
+  $txtQuery = "SELECT * FROM spip_amap_produit";
   $sqlResult_1 = sql_query($txtQuery);
 
   $trad_id_produit = _T('amap:id_produit');
@@ -41,15 +41,15 @@ function table_amap_lister_paysan()
   {
     $out .= "\t\t<tr style='background-color: #eeeeee;'>\n";
     $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit", "ecrire")." '>\n";
+    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=spip_amap_produit", "ecrire")." '>\n";
     $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['id_produit']."</center>\n";
     $out .= "\t\t\t\t</a>\n";
     $out .= "\t\t\t</td>\n";
     $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit", "ecrire")." '>\n";
+    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=spip_amap_produit", "ecrire")." '>\n";
 
-    // on recherche le nom du paysan dans la table amap_personne...
-    $txtQuery = "SELECT prenom, nom FROM amap_personne ";
+    // on recherche le nom du paysan dans la table spip_amap_personne...
+    $txtQuery = "SELECT prenom, nom FROM spip_amap_personne ";
     $txtQuery .= "WHERE id_personne=".$tabUnEnregistrement_1['id_paysan'];
     $sqlResult_2 = sql_query($txtQuery);
 
@@ -62,7 +62,7 @@ function table_amap_lister_paysan()
     $out .= "\t\t\t</td>\n";
 
     $out .= "\t\t\t<td class='arial1' style='border-top: 1px solid #cccccc;'>\n";
-    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=amap_produit", "ecrire")." '>\n";
+    $out .= "\t\t\t\t<a href='".generer_url_entite('amap_config', "action=edit&id_ligne=".$tabUnEnregistrement_1['id_produit']."&table=spip_amap_produit", "ecrire")." '>\n";
     $out .= "\t\t\t\t\t<center>".$tabUnEnregistrement_1['label_produit']."</center>\n";
     $out .= "\t\t\t\t</a>\n";
     $out .= "\t\t\t</td>\n";
@@ -84,8 +84,8 @@ function table_amap_getmodif_paysan()
   $out = '';
   $hiddens = '';
 
-  // boucle sur la table amap_produit
-  $txtQuery = "SELECT id_paysan, label_produit FROM amap_produit";
+  // boucle sur la table spip_amap_produit
+  $txtQuery = "SELECT id_paysan, label_produit FROM spip_amap_produit";
   $txtQuery .= " WHERE id_produit=".$_GET['id_ligne'];
   $sqlResult_1 = sql_query($txtQuery);
 
@@ -113,8 +113,8 @@ function table_amap_getmodif_paysan()
     $out .= "\t\t\t<select name='id_paysan'>\n";
     $out .= "\t\t\t\t<option value=''>------</option>\n";
 
-    // on recherche le nom du paysan dans la table amap_personne...
-    $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne ";
+    // on recherche le nom du paysan dans la table spip_amap_personne...
+    $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne ";
     $sqlResult_2 = sql_query($txtQuery);
 
     while ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -141,7 +141,7 @@ function table_amap_getmodif_paysan()
  
     $hiddens .= "\t<input type='hidden' name='id_ligne' value='".$_GET['id_ligne']."' />\n";
 
-    return generer_url_entite('amap_config', "table=amap_produit&action=maj","post_ecrire")
+    return generer_url_entite('amap_config', "table=spip_amap_produit&action=maj","post_ecrire")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin  while ($tabUnEnregistrement_1 = sql_fetch($sqlResult))
@@ -169,8 +169,8 @@ function table_amap_get_paysan()
   $out .= "\t\t\t<select name='id_paysan'>\n";
   $out .= "\t\t\t\t<option value=''>------</option>\n";
 
-  // on recherche le nom du paysan dans la table amap_personne...
-  $txtQuery = "SELECT id_personne, prenom, nom FROM amap_personne ";
+  // on recherche le nom du paysan dans la table spip_amap_personne...
+  $txtQuery = "SELECT id_personne, prenom, nom FROM spip_amap_personne ";
   $sqlResult_2 = sql_query($txtQuery);
 
   while ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
@@ -192,7 +192,7 @@ function table_amap_get_paysan()
   $out .= "\t\t</td>\n";
   $out .= "\t</tr>\n";
 
-  return generer_url_entite('amap_config', "table=amap_produit&action=add","post_ecrire")
+  return generer_url_entite('amap_config', "table=spip_amap_produit&action=add","post_ecrire")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -204,7 +204,7 @@ function table_amap_get_paysan()
 //
 function table_amap_modif_post_paysan()
 {
-  $txtQuery = "UPDATE amap_produit SET ";
+  $txtQuery = "UPDATE spip_amap_produit SET ";
   if ($_POST['id_paysan'])
     $txtQuery .= "id_paysan='".$_POST['id_paysan']."', ";
   else
@@ -214,7 +214,7 @@ function table_amap_modif_post_paysan()
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_produit " .
+  return "Mise à jour dans la table spip_amap_produit " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$_POST['id_ligne']." "));
 } //function table_amap_modif_post_paysan
 
@@ -233,7 +233,7 @@ function table_amap_post_paysan()
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 
-  return "Insertion dans la table amap_produit " .
+  return "Insertion dans la table spip_amap_produit " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$sqlResult." "));
  
 } //function table_amap_post_paysan

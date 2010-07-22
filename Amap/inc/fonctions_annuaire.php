@@ -22,17 +22,17 @@ function table_amap_lister_annuaire($statut)
 
   if ( isset($statut) )
   {
-    // boucle sur la table amap_personne
+    // boucle sur la table spip_amap_personne
     $txtQuery = "SELECT p.id_personne, p.prenom, p.nom, p.fixe, p.portable, p.adhesion";
-    $txtQuery .= ", (SELECT count(c.id_contrat) FROM amap_contrat c";
+    $txtQuery .= ", (SELECT count(c.id_contrat) FROM spip_amap_contrat c";
     $txtQuery .= "   WHERE c.id_personne=p.id_personne";
     $txtQuery .= "   GROUP BY c.id_personne";
     $txtQuery .= " ) As NbContrat";
-    $txtQuery .= ", (SELECT count(o.id_produit) FROM amap_produit o";
+    $txtQuery .= ", (SELECT count(o.id_produit) FROM spip_amap_produit o";
     $txtQuery .= "   WHERE o.id_paysan=p.id_personne";
     $txtQuery .= "   GROUP BY o.id_paysan";
     $txtQuery .= " ) As NbProduit";
-    $txtQuery .= " FROM amap_personne p ";
+    $txtQuery .= " FROM spip_amap_personne p ";
     $sqlResult = sql_query($txtQuery);
 
     $out .= "\t<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
@@ -113,8 +113,8 @@ function table_amap_getmodif_annuaire()
   $out = '';
   $hiddens = '';
 
-  // boucle sur la table amap_personne
-  $txtQuery = "SELECT * FROM amap_personne";
+  // boucle sur la table spip_amap_personne
+  $txtQuery = "SELECT * FROM spip_amap_personne";
   $txtQuery .= " WHERE id_personne=".$_GET['idPersonne'];
   $sqlResult = sql_query($txtQuery);
 
@@ -163,7 +163,7 @@ function table_amap_get_annuaire($statut)
   // 1er boucle sur la table spip_auteurs
   $txtQuery = "SELECT id_auteur, nom, email FROM spip_auteurs ";
   $txtQuery .= "WHERE id_auteur NOT IN ( ";
-  $txtQuery .= "SELECT id_personne FROM amap_personne ";
+  $txtQuery .= "SELECT id_personne FROM spip_amap_personne ";
   $txtQuery .= ") ORDER BY id_auteur";
   $sqlResult = sql_query($txtQuery);
 
@@ -185,7 +185,7 @@ function table_amap_get_annuaire($statut)
   $out .= "\t\t</td>\n";
   $out .= "\t</tr>\n";
 
-  // on affiche les élément à compléter dans la table amap_personne
+  // on affiche les élément à compléter dans la table spip_amap_personne
   $out .= "\t<tr bgcolor='#DBE1C5'>";
   $out .= "\t\t<td>pr&eacute;nom : </td>\n";
   $out .= "\t\t<td><input type='text' size='20' maxlength='20' name='prenom'/></td>\n";
@@ -221,7 +221,7 @@ function table_amap_get_annuaire($statut)
 //
 function table_amap_modif_post_annuaire()
 {
-  $txtQuery = "UPDATE amap_personne SET ";
+  $txtQuery = "UPDATE spip_amap_personne SET ";
   $txtQuery .= "prenom='".$_POST['prenom']."', ";
   $txtQuery .= "nom='".$_POST['nom']."', ";
   $txtQuery .= "fixe='".$_POST['fixe']."', ";
@@ -231,7 +231,7 @@ function table_amap_modif_post_annuaire()
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Mise à jour dans la table amap_personne " .
+  return "Mise à jour dans la table spip_amap_personne " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$_POST['idPersonne']." "));
 } // function table_amap_modif_post_annuaire
 
@@ -254,7 +254,7 @@ function table_amap_post_annuaire()
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 
-  return "Insertion dans la table amap_personne " .
+  return "Insertion dans la table spip_amap_personne " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$sqlResult." "));
 } // function table_amap_post_annuaire
 
@@ -263,12 +263,12 @@ function table_amap_post_annuaire()
 //
 function table_amap_suppr_annuaire()
 {
-  $txtQuery = "DELETE FROM amap_personne";
+  $txtQuery = "DELETE FROM spip_amap_personne";
   $txtQuery .= " WHERE id_personne='".$_GET['idPersonne']."' ";
 
   $sqlResult = sql_query($txtQuery);
 
-  return "Suppression dans la table amap_personne " .
+  return "Suppression dans la table spip_amap_personne " .
     (!$sqlResult ? ': erreur !!' : ("sous le numero: ".$_GET['idPersonne']." "));
 } // function table_amap_suppr_annuaire
 
