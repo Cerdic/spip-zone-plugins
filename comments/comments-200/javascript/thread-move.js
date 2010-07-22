@@ -3,9 +3,9 @@
 
 ;(function( $ ) {jQuery.fn.add_reply_to = function(id_thread){
 		var me = jQuery(this).parents('li.comment-li').eq(0);
-		if (me.find('.comment-form').length==0){
-			jQuery('.comment-form').siblings('p.repondre').show();
-			jQuery('.comment-form')
+		if (me.find('#formulaire_forum').length==0){
+			jQuery('#formulaire_forum').siblings('p.repondre').show();
+			jQuery('#formulaire_forum')
 				.hide()
 				.detach()
 				.appendTo(me)
@@ -14,14 +14,13 @@
 				.removeClass('noajax')
 				.find('input[name=id_forum]').val(id_thread);
 
-			jQuery('.comment-form').siblings('p.repondre').hide();
-			jQuery('.comment-form').find('form.preview,.reponse_formulaire').remove();
+			jQuery('#formulaire_forum').siblings('p.repondre').hide();
+			jQuery('#formulaire_forum').find('form.preview,.reponse_formulaire').remove();
 			jQuery(me).find('.comment').last().find('p').last().positionner(true);
-			var connect = jQuery('.comment-form .saisie_session_nom a,#formulaire_forum .session_qui .details a').eq(0);
+			var connect = jQuery('#formulaire_forum .saisie_session_nom a,#formulaire_forum .session_qui .details a').eq(0);
 			var url = connect.attr('href').match(/url=([^&"']*)/);
 			url = escape(unescape(url[1]).replace(/#.*/, "")+"#reply"+id_thread);
 			connect.attr('href',connect.attr('href').replace(/url=([^&"']*)/,"url="+url));
-			$('.comment-form h2').replaceWith('<h2>' + chaine + '</h2>');
 		}
 	}
 	function hash_reply(){
