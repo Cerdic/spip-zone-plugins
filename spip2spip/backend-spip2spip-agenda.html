@@ -47,7 +47,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
             
      <B_auteurs><auteur><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></auteur></B_auteurs> 
 		 <lang>#LANG</lang>
-		 [<logo>(#LOGO_ARTICLE|extraire_attribut{src})</logo>]
+		 [<logo>(#URL_SITE_SPIP/#LOGO_ARTICLE|extraire_attribut{src})</logo>]
      <BOUCLE_list_mot(MOTS){id_article}{type=- spip2spip -}{0,1}>[<keyword>(#TITRE|supprimer_numero|texte_backend)</keyword>]</BOUCLE_list_mot>
      <B_licence><licence><BOUCLE_licence(MOTS){id_article}{type=licence}{0,1}>[(#TITRE|supprimer_numero|texte_backend)]</BOUCLE_licence></licence></B_licence>		
 		</item>

@@ -35,7 +35,7 @@ function analyser_backend_spip2spip($rss){
   include_spip("inc_texte.php"); # pour couper()
 	include_spip("inc_filtres.php"); # pour filtrer_entites()
 		
-	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','evenements', 'lang','keyword','licence','documents'); 
+	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','evenements', 'lang','logo','keyword','licence','documents'); 
 	
 	$syndic_regexp = array(
 				'item'           => ',<item[>[:space:]],i',
@@ -71,7 +71,7 @@ function analyser_backend_spip2spip($rss){
 				'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
 	);
 	
-	$xml_event_tags = array('idevent','datedeb','datefin','titre','desc','lieu','horaire','idsource');
+	$xml_event_tags = array('idevent','datedeb','datefin','titre','desc','lieu','adresse','horaire','idsource');
 
 	$evenement_regexp = array(		
   			'evenement'        => ',<evenement[>[:space:]],i',
@@ -499,9 +499,13 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                       'objet' => 'article'));
                       }  
                       
-                      // ... si logo, tente de l'importer
-                      if ($_logo) {
-                      
+                      // ... si logo, tente de l'importer                      
+                      if ($_logo) {                                                      
+                            $logo_local = copie_locale($_logo);                         
+                            if ($logo_local) {                                 
+                                $logo_local_dest = "IMG/arton$id_nouvel_article.".substr($logo_local,-3);                                                        
+                                @rename( _DIR_RACINE.$logo_local, _DIR_RACINE.$logo_local_dest);
+                            }
                       }
                       
                       // etape 3 - traitement des evenements (a finir de porter) FIXME
