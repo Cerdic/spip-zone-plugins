@@ -1,11 +1,7 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	SPIP2SPIP
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	erational - [erational.org->http://www.erational.org]
-_ &#169; 2006-2009 - Licence GPL version 3
-	</auteur>
+	<nom>SPIP2SPIP</nom>
+	<auteur>erational - [erational.org->http://www.erational.org]</auteur>
+	<licence>GNU/GLP</licence>
 	<version>2.1</version>
 	<etat>dev</etat>
 	<description>
@@ -21,7 +17,7 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 
 
 	</description>
-	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 
+	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> 
 	<fonctions>spiptospip_filtre.php</fonctions>
 	<install>base/spip2spip_upgrade.php</install>
 	<prefix>spip2spip</prefix>

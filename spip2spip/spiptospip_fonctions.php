@@ -50,11 +50,12 @@ function analyser_backend_spip2spip($rss){
 				'ps'             => ',<ps[^>]*>(.*?)</ps[^>]*>,ims',
 				'auteur'         => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
 				'link'           => ',<link[^>]*>(.*?)</link[^>]*>,ims',
-				'evenements'       => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
+				'evenements'     => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
         'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
+        'logo'           => ',<logo[^>]*>(.*?)</logo[^>]*>,ims',
         'keyword'        => ',<keyword[^>]*>(.*?)</keyword[^>]*>,ims',
         'licence'        => ',<licence[^>]*>(.*?)</licence[^>]*>,ims',
-        'documents'       => ',<documents[^>]*>(.*?)</documents[^>]*>,ims',
+        'documents'      => ',<documents[^>]*>(.*?)</documents[^>]*>,ims',
 		
 	);
 	
@@ -73,16 +74,17 @@ function analyser_backend_spip2spip($rss){
 	$xml_event_tags = array('idevent','datedeb','datefin','titre','desc','lieu','horaire','idsource');
 
 	$evenement_regexp = array(		
-  			'evenement'       => ',<evenement[>[:space:]],i',
-				'evenementfin'    => '</evenement>',
-				'idevent'             => ',<idevent[^>]*>(.*?)</idevent[^>]*>,ims',
-        'datedeb'            => ',<datedeb[^>]*>(.*?)</datedeb[^>]*>,ims',
+  			'evenement'        => ',<evenement[>[:space:]],i',
+				'evenementfin'     => '</evenement>',
+				'idevent'          => ',<idevent[^>]*>(.*?)</idevent[^>]*>,ims',
+        'datedeb'          => ',<datedeb[^>]*>(.*?)</datedeb[^>]*>,ims',
 				'datefin'          => ',<datefin[^>]*>(.*?)</datefin[^>]*>,ims',
-				'titre'          => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
-				'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
-				'lieu'          => ',<lieu[^>]*>(.*?)</lieu[^>]*>,ims',
+				'titre'            => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+				'desc'             => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
+				'lieu'             => ',<lieu[^>]*>(.*?)</lieu[^>]*>,ims',
+				'adresse'          => ',<adresse[^>]*>(.*?)</adresse[^>]*>,ims',
 				'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',
-				'idsource'          => ',<idsource[^>]*>(.*?)</idsource[^>]*>,ims',
+				'idsource'         => ',<idsource[^>]*>(.*?)</idsource[^>]*>,ims',
 	);
 	// fichier backend correct ?
 	if (!is_spip2spip_backend($rss)) return _T('spiptospip:avis_echec_syndication_01');
@@ -444,7 +446,8 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                   		$_texte = spip2spip_convert_extra($article['texte'],$documents_current_article,$version_flux);
                   		$_ps = spip2spip_convert_extra($article['ps'],$documents_current_article,$version_flux);
                   		$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
-                  		$_lang =  $article['lang'];
+                  		$_lang = $article['lang'];
+                  		$_logo = $article['logo'];
                   		$_id_rubrique = $target; 
                       $_id_secteur = spip2spip_get_id_secteur($target);           		          		
                   		$_statut = $import_statut;
@@ -496,6 +499,11 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                       'objet' => 'article'));
                       }  
                       
+                      // ... si logo, tente de l'importer
+                      if ($_logo) {
+                      
+                      }
+                      
                       // etape 3 - traitement des evenements (a finir de porter) FIXME
                       $_evenements = $article['evenements'];
     				          $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
@@ -507,6 +515,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                             $datedeb = $_evenement['datedeb'];
                             $datefin = $_evenement['datefin'];
                             $lieu = $_evenement['lieu'];
+                            $adresse = $_evenement['adresse'];
                             $horaire = $_evenement['horaire'];
                             $titre = $_evenement['titre'];                        
                             $desc = $_evenement['desc'];                         
@@ -519,6 +528,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                 						            'titre'=>$titre,
                 						            'descriptif'=>$desc,
                 						            'lieu'=>$lieu,
+                						            'adresse'=>$adresse,
                 						            'horaire'=>$horaire));
                             $log_html .= "<div style='padding:2px 5px;border:1px solid #5DA7C5;background:#eee;display: block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
                 						 		                

@@ -1,16 +1,17 @@
-#CACHE{3600}[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
-<?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
-[(#REM)Liste tous les articles récents liés aux thématiques du groupe de mots-clés - spip2spip - destinés à être recopiés]
-<!-- backend utilisant SPIP2SPIP -->
-<spip2spip version="1.7">
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>[
+(#REM)
+  Liste tous les articles récents liés aux thématiques du groupe de mots-clés - spip2spip - destinés à être recopiés
+  
+  Vous pouvez modifier ce fichier selon vos besoins (exclure des rubriques, ...)
+
+]<!-- backend utilisant SPIP2SPIP --><spip2spip version="1.8">
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
-	<link>#URL_SITE_SPIP/</link>
-	
-    <!-- thématiques proposées -->
-	<BOUCLE_thema(MOTS){type=- spip2spip -}>[<thema>(#TITRE|supprimer_numero|texte_backend)</thema>]</BOUCLE_thema>
+	<link>#URL_SITE_SPIP/</link>	
+  <!-- thématiques proposées --><BOUCLE_thema(MOTS){type=- spip2spip -}>
+  [<thema>(#TITRE|supprimer_numero|texte_backend)</thema>]</BOUCLE_thema>
   	
-    <!-- derniers articles à synchroniser -->
-	<BOUCLE_synchro_article(ARTICLES){type_mot=- spip2spip -}{age<7}>
+  <!-- derniers articles à synchroniser --><BOUCLE_synchro_article(ARTICLES){type_mot=- spip2spip -}{age<7}>
 		<item>		  
 		  [<surtitre>(#SURTITRE*|liens_absolus|supprimer_numero|spip2spip_respecte_img|texte_backend)</surtitre>]
 		  <titre>[(#TITRE*|liens_absolus|supprimer_numero|spip2spip_respecte_img|texte_backend)]</titre>
@@ -33,9 +34,9 @@
       </documents></B_doc>            
      <B_auteurs><auteur><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></auteur></B_auteurs> 
 		 <lang>#LANG</lang>
+		 [<logo>(#LOGO_ARTICLE|fichier)</logo>]
      <BOUCLE_list_mot(MOTS){id_article}{type=- spip2spip -}{0,1}>[<keyword>(#TITRE|supprimer_numero|texte_backend)</keyword>]</BOUCLE_list_mot>
      <B_licence><licence><BOUCLE_licence(MOTS){id_article}{type=licence}{0,1}>[(#TITRE|supprimer_numero|texte_backend)]</BOUCLE_licence></licence></B_licence>		
 		</item>
 	</BOUCLE_synchro_article>
 </spip2spip>
-[(#REM)Vous pouvez modifier ce fichier selon vos besoins (exclure des rubriques, ...)]
