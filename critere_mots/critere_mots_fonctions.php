@@ -118,3 +118,13 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	return $wh;
 }
 
+
+function critere_mots_enleve_mot_de_liste($listemots, $id_mot) {
+	$listemots = array_unique($listemots);
+	while (array_search($id_mot,$listemots)!==false)
+		unset($listemots[array_search($id_mot,$listemots)]);
+	return $listemots;
+}
+
+?>
+
