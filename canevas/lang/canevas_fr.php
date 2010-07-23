@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_select_canevas' => 'S&eacute;lectionnez un canevas',
 'label_statut' => 'Statut',
 'liste_tous' => 'Tous les canevas',
-'liste_vos' => 'Tous vos canevas',
+'liste_vos' => 'Vos canevas',
 'label_vos_canevas' => 'Vos canevas',
 
 'nombre_canevas' => '@nb@ canevas',
