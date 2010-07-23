@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'No s\'ha trobat cap camp a @nom@', # MODIF
+	'pas_de_champs_dans' => 'No s\'ha trobat cap camp a @nom@',
 	'pas_de_changement' => 'Cap canvi a <b>@nom@</b>',
 
 	// R
