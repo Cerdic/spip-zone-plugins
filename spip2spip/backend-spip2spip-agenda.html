@@ -33,8 +33,8 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
                     [<adresse>(#ADRESSE|spip2spip_respecte_ln|texte_backend)</adresse>]
                     [<horaire>(#HORAIRE|texte_backend)</horaire>]                    
                     [(#CONFIG{spip2spip/export_mot_evnt}|oui)
-                        [(#GET{which_groupe}|find{-1}|oui)<INCLURE{fond=inclure/spip2spip_mot_article}{id_evenement} />]
-                        [(#GET{which_groupe}|find{-1}|non)<INCLURE{fond=inclure/spip2spip_mot_article_restreint}{id_evenement} />]
+                        [(#GET{which_groupe}|find{-1}|oui)<INCLURE{fond=inclure/spip2spip_mot_article}{id_evenement}{type_objet=evt} />]
+                        [(#GET{which_groupe}|find{-1}|non)<INCLURE{fond=inclure/spip2spip_mot_article_restreint}{id_evenement}{type_objet=evt} />]
                     ]                    
            </evenement></BOUCLE_datesevent>
 		  </evenements></B_datesevent> 
