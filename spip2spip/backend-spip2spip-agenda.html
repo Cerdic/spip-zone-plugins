@@ -21,16 +21,14 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		  <date>#DATE</date>         
       <B_datesevent><evenements> 
        		<BOUCLE_datesevent(EVENEMENTS){par date}{id_article}>
-        	<evenement>
-                    [<idevent>(#ID_EVENEMENT|texte_backend)</idevent>]
+        	<evenement>                    
                     [<datedeb>(#DATE_DEBUT|texte_backend)</datedeb>]
                     [<datefin>(#DATE_FIN|texte_backend)</datefin>]
                     [<titre>(#TITRE|texte_backend)</titre>]
-                    [<desc>(#DESCRIPTIF|texte_backend)</desc>]
+                    [<desc>(#DESCRIPTIF|spip2spip_respecte_ln|texte_backend)</desc>]
                     [<lieu>(#LIEU|texte_backend)</lieu>]
-                    [<adresse>(#ADRESSE|texte_backend)</adresse>]
-                    [<horaire>(#HORAIRE|texte_backend)</horaire>]
-                    [<idsource>(#ID_EVENEMENT_SOURCE|texte_backend)</idsource>]
+                    [<adresse>(#ADRESSE|spip2spip_respecte_ln|texte_backend)</adresse>]
+                    [<horaire>(#HORAIRE|texte_backend)</horaire>]                    
             	</evenement>
 	        </BOUCLE_datesevent>
 		  </evenements></B_datesevent> 

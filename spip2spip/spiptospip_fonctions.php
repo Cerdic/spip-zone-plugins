@@ -87,19 +87,19 @@ function analyser_backend_spip2spip($rss){
 	);
 	
 	// evenements
-	$xml_event_tags = array('idevent','datedeb','datefin','titre','desc','lieu','adresse','horaire','idsource');
+	$xml_event_tags = array('datedeb','datefin','titre','desc','lieu','adresse','horaire');
+	// on ne gere pas pour l'instant idevent/idsource qui permet de conserver la liaison des repetitions
+	
 	$evenement_regexp = array(		
   			'evenement'        => ',<evenement[>[:space:]],i',
-				'evenementfin'     => '</evenement>',
-				'idevent'          => ',<idevent[^>]*>(.*?)</idevent[^>]*>,ims',
+				'evenementfin'     => '</evenement>',				
         'datedeb'          => ',<datedeb[^>]*>(.*?)</datedeb[^>]*>,ims',
 				'datefin'          => ',<datefin[^>]*>(.*?)</datefin[^>]*>,ims',
 				'titre'            => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
 				'desc'             => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
 				'lieu'             => ',<lieu[^>]*>(.*?)</lieu[^>]*>,ims',
 				'adresse'          => ',<adresse[^>]*>(.*?)</adresse[^>]*>,ims',
-				'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',
-				'idsource'         => ',<idsource[^>]*>(.*?)</idsource[^>]*>,ims',
+				'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',				
 	);
 	// fichier backend correct ?
 	if (!is_spip2spip_backend($rss)) return _T('spiptospip:avis_echec_syndication_01');
@@ -622,17 +622,15 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       if ($_evenements!="") {
                         
                         $_evenements=unserialize($_evenements);           
-                        foreach($_evenements as $_evenement) {                      
-                            $id_distant = $_evenement['idevent'];  // utile ? a supprimer ds backend aussi ?
+                        foreach($_evenements as $_evenement) {                  
                             $datedeb = $_evenement['datedeb'];
                             $datefin = $_evenement['datefin'];
                             $lieu = $_evenement['lieu'];
-                            $adresse = $_evenement['adresse'];
+                            $adresse = spip2spip_convert_extra($_evenement['adresse'],$documents_current_article,$version_flux);
                             $horaire = $_evenement['horaire'];
                             $titre = $_evenement['titre'];                        
-                            $desc = $_evenement['desc'];                         
-                            $idsource = $_evenement['idsource'];   // utile ?
-		  		                      
+                            $desc = spip2spip_convert_extra($_evenement['desc'],$documents_current_article,$version_flux);  
+                             		  		                      
                             @sql_insertq('spip_evenements',array(
                 						            'id_article'=> $id_nouvel_article,
                 						            'date_debut'=> $datedeb,
@@ -642,7 +640,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                 						            'lieu'=>$lieu,
                 						            'adresse'=>$adresse,
                 						            'horaire'=>$horaire));
-                            $log_html .= "<div style='padding:2px 5px;border:1px solid #5DA7C5;background:#eee;display: block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
+                            $log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display: block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
                 						 		                
                 						            			
                         } 

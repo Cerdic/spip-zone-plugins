@@ -74,7 +74,7 @@ function exec_spip2spip(){
   while ($row = sql_fetch($result)) {  
     $couleur = ($i++ % 2) ? '#FFFFFF' : $couleur_claire;
   	echo "<tr bgcolor='$couleur'>";
-  	echo "\t<td><a href='".$row["site_rss"]."' target='_blank'>".$row["site_titre"]."</a></td>\n";
+  	echo "\t<td><a href='".$row["site_rss"]."'>".$row["site_titre"]."</a></td>\n";
   	echo "\t<td>".substr($row["last_syndic"],0,-3)."</td>\n";
   	echo "\t<td><a href='?exec=spip2spip_syndic&amp;id_site=".$row["id"]."' class='verdana2'>"._T('spiptospip:action_syndic')."</a></td>\n";
   	echo "\t<td><a href='?exec=spip2spip&amp;agir=del&amp;id=".$row["id"]."' class='verdana2'>"._T('spiptospip:action_delete')."</a></td>\n";
