@@ -1,0 +1,15 @@
+Formulaire multi-étape de demande d'actes d'état-civil
+
+Nécessite cvt-multi-etapes dispo sur la zone
+
+#FORMULAIRE_ACTES_ETAT_CIVIL{destinataire, commune}
+destinataire = email du destinataire (possibilité d'en declaré plusieurs séparés par des ;)
+commune = nom de la commune
+
+Peut également être appelé comme modèle dans un article
+<formulaire_actes_etat-civil|destinataire=.....|commune=.....>
+
+Toutes les chaines sont définies dans le fichier de langue
+
+css conforme spip_formulaires
+spécifités défines dans /css/actes_etat_civil.css qui peut être redéfinie dans /squelettes/css/actes_etat_civil.css

@@ -1,0 +1,126 @@
+[<!-- (#REM) etape 2 renseignement sur la personne concernée par l'acte -->]
+<a name="formulaire_etat_civil"></a>
+<div class="formulaire_spip formulaire_etat_civil formulaire_etat_civil_#ENV{_etape}" id="formulaire_etat_civil">
+[(#ENV{editable})
+<form method="post" action="#ENV{action}#formulaire_etat_civil" enctype="multipart/form-data">
+	[ <!--(#REM) declarer les hidden -->]
+	#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	
+	<h3><:etat_civil:demande_acte_etat_civil:></h3>
+	
+	<p class="etapes_acte">
+		<span class="etape"><:etat_civil:etape:>[ (#ENV{_etape})[/(#ENV{_etapes})]</span>
+		[ <span class="acte_enclair">(#ENV{type_acte}|en_clair{acte_etat_civil})</span>]<br />]
+		<:etat_civil:type_acte:> &gt; 
+		<span class="etape_encours"><:etat_civil:personne_concerne_acte:></span> &gt; 
+		<:etat_civil:renseignements_demandeur:> &gt; <:etat_civil:validation_demande:>
+	</p>
+	<p class="explication">
+		<:etat_civil:explications_personne_concerne_acte:><br/>
+		<span class="attention"><:etat_civil:etoile:> <:etat_civil:renseignement_obligatoire:></span>
+	</p>
+	
+	<fieldset>
+	<legend><:etat_civil:personne_concerne_acte:></legend>
+	<ul>
+		<li class="saisie_personne_nom obligatoire[ (#ENV*{erreurs}|table_valeur{personne_nom}|oui)erreur]">
+			<label for="personne_nom" title="<:etat_civil:aide_personne_nom:>">
+				<:etat_civil:nom:><:etat_civil:etoile:>
+			</label>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{personne_nom})</span>]
+			<input type="text" class="text" id="personne_nom" name="personne_nom" value="#ENV{personne_nom}" />
+		</li>
+		
+		<li class="saisie_personne_prenom obligatoire[ (#ENV*{erreurs}|table_valeur{personne_prenom}|oui)erreur]">
+			<label for="personne_prenom" title="<:etat_civil:aide_personne_prenom:>">
+				<:etat_civil:prenom:><:etat_civil:etoile:>
+			</label>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{personne_prenom})</span>]
+			<input type="text"  class="text" id="personne_prenom" name="personne_prenom" value="#ENV{personne_prenom}" />
+		</li>
+		
+		<li class="saisie_personne_date_evenement obligatoire[ (#ENV*{erreurs}|table_valeur{personne_date_evenement}|oui)erreur]">
+			<label for="personne_date_evenement" title="<:etat_civil:aide_personne_date_evenement:>">
+				[(#ENV{type_acte}|<={4}|?{<:etat_civil:date_naissance:>,
+					[(#ENV{type_acte}|<={8}|?{<:etat_civil:date_mariage:>,<:etat_civil:date_deces:>})]
+				})]<:etat_civil:etoile:>
+			</label>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{personne_date_evenement})</span>]
+			<input type="text" class="text" id="personne_date_evenement" name="personne_date_evenement" value="#ENV{personne_date_evenement}" />
+		</li>
+		
+		<li class="saisie_personne_commune_evenement">
+			<label for="personne_commune_evenement" title="<:etat_civil:aide_personne_commune_evenement:>">
+				[(#ENV{type_acte}|<={4}|?{<:etat_civil:commune_naissance:>,
+					[(#ENV{type_acte}|<={8}|?{<:etat_civil:commune_mariage:>,<:etat_civil:commune_deces:>})]
+				})]
+			</label>
+			<input type="text" class="text" disabled="disabled" id="personne_commune_evenement" name="personne_commune_evenement" value="#ENV{personne_commune_evenement}" />
+		</li>
+	</ul>
+
+	[<!-- (#REM) acte de naissance ou de mariage -->]
+	[(#ENV{type_acte}|<={8}|oui)
+	<fieldset>
+	<legend><:etat_civil:personne_concerne_acte_pere:></legend>
+	<ul>
+		<li class="saisie_personne_nom_pere obligatoire[ (#ENV*{erreurs}|table_valeur{personne_nom_pere}|oui)erreur]">
+			<label for="personne_nom_pere" title="<:etat_civil:aide_personne_nom_pere:>">
+				<:etat_civil:nom:><:etat_civil:etoile:>
+			</label>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{personne_nom_pere})</span>]
+			<input type="text" class="text" id="personne_nom_pere" name="personne_nom_pere" value="#ENV{personne_nom_pere}" />
+		</li>
+		
+		<li class="saisie_personne_prenom_pere obligatoire[ (#ENV*{erreurs}|table_valeur{personne_prenom_pere}|oui)erreur]">
+			<label for="personne_prenom_pere" title="<:etat_civil:aide_personne_prenom_pere:>"><:etat_civil:prenom:><:etat_civil:etoile:></label>
+			[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{personne_prenom_pere})</span>]
+			<input type="text" class="text" id="personne_prenom_pere" name="personne_prenom_pere" value="#ENV{personne_prenom_pere}" />
+		</li>
+		
+		<li class="choix saisie_perso_absence_pere">
+			<input type="checkbox" name="personne_absence_pere" id="personne_absence_pere" value="1"[ (#ENV{personne_absence_pere}|oui) checked="checked"] />
+			<label for="personne_absence_pere" title="<:etat_civil:aide_personne_absence_pere:>">
+				<:etat_civil:absence_filiation_pere:>
+			</label>
+		</li>
+	</ul>
+	</fieldset>
+
+<fieldset>
+<legend><:etat_civil:personne_concerne_acte_mere:></legend>
+<p class="explication"><:etat_civil:explications_personne_concerne_mere:>
+<ul>
+	<li class="saisie_personne_nom_mere obligatoire[ (#ENV*{erreurs}|table_valeur{personne_nom_mere}|oui)erreur]">
+		<label for="personne_nom_mere" title="<:etat_civil:aide_personne_nom_mere:>">
+			<:etat_civil:nom:><:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{personne_nom_mere})</span>]
+		<input type="text"  class="text" id="personne_nom_mere" name="personne_nom_mere" value="#ENV{personne_nom_mere}" />
+	</li>
+	
+	<li class="saisie_personne_prenom_mere obligatoire[ (#ENV*{erreurs}|table_valeur{personne_prenom_mere}|oui)erreur]">
+		<label for="personne_prenom_mere" title="<:etat_civil:aide_personne_prenom_mere:>">
+			<:etat_civil:prenom:><:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{personne_prenom_mere})</span>]
+		<input type="text"  class="text" id="personne_prenom_mere" name="personne_prenom_mere" value="#ENV{personne_prenom_mere}" />
+	</li>
+	
+	<li class="choix saisie_personne_absence_mere">
+		<input type="checkbox" name="personne_absence_mere" id="personne_absence_mere" value="1"[ (#ENV{personne_absence_mere}|oui) checked="checked"] />
+		<label for="personne_absence_mere" title="<:etat_civil:aide_personne_absence_mere:>">
+			<:etat_civil:absence_filiation_mere:>
+		</label>
+	</li>
+</ul>
+]
+
+</fieldset>
+	[<!-- (#REM) validation -->]
+	<p class="boutons">
+		<input type="submit" class="submit" name="valider" value="<:etat_civil:suite:>" />
+	</p>
+</form>
+]
+</div><!-- /formulaire_etat_civil -->

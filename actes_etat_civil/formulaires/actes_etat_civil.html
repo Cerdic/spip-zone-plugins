@@ -1,0 +1,98 @@
+[<!-- (#REM) etape 1 choix du type d'acte -->]
+<script type="text/javascript">
+$(document).ready(function(){
+	[(#ENV{type_acte}|>{8}|oui)$('#lien_parent').hide();]
+	$('input.acte_naissance').click(
+		function () {
+			$('#lien_parent').show();
+  		}
+	);
+	$('input.acte_mariage').click(
+		function () {
+			$('#lien_parent').show();
+  		}
+	);
+	$('input.acte_deces').click(
+		function () {
+			$('#lien_parent').hide();
+  		}
+	);
+
+});
+</script>
+<a name="formulaire_etat_civil"></a>
+<div class="formulaire_spip formulaire_etat_civil formulaire_etat_civil_#ENV{_etape}" id="formulaire_etat_civil">
+
+[(#ENV{editable})
+<form method="post" action="#ENV{action}#formulaire_etat_civil" enctype="multipart/form-data">
+	[ <!--(#REM) declarer les hidden -->]
+	#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	
+	<h3><:etat_civil:demande_acte_etat_civil:></h3>
+	
+	<p class="presentation"><:etat_civil:explication_service:></p>
+	
+	<p class="etapes_acte"><span class="etape">
+		<:etat_civil:etape:>[ (#ENV{_etape})[/(#ENV{_etapes})]</span><br />]
+		<span class="etape_encours"><:etat_civil:type_acte:></span> &gt; 
+		<:etat_civil:personne_concerne_acte:> &gt; 
+		<:etat_civil:renseignements_demandeur:> &gt; 
+		<:etat_civil:validation_demande:>
+	</p>
+	<p class="explication">
+		<:etat_civil:explications_type_acte:>#ENV{personne_commune_evenement}
+	</p>
+	[<p class="etat_civil_type_acte obligatoire erreur">
+		<span class="erreur_message">(#ENV*{erreurs}|table_valeur{type_acte})</span>
+	</p>]
+	<fieldset>
+		<legend><:etat_civil:type_acte:></legend>
+	[ <!--(#REM) acte de naissance -->]
+	<fieldset>
+		<legend><:etat_civil:acte_naissance:></legend>
+		<ul>
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{1,acte_naissance})</li>]
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{2,acte_naissance})</li>]
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{3,acte_naissance})</li>]
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{4,acte_naissance})</li>]
+		</ul>
+	</fieldset>
+	[ <!--(#REM) acte de mariage -->]
+	<fieldset>
+		<legend><:etat_civil:acte_mariage:></legend>
+		<ul>
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{5,acte_mariage})</li>]
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{6,acte_mariage})</li>]
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{7,acte_mariage})</li>]
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{8,acte_mariage})</li>]
+		</ul>
+	</fieldset>
+	[ <!--(#REM) acte de deces -->]
+	<fieldset>
+		<legend><:etat_civil:acte_deces:></legend>
+		<ul>
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{9,acte_deces})</li>]
+			[<li class="etat_civil_type_acte choix">(#ENV{type_acte}|etat_civil_generer_radio{10,acte_deces})</li>]
+		</ul>
+	</fieldset>
+</fieldset>
+	[<!-- (#REM) lien de parenté (caché si acte de décès) -->]
+	<fieldset id="lien_parent">
+		<legend><:etat_civil:lien_parent:></legend>
+		<ul>
+			<li class='etat_civil_lien_parent obligatoire[ (#ENV*{erreurs}|table_valeur{lien_parent}|oui)erreur]'>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{lien_parent})</span>]
+				<select size="1" name="lien_parent" class="select" id="etat_civil_lien_parent">
+					[(#ENV{lien_parent}|etat_civil_generer_select{#ENV{nbre_liens_parent}})]
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	
+	[<!-- (#REM) validation -->]
+	<p class="boutons">
+		<input type="submit" class="submit" name="valider" value="<:etat_civil:suite:>" />
+	</p>
+</form>
+]
+</div><!-- /formulaire_etat_civil -->

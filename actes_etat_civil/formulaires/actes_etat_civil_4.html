@@ -1,0 +1,96 @@
+[<!-- (#REM) etape 4 -->]
+<a name="formulaire_etat_civil"></a>
+<div class="formulaire_spip formulaire_etat_civil formulaire_etat_civil_#ENV{_etape}" id="formulaire_etat_civil">
+	<h3><:etat_civil:demande_acte_etat_civil:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable})
+<form method="post" action="#ENV{action}#formulaire_etat_civil" enctype="multipart/form-data">
+	[<!--(#REM) declarer les hidden -->]
+	#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	<p class="etapes_acte">
+		<span class="etape"><:etat_civil:etape:>[ (#ENV{_etape})[/(#ENV{_etapes})]</span>
+		[ <span class="acte_enclair">(#ENV{type_acte}|en_clair{acte_etat_civil})</span>]<br />]
+		<:etat_civil:type_acte:> &gt; 
+		<:etat_civil:personne_concerne_acte:> &gt; 
+		<:etat_civil:renseignements_demandeur:> &gt; 
+		<span class="etape_encours"><:etat_civil:validation_demande:></span>
+	</p>
+	<p class="explication">
+		<:etat_civil:explications_validation:>
+	</p>
+	
+	<fieldset>
+	<legend><:etat_civil:validation_demande:></legend>
+	
+	[<!-- (#REM) type acte -->]
+	<fieldset>
+		<legend><:etat_civil:type_acte:></legend>
+		<ul>
+			[<li><:etat_civil:demande_de:> : (#ENV{type_acte}|en_clair{acte_etat_civil})</li>]
+			[<li>(#ENV{type_acte}|<={8}|oui)
+				<:etat_civil:par:>[ : (#ENV{lien_parent}|en_clair{lien_parent})]
+			</li>]
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" name="_retour_etape_1" value="<:etat_civil:modifier:>" />
+		</p>
+	</fieldset>
+	
+	[<!-- (#REM) personne sur laquelle pour acte -->]
+	<fieldset>
+	<legend><:etat_civil:personne_concerne_acte:></legend>
+	<ul>
+		<li>[ (#ENV{personne_nom})][ (#ENV{personne_prenom})]</li>
+		[<li>
+			[(#ENV{type_acte}|<={4}|?{<:etat_civil:ne_le:>,
+				[(#ENV{type_acte}|<={8}|?{<:etat_civil:marie_le:>,<:etat_civil:decede_le:>})]
+			})] : (#ENV{personne_date_evenement})
+		</li>]
+		[<li>
+			[(#ENV{type_acte}|<={4}|?{<:etat_civil:commune_naissance:>,
+				[(#ENV{type_acte}|<={8}|?{<:etat_civil:commune_mariage:>,<:etat_civil:commune_deces:>})]
+			})] : (#ENV{personne_commune_evenement})
+		</li>]
+		[(#ENV{type_acte}|<={8}|oui)
+		[<li><:etat_civil:pere:> : 
+			(#ENV{personne_absence_pere}|=={1}|?{<:etat_civil:absence_filiation_pere:>,#ENV{personne_nom_pere}&nbsp;#ENV{personne_prenom_pere}})
+		</li>]
+		[<li><:etat_civil:mere:> : 
+			(#ENV{personne_absence_mere}|=={1}|?{<:etat_civil:absence_filiation_mere:>,#ENV{personne_nom_mere}&nbsp;#ENV{personne_prenom_mere}})]
+		</li>]
+	</ul>
+	<p class="boutons">
+		<input type="submit" class="submit" name="_retour_etape_2" value="<:etat_civil:modifier:>" />
+	</p>
+	</fieldset>
+	
+	[<!-- (#REM) demandeur -->]
+	<fieldset>
+	<legend><:etat_civil:demandeur:></legend>
+		<ul>
+			[<li> (#ENV{demandeur_nom})[ (#ENV{demandeur_prenom})]</li>]
+			[<li>(#ENV{demandeur_adresse1})</li>]
+			[<li>(#ENV{demandeur_adresse2})</li>]
+			[<li>(#ENV{demandeur_adresse3})</li>]
+			[<li>(#ENV{demandeur_code_postal})[ (#ENV{demandeur_ville})][ (#ENV{demandeur_pays})]</li>]
+			[<li><:etat_civil:email:> : (#ENV{demandeur_email})</li>]
+			[<li><:etat_civil:telephone:> : (#ENV{demandeur_telephone})</li>]
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" name="_retour_etape_3" value="<:etat_civil:modifier:>" />
+		</p>
+	</fieldset>
+	<ul><li>
+		<label for="remarque" id="label_rem"><:etat_civil:remarque:></label>
+	    <textarea id="remarque" name="remarque" cols="40" rows="3" class="textarea">#ENV{remarque}</textarea>
+	</li></ul>
+</fieldset>
+	[<!-- (#REM) confirmation -->]
+<p class="boutons">
+	<input type="submit" class="submit" name="confirmer" value="<:etat_civil:confirmer_demande:>" />
+</p>
+</form>
+]
+</div><!-- /formulaire_etat_civil -->

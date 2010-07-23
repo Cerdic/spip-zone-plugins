@@ -1,0 +1,22 @@
+div.formulaire_etat_civil {}
+
+/** surcharge de spip_formulaires.css **/
+
+.formulaire_etat_civil p.etapes_acte {color: #7f7f7f;}
+.formulaire_etat_civil p.etapes_acte span.etape {color: black;}
+.formulaire_etat_civil p.etapes_acte span.acte_enclair {color: black; font-weight: bold;}
+.formulaire_etat_civil p.etapes_acte span.etape_encours {color:#ff8000;}
+
+/* pour le etoile=obligatoire */
+.formulaire_etat_civil .attention {font-style:italic;}
+
+.formulaire_etat_civil label span,
+.formulaire_etat_civil .attention span {color:#ff0000; font-weight:bold;}
+
+/* Fieldset */
+.formulaire_etat_civil fieldset {margin:0 0 0.5em 0; padding:0 0.5em; border:1px black dotted;}
+.formulaire_etat_civil fieldset legend {padding: 0 0.5em;}
+
+
+/* pour la previsu du formulaire 4 */
+.formulaire_etat_civil_4 ul li.li_titre {font-weight:bold;}

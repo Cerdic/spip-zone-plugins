@@ -1,0 +1,109 @@
+[<!-- (#REM) etape 3 renseignements sur le demandeur -->]
+<a name="formulaire_etat_civil"></a>
+<div class="formulaire_spip formulaire_etat_civil formulaire_etat_civil_#ENV{_etape}" id="formulaire_etat_civil">
+[(#ENV{editable})
+<form method="post" action="#ENV{action}#formulaire_etat_civil" enctype="multipart/form-data">
+	[ <!--(#REM) declarer les hidden -->]
+	#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	
+	<h3><:etat_civil:demande_acte_etat_civil:></h3>
+	<p class="etapes_acte">
+		<span class="etape"><:etat_civil:etape:>[ (#ENV{_etape})[/(#ENV{_etapes})]</span>
+		[ <span class="acte_enclair">(#ENV{type_acte}|en_clair{acte_etat_civil})</span>]<br />]
+		<:etat_civil:type_acte:> &gt; 
+		<:etat_civil:personne_concerne_acte:> &gt; 
+		<span class="etape_encours"><:etat_civil:renseignements_demandeur:></span> 
+		&gt; <:etat_civil:validation_demande:>
+	</p>
+	<p class="explication">
+		<:etat_civil:explications_demandeur:><br/>
+		<span class="attention"><:etat_civil:etoile:> <:etat_civil:renseignement_obligatoire:></span>
+	</p>
+	
+	<fieldset>
+<legend><:etat_civil:demandeur:></legend>
+<ul>
+	<li class="saisie_demandeur_nom obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_nom}|oui)erreur]">
+		<label for="demandeur_nom"><:etat_civil:nom:>
+			<:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_nom})</span>]
+		<input type="text" class="text" id="demandeur_nom" name="demandeur_nom" value="#ENV{demandeur_nom}" />
+	</li>
+	
+	<li class="saisie_demandeur_prenom obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_prenom}|oui)erreur]">
+		<label for="demandeur_prenom">
+			<:etat_civil:prenom:><:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_prenom})</span>]
+		<input type="text"  class="text" id="demandeur_prenom" name="demandeur_prenom" value="#ENV{demandeur_prenom}" />
+	</li>
+	
+	<li class="saisie_demandeur_adresse1">
+		<label for="demandeur_adresse1">
+			<:etat_civil:adresse1:>
+		</label>
+		<input type="text" class="text" id="demandeur_adresse1" name="demandeur_adresse1" value="#ENV{demandeur_adresse1}" />
+	</li>
+	
+	<li class="saisie_demandeur_adresse2 obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_adresse2}|oui)erreur]">
+		<label for="demandeur_adresse2">
+			<:etat_civil:adresse2:><:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_adresse2})</span>]
+		<input type="text" class="text" id="demandeur_adresse2" name="demandeur_adresse2" value="#ENV{demandeur_adresse2}" />
+	</li>
+	
+	<li class="saisie_demandeur_adresse3">
+		<label for="demandeur_adresse3">
+			<:etat_civil:adresse3:>
+		</label>
+		<input type="text" class="text" id="demandeur_adresse3" name="demandeur_adresse3" value="#ENV{demandeur_adresse3}" />
+	</li>
+	
+	<li class="saisie_demandeur_code_postal obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_code_postal}|oui)erreur]">
+		<label for="demandeur_code_postal">
+			<:etat_civil:code_postal:><:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_code_postal})</span>]
+		<input type="text" class="text" id="demandeur_code_postal" name="demandeur_code_postal" value="#ENV{demandeur_code_postal}" />
+	</li>
+	
+	<li class="saisie_demandeur_ville obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_ville}|oui)erreur]">
+		<label for="demandeur_ville">
+			<:etat_civil:ville:><:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_ville})</span>]
+		<input type="text" class="text" id="demandeur_ville" name="demandeur_ville" value="#ENV{demandeur_ville}" />
+	</li>
+	
+	<li class="saisie_demandeur_pays obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_pays}|oui)erreur]">
+		<label for="demandeur_pays"><:etat_civil:pays:><:etat_civil:etoile:></label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_pays})</span>]
+		<input type="text" class="text" id="demandeur_pays" name="demandeur_pays" value="#ENV{demandeur_pays}" />
+	</li>
+	
+	<li class="saisie_demandeur_email obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_email}|oui)erreur]">
+		<label for="demandeur_email">
+			<:etat_civil:email:><:etat_civil:etoile:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_email})</span>]
+		<input type="text" class="text" id="demandeur_email" name="demandeur_email" value="#ENV{demandeur_email}" /> <:etat_civil:ou:>
+	</li>
+	
+	<li class="saisie_demandeur_telephone obligatoire[ (#ENV*{erreurs}|table_valeur{demandeur_telephone}|oui)erreur]">
+		<label for="demandeur_telephone">
+			<:etat_civil:telephone:>
+		</label>
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{demandeur_telephone})</span>]
+		<input type="text" class="text" id="demandeur_telephone" name="demandeur_telephone" value="#ENV{demandeur_telephone}" />
+
+	</ul>
+</fieldset>
+	[<!-- (#REM) validation -->]
+	<p class="boutons">
+		<input type="submit" class="submit" name="valider" value="<:etat_civil:suite:>" />
+	</p>
+</form>
+]
+</div><!-- /formulaire_etat_civil -->
