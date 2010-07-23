@@ -99,7 +99,8 @@ function analyser_backend_spip2spip($rss){
 				'desc'             => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
 				'lieu'             => ',<lieu[^>]*>(.*?)</lieu[^>]*>,ims',
 				'adresse'          => ',<adresse[^>]*>(.*?)</adresse[^>]*>,ims',
-				'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',				
+				'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',
+        'mots'             => ',<mots[^>]*>(.*?)</mots[^>]*>,ims',				
 	);
 	// fichier backend correct ?
 	if (!is_spip2spip_backend($rss)) return _T('spiptospip:avis_echec_syndication_01');
@@ -189,7 +190,36 @@ function analyser_backend_spip2spip($rss){
           }       
     }
 	
-		                                                  
+   
+    // On parse le noeud mots
+    if ($data['mots'] != "") {        
+          $mots = array();          
+          if (preg_match_all($mot_regexp['mot'],$data['mots'],$r2, PREG_SET_ORDER))
+          	foreach ($r2 as $regs) {
+          		$debut_item = strpos($data['mots'],$regs[0]);
+          		$fin_item = strpos($data['mots'],
+          		$mot_regexp['motfin'])+strlen($mot_regexp['motfin']);
+          		$mots[] = substr($data['mots'],$debut_item,$fin_item-$debut_item);
+          		$debut_texte = substr($data['mots'], "0", $debut_item);
+          		$fin_texte = substr($data['mots'], $fin_item, strlen($data['mots']));
+          		$data['mots'] = $debut_texte.$fin_texte;
+          }
+          
+          $motcle = array();
+          if (count($mots)) {          
+              foreach ($mots as $mot) {                 
+                 $data_node = array();
+                 foreach ($xml_mot_tags as $xml_mot_tag) {
+                    if (preg_match($mot_regexp[$xml_mot_tag],$mot,$match)) $data_node[$xml_mot_tag] = $match[1]; 
+  				                                                            else $data_node[$xml_mot_tag] = "";
+  				       } 
+                $motcle[] = $data_node;                                                     
+              }             
+              $data['mots'] =  serialize($motcle);
+          }       
+    }	
+    
+    		                                                  
 
 	  // On parse le noeud evenement
     if ($data['evenements'] != "") {
@@ -219,35 +249,6 @@ function analyser_backend_spip2spip($rss){
               $data['evenements'] =  serialize($agenda); 
           }       
     }
-    
-    // On parse le noeud mots
-    if ($data['mots'] != "") {        
-          $mots = array();
-          spip_log(".......debug: on trouve des mots");
-          if (preg_match_all($mot_regexp['mot'],$data['mots'],$r2, PREG_SET_ORDER))
-          	foreach ($r2 as $regs) {
-          		$debut_item = strpos($data['mots'],$regs[0]);
-          		$fin_item = strpos($data['mots'],
-          		$mot_regexp['motfin'])+strlen($mot_regexp['motfin']);
-          		$mots[] = substr($data['mots'],$debut_item,$fin_item-$debut_item);
-          		$debut_texte = substr($data['mots'], "0", $debut_item);
-          		$fin_texte = substr($data['mots'], $fin_item, strlen($data['mots']));
-          		$data['mots'] = $debut_texte.$fin_texte;
-          }
-          
-          $motcle = array();
-          if (count($mots)) {          
-              foreach ($mots as $mot) {                 
-                 $data_node = array();
-                 foreach ($xml_mot_tags as $xml_mot_tag) {
-                    if (preg_match($mot_regexp[$xml_mot_tag],$mot,$match)) $data_node[$xml_mot_tag] = $match[1]; 
-  				                                                            else $data_node[$xml_mot_tag] = "";
-  				       } 
-                $motcle[] = $data_node;                                                     
-              }             
-              $data['mots'] =  serialize($motcle);
-          }       
-    }	
 	  
 	  
 		// Nettoyer les donnees et remettre les CDATA en place

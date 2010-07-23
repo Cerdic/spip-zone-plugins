@@ -33,6 +33,7 @@
   
   <fieldset><legend>Mots-clés: Export</legend>
   <p><label><input type="checkbox" name="export_mot_article"[ checked="(#ENV{export_mot_article}|!={''}|?{'checked'})"] class="fondl" />Exporter les mots-clés des articles</label></p>
+  <p><label><input type="checkbox" name="export_mot_evnt"[ checked="(#ENV{export_mot_evnt}|!={''}|?{'checked'})"] class="fondl" />Exporter les mots-clés des événements</label></p>  
   <p>Choisissez les groupes dont vous voulez exporter les mots-clés
     #SET{which_groupe,#CONFIG{spip2spip/export_mot_groupe,#ARRAY{0,-1}}}[(#REM) inspi:plugin GIS]    
     <select name="export_mot_groupe[]" multiple="multiple" size="5">
@@ -50,7 +51,10 @@
   <fieldset><legend>Mots-clés: Import</legend>
   <p>
     <label><input type="checkbox" name="import_mot_article"[ checked="(#ENV{import_mot_article}|!={''}|?{'checked'})"] class="fondl" />Importer les mots-clés des articles</label><br />
-  </p>    
+  </p>  
+    <p>
+    <label><input type="checkbox" name="import_mot_evnt"[ checked="(#ENV{import_mot_evnt}|!={''}|?{'checked'})"] class="fondl" />Importer les mots-clés des événements (non fonctionnel)</label><br />
+  </p>  
   <p>
     Si oui, où placer les mots-clés importés ?<br />
     <label><input type="radio" name="import_mot_groupe_creer"  value="oui" [(#ENV{import_mot_groupe_creer}|=={oui}?{checked='checked',''})] />Récréer les groupes des mots-clés d'origine</label><br />
