@@ -47,7 +47,7 @@
   
   
   
-  <fieldset><legend>Mots-clés: Import (non fonctionnel pour l'instant...)</legend>
+  <fieldset><legend>Mots-clés: Import</legend>
   <p>
     <label><input type="checkbox" name="import_mot_article"[ checked="(#ENV{import_mot_article}|!={''}|?{'checked'})"] class="fondl" />Importer les mots-clés des articles</label><br />
   </p>    
@@ -58,7 +58,7 @@
    
     <select name="import_mot_groupe">
     <BOUCLE_groupes(GROUPES_MOTS){par titre}{titre !=- spip2spip - }>
-      <option value="#TITRE"[ selected="(#ENV{import_mot_groupe}|=={#TITRE}|oui)selected"]>#TITRE</option>    
+      <option value="#ID_GROUPE"[ selected="(#ENV{import_mot_groupe}|=={#ID_GROUPE}|oui)selected"]>#TITRE</option>    
     </BOUCLE_groupes>
     </select>
   </p>

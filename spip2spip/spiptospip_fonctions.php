@@ -28,6 +28,10 @@ function is_spip2spip_backend($str) {
     	 return false;
 }
 
+// -----------------------
+// Fonctions Parsing
+// -----------------------
+
 // 
 // parse le backend xml spip2spip 
 // basée sur la fonction originale: ecrire/inc/syndic.php -> analyser_backend()
@@ -261,6 +265,10 @@ function analyser_backend_spip2spip($rss){
   return $articles;
 }
 
+// -----------------------
+// Fonctions SQL
+// -----------------------
+
 //
 // recuperer rubrique (normalement uniquement) lié à un mot
 function spip2spip_get_id_rubrique($mot) {   
@@ -312,6 +320,54 @@ function spip2spip_get_id_auteur($name) {
     // auteur inconnu, on le cree ... 
     return sql_insertq('spip_auteurs',array('nom'=>$name,'statut'=>'1comite'));
 }
+
+//
+// insert un mot-cle 
+function spip2spip_insert_mode_article($id_article, $mot_titre, $groupe_titre, $mode_creer_groupe, $id_groupe=-1) {
+   if ($mode_creer_groupe) {
+        // groupe existe ?
+        if ($row = sql_fetsel("id_groupe","spip_groupes_mots","titre=".sql_quote($groupe_titre))) { 
+              $id_groupe = $row['id_groupe'];
+        } else {
+            $id_groupe = sql_insertq('spip_groupes_mots',array(
+                                      'titre'=> $groupe_titre, 
+                                      'tables_liees'=> 'articles', 
+                                      'minirezo' => 'oui',
+                                      'comite' => 'oui',
+                                      'forum' => 'non'));
+        }
+        
+   }     	
+        
+        
+   if ($id_groupe>0){                   
+        // mot existe ?
+        if ($row = sql_fetsel("id_mot","spip_mots","titre=".sql_quote($mot_titre)." AND id_groupe=".intval($id_groupe))) { 
+              $id_mot = $row['id_mot'];
+        } else {
+              if ($row = sql_fetsel("titre","spip_groupes_mots","id_groupe=".intval($id_groupe))) 
+                          $type = $row['titre'];
+              $id_mot = sql_insertq('spip_mots',array(
+                                      'titre'=> $mot_titre, 
+                                      'id_groupe'=> intval($id_groupe), 
+                                      'type' => $type));                                      
+        }
+            
+        sql_insertq('spip_mots_articles', array(
+                                      'id_mot'=> intval($id_mot), 
+                                      'id_article'=> intval($id_article)));
+                   
+   } else {
+      spip_log("spip2spip pas de groupe-clé import specifie");
+   }
+
+}
+
+
+// -----------------------
+// Fonctions de formatage 
+// -----------------------
+
 
 //
 // restaure le formatage des extra
@@ -382,18 +438,17 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
     if (spip2spip_get_id_groupemot("licence"))  $isLicenceInstalled = true; 
                                           else  $isLicenceInstalled = false;
                                 
-    // si cfg dispo, on charge les valeurs
-    if (function_exists(lire_config))  {
-        if (lire_config('spip2spip/import_statut')=="publie") $import_statut = "publie";  else $import_statut = "prop";
-        if (lire_config('spip2spip/citer_source')=="on") $citer_source=true; else  $citer_source=false;
-        if (lire_config('spip2spip/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
-        $email_suivi = lire_config('spip2spip/email_suivi'); 
-    } else { // sinon valeur par defaut
-        $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié)      
-        $citer_source = true; 
-        $email_alerte = true;
-        $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial
-    }
+    // on charge les valeurs de CFG
+    if (lire_config('spip2spip/import_statut')=="publie") $import_statut = "publie";  else $import_statut = "prop";
+    if (lire_config('spip2spip/citer_source')=="on") $citer_source=true; else  $citer_source=false;
+    if (lire_config('spip2spip/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
+    if (lire_config('spip2spip/email_suivi')!="")
+                   $email_suivi = lire_config('spip2spip/email_suivi');
+              else $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial 
+    if (lire_config('spip2spip/import_mot_article')=="on")  $import_mot_article=true; else  $import_mot_article=false;
+    if (lire_config('spip2spip/import_mot_groupe_creer')=="oui")  $import_mot_groupe_creer=true; else  $import_mot_groupe_creer=false;
+    if (lire_config('spip2spip/import_mot_groupe'))  $id_import_mot_groupe = (int) lire_config('spip2spip/import_mot_groupe');
+                                                else $id_import_mot_groupe = -1;
     
     //-------------------------------
     // selection du site
@@ -550,13 +605,13 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       }
                       
                       // etape 3 - traitement des mots de l'article
-                      $_mots = $article['mots']; 
-                      if ($_mots!="") {
+                      $_mots = $article['mots'];                       
+                      if ($_mots!="" && $import_mot_article) {
                         $_mots = unserialize($_mots);                  
-                        foreach($_mots as $_mot) {                    
+                        foreach($_mots as $_mot) {                   
                             $groupe = $_mot['groupe'];                            
-                            $titre  = $_mot['titre']; 
-                            spip_log(">...mot: $titre (groupe: $groupe)");                   
+                            $titre  = $_mot['titre'];                             
+                            spip2spip_insert_mode_article($id_nouvel_article, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe);                                              
                         }
                       }
                             
