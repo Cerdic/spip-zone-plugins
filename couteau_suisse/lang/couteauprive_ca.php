@@ -57,10 +57,10 @@ El valor de 1~000~000 p&iacute;xels sembla correcte per una configuraci&oacute; 
 	'auteurs:nom' => 'P&agrave;gina d\'autors',
 
 	// B
-	'balise_set:description' => 'Afin d\'all&eacute;ger les &eacute;critures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqu&eacute; &agrave; une variable passe donc dans le nom de la balise.
+	'balise_set:description' => 'Per simplificar l\'escriptura del tipus  <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la seg&uuml;ent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
 
-Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPLACE{x,ons,ez}</code>.', # NEW
-	'balise_set:nom' => 'Balise #SET &eacute;tendue', # NEW
+Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLACE{x,ons,ez}</code>.',
+	'balise_set:nom' => 'Etiqueta #SET ampliada',
 	'barres_typo_edition' => 'Edici&oacute; dels continguts',
 	'barres_typo_forum' => 'Missatges del F&ograve;rum',
 	'barres_typo_intro' => 'S\'ha detectar el connector &laquo;Porte-Plume&raquo;. Vulgueu escollir aqu&iacute; les barres tipogr&agrave;fiques on s\'inseriran alguns botons. ',
