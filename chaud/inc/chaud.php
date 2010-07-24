@@ -20,7 +20,8 @@ function chaud_notifier() {
 	if ($a) {
 		$b = array();
 		foreach ($a as $id => $v)
-			if ($v > $old[$id])
+			if ($v['p'] > $old[$id]['p']
+			AND $v['s'] > $old[$id]['s'])
 				$b[] = $id;
 
 		if ($b) {
@@ -46,6 +47,7 @@ function chaud_articles($seuil = 1.0) {
 	include_spip('base/abstract_sql');
 	if ($s = sql_query("SELECT
 		id_article,
+		popularite as p,
 		popularite * popularite
 		* DATEDIFF(NOW(),date_modif)
 		/ ( visites + 10 * popularite )
@@ -60,7 +62,7 @@ function chaud_articles($seuil = 1.0) {
 		while ($t = sql_fetch($s)
 		AND $t['s'] > $seuil
 		) {
-			$chaud[$t['id_article']] = $t['s'];
+			$chaud[$t['id_article']] = array($t['p'], $t['s']);
 		}
 	}
 

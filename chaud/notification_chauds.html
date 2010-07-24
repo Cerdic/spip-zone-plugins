@@ -3,6 +3,6 @@ Articles chauds sur [(#NOM_SITE_SPIP|textebrut)]
 
 <BOUCLE_chauds(ARTICLES){id_article IN #ENV{chauds}}{!par popularite}>
 #TITRE (pop: #POPULARITE_ABSOLUE, vis: #VISITES)
-#URL_SITE_SPIP/#URL_ARTICLE
+[(#URL_ARTICLE|url_absolue)]
 </BOUCLE_chauds>
 
