@@ -22,9 +22,9 @@
  (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
-][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|?{'',' '})
+][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|non)
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|max{120})px]']>
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#GET{largeur}|max{120})px]']>
 ]})
 ]
 [(#EXTENSION|=={swf}|?{' '})
@@ -32,11 +32,11 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
  codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
  width='#GET{largeur}' height='#GET{hauteur}'>
 	<param name='movie' value='#URL_DOCUMENT' />
-	[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
+	[(#ENV{quality,''}|non)<param name="quality" value="high" />]
 	[(#ENV*|env_to_params)]
 	<!--#EVAL**{chr(91)}if !IE#EVAL**{chr(93)}> <-->
 	<object data="#URL_DOCUMENT" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
-		[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
+		[(#ENV{quality,''}|non)<param name="quality" value="high" />]
 		[(#ENV*|env_to_params)]
 		<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
 		[(#ENV*{alternative}|propre)]
@@ -45,7 +45,7 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 </object>
 #SET{done,1}
 ]
-[(#GET{done,0}|?{'',' '})
+[(#GET{done,0}|non)
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='#URL_DOCUMENT' />
 <param name='src' value='#URL_DOCUMENT' />

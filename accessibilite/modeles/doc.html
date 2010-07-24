@@ -29,16 +29,16 @@
 
 [(#REM) qd titre ou descriptif on utilise le modele en dl sinon modele <img> à base de span]
 
-[(#TITRE|!={''}|?{' '})
+[(#TITRE|!={''}|oui)
 	#SET{dl,'true'}
 ]
 
-[(#DESCRIPTIF|!={''}|?{' '})
+[(#DESCRIPTIF|!={''}|oui)
 	#SET{dl,'true'}
 	#SET{desc,'true'}
 ]
 
-[(#GET{dl}|=={'true'}|?{' '})
+[(#GET{dl}|=={'true'}|oui)
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|min{350}|max{120})]px;']>
 <dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"]
 [(#MODE|=={image}|non)
@@ -55,19 +55,19 @@
  [(#MODE|=={image}|oui)
  alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
  ]
-[(#DESCRIPTIF|?{' ',''})longdesc="#desc-#ID_DOCUMENT"]
+[(#DESCRIPTIF|oui)longdesc="#desc-#ID_DOCUMENT"]
 [ lang="(#ENV{langue})"] />[(#GET{url}|?{</a>})]</dt>
-[(#GET{desc}|=={'true'}|?{' '})
+[(#GET{desc}|=={'true'}|oui)
 [<dt class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dt>]
 ]
-[(#GET{desc}|=={''}|?{' '})
+[(#GET{desc}|=={''}|oui)
 [<dd class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dd>]
 ]
 [<dd id="desc-#ID_DOCUMENT" class="#EDIT{descriptif} spip_doc_descriptif"[ style="width:(#GET{width}|min{350}|max{120})px;"]>(#ENV*{legende}|propre|PtoBR|sinon{#DESCRIPTIF|PtoBR})[(#NOTES|PtoBR)]</dd>]
 </dl>
 ]
 
-[(#GET{dl}|=={''}|?{' '})
+[(#GET{dl}|=={''}|oui)
 <span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ 
 	style="float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]"]>[
 	<a href="(#GET{url})" 
@@ -89,7 +89,7 @@
  [(#MODE|=={image}|oui)
  alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
  ]
- [(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
+ [(#DESCRIPTIF|oui)longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
 	  [(#GET{url}|?{</a>})]</span>
 ]
 </BOUCLE_doc>
