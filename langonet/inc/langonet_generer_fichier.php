@@ -74,6 +74,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	$texte = '<?php
 // Ceci est un fichier langue de SPIP -- This is a SPIP language file
 // Produit automatiquement par le plugin LangOnet a partir de la langue source ' . $langue_source . '
+// Module: ' . $module . '
 // Langue: ' . $langue_cible . '
 // Date: ' . $date . '
 // Items: ' . $i . '
