@@ -24,7 +24,7 @@ function canevas_declarer_tables_principales($tables_principales){
 		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 		"titre"	=> "text NOT NULL",
 		"texte"	=> "text NOT NULL",
-		"date"	=> "TIMESTAMP"
+		"date"	=> "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"
 	);
 	
 	$canevas_key = array(
