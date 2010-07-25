@@ -1,4 +1,6 @@
 <div class="formulaire_spip formulaire_langonet_lister" id="formulaire_langonet_lister">
+	<h3 class="titrem"><:langonet:legende_lister:></h3>
+
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
@@ -9,7 +11,6 @@
 		<ul>
 			<li class="fieldset">
 				<fieldset>
-					<h3 class="legend"><:langonet:legende_lister:></h3>
 					<p class="explication"><:langonet:info_lister:></p>
 					<ul>
 						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
