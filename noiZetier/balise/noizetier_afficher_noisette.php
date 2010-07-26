@@ -10,7 +10,6 @@ function balise_NOIZETIER_AFFICHER_NOISETTE_dist($p) {
 	$id_noisette = champ_sql('id_noisette', $p);
 	$noisette = champ_sql('noisette', $p);
 	$parametres = champ_sql('parametres', $p);
-	$contexte = champ_sql('contexte', $p);
 
 	// si pas de contexte attribuer, on passe tout le contexte que l'on recoit
 	// sinon, on regarde si 'aucun' ou 'env' est indique :
