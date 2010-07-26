@@ -3,6 +3,12 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+
+define('_CACHE_CONTEXTE_NOISETTES', 'noisettes_contextes.php');
+define('_CACHE_DESCRIPTIONS_NOISETTES', 'noisettes_descriptions.php');
+
+
 /**
  * Lister les noisettes disponibles dans les dossiers noisettes/
  *
@@ -11,48 +17,102 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  */
 function noizetier_lister_noisettes($type='tout'){
-	static $liste_noisettes = null;
-
-	if (is_null($liste_noisettes[$type])){
-		$liste_noisettes[$type] = array();
-		
-		// Si $type='tout' on recherche toutes les noisettes sinon seules celles qui commencent par $type
-		if ($type=='tout')
-			$match = "[^-]*[.]html$";
-		elseif ($type=='')
-			$match = "^[^-]*[.]html$";
-		else
-			$match = $type."-[^-]*[.]html$";
-
-		// lister les noisettes disponibles
-		$liste = find_all_in_path('noisettes/', $match);
-		if (count($liste)){
-			foreach($liste as $squelette=>$chemin) {
-				$noisette = preg_replace(',[.]html$,i', '', $squelette);
-				$dossier = str_replace($squelette, '', $chemin);
-				// On ne garde que les squelettes ayant un fichier YAML de config (si yaml est activé)
-				if (file_exists("$dossier$noisette.yaml") AND defined('_DIR_PLUGIN_YAML')
-					AND ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
-				){
-					$liste_noisettes[$type][$noisette] = $infos_noisette;
-				}
-				// ou les squelettes ayant un XML de config
-				elseif (file_exists("$dossier$noisette.xml")
-					AND ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
-				){
-					$liste_noisettes[$type][$noisette] = $infos_noisette;
-				}
-			}
-		}
-		// supprimer de la liste les noisettes necissant un plugin qui n'est pas actif
-		foreach ($liste_noisettes[$type] as $noisette => $infos_noisette)
-			if (isset($infos_noisette['necessite']))
-				foreach ($infos_noisette['necessite'] as $plugin)
-					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
-						unset($liste_noisettes[$type][$noisette]);
+	static $liste_noisettes = array();
+	if ($type == 'tout') {
+		return noizetier_obtenir_infos_noisettes();
 	}
+	if (isset($liste_noisettes[$type])) {
+		return $liste_noisettes[$type];
+	}
+	
+	$noisettes = noizetier_obtenir_infos_noisettes();
+	if ($type == '') {
+		$match = "^[^-]*$";
+	} else {
+		$match = $type."-[^-]*$";
+	}
+	
+	foreach($noisettes as $noisette => $description) {
+		if (preg_match("/$match/", $noisette)) {
+			$liste_noisettes[$type][$noisette] = $description;
+		}
+	}
+	
 	return $liste_noisettes[$type];
 }
+
+
+
+/**
+ * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
+ * On utilise un cache php pour alleger le calcul.
+ *
+ * @param 
+ * @return 
+**/
+function noizetier_obtenir_infos_noisettes() {
+	static $noisettes = false;
+	
+	// seulement 1 fois par appel, on lit ou calcule tous les contextes
+	if ($noisettes === false) {
+		// lire le cache des contextes sauves
+		lire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, $noisettes);
+		$noisettes = @unserialize($noisettes);
+		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
+		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
+			$noisettes = noizetier_obtenir_infos_noisettes_direct();
+			ecrire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
+		}
+	}
+	
+	return $noisettes;
+}
+
+
+/**
+ * Obtenir les infos de toutes les noisettes disponibles dans les dossiers noisettes/
+ * C'est un GROS calcul lorsqu'il est a faire.
+ *
+ * @return array
+ */
+function noizetier_obtenir_infos_noisettes_direct(){
+
+	$liste_noisettes = array();
+		
+	$match = "[^-]*[.]html$";
+	$liste = find_all_in_path('noisettes/', $match);
+		
+	if (count($liste)){
+		foreach($liste as $squelette=>$chemin) {
+			$noisette = preg_replace(',[.]html$,i', '', $squelette);
+			$dossier = str_replace($squelette, '', $chemin);
+			// On ne garde que les squelettes ayant un fichier YAML de config (si yaml est activé)
+			if (file_exists("$dossier$noisette.yaml") AND defined('_DIR_PLUGIN_YAML')
+				AND ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
+			){
+				$liste_noisettes[$noisette] = $infos_noisette;
+			}
+			// ou les squelettes ayant un XML de config
+			elseif (file_exists("$dossier$noisette.xml")
+				AND ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
+			){
+				$liste_noisettes[$noisette] = $infos_noisette;
+			}
+		}
+	}
+	
+	// supprimer de la liste les noisettes necissant un plugin qui n'est pas actif
+	foreach ($liste_noisettes as $noisette => $infos_noisette)
+		if (isset($infos_noisette['necessite']))
+			foreach ($infos_noisette['necessite'] as $plugin)
+				if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
+					unset($liste_noisettes[$noisette]);
+	
+	return $liste_noisettes;
+}
+
+
+
 
 /**
  * Charger les informations contenues dans le xml d'une noisette
@@ -511,6 +571,69 @@ function noizetier_lister_config(){
 		}
 	}
 	return $liste_config;
+}
+
+
+
+/**
+ * Retourne les elements du contexte uniquement
+ * utiles a la noisette demande.
+ *
+ * @param 
+ * @return 
+**/
+function noisetier_choisir_contexte($noisette, $contexte_entrant) {
+	if (!$parametres) $parametres = array();
+	if (!$contexte_entrant) $contexte_entrant = array();
+	$contexte_noisette = array_flip(noisetier_obtenir_contexte($noisette));
+
+	if (isset($contexte_noisette['aucun'])) {
+		return array();
+	}
+	if (isset($contexte_noisette['env'])) {
+		return $contexte_entrant;
+	}
+	if ($contexte_noisette) {
+		return array_intersect_key($contexte_entrant, $contexte_noisette);
+	}
+	
+	return $contexte_entrant;
+}
+
+
+
+/**
+ * Retourne la liste des contextes donc peut avoir besoin une noisette. 
+ *
+ * @param 
+ * @return 
+**/
+function noisetier_obtenir_contexte($noisette) {
+	static $noisettes = false;
+	
+	// seulement 1 fois par appel, on lit ou calcule tous les contextes
+	if ($noisettes === false) {
+		// lire le cache des contextes sauves
+		lire_fichier_securise(_DIR_CACHE . _CACHE_CONTEXTE_NOISETTES, $noisettes);
+		$noisettes = @unserialize($noisettes);
+		
+		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
+		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
+			include_spip('inc/noisetier');
+			$infos = noizetier_lister_noisettes();
+			$noisettes = array();
+			foreach ($infos as $noisette => $infos) {
+				$noisettes[$noisette] = ($infos['contexte'] ? $infos['contexte'] : array());
+			}
+			ecrire_fichier_securise(_DIR_CACHE . _CACHE_CONTEXTE_NOISETTES, serialize($noisettes));
+		}
+	}
+
+	if (isset($noisettes[$noisette])) {
+		return $noisettes[$noisette];
+	}
+	
+	return array();
 }
 
 ?>

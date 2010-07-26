@@ -32,6 +32,12 @@ function noizetier_upgrade($nom_meta_version_base, $version_cible){
 			maj_tables('spip_noisettes');
 			ecrire_meta($nom_meta_version_base, $version_actuelle='0.2', 'non');
 		}
+		if (version_compare($version_actuelle,'0.3','<')) {
+			// Suppression du champ 'contexte' ... il n'aura pas tenu longtemps !
+			include_spip('base/abstract_sql');
+			sql_alter('TABLE spip_noisettes DROP COLUMN contexte');
+			ecrire_meta($nom_meta_version_base, $version_actuelle='0.3', 'non');
+		}
 		
 		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 	
