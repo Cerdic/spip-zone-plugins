@@ -66,14 +66,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verification_fonction_l' => 'D&eacute;tection des cas d\'utilisation de la fonction _L()',
 	'label_verification_utilisation' => 'D&eacute;tection des d&eacute;finitions obsol&egrave;tes',
 	'label_verification' => 'Type de v&eacute;rification',
-	'legende_generer' => 'G&eacute;n&eacute;ration des fichiers de langue',
-	'legende_lister' => 'Affichage des fichiers de langue',
-	'legende_rechercher_item' => 'Recherche de raccourcis dans les fichiers de langue',
-	'legende_rechercher_texte' => 'Recherche de textes dans les fichiers de langue SPIP',
 	'legende_resultats' => 'R&eacute;sultats de la v&eacute;rification',
 	'legende_table' => 'Liste des items du fichier de langue choisi',
 	'legende_trouves' => 'Liste des items trouv&eacute;s (@total@)',
-	'legende_verifier' => 'V&eacute;rification des fichiers de langue',
 
 // M
 	'message_nok_aucun_fichier_log' => 'Aucun fichier de log disponible au t&eacute;l&eacute;chargement',
@@ -139,6 +134,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bloc_logs_definition' => 'D&eacute;finitions manquantes',
 	'titre_bloc_logs_fonction_l' => 'Utilisations de _L()',
 	'titre_bloc_logs_utilisation' => 'D&eacute;finitions obsol&egrave;tes',
+	'titre_form_generer' => 'G&eacute;n&eacute;ration des fichiers de langue',
+	'titre_form_lister' => 'Affichage des fichiers de langue',
+	'titre_form_rechercher_item' => 'Recherche de raccourcis dans les fichiers de langue',
+	'titre_form_rechercher_texte' => 'Recherche de textes dans les fichiers de langue SPIP',
+	'titre_form_verifier' => 'V&eacute;rification des fichiers de langue',
 	'titre_page_navigateur' => 'LangOnet',
 	'titre_page' => 'LangOnet',
 

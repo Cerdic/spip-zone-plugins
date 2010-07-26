@@ -1,7 +1,7 @@
 <?php
 
 function formulaires_langonet_rechercher_charger($type) {
-	$legende = _T('langonet:legende_rechercher_'.$type);
+	$legende = _T('langonet:titre_form_rechercher_'.$type);
 	$explication = _T('langonet:info_rechercher_'.$type);
 	$info_pattern = _T('langonet:info_pattern_'.$type.'_cherche');
 
