@@ -103,6 +103,15 @@ function analyser_backend_spip2spip($rss){
         'motevts'          => ',<motevts[^>]*>(.*?)</motevts[^>]*>,ims',         			
 	);
 	
+  $xml_motevt_tags = array('groupe','titre');
+	$motevt_regexp = array(		
+  			'motevt'       => ',<motevt[>[:space:]],i',
+				'motevtfin'    => '</motevt>',
+        	
+				'groupe'    => ',<groupe[^>]*>(.*?)</groupe[^>]*>,ims',
+				'titre'     => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+	);
+	
 	// fichier backend correct ?
 	if (!is_spip2spip_backend($rss)) return _T('spiptospip:avis_echec_syndication_01');
 	
@@ -215,7 +224,35 @@ function analyser_backend_spip2spip($rss){
   				                                                                      else $data_node[$xml_event_tag] = "";
   				       } 
   				       
-  				       // FIXME ici traiter le mot evt
+  				       // On parse le noeud motevt (mot evenement) ?
+  				       if ($data_node['motevts'] != "") {                              
+                        $motevts = array();          
+                        if (preg_match_all($motevt_regexp['motevt'],$data_node['motevts'],$r2, PREG_SET_ORDER))
+                        	foreach ($r2 as $regs) {
+                        		$debut_item = strpos($data_node['motevts'],$regs[0]);
+                        		$fin_item = strpos($data_node['motevts'],
+                        		$motevt_regexp['motevtfin'])+strlen($motevt_regexp['motevtfin']);
+                        		$motevts[] = substr($data_node['motevts'],$debut_item,$fin_item-$debut_item);
+                        		$debut_texte = substr($data_node['motevts'], "0", $debut_item);
+                        		$fin_texte = substr($data_node['motevts'], $fin_item, strlen($data_node['motevts']));
+                        		$data_node['motevts'] = $debut_texte.$fin_texte;
+                        }
+                        
+                        $motcleevt = array();
+                        if (count($motevts)) {          
+                            foreach ($motevts as $motevt) {                 
+                               $data_node_evt = array();
+                               foreach ($xml_motevt_tags as $xml_motevt_tag) {
+                                  if (preg_match($motevt_regexp[$xml_motevt_tag],$motevt,$match)) $data_node_evt[$xml_motevt_tag] = $match[1]; 
+                				                                                              else $data_node_evt[$xml_motevt_tag] = "";
+                				       } 
+                              $motcleevt[] = $data_node_evt;                  
+                            }             
+                            $data_node['motevts'] = $motcleevt; //serialize($motcleevt);
+                            
+                        }       
+                 }  				       
+  				       // #noeud motevt
   				       
                 $agenda[] = $data_node;                                                     
               }  
@@ -314,7 +351,7 @@ function spip2spip_get_id_secteur($id_rubrique) {
 
 //
 // recupere id d'un auteur selon son nom sinon le creer
-function spip2spip_get_id_auteur($name) {  
+function spip2spip_get_id_auteur($name) { 
    if (trim($name)=="") 
               return false;
    if ($row = sql_fetsel("id_auteur","spip_auteurs","nom=".sql_quote($name))) 
@@ -325,8 +362,8 @@ function spip2spip_get_id_auteur($name) {
 }
 
 //
-// insert un mot-cle 
-function spip2spip_insert_mode_article($id_article, $mot_titre, $groupe_titre, $mode_creer_groupe, $id_groupe=-1) {
+// insert un mot-cle a un objet (article / evenement)
+function spip2spip_insert_mode_article($id_objet, $mot_titre, $groupe_titre, $mode_creer_groupe, $id_groupe=-1,$objet_lie="article") {
 
    if ($mode_creer_groupe) {
         // groupe existe ?
@@ -335,7 +372,7 @@ function spip2spip_insert_mode_article($id_article, $mot_titre, $groupe_titre, $
         } else {
             $id_groupe = sql_insertq('spip_groupes_mots',array(
                                       'titre'=> $groupe_titre, 
-                                      'tables_liees'=> 'articles', 
+                                      'tables_liees'=> $objet_lie."s", 
                                       'minirezo' => 'oui',
                                       'comite' => 'oui',
                                       'forum' => 'non'));
@@ -356,9 +393,9 @@ function spip2spip_insert_mode_article($id_article, $mot_titre, $groupe_titre, $
                                       'type' => $type));                                      
         }
             
-        sql_insertq('spip_mots_articles', array(
-                                      'id_mot'=> intval($id_mot), 
-                                      'id_article'=> intval($id_article)));
+        sql_insertq("spip_mots_".$objet_lie."s", array(
+                                      'id_mot' => intval($id_mot), 
+                                      "id_".$objet_lie => intval($id_objet)));
                    
    } else {
       spip_log("spip2spip pas de groupe-clé import specifie");
@@ -614,12 +651,12 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                         foreach($_mots as $_mot) {                   
                             $groupe = $_mot['groupe'];                            
                             $titre  = $_mot['titre'];                                                     
-                            spip2spip_insert_mode_article($id_nouvel_article, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe);                                              
+                            spip2spip_insert_mode_article($id_nouvel_article, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe,"article");                                              
                         }
                       }
                             
                       
-                      // etape 4 - traitement des evenements (a finir de porter) FIXME
+                      // etape 4 - traitement des evenements
                       $_evenements = $article['evenements'];
     				          $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
                       if ($_evenements!="") {
@@ -632,9 +669,10 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                             $adresse = spip2spip_convert_extra($_evenement['adresse'],$documents_current_article,$version_flux);
                             $horaire = $_evenement['horaire'];
                             $titre = $_evenement['titre'];                        
-                            $desc = spip2spip_convert_extra($_evenement['desc'],$documents_current_article,$version_flux);  
-                             		  		                      
-                            @sql_insertq('spip_evenements',array(
+                            $desc = spip2spip_convert_extra($_evenement['desc'],$documents_current_article,$version_flux);
+                            $motevts = $_evenement['motevts'];
+                                                         		  		                      
+                            $id_nouvel_evt = sql_insertq('spip_evenements',array(
                 						            'id_article'=> $id_nouvel_article,
                 						            'date_debut'=> $datedeb,
                 						            'date_fin'=> $datefin,
@@ -644,7 +682,17 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                 						            'adresse'=>$adresse,
                 						            'horaire'=>$horaire));
                             $log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display: block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
-                						 		                
+                						
+                            // mot cle ? 	
+                            if ($motevts!="" && $import_mot_evt) {  
+                              foreach($motevts as $motevt) { 
+                                $groupe = $motevt['groupe'];                            
+                                $titre  = $motevt['titre'];                                  
+                                spip2spip_insert_mode_article($id_nouvel_evt, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe, "evenement");                              
+                              }
+                            }
+                            // #mot cle
+                            	                
                 						            			
                         } 
                       }
