@@ -2,7 +2,7 @@
 	<nom>SPIP2SPIP</nom>
 	<auteur>erational - [erational.org->http://www.erational.org]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>2.2</version>
+	<version>2.3</version>
 	<etat>dev</etat>
 	<description>
 Permet d'importer et d'exporter des articles avec d'autres sites SPIP en conservant le formatage spip
@@ -14,9 +14,7 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 -* images, documents attach&#233;s recopi&#233;s en documents distants, licence
 -* essayer de faire correspondre les auteurs
 -* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda])
-
-
-	</description>
+  </description>
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> 
 	<fonctions>spiptospip_filtre.php</fonctions>
 	<install>base/spip2spip_upgrade.php</install>
@@ -24,11 +22,15 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 	<icon>img_pack/icon.png</icon>
 	<options>spiptospip_options.php</options>
 	<fonctions>spiptospip_fonctions.php</fonctions>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
     <inclure>spiptospip_fonctions.php</inclure>		
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spip2spip.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>

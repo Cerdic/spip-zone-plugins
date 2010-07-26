@@ -1,8 +1,14 @@
 <?php
-$GLOBALS['spip2spip_base_version'] = 0.1;
+/**
+ * Plugin spip2spip pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
+
+$GLOBALS['spip2spip_base_version'] = 0.2;
     
 function spip2spip_upgrade(){
-
 		$version_base = $GLOBALS['spip2spip_base_version'];
 		$current_version = 0.0;
 		if ((!isset($GLOBALS['meta']['spip2spip_base_version']) )
@@ -28,15 +34,23 @@ function spip2spip_upgrade(){
 			  ecrire_meta('spip2spip_base_version',$current_version=$version_base,'non');
 				
 			}
-			ecrire_metas();
+			if (version_compare($current_version,"0.2","<")){
+				sql_alter("TABLE spip_articles ADD s2s_url VARCHAR(255) DEFAULT '' NOT NULL");
+				sql_alter("TABLE spip_articles ADD s2s_url_trad VARCHAR(255) DEFAULT '' NOT NULL");
+				ecrire_meta('spip2spip_base_version',$current_version=0.2,'non');
+			}
+			
+			
 		}
 }
 	
 function spip2spip_vider_tables() {
 		spip_query("DROP TABLE spip_spip2spip");
+		sql_alter("TABLE spip_articles DROP COLUMN s2s_url");
+		sql_alter("TABLE spip_articles DROP COLUMN s2s_url_trad");
 		effacer_meta('spip2spip_base_version');
-		ecrire_metas();
 }
+
 	
 function spip2spip_install($action){
 		$version_base = $GLOBALS['spip2spip_base_version'];

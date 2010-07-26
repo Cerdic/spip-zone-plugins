@@ -39,7 +39,7 @@ function analyser_backend_spip2spip($rss){
   include_spip("inc_texte.php"); # pour couper()
 	include_spip("inc_filtres.php"); # pour filtrer_entites()
 		
-	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','evenements', 'lang','logo','keyword','mots','licence','documents'); 
+	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','trad','evenements', 'lang','logo','keyword','mots','licence','documents'); 
 	
 	$syndic_regexp = array(
 				'item'           => ',<item[>[:space:]],i',
@@ -54,6 +54,7 @@ function analyser_backend_spip2spip($rss){
 				'ps'             => ',<ps[^>]*>(.*?)</ps[^>]*>,ims',
 				'auteur'         => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
 				'link'           => ',<link[^>]*>(.*?)</link[^>]*>,ims',
+				'trad'           => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
 				'evenements'     => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
         'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
         'logo'           => ',<logo[^>]*>(.*?)</logo[^>]*>,ims',
@@ -589,9 +590,10 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                   		$_statut = $import_statut;
                   		$_id_auteur = $article['auteur'];
                   		$_link = $article['link'];
-                  		$_licence = $article['licence'];                           		
-                  		
-                  		// on cite la source originale ds le champs ps et la licence
+                  		$_trad = $article['trad'];
+                  		$_licence = $article['licence'];               
+                      
+         		       		// on cite la source originale ds le champs ps et la licence
                   		if ($citer_source)
                   		      $_ps .= _T('spiptospip:origin_url')." [->".$_link."]";
                   		
@@ -614,10 +616,27 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                               'ps' => $_ps,
                                               'statut' => $_statut,
                                               'accepter_forum' => 'non',
-                                              'date' => $_date));      				        
+                                              'date' => $_date,
+                                              's2s_url' => $_link,
+                                              's2s_url_trad' => $_trad,
+                                              ));      				        
       				        $log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border:1px solid;background:#ddd;display: block;'>"._T('spiptospip:imported_view')."</a>";
                       $log_email .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
-      				                      			        
+      				        
+                      // gestion lien traduction
+                     if  ($_trad) {
+                          if ($_trad == $_link) { // il s'agit de l'article origine de traduc 
+                              sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "id_article=$id_nouvel_article");
+                          } else { // on cherche si on a l'article en local
+                              if ($row = sql_fetsel("id_article","spip_articles","s2s_url=".sql_quote($_trad))) {
+                                  $id_article_trad = (int) $row['id_article'];
+                                  spip_log("found .... $id_article_trad");
+                                  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_nouvel_article");
+                              } 
+                          } 
+                                  
+                      } 
+                                    			        
                       // ... dans la table auteurs
                       if ($_id_auteur) {
       				            $auteurs = explode(", ",$_id_auteur);
