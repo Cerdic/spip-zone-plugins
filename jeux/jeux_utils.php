@@ -315,14 +315,14 @@ function jeux_stylesheet($b) {
 function jeux_stylesheet_html($b) {
  $f = find_in_path("$b.css.html");
  $args = 'ltr=' . $GLOBALS['spip_lang_left'];
- // return $f?'<link rel="stylesheet" type="text/css" href="'.generer_url_public("$b.css", $args)."\" />\n"."\n":'';
+ return $f?'<link rel="stylesheet" type="text/css" href="'.generer_url_public("$b.css", $args)."\" />\n":'';
 }
 
 // pour inserer un js
 function jeux_javascript($b) {
  $f = find_in_path("javascript/$b.js");
  if (!$f && @is_readable($s = _DIR_IMG_PACK .$b.'.js')) $f = $s;		// compatibilite avec 1.9.1
- return $f?'<script type="text/javascript" src="'.$f.'"></script>'."\n":'';
+ return $f?'<script type="text/javascript" src="'.$f."\"></script>\n":'';
 }
 
 // pour obtenir un bloc depliable
