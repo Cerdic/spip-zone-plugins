@@ -29,7 +29,7 @@ function table_amap_lister_liste_contrat($idSaison, $idProduit)
     $txtQuery .= " AND c.id_saison=".$idSaison;
     $txtQuery .= " AND c.id_produit=".$idProduit;
     $txtQuery .= " AND t.id_type=c.id_type";
-    $txtQuery .= " AND e.id_evenement=c.debut_contrat";
+    $txtQuery .= " AND e.id_evenement=c.intPremierEnreg_contrat";
     $txtQuery .= " ORDER BY c.id_contrat";
     $sqlResult = sql_query($txtQuery);
 
@@ -113,7 +113,7 @@ function table_amap_getmodif_liste_contrat()
   $hiddens = '';
   $idLieu = 0;
 
-  $txtQuery = "SELECT c.debut_contrat, c.id_contrat, c.id_personne, c.demi_panier, c.nb_distribution, p.prenom, p.nom, c.id_type FROM spip_amap_contrat c, spip_amap_personne p";
+  $txtQuery = "SELECT c.intPremierEnreg_contrat, c.id_contrat, c.id_personne, c.demi_panier, c.nb_distribution, p.prenom, p.nom, c.id_type FROM spip_amap_contrat c, spip_amap_personne p";
   $txtQuery .= " WHERE c.id_personne=p.id_personne";
   $txtQuery .= " AND c.id_saison=".$_GET ['idSaison'];
   $txtQuery .= " AND c.id_produit=".$_GET['idProduit'];
@@ -185,9 +185,9 @@ function table_amap_getmodif_liste_contrat()
     $out .= "\t</tr>";
 
     $out .= "\t<tr bgcolor='#DBE1C5'>";
-    $out .= "\t\t<td>date debut : </td>\n";
+    $out .= "\t\t<td>date intPremierEnreg : </td>\n";
     $out .= "\t\t<td>\n";
-    $out .= "\t\t\t<select name='debutContrat' >\n";
+    $out .= "\t\t\t<select name='intPremierEnregContrat' >\n";
 
     // boucle sur les amap_evenements
     $txtQuery = "SELECT e.id_evenement, DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement";
@@ -200,7 +200,7 @@ function table_amap_getmodif_liste_contrat()
 
     while ($tabUnEnregistrement_2 = sql_fetch($sqlResult_2))
     {
-      if ($tabUnEnregistrement_2['id_evenement'] == $tabUnEnregistrement_1['debut_contrat'])
+      if ($tabUnEnregistrement_2['id_evenement'] == $tabUnEnregistrement_1['intPremierEnreg_contrat'])
         $out .= "\t\t\t\t<option selected value='".$tabUnEnregistrement_2['id_evenement']."'>".$tabUnEnregistrement_2['dateEvenement']."</option>\n";
       else
         $out .= "\t\t\t\t<option value='".$tabUnEnregistrement_2['id_evenement']."'>".$tabUnEnregistrement_2['dateEvenement']."</option>\n";
@@ -289,9 +289,9 @@ function table_amap_get_liste_contrat($idSaison, $idProduit)
     $out .= "\t</tr>";
 
     $out .= "\t<tr bgcolor='#DBE1C5'>";
-    $out .= "\t\t<td>date debut : </td>\n";
+    $out .= "\t\t<td>date intPremierEnreg : </td>\n";
     $out .= "\t\t<td>\n";
-    $out .= "\t\t\t<select name='debutContrat' >\n";
+    $out .= "\t\t\t<select name='intPremierEnregContrat' >\n";
 
     // boucle sur les amap_evenements
     $txtQuery = "SELECT e.id_evenement, DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateEvenement";
@@ -345,7 +345,7 @@ function table_amap_modif_post_liste_contrat()
   else
     $txtQuery .= "demi_panier='0' ,";
   $txtQuery .= "id_type='".$_POST['idType']."', ";
-  $txtQuery .= "debut_contrat='".$_POST['debutContrat']."', ";
+  $txtQuery .= "intPremierEnreg_contrat='".$_POST['intPremierEnregContrat']."', ";
   $txtQuery .= "nb_distribution='".$_POST['nbDistribution']."' ";
   $txtQuery .= " WHERE id_saison=".$_POST['idSaison'];
   $txtQuery .= " AND id_produit=".$_POST['idProduit'];
@@ -371,7 +371,7 @@ function table_amap_post_liste_contrat()
   if ($_POST['idPersonne']) { $description[]='id_personne'; $contenu[]="'".$_POST['idPersonne']."'"; }
   if ($_POST['panier'] == 'on') { $description[]='demi_panier'; $contenu[]="'1'"; }
   if ($_POST['idType']) { $description[]='id_type'; $contenu[]="'".$_POST['idType']."'"; }
-  if ($_POST['debutContrat']) { $description[]='debut_contrat'; $contenu[]="'".$_POST['debutContrat']."'"; }
+  if ($_POST['intPremierEnregContrat']) { $description[]='intPremierEnreg_contrat'; $contenu[]="'".$_POST['intPremierEnregContrat']."'"; }
   if ($_POST['nbDistribution']) { $description[]='nb_distribution'; $contenu[]="'".$_POST['nbDistribution']."'"; }
 
   $sqlResult = sql_insert('amap_contrat',

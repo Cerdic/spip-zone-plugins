@@ -94,7 +94,7 @@ function table_amap_lister_choix_distribution($idSaison, $idProduit, $idDistrib,
   {
     // on affiche le formulaire de sélection de la saison
     // boucle sur la table spip_amap_date_dsitribution
-    $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateDebut, e.id_evenement FROM spip_amap_evenements e, spip_amap_produit_distribution p";
+    $txtQuery = "SELECT DATE_FORMAT(e.date_evenement, '%d-%m-%Y') As dateintPremierEnreg, e.id_evenement FROM spip_amap_evenements e, spip_amap_produit_distribution p";
     $txtQuery .= " WHERE e.id_saison=".$idSaison;
     $txtQuery .= " AND p.id_produit=".$idProduit;
     $txtQuery .= " AND p.id_evenement=e.id_evenement";
@@ -106,9 +106,9 @@ function table_amap_lister_choix_distribution($idSaison, $idProduit, $idDistrib,
     while ($tabUnEnregistrement = sql_fetch($sqlResult))
     {
       if ($tabUnEnregistrement['id_evenement'] == $idDistrib)
-        $out .= "\t\t<option selected value='".$tabUnEnregistrement['id_evenement']."' >".$tabUnEnregistrement['dateDebut']."\n";
+        $out .= "\t\t<option selected value='".$tabUnEnregistrement['id_evenement']."' >".$tabUnEnregistrement['dateintPremierEnreg']."\n";
       else
-        $out .= "\t\t<option value='".$tabUnEnregistrement['id_evenement']."' >".$tabUnEnregistrement['dateDebut']."\n";
+        $out .= "\t\t<option value='".$tabUnEnregistrement['id_evenement']."' >".$tabUnEnregistrement['dateintPremierEnreg']."\n";
     } // fin while
     $out .= "\t</select>\n";
 

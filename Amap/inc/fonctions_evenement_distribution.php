@@ -481,10 +481,10 @@ function table_amap_add_post_evenement_distribution()
 //
 function table_amap_agenda_update_evenement_distribution()
 {
-  $txtQuery = "SELECT id_evenement, date_debut FROM spip_amap_saison s, spip_evenements e";
+  $txtQuery = "SELECT id_evenement, date_intPremierEnreg FROM spip_amap_saison s, spip_evenements e";
   $txtQuery .= " WHERE s.id_agenda=e.id_article";
   $txtQuery .= " AND s.id_saison=".$_POST['idSaison'];
-  $txtQuery .= " ORDER BY date_debut";
+  $txtQuery .= " ORDER BY date_intPremierEnreg";
   $sqlResult_1 = sql_query($txtQuery);
   $sqlResult_3 = 0;
   $res = array();
@@ -492,7 +492,7 @@ function table_amap_agenda_update_evenement_distribution()
   while ($tabUnEnregistrement_1 = sql_fetch($sqlResult_1))
   {
     $txtQuery = "SELECT count(id_evenement) As nbEvenement FROM spip_amap_evenements";
-    $txtQuery .= " WHERE DATE_FORMAT(date_evenement, '%Y-%m-%d')=DATE_FORMAT('".$tabUnEnregistrement_1['date_debut']."', '%Y-%m-%d')";
+    $txtQuery .= " WHERE DATE_FORMAT(date_evenement, '%Y-%m-%d')=DATE_FORMAT('".$tabUnEnregistrement_1['date_intPremierEnreg']."', '%Y-%m-%d')";
     $txtQuery .= " GROUP BY id_evenement";
     $sqlResult_2 = sql_query($txtQuery);
     $tabUnEnregistrement_2 = sql_fetch($sqlResult_2);
@@ -503,9 +503,9 @@ function table_amap_agenda_update_evenement_distribution()
       if ($_POST['idLieu'])
         $txtQuery .= "id_lieu='".$_POST['idLieu']."', ";
       $txtQuery .= "id_evenement='".$tabUnEnregistrement_1['id_evenement']."', ";
-      $txtQuery .= "date_evenement='".$tabUnEnregistrement_1['date_debut']."' ";
-      //$txtQuery .= " WHERE date_evenement=DATE_FORMAT('".$tabUnEnregistrement_1['date_debut']."', '%Y-%m-%d')";
-      $txtQuery .= " WHERE DATE_FORMAT(date_evenement, '%Y-%m-%d')=DATE_FORMAT('".$tabUnEnregistrement_1['date_debut']."', '%Y-%m-%d')";
+      $txtQuery .= "date_evenement='".$tabUnEnregistrement_1['date_intPremierEnreg']."' ";
+      //$txtQuery .= " WHERE date_evenement=DATE_FORMAT('".$tabUnEnregistrement_1['date_intPremierEnreg']."', '%Y-%m-%d')";
+      $txtQuery .= " WHERE DATE_FORMAT(date_evenement, '%Y-%m-%d')=DATE_FORMAT('".$tabUnEnregistrement_1['date_intPremierEnreg']."', '%Y-%m-%d')";
       $sqlResult_3 = sql_query($txtQuery);
 //echo "<p>".$txtQuery."</p>";
     }
@@ -515,7 +515,7 @@ function table_amap_agenda_update_evenement_distribution()
       $contenu = array();
 
       if ($tabUnEnregistrement_1['id_evenement']) { $description[]='id_evenement'; $contenu[]="'".$tabUnEnregistrement_1['id_evenement']."'"; }
-      if ($tabUnEnregistrement_1['date_debut']) { $description[]='date_evenement'; $contenu[]="'".$tabUnEnregistrement_1['date_debut']."'"; }
+      if ($tabUnEnregistrement_1['date_intPremierEnreg']) { $description[]='date_evenement'; $contenu[]="'".$tabUnEnregistrement_1['date_intPremierEnreg']."'"; }
       if ($_POST['idSaison']) { $description[]='id_saison'; $contenu[]="'".$_POST['idSaison']."'"; }
       if ($_POST['idLieu']) { $description[]='id_lieu'; $contenu[]="'".$_POST['idLieu']."'"; }
 

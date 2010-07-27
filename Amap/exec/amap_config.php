@@ -20,7 +20,8 @@ include_spip('inc/config');
 include(_DIR_PLUGIN_AMAP."/inc/fonctions_table.php");
 include(_DIR_PLUGIN_AMAP."/inc/fonctions_paysan.php");
 
-function exec_amap_config(){
+function exec_amap_config()
+{
 
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right, $changer_config, $spip_display;
   global $debut, $visiteurs, $connect_id_auteur, $table_prefix;
@@ -116,11 +117,9 @@ function exec_amap_config(){
         //  ==> Demande Enregistrement des valeurs.
   	echo   debut_cadre_trait_couleur("", true, "", "");
         if ($table == 'spip_amap_produit')
-          echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_modif_post_paysan($table, $serveur, $field, $key, $idLigne)."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_paysan($table, $serveur, $field, $key, $idLigne)."</div>";
         else
-          echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_modif_post($table, $serveur, $field, $key, $idLigne)."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post($table, $serveur, $field, $key, $idLigne)."</div>";
         echo fin_cadre_trait_couleur(true);
         break;
       default:
@@ -128,11 +127,9 @@ function exec_amap_config(){
         //  ==> Demande Insertion des valeurs.
 	echo   debut_cadre_trait_couleur("", true, "", "");
         if ($table == 'spip_amap_produit')
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_post_paysan()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_post_paysan()."</div>";
         else
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_post($table, $serveur)."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_post($table, $serveur)."</div>";
         echo fin_cadre_trait_couleur(true);
         break;
     } // switch ($_POST['action'])
@@ -140,14 +137,14 @@ function exec_amap_config(){
     if ($table == 'spip_amap_produit')
       echo table_amap_lister_paysan();
     else
-      echo table_amap_lister($table, $serveur, $field, $key);
+      echo table_amap_lister($table, $serveur, $field, $key, $intPremierEnreg);
     echo fin_cadre_trait_couleur(true);
 
         echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
     if ($table == 'spip_amap_produit')
       echo table_amap_get_paysan();
     else
-      echo table_amap_get($table, $serveur, $field, $key);
+      echo table_amap_get($table, $serveur, $field, $key, $intPremierEnreg);
     echo fin_cadre_trait_couleur(true);
   }  // if ($_SERVER['REQUEST_METHOD'] == 'POST')
   else
@@ -160,11 +157,9 @@ function exec_amap_config(){
         //  ==> Affichage formulaire de modification
         echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table').$table);
         if ($table == 'spip_amap_produit')
-          echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_getmodif_paysan()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_paysan()."</div>";
         else
-          echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_getmodif($table, $serveur, $field, $key , $idLigne)."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif($table, $serveur, $field, $key , $idLigne)."</div>";
         echo fin_cadre_trait_couleur(true);
         break;
       default :
@@ -174,20 +169,20 @@ function exec_amap_config(){
         if ($table == 'spip_amap_produit')
           echo table_amap_lister_paysan();
         else
-          echo table_amap_lister($table, $serveur, $field, $key);
+          echo table_amap_lister($table, $serveur, $field, $key, $intPremierEnreg);
         echo fin_cadre_trait_couleur(true);
 
         echo   debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
         if ($table == 'spip_amap_produit')
           echo table_amap_get_paysan();
         else
-          echo table_amap_get($table, $serveur, $field, $key);
+          echo table_amap_get($table, $serveur, $field, $key, $intPremierEnreg);
         echo fin_cadre_trait_couleur(true);
         break;
     } // switch ($_GET['action'])
   } // if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
-echo pipeline('affiche_milieu',array('args'=>array('exec'=>'amap_config'),'data'=>''));
-echo fin_gauche().fin_page();
+  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'amap_config'),'data'=>''));
+  echo fin_gauche().fin_page();
 }
 ?>
