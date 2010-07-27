@@ -517,25 +517,26 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
             foreach ($articles as $article) {
               $log_html .= "<ul>\n";              
               
-              if (isset($article['titre'])) {    		  	    
+              if (isset($article['link'])) {    		  	    
                 $documents_current_article = array();
-                $current_titre = $article['titre'];
                 $version_flux = $article['version_flux'];
-                              
+                
+                $current_titre = $article['titre'];
+                $current_link  = $article['link'];                                              
                 // Est que l'article n'a pas été déjà importé ?
-                $nb_reponses = sql_countsel("spip_articles","titre=".sql_quote($current_titre));                               
+                $nb_reponses = sql_countsel("spip_articles","s2s_url=".sql_quote($current_link));                               
                 if ($nb_reponses>0) {                                   
                    // article deja connu et present ds la base
-                   $log_html .= "<li>[<span style='color:#999'>"._T('spiptospip:imported_already')."</span>] $current_titre</li>\n";
-                   spip_log("spip2spip: deja importe: ".$current_titre);                    
+                   $log_html .= "<li>[<span style='color:#999'>"._T('spiptospip:imported_already')."</span>] <a href='$current_link'>$current_titre</a></li>\n";
+                   spip_log("spip2spip: deja importe: ".$current_link);                    
                 } else {
                    // nouvel article à importer
-                   $log_html .= "<li>[<span style='color:#090'>"._T('spiptospip:imported_new')."</span>] $current_titre<br />\n";
+                   $log_html .= "<li>[<span style='color:#090'>"._T('spiptospip:imported_new')."</span>] <a href='$current_link'>$current_titre</a>\n";
                    
                    // on cherche la rubrique destination
                    $target = spip2spip_get_id_rubrique($article['keyword']);
                    if (!$target) {  // pas de destination
-                      $log_html .= "<span style='color:#009'>"._T('spiptospip:no_target')." <strong>".$article['keyword']."</strong></span></li>\n";                    
+                      $log_html .= "<div style='color:#009'>"._T('spiptospip:no_target')." <strong>".$article['keyword']."</strong></div></li>\n";                    
                    } else {   
                       // tout est bon, on insert les donnnees !
                       
@@ -620,7 +621,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                               's2s_url' => $_link,
                                               's2s_url_trad' => $_trad,
                                               ));      				        
-      				        $log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border:1px solid;background:#ddd;display: block;'>"._T('spiptospip:imported_view')."</a>";
+      				        $log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border-bottom:3px solid;background:#eee;display:block;'>"._T('spiptospip:imported_view')."</a>";
                       $log_email .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
       				        
                       // gestion lien traduction
@@ -629,9 +630,9 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                               sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "id_article=$id_nouvel_article");
                           } else { // on cherche si on a l'article en local
                               if ($row = sql_fetsel("id_article","spip_articles","s2s_url=".sql_quote($_trad))) {
-                                  $id_article_trad = (int) $row['id_article'];
-                                  spip_log("found .... $id_article_trad");
-                                  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_nouvel_article");
+                                  $id_article_trad = (int) $row['id_article'];                                  
+                                  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_nouvel_article"); // maj article trad
+                                  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_article_trad");   // maj article orig trad (si deja importe ds un nouvelle sssion)
                               } 
                           } 
                                   
@@ -700,7 +701,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                 						            'lieu'=>$lieu,
                 						            'adresse'=>$adresse,
                 						            'horaire'=>$horaire));
-                            $log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display: block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
+                            $log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display:block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
                 						
                             // mot cle ? 	
                             if ($motevts!="" && $import_mot_evt) {  

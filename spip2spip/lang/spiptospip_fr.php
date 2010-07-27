@@ -39,11 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* attribuez les mots cl&eacute;s de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
 -* attribuez les mots cl&eacute;s de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip sur cette th&eacute;matique',
 'install_spip2spip_99' => '<p>Installation de SPIP2SPIP compl&egrave;te !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
-'imported_already' => 'article d&eacute;j&agrave;  import&eacute;',
-'imported_new' => 'nouvel article',
-'imported_update' => 'article mis &agrave; jour  ',
-'event_ok' => 'ajout d\'un evenement ',
-'imported_view' => 'consulter l\'article import&eacute;',
+'imported_already' => 'Article d&eacute;j&agrave;  import&eacute;',
+'imported_new' => 'Nouvel article',
+'imported_update' => 'Article mis &agrave; jour  ',
+'event_ok' => 'Ajout d\'un &eacute;v&eacute;nement ',
+'imported_view' => 'Consulter l\'article import&eacute;',
 'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave;  rien</p>',
 
 // L
