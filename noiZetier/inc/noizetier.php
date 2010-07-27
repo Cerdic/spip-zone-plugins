@@ -582,10 +582,10 @@ function noizetier_lister_config(){
  * @param 
  * @return 
 **/
-function noisetier_choisir_contexte($noisette, $contexte_entrant) {
+function noizetier_choisir_contexte($noisette, $contexte_entrant) {
 	if (!$parametres) $parametres = array();
 	if (!$contexte_entrant) $contexte_entrant = array();
-	$contexte_noisette = array_flip(noisetier_obtenir_contexte($noisette));
+	$contexte_noisette = array_flip(noizetier_obtenir_contexte($noisette));
 
 	if (isset($contexte_noisette['aucun'])) {
 		return array();
@@ -608,7 +608,7 @@ function noisetier_choisir_contexte($noisette, $contexte_entrant) {
  * @param 
  * @return 
 **/
-function noisetier_obtenir_contexte($noisette) {
+function noizetier_obtenir_contexte($noisette) {
 	static $noisettes = false;
 	
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
@@ -619,7 +619,7 @@ function noisetier_obtenir_contexte($noisette) {
 		
 		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
 		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
-			include_spip('inc/noisetier');
+			include_spip('inc/noizetier');
 			$infos = noizetier_lister_noisettes();
 			$noisettes = array();
 			foreach ($infos as $noisette => $infos) {
