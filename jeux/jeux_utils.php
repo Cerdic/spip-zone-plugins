@@ -315,7 +315,7 @@ function jeux_stylesheet($b) {
 function jeux_stylesheet_html($b) {
  $f = find_in_path("$b.css.html");
  $args = 'ltr=' . $GLOBALS['spip_lang_left'];
- return $f?'<link rel="stylesheet" type="text/css" href="'.generer_url_public("$b.css", $args)."\" >\n"."\n":'';
+ // return $f?'<link rel="stylesheet" type="text/css" href="'.generer_url_public("$b.css", $args)."\" />\n"."\n":'';
 }
 
 // pour inserer un js
