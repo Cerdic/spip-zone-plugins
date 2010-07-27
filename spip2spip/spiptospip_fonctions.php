@@ -212,8 +212,7 @@ function analyser_backend_spip2spip($rss){
           		$evenements[] = substr($data['evenements'],$debut_item,$fin_item-$debut_item);
           		$debut_texte = substr($data['evenements'], "0", $debut_item);
           		$fin_texte = substr($data['evenements'], $fin_item, strlen($data['evenements']));
-          		$data['evenements'] = $debut_texte.$fin_texte;
-				
+          		$data['evenements'] = $debut_texte.$fin_texte;				
           }
           
           $agenda = array();
@@ -227,19 +226,19 @@ function analyser_backend_spip2spip($rss){
   				       
   				       // On parse le noeud motevt (mot evenement) ?
   				       if ($data_node['motevts'] != "") {                              
-                        $motevts = array();          
+                        $motevts = array(); 
                         if (preg_match_all($motevt_regexp['motevt'],$data_node['motevts'],$r2, PREG_SET_ORDER))
-                        	foreach ($r2 as $regs) {
+                        foreach ($r2 as $regs) {
                         		$debut_item = strpos($data_node['motevts'],$regs[0]);
                         		$fin_item = strpos($data_node['motevts'],
                         		$motevt_regexp['motevtfin'])+strlen($motevt_regexp['motevtfin']);
-                        		$motevts[] = substr($data_node['motevts'],$debut_item,$fin_item-$debut_item);
+                        		$motevts[] = substr($data_node['motevts'],$debut_item,$fin_item-$debut_item);                        		
                         		$debut_texte = substr($data_node['motevts'], "0", $debut_item);
                         		$fin_texte = substr($data_node['motevts'], $fin_item, strlen($data_node['motevts']));
                         		$data_node['motevts'] = $debut_texte.$fin_texte;
                         }
                         
-                        $motcleevt = array();
+                        $motcleevt = array();                         
                         if (count($motevts)) {          
                             foreach ($motevts as $motevt) {                 
                                $data_node_evt = array();
@@ -248,9 +247,8 @@ function analyser_backend_spip2spip($rss){
                 				                                                              else $data_node_evt[$xml_motevt_tag] = "";
                 				       } 
                               $motcleevt[] = $data_node_evt;                  
-                            }             
-                            $data_node['motevts'] = $motcleevt; //serialize($motcleevt);
-                            
+                            }
+                            $data_node['motevts'] = $motcleevt; ;                            
                         }       
                  }  				       
   				       // #noeud motevt
@@ -453,6 +451,17 @@ function spip2spip_update_mode_document($id_document,$mode="vignette") {
    sql_updateq('spip_documents', array("mode"=>$mode), "id_document=$id_document");
 }
 
+//
+// unserialize qui gere les retours chariots \n et les charsets exotiques
+// pour l'instant non utilise - a voir en quand de pb
+function spip2spip_unserialize($sObject) {
+    $sObject = preg_replace("/\n/", " ", $sObject);
+    //$sObject = str_replace("\n", " ", $sObject);
+    //$sObject=htmlspecialchars_decode($sObject); //THIS FIXED
+
+    return unserialize(preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $sObject ));   
+}
+
 //---------------------------------------
 // fonction principale: spip2spip_syndique
 //
@@ -487,6 +496,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                    $email_suivi = lire_config('spip2spip/email_suivi');
               else $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial 
     if (lire_config('spip2spip/import_mot_article')=="on")  $import_mot_article=true; else  $import_mot_article=false;
+    if (lire_config('spip2spip/import_mot_evnt')=="on")  $import_mot_evt=true; else  $import_mot_evt=false;
     if (lire_config('spip2spip/import_mot_groupe_creer')=="oui")  $import_mot_groupe_creer=true; else  $import_mot_groupe_creer=false;
     if (lire_config('spip2spip/import_mot_groupe'))  $id_import_mot_groupe = (int) lire_config('spip2spip/import_mot_groupe');
                                                 else $id_import_mot_groupe = -1;
@@ -665,9 +675,9 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       }
                       
                       // etape 3 - traitement des mots de l'article
-                      $_mots = $article['mots']; 
-                      if ($_mots!="" && $import_mot_article) {                        
-                        $_mots = unserialize($_mots);                  
+                      $_mots = $article['mots'];                      
+                      if ($_mots!="" && $import_mot_article) {                      
+                        $_mots = unserialize($_mots);                 
                         foreach($_mots as $_mot) {                   
                             $groupe = $_mot['groupe'];                            
                             $titre  = $_mot['titre'];                                                     
@@ -677,11 +687,10 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                             
                       
                       // etape 4 - traitement des evenements
-                      $_evenements = $article['evenements'];
-    				          $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
-                      if ($_evenements!="") {
-                        
-                        $_evenements=unserialize($_evenements);           
+                      $_evenements = $article['evenements'];                      
+                      if ($_evenements!="") {  
+                        $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );                      
+                        $_evenements = unserialize($_evenements);                                  
                         foreach($_evenements as $_evenement) {                  
                             $datedeb = $_evenement['datedeb'];
                             $datefin = $_evenement['datefin'];
@@ -703,16 +712,15 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                 						            'horaire'=>$horaire));
                             $log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display:block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
                 						
-                            // mot cle ? 	
-                            if ($motevts!="" && $import_mot_evt) {  
-                              foreach($motevts as $motevt) { 
+                            // mot cle ?                            
+                            if ($motevts!="" && $import_mot_evt) { 
+                              foreach($motevts as $motevt) {                                
                                 $groupe = $motevt['groupe'];                            
                                 $titre  = $motevt['titre'];                                  
                                 spip2spip_insert_mode_article($id_nouvel_evt, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe, "evenement");                              
                               }
                             }
-                            // #mot cle
-                            	                
+                            // #mot cle   
                 						            			
                         } 
                       }
