@@ -625,17 +625,17 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       $log_email .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
       				        
                       // gestion lien traduction
-                     if  ($_trad) {
+                     if  ($_trad) {                     
                           if ($_trad == $_link) { // il s'agit de l'article origine de traduc 
-                              sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "id_article=$id_nouvel_article");
-                          } else { // on cherche si on a l'article en local
+                              sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "id_article=$id_nouvel_article");   // maj article orig trad                              
+                              sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "s2s_url_trad=".sql_quote($_link)); // maj article trad (si deja importe ds une session precedente)
+                          } else { // il s'agit d'un article traduit, on cherche si on a l'article origine de trad en local
                               if ($row = sql_fetsel("id_article","spip_articles","s2s_url=".sql_quote($_trad))) {
                                   $id_article_trad = (int) $row['id_article'];                                  
                                   sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_nouvel_article"); // maj article trad
-                                  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_article_trad");   // maj article orig trad (si deja importe ds un nouvelle sssion)
+                                  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_article_trad");   // maj article orig trad (si deja importe ds une session precedente)
                               } 
-                          } 
-                                  
+                          }                                   
                       } 
                                     			        
                       // ... dans la table auteurs
