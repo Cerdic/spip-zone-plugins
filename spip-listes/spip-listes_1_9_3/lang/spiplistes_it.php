@@ -4,7 +4,7 @@
 
 // $LastChangedBy: renato@rezo.net $
 
-$GLOBALS['i18n_spiplistes_fr'] = array(
+$GLOBALS['i18n_spiplistes_it'] = array(
 
 // CP-20081126: classement par scripts
 // action/spiplistes_agenda.php
