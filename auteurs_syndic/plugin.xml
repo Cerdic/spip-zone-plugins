@@ -1,0 +1,34 @@
+<plugin>
+	<nom>
+		<multi>
+		[fr]Auteurs pour les sites syndiqu&#233;s
+		[en]Authors for Web site
+		</multi>
+	</nom>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<prefix>auteurs_syndic</prefix>
+	<etat>dev</etat>
+	<auteur>kent1</auteur>
+	<licence>GNU/GPL</licence>
+	<description>
+		<multi>
+		[fr]Ajoute la possibilit&#233; d'ajouter des auteurs aux sites syndiqu&#233;s
+		[en]Adds the ability to add authors to syndicated sites
+		</multi>
+	</description>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/auteurs_syndic.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/auteurs_syndic.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_insertion</nom>
+		<inclure>auteurs_syndic_pipelines.php</inclure>
+	</pipeline>
+	<install>base/auteurs_syndic_upgrade.php</install>
+	<necessite id="SPIP" version="[2.1.0;]" />
+</plugin>
