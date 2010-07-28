@@ -13,6 +13,9 @@ function traiter_email_dist($args, $retours){
 	// On récupère les destinataires
 	if ($options['champ_destinataires']){
 		$destinataires = _request($options['champ_destinataires']);
+		if (!is_array($destinataires) and intval($destinataires)){
+			$destinataires = array($destinataires);
+		}
 		if (is_array($destinataires)){
 			// On récupère les mails des destinataires
 			$destinataires = array_map('intval', $destinataires);

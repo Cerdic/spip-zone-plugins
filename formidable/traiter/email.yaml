@@ -8,7 +8,7 @@ options:
       nom: 'champ_destinataires'
       label: '<:formidable:traiter_email_option_destinataires_label:>'
       explication: '<:formidable:traiter_email_option_destinataires_explication:>'
-      forcer_type: [destinataires]
+      forcer_type: [destinataires,hidden]
       env: true
   -
     saisie: 'input'
