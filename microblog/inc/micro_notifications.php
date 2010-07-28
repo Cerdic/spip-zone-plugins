@@ -58,8 +58,19 @@ function Microblog_notifications($x) {
 				include_spip('inc/meta');
 				ecrire_meta('microblog_annonces',$GLOBALS['meta']['microblog_annonces'].','.$id);
 			}
+
+			// en cas d'attente, on note la date du plus vieux, et on ajoute l'attente
+			$heure = time()+60;
+			if (($attente = 60*intval($cfg['attente'])) > 0) {
+				$vieux = $GLOBALS['meta']['microblog_vieux'];
+				if ($vieux AND $vieux>$heure-$attente) {
+					$heure = $vieux + $attente;
+				}
+				ecrire_meta('microblog_vieux', $heure);
+			}
+
 			$status = Microblog_annonce('instituerarticle',array('id_article'=>$id));
-			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$id));
+			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$id), $heure);
 		}
 		break;
 	}
@@ -71,14 +82,16 @@ function Microblog_annonce($quoi,$contexte){
 	return trim(recuperer_fond("modeles/microblog_$quoi",$contexte));
 }
 
-function envoyer_microblog($status,$liens=array()){
+function envoyer_microblog($status,$liens=array(), $heure = null){
 	if (!is_null($status)) {
 		if (!function_exists('job_queue_add')){
 			include_spip('inc/microblog');
 			microblog($status);
 		}
-		else{
-			$id_job = job_queue_add('microblog',"microblog : $status",array($status),'inc/microblog',true,time()+60);
+		else {
+			if ($heure === null)
+				$heure = time() + 60;
+			$id_job = job_queue_add('microblog',"microblog : $status",array($status),'inc/microblog',true, $heure);
 			if ($liens)
 				job_queue_link($id_job,$liens);
 		}

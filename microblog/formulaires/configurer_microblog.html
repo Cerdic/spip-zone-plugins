@@ -85,6 +85,7 @@
 									(#ENV{evt_proposerarticles}|?{checked="checked"})] id="evt_proposerarticles" />
 								<label for="evt_proposerarticles"><:microblog:proposer_articles:></label>
 							</div>
+							<hr />
 							<div class="choix">
 								<input type="checkbox" name="evt_publierarticles"[
 									(#ENV{evt_publierarticles}|?{checked="checked"})] id="evt_publierarticles" />
@@ -107,6 +108,15 @@
 											(#ENV{short_url,''}|oui)checked="checked"] />
 										<label for="short_url"><:microblog:publier_articles_shorturl:></label>
 									</div>
+
+									<div class="choix">
+										<input type="text" name="attente" id="attente" value="[(#ENV{attente}|sinon{1})]" size="2" />
+										<label for="attente"><:microblog:publier_articles_attente:>
+										<small>(n&#233;cessite job_queue)</small>
+										</label>
+									</div>
+
+
 								</div>
 								<script type="text/javascript">
 									function affiche_bloc_synchro(){

@@ -45,7 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'publie' => 'publi&#233;',
 	'publier_articles_futurs_immediatement'=>'Annoncer les articles quelle que soit leur date de publication',
 	'publier_articles_futurs_visibles'=>'Ne pas annoncer les articles avant la date de publication fix&eacute;e',
-	'publier_articles_shorturl'=>'Utiliser des urls courtes (necessite un .htaccess)',
+	'publier_articles_shorturl'=>'Utiliser des urls courtes (n&#233;cessite un .htaccess)',
+	'publier_articles_attente' => 'Espacer les publications dans le temps (minutes)',
 
 	// S
   'service' => 'Service'
