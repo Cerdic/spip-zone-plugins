@@ -129,6 +129,10 @@ function analyser_backend_spip2spip($rss){
   // supprimer les commentaires
 	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
 	
+	// multi (pas echappe)
+	$rss = str_replace("&lt;multi&gt;",  "@@@MULTI@@@", $rss);
+	$rss = str_replace("&lt;/multi&gt;",  "@@@MULTJ@@@", $rss);
+	
 	// version du flux
 	$version_flux = 0;
 	if (preg_match_all(',<spip2spip version="(.*?)">,Uims',$rss,$r, PREG_SET_ORDER)) 
@@ -268,10 +272,10 @@ function analyser_backend_spip2spip($rss){
           		$debut_item = strpos($data['mots'],$regs[0]);
           		$fin_item = strpos($data['mots'],
           		$mot_regexp['motfin'])+strlen($mot_regexp['motfin']);
-          		$mots[] = substr($data['mots'],$debut_item,$fin_item-$debut_item);
+          		$mots[] = substr($data['mots'],$debut_item,$fin_item-$debut_item);          		
           		$debut_texte = substr($data['mots'], "0", $debut_item);
           		$fin_texte = substr($data['mots'], $fin_item, strlen($data['mots']));
-          		$data['mots'] = $debut_texte.$fin_texte;
+          		$data['mots'] = $debut_texte.$fin_texte;          		
           }
           
           $motcle = array();
@@ -282,19 +286,21 @@ function analyser_backend_spip2spip($rss){
                     if (preg_match($mot_regexp[$xml_mot_tag],$mot,$match)) $data_node[$xml_mot_tag] = $match[1]; 
   				                                                            else $data_node[$xml_mot_tag] = "";
   				       } 
-                $motcle[] = $data_node;                                                     
+                $motcle[] = $data_node;                          
               }             
-              $data['mots'] =  serialize($motcle);
+              $data['mots'] =  serialize($motcle);              
           }       
     }	#noeud mots
 	  
 	  
-		// Nettoyer les donnees et remettre les CDATA en place
+		// Nettoyer les donnees et remettre les CDATA et multi en place
 		foreach ($data as $var => $val) {
 			$data[$var] = filtrer_entites($data[$var]);
 			foreach ($echappe_cdata as $n => $e)
 				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
-			$data[$var] = trim(textebrut($data[$var]));
+      $data[$var] = trim(textebrut($data[$var]));
+			$data[$var] = str_replace("@@@MULTI@@@", "<multi>", $data[$var]);
+	    $data[$var] = str_replace("@@@MULTJ@@@", "</multi>", $data[$var]);	
 		}
 
 		//$data['item'] = $item;  //utile pour spip2spip ?		
@@ -675,12 +681,13 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       }
                       
                       // etape 3 - traitement des mots de l'article
-                      $_mots = $article['mots'];                      
-                      if ($_mots!="" && $import_mot_article) {                      
-                        $_mots = unserialize($_mots);                 
-                        foreach($_mots as $_mot) {                   
+                      $_mots = $article['mots'];                                           
+                      if ($_mots!="" && $import_mot_article) {  
+                        $_mots = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_mots );                     
+                        $_mots = unserialize($_mots); 
+                        foreach($_mots as $_mot) {                                               
                             $groupe = $_mot['groupe'];                            
-                            $titre  = $_mot['titre'];                                                     
+                            $titre  = $_mot['titre'];                            
                             spip2spip_insert_mode_article($id_nouvel_article, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe,"article");                                              
                         }
                       }
