@@ -1,19 +1,14 @@
 <plugin>
 	<nom>SPIP2SPIP</nom>
 	<auteur>erational - [erational.org->http://www.erational.org]</auteur>
-	<licence>GNU/GLP</licence>
+	<licence>GNU/GPL</licence>
 	<version>2.3</version>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<description>
-Permet d'importer et d'exporter des articles avec d'autres sites SPIP en conservant le formatage spip
+Permet d'importer et d'exporter des articles avec d'autres sites SPIP en conservant le formatage spip, auteurs, mots-cl&#233;s, ...
 -* {{importer des articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos rubriques et inscrire les flux spip2spip de vos sites partenaires 
 -* {{diffuser vos articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos articles et donner [votre adresse de flux spip2spip (simple)->../spip.php?page=backend-spip2spip]  
-
-_ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
--* formatage original SPIP de l'article
--* images, documents attach&#233;s recopi&#233;s en documents distants, licence
--* essayer de faire correspondre les auteurs
--* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda])
+et si vous utilisez agenda,[ le flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda])
   </description>
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> 
 	<fonctions>spiptospip_filtre.php</fonctions>

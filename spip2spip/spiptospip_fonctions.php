@@ -298,7 +298,7 @@ function analyser_backend_spip2spip($rss){
 			$data[$var] = filtrer_entites($data[$var]);
 			foreach ($echappe_cdata as $n => $e)
 				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
-      $data[$var] = trim(textebrut($data[$var]));
+      $data[$var] = trim(textebrut($data[$var]));  // commenter cette ligne si vous voulez importer du HTML (a vos risques et perils)
 			$data[$var] = str_replace("@@@MULTI@@@", "<multi>", $data[$var]);
 	    $data[$var] = str_replace("@@@MULTJ@@@", "</multi>", $data[$var]);	
 		}
