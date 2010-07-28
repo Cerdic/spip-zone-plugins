@@ -2,8 +2,6 @@
 include_spip('inc/meta');
 include_spip('base/create');
 
-include_spip('inc/meta');
-
 // Installation et mise à jour
 function contact_upgrade($nom_meta_version_base, $version_cible){
 
