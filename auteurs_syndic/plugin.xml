@@ -29,6 +29,10 @@
 		<nom>post_insertion</nom>
 		<inclure>auteurs_syndic_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>auteurs_syndic_autoriser.php</inclure>
+	</pipeline>
 	<install>base/auteurs_syndic_upgrade.php</install>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>

@@ -1,4 +1,10 @@
-<?php 
+<?php
+/**
+ * Plugin auteurs_syndic
+ * par kent1
+ * Les pipelines
+ */
+
 /**
  * 
  * Insertion dans le pipeline post_instertion
