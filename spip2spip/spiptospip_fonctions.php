@@ -457,17 +457,6 @@ function spip2spip_update_mode_document($id_document,$mode="vignette") {
    sql_updateq('spip_documents', array("mode"=>$mode), "id_document=$id_document");
 }
 
-//
-// unserialize qui gere les retours chariots \n et les charsets exotiques
-// pour l'instant non utilise - a voir en quand de pb
-function spip2spip_unserialize($sObject) {
-    $sObject = preg_replace("/\n/", " ", $sObject);
-    //$sObject = str_replace("\n", " ", $sObject);
-    //$sObject=htmlspecialchars_decode($sObject); //THIS FIXED
-
-    return unserialize(preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $sObject ));   
-}
-
 //---------------------------------------
 // fonction principale: spip2spip_syndique
 //
@@ -560,12 +549,13 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       $_documents = $article['documents'];                    
                       $documents_current_article = array();
                       if ($_documents!="") {
+                        $_documents = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_documents ); 
                         $_documents = unserialize($_documents);                  
                         foreach($_documents as $_document) {                    
                             $id_distant = $_document['id'];
                             $source = $_document['url'];
-                            $titre = $_document['titre'];                        
-                            $desc = $_document['desc'];
+                            $titre = stripslashes($_document['titre']);                        
+                            $desc =  stripslashes($_document['desc']);
                                               
                             // inspire de @ajouter_un_document() - inc/ajout_documents.php 
                             if ($a = recuperer_infos_distantes($source)) { 
@@ -619,7 +609,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                             $_ps .= _T('spiptospip:article_license')." ".$_licence;
                      
                                                   	            		
-                  		// ....dans la table articles             	
+                  		// ....dans la table articles                                	
                   		$id_nouvel_article = sql_insertq("spip_articles",array(
                                               'lang' => $_lang,
                                               'surtitre' => $_surtitre,
@@ -686,8 +676,8 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                         $_mots = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_mots );                     
                         $_mots = unserialize($_mots); 
                         foreach($_mots as $_mot) {                                               
-                            $groupe = $_mot['groupe'];                            
-                            $titre  = $_mot['titre'];                            
+                            $groupe = stripslashes($_mot['groupe']);                            
+                            $titre  = stripslashes($_mot['titre']);                                                     
                             spip2spip_insert_mode_article($id_nouvel_article, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe,"article");                                              
                         }
                       }
@@ -697,17 +687,17 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       $_evenements = $article['evenements'];                      
                       if ($_evenements!="") {  
                         $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );                      
-                        $_evenements = unserialize($_evenements);                                  
+                        $_evenements = unserialize($_evenements);                                                          
                         foreach($_evenements as $_evenement) {                  
                             $datedeb = $_evenement['datedeb'];
                             $datefin = $_evenement['datefin'];
-                            $lieu = $_evenement['lieu'];
-                            $adresse = spip2spip_convert_extra($_evenement['adresse'],$documents_current_article,$version_flux);
+                            $lieu = stripslashes($_evenement['lieu']);
+                            $adresse = spip2spip_convert_extra(stripslashes($_evenement['adresse']),$documents_current_article,$version_flux);
                             $horaire = $_evenement['horaire'];
-                            $titre = $_evenement['titre'];                        
-                            $desc = spip2spip_convert_extra($_evenement['desc'],$documents_current_article,$version_flux);
+                            $titre = stripslashes($_evenement['titre']);                        
+                            $desc = spip2spip_convert_extra(stripslashes($_evenement['desc']),$documents_current_article,$version_flux);
                             $motevts = $_evenement['motevts'];
-                                                         		  		                      
+                                                                                     		  		                      
                             $id_nouvel_evt = sql_insertq('spip_evenements',array(
                 						            'id_article'=> $id_nouvel_article,
                 						            'date_debut'=> $datedeb,
@@ -722,8 +712,8 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                             // mot cle ?                            
                             if ($motevts!="" && $import_mot_evt) { 
                               foreach($motevts as $motevt) {                                
-                                $groupe = $motevt['groupe'];                            
-                                $titre  = $motevt['titre'];                                  
+                                $groupe = stripslashes($motevt['groupe']);                            
+                                $titre  = stripslashes($motevt['titre']);                                  
                                 spip2spip_insert_mode_article($id_nouvel_evt, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe, "evenement");                              
                               }
                             }
