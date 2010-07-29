@@ -249,7 +249,9 @@
 			if (eltclass.indexOf("boxIframe")!==-1) {
 				data = $.extend(data,{iframe:true});
 			}
-
+			if (eltclass.indexOf("boxSlideshow_off")!==-1) {
+				data = $.extend(data,{slideshow:false});
+			}
 			$(this).data(colorbox, data).addClass("cboxElement");
 
 			if (callback) {
