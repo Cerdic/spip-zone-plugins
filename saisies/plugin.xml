@@ -2,7 +2,7 @@
     <nom><multi>[fr]Saisies pour formulaires[en]Entries for forms</multi></nom>
     <auteur>Matthieu Marcillaud - RastaPopoulos</auteur>
     <licence>&#169; 2009 GNU/GPL</licence>
-    <version>1.7.6</version>
+    <version>1.7.7</version>
     <etat>test</etat>
     <categorie>outil</categorie>
     
@@ -39,6 +39,10 @@
     </pipeline>
     <pipeline>
     	<nom>insert_head</nom>
+    	<inclure>saisies_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+    	<nom>insert_head_css</nom>
     	<inclure>saisies_pipelines.php</inclure>
     </pipeline>
     
