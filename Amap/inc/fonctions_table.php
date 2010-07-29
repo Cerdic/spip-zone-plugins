@@ -129,7 +129,7 @@ function affiche_tableamap($table, $tabLesEnregistrements, $max_par_page, $nombr
         {
             $intPremierEnreg_prec = max($intPremierEnreg - $max_par_page, 0);
 			echo "<a href='"
-				, tabledata_url_generer_ecrire($page
+				, amap_url_generer_ecrire($page
 				, "intPremierEnreg=".$intPremierEnreg_prec."&table=".$table)
 				, "' title='Voir la liste pr&#233;c&#233;dente des enregistrements' >"
 				, "\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />"
@@ -196,11 +196,9 @@ function requete_tableamap($table , $field, $key, $idWhere = false)
 
 	$nbenreg = sql_count($Rselect) ;
 
-	echo ($nbenreg==1)?"":" Nombre(s) d'enregistrement dans la s&#233;lection : ".$nbenreg."<hr/>";
-
 	return $Rselect;
 
-} //function // fin function requete_tableamap
+} // fin function requete_tableamap
 
 
 //=========================================================================
