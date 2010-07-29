@@ -213,7 +213,7 @@ function amap_declarer_tables_interfaces($interface){
 function amap_declarer_tables_principales($tables_principales){
  	//-- Table banque -------------------
 	$spip_amap_banque = array(
-		'id_banque'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
+		'id_banque'  => 'BIGINT NOT NULL AUTO_INCREMENT',
 		'label_banque'  => 'VARCHAR(50) NOT NULL'
 		);
 	$spip_amap_banque_key = array(
@@ -226,14 +226,14 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table contrat -------------------
 	$spip_amap_contrat = array(
-		'id_contrat'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_produit'  => 'BIGINT(20) NOT NULL',
-		'id_saison'  => 'BIGINT(20) NOT NULL',
-		'id_personne'  => 'BIGINT(20) NOT NULL',
-		'id_type'  => 'BIGINT(20) NOT NULL',
-		'demi_panier'  => 'BIGINT(20) NULL',
-		'debut_contrat'  => 'BIGINT(20) NULL',
-		'nb_distribution'  => 'BIGINT(20) NULL'
+		'id_contrat'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_produit'  => 'BIGINT NOT NULL',
+		'id_saison'  => 'BIGINT NOT NULL',
+		'id_personne'  => 'BIGINT NOT NULL',
+		'id_type'  => 'BIGINT NOT NULL',
+		'demi_panier'  => 'BOOLEAN NULL',
+		'debut_contrat'  => 'BIGINT NULL',
+		'nb_distribution'  => 'BIGINT NULL'
 		);
 	$spip_amap_contrat_key = array(
 		'PRIMARY KEY'   => 'id_contrat'
@@ -246,13 +246,13 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table evenements -------------------
 	$spip_amap_evenements = array(
-		'id_evenement'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'date_evenement'  => 'BIGINT(20) NULL',
-		'id_saison'  => 'BIGINT(30) NOT NULL',
-		'id_lieu'  => 'BIGINT(13) NULL',
-		'id_personne1'  => 'BIGINT(20) NULL',
-		'id_personne2'  => 'BIGINT(20) NULL',
-		'id_personne3'  => 'BIGINT(20) NULL'
+		'id_evenement'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'date_evenement'  => 'DATETIME DEFAULT "0000-00-00 00:00:00" NOT NULL',
+		'id_saison'  => 'BIGINT NOT NULL',
+		'id_lieu'  => 'BIGINT NULL',
+		'id_personne1'  => 'BIGINT NULL',
+		'id_personne2'  => 'BIGINT NULL',
+		'id_personne3'  => 'BIGINT NULL'
 		);
 	$spip_amap_evenements_key = array(
 		'PRIMARY KEY'   => 'id_evenement'
@@ -265,9 +265,9 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table famille_variete -------------------
 	$spip_amap_famille_variete = array(
-		'id_famille'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
+		'id_famille'  => 'BIGINT NOT NULL AUTO_INCREMENT',
 		'label_famille'  => 'VARCHAR(30) NOT NULL',
-		'id_produit'  => 'BIGINT(20) NOT NULL',
+		'id_produit'  => 'BIGINT NOT NULL',
 		);
 	$spip_amap_famille_variete_key = array(
 		'PRIMARY KEY'   => 'id_famille'
@@ -280,11 +280,11 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table lieu -------------------
 	$spip_amap_lieu = array(
-		'id_lieu'  	=> 'BIGINT(20) NOT NULL AUTO_INCREMENT',
+		'id_lieu'  	=> 'BIGINT NOT NULL AUTO_INCREMENT',
 		'nom_lieu' 	=> 'VARCHAR(40) NOT NULL',
-		'rue_lieu' 	=> 'VARCHAR(40) NOT NULL',
+		'rue_lieu' 	=> 'VARCHAR(40) NULL',
 		'cp_lieu'  	=> 'VARCHAR(5) NULL',
-		'ville_lieu' => 'VARCHAR(30) NOT NULL',
+		'ville_lieu' => 'VARCHAR(30) NULL',
 		'telephone_lieu'    => 'VARCHAR(13) NULL'
 		);
 	$spip_amap_lieu_key = array(
@@ -297,12 +297,12 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table panier -------------------
 	$spip_amap_panier = array(
-		'id_produit'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_evenement'  => 'BIGINT(20) NOT NULL',
-		'id_element'  => 'BIGINT(20) NOT NULL',
-		'id_famille'  => 'BIGINT(20) NOT NULL',
-		'id_variete'  => 'BIGINT(20) NOT NULL',
-		'quantite'  => 'BIGINT(20) NOT NULL',
+		'id_produit'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_evenement'  => 'BIGINT NOT NULL',
+		'id_element'  => 'BIGINT NOT NULL',
+		'id_famille'  => 'BIGINT NOT NULL',
+		'id_variete'  => 'BIGINT NULL',
+		'quantite'  => 'BIGINT NULL',
 		'poids'  => 'VARCHAR(6) NULL'
 		);
 	$spip_amap_panier_key = array(
@@ -316,8 +316,8 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table participation_sortie -------------------
 	$spip_amap_participation_sortie = array(
-		'id_sortie'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_personne'  => 'BIGINT(20) NOT NULL'
+		'id_sortie'  => 'BIGINT NOT NULL',
+		'id_personne'  => 'BIGINT NOT NULL'
 		);
 	$spip_amap_participation_sortie_key = array(
 		'PRIMARY KEY'   => 'id_sortie,id_personne'
@@ -330,12 +330,12 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table personne -------------------
 	$spip_amap_personne = array(
-		'id_personne'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
+		'id_personne'  => 'BIGINT NOT NULL AUTO_INCREMENT',
 		'prenom'  => 'VARCHAR(20) NULL',
 		'nom'  => 'VARCHAR(30) NOT NULL',
 		'fixe'  => 'VARCHAR(13) NULL',
 		'portable'  => 'VARCHAR(13) NULL',
-		'adhesion'  => 'BIGINT(4) NULL'
+		'adhesion'  => 'BIGINT NULL'
 		);
 	$spip_amap_personne_key = array(
 		'PRIMARY KEY'   => 'id_personne'
@@ -347,10 +347,10 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table prix -------------------
 	$spip_amap_prix = array(
-		'id_produit'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_saison'  => 'BIGINT(20) NOT NULL',
-		'id_type'  => 'BIGINT(20) NOT NULL',
-		'prix_distribution'  => 'BIGINT(20) NOT NULL'
+		'id_produit'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_saison'  => 'BIGINT NOT NULL',
+		'id_type'  => 'BIGINT NOT NULL',
+		'prix_distribution'  => 'BIGINT NOT NULL'
 		);
 	$spip_amap_prix_key = array(
 		'PRIMARY KEY'   => 'id_produit,id_saison,id_type'
@@ -363,8 +363,8 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table produit -------------------
 	$spip_amap_produit = array(
-		'id_produit'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_paysan'  => 'BIGINT(20) NOT NULL',
+		'id_produit'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_paysan'  => 'BIGINT NULL',
 		'label_produit'  => 'VARCHAR(20) NOT NULL',
 		);
 	$spip_amap_produit_key = array(
@@ -378,8 +378,8 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table produit_distribution -------------------
   	$spip_amap_produit_distribution = array(
-		'id_evenement'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_produit'  => 'BIGINT(20) NOT NULL'
+		'id_evenement'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_produit'  => 'BIGINT NOT NULL'
 		);
 	$spip_amap_produit_distribution_key = array(
 		'PRIMARY KEY'   => 'id_evenement,id_produit'
@@ -392,9 +392,9 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table reglement -------------------
 	$spip_amap_reglement = array(
-		'id_cheque'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_contrat'  => 'BIGINT(20) NOT NULL',
-		'id_banque'  => 'BIGINT(20) NULL',
+		'id_cheque'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_contrat'  => 'BIGINT NOT NULL',
+		'id_banque'  => 'BIGINT NULL',
 		'ref_cheque'  => 'VARCHAR(12) NULL',
 		'montant_euros'  => 'VARCHAR(4) NOT NULL'
 		);
@@ -409,12 +409,12 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table saison -------------------
 	$spip_amap_saison = array(
-		'id_saison'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_agenda'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'id_contrat'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'id_sortie'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'id_responsable'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'id_vacance'  => 'BIGINT(20) DEFAULT "0" NOT NULL'
+		'id_saison'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_agenda'  => 'BIGINT DEFAULT NULL',
+		'id_contrat'  => 'BIGINT DEFAULT NULL',
+		'id_sortie'  => 'BIGINT DEFAULT NULL',
+		'id_responsable'  => 'BIGINT DEFAULT NULL',
+		'id_vacance'  => 'BIGINT DEFAULT NULL'
 		);
 	$spip_amap_saison_key = array(
 		'PRIMARY KEY'   => 'id_saison'
@@ -426,13 +426,10 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table sortie -------------------
 	$spip_amap_sortie = array(
-		'id_sortie'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
+		'id_sortie'  => 'BIGINT NOT NULL AUTO_INCREMENT',
 		'date_sortie'  => 'DATETIME DEFAULT "0000-00-00 00:00:00" NOT NULL',
-		'id_saison'  => 'BIGINT(20) NOT NULL',
-		'id_produit'  => 'BIGINT(20) NOT NULL',
-		'id_variete'  => 'BIGINT(20) NOT NULL',
-		'quantite'  => 'BIGINT(20) NOT NULL',
-		'poids'  => 'BIGINT(20) NULL'
+		'id_saison'  => 'BIGINT NOT NULL',
+		'id_produit'  => 'BIGINT NOT NULL',
 		);
 	$spip_amap_sortie_key = array(
 		'PRIMARY KEY'   => 'id_sortie'
@@ -445,7 +442,7 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table type_contrat -------------------
 	$spip_amap_type_contrat = array(
-		'id_type'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
+		'id_type'  => 'BIGINT NOT NULL AUTO_INCREMENT',
 		'label_type' => 'VARCHAR(20) NOT NULL'
 		);
 	$spip_amap_type_contrat_key = array(
@@ -458,15 +455,14 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table vacance -------------------
 	$spip_amap_vacance = array(
-		'id_vacance'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_contrat'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'id_evenement'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'id_remplacant'  => 'BIGINT(20) DEFAULT "0" NOT NULL',
-		'remplacant_ext'  => 'VARCHAR(150) DEFAULT "0" NOT NULL',
+		'id_contrat'  => 'BIGINT NOT NULL',
+		'id_evenement'  => 'BIGINT NOT NULL',
+		'id_remplacant'  => 'BIGINT DEFAULT NULL',
+		'remplacant_ext'  => 'VARCHAR(150) DEFAULT NULL',
 		'paye'  => 'BOOLEAN NOT NULL'
 		);
 	$spip_amap_vacance_key = array(
-		'PRIMARY KEY'   => 'id_vacance,id_contrat,id_evenement'
+		'PRIMARY KEY'   => 'id_contrat,id_evenement'
 		);
 	$tables_principales['spip_amap_vacance'] = array(
 		'field' => &$spip_amap_vacance,
@@ -476,9 +472,9 @@ function amap_declarer_tables_principales($tables_principales){
 
 	//-- Table variete -------------------
 	$spip_amap_variete = array(
-		'id_variete'  => 'BIGINT(20) NOT NULL AUTO_INCREMENT',
-		'id_famille'  => 'BIGINT(20) NOT NULL',
-		'label_variete'  => 'BIGINT(20) NULL',
+		'id_variete'  => 'BIGINT NOT NULL AUTO_INCREMENT',
+		'id_famille'  => 'BIGINT NOT NULL',
+		'label_variete'  => 'VARCHAR(30) NOT NULL',
 		);
 	$spip_amap_variete_key = array(
 		'PRIMARY KEY'   => 'id_variete'
