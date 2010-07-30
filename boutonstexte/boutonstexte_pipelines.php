@@ -11,8 +11,10 @@ function boutonstexte_insert_head_css($flux)
 		$cssFile = $metacfg['cssFile'];
 		$done = true;
 		$flux .= '<link rel="stylesheet" href="spip.php?page='.$cssFile.'.css" type="text/css" media="all" /><link rel="stylesheet" href="spip.php?page='.$cssFile.'-print.css" type="text/css" media="print" />';
+		return $flux;
+	} else {
+		return;
 	}
-	return $flux;
 }
 
 function boutonstexte_insert_head($flux)
