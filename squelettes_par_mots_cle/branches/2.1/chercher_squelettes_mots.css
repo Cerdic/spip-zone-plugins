@@ -1,0 +1,36 @@
+fieldset.regle .forml {
+	display: inline;
+	margin-right:0.5em;
+	margin-bottom:1em;
+	width:auto;
+}
+
+fieldset.regle input.forml {
+	width:7em;
+}
+
+fieldset.regle div.possible {
+  width: 25em;
+  overflow: hidden;
+}
+
+fieldset.regle div.possible ul {
+  margin: 0;
+  list-style-type: none;
+}
+
+fieldset.regle div.possible ul li {
+  float: left;
+  padding-left: 1em;
+  font-size: small;
+  color: red;
+}
+
+fieldset.regle div.possible ul li a {
+  color: green;
+}
+
+fieldset.regle div.avertissement { 
+  margin: 1em 3em;
+  color: red;
+ }
