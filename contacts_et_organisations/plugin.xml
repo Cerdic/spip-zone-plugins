@@ -1,0 +1,111 @@
+<plugin>
+	<nom>Contacts &amp; Organisations</nom>
+	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
+	<auteur>Matthieu Marcillaud - [Ma Graine->http://magraine.net]</auteur>
+	
+	<etat>test</etat>
+	<description>
+		<multi>
+[fr] Ajoute &agrave; SPIP les fonctionnalit&eacute;s d'un gestionnaire de contacts.
+Distingue les personnes pysiques (contacts) des personnes morales (organisations) en conservant tous les attributs des auteurs SPIP.
+Permet d'attribuer des droits d'acc&egrave;s &agrave; des organisations avec un mot de passe unique.
+ Permet d'&eacute;tendre &agrave; la fois les champs unitaires (pr&eacute;nom, date de naissance...)
+ et les champs multipes (num&eacute;ros de t&eacute;l&eacute;phone, adresses mail...).
+
+Plugin d&eacute;velopp&eacute; dans le cadre du gestionnaire de projets [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] et du plugin [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue].
+
+[en] Gives SPIP the functionnalities of a contact management system. Makes a difference between companies (organisations) and persons (contacts) while keeping all the SPIP author's attributes. Allows to give access rights to accounts with unique password. Allows to extend unique fields (such as frist name, date of birth...) together with multiple fields (phone numbers, mail addresses...).
+
+This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] and [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue] projects.	</multi>
+	</description>
+	
+	<lien></lien>
+	<icon>images/contacts-128.png</icon>
+	
+	<prefix>contacts</prefix>
+	<version>1.3.0</version>
+
+	<version_base>1.2.0</version_base>
+	<install>base/contacts_upgrade.php</install>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/contacts.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/contacts.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/contacts.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+		
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>contacts_autorisations.php</inclure>
+	</pipeline>
+
+	
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	
+
+	<!--
+	avec plugin champs extras 2
+	pour TESTS
+	-->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+	
+	
+
+	    
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="saisies" version="[1.7.7;]" />
+	<!-- coordonnees postales : cop -->
+	<utilise id="cop" version="[1.0.0;]" />
+	
+	<categorie>auteur</categorie>
+</plugin>

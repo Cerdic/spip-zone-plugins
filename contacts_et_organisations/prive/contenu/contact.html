@@ -1,0 +1,47 @@
+<BOUCLE_contact(CONTACTS){id_auteur}>
+[(#SET{contenu,
+[<div class="champ contenu_civilite[ (#CIVILITE*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_civilite:></div>
+	<div dir='#LANG_DIR' class='#EDIT{civilite} civilite'>(#CIVILITE)</div>
+</div>]
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_nom:></div>
+	<div dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</div>
+</div>]
+[<div class="champ contenu_prenom[ (#PRENOM*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_prenom:></div>
+	<div dir='#LANG_DIR' class='#EDIT{prenom} prenom'>(#PRENOM)</div>
+</div>]
+[<div class="champ contenu_fonction[ (#FONCTION*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_fonction:></div>
+	<div dir='#LANG_DIR' class='#EDIT{fonction} fonction'>(#FONCTION)</div>
+</div>]
+[<div class="champ contenu_date_naissance[ (#DATE_NAISSANCE*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<div class='label'><:contacts:label_date_naissance:></div>
+	<div dir='#LANG_DIR' class='#EDIT{date_naissance} date_naissance'>(#DATE_NAISSANCE|=={0000-00-00 00:00:00}|?{'',[(#DATE_NAISSANCE|affdate)]})</div>
+</div>]
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_descriptif:></div>
+	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF|affdate)</div>
+</div>]
+
+[(#REM) Un coup pour les champs extras ]
+[(#PIPELINE{afficher_contenu_objet,
+	[(#ARRAY{args,
+		[(#ARRAY{
+			type,contact,
+			id_objet,#ID_AUTEUR,
+			contexte,[(#ENV**|unserialize)]})],
+			data,''})]})]
+})]
+
+
+[(#GET{contenu}|trim|oui)
+	[(#VAL{e}|debut_cadre{#CHEMIN{images/contact-24.png},'',<:contacts:titre_contact:>})]
+	<div class="presentation_contenu">
+	#GET{contenu}
+	</div>
+	[(#EVAL{true}|fin_cadre)]
+]
+
+</BOUCLE_contact>

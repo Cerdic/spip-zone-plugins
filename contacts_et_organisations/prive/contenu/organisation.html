@@ -1,0 +1,42 @@
+<BOUCLE_organisation(ORGANISATIONS){id_auteur}>
+[(#SET{contenu,
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_nom:></div>
+	<div dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</div>
+</div>]
+[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_type:></div>
+	<div dir='#LANG_DIR' class='#EDIT{type} type'>(#TYPE)</div>
+</div>]
+[<div class="champ contenu_siret[ (#SIRET*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_siret:></div>
+	<div dir='#LANG_DIR' class='#EDIT{siret} siret'>(#SIRET)</div>
+</div>]
+[<div class="champ contenu_date_creation[ (#DATE_CREATION*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<div class='label'><:contacts:label_date_creation:></div>
+	<div dir='#LANG_DIR' class='#EDIT{date_creation} date_creation'>(#DATE_CREATION|=={0000-00-00 00:00:00}|?{'',[(#DATE_CREATION|affdate)]})</div>
+</div>]
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_descriptif:></div>
+	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF|affdate)</div>
+</div>]
+
+[(#REM) Un coup pour les champs extras ]
+[(#PIPELINE{afficher_contenu_objet,
+	[(#ARRAY{args,
+		[(#ARRAY{
+			type,organisation,
+			id_objet,#ID_AUTEUR,
+			contexte,[(#ENV**|unserialize)]})],
+			data,''})]})]
+})]
+
+
+[(#GET{contenu}|trim|oui)
+	[(#VAL{e}|debut_cadre{#CHEMIN{images/organisation-24.png},'',<:contacts:titre_organisation:>})]
+	<div class="presentation_contenu">
+	#GET{contenu}
+	</div>
+	[(#EVAL{true}|fin_cadre)]
+]
+</BOUCLE_organisation>
