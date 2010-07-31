@@ -1,2 +1,0 @@
-v2.0.1 (19 09 2009)
-  * Mise en plce de la version du plugin pour SIP V2.0.x
