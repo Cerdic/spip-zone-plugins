@@ -27,7 +27,8 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		'id_rubrique' => $id_rubrique));
 		spip_log('Création de la rubrique '.$id_rubrique.' pour l\'auteur '.$nom_inscription.' ( '.$mail.' )','rubrique_a_linscription');
 		
-		
+		//On ajoute la rubrique chez l'auteur
+		sql_update('spip_auteurs',array('rubrique_a_linscription'=>$id_rubrique),"id_auteur=$id_auteur");
 		
 		//Envoyer mails
 		

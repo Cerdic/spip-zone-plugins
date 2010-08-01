@@ -16,24 +16,34 @@
 		</ul>
 		
 	</fieldset>
-	
+	<fieldset>
+		<legend><:rubrique_a_linscription:cfg_espace_prive:></legend>
+		<ul>
+			<li>
+				<input type="checkbox" class="checkbox" name="espace_prive_voir" id="espace_prive_voir"[ checked="checked"(#ENV{espace_prive_voir}|oui)]>
+				<label for="espace_prive_voir"><:rubrique_a_linscription:cfg_espace_prive_voir:></label>
+
+			</li>
+		</ul>
+	</fieldset>	
 	<fieldset>
 		<legend><:rubrique_a_linscription:cfg_mail:></legend>
 		<ul>
 			<li class="editer_mail_public">
 				
-				<input type="checkbox" class="checkbox" name="mail_public"[ checked="checked"(#ENV{mail_public}|oui)]>
+				<input type="checkbox" class="checkbox" name="mail_public" id="mail_public"[ checked="checked"(#ENV{mail_public}|oui)]>
 				<label for="mail_public"><:rubrique_a_linscription:cfg_mail_public:></label>
 				
 			</li>
 			
 			<li class="editer_mail_prive">
 				
-				<input type="checkbox" class="checkbox" name="mail_prive"[ checked="checked"(#ENV{mail_prive}|oui)]>
+				<input type="checkbox" class="checkbox" name="mail_prive" id="mail_prive"[ checked="checked"(#ENV{mail_prive}|oui)]>
 				<label for="mail_prive"><:rubrique_a_linscription:cfg_mail_privee:></label>
 				
 			</li>
 		</ul>
+		</fieldset>
 	<p class="boutons"><input type="submit" name="ok" value="<:OK:>" /></p>
    
 </form>
