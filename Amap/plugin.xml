@@ -21,14 +21,12 @@
 	<bouton id='amap' parent='configuration'>
 		<icone>img_pack/amapconfig-24.gif</icone>
 		<titre>amap:gestion_amap</titre>
-		<url>exec</url>
-		<args>exec=amap_config</args>
+		<args>amap_config</args>
 	</bouton>
 	<bouton id="amap_bandeau" parent="bando_configuration">
 		<icone>img_pack/amapconfig-12.gif</icone>
 		<titre>amap:gestion_amap</titre>
-		<url>exec</url>
-		<args>exec=amap_config</args>
+		<args>amap_config</args>
 	</bouton>
 
 	<pipeline>
