@@ -1,3 +1,51 @@
+<<<<<<< .mine
+<plugin>
+	<nom>Plugin AMAP pour Spip 2</nom>
+	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems </auteur>
+	<version>2.0.1</version>
+	<version_base>0.1.1</version_base>
+
+	<licence>Distribu&eacute; sous licence GNU/GPL</licence>
+	<etat>dev</etat>
+
+    <description>
+	Ce plugin active ou d&eacute;sactive le module AMAP (qui permet de g&eacute;rer aux mieux une Association de Maintien de l'Agriculture Paysanne).
+    </description>
+
+	<prefix>amap</prefix>
+
+	<icon>img_pack/amapconfig-24.gif</icon>
+	<lien>[Documentation->http://www.spip-contrib.net/Plugin-AMAP-Version-2]</lien>
+
+	<install>base/amap_installation.php</install>
+	
+	<bouton id='amap' parent='configuration'>
+		<icone>img_pack/amapconfig-24.gif</icone>
+		<titre>amap:gestion_amap</titre>
+		<url>amap_config</url>
+	</bouton>
+	<bouton id="amap_bandeau" parent="bando_configuration">
+		<icone>img_pack/amapconfig-12.gif</icone>
+		<titre>amap:gestion_amap</titre>
+		<url>amap_config</url>
+	</bouton>
+
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouterOnglet</action>
+		<inclure>amap_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[2.0.0;]' />
+</plugin>
+=======
 <plugin>
 	<nom>Plugin AMAP pour Spip 2</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems </auteur>
@@ -44,3 +92,4 @@
 	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
 </plugin>
+>>>>>>> .r39654
