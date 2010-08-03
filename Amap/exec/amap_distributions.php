@@ -54,7 +54,7 @@ function exec_amap_distributions()
   // Affichage du sous-menu de configuration
   debut_cadre_relief();
   echo "<b><div class='verdana2'>";
-  $res = icone_horizontale(_T('amap:evenements'), generer_url_ecrire("amap_distributions", "&idSaison=".$_REQUEST['idSaison']), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+  $res = icone_horizontale(_T('amap:evenements'), generer_url_ecrire("amap_distributions", "table=spip_amap_evenements&idSaison=".$_REQUEST['idSaison']), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
        .icone_horizontale(_T('amap:produits'), generer_url_ecrire("amap_distributions", "table=spip_amap_produit&idSaison=".$_REQUEST['idSaison'].""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
        .icone_horizontale(_T('amap:vacances'), generer_url_ecrire("amap_distributions", "table=spip_amap_vacance&idSaison=".$_REQUEST['idSaison'].""),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
   echo $res . "</div>";

@@ -116,7 +116,7 @@ function table_amap_getmodif_tarif_contrat()
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$_GET['idProduit']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idType' value='".$_GET['idType']."' />\n";
 
-	return generer_url_post_ecrire("amap_contrats", "table=spip_amap_prix", "action=maj")
+	return generer_url_ecrire("amap_contrats", "table=spip_amap_prix", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -165,7 +165,7 @@ function table_amap_get_tarif_contrat($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-	return generer_url_post_ecrire("amap_contrats", "table=spip_amap_prix", "action=add")
+	return generer_url_ecrire("amap_contrats", "table=spip_amap_prix", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

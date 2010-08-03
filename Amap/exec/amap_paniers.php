@@ -54,7 +54,7 @@ function exec_amap_paniers()
   // Affichage du sous-menu de configuration
   debut_cadre_relief();
   echo "<b><div class='verdana2'>";
-  $res = icone_horizontale(_T('amap:paniers'), generer_url_ecrire("amap_paniers"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+  $res = icone_horizontale(_T('amap:paniers'), generer_url_ecrire("amap_paniers", "table=spip_amap_panier"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
        .icone_horizontale(_T('amap:familles_produits'), generer_url_ecrire("amap_paniers", "table=spip_amap_produit"),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
        .icone_horizontale(_T('amap:variete_famille'), generer_url_ecrire("amap_paniers", "table=spip_amap_famille_variete"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false);
   echo $res . "</div>";

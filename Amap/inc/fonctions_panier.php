@@ -206,7 +206,7 @@ function table_amap_getmodif_panier()
   $hiddens .= "\t<input type='hidden' name='idProduit' value='".$_GET['idProduit']."' />\n";
   $hiddens .= "\t<input type='hidden' name='idElement' value='".$_GET['idElement']."' />\n";
 
-  return generer_url_post_ecrire("amap_contrats", "table=spip_amap_panier", "action=maj")
+  return generer_url_ecrire("amap_contrats", "table=spip_amap_panier", "action=maj")
                             ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -297,7 +297,7 @@ function table_amap_get_panier($idSaison, $idDistrib, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idDistrib' value='".$idDistrib."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-	return generer_url_post_ecrire("amap_contrats", "table=spip_amap_panier", "action=add")
+	return generer_url_ecrire("amap_contrats", "table=spip_amap_panier", "action=add")
                              ."<table>\n".$out
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";

@@ -255,7 +255,7 @@ function table_amap_getmodif_vacance_distribution()
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idEvenement' value='".$_GET['idEvenement']."' />\n";
 
-	return generer_url_post_ecrire("amap_distributions", "table=spip_amap_vacance", "action=maj")
+	return generer_url_ecrire("amap_distributions", "table=spip_amap_vacance", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if ($tabUnEnregistrement_1 = sql_fetch($sqlResult_1))
@@ -382,7 +382,7 @@ function table_amap_get_vacance_distribution($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-	return generer_url_post_ecrire("amap_distrutions", "table=spip_amap_vacance", "action=add")
+	return generer_url_ecrire("amap_distrutions", "table=spip_amap_vacance", "action=add")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

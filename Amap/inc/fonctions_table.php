@@ -431,7 +431,7 @@ function table_amap_getmodif($table, $serveur, $field, $key , $idLigne)
                 $txtbouton ="AUCUN";
         }
 
-        return "\n\n\n".generer_url_post_ecrire("$page", "table=$table", "id_ligne=$idLigne")
+        return "\n\n\n".generer_url_ecrire("$page", "table=$table", "id_ligne=$idLigne")
 							."\"method=\"post\""
 							."\"value=\"add\""
 							."<table>\n".$strDebut.$total

@@ -180,7 +180,7 @@ function table_amap_getmodif_participation_contrat()
     $hiddens .= "\t<input type='hidden' name='idSortie' value='".$_GET['idSortie']."' />\n";
     $hiddens .= "\t<input type='hidden' name='ancienIdPersonne' value='".$_GET['idPersonne']."' />\n";
 
-	return generer_url_post_ecrire("amap_contrats", "table=spip_amap_participation_sortie", "action=maj")
+	return generer_url_ecrire("amap_contrats", "table=spip_amap_participation_sortie", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -253,7 +253,7 @@ function table_amap_get_participation_contrat($idSaison, $idProduit, $idSortie)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-	return generer_url_post_ecrire("amap_contrats", "table=spip_amap_participation_sortie", "action=add")
+	return generer_url_ecrire("amap_contrats", "table=spip_amap_participation_sortie", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

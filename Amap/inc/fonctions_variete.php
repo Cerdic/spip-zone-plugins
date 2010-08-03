@@ -151,7 +151,7 @@ function table_amap_getmodif_variete()
   $hiddens .= "\t<input type='hidden' name='ancIdVariete' value='".$_GET['idVariete']."' />\n";
   $hiddens .= "\t<input type='hidden' name='table' value='varietes' />\n";
 
-  return generer_url_post_ecrire("amap_paniers", "table=spip_amap_famille_variete", "action=maj")
+  return generer_url_ecrire("amap_paniers", "table=spip_amap_famille_variete", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -181,7 +181,7 @@ function table_amap_get_variete($idProduit, $idFamille)
     $hiddens .= "\t<input type='hidden' name='idFamille' value='".$idFamille."' />\n";
     $hiddens .= "\t<input type='hidden' name='table' value='varietes' />\n";
 
-	return generer_url_post_ecrire("amap_paniers", "table=spip_amap_famille_variete", "action=add")
+	return generer_url_ecrire("amap_paniers", "table=spip_amap_famille_variete", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin   if ( isset($idSaison) && isset($idDistrib) && isset($idProduit) )

@@ -248,7 +248,7 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idEvenement' value='".$idEvenement."' />\n";
 
-	return generer_url_post_ecrire("amap_distributions", "table=spip_amap_evenements", "action=modif")
+	return generer_url_ecrire("amap_distributions", "table=spip_amap_evenements", "action=modif")
                             ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -286,7 +286,7 @@ function table_amap_getAgendaUpdate_evenement_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
 
-	return generer_url_post_ecrire("amap_distributions", "action=agenda_update")
+	return generer_url_ecrire("amap_distributions", "table=spip_amap_evenements", "action=agenda_update")
                               ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))
@@ -308,7 +308,7 @@ function table_amap_get_evenement_distribution($idSaison)
   if (isset($idSaison))
   {
       $out .= "\t<tr bgcolor='#DBE1C5'>";
-      $out .= "\t\t<td>date (AAAA-MM-JJ): </td>\n";
+      $out .= "\t\t<td>date (JJ-MM-AAAA): </td>\n";
       $out .= "\t\t<td>\n";
       $out .= "\t\t\t<input name='dateEvenement' size='10' maxlength='10' /> \n";
       $out .= "\t\t</td>\n";
@@ -393,7 +393,7 @@ function table_amap_get_evenement_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
 
-	return generer_url_post_ecrire("amap_distributions", "action=add")
+	return generer_url_ecrire("amap_distributions", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))
