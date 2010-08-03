@@ -247,9 +247,9 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idEvenement' value='".$idEvenement."' />\n";
- 
-    return generer_url_entite('amap_distributions', "action=maj","post_ecrire")
-                             ."<table>\n".$out
+
+	return generer_url_post_ecrire("amap_distributions", "table=spip_amap_evenements", "action=modif")
+                            ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
 
@@ -285,9 +285,9 @@ function table_amap_getAgendaUpdate_evenement_distribution($idSaison)
     $out .= "\t</tr>";
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
- 
-    return generer_url_entite('amap_distributions', "action=agenda_update","post_ecrire")
-                             ."<table>\n".$out
+
+	return generer_url_post_ecrire("amap_distributions", "action=agenda_update")
+                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))
   else
@@ -392,8 +392,8 @@ function table_amap_get_evenement_distribution($idSaison)
       $out .= "\t</tr>\n";
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
- 
-    return generer_url_entite('amap_distributions', "action=add","post_ecrire")
+
+	return generer_url_post_ecrire("amap_distributions", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))
@@ -519,7 +519,7 @@ function table_amap_agenda_update_evenement_distribution()
       if ($_POST['idSaison']) { $description[]='id_saison'; $contenu[]="'".$_POST['idSaison']."'"; }
       if ($_POST['idLieu']) { $description[]='id_lieu'; $contenu[]="'".$_POST['idLieu']."'"; }
 
-      $sqlResult_3 = sql_insert('amap_evenements',
+      $sqlResult_3 = sql_insert('spip_amap_evenements',
                    "(" . join(', ', $description) . ")",
                    "(" . join(', ', $contenu) . ")");
     }

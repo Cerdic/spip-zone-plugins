@@ -126,8 +126,8 @@ function table_amap_getmodif_famille_variete()
   $hiddens .= "\t<input type='hidden' name='idProduit' value='".$_GET['idProduit']."' />\n";
   $hiddens .= "\t<input type='hidden' name='idFamille' value='".$_GET['idFamille']."' />\n";
   $hiddens .= "\t<input type='hidden' name='table' value='familles' />\n";
- 
-  return generer_url_entite('amap_paniers', "action=maj","post_ecrire")
+
+  return generer_url_post_ecrire("amap_paniers", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -156,7 +156,7 @@ function table_amap_get_famille_variete($idProduit)
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
     $hiddens .= "\t<input type='hidden' name='table' value='familles' />\n";
 
-    return generer_url_entite('amap_paniers', "action=add","post_ecrire")
+	return generer_url_post_ecrire("amap_paniers", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin   if ( isset($idSaison) && isset($idDistrib) && isset($idProduit) )
@@ -195,7 +195,7 @@ function table_amap_post_famille_variete()
   if ($_POST['labelFamille']) { $description[]='label_famille'; $contenu[]="'".$_POST['labelFamille']."'"; }
   if ($_POST['idProduit']) { $description[]='id_produit'; $contenu[]="'".$_POST['idProduit']."'"; }
 
-  $sqlResult = sql_insert('amap_famille_variete',
+  $sqlResult = sql_insert('spip_amap_famille_variete',
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 

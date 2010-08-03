@@ -203,7 +203,7 @@ function table_amap_getmodif_reglement_contrat()
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idCheque' value='".$_GET['idCheque']."' />\n";
 
-    return generer_url_entite('amap_contrats', "table=spip_amap_reglement&action=maj","post_ecrire")
+	return generer_url_post_ecrire("amap_contrats", "table=spip_amap_reglement", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -262,7 +262,7 @@ function table_amap_get_reglement_contrat($idSaison, $idProduit, $idContrat)
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$idContrat."' />\n";
 
-    return generer_url_entite('amap_contrats', "table=spip_amap_reglement&action=add","post_ecrire")
+	return generer_url_post_ecrire("amap_contrats", "table=spip_amap_reglements", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

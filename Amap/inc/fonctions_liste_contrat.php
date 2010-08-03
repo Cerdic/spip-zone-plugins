@@ -217,8 +217,8 @@ function table_amap_getmodif_liste_contrat()
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$_GET['idSaison']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$_GET['idProduit']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
- 
-    return generer_url_entite('amap_contrats', "action=maj","post_ecrire")
+
+	return generer_url_post_ecrire("amap_contrats", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -318,7 +318,7 @@ function table_amap_get_liste_contrat($idSaison, $idProduit)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    return generer_url_entite('amap_contrats', "action=add","post_ecrire")
+	return generer_url_post_ecrire("amap_contrats", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if ( ($idSaison!=0) && ($idProduit!=0) )
@@ -374,7 +374,7 @@ function table_amap_post_liste_contrat()
   if ($_POST['intPremierEnregContrat']) { $description[]='intPremierEnreg_contrat'; $contenu[]="'".$_POST['intPremierEnregContrat']."'"; }
   if ($_POST['nbDistribution']) { $description[]='nb_distribution'; $contenu[]="'".$_POST['nbDistribution']."'"; }
 
-  $sqlResult = sql_insert('amap_contrat',
+  $sqlResult = sql_insert('spip_amap_contrat',
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 

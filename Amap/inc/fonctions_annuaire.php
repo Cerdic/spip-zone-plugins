@@ -145,9 +145,8 @@ function table_amap_getmodif_annuaire()
   $hiddens .= "\t<input type='hidden' name='statut' value='".$_GET['statut']."' />\n";
   $hiddens .= "\t<input type='hidden' name='idPersonne' value='".$_GET['idPersonne']."' />\n";
 
-  return generer_url_entite("amap_annuaire"
-                           , "&action=maj","post_ecrire")
-                             ."<table>\n".$out
+  return generer_url_entite("amap_annuaire", "table=spip_amap_personne", "action=modif")
+                            ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
 } // function table_amap_getmodif_annuaire
@@ -209,8 +208,7 @@ function table_amap_get_annuaire($statut)
 
   $hiddens .= "\t<input type='hidden' name='statut' value='".$statut."' />\n";
 
-  return generer_url_entite("amap_annuaire"
-                           , "&action=add","post_ecrire")
+  return generer_url_entite("amap_annuaire", "table=spip_amap_personne", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -250,7 +248,7 @@ function table_amap_post_annuaire()
   if ($_POST['portable']) { $description[]='portable'; $contenu[]="'".$_POST['portable']."'"; }
   if ($_POST['adhesion']) { $description[]='adhesion'; $contenu[]="'".$_POST['adhesion']."'"; }
 
-  $sqlResult = sql_insert('amap_personne',
+  $sqlResult = sql_insert('spip_amap_personne',
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 

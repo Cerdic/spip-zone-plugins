@@ -141,7 +141,7 @@ function table_amap_getmodif_paysan()
  
     $hiddens .= "\t<input type='hidden' name='id_ligne' value='".$_GET['id_ligne']."' />\n";
 
-    return generer_url_entite('amap_config', "table=spip_amap_produit&action=maj","post_ecrire")
+	return generer_url_ecrire("amap_config", "table=spip_amap_produit", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin  while ($tabUnEnregistrement_1 = sql_fetch($sqlResult))
@@ -192,7 +192,7 @@ function table_amap_get_paysan()
   $out .= "\t\t</td>\n";
   $out .= "\t</tr>\n";
 
-  return generer_url_entite('amap_config', "table=spip_amap_produit&action=add","post_ecrire")
+  return generer_url_ecrire("amap_config", "table=spip_amap_produit", "action=add")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -229,7 +229,7 @@ function table_amap_post_paysan()
   if ($_POST['id_paysan']) { $description[]='id_paysan'; $contenu[]="'".$_POST['id_paysan']."'"; }
   if ($_POST['label_produit']) { $description[]='label_produit'; $contenu[]="'".$_POST['label_produit']."'"; }
 
-  $sqlResult = sql_insert('amap_produit',
+  $sqlResult = sql_insert('spip_amap_produit',
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 

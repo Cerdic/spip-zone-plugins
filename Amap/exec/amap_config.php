@@ -54,7 +54,7 @@ function exec_amap_config()
   // Affichage du sous-menu de configuration
   echo debut_cadre_relief("", true);
   echo "<b><div class='verdana2'>";
-  $res = icone_horizontale(_T('amap:saisons'), generer_url_ecrire("amap_config"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
+  $res = icone_horizontale(_T('amap:saisons'), generer_url_ecrire("amap_config", "table=spip_amap_saison"), _DIR_PLUGIN_AMAP."img_pack/page_accueil.png", _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
        .icone_horizontale(_T('amap:produits'), generer_url_ecrire("amap_config", "table=spip_amap_produit"),  _DIR_PLUGIN_AMAP."img_pack/options.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
        .icone_horizontale(_T('amap:banques'), generer_url_ecrire("amap_config", "table=spip_amap_banque"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
        .icone_horizontale(_T('amap:types_de_contrat'), generer_url_ecrire("amap_config", "table=spip_amap_type_contrat"),  _DIR_PLUGIN_AMAP."img_pack/themes.png",  _DIR_PLUGIN_AMAP."img_pack/rien.gif", false)
