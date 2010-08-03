@@ -1,3 +1,8 @@
-<div class="ajax">
+[(#CONFIG{accepter_inscriptions}|=={oui}|oui)<div class="ajax">
 #FORMULAIRE_CFG_RUBRIQUE_A_LINSCRIPTION
 </div>
+]
+[(#CONFIG{accepter_inscription}|=={oui}|non)
+<p><:rubrique_a_linscription:accepter_inscription:>
+
+]

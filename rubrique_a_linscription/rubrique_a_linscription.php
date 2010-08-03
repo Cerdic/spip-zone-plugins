@@ -1,8 +1,21 @@
 <?php
-
-function rubrique_a_linscription_formulaire_traiter($flux){
-	if ($flux['args']['form']=='inscription' and $flux['args']['args'][0]=='0minirezo'){
+/*charger*/
+function rubrique_a_linscription_formulaire_charger($flux){
+	
+	if ($flux['args']['form']=='inscription' and lire_config('accepter_inscriptions')=='oui'){
 		
+		$meta = unserialize(lire_meta('rubrique_a_linscription'));
+		$flux['args']['args'][0] = $meta['statut'];
+		$flux['data']['_commentaire'] = _T('rubrique_a_linscription:rubrique_reserve_'.$meta['statut'].'_'.$meta['espace_prive_voir']);
+		
+	}
+	return $flux;
+}
+
+/* Traiter */
+function rubrique_a_linscription_formulaire_traiter($flux){
+	if ($flux['args']['form']=='inscription'){
+
 		// Récuperation des paramètres
 		$mail = _request('mail_inscription');
 		$nom_inscription = str_replace('@',' (chez) ',_request('nom_inscription'));
@@ -11,6 +24,9 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		
 		include_spip('inc/meta');
 		$meta = unserialize(lire_meta('rubrique_a_linscription'));
+		//Modification du statut temporaire
+		sql_updateq('spip_auteurs',array('bio'=>$meta['statut']),'id_auteur='.$id_auteur); 
+
 		
 		// Création de la rubrique
 		if (!$meta['id_parent'] or $meta['id_parent']==0){
@@ -29,6 +45,15 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		
 		//On ajoute la rubrique chez l'auteur
 		sql_update('spip_auteurs',array('rubrique_a_linscription'=>$id_rubrique),"id_auteur=$id_auteur");
+		
+		//Création du mot clef associé
+		if($meta['groupe_mots']){
+			$type   = sql_getfetsel('titre','spip_groupes_mots','id_groupe='.$meta['groupe_mots']);
+			if ($type){
+				$id_mot = sql_insertq('spip_mots',array('id_groupe'=>$meta['groupe_mots'],'type'=>$type,'titre'=>_T('rubrique_a_linscription:mot_clef_de',array('nom'=>$nom_inscription))));
+				spip_log("Création du mot clef dans le groupe $type pour l'auteur $nom_inscription (id mot = $id_mot)",'rubrique_a_linscription');
+			}
+		}
 		
 		//Envoyer mails
 		
