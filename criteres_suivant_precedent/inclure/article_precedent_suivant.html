@@ -1,0 +1,16 @@
+
+<BOUCLE_article_precedent(ARTICLES) {precedent}{!par date}
+	{id_rubrique?}
+	{id_mot?}
+	{id_auteur?}
+	{id_groupe?}>
+	[<a href="#URL_ARTICLE" rel="prev" title="[(#TITRE|couper{20}|attribut_html)]">(#CHEMIN{images/precedent.png}|image_reduire{20,20})</a>]
+</BOUCLE_article_precedent>
+<BOUCLE_article_suivant(ARTICLES) {suivant}{!par date}
+	{id_rubrique?}
+	{id_mot?}
+	{id_auteur?}
+	{id_groupe?}>
+		[<a href="#URL_ARTICLE" rel="next" title="[(#TITRE|couper{20}|attribut_html)]">(#CHEMIN{images/suivant.png}|image_reduire{20,20})</a>]
+</BOUCLE_article_suivant>
+
