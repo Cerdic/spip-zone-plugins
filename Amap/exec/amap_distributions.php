@@ -26,6 +26,7 @@ include(_DIR_PLUGIN_AMAP."/inc/fonctions_choix.php");
 function exec_amap_distributions()
 {
 
+  global $page, $table;
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right, $changer_config, $spip_display;
   global $intPremierEnreg, $visiteurs, $connect_id_auteur, $table_prefix;
 
@@ -92,26 +93,24 @@ if ($table == 'spip_amap_vacance') { // Page vacances
         case "maj" :
           // la page est arrivée en POST avec action=maj
           //  ==> Demande Enregistrement des valeurs.
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_modif_post_vacance_distribution()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_vacance_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "add" :
           // la page est arrivée en POST sans action ou autre
           //  ==> Demande Insertion des valeurs.
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_post_vacance_distribution()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_post_vacance_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_POST['action'])
         echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-      echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "vacances", "amap_distributions");
+      echo table_amap_lister_choix_saison($_REQUEST['idSaison']);
       echo fin_cadre_trait_couleur(true);
 
         echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-      echo table_amap_lister_choix_produit($_REQUEST['idSaison'], $_POST['idProduit'], "vacances", "amap_distributions");
+      echo table_amap_lister_choix_produit($_REQUEST['idSaison'], $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -131,8 +130,7 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           // avec action=maj
           //  ==> Affichage formulaire de modification
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_resp_distribution'));
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_getmodif_vacance_distribution()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_vacance_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "suppr" :
@@ -145,11 +143,11 @@ if ($table == 'spip_amap_vacance') { // Page vacances
 
           //  ==> Affichage de la liste
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "vacances", "amap_distributions");
+          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], $table, "amap_distributions");
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit($_REQUEST['idSaison'], $_GET['idProduit'], "vacances", "amap_distributions");
+          echo table_amap_lister_choix_produit($_REQUEST['idSaison'], $_GET['idProduit'], $table, "amap_distributions");
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -164,11 +162,11 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           // sans action ou autre
           //  ==> Affichage de la liste
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "vacances", "amap_distributions");
+          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], $table, "amap_distributions");
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit($_REQUEST['idSaison'], $_GET['idProduit'], "vacances", "amap_distributions");
+          echo table_amap_lister_choix_produit($_REQUEST['idSaison'], $_GET['idProduit'], $table, "amap_distributions");
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -176,7 +174,7 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2.$_REQUEST['idSaison']);
-          echo table_amap_get_vacance_distribution($_REQUEST['idSaison'], $_GET['idProduit']);
+          echo table_amap_get_vacance_distribution($table, $page, $_REQUEST['idSaison'], $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_GET['action'])
@@ -198,22 +196,20 @@ if ($table == 'spip_amap_vacance') { // Page vacances
         case "maj" :
           // la page est arrivée en POST avec action=maj
           //  ==> Demande Enregistrement des valeurs.
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_modif_post_produit_distribution()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_produit_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "add" :
           // la page est arrivée en POST sans action ou autre
           //  ==> Demande Insertion des valeurs.
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_post_produit_distribution()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_post_produit_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_POST['action'])
         echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-      echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "produits", "amap_distributions");
+      echo table_amap_lister_choix_saison($_REQUEST['idSaison'], $table, "amap_distributions");
       echo fin_cadre_trait_couleur(true);
 
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -233,21 +229,19 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           // avec action=maj
           //  ==> Affichage formulaire de modification
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", "modification de la table spip_amap_produit_distribution");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_getmodif_produit_distribution()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_produit_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_produit_distribution'));
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_suppr_produit_distribution()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_suppr_produit_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
 
           //  ==> Affichage de la liste
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "produits", "amap_distributions");
+          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], $table, "amap_distributions");
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -262,7 +256,7 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           // sans action ou autre
           //  ==> Affichage de la liste
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "produits", "amap_distributions");
+          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], $table, "amap_distributions");
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -293,9 +287,8 @@ if ($table == 'spip_amap_vacance') { // Page vacances
         case "maj" :
           // la page est arrivée en POST avec action=maj
           //  ==> Demande Enregistrement des valeurs.
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_modif_post_evenement_distribution()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_evenement_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "add" :
@@ -303,26 +296,24 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           //  ==> Demande Insertion des valeurs.
           if ($_POST['dateEvenement'])
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_add_post_evenement_distribution()."</div>";
+			echo debut_cadre_trait_couleur("", true, "", "");
+            echo "<div class='verdana2' style='text-align: justify'>".table_amap_add_post_evenement_distribution()."</div>";
             echo fin_cadre_trait_couleur(true);
           }
           else
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
+			echo debut_cadre_trait_couleur("", true, "", "");
             echo "<div class='verdana2' style='text-align: justify'>";
-		echo _T('amap:label_date');
-	    echo "</div>";
+				echo _T('amap:label_date');
+				echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
         case "agenda_update" :
           // la page est arrivée en POST sans action ou autre
           //  ==> Demande Insertion des valeurs.
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_agenda_update_evenement_distribution()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_agenda_update_evenement_distribution()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_POST['action'])
@@ -351,21 +342,19 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           // avec action=maj
           //  ==> Affichage formulaire de modification
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_evenements'));
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_getmodif_evenement_distribution($_REQUEST['idSaison'],$_GET['idEvenement'])."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_evenement_distribution($_REQUEST['idSaison'],$_GET['idEvenement'])."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:suppression_table_amap_evenements'));
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_suppr_evenement_distribution($_REQUEST['idSaison'],$_GET['idEvenement'])."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_suppr_evenement_distribution($_REQUEST['idSaison'],$_GET['idEvenement'])."</div>";
           echo fin_cadre_trait_couleur(true);
 
           //  ==> Affichage de la liste
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "", "amap_distributions");
+          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], $table, "amap_distributions");
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -384,7 +373,7 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           // sans action ou autre
           //  ==> Affichage de la liste
             echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_REQUEST['idSaison'], "", "amap_distributions");
+          echo table_amap_lister_choix_saison($page, $table, $_REQUEST['idSaison']);
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_REQUEST['idSaison']);
@@ -392,11 +381,11 @@ if ($table == 'spip_amap_vacance') { // Page vacances
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_3.$_REQUEST['idSaison']);
-          echo table_amap_getAgendaUpdate_evenement_distribution($_REQUEST['idSaison']);
+          echo table_amap_getAgendaUpdate_evenement_distribution($page, $table, $_REQUEST['idSaison']);
           echo fin_cadre_trait_couleur(true);
 
             echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_4.$_REQUEST['idSaison']);
-          echo table_amap_get_evenement_distribution($_REQUEST['idSaison']);
+          echo table_amap_get_evenement_distribution($page, $table, $_REQUEST['idSaison']);
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_GET['action'])

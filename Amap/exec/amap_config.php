@@ -23,6 +23,7 @@ include(_DIR_PLUGIN_AMAP."/inc/fonctions_paysan.php");
 function exec_amap_config()
 {
 
+  global $page, $table;
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right, $changer_config, $spip_display;
   global $debut, $visiteurs, $connect_id_auteur, $table_prefix;
 

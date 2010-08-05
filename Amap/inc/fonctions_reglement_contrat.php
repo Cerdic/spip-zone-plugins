@@ -125,7 +125,7 @@ function table_amap_lister_reglement_contrat($idSaison, $idProduit, $idContrat)
 //=========================================================================
 //=========================================================================
 //
-function table_amap_getmodif_reglement_contrat()
+function table_amap_getmodif_reglement_contrat($page, $table)
 {
   $out = '';
   $hiddens = '';
@@ -203,7 +203,7 @@ function table_amap_getmodif_reglement_contrat()
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$_GET['idContrat']."' />\n";
     $hiddens .= "\t<input type='hidden' name='idCheque' value='".$_GET['idCheque']."' />\n";
 
-	return generer_url_ecrire("amap_contrats", "table=spip_amap_reglement", "action=maj")
+	return generer_url_ecrire("$page", "table=$table", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -214,7 +214,7 @@ function table_amap_getmodif_reglement_contrat()
 //=========================================================================
 //=========================================================================
 //
-function table_amap_get_reglement_contrat($idSaison, $idProduit, $idContrat)
+function table_amap_get_reglement_contrat($page, $table, $idSaison, $idProduit, $idContrat)
 {
   $out = '';
   $hiddens = '';
@@ -262,7 +262,7 @@ function table_amap_get_reglement_contrat($idSaison, $idProduit, $idContrat)
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
     $hiddens .= "\t<input type='hidden' name='idContrat' value='".$idContrat."' />\n";
 
-	return generer_url_ecrire("amap_contrats", "table=spip_amap_reglements", "action=add")
+	return generer_url_ecrire("$page", "table=$table", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 

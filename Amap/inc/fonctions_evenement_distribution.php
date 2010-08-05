@@ -131,7 +131,7 @@ function table_amap_lister_evenement_distribution($idSaison)
 //=========================================================================
 //=========================================================================
 //
-function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
+function table_amap_getmodif_evenement_distribution($page, $table, $idSaison, $idEvenement)
 {
   $out = '';
   $hiddens = '';
@@ -248,7 +248,7 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $hiddens .= "\t<input type='hidden' name='idEvenement' value='".$idEvenement."' />\n";
 
-	return generer_url_ecrire("amap_distributions", "table=spip_amap_evenements", "action=modif")
+	return generer_url_ecrire("$page", "table=$table", "action=modif")
                             ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   }
@@ -259,7 +259,7 @@ function table_amap_getmodif_evenement_distribution($idSaison, $idEvenement)
 //=========================================================================
 //=========================================================================
 //
-function table_amap_getAgendaUpdate_evenement_distribution($idSaison)
+function table_amap_getAgendaUpdate_evenement_distribution($page, $table, $idSaison)
 {
   $out = '';
   $hiddens = '';
@@ -286,7 +286,7 @@ function table_amap_getAgendaUpdate_evenement_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
 
-	return generer_url_ecrire("amap_distributions", "table=spip_amap_evenements", "action=agenda_update")
+	return generer_url_ecrire("$page", "table=$table", "action=agenda_update")
                               ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))
@@ -300,7 +300,7 @@ function table_amap_getAgendaUpdate_evenement_distribution($idSaison)
 //=========================================================================
 //=========================================================================
 //
-function table_amap_get_evenement_distribution($idSaison)
+function table_amap_get_evenement_distribution($page, $table, $idSaison)
 {
   $out = '';
   $hiddens = '';
@@ -393,7 +393,7 @@ function table_amap_get_evenement_distribution($idSaison)
 
     $hiddens .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
 
-	return generer_url_ecrire("amap_distributions", "action=add")
+	return generer_url_ecrire("$page", "table=$table", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin if (isset($idSaison))
@@ -465,7 +465,7 @@ function table_amap_add_post_evenement_distribution()
     if ($_POST['idPersonne2']) { $description[]='id_personne2'; $contenu[]="'".$_POST['idPersonne2']."'"; }
     if ($_POST['idPersonne3']) { $description[]='id_personne3'; $contenu[]="'".$_POST['idPersonne3']."'"; }
 
-    $sqlResult = sql_insert('amap_evenements',
+    $sqlResult = sql_insert('spip_amap_evenements',
                  "(" . join(', ', $description) . ")",
                  "(" . join(', ', $contenu) . ")");
 

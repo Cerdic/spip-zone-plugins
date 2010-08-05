@@ -35,9 +35,9 @@ function table_amap_lister_choix_saison($idSaison, $table, $page)
   } // fin while
   $out .= "\t</select>\n";
 
-  $res = generer_url_entite($page, "table=".$table."&action=saison","post_ecrire")
-         .$out
-         ."<input type='submit'/></form>";
+  $res = generer_url_ecrire("$page", "table=$table", "action=saison")
+							.$out
+							."<input type='submit'/>";
 
   return $res;
 
@@ -71,7 +71,7 @@ function table_amap_lister_choix_produit($idSaison, $idProduit, $table, $page)
 
     $out .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
 
-    $res = generer_url_entite($page, "table=".$table."&action=produit","post_ecrire")
+    $res = generer_url_entite("$page", "table=$table", "action=produit")
            .$out
            ."<input type='submit'/></form>";
   }
@@ -115,7 +115,7 @@ function table_amap_lister_choix_distribution($idSaison, $idProduit, $idDistrib,
     $out .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $out .= "\t<input type='hidden' name='idProduit' value='".$_POST['idProduit']."' />\n";
 
-    $res = generer_url_entite($page, "table=".$table."&action=distribution","post_ecrire")
+    $res = generer_url_entite("$page", "table=$table", "action=distribution")
          .$out
            ."<input type='submit'/></form>";
   }
@@ -161,7 +161,7 @@ function table_amap_lister_choix_contrat($idSaison, $idProduit, $idContrat, $tab
     $out .= "\t<input type='hidden' name='idSaison' value='".$idSaison."' />\n";
     $out .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    $res = generer_url_entite($page, "table=".$table."&action=contrat","post_ecrire")
+    $res = generer_url_entite("$page", "table=$table", "action=contrat")
            .$out
            ."<input type='submit'/></form>";
   }
@@ -203,7 +203,7 @@ function table_amap_lister_choix_famille($idProduit, $idFamille, $table, $page)
 
     $out .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
 
-    $res = generer_url_entite($page, "table=".$table."&action=famille","post_ecrire")
+    $res = generer_url_entite("$page", "table=$table", "action=famille")
            .$out
            ."<input type='submit'/></form>";
   }
@@ -241,7 +241,7 @@ function table_amap_lister_choix_statut($statut, $table, $page)
 
   $out .= "\t</select>\n";
   
-  $res = generer_url_entite($page, "table=".$table."&action=statut","post_ecrire")
+  $res = generer_url_entite("$page", "table=$table", "action=statut")
          .$out
          ."<input type='submit'/></form>";
   

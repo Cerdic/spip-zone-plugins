@@ -25,6 +25,7 @@ include(_DIR_PLUGIN_AMAP."/inc/fonctions_choix.php");
 function exec_amap_annuaire()
 {
 
+  global $page, $table;
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right, $changer_config, $spip_display;
   global $intPremierEnreg, $visiteurs, $connect_id_auteur, $table_prefix;
 
@@ -81,29 +82,27 @@ function exec_amap_annuaire()
         // la page est arrivée en POST avec action=maj
         //  ==> Demande Enregistrement des valeurs.
         echo debut_cadre_trait_couleur("", true, "", "");
-        echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_modif_post_annuaire()."</div>";
+        echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_annuaire()."</div>";
         echo fin_cadre_trait_couleur(true);
         break;
       case "add" :
         // la page est arrivée en POST sans action ou autre
         //  ==> Demande Insertion des valeurs.
         echo debut_cadre_trait_couleur("", true, "", "");
-        echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_post_annuaire()."</div>";
+        echo "<div class='verdana2' style='text-align: justify'>".table_amap_post_annuaire()."</div>";
         echo fin_cadre_trait_couleur(true);
         break;
     } // switch ($_POST['action'])
     echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_statut'));
-    echo table_amap_lister_choix_statut($_POST['statut'], "", "amap_annuaire");
+    echo table_amap_lister_choix_statut($table, $page, $_POST['statut']);
     echo fin_cadre_trait_couleur(true);
 
     echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_POST['statut']);
-    echo table_amap_lister_annuaire($_POST['statut']);
+    echo table_amap_lister_annuaire($table, $page, $_POST['statut']);
     echo fin_cadre_trait_couleur(true);
 
     echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
-    echo table_amap_get_annuaire($_POST['statut']);
+    echo table_amap_get_annuaire($table, $page, $_POST['statut']);
     echo fin_cadre_trait_couleur(true);
   }  // if ($_SERVER['REQUEST_METHOD'] == 'POST')
   else
@@ -115,44 +114,42 @@ function exec_amap_annuaire()
         // avec action=maj
         //  ==> Affichage formulaire de modification
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_personne'));
-        echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_getmodif_annuaire()."</div>";
+        echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_annuaire()."</div>";
         echo fin_cadre_trait_couleur(true);
         break;
       case "suppr" :
         // avec action=maj
         //  ==> Affichage formulaire de modification
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:suppression_table_amap_personne'));
-        echo "<div class='verdana2' style='text-align: justify'>"
-             .table_amap_suppr_annuaire()."</div>";
+        echo "<div class='verdana2' style='text-align: justify'>".table_amap_suppr_annuaire()."</div>";
         echo fin_cadre_trait_couleur(true);
 
         //  ==> Affichage de la liste
         echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_statut'));
-        echo table_amap_lister_choix_statut($_GET['statut'], "", "amap_annuaire");
+        echo table_amap_lister_choix_statut($table, $page, $_GET['statut']);
         echo fin_cadre_trait_couleur(true);
 
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_GET['statut']);
-        echo table_amap_lister_annuaire($_GET['statut']);
+        echo table_amap_lister_annuaire($table, $page, $_GET['statut']);
         echo fin_cadre_trait_couleur(true);
 
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
-        echo table_amap_get_annuaire($_GET['statut']);
+        echo table_amap_get_annuaire($table, $page, $_GET['statut']);
         echo fin_cadre_trait_couleur(true);
         break;
       default :
         // sans action ou autre
         //  ==> Affichage de la liste
         echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_statut'));
-        echo table_amap_lister_choix_statut($_GET['statut'], "", "amap_annuaire");
+        echo table_amap_lister_choix_statut($table, $page, $_GET['statut']);
         echo fin_cadre_trait_couleur(true);
 
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1);
-        echo table_amap_lister_annuaire($_GET['statut']);
+        echo table_amap_lister_annuaire($table, $page, $_GET['statut']);
         echo fin_cadre_trait_couleur(true);
 
         echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
-        echo table_amap_get_annuaire($_GET['statut']);
+        echo table_amap_get_annuaire($page, $table, $_GET['statut']);
         echo fin_cadre_trait_couleur(true);
         break;
     } // switch ($_GET['action'])

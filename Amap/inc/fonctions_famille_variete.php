@@ -71,7 +71,7 @@ function table_amap_lister_famille_variete($idProduit)
 //=========================================================================
 //=========================================================================
 //
-function table_amap_getmodif_famille_variete()
+function table_amap_getmodif_famille_variete($page, $table)
 {
   $out = '';
   $hiddens = '';
@@ -127,7 +127,7 @@ function table_amap_getmodif_famille_variete()
   $hiddens .= "\t<input type='hidden' name='idFamille' value='".$_GET['idFamille']."' />\n";
   $hiddens .= "\t<input type='hidden' name='table' value='familles' />\n";
 
-  return generer_url_ecrire("amap_paniers", "action=maj")
+  return generer_url_ecrire("$page", "table=$table", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
@@ -137,7 +137,7 @@ function table_amap_getmodif_famille_variete()
 //=========================================================================
 //=========================================================================
 //
-function table_amap_get_famille_variete($idProduit)
+function table_amap_get_famille_variete($page, $table, $idProduit)
 {
   $out = '';
   $hiddens = '';
@@ -156,7 +156,7 @@ function table_amap_get_famille_variete($idProduit)
     $hiddens .= "\t<input type='hidden' name='idProduit' value='".$idProduit."' />\n";
     $hiddens .= "\t<input type='hidden' name='table' value='familles' />\n";
 
-	return generer_url_ecrire("amap_paniers", "action=add")
+	return generer_url_ecrire("$page", "table=$table", "action=add")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin   if ( isset($idSaison) && isset($idDistrib) && isset($idProduit) )

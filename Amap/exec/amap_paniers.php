@@ -26,6 +26,7 @@ include(_DIR_PLUGIN_AMAP."/inc/fonctions_variete.php");
 function exec_amap_paniers()
 {
 
+  global $page, $table;
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right, $changer_config, $spip_display;
   global $intPremierEnreg, $visiteurs, $connect_id_auteur, $table_prefix;
 
@@ -93,17 +94,16 @@ function exec_amap_paniers()
           //  ==> Demande Enregistrement des valeurs.
           if ($_POST['labelFamille'])
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_modif_post_famille_variete()."</div>";
+			echo debut_cadre_trait_couleur("", true, "", "");
+            echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_famille_variete()."</div>";
             echo fin_cadre_trait_couleur(true);
           }
           else
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
+			echo debut_cadre_trait_couleur("", true, "", "");
             echo "<div class='verdana2' style='text-align: justify'>";
-		echo _T('amap:label_famille');
-	    echo "</div>";
+				echo _T('amap:label_famille');
+				echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -112,31 +112,30 @@ function exec_amap_paniers()
           //  ==> Demande Insertion des valeurs.
           if ($_POST['labelFamille'])
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_post_famille_variete()."</div>";
+			echo debut_cadre_trait_couleur("", true, "", "");
+            echo "<div class='verdana2' style='text-align: justify'>".table_amap_post_famille_variete()."</div>";
             echo fin_cadre_trait_couleur(true);
           }
           else
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
+			echo debut_cadre_trait_couleur("", true, "", "");
             echo "<div class='verdana2' style='text-align: justify'>";
-		echo _T('amap:label_famille');
-	    echo "</div>";
+				echo _T('amap:label_famille');
+				echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }          
           break;
       } // switch ($_POST['action'])
           echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-      echo table_amap_lister_choix_produit(1, $_POST['idProduit'], "familles", "amap_paniers");
+      echo table_amap_lister_choix_produit(1, $page, $table, $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_POST['idProduit']);
-      echo table_amap_lister_famille_variete($_POST['idProduit']);
+      echo table_amap_lister_famille_variete($page, $table, $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2.$_POST['idProduit']);
-      echo table_amap_get_famille_variete($_POST['idProduit']);
+      echo table_amap_get_famille_variete($page, $table, $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
     }  // if ($_SERVER['REQUEST_METHOD'] == 'POST')
     else
@@ -148,44 +147,42 @@ function exec_amap_paniers()
           // avec action=maj
           //  ==> Affichage formulaire de modification
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_famille_variete'));
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_getmodif_famille_variete()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_famille_variete()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_suppr_famille_variete()."</div>";
+				echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>" .table_amap_suppr_famille_variete()."</div>";
           echo fin_cadre_trait_couleur(true);
 
           //  ==> Affichage de la liste
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit(1, $_GET['idProduit'], "familles", "amap_paniers");
+          echo table_amap_lister_choix_produit(1, $page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_GET['idProduit']);
-          echo table_amap_lister_famille_variete($_GET['idProduit']);
+          echo table_amap_lister_famille_variete($page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2.$_GET['idProduit']);
-          echo table_amap_get_famille_variete($_GET['idProduit']);
+          echo table_amap_get_famille_variete($page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
           break;
         default :
           // sans action ou autre
           //  ==> Affichage de la liste
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit(1, $_GET['idProduit'], "familles", "amap_paniers");
+          echo table_amap_lister_choix_produit(1, $page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_GET['idProduit']);
-          echo table_amap_lister_famille_variete($_GET['idProduit']);
+          echo table_amap_lister_famille_variete($page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2.$_GET['idProduit']);
-          echo table_amap_get_famille_variete($_GET['idProduit']);
+          echo table_amap_get_famille_variete($page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_GET['action'])
@@ -209,17 +206,16 @@ function exec_amap_paniers()
           //  ==> Demande Enregistrement des valeurs.
           if ($_POST['labelVariete'])
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_modif_post_variete()."</div>";
+			echo debut_cadre_trait_couleur("", true, "", "");
+            echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_variete()."</div>";
             echo fin_cadre_trait_couleur(true);
           }
           else
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
+			echo debut_cadre_trait_couleur("", true, "", "");
             echo "<div class='verdana2' style='text-align: justify'>";
-		echo _T('amap:label_variete');
-	    echo "</div>";
+				echo _T('amap:label_variete');
+				echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
@@ -228,35 +224,34 @@ function exec_amap_paniers()
           //  ==> Demande Insertion des valeurs.
           if ($_POST['labelVariete'])
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_post_variete()."</div>";
+			echo debut_cadre_trait_couleur("", true, "", "");
+            echo "<div class='verdana2' style='text-align: justify'>".table_amap_post_variete()."</div>";
             echo fin_cadre_trait_couleur(true);
           }
           else
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
+			echo debut_cadre_trait_couleur("", true, "", "");
             echo "<div class='verdana2' style='text-align: justify'>";
-		echo _T('amap:label_variete');
-	    echo "</div>";
+				echo _T('amap:label_variete');
+				echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
       } // switch ($_POST['action'])
           echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-      echo table_amap_lister_choix_produit(1, $_POST['idProduit'], "varietes", "amap_paniers");
+      echo table_amap_lister_choix_produit(1, $page, $table, $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur("", true, "", "Choix de la famille");
-      echo table_amap_lister_choix_famille($_POST['idProduit'], $_POST['idFamille'], "varietes", "amap_paniers");
+      echo table_amap_lister_choix_famille($page, $table, $_POST['idProduit'], $_POST['idFamille'], "varietes", "amap_paniers");
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_POST['idProduit']);
-      echo table_amap_lister_variete($_POST['idProduit'], $_POST['idFamille']);
+      echo table_amap_lister_variete($page, $table, $_POST['idProduit'], $_POST['idFamille']);
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2.$_POST['idProduit']);
-      echo table_amap_get_variete($_POST['idProduit'], $_POST['idFamille']);
+      echo table_amap_get_variete($page, $table, $_POST['idProduit'], $_POST['idFamille']);
       echo fin_cadre_trait_couleur(true);
     }  // if ($_SERVER['REQUEST_METHOD'] == 'POST')
     else
@@ -268,52 +263,50 @@ function exec_amap_paniers()
           // avec action=maj
           //  ==> Affichage formulaire de modification
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_variete'));
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_getmodif_variete()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_variete()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_suppr_variete()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_suppr_variete()."</div>";
           echo fin_cadre_trait_couleur(true);
 
           //  ==> Affichage de la liste
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit(1, $_GET['idProduit'], "varietes", "amap_paniers");
+          echo table_amap_lister_choix_produit(1, $page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur("", true, "", "Choix de la famille");
-          echo table_amap_lister_choix_famille($_GET['idProduit'], $_GET['idFamille'], "varietes", "amap_paniers");
+          echo table_amap_lister_choix_famille($page, $table, $_GET['idProduit'], $_GET['idFamille'], "varietes", "amap_paniers");
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_GET['idProduit']);
-          echo table_amap_lister_variete($_GET['idProduit'], $_GET['idFamille']);
+          echo table_amap_lister_variete($page, $table, $_GET['idProduit'], $_GET['idFamille']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2.$_GET['idProduit']);
-          echo table_amap_get_variete($_GET['idProduit'], $_GET['idFamille']);
+          echo table_amap_get_variete($page, $table, $_GET['idProduit'], $_GET['idFamille']);
           echo fin_cadre_trait_couleur(true);
           break;
         default :
           // sans action ou autre
           //  ==> Affichage de la liste
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit(1, $_GET['idProduit'], "varietes", "amap_paniers");
+          echo table_amap_lister_choix_produit(1, $page, $table, $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur("", true, "", "Choix de la famille");
-          echo table_amap_lister_choix_famille($_GET['idProduit'], $_GET['idFamille'], "varietes", "amap_paniers");
+          echo table_amap_lister_choix_famille($page, $table, $_GET['idProduit'], $_GET['idFamille']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1.$_GET['idProduit']);
-          echo table_amap_lister_variete($_GET['idProduit'], $_GET['idFamille']);
+          echo table_amap_lister_variete($page, $table, $_GET['idProduit'], $_GET['idFamille']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2.$_GET['idProduit']);
-          echo table_amap_get_variete($_GET['idProduit'], $_GET['idFamille']);
+          echo table_amap_get_variete($page, $table, $_GET['idProduit'], $_GET['idFamille']);
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_GET['action'])
@@ -335,9 +328,8 @@ function exec_amap_paniers()
         case "maj" :
           // la page est arrivée en POST avec action=maj
           //  ==> Demande Enregistrement des valeurs.
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_modif_post_panier()."</div>";
+		echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_modif_post_panier()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "add" :
@@ -345,44 +337,43 @@ function exec_amap_paniers()
           //  ==> Demande Insertion des valeurs.
           if ( ($_POST['quantite'] <> '') || ($_POST['poids'] <> '') )
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
-            echo "<div class='verdana2' style='text-align: justify'>"
-                 .table_amap_post_panier()."</div>";
+			echo debut_cadre_trait_couleur("", true, "", "");
+            echo "<div class='verdana2' style='text-align: justify'>".table_amap_post_panier()."</div>";
             echo fin_cadre_trait_couleur(true);
             $_POST['quantite'] = '';
             $_POST['poids'] = '';
           }
           else
           {
-    echo debut_cadre_trait_couleur("", true, "", "");
+			echo debut_cadre_trait_couleur("", true, "", "");
             echo "<div class='verdana2' style='text-align: justify'>";
-		echo _T('amap:label_quantite');
-	    echo "</div>";
+				echo _T('amap:label_quantite');
+				echo "</div>";
             echo fin_cadre_trait_couleur(true);
           }
           break;
       } // switch ($_POST['action'])
           echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-      echo table_amap_lister_choix_saison($_POST['idSaison'], "", "amap_paniers");
+      echo table_amap_lister_choix_saison($page, $table, $_POST['idSaison']);
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-      echo table_amap_lister_choix_produit($_POST['idSaison'], $_POST['idProduit'], "", "amap_paniers");
+      echo table_amap_lister_choix_produit($page, $table, $_POST['idSaison'], $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_distribution'));
-      echo table_amap_lister_choix_distribution($_POST['idSaison'], $_POST['idProduit'], $_POST['idDistrib'], "", "amap_paniers");
+      echo table_amap_lister_choix_distribution($page, $table, $_POST['idSaison'], $_POST['idProduit'], $_POST['idDistrib'], "", "amap_paniers");
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
 										._T('amap:choix_contrat_saison').$_POST['idSaison']
 										._T('amap:choix_contrat_distribution').$_POST['idDistrib']
 										._T('amap:choix_contrat_produit2').$_POST['idProduit']);
-      echo table_amap_lister_panier($_POST['idSaison'], $_POST['idDistrib'], $_POST['idProduit']);
+      echo table_amap_lister_panier($page, $table, $_POST['idSaison'], $_POST['idDistrib'], $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
 
           echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
-      echo table_amap_get_panier($_POST['idSaison'], $_POST['idDistrib'], $_POST['idProduit']);
+      echo table_amap_get_panier($page, $table, $_POST['idSaison'], $_POST['idDistrib'], $_POST['idProduit']);
       echo fin_cadre_trait_couleur(true);
     }  // if ($_SERVER['REQUEST_METHOD'] == 'POST')
     else
@@ -394,66 +385,64 @@ function exec_amap_paniers()
           // avec action=maj
           //  ==> Affichage formulaire de modification
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", _T('amap:modification_table_amap_panier'));
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_getmodif_panier()."</div>";
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_getmodif_panier()."</div>";
           echo fin_cadre_trait_couleur(true);
           break;
         case "suppr" :
           // avec action=maj
           //  ==> Affichage formulaire de modification
-  echo debut_cadre_trait_couleur("", true, "", "");
-          echo "<div class='verdana2' style='text-align: justify'>"
-               .table_amap_suppr_panier()."</div>";
+			echo debut_cadre_trait_couleur("", true, "", "");
+          echo "<div class='verdana2' style='text-align: justify'>".table_amap_suppr_panier()."</div>";
           echo fin_cadre_trait_couleur(true);
 
           //  ==> Affichage de la liste
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_GET['idSaison'], "", "amap_paniers");
+          echo table_amap_lister_choix_saison($page, $table, $_GET['idSaison']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit($_GET['idSaison'], $_GET['idProduit'], "", "amap_paniers");
+          echo table_amap_lister_choix_produit($page, $table, $_GET['idSaison'], $_GET['idProduit'], "", "amap_paniers");
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_distribution'));
-          echo table_amap_lister_choix_distribution($_GET['idSaison'], $_GET['idProduit'], $_GET['idDistrib'], "", "amap_paniers");
+          echo table_amap_lister_choix_distribution($page, $table, $_GET['idSaison'], $_GET['idProduit'], $_GET['idDistrib'], "", "amap_paniers");
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
 										._T('amap:choix_contrat_saison').$_GET['idSaison']
 										._T('amap:choix_contrat_distribution').$_GET['idDistrib']
 										._T('amap:choix_contrat_produit2').$_GET['idProduit']);
-          echo table_amap_lister_panier($_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
+          echo table_amap_lister_panier($page, $table, $_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
-          echo table_amap_get_panier($_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
+          echo table_amap_get_panier($page, $table, $_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
           break;
         default :
           // sans action ou autre
           //  ==> Affichage de la liste
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_saison'));
-          echo table_amap_lister_choix_saison($_GET['idSaison'], "", "amap_paniers");
+          echo table_amap_lister_choix_saison($page, $table, $_GET['idSaison']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_produit'));
-          echo table_amap_lister_choix_produit($_GET['idSaison'], $_GET['idProduit'], "", "amap_paniers");
+          echo table_amap_lister_choix_produit($page, $table, $_GET['idSaison'], $_GET['idProduit'], "", "amap_paniers");
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur("", true, "", _T('amap:choix_distribution'));
-          echo table_amap_lister_choix_distribution($_GET['idSaison'], $_GET['idProduit'], $_GET['idDistrib'], "", "amap_paniers");
+          echo table_amap_lister_choix_distribution($page, $table, $_GET['idSaison'], $_GET['idProduit'], $_GET['idDistrib'], "", "amap_paniers");
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata.gif", true, "", $msg_presentation_1
 										._T('amap:choix_contrat_saison').$_GET['idSaison']
 										._T('amap:choix_contrat_distribution').$_GET['idDistrib']
 										._T('amap:choix_contrat_produit2').$_GET['idProduit']);
-          echo table_amap_lister_panier($_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
+          echo table_amap_lister_panier($page, $table, $_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
 
               echo debut_cadre_trait_couleur(_DIR_PLUGIN_AMAP."img_pack/tabledata-add.gif", true, "", $msg_presentation_2);
-          echo table_amap_get_panier($_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
+          echo table_amap_get_panier($page, $table, $_GET['idSaison'], $_GET['idDistrib'], $_GET['idProduit']);
           echo fin_cadre_trait_couleur(true);
           break;
       } // switch ($_GET['action'])

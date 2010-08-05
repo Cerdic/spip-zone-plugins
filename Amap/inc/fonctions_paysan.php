@@ -79,7 +79,7 @@ function table_amap_lister_paysan()
 //=========================================================================
 //=========================================================================
 //
-function table_amap_getmodif_paysan()
+function table_amap_getmodif_paysan($page, $table)
 {
   $out = '';
   $hiddens = '';
@@ -141,7 +141,7 @@ function table_amap_getmodif_paysan()
  
     $hiddens .= "\t<input type='hidden' name='id_ligne' value='".$_GET['id_ligne']."' />\n";
 
-	return generer_url_ecrire("amap_config", "table=spip_amap_produit", "action=maj")
+	return generer_url_ecrire("$page", "table=$table", "action=maj")
                              ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
   } // fin  while ($tabUnEnregistrement_1 = sql_fetch($sqlResult))
@@ -152,7 +152,7 @@ function table_amap_getmodif_paysan()
 //=========================================================================
 //=========================================================================
 //
-function table_amap_get_paysan()
+function table_amap_get_paysan($page, $table)
 {
   $out = '';
   $hiddens = '';
@@ -192,7 +192,7 @@ function table_amap_get_paysan()
   $out .= "\t\t</td>\n";
   $out .= "\t</tr>\n";
 
-  return generer_url_ecrire("amap_config", "table=spip_amap_produit", "action=add")
+  return generer_url_ecrire("$page", "table=$table", "action=add")
                                ."<table>\n".$out
                              ."</table>$hiddens<input type='submit'/></form>";
 
