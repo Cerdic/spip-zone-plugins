@@ -13,7 +13,7 @@
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-global $association_tables_principales;
+global $association_tables_principales, $association_tables_auxiliaires;
 include_spip('base/association');
 include_spip('base/abstract_sql');
 
@@ -74,10 +74,12 @@ function association_upgrade($meta, $courante, $table='meta')
 }
 
 function association_maj_0($version, $meta, $table){
-	global $association_tables_principales;
-	foreach($association_tables_principales as $table => $desc)
-		sql_create($table, $desc['field'], $desc['key'], true, false);
-	ecrire_meta($meta, $version, $table);
+	global $association_tables_principales, $association_tables_auxiliaires;
+	foreach($association_tables_principales as $nom => $desc)
+		sql_create($nom, $desc['field'], $desc['key'], true, false);
+	foreach($association_tables_auxiliaires as $nom => $desc)
+		sql_create($nom, $desc['field'], $desc['key'], false, false);
+	ecrire_meta($meta, $version, NULL, $table);
 	return 0; // Reussite (supposee !)
 }
 			

@@ -30,5 +30,5 @@
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.1;]" />
 </plugin>
