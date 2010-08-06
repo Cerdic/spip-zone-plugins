@@ -6,7 +6,7 @@
 
 	<etat>dev</etat>
 	<auteur>Camille Lafitte _ Licence GPL _ [un site->http://km.azerttyu.net]</auteur>
-	<icon>archive.jpg</icon>
+	<icon>images/archive-64.png</icon>
 
 	<description>
 		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.<br /> Pensez &agrave; utiliser le crit&egrave;re <b>{archive}</b> ou bien <b>archive seulement</b>
@@ -15,21 +15,23 @@
 	<lien>[->http://www.spip-contrib.net/Plugin-Archive]</lien>
 
 	<fonctions>
-		archive_fonctions.php
+		public/archive_criteres.php
 	</fonctions>
-
-	<options>
-		archive_options.php
-	</options>
 
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>execution</action>
-		<inclure>archive.php</inclure>
+		<inclure>archive_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
         <nom>taches_generales_cron</nom>
+        <inclure>archive_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+        <nom>pre_boucle</nom>
+        <inclure>archive_pipelines.php</inclure>
+	</pipeline>
+	
 
 	<install>base/archive_install.php</install>
     <pipeline>
