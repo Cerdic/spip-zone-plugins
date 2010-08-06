@@ -9,11 +9,16 @@ function lm2_jquery_plugins($plugins){
 
 function lm2_insert_head($flux){
 	$config_inline = lire_config('lecteur_multimedia/inlineplayer');
-	$inline_player = $config_inline ? recuperer_fond('lm2_'.$config_inline) : '';
+	$inline_player = $config_inline ? recuperer_fond('head/lm2_'.$config_inline) : '';
+	$config_lecteur_audio = lire_config('lecteur_multimedia/lecteur_audio');
+	if(($config_lecteur_audio != $config_inline) && find_in_path('head/lm2_'.$config_lecteur_audio.'.html')){
+		$lecteur_audio = recuperer_fond('head/lm2_'.$config_lecteur_audio);
+	}
 	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/lm2_playlist_jquery.js').'"></script>'."\n";
 	$flux .= '<link rel="stylesheet" href="'.generer_url_public('lm2_player.css').'" type="text/css" media="all" />'."\n";
 	$flux .= '<script type="text/javascript" src="'.generer_url_public('lm2_config.js').'"></script>'."\n";
 	$flux .= $inline_player;
+	$flux .= $lecteur_audio;
 
 	return $flux;
 }
@@ -36,13 +41,13 @@ function lm2_pre_liens($texte) {
 	if (preg_match_all(_RACCOURCI_LIEN_MP3, $texte, $regs, PREG_SET_ORDER)) {
 
 		foreach ($regs as $k => $reg) {
-		if($reg[1]){
-			$l = "<a href='$reg[4]' rel='enclosure'>$reg[1]</a>";
-		}else{
-			$l = "<a href='$reg[4]' rel='enclosure'>".couper($reg[4],50)."</a>";
-		}
-		$p = $reg[0];
-		$texte = str_replace($p,$l,$texte);
+			if($reg[1]){
+				$l = "<a href='$reg[4]' rel='enclosure'>$reg[1]</a>";
+			}else{
+				$l = "<a href='$reg[4]' rel='enclosure'>".couper($reg[4],50)."</a>";
+			}
+			$p = $reg[0];
+			$texte = str_replace($p,$l,$texte);
 		}
 	}
 
