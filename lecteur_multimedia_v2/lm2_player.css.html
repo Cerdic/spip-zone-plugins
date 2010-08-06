@@ -1,4 +1,4 @@
-#CACHE{3600*100,cache-client}
+#CACHE{0,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -32,51 +32,51 @@
 }
 
 #sm2_cover.sm2_cover_paused{
-	background:#000 url(#CHEMIN{skins/tango/media-playback-pause.png}) no-repeat 50% 50%;
+	background:#000 url([(#CHEMIN{skins/tango/media-playback-pause.png}|url_absolue)]) no-repeat 50% 50%;
 }
 #sm2_player .play {
-	background-image: url(#CHEMIN{skins/tango/media-playback-start.png});
+	background-image: url([(#CHEMIN{skins/tango/media-playback-start.png}|url_absolue)]);
 }
 #sm2_player .play:hover {
-	background-image: url(#CHEMIN{skins/tango/media-playback-start.png});
+	background-image: url([(#CHEMIN{skins/tango/media-playback-start.png}|url_absolue)]);
 }
 #sm2_player .next {
-	background-image: url(#CHEMIN{skins/tango/media-skip-forward.png});
+	background-image: url([(#CHEMIN{skins/tango/media-skip-forward.png}|url_absolue)]);
 }
 #sm2_player .next:hover {
-	background-image: url(#CHEMIN{skins/tango/media-skip-forward.png});
+	background-image: url([(#CHEMIN{skins/tango/media-skip-forward.png}|url_absolue)]);
 }
 #sm2_player .prev {
-	background-image: url(#CHEMIN{skins/tango/media-skip-backward.png});
+	background-image: url([(#CHEMIN{skins/tango/media-skip-backward.png}|url_absolue)]);
 }
 #sm2_player .prev:hover {
-	background-image: url(#CHEMIN{skins/tango/media-skip-backward.png});
+	background-image: url([(#CHEMIN{skins/tango/media-skip-backward.png}|url_absolue)]);
 }
 #sm2_player .pause {
-	background-image: url(#CHEMIN{skins/tango/media-playback-pause.png});
+	background-image: url([(#CHEMIN{skins/tango/media-playback-pause.png}|url_absolue)]);
 	display: none;
 }
 #sm2_player .pause:hover {
-	background-image: url(#CHEMIN{skins/tango/media-playback-pause.png});
+	background-image: url([(#CHEMIN{skins/tango/media-playback-pause.png}|url_absolue)]);
 }
 #sm2_player .stop {
-	background-image: url(#CHEMIN{skins/tango/media-playback-stop.png});
+	background-image: url([(#CHEMIN{skins/tango/media-playback-stop.png}|url_absolue)]);
 }
 #sm2_player .stop:hover {
-	background-image: url(#CHEMIN{skins/tango/media-playback-stop.png});
+	background-image: url([(#CHEMIN{skins/tango/media-playback-stop.png}|url_absolue)]);
 }
 #sm2_player .volume {
-	background-image: url(#CHEMIN{skins/tango/audio-volume-high.png});
+	background-image: url([(#CHEMIN{skins/tango/audio-volume-high.png}|url_absolue)]);
 }
 #sm2_player .volume:hover {
-	background-image: url(#CHEMIN{skins/tango/audio-volume-high.png});
+	background-image: url([(#CHEMIN{skins/tango/audio-volume-high.png}|url_absolue)]);
 }
 #sm2_player .mute {
-	background-image: url(#CHEMIN{skins/tango/audio-volume-muted.png});
+	background-image: url([(#CHEMIN{skins/tango/audio-volume-muted.png}|url_absolue)]);
 	display:none;
 }
 #sm2_player .mute:hover {
-	background-image: url(#CHEMIN{skins/tango/audio-volume-muted.png});
+	background-image: url([(#CHEMIN{skins/tango/audio-volume-muted.png}|url_absolue)]);
 	display:none;
 }
 
@@ -230,25 +230,43 @@ div#now_playing{
  min-height:16px;
  min-width:19em;
  padding:0 3px 0 20px;
- background:url(#CHEMIN{skins/playl.gif}) no-repeat 0% 50%;
+ background:url([(#CHEMIN{skins/playl.gif}|url_absolue)]) no-repeat 0% 50%;
  }
  a.sm2_link:hover {
 
  }
 
  a.sm2_playing {
- background:url(#CHEMIN{skins/pausel.gif}) no-repeat 0% 50%;
+ 	background:url([(#CHEMIN{skins/pausel.gif}|url_absolue)]) no-repeat 0% 50%;
  }
  a.sm2_playing:hover {
- background:url(#CHEMIN{skins/pausel.gif}) no-repeat 0% 50%;
+ 	background:url([(#CHEMIN{skins/pausel.gif}|url_absolue)]) no-repeat 0% 50%;
  }
 
  a.sm2_paused {
- background:url(#CHEMIN{skins/playl.gif}) no-repeat 0% 50%;
+ 	background:url([(#CHEMIN{skins/playl.gif}|url_absolue)]) no-repeat 0% 50%;
  }
  a.sm2_paused:hover {
- background:url(#CHEMIN{skins/playl.gif}) no-repeat 0% 50%;
+ 	background:url([(#CHEMIN{skins/playl.gif}|url_absolue)]) no-repeat 0% 50%;
  }
 
 .spip_documents .spip_doc_download { margin-top: 5px; }
-.spip_documents .spip_doc_download img { vertical-align: text-top; }
+.spip_documents .spip_doc_download img { vertical-align: text-top;}
+
+.spip_documents_center .sm2-360ui{
+	float:none;
+}
+
+.spip_documents .ui360 a{
+	line-height:2em;
+	background:none;
+}
+
+.spip_documents .ui360{
+	margin-bottom:0;
+}
+
+.spip_documents a.sm2_link {
+	min-width:inherit;
+	min-height:inherit;
+}

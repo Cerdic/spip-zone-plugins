@@ -8,7 +8,7 @@
 		jQuery('#playliste#ENV{id_playliste}').playlist({
 			smUrl : "#EVAL{_DIR_LIB_SM}swf/",
 			smnullUrl : "#CHEMIN{soundmanager/null.mp3}",
-			[(#ENV{autoPlay}|oui)autoPlay : true,]
+			[(#ENV{autoPlay}|oui{#ENV{autoplay}}|oui)autoPlay : true,]
 			[(#ENV{autoLoad}|oui)autoLoad : true,]
 			[(#ENV{logo}|oui)logo:'#ENV{logo}',]
 			[(#ENV{logo_top}|oui)logo_top:'#ENV{logo_top}',]
@@ -18,6 +18,6 @@
 		});
 	});
 </script>
-<div id="playliste#ENV{id_playliste}">
-	Là ou doit apparaitre la playliste
+<div id="playliste#ENV{id_playliste}" class="lm2_playliste[ spip_documents_(#ENV{align})][ (#ENV{class})]">
+	
 </div>

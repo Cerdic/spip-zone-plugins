@@ -2,17 +2,37 @@
 	Modele pour <doc|player> modifié pour pour MP3 et FLV par le plugin Lecteur multimedia
 	http://spip-zone.info/spip.php?article18
 
-	Si les fichiers ne sont pas MP3 ou FLV, utiliser le comportement normal.
+	Si les fichiers ne sont pas MP3 ou FLV, on utilise le comportement normal.
+	
+	Paramètres facultatifs à passer au modèle :
+	- left/right/center : Comme pour le modèle par défaut défini l'alignement
+	- largeur : défini la largeur du bloc entourant le document (ultilisé uniquement si alignement à droite ou à gauche)
+	- player : force l'usage d'un lecteur en particulier (sinon on prend celui défini dans la conf, à défaut le lecteur neolao)
+	- class : une class spécifique associée à l'élément parent du lecteur
+	- download : si la valeur est "non", on n'affiche pas le lien de téléchargement (affiché par défaut)
+	
 ]
 
-[(#REM) Definir les lecteurs utilisés par ENV ou par CONFIG ]
-
+[(#REM) 
+	Définir les lecteurs utilisés par ENV ou par CONFIG
+]
 #SET{player,players/#ENV{player,#CONFIG{lecteur_multimedia/lecteur_audio,'neolao_audio'}}}
 #SET{player_video,players/#ENV{player,#CONFIG{lecteur_multimedia/lecteur_video,'neolao_video'}}}
 
 <BOUCLE_doc(DOCUMENTS) {id_document}>
-[(#REM) Document MP3 ? ]
-[(#EXTENSION|=={mp3}|oui)
+[(#REM) 
+
+	Cas d'un document de type MP3 
+
+][(#EXTENSION|=={mp3}|oui)
+
+[(#GET{player}|=={players/360player}|oui)
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align,center})][ (#ENV{class})] spip_lien_ok'[
+	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#ENV{largeur}|max{120})px]']>
+	<INCLURE{fond=#GET{player},id_document,env}>
+</div>
+]
+[(#GET{player}|=={players/360player}|non)
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 [(#ID_VIGNETTE|oui)
 	<dt>
@@ -29,9 +49,13 @@
 <img src='[(#CHEMIN{players/download.png})]' width='16' height='16' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' style="vertical-align: text-top;" /> <:bouton_download:></a></dd>
 ]
 </dl>]
+]
 
-[(#REM) Document FLV ? ]
-[(#EXTENSION|=={flv}|oui)
+[(#REM) 
+
+	Cas d'un document de type video FLV 
+
+][(#EXTENSION|=={flv}|oui)
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <dt class='spip_doc_titre'>
 	<INCLURE{fond=#GET{player_video},id_document,env}>
@@ -39,8 +63,12 @@
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>
 ]</dl>]
 
+[(#REM)
 
-[(#EXTENSION|in_array{#ARRAY{0,mp3,1,flv}}|non)
+	Cas normal d'un document ne correspondant pas aux type de fichiers
+	gérés par le lecteur multimedia
+	
+][(#EXTENSION|in_array{#ARRAY{0,mp3,1,flv}}|non)
 	#MODELE{doc}
 ]
 </BOUCLE_doc>

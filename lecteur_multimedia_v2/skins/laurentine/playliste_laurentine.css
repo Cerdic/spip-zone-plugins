@@ -1,0 +1,43 @@
+#sm2-container{
+	position:absolute;
+	top:0;
+	left:0;
+	width:1px;
+	height:1px;
+}
+
+#sm2_player{
+	width:300px;
+}
+
+#sm2_player #sm2_scrollbar{
+	background:#000;
+	border:1px solid #000;
+}
+
+#sm2_player #sm2_loading{
+	background:#fff;
+}
+#sm2_player #sm2_position {
+	background:#AC0A22;
+}
+
+#sm2_player ul.playliste{
+	border:none;
+	margin:3px 0 0;
+}
+
+#sm2_player ul.playliste li.sm2_play_on{
+	background-color:#000;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+#sm2_player ul.playliste li.sm2_play_on a, #sm2_player ul.playliste li.sm2_play_on a:hover{
+	color:#fff;
+}
+
+#sm2_player .button{
+	width:24px;
+	height:24px;
+}

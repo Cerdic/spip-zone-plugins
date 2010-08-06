@@ -24,6 +24,10 @@
 							<input type="radio" name="lecteur_audio" id="pixplayer_audio" value="pixplayer_audio" [(#ENV{lecteur_audio}|=={pixplayer_audio}|oui)checked="checked"] />
 							<label for="pixplayer_audio">Pixplayer</label>
 						</div>
+						<div class="choix">
+							<input type="radio" name="lecteur_audio" id="player360" value="360player" [(#ENV{lecteur_audio}|=={360player}|oui)checked="checked"] />
+							<label for="player360">360 player</label>
+						</div>
 					</li>
 					<li>
 						<label><:lm2:cfg_label_lecteur_video:></label>
@@ -49,9 +53,35 @@
 							<label for="inlineplayer">Inline player</label>
 						</div>
 						<div class="choix">
-							<input type="radio" name="inlineplayer" id="360player" value="360player" [(#ENV{inlineplayer}|=={360player}|oui)checked="checked"] />
-							<label for="360player">360 player</label>
+							<input type="radio" name="inlineplayer" id="player360_inline" value="360player" [(#ENV{inlineplayer}|=={360player}|oui)checked="checked"] />
+							<label for="player360_inline">360 player</label>
 						</div>
+					</li>
+				</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:lm2:legende_style_players:></h3>
+				<ul>
+					<li class="fieldset">
+						<h3 class="legend"><:lm2:legende_style_360player:></h3>
+						<fieldset>
+						<ul>
+							[(#SAISIE{couleur,player360_loadringcolor,
+								label=<:lm2:label_360loadringcolor:>,
+								defaut=#ccc,
+								size=7})]
+							[(#SAISIE{couleur,player360_playringcolor,
+								label=<:lm2:label_360playringcolor:>,
+								defaut=#000,
+								size=7})]
+							[(#SAISIE{couleur,player360_backgroundringcolor,
+								label=<:lm2:label_360backgroundringcolor:>,
+								defaut=#eee,
+								size=7})]
+						</ul>
+						</fieldset>
 					</li>
 				</ul>
 				</fieldset>

@@ -15,6 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_documents_textes' => 'Lecteur pour les documents dans les textes',
 	'cfg_lien_doc' => '<a href="http://multimedia.spip-zone.info" class="spip_out">Documentation</a>',
 
+	// L
+	'label_360loadringcolor' => 'Couleur de la taille du son d&eacute;j&agrave; charg&eacute;',
+	'label_360playringcolor' => 'Couleur correspondant &agrave; la taille du son d&eacute;j&agrave; lu',
+	'label_360backgroundringcolor' => 'Couleur de base du cercle de lecture',
+	'legende_style_360player' => 'Styles du 360 player',
+	'legende_style_players' => 'Styles du ou des lecteurs',
 	// T
 	'titre_liste_lecture' => 'Liste de lecture'
 

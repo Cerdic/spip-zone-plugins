@@ -1,0 +1,28 @@
+#CACHE{0,cache-client}
+#HTTP_HEADER{Content-Type: text/javascript;}
+
+jQuery(document).ready(function(){
+	jQuery('a[rel=enclosure]').each(function(){
+		if(jQuery(this).attr('href').match(/\.mp3(\\?.*)$/i)){
+			jQuery(this).wrap('<div class="ui360"></div>');
+		}
+	});
+	threeSixtyPlayer.config = {
+		playNext: false, // stop after one sound, or play through list until end
+		autoPlay: false, // start playing the first sound right away
+		loadRingColor: '#CONFIG{lecteur_multimedia/player360_loadringcolor,#ccc}', // amount of sound which has loaded
+		playRingColor: '#CONFIG{lecteur_multimedia/player360_playringcolor,#000}', // amount of sound which has played
+		backgroundRingColor: '#CONFIG{lecteur_multimedia/player360_backgroundringcolor,#eee}', // "default" color shown underneath everything else
+		imageRoot: '#EVAL{_DIR_LIB_SM}demo/360-player/', // path to prepend for empty.gif used for play/pause button
+		animDuration: #CONFIG{lecteur_multimedia/360animduration,500},
+		animTransition: Animator.tx.bouncy // http://www.berniecode.com/writing/animator.html
+	}
+	
+	var player_360load = function(){
+		if (soundManager.supported()) {
+			// soundManager.createSound() etc. may now be called
+			threeSixtyPlayer.init();
+		}
+	}
+	onAjaxLoad(player_360load);
+});

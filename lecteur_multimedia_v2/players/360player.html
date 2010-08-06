@@ -1,0 +1,13 @@
+<BOUCLE_doc(DOCUMENTS){id_document}>
+<div class="ui360 spip_doc_titre">
+	<a href="#URL_DOCUMENT" class="inline-exclude">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a>
+</div>
+[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+[(#ENV{download}|!={non}|oui)
+<div class='spip_doc_download'>
+	<a href="#FICHIER" type="#MIME_TYPE" class="inline-exclude [(#ENV{lien_class})]" title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
+		<img src='[(#CHEMIN{players/download.png})]' width='16' height='16' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' style="vertical-align: text-top;" /> <:bouton_download:>
+	</a>
+</div>
+]
+</BOUCLE_doc>
