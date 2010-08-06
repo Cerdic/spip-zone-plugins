@@ -1,10 +1,9 @@
 #CACHE{0,cache-client}
 #HTTP_HEADER{Content-Type: text/javascript;}
-
 jQuery(document).ready(function(){
 	jQuery('a[rel=enclosure]').each(function(){
 		if(jQuery(this).attr('href').match(/\.mp3(\\?.*)$/i)){
-			jQuery(this).wrap('<div class="ui360"></div>');
+			jQuery(this).wrap('<div class="ui360"><\/div>');
 		}
 	});
 	threeSixtyPlayer.config = {
