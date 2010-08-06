@@ -19,7 +19,7 @@
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<label for="#GET{name}"><em>[(#VAL{140}|moins{#ENV{status}|strlen})]</em>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
-				<textarea name="#GET{name}" id="#GET{name}">#ENV{status}</textarea>
+				<textarea name="#GET{name}" id="#GET{name}" rows="3" cols="25">#ENV{status}</textarea>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
