@@ -1,0 +1,17 @@
+#CACHE{7200}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+{		
+		["title": "(#NOM_SITE_SPIP|texte_backend)",]
+		["link": "(#URL_SITE_SPIP)/",]
+		["description": "(#DESCRIPTIF_SITE_SPIP|texte_backend)",]
+		"markers": [
+		<BOUCLE_json(ARTICLES){id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{id_groupe ?}{par date}{inverse}{0, #ENV{limit}}{", "}>{
+			<BOUCLE_item(ARTICLES){id_article=#ID_ARTICLE}>["id": "(#ID_ARTICLE)",]
+			<BOUCLE_gis(GIS){id_article}>["lat": "(#LAT)",]
+			["lonx": "(#LONX)",]</BOUCLE_gis>
+			<BOUCLE_icon(MOTS){id_article}{type=marker_icon}{0,1}>["icon": "#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)",]</BOUCLE_icon>
+			["data": "(#URL_PAGE{json-gis-marker})&id_article=#ID_ARTICLE"]
+			</BOUCLE_item>
+		}</BOUCLE_json>
+		]
+}
