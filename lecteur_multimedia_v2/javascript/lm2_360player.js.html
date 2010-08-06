@@ -13,8 +13,8 @@ jQuery(document).ready(function(){
 		playRingColor: '#CONFIG{lecteur_multimedia/player360_playringcolor,#000}', // amount of sound which has played
 		backgroundRingColor: '#CONFIG{lecteur_multimedia/player360_backgroundringcolor,#eee}', // "default" color shown underneath everything else
 		imageRoot: '#EVAL{_DIR_LIB_SM}demo/360-player/', // path to prepend for empty.gif used for play/pause button
-		animDuration: #CONFIG{lecteur_multimedia/360animduration,500},
-		animTransition: Animator.tx.bouncy // http://www.berniecode.com/writing/animator.html
+		animDuration: #CONFIG{lecteur_multimedia/player360_animduration,500},
+		animTransition: #CONFIG{lecteur_multimedia/player360_animtransition,Animator.tx.bouncy} // http://www.berniecode.com/writing/animator.html
 	}
 	
 	var player_360load = function(){

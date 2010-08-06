@@ -80,6 +80,26 @@
 								label=<:lm2:label_360backgroundringcolor:>,
 								defaut=#eee,
 								size=7})]
+							[(#SAISIE{selection,player360_animtransition,
+								label=<:lm2:label_360animtransition:>,
+								defaut=Animator.tx.bouncy,
+								cacher_option_intro=oui,
+								datas=#ARRAY{
+									Animator.tx.easeInOut,easeInOut,
+									Animator.tx.linear,linear,
+									Animator.tx.easeIn,easeIn,
+									Animator.tx.easeOut,easeOut,
+									Animator.tx.strongEaseIn,strongEaseIn,
+									Animator.tx.strongEaseOut,strongEaseOut,
+									Animator.tx.elastic,elastic,
+									Animator.tx.veryElastic,veryElastic,
+									Animator.tx.bouncy,bouncy,
+									Animator.tx.veryBouncy,veryBouncy}})]
+							[(#SAISIE{input,player360_animduration,
+								label=<:lm2:label_360animduration:>,
+								defaut=500,
+								size=4,
+								maxlength=4})]
 						</ul>
 						</fieldset>
 					</li>
