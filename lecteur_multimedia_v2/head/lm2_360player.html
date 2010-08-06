@@ -4,3 +4,17 @@
 --></script>]
 [<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SM})]demo/360-player/script/berniecode-animator.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SM})]demo/360-player/script/360player.js})"></script>]
+<script type="text/javascript">
+	soundManager.onready(function(){
+		console.log('on passe ici?');
+		if(typeof threeSixtyPlayer == 'object'){
+			if(threeSixtyPlayer.links.length > 0){
+				for (i=0;i<=threeSixtyPlayer.links.length;i++){
+					if($(threeSixtyPlayer.links[i]).hasClass('autostart')){
+						threeSixtyPlayer.handleClick({target:threeSixtyPlayer.links[i],preventDefault:function(){}});
+					}
+				}		
+			}
+		}
+	});
+</script>

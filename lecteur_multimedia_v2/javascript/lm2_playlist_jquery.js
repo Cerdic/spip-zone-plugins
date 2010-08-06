@@ -22,7 +22,7 @@
 
 	$.fn.playlist = function(options) {
 		var defaults = {
-			sources : $('a[type=application/mp4],a[type=audio/mpeg],a[type=video/x-flv],object[type=video/x-flv]'),
+			sources : $('a[type=application/mp4],a[type=audio/mpeg],a[type=video/x-flv],object[type=video/x-flv]').not('.inline-exclude'),
 			smUrl : "soundmanager/swf/",
 			smnullUrl : "soundmanager/null.mp3",
 			logo : false,
@@ -298,14 +298,14 @@
 			});
 
 			if(options.autoPlay){
-				soundManager.onload = function(){
+				soundManager.onready(function(){
 					sm2_player_play(0);
-				}
+				});
 			}else if(options.autoLoad){
-				soundManager.onload = function(){
+				soundManager.onready(function(){
 					sm2_player_play(0);
 					sm2_player_togglePause();
-				}
+				});
 			}
 		}else{
 			playliste_text = 'no media elements found';
