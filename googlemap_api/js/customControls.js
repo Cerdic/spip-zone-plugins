@@ -428,3 +428,63 @@ mapAddressControl.prototype.initialize = function(map) {
 mapAddressControl.prototype.getDefaultPosition = function() {
 	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(90, 290));
 }
+
+
+//***********
+// Loader Custom Control
+//***********
+function mapLoaderControl() {
+}
+mapLoaderControl.prototype = new GControl();
+mapLoaderControl.prototype.initialize = function(map) {
+	
+	var container = document.createElement("div");
+	container.id = "map_loader";
+	container.style.width = "295px";
+	container.style.height = "54px";
+	container.style.border = "1px";
+	
+	var left = document.createElement("img");
+	left.src = URLbase + "img_pack/" + images_folder + "/loader-left." + images_extension;
+	left.style.height = "54px";
+	left.style.width= "8px";
+	left.style.position = "absolute";
+	left.style.top= "0px";
+	left.style.left = "0px";
+	container.appendChild(left);
+	
+	var middle = document.createElement("div");
+	middle.style.height = "54px";
+	middle.style.width = "279px";
+	middle.style.position = "absolute";
+	middle.style.top = "0px";
+	middle.style.left = "8px";
+	middle.style.backgroundImage = "url(" + URLbase + "img_pack/" + images_folder + "/loader-center." + images_extension + ")";
+	var content = document.createElement("div");
+	content.id = "map_loader_content";
+	content.style.margin = "8px 0";
+	var msg = document.createElement("span");
+	msg.id = "map_loader_msg";
+	content.appendChild(msg);
+	var loading = document.createElement("img");
+	loading.src = URLbase + "/img_pack/loading.gif";
+	content.appendChild(loading);
+	middle.appendChild(content);
+	container.appendChild(middle);
+	
+	var right = document.createElement("img");
+	right.src = URLbase + "img_pack/" + images_folder + "/loader-right." + images_extension;
+	right.style.height = "54px";
+	right.style.width = "8px";
+	right.style.position = "absolute";
+	right.style.top = "0px";
+	right.style.left = "287px";
+	container.appendChild(right);
+	
+	map.getContainer().appendChild(container);
+	
+	return container;
+}
+mapLoaderControl.prototype.getDefaultPosition = function() {
+	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(15, 45));
+}

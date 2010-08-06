@@ -54,7 +54,7 @@
 			map[(#GET{id_carte_gis})].getContainer().style.overflow='hidden'; 
 			[(#GET{control}|=={'custom'}|oui)
 				[(#ENV{control_type}|!={'non'}|oui)
-				map[(#GET{id_carte_gis})].addControl(new GMapTypeControl());
+				map[(#GET{id_carte_gis})].addControl(new mapTypeControl());
 				]
 			]
 			[(#GET{control}|=={'custom'}|oui)
@@ -69,6 +69,11 @@
 			]
 			[(#ENV{control_type}|=={'complet'}|oui)
 				map[(#GET{id_carte_gis})].addMapType(G_PHYSICAL_MAP);
+			]
+			[(#GET{control}|=={'custom'}|oui)
+				[(#ENV{control_loader}|!={'non'}|oui)
+				map[(#GET{id_carte_gis})].addControl(new mapLoaderControl());
+				]
 			]
 			[(#GET{control}|=={'small'}|oui)
 			map[(#GET{id_carte_gis})].addControl(new GSmallMapControl());
@@ -108,6 +113,11 @@
 			</BOUCLE_kml_rub>
 			<//B_kml_art>
 			
+			//loadder
+			msg[(#GET{id_carte_gis})] = "<div id='precarga'><:gis:loading_last_msg:><br><img src='" + URLbaseGis + "img_pack/loading.gif' /></div>";
+			$("#map_loader_msg").append(msg[(#GET{id_carte_gis})]);
+			$("#map_loader").show();
+			
 			//leemo-lo documento dos marcadores
 			// recuperer un eventuel nom de fichier personnalise pour le RSS qui genere les marqueurs
         [(#SET{rss_gis,[(#CONFIG{geomap/fichier_rss_gis,rss-gis})]})]
@@ -125,6 +135,9 @@
     					var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
     					agregarMarcador(xmlItem[(#GET{id_carte_gis})],'[(#GET{id_carte_gis})]',0,17,markerManager[(#GET{id_carte_gis})],[(#ENV{ombre,1}|=={0}|?{"''","'ombre'"})],[(#ENV{swfobject,oui}|=={non}|?{"'noplayer'","''"})]);//
     	});
+    	//loadder
+		$("#map_loader").hide();
+		$("#map_loader_msg").empty();
     	markerManager[(#GET{id_carte_gis})].refresh();
         [(#ENV{id_a_ouvrir}|=={''}|non) abrirVentana([(#ENV{id_a_ouvrir})],[(#GET{id_carte_gis})]);]
     	[(#ENV{attente}|=={1}|oui) $('#attente[(#GET{id_carte_gis})]').hide('normal'); ]

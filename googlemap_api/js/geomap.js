@@ -1,9 +1,45 @@
-//array para gadar os marcadores
-var marcadores = [];
-//array para gardar o html contido das xanelas de cada marcador
-var contidosHTML = [];
-//array para gardar as URL dos sonidos que se reproduciran en cada xanela
-var URLsons = [];
+//***********
+// Gis Marker
+//***********
+function GisMarker() {
+	this.id = false;
+	this.html = false;
+	this.enclosure = false;
+	this.json = false;
+	this.marker = false;
+}
+GisMarker.prototype.openWindow = function() {
+	openWindow(this);
+}
+function openWindow(marcador) {
+	//cando se abre a ventana do marcador executamos as seguintes intsruccions
+	GEvent.addListener(marcador.marker,"infowindowopen", function() {
+		tb_init('a.thickbox');
+		if (marcador.son!="") {
+			var fo = new FlashObject(URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + marcador.son, "player_x", "17", "17", "6", "#FFFFFF");
+			fo.write("player");
+		}
+	});
+	if (marcador.html=="") {
+		var msg = "<div id='precarga'>loading marker data...<br><img src='" + URLbaseGis + "img_pack/loading.gif' /></div>";
+		$("#map_loader_msg").append(msg);
+		$("#map_loader").show();
+		$.getJSON(marcador.json, function(jsonData) {
+			$.each(jsonData.marker, function(i,item){
+				marcador.html = "<div id='window_" + item.id +"' class='window_content'><div id='player'></div><h3><a href='" + item.link + "'>" + item.title + "</a></h3>" + item.description + "</div>";
+				if (typeof(item.enclosure) != "undefined") {
+					marcador.son = item.enclosure.url;
+				}
+				$("#map_loader").hide();
+				$("#map_loader_msg").empty();
+				marcador.marker.openInfoWindowHtml(marcador.html);
+			});
+		});
+	} else {
+		marcador.marker.openInfoWindowHtml(marcador.html);
+	}
+}
+
 
 function getNodeText(node){
 	return node.text || node.firstChild ? node.firstChild.nodeValue : "";
@@ -39,23 +75,36 @@ function coordenadas (articulo){
 	});
 }
 
-function creaMarcador(point, html, icon, son, idmap) {
-	//creamos un obxecto GMarker e o gradamos nunha variable
-	var marcador = new GMarker(point, icon);
-	//engadimos un evento para que ao pulsar no marcador se abra a ventana co html indicado
-	var map = eval('map'+idmap);
-	GEvent.addListener(marcador, "click", function() {
-		marcador.openInfoWindowHtml(html);
-		//cando se abre a ventana do marcador executamos as seguintes intsruccions
-		GEvent.addListener(marcador,"infowindowopen", function() {
-			if(son){
-				//esta parte del codigo enbebe un obxecto flah na ventana creado con flashobject.js
-				var fo = new FlashObject(URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url="+son, "player_x", "17", "17", "6", "#FFFFFF");
-				fo.write("player");
-			}
+function agregarMarcadorJson (jsonItem, idmap, minZoom, maxZoom, markerMngerXD) {
+	//almacenamos en distintas variables la informacion contenida nen los chilNodes de cada item-marcador do xml
+	var markerMgr = eval('markerManager'+idmap);
+	if ((typeof(jsonItem.lat) == "undefined")||(typeof(jsonItem.lonx) == "undefined")) return;
+	else {
+		var lat = parseFloat(jsonItem.lat);
+		var lng = parseFloat(jsonItem.lonx);
+		var id = parseInt(jsonItem.id);
+		
+		var point = new GPoint(lng,lat);
+		var icono_categoria = new GIcon();
+		icono_categoria.image = (jsonItem.icon != "" ? jsonItem.icon : MarkerImgBase);
+		icono_categoria.shadow = URLbase + "img_pack/shadow.png";
+		icono_categoria.iconSize = new GSize(MarkerBaseWidth, MarkerBaseHeight);
+		icono_categoria.shadowSize = new GSize(37, 34);	
+		icono_categoria.iconAnchor = new GPoint((MarkerBaseWidth/2), MarkerBaseHeight);
+		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
+		
+		eval('marcador_' + id + ' = new GisMarker();');
+		var marcador = eval('marcador_' + id);
+		marcador.html = "";;
+		marcador.son = "";
+		marcador.json = jsonItem.data;
+		marcador.id = id;
+		marcador.marker = new GMarker(point, icono_categoria);
+		GEvent.addListener(marcador.marker, "click", function() {
+			marcador.openWindow();
 		});
-	});		
-	return marcador;
+		markerMgr.addMarker(marcador.marker, minZoom,  maxZoom);
+	}	
 }
 
 function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre, noplayer) {
@@ -64,7 +113,7 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre
 	var xmlLng = $("geo_long",xmlItem);
 	var xmlSon = $("enclosure",xmlItem);
 	var id = $("guid",xmlItem);
-	var marker = eval('markerManager'+idmap);
+	var markerMgr = eval('markerManager'+idmap);
 	if ((xmlLat.length == 0) || (xmlLng.length == 0)) return;
 	else {
 		var lat = parseFloat(xmlLat.text());
@@ -92,40 +141,88 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre
 		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
 			
 		// creamos el marcador con los datos almacenados en las variables
-		var marcador = creaMarcador(point, html, icono_categoria, son, idmap);
-		// recollemos a informacion que sexa necesaria en distintos arrays, usando como identificador a id do artigo
-		marcadores["id_"+id] = marcador;
-		contidosHTML["id_"+id] = html;
-		URLsons["id_"+id] = son;
-		//engadimos o marcador ao markerManager antes "map.addOverlay(marker);"
-		if (maxZoom) {
-			if(marker){
-				marker.addMarker(marcador, minZoom,  maxZoom);
-			}
-			else{
-				markerManager.addMarker(marcador, minZoom,  maxZoom);
-			}
-		} else if (marker){
-			eval(marker).addMarker(marcador, minZoom);
-		}
+		eval('marcador_' + id + ' = new GisMarker();');
+		var marcador = eval('marcador_' + id);
+		marcador.html = html;
+		marcador.son = son;
+		marcador.id = id;
+		marcador.marker = new GMarker(point, icono_categoria);
+		GEvent.addListener(marcador.marker, "click", function() {
+			marcador.openWindow();
+		});
+		markerMgr.addMarker(marcador.marker, minZoom,  maxZoom);
 	}	
 }
 
-function abrirVentana(identificador, idmap) {
-	var map = eval('map'+ idmap);
-	map.closeInfoWindow();
-	GEvent.addListener(marcadores["id_"+identificador], "infowindowopen", function() {
-		if(URLsons["id_"+identificador]){
-			//esta parte del codigo enbebe un obxecto flah na ventana creado con flashobject.js
-			var fo = new FlashObject( URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons["id_"+identificador], "player_x", "17", "17", "6", "#FFFFFF");
-			fo.write("player");
+function loadMarkers(url, idmap, msg, minLat, maxLat, monLonx, maxLonx) {
+   	var latitudes = calculaIntervalos(minLat, maxLat, 3);
+  	var lonxitudes = calculaIntervalos(monLonx, maxLonx, 3);
+  	var map = eval('map' + idmap);
+  	var markerMgr = eval('markerManager'+idmap);
+  	var zoom = map.getZoom();
+  	if(zoom>=2) {
+  		zoom = zoom - 2;
+  	}
+	var count = 0;
+	if ($("#map_loader").is(":hidden")) {
+		var loading_msg = "<div id='precarga'>" +msg+ "<br><img src='" +URLbaseGis+ "img_pack/loading.gif' /><"+"/div>";
+   		$("#map_loader_msg").append(loading_msg);
+   		$("#map_loader").show();
+	}
+	for (i=0; i<3; i++) {
+		for(u=0; u<3; u++) {
+			$.getJSON(url+ '&minlat=' +latitudes[i]+ '&maxlat=' +latitudes[(i+1)]+ '&minlonx=' +lonxitudes[u]+ '&maxlonx=' +lonxitudes[(u+1)], function(data) {
+				$.each(data.markers, function(i, item){
+					agregarMarcadorJson(item, idmap, zoom, 17, markerMgr);
+				});
+				count++;
+				if(count==9) {
+					$("#map_loader").hide();
+					$("#map_loader_msg").empty();	
+				}
+			});
 		}
-	});
-	marcadores["id_"+identificador].openInfoWindowHtml(contidosHTML["id_"+identificador]);
+	}
+}
+
+/****************************************************
+estas son funciones nuevas para realizar calculos 
+espaciales de latitude y longitudes en el mapa
+****************************************************/
+//coordenadas visibles en el mapa
+function calculaRecuadro (mapa) {
+    var bounds = mapa.getBounds();
+    var coordenadas = new Array ();
+    //minlat
+    coordenadas [0] = Math.round(bounds.getSouthWest().lat()*10000) / 10000;
+    //maxlat
+    coordenadas [1] = Math.round(bounds.getNorthEast().lat()*10000) / 10000;
+    //minlonx
+    coordenadas [2] = Math.round(bounds.getSouthWest().lng()*10000) / 10000;
+    //maxlonx
+    coordenadas [3] = Math.round(bounds.getNorthEast().lng()*10000) / 10000;
+    return coordenadas;
+}
+//intervalos para dibidir un recuadro de coordenadas en 9 zonas diferentes
+function calculaIntervalos(min, max, num){
+    var incremento = (max - min) / num;
+    var intervalos = new Array ();
+    for (i=0; i<=num; i++){
+    	intervalos[i] = Math.round((min + (incremento * i)) * 10000) / 10000;
+    }
+    return intervalos;
 }
 
 function zoomIci(latit, lonxit, zoom, idmap) {
     var map = eval('map'+ idmap);
     map.panTo(new GLatLng(latit, lonxit));
     map.setZoom(zoom)
+}
+
+function abrirVentana(id, idmap) {
+	var map = eval('map'+ idmap);
+	var marcador = eval('marcador_'+ id);
+	map.closeInfoWindow();
+	map.setCenter(marcador.marker.getLatLng());
+	marcador.openWindow();
 }
