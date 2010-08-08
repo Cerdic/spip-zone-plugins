@@ -42,7 +42,7 @@ function spip_suggest_insert_head_css($flux) {
 }
 
 function spip_suggest_insert_head($flux) {
-	$flux .= spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
+	$flux = spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
 	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery.autocomplete.js").'"></script>';
 	$flux .= '
 <script type="text/javascript">
