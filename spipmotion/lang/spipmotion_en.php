@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'encoder_son_version' => '(Re)encode only the @version@ version of this sound',
 	'encoder_video' => '(Re)encode this video',
 	'encoder_video_version' => '(Re)encode only the @version@ version of this video',
+	'erreur_binaire' => 'One or several softwares needed for the plugin are not available on the system.',
 	'erreur_chemin_ffmpeg' => 'No encoding can be performed because the path does not work.',
 	'erreur_document_plus_disponible' => 'This document is not available on the website anymore',
 	'erreur_verifier_droits' => 'The encoding script "script_bash/spipmotion.sh" is not executable.',
