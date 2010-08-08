@@ -21,7 +21,6 @@ $GLOBALS['champs_extra']['breves']['OP_pseudo'] = "ligne|propre|pseudonyme du r&
 $GLOBALS['champs_extra']['breves']['OP_mail'] = "ligne|propre|mail du r&eacute;dacteur";
 
 // Declaration des pipelines
-$GLOBALS['spip_pipeline']['OP_squelette']='';
 $GLOBALS['spip_pipeline']['OP_environnement']='';
 $GLOBALS['spip_pipeline']['OP_action']='';
 $GLOBALS['spip_pipeline']['OP_pre_validation']='';
