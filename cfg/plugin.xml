@@ -50,7 +50,10 @@ Es kann auch f&uuml; die Konfiguration von Skeletten verwendet werden.
         <nom>insert_head</nom>
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>
-
+    <pipeline>
+        <nom>insert_head_css</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
      <pipeline>
         <nom>formulaire_charger</nom>
         <inclure>cfg_pipeline.php</inclure>

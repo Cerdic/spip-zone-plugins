@@ -89,9 +89,24 @@ function cfg_header_prive($flux){
  * @param  Array $flux
  * @return Array 
  */
-function cfg_insert_head($flux){
+function cfg_insert_head_css($flux){
 	// Ajout des css de cfg
-	$flux .= '<link rel="stylesheet" href="' . generer_url_public('cfg.css'). '" type="text/css" media="all" />';
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		$flux .= '<link rel="stylesheet" href="' . generer_url_public('cfg.css'). '" type="text/css" media="all" />';
+	}
+	return $flux;
+}
+
+/**
+ * CSS à ajouter lors du #INSERT_HEAD_CSS
+ * 
+ * @param  Array $flux
+ * @return Array 
+ */
+function cfg_insert_head($flux){
+	$flux = spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
 	return $flux;
 }
 
