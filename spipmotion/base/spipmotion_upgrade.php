@@ -22,6 +22,7 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 		include_spip('base/abstract_sql');
 		if (version_compare($current_version,'0.0','<=')){
 			creer_base();
+			maj_tables('spip_documents');
 			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
 			$ffmpeg_infos(true);
 
