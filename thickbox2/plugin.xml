@@ -24,6 +24,10 @@ _ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
 	ThickBox1
 	</prefix>
 	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
