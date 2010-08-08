@@ -10,7 +10,9 @@
  */
 
 /**
- * Vérifier que les binaires utilisés soient correctement installés
+ * Fonction de vérification que les binaires utilisés soient correctement installés
+ * et exécutables
+ * 
  * -* ffmpeg
  * -* ffmpeg2theora
  * -* flvtool2
@@ -18,16 +20,34 @@
  * -* le script spipmotion.sh
  * -* la class ffmpeg-php
  *
+ * Si le safe_mode est activé, on l'inscrit dans les metas ainsi que son exec_dir
+ * afin de retrouver le script spipmotion.sh qui doit s'y trouver
+ * 
  * Note : Les codes de retour normaux d'une application sont :
  * -* 0 en cas de réussite
  * -* 1 en cas d'échec (l'application est là mais retourne une erreur)
  * -* 127 en cas d'absence de l'application
+ * 
  * @param unknown_type $valeurs
+ * @param boolean $notif : On notifie ou pas?
  */
 function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
-	$erreurs = array();
-
 	spip_log('Verification des binaires','spipmotion');
+	$erreurs = array();
+	
+	/**
+	 * On vérifie que safe_mode soit activé ou pas
+	 */
+	$safe_mode = @ini_get('safe_mode');
+	if($safe_mode == 1){
+		ecrire_config('spipmotion_safe_mode', 'oui');
+		$safe_mode_path = @ini_get('safe_mode_exec_dir');
+		ecrire_config('spipmotion_safe_mode_exec_dir', $safe_mode_path);
+	}else{
+		effacer_config('spipmotion_safe_mode');
+		effacer_config('spipmotion_safe_mode_exec_dir');
+	}
+	
 	if(!$valeurs)
 		$valeurs = lire_config('spipmotion');
 
@@ -95,8 +115,14 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 
 	/**
 	 * Tester le script spipmotion.sh présent dans script_bash/
+	 * Si le safe_mode est activé, il doit se trouver dans le répertoire des scripts autorisés
 	 */
-	exec(find_in_path('script_bash/spipmotion.sh').' --help',$retour_spipmotionsh,$retour_spipmotionsh_int);
+	if($safe_mode == 1){
+		$spipmotion_sh = $safe_mode_path.'/spipmotion.sh --help';
+	}else{
+		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh').' --help';
+	}
+	exec($spipmotion_sh,$retour_spipmotionsh,$retour_spipmotionsh_int);
 	if($retour_spipmotionsh_int != 0){
 		ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
 		$erreurs[] = 'spipmotion.sh';

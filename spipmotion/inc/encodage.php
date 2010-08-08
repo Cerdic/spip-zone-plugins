@@ -232,6 +232,12 @@ function encodage($source,$doc_attente){
 		}
 	}
 
+	if($GLOBALS['meta']['spipmotion_safe_mode'] == 'oui'){
+		$spipmotion_sh = $GLOBALS['meta']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
+	}else{
+		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
+	}
+	
 	/**
 	 * Encodage
 	 * Cas d'un fichier audio
@@ -240,7 +246,7 @@ function encodage($source,$doc_attente){
 		/**
 		 * Encodage du son
 		 */
-		$encodage = find_in_path('script_bash/spipmotion.sh').' --e '.$chemin.' --s '.$fichier_temp.' '.$acodec.' '.$audiobitrate_ffmpeg.' '.$audiofreq.' '.$audiochannels_ffmpeg.' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg").' &> '.$fichier_log;
+		$encodage = $spipmotion_sh.' --e '.$chemin.' --s '.$fichier_temp.' '.$acodec.' '.$audiobitrate_ffmpeg.' '.$audiofreq.' '.$audiochannels_ffmpeg.' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg").' &> '.$fichier_log;
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour,$retour_int);
 		spip_log($retour_int,'spipmotion');
@@ -369,14 +375,14 @@ function encodage($source,$doc_attente){
 				spip_log('on encode en 2 passes','spipmotion');
 				$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
 				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $query $infos_sup_normal\"";
-				$encodage_1 = find_in_path('script_bash/spipmotion.sh')." --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+				$encodage_1 = $spipmotion_sh." --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
 				spip_log($retour_int_1,'spipmotion');
 				if($retour_int_1 == 0){
 					$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					$infos_sup_normal_2 = "--params_supp \"-passlogfile $query $infos_sup_normal\"";
-					$encodage = find_in_path('script_bash/spipmotion.sh')." --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." 2> $fichier_log";
+					$encodage = $spipmotion_sh." --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." 2> $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
 					spip_log($retour_int,'spipmotion');
@@ -389,7 +395,7 @@ function encodage($source,$doc_attente){
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
-				$encodage = find_in_path('script_bash/spipmotion.sh')." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+				$encodage = $spipmotion_sh." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 				spip_log($encodage,'spipmotion');
 				$lancement_encodage = exec($encodage,$retour,$retour_int);
 				spip_log($retour_int,'spipmotion');

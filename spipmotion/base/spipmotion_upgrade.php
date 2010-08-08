@@ -103,9 +103,32 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	}
 }
 
+/**
+ * 
+ * Désinstallation du plugin
+ * 
+ * On supprime : 
+ * -* Les metas de configuration
+ * -* Les metas de vérification des programmes
+ * -* La table spip_spipmotion_attentes
+ * 
+ * On laisse :
+ * -* Les nouveaux champs sur la table spip_documents
+ * 
+ * @param float $nom_meta_base_version
+ */
 function spipmotion_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_drop_table("spip_spipmotion_attentes");
 	effacer_meta($nom_meta_base_version);
+	effacer_meta('spipmotion_ffmpeg_casse');
+	effacer_meta('spipmotion_casse');
+	effacer_meta('spipmotion_ffmpeg2theora_casse');
+	effacer_meta('spipmotion_flvtool_casse');
+	effacer_meta('spipmotion_qt-faststart_casse');
+	effacer_meta('spipmotion_spipmotionsh_casse');
+	effacer_meta('spipmotion_ffmpeg-php_casse');
+	effacer_meta('safe_mode');
+	effacer_meta('spipmotion_safe_mode_exec_dir');
 }
 ?>

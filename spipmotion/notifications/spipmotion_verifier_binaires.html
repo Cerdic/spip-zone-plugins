@@ -17,5 +17,7 @@
 <BOUCLE_binaires(POUR){tableau #ENV*{erreurs}}>
 - #VALEUR
 </BOUCLE_binaires>
+[(#CONFIG{spipmotion_safe_mode}|=={oui}|oui)
+<:spipmotion:message_texte_binaires_informer_safe_mode{execdir=#CONFIG{spipmotion_safe_mode_exec_dir}}:>]
 <:spipmotion:message_texte_binaires_informer:>
 #FILTRE{supprimer_tags|trim}

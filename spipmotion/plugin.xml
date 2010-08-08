@@ -7,7 +7,7 @@
 	Quentin Drouet (kent1)
 	</auteur>
 	<version>
-	0.4.7
+	0.4.8
 	</version>
 	<version_base>0.7.3</version_base>
 	<etat>
@@ -15,7 +15,8 @@
 	</etat>
 	<description>
 	<multi>
-	[fr] Faire un dailymotion sous spip ?
+	[fr] Faire un Youtube ou Dailymotion avec SPIP...
+	[en] Create a Youtube or Dailymotion with SPIP...
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
@@ -28,7 +29,6 @@
 	<prefix>
 	spipmotion
 	</prefix>
-
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<action>editer_contenu_objet</action>
@@ -66,7 +66,7 @@
 
 	<install>base/spipmotion_upgrade.php</install>
 
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.1;]" />
 	<necessite id='cfg' version='[1.13;]' />
 	<necessite id='saisies' version='[1.0;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />

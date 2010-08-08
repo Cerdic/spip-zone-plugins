@@ -18,6 +18,7 @@
  * @param unknown_type $options
  */
 function notifications_spipmotion_verifier_binaires($quoi, $id, $options){
+	include_spip('inc/envoyer_mail'); #pour nettoyer_titre_emails
 	if(($nb = count($options['erreurs'])) > 0){
 
 		$tous = array();

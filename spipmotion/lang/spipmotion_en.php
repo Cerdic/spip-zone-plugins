@@ -149,8 +149,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_encodage_unique_oui' => 'The document #@id_document@ has been properly encoded to @extension@.',
 	'message_encodage_unique_erreur' => 'The document #@id_document@ was not properly encoded to @extension@.',
 	'message_texte_binaire_manquant' => 'A necessary software is not available on your server :',
-	'message_texte_binaires_manquant' => 'Several software needed are not available on your server :',
+	'message_texte_binaires_informer_safe_mode' => 'Safe mode is activated on your website. Binaries should be installed in the "@execdir@" folder of the server.',
 	'message_texte_binaires_informer' => 'Please inform your system administrator.',
+	'message_texte_binaires_manquant' => 'Several software needed are not available on your server :',
 	'message_titre_binaire_manquant' => 'A missing software',
 	'message_titre_binaires_manquant' => 'Plusieurs logiciels manquant',
 
@@ -158,7 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non' => 'no',
 
 	// O
-	'options_config' => 'Configuration of the encoding',
+	'options_config' => 'Encoding configuration',
 	'oui' => 'yes',
 
 	// P
