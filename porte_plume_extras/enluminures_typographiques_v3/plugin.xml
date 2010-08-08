@@ -90,6 +90,10 @@ Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=
 		<inclure>typoenluminee.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>typoenluminee_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>typoenluminee_pipelines.php</inclure>
 	</pipeline>
