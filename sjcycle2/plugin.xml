@@ -1,41 +1,23 @@
-<?xml version="1.0"?>
 <plugin>
 	<nom>Spip jQuery Cycle Plugin : sjcycle2</nom>
 	<auteur>
-		<a href="http://www.minimalteck.fr/" style="color:#999;text-decoration:underline;" title="Minimalteck : http://www.minimalteck.fr/">Minimalteck</a>. Port&eacute; pour spip 2 par Yffic
+		[Minimalteck->http://www.minimalteck.fr/]. Port&#233; pour spip 2 par Yffic
 	</auteur>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<version_base>0.3</version_base>
 	<etat>test</etat>
 	<description>
-		<h3>Plugin Spip jQuery Cycle Version 2: sjcycle 2</h3>
-		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />
-		&nbsp;Diaporama paramétrable pour Spip basé sur la librairie javascript 
-		<a href="http://jquery.com/" style="color:#999;text-decoration:underline;" title="Site officiel de jQuery">jQuery</a>
-		 et les plugins :
-		<ul>
-			<li><a href="http://malsup.com/jquery/cycle/" style="color:#999;text-decoration:underline;" 
-				    title="Site officiel du jQuery Cycle Plugin">jQuery Cycle Plugin</a>;</li>
-			<li>FancyBox (via le <a href="http://www.spip-contrib.net/FancyBox,3020"
-				 style="color:#999;text-decoration:underline;" title="Plugin fancybox pour Spip">plugin fancybox pour spip</a>);</li>
-			<li><a href="http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/"
-				 style="color:#999;text-decoration:underline;" title="Site officiel du jQuery Tooltip Plugin">Tooltip</a>.</li>
-		</ul>
-		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Int&eacute;gration pour Spip [2.0.x] 
-		<ul>
-			<li>basée sur les formulaires <a href="http://www.spip.net/fr_article3800.html"
-			     style="color:#999;text-decoration:underline;" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;</li>
-			<li>utilisant le moteur de configuration <a href="http://www.spip-contrib.net/Config-cfg" 
-					style="color:#999;text-decoration:underline;" title="CFG sur Spip-Contrib">CFG</a> [1.10].</li>
-		</ul>
+Diaporama param&#233;trable pour Spip bas&#233; sur la librairie javascript <a href="http://jquery.com/" title="Site officiel de jQuery">jQuery</a> et les plugins :
+-* <a href="http://malsup.com/jquery/cycle/" title="Site officiel du jQuery Cycle Plugin">jQuery Cycle Plugin</a>;
+-* FancyBox (via le <a href="http://www.spip-contrib.net/FancyBox,3020" title="Plugin fancybox pour Spip">plugin fancybox pour spip</a>);
+-* <a href="http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/" title="Site officiel du jQuery Tooltip Plugin">Tooltip</a>.
+
+Int&#233;gration pour Spip [2.0.x] 
+-* bas&#233;e sur les formulaires <a href="http://www.spip.net/fr_article3800.html" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;
+-* utilisant le moteur de configuration <a href="http://www.spip-contrib.net/Config-cfg" title="CFG sur Spip-Contrib">CFG</a> [1.10].
 	</description>
 	<icon>images/sjcycle-32.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-Spip-jQuery-Cycle-2</lien>
-	<lien>
-		<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />
-			&nbsp;Configuration via <a href=".?exec=cfg&amp;cfg=sjcycle" style="color:#999;text-decoration:underline;" 
-			title="Configuration du plugin Spip jQuery Cycle (sjcycle) via CFG">CFG</a>
-	</lien>
 	<prefix>sjcycle</prefix>
 	<install>base/sjcycle_install.php</install>
 	<fonctions>sjcycle_fonctions.php</fonctions>

@@ -1,15 +1,16 @@
 <?php 
 
 function cfg_config_sjcycle_pre_verifier(&$cfg){
-   // vérif des valeurs 
+	// verif des valeurs du formulaire 
 	$erreurs = array();
 		
 	if (!lire_config('image_process')){
 		$erreurs['message_erreur'] = _T('sjcycle:erreur_config_image_process');
 		return $cfg->ajouter_erreurs($erreurs);
 	}
-
-	if (lire_config('creer_preview')!='oui') {//Génération de miniatures des images inactive
+	
+	//Generation de miniatures des images inactive
+	if (lire_config('creer_preview')!='oui') {
 		$erreurs['message_erreur'] = _T('sjcycle:erreur_config_creer_preview');
 		return $cfg->ajouter_erreurs($erreurs);
 	}

@@ -11,32 +11,35 @@
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
 [(#SET{div_height, #GET{img_bordure}|mult{2}|plus{#GET{img_height}} })]
 
-[(#SET{cssfancybox, 	  [(#EVAL{8}|randomString)]})]
+[(#SET{cssbox,	[(#EVAL{8}|randomString)]})]
 
 <B_img>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		[(#CONFIG{sjcycle/tooltip}|=={1}|oui)
-			$('.infobulle').tooltip({ 
+			$('.infobulle').tooltip({
 					bodyHandler: function() {
 						return $($(this).children(".textinfobulle")).html();
 					},
-					track: true, 
-					delay: 0, 
-					showURL: false, 
-					opacity: 1, 
+					track: true,
+					delay: 0,
+					showURL: false,
+					opacity: 1,
 					fixPNG: true,
-					extraClass: "pretty", 
-					top: -15, 
-					left: 5 
+					extraClass: "pretty",
+					top: -15,
+					left: 5
 			});
 		]
-		[(#CONFIG{sjcycle/fancy}|=={1}|oui)
-			$("a.#GET{cssfancybox}").fancybox({
+		[(#CONFIG{sjcycle/fancy}|=={on}|oui)
+			$("a.#GET{cssbox}").fancybox({
 				'hideOnContentClick': false
 			});
 		]
-		$("#dsjcycle_#GET{id_diapo}").cycle({ 
+		[(#CONFIG{sjcycle/mediabox}|=={on}|oui)
+			$("a.#GET{cssbox}").mediabox(box_settings);
+		]
+		$("#dsjcycle_#GET{id_diapo}").cycle({
 			 fx:			"#CONFIG{sjcycle/fx}",
 			 timeout:	"#CONFIG{sjcycle/timeout}",
 			 speed:		"#CONFIG{sjcycle/speed}",
@@ -51,19 +54,19 @@
 	</script>
 	[(#REM) diaporama documents images conteneur jquery cycle ]
 
-	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height})px;][background:(#GET{div_background})]'>
+	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height}|>{0}|oui)px;][background:(#GET{div_background})]'>
 
 	[(#REM) Solution de denisb pour eviter de dupliquer le code Cf http://article.gmane.org/gmane.comp.web.spip.zone/18622 ]
 
 	<BOUCLE_img(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
 		<div class="infobulle" style="width:#GET{img_width}px;
-      										height:#GET{img_height}px;
+      								[(#GET{img_height}|>{0}|oui)height:#GET{img_height}px;]
                                     padding:0px;
                                     margin:[(#GET{img_bordure})]px;">
-         [(#CONFIG{sjcycle/fancy}|=={1}|oui)
-            <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE" 
-                                         class="#GET{cssfancybox}"
-                                         rel="#GET{cssfancybox}"
+         [(#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui)
+            <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
+                                         class="#GET{cssbox}"
+                                         rel="#GET{cssbox}"
                                          title="[(#TITRE|supprimer_numero|attribut_html)]"
                                          style="display:block;padding:0px;margin:0px;">
          ]
@@ -88,7 +91,7 @@
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
-         [(#CONFIG{sjcycle/fancy}|=={1}|oui)
+         [(#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui)
          	</a>
          ]
          [(#CONFIG{sjcycle/tooltip}|=={1}|oui)
