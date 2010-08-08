@@ -10,7 +10,7 @@ function TypoEnluminee_insert_head_css($flux) {
 		else
 			$BarreTypoEnrichie_Preserve_Header = lire_config('bte/insertcss','Oui');
 		if ($BarreTypoEnrichie_Preserve_Header == 'Oui')
-			$flux .= '<link rel="stylesheet" href="'.find_in_path('css/enluminurestypo.css').'" type="text/css" media="all" />'."\n";
+			$flux .= "\n".'<link rel="stylesheet" href="'.find_in_path('css/enluminurestypo.css').'" type="text/css" media="all" />';
 	}
 	return $flux;
 }

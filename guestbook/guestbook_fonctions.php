@@ -15,7 +15,7 @@ function guestbook_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= '<link media="all" type="text/css" href="'.find_in_path('prive/css/formulaire_guestbook.css').'" rel="stylesheet" />';
+		$flux .= "\n".'<link media="all" type="text/css" href="'.find_in_path('prive/css/formulaire_guestbook.css').'" rel="stylesheet" />';
 	}
 	return $flux;
 }
