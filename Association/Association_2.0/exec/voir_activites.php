@@ -20,6 +20,9 @@ function exec_voir_activites(){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip('inc/plugin');
+		$liste = liste_plugin_actifs();
+		$agenda = isset($liste['agenda']);
 		
 		$id_evenement= intval(_request('id'));
 		
@@ -35,10 +38,13 @@ function exec_voir_activites(){
 		
 		echo debut_boite_info(true);		
 		echo association_date_du_jour();	
-		$query = sql_select("*", "spip_evenements", "id_evenement=$id_evenement") ;
-	 	while ($data = sql_fetch($query)) {
-			echo '<p><strong>'.$data['date_debut'].'<br />'.$data['titre'].'</strong></p>';
-			echo '<p>'._T('asso:activite_liste_legende').'</p>'; 	
+
+		if ($agenda) {
+			$query = sql_select("*", "spip_evenements", "id_evenement=$id_evenement") ;
+		 	while ($data = sql_fetch($query)) {
+				echo '<p><strong>'.$data['date_debut'].'<br />'.$data['titre'].'</strong></p>';
+				echo '<p>'._T('asso:activite_liste_legende').'</p>'; 	
+			}
 		}
 			
 		// TOTAUX
@@ -64,11 +70,12 @@ function exec_voir_activites(){
 	// PAGINATION ET FILTRES
 		echo '<table width="100%">';
 		echo '<tr>';
-		$data = sql_fetsel("*", "spip_evenements", "id_evenement=$id_evenement") ;
-		$date = substr($data['date_debut'],0,10);
-		$date = association_datefr($date);
-		$titre = $data['titre'];
-
+		if ($agenda) {
+			$data = sql_fetsel("*", "spip_evenements", "id_evenement=$id_evenement") ;
+			$date = substr($data['date_debut'],0,10);
+			$date = association_datefr($date); // ne sert pas ????
+			$titre = $data['titre']; // non plus
+		}
 		echo "<td style='text-align:right;'>\n";
 		echo '<form method="post" action="'.$url_voir_activites.'"><div>';
 		echo '<input type="hidden" name="id" value="'.$id_evenement.'" />';

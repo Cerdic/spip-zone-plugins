@@ -30,18 +30,28 @@ function exec_activites(){
 		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite("",true);
+		include_spip('inc/plugin');
+		$liste = liste_plugin_actifs();
+
+		if (isset($liste['AGENDA']))
+			exec_activites_evenements(_request('mot'));
+		else echo _T('asso:config_libelle_activites');
+		echo fin_gauche(),fin_page(); 
+	}
+}
+
+
+function exec_activites_evenements($mot){
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_toutes_activites'));
 		
 		// FILTRES
-		if ( isset($_REQUEST['mot']) ) { $mot = $_REQUEST['mot']; } 
-		else { $mot= "%"; }
+		if (!preg_match('/^[\w%]+$/', $mot))  $mot= "%";
 		
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td>';
 		$annee=$_GET['annee'];
 		if(empty($annee)){$annee = date('Y');}
-		
 		$query = sql_select("date_format( date_debut, '%Y' )  AS annee", "spip_evenements", "", "annee", "annee");
 		while ($data = sql_fetch($query)) {
 			if ($data['annee']==$annee) { echo ' <strong>'.$data['annee'].'</strong> '; }
@@ -122,7 +132,5 @@ function exec_activites(){
 		echo '</table>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page(); 
-	}
 }
 ?>
