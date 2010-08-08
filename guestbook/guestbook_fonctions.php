@@ -21,7 +21,7 @@ function guestbook_insert_head_css($flux){
 }
 
 function guestbook_insert_head($flux){
-	$flux .= guestbook_insert_head_css($flux); // au cas ou il n'est pas implemente
+	$flux = guestbook_insert_head_css($flux); // au cas ou il n'est pas implemente
 	return $flux;
 }
 ?>
