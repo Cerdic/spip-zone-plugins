@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'description_menu_accueil' => 'Lien vers la page d\'accueil du site.',
 	'description_menu_deconnecter' => 'Si le visiteur est connect&eacute;, ajoute une entr&eacute;e lui proposant la d&eacute;connexion.',
+	'description_menu_espace_prive' => 'Lien permettant de se connecter au site si on ne l\'est pas d&eacute;j&agrave;, puis d\'aller dans l\'espace priv&eacute; si l\'on y est autoris&eacute;.',
 	'description_menu_groupes_mots' => 'Affiche automatiquement un menu listant les mots du groupe et les articles liés. Par d&eacute;faut, affiche la liste des groupes de mots et les mots li&eacute;s. Si un squelette groupes_mots.html existe, le lien vers le groupe est utilis&eacute;.',
 	'description_menu_lien' => 'Ajoute un lien arbitraire, en interne (URL relative) ou externe (http://...).',
 	'description_menu_mapage' => 'Si le visiteur est connect&eacute;, ajoute un lien vers sa page auteur.',
@@ -40,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_sur_n_mots' => '@n@ mots affich&eacute;(s)',
 	'entree_sur_n_niveaux' => 'Sur @n@ niveau(x)',
 	'entree_titre' => 'Titre',
+	'entree_titre_prive' => 'Titre pour acc&eacute;der &agrave; l\'espace priv&eacute;',
+	'entree_titre_connecter' => 'Titre pour l\'acc&egrave;s au formulaire d\'identification',
 	'entree_tri_alpha' => 'Crit&egrave;re de tri (alphab&eacute;tique)',
 	'entree_tri_num' => 'Crit&egrave;re de tri (num&eacute;rique)',
 	'entree_type_objet' => 'Type de l\'objet',
@@ -86,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_menu_accueil' => 'Accueil',
 	'nom_menu_deconnecter' => 'Se d&eacute;connecter',
+	'nom_menu_espace_prive' => 'Se connecter / lien vers espace priv&eacute;',
 	'nom_menu_groupes_mots' => 'Mots-cl&eacute;s et Articles d\'un Groupes de mots',
 	'nom_menu_lien' => 'Lien arbitraire',
 	'nom_menu_mapage' => 'Ma page',
