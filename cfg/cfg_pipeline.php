@@ -106,7 +106,7 @@ function cfg_insert_head_css($flux){
  * @return Array 
  */
 function cfg_insert_head($flux){
-	$flux = spip_suggest_insert_head_css($flux); // au cas ou il n'est pas implemente
+	$flux = cfg_insert_head_css($flux); // au cas ou il n'est pas implemente
 	return $flux;
 }
 
