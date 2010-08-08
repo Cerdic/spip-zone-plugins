@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'icone_creer_evenement' => 'Cr&eacute;er un nouvel &eacute;v&eacute;nement',
 'item_mots_cles_association_evenements' => 'aux &eacute;v&eacute;nements',
+'indiquez_votre_choix' => 'Indiquez votre choix',
 'info_un_evenement' => '1 &eacute;v&eacute;nement',
 'info_nombre_evenements' => '@nb@ &eacute;v&eacute;nements',
 'info_aucun_evenement' => 'Aucun &eacute;v&eacute;nement',
