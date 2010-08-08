@@ -32,7 +32,8 @@ function association_vider_tables($nom_meta, $table){
 		spip_log("table $k detruite");
 		sql_drop_table($k);
 	}
-	spip_log("plugin association desinstallee ($nom_meta)");
+	unset($GLOBALS[$table][$nom_meta]);
+	spip_log("plugin association desinstallee ($nom_meta $table)");
 }
 
 // MAJ des tables de la base SQL
