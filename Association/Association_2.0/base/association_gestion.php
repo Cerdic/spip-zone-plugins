@@ -23,17 +23,16 @@ include_spip('base/abstract_sql');
 // Ce numero est fourni automatiquement par la fonction spip_plugin_install
 // lors de l'appel des fonctions de ce fichier.
 
-// desinstatllatin
+// desinstatllation
 
 function association_vider_tables($nom_meta, $table){
-	include_spip('base/abstract_sql');
-	include_spip('base/association');
-	foreach ($GLOBALS['association_tables_principales'] as $k=>$v) {
-		spip_log("table $k detruite");
-		sql_drop_table($k);
-	}
-	unset($GLOBALS[$table][$nom_meta]);
-	spip_log("plugin association desinstallee ($nom_meta $table)");
+	global $association_tables_principales, $association_tables_auxiliaires;
+	effacer_meta($nom_meta, $table);
+	foreach($association_tables_principales as $nom => $desc)
+		sql_drop_table($nom);
+	foreach($association_tables_auxiliaires as $nom => $desc)
+		sql_drop_table($nom);
+	spip_log("plugin association desinstalle");
 }
 
 // MAJ des tables de la base SQL
@@ -54,7 +53,7 @@ function association_upgrade($meta, $courante, $table='meta')
 		} else $n = 0;
 		$GLOBALS['association_metas']['base_version'] = $n;
 	} else $n = $GLOBALS['association_metas']['base_version'];
-
+	effacer_meta('association_base_version');
 	spip_log("association upgrade: $table $meta = $n =>> $courante");
 	if (!$n)
 		return association_maj_0($courante, $meta, $table);
