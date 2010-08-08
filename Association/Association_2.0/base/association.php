@@ -84,14 +84,15 @@ $association_tables_principales['spip_asso_ventes'] = array(
 //-- Table COMPTES ------------------------------------------
 $spip_asso_comptes = array(
 	"id_compte" 	=> "bigint(21) NOT NULL auto_increment",
-	"date" 			=> "date default NULL",
-	"recette" 		=> "float NOT NULL default '0'",
-	"depense" 		=> "float NOT NULL default '0'",
+	"date"		=> "date default NULL",
+	"recette" 	=> "float NOT NULL default '0'",
+	"depense" 	=> "float NOT NULL default '0'",
 	"justification" => "text",
 	"imputation" 	=> "text",
-	"journal" 		=> "tinytext",
+	"journal" 	=> "tinytext",
 	"id_journal" 	=> "int(11) NOT NULL default '0'",
-	"maj" 			=> "timestamp(14) NOT NULL"
+	"valide"	=>  "text",
+	"maj" 		=> "timestamp(14) NOT NULL"
 );						
 $spip_asso_comptes_key = array(
 	"PRIMARY KEY" => "id_compte"
