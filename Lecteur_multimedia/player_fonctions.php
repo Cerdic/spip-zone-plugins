@@ -11,12 +11,9 @@ if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 	define('_DIR_PLUGIN_PLAYER',(_DIR_PLUGINS.end($p)."/"));
 }
 
-function Player_head(){
-	
-	$player_ = ($p = $GLOBALS['meta']['player']) ? $p : _PLAYER_MP3_LECTEUR_DEFAULT;
-	
+function Player_call_js() {
 	$flux = "\n"
-		. "<!-- Player -->\n"
+		. "<!-- Player JS -->\n"
 		. '<script type="text/javascript" src="'.find_in_path('soundmanager/soundmanager2.js').'"></script>'
 		. '<script type="text/javascript"><!--' . "\n"
 		// . 'var musicplayerurl="'.find_in_path('flash/eraplayer_playlist.swf').'";'."\n"
@@ -31,15 +28,42 @@ function Player_head(){
 		. "//--></script>\n"
 		. '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>'."\n"
 		. '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>'."\n"
-		. '<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="all" />'."\n"
 		;
+	return $flux;
+}
+
+function Player_call_css() {
+	$flux = '<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="all" />'."\n";
+	return $flux;
+}
+
+function Player_head(){
+	
+	$player_ = ($p = $GLOBALS['meta']['player']) ? $p : _PLAYER_MP3_LECTEUR_DEFAULT;
+	
+	$flux =	Player_call_js();
+	$flux .= Player_call_css();
+
+	return $flux;
+}
+
+function Player_insert_head_css($flux){
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)
+		{
+			$flux .= Player_call_css();
+		}
+	}
 	return $flux;
 }
 
 function Player_insert_head($flux){
 	if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)
 	{
-		$flux .= Player_head();
+		$flux = Player_insert_head_css($flux);
+		$flux .= Player_call_js();
 	}
 	return $flux;
 }

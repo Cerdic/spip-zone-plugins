@@ -54,6 +54,9 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 		<inclure>inc/player_pipeline_ajouter_onglets.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>insert_head_css</nom>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 	</pipeline>
 	<pipeline>
