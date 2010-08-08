@@ -46,6 +46,10 @@
         <nom>insert_head</nom>
         <inclure>boutons_admin_supp_fonctions.php</inclure>
     </pipeline>
+    <pipeline>
+        <nom>insert_head_css</nom>
+        <inclure>boutons_admin_supp_fonctions.php</inclure>
+    </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>maintenance</categorie>
 </plugin>
