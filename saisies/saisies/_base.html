@@ -28,7 +28,7 @@
 ]
 [(#ENV{nom}|oui)
 	#SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
-	#SET{disable,#ENV{disable,#ENV{disable_avec_post}}|et{#ENV{disable,#ENV{disable_avec_post}}|!={non}}|?{disabled,''}}
+	#SET{disable,#ENV{disable,#ENV{disable_avec_post}}|et{#ENV{disable,#ENV{disable_avec_post}}|!={non}}|?{#ENV{disable}|is_array|?{#ENV{disable,#ARRAY},disable},''}}
 	#SET{readonly,#ENV{readonly}|et{#ENV{readonly}!={non}}|?{readonly,''}}
 	#SET{saisies_autonomes,#VAL|saisies_autonomes}
 	

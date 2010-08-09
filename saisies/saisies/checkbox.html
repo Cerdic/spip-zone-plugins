@@ -24,9 +24,14 @@
 #SET{defaut, #ENV{defaut}}
 #SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), (#GET{defaut}|sinon{#ARRAY})}}
 
+#SET{disabled,#ENV{disable}}
+[(#GET{disabled}|is_string|oui)
+	#SET{disabled,#ARRAY|push{#GET{disabled}}}
+]
+
 <BOUCLE_checkbox(POUR){tableau #GET{datas}}>
 <div class="#ENV{choix,choix}">
-	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_#ENV{nom}_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur,#GET{defaut}}}|oui)checked="checked"] value="#CLE" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_#ENV{nom}_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur,#GET{defaut}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"] />
 	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
 </div>
 </BOUCLE_checkbox>
