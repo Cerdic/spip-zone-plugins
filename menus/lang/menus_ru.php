@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'description_menu_accueil' => '&#1057;&#1089;&#1099;&#1083;&#1082;&#1072; &#1085;&#1072; &#1075;&#1083;&#1072;&#1074;&#1085;&#1091;&#1102; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1091;.',
 	'description_menu_deconnecter' => 'Si le visiteur est connect&eacute;, ajoute une entr&eacute;e lui proposant la d&eacute;connexion.', # NEW
+	'description_menu_espace_prive' => 'Lien permettant de se connecter au site si on ne l\'est pas d&eacute;j&agrave;, puis d\'aller dans l\'espace priv&eacute; si l\'on y est autoris&eacute;.', # NEW
 	'description_menu_groupes_mots' => 'Affiche automatiquement un menu listant les mots du groupe et les articles liés. Par d&eacute;faut, affiche la liste des groupes de mots et les mots li&eacute;s. Si un squelette groupes_mots.html existe, le lien vers le groupe est utilis&eacute;.', # NEW
 	'description_menu_lien' => 'Ajoute un lien arbitraire, en interne (URL relative) ou externe (http://...).', # NEW
 	'description_menu_mapage' => 'Si le visiteur est connect&eacute;, ajoute un lien vers sa page auteur.', # NEW
@@ -42,6 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_sur_n_mots' => '@n@ mots affich&eacute;(s)', # NEW
 	'entree_sur_n_niveaux' => '&#1053;&#1072; @n@ &#1091;&#1088;&#1086;&#1074;&#1085;&#1077;',
 	'entree_titre' => '&#1053;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077;',
+	'entree_titre_connecter' => 'Titre pour l\'acc&egrave;s au formulaire d\'identification', # NEW
+	'entree_titre_prive' => 'Titre pour acc&eacute;der &agrave; l\'espace priv&eacute;', # NEW
 	'entree_tri_alpha' => 'Crit&egrave;re de tri (alphab&eacute;tique)', # NEW
 	'entree_tri_num' => 'Crit&egrave;re de tri (num&eacute;rique)', # NEW
 	'entree_type_objet' => '&#1058;&#1080;&#1087; &#1086;&#1073;&#1098;&#1077;&#1082;&#1090;&#1072;',
@@ -88,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_menu_accueil' => '&#1043;&#1083;&#1072;&#1074;&#1085;&#1072;&#1103; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072;',
 	'nom_menu_deconnecter' => 'Se d&eacute;connecter', # NEW
+	'nom_menu_espace_prive' => 'Se connecter / lien vers espace priv&eacute;', # NEW
 	'nom_menu_groupes_mots' => 'Mots-cl&eacute;s et Articles d\'un Groupes de mots', # NEW
 	'nom_menu_lien' => 'Lien arbitraire', # NEW
 	'nom_menu_mapage' => 'Ma page', # NEW
