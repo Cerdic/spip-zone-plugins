@@ -11,7 +11,7 @@ Ce service est propos&eacute; par le site de &#171; [L'Evangile au Quotidien->ht
 L'affichage des lectures se fait, d'une part, via l'utilisation d'un mod&egrave;le {{spiperipsum}} dans les squelettes utilisateur ou dans les articles, et d'autre part,
 via des pages sp&eacute;ciales &#171; Evangile &#187; et &#171; Saint &#187; compatibles ZPIP. 
 	</description>
-	<lien>http://plugins.spip.net</lien>
+	<lien>http://www.spip-contrib.net/SPIPer-Ipsum-l-evangile-au</lien>
 	<prefix>spiperipsum</prefix>
 	<icon>spiperipsum-64.png</icon>
 	<fonctions>spiperipsum_fonctions.php</fonctions>

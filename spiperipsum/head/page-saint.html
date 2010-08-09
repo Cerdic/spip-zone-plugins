@@ -1,2 +1,5 @@
 <title><:spiperipsum:saint_quotidien|ucfirst:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <meta name="robots" content="none" />
+[(#PLUGIN{Z, version}|version_compare{2.0.0-dev, >=}|oui)
+<INCLURE{fond=inclure/head}>
+]
