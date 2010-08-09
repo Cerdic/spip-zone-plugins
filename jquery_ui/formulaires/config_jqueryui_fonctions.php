@@ -8,8 +8,6 @@
  */
 function cfg_config_jqueryui_charger(&$cfg){
 	$valeurs = &$cfg->val['plugins'];
-	spip_log('valeurs_charger','jqueryui');
-	spip_log($valeurs,'jqueryui');
 	if(!is_array($valeurs))
 		$valeurs = array();
 	$plugins_pipeline = pipeline('jqueryui_forcer');
