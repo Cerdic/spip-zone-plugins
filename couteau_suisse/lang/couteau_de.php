@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'N&auml;chste Seite',
 	'plug_actifs' => 'Aktive Plugins',
 	'plug_inactifs' => 'Inaktive Plugins',
-	'plugin_xml' => 'Fasst einige Zusatzfunktionen zusammen, mit der sie ihre SPIP-Website besser steuern k&ouml;nnen.
+	'plugin_xml' => 'Fasst einige neue Zusatzfunktionen zusammen, mit der sie ihre SPIP-Website besser steuern k&ouml;nnen.
 
 Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und w&auml;hlen Sie dann {{Schweizer Taschenmesser}}.
 
@@ -89,7 +89,7 @@ W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Ziffern entfernen}, {T
 
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibel mit: SPIP 1.9x und v2.0', # MODIF
+Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.xKompatibel mit: SPIP 1.9x und v2.0',
 	'pp_blocs_bloc' => 'Eingeklappten Block einf&uuml;gen',
 	'pp_blocs_visible' => 'Ge&ouml;ffneten Block einf&uuml;gen',
 	'pp_chatons_inserer' => 'Smiley &laquo;&nbsp;@chaton@&nbsp;&raquo; einf&uuml;gen',
