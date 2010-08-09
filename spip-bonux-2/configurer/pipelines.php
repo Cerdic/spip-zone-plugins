@@ -226,10 +226,10 @@ function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
 	// par defaut, sur la table des meta
 	$table = 'meta';
 	$cfg = explode('/',$cfg);
-	// si le premier argument est vide, c'est une syntaxe /table/
+	// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
 	if (!reset($cfg)) {
 		array_shift($cfg);
-		$table = array_shift($cfg);
+		if (count($cfg)) $table = array_shift($cfg);
 		if (!isset($GLOBALS[$table]))
 			lire_metas($table);
 		if (!isset($GLOBALS[$table]))
@@ -237,14 +237,19 @@ function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
 	}
 
 	$r = $GLOBALS[$table];
-	// si on a demande #CONFIG{/meta,'',0} il faut serializer
-	if (!count($cfg) AND !$unserialize)
-		$r = serialize($r);
+
+	// si on a demande #CONFIG{/meta,'',0}
+	if (!count($cfg))
+		return $unserialize ? $r : serialize($r);
+	
+	$deserialize = false; // on ne deserialise qu'une seule fois...
 	while($casier = array_shift($cfg)) {
 		$r = isset($r[$casier])?$r[$casier]:null;
 		// deserializer tant que c'est necessaire
-		if ($r  AND is_string($r) AND (count($cfg) OR $unserialize))
+		if (!$deserialize AND $r  AND is_string($r) AND (count($cfg) OR $unserialize)) {
+			$deserialize = true;
 			$r = unserialize($r);
+		}
 	}
 
 	if (is_null($r)) return $def;
