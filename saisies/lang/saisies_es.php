@@ -7,6 +7,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// L
+	'label_annee' => 'Ann&eacute;e', # NEW
+	'label_jour' => 'Jour', # NEW
+	'label_mois' => 'Mois', # NEW
+
 	// O
 	'option_attention_explication' => 'Un mensaje m&aacute;s importante que la explicaci&oacute;n.',
 	'option_attention_label' => 'Aviso',
@@ -69,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_explication_titre' => 'Explication', # NEW
 	'saisie_fieldset_explication' => 'Un marco que podr&aacute; englobar varios campos.',
 	'saisie_fieldset_titre' => 'Grupo de campos',
+	'saisie_file_explication' => 'Envoi d\'un fichier', # NEW
+	'saisie_file_titre' => 'Fichier', # NEW
 	'saisie_hidden_explication' => 'Un champ pr&eacute;-rempli que l\'utilisateur ne pourra pas voir.', # NEW
 	'saisie_hidden_titre' => 'Champ cach&eacute;', # NEW
 	'saisie_input_explication' => 'Una sola l&iacute;nea de texto, que puede ser visible u ocultada (contrase&ntilde;a).',

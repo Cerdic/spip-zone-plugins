@@ -7,6 +7,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// L
+	'label_annee' => 'Ann&eacute;e', # NEW
+	'label_jour' => 'Jour', # NEW
+	'label_mois' => 'Mois', # NEW
+
 	// O
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
@@ -69,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_explication_titre' => 'Explication', # NEW
 	'saisie_fieldset_explication' => 'A frame which may include several fields.',
 	'saisie_fieldset_titre' => 'Fieldset',
+	'saisie_file_explication' => 'Envoi d\'un fichier', # NEW
+	'saisie_file_titre' => 'Fichier', # NEW
 	'saisie_hidden_explication' => 'Un champ pr&eacute;-rempli que l\'utilisateur ne pourra pas voir.', # NEW
 	'saisie_hidden_titre' => 'Champ cach&eacute;', # NEW
 	'saisie_input_explication' => 'A simple line of text that can be visible or hidden (password).',

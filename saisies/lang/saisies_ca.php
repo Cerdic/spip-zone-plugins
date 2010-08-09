@@ -7,6 +7,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// L
+	'label_annee' => 'Ann&eacute;e', # NEW
+	'label_jour' => 'Jour', # NEW
+	'label_mois' => 'Mois', # NEW
+
 	// O
 	'option_attention_explication' => 'Un missatge m&eacute;s important que l\'explicaci&oacute;.',
 	'option_attention_label' => 'Advert&egrave;ncia',
@@ -69,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_explication_titre' => 'Explicaci&oacute;',
 	'saisie_fieldset_explication' => 'Un quadre que podr&agrave; englobar diversos camps.',
 	'saisie_fieldset_titre' => 'Grup de camps',
+	'saisie_file_explication' => 'Envoi d\'un fichier', # NEW
+	'saisie_file_titre' => 'Fichier', # NEW
 	'saisie_hidden_explication' => 'Un camp omplert pr&egrave;viament que l\'usuari no podr&agrave; veure.',
 	'saisie_hidden_titre' => 'Camp amagat',
 	'saisie_input_explication' => 'Una simple l&iacute;nia de text, que podr&agrave; ser visible o estar amagada (contrasenya).',
