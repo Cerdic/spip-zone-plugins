@@ -11,10 +11,10 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 
 	<ul>
-	
 	[(#SAISIE{checkbox,plugins,
 		label=<:jqueryui:cfg_lbl_plugins:>,
 		explication=<:jqueryui:cfg_explication_plugins:>,
+		disable=#ENV{plugins_disable},
 		datas=#ARRAY{
 			jquery-ui-1.8.2.custom,<:jqueryui:cfg_val_complete:>,
 			jquery.ui.core,<:jqueryui:cfg_val_ui_core:>,
