@@ -8,8 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Pr&iacute;zvuky sa neber&uacute; v &uacute;vahu ("&#269;l&aacute;nok" alebo "clanok", d&aacute; rovnak&yacute; v&yacute;sledok, zah&#341;&#328;aj&uacute;c "&#269;l&aacute;nok", "&#269;lanok", "cl&aacute;nok"...)',
-	'asie' => '&aacute;zia',
+	'accents_pas_pris' => 'Pr&iacute;zvuky sa neber&uacute; do &uacute;vahu ("&#269;l&aacute;nok" alebo "clanok", d&aacute; rovnak&yacute; v&yacute;sledok, to ist&eacute; "&#269;l&aacute;nok", "&#269;lanok", "cl&aacute;nok"...)',
+	'asie' => '&Aacute;zia',
 	'asterisque_terminale' => 'nevyh&#318;ad&aacute; &#382;iadne v&yacute;sledky: hviezdi&#269;ka mus&iacute; by&#357; na konci',
 	'aussi' => 'tie&#382;',
 
@@ -17,18 +17,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'casse_indifferente' => 'Sp&ocirc;sob p&iacute;sania p&iacute;smen v slove (mal&eacute; p&iacute;smen&aacute;/ve&#318;k&eacute; p&iacute;smen&aacute;) nem&aacute; vplyv.',
 	'convertir_myisam' => 'Konvertova&#357; do MyISAM',
 	'convertir_toutes' => 'Konvertova&#357; v&#353;etky tabu&#318;ky do MyISAM',
-	'convertir_utf8' => 'obnovi&#357; koherenciu konvertovan&iacute;m do UTF-8 ',
-	'creer_tous' => 'Vytvori&#357; v&#353;etky navrhovan&eacute; indexy FULLTEXT-u ',
+	'convertir_utf8' => 'obnovi&#357; koherenciu konverziou do UTF-8 ',
+	'creer_tous' => 'Vytvori&#357; v&#353;etky navrhovan&eacute; FULLTEXTov&eacute; indexy ',
 
 	// E
 	'enfan' => 'cudz',
-	'enfance' => 'cudzina',
-	'enfant' => 'cudzinec',
-	'enfanter' => 'cudzos&#357;',
-	'enfantillage' => 'cudzokrajn&yacute;',
-	'enfants' => 'cudzozemec',
+	'enfance' => 'detstvo',
+	'enfant' => 'die&#357;a',
+	'enfanter' => 'die&#357;a',
+	'enfantillage' => 'detskos&#357;',
+	'enfants' => 'deti',
 	'et' => 'A',
-	'etranger' => 'die&#357;a',
+	'etranger' => 'cudzinec',
 	'exemples' => 'Pr&iacute;klady pou&#382;itia',
 
 	// F

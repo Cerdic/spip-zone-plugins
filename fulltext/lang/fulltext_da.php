@@ -16,8 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'casse_indifferente' => 'Det er lige meget, om man skriver med store eller sm&aring; bogstaver.',
 	'convertir_myisam' => 'Konverter til MyISAM',
-	'convertir_toutes' => 'Convert all tables to MyISAM', # NEW
-	'convertir_utf8' => 'convert to UTF-8 to restore coherency', # NEW
+	'convertir_toutes' => 'Convertir toutes les tables en MyISAM', # NEW
+	'convertir_utf8' => 'convertir en UTF-8 pour restaurer la coh&#233;rence', # NEW
 	'creer_tous' => 'Dan alle foresl&aring;ede FULLTEXT tabeller',
 
 	// E
@@ -32,33 +32,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exemples' => 'Eksempler p&aring; brug',
 
 	// F
-	'fant' => 'erim',
+	'fant' => 'domsven',
 	'fonctionnement_recherche' => 'Hvordan s&oslash;gefunktionen virker p&aring; denne side',
-	'fulltext_cree' => 'FULLTEXT created', # NEW
+	'fulltext_cree' => 'FULLTEXT cr&#233;&#233;', # NEW
 
 	// I
 	'il_faut_myisam' => 'MyISAM kr&aelig;ves',
-	'incoherence_charset' => 'There is an inconsistency between the character set of your site and that of the database. This may lead to bad results being given for searches which contain accented letters:', # NEW
-	'index_regenere' => 'table index regenerated', # NEW
-	'index_reinitialise' => 'The documents showing an error have been reinitialised', # NEW
-	'index_supprime' => 'index deleted', # NEW
+	'incoherence_charset' => 'Une incoh&#233;rence entre le charset de votre site et celui des tables de votre base de donn&#233;es risque de fausser les recherches avec caract&#232;res accentu&#233;s:', # NEW
+	'index_regenere' => 'index de la table r&#233;g&#233;n&#233;r&#233;s', # NEW
+	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s', # NEW
+	'index_supprime' => 'index supprim&eacute;', # NEW
 
 	// L
-	'liste_tables_connues' => 'Here is the list of tables taken into account for searches. You can add more FULLTEXT elements -- see the documentation at', # NEW
+	'liste_tables_connues' => 'Voici la liste des tables connues de la recherche. Vous pouvez y ajouter des &#233;l&#233;ments FULLTEXT, cf. documentation &#224; l\'adresse', # NEW
 
 	// M
 	'mais_pas' => 'men IKKE',
 
 	// O
-	'ou_bien' => 'or else', # NEW
+	'ou_bien' => 'ou bien', # NEW
 
 	// P
-	'pas_index' => 'No FULLTEXT index', # NEW
+	'pas_index' => 'Pas d\'index FULLTEXT', # NEW
 	'premier_soit' => 'ENTEN',
 
 	// R
-	'regenerer_tous' => 'Regenerate all FULLTEXT indexes', # NEW
-	'reinitialise_index_doc' => 'Reinitialise the indexation of documents showing an error', # NEW
+	'regenerer_tous' => 'R&#233;g&#233;n&#233;rer tous les index FULLTEXT', # NEW
+	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur', # NEW
 	'reserve_webmestres' => 'Kun webadministratorer kan bruge denne side',
 	'retourne' => 'Giver tekst som indeholder',
 
@@ -68,9 +68,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Slet',
 
 	// T
-	'table_convertie' => 'table converted to MyISAM', # NEW
-	'table_format' => 'This table\'s format is', # NEW
-	'table_non_reconnue' => 'unrecognised table', # NEW
+	'table_convertie' => 'table convertie en MyISAM', # NEW
+	'table_format' => 'Cette table est au format', # NEW
+	'table_non_reconnue' => 'table non reconnue', # NEW
 	'textes_premier' => 'men viser f&oslash;rst tekst, som indeholder',
 
 	// U
