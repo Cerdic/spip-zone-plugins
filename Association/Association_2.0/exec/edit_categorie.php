@@ -66,8 +66,8 @@ function exec_edit_categorie(){
 		. $duree.'" id="duree" class="formo" />'
 		. '<label for="montant"><strong>' . _T('asso:montant_en_euros')
 		. '&nbsp;:</strong></label>'
-		. '<input name="montant" type="text" value="'
-		. $cotisation.'" id="montant" class="formo" />'
+		. '<input name="cotisation" type="text" value="'
+		. $cotisation.'" id="cotisation" class="formo" />'
 		. '<label for="commentaires"><strong>' . _T('asso:commentaires') . '&nbsp;:</strong></label>'
 		. '<textarea name="commentaires" id="commentaires" class="formo"  rows="3" cols="80">'
 		. $commentaires.'</textarea>'

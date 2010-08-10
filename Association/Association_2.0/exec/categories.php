@@ -54,8 +54,8 @@ function exec_categories(){
 			echo '<td class="arial11 border1" style="text-align: right;">'.$data['duree']."</td>\n";
 			echo '<td class="arial11 border1" style="text-align: right;">'.$data['cotisation']."</td>\n";
 			echo '<td class="arial11 border1">'.$data['commentaires']."</td>\n";
-			echo '<td class="arial11 border1" style="text-align: center;">' . association_bouton(_T('asso:bouton_supprimer'), 'poubelle-12.gif', 'action_categorie','&id='.$data['id_categorie']). "</td>\n";
-			echo '<td class="arial11 border1" style="text-align: center;">' . association_bouton(_T('asso:bouton_modifier'), 'edit-12.gif', 'edit_categorie','&id='.$data['id_categorie']). "</td>\n";
+			echo '<td class="arial11 border1" style="text-align: center;">' . association_bouton(_T('asso:bouton_supprimer'), 'poubelle-12.gif', 'action_categorie','id='.$data['id_categorie']). "</td>\n";
+			echo '<td class="arial11 border1" style="text-align: center;">' . association_bouton(_T('asso:bouton_modifier'), 'edit-12.gif', 'edit_categorie','id='.$data['id_categorie']). "</td>\n";
 			echo'  </tr>';
 		}     
 		echo'</table>';
