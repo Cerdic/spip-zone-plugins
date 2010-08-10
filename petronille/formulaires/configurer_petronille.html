@@ -14,20 +14,20 @@
 					<input type="checkbox" class="checkbox" name="feuille_reset" id="feuille_reset" checked="checked" disabled="disabled" />
 				</li>
 				<li class="petronille_feuille_typo[ (#ENV**{erreurs}|table_valeur{feuille_typo}|oui)erreur]">
-					<label for="feuille_typo"><b>typo.css</b>&nbsp;:<br />base typographique<br />#ENV{feuille_typo}</label>[
+					<label for="feuille_typo"><b>typo.css</b>&nbsp;:<br />base typographique</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_typo})</span>
 					]
-					<input type="checkbox" class="checkbox" name="feuille_typo" id="feuille_typo"[ value="(#ENV{feuille_typo})"] />
+					<input type="checkbox" class="checkbox" name="feuille_typo" id="feuille_typo" value="oui"[ (#ENV{feuille_typo}|=={oui}|oui)checked="checked"] />
 				</li>
 				<li class="petronille_feuille_forms[ (#ENV**{erreurs}|table_valeur{feuille_forms}|oui)erreur]">
 					<label for="feuille_forms"><b>forms.css</b>&nbsp;:<br />base pour formulaires</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_forms})</span>
-					]<input type="checkbox" class="checkbox" name="feuille_forms" id="feuille_forms"[ value="(#ENV{feuille_forms})"] />
+					]<input type="checkbox" class="checkbox" name="feuille_forms" id="feuille_forms" value="oui"[ (#ENV{feuille_forms}|=={oui}|oui)checked="checked"] />
 				</li>
 				<li class="petronille_feuille_grid[ (#ENV**{erreurs}|table_valeur{feuille_grid}|oui)erreur]">
 					<label for="feuille_grid"><b>grid.css</b>&nbsp;:<br />&eacute;l&eacute;ments de composition</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_grid})</span>
-					]<input type="checkbox" class="checkbox" name="feuille_grid" id="feuille_grid"[ value="(#ENV{feuille_grid})"] />
+					]<input type="checkbox" class="checkbox" name="feuille_grid" id="feuille_grid" value="oui"[ (#ENV{feuille_grid}|=={oui}|oui)checked="checked"] />
 				</li>
 				<li class="petronille_feuille_layout">
 					<label for="feuille_layout"><b>layout.css</b>&nbsp;:<br />structure commune des pages</label>
