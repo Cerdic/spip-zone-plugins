@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>Démo jqPlot</title>
+<meta name="description" content="Démo du plugin sur le site public" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+#INSERT_HEAD
+</head>
+<body>
+
+
+<script type="text/javascript" src="#EVAL{_DIR_JQPLOT_JS.'plugins/jqplot.dateAxisRenderer.min.js'}"></script>
+<script type="text/javascript" src="#EVAL{_DIR_JQPLOT_JS.'plugins/jqplot.canvasTextRenderer.min.js'}"></script>
+<script type="text/javascript" src="#EVAL{_DIR_JQPLOT_JS.'plugins/jqplot.canvasAxisTickRenderer.min.js'}"></script>
+<script type="text/javascript" src="#EVAL{_DIR_JQPLOT_JS.'plugins/jqplot.highlighter.min.js'}"></script>
+<script type="text/javascript" src="#EVAL{_DIR_JQPLOT_JS.'plugins/jqplot.cursor.min.js'}"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+line1=[['2009-08',59],['2009-09',91],['2009-10',1130],['2009-11',322]];
+line2 = [['2009-08',1],['2009-09',22],['2009-10',995],['2009-11',197]];
+line3 = [['2009-08',9],['2009-09',20],['2009-10',39],['2009-11',39]];
+line4 = [['2009-10',3],['2009-11',9],['2009-12',28],['2010-01',29]];
+
+
+plot1 = $.jqplot('chart1', [line1,line2,line3,line4] , {
+    title:'Titre',
+    legend:{show:true, location:'nw', xoffset:10},
+    series:[{label:'ligne 1'},{label:'ligne 2'},{label:'ligne 3'},{label:'ligne4'}],
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+            tickOptions:{
+                formatString:'%b %Y', 
+                fontSize:'10pt', 
+                fontFamily:'Tahoma', 
+                angle:-30
+            }
+        },
+        yaxis:{
+        	tickOptions:{formatString:'%d'},
+        	min:0
+        	}
+    }, 
+    seriesDefaults: {
+    	lineWidth: 1.5,
+    	markerOptions: {
+    		show: true,
+    		size: 5,
+    		lineWidth: 1
+    	}
+    },
+    highlighter: {sizeAdjust: 7.5},
+    cursor: {show: false}
+});
+
+});
+</script>
+
+<div style="margin:auto;width:80%">
+
+<h1>Démo de jqPlot</h1>
+
+<p>Voir <a href="../lib/dist/examples">d'autres exemples</a></p>
+<p>Voir <a href="http://www.jqplot.com/tests/">toute la doc</a></p>
+
+
+	<div class="jqPlot" id="chart1" style="height:420px; width:740px;"></div>
+
+</div>
+
+
+</body>
+</html>

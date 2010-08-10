@@ -1,0 +1,23 @@
+<plugin>
+	<nom>jqPlot</nom>
+	<auteur>Chris Leonello</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Un plugin jQuery pour faire des graphiques élaborés en javascript. Mis en plugin SPIP par BoOz - booz@rezo.net</description>
+	<lien>http://www.jqplot.com/</lien>
+	<prefix>jqplot</prefix>
+	<icon>img/jqplot.jpg</icon>
+	<options>jqplot_options.php</options>
+	<necessite id="lib:dist" src="http://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.0.9.7.zip" />
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>jqplot_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>jqplot_pipelines.php</inclure>
+	</pipeline>
+	<categorie></categorie>
+</plugin>
+
+
