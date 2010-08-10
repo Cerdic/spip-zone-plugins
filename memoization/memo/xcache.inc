@@ -17,10 +17,18 @@ bool  cache_unlock(string key)
 @define('_LOCK_MAX', 30); # max lock time (seconds)
 
 function cache_get($key) {
-	return xcache_get(_CACHE_NAMESPACE.$key);
+	$a = xcache_get(_CACHE_NAMESPACE.$key);
+	// maybe_unserialize
+	if (is_array($a))
+		return @unserialize($a[0]);
+	else
+		return $a;
 }
 
 function cache_set($key, $value, $ttl=null) {
+	// maybe_serialize
+	if (is_object($value) OR is_array($value))
+		$value = array(serialize($value));
 	return is_null($ttl)
 		? xcache_set(_CACHE_NAMESPACE.$key, $value)
 		: xcache_set(_CACHE_NAMESPACE.$key, $value, $ttl);
