@@ -16,6 +16,7 @@ Vos retours critiques sont bienvenus pour am&eacute;liorer P&eacute;tronille&nbs
 </description>
 <version>0.4.1</version>
 <etat>dev</etat>
+<categorie>outil</categorie>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>
 <necessite id="SPIP" version="[;]" />
