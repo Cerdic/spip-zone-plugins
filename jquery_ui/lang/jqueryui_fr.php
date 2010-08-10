@@ -6,7 +6,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//C
 	'cfg_boite_jqueryui' => 'Configuration de jQuery UI',
-	'cfg_descr_jqueryui' => 'jQuery UI pour SPIP',
 	'cfg_effacer' => 'Effacer',
 	'cfg_explication_plugins' => 'Choisissez les plugins &agrave; ins&eacute;rer dans l\'ent&ecirc;te des pages publiques.',
 
