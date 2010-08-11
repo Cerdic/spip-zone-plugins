@@ -33,7 +33,7 @@ function yaml_encode($struct, $opt = array()) {
 	}
 
 	require_once _DIR_PLUGIN_YAML.'inc/yaml_sfyaml.php';
-	return yaml_sfyaml_encode($input);
+	return yaml_sfyaml_encode($struct, $opt);
 }
 
 /*
