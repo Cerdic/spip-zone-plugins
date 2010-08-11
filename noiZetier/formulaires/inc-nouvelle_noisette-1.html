@@ -8,7 +8,7 @@
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_page{type=#GET{nom_type}}:></strong></div>
 			<BOUCLE_type_noisettes(POUR){tableau #ENV{_noisettes_type}}{par valeur}>
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
-				[(#VALEUR|table_valeur{icon}|image_reduire{24})]
+				[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
 				<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
 				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
 			</div>
@@ -20,7 +20,7 @@
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></strong></div>
 			<BOUCLE_composition_noisettes(POUR){tableau #ENV{_noisettes_composition}}{par valeur}>
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
-				[(#VALEUR|table_valeur{icon}|image_reduire{24})]
+				[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
 				<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
 				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
 			</div>
@@ -31,7 +31,7 @@
 		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_toutes_pages:></strong></div>
 		<BOUCLE_page_noisettes(POUR){tableau #ENV{_noisettes_toutes_pages}}{par valeur}>
 		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
-			[(#VALEUR|table_valeur{icon}|image_reduire{24})]
+			[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
 			<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
 			<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
 		</div>
