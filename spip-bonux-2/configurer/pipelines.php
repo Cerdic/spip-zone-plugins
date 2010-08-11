@@ -170,6 +170,11 @@ function spip_bonux_configurer_stocker($form,$valeurs,$store) {
 		$c = explode('/',$casier);
 		$casier_principal = array_shift($c);
 		$st = isset($GLOBALS[$table][$casier_principal])?$GLOBALS[$table][$casier_principal]:array();
+		if (is_string($st) AND (count($c) OR is_array($store))) {
+			$st = unserialize($st);
+			if ($st===false) 
+				$st=array();
+		}
 		$sc = &$st;
 		while (count($c) AND $cc=reset($c)) {
 			// creer l'entree si elle n'existe pas
@@ -178,7 +183,10 @@ function spip_bonux_configurer_stocker($form,$valeurs,$store) {
 			$sc = &$sc[$cc];
 			array_shift($c);
 		}
-		$sc = $store;
+		if (is_array($sc) AND count($sc))
+			$sc = array_merge($sc,$store);
+		else
+			$sc = $store;
 		$store = array($casier_principal => serialize($st));
 	}
 
