@@ -98,7 +98,7 @@ function spip_bonux_formulaires_configurer_recense($form){
 
 			foreach($balises as $b) {
 				if ($n = extraire_attribut($b, 'name')
-					AND preg_match(",^(\w+)(\[\w*\])?$,",$n,$r)
+					AND preg_match(",^([\w\-]+)(\[\w*\])?$,",$n,$r)
 					AND !in_array($n,array('formulaire_action','formulaire_action_args'))
 					AND extraire_attribut($b,'type')!=='submit') {
 						$valeurs[$r[1]] = '';
@@ -110,6 +110,7 @@ function spip_bonux_formulaires_configurer_recense($form){
 			}
 		}
 	}
+
 
 	spip_bonux_configurer_lire_meta($form,$valeurs);
 	return $valeurs;
@@ -229,12 +230,17 @@ function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
 	// lire le stockage sous la forme /table/valeur
 	// ou valeur qui est en fait implicitement /meta/valeur
 	// ou casier/valeur qui est en fait implicitement /meta/casier/valeur
+	if ($cfg AND strpos($cfg,'/')===false){
+		return isset($GLOBALS['meta'][$cgf])?
+		  ((!$unserialize OR ($t=unserialize($GLOBALS['meta'][$cgf]))===false)?$GLOBALS['meta'][$cgf]:$t)
+		  :$def;
+	}
 
 	// par defaut, sur la table des meta
 	$table = 'meta';
 	$cfg = explode('/',$cfg);
 	// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
-	if (!reset($cfg)) {
+	if (!reset($cfg) AND count($cfg)>1) {
 		array_shift($cfg);
 		if (count($cfg)) $table = array_shift($cfg);
 		if (!isset($GLOBALS[$table]))
