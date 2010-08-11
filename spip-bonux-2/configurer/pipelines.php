@@ -20,8 +20,10 @@ function spip_bonux_formulaire_charger($flux){
 
 		$flux['data'] = spip_bonux_formulaires_configurer_recense($form);
 		$flux['data']['editable'] = true;
-		if (_request('var_mode')=='configurer'){
-			var_dump($flux['data']);
+		if (_request('var_mode')=='configurer' AND autoriser('webmestre')){
+			if (!_AJAX) var_dump($flux['data']);
+			// reinjecter pour la trace au traitement
+			$flux['data']['_hidden'] = "<input type='hidden' name='var_mode' value='configurer' />";
 		}
 	}
 	return $flux;
@@ -60,9 +62,9 @@ function spip_bonux_formulaire_traiter($flux){
 				$store[$k] = _request($k);
 		}
 
-		spip_bonux_configurer_stocker($form,$valeurs,$store);
+		$trace = spip_bonux_configurer_stocker($form,$valeurs,$store);
 
-		$flux['data'] = array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
+		$flux['data'] = array('message_ok'=>_T('config_info_enregistree').$trace,'editable'=>true);
 	}
 	return $flux;
 }
@@ -154,6 +156,7 @@ function spip_bonux_definir_configurer_conteneur($form,$valeurs) {
  * @param <type> $store
  */
 function spip_bonux_configurer_stocker($form,$valeurs,$store) {
+	$trace = '';
 	list($table,$casier,$prefixe) = spip_bonux_definir_configurer_conteneur($form,$valeurs);
 	// stocker en base
 	// par defaut, dans un casier serialize dans spip_meta (idem CFG)
@@ -181,7 +184,11 @@ function spip_bonux_configurer_stocker($form,$valeurs,$store) {
 	$prefixe = ($prefixe?$prefixe.'_':'');
 	foreach($store as $k=>$v){
 		ecrire_meta($prefixe.$k, $v, true, $table);
+		if (_request('var_mode')=='configurer' AND autoriser('webmestre')){
+			$trace .= "<br />table $table : ".$prefixe.$k." = $v;";
+		}
 	}
+	return $trace;
 }
 
 function spip_bonux_configurer_lire_meta($form,&$valeurs) {
