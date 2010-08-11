@@ -3,10 +3,10 @@
 	Accessibilit&#233;
 	</nom>
 	<auteur>
-	Goetsu	&#169; 2008 - GNU/GPL
+	Goetsu et RealET &#169; 2010 - GNU/GPL
 	</auteur>
 	<version>
-	0.4
+	0.5
 	</version>
 	<etat>
 	dev
@@ -18,8 +18,12 @@
 	<prefix>
 	Accessibilite
 	</prefix>
-	<icon>img_pack/wcag1AAA.png
-	</icon>
+	<icon>img_pack/wcag1AAA.png</icon>
+	<pipeline>
+		<nom>pre_liens</nom>
+		<inclure>accessibilite_pipelines.php</inclure>
+	</pipeline>
+	
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<utilise id="gestdoc" version="[1.1.2;]" />
