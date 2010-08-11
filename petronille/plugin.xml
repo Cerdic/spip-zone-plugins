@@ -28,4 +28,9 @@ Vos retours critiques sont bienvenus pour am&eacute;liorer P&eacute;tronille&nbs
 	<titre>P&eacute;tronille</titre>
 	<url>configurer_petronille</url>
 </bouton>
+
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>petronille_pipelines.php</inclure>
+</pipeline>
 </plugin>
