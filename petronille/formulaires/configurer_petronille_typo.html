@@ -19,10 +19,10 @@
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-size})</span>
 					]<input type="text" class="text" name="font-size" id="font-size" [ value="(#ENV{font-size}|sinon{1em})"] style="width: 6em;" />
 				</li>
-				<li class="petronille_font-size[ (#ENV**{erreurs}|table_valeur{font-size}|oui)erreur]">
-					<label for="font-size">Interlignage</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-size})</span>
-					]<input type="text" class="text" name="font-size" id="font-size" [ value="(#ENV{font-size}|sinon{1.5em})"] style="width: 6em;" />
+				<li class="petronille_line-height[ (#ENV**{erreurs}|table_valeur{line-height}|oui)erreur]">
+					<label for="line-height">Interlignage</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{line-height})</span>
+					]<input type="text" class="text" name="line-height" id="line-height" [ value="(#ENV{line-height}|sinon{1.5em})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_color[ (#ENV**{erreurs}|table_valeur{color}|oui)erreur]">
 					<label for="color">Couleur du texte</label>[
