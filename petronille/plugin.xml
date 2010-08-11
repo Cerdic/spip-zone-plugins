@@ -1,20 +1,8 @@
 <plugin>
 <nom>P&eacute;tronille</nom>
 <icon>icon.png</icon>
-<description>Framework CSS pour SPIP, en cours de d&eacute;veloppement. Pour l'utiliser, <strong>commencez par appeler ces feuilles de style EN PREMIER</strong> dans le head de vos pages.
-
--* <code>reset.css</code> : mise &agrave; z&eacute;ro multinavigateurs
--* <code>typo.css</code> : base typographique
--* <code>forms.css</code> : base pour formulaires
--* <code>grid.css</code> : &eacute;l&eacute;ments de composition
-
-Pour utiliser toutes ces feuilles d'un coup, appelez seulement <code>petronille.css</code>
-
-Il est d&eacute;conseill&eacute; d'activer P&eacute;tronille sur un site d&eacute;j&agrave; styl&eacute;&nbsp;: cela sera soit sans effet, soit contrariant. P&eacute;tronille vous pr&eacute;m&acirc;che le travail&nbsp;: elle n'est donc utile qu'employ&eacute;e d&egrave;s le d&eacute;but.
-
-Vos retours critiques sont bienvenus pour am&eacute;liorer P&eacute;tronille&nbsp;: faites-moi part de vos habitudes et pr&eacute;f&eacute;rences !
-</description>
-<version>0.4.3</version>
+<description>Framework CSS pour SPIP, exp&eacute;rimental.</description>
+<version>0.4.4</version>
 <etat>dev</etat>
 <categorie>outil</categorie>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
@@ -22,13 +10,11 @@ Vos retours critiques sont bienvenus pour am&eacute;liorer P&eacute;tronille&nbs
 <necessite id="SPIP" version="[;]" />
 <necessite id="bando" version="[1.1;]" />
 <necessite id="spip_bonux" version="[1.8;]" />
-<necessite id="tetue_trousse" version="[1.5;]" />
 <bouton id='petronille' parent='bando_squelette'>
 	<icone>icon-16.png</icone>
 	<titre>P&eacute;tronille</titre>
 	<url>configurer_petronille</url>
 </bouton>
-
 <pipeline>
 	<nom>insert_head</nom>
 	<inclure>petronille_pipelines.php</inclure>
