@@ -7,29 +7,33 @@
 #
 # Regle de dev: ne pas se rendre dependant de la lib sous-jacente
 
-// temporaire le temps de tester spyc
-define('_LIB_YAML','sfyaml'); 
-#define('_LIB_YAML','spyc'); 
-
+// Si on est en PHP4
+ if (version_compare(PHP_VERSION, '5.0.0', '<'))
+	define('_LIB_YAML','spyc-php4'); 
+ else {
+	// temporaire le temps de tester spyc
+	define('_LIB_YAML','sfyaml'); 
+	#define('_LIB_YAML','spyc'); 
+}
 /*
  * Encode n'importe quelle structure en yaml
  * @param $struct
  * @return string
  */
 function yaml_encode($struct, $opt = array()) {
+	// Si PHP4
+	if (_LIB_YAML == 'spyc-php4') {
+		require_once _DIR_PLUGIN_YAML.'spyc/spyc-php4.php';
+		return Spyc::YAMLDump($struct);
+	}
 	// test temporaire
 	if (_LIB_YAML == 'spyc') {
 		require_once _DIR_PLUGIN_YAML.'spyc/spyc.php';
 		return Spyc::YAMLDump($struct);
 	}
-	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYaml.php';
-	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYamlDumper.php';
-	$opt = array_merge(
-		array(
-			'inline' => 2
-		), $opt);
-	$yaml = new sfYamlDumper();
-	return $yaml->dump($struct, $opt['inline']);
+
+	require_once _DIR_PLUGIN_YAML.'inc/yaml_sfyaml.php';
+	return yaml_sfyaml_encode($input);
 }
 
 /*
@@ -37,26 +41,19 @@ function yaml_encode($struct, $opt = array()) {
  * @param string $input
  */
 function yaml_decode($input) {
+	// Si PHP4
+	if (_LIB_YAML == 'spyc-php4') {
+		require_once _DIR_PLUGIN_YAML.'spyc/spyc-php4.php';
+		return Spyc::YAMLLoad($input);
+	}
 	// test temporaire
 	if (_LIB_YAML == 'spyc') {
 		require_once _DIR_PLUGIN_YAML.'spyc/spyc.php';
 		return Spyc::YAMLLoad($input);
 	}
-	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYaml.php';
-	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYamlParser.php';
 
-	$yaml = new sfYamlParser();
-
-	try
-	{
-	  $ret = $yaml->parse($input);
-	}
-	catch (Exception $e)
-	{
-		throw new InvalidArgumentException(sprintf('Unable to parse string: %s', $e->getMessage()));
-	}
-
-	return $ret;
+	require_once _DIR_PLUGIN_YAML.'inc/yaml_sfyaml.php';
+	return yaml_sfyaml_decode($input);
 }
 
 /*
