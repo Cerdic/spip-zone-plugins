@@ -14,12 +14,15 @@ Il est d&eacute;conseill&eacute; d'activer P&eacute;tronille sur un site d&eacut
 
 Vos retours critiques sont bienvenus pour am&eacute;liorer P&eacute;tronille&nbsp;: faites-moi part de vos habitudes et pr&eacute;f&eacute;rences !
 </description>
-<version>0.4.2</version>
+<version>0.4.3</version>
 <etat>dev</etat>
 <categorie>outil</categorie>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>
 <necessite id="SPIP" version="[;]" />
+<necessite id="bando" version="[1.1;]" />
+<necessite id="spip_bonux" version="[1.8;]" />
+<necessite id="tetue_trousse" version="[1.5;]" />
 <bouton id='petronille' parent='bando_squelette'>
 	<icone>icon-16.png</icone>
 	<titre>P&eacute;tronille</titre>
