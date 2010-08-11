@@ -6,43 +6,8 @@
 
 -------------------------------------------------------------- */
 
-/* Raccourcis typographiques de SPIP */
-i.spip {}
-strong.spip {}
-.spip_serif {}
-
-/* Intertitre */
-h3.spip { /*text-align: center; font-weight: bold;*/ }
-hr.spip {}
-.puce, .spip_puce { /*vertical-align: middle; list-style-position: outside;*/ }
-
-/* Listes SPIP */
-ul.spip { list-style: square url(img/puce-li.gif) inside; }
-li .spip ul { list-style-type: circle; list-style-image: url(img/puce-li-li.gif); }
-ol.spip { list-style: decimal inside; }
-
-dl {}
-dt { clear: both; background: url(img/puce-dt.gif) no-repeat 1.5em; }
-dd {}
-
-/* Citations, code et poesie */
-p.spip {}
-p.spip_note {}
-blockquote.spip {}
-.spip_poesie {}
-.spip_poesie div { text-indent: -40px; margin-left: 40px; }
-.spip_code {}
-.spip_cadre {}
-
-/* Tableaux SPIP */
-table.spip {}
-table.spip caption {}
-table.spip tr.row_first {}
-table.spip tr.row_odd {}
-table.spip tr.row_even {}
-
 /* Logos, documents et images */
-img, .spip_logos { margin: 0; padding: 0; border: none; }
+.spip_logos { margin: 0; padding: 0; border: none; }
 dl.spip_documents,
 .spip_documents dt,
 .spip_documents dd { margin: 0 auto; padding: 0; background: none; }
@@ -61,9 +26,6 @@ dl.spip_documents,
 
 /* Modeles par defaut */
 .spip_modele { float: right; display: block; width: 25%; border: 1px dotted #666; }
-
-/* Paragraphes */
-div.spip, .spip li, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: 1.5em; }
 
 /* Liens de SPIP */
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
