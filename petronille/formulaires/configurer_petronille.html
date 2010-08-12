@@ -5,7 +5,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
 			<legend>Feuilles de style &agrave; appliquer au site</legend>
-			<p class="explication">Attention : s'il existe dans votre repertoire squelettes, un fichier du m&ecirc;me nom que l'un de ceux-ci, il sera appliqu&eacute; &agrave; la place.</p>
+			<p class="explication">Attention : si, dans votre repertoire squelettes, il existe un fichier du m&ecirc;me nom que l'un de ceux-ci, il sera appliqu&eacute; &agrave; la place.</p>
 			<ul>
 				<li class="petronille_feuille_reset">
 					<label for="feuille_reset"><strong>reset.css</strong>&nbsp;:<br />mise &agrave; z&eacute;ro multinavigateurs</label>
@@ -32,7 +32,7 @@
 					]<input type="checkbox" class="checkbox" name="feuille_grid" id="feuille_grid" value="oui"[ (#ENV{feuille_grid}|=={oui}|oui)checked="checked"] />
 				</li>
 			</ul>
-			<p class="explication">Pour &ecirc;tre utiles, ces feuilles de style sont appel&eacute;es en premier, dans le head de vos pages. N'oubliez pas d'activer la compression des fichiers CSS.</p>
+			<p class="explication">Les feuilles de style coch&eacute;es sont appel&eacute;es dans le head de vos pages, en premier, avant toutes les autres (ne supprimez pas la balise INSERT_HEAD de vos squelettes).</p>
 		</fieldset>
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
