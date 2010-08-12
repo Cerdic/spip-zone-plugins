@@ -4,7 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'adress_mail' =>'E-mail address associated with the calendar: ',
+'adresse_mail' =>'E-mail address associated with the calendar: ',
 'affichage_agenda' => 'Display address of the agenda',
 'chargement_agenda' => 'Loading calendar ...',
 'descriptif' => '<h4>Configuring the Plugin GCalendar</h4>',
