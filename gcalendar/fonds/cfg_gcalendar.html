@@ -1,12 +1,6 @@
 <!-- titre=gcalendar-->
 <!-- icone=img_pack/logo_gc.png-->
-[(#SET{logo,
-<img src='#DOSSIER_SQUELETTE/../img_pack/logo_gc.gif' width='85' height='35' alt='Logo Gcalendar' style="float:#LANG_RIGHT;" />
-})]
-<!-- descriptif=
-#GET{logo}
-<h4>Configuration du Plugin Gcalendar</h4>
--->
+<!-- descriptif=<img style="float:right;" src="#CHEMIN{img_pack/logo_gc.gif}" /><h4>Configuration du Plugin Gcalendar</h4> -->
 #CACHE{0}
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
 <p>
