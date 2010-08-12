@@ -8,7 +8,6 @@
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>
 <necessite id="SPIP" version="[;]" />
-<necessite id="bando" version="[1.1;]" />
 <necessite id="spip_bonux" version="[1.8;]" />
 <bouton id='petronille' parent='bando_squelette'>
 	<icone>icon-16.png</icone>
