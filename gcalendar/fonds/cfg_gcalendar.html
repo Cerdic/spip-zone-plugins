@@ -1,19 +1,19 @@
-<!-- titre=gcalendar-->
+<!-- titre=<:gcalendar:>-->
 <!-- icone=img_pack/logo_gc.png-->
-<!-- descriptif=<img style="float:right;" src="#CHEMIN{img_pack/logo_gc.gif}" /><h4>Configuration du Plugin Gcalendar</h4> -->
+<!-- descriptif=<img style="float:right;" src="#CHEMIN{img_pack/logo_gc.gif}" /><:descriptif:> -->
 #CACHE{0}
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
 <p>
-<label>Adresse mail associée à l'agenda : <input type="text" name="agenda" size=30 maxlength=40 value="#ENV{agenda}" />
+<label><:adresse_mail:><input type="text" name="agenda" size=30 maxlength=40 value="#ENV{agenda}" />
 </label>
 </p>
 <p>
-<label>Nombre d'évènements :<input type="text" name="nbev" size=2 maxlength=2 value="#ENV{nbev}" />
+<label><:nombre_evenements:><input type="text" name="nbev" size=2 maxlength=2 value="#ENV{nbev}" />
 </label>
 </p>
-<fieldset><legend>Affichage de l'adresse de l'agenda</legend>
-	<input type="radio" name="affich_agenda" value="oui" [checked="(#ENV{affich_agenda,oui}|=={oui}|?{checked})"]/>oui
-	<input type="radio" name="affich_agenda" value="" [checked="(#ENV{affich_agenda,""}|=={""}|?{checked})"]/>non
+<fieldset><legend><:affichage_agenda:></legend>
+	<input type="radio" name="affich_agenda" value="oui" [checked="(#ENV{affich_agenda,oui}|=={oui}|?{checked})"]/><:oui:>
+	<input type="radio" name="affich_agenda" value="" [checked="(#ENV{affich_agenda,""}|=={""}|?{checked})"]/><:non:>
 </fieldset>
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
