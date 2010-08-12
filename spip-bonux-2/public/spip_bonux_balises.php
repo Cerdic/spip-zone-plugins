@@ -459,4 +459,17 @@ function balise_PUBLIE_dist($p) {
 	#$p->interdire_scripts = true;
 	return $p;
 }
+
+function balise_SAUTER_dist($p){
+	$_nb = interprete_argument_balise(1,$p);
+	$_compteur = "\$Numrows['".$p->id_boucle."']['compteur_boucle']";
+	$_max = "\$Numrows['".$p->id_boucle."']['total']";
+
+	$code = "sql_seek(\$result,\$saut)?$_compteur=\$saut:false";
+	$code = "(\$saut=$_compteur+intval($_nb))<$_max?($code):sql_free(\$result)";
+	$code = "intval($_nb)?($code):''";
+	$p->code = "vide($code)";
+	$p->interdire_scripts = false;
+	return $p;
+}
 ?>
