@@ -1,0 +1,23 @@
+[(#REM)
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Popup des documents inclus dans un article
+*
+**/
+]<B_doc>
+<select id=geodoc onchange="location.href = '[(#SELF|parametre_url{exec,geodocuments_edit})]&id_document='+this.value;" NAME="geodoc">(this.value)" style="margin:0 1em;">
+	<option value=0 ><:geoportail:geo_document:></option>
+	<BOUCLE_doc(DOCUMENTS){id_article}>
+	<option value="#ID_DOCUMENT" ><:spip:info_document:> #ID_DOCUMENT [: (#TITRE) ]
+	<BOUCLE_tdoc(TYPES_DOCUMENTS){id_type}>[((#EXTENSION|majuscules))]</BOUCLE_tdoc>
+	</option>
+	</BOUCLE_doc>
+</select>
+</B_doc>

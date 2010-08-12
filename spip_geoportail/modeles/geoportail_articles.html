@@ -1,0 +1,72 @@
+[(#REM)
+- legende    : groupe de mot cle a utiliser comme legende (représentation en fonction du logo du mot cle)
+- taille     : taille des icones : 20px
+- couleur    : couleur du bord : #FFFFFF 
+- bord       : taille du bord : 4
+- id_article : limiter a un article
+- id_auteur	 : limiter a un auteur
+- id_rubrique: limiter a une rubrique
+- id_secteur : limiter a un secteur
+Parametres issus du modele GEOPORTAIL : 
+- id_geoportail   : si on veux plusieurs cartes
+- lon , lat, zoom, zone, mode, layerctrl, toolbox, infobox, searchtools, measuretools, carto, ortho, width, height
+]
+<script language=javascript>
+
+function initSpipMap#ENV{id_geoportail,0} (map,id)
+{	// Definition des styles pour l'affichage sous forme de punaises
+	var symbolizer = OpenLayers.Util.applyDefaults(
+			{pointRadius: 10, graphicXOffset: -2, graphicYOffset: -17},
+			OpenLayers.Feature.Vector.style["default"]);
+	var styleMap = new OpenLayers.StyleMap({"default": symbolizer, "select": {pointRadius: 15, graphicXOffset: -4, graphicYOffset: -26}});
+	<B_gmot>
+		// Definition d'une legende sur un groupe de mot-cle
+		var lookup = new Array();
+		var lookup2 = new Array();
+		<BOUCLE_gmot(MOTS){id_groupe=#ENV{legende,0}}>
+			lookup['[(#TITRE**|attribut_html)]'] = { pointRadius: [(#ENV{taille,10})], externalGraphic:"[(#LOGO_MOT||extraire_attribut{src})]", graphicXOffset: -[(#ENV{taille,10})], graphicYOffset: -[(#ENV{taille,10})] },
+			lookup2['[(#TITRE**|attribut_html)]'] = { pointRadius: [(#ENV{taille,10}|mult{1.5})], externalGraphic:"[(#LOGO_MOT||extraire_attribut{src})]", graphicXOffset: -[(#ENV{taille,10}|mult{1.5})], graphicYOffset: -[(#ENV{taille,10}|mult{1.5})] },
+		</BOUCLE_gmot>
+		styleMap.addUniqueValueRules("default", "mot_cle", lookup);
+		styleMap.addUniqueValueRules("select", "mot_cle", lookup2);
+	</B_gmot>
+
+	// Rajoute une couche pour les points
+	var l = new OpenLayers.Layer.Vector("<:spip:icone_articles:>",{ styleMap: styleMap, opacity:1, visibility:1, originators: jQuery.geoportail.originators });
+	map.rlayer = l;
+	map.getMap().addLayer(l);
+
+	// Controle pour la selection
+	options = {
+		clickout: true, toggle: false,
+		multiple: false, hover: false,
+		onSelect: $.geoportail.popupFeature,
+		onUnselect: $.geoportail.unpopupFeature
+		}
+	var selectControl = new OpenLayers.Control.SelectFeature(map.rlayer, options);
+	map.getMap().addControl(selectControl);
+	map.rlayer.selectControl = selectControl;
+	selectControl.activate();
+
+	// Ajouter les articles
+	<BOUCLE_geo_article(ARTICLES){geoposition}{id_article?}{id_auteur?}{id_rubrique?}{id_secteur?}{par date}{inverse}{0,#ENV{max,200}}>
+	{	var lon = #LON;
+		var lat = #LAT;
+		<BOUCLE_mot(MOTS){id_groupe=#ENV{legende,0}}{id_article}{0,1}>
+			var feature = jQuery.geoportail.createFeature (lon,lat);
+			feature.attributes.mot_cle = "[(#TITRE**|attribut_html)]";
+		</BOUCLE_mot>
+			[(#SET{largeur,[(#LOGO_ARTICLE||image_reduire{40}|largeur|plus{[(#ENV{bord,4})]})]})]
+			[(#SET{hauteur,[(#LOGO_ARTICLE||image_reduire{40}|hauteur|plus{[(#ENV{bord,4})]})]})]
+			var feature = jQuery.geoportail.createFeature (lon,lat, "[(#LOGO_ARTICLE||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]",#ENV{taille,20});
+		<//B_mot>
+		feature.attributes.img = "[(#LOGO_ARTICLE||image_reduire{40}|replace{'"',"'"})]";
+		feature.attributes.name = "[(#TITRE|attribut_html)]";
+		feature.attributes.link = "[(#URL_ARTICLE|url_absolue)]";
+		feature.attributes.description = "[(#INTRODUCTION|attribut_html|replace{\n,''}|replace{\r,''}|couper{100})]";
+		map.rlayer.addFeatures(feature);
+	}
+	</BOUCLE_geo_article>
+}
+</script>
+[(#MODELE{geoportail}{id_geoportail=#ENV{id_geoportail,0}}{overview=1}{searchtools}{measuretools}{zone}{mode}{lon}{lat}{zoom}{min_zoom}{layerctrl}{toolbox}{infobox}{carto}{ortho}{width}{height})]

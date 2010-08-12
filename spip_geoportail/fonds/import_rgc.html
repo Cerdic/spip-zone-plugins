@@ -1,0 +1,49 @@
+<script language=javascript>
+
+function import_rgc_ok(resp)
+{	pos = resp.split(' ');
+	if (parseInt(pos[0])) 
+	{	$("#info").html(pos[1]);
+		$("#prog").width(2*parseInt(pos[1]));
+		import_rgc(resp);
+	}
+	else if (resp=="OK") 
+	{	$("#import_prog").hide();
+		$("#import_fin").show();
+	}
+	else $("#import_erreur").show();
+}
+function import_rgc_erreur(resp, e, a)
+{	$("#import_prog").hide();
+	$("#import_erreur").show();
+}
+
+function import_rgc(pos)
+{	if (!pos) pos=0;
+	jQuery.ajax(
+		{	type	: 'GET', 
+			url		: '../spip.php', 
+			data	: "action=geoportail_importrgc&hash=#GEOPORTAIL_PROTECT{importrgc}&pos="+pos, 
+			success	: import_rgc_ok,
+			error	: import_rgc_erreur
+		}
+	);	
+}
+import_rgc();
+</script>
+<div id=import_prog style='padding:1em'>
+<table><tr>
+<td style="width:200px; border:1px solid #COULEUR_FONCEE;">
+<span id=prog style="width:0px; background-color:#COULEUR_FONCEE; display:block; overflow:hidden">&nbsp;</span>
+</td>
+<td>
+<span id=info style="padding-left:0.5em;">0</span>%
+</td>
+</tr></table>
+</div>
+<div id="import_erreur" style='display:none; color:red; font-weight:bold; padding:1em'>
+<:geoportail:import_erreur:>
+</div>
+<div id="import_fin" style='display:none; color:#4a4; font-weight:bold; padding:1em;'>
+<:geoportail:import_fin:>
+</div>

@@ -1,0 +1,101 @@
+[(#REM)
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Formulaire pour l'edition des geoservices
+*
+**/
+]
+<script language=javascript>
+function changeTypeService()
+{	var t=$("#type").val().toLowerCase();
+	$(".param").hide();
+	$("."+t).show();
+}
+$(document).ready(changeTypeService);
+</script>
+
+<:geoportail:geoservice_nom:> :
+<input class=formo name=titre  value="[(#TITRE|entites_html)]" />
+<?php
+		$id_rubrique = #ID_RUBRIQUE;
+		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+
+		$opt = $chercher_rubrique($id_rubrique, 'rubrique', true);
+
+		$msg = _T('titre_cadre_interieur_rubrique');
+
+		if ($id_rubrique == 0) $logo = "racine-site-24.gif";
+		elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
+		else $logo = "rubrique-24.gif";
+
+		echo debut_cadre_couleur($logo, true, "", $msg) . $opt .fin_cadre_couleur(true);
+
+?>
+<br />
+<:geoportail:geoservice_type:> : 
+<select id=type name=type onchange="javascript:changeTypeService()" >
+[(#TYPE|geoportail_services{type})]
+</select>
+<br/>
+<br/>
+
+<span class="param wms wfs kml wms-c">
+<:geoportail:geoservice_url:> :
+<input class=formo name=url id=url value="[(#ENV{url_geoservice}|entites_html)]" />
+<br/></span>
+
+<span class="param wfs kml wms-c" style="color:red; font-weight:bold; display:none;">
+Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/></span>
+
+<span class="param wms">
+<:geoportail:geoservice_map:> :
+<input class=formo name=map  value="[(#MAP|entites_html)]" />
+<br/></span><span class="param wms geoportail">
+<:geoportail:geoservice_layers:> :
+<input class=formo type=text name=layers value="[(#LAYERS|entites_html)]"  />
+<br/></span><span class="param wms">
+<:geoportail:geoservice_format:> : 
+<select name=format >
+[(#FORMAT|geoportail_services{format})]
+</select>
+<br/></span>
+<br/>
+<br/>
+
+<div class=cadre-e-noir>
+<div style="position: relative;">
+<div style="position: absolute; top: -15px; left: 10px;"><img alt="" src="#CHEMIN{images/suivi-petition-24.gif}"/></div></div>
+<div class=cadre-e style="padding:0.5em 1em;">
+<label class='geoservice' ><:geoportail:minzoom:> : </label><input class=formo style="display:inline; width:60px;" type=text name=minzoom id="minzoom" size=5 value="[(#MINZOOM|entites_html)]" />
+<label class='geoservice' ><:geoportail:maxzoom:> : </label><input class=formo style="display:inline; width:60px;" type=text name=maxzoom id="maxzoom" size=5 value="[(#MAXZOOM|entites_html)]" />
+<br/>
+<label class='geoservice' ><:geoportail:opacity:> : </label><input class=formo style="display:inline; width:60px;" type=text name=opacity id="opacity" size=5 value="[(#OPACITY|entites_html)]" />
+<label class='geoservice' for=visibility><:geoportail:visibility:> : </label>
+<input type=checkbox name=visibility id="visibility" [(#VISIBILITY|=={1}|?{CHECKED})] />
+<br/>
+<:geoportail:geoservice_extent:> :
+<input class=formo style="display:inline; width:200px;"  type=text name=extent value="[(#MAXEXTENT|entites_html)]"  />
+</div></div>
+
+<br/>
+<div class=cadre-e-noir>
+<div style="position: relative;">
+<div style="position: absolute; top: -15px; left: 10px;"><img alt="" src="#CHEMIN{images/vignette-24.png}"/></div></div>
+<div class=cadre-e style="padding:0.5em 1em;">
+<:geoportail:logo:> : <input class=formo style="display:inline; width:200px;"  type=text name=logo value="#LOGO"/>
+<br/>
+<:geoportail:link:> : <input class=formo type=text name=link size=40 value="[(#LINK|entites_html)]" />
+</div></div>
+
+<br/>
+<:geoportail:geoservice_descriptif:> :
+<textarea class=forml rows=6 name=descriptif>[
+(#DESCRIPTIF**|entites_html)
+]</textarea>

@@ -1,0 +1,46 @@
+#CACHE{0}
+<BOUCLE_f(TYPES_DOCUMENTS){extension=#FORMAT}>[(#HTTP_HEADER{Content-type: [(#MIME_TYPE)][; charset=(#CHARSET)]})]</BOUCLE_f>
+<?php
+	//-- Protection du script (interdir l'acces hors du site)
+	include_spip ('inc/geoportail_protect');
+	if (!geoportail_good_referer('geoportail')) { echo "<:geoportail:bad_referer:>"; return; }
+/**
+ * Script pour envoyer les donnes d'un POST dans un flux (pour telechargement).
+ * Donnees du post :
+ *  - name : le nom du fichier a telecharger (temp)
+ *  - format : le format du fichier (txt)
+ *  - data : les donnees a mettre dans le fichier
+ */
+	$filename = "temp";
+	// Nom du fichier
+	if (isset($_POST['name']))
+	{	$filename = $_POST['name'];
+	}
+	// Format du fichier
+	if (isset($_POST['format']))
+	{	$format = $_POST['format'];
+		switch ($format)
+		{	// Format texte
+			case 'wkt' : 
+			case 'json' : 
+				$filename .= ".txt"; break;
+			// Format dans le nom du format
+			default : $filename .= ".".$format; break;
+		}
+	}
+	// Nom du fichier a telecharger cote client
+	header("Content-disposition: attachment; filename=$filename");
+	// Forcer le telechargement (SPIP)
+	// header("Content-Type: application/force-download; charset=utf-8");
+
+/* bug sur free...
+	// Taille du fichier (evaluer le temps de telechargement)
+	header("Content-Length: ".strlen($data)+1); 
+	// Util ?
+	header("Expires: 0"); 
+	header("Cache-Control: no-cache, must-revalidate"); 
+	
+	header("Pragma: no-cache"); 
+*/	
+?>
+#DATA

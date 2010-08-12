@@ -1,0 +1,37 @@
+#CACHE{0}
+[(#REM)
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* La liste des geoservices
+*
+**/
+]<B_serv>
+<table class=arial2 cellpadding=2 cellspacing=0 width=100% style="margin:0; border:1px solid black;" >
+<BOUCLE_serv(spip_GEOSERVICES){id_rubrique?}>
+	<tr class=tr_liste >
+	<td class=arial11 width=1%>
+		[(#SPIP_VERSION|>{2}|?{
+		[(#STATUT|puce_statut)]
+		,
+		[<img src="(#CHEMIN{images/puce-[(#STATUT|puce_statut)].gif})" />]
+		})]
+	</td><td class=arial1 width=1%>
+		[(#LOGO_GEOSERVICE||image_reduire{30})]
+	</td><td class=arial11>
+		[(#MODIFIER)<a href="[(#URL_ECRIRE{geoservice,id_geoservice=#ID_GEOSERVICE})]" [title="(#DESCRIPTIF|couper{100})"]>]#TITRE[(#MODIFIER)</a>]
+	</td><td class=arial11 width=1%>
+		#TYPE
+	</td>
+	</tr>
+</BOUCLE_serv>
+</table>
+</B_serv>
+<div class=spip style="padding:1em"><:geoportail:no_service:></div>
+<//B_serv>

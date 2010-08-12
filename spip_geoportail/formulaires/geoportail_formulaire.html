@@ -1,0 +1,324 @@
+<?php
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Formulaire pour l'enregistrement des positions d'un objet SPIP 
+*
+**/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/compat_192');
+include_spip('inc/geoportail_fonctions');
+include_spip('inc/autoriser');
+
+// On a un objet a afficher
+if ("#ID_OBJET"!="0") {
+?>
+[(#REM) On recherche la zone dans le parametre ou dans le profil utilisateur ]
+[(#ZONE|=={''}|?{
+[(#SET{zone,[(#ENV|geoportail_profil{zone})]})]
+,
+[(#SET{zone,[(#ZONE)]})]
+})]
+
+[(#REM) Recherche des valeurs dans la table ]
+<BOUCLE_geo(GEOPOSITIONS){id_objet}{objet}>
+	#SET{lon,#LON}
+	#SET{lat,#LAT}
+	#SET{zoom,#ZOOM}
+	#SET{zone,#ZONE}
+	#SET{nom_com,#NOM_COM}
+	#SET{id_dep,#ID_DEP}
+</BOUCLE_geo>
+[(#REM) Recuperer les variables d'environnemnet ]
+#SET{supp,#EVAL{$_POST['supprimer'];}}
+[(#GET{supp}|?{'',' '})
+#SET{lon,#ENV{lon,#GET{lon}}}
+#SET{lat,#ENV{lat,#GET{lat}}}
+#SET{zoom,#ENV{zoom,#GET{zoom}}}
+#SET{zone,#ENV{zone,#GET{zone}}}
+]
+[(#GET{supp}|?{' '})
+#SET{lon,''}
+#SET{lat,''}
+#SET{zoom,''}
+#SET{zone,''}
+]
+
+<script language=javascript>
+// Gestion du formulaire
+var carte_formulaire = null;
+function initSpipMapFormulaire (map, id, OpenLayers)
+{	carte_formulaire = map;
+	jQuery('#id_zone').val(map.territory);
+	
+	// Gestion des controles x,y => affichage sur la carte
+	$("#lon").change( function () { geoportail_formulaire_centrer(Number($('#lon').val()), Number($('#lat').val()));} );
+	$("#lat").change( function () { geoportail_formulaire_centrer(Number($('#lon').val()), Number($('#lat').val()));} );
+	
+	// Layer de localisation pour accueillir des info
+	map.formulaire = new OpenLayers.Layer.Vector.Locator
+	(	"SPIP", 
+		{	displayInLayerSwitcher:false,
+			// Fonction a apeller si on bouge la punaise
+			callback: function(x,y) 
+			{	$('#lon').val(Math.round(x*100000000000)/100000000000);
+				$('#lat').val(Math.round(y*100000000000)/100000000000);
+				$('#zoom').val(carte_formulaire.getMap().getZoom());
+			}
+		}
+	);
+	map.getMap().addLayer(map.formulaire);
+	[geoportail_formulaire_centrer((#GET{lon}), [(#GET{lat})], '[(#GET{zoom})]');]
+	// Recherche par adresse
+	$("#geocode").show(jQuery.geoportail.formulaireAdresse(map,true));
+}
+
+function geoportail_formulaire_geocode()
+{	jQuery.geoportail.formulaireAdresse(carte_formulaire);
+}
+
+// Placer au centre
+function geoportail_formulaire_centrer(x, y, zoom)
+{	if (carte_formulaire)
+	{	// Afficher le point
+		if (!carte_formulaire.formulaire.locate(x,y)) 
+		{	alert ("Hors zone !");
+			return;
+		}
+		// Centrer
+		carte_formulaire.getMap().setCenterAtLonLat (x,y,zoom);
+	}
+}
+
+// On a selectionne une adresse
+function selectFormulaireAdresse(f)
+{	if (carte_formulaire)
+	{	geoportail_formulaire_centrer();
+		if (f.attributes.address.streetAddress.streets[0].name) carte_formulaire.getMap().zoomTo(15);
+		else carte_formulaire.getMap().zoomTo(13);
+	}
+}
+
+// Fonction de recherche sur la commune
+function geoportail_formulaire_chercher()
+{	var com = jQuery('#commune').val();
+	if (!com) return;
+	$.jqGeoSearch ("q="+com+"&hash=#GEOPORTAIL_PROTECT{jqsearch}&zone="+jQuery('#id_zone').val(), 
+	{	title:'<:geoportail:selectionner:>',
+		info:"[(#GEOPORTAIL_RGC{par})]",
+<?php
+echo (_DIR_RESTREINT) ? '':"path:'../',"
+?>
+		// On a trouve
+		success: function(rep)
+		{	if (rep && rep['name']) 
+			{	jQuery('#commune').val(rep['name']);
+				var zoom = carte_formulaire.getMap().getZoom();
+				var code = Number (rep['fcode']);
+				zoom = (code<4) ? 9+code : 13;
+				geoportail_formulaire_centrer(rep['lon'],rep['lat'],zoom);
+			}
+			else 
+			{	jQuery.jqDialog("", { dialog : "<:geoportail:no_result:>", icon : "#CHEMIN{images/warning.gif}" });
+			}
+		}
+	});
+}
+
+// Remplir lon,lat
+function geoportail_formulaire_lon_lat(x, y,zoom)
+{	$('#lon').val(Math.round(x*100000000000)/100000000000);
+	$('#lat').val(Math.round(y*100000000000)/100000000000);
+	$('#zoom').val(10);
+	geoportail_formulaire_centrer (x,y,zoom);
+}
+
+function geoportail_formulaire_show()
+{	var uri = '[(#URL_PAGE{geop,id=[(#ENV{id,0})]&hash=[(#GEOPORTAIL_PROTECT{geoformulaire[(#ENV{id,0})]})]&formulaire=1&toolbox=mini&carto=0.4&ortho=0&height=100pc&zone=[(#GET{zone})]&zoom=[(#GET{zoom})]&infobox=false})]';
+	uri = uri.replace (/amp;/g,'');
+	jqToogleClass('.[(#ENV{class,carto})]', uri);
+}
+
+jQuery(document).ready(
+	function() 
+	{	jQuery('#commune').keydown( 
+			function(e) 
+			{	if (e.keyCode==13) { javascript:geoportail_formulaire_chercher(); return false;} 
+				else return true; 
+			} 
+		);
+	}
+);
+
+// Envoyer une action en ajax
+function geoportail_editer_objet(act)
+{
+	if (carte_formulaire) $('#zoom').val(carte_formulaire.getMap().getZoom());
+	var d =$('#geoportail_edit_objet').formSerialize()+"&"+act+"=1";
+	$('#geoportail_edit_objet').css('opacity',0.5);
+	var uri ='<?php
+$securiser_action = charger_fonction('securiser_action','inc');
+echo $securiser_action('geoportail_editer_objet','#OBJET#ID_OBJET');
+?>'
+uri = uri.replace (/&amp;/g,'&');
+
+		jQuery.ajax(
+			{	type	: 'POST',
+				url		: uri,
+				data:d,
+				success	: function(msg)
+				{	var t;
+					eval ("t = " + msg);
+					if (t.error) //alert (t.error);
+					jQuery.jqDialog("", { dialog : t.error, icon : "#CHEMIN{images/warning.gif}"});
+					else
+					{	$('#alon').html (t.alon);
+						$('#alat').html (t.alat);
+						$('.com').html (t.nom_com);
+						if (t.id_dep) $('.dep').html ("("+t.id_dep+")");
+						else $('.dep').html("");
+						if (t.alon=='-' && $('.[(#ENV{class,carto})]_slide').css('display')!='none') jqToogleClass('.[(#ENV{class,carto})]')
+					}
+					$('#geoportail_edit_objet').css('opacity',1);
+				},
+				error	: function(r,msg)
+				{	alert (msg);
+					$('#geoportail_edit_objet').css('opacity',1);
+				}
+			}
+		);
+}
+
+</script>
+
+<div class=geoportail_formulaire>
+[
+<a id=[(#ENV{class,carto})] class=spip_in
+href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
+<img class=[(#ENV{class,carto})]_show src='[(#CHEMIN{images/deplierhaut.gif})]' />
+<img class=[(#ENV{class,carto})]_show style='display:none;' src='[(#CHEMIN{images/deplierbas.gif})]' />
+(#TITRE)
+<img class=[(#ENV{class,carto})]_patience style='display:none;' src='[(#CHEMIN{images/searching.gif})]' />
+</a>
+]
+<div class=[(#ENV{class,carto})]_show style='display:none; text-align:right;'>
+<span style="float:left; padding:0 1em;">
+<span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span>
+</span>
+[<form class=zone_geo>(#MODELE{geoportail_geozone}{selected=#GET{zone}}{class=fondl})</form>]
+</div>
+
+<iframe frameborder='no' scrolling='no' style='display:none; margin:0; padding:0;' class='GeoportalMapDiv [(#ENV{class,carto})]_slide' ></iframe>
+
+<?php 
+	// Est-t-on autorise a modifier l'objet ?
+	$objet = #OBJET;
+	$id = #ID_OBJET;
+	if ($objet == 'auteur') $action = 'positionner';
+	else $action = 'modifier';
+	if (autoriser($action, $objet, $id)) {  
+?>
+
+<form id=geoportail_edit_objet method=POST action='javascript:geoportail_editer_objet("valider")' >
+	<input type=hidden name=id_objet value='#ID_OBJET' />
+	<input type=hidden name=objet value='#OBJET' />
+	<input type=hidden name=idzone id=id_zone value='#GET{zone}' />
+	<span class='[(#ENV{class,carto})]_show' style='display:none; margin-left:0.25em;' >
+		<input name=valider class='fondo' style='float:right; margin:0.25em; ' type=submit value='<:bouton_valider:>'  title='<:bouton_valider:>' />
+		<input name=supprimer class='fondo' style='float:right; margin:0.25em; ' type=button onclick='javascript:geoportail_editer_objet("supprimer")' value='<:geoportail:bouton_supprimer:>'  title='<:geoportail:info_supprimer:>' />
+		<div class=icone36 id=geocode style='margin-right:0.25em; float:right; padding:0; width:auto;'>
+			<a href='javascript:geoportail_formulaire_geocode();' title='<:geoportail:bouton_geocode:>' >
+			    <img src="rien.gif" style="background:url(#CHEMIN{img/geocode.png}) center center no-repeat; width:24px; height:24px; padding:0"/>
+			</a>
+		</div>
+		<div class=icone36 style='margin-right:0.25em; float:right; padding:0; width:auto;'>
+			<a href='javascript:geoportail_formulaire_centrer();' title='<:geoportail:bouton_centrer:>'>
+			    <img src="rien.gif" style="background:url(#CHEMIN{img/cible.png}) center center no-repeat; width:24px; height:24px; padding:0"/>
+			</a>
+		</div>
+		[<div class=icone36 style='margin-right:0.25em; float:right; padding:0; width:auto;'>
+			<a href='javascript:geoportail_formulaire_lon_lat((#POS_FICHIER));' title='<:geoportail:centrer_doc:>' >
+				<img src='#CHEMIN{images/doc-24.gif}' style='width:22px; height:22px; padding:1px'/>
+			</a>
+		</div>]
+		[<div class=icone36 style='margin-right:0.25em; float:right; padding:0; width:auto;'>
+			<a href='javascript:geoportail_formulaire_lon_lat((#POS_ARTICLE));' title='<:geoportail:centrer_art:>' >
+				<img src='#CHEMIN{images/article-24.gif}' style='width:22px; height:22px; padding:1px'/>
+			</a>
+		</div>]
+		<span style="display:inline-block">
+		&lambda;:<input style='margin:0.25em; width:100px;' type=text id=lon name=lon value='[(#GET{lon})]'/>
+		</span><span style="display:inline-block">
+		&phi;:<input style='margin:0.25em; width:100px;' type=text id=lat name=lat value='[(#GET{lat})]'/>
+		</span>
+		<input type=hidden name=zoom id=zoom value='[(#GET{zoom})]' style='margin:0.25em; width:40px;' />
+		<BOUCLE_rgc(GEORGC){0,1}> </BOUCLE_rgc>
+			<table width="100%" cellpadding="5" style="margin:0" ><tr><td>
+			<:geoportail:chercher:>&nbsp;:</td><td width=80%>
+			<input id=commune name=commune type=text title='<:geoportail:chercher_commune:>' style='width:100%; ' />
+			<small>
+			[(#GEOPORTAIL_RGC{par})]
+			</small>
+			</td><td>
+			<input id=chercher name=chercher class='fondo' type=button value='<:geoportail:chercher:>') title='<:geoportail:chercher_commune:>' onclick='javascript:geoportail_formulaire_chercher()' />
+			</td></tr></table>
+		</B_rgc>
+	</span>
+	[<div class='[(#ENV{class,carto})]_show' style='margin-left:1em; padding:0; clear:both; display '>
+		<input name=supprimer class='fondo' style='float:right;' type=button onclick='javascript:geoportail_editer_objet("supprimer")' value='<:geoportail:bouton_supprimer:>') title='<:geoportail:info_supprimer:>' />
+		<span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span>
+		<span style='padding:0.25em 0em; display:block;'>
+		<:geoportail:lon:> : <span id="alon">(#GET{lon}|geoportail_longitude)</span> &nbsp; ][<:geoportail:lat:> : <span id="alat">(#GET{lat}|geoportail_latitude)</span>
+		</span>
+	</div>]
+	[(#REM)
+		- modifier les documents de l'article en version 1.9.x -> on passe la liste des documents
+		- a partir de la v2, on y accede directement dans le document (pipeline : afficher_contenu_objet)
+	]
+	[(#SPIP_VERSION|<{2}|?{[(#INCLURE{fond=fonds/popdoc}{id_article})]})]
+	
+</form>
+
+
+<?php } ?>
+
+[(#DEPLIER)
+<script language=javascript>
+	geoportail_formulaire_show();
+</script>]
+</div>
+[(#REM) On a une erreur... ]
+<?php } else {?> 
+[(#REM) On n'est pas identifier... ]
+<style>
+.formulaire_login fieldset {
+	border:1px solid #BABDB6;
+	font-size:1em;
+	margin:0;
+	padding:1em;
+}
+.formulaire_login
+{	font-size:0.9em;
+	font-family:Arial;
+}
+#minipress .formulaire_login label
+{	font-weight:normal;
+}
+</style>
+<div id=minipress style="width:28em; margin:auto;">
+	[(#LOGIN_PUBLIC)]
+	<p class="retour" style="text-align:center">
+		[&#91;<a href="(#URL_PAGE{identifiants})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=340'); return false;"><:login_sinscrire:></a>&#93;]
+		[&#91;<a href="(#URL_PAGE{spip_pass})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=340'); return false;"><:login_motpasseoublie:></a>&#93;]
+	</p>
+</div>
+
+<?php } ?>

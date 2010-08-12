@@ -1,0 +1,68 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		SPIP-G&eacute;oportail
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  [Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<icon>img/geoportail.gif</icon>
+	<etat>
+		test
+	</etat>
+	<description>
+Int&eacute;gration de l'API G&eacute;oportail dans SPIP
+- cr&eacute;ation d'une table de GEOPOSITIONS d'objets SPIP
+- formulaire pour la saisie du geopositionnement des objets SPIP (articles, auteurs, etc.)
+- int&eacute;gration de geoservices WMS,WFS,...
+- crit&egrave;re geoposition pour jointure avec les tables SPIP
+----
+Vous devez param&eacute;trer l'API G&eacute;oportail avant utilisation : 
+_ <a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
+	</description>
+	<prefix>
+		geoportail
+	</prefix>
+	<options> <!-- definition des options -->
+		options.php
+	</options>
+	<fonctions> <!-- definition des balises -->
+		balise/geoportail_balises.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+		public/geoportail_boucles.php
+	</fonctions>
+	<fonctions> <!-- API pour la gestion de profil -->
+		public/geoportail_profils.php
+	</fonctions>
+	<install> <!-- Installation de la base -->
+		base/geoportail_init.php
+	</install>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>head_prive.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>geoportail.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>geoportail.php</inclure>
+	</pipeline>
+	<pipeline> <!-- seulement en SPIP v2 -->
+		<nom>afficher_contenu_objet</nom>
+		<inclure>geoportail.php</inclure>
+	</pipeline>
+	<pipeline> <!-- seulement en SPIP v2 -->
+		<nom>lister_tables_noexport</nom>
+		<inclure>geoportail.php</inclure>
+	</pipeline>
+</plugin>

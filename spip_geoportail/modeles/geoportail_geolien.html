@@ -1,0 +1,28 @@
+[(#REM)
+	Affiche un lien pour un acces direct a la carte du type :
+	http://mon_site_spip/spip.php?article18&lon=4.71&lat=46.97&zoom=10
+	Syntaxe : 
+		<geoportail1|geolien|titre=lien>
+	ou	[(#MODELE{geoportail_geolien}{id_geoportail=1}{titre=lien})]
+]
+<script language=javascript>
+// Petite fonction pour formater le lien
+function geoportail_lien_format#ENV{id_geoportail,0}(href)
+{	return "<table cellspacin=0 cellpadding=0 width=100%><tr><td valign=top width=1%><img src='#CHEMIN{img/geoportail.gif}' style='padding-right:1em' /></td><td>"
+	+ "<:geoportail:info_lien:><hr/>"
+	+ "<a class=spip_in href="+href+">"
+	+ "<img src='#CHEMIN{img/lien-24.gif}' style='vertical-align:middle;' /> "
+	+ "<:geoportail:lien_direct:></a>"
+	+ "<br/>"
+	+ "<a class='spip_out geoportail_lien' href=mailto:?subject="+escape(document.title)+"&body="+escape('<:geoportail:lien_mail:> '+href)+">"
+	+ "<img src='#CHEMIN{images/envoi-message-24.gif}' style='vertical-align:middle;' /> "
+	+ "<:geoportail:envoyer_ami:></a>"
+	+ "</td></tr></table>"
+	;
+}
+</script>
+<div class='geoportail_lien [spip_documents_(#ENV{align})][ (#ENV{class})] ' style='[float:(#ENV{align}|match{left|right});]'>
+<a class='spip_in' href="javascript:$.geoportail.lien(#ENV{id_geoportail,0}); " title='<:geoportail:lien_direct:>'>
+	<img src='#CHEMIN{img/lien-24.gif}' style='vertical-align:middle;' /> [(#ENV{titre,<:geoportail:lien_direct:>})]
+</a>
+</div>

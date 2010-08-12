@@ -1,0 +1,47 @@
+#CACHE{0}
+<?php
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Insertion d'un formulaire (carte dans une iframe)
+*
+**/
+	//-- Protection du script (interdir l'acces hors du site)
+	include_spip ('inc/geoportail_protect');
+	if (!geoportail_good_referer('geoformulaire#ID'))
+	{	echo "<h1>Forbidden</h1>You don't have permission to access <i>#URL_SITE_SPIP</i> on this server. <br/>Adress IP : <i>".$_SERVER['REMOTE_ADDR']."</i><hr/>"; 
+		return; 
+	}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+#INSERT_HEAD
+<style>
+	.spip-admin-float { display:none; }
+	.GeoportalMapDiv
+	{	margin:0; 
+		padding:0;
+		border:0 none;
+		width:100%;
+	}
+	.gpControlInformation
+	{	overflow:hidden !important;
+	}
+	html, body {
+		height:100% !important;
+		min-height:100%;
+	}
+</style>
+
+</head>
+<body style='margin:0; padding:0;'>
+[(#MODELE{geoportail}{id=#ID}{id_geoportail=#ID}{formulaire=#FORMULAIRE}{min_zoom=#MIN_ZOOM}{carto=#CARTO}{ortho=#ORTHO}{layerctrl=#LAYERCTRL}{toolbox=#TOOLBOX}{infobox=#INFOBOX}{width=#ENV{width}}{height=#ENV{height}})]
+</body>
+</html>

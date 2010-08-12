@@ -1,0 +1,52 @@
+#CACHE{3600}
+[(#REM)
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Envoie des derniers articles dans un flux geoRSS.
+*
+**/
+][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" 
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:georss="http://www.georss.org/georss"
+>
+
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description>[(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)]</description>
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||extraire_attribut{width})</width>]
+	</image>
+]
+
+<BOUCLE_10recents(ARTICLES) {geoposition}{lang ?}{branche ?}{id_mot ?}
+	{par date}{inverse}{0,10}{unique}>
+<INCLURE{fond=inc-georss-item}{id_article}>
+</BOUCLE_10recents>
+
+<BOUCLE_tres_recents(ARTICLES){geoposition}{lang ?}{branche ?}{id_mot ?}
+	{par date}{inverse}{age<3}{unique}>
+<INCLURE{fond=inc-georss-item}{id_article}>
+</BOUCLE_tres_recents>
+
+</channel>
+
+</rss>

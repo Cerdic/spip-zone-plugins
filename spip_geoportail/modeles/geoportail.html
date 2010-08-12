@@ -1,0 +1,277 @@
+#CACHE{0}
+[(#REM)
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Utilisez ce modele pour afficher une carte Geoportail sur le site SPIP.
+*
+* Parametres :
+* - id_geoportail		: identifiant de la carte (unique de preference !)
+* - id_article			: id de l'article si on veut afficher les documents de l'article 
+* - id_rubrique			: affichage des services lies a une rubrique
+* - id_secteur			: affichage des services lies a un secteur
+* - width, height		: largeur, hauteur (utiliser pc au lieu de % dans les URI) par defaut, ceux du css
+* - mode				: normal/mini
+* - lon, lat, zoom		: centrage sur la zone 
+* - zone				: la zone geoportail (FXX)
+* - layerctrl			: affichage du gestionnaire de couche (0,1,mini)
+* - toolbox				: affichage des outils (0,1,mini)
+* - infobox				: affichage des infos (0,1)
+* - searchtools			: afficher les outils de recherche (0,1) par defaut:1
+* - measuretools		: afficher les outils de mesure (0,1) par defaut : 0
+* - overview			: afficher une vue globale (0,1) par defaut : 0. 
+						  La vue s'affiche dans la div id="overViewMap" ou est cree dans la div id="navigation"
+* - min_zoom			: zoom mini
+* - carto				: opacite de la carte (0->1)
+* - ortho				: opacite de l'image (0->1)
+* - formulaire			: la carte est un formulaire (ajoute un controleur pour faire le lien avec le formulaire)
+**/
+]
+[(#REM) Recherche de la zone dans le parametre ou dans le profil utilisateur ]
+[(#ZONE|=={''}|?{
+[(#SET{zone,[(#ENV|geoportail_profil{zone})]})]
+,
+[(#SET{zone,[(#ZONE)]})]
+})]
+[
+
+(#REM) GESTION de l'espace prive :
+Ne pas charger dans l'espace prive (previsu) 
+sauf si en mode geoportail_force (saisie)
+*****************
+]
+<?php 
+global $geoportail_force;
+if (_DIR_RESTREINT!="" || $geoportail_force) 
+{
+?>
+
+[(#REM) Rubriques pour les geoservices ]
+#SET{rubriques,#ARRAY{site,0,rub,#ID_RUBRIQUE,sect,#ID_SECTEUR}}
+
+[(#REM) N'inclure l'engin qu'une seule fois... ]
+<script src="http://api.ign.fr/geoportail/api?#MAPKEY&instance=map#ENV{id_geoportail,0}&includeEngine=false"></script>
+
+[(#GEOPORTAIL_ENGINE{#ENV{id_geoportail,0}})
+<!-- Format d'import -->
+[<script type="text/javascript" src="(#CHEMIN{js/Format/Ceoconcept_rip.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/Layer/Locator.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/Layer/GXT.js})"></script>]
+<script>jQuery.geoportail.hash = "[(#GEOPORTAIL_PROTECT{geoportail})]";</script>
+]
+<script language=javascript>
+// Ajouter une nouvelle carte
+jQuery.geoportail.addMap(
+	{	id : '#ENV{id_geoportail,0}',
+		formulaire : #ENV{formulaire,false},
+		map : null,
+		geoportalLoadmap : function () 
+		{	geoportalLoadmap#ENV{id_geoportail,0}("GeoportalMapDiv#ENV{id_geoportail,0}", "[(#MODE|sinon{normal})]", "[(#GET{zone})]"); 
+			map = this.map = map#ENV{id_geoportail,0};
+			
+			map.getMap().setProxyUrl("#CHEMIN{php/proxy.php}?url=");
+			//map.getMap().setProxyUrl("spip.php?page=geoproxy&hash=#GEOPORTAIL_PROTECT{geoproxy}&url=");
+			// Affichage de la carte
+			jQuery.geoportail.showMap (map, '#GET{zone}', Number('#LON'), Number('#LAT'), Number('#ZOOM'), '#LAYERCTRL', '#TOOLBOX', '#INFOBOX', '#CARTO', '#ORTHO');
+			// Outils de recherche (un petit delais pour IE !)
+			if ("[(#SEARCHTOOLS|sinon{1})]"=="1") 
+			{	if (jQuery.browser["msie"]) setTimeout("jQuery.geoportail.addSearchTools(map#ENV{id_geoportail,0})", 1000);
+				else jQuery.geoportail.addSearchTools(this.map);
+			}
+			// Outils de mesure
+			if ("[(#MEASURETOOLS)]"=="1") 
+			{	jQuery.geoportail.addMeasureTools(this.map);
+			}
+			// Style d'affichage par defaut
+			OpenLayers.Feature.Vector.style['default'].externalGraphic = "#CHEMIN{img/punaise.gif}";
+			// Limiter le zoom
+			[map.getMap().minZoomLevel = (#MIN_ZOOM);]
+			[map.getMap().maxZoomLevel = (#MAX_ZOOM);]
+			// Afficher la vue globale
+			if ("[(#OVERVIEW)]"=="1") 
+			{	jQuery.geoportail.setOverview(this.map);
+			}
+			
+			<B_poubelle>
+			// Supprimer les layers Geoportail dans un geoservice refuse
+			{	var tab, couches, i, j;
+			<BOUCLE_poubelle(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='Geoportail'}{statut=refuse}>
+				tab = new Array();
+				couches = "#LAYERS";
+				couches = couches.split(/,/g);
+				var i,j;
+				for (i=map.getMap().layers.length-1; i>=0; i--)
+				{	for(j=0; j<couches.length; j++)
+					{	if (map.getMap().layers[i].name == couches[j]) 
+						{	map.getMap().removeLayer(map.getMap().layers[i]);
+							break;
+						}
+					}
+				}
+			</BOUCLE_poubelle>
+			}
+			</B_poubelle>
+			
+			<B_couches>
+			// Regrouper les layers Geoportail places dans le meme geoservice
+			{	var tab, couches, i, j;
+			<BOUCLE_couches(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='Geoportail'}{statut=publie}>
+				tab = new Array();
+				couches = "#LAYERS";
+				couches = couches.split(/,/g);
+				for (i=0; i<map.getMap().layers.length; i++)
+				{	if (map.getMap().layers[i].territory == map.territory) 
+					{	for(j=0; j<couches.length; j++)
+						{	if (map.getMap().layers[i].name == couches[j]) 
+							{	tab[tab.length] = map.getMap().layers[i];
+								map.getMap().layers[i].setOpacity(#OPACITY);
+							}
+						}
+					}
+				}
+				if (tab.length>0)
+				{	var l = new Geoportal.Layer.Aggregate ("#TITRE", tab, { opacity:#OPACITY, visibility:#VISIBILITY, displayInLayerSwitcher:true });
+					map.getMap().addLayer ( l );
+				}
+			</BOUCLE_couches>
+			}
+			</B_couches>
+			
+			<B_service_WFS>
+			// Ajouter les services WFS disponibles dans les geoservices
+			<BOUCLE_service_WFS(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='WFS'}{statut=afaire}>
+			map.getMap().addLayer
+			(
+            "#TYPE",
+            "#TITRE",
+            "#URL_GEOSERVICE",
+            {
+                typename: '#LAYERS'
+            },
+            {
+                projection: 'EPSG:4326',
+                units:'degrees',
+                // maxExtent expressed in EPSG:4326 :
+                maxExtent: new OpenLayers.Bounds(#MAXEXTENT),
+                minZoomLevel: #MINZOOM,
+                maxZoomLevel: #MAXZOOM,
+                opacity: #OPACITY,
+                isBaseLayer: false,
+                visibility: #VISIBILITY,
+                originators: [
+                    {	logo:'ign', 
+                       [,logo:'logo#ID_GEOSERVICE',
+                        pictureUrl: '(#LOGO_GEOSERVICE||extraire_attribut{src}|url_absolue)',
+                        url: '#LINK']
+                    }
+                ]
+            }
+			);
+        	</BOUCLE_service_WFS>
+
+			<B_service_WMSC>
+			// Ajouter les services WMS-C disponibles
+			<BOUCLE_service_WMSC(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='WMS-C'}{statut=afaire}>
+			map.getMap().addLayer
+			(
+            "#TYPE",
+            "#TITRE",
+            "#URL_GEOSERVICE",
+            {
+				[map:'(#MAP)',]
+                layers:'#LAYERS',
+                format:'#FORMAT',
+                transparent:'true'
+            },
+            {
+                singleTile:false,
+                projection:'EPSG:4326',
+                units:'degrees',
+                // maxExtent expressed in EPSG:4326 :
+                maxExtent: new OpenLayers.Bounds(#MAXEXTENT),
+//				nativeResolutions:ideeResolutions.slice(0),
+                minZoomLevel: #MINZOOM,
+                maxZoomLevel: #MAXZOOM,
+                opacity: #OPACITY,
+                isBaseLayer: false,
+                visibility: #VISIBILITY,
+                originators:[
+                    {	logo:'ign'
+                        [,logo:'logo#ID_GEOSERVICE',
+                        pictureUrl: '(#LOGO_GEOSERVICE||extraire_attribut{src}|url_absolue)',
+                        url: '#LINK']
+                    }
+                ]
+            }
+			);
+        	</BOUCLE_service_WMSC>
+
+			<B_service>
+			// Ajouter les services WMS disponibles
+			<BOUCLE_service(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='WMS'}{statut=publie}>
+			map.getMap().addLayer
+			(
+            "#TYPE",
+            "#TITRE",
+            "#URL_GEOSERVICE",
+            {
+				[map:'(#MAP)',]
+                layers:'#LAYERS',
+                format:'#FORMAT',
+                transparent:'true'
+            },
+            {
+                singleTile:true,
+                projection:'EPSG:4326',
+                units:'degrees',
+                // maxExtent expressed in EPSG:4326 :
+                maxExtent: new OpenLayers.Bounds(#MAXEXTENT),
+                minZoomLevel: #MINZOOM,
+                maxZoomLevel: #MAXZOOM,
+                opacity: #OPACITY,
+                isBaseLayer: false,
+                visibility: #VISIBILITY,
+                originators:[
+                    {	[(#REM) par defaut : le logo IGN]
+						logo:'ign'
+						[(#REM) substituer le logo du service]
+                        [,logo:'logo#ID_GEOSERVICE',
+                        pictureUrl: '(#LOGO_GEOSERVICE||extraire_attribut{src}|url_absolue)',
+                        url: '#LINK']
+						[(#REM) Substituer un logo commun ]
+						[,logo:'(#LOGO)']
+                    }
+                ]
+            }
+			);
+			</BOUCLE_service>
+		}
+	}
+);
+
+// Ajouter les documents (si dans un article)
+<BOUCLE_gpx(DOCUMENTS){id_article}{extension=gpx}>
+	jQuery.geoportail.addDoc ('#ENV{id_geoportail,0}', "GPX", #ID_DOCUMENT, "#TITRE", "#FICHIER");
+</BOUCLE_gpx>
+<BOUCLE_kml(DOCUMENTS){id_article}{extension=kml}>
+	jQuery.geoportail.addDoc ('#ENV{id_geoportail,0}', "KML", #ID_DOCUMENT, "#TITRE", "#FICHIER");
+</BOUCLE_kml>
+
+</script>
+[
+(#REM) 
+************
+FIN gestion de l'espace prive 
+]<?php } ?>
+
+<!-- La carte #[(#ENV{id_geoportail,0})]-->
+<div class='GeoportalMapDiv' id='GeoportalMapDiv#ENV{id_geoportail,0}' style="[float:(#ALIGN|match{left|right}); ][width:(#ENV{width}|replace{pc,%}); ][height:(#ENV{height}|replace{pc,%}); ]" ><!-- --></div>
+[(#REM) Surcharger l'affichage du viewer]
+<link type="text/css" href="#CHEMIN{css/geoportail_carte.css}" rel="stylesheet" />
+

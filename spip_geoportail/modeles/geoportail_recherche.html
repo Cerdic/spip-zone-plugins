@@ -1,0 +1,148 @@
+<script language=javascript>
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Exemple d'utilisation de la fonction recherche dans le RGC
+*
+**/
+
+// La carte 
+var map;
+
+// Initialisation de la carte
+function initSpipMap(themap,id)
+{	map = themap;
+	if (!map) alert ("Impossible d'accéder au Géoportail...");
+	else
+	{	jQuery('#zone_geo').val(map.territory);
+		
+		// Lancer la recherche avec un retour chariot
+		jQuery('#adm2').keydown( function(e) { if (e.keyCode==13) { jQuery('#badm2').click(); return false;} else return true; } );
+		
+		// Gestion des controles x,y => affichage sur la carte
+		$("#x").change( function () { centerMap();} );
+		$("#y").change( function () { centerMap();} );
+		
+		// Layer de localisation pour accueillir des info
+		map.vlayer = new OpenLayers.Layer.Vector.Locator
+		(	"SPIP (locator)", 
+			{	displayInLayerSwitcher:true,
+				// Fonction a apeller si on bouge la punaise
+				callback: function(x,y) 
+				{	$('#x').val(Math.round(x*100000000000)/100000000000);
+					$('#y').val(Math.round(y*100000000000)/100000000000);
+				}
+			}
+		);
+		map.getMap().addLayer(map.vlayer);
+		
+	}
+}
+
+/** Fonction de recherche dans le RGC */
+function search(t, code)
+{	var requete = "";
+	if (!code) code='';
+	// Recherche sur nom de commune
+	if (t)
+	{	var	q = $(t).val();
+		if (q=='') 
+		{	alert ("Pas de nom de commune");
+			return;
+		}
+		requete = "q="+q+"&code="+code;
+	}
+	// Recherche sur x,y
+	else requete = "lon="+ $('#x').val() +"&lat="+ $('#y').val();
+	
+	// Recuperer la zone
+	requete += "&zone="+map.territory;
+	// Hash
+	requete += "&hash=#GEOPORTAIL_PROTECT{jqsearch}";
+	
+	// Envoyer la requete Ajax
+	$.jqGeoSearch (requete, 
+		{	title:'S&eacute;lectionnez une destination', 
+			// On a trouve une commune
+			success: centerMapObj
+		}
+	);
+}
+
+/** Centrer la carte sur un x,y */
+function centerMap (x,y, sc)
+{	if (map)
+	{	if (!x) x = Number($('#x').val());
+		if (!y) y = Number($('#y').val());
+		// Afficher le point
+		if (!map.vlayer.locate(x,y)) 
+		{	alert ("Hors zone !");
+			return;
+		}
+		// Centrer
+		if (!sc) map.getMap().setCenterAtLonLat (x,y);
+		else map.getMap().setCenterAtLonLat (x,y, (sc == 'ADM2') ? 9 : 13);
+	}
+}
+
+/** Centrer la carte sur une commune */
+function centerMapObj(obj)
+{	if (!obj) alert ("Impossible de trouver cette destination");
+	else
+	{	// remplir
+		$('#nadm1').val(obj['nadm']);
+		$('#adm1').val(obj['adm']);
+		$('#top').val(obj['carte']);
+		$('#adm2').val(obj['name']);
+		$('#pop').val(100*obj['population']);
+		// Centrer
+		if (obj['lon'])
+		{	$('#x').val(obj['lon']);
+			$('#y').val(obj['lat']);
+			centerMap (obj['lon'], obj['lat'], obj['fcode']);
+		}
+	}
+}
+
+</script>
+
+<p style='font-weight:bold; padding:0; margin:0;'>
+Test de recherche dans le Répertoire Géographique des Communes.
+</p>
+<font size=-1><i>Entrez un nom de commune ou un code postal / déplacez la punaise sur la carte / lancez une recherche inverse.</i></font>
+<hr/>
+<form style="font-size:10pt; margin:0 padding:0; ">
+	<label for="adm2">Commune :</label>
+	<input id="adm2" name="adm2" value="" type="text" title="Entrez un nom de commune ou son code postal" />
+	<input id=badm2 value="Localiser" type=button onclick="javascript:search('#adm2');" NAME="badm2"/>
+
+	<font style="font-size:0.88em; ">
+		<label for="adm1">Département : </label>
+		<input id="adm1" name="adm1" value="" type="text" readonly class=readonly size=13 />
+		<input id="nadm1" name="nadm1" value="" type=hidden />
+
+        <br />
+		<label for="top">TOP25 : </label>
+		<input id="top" name="top" value="" type="text" readonly class=readonly size=5 />
+		<label for="top">Pop : </label>
+		<input id="pop" name="pop" value="" type="text" readonly class=readonly size=5 style="text-align:right;" /> hab.
+	</font>
+	<hr/>
+	<label >Coordonnées : </label><br/>
+	<label for="x">lon : </label><input id="x" name="lon" value="" type="text" />
+
+	<label for="y">lat : </label><input id="y" name="lat" value="" type="text" />
+	<input value="Rechercher la commune" type=button onclick="javascript:search();" />
+</form>
+
+[<form class=zone_geo>(#MODELE{geoportail_geozone})</form>]
+<!-- La carte -->
+	[(#MODELE{geoportail}{id=0}{min_zoom=5}{height=650px}{ortho}{carto})]
+
+&nbsp;

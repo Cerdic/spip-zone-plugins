@@ -1,0 +1,41 @@
+*******************************************************************
+ REPERTOIRE GEOGRAPHIQUE DE COMMUNE (RGC)
+ Si present permet une localisation a la commune.
+ Utilisez jqGeoSearch ou la table GEORGC.
+*******************************************************************
+
+Vous pouvez creer votre propre repertoire geographique (RG)
+(qui localise des stations, des magazins, etc.).
+
+Pour cela, vous devez placer dans le repertoire ./rgc du plugin 
+un fichier contenant vos objets a referencer dans une fichier texte, 
+au format defini dans le descriptif ci-dessous (separe par des tab).
+Il doit se nommer rgc.monrg.txt (ou 'monrg' est le nom de votre RG).
+
+Il vous faut egalement definir dans votre fichier de langue 
+(local_fr.php de votre squelette) :
+'rgc_info_monrg'	=> 'info sur mon RG',
+'rgc_use_monrg'		=> 'Vous utilisez mon RG.',
+'rgc_par_monrg'		=> 'Powered by monRG',
+
+Lorsque vous localiser un objet SPIP, il sera associe a l'objet 
+le plus proche (a vol d'oiseau) de celui reference dans votre RG.
+Vous pourrez egalement faire des recherches sur le nom ou un code 
+(5 chiffres) designant vos objets.
+
+-------------------------------------------------------------------
+ DESCRIPTIF :
+-------------------------------------------------------------------
+Departement		: Numéro du département, char(3)
+Numero de commune	: Numéro de la commune, char(3)
+Type admin		: (P=non present dans geonames), 0=departement, 1=capitale, 2=Préfecture de région, 3=Préfecture, 4=Sous-préfecture, 5=Chef lieu, 6=Commune, char(1)
+Population 		: pop en centaine d'habitant, int(11)
+Surface		: Superficie de la commune en hectares (non present dans geonames), int(11)
+Zone			: Code ISO 3166 alpha-3 du territoire, varchar(3)
+asciiName		: Nom du territoire en majuscules non accentuées, sans apostrophe (ascii), varchar(200)
+Nom			: Nom du territoire (utf8), varchar(200)
+Code postal		: Code postal (issu de alternatenames dans geonames), varchar(5)
+Longitude		: Longitude en degré décimale, double
+Latitude		: Latitude en degré décimale, double
+Carte			: Num de la carte 1:25 000, (non present dans geonames), varchar(6)
+-------------------------------------------------------------------

@@ -1,0 +1,119 @@
+@media print
+{	/* Autoriser l'impression des cartes ! */
+	body { display:inherit !important; }
+}
+
+.GeoportalMapDiv
+{	width:100%;
+	height:500px;
+	background:url(waitingearth.gif) no-repeat center center;
+	line-height:normal;
+	font-size:12pt;
+}
+
+div.gpLUSResult, div.gpLUSResultAlternate
+{	overflow:hidden;
+}
+div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
+{	background-color:#99B;
+}
+
+/** Affichage de la zone geographique */
+.zone_geo
+{	text-align:right;
+	margin:0;
+	padding:0;
+	width:100%;
+}
+
+.zone_geo select 
+{	background-color:#E4E4E4;
+	border:1px solid #336699;
+	color:black;
+	font-family:Verdana,Geneva,helvetica,sans-serif;
+	font-size:11px;
+}
+
+/* Le questionnaire */
+#questionnaire
+{	height:500px; 
+	overflow:hidden;
+	clear:both; 
+	width:100%;
+}
+
+/* Pour faire patienter */
+#query_back
+{	background-position:center center;
+	background-repeat:no-repeat;
+	background-image:url(waiting.gif);
+}
+
+#query
+{	background-color:White;
+	border:2px solid black;
+	font-size:0.9em;
+	width:400px;
+	height:450px;
+}
+#query .jqCloseButton
+{	border:0;
+	background:transparent url("closebox.png") no-repeat 0 0;
+	width:28px;
+	height:25px;
+	float:right;
+	cursor:pointer; 
+	margin:1em; 
+	padding:0;
+}
+#query .jqCloseButton:hover
+{	background-position:0 -25px;
+}
+#query p
+{	padding:0 0.5em;
+	margin:1em; 
+	font-weight:bold;
+	color:Navy;
+	text-align:left;
+}
+#query p a
+{	color:orange;
+}
+
+#query ul
+{	width:80%; 
+	height:80%; 
+	overflow-x:hidden; 
+	overflow-y:scroll; 
+	border:1px solid navy; 
+	padding:0; 
+	margin:0.5em 1.5em;
+	list-style-type:none;
+	text-align:left;
+}
+#query ul a
+{	padding:0 1em; 
+	display:block;
+}
+#query ul a:hover
+{	background-color:#369;
+	color:White;
+	display:block;
+	text-decoration:none;
+}
+
+/* Fromulaire */
+.geoportail_formulaire .fondo
+{	background-color:#336699;
+	border-color:#336699;
+	color:White;
+	font-family:Verdana,Arial,Sans,sans-serif;
+	font-size:11px;
+	font-weight:bold;
+}
+.geoportail_formulaire .icone36 img
+{	border:3px solid #336699;
+	-moz-border-radius : 5px;
+	padding:4px;
+
+}

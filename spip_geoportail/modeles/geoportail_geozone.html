@@ -1,0 +1,4 @@
+<?php
+/* Affichage du popup pour changer de zone */
+	echo geoportail_popup_zone ("[(#ENV{name,zone_geo})]", '[(#ENV{selected})]', '[(#ENV{class})]', "onchange='window.location = \"[(#SELF|parametre_url{zone,''})]&zone=\"+this.value'");
+?>

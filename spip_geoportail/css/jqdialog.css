@@ -1,0 +1,64 @@
+/* Affichage des Dialogues */
+#jqDialog
+{	border:3px double navy;
+	border-color:Navy;
+	background-color:White;
+	font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+	width:380px;
+	font-size:0.88em;
+	font-weight:bold;
+	color:#777;
+}
+#jqDialog .jqDialogImg
+{	margin-right:0.5em;
+}
+
+#jqDialog p
+{	padding:0.5em;
+	margin:0.5em; 
+	font-weight:bold;
+	color:Navy;
+	text-align:left;
+}
+#jqDialog .jqCloseButton
+{	border:0;
+	background:transparent url("closebox.png") no-repeat 0 0;
+	width:28px;
+	height:25px;
+	float:right;
+	cursor:pointer; 
+	margin:0.5em; 
+	padding:0;
+}
+#jqDialog .jqCloseButton:hover
+{	background-position:0 -25px;
+}
+#jqDialog .jqDialogButton
+{	color:#F7CC55;
+	background:#4198CC;
+	font-weight:bold;
+	margin-left:0.5em;
+	border-color:#4198CC;
+}
+#jqDialog .jqDialogButton:hover
+{	background:#47A8E2;
+	color:#FBE064;
+}
+#jqDialog .jqDialogInner
+{	padding:0.5em 0;
+	font-size:0.88em;
+	text-align:left;
+	display:block;
+}
+
+#jqDialog.error 
+{	border-color:DarkRed;
+}
+
+#jqDialog.error p
+{	background-color:red;
+	color:White;
+	margin:0;
+	padding:0.8em;
+}
+

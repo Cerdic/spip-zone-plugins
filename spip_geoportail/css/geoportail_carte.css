@@ -1,0 +1,62 @@
+/** Thickbox au dessus ! */
+#TB_overlay
+{	z-index:2000;
+}
+#TB_window
+{	z-index:2001;
+}
+
+
+/** Modification des styles de la carte */
+.gpMap, div.olMap
+{	cursor:default !important;
+}
+
+img.gpGeocodeMatchCodeMatchType
+{	position:static;
+}
+
+.gpGroupDivClass
+{	max-height:350px;
+}
+
+/** Popup sur la carte **/
+#popup
+{	font-size:0.77em;
+	line-height:1.3em;
+}
+#popup p
+{	padding:0 0.5em ;
+	margin:0;	
+}
+#popup_contentDiv
+{	background: transparent url(guillemetg.png) no-repeat;
+}
+#popup p.guillemet
+{	padding:0.5em 0 0 1em;
+}
+#popup .titre
+{	padding:0 0 0 20px;
+	margin:0;
+	font-size:1em;
+	font-weight:bold;
+}
+#popup .spip_logos
+{	margin:0 0.5em 0 0;
+	float:left;
+}
+#popup small
+{	color:Maroon;
+	padding-left:20px;
+}
+#popup a
+{	color:Navy;
+}
+
+#popup .olPopupCloseBox 
+{	background:transparent url(close.png) no-repeat scroll 0 0;
+	overflow:hidden;
+}
+#popup .olPopupCloseBox:hover
+{	background:transparent url(close.png) no-repeat scroll 0 -17px
+}
