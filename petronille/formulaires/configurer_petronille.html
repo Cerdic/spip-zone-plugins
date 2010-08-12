@@ -4,8 +4,8 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
-			<legend>Feuilles de style &agrave; appliquer</legend>
-			<p class="explication">Pour etre utiles, ces feuilles de style sont appelees en premier, dans le head de vos pages. </p>
+			<legend>Feuilles de style &agrave; appliquer au site</legend>
+			<p class="explication">Attention : s'il existe dans votre repertoire squelettes, un fichier du m&ecirc;me nom que l'un de ceux-ci, il sera appliqu&eacute; &agrave; la place.</p>
 			<ul>
 				<li class="petronille_feuille_reset">
 					<label for="feuille_reset"><strong>reset.css</strong>&nbsp;:<br />mise &agrave; z&eacute;ro multinavigateurs</label>
@@ -21,21 +21,18 @@
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_forms})</span>
 					]<input type="checkbox" class="checkbox" name="feuille_forms" id="feuille_forms" value="oui"[ (#ENV{feuille_forms}|=={oui}|oui)checked="checked"] />
 				</li>
-				<li class="petronille_feuille_spip">
-					<label for="feuille_spip"><strong>spip.css</strong>&nbsp;:<br />&eacute;l&eacute;ments introduits par SPIP (illustrations, etc.)</label>
-					<input type="checkbox" class="checkbox" name="feuille_spip" id="feuille_spip" checked="checked" disabled="disabled" />
+				<li class="petronille_feuille_spip[ (#ENV**{erreurs}|table_valeur{feuille_spip}|oui)erreur]">
+					<label for="feuille_spip"><strong>spip.css</strong>&nbsp;:<br />Autres &eacute;l&eacute;ments introduits par SPIP (illustrations, etc.)</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_spip})</span>
+					]<input type="checkbox" class="checkbox" name="feuille_spip" id="feuille_spip" value="oui"[ (#ENV{feuille_spip}|=={oui}|oui)checked="checked"] />
 				</li>
 				<li class="petronille_feuille_grid[ (#ENV**{erreurs}|table_valeur{feuille_grid}|oui)erreur]">
 					<label for="feuille_grid"><strong>grid.css</strong>&nbsp;:<br />&eacute;l&eacute;ments de composition</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_grid})</span>
 					]<input type="checkbox" class="checkbox" name="feuille_grid" id="feuille_grid" value="oui"[ (#ENV{feuille_grid}|=={oui}|oui)checked="checked"] />
 				</li>
-				<li class="petronille_feuille_layout none">
-					<label for="feuille_layout"><strong>layout.css</strong>&nbsp;:<br />structure commune des pages</label>
-					<input type="checkbox" class="checkbox" name="feuille_layout" id="feuille_layout" disabled="disabled" />
-				</li>
 			</ul>
-			<p class="explication">Il est déconseillé d’activer Pétronille sur un site déjà stylé : cela sera soit sans grand effet, soit contrariant. Pétronille vous prémâche le travail : elle n’est donc utile qu’employée dès le début.</p>
+			<p class="explication">Pour &ecirc;tre utiles, ces feuilles de style sont appel&eacute;es en premier, dans le head de vos pages. N'oubliez pas d'activer la compression des fichiers CSS.</p>
 		</fieldset>
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />

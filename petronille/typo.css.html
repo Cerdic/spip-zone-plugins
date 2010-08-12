@@ -46,24 +46,7 @@ ins { text-decoration: none; }
 ins, ins * { color: red; }
 sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
 sup { vertical-align: super; }
-sub { vertical-align: sub;}
-
-/* Citations, code et poesie */
-q, blockquote { font-style: italic; }
-blockquote { padding: 0 #GET{text-indent};[ (#GET{text-indent})];[ background: url((#CHEMIN{img/quote.gif})) no-repeat;] }
-blockquote.spip {}
-.spip_poesie {}
-.spip_poesie div { margin-left: #GET{text-indent}; text-indent: -#GET{text-indent}; }
-cite { background-color: #FFFCDF; font-style: italic; }
-
-address { font-style: italic; }
-
-pre,code,kbd,samp,var,tt,
-.spip_code,.spip_cadre { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
-pre { margin: #GET{line-height} 0; white-space: pre; }
-kbd { background-color: #GET{color}; color: #GET{background-color}; }
-samp { font-weight: bold; }
-var { font-style: italic; }
+sub { vertical-align: sub; }
 
 /* Listes */
 ul, ol, li, dl, dt, dd {}
@@ -90,9 +73,33 @@ tr.odd td { background: #DDD; }
 tr.even td { background: #EEE; }
 tfoot { font-style: italic; }
 
+/* Tableaux SPIP */
+table.spip {}
+table.spip caption {}
+table.spip tr.row_first {}
+table.spip tr.row_odd {}
+table.spip tr.row_even {}
+
+/* Citations, code et poesie */
+q, blockquote { font-style: italic; }
+blockquote { padding: 0 #GET{text-indent};[ (#GET{text-indent})];[ background: url((#CHEMIN{img/quote.gif})) no-repeat;] }
+blockquote.spip {}
+.spip_poesie {}
+.spip_poesie div { margin-left: #GET{text-indent}; text-indent: -#GET{text-indent}; }
+cite { background-color: #FFFCDF; font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,var,tt,
+.spip_code,.spip_cadre { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
+pre { margin: #GET{line-height} 0; white-space: pre; }
+kbd { background-color: #GET{color}; color: #GET{background-color}; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
 /* Paragraphes */
 p, dl, dd, blockquote, address, pre, table, fieldset,
-div.spip_code, .spip_cadre, ul.spip, ol.spip, table.spip { margin-bottom: #GET{line-height}; }
+div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: #GET{line-height}; }
 
 /* Liens */
 a {}
