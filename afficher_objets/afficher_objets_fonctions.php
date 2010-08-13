@@ -110,7 +110,7 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 			$res = lien_ou_expose($memo['url'],$memo['initiale'],$on,'lien_pagination');
 		}
 		if ($initiale)
-			$memo = array('initiale'=>$initiale,'url'=>$url,'compteur'=>$newcompt);
+			$memo = array('initiale'=>$initiale,'url'=>parametre_url($url,'i',$initiale),'compteur'=>$newcompt);
 	}
 	return $res;
 }
