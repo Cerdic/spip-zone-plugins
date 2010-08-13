@@ -17,7 +17,7 @@ function menus_declarer_tables_principales($tables_principales){
 		"id_menu" => "bigint(21) NOT NULL",
 		"id_menus_entree" => "bigint(21) DEFAULT '0' NOT NULL",
 		"titre" => "text DEFAULT '' NOT NULL",
-		"identifiant" => "varchar(255) not null",
+		"identifiant" => "varchar(255) default '' not null",
 		"css" => "tinytext DEFAULT '' NOT NULL"
 	);
 	
