@@ -86,7 +86,7 @@ function agregarMarcadorJson (jsonItem, idmap, minZoom, maxZoom, markerMngerXD) 
 		
 		var point = new GPoint(lng,lat);
 		var icono_categoria = new GIcon();
-		icono_categoria.image = (jsonItem.icon != "" ? jsonItem.icon : MarkerImgBase);
+		icono_categoria.image = (jsonItem.icon ? jsonItem.icon : MarkerImgBase);
 		icono_categoria.shadow = URLbase + "img_pack/shadow.png";
 		icono_categoria.iconSize = new GSize(MarkerBaseWidth, MarkerBaseHeight);
 		icono_categoria.shadowSize = new GSize(37, 34);	
