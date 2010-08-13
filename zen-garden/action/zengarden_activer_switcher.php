@@ -14,7 +14,7 @@ function action_zengarden_activer_switcher_dist(){
 		ecrire_meta("zengarden_switcher", 'on');
 	}
 	else {
-		effacer_meta("zengarden_switcher", 'on');
+		effacer_meta("zengarden_switcher");
 	}
 }
 
