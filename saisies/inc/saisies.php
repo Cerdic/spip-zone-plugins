@@ -392,7 +392,7 @@ function saisies_verifier($formulaire){
 			$valeur = _request($champ);
 		
 		// On regarde d'abord si le champ est obligatoire
-		if ($obligatoire and $obligatoire != 'non' and (trim($valeur) == ''))
+		if ($obligatoire and $obligatoire != 'non' and ((is_string($valeur) and trim($valeur) == '') or (is_array($valeur) and count($valeur) == 0)))
 			$erreurs[$champ] = _T('info_obligatoire');
 		
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
