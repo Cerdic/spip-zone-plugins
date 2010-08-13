@@ -460,15 +460,45 @@ function balise_PUBLIE_dist($p) {
 	return $p;
 }
 
+
+/**
+ * Implementation securisee du saut en avant
+ * pour la balise #SAUTER
+ *
+ * @param resource $res
+ * @param int $pos
+ * @param int $nb
+ * @param int $total
+ */
+function spip_bonux_sauter(&$res, &$pos, $nb, $total){
+	// pas de saut en arriere qu'on ne sait pas faire sans sql_seek
+	if (($nb=intval($nb))<=0) return;
+
+	$saut = $pos + $nb;
+	// si le saut fait depasser le maxi, on libere et on sort
+	if ($saut>=$total) {sql_free($res); return;}
+
+	if (sql_seek($res, $saut))
+		$pos += $nb;
+	else
+		while ($pos<$saut AND sql_fetch($res))
+			$pos++;
+	return;
+}
+
+/**
+ * #SAUTER{n} permet de sauter n resultats dans une boucle
+ * n>0
+ *
+ * @param <type> $p
+ * @return <type>
+ */
 function balise_SAUTER_dist($p){
 	$_nb = interprete_argument_balise(1,$p);
 	$_compteur = "\$Numrows['".$p->id_boucle."']['compteur_boucle']";
 	$_max = "\$Numrows['".$p->id_boucle."']['total']";
 
-	$code = "sql_seek(\$result,\$saut)?$_compteur=\$saut:false";
-	$code = "(\$saut=$_compteur+intval($_nb))<$_max?($code):sql_free(\$result)";
-	$code = "intval($_nb)?($code):''";
-	$p->code = "vide($code)";
+	$p->code = "spip_bonux_sauter(\$result,$_compteur,$_nb,$_max)";
 	$p->interdire_scripts = false;
 	return $p;
 }
