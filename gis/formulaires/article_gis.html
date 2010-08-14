@@ -93,7 +93,6 @@ if (GBrowserIsCompatible()) {
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
 			<div class="explication"><:texte_enrichir_mise_a_jour:></div>
-			[(#VAL{text_area}|barre_typo{#LANG})]
 			<textarea name='texte' id='texte' class='barre_inserer' rows='7' cols='40'[
 			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 			
