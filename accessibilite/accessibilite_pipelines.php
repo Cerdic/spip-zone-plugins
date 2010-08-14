@@ -19,8 +19,11 @@ function accessibilite_pre_liens($texte){
 					);
 				$textelien = ($intitule[0]) ? $intitule[0]:$row['T1'];
 				$langue = ($intitule[2]) ? '{'.$intitule[2].'}':'';
-				// Si pas de titre pour le doc, remplacer par "Document"
-				$titredoc = ($row['T1']) ? $row['T1']:_T('info_document');
+				// Si intitulé du lien, le reprendre,
+				// Sinon, si titre pour le doc, le reprendre,
+				// Sinon remplacer par "Document"
+				$titredoc = ($intitule[0]) ? $intitule[0]:
+					(($row['T1']) ? $row['T1']:_T('info_document'));
 				// Quand un title est spécifie il doit etre plus plus long que l'intitule
 				// car les lecteurs d'ecran lisent le plus long des deux
 				$title = ((($intitule[1]) && _ACCESSIBILITE_CONSERVER_BULLE) ? $titredoc. ' &ndash; ' .$intitule[1]:$titredoc) // Le texte du lien + Nom du doc
