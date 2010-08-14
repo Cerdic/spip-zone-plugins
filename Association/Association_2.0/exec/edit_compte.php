@@ -58,7 +58,7 @@ function exec_edit_compte() {
 		while ($banque = sql_fetch($sql)) {
 			$code = $banque['code'];
 			$s = ($imputation==$code) ? ' selected="selected"' : '';
-			$opt .= "\n<option value='$code'$s>".$banque['intitule'].'</option>';
+			$res .= "\n<option value='$code'$s>".$banque['intitule'].'</option>';
 		}
 		if ($res)
 			$res = '<label for="imputation"><strong>' 
