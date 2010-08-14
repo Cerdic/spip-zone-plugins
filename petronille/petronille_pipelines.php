@@ -12,8 +12,12 @@
  * @return string
  */
 function petronille_pied_de_biche($head){
-	$p = stripos($head, "<link");
+	$search = "<link";
+	if (preg_match(",<link\s[^>]*stylesheet,Uims", $head, $match))
+		$search = $match[0];
+	$p = stripos($head, $search);
 	$h = recuperer_fond('inclure/petronille-head',array());
+	$h = "\n".trim($h)."\n";
 
 	$head = substr_replace($head, $h, $p, 0);
 	return $head;
