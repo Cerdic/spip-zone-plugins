@@ -37,7 +37,7 @@ function autoriser_article_creerevenementdans_dist($faire,$quoi,$id,$qui,$option
 			if (sql_countsel('spip_rubriques','agenda=1')){
 				// alors il faut le flag agenda dans cette branche !
 				$afficher = false;
-				include_spip('inc/rubriques');
+				include_spip('inc/agenda_gestion');
 				$in = calcul_hierarchie_in(sql_getfetsel('id_rubrique','spip_articles','id_article='.intval($id)));
 				$afficher = sql_countsel('spip_rubriques',sql_in('id_rubrique',$in)." AND agenda=1");
 			}
@@ -102,30 +102,6 @@ function autoriser_evenement_supprimer_dist($faire,$quoi,$id,$qui,$options){
 	}
 	return autoriser('modifier','article',$id_article,$qui);
 }
-
-// Calcul d'une hierarchie
-// (liste des id_rubrique contenants une rubrique donnee)
-function calcul_hierarchie_in($id) {
-
-	// normaliser $id qui a pu arriver comme un array
-	$id = is_array($id)
-		? join(',', array_map('sql_quote', $id))
-		: $id;
-
-	// Notre branche commence par la rubrique de depart
-	$hier = $id;
-
-	// On ajoute une generation (les filles de la generation precedente)
-	// jusqu'a epuisement
-	while ($parents = sql_allfetsel('id_parent', 'spip_rubriques',
-	sql_in('id_rubrique', $id))) {
-		$id = join(',', array_map('reset', $parents));
-		$hier .= ',' . $id;
-	}
-
-	return $hier;
-}
-
 
 
 ?>

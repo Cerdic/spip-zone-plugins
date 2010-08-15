@@ -25,6 +25,7 @@ function agenda_affiche_milieu($flux) {
 		if (!sql_countsel('spip_rubriques','agenda=1'))
 			$res .= _T('agenda:aucune_rubrique_mode_agenda').'<br />';
 		else {
+			include_spip('inc/agenda_gestion');
 			if (sql_countsel('spip_rubriques',sql_in('id_rubrique',calcul_hierarchie_in($id_rubrique))." AND agenda=1 AND id_rubrique<>".intval($id_rubrique))){
 				$res .= _T('agenda:rubrique_dans_une_rubrique_mode_agenda').'<br />';
 				$activer = false;
