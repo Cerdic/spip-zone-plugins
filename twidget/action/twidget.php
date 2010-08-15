@@ -10,7 +10,10 @@ function action_twidget_dist(){
 
 	$url = $_SERVER['QUERY_STRING'];
 	$url = preg_replace(",^action=twidget&w=,","",$url);
-	$url = "http://www.twitter.com/".$url;
+	$sd = "";
+	if (strncmp($url,'search',6)==0)
+		$sd = "search.";
+	$url = "http://{$sd}twitter.com/".$url;
 
 	echo twidget_get_cached_url($url);
 	exit;
