@@ -57,8 +57,7 @@ function agenda_affiche_milieu($flux) {
 	}
 	elseif ($exec=='articles'){
 		$id_article = $flux['args']['id_article'];
-		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-		$afficher = autoriser('creerevenementdans','article',$id_article,$id_auteur);
+		$afficher = autoriser('creerevenementdans','article',$id_article);
 		if ($afficher) {
 			$contexte = array();
 			foreach($_GET as $key=>$val)
