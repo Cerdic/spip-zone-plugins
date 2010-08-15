@@ -1,0 +1,21 @@
+[(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
+	donne un select 
+]<BOUCLE_ungroupe(GROUPES_MOTS){id_groupe}>
+	<div class='mots_chemin'>
+	<a href='[(#SELF|parametre_url{id_groupe|debut_mots,''})]' class='ajax'><:agenda:groupes_mots:></a> &gt; [(#TITRE|supprimer_tags)]
+	</div>
+	<B_mots>
+	[<p class='pagination'>(#PAGINATION)</p>]
+	<ul class='groupes_contenus'><BOUCLE_mots(MOTS){id_groupe}{par num titre,titre}{pagination 20}><li 
+class='mot'><a href='#' onclick="mot_sel_add(#ID_MOT,'[(#TITRE|supprimer_tags|texte_script)]','#ENV{name}');return false;"
+>[(#TITRE|supprimer_tags)]</a></li></BOUCLE_mots></ul>
+	</B_mots>	
+</BOUCLE_ungroupe><B_groupes><div class='mots_chemin'>
+	<:agenda:groupes_mots:>
+	</div>
+	<ul class='groupes_contenus'>
+	<BOUCLE_groupes(GROUPES_MOTS){tables_liees==evenements}>
+	<li class='groupe'><a href='[(#SELF|parametre_url{id_groupe,#ID_GROUPE})]' class='ajax'>[(#TITRE|supprimer_tags)]</a></li>
+	</BOUCLE_groupes>
+	</ul>
+	</B_groupes><//B_ungroupe>
