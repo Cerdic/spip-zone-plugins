@@ -131,11 +131,11 @@ function calcul_CITATION ($params) {
 		$style = ($params['style'] ? "style='" . $params['style'] . "'" : "");
 		
 		$result = ($texte) ? "\n<!-- " . $params['sig'] . " -->\n" 
-			. "<$p class='citation" . $class . "' $style>$texte$auteur</$p>\n" : "";
+			. "<$p class='citation robots-nocontent" . $class . "' $style>$texte$auteur</$p>\n" : "";
 			
 	}
 	else {
-		cital_log("Pas de citation disponible");
+		cital_log('Pas de citation disponible');
 	}
 
 	return($result);
