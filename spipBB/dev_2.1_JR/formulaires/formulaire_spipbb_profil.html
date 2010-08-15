@@ -1,0 +1,72 @@
+<div class="formulaire_spip formulaire_profil">
+[<p class="info_echec">(#ENV*{echec})</p>]
+<form action="[(#ENV{self})]" method="post">
+<div>
+
+<BOUCLE_AUTEUR(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+
+	<input type='hidden' name='nom' value='[(#NOM)]' />
+	<input type='hidden' name='id_auteur' value="[(#ID_AUTEUR)]" />
+	<input type='hidden' name='modif' value="1" />
+
+	<p><label for="email"><:spipbb:votre_email:></label><br />
+	<input type='text' id='email' name='email' class='forml' value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" disabled='disabled' />
+	</p>
+
+	<p><label for="bio"><:spipbb:votre_bio:></label><br />
+	<textarea id='bio' name='bio' class='forml' rows='4' cols='40'>[(#BIO*)]</textarea>
+	</p><br />
+
+	<input type='hidden' name='pgp' value="[(#PGP)]" />
+
+	<p><label for="nom_site"><:spipbb:votre_site:></label><br />
+	<input type='text' id='nom_site' name='nom_site' class='forml' value="[(#NOM_SITE)]" size='40' />
+	</p>
+
+	<p><label for="url_site"><:spipbb:votre_url_site:></label><br />
+	<input type='text' id='url_site' name='url_site' class='forml' value="[(#URL_SITE)]" size='40' />
+	</p>
+
+
+	[(#REM) liste des threads de l_auteur ==> checkbox refus de suivi ]
+	<br />
+
+	<B_suivi_forum>
+	<table class="spipforum" id="liste_refus_suivi">
+	<tr class="inter">
+		<th colspan="2">
+		<:spipbb:infos_refus_suivi_sujet:>
+		</th>
+	</tr>
+	<BOUCLE_suivi_forum(FORUMS spip_articles){id_auteur}{id_secteur=#CONFIG{spipbb/id_secteur}}{plat}{!par date}{fusion id_thread}>
+	<tr class="ligne_sujet">
+		<td class="titreforum">
+			#ID_THREAD|&nbsp;&laquo;&nbsp;#TITRE&nbsp;&raquo;&nbsp;
+		</td><td class="nbr_post">
+			<input type="checkbox" name="refus_suivi_thread[]" value="#ID_THREAD"
+				[(#ID_THREAD|in_array{#GET{select}|is_array|?{#GET{select},alt="lolo"}}|?{'checked="checked"',''})] title="" /><br />
+		</td>
+	</tr>
+	</BOUCLE_suivi_forum>
+	</table>
+	</B_suivi_forum>
+		<p><:spipbb:infos_suivi_forum_par_inscription:></p>
+	<//B_suivi_forum>
+
+	<br />
+	<p><label for="new_pass"><:spipbb:votre_nouveau_passe:></label>
+	<span style="color:red"><:spipbb:info_plus_cinq_car:></span><br />
+	<input type='password' name='new_pass' id='new_pass' class='forml' value="" size='40' />
+	</p>
+
+	<p><label for="new_pass2"><:spipbb:info_confirmer_passe:></label>
+	<input type='password' name='new_pass2' id='new_pass2' class='forml' value="" size='40' />
+	</p>
+
+	<div class="spip_bouton"><input type="submit" name="valider_auteur" value="<:valider:>" /></div>
+
+</BOUCLE_AUTEUR>
+</div>
+</form>
+</div>
+

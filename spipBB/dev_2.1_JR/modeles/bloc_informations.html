@@ -1,0 +1,49 @@
+#CACHE{3600}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) Bloc d'informations a afficher en bas de page]
+
+#SET{spipbb_secteur,#CONFIG{spipbb/id_secteur}}
+<BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#GET{spipbb_secteur}}>
+<p class="space_5"></p>
+<table summary="bloc_informations" class="spipforum">
+		<tbody[ id="salon(#ID_RUBRIQUE)"]>
+		<tr>
+			<th colspan="2"><:spipbb:en_ligne:></th>
+		</tr>
+		<tr class="ligne_forum">
+			<td rowspan="2" class="etatforum enligne">
+				<span>&nbsp;</span>
+			</td>
+			<td class="titreforum">
+			[(#REM) un peu lourd mais le critère {plat} déconne avec {id_secteur}]
+			<BOUCLE_s(ARTICLES){id_secteur=#ID_RUBRIQUE}>
+			<BOUCLE_a(FORUMS){doublons messages}{plat}{id_article} /> 
+			</BOUCLE_s>
+			<BOUCLE_total_posts(FORUMS){!doublons messages}{plat}{!par date} />
+			<:spipbb:total_messages_membres:>[ (#TOTAL_BOUCLE) ]<:spipbb:message_s:><br />
+			<//B_total_posts>
+			
+			<BOUCLE_auteurs(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}></BOUCLE_auteurs><:spipbb:total_membres:> #TOTAL_BOUCLE <:spipbb:membres_inscrits:><br /><//B_auteurs>
+			[(#REM) c.23/12/7 on passe par la page profile]
+			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}{par id_auteur}{inverse}{0,1}><a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
+			</td>
+		</tr>
+		<tr  class="ligne_forum">
+			<td class="dernmsg">
+				[(#TOTAL_AUTEURS_EN_LIGNE{'30 MINUTE'}) <:spipbb:membres_en_ligne:><br />]
+			</td>
+		</tr>
+		[<tr>
+			<th colspan="2"><:spipbb:membres_les_plus_actifs:></th>
+		</tr>
+		<tr class="ligne_forum">
+			<td class="etatforum actifs">
+				<span>&nbsp;</span>
+			</td>
+			<td class="dernmsg">
+				(#ID_RUBRIQUE|spipbb_nb_messages_groupe)
+			</td>
+		</tr>]
+		</tbody>
+</table>
+</BOUCLE_forum_principal>

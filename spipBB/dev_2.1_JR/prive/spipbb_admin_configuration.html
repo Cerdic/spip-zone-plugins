@@ -1,0 +1,276 @@
+#CACHE{0}
+[(#REM) Plugin SpiBB - Licence GPL]
+[(#REM) SpipBB admin - Configuration generale SpipBB]
+
+<form method="post" action="#ENV{lien_action}">
+<input type='hidden' id="exec" value="#ENV{exec_script}">
+
+[(#ENV{url_post}|form_hidden)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration:>})]
+
+[(#REM) ------------------------ ETAT DES PREREQUIS ------------------------ ]
+<fieldset>
+<legend><:spipbb:admin_config_prerequis:></legend>
+<p>
+<label>
+	#ENV*{etat_general}
+</label>
+</p>
+</fieldset>
+
+<?php if ( "#ENV{prerequis}"=="oui" ) { ?>
+
+[(#REM) ------------------------ ACTIVATION DE SPIPBB ------------------------ ]
+<fieldset>
+<legend><:spipbb:admin_config_spipbb:></legend>
+<p>
+<label>
+	<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+	<tr>
+		<td class='verdana2'><:spipbb:admin_config_spipbb_info:></td>
+		<td>
+		<input type='radio' name='config_spipbb' value='oui' id='config_spipbb_1' [ checked="(#ENV{config_spipbb}|=={'oui'}|?{checked})"] /> <label for='config_spipbb_1'><:spipbb:oui:></label>
+		&nbsp;
+		<input type='radio' name='config_spipbb' value='non' id='config_spipbb_0' [ checked="(#ENV{config_spipbb}|=={'non'}|?{checked})"] /> <label for='config_spipbb_0'><:spipbb:non:></label>
+		</td>
+	</tr>
+	</table>
+</label>
+</p>
+</fieldset>
+
+<?php if ( "#ENV{config_spipbb}"=="oui" ) { ?>
+
+[(#REM) ------------------------ RUBRIQUE/SECTEUR CONTENANT LES FORUMS ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:config_choix_rubrique:></legend>
+<p>
+<label>
+	<i><:spipbb:choix_rubrique_selection:></i>
+	<div style='text-align:center'>
+	<select name="spipbb_id_secteur">
+	<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}{racine}{tout}>
+		<option value="#ID_RUBRIQUE"[ selected="(#ENV{spipbb_id_secteur}|=={#ID_RUBRIQUE}|?{selected})"]>#ID_RUBRIQUE. #TITRE</option>
+	</BOUCLE_rubriques>
+		<option value="0"[ selected="(#ENV{spipbb_id_secteur}|=={0}|?{selected})"]>&nbsp;</option>
+	</B_rubriques>
+		<option value="0" selected="selected">&nbsp;</option>
+	<//B_rubriques>
+	</select>
+	</div>
+</label>
+</p>
+</fieldset>
+
+[(#REM) ------------------------ GROUPE DE MOTS ASSOCIES A SPIPBB ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:config_choix_mots:></legend>
+<p>
+<label>
+	<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+	<tr>
+		<td class='verdana2'[(#ENV{id_groupe_mot}|=={0}|?{ rowspan='2'})]>
+			<i><:spipbb:choix_mots_selection:></i>
+		</td>
+		<td class='verdana2'>
+			<select name="id_groupe_mot">
+			<BOUCLE_mots(GROUPES_MOTS){par id_groupe}>
+			<option value="#ID_GROUPE"[ selected="(#ENV{id_groupe_mot}|=={#ID_GROUPE}|?{selected})"]>#TITRE</option>
+			</BOUCLE_mots>
+				<option value="0"[ selected="(#ENV{id_groupe_mot}|=={0}|?{selected})"]>&nbsp;</option>
+			</B_mots>
+				<option value="0" selected="selected">&nbsp;</option>
+			<//B_mots>
+			</select>
+		</td>
+	</tr>
+	[(#ENV{id_groupe_mot}|=={0}|?{
+	<tr>
+		<td>
+		<input type="text" name="nom_groupe_mot" value="spipbb" />
+		</td>
+	</tr>
+	})]
+	</table>
+	<?php if ( $idgm="#ENV{id_groupe_mot}" ) { ?>
+	<table cellpadding='3' cellspacing='1' border='1' width='100%'>
+	<tr>
+		<td class='verdana2'><:spipbb:choix_mots_ferme:></td>
+		<td>
+		<select name='id_mot_ferme'>
+		<BOUCLE_mot_ferme(MOTS){id_groupe=#ENV{id_groupe_mot}}{par id_mot}>
+		<option value='#ID_MOT'[ selected='(#ENV{id_mot_ferme}|=={#ID_MOT}|?{selected})']>#TITRE[ - (#DESCRIPTIF|couper{40})]</option>
+		</BOUCLE_mot_ferme>
+		<option value="0"[ selected="(#ENV{id_mot_ferme}|=={0}|?{selected})"]>&nbsp;</option>
+		</B_mot_ferme>
+		<option value="0" selected="selected">&nbsp;</option>
+		<//B_mot_ferme>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td class='verdana2'><:spipbb:choix_mots_annonce:></td>
+		<td>
+		<select name='id_mot_annonce'>
+		<BOUCLE_mot_annonce(MOTS){id_groupe=#ENV{id_groupe_mot}}{par id_mot}>
+		<option value='#ID_MOT'[ selected='(#ENV{id_mot_annonce}|=={#ID_MOT}|?{selected})']>#TITRE[ - (#DESCRIPTIF|couper{40})]</option>
+		</BOUCLE_mot_annonce>
+		<option value="0"[ selected="(#ENV{id_mot_annonce}|=={0}|?{selected})"]>&nbsp;</option>
+		</B_mot_annonce>
+		<option value="0" selected="selected">&nbsp;</option>
+		<//B_mot_annonce>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td class='verdana2'><:spipbb:choix_mots_postit:></td>
+		<td>
+		<select name='id_mot_postit'>
+		<BOUCLE_mot_postit(MOTS){id_groupe=#ENV{id_groupe_mot}}{par id_mot}>
+		<option value='#ID_MOT'[ selected='(#ENV{id_mot_postit}|=={#ID_MOT}|?{selected})']>#TITRE[ - (#DESCRIPTIF|couper{40})]</option>
+		</BOUCLE_mot_postit>
+		<option value="0"[ selected="(#ENV{id_mot_postit}|=={0}|?{selected})"]>&nbsp;</option>
+		</B_mot_postit>
+		<option value="0" selected="selected">&nbsp;</option>
+		<//B_mot_postit>
+		</select>
+		</td>
+	</tr>
+	</table>
+	<?php } ?>
+</label>
+</p>
+</fieldset>
+
+
+[(#REM) ------------------------ SQUELETTES ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:config_choix_squelettes:></legend>
+<p>
+	<i><:spipbb:choix_squelettes:></i>
+</p>
+<label>
+</select>
+<table cellpadding='3' cellspacing='1' border='1' width='100%'>
+<tr>
+	<td><:spipbb:squelette_groupeforum:></td>
+	<td><input type="text" name="squelette_groupeforum" value="[(#ENV{squelette_groupeforum})]" size='20' />
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:squelette_filforum:></td>
+	<td><input type="text" name="squelette_filforum" value="[(#ENV{squelette_filforum})]" size='20' />
+	</td>
+</tr>
+</table>
+<label>
+</fieldset>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+
+[(#REM) ------------------------ CONFIG ISSUE GAFOSPIP ------------------------ ]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_interface:>})]
+
+<table cellpadding='3' cellspacing='0' border='0' width='100%'>
+<tr>
+	<td><:spipbb:admin_nombre_lignes_messages:></td>
+	<td>
+		<input type='text' name='fixlimit' value='#ENV{fixlimit}' size='4' />
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_temps_deplacement:></td>
+	<td>
+		<input type='text' name='lockmaint' value='#ENV{lockmaint}' size='4' />
+	</td>
+</tr>
+</table>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:bouton_speciaux_sur_skels:>})]
+<table cellpadding='3' cellspacing='0' border='0' width='100%'>
+<tr>
+	<td><:spipbb:admin_afficher_bouton_alerte_abus:></td>
+	<td>
+		<input type='radio' name='affiche_bouton_abus' value='oui' id='affiche_bouton_abus_1' [ checked="(#ENV{affiche_bouton_abus}|=={'oui'}|?{checked})"] /> <label for='affiche_bouton_abus_1'><:spipbb:oui:></label>
+		&nbsp;
+		<input type='radio' name='affiche_bouton_abus' value='non' id='affiche_bouton_abus_0' [ checked="(#ENV{affiche_bouton_abus}|=={'non'}|?{checked})"] /> <label for='affiche_bouton_abus_0'><:spipbb:non:></label>
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_affichier_bouton_rss:></td>
+	<td>
+		<input type='radio' name='affiche_bouton_rss' value='non' id='affiche_bouton_rss_0' [ checked="(#ENV{affiche_bouton_rss}|=={'non'}|?{checked})"] /> <label for='affiche_bouton_rss_0'><:spipbb:non:></label>
+		&nbsp;
+		<input type='radio' name='affiche_bouton_rss' value='un' id='affiche_bouton_rss_1' [ checked="(#ENV{affiche_bouton_rss}|=={'un'}|?{checked})"] /> <label for='affiche_bouton_rss_1'><:spipbb:un:></label>
+		&nbsp;
+		<input type='radio' name='affiche_bouton_rss' value='tous' id='affiche_bouton_rss_2' [ checked="(#ENV{affiche_bouton_rss}|=={'tous'}|?{checked})"] /> <label for='affiche_bouton_rss_1'><:spipbb:tous:></label>
+	</td>
+</tr>
+</table>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+[(#REM) ------------------------ OPTIONS ------------------------ ]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_options:>})]
+
+<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+<tr>
+	<td><:spipbb:admin_forums_affiche_membre_defaut:></td>
+	<td>
+		<input type='radio' name='affiche_membre_defaut' value='oui' id='affiche_membre_defaut_1' [ checked="(#ENV{affiche_membre_defaut}|=={'oui'}|?{checked})"] /> <label for='affiche_membre_defaut_1'><:spipbb:oui:></label>
+		&nbsp;
+		<input type='radio' name='affiche_membre_defaut' value='non' id='affiche_membre_defaut_0' [ checked="(#ENV{affiche_membre_defaut}|=={'non'}|?{checked})"] /> <label for='affiche_membre_defaut_0'><:spipbb:non:></label>
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_forums_log_level:></td>
+	<td>
+	<div style='text-align:center'>
+	<select name="log_level">
+		<option value="0"[ selected="(#ENV{log_level}|=={0}|?{selected})"]>[ 0 ] - <:spipbb:admin_forums_log_level_0:></option>
+		<option value="1"[ selected="(#ENV{log_level}|=={1}|?{selected})"]>[ 1 ] - <:spipbb:admin_forums_log_level_1:></option>
+		<option value="2"[ selected="(#ENV{log_level}|=={2}|?{selected})"]>[ 2 ] - <:spipbb:admin_forums_log_level_2:></option>
+		<option value="3"[ selected="(#ENV{log_level}|=={3}|?{selected})"]>[ 3 ] - <:spipbb:admin_forums_log_level_3:></option>
+	</select>
+	</div>
+	</td>
+</tr>
+</table>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+#ENV*{config_support_auteurs}
+#ENV*{config_champs_supp}
+
+<?php //fin spipbb active == oui
+} else { ?>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+<?php } ?>
+
+<?php //fin spipbb prerequis == oui
+} ?>
+
+</form>

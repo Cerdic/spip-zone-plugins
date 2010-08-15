@@ -1,0 +1,49 @@
+#CACHE{3600}
+
+[(#REM) c: 21/4/8 pour debogage eventuel. A supprimer
+<!-- c_profile {id_auteur=#ENV{id_auteur}} {id_rubrique=#ENV{id_rubrique}} {id_article=#ENV{id_article}}-->]
+
+[(#REM) c: 23/12/7 petite manip pour recuperer eventuellement la rubrique]
+#SET{id_rubrique,#ENV{id_rubrique}}
+<BOUCLE_selart(ARTICLES){id_article=#ENV{id_article}}>#SET{id_rubrique,#ID_RUBRIQUE}</BOUCLE_selart>
+[(#REM) Au cas ou le numero de rubrique serait vide ou invalide...]
+<BOUCLE_rub_sel(RUBRIQUES){id_rubrique=#GET{id_rubrique}}></BOUCLE_rub_sel></B_rub_sel>#SET{id_rubrique,#CONFIG{'spipbb/id_secteur'}}<//B_rub_sel>
+
+[(#REM) c: 23/12/7 petite manip pour recuperer eventuellement l'identifiant auteur]
+#SET{id_auteur,#ENV{id_auteur}}
+[(#ENV{id_auteur}|=={''}|?{#SET{id_auteur,#SESSION{id_auteur}},''})]
+<BOUCLE_lang_sel(RUBRIQUES){id_rubrique=#GET{id_rubrique}}>
+<BOUCLE_recap(AUTEURS){id_auteur=#GET{id_auteur}}{tout}>
+
+	<INCLURE{fond=inc_teteforum}{id_rubrique}>
+
+	<p class="space_20"></p>
+
+	<table class="spipforum" id="tabprofile">
+		<tr>
+			<th colspan="2">#NOM</th>
+		</tr>
+		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})<tr class="inter"><td colspan="2"><:spipbb:modif_parametre:></td></tr>]
+		<tr class="ligne_sujet">
+			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})<td class="aff_avatar">
+				</td>
+				<td></td>]
+			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})<td colspan='2'>[(#MODELE{profil_auteur}{id_auteur}{id_rubrique})]</td>]
+		</tr>
+		<tr class="inter">
+			<td colspan="2">&nbsp;</td>
+		</tr>
+	</table>
+
+	<INCLURE{fond=inc_piedforum}{id_rubrique}>
+
+</BOUCLE_recap>
+</B_recap>
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
+	#FORMULAIRE_LOGIN{#SELF}
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
+</BOUCLE_lang_sel>

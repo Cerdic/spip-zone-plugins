@@ -1,0 +1,614 @@
+﻿2010-04-12 <damazone72-spip!@!yahoo.fr>
+ * 0.5.4.0 : Compatibilité spip2.1
+ * Correction de bug Erreur SQL de syntaxe 1064 quand une rubrique ne contient pas d'article
+ * Correction Erreur dans l’espace privé : Function ereg() is deprecated cfr http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=839
+
+2008-12-29  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.3.1 : Correction du bug interface admin + typos : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=998
+ 
+2008-12-16  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.3.0 : Amélioration des notifications et correction de l'erreur fatale...
+ * passage en template du mail de notification
+
+2008-12-15  chryjs  <chryjs!@!free!.!fr>
+ 
+ * 0.5.2.9 Correction du bug cf http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=933 résolution : http://permalink.gmane.org/gmane.comp.web.spip.devel/51536
+
+2008-12-07  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.2.3 : Correction de bug url_decode non défini : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=901
+ * Remplacement des appels php a generer_url par les balises #URL_ECRIRE et #URL_ACTION_AUTEUR
+ * 0.5.2.4 : Ajout de la variable non traduite : pagine_sujet_ singulier oubliée de longue date : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=897
+ * Correction de la borne de pagination avec parametre #CONFIG{spipbb/fixlimit} dans modeles/pagine_page_sujets
+ * 0.5.2.5 : Suite à l'optimisation sur la liste des membres on avait perdu une partie des fonctionnalites... 
+ * cf bug : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=886 , correction apporte par un second formulaire séparé pour garder l'optimisation et en conservant les deux modes de gestion
+ * Correction du total de la liste des membres (mauvais calcul)
+ * 0.5.2.6 : Les notifications revues par Spipbb ne fonctionnaient plus depuis longtemps. Cf Bug : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=886
+ * Mise à jour de la notification spipbb et correction des appels + passage en pipeline ( suppression de spipbb_fonctions )
+ * Correction de l'URL pour voir le sujet d'un forum SpipBB. Devrait être pris en compte dorenavant.
+ * 0.5.2.7 : Notifications une erreur subsistait (nom de la fonction appelée par le pipeline) et ajout de la notif pour forumposte
+ 
+
+2008-12-05  chryjs  <chryjs!@!free!.!fr>
+
+ * Report du Bug corrigé par cf 24961 : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=876#forum878
+ * 0.5.2.2 : Correction du bug sur action gestion du forum (interface privee) : cf http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=827
+ * correction des requetes sql : adapatation de celles qui utilisaient l'ancienne interface
+ 
+
+2008-12-01  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.2.0 Evolution de l'interface de configuration sur modèle Spip avec Ajax
+ * correction des liens vers ancien site
+ * meilleure conformité avec le noyau SPIP
+ * bouton d'automatisation de la configuration
+ * 0.5.2.1 Quelques corrections dans l'initialisation des rubriques avec le bouton de creation automatique
+ * Correction des squelettes
+ * Auteurs en lignes plus proche du realisme
+
+ 
+
+2008-09-21  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.1.3 Nouveaux parametres de boutons_controle_forum
+ * 0.5.1.4 Parametres pour le formulaire de tri
+ 
+
+2008-09-19  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.1.2 Correction des problèmes de pagination (transport des variables dans les squelettes inclus)
+
+ 
+2008-09-17  chryjs  <chryjs!@!free!.!fr>
+
+ * BUG avec le formulaire de pagination (ancienne compatibilite ascendante mal geree)
+
+ 
+2008-07-15  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.0.5 Apposition d'un numero de version pour les changements deja apportes
+ * correction des inclusions liees au deplacement de recuperer_fonds
+ * simplification du HTML des pages racine pour eviter la redondance et simplifier l'integration au format utilisateur
+ * correction entete c_inc_teteforum : le parametre avait été mis en commentaire !!! (gloups...)
+ * 0.5.1 ces corrections memes mineures meritent de distinguer la version (surtout en cas de bug) + revision spip SVN
+ * correction suite a http://zone.spip.org/trac/spip/changeset/12429 pour generer_url_article
+
+
+
+2008-07-15  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.0.4 Cette version est dédiée à SPIP SVN pas la 1.9.2 !!...
+
+
+
+2008-07-12  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.0.3 On doit pouvoir afficher les forums d'un secteur sans nécessairement avoir des sous-rubriques (des groupes de forums)
+ * Suppression de l'appel au fichier session.php inutile dans cette version
+ * Suppression de l'appel à la librairie de compatibilité inutile dans cette version spipbb_192 styliser_192
+ * Maintenant qu'on peut ajouter des documents dans les forums autant les afficher !
+ * On filtre l'affichage des mots clés de SpipBB : oui si on est authentifié (prochainement controle sur les droits) dans secteur spipbb, non si on est ailleurs ou pas modo
+
+
+2008-07-10  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.0.2 Pour que le js des emoticons fonctionne (en l'état) il faut que le formulaire (ajax ou pas) soit nomme "formulaire"...
+
+
+2008-07-09  chryjs  <chryjs!@!free!.!fr>
+
+ * Séparation dev/branche pour réellement dissocier le code des versions de spip... trop imbriqué trop lourd à garder fusionné
+ * 0.5.0.0 Petite correction pour la version spip > SVN 12000 : les formulaires de forums ont changé... reste un bug lié à AJAX ? la citation reste dans le cache semble-t-il...
+ * 0.5.0.1 Correction des chemins et url diverses
+
+
+
+2008-05-05  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.9.8 correction cosmétique sur trad FR + probleme de order by sans array
+
+
+2008-05-02  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.9.5 correction présentation signatures... + ajout d'une chaine manquante en langue de reference : fr
+ * 0.4.9.6 correction page de tri des membres doit etre dans une rubrique !  + page du profil membre doit gerer les erreurs ou id inconnus
+ * 0.4.9.7 correction de contournement du BUG de CFG sur sql_updateq (le retour n'est pas l'insert id) => Le login envoyé est maintenant valide en 1.9.2
+
+
+2008-04-21  chryjs  <chryjs!@!free!.!fr>
+
+ * correction requete sur statut auteur : table spip classique !
+ * order by doit etre un array !
+ * 0.4.9.3 Nouvelles metas pour la verification de version de mise à jour avec délais de rafraichissement !
+ * 0.4.9.4 : correction des delais de CACHE des squelettes
+
+
+2008-04-17  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.9 Correction des bugs (inscription+activation principalement) : en 1.9.2 mode==forum en 1.9.3 mode==6forum il faut les gérer séparément
+ * 0.4.9.1 : correction style pour #TEXTE dans groupeforum,
+ * traductions manquantes,
+ * corrections sur membres les plus actifs
+ * nombre de lignes de message dans filforum depend de fixlimit (dans la configuration)
+ * 0.4.9.2 : correction adresse du fichier de spam
+
+2008-04-16  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.8.4 : traductions +
+ * corrections sur la balise FORMULAIRE_AUTEUR_SPIPBB dont la lecture était très bugguée
+ * amélioration de la notification qui devrait donner enfin la bonne url de page dans les forums spipbb
+ * 0.4.8.5 : Liste des membres affichage cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=516#forum517
+ * 0.4.8.6 : Gros bug sur l'interface privee qui reste bloquée : http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=645
+
+
+2008-04-15  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.8.2 : Quelques corrections de langue
+ * Les éléments titre, descriptif, texte sont maintenant éditables partout avec crayons+autorite
+ * Uniformisation des entete pour categories (rubrique) et forums (article) utilsant toutes #DESCRIPTIF au lieu d'un mélange.
+ * c_rubrique fait maintenant appel au modele ligne_voir_forum pour afficher chaque ligne du tableau des forums
+ * 0.4.8.3 : finalement #DESCRIPTIF étant optionnel, il vaut utiliser #TEXTE tout betement...
+
+
+2008-04-14  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.6 [FAIT] Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
+ * 0.4.7 [FAIT] Problemes titres _T et _L // traductions à revoir corriger finir + en outre spipbb est maintenant gere par spip-trad
+ * 0.4.8 Amelioration de l'interface prive de configuration + meilleur controle de version
+ * inc_teteforum inc_piedforum sont maintenant aussi des "coquilles vides" pour simplifier l'integration
+ * les "squelettes coquilles" ont maintenant un style et des proprietes paratagees et un id specifique, le tout reporte dans la css cf discussionhttp://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=634
+ * ajout du danois (merci a tom@mir.dk et a scoty)
+ * ajouts en espagnol (merci a philippebessiere@free.fr)
+
+
+2008-03-03  chryjs  <chryjs!@!free!.!fr>
+
+ * Palliatif pour le probleme de unserialize... qui n'arrive pas a reconstruire un tableau stocke avec serialize !... probleme de conversion dans les requetes virtuelles sql ?
+
+
+2008-02-23  chryjs  <chryjs!@!free!.!fr>
+
+ * Petite adaptation pour forcer le titre a vide dans les forums...
+ * Passage en 0.4.5 : fonctionnalite realisee
+
+
+2008-02-11  chryjs  <chryjs!@!free!.!fr>
+
+ * Autres corrections sur controle des tables cf bug report http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=545 + logs
+ * Evolution majeure : Adaptation des requetes pour passage en multi-bases (mysql/pg/sqlite)
+ * Passage en 0.4.4 : grosses adaptations + decalage dans cycle d'evolutions
+
+
+2008-02-07  chryjs  <chryjs!@!free!.!fr>
+
+ * Suite : problemes de compatibilite PostGres (simplification des controles) cf Bug Report Adeline D
+
+
+2008-02-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Probleme de compatibilite PostGres (simplification des controles) cf Bug Report Adeline D
+
+
+2008-02-04  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction fonction sql_countsel manquante dans librairie de compatibilité pour spip 192 cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=536
+
+
+2008-01-19  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections sur le champ email pour meilleure compatibilite avec les autres plugins + controle pour la modification (a ameliorer) . Grâce aux infos de Pat
+
+
+2008-01-18  chryjs  <chryjs!@!free!.!fr>
+
+ * C'est bien #ARRAY tout court pour un tableau vide :)
+ * On resserre un peu la présentation des modérateurs
+
+
+2008-01-17  chryjs  <chryjs!@!free!.!fr>
+
+ * Insertion de balises pour rendre le plugin "utilisable" aussi avec les crayons propose par allsecurite!@!gmail!.!com
+ * Petite amelioration pour le formulaire de saisie Email
+
+
+2008-01-16  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction bug emoticons : revert sur formulaire/forum ...
+ * A priori on peut diviser un thread dans le même forum pour sérarer un fil en deux tout simplement par exemple.
+ * Debut des modifications pour utiliser un avatar pour tous - reporte a une version ulterieure
+ * Passage en 0.4.4 : fin des evolutions prevues (avec report)
+ * Corrections de bugs sur balise ARRAY inclusion de pied et construction de page
+
+
+
+2008-01-15  chryjs  <chryjs!@!free!.!fr>
+
+ * Nouveau formulaire et balise d'inscription FORMULAIRE_INSCRIPTION_SPIPBB directement tirés de ceux de SPIP (pour l'instant) permettra de séparer l'inscription aux forums (et ses champs spécique) du reste du site
+ * Passage en 0.4.3 : fin des evolutions prevues
+ * Correction bug affichage id_rubrique manquant
+
+
+2008-01-14  chryjs  <chryjs!@!free!.!fr>
+
+ * Separer/diviser un thread
+
+
+2008-01-13  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections et controles divers pour tracer et résoudre certains dysfonctionnements à confirmer (Bug report email Patrick)
+ * Ajout ouverture/fermeture d'un thread + deplacement d'un thread dans un autre forum
+
+
+2008-01-12  chryjs  <chryjs!@!free!.!fr>
+
+ * Pour tester les autorisations (moderation) il est preferable de s'appuyer sur la fonction autoriser.
+
+
+2008-01-11  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction de la configuration
+ * Ajout d'un filtre sur le secteur pour le comptage des messages (report XB)
+ * Traitement de genie(cron)/statvisites, public/styliser seulement si plugin configure
+ * Boutons d'admin sur l'interface publique : Adresse + Supprimer post
+ * Traductions et meilleure gestion des messages effacés
+
+
+2008-01-10  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections des manques dans la librairie de compatibilite (sur fonction sql_in)
+ * Fromphpbb Renommage ancienne fonction + suppression ancienne librairie (qui devenait problematique)
+ * Correction des inclusions associees + definition de constantes dans la librairie commune
+ * Premiere etape de standardisation des imports
+
+
+2008-01-09  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.1 Traitement des messages des id_auteurs supprimés selon choix + quelques corrections affichage
+ * Corrections pour suivre les évolutions de SPIP 1.9.3 dans public/styliser + erreur dans #ARRAY{} vide modeles/moderateur_ligne
+ * 0.4.1 lien entre auteur et la liste des messages qu'il a publie (en page publique)
+ * Petite mise à jour de la description du plugin
+ * 0.4.1 Correction bug affichage total des vues/visites par forums
+ * Passage en 0.4.2 : fin des evolutions prevues
+
+2008-01-08  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.0 FAIT : Gestion des bans : bug avec ajax ! -> reconstruction de la configuration façon SPIP
+ * Passage en 0.4.1 : fin des evolutions prevues
+ * 0.4.1 Premiere evolution pour la gestion des membres : liens vers les messags d'un auteur + filtres par type d'auteur + actions (à finir) sur les messages
+
+
+2008-01-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Import phpBB : verif difference login et nom auteur => nom=login lors de l'import donc pas de difference
+ * Import phpBB : adresse IP des posteurs -> forums
+ * Import phpBB : traduction
+
+
+2008-01-05  chryjs  <chryjs!@!free!.!fr>
+
+ * On ne peut afficher un moderateur que pour un forum (ie : un article).. pour un groupe (ie: une rubrique) ca n'a pas de sens
+ * Ajout de l'import a partir de Phorum (v5)
+ * Passage en 0.4.0 : debut d'ajout de nouvelles fonctionnalites
+
+
+2007-12-29  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout du fond backend-forum manquant pour les boutons RSS http://www.spip-contrib.net/Plugin-SpipBB#forum401676
+ * Correction affichage #ID_AUTEUR dans page profil http://www.spip-contrib.net/Plugin-SpipBB#forum401676
+ * Page profil correction pour les boutons radio "Apparaitre dans la liste des Inscrits" corrigé
+
+
+2007-12-28  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout d'un controle de revision pour les fonctions trace_query http://www.spip-contrib.net/Plugin-SpipBB#forum400542
+ * Presentation du profil auteur dans modeles
+ * Probleme de crochets dans entete
+
+2007-12-27  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction bug pagination dans spipbb_192 : qui provoquait une fonction infiniment récursive...
+ * Corrige le bug auteurs_rubriques table SQL inconnue en 1.9.2
+ * Tableaux plus grands dans la presentation (CSS)
+ * Passage en 0.3.9 : ajout de 2 champs de config supplémentaires (log_level et affiche_membre_defaut)
+
+
+2007-12-25  chryjs  <chryjs!@!free!.!fr>
+
+ * Conversion des documents en format LF (problemes de logs)
+ * Affichage des logs dans page admin_debug
+
+
+2007-12-24  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout d'une fonction spipbb_log pour gerer les niveaux de log (a terme)
+
+
+2007-12-23  chryjs  <chryjs!@!free!.!fr>
+
+ * Petit nettoyage XHTML + Passage du tableau de smiley à 3 colonnes : il faudrait revoir la presentation
+ * Renvoi vers la page de profil utilisateur
+ * Correction formulaire_spipbb_profil : array mal défini bug report Jack sur Gmane (meme jour)
+ * Ajout d'un test dans traiter_imagerie pour identifier la cause d'un bug
+
+2007-12-22  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections petites erreurs (bug report BB)
+ * Correction prefixes et autres librairie 192
+ * Correction regression
+ * Suppression de fichiers obsoletes (archive trop lourde)
+ * Liste des messages publiés par un membre
+ * Correction inclusion erronee de spipbb_192 dans genie
+ * Gestion des bans (login/ip/email)
+ * Correction regression : erreur d'appel sql_showtable pour permettre l'adaptation (mutualisation) bug report Gurdil
+ * Amélioration de la présentation de la page des inscrits
+ * Amélioration de la présentation de la page d'admin
+
+2007-12-20  chryjs  <chryjs!@!free!.!fr>
+
+ * Rajout page racine connexion manquante
+ * Corrections d'inclusions dans spipbb_fonctions le fichier public/spipbb_balises est obsolete
+ * Corrections d'inclusions dans spipbb_options, l'execution d'une partie du code est suspendu a l'activation de spipbb !
+ * Correction regression inc/spipbb_192
+ * Rajout page racine fom_inscript manquante (pour l'inscription façon forums)
+
+2007-12-19  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction impossible de publier (problemes de librairies et de versions)
+ * Ajout controle version dans librairie 192 (au cas où)
+ * Ajout ligne postit + alignement a gauche
+ * Correction bug B_annonce en double dans le squelette c_rubrique (regression)
+ * Ajout selection et suppression (passe en 5poubelle) des membres sur la page de gestion + presentation + comptage des messages + selection des 'nouveau'x aussi !
+ * Ajout signature + version interface privée
+
+2007-12-18  chryjs  <chryjs!@!free!.!fr>
+
+ * correction appels base de données (pour etre compatible 1.9.3)
+ * correction affichages admin
+ * correction bug inc/spipbb_presentation + reactivation dans spipbb_fonctions
+ * corrections appels sql avec parametres vides
+ * Ajout des icones manquants dans les menus
+ * Correction bug dans le pipeline
+ * Page debogage toujours dispo meme si pas configuré !!
+ * Uniformisation de la presentation + quelques traductions + entetes + divers
+ * Passage en 0.3.8 : elements majeurs presents
+ * Integration de la definition de la base dans spipbb_options et adaptation squelette boucle pour compatibilite avec mutualisation
+
+2007-12-10  scoty  <scoty!@!koakidi!.!com>
+
+ * reorga des fichiers .. en général ! voir ci-apres !
+ * intialisation des exec par un fichier : spipbb_init : exécute controle d'install de tout exec ; charge fonctions utiles/communes.
+ * Reste a modifier certains skel (corps_sk/) pour accepter/afficher forums(article) en racine du secteur. (issu de GAF 0.6)
+ * n'est pas encore touché aux exec/ ..spam.. ; ni fromphpbb
+ * renommé chatons/ en smileys/ (denomin. + courante !)
+ * nouvelle icones de l'espace public (themes/defaut/img/) ; suppress. icones non utilisées
+ * suggest. : base/spipbb_uprgrade.php -> ajouter delete des groupe_mot, mots-clef  si désintallation du plugin !?!
+ * reorganisation des fichiers :
+	** : nouveau  /  @@ : supprimé
+
+	## spipbb_configuration.php (exec/)**
+	remplace spipbb_admin_configuration
+	Nouveau processus !
+
+	## spipbb.php (inc/) @@
+	suppression !
+	dispatch fonction dans divers fichiers
+	Nouveau processus --> spipbb_init.php
+
+	## spipbb_util.php (inc/)**
+	diverses fonctions communes a plusieurs scripts
+	ou du variés de tout poil inclassable !
+
+	## spipbb_inc_config (inc/)**
+	diverses fonction de inc/spipbb.php ayant trait à la config
+		--> les "spipbb_check_ .."
+
+	## spipbb_inc_metas (inc/)**
+	Rassemble diverses fonctions (de inc/spipbb.php !) ayant trait au metas
+	spipbb_import_gafospip_metas() ==> correspond a recup sur gaf 0.6, hors ce plugin jamais diffusé, donc
+		faire recup des 3 premier champs (gaf 0.5 !).
+
+	## spipbb_presentation (inc/) **
+	[[ anc. inc/gaf_inc.php ]]
+	.. Diverses fonctions liées à la presentation
+	==> bouton de tout genre, positionnement spécifique, encadrement ...
+
+	## spipbb_menus_gauche (inc/)**
+	Assemblage de (gaf)menu_arbo.php + (spipbb)interface_admin.php
+	.. integré en une fonction de Menus (accepter icone sur bouton menu)
+
+	## spipbb_init (inc/) **
+	appel systematique à chaque exec du plugin
+	verifie l'état de la config, fait les includes communs à tous exec de spipbb
+
+	## statvisites.php (genie/)
+	supprime appel spipbb.php
+	ajout inc/spipbb_192.php
+
+	## spipbb_admin_reconfig (action/)
+	.. ajout fonction : spipbb_init_mot_cle (issue de feu inc/spipbb.php)
+	.. ajout (essai) recup jointure article/forum des anc. mot-clef gaf
+
+	## spipbb_fonctions.php
+	Deplaces fonctions traitement balises dans traiter_imagerie.php
+
+	## spipbb_pipelines.php
+	.. Supprime un des deux boutons => un bouton pour spipbb suffit ! tout est derrière
+	.. Ajout pipeline "header_prive" -->  css et le js sur tout exec "spipbb_.....", js sur spipbb_formpost
+	.. ajout pipeline "affiche_milieu" --> formulaire sur exec[/]_auteur_infos
+
+	## spipbb_options.php
+	.. Deplace $GLOBALS['champs_sap_spipbb'] dans base/sap_spipbb.php
+	Certes ce sont des champs extra mais aussi et surtout def. champs table.
+	De plus liés à un test de plugin générant une table "auteurs_profils" cherchant "ce" fichier dans "base/"
+
+	.. inclure base/sap_spipbb.php
+
+	## plugin.xml
+	.. ajout pipeline "header_prive" | "affiche_milieu" (form supp. sur auteur_infos.php)
+
+	## repert balise/
+	supprime : affiche_avatar.php, signature_post.php, spipbb.php, tableau_smileys.php
+	--> ces balises sont dans public/spipbb_balises.php
+
+	## repert javascript/ **
+	.. ajout de deux fichiers spipbb_vueavatar.js ; spipbb_formpost.js
+
+	## spipbb_js_formpost.js (javascript)**
+	.. fonction emoticon pour backoffice +  window(focus)
+	--> origine exec/gaf_formpost.php
+	-- appel passer dans le pipeline "header_prive".
+
+	## spipbb_affecter_thread.php (exec/)**
+	(anc. gaf_affect.php) --> déplacement de threads
+
+	## spipbb_inc_affecter.php (inc/)**
+	(anc. heritage.php) fonctions hierarchie
+
+	## spipbb_affecter_affiche.php (exec/)**
+	(anc. gaf_val_affect.php)
+
+	!! ## (h)gaf_auteur_infos() -> (chrys) spipbb_auteur_infos()
+		DEVIENT : spipbb_donnees_auteur() ... risque confusion avec les script + fonction spipbb_auteur_infos destinées
+		à l'affichage d'un formulaire dans exec/auteur_infos (spip) !!
+
+	## spipbb_admin_gestion_forum.php@@
+	fonctionnalités : ordonner les art/rub, intégrée à spipbb_admin !!
+	Mais reste toujours le problème de monter descendre sur article .. dysfonctionnement sous 1.9.2 !!!
+	Corrigé sur 0.3.7 ???
+
+	## spipbb_styles.css (img_pack/)**
+	(anc. gaf_styles.css) dans img_pack/
+
+2007-12-02  chryjs  <chryjs!@!free!.!fr>
+
+ * sql_showtable(.., true) permet de faire le remplacement pour les tables "spip"
+ * GLOBALS connexions prefixe n existe pas en 192... il faut utiliser table_prefix
+
+2007-11-27  chryjs  <chryjs!@!free!.!fr>
+
+ * Controler l'activation des forums public comme precondition a l'activation !
+
+2007-11-26  chryjs  <chryjs!@!free!.!fr>
+
+ * ORDER BY doit etre un array !!!!
+ * Attention a ameliorer la gestion des champs extras
+ * Ajout des boutons RSS en alerte abus + passage de avatar en page prive/
+ * Passage en 0.3.7 du aux metas
+ * Import a partir de base pour phpbb
+
+2007-11-25  chryjs  <chryjs!@!free!.!fr>
+
+ * Reprise de regression fonctionnelle whosonline -> modeles/bloc_informations
+ * Corrections erreurs de traduction
+ * Anonyme n'est pas un "auteur" :)
+ * On doit explicitement demander a ne pas paraitre dans l'annuaire pour ne pas y figurer
+ * Compat 192/193 calcul_bornes_pagination devient bornes_pagination  cf http://article.gmane.org/gmane.comp.web.spip.devel/43020/match=calcul_bornes_pagination
+
+2007-11-24  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout traductions anglais
+ * Mots cles dans formulaire/forum.html <-- est-ce bien utile ?
+
+2007-11-23  chryjs  <chryjs!@!free!.!fr>
+
+ * Passage en fichier des stats... reste le bug de la double passe des pages SPIP pourquoi ?
+ * Correction tables inclues bug mutu ?
+ * Passage en revision 0.3.6
+
+2007-11-22  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajouts/correction des traductions (en fr seulement)... il en manque beaucoup
+ * Correction fonction inexistante dans menu admin fromphpbb
+ * Petites corrections de bugs divers
+ * Passage en 0.3.5
+
+2007-11-20  chryjs  <chryjs!@!free!.!fr>
+
+ * Recherche et correction bug interface privee
+ * Petite correction de lien dans la traduction
+ * Meilleure gestion de la mise a jour avec conservation des tables et des metas
+ * Upgrade/install possible en utilisant la config de Gafospip si pre-existe (lecture des metas)
+ * check_une_table optimisee pour cause de difference de structure parfois + log en cas de probleme pour debug
+ * passage en 0.3.4 - reecriture de la partie causant les plantages (enfin !)
+
+2007-11-19  chryjs  <chryjs!@!free!.!fr>
+
+ * Suppression de modeles obsoletes
+ * Ajout d'un controle des prerequis a l'activation
+ * passage en 0.3.1 - meilleurs controles
+ * Filtrage (conditions d'acces et menus) des affichages exec=...
+ * Correction bug meta spipbb_id_rubrique -> id_secteur
+ * Correction d'un gros bug dans les inclusions (menus admins) qui plantait spip en 192 (certaines versions)...
+ * passage en 0.3.2 - plantage corrige
+
+2007-11-18  chryjs  <chryjs!@!free!.!fr>
+
+ * Integration Gafospip, balises, fonctions et mise en page
+ * passage en 0.3.0 - coherence avec gafospip
+
+2007-11-14  chryjs  <chryjs!@!free!.!fr>
+
+ * Premiere adaptation en vue d'un rapprochement avec Gafospip
+ * Reecriture du processus d'installation : tout est maintenant optionnel
+ * Chaque element des menus est propose sous condition
+ * Les traitements, balises sont aussi soumis a condition
+
+2007-11-12  chryjs  <chryjs!@!free!.!fr>
+
+ * spipbb_pipelines : appel a inc/spipbb pour la compatibilite necessaire 192 a cause de sql_fetsel bug report X. Burot (email)
+ * fromphpbb : ajout de la recherche en local de la config + controles + un peu de traduction + utlisation d'un fond
+ * passage en 0.2.7
+
+2007-11-11  chryjs  <chryjs!@!free!.!fr>
+
+ * L'utilisation de CFG n'est plus obligatoire
+ * Ajout de l'affichage de la log du spam + corrections cosmetiques
+ * Controle de l'insertion de mot de spam (pas de doublons)
+ * Supprimer n'est pas bienvenue dans la gestion des categories et forums
+ * forum_insert : ajout filtre mots clés retenus lors de l'enreg (passage en gras spip {{ }} )
+ * Ajout ban list et filtrage a l'inscription
+
+2007-11-11  chryjs  <chryjs!@!free!.!fr>
+
+ * inc/spipbb_192 oubli de parenthèses, bug : http://www.spip-contrib.net/Plugin-SpipBB#forum400092
+ * correction erreur ORDER BY doit etre un array (surtout en 192)
+ * meilleure presentation de menu admin
+ * Retour en arriere sur le fichier plugin.xml et spipbb_pipelines pour remettres les boutons qui n'etaient plus visibles en 192
+ * Passage en 0.2.5
+
+2007-11-10  chryjs  <chryjs!@!free!.!fr>
+
+ * Anti Spam : ajout de l'import d'un CSV avec une liste de mots
+ * Admin info : Presentation et traduction [fr] [en]
+ * Admin config : Presentation et traduction [fr] [en] correction des actions
+ * Admin Correction de la presentation + bug select id_rubrique + actions / exec
+ * inc/forum_insert doit inclure inc/spipbb pour la compatibilite 192 voir : http://www.spip-contrib.net/Plugin-SpipBB#forum400088
+
+2007-11-09  chryjs  <chryjs!@!free!.!fr>
+
+ * admin : Gestion des messages de spam, ajout de la gestion de mot, envoyer un message, logger etc
+
+2007-11-08  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction de la librairie de compatibilite, mauvaise adaptation du code de sql_fetch et de spip_mysql_explain donc bug !
+ * Correction des credits (remarques sur la liste), renvoi vers la documentation http://www.spip-contrib.net/Plugin-SpipBB#contributeurs
+ * Correction mots cles annonce postit et ferme dans modeles/spipbb_liste_sujets et filforum, il reste un "soucis" postit et annonce ne peuvent s'appliquer qu'au message principal du thread et on ne peut pas appliquer fermé n'importe comment
+ * Ajout d'un filtrage du spam : formulaire de configuration, filtre au post, tables. Ne manque que la saisie de la liste.
+
+2007-11-07  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout d'un filtre de spam dans le formulaire_forum inc/forum_insert + tables associes
+ * Ajout de la suppression des tables
+ * Selection plus souple de la rubrique secteur contenant le forum a l'installation
+ * Correction bug sur la requete groupes_mots a l'installation
+ * Correction de la presentation des requetes sql_fetsel, array de where est compose des filtres !!!
+
+
+2007-11-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction spipbb_index : erreur sur le test des forums fermes
+ * Presentation hierarchie/fil d'ariane et moderateurs revue mais reste a ameliorer
+ * Revoir le formulaire admin avec les infos de http://www.spip-blog.net/spip.php?article431
+ * Correction du chemin des plugins dans les fonctions spipbb_chatons : j'avois oublie un . entre le nom et l'extension

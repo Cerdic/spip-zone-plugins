@@ -1,0 +1,82 @@
+<plugin>
+	<version>0.5.4.0</version>
+	<nom>SpipBB : Gestion des forums de SPIP 2.0</nom>
+	<auteur>Distribu&eacute; sous licence GPL</auteur>
+	<etat>dev</etat>
+	<description>
+	Le plugin SpipBB permet :
+-* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
+-* D'utiliser un secteur comme base d'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d'un article y d&eacute;marre un thread.
+	</description>
+	<lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
+[ca]Consultar la documentaci&oacute; del plugin a Spip-contrib
+[pt]Consultar a documenta&ccedil;&atilde;o do plugin sobre Spip-contrib
+[nl]De documentatie van plugin raadplegen op Spip-contrib
+[gl]Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib
+[tr]Spip-contrib\'de eklenti hakk&#305;ndaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum
+[fr]Consulter la documentation du plugin sur Spip-contrib</multi>
+->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
+	<fonctions>spipbb_fonctions.php</fonctions>
+	<options>spipbb_options.php</options>
+	<version_base>1.0</version_base>
+	<install>base/spipbb_upgrade.php</install>
+	<prefix>spipbb</prefix>
+	<pipeline>
+		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
+		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<!-- limiter l'utiliser du squelette de spipBB à un seul secteur -->
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<!-- chryjs 16/10/9 declarations des tables façon SPIP 2.0 -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spipbb.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spipbb.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/spipbb.php</inclure>
+	</pipeline>
+	<!-- chargement des notifications facon spipbb -->
+	<pipeline> 
+		<nom>notifications</nom> 
+		<!-- action vide pour provoquer l'inclusion de inc/spipbb_notifications.php --> 
+		<action>chargespipbb</action> 
+		<inclure>inc/spipbb_notifications.php</inclure> 
+	</pipeline>
+		
+
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.0.0;]" />
+	<categorie>communication</categorie>
+</plugin>

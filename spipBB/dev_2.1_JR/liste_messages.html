@@ -1,0 +1,20 @@
+#CACHE{3600}
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<head>
+
+<title>[(#NOM_SITE_SPIP|textebrut)] <:spipbb:liste_des_messages:> #NOM</title>
+
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
+
+</head>
+<body id='liste_messages'>
+
+[(#REM) c: 19/9/8 c_article ayant une PAGINATION il faut absolument lui passer {env} et pourquoi pas ajax]
+<INCLURE{fond=corps_sk/c_liste_messages}{id_auteur}{id_rubrique}{id_article}{orig}{env}{ajax}>
+
+</body>
+</html>
+</BOUCLE_auteur>

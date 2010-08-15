@@ -1,0 +1,393 @@
+#CACHE{3600}
+[(#REM) Plugin SpipBB - Licence GPL]
+<!-- debut code pour fichier voirsujet.html -->
+<BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
+
+
+
+
+	[
+	(#REM) entete corps forum
+	]
+	<INCLURE{fond=inc_teteforum}{id_article}>
+
+	<p class="space_20"></p>
+
+	[(#REM) c: 11/1/8 on determine si on est admin (pour l'affichage)]
+	[(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
+	#SET{admin,#SESSION{id_auteur}|is_modo{#ID_ARTICLE}}
+
+	[
+	(#REM) determiner si le forum ferme / sujet ferme
+	]
+	#SET{forumferme,0}
+	#SET{sujetferme,0}
+	<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>
+		#SET{forumferme,1}
+		[(#REM) h.26/09 .. maintenance ]
+		#SET{maintenance,#ID_ARTICLE|spipbb_maintenance}
+	</BOUCLE_etat>
+
+	[(#REM) forum type annonce ? ]
+	#SET{forum_annonce,0}
+	<BOUCLE_mot_ferme(MOTS){id_article}{id_groupe=#CONFIG{'spipbb/id_groupe_mot'}}>
+	#SET{forum_annonce,#TITRE|=={annonce}|?{1,#GET{forum_annonce}}}
+	</BOUCLE_mot_ferme>
+
+
+	[(#REM) ligne chemin ]
+	[(#MODELE{chemin_hierarchie}{id_article})]
+
+	<p class="space_10"></p>
+	[
+	(#REM) message art ferme|maintenance
+	]
+	[(#GET{forumferme}|=={1}|?{' ',''})
+		<div class="mesg_forum_clos">
+		[(#GET{maintenance}|=={1}|?{<:spipbb:forum_maintenance:>,<:spipbb:forum_ferme:>})]
+		</div>
+	]
+
+	[
+	(#REM) post qui ferme le sujet (dernier post du sujet en somme !
+	]
+	<BOUCLE_reponse_ferme(FORUMS){id_thread}{plat}{titre_mot=ferme}>
+		#SET{sujetferme,1}
+
+		<BOUCLE_thelast(FORUMS){id_parent}{!par date}{0,1}{doublons}>
+
+		<table class="spipforum" id="post_ferme">
+			<tr>
+				<th colspan="2"><:spipbb:sujet_clos_titre:></th>
+			</tr>
+			<tr class="ligne_sujet">
+				<td id="forum#ID_FORUM" colspan="2">
+					<span class="text_nom">
+					[(#REM) c.23/12/7 on passe par la page profile]
+					<BOUCLE_modo(AUTEURS){id_article}{id_auteur}>
+						[(#REM) set id_auteur modo , en attendant requette sur admin restreint]
+						#SET{modo,#ID_AUTEUR}
+					</BOUCLE_modo>
+					</span>
+					<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
+				</td>
+			</tr>
+			<tr class="ligne_sujet">
+				<td class="aff_avatar" rowspan="2">
+					<BOUCLE_auteur_av(AUTEURS){id_auteur}> 
+					</BOUCLE_auteur_av>
+				</td>
+				<td class="date_sujet">
+				[(#SET{affboutonadmin,[(#GET{admin}|!={'oui'}|?{'',' '})
+				<div class="bout_admin">
+					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				]})]
+				#GET{affboutonadmin}
+					<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+				</td>
+			</tr>
+			<tr class="ligne_sujet">
+				<td>
+					<div class="#EDIT{texte} forum-texte">
+						[(#TEXTE|lignes_longues|smileys)]
+						<BOUCLE_doc_pc(DOCUMENTS){id_forum}>
+						[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+							[(#EMBED_DOCUMENT|image_reduire{300})]
+						,
+							[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+						})]
+						</BOUCLE_doc_pc>
+					</div>
+
+					[(#REM) signature auteur ]
+					[<p class="signature">(#SIGNATURE_POST|PtoBr)</p>]
+
+					[
+					<p class="space_5"></p>
+					<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+					]
+				</td>
+			</tr>
+		</table>
+		</BOUCLE_thelast>
+		<p class="space_20"></p>
+	</BOUCLE_reponse_ferme>
+	<!-- fin post fermeture sujet -->
+
+
+	[(#REM) affichage commun, tout type situation voirsujet ]
+
+	[
+	(#REM) bouton nouveau_sujet/repondre ou pas ?
+	]
+	<ul class="actionforum">
+		<li class="poster">
+			<BOUCLE_forum_pere(ARTICLES){id_article}>
+			[(#SET{affboutonnew,[(#GET{forumferme}|!={1}|?{' ',''})
+				[(#GET{forum_annonce}|!={1}|?{' ',''})
+				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:sujet_nouveau:>">&nbsp;</a>
+				]
+			]})]
+			#GET{affboutonnew}
+			</BOUCLE_forum_pere>
+		</li>
+		<li class="repondre">
+			[(#SET{affboutonrep,[(#GET{forumferme}|!={1}|?{' ',''})
+				[(#GET{forum_annonce}|!={1}|?{' ',''})
+				[(#GET{sujetferme}|!={1}|?{' ',''})
+				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:sujet_repondre:>">&nbsp;</a>
+				]
+				]
+			]})]
+			#GET{affboutonrep}
+		</li>
+	</ul>
+
+	<div class="[(#EDIT{titre}) ]titre_actif">#TITRE</div>
+
+	<p class="space_10"></p>
+
+	<!-- tableau -->
+	<table class="spipforum" id="liste_post">
+		<tr>
+			<th colspan="2"><:spipbb:message_s:></th>
+		</tr>
+
+		<tr class="inter entete_sujet">
+			<td id="forum#ID_FORUM" colspan="2">
+				<span class="text_nom">
+				<B_auteurp>
+				[(#REM) c.23/12/7 on passe par la page profile]
+				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+
+				</BOUCLE_auteurp>
+
+				<BOUCLE_modo2(AUTEURS){id_article}{id_auteur}>
+					[(#REM) set id_auteur modo , en attendant requete sur admin restreint ]
+					#SET{modo,#ID_AUTEUR}
+				</BOUCLE_modo2>
+
+				</B_auteurp>
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
+				<//B_auteurp>
+				</span>
+				<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:en_rep_sujet_:>#TITRE</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet">
+			<td class="aff_avatar" rowspan="2">
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
+
+				[(#REM) bouton alerter abus ... !]
+				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
+				<div class="bouton_alerter">
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
+				</div>
+				]
+			</td>
+			<td class="date_sujet">
+
+				[(#REM) bouton citer ou pas ? ]
+				[(#SET{affboutonciter,[(#GET{forumferme}|!={1}|?{' ',''})
+					[(#GET{forum_annonce}|!={1}|?{' ',''})
+					[(#GET{sujetferme}|!={1}|?{' ',''})
+					<div class="bout_citer">
+						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>">&nbsp;</a>
+					</div>
+					]
+					]
+				]})]
+				#GET{affboutonciter}
+				[(#SET{affboutonadminp,[(#GET{admin}|!={'oui'}|?{'',' '})
+				<div class="bout_admin">
+					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				[(#REM) ajout JR test sur instituer ]
+				<div class="bout_admin">
+				[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{poster}|parametre_url{editer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:editer:>">edtier</a>
+				</div>
+				]})]
+
+				#GET{affboutonadminp}
+				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet">
+			<td>
+				<div class="#EDIT{texte} forum-texte">
+					[(#TEXTE|lignes_longues|smileys)]
+					<BOUCLE_doc_p(DOCUMENTS){id_forum}>
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+						[(#EMBED_DOCUMENT|image_reduire{300})]
+					,
+						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+					})]
+					</BOUCLE_doc_p>
+				</div>
+				[(#REM) signature auteur ]
+				[<p class="signature">(#SIGNATURE_POST|PtoBr)</p>]
+
+				[
+				<p class="space_10"></p>
+				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+				]
+			</td>
+		</tr>
+		<tr class="inter">
+			<td colspan="2">&nbsp;</td>
+		</tr>
+
+
+		<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}{pagination #CONFIG{spipbb/fixlimit}}>
+		<tr>
+			<th colspan="2"></th>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td  id="forum#ID_FORUM" colspan="2" class="ligne_nom">
+				<span class="text_nom">
+					<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
+					[(#REM) set id_auteur modo , en attendant reglage sur admin restreint ]
+					#SET{modo,#ID_AUTEUR}
+					</BOUCLE_modo3>
+				</span>
+				<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td class="aff_avatar" rowspan="2">
+
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
+
+				[(#REM) bouton alerter abus ... ! ]
+				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
+				<div class="bouton_alerter">
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
+				</div>
+				]
+			</td>
+			<td class="date_sujet">
+				[(#REM) affiche ou pas bouton (repondre)/citer ]
+				[(#SET{affboutonciter,[(#GET{forumferme}!={1}|?{' ',''})
+					[(#GET{forum_annonce}|!={1}|?{' ',''})
+					[(#GET{sujetferme}|!={1}|?{' ',''})
+					<div class="bout_citer">
+						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>">&nbsp;</a>
+					</div>
+					]
+					]
+				]})]
+				#GET{affboutonciter}
+				[(#SET{affboutonadminpr,[(#GET{admin}|!={'oui'}|?{'',' '})
+				<div class="bout_admin">
+					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{poster}|parametre_url{editer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:editer:>">editer</a>
+				</div>
+				]})]
+				[(#REM) ajout JR test sur instituer ]
+				<div class="bout_admin">
+				[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+				</div>
+				#GET{affboutonadminpr}
+				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td>
+				<div class="#EDIT{texte} forum-texte">
+					[(#TEXTE|lignes_longues|smileys)]
+					<BOUCLE_doc(DOCUMENTS){id_forum}>
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+						[(#EMBED_DOCUMENT|image_reduire{300})]
+					,
+						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+					})]
+					</BOUCLE_doc>
+				</div>
+				[(#REM) signature auteur ]
+				[<p class="signature">(#SIGNATURE_POST|PtoBr)</p>]
+
+				[
+				<p class="space_10"></p>
+				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+				]
+			</td>
+		</tr>
+
+		</BOUCLE_posts>
+		<tr class="pagination">
+			<td colspan="2">
+			#GRAND_TOTAL
+			[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_post_s:>,<:spipbb:pagine_post_:>})]
+			[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
+			</td>
+		</tr>
+		</B_posts>
+	</table>
+
+	<p class="space_10"></p>
+
+	<ul class="actionforum">
+		<li class="poster">
+			#GET{affboutonnew}
+		</li>
+		<li class="repondre">
+			#GET{affboutonrep}
+		</li>
+	</ul>
+
+	<p class="space_10"></p>
+
+	[(#REM) ligne chemin ]
+	[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
+
+	[(#SET{affboutonadminforum,[(#GET{admin}|!={'oui'}|?{'',' '})
+	<div class="bout_admin">
+		<a href="[(#URL_PAGE{deplacer}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="<:deplacer:>" class="deplacer">
+		</a>
+	</div>
+	<div class="bout_admin"> [(#REM) Ici il faudrait faire un test ferme/ouvert ]
+		<?php if ( "#GET{sujetferme}"=="1" ) { ?>
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-ouvrir,#ID_ARTICLE|generer_url_entite{article}}" title="<:ouvrir:>" class="ouvrir">
+		<?php  } else { ?>
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-fermer,#ID_ARTICLE|generer_url_entite{article}}" title="<:fermer:>" class="fermer">
+		<?php } ?>
+		</a>
+	</div>
+	<div class="bout_admin">
+		<a href="[(#URL_PAGE{diviser}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="<:diviser:>" class="diviser">
+		</a>
+	</div>
+	]})]
+	#GET{affboutonadminforum}
+
+	<INCLURE{fond=inc_piedforum}{id_article}{id_thread}>
+
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
+	#FORMULAIRE_LOGIN{#SELF}
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
+	
+	[(#REM) Chryjs : Balise de calcul des visites - Ne pas retirer]
+	[(#ID_FORUM|spipbb_calc_visites)]
+	
+</BOUCLE_sujet_principal>
+</B_sujet_principal>
+<!-- fin code pour fichier voirsujet.html -->

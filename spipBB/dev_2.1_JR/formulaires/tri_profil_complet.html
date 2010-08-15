@@ -1,0 +1,87 @@
+		
+		[(#ENV{ordre_tri}|=={'inverse'}|?{' '})
+			#SET{_tri,#ENV{mode}|=={''}|?{id_auteur,#ENV{mode}}}
+			#SET{tri,''}
+		]
+		[(#ENV{ordre_tri}|!={'inverse'}|?{' '})
+			#SET{tri,#ENV{mode}|=={''}|?{id_auteur,#ENV{mode}}}
+			#SET{_tri,''}
+		]
+		
+		#GET{inverse}
+
+		#SET{aff_localisation,#CONFIG{'spipbb/affiche_localisation'}}
+		[(#GET{aff_localisation}|=={oui}|?{#SET{colspan,7},#SET{colspan,6}})]
+
+		<table class="spipforum" id="membres">
+			<tr class="inter salon">
+				<td colspan="#GET{colspan}"><:spipbb:liste_inscrits:></td>
+			</tr>
+			<tr class="tri">
+				<td colspan="#GET{colspan}">
+				<form action="[(#ENV{self})]" method="post">
+					<:spipbb:selection_tri_dpt:>&nbsp;
+					<select name="mode">
+						<option value="id_auteur"[(#ENV{mode}|=={id_auteur}|?{' selected="selected"',''})]><:spipbb:col_date_crea:></option>
+						<option value="nom"[(#ENV{mode}|=={nom}|?{' selected="selected"',''})]><:spipbb:nom_util:></option>
+						<option value="url_site"[(#ENV{mode}|=={url_site}|?{' selected="selected"',''})]><:spipbb:site_web:></option>
+					</select>
+					&nbsp;&nbsp;<:spipbb:ordre_dpt:>&nbsp;
+					<select name="ordre_tri">
+						<option value="ASC"[(#ENV{ordre_tri}|=={ASC}|?{' selected="selected"',''})]><:spipbb:ordre_croissant:></option>
+						<option value="inverse"[(#ENV{ordre_tri}|=={inverse}|?{' selected="selected"',''})]><:spipbb:ordre_decroissant:></option>
+					</select>&nbsp;&nbsp;
+					<input type="submit" name="submit" value="<:spipbb:trier:>" class="spip_bouton" />
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<th><:spipbb:nom_util:></th>
+				<th><:spipbb:statut:></th>
+				<th><:spipbb:email:></th>
+			[(#GET{aff_localisation}|=={oui}|?{'	',''})<th><:spipbb:extra_localisation:></th>]
+				<th><:spipbb:inscrit_le:></th>
+				<th><:spipbb:message_s:></th>
+				<th><:spipbb:site_web:></th>
+			</tr>
+
+		[(#REM) h.17/02/07 {statut IN ... } pour palier a d eventuels nouv. statut auteur --plugins ]
+		<BOUCLE_auteur_principal(AUTEURS){tout}{par #GET{tri}}{!par #GET{_tri}}{statut IN 0minirezo,1comite,6forum}{pagination #CONFIG{spipbb/fixlimit}}>
+
+]
+			[(#REM) c.18/12/07 Dans ce cas il faut absolument documenter la page car sinon confusion ]
+			[(#REM) c 27/12/07 Puisque c'est ca on le passe en option configurable... ]
+			
+			<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{'1','2'})]">
+				<td>
+					[(#REM) c.23/12/7 on passe par la page profile]
+					<a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">
+					#NOM
+					</a>
+				</td>
+				<td>
+					[(#STATUT|=={0minirezo}|?{<:spipbb:statut_admin:>,''})]
+					[(#STATUT|=={1comite}|?{<:spipbb:statut_redac:>,''})]
+					[(#STATUT|=={6forum}|?{<:spipbb:statut_visit:>,''})]
+				</td>
+				<td class="email">
+					[(#EMAIL|?{<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]"><span>&nbsp;</span></a>,''})]
+				</td>
+				<td class="inscrit">
+				</td>
+				<td class="nbr_sujet">
+					<a href="[(#URL_PAGE{liste_messages}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">[(#ID_AUTEUR|spipbb_nb_messages)]</a>
+				</td>
+				<td class="www">
+					[<a href="(#URL_SITE)" title="#NOM_SITE">&nbsp;</a>]
+				</td>
+			</tr>
+
+		</BOUCLE_auteur_principal>
+			<tr class="pagination">
+				<td colspan="#GET{colspan}">
+				[(#GRAND_TOTAL) <:spipbb:inscrit_s:>][<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
+				</td>
+			</tr>
+		</B_auteur_principal>
+		</table>

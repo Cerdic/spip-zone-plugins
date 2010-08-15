@@ -1,0 +1,41 @@
+<!--#hierarchie-->
+<ul id="chemin">
+    <li>Une liste de pages constituant un chemin</li>
+</ul>
+<!--/#hierarchie-->
+ 
+<h1>Gestion des forums</h1>
+
+[(#REM) On teste la rubrique, si c'est un secteur, on envoie id_secteur de spipBB dans la variable]
+
+<BOUCLE_spipBB(RUBRIQUES){id_rubrique=#ENV{id_rubrique, #CONFIG{spipbb/id_secteur}}}>
+	<ul>
+	<BOUCLE_enfants(RUBRIQUES){id_parent}{tout}{par titre}>
+  		<li>
+  			<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]">#TITRE</a>
+  			<div><a href="#URL_ACTION_AUTEUR{spipbb_move,rubrique-#ID_RUBRIQUE-up,#SELF}">up</a></div>
+  			<div><a href="#URL_ACTION_AUTEUR{spipbb_move,rubrique-#ID_RUBRIQUE-down,#SELF}">down</a></div>
+  		</li> 		
+   	</BOUCLE_enfants>
+  	</ul>
+  	<ul>
+  	<BOUCLE_salon(ARTICLES){id_rubrique}{par titre}>
+  		<li>
+  			#TITRE
+  			<div><a href="#URL_ACTION_AUTEUR{spipbb_move,article-#ID_ARTICLE-up,#SELF}">up</a></div>
+  			<div><a href="#URL_ACTION_AUTEUR{spipbb_move,article-#ID_ARTICLE-down,#SELF}">down</a></div>
+  		</li>
+  	</BOUCLE_salon>
+  	</ul>
+</BOUCLE_spipBB>
+
+
+<!--#navigation-->
+<div class='cadre-info'>
+Une information dans une colonne de navigation.
+</div>
+<!--/#navigation-->
+ 
+<!--#extra-->
+Du contenu en plus dans la colonne extra.
+<!--/#extra-->

@@ -1,0 +1,125 @@
+#CACHE{0}
+<BOUCLE_forum(FORUMS){id_forum}><BOUCLE_lang_select(ARTICLES){id_article}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<head>
+
+<title>[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE|textebrut)]</title>
+#SET{langforum,#LANG}
+</BOUCLE_lang_select>
+
+<INCLURE{fond=inc-head}{lang=#GET{langforum}}>
+<INCLURE{fond=inc-forum-head}{lang=#GET{langforum}}>
+
+</head>
+<body id='voirsujet'>
+[(#REM) Plugin SpipBB - Licence GPL]
+<!-- debut code pour fichier voirsujet.html -->
+<BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
+
+<INCLURE{fond=inc_teteforum}{id_article}>
+[(#REM) c: 11/1/8 on determine si on est admin (pour l'affichage)]
+[(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
+#SET{admin,#SESSION{id_auteur}|is_modo{#ID_ARTICLE}}
+
+	<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}{pagination}>
+		<div class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<div  id="forum#ID_FORUM" colspan="2" class="ligne_nom">
+				<span class="text_nom">
+					<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
+					[(#REM) set id_auteur modo, en attendant reglage sur admin restreint]
+					#SET{modo,#ID_AUTEUR}
+					</BOUCLE_modo3>
+				</span>
+				<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
+			</div>
+		</div>
+		<div class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<div class="aff_avatar">
+
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
+
+				[(#REM) bouton alerter abus ... ! ]
+				<div class="bouton_alerter">
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
+				</div>
+			</div>
+			<div class="date_sujet">
+				[(#SET{affboutonadminpr,[(#GET{admin}|!={'oui'}|?{'',' '})
+				[(#REM) ajout JR test sur instituer ]
+				<div class="bout_admin">
+				[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+				</div>
+				<div class="bout_admin">
+					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{poster}|parametre_url{editer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:editer:>">editer</a>
+				</div>
+				]})]
+				<div class="bout_admin">
+						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>"><IMG src="#CHEMIN{themes/defaut/img/bouton_citer.png}"></a>
+				</div>
+				#GET{affboutonadminpr}
+				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+			</div>
+		</div>
+		<div class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<div class="#EDIT{texte} forum-texte">
+				[(#TEXTE|lignes_longues)]
+			</div>
+		</div>
+	</BOUCLE_posts>
+			<tr class="pagination">
+			<td colspan="2">
+			#GRAND_TOTAL
+			[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_post_s:>,<:spipbb:pagine_post_:>})]
+			[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
+			</td>
+		</tr>
+		</B_posts>
+
+	<p class="space_10"></p>
+
+	<ul class="actionforum">
+		<li class="poster">
+			#GET{affboutonnew}
+		</li>
+		<li class="repondre">
+			#GET{affboutonrep}
+		</li>
+	</ul>
+		[(#REM) ligne chemin ]
+	[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
+
+	[(#SET{affboutonadminforum,[(#GET{admin}|!={'oui'}|?{'',' '})
+	<div class="bout_admin">
+		<a href="[(#URL_PAGE{deplacer}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="<:deplacer:>" class="deplacer">
+		</a>
+	</div>
+	<div class="bout_admin"> [(#REM) Ici il faudrait faire un test ferme/ouvert ]
+		<?php if ( "#GET{sujetferme}"=="1" ) { ?>
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-ouvrir,#ID_ARTICLE|generer_url_entite{article}}" title="<:ouvrir:>" class="ouvrir">
+		<?php  } else { ?>
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-fermer,#ID_ARTICLE|generer_url_entite{article}}" title="<:fermer:>" class="fermer">
+		<?php } ?>
+		</a>
+	</div>
+	<div class="bout_admin">
+		<a href="[(#URL_PAGE{diviser}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="<:diviser:>" class="diviser">
+		</a>
+	</div>
+	]})]
+	#GET{affboutonadminforum}
+
+	<INCLURE{fond=inc_piedforum}{id_article}{id_thread}>
+	
+</BOUCLE_sujet_principal>
+</B_sujet_principal>
+
+</body>
+</html>
+</BOUCLE_forum>
