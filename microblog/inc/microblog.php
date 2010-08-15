@@ -38,7 +38,8 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	$apis = array(
 		'spipo' => 'http://%user%:%pass%@spip.org/api/statuses/update.xml',
 		'identica' => 'http://%user%:%pass%@identi.ca/api/statuses/update.xml',
-		'twitter' => 'http://%user%:%pass%@twitter.com/statuses/update.xml'
+		'twitter' => 'http://%user%:%pass%@twitter.com/statuses/update.xml',
+		'supertweet' => 'http://%user%:%pass%@api.supertweet.net/statuses/update.xml'
 	);
 
 	// Choix de l'API
