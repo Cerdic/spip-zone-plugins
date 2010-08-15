@@ -1,36 +1,4 @@
 <?php
-
-
-#
-# bouton interface spip
-#
-function spipbb_ajouter_boutons($boutons_admin) {
-	// si on est admin ou admin restreint
-	if ($GLOBALS['connect_statut'] == "0minirezo") {
-		// on voit le bouton dans la barre "statistiques"
-		$boutons_admin['forum']->sousmenu["spipbb_admin"]= new Bouton(
-		"../"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-24.png",  // icone
-		_T('spipbb:titre_spipbb')	// titre
-		);
-	}
-	return $boutons_admin;
-}
-
-#
-# js + css prive
-#
-function spipbb_header_prive($flux) {
-	$exec = _request('exec');
-	if(strpos($exec, '^(spipbb_).*')!==false) { 
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SPIPBB.'css/spipbb_styles.css" />'."\n";
-	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_vueavatar.js"></script>'."\n";
-	}
-	if($exec=="spipbb_formpost") {
-	$flux.='<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_js_formpost.js"></script>'."\n";
-	}
-	return $flux;
-}
-
 #
 # bouton interface spip col. droite sur exec/naviguer (rubrique)
 #

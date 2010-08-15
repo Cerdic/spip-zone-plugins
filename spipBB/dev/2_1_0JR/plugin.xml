@@ -22,6 +22,11 @@
 	<version_base>1.0</version_base>
 	<install>base/spipbb_upgrade.php</install>
 	<prefix>spipbb</prefix>
+	<bouton id="spipbb" parent="forum"> 
+		<icone>img_pack/spipbb-24.png</icone> 
+		<titre>spipbb:titre_spipbb</titre>       
+		<url>spipbb_admin</url>  
+	</bouton> 
 	<pipeline>
 		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
 		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
@@ -29,15 +34,6 @@
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouter_boutons</action>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-		<pipeline>
-		<nom>header_prive</nom>
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
