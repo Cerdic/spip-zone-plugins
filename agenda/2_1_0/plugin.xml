@@ -5,9 +5,9 @@
 	[C&eacute;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net], [Julien Tessier->http://www.cahri.com]
 	</auteur>
 	<licence>GPL 3 - &#169; 2006-2010</licence>
-	<version>2.1.4</version>
+	<version>2.1.5</version>
 	<version_base>0.22</version_base>
-	<etat>stable</etat>
+	<etat>test</etat>
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://www.spip-contrib.net/article2858</lien> <!-- URI de documentation -->
 	<options>agenda_options.php</options>
@@ -88,8 +88,8 @@
 		<args>new=oui&amp;id_article=@id_article@</args>
 	</bouton>
 
-	<necessite id='SPIP' version='[2.0.3;]' />
-	<necessite id='spip_bonux' version='[1.9.1;]' />
+	<necessite id='SPIP' version='[2.1.1;]' />
+	<utilise id='spip_bonux' version='[1.9.1;]' />
 <!-- si le plugin fulltext est actif, il faut qu'agenda soit pris en compte avant lui pour le pipeline rechercher_liste_des_champs -->
 	<utilise id='Fulltext' version='[0.2;]' />
 	<utilise id='bando' version='[1.0.0;]' />
