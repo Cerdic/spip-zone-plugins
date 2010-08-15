@@ -239,8 +239,8 @@ function spip_bonux_lire_config($cfg='', $def=null, $unserialize=true) {
 	// ou valeur qui est en fait implicitement /meta/valeur
 	// ou casier/valeur qui est en fait implicitement /meta/casier/valeur
 	if ($cfg AND strpos($cfg,'/')===false){
-		return isset($GLOBALS['meta'][$cgf])?
-		  ((!$unserialize OR ($t=unserialize($GLOBALS['meta'][$cgf]))===false)?$GLOBALS['meta'][$cgf]:$t)
+		return isset($GLOBALS['meta'][$cfg])?
+		  ((!$unserialize OR ($t=unserialize($GLOBALS['meta'][$cfg]))===false)?$GLOBALS['meta'][$cfg]:$t)
 		  :$def;
 	}
 
