@@ -8,7 +8,7 @@
  *
  */
 
-function generer_url_microblog($id, $entite, $args, $ancre, $public, $type){
+function generer_url_microblog($id, $entite='article', $args='', $ancre='', $public=true, $type=null){
 	include_spip('inc/filtres_mini');
 	$config = unserialize($GLOBALS['meta']['microblog']);
 
