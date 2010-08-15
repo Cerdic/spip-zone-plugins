@@ -4,8 +4,8 @@
 <B_agenda>
 <div class='pagination'>
 <div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:lien_tout_replier:></a></div>
-[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
-[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+[(#GET{self}|parametre_url{date_debut,1900-01-01}|lien_ou_expose{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+[(#GET{self}|lien_ou_expose{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
 </div>
 <ul class='liste_items liste-items evenements'>
 	<BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
@@ -35,8 +35,8 @@
 </B_agenda>
 <div class='pagination'><a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:agenda:creer_evenement:></a>
 [(#GET{yena})
-[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
-[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+[(#GET{self}|parametre_url{date_debut,1900-01-01}|lien_ou_expose{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+[(#GET{self}|lien_ou_expose{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
 ]
 <div class='nettoyeur'></div>
 </div>
