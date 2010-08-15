@@ -1,0 +1,231 @@
+#CACHE{0}
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_configurer:> -->
+<!-- nom=spipbb -->
+
+<div class="formulaire_spip formulaire_configurer_spipbb">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:spipbb:admin_config_spipbb:></h3>
+						<ul>
+							[(#SAISIE{oui_non,activer_spipbb,
+								label=<:spipbb:admin_config_spipbb_info:>}
+							)]
+						</ul>
+					</fieldset>
+				</li>	
+				<li class="boutons">
+					<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				</li>
+				<div id="autres">
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:spipbb:config_choix_rubrique:></h3>
+						<ul>
+							[(#SAISIE{secteur,secteur_spipbb,
+								label=<:spipbb:choix_rubrique_selection:>}
+							)]
+						</ul>
+					</fieldset>
+				</li>	
+				<li class="boutons">
+					<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:spipbb:config_choix_mots:></h3>
+						<ul>
+							[(#SAISIE{groupe_mots,groupe_spipbb,
+								label=<:spipbb:choix_mots_selection:>,
+								table_liaison=articles}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{mot,mot_ferme,
+								label=<:spipbb:choix_mots_ferme:>,
+								id_groupe=#ENV{groupe_spipbb}}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{mot,mot_annonce,
+								label=<:spipbb:choix_mots_annonce:>,
+								id_groupe=#ENV{groupe_spipbb}}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{mot,mot_postit,
+								label=<:spipbb:choix_mots_postit:>,
+								id_groupe=#ENV{groupe_spipbb}}
+							)]
+						</ul>
+
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:spipbb:config_choix_squelettes:></h3>
+						<ul>
+							[(#SAISIE{oui_non,utiliser_styliser,
+								label='Voulez vous utiliser styliser ?',
+								defaut='on'}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{input,groupeforum,
+								label=<:spipbb:squelette_groupeforum:>,
+								defaut="groupeforum"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{input,filforum,
+								label=<:spipbb:squelette_filforum:>,
+								defaut="filforum"}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+				<li class="boutons">
+					<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:spipbb:bouton_speciaux_sur_skels:></h3>
+
+						<ul>
+							[(#SAISIE{oui_non,alerte_abus,
+								label=<:spipbb:admin_afficher_bouton_alerte_abus:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{radio,afficher_rss,
+								label=<:spipbb:admin_afficher_bouton_rss:>,
+								datas=#ARRAY{
+									tous,tous,
+									un,un,
+									non,non
+								},
+								defaut="un"}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+				<li class="boutons">
+					<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:spipbb:admin_forums_configuration_avatar:></h3>
+						<ul>
+							[(#SAISIE{oui_non,afficher_avatar,
+								label=<:spipbb:admin_avatar_affiche:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{input,avatar_taille_sujet,
+								label=<:spipbb:admin_avatar_taille_sujet:>,
+								defaut="50"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{input,avatar_taille_contact,
+								label=<:spipbb:admin_avatar_taille_contact:>,
+								defaut="80"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{input,avatar_taille_profil,
+								label=<:spipbb:admin_avatar_taille_profil:>,
+								defaut="80"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,afficher_membres,
+								label=<:spipbb:admin_forums_affiche_membre_defaut:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{input,temps_deplacement,
+								label=<:spipbb:admin_temps_deplacement:>,
+								defaut="600"}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+				<li class="boutons">
+					<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:spipbb:config_affiche_extra:></h3>
+						<ul>
+							[(#SAISIE{oui_non,display_signature_post,
+								label=<:spipbb:extra_signature_saisie_texte_info:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,display_localisation,
+								label=<:spipbb:extra_localisation:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,display_emploi,
+								label=<:spipbb:extra_emploi:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,display_loisirs,
+								label=<:spipbb:extra_loisirs:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,display_numero_icq,
+								label=<:spipbb:extra_numero_icq:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,display_nom_aim,
+								label=<:spipbb:extra_nom_aim:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,display_nom_yahoo,
+								label=<:spipbb:extra_nom_yahoo:>,
+								defaut="on"}
+							)]
+						</ul>
+						<ul>
+							[(#SAISIE{oui_non,display_nom_msnm,
+								label=<:spipbb:extra_nom_msnm:>,
+								defaut="on"}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+				<li class="boutons">
+					<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				</li>
+
+			</ul>
+			</div>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+			</p>
+		</div>
+	</form>
+</div>
