@@ -27,59 +27,8 @@
 	<input type='text' id='url_site' name='url_site' class='forml' value="[(#URL_SITE)]" size='40' />
 	</p>
 
-	[
-	(#REM) les champs de GAFOSPIP ...
-	]
-
-	[(#REM) controle nouvel inscrit ]
-	[(#SPIPBB{date_crea_spipbb}|=={''}|?{' ',''})
-	<input type="hidden" name="nouveau" value="1" />
-	]
-
-	<br />
-	#SET{aff_avatar,#CONFIG{'spipbb/affiche_avatar'}}
-	[(#GET{aff_avatar}|=={oui}|?{' ',''})
-		[(#STATUT|=={'6forum'}|?{' ',''})
-
-		<p><label for="avatar"><:spipbb:votre_url_avatar:></label><br />
-		<input type="text" name="avatar" id="avatar" class="forml" value="#SPIPBB{avatar}" size="40" />
-		</p>
-		]
-	]
-
-	#SET{aff_signature,#CONFIG{'spipbb/affiche_signature_post'}}
-	[(#GET{aff_signature}|=={oui}|?{' ',''})
-		<p><label for="signature_post"><:spipbb:votre_signature:></label><br />
-		<input type="text" name="signature_post" id="signature_post" class="forml" value="#SPIPBB{signature_post}" size="40" />
-		</p>
-	]
-
-	[
-	(#REM) h. 11/11/07 .. autres support de champs ... a voir ulterieurement !!
-	Ne pas passer ca sur  "support_auteur"
-	Laisse ici pour memo/infos/reflexo...]
-	[(#REM) support : autre -> appel modele adapte ]
-	#SET{support,#CONFIG{'spipbb/support_auteurs'}}
-	[(#GET{support}|=={autre}|?{'',' '})
-	[(#INCLURE{fond=modeles/form_profil_#GET{support}}{id_auteur}{statut=#SESSION{statut}})]
-	]
-
-	[(#SET{check,[(#SPIPBB{annuaire_forum}|=={''}|?{'non',#SPIPBB{annuaire_forum}})]})]
-	<br />
-	<p><:spipbb:visible_annuaire_forum:>
-	&nbsp;&nbsp;&nbsp;
-	<:spipbb:non:><input type="radio" name="annuaire_forum"
-			value="non" [(#GET{check}|=={'non'}|?{'checked="checked"',''})] />
-	&nbsp;&nbsp;&nbsp;
-	<:spipbb:oui:><input type="radio" name="annuaire_forum"
-			value="oui" [(#GET{check}|=={'oui'}|?{'checked="checked"',''})] />
-	</p>
-
-	[(#REM) pour simple transport ]
-	<input type="hidden" name="date_crea_spipbb" value="[(#SPIPBB{date_crea_spipbb})]" />
 
 	[(#REM) liste des threads de l_auteur ==> checkbox refus de suivi ]
-	#SET{select,#SPIPBB{refus_suivi_thread}|chaine2array}
 	<br />
 
 	<B_suivi_forum>

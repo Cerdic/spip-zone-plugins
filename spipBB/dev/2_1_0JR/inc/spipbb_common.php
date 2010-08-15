@@ -34,7 +34,6 @@ define('_SPIPBB_LOG_LEVEL',3);
 
 // Numero de version de spip_version_code pour les differentes comparaisons et inclusions
 define('_SPIPBB_REV_AJAXCONFIG','1.9250'); // Introduction du repertoire configuration/ avec fonctions ajax_... SVN 9080/9081 ->9134
-define('_SPIPBB_REV_STYLISER','1.9250'); // Evolution de public/styliser (SVN 9918 ?)
 define('_SPIPBB_REV_REQSQL','1.9259'); // trace_query_start apparus en SVN 9932 -> version_code 1.9259/1.9260
 define('_SPIPBB_REV_SQL','1.9260'); // Changement pour les fonctions SQL (abstract) SVN 9919 -> 9955
 define('_SPIPBB_REV_BALISE_SESSION','1.9262'); // Ajout de la balise SESSION SVN 10124/10130 -> 10132

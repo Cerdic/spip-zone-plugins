@@ -1,24 +1,4 @@
 <?php
-#----------------------------------------------------------#
-#  Plugin  : spipBB - Licence : GPL                        #
-#  File    : spipbb_pipelines - pipelines                  #
-#  Authors : Chryjs, 2007 et als                           #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
-#  Contact : chryjs!@!free!.!fr                            #
-#----------------------------------------------------------#
-
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
 #
@@ -32,13 +12,6 @@ function spipbb_ajouter_boutons($boutons_admin) {
 		"../"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-24.png",  // icone
 		_T('spipbb:titre_spipbb')	// titre
 		);
-## h. un seul bouton suffit !!
-		/*
-		$boutons_admin['configuration']->sousmenu["spipbb_admin_configuration"]= new Bouton(
-		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
-		_T('spipbb:admin_forums_configuration')	// titre
-		);
-		*/
 	}
 	return $boutons_admin;
 }
@@ -49,7 +22,7 @@ function spipbb_ajouter_boutons($boutons_admin) {
 function spipbb_header_prive($flux) {
 	$exec = _request('exec');
 	if(strpos($exec, '^(spipbb_).*')!==false) { 
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SPIPBB.'img_pack/spipbb_styles.css" />'."\n";
+	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SPIPBB.'css/spipbb_styles.css" />'."\n";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_vueavatar.js"></script>'."\n";
 	}
 	if($exec=="spipbb_formpost") {
@@ -138,4 +111,40 @@ function spipbb_ajouter_onglets($flux){
 	return $flux;
 }
 
-?>
+
+// [Backick] Définir le squelette a utiliser si on est dans le cas d'une rubrique de spipBB 
+function spipbb_styliser($flux){
+	
+
+	// si article ou rubrique
+	if (($fond = $flux['args']['fond'])
+	AND in_array($fond, array('article','rubrique'))) {
+		
+		$ext = $flux['args']['ext'];
+		
+		if ($id_rubrique = $flux['args']['id_rubrique']) {
+			// calcul du secteur
+			$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
+			
+			// je retrouve le secteur de spipBB grâce à CFG
+			$spipbb_id_secteur =  lire_config('spipbb/id_secteur');
+			// comparaison du secteur avec la config de spipBB
+			if ($id_secteur==$spipbb_id_secteur) {
+				// si un squelette $fond_spipbb existe
+                if ($squelette = test_squelette_spipbb($fond, $ext)) {
+                    $flux['data'] = $squelette;
+                }
+			}
+
+		}
+	}
+	return $flux;
+}
+
+function test_squelette_spipbb($fond, $ext) {
+    if ($squelette = find_in_path($fond."_spipbb.$ext")) {
+        return substr($squelette, 0, -strlen(".$ext"));
+    }
+    return false;
+}
+

@@ -225,37 +225,6 @@
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
 
-[(#REM) ------------------------ AVATARS ------------------------ ]
-
-[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_avatar:>})]
-<table cellpadding='3' cellspacing='1' border='0' width='100%'>
-<tr>
-	<td><:spipbb:admin_avatar_affiche:></td>
-	<td>
-		<input type='radio' name='affiche_avatar' value='oui' id='affiche_avatar_1' [ checked="(#ENV{affiche_avatar}|=={'oui'}|?{checked})"] /> <label for='affiche_avatar_1'><:spipbb:oui:></label>
-		&nbsp;
-		<input type='radio' name='affiche_avatar' value='non' id='affiche_avatar_0' [ checked="(#ENV{affiche_avatar}|=={'non'}|?{checked})"] /> <label for='affiche_avatar_0'><:spipbb:non:></label>
-	</td>
-</tr>
-<tr>
-	<td><:spipbb:admin_avatar_taille_sujet:></td>
-	<td>
-		<input type="text" name="taille_avatar_suj" value="#ENV{taille_avatar_suj}" />
-	</td>
-</tr>
-<tr>
-	<td><:spipbb:admin_avatar_taille_contact:></td>
-	<td>
-		<input type="text" name="taille_avatar_cont" value="#ENV{taille_avatar_cont}" />
-	</td>
-</tr>
-<tr>
-	<td><:spipbb:admin_avatar_taille_profil:></td>
-	<td>
-		<input type="text" name="taille_avatar_prof" value="#ENV{taille_avatar_prof}" />
-	</td>
-</tr>
-</table>
 
 <div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
 

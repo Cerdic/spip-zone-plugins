@@ -72,30 +72,12 @@ function spipbb_init_metas()
 	$spipbb_meta['id_mot_postit'] = isset($old_meta['id_mot_postit']) ? $old_meta['id_mot_postit'] : 0;
 	$spipbb_meta['config_mot_cles'] = isset($old_meta['config_mot_cles']) ? $old_meta['config_mot_cles'] : 'non';
 
-	// gafospip
-	#stockage des champs supplementaires
-	$spipbb_meta['support_auteurs'] = isset($old_meta['support_auteurs']) ? $old_meta['support_auteurs'] : 'extra'; //$options_sap = array('extra','table');
-	$spipbb_meta['table_support'] = isset($old_meta['table_support']) ? $old_meta['table_support'] : '';
-	#champs supplementaires auteurs
-	$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
-	$champs_definis=array();
-	foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
-		$champs_definis[]=$champ;
-	}
-	$champs_optionnels = array_diff($champs_definis,$champs_requis);
-	foreach ($champs_optionnels as $champ_a_valider) {
-		$champ_a_valider=strtolower($champ_a_valider);
-		$spipbb_meta['affiche_'.$champ_a_valider]=isset($old_meta['affiche_'.$champ_a_valider]) ? $old_meta['affiche_'.$champ_a_valider] : 'oui';
-	}
 	# autres parametres
 	$spipbb_meta['fixlimit'] = isset($old_meta['fixlimit']) ? $old_meta['fixlimit'] : 30;
 	$spipbb_meta['lockmaint'] = isset($old_meta['lockmaint']) ? $old_meta['lockmaint'] : 600;
 	$spipbb_meta['affiche_bouton_abus'] = isset($old_meta['affiche_bouton_abus']) ? $old_meta['affiche_bouton_abus'] : 'non';
 	$spipbb_meta['affiche_bouton_rss'] = isset($old_meta['affiche_bouton_rss']) ? $old_meta['affiche_bouton_rss'] : 'un';
-	$spipbb_meta['affiche_avatar'] = isset($old_meta['affiche_avatar']) ? $old_meta['affiche_avatar'] : 'oui';
-	$spipbb_meta['taille_avatar_suj'] = isset($old_meta['taille_avatar_suj']) ? $old_meta['taille_avatar_suj'] : 50;
-	$spipbb_meta['taille_avatar_cont'] = isset($old_meta['taille_avatar_cont']) ? $old_meta['taille_avatar_cont'] : 80;
-	$spipbb_meta['taille_avatar_prof'] = isset($old_meta['taille_avatar_prof']) ? $old_meta['taille_avatar_prof'] : 80;
+
 	$spipbb_meta['affiche_bouton_abus'] = isset($old_meta['affiche_bouton_abus']) ? $old_meta['affiche_bouton_abus'] : 'non';
 	$spipbb_meta['affiche_bouton_rss'] = isset($old_meta['affiche_bouton_rss']) ? $old_meta['affiche_bouton_rss'] : 'un';
 	$spipbb_meta['affiche_membre_defaut'] = isset($old_meta['affiche_membre_defaut']) ? $old_meta['affiche_membre_defaut'] : 'non'; // c: 27/12/7 par defaut non pour respecter demande Scoty
@@ -150,20 +132,11 @@ function spipbb_liste_metas()
 	'id_mot_annonce'			=> 0,
 	'id_mot_postit' 			=> 0,
 	'config_mot_cles' 			=> 'non',
-	'support_auteurs' 			=> 'extra',
-	'table_support'				=> '',
-	'affiche_date_crea_spipbb'	=> 'oui',
-	'affiche_avatar'			=> 'oui',
-	'affiche_annuaire_forum'	=> 'oui',
 	'affiche_refus_suivi_thread'=> 'oui',
 	'fixlimit' 					=> 30,
 	'lockmaint' 				=> 600,
 	'affiche_bouton_abus' 		=> 'non',
 	'affiche_bouton_rss' 		=> 'un',
-	'affiche_avatar' 			=> 'oui',
-	'taille_avatar_suj' 		=> 50,
-	'taille_avatar_cont' 		=> 80,
-	'taille_avatar_prof' 		=> 80,
 	'affiche_bouton_abus' 		=> 'non',
 	'affiche_bouton_rss' 		=> 'un',
 	'affiche_membre_defaut' 	=> 'non',
@@ -191,40 +164,9 @@ function spipbb_import_gafospip_metas()
 	if (isset($GLOBALS['meta']['gaf_install'])) {
 		$tbl_conf=@unserialize($GLOBALS['meta']['gaf_install']);
 		$spipbb_meta=array();
-		# non ! c'est bloquant lors de l'install ()
-		# on le recuperera plus tard (dans admin_reconfig)
-		#$spipbb_meta['id_groupe_mot']=$tbl_conf['groupe']; # num groupe
 		$spipbb_meta['fixlimit']=$tbl_conf['fixlimit']; # n lignes
 		$spipbb_meta['lockmaint']=$tbl_conf['lockmaint']; # n secondes
 
-		## h. 1/12/07
-		# ceci repond a gafosip 0.6 -> il ne sera pas publie a priori !!
-		# donc on zap ceci :
-		/*
-		$spipbb_meta['support_auteurs']=$tbl_conf['support_auteurs']; # extra / table / autre
-		$spipbb_meta['table_support']=$tbl_conf['table_support']; # nom table generique, ex. : auteurs_profils
-		#$tbl_conf['champs_gaf']; # array xx,yy,zz
-		$spipbb_meta['taille_avatar_suj']=$tbl_conf['taille_avatar_suj']; # nbr pix
-		$spipbb_meta['taille_avatar_cont']=$tbl_conf['taille_avatar_cont']; # nbr pix
-		$spipbb_meta['taille_avatar_prof']=$tbl_conf['taille_avatar_prof']; # nbr pix
-		$spipbb_meta['affiche_avatar']=$tbl_conf['affiche_avatar']; # oui/non
-		$spipbb_meta['affiche_bouton_abus']=$tbl_conf['affiche_bouton_abus']; # oui/non
-		$spipbb_meta['affiche_bouton_rss']=$tbl_conf['affiche_bouton_rss']; # non/un/tout
-		###$tbl_conf['affiche_signature']; # oui/non
-
-		# affichage champ 'nnn_nnn'
-		#champs supplementaires auteurs
-		$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
-		$champs_definis=array();
-		foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
-			$champs_definis[]=$champ;
-		}
-		$champs_optionnels = array_diff($champs_definis,$champs_requis);
-		foreach ($champs_optionnels as $champ_a_valider) {
-			$spipbb_meta['affiche_'.$champ_a_valider]=$tbl_conf['affiche_'.$champ_a_valider];
-		}
-		*/
-		# h. fin gaf 0.6
 
 		return $spipbb_meta;
 	}

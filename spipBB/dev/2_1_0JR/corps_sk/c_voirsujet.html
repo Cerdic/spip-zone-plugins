@@ -3,6 +3,9 @@
 <!-- debut code pour fichier voirsujet.html -->
 <BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
 
+
+
+
 	[
 	(#REM) entete corps forum
 	]
@@ -60,32 +63,18 @@
 			<tr class="ligne_sujet">
 				<td id="forum#ID_FORUM" colspan="2">
 					<span class="text_nom">
-					<B_auteurpc2>
 					[(#REM) c.23/12/7 on passe par la page profile]
-					<BOUCLE_auteurpc2(AUTEURS){id_auteur}{tout}>
-						<a
-						[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
-						 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
-						]
-						>#NOM</a>
-					</BOUCLE_auteurpc2>
 					<BOUCLE_modo(AUTEURS){id_article}{id_auteur}>
 						[(#REM) set id_auteur modo , en attendant requette sur admin restreint]
 						#SET{modo,#ID_AUTEUR}
 					</BOUCLE_modo>
-
-					</B_auteurpc2>
-						[(#NOM|sinon{<:spipbb:anonyme:>})]
-					<//B_auteurpc2>
 					</span>
 					<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
 				</td>
 			</tr>
 			<tr class="ligne_sujet">
 				<td class="aff_avatar" rowspan="2">
-					<BOUCLE_auteur_av(AUTEURS){id_auteur}>
-						[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
-						[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
+					<BOUCLE_auteur_av(AUTEURS){id_auteur}> 
 					</BOUCLE_auteur_av>
 				</td>
 				<td class="date_sujet">
@@ -174,11 +163,7 @@
 				<B_auteurp>
 				[(#REM) c.23/12/7 on passe par la page profile]
 				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
-					<a
-					[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
-					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
-					]
-					>#NOM</a>
+
 				</BOUCLE_auteurp>
 
 				<BOUCLE_modo2(AUTEURS){id_article}{id_auteur}>
@@ -195,8 +180,6 @@
 		</tr>
 		<tr class="ligne_sujet">
 			<td class="aff_avatar" rowspan="2">
-				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
-
 				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
 
 				[(#REM) bouton alerter abus ... !]
@@ -225,6 +208,13 @@
 				</div>
 				<div class="bout_admin">
 					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				[(#REM) ajout JR test sur instituer ]
+				<div class="bout_admin">
+				[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{poster}|parametre_url{editer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:editer:>">edtier</a>
 				</div>
 				]})]
 
@@ -265,31 +255,16 @@
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			<td  id="forum#ID_FORUM" colspan="2" class="ligne_nom">
 				<span class="text_nom">
-				<B_auteurpr>
-				[(#REM) c.23/12/7 on passe par la page profile]
-				<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
-					<a
-					[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
-					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
-					]
-					>#NOM</a>
-				</BOUCLE_auteurpr>
-
 					<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
 					[(#REM) set id_auteur modo , en attendant reglage sur admin restreint ]
 					#SET{modo,#ID_AUTEUR}
 					</BOUCLE_modo3>
-
-				</B_auteurpr>
-					[(#NOM|sinon{<:spipbb:anonyme:>})]
-				<//B_auteurpr>
 				</span>
 				<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
 			</td>
 		</tr>
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			<td class="aff_avatar" rowspan="2">
-				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
 
 				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
 
@@ -319,7 +294,14 @@
 				<div class="bout_admin">
 					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
 				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{poster}|parametre_url{editer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:editer:>">editer</a>
+				</div>
 				]})]
+				[(#REM) ajout JR test sur instituer ]
+				<div class="bout_admin">
+				[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+				</div>
 				#GET{affboutonadminpr}
 				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
 			</td>

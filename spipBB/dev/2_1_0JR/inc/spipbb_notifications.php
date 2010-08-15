@@ -32,7 +32,6 @@ function spipbb_chargespipbb($x) {
 // inspire de :
 // http://doc.spip.org/@notifications_forumvalide_dist
 function notifications_forumvalide($quoi, $id_forum) {
-	spipbb_log("notifications_forumvalide: $quoi : $id_forum :",3,__FILE__);
 
 	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
 	if (!$t)
@@ -96,7 +95,6 @@ function notifications_forumvalide($quoi, $id_forum) {
 
 	# _SUIVI_FORUM_THREAD => reactive par spipbb spipbb_options
 
-	if (!function_exists('spipbb_donnees_auteur')) include_spip('inc/traiter_imagerie'); // c: 18/12/7 necessaire ?
 	
 	// voir par rapport à @$GLOBALS['meta']['prevenir_auteurs']
 
@@ -107,16 +105,6 @@ function notifications_forumvalide($quoi, $id_forum) {
 			# par defaut visiteur non-inscrit : pas de notif.
 			if($r['id_auteur']!='0') {
 				$tous[] = $r['email_auteur'];
-			}
-
-			# participant au thread refuse de suivre ?
-			$infos = spipbb_donnees_auteur($r['id_auteur']); // c: 18/12/7 remplace ex gaf_auteur_infos
-
-			if($infos['refus_suivi_thread'] && $infos['refus_suivi_thread']!='') {
-				$refus=explode(",",$infos['refus_suivi_thread']);
-				if (in_array($t['id_thread'],$refus) ) {
-					$pasmoi[] = $r['email_auteur'];
-				}
 			}
 
 		}

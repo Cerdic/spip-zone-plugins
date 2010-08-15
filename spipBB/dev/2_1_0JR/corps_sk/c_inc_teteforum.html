@@ -43,7 +43,7 @@
 		</a>
 	</li>
 
-	<!-- lien fiche de profil du connecté -->
+	lien fiche de profil du connecté 
 	[(#SESSION{id_auteur}|?{'<li class="profil">
 	<a href="',''})][(#SESSION{id_auteur}|?{#URL_PAGE{profile,id_rubrique=#GET{sector}},''})][(#SESSION{id_auteur}|?{'&amp;id_auteur='#SESSION{id_auteur},''})][(#SESSION{id_auteur}|?{'">'<:spipbb:profil:></a></li>,''})]
 

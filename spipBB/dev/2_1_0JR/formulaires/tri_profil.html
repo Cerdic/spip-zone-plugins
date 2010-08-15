@@ -46,15 +46,12 @@
 			</tr>
 
 		[(#REM) h.17/02/07 {statut IN ... } pour palier a d eventuels nouv. statut auteur --plugins ]
-		<BOUCLE_auteur_principal(AUTEURS){tout}{par #GET{tri}}{!par #GET{_tri}}{statut IN 0minirezo,1comite,6forum}{extra==annuaire_forum..s:3:"oui"}{pagination #CONFIG{spipbb/fixlimit}}>
+		<BOUCLE_auteur_principal(AUTEURS){tout}{par #GET{tri}}{!par #GET{_tri}}{statut IN 0minirezo,1comite,6forum}{pagination #CONFIG{spipbb/fixlimit}}>
 
-			[(#REM) c.25/11/07 On doit explicitement demander a ne pas paraitre dans l'annuaire]
 			[(#REM) h.01/12/07 .. euh ... justement l'inverse ! a cause de plugins comme spip-liste ! ]
 			[(#REM) c.18/12/07 Dans ce cas il faut absolument documenter la page car sinon confusion ]
 			[(#REM) c 27/12/07 Puisque c'est ca on le passe en option configurable... ]
 			[(#REM) b_b 12/10/08 Option plus active suite a 22857 pour optimisation, 
-					trouver une autre solution car extra=!annuaire_forum..s:3:"non" ne fonctionne pas ]
-			[(#REM) c 7/12/08 Normal car on evalue une regexp donc c'est extra!==annuaire_forum..s:3:"non" avec les deux = ]
 
 			<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{'1','2'})]">
 				<td>
@@ -71,9 +68,7 @@
 				<td class="email">
 					[(#EMAIL|?{<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]"><span>&nbsp;</span></a>,''})]
 				</td>
-			[(#GET{aff_localisation}|=={oui}|?{'	',''})<td class="localisation">#SPIPBB{localisation}</td>]
 				<td class="inscrit">
-					[(#SPIPBB{date_crea_spipbb}|affdate)]
 				</td>
 				<td class="nbr_sujet">
 					<a href="[(#URL_PAGE{liste_messages}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">[(#ID_AUTEUR|spipbb_nb_messages)]</a>

@@ -127,17 +127,7 @@ function spipbb_nb_messages_groupe($id_bidon){
 							"10" // LIMIT
 							);
 	$compte = 0;
-	while ($row = sql_fetch($result_auteurs) AND $compte++<10) {
-		# 1/12/07 fct spipbb_auteur_infos() change de nom :
-		$infos = spipbb_donnees_auteur($row['id_auteur']);
-		if ( ( isset($infos['annuaire_forum'])  AND $infos['annuaire_forum']!='non')
-				OR
-				( $GLOBALS['spipbb']['affiche_membre_defaut']=='oui' AND (!isset($infos['annuaire_forum']) OR  !$infos['annuaire_forum'] ) ) )
-		 {
-			// Peut apparaitre dans la liste
-			$aut_nb[]=$row['auteur']."(".$row['total'].")";
-		}
-	}
+
 
 	return join(", ",$aut_nb) ;
 } // spipbb_nb_messages_groupe

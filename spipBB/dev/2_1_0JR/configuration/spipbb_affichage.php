@@ -68,42 +68,7 @@ function  configuration_bloc_affichage()
 		. "</table>\n"
 		. fin_cadre_relief(true);
 
-	//  AVATARS
-	$res .= debut_cadre_relief("", true, "", _T('spipbb:admin_forums_configuration_avatar'))
-		. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">\n"
-
-		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
-		. _T('spipbb:admin_avatar_affiche')
-		. "</td><td align='$spip_lang_left' class='verdana2'>\n"
-		. afficher_choix('admin_avatar_affiche',
-			($admin_avatar_affiche != 'non') ? 'oui' : 'non',
-			array(
-				'oui' => _T('item_oui'),
-				'non' => _T('item_non')
-			), " &nbsp; " )
-		. "</td></tr>\n"
-
-		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
-		. _T('spipbb:admin_avatar_taille_sujet')
-		. "</td><td align='$spip_lang_left' class='verdana2'>\n"
-		. "<input type='text' name='taille_avatar_suj' id='taille_avatar_suj' value=\"$taille_avatar_suj\" class='formo' />"
-		. "</td></tr>\n"
-
-		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
-		. _T('spipbb:admin_avatar_taille_contact')
-		. "</td><td align='$spip_lang_left' class='verdana2'>\n"
-		. "<input type='text' name='taille_avatar_cont' id='taille_avatar_cont' value=\"$taille_avatar_cont\" class='formo' />"
-		. "</td></tr>\n"
-
-		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
-		. _T('spipbb:admin_avatar_taille_profil')
-		. "</td><td align='$spip_lang_left' class='verdana2'>\n"
-		. "<input type='text' name='taille_avatar_prof' id='taille_avatar_prof' value=\"$taille_avatar_prof\" class='formo' />"
-		. "</td></tr>\n"
-
-		. "</table>\n"
-		. fin_cadre_relief(true);
-
+	
 	//  OPTIONS
 
 	$res .= debut_cadre_relief("", true, "", _T('spipbb:admin_forums_configuration_options'))

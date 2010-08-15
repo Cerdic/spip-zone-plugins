@@ -26,11 +26,8 @@
 		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})<tr class="inter"><td colspan="2"><:spipbb:modif_parametre:></td></tr>]
 		<tr class="ligne_sujet">
 			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})<td class="aff_avatar">
-				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_prof'}})]
-				[(#REM) c: 16/1/8 l'utilisation de la balise ci-dessous est ok en 193 mais pas en 192]
-				[(#REM) SPIPBB_AVATAR{#SESSION{id_auteur}})]
 				</td>
-				<td>#FORMULAIRE_SPIPBB_PROFIL</td>]
+				<td></td>]
 			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})<td colspan='2'>[(#MODELE{profil_auteur}{id_auteur}{id_rubrique})]</td>]
 		</tr>
 		<tr class="inter">

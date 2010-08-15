@@ -208,54 +208,6 @@ function exec_spipbb_inscrits() {
 			"<td width='2%' style='text-align:center;'>"._T('spipbb:col_marquer')."</td>\n".
 			"</tr>\n";
 
-
-	// corps du tableau
-	$ifond=0;
-	while ($r=sql_fetch($q)) {
-		$ifond = $ifond ^ 1;
-		$coul_ligne = ($ifond) ? $couleur_claire : '#ffffff';
-
-		# options gafospip
-		$infos=spipbb_donnees_auteur($r['id_auteur']);
-		$ico_avatar='';
-		$ico_signature='';
-
-		if($infos['avatar']!='') {
-			$ico_avatar = "<a href='".$infos['avatar']."' class='load'>".
-			http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_T('spipbb:avatar')).
-			"</a>";
-		}
-		if($infos['signature_post']!='') {
-			$ico_signature =
-				"<a href='#' class='afftxt' id='"
-				. $r['id_auteur']."'><p id='p".$r['id_auteur']
-				. "' class='hidesign'>".$infos['signature']."</p>"
-				. http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_T('spipbb:signature'))
-				. "</a>";
-		}
-
-		if($infos['date_crea_spipbb']!='') {
-			$aff_date=affdate($infos['date_crea_spipbb'],'d/m/Y');
-		}
-		else $aff_date="";
-		$aut_spec=($r['statut']=='nouveau') ? "*" : ( ($r['statut']=='0minirezo') ? "!" : "" );
-		echo "<tr bgcolor='".$coul_ligne."'>\n".
-			"<td>".$r['id_auteur'].$aut_spec."</td>".
-			"<td><a href='".generer_url_ecrire("auteur_infos","id_auteur=".$r['id_auteur'])."'>".couper(typo($r['nom']),20)."</a></td>".
-			"<td style='text-align:center;'>".
-			"<a href='mailto:".htmlspecialchars($r['email'])."'>".
-			http_img_pack('envoi-message-24.gif','mail'," border='0' align='absmiddle'",htmlspecialchars($r['email'])).
-			"</a></td>".
-			"<td style='text-align:center;'>".$aff_date."</td>".
-//			"<td style='text-align:center;'>".$ico_signature."</td>".
-//			"<td style='text-align:center;'>".$ico_avatar."</td>".
-			"<td style='text-align:center;'>";
-		if ($r['nb_mes']>0) echo "<a href='".generer_url_public('liste_messages',"id_auteur=".$r['id_auteur']."&id_rubrique=".$GLOBALS['spipbb']['id_secteur'])."'>".$r['nb_mes']."</a>";
-		else echo $r['nb_mes'];
-		echo "</td>".
-			"<td width='2%' style='text-align:center;'><input type='checkbox' name='selectmembre[]' value='".$r['id_auteur']."' /></td>".
-			"</tr>\n";
-	}
 	echo "</table>\n";
 	echo tout_de_selectionner("formmembre");
 	/*
