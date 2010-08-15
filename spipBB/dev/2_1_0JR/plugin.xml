@@ -1,0 +1,184 @@
+<plugin>
+	<version>0.5.4.0</version>
+	<nom>
+		<multi>
+			[en]SpipBB: Management of SPIP 2.0 forums
+			[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 2.0
+			[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 2.0
+			[tr]SpipBB : SPIP 2.0 forumlar&#305;n&#305;n y&ouml;netimi
+			[nl]SpipBB: Beleid van de SPIP 2.0 forums
+			[gl]SpipBB : xesti&oacute;n de foros de SPIP 2.0
+			[fr]SpipBB : Gestion des forums de SPIP 2.0
+		</multi>
+	</nom>
+	<auteur>
+	[<multi>[en]The SpipBB Team: see the contributors' list on Spip-contrib
+	[ca]La SpipBB Team: veure la llista de col&middot;laboradors a Spip-contrib
+	[nl]SpipBB Team: zie de lijst van contributoren op Spip-contrib
+	[gl]O equipo SpipBB : ver a lista de contribuidores en Spip-contrib
+	[pt]O SpipBB Equipa: ver a lista dos contribuintes sobre Spip-contrib
+	[tr]SpipBB Tak&#305;m&#305; : kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in
+	[fr]La SpipBB Team : voir la liste des contributeurs sur Spip-contrib</multi>->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
+	_ &#169; 2006 - 2008<multi>
+	[en]Distributed under the GPL licence
+	[fr]Distribu&eacute; sous licence GPL
+	[ca]Distribu&iuml;t sota llic&egrave;ncia GPL
+	[pt]Distribu&iacute;do sob licen&ccedil;a GPL
+	[tr]GPL lisans&#305; ile da&#287;&#305;t&#305;lan
+	[nl]Verdeeld onder GPL vergunning
+	[gl]Distribu&iacute;do baixo licenza GPL
+	</multi>
+	</auteur>
+	<etat>dev</etat>
+	<description>
+	<multi>
+[en]The SpipBB plugin provides the following features:
+-* centralizes the forum management in SPIP (in the private area),
+-* turns a sector of the site into a forum, "Bulletin Board" style, similar to phpBB. In this sector, subsections are used as forum groups and articles dedicated forums where threads are made of messages posted to that article.
+
+{{Please check :}}
+-* &bull;[help and support on spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
+-* &bull;[the documentation on Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
+
+_ [Access to the admin panel-> .?exec=spipbb_configuration]
+
+[ca]El plugin SpipBB permet:
+-* Gestionar de manera centralitzada els f&ograve;rums d'SPIP (interf&iacute;cie privada),
+-* Utilitzar un sector com a base d'un grup de f&ograve;rums com els &laquo;Bulletin Board&raquo; tals com phpBB. En aquest sector, les subseccions s&oacute;n grups de f&ograve;rums, els articles f&ograve;rums, cada missatge al f&ograve;rum d'un article hi inicia una cadena.
+
+{{Consulteu:}}
+-* &bull;[l'ajuda i suport a spipbb.free.fr->http://spipbb.free.fr/spip.php?article11],
+-* &bull;[La documentaci&oacute; a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+ _ {{Plugin SpipBB en curs de desenvolupament. Utilitzeu-los assumint-ne els riscs i els perills}}
+
+ _ [Acc&eacute;s al panell d'administraci&oacute;-&gt; .?exec=spipbb_configuration]
+[pt]
+O plugin SpipBB permite :
+-* De gerir de maneira centralizada os f&oacute;runs de SPIP (convers&atilde;o privada),
+-* De utilizar um sector como base de um grupo de f&oacute;runs como os &laquo;Bulletin Board&raquo; como phpBB. neste sector, os subt&iacute;tulos s&atilde;o grupos de f&oacute;runs, os artigos dos f&oacute;runs, cada mensagem no f&oacute;rum h&aacute; do thread.
+
+{{Consulte :}}
+-* [ a ajuda e apoio sobre spipbb.free.fr ->http://spipbb.free.fr/spip.php?article11],
+-* [ A documenta&ccedil;&atilde;o sobre Spip-contrib ->http://www.spip-contrib.net/SpipBB-le-forum].
+
+{{Plugin SpipBB em fase de desenvolvimento. Utilize-o a vossos riscos e perigos}}
+
+_ [ Acessos ao painel de administra&amp;ccedil;&amp;atilde;o ->.?exec=spipbb_configuration]
+
+[fr]Le plugin SpipBB permet :
+-* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
+-* D'utiliser un secteur comme base d'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d'un article y d&eacute;marre un thread.
+
+{{Consultez :}}
+-* &bull;[l'aide et support sur spipbb.free.fr->http://spipbb.free.fr/spip.php?article11],
+-* &bull;[la documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave; vos risques et p&eacute;rils}}
+
+_ [Acc&egrave;s au panneau d'administration-> .?exec=spipbb_configuration]
+
+[nl]Plugin SpipBB laat toe:
+-* Om op gecentraliseerde wijze de forums van SPIP (particuliere interface),
+ te beheren-* Om een sector als basis van een groep forums zoals &#132;het Bulletin Board&#147; zoals phpBB te gebruiken. In deze sector, zijn sous-rubriques groepen forums, de artikelen van de forums, elk bericht in het forum van een artikel start er een thread.
+
+{{Raadplegen:}}
+-* [de hulp en steun op spipbb.free.fr ->http://spipbb.free.fr/spip.php?article11],
+-* [De documentatie over Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico\'s en gevaren}}
+
+_ [Toegang tot het administratie paneel ->.? exec=spipbb_configuration]
+
+[gl]O m&oacute;dulos SpipBB permite :
+-* Xestionar de forma centralizada os foros d SPIP (interface privada),
+-* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as secci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
+
+{{Consulte :}}
+-* [a axuda en spipbb.free.fr->http://spipbb.free.fr/spip.php?article11],
+-* [a documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo ao seu risco e ventura}}
+
+_ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]
+
+[tr]SpipBB eklentisi &#351;unlar&#305; sa&#287;lar :
+-* SPIP forumlar&#305;n&#305; tek merkezden y&ouml;netmek (&ouml;zel aray&uuml;z),
+-* Bir sekt&ouml;r&uuml; forumlar grubu veritaban&#305; olarak phpBB benzeri &laquo;Bulletin Board&raquo; gibi kullanmak. Bu sekt&ouml;rde; alt ba&#351;l&#305;klar forum gruplar&#305; ve forum makaleleridir. Bir makalenin forumuna yaz&#305;lan her yeni mesaj orada bir "thread" ba&#351;lat&#305;r.
+
+{{Consultez :}}
+-* [l\'aide et support sur spipbb.free.fr->http://spipbb.free.fr/spip.php?article11],
+-* [La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risques et p&eacute;rils}}
+
+_ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
+	</multi>
+	</description>
+	<lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
+[ca]Consultar la documentaci&oacute; del plugin a Spip-contrib
+[pt]Consultar a documenta&ccedil;&atilde;o do plugin sobre Spip-contrib
+[nl]De documentatie van plugin raadplegen op Spip-contrib
+[gl]Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib
+[tr]Spip-contrib\'de eklenti hakk&#305;ndaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum
+[fr]Consulter la documentation du plugin sur Spip-contrib</multi>
+->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
+	<fonctions>spipbb_fonctions.php</fonctions>
+	<options>spipbb_options.php</options>
+	<install>base/spipbb_upgrade.php</install>
+	<prefix>spipbb</prefix>
+	<pipeline>
+		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
+		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<!-- chryjs 16/10/9 declarations des tables façon SPIP 2.0 -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spipbb.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spipbb.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/spipbb.php</inclure>
+	</pipeline>
+	<!-- chargement des notifications facon spipbb -->
+	<pipeline> 
+		<nom>notifications</nom> 
+		<!-- action vide pour provoquer l'inclusion de inc/spipbb_notifications.php --> 
+		<action>chargespipbb</action> 
+		<inclure>inc/spipbb_notifications.php</inclure> 
+	</pipeline> 
+
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.0.0;]" />
+	<categorie>communication</categorie>
+</plugin>

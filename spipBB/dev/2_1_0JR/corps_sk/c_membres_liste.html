@@ -1,0 +1,13 @@
+<!-- debut code pour fichier membres_liste.html -->
+
+		<INCLURE{fond=inc_teteforum}{id_rubrique}{lang ?}>
+
+		<p class="space_20"></p>
+
+		[(#REM) c: 16/4/8 Transfert en formulaire pour tri ]
+		[(#REM) c: 7/12/8 dorenavant la balise est evaluee differemment selon la config de spipbb/affiche_membre_defaut ce afin de garder les optimisations intéressantes faites par b_b ]
+		[(#FORMULAIRE_TRI_PROFIL{id_rubrique})]
+
+		<INCLURE{fond=inc_piedforum}{id_rubrique}>
+
+<!-- fin code membres_liste.html -->

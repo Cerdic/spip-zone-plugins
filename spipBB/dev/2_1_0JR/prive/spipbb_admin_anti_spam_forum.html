@@ -1,0 +1,58 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB admin - Page de gestion des forums]
+
+<B_messages>
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB Anti Spam'})]
+[(#REM) ------------------------ Liste et edition ------------------------ ]
+
+<div><table border='1' cellspacing='1' cellpadding='3' width="100%">
+<thead>
+	<tr>
+		<th class="tsujaut"><:spipbb:sujet_auteur:></th>
+		<th class="tsujet"><:spipbb:sujets:></th>
+		<th class="tmsgvs"><:spipbb:messages:></th>
+		<th class="tdermsg"><:date:></th>
+		<th class="tdermsg"><:ip:></th>
+		<th class="tdermsg"><:spipbb:admin_form_action:></th>
+	</tr>
+</thead>
+
+<BOUCLE_messages(FORUMS){id_secteur}{tout}{!par date_thread}{statut=spam}{pagination 25}>
+<!-- BEGIN topicrow -->
+<tr>
+	<td class="autpost">
+		<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+		<a href=".?exec=auteur_infos&amp;id_auteur=#ID_AUTEUR">#NOM</a>
+		</BOUCLE_auteurp>
+			[(#NOM|sinon{<:spipbb:anonyme:>})]
+		<//B_auteurp>
+	</td>
+	<td class="titre" id="forum#ID_FORUM">
+		#TITRE
+	</td>
+	<td class='verdana2'>
+		[(#TEXTE|smileys)]
+	</td>
+	<td class='verdana2'>
+		[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]</li>
+	</td>
+	<td class='verdana2'>
+		<a title="IP: #IP"><span>#IP</span>&nbsp;</a>
+	</td>
+	<td class='verdana2'>
+		[(#REM) c: 7/12/8 correction de <php echo generer_action_auteur('instituer_forum',"#ID_FORUM-off","ecrire/[(#SELF|url_decode)]") ; > ]
+		[<a href='(#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#URL_ECRIRE{spipbb_admin_anti_spam_forum}})'><:supprimer_message:></a><br />]
+		[(#REM) et de < echo generer_action_auteur('instituer_forum',"#ID_FORUM-publie","ecrire/[(#SELF|url_decode)]") ; >]
+		[<a href='(#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-publie,#URL_ECRIRE{spipbb_admin_anti_spam_forum}})'><:valider_message:></a>]
+	</td>
+</tr>
+</BOUCLE_messages>
+</table></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</B_messages>
+<:spipbb:sw_admin_no_spam:>
+<//B_messages>
