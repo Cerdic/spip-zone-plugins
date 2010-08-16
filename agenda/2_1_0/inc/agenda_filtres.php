@@ -205,17 +205,13 @@ function agenda_affiche_full($i)
 	$agenda = agenda_memo_full(0);
 	$evt_avec = array();
 	$evt_sans = array();
-	if (!$nb) {
-		$d = array(time());
-	} else {
+	if ($nb) {
 		foreach (($args ? $args : array_keys($agenda)) as $k) {
 			if (isset($agenda[$k])&&is_array($agenda[$k]))
 				foreach($agenda[$k] as $d => $v) {
 					$evt_avec[$d] = isset($evt_avec[$d]) ? (array_merge($evt_avec[$d], $v)) : $v;
 				}
 		}
-		$d = array_keys($evt_avec);
-
 		$evenements = agenda_memo_evt_full(0);
 		foreach (($args ? $args : array_keys($evenements)) as $k) {
 			if (isset($evenements[$k])&&is_array($evenements[$k]))
@@ -225,32 +221,7 @@ function agenda_affiche_full($i)
 		}
 	}
 
-	if (count($d)){
-		$mindate = min($d);
-		$start = strtotime($mindate);
-	} else {
-		$mindate = ($j=_request('jour')) * ($m=_request('mois')) * ($a=_request('annee'));
-  	if ($mindate)
-			$start = mktime(0,0,0, $m, $j, $a);
-  	else
-			$start = mktime(0,0,0);
-	}
-
-	if ($type != 'periode')
-		$evt = array($evt_sans, $evt_avec);
-	else
-	{
-		$min = substr($mindate,6,2);
-		$max = $min + ((strtotime(max($d)) - strtotime($mindate)) / (3600 * 24));
-		if ($max < 31) $max = 0;
-			$evt = array($evt_sans, $evt_avec, $min, $max);
-		$type = 'mois';
-	}
-
-	include_spip('inc/agenda');
-	$texte=http_calendrier_init($start, $type, '', '', self(), $evt);
-
-	return $texte;
+	return agenda_periode($type, $nb, $evt_avec, $evt_sans);
 }
 
 
