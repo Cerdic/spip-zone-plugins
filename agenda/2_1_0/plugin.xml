@@ -87,7 +87,8 @@
 		<url>evenements_edit</url>
 		<args>new=oui&amp;id_article=@id_article@</args>
 	</bouton>
-
+	<chemin dir="" />
+	<chemin dir="inclure" />
 	<necessite id='SPIP' version='[2.1.1;]' />
 	<utilise id='spip_bonux' version='[1.9.1;]' />
 <!-- si le plugin fulltext est actif, il faut qu'agenda soit pris en compte avant lui pour le pipeline rechercher_liste_des_champs -->
