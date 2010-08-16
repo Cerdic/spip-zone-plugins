@@ -1,8 +1,7 @@
 <?php
 /*charger*/
 function rubrique_a_linscription_formulaire_charger($flux){
-	
-	if ($flux['args']['form']=='inscription' and lire_config('accepter_inscriptions')=='oui'){
+	if ($flux['args']['form']=='inscription' and lire_meta('accepter_inscriptions')=='oui'){
 		
 		$meta = unserialize(lire_meta('rubrique_a_linscription'));
 		$flux['args']['args'][0] = $meta['statut'];
