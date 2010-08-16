@@ -1,17 +1,18 @@
 <?php
-/*
+/**
  * Plugin spip|microblog
  * (c) Fil 2009-2010
  *
- * envoyer des micromessages depuis SPIP vers twitter ou laconica
- * distribue sous licence GNU/LGPL
+ * Envoyer des micromessages depuis SPIP vers twitter ou laconica
+ * Distribue sous licence GNU/LGPL
  *
  */
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// chargement des valeurs par defaut des champs du formulaire
+/**
+ * Fonction de chargement des valeurs par defaut des champs du formulaire
+ */
 function formulaires_microbloguer_charger_dist(){
 	return 
 		array(
@@ -19,7 +20,12 @@ function formulaires_microbloguer_charger_dist(){
 		);
 }
 
-// chargement des valeurs par defaut des champs du formulaire
+/**
+ * Fonction de vérification du formulaire avant traitement
+ * 
+ * Vérifie la présence d'un statut depuis le champs adéquat
+ * Vérifie que la longueur du statut n'excède pas la longueur maximale
+ */
 function formulaires_microbloguer_verifier_dist(){
 	$erreurs = array();
 	if (!$status = _request('status')){
@@ -33,14 +39,25 @@ function formulaires_microbloguer_verifier_dist(){
 		$erreurs;
 }
 
-
+/**
+ * Fonction de traitement du formulaire
+ * Envoie la contribution au service configuré
+ * 
+ * S'il y a une erreur en retour (false), 
+ * on affiche un message explicitant qu'il y a une erreur dans la configuration
+ */
 function formulaires_microbloguer_traiter_dist(){
 	$res = array();
 	if ($status = _request('status')){
 		include_spip('inc/microblog');
-		microblog($status);
+		$retour = microblog($status);
+		spip_log($retour,'microblog');
 		set_request('status','');
-		$res = array('message_ok'=>$status,'editable'=>true);
+		if($retour){
+			$res = array('message_ok'=>$status,'editable'=>true);
+		}else{
+			$res = array('message_erreur'=>_T('microblog:erreur_verifier_configuration'),'editable'=>true);
+		}
 	}
 	else
 		$res = array('message_erreur'=>'???','editable'=>true);

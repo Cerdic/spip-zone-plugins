@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Plugin spip|microblog
  * (c) Fil 2009-2010
  *
@@ -11,8 +11,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-/*
+/**
  * Envoyer un microblog sur une des plateformes disponibles
+ * 
  * $status : ce qu'on veut ecrire
  * $user, $pass : identifiants
  * $service : quel service
@@ -38,7 +39,7 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	$apis = array(
 		'spipo' => 'http://%user%:%pass%@spip.org/api/statuses/update.xml',
 		'identica' => 'http://%user%:%pass%@identi.ca/api/statuses/update.xml',
-		'twitter' => 'http://%user%:%pass%@twitter.com/statuses/update.xml',
+		'twitter' => 'http://twitter.com/statuses/update.xml',
 		'supertweet' => 'http://%user%:%pass%@api.supertweet.net/statuses/update.xml'
 	);
 
@@ -50,15 +51,45 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 			return false;
 		$api = $apis[$service];
 	}
+	
+	/**
+	 * Si l'API utilisée est twitter, on force le passage en oAuth
+	 */
+	if($service == 'twitter'){
+		if(
+			isset($cfg['twitter_consumer_key']) 
+				&& isset($cfg['twitter_consumer_secret'])
+				&& isset($cfg['twitter_token'])
+				&& isset($cfg['twitter_token_secret'])){
+			// Cas de twitter et oAuth
+			include_spip('inc/twitteroauth');
+			$consumer_key = $cfg['twitter_consumer_key'];
+			$consumer_secret = $cfg['twitter_consumer_secret'];
 
-	if (!isset($user))
-		$user = $cfg['user'];
-	if (!isset($pass))
-		$pass = $cfg['pass'];
+			$connection = new TwitterOAuth($consumer_key, $consumer_secret, $cfg['twitter_token'], $cfg['twitter_token_secret']);
+			
+			if($connection){
+				$oAuth = true;
+			}
+			else{
+				spip_log('Erreur de connexion à twitter, verifier la configuration','microblog');
+				return false;
+			}
+		}
+		else{
+			spip_log('Erreur de connexion à twitter, verifier la configuration','microblog');
+			return false;
+		}
+	}else{
+		if (!isset($user))
+			$user = $cfg['user'];
+		if (!isset($pass))
+			$pass = $cfg['pass'];
 
-	// Inserer les credits d'authentification
-	$api = str_replace(array('%user%','%pass%'), array(urlencode($user),urlencode($pass)), $api);
-
+		// Inserer les credits d'authentification
+		$api = str_replace(array('%user%','%pass%'), array(urlencode($user),urlencode($pass)), $api);
+	}
+	
 	// Preparer le message (utf8 < 140 caracteres)
 	include_spip('inc/charsets');
 	$status = trim(preg_replace(',\s+,', ' ', $status));
@@ -79,9 +110,20 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 		ecrire_meta('microblog_begaie', $begaie);
 
 	// ping et renvoyer la reponse xml
-	include_spip('inc/distant');
-	$ret = recuperer_page($api, false, false, null, $datas);
-	spip_log("$service $user $status ".strlen($ret), 'microblog');
+	if($oAuth){
+		$ret = 'ok';
+		$api = 'statuses/update';
+		$connection->post($api,$datas);
+		if (200 != $connection->http_code){
+			spip_log('Erreur '.$connection->http_code,'microblog');
+			return false;
+		}
+	}else{
+		include_spip('inc/distant');
+		$ret = recuperer_page($api, false, false, null, $datas);
+		spip_log("$service $user $status ".strlen($ret), 'microblog');
+	}
+	
 	return $ret;
 }
 

@@ -3,53 +3,58 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
-  // A
-  'article' => 'article',
+	// A
+	'article' => 'article',
 
 	// B
 	'bouton_envoyer' => 'Envoyer',
 
-  // C
-  'choisir' => 'choisir',
-  'compte_tests' => 'Compte de tests',
-  'compte_defaut' => 'Compte par d&#233;faut pour la fonction',
-  'creer_compte_services' => 'Vous pouvez cr&#233;er un compte pour votre site SPIP sur l\'un des services suivants',
+	// C
+	'choisir' => 'choisir',
+	'compte_tests' => 'Compte de tests',
+	'compte_defaut' => 'Compte par d&#233;faut pour la fonction',
+	'creer_compte_services' => 'Vous pouvez cr&#233;er un compte pour votre site SPIP sur l\'un des services suivants',
 
-  // E
-  'elements_signaler' => 'Elements &#224; signaler sur le flux public ci-dessus',
+	// E
+	'elements_signaler' => 'Elements &#224; signaler sur le flux public ci-dessus',
+	'erreur_verifier_configuration' => 'Il y a une erreur, veuillez v&eacute;rifiez la configuration.',
+	'explication_twitter_api_oauth' => 'L\'API oAuth de twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>. Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration puis un lien plus bas permettra d\'associer un compte twitter &agrave; ce site.',
 
 	// I
 	'invite' => 'Invite',
 	'invite_statut' => 'Invite de statut',
 	'invite_statut_explications' => 'Le plugin peut afficher dans l\'espace priv&#233; une invite de statut. Voulez-vous afficher une invite de statut pour les r&#233;dacteurs autoris&#233;s (par d&#233;faut&nbsp;: les administrateurs du site) ?',
 	'invite_afficher' => 'Afficher l\'invite de statut',
-	
 
-  // L
+	// L
+	'label_associer_compte_twitter' => 'Associer votre compte twitter &agrave; ce site',
+	'label_dissocier_compte_twitter' => 'Dissocier le compte twitter actuellement utilis&eacute; (<a href="@url@">@nom@</a>)',
 	'label_status' => 'Quoi de neuf ?',
+	'label_twitter_consumer_key' => 'Cl&eacute; cliente (consumer key) de l\'API Twitter',
+	'label_twitter_consumer_secret' => 'Cl&eacute; secr&ecirc;te (consumer secret) de l\'API Twitter',
+	'label_username' => 'Nom d\'utilisateur',
 
 	// P
-  'presentation_spipo' => 'le site de la communaut&#233; SPIP',
-  'presentation_laconica' => 'le site public du logiciel laconi.ca',
+	'presentation_spipo' => 'le site de la communaut&#233; SPIP',
+	'presentation_laconica' => 'le site public du logiciel laconi.ca',
 
-  // N
-  'notifications' => 'Notifications',
-  'notifications_publiques' => 'Notifications publiques',
+	// N
+	'notifications' => 'Notifications',
+	'notifications_publiques' => 'Notifications publiques',
 
 	// P
-  'poster_forums' => 'Forums post&#233;s',
-  'proposer_articles' => 'Articles propos&#233;s',
-  'propose' => 'propos&#233;',
+	'poster_forums' => 'Forums post&#233;s',
+	'proposer_articles' => 'Articles propos&#233;s',
+	'propose' => 'propos&#233;',
 	'publier_articles' => 'Articles publi&#233;s',
-  'publie' => 'publi&#233;',
+	'publie' => 'publi&#233;',
 	'publier_articles_futurs_immediatement'=>'Annoncer les articles quelle que soit leur date de publication',
 	'publier_articles_futurs_visibles'=>'Ne pas annoncer les articles avant la date de publication fix&eacute;e',
 	'publier_articles_shorturl'=>'Utiliser des urls courtes (n&#233;cessite un .htaccess)',
 	'publier_articles_attente' => 'Espacer les publications dans le temps (minutes)',
 
 	// S
-  'service' => 'Service'
+	'service' => 'Service'
 
 );
 
