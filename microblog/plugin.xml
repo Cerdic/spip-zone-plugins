@@ -9,7 +9,7 @@
 	
 	Utilise la librairie [twitteroauth->http://github.com/abraham/twitteroauth] d'Abraham Williams pour l'API oAuth de twitter.
 	</description>
-	<lien>http://www.spip-contrib.net/Microblog</lien>
+	<lien>http://www.spip-contrib.net/Microblog,3051</lien>
 	<prefix>microblog</prefix>
 	<icon>images/microblog.png</icon>
 
