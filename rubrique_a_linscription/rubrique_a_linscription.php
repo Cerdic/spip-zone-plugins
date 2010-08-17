@@ -1,9 +1,10 @@
 <?php
 /*charger*/
 function rubrique_a_linscription_formulaire_charger($flux){
-	if ($flux['args']['form']=='inscription' and lire_meta('accepter_inscriptions')=='oui'){
+	$meta = unserialize(lire_meta('rubrique_a_linscription'));
+	if ($flux['args']['form']=='inscription' and lire_meta('accepter_inscriptions')=='oui' and (!$meta['argument_explicite']) or ($meta['argument_explicite']=='on' and $flux['args']['args'][0] == 'rubrique_a_linscription')){
 		
-		$meta = unserialize(lire_meta('rubrique_a_linscription'));
+		
 		$flux['args']['args'][0] = $meta['statut'];
 		$flux['data']['_commentaire'] = _T('rubrique_a_linscription:rubrique_reserve_'.$meta['statut'].'_'.$meta['espace_prive_voir']);
 		
@@ -13,7 +14,8 @@ function rubrique_a_linscription_formulaire_charger($flux){
 
 /* Traiter */
 function rubrique_a_linscription_formulaire_traiter($flux){
-	if ($flux['args']['form']=='inscription'){
+	$meta = unserialize(lire_meta('rubrique_a_linscription'));
+	if ($flux['args']['form']=='inscription' and (!$meta['argument_explicite']) or ($meta['argument_explicite']=='on' and $flux['args']['args'][0] == 'rubrique_a_linscription')){
 
 		// Récuperation des paramètres
 		$mail = _request('mail_inscription');
@@ -22,7 +24,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		$id_auteur = sql_getfetsel('id_auteur','spip_auteurs','email='.sql_quote($mail));
 		
 		include_spip('inc/meta');
-		$meta = unserialize(lire_meta('rubrique_a_linscription'));
+		
 		//Modification du statut temporaire
 		sql_updateq('spip_auteurs',array('bio'=>$meta['statut']),'id_auteur='.$id_auteur); 
 
