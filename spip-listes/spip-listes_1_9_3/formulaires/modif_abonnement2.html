@@ -76,7 +76,7 @@
 				[(#TOTAL_BOUCLE|!={1}|oui)
 					<li>
 						<label lang='#LANG'>
-							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:total_boucle|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
+							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
 							<span class='liste-titre'>#TITRE</span>
 							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 						</label>
@@ -101,15 +101,15 @@
 				<legend class="legend"><:spiplistes:format_de_reception:> :</legend>
 				<ul class='liste-formats'>
 				<li>
-					<input name="suppl_abo" [(#ENV{format}|=={html}|?{'checked="checked"',''})] value="html" type="radio" id='fslhtml' />
+					<input name="suppl_abo"[ (#ENV{format}|=={html}|?{'checked="checked"',''})] value="html" type="radio" id='fslhtml' />
 					<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label>
 				</li>
 				<li>
-					<input name="suppl_abo" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] value="texte" type="radio" id='fsltexte' />
+					<input name="suppl_abo"[ (#ENV{format}|=={texte}|?{'checked="checked"',''})] value="texte" type="radio" id='fsltexte' />
 					<label for='fsltexte'><:spiplistes:texte_brut:></label>
 				</li>
 				<li>
-					<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked="checked"',''})] value="non" type="radio" id='fslnon' />
+					<input name="suppl_abo"[ (#ENV{format}|=={non}|?{'checked="checked"',''})] value="non" type="radio" id='fslnon' />
 					<label for='fslnon'><:spiplistes:desabonnement:></label>
 				</li>
 				</ul>
