@@ -26,6 +26,7 @@
  */
 function genie_spipmotion_file($time)  {
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
+	spip_log('début de tache cron','spipmotion');
 	spip_log("Il y a $nb_encodages vidéo(s) à encoder","spipmotion");
 	$en_cours = sql_getfetsel('id_spipmotion_attente','spip_spipmotion_attentes',"encode='en_cours'");
 	if(($nb_encodages>0) && ($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !intval($en_cours)){
@@ -47,7 +48,9 @@ function genie_spipmotion_file($time)  {
 		spip_log('Attention, problème dans la configuration','spipmotion');
 	}else if(intval($en_cours)){
 		spip_log("L'id $en_cours de la file d'attente est en cours d'encodage",'spipmotion');
+		spip_log("On attend sa fin avant d'en commencer un nouveau",'spipmotion');
 	}
+	spip_log('fin de tache cron','spipmotion');
 	return 1;
 }
 ?>

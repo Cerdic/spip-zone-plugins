@@ -28,6 +28,7 @@ function inc_spipmotion_recuperer_infos($id_document){
 	 * Si c'est un mov ou MP4 on applique qt-faststart
 	 */
 	if(($document['extension'] == 'flv') && !$GLOBALS['meta']['spipmotion_flvtool_casse']){
+		spip_log('on lance flvtool pour être sûr','spipmotion');
 		$metadatas = @shell_exec("flvtool2 -xUP $movie_chemin");
 	}
 	if(in_array($document['extension'],array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
@@ -83,8 +84,16 @@ function inc_spipmotion_recuperer_infos($id_document){
 			$infos['audiobitrate'] = floor($audiobitrate_array['audiodatarate'][0]*1000);
 		}
 	}
+	
+	foreach($infos as $key => $val){
+		if(!$val){
+			unset($infos[$key]);
+		}	
+	}
 	spip_log($infos,'spipmotion');
 	include_spip('inc/modifier');
-	return revision_document($id_document, $infos);
+	
+	revision_document($id_document, $infos);
+	return true;
 }
 ?>

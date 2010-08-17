@@ -416,6 +416,7 @@ function encodage($source,$doc_attente){
 	}
 
 	if($encodage_ok){
+		spip_log('on ajoute le document dans la base','spipmotion');
 		/**
 		 * Ajout du nouveau document dans la base de donnée de SPIP
 		 * NB : la récupération des infos et du logo est faite automatiquement par

@@ -15,6 +15,7 @@
  * @param int $id_document
  */
 function inc_spipmotion_recuperer_logo($id_document){
+	spip_log("SPIPMOTION : recuperation d un logo du document $id_document","spipmotion");
 	if(!intval($id_document) OR !class_exists('ffmpeg_movie')){
 		return;
 	}
