@@ -101,7 +101,11 @@ function geoportail_formulaire_centrer(x, y, zoom)
 // On a selectionne une adresse
 function selectFormulaireAdresse(f)
 {	if (carte_formulaire)
-	{	geoportail_formulaire_centrer();
+	{	// Ne pas afficher le calque (car empeche la selection de la punaise)
+		var l = carte_formulaire.getMap().getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
+		if (l.length > 0) l[0].setVisibility(false);
+		// Centrer la punaise
+		geoportail_formulaire_centrer();
 		if (f.attributes.address.streetAddress.streets[0].name) carte_formulaire.getMap().zoomTo(15);
 		else carte_formulaire.getMap().zoomTo(13);
 	}
