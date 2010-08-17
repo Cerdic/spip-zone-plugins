@@ -28,7 +28,7 @@
 				<input type="text" class="spip_formulaires" name="email_oubli" value="" />
 				<input type="hidden" name="oubli_pass" value="oui" />
 				<div class="spip_bouton" style="text-align:right">
-				<input type="submit" class="spip_bouton" name="oubli" value="<:pass_ok:>" /></div>
+				<input type="submit" class="submit" name="oubli" value="<:pass_ok:>" /></div>
 		</div>
 	</form>
 
@@ -154,7 +154,7 @@
 			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 			<li>
 						<label lang='#LANG'>
-							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
+							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:total_boucle|?{' ',''})checked="checked"] value="#ID_LISTE" />
 							<span class='liste-titre'>#TITRE</span>
 							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 						</label>
@@ -196,23 +196,32 @@
 		<ul class='liste-formats'>
 			<li>
 				<label class="block">
-					<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:html:><:spiplistes:html_description:></span>
+					<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{' ',''})checked="checked"] type="radio" />
+					<span><:spiplistes:html:><:spiplistes:html_description:></span>
 				</label>
 			</li>
 			<li>
 				<label class="block">
-					<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:texte_brut:></span>
+					<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{' ',''})checked="checked"] type="radio" />
+					<span><:spiplistes:texte_brut:></span>
 				</label>
 			</li>
 		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:spiplistes:suspendre_abonnement_:> : </legend>
-		<label class="block"><input name="suppl_abo" value="non" [(#ENV{format}|=={non}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:suspendre_abonnement_:></span></label>
+		<ul>
+			<li>
+				<label class="block">
+					<input name="suppl_abo" value="non" [(#ENV{format}|=={non}|?{' ',''})checked="checked"] type="radio" />
+					<span><:spiplistes:suspendre_abonnement_:></span>
+				</label>
+			</li>
+		</ul>
 	</fieldset>
 	]
-	<p class="spip_bouton">
-		<input type="submit" name="Valider" value="<:bouton_valider:>" />
+	<p class="boutons spip_bouton">
+		<input type="submit" class="submit" name="Valider" value="<:bouton_valider:>" />
 	</p>
 	</form>][<!--(#REM) fin mode_login -->]
 </div>
