@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accepter_inscription'		=>"Pour utiliser ce plugin vous devez <a href='?exec=config_contenu#configurer-redacteurs'>autoriser l'inscription de rédacteurs</a>.",
 	'cfg_pas_creer_mot'			=>'Ne pas créer de mot clef',
+	'cfg_argument_explicite'	=>'Le formulaire d\'inscription ne crée la rubrique ad hoc que si on lui passe l\'argument {rubrique_a_linscription}',
 	'cfg_avertissement_changement'	=> 'Attention : si vous modifiez ce paramètre, les rubriques déja créées ne changeront pas de place pour autant.',
 	'cfg_espace_prive_voir'		=> "Ne pas autoriser les auteurs ainsi créés à voir d'autres rubriques dans l'espace privé",
 	'cfg_espace_prive'			=> "Lien avec l'espace privé",
