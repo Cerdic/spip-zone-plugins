@@ -9,7 +9,7 @@
 	<version>
 	0.4.8
 	</version>
-	<version_base>0.7.3</version_base>
+	<version_base>0.7.4</version_base>
 	<etat>
 	experimental
 	</etat>
@@ -63,7 +63,16 @@
 		<nom>header_prive</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
-
+	<bouton id='spipmotion_file' parent='naviguer'>
+		<titre>spipmotion:titre_page_file</titre>
+		<icone>images/spipmotion-24.png</icone>
+		<url>spipmotion_file</url>
+	</bouton>
+	<bouton id='ffmpeg_infos' parent='configuration'>
+		<titre>spipmotion:titre_page_ffmpeg_infos</titre>
+		<icone>images/spipmotion-24.png</icone>
+		<url>ffmpeg_infos</url>
+	</bouton>
 	<install>base/spipmotion_upgrade.php</install>
 
 	<necessite id="SPIP" version="[2.1.1;]" />
