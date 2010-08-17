@@ -25,10 +25,10 @@
 	
 	<form action="#SELF#spiplistes_formabo" method="post">
 		<div style="text-align:right">
-				<input type="text" class="spip_formulaires" name="email_oubli" value="" />
-				<input type="hidden" name="oubli_pass" value="oui" />
-				<div class="spip_bouton" style="text-align:right">
-				<input type="submit" class="submit" name="oubli" value="<:pass_ok:>" /></div>
+			<input type="text" class="spip_formulaires" name="email_oubli" value="" />
+			<input type="hidden" name="oubli_pass" value="oui" />
+			<div class="spip_bouton" style="text-align:right">
+			<input type="submit" class="submit" name="oubli" value="<:pass_ok:>" /></div>
 		</div>
 	</form>
 
@@ -66,7 +66,7 @@
 		<p><:form_forum_indiquer_nom_email:></p>
 		<div class="coord">
 		<label for="nom_inscription_"><:form_pet_votre_nom:> :</label>
-		<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
+		<input type="text" class="text forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
 		</div>]
 [<!--(#REM)
 	
@@ -84,7 +84,7 @@
 		<p><:form_forum_indiquer_nom_email:></p>
 		<div class="coord">
 		<label for="nom_inscription_"><:form_pet_votre_nom:> :</label>
-		<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
+		<input type="text" class="text forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
 		</div>
 	][(#CONFIG{abonnement_config}|=={membre}|?{'',' '})
 		<p><:spiplistes:abonnement_presentation:></p>
@@ -92,7 +92,7 @@
 ]
 	<div class="coord">
 	<label for="mail_inscription_"><:form_pet_votre_email:> :</label>
-	<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
+	<input type="text" class="text forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
 	</div>
 [(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
 	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
@@ -103,7 +103,7 @@
 ]
 </fieldset>
 ]][<!--(#REM) =============== FIN texte d'inscription =============== -->]
-[<p class="message-formulaire">(#ENV*{reponse_formulaire})</p>]
+[<p class="message-formulaire reponse_formulaire">(#ENV*{reponse_formulaire})</p>]
 
 [<!--(#REM)
 
@@ -121,8 +121,8 @@
 	<B_id_liste>
 	<BOUCLE_id_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste=#ENV{id_liste}} {0,(#ENV{mode_login}|?{1,0})}>
 		[<fieldset>
-		[<legend>(#TITRE)</legend>]
-		(#TEXTE)
+			[<legend>(#TITRE)</legend>]
+			(#TEXTE)
 		</fieldset>]
 	</BOUCLE_id_liste>
 	</B_id_liste>
@@ -169,7 +169,7 @@
 			[(#ENV{mode_login}|oui)<fieldset><:spiplistes:aucune_liste_publique:></fieldset>]
 		]
 		[(#ENV{reponse_formulaire}|oui)
-			[(#ENV{mode_login}|oui)<fieldset style="color:#000"><legend><:spiplistes:abo_1_lettre:></legend></fieldset>]
+			[(#ENV{mode_login}|oui)<fieldset><legend><:spiplistes:abo_1_lettre:></legend></fieldset>]
 		]
 	<//B_listes>
 	
@@ -196,13 +196,13 @@
 		<ul class='liste-formats'>
 			<li>
 				<label class="block">
-					<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{' ',''})checked="checked"] type="radio" />
+					<input name="suppl_abo" value="html"[ (#ENV{format}|=={html}|?{' ',''})checked="checked"] type="radio" />
 					<span><:spiplistes:html:><:spiplistes:html_description:></span>
 				</label>
 			</li>
 			<li>
 				<label class="block">
-					<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{' ',''})checked="checked"] type="radio" />
+					<input name="suppl_abo" value="texte"[ (#ENV{format}|=={texte}|?{' ',''})checked="checked"] type="radio" />
 					<span><:spiplistes:texte_brut:></span>
 				</label>
 			</li>
@@ -213,7 +213,7 @@
 		<ul>
 			<li>
 				<label class="block">
-					<input name="suppl_abo" value="non" [(#ENV{format}|=={non}|?{' ',''})checked="checked"] type="radio" />
+					<input name="suppl_abo" value="non"[ (#ENV{format}|=={non}|?{' ',''})checked="checked"] type="radio" />
 					<span><:spiplistes:suspendre_abonnement_:></span>
 				</label>
 			</li>
