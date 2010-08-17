@@ -9,8 +9,8 @@
 			<BOUCLE_item(ARTICLES){id_article=#ID_ARTICLE}>["id": "(#ID_ARTICLE)",]
 			<BOUCLE_gis(GIS){id_article}>["lat": "(#LAT)",]
 			["lonx": "(#LONX)",]</BOUCLE_gis>
-			<BOUCLE_icon(MOTS){id_article}{type=marker_icon}{0,1}>["icon": "#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)",]</BOUCLE_icon>
-			["data": "(#URL_PAGE{json-gis-marker})&id_article=#ID_ARTICLE"]
+			["data": "(#URL_PAGE{json-gis-marker})&id_article=#ID_ARTICLE"],
+			"icon": {<BOUCLE_iconc(MOTS){id_article}{type=marker_icon}{0,1}>["image": "(#LOGO_MOT_NORMAL|extraire_attribut{src})"][, "imageWidth": "(#LOGO_MOT_NORMAL|largeur)"][, "imageHeight": "(#LOGO_MOT_NORMAL|hauteur)"][, "shadow": "(#LOGO_MOT_SURVOL|extraire_attribut{src})"][, "shadowWidth": "(#LOGO_MOT_SURVOL|largeur)"][, "shadowHeight": "(#LOGO_MOT_SURVOL|hauteur)"]</BOUCLE_iconc>}
 			</BOUCLE_item>
 		}</BOUCLE_json>
 		]
