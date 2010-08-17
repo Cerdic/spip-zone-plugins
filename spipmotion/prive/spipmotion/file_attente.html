@@ -1,7 +1,7 @@
 <BOUCLE_log(SPIPMOTION_ATTENTES){id_spipmotion_attente=#ENV{log}}{encode=erreur}>
 [<div class="spipmotion_info_log">
 	<p><strong><:spipmotion:titre_fichier_log{id=#ID_SPIPMOTION_ATTENTE}:></strong></p>
-	(#INFOS|table_valeur{log}|appliquer_filtre{coloration_code_color,bash}|sinon{[(#INFOS|table_valeur{log})]})
+	(#INFOS|table_valeur{log}|appliquer_filtre{coloration_code_color,bash}|sinon{[(#INFOS|table_valeur{log}|nl2br)]})
 </div>]
 </BOUCLE_log>
 <B_spipmotion_file>
