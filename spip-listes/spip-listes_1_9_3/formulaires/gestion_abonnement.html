@@ -17,7 +17,7 @@
 		[(#INCLURE{fond=formulaires/inc-liste_des_listes}{env}
 			{explication=<:spiplistes:vous_etes_abonne_aux_listes_selectionnees_:>})]
 		<li class="bloc-formats fieldset">
-			<fieldset><h3 class="legend"><:spiplistes:format_de_reception:></h3>
+			<fieldset><legend class="legend"><:spiplistes:format_de_reception:></legend>
 			<ul><li>
 				<div class="choix">
 					<input type="radio" class="radio" name="suppl_abo" [(#ENV{format}|=={html}|?{'checked="checked"',''})] value="html" id='fslhtml' />
@@ -31,7 +31,7 @@
 			</fieldset>
 		</li>
 		<li class="desabonnement fieldset">
-			<fieldset><h3 class="legend"><:spiplistes:suspendre_abonnement_:></h3>
+			<fieldset><legend class="legend"><:spiplistes:suspendre_abonnement_:></legend>
 			<ul><li>
 				<div class="choix">
 					<input type="radio" class="radio" name="suppl_abo" value="non" id='fslnon' />
@@ -40,7 +40,7 @@
 			</li></ul>
 			</fieldset>
 		</li>
-		<p class="spip_bouton">
+		<p class="boutons spip_bouton">
 			<input type='submit' class='submit' name='valider' value='<:spiplistes:abonnement_bouton:>' />
 		</p>
 	</div></form>]

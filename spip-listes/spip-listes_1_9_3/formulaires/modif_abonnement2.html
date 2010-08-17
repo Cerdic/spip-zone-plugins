@@ -52,7 +52,7 @@
 </BOUCLE_auteur>
 <B_listes>
 	<li class="fieldset">
-		<h3 class="legend">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})] :</h3>
+		<legend class="legend">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})] :</legend>
 		<ul class='liste-des-listes'>
 		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 		[<!--(#REM) 
@@ -76,7 +76,7 @@
 				[(#TOTAL_BOUCLE|!={1}|oui)
 					<li>
 						<label lang='#LANG'>
-							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
+							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:total_boucle|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
 							<span class='liste-titre'>#TITRE</span>
 							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 						</label>
@@ -98,7 +98,7 @@
 	
 -->][(#ENV{editable}|oui)
 			<div class='bloc-formats'>
-				<h3 class="legend"><:spiplistes:format_de_reception:> :</h3>
+				<legend class="legend"><:spiplistes:format_de_reception:> :</legend>
 				<ul class='liste-formats'>
 				<li>
 					<input name="suppl_abo" [(#ENV{format}|=={html}|?{'checked="checked"',''})] value="html" type="radio" id='fslhtml' />
@@ -114,7 +114,7 @@
 				</li>
 				</ul>
 			</div>
-			<p class="spip_bouton">
+			<p class="boutons spip_bouton">
 				<input type='submit' class='submit' name='valider' value='<:spiplistes:abonnement_bouton:>' />
 				<input type="hidden" name="d" value="[(#ENV{d})]" />
 				<input type="hidden" name="confirm"  value="oui" />
