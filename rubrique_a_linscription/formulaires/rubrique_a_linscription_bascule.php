@@ -21,7 +21,7 @@ function formulaires_rubrique_a_linscription_bascule_traiter(){
 		}
 		
 	}
-	return array('message_ok'=>_T(':rubrique_a_linscription:auteur_basculee',array('id_auteurs'=>implode(',',$id_auteurs))));
+	return array('message_ok'=>_T('rubrique_a_linscription:auteur_bascule',array('id_auteurs'=>implode(',',$id_auteurs))));
 }
 
 ?>
