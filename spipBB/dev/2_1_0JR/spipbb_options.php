@@ -66,11 +66,10 @@ function test_inscription($mode, $mail, $nom, $id=0)
 
 	// Controle de la ban_list
 
-	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 
 	if (is_array($spipbb_meta) AND
-		$spipbb_meta['configure'] == 'oui' AND
- 		$spipbb_meta['config_spam_words'] == 'oui' ) {
+		lire_config('spipbb/activer_spipbb', '') == 'on' AND
+ 		lire_config('spipbb/config_spam_mots', '') == 'on' ) {
 
 		$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
 
@@ -111,11 +110,8 @@ define('_SUIVI_FORUM_THREAD', true);
 // lire_config fourni par CFG
 // Voir si pas plus simple d'utiliser meta ?
 if(function_exists('lire_config')) {
-	// a activer seulement si spipbb est configure
-	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 
-	if (is_array($spipbb_meta) AND
-		$spipbb_meta['configure'] == 'oui' ) {
+	if (lire_config('spipbb/activer_spipbb', '') == 'on') {
 
 		if (lire_config('spipbb/support_auteurs')=='extra') {
 			# champs a creer

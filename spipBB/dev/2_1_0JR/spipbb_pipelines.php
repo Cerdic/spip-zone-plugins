@@ -1,4 +1,25 @@
 <?php
+#----------------------------------------------------------#
+#  Plugin  : spipBB - Licence : GPL                        #
+#  File    : spipbb_pipelines - pipelines                  #
+#  Authors : Chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #
 # bouton interface spip col. droite sur exec/naviguer (rubrique)
 #
@@ -6,38 +27,29 @@ function spipbb_affiche_droite($flux)
 {
 	// [fr] Peut etre ajouter un controle d acces
 	// [en] Todo : maybe add access control
-
-	if ( ($flux['args']['exec']=='naviguer') AND (!empty($flux['args']['id_rubrique'])) )
-	{ // AND (!empty($GLOBALS['meta']['spipbb']))
+	if ( ($flux['args']['exec']=='naviguer') AND (intval($flux['args']['id_rubrique']) > 0)  )
+	{
 		include_spip('inc/spipbb_util'); // pour spipbb_is_configured
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
 		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
-		if ( !spipbb_is_configured()
-			OR ($GLOBALS['spipbb']['configure']!='oui')
-			OR (empty($GLOBALS['spipbb']['id_secteur'])) ) {
+		if ((lire_config('spipbb/activer_spipbb', '') != 'on')
+			OR (intval(lire_config('spipbb/secteur_spipbb', '')) < 0)) {
 		// [fr] configuration pas terminee -> lien vers la config
 			$url_lien = generer_url_ecrire('spipbb_configuration',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
-			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" ;
-			$flux['data'] .= _T('spipbb:admin_titre') . " :</b>\n";
-			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
-			$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
-			$flux['data'] .= "<img src='"._DIR_PLUGIN_SPIPBB ."img_pack/spipbb-24.png' width='24' alt='";
-			$flux['data'] .= _T('spipbb:admin_titre') . "' /></span></a></td>\n" ;
-			$flux['data'] .= "<td class='cellule-h-lien'><a href='$url_lien' class='cellule-h'>" ;
-			$flux['data'] .= _T('spipbb:config_spipbb') . "</a></td></tr></table>\n</div>\n" ;
+			$flux['data'] .= "<div style='font-size: x-small'><h3>" . _T('spipbb:admin_titre') . " :</h3>\n";
+			$flux['data'] .= "<img src='".chemin('img_pack/spipbb-24.png')."' width='24' alt='"._T('spipbb:admin_surtitre')."' />";
+			$flux['data'] .= "<a href='$url_lien' style='font-size: 1.2em;'>"._T('spipbb:config_spipbb')."</a>";
+			$flux['data'] .= "</div>";
 			$flux['data'] .= fin_cadre_relief(true);
-		} elseif (is_array($r) AND ($r['id_secteur']!=$GLOBALS['meta']['spipbb']['id_secteur'])) {
+		} elseif (is_array($r) AND ($r['id_secteur']!=lire_config('spipbb/secteur_spipbb'))) {
 		// [fr] configuration Ok et on est dans la rubrique forum
 			$url_lien = generer_url_ecrire('spipbb_admin',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
-			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('spipbb:admin_titre') . " :</b>\n";
-			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
-			$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
-			$flux['data'] .= "<img src='"._DIR_PLUGIN_SPIPBB ."img_pack/spipbb-24.png' width='24' alt='";
-			$flux['data'] .= _T('spipbb:admin_surtitre') . "' /></span></a></td>\n" ;
-			$flux['data'] .= "<td class='cellule-h-lien'><a href='$url_lien' class='cellule-h'>" ;
-			$flux['data'] .= _T('spipbb:admin_sous_titre') . "</a></td></tr></table>\n</div>\n" ;
+			$flux['data'] .= "<div style='font-size: x-small'><h3>" . _T('spipbb:admin_titre') . " :</h3>\n";
+			$flux['data'] .= "<img src='".chemin('img_pack/spipbb-24.png')."' width='24' alt='"._T('spipbb:admin_surtitre')."' />";
+			$flux['data'] .= "<a href='$url_lien' style='font-size: 1.2em;'>"._T('spipbb:admin_sous_titre')."</a>";
+			$flux['data'] .= "</div>";
 			$flux['data'] .= fin_cadre_relief(true);
 		}
 	}
@@ -69,50 +81,4 @@ function spipbb_taches_generales_cron($taches_generales){
 	return $taches_generales;
 } // spipbb_taches_generales_cron
 
-#
-# Onglet dans la page de configuration
-#
-function spipbb_ajouter_onglets($flux){
-	// si on est admin...
-	if ($flux['args']=='configuration' && spipbb_autoriser())
-		$flux['data']['spipbb']= new Bouton(find_in_path('img_pack/spipbb-24.png'), _T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'));
-	return $flux;
-}
-
-
-// [Backick] Définir le squelette a utiliser si on est dans le cas d'une rubrique de spipBB 
-function spipbb_styliser($flux){
-	
-
-	// si article ou rubrique
-	if (($fond = $flux['args']['fond'])
-	AND in_array($fond, array('article','rubrique'))) {
-		
-		$ext = $flux['args']['ext'];
-		
-		if ($id_rubrique = $flux['args']['id_rubrique']) {
-			// calcul du secteur
-			$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
-			
-			// je retrouve le secteur de spipBB grâce à CFG
-			$spipbb_id_secteur =  lire_config('spipbb/id_secteur');
-			// comparaison du secteur avec la config de spipBB
-			if ($id_secteur==$spipbb_id_secteur) {
-				// si un squelette $fond_spipbb existe
-                if ($squelette = test_squelette_spipbb($fond, $ext)) {
-                    $flux['data'] = $squelette;
-                }
-			}
-
-		}
-	}
-	return $flux;
-}
-
-function test_squelette_spipbb($fond, $ext) {
-    if ($squelette = find_in_path($fond."_spipbb.$ext")) {
-        return substr($squelette, 0, -strlen(".$ext"));
-    }
-    return false;
-}
-
+?>

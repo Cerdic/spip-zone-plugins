@@ -1,28 +1,4 @@
 <?php
-#----------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                        #
-#  File    : action/spipbb_configurer                      #
-#  Authors : chryjs, 2008                                  #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
-#  Contact : chryjs¡@!free¡.!fr                            #
-#----------------------------------------------------------#
-
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-// * [fr] Acces restreint, plugin pour SPIP * //
-// * [en] Restricted access, SPIP plugin * //
-
 // inspire de ecrire/action/configurer.php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -213,71 +189,6 @@ function spipbb_appliquer_modifs_config($arg='') {
 			} // switch
 		} // if modif
 	} // foreach
-
-	// demande de creation d'un secteur contenant un forum spipbb preconfigure
-	if ($arg=="spipbb_rubriques" AND _request('spipbbrub_now') AND empty($spipbb_metas['id_secteur']) ) 
-	{
-	//		if (autoriser('publierdans', 'rubrique', $id_rubrique))  ??
-
-		lang_select($GLOBALS['visiteur_session']['lang']);
-		$lang = $GLOBALS['spip_lang'];
-		if (!$lang) $lang=$GLOBALS['meta']['langue_site'];
-		include_spip('inc/rubriques');
-		$id_secteur=creer_rubrique_nommee(_T('spipbb:forums_spipbb')); // inc/rubriques
-		sql_updateq('spip_rubriques',array('statut'=>'publie'),"id_rubrique=$id_secteur");
-		$spipbb_metas['id_secteur'] = $id_secteur;
-		$id_categorie=creer_rubrique_nommee(_T('spipbb:forums_categories'),$id_secteur);
-		sql_updateq('spip_rubriques',array('statut'=>'publie'),"id_rubrique=$id_categorie");
-		$id_forum = sql_insertq("spip_articles", array(
-							'titre' => _T('spipbb:forums_titre'),
-							'id_rubrique' => $id_categorie,
-							'id_secteur' =>  $id_secteur,
-							'date' => 'NOW()',
-							'accepter_forum' => 'oui',
-							'statut' => 'publie',
-							'lang' => $lang)
-					);
-		// controler si le serveur n'a pas renvoye une erreur
-		if ($id_forum > 0) 
-			sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_article' => $id_forum));;
-
-		// Invalider les caches
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_article/$id_forum'");
-
-		$reconf=true;
-	}
-	
-	// demande de creation d'un group de mots cles preconfigure
-	if ($arg=="spipbb_mots_cles" 
-		AND _request('spipbbmots_now') 
-//		AND ( $spipbb_metas['config_groupe_mots']!='oui' OR $spipbb_metas['config_mot_cles']!='oui') 
-		) 
-	{
-		// on cherche s'il n'existe pas deja
-		$row = sql_fetsel('id_groupe','spip_groupes_mots', "titre = 'spipbb'" ,'','','1');
-		if (!$row) { // Celui la n'existe pas
-			$id_groupe = sql_insertq("spip_groupes_mots",array(
-					'titre' => 'spipbb',
-					'descriptif' => _T('spipbb:mot_groupe_moderation'),
-					'tables_liees' => 'articles,rubriques,forum',
-					'unseul' =>'non',
-					'obligatoire' => 'non',
-					'minirezo' => 'oui',
-					'comite' => 'oui',
-					'forum' => 'oui' )
-						);
-			$row['id_groupe'] = $id_groupe;
-			}
-		$spipbb_metas['id_groupe_mot'] = $row['id_groupe'];
-		$spipbb_metas['config_groupe_mots']='oui';
-		// on cree les mots cles associes
-		$spipbb_metas['id_mot_ferme'] = spipbb_init_mot_cle("ferme",$spipbb_metas['id_groupe_mot']);
-		$spipbb_metas['id_mot_annonce'] = spipbb_init_mot_cle("annonce",$spipbb_metas['id_groupe_mot']);
-		$spipbb_metas['id_mot_postit'] = spipbb_init_mot_cle("postit",$spipbb_metas['id_groupe_mot']);
-		$spipbb_metas['config_mot_cles']='oui';
-		$reconf=true;
-	}
 	
 	if ($reconf) {
 		// controles dans save_metas		
