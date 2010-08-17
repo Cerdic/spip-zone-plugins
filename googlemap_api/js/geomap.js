@@ -83,15 +83,21 @@ function agregarMarcadorJson (jsonItem, idmap, minZoom, maxZoom, markerMngerXD) 
 		var lat = parseFloat(jsonItem.lat);
 		var lng = parseFloat(jsonItem.lonx);
 		var id = parseInt(jsonItem.id);
-		
+
 		var point = new GPoint(lng,lat);
 		var icono_categoria = new GIcon();
-		icono_categoria.image = (jsonItem.icon ? jsonItem.icon : MarkerImgBase);
-		icono_categoria.shadow = URLbase + "img_pack/shadow.png";
-		icono_categoria.iconSize = new GSize(MarkerBaseWidth, MarkerBaseHeight);
-		icono_categoria.shadowSize = new GSize(37, 34);	
-		icono_categoria.iconAnchor = new GPoint((MarkerBaseWidth/2), MarkerBaseHeight);
-		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
+
+		var markerWidth = (jsonItem.icon.imageWidth ? jsonItem.icon.imageWidth : MarkerBaseWidth);
+		var markerHeight = (jsonItem.icon.imageHeight ? jsonItem.icon.imageHeight : MarkerBaseHeight);
+		var mShadowWidth = (jsonItem.icon.shadowWidth ? jsonItem.icon.shadowWidth : MarkerShadowWidth);
+		var mShadowHeight = (jsonItem.icon.shadowHeight ? jsonItem.icon.shadowHeight : MarkerShadowHeight);
+		
+		icono_categoria.image = (jsonItem.icon.image ? jsonItem.icon.image : MarkerImgBase);
+		icono_categoria.shadow = (jsonItem.icon.shadow ? jsonItem.icon.shadow: MarkerShadowBase);
+		icono_categoria.iconSize = new GSize(markerWidth, markerHeight);
+		icono_categoria.shadowSize = new GSize(mShadowWidth, mShadowHeight);	
+		icono_categoria.iconAnchor = new GPoint((markerWidth/2), markerHeight);
+		icono_categoria.infoWindowAnchor = new GPoint(markerWidth*1, 0);
 		
 		eval('marcador_' + id + ' = new GisMarker();');
 		var marcador = eval('marcador_' + id);
@@ -122,7 +128,15 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre
 		var html = "<div id='window_" + id +"' class='window_content'>";
     if (noplayer == '') html += "<div id='player'></div>";
     html += "<h3><a href='" + $("link",xmlItem).text() + "'>" + $("title",xmlItem).text() + "</a></h3>" + $("description",xmlItem).text() + "</div>";
-		var icon = $("geo_icon",xmlItem).text();
+		var icon = $("geo_icon",xmlItem);
+		var iconWidth = icon.attr("width");
+		var iconHeight = icon.attr("height");
+		var shadow = $("geo_icon_shadow",xmlItem);
+		var shadowWidth = shadow.attr("width");
+		var shadowHeight = shadow.attr("height");
+		icon = icon.text();
+		shadow = shadow.text();
+		
 		var son;
 		if (xmlSon.length != 0) son = xmlSon.attr("url");
    	
@@ -131,14 +145,31 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre
 		
 		//creamos un icono para o marcador
 		var icono_categoria = new GIcon();
-		icono_categoria.image = (icon != "" ? icon : MarkerImgBase);
-		if(ombre != ''){
-			icono_categoria.shadow = URLbase + "img_pack/shadow.png";
+		
+		//chequeamos si hai icono personalizado e po–emos a sua url, ancho e alto.
+		if(icon != ''){
+			icono_categoria.image = icon;
+		}else{		
+			icono_categoria.image = MarkerImgBase;
+			iconWidth = MarkerBaseWidth;
+			iconHeight = MarkerBaseHeight;
 		}
-		icono_categoria.iconSize = new GSize(MarkerBaseWidth, MarkerBaseHeight);
-		icono_categoria.shadowSize = new GSize(37, 34);	
-		icono_categoria.iconAnchor = new GPoint((MarkerBaseWidth/2), MarkerBaseHeight);
-		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
+		
+		//chequeamos si queremos sombra
+		if(ombre != ''){
+			//chequeamos si hai sombra personalizada e po–emos a sœa url, ancho e alto.
+			if(shadow != ''){
+				icono_categoria.shadow = shadow;
+			}else{
+				icono_categoria.shadow = MarkerShadowBase;
+				shadowWidth = MarkerShadowWidth;
+				shadowHeight = MarkerShadowHeight;
+			}
+		}
+		icono_categoria.iconSize = new GSize(iconWidth, iconHeight);
+		icono_categoria.shadowSize = new GSize(shadowWidth, shadowHeight);	
+		icono_categoria.iconAnchor = new GPoint((iconWidth/2), iconHeight);
+		icono_categoria.infoWindowAnchor = new GPoint(iconWidth*1, 1);
 			
 		// creamos el marcador con los datos almacenados en las variables
 		eval('marcador_' + id + ' = new GisMarker();');
