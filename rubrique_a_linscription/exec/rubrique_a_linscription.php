@@ -16,7 +16,7 @@ function exec_rubrique_a_linscription_dist(){
 	// colonne gauche
 	echo debut_gauche('', true);
 	
-	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'rubrique_a_linscription'),'data'=>''));
+	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'rubrique_a_linscription'),'data'=>recuperer_fond('fonds/rubrique_a_linscription_bascule')));
 	
 	// colonne droite
 	echo creer_colonne_droite('', true);

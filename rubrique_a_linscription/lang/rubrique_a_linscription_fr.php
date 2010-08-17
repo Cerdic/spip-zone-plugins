@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_mail_public'			=> 'L\'adresse publique de la rubrique',
 	'cfg_mail_privee'			=> 'L\'adresse privée de la rubrique',
 	'cfg_statut'				=> 'Statut des auteurs',
+	'explication_bascule'		=> 'Cochez les auteurs à basculer en auteur "Normal" (ne supprime pas pour autant la restriction d\'administration.).',
 	'mail_adresse_rubrique'		=>"L'adresse de votre rubrique reservée est : \n",
 	'rubrique_a_linscription'	=> 'Rubrique à l\'inscription',
 	'titre_mail_adresse_rubrique'=> 'Votre rubrique reservée',

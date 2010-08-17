@@ -23,7 +23,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		include_spip('base/abstract_sql');
 		$id_auteur = sql_getfetsel('id_auteur','spip_auteurs','email='.sql_quote($mail));
 		
-		include_spip('inc/meta');
+		
 		
 		//Modification du statut temporaire
 		sql_updateq('spip_auteurs',array('bio'=>$meta['statut']),'id_auteur='.$id_auteur); 
