@@ -54,9 +54,9 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 }
 
 function contacts_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_comptes");
+	sql_drop_table("spip_organisations");
 	sql_drop_table("spip_contacts");
-	sql_drop_table("spip_comptes_contacts");	
+	sql_drop_table("spip_organisations_contacts");	
 
 	effacer_meta($nom_meta_base_version);
 }
