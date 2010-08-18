@@ -165,6 +165,7 @@ function step_actualiser_plugins_locaux(){
 				step_actualiser_plugin_local($constante, $p, $actifs, $recents);
 			}		
 		}
+		sql_delete('spip_resultats');
 	}
 }
 
