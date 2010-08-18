@@ -33,26 +33,28 @@
 				append += '<\/button><\/li>';
 				$(this).prev('ul').append(append);
 			});
-			$('.editer_recherche_paquet button.rechercher_plus').each(function(){
-				$(this).click(function(){
-					if ($(this).is('.rechercher_plus')) {
-						$(this).parents('ul').next('ul').slideDown();
-						$(this)
-							.removeClass('rechercher_plus')
-							.addClass('rechercher_moins')
-							.attr('title',text_moins)
-							.html(img_moins);
-					}else{
-						$(this).parents('ul').next('ul').slideUp();
-						$(this)
-							.removeClass('rechercher_moins')
-							.addClass('rechercher_plus')
-							.attr('title',text_plus)
-							.html(img_plus);
-					}
-					return false;
+			function rechercher_plus_moins(){
+				$('.editer_recherche_paquet button.rechercher_plus,.editer_recherche_paquet button.rechercher_moins').each(function(){
+					$(this).unbind('click').click(function(){
+						if ($(this).is('.rechercher_plus')) {
+							$(this).parents('ul').next('ul').slideDown();
+							$(this)
+								.removeClass('rechercher_plus')
+								.addClass('rechercher_moins')
+								.attr('title',text_moins)
+								.html(img_moins);
+						}else{
+							$(this).parents('ul').next('ul').slideUp();
+							$(this)
+								.removeClass('rechercher_moins')
+								.addClass('rechercher_plus')
+								.attr('title',text_plus)
+								.html(img_plus);
+						}
+						return false;
+					});
 				});
-			});
+			}
 			function autosubmit(){
 				go = $('.formulaire_step_actions form.ok');
 				if (go.is(':visible')) {
@@ -62,7 +64,9 @@
 					}, 500);
 				}
 			}
+			rechercher_plus_moins();
 			onAjaxLoad(autosubmit);
+			onAjaxLoad(rechercher_plus_moins);
 		})
 		})(jQuery);
 		//--></script>
