@@ -75,8 +75,8 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 		preg_match_all('!<span class="verse">([0-9]*)</span>!',$tableau_chapitre[$index],$liste_verset);
 		$index2 = 0;
 
-
-		$resultat[$liste_chapitre[$index]] = array();
+		
+	
 		foreach($liste_verset[1] as $verset){
 				$resultat[$liste_chapitre[1][$index]][$verset] = trim(str_replace('&nbsp;',' ',strip_tags($tableau_verset[$index2])));
 				$index2++;	
