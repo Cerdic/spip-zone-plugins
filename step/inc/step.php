@@ -406,7 +406,7 @@ function step_selectionner_champs_sql_plugin($p) {
 		'actif' => 'non',
 		'installe' => 'non',
 		'logo' => $p['icon'],
-		'categorie' => $p['categorie'],
+		'categorie' => $p['categorie'] ? $p['categorie'] : ' ',
 		'tags' => $p['tags'],
 	);
 }

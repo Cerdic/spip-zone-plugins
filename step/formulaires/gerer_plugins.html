@@ -131,7 +131,8 @@
 					</BOUCLE_zones_presentes>
 				</li>
 				</B_zones_presentes>
-
+				
+				<B_categories>
 				<li class="editer_categorie">
 					#REM{
 						Des categories au Pif ...
@@ -140,21 +141,14 @@
 					<label for="step_categorie"><:step:categorie:></label>
 					<select name="categorie" id="step_categorie">
 						<option value=""><:step:categorie_tous:></option>
-						<option value="date"[ (#ENV{categorie}|=={date}|oui)selected='selected']><:tag:date:></option>
-						<option value="auteur"[ (#ENV{categorie}|=={auteur}|oui)selected='selected']><:tag:auteur:></option>
-						<option value="divers"[ (#ENV{categorie}|=={divers}|oui)selected='selected']><:tag:divers:></option>
-						<option value="communication"[ (#ENV{categorie}|=={communication}|oui)selected='selected']><:tag:communication:></option>
-						<option value="multimedia"[ (#ENV{categorie}|=={multimedia}|oui)selected='selected']><:tag:multimedia:></option>
-						<option value="maintenance"[ (#ENV{categorie}|=={maintenance}|oui)selected='selected']><:tag:maintenance:></option>
-						<option value="navigation"[ (#ENV{categorie}|=={navigation}|oui)selected='selected']><:tag:navigation:></option>
-						<option value="outil"[ (#ENV{categorie}|=={outil}|oui)selected='selected']><:tag:outil:></option>
-						<option value="performance"[ (#ENV{categorie}|=={performance}|oui)selected='selected']><:tag:performance:></option>
-						<option value="edition"[ (#ENV{categorie}|=={edition}|oui)selected='selected']><:tag:edition:></option>
-						<option value="squelette"[ (#ENV{categorie}|=={squelette}|oui)selected='selected']><:tag:squelette:></option>
-						<option value="statistique"[ (#ENV{categorie}|=={statistique}|oui)selected='selected']><:tag:statistique:></option>
-						<option value="theme"[ (#ENV{categorie}|=={theme}|oui)selected='selected']><:tag:theme:></option>
+						<BOUCLE_categories(PLUGINS){fusion categorie}>
+						[(#CATEGORIE|=={' '}|oui)[(#SET{titre_categorie,<:tag:sans_categorie:>})]]
+						[(#CATEGORIE|=={' '}|non)[(#SET{titre_categorie,[(#VAL{tag:}|concat{#CATEGORIE}|_T)]})]]
+						<option value="#CATEGORIE"[ (#ENV{categorie}|=={#CATEGORIE}|oui)selected='selected']>[(#GET{titre_categorie})]</option>
+						</BOUCLE_categories>
 					</select>
 				</li>
+				</B_categories>
 				[(#SET{afficher,[(#ENV{etat}
 					|ou{[(#ENV{actif}|!={''})]}
 					|ou{[(#ENV{zone}|!={''})]}
