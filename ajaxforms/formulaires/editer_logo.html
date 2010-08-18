@@ -9,10 +9,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
 	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
-				<label for="logo_on"><:ajaxform:logo:></label>[
+				<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options}|table_valeur{label}|sinon{<:ajaxform:logo:>})]</label>[
 				<div class="spip_logos">(#ENV{logo_on}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{50})]})</div>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
-				]<input type='file' class='file' name='logo_on' size="15" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
+				]<input type='file' class='file' name='logo_on' size="[(#ENV{_options}|table_valeur{size_input}|sinon{15})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
 				[(#ENV{logo_on}|oui)
 					[(#ENV{logo_off}|non)
 					<div class="choix">
