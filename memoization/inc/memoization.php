@@ -13,6 +13,8 @@ function memoization_methode ($methode=null) {
 	switch($methode) {
 		case 'xcache':
 			return function_exists('xcache_set');
+		case 'memcache':
+			return function_exists('memcache_set');
 		case 'eaccelerator':
 			return function_exists('eaccelerator_put');
 		case 'filecache':

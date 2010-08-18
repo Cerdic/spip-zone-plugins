@@ -30,6 +30,10 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
 		selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
 			disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
 			>EAccelerator</option>
+	<option value="memcache"[
+		selected="(#ENV{methode}|=={memcache}|?{selected})"][
+			disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
+			>Memcache (NON FONCTIONNEL)</option>
 	<option value="filecache"[
 		selected="(#ENV{methode}|=={filecache}|?{selected})"][
 			disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
