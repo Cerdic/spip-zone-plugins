@@ -27,8 +27,10 @@ function fc_testie() {
 		OR isset($_GET['fctestie']);
 }
 
-if (defined('_FC_KEY'))
+if (defined('_FC_KEY')) {
+	$GLOBALS['meta']['memoization'] = _FC_CFG_MEMOIZATION;
 	require_once _FC_MEMOIZATION;
+}
 
 if (defined('_FC_KEY')
 AND $p = cache_get(_FC_KEY)

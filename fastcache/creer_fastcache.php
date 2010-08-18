@@ -24,6 +24,7 @@ function creer_fastcache() {
 	$prefix = var_export($GLOBALS['cookie_prefix'], true);
 
 	$memoization = var_export(find_in_path('inc/memoization.php'), true);
+	$cfg_memoization = var_export($GLOBALS['meta']['memoization'], true);
 
 	$contenu = '<'.'?php' .
 <<<CONFIG
@@ -39,6 +40,7 @@ function creer_fastcache() {
 @define ('_FC_TOUTES', $toutes);
 @define ('_FC_COOKIE_PREFIX', $prefix);
 @define ('_FC_MEMOIZATION', $memoization);
+@define ('_FC_CFG_MEMOIZATION', $cfg_memoization);
 
 CONFIG
 
