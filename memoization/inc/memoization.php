@@ -1,19 +1,35 @@
 <?php
 
 # xcache ?
+$cfg = @unserialize($GLOBALS['meta']['memoization']);
 
-if (function_exists('cache_set')) {
-	@define('_MEMOIZE', '??');
-} elseif (function_exists('xcache_set')) {
-	@define('_MEMOIZE', 'xcache');
-	require_once dirname(dirname(__FILE__)).'/memo/xcache.inc';
-} elseif (function_exists('eaccelerator_put')) {
-	@define('_MEMOIZE', 'eaccelerator');
-	require_once dirname(dirname(__FILE__)).'/memo/eaccelerator.inc';
-} else {
-	@define('_MEMOIZE', 'filecache');
-	require_once dirname(dirname(__FILE__)).'/memo/filecache.inc';
+function memoization_methode ($methode=null) {
+	if (!$methode) {
+		$methodes = array('xcache', 'eaccelerator', 'filecache', 'nocache');
+		while (!memoization_methode($methode = array_shift($methodes))){};
+		return $methode;
+	}
+
+	switch($methode) {
+		case 'xcache':
+			return function_exists('xcache_set');
+		case 'eaccelerator':
+			return function_exists('eaccelerator_put');
+		case 'filecache':
+		case 'nocache':
+			return true;
+	}
 }
+
+if (!$cfg['methode']) {
+	$cfg['methode'] = memoization_methode();
+}
+if ($cfg['methode']
+AND memoization_methode($cfg['methode'])) {
+	@define('_MEMOIZE', $cfg['methode']);
+	require_once dirname(dirname(__FILE__)).'/memo/'.$cfg['methode'].'.inc';
+} else
+	@define('_MEMOIZE', '??');
 
 //
 // Cache a function's result cache_me()

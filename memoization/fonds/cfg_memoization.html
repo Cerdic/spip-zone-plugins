@@ -1,0 +1,71 @@
+[(#REM) titre=M&#233;moization]
+[(#REM) autoriser=webmestre ]
+
+<!-- descriptif=
+M&#233;moization.
+Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
+-->
+
+#CACHE{0}
+
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) ------------------------ Memoization --------------------- ]
+<fieldset>
+<legend>
+	M&#233;thode de m&#233;moization
+</legend>
+
+<label for="methode">Choisir le mode de m&#233;moization</label>
+
+<select name="methode" id="methode">
+	<option value="">Auto-d&#233;tection[
+		((#VAL|memoization_methode))]</option>
+	<option value="xcache"[
+		selected="(#ENV{methode}|=={xcache}|?{selected})"][
+			disabled="(#VAL{xcache}|memoization_methode|non|?{disabled})"]
+			>XCache</option>
+	<option value="eaccelerator"[
+		selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
+			disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
+			>EAccelerator</option>
+	<option value="filecache"[
+		selected="(#ENV{methode}|=={filecache}|?{selected})"][
+			disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
+			>Fichiers (filecache)</option>
+	<option value="nocache"[
+		selected="(#ENV{methode}|=={nocache}|?{selected})"][
+			disabled="(#VAL{nocache}|memoization_methode|non|?{disabled})"]
+			>D&#233;sactiv&#233; (nocache)</option>
+</select>
+
+
+</fieldset>
+
+<fieldset>
+<legend>
+	Cache des pages
+</legend>
+
+<label for="pages">G&#233;rer le cache des pages</label>
+
+<select name="pages" id="pages">
+	<option value="">Par m&#233;moization</option>
+	<option value="file"[
+		selected="(#ENV{pages}|=={file}|?{selected})"]>Par fichiers classiques dans [(#EVAL{_DIR_CACHE}|joli_repertoire)]</option>
+</select>
+
+
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+</form>
