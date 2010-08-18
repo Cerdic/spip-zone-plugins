@@ -5,7 +5,7 @@ $cfg = @unserialize($GLOBALS['meta']['memoization']);
 
 function memoization_methode ($methode=null) {
 	if (!$methode) {
-		$methodes = array('xcache', 'eaccelerator', 'filecache', 'nocache');
+		$methodes = array('xcache', 'eaccelerator', 'filecache');
 		while (!memoization_methode($methode = array_shift($methodes))){};
 		return $methode;
 	}

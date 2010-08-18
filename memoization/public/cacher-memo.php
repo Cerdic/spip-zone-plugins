@@ -140,8 +140,10 @@ function creer_cache(&$page, &$chemin_cache) {
 	$page['lastmodified'] = time();
 
 
-	// l'enregistrer, compresse ou non...
-	$ok = cache_set($chemin_cache, $page);
+	// memoizer...
+	// on ajoute une heure histoire de pouvoir tourner
+	// sur le cache quand la base de donnees est plantee (a tester)
+	$ok = cache_set($chemin_cache, $page, 3600+$page['entetes']['X-Spip-Cache']);
 
 	spip_log("Creation du cache $chemin_cache "._MEMOIZE." pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));

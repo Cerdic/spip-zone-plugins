@@ -33,7 +33,7 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
 	<option value="memcache"[
 		selected="(#ENV{methode}|=={memcache}|?{selected})"][
 			disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
-			>Memcache (NON FONCTIONNEL)</option>
+			>Memcache</option>
 	<option value="filecache"[
 		selected="(#ENV{methode}|=={filecache}|?{selected})"][
 			disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
@@ -46,6 +46,38 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
 
 
 </fieldset>
+
+<fieldset id="memcache_options">
+<legend>
+	R&#233;glages de memcache
+</legend>
+
+<ul>
+<li>
+<label for="memcache_host">Nom d&#8217;h&#244;te memcache&#160;:</label>
+<input type="text" name="memcache_host" value="[(#ENV{memcache_host}|sinon{localhost})]" />
+</li>
+<li>
+<label for="memcache_port">Port memcache&#160;:</label>
+<input type="text" name="memcache_port" value="[(#ENV{memcache_port}|sinon{11211})]" />
+</li>
+</ul>
+</fieldset>
+<script type="text/javascript"><!--
+	var methode_memcache = function() {
+		if ($("#methode").val() == 'memcache')
+			$('#memcache_options').slideDown();
+		else
+			$('#memcache_options').hide();
+	};
+	methode_memcache();
+	$("#methode")
+	.bind('change', methode_memcache);
+
+// -->
+</script>
+
+
 
 <fieldset>
 <legend>
@@ -62,6 +94,7 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
 
 
 </fieldset>
+
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>

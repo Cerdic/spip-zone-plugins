@@ -16,7 +16,11 @@ bool  cache_unlock(string key)
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 @define('_LOCK_MAX', 30); # max lock time (seconds)
 
-$GLOBALS['memcache'] = memcache_connect('localhost',11211);
+$cfg = @unserialize($GLOBALS['meta']['memoization']);
+if (!$cfg['memcache_host']) $cfg['memcache_host'] = 'localhost';
+if (!$cfg['memcache_port']) $cfg['memcache_port'] = '11211';
+
+$GLOBALS['memcache'] = memcache_connect($cfg['memcache_host'],$cfg['memcache_port']);
 
 function cache_get($key) {
 	$a = memcache_get($GLOBALS['memcache'], _CACHE_NAMESPACE.$key);
@@ -29,7 +33,7 @@ function cache_get($key) {
 
 function cache_set($key, $value, $ttl=null) {
 	// maybe_serialize
-	if (is_object($value) OR is_array($value))
+	if (is_object($value) OR is_array($value) OR is_null($value))
 		$value = array(serialize($value));
 	return is_null($ttl)
 		? memcache_set($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, $value)
@@ -48,14 +52,22 @@ function cache_inc($key, $value=null, $ttl=null) {
 	$a = func_get_args();
 	$a[0] = _CACHE_NAMESPACE.$key;
 	array_unshift($a, $GLOBALS['memcache']);
-	return call_user_func_array('memcache_inc', $a);
+
+	// set if not exists
+	$b = $a; $b[2] = 0; call_user_func_array('memcache_add', $b);
+
+	return call_user_func_array('memcache_increment', $a);
 }
 
 function cache_dec($key, $value=null, $ttl=null) {
 	$a = func_get_args();
 	$a[0] = _CACHE_NAMESPACE.$key;
 	array_unshift($a, $GLOBALS['memcache']);
-	return call_user_func_array('memcache_dec', $a);
+
+	// set if not exists
+	$b = $a; $b[2] = 0; call_user_func_array('memcache_add', $b);
+
+	return call_user_func_array('memcache_decrement', $a);
 }
 
 function cache_lock($key, /* private */ $unlock = false) {
