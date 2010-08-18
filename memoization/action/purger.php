@@ -37,17 +37,11 @@ function action_purger_dist()
 		purger_repertoire(_DIR_VAR.'cache-css');
 		purger_repertoire(_DIR_VAR.'cache-js');
 
-		$cfg = @unserialize($GLOBALS['meta']['memoization']);
-		switch ($cfg['pages']) {
-			# a l'ancienne
-			case 'file':
-				purger_repertoire(_DIR_CACHE,array('subdir'=>true));
-				break;
-			# n'importe quelle methode de memoization
-			default:
-				ecrire_meta('cache_mark', time());
-				break;
-		}
+		# purge a l'ancienne des fichiers de tmp/cache/
+		purger_repertoire(_DIR_CACHE,array('subdir'=>true));
+
+		# ajouter une mark pour les autres methodes de memoization
+		ecrire_meta('cache_mark', time());
 
 		break;
 
