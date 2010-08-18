@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_plugins' => '@nb@ plugins',
 
 	// P
-	'paquets_activer_info' => 'Cocher un des plugins ci-contre pour l\'activer.',
+	'paquets_activer_info' => 'S&eacute;lectionner un des plugins ci-contre pour l\'activer.',
 	'paquets_liste' => 'Liste des plugins',
 	'paquets_telecharger_info' => 'Si le plugin n\'est pas install&eacute; sur le site, il sera automatiquement t&eacute;l&eacute;charg&eacute;.',
 	'paquet_info' => 'Informations sur le paquets',
@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'paquets_telechargeables' => 'Paquets t&eacute;l&eacute;chargeables',
 
 	// champs des plugins
-	'pas_de_plugin_trouve' => 'Aucun plugin trouv&eacute; !',
+	'pas_de_plugin_trouve' => 'Aucun plugin trouv&eacute; correspondant &agrave; vos crit&egrave;res.',
 	'plugin_nom' => 'Nom',
 	'plugins_trouves' => 'Plugins trouv&eacute;s',
 	'plugin_upgrade_possible' => 'Mise &agrave; jour disponible',

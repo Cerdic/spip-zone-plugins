@@ -627,9 +627,9 @@ class Actionneur {
 				if (!$meta_plug_installes) $meta_plug_installes=array();
 				$meta_plug_installes[] = $dossier;
 				ecrire_meta('plugin_installes',serialize($meta_plug_installes), 'non');
-				$messages = preg_replace('/<div.*(install-plugins).*<\/div>/','',ob_get_contents());
+				//$messages = preg_replace('/<div.*(install-plugins).*<\/div>/','',ob_get_contents());
 				ob_end_clean();
-				return $messages;
+				return true;
 			}
 			ob_end_clean();
 		}
