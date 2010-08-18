@@ -247,7 +247,7 @@ function bible_afficher_references_direct($ref,$traduction,$lang,$nommer_trad=tr
 	$separateur = $tableau_separateur[$lang_version];
 	return afficher_references($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
 }
-function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad=true){
+function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true'){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
 	$trad = $tableau_traduction[strtolower($trad)]['traduction'];
@@ -258,7 +258,7 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 
-	$nommer_trad == true and $nommer_trad!='false' ? $bloc_fin = ' (<i>'.$trad.'</i>)' : $bloc_fin = '';
+	$nommer_trad!='false' ? $bloc_fin = ' (<i>'.$trad.'</i>)' : $bloc_fin = '';
 
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
