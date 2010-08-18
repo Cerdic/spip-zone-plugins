@@ -25,7 +25,7 @@ function step_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('inc/step');
 			spip_log('Installation de la liste des plugins locaux','step');
 			step_actualiser_plugins_locaux();
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=0.5,'non');
 		}
 	}
 }
