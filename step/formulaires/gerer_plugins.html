@@ -85,7 +85,7 @@
 	]
 
 	[<div class="reponse_formulaire reponse_formulaire_erreur">
-		<strong>Erreurs :</strong>
+		<strong><:step:label_erreurs:></strong>
 		<ul>(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach{foreach_li})</ul>
 	</div>]
 
@@ -113,6 +113,7 @@
 					|?{afficher,cacher})]})]
 			</ul>
 			<ul class="more[ (#GET{afficher})]">
+				#SET{zones,''}
 				<B_zones_presentes>
 				#SET{zones,ok}
 				<li class="editer_present">
@@ -188,6 +189,7 @@
 				</li>
 				</B_zones>
 
+				[(#GET{zones}|=={ok}|oui)
 				<li class="editer_obsolete">
 					<label for="step_obsolete"><:step:obsolete:></label>
 					<select name="obsolete" id="step_obsolete">
@@ -195,8 +197,9 @@
 						<option value="oui"[ (#ENV{obsolete}|=={oui}|oui)selected='selected']><:step:obsolete_oui:></option>
 						<option value="non"[ (#ENV{obsolete}|=={non}|oui)selected='selected']><:step:obsolete_non:></option>
 					</select>
-				</li>
+				</li>]
 
+				[(#GET{zones}|=={ok}|oui)
 				<li class="editer_superieur">
 					<label for="step_superieur"><:step:superieur:></label>
 					<select name="superieur" id="step_superieur">
@@ -204,7 +207,7 @@
 						<option value="oui"[ (#ENV{superieur}|=={oui}|oui)selected='selected']><:step:superieur_oui:></option>
 						<option value="non"[ (#ENV{superieur}|=={non}|oui)selected='selected']><:step:superieur_non:></option>
 					</select>
-				</li>
+				</li>]
 			</ul>
 			<p class="boutons">
 				<input type='submit' name='rechercher' class='submit' value='<:info_rechercher:>' />

@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_action' => 'L\'action "@action@" demand&eacute;e n\'est pas connue',
 
 	// L
+	'label_erreurs' => 'Erreurs :',
 	'librairie' => 'Librairie : @nom@',
 
 	// G
