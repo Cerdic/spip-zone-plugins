@@ -127,4 +127,3 @@ function critere_mots_enleve_mot_de_liste($listemots, $id_mot) {
 }
 
 ?>
-
