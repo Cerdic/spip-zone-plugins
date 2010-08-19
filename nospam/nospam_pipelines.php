@@ -163,7 +163,7 @@ function nospam_pre_edition($flux){
 	  AND (!isset($GLOBALS['visiteur_session']['id_auteur']) OR !autoriser('modererforum'))){
 
 			$email = strlen($flux['data']['email_auteur']) ? " OR email_auteur=".sql_quote($flux['data']['email_auteur']):"";
-			$spammeur_connu = !isset($GLOBALS['visiteur_session']['statut']) AND (sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip'])."$email) AND statut='spam'")>0);
+			$spammeur_connu = (!isset($GLOBALS['visiteur_session']['statut']) AND (sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip'])."$email) AND statut='spam'")>0));
 
 			// si c'est un spammeur connu,
 			// verifier que cette ip n'en est pas a son N-ieme spam en peu de temps
