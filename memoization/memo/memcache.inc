@@ -35,9 +35,10 @@ function cache_set($key, $value, $ttl=null) {
 	// maybe_serialize
 	if (is_object($value) OR is_array($value) OR is_null($value))
 		$value = array(serialize($value));
+	$flag = strlen($value) > 16000 ? MEMCACHE_COMPRESSED : 0;
 	return is_null($ttl)
 		? memcache_set($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, $value)
-		: memcache_set($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, $value, $ttl);
+		: memcache_set($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, $value, $flag, $ttl);
 }
 
 function cache_isset($key) {
