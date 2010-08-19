@@ -534,7 +534,11 @@ jQuery.geoportail =
     },
 
     // On a selectionne une adresse avec l'outil
-    selectAdresse: function(f) {	// pour les autres cartes
+    selectAdresse: function(f) 
+    {	// Ne pas afficher le calque (risque d'interception d'evenements)
+		var l = f.layer.map.getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
+		if (l.length > 0) l[0].setVisibility(false);
+		// pour les autres cartes
         if (typeof (selectAdresse) == 'function') selectAdresse(f);
         else if (typeof (parent.selectFormulaireAdresse) == 'function') parent.selectFormulaireAdresse(f);
     },
