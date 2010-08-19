@@ -78,13 +78,21 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
  * @return int compte du texte nettoye
  */
 function compter_caracteres_utiles($texte, $propre=true) {
+	include_spip('inc/charsets');
 	if ($propre) $texte = propre($texte);
 	$u = $GLOBALS['meta']['pcre_u'];
 	// regarder si il y a du contenu en dehors des liens !
 	$texte = PtoBR($texte);
 	$texte = preg_replace(",<a.*</a>,{$u}Uims",'',$texte);
-	$texte = trim(preg_replace(",[\W]+,{$u}ims",' ',$texte));
-	return strlen($texte);
+	// \W matche tous les caracteres non ascii apres 0x80
+	// et vide donc les chaines constitues de caracteres unicodes uniquement
+	// on remplace par un match qui elimine uniquement
+	// les non \w  et les non unicodes
+	$texte = trim(preg_replace(",[^\w\x80-\xFF]+,ims",' ',$texte));
+
+	// on utilise spip_strlen pour compter la longueur correcte
+	// pour les chaines unicodes
+	return spip_strlen($texte);
 }
 
 
