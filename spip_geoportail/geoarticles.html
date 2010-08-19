@@ -58,6 +58,8 @@
 
 		</div><!-- fin contenu -->
 		
+		[(#REM) Affichage pour la v2 ]
+		[(#SPIP_VERSION|>={2}|?{</div><!-- fin navigation -->})]
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -77,7 +79,8 @@
 			</div>
 			</B_articles_rubrique>
 
-		</div><!-- fin navigation -->
+		[(#REM) Affichage pour la v1.9 ]
+		[(#SPIP_VERSION|<{2}|?{</div><!-- fin navigation -->})]
 
 	</div><!-- fin conteneur -->
 	
