@@ -19,7 +19,7 @@ Plugin d&eacute;velopp&eacute; dans le cadre du gestionnaire de projets [SPIPMIN
 This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] and [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue] projects.	</multi>
 	</description>
 	
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Contacts-Organisations</lien>
 	<icon>images/contacts-128.png</icon>
 	
 	<prefix>contacts</prefix>
