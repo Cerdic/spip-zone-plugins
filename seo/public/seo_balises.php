@@ -25,8 +25,6 @@ function calculer_balise_SEO_GA(){
     return $flux;
 }
 
-
-
 /**
  * #SEO_META_TAGS
  * Renvoyer les META Classiques
@@ -40,6 +38,23 @@ function calculer_balise_SEO_META_TAGS(){
     $flux = generer_meta_tags();
     return $flux;
 }
+
+/**
+ * #SEO_META_BRUTE{nom_de_la_meta}
+ * Renvoyer la valeur de la meta appelée (sans balise)
+ */
+function balise_SEO_META_BRUTE($p){
+	return calculer_balise_META_BRUTE($p);
+}
+function calculer_balise_META_BRUTE($p){	
+	$_nom = str_replace("'","",interprete_argument_balise(1,$p));
+	$retour = generer_meta_brute($_nom);
+
+	$p->code = "'$retour'";	
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 
 /**
  * #SEO_GWT

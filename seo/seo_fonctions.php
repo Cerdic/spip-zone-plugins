@@ -146,6 +146,21 @@ function generer_meta_tags(){
 }
 
 /**
+ * Renvoyer une META toute seule (hors balise)
+ * @return string $retour
+ */
+function generer_meta_brute($nom){	
+	$config = unserialize($GLOBALS['meta']['seo']);
+	$nom = strtolower($nom);
+	
+	if($config['meta_tags']['tag'][$nom]){
+		return $config['meta_tags']['tag'][$nom];
+	}
+	
+	return false;
+}
+
+/**
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
  * @return string $flux
  */
