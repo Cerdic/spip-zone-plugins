@@ -13,7 +13,7 @@
 		<THELIA SI CONNECTE>
 			<li class="menu-entree"><a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a></li>
 			[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)
-			      <li class="menu-entree"><a href="[(#URL_LOGOUT{[(#URL_SITE_SPIP|parametre_url{thelia_action,deconnexion})]})]"><:spipthelia:se_deconnecter:></a></li>
+			      <li><a href="[(#URL_SITE_SPIP|parametre_url{action,logout}|parametre_url{logout,public}|parametre_url{url,[(#URL_SITE_SPIP|parametre_url{thelia_action,deconnexion})]})]"><:spipthelia:se_deconnecter:></a></li>
 			]
 			[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|non)
 			      <li class="menu-entree"><a href="#URL_PAGE{sommaire,thelia_action=deconnexion}"><:spipthelia:se_deconnecter:></a></li>
