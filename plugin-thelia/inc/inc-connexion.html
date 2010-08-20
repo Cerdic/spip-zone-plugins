@@ -17,10 +17,9 @@
 				[(#REM) Contenu de la page]
 
 				<h2 class="h2"><:spipthelia:deja_compte:></h2>
-				
 				[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)
 					[(#SESSION{id_auteur}|oui)
-					      [(#REM)Vous &ecirc;tes connect&eacute; actuellement sans compte client associ&eacute;. Veuillez vous identifier sur la boutique ou cr&eacute;er un nouveau compte pour continuer. 
+					      Vous &ecirc;tes connect&eacute; actuellement sans compte client associ&eacute;. Veuillez vous identifier sur la boutique ou cr&eacute;er un nouveau compte pour continuer. 
 					      <form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire_spip">
 						  <input type="hidden" name="thelia_action" value="connexion" />
 						<fieldset>
@@ -38,11 +37,14 @@
 							  </li>
 							</ul>  	
 						      </fieldset>
-					      </form>]
+					      </form>
+					      
 					]
 					
 				
-					[(#LOGIN_PUBLIC{#URL_PAGE{adresse}})]		
+					[(#SESSION{id_auteur}|non)
+					      [(#LOGIN_PUBLIC{#URL_PAGE{adresse}})]		
+					]
 				]
 				[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|non)
 					<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire_spip">

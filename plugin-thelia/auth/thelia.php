@@ -93,7 +93,7 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 				spip_log("thelia4");
 	      
 				if($_SESSION['navig']->urlpageret) {
-				      spip_log("redirige vers ".$_SESSION['navig']->urlpageret);
+				     spip_log("redirige vers ".$_SESSION['navig']->urlpageret);
 					  redirige($_SESSION['navig']->urlpageret);
 				} else {
 				      spip_log("redirige vers index.php");
