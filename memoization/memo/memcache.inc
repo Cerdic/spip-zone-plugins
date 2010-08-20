@@ -22,7 +22,7 @@ foreach(cfg_memcache_servers() as $server) {
 	if (!$GLOBALS['memcache'])
 		$GLOBALS['memcache'] = @memcache_connect($host,$port);
 	else
-		@memcache_addserver($GLOBALS['memcache'], $host, $port);
+		@memcache_add_server($GLOBALS['memcache'], $host, $port);
 }
 
 function cache_get($key) {

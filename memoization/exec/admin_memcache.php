@@ -65,7 +65,8 @@ function sendMemcacheCommand($server,$port,$command){
 
 	$s = @fsockopen($server,$port);
 	if (!$s){
-		die("Cant connect to:".$server.':'.$port);
+		echo ("Cant connect to:".$server.':'.$port);
+		return false;
 	}
 
 	fwrite($s, $command."\r\n");
@@ -151,7 +152,7 @@ function getMemcacheStats($total=true){
 	$resp = sendMemcacheCommands('stats');
 	if ($total){
 		$res = array();
-		foreach($resp as $server=>$r){
+		foreach(array_filter($resp) as $server=>$r){
 			foreach($r['STAT'] as $key=>$row){
 				if (!isset($res[$key])){
 					$res[$key]=null;
