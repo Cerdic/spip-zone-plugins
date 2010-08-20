@@ -39,9 +39,10 @@ define('GRAPH_SIZE',200);
 define('MAX_ITEM_DUMP',50);
 
 
-$cfg = @unserialize($GLOBALS['meta']['memoization']);
+if (!function_exists('memcache_connect'))
+	die ('PHP compil&#233; sans memcache. Bye.');
 
-$MEMCACHE_SERVERS[] = $cfg['memcache_host'].':'.$cfg['memcache_port'];
+$MEMCACHE_SERVERS = cfg_memcache_servers();
 
 
 ////////// END OF DEFAULT CONFIG AREA /////////////////////////////////////////////////////////////

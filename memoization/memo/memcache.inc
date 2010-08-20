@@ -16,11 +16,15 @@ bool  cache_unlock(string key)
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 @define('_LOCK_MAX', 30); # max lock time (seconds)
 
-$cfg = @unserialize($GLOBALS['meta']['memoization']);
-if (!$cfg['memcache_host']) $cfg['memcache_host'] = 'localhost';
-if (!$cfg['memcache_port']) $cfg['memcache_port'] = '11211';
-
-$GLOBALS['memcache'] = memcache_connect($cfg['memcache_host'],$cfg['memcache_port']);
+unset($GLOBALS['memcache']);
+foreach(cfg_memcache_servers() as $server) {
+	list($host, $port) = explode(':', $server);
+	var_dump($host, $port);
+	if (!$GLOBALS['memcache'])
+		$GLOBALS['memcache'] = @memcache_connect($host,$port);
+	else
+		@memcache_addserver($GLOBALS['memcache'], $host, $port);
+}
 
 function cache_get($key) {
 	$a = memcache_get($GLOBALS['memcache'], _CACHE_NAMESPACE.$key);
