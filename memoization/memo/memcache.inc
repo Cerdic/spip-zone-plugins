@@ -19,7 +19,6 @@ bool  cache_unlock(string key)
 unset($GLOBALS['memcache']);
 foreach(cfg_memcache_servers() as $server) {
 	list($host, $port) = explode(':', $server);
-	var_dump($host, $port);
 	if (!$GLOBALS['memcache'])
 		$GLOBALS['memcache'] = @memcache_connect($host,$port);
 	else
