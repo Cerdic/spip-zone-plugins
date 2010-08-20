@@ -17,7 +17,7 @@
 	<a href="http://www.spip-contrib.net/BoOz,502">BoOz</a>,C&#233;dric, erational, CP.
 	</auteur>
 	<version>
-	0.73
+	0.74
 	</version>
 	<etat>
 	dev
@@ -36,6 +36,11 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 	<prefix>Player</prefix>
 	
 	<install>base/player_install.php</install>
+	<bouton id='player_config21' parent='bando_squelette'>
+		<icone>images/player-16.png</icone>
+		<titre>player:player_nom</titre>
+		<url>player_admin</url>
+	</bouton>
 	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
 	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
