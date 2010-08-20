@@ -36,14 +36,12 @@
 	}
 	
 	function spip_thelia_install($action){
-		
+		include_spip('inc/meta'); 
+ 		include_spip('base/create');
 		$version_base = $GLOBALS['spip_thelia_base_version'];
 		switch ($action){
 			case 'test':
-				return (isset($GLOBALS['meta']['spip_thelia_base_version']) AND ($GLOBALS['meta']['spip_thelia_base_version']>=$version_base)
-				AND isset($GLOBALS['meta']['INDEX_elements_objet'])
-				AND $t = unserialize($GLOBALS['meta']['INDEX_elements_objet'])
-				AND isset($t['spip_produits_articles']));
+				return (isset($GLOBALS['meta']['spip_thelia_base_version']) AND ($GLOBALS['meta']['spip_thelia_base_version']>=$version_base));
 				break;
 			case 'install':
 				spip_thelia_verifier_base();
