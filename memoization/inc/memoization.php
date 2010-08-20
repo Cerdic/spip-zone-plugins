@@ -30,8 +30,10 @@ if ($cfg['methode']
 AND memoization_methode($cfg['methode'])) {
 	@define('_MEMOIZE', $cfg['methode']);
 	require_once dirname(dirname(__FILE__)).'/memo/'.$cfg['methode'].'.inc';
-} else
-	@define('_MEMOIZE', '??');
+} else {
+	@define('_MEMOIZE', 'nocache');
+	require_once dirname(dirname(__FILE__)).'/memo/'.'nocache'.'.inc';
+}
 
 //
 // Cache a function's result cache_me()
