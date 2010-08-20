@@ -1,0 +1,5 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+<B_legendes>[<BOUCLE_legendes(LEGENDES){id_document}{tout}{","}>
+	{ "top": "#POSY", "left": "#POSX", "width": "#WIDTH", "height": "#HEIGHT", "text": [(#TEXTE|PtoBR|concat{[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)[ - (#MODELE{legende_auteur,id_auteur=#ID_AUTEUR})]]}|json_encode)], "id": "#ID_LEGENDE", "editable": false }</BOUCLE_legendes>
+]</B_legendes>

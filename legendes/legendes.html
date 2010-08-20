@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG" xml:lang="#LANG" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head} />
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+[(#REM) Entete de la page + titre du site ]
+<INCLURE{fond=inc-entete} />
+<div id="conteneur">
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div id="contenu">
+
+		<h1 class="invisible">#NOM_SITE_SPIP</h1>
+		[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
+		
+		[(#INCLURE{fond=modeles/image_legendes}
+			{id_document=1}
+			{largeur=560}
+			{class=media}{editable})]
+
+		
+	</div><!-- fin contenu -->
+</div><!-- fin conteneur -->
+<div id="navigation">
+</div>
+</div><!-- fin page -->
+</body>
+</html>

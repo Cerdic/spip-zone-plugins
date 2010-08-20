@@ -1,0 +1,43 @@
+<div class="ajax formulaire_spip formulaire_editer_legende" id="formulaire_editer_legende#ENV{id_legende,nouveau}">
+<br class="bugajaxie" />
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}" enctype="multipart/form-data">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type="hidden" name="top" value="#ENV{posy}" />
+	<input type="hidden" name="left" value="#ENV{posx}" />
+	<input type="hidden" name="width" value="#ENV{width}" />
+	<input type="hidden" name="height" value="#ENV{height}" />
+	[<input type="hidden" name="id_legende" value="(#ENV*{id_legende})" />]
+	[<input type="hidden" name="id_document" value="(#ENV*{id_document})" />]
+	<fieldset>
+		<legend><:legendes:editer_legende:></legend>
+		<ul>
+			<li class="saisie_texte obligatoire[ (#ENV*{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="texte#ENV{id_legende}"><:legendes:texte_legende:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_legende})</span>]
+				<textarea name="texte" id="texte#ENV{id_legende}" class="no_barre" rows="8" cols="60">#ENV{texte}</textarea>
+			</li>
+		</ul>
+	</fieldset>
+	<p class="boutons">
+		<input type="submit" class="submit" name="valider" value="<:legendes:bouton_enregistrer:>" />[
+		(#ENV{id_legende}|intval|oui)
+		<input type="submit" class="submit" name="effacer" value="<:legendes:bouton_supprimer:>" />]
+		<input type="reset" class="submit" name="annuler" value="<:legendes:bouton_reset:>" />
+	</p>
+</form>]
+</div>
+[(#ENV*{message_ok}|oui)
+<script type="text/javascript">
+if (window.jQuery)
+(function($){
+	$(function(){
+		var annotateEdit = $('.legendes').getannotateEdit();
+		annotateEdit.image.mode = 'view';
+		annotateEdit.destroy();
+	});
+})(jQuery);
+</script>]

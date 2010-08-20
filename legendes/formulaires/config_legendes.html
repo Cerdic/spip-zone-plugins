@@ -1,0 +1,69 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=legendes -->
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+					<h3 class="legend"><:legendes:cfg_legend_statuts:></h3>
+					<ul>
+						<li>
+							<label><:legendes:autoriser_creerdans:></label>
+							<select name="statuts_creerdans[]" multiple="multiple">
+								<option value="0minirezo"[(#VAL{0minirezo}|in_any{#ENV{statuts_creerdans}}|oui) selected="selected"]>
+									<:legendes:statut_admins:>
+								</option>
+								<option value="1comite"[(#VAL{1comite}|in_any{#ENV{statuts_creerdans}}|oui) selected="selected"]>
+									<:legendes:statut_redacteurs:>
+								</option>
+								<option value="6forum"[(#VAL{6forum}|in_any{#ENV{statuts_creerdans}}|oui) selected="selected"]>
+									<:legendes:statut_visiteurs:>
+								</option>
+							</select>
+						</li>
+						<li>
+							<label><:legendes:autoriser_modifier:></label>
+							<select name="statuts_modifier[]" multiple="multiple">
+								<option value="0minirezo"[(#VAL{0minirezo}|in_any{#ENV{statuts_modifier}}|oui) selected="selected"]>
+									<:legendes:statut_admins:>
+								</option>
+								<option value="1comite"[(#VAL{1comite}|in_any{#ENV{statuts_modifier}}|oui) selected="selected"]>
+									<:legendes:statut_redacteurs:>
+								</option>
+								<option value="6forum"[(#VAL{6forum}|in_any{#ENV{statuts_modifier}}|oui) selected="selected"]>
+									<:legendes:statut_visiteurs:>
+								</option>
+							</select>
+						</li>
+						<li>
+							<label><:legendes:autoriser_suprrimer:></label>
+							<select name="statuts_supprimer[]" multiple="multiple">
+								<option value="0minirezo"[(#VAL{0minirezo}|in_any{#ENV{statuts_supprimer}}|oui) selected="selected"]>
+									<:legendes:statut_admins:>
+								</option>
+								<option value="1comite"[(#VAL{1comite}|in_any{#ENV{statuts_supprimer}}|oui) selected="selected"]>
+									<:legendes:statut_redacteurs:>
+								</option>
+								<option value="6forum"[(#VAL{6forum}|in_any{#ENV{statuts_supprimer}}|oui) selected="selected"]>
+									<:legendes:statut_visiteurs:>
+								</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				</fieldset>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_delete" value="<:cfg:reset:>" class="submit" />
+				<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+			</p>
+	</div>
+</form>
+</div>

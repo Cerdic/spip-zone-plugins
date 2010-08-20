@@ -1,0 +1,59 @@
+[(#REM) 
+	Parametres :
+	-* largeur : de l'image... (largeur originale par defaut)
+	-* hauteur : de l'image... (hauteur originale par defaut)
+	-* editable : si "oui" les notes sont editables, si "non" ou vide les notes sont en lecture seule
+	-* class : classe(s) css à ajouter à la div principale du modele
+	-* bouton_ajouter : expression css cible du bouton perso pour ajouter des notes
+ ]
+
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+[(#SET{largeur,#ENV{largeur,#LARGEUR}})]
+[(#SET{hauteur,#ENV{hauteur,#HAUTEUR}})]
+
+<div class="image_legendes[ (#ENV{class})]">
+[(#TYPE_DOCUMENT|match{^(JPEG|GIF|PNG)$}|?{
+	[(#FICHIER
+			|image_reduire{#GET{largeur},#GET{hauteur}}
+			|inserer_attribut{class,legendes}
+			|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
+})]
+
+<BOUCLE_legendes(LEGENDES){id_document}{tout} />
+[<p class="nb_notes">(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{legendes:msg_yaunenote,legendes:msg_yadesnotes})</p>]
+<//B_legendes>
+
+[(#ENV{editable}|?{
+	#SET{editable,#ENV{editable}}
+	,
+	#SET{editable,#AUTORISER{creerdans,legende,#ID_DOCUMENT}|?{oui}}
+})]
+
+[(#GET{editable}|=={oui}|?{
+	#SET{url_get,legendes_get_edit}
+	,
+	#SET{url_get,legendes_get}
+})]
+
+<script type="text/javascript">
+/*<![CDATA[*/ 
+(function($){
+	var init_notes = function() {
+		$(".legendes").annotateImage({
+			editable: [(#GET{editable}|=={oui}|?{'true','false'})],
+			getUrl: "#URL_PAGE{#GET{url_get}}&id_document=#ID_DOCUMENT",
+			editUrl: "#URL_PAGE{editer_legende}",
+			[addButton: "(#ENV{bouton_ajouter})",
+			]id_document: "#ID_DOCUMENT",
+			echelle: "[(#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{width}|div{#LARGEUR})]",
+			useAjax: true
+		});
+	}
+	$(function(){
+		init_notes();
+	});
+})(jQuery);
+/*]]>*/
+</script>
+</div>
+</BOUCLE_doc>
