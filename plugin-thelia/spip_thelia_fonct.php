@@ -1,4 +1,5 @@
 <?php
+include_spip("inc/charsets") ;
 function spip_thelia_supprimer_balises_thelia($texte) {
 	//suppression des boucles th�lia
 	$texte = str_replace("THELIA_", "DUMMY_", $texte);
