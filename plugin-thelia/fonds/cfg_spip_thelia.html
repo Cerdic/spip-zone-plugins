@@ -54,8 +54,10 @@
 			<option value="non" [(#CONFIG{spip_thelia/quantite_produit_select_spip_thelia}|=={"non"}|?{selected="selected",})]>non</option>		
 			<option value="oui" [(#CONFIG{spip_thelia/quantite_produit_select_spip_thelia}|=={"oui"}|?{selected="selected",})]>oui</option>		
 		</select>
-
-
+		<br />
+		<label for="repadmin_spip_thelia">Nom du dossier admin de Th&eacute;lia</label>
+		<input type="text" name="repadmin_spip_thelia" id="repadmin_spip_thelia" value="[(#CONFIG{spip_thelia/repadmin_spip_thelia}|sinon{admin})]" />
+		[(#CONFIG{spip_thelia/repadmin_spip_thelia}|sinon{admin}|find_in_path|?{ok,<strong>dossier non trouv&eacute;</strong>})]
 		<br />
 		<label for="infos_cheque_spip_thelia">Ecrire ici les infos sur le r&eacute;glement par ch&egrave;que ...</label>
 		<textarea name="infos_cheque_spip_thelia" id="infos_cheque_spip_thelia" rows="10" cols="40">[(#CONFIG{spip_thelia/infos_cheque_spip_thelia})]</textarea>

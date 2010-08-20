@@ -1,7 +1,7 @@
 <?php
 
 /* Repertoire de l'admin THELIA */
-define('_THELIA_ADMIN','admin');
+define('_THELIA_ADMIN','admin'); //obsolete cette variable est désormais définie dans le formulaire CFG du plugin
 
 if (!defined('_DIR_PLUGIN_SPIP_THELIA')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
