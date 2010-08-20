@@ -49,7 +49,7 @@ array('field' => &$spip_auteurs_pmb, 'key' => &$spip_auteurs_pmb_key);
 function pmb_install($action){
   switch ($action){
 	case 'test':
-	  
+	  return 1;
 	  break;
 	case 'install':
 		spip_query("CREATE TABLE IF NOT EXISTS ".$GLOBALS['table_prefix']."_auteurs_pmb (
@@ -78,7 +78,6 @@ function pmb_install($action){
 
 		break;
 	case 'uninstall':
-	  
 		break;
   }
 }
