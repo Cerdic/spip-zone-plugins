@@ -76,7 +76,7 @@ function cfg_memcache_servers() {
 	$cfg = @unserialize($GLOBALS['meta']['memoization']);
 	if (!$cfg = $cfg['memcache_servers'])
 		$cfg = 'localhost:11211';
-	preg_match_all('/[a-z0-1._-]*(?::\d+)/', $cfg, $s, PREG_PATTERN_ORDER);
+	preg_match_all('/[a-z0-9._-]*(?::\d+)/', $cfg, $s, PREG_PATTERN_ORDER);
 	return $s[0];
 }
 
