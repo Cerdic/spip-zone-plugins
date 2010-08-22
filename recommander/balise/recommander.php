@@ -1,26 +1,27 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-// Pas besoin de contexte de compilation
-global $balise_RECOMMANDER_collecte;
-$balise_RECOMMANDER_collecte = array();
+/**
+ * #RECOMMANDER{titre,url,texte,subject}
+ * @param <type> $p
+ * @return <type> 
+ */
+function balise_RECOMMANDER_dist ($p) {
+	$_titre = interprete_argument_balise(1,$p);
 
-function balise_RECOMMANDER ($p) {
-	return calculer_balise_dynamique($p,'RECOMMANDER', array());
+	$_url = interprete_argument_balise(2,$p);
+	$_url = ($_url ? $_url:"''");
+
+	$_texte = interprete_argument_balise(3,$p);
+	$_texte = ($_texte ? $_texte:"''");
+
+	$_subject = interprete_argument_balise(4,$p);
+	$_subject = ($_subject?$_subject:"''");
+
+	$p->code = "recuperer_fond('modeles/recommander',array('titre'=>$_titre,'url'=>$_url,'texte'=>$_texte,'subject'=>$_subject))";
+	$p->interdire_scripts = false;
+	return $p;
 }
 
-function balise_RECOMMANDER_stat($args, $filtres) {
-	return $args;
-}
-
-function balise_RECOMMANDER_dyn($titre='',$url='',$texte='',$subject='') {
-	if (!$f = charger_fonction('fragment_recommander', 'action', true))
-		die('erreur fragment_recommander absent');
-
-	return array('modeles/recommander', 0, 
-		array(
-			'fragment'=>$f(true,array('titre'=>$titre,'url'=>$url,'texte'=>$texte,'subject'=>$subject)),
-		));
-}
 
 ?>
