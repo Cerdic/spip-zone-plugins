@@ -2,12 +2,13 @@
 	<nom> <!-- Nom du plugin -->
 	Acronymes
 	</nom>
+	<icon>img_pack/acronym-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN
  	[notre-ville.net->http://www.notre-ville.net]
 _ &#169; 2006 - Licence GPL
 	</auteur>
-	<version>0.12</version>
+	<version>0.13</version>
 	<version_base>0.1</version_base>
 	<install>base/acronymes_upgrade.php</install>
 	<etat>
