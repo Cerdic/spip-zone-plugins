@@ -49,21 +49,6 @@ function insere_sujet_alerter($sujet,$insere)
 
 
 // ------------------------------------------------------------------------------
-// filtre :
-// explode() !!
-// scoty 26/10/07 - GAF v.0.6
-// ------------------------------------------------------------------------------
-function chaine2array($chaine,$sep='')
-{
-	$chaine=trim($chaine);
-	if(!$sep) $sep = ',';
-	if($chaine=='') { $chaine=array(); }
-	else { $chaine = explode($sep,$chaine); }
-	return $chaine;
-} // chaine2array
-
-
-// ------------------------------------------------------------------------------
 //	Filtre : spipbb_maintenance ex gaf_maintenance
 //	scoty 26/09/07 - GAF v.0.6
 //	Sur balise id_article.

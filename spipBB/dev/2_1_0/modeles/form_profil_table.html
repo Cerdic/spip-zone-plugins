@@ -42,7 +42,7 @@
 
 
 [(#REM) liste des threads de l_auteur ==> checkbox refus de suivi ]
-#SET{select,#REFUS_SUIVI_THREAD|chaine2array}
+#SET{select,#VAL{','}|explode{#REFUS_SUIVI_THREAD}}
 
 </B_suivi_forum>
 <table class="spipforum" id="liste_refus_suivi">
