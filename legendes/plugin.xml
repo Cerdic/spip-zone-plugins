@@ -5,6 +5,7 @@
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>legendes</prefix>
+	<categorie>multimedia</categorie>
 	<description>
 	Plugin jQuery Image Annotate pour SPIP.
 	</description>
