@@ -23,7 +23,7 @@ et d'effectuer des recherches d'items dans les fichiers de langue de SPIP.
 	</pipeline>
 
 	<bouton id="langonet" parent="naviguer">
-		<icone>images/langonet-24.png</icone>
+		<icone>prive/themes/spip/images/langonet-24.png</icone>
 		<titre>langonet:bouton_langonet</titre>
 		<url>langonet_verifier</url>
 	</bouton>
@@ -33,22 +33,22 @@ et d'effectuer des recherches d'items dans les fichiers de langue de SPIP.
 		<url>langonet_verifier</url>
 	</bouton>
 	<onglet id='langonet_verifier' parent='langonet'>
-		<icone>images/langonet-24.png</icone>
+		<icone>prive/themes/spip/images/langonet-24.png</icone>
 		<titre>langonet:onglet_verifier</titre>
 		<url>langonet_verifier</url>
 	</onglet>
 	<onglet id='langonet_generer' parent='langonet'>
-		<icone>images/langonet-24.png</icone>
+		<icone>prive/themes/spip/images/langonet-24.png</icone>
 		<titre>langonet:onglet_generer</titre>
 		<url>langonet_generer</url>
 	</onglet>	
 	<onglet id='langonet_lister' parent='langonet'>
-		<icone>images/langonet-24.png</icone>
+		<icone>prive/themes/spip/images/langonet-24.png</icone>
 		<titre>langonet:onglet_lister</titre>
 		<url>langonet_lister</url>
 	</onglet>	
 	<onglet id='langonet_rechercher' parent='langonet'>
-		<icone>images/langonet-24.png</icone>
+		<icone>prive/themes/spip/images/langonet-24.png</icone>
 		<titre>langonet:onglet_rechercher</titre>
 		<url>langonet_rechercher</url>
 	</onglet>	
