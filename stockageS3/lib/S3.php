@@ -1,8 +1,4 @@
 <?php
-/*
- * Original URL http://code.google.com/p/amazon-s3-php-class/
- */
-
 /**
 * $Id: S3.php 47 2009-07-20 01:25:40Z don.schonknecht $
 *

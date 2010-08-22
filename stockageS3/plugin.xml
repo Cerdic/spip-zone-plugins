@@ -2,7 +2,7 @@
 	<nom>Stockage S3</nom>
 	<auteur>Natxo</auteur>
 	<icon>stockageS3.png</icon>
-	<version>0.1.0</version>
+	<version>0.2</version>
 	<etat>test</etat>
 	<description>Stockage des documents sur S3</description>
 	<lien></lien> <!-- URI de documentation -->
@@ -21,7 +21,6 @@
 	</pipeline>
 	<fonctions>inc/s3.php</fonctions>
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<!-- necessite id="gestdoc" version="[1.2.0;]" / -->
 	<categorie>maintenance</categorie>
 
 	<pipeline>
