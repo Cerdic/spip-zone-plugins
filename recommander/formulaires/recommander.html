@@ -3,16 +3,19 @@
 [(#ENV{url}|form_hidden)]
 <input type='hidden' name='recommander_env' value='#ENV*{recommander_env}' />
 <input type='hidden' name='recommander_cle' value='#ENV*{recommander_cle}' />
-<p>
-<label for='recommander_from'><:form_pet_votre_email:></label>
-<input type='text' id='recommander_from' name='recommander_from' value='[(#ENV{recommander_from,''}|htmlspecialchars)]' class='forml' />
-</p>
-<p>
-<label for='recommander_to'><:recommander:destinataire:></label>
-<input type='text' id='recommander_to' name='recommander_to' class='forml formo' value='[(#ENV{recommander_to,''}|htmlspecialchars)]' />
-</p>
-<p><label for='recommander_message'><:forum_texte:></label>
-<textarea id='recommander_message' name='recommander_message' class='forml' rows='' cols=''>[(#ENV{recommander_message,''}|htmlspecialchars)]</textarea>
-</p>
-<div class='spip_bouton'><input type='submit' name='recommander_email' value='<:recommander:recommander_message:>' /></div>
+<ul>
+	<li>
+		<label for='recommander_from'><:form_pet_votre_email:></label>
+		<input type='text' class='text forml' id='recommander_from' name='recommander_from' value='[(#ENV{recommander_from,''}|htmlspecialchars)]' />
+	</li>
+	<li>
+		<label for='recommander_to'><:recommander:destinataire:></label>
+		<input type='text' class='text forml formo' id='recommander_to' name='recommander_to' value='[(#ENV{recommander_to,''}|htmlspecialchars)]' />
+	</li>
+	<li>
+		<label for='recommander_message'><:forum_texte:></label>
+		<textarea class='text forml' id='recommander_message' name='recommander_message' rows='' cols=''>[(#ENV{recommander_message,''}|htmlspecialchars)]</textarea>
+	</li>
+</ul>
+<div class='boutons spip_bouton'><input type='submit' class='submit' name='recommander_email' value='<:recommander:recommander_message:>' /></div>
 </form>
