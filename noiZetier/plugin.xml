@@ -2,7 +2,7 @@
 	<nom>noiZetier</nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.6</version>
+	<version>0.6.1</version>
 	<version_base>0.3</version_base>
 	<etat>test</etat>
 	<description>Prototype de gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.<p />
@@ -52,7 +52,7 @@
 	<bouton id='bando_noizetier' parent="bando_squelette">
 		<url>noizetier</url>
 		<titre>noizetier:editer_noizetier_titre</titre>
-		<icone>img/noizetier-16.png</icone>
+		<icone>images/noizetier-16.png</icone>
 	</bouton>
 	
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
