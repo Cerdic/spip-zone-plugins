@@ -49,19 +49,20 @@ sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
 sup { vertical-align: super; }
 sub { vertical-align: sub; }
 
-/* Listes */
+/* Listes / Listes SPIP */
 ul, ol, li, dl, dt, dd {}
-ul, ol, dt, dd { /*padding-left: #GET{text-indent};*/ }
-ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0 }
-ol { list-style-type: decimal; }
-dl dt { clear: both;[ background: url((#CHEMIN{img/puce-dt.gif})) no-repeat[ (#GET{line-height})];] font-weight: bold; }
-dl dd {}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
 
-/* Listes SPIP */
-ul.spip, ol.spip, dt, dd { padding-left: #GET{text-indent}; }
+ul.spip, ol.spip { margin-left: #GET{text-indent}; }
 ul.spip { list-style-type: square;[ list-style-image:  url((#CHEMIN{img/puce-li.gif}));] }
 li ul.spip { list-style-type: circle;[ list-style-image: url((#CHEMIN{img/puce-li-li.gif}));] }
+ol { list-style-type: decimal; }
 ol.spip {}
+
+dl dt { font-weight: bold; }
+dl.spip dt, dl.spip dd { padding-left: #GET{text-indent}; }
+dl.spip dt { clear: both;[ background: url((#CHEMIN{img/puce-dt.gif})) no-repeat[ (#GET{line-height})];] }
+dl.spip dd {}
 
 /* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
