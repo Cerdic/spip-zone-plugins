@@ -6,7 +6,7 @@
  *
  */
 
-//$GLOBALS['theme_defaut'] = 'basic'; // pour tester un theme
+#$GLOBALS['theme_prive_defaut'] = 'basic'; // pour tester un theme
 
 function lister_themes_prives(){
 	static $themes = null;
@@ -30,9 +30,6 @@ function lister_themes_prives(){
 function find_in_theme($file, $dirname='', $include=false){
 	$themes = lister_themes_prives();
 	foreach($themes as $theme){
-		if ($f = find_in_path($file,"themes/$theme/$dirname",$include))
-			return $f;
-		// et chercher aussi comme en 2.1...
 		if ($f = find_in_path($file,"prive/themes/$theme/$dirname",$include))
 			return $f;
 	}
