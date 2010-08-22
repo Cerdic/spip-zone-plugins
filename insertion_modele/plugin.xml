@@ -1,11 +1,11 @@
 <plugin>
 	<nom>Insertion modèles</nom>
 	<auteur>Sephyria</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<description>Rajoute des boutons dans le porte-plume qui permettront d'insérer des modèles simplement</description>
 	<prefix>inserer_modeles</prefix>
-	<icon>images/inserer_modeles.gif</icon>
+	<icon>images/inserer_modeles-24.png</icon>
 	<options>inserer_modeles_fonctions.php</options>
 	<fonctions>inserer_modeles_fonctions.php</fonctions>
 	<pipeline>
