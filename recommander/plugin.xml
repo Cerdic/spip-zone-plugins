@@ -6,12 +6,8 @@
 	[fil@rezo.net->mailto:fil@rezo.net]
 _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	test
-	</etat>
+	<version>0.2.1</version>
+	<etat>stable</etat>
 	<description>
 	Fonction recommander un article &#224; un ami.
 
@@ -24,9 +20,7 @@ _ l'url, l'intro et le sujet sont facultatifs
 L'interface est en ahah.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
-	<prefix>
-	recommander
-	</prefix>
+	<prefix>recommander</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>communication</categorie>
 </plugin>
