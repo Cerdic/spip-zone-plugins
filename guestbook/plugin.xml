@@ -32,7 +32,7 @@
 	</pipeline>
 	<necessite id="SPIP" version='[2.1.0;]' />
 	<utilise id="nospam" version='[0.8;]' />
-	<bouton id='livredor' parent='forum'>
+	<bouton id='livredor' parent='naviguer'>
 		<icone>prive/images/guestbook.png</icone>
 		<titre>Livre d'or</titre>
 		<url>controle_guestbook</url>
