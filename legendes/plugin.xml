@@ -12,6 +12,7 @@
 	<lien></lien>
 	<licence>GPL</licence>
 	<icon>images/legendes-128.png</icon>
+	<lien>http://www.spip-contrib.net/Legendes</lien>
 	<fonctions>legendes_fonctions.php</fonctions>
 	<install>base/legendes_upgrade.php</install>
 	<pipeline>
