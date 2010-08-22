@@ -5,8 +5,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_rechercher' => "Rechercher",
-	'bouton_organisations' => 'Gestion des organisations',
-	'bouton_contacts' => 'Gestion des contacts',
+	'bouton_contacts' => 'Contacts',
+	'bouton_organisations' => 'Organisations',
 	
 	// C
 	'contacts' => 'Contacts',
@@ -32,8 +32,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		toutes les informations supplémentaires renseignées sur l'auteur.",
 	'explication_supprimer_organisation' => "La suppression de l'organisation supprimera
 		toutes les informations supplémentaires renseignées sur l'auteur.",
-	'explications_page_contacts' => 'En cours de developpement. Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
-	'explications_page_organisations' => 'En cours de developpement. Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explications_page_contacts' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
+	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explications_page_organisations' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
+	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 
 	// I
 	'infos_contacts_ou_organisations' => "Contacts & Organisations",
@@ -69,8 +71,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_contact' => "D&eacute;tails du contact",
 	'titre_organisation' => "D&eacute;tails de l'organisation",
-	'titre_page_contacts' => 'Page de gestion des contacts',
-	'titre_page_organisations' => 'Page de gestion des organisations',
+	'titre_page_contacts' => 'Gestion des contacts',
+	'titre_page_organisations' => 'Gestion des organisations',
 	
 );
 
