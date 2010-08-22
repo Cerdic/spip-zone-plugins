@@ -95,6 +95,7 @@ function cache_lock($key, /* private */ $unlock=false) {
 		if (!isset($locks[$f])) {
 			$locks[$f] = @fopen($f, 'a');
 			@flock($locks[$f], LOCK_EX);
+			return true;
 		}
 	}
 }

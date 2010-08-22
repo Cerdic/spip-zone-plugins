@@ -49,31 +49,26 @@ function cache_isset($key) {
 }
 
 function cache_unset($key) {
-	return memcache_set($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, FALSE);
+	return memcache_delete($GLOBALS['memcache'], _CACHE_NAMESPACE.$key);
 }
 
 function cache_inc($key, $value=null, $ttl=null) {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$key;
-	array_unshift($a, $GLOBALS['memcache']);
 
 	// set if not exists
-	$b = $a; $b[2] = 0; call_user_func_array('memcache_add', $b);
+	memcache_add($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, 0, $ttl);
 
-	array_pop($a);
-	return call_user_func_array('memcache_increment', $a);
+	if (!isset($value))
+		$value = 1;
+	return memcache_increment($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, $value);
 }
 
 function cache_dec($key, $value=null, $ttl=null) {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$key;
-	array_unshift($a, $GLOBALS['memcache']);
-
 	// set if not exists
-	$b = $a; $b[2] = 0; call_user_func_array('memcache_add', $b);
+	memcache_add($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, 0, $ttl);
 
-	array_pop($a);
-	return call_user_func_array('memcache_decrement', $a);
+	if (!isset($value))
+		$value = 1;
+	return memcache_decrement($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, $value);
 }
 
 function cache_lock($key, /* private */ $unlock = false) {
@@ -86,19 +81,29 @@ function cache_lock($key, /* private */ $unlock = false) {
 	}
 	/* lock */
 	else {
-		$wait = 0;
-		if (!isset($locks[$key])) {
-			while (cache_isset('lock::'.$key)
-			AND $wait++<_LOCK_MAX)
-				sleep(1);
+		# si on l'a deja, ok
+		if (isset($locks[$key]))
+			return true;
 
-			if (cache_inc('lock::'.$key, 1, _LOCK_MAX) == 1) {
-				$locks[$key] = true;
-				register_shutdown_function('cache_lock', $key, true);
-				return true;
-			}
-			return false;
+		# sinon s'il existe, on attend qu'il se libere
+		$wait = 0;
+		while (cache_isset('lock::'.$key)) {
+			if ($wait++ < _LOCK_MAX)
+				sleep(1);
+			else
+				return false;
 		}
+
+		# ... puis on le pose
+		# attention cache_inc() renvoie parfois false (??)
+		if (cache_inc('lock::'.$key, 1, _LOCK_MAX) <= 1) {
+			cache_set('lock::'.$key, 2, _LOCK_MAX);
+			$locks[$key] = true;
+			register_shutdown_function('cache_unlock', $key);
+			return true;
+		}
+
+		return false;
 	}
 }
 

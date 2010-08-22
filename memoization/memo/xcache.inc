@@ -64,12 +64,27 @@ function cache_lock($key, /* private */ $unlock = false) {
 	}
 	/* lock */
 	else {
-		if (!isset($locks[$key])) {
-			while (cache_isset('lock::'.$key)
-			OR cache_inc('lock::'.$key, 1, _LOCK_MAX) !== 1)
-				sleep (1);
-			register_shutdown_function('cache_lock', $key, true);
+		# si on l'a deja, ok
+		if (isset($locks[$key]))
+			return true;
+
+		# sinon s'il existe, on attend qu'il se libere
+		$wait = 0;
+		while (cache_isset('lock::'.$key)) {
+			if ($wait++ < _LOCK_MAX)
+				sleep(1);
+			else
+				return false;
 		}
+
+		# ... puis on le pose
+		if (cache_inc('lock::'.$key, 1, _LOCK_MAX) <= 1) {
+			$locks[$key] = true;
+			register_shutdown_function('cache_unlock', $key);
+			return true;
+		}
+
+		return false;
 	}
 }
 

@@ -51,7 +51,7 @@ function cache_dec($key, $value=null, $ttl=null) {
 }
 
 function cache_lock($key) {
-	eaccelerator_lock(_CACHE_NAMESPACE.$key);
+	return eaccelerator_lock(_CACHE_NAMESPACE.$key);
 }
 
 function cache_unlock($key) {
