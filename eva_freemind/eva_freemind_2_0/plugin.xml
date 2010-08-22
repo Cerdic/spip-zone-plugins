@@ -2,6 +2,7 @@
 	<nom> <!-- Nom du plugin -->
 	Int&eacute;gration d'activit&eacute;s Freemind
 	</nom>
+	<icon>img_pack/freemind_icon-24.png</icon>
 	<auteur>
 	Olivier Gautier, &eacute;quipe de d&eacute;veloppement EVA-web.<br/>
 	Dominique Lepaisant, acad&eacute;mie de Caen.<br />
@@ -11,7 +12,7 @@
 	GNU/GPL
 	</licence>
 	<version>
-	1.1
+	1.2
 	</version>
 	<etat>
 	stable
