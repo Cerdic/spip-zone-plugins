@@ -60,6 +60,7 @@ function cache_inc($key, $value=null, $ttl=null) {
 	// set if not exists
 	$b = $a; $b[2] = 0; call_user_func_array('memcache_add', $b);
 
+	array_pop($a);
 	return call_user_func_array('memcache_increment', $a);
 }
 
@@ -71,6 +72,7 @@ function cache_dec($key, $value=null, $ttl=null) {
 	// set if not exists
 	$b = $a; $b[2] = 0; call_user_func_array('memcache_add', $b);
 
+	array_pop($a);
 	return call_user_func_array('memcache_decrement', $a);
 }
 
@@ -84,11 +86,18 @@ function cache_lock($key, /* private */ $unlock = false) {
 	}
 	/* lock */
 	else {
+		$wait = 0;
 		if (!isset($locks[$key])) {
 			while (cache_isset('lock::'.$key)
-			OR cache_inc('lock::'.$key, 1, _LOCK_MAX) !== 1)
-				sleep (1);
-			register_shutdown_function('cache_lock', $key, true);
+			AND $wait++<_LOCK_MAX)
+				sleep(1);
+
+			if (cache_inc('lock::'.$key, 1, _LOCK_MAX) == 1) {
+				$locks[$key] = true;
+				register_shutdown_function('cache_lock', $key, true);
+				return true;
+			}
+			return false;
 		}
 	}
 }
