@@ -16,7 +16,7 @@ include_spip('inc/filtres');
  * @param string $subject
  * @return string
  */
-function formulaire_recommander_charger_dist($titre, $url='', $texte='', $subject=''){
+function formulaires_recommander_charger_dist($titre, $url='', $texte='', $subject=''){
 	$valeurs = array(
 		'recommander_from'=> '',
 		'recommander_to'=> '',
@@ -34,7 +34,7 @@ function formulaire_recommander_charger_dist($titre, $url='', $texte='', $subjec
  * @param string $subject
  * @return string
  */
-function formulaire_recommander_verifier_dist($titre, $url='', $texte='', $subject=''){
+function formulaires_recommander_verifier_dist($titre, $url='', $texte='', $subject=''){
 	$erreurs = array();
 
 	foreach(array('recommander_from','recommander_to') as $c) {
@@ -59,7 +59,7 @@ function formulaire_recommander_verifier_dist($titre, $url='', $texte='', $subje
  * @param string $subject
  * @return string
  */
-function formulaire_recommander_traiter_dist($titre, $url='', $texte='', $subject=''){
+function formulaires_recommander_traiter_dist($titre, $url='', $texte='', $subject=''){
 
 	$subject = sinon ($subject,
 		_L("A lire sur ").$GLOBALS['meta']['nom_site']." -- "
