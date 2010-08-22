@@ -1,7 +1,7 @@
 <plugin>
 	<nom>CleverMail pour SPIP 2.0</nom>
 	<auteur>Thomas Beaumanoir, Nicolas Hoizey et Stéphanie Caron de [Clever Age->http://www.clever-age.com/]</auteur>
-	<version>2.5.0</version>
+	<version>2.5.1</version>
   <version_base>0.8</version_base>
 	<etat>stable</etat>
 	<description>
@@ -64,7 +64,7 @@ Ic&ocirc;ne issue de la collection [Futurosoft->http://www.kde-look.org/content/
     <url>clevermail</url>
   </bouton>
   <bouton id='clevermail2' parent='bando_publication' position='-1'>
-    <icone>img_pack/clevermail-16.png</icone>
+    <icone>images/clevermail-16.png</icone>
     <titre>CleverMail</titre>
     <url>clevermail</url>
   </bouton>
