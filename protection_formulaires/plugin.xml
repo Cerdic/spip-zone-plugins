@@ -2,11 +2,12 @@
 	<nom> <!-- Nom du plugin -->
 	Protection des formulaires
 	</nom>
+	<icon>img_pack/protection_formulaires-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	[ARNO*->arnaud@paris-beyrouth.net] © GPL 2009.
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	test
