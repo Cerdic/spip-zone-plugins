@@ -2,6 +2,7 @@
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
@@ -23,4 +24,5 @@
 	</ul>
 	<div class='boutons spip_bouton'><input type='submit' class='submit' name='recommander_email' value='<:recommander:recommander_message:>' /></div>
 	</div></form>
+]
 </div>
