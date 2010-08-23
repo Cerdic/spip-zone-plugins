@@ -39,8 +39,12 @@ function action_definir_organisation_post($id_auteur) {
 
 
 function insert_contact($id_auteur) {
+	// récupérer le nom
+	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
+
 	$champs = array(
-		'id_auteur' => $id_auteur
+		'id_auteur' => $id_auteur,
+		'nom' => $nom
 	);
 	
 	// Envoyer aux plugins
@@ -56,8 +60,13 @@ function insert_contact($id_auteur) {
 }
 
 function insert_organisation($id_auteur) {
+
+	// récupérer le nom
+	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
+
 	$champs = array(
-		'id_auteur' => $id_auteur
+		'id_auteur' => $id_auteur,
+		'nom' => $nom
 	);
 	
 	// Envoyer aux plugins
