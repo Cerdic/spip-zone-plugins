@@ -55,8 +55,8 @@ function extraire_exif($fichier) {
 
 
 		// Completer GPS
-		if (function_exists(exif_read_data)) {
-			$exif_direc = exif_read_data($fichier);
+		if (function_exists('exif_read_data')) {
+			$exif_direc = @exif_read_data($fichier);
 			
 			// Si Latitude deja fixee, la traiter
 			// Si la ref n'est ni N ni S, c'est une erreur (j'en trouve sur Flickr)
