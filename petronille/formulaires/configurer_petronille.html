@@ -16,11 +16,6 @@
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_typo})</span>
 					]<input type="checkbox" class="checkbox" name="feuille_typo" id="feuille_typo" value="oui"[ (#ENV{feuille_typo}|=={oui}|oui)checked="checked"] />
 				</li>
-				<li class="petronille_feuille_forms[ (#ENV**{erreurs}|table_valeur{feuille_forms}|oui)erreur]">
-					<label for="feuille_forms"><strong>forms.css</strong>&nbsp;:<br />base pour formulaires</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_forms})</span>
-					]<input type="checkbox" class="checkbox" name="feuille_forms" id="feuille_forms" value="oui"[ (#ENV{feuille_forms}|=={oui}|oui)checked="checked"] />
-				</li>
 				<li class="petronille_feuille_spip[ (#ENV**{erreurs}|table_valeur{feuille_spip}|oui)erreur]">
 					<label for="feuille_spip"><strong>spip.css</strong>&nbsp;:<br />Autres &eacute;l&eacute;ments introduits par SPIP (illustrations, etc.)</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_spip})</span>
