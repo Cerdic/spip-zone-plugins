@@ -7,6 +7,8 @@
 <categorie>outil</categorie>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>
+<chemin dir="" />
+<chemin dir="css" />
 <necessite id="SPIP" version="[;]" />
 <necessite id="spip_bonux" version="[1.8;]" />
 <bouton id='petronille' parent='bando_squelette'>
