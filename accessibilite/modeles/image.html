@@ -68,7 +68,7 @@ equivalent a un <docXX> pour une image en mode image
  [(#MODE|=={image}|oui)
  alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
  ]
-[(#DESCRIPTIF|oui)[(#ENV{legende}|?{' ',longdesc="#desc-#ID_DOCUMENT"})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"]]
+[(#DESCRIPTIF|oui)[(#ENV{legende}|?{longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]",longdesc="#desc-#ID_DOCUMENT"})]]
 [ lang="(#ENV{langue})"] />[(#GET{url}|?{</a>})]</dt>
 [(#GET{desc}|=={'true'}|oui)
 [<dt class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dt>]
