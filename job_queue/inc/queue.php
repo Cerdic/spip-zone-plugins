@@ -180,6 +180,7 @@ function queue_start_job($row){
 		return false;
 	}
 
+	spip_log("queue: $fonction() start", 'queue');
 	switch (count($args)) {
 		case 0:	$res = $fonction(); break;
 		case 1:	$res = $fonction($args[0]); break;
@@ -195,6 +196,7 @@ function queue_start_job($row){
 		default:
 			$res = call_user_func_array($fonction, $args);
 	}
+	spip_log("queue: $fonction() end", 'queue');
 	return $res;
 
 }
