@@ -13,6 +13,7 @@ function action_lier_contact_dist() {
 
 	// cas suppression d'une adresse et de toutes ses liaisons
 	if (intval($arg[0]) and intval($arg[1])) {
+		spip_log("appel à l'action_lier_contact_dist avec $arg[1] comme argument");
 		action_lier_contact_post($arg[0], $arg[1]);
 	}
 

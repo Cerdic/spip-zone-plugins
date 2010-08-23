@@ -14,9 +14,9 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts';
 	$interface['tables_jointures']['spip_organisations'][]= 'auteurs';
-	$interface['tables_jointures']['spip_auteurs'][]= 'comptes';
+	$interface['tables_jointures']['spip_auteurs'][]= 'organisations';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
-	$interface['tables_jointures']['spip_organisations_contacts'][]= 'comptes';
+	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organsiations';
 	$interface['tables_jointures']['spip_contacts'][]= 'organisations_contacts';
 	$interface['tables_jointures']['spip_organisations'][]= 'organisations_contacts';
 
@@ -43,10 +43,10 @@ function contacts_declarer_tables_interfaces($interface){
 
 
 function contacts_declarer_tables_principales($tables_principales){
-	//-- Table comptes ------------------------------------------
+	//-- Table organisations ------------------------------------------
 	$organisations = array(
 		"id_auteur"		=> "bigint(21) NOT NULL",
-		"id_organisation" => "bigint(21) NOT NULL", // autoriser les jointures automatique... c'est un rien vilain la redondance...
+		"id_organisation" => "bigint(21) NOT NULL", // autoriser les jointures automatiques... c'est un rien vilain la redondance...
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
         "type"          => "tinytext DEFAULT '' NOT NULL", // SA, SARL, association, etc.
         "siret"         => "tinytext DEFAULT '' NOT NULL", // N° d'identification
@@ -95,14 +95,14 @@ function contacts_declarer_tables_principales($tables_principales){
 
 function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
 
-    //-- Table comptes_contacts -------------------------------------
+    //-- Table organisations_contacts -------------------------------------
     $organisations_contacts = array(
-        "id_compte"     => "BIGINT(21) NOT NULL",
+        "id_organisation"     => "BIGINT(21) NOT NULL",
         "id_contact"    => "BIGINT(21) NOT NULL"
     );
     $organisations_contacts_key = array(
-        "PRIMARY KEY"	=> "id_compte, id_contact",
-		"KEY id_compte"	=> "id_compte",
+        "PRIMARY KEY"	=> "id_organisation, id_contact",
+		"KEY id_organisation"	=> "id_organisation",
 		"KEY id_contact"	=> "id_contact"
     );
 	$tables_auxiliaires['spip_organisations_contacts'] =

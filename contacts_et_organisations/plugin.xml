@@ -90,6 +90,27 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
 	
+	<!-- des boutons pour un acces direct aux contacts / organsations (CRM) --> 
+	<bouton id='contacts' parent='auteurs'> 
+			<icone>images/contact-24.png</icone> 
+			<titre>contacts:bouton_contacts</titre> 
+			<url>contacts</url> 
+	</bouton> 
+	<bouton id='contacts21' parent='bando_edition'> 
+			<icone>prive/themes/spip/images/contact-16.png</icone> 
+			<titre>contacts:bouton_contacts</titre> 
+			<url>contacts</url> 
+	</bouton> 
+	<bouton id='organisations' parent='auteurs'> 
+			<icone>images/organisation-24.png</icone> 
+			<titre>contacts:bouton_organisations</titre> 
+			<url>organisations</url> 
+	</bouton> 
+	<bouton id='organisations21' parent='bando_edition'> 
+			<icone>prive/themes/spip/images/organisation-16.png</icone> 
+			<titre>contacts:bouton_organisations</titre> 
+			<url>organisations</url> 
+	</bouton> 	
 
 	<!--
 	avec plugin champs extras 2
