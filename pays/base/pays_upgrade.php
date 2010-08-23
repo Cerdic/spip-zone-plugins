@@ -23,6 +23,14 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 		peupler_base_pays();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
+	
+	if (version_compare($current_version,"1.1","<")){
+		sql_drop_table("spip_pays");
+		creer_base();
+		peupler_base_pays();
+		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
+	}
+
 }
 function pays_vider_tables($nom_meta_base_version) {
 

@@ -1,0 +1,9 @@
+[(#SET{critere_tri, 'num titre'})]
+#GET{critere_tri}|=={'num titre'}|oui)
+	#SET{critere_tri, 'titre'}
+]
+
+
+<BOUCLE_b(ARTICLES){par #GET{critere_tri}}{0,10}>
+<p>#TITRE</p>
+</BOUCLE_b>
