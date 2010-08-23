@@ -1094,4 +1094,47 @@ function image_negatif($im){
 
 	return "<img src='$dest'$tags />";
 }
+
+/**
+ * Un filtre permettant de dire à peu près si une image est monochrome
+ * On réduit l'image de départ à un carré de 20x20 px et on analyse chaque couleur de chaque pixel
+ * Si on a moins de 13 couleurs différentes, on considère que l'image est plus ou moins monochrome
+ * 
+ * @param unknown_type $img
+ * @param int $largeur
+ * @param int $seuil le nombre de couleur minimum d'une image non considérée comme monochrome
+ * @return bool true|false
+ */
+function image_monochrome($img,$largeur=20,$seuil=13){
+	$cache = _image_valeurs_trans($img, "coul-monochrome-$largeur", "txt");
+	if (!$cache) return("");
+	
+	$x_i = $cache["largeur"];
+	$y_i = $cache["hauteur"];
+	
+	$creer = $cache["creer"];
+	
+	$fichier = $cache["fichier"];	
+	$dest = $cache["fichier_dest"];
+	
+	if ($creer) {
+		if (@file_exists($fichier)) {
+			$thumb = imagecreate($largeur, $largeur);
+			$source = $cache["fonction_imagecreatefrom"]($fichier);
+			imagepalettetotruecolor($source);
+			imagecopyresized($thumb, $source, 0, 0, 0, 0, $largeur, $largeur, $x_i, $y_i);
+			for ($x = 0; $x < $largeur; $x++) {
+				for ($y=0; $y < $largeur; $y++) {
+					$rgb[] = imagecolorat($thumb, $x, $y);
+				}
+			}
+			$rgb = array_unique($rgb);
+		}
+	}
+	if(count($rgb) < $seuil){
+		return false;
+	}
+	else 
+		return true;
+}
 ?>

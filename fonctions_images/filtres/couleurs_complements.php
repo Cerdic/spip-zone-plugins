@@ -120,9 +120,9 @@ function couleur_teinter ($coul, $val=30) {
 
 /*
  *
- * Permet d'�claircir une couleur si elle est foncee
+ * Permet d'éclaircir une couleur si elle est foncee
  * ou de la foncer si elle est claire.
- * La valeur par defaut est 20% (sur une echelle de 0 � 100%).
+ * La valeur par defaut est 20% (sur une echelle de 0 à 100%).
  * Le troisieme parametre permet de rendre plus lumineux ou plus sombre ce qui l'est deja
  */
 function couleur_inverserluminosite($coul,$pourcentage=20, $intensifier=false) {
