@@ -26,10 +26,10 @@
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_spip})</span>
 					]<input type="checkbox" class="checkbox" name="feuille_spip" id="feuille_spip" value="oui"[ (#ENV{feuille_spip}|=={oui}|oui)checked="checked"] />
 				</li>
-				<li class="petronille_feuille_grid[ (#ENV**{erreurs}|table_valeur{feuille_grid}|oui)erreur]">
-					<label for="feuille_grid"><strong>grid.css</strong>&nbsp;:<br />&eacute;l&eacute;ments de composition</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_grid})</span>
-					]<input type="checkbox" class="checkbox" name="feuille_grid" id="feuille_grid" value="oui"[ (#ENV{feuille_grid}|=={oui}|oui)checked="checked"] />
+				<li class="petronille_feuille_base[ (#ENV**{erreurs}|table_valeur{feuille_base}|oui)erreur]">
+					<label for="feuille_base"><strong>base.css</strong>&nbsp;:<br />&eacute;l&eacute;ments de composition</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_base})</span>
+					]<input type="checkbox" class="checkbox" name="feuille_base" id="feuille_base" value="oui"[ (#ENV{feuille_base}|=={oui}|oui)checked="checked"] />
 				</li>
 			</ul>
 			<p class="explication">Les feuilles de style coch&eacute;es sont appel&eacute;es dans le head de vos pages, en premier, avant toutes les autres (ne supprimez pas la balise INSERT_HEAD de vos squelettes).</p>
