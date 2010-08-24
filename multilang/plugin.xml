@@ -27,4 +27,5 @@
 		<nom>insert_head</nom>
 		<inclure>multilang_pipelines.php</inclure>
 	</pipeline>
+	<categorie>edition</categorie>
 </plugin>
