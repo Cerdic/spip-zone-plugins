@@ -60,9 +60,7 @@ _ &#169; 2009-2010
 		<nom>post_edition</nom>
 		<inclure>polyhier_pipeline.php</inclure>
 	</pipeline>
-
-
-
  	<necessite id='SPIP' version='[2.0.10;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
+	<categorie>navigation</categorie>
 </plugin>
