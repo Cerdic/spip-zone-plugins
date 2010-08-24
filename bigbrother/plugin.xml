@@ -82,4 +82,5 @@
 	<necessite id='spip_bonux' version='[1.9.1;]' />
 	<necessite id='SPIP' version="[2.0.10;]" />
 	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.6.zip" />
+	<categorie>statistique</categorie>
 </plugin>
