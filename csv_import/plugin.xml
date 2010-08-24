@@ -27,6 +27,11 @@ afin d'&#234;tre sauvegard&#233;es automatiquement par le plugin Super_Dump
 	<options>
 	csvimport_mes_options.php
 	</options>
+	<bouton id='csvimport' parent='bando_edition'>
+	<icone>img_pack/csvimport-16.png</icone>
+	<titre>csvimport:csvimport</titre>
+	<url>exec/csvimport_tous.php</url>
+	</bouton>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
