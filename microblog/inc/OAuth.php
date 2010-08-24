@@ -1,5 +1,6 @@
 <?php
 // vim: foldmethod=marker
+include_spip('inc/json'); #decode&encode
 
 if (!function_exists('hash_hmac')) {
 function hash_hmac($algo, $data, $key, $raw_output = false) {
