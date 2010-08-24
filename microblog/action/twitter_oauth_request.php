@@ -47,7 +47,7 @@ function action_twitter_oauth_request_dist() {
 		 * L'URL de callback qui sera utilisée suite à la validation chez twitter
 		 * Elle vérifiera le retour et finira la configuration
 		 */
-		$oauth_callback = url_absolue(generer_url_action('twitter_oauth'));
+		$oauth_callback = str_replace('&amp;','&',generer_url_action('twitter_oauth'));
 
 		/**
 		 * Récupération des tokens depuis twitter par rapport à notre application
