@@ -16,4 +16,5 @@
 	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id="pcltar" version="[0.1;]" />
 	<necessite id="lib:zeroclipboard" src="http://zeroclipboard.googlecode.com/files/zeroclipboard-1.0.7.tar.gz" />
+	<categorie>divers</categorie>
 </plugin>
