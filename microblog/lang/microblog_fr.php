@@ -28,11 +28,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_associer_compte_twitter' => 'Associer votre compte twitter &agrave; ce site',
-	'label_dissocier_compte_twitter' => 'Dissocier le compte twitter actuellement utilis&eacute; (<a href="@url@">@nom@</a>)',
+	'label_dissocier_compte_twitter' => '<a href="@url_assoc@">Dissocier le compte twitter actuellement utilis&eacute;</a> (<a href="@url_compte@">@nom@</a>)',
 	'label_status' => 'Quoi de neuf ?',
 	'label_twitter_consumer_key' => 'Cl&eacute; cliente (consumer key) de l\'API Twitter',
 	'label_twitter_consumer_secret' => 'Cl&eacute; secr&ecirc;te (consumer secret) de l\'API Twitter',
 	'label_username' => 'Nom d\'utilisateur',
+	'lien_documentation' => '<a href="http://www.spip-contrib.net/Microblog" class="spip_out">Cf. documentation</a>',
 
 	// P
 	'presentation_spipo' => 'le site de la communaut&#233; SPIP',
