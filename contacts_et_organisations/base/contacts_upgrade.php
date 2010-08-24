@@ -50,6 +50,13 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		sql_alter('TABLE spip_organisations_contacts ADD INDEX (id_organisation)');		
 		ecrire_meta($nom_meta_base_version, $current_version="1.2.0");
 	}
+	if (version_compare($current_version,"1.2.1","<")){
+		// on modifie quelques champs de la table organisations
+		sql_alter('TABLE spip_organisations CHANGE type statut_juridique'); // renomme le champ 'type' en 'statut_juridique'
+		sql_alter('TABLE spip_organisations CHANGE siret identification'); // renomme le champ 'siret' en 'identification'
+		sql_alter('TABLE spip_organisations ADD activite TINYTEXT NOT NULL AFTER identification'); // ajoute le champ 'activite'
+		ecrire_meta($nom_meta_base_version, $current_version="1.2.1");
+	}
 
 }
 

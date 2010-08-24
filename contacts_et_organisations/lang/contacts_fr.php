@@ -16,14 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		les informations relatives à cette organisation ?",
 	'confirmer_delier_organisation' => "Êtes-vous sûr de vouloir délier ce contact de cette organisation ?",
 	'confirmer_delier_contact' => "Êtes-vous sûr de vouloir délier cette organisation de ce contact ?",
+	
 	// D
-	'definir_auteur_comme_contact' => "Devenir contact",
-	'definir_auteur_comme_organisation' => "Devenir organisation",
+	'definir_auteur_comme_contact' => "Définir comme contact",
+	'definir_auteur_comme_organisation' => "Déf. comme organisation",
 
 	// E
 	'est_un_contact' => "Cet auteur est défini comme étant un contact.",
 	'est_une_organisation' => "Cet auteur est défini comme étant une organisation.",
-	'explication_type' => "SA, SARL, association...",
+	'explication_statut_juridique' => "SA, SARL, association...",
+	'explication_activite' => 'Activité de l\'organisation : humanitaire, formation, édition...',
 	'explication_contacts_ou_organisations' => "Vous pouvez définir cet auteur
 		comme étant un contact ou comme étant une organisation.
 		Ces attributions donnent accès à des champs de saisies supplémentaires
@@ -32,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		toutes les informations supplémentaires renseignées sur l'auteur.",
 	'explication_supprimer_organisation' => "La suppression de l'organisation supprimera
 		toutes les informations supplémentaires renseignées sur l'auteur.",
+	'explication_identification' => 'Identifiant de l\'organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
 	'explications_page_contacts' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
 	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 	'explications_page_organisations' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
@@ -45,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_contacts_organisation' => "Contacts de l'organisation",
 	
 	// L
+	'label_activite' => "Activité",
 	'label_civilite' => "Civilité",
 	'label_fonction' => "Fonction",
 	'label_nom' => "Nom",
@@ -52,8 +56,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_naissance' => "Date de naissance",
 	'label_date_creation' => "Date de création",
 	'label_descriptif' => "Description",
-	'label_siret' => "Siret",
-	'label_type' => "Type",
+	'label_identification' => "Identification",
+	'label_statut_juridique' => "Statut juridique",
 	'label_recherche_contacts' => "Chercher dans les contacts",
 	'label_recherche_organisations' => "Chercher dans les organisations",
 	'lier_contact' => "Lier un contact",

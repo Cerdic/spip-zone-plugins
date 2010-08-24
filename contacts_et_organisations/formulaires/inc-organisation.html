@@ -4,8 +4,9 @@
 	<h3 class='legend'><:contacts:titre_organisation:></h3>
 		<ul>
 			[(#SAISIE{input,co__nom,label=<:contacts:label_nom:>})]
-			[(#SAISIE{input,co__type,label=<:contacts:label_type:>,explication=<:contacts:explication_type:>})]
-			[(#SAISIE{input,co__siret,label=<:contacts:label_siret:>})]
+			[(#SAISIE{input,co__statut_juridique,label=<:contacts:label_statut_juridique:>,explication=<:contacts:explication_statut_juridique:>})]
+			[(#SAISIE{input,co__identification,label=<:contacts:label_identification:>,explication=<:contacts:explication_identification:>})]
+			[(#SAISIE{input,co__activite,label=<:contacts:label_activite:>,explication=<:contacts:explication_activite:>})]
 			[(#SAISIE{date_jour_mois_annee,co__date_creation,label=<:contacts:label_date_creation:>})]
 			[(#SAISIE{textarea,co__descriptif,label=<:contacts:label_descriptif:>, class='inserer_barre_edition inserer_previsualisation',li_class=haut})]
 		</ul>

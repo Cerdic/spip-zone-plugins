@@ -28,7 +28,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_traitements']['PRENOM'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['CIVILITE'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['FONCTION'][] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['VILLE'][] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['SECTEUR'][] = _TRAITEMENT_TYPO;
 
 	// gerer le critere de date
 	$interface['table_date']['contacts'] = 'date_naissance';
@@ -48,8 +48,9 @@ function contacts_declarer_tables_principales($tables_principales){
 		"id_auteur"		=> "bigint(21) NOT NULL",
 		"id_organisation" => "bigint(21) NOT NULL", // autoriser les jointures automatiques... c'est un rien vilain la redondance...
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
-        "type"          => "tinytext DEFAULT '' NOT NULL", // SA, SARL, association, etc.
-        "siret"         => "tinytext DEFAULT '' NOT NULL", // N° d'identification
+        "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
+        "identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
+		"activite"		=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
 		"date_creation"	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"descriptif"	=> "tinytext DEFAULT '' NOT NULL",
 		"maj"			=> "TIMESTAMP"

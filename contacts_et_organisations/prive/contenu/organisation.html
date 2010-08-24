@@ -4,13 +4,17 @@
 	<div class='label'><:contacts:label_nom:></div>
 	<div dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</div>
 </div>]
-[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
-	<div class='label'><:contacts:label_type:></div>
-	<div dir='#LANG_DIR' class='#EDIT{type} type'>(#TYPE)</div>
+[<div class="champ contenu_statut_juridique[ (#STATUT_JURIDIQUE*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_statut_juridique:></div>
+	<div dir='#LANG_DIR' class='#EDIT{statut_juridique} statut_juridique'>(#STATUT_JURIDIQUE)</div>
 </div>]
-[<div class="champ contenu_siret[ (#SIRET*|strlen|?{'',vide})]">
-	<div class='label'><:contacts:label_siret:></div>
-	<div dir='#LANG_DIR' class='#EDIT{siret} siret'>(#SIRET)</div>
+[<div class="champ contenu_siret[ (#IDENTIFICATION*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_identification:></div>
+	<div dir='#LANG_DIR' class='#EDIT{identification} identification'>(#IDENTIFICATION)</div>
+</div>]
+[<div class="champ contenu_siret[ (#ACTIVITE*|strlen|?{'',vide})]">
+	<div class='label'><:contacts:label_activite:></div>
+	<div dir='#LANG_DIR' class='#EDIT{activite} activite'>(#ACTIVITE)</div>
 </div>]
 [<div class="champ contenu_date_creation[ (#DATE_CREATION*|!={0000-00-00 00:00:00}|?{'',vide})]">
 	<div class='label'><:contacts:label_date_creation:></div>
