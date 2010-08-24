@@ -29,4 +29,5 @@
 
 	<necessite id="SPIP" version="[2.0;]" />
 	<!-- en vrai http://trac.rezo.net/trac/spip/changeset/14036 -->
+	<categorie>communication</categorie>
 </plugin>
