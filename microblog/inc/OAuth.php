@@ -1,6 +1,22 @@
 <?php
 // vim: foldmethod=marker
 
+if (!function_exists('hash_hmac')) {
+function hash_hmac($algo, $data, $key, $raw_output = false) {
+	$blocksize = 64;
+  if (strlen($key)>$blocksize) {
+    $key = pack('H*', $algo($key));
+  }
+  $key  = str_pad($key, $blocksize, chr(0));
+  $ipad = str_repeat(chr(0x36), $blocksize);
+  $opad = str_repeat(chr(0x5c), $blocksize);
+  $res = $algo(($key^$opad) . pack('H*', $algo(($key^$ipad) . $data)));
+	if ($raw)
+		$res = pack('H*', $res);
+	return $res;
+}
+}
+
 /* Generic exception class
  */
 class OAuthException extends Exception {
