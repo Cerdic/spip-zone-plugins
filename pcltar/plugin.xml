@@ -18,4 +18,5 @@ _ Vocation &agrave; int&eacute;grer le core ?
 	</description>
 	<prefix>pcltar</prefix>
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
+	<categorie>outil</categorie>
 </plugin>
