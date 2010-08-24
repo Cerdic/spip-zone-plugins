@@ -15,6 +15,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	
 	if ($current_version=="0.0") {
 		creer_base();
+		spip_log('Tables C&O correctement créées','contacts');
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 	if (version_compare($current_version,"1.1.0","<")){
@@ -52,9 +53,10 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	}
 	if (version_compare($current_version,"1.2.1","<")){
 		// on modifie quelques champs de la table organisations
-		sql_alter('TABLE spip_organisations CHANGE type statut_juridique'); // renomme le champ 'type' en 'statut_juridique'
-		sql_alter('TABLE spip_organisations CHANGE siret identification'); // renomme le champ 'siret' en 'identification'
-		sql_alter('TABLE spip_organisations ADD activite TINYTEXT NOT NULL AFTER identification'); // ajoute le champ 'activite'
+		sql_alter("TABLE spip_organisations CHANGE type statut_juridique TINYTEXT NOT NULL DEFAULT ''"); // renomme le champ 'type' en 'statut_juridique'
+		sql_alter("TABLE spip_organisations CHANGE siret identification TINYTEXT NOT NULL DEFAULT ''"); // renomme le champ 'siret' en 'identification'
+		sql_alter("TABLE spip_organisations ADD activite TINYTEXT NOT NULL DEFAULT '' AFTER identification"); // ajoute le champ 'activite'
+		spip_log('Tables correctement passsées en version 1.2.1','contacts');
 		ecrire_meta($nom_meta_base_version, $current_version="1.2.1");
 	}
 

@@ -9,7 +9,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction pour le pipeline, n'a rien a effectuer
 function contacts_autoriser(){}
 
-
 function autoriser_contacts_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
