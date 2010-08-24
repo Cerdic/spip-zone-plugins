@@ -24,6 +24,7 @@
 		<inclure>configurer/pipelines.php</inclure>
 	</pipeline>
   <fonctions>configurer/pipelines.php</fonctions>
+  <categorie>outil</categorie>
 </plugin>
 <plugin spip='[2.1.0-beta;]'>
   <nom>SPIP Bonux</nom>
@@ -48,4 +49,5 @@
 		<inclure>configurer/pipelines.php</inclure>
 	</pipeline>
   <fonctions>configurer/pipelines.php</fonctions>
+  <categorie>outil</categorie>
 </plugin>
