@@ -28,7 +28,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_traitements']['PRENOM'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['CIVILITE'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['FONCTION'][] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['SECTEUR'][] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['ACTIVITE'][] = _TRAITEMENT_TYPO;
 
 	// gerer le critere de date
 	$interface['table_date']['contacts'] = 'date_naissance';
