@@ -1,5 +1,7 @@
 a faire
 
+rendre compatible spip 2.1.1 et spip 2.2
+
 separer le choix des groupes sur criteres de ldap++
 
 lier au plugin champs elargis
