@@ -38,6 +38,8 @@
 		<inclure>base/pays_tables.php</inclure>
 	</pipeline>
 	
-	
 	<necessite id="SPIP" version="[2.0.9;]" />
+
+	<categorie>divers</categorie>
+
 </plugin>
