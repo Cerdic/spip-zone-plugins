@@ -66,10 +66,8 @@
 		<a href="#SELF" id="select_aucun"><:forum:messages_aucun:></a>
 		<a href="#SELF" id="select_prop"><:forum:messages_prop:></a>
 	</li>
-	<li class="fieldset">
-		<fieldset>
-			[(#INCLURE{fond=formulaires/inc-gestion_forum_liste}{statut=#ENV*{select_statut}}{prive=#GET{prive}}{public=#GET{public}}{pagination=#GET{pagination}}{env})]
-		</fieldset>
+	<li class="messages">
+		[(#INCLURE{fond=formulaires/inc-gestion_forum_liste}{statut=#ENV*{select_statut}}{prive=#GET{prive}}{public=#GET{public}}{pagination=#GET{pagination}}{env})]
 	</li>
 </ul>
 
