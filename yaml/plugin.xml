@@ -18,5 +18,6 @@
 	YAML
 	</prefix>
 	<fonctions>yaml_fonctions.php</fonctions>
+	<categorie>outil</categorie>
 	<chemin dir='' />
 </plugin>
