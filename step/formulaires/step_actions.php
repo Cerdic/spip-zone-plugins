@@ -47,7 +47,11 @@ function formulaires_step_actions_verifier_dist($actions){
 		$actionneur->one_action();
 		if ($actionneur->end) {
 			$act = reset($actionneur->end);
-			$erreurs['actionneur_action'] = _L("$act[todo] de «" . typo($act['n']) . "» ($act[v])...");
+			$infos = array(
+						'plugin' => typo($act['n']),
+						'version' => $act[v]
+					);
+			$erreurs['actionneur_action'] = _T("step:message_action_end_$act[todo]",$infos);
 		} else {
 			// une fois que tout est realise, on met a jour la liste des plugins locaux !
 			include_spip('inc/step');

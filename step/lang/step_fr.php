@@ -32,6 +32,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gestion_des_plugins' => 'Gestion des plugins',
 
 	// M
+	'message_action_end_get' => 'R&eacute;cup&eacute;ration du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_end_install' => 'Installation du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_end_kill' => 'Suppression du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_end_off' => 'D&eacute;sactivation du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_end_on' => 'Activation du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_end_stop' => 'D&eacute;sinstallation du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_end_up' => 'Mise &agrave; jour du plugin &laquo;@plugin@&raquo; (version : @version@)',
 	'message_action_get' => 'R&eacute;cup&eacute;ration du plugin &laquo;@plugin@&raquo; (version : @version@)',
 	'message_action_install' => 'Le plugin &laquo;@plugin@&raquo; (version : @version@) va &ecirc;tre install&eacute;',
 	'message_action_kill' => 'Suppression des fichiers du plugin &laquo;@plugin@&raquo; (version : @version@)',
