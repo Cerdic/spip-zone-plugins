@@ -35,4 +35,5 @@
 	</pipeline>
 	<install>base/auteurs_syndic_upgrade.php</install>
 	<necessite id="SPIP" version="[2.1.0;]" />
+	<categorie>auteur</categorie>
 </plugin>
