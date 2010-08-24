@@ -19,5 +19,6 @@
 	
 	<fonctions>public/csp_criteres.php</fonctions>
 	
-	<necessite id="SPIP" version="[2.1;]" />	
+	<necessite id="SPIP" version="[2.1;]" />
+	<categorie>navigation</categorie>	
 </plugin>
