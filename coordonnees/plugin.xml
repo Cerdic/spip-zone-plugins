@@ -1,10 +1,12 @@
 <plugin>
-	<nom>Coordonnées</nom>
+	<nom><multi>[fr]Coordonnées[en]Addresses and phone numbers</multi></nom>
 	<description>
-	Ajoute la possibilité de donner des coordonnées postales (adresses, mails, téléphones)
-	aux objets de SPIP, tout particulièrement aux auteurs.
+	<multi>[fr]Ajoute la possibilité de donner des coordonnées postales (adresses, mails, téléphones)
+	aux objets de SPIP, tout particulièrement aux auteurs. Plusieurs adresses et numéros de téléphone peuvent ainsi être donnés à chaque auteur.
+	[fr]Provides the ability to add postal details (addresses, e-mail, phone numbers) to SPIP objects, specifically to authors. Several addresses or phone numbers can be given to each single author.
+	</multi>
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Plugin-Coordonnees</lien>
 	<icon>images/addressbook-128.png</icon>
 	
 	<version>1.1.0</version>
@@ -12,7 +14,6 @@
 	
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
-	
 	
 	<prefix>cop</prefix>
 	<fonctions>cop_fonctions.php</fonctions>
@@ -56,5 +57,7 @@
 	<necessite id="saisies" version="[1.5.0;]" />
 
 	<necessite id="pays" version="[1.0.0;]" />
+	
+	<categorie>auteur</categorie>
 	
 </plugin>
