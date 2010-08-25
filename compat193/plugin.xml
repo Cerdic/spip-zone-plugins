@@ -16,5 +16,6 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<prefix>compat</prefix>
 	<options>compat.php</options>
 	<necessite id="SPIP" version='[2.0.0;]' />
+	<categorie>outil</categorie>
 	<chemin dir='' />
 </plugin>
