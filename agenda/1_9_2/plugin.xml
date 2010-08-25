@@ -60,4 +60,5 @@ _ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 	<necessite id="WCalendar" version="[0.11;]" />
 <!--	<necessite id="SPIP" version="[;1.925)" />-->
 	<necessite id="SPIP" version="[1.9.2;2.0.0)" />
+	<categorie>date</categorie>
 </plugin>

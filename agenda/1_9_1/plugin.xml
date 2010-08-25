@@ -66,4 +66,5 @@ _ {{This plugin needs the Widget Calendar plugin}}
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
 	<necessite id="SPIP" version="[1.9.0;1.9.1)" />
+	<categorie>date</categorie>
 </plugin>
