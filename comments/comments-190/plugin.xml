@@ -9,4 +9,5 @@
 <prefix>comments</prefix>
 <fonctions>comments_fonctions.php</fonctions>
 <necessite id='SPIP' version='[1.9.2;]' />
+<categorie>communication</categorie>
 </plugin>
