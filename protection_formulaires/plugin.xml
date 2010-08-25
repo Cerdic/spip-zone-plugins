@@ -29,5 +29,5 @@
 		<categorie>performance</categorie>
 		<inclure>protection_formulaires.php</inclure>
 	</pipeline>
-
+	<categorie>edition</categorie>
 </plugin>
