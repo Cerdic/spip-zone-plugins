@@ -4,4 +4,5 @@
  <prefix>html5_video</prefix>
  <auteur>Pierre Rudloff ([contact->mailto:rudloff.p@gmail.com])</auteur>
  <description>Ce plugin remplace la balise &lt;video&gt; par un lecteur en HTML5.</description>
+ <categorie>multimedia</categorie>
 </plugin>
