@@ -11,6 +11,8 @@
 	</description>
 	<prefix>zpipcoop</prefix>
 	<fonctions>zpipcoop_fonctions.php</fonctions>
+
+	<categorie>squelette</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="Z" version="[1.5.1;]" />
 	<utilise id="autorite" version='[0.9.6;]' />
