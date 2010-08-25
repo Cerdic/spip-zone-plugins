@@ -21,10 +21,9 @@ _        [Documentation->http://www.spip-contrib.net/?article3059] /
         	<inclure>rers_options.php</inclure>
 		<action>affiche_aide</action>
 	</pipeline>
-        <pipeline>
-        	<nom>ajouter_boutons</nom>
-            	<inclure>rers_options.php</inclure>
-        </pipeline>	
-
-
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+			<inclure>rers_options.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
 </plugin>
