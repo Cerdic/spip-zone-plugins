@@ -181,5 +181,6 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="cfg" version="[1.0.0;]" />
+	<necessite id="saisies" version="[1.7.7;]" />
 	<categorie>communication</categorie>
 </plugin>

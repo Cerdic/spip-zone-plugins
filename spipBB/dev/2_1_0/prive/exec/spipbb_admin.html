@@ -8,7 +8,7 @@
 
 [(#REM) On teste la rubrique, si c'est un secteur, on envoie id_secteur de spipBB dans la variable]
 
-<BOUCLE_spipBB(RUBRIQUES){id_rubrique=#ENV{id_rubrique, #CONFIG{spipbb/id_secteur}}}>
+<BOUCLE_spipBB(RUBRIQUES){id_rubrique=#ENV{id_rubrique, #CONFIG{spipbb/secteur_spipbb}}}{tout}>
 	<ul>
 	<BOUCLE_enfants(RUBRIQUES){id_parent}{tout}{par titre}>
   		<li>
