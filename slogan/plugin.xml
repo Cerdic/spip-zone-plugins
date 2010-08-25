@@ -17,4 +17,5 @@
 		<inclure>slogan_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<categorie>divers</categorie>
 </plugin>
