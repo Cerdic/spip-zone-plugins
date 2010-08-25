@@ -41,4 +41,5 @@ _ &#169; 2005-2008 - Distribu&#233; sous licence GNU/GPL
 	</pipeline>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
