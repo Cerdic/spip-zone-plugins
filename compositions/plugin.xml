@@ -36,4 +36,5 @@ Les rubriques peuvent aussi se voir attribuer un article d'accueil. Les champs i
 	</pipeline>
  	<necessite id='SPIP' version='[2.0.6;]' />
 	<necessite id='spip_bonux' version='[1.8.10;]' />
+	<categorie>outil</categorie>
 </plugin>
