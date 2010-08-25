@@ -29,4 +29,5 @@
 	</prefix>
 	<fonctions>ajaxform_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
