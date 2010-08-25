@@ -366,7 +366,7 @@ function encodage($source,$doc_attente){
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
-			$encodage = "ffmpeg2theora $chemin -v 7 $bitrate_ffmpeg2theora --soft-target $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
+			$encodage = "ffmpeg2theora $chemin -v ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $bitrate_ffmpeg2theora --soft-target $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
 			spip_log($encodage,'spipmotion');
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
 			spip_log($retour_int,'spipmotion');
