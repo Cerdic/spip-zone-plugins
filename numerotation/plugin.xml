@@ -12,4 +12,5 @@
 		<inclure>numero_pipeline.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<categorie>navigation</categorie>
 </plugin>
