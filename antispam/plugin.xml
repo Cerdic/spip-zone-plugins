@@ -16,4 +16,5 @@
   </description>
   <prefix>antispam</prefix>
   <necessite id="SPIP" version="[1.9.2;2.0.0)" />
+  <categorie>performance</categorie>
 </plugin>
