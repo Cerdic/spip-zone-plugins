@@ -81,4 +81,5 @@ This allows the creation of pages of legal information, about, contact, etc..
 		<action>pre_edition_ajouter_page</action>
 		<inclure>pages_pipelines.php</inclure>
 	</pipeline>
+	<categorie>divers</categorie>
 </plugin>
