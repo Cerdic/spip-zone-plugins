@@ -29,5 +29,5 @@
 		<action>charger_script</action>
 		<inclure>edition_plein_ecran.php</inclure>
 	</pipeline>
-
+	<categorie>edition</categorie>
 </plugin>
