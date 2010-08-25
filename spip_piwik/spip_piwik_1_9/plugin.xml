@@ -28,4 +28,5 @@
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.4;]' />
+	<categorie>statistique</categorie>
 </plugin>
