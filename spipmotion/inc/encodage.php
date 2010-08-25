@@ -366,7 +366,7 @@ function encodage($source,$doc_attente){
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
-			$encodage = "ffmpeg2theora $chemin -v 8 $bitrate_ffmpeg2theora $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
+			$encodage = "ffmpeg2theora $chemin -v 7 $bitrate_ffmpeg2theora --soft-target $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
 			spip_log($encodage,'spipmotion');
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
 			spip_log($retour_int,'spipmotion');
@@ -381,7 +381,7 @@ function encodage($source,$doc_attente){
 				spip_log($retour_int_1,'spipmotion');
 				if($retour_int_1 == 0){
 					$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal" : $infos_sup_normal;
-					$infos_sup_normal_2 = "--params_supp \"-passlogfile $query $infos_sup_normal\"";
+					$infos_sup_normal_2 = "--params_supp \"-passlogfile $query $infos_sup_normal -deinterlace\"";
 					$encodage = $spipmotion_sh." --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." 2> $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
@@ -393,7 +393,7 @@ function encodage($source,$doc_attente){
 				spip_log('on encode en 1 passe','spipmotion');
 				$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
 				if($infos_sup_normal){
-					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
+					$infos_sup_normal = "--params_supp \"$infos_sup_normal -deinterlace\"";
 				}
 				$encodage = $spipmotion_sh." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 				spip_log($encodage,'spipmotion');
@@ -429,19 +429,46 @@ function encodage($source,$doc_attente){
 
 		if(intval($x) > 1){
 			unlink($fichier_temp);
+			
+			/**
+			 * Modification de la file d'attente
+			 * - On marque le document comme correctement encodé
+			 * - On ajoute la date de fin d'encodage
+			 */
 			$infos_encodage['fin_encodage'] = time();
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
-			sql_updateq("spip_documents",array('id_orig'=>$attente['id_document']),'id_document='.intval($x));
+
 			/**
 			 * Tentative de récupération d'un logo du document original
 			 */
-			if($source['id_vignette'] > 0){
+			if((sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x)) == 0) && ($source['id_vignette'] > 0)){
 				$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
 				$fichier_vignette = get_spip_doc($vignette['fichier']);
 				$string_tmp = basename(get_spip_doc($vignette['fichier'])).'-'.date();
 				$nom_vignette = md5($string_tmp).'.'.$vignette['extension'];
 				$x2 = $ajouter_documents($fichier_vignette, $nom_vignette, '', '', 'vignette', $x, $actif,'','','');
 			}
+			/**
+			 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
+			 */
+			$champs_recup = array('titre' => '0','descriptif' => '0');
+			if(_DIR_PLUGIN_PODCAST)
+				$champs_recup['podcast'] = 0;
+				$champs_recup['explicit'] = 0;
+			if(_DIR_PLUGIN_LICENCES)
+				$champs_recup['id_licence'] = 0;
+			if(_DIR_PLUGIN_GESTDOC)
+				$champs_recup['credits'] = 0;
+				
+			$modifs = array_intersect_key($source, $champs_recup);
+			
+			/**
+			 * On ajoute l'id dur document original id_orig
+			 */
+			$modifs['id_orig'] = $attente['id_document'];
+			
+			include_spip('inc/modifier');
+			revision_document($x, $modifs);
 		}else{
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
 			spip_log('Il y a une erreur, le fichier n est pas copié','spipmotion');
