@@ -40,6 +40,6 @@
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
 
-	<categorie>divers</categorie>
+	<categorie>outil</categorie>
 
 </plugin>
