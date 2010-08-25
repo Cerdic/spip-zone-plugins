@@ -9,6 +9,7 @@
   <prefix>bando</prefix>
  
  	<necessite id="SPIP" version="[2.0.3;2.2.0-dev)" />
+ 	<categorie>navigation</categorie>
 
  	<fonctions>bando_fonctions.php</fonctions>
  	<options>bando_options.php</options>
