@@ -11,4 +11,5 @@
 	<necessite id="Z" version="[1.2.0;]" />
 	<necessite id="html5" />
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<categorie>squelette</categorie>
 </plugin>
