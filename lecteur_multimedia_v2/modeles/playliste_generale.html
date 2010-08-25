@@ -37,7 +37,7 @@
 		<BOUCLE_liste_lecture(DOCUMENTS) {id_article ?} {extension IN flv,mp3} {vu=non}{!par date}{0,10}>
 		[
 		<li>
-			<strong><a href="(#URL_DOCUMENT)" title="<:lm2:source:>" type="#MIME_TYPE" rel="media">
+			<strong><a href="(#URL_DOCUMENT|url_absolue)" title="<:lm2:source:>" type="#MIME_TYPE" rel="media">
 			[<span class="title">(#TITRE|sinon{#FICHIER|lm2_joli_titre})</span>]</a></strong>
 			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>#DATE
 			#DESCRIPTIF
