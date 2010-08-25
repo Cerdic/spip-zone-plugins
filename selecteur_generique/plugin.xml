@@ -24,4 +24,5 @@
 	</pipeline>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0;]" />
+	<categorie>outil</categorie>
 </plugin>
