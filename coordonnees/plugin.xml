@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]Coordonnées[en]Addresses and phone numbers</multi></nom>
+	<nom><multi>[fr]Coordonnées[en]Addresses &amp; phone numbers</multi></nom>
 	<description>
 	<multi>[fr]Ajoute la possibilité de donner des coordonnées postales (adresses, mails, téléphones)
 	aux objets de SPIP, tout particulièrement aux auteurs. Plusieurs adresses et numéros de téléphone peuvent ainsi être donnés à chaque auteur.
