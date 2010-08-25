@@ -13,4 +13,5 @@
 </pipeline>
 <necessite id="SPIP" version="[;]" />
 <utilise id="Z" version="[;]" />
+<categorie>outil</categorie>
 </plugin>
