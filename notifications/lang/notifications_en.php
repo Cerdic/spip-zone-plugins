@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Configuration page in CFG
 'evenement_notification' => 'Following events may generate email notifications.',
-'article_prive' => 'Articles in private area',
+'article_prive' => 'Articles publishing',
 'article_prive_auteurs' => '<strong>Authors</strong>&nbsp;: Authors get notified when their article(s) is(are) published',
 'article_prive_admins_restreints' => '<strong>Administrators</strong>&nbsp;: Administrators get notified when article(s) is(are) proposed in their section',
 'forums_public' => 'Public forums',
