@@ -35,4 +35,5 @@ N&#233;cessite SPIP 1.9.1 ou une version de d&#233;veloppement
 		<inclure>comarquage_pipeline.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.1;]" />
+	<categorie>divers</categorie>
 </plugin>

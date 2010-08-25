@@ -39,4 +39,5 @@ N&#233;cessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1
 		<inclure>comarquage_pipeline.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>divers</categorie>
 </plugin>
