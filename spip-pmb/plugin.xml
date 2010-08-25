@@ -41,4 +41,5 @@ _ &#169; 2010 - Licence GPL
 	<necessite id="spip_bonux" version="[1.2;]" />
 	<necessite id='spip' version='[2.0.10;]' />
 	<utilise id='Z' version='[1.2.0;]' />
+	<categorie>divers</categorie>
 </plugin>
