@@ -50,4 +50,5 @@ Se la cartella specifica non esiste, allora sar&#224; utilizzata  la cartella di
 	  SquelettesProfils
 	</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
