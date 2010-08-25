@@ -11,6 +11,7 @@
 <chemin dir="css" />
 <necessite id="SPIP" version="[;]" />
 <necessite id="spip_bonux" version="[1.8;]" />
+<categorie>outil</categorie>
 <bouton id='petronille' parent='bando_squelette'>
 	<icone>icon-16.png</icone>
 	<titre>P&eacute;tronille</titre>
