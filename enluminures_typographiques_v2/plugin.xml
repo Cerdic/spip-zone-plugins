@@ -118,4 +118,5 @@ Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=
 
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="BarreTypoEnrichie" version="[2.5.3;]" />
+	<categorie>edition</categorie>
 </plugin>
