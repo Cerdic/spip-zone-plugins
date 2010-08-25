@@ -24,6 +24,6 @@ une unique page de configuration pour les r&eacute;glages cach&eacute;s de SPIP.
 		<url>couteau</url>
 	</bouton>
 
-
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>

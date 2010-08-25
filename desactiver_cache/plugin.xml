@@ -23,4 +23,5 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	desactiver_cache.php
 	</options>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>

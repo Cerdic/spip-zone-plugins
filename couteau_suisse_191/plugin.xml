@@ -242,4 +242,5 @@ Compatibilidade: SPIP 1.91
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
