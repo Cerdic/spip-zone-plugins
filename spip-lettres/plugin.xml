@@ -11,6 +11,7 @@
 	<necessite id="facteur" version="[1.5.1;]" />
 	<necessite id="queue" version="[0.3.4;]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
+	<categorie>communication</categorie>
 	<utilise id="bando" version="[;]" />
 	<install>base/lettres.php</install>
 	<lien>http://www.artego.fr/-Lettre-d-information-</lien>
