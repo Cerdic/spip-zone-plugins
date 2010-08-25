@@ -8,4 +8,5 @@
 	<lien>http://www.spip-contrib.net/balise-TITRE-PARENT</lien>
 	<description>Une balise pour afficher le titre de la rubrique parente, sans boucle suppl&eacute;mentaire.</description>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
