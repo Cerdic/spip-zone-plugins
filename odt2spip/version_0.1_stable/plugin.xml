@@ -24,4 +24,5 @@ _ La conversion des formules math&#233;matiques repose sur la librairie XSLT {{M
         <inclure>odt2spip_pipelines.php</inclure>
     </pipeline>
     <necessite id="snippets" version="[0.1;]" />  
+    <categorie>edition</categorie>
 </plugin>
