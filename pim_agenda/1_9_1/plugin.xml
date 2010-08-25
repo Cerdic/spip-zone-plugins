@@ -41,4 +41,5 @@ _	{{Ce plugin n&#233;cessite le plugin Widget Calendar}}
 
 	<necessite id="SPIP" version="[1.9.1;1.9.2)" />
 	<utilise id="widget_calendar" version="[0.1;]" />
+	<categorie>date</categorie>
 </plugin>
