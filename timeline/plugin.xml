@@ -19,5 +19,5 @@ Affichage d'un timeline des &#233;v&#233;nements du site : ?page=timeline&amp;ag
 	timeline
 	</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
-
+	<categorie>date</categorie>
 </plugin>
