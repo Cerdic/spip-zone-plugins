@@ -58,4 +58,5 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="BarreTypoEnrichie" version="[2.5.3;]" />
+	<categorie>edition</categorie>
 </plugin>
