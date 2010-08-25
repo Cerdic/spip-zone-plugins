@@ -32,4 +32,5 @@ _ <code>spip http://www.spip.net/spip-dev/DISTRIB/spip.zip</code>
 		<inclure>spip_loader_update_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
