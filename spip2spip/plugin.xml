@@ -13,6 +13,7 @@ et si vous utilisez agenda,[ le flux spip2spip (agenda)->../spip.php?page=backen
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> 
 	<fonctions>spiptospip_filtre.php</fonctions>
 	<install>base/spip2spip_upgrade.php</install>
+	<categorie>edition</categorie>
 	<prefix>spip2spip</prefix>
 	<icon>img_pack/icon.png</icon>
 	<options>spiptospip_options.php</options>
