@@ -12,4 +12,5 @@
 	<necessite id='spip' version='[2.0.10;]' />
 	<utilise id='bannieres' version='[0.22;]' />
 	<utilise id='notation' version='[0.7.0;]' />
+	<categorie>squelette</categorie>
 </plugin>
