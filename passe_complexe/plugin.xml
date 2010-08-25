@@ -28,4 +28,5 @@ _ [Configuration->./?exec=cfg&amp;cfg=passe_complexe]
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0.8;]' />
+	<categorie>performance</categorie>
 </plugin>
