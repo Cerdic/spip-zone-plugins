@@ -65,4 +65,5 @@ _ <a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
 		<nom>lister_tables_noexport</nom>
 		<inclure>geoportail.php</inclure>
 	</pipeline>
+	<categorie>divers</categorie>
 </plugin>
