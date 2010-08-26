@@ -37,4 +37,5 @@ pour utiliser celui de {jabberfr.org}.
 	<necessite id="cextras" version="[0.8;]" />
 	<necessite id="jabberid" version="[0.1;]" />
 	<utilise id="cfg" version="[1.10.5;]" />
+	<categorie>auteur</categorie>
 </plugin>
