@@ -39,6 +39,7 @@
   <!-- necessite -->
 	<chemin dir="spip_200" />
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<categorie>outil</categorie>
 </plugin>
 <plugin version="[2.1.0-beta;]" >
 	<nom>SkelEditor</nom>
@@ -81,4 +82,5 @@
 
 	<chemin dir="spip_210/" />
 	<necessite id="SPIP" version="[2.1.0-beta;)" />
+	<categorie>outil</categorie>
 </plugin>
