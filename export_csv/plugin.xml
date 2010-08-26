@@ -66,4 +66,5 @@ _ &copy; 2008 -
 	
 	 <necessite id="SPIP" version="[1.9.2;]" />
 	 <necessite id="cfg" version="[1.3.4;]" />
+	 <categorie>edition</categorie>
 </plugin>
