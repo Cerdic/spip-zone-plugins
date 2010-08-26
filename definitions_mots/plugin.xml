@@ -50,4 +50,5 @@ Copyright (c) 2007 [Casa d'Art->http://www.casadart.fr] &amp; [OpenStudio->http:
 	
 	
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>navigation</categorie>
 </plugin>
