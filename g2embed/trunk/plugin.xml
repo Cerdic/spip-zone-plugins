@@ -45,6 +45,5 @@
 		<action>call_guest</action>
 		<inclure>g2embed.php</inclure>
 	</pipeline>
-
-			
+	<categorie>multimedia</categorie>
 </plugin>
