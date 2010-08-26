@@ -50,4 +50,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 				
 				<chemin dir='' />
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>navigation</categorie>
 </plugin>
