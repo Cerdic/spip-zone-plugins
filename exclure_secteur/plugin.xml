@@ -41,5 +41,6 @@ Exclut automatiquement les secteurs s&eacute;l&eacute;ctionn&eacute;s des boucle
 
  
 	<fonctions>exclure_sect_fonctions.php</fonctions>
+	<categorie>outil</categorie>
 
 </plugin>
