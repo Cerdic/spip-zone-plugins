@@ -8,4 +8,5 @@
 	<lien>http://www.spip-contrib.net/Cooliris-pour-SPIP</lien>
 	<icon>images/3D.png</icon>
 	<prefix>spipiris</prefix>
+	<categorie>multimedia</categorie>
 </plugin>
