@@ -20,6 +20,7 @@
 	<necessite id="cextras" version="[1.4.3;]" />
 	<necessite id="saisies" version="[1.6.6;]" />
 	<necessite id="spip_bonux" version="[1.8.6;]" />
+	<categorie>maintenance</categorie>
 
 	<install>base/motus_install.php</install>
 	
