@@ -44,4 +44,5 @@
 	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id='cfg' version='[1.14.1;]' />
 	<necessite id='cextras' version='[1.0;]' />
+	<categorie>edition</categorie>
 </plugin>
