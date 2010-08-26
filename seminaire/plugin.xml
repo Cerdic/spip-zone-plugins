@@ -47,5 +47,5 @@ Vous pouvez également installer le plugin Crayons avec lequel ce plugin est ent
         <nom>declarer_champs_extras</nom>
         <inclure>base/seminaire.php</inclure>
 	</pipeline>
-
+	<categorie>date</categorie>
 </plugin>
