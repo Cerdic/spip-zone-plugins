@@ -8,4 +8,5 @@
   <description>Une pagination simple</description>
   <prefix>paginationsimple</prefix>
   <necessite id="SPIP" version="[1.9.2;]" />
+  <categorie>navigation</categorie>
 </plugin>
