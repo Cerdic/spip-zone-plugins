@@ -45,8 +45,8 @@ function cache_set($key, $value, $ttl=null) {
 }
 
 function cache_isset($key) {
-	if ($c = file_get_contents(cache_filename($key))
-	AND $r = unserialize($c)
+	if ($c = @file_get_contents(cache_filename($key))
+	AND $r = @unserialize($c)
 	AND $r[1] == $key
 	AND $r[2] <= time())
 		return true;
@@ -56,9 +56,9 @@ function cache_isset($key) {
 
 function cache_unset($key) {
 	return (
-		$c = file_get_contents($f = cache_filename($key))
+		$c = @file_get_contents($f = cache_filename($key))
 		AND $s = supprimer_fichier($f)
-		AND $r = unserialize($c)
+		AND $r = @unserialize($c)
 		AND $r[1] == $key
 		AND $r[2] <= time()
 	);
