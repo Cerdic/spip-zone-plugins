@@ -40,4 +40,5 @@ _ version 0.2 introduces SPIP loops to access Flickr's API from your templates.
 	  FpipR_fonctions.php
 	</fonctions>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
 </plugin>

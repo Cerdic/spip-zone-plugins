@@ -49,4 +49,5 @@ and the [introduction article on spip-contrib->http://www.spip-contrib.net/Le-pl
   <necessite id='cfg' version='[1.0.3;]' />
   <necessite id='SPIP' version='[1.9.0;]' />
   <necessite id='tag_machine' version='[0.1;]' />
+  <categorie>multimedia</categorie>
 </plugin>
