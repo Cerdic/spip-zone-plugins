@@ -43,5 +43,6 @@ _ 2006 - Distribu&#233; sous licence GPL
 	</pipeline>
 <!--	<necessite id="SPIP" version="[;1.925)" /> -->
 	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
+	<categorie>date</categorie>
 	<chemin dir='' type='prive' />
 </plugin>
