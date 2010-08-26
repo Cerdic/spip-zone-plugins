@@ -46,4 +46,5 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 		<inclure>head.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
