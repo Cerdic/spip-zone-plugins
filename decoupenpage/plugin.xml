@@ -29,4 +29,5 @@ _ &#169; 2007 - Distribu&eacute; sous licence GPL
 	decouper
 	</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>edition</categorie>
 </plugin>
