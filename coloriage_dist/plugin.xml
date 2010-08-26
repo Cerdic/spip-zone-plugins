@@ -13,6 +13,7 @@ _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtas
  <prefix>coloriagedist</prefix>
  <lien>http://www.spip-contrib.net/Plugin-pour-colorier-la-dist</lien>
  <necessite id="SPIP" version="[2.0;)" />
+ <categorie>maintenance</categorie>
  <pipeline>
 		<nom>header_prive</nom>
 		<inclure>coloriagedist_fonctions.php</inclure>
