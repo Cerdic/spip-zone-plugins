@@ -70,5 +70,6 @@ Il manque :
 	
 	<necessite id="spip" version="[2.0.0;]" />
 	<necessite id="notation" version="[0.7.1;]" />
+	<categorie>communication</categorie>
 	
 </plugin>
