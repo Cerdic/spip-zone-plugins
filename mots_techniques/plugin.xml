@@ -43,4 +43,5 @@ permet de s&eacute;lectionner par type technique
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.2;]" />
 	<necessite id="cextras" version="[0.7;]" />
+	<categorie>outil</categorie>
 </plugin>
