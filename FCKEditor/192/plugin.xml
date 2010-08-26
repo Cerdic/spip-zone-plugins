@@ -58,4 +58,5 @@ Attention : Ces fonctions ne marchent pas bien et ne sont l&agrave; qu'&agrave; 
 </description>
 	
 	<necessite id="SPIP" version="[1.9.2;]" />
+	<categorie>edition</categorie>
 </plugin>

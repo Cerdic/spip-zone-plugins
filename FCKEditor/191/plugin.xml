@@ -47,4 +47,5 @@ De m&#234;me, si vous voulez utiliser geshi vous devez l'ajouter dans le r&#233;
 	</pipeline>
 	
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>edition</categorie>
 </plugin>
