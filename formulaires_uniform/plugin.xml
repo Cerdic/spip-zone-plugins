@@ -19,6 +19,7 @@
 		<inclure>form_uniform.php</inclure>
 	</pipeline>
 
+	<categorie>outil</categorie>
 
 </plugin>
 
