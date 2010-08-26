@@ -44,7 +44,7 @@ La pr&eacute;sente version a &eacute;t&eacute; d&eacute;velopp&eacute;e dans le 
 		<nom>affiche_milieu</nom>
 		<inclure>quiz_pipelines.php</inclure>
 	</pipeline>
-
+	<categorie>communication</categorie>
 
 </plugin>
 	
