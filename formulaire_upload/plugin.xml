@@ -35,4 +35,5 @@
 		<inclure>formulaire_upload_pipelines.php</inclure>
 	</pipeline>
 	<necessite id='spip' version='[2.0.0;]' />
+	<categorie>outil</categorie>
 </plugin>
