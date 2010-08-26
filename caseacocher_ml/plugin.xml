@@ -8,4 +8,5 @@
 	<icon>caseacocher_ml.png</icon>
 	<prefix>caseacocher_ml</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>communication</categorie>
 </plugin>
