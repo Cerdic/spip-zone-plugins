@@ -73,4 +73,5 @@ Lors de pre typo , on va passer le texte a travers de coloration_code_echappe() 
 		<inclure>coloration_code.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>edition</categorie>
 </plugin>

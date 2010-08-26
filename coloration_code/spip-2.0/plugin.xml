@@ -79,4 +79,5 @@ _ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in
 	  coloration_code
 	</prefix>
 	<necessite id="SPIP" version="[2.0;]" />
+	<categorie>edition</categorie>
 </plugin>
