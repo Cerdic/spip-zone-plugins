@@ -48,4 +48,5 @@ _ Lilypond css for Codepress : Valentin Villenave
 	</pipeline>
 
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>edition</categorie>
 </plugin>
