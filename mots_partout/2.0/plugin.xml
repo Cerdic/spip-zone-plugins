@@ -8,6 +8,7 @@
 	<version>0.5.1</version>
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.0;]" />
+	<categorie>navigation</categorie>
 	<description>
 	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
 	  Cette version int&eacute;gre les mots clefs arborescents.
