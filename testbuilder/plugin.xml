@@ -8,7 +8,7 @@
 	<lien>http://www.spip-contrib.net/TestBuilder</lien> <!-- URI de documentation -->
 	<prefix>tb</prefix>
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<categorie>outils</categorie>
+	<categorie>outil</categorie>
 	<bouton id="tb" parent="configuration">
 		<icone>images/tb-24.png</icone>
 		<titre>tb:testbuilder</titre>
