@@ -51,4 +51,5 @@
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;1.9.3)" />
+	<categorie>auteur</categorie>
 </plugin>
