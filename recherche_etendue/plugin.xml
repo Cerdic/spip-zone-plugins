@@ -74,4 +74,5 @@ _ Filtro google_like
 	</pipeline>
 <!--	<necessite id="SPIP" version="[;1.925)" /> -->
 	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
+	<categorie>navigation</categorie>
 </plugin>
