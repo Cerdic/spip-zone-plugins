@@ -29,4 +29,5 @@
 		<nom>header_prive</nom>
 		<inclure>mercure_pipe.php</inclure>
 	</pipeline>
+	<categorie>communication</categorie>
 </plugin>
