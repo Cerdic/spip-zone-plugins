@@ -28,4 +28,5 @@ _ Cette version ne contient pas de switcher
     <nom>ajouter_boutons</nom>
     <inclure>sktheme_fonctions.php</inclure>
  </pipeline>
+ <categorie>maintenance</categorie>
  </plugin>

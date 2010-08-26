@@ -36,4 +36,5 @@ _ Activez ce plugin et g&#233;rez les th&#232;mes dans le menu {{Configuration}}
       <inclure>sktheme_head.php</inclure>
  </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
