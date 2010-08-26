@@ -25,4 +25,5 @@
 		<inclure>date_inscription_pipelines.php</inclure>
 	</pipeline>
  	<necessite id='SPIP' version='[2.0.10;]' />
+ 	<categorie>auteur</categorie>
 </plugin>
