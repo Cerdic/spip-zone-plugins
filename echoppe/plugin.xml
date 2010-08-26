@@ -32,6 +32,7 @@ _
 	<necessite id='ajaxforms' version='[0.2;]' /> 
 	<necessite id='spip_bonux' version='[1.6;]' /> 
 	<necessite id="lib:jquery.ui-1.6rc2" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6rc2.zip" />
+	<categorie>divers</categorie>
 	<install>base/echoppe_upgrade.php</install>
 	<options>echoppe_options.php</options>
 	<fonctions>echoppe_fonctions.php</fonctions>
