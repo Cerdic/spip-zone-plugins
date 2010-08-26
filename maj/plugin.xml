@@ -39,4 +39,5 @@ et permet le selection de l'outil appropri&#233;
 _ si SVN alors destination est obligatoire m&#234;me si .
 	</description>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
