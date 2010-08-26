@@ -25,6 +25,6 @@
 	</pipeline>
 
 	<necessite id="SPIP" version="[1.9.0;]" />
-
+	<categorie>navigation</categorie>
 </plugin>
 
