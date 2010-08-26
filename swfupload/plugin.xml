@@ -24,4 +24,5 @@ _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
         <inclure>swfupload_pipelines.php</inclure>
     </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
