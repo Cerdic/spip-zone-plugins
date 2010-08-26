@@ -15,4 +15,5 @@ Formulaire multi-&eacute;tapes de demande d'acte d'&eacute;tat civil en ligne
 </pipeline>
 <necessite id='cvtm' version='[0.1.0;]' />
 <necessite id='SPIP' version='[2.1.0;]' />
+<categorie>communication</categorie>
 </plugin>
