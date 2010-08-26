@@ -43,4 +43,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 		<nom>jquery_plugins</nom>
 		<inclure>jqueryp_pipeline.php</inclure>
 	</pipeline>
+	<categorie>outil</categorie>
 </plugin>
