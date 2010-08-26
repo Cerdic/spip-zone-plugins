@@ -49,4 +49,5 @@ _ Merci de nous signaler son bon fonctionnement ou non sur le forum li&#233; &#2
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
