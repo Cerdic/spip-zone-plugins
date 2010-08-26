@@ -53,5 +53,7 @@ Ce plugin permet de g&eacute;rer des s&eacute;lections d'articles, par des auteu
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="catalogue" version="[1.0;]" />	
 	<necessite id="comptes" version="[1.0;]" />
+	
+	<categorie>divers</categorie>
 
 </plugin>
