@@ -10,7 +10,7 @@
     <nom>affichage_final</nom>
   </pipeline>
   <prefix>zengarden</prefix>
-  
+  <categorie>maintenance</categorie>
   <necessite id="SPIP" version="[2.0.10;]" />
   <necessite id="spip_bonux" version="[1.8.7;]" />
 	<chemin dir='' />
@@ -37,6 +37,7 @@
   <description>Un jardin Zen pour Zpip</description>
   <options>zengarden_options.php</options>
   <prefix>zengarden</prefix>
+  <categorie>maintenance</categorie>
 	<pipeline>
     <nom>affichage_final</nom>
   </pipeline>
