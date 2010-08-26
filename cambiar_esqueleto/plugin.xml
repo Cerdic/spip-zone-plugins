@@ -26,4 +26,5 @@ _ Para utilizarlo:
 	<options>cambiar_esqueleto_options.php</options>
 	<fonctions>baliza_cambiar_esqueleto.php</fonctions>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
