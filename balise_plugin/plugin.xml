@@ -33,4 +33,5 @@ et doivent &ecirc;tre format&eacute;es le cas &eacute;ch&eacute;ant.
 	
 	<fonctions>baliseplugin_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>

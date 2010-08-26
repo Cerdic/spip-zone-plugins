@@ -13,4 +13,5 @@
 	<prefix>BaliseSession</prefix>
 <!--	<necessite version="[;1.9262)" /> -->
 	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
+	<categorie>outil</categorie>
 </plugin>
