@@ -28,7 +28,6 @@
 		<titre>Traducteur</titre>
 		<url>traducteur</url>
 	</bouton>
-	
-
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>edition</categorie>
 </plugin>
