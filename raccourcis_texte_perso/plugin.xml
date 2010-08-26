@@ -54,5 +54,5 @@
 	</pipeline>
 	
 	<necessite id='spip' version='[1.9.2;]' />
-	
+	<categorie>outil</categorie>
 </plugin>
