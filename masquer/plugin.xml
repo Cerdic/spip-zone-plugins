@@ -20,4 +20,5 @@ Todo :
     <nom>pre_boucle</nom>
     <inclure>masquer_pipelines.php</inclure>
   </pipeline>
+  <categorie>navigation</categorie>
 </plugin>
