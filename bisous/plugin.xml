@@ -46,4 +46,5 @@ Vous &ecirc;tes content ? Il vous faut des bisous !
 	   <inclure>bisous_pipelines.php</inclure>
     </pipeline>
 	<necessite id="SPIP" version="[2.0;]" />
+	<categorie>communication</categorie>
 </plugin>
