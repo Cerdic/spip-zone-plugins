@@ -15,4 +15,5 @@
   	<utilise id="saisies" version="[1.6.1;]" />
 	<utilise id="cfg" version="[1.10.4;]" />
 	<utilise id="Z" version="[1.2.0;]" />
+	<categorie>multimedia</categorie>
 </plugin>
