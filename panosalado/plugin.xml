@@ -18,4 +18,5 @@
     <nom>header_prive</nom>
     <inclure>panosaladomodele_pipeline.php</inclure>
     </pipeline>
+    <categorie>multimedia</categorie>
 </plugin>
