@@ -29,4 +29,5 @@
 		<inclure>peuplement_ldap_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>auteur</categorie>
 </plugin>
