@@ -25,4 +25,5 @@
 		<inclure>association_mes_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>divers</categorie>
 </plugin>
