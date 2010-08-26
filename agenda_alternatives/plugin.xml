@@ -27,6 +27,7 @@ _ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.2c et Alternatives v
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="Agenda" version="[0.1;]" />
 	<necessite id="WCalendar" version="[0.11;]" />
+	<categorie>date</categorie>
 	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>minicalalter_pipelines.php</inclure>
