@@ -37,4 +37,5 @@
         <nom>declarer_tables_interfaces</nom>
         <inclure>base/groupes_pipelines.php</inclure>
 	</pipeline>
+	<categorie>auteur</categorie>
 </plugin>
