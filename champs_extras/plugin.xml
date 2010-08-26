@@ -23,5 +23,5 @@
 	  <nom>afficher_revision_objet</nom>
   	<inclure>extras_pipelines.php</inclure>
   </pipeline>
-
+  <categorie>outil</categorie>
 </plugin>
