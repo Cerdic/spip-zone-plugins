@@ -8,7 +8,7 @@
 	<lien>http://www.spip-contrib.net/spip.php?article3389</lien>
 	<icon>portfolio_simple.png</icon>
 	
-	<categorie>theme</categorie>
+	<categorie>multimedia</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="menus" version="[0.8;]" />
 	<necessite id="fancybox" />
