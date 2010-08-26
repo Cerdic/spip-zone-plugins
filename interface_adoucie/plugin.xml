@@ -9,4 +9,5 @@
 	<description>Une &eacute;volution de l'interface priv&eacute;e, subtilement moins contrastr&eacute;e. Le plugin intervient en modifiant les feuilles de style de l'espace priv&eacute;.</description>
  	<necessite id='SPIP' version='[2.0.0;]' />
 	<prefix>interface_adoucie</prefix>
+	<categorie>maintenance</categorie>
 </plugin>

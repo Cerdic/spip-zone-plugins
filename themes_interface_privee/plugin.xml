@@ -16,6 +16,6 @@
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.0-beta;]" />
 	<necessite id="css_imbriques" version="[0.9;]" />
-
+	<categorie>maintenance</categorie>
 </plugin>
 

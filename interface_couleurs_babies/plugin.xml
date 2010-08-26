@@ -11,4 +11,5 @@
 	<lien></lien> <!-- URI de documentation -->
  	<necessite id='SPIP' version='[2.0.0;]' />
 	<prefix>interface_babies</prefix>
+	<categorie>maintenance</categorie>
 </plugin>
