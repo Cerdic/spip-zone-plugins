@@ -50,4 +50,5 @@
 	</pipeline>
 	
 	<necessite id="SPIP" version="[1.9.2;]" />
+	<categorie>multimedia</categorie>
 </plugin>
