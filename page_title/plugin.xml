@@ -20,4 +20,5 @@
 		<nom>affichage_final</nom>
 		<inclure>page_title.php</inclure>
 	</pipeline>
+	<categorie>statistique</categorie>
 </plugin>
