@@ -29,4 +29,5 @@ Ce menu n'est affich&eacute; {{que}} s'il y a au moins 2 langues vraiment utilis
 	img_pack/menu_langues_liens.png
 	</icon>
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<categorie>navigation</categorie>
 </plugin>
