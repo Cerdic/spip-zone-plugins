@@ -24,4 +24,5 @@
 		<nom>header_prive</nom>
 		<inclure>tablesorter_pipelines.php</inclure>
 	</pipeline>
+	<categorie>navigation</categorie>
 </plugin>
