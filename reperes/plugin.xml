@@ -37,5 +37,5 @@
 	</pipeline>
 
 	<necessite id='cfg' version='[1.0;]' />
-	
+	<categorie>outil</categorie>
 </plugin>
