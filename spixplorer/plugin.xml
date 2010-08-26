@@ -22,4 +22,5 @@ Utilisation: bouton sous l'accueil ou [spip.php?action=spx_list->../?action=spx_
 	</install>
 	<necessite id='chargeur' version='[0.1.0;]' / -->
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
