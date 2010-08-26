@@ -13,5 +13,6 @@ Consente di indicizzare tabelle esterne a SPIP e consentire ricerche
 	<inclure>ind_tab.php</inclure>
 </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>
 
