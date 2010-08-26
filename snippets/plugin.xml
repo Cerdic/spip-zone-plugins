@@ -24,4 +24,5 @@
 	</pipeline>
 	<chemin dir='' />	
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>edition</categorie>
 </plugin>
