@@ -14,7 +14,6 @@ GisMarker.prototype.openWindow = function() {
 function openWindow(marcador) {
 	//cando se abre a ventana do marcador executamos as seguintes intsruccions
 	GEvent.addListener(marcador.marker,"infowindowopen", function() {
-		tb_init('a.thickbox');
 		if (marcador.son!="") {
 			var fo = new FlashObject(URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + marcador.son, "player_x", "17", "17", "6", "#FFFFFF");
 			fo.write("player");
