@@ -67,6 +67,9 @@ function formulaires_configurer_facteur_verifier_dist(){
 				$erreurs['facteur_smtp_password'] = _T('info_obligatoire');
 		}
 	}
+	if(count($erreurs)>0){
+		$erreurs['message_erreur'] = _T('facteur:erreur_generale');
+	}
 	return $erreurs;
 }
 
