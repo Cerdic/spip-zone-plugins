@@ -100,8 +100,10 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 				      redirige("index.php");
 				}
 				spip_log("test6");
-				if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
-
+				if ($n)	{
+				    return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
+				    
+				}
 
 				spip_log("Creation de l'auteur '$nom' depuis thelia impossible");
 				

@@ -9,5 +9,5 @@ if (!defined('_DIR_PLUGIN_SPIP_THELIA')){
 }
 include_spip('base/spip_thelia_produits_associes');
 $GLOBALS['liste_des_authentifications']['thelia'] = 'thelia';
-$GLOBALS['thelia_statut_nouvel_auteur'] = '1comite';
+$GLOBALS['thelia_statut_nouvel_auteur'] = lire_config("spip_thelia/statutclients_spip_thelia", "6forum");
 ?>

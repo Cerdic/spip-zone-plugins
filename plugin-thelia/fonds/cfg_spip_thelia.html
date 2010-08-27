@@ -37,6 +37,9 @@
 			<option value="oui" [(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|?{selected="selected",})]>oui</option>		
 		</select>
 
+		<br />
+		<label for="statutclients_spip_thelia">Statut dans SPIP des clients Th&eacute;lia (authentification unique SPIP/Th&eacute;lia)</label>
+		<input type="text" name="statutclients_spip_thelia" id="statutclients_spip_thelia" value="[(#CONFIG{spip_thelia/statutclients_spip_thelia}|sinon{6forum})]" />
 		<br /><label for="encodage_spip_thelia">Activer l'encodage utf8 des donnees issues de Th&eacute;lia :</label>	
 		<select name="encodage_spip_thelia" id="encodage_spip_thelia">
 			<option value="non" [(#CONFIG{spip_thelia/encodage_spip_thelia}|=={"non"}|?{selected="selected",})]>non</option>		
