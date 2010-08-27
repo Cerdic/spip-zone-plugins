@@ -56,6 +56,6 @@ Attention : Ces fonctions ne marchent pas bien et ne sont l&agrave; qu'&agrave; 
 - De nombreux boutons peuvent &#234;tre jug&#233;s inutiles (voire dangereux) par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez FCKConfig.ToolbarSets (BarreArticle, BarreBreve et BarreRubrique),
  
 </description>
-	
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
