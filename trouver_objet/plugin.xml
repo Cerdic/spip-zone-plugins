@@ -10,7 +10,7 @@
 	<lien></lien>
 	<prefix>trouver_objet</prefix>
  	<necessite id='SPIP' version='[2.0.9;]' />
-	<categorie>recherche</categorie>
+	<categorie>navigation</categorie>
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>inserer_javascript</action>
