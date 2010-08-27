@@ -3,7 +3,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	
+	// B
+	'bouton_reinitialiser' => 'R&eacute;initialiser',
+
 	'titre_menu_box' => 'Bo&icirc;te Multim&eacute;dia',
 	'titre_page_configurer_box' => 'Configuration de la Bo&icirc;te multim&eacute;dia',
 

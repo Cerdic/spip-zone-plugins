@@ -35,12 +35,12 @@
 		<li class="fieldset"><fieldset><legend><:mediabox:label_apparence:></legend>
 		<ul>
 			[<li class="editer_skin[ (#ENV**{erreurs}|table_valeur{skin}|oui)erreur]">
-				<label for='skin'><:mediabox:label_skin:></label>
+				<label><:mediabox:label_skin:></label>
 				(#ENV{_skins}|box_choisir_skin{#ENV{skin}}|image_reduire{130})
 			</li>]
 			<li class="editer_transition[ (#ENV**{erreurs}|table_valeur{transition}|oui)erreur]">
 				<label for='transition'><:mediabox:label_transition:></label>
-				<select name="transition">
+				<select name="transition" id="transition">
 					<option value="elastic"[(#ENV{transition}|=={elastic}|oui)selected="selected"]><:mediabox:label_choix_transition_elastic:></option>
 					<option value="fade"[(#ENV{transition}|=={fade}|oui)selected="selected"]><:mediabox:label_choix_transition_fade:></option>
 					<option value="none"[(#ENV{transition}|=={none}|oui)selected="selected"]><:mediabox:label_choix_transition_none:></option>
@@ -79,8 +79,8 @@
 
 	<p class="boutons">
 		<input style="display:none;" type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
-		<input type="submit" name="reinit" class="submit" value="<:mediabox:reinitialiser:>" />
-		<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
+		<input type="submit" name="reinit" class="submit" value="<:mediabox:bouton_reinitialiser:>" />
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
 	</p>
 </div></form>
 </div>
