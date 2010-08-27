@@ -75,7 +75,7 @@ function inc_afficher_objets($type, $titre,$requete,$formater='', $force=false){
 
 	// pas de skel pour cet objet,
 	// on se rabat sur le core
-	return inc_afficher_objets($type, $titre, $requete, $formater, $force);
+	return inc_afficher_objets_dist($type, $titre, $requete, $formater, $force);
 
 }
 
