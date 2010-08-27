@@ -39,7 +39,7 @@ function filtre_calculer_nuage_dist($titres, $urls, $poids, $expose) {
 function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose = array()){
 	static $nuage = array();
 	if($titre and $url){
-		$nuage['titre'][$id_mot] = $titre;
+		$nuage['titre'][$id_mot] = supprimer_tags($titre);
 		$nuage['url'][$id_mot] = $url;
 	}
 	elseif($poids>=0){
