@@ -5,6 +5,8 @@
  * Les autorisations
  */
 
+function auteurs_syndic_autoriser(){}
+
 /**
  * 
  * Autoriser a modifier un site
