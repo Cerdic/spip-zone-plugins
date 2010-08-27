@@ -53,6 +53,7 @@
 	<necessite id="saisies" version="[1.5.1;]" />
 	<!-- filtre |icone et boucles CONDITIONS -->
 	<necessite id="spip_bonux" version="[1.9.3;]" />
+	<categorie>divers</categorie>
 	<!-- Pour la geolocalisation -->
 	<!--<necessite id="geographie" version="[0.2;]" />-->
 </plugin>
