@@ -1,0 +1,52 @@
+<plugin>
+	<nom>
+		Groupes
+	</nom>
+	<auteur>
+		&copy; VincentL - 2010 - Distribu&eacute; sous licence GNU/LGPL
+	</auteur>
+	<version>0.2</version>
+	<version_base>0.63</version_base>
+	<etat>dev</etat>
+	<description>
+		Cr&eacute;ation de groupes d&rsquo;auteurs
+		<a href="?exec=groupes">Page de gestion</a>
+	</description>
+	<icon>img_pack/groupes_auteurs.png</icon>
+	<prefix>groupes</prefix>
+	<install>base/groupes_install.php</install>
+	<options>groupes_options.php</options>
+	<fonctions>groupes_fonctions.php</fonctions>
+	<install>base/groupes_install.php</install>
+	<pipeline>
+		<nom>listeauteurs</nom>
+		<inclure>groupes_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='groupes_auteurs' parent='auteurs'>
+	    <icone>img_pack/groupes_auteurs16png</icone>
+	    <titre>groupes_auteurs:groupes d&rsquo;auteurs</titre>
+		<url>groupes</url>
+	</bouton>
+	<bouton id='groupes_auteurs' parent='bando_edition'>
+	<icone>img_pack/groupes_auteurs16.png</icone>
+	    <titre>groupes_auteurs:groupesd&rsquo;auteurs</titre>
+		<url>groupes</url>
+	</bouton>
+	
+	<pipeline>
+		<nom>listeliens</nom>
+		<inclure>groupes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_principales</nom>
+        <inclure>base/groupes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_auxiliaires</nom>
+        <inclure>base/groupes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_interfaces</nom>
+        <inclure>base/groupes_pipelines.php</inclure>
+	</pipeline>
+</plugin>
