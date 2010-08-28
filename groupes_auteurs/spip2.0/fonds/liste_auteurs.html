@@ -1,0 +1,15 @@
+<B_aut>
+#PAGINATION
+<table>
+	<tr>
+		<th><:groupes:liste_auteurs_nom:></th>
+		<th><:groupes:liste_auteurs_gerer:></th>
+	</tr>
+	<BOUCLE_aut(AUTEURS) {tout} {pagination 10}>
+		<tr>
+			<td>#NOM</td>
+			<td><a href="?exec=groupes&page=gerer_auteur&id_auteur=#ID_AUTEUR"><:groupes:liste_auteurs_gerer:></a></td>
+		</tr>
+	</BOUCLE_aut>
+</table>
+</B_aut>
