@@ -1,0 +1,23 @@
+#CACHE{0}
+
+<div class="formulaire_spip formulaire_cfg">
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+
+<form method="post" action="#ENV{action}"><div>#ACTION_FORMULAIRE{#SELF}
+<fieldset><legend><:groupes:liste_actions_act1:></legend>
+<ul>
+<li>[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_groupe})</span>]<:groupes:nom_groupe:>
+<input type="text" name="nom_groupe"/></li>
+<li>[(#EVAL{defined('_DIR_PLUGIN_ACCESRESTREINT')}|?{' '}) 
+[<span class='erreur'>(#ENV**{erreurs}|table_valeur{zones})</span>]<:groupes:zones:>
+	<ul id="ulzones">
+		<li id="li_zone_0"><INCLURE{fond=inc/boucle_zones}/></li>
+	</ul>
+</li>]
+</ul>
+<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:OK:>" />
+<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+</fieldset>
+</form></div>
+
