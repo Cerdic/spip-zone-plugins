@@ -17,7 +17,7 @@ function webfonts_insert_head_css($flux){
 		$fonts = array_map('urlencode',$fonts);
 		$fonts = implode('|',$fonts);
 		if (strlen($fonts)) {
-			$code = '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.$fonts.'" id="webfonts">';
+			$code = '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.$fonts.'" id="webfonts" />';
 			$flux = $code.$flux; // on le place en premier !
 		}
 
