@@ -3,46 +3,46 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_meta_casier" value="petronille/typo" />
 		<fieldset>
-			<legend>Feuilles de style &agrave; appliquer au site</legend>
-			<p class="explication">Attention : si, dans votre repertoire squelettes, il existe un fichier du m&ecirc;me nom que l'un de ceux-ci, il sera appliqu&eacute; &agrave; la place.</p>
+			<legend>R&eacute;glage de la base typographique generale du site (typo.css)</legend>
+			<p class="explication">Indiquez vos valeurs en CSS. Pour voir, affichez la page de test ?page=demo/typo ou mieux, ins&eacute;rez le mod&egrave;le &lt;typo|&gt; dans un de vos articles.</p>
 			<ul>
-				<li class="petronille_feuille_reset">
-					<label for="feuille_reset"><strong>reset.css</strong>&nbsp;:<br />mise &agrave; z&eacute;ro multinavigateurs</label>
-					<input type="checkbox" class="checkbox" name="feuille_reset" id="feuille_reset" checked="checked" disabled="disabled" />
+				<li class="petronille_font-family[ (#ENV**{erreurs}|table_valeur{font-family}|oui)erreur]">
+					<label for="font-family">Famille typo</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-family})</span>
+					]<input type="text" class="text" name="font-family" id="font-family" [ value="(#ENV{font-family}|sinon{sans-serif})"] />
+					<p class="explication">Exemple :  Verdana, Geneva, sans-serif</p>
 				</li>
-				<li class="petronille_feuille_typo[ (#ENV**{erreurs}|table_valeur{feuille_typo}|oui)erreur]">
-					<label for="feuille_typo"><strong>typo.css</strong>&nbsp;:<br />base typographique</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_typo})</span>
-					]<input type="checkbox" class="checkbox" name="feuille_typo" id="feuille_typo" value="oui"[ (#ENV{feuille_typo}|=={oui}|oui)checked="checked"] />
+				<li class="petronille_font-size[ (#ENV**{erreurs}|table_valeur{font-size}|oui)erreur]">
+					<label for="font-size">Taille</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-size})</span>
+					]<input type="text" class="text" name="font-size" id="font-size" [ value="(#ENV{font-size}|sinon{1em})"] style="width: 6em;" />
 				</li>
-				<li class="petronille_feuille_spip[ (#ENV**{erreurs}|table_valeur{feuille_spip}|oui)erreur]">
-					<label for="feuille_spip"><strong>spip.css</strong>&nbsp;:<br />Autres &eacute;l&eacute;ments introduits par SPIP (illustrations, etc.)</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_spip})</span>
-					]<input type="checkbox" class="checkbox" name="feuille_spip" id="feuille_spip" value="oui"[ (#ENV{feuille_spip}|=={oui}|oui)checked="checked"] />
+				<li class="petronille_line-height[ (#ENV**{erreurs}|table_valeur{line-height}|oui)erreur]">
+					<label for="line-height">Interlignage</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{line-height})</span>
+					]<input type="text" class="text" name="line-height" id="line-height" [ value="(#ENV{line-height}|sinon{1.5em})"] style="width: 6em;" />
 				</li>
-				<li class="petronille_feuille_base[ (#ENV**{erreurs}|table_valeur{feuille_base}|oui)erreur]">
-					<label for="feuille_base"><strong>base.css</strong>&nbsp;:<br />&eacute;l&eacute;ments de composition</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{feuille_base})</span>
-					]<input type="checkbox" class="checkbox" name="feuille_base" id="feuille_base" value="oui"[ (#ENV{feuille_base}|=={oui}|oui)checked="checked"] />
+				<li class="petronille_text-indent[ (#ENV**{erreurs}|table_valeur{text-indent}|oui)erreur]">
+					<label for="text-indent">Alin&eacute;a</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{text-indent})</span>
+					]<input type="text" class="text" name="text-indent" id="text-indent" [ value="(#ENV{text-indent}|sinon{50px})"] style="width: 6em;" />
+				</li>
+				<li class="petronille_color[ (#ENV**{erreurs}|table_valeur{color}|oui)erreur]">
+					<label for="color">Couleur du texte</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{color})</span>
+					]<input type="text" class="text" name="color" id="color" [ value="(#ENV{color}|sinon{#666666})"] style="width: 6em;" />
+				</li>
+				<li class="petronille_background-color[ (#ENV**{erreurs}|table_valeur{background-color}|oui)erreur]">
+					<label for="background-color">Couleur du fond</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{background-color})</span>
+					]<input type="text" class="text" name="background-color" id="background-color" [ value="(#ENV{background-color}|sinon{#FFFFFF})"] style="width: 6em;" />
 				</li>
 			</ul>
-			<p class="explication">Les feuilles de style coch&eacute;es sont appel&eacute;es dans le head de vos pages, en premier, avant toutes les autres (ne supprimez pas la balise INSERT_HEAD de vos squelettes).</p>
 		</fieldset>
 		<p class="boutons">
 			<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
 		</p>
 	</div></form>
 </div>
-<script type="text/javascript">
-	function update_typo_form(){
-		if (jQuery('#feuille_typo').attr('checked'))
-			jQuery('.formulaire_configurer_petronille_typo').slideDown();
-		else
-			jQuery('.formulaire_configurer_petronille_typo').slideUp();
-	}
-	jQuery('document').ready(function(){
-		update_typo_form();
-		jQuery('#feuille_typo').bind('change',update_typo_form);
-	});
-</script>
