@@ -57,9 +57,17 @@ function cvtm_recuperer_post_precedents($form){
 	  AND $c = _request('cvtm_prev_post')
 		AND $c = decoder_contexte_ajax($c, $form)){
 		#var_dump($c);
+		
+		# reinjecter dans la bonne variable pour permettre de retrouver
+		# toutes les saisies dans un seul tableau
+		if ($_SERVER['REQUEST_METHOD']=='POST')
+			$store = &$_POST;
+		else
+			$store = &$_GET;
+
 		foreach($c as $k=>$v)
-			if (!_request($k)) // on ecrase pas si saisi a nouveau !
-				set_request($k,$v);
+			if (!isset($store[$k])) // on ecrase pas si saisi a nouveau !
+				$_REQUEST[$k] = $store[$k] = $v;
 		return array($c['_etape'],$c['_etapes']);
 	}
 	return false;
