@@ -3,7 +3,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	
+	//B
+	'bouton_effacer' => 'Effacer',
+
 	//C
 	'cfg_boite_opensearch' => 'Configuration du plugin OpenSearch',
 	'cfg_descr_opensearch' => 'OpenSearch : Moteur de recherche personnalisé pour votre site.',
