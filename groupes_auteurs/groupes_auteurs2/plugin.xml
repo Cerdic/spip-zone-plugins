@@ -9,6 +9,7 @@
 	<version_base>0.63</version_base>
 	<etat>dev</etat>
 	<description>
+		pour spip 2.1.1
 		Cr&eacute;ation de groupes d&rsquo;auteurs
 		<a href="?exec=groupes">Page de gestion</a>
 	</description>
