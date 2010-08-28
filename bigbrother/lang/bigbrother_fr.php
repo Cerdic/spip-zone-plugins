@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_statistiques' => '"id_article" ou "id_auteur" manquant',
-	'explication_exclure_auteurs' => 'Les auteurs s&eacute;lectionn&eacute;s seront exclus des r&eacute,sultats visibles mais seront quand m&ecirc;me enregistr&eacute; en base pour les cas o&ugrave; l\'on souhaite revenir en arri&egrave;re.',
+	'explication_exclure_auteurs' => 'Les auteurs s&eacute;lectionn&eacute;s seront exclus des r&eacute;sultats visibles mais seront quand m&ecirc;me enregistr&eacute; en base pour les cas o&ugrave; l\'on souhaite revenir en arri&egrave;re.',
 	'explication_page_stats' => 'Cette page liste les &eacute;v&egrave;nements qui ont eu lieu sur le site',
 
 	// F
