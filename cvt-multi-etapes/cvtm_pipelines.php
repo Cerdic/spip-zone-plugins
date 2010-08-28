@@ -149,8 +149,13 @@ function cvtm_formulaire_verifier($flux){
 		while ($e<$etape AND $e<$etapes){
 			$e++;
 			$erreurs[$e] = array();
-			if ($verifier = charger_fonction("verifier_$e","formulaires/$form/",true));
+			if ($verifier = charger_fonction("verifier_$e","formulaires/$form/",true))
 				$erreurs[$e] = call_user_func_array($verifier, $flux['args']['args']);
+			elseif ($verifier = charger_fonction("verifier_etape","formulaires/$form/",true)){
+				$args = $flux['args']['args'];
+				array_unshift($args, $e);
+				$erreurs[$e] = call_user_func_array($verifier, $args);
+			}
 			if (!count($erreurs[$e]))
 				$derniere_etape_ok = $e;
 			// possibilite de poster dans _retour_etape_x
