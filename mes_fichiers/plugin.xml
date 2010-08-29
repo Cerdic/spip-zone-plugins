@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom>mes_fichiers.zip</nom>
+	<nom>Mes fichiers</nom>
 	<version>0.2</version>
 	<etat>stable</etat>
 	<prefix>mes_fichiers</prefix>
