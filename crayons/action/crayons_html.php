@@ -372,9 +372,6 @@ class SecureCrayon extends Crayon {
 }
 
 function action_crayons_html_dist() {
-
-	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
-
 	// CONTROLEUR
 	// on affiche le formulaire demande (controleur associe au crayon)
 	// Si le crayon n'est pas de type "crayon", c'est un crayon etendu, qui
@@ -387,7 +384,9 @@ function action_crayons_html_dist() {
 	if (!_request('type') OR _request('type') == 'crayon')
 	  $return['$html'] = crayons_formulaire($return['$html']);
 
-	$json = trim(json_encode($return));
+	$json = trim(safe_json_encode($return));
+
+	header("Content-Type: text/plain; charset=utf-8");
 	die($json);
 }
 

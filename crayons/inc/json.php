@@ -62,8 +62,20 @@ function var2js($var) {
 	return false;
 }
 
-if(!function_exists('json_encode')) {
-	function json_encode($v) { return var2js($v); }
+// Un json_encode qui marche en iso (la spec JSON exige utf-8)
+function safe_json_encode($v) {
+	if ($GLOBALS['charset'] == 'utf-8'
+	AND function_exists('json_encode'))
+		return json_encode($v);
+
+	$v = var2js($v);
+
+	if ($GLOBALS['charset'] != 'utf-8') {
+		include_spip('inc/charsets');
+		$v = unicode2charset(charset2unicode($v), 'utf-8');
+	}
+
+	return $v;
 }
 
 // http://doc.spip.org/@json_export
