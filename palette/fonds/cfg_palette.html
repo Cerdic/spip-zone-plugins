@@ -6,27 +6,12 @@
 <:palette:config_desc|propre:>
 <:palette:config_exemple:>
 <p><input class="palette" name="couleur" value="#dfdfdf" style="width:5em" /><br />
-&lt;input <b>class="palette"</b> name="couleur" value="#dfdfdf" /&gt;</p>
+&lt;input <strong>class="palette"</strong> name="couleur" value="#dfdfdf" /&gt;</p>
 
-<a href="http://www.spip-contrib.net/Palette" class="spip_out" target="_new">Documentation sur contrib</a>
+<:palette:config_lien_doc:>
 -->
-<div class="formulaire_spip">
-	<form method="post" action="#SELF">
-		<div>
-			[(#ENV{_cfg_}|form_hidden)]
-			<ul>
-				<li>
-					<label for="palette_public"><:palette:palette_public:></label>
-					<input type="checkbox" name="palette_public" id="palette_public"[ checked="(#ENV{palette_public}|=={'on'}|?{'checked'})"] class="text" value="on" />
-				</li>
-				<li>
-					<label for="palette_ecrire"><:palette:palette_ecrire:></label>
-					<input type="checkbox" name="palette_ecrire" id="palette_ecrire"[ checked="(#ENV{palette_ecrire}|!={''}|?{'checked'})"] class="text" value="on" />
-				</li>
-			</ul>
-			<div class="boutons">
-				<input type="submit" class="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
-			</div>
-		</div>
-	</form>
+
+<div class="ajax">
+	#FORMULAIRE_CONFIG_PALETTE
 </div>
+
