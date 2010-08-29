@@ -1,13 +1,13 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Mes fichiers 2
-			[en]My files 2
+			[fr]Mes fichiers
+			[en]My files
 		</multi>
 	</nom>
 	<auteur>_Eric_, Quentin, d'apr&egrave;s la version initiale de James</auteur>
-	<version>0.3.1</version>
-	<etat>dev</etat>
+	<version>1.0.0</version>
+	<etat>test</etat>
 	<licence>GPL 3</licence>
 	<icon>prive/themes/spip/images/mes_fichiers-64.png</icon>
 	<description><multi>
