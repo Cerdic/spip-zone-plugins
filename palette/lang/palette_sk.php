@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_desc' => '<NEW><strong>Paleta</strong> automaticky prid&aacute; koliesko s v&yacute;berom farieb k vstupn&eacute;mu po&#318;u,
   ak ho ozna&#269;&iacute;te CSS triedou &#132;palette&#147;',
 	'config_exemple' => '<NEW>Vzorka :',
+	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Cf. documentation</a>', # NEW
 
 	// F
 	'fermer' => '<NEW>Zatvori&#357; paletu',
