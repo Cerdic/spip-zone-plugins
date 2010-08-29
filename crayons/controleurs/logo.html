@@ -5,7 +5,6 @@
 ]
 #CACHE{0}
 
-
 [(#REM) En fonction de du contexte, choisir un logo ]
 [(#SET{image,[(#ID_ARTICLE|?{#LOGO_ARTICLE_NORMAL}
 	|sinon{[(#ID_AUTEUR|?{#LOGO_AUTEUR_NORMAL})]}
@@ -26,19 +25,18 @@
 		|extraire_attribut{height})]px)]&nbsp;:
 	})]
 	[(#SET{supprimer,
-		[<br /><label>
-			<input type="checkbox" name="(#ENV{name_logo})_supprimer" id="#ENV{name_logo}_supprimer" /> supprimer</label>]
+		[<br />
+			<input type="checkbox" name="(#ENV{name_logo})_supprimer" id="#ENV{name_logo}_supprimer" /><label for="#ENV{name_logo}_supprimer"> supprimer</label>]
 	})]
 })]
 
 
 <fieldset[ style="(#ENV{style}); border:none;"]>
-[<div style="float:#LANG_RIGHT">(#GET{logo}|inserer_attribut{src,#GET{url}}
-	|inserer_attribut{style,vertical-align:middle;})</div>]
 <legend>
 	<small>[(#GET{legend}|sinon{Choisir un logo&nbsp;:})]</small>
 </legend>
-
+[<div style="float:#LANG_RIGHT">(#GET{logo}|inserer_attribut{src,#GET{url}}
+	|inserer_attribut{style,vertical-align:middle;})</div>]
 <input class="crayon-active" name="#ENV{name_logo}" type="file"
 onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('Il faut choisir une image :-)'); this.value=''; }; var q=cQuery('##ENV{name_logo}_supprimer').parent(); this.value ? q.hide() : q.show();" size="1" />
 
