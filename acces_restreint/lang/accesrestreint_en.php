@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Give me instant acces to this area',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => 'No zones',
 	'auteurs' => 'authors',
 
 	// B
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => '#',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
+	'confirmer_ajouter_auteurs' => 'Are you sure you want to add this author to the zone?',
 	'confirmer_retirer_auteur_zone' => 'Are you sure you wish to remove this author from this zone?',
 	'confirmer_retirer_auteurs' => 'Are you sure you wish to remove all authors from this zone?',
 	'confirmer_supprimer_zone' => 'Are you sure you want to delete this zone?',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'restricted access',
 	'icone_supprimer_zone' => 'Delete this area',
-	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
+	'info_acces_restreint' => 'Access to this page is restricted. Please identify yourself to continue',
 	'info_ajouter_auteur' => 'Add this author',
 	'info_ajouter_auteurs' => 'Add all authors',
 	'info_ajouter_zones' => 'Add all areas',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Title',
 	'titre_ajouter_zone' => 'Add to a restricted area',
 	'titre_cadre_modifier_zone' => 'Modify a zone',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_page_config' => 'Configure the access rights',
 	'titre_table' => 'All restricted areas',
 	'titre_zones_acces' => 'Restricted areas',
 	'toutes' => 'All',
