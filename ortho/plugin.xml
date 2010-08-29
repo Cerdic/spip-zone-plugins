@@ -9,14 +9,7 @@
 	<etat>
 	stable
 	</etat>
-	<description>
-
-		<div class='verdana2'>[:ortho_avis_privacy:]</div>
-		<div class='verdana2'><blockquote class='spip'><p>
-		[:ortho_avis_privacy2:]
-		</p></blockquote></div>
-
-	</description>
+	<description>ortho_description</description>
 	<lien>
 	</lien>
 	<prefix>
