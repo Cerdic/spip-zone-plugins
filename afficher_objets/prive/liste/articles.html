@@ -23,7 +23,7 @@
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 			<td class='titre'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">[(#RANG). ]#TITRE</a></td>
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
-			<td class='date'>[(#DATE|affdate_court)]</td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
 				<a href="[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
 				#ID_ARTICLE

@@ -21,7 +21,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 			<td class='titre'>[(#LOGO_BREVE||image_reduire{20,26})]<a href="[(#ID_BREVE|generer_url_entite{breve})]">#TITRE</a></td>
-			<td class='date'>[(#DATE|affdate_court)]</td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,breve,#ID_BREVE}|?{
 				<a href="[(#URL_ECRIRE{breves_edit,id_breve=#ID_BREVE})]">#ID_BREVE</a>,
 				#ID_BREVE
