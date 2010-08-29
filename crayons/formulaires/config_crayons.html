@@ -4,11 +4,11 @@
 
 <div class="formulaire_spip formulaire_cfg formulaire_#FORM">
 
-<h3 class='titrem'>[(#CHEMIN{images/crayon-24.png}|image_reduire{24}|inserer_attribut{class,cadre-icone})]<:crayons:titre_config_crayons:></h3>
+<h3 class='titrem'>[(#CHEMIN{images/crayon-24.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,''})]<:crayons:titre_config_crayons:></h3>
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
+
 <form method="post" action="#ENV{action}">
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
@@ -38,7 +38,7 @@
 	<div class="choix">
 		<input type="checkbox" name="msgAbandon" class="checkbox" value='on' id='msgAbandon'[ (#ENV{msgAbandon}|oui)checked="checked"] />
 		<label for='msgAbandon'><:crayons:label_msg_abandon:></label>
-	</div>			
+	</div>
 </li>
 
 
@@ -53,11 +53,11 @@
 	<div class="choix">
 		<input type="checkbox" name="yellow_fade" class="checkbox" value='on' id='yellow_fade'[ (#ENV{yellow_fade}|oui)checked="checked"] />
 		<label for='yellow_fade'><:crayons:label_yellow_fade:></label>
-	</div>			
+	</div>
 	<div class="choix">
 		<input type="checkbox" name="clickhide" class="checkbox" value='on' id='clickhide'[ (#ENV{clickhide}|oui)checked="checked"] />
 		<label for='clickhide'><:crayons:label_clickhide:></label>
-	</div>			
+	</div>
 </li>
 
 
@@ -67,11 +67,9 @@
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	<p class='explication'><:crayons:explication_reduire_logo:></p>
 	<input type="text" name="reduire_logo" class="text" size="3" id='reduire_logo' value="[(#ENV{reduire_logo}|intval)]" />
-
 </li>
 
-
-<li class="fieldset">
+<li class="fieldset fieldset_crayons_prive">
 	<h3 class="legend"><:crayons:legend_editer_prive:></h3>
 	<ul>
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{espaceprive}}
@@ -90,9 +88,8 @@
 			<p class='explication'><:crayons:explication_exec_autorise:></p>
 			<input type="text" name="exec_autorise" class="text"  id='exec_autorise' value="[(#ENV{exec_autorise}|attribut_html)]" />
 		</li>
-	</ul>		
+	</ul>
 </li>
-
 </ul>
 <p class="boutons">
 	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
