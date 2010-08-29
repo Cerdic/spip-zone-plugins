@@ -3,21 +3,25 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// A
+	'aucun_fichier_recu' => 'Vous devez s&eacute;lectionner un fichier.',
+	
+	// C
+	'changer_document'=>'Changer le document',
+	'confirmer_suppression'=>'La suppression a &eacute;t&eacute; effectu&eacute;e.',
 
-// formulaire editer logo
-'logo' => 'Logo',
-'logo_survol' => 'Logo survol&eacute;',
-'logo_maj'=>'Le logo a &eacute;t&eacute; mis à jour.',
-'confirmer_suppression'=>'Suppression effectu&eacute;e.',
+	// D
+	'document_ajoute' => 'Le document a &eacute;t&eacute; ajout&eacute;.',
 
-// formulaire ajouter document
-'aucun_fichier_recu' => 'Hep ! Il faut envoyer quelque chose !',
-'document_ajoute' => 'Le document a &eacute;t&eacute; ajout&eacute;.',
-'erreur_ajout_document' => 'Une erreur est survenue lors de l\'ajout du document.',
-'mauvaise_reception' => 'Oups ! Erreur dans la r&eacute;ception du fichier. R&eacute;essayez...',
+	// E
+	'erreur_ajout_document' => 'Une erreur est survenue lors de l\'ajout du document.',
 
-// formulaire modifier document
-'changer_document'=>'Changer le document',
+	// L
+	'logo' => 'Logo',
+	'logo_maj'=> 'Le logo a &eacute;t&eacute; mis à jour.',
+	'logo_survol' => 'Logo survol&eacute;',
 
+	// M
+	'mauvaise_reception' => 'Oups ! Erreur dans la r&eacute;ception du fichier. R&eacute;essayez...',
 );
 ?>
