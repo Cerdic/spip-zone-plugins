@@ -11,7 +11,7 @@
 
 <:notifications:article_valide_titre:>
 
-[(#VAL{info_publie_01}|_T{#ARRAY{titre,#TITRE,connect_nom,#SESSION{nom}}})]
+[(#VAL{notifications:article_valide_detail}|_T{#ARRAY{titre,#TITRE,connect_nom,#SESSION{nom}}})]
 
 [<:notifications:article_valide_date:> (#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]}).]
 [<:notifications:article_valide_url:>
