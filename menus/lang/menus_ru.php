@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => '&#1057;&#1089;&#1099;&#1083;&#1082;&#1072; &#1085;&#1072; &#1075;&#1083;&#1072;&#1074;&#1085;&#1091;&#1102; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1091;.',
+	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
 	'description_menu_deconnecter' => 'Si le visiteur est connect&eacute;, ajoute une entr&eacute;e lui proposant la d&eacute;connexion.', # NEW
 	'description_menu_espace_prive' => 'Lien permettant de se connecter au site si on ne l\'est pas d&eacute;j&agrave;, puis d\'aller dans l\'espace priv&eacute; si l\'on y est autoris&eacute;.', # NEW
 	'description_menu_groupes_mots' => 'Affiche automatiquement un menu listant les mots du groupe et les articles liés. Par d&eacute;faut, affiche la liste des groupes de mots et les mots li&eacute;s. Si un squelette groupes_mots.html existe, le lien vers le groupe est utilis&eacute;.', # NEW
@@ -90,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => '&#1043;&#1083;&#1072;&#1074;&#1085;&#1072;&#1103; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072;',
+	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
 	'nom_menu_deconnecter' => 'Se d&eacute;connecter', # NEW
 	'nom_menu_espace_prive' => 'Se connecter / lien vers espace priv&eacute;', # NEW
 	'nom_menu_groupes_mots' => 'Mots-cl&eacute;s et Articles d\'un Groupes de mots', # NEW

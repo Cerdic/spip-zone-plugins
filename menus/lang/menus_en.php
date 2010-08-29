@@ -9,8 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => 'Link to website\'s home page.',
+	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
 	'description_menu_deconnecter' => 'If the visitor is connected, add an entry offering disconnection.',
-	'description_menu_espace_prive' => 'Lien permettant de se connecter au site si on ne l\'est pas d&eacute;j&agrave;, puis d\'aller dans l\'espace priv&eacute; si l\'on y est autoris&eacute;.', # NEW
+	'description_menu_espace_prive' => 'Link enabling the connection to the site if you aren\'t already connected, and then to enter the private space if you are authorised to do so.',
 	'description_menu_groupes_mots' => 'Automatically lists the keyword groups and the articles linked to them. By default the list shows keyword groups and the keywords within them. If a groupes_mots.html template exists, the link to the group is used.',
 	'description_menu_lien' => 'Adds an individually specified link, either an internal one (relative URL), or an external one (http://...).',
 	'description_menu_mapage' => 'If visitors are connected, add a link to their author page.',
@@ -43,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_sur_n_mots' => '@n@ keyword(s) shown',
 	'entree_sur_n_niveaux' => 'On @n@ level(s)',
 	'entree_titre' => 'Title',
-	'entree_titre_connecter' => 'Titre pour l\'acc&egrave;s au formulaire d\'identification', # NEW
-	'entree_titre_prive' => 'Titre pour acc&eacute;der &agrave; l\'espace priv&eacute;', # NEW
+	'entree_titre_connecter' => 'The title for accessing the identification form',
+	'entree_titre_prive' => 'The title for accessing the private zone',
 	'entree_tri_alpha' => 'Sort criterion (alphabetic)',
 	'entree_tri_num' => 'Sort criterion (numeric)',
 	'entree_type_objet' => 'Object type',
@@ -90,8 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => 'Home Page',
+	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
 	'nom_menu_deconnecter' => 'Disconnect',
-	'nom_menu_espace_prive' => 'Se connecter / lien vers espace priv&eacute;', # NEW
+	'nom_menu_espace_prive' => 'Login / link to the private zone',
 	'nom_menu_groupes_mots' => 'Keywords and Articles of a group of keywords',
 	'nom_menu_lien' => 'Individual link',
 	'nom_menu_mapage' => 'My page',
@@ -99,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Article, section or other SPIP object',
 	'nom_menu_page_speciale' => 'Link to a page template',
 	'nom_menu_rubriques' => 'List or tree of sections',
-	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques', # NEW
+	'nom_menu_rubriques_evenements' => 'Section-related events',
 	'nom_menu_secteurlangue' => 'Language sectors'
 );
 

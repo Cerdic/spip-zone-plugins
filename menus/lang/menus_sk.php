@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => '<NEW>Odkaz na domovsk&uacute; str&aacute;nku.',
+	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
 	'description_menu_deconnecter' => '<NEW>Ak bude n&aacute;v&#353;tevn&iacute;k pripojen&yacute;, prida&#357; mo&#382;nos&#357; pon&uacute;kaj&uacute;cu odpojenie.',
 	'description_menu_espace_prive' => 'Lien permettant de se connecter au site si on ne l\'est pas d&eacute;j&agrave;, puis d\'aller dans l\'espace priv&eacute; si l\'on y est autoris&eacute;.', # NEW
 	'description_menu_groupes_mots' => 'Automatically lists the keyword groups and the articles linked to them. By default the list shows keyword groups and the keywords within them. If a groupes_mots.html template exists, the link to the group is used.', # MODIF
@@ -90,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => '<NEW>Domovsk&aacute; str&aacute;nka',
+	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
 	'nom_menu_deconnecter' => '<NEW>Odpoji&#357;',
 	'nom_menu_espace_prive' => 'Se connecter / lien vers espace priv&eacute;', # NEW
 	'nom_menu_groupes_mots' => '<NEW>K&#318;&uacute;&#269;ov&eacute; slov&aacute; a &#269;l&aacute;nky zo skupiny k&#318;&uacute;&#269;ov&yacute;ch slov',

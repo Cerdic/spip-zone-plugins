@@ -9,8 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => 'Enlla&ccedil; cap a la p&agrave;gina d\'inici del lloc.',
+	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
 	'description_menu_deconnecter' => 'Si el visitant est&agrave; connectat, afegeix una entrada proposant-li la desconnexi&oacute;.',
-	'description_menu_espace_prive' => 'Lien permettant de se connecter au site si on ne l\'est pas d&eacute;j&agrave;, puis d\'aller dans l\'espace priv&eacute; si l\'on y est autoris&eacute;.', # NEW
+	'description_menu_espace_prive' => 'Enlla&ccedil; que permet connectar-se al lloc, si encara no ho estem, i despr&eacute;s anar a l\'espai privat sempre i quan estiguem autoritzats a fer-ho.',
 	'description_menu_groupes_mots' => 'Mostra autom&agrave;ticament un men&uacute; que llista les paraules del grup i els articles lligats. Per defecte, mostra la llista dels grups de paraules i les paraules lligades. Si un esquelet grups_paraules.html existeix, s\'utilitzar&agrave; l\'enlla&ccedil; cap al grup.',
 	'description_menu_lien' => 'Afegeix un enlla&ccedil; arbitrari, intern (URL relativa) o extern (http://...).',
 	'description_menu_mapage' => 'Si el visitant est&agrave; connectat, afegeix un enlla&ccedil; cap a la p&agrave;gina de l\'autor.',
@@ -43,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_sur_n_mots' => '@n@ paraules mostrada(es)',
 	'entree_sur_n_niveaux' => 'A @n@ nivell(s)',
 	'entree_titre' => 'T&iacute;tol',
-	'entree_titre_connecter' => 'Titre pour l\'acc&egrave;s au formulaire d\'identification', # NEW
-	'entree_titre_prive' => 'Titre pour acc&eacute;der &agrave; l\'espace priv&eacute;', # NEW
+	'entree_titre_connecter' => 'T&iacute;tol per l\'acc&eacute;s al formulari d\'identificaci&oacute;',
+	'entree_titre_prive' => 'T&iacute;tol per accedir a l\'espai privat',
 	'entree_tri_alpha' => 'Criteri d\'ordenaci&oacute; (alfab&egrave;tic)',
 	'entree_tri_num' => 'Criteri d\'ordenaci&oacute; (num&egrave;ric)',
 	'entree_type_objet' => 'Tipus d\'objecte',
@@ -90,8 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => 'Inici',
+	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
 	'nom_menu_deconnecter' => 'Desconnectar-se',
-	'nom_menu_espace_prive' => 'Se connecter / lien vers espace priv&eacute;', # NEW
+	'nom_menu_espace_prive' => 'Connectar-se / enlla&ccedil; cap a l\'espai privat',
 	'nom_menu_groupes_mots' => 'Paraules clau i Articles d\'un Grup de paraules',
 	'nom_menu_lien' => 'Enlla&ccedil; arbitrari',
 	'nom_menu_mapage' => 'La meva p&agrave;gina',

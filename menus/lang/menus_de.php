@@ -9,8 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => 'Link zur Startseite.',
+	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
 	'description_menu_deconnecter' => 'Wenn eine Leser angemeldet ist, zeige ihm einen Abmelde-Link.',
-	'description_menu_espace_prive' => 'Lien permettant de se connecter au site si on ne l\'est pas d&eacute;j&agrave;, puis d\'aller dans l\'espace priv&eacute; si l\'on y est autoris&eacute;.', # NEW
+	'description_menu_espace_prive' => 'Link zum Login und zum Redaktionssystem',
 	'description_menu_groupes_mots' => 'Zeige automatisch ein Men&uuml; aus Schlagworten und zugeh&ouml;rigen Artikeln. In der Grundeinstellung werden die Schlagwortgruppen mit ihren Schlagworten angezeigt. Wenn ein Skelett mit der Bezeichnung groupes_mots.html existiert, wird der Link zur Schlagwortguppe verwendet.',
 	'description_menu_lien' => 'Fügt eine beliebigen Link hinzu, der entweder intern (rekative URL)oder extern (http://...) sein kann.',
 	'description_menu_mapage' => 'Wenn der Besucher angemeldet ist, füge einen Link zu seiner pers&ouml;nlichen Seite hinzu.',
@@ -43,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_sur_n_mots' => '@n@ Worte angezeigt',
 	'entree_sur_n_niveaux' => 'Auf @n@ Niveau(s)',
 	'entree_titre' => 'Titel',
-	'entree_titre_connecter' => 'Titre pour l\'acc&egrave;s au formulaire d\'identification', # NEW
-	'entree_titre_prive' => 'Titre pour acc&eacute;der &agrave; l\'espace priv&eacute;', # NEW
+	'entree_titre_connecter' => 'Titel f&uuml;r den Zugang zum Anmeldeformular',
+	'entree_titre_prive' => 'Titel f&uuml;r den Redaktionszugang',
 	'entree_tri_alpha' => 'Sortierkriterium (alphanumerisch)',
 	'entree_tri_num' => 'Sortierkriterium (numerisch)',
 	'entree_type_objet' => 'Objekttyp',
@@ -90,8 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => 'Startseite',
+	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
 	'nom_menu_deconnecter' => 'Abmelden',
-	'nom_menu_espace_prive' => 'Se connecter / lien vers espace priv&eacute;', # NEW
+	'nom_menu_espace_prive' => 'Einloggen / zum Redaktionssystem',
 	'nom_menu_groupes_mots' => 'Schlagworte und Artikel einer Schlagwortgruppe',
 	'nom_menu_lien' => 'Beliebiger Link',
 	'nom_menu_mapage' => 'Meine Seite',
