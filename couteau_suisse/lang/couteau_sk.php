@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].', # MODIF
 	'maj_verif' => 'First check which file is right for you:', # MODIF
 	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.', # MODIF
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.',
 	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
 
 	// N
@@ -101,8 +101,8 @@ Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
 	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
 	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet',
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet',
 	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
 	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
 	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW

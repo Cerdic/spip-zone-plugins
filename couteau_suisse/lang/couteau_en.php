@@ -14,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Waiting for confirmation',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'base_donnees' => 'Database',
+	'bloc_deplier' => 'Expand',
+	'bloc_replier' => 'Collapse',
 
 	// C
 	'colorer_fond' => 'Colour the background',
@@ -33,11 +33,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => 'Run the test!',
 	'lutte_spam' => 'Fight against SPAM',
 
 	// M
-	'maj_actu' => 'Force update', # MODIF
+	'maj_actu' => 'Force the remote update',
 	'maj_liste' => 'List of detected plugins:',
 	'maj_maj' => 'Update the selected plugin',
 	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].',
@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
 	'maj_verif' => 'First check which file is right for you:',
 	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_zip_ko' => 'The remote .zip file could not be identified.',
+	'msg_publies' => 'Only the published messages',
 
 	// N
 	'nom_email_forum' => 'Please give your name or email address!',
@@ -81,34 +81,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Inactive plugins',
 	'plugin_xml' => 'Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
 
-Each tool can be ativated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
+Each tool can be activated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
 
 Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria.
 
-Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Fine URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
+Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Friendly URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x and v2.0.x', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
+Compatibility: SPIP 1.92x and v2.0.x and v2.1.x',
+	'pp_blocs_bloc' => 'Insert a collapsed block',
+	'pp_blocs_visible' => 'Insert an expanded block',
+	'pp_chatons_inserer' => 'Insert the "&nbsp;@chaton@&nbsp;" emoticon/smiley',
+	'pp_chatons_inserer_drop' => 'Insert an emoticon/smiley into your text',
+	'pp_couleur_fond' => '@couleur@ background',
+	'pp_couleur_icone_fond' => 'B',
+	'pp_couleur_icone_texte' => 'T',
+	'pp_couleur_texte' => '@couleur@ text',
+	'pp_couteau_suisse_drop' => 'Use a Swiss Knife tool',
+	'pp_decoration_inserer' => '"&nbsp;@balise@.@racc@&nbsp;" decoration',
+	'pp_decoration_inserer_drop' => 'Apply a customised "decoration" to the text',
+	'pp_decoupe_onglets' => 'Insert a tab mechanism',
+	'pp_decoupe_separateur' => 'Insert a page or tab separator',
+	'pp_filets_inserer' => 'Insert a line with the "&nbsp;@filet@&nbsp;" style',
+	'pp_filets_inserer_drop' => 'Insert a separation line',
+	'pp_smileys_inserer' => 'Insert a @smiley@ smiley',
+	'pp_un_titre' => 'A title',
+	'pp_votre_texte' => 'Insert your text here',
+	'pp_votre_titre' => 'Title @nb@',
 
 	// S
 	'smileys_dispos' => 'Available smileys:',
@@ -119,8 +119,8 @@ Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;at&nbsp;@h@:@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
-	'test_manuel' => 'Test manuel', # NEW
+	'test_base' => 'Database test',
+	'test_manuel' => 'Manual test',
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
 	'titre' => 'Penknife',
