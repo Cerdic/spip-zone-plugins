@@ -9,7 +9,7 @@
 	<version>0.3.1</version>
 	<etat>dev</etat>
 	<licence>GPL 3</licence>
-	<icon>themes/spip/images/mes_fichiers-64.png</icon>
+	<icon>prive/themes/spip/images/mes_fichiers-64.png</icon>
 	<description><multi>
 [fr]Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
 Le fichier d'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
@@ -29,7 +29,7 @@ It is also possible to initiate an automatic daily backup of all customization f
 		<inclure>genie/mes_fichiers.php</inclure>
 	</pipeline>
 	<bouton id='mes_fichiers' parent='configuration'>
-		<icone>themes/spip/images/mes_fichiers-24.png</icone>
+		<icone>prive/themes/spip/images/mes_fichiers-24.png</icone>
 		<titre>mes_fichiers:bouton_mes_fichiers</titre>
 		<url>mes_fichiers</url>
 	</bouton>
