@@ -8,16 +8,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_effacement' => 'Confirmez l\'effacement des donn&eacute;es de configuration de contact.', # NEW
-	'aucun_message' => 'Aucun message &agrave; afficher', # NEW
+	'alerte_effacement' => 'Confirm the deletion of the contact configuration data.',
+	'aucun_message' => 'There is no message to be displayed',
 
 	// B
-	'bouton_effacer' => 'Gommer', # NEW
+	'bouton_effacer' => 'Erase',
 
 	// C
 	'champ_adresse' => 'Address',
-	'champ_civi_explication' => 'R&eacute;glages avanc&eacute;es du champ civilit&eacute;', # NEW
-	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilit&eacute;', # NEW
+	'champ_civi_explication' => 'Advanced settings for the title field',
+	'champ_civi_mademoiselle_ok' => 'Include an option for "Miss" in the title field',
 	'champ_civilite' => 'Civility',
 	'champ_code_postal' => 'Zip Code',
 	'champ_etat' => 'State',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'Phone Number',
 	'champ_texte' => 'Text',
 	'champ_ville' => 'City',
-	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.', # NEW
+	'configuration_barre_impossible' => 'Another plugin is blocking the use of porte-plume in the public space - the settings below will not have any effect.',
 	'configuration_barre_oui' => 'View the complete bar typo.',
 	'configuration_champs_message' => 'PenHolder Settings.',
 	'configuration_champs_message_explication' => 'Typo toolbar settings, associated to the text\'s message.',
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deplacement_possible' => 'Vertical displacement by drag and drop',
-	'description_menu_contact' => '&Eacute;l&eacute;ment de menu vers la page du formulaire de contact', # NEW
+	'description_menu_contact' => 'Menu entry pointing to the contact form page',
 
 	// F
 	'form_destinataire' => 'Choose a recipient',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'madame' => 'Madam',
-	'mademoiselle' => 'Mademoiselle', # NEW
+	'mademoiselle' => 'Miss',
 	'monsieur' => 'Mister',
 	'msg_accueil' => 'Here are messages from contacts you have received.',
 	'msg_contact' => 'Message from contact',
@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_supprimer_message' => 'Delete this message',
 
 	// P
-	'preselection' => 'D&eacute;cocher tous les items de la liste de destinataires', # NEW
+	'preselection' => 'Uncheck all the entries in the list of recipients',
 
 	// S
 	'sauv_message' => 'Save contact messages',
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre' => 'Contact Form',
-	'titre_court' => 'Contact', # NE
+	'titre_court' => 'Contact'
 );
 
 ?>

@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_effacement' => 'Confirmez l\'effacement des donn&eacute;es de configuration de contact.', # NEW
+	'alerte_effacement' => 'Confirmez l\'effacement des donn&eacute;es de configuration de contact.',
 	'aucun_message' => 'Aucun message &agrave; afficher', # NEW
 
 	// B
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'Phone Number', # MODIF
 	'champ_texte' => 'Text', # MODIF
 	'champ_ville' => 'City', # MODIF
-	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.', # NEW
+	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.',
 	'configuration_barre_oui' => 'View the complete bar typo.', # MODIF
 	'configuration_champs_message' => 'PenHolder Settings.', # MODIF
 	'configuration_champs_message_explication' => 'Typo toolbar settings, associated to the text\'s message.', # MODIF
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre' => 'Contact Form', # MODIF
-	'titre_court' => 'Contact', # NE
+	'titre_court' => 'Contact', # N
 );
 
 ?>
