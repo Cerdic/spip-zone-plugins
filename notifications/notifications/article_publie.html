@@ -7,11 +7,11 @@
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
 <BOUCLE_art(ARTICLES){id_article}{statut?}{tout}>
 #SET{auteurs,#LESAUTEURS}
-[(#VAL{info_publie_1}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+[(#VAL{notifications:article_publie_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
 
-<:info_publie_2:>
+<:notifications:article_valide_titre:>
 
-[(#VAL{info_publie_01}|_T{#ARRAY{titre,#TITRE,connect_nom,#SESSION{nom}}})]
+[(#VAL{notifications:article_publie_detail}|_T{#ARRAY{titre,#TITRE,connect_nom,#SESSION{nom}}})]
 
 [** (#TITRE) **][(#GET{auteurs}|oui)
 [(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#GET{auteurs}}})]][
