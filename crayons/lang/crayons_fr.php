@@ -57,8 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'svp_copier_coller' => 'D&eacute;sol&eacute;, copiez/collez vos changements et recommencez',
 
 	// T
-	'titre_crayons' => 'Les Crayons',
 	'titre_config_crayons' => 'Configurer les crayons',
+	'titre_crayons' => 'Les Crayons',
 
 	// U
 	'update_impossible' => 'La mise &agrave; jour a &eacute;chou&eacute;.',

@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduire_logo' => 'Logos verkleinern',
 	'label_yellow_fade' => 'Ausblenden',
 	'legend_editer_prive' => 'Stift im Redaktionssystem (experimentell)',
+	'lien_documentation' => '<a href="http://www.spip-contrib.net/Les-Crayons" class="spip_out">Cf. documentation</a>', # NEW
 
 	// M
 	'messages' => 'Nachrichten',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Der Stift: Konfiguration ',
+	'titre_crayons' => 'Les Crayons', # NEW
 
 	// U
 	'update_impossible' => 'Das Update ist fehlgeschlagen.',

@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduire_logo' => 'Reduir els logotips',
 	'label_yellow_fade' => 'Sense inter&egrave;s',
 	'legend_editer_prive' => 'Editar l\'espai privat (experimental)',
+	'lien_documentation' => '<a href="http://www.spip-contrib.net/Les-Crayons" class="spip_out">Cf. documentation</a>', # NEW
 
 	// M
 	'messages' => 'Missatges',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configurar els llapis',
+	'titre_crayons' => 'Les Crayons', # NEW
 
 	// U
 	'update_impossible' => 'L\'actualitzaci&oacute; ha fracassat',

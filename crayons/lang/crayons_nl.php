@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduire_logo' => 'R&eacute;duire les logos', # NEW
 	'label_yellow_fade' => 'Fade', # NEW
 	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)', # NEW
+	'lien_documentation' => '<a href="http://www.spip-contrib.net/Les-Crayons" class="spip_out">Cf. documentation</a>', # NEW
 
 	// M
 	'messages' => 'Berichten',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configurer les crayons', # NEW
+	'titre_crayons' => 'Les Crayons', # NEW
 
 	// U
 	'update_impossible' => 'De update is niet geslaagd.',
