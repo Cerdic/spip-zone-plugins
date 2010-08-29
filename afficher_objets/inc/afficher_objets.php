@@ -43,10 +43,12 @@ function inc_afficher_objets($type, $titre,$requete,$formater='', $force=false){
 		}
 		if (isset($contexte['order by'])){
 			$contexte['order by'] = explode(' ',$contexte['order by']);
+			$sens = (end($contexte['order by'])=='DESC')?-1:1;
 			$contexte['order by'] = explode(',',reset($contexte['order by']));
 			$contexte['order by'] = explode('.',reset($contexte['order by']));
 			$contexte['order'] = end($contexte['order by']);
-			unset($contexte['order by']);
+			if ($contexte['order']=='date')
+				$contexte['date_sens'] = $sens;
 		}
 
 		// cas particuliers tordus avec jointures, en attendant la recriture
