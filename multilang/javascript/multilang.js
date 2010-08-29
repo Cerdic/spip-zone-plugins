@@ -136,6 +136,7 @@ function multilang_init_multi(options) {
 	init_forms.each(function() {
 		$(this).find('input.submit').click(function(){
 			$(this).parents('form').submit();
+			return false;
 		});
 		this.isfull = false;
 		this.form_lang = multilang_lang_courante;
