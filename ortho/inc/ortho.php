@@ -495,7 +495,7 @@ function panneau_ortho($ortho_result) {
 	ksort($mauvais);
 
 	$panneau .= "<select name='select_ortho' id='select_ortho' onChange='suggest(this.selectedIndex);'>\n";
-	$panneau .= "<option value='0'>... "._T('ortho_mots_a_corriger')." ...</option>\n";
+	$panneau .= "<option value='0'>... "._T('ortho:ortho_mots_a_corriger')." ...</option>\n";
 	foreach ($mauvais as $mot => $suggest) {
 		$id = $id_suggest[$mot] = "$i";
 		$i++;
@@ -549,12 +549,12 @@ function panneau_ortho($ortho_result) {
 			$panneau .= "</ul>\n";
 		}
 		else {
-			$panneau .= "<i>"._T('ortho_aucune_suggestion')."</i>";
+			$panneau .= "<i>"._T('ortho:ortho_aucune_suggestion')."</i>";
 		}
 		$panneau .= "<br />";
 		$lien = parametre_url(self(), 'supp_ortho', '');
 		$lien = parametre_url($lien, 'ajout_ortho', $mot);
-		$panneau .= icone_horizontale(_T('ortho_ajouter_ce_mot'), $lien, "ortho-24.gif", "creer.gif", false);
+		$panneau .= icone_horizontale(_T('ortho:ortho_ajouter_ce_mot'), $lien, "ortho-24.gif", "creer.gif", false);
 		$panneau .= "</div>\n";
 		$panneau .= "</div>\n\n";
 	}
@@ -566,11 +566,11 @@ function panneau_ortho($ortho_result) {
 		$panneau .= "<div class='suggest-inactif' id='suggest$id'>";
 		$panneau .= "<span class='ortho-dico'>$mot_html</span>";
 		$panneau .= "<div class='detail'>\n";
-		$panneau .= "<i>"._T('ortho_ce_mot_connu')."</i>";
+		$panneau .= "<i>"._T('ortho:ortho_ce_mot_connu')."</i>";
 		$panneau .= "<br />";
 		$lien = parametre_url(self(), 'ajout_ortho', '');
 		$lien = parametre_url($lien, 'supp_ortho', $mot);
-		$panneau .= icone_horizontale(_T('ortho_supprimer_ce_mot'), $lien, "ortho-24.gif", "supprimer.gif", false);
+		$panneau .= icone_horizontale(_T('ortho:ortho_supprimer_ce_mot'), $lien, "ortho-24.gif", "supprimer.gif", false);
 		$panneau .= "</div>\n";
 		$panneau .= "</div>\n";
 	}

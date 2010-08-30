@@ -12,7 +12,7 @@ function Ortho_bouton_ortho($flux) {
 	// Correction orthographique
 	if ($type == 'article') {
 		$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
-		$boite .= icone_horizontale(_T('ortho_verifier'), generer_url_ecrire("articles_ortho", "id_article=$id"),
+		$boite .= icone_horizontale(_T('ortho:ortho_verifier'), generer_url_ecrire("articles_ortho", "id_article=$id"),
 			_DIR_PLUGIN_ORTHO."images/ortho-24.gif",
 			"rien.gif", false, $js_ortho);
 	}

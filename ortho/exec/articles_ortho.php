@@ -96,7 +96,7 @@ $code_ie = "<!--[if IE]>
 </style>
 <![endif]-->";
 
-debut_html(_T('ortho_orthographe').' &laquo;'.$titre.'&raquo;', $code_ie);
+debut_html(_T('ortho:ortho_orthographe').' &laquo;'.$titre.'&raquo;', $code_ie);
 
 
 // Ajouts et suppressions de mots par l'utilisateur
@@ -119,21 +119,21 @@ $result_ortho = corriger_ortho($ortho, $lang_article);
 if (is_array($result_ortho)) {
 	$mots = $result_ortho['mauvais'];
 	if ($erreur = $result_ortho['erreur']) {
-		echo "<b>"._T('ortho_trop_de_fautes').aide('corrortho')."</b><p>\n";
-		echo "<b>"._T('ortho_trop_de_fautes2')."</b><p>";
+		echo "<b>"._T('ortho:ortho_trop_de_fautes').aide('corrortho')."</b><p>\n";
+		echo "<b>"._T('ortho:ortho_trop_de_fautes2')."</b><p>";
 	}
 	else {
-		echo "<b>"._T('ortho_mode_demploi').aide('corrortho')."</b><br />\n";
+		echo "<b>"._T('ortho:ortho_mode_demploi').aide('corrortho')."</b><br />\n";
 	}
 
 	echo panneau_ortho($result_ortho);
 }
 else {
 	$erreur = $result_ortho;
-	echo "<b>"._T('ortho_dico_absent').aide('corrortho')." (";
+	echo "<b>"._T('ortho:ortho_dico_absent').aide('corrortho')." (";
 	echo traduire_nom_langue($lang_article);
 	echo "). ";
-	echo _T('ortho_verif_impossible')."</b>";
+	echo _T('ortho:ortho_verif_impossible')."</b>";
 }
 
 fin_cadre_enfonce();
