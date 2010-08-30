@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduire_logo' => 'R&eacute;duire les logos',
 	'label_yellow_fade' => 'Fade',
 	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)',
+	'lien_documentation' => '<a href="@url@" class="spip_out">Documentation</a>',
 
 	// M
 	'messages' => 'Messages',
