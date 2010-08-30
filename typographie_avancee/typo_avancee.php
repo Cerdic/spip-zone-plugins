@@ -50,6 +50,9 @@ function traiter_typo_avancee($texte) {
 	// et ne pas l'appliquer (ça déconne)
 	$typo->set_smart_quotes(false);
 
+	// Pas de gestion des fractons
+	$typo->set_smart_fractions(false);
+	
 	// Et hop, le traitement!
 	$texte = $typo->process($texte);
 	
@@ -102,6 +105,14 @@ function uniord($c) {
 }
 
 
+function unichr ($codes) {
+	if (is_scalar($codes)) $codes= func_get_args();
+	$str= '';
+	foreach ($codes as $code) $str.= html_entity_decode('&#'.$code.';',ENT_NOQUOTES,'UTF-8');
+	return $str;
+}
+
+
 function typo_avancee_typo($texte) {
 	// Ne pas appliquer dans l'espace prive
 	if (_DIR_RACINE == "../") return $texte;
@@ -124,7 +135,7 @@ function typo_avancee_typo($texte) {
 
 function supprimer_cesure($texte) {
 	// pas terrible, pas terrible...
-	return preg_replace("/(&#8203;|&#173;|­|​​)/", "", $texte);
+	return preg_replace("/(".unichr(8203)."|".unichr(173)."|­|​​)/", "", $texte);
 }
 
 ?>
