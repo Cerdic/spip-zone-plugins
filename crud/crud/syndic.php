@@ -16,18 +16,18 @@ include_spip('action/editer_site');
 /**
  * Interface C(r)UD
  */
-function syndic_create($dummy,$set=null){
+function crud_syndic_create_dist($dummy,$set=null){
 	if ($id = insert_syndic($set['id_rubrique']))
 		list($e,$ok) = revisions_sites($id,$set);
 	else
 		$e = _L('create error');
 	return array($id,$ok,$e);
 }
-function syndic_update($id,$set=null){
+function crud_syndic_update_dist($id,$set=null){
 	list($e,$ok) = revisions_sites($id,$set);
 	return array($id,$ok,$e);
 }
-function syndic_delete($id){
+function crud_syndic_delete_dist($id){
 	list($e,$ok) = revisions_sites($id,array('statut'=>'poubelle'));
 	return array($id,$ok,$e);
 }

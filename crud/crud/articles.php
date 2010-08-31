@@ -16,18 +16,18 @@ include_spip('action/editer_article');
 /**
  * Interface C(r)UD
  */
-function articles_create($dummy,$set=null){
+function crud_articles_create_dist($dummy,$set=null){
 	if ($id = insert_article($set['id_rubrique']))
 		list($e,$ok) = articles_set($id,$set);
 	else
 		$e = _L('create error');
 	return array($id,$ok,$e);
 }
-function articles_update($id,$set=null){
+function crud_articles_update_dist($id,$set=null){
 	list($e,$ok) = articles_set($id,$set);
 	return array($id,$ok,$e);
 }
-function articles_delete($id){
+function crud_articles_delete_dist($id){
 	list($e,$ok) = articles_set($id,array('statut'=>'poubelle'));
 	return array($id,$ok,$e);
 }

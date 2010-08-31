@@ -17,7 +17,7 @@ include_spip('action/editer_mot');
 /**
  * Interface C(r)UD
  */
-function mots_create($dummy,$set=null){
+function crud_mots_create_dist($dummy,$set=null){
 	if ($id_groupe=intval($set['id_groupe'])
 	 AND $id = sql_insertq("spip_mots", array('id_groupe' => $id_groupe)))
 		list($id,$ok,$e) = mot_update($id,$set);
@@ -25,7 +25,7 @@ function mots_create($dummy,$set=null){
 		$e = _L('create error');
 	return array($id,$ok,$e);
 }
-function mots_update($id,$set=null){
+function crud_mots_update_dist($id,$set=null){
 	// modifier le contenu via l'API
 	include_spip('inc/modifier');
 
@@ -38,7 +38,7 @@ function mots_update($id,$set=null){
 	revision_mot($id, $c);
 	return array($id,$ok,$e);
 }
-function mots_delete($id){
+function crud_mots_delete_dist($id){
 	$ok = sql_delete("spip_mots","id_mot=".intval($id));
 	return array($id,$ok,$e);
 }

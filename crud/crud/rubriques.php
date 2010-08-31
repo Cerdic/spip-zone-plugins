@@ -16,18 +16,18 @@ include_spip('action/editer_rubrique');
 /**
  * Interface C(r)UD
  */
-function rubriques_create($dummy,$set=null){
+function crud_rubriques_create_dist($dummy,$set=null){
 	if ($id = insert_rubrique($set['id_parent']))
 		list($e,$ok) = revisions_rubriques($id,$set);
 	else
 		$e = _L('create error');
 	return array($id,$ok,$e);
 }
-function rubriques_update($id,$set=null){
+function crud_rubriques_update_dist($id,$set=null){
 	revisions_rubriques($id,$set);
 	return array($id,$ok,$e);
 }
-function rubriques_delete($id){
+function crud_rubriques_delete_dist($id){
 	// que fait on ici ? suppression sans precaution ?
 	return array($id,$ok,$e);
 }

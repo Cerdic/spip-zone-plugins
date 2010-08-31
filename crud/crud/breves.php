@@ -17,18 +17,18 @@ include_spip('action/editer_breve');
 /**
  * Interface C(r)UD
  */
-function breves_create($dummy,$set=null){
+function crud_breves_create_dist($dummy,$set=null){
 	if ($id = insert_breve($set['id_rubrique']))
 		list($e,$ok) = revisions_breves($id,$set);
 	else
 		$e = _L('create error');
 	return array($id,$ok,$e);
 }
-function breves_update($id,$set=null){
+function crud_breves_update_dist($id,$set=null){
 	list($e,$ok) = revisions_breves($id,$set);
 	return array($id,$ok,$e);
 }
-function breves_delete($id){
+function crud_breves_delete_dist($id){
 	list($e,$ok) = revisions_breves($id,array('statut'=>'poubelle'));
 	return array($id,$ok,$e);
 }

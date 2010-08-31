@@ -16,18 +16,18 @@ include_spip('action/editer_auteur');
 /**
  * Interface C(r)UD
  */
-function auteurs_create($dummy,$set = null){
+function crud_auteurs_create_dist($dummy,$set = null){
 	if ($id = insert_auteur($set['source']))
 		list($e,$ok) = auteurs_set($id,$set);
 	else
 		$e = _L('create error');
 	return array($id,$ok,$e);
 }
-function auteurs_update($id,$set=null){
+function crud_auteurs_update_dist($id,$set=null){
 	list($e,$ok) = auteurs_set($id,$set);
 	return array($id,$ok,$e);
 }
-function auteurs_delete($id){
+function crud_auteurs_delete_dist($id){
 	list($e,$ok) = auteurs_set($id,array('statut'=>'5poubelle'));
 	return array($id,$ok,$e);
 }
