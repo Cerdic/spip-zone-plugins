@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * $crud = charger_fonction('crud','action');
  * $crud('create','articles',null,array('id_rubrique'=>23));
  * $crud('update','rubriques',12,array('titre'=>'Super !'));
- * $crud('delete','syndiq',5);
+ * $crud('delete','syndic',5);
  *
  *
  * @param string $action
