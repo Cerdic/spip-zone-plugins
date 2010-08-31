@@ -69,10 +69,10 @@ function exec_ressources(){
 			echo '<td class="arial11 border1" style="text-align:center;">'.number_format($data['pu'], 2, ',', ' ')."</td>\n";
 			
 			echo '<td class="arial11 border1"></td>';
-			echo '<td class="arial11 border1">', association_bouton(_T('asso:prets_nav_gerer'), 'voir-12.png', generer_url_ecrire('prets', 'id='.$data['id_ressource'])), "</td>\n";
+			echo '<td class="arial11 border1">', association_bouton(_T('asso:prets_nav_gerer'), 'voir-12.png', 'prets', 'id='.$data['id_ressource']), "</td>\n";
 
-			echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:ressources_nav_supprimer'), 'poubelle-12.gif', generer_url_ecrire('action_ressources', 'id='.$data['id_ressource'])), "</td>\n";
-			echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:ressources_nav_editer'), 'edit-12.gif', generer_url_ecrire('edit_ressource', 'id='.$data['id_ressource'])), "</td>\n";
+			echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:ressources_nav_supprimer'), 'poubelle-12.gif', 'action_ressources', 'id='.$data['id_ressource']), "</td>\n";
+			echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:ressources_nav_editer'), 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), "</td>\n";
 			echo'  </tr>';
 		}     
 		echo'</table>';
