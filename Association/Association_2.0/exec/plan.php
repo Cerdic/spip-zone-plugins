@@ -42,7 +42,7 @@ function exec_plan(){
 
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));
+		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."EuroOff.gif", false, "",  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . _T('asso:plan_comptable'));
 		
 		$classe = _request('classe'); 
 		if (!$classe) $classe = '%';
