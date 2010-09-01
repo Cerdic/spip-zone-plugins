@@ -6,14 +6,14 @@
 _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtastic] sous licence GPL
   </auteur>
   <licence>GNU/GPL</licence>
-  <version>0.3</version>
+  <version>0.4</version>
   <etat>experimental</etat>
 	<description>Permet de modifier les couleurs de l'habillage par d&#233;faut (squelette dist) du site SPIP via une interface graphique sans &#224; avoir &#224; &#233;diter le code</description>
  <fonctions>coloriagedist_fonctions.php</fonctions>
  <prefix>coloriagedist</prefix>
  <lien>http://www.spip-contrib.net/Plugin-pour-colorier-la-dist</lien>
  <necessite id="SPIP" version="[2.0;)" />
- <categorie>maintenance</categorie>
+ <categorie>squelette</categorie>
  <pipeline>
 		<nom>header_prive</nom>
 		<inclure>coloriagedist_fonctions.php</inclure>
