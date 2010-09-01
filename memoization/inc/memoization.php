@@ -73,9 +73,7 @@ if (!function_exists('debug_backtrace')) {
 	}
 }
 
-// outil pour memcache
-// Attention, vérifier que le port 11211 est celui utilisé par memcached
-// Sinon, adapter ce code selon la configuration de votre serveur
+// outil pour memcache (hosts et ports a configurer dans le CFG)
 function cfg_memcache_servers() {
 	$cfg = @unserialize($GLOBALS['meta']['memoization']);
 	if (!$cfg = $cfg['memcache_servers'])
