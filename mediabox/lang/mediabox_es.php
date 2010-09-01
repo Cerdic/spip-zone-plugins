@@ -9,9 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_menu_box' => 'Caja Multimedia',
     'titre_page_configurer_box' => 'Configurac&iacute;on de la caja multimedia',
 
-    'explication_selecteur' => 'Indique los selectores que activar&aacute;n la caja (Expresi&oacute;n CSS o selector jQuery)',
-    'explication_selecteur_galerie' => 'Indique los selectores que activar&aacute;n la caja en forma de galer&iacute;a. (Expresi&oacute;n CSS o selector jQuery)',
-    'explication_splash_url' => 'Indique la URL de un contenido multimedia que se mostrar&aacute; en una caja la primera vez que un visitante accede al sitio p&uacute;blico',
+    'explication_selecteur' => 'Indica los selectores que activar&aacute;n la caja (Expresi&oacute;n CSS o selector jQuery)',
+    'explication_selecteur_galerie' => 'Indica los selectores que activar&aacute;n la caja en forma de galer&iacute;a. (Expresi&oacute;n CSS o selector jQuery)',
+    'explication_splash_url' => 'Indica la URL de un contenido multimedia que se mostrar&aacute; en una caja la primera vez que un visitante accede al sitio p&uacute;blico',
     'explication_traiter_toutes_images' => '&iquest;Insertar una caja en todas las im&aacute;genes?',
 
     'label_apparence' => 'Apariencia',
