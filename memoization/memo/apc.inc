@@ -41,15 +41,15 @@ function cache_unset($key) {
 }
 
 function cache_inc($key, $value=null, $ttl=null) {
-	$value = isset($value) ? intval($value) : 1;
-	if (cache_lock($key)) {
-		$value = isset($value) ? intval($value) : 1;
-		$value += intval(cache_get($key));
-		cache_set($key, $value, $ttl);
-		cache_unlock($key);
-		return $value;
-	}
-	return false;
+	while (true) {
+		if (cache_lock($key)) {
+			$value = isset($value) ? intval($value) : 1;
+			$value += intval(cache_get($key));
+			cache_set($key, $value, $ttl);
+			cache_unlock($key);
+			return $value;
+		}
+	} 
 }
 
 function cache_dec($key, $value=null, $ttl=null) {
