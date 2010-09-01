@@ -62,14 +62,14 @@ function key_for_lock($str) {
 }
 
 function is_locked($key) {
-    return apc_fetch($key);
+    return apc_exists($key);
 }
 
 function cache_lock($key) {
     if (is_locked($key_for_lock = key_for_lock($key))) {
         return false;
     }
-    return apc_store($key_for_lock, true);
+    return apc_add($key_for_lock, true);
 }
 
 function cache_unlock($key) {
