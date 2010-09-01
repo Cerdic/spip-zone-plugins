@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// D
 	'documents'=> 'Mediathek',
-	'documents_distants'=> 'Entfernte',
+	'documents_distants'=> 'Externe',
 	'documents_locaux'=> 'Lokale',
 	'documents_non_publies'=> 'Nicht ver&ouml;ffentlicht',
 	'documents_publies'=> 'Ver&ouml;ffentlicht',
