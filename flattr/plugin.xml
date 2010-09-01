@@ -8,7 +8,7 @@
 	0.0.3
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 	Int&#233;gration des microdons Flattr
@@ -22,4 +22,5 @@
 	</icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<utilise id="cfg" />
+	<categorie>divers</categorie>
 </plugin>
