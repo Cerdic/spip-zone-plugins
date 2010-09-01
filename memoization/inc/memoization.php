@@ -5,12 +5,14 @@ $cfg = @unserialize($GLOBALS['meta']['memoization']);
 
 function memoization_methode ($methode=null) {
 	if (!$methode) {
-		$methodes = array('xcache', 'eaccelerator', 'filecache');
+		$methodes = array('apc', 'xcache', 'eaccelerator', 'filecache');
 		while (!memoization_methode($methode = array_shift($methodes))){};
 		return $methode;
 	}
 
 	switch($methode) {
+		case 'apc':
+			return function_exists('apc_add');
 		case 'xcache':
 			return function_exists('xcache_set');
 		case 'memcache':
@@ -72,6 +74,8 @@ if (!function_exists('debug_backtrace')) {
 }
 
 // outil pour memcache
+// Attention, vérifier que le port 11211 est celui utilisé par memcached
+// Sinon, adapter ce code selon la configuration de votre serveur
 function cfg_memcache_servers() {
 	$cfg = @unserialize($GLOBALS['meta']['memoization']);
 	if (!$cfg = $cfg['memcache_servers'])

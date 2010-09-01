@@ -22,10 +22,10 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
 <select name="methode" id="methode">
 	<option value="">Auto-d&#233;tection[
 		((#VAL|memoization_methode))]</option>
-	<option value="xcache"[
-		selected="(#ENV{methode}|=={xcache}|?{selected})"][
-			disabled="(#VAL{xcache}|memoization_methode|non|?{disabled})"]
-			>XCache</option>
+	<option value="apc"[
+		selected="(#ENV{apc}|=={apc}|?{selected})"][
+			disabled="(#VAL{apc}|memoization_methode|non|?{disabled})"]
+			>APC</option>
 	<option value="eaccelerator"[
 		selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
 			disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
@@ -34,6 +34,10 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
 		selected="(#ENV{methode}|=={memcache}|?{selected})"][
 			disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
 			>Memcache</option>
+	<option value="xcache"[
+		selected="(#ENV{methode}|=={xcache}|?{selected})"][
+			disabled="(#VAL{xcache}|memoization_methode|non|?{disabled})"]
+			>XCache</option>
 	<option value="filecache"[
 		selected="(#ENV{methode}|=={filecache}|?{selected})"][
 			disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
