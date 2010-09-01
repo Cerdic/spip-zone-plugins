@@ -61,22 +61,12 @@ function key_for_lock($str) {
     return _CACHE_NAMESPACE.md5($str."locked");
 }
 
-function is_locked($key) {
-    return apc_exists($key);
-}
-
 function cache_lock($key) {
-    if (is_locked($key_for_lock = key_for_lock($key))) {
-        return false;
-    }
-    return apc_add($key_for_lock, true);
+   return apc_add(key_for_lock($key), true);
 }
 
 function cache_unlock($key) {
-    if (!is_locked($key_for_lock = key_for_lock($key))) {
-        return false;
-    }
-    return apc_delete($key_for_lock);
+    return apc_delete(key_for_lock($key));
 }
 
 ?>
