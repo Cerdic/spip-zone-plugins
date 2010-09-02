@@ -116,6 +116,11 @@ function queue_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("table spip_jobs drop status_old");
 			ecrire_meta($nom_meta_base_version,$current_version="0.3.3",'non');
 		}
+		if (version_compare($current_version,"0.3.4",'<')){
+			// on n'utilise plus les meta, la queue se reinitialisera automatiquement
+			effacer_meta('queue_next_job_time');
+			ecrire_meta($nom_meta_base_version,$current_version="0.3.4",'non');
+		}
 
 	}
 	// replanifier les taches cron quand on passe ici
@@ -124,7 +129,6 @@ function queue_upgrade($nom_meta_base_version,$version_cible){
 }
 
 function queue_vider_tables($nom_meta_base_version) {
-	effacer_meta('queue_next_job_time');
 	effacer_meta($nom_meta_base_version);
 	sql_drop_table("spip_jobs");
 }
