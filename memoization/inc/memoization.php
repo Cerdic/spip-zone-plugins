@@ -31,9 +31,11 @@ if (!$cfg['methode']) {
 if ($cfg['methode']
 AND memoization_methode($cfg['methode'])) {
 	@define('_MEMOIZE', $cfg['methode']);
+	@define('_MEMOIZE_MEMORY', $cfg['methode']!=='filecache');
 	require_once dirname(dirname(__FILE__)).'/memo/'.$cfg['methode'].'.inc';
 } else {
 	@define('_MEMOIZE', 'nocache');
+	@define('_MEMOIZE_MEMORY', false);
 	require_once dirname(dirname(__FILE__)).'/memo/'.'nocache'.'.inc';
 }
 
