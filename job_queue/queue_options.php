@@ -78,30 +78,15 @@ function job_queue_link($id_job,$objets){
 
 
 /**
- * Lire la date de prochain job
+ * Renvoyer le temps de repos restant jusqu'au prochain job
+ * 0 si un job est a traiter
+ * null si la queue n'est pas encore initialise
  * @return <type>
  */
-function queue_get_next_job_time() {
-	return isset($GLOBALS['meta']['queue_next_job_time'])?$GLOBALS['meta']['queue_next_job_time']:0;
-}
-
-/**
- * Mettre a jour la date de prochain job
- * @param <type> $next
- */
-function queue_set_next_job_time($next) {
-	$time = time();
-	// toujours relire la table pour comparer, pour tenir compte des maj concourrantes
-	// et ne mettre a jour que si il y a un interet a le faire
-	$curr_next = sql_getfetsel('valeur','spip_meta',"nom='queue_next_job_time'");
-	if (
-			($curr_next<$time AND $next>$time) // le prochain job est dans le futur mais pas la date planifiee actuelle
-			OR $curr_next>$next // le prochain job est plus tot que la date planifiee actuelle
-		) {
-		include_spip('inc/meta');
-		ecrire_meta('queue_next_job_time',$next);
-	}
-	return $GLOBALS['meta']['queue_next_job_time'];
+function queue_sleep_time_to_next_job() {
+	if (!isset($GLOBALS['meta']['queue_next_job_time']))
+		return null;
+	return max(0,$GLOBALS['meta']['queue_next_job_time']-$_SERVER['REQUEST_TIME']);
 }
 
 ?>
