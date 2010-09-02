@@ -12,40 +12,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//
-// Le format souhaite : "a/bout-d-url.md5" (.gz s'ajoutera pour les gros caches)
-// Attention a modifier simultanement le sanity check de
-// la fonction retire_cache() de inc/invalideur
-//
 // http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte, $page) {
-	return $page['contexte_implicite']['cache']
-		. '-'
-		. md5(var_export(array($contexte, $page['contexte_implicite']),true));
-}
+	// l'indicateur sert a savoir un peu de quoi il s'agit
+	// quand on regarde dans le cache ; on le met a la fin
+	// du nom pour que ca "melange" mieux sous memcache
+	$indicateur = is_array($page)
+		? $page['contexte_implicite']['cache'] # SPIP 2.1
+		: strval($page); # SPIP 2.0 ou autre
 
-// Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup
-// (pas de passage par reference car on veut conserver la version non compressee
-// pour l'afficher)
-// http://doc.spip.org/@gzip_page
-function gzip_page($page) {
-	if (function_exists('gzcompress') AND strlen($page['texte']) > 16*1024) {
-		$page['gz'] = true;
-		$page['texte'] = gzcompress($page['texte']);
-	} else {
-		$page['gz'] = false;
-	}
-	return $page;
-}
-
-// Faut-il decompresser ce cache ?
-// (passage par reference pour alleger)
-// http://doc.spip.org/@gunzip_page
-function gunzip_page(&$page) {
-	if ($page['gz']) {
-		$page['texte'] = gzuncompress($page['texte']);
-		$page['gz'] = false; // ne pas gzuncompress deux fois une meme page
-	}
+	return
+		md5(var_export(array($contexte, $page),true))
+		. '-'.$indicateur;
 }
 
 /**
@@ -141,11 +119,23 @@ function creer_cache(&$page, &$chemin_cache) {
 	// (qui contient deja sa duree de validite)
 	$page['lastmodified'] = $_SERVER['REQUEST_TIME'];
 
+	// compresser si elle est > 16 ko
+	if (strlen($page['texte']) > 16384
+	AND function_exists('gzcompress')) {
+		$page['texte'] = gzcompress($z = $page['texte']);
+		$page['gz'] = true;
+	}
 
 	// memoizer...
 	// on ajoute une heure histoire de pouvoir tourner
 	// sur le cache quand la base de donnees est plantee (a tester)
 	$ok = cache_set($chemin_cache, $page, 3600+$page['entetes']['X-Spip-Cache']);
+
+	// retablir le texte pour l'afficher
+	if (isset($z)) {
+		$page['texte'] = $z;
+		unset($page['gz']);
+	}
 
 	spip_log("Creation du cache $chemin_cache "._MEMOIZE." pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
@@ -229,6 +219,12 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 			$page = array();
 	}
 
+	// dezip si on l'a zipe
+	if (isset($page['gz'])) {
+		$page['texte'] = gzuncompress($page['texte']);
+		unset($page['gz']);
+	}
+
 	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 		$use_cache = 0;
@@ -263,11 +259,8 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 		// le contexte implicite n'est pas stocke dans le cache, mais il y a equivalence
 		// par le nom du cache. On le reinjecte donc ici pour utilisation eventuelle au calcul
 		$page['contexte_implicite'] = $contexte_implicite;
-		if (!$use_cache) {
-			// $page est un cache utilisable
-			gunzip_page($page);
+		if (!$use_cache)
 			return;
-		}
 	} else {
 		$page = array('contexte_implicite'=>$contexte_implicite);
 		$use_cache = cache_valide($page,0); // fichier cache absent : provoque le calcul
@@ -276,7 +269,6 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!spip_connect()) {
 		if (isset($page['texte'])) {
-			gunzip_page($page);
 			$use_cache = 0;
 		}
 		else {
