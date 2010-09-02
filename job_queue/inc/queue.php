@@ -204,7 +204,7 @@ function queue_start_job($row){
 /**
  * Ordonanceur
  * Evite les requetes sql a chaque appel
- * en memorisant en meta la date du prochain job
+ * en memorisant la date du prochain job
  */
 function queue_schedule($force_jobs = null){
 	$time = time();
@@ -399,17 +399,22 @@ function queue_update_next_job_time($next_time=null){
  * @param <type> $next
  */
 function queue_set_next_job_time($next) {
+
+	// utiliser le temps courant reel plutot que temps de la requete ici
 	$time = time();
-	// toujours relire la table pour comparer, pour tenir compte des maj concourrantes
+
+	// toujours relire la valeur pour comparer, pour tenir compte des maj concourrantes
 	// et ne mettre a jour que si il y a un interet a le faire
-	$curr_next = sql_getfetsel('valeur','spip_meta',"nom='queue_next_job_time'");
+	// permet ausis d'initialiser le nom de fichier a coup sur
+	$curr_next = $_SERVER['REQUEST_TIME'] + queue_sleep_time_to_next_job(true);
 	if (
 			($curr_next<$time AND $next>$time) // le prochain job est dans le futur mais pas la date planifiee actuelle
 			OR $curr_next>$next // le prochain job est plus tot que la date planifiee actuelle
 		) {
-		include_spip('inc/meta');
-		ecrire_meta('queue_next_job_time',$next);
+		ecrire_fichier(_JQ_NEXT_JOB_TIME_FILENAME,intval($next));
+		queue_sleep_time_to_next_job($next);
 	}
-	return $GLOBALS['meta']['queue_next_job_time'];
+	
+	return queue_sleep_time_to_next_job();
 }
 ?>

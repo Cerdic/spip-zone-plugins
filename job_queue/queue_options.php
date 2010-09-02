@@ -81,12 +81,32 @@ function job_queue_link($id_job,$objets){
  * Renvoyer le temps de repos restant jusqu'au prochain job
  * 0 si un job est a traiter
  * null si la queue n'est pas encore initialise
- * @return <type>
+ * $force est utilisee par queue_set_next_job_time() pour maj la valeur
+ *  - si true, force la relecture depuis le fichier
+ *  - si int, affecte la static directement avec la valeur
+ *
+ * @staticvar int $queue_next_job_time
+ * @param int/bool $force_next
+ * @return int
  */
-function queue_sleep_time_to_next_job() {
-	if (!isset($GLOBALS['meta']['queue_next_job_time']))
+function queue_sleep_time_to_next_job($force=null) {
+	static $queue_next_job_time = -1;
+	if ($force===true)
+		$queue_next_job_time = -1;
+	elseif ($force)
+		$queue_next_job_time = $force;
+
+	if ($queue_next_job_time==-1) {
+		define('_JQ_NEXT_JOB_TIME_FILENAME',_DIR_TMP . "job_queue_next.txt");
+		$queue_next_job_time = null;
+		if (lire_fichier(_JQ_NEXT_JOB_TIME_FILENAME, $contenu))
+			$queue_next_job_time = intval($contenu);
+	}
+
+	if (is_null($queue_next_job_time))
 		return null;
-	return max(0,$GLOBALS['meta']['queue_next_job_time']-$_SERVER['REQUEST_TIME']);
+
+	return max(0,$queue_next_job_time-$_SERVER['REQUEST_TIME']);
 }
 
 ?>
