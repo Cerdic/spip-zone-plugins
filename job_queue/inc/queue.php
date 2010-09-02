@@ -212,7 +212,7 @@ function queue_schedule($force_jobs = null){
 		return;
 
 	// rien a faire si le prochain job est encore dans le futur
-	if ($GLOBALS['meta']['queue_next_job_time']>$time AND (!$force_jobs OR !count($force_jobs)))
+	if (queue_get_next_job_time()>$time AND (!$force_jobs OR !count($force_jobs)))
 		return;
 
 	include_spip('base/abstract_sql');
@@ -372,7 +372,7 @@ function queue_update_next_job_time($next_time=null){
 		queue_close_job($row,$time);
 
 	// chercher la date du prochain job si pas connu
-	if (is_null($next) OR !isset($GLOBALS['meta']['queue_next_job_time'])){
+	if (is_null($next) OR !queue_get_next_job_time()){
 		$date = sql_getfetsel('date','spip_jobs',"status=".intval(_JQ_SCHEDULED),'','date','0,1');
 		$next = strtotime($date);
 	}
@@ -388,16 +388,8 @@ function queue_update_next_job_time($next_time=null){
 				define('_DIRECT_CRON_FORCE',true);
 		}
 	}
-	// toujours relire la table pour comparer, pour tenir compte des maj concourrantes
-	// et ne mettre a jour que si il y a un interet a le faire
-	$curr_next = sql_getfetsel('valeur','spip_meta',"nom='queue_next_job_time'");
-	if (
-			($curr_next<$time AND $next>$time) // le prochain job est dans le futur mais pas la date planifiee actuelle
-			OR $curr_next>$next // le prochain job est plus tot que la date planifiee actuelle
-		) {
-		include_spip('inc/meta');
-		ecrire_meta('queue_next_job_time',$next);
-	}
+
+	queue_set_next_job_time($next);
 	$deja_la = false;
 }
 ?>
