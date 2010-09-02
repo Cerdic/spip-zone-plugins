@@ -21,9 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function generer_nom_fichier_cache($contexte, $page) {
 	return $page['contexte_implicite']['cache']
 		. '-'
-		. md5($GLOBALS['meta']['cache_mark']
-			.var_export(array($contexte, $page['contexte_implicite']),true)
-		);
+		. md5(var_export(array($contexte, $page['contexte_implicite']),true));
 }
 
 // Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup
@@ -65,6 +63,7 @@ function gunzip_page(&$page) {
  */
 /// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
+	$now = $_SERVER['REQUEST_TIME'];
 
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
@@ -84,10 +83,10 @@ function cache_valide(&$page, $date) {
 		// Apparition d'un nouvel article post-date ?
 		if ($GLOBALS['meta']['post_dates'] == 'non'
 		AND isset($GLOBALS['meta']['date_prochain_postdate'])
-		AND time() > $GLOBALS['meta']['date_prochain_postdate']) {
+		AND $now > $GLOBALS['meta']['date_prochain_postdate']) {
 			spip_log('Un article post-date invalide le cache');
 			include_spip('inc/rubriques');
-			ecrire_meta('derniere_modif', time());
+			ecrire_meta('derniere_modif', $now);
 			calculer_prochain_postdate();
 			return 1;
 		}
@@ -96,9 +95,12 @@ function cache_valide(&$page, $date) {
 
 	// Sinon comparer l'age du fichier a sa duree de cache
 	$duree = intval($page['entetes']['X-Spip-Cache']);
+	$cache_mark = (isset($GLOBALS['meta']['cache_mark'])?$GLOBALS['meta']['cache_mark']:0);
 	if ($duree == 0)  #CACHE{0}
 		return -1;
-	else if ($date + $duree < time())
+	else if ($date + $duree < $now 
+		# le cache est anterieur a la derniere purge : l'ignorer
+	  OR $date<$cache_mark)
 		return 1;
 	else
 		return 0;
@@ -128,7 +130,7 @@ function creer_cache(&$page, &$chemin_cache) {
 			spip_log('Creation cache sessionne '._MEMOIZE.' '.$chemin_cache);
 			$tmp = array(
 				'invalideurs' => array('session' => ''),
-				'lastmodified' => time()
+				'lastmodified' => $_SERVER['REQUEST_TIME']
 			);
 			cache_set($chemin_cache, $tmp);
 		}
@@ -137,7 +139,7 @@ function creer_cache(&$page, &$chemin_cache) {
 
 	// ajouter la date de production dans le cache lui meme
 	// (qui contient deja sa duree de validite)
-	$page['lastmodified'] = time();
+	$page['lastmodified'] = $_SERVER['REQUEST_TIME'];
 
 
 	// memoizer...
@@ -163,7 +165,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
 		foreach (preg_files($dircache,'[.]txt$') as $f) {
-			if (time() - (@file_exists($f)?@filemtime($f):0) > $duree)
+			if ($_SERVER['REQUEST_TIME'] - (@file_exists($f)?@filemtime($f):0) > $duree)
 				spip_unlink($f);
 		}
 	}
