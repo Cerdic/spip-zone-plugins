@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Création d'un auteur automatiquement pour SPIP 2.1</nom>
+	<auteur>
+	[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] 
+_ &#169; 2010 - Distribu&#233; sous licence GPL (m&ecirc;me num&eacute;ro que celle de SPIP)
+	</auteur>
+	<lien></lien>
+	
+	<version>1.0.0</version>
+	<version_base>1.0</version_base>
+	
+	<etat>stable</etat>
+	<description>Ce plugin crée automatiquement un auteur à son activation (données de l'auteur dans mes_options.php). À utiliser en tant qu'extension dans le cadre de la mutualisation</description>
+	<!-- http://www.iconfinder.com/icondetails/9381/48/add_plus_user_icon -->
+	<icon>img_pack/auteur_automatique_48.png</icon>
+
+ 	<prefix>auteur_automatique</prefix>
+
+	<install>base/auteur_automatique_install.php</install>
+	
+	<categorie>maintenance</categorie>
+	<necessite id='SPIP' version='[2.1.0;]' />
+</plugin>
