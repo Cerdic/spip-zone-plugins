@@ -11,12 +11,32 @@ null  cache_lock(string key)
 null  cache_unlock(string key)
 */
 
-@define('_DIR_TMP_XCACHE', (defined('_DIR_TMP') ? _DIR_TMP : 'tmp/').'xcache/');
+if (!defined('_DIR_TMP')) define('_DIR_TMP', 'tmp/');
+if (!defined('_DIR_FILECACHE')) define('_DIR_FILECACHE', 'cache/');
 
+// file named tmp/cache/ab/cd
+// that's a maximum of 16^4 files in 256 directories
 function cache_filename($u) {
+	$u = md5($u);
+	$d = substr($u,0,2); 
+	$u = substr($u,2,2);
+
+	# SPIP
+	if (function_exists('sous_repertoire')) {
+		return
+			sous_repertoire(
+				sous_repertoire(_DIR_TMP, _DIR_FILECACHE),
+				$d
+			)
+			. $u;
+	}
+
+	# Normal PHP
 	if (!is_dir(_DIR_TMP_XCACHE))
 		@mkdir(_DIR_TMP_XCACHE);
-	return _DIR_TMP_XCACHE.substr(md5($u),0,4); # soit 16^4 fichiers max
+	if (!is_dir($sub = _DIR_TMP_XCACHE.$d))
+		@mkdir($sub);
+	return $sub.'/'.$u;
 }
 
 function cache_get($key) {
