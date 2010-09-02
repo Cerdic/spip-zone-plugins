@@ -31,7 +31,7 @@ function spip2spip_upgrade(){
                                          'forum' => 'non' ,
                                          'maj' => 'NOW()'));
         echo _T('spiptospip:install_spip2spip_groupe_mot');                                 
-			  ecrire_meta('spip2spip_base_version',$current_version=$version_base,'non');
+			  ecrire_meta('spip2spip_base_version',$current_version=0.1,'non');
 				
 			}
 			if (version_compare($current_version,"0.2","<")){
