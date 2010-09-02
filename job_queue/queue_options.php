@@ -98,9 +98,15 @@ function queue_sleep_time_to_next_job($force=null) {
 
 	if ($queue_next_job_time==-1) {
 		define('_JQ_NEXT_JOB_TIME_FILENAME',_DIR_TMP . "job_queue_next.txt");
-		$queue_next_job_time = null;
-		if (lire_fichier(_JQ_NEXT_JOB_TIME_FILENAME, $contenu))
-			$queue_next_job_time = intval($contenu);
+		// utiliser un cache memoire si dispo
+		if (include_spip('inc/memoization') AND defined('_MEMOIZE_MEMORY') AND _MEMOIZE_MEMORY) {
+			$queue_next_job_time = cache_get(_JQ_NEXT_JOB_TIME_FILENAME);
+		}
+		else {
+			$queue_next_job_time = null;
+			if (lire_fichier(_JQ_NEXT_JOB_TIME_FILENAME, $contenu))
+				$queue_next_job_time = intval($contenu);
+		}
 	}
 
 	if (is_null($queue_next_job_time))

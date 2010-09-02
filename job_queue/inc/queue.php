@@ -411,7 +411,12 @@ function queue_set_next_job_time($next) {
 			($curr_next<$time AND $next>$time) // le prochain job est dans le futur mais pas la date planifiee actuelle
 			OR $curr_next>$next // le prochain job est plus tot que la date planifiee actuelle
 		) {
-		ecrire_fichier(_JQ_NEXT_JOB_TIME_FILENAME,intval($next));
+		if (include_spip('inc/memoization') AND defined('_MEMOIZE_MEMORY') AND _MEMOIZE_MEMORY) {
+			cache_set(_JQ_NEXT_JOB_TIME_FILENAME,$queue_next_job_time);
+		}
+		else {
+			ecrire_fichier(_JQ_NEXT_JOB_TIME_FILENAME,intval($next));
+		}
 		queue_sleep_time_to_next_job($next);
 	}
 	
