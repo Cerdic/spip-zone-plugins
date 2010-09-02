@@ -372,7 +372,7 @@ function queue_update_next_job_time($next_time=null){
 		queue_close_job($row,$time);
 
 	// chercher la date du prochain job si pas connu
-	if (is_null($next) OR is_null(queue_get_next_job_time())){
+	if (is_null($next) OR is_null(queue_sleep_time_to_next_job())){
 		$date = sql_getfetsel('date','spip_jobs',"status=".intval(_JQ_SCHEDULED),'','date','0,1');
 		$next = strtotime($date);
 	}
