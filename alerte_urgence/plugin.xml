@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Alerte d'Urgence</nom>
+	<version>1.0.0</version>
+	<prefix>alerte_urgence</prefix>
+	<etat>test</etat>
+	<auteur>Cerdic</auteur>
+	<licence>GNU/GPL</licence>
+	<description>Un bandeau d'alerte d'urgence pour diffuser un message</description>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>alerte_urgence_pipelines.php</inclure>
+	</pipeline>
+	<categorie>outils</categorie>
+</plugin>

@@ -1,0 +1,24 @@
+[(#REM)
+
+  Squelette Message Alerte
+  (c) 2010 Cedric
+  Distribue sous licence GPL
+
+]
+<div id="alerte_urgence">
+	<div class="wrap">
+		<:alerte:message_urgent|propre:>
+	</div>
+</div>
+<style>
+body {padding-top:60px;}
+#alerte_urgence {
+	position:absolute;left:0;top:0;padding:10px 30px;height:40px;width:100%;
+	border: 2px solid #FFD324;
+	background:#FFF6BF url(#CHEMIN{img_pack/message_notice-24.png}) no-repeat 5px 10px;
+	color : #514721;
+	font-size:1.1em;
+	text-align:center;
+}
+#alerte_urgence .wrap {position:relative;top:50%;margin-top:-1em;}
+</style>
