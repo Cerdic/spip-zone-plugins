@@ -6,19 +6,24 @@
 
 ]
 <div id="alerte_urgence">
+	<div class="box">
 	<div class="wrap">
 		<:alerte:message_urgent|propre:>
+	</div>
 	</div>
 </div>
 <style>
 body {padding-top:60px;}
 #alerte_urgence {
-	position:absolute;left:0;top:0;padding:10px 30px;height:40px;width:100%;
+	position:absolute;left:0;top:0;height:60px;width:100%;
+}
+#alerte_urgence .box {
+	position:relative;left:50%;margin-left:-400px;top:0;padding:10px 50px;height:30px;width:700px;
 	border: 2px solid #FFD324;
 	background:#FFF6BF url(#CHEMIN{img_pack/message_notice-24.png}) no-repeat 5px 10px;
 	color : #514721;
 	font-size:1.1em;
-	text-align:center;
+	text-align:left;
 }
-#alerte_urgence .wrap {position:relative;top:50%;margin-top:-1em;}
+#alerte_urgence .wrap {}
 </style>
