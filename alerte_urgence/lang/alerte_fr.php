@@ -4,7 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'message_urgent'=>'Vos articles ont tous disparu de votre site SPIP : [un correctif est disponible->http://www.spip.net/fr_article5248.html]',
+	'message_urgent'=>'Urgent&nbsp;: vos articles ont disparu ce matin&nbsp;? [Un correctif est disponible->http://www.spip.net/fr_article5248.html]'
 );
 
 ?>
