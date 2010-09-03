@@ -42,24 +42,25 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 		$args = _request('args');
 	}
 
-	$ok = $er = "";
-	if (!in_array($action,array('create','update','delete'))){
-		$er = _L("CRUD action $action erronee");
-	}
+	if (!in_array($action,array('create','update','delete')))
+		$res = array('success'=>false,'message'=>_L("CRUD action $action erronee"),'result'=>array());
+
 	elseif (!preg_match(',^\w+$,',$table))
-		$er = _L("CRUD table $table erronee");
+		$res = array('success'=>false,'message'=>_L("CRUD table $table erronee"),'result'=>array());
+
 	elseif(!include_spip("crud/$table")
 		// tolerer un appel avec type plutot que table
 		AND (!$table = table_objet($table) OR !include_spip("crud/$table")))
-		$er = _L("CRUD table $table inconnue");
-	elseif (!$f=charger_fonction("{$table}_{$action}","crud",true)
-	  AND !$f=charger_fonction("{$action}","crud",true))
-		$er = _L("CRUD action $action inconnue pour table $table");
-	if ($er)
-		return array($id,'',$er);
+		$res = array('success'=>false,'message'=>_L("CRUD table $table inconnue"),'result'=>array());
 
-	// ok ici tout va bien !
-	$res = $f($id,$args);
+	elseif ($f=charger_fonction("{$table}_{$action}","crud",true))
+		$res = $f($id,$args);
+	elseif ($f=charger_fonction("{$action}","crud",true))
+		$res = $f($table,$id,$args);
+
+	else
+		$res = array('success'=>false,'message'=>_L("CRUD action $action inconnue pour table $table"),'result'=>array());
+
 
 	// TODO : verifier que l'objet a ete supprime physiquement, et dans ce cas
 	// trigger le pipeline de suppression des objets lies
