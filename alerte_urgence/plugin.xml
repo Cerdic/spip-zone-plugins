@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Alerte d'Urgence</nom>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<prefix>alerte_urgence</prefix>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<auteur>Cerdic</auteur>
 	<licence>GNU/GPL</licence>
 	<description>Un bandeau d'alerte d'urgence pour diffuser un message</description>
