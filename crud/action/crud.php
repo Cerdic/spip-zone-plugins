@@ -29,7 +29,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *  liste des valeurs a affecter sous forme champ=>valeur
  *  ou conditions du where pour la lecture
  * @return array
- *  ($id,$ok,$erreur)
+ *  ('success'=>true/false,'message'=>..,'result'=>array())
  */
 function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 	// si pas d'action fournie en arg, c'est un appel par url
@@ -61,10 +61,6 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 	else
 		$res = array('message'=>_L("CRUD action $action inconnue pour table $table"));
 
-
-	// TODO : verifier que l'objet a ete supprime physiquement, et dans ce cas
-	// trigger le pipeline de suppression des objets lies
-
 	// interpretons un peu le retour pour le mettre en forme :
 	if (!$res['success'])
 		$res['success'] = false;
@@ -75,10 +71,34 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 	if ($res['success'] AND !$res['message'])
 		$res['message'] = _L("ok");
 
+	// TODO : verifier que l'objet a ete supprime physiquement, et dans ce cas
+	// trigger le pipeline de suppression des objets lies
+
+	// apres un insert ou un update, on relit la ligne complete
+	// pour la fournir en resultat
+	if ($res['success'] AND isset($res['result']['id'])) {
+		$crud = charger_fonction('crud','action');
+		$res['result']['row'] = $crud('read',$table,$res['result']['id']);
+		$res['result']['row'] = reset($res['result']['row']);
+	}
+
 	return $res;
 
 }
 
+/**
+ * R(ead) les lignes d'une table
+ * dans le retour, 'result' est un tableau de lignes.
+ * Si un $id est fournit en entree, une seule ligne sera dans le tableau
+ * et il faut utiliser reset() pour avoir la ligne seule
+ *
+ * @param string $table
+ * @param int $id
+ *   primary value
+ * @param array $args
+ *   arguments for where condition (TBD)
+ * @return array
+ */
 function crud_read_dist($table,$id,$args=array()) {
 	if (!preg_match(',^\w+$,',$table))
 		return array('message'=>_L("CRUD table $table erronee"));
