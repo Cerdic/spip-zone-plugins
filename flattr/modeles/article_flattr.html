@@ -1,5 +1,5 @@
 <BOUCLE_a(ARTICLES){id_article}>
-<BOUCLE_m(MOTS){id_article}{", "}>[(#SET{flattrtags,[(#GET{flattrtags}|concat{#GET{flattrcomma}}|concat{#TITRE})]})]
+<BOUCLE_m(MOTS){id_article}>[(#SET{flattrtags,[(#GET{flattrtags}|concat{#GET{flattrcomma}}|concat{#TITRE})]})]
 #SET{flattrcomma,', '}
 </BOUCLE_m>
 [(#INCLUDE{fond=modeles/flattr,
