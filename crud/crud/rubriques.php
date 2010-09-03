@@ -21,15 +21,15 @@ function crud_rubriques_create_dist($dummy,$set=null){
 		list($e,$ok) = revisions_rubriques($id,$set);
 	else
 		$e = _L('create error');
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_rubriques_update_dist($id,$set=null){
 	revisions_rubriques($id,$set);
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_rubriques_delete_dist($id){
 	// que fait on ici ? suppression sans precaution ?
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 
 ?>

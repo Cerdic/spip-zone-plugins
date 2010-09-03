@@ -23,7 +23,7 @@ function crud_mots_create_dist($dummy,$set=null){
 		list($id,$ok,$e) = mot_update($id,$set);
 	else
 		$e = _L('create error');
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_mots_update_dist($id,$set=null){
 	// modifier le contenu via l'API
@@ -36,11 +36,11 @@ function crud_mots_update_dist($id,$set=null){
 		$c[$champ] = _request($champ,$set);
 
 	revision_mot($id, $c);
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_mots_delete_dist($id){
 	$ok = sql_delete("spip_mots","id_mot=".intval($id));
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 
 ?>

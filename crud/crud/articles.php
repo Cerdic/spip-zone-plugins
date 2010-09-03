@@ -21,15 +21,15 @@ function crud_articles_create_dist($dummy,$set=null){
 		list($e,$ok) = articles_set($id,$set);
 	else
 		$e = _L('create error');
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_articles_update_dist($id,$set=null){
 	list($e,$ok) = articles_set($id,$set);
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_articles_delete_dist($id){
 	list($e,$ok) = articles_set($id,array('statut'=>'poubelle'));
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 
 ?>

@@ -22,15 +22,15 @@ function crud_breves_create_dist($dummy,$set=null){
 		list($e,$ok) = revisions_breves($id,$set);
 	else
 		$e = _L('create error');
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_breves_update_dist($id,$set=null){
 	list($e,$ok) = revisions_breves($id,$set);
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_breves_delete_dist($id){
 	list($e,$ok) = revisions_breves($id,array('statut'=>'poubelle'));
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 
 ?>

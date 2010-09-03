@@ -21,15 +21,15 @@ function crud_auteurs_create_dist($dummy,$set = null){
 		list($e,$ok) = auteurs_set($id,$set);
 	else
 		$e = _L('create error');
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_auteurs_update_dist($id,$set=null){
 	list($e,$ok) = auteurs_set($id,$set);
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_auteurs_delete_dist($id){
 	list($e,$ok) = auteurs_set($id,array('statut'=>'5poubelle'));
-	return array($id,$ok,$e);
+	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 
 

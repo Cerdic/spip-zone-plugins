@@ -59,18 +59,17 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 		return array($id,'',$er);
 
 	// ok ici tout va bien !
-	list($id,$ok,$err) = $f($id,$args);
+	$res = $f($id,$args);
 
 	// TODO : verifier que l'objet a ete supprime physiquement, et dans ce cas
 	// trigger le pipeline de suppression des objets lies
 
-
 	// interpretons un peu le retour pour le mettre en forme :
-	if (!$ok AND !$err) {$ok = _L("ok");$err='';}
-	elseif($err) $ok='';
-	elseif($ok) $err='';
+	if ($res['success'] AND !$res['message'])
+		$res['message'] = _L("ok");
 
-	return array($id,$ok,$err);
+	return $res;
+
 }
 
 ?>
