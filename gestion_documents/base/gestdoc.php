@@ -12,6 +12,7 @@ function gestdoc_declarer_tables_interfaces($interface){
 
 function gestdoc_declarer_tables_principales($tables_principales){
 	
+	$tables_principales['spip_documents']['field']['fichier'] = "text NOT NULL";
 	$tables_principales['spip_types_documents']['field']['media'] = "varchar(10) DEFAULT 'file' NOT NULL";
 	$tables_principales['spip_documents']['field']['statut'] = "varchar(10) DEFAULT '0' NOT NULL";
 	$tables_principales['spip_documents']['field']['credits'] = "varchar(255) DEFAULT '' NOT NULL";	
@@ -82,6 +83,12 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/abstract_sql');
 			sql_updateq('spip_documents',array("statut"=>'0'));
 			ecrire_meta($nom_meta_base_version,$current_version="0.8",'non');
+		}
+		if (version_compare($current_version,'0.9','<')){
+			// Augmentation de la taille du champ fichier pour permettre les URL longues
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE spip_documents CHANGE fichier fichier TEXT NOT NULL");
+			ecrire_meta($nom_meta_base_version,$current_version="0.9",'non');
 		}
 	}
 	gestdoc_check_statuts();
