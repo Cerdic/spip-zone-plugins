@@ -65,7 +65,7 @@ function multilang_inserer_head($flux,$config=array()){
 			$root .= ',div.formulaire_editer_site';
 		}
 		if($config['motcle']) { // Mots
-			$root .= ',div.formulaire_editer_mot';
+			$root .= ',div.formulaire_editer_mot,div.formulaire_editer_groupe_mot';
 		}
 
 		// Docs traites a part dans pages d'edition d'articles et de rubriques
