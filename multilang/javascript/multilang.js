@@ -139,7 +139,7 @@ function multilang_init_multi(options) {
 			return false;
 		});
 		this.isfull = false;
-		this.form_lang = multilang_lang_courante;
+		this.form_lang = multilang_def_lang;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
 		// Pas de rajout s'il y en deja un
 		if(!container.find('.menu_lang').size())
@@ -347,7 +347,7 @@ function multilang_init_field(el,lang,force) {
 		}
 	}
 
-	//Put the current lang string only in the field
+	// Put the current lang string only in the field
 	multilang_set_lang(el,lang);
 
 	/**
@@ -538,7 +538,7 @@ function multilang_save_lang(el,lang) {
 
 	//if the lang value is equal to the def lang do nothing
 	//else save value but if the field is not empty, delete lang value
-	if(el.field_lang[multilang_lang_courante]!= el.value) {
+	if(el.field_lang[multilang_def_lang]!= el.value) {
 		if(!el.value) {
 			delete el.field_lang[lang];
 			return;
@@ -546,9 +546,9 @@ function multilang_save_lang(el,lang) {
 		el.multi = true;
 		el.field_lang[lang] = el.value;
 	}else{
-		el.field_lang[lang] = el.field_lang[multilang_lang_courante];
+		el.field_lang[lang] = el.field_lang[multilang_def_lang];
 		$.each(el.field_lang,function(index, value){
-			if((index != multilang_lang_courante) && (value == el.field_lang[multilang_lang_courante])){
+			if((index != multilang_def_lang) && (value == el.field_lang[multilang_def_lang])){
 				delete el.field_lang[index];
 			}
 		});
