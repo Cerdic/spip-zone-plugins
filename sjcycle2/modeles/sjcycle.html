@@ -16,7 +16,7 @@
 <B_img>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		[(#CONFIG{sjcycle/tooltip}|=={1}|oui)
+		[(#CONFIG{sjcycle/tooltip}|=={on}|oui)
 			$('.infobulle').tooltip({
 					bodyHandler: function() {
 						return $($(this).children(".textinfobulle")).html();
@@ -94,11 +94,11 @@
          [(#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui)
          	</a>
          ]
-         [(#CONFIG{sjcycle/tooltip}|=={1}|oui)
+         [(#CONFIG{sjcycle/tooltip}|=={on}|oui)
             <div class="textinfobulle" style="display:none;text-align:left;">
                [<h4>(#TITRE|supprimer_numero)</h4>]
                [(#DESCRIPTIF)<br/ >]
-               [(#CONFIG{sjcycle/tooltip_carac}|=={1}|oui)
+               [(#CONFIG{sjcycle/tooltip_carac}|=={on}|oui)
                	<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]
                ]
             </div>
