@@ -139,7 +139,7 @@ function multilang_init_multi(options) {
 			return false;
 		});
 		this.isfull = false;
-		this.form_lang = multilang_def_lang;
+		this.form_lang = multilang_lang_courante;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
 		// Pas de rajout s'il y en deja un
 		if(!container.find('.menu_lang').size())
@@ -243,7 +243,8 @@ function multilang_multi_recover(el,container,target,event){
 			multilang_save_lang(this,this.form.form_lang);
 			//build the string value
 			multilang_field_set_background(this,lang);
-			var def_value = this.field_lang[multilang_lang_courante];
+			multilang_mark_empty_langs(container,target);
+			var def_value = this.field_lang[multilang_def_lang];
 			if(!this.multi)
 				this.value = (def_value==undefined?"":def_value);
 			else {
@@ -251,7 +252,10 @@ function multilang_multi_recover(el,container,target,event){
 				$.each(this.field_lang,function(name){
 					if((name != 'full') && (this.length > 0)){
 						//save default lang value and other lang values if different from the default one
-						if(this!=def_value || name == multilang_lang_courante) {
+						if(name == multilang_def_lang){
+							value = "["+name+"]"+this+value;
+							count++;
+						}else if(this!=def_value) {
 							value += "["+name+"]"+this;
 							count++;
 						}
@@ -380,7 +384,6 @@ function multilang_change_lang(el,container,target) {
 
 	if(target[0].isfull){
 		// Maj du menu de langues avant multilang_init_field
-		multilang_mark_empty_langs(container,target)
 		multilang_forms_fields[target_id].each(function(){
 			var me = $(this);
 			if(me.parents(root_opt).size()>0){
@@ -399,7 +402,7 @@ function multilang_change_lang(el,container,target) {
 			multilang_save_lang(this,this.form.form_lang);
 		});
 		// Maj du menu de langues apres multilang_save_lang
-		multilang_mark_empty_langs(container,target)
+		multilang_mark_empty_langs(container,target);
 	}
 
 	//change current lang
@@ -548,7 +551,7 @@ function multilang_save_lang(el,lang) {
 	}else{
 		el.field_lang[lang] = el.field_lang[multilang_def_lang];
 		$.each(el.field_lang,function(index, value){
-			if((index != multilang_def_lang) && (value == el.field_lang[multilang_def_lang])){
+			if((index != multilang_lang_courante) && (value == el.field_lang[multilang_lang_courante])){
 				delete el.field_lang[index];
 			}
 		});

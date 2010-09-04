@@ -24,7 +24,8 @@ function multilang_insert_head($flux){
 	$config = lire_config('multilang',array());
 
 	if($config['multilang_public'] == 'on'){
-		$flux = multilang_inserer_head($flux,$config);
+		$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
+		$flux .= multilang_inserer_head($flux,$config);
 	}
 
 	return $flux;
@@ -40,7 +41,6 @@ function multilang_insert_head($flux){
 function multilang_inserer_head($flux,$config=array()){
 	if(count(explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
 		// Insertion de la css
-		$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
 		$root = '' ;
 
 		if($config['siteconfig']){
