@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// F
+	'formulaire_modifier_id3' => 'Modifier les m&eacute;tadonn&eacute;es de :',
+
 	// I
 	'info_artist' => 'Artiste',
 	'info_album' => 'Album',
@@ -43,6 +46,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_mise_a_jour_base' => 'Mise &agrave; jour de la base de getid3 en @version@',
 	'install_ajout_champs_documents' => 'GetID3 : Ajout des champs sur spip_documents',
 
+	// L
+	'label_album' => 'Album',
+	'label_artist' => 'Artiste',
+	'label_comment' => 'Commentaire',
+	'label_cover' => 'Pochette',
+	'label_genre' => 'Genre',
+	'label_title' => 'Titre',
+	'label_year' => 'Ann&eacute;e',
+	'lien_modifier_id3' => 'Modifier les tags ID3',
+
+	// M
+	'message_erreur_document_distant_ecriture' => 'Ce document est &laquo;distant&raquo; et ne peut donc pas &ecirc;tre modifi&eacute;.',
+	'message_extension_invalide_ecriture' => 'Le format de ce fichier n\'est pas pris en charge.',
+	'message_fichier_maj' => 'Le fichier a &eacute;t&eacute; mis &agrave; jour.',
+	
 	// S
 	'son_infos_techniques' => 'Infos techniques',
 	'son_nom_fichier' => 'Nom du fichier',

@@ -1,0 +1,63 @@
+<div class='formulaire_spip formulaire_editer formulaire_id3_editer formulaire_id3_editer-#ENV{id_document}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_document' value='#ENV{id_document}' />
+		[(#REM) un bouton submit pour enregistrer qui sera declenche par le return
+		il ne doit pas etre hidden pour marcher dans safari
+		]
+	  <div style="position:absolute;left:-10000px;"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></div>
+	  <ul>
+	    <li class="editer_title[ (#ENV{erreurs}|table_valeur{title}|oui)erreur]">
+		    <label for="title"><:getid3:label_title:></label>[
+				<span class='erreur_message'>(#ENV{erreurs}|table_valeur{title})</span>
+				]<input type='text' class='text' name='title' id='title' value="[(#ENV{title,''})]" />
+	    </li>
+		<li class="editer_artist[ (#ENV{erreurs}|table_valeur{artist}|oui)erreur]">
+		    <label for="artist"><:getid3:label_artist:></label>[
+				<span class='erreur_message'>(#ENV{erreurs}|table_valeur{artist})</span>
+				]<input type='text' class='text' name='artist' id='artist' value="[(#ENV{artist,''})]" />
+	    </li>
+		<li class="editer_album[ (#ENV{erreurs}|table_valeur{album}|oui)erreur]">
+		    <label for="album"><:getid3:label_album:></label>[
+				<span class='erreur_message'>(#ENV{erreurs}|table_valeur{album})</span>
+				]<input type='text' class='text' name='album' id='album' value="[(#ENV{album,''})]" />
+	    </li>
+		<li class="editer_year[ (#ENV{erreurs}|table_valeur{year}|oui)erreur]">
+		    <label for="year"><:getid3:label_year:></label>[
+				<span class='erreur_message'>(#ENV{erreurs}|table_valeur{year})</span>
+				]<input type='text' class='text' name='year' id='year' size="4" maxlength="4" value="[(#ENV{year,''})]" />
+	    </li>
+		<li class="editer_comment[ (#ENV{erreurs}|table_valeur{comment}|oui)erreur]">
+		    <label for="comment"><:getid3:label_comment:></label>[
+				<span class='erreur_message'>(#ENV{erreurs}|table_valeur{comment})</span>
+				]<textarea name='comment' id='comment'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV{comment})]</textarea>
+	    </li>
+		<li class="editer_genre[ (#ENV{erreurs}|table_valeur{genre}|oui)erreur]">
+		    <label for="genre"><:getid3:label_genre:></label>[
+				<span class='erreur_message'>(#ENV{erreurs}|table_valeur{genre})</span>
+				]<input type='text' class='text' name='genre' id='genre' value="[(#ENV{genre,''})]" />
+	    </li>
+		<li class="editer_cover[ (#ENV{erreurs}|table_valeur{cover}|oui)erreur]">
+			<div>
+				<BOUCLE_covers(POUR){tableau #ENV{covers}}>
+					[(#VALEUR|image_reduire{120,120})]
+				</BOUCLE_covers>
+			</div>
+			<label for='cover'><:getid3:label_cover:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cover})</span>
+			]<input class='file' type="file" name="cover" value='#ENV{cover}' id="cover" size='14' />
+		</li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	<p class="boutons">
+		<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+	</p>
+	</div></form>
+	</BOUCLE_editable>
+</div>

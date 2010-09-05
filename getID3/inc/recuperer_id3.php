@@ -26,9 +26,14 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 			foreach($file_info['id3v2']['APIC'] as $cle=>$val){
 				if (isset($file_info['id3v2']['APIC'][$cle]['data']) && isset($file_info['id3v2']['APIC'][$cle]['image_mime']) && isset($file_info['id3v2']['APIC'][$cle]['dataoffset'])) {
 		            $imagechunkcheck = getid3_lib::GetDataImageSize($file_info['id3v2']['APIC'][$cle]['data']);
-		            $tmp_file = 'getid3-'.$file_info['id3v2']['APIC'][$cle]['dataoffset'].'.'.getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
-					if (ecrire_fichier(_DIR_TMP . $tmp_file, $file_info['id3v2']['APIC'][$cle]['data'])) {
-						$id3['cover'.$cle] = _DIR_TMP . $tmp_file;
+		            $extension = getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
+		            if($extension == 'jpeg')
+		            	$extension = 'jpg';
+		            $tmp_file = 'getid3-'.$file_info['id3v2']['APIC'][$cle]['dataoffset'].'.'.$extension;
+		            $dest = sous_repertoire(_DIR_VAR, 'cache-getid3');
+					$dest = $dest.$tmp_file;
+					if ($ok = ecrire_fichier($dest, $file_info['id3v2']['APIC'][$cle]['data'])) {
+						$id3['cover'.$cle] = $dest;
 					}
 				}
 			}
@@ -58,6 +63,7 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 		$id3['mime'] = $file_info['mime_type'];
 	}
 	if(!$info){
+		spip_log($id3,'id3');
 		return $id3;
 	}
 	else{

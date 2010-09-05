@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// F
+	'formulaire_modifier_id3' => 'Edit metadatas of :',
+
 	// I
 	'info_artist' => 'Artist',
 	'info_album' => 'Album',
@@ -42,6 +45,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_year' => 'Year',
 	'install_mise_a_jour_base' => 'Update of the getid3 database at @version@',
 	'install_ajout_champs_documents' => 'GetID3 : Adding fields on the spip_documents database table',
+ 
+	// L
+	'label_album' => 'Album',
+	'label_artist' => 'Artist',
+	'label_comment' => 'Comment',
+	'label_cover' => 'Cover',
+	'label_genre' => 'Genre',
+	'label_title' => 'Title',
+	'label_year' => 'Year',
+	'lien_modifier_id3' => 'Edit the ID3 tags',
+	
+	// M
+	'message_erreur_document_distant_ecriture' => 'This is a &laquo;remote&raquo; document which can not be changed.',
+	'message_extension_invalide_ecriture' => 'The format of this file is not supported.',
+	'message_fichier_maj' => 'The file has been updated.',
 
 	// S
 	'son_infos_techniques' => 'Technical informations',

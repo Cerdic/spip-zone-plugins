@@ -8,13 +8,15 @@
  */
 function getid3_editer_contenu_objet($flux){
 	$id_document = $flux['args']['id'];
-	if($flux['args']['type']=='case_document'){
+	if(in_array($flux['args']['type'],array('case_document'))){
+		spip_log($flux['args']['type'],'id3');
 		$son = array("mp3","ogg","flac","aiff","aif","wav");
+		$sons_metas = array('mp3','ogg');
 		$document = sql_fetsel("docs.id_document, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
-		if(in_array($extension,$son)){
+		if(in_array($extension,$son) && ($flux['args']['type'] == 'case_document')){
 			$infos_son = charger_fonction('infos_son', 'inc');
 			$flux['data'] .= $infos_son($id,$id_document,$type);
 		}
@@ -40,6 +42,20 @@ function getid3_post_edition($flux){
 			$infos = $recuperer_infos($id_document);
 		}
 	}
+	return $flux;
+}
+
+/**
+ * Ajouter le lien vers la modifs des id3
+ *
+ * @param array $flux
+ * @return array
+ */
+function getid3_document_desc_actions($flux){
+	$redirect = self();
+	$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.$flux['args']['id_document']),'redirect',$redirect);
+	$texte = _T('getid3:lien_modifier_id3');
+	$flux['data'] .= "<span class='sep'> | </span><a href='$url'>$texte</a>";	
 	return $flux;
 }
 ?>

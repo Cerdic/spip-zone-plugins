@@ -8,10 +8,10 @@
 	<icon>images/id3v2.png</icon>
 	<licence>(c) 2008-2010 GPL</licence>
 	<version>
-	0.2.3
+	0.4.0
 	</version>
 	<version_base>
-	0.2
+	0.3
 	</version_base>
 	<etat>
 	test
@@ -32,6 +32,10 @@ _ [->http://getid3.sourceforge.net/]
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/getid3_base.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>document_desc_actions</nom>
+		<inclure>getid3_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
