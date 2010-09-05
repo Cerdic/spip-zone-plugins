@@ -25,10 +25,11 @@ Wrap (encapsulate) widgets for preview or Ajax call
 <link rel="stylesheet" href="spip.php?page=habillage.css[&v=(#ACS_DERNIERE_MODIF)]" type="text/css" media="projection, screen, tv" />
 <?php // Widget's style is not included yet in above css if just activated
 $fond ='#ENV{c}.css';
-$fond = @recuperer_fond($fond);
-if ($fond)
-	echo '<style>'.$fond.'</style>';
-
+if (find_in_path($fond.'.html')) {
+	$fond = @recuperer_fond($fond);
+	if ($fond)
+		echo '<style>'.$fond.'</style>';
+}
 $fond ='#ENV{c}_instances.css';
 if (find_in_path($fond)) {
 	$fond = @recuperer_fond($fond, array("nic" => "#NIC"));
