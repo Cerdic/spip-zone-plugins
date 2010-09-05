@@ -9,7 +9,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	$livre_or = $livre;
 	$livre		= $livre_al[$livre_lang];
 	
-	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,false)));
+	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,'false')));
 
 	$param_cache = array('ref'=>$ref,'wissen'=>$wissen);
 	//Vérifions qu'on a pas en cache
@@ -34,7 +34,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 		$ref = str_replace($livre_or,$livre,$ref);
 	}
 		
-	//var_dump($petit_livre);
+
 	//recuperation du passage
 	
 	
