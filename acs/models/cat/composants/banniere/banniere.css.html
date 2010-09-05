@@ -15,13 +15,28 @@
   [(#VAR{acsBanniereLogoAlign,left}|=={left}|?{left: 0,right: 0});]
 }
 
-#banniere .banniere {
+#banniere .bantab {
+  height:100%;
+  width: 100%;
+}
+
+#banniere .bantd {
+  vertical-align: #VAR{acsBanniereValign};
+}
+
+#banniere .banimg {
   position: relative;
-  /*left: 60px;*/
+  border: 0;
 }
 
 #banniere .nom_site {
   position: relative;
   font-size: 40px;
   [color: (#VAR{acsBanniereTextColor});]
+}
+
+#banniere .extralink {
+  padding_left: 5px;
+  padding-right: 5px;
+  float: right;
 }
