@@ -20,18 +20,29 @@
 					if (!response || response.Status.code != 200) {
 						return false;
 					} else {
+						CountryName = '';
+						CountryNameCode = '';
+						AdministrativeAreaName = '';
+						LocalityName = '';
+						PostalCodeNumber = '';
 						place = response.Placemark[(#VAL{91}|chr)]0[(#VAL{93}|chr)];
 						$("#map_adresse").val(place.address);
-						if (place.AddressDetails.Accuracy > 0)
-							$("#pays").val(place.AddressDetails.Country.CountryName);
-						if (place.AddressDetails.Accuracy > 0)
-							$("#code_pays").val(place.AddressDetails.Country.CountryNameCode);
-						if (place.AddressDetails.Accuracy > 1)
-							$("#region").val(place.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName);
-						if (place.AddressDetails.Accuracy > 3)
-							$("#ville").val(place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName);
-						if (place.AddressDetails.Accuracy > 5)
-							$("#code_postal").val(place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber);
+						if (Country = place.AddressDetails.Country){
+							if (CountryName = Country.CountryName)
+								$("#pays").val(CountryName);
+							if (CountryNameCode = Country.CountryNameCode)
+								$("#code_pays").val(CountryNameCode);
+							if (AdministrativeArea = Country.AdministrativeArea){
+								if (AdministrativeAreaName = AdministrativeArea.AdministrativeAreaName)
+									$("#region").val(AdministrativeAreaName);
+								if ((SubAdministrativeArea = AdministrativeArea.SubAdministrativeArea) && (Locality = SubAdministrativeArea.Locality)){
+									if (LocalityName = Locality.LocalityName)
+										$("#ville").val(LocalityName);
+									if ((PostalCode = Locality.PostalCode) && (PostalCodeNumber = PostalCode.PostalCodeNumber))
+										$("#code_postal").val(PostalCodeNumber);
+								}
+							}
+						}
 					}
 				}
 				geocoder.getLocations(new GLatLng(lat,lonx), showAddress);
