@@ -63,7 +63,6 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 		$id3['mime'] = $file_info['mime_type'];
 	}
 	if(!$info){
-		spip_log($id3,'id3');
 		return $id3;
 	}
 	else{

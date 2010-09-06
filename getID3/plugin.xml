@@ -8,7 +8,7 @@
 	<icon>images/id3v2.png</icon>
 	<licence>(c) 2008-2010 GPL</licence>
 	<version>
-	0.4.0
+	0.4.1
 	</version>
 	<version_base>
 	0.3
@@ -49,5 +49,7 @@ _ [->http://getid3.sourceforge.net/]
 	</pipeline>
 	<install>base/getid3_upgrade.php</install>
 	<necessite id="SPIP" version='[2.0.0;]' />
+	<utilise id="cfg" />
+	<utilise id="gestdoc" />
 	<categorie>multimedia</categorie>
 </plugin>

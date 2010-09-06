@@ -52,8 +52,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_comment' => 'Commentaire',
 	'label_cover' => 'Pochette',
 	'label_genre' => 'Genre',
+	'label_reecriture_tags' => 'R&eacute;&eacute;crire les tags des fichiers &agrave la modification :',
+	'label_reecriture_tags_descriptif' => 'de la description du document',
+	'label_reecriture_tags_logo' => 'du logo du document',
+	'label_reecriture_tags_titre' => 'du titre du document',
 	'label_title' => 'Titre',
 	'label_year' => 'Ann&eacute;e',
+	'legende_ecriture_tags' => '&Eacute;criture des tags',
 	'lien_modifier_id3' => 'Modifier les tags ID3',
 
 	// M
@@ -77,6 +82,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'recuperer_infos' => 'R&eacute;cup&eacute;rer les informations du fichier',
+
+	// T
+	'titre_getid3' => 'GetID3',
 
 	// V
 	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.',

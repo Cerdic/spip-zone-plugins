@@ -97,6 +97,9 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 		$err = array_merge($err,$ecrire->errors);
 	}
 
+	$taille = filesize($document_chemin);
+	sql_updateq('spip_documents', array('taille'=>$taille),"id_document=".$id_document);	
+
 	return $err;
 }
 ?>

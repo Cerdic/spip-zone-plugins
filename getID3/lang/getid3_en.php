@@ -52,8 +52,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_comment' => 'Comment',
 	'label_cover' => 'Cover',
 	'label_genre' => 'Genre',
+	'label_reecriture_tags' => 'Rewrite file tags after editing :',
+	'label_reecriture_tags_descriptif' => 'the description of the document',
+	'label_reecriture_tags_logo' => 'the logo of the document',
+	'label_reecriture_tags_titre' => 'the title of the document',
 	'label_title' => 'Title',
 	'label_year' => 'Year',
+	'legende_ecriture_tags' => 'Writing tags',
 	'lien_modifier_id3' => 'Edit the ID3 tags',
 	
 	// M
@@ -77,6 +82,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'recuperer_infos' => 'Retrieve file informations',
+
+	// T
+	'titre_getid3' => 'GetID3',
 
 	// V
 	'verifier_formulaire' => 'Verify the content of the form',

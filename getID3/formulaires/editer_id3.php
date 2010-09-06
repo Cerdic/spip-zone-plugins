@@ -45,7 +45,6 @@ function formulaires_editer_id3_charger($id){
 				$valeurs[$valeur] = filtrer_entites($info);
 			}
 		}
-		
 	}
 	return $valeurs;
 }

@@ -1,0 +1,40 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=getid3 -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	<li class="fieldset">
+		<h3 class="legend"><:getid3:legende_ecriture_tags:></h3>
+		<ul>
+			<li class="editer_ecriture_tags">
+				<label><:getid3:label_reecriture_tags:></label>
+				<div class="choix">
+					<input type="checkbox" name="reecriture_tags[]" value="titre" id="reecriture_tags_titre"[(#VAL{titre}|in_array{#ENV**{reecriture_tags,#ARRAY}}|oui)checked="checked"] />
+					<label for="reecriture_tags_titre"><:getid3:label_reecriture_tags_titre:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="reecriture_tags[]" value="descriptif" id="reecriture_tags_descriptif"[(#VAL{descriptif}|in_array{#ENV**{reecriture_tags,#ARRAY}}|oui)checked="checked"] />
+					<label for="reecriture_tags_descriptif"><:getid3:label_reecriture_tags_descriptif:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="reecriture_tags[]" value="logo" id="reecriture_tags_logo"[(#VAL{logo}|in_array{#ENV**{reecriture_tags,#ARRAY}}|oui)checked="checked"] />
+					<label for="reecriture_tags_logo"><:getid3:label_reecriture_tags_logo:></label>
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+</p>
+</div>
+</form>
+</div>
