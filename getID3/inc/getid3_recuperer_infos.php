@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Enregistrement en base le contenu des données des tags et des données audio
  *
@@ -73,8 +75,8 @@ function inc_getid3_recuperer_infos($id_document){
 	}
 	sql_updateq('spip_documents',
 		array(
-			'titre'=>$document['titre'],
-			'descriptif'=>$document['descriptif'],
+			'titre'=>filtrer_entites($document['titre']),
+			'descriptif'=>filtrer_entites($document['descriptif']),
 			'duree'=> $id3['duree_secondes'],
 			'bitrate' => $id3['bitrate'],
 			'bitrate_mode'=>$id3['bitrate_mode'],
