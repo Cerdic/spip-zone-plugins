@@ -14,6 +14,7 @@ define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
 
 function maj_auto_action_rapide() {
+	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
 	$time = time();
 	$timeout = ini_get('max_execution_time');
 	$timeout = $timeout?min(30,floor($timeout/2)):10;
@@ -49,10 +50,10 @@ function maj_auto_action_rapide() {
 		if($infos['svn']) $rev .= '<br/>SVN';		
 		if(!strlen($rev)) $rev = '&nbsp;';
 		$zip_log = (strlen($infos['zip_log']) && $infos['zip_log']!=$infos['zip_trac'])
-			?"<label><input type='radio' value='$infos[zip_log]'$checked name='url_zip_plugin'/>[->$infos[zip_log]]</label>":'';
+			?"<label><input type='radio' value='$infos[zip_log]'$checked name='$arg_chargeur'/>[->$infos[zip_log]]</label>":'';
 		$bouton = '&nbsp;';
 		if($auto && !$stop) $bouton = strlen($infos['zip_trac'])
-			?"<input type='radio' value='$infos[zip_trac]'$checked name='url_zip_plugin'/>"
+			?"<input type='radio' value='$infos[zip_trac]'$checked name='$arg_chargeur'/>"
 			:'<center style="margin-top:0.6em;font-weight:bold;"><acronym title="'._T('couteau:maj_zip_ko').'">&#63;</acronym></center>';
 		if(strlen($zip_log)) {
 			if (!$stop)
