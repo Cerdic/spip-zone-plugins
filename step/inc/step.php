@@ -567,7 +567,7 @@ function step_liste_plugin_files($dir_plugins = ""){
 			'_DIR_EXTENSIONS',
 		);
 		// plugins supp (1 seul dossier)
-		if (defined('_DIR_PLUGINS_SUPP')) {$dir_plugins[] = '_DIR_PLUGINS_SUPP';}
+		if (defined('_DIR_PLUGINS_SUPPL')) {$dir_plugins[] = '_DIR_PLUGINS_SUPPL';}
 	}
 	
 	// tableau
