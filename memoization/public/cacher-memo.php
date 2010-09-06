@@ -26,6 +26,12 @@ function generer_nom_fichier_cache($contexte, $page) {
 		. '-'.$indicateur;
 }
 
+// Parano : on signe le cache, afin d'interdire un hack d'injection
+// dans notre memcache
+function cache_signature(&$page) {
+	return crc32($GLOBALS['meta']['secret_du_site'].$page['texte']);
+}
+
 /**
  * gestion des delais d'expiration du cache...
  * $page passee par reference pour accelerer
@@ -46,6 +52,10 @@ function cache_valide(&$page, $date) {
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
 	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
+
+	// controle de la signature
+	if ($page['sig'] !== cache_signature($page))
+		return 1;
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
@@ -118,6 +128,9 @@ function creer_cache(&$page, &$chemin_cache) {
 	// ajouter la date de production dans le cache lui meme
 	// (qui contient deja sa duree de validite)
 	$page['lastmodified'] = $_SERVER['REQUEST_TIME'];
+
+	// signer le contenu
+	$page['sig']= cache_signature($page);
 
 	// compresser si elle est > 16 ko
 	if (strlen($page['texte']) > 16384
