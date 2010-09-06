@@ -19,6 +19,8 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 	if (!strlen($view_zoom) OR !is_numeric($view_zoom)){
 		$view_zoom = lire_config('geomap/zoom',0);
 	}
+	if (lire_config('gis/geocoding'))
+		$geocoding = true;
 	$out = '
 	<script type="text/javascript">
 		//<![CDATA[
@@ -46,7 +48,47 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 				var center = marker.getPoint();
 		  		jQuery("#'.$target_lat_id.'").val(center.lat());
 				jQuery("#'.$target_long_id.'").val(center.lng());
+				'.($geocoding?'
+				geocode(point.y,point.x);':'').'
 			});':'')
+	.($geocoding?'
+			// reverse geocoding
+			var geocode = function(lat,lonx) {
+				var geocoder;
+				geocoder = new GClientGeocoder();
+				function showAddress(response) {
+					console.log(response);
+					if (!response || response.Status.code != 200) {
+						return false;
+					} else {
+						$("#pays,#code_pays,#region,#ville,#code_postal").val("");
+						CountryName = "";
+						CountryNameCode = "";
+						AdministrativeAreaName = "";
+						LocalityName = "";
+						PostalCodeNumber = "";
+						place = response.Placemark[0];
+						$("#map_adresse").val(place.address);
+						if (Country = place.AddressDetails.Country){
+							if (CountryName = Country.CountryName)
+								$("#pays").val(CountryName);
+							if (CountryNameCode = Country.CountryNameCode)
+								$("#code_pays").val(CountryNameCode);
+							if (AdministrativeArea = Country.AdministrativeArea){
+								if (AdministrativeAreaName = AdministrativeArea.AdministrativeAreaName)
+									$("#region").val(AdministrativeAreaName);
+								if ((SubAdministrativeArea = AdministrativeArea.SubAdministrativeArea) && (Locality = SubAdministrativeArea.Locality)){
+									if (LocalityName = Locality.LocalityName)
+										$("#ville").val(LocalityName);
+									if ((PostalCode = Locality.PostalCode) && (PostalCodeNumber = PostalCode.PostalCodeNumber))
+										$("#code_postal").val(PostalCodeNumber);
+								}
+							}
+						}
+					}
+				}
+				geocoder.getLocations(new GLatLng(lat,lonx), showAddress);
+			};':'')
 	.'			
 			GEvent.addListener(formMap, \'click\', function(overlay,point) {
 				formMap.clearOverlays();
@@ -58,10 +100,14 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 					jQuery("#'.$target_lat_id.'").val(center.lat());
 					jQuery("#'.$target_long_id.'").val(center.lng());
 					jQuery("#'.$target_zoom_id.'").val(zoom);
+					'.($geocoding?'
+					geocode(point.y,point.x);':'').'
 					GEvent.addListener(marker, \'dragend\', function(){
 						var center = marker.getPoint();
 	 					jQuery("#'.$target_lat_id.'").val(center.lat());
 						jQuery("#'.$target_long_id.'").val(center.lng());
+						'.($geocoding?'
+						geocode(point.y,point.x);':'').'
 					});
 				}
 			});'
@@ -82,6 +128,8 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 							marker = new GMarker(point,{draggable:true,icon:clicable_icon});
 							formMap.addOverlay(marker);
 							marker.openInfoWindowHtml(address);
+							'.($geocoding?'
+							geocode(point.y,point.x);':'').'
 							jQuery("#'.$target_lat_id.'").val(point.lat());
 							jQuery("#'.$target_long_id.'").val(point.lng());
 							jQuery("#'.$target_zoom_id.'").val(formMap.getZoom());

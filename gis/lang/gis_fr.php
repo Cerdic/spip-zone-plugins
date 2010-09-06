@@ -35,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"coord_enregistre" => "Coordonn&eacute;es enregistr&eacute;es",
 	"coord_maj" => "Coordonn&eacute;es mises &agrave; jour",
 	"label_address" => "Rechercher",
+	"label_ville" => "Ville",
+	"label_pays" => "Pays",
 	
 	//elements du formulaire public
 	

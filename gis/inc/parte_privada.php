@@ -31,6 +31,8 @@ function gis_cambiar_coord($id,$table,$exec) {
 	$mapa = "";
 	$defaut = _DIR_PLUGIN_GEOMAP ? 'geomap' : '';
 	$api_carte = lire_config('gis/api_carte',$defaut);
+	if (lire_config('gis/geocoding'))
+		$geocoding = true;
 	$result= spip_query("SELECT * FROM spip_gis WHERE $pkey = " . intval($id));
 	if ($row = spip_fetch_array($result)){
 		$glat = $row['lat'];
@@ -41,10 +43,32 @@ function gis_cambiar_coord($id,$table,$exec) {
 		$glat = _request('lat');
 		$glonx = _request('lonx');
 		$gzoom = _request('zoom');
-		if (!$row)
-			spip_abstract_insert("spip_gis", "($pkey, lat, lonx, zoom)", "("._q($id) .", "._q($glat).", "._q($glonx).", "._q($gzoom).")");
-		else
-			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx).", zoom="._q($gzoom)."  WHERE $pkey = " . _q($id));
+		if ($geocoding){
+			$pays = _request('pays');
+			$code_pays = _request('code_pays');
+			$region = _request('region');
+			$ville = _request('ville');
+			$code_postal = _request('code_postal');
+		}
+		if (!$row){
+			if ($geocoding) {
+				spip_abstract_insert("spip_gis",
+					"($pkey, lat, lonx, zoom, pays, code_pays, region, ville, code_postal)",
+					"("._q($id) .", "._q($glat).", "._q($glonx).", "._q($gzoom).", "._q($pays).", "._q($code_pays).", "._q($region).", "._q($ville).", "._q($code_postal).")"
+				);
+			} else {
+				spip_abstract_insert("spip_gis",
+					"($pkey, lat, lonx, zoom)",
+					"("._q($id) .", "._q($glat).", "._q($glonx).", "._q($gzoom).")"
+				);
+			}
+		} else {
+			if ($geocoding) {
+				spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx).", zoom="._q($gzoom).", pays="._q($pays).", code_pays="._q($code_pays).", region="._q($region).", ville="._q($ville).", code_postal="._q($code_postal)."  WHERE $pkey = " . _q($id));
+			} else {
+				spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx).", zoom="._q($gzoom)."  WHERE $pkey = " . _q($id));
+			}
+		}
 	}
 	if(_request('supprimer')){
 		sql_delete("spip_gis", array("$pkey = " . sql_quote($id)));
@@ -94,7 +118,6 @@ function gis_cambiar_coord($id,$table,$exec) {
 		} else {
 			$s .= '<div>' . _T('gis:falta_plugin') . '</div>';
 		}
-
 		// Formulario para actualizar as coordenadas do mapa______________________.
 		$s .= '
 			<form id="formulaire_address" action="#">
@@ -106,11 +129,24 @@ function gis_cambiar_coord($id,$table,$exec) {
 			</ul>
 			</form>
 			<form id="formulaire_coordenadas" action="'.generer_url_ecrire($exec,"$pkey=".$id).'" method="post">
+			'.($geocoding?'<input type="hidden" name="code_pays" id="code_pays" value="" />
+			<input type="hidden" name="region" id="region" value="" />
+			<input type="hidden" name="code_postal" id="code_postal" value="" />':'').'
 			<ul style="text-align:center;">
 			<li style="padding-left:0; display:inline;"><label for="form_lat" style="margin-left:0; float:none; display:inline;">'._T('gis:lat').': </label><input type="text" class="text" name="lat" id="form_lat" value="'.$glat.'" size="12" style="width:80px;" /></li>
 			<li style="padding-left:0; display:inline;"><label for="form_long" style="margin-left:0; float:none; display:inline;">'._T('gis:long').': </label><input type="text" class="text" name="lonx" id="form_long" value="'.$glonx.'" size="12" style="width:80px;" /></li>
 			<li style="padding-left:0; display:inline;"><label for="form_zoom" style="margin-left:0; float:none; display:inline;">'._T('gis:zoom').': </label><input type="text" class="text" name="zoom" id="form_zoom" value="'.$gzoom.'" size="6" style="width:30px;" /></li>
 			</ul>
+			'.($geocoding?'<ul style="text-align:center;">
+				<li style="padding-left:0; display:inline;">
+					<label for="pays" style="margin-left:0; float:none; display:inline;">'._T('gis:label_pays').': </label>
+					<input type="text" class="text" name="pays" id="pays" value="'.$row['pays'].'" style="width:95px;" />
+				</li>
+				<li style="padding-left:0; display:inline;">
+					<label for="ville" style="margin-left:0; float:none; display:inline;">'._T('gis:label_ville').': </label>
+					<input type="text" class="text" name="ville" id="ville" value="'.$row['ville'].'" style="width:95px;" />
+				</li>
+			</ul>':'').'
 			<p class="boutons">
 			<input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" /><input type="submit" name="supprimer" value="'._T("gis:bouton_supprimer").'" />
 			</p>
