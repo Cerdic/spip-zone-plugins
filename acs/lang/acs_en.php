@@ -23,9 +23,13 @@ $traductions_acs = array(
   'outset' => 'outset',
 
   'align' => 'Alignment',
+	'valign' => 'vertical alignment',
+	'margin' => 'Margin',
 	'left' => 'left',
 	'center' => 'center',
 	'right' => 'right',
+	'top' => 'top',
+	'bottom' => 'bottom',
 
 	'font' => 'Font(s)',
 	'fontsize' => 'Size',

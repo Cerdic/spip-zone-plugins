@@ -23,9 +23,13 @@ $traductions_acs = array(
   'outset' => 'extrud&eacute; de la page (inverse de inset)',
 
   'align' => 'Alignement',
+  'valign' => 'Alignement vertical',
+	'margin' => 'Marge',
 	'left' => 'gauche',
 	'center' => 'centr&eacute;',
 	'right' => 'droit',
+	'top' => 'haut',
+	'bottom' => 'bas',
 
 	'font' => 'Fonte(s)',
 	'fontsize' => 'Taille',
