@@ -104,10 +104,13 @@ function getid3_post_edition($flux){
  * @return array
  */
 function getid3_document_desc_actions($flux){
-	$redirect = self();
-	$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.$flux['args']['id_document']),'redirect',$redirect);
-	$texte = _T('getid3:lien_modifier_id3');
-	$flux['data'] .= "<span class='sep'> | </span><a href='$url'>$texte</a>";	
+	$distant = sql_getfetsel('distant','spip_documents','id_document='.intval($flux['args']['id_document']));
+	if($distant == 'non'){
+		$redirect = self();
+		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.$flux['args']['id_document']),'redirect',$redirect);
+		$texte = _T('getid3:lien_modifier_id3');
+		$flux['data'] .= "<span class='sep'> | </span><a href='$url'>$texte</a>";
+	}	
 	return $flux;
 }
 ?>
