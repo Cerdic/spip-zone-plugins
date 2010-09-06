@@ -659,7 +659,7 @@ add_outil( array(
 	'id' => 'titres_typo',
 	'categorie'   => 'typo-corr',
 	'code:options' => 'define("_titres_typo_ARG", "couleur=%%i_couleur%%,taille=%%i_taille%%,police=%%i_police%%,largeur=%%i_largeur%%,hauteur_ligne=%%i_hauteur%%,padding=%%i_padding%%,align=%%i_align%%");',
-	'pipeline:pre_typo'   => 'titres_typo_pre_typo',
+	defined('_SPIP19300')?'pipeline:pre_propre':'pipeline:pre_typo'   => 'titres_typo_pre_typo',
 	'pipelinecode:pre_description_outil' => 'if($id=="titres_typo")
 		$texte=str_replace("@_CS_FONTS@",join(" - ",get_liste_fonts()),$texte);',	
 ));
