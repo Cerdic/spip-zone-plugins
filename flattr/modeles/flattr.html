@@ -16,7 +16,7 @@ function flattr_init() {
 		hidden: "[(#ENV{hidden,#CONFIG{flattr/hidden,true}}|texte_backend)]",
 		title: "[(#ENV{title}|texte_backend)]",
 		tags: "[(#ENV{tags}|texte_backend)]",
-		description: "[(#ENV{description}|texte_backend)]",
+		description: "[(#ENV{description}|replace{\n,' '}|texte_backend)]",
 		category: "[(#ENV{category,#CONFIG{flattr/category,text}}|texte_backend)]",
 		},
 		/* id */ 'flattr',
