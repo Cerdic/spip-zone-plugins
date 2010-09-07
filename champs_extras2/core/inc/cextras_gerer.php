@@ -151,11 +151,11 @@ function creer_champs_extras($champs) {
 	$trouver_table = charger_fonction('trouver_table','base');
 	$trouver_table(''); // recreer la description des tables.
 	$retour = true;
-	foreach ($champs as $c){ 
-		if ($table = table_objet_sql($c->table)) {
-			$desc = $trouver_table($table);
+	foreach ($champs as $c){
+		if ($objet = table_objet($c->table)) {
+			$desc = $trouver_table($objet);
 			if (!isset($desc['field'][$c->champ])) {
-				extras_log("Le champ extra '" . $c->champ . "' sur $table n'a pas ete cree :(", true);
+				extras_log("Le champ extra '" . $c->champ . "' sur $objet n'a pas ete cree :(", true);
 				$retour = false;
 			}
 		} else {
@@ -256,6 +256,7 @@ function extras_champs_anormaux($connect='') {
 // ignore la table 'spip_test'
 function extras_base($connect='') {
 	$champs = array();
+	
 	foreach (extras_tables($connect) as $table) {
 		if ($table != 'spip_test') {
 			$champs[$table] = extras_champs($table, $connect);
@@ -264,12 +265,15 @@ function extras_base($connect='') {
 	return $champs;
 }
 
-// liste les tables dispos ans la connexion $connect
+// liste les tables dispos dans la connexion $connect
 function extras_tables($connect='') {
 	$a = array();
+	$taille_prefixe = strlen( $GLOBALS['connexions'][$connect ? $connect : 0]['prefixe'] );
+
 	if ($s = sql_showbase(null, $connect)) {
 		while ($t = sql_fetch($s, $connect)) {
-				$a[] = array_pop($t);
+				$t = 'spip' . substr(array_pop($t), $taille_prefixe);
+				$a[] = $t;
 		}
 	}
 	return $a;
@@ -278,7 +282,7 @@ function extras_tables($connect='') {
 
 // liste les champs dispos dans la table $table de la connexion $connect
 function extras_champs($table, $connect) {
-	$desc = sql_showtable($table, null, $connect);
+	$desc = sql_showtable($table, true, $connect);
 	if (is_array($desc['field'])) {
 		return $desc['field'];
 	} else {

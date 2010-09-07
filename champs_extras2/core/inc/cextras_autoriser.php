@@ -155,7 +155,7 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 		$table = table_objet_sql($objet);
 		$id_table = id_table_objet($table);
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table($table);
+		$desc = $trouver_table( table_objet($table) );
 		if (isset($desc['field'][$_id_cible])) {
 			$id_cible = sql_getfetsel($_id_cible, $table, "$id_table=".sql_quote($id_objet));
 		}
@@ -260,7 +260,7 @@ function inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt
 	// on desactive cette option si cette colonne est absente
 	if ($id_groupe and $recursif) {
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table("spip_groupes_mots");
+		$desc = $trouver_table("groupes_mots");
 		if (isset($desc['field']['id_parent'])) {
 			$id_parent = $id_groupe;
 			while ($id_parent = sql_getfetsel("id_parent", "spip_groupes_mots", "id_parent=" . sql_quote($id_parent))) {
