@@ -97,4 +97,12 @@ if (window.jQuery) (function($){ if(typeof onAjaxLoad == "function") onAjaxLoad(
 	return $flux;
 }
 
+function mediabox_jquery_plugins($plugins){
+	$config = mediabox_config();
+	if ($config['splash_url']) {
+		$plugins[] = 'javascript/jquery.cookie.js';
+	}
+	return $plugins;
+}
+
 ?>
