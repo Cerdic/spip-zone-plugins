@@ -3,7 +3,7 @@
     <auteur>Daniel FAIVRE (&#224; partir de travaux de Marcimat)
 _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
-    <version>1.3</version>
+    <version>1.3.1</version>
 	<version_base>0.1</version_base>
     <etat>
     stable
@@ -24,11 +24,7 @@ _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license
         <nom>insert_head</nom>
         <inclure>palette_pipeline.php</inclure>
     </pipeline>
-	<pipeline>
-        <nom>jquery_plugins</nom>
-        <inclure>palette_pipeline.php</inclure>
-    </pipeline>
-	<pipeline>
+    <pipeline>
         <nom>insert_head_css</nom>
         <inclure>palette_pipeline.php</inclure>
     </pipeline>
