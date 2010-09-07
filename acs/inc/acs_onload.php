@@ -113,14 +113,22 @@ function mkdir_recursive($pathname) {
     return @is_dir($pathname) || @mkdir($pathname);
 }
 
-// Utilise par la fonction balise_VAR()
-function meta_recursive($meta) {
-	if (isset($GLOBALS['meta'][$meta])) {
-		$val = $GLOBALS['meta'][$meta];
-		if (substr($val, 0 ,1) == '=') {
-  		$meta = meta_recursive(substr($val, 1));
-  	}
+/**
+ * Lit une variable meta à la façon de l'API cfg, suivant un chemin,
+ * avec en plus la récursivité ACS (une variable ACS peut référencer une autre variable ACS)
+ * Utilisé par la fonction balise_VAR()
+ */
+function meta_recursive($src, $meta) {
+	$chemin = strtok($meta, '/');
+	$val = $src[$chemin];
+	if (is_array($val)) {
+		$val = meta_recursive($val, substr($meta, strlen($chemin)+1));
 	}
-	return $meta;
+	elseif (is_array(unserialize($val))) {
+		$val = meta_recursive(unserialize($val), substr($meta, strlen($chemin)+1));
+	}
+	if (substr($val, 0 ,1) == '=')
+		$val = meta_recursive($src, substr($val, 1));
+	return $val;
 }
 ?>

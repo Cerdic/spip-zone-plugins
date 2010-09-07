@@ -1,19 +1,17 @@
 [(#SET{acsEditoKeyword,<:acs:edito_keyword:>})]
 <B_edito>
 <fieldset class="edito">
-<legend>&nbsp;<:acs:edito_edito:>&nbsp;</legend>
+  [(#VAR{acsEditoLegend}|=={oui}|?{' '}) <legend>&nbsp;<:acs:edito_edito:>&nbsp;</legend>]
   [(#ENV{debut_articles}|?{'',' '})]
-  <ul>
     <BOUCLE_edito(ARTICLES) {par date}{inverse} {doublons} {titre_mot=#GET{acsEditoKeyword}} {0,1}{lang=#LANG}>
-    <li>
+      [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|left||image_reduire{100,100})</a>]
       [<p class="surtitre">(#SURTITRE)</p>]
       <p class="titre"><a href="#URL_ARTICLE">#TITRE</a></p>
       [<p class="soustitre">(#SOUSTITRE)</p>]
-      [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|left||image_reduire{100,100})</a>][<span class="texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> (lire la suite)</a></i></small>})</span><br />]
-      <BOUCLE_mot(MOTS) {id_article} {titre=Edito} {0,1}><a href="#URL_MOT" style ="float:left; font-size: 0.71em"><img src="#ACS_CHEMIN{img/triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
       <small class="infos_article">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
-    </li>
+      [<br /><div class="chapo">(#CHAPO)</div>]
+      [<span class="texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> (lire la suite)</a></i></small>})</span><br />]
+      <BOUCLE_mot(MOTS) {id_article} {titre=Edito} {0,1}><a href="#URL_MOT" style ="float:left; font-size: 0.71em"><img src="#ACS_CHEMIN{img/triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
     </BOUCLE_edito>
-  </ul>
 </fieldset>
 </B_edito>

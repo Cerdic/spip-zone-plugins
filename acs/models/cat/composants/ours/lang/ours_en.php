@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'articles_refuses' => 'Refused articles are visible here.',
 
-'visites' => ' contain @nb_articles@ texts from @nb_auteurs@ authors read @visites_articles@ times by @total_visites@ persons.'
+'visites' => '@nb_articles@ texts from @nb_auteurs@ authors read @visites_articles@ times by @total_visites@ persons.'
 
 );
 ?>

@@ -16,6 +16,12 @@
     <type>color</type>
   </variable>
   <variable>
+    <nom>FondImage</nom>
+    <type>img</type>
+    <chemin>img/edito</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
@@ -23,6 +29,20 @@
     <nom>LegendBord</nom>
     <type>bord</type>
   </variable>
+  <variable>
+    <nom>Legend</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>AlignInfosArticle</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>right</option>
+    <valeur>right</valeur>
+  </variable>  
   <variable>
     <nom>NbLettres</nom>
     <type>nombre</type>

@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -21,7 +21,7 @@ function exec_acs() {
   // Modifications
   $changer_config = $_POST['changer_config'];
   if ($changer_config=='oui') {
-    ecrire_meta("acsDerniereModif", time());
+    ecrire_config("acs/params/DerniereModif", time());
     ecrire_metas();
     lire_metas();
   }

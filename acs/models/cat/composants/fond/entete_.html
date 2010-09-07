@@ -50,7 +50,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   ][(#REM) Feuille de style CSS et scripts pour l'édition des composants ACS (feuilles de style de l'espace privé utilisées sur la partie publique, pour les crayons) ]
   <script type="text/javascript" src="#CHEMIN{javascript/layer.js}"></script>
 </head>
-<body[ class="page_(#ENV{page})"]>
+<body[ class="page_(#ENV{pagestyle})"]>
 <div class="traductions">[(#SET{userlang,#LANG})]
 <BOUCLE_langues(ARTICLES){fusion lang}{par lang}>
 [(#TOTAL_BOUCLE|>{1}|?{' '})<span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR" class="lang_button">[(#GET{userlang}|=={#LANG}|?{'',<a href="[(#REM|sinon{spip.php?action=converser}|parametre_url{var_lang,#LANG})]&amp;redirect=<?php

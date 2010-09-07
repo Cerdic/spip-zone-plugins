@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 include_spip('inc/acs_groups');
@@ -95,7 +95,7 @@ function acs_adm_droite() {
   	_T('acs:acs'),
     '<div style="text-align: right"><form name="acs_config" action="?exec=acs&onglet=adm" method="post"><input type="hidden" name="changer_config" value="oui">'._T('acs:voir_onglet_vars').'<input name="acsVoirOngletVars" type="checkbox"'.($GLOBALS['meta']['acsVoirOngletVars'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_composants').'<input name="acsVoirPagesComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesComposants'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_preview_composants').'<input name="acsVoirPagesPreviewComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesPreviewComposants'] ? ' checked' : '').' /><br /><br /><input type="submit" name="'._T('bouton_valider').
   '" value="'._T('bouton_valider').'" class="fondo" /></form></div><br />'.
-    _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", $GLOBALS['meta']['acsDerniereModif']).
+    _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", lire_config("acs/params/DerniereModif")).
     '<hr /><br />'.
     _T('version').' <a style="color: black">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a>'.
     '<br /><br />'.

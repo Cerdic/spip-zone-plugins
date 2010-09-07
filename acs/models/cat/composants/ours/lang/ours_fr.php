@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 </ul>
 Un article peut également avoir été refusé par erreur.',
 
-'visites' => ', c\'est @nb_articles@ textes de @nb_auteurs@ auteur-e-s lus @visites_articles@ fois par @total_visites@ personnes.'
+'visites' => '@nb_articles@ textes de @nb_auteurs@ auteur-e-s lus @visites_articles@ fois par @total_visites@ personnes.'
 
 );
 ?>

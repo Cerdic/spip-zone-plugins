@@ -2,7 +2,7 @@
   <!-- Nom du composant -->
   <nom>Bandeau</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
   <version>0.6</version>
   <necessite id='acs' version='[0.6;]' />
 
@@ -26,6 +26,11 @@
   <variable>
     <nom>BordBas</nom>
     <type>color</type>
+  </variable>
+  <variable>
+    <nom>FontSize</nom>
+    <type>nombre</type>
+		<valeur>1em</valeur>
   </variable>
 
   <variable>

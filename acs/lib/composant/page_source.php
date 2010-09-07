@@ -221,7 +221,7 @@ function affiche_widgy($include, $param, &$vars, $indentation, $nic) {
 
 function widgy($composant, $param, &$vars, $label='', $indentation='', $nic = '') {
   $label = ucfirst(str_replace('_', ' ', $label));
-  $r = '<table><tr valign="top"><td>'.$indentation.'</td><td><b><a class="'.get_widget_class($composant, 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="'._T('acs:composant').' '.$label.($nic ? ' '.$nic : '').'">'.$label.($nic ? ' '.$nic : '').'</a></b></td><td>';
+  $r = '<table><tr valign="top"><td>'.$indentation.'</td><td><b><a class="'.get_widget_class('', 'oui', 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="'._T('acs:composant').' '.$label.($nic ? ' '.$nic : '').'">'.$label.($nic ? ' '.$nic : '').'</a></b></td><td>';
 
 //todo: params
   if (is_array($vars)) {

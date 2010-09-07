@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 /* meta tags (dépend du jeu de composants associés - depend on associated compônents set) */
 'meta_keywords' => 'ACS,assistant,configuration,site,spip,cms',
-'meta_author' => 'ACS 0.5',
+'meta_author' => 'ACS 0.6',
 'meta_copyright' => 'Tous droits réservés',
 'meta_location' => 'France, FRANCE',
 'meta_page_sommaire' => 'A la Une: les derniers textes publiés',

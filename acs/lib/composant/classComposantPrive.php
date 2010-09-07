@@ -25,7 +25,7 @@ interface Icomposant {
 /**
  * Classe AdminComposant
  *
- * "Interface d'admin de coposants pour ACS
+ * "Interface d'admin de composants pour ACS
  */
 
 class AdminComposant {
@@ -123,7 +123,7 @@ class AdminComposant {
 					else
 						$v = $value[0];
 					if ($this->debug)
-						$this->errors['vars'] .= $type.'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v))."<br />\n"; // dbg composant
+						$this->errors['vars'] .= $type.($nic ? '#'.$nic : '').'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v))."<br />\n"; // dbg composant
 					$this->vars[$k+1][$varname] = $v;
 					if ($varname == 'valeur') { // Default values
 						if (substr($v,0,3) == 'acs') {

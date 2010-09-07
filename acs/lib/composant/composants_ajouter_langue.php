@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 require_once _DIR_ACS.'lib/composant/composants_liste.php';
@@ -25,7 +25,8 @@ function composants_ajouter_langue($module='') {
   $GLOBALS['idx_lang'] = $idx_tmp;
 
   foreach (composants_liste() as $c => $composant) {
-    if ($composant['on'] != 'oui') continue;
+  	// On teste si au moins une instance du composant est active
+    if (!composant_actif($composant)) continue;
 
     $langfile = find_in_path("composants/$c/".($module ? $module.'/' : '')."lang/$c".'_'.($module ? $module.'_' : '').$GLOBALS['spip_lang'].'.php');
     if (!$langfile)

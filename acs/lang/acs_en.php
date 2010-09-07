@@ -86,6 +86,8 @@ To setup your website, customize components.<br/>A new instance of a component i
   'undefined' => 'Not defined',
   'composant' => 'Component',
   'composants' => 'Components',
+  'creer_composant' => 'Create a new instance of these component',
+  'del_composant' => 'Delete these instance',
   'container' => 'Container',
   'containers' => 'Containers',
   'modele' => 'Model',

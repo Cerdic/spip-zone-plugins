@@ -106,8 +106,8 @@ function acs_ecrire_init() {
   $(".ctlWidget").each(
     function(i,cw) {
       var selectid = "#select_" + cw.id;
-      $(selectid).attr("style", "visibility: hidden;");
-      if ($(selectid).get(0)) $(selectid).get(0).style.visibility = "hidden"; /* IE */
+      //$(selectid).attr("style", "visibility: hidden;");
+      if ($(selectid).get(0)) $(selectid).get(0).style.visibility = "hidden"; // for IE damned browser 
       if ($(selectid).val() != '') { 
         var dragid = "#" + $(selectid).val();
         $(this).append($(dragid));

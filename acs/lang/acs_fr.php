@@ -88,6 +88,8 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'undefined' => 'Non d&eacute;fini',
   'composant' => 'Composant',
   'composants' => 'Composants',
+  'creer_composant' => 'Cr&eacute;er une nouvelle instance de ce composant',
+  'del_composant' => 'Effacer cette instance de composant',
   'container' => 'Conteneur',
   'containers' => 'Conteneurs',
   'modele' => 'Mod&egrave;le',

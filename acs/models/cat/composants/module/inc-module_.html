@@ -4,24 +4,24 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#ENV{orientation,vertical}|=={horizontal}|?{" "}) #SET{orientation,style="float: #LANG_LEFT"}]
 <div id="#ENV{v1}" class="module-composant"[ (#GET{orientation})]>#SET{use1,#CONFIG{#EVAL{acs(#ENV{c1}|ucfirst)Use}}}
-[(#GET{use1}|=={oui}|?{' '}) [(#SET{c11,composants/[(#ENV{c1})]/[(#ENV{c1})]})] <INCLURE{fond=#GET{c11}} {env} {self} {lang}>]</div>
+[(#GET{use1}|=={oui}|?{' '}) [(#SET{c11,composants/[(#ENV{c1})]/[(#ENV{c1})]})] <INCLURE{fond=#GET{c11}} {env} {self} {lang} {nic=#ENV{n1}}>]</div>
 <div id="#ENV{v2}" class="module-composant"[ (#GET{orientation})]>#SET{use2,#CONFIG{#EVAL{acs(#ENV{c2}|ucfirst)Use}}}
-[(#GET{use2}|=={oui}|?{' '}) [(#SET{c12,composants/[(#ENV{c2})]/[(#ENV{c2})]})] <INCLURE{fond=#GET{c12}} {env} {self} {lang}>]</div>
+[(#GET{use2}|=={oui}|?{' '}) [(#SET{c12,composants/[(#ENV{c2})]/[(#ENV{c2})]})] <INCLURE{fond=#GET{c12}} {env} {self} {lang} {nic=#ENV{n2}}>]</div>
 <div id="#ENV{v3}" class="module-composant"[ (#GET{orientation})]>#SET{use3,#CONFIG{#EVAL{acs(#ENV{c3}|ucfirst)Use}}}
-[(#GET{use3}|=={oui}|?{' '}) [(#SET{c13,composants/[(#ENV{c3})]/[(#ENV{c3})]})] <INCLURE{fond=#GET{c13}} {env} {self} {lang}>]</div>
+[(#GET{use3}|=={oui}|?{' '}) [(#SET{c13,composants/[(#ENV{c3})]/[(#ENV{c3})]})] <INCLURE{fond=#GET{c13}} {env} {self} {lang} {nic=#ENV{n3}}>]</div>
 <div id="#ENV{v4}" class="module-composant"[ (#GET{orientation})]>#SET{use4,#CONFIG{#EVAL{acs(#ENV{c4}|ucfirst)Use}}}
-[(#GET{use4}|=={oui}|?{' '}) [(#SET{c14,composants/[(#ENV{c4})]/[(#ENV{c4})]})] <INCLURE{fond=#GET{c14}} {env} {self} {lang}>]</div>
+[(#GET{use4}|=={oui}|?{' '}) [(#SET{c14,composants/[(#ENV{c4})]/[(#ENV{c4})]})] <INCLURE{fond=#GET{c14}} {env} {self} {lang} {nic=#ENV{n4}}>]</div>
 <div id="#ENV{v5}" class="module-composant"[ (#GET{orientation})]>#SET{use5,#CONFIG{#EVAL{acs(#ENV{c5}|ucfirst)Use}}}
-[(#GET{use5}|=={oui}|?{' '}) [(#SET{c15,composants/[(#ENV{c5})]/[(#ENV{c5})]})] <INCLURE{fond=#GET{c15}} {env} {self} {lang}>]</div>
+[(#GET{use5}|=={oui}|?{' '}) [(#SET{c15,composants/[(#ENV{c5})]/[(#ENV{c5})]})] <INCLURE{fond=#GET{c15}} {env} {self} {lang} {nic=#ENV{n5}}>]</div>
 <div id="#ENV{v6}" class="module-composant"[ (#GET{orientation})]>#SET{use6,#CONFIG{#EVAL{acs(#ENV{c6}|ucfirst)Use}}}
-[(#GET{use6}|=={oui}|?{' '}) [(#SET{c16,composants/[(#ENV{c6})]/[(#ENV{c6})]})] <INCLURE{fond=#GET{c16}} {env} {self} {lang}>]</div>
+[(#GET{use6}|=={oui}|?{' '}) [(#SET{c16,composants/[(#ENV{c6})]/[(#ENV{c6})]})] <INCLURE{fond=#GET{c16}} {env} {self} {lang} {nic=#ENV{n6}}>]</div>
 <div id="#ENV{v7}" class="module-composant"[ (#GET{orientation})]>#SET{use7,#CONFIG{#EVAL{acs(#ENV{c7}|ucfirst)Use}}}
-[(#GET{use7}|=={oui}|?{' '}) [(#SET{c17,composants/[(#ENV{c7})]/[(#ENV{c7})]})] <INCLURE{fond=#GET{c17}} {env} {self} {lang}>]</div>
+[(#GET{use7}|=={oui}|?{' '}) [(#SET{c17,composants/[(#ENV{c7})]/[(#ENV{c7})]})] <INCLURE{fond=#GET{c17}} {env} {self} {lang} {nic=#ENV{n7}}>]</div>
 <div id="#ENV{v8}" class="module-composant"[ (#GET{orientation})]>#SET{use8,#CONFIG{#EVAL{acs(#ENV{c8}|ucfirst)Use}}}
-[(#GET{use8}|=={oui}|?{' '}) [(#SET{c18,composants/[(#ENV{c8})]/[(#ENV{c8})]})] <INCLURE{fond=#GET{c18}} {env} {self} {lang}>]</div>
+[(#GET{use8}|=={oui}|?{' '}) [(#SET{c18,composants/[(#ENV{c8})]/[(#ENV{c8})]})] <INCLURE{fond=#GET{c18}} {env} {self} {lang} {nic=#ENV{n8}}>]</div>
 [(#ENV{orientation,vertical}|=={horizontal}|?{" "}) <div style="clear:both"></div>]

@@ -8,9 +8,8 @@
   [border-width: (#VAR{acsEditoBordWidth});]
   [border-style: (#VAR{acsEditoBordStyle});]
   [border-color: (#VAR{acsEditoBordColor});]
-  border-left:0;
-  border-right:0;
   [background: (#VAR{acsEditoFond});]
+  [background-image: url("(#ACS_CHEMIN{img/edito/#VAR{acsEditoFondImage}})");]
   margin: 0;
   padding: 5px;
   padding-bottom: 0;
@@ -29,15 +28,17 @@
   font: bold 0.88em serif;
 }
 
-.edito li {
-  list-style: none;
-}
-
-.edito li p { margin: 0; padding: 0; }
-
 .edito .titre, .edito .surtitre, .edito .soustitre {
   border: 0;
   font-size: 1.1em;
+}
+
+.edito .chapo {
+  text-align: justify;
+  font-weight: bold;
+  padding: 0;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .edito .texte {
@@ -50,11 +51,12 @@
 .edito .infos_article {
   margin: 0;
   margin-left: 5px;
-  float: #LANG_RIGHT;
+  margin-right: 5px;
+  [float: (#VAR{acsEditoAlignInfosArticle}|=={right}|?{#LANG_RIGHT,#LANG_LEFT});]
   font-size: 0.71em;
 }
 
 .edito .spip_logos {
   float: #LANG_LEFT;
-  margin-right: 5px;
+  margin: 5px;
 }

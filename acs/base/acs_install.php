@@ -3,10 +3,10 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-$acs_install_version = '0.5';
+$acs_install_version = '0.6';
 
 function acs_install($action){
   switch ($action)
@@ -44,8 +44,8 @@ function acs_set_default() {
   }
   // Installation des composants
   include_spip('lib/composant/composant_liste');
-  foreach(composants_liste() as $composant=>$tag) {
-  	$install_dir = find_in_path('composants/'.$composant.'/install');
+  foreach(composants_liste() as $class=>$tag) {
+  	$install_dir = find_in_path('composants/'.$class.'/install');
   	if (!$install_dir)
   		continue;
 		copy_dir($install_dir.'/', '../'.$GLOBALS['ACS_CHEMIN'].'/');

@@ -26,7 +26,7 @@ function composants($c) {
 	$nom = $c->T('nom');
 	if ($nom == $c->type.' nom') $nom = ucfirst($c->type);
 	$r .= acs_box(
-				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td><td>'.$over.'</td>'.composant_instances_select($c->type, $c->nic).'</tr></table>',
+				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td><td>'.$over.'</td><td>'.instance_create($c->type).'</td><td>'.instance_select($c->type, $c->nic).'</td></tr></table>',
 				'<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">'.
 				$c->edit().
 				'<table width="100%"><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
@@ -40,19 +40,12 @@ function composants($c) {
 }
 
 function composants_droite($c) {
-  $choixComposants = array_keys(composants_liste());
-  if (is_array($choixComposants))
-    $l = liste_widgets($choixComposants, true);
-  else
-    $l = '&nbsp;';
-  return acs_box(count($choixComposants).' '.((count($choixComposants)==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))), $l, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
+	return liste_widgets();
 }
 
-function composant_instances_select($c, $nic) {
-  include_spip('lib/composant/composants_variables');
+function instance_select($c, $nic) {
   $instances = composant_instances($c);
   if (is_array($instances) && count($instances)) {
-    sort($instances);
     $r ='<select name="nic" onchange=submit()>';
     $r .= '<option value=""'.($id=="" ? ' selected': '').'></option>';
     foreach($instances as $id) {
@@ -63,7 +56,25 @@ function composant_instances_select($c, $nic) {
 		'<input type="hidden" name="composant" value="'.$c.'" />'.
 		'<input type="hidden" name="onglet" value="composants" />';
     $r = '<td><form action="">'.$r.'<noscript></td><td><input type="submit" value="'._T('bouton_valider').'"></noscript></form></td>';
+    $r .= '<td>'.instance_delete($c->type, $c->nic).'</td>';
   }
   return $r;
+}
+
+function instance_create($c) {
+	return '<form action=""></td><td><noscript><input type="text" name="newnic" size="4" maxlength="4" /></td><td></noscript><input type="image" src="'._DIR_PLUGIN_ACS.'images/composant-creer.gif" title="'._T('acs:creer_composant').'" />
+					<input type="hidden" name="exec" value="acs" />
+					<input type="hidden" name="onglet" value="composants" />
+					<input type="hidden" name="composant" value="'.$c.'" />
+					</form>';
+}
+
+function instance_delete($c, $nic) {
+	return '<form action=""><input type="image" src="'._DIR_PLUGIN_ACS.'images/composant-del.gif" title="'._T('acs:del_composant').'" />
+					<input type="hidden" name="exec" value="acs" />
+					<input type="hidden" name="onglet" value="composants" />
+					<input type="hidden" name="composant" value="'.$c.'" />
+					<input type="hidden" name="nic" value="'.$nic.'" />
+					</form>';
 }
 ?>

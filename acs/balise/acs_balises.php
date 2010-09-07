@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 require_once _DIR_ACS.'lib/composant/composants_ajouter_balises.php';
@@ -42,9 +42,13 @@ function balise_ACS_CHEMIN($p) {
   	$p->code = '""';
   return $p;
 }
-// VAR = balise CONFIG de SPIP etendue, qui remplaçe les variables ACS par leur valeur.
-// admet deux arguments : nom de variable, valeur par defaut si vide
-// syntaxe : #VAR{acsComposantVariable} ou #VAR{acsComposantVariable, valeur_par_defaut}
+
+/** VAR = balise CONFIG de SPIP etendue, qui remplaçe les variables ACS par leur valeur, récursivement.
+ * admet deux arguments : nom de variable, valeur par defaut si vide
+ * syntaxe : #VAR{acsComposantVariable} ou #VAR{acsComposantVariable, valeur_par_defaut}
+ * Lorsque la valeur d'une variable commence par le signe "=",
+ * cette valeur est interprétée comme une référence récursive à une autre variable.
+ */
 function balise_VAR($p) {
 	$var = interprete_argument_balise(1,$p);
 	$sinon = interprete_argument_balise(2,$p);
@@ -55,9 +59,9 @@ function balise_VAR($p) {
 		$p->code = $src ? ('(is_array($a = ('.$src.')) ? serialize($a) : "")'): '@serialize($Pile[0])';
 	} else {
 		$meta = substr($var, 1, -1);
-		$p->code = $src ? ('is_array($a = ('.$src.')) ? $a[meta_recursive("'.$meta.'")] : ""') : ('@$Pile[0][meta_recursive("'.$meta.'")]');
+		$p->code = $src ? ('is_array($a = ('.$src.')) ? meta_recursive($a,"'.$meta.'") : ""') : ('meta_recursive(@$Pile[0],"'.$meta.'")');
 		if ($sinon)
-			$p->code = 'sinon('.$p->code.",$sinon)";
+			$p->code = 'sinon('.$p->code.',$sinon)';
 		else
 			$p->code = '('.$p->code.')';
 	}
@@ -88,33 +92,37 @@ function composants_head($type) {
   if (is_array(composants_liste())) {
     // composants_liste() est statique,  mise en cache,
     // et tient compte de l'override éventuel
-    foreach (composants_liste() as $c=>$tag) {
-      if (!isUsed($c)) continue;
-      $filepath = 'composants/'.$c.'/'.((strtolower($type) == 'css') ? $c.'.css': "$type/$c.js");
-      $file = find_in_path($filepath.'.html');
-      if (!$file) {
-        $file = find_in_path($filepath);
-        if (!$file)
-          continue;
-        $r .= file_get_contents($file);
-      }
-      else {
-        $r .= recuperer_fond($filepath);
-      }
-      // On cherche aussi les css d'instances de composants
-      if (strtolower($type) == 'css') {
-      	$filepath = 'composants/'.$c.'/'.$c.'_instances.css';
-      	$file = find_in_path($filepath.'.html');
-      	if ($file) {
-      		foreach (composant_instances($c) as $nic) {
-      			$r .= recuperer_fond($filepath, array('nic' => $nic));
-      		}
-      	}
+    $done = array();
+    foreach (composants_liste() as $class=>$cp) {
+    	foreach($cp['instances'] as $nic=>$c) {
+    		if ($c['on'] != 'oui') continue;
+    		if (!in_array($class, $done)) {
+          $filepath = 'composants/'.$class.'/'.((strtolower($type) == 'css') ? $class.'.css': "$type/$class.js");
+          $file = find_in_path($filepath.'.html');
+          if (!$file) {
+            $file = find_in_path($filepath);
+            if (!$file)
+              continue;
+            $r .= file_get_contents($file);
+          }
+          else {
+            $r .= recuperer_fond($filepath);
+          }
+          $done[] = $class; 
+    		}
+        // On cherche aussi les css d'instances de composants
+        if (strtolower($type) == 'css') {
+        	$filepath = 'composants/'.$class.'/'.$class.'_instances.css';
+        	$file = find_in_path($filepath.'.html');
+        	if ($file)
+       			$r .= recuperer_fond($filepath, array('nic' => $nic));
+        }
       }
     }
   }
   return $r;
 }
+
 /**
  * Indique si un composant optionnel est activé
  * Return true if an optionnal component is on

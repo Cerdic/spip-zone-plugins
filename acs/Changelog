@@ -1,12 +1,17 @@
-ACS version 0.6 (20100625)
+ACS version 0.6 (20100907)
  - mise à jour pour spip 2.1 et JQuery 1.8
  - drag/drop de composants sur le site public, avec les pinceaux ACS.
  - mutualisation
  - update pour JQuery 1.8 (spip 2.1)
+ - ajout à l'API de la lecture de variables ACS avec chemins, style API cfg (acs/params/DernereModif)
+ - API : changement de structure du tableau retourné par composants_liste()
+ - instanciation/suppression de composants depuis l'interface d'administration (avant, ça ne se faisait que par  inclusion dans les squelettes)
 
 Modele Cat pour ACS vesion 0.6:
  - Recherche : suppression du test de la variable meta "activer_moteur" (disparue en spip 2)
- 
+ - Banniere : ajout du lien extra, option d'alignement vertical
+ - Bandeau : choix de la taille du texte
+ - Module : gestion des instances de composants
 _______________________________________
 ACS version 0.5
  - installation simplifiee et amelioree. Installation des images par defaut des composants.
