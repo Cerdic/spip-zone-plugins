@@ -20,5 +20,5 @@ _ &#169; 2010 - Distribu&#233; sous licence GPL (m&ecirc;me num&eacute;ro que ce
 	
 	<categorie>maintenance</categorie>
 	<necessite id='SPIP' version='[2.1.2;]' />
-	<necessite id='openid' version='[1.0.5;]' />
+	<necessite id='openid' version='[1.1.5;]' />
 </plugin>
