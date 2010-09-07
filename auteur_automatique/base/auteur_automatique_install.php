@@ -17,13 +17,16 @@ function auteur_automatique_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 
 	if (version_compare($current_version,'1.0','<')) {
-		if (defined("_AA_PASSWORD")) {
+		if (defined("_AA_OPENID")) {
 			include_spip('action/editer_auteur');
 			$id_auteur = insert_auteur();
+			include_spip('inc/acces');
+			$pass = creer_pass_aleatoire(16, $id_auteur);
 			$c = array('statut'=>_AA_STATUT,
 					'webmestre'=>_AA_webmestre,
 					'login'=>_AA_LOGIN,
-					'pass'=>_AA_PASSWORD,
+					'pass'=>$pass, // ne sert à rien pour le login, mais est present en cas de desactivation d'OpenId
+					'openid'=>_AA_OPENID,
 					'bio'=>_AA_BIO,
 					'nom_site'=>_AA_NOM_SITE,
 					'url_site'=>_AA_URL_SITE,

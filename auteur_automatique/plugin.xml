@@ -19,5 +19,6 @@ _ &#169; 2010 - Distribu&#233; sous licence GPL (m&ecirc;me num&eacute;ro que ce
 	<install>base/auteur_automatique_install.php</install>
 	
 	<categorie>maintenance</categorie>
-	<necessite id='SPIP' version='[2.1.0;]' />
+	<necessite id='SPIP' version='[2.1.2;]' />
+	<necessite id='openid' version='[1.0.5;]' />
 </plugin>
