@@ -102,7 +102,12 @@
 		</td>
 		<td class="logo">
 		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
-		[<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}||inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>]
+		[(#MEDIA|=={image}|oui)[
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		]]
+		[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		</div>]]
 		<div class="fichier">#GET{fichier}</div>
 		</td>
 		<td class="exif">
