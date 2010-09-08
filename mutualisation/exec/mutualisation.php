@@ -63,7 +63,7 @@ function exec_mutualisation_dist() {
 		AND is_array($meta = @unserialize($meta))
 		AND $url = $meta['adresse_site']) {
 			$url .= '/';
-			$nom_site = sinon($meta['nom_site'], $v);
+			$nom_site = sinon(importer_charset($meta['nom_site'], $meta['charset']), $v);
 			$stats = intval($meta['popularite_total']);
 			if ($cfg = @unserialize($meta['plugin'])) {
 				$plugins = array_keys($cfg);
