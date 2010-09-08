@@ -27,15 +27,15 @@ function zippeur($array,$date,$nom=''){
 function zippeur_zipper($chemin,$array){
 	include_spip('inc/pclzip');
 	supprimer_fichier($chemin);
-	spip_log($chemin,'zipper');
 	
 	$zip = new PclZip($chemin);
-
-	$erreur = $zip->add(implode(',',$array),PCLZIP_OPT_REMOVE_ALL_PATH);
-	if ($erreur == 0){
-		spip_log("$chemin $zip->errorInfo()",PCLZIP_OPT_REMOVE_ALL_PATH);
+	foreach ($array as $fichier){
+		$erreur = $zip->add($fichier,PCLZIP_OPT_REMOVE_ALL_PATH);
+		if ($erreur == 0){
+			spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur");
+			
+		}
 	}
-		
 }
 
 ?>
