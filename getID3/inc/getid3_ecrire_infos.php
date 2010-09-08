@@ -35,29 +35,30 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 	$ecrire->tagformats			= $formats;
 	$ecrire->tag_encoding		= 'UTF-8';
 	$ecrire->overwrite_tags		= true;
-	$ecrire->remove_other_tags	= true;
-
-	/**
-	 * Eviter des problèmes d'insertion
-	 * Au pire des cas on insère des tags vides
-	 */
-	$ecrire->tag_data = array(
-		'title' => array(),
-		'artist' => array(),
-		'album' => array(),
-		'track' => array(),
-		'genre' => array(),
-		'year' => array(),
-		'comment' => array(),
-	);
+	$ecrire->remove_other_tags	= false;
 
 	/**
 	 * On utilise nos valeurs
 	 */
+	spip_log($infos,'id3');
 	foreach ($infos as $info => $value) {
-		$ecrire->tag_data[$info][] = $value;
+		$TagData[$info][] = $value;
 	}
-
+	
+	$TagData = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_documents', // compatibilite
+				'table_objet' => 'documents',
+				'spip_table_objet' => 'spip_documents',
+				'type' =>'document',
+				'id_objet' => $id_document,
+				'action' => 'getid3_ecrire_infos',
+				'operation' => 'getid3_ecrire_infos', // compat <= v2.0
+			),
+			'data' => $TagData
+		)
+	);
 	/**
 	 * Ajout des images
 	 */
@@ -71,7 +72,7 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 				$image_finale['mime'] = image_type_to_mime_type($image_infos[2]);
 				$image = $image_finale;
 			}
-			$ecrire->tag_data['attached_picture'][] = array(
+			$TagData['attached_picture'][] = array(
 				'data' => file_get_contents($image['chemin']),
 				'picturetypeid' => $image['picturetypeid'],
 				'description' => $image['description'],
@@ -79,7 +80,8 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 			);
 		}
 	}
-
+	$ecrire->tag_data = $TagData;
+	
 	/**
 	 * On écrit le tout
 	 */
@@ -100,8 +102,24 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 	}
 
 	$taille = filesize($document_chemin);
-	sql_updateq('spip_documents', array('taille'=>$taille),"id_document=".$id_document);	
-
+	include_spip('inc/modifier');
+	revision_document($id_document, array('taille'=>$taille));
+	
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_documents', // compatibilite
+				'table_objet' => 'documents',
+				'spip_table_objet' => 'spip_documents',
+				'type' =>'document',
+				'id_objet' => $id_document,
+				'action' => 'getid3_ecrire_infos',
+				'operation' => 'getid3_ecrire_infos', // compat <= v2.0
+			),
+			'data' => $infos
+		)
+	);
+	spip_log($err,'id3');
 	return $err;
 }
 ?>

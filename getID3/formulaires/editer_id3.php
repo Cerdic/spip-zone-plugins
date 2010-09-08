@@ -45,6 +45,7 @@ function formulaires_editer_id3_charger($id){
 				$valeurs[$valeur] = filtrer_entites($info);
 			}
 		}
+		$valeurs['id_document'] = $id;
 	}
 	return $valeurs;
 }
