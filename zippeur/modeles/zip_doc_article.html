@@ -1,0 +1,17 @@
+#SET{doc,#ARRAY}
+#SET{id_article,#ENV{id_zip_doc_article,#ENV{id_article}}}
+<BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
+[(#SET{doc,#GET{doc}|push{#FICHIER|copie_locale}})]
+</BOUCLE_doc>
+<BOUCLE_date(DOCUMENTS){!par maj}{id_article=#GET{id_article}}{0,1}>
+<dl class='spip_documents'>
+	<dt>
+		<a href="[(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]})]" title="<:zippeur:ensemble_fichier:> [(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]}|filesize|taille_en_octets)])">
+		<img src='#CHEMIN{vignettes/zip.png}' alt="<:zippeur:ensemble_fichier:> [(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]}|filesize|taille_en_octets)])" /></a>
+	</dt>
+	<dt class='spip_doc_titre'><strong>(<:zippeur:ensemble_fichier:> - [(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]}|filesize|taille_en_octets)])</strong></dt>
+</dl>
+</BOUCLE_date>
+</B_doc>
+
+
