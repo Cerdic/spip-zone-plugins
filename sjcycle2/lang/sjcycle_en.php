@@ -5,11 +5,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'boite_info' =>'Recopy one of these shortcuts and insert it inside the box "Text", where you wish to locate the slideshow in your article.<br /><br />
-		Click on <a href="'._DIR_PLUGIN_SJCYCLE.'doc.php?art=@art@" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="Click to consult the help in a new window" onclick="javascript:window.open(\''._DIR_PLUGIN_SJCYCLE.'doc.php?art=@art@\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="'._DIR_IMG_PACK.'aide.gif" alt="Click to consult the help in a new window" class="aide" title="Click to consult the help and the different parameters in a new window" /></a> to consult the inline help and other parameters.',
+	Consult the inline help to know other parameters.',
 
 	// C
 	'cfg_boite_sjcycle' => 'Spip jQuery Cycle plugin configuration.<br /><br />
-		Click on <a href="'._DIR_PLUGIN_SJCYCLE.'doc.php" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="Click to consult the help in a new window" onclick="javascript:window.open(\''._DIR_PLUGIN_SJCYCLE.'doc.php\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="'._DIR_IMG_PACK.'aide.gif" alt="Click to consult the help in a new window" class="aide" title="Click to consult the help and the different parameters in a new window" /></a> to consult the inline help and other parameters.',
+	Consult the inline help to know other parameters.',
 	'cfg_descr_sjcycle' => '<h4>sjcycle</h4>jQuery Cycle plugin for SPIP',
 	'cfg_titre_sjcycle' => 'Spip jQuery Cycle Plugin',
 

@@ -9,7 +9,7 @@ function sjcycle_affiche_gauche(&$flux){
 		if ($document<2){
 			return $flux;
 		}
-		$flux['data'] .= debut_cadre_enfonce(url_absolue(find_in_path('images/sjcycle-24.png')), true, '', 'Diaporama <a href="'._DIR_PLUGIN_SJCYCLE.'doc.php?art='.$flux["args"]["id_article"].'" target="_blank" onclick="javascript:window.open(\''._DIR_PLUGIN_SJCYCLE.'doc.php?art='.$flux["args"]["id_article"].'\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;" rel="#sjcycle_infobulle" id="sjcyle_aide1" title="'._T('sjcycle:nouvelle_fenetre').'"><img src="../prive/images/aide.gif" alt="'._T('sjcycle:nouvelle_fenetre').'" class="aide" title="'._T('sjcycle:nouvelle_fenetre').'" /></a>', "", "");
+		$flux['data'] .= debut_cadre_enfonce(url_absolue(find_in_path('images/sjcycle-24.png')), true, '', "Diaporama ".inc_aider_dist("sjcycle"), "", "");
 		$flux['data'] .= '<div style="padding:2px;margin:10px 0px;" class="arial1 spip_xx-small">'
 				. affiche_raccourci_doc('sjcycle', $flux["args"]["id_article"], 'left')
 				. affiche_raccourci_doc('sjcycle', $flux["args"]["id_article"], 'center')

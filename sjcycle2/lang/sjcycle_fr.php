@@ -5,11 +5,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'boite_info' =>'Recopiez l\'un de ces raccourcis et ins&eacute;rez-le &agrave; l’int&eacute;rieur de la case «&nbsp;Texte&nbsp;», l&agrave; o&ugrave; vous d&eacute;sirez situer le diaporama dans votre article.<br /><br />
-		Cliquer sur <a href="'._DIR_PLUGIN_SJCYCLE.'doc.php?art=@art@" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" onclick="javascript:window.open(\''._DIR_PLUGIN_SJCYCLE.'doc.php?art=@art@\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="'._DIR_IMG_PACK.'aide.gif" alt="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" class="aide" title="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" /></a> pour consulter l\'aide en ligne et les param&egrave;tres disponibles.',
+		Consultez l\'aide pour conna&icirc;tre les param&egrave;tres disponibles.',
 
 	// C
 	'cfg_boite_sjcycle' => 'Configuration du plugin Spip jQuery Cycle.<br /><br />
-		Cliquer sur <a href="'._DIR_PLUGIN_SJCYCLE.'doc.php" target="_blank" rel="#sjcycle_infobulle" id="sjcyle_aide" title="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" onclick="javascript:window.open(\''._DIR_PLUGIN_SJCYCLE.'doc.php\', \'aide\', \'scrollbars=yes,resizable=yes,width=740,height=580\');; return false;"><img src="'._DIR_IMG_PACK.'aide.gif" alt="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" class="aide" title="Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre" /></a> pour consulter l\'aide en ligne et les autres param&egrave;tres disponibles localement dans un article.',
+		Consulter l\'aide en ligne pour conna&icirc;tre les autres param&egrave;tres disponibles localement dans un article.',
 	'cfg_descr_sjcycle' => '<h4>sjcycle</h4>Plugin jQuery Cycle pour SPIP',
 	'cfg_titre_sjcycle' => 'Spip jQuery Cycle Plugin',
 	
@@ -60,9 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_imgparams' => 'Traitements images SjCycle',
 	'legend_jsparams' => 'Param&egrave;tres javascript jQuery Cycle',
 	'legend_tooltipfancy' => 'Param&egrave;tres tooltip, fancybox et mediabox',	
-
-	// N
-	'nouvelle_fenetre' =>'Cliquer pour consulter l\'aide dans une nouvelle fen&ecirc;tre',
 	
 	// V
 	'valeur_hex' => 'Valeur hexadecimale ou "transparent"',
