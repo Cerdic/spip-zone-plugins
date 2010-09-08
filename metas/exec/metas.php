@@ -6,7 +6,7 @@ include_spip('inc/config');
 include_spip('inc/meta');
 
 function exec_metas() {
-	if (!autoriser('voir', 'metas')) {
+	if (!autoriser('configurer', 'metas')) {
         include_spip('inc/minipres');
         echo minipres();
         exit;
