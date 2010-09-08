@@ -22,7 +22,7 @@ function liste_widgets() {
       $wicon = find_in_path('composants/'.$class.'/images/'.$class.'_icon.gif');
       if (!file_exists($wicon))
         $wicon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
-  		$r .= '<div id="'.$class.($nic ? '#'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
+  		$r .= '<div id="'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
         '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'"><img src="'.$wicon.'" style="width:20px;height:20px;vertical-align:middle" /></a>'.
         '</td><td title="'.ucfirst($class).'" style="padding-left: 5px; padding-right: 5px; width: 95%;"><div style="overflow:hidden; text-align:center">'.ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '').'</div></td></tr></table>'.
       '</div>';

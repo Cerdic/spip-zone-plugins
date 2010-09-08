@@ -169,7 +169,7 @@ function ctlWidget($composant, $nic, $nom, $value, $param, $wid) {
   	foreach($c['instances'] as $lnic => $cp) {
     	if ($lnic == $nic) continue;
     	if ($cp['on'] == 'oui')
-				$r .= '<option value="'.$class.($lnic ? '#'.$lnic : '').'"'.($value==$class ? ' selected' : '').'>'.ucfirst($class).($lnic ? ' '.$lnic : '').'</option>';
+				$r .= '<option value="'.$class.($lnic ? '-'.$lnic : '').'"'.($value==$class.($lnic ? '-'.$lnic : '') ? ' selected' : '').'>'.ucfirst($class).($lnic ? ' '.$lnic : '').'</option>';
   	}
   }
   $r .= '</select></div></td>';
