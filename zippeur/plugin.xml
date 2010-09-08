@@ -4,7 +4,7 @@
     <version>0.1</version>
     <version_base>0.1</version_base>
   	<categorie>multimedia</categorie>
-    <etat>dev</etat>
+    <etat>test</etat>
 
 	<description> Zippez facilement vos documents joints.</description>
 	<install>base/zippeur.php</install>
