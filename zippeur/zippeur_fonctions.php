@@ -26,6 +26,7 @@ function zippeur($array,$date,$nom=''){
 
 function zippeur_zipper($chemin,$array){
 	include_spip('inc/pclzip');
+	sous_repertoire(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip');
 	supprimer_fichier($chemin);
 	
 	$zip = new PclZip($chemin);
