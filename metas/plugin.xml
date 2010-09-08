@@ -1,6 +1,6 @@
 <plugin>
 	<nom>M&eacute;tas</nom>
-	<version>1.1</version>
+	<version>1.2</version>
 	<version_base>1.0</version_base>
 	<etat>stable</etat>
 	<icon>icon.png</icon>
@@ -44,4 +44,5 @@ _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-
 		<inclure>metas_autorisations.php</inclure>
 	</pipeline>
 	<categorie>outil</categorie>
+	<utilise id="Z" />
 </plugin>
