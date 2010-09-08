@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Facebook Stats</nom>
+	<auteur>BoOz &#169; 2009-2010</auteur>
+	<licence>GNU/LGPL</licence>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>
+	Le plugin Facebook stats recherche sur Facebook le nom de votre site et rapporte les messages qui le mentionnent. Il indique également combien de fois est partagé un de vos articles sur Facebook.
+	Vous pouvez également chercher une autre chose que vos articles en saisissant une recherche.
+	</description>
+	<lien></lien>
+	<prefix>fbstats</prefix>
+	<icon>fbstats-64.png</icon>
+
+	<fonctions>fbstats_fonctions.php</fonctions>
+	<bouton id='fb_stats' parent='statistiques_visites'>
+ 		<icone>fbstats-32.png</icone>
+	<titre>Buzz Facebook</titre>
+	</bouton>
+	<necessite id="SPIP" version="[2.0;]" />
+</plugin>

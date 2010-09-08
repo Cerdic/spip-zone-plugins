@@ -1,0 +1,49 @@
+#CACHE{0}
+<style type="text/css">
+.cadre-liste a{
+color:#3B5998;
+}
+</style>
+
+[(#ENV{q}|non)
+<h1>Articles du site #NOM_SITE_SPIP sur Facebook</h1>
+]
+[(#ENV{q}|oui)
+<h1>Recherche <em>#ENV{q}</em> sur Facebook</h1>
+]
+
+
+
+<div style="margin-top: 20px;" class="cadre cadre-liste" id="">
+
+	[(#NOM_SITE_SPIP|paie_ton_buzz{[(#ENV{src}|urldecode)],[(#ENV{q})]})]
+	
+</div>
+
+
+
+<!--#navigation-->
+<div style="" class="cadre cadre-info verdana1">
+	<div class="cadre_padding">
+		<p>
+		
+		Le plugin <em>Facebook stats</em> recherche sur Facebook le nom de votre site (<em>#NOM_SITE_SPIP</em>) et rapporte les messages qui le mentionnent. Il indique également combien de fois est partagé un de vos articles sur Facebook.
+		
+		</p>
+		
+		<p>
+		Vous pouvez également chercher une autre chose que vos articles en saisissant une recherche ici :
+		</p>
+		
+		<form action="#SELF" method="get">
+			[(#SELF|form_hidden)]
+			<input type="hidden" name="src" value=""/>
+			<input type="text" name="q" />
+			<input type="submit" value="rechercher" />
+		</form>
+		
+		<div class="nettoyeur"></div>
+	</div>
+</div>
+<!--/#navigation-->
+
