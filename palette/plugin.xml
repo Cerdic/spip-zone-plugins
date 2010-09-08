@@ -25,10 +25,6 @@ _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license
         <inclure>palette_pipeline.php</inclure>
     </pipeline>
     <pipeline>
-        <nom>insert_head_css</nom>
-        <inclure>palette_pipeline.php</inclure>
-    </pipeline>
-    <pipeline>
         <nom>header_prive</nom>
         <inclure>palette_pipeline.php</inclure>
     </pipeline>
