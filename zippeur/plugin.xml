@@ -15,7 +15,7 @@
        <nom>declarer_tables_principales</nom>
        <inclure>zippeur_pipelines.php</inclure>
    </pipeline>
-
+	<licence>GPL</licence>
 
 
 </plugin>
