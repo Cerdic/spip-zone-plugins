@@ -504,6 +504,38 @@ class getid3_writetags
 						}
 					}
 					break;
+					
+				case 'UFID':
+				case 'AENC':
+				case 'ENCR':
+				case 'GRID':
+				case 'PRIV':
+					foreach ($valuearray as $key => $apic_data_array) {
+						if (isset($apic_data_array['data']) &&
+							isset($apic_data_array['ownerid'])) {
+							if (isset($ID3v2_text_encoding_lookup[$id3v2_majorversion][$this->tag_encoding])) {
+								// source encoding is valid in ID3v2 - use it with no conversion
+								$tag_data_id3v2[$ID3v2_framename][$key]['encodingid'] = $ID3v2_text_encoding_lookup[$id3v2_majorversion][$this->tag_encoding];
+								$tag_data_id3v2[$ID3v2_framename][$key]['data']       = $apic_data_array['data'];
+								$tag_data_id3v2[$ID3v2_framename][$key]['ownerid']       = $apic_data_array['ownerid'];
+							} else {
+								// source encoding is NOT valid in ID3v2 - convert it to an ID3v2-valid encoding first
+								if ($id3v2_majorversion < 4) {
+									// convert data from other encoding to UTF-16
+									$tag_data_id3v2[$ID3v2_framename][$key]['encodingid'] = 1;
+									$tag_data_id3v2[$ID3v2_framename][$key]['data']       = getid3_lib::iconv_fallback($this->tag_encoding, 'UTF-16', $apic_data_array['data']);
+									$tag_data_id3v2[$ID3v2_framename][$key]['ownerid']       = getid3_lib::iconv_fallback($this->tag_encoding, 'UTF-16', $apic_data_array['ownerid']);
+	
+								} else {
+									// convert data from other encoding to UTF-8
+									$tag_data_id3v2[$ID3v2_framename][$key]['encodingid'] = 3;
+									$tag_data_id3v2[$ID3v2_framename][$key]['data']       = getid3_lib::iconv_fallback($this->tag_encoding, 'UTF-8', $apic_data_array['data']);
+									$tag_data_id3v2[$ID3v2_framename][$key]['ownerid']       = getid3_lib::iconv_fallback($this->tag_encoding, 'UTF-8', $apic_data_array['ownerid']);
+								}
+							}
+						}
+					}
+					break;
 
 				case '':
 					$this->errors[] = 'ID3v2: Skipping "'.$tag_key.'" because cannot match it to a known ID3v2 frame type';
