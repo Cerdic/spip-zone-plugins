@@ -1,0 +1,15 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Google_analytics</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
+  <version>0.6</version>
+  <necessite id='acs' version='[0.6;]' />
+
+  <variable>
+    <nom>UA</nom>
+    <type>text</type>
+    <taille>15</taille>
+    <value>UA-xxxxxxx-x</value>
+  </variable>
+</composant>
