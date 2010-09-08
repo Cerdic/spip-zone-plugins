@@ -11,6 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activation_barre_impossible' => 'Another plugin is preventing the use of  porte-plume on the public site.',
 	'annuler' => 'Cancel',
 
+	// B
+	'bouton_supprimer' => 'Supprimer', # NEW
+
 	// D
 	'deja_modifie' => 'Already modified',
 	'donnees_mal_formatees' => 'Invalid request format',
@@ -39,9 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'If no change made',
 	'label_reduire_logo' => 'Reduce logos',
 	'label_yellow_fade' => 'Fade',
+	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
+	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
 	'legend_editer_prive' => 'Use in editing area (experimental)',
 
 	// M
+	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
 	'messages' => 'Messages',
 	'modifie_par_ailleurs' => 'Was modified elsewhere in the meantime',
 

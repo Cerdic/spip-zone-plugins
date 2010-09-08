@@ -11,6 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activation_barre_impossible' => 'Un altre connector impedeix l\'&uacute;s del portaplomes a l\'espai p&uacute;blic. ',
 	'annuler' => 'Anul&middot;lar',
 
+	// B
+	'bouton_supprimer' => 'Supprimer', # NEW
+
 	// D
 	'deja_modifie' => 'Ja modificat',
 	'donnees_mal_formatees' => 'Dades mal formatades',
@@ -38,9 +41,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si no hi ha canvi',
 	'label_reduire_logo' => 'Reduir els logotips',
 	'label_yellow_fade' => 'Sense inter&egrave;s',
+	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
+	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
 	'legend_editer_prive' => 'Editar l\'espai privat (experimental)',
 
 	// M
+	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
 	'messages' => 'Missatges',
 	'modifie_par_ailleurs' => 'Modificat per altres raons',
 
@@ -58,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configurar els llapis',
-	'titre_crayons' => 'Les Crayons', # NEW
+	'titre_crayons' => 'Els "Crayons"',
 
 	// U
 	'update_impossible' => 'L\'actualitzaci&oacute; ha fracassat',

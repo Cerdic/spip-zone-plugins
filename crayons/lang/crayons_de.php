@@ -11,6 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activation_barre_impossible' => 'Ein anderes Plugin verhindert den Einsatz des Federhalters im &ouml;ffentlichen Bereich.',
 	'annuler' => 'Abbrechen',
 
+	// B
+	'bouton_supprimer' => 'Supprimer', # NEW
+
 	// D
 	'deja_modifie' => 'Bereits ge&auml;ndert',
 	'donnees_mal_formatees' => 'Datenformat unrichtig',
@@ -39,9 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'wenn keine &amp;Auml;nderung',
 	'label_reduire_logo' => 'Logos verkleinern',
 	'label_yellow_fade' => 'Ausblenden',
+	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
+	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
 	'legend_editer_prive' => 'Stift im Redaktionssystem (experimentell)',
 
 	// M
+	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
 	'messages' => 'Nachrichten',
 	'modifie_par_ailleurs' => 'Auf anderem Weg ge&auml;ndert',
 

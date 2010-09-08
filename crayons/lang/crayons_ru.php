@@ -11,6 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
 	'annuler' => '&#1054;&#1090;&#1084;&#1077;&#1085;&#1072;',
 
+	// B
+	'bouton_supprimer' => 'Supprimer', # NEW
+
 	// D
 	'deja_modifie' => '&#1059;&#1078;&#1077; &#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;',
 	'donnees_mal_formatees' => '&#1053;&#1077;&#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1100;&#1085;&#1099;&#1081; &#1092;&#1086;&#1088;&#1084;&#1072;&#1090; &#1079;&#1072;&#1087;&#1088;&#1086;&#1089;&#1072;',
@@ -39,9 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si pas de changement', # NEW
 	'label_reduire_logo' => 'R&eacute;duire les logos', # NEW
 	'label_yellow_fade' => 'Fade', # NEW
+	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
+	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
 	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)', # NEW
 
 	// M
+	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
 	'messages' => 'Messages', # NEW
 	'modifie_par_ailleurs' => '&#1041;&#1099;&#1083; &#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085; &#1074; &#1076;&#1088;&#1091;&#1075;&#1086;&#1084; &#1084;&#1077;&#1089;&#1090;&#1077; &#1074; &#1090;&#1086; &#1078;&#1077; &#1074;&#1088;&#1077;&#1084;&#1103;',
 
