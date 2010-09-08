@@ -98,15 +98,15 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 function metas_formulaire ($vars = "")
 {
 	$exec = $vars["args"]["exec"];
-	if ($vars["args"]["id_rubrique"]) {
+	if ($vars["args"]["id_rubrique"] and $exec=='naviguer') {
 		$objet = 'rubrique';
 		$id_objet = $vars["args"]["id_rubrique"];
 	}
-	if ($vars["args"]["id_article"]) {
+	if ($vars["args"]["id_article"] and $exec=='articles') {
 		$objet = 'article';
 		$id_objet = $vars["args"]["id_article"];
 	}
-	if ($vars["args"]["id_breve"]) {
+	if ($vars["args"]["id_breve"] and $exec=='breves_voir') {
 		$objet = 'breve';
 		$id_objet = $vars["args"]["id_breve"];
 	}
