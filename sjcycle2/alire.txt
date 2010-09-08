@@ -20,4 +20,7 @@ V 0.4 : Nettoyage
 - Suppression de l'écrasement du meta taille_preview
 - Ajout de la possibilite de surcharger localement dans un article les parametres generaux du plugin
 
-V 0.5 : On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
+V 0.5 : Intégration de l'aide en utilisant la balise AIDER
+
+
+On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
