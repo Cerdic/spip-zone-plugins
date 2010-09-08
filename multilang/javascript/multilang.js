@@ -243,7 +243,9 @@ function multilang_multi_recover(el,container,target,event){
 			multilang_save_lang(this,this.form.form_lang);
 			//build the string value
 			multilang_field_set_background(this,lang);
-			multilang_mark_empty_langs(container,target);
+			if(container && target){
+				multilang_mark_empty_langs(container,target);
+			}
 			var def_value = this.field_lang[multilang_def_lang];
 			if(!this.multi)
 				this.value = (def_value==undefined?"":def_value);
@@ -412,8 +414,6 @@ function multilang_change_lang(el,container,target) {
 	multilang_forms_fields[target_id].each(function(){
 		multilang_set_lang(this,lang);
 	});
-
-
 }
 
 /**
@@ -429,7 +429,7 @@ function multilang_mark_empty_langs(container,target) {
 	var target_id = multilang_init_target_id(target);
 
 	multilang_forms_fields[target_id].each(function(){
-
+		
 		// Trouver les elements non communs entre le tableau des langues availables et pour chaque champ,
 		// celui des langues renseignees, si ce champ est multi
 		if(this.multi) {
@@ -448,7 +448,6 @@ function multilang_mark_empty_langs(container,target) {
 	});
 
 	// On indique dans le menu de langue, celles qui ont au moins un champ non renseigne
-	container.find('a[class~=change_lang]').removeClass('empty') ;
 	$.each(langs_empty,function(i,name){
 		container.find('a[class~='+name+']').addClass('empty') ;
 	});
