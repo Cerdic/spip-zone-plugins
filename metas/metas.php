@@ -17,11 +17,9 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 		$result['descriptif'] = $result['description']; // pas super bô mais descriptif ne convenait pas vraiment pour le meta description...
 
 	if (!$result) {
-		// On récupère aussi les infos de l'objet concerné, pour aider la saisie car il n'y a rien.
-		$select = '*';
-		$from = 'spip_'.$ElementGestionMetas.'s';
-		$where = 'id_'.$ElementGestionMetas.' = '.$IdElementGestionMetas;
-		$result = sql_fetsel($select, $from, $where);
+		$result = array();
+		$result['titre'] = '';
+		$result['descriptif'] = '';
 		$result['id_meta'] = '';
 		$result['keywords'] = '';
 	}
