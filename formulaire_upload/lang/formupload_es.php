@@ -8,7 +8,7 @@
 	'cfg_lbl_files_number' => 'Número de archivos aceptados',
 	'cfg_inf_files_accepted' => 'Separe los formatos de los archivos mediante barras horizontales: pdf|txt|odt o gif|jpg|png',
 	'cfg_inf_insert_code' => 'Ver el código de inserción de los documentos (útil si hay otro formulario para crear artículos, por ejemplo)',
-	'cfg_inf_files_number' => 'El/la usuari@ no podrá subir esta cantidad de archivos como máximo',
+	'cfg_inf_files_number' => 'El/la usuari@ podrá subir esta cantidad de archivos como máximo',
 	'cfg_titre_formupload' => 'Formulario de subidas',
 	'choosefiles' => 'Selecciona los archivos para subir',
 	'nodocs' => 'Ningún documento en el área de descargas',
