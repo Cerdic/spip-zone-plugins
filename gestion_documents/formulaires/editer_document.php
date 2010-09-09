@@ -46,7 +46,6 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	if ($valeurs['distant']!=='oui'){
 		include_spip('inc/renseigner_document');
 		$infos = renseigner_taille_dimension_image(get_spip_doc($valeurs['fichier']),$valeurs['extension']);
-		spip_log($infos,'test');
 		if ($infos['taille']!=$valeurs['taille']
 			OR ($infos['type_image'] && ($infos['largeur']!=$valeurs['largeur']))
 			OR ($infos['type_image'] && ($infos['hauteur']!=$valeurs['hauteur']))){
