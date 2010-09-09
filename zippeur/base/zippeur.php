@@ -19,7 +19,7 @@ function zippeur_upgrade($nom_meta_base_version,$version_cible){
 function zippeur_vider_tables($nom_meta_version_base){
 	include_spip('base/abstract_sql');
 	include_spip('inc/flock');
-	$fichiers = preg_files(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.'/cache-zip');
+	defined('_DIR_SITE') ? $fichiers = preg_files(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.'/cache-zip') : $fichiers = preg_files(_DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.'/cache-zip') ;
 	foreach($fichiers as $f){
 		supprimer_fichier($f);
 	}

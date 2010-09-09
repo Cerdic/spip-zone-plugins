@@ -2,7 +2,9 @@
 
 function zippeur($array,$date,$nom=''){
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
-	$chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.'cache-zip/'.$nom.".zip";
+
+	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.'cache-zip/'.$nom.".zip" : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.'cache-zip/'.$nom.".zip";
+	
 	include_spip('inc/flock');
 	$enbase = sql_fetsel('id_zip','spip_zippeur',"`nom`='$nom' AND date_modif='$date'");
 	/* On vérifie si le zip existe*/
@@ -26,7 +28,7 @@ function zippeur($array,$date,$nom=''){
 
 function zippeur_zipper($chemin,$array){
 	include_spip('inc/pclzip');
-	sous_repertoire(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip');
+	defined('_DIR_SITE') ? sous_repertoire(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip') : sous_repertoire(_DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip');
 	supprimer_fichier($chemin);
 	
 	$zip = new PclZip($chemin);
