@@ -5,11 +5,14 @@ function paie_ton_buzz($name,$src="",$q=""){
 	include_spip("inc/distant");
 	
 	if($src){
-		$resultat = recuperer_page($src);
+		// une url de pagination fb
+		$resultat = recuperer_page(urldecode($src));
 	}elseif($q){
-		$resultat = recuperer_page("https://graph.facebook.com/search?q=".urlencode($q));
+		// une recherche
+		$resultat = recuperer_page("https://graph.facebook.com/search?q=".urlencode(htmlspecialchars_decode($q)));
 	}else{
-		$resultat = recuperer_page("https://graph.facebook.com/search?q=\"".urlencode($name));
+		// le nom du site
+		$resultat = recuperer_page("https://graph.facebook.com/search?q=".urlencode('"'.$name.'"'));
 	}
 	
 	$json_tab = json_decode($resultat,true);
