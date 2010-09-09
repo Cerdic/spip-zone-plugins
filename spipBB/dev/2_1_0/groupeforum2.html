@@ -1,0 +1,93 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<head>
+
+<title>[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE|textebrut)]</title>
+
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
+
+</head>
+<body id="phpbb" class="section-viewforum ltr">
+<div class="fond_page">
+
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
+
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+
+<INCLURE{fond=inc_teteforum}{id_rubrique}>
+
+	#SET{secteur,#ID_SECTEUR}
+
+	[(#REM) ligne chemin ]
+	[(#ID_RUBRIQUE|=={#CONFIG{spipbb/id_secteur}}|?{'',' '})[(#MODELE{chemin_rubrique}{id_rubrique})]]
+	
+
+	<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}>
+	<div class="forabg">
+		<ul class="topiclist forums">
+			<li class="header">
+				<dl class="icon">
+					<dt>[(#TITRE)]</dt>
+					<dd class="topics"><:spipbb:sujet_s:></dd>
+					<dd class="posts"><:spipbb:reponse_s_:></dd>
+					<dd class="lastpost"><span><:spipbb:messages_derniers:></span></dd>
+				</dl>
+			</li>
+			<BOUCLE_ligne(ARTICLES){id_rubrique}>
+			<li class="row">
+				<dl class="icon">
+					<dt title="Pas de nouveau message">
+						[<div class="[(#EDIT{titre}) ]"><a href="#URL_ARTICLE" class="forumtitle">(#TITRE|supprimer_numero)</a></div>]
+						[<div class="[(#EDIT{texte}) ]titretexte">(#TEXTE|sinon{"&nbsp;"})</div>]
+					</dt>
+				<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
+					<dd class="topics">#TOTAL_BOUCLE</dd>
+				<//B_sujets>
+	
+				<BOUCLE_messages(FORUMS){id_article}{plat}{doublons sujets}></BOUCLE_messages>
+					<dd class="posts">#TOTAL_BOUCLE</dd>
+				<//B_messages>
+	
+				<BOUCLE_dernier_message(FORUMS){id_article}{plat}{!par date}{0,1}>
+					<dd class="lastpost">
+						[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>]
+						<:spipbb:par_:>
+						<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+		
+						</BOUCLE_auteurp>
+						</B_auteurp>
+							[(#NOM|sinon{<:spipbb:anonyme:>})]
+						<//B_auteurp>
+						<BOUCLE_papa(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa>
+						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;</a>
+					</dd>
+				</BOUCLE_dernier_message><dd class="lastpost"> - </dd><//B_dernier_message>
+				</dl>
+			</li>
+			</BOUCLE_ligne>			
+		</ul>
+	</div>
+	</BOUCLE_sous_rubriques>
+[(#MODELE{bloc_informations}{id_rubrique})]
+
+<INCLURE{fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
+
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
+	#FORMULAIRE_LOGIN{#SELF}
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
+
+</BOUCLE_principale>
+
+
+[(#SPIP_CRON)]
+
+</div>
+</body>
+</html>
+</BOUCLE_rubrique>
