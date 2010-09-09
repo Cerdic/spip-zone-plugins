@@ -138,6 +138,7 @@
 		[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
 		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})[(#BOUTON_ACTION{<:gestdoc:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax})]</span>]
 		]
+		[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,galerie},data,''}})]
 		[(#REM) Utilisation de la galerie en mode selecteur, avec un bouton choix qui appelle une fonction js passee en argument]
 		[<span class="choisir"><a href="#" onclick="(#ENV{selectfunc,''})([(#ID_DOCUMENT)]);return false;"><:bouton_choisir:></a></span>]
 		</td>

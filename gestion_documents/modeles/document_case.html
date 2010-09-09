@@ -42,6 +42,7 @@
 				[(#AUTORISER{modifier,#OBJET,#ID_OBJET})[(#BOUTON_ACTION{<:gestdoc:bouton_enlever_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT,#SELF},ajax})]<span>|</span>]
 				<a href="#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}" target="_blank" class="editbox"><:gestdoc:bouton_modifier_document:></a>
 				<//B_compte>
+				[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,document_case},data,''}})]
 			</div>
 		</div>
 	</div>
