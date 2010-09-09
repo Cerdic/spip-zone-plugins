@@ -12,13 +12,13 @@ function joomla2spip_nettoyer_texte($texte,$champ="texte"){
     //$texte = ereg_replace("(\n|\r|\r\n)+","",$texte);    
     //$texte = preg_replace("#<br[^>]*>#i","\n\n",$texte);
     $texte = str_replace("<br />","\n_ ",$texte);  // pas semantique mais efficace
-    
     //var_dump($texte);
     
     // extra regex
     $texte = preg_replace("#<li[^>]*>#i","-* ",$texte);
     $texte = preg_replace("#<h1[^>]*>#i","{{{",$texte);
     $texte = preg_replace("#</h1>*>#i","}}}",$texte);
+    $texte = preg_replace("#<div[^>]*>#i","\n",$texte);
     // extra  regx
     
     /*foreach(extraire_balises($texte,"h1") as $val){
@@ -69,6 +69,11 @@ function joomla2spip_nettoyer_texte($texte,$champ="texte"){
     // supprimer le html (editeurs wysiwyg)       
     //$texte = supprimer_tags(textebrut($texte));
     $texte = supprimer_tags($texte); // ne pas utiliser textebrut sinon on perd les \n
+    
+    if (substr($texte,-2)=="_ ")  
+                  $texte = substr($texte,0,-2);
+
+    
     
     //notes
     preg_match_all("/@@@([a-z0-9]+)@@@/",$texte,$matches);
