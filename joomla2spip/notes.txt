@@ -12,6 +12,8 @@ UTILISATION
 
 2) installer le plugin et se rendre sur la page ./spip.php?page=joomla2spip
 
+3) apres la migration. effacer le plugin
+
 
 REMARQUES
 
@@ -48,7 +50,13 @@ les contacts : jos_contact_details
 les abonnés : jos_acajoom_subscribers
 
 Types d'utilisateurs : jos_usertypes
- 	 1 	administrator 	 2 	editor 	 3 	user 	 4 	author 	 5 	publisher 	 6 	manager
+ 	 
+1 	administrator 	 
+2 	editor 	 
+3 	user 	 
+4 	author 	 
+5 	publisher 	 
+6 	manager
 
 
 Pour lancer la convertion regler php.ini
@@ -60,3 +68,5 @@ Pour lancer la convertion regler php.ini
 max_execution_time = 18000     ; Maximum execution time of each script, in seconds
 max_input_time = 18000	; Maximum amount of time each script may spend parsing request data
 memory_limit = 64M      ; Maximum amount of memory a script may consume (8MB)
+
+-> erational: la pagination permet de limiter la consommation

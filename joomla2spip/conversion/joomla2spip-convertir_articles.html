@@ -1,56 +1,45 @@
 #CACHE{0}
+[(#REM)
+    script de migration
+    
+    pagination par paquets de 200 pour eviter le timeout 
+
+]
 <INCLURE{fond=inclure/joomla2spip-entete} />
 
 
 <h1>Articles</h1>
-<BOUCLE_articles(jos_content){!par publish_up}{id=110}>
-  
-  <BOUCLE_rubrique(jos_categories){id=#CATID}>
-  <div>rubrique : #NAME</div>
-  #SET{rubrique,#NAME}
-  </BOUCLE_rubrique>
-  
-  
-  <div>date : #PUBLISH_UP</div>
-  <div>maj : #MODIFIED</div>
-  [(#REM) joomla state
-    -2 = publie + en une
-    -1 = archive
-     0 = brouillon
-     1 = publie
-]<div>statut : [(#STATE|=={0}|oui)prop][(#STATE|=={-2}|oui)publie][(#STATE|=={1}|oui)publie]</div>   
-  [(#STATE|=={0}|oui)#SET{statut,prop}][(#STATE|=={-2}|oui)#SET{statut,publie}][(#STATE|=={1}|oui)#SET{statut,publie}]
-  <div>Mots-cles : #METAKEY</div>
-  <div>visites : #HITS</div>
-  
-  <div class="label">Titre</div>
-  <div id="titre" class="champ"><h2>#TITLE*</h2></div>
-  
-  <div class="label">Descriptif</div>
-  <div id="descriptif" class="champ">
-  [(#INTROTEXT|joomla2spip_nettoyer_texte|propre)]
-  [(#SET{descriptif,''})]
+<B_articles><ul>
+<BOUCLE_articles(jos_content){!par publish_up}{pagination 200}>
+  <li>  
+  <strong>#TITLE*</strong>  
+  <div class="log_short">
+    <BOUCLE_rubrique(jos_categories){id=#CATID}><div>rubrique : #NAME #TITLE</div>#SET{rubrique,#TITLE} </BOUCLE_rubrique>
+    <div>date : #PUBLISH_UP - maj : #MODIFIED</div>  
+    [(#REM) joomla state
+      -2 = publie + en une
+      -1 = archive
+       0 = brouillon
+       1 = publie
+    ]<div>statut : [(#STATE|=={0}|oui)prop][(#STATE|=={-2}|oui)publie][(#STATE|=={1}|oui)publie]</div>   
+    [(#STATE|=={0}|oui)#SET{statut,prop}][(#STATE|=={-2}|oui)#SET{statut,publie}][(#STATE|=={1}|oui)#SET{statut,publie}]   
+    <div>visites : #HITS</div>
   </div>
   
-  <div class="label traite">Texte traité</div>
+  [(#SET{descriptif,''})]  
   [(#SET{titre_original,[(#FULLTEXT*|joomla2spip_nettoyer_texte{titre})]})]
   [(#SET{chapo,[(#FULLTEXT*|joomla2spip_nettoyer_texte{chapo})]})]
   [(#REM) on merge l'introtext+fulltext de joomla pour obtenir texte de spip]  
   [(#SET{texte,[(#INTROTEXT*|joomla2spip_nettoyer_texte)][(#FULLTEXT*|joomla2spip_nettoyer_texte)]})]
 
-  
-  <div id="texte" class="champ">
-  [<div> titre original : (#FULLTEXT*|joomla2spip_nettoyer_texte{titre}|propre)</div>]
-  [<div> chapo : (#FULLTEXT*|joomla2spip_nettoyer_texte{chapo}|propre)</div>]
-  [(#FULLTEXT*|joomla2spip_nettoyer_texte|propre)]
-  </div>
-  
-  <hr />
   [(#REM) importer l'article]
   [(#SET{mon_article,#ARRAY{rubrique,#GET{rubrique},date,#PUBLISH_UP,maj,#MODIFIED,statut,#GET{statut},visites,#HITS,titre,#TITLE*,descriptif,#GET{descriptif},ps,#GET{titre_original},chapo,#GET{chapo},texte,#GET{texte},id_article,#ID}})]
   [(#GET{mon_article}|article_import)]
+  </li>
 </BOUCLE_articles>
-<p>#TOTAL_BOUCLE articles importés</p>
+</ul>
+<p>#TOTAL_BOUCLE articles importés - #PAGINATION - #GRAND_TOTAL</p>
+
 
 </B_articles>
 <INCLURE{fond=inclure/joomla2spip-pied} />

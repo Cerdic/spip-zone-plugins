@@ -161,21 +161,25 @@ function rubrique_import($ma_rubrique,$id_parent=0,$id_secteur=0) {
 //
 function article_import($mon_article) {
 	$err = '';
+	
+	// chercher si l'article n'a pas deja ete importe
+	$ancien_id = $mon_article['id_article'];
+	$result = sql_fetsel('id_article','spip_articles','id_article='.intval($ancien_id)) ;
+	if($result)
+	       return;
+	
         
 	// chercher la rubrique
 	$titre_rub = $mon_article['rubrique'];
-    
-    $result = sql_fetsel('id_rubrique','spip_rubriques','titre='.sql_quote($titre_rub)) ; 
-    
-    if($result){
+  $result = sql_fetsel('id_rubrique','spip_rubriques','titre='.sql_quote($titre_rub)) ; 
+  if($result){
      $id_rubrique = $result['id_rubrique'] ;
-    }
+  }
     
     
 	// creer article vide
 	include_spip('action/editer_article');
-	$id_article = insert_article($id_rubrique);
-	$ancien_id = $mon_article['id_article'];
+	$id_article = insert_article($id_rubrique);	
 	$sql = "UPDATE spip_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";
 	spip_query($sql);
 	$sql = "UPDATE spip_auteurs_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";
