@@ -9,7 +9,7 @@
 function multilang_insert_head_prive($flux){
 	$config = lire_config('multilang',array());
 
-	$flux = multilang_inserer_head($flux,$config);
+	$flux .= multilang_inserer_head($flux,$config);
 
 	return $flux;
 }
@@ -77,7 +77,7 @@ function multilang_inserer_head($flux,$config=array()){
 		// - document.ready
 		// - onAjaxLoad (cas des docs et de la configuration du site)
 
-		$flux .= '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
+		$newflux = '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
 				  	<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
 				  	<script type="text/javascript">
 				  	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
@@ -111,6 +111,6 @@ function multilang_inserer_head($flux,$config=array()){
 				  </script>
 				  ';
 	}
-	return $flux;
+	return $newflux;
 }
 ?>
