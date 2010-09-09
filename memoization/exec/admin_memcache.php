@@ -155,6 +155,13 @@ switch ($_GET['op']) {
     case 1: // host stats
     	$phpversion = phpversion();
         $memcacheStats = getMemcacheStats();
+
+		if (!$memcacheStats) {
+			echo "<h2>No connection to memcached server!</h2>\n";
+			echo "<p>Please check your settings and verify that your servers are up and running</p>\n";
+			break;
+		}
+
         $memcacheStatsSingle = getMemcacheStats(false);
 
         $mem_size = $memcacheStats['limit_maxbytes'];

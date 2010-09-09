@@ -26,6 +26,8 @@ foreach(cfg_memcache_servers() as $server) {
 }
 
 function cache_get($key) {
+	if (!$GLOBALS['memcache']) return null;
+
 	$a = memcache_get($GLOBALS['memcache'], _CACHE_NAMESPACE.$key);
 	// maybe_unserialize
 	if (is_array($a))
@@ -35,6 +37,8 @@ function cache_get($key) {
 }
 
 function cache_set($key, $value, $ttl=null) {
+	if (!$GLOBALS['memcache']) return null;
+
 	// maybe_serialize
 	if (is_object($value) OR is_array($value) OR is_null($value))
 		$value = array(serialize($value));
@@ -45,14 +49,19 @@ function cache_set($key, $value, $ttl=null) {
 }
 
 function cache_isset($key) {
+	if (!$GLOBALS['memcache']) return false;
+
 	return memcache_get($GLOBALS['memcache'], _CACHE_NAMESPACE.$key) !== FALSE;
 }
 
 function cache_unset($key) {
+	if (!$GLOBALS['memcache']) return false;
+
 	return memcache_delete($GLOBALS['memcache'], _CACHE_NAMESPACE.$key);
 }
 
 function cache_inc($key, $value=null, $ttl=null) {
+	if (!$GLOBALS['memcache']) return null;
 
 	// set if not exists
 	memcache_add($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, 0, $ttl);
@@ -63,6 +72,8 @@ function cache_inc($key, $value=null, $ttl=null) {
 }
 
 function cache_dec($key, $value=null, $ttl=null) {
+	if (!$GLOBALS['memcache']) return null;
+
 	// set if not exists
 	memcache_add($GLOBALS['memcache'], _CACHE_NAMESPACE.$key, 0, $ttl);
 
@@ -72,6 +83,8 @@ function cache_dec($key, $value=null, $ttl=null) {
 }
 
 function cache_lock($key, /* private */ $unlock = false) {
+	if (!$GLOBALS['memcache']) return null;
+
 	static $locks = array();
 
 	/* unlock */
@@ -108,6 +121,8 @@ function cache_lock($key, /* private */ $unlock = false) {
 }
 
 function cache_unlock($key) {
+	if (!$GLOBALS['memcache']) return null;
+
 	cache_lock($key, true);
 }
 
