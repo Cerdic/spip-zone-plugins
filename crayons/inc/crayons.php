@@ -253,8 +253,6 @@ function vignette_revision($id, $data, $type, $ref) {
 	if (!is_array($s))
 		return false;
 
-	$objet_parent = sql_getfetsel('id_objet,objet',"spip_documents_liens","id_document=".intval($id));
-
 	// Chargement d'un nouveau doc ?
 	if ($data['vignette']) {
 		define('FILE_UPLOAD', true);
@@ -277,8 +275,7 @@ function vignette_revision($id, $data, $type, $ref) {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 		$arg = $data['vignette'];
 		check_upload_error($arg['error']);
-		$x = $ajouter_documents($arg['tmp_name'], $arg['name'],
-			$objet_parent['objet'], $objet_parent['id_objet'], 'vignette', $id, $actifs);
+		$x = $ajouter_documents($arg['tmp_name'], $arg['name'],'','', 'vignette', $id, $actifs);
 	}else
 		// Suppression de la vignette ?
 		if ($wid = array_pop($ref)
