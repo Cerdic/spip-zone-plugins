@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_forum_longueur' => ' Longitud de los mensajes',
+	'cfg_forum_longueur' => 'Longitud de los mensajes',
 	'cfg_forum_longueur_maxi' => 'Longitud m&aacute;xima',
 	'cfg_forum_longueur_mini' => 'Longitud m&iacute;nima',
 	'comment' => 'comentario',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => '&iexcl;Gracias por su comentario!',
 
 	// S
-	'saisie_texte_info' => 'Este formulario acepta los atajos de SPIP, [-&gt;url] {{negrita}} {cursiva} &lt;quote&gt; &lt;code&gt;  y el c&oacute;digo HTML.',
+	'saisie_texte_info' => 'Este formulario acepta los atajos de SPIP, [-&gt;url] {{negrita}} {cursiva} &lt;quote&gt; &lt;code&gt;  y el c&oacute;digo HTML. Para crear p&aacute;rrafos, dejen simplemente unas l&iacute;neas vac&iacute;as.',
 	'saisie_texte_legend' => 'A&ntilde;ade tu comentario aqu&iacute;',
 	'submit1' => 'Previsualizaci&oacute;n',
 	'submit2' => 'Confirmar el envio',
