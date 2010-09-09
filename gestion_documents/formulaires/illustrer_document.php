@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_illustrer_document_charger_dist($id_document){
+	include_spip('inc/documents');
 	$valeurs = sql_fetsel('id_document,mode,id_vignette,extension','spip_documents','id_document='.intval($id_document));
 	if (!$valeurs /*OR in_array($valeurs['extension'],array('jpg','gif','png'))*/)
 		return array('editable'=>false,'id'=>$id_document);
