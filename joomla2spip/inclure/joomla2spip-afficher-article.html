@@ -3,14 +3,16 @@
 $(function(){
 $("#texte_brut").hide();
 $("#flip_brut").click(function(e){
-e.preventDefault();
-$("#texte_brut, .brut").show();
-$("#texte, .traite").hide();
+  e.preventDefault();
+  $("#texte_brut, .brut").show();
+  $("#texte, .traite, .interprete").hide();
+  $("#texte_source, .traite").hide();
 });
 $("#flip_traite").click(function(e){
-e.preventDefault();
-$("#texte, .traite").show();
-$("#texte_brut, .brut").hide();
+  e.preventDefault();
+  $("#texte, .traite").show();
+  $("#texte_source, .traite").show();
+  $("#texte_brut, .brut").hide();
 });
 
 });
@@ -27,7 +29,7 @@ float:left;
 <BOUCLE_article(jos_content){id=#ENV{id_article}}>
 <div class="label">Titre</div>
 <div id="titre" class="champ">
-<h2>#TITLE*</h2>
+<h2>n°#ID: #TITLE*</h2>
 </div>
 
 <div class="label">Url(s)</div>
@@ -59,24 +61,28 @@ float:left;
 
 <div>
 <a href="#flip_brut" id="flip_traite" class="flip">Texte traité</a>
-<a href="#flip_brut" id="flip_brut" class="flip">Texte brut bdd</a>
+<a href="#flip_brut" id="flip_brut" class="flip">Texte brut BDD</a>
 </div>
 
-<!-- traite -->
+<!-- traite / interprete -->
 <div class="label traite" style="clear:both">Texte traité</div>
-[<div style="clear:both">titre original</div>
-<div id="titre_original" class="champ">(#FULLTEXT*|joomla2spip_nettoyer_texte{titre}|propre)</div>]
-
-[<div>chapo</div>
-<div id="chapo" class="champ">(#FULLTEXT*|joomla2spip_nettoyer_texte{chapo}|propre)</div>]
-
+[<div style="clear:both">titre original</div><div id="titre_original" class="champ">(#FULLTEXT*|joomla2spip_nettoyer_texte{titre}|propre)</div>]
+[<div>chapo</div><div id="chapo" class="champ">(#FULLTEXT*|joomla2spip_nettoyer_texte{chapo}|propre)</div>]
 <div id="texte" class="champ">
-[(#INTROTEXT|joomla2spip_nettoyer_texte|propre)]
+[(#INTROTEXT*|joomla2spip_nettoyer_texte|propre)]
 [(#FULLTEXT*|joomla2spip_nettoyer_texte|propre)]
 </div>
+<div class="label interprete" style="clear:both">Texte interprété par SPIP</div>
+<div id="texte_source" class="champ">
+<pre>
+[(#INTROTEXT*|joomla2spip_nettoyer_texte)]
+[(#FULLTEXT*|joomla2spip_nettoyer_texte)]</pre>
+</div>
+
+
 
 <!-- brut -->
-<div class="label brut"  style="clear:both">Texte brut bdd</div>
+<div class="label brut"  style="clear:both;display:none;">Texte brut bdd</div>
 <div id="texte_brut" class="champ">
 [(#INTROTEXT*)<hr class='sep' />]
 [(#FULLTEXT*)]

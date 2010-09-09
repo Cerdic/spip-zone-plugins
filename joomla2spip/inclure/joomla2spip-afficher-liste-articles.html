@@ -2,7 +2,7 @@
 <B_articles>
 <h2>#GRAND_TOTAL articles</h2> 
 <ul>
-<BOUCLE_articles(jos_content){catid ?}{!par publish_up}{pagination 50}>
+<BOUCLE_articles(jos_content){catid ?}{!par publish_up}{pagination 200}>
 <li>
   <a href="./?page=joomla2spip&id_article=#ID">#TITLE</a> 
   ([(#STATE|=={0}|oui)prop][(#STATE|=={-2}|oui)publie][(#STATE|=={1}|oui)publie])

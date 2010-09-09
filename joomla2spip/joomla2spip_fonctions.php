@@ -9,14 +9,25 @@ function joomla2spip_nettoyer_texte($texte,$champ="texte"){
     
     $texte = $result['texte'] ;
     
-    $texte = ereg_replace("(\n|\r|\r\n)+","",$texte);
+    //$texte = ereg_replace("(\n|\r|\r\n)+","",$texte);    
     //$texte = preg_replace("#<br[^>]*>#i","\n\n",$texte);
+    $texte = str_replace("<br />","\n_ ",$texte);
+    //$texte = preg_replace("#<br[^>]*>#i","*****",$texte);
     
     //var_dump($texte);
     
+    // extra regex
+    $texte = preg_replace("#<li[^>]*>#i","-* ",$texte);
+    /*
+    foreach(extraire_balises($texte,"li") as $val){
+    $inter = supprimer_tags($val);	
+    $texte = str_replace($val,"\n\r\n-*".$inter."\n",$texte);
+    }*/
+    // extra  regx
+    
     foreach(extraire_balises($texte,"strong") as $val){
     $inter = supprimer_tags($val);	
-    $texte = str_replace($val,"\n\n{{{".$inter."}}}\n\n",$texte);
+    $texte = str_replace($val,"{{".$inter."}}",$texte);
     }
     
     foreach(extraire_balises($texte,"em") as $val){
@@ -54,11 +65,9 @@ function joomla2spip_nettoyer_texte($texte,$champ="texte"){
     // <script> </script>
     $texte = preg_replace("/<script type=\"text\/javascript\">.*?<\/script>/Uims","",$texte);
     
-    
-    // supprimer le html (editeurs wysiwyg)
-    $texte = supprimer_tags(textebrut($texte));
-    
-    
+    // supprimer le html (editeurs wysiwyg)       
+    //$texte = supprimer_tags(textebrut($texte));
+    $texte = supprimer_tags($texte); // ne pas utiliser textebrut sinon on perd les \n
     
     //notes
     preg_match_all("/@@@([a-z0-9]+)@@@/",$texte,$matches);
@@ -262,22 +271,23 @@ sql_insertq('spip_urls', array('url' => $url,'type' => $type,'id_objet' => $id_o
 return  ;
 }
 
+
+//
+// importer auteur
 function joomla2spip_auteur_import($mon_auteur){
-
-if($mon_auteur['statut'] == "Super Administrator") $statut = "0minirezo" ;
-else $statut = "1commite" ;
-
-if($mon_auteur['statut'] == "visiteur") $statut = "6forum" ;
-
-$email = $mon_auteur['email'];
-
-$login = $mon_auteur['login'];
-$nom = $mon_auteur['nom'];
-
-sql_insertq('spip_auteurs', array('email' => $email,'login' => $login,'statut' => $statut,'nom' => $nom));
-
-return ;
-	
+  if($mon_auteur['statut'] == "Super Administrator") $statut = "0minirezo" ;
+  else $statut = "1commite" ;
+  
+  if($mon_auteur['statut'] == "visiteur") $statut = "6forum" ;
+  
+  $email = $mon_auteur['email'];
+  
+  $login = $mon_auteur['login'];
+  $nom = $mon_auteur['nom'];
+  
+  sql_insertq('spip_auteurs', array('email' => $email,'login' => $login,'statut' => $statut,'nom' => $nom));
+  
+  return ;	
 }
 
 
