@@ -34,13 +34,48 @@ function getid3_post_edition($flux){
 	$id_document = $flux['args']['id_objet'];
 	$son_modif_id3 = array("mp3");
 	$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav");
+	$extensions_vignettes = array("png","gif","jpg");
 	$conf_id3 = lire_config('getid3/reecriture_tags',array());
+	$document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document));
 	if($flux['args']['operation'] == 'ajouter_document'){
-		$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
 		$extension = $document['extension'];
+		spip_log($extension,'test');
+		/**
+		 * Récupération automatique des infos des fichiers sons à leur insertion
+		 */
 		if(in_any($extension,$son_recup_id3)){
 			$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
 			$infos = $recuperer_infos($id_document);
+		}
+		/**
+		 * Insertion de la vignette automatiquement dans le mp3 si changement
+		 */
+		else if(in_any($extension,$extensions_vignettes) 
+			&& ($document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document)))
+			&& in_array($document_orig['extension'],$son_modif_id3)
+		){
+			include_spip('inc/documents');
+			
+			$fichier_orig = get_spip_doc($document_orig['fichier']);
+			$recuperer_id3 = charger_fonction('recuperer_id3','inc');
+			$valeurs = $recuperer_id3($fichier_orig);
+			
+			$files[] = get_spip_doc($document['fichier']);
+			
+			foreach($valeurs as $valeur => $info){
+				if(preg_match('/cover/',$valeur) && (count($files) == 0)){
+					$files[] = $info;
+				}else{
+					$valeurs[$valeur] = filtrer_entites($info);
+				}
+			}
+			
+			/**
+			 * On écrit les tags
+			 */
+			$ecrire_id3 = charger_fonction('getid3_ecrire_infos','inc');
+			$err = $ecrire_id3($document_orig['id_document'],$valeurs,$files);
 		}
 	}
 	/**

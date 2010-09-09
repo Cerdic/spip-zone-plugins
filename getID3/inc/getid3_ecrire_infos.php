@@ -13,12 +13,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$formats = array('id3v1', 'id3v2.3')){
 	$err = array();
+	$TagData = array();
 	if(!intval($id_document)){
 		return;
 	}
 	include_spip('inc/documents');
-	$document = sql_fetsel("docs.id_document,docs.titre,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-	$document_chemin = get_spip_doc($document['fichier']);
+	$document_chemin = get_spip_doc(sql_getfetsel("fichier", "spip_documents","id_document=".intval($id_document)));
 
 	include_spip('getid3/getid3');
 	$getid3 = new getID3;
@@ -40,7 +40,6 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 	/**
 	 * On utilise nos valeurs
 	 */
-	spip_log($infos,'id3');
 	foreach ($infos as $info => $value) {
 		$TagData[$info][] = $value;
 	}
@@ -119,7 +118,6 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 			'data' => $infos
 		)
 	);
-	spip_log($err,'id3');
 	return $err;
 }
 ?>
