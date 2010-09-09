@@ -312,14 +312,18 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 			'spip_auteurs',
 			'email = '.sql_quote($posteur['mail'])
 		);
-		if (!$id_aut)
+		if (!$id_aut){
+			$nom_auteur = trim(_request('prenom').' '._request('nom'));
+			if (!$nom_auteur) $nom_auteur = $posteur['mail'];
 			$id_aut = sql_insertq(
 				'spip_auteurs',
 				array(
+					'nom' => $nom_auteur,
 					'email' => $posteur['mail'],
 					'statut' => 'contact'
 				)
 			);
+		}
 
 		// Ensuite on ajoute le message dans la base
 		$id_message = sql_insertq(
