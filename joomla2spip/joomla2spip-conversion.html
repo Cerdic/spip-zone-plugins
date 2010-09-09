@@ -4,77 +4,52 @@ Il faut mettre les documents du repertoire images/ de joomla dans un repertoire 
 ]
 
 #CACHE{0}
-
-<style>
-#menu{
-float:right;
-padding:0px 20px;	
-width:25%;
-}
-#contenu{
-float:left;
-padding:0px 20px;	
-width:60%;
-margin-bottom:20px;
-
-}
-#pied{
-clear:both;
-padding:20px;
-border:1px dotted black;
-}
-</style>
-
-<INCLURE{fond=inclure/joomla2spip-entete}>
+<INCLURE{fond=inclure/joomla2spip-entete} />
 
 
 <div id="contenu">
 
+[(#REM) secteurs]
 <B_secteurs>
 <h2>Secteurs</h2>
-<BOUCLE_secteurs(jos_sections)>
- </BOUCLE_secteurs>
-<p>#TOTAL secteurs</p>
+<BOUCLE_secteurs(jos_sections)> </BOUCLE_secteurs>
+<p>#TOTAL_BOUCLE secteurs</p>
 </B_secteurs>
 
-<BOUCLE_sous_rubriques(jos_categories)>
- </BOUCLE_sous_rubriques>
-<p>#TOTAL rubriques</p>
+<BOUCLE_sous_rubriques(jos_categories)> </BOUCLE_sous_rubriques>
+<p>#TOTAL_BOUCLE rubriques</p>
 <a href="./?page=joomla2spip-convertir&conversion=navigation">Transferer les rubriques de joomla vers spip</a>
 </B_sous_rubriques>
 
 
-
-<B_articles>
+[(#REM) articles]
 <h2>articles</h2>
-<BOUCLE_articles(jos_content){catid ?}{!par publish_up}>
-</BOUCLE_articles>
-joomla : #TOTAL_BOUCLE
-</B_articles>
+<p>joomla :
+<BOUCLE_articles(jos_content){catid ?}{!par publish_up}> 
+</BOUCLE_articles>#TOTAL_BOUCLE</B_articles>0<//B_articles></p>
 
+<p>spip : 
 <BOUCLE_articlesspip(ARTICLES){statut IN prepa,prop,publie}>
-</BOUCLE_articlesspip>
-<p>spip : #TOTAL_BOUCLE</p>
-</B_articlesspip>
+</BOUCLE_articlesspip>#TOTAL_BOUCLE</B_articlesspip>0<//B_articlesspip></p>
 
 <a href="./?page=joomla2spip-convertir&conversion=articles">Transferer les articles de joomla vers spip</a>
 
 
-<B_urls>
-<h2>urls</h2>
-<BOUCLE_urls(jos_jv_page_url){!par idpage_url}>
- </BOUCLE_urls>
-joomla : #TOTAL_BOUCLE
-</B_urls>
+[(#REM) urls]
+<h2>URLs</h2>
+<p>joomla :
+<BOUCLE_urls(jos_jv_page_url ?){!par idpage_url}>
+</BOUCLE_urls>#TOTAL_BOUCLE
+</B_urls>0<//B_urls></p>
 
-<BOUCLE_urlsspip(URLS)>
- </BOUCLE_urlsspip>
-<p>spip : #TOTAL_BOUCLE</p>
-</B_urlsspip>
+<p>spip :<BOUCLE_urlsspip(spip_urls)> 
+</BOUCLE_urlsspip>#TOTAL_BOUCLE</p>
+</B_urlsspip>0<//B_urlsspip></p>
 
 <a href="./?page=joomla2spip-convertir&conversion=urls">Transferer les urls de joomla vers spip</a>
 
 
+[(#REM) table auteurs]
 <B_auteurs>
 <h2>Auteurs</h2>
 <BOUCLE_auteurs(jos_users)>
@@ -83,25 +58,16 @@ joomla : #TOTAL_BOUCLE
 </B_auteurs>
 
 
+[(#REM) table visiteurs pas tjs presente]
 <B_visiteurs>
 <h2>Visiteurs</h2>
-<BOUCLE_visiteurs(jos_acajoom_subscribers)>
+<BOUCLE_visiteurs(jos_acajoom_subscribers ?)>
 </BOUCLE_visiteurs>
-<p>joomla : #TOTAL_BOUCLE</p>
+  <p>joomla : #TOTAL_BOUCLE</p>
 </B_visiteurs>
-
-<a href="./?page=joomla2spip-convertir&conversion=utilisateurs">Transferer les auteurs et visiteurs de joomla vers spip</a>
-
+  <a href="./?page=joomla2spip-convertir&conversion=utilisateurs">Transferer les auteurs et visiteurs de joomla vers spip</a>
 </div>
 
-<div id="menu">
 
-<div id="convertir" style="font-size:16px;margin:20px">
-<a href="#URL_PAGE{joomla2spip-convertir}">-> Transferer vers SPIP</a>
-</div>
 
-</div>
-
-<div id="pied">
-Joomla2spip est un logiciel de BoOz
-</div>
+<INCLURE{fond=inclure/joomla2spip-pied} />

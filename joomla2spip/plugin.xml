@@ -1,5 +1,13 @@
-<plugin>    <!-- Nom du plugin -->    <nom> Joomla2SPIP </nom>    <!-- Auteur du plugin -->    <auteur> BoOz booz@rezo.net </auteur>    <version>0.1</version>    <etat>experimental</etat>    <icon></icon>    <description> 
-    
-    Migration de Joomla vers SPIP
-        
-    </description>    <!-- URL de documentation -->    <lien>[->../?page=joomla2spip]</lien>    <!-- précise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->    <prefix>joomla2spip</prefix>    <!-- précise le fichier à charger à chaque recalcul, partie publique -->    <fonctions>joomla2spip_fonctions.php</fonctions>    <!-- précise le fichier à charger à chaque appel de la page, partie publique -->    <options></options>    <!-- Chemin du fichier d'installation et de mise à jour -->    <install></install>     </plugin>
+<plugin>
+    <nom>Joomla2SPIP</nom>
+    <auteur>BoOz booz@rezo.net</auteur>
+    <version>0.2</version>
+    	<licence>GNU/GPL</licence>
+    <etat>experimental</etat>
+    <icon>img_pack/icon.png</icon>
+    <description>Migration de Joomla vers SPIP</description>
+    <lien>[->../?page=joomla2spip]</lien>
+    <prefix>joomla2spip</prefix>
+    <categorie>maintenance</categorie>
+    <fonctions>joomla2spip_fonctions.php</fonctions> 
+</plugin>

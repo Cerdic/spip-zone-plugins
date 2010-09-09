@@ -1,5 +1,5 @@
 #CACHE{0}
-
+<INCLURE{fond=inclure/joomla2spip-entete} />
 <p><a href="#URL_PAGE{joomla2spip-articles-sans-url}">articles sans url</a></p>
 
 <B_articles>
@@ -10,7 +10,7 @@
 </li>
 <B_urls>
 <ul>
-<BOUCLE_urls(jos_jv_page_url){url LIKE %(#TITRE|sef_url)%}{!par idpage_url}>
+<BOUCLE_urls(jos_jv_page_url ?){url LIKE %(#TITRE|sef_url)%}{!par idpage_url}>
 [<li>(#URL|joomla2spip_nettoyer_url)</li>
 [(#SET{url_relative,[(#URL|joomla2spip_url_relative)]})]
 [(#SET{mon_url_propre,#ARRAY{url,#GET{url_relative},type,article,id_objet,#ID_ARTICLE,date,#DATE}})]
@@ -22,4 +22,6 @@
 </BOUCLE_articles>
 </ul>
 </B_articles>
+
+<INCLURE{fond=inclure/joomla2spip-pied} />
 
