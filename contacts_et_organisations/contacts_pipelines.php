@@ -72,8 +72,6 @@ function contacts_formulaire_charger($flux){
 function contacts_formulaire_verifier($flux){
 	if ($flux['args']['form'] == 'editer_auteur') {
 		$id_auteur = $flux['args']['args'][0];
-		#$flux['data']['co__nom'] = 'Raté !';
-		#$flux['data']['message_erreur'] = 'Raté aussi !';
 		
 		// test des contacts, sinon des organisations
 		if (sql_countsel('spip_contacts', 'id_auteur='.sql_quote($id_auteur))) {
@@ -138,44 +136,14 @@ function contacts_formulaire_traiter($flux){
 					$c[$cle] = _request('co__' . $cle);
 				}
 			}
-			modifier_contenu($objet, $id_auteur, array('invalideur' => "id='id_auteur/$id_auteur'"), $c);
+			$_id_objet = id_table_objet($objet); // id_contact
+			$id_objet = $res[$_id_objet]; // 3
+			modifier_contenu($objet, $id_objet, array('invalideur' => "id='$_id_objet/$id_objet'"), $c);
 		}
 	}
 	return $flux;
 }
 
-
-/**
- * Dupliquer id_auteur sur id_contact 
- *
- * @param 
- * @return 
-**/
-function contacts_pre_insertion($flux) {
-	if ($flux['args']['table'] == 'spip_contacts') {
-		$flux['data']['id_contact'] = $flux['data']['id_auteur'];
-	}
-	elseif ($flux['args']['table'] == 'spip_organisations') {
-		$flux['data']['id_organisation'] = $flux['data']['id_auteur'];
-	}
-	return $flux;
-}
-
-/**
- * Dupliquer id_auteur sur id_contact 
- *
- * @param 
- * @return 
-**/
-function contacts_pre_edition($flux) {
-	if ($flux['args']['table'] == 'spip_contacts') {
-		$flux['data']['id_contact'] = $flux['args']['id_objet'];
-	}
-	elseif ($flux['args']['table'] == 'spip_organisations') {
-		$flux['data']['id_organisation'] = $flux['args']['id_objet'];
-	}
-	return $flux;
-}
 
 
 

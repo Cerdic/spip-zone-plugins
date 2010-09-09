@@ -59,6 +59,25 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		spip_log('Tables correctement passsées en version 1.2.1','contacts');
 		ecrire_meta($nom_meta_base_version, $current_version="1.2.1");
 	}
+	if (version_compare($current_version,"1.3.0","<")){
+		// les clés primaires des tables contacts et organisations
+		// passent sur le id_contact et id_organisation au lieu du id_auteur
+		// afin de gérer éventuellement des contacts/organisations autonomes.
+		sql_alter('TABLE spip_organisations DROP INDEX id_organisation');
+		sql_alter('TABLE spip_organisations DROP PRIMARY KEY');
+		sql_alter('TABLE spip_organisations CHANGE id_auteur id_auteur bigint(21) NOT NULL'); 
+		sql_alter('TABLE spip_organisations CHANGE id_organisation id_organisation bigint(21) NOT NULL auto_increment PRIMARY KEY'); 
+		sql_alter('TABLE spip_organisations ADD INDEX (id_auteur)');
+		
+		sql_alter('TABLE spip_contacts DROP INDEX id_contact');
+		sql_alter('TABLE spip_contacts DROP PRIMARY KEY');
+		sql_alter('TABLE spip_contacts CHANGE id_auteur id_auteur bigint(21) NOT NULL');  
+		sql_alter('TABLE spip_contacts CHANGE id_contact id_contact bigint(21) NOT NULL auto_increment PRIMARY KEY');
+		sql_alter('TABLE spip_contacts ADD INDEX (id_auteur)');
+		
+		spip_log('Tables correctement passsées en version 1.3.0','contacts');
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.0");
+	}
 
 }
 

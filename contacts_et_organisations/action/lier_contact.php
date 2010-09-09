@@ -32,7 +32,7 @@ function action_lier_contact_post($id_contact, $id_organisation) {
 		));
 		
 		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_auteur/$id_contact'");
+		suivre_invalideur("id='id_contact/$id_contact'");
 	}
 }
 

@@ -4,7 +4,7 @@
 [(#CHEMIN{images/contacts-24.png}|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:contacts:infos_contacts_ou_organisations:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})],0})]
 #SET{rien,0}#SET{contact,0}
 <BOUCLE_est_un_contact(CONTACTS){id_auteur}>
-		#SET{contact,1}
+		#SET{id_contact,#ID_CONTACT}
 		[(#CHEMIN{images/contact-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]
 		<:contacts:est_un_contact:>
 
@@ -12,7 +12,7 @@
 </BOUCLE_est_un_contact>
 
 	<BOUCLE_est_une_organisation(ORGANISATIONS){id_auteur}>
-
+		#SET{id_organisation,#ID_ORGANISATION}
 		[(#CHEMIN{images/organisation-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]
 		<:contacts:est_une_organisation:>
 
@@ -41,10 +41,10 @@
 			ajax})]
 	]
 	[(#GET{rien}|non)
-		[(#GET{contact}|oui)
+		[(#GET{id_contact}|oui)
 			<h3 class='h3'><:contacts:lier_organisation:></h3>
 			<div class='ajax'>
-			[(#FORMULAIRE_LIER_ORGANISATION{#ID_AUTEUR})]
+			[(#FORMULAIRE_LIER_ORGANISATION{#GET{id_contact}})]
 			</div>
 
 			<h3 class='h3'><:contacts:supprimer_contact:></h3>
@@ -54,15 +54,15 @@
 				[(#BOUTON_ACTION{[(#CHEMIN{images/contact-delete-24.png}
 					|balise_img{<:contacts:supprimer_contact:>}
 					|concat{' ',<:contacts:supprimer_contact:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_contact,contact/#ID_AUTEUR,#SELF})],
+					[(#URL_ACTION_AUTEUR{supprimer_contact,contact/#GET{id_contact},#SELF})],
 					ajax,<:contacts:confirmer_supprimer_contact:>})]
 			</p>
 			</div>
 		]
-		[(#GET{contact}|non)
+		[(#GET{id_contact}|non)
 			<h3 class='h3'><:contacts:lier_contact:></h3>
 			<div class='ajax'>
-			[(#FORMULAIRE_LIER_CONTACT{#ID_AUTEUR})]
+			[(#FORMULAIRE_LIER_CONTACT{#GET{id_organisation}})]
 			</div>
 
 			<h3 class='h3'><:contacts:supprimer_organisation:></h3>
@@ -72,7 +72,7 @@
 				[(#BOUTON_ACTION{[(#CHEMIN{images/organisation-delete-24.png}
 					|balise_img{<:contacts:supprimer_organisation:>}
 					|concat{' ',<:contacts:supprimer_organisation:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_contact,organisation/#ID_AUTEUR,#SELF})],
+					[(#URL_ACTION_AUTEUR{supprimer_contact,organisation/#GET{id_organisation},#SELF})],
 					ajax,<:contacts:confirmer_supprimer_organisation:>})]
 			</p>
 			</div>

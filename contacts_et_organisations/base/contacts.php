@@ -45,8 +45,8 @@ function contacts_declarer_tables_interfaces($interface){
 function contacts_declarer_tables_principales($tables_principales){
 	//-- Table organisations ------------------------------------------
 	$organisations = array(
+		"id_organisation" => "bigint(21) NOT NULL",
 		"id_auteur"		=> "bigint(21) NOT NULL",
-		"id_organisation" => "bigint(21) NOT NULL", // autoriser les jointures automatiques... c'est un rien vilain la redondance...
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
         "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
         "identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
@@ -56,8 +56,8 @@ function contacts_declarer_tables_principales($tables_principales){
 		"maj"			=> "TIMESTAMP"
 		);
 	$organisations_key = array(
-		"PRIMARY KEY"	=> "id_auteur",
-		"KEY id_organisation" => "id_organisation"
+		"PRIMARY KEY"	=> "id_organisation",
+		"KEY id_auteur" => "id_auteur"
 		);
 	$organisations_join = array(
 		"id_auteur" => "id_auteur",
@@ -68,8 +68,8 @@ function contacts_declarer_tables_principales($tables_principales){
 
 	//-- Table contacts ------------------------------------------
 	$contacts = array(
+		"id_contact"	=> "bigint(21) NOT NULL", 
 		"id_auteur"		=> "bigint(21) NOT NULL",
-		"id_contact"	=> "bigint(21) NOT NULL", // autoriser les jointures automatique... c'est un rien vilain la redondance...
 		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
 		"prenom"		=> "tinytext NOT NULL DEFAULT ''",
@@ -79,8 +79,8 @@ function contacts_declarer_tables_principales($tables_principales){
 		"maj"			=> "TIMESTAMP"
 		);
 	$contacts_key = array(
-		"PRIMARY KEY"	=> "id_auteur",
-		"KEY id_contact" => "id_contact"
+		"PRIMARY KEY"	=> "id_contact",
+		"KEY id_auteur" => "id_auteur"
 		);
 	$contacts_join = array(
 		"id_auteur" => "id_auteur",

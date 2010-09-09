@@ -38,7 +38,7 @@ function action_definir_organisation_post($id_auteur) {
 }
 
 
-function insert_contact($id_auteur) {
+function insert_contact($id_auteur=0) {
 	// récupérer le nom
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
 
@@ -59,7 +59,7 @@ function insert_contact($id_auteur) {
 	return $id_contact;
 }
 
-function insert_organisation($id_auteur) {
+function insert_organisation($id_auteur=0) {
 
 	// récupérer le nom
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
