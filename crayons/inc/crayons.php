@@ -254,14 +254,32 @@ function vignette_revision($id, $data, $type, $ref) {
 		return false;
 
 	include_spip('inc/modifier');
+	include_spip('inc/documents');
 	// Chargement d'un nouveau doc ?
 	if ($data['vignette']) {
 		define('FILE_UPLOAD', true);
 		if(is_numeric($s['id_vignette']) && ($s['id_vignette']>0)){
 			spip_log('suppression de la vignette');
 			// Suppression du document
-			$supprimer_document = charger_fonction('supprimer_document','action');
-			$supprimer_document($s['id_vignette']);
+			$vignette = sql_getfetsel('fichier', 'spip_documents', 'id_document='.intval($s['id_vignette']));
+			if (@file_exists($f = get_spip_doc($vignette))) { 
+				spip_log("efface $f"); 
+				supprimer_fichier($f); 
+			}
+			sql_delete('spip_documents', 'id_document='.intval($s['id_vignette']));
+			sql_delete('spip_documents_liens',  'id_document='.intval($s['id_vignette']));
+
+			pipeline('post_edition',
+				array(
+					'args' => array(
+						'operation' => 'supprimer_document',
+						'table' => 'spip_documents',
+						'id_objet' => $s['id_vignette']
+					),
+					'data' => null
+				)
+			);
+			
 			// On remet l'id_vignette a 0
 			revision_document($s['id_document'], array('id_vignette'=>0));
 		}
@@ -276,8 +294,25 @@ function vignette_revision($id, $data, $type, $ref) {
 			AND $_POST['content_'.$wid.'_vignette_supprimer'] == 'on') {
 			if(is_numeric($s['id_vignette']) && ($s['id_vignette']>0)){
 				// Suppression du document
-				$supprimer_document = charger_fonction('supprimer_document','action');
-				$supprimer_document($s['id_vignette']);
+				$vignette = sql_getfetsel('fichier', 'spip_documents', 'id_document='.intval($s['id_vignette']));
+				if (@file_exists($f = get_spip_doc($vignette))) { 
+					spip_log("efface $f"); 
+					supprimer_fichier($f); 
+				}
+				sql_delete('spip_documents', 'id_document='.intval($s['id_vignette']));
+				sql_delete('spip_documents_liens',  'id_document='.intval($s['id_vignette']));
+				
+				pipeline('post_edition',
+					array(
+						'args' => array(
+							'operation' => 'supprimer_document',
+							'table' => 'spip_documents',
+							'id_objet' => $s['id_vignette']
+						),
+						'data' => null
+					)
+				);
+				
 				// On remet l'id_vignette a 0
 				revision_document($s['id_document'], array('id_vignette'=>0));
 			}
