@@ -22,5 +22,6 @@ V 0.4 : Nettoyage
 
 V 0.5 : Intégration de l'aide en utilisant la balise AIDER
 
-
-On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
+A faire :
+- On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
+- Possibilité d'afficher un diapo dans une rubrique
