@@ -1,4 +1,0 @@
-[(#REM) #ENV{cle} et #ENV{valeur} ]
-<input type="checkbox" name="plugins_actifs[]" value="#ENV{cle}" id="plugactif_#ENV{cle}"
-	[(#ENV{cle}|in_array{#CONFIG{jqueryp/plugins_actifs,#ARRAY}}|?{checked="checked"})] />
-	<label for="plugactif_#ENV{cle}" >#ENV{cle}</label><br />

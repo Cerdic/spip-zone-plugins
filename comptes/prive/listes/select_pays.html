@@ -1,5 +1,0 @@
-[(#PLUGIN{pays}|oui)]
-#CACHE{0}
-<BOUCLE_r(PAYS){par nom}>
-<option value="#ID_PAYS"[(#ID_PAYS|=={70}|?{selected})][(#ENV{id}|=={#ID_PAYS}|?{selected})]>[(#NOM|couper{30})]</option>
-</BOUCLE_r>
