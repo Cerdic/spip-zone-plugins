@@ -11,19 +11,20 @@ function joomla2spip_nettoyer_texte($texte,$champ="texte"){
     
     //$texte = ereg_replace("(\n|\r|\r\n)+","",$texte);    
     //$texte = preg_replace("#<br[^>]*>#i","\n\n",$texte);
-    $texte = str_replace("<br />","\n_ ",$texte);
-    //$texte = preg_replace("#<br[^>]*>#i","*****",$texte);
+    $texte = str_replace("<br />","\n_ ",$texte);  // pas semantique mais efficace
     
     //var_dump($texte);
     
     // extra regex
     $texte = preg_replace("#<li[^>]*>#i","-* ",$texte);
-    /*
-    foreach(extraire_balises($texte,"li") as $val){
-    $inter = supprimer_tags($val);	
-    $texte = str_replace($val,"\n\r\n-*".$inter."\n",$texte);
-    }*/
+    $texte = preg_replace("#<h1[^>]*>#i","{{{",$texte);
+    $texte = preg_replace("#</h1>*>#i","}}}",$texte);
     // extra  regx
+    
+    /*foreach(extraire_balises($texte,"h1") as $val){
+    $inter = supprimer_tags($val);	
+    $texte = str_replace($val,"{{{".$inter."}}}",$texte);
+    }*/
     
     foreach(extraire_balises($texte,"strong") as $val){
     $inter = supprimer_tags($val);	
@@ -118,6 +119,7 @@ function joomla2spip_nettoyer_texte($texte,$champ="texte"){
 //
 function joomla2spip_nettoyer_texte_perso($texte){
 
+  /* desactive titre et chapo (il peut avoir plusieurs h1 et h4)
   $titre_temp = extraire_balise($texte,"h1");	
   $titre = supprimer_tags(ereg_replace("(\n|\r\n|\r)"," ",$titre_temp));	
   $texte = str_replace($titre_temp,"",$texte);
@@ -125,7 +127,7 @@ function joomla2spip_nettoyer_texte_perso($texte){
   $chapo_temp = extraire_balise($texte,"h4") ;
   $chapo = supprimer_tags($chapo_temp);	
   $texte = str_replace($chapo_temp,"",$texte);
-  
+  */
   
   // demontage de texte
   $texte = preg_replace("#<\/*font[^>]*>#","",$texte);
