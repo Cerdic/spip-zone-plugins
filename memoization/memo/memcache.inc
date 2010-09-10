@@ -41,7 +41,7 @@ class CacheBackend_memcache extends CacheBackend {
 			: memcache_set($this->memcache, _CACHE_NAMESPACE.$key, $value, $flag, $ttl);
 	}
 	
-	function test($key) {
+	function exists($key) {
 		if (!$this->ok) return null;
 		return memcache_get($this->memcache, _CACHE_NAMESPACE.$key) !== FALSE;
 	}
@@ -91,7 +91,7 @@ class CacheBackend_memcache extends CacheBackend {
 	
 			# sinon s'il existe, on attend qu'il se libere
 			$wait = 0;
-			while ($this->test('lock::'.$key)) {
+			while ($this->exists('lock::'.$key)) {
 				if ($wait++ < _LOCK_MAX)
 					sleep(1);
 				else

@@ -4,7 +4,7 @@
 class CacheBackend {
 	function get($key) {}
 	function set($key, $value, $ttl=null) {}
-	function test($key) {}
+	function exists($key) {}
 	function del($key) {}
 	function inc($key, $value=null, $ttl=null) {}
 	function dec($key, $value=null, $ttl=null) {}
@@ -64,8 +64,8 @@ class Cache {
 	}
 	
 	/* bool */
-	function test($key) {
-		return $this->backend->test($key);
+	function exists($key) {
+		return $this->backend->exists($key);
 	}
 	
 	/* bool */
@@ -118,13 +118,13 @@ function cache_set($key, $value, $ttl=null) {
 }
 
 /* bool */
-function cache_test($key) {
+function cache_exists($key) {
 	global $Memoization;
-	return $Memoization->test($key);
+	return $Memoization->exists($key);
 }
 function cache_isset($key) { # obsolete
 	global $Memoization;
-	return $Memoization->test($key);
+	return $Memoization->exists($key);
 }
 
 /* bool */

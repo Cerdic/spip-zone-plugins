@@ -26,7 +26,7 @@ class CacheBackend_apc extends CacheBackend {
 			: apc_store(_CACHE_NAMESPACE.$key, $value, $ttl);
 	}
 	
-	function test($key) {
+	function exists($key) {
 		return apc_exists(_CACHE_NAMESPACE.$key);
 	}
 	

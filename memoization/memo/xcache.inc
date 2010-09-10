@@ -25,7 +25,7 @@ class CacheBackend_xcache extends CacheBackend {
 			: xcache_set(_CACHE_NAMESPACE.$key, $value, $ttl);
 	}
 	
-	function test($key) {
+	function exists($key) {
 		return xcache_isset(_CACHE_NAMESPACE.$key);
 	}
 	
@@ -61,7 +61,7 @@ class CacheBackend_xcache extends CacheBackend {
 	
 			# sinon s'il existe, on attend qu'il se libere
 			$wait = 0;
-			while ($this->test('lock::'.$key)) {
+			while ($this->exists('lock::'.$key)) {
 				if ($wait++ < _LOCK_MAX)
 					sleep(1);
 				else

@@ -19,7 +19,7 @@ class CacheBackend_eaccelerator extends CacheBackend {
 			: eaccelerator_put(_CACHE_NAMESPACE.$key, $value, $ttl);
 	}
 	
-	function test($key) {
+	function exists($key) {
 		return cache_get($key) !== null;
 	}
 	
