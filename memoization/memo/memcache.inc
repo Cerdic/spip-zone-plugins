@@ -5,7 +5,7 @@
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 @define('_LOCK_MAX', 30); # max lock time (seconds)
 
-class CacheBackend_xcache extends CacheBackend {
+class CacheBackend_memcache extends CacheBackend {
 	var $memcache = null;
 	var $ok = false;
 
