@@ -4,7 +4,7 @@
   <version>0.5.0</version>
   <version_base>0.3.4</version_base>
   <etat>test</etat>
-  <description>Gestion d'une queue de Jobs</description>
+  <description>Gestion d'une file d'attente de t&acirc;ches &agrave; ex&eacute;cuter.</description>
   <icon>img_pack/job_queue_48.png</icon>
   <install>base/queue.php</install>
   <options>queue_options.php</options>
