@@ -45,7 +45,7 @@ function contacts_declarer_tables_interfaces($interface){
 function contacts_declarer_tables_principales($tables_principales){
 	//-- Table organisations ------------------------------------------
 	$organisations = array(
-		"id_organisation" => "bigint(21) NOT NULL",
+		"id_organisation" => "bigint(21) NOT NULL auto_increment",
 		"id_auteur"		=> "bigint(21) NOT NULL",
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
         "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
@@ -68,7 +68,7 @@ function contacts_declarer_tables_principales($tables_principales){
 
 	//-- Table contacts ------------------------------------------
 	$contacts = array(
-		"id_contact"	=> "bigint(21) NOT NULL", 
+		"id_contact"	=> "bigint(21) NOT NULL auto_increment", 
 		"id_auteur"		=> "bigint(21) NOT NULL",
 		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
