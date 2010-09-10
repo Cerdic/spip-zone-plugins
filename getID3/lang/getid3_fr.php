@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// E
+	'explication_cover_defaut' => '&Agrave; la mise en ligne de fichiers sonores, une vignette par d&eacute;faut (URL &agrave; mettre ci-dessous) est associ&eacute;e au fichier son. Si l\'option de r&eacute;&eacute;criture des tags &agrave; la modification du logoest activ&eacute;e, la pochette des tags id3 sera &eacute;galement mise &agrave; jour.',
+
 	// F
 	'formulaire_modifier_id3' => 'Modifier les m&eacute;tadonn&eacute;es de :',
 
@@ -51,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_artist' => 'Artiste',
 	'label_comment' => 'Commentaire',
 	'label_cover' => 'Pochette',
+	'label_cover_defaut' => 'Utiliser une pochette par d&eacute;faut',
 	'label_genre' => 'Genre',
 	'label_reecriture_tags' => 'R&eacute;&eacute;crire les tags des fichiers &agrave la modification :',
 	'label_reecriture_tags_descriptif' => 'de la description du document',
@@ -65,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_document_distant_ecriture' => 'Ce document est &laquo;distant&raquo; et ne peut donc pas &ecirc;tre modifi&eacute;.',
 	'message_extension_invalide_ecriture' => 'Le format de ce fichier n\'est pas pris en charge.',
 	'message_fichier_maj' => 'Le fichier a &eacute;t&eacute; mis &agrave; jour.',
+	'message_valider_cover_defaut' => 'Validez le formulaire pour associer la pochette par d&eacute;faut',
 	
 	// S
 	'son_infos_techniques' => 'Infos techniques',

@@ -15,6 +15,7 @@
  */
 function formulaires_editer_id3_charger($id){
 	$valeurs = array();
+	$config_id3 = lire_config('getid3',array());
 	$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id));
 	
 	if(!in_array($infos_doc['extension'],array('mp3'))){
@@ -44,6 +45,11 @@ function formulaires_editer_id3_charger($id){
 			}else{
 				$valeurs[$valeur] = filtrer_entites($info);
 			}
+		}
+		if(!count($valeurs['covers']) && (strlen($config_id3['cover_defaut']) > 0)){
+			$valeurs['covers'][] = $config_id3['cover_defaut'];
+			$valeurs['_hidden'] .= "<input type='hidden' name='old_cover' id='old_cover' value='".$config_id3['cover_defaut']."' />";
+			$valeurs['message_cover_defaut'] = _T('getid3:message_valider_cover_defaut');
 		}
 		$valeurs['id_document'] = $id;
 	}

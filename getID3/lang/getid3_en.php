@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// E
+	'explication_cover_defaut' => 'At the upload of audio files, a default thumbnail (see input URL below) is associated to the sound file. If the option to rewrite tags when the logo is changed is activated, the id3 artwork tags will also be updated.',
+
 	// F
 	'formulaire_modifier_id3' => 'Edit metadatas of :',
 
@@ -51,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_artist' => 'Artist',
 	'label_comment' => 'Comment',
 	'label_cover' => 'Cover',
+	'label_cover_defaut' => 'Use a default cover',
 	'label_genre' => 'Genre',
 	'label_reecriture_tags' => 'Rewrite file tags after editing :',
 	'label_reecriture_tags_descriptif' => 'the description of the document',
@@ -65,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_document_distant_ecriture' => 'This is a &laquo;remote&raquo; document which can not be changed.',
 	'message_extension_invalide_ecriture' => 'The format of this file is not supported.',
 	'message_fichier_maj' => 'The file has been updated.',
+	'message_valider_cover_defaut' => 'Submit the form to use the default cover',
 
 	// S
 	'son_infos_techniques' => 'Technical informations',

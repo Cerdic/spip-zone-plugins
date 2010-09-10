@@ -71,6 +71,24 @@ function inc_getid3_recuperer_infos($id_document){
 		foreach($covers as $fichier){
 			supprimer_fichier($fichier);
 		}
+	}else if(strlen($cover_defaut = lire_config('getid3/cover_defaut','')) > 1){
+		/**
+		 * Si on n'a pas de cover,
+		 * On ajoute la cover par défaut si elle existe comme vignette de document et
+		 * comme cover du fichier
+		 */
+		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+	
+		if(($id_vignette == 0)){
+			include_spip('inc/documents');
+			include_spip('inc/distant');
+			$cover_defaut = find_in_path(copie_locale($cover_defaut));
+			$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+
+			list($extension,$arg) = fixer_extension_document($cover_defaut);
+			$x = $ajouter_documents($cover_defaut, $cover_defaut,
+					    $type, $id, 'vignette', $id_document, $actifs);
+		}
 	}
 	sql_updateq('spip_documents',
 		array(

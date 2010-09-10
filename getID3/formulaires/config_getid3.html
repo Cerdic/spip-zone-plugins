@@ -29,6 +29,12 @@
 					<label for="reecriture_tags_logo"><:getid3:label_reecriture_tags_logo:></label>
 				</div>
 			</li>
+			<li class="editer_cover_defaut">
+				<label><:getid3:label_cover_defaut:></label>
+				[<div>(#ENV{cover_defaut}|image_reduire{150,150})</div>]
+				<p class="explication"><:getid3:explication_cover_defaut:></p>
+				<input type="text" name="cover_defaut" id="cover_defaut" value="#ENV{cover_defaut}" class="text" />
+			</li>
 		</ul>
 	</li>
 </ul>
