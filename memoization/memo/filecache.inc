@@ -23,9 +23,9 @@ class CacheBackend_filecache extends CacheBackend {
 		}
 	
 		# Normal PHP
-		if (!is_dir(_DIR_TMP_XCACHE))
-			@mkdir(_DIR_TMP_XCACHE);
-		if (!is_dir($sub = _DIR_TMP_XCACHE.$d))
+		if (!is_dir(_DIR_TMP._DIR_FILECACHE))
+			@mkdir(_DIR_TMP._DIR_FILECACHE);
+		if (!is_dir($sub = _DIR_TMP._DIR_FILECACHE.$d))
 			@mkdir($sub);
 		return $sub.'/'.$u;
 	}
