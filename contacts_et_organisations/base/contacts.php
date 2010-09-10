@@ -57,7 +57,7 @@ function contacts_declarer_tables_principales($tables_principales){
 		);
 	$organisations_key = array(
 		"PRIMARY KEY"	=> "id_organisation",
-		"KEY id_auteur" => "id_auteur"
+		"UNIQUE KEY id_auteur" => "id_auteur"
 		);
 	$organisations_join = array(
 		"id_auteur" => "id_auteur",
@@ -80,7 +80,7 @@ function contacts_declarer_tables_principales($tables_principales){
 		);
 	$contacts_key = array(
 		"PRIMARY KEY"	=> "id_contact",
-		"KEY id_auteur" => "id_auteur"
+		"UNIQUE KEY id_auteur" => "id_auteur"
 		);
 	$contacts_join = array(
 		"id_auteur" => "id_auteur",
