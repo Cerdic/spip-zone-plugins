@@ -1,7 +1,7 @@
 <!-- titre=<:getid3:titre_getid3:> -->
 <!-- icone=images/id3v2-24.png -->
 <!-- logo=images/id3v2.png -->
-
+<!-- descriptif=[(#AUTORISER{webmestre}|oui)[(#CONFIG{getid3/cover_defaut}|strlen|>{1}|oui)[(#VAL{modifs}|_request|oui)#SET{modifs,#VAL{modifs}|_request}<div class="formulaire_spip"><p class="reponse_formulaire reponse_formulaire_ok">[(#GET{modifs}|singulier_ou_pluriel{<:getid3:message_cover_defaut_modifiee:>,<:getid3:message_cover_defaut_modifiees:>})]</p></div>][(#GET{modifs}|non)[(#BOUTON_ACTION{<:getid3:bouton_appliquer_cover_defaut:>,[(#URL_ACTION_AUTEUR{getid3_appliquer_cover_defaut,'',#SELF})],'',<:getid3:message_validation_appliquer_cover:>})]]]] -->
 #CACHE{0}
 <div class="ajax">
 #FORMULAIRE_CONFIG_GETID3

@@ -49,7 +49,7 @@
 				</BOUCLE_covers>
 			</div>
 			<label for='cover'><:getid3:label_cover:></label>[
-			<span class='erreur_message'>(#ENV{message_cover_defaut})</span>][
+			<span class='erreur_message'>(#ENV{message_cover_defaut}|filtrer_entites)</span>][
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cover})</span>
 			]<input class='file' type="file" name="cover" value='#ENV{cover}' id="cover" size='14' />
 		</li>

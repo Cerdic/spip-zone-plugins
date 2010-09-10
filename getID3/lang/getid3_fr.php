@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// B
+	'bouton_appliquer_cover_defaut' => 'Appliquer la pochette par d&eacute;faut &agrave; tous les documents sonores sans vignette',
+
 	// E
 	'explication_cover_defaut' => '&Agrave; la mise en ligne de fichiers sonores, une vignette par d&eacute;faut (URL &agrave; mettre ci-dessous) est associ&eacute;e au fichier son. Si l\'option de r&eacute;&eacute;criture des tags &agrave; la modification du logoest activ&eacute;e, la pochette des tags id3 sera &eacute;galement mise &agrave; jour.',
 
@@ -56,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cover' => 'Pochette',
 	'label_cover_defaut' => 'Utiliser une pochette par d&eacute;faut',
 	'label_genre' => 'Genre',
-	'label_reecriture_tags' => 'R&eacute;&eacute;crire les tags des fichiers &agrave la modification :',
+	'label_reecriture_tags' => 'R&eacute;&eacute;crire les tags des fichiers &agrave; la modification',
 	'label_reecriture_tags_descriptif' => 'de la description du document',
 	'label_reecriture_tags_logo' => 'du logo du document',
 	'label_reecriture_tags_titre' => 'du titre du document',
@@ -66,9 +69,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_modifier_id3' => 'Modifier les tags ID3',
 
 	// M
+	'message_cover_defaut_modifiee' => 'Un document a &eacute;t&eacute; modifi&eacute;',
+	'message_cover_defaut_modifiees' => '@nb@ documents ont &eacute;t&eacute; modifi&eacute;s',
 	'message_erreur_document_distant_ecriture' => 'Ce document est &laquo;distant&raquo; et ne peut donc pas &ecirc;tre modifi&eacute;.',
 	'message_extension_invalide_ecriture' => 'Le format de ce fichier n\'est pas pris en charge.',
 	'message_fichier_maj' => 'Le fichier a &eacute;t&eacute; mis &agrave; jour.',
+	'message_validation_appliquer_cover' => 'Cette action est d&eacute;finitive. Il n\'est pas possible de revenir en arri&egrave;re par la suite.',
 	'message_valider_cover_defaut' => 'Validez le formulaire pour associer la pochette par d&eacute;faut',
 	
 	// S

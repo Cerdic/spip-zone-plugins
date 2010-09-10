@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// B
+	'bouton_appliquer_cover_defaut' => 'Apply the default cover to all sound documents without any logo',
+
 	// E
 	'explication_cover_defaut' => 'At the upload of audio files, a default thumbnail (see input URL below) is associated to the sound file. If the option to rewrite tags when the logo is changed is activated, the id3 artwork tags will also be updated.',
 
@@ -66,9 +69,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_modifier_id3' => 'Edit the ID3 tags',
 	
 	// M
+	'message_cover_defaut_modifiee' => 'One document has been updated',
+	'message_cover_defaut_modifiees' => '@nb@ documents have been updated',
 	'message_erreur_document_distant_ecriture' => 'This is a &laquo;remote&raquo; document which can not be changed.',
 	'message_extension_invalide_ecriture' => 'The format of this file is not supported.',
 	'message_fichier_maj' => 'The file has been updated.',
+	'message_validation_appliquer_cover' => 'This action is definitive. It won\'t be possible to go back later.',
 	'message_valider_cover_defaut' => 'Submit the form to use the default cover',
 
 	// S
