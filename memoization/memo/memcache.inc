@@ -7,6 +7,7 @@
 
 class CacheBackend_xcache extends CacheBackend {
 	var $memcache = null;
+	var $ok = false;
 
 	function init($params=null) {
 		foreach(cfg_memcache_servers() as $server) {
@@ -16,9 +17,11 @@ class CacheBackend_xcache extends CacheBackend {
 			else
 				@memcache_add_server($this->memcache, $host, $port);
 		}
+		if ($this->memcache) $this->ok = true;
 	}
 
 	function get($key) {
+		if (!$this->ok) return null;
 		$a = memcache_get($this->memcache, _CACHE_NAMESPACE.$key);
 		// maybe_unserialize
 		if (is_array($a))
@@ -28,6 +31,7 @@ class CacheBackend_xcache extends CacheBackend {
 	}
 	
 	function set($key, $value, $ttl=null) {
+		if (!$this->ok) return null;
 		// maybe_serialize
 		if (is_object($value) OR is_array($value) OR is_null($value))
 			$value = array(serialize($value));
@@ -38,15 +42,18 @@ class CacheBackend_xcache extends CacheBackend {
 	}
 	
 	function test($key) {
+		if (!$this->ok) return null;
 		return memcache_get($this->memcache, _CACHE_NAMESPACE.$key) !== FALSE;
 	}
 	
 	function del($key) {
+		if (!$this->ok) return null;
 		return memcache_delete($this->memcache, _CACHE_NAMESPACE.$key);
 	}
 	
 	function inc($key, $value=null, $ttl=null) {
-	
+		if (!$this->ok) return null;
+
 		// set if not exists
 		memcache_add($this->memcache, _CACHE_NAMESPACE.$key, 0, $ttl);
 	
@@ -56,6 +63,8 @@ class CacheBackend_xcache extends CacheBackend {
 	}
 	
 	function dec($key, $value=null, $ttl=null) {
+		if (!$this->ok) return null;
+
 		// set if not exists
 		memcache_add($this->memcache, _CACHE_NAMESPACE.$key, 0, $ttl);
 	
@@ -67,6 +76,8 @@ class CacheBackend_xcache extends CacheBackend {
 	function lock($key, /* private */ $unlock = false) {
 		static $locks = array();
 	
+		if (!$this->ok) return null;
+
 		/* unlock */
 		if ($unlock) {
 			unset($locks[$key]);
@@ -101,6 +112,7 @@ class CacheBackend_xcache extends CacheBackend {
 	}
 	
 	function unlock($key) {
+		if (!$this->ok) return null;
 		cache_lock($key, true);
 	}
 
