@@ -4,11 +4,14 @@ function zippeur_upgrade($nom_meta_base_version,$version_cible){
 	 $current_version = 0.0;
 	 if ( (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
                         || (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-                include_spip('zippeur_pipelines');
+                include_spip('base/create');
                 if (version_compare($current_version,"0.1","<")){
-                        include_spip('base/create');
                         creer_base();
                         ecrire_meta($nom_meta_base_version,$current_version="0.1");
+                }
+                if (version_compare($current_version,"0.2","<")){
+                        maj_tables('spip_zippeur');
+                        ecrire_meta($nom_meta_base_version,$current_version="0.2");
                 }
                 ecrire_metas();
         }
