@@ -97,7 +97,7 @@ function cache_valide(&$page, $date) {
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
 // http://doc.spip.org/@creer_cache
-function creer_cache(&$page, &$chemin_cache) {
+function creer_cache(&$page, &$chemin_cache, &$memo) {
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
@@ -114,13 +114,13 @@ function creer_cache(&$page, &$chemin_cache) {
 		// on verifie que le contenu du chemin cache indique seulement
 		// "cache sessionne" ; sa date indique la date de validite
 		// des caches sessionnes
-		if (!is_array($tmp = cache_get($chemin_cache))) {
-			spip_log('Creation cache sessionne '._MEMOIZE.' '.$chemin_cache);
+		if (!is_array($tmp = $memo->get($chemin_cache))) {
+			spip_log('Creation cache sessionne '.$memo->methode.' '.$chemin_cache);
 			$tmp = array(
 				'invalideurs' => array('session' => ''),
 				'lastmodified' => $_SERVER['REQUEST_TIME']
 			);
-			cache_set($chemin_cache, $tmp);
+			$memo->set($chemin_cache, $tmp);
 		}
 		$chemin_cache .= '_'.$page['invalideurs']['session'];
 	}
@@ -142,7 +142,7 @@ function creer_cache(&$page, &$chemin_cache) {
 	// memoizer...
 	// on ajoute une heure histoire de pouvoir tourner
 	// sur le cache quand la base de donnees est plantee (a tester)
-	$ok = cache_set($chemin_cache, $page, 3600+$page['entetes']['X-Spip-Cache']);
+	$ok = $memo->set($chemin_cache, $page, 3600+$page['entetes']['X-Spip-Cache']);
 
 	// retablir le texte pour l'afficher
 	if (isset($z)) {
@@ -191,9 +191,14 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 
 // http://doc.spip.org/@public_cacher_dist
 function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
+	static $memo;
+	if (!isset($memo)) {
+		$cfg = @unserialize($GLOBALS['meta']['memoization']);
+		$memo = new Cache($cfg['pages'] ? $cfg['pages'] : $cfg['methode']);
+	}
 
 	// Second appel, destine a l'enregistrement du cache sur le disque
-	if (isset($chemin_cache)) return creer_cache($page, $chemin_cache);
+	if (isset($chemin_cache)) return creer_cache($page, $chemin_cache, $memo);
 
 	// Toute la suite correspond au premier appel
 	$contexte_implicite = $page['contexte_implicite'];
@@ -218,14 +223,14 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 	$lastmodified = 0;
 
 	// charger le cache s'il existe
-	if (!is_array($page = cache_get($chemin_cache)))
+	if (!is_array($page = $memo->get($chemin_cache)))
 		$page = array();
 
 	// s'il est sessionne, charger celui correspondant a notre session
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
 		$chemin_cache_session = $chemin_cache . '_' . spip_session();
-		if (is_array($page_session = cache_get($chemin_cache_session))
+		if (is_array($page_session = $memo->get($chemin_cache_session))
 		AND $page_session['lastmodified'] >= $page['lastmodified'])
 			$page = $page_session;
 		else
@@ -255,9 +260,9 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 		$page = array('contexte_implicite'=>$contexte_implicite); // ignorer le cache deja lu
 		include_spip('inc/invalideur');
 		retire_caches($chemin_cache); # API invalideur inutile
-		cache_unset($chemin_cache);
+		$memo->del($chemin_cache);
 		if ($chemin_cache_session)
-			cache_unset($chemin_cache_session);
+			$memo->del($chemin_cache_session);
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})

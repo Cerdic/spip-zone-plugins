@@ -88,9 +88,11 @@ Serveur(s) memcache&#160;:
 <label for="pages">G&#233;rer le cache des pages</label>
 
 <select name="pages" id="pages">
-	<option value="">Par m&#233;moization</option>
+	<option value="">Par la m&#233;moization d&#233;finie ci-dessus</option>
+	<option value="filecache"[
+		selected="(#ENV{pages}|=={filecache}|?{selected})"]>Par la m&#233;moization filecache</option>
 	<option value="file"[
-		selected="(#ENV{pages}|=={file}|?{selected})"]>Par fichiers classiques dans [(#EVAL{_DIR_CACHE}|joli_repertoire)]</option>
+		selected="(#ENV{pages}|=={file}|?{selected})"]>Ancienne m&#233;thode du core</option>
 </select>
 
 
