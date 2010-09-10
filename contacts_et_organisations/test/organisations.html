@@ -1,0 +1,44 @@
+[(#REM)
+	Page de test du plugin C&O
+	Test de la table des organisations; liaison avec contacts;
+]
+
+
+<B_o>
+#PAGINATION
+
+<table class="spip" summary="<:contacts:liste_organisations:>" width="100%">
+	<thead>
+	<tr>
+		<th>Nom</th>
+		<th>Activité</th>
+		<th>Descriptif</th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_o(ORGANISATIONS){par nom}{pagination}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+		<td>#NOM</td>
+		<td>#ACTIVITE</td>
+		<td>#DESCRIPTIF</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<B_c>
+			<table summary="Contacts de #NOM" class="spip" width="100%">
+			<BOUCLE_c(CONTACTS){id_organisation}>
+			<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+				<td>#NOM</td>
+				<td>#PRENOM</td>
+			</tr>
+			</BOUCLE_c>
+			</table>
+			</B_c>
+		</td>
+	</tr>
+</BOUCLE_o>
+	</tbody>
+</table>
+
+#PAGINATION
+</B_o>

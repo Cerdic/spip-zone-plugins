@@ -64,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_organisation' => "Lier une organisation",
 	'lier_ce_contact' => "Lier ce contact",
 	'lier_cette_organisation' => "Lier cette organisation",
+	'liste_contacts' => 'Liste les contacts de la base',
+	'liste_organisations' => 'Liste les organisations de la base',
 
 	// O
 	'organisations' => 'Organisations',
