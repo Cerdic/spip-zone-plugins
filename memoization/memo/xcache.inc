@@ -71,7 +71,7 @@ class CacheBackend_xcache extends CacheBackend {
 			# ... puis on le pose
 			if ($this->inc('lock::'.$key, 1, _LOCK_MAX) <= 1) {
 				$locks[$key] = true;
-				register_shutdown_function($this->unlock, $key);
+				register_shutdown_function(array($this,'unlock'), $key);
 				return true;
 			}
 	
@@ -80,7 +80,7 @@ class CacheBackend_xcache extends CacheBackend {
 	}
 	
 	function unlock($key) {
-		cache_lock($key, true);
+		$this->lock($key, true);
 	}
 	
 }
