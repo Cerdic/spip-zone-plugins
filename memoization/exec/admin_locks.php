@@ -4,8 +4,6 @@ header('Content-Type: text/plain');
 
 echo time()."\n";
 
-var_dump(_MEMOIZE);
-
 echo "lock::you=".var_export(cache_get('lock::test'), 1).";\n";
 echo "test=".var_export(cache_get('test'), 1).";\n";
 

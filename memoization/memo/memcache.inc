@@ -103,7 +103,7 @@ class CacheBackend_memcache extends CacheBackend {
 			if ($this->inc('lock::'.$key, 1, _LOCK_MAX) <= 1) {
 				$this->set('lock::'.$key, 2, _LOCK_MAX);
 				$locks[$key] = true;
-				register_shutdown_function($this->unlock, $key);
+				register_shutdown_function(array($this,'unlock'), $key);
 				return true;
 			}
 	
@@ -113,7 +113,7 @@ class CacheBackend_memcache extends CacheBackend {
 	
 	function unlock($key) {
 		if (!$this->ok) return null;
-		cache_lock($key, true);
+		$this->lock($key, true);
 	}
 
 }
