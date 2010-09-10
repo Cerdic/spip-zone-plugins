@@ -141,8 +141,8 @@ function getid3_post_edition($flux){
  * @return array
  */
 function getid3_document_desc_actions($flux){
-	$distant = sql_getfetsel('distant','spip_documents','id_document='.intval($flux['args']['id_document']));
-	if($distant == 'non'){
+	$infos = sql_fetsel('distant,extension','spip_documents','id_document='.intval($flux['args']['id_document']));
+	if(($infos['distant'] == 'non') && in_array($infos['extension'],array('mp3'))){
 		$redirect = self();
 		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.$flux['args']['id_document']),'redirect',$redirect);
 		$texte = _T('getid3:lien_modifier_id3');
