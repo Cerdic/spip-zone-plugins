@@ -34,13 +34,12 @@ function inc_getid3_recuperer_infos($id_document){
 		$document['titre'] = preg_replace('/_/',' ',$titre);
 	}
 
-	if($document['descriptif'] == ''){
-		if($id3['comments']){
+	if(($document['descriptif'] == '') && $id3['comments']){
+		/**
+		 * Ne pas prendre les comments foireux d'itunes
+		 */
+		if(!preg_match('/0000[a-b|0-9]{4}/',$id3['comments']))
 			$document['descriptif'] = utf8_encode($id3['comments']);
-		}
-		else{
-			$document['descriptif'] = utf8_encode($id3['genre']);
-		}
 	}
 
 	/**
