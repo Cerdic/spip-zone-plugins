@@ -56,7 +56,7 @@ function couteau_suisse_header_prive($flux_){
 	global $cs_metas_pipelines;
 	$flux = '';
 	if(isset($cs_metas_pipelines['header_prive'])) eval($cs_metas_pipelines['header_prive']);
-	cs_compile_header($flux);
+	cs_compile_header($flux,'css', false); cs_compile_header($flux,'js');
 	return $flux_ . $flux;
 }
 
@@ -65,12 +65,25 @@ function couteau_suisse_header_prive($flux_){
  * PUBLIC *
  **********/
 
+function couteau_suisse_insert_head_css($flux_ = '', $prive = false){
+	static $done = false;
+	if($done) return $flux_;
+	$done = true;
+	global $cs_metas_pipelines;
+	$flux = '';
+	if(isset($cs_metas_pipelines['insert_head_css'])) eval($cs_metas_pipelines['insert_head_css']);
+	cs_compile_header($flux, 'css');
+	return $flux_ . $flux;
+}
+
 function couteau_suisse_insert_head($flux_){
 	global $cs_metas_pipelines;
 	$flux = '';
 	if(isset($cs_metas_pipelines['insert_head'])) eval($cs_metas_pipelines['insert_head']);
-	cs_compile_header($flux);
-	return $flux_ . $flux;
+	cs_compile_header($flux,'js');
+	return $flux_ 
+		. couteau_suisse_insert_head_css() // en cas d'absence de balise #INSERT_HEAD_CSS
+		. $flux;
 }
 
 function couteau_suisse_affichage_final($flux){
@@ -207,23 +220,24 @@ if(defined('_LOG_CS')) cs_log(" -- compilation d'un header. Code CSS : ".couper(
 }
 
 // recherche et compilation par SPIP du contenu d'un fichier .html : <cs_html>contenu</cs_html>
-function cs_compile_header(&$flux) {
+// $type = 'css' ou 'js'
+function cs_compile_header(&$flux, $type, $rem=true) {
 //if(defined('_LOG_CS')) cs_log(" -- recherche de compilations necessaires du header.");
 	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['header'])) {
-		$header = &$cs_metas_pipelines['header'];
+	$type = 'header_'.$type;
+	if(isset($cs_metas_pipelines[$type])) {
+		$header = &$cs_metas_pipelines[$type];
 		if(strpos($header, '<cs_html>')!==false) {
 			$header = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $header);
 			// sauvegarde en metas
 			ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
 			ecrire_metas();
-			ecrire_fichier(_DIR_CS_TMP.'header.html', "<!-- Configuration de controle pour le plugin 'Couteau Suisse' -->\n\n$header");
+			ecrire_fichier(_DIR_CS_TMP.$type.'.html', "<!-- Configuration de controle pour le plugin 'Couteau Suisse' -->\n\n$header");
 		}
 		$flux .= $header;
 	}
-	$flux = strlen(trim($flux))
-		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
-		:"\n<!-- Rien dans les metas du Couteau Suisse -->\n\n";
+	if($rem) $flux = strlen(trim($flux))
+		?"\n<!-- Debut CS -->\n$flux\n<!-- Fin CS -->\n\n":"\n<!-- CS vide -->\n\n";
 
 }
 

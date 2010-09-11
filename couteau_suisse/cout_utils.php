@@ -352,9 +352,9 @@ function cs_initialise_includes($count_metas_outils) {
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
 			// TODO : librairies distantes placees dans lib/
 			foreach(array('css', 'js') as $f) {
-				if($file=find_in_path("outils/$inc.$f")) $cs_metas_pipelines['header'][] = cs_insert_header($file, $f);
+				if($file=find_in_path("outils/$inc.$f")) $cs_metas_pipelines['header_'.$f][] = cs_insert_header($file, $f);
 /*				if(isset($outil['distant_'.$type]) && (file=find_in_path("lib/$inc/distant_{$f}_".basename($outil["distant_$f"]))))
-					$cs_metas_pipelines['header'][] = cs_insert_header($file, $f);
+					$cs_metas_pipelines['header_'.$f][] = cs_insert_header($file, $f);
 */			}
 			// en fait on peut pas compiler ici car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
 			// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
@@ -404,7 +404,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		if(function_exists('compacte_css')) $temp_css = compacte_css($temp_css);
 		$temp = array("<style type=\"text/css\">\n$temp_css\n</style>");
 		unset($temp_css);
-		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
+		$cs_metas_pipelines['header_css'] = is_array($cs_metas_pipelines['header_css'])?array_merge($temp, $cs_metas_pipelines['header_css']):$temp;
 	}
 	if(count($temp_jq_init)) {
 		$temp_js[] = "var cs_init = function() {\n\t".join("\n\t", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
@@ -422,10 +422,11 @@ var cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;
 jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
 $temp_js\n// --></script>\n");
 		unset($temp_js);
-		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
+		$cs_metas_pipelines['header_js'] = is_array($cs_metas_pipelines['header_js'])?array_merge($temp, $cs_metas_pipelines['header_js']):$temp;
 	}
 	// join final...
-	if(is_array($cs_metas_pipelines['header']))	$cs_metas_pipelines['header'] = join("\n", $cs_metas_pipelines['header']);
+	foreach(array('header_css', 'header_js') as $f)
+		if(is_array($cs_metas_pipelines[$f])) $cs_metas_pipelines[$f] = join("\n", $cs_metas_pipelines[$f]);
 	// SPIP 2.0 ajoute les parametres "TYPO" et $connect aux fonctions typo() et propre()
 	$liste_pivots = defined('_SPIP19300')
 		?array(
@@ -487,9 +488,8 @@ $temp_js\n// --></script>\n");
 	ecrire_fichier_en_tmp($infos_fichiers, 'spip_options');
 	ecrire_fichier_en_tmp($infos_fichiers, 'options');
 	ecrire_fichier_en_tmp($infos_fichiers, 'fonctions');
-	// installation de cs_metas_pipelines[] et ecriture du fichier de controle
+	// installation de cs_metas_pipelines[]
 	set_cs_metas_pipelines($infos_pipelines);
-	ecrire_fichier(_DIR_CS_TMP.'header.html', "<!-- Configuration de controle pour le plugin 'Couteau Suisse' -->\n\n$cs_metas_pipelines[header]");
 }
 
 function cs_fermer_parentheses($expr) {
