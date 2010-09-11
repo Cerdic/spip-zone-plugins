@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configurer les crayons', # NEW
-	'titre_crayons' => 'Les Crayons', # NEW
+	'titre_crayons' => 'Crayons', # NEW
 
 	// U
 	'update_impossible' => '&#6016;&#6070;&#6042;&#6036;&#6035;&#6098;&#6033;&#6070;&#6035;&#6091;&#6047;&#6040;&#6096;&#6041; &#6036;&#6070;&#6035;&#6036;&#6042;&#6070;&#6023;&#6096;&#6041;&#6100;',

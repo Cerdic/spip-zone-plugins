@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Anul&middot;lar',
 
 	// B
-	'bouton_supprimer' => 'Supprimer', # NEW
+	'bouton_supprimer' => 'Suprimir',
 
 	// D
 	'deja_modifie' => 'Ja modificat',
@@ -41,12 +41,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si no hi ha canvi',
 	'label_reduire_logo' => 'Reduir els logotips',
 	'label_yellow_fade' => 'Sense inter&egrave;s',
-	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
-	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
+	'legend_controleur_logo' => 'Escollir un logotip:',
+	'legend_controleur_vignette' => 'Escollir una vinyeta:',
 	'legend_editer_prive' => 'Editar l\'espai privat (experimental)',
 
 	// M
-	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
+	'message_image_obligatoire' => 'Cal escollir una imatge',
 	'messages' => 'Missatges',
 	'modifie_par_ailleurs' => 'Modificat per altres raons',
 

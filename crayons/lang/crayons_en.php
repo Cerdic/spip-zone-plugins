@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Cancel',
 
 	// B
-	'bouton_supprimer' => 'Supprimer', # NEW
+	'bouton_supprimer' => 'Delete',
 
 	// D
 	'deja_modifie' => 'Already modified',
@@ -42,12 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'If no change made',
 	'label_reduire_logo' => 'Reduce logos',
 	'label_yellow_fade' => 'Fade',
-	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
-	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
+	'legend_controleur_logo' => 'Choose a logo:',
+	'legend_controleur_vignette' => 'Choose a thumbnail:',
 	'legend_editer_prive' => 'Use in editing area (experimental)',
 
 	// M
-	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
+	'message_image_obligatoire' => 'You need to choose an image',
 	'messages' => 'Messages',
 	'modifie_par_ailleurs' => 'Was modified elsewhere in the meantime',
 
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configure &laquo;crayons&raquo;',
-	'titre_crayons' => 'Les Crayons', # NEW
+	'titre_crayons' => 'Crayons',
 
 	// U
 	'update_impossible' => 'The update did not succeed.',
