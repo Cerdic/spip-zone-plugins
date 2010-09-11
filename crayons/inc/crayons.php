@@ -17,7 +17,7 @@ define('_CRAYONS_TABLES_EXTERNES', true);
 // Autorisations non prevues par le core
 include_spip('inc/autoriser');
 
-include_spip('inc/json');
+include_spip('inc/crayons-json');
 
 // table spip_meta, non ; sauf quelques-uns qu'on teste autoriser(configurer)
 // Attention sur les SPIP < 11515 inc/autoriser passe seulement
@@ -127,7 +127,7 @@ function logo_revision($id, $file, $type, $ref) {
 
 	// Chargement d'un nouveau logo ?
 	if ($file['logo']) {
-		define('FILE_UPLOAD', true); // message pour json_export :(
+		define('FILE_UPLOAD', true); // message pour crayons_json_export :(
 
 		// supprimer l'ancien logo
 		$on = $chercher_logo($id, $_id_objet, 'on');
@@ -214,7 +214,7 @@ function document_fichier_revision($id, $data, $type, $ref) {
 		AND $s = spip_query("SELECT fichier, taille, largeur, hauteur $extension, distant FROM spip_documents
 			WHERE id_document="._q($id_new))
 		AND $new = sql_fetch($s)) {
-			define('FILE_UPLOAD', true); // message pour json_export :(
+			define('FILE_UPLOAD', true); // message pour crayons_json_export :(
 
 			// Une vignette doit rester une image
 			if ($t['mode'] == 'vignette'
@@ -442,7 +442,7 @@ function valeur_colonne_table($table, $col, $id) {
 }
 
 function return_log($var) {
-	die(json_export(array('$erreur'=> var_export($var,true))));
+	die(crayons_json_export(array('$erreur'=> var_export($var,true))));
 }
 
 function _U($texte, $params=array())

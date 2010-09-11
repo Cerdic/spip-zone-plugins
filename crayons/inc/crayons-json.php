@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 
 // http://doc.spip.org/@var2js
-function var2js($var) {
+function crayons_var2js($var) {
 	$asso = false;
 	switch (true) {
 		case is_null($var) :
@@ -46,14 +46,14 @@ function var2js($var) {
 			if ($asso) {
 				$ret = '{';
 				foreach ($var as $key => $elt) {
-					$ret .= $sep . '"' . $key . '":' . var2js($elt);
+					$ret .= $sep . '"' . $key . '":' . crayons_var2js($elt);
 					$sep = ',';
 				}
 				return $ret ."}";
 			} else {
 				$ret = '[';
 				foreach ($var as $elt) {
-					$ret .= $sep . var2js($elt);
+					$ret .= $sep . crayons_var2js($elt);
 					$sep = ',';
 				}
 				return $ret ."]";
@@ -63,12 +63,12 @@ function var2js($var) {
 }
 
 // Un json_encode qui marche en iso (la spec JSON exige utf-8)
-function safe_json_encode($v) {
+function crayons_json_encode($v) {
 	if ($GLOBALS['charset'] == 'utf-8'
 	AND function_exists('json_encode'))
 		return json_encode($v);
 
-	$v = var2js($v);
+	$v = crayons_var2js($v);
 
 	if ($GLOBALS['charset'] != 'utf-8') {
 		include_spip('inc/charsets');
@@ -79,7 +79,7 @@ function safe_json_encode($v) {
 }
 
 // http://doc.spip.org/@json_export
-function json_export($var) {
+function crayons_json_export($var) {
 	$var = json_encode($var);
 
 	// flag indiquant qu'on est en iframe et qu'il faut proteger nos

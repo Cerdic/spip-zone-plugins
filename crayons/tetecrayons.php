@@ -89,7 +89,7 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 	include_spip('inc/filtres'); // rien que pour direction_css() :(
 	$cssFile = direction_css(find_in_path('crayons.css'));
 
-	$config = var2js(array(
+	$config = crayons_var2js(array(
 		'imgPath' => dirname(find_in_path('images/crayon.png')),
 		'droits' => $droits,
 		'dir_racine' => _DIR_RACINE,

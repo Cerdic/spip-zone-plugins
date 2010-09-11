@@ -384,7 +384,7 @@ function action_crayons_html_dist() {
 	if (!_request('type') OR _request('type') == 'crayon')
 	  $return['$html'] = crayons_formulaire($return['$html']);
 
-	$json = trim(safe_json_encode($return));
+	$json = trim(crayons_json_encode($return));
 
 	header("Content-Type: text/plain; charset=utf-8");
 	die($json);
