@@ -1,10 +1,10 @@
 [(#REM) Placeholder and static img ]
-<div id="flattr"></div>
+<div id="flattr-#ENV{buttonid}"></div>
 
 [(#REM) recuperer les donnees ]
 <script type="text/javascript">
-function flattr_init() {
-	$('#flattr')
+function flattr_init#ENV{buttonid}() {
+	$('#flattr-#ENV{buttonid}')
 	.one('mouseover', function() {
 		FlattrLoader.render(
 		/* Configuration */
@@ -19,19 +19,19 @@ function flattr_init() {
 		description: "[(#ENV{description}|replace{\n,' '}|texte_backend)]",
 		category: "[(#ENV{category,#CONFIG{flattr/category,text}}|texte_backend)]",
 		},
-		/* id */ 'flattr',
+		/* id */ 'img-flattr-#ENV{buttonid}',
 		/* method */ 'replace');
 	});
 }
 
 // Inserer l'image si on a js (sinon, pas de flattr)
-$('#flattr')
-.html('<img src="#CHEMIN{images/flattr-#CONFIG{flattr/button,default}.png}" alt="Flattr" \/>');
+$('#flattr-#ENV{buttonid}')
+.html('<img src="#CHEMIN{images/flattr-#CONFIG{flattr/button,default}.png}" alt="Flattr" id="img-flattr-#ENV{buttonid}"\/>');
 
 // charger le script s'il n'est pas deja dans le inc-head
 if (typeof FlattrLoader != 'object')
-	$.getScript('#CHEMIN{js/flattr-load-0.6.js}', flattr_init);
+	$.getScript('#CHEMIN{js/flattr-load-0.6.js}', flattr_init#ENV{buttonid});
 else
-	flattr_init();
+	flattr_init#ENV{buttonid}();
 
 </script>

@@ -1,0 +1,11 @@
+[(#REM)
+
+	Flattr pour la page d'accueil de Mon site SPIP
+
+]
+[(#INCLUDE{fond=modeles/flattr,
+	url=[(#URL_SITE_SPIP|url_absolue)],
+	title=#NOM_SITE_SPIP,
+	description=[(#DESCRIPTIF_SITE_SPIP|PtoBR|sinon{#NOM_SITE_SPIP})],
+	buttonid=site0,
+})]
