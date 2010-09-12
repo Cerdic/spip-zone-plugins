@@ -1,0 +1,41 @@
+<plugin>
+	<nom>IECFG</nom>
+	<auteur>Joseph</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Importeur / Exporteur de configurations. Ce plugin permet d'exporter la configuration de SPIP et des plugins compatibles IECFG dans un seul et unique fichier au format YAML. Ces fichiers de configuration peuvent ensuite &ecirc;tre import&eacute;s.</description>
+	<lien></lien>
+	<icon>img/iecfg-128.png</icon>
+	<prefix>iecfg</prefix>
+	<options>iecfg_options.php</options>
+	<onglet id='iecfg_export' parent="iecfg">
+		<url>iecfg_export</url>
+		<titre>iecfg:titre_export</titre>
+		<icone>img/iecfg-export.png</icone>
+	</onglet>
+	<onglet id='iecfg_import' parent="iecfg">
+		<url>iecfg_import</url>
+		<titre>iecfg:titre_import</titre>
+		<icone>img/iecfg-import.png</icone>
+	</onglet>
+	<bouton id='iecfg' parent="configuration">
+		<url>iecfg_export</url>
+		<titre>iecfg:titre_iecfg</titre>
+		<icone>img/iecfg-24.png</icone>
+	</bouton>
+	<bouton id='bando_iecfg' parent="bando_administration">
+		<url>iecfg_export</url>
+		<titre>iecfg:titre_iecfg</titre>
+		<icone>images/iecfg-16.png</icone>
+	</bouton>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>iecfg_autoriser.php</inclure>
+	</pipeline>	
+	<categorie>maintenance</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.2)" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="saisies" version="[1.7.6;]" />
+	<necessite id="verifier" />
+</plugin>

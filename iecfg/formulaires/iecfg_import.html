@@ -1,0 +1,18 @@
+<div class="formulaire_spip formulaire_iecfg_import">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		#GENERER_SAISIES{#ENV{_saisies}}
+	</ul>
+	[<textarea name="_code_yaml" id="_code_yaml" style="display:none;">(#ENV{_code_yaml})</textarea>]
+	<p class="boutons">
+		[(#ENV{_code_yaml}|oui)
+		<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />
+		<input type="submit" class="submit" name="importer" value="<:iecfg:titre_import:>" />]
+		[(#ENV{_code_yaml}|non)
+		<input type="submit" class="submit" name="suivant" value="<:iecfg:titre_import:>" />]
+	</p>
+</div></form>
+</div>

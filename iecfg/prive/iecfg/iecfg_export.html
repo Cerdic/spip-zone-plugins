@@ -1,0 +1,11 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<h2><:iecfg:titre_export:></h2>
+	</div>
+	[(#AUTORISER{configurer,iecfg}|oui)
+		<div class="ajax">
+		#FORMULAIRE_IECFG_EXPORT
+		</div>
+	]
+</div>
+<div class="nettoyeur" />

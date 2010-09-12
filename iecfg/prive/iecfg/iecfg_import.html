@@ -1,0 +1,11 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<h2><:iecfg:titre_import:></h2>
+	</div>
+	[(#AUTORISER{configurer,iecfg}|oui)
+		<div class="ajax">
+		#FORMULAIRE_IECFG_IMPORT
+		</div>
+	]
+</div>
+<div class="nettoyeur" />
