@@ -3,8 +3,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-    // B
+    // A
     'add_to_cart' => 'Add to Cart',
+    //B
+    'buy' => 'Buy', 
 
     //C
     'cart_configuration' => 'Cart configuration',
