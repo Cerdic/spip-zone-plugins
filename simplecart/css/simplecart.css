@@ -95,9 +95,14 @@
     text-decoration:none;
 }
 
-.simpleCart_empy {
+.simpleCart_empty {
     float: right;
     font-size: 1.3em;
     padding:6px;
     text-decoration:none;
+}
+
+.simpleCart_clear {
+    clear:both;
+    margin-bottom:5px;
 }
