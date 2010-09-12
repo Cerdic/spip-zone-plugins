@@ -58,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     'items_in_cart' => 'You have @quantity@ items in your cart.', //<span class="simpleCart_quantity"></span>
 
+    //Y
+    'your_cart' => 'Your Cart',
     
 
     'total_in_cart' => 'Cart total: @total@',  //<div class="simpleCart_total"></div>
