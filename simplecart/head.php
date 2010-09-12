@@ -10,7 +10,7 @@ include_spip('inc/utils');
                         $js .= 'simpleCart.merchantId = "'. lire_config('simplecart/google_merchant_id') .'";';
             }
             if (lire_config('simplecart/cart_headers')) {
-                        $js .= 'simpleCart.cartHeaders = "'. lire_config('simplecart/cart_headers') .'";';
+                        $js .= 'simpleCart.cartHeaders = '. lire_config('simplecart/cart_headers') .' ;';
             }
             
             if (lire_config('simplecart/tax_rate')) {
