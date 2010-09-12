@@ -162,8 +162,7 @@ function formulaires_iecfg_export_traiter_dist() {
 	// On passe via le pipeline iecfg
 	$export = pipeline('iecfg',array(
 		'args' => array(
-			'action' => 'export',
-			'request' => $_POST
+			'action' => 'export'
 		),
 		'data' => $export
 	));

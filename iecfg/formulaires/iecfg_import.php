@@ -177,8 +177,7 @@ function formulaires_iecfg_import_traiter_dist() {
 		$message_erreur = pipeline('iecfg',array(
 			'args' => array(
 				'action' => 'import',
-				'config' => $config,
-				'request' => $_POST
+				'config' => $config
 			),
 			'data' => ''
 		));
@@ -186,7 +185,7 @@ function formulaires_iecfg_import_traiter_dist() {
 		if ($message_erreur!='')
 			return array('message_erreur' => $message_erreur);
 		else
-			return array('message_erreur' => _T('message_ok_import'));
+			return array('message_ok' => _T('iecfg:message_ok_import'));
 	}
 }
 
