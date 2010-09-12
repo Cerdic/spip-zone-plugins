@@ -17,23 +17,9 @@ function action_exporter_config_noizetier_dist(){
 	include_spip('inc/filtres');
 	$data['nom'] = $GLOBALS['meta']['nom_site'].' - '.affdate(date('Y-m-d'));
 	
-	// On calcule le tableau des noisettes
-	$data['noisettes'] = sql_allfetsel(
-		'type, composition, bloc, noisette, parametres',
-		'spip_noisettes',
-		'1',
-		'',
-		'type, composition, bloc, rang'
-	);
-	
-	// On remet au propre les parametres
-	foreach ($data['noisettes'] as $cle => $noisette)
-		$data['noisettes'][$cle]['parametres'] = unserialize($noisette['parametres']);
-	
-	// On récupère les compositions du noizetier
-	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
-	if (is_array($noizetier_compositions) AND count($noizetier_compositions)>0)
-		$data['noizetier_compositions'] = $noizetier_compositions;
+	// On ajoute les noisettes et les compos du noizetier
+	include_spip('inc/noizetier');
+	$data = array_merge($data,noizetier_tableau_export());
 	
 	// On encode en yaml
 	$export = yaml_encode($data);

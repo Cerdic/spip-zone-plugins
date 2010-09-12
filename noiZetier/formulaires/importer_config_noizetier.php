@@ -70,68 +70,14 @@ function formulaires_importer_config_noizetier_traiter(){
 	$ok = false;
 	if (autoriser('configurer', 'noizetier') AND _request('importer')){
 		$type_import = _request('type_import');
-		if (_request('import_compos'))
-			$import_compos = _request('import_compos');
-		else
-			$import_compos = 'non';
+		$import_compos = _request('import_compos');
 		$code_yaml = _request('code_yaml');
 		include_spip('inc/yaml');
 		$yaml = yaml_decode($code_yaml);
 		
-		// On s'occupe déjà des noisettes
-		$noisettes = $yaml['noisettes'];
-		include_spip('base/abstract_sql');
-		if (is_array($noisettes) AND count($noisettes)>0) {
-			$noisettes_insert = array();
-			$rang = 1;
-			$page = '';
-			if ($type_import=='remplacer')
-				sql_delete('spip_noisettes','1');
-			foreach($noisettes as $noisette) {
-				$type = $noisette['type'];
-				$composition = $noisette['composition'];
-				if ($type.'-'.$composition!=$page) {
-					$page = $type.'-'.$composition;
-					$rang = 1;
-					if ($type_import=='fusion')
-						$rang = sql_getfetsel('rang','spip_noisettes','type='.sql_quote($type).' AND composition='.sql_quote($composition),'','rang DESC') + 1;
-				}
-				else {
-					$rang = $rang + 1;
-				}
-				$noisette['rang']=$rang;
-				$noisette['parametres'] = serialize($noisette['parametres']);
-				$noisettes_insert[] = $noisette;
-			}
-			$ok = sql_insertq_multi('spip_noisettes',$noisettes_insert);
-		}
-		
-		// On s'occupe des compositions du noizetier
-		if ($import_compos=='oui') {
-			include_spip('inc/meta');
-			$compos_importees = $yaml['noizetier_compositions'];
-			if (is_array($compos_importees) AND count($compos_importees)>0){
-				if ($type_import=='remplacer')
-					effacer_meta('noizetier_compositions');
-				else 
-					$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
-				
-				if (!is_array($noizetier_compositions))
-					$noizetier_compositions = array();
-				
-				foreach($compos_importees as $type => $compos_type)
-					foreach($compos_type as $composition => $info_compo)
-						$noizetier_compositions[$type][$composition] = $info_compo;
-				
-				ecrire_meta('noizetier_compositions',serialize($noizetier_compositions));
-			}
-		}
-		
-		if ($ok)
+		include_spip('inc/noizetier');
+		if (noizetier_importer_configuration($type_import, $import_compos, $yaml))
 			$retours['message_ok'] = _T('noizetier:formulaire_config_importee');
-		// On invalide le cache
-		include_spip('inc/invalideur');
-		suivre_invalideur('noizetier-import-config');
 	}
 	
 	$retours['editable'] = true;

@@ -636,4 +636,106 @@ function noizetier_obtenir_contexte($noisette) {
 	return array();
 }
 
+
+/**
+ * Retourne le tableau des noisettes et des compositions du noizetier pour les exports
+ *
+ * 
+ * @return 
+**/
+function noizetier_tableau_export() {
+	$data = array();
+	
+	// On calcule le tableau des noisettes
+	$data['noisettes'] = sql_allfetsel(
+		'type, composition, bloc, noisette, parametres',
+		'spip_noisettes',
+		'1',
+		'',
+		'type, composition, bloc, rang'
+	);
+	
+	// On remet au propre les parametres
+	foreach ($data['noisettes'] as $cle => $noisette)
+		$data['noisettes'][$cle]['parametres'] = unserialize($noisette['parametres']);
+	
+	// On récupère les compositions du noizetier
+	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+	if (is_array($noizetier_compositions) AND count($noizetier_compositions)>0)
+		$data['noizetier_compositions'] = $noizetier_compositions;
+	
+	return $data;
+}
+
+/**
+ * Importe une configuration de noisettes et de compositions
+ *
+ * @param text $type_import
+ * @param text $import_compos
+ * @param array $config
+ * @return boolean
+ */
+function noizetier_importer_configuration($type_import, $import_compos, $config){
+	if ($import_compos!='remplacer')
+		$import_compos = 'fusion';
+	if ($import_compos!='oui')
+		$import_compos = 'non';
+	
+	// On s'occupe déjà des noisettes
+	$noisettes = $config['noisettes'];
+	include_spip('base/abstract_sql');
+	if (is_array($noisettes) AND count($noisettes)>0) {
+		$noisettes_insert = array();
+		$rang = 1;
+		$page = '';
+		if ($type_import=='remplacer')
+			sql_delete('spip_noisettes','1');
+		foreach($noisettes as $noisette) {
+			$type = $noisette['type'];
+			$composition = $noisette['composition'];
+			if ($type.'-'.$composition!=$page) {
+				$page = $type.'-'.$composition;
+				$rang = 1;
+				if ($type_import=='fusion')
+					$rang = sql_getfetsel('rang','spip_noisettes','type='.sql_quote($type).' AND composition='.sql_quote($composition),'','rang DESC') + 1;
+			}
+			else {
+				$rang = $rang + 1;
+			}
+			$noisette['rang']=$rang;
+			$noisette['parametres'] = serialize($noisette['parametres']);
+			$noisettes_insert[] = $noisette;
+		}
+		$ok = sql_insertq_multi('spip_noisettes',$noisettes_insert);
+	}
+	
+	// On s'occupe des compositions du noizetier
+	if ($import_compos=='oui') {
+		include_spip('inc/meta');
+		$compos_importees = $config['noizetier_compositions'];
+		if (is_array($compos_importees) AND count($compos_importees)>0){
+			if ($type_import=='remplacer')
+				effacer_meta('noizetier_compositions');
+			else 
+				$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+			
+			if (!is_array($noizetier_compositions))
+				$noizetier_compositions = array();
+			
+			foreach($compos_importees as $type => $compos_type)
+				foreach($compos_type as $composition => $info_compo)
+					$noizetier_compositions[$type][$composition] = $info_compo;
+			
+			ecrire_meta('noizetier_compositions',serialize($noizetier_compositions));
+			ecrire_metas();
+		}
+	}
+	
+	// On invalide le cache
+	include_spip('inc/invalideur');
+	suivre_invalideur('noizetier-import-config');
+	
+	return $ok;
+}
+
 ?>

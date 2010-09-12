@@ -2,7 +2,7 @@
 	<nom>noiZetier</nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.6.2</version>
+	<version>0.7</version>
 	<version_base>0.3</version_base>
 	<etat>test</etat>
 	<description>Prototype de gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.<p />
@@ -43,6 +43,10 @@
 	<pipeline>
 		<nom>compositions_lister_disponibles</nom>
 		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>iecfg</nom>
+		<inclure>noizetier_iecfg.php</inclure>
 	</pipeline>
 	<bouton id='noizetier' parent="configuration">
 		<url>noizetier</url>

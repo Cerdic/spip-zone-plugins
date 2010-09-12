@@ -96,6 +96,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'nom_bloctexte' => 'Bloc de texte libre',
 	
+	'iecfg_probleme_import_config' => 'Un probl&egrave;me a &eacute;t&eacute; rencontr&eacute; lors de l\'importation de la configuration du noiZetier.',
+	'iecfg_ne_pas_importer' => 'Ne pas importer',
+	'iecfg_noizetier_export_explication' => 'Exportera la configuration des noisettes et les compositions du noiZetier.',
+	'iecfg_noizetier_export_option' => 'Inclure dans l\'export&nbsp;?',
+	
 	'label_titre' => 'Titre&nbsp;:',
 	'label_niveau_titre' => 'Niveau du titre&nbsp;:',
 	'label_texte' => 'Texte&nbsp;:',
