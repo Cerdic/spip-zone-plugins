@@ -41,22 +41,22 @@
  <ul>
     <li>
         <label><:simplecart:tax_rate:></label>
-        <input type="text" name="tax_rate"  class="text" value="#ENV{tax_rate}" />
+        <input type="text" name="tax_rate"  class="text" value="#ENV{tax_rate, 0}" />
     </li>
     <li>
         <label><:simplecart:shipping_flat_rate:></label>
         <p class="explication"><:simplecart:shipping_flat_rate_explication:></p>
-        <input type="text" name="shipping_flat_rate"  class="text" value="#ENV{shipping_flat_rate}" />
+        <input type="text" name="shipping_flat_rate"  class="text" value="#ENV{shipping_flat_rate, 0}" />
     </li>
     <li>
         <label><:simplecart:shipping_quantity_rate:></label>
         <p class="explication"><:simplecart:shipping_quantity_rate_explication:></p>
-        <input type="text" name="shipping_quantity_rate"  class="text" value="#ENV{shipping_quantity_rate}" />
+        <input type="text" name="shipping_quantity_rate"  class="text" value="#ENV{shipping_quantity_rate, 0}" />
     </li>
     <li>
         <label><:simplecart:shipping_total_rate:></label>
         <p class="explication"><:simplecart:shipping_total_rate_explication:></p>
-        <input type="text" name="shipping_total_rate"  class="text" value="#ENV{shipping_total_rate}" />
+        <input type="text" name="shipping_total_rate"  class="text" value="#ENV{shipping_total_rate, 0}" />
     </li>
 
   </ul>
