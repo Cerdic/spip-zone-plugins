@@ -12,6 +12,7 @@
   [<span class="item_price">$ (#ENV{price})</span>]
   <a href="javascript:;" class="item_add"><:simplecart:add_to_cart:></a>
 
+<span class="item_thumb">[(#FICHIER|image_reduire{100}|extraire_attribut{'src'})]</span>
 </div>
 
 </BOUCLE_shelfItem>
