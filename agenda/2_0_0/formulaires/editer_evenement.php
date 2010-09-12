@@ -54,6 +54,8 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	// Pouvoir interdire l'affichage de l'inscription (puisque ce n'est pas traite' par le plugin)
 	$valeurs['affiche_inscription'] = $GLOBALS['agenda_affiche_inscription'];
 
+	$valeurs['places'] = intval($valeurs['places']);
+
 	return $valeurs;
 }
 
