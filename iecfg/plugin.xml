@@ -5,7 +5,7 @@
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>Importeur / Exporteur de configurations. Ce plugin permet d'exporter la configuration de SPIP et des plugins compatibles IECFG dans un seul et unique fichier au format YAML. Ces fichiers de configuration peuvent ensuite &ecirc;tre import&eacute;s.</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/IECFG-Carnet-de-Developpement</lien>
 	<icon>img/iecfg-128.png</icon>
 	<prefix>iecfg</prefix>
 	<options>iecfg_options.php</options>
