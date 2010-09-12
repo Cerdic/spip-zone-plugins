@@ -1,0 +1,71 @@
+<!-- titre=<:simplecart:title:>--> 
+<!-- descriptif=<:simplecart:description:>--> 
+
+<div class="formulaire_spip formulaire_cfg formulaire_config_crayons">
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+
+<ul>
+
+[(#REM)
+<li>
+  <label for='checkout_to'><:simplecart:checkout_to:> #ENV{checkout_to} </label>
+  <select name='checkout_to'>
+       <option value="PayPal">PayPal</option>
+       <option value="GoogleCheckout" >Google Checkout</option>
+  </select>
+</li>]
+
+<li>
+  <label for='paypal_account'><:simplecart:paypal_account:></label>
+  <p class="explication"><:simplecart:paypal_account_explication:></p>
+  <input type="text" name="paypal_account" class="text" value="#ENV{paypal_account}" />
+</li>
+
+<li>
+  <label for='google_merchant_id'><:simplecart:google_merchant_id:></label>
+  <input type="text" name="google_merchant_id"  class="text" value="#ENV{google_merchant_id}" />
+</li>
+</ul>
+
+
+<h3 class="legend"><:simplecart:cart_configuration:></h3>
+ <ul>
+    <li>
+        <label><:simplecart:cart_headers:></label>
+        <p class="explication"><:simplecart:cart_headers_explication:></p>
+        <input type="text" name="cart_headers"  class="text" value="#ENV{cart_headers, ["Name" , "Price" , "Quantity" , "Total"]}" />
+    <li>
+  </ul>
+
+<h3 class="legend"><:simplecart:other_parameters:></h3>
+ <ul>
+    <li>
+        <label><:simplecart:tax_rate:></label>
+        <input type="text" name="tax_rate"  class="text" value="#ENV{tax_rate}" />
+    </li>
+    <li>
+        <label><:simplecart:shipping_flat_rate:></label>
+        <p class="explication"><:simplecart:shipping_flat_rate_explication:></p>
+        <input type="text" name="shipping_flat_rate"  class="text" value="#ENV{shipping_flat_rate}" />
+    </li>
+    <li>
+        <label><:simplecart:shipping_quantity_rate:></label>
+        <p class="explication"><:simplecart:shipping_quantity_rate_explication:></p>
+        <input type="text" name="shipping_quantity_rate"  class="text" value="#ENV{shipping_quantity_rate}" />
+    </li>
+    <li>
+        <label><:simplecart:shipping_total_rate:></label>
+        <p class="explication"><:simplecart:shipping_total_rate_explication:></p>
+        <input type="text" name="shipping_total_rate"  class="text" value="#ENV{shipping_total_rate}" />
+    </li>
+
+  </ul>
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</div>
+</form>
+
+</div>
+
