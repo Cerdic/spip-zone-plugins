@@ -1,0 +1,17 @@
+<BOUCLE_shelfItem(DOCUMENTS){id_document=#ENV{id}}{tout}>
+
+<div class="simpleCart_shelfItem">
+
+   [(#FICHIER|image_reduire{200}|inserer_attribut{'class', 'item_image'})]
+ 
+
+  [<h5 class="item_name">(#TITRE)</h5>]
+    [<p class="item_Description">
+                    (#DESCRIPTION)
+                </p>]
+  $ [<span class="item_price">(#ENV{price})</span>]
+  <a href="javascript:;" class="item_add"><:simplecart:add_to_cart:></a>
+
+</div>
+
+</BOUCLE_shelfItem>
