@@ -55,6 +55,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     
     //T
     'title' => 'SimpleCart',
+    'total_in_cart' => 'Total en el carrito: @total@',  //<div class="simpleCart_total"></div>
+
+    'tax_rate' => 'Tasa impositiva',
+    'tax_rate_explication' => 'Tasa de impuestos. Ejemplo: 0.19 de Impuesto al Valor Agregado',
+    
+
 
     'items_in_cart' => 'Tienes @quantity@ productos en tu carrito', //<span class="simpleCart_quantity"></span>
 
@@ -62,9 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'your_cart' => 'Tu carrito',
     
 
-    'total_in_cart' => 'Total en el carrito: @total@',  //<div class="simpleCart_total"></div>
-
-    'tax_rate' => 'Impuestos',
     
 
 );
