@@ -45,8 +45,8 @@
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>iecfg</nom>
-		<inclure>noizetier_iecfg.php</inclure>
+		<nom>ieconfig</nom>
+		<inclure>noizetier_ieconfig.php</inclure>
 	</pipeline>
 	<bouton id='noizetier' parent="configuration">
 		<url>noizetier</url>

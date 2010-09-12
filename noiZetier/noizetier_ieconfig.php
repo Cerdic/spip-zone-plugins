@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Pipeline iecfg pour l'import/export de configuration
+ * Pipeline ieconfig pour l'import/export de configuration
  *
  * @param array $flux
  * @return array
  */
-function noizetier_iecfg($flux){
+function noizetier_ieconfig($flux){
 	$action = $flux['args']['action'];
 	
 	// Formulaire d'export
@@ -23,14 +23,14 @@ function noizetier_iecfg($flux){
 						'saisie' => 'explication',
 						'options' => array(
 							'nom' => 'noizetier_export_explication',
-							'texte' => '<:noizetier:iecfg_noizetier_export_explication:>'
+							'texte' => '<:noizetier:ieconfig_noizetier_export_explication:>'
 						)
 					),
 					array(
 						'saisie' => 'oui_non',
 						'options' => array(
 							'nom' => 'noizetier_export_option',
-							'label' => '<:noizetier:iecfg_noizetier_export_option:>',
+							'label' => '<:noizetier:ieconfig_noizetier_export_option:>',
 							'defaut' => ''
 						)
 					)
@@ -87,7 +87,7 @@ function noizetier_iecfg($flux){
 								'label' => '<:noizetier:formulaire_type_import:>',
 								'explication' => '<:noizetier:formulaire_type_import_explication:>',
 								'defaut' => '',
-								'option_intro' => '<:noizetier:iecfg_ne_pas_importer:>',
+								'option_intro' => '<:noizetier:ieconfig_ne_pas_importer:>',
 								'datas' => array(
 									'fusion' => '<:noizetier:formulaire_import_fusion:>',
 									'remplacer' => '<:noizetier:formulaire_import_remplacer:>'
@@ -132,7 +132,7 @@ function noizetier_iecfg($flux){
 								'label' => '<:noizetier:formulaire_type_import:>',
 								'explication' => '<:noizetier:formulaire_type_import_explication:>',
 								'defaut' => '',
-								'option_intro' => '<:noizetier:iecfg_ne_pas_importer:>',
+								'option_intro' => '<:noizetier:ieconfig_ne_pas_importer:>',
 								'datas' => array(
 									'fusion' => '<:noizetier:formulaire_import_fusion:>',
 									'remplacer' => '<:noizetier:formulaire_import_remplacer:>'
@@ -157,7 +157,7 @@ function noizetier_iecfg($flux){
 	if ($action=='import' && isset($flux['args']['config']['noizetier']) && _request('noizetier_type_import')!='') {
 		include_spip('inc/noizetier');
 		if (!noizetier_importer_configuration(_request('noizetier_type_import'),_request('noizetier_import_compos'),$flux['args']['config']['noizetier']))
-			$flux['data'] .= _T('noizetier:iecfg_probleme_import_config').'<br />';
+			$flux['data'] .= _T('noizetier:ieconfig_probleme_import_config').'<br />';
 	}
 	
 	return($flux);
