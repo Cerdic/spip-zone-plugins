@@ -33,5 +33,5 @@ A simple e-commerce plugin with no headaches. Just javascript (and spip). [Confi
         <inclure>head.php</inclure>
     </pipeline>
 
-    <necessite id="SPIP" version="[2.1.0;]" />
+    <necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
