@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'shipping_flat_rate' => 'Tasa de envío fija',
     'shipping_flat_rate_explication' => 'Agrega una tasa fija a la orden completa',
     'shipping_quantity_rate' => 'Tasa de envío por cantidad',
-    'shipping_quantity_rate_explication' => 'Agrega una tasa fija por cada item  en el carrito',
+    'shipping_quantity_rate_explication' => 'Agrega una tasa fija por cada item en el carrito',
     'shipping_total_rate' => 'Tasa de envío como porcentaje del total',
     'shipping_total_rate_explication' => 'Agrega un costo de envío proporcional al costo total de la orden',
 
@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     'total_in_cart' => 'Total en el carrito: @total@',  //<div class="simpleCart_total"></div>
 
-    'tax_rate' => 'Tasa impositiva',
+    'tax_rate' => 'Impuestos',
     
 
 );
