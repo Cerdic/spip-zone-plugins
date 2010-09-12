@@ -154,14 +154,9 @@ function noizetier_iecfg($flux){
 	}
 	
 	// Import de la configuration
-	if ($action=='form_import' && isset($flux['args']['config']['noizetier']) 
-		&& isset($flux['args']['request']['noizetier_type_import']) && $flux['args']['request']['noizetier_type_import'])!='' {
+	if ($action=='import' && isset($flux['args']['config']['noizetier']) && _request('noizetier_type_import')!='') {
 		include_spip('inc/noizetier');
-		if (!noizetier_importer_configuration(
-			$flux['args']['request']['noizetier_type_import'],
-			$import_compos = $flux['args']['request']['noizetier_import_compos'],
-			$flux['args']['config']['noizetier']
-		))
+		if (!noizetier_importer_configuration(_request('noizetier_type_import'),_request('noizetier_import_compos'),$flux['args']['config']['noizetier']))
 			$flux['data'] .= _T('noizetier:iecfg_probleme_import_config').'<br />';
 	}
 	

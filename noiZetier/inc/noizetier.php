@@ -676,8 +676,8 @@ function noizetier_tableau_export() {
  * @return boolean
  */
 function noizetier_importer_configuration($type_import, $import_compos, $config){
-	if ($import_compos!='remplacer')
-		$import_compos = 'fusion';
+	if ($type_import!='remplacer')
+		$type_import = 'fusion';
 	if ($import_compos!='oui')
 		$import_compos = 'non';
 	
