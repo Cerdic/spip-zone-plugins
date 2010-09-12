@@ -300,4 +300,14 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 	return;
 }
 
+// Faut-il decompresser ce cache ?
+// (passage par reference pour alleger)
+// http://doc.spip.org/@gunzip_page
+function gunzip_page(&$page) {
+	if ($page['gz']) {
+		$page['texte'] = gzuncompress($page['texte']);
+		$page['gz'] = false; // ne pas gzuncompress deux fois une meme page
+	}
+}
+
 ?>
