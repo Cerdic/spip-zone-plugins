@@ -14,17 +14,10 @@ function balise_SIMPLECART_ADD_dist($p) {
 }
 
 
-<?php
-
 function balise_HELLO_WORLD($p) {
     $p->code = "'Hello World!'";
     return $p;
 }
 
 ?>
-
-
-
-?>
-
 

@@ -24,11 +24,9 @@ A simple e-commerce plugin with no headaches. Just javascript (and spip). [Confi
     simplecart
     </prefix>
 
-    <fonctions>simplecart_fonctions.php</fonctions>
-    <pipeline>
-        <nom>affichage_final</nom>
-        <inclure>simplecart_fonctions.php</inclure>
-    </pipeline>
+
+    
+<fonctions>simplecart_fonctions.php</fonctions>
 
     <pipeline>
         <nom>insert_head</nom>
