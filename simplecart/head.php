@@ -27,13 +27,14 @@ include_spip('inc/utils');
             }
             $js .=  '</script>';
 
+
             $css = '<link rel="stylesheet" href="'. url_absolue(find_in_path('css/simplecart.css')).'" type="text/css" media="all" />';
 
 
         if (strpos($stream,'<head')!==FALSE)
             return preg_replace('/(<head[^>]*>)/i', "\n\$1".$js.$css, $stream, 1);
         else 
-            return $stream.$js;
+            return $stream.$js.$css;
     }
 
 ?>
