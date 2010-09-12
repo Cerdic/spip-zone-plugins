@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_iecfg_import">
+<div class="formulaire_spip formulaire_ieconfig_import">
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 <form action="#ENV{action}" method="post"><div>
@@ -10,9 +10,9 @@
 	<p class="boutons">
 		[(#ENV{_code_yaml}|oui)
 		<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />
-		<input type="submit" class="submit" name="importer" value="<:iecfg:titre_import:>" />]
+		<input type="submit" class="submit" name="importer" value="<:ieconfig:titre_import:>" />]
 		[(#ENV{_code_yaml}|non)
-		<input type="submit" class="submit" name="suivant" value="<:iecfg:titre_import:>" />]
+		<input type="submit" class="submit" name="suivant" value="<:ieconfig:titre_import:>" />]
 	</p>
 </div></form>
 </div>

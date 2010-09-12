@@ -1,20 +1,20 @@
 <?php
 
-function iecfg_saisies_export() {
+function ieconfig_saisies_export() {
 	$saisies = array (
 		// Options d'export
 		array(
 			'saisie' => 'fieldset',
 			'options' => array(
-				'nom' => 'iecfg_export',
-				'label' => '<:iecfg:label_iecfg_export:>'
+				'nom' => 'ieconfig_export',
+				'label' => '<:ieconfig:label_ieconfig_export:>'
 			),
 			'saisies' => array(
 				array(
 					'saisie' => 'input',
 					'options' => array(
-						'nom' => 'iecfg_export_nom',
-						'label' => '<:iecfg:label_iecfg_export_nom:>',
+						'nom' => 'ieconfig_export_nom',
+						'label' => '<:ieconfig:label_ieconfig_export_nom:>',
 						'obligatoire' => 'oui',
 						'defaut' => $GLOBALS['meta']['nom_site'].' - '.date('Y/m/d')
 					)
@@ -22,28 +22,28 @@ function iecfg_saisies_export() {
 				array(
 					'saisie' => 'textarea',
 					'options' => array(
-						'nom' => 'iecfg_export_description',
-						'label' => '<:iecfg:label_iecfg_export_description:>',
+						'nom' => 'ieconfig_export_description',
+						'label' => '<:ieconfig:label_ieconfig_export_description:>',
 						'rows' => 4
 					)
 				),
 				array(
 					'saisie' => 'explication',
 					'options' => array(
-						'nom' => 'iecfg_export_explication',
-						'texte' => '<:iecfg:texte_iecfg_export_explication:>'
+						'nom' => 'ieconfig_export_explication',
+						'texte' => '<:ieconfig:texte_ieconfig_export_explication:>'
 					)
 				),
 				array(
 					'saisie' => 'selection',
 					'options' => array(
-						'nom' => 'iecfg_export_choix',
-						'label' => '<:iecfg:label_iecfg_export_choix:>',
+						'nom' => 'ieconfig_export_choix',
+						'label' => '<:ieconfig:label_ieconfig_export_choix:>',
 						'cacher_option_intro' => 'oui',
 						'defaut' => 'telecharger',
 						'datas' => array(
-							'sauvegarder' => '<:iecfg:item_sauvegarder:>',
-							'telecharger' => '<:iecfg:item_telecharger:>'
+							'sauvegarder' => '<:ieconfig:item_sauvegarder:>',
+							'telecharger' => '<:ieconfig:item_telecharger:>'
 						)
 					)
 				)
@@ -61,31 +61,31 @@ function iecfg_saisies_export() {
 					'saisie' => 'explication',
 					'options' => array(
 						'nom' => 'spip_contenu_explication',
-						'texte' => '<:iecfg:texte_spip_contenu_export_explication:>'
+						'texte' => '<:ieconfig:texte_spip_contenu_export_explication:>'
 					)
 				),
 				array(
 					'saisie' => 'selection_multiple',
 					'options' => array(
 						'nom' => 'spip_contenu_choix',
-						'label' => '<:iecfg:label_elements_a_exporter:>',
+						'label' => '<:ieconfig:label_elements_a_exporter:>',
 						'cacher_option_intro' => 'oui',
 						'datas' => array(
-							'articles' => '<:iecfg:label_configuration_articles:>',
-							'rubriques' => '<:iecfg:label_configuration_rubriques:>',
-							'breves' => '<:iecfg:label_configuration_breves:>',
-							'mots' => '<:iecfg:label_configuration_mots:>',
-							'logos' => '<:iecfg:label_configuration_logos:>',
-							'documents' => '<:iecfg:label_configuration_documents:>',
-							'sites' => '<:iecfg:label_configuration_sites:>'
+							'articles' => '<:ieconfig:label_configuration_articles:>',
+							'rubriques' => '<:ieconfig:label_configuration_rubriques:>',
+							'breves' => '<:ieconfig:label_configuration_breves:>',
+							'mots' => '<:ieconfig:label_configuration_mots:>',
+							'logos' => '<:ieconfig:label_configuration_logos:>',
+							'documents' => '<:ieconfig:label_configuration_documents:>',
+							'sites' => '<:ieconfig:label_configuration_sites:>'
 						)
 					)
 				)
 			)
 		)
 	);
-	// On passe via le pipeline iecfg
-	$saisies = pipeline('iecfg',array(
+	// On passe via le pipeline ieconfig
+	$saisies = pipeline('ieconfig',array(
 		'args' => array(
 			'action' => 'form_export'
 		),
@@ -94,23 +94,23 @@ function iecfg_saisies_export() {
 	return $saisies;
 }
 
-function formulaires_iecfg_export_charger_dist() {
+function formulaires_ieconfig_export_charger_dist() {
 	$contexte = array(
-		'_saisies' => iecfg_saisies_export()
+		'_saisies' => ieconfig_saisies_export()
 	);
 	return array_merge($_POST,$contexte);
 }
 
-function formulaires_iecfg_export_verifier_dist() {
+function formulaires_ieconfig_export_verifier_dist() {
 	include_spip('inc/saisies');
-	return saisies_verifier(iecfg_saisies_export());
+	return saisies_verifier(ieconfig_saisies_export());
 }
 
-function formulaires_iecfg_export_traiter_dist() {
+function formulaires_ieconfig_export_traiter_dist() {
 	$export = array();
-	$export['nom'] = _request('iecfg_export_nom');
-	if (_request('iecfg_export_description') != '')
-		$export['description'] = _request('iecfg_export_description');
+	$export['nom'] = _request('ieconfig_export_nom');
+	if (_request('ieconfig_export_description') != '')
+		$export['description'] = _request('ieconfig_export_description');
 	
 	// Configuration du contenu du site SPIP
 	if (count(_request('spip_contenu_choix'))>0) {
@@ -159,8 +159,8 @@ function formulaires_iecfg_export_traiter_dist() {
 			}
 	}
 	
-	// On passe via le pipeline iecfg
-	$export = pipeline('iecfg',array(
+	// On passe via le pipeline ieconfig
+	$export = pipeline('ieconfig',array(
 		'args' => array(
 			'action' => 'export'
 		),
@@ -179,7 +179,7 @@ function formulaires_iecfg_export_traiter_dist() {
 	$filename = $site.'_'.date('Y-m-d_H-i').'.yaml';
 	
 	// Si telechargement
-	if(_request('iecfg_export_choix')=='telecharger') {
+	if(_request('ieconfig_export_choix')=='telecharger') {
 		refuser_traiter_formulaire_ajax();
 		Header("Content-Type: text/x-yaml;");
 		Header("Content-Disposition: attachment; filename=$filename");
@@ -187,11 +187,11 @@ function formulaires_iecfg_export_traiter_dist() {
 		echo $export;
 		exit;
 	} else {
-		sous_repertoire(_DIR_TMP, 'iecfg');
-		if (ecrire_fichier(_DIR_TMP . 'iecfg/'.$filename , $export))
-			return array('message_ok' => _T('iecfg:message_ok_export',array('filename'=>$filename)));
+		sous_repertoire(_DIR_TMP, 'ieconfig');
+		if (ecrire_fichier(_DIR_TMP . 'ieconfig/'.$filename , $export))
+			return array('message_ok' => _T('ieconfig:message_ok_export',array('filename'=>$filename)));
 		else
-			return array('message_erreur' => _T('iecfg:message_erreur_export',array('filename'=>$filename)));
+			return array('message_erreur' => _T('ieconfig:message_erreur_export',array('filename'=>$filename)));
 	}
 }
 
