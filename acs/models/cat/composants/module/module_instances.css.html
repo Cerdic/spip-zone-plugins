@@ -1,5 +1,17 @@
 #CACHE{0}
-[.cModule(#NIC) {
+.cModule#NIC {
   padding-left: #CONFIG{#EVAL{'acsModule'.'#NIC'.'Left'},0};
-  padding-right: #CONFIG{#EVAL{'acsModule'.'#NIC'.'Right'},0};
-}]
+  padding-right: #CONFIG{#EVAL{'acsModule'.'#NIC'.'Right'},0};[
+  background: (#CONFIG{#EVAL{'acsModule'.'#NIC'.'Fond'}});][
+  color: (#CONFIG{#EVAL{'acsModule'.'#NIC'.'Text'}});]
+}[
+.cModule#NIC a:link, .cModule#NIC a:visited {text-decoration: none; color: (#CONFIG{#EVAL{'acsModule'.'#NIC'.'Link'}});}][
+.cModule#NIC a:hover {color: (#CONFIG{#EVAL{'acsModule'.'#NIC'.'LinkHover'}});}]
+[.acsModule[(#NIC)]1style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'1style'}})}]
+[.acsModule[(#NIC)]2style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'2style'}})}]
+[.acsModule[(#NIC)]3style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'3style'}})}]
+[.acsModule[(#NIC)]4style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'4style'}})}]
+[.acsModule[(#NIC)]5style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'5style'}})}]
+[.acsModule[(#NIC)]6style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'6style'}})}]
+[.acsModule[(#NIC)]7style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'7style'}})}]
+[.acsModule[(#NIC)]8style {(#CONFIG{#EVAL{'acsModule'.'#NIC'.'8style'}})}]

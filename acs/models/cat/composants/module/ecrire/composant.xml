@@ -27,35 +27,102 @@
     <type>nombre</type>
   </variable>
   <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>FondImage</nom>
+    <type>img</type>
+    <chemin>img/trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Text</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Link</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>LinkHover</nom>
+    <type>color</type>
+  </variable>
+  
+  <variable>
     <nom>1</nom>
     <type>widget</type>
+  </variable>
+  <variable>
+    <nom>1style</nom>
+    <type>text</type>
+    <label>non</label>
   </variable>
   <variable>
     <nom>2</nom>
     <type>widget</type>
   </variable>
   <variable>
+    <nom>2style</nom>
+    <type>text</type>
+    <label>non</label>
+  </variable>
+  <variable>
     <nom>3</nom>
     <type>widget</type>
+  </variable>
+  <variable>
+    <nom>3style</nom>
+    <type>text</type>
+    <label>non</label>
   </variable>
   <variable>
     <nom>4</nom>
     <type>widget</type>
   </variable>
   <variable>
+    <nom>4style</nom>
+    <type>text</type>
+    <label>non</label>
+  </variable>
+  <variable>
     <nom>5</nom>
     <type>widget</type>
+  </variable>
+  <variable>
+    <nom>5style</nom>
+    <type>text</type>
+    <label>non</label>
   </variable>
   <variable>
     <nom>6</nom>
     <type>widget</type>
   </variable>
   <variable>
+    <nom>6style</nom>
+    <type>text</type>
+    <label>non</label>
+  </variable>
+  <variable>
     <nom>7</nom>
     <type>widget</type>
   </variable>
   <variable>
+    <nom>7style</nom>
+    <type>text</type>
+    <label>non</label>
+  </variable>
+  <variable>
     <nom>8</nom>
     <type>widget</type>
+  </variable>
+  <variable>
+    <nom>8style</nom>
+    <type>text</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>comment</nom>
+    <type>textarea</type>
   </variable>
 </composant>

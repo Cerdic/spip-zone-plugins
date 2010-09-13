@@ -11,13 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'orientation' => 'Orientation',
 'vertical' => 'vertical',
 'horizontal' => 'horizontal',
-'1' => 'Component 1',
-'2' => 'Component 2',
-'3' => 'Component 3',
-'4' => 'Component 4',
-'5' => 'Component 5',
-'6' => 'Component 6',
-'7' => 'Component 7',
-'8' => 'Component 8'
+'comment' => 'Comments'
 );
 ?>
