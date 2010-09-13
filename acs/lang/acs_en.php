@@ -33,7 +33,10 @@ $traductions_acs = array(
 
 	'font' => 'Font(s)',
 	'fontsize' => 'Size',
-	'fontfamily' => 'Font family'
+	'fontfamily' => 'Font family',
+	'text' => ' Text',
+	'link' => 'Link',
+	'linkhover' => 'Link hover'
 );
 
 // Lang file is build with components public lang files

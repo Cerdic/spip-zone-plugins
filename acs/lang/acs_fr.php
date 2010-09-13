@@ -6,7 +6,7 @@ require_once _DIR_ACS.'lib/composant/composants_ajouter_langue.php';
 $traductions_acs = array(
   'use' => 'Utiliser',
 
-	'fond' => ' Fond', // Non traduit en 2.0.8 sans l'espace devant : a debugger
+	'fond' => ' Fond', // Non traduit sans l'espace devant, car identique
 
   'bordcolor' => 'Bordure',
   'bordlargeur' => 'largeur de bordure',
@@ -33,7 +33,10 @@ $traductions_acs = array(
 
 	'font' => 'Fonte(s)',
 	'fontsize' => 'Taille',
-	'fontfamily' => 'Famille de fonte'
+	'fontfamily' => 'Famille de fonte',
+	'text' => "Texte",
+	'link' => "Lien",
+	'linkhover' => "Au survol",
 );
 
 // Lang file is build with components lang files
@@ -90,6 +93,7 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'composants' => 'Composants',
   'creer_composant' => 'Cr&eacute;er une nouvelle instance de ce composant',
   'del_composant' => 'Effacer cette instance de composant',
+  'del_composant_confirm' => 'Voulez-vous vraiment effacer DEFINITIVEMENT l\'instance @nic@ du composant @c@ ?',
   'container' => 'Conteneur',
   'containers' => 'Conteneurs',
   'modele' => 'Mod&egrave;le',
@@ -131,7 +135,7 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'echec_afterUpdate' => 'Echec afterUpdate',
   'err_aucun_composant' => 'Aucun composant actif pour ',
   'spip_trop_ancien' => 'Ne fonctionne pas correctement avec spip < @min@',
-  'spip_non_supporte' => 'Non valid&eacute; avec spip > @max@',
+  'spip_non_supporte' => 'Non valid&eacute; avec spip > @max@',  
 
   );
   $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);

@@ -106,7 +106,7 @@ function composants_head($type) {
             $r .= file_get_contents($file);
           }
           else {
-            $r .= recuperer_fond($filepath);
+            $r .= recuperer_fond($filepath)."\r";
           }
           $done[] = $class; 
     		}
@@ -115,7 +115,7 @@ function composants_head($type) {
         	$filepath = 'composants/'.$class.'/'.$class.'_instances.css';
         	$file = find_in_path($filepath.'.html');
         	if ($file)
-       			$r .= recuperer_fond($filepath, array('nic' => $nic));
+       			$r .= recuperer_fond($filepath, array('nic' => $nic))."\r";
         }
       }
     }

@@ -26,7 +26,7 @@ function composants($c) {
 	$nom = $c->T('nom');
 	if ($nom == $c->type.' nom') $nom = ucfirst($c->type);
 	$r .= acs_box(
-				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td><td>'.$over.'</td><td>'.instance_create($c->type).'</td><td>'.instance_select($c->type, $c->nic).'</td></tr></table>',
+				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td><td>'.$over.'</td><td>'.instance_create($c).'</td><td>'.instance_select($c).'</td></tr></table>',
 				'<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">'.
 				$c->edit().
 				'<table width="100%"><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
@@ -43,38 +43,40 @@ function composants_droite($c) {
 	return liste_widgets();
 }
 
-function instance_select($c, $nic) {
-  $instances = composant_instances($c);
+function instance_select($c) {
+  $instances = composant_instances($c->type);
   if (is_array($instances) && count($instances)) {
     $r ='<select name="nic" onchange=submit()>';
     $r .= '<option value=""'.($id=="" ? ' selected': '').'></option>';
     foreach($instances as $id) {
-      $r .= '<option value="'.$id.'"'.($id==$nic ? ' selected': '').'>'.$id.'</option>';
+      $r .= '<option value="'.$id.'"'.($id==$c->nic ? ' selected': '').'>'.$id.'</option>';
     }
     $r .='</select>';
     $r .= "<input type='hidden' name='exec' value='acs' />".
-		'<input type="hidden" name="composant" value="'.$c.'" />'.
+		'<input type="hidden" name="composant" value="'.$c->type.'" />'.
 		'<input type="hidden" name="onglet" value="composants" />';
     $r = '<td><form action="">'.$r.'<noscript></td><td><input type="submit" value="'._T('bouton_valider').'"></noscript></form></td>';
-    $r .= '<td>'.instance_delete($c->type, $c->nic).'</td>';
+    $r .= '<td>'.instance_delete($c).'</td>';
   }
   return $r;
 }
 
 function instance_create($c) {
-	return '<form action=""></td><td><noscript><input type="text" name="newnic" size="4" maxlength="4" /></td><td></noscript><input type="image" src="'._DIR_PLUGIN_ACS.'images/composant-creer.gif" title="'._T('acs:creer_composant').'" />
+	return '<form action="" id="form_instance_create" onSubmit="return instance_create(\''.$c->nextInstance().'\');"></td><td><noscript><input type="text" name="nic" size="4" maxlength="4" /></td><td></noscript><input type="image" src="'._DIR_PLUGIN_ACS.'images/composant-creer.gif" title="'._T('acs:creer_composant').'" />
 					<input type="hidden" name="exec" value="acs" />
 					<input type="hidden" name="onglet" value="composants" />
-					<input type="hidden" name="composant" value="'.$c.'" />
+					<input type="hidden" name="composant" value="'.$c->type.'" />
 					</form>';
 }
 
-function instance_delete($c, $nic) {
-	return '<form action=""><input type="image" src="'._DIR_PLUGIN_ACS.'images/composant-del.gif" title="'._T('acs:del_composant').'" />
+function instance_delete($c) {
+	$msg = str_replace("'", "\'", _T('acs:del_composant_confirm', array('c' => $c->type, 'nic' => $c->nic)));
+	return '<form action="" onSubmit="return instance_delete(\''.$msg.'\');"><input type="image" src="'._DIR_PLUGIN_ACS.'images/composant-del.gif" title="'._T('acs:del_composant').'" />
 					<input type="hidden" name="exec" value="acs" />
 					<input type="hidden" name="onglet" value="composants" />
-					<input type="hidden" name="composant" value="'.$c.'" />
-					<input type="hidden" name="nic" value="'.$nic.'" />
+					<input type="hidden" name="composant" value="'.$c->type.'" />
+					<input type="hidden" name="nic" value="'.$c->nic.'" />
+					<input type="hidden" name="del_composant" value="delete" />
 					</form>';
 }
 ?>

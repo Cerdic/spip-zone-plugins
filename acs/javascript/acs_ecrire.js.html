@@ -25,12 +25,29 @@ function mode_source() {
 	return "";
 }
 
+[(#REM) creation d'une nouvelle instance d'un composant]
+var instance_create_input = false;
+function instance_create(nic) {
+  if (instance_create_input == false) {
+    $("#form_instance_create").append('<input id="nic" type="text" name="nic"  size="4" maxlength="4" value="' + nic + '" />');
+    instance_create_input = true;
+    return false;
+  }
+  return true;
+}
+[(#REM) suppression de l'instance active d'un composant]
+function instance_delete(msg) {
+  if (confirm(msg))
+    return true;
+  else
+    return false;
+}
+
 $(document).ready(
 	function() {
 		acs_ecrire_init();
 	}
 );
-
 
 function acs_ecrire_init() {
 	if (detail() == "") {
@@ -41,7 +58,7 @@ function acs_ecrire_init() {
 		);
 	}
 
-	// Donne leur fonction onclick aux plieurs (générique)
+  [(#REM) Donne leur fonction onclick aux plieurs (générique)]
 	$(".acs_plieur").each(
 		function(i, plieur) {
 			var cap = plieur.name.substr(7); //classe à plier
