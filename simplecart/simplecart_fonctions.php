@@ -33,7 +33,7 @@ function balise_SIMPLECART_ITEMS_dist($p) {
 }
 
 function balise_SIMPLECART_TAX_RATE_dist($p) {
-     $p->code = "'<div class=\"simpleCart_taxRate\"></div>'";
+     $p->code = "'<span class=\"simpleCart_taxRate\"></span>'";
     return $p;
 }
 
