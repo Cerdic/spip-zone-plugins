@@ -11,6 +11,7 @@ Modele Cat pour ACS vesion 0.6:
  - Recherche : suppression du test de la variable meta "activer_moteur" (disparue en spip 2)
  - Banniere : ajout du lien extra, option d'alignement vertical
  - Bandeau : choix de la taille du texte
+ - Custom : le composant est désormais instanciable
  - Module : gestion des instances de composants
 _______________________________________
 ACS version 0.5

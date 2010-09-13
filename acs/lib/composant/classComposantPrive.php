@@ -142,6 +142,14 @@ class AdminComposant {
 			$this->errors[] = dbg($_POST);
 			$this->errors[] = "\n<br />\n";
 		}
+		// Suppression de l'instance du compoant
+		if (_request('del_composant')=='delete') {
+			foreach ($this->vars as $var) {
+				$v = $this->fullname.$var['nom'];
+				effacer_meta($v);
+			}
+			$updated = true;
+		}
 		if (_request('maj_composant')=='oui') {
 			foreach ($this->vars as $var) {
 				$v = $this->fullname.$var['nom'];
@@ -238,13 +246,13 @@ class AdminComposant {
   function gauche() {
 		global $spip_version_code;
 
-		if ($this->T('description') != $this->type.' description')
+		if ($this->T('description') != str_replace('_', ' ', $this->type.' description'))
 			$r .= '<div>'.$this->T('description').'</div><br />';
 
-		if ($this->T('info') != $this->type.' info')
+		if ($this->T('info') != str_replace('_', ' ', $this->type.' info'))
 			$r .= '<div class="onlinehelp" style="text-align: justify">'.$this->T('info').'</div><br />';
 			
-		if ($this->T('help') != $this->type.' help')
+		if ($this->T('help') != str_replace('_', ' ', $this->type.'_help'))
 			$r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'images/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$this->T('help').'</div><br />';
 
 		$n = 999;
@@ -301,7 +309,7 @@ class AdminComposant {
 
 		$r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
 		if (($mode != 'controleur') && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
-			$url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
+			$url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.($this->nic ? '&amp;nic='.$this->nic : '').'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
 			$r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0; background:'.$GLOBALS['meta']['acsFondColor'].'" src="'.$url.'"></iframe></fieldset>';
 		}
 		// Affiche les variables paramétrables du composant:
@@ -359,6 +367,13 @@ class AdminComposant {
   function pages() {
 		include_once(_DIR_PLUGIN_ACS.'lib/cGetPages.php');
 		return cGetPages($this->type);
+  }
+/**
+ * Méthode nextInstance: retourne un numéro d'instance de composant inutilisé
+ */
+  function nextInstance() {
+  	$i = composant_instances($this->type);
+ 		return count($i) + 1;
   }
 }
 

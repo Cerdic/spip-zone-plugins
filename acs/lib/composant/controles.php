@@ -110,7 +110,11 @@ function ctlNombre($composant, $nic, $nom, $nombre=0, $param, $wid) {
 // Saisie d'un texte
 function ctlText($composant, $nic, $nom, $txt, $param = array('taille' => 30), $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
+  $r = '<table width="100%"><tr>';
+  if ($param['label'] != 'non')
+  	$r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
+  $r .= '<td><input type="text" name="'.$var.'_'.$wid.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
+  return $r;
 }
 
 // Saisie d'un texte long
@@ -159,8 +163,10 @@ function ctlWidget($composant, $nic, $nom, $value, $param, $wid) {
   require_once(_DIR_PLUGIN_ACS.'lib/composant/composants_variables.php');
   $vars = composants_variables();
 
-  $r = '<table><tr><td><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>'.
-  '<td><div id="'.$var.'_'.$wid.'" class="ctlWidget">';
+  $r = '<table><tr>';
+  if ($param['label'] != 'non')
+    $r .= '<td><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
+  $r .= '<td><div id="'.$var.'_'.$wid.'" class="ctlWidget">';
   $r .= '<select id="select_'.$var.'_'.$wid.'" name="'.$var.'_'.$wid.'" class="forml select_widget">';
   $r .= '<option value=""'.($value=='' ? ' selected' : '').'> </option>';
   
