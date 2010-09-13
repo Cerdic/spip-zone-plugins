@@ -43,6 +43,18 @@ function ieconfig_saisies_import() {
 		$texte_explication = '<b>'._T('ieconfig:texte_nom').'</b> '._T_ou_typo($config['nom']);
 		if ($config['description']!= '')
 			$texte_explication .= '<br /><b>'._T('ieconfig:texte_description').'</b> '._T_ou_typo($config['description']);
+		// On identifie les entrées ne correspondants pas à un plugin
+		$entrees = $config;
+		unset($entrees['nom']);
+		unset($entrees['description']);
+		unset($entrees['spip_contenu']);
+		unset($entrees['spip_interactivite']);
+		$entrees = array_map('strtolower',array_keys($entrees));
+		$plugins = array_map('strtolower',array_keys(unserialize($GLOBALS['meta']['plugin'])));
+		$plugins_manquants = array_diff($entrees,$plugins);
+		if (count($plugins_manquants)>0)
+			$texte_explication .= '<p class="reponse_formulaire reponse_formulaire_erreur">'._T('ieconfig:texte_plugins_manquants',array('plugins' => implode(', ',$plugins_manquants))).'</p>';
+		
 		$saisies = array(
 			array(
 				'saisie' => 'explication',
@@ -187,7 +199,7 @@ function ieconfig_saisies_import() {
 function formulaires_ieconfig_import_charger_dist() {
 	$saisies = ieconfig_saisies_import();
 	$contexte = array(
-		'_saisies' => $saisies
+		'_saisies' => $saisies,
 	);
 	if (_request('_code_yaml') and !_request('annuler') and !_request('importer'))
 		$contexte['_code_yaml'] = _request('_code_yaml');
