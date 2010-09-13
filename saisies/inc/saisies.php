@@ -8,6 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * saisies_lister_par_nom()
  * saisies_lister_champs()
+ * saisies_lister_valeurs_defaut()
  * saisies_chercher()
  * saisies_supprimer()
  * saisies_inserer()
@@ -77,7 +78,7 @@ function saisies_lister_par_type($contenu) {
 		}
 	}
 	
-	return $saisies;	
+	return $saisies;
 }
 
 
@@ -93,6 +94,22 @@ function saisies_lister_champs($contenu, $avec_conteneur=true){
 	$saisies = saisies_lister_par_nom($contenu, $avec_conteneur);
 	return array_keys($saisies);
 }
+
+/*
+ * Prend la description complète du contenu d'un formulaire et retourne
+ * une liste des valeurs par défaut des champs du formulaire.
+ *
+ * @param array $contenu Le contenu d'un formulaire
+ * @return array Un tableau renvoyant la valeur par défaut de chaque champs
+ */
+function saisies_lister_valeurs_defaut($contenu){
+	$contenu = saisies_lister_par_nom($contenu, false);
+	$saisies = array();
+	foreach ($contenu as $champs => $ligne)
+		$saisies[$champs]  = isset($ligne['options']['defaut']) ? $ligne['options']['defaut'] : ''; 
+	return $saisies;
+}
+
 
 /*
  * Cherche une saisie par son nom ou son chemin et renvoie soit la saisie, soit son chemin
