@@ -111,6 +111,65 @@ function ieconfig_saisies_import() {
 				);
 			$saisies = array_merge($saisies,$saisies_spip_contenu);
 		}
+		// Le fichier contient-il une configuration pour l'onglet interactivité
+		if (isset($config['spip_interactivite'])) {
+			$texte_explication = _T('ieconfig:texte_spip_interactivite_import_explication');
+			$i = 0;
+			foreach($config['spip_interactivite'] as $meta => $valeur)
+				if ($GLOBALS['meta'][$meta] != $valeur) {
+					$texte_explication .= '<br />&raquo; '.$meta.' : '.$GLOBALS['meta'][$meta].' -> '.$valeur;
+					$i++;
+				}
+			if ($i>0)
+				$saisies_spip_interactivite = array(
+					array(
+						'saisie' => 'fieldset',
+						'options' => array(
+							'nom' => 'spip_interactivite',
+							'label' => '<:spip:onglet_interactivite:>',
+							'icone' => 'images/forum-interne-24.gif'
+						),
+						'saisies' => array(
+							array(
+								'saisie' => 'explication',
+								'options' => array(
+									'nom' => 'spip_interactivite_explication',
+									'texte' => $texte_explication
+								)
+							),
+							array(
+								'saisie' => 'oui_non',
+								'options' => array(
+									'nom' => 'spip_interactivite_importer',
+									'label' => '<:ieconfig:label_importer:>',
+									'defaut' => '',
+								)
+							)
+						)
+					)
+				);
+			else
+				$saisies_spip_interactivite = array(
+					array(
+						'saisie' => 'fieldset',
+						'options' => array(
+							'nom' => 'spip_interactivite',
+							'label' => '<:spip:onglet_interactivite:>',
+							'icone' => 'images/forum-interne-24.gif'
+						),
+						'saisies' => array(
+							array(
+								'saisie' => 'explication',
+								'options' => array(
+									'nom' => 'spip_interactivite_explication',
+									'texte' => '<:ieconfig:texte_configuration_identique:>'
+								)
+							)
+						)
+					)
+				);
+			$saisies = array_merge($saisies,$saisies_spip_interactivite);
+		}
 		// On passe via le pipeline ieconfig
 		$saisies = pipeline('ieconfig',array(
 			'args' => array(
@@ -170,6 +229,13 @@ function formulaires_ieconfig_import_traiter_dist() {
 		// Le fichier contient-il une configuration des contenus du site à importer
 		if (isset($config['spip_contenu']) && _request('spip_contenu_importer')=='on') {
 			foreach($config['spip_contenu'] as $nom => $valeur)
+				ecrire_meta($nom,$valeur);
+			ecrire_metas();
+		}
+		
+		// Le fichier contient-il une configuration pour l'ongler interactivité
+		if (isset($config['spip_interactivite']) && _request('spip_interactivite_importer')=='on') {
+			foreach($config['spip_interactivite'] as $nom => $valeur)
 				ecrire_meta($nom,$valeur);
 			ecrire_metas();
 		}

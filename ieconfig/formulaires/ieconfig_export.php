@@ -73,13 +73,49 @@ function ieconfig_saisies_export() {
 						'label' => '<:ieconfig:label_elements_a_exporter:>',
 						'cacher_option_intro' => 'oui',
 						'datas' => array(
-							'articles' => '<:ieconfig:label_configuration_articles:>',
-							'rubriques' => '<:ieconfig:label_configuration_rubriques:>',
-							'breves' => '<:ieconfig:label_configuration_breves:>',
-							'mots' => '<:ieconfig:label_configuration_mots:>',
-							'logos' => '<:ieconfig:label_configuration_logos:>',
-							'documents' => '<:ieconfig:label_configuration_documents:>',
-							'sites' => '<:ieconfig:label_configuration_sites:>'
+							'articles' => '<:ecrire:titre_page_articles_page:>',
+							'rubriques' => '<:icone_rubriques:>',
+							'breves' => '<:ecrire:titre_breves:>',
+							'mots' => '<:info_mots_cles:>',
+							'logos' => '<:info_logos:>',
+							'documents' => '<:titre_documents_joints:>',
+							'sites' => '<:titre_referencement_sites:>'
+						)
+					)
+				)
+			)
+		),
+				// Onglet Interactivité
+		array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'spip_interactivite',
+				'label' => '<:spip:onglet_interactivite:>',
+				'icone' => 'images/forum-interne-24.gif'
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'explication',
+					'options' => array(
+						'nom' => 'spip_interactivite_explication',
+						'texte' => '<:ieconfig:texte_spip_interactivite_export_explication:>'
+					)
+				),
+				array(
+					'saisie' => 'selection_multiple',
+					'options' => array(
+						'nom' => 'spip_interactivite_choix',
+						'label' => '<:ieconfig:label_elements_a_exporter:>',
+						'cacher_option_intro' => 'oui',
+						'datas' => array(
+							'participants' => '<:ecrire:info_mode_fonctionnement_defaut_forum_public:>',
+							'contenu_forums' => '<:spip:titre_forum:>',
+							'redacteurs' => '<:ecrire:info_inscription_automatique:>',
+							'visiteurs' => '<:ecrire:info_visiteurs:>',
+							'forums_prives' => '<:ecrire:titre_config_forums_prive:>',
+							'messagerie_agenda' => '<:ecrire:titre_messagerie_agenda:>',
+							'annonces' => '<:ecrire:info_envoi_email_automatique:>',
+							'notifications_forum' => '<:ecrire:info_envoi_forum:>'
 						)
 					)
 				)
@@ -159,6 +195,49 @@ function formulaires_ieconfig_export_traiter_dist() {
 				$export['spip_contenu']["activer_syndic"] = $GLOBALS['meta']["activer_syndic"];
 				$export['spip_contenu']["proposer_sites"] = $GLOBALS['meta']["proposer_sites"];
 				$export['spip_contenu']["moderation_sites"] = $GLOBALS['meta']["moderation_sites"];
+				break;
+			}
+	}
+	
+	// Onglet Interactivité (configuration de spip)
+	if (count(_request('spip_interactivite_choix'))>0) {
+		$export['spip_interactivite'] = array();
+		foreach(_request('spip_interactivite_choix') as $choix) 
+			switch ($choix) {
+			case 'participants':
+				$export['spip_interactivite']['forums_publics'] = $GLOBALS['meta']["forums_publics"];
+				break;
+			case 'contenu_forums':
+				$export['spip_interactivite']['forums_titre'] = $GLOBALS['meta']["forums_titre"];
+				$export['spip_interactivite']['forums_texte'] = $GLOBALS['meta']["forums_texte"];
+				$export['spip_interactivite']['forums_urlref'] = $GLOBALS['meta']["forums_urlref"];
+				$export['spip_interactivite']['forums_afficher_barre'] = $GLOBALS['meta']["forums_afficher_barre"];
+				break;
+			case 'redacteurs':
+				$export['spip_interactivite']['accepter_inscriptions'] = $GLOBALS['meta']["accepter_inscriptions"];
+				break;
+			case 'visiteurs':
+				$export['spip_interactivite']['accepter_visiteurs'] = $GLOBALS['meta']["accepter_visiteurs"];
+				break;
+			case 'forums_prives':
+				$export['spip_interactivite']['forum_prive_objets'] = $GLOBALS['meta']["forum_prive_objets"];
+				$export['spip_interactivite']['forum_prive'] = $GLOBALS['meta']["forum_prive"];
+				$export['spip_interactivite']['forum_prive_admin'] = $GLOBALS['meta']["forum_prive_admin"];
+				break;
+			case 'messagerie_agenda':
+				$export['spip_interactivite']['messagerie_agenda'] = $GLOBALS['meta']["messagerie_agenda"];
+				break;
+			case 'annonces':
+				$export['spip_interactivite']['suivi_edito'] = $GLOBALS['meta']["suivi_edito"];
+				$export['spip_interactivite']['adresse_suivi'] = $GLOBALS['meta']["adresse_suivi"];
+				$export['spip_interactivite']['adresse_suivi_inscription'] = $GLOBALS['meta']["adresse_suivi_inscription"];
+				$export['spip_interactivite']['quoi_de_neuf'] = $GLOBALS['meta']["quoi_de_neuf"];
+				$export['spip_interactivite']['adresse_neuf'] = $GLOBALS['meta']["adresse_neuf"];
+				$export['spip_interactivite']['jours_neuf'] = $GLOBALS['meta']["jours_neuf"];
+				$export['spip_interactivite']['email_envoi'] = $GLOBALS['meta']["email_envoi"];
+				break;
+			case 'notifications_forum':
+				$export['spip_interactivite']['prevenir_auteurs'] = $GLOBALS['meta']["prevenir_auteurs"];
 				break;
 			}
 	}
