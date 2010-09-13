@@ -9,7 +9,8 @@ function ieconfig_saisies_import() {
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'ieconfig_import_choix_fichier',
-					'label' => '<:ieconfig:label_ieconfig_import_choix_fichier:>'
+					'label' => '<:ieconfig:label_ieconfig_import_choix_fichier:>',
+					'icone' => 'img/ieconfig-import.png'
 				),
 				'saisies' => array(
 					array(
@@ -66,7 +67,8 @@ function ieconfig_saisies_import() {
 						'saisie' => 'fieldset',
 						'options' => array(
 							'nom' => 'spip_contenu',
-							'label' => '<:spip:onglet_contenu_site:>'
+							'label' => '<:spip:onglet_contenu_site:>',
+							'icone' => 'images/racine-site-24.gif'
 						),
 						'saisies' => array(
 							array(
@@ -93,7 +95,8 @@ function ieconfig_saisies_import() {
 						'saisie' => 'fieldset',
 						'options' => array(
 							'nom' => 'spip_contenu',
-							'label' => '<:spip:onglet_contenu_site:>'
+							'label' => '<:spip:onglet_contenu_site:>',
+							'icone' => 'images/racine-site-24.gif'
 						),
 						'saisies' => array(
 							array(
@@ -123,15 +126,13 @@ function ieconfig_saisies_import() {
 }
 
 function formulaires_ieconfig_import_charger_dist() {
+	$saisies = ieconfig_saisies_import();
 	$contexte = array(
-		'_saisies' => ieconfig_saisies_import()
+		'_saisies' => $saisies
 	);
-	if (_request('_code_yaml'))
+	if (_request('_code_yaml') and !_request('annuler') and !_request('importer'))
 		$contexte['_code_yaml'] = _request('_code_yaml');
-	$contexte = array_merge($_POST,$contexte);
-	if (_request('annuler') or _request('importer'))
-		unset($contexte['_code_yaml']);
-	return $contexte;
+	return array_merge(saisies_lister_valeurs_defaut($saisies),$contexte);
 }
 
 function formulaires_ieconfig_import_verifier_dist() {

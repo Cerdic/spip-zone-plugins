@@ -36,6 +36,6 @@
 	<categorie>maintenance</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.2)" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
-	<necessite id="saisies" version="[1.7.6;]" />
+	<necessite id="saisies" version="[1.7.8;]" />
 	<necessite id="verifier" />
 </plugin>

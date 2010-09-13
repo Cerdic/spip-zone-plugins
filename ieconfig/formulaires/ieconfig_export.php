@@ -7,7 +7,8 @@ function ieconfig_saisies_export() {
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'ieconfig_export',
-				'label' => '<:ieconfig:label_ieconfig_export:>'
+				'label' => '<:ieconfig:label_ieconfig_export:>',
+				'icone' => 'img/ieconfig-export.png'
 			),
 			'saisies' => array(
 				array(
@@ -54,7 +55,8 @@ function ieconfig_saisies_export() {
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'spip_contenu',
-				'label' => '<:spip:onglet_contenu_site:>'
+				'label' => '<:spip:onglet_contenu_site:>',
+				'icone' => 'images/racine-site-24.gif'
 			),
 			'saisies' => array(
 				array(
@@ -95,10 +97,12 @@ function ieconfig_saisies_export() {
 }
 
 function formulaires_ieconfig_export_charger_dist() {
+	$saisies = ieconfig_saisies_export();
 	$contexte = array(
-		'_saisies' => ieconfig_saisies_export()
+		'_saisies' => $saisies
 	);
-	return array_merge($_POST,$contexte);
+	
+	return array_merge(saisies_lister_valeurs_defaut($saisies),$contexte);
 }
 
 function formulaires_ieconfig_export_verifier_dist() {
