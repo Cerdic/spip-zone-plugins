@@ -100,6 +100,7 @@ function noizetier_ieconfig($flux){
 								'nom' => 'noizetier_import_compos',
 								'label' => '<:noizetier:formulaire_import_compos:>',
 								'defaut' => 'oui',
+								'cacher_option_intro' => 'oui',
 								'datas' => array(
 									'oui' => '<:noizetier:oui:>',
 									'non' => '<:noizetier:non:>'
