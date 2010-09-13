@@ -16,7 +16,8 @@ function noizetier_ieconfig($flux){
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => 'noizetier_export',
-					'label' => '<:noizetier:editer_noizetier_titre:>'
+					'label' => '<:noizetier:editer_noizetier_titre:>',
+					'icone' => 'img/noizetier-24.png'
 				),
 				'saisies' => array(
 					array(
@@ -70,7 +71,8 @@ function noizetier_ieconfig($flux){
 					'saisie' => 'fieldset',
 					'options' => array(
 						'nom' => 'noizetier_export',
-						'label' => '<:noizetier:editer_noizetier_titre:>'
+						'label' => '<:noizetier:editer_noizetier_titre:>',
+						'icone' => 'img/noizetier-24.png'
 					),
 					'saisies' => array(
 						array(
@@ -116,7 +118,8 @@ function noizetier_ieconfig($flux){
 					'saisie' => 'fieldset',
 					'options' => array(
 						'nom' => 'noizetier_export',
-						'label' => '<:noizetier:editer_noizetier_titre:>'
+						'label' => '<:noizetier:editer_noizetier_titre:>',
+						'icone' => 'img/noizetier-24.png'
 					),
 					'saisies' => array(
 						array(
