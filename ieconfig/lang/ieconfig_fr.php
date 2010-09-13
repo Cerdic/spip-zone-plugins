@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_description' => 'Description&nbsp;:',
 	'texte_ieconfig_export_explication' => 'Vous pouvez sauvegarder localement votre export au format YAML dans le r&eacute;pertoire <i>tmp/ieconfig/</i> ou bien le t&eacute;l&eacute;charger.',
 	'texte_nom' => 'Nom&nbsp;:',
-	'texte_plugins_manquants' => 'Ce fichier contient des configurations pour les plugins suivants qui ne sont pas activ&eacute;s sur votre site&nbsp;: <i>@plugins@</i>. Ces configurations ne seront donc pas import&eacute;s.',
+	'texte_plugins_manquants' => 'Ce fichier contient des configurations pour les plugins suivants qui ne sont pas activ&eacute;s sur votre site&nbsp;: <i>@plugins@</i>. Ces configurations ne seront donc pas import&eacute;es.',
 	'texte_spip_contenu_export_explication' => 'Vous pouvez exporter la configuration des contenus du site que vous avez d&eacute;fini dans la <a href="./?exec=config_contenu">Configuration du site</a>.',
 	'texte_spip_contenu_import_explication' => 'Ce fichier contient des valeurs de configuration pour les contenus de votre site. Si vous l\'importez, les param&egrave;tres suivants seront modifi&eacute;s&nbsp;:',
 	'texte_spip_interactivite_export_explication' => 'Vous pouvez exporter les param&egrave;tres d&eacute;finis sous l\'onglet <i><a href="./?exec=config_contenu">Interactivit&eacute;</a></i> dans la Configuration du site.',
