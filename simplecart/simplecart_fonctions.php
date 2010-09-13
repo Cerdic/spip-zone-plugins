@@ -13,6 +13,10 @@ function balise_SIMPLECART_TOTAL_dist($p) {
     return $p;
 }
 
+function balise_SIMPLECART_FINAL_TOTAL_dist($p) {
+     $p->code = "'<span class=\"simpleCart_finalTotal\"></span>'";
+    return $p;
+}
 
 function balise_SIMPLECART_CHECKOUT_dist($p) {
      $p->code = "'<a href=\"javascript:;\" class=\"simpleCart_checkout\">". _T('simplecart:checkout')."</a>'";
