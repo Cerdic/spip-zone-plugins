@@ -38,13 +38,13 @@ function balise_SIMPLECART_TAX_RATE_dist($p) {
 }
 
 function balise_SIMPLECART_TAX_COST_dist($p) {
-     $p->code = "'<div class=\"simpleCart_taxCost\"></div>'";
+     $p->code = "'<span class=\"simpleCart_taxCost\"></span>'";
     return $p;
 }
 
 
 function balise_SIMPLECART_SHIPPING_COST_dist($p) {
-     $p->code = "'<div class=\"simpleCart_shippingCost\"></div>'";
+     $p->code = "'<span class=\"simpleCart_shippingCost\"></span>'";
     return $p;
 }
 
