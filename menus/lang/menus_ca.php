@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => 'Enlla&ccedil; cap a la p&agrave;gina d\'inici del lloc.',
-	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
+	'description_menu_articles_rubrique' => 'Mostra la llista d\'articles d\'una secci&oacute;.',
 	'description_menu_deconnecter' => 'Si el visitant est&agrave; connectat, afegeix una entrada proposant-li la desconnexi&oacute;.',
 	'description_menu_espace_prive' => 'Enlla&ccedil; que permet connectar-se al lloc, si encara no ho estem, i despr&eacute;s anar a l\'espai privat sempre i quan estiguem autoritzats a fer-ho.',
 	'description_menu_groupes_mots' => 'Mostra autom&agrave;ticament un men&uacute; que llista les paraules del grup i els articles lligats. Per defecte, mostra la llista dels grups de paraules i les paraules lligades. Si un esquelet grups_paraules.html existeix, s\'utilitzar&agrave; l\'enlla&ccedil; cap al grup.',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => 'Inici',
-	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
+	'nom_menu_articles_rubrique' => 'Articles d\'una secci&oacute;',
 	'nom_menu_deconnecter' => 'Desconnectar-se',
 	'nom_menu_espace_prive' => 'Connectar-se / enlla&ccedil; cap a l\'espai privat',
 	'nom_menu_groupes_mots' => 'Paraules clau i Articles d\'un Grup de paraules',
