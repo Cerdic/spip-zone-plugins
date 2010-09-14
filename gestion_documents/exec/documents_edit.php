@@ -93,9 +93,10 @@ function documents_edit_ok($row, $id_document, $parent, $new)
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'documents_edit','id_document'=>$id_document),'data'=>''));
 	echo debut_droite('', true);
 
+	$redirect = _request('redirect') ? _request('redirect') : generer_url_ecrire("portfolio");
 	$contexte = array(
-	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("portfolio"), find_in_path("images/document-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
-	'redirect'=>'',//generer_url_ecrire("portfolio"),
+	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'),$redirect, find_in_path("images/document-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
+	'redirect'=>_request('redirect',''),//generer_url_ecrire("portfolio"),
 	'titre'=>$titre,
 	'new'=>$new == "oui"?$new:$id_document,
 	'parent'=>$parent,
