@@ -42,7 +42,7 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 		$args = _request('args');
 	}
 
-	if (!in_array($action,array('create','update','delete')))
+	if (!in_array($action,array('create','update','delete', 'read')))
 		$res = array('message'=>_L("CRUD action $action erronee"));
 
 	elseif (!preg_match(',^\w+$,',$table))

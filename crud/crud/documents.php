@@ -23,15 +23,15 @@ function crud_documents_create_dist($dummy,$set=null){
 		$f = chercher_filtre('info_plugin');
 		// gerer la mediatheque aussi avant son entree dans le core
 		if ($f('gestdoc', 'est_actif')) {
-			$f = charger_fonction('ajouter_un_document','action');
-			$id = $f('non', array('tmp_name' => $chemin, 'name' => basename($chemin)), $set['type'], $set['id_objet'], $set['mode']);
+			$f = charger_fonction('ajouter_documents','action');
+			$id = $f('new', array(array('tmp_name' => $chemin, 'name' => basename($chemin))), $set['type'], $set['id_objet'], $set['mode']);
 		}
 		else {
 			$f = charger_fonction('ajouter_documents', 'inc');
 			$id = $f($chemin, basename($chemin), $set['type'], $set['id_objet'], $set['mode'], 0, basename($chemin));
 		}
-		if (intval($id)) {
-			$resultat = array($id, true, 'ok');
+		if (intval($id = $id[0])) {
+			$resultat = array($id, 'ok');
 			$champs = array();
 			foreach (array('titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode','credits','fichier','distant','extension', 'id_vignette') as $champ) {
 				if (($set[$champ]) !== null)
@@ -39,7 +39,7 @@ function crud_documents_create_dist($dummy,$set=null){
 			}
 			document_set($id, $champs);
 		}
-		list($id,$ok,$e) = $resultat;
+		list($id,$ok) = $resultat;
 	}
 	else
 		$e = _L('create error');
