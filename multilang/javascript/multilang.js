@@ -448,9 +448,11 @@ function multilang_mark_empty_langs(container,target) {
 	});
 
 	// On indique dans le menu de langue, celles qui ont au moins un champ non renseigne
-	$.each(langs_empty,function(i,name){
-		container.find('a[class~='+name+']').addClass('empty') ;
-	});
+	if(container!='') {
+		$.each(langs_empty,function(i,name){
+			container.find('a[class~='+name+']').addClass('empty') ;
+		});
+	}
 }
 
 /**
