@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Bana, bu b&ouml;lgeye eri&#351;im haklar&#305;n&#305; ver',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => '&#1604;&#1575; &#1578;&#1608;&#1580;&#1583; &#1571;&#1610;&#1577; &#1605;&#1606;&#1591;&#1602;&#1577;', # NEW
 	'auteurs' => 'yazar',
 
 	// B
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Say&#305;',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
+	'confirmer_ajouter_auteurs' => '&#1607;&#1604; &#1575;&#1606;&#1578; &#1605;&#1578;&#1571;&#1603;&#1583; &#1605;&#1606; &#1573;&#1590;&#1575;&#1601;&#1577; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601; &#1575;&#1604;&#1609; &#1575;&#1604;&#1605;&#1606;&#1591;&#1602;&#1577;&#1567;', # NEW
 	'confirmer_retirer_auteur_zone' => 'Bu yazar&#305; bu b&ouml;l&uuml;mden (Zone) &ccedil;ekmek istedi&#287;inizden emin misiniz ?',
 	'confirmer_retirer_auteurs' => 'T&uuml;m yazarlar&#305; bu b&ouml;l&uuml;mden (Zone) &ccedil;ekmek istedi&#287;inizden emin misiniz ?',
 	'confirmer_supprimer_zone' => 'Bu b&ouml;lgeyi silmek istedi&#287;inizden emin misiniz ?',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'K&#305;s&#305;tl&#305; Eri&#351;im',
 	'icone_supprimer_zone' => 'Bu b&ouml;lgeyi sil',
-	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
+	'info_acces_restreint' => '&#1575;&#1604;&#1608;&#1589;&#1608;&#1604; &#1575;&#1604;&#1609; &#1607;&#1584;&#1607; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1605;&#1581;&#1589;&#1608;&#1585;. &#1593;&#1604;&#1610;&#1603; &#1575;&#1604;&#1578;&#1593;&#1585;&#1610;&#1601; &#1576;&#1606;&#1601;&#1587;&#1603; &#1604;&#1604;&#1608;&#1589;&#1608;&#1604; &#1575;&#1604;&#1610;&#1607;&#1575;', # NEW
 	'info_ajouter_auteur' => 'Bu yazar&#305; ekle',
 	'info_ajouter_auteurs' => 'T&uuml;m yazarlar&#305; ekle',
 	'info_ajouter_zones' => 'T&uuml;m b&ouml;lgeleri ekle',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Ba&#351;l&#305;k',
 	'titre_ajouter_zone' => 'B&ouml;lgeye gir',
 	'titre_cadre_modifier_zone' => 'Bir b&ouml;l&uuml;m&uuml; (Zone) de&#287;i&#351;tir',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_page_config' => '&#1573;&#1593;&#1583;&#1575;&#1583; &#1575;&#1604;&#1583;&#1582;&#1608;&#1604;', # NEW
 	'titre_table' => 'T&uuml;m eri&#351;im b&ouml;lgeleri',
 	'titre_zones_acces' => 'K&#305;s&#305;tl&#305; eri&#351;im b&ouml;lgeleri',
 	'toutes' => 'Hepsi',
