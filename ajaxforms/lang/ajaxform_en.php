@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'logo' => 'Logo',
-	'logo_maj' => 'The logo has been updated.',
+	'logo_maj' => 'The logo has been updated.', # MODIF
 	'logo_survol' => 'Rollover Logo',
 
 	// M
