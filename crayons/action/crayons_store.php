@@ -425,7 +425,7 @@ function action_crayons_store_args($store = 'crayons_store') {
 
 	// Cas normal : JSON
 	else {
-		echo json_export($r);
+		echo crayons_json_export($r);
 	}
 
 	exit;
