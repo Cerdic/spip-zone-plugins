@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -28,6 +28,7 @@ if (($GLOBALS['auteur_session']['statut'] != '0minirezo') || !$ok) {
 function url_filepicker($dir, $file, $args = false) {
   return '?action=filepickerwrapper&dir='.$dir.'&file='.$file.(($args==true) ? $args : '');
 }
+$action_effacer = url_filepicker($dir, $file, '&del=true'); 
 
 if (isset($_POST['dir']) && isset($_POST['file'])) {
   $file = $_POST['file'];
@@ -47,9 +48,12 @@ else {
   $hash = $_GET['hash'];
   // Efface l'image après quelques vérifications ... ;-)
   if (isset($dir) && $dir && isset($file) && $file && isset($del) && $del) {
-    $hashdel = md5(serialize(url_filepicker($dir, $file, '&del=true').$GLOBALS['auteur_session']['hash_env']));
+    $hashdel = md5(serialize($action_effacer.$GLOBALS['auteur_session']['hash_env']));
     if($hash==$hashdel) {
      if (!@unlink($dir.'/'.$file)) echo '<div class="alert">'._T('acs:err_del_file').'</div>';
+    }
+    else {
+    	echo '<div class="alert">'._T('acs:err_del_file').'</div>';
     }
   }
 }
