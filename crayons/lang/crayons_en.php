@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configure &laquo;crayons&raquo;',
-	'titre_crayons' => 'Crayons',
+	'titre_crayons' => 'Crayons', # MODIF
 
 	// U
 	'update_impossible' => 'The update did not succeed.',
