@@ -5,6 +5,14 @@ thewojogroup.com
 simplecartjs.com
 http://github.com/thewojogroup/simplecart-js/tree/master
 
+
+Copyright (c) 2010 Martín Gaitán
+
+This is a forked version by Martín Gaitán to add new checkout options. 
+http://github.com/nqnwebs/simplecart-js/
+http://nqnwebs.com/blog/article/integracion-de-dineromail-en  
+
+
 The MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -333,7 +341,6 @@ function Cart(){
         }
 
         
-        
         var form = document.createElement("form"),
         counter = 1;
         form.style.display = "none";
@@ -405,12 +412,12 @@ function Cart(){
         form.submit();
         document.body.removeChild( form );        
 
-        };
+    };
 
 
-        me.customCheckout = function() {
-            return;
-        };
+    me.customCheckout = function() {
+        return;
+    };
 
 
 
@@ -477,8 +484,15 @@ function Cart(){
         me.addEventToArray( getElementsByClassName('simpleCart_checkout') , simpleCart.checkout , "click");
         me.addEventToArray( getElementsByClassName('simpleCart_empty')  , simpleCart.empty , "click" );
         
+
+        //update checkout method. Useful to allow buyer select checkout method dinamically
+        me.addEventToArray( getElementsByClassName('simpleCart_to_paypal') , function(){ me.checkoutTo=PayPal } , "click" );
+        me.addEventToArray( getElementsByClassName('simpleCart_to_googlecheckout') , function(){ me.checkoutTo=GoogleCheckout } , "click" );
+        me.addEventToArray( getElementsByClassName('simpleCart_to_dineromail') , function(){ me.checkoutTo=DineroMail } , "click" );
+        me.addEventToArray( getElementsByClassName('simpleCart_to_email') , function(){ me.checkoutTo=DineroMail } , "click" );
+
+
         me.Shelf.readPage();
-            
         me.pageIsReady = true;
         
     };

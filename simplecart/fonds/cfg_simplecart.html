@@ -1,5 +1,7 @@
 <!-- titre=<:simplecart:title:>--> 
 <!-- descriptif=<:simplecart:description:>--> 
+<!-- icone=images/simplecart-24.png -->
+<!-- logo=images/simplecart-48.png -->
 
 <div class="formulaire_spip formulaire_cfg formulaire_config_crayons">
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
@@ -7,61 +9,122 @@
 
 
 
-<h3 class="legend"><:simplecart:enable_payment_method</h3>
+<h3 class="legend"><:simplecart:checkout_methods:></h3>
 
 <ul><li>
     <div class="choix">
         <input type="checkbox" name="method_paypal" class="checkbox" value='on' [(#ENV{method_paypal}|oui)checked="checked"] />
-        <label for='msgNoChange'>PayPal</label>
+        <label><:simplecart:c_paypal:></label>
     </div>
     
     <div class="choix">
         <input type="checkbox" name="method_google_checkout" class="checkbox" value='on' [(#ENV{method_google_checkout}|oui)checked="checked"] />
-        <label for='msgNoChange'>Google CheckOut</label>
+        <label><:simplecart:c_google_checkout:></label>
     </div>
 
     <div class="choix">
         <input type="checkbox" name="method_dineromail" class="checkbox" value='on' [(#ENV{method_dineromail}|oui)checked="checked"] />
-        <label for='msgNoChange'>Dineromail</label>
+        <label><:simplecart:c_dineromail:></label>
     </div>
 
     <div class="choix">
         <input type="checkbox" name="method_email" class="checkbox" value='on' [(#ENV{method_email}|oui)checked="checked"] />
-        <label for='msgNoChange'>Email</label>
+        <label><:simplecart:c_email:></label>
     </div>
 </li></ul>
 
 
 
-<h3 class="legend">PayPal</h3>
+<h3 class="legend"><:simplecart:c_paypal:></h3>
 <ul>
-<li>
-  <label for='paypal_account'><:simplecart:paypal_account:></label>
-  <p class="explication"><:simplecart:paypal_account_explication:></p>
-  <input type="text" name="paypal_account" class="text" value="#ENV{paypal_account}" />
-</li>
+    <li>
+      <label for='paypal_account'><:simplecart:paypal_account:></label>
+      <p class="explication"><:simplecart:paypal_account_explication:></p>
+      <input type="text" name="paypal_account" class="text" value="#ENV{paypal_account}" />
+    </li>
 </ul>
 
 
-<h3 class="legend">Google CheckOut</h3>
+<h3 class="legend"><:simplecart:c_google_checkout:></h3>
 <ul>
-<li>
-  <label for='google_merchant_id'><:simplecart:google_merchant_id:></label>
-  <p class="explication"><:simplecart:google_merchant_id_explication:></p>
-  <input type="text" name="google_merchant_id"  class="text" value="#ENV{google_merchant_id}" />
-</li>
+    <li>
+      <label for='google_merchant_id'><:simplecart:google_merchant_id:></label>
+      <p class="explication"><:simplecart:google_merchant_id_explication:></p>
+      <input type="text" name="google_merchant_id"  class="text" value="#ENV{google_merchant_id}" />
+    </li>
 </ul>
 
-<h3 class="legend">Dineromail</h3>
+<h3 class="legend"><:simplecart:c_dineromail:></h3>
 <ul>
-<li>
-  <label for='dineromail_merchant_id'><:simplecart:dineromail_merchant_id:></label>
-    <p class="explication"><:simplecart:dineromail_merchant_id_explication:></p>
-  <input type="text" name="dinero_merchant_id"  class="text" value="#ENV{dineromail_merchant_id}" />
-</li>
+    <li>
+      <label for='dineromail_merchant_id'><:simplecart:dineromail_merchant_id:></label>
+        <p class="explication"><:simplecart:dineromail_merchant_id_explication:></p>
+      <input type="text" name="dineromail_merchant_id"  class="text" value="#ENV{dineromail_merchant_id}" />
+    </li>
+
+    <li>
+      <label><:simplecart:dineromail_country:></label>
+        <p class="explication"><:simplecart:dineromail_country_explication:></p>
+
+       <select name="dineromail_country_id" class="text">
+            <option value="1" [(#ENV{dineromail_country_id}|=={1}|?{selected="selected"})]><:simplecart:dineromail_country_argentine:></option>
+            <option value="2" [(#ENV{dineromail_country_id}|=={2}|?{selected="selected"})]><:simplecart:dineromail_country_brazil:></option>
+            <option value="3" [(#ENV{dineromail_country_id}|=={3}|?{selected="selected"})]><:simplecart:dineromail_country_chile:></option>
+            <option value="4" [(#ENV{dineromail_country_id}|=={4}|?{selected="selected"})]><:simplecart:dineromail_country_mexico:></option>
+        </select>
+    </li>
+
+    <li>
+      <label for='dineromail_currency'><:simplecart:dineromail_currency:></label>
+        <p class="explication"><:simplecart:dineromail_currency_explication:></p>
+
+       <select name="dineromail_currency" class="text">
+            <option value="1" [(#ENV{dineromail_currency}|=={1}|?{selected="selected"})]><:simplecart:dineromail_currency_local:></option>
+            <option value="2" [(#ENV{dineromail_currency}|=={2}|?{selected="selected"})]><:simplecart:dineromail_currency_usd:></option>
+       </select>
+    </li>
+
+
+
+    <li>
+      <label for='dineromail_payments_methods'><:simplecart:dineromail_payments_methods:></label>
+      <p class="explication"><:simplecart:dineromail_payments_methods_explication:></p>
+    <input type="text" name="dineromail_payments_methods"  class="text" value="#ENV{dineromail_payments_methods}" />
+    </li>
+
+    <li>
+      <label for='dineromail_seller_name'><:simplecart:dineromail_seller_name:></label>
+      <p class="explication"><:simplecart:dineromail_seller_name_explication:></p>
+    <input type="text" name="dineromail_seller_name"  class="text" value="#ENV{dineromail_seller_name}" />
+    </li>
+
+    <li>
+      <label for='dineromail_header_image'><:simplecart:dineromail_header_image:></label>
+      <p class="explication"><:simplecart:dineromail_header_image_explication:></p>
+    <input type="text" name="dineromail_header_image"  class="text" value="#ENV{dineromail_header_image}" />
+    </li>
+
+    <li>
+      <label for='dineromail_ok_url'><:simplecart:dineromail_ok_url:></label>
+      <p class="explication"><:simplecart:dineromail_ok_url_explication:></p>
+      <input type="text" name="dineromail_ok_url"  class="text" value="#ENV{dineromail_ok_url}" />
+    </li>
+
+    <li>
+      <label for='dineromail_error_url'><:simplecart:dineromail_error_url:></label>
+      <p class="explication"><:simplecart:dineromail_error_url_explication:></p>
+      <input type="text" name="dineromail_error_url"  class="text" value="#ENV{dineromail_error_url}" />
+    </li>
+
+    <li>
+      <label for='dineromail_pending_url'><:simplecart:dineromail_pending_url:></label>
+      <p class="explication"><:simplecart:dineromail_pending_url_explication:></p>
+      <input type="text" name="dineromail_pending_url"  class="text" value="#ENV{dineromail_pending_url}" />
+    </li>
+
 </ul>
 
-<h3 class="legend">Email</h3>
+<h3 class="legend"><:simplecart:c_email:></h3>
 <ul>
 <li>
   <label for='checkout2email'><:simplecart:checkout2email:></label>
@@ -85,6 +148,7 @@
  <ul>
     <li>
         <label><:simplecart:tax_rate:></label>
+        <p class="explication"><:simplecart:tax_rate_explication:></p>
         <input type="text" name="tax_rate"  class="text" value="#ENV{tax_rate, 0}" />
     </li>
     <li>

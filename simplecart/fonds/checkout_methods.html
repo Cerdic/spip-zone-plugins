@@ -1,0 +1,15 @@
+#CACHE{0}
+<div class="simpleCart_methods">
+    <h3><:simplecart:checkout_methods:></h3>
+
+    <ul>
+    [(#CONFIG{simplecart/method_paypal}|oui)
+        <li><label><:simplecart:c_paypal:></label><input type="radio" name="method" class="simpleCart_to_paypal"> </li>]
+    [(#CONFIG{simplecart/method_google_checkout}|oui)
+        <li><label><:simplecart:c_google_checkout:></label><input type="radio" name="method" class="simpleCart_to_googlecheckout"></li>]
+    [(#CONFIG{simplecart/method_dineromail}|oui)
+        <li><label><:simplecart:c_dineromail:></label><input type="radio" name="method" class="simpleCart_to_dineromail"></li>]
+    [(#CONFIG{simplecart/method_email}|oui)
+        <li><label><:simplecart:c_email:></label><input type="radio" name="method" class="simpleCart_to_email"></li>]
+    </ul>
+</div>

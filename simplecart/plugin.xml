@@ -1,37 +1,32 @@
 <plugin>
-    <nom> <!-- Nom du plugin -->
-    SimpleCart
-    </nom>
-    <auteur>    <!-- Auteur du plugin -->
+    <nom>SimpleCart (js)</nom>
+    <auteur> 
     Martín Gaitán based on [SimpleCart(js)->http://simplecartjs.com/]
-    _ [Feedback->gaitan@gmail.com] will be appreciated
+    [Feedback->http://nqnwebs.com/blog/article/simplecart-js-para-spip] will be appreciated.
     </auteur>
-    <version>
-    0.1
-    </version>
-    <icon>logo.png</icon>
-    <etat>
-    dev
-    </etat>
+    <version> 0.1 </version>
+    <icon>images/simplecart-48.png</icon>
+    <etat>dev</etat>
     <description>
-<multi>
-A simple e-commerce plugin with no headaches. Just javascript (and spip). [Configuration->.?exec=cfg&amp;cfg=simplecart]
-    </multi>
+        <multi>
+        [en]
+            A simple e-commerce plugin with no headaches. Just javascript (and spip). 
+            [Configuration->.?exec=cfg&amp;cfg=simplecart]
+        [es]
+            Un plugin para e-commerce simple, sin dolores de cabeza. Sólo javascript (y spip). 
+            [Configuración->.?exec=cfg&amp;cfg=simplecart]
+        </multi>
     </description>
     <lien>http://nqnwebs.com/blog/article/simplecart-js-para-spip</lien>
+    <prefix>simplecart</prefix>
     
-    <prefix>
-    simplecart
-    </prefix>
-
-
-    
-<fonctions>simplecart_fonctions.php</fonctions>
+    <fonctions>simplecart_fonctions.php</fonctions>
 
     <pipeline>
         <nom>insert_head</nom>
-        <inclure>head.php</inclure>
+        <inclure>simplecart_head.php</inclure>
     </pipeline>
 
     <necessite id="SPIP" version="[2.0.0;]" />
+    <necessite id="cfg" version="[1.14.1;]" />
 </plugin>

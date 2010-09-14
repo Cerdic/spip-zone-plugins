@@ -13,6 +13,12 @@ function balise_SIMPLECART_TOTAL_dist($p) {
     return $p;
 }
 
+function balise_SIMPLECART_METHODS_dist($p) {
+    $p->code = "recuperer_fond('fonds/checkout_methods')";
+    return $p;
+}
+
+
 function balise_SIMPLECART_FINAL_TOTAL_dist($p) {
      $p->code = "'<span class=\"simpleCart_finalTotal\"></span>'";
     return $p;
