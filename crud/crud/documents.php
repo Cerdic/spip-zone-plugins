@@ -34,7 +34,7 @@ function crud_documents_create_dist($dummy,$set=null){
 			$champs = array('titre' => $set['titre']);
 			if (isset($set['descriptif']))
 				$champs['descriptif'] = $set['descriptif'];
-			sql_updateq('spip_documents', $champs, 'id_document='.$id);
+			sql_updateq("spip_documents", $champs, "id_document=".intval($id));
 		}
 		list($id,$ok,$e) = $resultat;
 	}
@@ -43,7 +43,7 @@ function crud_documents_create_dist($dummy,$set=null){
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_documents_update_dist($id,$set=null){
-	$ok = sql_updateq('spip_documents', $set, 'id_document=$id');
+	$ok = sql_updateq("spip_documents", $set, "id_document=".intval($id));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_documents_delete_dist($id){
