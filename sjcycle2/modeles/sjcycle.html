@@ -59,10 +59,17 @@
 	[(#REM) Solution de denisb pour eviter de dupliquer le code Cf http://article.gmane.org/gmane.comp.web.spip.zone/18622 ]
 
 	<BOUCLE_img(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
-		<div class="infobulle" style="width:#GET{img_width}px;
-      								[(#GET{img_height}|>{0}|oui)height:#GET{img_height}px;]
+   
+   		[(#REM) Les effets de type turnLeft ne fonctionnent pas si ce div est en place. En attendant de corriger
+         rajout dans la doc de l'incompatibilité entre infobulles et ces effets. Du coup la bordure autour de l'image
+         ne se met pas en place non plus ]
+         
+         [(#CONFIG{sjcycle/tooltip}|=={on}|oui)
+        		<div class="infobulle" style="width:#GET{img_width}px;
+      										[(#GET{img_height}|>{0}|oui)height:#GET{img_height}px;]
                                     padding:0px;
                                     margin:[(#GET{img_bordure})]px;">
+         ]
          [(#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui)
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
                                          class="#GET{cssbox}"
@@ -102,8 +109,8 @@
                	<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]
                ]
             </div>
+         </div> <!-- .infobulle -->
          ]
-		</div> <!-- .infobulle -->
 	</BOUCLE_img>
 	</div><!-- sjcycle-->
 </B_img>

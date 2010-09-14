@@ -22,6 +22,12 @@ V 0.4 : Nettoyage
 
 V 0.5 : Intégration de l'aide en utilisant la balise AIDER
 
+V 0.6 :
+- Ne pas mettre en place le div .infobulle dans le modèle si les infobulles ne sont pas demandées dans la config sinon les effets de type turnLeft ne fonctionnent pas
+- Correction d'une erreur d'écriture d'un effet dans le fichier de config
+
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
-- Possibilité d'afficher un diapo dans une rubrique
+- Possibilité d'afficher un diapo dans une rubrique à partir des images de la rubrique
+- L'affichage via un modele ne fonctionne pas dans une rubrique avec les images dans un article car l'id qui arrive dans le modele est celui de la rubrique et non celui de l'article
+- Les effets de type turnLeft ne fonctionnent pas si le div .infobulle est en place dans le modele. En attendant de corriger, rajout dans la doc de l'incompatibilité entre infobulles et ces effets. Du coup la bordure autour de l'image ne se met pas en place non plus... A voir.
