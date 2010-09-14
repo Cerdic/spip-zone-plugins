@@ -59,4 +59,3 @@ function balise_SIMPLECART_ADD_dist($p) {
 
 
 ?>
-
