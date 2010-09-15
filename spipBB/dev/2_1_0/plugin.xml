@@ -170,13 +170,7 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 		<nom>pre_edition</nom>
 		<inclure>spipbb_fonctions.php</inclure>
 	</pipeline>
-	<!-- chargement des notifications facon spipbb -->
-	<pipeline> 
-		<nom>notifications</nom> 
-		<!-- action vide pour provoquer l'inclusion de inc/spipbb_notifications.php --> 
-		<action>chargespipbb</action> 
-		<inclure>inc/spipbb_notifications.php</inclure> 
-	</pipeline> 
+
 
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.1.0;]" />
