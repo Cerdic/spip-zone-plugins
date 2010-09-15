@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -14,13 +14,15 @@ spip_log('ACS: crayons_composant_store');
  */
 function action_crayons_composant_store_dist() {
   include_spip('inc/crayons');
+  include_spip('action/crayons_api');
+  
 	lang_select($GLOBALS['auteur_session']['lang']);
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 	  
   // Dernière sécurité :Accès réservé aux admins ACS
   // Last security: access restricted to ACS admins 
   if (!in_array($GLOBALS['auteur_session']['id_auteur'], explode(',', $GLOBALS['meta']['ACS_ADMINS']))) {
-    echo var2js(array('$erreur' => _T('avis_operation_impossible')));
+    echo api_crayons_var2js(array('$erreur' => _T('avis_operation_impossible')));
     exit;
   }
 
@@ -32,7 +34,7 @@ function action_crayons_composant_store_dist() {
 	// Retourne la vue - Return vue 
 	$return['$erreur'] ='';
   $return[$wid] = vues_dist('composant', $c, $_POST['nic'], array('var_mode'=>'recalcul'));
-	echo var2js($return);
+	echo api_crayons_var2js($return);
 	exit;
 }
 
