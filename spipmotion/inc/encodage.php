@@ -363,6 +363,7 @@ function encodage($source,$doc_attente){
 		 * sinon on utilise notre script pour ffmpeg
 		 */
 		$passes = lire_config("spipmotion/passes_$extension_attente",'1');
+		spip_log("on est en $passes passe(s)","spipmotion");
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
@@ -371,7 +372,7 @@ function encodage($source,$doc_attente){
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
 			spip_log($retour_int,'spipmotion');
 		}else{
-			if(($passes == "2") && (($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($extension_attente == 'webm')){
+			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($extension_attente == 'webm'))){
 				spip_log('on encode en 2 passes','spipmotion');
 				$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
 				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $query $infos_sup_normal\"";
