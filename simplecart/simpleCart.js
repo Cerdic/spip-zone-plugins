@@ -68,10 +68,11 @@ function Cart(){
     //me.dmCurrency = ""; //valid values are USD, ARS, MXN, CLP o BRL. Use the local currency if isn't set.
     //me.dmSellerName = ""; //text replacement for default seller description (email)
     //me.dmHeaderImage = ""; //Image URL to display in the Header.    
-    //me.dmOkUrl = "" //URL to redirect the buyer in case of successful transaction
-    //me.dmErrorUrl = "" //URL to redirect the buyer in case of an error in transaction
-    //me.dmPendingUrl = "" //URL to redirect the buyer in case of pending transaction
+    
 
+    me.okUrl = "" //URL to redirect the buyer in case of successful transaction
+    me.failUrl = "";    //URL to redirect the buyer in case of an error in transaction
+    me.pendingUrl = "" //URL to redirect the buyer in case of pending transaction
 
     me.cartHeaders = ['Name','Price','Quantity','Total'];
     /* 
@@ -256,6 +257,15 @@ function Cart(){
         
         
         strn = strn + itemsString ;
+
+        if( me.okUrl ){
+            strn = strn + "&return=" + me.okUrl;
+        }
+        
+        if( me.failUrl ){
+            strn = strn + "&cancel_return=" + me.failUrl;
+        }
+
         window.open (strn, "paypal", winpar);
     };
 
@@ -364,13 +374,13 @@ function Cart(){
         else if (me.dmHeaderImage) { 
             form.appendChild( me.createHiddenElement( "header_image" , me.dmHeaderImage ) );
         }
-        else if (me.dmOkUrl) { 
+        else if (me.okUrl) { 
             form.appendChild( me.createHiddenElement( "ok_url" , me.dmOkUrl ) );
         }
-        else if (me.dmErrorUrl) { 
+        else if (me.errorUrl) { 
             form.appendChild( me.createHiddenElement( "error_url" , me.dmErrorUrl ) );
         }
-        else if (me.dmPendingUrl) { 
+        else if (me.pendingUrl) { 
             form.appendChild( me.createHiddenElement( "pending_url" , me.dmPendingUrl ) );
         }
         
@@ -676,6 +686,20 @@ function Cart(){
     
     me.currencySymbol = function() {        
         switch(me.currency){
+            case CHF:
+                return "CHF&nbsp;";
+            case CZK:
+                return "CZK&nbsp;";
+            case DKK:
+                return "DKK&nbsp;";
+            case HUF:
+                return "HUF&nbsp;";
+            case NOK:
+                return "NOK&nbsp;";
+            case PLN:
+                return "PLN&nbsp;";
+            case SEK:
+                return "SEK&nbsp;";
             case JPY:
                 return "&yen;";
             case EUR:
