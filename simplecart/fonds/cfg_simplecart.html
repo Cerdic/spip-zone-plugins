@@ -57,50 +57,50 @@
 <h3 class="legend"><:simplecart:c_dineromail:></h3>
 <ul>
     <li>
-      <label for='merchant_id'><:simplecart:merchant_id:></label>
-        <p class="explication"><:simplecart:merchant_id_explication:></p>
+      <label for='merchant_id'><:simplecart:dineromail_merchant_id:></label>
+        <p class="explication"><:simplecart:dineromail_merchant_id_explication:></p>
       <input type="text" name="merchant_id"  class="text" value="#ENV{merchant_id}" />
     </li>
 
     <li>
-      <label><:simplecart:country:></label>
-        <p class="explication"><:simplecart:country_explication:></p>
+      <label><:simplecart:dineromail_country:></label>
+        <p class="explication"><:simplecart:dineromail_country_explication:></p>
 
        <select name="country_id" class="text">
-            <option value="1" [(#ENV{country_id}|=={1}|?{selected="selected"})]><:simplecart:country_argentine:></option>
-            <option value="2" [(#ENV{country_id}|=={2}|?{selected="selected"})]><:simplecart:country_brazil:></option>
-            <option value="3" [(#ENV{country_id}|=={3}|?{selected="selected"})]><:simplecart:country_chile:></option>
-            <option value="4" [(#ENV{country_id}|=={4}|?{selected="selected"})]><:simplecart:country_mexico:></option>
+            <option value="1" [(#ENV{country_id}|=={1}|?{selected="selected"})]><:simplecart:dineromail_country_argentine:></option>
+            <option value="2" [(#ENV{country_id}|=={2}|?{selected="selected"})]><:simplecart:dineromail_country_brazil:></option>
+            <option value="3" [(#ENV{country_id}|=={3}|?{selected="selected"})]><:simplecart:dineromail_country_chile:></option>
+            <option value="4" [(#ENV{country_id}|=={4}|?{selected="selected"})]><:simplecart:dineromail_country_mexico:></option>
         </select>
     </li>
 
     <li>
-      <label for='currency'><:simplecart:currency:></label>
-        <p class="explication"><:simplecart:currency_explication:></p>
+      <label for='currency'><:simplecart:dineromail_currency:></label>
+        <p class="explication"><:simplecart:dineromail_currency_explication:></p>
 
        <select name="currency" class="text">
-            <option value="1" [(#ENV{currency}|=={1}|?{selected="selected"})]><:simplecart:currency_local:></option>
-            <option value="2" [(#ENV{currency}|=={2}|?{selected="selected"})]><:simplecart:currency_usd:></option>
+            <option value="1" [(#ENV{currency}|=={1}|?{selected="selected"})]><:simplecart:dineromail_currency_local:></option>
+            <option value="2" [(#ENV{currency}|=={2}|?{selected="selected"})]><:simplecart:dineromail_currency_usd:></option>
        </select>
     </li>
 
 
 
     <li>
-      <label for='payments_methods'><:simplecart:payments_methods:></label>
-      <p class="explication"><:simplecart:payments_methods_explication:></p>
+      <label for='payments_methods'><:simplecart:dineromail_payments_methods:></label>
+      <p class="explication"><:simplecart:dineromail_payments_methttp://nqnwebs.com/ecrire/?exec=cfg&cfg=simplecarthods_explication:></p>
     <input type="text" name="payments_methods"  class="text" value="#ENV{payments_methods}" />
     </li>
 
     <li>
-      <label for='seller_name'><:simplecart:seller_name:></label>
-      <p class="explication"><:simplecart:seller_name_explication:></p>
+      <label for='seller_name'><:simplecart:dineromail_seller_name:></label>
+      <p class="explication"><:simplecart:dineromail_seller_name_explication:></p>
     <input type="text" name="seller_name"  class="text" value="#ENV{seller_name}" />
     </li>
 
     <li>
-      <label for='header_image'><:simplecart:header_image:></label>
-      <p class="explication"><:simplecart:header_image_explication:></p>
+      <label for='header_image'><:simplecart:dineromail_header_image:></label>
+      <p class="explication"><:simplecart:dineromail_header_image_explication:></p>
     <input type="text" name="header_image"  class="text" value="#ENV{header_image}" />
     </li>
 

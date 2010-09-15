@@ -95,10 +95,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     //S
     'shipping_flat_rate' => 'Tasa de envío fija',
     'shipping_flat_rate_explication' => 'Agrega una tasa fija a la orden completa',
-    'shipping_quantity_rate' => 'Tasa de envío por cantidad',
-    'shipping_quantity_rate_explication' => 'Agrega una tasa fija por cada item en el carrito',
-    'shipping_total_rate' => 'Tasa de envío como porcentaje del total',
-    'shipping_total_rate_explication' => 'Agrega un costo de envío proporcional al costo total de la orden',
+    'shipping_quantity_rate' => 'Costo de envío por cantidad',
+    'shipping_quantity_rate_explication' => 'Agrega un monto fijo por cada item en el carrito',
+    'shipping_total_rate' => 'Costo de envío como porcentaje del total',
+    'shipping_total_rate_explication' => 'Agrega un costo de envío proporcional al costo de la orden',
     
     'shipping_cost' => 'Costo de envío',
 
