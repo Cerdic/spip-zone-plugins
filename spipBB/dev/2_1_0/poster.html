@@ -10,7 +10,7 @@
 
 </head>
 <body id='poster'>
-<BOUCLE_forum(FORUMS){id_forum}>
+<BOUCLE_forum(FORUMS){id_forum?}{id_article?}>
 		[(#REM)<INCLURE{fond=corps_sk/c_poster}{id_article}{id_forum}>]
 		[(#FORMULAIRE_FORUM{#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM}})]
 </BOUCLE_forum>
