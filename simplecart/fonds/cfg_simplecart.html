@@ -57,69 +57,51 @@
 <h3 class="legend"><:simplecart:c_dineromail:></h3>
 <ul>
     <li>
-      <label for='dineromail_merchant_id'><:simplecart:dineromail_merchant_id:></label>
-        <p class="explication"><:simplecart:dineromail_merchant_id_explication:></p>
-      <input type="text" name="dineromail_merchant_id"  class="text" value="#ENV{dineromail_merchant_id}" />
+      <label for='merchant_id'><:simplecart:merchant_id:></label>
+        <p class="explication"><:simplecart:merchant_id_explication:></p>
+      <input type="text" name="merchant_id"  class="text" value="#ENV{merchant_id}" />
     </li>
 
     <li>
-      <label><:simplecart:dineromail_country:></label>
-        <p class="explication"><:simplecart:dineromail_country_explication:></p>
+      <label><:simplecart:country:></label>
+        <p class="explication"><:simplecart:country_explication:></p>
 
-       <select name="dineromail_country_id" class="text">
-            <option value="1" [(#ENV{dineromail_country_id}|=={1}|?{selected="selected"})]><:simplecart:dineromail_country_argentine:></option>
-            <option value="2" [(#ENV{dineromail_country_id}|=={2}|?{selected="selected"})]><:simplecart:dineromail_country_brazil:></option>
-            <option value="3" [(#ENV{dineromail_country_id}|=={3}|?{selected="selected"})]><:simplecart:dineromail_country_chile:></option>
-            <option value="4" [(#ENV{dineromail_country_id}|=={4}|?{selected="selected"})]><:simplecart:dineromail_country_mexico:></option>
+       <select name="country_id" class="text">
+            <option value="1" [(#ENV{country_id}|=={1}|?{selected="selected"})]><:simplecart:country_argentine:></option>
+            <option value="2" [(#ENV{country_id}|=={2}|?{selected="selected"})]><:simplecart:country_brazil:></option>
+            <option value="3" [(#ENV{country_id}|=={3}|?{selected="selected"})]><:simplecart:country_chile:></option>
+            <option value="4" [(#ENV{country_id}|=={4}|?{selected="selected"})]><:simplecart:country_mexico:></option>
         </select>
     </li>
 
     <li>
-      <label for='dineromail_currency'><:simplecart:dineromail_currency:></label>
-        <p class="explication"><:simplecart:dineromail_currency_explication:></p>
+      <label for='currency'><:simplecart:currency:></label>
+        <p class="explication"><:simplecart:currency_explication:></p>
 
-       <select name="dineromail_currency" class="text">
-            <option value="1" [(#ENV{dineromail_currency}|=={1}|?{selected="selected"})]><:simplecart:dineromail_currency_local:></option>
-            <option value="2" [(#ENV{dineromail_currency}|=={2}|?{selected="selected"})]><:simplecart:dineromail_currency_usd:></option>
+       <select name="currency" class="text">
+            <option value="1" [(#ENV{currency}|=={1}|?{selected="selected"})]><:simplecart:currency_local:></option>
+            <option value="2" [(#ENV{currency}|=={2}|?{selected="selected"})]><:simplecart:currency_usd:></option>
        </select>
     </li>
 
 
 
     <li>
-      <label for='dineromail_payments_methods'><:simplecart:dineromail_payments_methods:></label>
-      <p class="explication"><:simplecart:dineromail_payments_methods_explication:></p>
-    <input type="text" name="dineromail_payments_methods"  class="text" value="#ENV{dineromail_payments_methods}" />
+      <label for='payments_methods'><:simplecart:payments_methods:></label>
+      <p class="explication"><:simplecart:payments_methods_explication:></p>
+    <input type="text" name="payments_methods"  class="text" value="#ENV{payments_methods}" />
     </li>
 
     <li>
-      <label for='dineromail_seller_name'><:simplecart:dineromail_seller_name:></label>
-      <p class="explication"><:simplecart:dineromail_seller_name_explication:></p>
-    <input type="text" name="dineromail_seller_name"  class="text" value="#ENV{dineromail_seller_name}" />
+      <label for='seller_name'><:simplecart:seller_name:></label>
+      <p class="explication"><:simplecart:seller_name_explication:></p>
+    <input type="text" name="seller_name"  class="text" value="#ENV{seller_name}" />
     </li>
 
     <li>
-      <label for='dineromail_header_image'><:simplecart:dineromail_header_image:></label>
-      <p class="explication"><:simplecart:dineromail_header_image_explication:></p>
-    <input type="text" name="dineromail_header_image"  class="text" value="#ENV{dineromail_header_image}" />
-    </li>
-
-    <li>
-      <label for='dineromail_ok_url'><:simplecart:dineromail_ok_url:></label>
-      <p class="explication"><:simplecart:dineromail_ok_url_explication:></p>
-      <input type="text" name="dineromail_ok_url"  class="text" value="#ENV{dineromail_ok_url}" />
-    </li>
-
-    <li>
-      <label for='dineromail_error_url'><:simplecart:dineromail_error_url:></label>
-      <p class="explication"><:simplecart:dineromail_error_url_explication:></p>
-      <input type="text" name="dineromail_error_url"  class="text" value="#ENV{dineromail_error_url}" />
-    </li>
-
-    <li>
-      <label for='dineromail_pending_url'><:simplecart:dineromail_pending_url:></label>
-      <p class="explication"><:simplecart:dineromail_pending_url_explication:></p>
-      <input type="text" name="dineromail_pending_url"  class="text" value="#ENV{dineromail_pending_url}" />
+      <label for='header_image'><:simplecart:header_image:></label>
+      <p class="explication"><:simplecart:header_image_explication:></p>
+    <input type="text" name="header_image"  class="text" value="#ENV{header_image}" />
     </li>
 
 </ul>
@@ -144,8 +126,8 @@
     <li>
   </ul>
 
-<h3 class="legend"><:simplecart:other_parameters:></h3>
- <ul>
+<h3 class="legend"><:simplecart:tax_and_shipping:></h3>
+<ul>
     <li>
         <label><:simplecart:tax_rate:></label>
         <p class="explication"><:simplecart:tax_rate_explication:></p>
@@ -166,8 +148,31 @@
         <p class="explication"><:simplecart:shipping_total_rate_explication:></p>
         <input type="text" name="shipping_total_rate"  class="text" value="#ENV{shipping_total_rate, 0}" />
     </li>
+</ul>
 
-  </ul>
+<h3 class="legend"><:simplecart:other_parameters:></h3>
+ <ul>
+
+    <li>
+      <label for='ok_url'><:simplecart:ok_url:></label>
+      <p class="explication"><:simplecart:ok_url_explication:></p>
+      <input type="text" name="ok_url"  class="text" value="#ENV{ok_url}" />
+    </li>
+
+    <li>
+      <label for='error_url'><:simplecart:error_url:></label>
+      <p class="explication"><:simplecart:error_url_explication:></p>
+      <input type="text" name="error_url"  class="text" value="#ENV{error_url}" />
+    </li>
+
+    <li>
+      <label for='pending_url'><:simplecart:pending_url:></label>
+      <p class="explication"><:simplecart:pending_url_explication:></p>
+      <input type="text" name="pending_url"  class="text" value="#ENV{pending_url}" />
+    </li>
+</ul>
+
+
 
 
 <input type="submit" name="_cfg_ok" value="<:OK:>" />

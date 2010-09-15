@@ -11,6 +11,9 @@ include_spip('inc/utils');
             $js .= lire_config('simplecart/shipping_flat_rate') ? 'simpleCart.shippingFlatRate ="'.lire_config('simplecart/shipping_flat_rate').'";': '';
             $js .= lire_config('simplecart/shipping_quantity_rate') ? 'simpleCart.shippingQuantityRate ="'.lire_config('simplecart/shipping_quantity_rate').'";': '';
             $js .= lire_config('simplecart/shipping_total_rate') ? 'simpleCart.shippingTotalRate ="'.lire_config('simplecart/shipping_total_rate').'";': '';
+            $js .= lire_config('simplecart/ok_url') ? 'simpleCart.okUrl="'.lire_config('simplecart/ok_url').'";': '';
+            $js .= lire_config('simplecart/error_url') ? 'simpleCart.errorUrl="'.lire_config('simplecart/error_url').'";': '';
+            $js .= lire_config('simplecart/pending_url') ? 'simpleCart.pendingUrl="'.lire_config('simplecart/pending_url').'";': '';
 
 
             if( lire_config('simplecart/method_paypal')) {
@@ -26,10 +29,7 @@ include_spip('inc/utils');
                 $js .= lire_config('simplecart/dineromail_country_id') ? 'simpleCart.dmCountryId='.lire_config('simplecart/dineromail_country_id').';': '';
                 $js .= lire_config('simplecart/dineromail_currency') == 2 ? 'simpleCart.dmCurrency=USD;': '';
                 $js .= lire_config('simplecart/dineromail_seller_name') ? 'simpleCart.dmSellerName="'.lire_config('simplecart/dineromail_seller_name').'";': '';
-                $js .= lire_config('simplecart/dineromail_header_image') ? 'simpleCart.dmHeaderImage="'.lire_config('simplecart/dineromail_header_image').'";': '';
-                $js .= lire_config('simplecart/dineromail_ok_url') ? 'simpleCart.dmOkUrl="'.lire_config('simplecart/dineromail_ok_url').'";': '';
-                $js .= lire_config('simplecart/dineromail_error_url') ? 'simpleCart.dmErrorUrl="'.lire_config('simplecart/dineromail_error_url').'";': '';
-                $js .= lire_config('simplecart/dineromail_pending_url') ? 'simpleCart.dmPendingUrl="'.lire_config('simplecart/dineromail_pending_url').'";': '';
+                $js .= lire_config('simplecart/dineromail_header_image') ? 'simpleCart.dmHeaderImage="'.lire_config('simplecart/dineromail_header_image').'";': '';             
             }
             
             $js .=  '</script>';

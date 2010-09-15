@@ -61,12 +61,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'dineromail_header_image' => 'Imágen de cabecera',
     'dineromail_header_image_explication' => 'URL absoluta del logo a mostrar en la cabecera de DineroMail (jpg o gif, 150px x 50px)',
 
-    'dineromail_ok_url' => 'URL compra exitosa',
-    'dineromail_ok_url_explication' => 'URL donde se redirecciona al comprador en caso de transacción exitosa',
-    'dineromail_error_url' => 'URL compra erronea',
-    'dineromail_error_url_explication' => 'URL donde se re direcciona al comprador en caso de transacción errónea',
-    'dineromail_pending_url' => 'URL compra pendiente',
-    'dineromail_pending_url_explication' => 'URL donde se re direcciona al comprador en caso de transacción pendiente.',
+    'ok_url' => 'URL compra exitosa',
+    'ok_url_explication' => 'URL donde se redirecciona al comprador en caso de transacción exitosa',
+    'error_url' => 'URL compra erronea',
+    'error_url_explication' => 'URL donde se re direcciona al comprador en caso de transacción errónea',
+    'pending_url' => 'URL compra pendiente',
+    'pending_url_explication' => 'URL donde se re direcciona al comprador en caso de transacción pendiente.',
 
     'final_total' => 'Total',
 
@@ -108,6 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'title' => 'SimpleCart',
 
     'tax_cost' => 'Impuestos',
+
+    'tax_and_shipping' => 'Impuestos y costo de envío',
 
     'tax_rate' => 'Tasa impositiva',
     'tax_rate_explication' => 'Tasa de impuestos. Ejemplo: 0.19 de Impuesto al Valor Agregado',
