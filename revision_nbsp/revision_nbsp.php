@@ -56,7 +56,8 @@
 
 		// Attraper les notes
 		$regexp = ', *\[\[(.*?)\]\],msS';
-		if ($s = preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)
+		if (strpos($texte, '[[')
+		AND $s = preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)
 		AND $s==1
 		AND preg_match(",^ *<>(.*),s", $matches[0][1], $r)) {
 			$lesnotes = $r[1];
@@ -64,8 +65,10 @@
 
 			$num = 0;
 			while (($a = strpos($lesnotes, '('.(++$num).')')) !== false
-			AND ($b = strpos($letexte, '('.($num).')')) !== false
-			) {
+			AND (
+				($b = strpos($letexte, '('.($num).')')) !== false
+				OR ($b = strpos($letexte, '['.($num).'])')) !== false
+			)) {
 				if (!isset($debut))
 					$debut = trim(substr($lesnotes, 0, $a));
 
