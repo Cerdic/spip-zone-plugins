@@ -6,7 +6,7 @@
 	Phil
 	</auteur>
 	<version>
-	0.3
+	0.3.1
 	</version>
 	<etat>
 	stable
@@ -25,7 +25,7 @@
 	</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>googleanalytics_insert_head.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>statistique</categorie>
