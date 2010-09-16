@@ -10,7 +10,7 @@
 	$.geoportail.addDoc (#ENV{id_geoportail,0}, "GPX", #ID_DOCUMENT, "#TITRE", "#FICHIER", [(#ENV{align}|=={center}|?{false,true})]);
 </script>
 </BOUCLE_gpx>
-<BOUCLE_kml(DOCUMENTS){id_document}{extension=kml)}>
+<BOUCLE_kml(DOCUMENTS){id_document}{extension=kml}>
 <script language=javascript>
 	$.geoportail.addDoc (#ENV{id_geoportail,0}, "KML", #ID_DOCUMENT, "#TITRE", "#FICHIER", [(#ENV{align}|=={center}|?{false,true})]);
 </script>
