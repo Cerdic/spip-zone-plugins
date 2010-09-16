@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Database Dump</nom>
+	<auteur>Collectif SPIP</auteur>
+	<icon>prive/themes/spip/images/dump-32.png</icon>
+	<licence>GPL</licence>
+	<version>1.0.0</version>
+	<etat>stable</etat>
+	<description>Export et Import de la base en XML</description>
+	<prefix>dump</prefix>
+	
+	<bouton id='admin_sauvegarder' parent='bando_administration' position='1'>
+		<icone>images/base-backup-16.png</icone>
+		<titre>texte_sauvegarde_base</titre>
+		<url>admin_backup</url>
+	</bouton>
+	<bouton id='admin_restaurer' parent='bando_administration' position='2'>
+		<icone>images/base-restore-16.png</icone>
+		<titre>bouton_restaurer_base</titre>
+		<url>admin_restore</url>
+	</bouton>
+
+	<necessite id="SPIP" version="[2.3.0-dev;)" />
+</plugin>
