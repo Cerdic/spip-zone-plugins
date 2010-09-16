@@ -105,104 +105,102 @@ jQuery.geoportail =
             jQuery("#GeoportalMapDiv" + i).css("background-image", "none");
         }
     },
-    
+
     /** Ajouter une carte de situation
-		la fonction renvoie le control correspondant dans map.overview
-		la carte s'affiche dans la div id=overviewMap ou a la suite de la div id=navigation
+    la fonction renvoie le control correspondant dans map.overview
+    la carte s'affiche dans la div id=overviewMap ou a la suite de la div id=navigation
     */
-    setOverview : function (map, photo, zoom, divID)
-	{	// Div de la vue globale
-		var ovDiv;
-		var w = h = 162;
-		if (!divID) divID = "overviewMap";
-		ovDiv = jQuery("#"+divID);
-		if (ovDiv && ovDiv.length>0) 
-		{	w = ovDiv.width();
-			if (!w) w=160;
-			h = ovDiv.height();
-			if (!h) h=w;
-			ovDiv = ovDiv[0];
-		}
-		// En creer une
-		else
-		{	var div = OpenLayers.Util.getElement('navigation');
-			if (!div) return;
-			ovDiv = document.createElement('div');
-			ovDiv.id = OpenLayers.Util.createUniqueID('overviewMap');
-			ovDiv.className = 'overviewMap';
-			ovDiv.style.width = w+"px";
-			ovDiv.style.margin = "auto";
-			div.appendChild(ovDiv);
-		}
-		// photo ou carte ?
-		var fond = photo ? 'ORTHOIMAGERY.ORTHOPHOTOS:WMSC' : 'GEOGRAPHICALGRIDSYSTEMS.MAPS:WMSC';
-		// Recuperer la couche
-		var worldMapPrms= map.getMap().catalogue.getLayerParameters('WLD',fond);
-        worldMapPrms.options.territory= 'WLD';
-        worldMapPrms.options.isBaseLayer= true;
-        worldMapPrms.options.opacity= 1.0;
-        worldMapPrms.options.afterAdd= function() 
-        {// add GeoRM :
-            var k= map.getMap().catalogue.getLayerGeoRMKey(this.territory,this.name);
-            if (k!=null) {
-                this.GeoRM= Geoportal.GeoRMHandler.addKey(
+    setOverview: function(map, photo, zoom, divID) {	// Div de la vue globale
+        var ovDiv;
+        var w = h = 162;
+        if (!divID) divID = "overviewMap";
+        ovDiv = jQuery("#" + divID);
+        if (ovDiv && ovDiv.length > 0) {
+            w = ovDiv.width();
+            if (!w) w = 160;
+            h = ovDiv.height();
+            if (!h) h = w;
+            ovDiv = ovDiv[0];
+        }
+        // En creer une
+        else {
+            var div = OpenLayers.Util.getElement('navigation');
+            if (!div) return;
+            ovDiv = document.createElement('div');
+            ovDiv.id = OpenLayers.Util.createUniqueID('overviewMap');
+            ovDiv.className = 'overviewMap';
+            ovDiv.style.width = w + "px";
+            ovDiv.style.margin = "auto";
+            div.appendChild(ovDiv);
+        }
+        // photo ou carte ?
+        var fond = photo ? 'ORTHOIMAGERY.ORTHOPHOTOS:WMSC' : 'GEOGRAPHICALGRIDSYSTEMS.MAPS:WMSC';
+        // Recuperer la couche
+        var worldMapPrms = map.getMap().catalogue.getLayerParameters('WLD', fond);
+        worldMapPrms.options.territory = 'WLD';
+        worldMapPrms.options.isBaseLayer = true;
+        worldMapPrms.options.opacity = 1.0;
+        worldMapPrms.options.afterAdd = function() {// add GeoRM :
+            var k = map.getMap().catalogue.getLayerGeoRMKey(this.territory, this.name);
+            if (k != null) {
+                this.GeoRM = Geoportal.GeoRMHandler.addKey(
                     k,
                     map.getMap().catalogue[k].tokenServer.url,
                     map.getMap().catalogue[k].tokenServer.ttl,
-                    this.map);//the overview map !
+                    this.map); //the overview map !
             }
         };
         // Nouvelle couche
-        var worldMap= new worldMapPrms.classLayer(
+        var worldMap = new worldMapPrms.classLayer(
             worldMapPrms.options.name,
             worldMapPrms.url,
             worldMapPrms.params,
             worldMapPrms.options);
-		var options ={	resolutions:worldMapPrms.options.nativeResolutions.slice(0,5),  // get resolutions from worldMap
-						numZoomLevels:5,
-						minZoomLevel:worldMapPrms.options.minZoomLevel,
-						maxZoomLevel:worldMapPrms.options.maxZoomLevel,
-						projection:worldMapPrms.options.projection.clone(),
-						maxExtent:worldMapPrms.options.maxExtent,
-						theme:null // prevent OL to insert style.css !
-					};
-		// 1 seul niveau de zoom (moyen)
-        if (!zoom)
-        {	options.resolutions = worldMapPrms.options.nativeResolutions.slice(2,5)
-			options.numZoomLevels = options.minZoomLevel = options.maxZoomLevel = 1;
+        var options = { resolutions: worldMapPrms.options.nativeResolutions.slice(0, 5),  // get resolutions from worldMap
+            numZoomLevels: 5,
+            minZoomLevel: worldMapPrms.options.minZoomLevel,
+            maxZoomLevel: worldMapPrms.options.maxZoomLevel,
+            projection: worldMapPrms.options.projection.clone(),
+            maxExtent: worldMapPrms.options.maxExtent,
+            theme: null // prevent OL to insert style.css !
+        };
+        // 1 seul niveau de zoom (moyen)
+        if (!zoom) {
+            options.resolutions = worldMapPrms.options.nativeResolutions.slice(2, 5)
+            options.numZoomLevels = options.minZoomLevel = options.maxZoomLevel = 1;
         }
         // Creer la carte
-        var ovmap= new OpenLayers.Control.OverviewMap(
-			{   div:ovDiv,
-                layers:[worldMap],
-                mapOptions: options,
-                autoPan:false,
-                size: new OpenLayers.Size(w-2,h-2)
+        var ovmap = new OpenLayers.Control.OverviewMap(
+			{ div: ovDiv,
+			    layers: [worldMap],
+			    mapOptions: options,
+			    autoPan: false,
+			    size: new OpenLayers.Size(w - 2, h - 2)
 			});
-		// Ne pas deplacer la carte intepestivement
-		if (!zoom)
-		{   ovmap.isSuitableOverview = function() {
-				var mapExtent = this.map.getExtent();
-				var maxExtent = this.map.maxExtent;
-				var testExtent = new OpenLayers.Bounds(
+        // Ne pas deplacer la carte intepestivement
+        if (!zoom) {
+            ovmap.isSuitableOverview = function() {
+                var mapExtent = this.map.getExtent();
+                var maxExtent = this.map.maxExtent;
+                var testExtent = new OpenLayers.Bounds(
 										Math.max(mapExtent.left, maxExtent.left),
 										Math.max(mapExtent.bottom, maxExtent.bottom),
 										Math.min(mapExtent.right, maxExtent.right),
-										Math.min(mapExtent.top, maxExtent.top));        
+										Math.min(mapExtent.top, maxExtent.top));
 
-				if (this.ovmap.getProjection() != this.map.getProjection()) {
-					testExtent = testExtent.transform(
+                if (this.ovmap.getProjection() != this.map.getProjection()) {
+                    testExtent = testExtent.transform(
 						this.map.getProjectionObject(),
-						this.ovmap.getProjectionObject() );
-				}
+						this.ovmap.getProjectionObject());
+                }
 
-				return ((this.ovmap.getExtent().containsBounds(testExtent)));
-			};
-		}
-		// Ajouter
-		map.getMap().addControl(ovmap);
-		map.overview = ovmap;
-	},
+                return ((this.ovmap.getExtent().containsBounds(testExtent)));
+            };
+        }
+        // Ajouter
+        map.getMap().addControl(ovmap);
+        map.overview = ovmap;
+    },
 
     // Ajouter une nouvelle carte
     addMap: function(carte) {
@@ -452,7 +450,7 @@ jQuery.geoportail =
                         case 'UTILITYANDGOVERNMENTALSERVICES.ALL:WMSC':
                         case 'ADMINISTRATIVEUNITS.BOUNDARIES:WMSC':
                             break;
-                        // Afficher 
+                        // Afficher  
                         default:
                             map.addGeoportalLayer(olayersId[i]);
                             break;
@@ -536,9 +534,11 @@ jQuery.geoportail =
     // On a selectionne une adresse avec l'outil
     selectAdresse: function(f) 
     {	// Ne pas afficher le calque (risque d'interception d'evenements)
-		var l = f.layer.map.getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
-		if (l.length > 0) l[0].setVisibility(false);
-		// pour les autres cartes
+        if (f.layer) 
+        {   var l = f.layer.map.getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
+            if (l.length > 0) l[0].setVisibility(false);
+        }
+        // pour les autres cartes
         if (typeof (selectAdresse) == 'function') selectAdresse(f);
         else if (typeof (parent.selectFormulaireAdresse) == 'function') parent.selectFormulaireAdresse(f);
     },
@@ -608,37 +608,36 @@ jQuery.geoportail =
         }
         return false;
     },
-    
+
     // Fonction d'affichage d'un popup sur une carte
-	popupFeature : function (feature) 
-	{
-	//    popup = new OpenLayers.Popup.FramedCloud("popup", 
-		popup = new OpenLayers.Popup.AnchoredBubble("popup",
+    popupFeature: function(feature) {
+        //    popup = new OpenLayers.Popup.FramedCloud("popup", 
+        popup = new OpenLayers.Popup.AnchoredBubble("popup",
 										feature.geometry.getBounds().getCenterLonLat(),
-										new OpenLayers.Size(200,100),
+										new OpenLayers.Size(200, 100),
 										feature.attributes.img +
-										"<p class=titre><a href='"+feature.attributes.link+"'>"+feature.attributes.name +"</a></p>" 
+										"<p class=titre><a href='" + feature.attributes.link + "'>" + feature.attributes.name + "</a></p>"
 										+ feature.attributes.description
 										,
-										null, true, 
-										function (evt)
-										{	if (this.feature) $.geoportail.unpopupFeature(this.feature);
+										null, true,
+										function(evt) {
+										    if (this.feature) $.geoportail.unpopupFeature(this.feature);
 										});
-										
-		popup.maxSize = new OpenLayers.Size(400,200);
-		popup.minSize = new OpenLayers.Size(220,0);
-		popup.feature = feature;//mimic Geoportal.Popup (See closeFeatureInfo)
-		feature.popup = popup;
-		popup.setBackgroundColor("#ffffcc");
-		feature.layer.map.addPopup(popup);
-	},
-	 
-	unpopupFeature : function (feature)
-	{	Geoportal.Control.unselectFeature(feature);
-		feature.layer.drawFeature(feature,'default');
-		feature.popup = null;
-	}
-    
+
+        popup.maxSize = new OpenLayers.Size(400, 200);
+        popup.minSize = new OpenLayers.Size(220, 0);
+        popup.feature = feature; //mimic Geoportal.Popup (See closeFeatureInfo)
+        feature.popup = popup;
+        popup.setBackgroundColor("#ffffcc");
+        feature.layer.map.addPopup(popup);
+    },
+
+    unpopupFeature: function(feature) {
+        Geoportal.Control.unselectFeature(feature);
+        feature.layer.drawFeature(feature, 'default');
+        feature.popup = null;
+    }
+
 
 }
 
