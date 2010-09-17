@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 include_spip('lib/composant/composants_variables');
@@ -17,8 +17,7 @@ function analyse_page($page, $mode_source) {
   // Construit regexp pour chercher les variables de composants
   // Build regexp for searching components variables
 
-  $vars = composants_variables();
-
+  $vars = liste_variables();
   if (is_array($vars) && (count($vars) > 0)) {
     foreach ($vars as $v=>$c) {
       $vars_regexp .= 'acs'.$v.'|';
@@ -159,11 +158,11 @@ function pi_INCLURE($args) {
   }
   else {
     if (find_in_path($include.'.html'))
-      $r = indent($args[1]['indentation']).'<a class="'.get_widget_class($include, 'widgy').' lien_page" style="background: none" href="?exec=acs&onglet=page&pg='.$include.'" onclick=\'$("#page_infos").empty();
+      $r = indent($args[1]['indentation']).'<a class="'.get_widget_class($include, $param['on'], 'widgy').' lien_page" style="background: none" href="?exec=acs&onglet=page&pg='.$include.'" onclick=\'$("#page_infos").empty();
         AjaxSqueeze("?exec=acs_page_get_infos&pg=" + this.text, "page_infos");
         return false;\' title="'.$param.'">'.$include.'</a>';
     else
-      $r = indent($args[1]['indentation']).'<a class="'.get_widget_class($include, 'widgy').' lien_page" style="background: #efefef; border-style: solid; color: red; text-decoration: blink; " title="'._T('acs:err_fichier_absent', array('file' => $include)).'">'.$include.'</a>';
+      $r = indent($args[1]['indentation']).'<a class="'.get_widget_class($include, $param['on'], 'widgy').' lien_page" style="background: #efefef; border-style: solid; color: red; text-decoration: blink; " title="'._T('acs:err_fichier_absent', array('file' => $include)).'">'.$include.'</a>';
   }
   $r = $r;
   if ($param)
@@ -221,22 +220,30 @@ function affiche_widgy($include, $param, &$vars, $indentation, $nic) {
 
 function widgy($composant, $param, &$vars, $label='', $indentation='', $nic = '') {
   $label = ucfirst(str_replace('_', ' ', $label));
-  $r = '<table><tr valign="top"><td>'.$indentation.'</td><td><b><a class="'.get_widget_class('', 'oui', 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="'._T('acs:composant').' '.$label.($nic ? ' '.$nic : '').'">'.$label.($nic ? ' '.$nic : '').'</a></b></td><td>';
-
-//todo: params
+  
+  // On recherche ce que contient le widgy, recursivement
   if (is_array($vars)) {
     foreach($vars as $varname=>$v) {
-      if (($v['composant'] == $composant) && ($v['type'] == 'widget')) {
+      if (($v['c'] == $composant) && ($v['type'] == 'widget') && $v['nic'] == $nic) {
         $var = 'acs'.$varname;
         if (isset($GLOBALS['meta'][$var]) && $GLOBALS['meta'][$var]) {
-          $r .= '<table><tr><td><a class="nompage" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="'._T('acs:variable').'">'.$varname.'</a> : </td><td>'. widgy($GLOBALS['meta'][$var], '', $vars, $GLOBALS['meta'][$var]).'</td></tr></table>';
+        	$ci = explode('-', $GLOBALS['meta'][$var]);
+        	$cinom = $ci[0];
+        	$cinic = $ci[1]; 
+          $content .= '<tr class="widgy_included"><td class="widgy_included_label"><a class="nompage" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="acs'.$varname.'">'.substr($varname, strlen($composant.$nic)).'</a></td><td>'.widgy($cinom, '', $vars, $cinom, '', $cinic).'</td></tr>';
         }
       }
     }
   }
   else
-    $r .= _T('acs:variable');
-  return $r.'</td></tr></table>';
+    $content .= _T('acs:variable');
+  
+  // affichage du contenu du widgy
+  $r = '<table><tr><td>'.$indentation.'</td><td>';
+  $r .= '<table><tr><th><a class="'.get_widget_class('', 'oui', 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="'._T('acs:composant').' '.$label.($nic ? ' '.$nic : '').'">'.$label.($nic ? '&nbsp;'.$nic : '').'</a></th></tr>';
+  $r .= $content;
+  $r .= '</table></td></tr></table>';
+  return $r;
 }
 
 function indent($l) {

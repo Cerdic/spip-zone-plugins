@@ -36,7 +36,12 @@ $traductions_acs = array(
 	'fontfamily' => 'Font family',
 	'text' => ' Text',
 	'link' => 'Link',
-	'linkhover' => 'Link hover'
+	'linkhover' => 'Link hover',
+
+	'shadow' => 'Shadow',
+  'shadowsize' => 'Size',
+  'shadowblur' => 'Blur',
+
 );
 
 // Lang file is build with components public lang files
@@ -44,7 +49,7 @@ if (_DIR_RESTREINT != '') {
   // Add components lang files (public)
   $GLOBALS[$GLOBALS['idx_lang']] = array( // public area
   // L'upload direct depuis l'espace ecrire de spip étant interdit, cette traduction se retrouve ici
-  'effacer_image' => 'DEFINTIVELY delete these image from server ???',
+  'effacer_image' => 'DEFINITIVELY delete these image from server ???',
   'impossible_ouvrir_dossier' => 'Unable to open directory',
   'err_del_file' => 'Unable to delete file',
   );
@@ -91,8 +96,7 @@ To setup your website, customize components.<br/>A new instance of a component i
   'composants' => 'Components',
   'creer_composant' => 'Create a new instance of these component',
   'del_composant' => 'Delete these instance',
-  'container' => 'Container',
-  'containers' => 'Containers',
+  'used_in' => 'Used in',
   'modele' => 'Model',
   'modeles' => 'Models',
   'formulaire' => 'Form',
@@ -100,7 +104,6 @@ To setup your website, customize components.<br/>A new instance of a component i
   'adm' => 'Administration',
   'public' => 'Public',
   'ecrire' => 'Ecrire',
-  'includes' => 'Inclut',
   'structure_page' => 'page structure',
   'err_fichier_absent' => 'File @file@ not found',
   'err_fichier_ecrire' => 'Unable to write file &quot;@file@&quot;',

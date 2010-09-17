@@ -4,7 +4,7 @@
  *
  * Fonctionne avec jQuery.
  *
- * Copyright Daniel FAIVRE 2007-2009
+ * Copyright Daniel FAIVRE 2007-2010
  */
 
 soundManager.onerror = function() {
@@ -178,7 +178,7 @@ soundManager._writeDebug(" * create " + sndmd5 + " (" + url + ")");
 		return (typeof o == 'undefined' || o == null || o == 'null' || (typeof o == 'string' && o.toLowerCase() == 'n/a' || o.toLowerCase == 'undefined'));
 	}
 
-	pl.parent().find("a[@rel='enclosure'][@href$=mp3]").each(
+	pl.parent().find("a[rel='enclosure'][href$=mp3]").each(
 			function(i) {
 				var html = pl.html().match(codehtml);
 				self.createSound(this.href, html + " " + this.title);

@@ -4,11 +4,11 @@
 <div class="liste-articles">
   #ANCRE_PAGINATION
   [<span class="pagination" style="float:left">(#PAGINATION)</span>]
-  <span class="texte_nav" style="float:right"><i><:articles_rubrique:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={popularite}|?{<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL_RUBRIQUE#pagination_articles"><:acs:articles_classes_par_date:></a>),<:acs:articles_classes_par_date:></i> (<a href="#URL_RUBRIQUE&amp;classement=popularite#pagination_articles"><:acs:articles_classes_par_popularite:></a>)})],<:acs:articles_classes_par_date:></i>})]</span>
+  <span class="texte_nav" style="float:right"><i><:articles_rubrique:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#VAR{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={popularite}|?{<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL_RUBRIQUE#pagination_articles"><:acs:articles_classes_par_date:></a>),<:acs:articles_classes_par_date:></i> (<a href="#URL_RUBRIQUE&amp;classement=popularite#pagination_articles"><:acs:articles_classes_par_popularite:></a>)})],<:acs:articles_classes_par_date:></i>})]</span>
   <br class="nettoyeur" />
   <ul>
   <BOUCLE_articles(ARTICLES) {id_rubrique} {par (#CLASSEMENT|=={popularite}|?{popularite,date})}{inverse} {pagination #VAR{acsArticlesPagination,10}} {lang=#LANG}>
-    <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}>
+    <INCLURE{fond=composants/articles/article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}>
   </BOUCLE_articles>
   </ul>
 </div>

@@ -5,6 +5,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'keyword' => '_Edito', /* Mot-clé pour mettre un article en édito */
 'edito' => 'Editorial',
-'previous' => 'Editoriaux précédents'
+'previous' => 'Editoriaux précédents',
+'pause' => 'Pause',
+'suivant' => 'Suivant',
+'precedent' => 'Pr&eacute;c&eacute;dent',
 );
 ?>

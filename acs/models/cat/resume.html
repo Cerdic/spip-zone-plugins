@@ -5,7 +5,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Articles les plus populaires.
@@ -13,22 +13,6 @@ Most popular texts.
  
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) ][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut) - ]<:acs:fond_meta_page_resume:>})]
 <INCLURE{fond=composants/fond/entete}{page=resume}{title=#GET{mdescription}}{mkeywords=#EVAL{'_T("acs:fond_meta_page_resume").","._T("acs:fond_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:fond_meta_page_resume:>}>
-<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
-</div>[(#REM) fin colonne1 (navigation) ]
-<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#REM) Contenu principal : derniers articles publies ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=resume}{env=#ENV}>
-  <div id="onglet">]
-    [(#REM) Fil d'Ariane ]
-    <span id="hierarchie" style="float: #LANG_LEFT"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:en_resume:></span>
-    <span class="texte_nav" style="float: #LANG_RIGHT"><:acs:fond_meta_page_resume:></span>
-    <br class="nettoyeur" />
-    <INCLURE{fond=composants/articles/boucle-articles}{env=#ENV}{debut_articles}{classement}{url=spip.php?page=resume}>
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<div id="colonne3"><div class="spacer"></div>
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=41}>
-</div>[(#REM) fin colonne3 ]
+<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2010}{current=sommaire}>[(#REM) Bloc principal de la page resume ]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

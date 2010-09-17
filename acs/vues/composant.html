@@ -3,5 +3,5 @@
 $fond='#ENV{c}.css';
 if ($fond=@recuperer_fond($fond,array('var_mode' => 'recalcul'))) echo '<style>'.$fond.'</style>';
 $fond='#ENV{c}_instances.css';
-//if ($fond=@recuperer_fond($fond,array('nic' => '#NIC', 'var_mode' => 'recalcul'))) echo '<style>'.$fond.'</style>';
+if ($fond=@recuperer_fond($fond,array('nic' => '#NIC', 'var_mode' => 'recalcul'))) echo '<style>'.$fond.'</style>';
 ?><INCLURE {fond=#ENV{c}}{nic=#NIC}{env}>

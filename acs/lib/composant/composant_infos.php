@@ -11,53 +11,62 @@
  */
 function composant_infos($c, $nic) {
   include (_DIR_PLUGIN_ACS.'lib/composant/composant_get_infos.php');
-  $r ='';
-
   include_spip('lib/composant/composants_liste');
-  $choixComposants = array_keys(composants_liste());
+  $r ='<br />';
+  
+  // On calcule la liste de toutes les instances de composants actifs
+  $choixComposants = array();
+  foreach(composants_liste() as $class=>$composant) {
+  	foreach($composant['instances'] as $instance=>$params) {
+  		if ($params['on'] == 'oui')
+  			array_push($choixComposants, $class.($instance != 0 ? '-'.$instance :''));
+  	}
+  }
 
-  if (!is_array($choixComposants))
+  if (count($choixComposants) == 0)
     ajax_retour($r.'<div class="alert">'._T('acs:config_not_found').'</div>');
 
+  // On établit la liste de toutes les variables ACS ayant pour valeur le nom du composant $c.$nic
   $ca = array();
   foreach($GLOBALS['meta'] as $k => $v) {
-    if ((substr($k, 0, 3) == 'acs') && ($v == $c.$nic)) {
+    if ((substr($k, 0, 3) == 'acs') && ($v == $c.($nic ? '-'.$nic: ''))) {
       if (in_array($v, $choixComposants)) array_push($ca, substr($k, 3));
     }
   }
 
+  // On retourne la liste de tous les composants qui contiennent ce composant
   if (count($ca)) {
     include_spip('lib/composant/composants_variables');
     $lv = liste_variables();
     if (is_array($lv)) {
-      $r .= '<br /><div class="onlinehelp">'.(count($ca) > 1 ? _T('acs:containers') : _T('acs:container')).'</div>';
+      $r .= '<span class="onlinehelp">'._T('acs:used_in').'</span> ';
       foreach ($ca as $var) {
         if (isset($lv[$var]['c']))
           $r .= '<a class="nompage" href="?exec=acs&onglet=composants&composant='.$lv[$var]['c'].($lv[$var]['nic'] ? '&nic='.$lv[$var]['nic'] : '').'" title="'._T('acs:variable').' '.$var.'">'.ucfirst($lv[$var]['c']).(isset($lv[$var]['nic']) ? $lv[$var]['nic'] : '').'</a> ';
       }
-	    $r .= '<br />';
+      $r .= '<hr />';
     }
   }
+
+  // On cherche toutes les pages qui contiennent ce composant
   $l = liste_pages_composant(cGetPages($c, $nic), _T('acs:page'), _T('acs:pages'));
   $l .= liste_pages_composant(cGetPages($c, $nic, 'modeles'), _T('acs:modele'), _T('acs:modeles'));
   $l .= liste_pages_composant(cGetPages($c, $nic, 'formulaires'), _T('acs:formulaire'), _T('acs:formulaires'));
-  foreach ($choixComposants as $cc) {
-  	$l .= liste_pages_composant(cGetPages($c, $nic, 'composants/'.$cc), _T('acs:composant'), _T('acs:composants'));
+  foreach (composants_liste() as $class=>$composant) {
+  	$l .= liste_pages_composant(cGetPages($c, $nic, 'composants/'.$class), _T('acs:composant'), _T('acs:composants'));
   }
   if ($l)
-  	$r.= '<br /><div class="onlinehelp">'._T('acs:includes').'</div>'.$l;
-  $cp = 'composants/'.$c.'/';
-  $traductions = cGetTraductions($c,$cp.'lang',';.*[.]php$;iS');
-  $r .= '<br /><table width="100%"><tr><td colspan="2" class="onlinehelp">'.ucfirst(_T('spip:afficher_trad')).'</td></tr>';
+  	$r.= $l;
+
+	$traductions = cGetTraductions($c,'composants/'.$c.'/lang',';.*[.]php$;iS');
+  $r .= '<hr /><table width="100%"><tr><td colspan="2" class="onlinehelp centre">'.ucfirst(_T('spip:afficher_trad')).'</td></tr>';
   $r .= (count($traductions[0]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:public').' </td><td>'.liens_traductions($c, $traductions[0]).'</td></tr>' : '');
   $r .= (count($traductions[1]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:ecrire').' </td><td>'.liens_traductions($c, $traductions[1], 'ecrire').'</td></tr>' : '');
-  $r .= '</table><br />';
-
+  $r .= '</table>';
   return $r;
 }
 
 function liens_traductions($c, $langs, $module='') {
-/*this.href=\''.'?exec=acs_config&onglet=composants&composant='.$c.'&trcmp='.$lang.'&module='.$module.'\';"*/
   foreach($langs as $lang) {
     $url = '?exec=composant_get_trad&c='.$c.'&trcmp='.$lang.'&module='.$module;
     $r .= ' <a href="#cTrad" title="'.traduire_nom_langue($lang).'" onclick="AjaxSqueeze(\''.$url.'\',\'cTrad\');" ><img src="'._DIR_PLUGIN_ACS.'lang/flags/'.$lang.'.gif" alt="'.$lang.'" /></a> ';
@@ -67,7 +76,7 @@ function liens_traductions($c, $langs, $module='') {
 
 function liste_pages_composant($p, $singulier, $pluriel) {
   if (count($p['composant']) > 0) {
-    $r = '<div class="onlinehelp">'.(count($p['composant']) > 1 ? $pluriel : $singulier).'</div>';  
+    $r = '<span class="onlinehelp">'.(count($p['composant']) > 1 ? $pluriel : $singulier).'</span> ';  
     foreach($p['composant'] as $page) {
       $r .= show_override($p['chemin'], $page).' ';
     }

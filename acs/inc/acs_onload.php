@@ -121,12 +121,16 @@ function mkdir_recursive($pathname) {
 function meta_recursive($src, $meta) {
 	$chemin = strtok($meta, '/');
 	$val = $src[$chemin];
+	
+	spip_log('meta_recursive call: meta='.$meta.' chemin='.$chemin.' val="'.$val.'"', 'balise_var');
+	
 	if (is_array($val)) {
 		$val = meta_recursive($val, substr($meta, strlen($chemin)+1));
 	}
 	elseif (is_array(unserialize($val))) {
 		$val = meta_recursive(unserialize($val), substr($meta, strlen($chemin)+1));
 	}
+	spip_log('meta_recursive result: meta='.$meta.' chemin='.$chemin.' val="'.$val.'"', 'balise_var');
 	if (substr($val, 0 ,1) == '=')
 		$val = meta_recursive($src, substr($val, 1));
 	return $val;

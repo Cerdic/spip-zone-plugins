@@ -32,21 +32,21 @@ class AdminComposant {
   // Constructeur
   // Instancie (au besoin) un objet Composant à l'éxécution
   // pour en adopter les méthodes implémentées.
-  function __construct($type, $nic=0, $debug = false) {
+  function __construct($class, $nic=0, $debug = false) {
     global $_POST;
     
     include_spip('inc/xml'); // spip_xml_load()
     include_spip('inc/traduire');
     
     $this->debug = $debug;
-    $this->type = $type; // Classe de composant (nom)
+    $this->class = $class; // Classe de composant (nom)
     $this->nic = $nic != 0 ? $nic : '';  // Numéro d'instance du composant
-    $this->fullname = "acs".ucfirst($type).$this->nic;
+    $this->fullname = "acs".ucfirst($class).$this->nic;
     $this->errors = array();
     $this->vars = array();
     $this->cvars = array(); // Variables issues d'un autre composant
-    $this->rootDir = find_in_path('composants/'.$type);// Dossier racine du composant
-    $this->icon = $this->rootDir.'/images/'.$type.'_icon.gif';
+    $this->rootDir = find_in_path('composants/'.$class);// Dossier racine du composant
+    $this->icon = $this->rootDir.'/images/'.$class.'_icon.gif';
     if (!is_readable($this->icon))
 			$this->icon = _DIR_PLUGIN_ACS."/images/composant-24.gif";
 		$this->optionnel = 'oui';
@@ -123,7 +123,7 @@ class AdminComposant {
 					else
 						$v = $value[0];
 					if ($this->debug)
-						$this->errors['vars'] .= $type.($nic ? '#'.$nic : '').'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v))."<br />\n"; // dbg composant
+						$this->errors['vars'] .= $class.($nic ? '#'.$nic : '').'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v))."<br />\n"; // dbg composant
 					$this->vars[$k+1][$varname] = $v;
 					if ($varname == 'valeur') { // Default values
 						if (substr($v,0,3) == 'acs') {
@@ -196,8 +196,8 @@ class AdminComposant {
 
 			if (isset($updated)) {
 			  if (isset($this->afterUpdate)) {
-					@include_once($this->rootDir.'/ecrire/'.$type.'.php');
-					$cObj = 'acs'.ucfirst($type);
+					@include_once($this->rootDir.'/ecrire/'.$class.'.php');
+					$cObj = 'acs'.ucfirst($class);
 					if(class_exists($cObj)) {
 						$$cObj = @new $cObj();
 						if (($$cObj instanceof Composant) && is_callable(array($$cObj, 'afterUpdate'))) {
@@ -236,7 +236,7 @@ class AdminComposant {
   }
 
   function T($string) {
-		return _T('acs:'.$this->type.'_'.$string);
+		return _T('acs:'.$this->class.'_'.$string);
   }
   
 /**
@@ -246,22 +246,22 @@ class AdminComposant {
   function gauche() {
 		global $spip_version_code;
 
-		if ($this->T('description') != str_replace('_', ' ', $this->type.' description'))
+		if ($this->T('description') != str_replace('_', ' ', $this->class.' description'))
 			$r .= '<div>'.$this->T('description').'</div><br />';
 
-		if ($this->T('info') != str_replace('_', ' ', $this->type.' info'))
+		if ($this->T('info') != str_replace('_', ' ', $this->class.' info'))
 			$r .= '<div class="onlinehelp" style="text-align: justify">'.$this->T('info').'</div><br />';
 			
-		if ($this->T('help') != str_replace('_', ' ', $this->type.'_help'))
+		if ($this->T('help') != str_replace('_', ' ', $this->class.'_help'))
 			$r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'images/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$this->T('help').'</div><br />';
 
 		$n = 999;
-		$r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->type.($this->nic ? '&nic='.$this->nic: '').'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';
+		$r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->class.($this->nic ? '&nic='.$this->nic: '').'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';
 		if (count($this->cvars))
 			$r .= '<br /><div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
 						'<div class="onlinehelplayer">'.$this->get_cvars_html().'</div>';
 		$r .= '<div id="puAjax'.$n.'" class="puAjax'.$n.'"></div>';
-		$r .= '<div>'._T('version').' '.$this->type.' <b>'.(($this->version != ACS_VERSION) ? '<span class="alert">'.$this->version.'</span>' : $this->version).'</b></div>';
+		$r .= '<hr /><div>'._T('version').' '.$this->class.' <b>'.(($this->version != ACS_VERSION) ? '<span class="alert">'.$this->version.'</span>' : $this->version).'</b></div>';
 		/*
 		if ($spip_version_code < $this->version_spip_min)
 			$r .= '<div class="alert">'._T('acs:spip_trop_ancien', array('min' => spip_version_texte($this->version_spip_min))).'</div>';
@@ -282,7 +282,7 @@ class AdminComposant {
   	include_spip('lib/composant/controles');
 		$r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
 		$r .= "<input type='hidden' name='maj_composant' value='oui' />".
-					'<input type="hidden" name="composant" value="'.$this->type.'" />'.
+					'<input type="hidden" name="composant" value="'.$this->class.'" />'.
 					'<input type="hidden" name="nic" value="'.$this->nic.'" />';
 
 		$varconf = $this->fullname.'Config';
@@ -309,7 +309,7 @@ class AdminComposant {
 
 		$r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
 		if (($mode != 'controleur') && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
-			$url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.($this->nic ? '&amp;nic='.$this->nic : '').'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
+			$url = '../?page=wrap&c=composants/'.$this->class.'/'.$this->class.($this->nic ? '&amp;nic='.$this->nic : '').'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
 			$r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0; background:'.$GLOBALS['meta']['acsFondColor'].'" src="'.$url.'"></iframe></fieldset>';
 		}
 		// Affiche les variables paramétrables du composant:
@@ -329,15 +329,15 @@ class AdminComposant {
 			}
 			$draw = 'ctl'.ucfirst($var['type']);
 			if (is_callable($draw)) {
-			  $controls[$var['nom']] = $draw($this->type, $this->nic, $v, $$v, $var, md5($this->fullname));
+			  $controls[$var['nom']] = $draw($this->class, $this->nic, $v, $$v, $var, md5($this->fullname));
 			}
 			else $controls[$var['nom']] = $draw."() undefined.<br />" ;
 		}
 
 		// Recherche une mise en page et y remplace les variables par des contrôles
 		$mis_en_page = array();
-		if (is_readable($this->rootDir.'/ecrire/'.$this->type.'_mep.html')) {
-			$mep .= recuperer_fond('composants/'.$this->type.'/ecrire/'.$this->type.'_mep', array('lang' => $GLOBALS['spip_lang']));
+		if (is_readable($this->rootDir.'/ecrire/'.$this->class.'_mep.html')) {
+			$mep .= recuperer_fond('composants/'.$this->class.'/ecrire/'.$this->class.'_mep', array('lang' => $GLOBALS['spip_lang']));
 			foreach ($controls as $nom=>$html) {
 			  $tag = '&'.$nom.'&';
 			  if (strpos($mep, $tag) !== false)
@@ -366,13 +366,13 @@ class AdminComposant {
  */
   function pages() {
 		include_once(_DIR_PLUGIN_ACS.'lib/cGetPages.php');
-		return cGetPages($this->type);
+		return cGetPages($this->class);
   }
 /**
  * Méthode nextInstance: retourne un numéro d'instance de composant inutilisé
  */
   function nextInstance() {
-  	$i = composant_instances($this->type);
+  	$i = composant_instances($this->class);
  		return count($i) + 1;
   }
 }

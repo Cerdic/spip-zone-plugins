@@ -37,7 +37,7 @@ function acs_header_prive($flux) {
 	}
 	else
 		$jquery_version = 0;
-	
+
 	$r .= 
 '<script type="text/javascript" src="'.$js_dragdrop.'"></script>'.
 '<script type="text/javascript" src="../spip.php?page=javascript/acs_ecrire.js&jquery_version='.$jquery_version.'"></script>'.

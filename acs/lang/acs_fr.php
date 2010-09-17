@@ -37,6 +37,11 @@ $traductions_acs = array(
 	'text' => "Texte",
 	'link' => "Lien",
 	'linkhover' => "Au survol",
+
+	'shadow' => 'Ombre',
+  'shadowsize' => 'Taille',
+  'shadowblur' => 'Flou',
+
 );
 
 // Lang file is build with components lang files
@@ -94,8 +99,7 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'creer_composant' => 'Cr&eacute;er une nouvelle instance de ce composant',
   'del_composant' => 'Effacer cette instance de composant',
   'del_composant_confirm' => 'Voulez-vous vraiment effacer DEFINITIVEMENT l\'instance @nic@ du composant @c@ ?',
-  'container' => 'Conteneur',
-  'containers' => 'Conteneurs',
+  'used_in' => 'Utilis&eacute; dans',
   'modele' => 'Mod&egrave;le',
   'modeles' => 'Mod&egrave;les',
   'formulaire' => 'Formulaire',
@@ -103,7 +107,6 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'adm' => 'Administration',
   'public' => 'Public',
   'ecrire' => 'Ecrire',
-  'includes' => 'Inclusions',
   'structure_page' => 'Structure de la page',
   'err_fichier_absent' => 'Fichier @file@ introuvable',
   'err_fichier_ecrire' => 'Impossible d\'&eacute;crire le fichier &quot;@file@&quot;',

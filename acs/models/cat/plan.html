@@ -5,25 +5,10 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2008
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mkeywords,#EVAL{'_T("acs:entete_meta_page_plan").","._T("acs:entete_meta_keywords")'}})]
-<INCLURE{fond=composants/fond/entete}{page=plan}{env=#ENV}{title=<:acs:fond_meta_page_plan:>}{mdescription=<:acs:fond_meta_page_plan:>}{mkeywords=#GET{mkeywords}}{mabstract=<:acs:fond_meta_page_plan:>}{mexpires=7200}{msubject=<:acs:fond_meta_page_plan:>}>
-
-[(#REM) Menu de navigation laterale (colonne 1) ]
-<div id="colonne1"><div class="spacer"></div>
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=22}>
-</div>[(#REM) fin colonne1 (navigation) ]
-
-[(#REM) Colonne 2 ]
-<div id="colonne2"><div class="spacer"></div>
- [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=plan}{env=#ENV}>
-  <div id="onglet">]
-		[(#REM) Fil d'Ariane ]
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:plan_site:></div>
-    <INCLURE{fond=composants/articles/boucle-plan}{lang ?}{env=#ENV}>
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
-
+<INCLURE{fond=composants/fond/entete}{stylepage=plan}{env=#ENV}{title=<:acs:fond_meta_page_plan:>}{mdescription=<:acs:fond_meta_page_plan:>}{mkeywords=#GET{mkeywords}}{mabstract=<:acs:fond_meta_page_plan:>}{mexpires=7200}{msubject=<:acs:fond_meta_page_plan:>}>
+<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2020}{current=plan}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}>

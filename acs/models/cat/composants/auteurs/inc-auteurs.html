@@ -13,7 +13,7 @@ Variables: id_auteur (EXPOSE), debut_auteurs (PAGINATION), id_article (auteurs d
         [(#ID_ARTICLE|=={''}|?{'',' '})
             [<div class="menu-item siteauteur"><a href="(#URL_SITE)">#NOM_SITE</a></div>]
             [<div class="menu-item bioauteur">(#BIO)</div>]
-            <INCLURE {fond=composants/auteurs/boucle-auteur-articles}{ajax}{self}{self=#SELF}{id_auteur}>
+            <INCLURE {fond=composants/auteurs/boucle-auteur-articles}{ajax}{self}{id_auteur}>
         ]
       </li>
     </BOUCLE_auteurs>

@@ -5,12 +5,12 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]
 <BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}{doublons}{titre_mot=Video}>
 	[(#ENV{'mode'}|?{#SET{'mode', #ENV{'mode'}}, #SET{'mode', 'Video'}})]
-	<INCLURE {fond=inc-rubrique}{self=#SELF}{env=#ENV}{id_rubrique}{mode=#GET{'mode'}}{classement}{debut_articles=#ENV{'debut_articles'}}{debut_breves}>
+	<INCLURE {fond=inc-rubrique}{self=#SELF}{env=#ENV}{id_rubrique}{mode=#GET{'mode'}}{classement}{debut_articles}{debut_breves}>
 </BOUCLE_rubrique_principal>
 <BOUCLE_rubrique_principal2(RUBRIQUES) {id_rubrique}{tout}{doublons}>
 	<INCLURE {fond=inc-rubrique}{self=#SELF}{env=#ENV}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{debut_breves}>

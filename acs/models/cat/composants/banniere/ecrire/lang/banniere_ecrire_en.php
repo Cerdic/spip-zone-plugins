@@ -21,5 +21,6 @@ You can add an extra link somewhere in the banner.',
 'ExtraLink' => 'URL',
 'ExtraLabel' => 'Text',
 'ExtraImg' => 'Image',
+'ExtraTop' => 'Top',
 );
 ?>

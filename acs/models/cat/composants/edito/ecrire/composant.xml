@@ -22,6 +22,35 @@
     <label>non</label>
   </variable>
   <variable>
+    <nom>FondImageRepeatX</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>FondImageRepeatY</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
+    <nom>FondAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>right</option>
+    <valeur>left</valeur>
+  </variable>
+  <variable>
+    <nom>FondVerticalAlign</nom>
+    <type>choix</type>
+    <option>top</option>
+    <option>bottom</option>
+    <valeur>top</valeur>
+  </variable>
+
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
@@ -47,5 +76,20 @@
     <nom>NbLettres</nom>
     <type>nombre</type>
     <valeur>300</valeur>
+  </variable>
+
+  <variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>nombre</type>
+    <valeur>5</valeur>
+  </variable>
+  <variable>
+  	<nom>ShadowBlur</nom>
+    <type>nombre</type>
+    <valeur>5</valeur>
   </variable>
 </composant>

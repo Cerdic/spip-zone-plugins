@@ -104,7 +104,7 @@ function ctlFontFamily($composant, $nic, $nom, $style='sans-serif', $param, $wid
 // Choix de valeur, avec + / - (todo)
 function ctlNombre($composant, $nic, $nom, $nombre=0, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-	return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table></div>';
+	return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="8" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table></div>';
 }
 
 // Saisie d'un texte

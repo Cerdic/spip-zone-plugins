@@ -11,16 +11,16 @@ composants_ajouter_balises();
 
 function balise_PINCEAU($p) {
   $composant = interprete_argument_balise(1,$p);
-  $instance = interprete_argument_balise(2,$p);
-  $instance = $instance ? $instance : "'0'";
-  $p->code = 'calculer_balise_pinceau('.$composant.', '.$instance.')';
+  $nic = interprete_argument_balise(2,$p);
+  $nic = $nic ? $nic : "'0'";
+  $p->code = 'calculer_balise_pinceau('.$composant.', '.$nic.')';
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p;
 }
 
-function calculer_balise_pinceau($composant, $instance) {
-    return  'crayon composant-'.$composant.'-'.$instance.' type_pinceau';
+function calculer_balise_pinceau($composant, $nic) {
+    return  'crayon composant-'.$composant.'-'.$nic.' type_pinceau';
 }
 
 function balise_ACS_DERNIERE_MODIF($p) {
@@ -49,17 +49,14 @@ function balise_ACS_CHEMIN($p) {
  * Lorsque la valeur d'une variable commence par le signe "=",
  * cette valeur est interprétée comme une référence récursive à une autre variable.
  */
+
 function balise_VAR($p) {
 	$var = interprete_argument_balise(1,$p);
 	$sinon = interprete_argument_balise(2,$p);
-	$src = '$GLOBALS["meta"]';
 	if (!$var) {
-		// cas de #VAR sans argument : on retourne le serialize() du tableau
-		// une belle fonction [(#VAR|affiche_env)] serait pratique
-		$p->code = $src ? ('(is_array($a = ('.$src.')) ? serialize($a) : "")'): '@serialize($Pile[0])';
+		$p->code = '""'; // cas de #VAR sans argument
 	} else {
-		$meta = substr($var, 1, -1);
-		$p->code = $src ? ('is_array($a = ('.$src.')) ? meta_recursive($a,"'.$meta.'") : ""') : ('meta_recursive(@$Pile[0],"'.$meta.'")');
+		$p->code = 'meta_recursive($GLOBALS["meta"], '.$var.')';
 		if ($sinon)
 			$p->code = 'sinon('.$p->code.',$sinon)';
 		else

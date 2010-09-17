@@ -21,5 +21,6 @@ Un lien vers une page particuli&egrave;re peut être affich&eacute; en option da
 'ExtraLink' => 'URL',
 'ExtraLabel' => 'Texte',
 'ExtraImg' => 'Image',
+'ExtraTop' => 'Top',
 );
 ?>

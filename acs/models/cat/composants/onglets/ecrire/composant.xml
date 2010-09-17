@@ -3,7 +3,7 @@
   <nom>Onglets</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.5</version>
+  <version>0.6</version>
   <necessite id='acs' version='[0.6;]' />
 
   <param>
@@ -43,6 +43,11 @@
     <type>color</type>
   </variable>
 
+  <variable>
+    <nom>Space</nom>
+    <type>nombre</type>
+  </variable>
+  
   <variable>
     <nom>1</nom>
     <type>text</type>

@@ -10,6 +10,9 @@
     <nom>optionnel</nom>
     <valeur>no</valeur>
   </param>
+  <param>
+    <nom>instanciable</nom>
+  </param>
 
   <variable>
     <nom>Orientation</nom>
@@ -27,6 +30,14 @@
     <type>nombre</type>
   </variable>
   <variable>
+    <nom>Top</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+    <nom>Bottom</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
     <nom>Fond</nom>
     <type>color</type>
   </variable>
@@ -35,6 +46,10 @@
     <type>img</type>
     <chemin>img/trame</chemin>
     <label>non</label>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
   </variable>
   <variable>
     <nom>Text</nom>
@@ -121,6 +136,22 @@
     <type>text</type>
     <label>non</label>
   </variable>
+  
+  <variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>nombre</type>
+    <valeur>5</valeur>
+  </variable>
+  <variable>
+  	<nom>ShadowBlur</nom>
+    <type>nombre</type>
+    <valeur>5</valeur>
+  </variable>
+  
   <variable>
     <nom>comment</nom>
     <type>textarea</type>

@@ -6,7 +6,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 -----------------------------------------------
@@ -95,10 +95,10 @@ br.nettoyeur { clear: both; line-height: 0;}
 }
 
 .traductions {
-  float: #LANG_RIGHT;
-  text-align:right;
-  margin-top: 5px;
-  margin-right: 5px;
+  position : absolute;
+  text-align: #LANG_RIGHT;
+  top: 2px;
+  #LANG_RIGHT: 5px;
 }
 
 .traductions .lang_button {
@@ -109,16 +109,13 @@ br.nettoyeur { clear: both; line-height: 0;}
 
 .traductions .lang {
   background: #dfdfdf;
-  /*border: 1px outset #dfdfdf;*/
   opacity:0.5;
   filter:alpha(opacity=50);
 }
 .traductions .selected_lang {
   background: #dfdfdf;
-  /*border: 1px inset green;*/
 }
 .traductions .lang:hover {
-  /*border: 1px inset black;*/
   opacity:0.7;
   filter:alpha(opacity=70);
 }
@@ -469,4 +466,4 @@ table.petition {
 	color: #048;
 }
 
-[(#HEADER_COMPOSANTS{css}|compacte_css)]
+[(#HEADER_COMPOSANTS{css})]

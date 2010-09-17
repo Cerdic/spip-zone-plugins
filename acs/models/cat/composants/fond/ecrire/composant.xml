@@ -10,7 +10,11 @@
     <nom>preview</nom>
     <valeur>150</valeur>
   </param>
-  
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+
   <variable>
     <nom>Favicon</nom>
     <type>img</type>
@@ -43,27 +47,6 @@
     <label>non</label>
   </variable>
 
-  <variable>
-    <nom>Left</nom>
-    <type>nombre</type>
-  </variable>
-  <variable>
-    <nom>Right</nom>
-    <type>nombre</type>
-  </variable>
-  <variable>
-    <nom>Top</nom>
-    <type>nombre</type>
-  </variable>
-  <variable>
-    <nom>Bottom</nom>
-    <type>nombre</type>
-  </variable>
-  <variable>
-    <nom>Bord</nom>
-    <type>bord</type>
-  </variable>
-  
   <variable>
     <nom>FontSize</nom>
     <type>nombre</type>

@@ -163,8 +163,8 @@ else if (document.body) // other Explorers
 		?>
     <div id="bullechelp" class="bulle" onmouseover="mouseOverBulle()" onmouseout="mouseOutBulle()">
       <div class="publie"><a href="#"><small>01h11</small>: <:acs:agenda_publie:></a></div>[
-      (#CONFIG{acsAgendaBulleVoirArticlesModifies}|=={oui}|?{" "})<div class="modifie"><a href="#"><small>02h22</small>: <:acs:agenda_modifie:></a></div>][
-      (#CONFIG{activer_breves}|=={oui}|?{" "})<div class="breve"><a href="#"><small>03h33</small>: <:breves:></a></div>]
+      (#VAR{acsAgendaBulleVoirArticlesModifies}|=={oui}|?{" "})<div class="modifie"><a href="#"><small>02h22</small>: <:acs:agenda_modifie:></a></div>][
+      (#VAR{activer_breves}|=={oui}|?{" "})<div class="breve"><a href="#"><small>03h33</small>: <:breves:></a></div>]
     </div>
 	</th>
 </tr>

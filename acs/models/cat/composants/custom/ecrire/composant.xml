@@ -10,6 +10,9 @@
     <nom>preview</nom>
     <valeur>150</valeur>
   </param>
+  <param>
+    <nom>instanciable</nom>
+  </param>
 
   <variable>
     <nom>Contenu</nom>

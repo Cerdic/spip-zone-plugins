@@ -3,11 +3,11 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
- * Composant - Méthode cGetPages: retourne un tableau des squelettes qui utilisent le composant $c
+ * Composant - Méthode cGetPages: retourne un tableau des squelettes qui utilisent le composant ($c,$nic)
  * Non inclus comme méthode d'objet composant pour permettre usage sans création d'objet composant
  */
 
@@ -25,7 +25,10 @@ function cGetPages($c, $nic, $chemin='') {
 
   if (@is_dir($dir) AND @is_readable($dir) AND $d = @opendir($dir)) {
     $vars= cGetVars($c, $nic);
-    $cpreg = '/\{fond=composants\/'.$c.'[^\}]*\}.*\{nic='.$nic.'\}/';
+    if ($nic)
+    	$cpreg = '/\{fond=composants\/'.$c.'[^\}]*\}.*\{nic='.$nic.'\}/';
+   	else
+   		$cpreg = '/\{fond=composants\/'.$c.'[^\}]*\}.*/';
     while (($f = readdir($d)) !== false && ($nbfiles<1000)) {
       if ($f[0] != '.' # ignorer . .. .svn etc
       AND $f != 'CVS'

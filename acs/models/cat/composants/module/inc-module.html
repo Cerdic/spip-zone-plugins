@@ -7,37 +7,37 @@
 Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-]<div class="Modules cModule#NIC">
-#SET{v1,#EVAL{'acsModule'.'#NIC'.'1'}}
-#SET{v2,#EVAL{'acsModule'.'#NIC'.'2'}}
-#SET{v3,#EVAL{'acsModule'.'#NIC'.'3'}}
-#SET{v4,#EVAL{'acsModule'.'#NIC'.'4'}}
-#SET{v5,#EVAL{'acsModule'.'#NIC'.'5'}}
-#SET{v6,#EVAL{'acsModule'.'#NIC'.'6'}}
-#SET{v7,#EVAL{'acsModule'.'#NIC'.'7'}}
-#SET{v8,#EVAL{'acsModule'.'#NIC'.'8'}}
+]<div class="Module cModule#NIC">
+  #SET{v1,#EVAL{'acsModule'.'#NIC'.'1'}}
+  #SET{v2,#EVAL{'acsModule'.'#NIC'.'2'}}
+  #SET{v3,#EVAL{'acsModule'.'#NIC'.'3'}}
+  #SET{v4,#EVAL{'acsModule'.'#NIC'.'4'}}
+  #SET{v5,#EVAL{'acsModule'.'#NIC'.'5'}}
+  #SET{v6,#EVAL{'acsModule'.'#NIC'.'6'}}
+  #SET{v7,#EVAL{'acsModule'.'#NIC'.'7'}}
+  #SET{v8,#EVAL{'acsModule'.'#NIC'.'8'}}
 
-#SET{c1,#CONFIG{#GET{v1}}|cclass}
-#SET{c2,#CONFIG{#GET{v2}}|cclass}
-#SET{c3,#CONFIG{#GET{v3}}|cclass}
-#SET{c4,#CONFIG{#GET{v4}}|cclass}
-#SET{c5,#CONFIG{#GET{v5}}|cclass}
-#SET{c6,#CONFIG{#GET{v6}}|cclass}
-#SET{c7,#CONFIG{#GET{v7}}|cclass}
-#SET{c8,#CONFIG{#GET{v8}}|cclass}
-
-#SET{n1,#CONFIG{#GET{v1}}|cnic}
-#SET{n2,#CONFIG{#GET{v2}}|cnic}
-#SET{n3,#CONFIG{#GET{v3}}|cnic}
-#SET{n4,#CONFIG{#GET{v4}}|cnic}
-#SET{n5,#CONFIG{#GET{v5}}|cnic}
-#SET{n6,#CONFIG{#GET{v6}}|cnic}
-#SET{n7,#CONFIG{#GET{v7}}|cnic}
-#SET{n8,#CONFIG{#GET{v8}}|cnic}
-#SET{orientation,#EVAL{'acsModule'.'#NIC'.'Orientation'}}
-<INCLURE{fond=composants/module/inc-module_} {env} {self} {lang}
-{v1=#GET{v1}} {v2=#GET{v2}} {v3=#GET{v3}} {v4=#GET{v4}} {v5=#GET{v5}} {v6=#GET{v6}} {v7=#GET{v7}} {v8=#GET{v8}}
-{c1=#GET{c1}} {c2=#GET{c2}} {c3=#GET{c3}} {c4=#GET{c4}} {c5=#GET{c5}} {c6=#GET{c6}} {c7=#GET{c7}} {c8=#GET{c8}}
-{n1=#GET{n1}} {n2=#GET{n2}} {n3=#GET{n3}} {n4=#GET{n4}} {n5=#GET{n5}} {n6=#GET{n6}} {n7=#GET{n7}} {n8=#GET{n8}}
-{orientation=#CONFIG{#GET{orientation}}}>
+  #SET{c1,#VAR{#GET{v1}}|cclass}
+  #SET{c2,#VAR{#GET{v2}}|cclass}
+  #SET{c3,#VAR{#GET{v3}}|cclass}
+  #SET{c4,#VAR{#GET{v4}}|cclass}
+  #SET{c5,#VAR{#GET{v5}}|cclass}
+  #SET{c6,#VAR{#GET{v6}}|cclass}
+  #SET{c7,#VAR{#GET{v7}}|cclass}
+  #SET{c8,#VAR{#GET{v8}}|cclass}
+  
+  #SET{n1,#VAR{#GET{v1}}|cnic}
+  #SET{n2,#VAR{#GET{v2}}|cnic}
+  #SET{n3,#VAR{#GET{v3}}|cnic}
+  #SET{n4,#VAR{#GET{v4}}|cnic}
+  #SET{n5,#VAR{#GET{v5}}|cnic}
+  #SET{n6,#VAR{#GET{v6}}|cnic}
+  #SET{n7,#VAR{#GET{v7}}|cnic}
+  #SET{n8,#VAR{#GET{v8}}|cnic}
+  #SET{orientation,#EVAL{'acsModule'.'#NIC'.'Orientation'}}
+  <INCLURE{fond=composants/module/inc-module_} {env} {self} {lang}
+  {v1=#GET{v1}} {v2=#GET{v2}} {v3=#GET{v3}} {v4=#GET{v4}} {v5=#GET{v5}} {v6=#GET{v6}} {v7=#GET{v7}} {v8=#GET{v8}}
+  {c1=#GET{c1}} {c2=#GET{c2}} {c3=#GET{c3}} {c4=#GET{c4}} {c5=#GET{c5}} {c6=#GET{c6}} {c7=#GET{c7}} {c8=#GET{c8}}
+  {n1=#GET{n1}} {n2=#GET{n2}} {n3=#GET{n3}} {n4=#GET{n4}} {n5=#GET{n5}} {n6=#GET{n6}} {n7=#GET{n7}} {n8=#GET{n8}}
+  {orientation=#VAR{#GET{orientation}}}>
 </div>

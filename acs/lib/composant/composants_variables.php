@@ -66,11 +66,11 @@ function liste_variables() {
   $cv = composants_variables();
 	foreach($cv as $c=>$p) {
 		foreach($p['vars'] as $var=>$vp) {
-			$lv[ucfirst($c).$var] = array('c' => $c);
+			$lv[ucfirst($c).$var] = array('c' => $c, 'type' => $vp['type']);
 		}
   	foreach(composant_instances($c) as $nic) {
   		foreach($p['vars'] as $var=>$vp) {
-				$lv[ucfirst($c).$nic.$var] = array('c' => $c, 'nic' => $nic);
+				$lv[ucfirst($c).$nic.$var] = array('c' => $c, 'type' => $vp['type'], 'nic' => $nic);
   		}
   	}
   }

@@ -43,6 +43,13 @@
     <option>right</option>
     <valeur>left</valeur>
   </variable>
+  <variable>
+    <nom>FondVerticalAlign</nom>
+    <type>choix</type>
+    <option>top</option>
+    <option>bottom</option>
+    <valeur>top</valeur>
+  </variable>
   
   <variable>
     <nom>Image</nom>
@@ -110,6 +117,10 @@
   <variable>
   	<nom>ExtraImg</nom>
   	<type>img</type>
-		<chemin>img/banniere</chemin>
+		<chemin>img/banniere/extra</chemin>
+  </variable>
+  <variable>
+  	<nom>ExtraTop</nom>
+  	<type>text</type>
   </variable>
 </composant>

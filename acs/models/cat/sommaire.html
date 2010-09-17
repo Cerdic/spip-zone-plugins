@@ -11,24 +11,9 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Page d'acceuil
 Home page
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]
-[(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) ][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut) - ]<:acs:fond_meta_page_sommaire:>})][(#SET{mkeywords,<:acs:fond_meta_keywords:>,<:acs:fond_sommaire:>})]
-<INCLURE{fond=composants/fond/entete}{self=#SELF}{pagestyle=sommaire}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
-<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=20}>
-</div>[(#REM) fin colonne1 (navigation) ]
-<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=sommaire}{env=#ENV}>
-  <div id="onglet">]
-  <span id="hierarchie" style="float: #LANG_LEFT"><:accueil_site:></span>[(#REM) Fil d'Ariane ]
-  <span class="texte_nav" style="float: #LANG_RIGHT"><:acs:fond_meta_page_sommaire:></span><br class="nettoyeur" />
-  [(#VAR{acsEditoUse}|=={oui}|?{' '}) <INCLURE{fond=composants/edito/edito}{self=#SELF}>]  [(#REM) Contenu principal : éditorial ]
-  [(#REM) Contenu principal : derniers communiqués et articles publies ]
-  <INCLURE{fond=composants/articles/boucle-une}{self=#SELF}{debut_articles}> [(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<div id="colonne3"><div class="spacer"></div>
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=40}>
-</div>[(#REM) Fin colonne3]
-[(#REM) Pied de page ]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
+(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) ][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut) - ]<:acs:fond_meta_page_sommaire:>})][
+(#SET{mkeywords,<:acs:fond_meta_keywords:>,<:acs:fond_sommaire:>})
+]<INCLURE{fond=composants/fond/entete}{self=#SELF}{pagestyle=sommaire}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2000}{current=sommaire}>
 <INCLURE{fond=composants/fond/pied}{self=#SELF}>

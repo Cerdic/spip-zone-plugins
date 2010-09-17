@@ -2,7 +2,7 @@
 
 /**
  * ACS
- * Copyright Daniel FAIVRE 2008 - Copyleft licence GPL
+ * Copyright Daniel FAIVRE 2008-2010 - Copyleft licence GPL
  *
  * Implémentation d'une classe acsOnglets qui étend Composant,
  * avec sa méthode afterUpdate() pour personnaliser

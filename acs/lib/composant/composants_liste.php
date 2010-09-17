@@ -39,7 +39,7 @@
                 )
         )
 )
- * 
+
  */
 function composants_liste(){
   static $cl=array();

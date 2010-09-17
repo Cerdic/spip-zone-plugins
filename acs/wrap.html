@@ -1,4 +1,4 @@
-#CACHE{3600}
+#CACHE{0}
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 [(#REM)
              ACS
@@ -31,7 +31,7 @@ if (find_in_path($fond.'.html')) {
 		echo '<style>'.$fond.'</style>';
 }
 $fond ='#ENV{c}_instances.css';
-if (find_in_path($fond)) {
+if (find_in_path($fond.'.html')) {
 	$fond = @recuperer_fond($fond, array("nic" => "#NIC"));
 	if ($fond)
 		echo '<style>'.$fond.'</style>';

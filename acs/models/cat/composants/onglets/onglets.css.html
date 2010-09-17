@@ -1,6 +1,6 @@
 #CACHE{0}[(#REM)
 
-Onglets - dF 2008
+Onglets - dF 2008-2010
 ]
 
 #onglet {
@@ -64,7 +64,7 @@ Onglets - dF 2008
   position:relative; /* pour IE */
   z-index: 1; /* pour IE */
   background: url("[(#ACS_CHEMIN)]img/onglets/left.gif") no-repeat left top;
-  margin-#LANG_RIGHT: 3px; /* space between Onglets */
+  [margin-#LANG_RIGHT: (#VAR{acsOngletsSpace,0});] [(#REM) space between Onglets ]
   padding:0 0 0 9px;
   border-bottom: 1px solid [(#VAR{acsOngletsBordColor})];
   line-height: 14px; /* PROVISOIRE : en px pour permettre différentes tailles de fontes sans flinguer le système d'onglets */

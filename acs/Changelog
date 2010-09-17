@@ -1,4 +1,14 @@
-ACS version 0.6 (20100907)
+Suivi des principales révisions 
+
+AVERTISSEMENT : la version 0.6, bien que parfaitement fonctionnelle, n'intègre pas d'initialisation automatique d'un site
+
+ACS version 0.7
+
+Modele Cat pour ACS vesion 0.7:
+ - en cours de mise à jour : les composants sont encore en version 0.6 
+ 
+_______________________________________
+ACS version 0.6
  - mise à jour pour spip 2.1 et JQuery 1.8
  - drag/drop de composants sur le site public, avec les pinceaux ACS.
  - mutualisation
@@ -6,13 +16,26 @@ ACS version 0.6 (20100907)
  - ajout à l'API de la lecture de variables ACS avec chemins, style API cfg (acs/params/DernereModif)
  - API : changement de structure du tableau retourné par composants_liste()
  - instanciation/suppression de composants depuis l'interface d'administration (avant, ça ne se faisait que par  inclusion dans les squelettes)
-
+ - classComposantPrive.php : propriété "type" remplacé par "class" dans le constructeur (c'est plus cohérent)
+ - détection des composants instanciables (paramètre instanciable définie dans le xml du composant)
+ - lib/composant_infos : indique correctement les inclusions dans des composants Modules
+ - exec/composant_get_infos : correction d'un bug de cGetPages() pour les composants sans numéro d'instance
+ - lib/composant/page_source : affichage du contenu des variables de type widget dans le schéma de page
+ - balise #VAR : gère à la fois l'héritage de propriétés de composants ACS et la lecture de "chemins" type cfg y compris pour les modules.
+ - vues/composant : prise en compte des styles d'instances e composant
+ 
 Modele Cat pour ACS vesion 0.6:
- - Recherche : suppression du test de la variable meta "activer_moteur" (disparue en spip 2)
- - Banniere : ajout du lien extra, option d'alignement vertical
+ - pages du squelette : transformation de toutes les pages en pages constituées de composants Modules (partiellement réalisé : reste à définir un fichier dinitialisation adéquat. Ce sera fait dans la version 0.7)
+ - Articles : composant contextuel selon la page dans laquelle il est inclus.
+ - Banniere : ajout du lien extra, option d'alignement vertical, d'une variable ExtraTop pour positionner verticalement le lien optionnel, et du choix de l'alignement vertical de l'image de fond. Ajout d'une variable ExtraTop pour positionner verticalement le lien optionnel, et du choix de l'alignement vertical de l'image de fond, compatibilité du lien extra avec Safari/Konqueror  
  - Bandeau : choix de la taille du texte
  - Custom : le composant est désormais instanciable
- - Module : gestion des instances de composants
+ - Edito : variable ombre (couleur, taille, et flou), et choix d'une image de fond, de ses répétitions en x et y  et de son alignement horizontal et vertical
+ - Fond : suppression des insertions automatiques des modules 1&3 d'entête et pied de page. En conséquence, Fond ne peut plus être optionnel (car il inclut les entêtes/pied de page html techniques, non visibles)
+ - Module : gestion des instances de composants, ajout des variables : marges haute et basse, ombre (couleur, taille, et flou). Les propriétés deviennent héritables.
+ - Onglets : nouvelle variable Space (espace entre deux onglets)
+ - Recherche : suppression du test de la variable meta "activer_moteur" (disparue en spip 2)
+ 
 _______________________________________
 ACS version 0.5
  - installation simplifiee et amelioree. Installation des images par defaut des composants.

@@ -2,8 +2,8 @@
 Les 3 derniers articles de la ou des rubriques
 avec le mot-clé articles_keyword (Communiques, en français)
 par date, sans doublons, pour la langue en cours.
-]
-[(#SET{acsKeyword,<:acs:articles_keyword:>})]
+
+][(#SET{acsKeyword,<:acs:articles_keyword:>})]
 <B_rubrique_communiques>
 <BOUCLE_rubrique_communiques(RUBRIQUES) {titre_mot=#GET{acsKeyword}}{doublons}>
 <B_communiques>
@@ -12,7 +12,7 @@ par date, sans doublons, pour la langue en cours.
       [(#ENV{debut_articles}|?{'',' '})]
       <ul>
         <BOUCLE_communiques(ARTICLES) {id_rubrique}{par date}{inverse} {doublons} {pagination 3}>
-            <INCLURE{fond=composants/articles/articles}{id_article}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#EVAL{2*#VAR{acsArticlesNbLettres,200}}}>
+            <INCLURE{fond=composants/articles/article}{id_article}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#EVAL{2*#VAR{acsArticlesNbLettres,200}}}>
         </BOUCLE_communiques>
       </ul>
   </div>
@@ -32,7 +32,7 @@ Les articles dotés d'une date de publication future ne sont donc pas affichés.
       [(#ENV{debut_articles}|?{'',' '})]
       <ul>
         <BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination #VAR{acsArticlesPagination,10}} {age_relatif>=0} {lang=#LANG}>
-          <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#VAR{acsArticlesNbLettres,200}}>
+          <INCLURE{fond=composants/articles/article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#VAR{acsArticlesNbLettres,200}}>
         </BOUCLE_articles>
       </ul>
   </div>

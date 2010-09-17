@@ -1,19 +1,19 @@
 #CACHE{0}
+[(#REM) Edito
 
-/*************
- * Edito
- *************/
-
-.edito {
+].edito {
   [border-width: (#VAR{acsEditoBordWidth});]
   [border-style: (#VAR{acsEditoBordStyle});]
   [border-color: (#VAR{acsEditoBordColor});]
-  [background: (#VAR{acsEditoFond});]
-  [background-image: url("(#ACS_CHEMIN{img/edito/#VAR{acsEditoFondImage}})");]
+  [background: (#VAR{acsEditoFond})[ url("(#ACS_CHEMIN{img/edito/#VAR{acsEditoFondImage}})")][ (#VAR{acsEditoFondImageRepeatX}|=={non}|?{[(#VAR{acsEditoFondImageRepeatY}|=={non}|?{"no-repeat","repeat-y"})],[(#VAR{acsEditoFondImageRepeatY}|=={non}|?{"repeat-x","repeat"})]})][ (#VAR{acsEditoFondAlign}|=={right}|?{right,left})][ (#VAR{acsEditoFondVerticalAlign}|=={top}|?{top,bottom})];]
   margin: 0;
   padding: 5px;
   padding-bottom: 0;
-  padding-top: 0;
+  padding-top: 0;[
+  box-shadow: #VAR{acsEditoShadowSize,5}px #VAR{acsEditoShadowSize,5}px #VAR{acsEditoShadowBlur,5}px (#VAR{acsEditoShadow});
+  -webkit-box-shadow: #VAR{acsEditoShadowSize,5}px #VAR{acsEditoShadowSize,5}px #VAR{acsEditoShadowBlur,5}px #VAR{acsEditoShadow};
+  -moz-box-shadow: #VAR{acsEditoShadowSize,5}px #VAR{acsEditoShadowSize,5}px #VAR{acsEditoShadowBlur,5}px #VAR{acsEditoShadow};
+  filter: progid:DXImageTransform.Microsoft.dropShadow(color=#VAR{acsEditoShadow}, offX=#VAR{acsEditoShadowSize,5}, offY=#VAR{acsEditoShadowSize,5}, positive=true);]  
 }
 
 .edito legend{
@@ -59,4 +59,13 @@
 .edito .spip_logos {
   float: #LANG_LEFT;
   margin: 5px;
+}
+
+.edito .navigation {
+  float: right;
+  [background: (#VAR{acsEditoFond});]
+  font-size: 60%;
+  padding-left: 5px;
+  padding-right: 5px;
+  -moz-border-radius: 1em;
 }
