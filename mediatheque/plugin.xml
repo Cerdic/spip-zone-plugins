@@ -78,7 +78,7 @@
 		<icone>images/portfolio-16.png</icone>
 		<url>portfolio</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1)" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="Z" version="[1.2.1;]" />
 	<utilise id="mediabox" version="[0.5.0;]" />
