@@ -18,7 +18,7 @@
   <variable>
     <nom>TitreFondImage</nom>
     <type>img</type>
-    <chemin>img/trame</chemin>
+    <chemin>trame</chemin>
     <label>non</label>
   </variable>
   <variable>
@@ -58,6 +58,6 @@
   <variable>
     <nom>Puce</nom>
     <type>img</type>
-    <chemin>img/puces</chemin>
+    <chemin>puces</chemin>
   </variable>
 </composant>

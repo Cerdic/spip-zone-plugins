@@ -3,7 +3,7 @@
   <nom>Articles</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.6</version>
+  <version>0.7</version>
 	<necessite id='acs' version='[0.6;]' />
 
   <param>
@@ -19,7 +19,7 @@
   <variable>
     <nom>TitresFondImage</nom>
     <type>img</type>
-    <chemin>img/trame</chemin>
+    <chemin>trame</chemin>
     <label>non</label>
   </variable>
   <variable>

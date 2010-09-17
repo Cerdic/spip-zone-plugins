@@ -42,6 +42,7 @@ $traductions_acs = array(
   'shadowsize' => 'Taille',
   'shadowblur' => 'Flou',
 
+	'comment' => 'Commentaire'
 );
 
 // Lang file is build with components lang files

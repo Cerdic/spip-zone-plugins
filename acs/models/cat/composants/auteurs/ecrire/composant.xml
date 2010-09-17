@@ -22,7 +22,7 @@
   <variable>
     <nom>TitreFondImage</nom>
     <type>img</type>
-    <chemin>img/trame</chemin>
+    <chemin>trame</chemin>
     <label>non</label>
   </variable>  
   <variable>

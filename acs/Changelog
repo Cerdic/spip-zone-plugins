@@ -3,10 +3,12 @@ Suivi des principales révisions
 AVERTISSEMENT : la version 0.6, bien que parfaitement fonctionnelle, n'intègre pas d'initialisation automatique d'un site
 
 ACS version 0.7
-
+ - changement des chemins d'images installées par les composants : img->IMG
+ - affichage du commentaire du composant en info-bulle sur le schéma de la page
+ 
 Modele Cat pour ACS vesion 0.7:
  - en cours de mise à jour : les composants sont encore en version 0.6 
- 
+
 _______________________________________
 ACS version 0.6
  - mise à jour pour spip 2.1 et JQuery 1.8

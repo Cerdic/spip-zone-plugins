@@ -14,12 +14,12 @@
       <small class="infos_article">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
       [<br /><div class="chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> (lire la suite)</a></i></small>})</div>]
       [<span class="texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> (lire la suite)</a></i></small>})</span><br />]
-      <BOUCLE_mot(MOTS) {id_article} {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT" style ="float:left; font-size: 0.71em"><img src="#ACS_CHEMIN{img/triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
+      <BOUCLE_mot(MOTS) {id_article} {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT" style ="float:left; font-size: 0.71em"><img src="#ACS_CHEMIN{triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
     </BOUCLE_edito>
     <span class="navigation">
-      <img src="#ACS_CHEMIN{img/edito/pause.gif}" title="<:acs:edito_pause:>" alt="||" />
-      [(#ENV{edito_debut,0}|>{0}|?{' '}) <a id="edito_precedent" href="?edito_debut=[(#EVAL{#ENV{edito_debut,0}-1})]" class="ajax"><img src="#ACS_CHEMIN{img/edito/gauche.gif}" title="<:acs:edito_precedent:>" alt="&larr;" /></a>]
-      [(#ENV{edito_debut,0}|<{#GET{edito_total}|moins{1}}|?{' '}) <a id="edito_suivant" href="?edito_debut=#EVAL{#ENV{edito_debut,0}+1}" class="ajax"><img src="#ACS_CHEMIN{img/edito/droit.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" /></a>] [(#ENV{edito_debut,0}|plus{1})]/#GET{edito_total}
+      <img src="#ACS_CHEMIN{edito/pause.gif}" title="<:acs:edito_pause:>" alt="||" />
+      [(#ENV{edito_debut,0}|>{0}|?{' '}) <a id="edito_precedent" href="?edito_debut=[(#EVAL{#ENV{edito_debut,0}-1})]" class="ajax"><img src="#ACS_CHEMIN{edito/gauche.gif}" title="<:acs:edito_precedent:>" alt="&larr;" /></a>]
+      [(#ENV{edito_debut,0}|<{#GET{edito_total}|moins{1}}|?{' '}) <a id="edito_suivant" href="?edito_debut=#EVAL{#ENV{edito_debut,0}+1}" class="ajax"><img src="#ACS_CHEMIN{edito/droit.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" /></a>] [(#ENV{edito_debut,0}|plus{1})]/#GET{edito_total}
     </span>
 </fieldset>
 </B_edito>

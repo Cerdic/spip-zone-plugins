@@ -18,7 +18,7 @@
   <variable>
     <nom>Favicon</nom>
     <type>img</type>
-		<chemin>img/favicon</chemin>
+		<chemin>favicon</chemin>
   </variable>
   <variable>
     <nom>Color</nom>
@@ -43,7 +43,7 @@
   <variable>
     <nom>Image</nom>
     <type>img</type>
-    <chemin>img/trame</chemin>
+    <chemin>trame</chemin>
     <label>non</label>
   </variable>
 

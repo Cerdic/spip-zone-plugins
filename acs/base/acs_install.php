@@ -6,7 +6,7 @@
 # Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-$acs_install_version = '0.6';
+$acs_install_version = '0.7';
 
 function acs_install($action){
   switch ($action)
@@ -48,7 +48,9 @@ function acs_set_default() {
   	$install_dir = find_in_path('composants/'.$class.'/install');
   	if (!$install_dir)
   		continue;
-		copy_dir($install_dir.'/', '../'.$GLOBALS['ACS_CHEMIN'].'/');
+  	if (is_readable($install_dir.'/IMG')) {
+			copy_dir($install_dir.'/IMG/', '../'.$GLOBALS['ACS_CHEMIN'].'/');
+  	}
   }
 }
 

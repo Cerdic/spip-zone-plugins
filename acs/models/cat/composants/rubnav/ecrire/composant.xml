@@ -57,7 +57,7 @@
   <variable>
     <nom>TitreFondImage</nom>
     <type>img</type>
-    <chemin>img/trame</chemin>
+    <chemin>trame</chemin>
     <label>non</label>
   </variable>
   <variable>
@@ -78,37 +78,37 @@
   <variable>
     <nom>DeplierHaut</nom>
     <type>img</type>
-    <chemin>img/triangles</chemin>
+    <chemin>triangles</chemin>
     <valeur>deplierhaut.gif</valeur>
   </variable>
   <variable>
     <nom>DeplierHautOver</nom>
     <type>img</type>
-    <chemin>img/triangles</chemin>
+    <chemin>triangles</chemin>
     <valeur>deplierhauton.gif</valeur>
   </variable>
   <variable>
     <nom>DeplierHaut_rtl</nom>
     <type>img</type>
-    <chemin>img/triangles</chemin>
+    <chemin>triangles</chemin>
     <valeur>deplierhaut_rtl.gif</valeur>
   </variable>
   <variable>
     <nom>DeplierHautOver_rtl</nom>
     <type>img</type>
-    <chemin>img/triangles</chemin>
+    <chemin>triangles</chemin>
     <valeur>deplierhaut_rtl.gif</valeur>
   </variable>
   <variable>
     <nom>DeplierBas</nom>
     <type>img</type>
-    <chemin>img/triangles</chemin>
+    <chemin>triangles</chemin>
     <valeur>deplierbas.gif</valeur>
   </variable>
   <variable>
     <nom>DeplierBasOver</nom>
     <type>img</type>
-    <chemin>img/triangles</chemin>
+    <chemin>triangles</chemin>
     <valeur>deplierbas.gif</valeur>
   </variable>
 </composant>

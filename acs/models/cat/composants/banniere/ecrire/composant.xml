@@ -19,7 +19,7 @@
   <variable>
     <nom>FondImage</nom>
     <type>img</type>
-    <chemin>img/trame</chemin>
+    <chemin>trame</chemin>
     <label>non</label>
   </variable>
   <variable>
@@ -54,7 +54,7 @@
   <variable>
     <nom>Image</nom>
     <type>img</type>
-    <chemin>img/banniere</chemin>
+    <chemin>banniere</chemin>
   </variable>
   <variable>
     <nom>Align</nom>
@@ -117,7 +117,7 @@
   <variable>
   	<nom>ExtraImg</nom>
   	<type>img</type>
-		<chemin>img/banniere/extra</chemin>
+		<chemin>banniere/extra</chemin>
   </variable>
   <variable>
   	<nom>ExtraTop</nom>

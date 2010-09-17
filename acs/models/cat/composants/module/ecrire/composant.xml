@@ -44,7 +44,7 @@
   <variable>
     <nom>FondImage</nom>
     <type>img</type>
-    <chemin>img/trame</chemin>
+    <chemin>trame</chemin>
     <label>non</label>
   </variable>
   <variable>
@@ -153,7 +153,7 @@
   </variable>
   
   <variable>
-    <nom>comment</nom>
+    <nom>Comment</nom>
     <type>textarea</type>
   </variable>
 </composant>

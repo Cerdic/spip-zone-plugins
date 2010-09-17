@@ -54,7 +54,7 @@ class acsOnglets extends Composant {
     imagecolorset($iml, 2, $hr, $hg, $hb);
     imagecolorset($iml, 3, $ar, $ag, $ab);
 
-    $dir_img = '../'.$GLOBALS['ACS_CHEMIN'].'/img/onglets';
+    $dir_img = '../'.$GLOBALS['ACS_CHEMIN'].'/onglets';
     if (!is_readable($dir_img)) mkdir_recursive($dir_img);
     if ( (!@imagegif($imr,$dir_img.'/right.gif')) ||
     	(!@imagegif($iml,$dir_img.'/left.gif')) ) {

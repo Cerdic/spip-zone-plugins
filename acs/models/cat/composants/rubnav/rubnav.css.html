@@ -11,7 +11,7 @@
 .cRubnav .menu-titre {
   text-align : center;
   font-weight: bold;
-  [background: (#VAR{acsRubnavTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsRubnavTitreFondImage}})") repeat top left];]
+  [background: (#VAR{acsRubnavTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsRubnavTitreFondImage}})") repeat top left];]
 }
 
 .cRubnav .menu-item {
@@ -29,13 +29,13 @@
 .cRubnav .menu-item  a.menu-item-haschilds {
   background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];  
   background-repeat: no-repeat;
-  [background-image: url("(#ACS_CHEMIN{img/triangles/deplierhaut[(#GET{sitelangdir})].gif})");]
+  [background-image: url("(#ACS_CHEMIN{triangles/deplierhaut[(#GET{sitelangdir})].gif})");]
 }
 
 .cRubnav .menu-item  a.menu-item-haschildson {
   background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];  
   background-repeat: no-repeat;
-  [background-image: url("(#ACS_CHEMIN{img/triangles/deplierbas.gif})");]
+  [background-image: url("(#ACS_CHEMIN{triangles/deplierbas.gif})");]
 }
 
 .cRubnav .menu-item a {
@@ -66,12 +66,12 @@
 .cRubnav .menu-item  a.menu-item-haschilds:hover {
   background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];  
   background-repeat: no-repeat;
-  [background-image: url("(#ACS_CHEMIN{img/triangles/deplierhauton[(#GET{sitelangdir})].gif})");]
+  [background-image: url("(#ACS_CHEMIN{triangles/deplierhauton[(#GET{sitelangdir})].gif})");]
 }
 .cRubnav .menu-item  a.menu-item-haschildson:hover {
   background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];  
   background-repeat: no-repeat;
-  [background-image: url("(#ACS_CHEMIN{img/triangles/deplierbason.gif})");]
+  [background-image: url("(#ACS_CHEMIN{triangles/deplierbason.gif})");]
 }
 
 .cRubnav ul.hidden {

@@ -34,7 +34,7 @@
   <variable>
     <nom>Image</nom>
     <type>img</type>
-    <chemin>img/fond</chemin>
+    <chemin>fond</chemin>
     <label>non</label>
   </variable>
   <variable>

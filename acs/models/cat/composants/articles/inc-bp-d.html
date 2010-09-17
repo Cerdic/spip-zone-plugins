@@ -2,12 +2,12 @@
 <div class="plan-articles">
 <BOUCLE_articles(ARTICLES spip_notations_objets) {id_rubrique} {par titre} {lang ?} {note_ponderee>=#VAR{acsDemocratieSeuilPublication,0}} {statut==#DEMOCRATIE_STATUT} >
 [(#MODE|=={forums}|?{#ACCEPTER_FORUM|!={non}|?{' '}})
-<span class="plan-article">[<img src="#ACS_CHEMIN{img/puces/}(#VAR{acsArticlesPuce})" alt="¤" />]
+<span class="plan-article">[<img src="#ACS_CHEMIN{puces/}(#VAR{acsArticlesPuce})" alt="¤" />]
 <a href="#URL_ARTICLE[(#MODE|=={forums}|?{'&ouvrir=oui#forum'})]" [title="(#INTRODUCTION|textebrut|entites_html)"]>#TITRE</a>
 <INCLURE {fond=composants/forums/nbmessages}{id_article}{lang ?}>
 </span>]
 [(#MODE|!={forums}|?{' '})
-<span class="plan-article">[<img src="#ACS_CHEMIN{img/puces/}(#VAR{acsArticlesPuce})" alt="¤" />]
+<span class="plan-article">[<img src="#ACS_CHEMIN{puces/}(#VAR{acsArticlesPuce})" alt="¤" />]
 <a href="#URL_ARTICLE[(#MODE|=={forums}|?{'&ouvrir=oui#forum'})]" [title="(#INTRODUCTION|textebrut|entites_html)"]>#TITRE</a>
 </span>]
 </BOUCLE_articles>

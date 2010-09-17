@@ -229,7 +229,7 @@ function widgy($composant, $param, &$vars, $label='', $indentation='', $nic = ''
         if (isset($GLOBALS['meta'][$var]) && $GLOBALS['meta'][$var]) {
         	$ci = explode('-', $GLOBALS['meta'][$var]);
         	$cinom = $ci[0];
-        	$cinic = $ci[1]; 
+        	$cinic = $ci[1];
           $content .= '<tr class="widgy_included"><td class="widgy_included_label"><a class="nompage" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="acs'.$varname.'">'.substr($varname, strlen($composant.$nic)).'</a></td><td>'.widgy($cinom, '', $vars, $cinom, '', $cinic).'</td></tr>';
         }
       }
@@ -238,9 +238,16 @@ function widgy($composant, $param, &$vars, $label='', $indentation='', $nic = ''
   else
     $content .= _T('acs:variable');
   
+	// On recupere le commentaire du composant
+	$cvn = 'acs'.ucfirst($composant).$nic.'Comment';
+	if (isset($GLOBALS['meta'][$cvn]))
+		$title = $GLOBALS['meta'][$cvn];
+	else
+		$title = _T('acs:composant').' '.$label.' '.$nic;
+	$title = ' title="'.$title.'"';
   // affichage du contenu du widgy
   $r = '<table><tr><td>'.$indentation.'</td><td>';
-  $r .= '<table><tr><th><a class="'.get_widget_class('', 'oui', 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="'._T('acs:composant').' '.$label.($nic ? ' '.$nic : '').'">'.$label.($nic ? '&nbsp;'.$nic : '').'</a></th></tr>';
+  $r .= '<table><tr><th><a class="'.get_widget_class('', 'oui', 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'"'.$title.'>'.$label.($nic ? '&nbsp;'.$nic : '').'</a></th></tr>';
   $r .= $content;
   $r .= '</table></td></tr></table>';
   return $r;

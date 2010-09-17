@@ -1,6 +1,6 @@
 <?php  // Doit renvoyer UNIQUEMENT une image
 
-$url = $GLOBALS['ACS_CHEMIN'].'/img/banniere/';
+$url = $GLOBALS['ACS_CHEMIN'].'/banniere/';
 // la variable globale est rendue disponible en appellant ce fichier par un wrap
 
 require_once('banner_lib.php');
