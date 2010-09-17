@@ -1,0 +1,20 @@
+<plugin>
+
+    <nom>Dublin Core</nom>
+
+    <categorie>statistique</categorie>
+    <auteur>Tony Gheeraert</auteur>
+    <version>0.1</version>
+  
+    <etat>dev</etat>
+
+    <description> Des Dublins Core pour vos articles</description>
+    <prefix>dublin</prefix>
+
+    <pipeline>
+       <nom>insert_head</nom>
+       <inclure>dublin_pipelines.php</inclure>
+   </pipeline>
+
+
+</plugin>
