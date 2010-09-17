@@ -4,11 +4,11 @@
 
     <categorie>statistique</categorie>
     <auteur>Tony Gheeraert</auteur>
-    <version>0.1</version>
+    <version>1.0</version>
   
-    <etat>dev</etat>
+    <etat>stable</etat>
 
-    <description> Des Dublins Core pour vos articles</description>
+    <description>Des Dublins Core pour vos articles</description>
     <prefix>dublin</prefix>
 
     <pipeline>
