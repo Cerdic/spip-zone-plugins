@@ -51,7 +51,7 @@ class CacheBackend_xcache extends CacheBackend {
 		/* unlock */
 		if ($unlock) {
 			unset($locks[$key]);
-			$this->delete('lock::'.$key);
+			$this->del('lock::'.$key);
 		}
 		/* lock */
 		else {
