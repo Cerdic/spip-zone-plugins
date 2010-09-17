@@ -2,14 +2,14 @@
  * jQuery.ScrollTo
  * Copyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
  * Dual licensed under MIT and GPL.
- * Date: 3/9/2009
+ * Date: 5/25/2009
  *
  * @projectDescription Easy element scrolling using jQuery.
  * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
  * Works with jQuery +1.2.6. Tested on FF 2/3, IE 6/7/8, Opera 9.5/6, Safari 3, Chrome 1 on WinXP.
  *
  * @author Ariel Flesler
- * @version 1.4.1
+ * @version 1.4.2
  *
  * @id jQuery.scrollTo
  * @id jQuery.fn.scrollTo
@@ -20,6 +20,7 @@
  *		- A jQuery/DOM element ( logically, child of the element to scroll )
  *		- A string selector, that will be relative to the element to scroll ( 'li:eq(2)', etc )
  *		- A hash { top:x, left:y }, x and y can be any kind of number/string like above.
+*		- A percentage of the container's dimension/s, for example: 50% to go to the middle.
  *		- The string 'max' for go-to-end. 
  * @param {Number} duration The OVERALL length of the animation, this argument can be the settings object instead.
  * @param {Object,Function} settings Optional set of settings or the onAfter callback.
@@ -66,12 +67,12 @@
 	// Returns the element that needs to be animated to scroll the window.
 	// Kept for backwards compatibility (specially for localScroll & serialScroll)
 	$scrollTo.window = function( scope ){
-		return $(window).scrollable();
+		return $(window)._scrollable();
 	};
 
-	// Hack, hack, hack... stay away!
+	// Hack, hack, hack :)
 	// Returns the real elements to scroll (supports window/iframes, documents and regular nodes)
-	$.fn.scrollable = function(){
+	$.fn._scrollable = function(){
 		return this.map(function(){
 			var elem = this,
 				isWin = !elem.nodeName || $.inArray( elem.nodeName.toLowerCase(), ['iframe','#document','html','body'] ) != -1;
@@ -110,7 +111,7 @@
 		settings.offset = both( settings.offset );
 		settings.over = both( settings.over );
 
-		return this.scrollable().each(function(){
+		return this._scrollable().each(function(){
 			var elem = this,
 				$elem = $(elem),
 				targ = target, toff, attr = {},
@@ -120,7 +121,7 @@
 				// A number will pass the regex
 				case 'number':
 				case 'string':
-					if( /^([+-]=)?\d+(\.\d+)?(px)?$/.test(targ) ){
+					if( /^([+-]=)?\d+(\.\d+)?(px|%)?$/.test(targ) ){
 						targ = both( targ );
 						// We are done
 						break;
@@ -138,7 +139,7 @@
 					pos = Pos.toLowerCase(),
 					key = 'scroll' + Pos,
 					old = elem[key],
-					Dim = axis == 'x' ? 'Width' : 'Height';
+					max = $scrollTo.max(elem, axis);
 
 				if( toff ){// jQuery / DOMElement
 					attr[key] = toff[pos] + ( win ? 0 : old - $elem.offset()[pos] );
@@ -153,14 +154,19 @@
 					
 					if( settings.over[pos] )
 						// Scroll to a fraction of its width/height
-						attr[key] += targ[Dim.toLowerCase()]() * settings.over[pos];
-				}else
-					attr[key] = targ[pos];
+						attr[key] += targ[axis=='x'?'width':'height']() * settings.over[pos];
+				}else{ 
+					var val = targ[pos];
+					// Handle percentage values
+					attr[key] = val.slice && val.slice(-1) == '%' ? 
+						parseFloat(val) / 100 * max
+						: val;
+				}
 
 				// Number or 'number'
 				if( /^\d+$/.test(attr[key]) )
 					// Check the limits
-					attr[key] = attr[key] <= 0 ? 0 : Math.min( attr[key], max(Dim) );
+					attr[key] = attr[key] <= 0 ? 0 : Math.min( attr[key], max );
 
 				// Queueing axes
 				if( !i && settings.queue ){
@@ -181,13 +187,17 @@
 				});
 			};
 
+		}).end();
+	};
+	
 			// Max scrolling position, works on quirks mode
 			// It only fails (not too badly) on IE, quirks mode.
-			function max( Dim ){
-				var scroll = 'scroll'+Dim;
+	$scrollTo.max = function( elem, axis ){
+		var Dim = axis == 'x' ? 'Width' : 'Height',
+			scroll = 'scroll'+Dim;
 				
-				if( !win )
-					return elem[scroll];
+		if( !$(elem).is('html,body') )
+			return elem[scroll] - $(elem)[Dim.toLowerCase()]();
 				
 				var size = 'client' + Dim,
 					html = elem.ownerDocument.documentElement,
@@ -197,9 +207,6 @@
 					 - Math.min( html[size]  , body[size]   );
 					
 			};
-
-		}).end();
-	};
 
 	function both( val ){
 		return typeof val == 'object' ? val : { top:val, left:val };
