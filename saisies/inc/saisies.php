@@ -831,4 +831,73 @@ function saisies_generer_aide(){
 	);
 }
 
+/*
+ * Génère, à partir d'un tableau de saisie le code javascript ajouté à la fin de #GENERER_SAISIES
+ * pour produire un affichage conditionnel des saisies avec une option afficher_si.
+ *
+ * @param array $saisies Un tableau de saisies
+ * @return text
+ */
+function saisies_generer_js_afficher_si($saisies){
+	$i = 0;
+	$saisies = saisies_lister_par_nom($saisies,true);
+	
+	$code = '$(document).ready(function(){';
+		$code .= 'verifier_saisie = function(){';
+				foreach ($saisies as $saisie) {
+					if (isset($saisie['options']['afficher_si'])) {
+						$i++;
+						switch ($saisie['saisie']) {
+							case 'fieldset':
+								$class_li = 'fieldset_'.$saisie['options']['nom'];
+								break;
+							default:
+								$class_li = 'editer_'.$saisie['options']['nom'];
+						}
+						$condition = $saisie['options']['afficher_si'];
+						preg_match_all('#@(.+)@#U', $condition, $matches);
+						foreach ($matches[1] as $nom) {
+							switch($saisies[$nom]['saisie']) {
+								case 'radio':
+								case 'oui_non':
+									$condition = preg_replace('#@'.$nom.'@#U', '$("[name=\''.$nom.'\']:checked").val()', $condition);
+									break;
+								default:
+									$condition = preg_replace('#@'.$nom.'@#U', '$("[name=\''.$nom.'\']").val()', $condition);
+							}
+						}
+						$code .= 'if ('.$condition.') {$("li.'.$class_li.'").show(400);} ';
+						$code .= 'else {$(".'.$class_li.'").hide(400);} ';
+					}
+				}
+		$code .= '};';
+		$code .= 'verifier_saisie();';
+		$code .= '$("form").change(function(){verifier_saisie();});';
+	$code .= '});';
+	
+	return $i>0 ? $code : '';
+}
+
+/*
+ * Lorsque l'on affiche les saisies (#VOIR_SAISIES), les saisies ayant une option afficher_si
+ * et dont les conditions ne sont pas remplies doivent être retirées du tableau de saisies
+ *
+ * @param array $saisies Un tableau de saisies
+ * @param array $env Les variables d'environnement
+ * @return array Un tableau de saisies
+ */
+
+function saisies_verifier_afficher_si($saisies,$env) {
+	foreach ($saisies as $cle => $saisie) {
+		if (isset($saisie['options']['afficher_si'])) {
+			$condition = $saisie['options']['afficher_si'];
+			$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
+			eval('$ok = '.$condition.';');
+			if (!$ok)
+				unset($saisies[$cle]);
+		}
+	}
+	return $saisies;
+}
+
 ?>
