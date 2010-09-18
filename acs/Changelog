@@ -5,6 +5,7 @@ AVERTISSEMENT : la version 0.6, bien que parfaitement fonctionnelle, n'intègre 
 ACS version 0.7
  - changement des chemins d'images installées par les composants : img->IMG
  - affichage du commentaire du composant en info-bulle sur le schéma de la page
+ - installation automatique de mots-clefs de composants
  
 Modele Cat pour ACS vesion 0.7:
  - en cours de mise à jour : les composants sont encore en version 0.6 
