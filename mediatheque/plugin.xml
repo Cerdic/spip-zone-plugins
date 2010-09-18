@@ -10,8 +10,8 @@
 	</nom>
 	<icon>img_pack/portfolio-64.png</icon>
 	<auteur>[Cedric MORIN->http://www.yterium.net] &amp; [romy.tetue.net->http://romy.tetue.net] &amp; superyms--(traduction)</auteur>
-	<version>1.4</version>
-	<version_base>0.9</version_base>
+	<version>1.4.1</version>
+	<version_base>0.10</version_base>
 	<etat>stable</etat>
 	<description><multi>
 	[fr]Outils de gestion des documents, avec page r&eacute;capitulative listant tous les documents du site.
