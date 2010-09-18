@@ -245,9 +245,9 @@ function queue_schedule($force_jobs = null){
 	}
 
 	register_shutdown_function('queue_error_handler'); // recuperer les erreurs auant que possible
-	$res = sql_select('*','spip_jobs',$cond,'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
+	$res = sql_allfetsel('*','spip_jobs',$cond,'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
 	do {
-		if ($row = sql_fetch($res)){
+		if ($row = (isset($res[$nbj]) ? $res[$nbj] : false)){
 			$nbj++;
 			// il faut un verrou, a base de sql_delete
 			if (sql_delete('spip_jobs',"id_job=".intval($row['id_job']."AND status=".intval(_JQ_SCHEDULED)))){
@@ -267,10 +267,9 @@ function queue_schedule($force_jobs = null){
 		}
 		#spip_log("JQ schedule job end time ".$time,'jq');
 	} while ($nbj<_JQ_MAX_JOBS_EXECUTE AND $row AND $time<$end_time);
-
 	#spip_log("JQ schedule end time ".time(),'jq');
 	
-	if ($row = sql_fetch($res)){
+	if ($row = (isset($res[$nbj]) ? $res[$nbj] : false)){
 		queue_update_next_job_time(0); // on sait qu'il y a encore des jobs a lancer ASAP
 		#spip_log("JQ encore !",'jq');
 	}
@@ -367,10 +366,12 @@ function queue_update_next_job_time($next_time=null){
 
 	// traiter les jobs morts au combat (_JQ_PENDING depuis plus de 180s)
 	// pour cause de timeout ou autre erreur fatale
-	$res = sql_select("*","spip_jobs","status=".intval(_JQ_PENDING)." AND date<".sql_quote(date('Y-m-d H:i:s',$time-180)));
-	while ($row = sql_fetch($res))
-		queue_close_job($row,$time);
-
+	$res = sql_allfetsel("*","spip_jobs","status=".intval(_JQ_PENDING)." AND date<".sql_quote(date('Y-m-d H:i:s',$time-180)));
+	if (is_array($res)) {
+		foreach ($res as $row)
+			queue_close_job($row,$time);
+	}
+	
 	// chercher la date du prochain job si pas connu
 	if (is_null($next) OR is_null(queue_sleep_time_to_next_job())){
 		$date = sql_getfetsel('date','spip_jobs',"status=".intval(_JQ_SCHEDULED),'','date','0,1');

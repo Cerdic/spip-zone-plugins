@@ -1,7 +1,7 @@
 <plugin>
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
-  <version>0.5.1</version>
+  <version>0.5.2</version>
   <version_base>0.3.4</version_base>
   <etat>test</etat>
   <description>Gestion d'une file d'attente de t&acirc;ches &agrave; ex&eacute;cuter.</description>
