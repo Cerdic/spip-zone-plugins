@@ -9,6 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * saisies_lister_par_nom()
  * saisies_lister_champs()
  * saisies_lister_valeurs_defaut()
+ * saisies_charger_champs()
  * saisies_chercher()
  * saisies_supprimer()
  * saisies_inserer()
@@ -104,12 +105,24 @@ function saisies_lister_champs($contenu, $avec_conteneur=true){
  */
 function saisies_lister_valeurs_defaut($contenu){
 	$contenu = saisies_lister_par_nom($contenu, false);
-	$saisies = array();
+	$defaut = array();
 	foreach ($contenu as $champs => $ligne)
-		$saisies[$champs]  = isset($ligne['options']['defaut']) ? $ligne['options']['defaut'] : ''; 
-	return $saisies;
+		$defaut[$champs]  = isset($ligne['options']['defaut']) ? $ligne['options']['defaut'] : ''; 
+	return $defaut;
 }
 
+
+/*
+ * A utiliser dans une fonction charger d'un formulaire CVT,
+ * cette fonction renvoie le tableau de contexte correspondant
+ * de la forme $contexte['nom_champ'] = ''
+ *
+ * @param array $contenu Le contenu d'un formulaire (un tableau de saisies)
+ * @return array Un tableau de contexte
+ */
+function saisie_charger_champs($contenu) {
+	return array_fill_keys(saisies_lister_champs($contenu, false), '');
+}
 
 /*
  * Cherche une saisie par son nom ou son chemin et renvoie soit la saisie, soit son chemin
