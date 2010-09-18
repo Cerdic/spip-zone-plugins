@@ -203,7 +203,7 @@ function formulaires_ieconfig_import_charger_dist() {
 	);
 	if (_request('_code_yaml') and !_request('annuler') and !_request('importer'))
 		$contexte['_code_yaml'] = _request('_code_yaml');
-	return array_merge(saisies_lister_valeurs_defaut($saisies),$contexte);
+	return array_merge(saisie_charger_champs($saisies),$contexte);
 }
 
 function formulaires_ieconfig_import_verifier_dist() {
