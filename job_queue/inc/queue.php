@@ -247,7 +247,7 @@ function queue_schedule($force_jobs = null){
 	register_shutdown_function('queue_error_handler'); // recuperer les erreurs auant que possible
 	$res = sql_allfetsel('*','spip_jobs',$cond,'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
 	do {
-		if ($row = (isset($res[$nbj]) ? $res[$nbj] : false)){
+		if ($row = array_shift($res)){
 			$nbj++;
 			// il faut un verrou, a base de sql_delete
 			if (sql_delete('spip_jobs',"id_job=".intval($row['id_job']."AND status=".intval(_JQ_SCHEDULED)))){
@@ -269,7 +269,7 @@ function queue_schedule($force_jobs = null){
 	} while ($nbj<_JQ_MAX_JOBS_EXECUTE AND $row AND $time<$end_time);
 	#spip_log("JQ schedule end time ".time(),'jq');
 	
-	if ($row = (isset($res[$nbj]) ? $res[$nbj] : false)){
+	if ($row = array_shift($res)){
 		queue_update_next_job_time(0); // on sait qu'il y a encore des jobs a lancer ASAP
 		#spip_log("JQ encore !",'jq');
 	}
