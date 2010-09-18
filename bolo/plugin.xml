@@ -14,7 +14,7 @@
 	
 	<icon>images/bolo-128.png</icon>
 	
-	<lien>http://www.spip-contrib.net/Bolo</lien>
+	<lien>http://www.spip-contrib.net/Balise-BOLO</lien>
 
 	<description><multi>[fr]Ce plugin permet d'ins&eacute;rer tr&egrave;s facilement du faux texte dans les articles ou dans les squelettes, en sp&eacute;cifiant le nombre de caract&egrave;res souhait&eacute;s. La version actuelle permet d'ins&eacute;rer du texte latin; une future version permettra d'ins&eacute;rer du texte latin ou fran&ccedil;ais accentu&eacute;.[en]This plugin allows to easily insert fake text with an ajustable number of characters, into SPIP articles or into SPIP templates. This version inserts text in latin language, a future version will offer the choice between latin or French language texts.</multi></description>
 
