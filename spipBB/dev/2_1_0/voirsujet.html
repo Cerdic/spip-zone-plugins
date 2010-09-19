@@ -12,7 +12,8 @@
 <INCLURE{fond=inc-forum-head}{lang=#GET{langforum}}>
 
 </head>
-<body id='voirsujet'>
+<body>
+<div class="fond_page">
 [(#REM) Plugin SpipBB - Licence GPL]
 <!-- debut code pour fichier voirsujet.html -->
 <BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
@@ -21,66 +22,67 @@
 [(#REM) c: 11/1/8 on determine si on est admin (pour l'affichage)]
 [(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
 #SET{admin,#SESSION{id_auteur}|is_modo{#ID_ARTICLE}}
-
-	<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}{pagination}>
-		<div class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
-			<div  id="forum#ID_FORUM" colspan="2" class="ligne_nom">
-				<span class="text_nom">
-					<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
-					[(#REM) set id_auteur modo, en attendant reglage sur admin restreint]
-					#SET{modo,#ID_AUTEUR}
-					</BOUCLE_modo3>
-				</span>
-				<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
-			</div>
-		</div>
-		<div class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
-			<div class="aff_avatar">
-
-				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
-
+	<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{pagination}>
+		<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
+		[(#REM) set id_auteur modo, en attendant reglage sur admin restreint]
+		#SET{modo,#ID_AUTEUR}
+		</BOUCLE_modo3>
+		<div class="post bg[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<div class="postbody">
+				<ul class="profile-icons">
 				[(#REM) bouton alerter abus ... ! ]
-				<div class="bouton_alerter">
-					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
-				</div>
-			</div>
-			<div class="date_sujet">
-				[(#SET{affboutonadminpr,[(#GET{admin}|!={'oui'}|?{'',' '})
-				[(#REM) ajout JR test sur instituer ]
-				<div class="bout_admin">
-				[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
-				</div>
-				<div class="bout_admin">
-					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
-				</div>
-				<div class="bout_admin">
-					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
-				</div>
-				<div class="bout_admin">
-					<a href="[(#URL_PAGE{poster}|parametre_url{editer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:editer:>">editer</a>
-				</div>
-				]})]
-				<div class="bout_admin">
+					<li class="report-icon">
+						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
+					</li>
+					<li class="delete-icon">
+						<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
+					</li>
+					<li class="delete-icon">
+						[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+					</li>
+					<li class="edit-icon">
+						<a href="[(#URL_PAGE{poster}|parametre_url{editer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:editer:>">editer</a>
+					</li>
+					<li class="quote-icon">
 						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>"><IMG src="#CHEMIN{themes/defaut/img/bouton_citer.png}"></a>
+					</li>
+				</ul>
+				<h3 class="first"><span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span></h3>
+				<p class="author"><:spipbb:de_:>#NOM<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span></p>
+				<div class="#EDIT{texte} content">
+					[(#TEXTE|lignes_longues)]
 				</div>
-				#GET{affboutonadminpr}
-				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+				<div class="signature">Signature à définir</div>
 			</div>
+			<dl class="postprofile">
+				[(#REM) A traiter : cas des forums SANS abonnement]
+				<BOUCLE_auteur(AUTEURS){id_auteur}>
+				<dt>
+					<a href="#URL_AUTEUR">#LOGO_AUTEUR</a><br />
+					<a href="#URL_AUTEUR">#NOM</a>
+				</dt>
+				<dd>Titre de forum</dd>
+				<dd>&nbsp;</dd>
+				<dd><strong>Messages:</strong> Nombre de messages</dd>
+				<dd><strong>Inscription:</strong> Date inscription</dd>
+				<dd><strong>Localisation:</strong> Lieu</dd>
+				<dd>
+					<ul class="profile-icons">
+						<li class="pm-icon"><a href="" title="Message privé"><span>Message privé</span></a></li>
+						<li class="web-icon"><a href="#URL_SITE" title="#NOM_SITE"><span>Site Internet</span></a></li>
+					</ul>
+				</dd>
+				</BOUCLE_auteur>	
+			</dl>
 		</div>
-		<div class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
-			<div class="#EDIT{texte} forum-texte">
-				[(#TEXTE|lignes_longues)]
-			</div>
-		</div>
+	<hr class="divider" />
 	</BOUCLE_posts>
-			<tr class="pagination">
-			<td colspan="2">
-			#GRAND_TOTAL
-			[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_post_s:>,<:spipbb:pagine_post_:>})]
-			[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
-			</td>
-		</tr>
-		</B_posts>
+	<p class="space_10">
+		#GRAND_TOTAL
+		[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_post_s:>,<:spipbb:pagine_post_:>})]
+		[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
+	</p>
+	</B_posts>
 
 	<p class="space_10"></p>
 
@@ -119,7 +121,7 @@
 	
 </BOUCLE_sujet_principal>
 </B_sujet_principal>
-
+</div>
 </body>
 </html>
 </BOUCLE_forum>
