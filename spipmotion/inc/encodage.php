@@ -75,6 +75,8 @@ function encodage($source,$doc_attente){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
 		return;
 
+	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
+	
 	/**
 	 * On change le statut d'encodage à en_cours pour
 	 * - changer les messages sur le site (ce media est en cours d'encodage par exemple)
@@ -101,18 +103,11 @@ function encodage($source,$doc_attente){
 	 * - Le nom du fichier de log généré pour chaque fichier
 	 */
 	$query = "$fichier-$extension_attente-".date('Y_m_d_H-i-s');
-	$dossier = _DIR_TMP.'spipmotion/';
+	$dossier = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 	$fichier_final = substr($fichier,0,-(strlen($source['extension'])+1)).'-encoded.'.$extension_attente;
 	$fichier_temp = "$dossier$query.$extension_attente";
 	$fichier_log = "$dossier$query.log";
 	spip_log("le nom temporaire durant l'encodage est $fichier_temp","spipmotion");
-
-	/**
-	 * On crée le dossier temporaire s'il n'existe pas
-	 */
-	if(!is_dir($dossier)){
-		sous_repertoire(_DIR_TMP,'spipmotion');
-	}
 
 	/**
 	 * Si on n'a pas l'info hasaudio c'est que la récupération d'infos n'a pas eu lieu
@@ -364,6 +359,8 @@ function encodage($source,$doc_attente){
 		 */
 		$passes = lire_config("spipmotion/passes_$extension_attente",'1');
 		spip_log("on est en $passes passe(s)","spipmotion");
+		$pass_log_file = $dossier.$query.'-pass';
+		
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
@@ -375,15 +372,15 @@ function encodage($source,$doc_attente){
 			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($extension_attente == 'webm'))){
 				spip_log('on encode en 2 passes','spipmotion');
 				$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
-				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $query $infos_sup_normal\"";
+				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal\"";
 				$encodage_1 = $spipmotion_sh." --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
 				spip_log($retour_int_1,'spipmotion');
 				if($retour_int_1 == 0){
 					$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal" : $infos_sup_normal;
-					$infos_sup_normal_2 = "--params_supp \"-passlogfile $query $infos_sup_normal -deinterlace\"";
-					$encodage = $spipmotion_sh." --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." 2> $fichier_log";
+					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $infos_sup_normal \"";
+					$encodage = $spipmotion_sh." --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." 2> $fichier_log-pass2.log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
 					spip_log($retour_int,'spipmotion');
@@ -394,7 +391,7 @@ function encodage($source,$doc_attente){
 				spip_log('on encode en 1 passe','spipmotion');
 				$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
 				if($infos_sup_normal){
-					$infos_sup_normal = "--params_supp \"$infos_sup_normal -deinterlace\"";
+					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
 				$encodage = $spipmotion_sh." $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 				spip_log($encodage,'spipmotion');
@@ -429,7 +426,7 @@ function encodage($source,$doc_attente){
 		$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $id_objet, $mode, '', $actif,'','','');
 
 		if(intval($x) > 1){
-			unlink($fichier_temp);
+			spip_unlink($fichier_temp);
 			
 			/**
 			 * Modification de la file d'attente
