@@ -1,8 +1,14 @@
+
 <plugin>
 <nom>Color Chart</nom>
-<auteur>_fil_</auteur>
-<description>moulinette de _fil_</description>
-<version>0.1</version>
+<auteur>_fil_, loiseau2nuit</auteur>
+<description>
+d'apres un premier jet de _fil_, une moulinette ressortant les couleurs dominantes d'une image afin d'etablir des plalettes de couleur.<br/>
+l'objectif est en suite d'utiliser ces couleurs dans ses squelettes de maniere automatique (feuille de style dynamique) pour pouvoir en qques clics generer une charte de couleurs pour son site sur la base d'un squelette comme ZPIP par exemple...<br/>
+<b>Travaux en cours - plugin hautement instable et non fonctionnel ! <br/>
+Ne pas installer sauf si vous souhaitez participer au dev.</b>
+</description>
+<version>0 dev</version>
 <etat>dev</etat>
 <fonctions>colorchart_fonctions.php</fonctions>
 <prefix>colorchart</prefix>
