@@ -1,0 +1,7 @@
+Quelques idées en vrac, desole il est tard...
+
+- transformer le colorchart.html en fond CFG
+- permettre une assignation des couleurs ressorties a differents elements d'une css dynamique (JQuery UI sur le fond CFG pour drag&drop les couleurs + roue chromatiques pour affiner la couleur)
+- peut servir d' """API""" pour d'autres plugins...
+
+
