@@ -4,6 +4,6 @@
 (#ID_MOT|nuage{#TITRE,[(#URL_MOT|parametre_url{lang,#GET{lang}})]})
 ]<BOUCLE_pop(ARTICLES){id_mot}{par popularite}{inverse}{0,200}>[
 (#ID_MOT|nuage{'','',#POPULARITE_ABSOLUE})
-]</BOUCLE_pop></BOUCLE_tags>[<ul class="nuage">
+]</BOUCLE_pop></BOUCLE_tags>[<ul class="nuage menu-liste">
 	(#FOREACH{NUAGE,foreach_nuage_pop})
 </ul>]
