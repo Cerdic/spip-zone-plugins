@@ -72,7 +72,7 @@ function acs_bouton_bloc_depliable($titre_boite, $flag, $id) {
 function inc_acs_editer_admins($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL,  $icon="auteur-24.gif") {
 	global $options;
 
-  //spip_log("inc_acs_editer_admins($type, $id, $flag, $cherche_auteur, $ids, $titre_boite, $script_edit_objet)");
+  acs_log("inc_acs_editer_admins($type, $id, $flag, $cherche_auteur, $ids, $titre_boite, $script_edit_objet)");
 
 	$arg_ajax = "&id_{$type}=$id";
 	if ($script_edit_objet===NULL) $script_edit_objet = $type.'s';
@@ -94,7 +94,7 @@ function editer_admins_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aute
 {
 	global $spip_lang_left, $spip_lang_right, $options;
 
-  //spip_log("inc_acs_editer_admins_objet($type, $id, $flag, cherche_auteur, $ids, les_auteurs, futurs, $titre_boite, $script_edit_objet, $arg_ajax)");
+  acs_log("inc_acs_editer_admins_objet($type, $id, $flag, cherche_auteur, $ids, les_auteurs, futurs, $titre_boite, $script_edit_objet, $arg_ajax)");
 
 //
 // Ajouter un admin
@@ -167,7 +167,7 @@ function afficher_admins_objet($type, $id, $flag_editable, $cond_les_auteurs, $s
 {
 	global $connect_statut, $options,$connect_id_auteur, $spip_display;
 
-  // spip_log("inc/acs_editer_admins: afficher_admins_objet(type=$type, id=$id, flag_editable=$flag_editable, cond_les_auteurs=$cond_les_auteurs, script_edit=$script_edit, arg_ajax=$arg_ajax)");
+  acs_log("inc/acs_editer_admins: afficher_admins_objet(type=$type, id=$id, flag_editable=$flag_editable, cond_les_auteurs=$cond_les_auteurs, script_edit=$script_edit, arg_ajax=$arg_ajax)");
 
 	$les_auteurs = array();
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs;

@@ -62,7 +62,7 @@ function acs_groups_update($newgroups) {
     ecrire_meta('acsCadenasse', '');
   }
   ecrire_metas();
-  spip_log("acs_groups_update : ".$newgroups);
+  acs_log("acs_groups_update : ".$newgroups);
 }
 
 /**
@@ -96,7 +96,7 @@ function acs_group_update_pages($grid, $pages) {
   }
   ecrire_meta('acsCadenasse', serialize($acsPages));
   ecrire_metas();
-  spip_log("acs_group_update_pages ($grid) : ".$pages);
+  acs_log("acs_group_update_pages ($grid) : ".$pages);
 }
 
 function acs_group_add_admin($id, $id_admin) {
@@ -112,7 +112,7 @@ function acs_group_add_admin($id, $id_admin) {
     ecrire_meta('acsGroups', serialize($groups));
     ecrire_meta('acsCadenasse', serialize($pages));
     ecrire_metas();
-    spip_log("acs_group_add_admin (nouvel admin dans le groupe $id ".$grid."): ".$GLOBALS['auteur_session']['id_auteur']."+$id_admin");
+    acs_log("acs_group_add_admin (nouvel admin dans le groupe $id ".$grid."): ".$GLOBALS['auteur_session']['id_auteur']."+$id_admin");
   }
 }
 
@@ -140,7 +140,7 @@ function acs_group_del_admin($id, $id_admin) {
     ecrire_meta('acsGroups', serialize($acsGroups));
     ecrire_meta('acsCadenasse', serialize($pages));
     ecrire_metas();
-    spip_log("acs_group_del_admin (efface admin $id_admin du groupe $id $grid): ".$GLOBALS['auteur_session']['id_auteur']."-$id_admin");
+    acs_log("acs_group_del_admin (efface admin $id_admin du groupe $id $grid): ".$GLOBALS['auteur_session']['id_auteur']."-$id_admin");
   }
 }
 

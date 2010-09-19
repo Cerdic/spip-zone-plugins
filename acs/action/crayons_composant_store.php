@@ -7,7 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log('ACS: crayons_composant_store');
+acs_log('ACS: crayons_composant_store');
 /**
  * Crayon pour un composant - Sauvegarde
  * Crayon for one component - Store changes

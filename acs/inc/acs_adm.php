@@ -51,6 +51,14 @@ print_r(unserialize($GLOBALS['meta']['acsGroups']));
 echo "<br>_______________________________________________\$GLOBALS['meta']['acsCadenasse']<br>\n";
 print_r(unserialize($GLOBALS['meta']['acsCadenasse']));
 */
+
+
+  // Sauvegarde/restauration
+  $acs_sr = charger_fonction('acs_sr', 'inc');
+  $res = ajax_action_greffe("acs_sr", 0, $acs_sr());
+  $r.= '<br />'.acs_box(_T('acs:save').' / '._T('acs:restore'), $res, _DIR_PLUGIN_ACS.'images/sr.png');  
+  
+  // Bloc des admins
   $editer_acs_admins = charger_fonction('acs_editer_admins', 'inc');
   $groups = acs_groups();
   $blocs_cadenas = '';
@@ -95,7 +103,7 @@ function acs_adm_droite() {
   	_T('acs:acs'),
     '<div style="text-align: right"><form name="acs_config" action="?exec=acs&onglet=adm" method="post"><input type="hidden" name="changer_config" value="oui">'._T('acs:voir_onglet_vars').'<input name="acsVoirOngletVars" type="checkbox"'.($GLOBALS['meta']['acsVoirOngletVars'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_composants').'<input name="acsVoirPagesComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesComposants'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_preview_composants').'<input name="acsVoirPagesPreviewComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesPreviewComposants'] ? ' checked' : '').' /><br /><br /><input type="submit" name="'._T('bouton_valider').
   '" value="'._T('bouton_valider').'" class="fondo" /></form></div><br />'.
-    _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", lire_config("acs/params/DerniereModif")).
+    _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", lire_meta("acsDerniereModif")).
     '<hr /><br />'.
     _T('version').' <a style="color: black">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a>'.
     '<br /><br />'.

@@ -129,22 +129,3 @@ function isUsed($c) {
   return false;
 }
 
-/**
- * Retourne un objet ou un tableau sous forme de tableau affichable en html
- */
-function dbg($r, $html=false) {
-   if (is_object($r) or is_array($r)) {
-        ob_start();
-        print_r($r);
-        $r = ob_get_contents();
-        ob_end_clean();
-        if ($html)
-        	$r = htmlentities($r);
-        $srch = array('/Array[\n\r]/', '/\s*[\(\)]+/', '/[\n\r]+/', '/ (?= )/s');
-        $repl = array(''             , ''            , "\n"       , ($html ? '&nbsp;' : ' '));
-        $r = preg_replace($srch, $repl, $r);
-        if ($html)
-        	$r = nl2br($r);
-    }
-    return $r;
-}

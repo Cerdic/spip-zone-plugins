@@ -24,14 +24,18 @@ if (is_array($plugs)) {
 		$GLOBALS['ACS_ACCES'][] = 'op_effacer';
 	}
 }
+
+// Uncomment for debug :
 //define('_DEBUG_CRAYONS', true);
+//define('_ACS_LOG', true);
+
+
 
 /*__________________________________________________________________
 
   Ne PAS modifier ce qui suit - Do NOT modify anything after this
   __________________________________________________________________
 */
-
 // Chargement - Loading
 require_once _DIR_PLUGIN_ACS.'inc/acs_onload.php';
 ?>

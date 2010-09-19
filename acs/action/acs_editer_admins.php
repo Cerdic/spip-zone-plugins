@@ -13,7 +13,7 @@ include_spip('inc/acs_groups');
  * Admins edit actions
  */
 function action_acs_editer_admins() {
-  //log
+
   if ($_GET) $R = '$_GET:['.implode(array_keys($_GET), ', ').']=('.implode($_GET, ', ').')';
   else $R = '$_POST:['.implode(array_keys($_POST), ', ').']=('.implode($_POST, ', ').')';
 
@@ -26,7 +26,7 @@ function action_acs_editer_admins() {
   if ($titre = _request('titre'))
   $redirect = parametre_url($redirect,'titre',$titre,'&');
 
-  spip_log("\n------------------------------------------------------\n".
+  acs_log("\n------------------------------------------------------\n".
            'action_acs_editer_admins (appel): arg='.$arg."\n".urldecode($R)."\n\$arg=".urldecode($arg)."\n".
            "------------------------------------------------------");
 
@@ -63,7 +63,7 @@ function action_acs_editer_admins() {
         redirige_par_entete("$redirect&cherche_admin=$cherche&ids=" . join(',',$res)  . $ancre);
     }
     else
-      spip_log("ERR action_acs_editer_admins pour id=".$$nouv_admin.": args $arg pas compris");
+      acs_log("ERR action_acs_editer_admins pour id=".$$nouv_admin.": args $arg pas compris");
   }
 }
 
@@ -80,7 +80,7 @@ function supprimer_admin_et_rediriger($type, $id, $id_admin, $redirect) {
       }
       ecrire_meta('ACS_ADMINS', implode(',', $admins));
       ecrire_metas();
-      spip_log("action_acs_editer_admins (acs): ".$GLOBALS['auteur_session']['id_auteur']."-$id_admin");
+      acs_log("action_acs_editer_admins (acs): ".$GLOBALS['auteur_session']['id_auteur']."-$id_admin");
     }
   }
   else {
@@ -96,7 +96,7 @@ function ajouter_admin_et_rediriger($type, $id, $id_admin, $redirect) {
     if (!in_array($id_admin, $admins)) {
       ecrire_meta('ACS_ADMINS', $GLOBALS['meta']['ACS_ADMINS'].','.$id_admin);
       ecrire_metas();
-      spip_log("action_acs_editer_admins (acs): ".$GLOBALS['auteur_session']['id_auteur']."+$id_admin");
+      acs_log("action_acs_editer_admins (acs): ".$GLOBALS['auteur_session']['id_auteur']."+$id_admin");
     }
   }
   else {

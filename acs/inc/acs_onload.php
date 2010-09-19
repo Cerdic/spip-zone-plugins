@@ -121,18 +121,39 @@ function mkdir_recursive($pathname) {
 function meta_recursive($src, $meta) {
 	$chemin = strtok($meta, '/');
 	$val = $src[$chemin];
-	
-	spip_log('meta_recursive call: meta='.$meta.' chemin='.$chemin.' val="'.$val.'"', 'balise_var');
-	
 	if (is_array($val)) {
 		$val = meta_recursive($val, substr($meta, strlen($chemin)+1));
 	}
 	elseif (is_array(unserialize($val))) {
 		$val = meta_recursive(unserialize($val), substr($meta, strlen($chemin)+1));
 	}
-	spip_log('meta_recursive result: meta='.$meta.' chemin='.$chemin.' val="'.$val.'"', 'balise_var');
 	if (substr($val, 0 ,1) == '=')
 		$val = meta_recursive($src, substr($val, 1));
 	return $val;
+}
+
+
+function acs_log($txt) {
+	if (_ACS_LOG === true)
+		spip_log($txt, 'acs');
+}
+/**
+ * Retourne un objet ou un tableau sous forme de tableau affichable en html
+ */
+function dbg($r, $html=false) {
+   if (is_object($r) or is_array($r)) {
+        ob_start();
+        print_r($r);
+        $r = ob_get_contents();
+        ob_end_clean();
+        if ($html)
+        	$r = htmlentities($r);
+        $srch = array('/Array[\n\r]/', '/\s*[\(\)]+/', '/[\n\r]+/', '/ (?= )/s');
+        $repl = array(''             , ''            , "\n"       , ($html ? '&nbsp;' : ' '));
+        $r = preg_replace($srch, $repl, $r);
+        if ($html)
+        	$r = nl2br($r);
+    }
+    return $r;
 }
 ?>

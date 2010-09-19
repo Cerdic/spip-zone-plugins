@@ -79,7 +79,7 @@ else {
 <br /><br />
 <b>Source</b> display colorized source code of the page.
 <br /><br />
-To setup your website, customize components.<br/>A new instance of a component is created the first time you click on this component from the page which contain it.<br /><br />These page display customizable ACS plugin elements: pages, components, spip models and forms available in active ACS model, and default pages from spip distribution and installed plugins (even not used pages).<br /><br />ACS model elements may be eventually overriden by equivalents from skeleton directory optionnaly defined (Administration pane).',
+To setup your website, customize components.',
 
   'page' => 'Page',
   'pages' => 'Pages',
@@ -107,11 +107,11 @@ To setup your website, customize components.<br/>A new instance of a component i
   'ecrire' => 'Ecrire',
   'structure_page' => 'page structure',
   'err_fichier_absent' => 'File @file@ not found',
-  'err_fichier_ecrire' => 'Unable to write file &quot;@file@&quot;',
+  'err_fichier_ecrire' => 'Unable to write in &quot;@file@&quot;',
   'err_cache' => 'Unable to read or write ACS cache',
 
   'onglet_adm_description' => 'Configuration',
-  'onglet_adm_info' => 'ACS model choice and administration.',
+  'onglet_adm_info' => 'ACS model choice, administration, backup / restore.',
   'onglet_adm_help' => '<b>Model</b>:<br />Model is a set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the model and/or its components. If more than one is needed, separator is ":"  between paths.<br /><br /><b>ACS administrators</b>:<br />ACS administrators only are authorized to configure the website. Configuration pages are no more accessible to other administrators.<br /><br /><b>ACS access control</b>:<br />You can lock access to other spip "ecrire" area pages: creat a new group, look for the exec=dosomething parameter in the page-to-control url, add "something" in the "ACS administrated" list (separated by comma), validate, and add the page-to-control administrator(s).<br /><br /><b>Display all variables</b>:<br /> All variables display created components variables, whenever components are used or not.<br /><br /><b>Display component\'s pages</b>:<br />Display component\'s pages in "Pages" pane.',
 
   'admins' => 'Administrators',
@@ -123,6 +123,8 @@ To setup your website, customize components.<br/>A new instance of a component i
   'voir_pages_composants' => 'Display components pages',
   'voir_pages_preview_composants' => 'Components preview pages',
   'voir_onglet_vars' => 'Show Variables pane.',
+  'save' => 'Save',
+  'restore' => 'Restore',
 
   'acsDerniereModif' => 'Updated',
 

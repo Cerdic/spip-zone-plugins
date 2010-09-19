@@ -6,7 +6,6 @@
 # Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-$acs_install_version = '0.7';
 
 function acs_install($action){
   switch ($action)
@@ -16,7 +15,7 @@ function acs_install($action){
       break;
 
     case 'install':
-      acs_set_default();
+      acs_init();
       break;
 
     case 'uninstall':
@@ -26,23 +25,17 @@ function acs_install($action){
 }
 
 
-function acs_set_default() {
+function acs_init() {
 	// Initialisation des variables ACS
-  $defaults = find_in_path('composants/def.php');
-  if (is_readable($defaults))
-    include $defaults;
-  else 
-    spip_log('ACS init failed : unable to read composants/def.php');  
-  if (is_array($def)) {
-    foreach($def as $var=>$value) {
-      if (!isset($GLOBALS['meta'][$var]) || ($var=='acsModel'))
-	      ecrire_meta($var, $value);
-    }
-    ecrire_meta('acsInstalled', $acs_install_version);
-    ecrire_metas();
-    lire_metas();
-    spip_log('ACS init done with default values from composants/def.php');
-  }
+	$loadvars = charger_fonction('acs_load_vars', 'inc');
+	$theme = find_in_path('composants/def.php');
+	$r = $loadvars($theme);
+	if ($r == "ok")
+		acs_log('ACS init read default values from '.$theme);
+	else {
+		acs_log('ACS init read vars for ACS version '.ACS_VERSION.' : '.$r);
+		echo $r;
+	}
   
   // Installation des composants
   $keys = array();
@@ -56,7 +49,7 @@ function acs_set_default() {
   	// installation des images du composant
   	if (is_readable($install_dir.'/IMG')) {
 			copy_dir($install_dir.'/IMG/', '../'.$GLOBALS['ACS_CHEMIN'].'/');
-			spip_log('ACS init : images du composant '.$class.' installées dans '.$GLOBALS['ACS_CHEMIN'].'/ depuis '.$install_dir);
+			acs_log('ACS init : images du composant '.$class.' installées dans '.$GLOBALS['ACS_CHEMIN'].'/ depuis '.$install_dir);
 			echo ", images";
   	}
   	
@@ -68,13 +61,13 @@ function acs_set_default() {
 		// Si on ne trouve pas de mot-clés, on passe au composant suivant			
 		if (!is_readable($keyfile)) {
 			if (is_readable($install_dir.'/keywords/'))
-				spip_log('ACS init : échec de lecture du fichier des mots-clefs du composant '.$class. ' : '.$keyfile);
+				acs_log('ACS init : échec de lecture du fichier des mots-clefs du composant '.$class. ' : '.$keyfile);
 			continue;
 		}
 		// On lit les mots-clefs du composant
 		require_once($keyfile);
 		if (!is_array($keywords)) {
-			spip_log('ACS init : échec de lecture des mots-clefs du composant '.$class. ' depuis '.$keyfile);
+			acs_log('ACS init : échec de lecture des mots-clefs du composant '.$class. ' depuis '.$keyfile);
 			continue;
 		}
 		$keys = array_merge_recursive($keys, $keywords);
@@ -123,7 +116,7 @@ function acs_install_keywords($keywords) {
 				$id_groupe = $r;
 			// a ce stade, si l'on a pas d'id_groupe, c'est qu'il n'existait pas ET n'a pas pu etre cree
 			if (!$id_groupe) {
-				spip_log('ACS init : échec de création du groupe de mots-clés '.$keygroup['titre']);
+				acs_log('ACS init : échec de création du groupe de mots-clés '.$keygroup['titre']);
 				continue;
 			}
 			foreach($keygroup['mots'] as $mottitre=>$mots) {
@@ -136,7 +129,7 @@ function acs_install_keywords($keywords) {
     				'id_groupe' => $id_groupe,
     				'type' => $rubtitre));
     			if (!$r) {
-    				spip_log('ACS init : échec de création du mot-clé '.$mots['titre']);
+    				acs_log('ACS init : échec de création du mot-clé '.$mots['titre']);
     				continue;
     			}
   			}
@@ -148,7 +141,7 @@ function acs_install_keywords($keywords) {
 function acs_reset_vars() {
   spip_query("delete FROM spip_meta where left(nom,3)='acs'");
   lire_metas();
-  spip_log('ACS variables DELETED');
+  acs_log('ACS variables DELETED');
   
 }
 

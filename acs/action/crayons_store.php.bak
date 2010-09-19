@@ -9,7 +9,7 @@
 /*
  * Ajoute des sources de données non-tables pour les crayons
  */
-spip_log('crayons_store ACS');
+acs_log('crayons_store ACS');
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Définition de fonction de pinceaux (extensions des crayons)
@@ -44,7 +44,7 @@ function source_revision($id, $vals, $type, $wids) {
     $r = 'FAILED';
   else
     $r = 'done';
-  spip_log("source_revision $r for $page by ".$GLOBALS['auteur_session']['id_auteur']." ($file)");
+  acs_log("source_revision $r for $page by ".$GLOBALS['auteur_session']['id_auteur']." ($file)");
 }
 
 // Inclusion de l'action crayons_store du plugin crayons

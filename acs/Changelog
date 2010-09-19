@@ -1,11 +1,13 @@
 Suivi des principales révisions 
 
-AVERTISSEMENT : la version 0.6, bien que parfaitement fonctionnelle, n'intègre pas d'initialisation automatique d'un site
+AVERTISSEMENT : la version 0.7, bien que parfaitement fonctionnelle, n'intègre pas d'initialisation automatique d'un site
 
 ACS version 0.7
  - changement des chemins d'images installées par les composants : img->IMG
  - affichage du commentaire du composant en info-bulle sur le schéma de la page
  - installation automatique de mots-clefs de composants
+ - option _ACS_LOG dans acs_options.php pour gérer activation / désactivation des logs ACS
+ - fonction sauvegarder / restaurer la configuration d'un modèle ACS 
  
 Modele Cat pour ACS vesion 0.7:
  - en cours de mise à jour : les composants sont encore en version 0.6 

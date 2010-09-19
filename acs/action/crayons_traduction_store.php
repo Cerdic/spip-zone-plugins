@@ -29,7 +29,7 @@ function action_crayons_traduction_store_dist() {
 
 	$wid = $_POST['crayons'][0];
 	if (!verif_secu($_POST['name_'.$wid], $_POST['secu_'.$wid])) {
-		spip_log('ACS action/crayons_traduction_store : verif_secu('.$_POST['name_'.$wid].', '.$_POST['secu_'.$wid].') returned false');	
+		acs_log('ACS action/crayons_traduction_store : verif_secu('.$_POST['name_'.$wid].', '.$_POST['secu_'.$wid].') returned false');	
     return false;
     exit;
   }  
@@ -60,7 +60,7 @@ function action_crayons_traduction_store_dist() {
 		echo api_crayons_var2js(array('$erreur' => _U('acs:err_fichier_ecrire', array('file' => $langfile))));
 		exit;		
 	}
-	spip_log('ACS action/crayons_traduction_store '.$champ."=>".$newval. ' ('.$langfile.')');
+	acs_log('ACS action/crayons_traduction_store '.$champ."=>".$newval. ' ('.$langfile.')');
 	// Retourne la vue - Return vue 
 	//$return['$erreur'] = 'Code pour faire ça pas encore écrit ... ;-)';
   $return[$wid] = $newval;

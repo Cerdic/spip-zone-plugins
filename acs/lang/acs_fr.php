@@ -80,7 +80,7 @@ else {
 <br /><br />
 <b>Source</b> affiche le code source coloris&eacute; de la page.
 <br /><br />
-Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle instance num&eacute;rot&eacute;e d\'un composant est cr&eacute;e la première fois que l\'on clique sur ce composant depuis la page qui le contient.
+Pour personnaliser votre site, configurez ses composants.
 ',
 
   'page' => 'Page',
@@ -110,11 +110,11 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'ecrire' => 'Ecrire',
   'structure_page' => 'Structure de la page',
   'err_fichier_absent' => 'Fichier @file@ introuvable',
-  'err_fichier_ecrire' => 'Impossible d\'&eacute;crire le fichier &quot;@file@&quot;',
+  'err_fichier_ecrire' => 'Impossible d\'&eacute;crire dans &quot;@file@&quot;',
   'err_cache' => 'Impossible de lire ou d\'&eacute;crire dans le cache ACS',
 
   'onglet_adm_description' => 'Configuration d\'ACS',
-  'onglet_adm_info' => 'Choix du mod&egrave;le, gestion des droits, ..',
+  'onglet_adm_info' => 'Choix du mod&egrave;le, gestion des droits, sauvegarder / restaurer.',
   'onglet_adm_help' => '<b>Mod&egrave;le</b>:<br>Le mod&egrave;le est un jeu de squelettes Spip basés sur des composants ACS. Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br /><br /><b>Administrateurs ACS</b>:<br />Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.<br /><br /><b>Administration avec ACS</b>:<br />ACS permet &eacute;galement de verrouiller séparément l\'acc&egrave;s à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le param&egrave;tre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez leurs administrateurs.<br /><br /><b>Afficher l\'onglet variables</b>:<br /> La liste des variables affiche toutes les variables de tous les composants instanciés du mod&egrave;le ACS actif, utilis&eacute;s ou non.<br /><br /><b>Afficher les pages des composants</b>:<br />Affiche les pages des composants dans l\'onglet "Pages".',
 
   'admins' => 'Administrateurs',
@@ -126,6 +126,8 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'voir_pages_composants' => 'Afficher les pages des composants',
   'voir_pages_preview_composants' => 'Pages de pr&eacute;visualisation des composants',
   'voir_onglet_vars' => 'Afficher l\'onglet Variables',
+  'save' => 'Sauvegarder',
+  'restore' => 'Restaurer',
 
   'acsDerniereModif' => 'Mis &agrave; jour le',
 

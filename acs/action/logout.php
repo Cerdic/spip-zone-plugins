@@ -23,7 +23,7 @@ else {
 	  global $auteur_session, $ignore_auth_http;
 	  $logout =_request('logout');
 	  $url = _request('url');
-	  spip_log("logout $logout $url" . $auteur_session['id_auteur']);
+	  acs_log("logout $logout $url" . $auteur_session['id_auteur']);
 	  // cas particulier, logout dans l'espace public
 	  if ($logout == 'public' AND !$url)
 		  $url = url_de_base();

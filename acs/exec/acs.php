@@ -21,7 +21,7 @@ function exec_acs() {
   // Modifications
   $changer_config = $_POST['changer_config'];
   if ($changer_config=='oui') {
-    ecrire_config("acs/params/DerniereModif", time());
+    ecrire_meta("acsDerniereModif", time());
     ecrire_metas();
     lire_metas();
   }
@@ -52,7 +52,6 @@ function exec_acs() {
       include_spip('inc/acs_vars');
       $col1 = acs_vars_gauche();
       $col2 = acs_vars();
-      $col3 = acs_vars_droite();
       break;
       
     case 'adm':

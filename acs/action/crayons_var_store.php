@@ -29,7 +29,7 @@ function action_crayons_var_store_dist() {
 
 	$wid = $_POST['crayons'][0];
 	if (!verif_secu($_POST['name_'.$wid], $_POST['secu_'.$wid])) {
-		spip_log('ACS action/crayons_var_store : verif_secu('.$_POST['name_'.$wid].', '.$_POST['secu_'.$wid].') returned false');	
+		acs_log('action/crayons_var_store : verif_secu('.$_POST['name_'.$wid].', '.$_POST['secu_'.$wid].') returned false');	
     return false;
     exit;
   }
@@ -50,7 +50,7 @@ function action_crayons_var_store_dist() {
 	$newval = $_POST[$var.'_'.$wid];
 	ecrire_meta($var, $newval);
 	ecrire_meta("acsDerniereModif", time()); // forcera un recalcul
-	spip_log('ACS action/crayons_var_store '.$var."=>".$newval);
+	acs_log('ACS action/crayons_var_store '.$var."=>".$newval);
 	// Retourne la vue - Return vue 
 	$return['$erreur'] = NULL;
   $return[$wid] = $newval;

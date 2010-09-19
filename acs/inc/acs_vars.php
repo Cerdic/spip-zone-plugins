@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 //include_spip('inc/acs_presentation');//(implicite)
@@ -18,24 +18,19 @@ function acs_vars() {
   return acs_page_get_all_variables();
 }
 
-function acs_vars_droite() {
-  return acs_box(_T('acs:variables'), 'thème : todo', _DIR_PLUGIN_ACS."images/acs_32x32.gif", false);
-}
-
 function acs_page_get_all_variables() {
 
   $cv = composants_variables();
-  ksort($cv);
-  //print_r($cv);
+
   $r .= '<table frame="void" rules="cols" cellpadding="2" cellspacing="0" style="width: 100%; border: '.$GLOBALS['couleur_claire'].' 0 groove;">';
   $r .= '<tr style="text-align: center; border-bottom: '.$GLOBALS['couleur_claire'].' thin groove;"><th class="verdana1"><b>'._T('nom')."</b></th>\n<th class='verdana1'><b>"._T('acs:valeur')."</b></th>\n</tr>\n";
   foreach($cv as $c=>$p) {
 		foreach($p['vars'] as $var=>$vp) {
-			$r .= composant_variable($c, $var, false, $vp);
+			$r .= affiche_composant_variables($c, $var, false, $vp);
 		}
   	foreach(composant_instances($c) as $nic) {
   		foreach($p['vars'] as $var=>$vp) {
-				$r .= composant_variable($c, $var, $nic, $vp);
+				$r .= affiche_composant_variables($c, $var, $nic, $vp);
   		}
 			$r .= '<tr><td colspan="2" style=" height: 1px; padding: 0; background-color: '.$GLOBALS['couleur_claire'].';"></td></tr>';
   	}
@@ -45,7 +40,7 @@ function acs_page_get_all_variables() {
   return acs_box(_T('acs:toutes_les_variables'), $r, _DIR_PLUGIN_ACS.'/images/vars-24.gif');
 }
 
-function composant_variable($c, $v, $nic, $vp) {
+function affiche_composant_variables($c, $v, $nic, $vp) {
   static $i;
   $bgcolor = alterner($i++, '#eeeeee','white');
   

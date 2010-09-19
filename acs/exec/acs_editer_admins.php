@@ -26,7 +26,7 @@ function exec_acs_editer_admins() {
 	$script = urldecode(_request('script')).(_request('onglet') ? '&onglet='.urldecode(_request('onglet')) : '');
 	$titre = ($titre=_request('titre'))?urldecode($titre):$titre;
 
-  //spip_log("exec_acs_editer_admins id_$type=".$id.' script='.$script);
+  acs_log("exec_acs_editer_admins id_$type=".$id.' script='.$script);
 
 	$editer_admins = charger_fonction('acs_editer_admins', 'inc');
 	ajax_retour($editer_admins($type, $id, 'ajax', _request('cherche_auteur'), _request('ids'),$titre,$script));
