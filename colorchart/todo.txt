@@ -1,7 +1,17 @@
 Quelques idées en vrac, desole il est tard...
-
+- faire en sorte qu'il ne nous ressorte pas X fois la meme couleur sur un echantillon de 16 (pas pratique pour faire une palette quand seulement 2 couleurs dominantes ressortent 8 ou 10 fois chacune !)
+=> pour ça, voir le code d'emeric, pas mal d'idee interessantes pour faire le tri dans les resultats ressortis...
 - transformer le colorchart.html en fond CFG
 - permettre une assignation des couleurs ressorties a differents elements d'une css dynamique (JQuery UI sur le fond CFG pour drag&drop les couleurs + roue chromatiques pour affiner la couleur)
 - peut servir d' """API""" pour d'autres plugins...
+- passerait par un rangement des couleurs trouvees/affinees/validees dans un tableau PHP => à fixer dans la BDD
+- créer une css (habillage) dynamique pour deployer les couleurs de maniere automatique dans sa css
 
+Questions :
+- automatiser le traitement a chaque upload d'une nouvelle #LOGO_SITE_SPIP_SURVOL ?
+ou
+- fixer les couleurs une bonne fois pour toute et ne regenerer le traitement de palette que sur commande ?
+avantage => rendrait le boulot surcchargeable par un theme avec une repartition differente des couleurs
+inconvenient => peut etre un peu lourd. Obligerait a stocker les palettes validees dans une table et faire en sorte que chaque theme ressorte la sienne au bon moment
+inconvenient => qui nous dit qu'a chaque theme correspond un visuel d'ambiance different ? Ca serait logique mais...
 
