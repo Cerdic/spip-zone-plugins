@@ -1,0 +1,22 @@
+<style>
+	.chart div {float:left; height:102px; width: 102px }
+	.chart div img { display:none}
+	.chart div table { display:block; width:100%; height:100%}
+	.chart div:hover img { display:block}
+	.chart div:hover table { display:none}
+</style>
+
+<div class="chart">
+
+	<div>
+		[(#SET{logo,[(#LOGO_SITE_SPIP_NORMAL|copie_locale|image_aplatir{jpg,ffffff})]})]
+		#GET{logo}[(#GET{logo}|pixellate{4})]
+	</div>
+
+	<div>
+                [(#SET{survol,[(#LOGO_SITE_SPIP_SURVOL|copie_locale|image_aplatir{jpg,ffffff})]})]
+                #GET{survol}[(#GET{survol}|pixellate{4})]
+
+	</div>
+
+</div>

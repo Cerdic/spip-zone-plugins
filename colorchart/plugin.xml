@@ -1,0 +1,11 @@
+<plugin>
+<nom>Color Chart</nom>
+<auteur>_fil_</auteur>
+<description>moulinette de _fil_</description>
+<version>0.1</version>
+<etat>dev</etat>
+<fonctions>colorchart_fonctions.php</fonctions>
+<prefix>colorchart</prefix>
+<necessite id="SPIP" version="[2.0;]" />
+<categorie>squelettes</categorie>
+</plugin>
