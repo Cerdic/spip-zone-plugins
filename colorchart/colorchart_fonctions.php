@@ -22,7 +22,7 @@ function pixellate($img, $a=4) {
 	foreach (explode('-', $k) as $i => $c) {
 		$c = str_replace(':', 'a', preg_replace(',(.).,e', 'chr(2*ceil(ord("\1")/2))', $c));
 		if ($i%$a == 0) $r .= "<tr>";
-		$r .= "<td style='background:#$c;' title='$c' />";
+		$r .= "<td style='background:#$c;' title='$c' /><b> $c </b>";
 	}
 	$r .= "</table>\n";
 
