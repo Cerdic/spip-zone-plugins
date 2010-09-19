@@ -132,7 +132,7 @@ function noizetier_charger_infos_noisette_xml($noisette, $info=""){
 				$xml = reset($xml['noisette']);
 				$infos_noisette['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 				$infos_noisette['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
-				$infos_noisette['icon'] = isset($xml['icon']) ? find_in_path(reset($xml['icon'])) : '';
+				$infos_noisette['icon'] = isset($xml['icon']) ? reset($xml['icon']) : '';
 				// Décomposition des paramètres (enregistrer sous la forme d'un tableau respectant la norme de saisies
 				$infos_noisette['parametres'] = array();
 				if (spip_xml_match_nodes(',^parametre,', $xml, $parametres)){
@@ -192,7 +192,7 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info=""){
 			if (isset($infos_noisette['description']))
 				$infos_noisette['description'] = _T_ou_typo($infos_noisette['description']);
 			if (isset($infos_noisette['icon']))
-				$infos_noisette['icon'] = find_in_path($infos_noisette['icon']);
+				$infos_noisette['icon'] = $infos_noisette['icon'];
 				
 			if (!isset($infos_noisette['parametres']))
 				$infos_noisette['parametres'] = array();
@@ -332,7 +332,7 @@ function noizetier_lister_pages(){
 					foreach($compos_type as $compo => $infos_compo) {
 						$infos_compo['nom'] = typo($infos_compo['nom']);
 						$infos_compo['description'] = propre($infos_compo['description']);
-						$infos_compo['icon'] = $infos_compo['icon']!='' ? find_in_path($infos_compo['icon']) : '';
+						$infos_compo['icon'] = $infos_compo['icon']!='' ? $infos_compo['icon'] : '';
 						if (isset($liste_pages[$type]))
 							$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
 						else
@@ -376,7 +376,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 		if ($xml != '') {
 			$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 			$infos_page['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
-			$infos_page['icon'] = isset($xml['icon']) ? find_in_path(reset($xml['icon'])) : '';
+			$infos_page['icon'] = isset($xml['icon']) ? reset($xml['icon']) : '';
 			// Décomposition des blocs
 			if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)){
 				$infos_page['blocs'] = array();
@@ -384,7 +384,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 					list($balise, $attributs) = spip_xml_decompose_tag($bloc);
 					$infos_page['blocs'][$attributs['id']] = array(
 						'nom' => $attributs['nom'] ? _T($attributs['nom']) : $attributs['id'],
-						'icon' => isset($attributs['icon']) ? find_in_path($attributs['icon']) : '',
+						'icon' => isset($attributs['icon']) ? $attributs['icon'] : '',
 						'description' => _T($attributs['description'])
 					);
 				}
@@ -400,7 +400,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 		// S'il n'y a pas de fichier XML de configuration
 		elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML')?_NOIZETIER_LISTER_PAGES_SANS_XML:true) {
 			$infos_page['nom'] = $page;
-			$infos_page['icon'] = find_in_path('img/ic_page.png');
+			$infos_page['icon'] = 'img/ic_page.png';
 		}
 		
 		// Si les blocs n'ont pas été définis, on applique les blocs par défaut
@@ -429,17 +429,17 @@ function noizetier_blocs_defaut(){
 		'contenu' => array(
 			'nom' => _T('noizetier:nom_bloc_contenu'),
 			'description' => _T('noizetier:description_bloc_contenu'),
-			'icon' => find_in_path('img/ic_bloc_contenu.png')
+			'icon' => 'img/ic_bloc_contenu.png'
 			),
 		'navigation' => array(
 			'nom' => _T('noizetier:nom_bloc_navigation'),
 			'description' => _T('noizetier:description_bloc_navigation'),
-			'icon' => find_in_path('img/ic_bloc_navigation.png')
+			'icon' => 'img/ic_bloc_navigation.png'
 			),
 		'extra' => array(
 			'nom' => _T('noizetier:nom_bloc_extra'),
 			'description' => _T('noizetier:description_bloc_extra'),
-			'icon' => find_in_path('img/ic_bloc_extra.png')
+			'icon' => 'img/ic_bloc_extra.png'
 			),
 	);
 	$blocs_defaut = pipeline('noizetier_blocs_defaut',$blocs_defaut);

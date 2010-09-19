@@ -1,7 +1,7 @@
 #SET{rang_suivant,1}
 <ul id="bloc-#ENV{bloc}" class="noisettes">
 	<BOUCLE_noisettes(NOISETTES){type}{composition}{bloc}{par rang}>
-	<li class="noisette plie"[ style="background-image:url((#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{icon}|image_reduire{24}|extraire_attribut{src}))"]>
+	<li class="noisette plie"[ style="background-image:url((#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{icon}|chemin|image_reduire{24}|extraire_attribut{src}))"]>
 		<BOUCLE_test_modifier(CONDITION){si #ENV{id_noisette}|=={#ID_NOISETTE}|non}>
 		<div class="ligne">
 			<div class="description arial2">
