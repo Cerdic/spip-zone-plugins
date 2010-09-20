@@ -374,7 +374,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'devdebug:item_espace_prive' => 'Espace priv&eacute;',
 	'devdebug:item_espace_public' => 'Espace public',
 	'label:devdebug_niveau' => 'Filtrage du niveau d\'erreur renvoy&eacute; :',	
-	'devdebug:item_e_notice' => 'Notes d&#039;&#233;xecution (notice)',
+	'devdebug:item_e_notice' => 'Notes d&#039;ex&#233;cution (notice)',
 	'devdebug:item_e_warning' => 'Avertissements (warning)',
 	'devdebug:item_e_error' => 'Erreurs graves ou fatales (error)',
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)',
