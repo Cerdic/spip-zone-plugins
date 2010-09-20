@@ -15,15 +15,15 @@ function devdebug_charger_debug(){
 	// Sinon, on traite
 	$prive = test_espace_prive() ? 'prive':'public';
 	if(_DEVDEBUG_MODE==1){
-		// Les liens d'erreur générés par PHP renvoient ... en local ! dans le php.ini standard
-		// On les définit du type 'http://fr.php.net/manual/en/ %s .php' (nécessite une connexion)
+		// Les liens d'erreur generes par PHP renvoient ... en local ! dans le php.ini standard
+		// On les definit du type 'http://fr.php.net/manual/en/ %s .php' (necessite une connexion)
 		@ini_set('docref_root', "http://fr.php.net/manual/en/");
 		@ini_set('docref_ext', '.php');
 		// On lance le php error tracking quoiqu'il arrive
 		@ini_set('track_errors',1);
-		// On évite d'afficher les erreurs répétées
+		// On evite d'afficher les erreurs repetees
 		@ini_set('ignore_repeated_errors',1);
-		// Compatibilite PHP (recup de 'inc_version', mais qui le définit trop tard)
+		// Compatibilite PHP (recup de 'inc_version', mais qui le definit trop tard)
 		@define('E_DEPRECATED',8192); // PHP 5.3
 		// Et let's go
 		$niveau = 'E_WARNING';
