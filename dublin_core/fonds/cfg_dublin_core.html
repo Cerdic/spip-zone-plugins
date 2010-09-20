@@ -1,0 +1,81 @@
+<!-- titre=<:dublin_core:dublin_core:>-->
+<!-- icone=images/dublin_core-24.png -->
+[(#REM) autoriser=configurer ]
+#CACHE{0}
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_dublin_core' id='formulaire_configurer_dublin_core'>
+<h3 class='titrem'><:dublin_core:configurer_dublin_core:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF"><div>
+		[(#ENV{_cfg_}|form_hidden)]
+		<ul>
+			<li class='configurer_dc_creator obligatoire'>
+				<label for="dc_creator"><:dublin_core:label_dc_creator:></label>
+				<select name="dc_creator" id="dc_creator" class="select" >
+						<option value="auteurs" [(#ENV{dc_creator}|=={auteurs}|?{selected="selected"})]><:dublin_core:item_auteurs:></option>
+						<option value="nom_site_spip" [(#ENV{dc_creator}|=={nom_site_spip}|?{selected="selected"})]><:dublin_core:item_nom_site_spip:></option>
+						<option value="surtitre" [(#ENV{dc_creator}|=={surtitre}|?{selected="selected"})]><:dublin_core:item_surtitre:></option>
+						<option value="soustitre" [(#ENV{dc_creator}|=={soustitre}|?{selected="selected"})]><:dublin_core:item_soustitre:></option>
+				</select>
+			</li>
+			<li class='configurer_dc_subject obligatoire'>
+				<label for="dc_subject"><:dublin_core:label_dc_subject:></label>
+				<select name="dc_subject" id="dc_subject" class="select" >
+						<option value="motscles" [(#ENV{dc_subject}|=={motscles}|?{selected="selected"})]><:dublin_core:item_motscles:></option>
+						<option value="groupe_mot" [(#ENV{dc_subject}|=={groupe_mot}|?{selected="selected"})]><:dublin_core:item_groupe_mot:></option>
+						<option value="chapo" [(#ENV{dc_subject}|=={chapo}|?{selected="selected"})]><:dublin_core:item_chapo:></option>
+						<option value="surtitre" [(#ENV{dc_subject}|=={surtitre}|?{selected="selected"})]><:dublin_core:item_surtitre:></option>
+						<option value="soustitre" [(#ENV{dc_subject}|=={soustitre}|?{selected="selected"})]><:dublin_core:item_soustitre:></option>
+				</select>
+			</li>
+			<li class='configurer_dc_subject_groupe_mot'>
+				<label for="dc_subject_groupe_mot"><:dublin_core:label_dc_subject_groupe_mot:></label>
+				<select name="dc_subject_groupe_mot" id="dc_subject_groupe_mot" class="select" >
+						<BOUCLE_dc_subject_groupe_mot(GROUPES_MOTS){par titre}>
+						<option value="#ID_GROUPE" [(#ID_GROUPE|=={#ENV**{dc_subject_groupe_mot}}|oui) selected="selected"]>#TITRE</option>
+						</BOUCLE_dc_subject_groupe_mot>
+				</select>
+			</li>
+			<li class='configurer_dc_description_abstract obligatoire'>
+				<label for="dc_description_abstract"><:dublin_core:label_dc_description_abstract:></label>
+				<select name="dc_description_abstract" id="dc_description_abstract" class="select" >
+						<option value="descriptif" [(#ENV{dc_description_abstract}|=={descriptif}|?{selected="selected"})]><:dublin_core:item_descriptif:></option>
+						<option value="introduction" [(#ENV{dc_description_abstract}|=={introduction}|?{selected="selected"})]><:dublin_core:item_introduction:></option>
+						<option value="chapo" [(#ENV{dc_description_abstract}|=={chapo}|?{selected="selected"})]><:dublin_core:item_chapo:></option>
+				</select>
+			</li>
+			<li class='configurer_dc_date_available'>
+				<label for="dc_creator"><:dublin_core:label_dc_creator:></label>
+				<select name="dc_creator" id="dc_creator" class="select" >
+						<option value="auteurs" [(#ENV{dc_creator}|=={auteurs}|?{selected="selected"})]><:dublin_core:item_auteurs:></option>
+						<option value="nom_site_spip" [(#ENV{dc_creator}|=={nom_site_spip}|?{selected="selected"})]><:dublin_core:item_nom_site_spip:></option>
+						<option value="surtitre" [(#ENV{dc_creator}|=={surtitre}|?{selected="selected"})]><:dublin_core:item_surtitre:></option>
+						<option value="soustitre" [(#ENV{dc_creator}|=={soustitre}|?{selected="selected"})]><:dublin_core:item_soustitre:></option>
+				</select>
+			</li>
+			<li class='configurer_issn'>
+				<label for="issn"><:dublin_core:label_issn:></label>
+				<input type="text" name="issn" value="#ENV{issn}" id="issn" class="text" />
+			</li>
+			<li class='configurer_dc_rights_license'>
+				<label for="dc_rights_license"><:dublin_core:label_dc_rights_license:></label>
+				<div class='explication'><:dublin_core:label_dc_rights_license_details:></div>
+				<input type="text" name="dc_rights_license" value="#ENV{dc_rights_license}" id="dc_rights_license" class="text" />
+			</li>
+			<li class='configurer_dc_rights_rightsholder'>
+				<label for="dc_rights_rightsholder"><:dublin_core:label_dc_rights_rightsholder:></label>
+				<select name="dc_rights_rightsholder" id="dc_rights_rightsholder" class="select" >
+						<option value="auteurs" [(#ENV{dc_rights_rightsholder}|=={auteurs}|?{selected="selected"})]><:dublin_core:item_auteurs:></option>
+						<option value="nom_site_spip" [(#ENV{dc_rights_rightsholder}|=={nom_site_spip}|?{selected="selected"})]><:dublin_core:item_nom_site_spip:></option>
+						<option value="surtitre" [(#ENV{dc_rights_rightsholder}|=={surtitre}|?{selected="selected"})]><:dublin_core:item_surtitre:></option>
+						<option value="soustitre" [(#ENV{dc_rights_rightsholder}|=={soustitre}|?{selected="selected"})]><:dublin_core:item_soustitre:></option>
+				</select>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+
+</div>

@@ -1,27 +1,41 @@
 [(#REM) Insertion des métadonnées Dublin Core]
 <BOUCLE_metadonnees_dublin_core(ARTICLES) {id_article}>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
-<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
 <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
-<meta name="DC.format" content="text/html" />
-<meta name="DC.type" content="Text" />
-<meta name="DC.type" content="" />
-<meta name="DC.identifier" scheme="URI" content=["(#URL_ARTICLE|url_absolue)"] />
-<meta name="DC.identifier" scheme="ISSN" content="" />
-<meta name="DC.publisher" content=["(#NOM_SITE_SPIP)"] />
-<meta name="DC.language" scheme="RFC3066" content="Franç" />
-<BOUCLE_dc_creator(AUTEURS){id_article}>
-<meta name="DC.creator" content=["(#NOM)"] />
-</BOUCLE_dc_creator>
-<meta name="DC.title" lang="fr" content=["(#TITRE)"] />
-<meta name="DC.date" scheme="DCTERMS.W3CDTF" content=["(#DATE|affdate{'Y-m-j'})"] />
-<meta name="DC.subject" lang="fr" content=["(#CHAPO)"] />
-<meta name="DC.language" scheme="DCTERMS.RFC4646" content="fr-FR" />
-<meta name="DC.rights" content="Tous droits réservés" />
-<meta name="DC.source" content=["(#URL_SITE_SPIP)"] />
-<link rel="DC.source" href="urn:ISBN:" />
-<meta name="DC.description" lang="fr" content=["(#DESCRIPTIF)"] />
-<meta name="DC.coverage" content="" />
-<meta name="DC.contributor" content="" />
-<meta name="DC.relation" content="" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Type" content="Text" />
+<meta name="DC.Identifier" scheme="URI" content=["(#URL_ARTICLE|url_absolue)"] />
+[<meta name="DC.Identifier" scheme="ISSN" content="(#CONFIG{dublin_core/issn})" />]
+[<meta name="DC.Publisher" content="(#NOM_SITE_SPIP)" />]
+<meta name="DC.Language" scheme="rfc1766" content="#LANG" />
+[(#CONFIG{dublin_core/dc_creator}|=={nom_site_spip}|oui)[<meta name="DC.Creator" content="(#NOM_SITE_SPIP)" />]]
+[(#CONFIG{dublin_core/dc_creator}|=={surtitre}|oui)[<meta name="DC.Creator" content="(#SURTITRE)" />]]
+[(#CONFIG{dublin_core/dc_creator}|=={soustitre}|oui)[<meta name="DC.Creator" content="(#SOUSTITRE)" />]]
+[(#CONFIG{dublin_core/dc_creator}|=={auteurs}|oui)#INCLURE{fond=inclure/dc_creator_auteurs,id_article=#ID_ARTICLE}]
+[(#CONFIG{dublin_core/dc_creator}|non)#INCLURE{fond=inclure/dc_creator_auteurs,id_article=#ID_ARTICLE}]
+<meta name="DC.Title" lang="#LANG" content=["(#TITRE)"] />
+<meta name="DC.Date" scheme="DCTERMS.W3CDTF" content=["(#DATE|affdate{'Y-m-j'})"] />
+<meta name="DC.Date.Created" scheme="DCTERMS.W3CDTF" content=["(#DATE_REDAC|sinon{#DATE}|affdate{'Y-m-j'})"] />
+<meta name="DC.Date.Available" scheme="DCTERMS.W3CDTF" content=["(#DATE|affdate{'Y-m-j'})"] />
+<meta name="DC.Date.Modified" scheme="DCTERMS.W3CDTF" content=["(#DATE_MODIF|affdate{'Y-m-j'})"] />
+[(#CONFIG{dublin_core/dc_subject}|=={chapo}|oui)[<meta name="DC.Subject" lang="#LANG" content="(#CHAPO)" />]]
+[(#CONFIG{dublin_core/dc_subject}|=={surtitre}|oui)[<meta name="DC.Subject" lang="#LANG" content="(#SURTITRE)" />]]
+[(#CONFIG{dublin_core/dc_subject}|=={soustitre}|oui)[<meta name="DC.Subject" lang="#LANG" content="(#SOUSTITRE)" />]]
+[(#CONFIG{dublin_core/dc_subject}|=={motscles}|oui)#INCLURE{fond=inclure/dc_subject_motscles,id_article=#ID_ARTICLE}]
+[(#CONFIG{dublin_core/dc_subject}|non)#INCLURE{fond=inclure/dc_subject_motscles,id_article=#ID_ARTICLE}]
+[(#CONFIG{dublin_core/dc_subject}|=={groupe_mot}|oui)#INCLURE{fond=inclure/dc_subject_motscles,id_article=#ID_ARTICLE,id_groupe=#CONFIG{dublin_core/dc_subject_groupe_mot}}]
+<meta name="DC.Rights" content="Tous droits réservés" />
+[<meta name="DC.Source" scheme="URI" content="(#URL_SITE_SPIP)" />]
+[(#CONFIG{dublin_core/dc_description_abstract}|non)[<meta name="DC.Description.Abstract" lang="#LANG" content="(#DESCRIPTIF)" />]]
+[(#CONFIG{dublin_core/dc_description_abstract}|=={descriptif}|oui)[<meta name="DC.Description.Abstract" lang="#LANG" content="(#DESCRIPTIF)" />]]
+[(#CONFIG{dublin_core/dc_description_abstract}|=={introduction}|oui)[<meta name="DC.Description.Abstract" lang="#LANG" content="(#INTRODUCTION)" />]]
+[(#CONFIG{dublin_core/dc_description_abstract}|=={chapo}|oui)[<meta name="DC.Description.Abstract" lang="#LANG" content="(#CHAPO)" />]]
+[<meta name="DC.Description.TableofContents" lang="#LANG" content="(#TEXTE**|dublin_core_tableofcontents)" />]
+[(#PLUGIN{licence}|non)[<meta name="DC.Rights.License" scheme="URI" content="(#CONFIG{dublin_core/dc_rights_license})" />]]
+[(#PLUGIN{licence}|oui)[<meta name="DC.Rights.License" scheme="URI" content="(#ID_LICENCE|licence_affiche{non,oui}|extraire_attribut{href}|sinon{#CONFIG{dublin_core/dc_rights_license}})" />]]
+[(#CONFIG{dublin_core/dc_rights_rightsholder}|=={nom_site_spip}|oui)[<meta name="DC.Rights.RightsHolder" content="(#NOM_SITE_SPIP)" />]]
+[(#CONFIG{dublin_core/dc_rights_rightsholder}|=={surtitre}|oui)[<meta name="DC.Rights.RightsHolder" content="(#SURTITRE)" />]]
+[(#CONFIG{dublin_core/dc_rights_rightsholder}|=={soustitre}|oui)[<meta name="DC.Rights.RightsHolder" content="(#SOUSTITRE)" />]]
+[(#CONFIG{dublin_core/dc_rights_rightsholder}|=={auteurs}|oui)#INCLURE{fond=inclure/dc_rightsholder_auteurs,id_article=#ID_ARTICLE}]
+[(#CONFIG{dublin_core/dc_rights_rightsholder}|non)#INCLURE{fond=inclure/dc_rightsholder_auteurs,id_article=#ID_ARTICLE}]
 </BOUCLE_metadonnees_dublin_core> 
