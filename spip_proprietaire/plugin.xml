@@ -1,0 +1,33 @@
+<plugin>
+	<nom>SPIP Propri&#233;taire</nom>
+	<version>1.2</version>
+	<etat>stable</etat>
+	<licence>&#169; 2009 GNU GPL v3</licence>
+ 	<prefix>spip_proprio</prefix>
+	<chemin dir='public' type='public' />
+	<chemin dir='prive' type='prive' />
+	<chemin dir='' />
+	<auteur>[CreaDesign->http://creadesignweb.free.fr/] - [->creadesignweb@free.fr]</auteur>
+	<lien>http://www.spip-contrib.net/?article3516</lien>
+	<description>
+Ce plugin vous propose la g&#233;n&#233;ration automatique de {{Mentions L&#233;gales}}, {{Conditions d'Utilisation}} et informations de {{Copyright}} propres &#224; votre site SPIP.
+
+-* La page de configuration du plugin, accessible depuis l'onglet "Configuration" de l'espace priv&#233; de SPIP, vous permet de saisir diff&#233;rentes informations sur l'&#233;diteur du site, son h&#233;bergeur et son cr&#233;ateur.
+-* <u>Les textes l&#233;gaux se basent par d&#233;faut sur la l&#233;gislation en vigueur en France ({au 1er janvier 2010})</u> et repr&#233;sentent en grande partie le {{minimum l&#233;gal pour tout site web}}. Ils sont modifiables dans un fichier de langue sp&#233;cifique pour vous permettre de les personnaliser.
+-* Un ensemble de mod&#232;les est disponible : 
+- des outils pour valoriser votre site SPIP : vCard, cartes de visites, blocs d'informations ...
+- des outils pour organiser votre site SPIP : deux nouveaux mod&#232;les de {header} et de {pied}, bas&#233;s sur les squelettes de la distribution de SPIP ('inc-header.html' et 'inc-pied.html'), pr&#233;sentant les informations de copyright et un acc&#232;s &#224; la page de mentions l&#233;gales. 
+
+Certaines ic&#244;nes du plugin, dans les mod&#232;les publics, proviennent du set "{{[bwpx.icns->http://paularmstrongdesigns.com/portfolio/bwpx-icns/]}}" de {{Paul Armstrong}}, distribu&#233; sous licence {Creative Commons Attribution-Share Alike 3.0} (US).
+
+Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://www.gnome.org/]}}.
+	</description>
+ 	<icon>images/idisk-dir-36.png</icon>
+	<options>spip_proprio_options.php</options>
+	<fonctions>spip_proprio_fonctions.php</fonctions>
+	<onglet id="spip_proprio" parent="configuration">
+	    <icone>images/idisk-dir-24.png</icone>
+	    <titre>spip_proprio:spip_proprio</titre>  
+	    <url>spip_proprio</url>
+	</onglet>
+</plugin>

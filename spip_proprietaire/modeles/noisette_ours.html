@@ -1,0 +1,27 @@
+[(#SET{who,#ENV{who,proprietaire}})]
+[(#SET{proprietaire,#CONFIG{spip_proprietaire}})]
+<small>
+[(#GET*{proprietaire}|table_valeur{[(#GET{who})_nom]}|typo)][, (#GET*{proprietaire}|table_valeur{[(#GET{who})_libelle]}|typo)]
+[<br />(#GET*{proprietaire}|table_valeur{[(#GET{who})_legal_forme]}|typo)
+	[<:spip_proprio:au_capital_de:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_capital_social]}|typo)]
+	[
+		[(#GET*{proprietaire}|table_valeur{[(#GET{who})_legal_genre]}|=={fem}|?{<:spip_proprio:enregistree_pres:>,<:spip_proprio:enregistre_pres:>})]
+		[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_genre]}|=={fem}|?{<:spip_proprio:de_la:>,<:spip_proprio:du:>})]
+		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_organisme]}|typo)
+	]
+	[<:spip_proprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_numero]}|typo)]
+]
+[<br />
+	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_fonction_responsable]}|typo) : ]
+	(#GET*{proprietaire}|table_valeur{[(#GET{who})_nom_responsable]})
+	[ - <a href="mailto:[(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail_responsable]})]" title="<:spip_proprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail_responsable]})</a>]
+]
+[<br /><:spip_proprio:siege:> : 
+	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_rue]}) - ]
+	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_code_postal]}) ]
+	(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_ville]})
+	[ - (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_pays]})]
+]
+[<br /><:spip_proprio:tel:> : (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telephone]}|spip_proprio_formater_telephone)]
+[<br /><:spip_proprio:mel:> : <a href='mailto:[(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})]' title="<:spip_proprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})</a>]
+</small>

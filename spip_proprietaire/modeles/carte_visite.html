@@ -1,0 +1,53 @@
+#CACHE{0}
+[(#SET{proprietaire,[(#CONFIG{spip_proprietaire})]})]
+[(#SET{str_adresse,[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_rue}) ][(#GET*{proprietaire}|table_valeur{proprietaire_adresse_code_postal}) ][(#GET*{proprietaire}|table_valeur{proprietaire_adresse_ville}) - ][(#GET*{proprietaire}|table_valeur{proprietaire_adresse_pays})]})]
+[(#SET{adresse_mail,[(#ENV{who}|=={admin}|?{[(#GET*{proprietaire}|table_valeur{proprietaire_mail_administratif})],[(#ENV{who}|=={webmaster}|?{[(#CONFIG{email_webmaster})],[(#ENV{who}|=={chef}|?{[(#GET*{proprietaire}|table_valeur{proprietaire_mail_responsable})],[(#GET*{proprietaire}|table_valeur{proprietaire_mail})]})]})]})]})]
+[(#SET{alpha,[(#ENV{type}|=={image}|?{0,10})]})]
+[(#SET{alpha_icones,[(#ENV{type}|=={image}|?{0,50})]})]
+[(#SET{police_grasse,dustismo_bold.ttf})]
+[(#SET{police_fine,dustismo.ttf})]
+[(#SET{couleur_police,[(#LOGO_SITE_SPIP||couleur_extraire|couleur_eclaircir)]})]
+[(#SET{couleur_fond,[(#LOGO_SITE_SPIP||couleur_extraire|couleur_foncer|couleur_foncer)]})]
+<style type="text/css">
+html { font-size: 100%; }
+body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; background: #FFF; margin: 0; padding: 0; }
+img { margin: 0; padding: 0.1em;}
+a, a img { color: #604A7F; text-decoration: none; border: none;}
+a:focus,a:hover,a:active,a:focus img,a:hover img,a:active img { color: #F57900; text-decoration: underline; border: none; }
+div.carte_visite {z-index: 100;}
+div.carte_visite img, div.carte_visite table td img {z-index: 105;}
+</style>
+<div class="carte_visite" style="position: relative; padding: 0.6em; margin: [(#ENV{type}|=={image}|?{0,1em})]; border: 1px solid #ccc; -moz-border-radius: 8px; -webkit-border-radius: 8px; width: 420px; background-color: ##GET{couleur_fond}; text-align: left;">
+<table border="0" width="96%">
+	<tr>
+		<td rowspan="3" style="padding: 1em; text-align: center;">
+			<a href="#URL_SITE_SPIP/" title="[(#DESCRIPTIF_SITE_SPIP|textebrut|attribut_html)]">
+				[(#LOGO_SITE_SPIP||image_reduire{160,100}|spip_proprio_image_alpha{#GET{alpha}}|liens_absolus)]
+				<p style="margin: 0; padding: 0.2em 0; color: #[(#GET{couleur_fond}|couleur_eclaircir)]; font-size: 0.76em;">#URL_SITE_SPIP</p>
+			</a>
+		</td>
+		<td style="padding: 0.4em; padding-left: 1em; text-align: right; color: ##GET{couleur_police};">
+			<a href="mailto:#GET{adresse_mail}" target="_blank" title="<:spip_proprio:mail_to:>">[(#GET{adresse_mail}|image_typo{police=#GET{police_grasse},taille=17,couleur=#GET{couleur_police}}|inserer_attribut{alt,#GET{adresse_mail}}|inserer_attribut{class,spip_logos}|liens_absolus|spip_proprio_image_alpha{#GET{alpha}})]</a>
+			[(#ENV{who}|=={chef}|oui)<br /><small>[(#GET*{proprietaire}|table_valeur{proprietaire_nom_responsable})][ - <i>(#GET*{proprietaire}|table_valeur{proprietaire_fonction_responsable}|typo)</i>]</small>]
+			[(#ENV{who}|=={admin}|oui)<br /><small><i><:spip_proprio:fonction_administrateur:></i></small>]
+			[(#ENV{who}|=={webmaster}|oui)<br /><small><i><:spip_proprio:fonction_webmaster:></i></small>]
+			[(#ENV{who}|=={site}|oui)<br />
+				&nbsp;&nbsp;<a href="#URL_SITE_SPIP" target="_blank" title="<:spip_proprio:home_page:>"><img src="[(#CHEMIN{bwpx-icns/icons/monitor.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
+				&nbsp;&nbsp;<a href="mailto:#GET{adresse_mail}" target="_blank" title="<:spip_proprio:mail_to:>"><img src="[(#CHEMIN{bwpx-icns/icons/envelope.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
+				&nbsp;&nbsp;<a href="[(#URL_PAGE{backend}|url_absolue)]" target="_blank" title="RSS 2.0 - <:spip_proprio:all_site:>"><img src="[(#CHEMIN{bwpx-icns/icons/rss.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
+				[(#CONFIG{activer_breves}|=={oui}|oui)&nbsp;&nbsp;<a href="[(#URL_PAGE{backend-breves}|url_absolue)]" target="_blank" title="RSS 2.0 - <:spip_proprio:news:>"><img src="[(#CHEMIN{bwpx-icns/icons/rss_comment.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>]
+			]
+		</td>
+	</tr>
+	<tr>
+		<td style="padding: 0; padding-left: 1em; padding-right: 0.4em; text-align: right;">
+			[(#GET*{str_adresse}|image_typo{police=#GET{police_fine},taille=12,couleur=#GET{couleur_police},largeur=200,align=right}|spip_proprio_image_alpha{#GET{alpha}}|liens_absolus|modifier_guillemets)]
+		</td>
+	</tr>
+	<tr>
+		<td style="padding: 0.4em; padding-left: 1em; text-align: right;">
+			<a href="tel:[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telephone}|spip_proprio_formater_telephone)]" target="_blank" title="Tel to">[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telephone}|image_typo{police=#GET{police_fine},taille=16,couleur=#GET{couleur_police},largeur=200,align=right}|spip_proprio_image_alpha{#GET{alpha}}|liens_absolus|modifier_guillemets)]</a>
+		</td>
+	</tr>
+</table>
+</div>

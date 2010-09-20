@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:spip_proprio:mentions_legales:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+</head>
+<body class="page_sommaire">
+<div id="page">
+	<INCLURE{fond=inc-entete}>
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:spip_proprio:mentions_legales:></strong></div>
+
+		<div class="cartouche"><h1><:spip_proprio:mentions_legales:></h1></div>
+		<div class="texte entry-content">
+			#MODELE{mentions_legales}
+		<br /><br /></div>
+
+		<div class="cartouche"><h1><:spip_proprio:conditions_utilisation:></h1></div>
+		<div class="texte entry-content">
+			#MODELE{conditions_utilisation}
+		<br /><br /></div>
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	<div id="navigation">
+		<INCLURE{fond=inc-rubriques}>
+		#FORMULAIRE_RECHERCHE
+    </div><!--#navigation-->
+	<div id="extra">
+		#FORMULAIRE_INSCRIPTION
+	</div><!--#extra-->
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
+</div><!--#page-->
+</body>
+</html>

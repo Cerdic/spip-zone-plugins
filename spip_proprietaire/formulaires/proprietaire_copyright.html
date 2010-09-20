@@ -1,0 +1,27 @@
+<div class='formulaire_spip formulaire_editer ajax' id='formulaire_editer_proprietaire_config_copyright'>
+	<br class='bugajaxie' />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p class='explication'><:spip_proprio:copyright_comment:></p>
+	<ul>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{copyright_annee}|oui)erreur]">
+		    <label for="copyright_annee"><:spip_proprio:copyright_annee_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{copyright_annee})</span>
+			]<input type='text' class='text' name='copyright_annee' id='copyright_annee' value="[(#ENV**{copyright_annee})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{copyright_complement}|oui)erreur]">
+		    <label for="copyright_complement"><:spip_proprio:copyright_complement_label:>&nbsp;:<span style='color: red;'>*</span></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{copyright_complement})</span>
+			]<input type='text' class='text' name='copyright_complement' id='copyright_complement' value="[(#ENV**{copyright_complement})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{copyright_comment}|oui)erreur]">
+		    <label for="copyright_comment"><:spip_proprio:copyright_comment_label:>&nbsp;:<span style='color: red;'>*</span></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{copyright_comment})</span>
+			]<textarea class='<textarea' name='copyright_comment' id='copyright_comment'>[(#ENV**{copyright_comment})]</textarea>
+		</li>
+	</ul>
+	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	</div></form>
+</div>

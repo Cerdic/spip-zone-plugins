@@ -1,0 +1,17 @@
+<div class='formulaire_spip formulaire_editer ajax' id='formulaire_editer_proprietaire_config_infos_createures'>
+	<br class='bugajaxie' />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{createur_administrateur}|oui)erreur]">
+		    <label for="createur_administrateur"><:spip_proprio:administrateur_aussi_label:>&nbsp;:</label>[
+		    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{createur_administrateur})</span>
+			]<input type='checkbox' class='checkbox' name='createur_administrateur' id='createur_administrateur' value="oui"[(#ENV**{createur_administrateur}|=={oui}|oui) checked="checked"] />
+			<span class='explication'><:spip_proprio:administrateur_aussi_comment:></span>
+		</li>
+	</ul>
+	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	</div></form>
+</div>

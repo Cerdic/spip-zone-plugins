@@ -1,0 +1,54 @@
+<div class='formulaire_spip formulaire_editer ajax' id='formulaire_editer_proprietaire_config_infos_necessaires'>
+	<br class='bugajaxie' />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+	    	<label for="nom"><:spip_proprio:nom_label:>&nbsp;:<span style='color: red;'>*</span></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
+			]<input type='text' class='text' name='nom' id='nom' value="[(#ENV**{nom})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{libelle}|oui)erreur]">
+		    <label for="libelle"><:spip_proprio:libelle_label:>&nbsp;:<span style='color: red;'>*</span></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{libelle})</span>
+			]<input type='text' class='text' name='libelle' id='libelle' value="[(#ENV**{libelle})]" />
+			<span class='explication'><:spip_proprio:libelle_comment:></span>
+		</li>
+		<li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{mail}|oui)erreur]">
+		    <label for="mail"><:spip_proprio:mail_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mail})</span>
+			]<input type='text' class='text' name='mail' id='mail' value="[(#ENV**{mail})]" />
+		</li>
+		<li class="editer[(#ENV{who}|=={proprietaire}|oui) obligatoire][ (#ENV**{erreurs}|table_valeur{nom_responsable}|oui)erreur]">
+	    	<label for="nom_responsable"><:spip_proprio:responsable_nom_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_responsable})</span>
+			]<input type='text' class='text' name='nom_responsable' id='nom_responsable' value="[(#ENV**{nom_responsable})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{fonction_responsable}|oui)erreur]">
+	    	<label for="fonction_responsable"><:spip_proprio:responsable_fonction_label:>&nbsp;:<span style='color: red;'>*</span></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fonction_responsable})</span>
+			]<input type='text' class='text' name='fonction_responsable' id='fonction_responsable' value="[(#ENV**{fonction_responsable})]" />
+		</li>
+[(#ENV{who}|=={proprietaire}|oui)
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{mail_responsable}|oui)erreur]">
+	    	<label for="mail_responsable"><:spip_proprio:responsable_mail_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mail_responsable})</span>
+			]<input type='text' class='text' name='mail_responsable' id='mail_responsable' value="[(#ENV**{mail_responsable})]" />
+		</li>
+		<li class="editer[(#ENV{who}|=={proprietaire}|oui) obligatoire][ (#ENV**{erreurs}|table_valeur{mail_administratif}|oui)erreur]">
+	    	<label for="mail_administratif"><:spip_proprio:administrateur_mail_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mail_administratif})</span>
+			]<input type='text' class='text' name='mail_administratif' id='mail_administratif' value="[(#ENV**{mail_administratif})]" />
+		</li>
+]
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{site_web}|oui)erreur]">
+		    <label for="site_web"><:spip_proprio:site_web_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{site_web})</span>
+			]<input type='text' class='text' name='site_web' id='site_web' value="[(#ENV**{site_web})]" />
+		</li>
+	</ul>
+	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	</div></form>
+</div>

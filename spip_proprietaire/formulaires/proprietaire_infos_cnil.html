@@ -1,0 +1,22 @@
+<div class='formulaire_spip formulaire_editer ajax' id='formulaire_editer_proprietaire_config_infos_createures'>
+	<br class='bugajaxie' />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p class='explication'><:spip_proprio:cnil_comment:></p>
+	<ul>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{date_cnil}|oui)erreur]">
+		    <label for="date_cnil"><:spip_proprio:cnil_date_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_cnil})</span>
+			]<input type='text' class='text' name='date_cnil' id='date_cnil' value="[(#ENV**{date_cnil})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{numero_cnil}|oui)erreur]">
+		    <label for="numero_cnil"><:spip_proprio:cnil_numero_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{numero_cnil})</span>
+			]<input type='text' class='text' name='numero_cnil' id='numero_cnil' value="[(#ENV**{numero_cnil})]" />
+		</li>
+	</ul>
+	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	</div></form>
+</div>

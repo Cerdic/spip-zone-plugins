@@ -1,0 +1,24 @@
+[(#ENV{form}|=={infos_necessaires}|oui)
+	#FORMULAIRE_PROPRIETAIRE_INFOS_NECESSAIRES{#ENV{who}}
+]
+[(#ENV{form}|=={adresse}|oui)
+	#FORMULAIRE_PROPRIETAIRE_ADRESSE{#ENV{who}}
+]
+[(#ENV{form}|=={infos_legales}|oui)
+	#FORMULAIRE_PROPRIETAIRE_INFOS_LEGALES{#ENV{who}}
+]
+[(#ENV{form}|=={createur}|oui)
+	#FORMULAIRE_PROPRIETAIRE_INFOS_CREATEUR
+]
+[(#ENV{form}|=={serveur}|oui)
+	#FORMULAIRE_PROPRIETAIRE_INFOS_SERVEUR
+]
+[(#ENV{form}|=={cnil}|oui)
+	#FORMULAIRE_PROPRIETAIRE_INFOS_CNIL
+]
+[(#ENV{form}|=={copyright}|oui)
+	#FORMULAIRE_PROPRIETAIRE_COPYRIGHT
+]
+[(#ENV{form}|=={idem}|oui)
+	#FORMULAIRE_PROPRIETAIRE_INFOS_IDEM{#ENV{who}}
+]

@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:spip_proprio:testing_page_titre:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+<body class="page_sommaire">
+<div id="page">
+	<INCLURE{fond=inc-entete}>
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:spip_proprio:testing_page_titre:></strong></div>
+
+        <div class="cartouche">
+			<h1 class="entry-title"><:spip_proprio:testing_page_titre:></h1>
+		</div>
+		<div class="chapo"><:spip_proprio:testing_page_intro{mentions_legales=#URL_PAGE{mentions_legales}}|propre:></div>
+
+        <div class="cartouche">
+        	<h2>1_ <:spip_proprio:testing_page_bloc:></h2>
+            <p><small><:spip_proprio:testing_page_code:>
+            <code>
+            &#035;PROPRIETAIRE
+            </code>
+            <br /><:spip_proprio:testing_page_modele:>
+            <code>
+            'noisette_proprietaire.html'
+            </code>
+            </small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE</div>
+		<br class="nettoyeur" />
+
+        <div class="cartouche">
+        	<h2>2_ <:spip_proprio:testing_page_googlemap:></h2>
+            <p><small><:spip_proprio:testing_page_code:>
+            <code>
+            &#035;PROPRIETAIRE{googlemap}
+            </code>
+            <br /><:spip_proprio:testing_page_modele:>
+            <code>
+            'noisette_googlemap.html'
+            </code>
+            </small></p>
+        </div>
+		<div class="entry-content">#PROPRIETAIRE{googlemap}</div>
+		<br class="nettoyeur" />
+
+        <div class="cartouche">
+        	<h2>3_ <:spip_proprio:testing_page_carte_visite:></h2>
+            <p><small><:spip_proprio:testing_page_modele:><code>
+            'carte_visite.html'
+            </code></small></p>
+        </div>
+        <div class="cartouche">
+        	<h3>3_a <:spip_proprio:testing_page_carte_visite_normale:></h3>
+            <p><small><:spip_proprio:testing_page_code:><code>
+            &#035;PROPRIETAIRE{carte_visite}
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{carte_visite}</div>
+		<br class="nettoyeur" />
+        <div class="cartouche">
+        	<h3>3_b <:spip_proprio:testing_page_carte_visite_chef:></h3>
+            <p><small><:spip_proprio:testing_page_code:><code>
+            &#035;PROPRIETAIRE{carte_visite,chef}
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{carte_visite,chef}</div>
+		<br class="nettoyeur" />
+        <div class="cartouche">
+        	<h3>3_c <:spip_proprio:testing_page_carte_visite_webmaster:></h3>
+            <p><small><:spip_proprio:testing_page_code:><code>
+            &#035;PROPRIETAIRE{carte_visite,webmaster}
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{carte_visite,webmaster}</div>
+		<br class="nettoyeur" />
+        <div class="cartouche">
+        	<h3>3_d <:spip_proprio:testing_page_carte_visite_administrateur:></h3>
+            <p><small><:spip_proprio:testing_page_code:><code>
+            &#035;PROPRIETAIRE{carte_visite,admin}
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{carte_visite,admin}</div>
+		<br class="nettoyeur" />
+        <div class="cartouche">
+        	<h3>3_e <:spip_proprio:testing_page_carte_visite_site:></h3>
+            <p><small><:spip_proprio:testing_page_code:><code>
+            &#035;PROPRIETAIRE{carte_visite,site}
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{carte_visite,site}</div>
+		<br class="nettoyeur" />
+
+        <div class="cartouche">
+        	<h2>4_ <:spip_proprio:testing_page_business_cards:></h2>
+        </div>
+        <div class="cartouche">
+        	<h3>4_ <:spip_proprio:testing_page_vcard:></h3>
+            <p><small><:spip_proprio:testing_page_code:>
+            <code>
+            &#035;PROPRIETAIRE{vcard}
+            </code>
+            <br /><:spip_proprio:testing_page_modele:>
+            <code>
+            '?page=vcard'
+            </code>
+            </small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{vcard}</div>
+		<br class="nettoyeur" />
+        <div class="cartouche">
+        	<h3>4b_ <:spip_proprio:testing_page_liens_cartes_visite:></h3>
+            <p><small><:spip_proprio:testing_page_code:>
+            <code>
+            &#035;PROPRIETAIRE{cartes_visite}
+            </code>
+            </small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{cartes_visite}</div>
+		<br class="nettoyeur" />
+        <div class="cartouche">
+        	<h3>4c_ <:spip_proprio:testing_page_business_cards_complet:></h3>
+            <p><small><:spip_proprio:testing_page_code:>
+            <code>
+            &#035;PROPRIETAIRE{business_cards}
+            </code>
+            </small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{business_cards}</div>
+		<br class="nettoyeur" />
+
+        <div class="cartouche">
+        	<h2>5_ <:spip_proprio:testing_page_copyright:></h2>
+            <p><small><:spip_proprio:testing_page_code:><code>
+            &#035;PROPRIETAIRE{copyright}
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">#PROPRIETAIRE{copyright}</div>
+		<br class="nettoyeur" />
+
+        <div class="cartouche">
+        	<h2>6_ <:spip_proprio:testing_page_textes_proprietaire:></h2>
+            <p><small><:spip_proprio:testing_page_code:>
+            <code>
+            &#035;TEXTES_PROPRIETAIRE{chaine}
+            </code>
+            <:spip_proprio:ou:> 
+            <code>
+            &lt;:proprietaire:chaine|propre:&gt;
+            </code>
+            </small></p>
+        </div>
+		<div class="texte entry-content">#TEXTES_PROPRIETAIRE{exemple}</div>
+		<br class="nettoyeur" />
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	<div id="navigation">
+		<INCLURE{fond=inc-rubriques}>
+		#FORMULAIRE_RECHERCHE
+    </div><!--#navigation-->
+	<div id="extra">
+		#FORMULAIRE_INSCRIPTION
+	</div><!--#extra-->
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
+</div><!--#page-->
+</body>
+</html>

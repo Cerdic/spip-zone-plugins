@@ -1,0 +1,42 @@
+<div class='formulaire_spip formulaire_editer ajax' id='formulaire_editer_proprietaire_config_adresse'>
+	<br class='bugajaxie' />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p class='explication'><:spip_proprio:adresse_comment:></p>
+	<ul>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{adresse_rue}|oui)erreur]">
+		    <label for="adresse_rue"><:spip_proprio:rue_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_rue})</span>
+			]<input type='text' class='text' name='adresse_rue' id='adresse_rue' value="[(#ENV**{adresse_rue})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{adresse_code_postal}|oui)erreur]">
+		    <label for="adresse_code_postal"><:spip_proprio:code_postal_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_code_postal})</span>
+			]<input type='text' class='text' name='adresse_code_postal' id='adresse_code_postal' value="[(#ENV**{adresse_code_postal})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{adresse_ville}|oui)erreur]">
+		    <label for="adresse_ville"><:spip_proprio:ville_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_ville})</span>
+			]<input type='text' class='text' name='adresse_ville' id='adresse_ville' value="[(#ENV**{adresse_ville})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{adresse_pays}|oui)erreur]">
+		    <label for="adresse_pays"><:spip_proprio:pays_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_pays})</span>
+			]<input type='text' class='text' name='adresse_pays' id='adresse_pays' value="[(#ENV**{adresse_pays})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{adresse_telephone}|oui)erreur]">
+		    <label for="adresse_telephone"><:spip_proprio:telephone_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_telephone})</span>
+			]<input type='text' class='text' name='adresse_telephone' id='adresse_telephone' value="[(#ENV**{adresse_telephone})]" />
+		</li>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{adresse_telecopie}|oui)erreur]">
+		    <label for="adresse_telecopie"><:spip_proprio:telecopie_label:>&nbsp;:</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_telecopie})</span>
+			]<input type='text' class='text' name='adresse_telecopie' id='adresse_telecopie' value="[(#ENV**{adresse_telecopie})]" />
+		</li>
+	</ul>
+	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	</div></form>
+</div>

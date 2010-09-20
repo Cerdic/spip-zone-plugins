@@ -1,0 +1,24 @@
+[(#SET{proprietaire,#CONFIG{spip_proprietaire}})]
+	[(#TEXTES_LEGAUX{proprietaire_mentions_legales})]
+	[<strong>(#MODELE{noisette_ours})</strong>]
+	
+[(#GET*{proprietaire}|table_valeur{hebergeur_idem}|=={oui}|non)
+	[(#TEXTES_LEGAUX{hebergeur_mentions_legales})]
+	[<strong>(#MODELE{noisette_ours}{who=hebergeur})</strong>]
+]
+[(#GET*{proprietaire}|table_valeur{hebergeur_idem}|=={oui}|oui)
+	<:textes_legaux:hebergeur_mentions_legales_idem{nom_site=#NOM_SITE_SPIP,url_site=#URL_SITE_SPIP}|propre:>
+]
+
+[(#GET*{proprietaire}|table_valeur{createur_idem}|=={oui}|non)
+	[(#TEXTES_LEGAUX{createur_mentions_legales})]
+	[<strong>(#MODELE{noisette_ours}{who=createur})</strong>]
+]
+[(#GET*{proprietaire}|table_valeur{createur_idem}|=={oui}|oui)
+	<:textes_legaux:createur_mentions_legales_idem{nom_site=#NOM_SITE_SPIP,url_site=#URL_SITE_SPIP}|propre:>
+]
+
+	[(#TEXTES_LEGAUX{mentions_legales_fonctionnement})]
+
+	[(#TEXTES_LEGAUX{mentions_legales_copyright})]
+	[<small><strong>(#PROPRIETAIRE{copyright})</strong></small>]

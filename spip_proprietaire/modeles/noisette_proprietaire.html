@@ -1,0 +1,27 @@
+[(#SET{proprietaire,#CONFIG{spip_proprietaire}})]
+<div>
+	<span style='font-weight: bold;'>
+	[(#ENV{logo}|=={oui}|oui)[(#LOGO_SITE_SPIP||image_reduire{200,100})]]
+	[<p><strong>(#GET*{proprietaire}|table_valeur{proprietaire_nom}|typo)</strong></p>]
+	<a href='#URL_SITE_SPIP'>#URL_SITE_SPIP</a>[(#ENV*{separator})]
+	[<:spip_proprio:coordonnees_tel:>&nbsp;(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telephone}|spip_proprio_formater_telephone)[(#ENV*{separator})]]
+	[<:spip_proprio:coordonnees_fax:>&nbsp;(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telecopie})[(#ENV*{separator})]]
+	[<a href='mailto:[(#GET*{proprietaire}|table_valeur{proprietaire_mail})]' title="<:spip_proprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{proprietaire_mail})</a>[(#ENV*{separator})]]
+	[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_rue})[(#ENV*{separator})]]
+	[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_code_postal}) ][(#GET*{proprietaire}|table_valeur{proprietaire_adresse_ville})[(#ENV*{separator})]]
+	[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_pays})[(#ENV*{separator})]]
+	</span>
+	<br /><i>
+	[[(#GET*{proprietaire}|table_valeur{proprietaire_nom}|typo), ](#GET*{proprietaire}|table_valeur{proprietaire_libelle}|typo)[(#ENV*{separator})]]
+[(#GET*{proprietaire}|table_valeur{proprietaire_legal_forme}|typo)
+	[<:spip_proprio:au_capital_de:>(#GET*{proprietaire}|table_valeur{proprietaire_capital_social}|typo)]
+	[
+		[(#GET*{proprietaire}|table_valeur{proprietaire_legal_genre}|=={fem}|?{<:spip_proprio:enregistree_pres:>,<:spip_proprio:enregistre_pres:>})]
+		[(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_genre}|=={fem}|?{<:spip_proprio:de_la:>,<:spip_proprio:du:>})]
+		(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_organisme}|typo)
+	]
+	[<:spip_proprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_numero}|typo)]
+]
+	</i>
+</div>
+

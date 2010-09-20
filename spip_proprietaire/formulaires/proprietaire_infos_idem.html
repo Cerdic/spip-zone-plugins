@@ -1,0 +1,17 @@
+<div class='formulaire_spip formulaire_editer ajax' id='formulaire_editer_proprietaire_config_infos_createures'>
+	<br class='bugajaxie' />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer[ (#ENV**{erreurs}|table_valeur{idem}|oui)erreur]">
+		    <label for="idem"><:spip_proprio:idem_label:>&nbsp;:</label>[
+		    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{idem})</span>
+			]<input type='checkbox' class='checkbox' name='idem' id='idem' value="oui"[(#ENV**{idem}|=={oui}|oui) checked="checked"] />
+			<span class='explication'><:spip_proprio:idem_comment{type=#ENV{who}}:></span>
+		</li>
+	</ul>
+	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	</div></form>
+</div>
