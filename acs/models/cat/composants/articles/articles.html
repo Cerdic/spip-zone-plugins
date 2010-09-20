@@ -1,3 +1,5 @@
 <div class="#PINCEAU{articles}">
 [(#ENV{current}|=={sommaire}|?{' '})<INCLURE{fond=composants/articles/boucle-une}{self}{debut_articles}>][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
+[(#ENV{current}|=={resume}|?{' '})<INCLURE{fond=composants/articles/boucle-articles}{self}{debut_articles}>]
+[(#ENV{current}|=={plan}|?{' '})<INCLURE{fond=composants/articles/boucle-plan}{self}>]
 </div>

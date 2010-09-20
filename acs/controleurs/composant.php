@@ -13,13 +13,13 @@ function controleurs_composant_dist($regs) {
   include_spip('inc/acs_presentation');
   include_spip('lib/composant/classComposantPrive');
 
-  list(,$crayon,$type,$ctype,$id) = $regs;
+  list(,$crayon,$type,$class,$id) = $regs;
   
-  $c = $ctype.'/'.$ctype;
-  $crayon = new SecureCrayon("composant-$ctype-$id");
+  $c = $class.'/'.$class;
+  $crayon = new SecureCrayon("composant-$class-$id");
 
-  $composant = new AdminComposant($ctype, $id);  
-  $icon = find_in_path('composants/'.$ctype.'/images/'.$ctype.'_icon.gif');
+  $composant = new AdminComposant($class, $id);  
+  $icon = find_in_path('composants/'.$class.'/images/'.$class.'_icon.gif');
   if (($crayon->left + $crayon->largeur) > ($crayon->ww / 2))
     $left = ($crayon->left < 300) ? 0 : - 300;
   else
@@ -31,11 +31,11 @@ function controleurs_composant_dist($regs) {
   );
   $html = '<style>'.recuperer_fond('acs_style_prive.css').'</style>';
   $html .= '<div  style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
-    '<div id="'."composant-$ctype-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
+    '<div id="'."composant-$class-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
       recuperer_fond('vues/composant', $contexte).
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
-    '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$ctype.'&amp;nic='.$id.'"><img src="'.$icon.'" alt="'.$ctype.'" title="'._T('crayons:editer').' '._T($champ).'"  class="bouton_edit_composant" /></a>'.
+    '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.'&amp;nic='.$id.'"><img src="'.$icon.'" alt="'.$class.'" title="'._T('crayons:editer').' '._T($champ).'"  class="bouton_edit_composant" /></a>'.
   	'</div>'.
   	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:'.$left.'px; z-index: 99999999">'.
     acs_box(

@@ -76,6 +76,8 @@ function acs_init() {
   // Installation des mots-clefs des composants
   acs_install_keywords($keys);
   echo '<br />';
+  // Ecrire la meta signalant la version installee
+  ecrire_meta('acsInstalled', ACS_VERSION);
 }
 
 /**
@@ -141,8 +143,7 @@ function acs_install_keywords($keywords) {
 function acs_reset_vars() {
   spip_query("delete FROM spip_meta where left(nom,3)='acs'");
   lire_metas();
-  acs_log('ACS variables DELETED');
-  
+  acs_log('ACS init : variables DELETED');
 }
 
 // Copie recursive d'un dossier

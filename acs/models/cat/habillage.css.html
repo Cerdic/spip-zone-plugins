@@ -44,7 +44,7 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
   .notation {}
   .notation .topten {
-    border: thin dotted #VAR{acsRubnavBordColor,#AAE};
+    border: thin dotted #VAR{acsRubnavBord/Color,#AAE};
     background: #VAR{acsFondColor};
     padding: 2px;
     margin: 5px;
@@ -286,7 +286,7 @@ table.petition {
   margin-top: 0;
   padding: 0.77em;
   padding-top: 0;
-  border: 1px dotted #VAR{acsRubnavBordColor,#004F8F};
+  border: 1px dotted #VAR{acsRubnavBord/Color,#004F8F};
  }
  .formulaire_spip legend {
   font-weight: bold;
@@ -311,7 +311,7 @@ table.petition {
 .formulaire_spip input.text, .formulaire_spip textarea, .formulaire_spip select {
   width: 100%;
   background: #VAR{acsOngletsFondColor,#VAR{acsFondColor}};
-  border: thin groove #VAR{acsRubnavBordColor};
+  border: thin groove #VAR{acsRubnavBord/Color};
   color: #VAR{acsFondText};
 }
 .formulaire_spip label {
@@ -341,9 +341,9 @@ table.petition {
 
 .form_inscription {
   width: 80%;
-  [border-color: (#VAR{acsRubnavBordColor, afdfaf});]
+  [border-color: (#VAR{acsRubnavBord/Color, afdfaf});]
   [border-width:(#VAR{acsRubnavBordLargeur, thin});]
-  border-style: #VAR{acsRubnavBordStyle, dotted};
+  border-style: #VAR{acsRubnavBord/Style, dotted};
   [background-color: (#VAR{acsFondColor, #efffef});]
   padding: 4px;
   -moz-border-radius: 8px;

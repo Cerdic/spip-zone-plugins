@@ -2,9 +2,9 @@
 [(#REM) Edito
 
 ].edito {
-  [border-width: (#VAR{acsEditoBordWidth});]
-  [border-style: (#VAR{acsEditoBordStyle});]
-  [border-color: (#VAR{acsEditoBordColor});]
+  [border-width: (#VAR{acsEditoBord/Width});]
+  [border-style: (#VAR{acsEditoBord/Style});]
+  [border-color: (#VAR{acsEditoBord/Color});]
   [background: (#VAR{acsEditoFond})[ url("(#ACS_CHEMIN{edito/#VAR{acsEditoFondImage}})")][ (#VAR{acsEditoFondImageRepeatX}|=={non}|?{[(#VAR{acsEditoFondImageRepeatY}|=={non}|?{"no-repeat","repeat-y"})],[(#VAR{acsEditoFondImageRepeatY}|=={non}|?{"repeat-x","repeat"})]})][ (#VAR{acsEditoFondAlign}|=={right}|?{right,left})][ (#VAR{acsEditoFondVerticalAlign}|=={top}|?{top,bottom})];]
   margin: 0;
   padding: 5px;
@@ -18,9 +18,9 @@
 
 .edito legend{
   margin-left: 10px;
-  [border-width: (#VAR{acsEditoLegendBordWidth});]
-  [border-style: (#VAR{acsEditoLegendBordStyle});]
-  [border-color: (#VAR{acsEditoLegendBordColor});]
+  [border-width: (#VAR{acsEditoLegendBord/Width});]
+  [border-style: (#VAR{acsEditoLegendBord/Style});]
+  [border-color: (#VAR{acsEditoLegendBord/Color});]
   [background: (#VAR{acsEditoFond});]
   padding-left: 5px;
   padding-right: 5px;

@@ -4,7 +4,7 @@
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
   <version>0.6</version>
-	<necessite id='acs' version='[0.6;]' />
+	<necessite id='acs' version='[0.7.1;]' />
 
   <param>
     <nom>preview</nom>
@@ -23,7 +23,7 @@
   <variable>
     <nom>HeadFondColor</nom>
     <type>color</type>
-    <valeur>acsRubnavFond</valeur>
+    <valeur>=acsRubnavFond</valeur>
   </variable>
   <variable>
     <nom>Bord</nom>
@@ -32,22 +32,22 @@
   <variable>
     <nom>NotThisMonth</nom>
     <type>color</type>
-    <valeur>acsRubnavFondHover</valeur>
+    <valeur>=acsRubnavFondHover</valeur>
   </variable>
   <variable>
     <nom>ThisMonth</nom>
     <type>color</type>
-    <valeur>acsFondColor</valeur>
+    <valeur>=acsFondColor</valeur>
   </variable>
   <variable>
     <nom>ThisDay</nom>
     <type>color</type>
-    <valeur>acsFondColor</valeur>
+    <valeur>=acsFondColor</valeur>
   </variable>
   <variable>
     <nom>BulleFondColor</nom>
     <type>color</type>
-    <valeur>acsFondColor</valeur>
+    <valeur>=acsFondColor</valeur>
   </variable>
   <variable>
     <nom>BulleVoirArticlesModifies</nom>
@@ -59,16 +59,16 @@
   <variable>
     <nom>BulleArticleModifieFondColor</nom>
     <type>color</type>
-    <valeur>acsFondColor</valeur>
+    <valeur>=acsFondColor</valeur>
   </variable>
   <variable>
     <nom>BulleBreveFondColor</nom>
     <type>color</type>
-    <valeur>acsFondColor</valeur>
+    <valeur>=acsFondColor</valeur>
   </variable>
   <variable>
     <nom>BulleSurvol</nom>
     <type>color</type>
-    <valeur>acsRubnavFondHover</valeur>
+    <valeur>=acsRubnavFondHover</valeur>
   </variable>
 </composant>

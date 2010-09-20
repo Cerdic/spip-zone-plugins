@@ -105,7 +105,7 @@ function acs_adm_droite() {
   '" value="'._T('bouton_valider').'" class="fondo" /></form></div><br />'.
     _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", lire_meta("acsDerniereModif")).
     '<hr /><br />'.
-    _T('version').' <a style="color: black">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a>'.
+    _T('version').' <a style="color: black">ACS '.ACS_VERSION.'</a>'.
     '<br /><br />'.
     _T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'images/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
     _DIR_PLUGIN_ACS."images/acs_32x32.gif"

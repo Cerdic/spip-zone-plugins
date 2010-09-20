@@ -11,8 +11,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Articles les plus populaires.
 Most popular texts.
  
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) ][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut) - ]<:acs:fond_meta_page_resume:>})]
-<INCLURE{fond=composants/fond/entete}{page=resume}{title=#GET{mdescription}}{mkeywords=#EVAL{'_T("acs:fond_meta_page_resume").","._T("acs:fond_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:fond_meta_page_resume:>}>
-<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2010}{current=sommaire}>[(#REM) Bloc principal de la page resume ]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) ][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut) - ]<:acs:fond_meta_page_resume:>})
+]<INCLURE{fond=composants/fond/entete}{page=resume}{title=#GET{mdescription}}{mkeywords=#EVAL{'_T("acs:fond_meta_page_resume").","._T("acs:fond_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:fond_meta_page_resume:>}>
+<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2010}{current=resume}>[(#REM) Bloc principal de la page resume ]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
-

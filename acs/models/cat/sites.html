@@ -5,42 +5,12 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2008
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Sites
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=sites}{title=<:autres_sites:>}>
-<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=23}>
-</div>[(#REM) fin colonne1 (navigation) ]
-
-[(#REM) Colonne 2 ]
-<div id="colonne2"><div class="spacer"></div>
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=sites}{env=#ENV}>
-  <div id="onglet">]
-  
-  [(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:autres_sites:></div>
-    <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
-    <div class="plan-secteur">
-        <B_sites>
-          <ul>
-              <li>
-              <h1 class="plan-secteur">[(#LOGO_RUBRIQUE|left)][<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE|supprimer_numero)</a>]</h1></li>
-              <ul>
-              <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
-              <li class="menu-item">
-              <a href="?site#ID_SYNDIC" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#NOM_SITE</a>
-              <a href="#URL_SITE" target="_new" title="<:acces_direct:>: #URL_SITE" class="spip_out"><img src="#CHEMIN{composants/articles/images/goto.gif}" alt="&uaArr;"  title="<:acces_direct:>: #URL_SITE" /></a>
-              <i>[(#DESCRIPTIF|couper{150})]</i>
-              </li>
-              </BOUCLE_sites>
-              </ul>
-          </ul>
-        </B_sites>
-    </div>
-    </BOUCLE_secteurs>
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mdescription,<:autres_sites:>})
+]<INCLURE{fond=composants/fond/entete}{page=sites}{title=#GET{mdescription}}{mkeywords=#EVAL{'_T("acs:fond_meta_page_sites").","._T("acs:fond_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:fond_meta_page_sites:>}>
+<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2030}{current=sites}>[(#REM) Bloc principal de la page sites ]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]

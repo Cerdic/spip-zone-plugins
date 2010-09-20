@@ -1,16 +1,18 @@
 Suivi des principales révisions 
 
-AVERTISSEMENT : la version 0.7, bien que parfaitement fonctionnelle, n'intègre pas d'initialisation automatique d'un site
-
 ACS version 0.7
  - changement des chemins d'images installées par les composants : img->IMG
  - affichage du commentaire du composant en info-bulle sur le schéma de la page
  - installation automatique de mots-clefs de composants
  - option _ACS_LOG dans acs_options.php pour gérer activation / désactivation des logs ACS
  - fonction sauvegarder / restaurer la configuration d'un modèle ACS 
- 
-Modele Cat pour ACS vesion 0.7:
- - en cours de mise à jour : les composants sont encore en version 0.6 
+ - suppression du numero de release d'ACS dans plugin.xml et partout ailleurs
+ - changement du schéma composant.xml : une valeur par défaut héritée se note désormais "=acsComposantVariable" et non plus  "acsComposantVariable, par souci de cohérence avec l'affectation de valeurs de propriétés héritées. 
+ - changement de syntaxe pour les variables de type "bord" : #VAR{acsComposantBord/Width} au lieu  de #VAR{acsComposantBordWidth} et modification de la balise VAR pour tenir compte de ce cas récursivement
+
+Modele Cat pour ACS vesion 0.7 :
+ - transformation de TOUTES les pages du modèle (squelette) "cat" en pages constituées uniquement de modules (en cours)
+ - Mise à jour de TOUS les composants (en cours)
 
 _______________________________________
 ACS version 0.6

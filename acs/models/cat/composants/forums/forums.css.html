@@ -12,12 +12,12 @@ ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-texte .forum-repondre-message { margin: 0; padding: 0; text-align: right}
 .forum-item {padding-bottom: 10px;}
 [(#REM) Boite d'un forum : eclaircissement progressif des bords ]
-ul .forum-message { border: [(#VAR{acsForumsBordWidth,thin}) ][(#VAR{acsForumsBordStyle,solid}) ] #VAR{acsForumsBordColor,#666}; margin: 0; padding: 0; margin-bottom: 2px; }
-ul ul .forum-message { border: thin solid #VAR{acsForumsBordColor,#A4A4A4}; }
-ul ul ul .forum-message { border: thin solid #VAR{acsForumsBordColor,#B8B8B8}; }
-ul ul ul ul .forum-message { border: thin solid #VAR{acsForumsBordColor,#CCC}; }
-ul ul ul ul ul .forum-message { border: thin solid #VAR{acsForumsBordColor,#E0E0E0}; }
-ul ul ul ul ul ul .forum-message { border: thin dotted #VAR{acsForumsBordColor,#E0E0E0}; }
+ul .forum-message { border: [(#VAR{acsForumsBord/Width,thin}) ][(#VAR{acsForumsBord/Style,solid}) ] #VAR{acsForumsBord/Color,#666}; margin: 0; padding: 0; margin-bottom: 2px; }
+ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#A4A4A4}; }
+ul ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#B8B8B8}; }
+ul ul ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#CCC}; }
+ul ul ul ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#E0E0E0}; }
+ul ul ul ul ul ul .forum-message { border: thin dotted #VAR{acsForumsBord/Color,#E0E0E0}; }
 
 [(#REM) Boite de titre d'un forum : mise en couleur selon la profondeur du forum ]
 ul .forum-chapo { border: none; border-bottom: 1px dotted #VAR{acsForumsBord,#B8B8B8}; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: #VAR{acsForumsFond1,#C4E0E0}; }
@@ -37,9 +37,9 @@ ul ul ul ul ul ul .forum-chapo { background: #VAR{acsForumsFond6,#FFF};}
 
 .blocForums {
   font-size: 0.82em;
-  [border-width: (#VAR{acsForumsBordWidth});]
-  [border-style: (#VAR{acsForumsBordStyle});]
-  [border-color: (#VAR{acsForumsBordColor});]
+  [border-width: (#VAR{acsForumsBord/Width});]
+  [border-style: (#VAR{acsForumsBord/Style});]
+  [border-color: (#VAR{acsForumsBord/Color});]
   [background: (#VAR{acsForumsFond});]
 }
 .blocForums .menu-titre {

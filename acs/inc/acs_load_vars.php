@@ -9,16 +9,19 @@
 // Initialisation des variables ACS, à l'installation et lors d'une restauration
 function inc_acs_load_vars($from) {
   if (is_readable($from))
-    @include $from;
+    include $from;
   else 
     return 'unable to read '.$from;
+    dbg($from);
   if (is_array($def)) {
+  	// acsVersion est la version d'acsInstalled lors de la sauvegarde : NE PAS LA RESTAURER !
+  	// todo : gérer les version mismatches
   	$dversion = $def['acsVersion'];
-  	$drelease = $def['acsRelease'];
   	unset($def['acsVersion']);
-  	unset($def['acsRelease']);
-  	
+
     foreach($def as $var=>$value) {
+    	if (is_array($value))
+    		serialize($value);
 	    ecrire_meta($var, $value);
     }
     ecrire_metas();
@@ -26,7 +29,7 @@ function inc_acs_load_vars($from) {
     if ($dversion == ACS_VERSION)
     	return 'ok';
     else
-    	return 'version mismatch ('.$dversion.')';
+    	return 'version mismatch (def '.$dversion.' vs ACS '.ACS_VERSION.')';
   }
   else
   	return 'no vars';

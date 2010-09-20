@@ -39,7 +39,7 @@
 	<auteur>	<!-- Auteur du plugin -->
  	Daniel FAIVRE &copy; 2007-2010 - <multi>[fr]licence GPL[en]GPL license</multi>
 	</auteur>
-  <version>0.7 (20100919)</version>
+  <version>0.7.1</version>
 	<etat>stable</etat>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

@@ -52,7 +52,6 @@ function acs_save($repertoire, $nom_fichier) {
 	if ($file) {
 		$file = "<?php # backup of ".$meta['acsModel']."\n\$def=array(\n".
 			"'acsVersion'=>'".ACS_VERSION."',\n".
-			"'acsRelease'=>'".ACS_RELEASE."',\n".
 			"'acsModel'=>'".$meta['acsModel']."',\n".
 			$file.
 			");\n?>";

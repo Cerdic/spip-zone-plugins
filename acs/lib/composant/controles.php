@@ -29,9 +29,18 @@ function ctlImg($composant, $nic, $nom, $image, $param, $wid) {
 // Choix de bordure - Border choice
 function ctlBord($composant, $nic, $nom, $bord, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
- 	$largeur = $GLOBALS['meta'][$var.'Width'];
- 	$style = $GLOBALS['meta'][$var.'Style'];
-	$couleur = $GLOBALS['meta'][$var.'Color'];
+  $b = $GLOBALS['meta'][$var];
+  $bord = unserialize($b);
+  if (is_array($bord)) {
+   	$largeur = $bord['Width'];
+   	$style = $bord['Style'];
+  	$couleur = $bord['Color'];
+  }
+  elseif (substr($b,0,1) == '=') {
+   	$largeur = '=';
+   	$style = '=';
+  	$couleur = $b;
+  }
 	$r = '<table><tr><td>'.ctlColor($composant, $nic, $nom.'Color', $couleur, $param, $wid).'</td>';
 	$param['label'] = 'non';
 	$r .= '<td>'.ctlLargeurBord($composant, $nic, $nom.'Width', $largeur, $param, $wid).

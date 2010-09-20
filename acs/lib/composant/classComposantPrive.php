@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -81,11 +81,13 @@ class AdminComposant {
 			}
 		}
 		
-		// Active le composant non optionnel
+		// Active le composant non optionnel, si nécessaire
 		if (($this->optionnel=='non') || ($this->optionnel =='no') || ($this->optionnel =='false')) {
-			ecrire_meta($this->fullname.'Use','oui');
-			$this->enable = true;
-			$updated = true;
+			if ($GLOBALS['meta'][$this->fullname.'Use'] != 'oui') {
+  			ecrire_meta($this->fullname.'Use','oui');
+  			$this->enable = true;
+  			$updated = true;
+			}
 		}
 		else { // Regarde si le composant optionnel doit être activé
 			// Désactive le composant s'il dépend de plugins non activés
@@ -126,7 +128,7 @@ class AdminComposant {
 						$this->errors['vars'] .= $class.($nic ? '#'.$nic : '').'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v))."<br />\n"; // dbg composant
 					$this->vars[$k+1][$varname] = $v;
 					if ($varname == 'valeur') { // Default values
-						if (substr($v,0,3) == 'acs') {
+						if (substr($v,0,4) == '=acs') {
 							if (!in_array($v, $this->cvars)) $this->cvars[ ] = $v;
 							$v = $GLOBALS['meta'][$v];
 						}
@@ -139,10 +141,10 @@ class AdminComposant {
 		if ($this->debug && $_POST) {
 			include_spip('balise/acs_balises');
 			$this->errors[] = "\n<br />\$_POST=\n";
-			$this->errors[] = dbg($_POST);
+			$this->errors[] = nl2br(dbg($_POST));
 			$this->errors[] = "\n<br />\n";
 		}
-		// Suppression de l'instance du compoant
+		// Suppression de l'instance du composant
 		if (_request('del_composant')=='delete') {
 			foreach ($this->vars as $var) {
 				$v = $this->fullname.$var['nom'];
@@ -150,48 +152,55 @@ class AdminComposant {
 			}
 			$updated = true;
 		}
+		// Mise à jour
 		if (_request('maj_composant')=='oui') {
+			$md5 = md5($this->fullname);
 			foreach ($this->vars as $var) {
+				unset($nv);
 				$v = $this->fullname.$var['nom'];
 				switch($var['type']) {
-			  	case 'bord' :
-			  		$v2u = array('Width', 'Style', 'Color');
-						$couleur = $GLOBALS['meta'][$v.'Color'];
-						// Valeurs par defaut pour un Bord herite d'un autre composant 
-						if (substr($couleur, 0, 1) == '=') {
-							$vb = substr($couleur, 1, -5);
-							if ($_POST[$v.'Width_'.md5($this->fullname)] === '') {
-								ecrire_meta($v.'Width', '='.$vb.'Width');
-								$updated = true;
-							}
-						  if ($_POST[$v.'Style_'.md5($this->fullname)] === '') {
-								ecrire_meta($v.'Style', '='.$vb.'Style');
-								$updated = true;
-							}
+					case 'bord' :
+						// on ne traite surtout pas les variables non postées
+						if (!isset($_POST[$v.'Color_'.$md5])) continue 2;
+
+						if ($_POST[$v.'Color_'.$md5] === '') {
+							$nv = '';
 						}
+						else {
+  						$postedColor = $_POST[$v.'Color_'.$md5];
+  						// si la valeur postee commence par "=", c'est une référence à la valeur d'un autre composant
+  						if (substr($postedColor, 0, 1) == '=')
+  							$nv = $postedColor;
+  						else
+  							$nv = array('Width' => $_POST[$v.'Width_'.$md5],
+														'Style' => $_POST[$v.'Style_'.$md5],
+														'Color' => $_POST[$v.'Color_'.$md5]
+  										);
+						}
+						if (is_array($nv))
+							$nv = serialize($nv);
 			  		break;
+			  		
 			  	default:
-			  		$v2u = array('');
+						// on ne traite surtout pas les variables non postées
+			  		if (!isset($_POST[$v.'_'.$md5]))
+			  			continue 2;
+
+			  		$nv = $_POST[$v.'_'.$md5];
 				}
-			  foreach($v2u as $w) {
-			  	$w = $v.$w;
-					$posted = $w.'_'.md5($this->fullname);
-					if (!isset($_POST[$posted])) continue; // on ne traite surtout pas les variables non postées
-					if ($_POST[$posted] == $GLOBALS['meta'][$v]) continue;
-					if ($_POST[$posted] === '') {
-						if (isset($var['valeur'])) { // Valeur par defaut - default value
-							if (substr($var['valeur'], 0, 3) == 'acs')
-								$nv = $GLOBALS['meta'][$var['valeur']];
-							else
-								$nv = $var['valeur'];
+				// On continue si rien à faire
+				if ($nv == $GLOBALS['meta'][$v]) continue;
+				// On affecte la valeur par defaut (si elle existe) si la nouvelle valeur est vide 
+				if ($nv === '') {
+					if (isset($var['valeur'])) { // Valeur par defaut - default value
+						if (substr($var['valeur'], 0, 4) == '=acs')
+							$nv = $GLOBALS['meta'][$var['valeur']];
+						else
+							$nv = $var['valeur'];
 						}
 					}
-					else
-						$nv = $_POST[$posted];
-					ecrire_meta($w, $nv);
-					unset($nv);
-					$updated = true;
-			  }
+				ecrire_meta($v, $nv);
+				$updated = true;
 			}
 
 			if (isset($updated)) {
@@ -285,7 +294,7 @@ class AdminComposant {
 					'<input type="hidden" name="composant" value="'.$this->class.'" />'.
 					'<input type="hidden" name="nic" value="'.$this->nic.'" />';
 
-		$varconf = $this->fullname.'Config';
+		$varconf = $this->fullname.'Config';		
 		if (($mode != 'controleur') && ($this->optionnel!='non') && ($this->optionnel!='no') && ($this->optionnel!='false')) {
 			$varname = $this->fullname.'Use';
 			if (isset($GLOBALS['meta'][$varname]) && $GLOBALS['meta'][$varname])
@@ -337,7 +346,7 @@ class AdminComposant {
 		// Recherche une mise en page et y remplace les variables par des contrôles
 		$mis_en_page = array();
 		if (is_readable($this->rootDir.'/ecrire/'.$this->class.'_mep.html')) {
-			$mep .= recuperer_fond('composants/'.$this->class.'/ecrire/'.$this->class.'_mep', array('lang' => $GLOBALS['spip_lang']));
+			$mep .= recuperer_fond('composants/'.$this->class.'/ecrire/'.$this->class.'_mep', array('lang' => $GLOBALS['spip_lang'], 'nic' => $this->nic));
 			foreach ($controls as $nom=>$html) {
 			  $tag = '&'.$nom.'&';
 			  if (strpos($mep, $tag) !== false)

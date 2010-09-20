@@ -38,9 +38,8 @@ $GLOBALS['ACS_CHEMIN'] = $dir_site_absolu._NOM_PERMANENTS_ACCESSIBLES.'_acs/'.$G
 
 define('_DIR_ACS', _DIR_PLUGINS.acs_get_from_active_plugin('ACS', 'dir').'/'); // Chemin valable espace public aussi, pas comme _DIR_PLUGIN_ACS, qui est à proscrire
 
-// Versions - Lues dans la variable meta que spip a écrit
-define('ACS_VERSION', preg_replace('/([^\s]+).*/', '\1', acs_get_from_active_plugin('ACS', 'version')));
-define('ACS_RELEASE', preg_replace('/.*\s\((.*)\)/', '\1', acs_get_from_active_plugin('ACS', 'version')));
+// Version - Lue dans la variable meta que spip a écrit
+define('ACS_VERSION', acs_get_from_active_plugin('ACS', 'version'));
 
 // Définition du dossier global des squelettes actifs d'ACS (avec override)
 // Global active ACS skeletons directory definition (with override)
@@ -121,17 +120,18 @@ function mkdir_recursive($pathname) {
 function meta_recursive($src, $meta) {
 	$chemin = strtok($meta, '/');
 	$val = $src[$chemin];
+	// Si la valeur commence par "=", c'est une référence récursive à une autre variable ACS
+	if (substr($val, 0 ,1) == '=')
+		$val = meta_recursive($src, substr($val, 1).substr($meta, strlen($chemin)));
+	// On appelle récursivement la fonction tant que $val est un array ou un array serialise
 	if (is_array($val)) {
 		$val = meta_recursive($val, substr($meta, strlen($chemin)+1));
 	}
 	elseif (is_array(unserialize($val))) {
 		$val = meta_recursive(unserialize($val), substr($meta, strlen($chemin)+1));
 	}
-	if (substr($val, 0 ,1) == '=')
-		$val = meta_recursive($src, substr($val, 1));
 	return $val;
 }
-
 
 function acs_log($txt) {
 	if (_ACS_LOG === true)

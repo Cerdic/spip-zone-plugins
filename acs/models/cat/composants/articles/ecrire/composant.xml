@@ -4,7 +4,7 @@
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
   <version>0.7</version>
-	<necessite id='acs' version='[0.6;]' />
+	<necessite id='acs' version='[0.7.1;]' />
 
   <param>
     <nom>preview</nom>
@@ -14,7 +14,7 @@
   <variable>
     <nom>TitresFondColor</nom>
     <type>color</type>
-    <valeur>acsOngletsFondColor</valeur>
+    <valeur>=acsOngletsFondColor</valeur>
   </variable>
   <variable>
     <nom>TitresFondImage</nom>
