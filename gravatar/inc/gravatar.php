@@ -185,7 +185,9 @@ function gravatar($email, $default='404') {
 				$a = @getimagesize($gravatar_cache);
 				if ($a[2] == 3) // png
 				{
-					@rename($gravatar_cache, $gravatar_cache.'.png'); // @ pour eviter un warning sous windows si le fichier existe deja
+					if (!file_exists($gravatar_cache.'.png')) { // pour eviter un warning sous windows si le fichier existe deja
+						rename($gravatar_cache, $gravatar_cache.'.png'); 
+					}
 					include_spip('inc/filtres_images');
 					$img = imagecreatefrompng($gravatar_cache.'.png');
 					// Compatibilite avec la 2.1
