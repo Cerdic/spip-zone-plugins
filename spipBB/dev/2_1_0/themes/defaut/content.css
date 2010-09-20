@@ -307,6 +307,16 @@ dd.lastpost span, ul.topiclist dd.searchby span, ul.topiclist dd.info span, ul.t
 	color: #000000;
 }
 
+/* Pagination
+---------------------------------------- */
+.pagination {
+	height: 1%; /* IE tweak (holly hack) */
+	width: auto;
+	text-align: right;
+	margin-top: 5px;
+	float: right;
+}
+
 /* Post body styles
 ----------------------------------------*/
 .postbody {
