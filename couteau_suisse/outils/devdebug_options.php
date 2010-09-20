@@ -20,7 +20,11 @@ function devdebug_charger_debug(){
 			:(defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false);
 		// Les liens d'erreur generes par PHP renvoient ... en local ! dans le php.ini standard
 		// On les definit du type 'http://fr.php.net/manual/en/ %s .php' (necessite une connexion)
-		@ini_set('docref_root', "http://fr.php.net/manual/en/");
+		$devdebug_langues_phpdoc = array('en','fr','de','ja','pl','ro','fa','es','tr');
+		if(function_exists('utiliser_langue_visiteur')) utiliser_langue_visiteur();
+		$lang = (isset($GLOBALS['spip_lang']) && in_array($GLOBALS['spip_lang'], $devdebug_langues_phpdoc))
+			? $GLOBALS['spip_lang'] : 'fr';
+		@ini_set('docref_root', "http://www.php.net/manual/".$lang."/");
 		@ini_set('docref_ext', '.php');
 		// On lance le php error tracking quoiqu'il arrive
 		@ini_set('track_errors',1);
