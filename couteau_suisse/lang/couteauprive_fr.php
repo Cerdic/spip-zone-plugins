@@ -367,15 +367,9 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'dossier_squelettes:description' => 'Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit (ou en tapant &quot;dist&quot;), c\'est le squelette original &quot;dist&quot; fourni par SPIP qui sera utilis&eacute;.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 	'devdebug:nom' => 'D&eacute;bogueur de d&eacute;veloppement',
-	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.
-
-[[%devdebug_mode%]]
-
-[[%devdebug_espace%]]
-
-[[%devdebug_niveau%]]',
-	'label:devdebug_mode' => 'Activer le d&eacute;boguage',
-	'label:devdebug_espace' => 'Filtrage de l\'espace d\'application du d&eacute;bogue :',
+	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.',
+	'label:devdebug_mode' => 'Activer le d&eacute;bogage',
+	'label:devdebug_espace' => 'Filtrage de l\'espace concern&#233; :',
 	'devdebug:item_tout' => 'Tout SPIP',
 	'devdebug:item_espace_prive' => 'Espace priv&eacute;',
 	'devdebug:item_espace_public' => 'Espace public',
@@ -383,8 +377,8 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'devdebug:item_e_notice' => 'Notes d&#039;&#233;xecution (notice)',
 	'devdebug:item_e_warning' => 'Avertissements (warning)',
 	'devdebug:item_e_error' => 'Erreurs graves ou fatales (error)',
-	'devdebug:item_e_all' => 'Tout les messages d&#039;erreurs (all)',
-	'devdebug:item_e_strict' => 'Tout les messages d&#039;erreurs + les conseils PHP (strict)',
+	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)',
+	'devdebug:item_e_strict' => 'Tous les messages + les conseils PHP (strict)',
 
 	// E
 	'effaces' => 'Effac&eacute;s',

@@ -63,8 +63,23 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 		}
 		return $res.'</ul>'.$comment._VAR_OUTIL;
 	}
+	// si la variable necessite un select
+	elseif(is_array($select = &$cs_variable['select'])) {
+		if(!$actif) {
+			$code = _T($select[$valeur]);
+			return "<input type=\"hidden\" name=\"$variable\" class=\"cs_hidden_checkbox\" value=\"$code\" />"
+				. $label . (strlen($valeur)?ucfirst($code):'&nbsp;-');
+		}
+		$res = "$label <select name=\"$variable\"$disab>";
+		foreach($select as $code=>$traduc) {
+			$res .=	"<option"
+				.($valeur==$code?' selected="selected"':'')." value=\"$code\">"
+				._T($traduc)."</option>";
+		}
+		return $res.'</select>'.$comment._VAR_OUTIL;
+	}
 	// ... ou une case a cocher
-	if(isset($cs_variable['check'])) {
+	elseif(isset($cs_variable['check'])) {
 		if(!$actif)
 			return $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
 		return $label.'<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" $disab/>"

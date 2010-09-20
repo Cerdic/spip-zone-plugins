@@ -8,7 +8,7 @@
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
 // compatibilite spip 1.9
-if(!function_exists(ajax_retour)) { 
+if(!function_exists('ajax_retour')) { 
 	function ajax_retour($corps) {
 		$c = $GLOBALS['meta']["charset"];
 		header('Content-Type: text/html; charset='. $c);

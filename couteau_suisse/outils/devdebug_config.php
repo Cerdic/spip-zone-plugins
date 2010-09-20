@@ -23,10 +23,11 @@ function outils_devdebug_config_dist() {
 	add_outil(array(
 		'id' => 'devdebug',
         'contrib' => 3572,
-//        'auteur' => 'Piero Wbmstr',
+        'auteur' => 'Piero Wbmstr',
         'categorie' => 'divers',
 		'code:options' => "%%devdebug_mode%%%%devdebug_espace%%%%devdebug_niveau%%devdebug_charger_debug();\n",
 		'autoriser' => "autoriser('webmestre')",
+		'description' => '<:devdebug::>[[%devdebug_mode%]][[%devdebug_espace%]][[%devdebug_niveau%]]',
 	));
 	// Ajout des variables utilisees ci-dessus
 	add_variables(array(
@@ -47,14 +48,13 @@ function outils_devdebug_config_dist() {
 		),array(
 			'nom' => 'devdebug_niveau',
 			'format' => _format_CHAINE,
-			'radio' => array(
+			'select' => array(
 				'warning' => 'couteauprive:devdebug:item_e_warning',
 				'notice' => 'couteauprive:devdebug:item_e_notice',
 				'all' => 'couteauprive:devdebug:item_e_all',
 				'error' => 'couteauprive:devdebug:item_e_error', 
 				'strict' => 'couteauprive:devdebug:item_e_strict',
 			),
-			'radio/ligne' => 1,
 			'defaut' => _DEVDEBUG_NIVEAU_DEF,
 			'code' => "define('_DEVDEBUG_NIVEAU', %s);\n",
 		)

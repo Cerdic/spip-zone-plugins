@@ -7,14 +7,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * On charge la config de l'outil et le valeurs d'erreurs renvoyees
+ * On charge la config de l'outil et les valeurs d'erreurs renvoyees
  */
 function devdebug_charger_debug(){
 	// On renvoie direct si pas defini
 	if(!defined('_DEVDEBUG_MODE')) return;
 	// Sinon, on traite
-	$prive = test_espace_prive() ? 'prive':'public';
 	if(_DEVDEBUG_MODE==1){
+		$prive = function_exists('test_espace_prive')
+			?test_espace_prive()
+			// compatibilite pour avant 1.9.3
+			:(defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false);
 		// Les liens d'erreur generes par PHP renvoient ... en local ! dans le php.ini standard
 		// On les definit du type 'http://fr.php.net/manual/en/ %s .php' (necessite une connexion)
 		@ini_set('docref_root', "http://fr.php.net/manual/en/");
@@ -31,20 +34,20 @@ function devdebug_charger_debug(){
 			case 'warning' : $niveau = "E_ALL ^ E_NOTICE"; break;
 			case 'error' : $niveau = "E_ALL ^ (E_NOTICE | E_WARNING)"; break;
 			case 'strict' : $niveau = "-1"; break;
-			case 'all' : $niveau = "E_ALL |ÊE_DEPRECATED"; break;
-			case 'user' : $niveau = "E_USER_NOTICE |ÊE_USER_WARNING | E_USER_ERROR"; break;
+			case 'all' : $niveau = "E_ALL | E_DEPRECATED"; break;
+			case 'user' : $niveau = "E_USER_NOTICE | E_USER_WARNING | E_USER_ERROR"; break;
 			case 'notice' : default : $niveau = "E_ALL"; break;
 		}
 		if(defined('_DEVDEBUG_ESPACE')) switch(_DEVDEBUG_ESPACE) {
 			case 'public' :
-				if($prive =='public') {
+				if(!$prive) {
 					ini_set('display_errors',1); 
 					eval("error_reporting($niveau);");
 				}
 				else ini_set('display_errors',0);
 				break;
 			case 'prive' :
-				if($prive =='prive') {
+				if($prive) {
 					ini_set('display_errors',1); 
 					eval("error_reporting($niveau);");
 				}
