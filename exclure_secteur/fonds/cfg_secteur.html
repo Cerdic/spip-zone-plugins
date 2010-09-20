@@ -7,7 +7,7 @@
     <fieldset>
 	<ul>
 	<legend id="explication">Choisissez les secteurs &agrave; exclure</legend>
-	<BOUCLE_racine(RUBRIQUES){racine}>
+	<BOUCLE_racine(RUBRIQUES){racine}{tout}>
 	<li>
 
     #SET{checked, #CONFIG{secteur/exclure_sect, #ARRAY}}
