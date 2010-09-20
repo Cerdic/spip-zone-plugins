@@ -47,15 +47,6 @@
 						<option value="chapo" [(#ENV{dc_description_abstract}|=={chapo}|?{selected="selected"})]><:dublin_core:item_chapo:></option>
 				</select>
 			</li>
-			<li class='configurer_dc_date_available'>
-				<label for="dc_creator"><:dublin_core:label_dc_creator:></label>
-				<select name="dc_creator" id="dc_creator" class="select" >
-						<option value="auteurs" [(#ENV{dc_creator}|=={auteurs}|?{selected="selected"})]><:dublin_core:item_auteurs:></option>
-						<option value="nom_site_spip" [(#ENV{dc_creator}|=={nom_site_spip}|?{selected="selected"})]><:dublin_core:item_nom_site_spip:></option>
-						<option value="surtitre" [(#ENV{dc_creator}|=={surtitre}|?{selected="selected"})]><:dublin_core:item_surtitre:></option>
-						<option value="soustitre" [(#ENV{dc_creator}|=={soustitre}|?{selected="selected"})]><:dublin_core:item_soustitre:></option>
-				</select>
-			</li>
 			<li class='configurer_issn'>
 				<label for="issn"><:dublin_core:label_issn:></label>
 				<input type="text" name="issn" value="#ENV{issn}" id="issn" class="text" />
