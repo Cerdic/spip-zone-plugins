@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+	<!--  
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	 	
+	<nom>Get Info SPIP (GInS)</nom>
+	<auteur>
+		[Christian Paulus->http://www.quesaco.org/]
+	</auteur>
+	<licence>&#169; 2010 [GNU/GPL 3->http://fr.wikipedia.org/wiki/Licence_publique_g%C3%A9n%C3%A9rale_GNU]</licence>
+
+	<description>
+		Informations sur la configuration du site SPIP.
+	</description>
+	<icon>images/gins-64.png
+	</icon>
+	
+	<!-- documentation -->
+	<lien>http://www.quesaco.org/Informations-SPIP-Get-Info-GInS</lien>
+	
+	<version>1.0.0</version>
+	<etat>stable</etat>
+	
+	<!-- espace de nommage -->
+	<prefix>gins</prefix>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/gins_pipelines.php</inclure>
+	</pipeline>
+	
+	<bouton id='get_infos_spip' parent='configuration'>
+		<icone>images/gins-24.png</icone>
+		<titre>Infos SPIP</titre>
+		<url>get_infos_spip</url>
+	</bouton>
+	
+	<necessite id='SPIP' version='[2.1.2;]' />
+	
+	<categorie>maintenance</categorie>
+	
+</plugin>
