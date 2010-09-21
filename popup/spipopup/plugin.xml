@@ -1,0 +1,49 @@
+<plugin>
+	<nom>Balise &#035;POPUP</nom>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<version>1.0</version>
+	<licence>&#169; 2010 [GPL->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+	<icon>images/popup-128.png</icon>
+	<etat>dev</etat>
+	<lien>[Documentation sur Spip-Contrib->http://www.spip-contrib.net/?article3573]</lien>
+	<description>
+Gestion d'une fen&ecirc;tre popup ({fen&ecirc;tre externe}) unique sous forme de squelette SPIP et aux dimensions r&eacute;glables pour diff&eacute;rents usages.
+
+{{Utilisation de la balise {{&#035;POPUP}} }}
+<quote><code>
+<a href="#POPUP{objet SPIP,squelette,width,height,titre}">texte du lien</a>
+</code></quote>
+- {{objet SPIP}} : 'article1' ou 'id_article=1' (valable par d&eacute;faut pour tout objet &eacute;ditorial de SPIP).
+- {{squelette}} : squelette utilis&eacute; pour afficher la fen&ecirc;tre ({optionnel - par d&eacute;faut : '{{popup_defaut.html}}'}).
+- {{width}} : la largeur de la fen&ecirc;tre en pixels ({optionnel - {{620px}} par d&eacute;faut}).
+- {{height}} : la hauteur de la fen&ecirc;tre en pixels ({optionnel - {{640px}} par d&eacute;faut}).
+- {{titre}} : le titre ajout&eacute; au lien.
+
+{{Utilisation du mod&egrave;le dans les article}}
+<quote><code>
+<popup
+	|texte=le texte du lien (necessaire)
+	|lien=objet SPIP pour le lien (necessaire)
+	|skel=squelette (option)
+	|width=XX (option)
+	|height=XX (option)
+	|titre=mon titre (option)
+>
+</code></quote>
+M&ecirc;mes options que la balise, le texte du lien en plus.
+
+{{Retour de la balise {{&#035;POPUP}} }}
+<quote><code>
+<a href="url" onclick="_popup_set('url',width,height);return false;" title="titre - nouvelle fenetre">texte du lien</a>
+</code></quote>
+	</description>
+	<options>spipopup_options.php</options>
+	<options>spipopup_fonctions.php</options>
+	<prefix>spipopup</prefix>
+	<chemin dir='' />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>spipopup_pipelines.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
+</plugin>

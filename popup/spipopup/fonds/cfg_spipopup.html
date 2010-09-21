@@ -1,0 +1,42 @@
+<!-- titre=<:spipopup:nom:>-->
+<!-- icone=images/popup-24.png-->
+[(#SET{logo,
+<img src="#DOSSIER_SQUELETTE/../images/popup-24.png" width="24" height="24" alt="Logo <:spipopup:spipopup:>" style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
+<h4><:spipopup:titre_descr_cfg:></h4>
+<p><:spipopup:descr_cfg|propre:></p>
+<br />
+-->
+<!-- boite=<:spipopup:titre_descr_cfg:>-->
+#CACHE{0}
+
+<form method="post" action="#SELF" id="top_tb_form"><div>
+	<div>[(#ENV{_cfg_}|form_hidden)]</div>
+	<fieldset>
+	<div style="padding:0.2em; padding-right: 1.2em">
+		<p class="forml">
+			<label for="popup_skel"><strong><:spipopup:skel_defaut:></strong></label>
+			<span class="comment"><:spipopup:skel_defaut_comment|propre:></span>
+			<input type="text" name="popup_skel" id="popup_skel" value="#ENV{popup_skel,#EVAL{POPUP_SKEL_DEFAUT}}" size="50" />
+		</p>
+		<p class="forml">
+			<label for="nothing"><strong><:spipopup:width_and_height:></strong></label><br />
+			<label for="popup_width"><:spipopup:width:>&nbsp;:</label>
+			<input type="text" name="popup_width" id="popup_width" value="#ENV{popup_width,#EVAL{POPUP_WIDTH_DEFAUT}}" size="10" />
+			<label for="popup_height"><:spipopup:height:>&nbsp;:</label>
+			<input type="text" name="popup_height" id="popup_height" value="#ENV{popup_height,#EVAL{POPUP_HEIGHT_DEFAUT}}" size="10" />
+		</p>
+		<p class="forml">
+			<label for="popup_titre"><strong><:spipopup:titre_popup:></strong></label>
+			<span class="comment"><:spipopup:titre_popup_comment|propre:></span>
+			<input type="text" name="popup_titre" id="popup_titre" value="#ENV{popup_titre,#EVAL{POPUP_TITRE_DEFAUT}}" size="50" />
+		</p>
+	</div>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" />
+		<input onClick="window.location.href=window.location.href+'#top_tb_form';" type="reset" name="_cfg_delete" value="<:spipopup:bouton_reset:>" class="fondo" />
+	</p>
+</fieldset>
+</div></form>

@@ -1,0 +1,16 @@
+[(#REM)
+	modele pour les contenus des objets SPIP
+	indiquer :
+	
+	<popup
+		|texte=le texte du lien (necessaire)
+		|lien=objet SPIP pour le lien (necessaire)
+		|skel=squelette (option)
+		|width=XX (option)
+		|height=XX (option)
+		|titre=mon titre (option)
+	>
+	
+][(#ENV{lien}|=={''}|non)[(#ENV{texte}|=={''}|non)
+	<a href="#POPUP{#ENV{lien},#ENV{skel,''},#ENV{width,''},#ENV{height,''},#ENV{titre,''}}">#ENV{texte}</a>
+]]
