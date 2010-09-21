@@ -36,12 +36,30 @@
 		<inclure>base/mots_auteurs_tables.php</inclure>
 	</pipeline>
 
+	<!-- Les autorisations specifiques au plugin -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>mots_auteurs_autorisations.php</inclure>
+	</pipeline>
+
+	<!-- pouvoir ajouter des mots-clé aux objets de type auteur -->
+	<pipeline>
+		<nom>libelle_associations_mots</nom>
+		<inclure>mots_auteurs_pipelines.php</inclure>
+	</pipeline>	
+
+	<!-- afficher le bloc des mots clé dans la colonne du milieu de la page vue auteur-->
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>mots_auteurs_pipelines.php</inclure>
 	</pipeline>
 
-	
+	<!-- proposer un checkbox auteurs sur la page des groupes de mots-->
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>mots_auteurs_pipelines.php</inclure>
+	</pipeline>
+
 	<necessite id="SPIP" version="[2.1.0;]" />
 
 	<categorie>outil</categorie>
