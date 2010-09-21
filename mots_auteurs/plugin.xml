@@ -1,0 +1,43 @@
+<plugin>
+	<nom><multi>[fr]Mots Auteurs[en]Authors key-words</multi></nom>
+	
+	<auteur>Cyril Marion - [Ateliers CYM->http://www.cym.fr]</auteur>
+	
+	<icon>images/tag_purple-32.png</icon>
+	
+	<licence>GNU/GPL</licence>
+	
+	<version>0.1</version>
+	
+	<version_base>0.1</version_base>
+	
+	<etat>dev</etat>
+	
+	<lien></lien>
+	
+	<description>
+	<multi>
+	[fr] Permet d'ajouter des mots cl&eacute; sur les auteurs SPIP, et par extension, sur les Contacts et les Organisations
+	[en] Allows to attach key-words to SPIP  authors, and by extention, to Contacts and Organisations.
+	</multi>
+	</description>
+	
+	<prefix>mots_auteurs</prefix>
+	
+	<install>base/mots_auteurs_upgrade.php</install>
+	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/mots_auteurs_tables.php</inclure>
+	</pipeline>	
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/mots_auteurs_tables.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+
+	<categorie>outil</categorie>
+
+</plugin>
