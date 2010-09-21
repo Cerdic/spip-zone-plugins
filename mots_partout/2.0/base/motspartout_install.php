@@ -91,3 +91,4 @@ function motspartout_upgrade($tables_possibles){
 		}
 	}
 
+?>
