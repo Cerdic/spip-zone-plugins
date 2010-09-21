@@ -2,13 +2,13 @@
 	<nom>SPIP Propri&#233;taire</nom>
 	<version>1.2</version>
 	<etat>stable</etat>
-	<licence>&#169; 2009 GNU GPL v3</licence>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<licence>&#169; 2009 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
  	<prefix>spip_proprio</prefix>
 	<chemin dir='public' type='public' />
 	<chemin dir='prive' type='prive' />
 	<chemin dir='' />
-	<auteur>[CreaDesign->http://creadesignweb.free.fr/] - [->creadesignweb@free.fr]</auteur>
-	<lien>http://www.spip-contrib.net/?article3516</lien>
+	<lien>[Documentation->http://www.spip-contrib.net/?article3516]</lien>
 	<description>
 Ce plugin vous propose la g&#233;n&#233;ration automatique de {{Mentions L&#233;gales}}, {{Conditions d'Utilisation}} et informations de {{Copyright}} propres &#224; votre site SPIP.
 
@@ -30,4 +30,5 @@ Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://ww
 	    <titre>spip_proprio:spip_proprio</titre>  
 	    <url>spip_proprio</url>
 	</onglet>
+	<categorie>communication</categorie>
 </plugin>
