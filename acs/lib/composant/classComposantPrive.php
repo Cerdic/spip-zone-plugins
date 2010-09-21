@@ -119,6 +119,8 @@ class AdminComposant {
 												  );
 		if (is_array($c['variable'])) {
 			foreach($c['variable'] as $k=>$var) {
+				if (!is_array($var))
+					continue; // Peut se produire en cas d'erreur dans compoant.xml
 				foreach($var as $varname=>$value) {
 					if (count($value) > 1)
 						  $v = $value;
