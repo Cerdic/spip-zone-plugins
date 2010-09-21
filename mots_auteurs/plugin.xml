@@ -35,6 +35,12 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/mots_auteurs_tables.php</inclure>
 	</pipeline>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>mots_auteurs_pipelines.php</inclure>
+	</pipeline>
+
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
 

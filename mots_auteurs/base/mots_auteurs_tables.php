@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin mots-auteurs pour Spip 2.0
- * Licence GPL 2010
- * Adaptation Cyril MARION - Ateliers CYM http://www.cym.fr
+ * Licence GPL 
+ * Adaptation Cyril MARION - (c) 2010 Ateliers CYM http://www.cym.fr
  *
  */
 
-function mots_auteurs_declarer_tables_interfaces($interface){
+function mots_auteurs_declarer_tables_interfaces($tables_interface){
 
 	// -- Prise en compte de la nouvelle table
 	$interface['table_des_tables']['mots_auteurs'] = 'mots_auteurs';
@@ -15,7 +15,7 @@ function mots_auteurs_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_mots_auteurs'][]= 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'mots_auteurs';
 
-	return $interface;
+	return $tables_interface;
 }
 
 function mots_auteurs_declarer_tables_principales($tables_principales){

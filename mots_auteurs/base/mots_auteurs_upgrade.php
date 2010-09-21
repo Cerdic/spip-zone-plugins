@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin mots-auteurs pour Spip 2.0
- * Licence GPL 2010
- * Adaptation Cyril MARION - Ateliers CYM http://www.cym.fr
+ * Licence GPL 
+ * Adaptation Cyril MARION - (c) 2010 Ateliers CYM http://www.cym.fr
  *
  */
 
