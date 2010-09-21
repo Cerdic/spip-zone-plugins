@@ -6,6 +6,8 @@
  *
  */
 
+
+
 /**
  * Ajout du bloc d'attribution de mot-clé
  * sur la page de visualisation d'un auteur
@@ -17,7 +19,8 @@ function mots_auteurs_affiche_milieu($flux) {
 				'objet' => 'auteur',
 				'id_objet' => $id_auteur
 			);
-			$flux['data'] .= recuperer_fond('prive/blocs/mots', $contexte, array('ajax'=>true));
+
+			$flux = $editer_mots('article', $id_article, $cherche_mot, $select_groupe, $flag_editable, false, 'auteurs'));
 		}
 	}
 	return $flux;
