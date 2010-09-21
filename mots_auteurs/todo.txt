@@ -1,0 +1,6 @@
+
+trouver comment adapter la chaine de langue icone_creer_mot_cle_auteur; 
+
+sur la page "mots_tous" : compter aussi les auteurs;
+
+sur la page "mots_tous" : trouver comment traduire la chaine de langue "info_auteurs";

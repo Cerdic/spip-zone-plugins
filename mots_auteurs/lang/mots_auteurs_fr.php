@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
+	'info_auteurs' => 'Auteurs',
 	'item_mots_cles_association_auteurs' => 'aux auteurs',
 	
 	// L
