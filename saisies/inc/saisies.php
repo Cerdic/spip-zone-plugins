@@ -836,9 +836,10 @@ function saisies_generer_aide(){
  * pour produire un affichage conditionnel des saisies avec une option afficher_si.
  *
  * @param array $saisies Un tableau de saisies
+ * @param string $form Nom du formulaire
  * @return text
  */
-function saisies_generer_js_afficher_si($saisies){
+function saisies_generer_js_afficher_si($saisies,$form){
 	$i = 0;
 	$saisies = saisies_lister_par_nom($saisies,true);
 	
@@ -871,8 +872,8 @@ function saisies_generer_js_afficher_si($saisies){
 					}
 				}
 		$code .= '};';
-		$code .= '$("form").each(function(){verifier_saisies(this);});';
-		$code .= '$("form").change(function(){verifier_saisies(this);});';
+		$code .= '$(".formulaire_'.$form.' form").each(function(){verifier_saisies(this);});';
+		$code .= '$(".formulaire_'.$form.' form").change(function(){verifier_saisies(this);});';
 	$code .= '});';
 	
 	return $i>0 ? $code : '';

@@ -42,8 +42,8 @@
 </BOUCLE_contenu>
 
 [(#REM) Ajout du script js pour l'option si des saisies ]
-<BOUCLE_afficher_si(CONDITION){si #ENV{from_fieldset}|non}>
+<BOUCLE_afficher_si(CONDITION){si #ENV{from_fieldset}|non|et{#ENV{form}}}>
 	<script type="text/javascript">// <![CDATA[
-	[(#ENV**{saisies}|saisies_generer_js_afficher_si)]
+	[(#ENV**{saisies}|saisies_generer_js_afficher_si{#ENV{form}})]
 	 //]]></script>
 </BOUCLE_afficher_si>
