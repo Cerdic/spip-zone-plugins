@@ -5,7 +5,7 @@ Author : Cody Lindley
 
 - - - - - - - - - - - - - - - - - - - - - */
 
-.formInfo a, .formInfo a:active, formInfo a:visited{
+.formInfo a, .formInfo a:active, .formInfo a:visited{
 	background-color: #f66;
 	font-size: 1.3em;
 	font-weight:bold;
