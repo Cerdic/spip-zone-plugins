@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_email' => "Delete this email",
 	
 	// T
-	'titre_coordonnees'	=> 'Addresses &amp; phone numbers',
+	'titre_coordonnees'	=> 'Address book',
 
 );
 
