@@ -57,4 +57,21 @@ function mots_auteurs_editer_contenu_objet($flux){
 	return $flux;
 }
 
+
+// compter le nombre d'auteurs sur les mots cles 
+function mots_auteurs_afficher_nombre_objets_associes_a($flux){
+	if ($flux['args']['objet'] == 'mot'
+	  AND $id_mot = $flux['args']['id_objet'])
+	{
+		if ($nb = sql_countsel("spip_mots_auteurs", "id_mot=".intval($id_mot))) {
+			$flux['data'][] = singulier_ou_pluriel($nb,
+				"mots_auteurs:info_un_auteur",
+				"mots_auteurs:info_nombre_auteurs"
+			);
+		}
+	}
+	return $flux;
+}
+
+
 ?>

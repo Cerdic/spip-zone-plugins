@@ -11,7 +11,7 @@ function autoriser_mots_auteurs() {}
 
 
 function autoriser_auteur_editermots_dist($faire,$quoi,$id,$qui,$opts) {
-	return autoriser_rubrique_editermots_dist($faire,'auteur',0,$qui,$opts);
+	return autoriser_rubrique_editermots_dist($faire, 'auteur', 0, $qui, $opts);
 }
 
 
