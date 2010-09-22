@@ -97,7 +97,7 @@ function critere_agendafull_dist($idb, &$boucles, $crit)
 	$jour2 = "\n" .  'sprintf("%02d", ($x = ' .
 		calculer_liste($jour2, array(), $boucles, $parent) .
 		') ? $x : date("d"))';
-
+	
 	$boucle = &$boucles[$idb];
 	$date = $boucle->id_table . ".$date";
 
@@ -201,15 +201,35 @@ function critere_fusion_par_annee_dist($idb, &$boucles, $crit) {
 function critere_evenement_a_venir_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$id_table = $boucle->id_table;
-
-	if (isset($crit->param[0]))
-		$_dateref = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	else
-		$_dateref = "date('Y-m-d H:i:00')";
-
+	
+	$_dateref = agenda_calculer_date_reference($idb, $boucles, $crit);
 	$_date = "$id_table.date_debut";
 	$op = $crit->not ? "<=":">";
-	$boucle->where[] = array("'$op'","'$_date'","sql_quote($_dateref)");
+	
+	// si on ne sait pas si les heures comptent, on utilise toute la journee.
+	// sinon, on s'appuie sur le champ 'horaire=oui'
+	// pour savoir si les dates utilisent les heures ou pas.	
+	$where_futur_sans_heure =
+		array("'$op'", "'$_date'", "sql_quote(date('Y-m-d 23:59:59', strtotime($_dateref)))");
+		
+	if (array_key_exists('horaire', $boucle->show['field'])) {
+		$where =
+			array("'OR'",
+				array("'AND'",
+					array("'='", "'horaire'", "sql_quote('oui')"),
+					array("'$op'","'$_date'","sql_quote($_dateref)")
+				),		
+				array("'AND'",
+					array("'!='", "'horaire'", "sql_quote('oui')"),
+					$where_futur_sans_heure
+				)
+			);
+	} else {
+		$where = $where_futur_sans_heure;
+	}
+	
+	
+	$boucle->where[] = $where;
 }
 
 
@@ -225,14 +245,34 @@ function critere_evenement_passe_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$id_table = $boucle->id_table;
 
-	if (isset($crit->param[0]))
-		$_dateref = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	else
-		$_dateref = "date('Y-m-d H:i:00')";
-
+	$_dateref = agenda_calculer_date_reference($idb, $boucles, $crit);
 	$_date = "$id_table.date_fin";
 	$op = $crit->not ? ">=":"<";
-	$boucle->where[] = array("'$op'","'$_date'","sql_quote($_dateref)");
+	
+	// si on ne sait pas si les heures comptent, on utilise toute la journee.
+	// sinon, on s'appuie sur le champ 'horaire=oui'
+	// pour savoir si les dates utilisent les heures ou pas.	
+	$where_passe_sans_heure =
+		array("'$op'", "'$_date'", "sql_quote(date('Y-m-d 00:00:00', strtotime($_dateref)))");
+		
+	if (array_key_exists('horaire', $boucle->show['field'])) {
+		$where =
+			array("'OR'",
+				array("'AND'",
+					array("'='", "'horaire'", "sql_quote('oui')"),
+					array("'$op'","'$_date'","sql_quote($_dateref)")
+				),		
+				array("'AND'",
+					array("'!='", "'horaire'", "sql_quote('oui')"),
+					$where_passe_sans_heure
+				)
+			);
+	} else {
+		$where = $where_passe_sans_heure;
+	}
+	
+	
+	$boucle->where[] = $where;
 }
 
 /**
@@ -247,17 +287,60 @@ function critere_evenement_en_cours_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$id_table = $boucle->id_table;
 
-	if (isset($crit->param[0]))
-		$_dateref = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	else
-		$_dateref = "date('Y-m-d H:i:00')";
+	$_dateref = agenda_calculer_date_reference($idb, $boucles, $crit);
 
-	$where = array("'<='","'date_debut'","sql_quote($_dateref)");
-	$where = array("'AND'",$where,array("'>='","'date_fin'","sql_quote($_dateref)"));
+	// si on ne sait pas si les heures comptent, on utilise toute la journee.
+	// sinon, on s'appuie sur le champ 'horaire=oui'
+	// pour savoir si les dates utilisent les heures ou pas.	
+	$where_jour_sans_heure =
+		array("'AND'",
+			array("'<='", "'date_debut'", "sql_quote(date('Y-m-d 23:59:59', strtotime($_dateref)))"),
+			array("'>='", "'date_fin'", "sql_quote(date('Y-m-d 00:00:00', strtotime($_dateref)))")
+		);
+		
+	if (array_key_exists('horaire', $boucle->show['field'])) {
+		$where =
+			array("'OR'",
+				array("'AND'",
+					array("'='", "'horaire'", "sql_quote('oui')"),
+					array("'AND'",
+						array("'<='", "'date_debut'", "sql_quote($_dateref)"),
+						array("'>='", "'date_fin'", "sql_quote($_dateref)")
+					)
+				),		
+				array("'AND'",
+					array("'!='", "'horaire'", "sql_quote('oui')"),
+					$where_jour_sans_heure
+				)
+			);
+	} else {
+		$where = $where_jour_sans_heure;
+	}
+
 	if ($crit->not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;
 }
+
+
+/**
+ * Fonction privee pour mutualiser de code des criteres_evenement_*
+ * Retourne le code php pour obtenir la date de reference de comparaison
+ * des evenements a trouver 
+ *
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ * 
+ * @return string code PHP concernant la date.
+**/
+function agenda_calculer_date_reference($idb, &$boucles, $crit) {
+	if (isset($crit->param[0]))
+		return calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		return "date('Y-m-d H:i:00')";
+}
+
 
 function agenda_date_a_venir($date_test,$date_ref=null){
 	if (is_null($date_ref))
@@ -267,6 +350,7 @@ function agenda_date_a_venir($date_test,$date_ref=null){
 
 	return (strtotime($date_test)>$date_ref)?' ':'';
 }
+
 
 function agenda_date_passee($date_test,$date_ref=null){
 	if (is_null($date_ref))
