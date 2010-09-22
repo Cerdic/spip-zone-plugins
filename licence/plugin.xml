@@ -14,7 +14,7 @@
 		<br />Based on an original idea of : <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a>
 		</multi>
 	</auteur>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<version_base>0.2</version_base>
 	<etat>test</etat>
 	<description>
@@ -25,12 +25,15 @@
 	</description>
 	<lien>http://www.spip-contrib.net/spip.php?article2147</lien>
 	<fonctions>licence_fonctions.php</fonctions>
-	<options>licence_options.php</options>
 	<prefix>licence</prefix>
 	<install>base/licence_upgrade.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/licence.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>licence_ieconfig_metas.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
