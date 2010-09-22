@@ -193,8 +193,8 @@ function ieconfig_saisies_import() {
 			'data' => $saisies
 		));
 		
-		// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
-		foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+		// Gestion des plugins utilisant le pipeline ieconfig_metas
+		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
 			if(isset($config[$prefixe]))
 				$saisies[] = array(
 					'saisie' => 'fieldset',
@@ -282,8 +282,8 @@ function formulaires_ieconfig_import_traiter_dist() {
 			'data' => ''
 		));
 		
-		// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
-		foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+		// Gestion des plugins utilisant le pipeline ieconfig_metas
+		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
 			if(_request('import_'.$prefixe)=='on' && isset($config[$prefixe])) {
 				if(isset($data['metas_brutes']))
 					foreach(explode(',',$data['metas_brutes']) as $meta)

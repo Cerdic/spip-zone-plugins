@@ -129,8 +129,8 @@ function ieconfig_saisies_export() {
 		),
 		'data' => $saisies
 	));
-	// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
-	foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+	// Gestion des plugins utilisant le pipeline ieconfig_metas
+	foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
 		$saisies[] = array(
 			'saisie' => 'fieldset',
 			'options' => array(
@@ -271,8 +271,8 @@ function formulaires_ieconfig_export_traiter_dist() {
 		'data' => $export
 	));
 	
-	// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
-	foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+	// Gestion des plugins utilisant le pipeline ieconfig_metas
+	foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
 		if(_request('export_'.$prefixe)=='on') {
 			$export_plugin = array();
 			if(isset($data['metas_brutes']))
