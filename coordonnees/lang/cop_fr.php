@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'item_nouveau_adresse' => 'Nouvelle adresse',
 	'item_nouveau_numero' => 'Nouveau num&eacute;ro',
-	'item_nouveau_email' => 'Nouvelle courriel',
+	'item_nouveau_email' => 'Nouveau courriel',
 	'info_adresse_utilisee_par' => "Adresse utilis&eacute;e par :",
 	'info_numero_utilise_par' => "Num&eacute;ro utilis&eacute; par :",
 	'info_email_utilise_par' => "Courriel utilis&eacute; par :",
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_email' => "Supprimer ce courriel",
 	
 	// T
-	'titre_coordonnees'	=> 'Coordonn&eacute;es',
+	'titre_coordonnees'	=> 'Address book',
 
 );
 
