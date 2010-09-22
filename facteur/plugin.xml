@@ -2,7 +2,7 @@
 <plugin>
 	<nom>Facteur</nom>
 	<auteur>Collectif SPIP</auteur>
-	<version>1.5.10</version>
+	<version>1.6.0</version>
 	<version_base>1.1</version_base>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
@@ -10,6 +10,7 @@
 	<lien>http://www.spip-contrib.net/Facteur</lien>
  	<necessite id="SPIP" version="[2.0.3;]" />
 	<utilise id="bando" version="[;]" />
+	<options>facteur_options.php</options>
 	<install>base/facteur.php</install>
 	<icon>prive/images/facteur-48.png</icon>
 	<prefix>facteur</prefix>
