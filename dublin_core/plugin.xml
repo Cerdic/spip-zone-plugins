@@ -2,7 +2,7 @@
 	<nom>Dublin Core</nom>
 	<categorie>statistique</categorie>
 	<auteur>Tony Gheeraert, Ma&#239;eul Rouquette, Joseph</auteur>
-	<version>1.2</version>
+	<version>1.2.1</version>
 	<etat>stable</etat>
 	<description>Des Dublins Core pour vos articles, configurables avec le plugin CFG.</description>
 	<lien>http://www.spip-contrib.net/Dublin-Core</lien> <!-- URI de documentation -->
@@ -14,4 +14,5 @@
 		<inclure>dublin_core_pipelines.php</inclure>
 	</pipeline>
 	<utilise id="cfg" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>
