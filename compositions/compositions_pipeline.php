@@ -83,7 +83,7 @@ function compositions_styliser($flux){
 		}
 		else {
 			$contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte'];
-			if (preg_match(',^contenu/([^/]*)$,i',$flux['args']['fond'],$regs)
+			if (preg_match(',(^|/)contenu/([^/]*)$,i',$flux['args']['fond'],$regs)
 			  AND $type = $regs[1]
 			  AND in_array($type,compositions_types())){
 				$serveur = $flux['args']['connect'];
@@ -111,24 +111,28 @@ function compositions_styliser($flux){
 	return $flux;
 }
 
-
 /**
  * Affichage du formulaire de selection de la composition
  *
  * @param array $flux
  * @return array
  */
-function compositions_affiche_droite($flux){
+function compositions_affiche_milieu($flux){
 	$exec = $flux['args']['exec'];
 	if (isset($GLOBALS['compositions_exec'][$exec])){
 		$type = $GLOBALS['compositions_exec'][$exec];
 		$_id = id_table_objet($type);
-		if ($id = $flux['args'][$_id])
-			$flux['data'] .= recuperer_fond('prive/editer/compositions',array_merge($_GET,array('type'=>$type,'id'=>$id)));
+		if ($id = $flux['args'][$_id]) {
+			$deplie = false;
+			$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
+			$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
+			$flux['data'] .= debut_cadre('e', chemin('compositions-24.gif','images/'),'',$bouton, '', '', true);
+			$flux['data'] .= recuperer_fond('prive/editer/compositions', array_merge($_GET, array('type'=>$type,'id'=>$id)));
+			$flux['data'] .= fin_cadre();
+		}
 	}
 
 	return $flux;
 }
-
 
 ?>

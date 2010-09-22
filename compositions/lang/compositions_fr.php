@@ -6,11 +6,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'article_en_accueil' => 'Cet article est selectionn&eacute; en accueil de la rubrique',
 'aucun_article_accueil' => 'Aucun article',
+'rubrique_article_en_accueil' => 'Article d\'accueil&nbsp;:',
 
 'choisir_article_accueil' => 'Choisir comme article d\'accueil',
 'composition' => 'Composition',
 'compositions' => 'Compositions',
 'composition_verrouillee' => 'Cette composition est verrouill&eacute; par le webmestre',
+'composition_utilisee' => 'Utilise&nbsp;:',
 
 'label_chemin_compositions' => 'Dossier des compositions',
 'label_chemin_compositions_details' => 'Indiquez le chemin dans lequel seront recherch&eacute;s les squelettes de composition.',

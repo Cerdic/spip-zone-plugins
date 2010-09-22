@@ -15,7 +15,7 @@ include_spip('inc/compositions');
  * @param int $id
  * @return array
  */
-function formulaires_editer_composition_objet_charger($type,$id){
+function formulaires_editer_composition_objet_charger($type,$id,$hide_form=false){
 	$valeurs = array();
 	$table_objet_sql = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
@@ -26,6 +26,10 @@ function formulaires_editer_composition_objet_charger($type,$id){
 		$valeurs['editable'] = false;
 	}
 	else {
+		$valeurs['id'] = "$type-$id";
+		$valeurs['id_objet'] = $id;
+		$valeurs['objet'] = $type;
+		$valeurs['_hide'] = (($hide_form AND is_null(_request('composition')))?' ':'');
 
 		if ($type=='rubrique'){
 			$config_accueil = true;

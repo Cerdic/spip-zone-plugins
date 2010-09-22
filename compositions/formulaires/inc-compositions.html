@@ -6,6 +6,10 @@
 		|et{#AUTORISER{styliser,rubrique,#ID_RUBRIQUE}}
 		|oui)
 		[(#BOUTON_ACTION{<:compositions:choisir_article_accueil:>,#URL_ACTION_AUTEUR{accueillir_rubrique,#ID_RUBRIQUE-#ID_ARTICLE,#SELF},ajax})] 
-		][(#ID_ARTICLE_ACCUEIL|=={#ID_ARTICLE}|oui)<:compositions:article_en_accueil:>
-]</BOUCLE_rub></BOUCLE_article></div></B_article>[
-(#FORMULAIRE_EDITER_COMPOSITION_OBJET{#ENV{type},#ENV{id}})]
+		][(#ID_ARTICLE_ACCUEIL|=={#ID_ARTICLE}|oui)<strong><:compositions:article_en_accueil:></strong>
+]</BOUCLE_rub></BOUCLE_article></div></B_article>
+[(#ENV{type}|=={rubrique}|et{#ENV{id_article_accueil}}|oui)
+<div class="accueil">
+ <:compositions:rubrique_article_en_accueil:> <a href="[(#ENV{id_article_accueil}|generer_url_entite{article})]">[(#INFO_TITRE{article,#ENV{id_article_accueil}})]</a>
+</div>
+]

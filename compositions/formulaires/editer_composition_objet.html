@@ -1,5 +1,14 @@
-[<div class='ajax'>
-<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<div class='ajax'>
+	<div class="compo-utilisee">
+		[(#ENV{composition}|oui)
+		<:compositions:composition_utilisee:> <strong>[(#ENV{composition})]</strong> [(#ENV{composition_lock}|oui)(<:compositions:composition_verrouillee:>)]
+		][(#ENV{composition}|non)
+		<:compositions:label_pas_de_composition:>
+		]
+	</div>
+	<INCLURE{fond=formulaires/inc-compositions,type=#ENV{objet},id=#ENV{id_objet},id_article_accueil,ajax}>
+
+[<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="formulaire_#FORM-#ENV{id,nouveau}"[(#ENV{_hide})style="display:none;"]>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	(#ENV{editable})
@@ -15,8 +24,7 @@
 	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				(#INCLURE{fond=formulaires/inc-selecteur_accueil}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}})]
-				[<span class="explication">(#ENV{id_article_accueil}|oui)<a href="[(#ENV{id_article_accueil}|generer_url_entite{article})]"><:compositions:voir_article_accueil:></a></span>
-	    </li>]]
+	    </li>]
 			#SET{lockable,''}
 	  	#SET{name,composition}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	  	[(#AUTORISER{webmestre}|ou{#ENV{composition_lock}|non}|oui)
