@@ -31,7 +31,7 @@
 [(#CONFIG{dublin_core/dc_description_abstract}|=={chapo}|oui)[<meta name="DC.Description.Abstract" lang="#LANG" content="(#CHAPO)" />]]
 [<meta name="DC.Description.TableofContents" lang="#LANG" content="(#TEXTE**|dublin_core_tableofcontents)" />]
 [(#PLUGIN{licence}|non)[<meta name="DC.Rights.License" scheme="URI" content="(#CONFIG{dublin_core/dc_rights_license})" />]]
-[(#PLUGIN{licence}|oui)[<meta name="DC.Rights.License" scheme="URI" content="(#ID_LICENCE|licence_affiche{non,oui}|extraire_attribut{href}|sinon{#CONFIG{dublin_core/dc_rights_license}})" />]]
+[(#PLUGIN{licence}|oui)[<meta name="DC.Rights.License" scheme="URI" content="(#ID_LICENCE|appliquer_filtre{licence_affiche, non, oui}|extraire_attribut{href}|sinon{#CONFIG{dublin_core/dc_rights_license}})" />]]
 [(#CONFIG{dublin_core/dc_rights_rightsholder}|=={nom_site_spip}|oui)[<meta name="DC.Rights.RightsHolder" content="(#NOM_SITE_SPIP)" />]]
 [(#CONFIG{dublin_core/dc_rights_rightsholder}|=={surtitre}|oui)[<meta name="DC.Rights.RightsHolder" content="(#SURTITRE)" />]]
 [(#CONFIG{dublin_core/dc_rights_rightsholder}|=={soustitre}|oui)[<meta name="DC.Rights.RightsHolder" content="(#SOUSTITRE)" />]]
