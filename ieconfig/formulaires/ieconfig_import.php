@@ -43,7 +43,8 @@ function ieconfig_saisies_import() {
 		$texte_explication = '<b>'._T('ieconfig:texte_nom').'</b> '._T_ou_typo($config['nom']);
 		if ($config['description']!= '')
 			$texte_explication .= '<br /><b>'._T('ieconfig:texte_description').'</b> '._T_ou_typo($config['description']);
-		// On identifie les entrées ne correspondants pas à un plugin
+		// On identifie les entrées ne correspondant pas à un plugin
+		// Convention : les clés du tableau de config correspondent aux préfixes des plugins
 		$entrees = $config;
 		unset($entrees['nom']);
 		unset($entrees['description']);
@@ -182,6 +183,7 @@ function ieconfig_saisies_import() {
 				);
 			$saisies = array_merge($saisies,$saisies_spip_interactivite);
 		}
+		
 		// On passe via le pipeline ieconfig
 		$saisies = pipeline('ieconfig',array(
 			'args' => array(
@@ -190,8 +192,29 @@ function ieconfig_saisies_import() {
 			),
 			'data' => $saisies
 		));
-		// On identifie les éléments de config correspondant à des plugins non actifs
-		// Convention : les clés du tableau de config correspondent aux préfixes des plugins
+		
+		// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
+		foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+			if(isset($config[$prefixe]))
+				$saisies[] = array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => $prefixe,
+						'label' => isset($data['titre']) ? $data['titre'] : $prefixe,
+						'icone' => isset($data['icone']) ? $data['icone'] : ''
+					),
+					'saisies' => array(
+						array(
+							'saisie' => 'oui_non',
+							'options' => array(
+								'nom' => 'import_'.$prefixe,
+								'label' => _T('ieconfig:label_importer'),
+								'defaut' => ''
+							)
+						)
+					)
+				);
+		}
 	}
 	return $saisies;
 }
@@ -242,14 +265,12 @@ function formulaires_ieconfig_import_traiter_dist() {
 		if (isset($config['spip_contenu']) && _request('spip_contenu_importer')=='on') {
 			foreach($config['spip_contenu'] as $nom => $valeur)
 				ecrire_meta($nom,$valeur);
-			ecrire_metas();
 		}
 		
 		// Le fichier contient-il une configuration pour l'ongler interactivité
 		if (isset($config['spip_interactivite']) && _request('spip_interactivite_importer')=='on') {
 			foreach($config['spip_interactivite'] as $nom => $valeur)
 				ecrire_meta($nom,$valeur);
-			ecrire_metas();
 		}
 		
 		// On passe via le pipeline ieconfig
@@ -260,6 +281,22 @@ function formulaires_ieconfig_import_traiter_dist() {
 			),
 			'data' => ''
 		));
+		
+		// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
+		foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+			if(_request('import_'.$prefixe)=='on' && isset($config[$prefixe])) {
+				if(isset($data['metas_brutes']))
+					foreach(explode(',',$data['metas_brutes']) as $meta)
+						if (isset($config[$prefixe][$meta]))
+							ecrire_meta($meta,$config[$prefixe][$meta]);
+				if(isset($data['metas_serialize']))
+					foreach(explode(',',$data['metas_serialize']) as $meta)
+						if (isset($config[$prefixe][$meta]))
+							ecrire_meta($meta,serialize($config[$prefixe][$meta]));
+			}
+		}
+		
+		ecrire_metas();
 		
 		if ($message_erreur!='')
 			return array('message_erreur' => $message_erreur);

@@ -129,6 +129,27 @@ function ieconfig_saisies_export() {
 		),
 		'data' => $saisies
 	));
+	// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
+	foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+		$saisies[] = array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => $prefixe,
+				'label' => isset($data['titre']) ? $data['titre'] : $prefixe,
+				'icone' => isset($data['icone']) ? $data['icone'] : ''
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'export_'.$prefixe,
+						'label' => _T('ieconfig:label_exporter'),
+						'defaut' => ''
+					)
+				)
+			)
+		);
+	}
 	return $saisies;
 }
 
@@ -249,6 +270,23 @@ function formulaires_ieconfig_export_traiter_dist() {
 		),
 		'data' => $export
 	));
+	
+	// Gestion des plugins utilisant $GLOBALS['ieconfig_metas']
+	foreach($GLOBALS['ieconfig_metas'] as $prefixe => $data){
+		if(_request('export_'.$prefixe)=='on') {
+			$export_plugin = array();
+			if(isset($data['metas_brutes']))
+				foreach(explode(',',$data['metas_brutes']) as $meta)
+					if (isset($GLOBALS['meta'][$meta]))
+						$export_plugin[$meta] = $GLOBALS['meta'][$meta];
+			if(isset($data['metas_serialize']))
+				foreach(explode(',',$data['metas_serialize']) as $meta)
+					if (isset($GLOBALS['meta'][$meta]))
+						$export_plugin[$meta] = unserialize($GLOBALS['meta'][$meta]);
+			if (count($export_plugin)>0)
+				$export[$prefixe] = $export_plugin;
+		}
+	}
 	
 	// On encode en yaml
 	include_spip('inc/yaml');

@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_sauvegarder' => 'Sauvegarder le fichier',
 	'item_telecharger' => 'T&eacute;l&eacute;charger le fichier',
 	'label_elements_a_exporter' => '&Eacute;l&eacute;ments &agrave; exporter&nbsp;:',
+	'label_exporter' => 'Exporter&nbsp;?',
 	'label_ieconfig_export' => 'Options g&eacute;n&eacute;rales d\'export',
 	'label_ieconfig_export_choix' => 'Que souhaitez-vous&nbsp;?',
 	'label_ieconfig_export_description' => 'Description&nbsp;:',
