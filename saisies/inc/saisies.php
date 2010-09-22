@@ -852,6 +852,9 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							case 'fieldset':
 								$class_li = 'fieldset_'.$saisie['options']['nom'];
 								break;
+							case 'explication':
+								$class_li = 'explication_'.$saisie['options']['nom'];
+								break;
 							default:
 								$class_li = 'editer_'.$saisie['options']['nom'];
 						}
