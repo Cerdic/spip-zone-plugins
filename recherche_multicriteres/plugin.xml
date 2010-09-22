@@ -19,14 +19,7 @@
 		<strong>This plugin requires cfg v 1.3.8 or higher.</strong>
 		</multi>
 	</description>
-	<lien>
-	<multi>
-		[fr]Documentation et Installation : <a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
-		title="Aller &agrave; la documentation" >TiSpiP-sKeLeT</a>
-		[en]Documentation and Installation :<a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
-		title="Information and Documentation">TiSpiP-sKeLeT</a>
-	</multi>
-	</lien>
+	<lien>http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189</lien>
 	<version>0.1</version>
 	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
