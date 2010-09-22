@@ -7,21 +7,5 @@ function contact_header_prive($flux){
 	return $flux;
 }
 
-function contact_ajouter_boutons($boutons_admin) {
-	// On vérifie s'il faut enregistrer les contacts.
-	if (lire_config('contact/sauvegarder_contacts')) {
-		$menu='auteurs';
-		$icone='contact-24.png';
-		if (isset($boutons_admin['outils_collaboratifs'])){
-			$menu = "outils_collaboratifs";
-			$icone = "contact-20.png";
-			}
-		$boutons_admin[$menu]->sousmenu['contact_messages'] = new Bouton(
-			_DIR_PLUGIN_CONTACT.'images/'.$icone,
-			_T('contact:msg_messagerie')
-		);
-	}
 
-	return ($boutons_admin);
-}
 ?>

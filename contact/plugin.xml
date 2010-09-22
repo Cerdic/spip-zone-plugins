@@ -23,10 +23,6 @@
 		<inclure>contact_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<inclure>contact_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/contact_tables.php</inclure>
 	</pipeline>
@@ -38,7 +34,18 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/contact_tables.php</inclure>
 	</pipeline>
-
+	
+	<bouton id='contact_message' parent='auteurs'>
+		<icone>images/contact-24.png</icone>
+		<titre>contact:msg_messagerie</titre>
+		<url>contact_messages</url>
+	</bouton>
+	<bouton id='contact_message' parent='bando_reactions'>
+		<icone>images/contact-20.png</icone>
+		<titre>contact:msg_messagerie</titre>
+		<url>contact_messages</url>
+	</bouton>
+	
 	<necessite id='SPIP' version="[2.0.0;]" />
 	<necessite id="cfg" version="[1.10.5;]" />
 	<necessite id="spip_bonux" version="[1.2;]" />
