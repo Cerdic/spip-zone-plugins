@@ -135,7 +135,7 @@
 	text-align: center;
 }
 .rainette_previsions_24h .contenu {width: 120px; border: 0; padding: 10px 0 10px 0; text-align: center; min-height: 20em;}
-*html .rainette_previsions_24h .contenu {height: 20em;}
+* html .rainette_previsions_24h .contenu {height: 20em;}
 .rainette_previsions_24h .icone {margin-bottom: 10px;}
 .rainette_previsions_24h .t_reelle {font-weight: bold; margin: 0 5px 10px 5px; min-height: 35px}
 .rainette_previsions_24h .resume {font-weight: bold; margin: 0 5px 10px 5px; min-height: 45px}
