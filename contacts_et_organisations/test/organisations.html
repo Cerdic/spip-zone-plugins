@@ -26,12 +26,26 @@
 		<td colspan="3">
 			<B_c>
 			<table summary="Contacts de #NOM" class="spip" width="100%">
-			<BOUCLE_c(CONTACTS){id_organisation}>
-			<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
-				<td>#NOM</td>
-				<td>#PRENOM</td>
-			</tr>
-			</BOUCLE_c>
+				<tr>
+					<th>Auteur</th>
+					<th>Nom</th>
+					<th>Prénom</th>
+					[(#PLUGIN{concurrences}|oui)
+					<th colspan="2">Revue</th>
+					<th colspan="2">Bulletin</th>
+					]
+				</tr>
+				<BOUCLE_c(CONTACTS){id_organisation}>
+				<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+					<td>#ID_AUTEUR</td>
+					<td>#NOM</td>
+					<td>#PRENOM</td>
+					[(#PLUGIN{concurrences}|oui)
+					<INCLURE{fond=test/col_revue}{id_auteur=#ID_AUTEUR}/>
+					<INCLURE{fond=test/col_bulletin}{id_auteur=#ID_AUTEUR}/>
+					]
+				</tr>
+				</BOUCLE_c>
 			</table>
 			</B_c>
 		</td>
