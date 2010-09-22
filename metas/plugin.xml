@@ -3,7 +3,7 @@
 	<version>1.2</version>
 	<version_base>1.0</version_base>
 	<etat>stable</etat>
-	<icon>icon.png</icon>
+	<icon>images/metas-24.png</icon>
 	<auteur>[Quentin de Serres-Justiniac->http://www.spip-contrib.net/?auteur10451]
 _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
 	<description>Gestion des m&eacute;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.</description>
@@ -23,7 +23,7 @@ _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-
 		<inclure>metas.php</inclure>
 	</pipeline>
 	<onglet id="metas" parent="configuration">
-		<icone>icon.png</icone>
+		<icone>images/metas-24.png</icone>
 		<titre>metas:configuration_metas</titre>
 	</onglet>
 	<install>base/metas_install.php</install>
