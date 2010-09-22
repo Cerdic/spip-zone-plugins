@@ -4,6 +4,7 @@ var forms_css_link,forms_css_cur_link={},forms_root;
 forms_css_link = {"cursor":"pointer","margin":"2px 5px","float":"left"};
 $.extend(forms_css_cur_link,forms_css_link);
 $.extend(forms_css_cur_link,{fontWeight:"bold"});
+var forms_fields_selector = 'input[id^=nom],textarea[id^=nom]';
 
 function forms_init_lang() {
 	//Detect if we're on the right page and if multilinguism is activated. If not return.
@@ -39,7 +40,7 @@ function forms_change_lang(el,container,target) {
 	lang = lang.slice(1,-1);
 	//store the fields inputs for later use (usefull for select)
 	var target_name = target!=forms_forms?target[0].nom_champ.id:"undefined";
-	if(!forms_fields[target_name]) forms_fields[target_name] = $('input[id^="nom_"]',target);
+	if(!forms_fields[target_name]) forms_fields[target_name] = $(forms_fields_selector,target);
 	//save the current values
 	forms_fields[target_name].each(function(){
 		forms_save_lang(this,this.form.form_lang);
@@ -55,12 +56,12 @@ function forms_init_multi(target) {
 	//Update the list of form if this is an update
 	if(target) forms_forms.add($("div.forms_champs form",target).get());
 	forms_fields = {};
-	forms_fields["undefined"] = $('input[id^="nom_"]',forms_forms);
+	forms_fields["undefined"] = $(forms_fields_selector,forms_forms);
 	//store the fields of the target if any
 	var init_forms = target?$("div.forms_champs form",target):forms_forms;
 	//init the value of the field to current lang
 	init_forms.each(function() { this.form_lang = forms_def_lang; }); 
-	$('input[id^="nom_"]',init_forms).each(function(){
+	$(forms_fields_selector,init_forms).each(function(){
 		forms_init_field(this,this.form.form_lang);
 	});
 	//create menu for each form. The menu is just before the form
@@ -127,7 +128,7 @@ function forms_multi_submit(params) {
 	//remove the current menu lang container from the list
 	forms_containers.not($(this).prev());
 	//build the input values
-	$('input[id^="nom_"]',this).each(function(){
+	$(forms_fields_selector,this).each(function(){
 		//save data before submit
 		forms_save_lang(this,form.form_lang || forms_def_lang);
 		//build the string value
