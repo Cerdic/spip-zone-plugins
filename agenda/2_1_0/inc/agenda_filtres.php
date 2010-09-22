@@ -98,7 +98,28 @@ function agenda_dateplus($date,$secondes,$format){
 	return date($format,$date);
 }
 
-function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
+/**
+ * Ajoute un evenement dans un buffer, comme le filtre agenda_memo,
+ * mais en prenant une date de debut et de fin de l'evenement.
+ * 
+ * La liste est retournee et videe par un appel vide a cette fonction
+ * (voir le filtre agenda_mini)
+ *
+ * @param string $date_deb Date de debut de l'evenement '2010-10-09 13:30:00'
+ * @param string $date_fin Date de fin de l'evenement
+ * @param string $titre Titre de l'evenement
+ * @param string $descriptif Descriptif de l'evenement
+ * @param string $lieu Lieu de l'evenement
+ * @param string $url URL du lien
+ * @param string $cal ?
+ * @param string $var_date
+ * 	Inserer la date du jour parcouru dans l'URL du lien (de chaque evenement).
+ * 	Passer pour cela le nom de la variable a utiliser
+ * (typiquement, #ENV{var_date} avec le mini-calendrier).
+ * 
+ * @return
+**/
+function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='', $var_date='')
 {
 	static $agenda = array();
 	if (!$date_deb) {
@@ -116,15 +137,17 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 	$ts_startday1=strtotime($startday1);
 	$ts_date_fin=strtotime($date_fin);
 	$maxdays=365;
-	while (($ts_startday1<=$ts_date_fin)&&($maxdays-->0))
+	$d1 = date('Y-m-d', strtotime($date_deb));
+	
+	while (($ts_startday1 <= $ts_date_fin) && ($maxdays-- > 0))
 	{
 		$day=date('Y-m-d H:i:s',$ts_startday1);
-		$d1 = date('Y-m-d', strtotime($date_deb));
 		$d2 = date('Y-m-d', $ts_startday1);
-		$newurl = $url;
-		// On remplace les dates nommees:
-		$newurl = str_replace("date=courante","date=$d2","$newurl");
-		$newurl = str_replace("date=debut","date=$d1","$newurl");
+		
+		if ($var_date) {
+			$url = parametre_url($url, $var_date, $d2);
+		}
+		
 		// element a ajouter:
 		$a2 = array (
 			     'CATEGORIES' => $cal,
@@ -133,12 +156,12 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 			     'DESCRIPTION' => $descriptif,
 			     'SUMMARY' => $titre,
 			     'LOCATION' => $lieu,
-			     'URL' => $newurl);
+			     'URL' => $url);
 		//DEBUG echo "\n<!-- ";
 		//DEBUG echo "" . sprintf("d1=%s d2=%s",$d1,$d2) . "";
 		// On extrait la bonne liste:
 		$tab = (array)$agenda[$cal][(date_anneemoisjour($day))];
-		// si la date de debut de l'�l�ment est exactement la
+		// si la date de debut de l'element est exactement la
 		// date du jour courant ET qu'il y a deja des
 		// evenements, on met l'element a ajouter en premier
 		// dans la liste; sinon on l'ajoute a la fin comme
@@ -160,6 +183,7 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 	// toujours retourner vide pour qu'il ne se passe rien
 	return "";
 }
+
 
 function agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
