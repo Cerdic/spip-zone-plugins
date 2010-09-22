@@ -68,7 +68,7 @@
 	'gestion_des_banques' => 'Gestion des banques',
 	'gestion_de_lassoc' => 'Gestion de l\'association',
 	'ID' => 'ID',
-	'info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons, des ventes associatives, des inscriptions aux activit&eacute;s, des pr&ecirc;ts de mat&eacute;riels et autres ressources, et tenir une livre de comptes.</p>',
+	'info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons, des ventes associatives, des inscriptions aux activit&eacute;s, des pr&ecirc;ts de mat&eacute;riels et autres ressources, et tenir un livre de comptes.</p>',
 	'message_relance' => '
 Bonjour,
 		
@@ -419,7 +419,6 @@ Commentaire: @commentaire@
 'classe' => 'Classe',
 'code' => 'Code :',
 'code_de_l_article' => 'Code de l\'article',
-'code' => 'Code',
 'colis' => 'Colis',
 'commentaires' => 'Commentaires',
 'compte_active' => 'Compte activ&eacute; :',
@@ -450,7 +449,7 @@ Commentaire: @commentaire@
 'gestion_pour_association' => 'Gestion pour Association',
 'id' => 'ID',
 'imputation' => 'Imputation :',
-'intitule' => 'Intitul&eacute;',
+'intitule' => 'Intitul&eacute; :',
 'justification' => 'Justification',
 'libelle_complet' => 'Libell&eacute; complet',
 'membre' => 'Membre',
