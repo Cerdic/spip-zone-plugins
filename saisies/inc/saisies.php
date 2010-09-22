@@ -836,15 +836,15 @@ function saisies_generer_aide(){
  * pour produire un affichage conditionnel des saisies avec une option afficher_si.
  *
  * @param array $saisies Un tableau de saisies
- * @param string $form Nom du formulaire
+ * @param string $id_form Un identifiant unique pour le formulaire
  * @return text
  */
-function saisies_generer_js_afficher_si($saisies,$form){
+function saisies_generer_js_afficher_si($saisies,$id_form){
 	$i = 0;
 	$saisies = saisies_lister_par_nom($saisies,true);
-	
-	$code = '$(document).ready(function(){';
-		$code .= 'verifier_saisies = function(form){';
+	$code = '';
+	$code .= '$(document).ready(function(){';
+		$code .= 'verifier_saisies_'.$id_form.' = function(form){';
 				foreach ($saisies as $saisie) {
 					if (isset($saisie['options']['afficher_si'])) {
 						$i++;
@@ -872,10 +872,9 @@ function saisies_generer_js_afficher_si($saisies,$form){
 					}
 				}
 		$code .= '};';
-		$code .= '$(".formulaire_'.$form.' form").each(function(){verifier_saisies(this);});';
-		$code .= '$(".formulaire_'.$form.' form").change(function(){verifier_saisies(this);});';
+		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").each(function(){verifier_saisies_'.$id_form.'(this);});';
+		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").change(function(){verifier_saisies_'.$id_form.'(this);});';
 	$code .= '});';
-	
 	return $i>0 ? $code : '';
 }
 

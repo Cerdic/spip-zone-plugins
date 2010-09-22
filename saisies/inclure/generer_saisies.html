@@ -42,8 +42,11 @@
 </BOUCLE_contenu>
 
 [(#REM) Ajout du script js pour l'option si des saisies ]
-<BOUCLE_afficher_si(CONDITION){si #ENV{from_fieldset}|non|et{#ENV{form}}}>
+<BOUCLE_afficher_si(CONDITION){si #ENV{from_fieldset}|non}>
+	[(#REM) Ajout d'un marqueur unique pour identifier le formulaire]
+	[(#SET{id_unique,#EVAL{'rand();'}})]
+	<li id="afficher_si_#GET{id_unique}" style="display:none;" ></li>
 	<script type="text/javascript">// <![CDATA[
-	[(#ENV**{saisies}|saisies_generer_js_afficher_si{#ENV{form}})]
+	[(#ENV**{saisies}|saisies_generer_js_afficher_si{#GET{id_unique}})]
 	 //]]></script>
 </BOUCLE_afficher_si>
