@@ -13,10 +13,9 @@
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_licence})</span>]
 				<select name="id_licence" id="id_licence"[(#ENV{editable}|non)readonly="true"]>
 				<option value="0"[(#ENV{id_licence,#CONFIG{licence/licence_defaut}}|=={0}|oui) selected="selected"]><:licence:sans_licence:></option>
-				<BOUCLE_selection(POUR){tableau #ENV{licences}}>
-					<BOUCLE_id_licence(POUR){tableau #VALEUR}{cle=id}>#SET{id_licence,#VALEUR}</BOUCLE_id_licence>
-					<BOUCLE_name_licence(POUR){tableau #VALEUR}{cle=name}>#SET{name_licence,#VALEUR}</BOUCLE_name_licence>
-					<option value="#GET{id_licence}"[(#GET{id_licence}|=={#ENV{id_licence,#CONFIG{licence/licence_defaut}}}|oui) selected="selected"]>#GET{name_licence}</option>
+				<BOUCLE_selection(POUR){tableau #ENV{_licences}}>
+					#SET{id_licence,#VALEUR|table_valeur{id}}
+					<option value="#GET{id_licence}"[(#GET{id_licence}|=={#ENV{id_licence,#CONFIG{licence/licence_defaut}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{name})][ - (#VALEUR|table_valeur{description})]</option>
 				</BOUCLE_selection>
 				</select>
 				[(#ENV{editable}|non)<input type='hidden' name='id_licence' value='#ENV{id_licence}' />]

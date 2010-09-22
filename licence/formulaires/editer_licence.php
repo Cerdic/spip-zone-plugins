@@ -7,7 +7,7 @@ function formulaires_editer_licence_charger_dist($id_article='new', $retour=''){
 	
 	$id_licence = sql_getfetsel('id_licence','spip_articles','id_article='.intval($id_article));
 	
-	$valeurs['licences'] = $GLOBALS['licence_licences'];
+	$valeurs['_licences'] = $GLOBALS['licence_licences'];
 	$valeurs['id_licence'] = $id_licence;
 	$valeurs['id_article'] = $id_article;
 	$valeurs['editable'] = true;
