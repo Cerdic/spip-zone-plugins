@@ -2,13 +2,14 @@
 	<nom>Dublin Core</nom>
 	<categorie>statistique</categorie>
 	<auteur>Tony Gheeraert, Ma&#239;eul Rouquette, Joseph</auteur>
-	<version>1.2.1</version>
+	<version>1.3</version>
 	<etat>stable</etat>
 	<description>Des Dublins Core pour vos articles, configurables avec le plugin CFG.</description>
 	<lien>http://www.spip-contrib.net/Dublin-Core</lien> <!-- URI de documentation -->
 	<prefix>dublin_core</prefix>
 	<icon>images/dublin_core-48.png</icon>
 	<fonctions>dublin_core_fonctions.php</fonctions>
+	<options>dublin_core_options.php</options>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>dublin_core_pipelines.php</inclure>
