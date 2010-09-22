@@ -843,7 +843,7 @@ function saisies_generer_js_afficher_si($saisies){
 	$saisies = saisies_lister_par_nom($saisies,true);
 	
 	$code = '$(document).ready(function(){';
-		$code .= 'verifier_saisie = function(){';
+		$code .= 'verifier_saisies = function(form){';
 				foreach ($saisies as $saisie) {
 					if (isset($saisie['options']['afficher_si'])) {
 						$i++;
@@ -860,19 +860,19 @@ function saisies_generer_js_afficher_si($saisies){
 							switch($saisies[$nom]['saisie']) {
 								case 'radio':
 								case 'oui_non':
-									$condition = preg_replace('#@'.$nom.'@#U', '$("[name=\''.$nom.'\']:checked").val()', $condition);
+									$condition = preg_replace('#@'.$nom.'@#U', '$(form).find("[name=\''.$nom.'\']:checked").val()', $condition);
 									break;
 								default:
-									$condition = preg_replace('#@'.$nom.'@#U', '$("[name=\''.$nom.'\']").val()', $condition);
+									$condition = preg_replace('#@'.$nom.'@#U', '$(form).find("[name=\''.$nom.'\']").val()', $condition);
 							}
 						}
-						$code .= 'if ('.$condition.') {$("li.'.$class_li.'").show(400);} ';
-						$code .= 'else {$(".'.$class_li.'").hide(400);} ';
+						$code .= 'if ('.$condition.') {$(form).find("li.'.$class_li.'").show(400);} ';
+						$code .= 'else {$(form).find(".'.$class_li.'").hide(400);} ';
 					}
 				}
 		$code .= '};';
-		$code .= 'verifier_saisie();';
-		$code .= '$("form").change(function(){verifier_saisie();});';
+		$code .= '$("form").each(function(){verifier_saisies(this);});';
+		$code .= '$("form").change(function(){verifier_saisies(this);});';
 	$code .= '});';
 	
 	return $i>0 ? $code : '';
