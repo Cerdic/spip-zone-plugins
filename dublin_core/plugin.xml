@@ -9,10 +9,13 @@
 	<prefix>dublin_core</prefix>
 	<icon>images/dublin_core-48.png</icon>
 	<fonctions>dublin_core_fonctions.php</fonctions>
-	<options>dublin_core_options.php</options>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>dublin_core_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>dublin_core_ieconfig_metas.php</inclure>
 	</pipeline>
 	<utilise id="cfg" />
 	<necessite id="SPIP" version="[2.1.0;]" />
