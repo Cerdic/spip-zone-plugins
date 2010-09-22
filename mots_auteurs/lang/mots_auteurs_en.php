@@ -5,10 +5,12 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'info_auteurs' => 'Authors',
-	'item_mots_cles_association_auteurs' => 'authors',
 	'icone_creer_mot_cle_auteur' => 'Create a new keyword and link it to this author',
-	
+	'info_auteurs' => 'Authors',
+	'info_nombre_auteurs' => '@nb@ auteurs',
+	'info_un_auteur' => '1 auteur',
+	'item_mots_cles_association_auteurs' => 'authors',
+		
 	// L
 	'liste_mots' => 'List of keywords avialable for this author.',
 
