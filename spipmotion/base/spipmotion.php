@@ -38,7 +38,7 @@ function spipmotion_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_documents']['field']['duree'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['hasvideo'] = "VARCHAR(3) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['framecount'] = "INTEGER";
-	$tables_principales['spip_documents']['field']['framerate'] = "INTEGER";
+	$tables_principales['spip_documents']['field']['framerate'] = "FLOAT";
 	$tables_principales['spip_documents']['field']['pixelformat'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['bitrate'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['videobitrate'] = "INTEGER";

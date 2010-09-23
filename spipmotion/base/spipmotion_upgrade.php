@@ -97,6 +97,10 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			suivre_invalideur("1");
 			ecrire_meta($nom_meta_base_version,$current_version='0.7.3');
 		}
+		if (version_compare($current_version,'0.7.4','<')){
+			sql_alter("TABLE spip_documents CHANGE `framerate` `framerate` FLOAT");
+			ecrire_meta($nom_meta_base_version,$current_version='0.7.4');
+		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/
 		 * TODO : insérer une préconfiguration par défaut
