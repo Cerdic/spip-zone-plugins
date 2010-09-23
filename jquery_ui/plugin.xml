@@ -3,7 +3,10 @@
 	<auteur>jQuery Team</auteur>
 	<version>1.8.4</version>
 	<etat>stable</etat>
-	<description>jQuery UI pour SPIP.</description>
+	<description><multi>
+		[fr]jQuery UI pour SPIP.
+		[en]jQuery UI for SPIP.
+	</multi></description>
 	<lien></lien>
 	<prefix>jqueryui</prefix>
 	<icon>images/jqueryui.png</icon>
