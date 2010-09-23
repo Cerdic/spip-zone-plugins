@@ -126,7 +126,7 @@ function compositions_affiche_milieu($flux){
 			$deplie = false;
 			$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
 			$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
-			$flux['data'] .= debut_cadre('e', chemin('compositions-24.gif','images/'),'',$bouton, '', '', true);
+			$flux['data'] .= debut_cadre('e', chemin('compositions-24.png','images/'),'',$bouton, '', '', true);
 			$flux['data'] .= recuperer_fond('prive/editer/compositions', array_merge($_GET, array('type'=>$type,'id'=>$id)));
 			$flux['data'] .= fin_cadre();
 		}
