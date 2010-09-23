@@ -19,11 +19,17 @@ function mots_auteurs_upgrade($nom_meta_base_version, $version_cible){
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
+	// documents...
+	if (version_compare($current_version,"0.2","<")){
+		creer_base();
+		ecrire_meta($nom_meta_base_version,$current_version="0.2");
+	}
 
 }
 function mots_auteurs_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_mots_auteurs");
+	sql_drop_table("spip_mots_documents");
 	effacer_meta($nom_meta_base_version);
 }
 

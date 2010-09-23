@@ -14,6 +14,10 @@ function autoriser_auteur_editermots_dist($faire,$quoi,$id,$qui,$opts) {
 	return autoriser_rubrique_editermots_dist($faire, 'auteur', 0, $qui, $opts);
 }
 
+function autoriser_document_editermots_dist($faire,$quoi,$id,$qui,$opts) {
+	return autoriser_rubrique_editermots_dist($faire, 'document', 0, $qui, $opts);
+}
+
 
 
 ?>

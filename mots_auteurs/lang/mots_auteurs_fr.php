@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_auteurs' => '@nb@ auteurs',
 	'info_un_auteur' => '1 auteur',
 	'item_mots_cles_association_auteurs' => 'aux auteurs',
+	'item_mots_cles_association_documents' => 'aux documents',
 		
 	// L
 	'liste_mots' => 'Liste des mots cl&eacute; attribu&eacute;s &agrave; cet auteur.',

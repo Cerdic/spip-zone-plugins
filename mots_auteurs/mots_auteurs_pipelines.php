@@ -8,7 +8,6 @@
  */
 
 
-
 /**
  * Ajout du bloc d'attribution de mot-clé
  * sur la page de visualisation d'un auteur
@@ -18,7 +17,10 @@ function mots_auteurs_affiche_milieu($flux) {
 	static $ou = array(
 		'auteur_infos' => array(
 			'objet' => 'auteur',
-		)
+		),
+		'documents_edit' => array(
+			'objet' => 'document',
+		),
 	);
 	
 	// si on est sur une page ou il faut inserer les mots cles...
@@ -87,6 +89,7 @@ function mots_objets_ajouter_selecteur_mots($objet, $id_objet, $opt = array()) {
 // Ajout de l'objet de type auteur
 function mots_auteurs_libelle_association_mots($flux){
 	$flux['auteur'] = 'auteurs_mots:info_mots_auteurs_libelle_annonce';
+	$flux['document'] = 'auteurs_mots:info_mots_documents_libelle_annonce';
 	return $flux;
 }
 
@@ -95,7 +98,8 @@ function mots_auteurs_libelle_association_mots($flux){
 function mots_auteurs_editer_contenu_objet($flux){
 
 	$liste = array(
-		'auteurs' => _T('mots_auteurs:item_mots_cles_association_auteurs'),
+		'auteurs'   => _T('mots_auteurs:item_mots_cles_association_auteurs'),
+		'documents' => _T('mots_auteurs:item_mots_cles_association_documents'),
 	);
 		
 	// Concernant le formulaire CVT 'editer_groupe_mot', on veut faire apparaitre l'objet auteurs
@@ -125,6 +129,10 @@ function mots_auteurs_afficher_nombre_objets_associes_a($flux){
 		'auteurs' => array(
 			'singulier' => "mots_auteurs:info_un_auteur",
 			'pluriel'   => "mots_auteurs:info_nombre_auteurs",
+		),
+		'documents' => array(
+			'singulier' => "gestdoc:un_document", //"mediatheque:un_document",
+			'pluriel'   => "gestdoc:des_documents", //"mediatheque:des_documents",
 		)
 	);
 	

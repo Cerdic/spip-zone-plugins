@@ -1,18 +1,14 @@
 <plugin>
 	<nom><multi>[fr]Mots Auteurs[en]Authors key-words</multi></nom>
-	
 	<auteur>Cyril Marion - [Ateliers CYM->http://www.cym.fr]</auteur>
 	
 	<icon>images/tag_purple-32.png</icon>
 	
 	<licence>GNU/GPL</licence>
-	
-	<version>0.1.2</version>
-	
-	<version_base>0.1</version_base>
+	<version>0.2.0</version>
+	<version_base>0.2</version_base>
 	
 	<etat>dev</etat>
-	
 	<lien></lien>
 	
 	<description>
@@ -27,7 +23,7 @@
 	<install>base/mots_auteurs_upgrade.php</install>
 	
 	<pipeline>
-		<nom>declarer_tables_principales</nom>
+		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/mots_auteurs_tables.php</inclure>
 	</pipeline>	
 	
@@ -53,6 +49,7 @@
 		<nom>affiche_milieu</nom>
 		<inclure>mots_auteurs_pipelines.php</inclure>
 	</pipeline>
+	
 
 	<!-- proposer un checkbox auteurs sur la page des groupes de mots-->
 	<pipeline>
@@ -68,6 +65,6 @@
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
 
-	<categorie>outil</categorie>
+	<categorie>navigation</categorie>
 
 </plugin>
