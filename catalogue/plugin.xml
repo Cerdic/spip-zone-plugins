@@ -15,10 +15,10 @@
 	<multi>
 		[fr] Transforme les articles SPIP en articles de catalogue. Permet de saisir plusieurs variantes d'un m&ecirc;me produit. Permet d'indiquer des prix HT ou TTC, et permet d'ajouter des options.
 		
-		Il utilise le plugin [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des s&eacute;lections d'articles.
+		Il utilise le plugin [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts_et_organisations.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des s&eacute;lections d'articles.
 		[en]Transforms SPIP articles in catalogue articles. Allows to edit several variants of a product. Allows to indicate prices with or without taxes, and add options.
 		
-		This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
+		This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts_et_organisations.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
 	</multi>
 	</description>
 
