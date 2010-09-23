@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_articles' => 'Liste de tous les articles du site ayant le statut d\'article de catalogue.',
 	
 	// N
+	'nom_plugin' => 'Catalogue',
 	'neant' => 'n&eacute;ant',
 	
 	// M

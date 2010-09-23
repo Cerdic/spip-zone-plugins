@@ -6,7 +6,7 @@
 
 	<version>1.0.4</version>
 	
-	<version_base>1.3.1</version_base>
+	<version_base>1.3</version_base>
 	
 	<etat>test</etat>
 	
@@ -15,17 +15,15 @@
 	<multi>
 		[fr] Transforme les articles SPIP en articles de catalogue. Permet de saisir plusieurs variantes d'un m&ecirc;me produit. Permet d'indiquer des prix HT ou TTC, et permet d'ajouter des options.
 		
-		Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/spip-zone/comptes.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des s&eacute;lections d'articles.
+		Il utilise le plugin [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des s&eacute;lections d'articles.
 		[en]Transforms SPIP articles in catalogue articles. Allows to edit several variants of a product. Allows to indicate prices with or without taxes, and add options.
 		
-		This plugin requires [Comptes &amp; Contacts->http://files.spip.org/spip-zone/comptes.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
+		This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
 	</multi>
 	</description>
 
-	<lien>[Un exemple de conf&eacute;rence en ligne->http://events.concurrences.com/article2.html?var_mode=recalcul]</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Catalogue</lien>
 	
-	<lien>[Un exemple de voyage en ligne->http://tsc.cym.fr/spip.php?page=transaction&env]</lien>
-
 	<icon>img/picto_catalogue_128x128.png</icon>
 
 	<prefix>catalogue</prefix>
@@ -52,9 +50,15 @@
 	
 	<options>catalogue_options.php</options>
 	
+	<!-- les boutons dans l'interface d'admin -->
 	<bouton id='catalogue' parent='naviguer'>
 		<icone>img/picto_catalogue_32x32.png</icone>
 		<titre>catalogue:catalogue</titre>
+		<url>catalogue</url>
+	</bouton>
+	<bouton id='catalogue21' parent='bando_edition'>
+		<icone>img/picto_catalogue_16x16.png</icone>
+		<titre>catalogue:nom_plugin</titre>
 		<url>catalogue</url>
 	</bouton>
 

@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_prix' => 'Detailed prices for this formula',
 	
 	// N
+	'nom_plugin' => 'Catalogue',
 	'neant' => 'none',
 	
 	// O

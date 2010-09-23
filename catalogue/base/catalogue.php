@@ -42,7 +42,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"id_variante" 	=> "bigint(21) NOT NULL auto_increment",
 		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "TEXT DEFAULT '' NOT NULL",
+		"descriptif" 	=> "text DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
 		"prix_ht" 		=> "decimal(6,2) default NULL",
 		"tva"			=> "decimal(4,3) default '0.196'",
@@ -62,7 +62,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 	$options = array(
 		"id_option" 	=> "bigint(21) NOT NULL auto_increment",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "TEXT DEFAULT '' NOT NULL",
+		"descriptif" 	=> "text DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
 		"prix_ht" 		=> "decimal(6,2) default 0",
 		"tva"			=> "decimal(4,3) default '0.196'",
@@ -118,7 +118,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 	 * chaque ligne comporte :
 	 * - un id_variante (qui remontre à l'id_article)
 	 * - une quantité (quantité de cette variante)
-	 * - un prix unitaire HT (qui restera fixe pour cette ransaction, malgré les évolutions potentielles du montant de la variante)
+	 * - un prix unitaire HT (qui restera fixe pour cette transaction, malgré les évolutions potentielles du montant de la variante)
 	 * - un taux de tva applicable (pour cette transaction)
 	 * exemples de ligne :
 	 * - 1 inscription tarif "professeur" à 250€ HT, TVA 19.6 (si client en France)
