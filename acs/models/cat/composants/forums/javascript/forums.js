@@ -1,8 +1,8 @@
 
 jQuery(document).ready(
   function() {
-		jQuery(".page_article div#formulaire_forum").hide();
-		jQuery("#Layer0.forum_layer").attr("style","display:none");
+		jQuery(".cArticle div.formulaire_forum").hide();
+		jQuery("#Layer0cmd").not(".open").click();
 		jQuery("a#forum_repondre").click(function(e){
 			e.preventDefault();
 			jQuery("div#formulaire_forum:visible").slideUp("slow");

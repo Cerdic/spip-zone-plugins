@@ -1,9 +1,11 @@
 #CACHE{0}
+[(#REM) 
 
-[(#REM) Habillage des forums ]
-ul.forum { display: block; clear: both; margin: 0; padding: 0; }
+Habillage des forums
+
+]ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-total {margin: 0; padding: 0;}
-.forum-fil { margin-top: 2px; margin-left: 1em; margin-right: 1px; font-weight: normal;}
+.forum-fil { margin-top: 2px; margin-left: 1em; margin-right: 0; font-weight: normal;}
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
 .forum-chapo .forum-titre { display: block; margin: 0; padding: 0; font-weight: bold; text-decoration: none; color: #VAR{acsFondText,#333}; }
 .forum-chapo small {}
@@ -11,21 +13,26 @@ ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-texte .forum-lien {}
 .forum-texte .forum-repondre-message { margin: 0; padding: 0; text-align: right}
 .forum-item {padding-bottom: 10px;}
-[(#REM) Boite d'un forum : eclaircissement progressif des bords ]
-ul .forum-message { border: [(#VAR{acsForumsBord/Width,thin}) ][(#VAR{acsForumsBord/Style,solid}) ] #VAR{acsForumsBord/Color,#666}; margin: 0; padding: 0; margin-bottom: 2px; }
-ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#A4A4A4}; }
-ul ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#B8B8B8}; }
-ul ul ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#CCC}; }
-ul ul ul ul ul .forum-message { border: thin solid #VAR{acsForumsBord/Color,#E0E0E0}; }
-ul ul ul ul ul ul .forum-message { border: thin dotted #VAR{acsForumsBord/Color,#E0E0E0}; }
+[(#REM)
 
-[(#REM) Boite de titre d'un forum : mise en couleur selon la profondeur du forum ]
-ul .forum-chapo { border: none; border-bottom: 1px dotted #VAR{acsForumsBord,#B8B8B8}; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: #VAR{acsForumsFond1,#C4E0E0}; }
-ul ul .forum-chapo { background: #VAR{acsForumsFond2,#D4E8E8};}
-ul ul ul .forum-chapo { background: #VAR{acsForumsFond3,#E4F0F0};}
-ul ul ul ul .forum-chapo { background: #VAR{acsForumsFond4,#F4F8F8};}
-ul ul ul ul ul .forum-chapo { background: #VAR{acsForumsFond5,#FFF};}
-ul ul ul ul ul ul .forum-chapo { background: #VAR{acsForumsFond6,#FFF};}
+Boite d'un forum : eclaircissement ou assombrissement progressif des bords
+
+]ul .forum-message { [border: thin inset (#VAR{acsForumsFond1});] margin: 0; padding: 0; margin-bottom: 2px;}
+[ul ul .forum-message { border: thin inset (#VAR{acsForumsFond2});}]
+[ul ul ul .forum-message { border: thin inset (#VAR{acsForumsFond3});}]
+[ul ul ul ul .forum-message { border: thin inset (#VAR{acsForumsFond4});}]
+[ul ul ul ul ul .forum-message { border: thin inset (#VAR{acsForumsFond5});}]
+[ul ul ul ul ul ul .forum-message { border: thin inset (#VAR{acsForumsFond6});]}
+[(#REM)
+
+Boite de titre d'un forum : mise en couleur selon la profondeur du forum
+
+]ul .forum-chapo { border: none; border-bottom: thin dotted #VAR{acsForumsBord/Color,#B8B8B8}; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em;[ background: (#VAR{acsForumsFond1});]}
+[ul ul .forum-chapo { background: (#VAR{acsForumsFond2});}]
+[ul ul ul .forum-chapo { background: (#VAR{acsForumsFond3});}]
+[ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond4});}]
+[ul ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond5});}]
+[ul ul ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond6});}]
 
 .repondreaufil {
   font-size: 0.82em;
@@ -68,9 +75,13 @@ ul ul ul ul ul ul .forum-chapo { background: #VAR{acsForumsFond6,#FFF};}
 }
 [.blocForums .menu-item:hover, .blocForums .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
 .blocForums .pagination {
-  text-align: center;
   [background: (#VAR{acsForumsTitreFond});]
   [border-top: 1px solid (#VAR{acsRubnavSep});]
+  text-align: center;
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 0.65em;
 }
 
 

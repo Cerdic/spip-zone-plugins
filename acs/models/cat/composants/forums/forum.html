@@ -17,16 +17,18 @@ Variables :
 ][(#PARAMETRES_FORUM|?) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#STATUT|?{#SET{'statut',#STATUT},#SET{'statut','publie'}})]
 <BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}{statut==#GET{'statut'}}></BOUCLE_decompte>
-[<a class="repondreaufil" style="float: #LANG_RIGHT" href="#URL_ARTICLE&ouvrir=oui"><:lire_tous_les_messages:></a>
-<a name="forum" href="#forum" onclick="swap_couche('0', '','#ACS_CHEMIN{triangles/}'); return false;"><img id='triangle0' src='#ACS_CHEMIN{triangles/deplierbas.gif}' alt='' title='[(#ENV{ouvrir}|?{Déplier,Replier})]' width='10' height='10' border='0' /></a>
+[<a class="repondreaufil" style="float: #LANG_RIGHT" href="#URL_ARTICLE&ouvrir=oui#forum"><:lire_tous_les_messages:></a>
+<a name="forum" id="Layer0cmd"[(#ENV{ouvrir}|?{class="open"})] href="#forum" onclick="swap_couche('0', '','#ACS_CHEMIN{triangles/}'); return false;"><img id='triangle0' src='#ACS_CHEMIN{triangles/deplierbas.gif}' alt='' title='[(#ENV{ouvrir}|?{Déplier,Replier})]' width='10' height='10' border='0' /></a>
 	<a name="forum" href="#forum"  class="repondreaufil" onclick="swap_couche('0','','#ACS_CHEMIN{triangles/}'); return false;">
 		(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})[ (#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]
 	</a>][(#ENV{ouvrir}=={oui}|?{#SET{pg,#TOTAL_BOUCLE},#SET{pg,10}})]
- <//B_decompte>
- <B_forums>
+<//B_decompte>
+[(#REM)
  
+ Messages du forum
+  
+]<B_forums>
 [<span class="pagination" style="float:right">(#PAGINATION)</span>]
-[(#REM) Messages du forum ]
 <ul id="Layer0" class="forum[ (#ENV{ouvrir}!={oui}|?{forum_layer})]">
 	<BOUCLE_forums(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {par date} {inverse} {pagination #GET{pg}}{statut==#GET{statut}}>
 	<li class="forum-fil">
@@ -63,7 +65,7 @@ Variables :
 			   </BOUCLE_forums_fils>
 		   </ul>
 		   </B_forums_fils>
-      </div>
+    </div>
 	</li>
 	</BOUCLE_forums>
 </ul>
