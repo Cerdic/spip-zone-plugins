@@ -88,8 +88,8 @@ function mots_objets_ajouter_selecteur_mots($objet, $id_objet, $opt = array()) {
 
 // Ajout de l'objet de type auteur
 function mots_auteurs_libelle_association_mots($flux){
-	$flux['auteur'] = 'auteurs_mots:info_mots_auteurs_libelle_annonce';
-	$flux['document'] = 'auteurs_mots:info_mots_documents_libelle_annonce';
+	$flux['auteurs'] = 'mots_auteurs:objet_auteurs';
+	$flux['documents'] = 'gestdoc:objet_documents';
 	return $flux;
 }
 

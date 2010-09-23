@@ -40,7 +40,7 @@
 
 	<!-- pouvoir ajouter des mots-clé aux objets de type auteur -->
 	<pipeline>
-		<nom>libelle_associations_mots</nom>
+		<nom>libelle_association_mots</nom>
 		<inclure>mots_auteurs_pipelines.php</inclure>
 	</pipeline>	
 
