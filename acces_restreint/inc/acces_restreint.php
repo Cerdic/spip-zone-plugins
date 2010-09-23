@@ -134,6 +134,8 @@ function accesrestreint_liste_contenu_zone_auteur($id_zone) {
 function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL) {
 	// cache static
 	static $liste_rub_exclues = array();
+	static $liste_rub_inclues = array();
+	
 	$id_auteur = is_null($id_auteur)?$GLOBALS['visiteur_session']['id_auteur']:$id_auteur;
 	if (!isset($liste_rub_exclues[$id_auteur][$publique]) || !is_array($liste_rub_exclues[$id_auteur][$publique])) {
 
@@ -157,7 +159,41 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		$liste_rub_exclues[$id_auteur][$publique] = accesrestreint_liste_contenu_zone_rub($where);
 		#$liste_rub_exclues[$publique] = array_unique($liste_rub_exclues[$publique]);
 	}
-	return $liste_rub_exclues[$id_auteur][$publique];
+	$final_liste_rub_exclues = $liste_rub_exclues[$id_auteur][$publique];
+	
+	if (defined("AR_TYPE_RESTRICTION") AND AR_TYPE_RESTRICTION == "faible") {
+		// AR_TYPE_RESTRICTION définit le type de restriction pour traiter les elements communs à plusieurs zone
+		// Une restriction exclusive (ou forte) donne l'acces aux rubriques restreintes par 
+		// plusieurs zone aux seuls membres de toutes les zones concernees.
+		// Une restriction faible donne acces à une rubrique, même restreinte par 
+		// plusieurs zones, aux membres de chaque zone concernee.
+		// valeurs : 'faible', 'forte, ou 'exclusive'		
+		
+		if (!isset($liste_rub_inclues[$id_auteur][$publique]) OR !is_array($liste_rub_inclues[$id_auteur][$publique])) {
+
+			$where = array();
+			// Ne selectionner que les zones pertinentes
+			if ($publique)
+				$where[] = "publique='oui'";
+			else
+				$where[] = "privee='oui'";
+
+			// Calcul des rubriques dans des zones autorisees
+			include_spip('base/abstract_sql');
+			if ($GLOBALS['accesrestreint_zones_autorisees']
+			  AND $id_auteur==$GLOBALS['visiteur_session']['id_auteur'])
+				$where[] = sql_in('zr.id_zone',$GLOBALS['accesrestreint_zones_autorisees']);
+			elseif ($id_auteur)
+				$where[] = sql_in('zr.id_zone',accesrestreint_liste_zones_autorisees('',$id_auteur));
+
+			$liste_rub_inclues[$id_auteur][$publique] = accesrestreint_liste_contenu_zone_rub($where);
+		}
+
+		// Ne pas exclure les elements qui sont autorises
+		$final_liste_rub_exclues = array_diff($final_liste_rub_exclues,
+			array_intersect($final_liste_rub_exclues,$liste_rub_inclues[$id_auteur][$publique]));
+	}
+	return $final_liste_rub_exclues;
 }
 
 
