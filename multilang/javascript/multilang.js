@@ -134,9 +134,10 @@ function multilang_init_multi(options) {
 	//init the value of the field to current lang
 	//add a container for the language menu inside the form
 	init_forms.each(function() {
-		$(this).find('input.submit').click(function(){
-			$(this).parents('form').submit();
-			return false;
+		$(this).find('input[type=submit],button').click(function(){
+			$(this).parents('form').multilang_multi_submit();
+			//$(this).parents('form').submit();
+			//return false;
 		});
 		this.isfull = false;
 		this.form_lang = multilang_lang_courante;
@@ -587,8 +588,9 @@ function multilang_attach_submit() {
 	}else{
 		var oldsubmit = this.onsubmit;
 		this.onsubmit = "";
-		if(oldsubmit && oldsubmit != "")
+		if(oldsubmit && oldsubmit != ""){
 			$(this).submit(function(){multilang_multi_submit.apply(this);return oldsubmit.apply(this);});
+		}
 		else if(oldsubmit != "")
 			$(this).submit(multilang_multi_submit);
 	}
