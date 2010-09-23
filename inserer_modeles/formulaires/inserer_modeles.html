@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_inserer_modeles">
+[(#ENV{formulaire_modele}|non)<h3 class="titrem"><:inserer_modeles:titre_inserer_modeles:></h3>]
+[(#ENV{formulaire_modele}|oui)<h3 class="titrem"><:inserer_modeles:titre_inserer{modele=#ENV{nom}}:></h3>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form action="#ENV{action}" method="post"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<BOUCLE_deja_choisi(CONDITION){si #ENV{formulaire_modele}}>
+		[<textarea readonly="readonly" >(#ENV{code_modele})</textarea>]
+		<input type="hidden" name="formulaire_modele" value="#ENV{formulaire_modele}" />
+		<ul>
+		#GENERER_SAISIES{#ENV{_saisies}}
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />
+			<input type="submit" class="submit" name="inserer" value="<:inserer_modeles:bouton_inserer:>" />
+		</p>
+	</BOUCLE_deja_choisi>
+		<B_choix>
+		<strong><:inserer_modeles:choisir_modele:></strong>
+		<ul>
+		<BOUCLE_choix(POUR){tableau #ENV{_liste_formulaires_modeles}}{par valeur}>
+		<li class="choix">
+			[(#CHEMIN{#VALEUR|table_valeur{logo}}|image_reduire{24})]
+			<input type="radio" class="radio" name="formulaire_modele" id="#CLE" value="#CLE" style="vertical-align:top;" />
+			<label for="#CLE">[(#VALEUR|table_valeur{nom}|_T_ou_typo)]</label>
+		</li>
+		</BOUCLE_choix>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" name="choisir" value="<:inserer_modeles:bouton_choisir:>" />
+		</p>
+		</B_choix>
+	<//B_deja_choisi>
+</div></form>
+</div>

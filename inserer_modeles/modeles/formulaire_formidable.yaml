@@ -1,0 +1,19 @@
+nom: '<:inserer_modeles:nom_formulaire:>'
+logo: 'images/formulaire-24.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'formulaire'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'classe'
+      defaut: 'formidable'
+  -
+    saisie: 'formulaire_formidable'
+    options:
+      nom: 'id'
+      label: '<:inserer_modeles:label_formulaire_formidable:>'
+      cacher_option_intro: 'oui'

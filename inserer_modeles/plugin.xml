@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Ins&eacute;rer Mod&egrave;les</nom>
+	<auteur>Joseph</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Ce plugin facilite l'insertion de mod&egrave;les dans vos textes avec des formulaires d'aide &agrave; la saisie.</description>
+	<lien>http://www.spip-contrib.net/Inserer-Modeles-Carnet-de-developpement</lien>
+	<icon>images/inserer_modeles-48.png</icon>
+	<prefix>inserer_modeles</prefix>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="saisies" version="[1.7.9;]" />
+	<necessite id="verifier" />
+</plugin>
