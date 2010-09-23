@@ -4,10 +4,14 @@
 
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 
-	<version>1.0.3</version>
-	<version_base>1.6</version_base>
-	<etat>dev</etat>
+	<version>1.0.4</version>
+	
+	<version_base>1.3.1</version_base>
+	
+	<etat>test</etat>
+	
 	<description>
+	
 	<multi>
 		[fr] Transforme les articles SPIP en articles de catalogue. Permet de saisir plusieurs variantes d'un m&ecirc;me produit. Permet d'indiquer des prix HT ou TTC, et permet d'ajouter des options.
 		
@@ -66,7 +70,7 @@
 	
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<utilise id="comptes" version="[1.0]" src="http://files.spip.org/spip-zone/comptes.zip" />
+	<utilise id="contacts" version="[1.0]" src="http://files.spip.org/spip-zone/contacts.zip" />
 	
 </plugin>
 

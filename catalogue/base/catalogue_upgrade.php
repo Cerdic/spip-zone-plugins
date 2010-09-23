@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Catalogue pour Spip 2.0
- * Licence GPL (c) 2009 - Ateliers CYM
+ * Licence GPL (c) 2009 - 2010- Ateliers CYM
  *
  */
 
@@ -29,6 +29,16 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 				
 		ecrire_meta($nom_meta_base_version,$current_version="1.3");
 	}
+
+	if (version_compare($current_version,"1.3.1","<")){
+		sql_alter("TABLE spip_variantes CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL"); // on change le type de "descriptif" de TINYTEXT à TEXT
+		sql_alter("TABLE spip_options CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL"); // on change le type de "descriptif" de TINYTEXT à TEXT
+		spip_log('Tables correctement passsées en version 1.3.1','catalogue');
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.1");
+	}
+
+
 }
 
 

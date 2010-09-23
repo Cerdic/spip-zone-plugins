@@ -42,7 +42,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"id_variante" 	=> "bigint(21) NOT NULL auto_increment",
 		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
+		"descriptif" 	=> "TEXT DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
 		"prix_ht" 		=> "decimal(6,2) default NULL",
 		"tva"			=> "decimal(4,3) default '0.196'",
@@ -62,7 +62,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 	$options = array(
 		"id_option" 	=> "bigint(21) NOT NULL auto_increment",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
+		"descriptif" 	=> "TEXT DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
 		"prix_ht" 		=> "decimal(6,2) default 0",
 		"tva"			=> "decimal(4,3) default '0.196'",

@@ -1,3 +1,5 @@
 Pouvoir créer une boucle transactions 
 et la filtrer pour une rubrique
 ou un client/auteur ?
+
+Version 1.0.4 : sur une suggestion pertinente, les champs descriptif doivent etre de type TEXT et non TINYTEXT;
