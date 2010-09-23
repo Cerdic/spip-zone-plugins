@@ -121,7 +121,12 @@ function saisies_lister_valeurs_defaut($contenu){
  * @return array Un tableau de contexte
  */
 function saisie_charger_champs($contenu) {
-	return array_fill_keys(saisies_lister_champs($contenu, false), '');
+	// array_fill_keys est disponible uniquement avec PHP >= 5.2.0
+	// return array_fill_keys(saisies_lister_champs($contenu, false), '');
+	$champs = array();
+	foreach (saisies_lister_champs($contenu, false) as $champ)
+		$champs[$champ] = '';
+	return $champs;
 }
 
 /*
