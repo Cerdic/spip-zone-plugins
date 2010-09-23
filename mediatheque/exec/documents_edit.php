@@ -103,7 +103,8 @@ function documents_edit_ok($row, $id_document, $parent, $new)
 	'config_fonc'=>'documents_edit_config'
 	);
 
-	echo recuperer_fond("prive/editer/document", $contexte);
+	$milieu = recuperer_fond("prive/editer/document", $contexte);
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'documents_edit','id_document'=>$id_document),'data'=>$milieu));
 
 	echo fin_gauche(), fin_page();
 
