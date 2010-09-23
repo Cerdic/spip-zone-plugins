@@ -4,6 +4,7 @@
 	<auteur>Matthieu Marcillaud - [Ma Graine->http://magraine.net]</auteur>
 	
 	<etat>test</etat>
+	
 	<description>
 		<multi>
 [fr] Ajoute &agrave; SPIP les fonctionnalit&eacute;s d'un gestionnaire de contacts.
@@ -24,9 +25,9 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	
 	<prefix>contacts</prefix>
 	
-	<version>1.3.6</version>
+	<version>1.3.7</version>
 
-	<version_base>1.3.0</version_base>
+	<version_base>1.3.1</version_base>
 	<install>base/contacts_upgrade.php</install>
 
 	<pipeline>

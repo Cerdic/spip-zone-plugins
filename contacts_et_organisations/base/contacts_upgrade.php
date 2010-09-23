@@ -79,6 +79,22 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.0");
 	}
 
+	if (version_compare($current_version,"1.3.1","<")){
+		if (!sql_alter("TABLE spip_contacts CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL")) {
+			spip_log('Probleme lors de la modif de la table spip_contacts','contacts');
+		} else {
+			spip_log('Table spip_contacts correctement passsée en version 1.3.1','contacts');
+		}
+		if (!sql_alter("TABLE spip_organisations CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL")) {
+			spip_log('Probleme lors de la modif de la table spip_organisations','contacts');
+		} else {
+			spip_log('Table spip_organisations correctement passsée en version 1.3.1','contacts');
+		}
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.1");
+	}
+
+
 }
 
 function contacts_vider_tables($nom_meta_base_version) {

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Comptes & Contacts pour Spip 2.0
- * Licence GPL (c) 2009 - 2010 - Ateliers CYM
+ * Licence GPL (c) 2009 - 2010- Ateliers CYM
  */
 
 function contacts_declarer_tables_interfaces($interface){
