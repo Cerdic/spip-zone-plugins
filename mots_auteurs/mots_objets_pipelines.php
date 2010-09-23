@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin mots-auteurs pour Spip 2.0
+ * Plugin mots-objets pour Spip 2.0
  * Licence GPL 
  * Adaptation Cyril MARION - (c) 2010 Ateliers CYM http://www.cym.fr
  * Grâce au soutien actif de Matthieu Marcillaud - Magraine
@@ -12,7 +12,7 @@
  * Ajout du bloc d'attribution de mot-clé
  * sur la page de visualisation d'un auteur
 **/
-function mots_auteurs_affiche_milieu($flux) {
+function mots_objets_affiche_milieu($flux) {
 
 	static $ou = array(
 		'auteur_infos' => array(
@@ -87,19 +87,19 @@ function mots_objets_ajouter_selecteur_mots($objet, $id_objet, $opt = array()) {
 
 
 // Ajout de l'objet de type auteur
-function mots_auteurs_libelle_association_mots($flux){
-	$flux['auteurs'] = 'mots_auteurs:objet_auteurs';
+function mots_objets_libelle_association_mots($flux){
+	$flux['auteurs'] = 'mots_objets:objet_auteurs';
 	$flux['documents'] = 'gestdoc:objet_documents';
 	return $flux;
 }
 
 
 // Ajout du contenu aux formulaires CVT du core.
-function mots_auteurs_editer_contenu_objet($flux){
+function mots_objets_editer_contenu_objet($flux){
 
 	$liste = array(
-		'auteurs'   => _T('mots_auteurs:item_mots_cles_association_auteurs'),
-		'documents' => _T('mots_auteurs:item_mots_cles_association_documents'),
+		'auteurs'   => _T('mots_objets:item_mots_cles_association_auteurs'),
+		'documents' => _T('mots_objets:item_mots_cles_association_documents'),
 	);
 		
 	// Concernant le formulaire CVT 'editer_groupe_mot', on veut faire apparaitre l'objet auteurs
@@ -124,11 +124,11 @@ function mots_auteurs_editer_contenu_objet($flux){
 
 
 // compter le nombre d'auteurs sur les mots cles 
-function mots_auteurs_afficher_nombre_objets_associes_a($flux){
+function mots_objets_afficher_nombre_objets_associes_a($flux){
 	static $ou = array(
 		'auteurs' => array(
-			'singulier' => "mots_auteurs:info_un_auteur",
-			'pluriel'   => "mots_auteurs:info_nombre_auteurs",
+			'singulier' => "mots_objets:info_un_auteur",
+			'pluriel'   => "mots_objets:info_nombre_auteurs",
 		),
 		'documents' => array(
 			'singulier' => "gestdoc:un_document", //"mediatheque:un_document",
