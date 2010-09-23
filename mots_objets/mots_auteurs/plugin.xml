@@ -1,0 +1,70 @@
+<plugin>
+	<nom><multi>[fr]Mots Objets[en]Authors key-words</multi></nom>
+	<auteur>Cyril Marion - [Ateliers CYM->http://www.cym.fr]</auteur>
+	
+	<icon>images/tag_purple-32.png</icon>
+	
+	<licence>GNU/GPL</licence>
+	<version>0.2.0</version>
+	<version_base>0.2</version_base>
+	
+	<etat>test</etat>
+	<lien></lien>
+	
+	<description>
+	<multi>
+	[fr] Permet d'ajouter des mots cl&eacute; sur les auteurs et sur les documents (avec le plugin Médiathèque)
+	[en] Allows to attach key-words to SPIP  authors, and by extention, to Contacts and Organisations.
+	</multi>
+	</description>
+	
+	<prefix>mots_objets</prefix>
+	
+	<install>base/mots_objets_upgrade.php</install>
+	
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/mots_objets_tables.php</inclure>
+	</pipeline>	
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/mots_objets_tables.php</inclure>
+	</pipeline>
+
+	<!-- Les autorisations specifiques au plugin -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>mots_objets_autorisations.php</inclure>
+	</pipeline>
+
+	<!-- pouvoir ajouter des mots-clé aux objets de type auteur -->
+	<pipeline>
+		<nom>libelle_association_mots</nom>
+		<inclure>mots_objets_pipelines.php</inclure>
+	</pipeline>	
+
+	<!-- afficher le bloc des mots clé dans la colonne du milieu de la page vue auteur-->
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>mots_objets_pipelines.php</inclure>
+	</pipeline>
+	
+
+	<!-- proposer un checkbox auteurs sur la page des groupes de mots-->
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>mots_objets_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- compter les mots d'un auteur -->
+	<pipeline>
+		<nom>afficher_nombre_objets_associes_a</nom>
+		<inclure>mots_objets_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+
+	<categorie>navigation</categorie>
+
+</plugin>
