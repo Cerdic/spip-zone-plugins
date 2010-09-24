@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Pays - ISO 3166-1</nom>
+	<nom><multi>[fr]Pays - ISO 3166-1[en]Countries- ISO 3166-1</multi></nom>
 	
 	<auteur>Collectif SPIP</auteur>
 	
