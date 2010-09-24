@@ -16,10 +16,10 @@ function controleurs_traduction_dist($regs) {
 	
 	list(,$crayon,$type,$champ,$id,$class) = $regs;
 	
-	// On lit la langue du crayon et le module dans sa classe, qui comprend la classe lang_xx 
+	// On lit la langue du crayon et le cadre dans sa classe, qui comprend la classe lang_xx 
 	if (preg_match('/\blang_([^_|^\W]+)(?:_(\w+)){0,1}\b/', $class, $matches)) {
 		$lang = $matches[1];
-		$module = $matches[2];
+		$cadre = $matches[2];
 	}
 	else
 		return array(_U('crayons:donnees_mal_formatees').' (lang)', 'err');
@@ -32,11 +32,11 @@ function controleurs_traduction_dist($regs) {
 	else
 		return array(_U('crayons:donnees_mal_formatees').' (champ)', 'err');
 
-	$tr = lecture_composant_traduction($c, $lang, $module);
+	$tr = lecture_composant_traduction($c, $lang, $cadre);
 	$val = $tr[$var];
 	$crayon = new SecureCrayon("traduction-".$champ."-".$id);
 	$html = $crayon->code();
-	$html .= '<input type="hidden" name="module_'.$crayon->key.'" value="'.$module.'" />';
+	$html .= '<input type="hidden" name="cadre_'.$crayon->key.'" value="'.$cadre.'" />';
 	$html .= '<input type="hidden" name="lang_'.$crayon->key.'" value="'.$lang.'" />';
 	$html .= '<input type="hidden" name="oldval_'.$crayon->key.'" value="'.entites_html($val).'" />';
 	$html .= '<input class="crayon-active" type="text"'

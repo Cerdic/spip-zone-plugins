@@ -14,6 +14,6 @@ Section page
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})
 ]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 <INCLURE{fond=composants/fond/entete}{title=#TITRE}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
-<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2060}{id_rubrique}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2060}{id_rubrique}>
 <INCLURE{fond=composants/fond/pied}>
 </BOUCLE_rubrique>

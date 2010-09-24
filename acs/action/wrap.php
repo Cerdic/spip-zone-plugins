@@ -13,6 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_wrap() {
-	if (isset($_GET['module'])) include($_GET['module']);
+	if (isset($_GET['cadre'])) include($_GET['cadre']);
 }
 ?>

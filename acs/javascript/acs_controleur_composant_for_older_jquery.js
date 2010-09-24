@@ -28,16 +28,16 @@ jQuery(".edit_composant").each(
     		onStart: function(drag) {
     			jQuery(this).parent().css("cursor", "move");
     			jQuery(this).attr("style", "cursor:move");
-					jQuery(".module-composant").each(function(i, composant) {jQuery(this).attr("style","display:block;border:1px dotted orange;left:-1px;top:-1px;min-height:15px;margin-bottom:5px;");});
+					jQuery(".cadre-composant").each(function(i, composant) {jQuery(this).attr("style","display:block;border:1px dotted orange;left:-1px;top:-1px;min-height:15px;margin-bottom:5px;");});
 				},
     		onStop: function(drag) {
     			jQuery(this).css("cursor", "");
-					//jQuery(".module-composant").each(function(i, composant) {jQuery(this).attr("style","");});
+					//jQuery(".cadre-composant").each(function(i, composant) {jQuery(this).attr("style","");});
 				}
 			});
   	}
   );
-  jQuery(".module-composant").Droppable({
+  jQuery(".cadre-composant").Droppable({
   	accept: "type_pinceau",
 		activeclass: "ctlWidget_droppable_active",
 		hoverclass: "ctlWidget_droppable_over",

@@ -1,49 +1,16 @@
-#CACHE{2*86400}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-[(#REM)
+#CACHE{2*86400}[(#REM)
+
              ACS
          (Plugin Spip)
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<BOUCLE_auteur_principal(AUTEURS) {id_auteur} {tout}>[(#SET{mkeywords,<:acs:entete_meta_page_auteur:>[,(#NOM|askeywords)][,(#NOM_SITE_SPIP|askeywords)]})][(#SET{title,[(#NOM|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]})][(#SET{mabstract,<:acs:entete_meta_page_auteur:>[ (#NOM|textebrut)]})]
-<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=auteur}{title=#GET{title}}{mdescription=#BIO|couper{150}|textebrut}{mkeywords=#GET{mkeywords}}{mauthor=#NOM|textebrut}{mexpires=86400}{mabstract=#GET{mabstract}}{mpublisher=#NOM|textebrut}{mcontributor=#NOM|textebrut}{msubject=#NOM|textebrut}>
-<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation lateral (colonne 1)]
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=24}>
-</div>[(#REM) fin colonne1 ]
-<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#REM) Contenu principal : derniers articles publies ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
-  <div id="onglet">]
-    [(#REM) Fil d'Ariane ]
-    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="?page=auteurs"><:info_auteurs:></a>[ &gt; (#NOM|couper{80})]</div>
-    <div class="cartouche">
-      [(#LOGO_AUTEUR||image_reduire{200,200})]
-      <h1 class="titre #EDIT{nom}">#NOM</h1>
-      [<p class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-    </div>
-    [<div class="texte #EDIT{bio}">(#BIO)</div><br />]
-    <B_articles>[(#REM) Articles de l'auteur ]
-    <div class="contre-encart">
-        <div class="liste-articles">
-          #ANCRE_PAGINATION
-          [<p class="pagination">(#PAGINATION)</p>]
-          <ul>
-            <BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
-            <INCLURE{fond=composants/articles/articles}{env=#ENV}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
-            </BOUCLE_articles>
-          </ul>
-        </div>
-    </div><!-- fin contre-encart -->
-    </B_articles>
-    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<div id="colonne3">
-  <INCLURE{fond=composants/module/module}{self}{env}{nic=44}>
-</div>
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>
-</BOUCLE_auteur_principal>
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<BOUCLE_auteur(AUTEURS){id_auteur}>[(#SET{mkeywords,<:acs:fond_meta_page_auteur:>[,(#NOM|askeywords)][,(#NOM_SITE_SPIP|askeywords)]})][(#SET{title,[(#NOM|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]})][(#SET{mabstract,<:acs:fond_meta_page_auteur:>[ (#NOM|textebrut)]})]
+
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2170}{page=sommaire}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}>
+</BOUCLE_auteur>

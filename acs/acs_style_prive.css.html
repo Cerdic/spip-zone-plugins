@@ -342,7 +342,7 @@ fieldset.apercu {
 
 /* Coloration syntaxique acs-spip */
 .spip_source {
-  overflow: scroll;
+  overflow: auto;
   max-height: 600px;
   border: 1px inset #dfdfdf;
 }
@@ -413,4 +413,9 @@ img.bouton_edit_composant:hover {
   z-index: 99999999;
   border : [(#GET{foncee})] 0px solid;
   -moz-border-radius: 0;
+}
+
+[(#REM) Position de l'image signalant un chargement en ajax ]
+.image_loading {
+  position: absolute;
 }

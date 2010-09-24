@@ -66,9 +66,9 @@ function composant_infos($c, $nic) {
   return $r;
 }
 
-function liens_traductions($c, $langs, $module='') {
+function liens_traductions($c, $langs, $cadre='') {
   foreach($langs as $lang) {
-    $url = '?exec=composant_get_trad&c='.$c.'&trcmp='.$lang.'&module='.$module;
+    $url = '?exec=composant_get_trad&c='.$c.'&trcmp='.$lang.'&cadre='.$cadre;
     $r .= ' <a href="#cTrad" title="'.traduire_nom_langue($lang).'" onclick="AjaxSqueeze(\''.$url.'\',\'cTrad\');" ><img src="'._DIR_PLUGIN_ACS.'lang/flags/'.$lang.'.gif" alt="'.$lang.'" /></a> ';
   }
   return $r;

@@ -11,7 +11,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{title,<:acs:fond_meta_page_mot:>[ (#TITRE|textebrut|texte_backend)]})][(#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][(#SET{mkeywords,[(#TITRE|textebrut|texte_backend),]<:acs:fond_meta_keywords:>})][(#SET{mrsstitle,[(#TITRE|textebrut|texte_backend)]})][(#SET{mrssurl,[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]})]
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=mot}{title=#GET{title}}{mrobots=all}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{rsstitle=#GET{rsstitle}}{rssurl=#GET{rssurl}}{mexpires=86400}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=27}{type}>
+  <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=27}{type}>
 </div><!-- fin colonne1 (navigation) -->
 
 [(#REM) Colonne 2 ]

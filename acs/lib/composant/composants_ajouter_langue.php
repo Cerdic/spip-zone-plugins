@@ -19,7 +19,7 @@ require_once _DIR_ACS.'lib/composant/composants_liste.php';
  * 4. langue par défaut depuis dossier modèle acs actif
  */
 
-function composants_ajouter_langue($module='') {
+function composants_ajouter_langue($cadre='') {
   $idx = $GLOBALS['idx_lang'];
   $idx_tmp = $idx.'_tmp';
   $GLOBALS['idx_lang'] = $idx_tmp;
@@ -28,9 +28,9 @@ function composants_ajouter_langue($module='') {
   	// On teste si au moins une instance du composant est active
     if (!composant_actif($composant)) continue;
 
-    $langfile = find_in_path("composants/$c/".($module ? $module.'/' : '')."lang/$c".'_'.($module ? $module.'_' : '').$GLOBALS['spip_lang'].'.php');
+    $langfile = find_in_path("composants/$c/".($cadre ? $cadre.'/' : '')."lang/$c".'_'.($cadre ? $cadre.'_' : '').$GLOBALS['spip_lang'].'.php');
     if (!$langfile)
-      $langfile = find_in_path("composants/$c/".($module ? $module.'/' : '')."lang/$c".'_'.($module ? $module.'_' : '').'fr.php');
+      $langfile = find_in_path("composants/$c/".($cadre ? $cadre.'/' : '')."lang/$c".'_'.($cadre ? $cadre.'_' : '').'fr.php');
     if (!$langfile)
       continue;
     require_once($langfile);

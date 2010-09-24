@@ -22,7 +22,7 @@
                         )
                 )
         )
-    [module] => Array
+    [cadre] => Array
         (
             [over] => squelettes_netoyens
             [instances] => Array

@@ -14,7 +14,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=login}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
+    <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
   [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>

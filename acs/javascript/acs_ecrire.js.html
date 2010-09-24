@@ -46,6 +46,7 @@ function instance_delete(msg) {
 $(document).ready(
 	function() {
     acs_ecrire_init();
+    acs_ecrire_init_ajax();
 		onAjaxLoad(acs_ecrire_init_ajax);
 	}
 );
@@ -58,35 +59,6 @@ function acs_ecrire_init() {
 			}
 		);
 	}
-
-  [(#REM) Donne leur fonction onclick aux plieurs (générique)]
-	$(".acs_plieur").each(
-		function(i, plieur) {
-			var cap = plieur.name.substr(7); //classe à plier
-			if ((typeof plieur.onclick) != "undefined") {
-				plieur.clic = plieur.onclick.toString();
-			}
-			plieur.onclick = function(e) {
-				e.preventDefault();
-				imgp = $(".imgp_" + cap).attr("src");
-				ploff = $(".imgoff_" + cap).attr("src");
-				plon = $(".imgon_" + cap).attr("src");
-				if (imgp == ploff)
-					$(".imgp_" + cap).attr("src", plon)
-				else
-					$(".imgp_" + cap).attr("src", ploff)
-				$("." + cap).each(
-					function(i, cap) {
-						$(cap).slideToggle("slow");
-					}
-				);
-				if ((typeof plieur.clic) != "undefined") {
-					eval(plieur.clic + ";onclick(e);");
-				}
-				return false;
-			}
-		}
-	);
 
 	// Retourne les infos sur la page avec le niveau de détail défini par le plieur 
 	// get page infos with detail level setted by plieur
@@ -128,6 +100,35 @@ function acs_ecrire_init_ajax() {
       }
     );
   }
+
+  [(#REM) Donne leur fonction onclick aux plieurs (générique)]
+  $(".acs_plieur").each(
+    function(i, plieur) {
+      var cap = plieur.name.substr(7); //classe à plier
+      if ((typeof plieur.onclick) != "undefined") {
+        plieur.clic = plieur.onclick.toString();
+      }
+      plieur.onclick = function(e) {
+        e.preventDefault();
+        imgp = $(".imgp_" + cap).attr("src");
+        ploff = $(".imgoff_" + cap).attr("src");
+        plon = $(".imgon_" + cap).attr("src");
+        if (imgp == ploff)
+          $(".imgp_" + cap).attr("src", plon)
+        else
+          $(".imgp_" + cap).attr("src", ploff)
+        $("." + cap).each(
+          function(i, cap) {
+            $(cap).slideToggle("slow");
+          }
+        );
+        if ((typeof plieur.clic) != "undefined") {
+          eval(plieur.clic + ";onclick(e);");
+        }
+        return false;
+      }
+    }
+  );
   
   $("#mode_source").each(
   function(i, link) {

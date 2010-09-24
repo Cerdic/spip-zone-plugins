@@ -11,5 +11,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{title,<:acs:entete_meta_page_auteurs:>[ (#NOM_SITE_SPIP|textebrut)]})]
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
-<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2070}{mrobots=none}{mexpires=86400}{page=auteurs}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2070}{mrobots=none}{mexpires=86400}{page=auteurs}>
 <INCLURE{fond=composants/fond/pied}{self=#SELF}>

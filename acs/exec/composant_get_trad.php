@@ -19,10 +19,10 @@ if (!is_callable('ajax_retour'))
 function exec_composant_get_trad() {
   $c = _request('c');
   $trcmp = _request('trcmp');
-  $module = _request('module');
+  $cadre = _request('cadre');
 
   include_spip('lib/composant/composant_traduction');
-  $r .=  composant_traduction($c, $trcmp, $module);
+  $r .=  composant_traduction($c, $trcmp, $cadre);
 
   ajax_retour($r);
 }
