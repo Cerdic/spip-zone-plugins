@@ -129,8 +129,6 @@ function page_get_infos($page, $mode_source=false, $detail='') {
   $r .= '</tr></table>';
 
   $r = acs_box(_T('acs:page').' '.$page, $r, _DIR_PLUGIN_ACS."images/page-24.gif", false, page_modes($page, $mode_source, $detail));
-  if (_AJAX) // Script inséré ici AUSSI si et seulement si appel Ajax (sinon c'est déjà fait) 
-  	$r .= '<script type="text/javascript" src="'._DIR_ACS.'javascript/acs_ecrire.js"></script>';
   return $r;
 }
 

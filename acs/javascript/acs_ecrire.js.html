@@ -45,7 +45,8 @@ function instance_delete(msg) {
 
 $(document).ready(
 	function() {
-		acs_ecrire_init();
+    acs_ecrire_init();
+		onAjaxLoad(acs_ecrire_init);
 	}
 );
 
@@ -123,7 +124,7 @@ function acs_ecrire_init() {
   $(".ctlWidget").each(
     function(i,cw) {
       var selectid = "#select_" + cw.id;
-      //$(selectid).attr("style", "visibility: hidden;");
+      $(selectid).attr("style", "visibility: hidden;");
       if ($(selectid).get(0)) $(selectid).get(0).style.visibility = "hidden"; // for IE damned browser 
       if ($(selectid).val() != '') { 
         var dragid = "#" + $(selectid).val();
