@@ -12,7 +12,7 @@ function inc_acs_load_vars($from) {
     include $from;
   else 
     return 'unable to read '.$from;
-    dbg($from);
+
   if (is_array($def)) {
   	// acsVersion est la version d'acsInstalled lors de la sauvegarde : NE PAS LA RESTAURER !
   	// todo : gérer les version mismatches
@@ -22,7 +22,9 @@ function inc_acs_load_vars($from) {
     foreach($def as $var=>$value) {
     	if (is_array($value))
     		serialize($value);
-	    ecrire_meta($var, $value);
+    	// on n'écrase pas les valeurs existantes lorsd'une installation / reinstallation du plugin
+	    if (!isset($GLOBALS['meta'][$var]))
+	    	ecrire_meta($var, $value);
     }
     ecrire_metas();
     lire_metas();

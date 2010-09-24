@@ -1,13 +1,80 @@
-<li>
-<div class="entete">
-  [(#PLUGIN{notation}|oui)<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">[(#NOTATION_ETOILE{#NOTE})]</div>]
-  <div class="infos_article">
-[(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
-[(#VAR{acsArticlesAut}|=={oui}|?{' '})[(#AUTEURS)]]
-<BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '})[(#VAR{acsArticlesDates}|=={oui}|?{ - })]<i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></i>]</BOUCLE_Rubb2>
-  </div>
-  <div class="titres">[<p class="surtitre">(#SURTITRE)</p>]<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>[<p class="soustitre">(#SOUSTITRE)</p>]</div>
-</div><br class="nettoyeur" />
-[<div class="extrait">[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{#VAR{acsArticlesLogoTailleMax,50},#VAR{acsArticlesLogoTailleMax,50}})</a>](#TEXTE|coupe{#ENV{coupe,200},... <small><i><a href="#URL_ARTICLE"> (<:acs:articles_lire_la_suite:>)</a></i></small>})</div>]
+<B_article>
+<div class="cArticle">
+<BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>
+         <div class="cartouche">
+            <div class="entete">
+            [(#MODELE{article_traductions})]
+            <span style="float: #LANG_LEFT">
+            #DEBUT_SURLIGNE
+            [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+            <h1 class="#EDIT{titre} titre">[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''}) ]#TITRE</h1>
+            [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+            #FIN_SURLIGNE</span>
+            <br class="nettoyeur" />
+            </div>[(#LOGO_ARTICLE||image_reduire{100,100})]
+         </div>[(#REM) fin cartouche ]
+
+         #DEBUT_SURLIGNE
+         [<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+
+         [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+         [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+         #FIN_SURLIGNE
+
+         [(#REM) Portfolio : album d'images ]
+         <B_documents_portfolio>
+         <div id="documents_portfolio">
+            <h2><:info_portfolio:></h2>
+            <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+            [<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+            </BOUCLE_documents_portfolio>
+         </div>
+         </B_documents_portfolio>
+         <BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
+         <div class="spip_documents spip_documents_center" id="document_actif">
+            #EMBED_DOCUMENT
+            [<div class="spip_doc_titre">(#TITRE)</div>]
+            [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+         </div>
+         </BOUCLE_afficher_document>
+
+         [<div class="ps" style="#EDIT{ps} clear: left;">#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+
+         [(#REM) Autres documents joints a l'article ]
+         <B_documents_joints>
+         <div id="documents_joints">
+            <h2><:titre_documents_joints:></h2>
+            <ul>
+               <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
+               <li>
+                  <div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+                  [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+               </li>
+               </BOUCLE_documents_joints>
+            </ul>
+         </div>
+         </B_documents_joints>
+
+         [<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+[(#VAR{acsArticlesStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div style="font-size:75%; padding-right: 5px;" align="right">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
+
+[(#REM) Petition : la petition ayant une PAGINATION il faut absolument lui passer SELF]
+[(#PETITION|?{' '}) <INCLURE{fond=inc-petition}{env=#ENV}{id_article}{self=#SELF}>]
 <br class="nettoyeur" />
-</li>
+
+[(#REM) Forum de l'article ]
+[(#STATUT|=={refuse}|?{' ', ''})
+  <a href="" class="refus">Article refusé</a>
+  <a href="#forum" name="forum" id="forum"></a><span class="texte_nav" style="float: #LANG_RIGHT"><a href="#URL_ARTICLE&ouvrir=oui#forum" id="forum_lire_tous"><small><:lire_tous_les_messages:></small></a></span>
+  <INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}{statut=prive}{env}{self}{ajax}>
+]
+[(#STATUT|=={publie}|?{' ', ''})
+  [(#PLUGIN{notation}|?{' '}) <span class="texte_nav" style="float:right">#FORMULAIRE_NOTATION</span>]
+  [(#PLUGIN{recommander}|?{' '})#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}]
+  [<a id="forum_repondre" class="repondreaufil" href="spip.php?page=forum&id_article=#ID_ARTICLE"><:form_pet_message_commentaire:></a><br/>(#FORMULAIRE_FORUM)]
+  <INCLURE{fond=composants/forums/forum}{ajax}{id_article}{ouvrir=#OUVRIR}{debut_forums}>
+]
+</BOUCLE_article>
+</div><!-- fin cArticle -->
+</B_article>

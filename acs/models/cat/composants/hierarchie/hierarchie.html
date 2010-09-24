@@ -1,0 +1,8 @@
+[(#REM)
+
+Hierarchie des pages (arborescence)
+
+]<span id="hierarchie">[(#ENV{page}|!={sommaire}|?{<a href="#URL_SITE_SPIP/"><:accueil_site:></a>,<:accueil_site:>})]
+[(#ID_RUBRIQUE|!={''}|?{' '})<INCLURE{fond=composants/hierarchie/inc-hierarchie_rubrique_ou_article}{env}{self}>]
+[(#ENV{page}|=={auteurs}|?{' '}) &gt; <:acs:fond_meta_page_auteurs:>]
+</span>

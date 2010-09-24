@@ -45,7 +45,7 @@ function get_widget_class($over, $on, $style) {
   $ov .= $style;
   if ($over)
   	$ov .= ' '.$style.'_overriden';
-  if (!$on == 'oui')
+  if (!($on == 'oui'))
 		$ov .= ' '.$style.'_unused';
   return $ov;
 }

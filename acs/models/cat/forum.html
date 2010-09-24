@@ -5,7 +5,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page d'un forum
@@ -13,15 +13,6 @@ Page d'un forum
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) - ]<:acs:fond_meta_page_forums:>})]
 <INCLURE{fond=composants/fond/entete}{env=#ENV}{page=forum}{title=#GET{mdescription}}{mrobots=none}>
 
-[(#REM) Menu de navigation laterale (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=28}>
-</div>[(#REM) fin colonne1 (navigation) ]
-
-	[(#REM) Colonne 2 ]
-	<div id="colonne2"><div class="spacer"></div>
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{env=#ENV}{current=forums}>
-  <div id="onglet">]
     [(#REM) Fil d'Ariane ]
     <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
 <div class="texte">
@@ -51,7 +42,7 @@ Page d'un forum
         <BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
         &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
         </BOUCLE_ariane_site>
-        &gt; <a href="[(#ID_SYNDIC|generer_url_site)]">[(#TITRE|couper{80})]</a>
+        &gt; <a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">[(#TITRE|couper{80})]</a>
         </BOUCLE_contexte_site>
 
         <//B_contexte_site>
@@ -104,7 +95,7 @@ Page d'un forum
           </BOUCLE_rubrique>
 
           <BOUCLE_syndic(SITES) {id_syndic}>
-          <h2 class="titre"><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></h2>
+          <h2 class="titre"><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a></h2>
           [<div class="texte">(#DESCRIPTIF)</div>]
           </BOUCLE_syndic>
 
@@ -116,7 +107,6 @@ Page d'un forum
 
     #FORMULAIRE_FORUM
 </div> <!-- fin div texte -->
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
+
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

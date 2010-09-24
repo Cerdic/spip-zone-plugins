@@ -6,7 +6,7 @@ require_once _DIR_ACS.'lib/composant/composants_ajouter_langue.php';
 $traductions_acs = array(
   'use' => 'Utiliser',
 
-	'fond' => ' Fond', // Non traduit sans l'espace devant, car identique
+	'fond' => ' Fond', // astuce : non traduit sans l'espace devant, car identique
 
   'bordcolor' => 'Bordure',
   'bordlargeur' => 'largeur de bordure',

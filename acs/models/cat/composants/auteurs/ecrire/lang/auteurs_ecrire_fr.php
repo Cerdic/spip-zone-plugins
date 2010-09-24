@@ -4,8 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Auteurs',
+'description' => 'Liste des auteurs du site ou liste des auteurs d\'un article, selon le contexte.',
 'info' => 'Ajax & soft-downgrade',
-'description' => 'Bloc liste des auteurs.',
 
 'Nb' => 'Nombre'
 );

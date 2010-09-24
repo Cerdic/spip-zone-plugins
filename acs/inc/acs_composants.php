@@ -50,10 +50,13 @@ function composants_droite($c) {
 function instance_select($c) {
   $instances = composant_instances($c->class);
   if (is_array($instances) && count($instances)) {
+  	$vp = 'acs'.ucfirst($c->class);
     $r ='<select name="nic" onchange=submit()>';
     $r .= '<option value=""'.($id=="" ? ' selected': '').'></option>';
     foreach($instances as $id) {
-      $r .= '<option value="'.$id.'"'.($id==$c->nic ? ' selected': '').'>'.$id.'</option>';
+    	$v = $vp.$id.'Comment';
+    	$title = $GLOBALS['meta'][$v] ? ' title="'.$GLOBALS['meta'][$v].'"' : '';
+      $r .= '<option value="'.$id.'"'.($id==$c->nic ? ' selected': '').$title.'>'.$id.'</option>';
     }
     $r .='</select>';
     $r .= "<input type='hidden' name='exec' value='acs' />".

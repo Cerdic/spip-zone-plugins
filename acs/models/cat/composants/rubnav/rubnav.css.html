@@ -1,9 +1,9 @@
 #CACHE{0}[(#SET{sitelangdir,[(#LANG_DIR|=={rtl}|?{_rtl})]})]
 .cRubnav {
   font-size: 0.82em;
-  [border-width: (#VAR{acsRubnavBordWidth});]
-  [border-style: (#VAR{acsRubnavBordStyle});]
-  [border-color: (#VAR{acsRubnavBordColor});]
+  [border-width: (#VAR{acsRubnavBord/Width});]
+  [border-style: (#VAR{acsRubnavBord/Style});]
+  [border-color: (#VAR{acsRubnavBord/Color});]
   [background: (#VAR{acsRubnavFond});]
   position: static;
 }
@@ -79,11 +79,14 @@
   position: absolute;
   #LANG_LEFT: 100%;
   width: 100%;
-  top:-2px;
-  [border-width: (#VAR{acsRubnavBordWidth});]
-  [border-style: (#VAR{acsRubnavBordStyle});]
-  [border-color: (#VAR{acsRubnavBord});]
+  top:-1px;
+  [border-width: (#VAR{acsRubnavBord/Width});]
+  [border-style: (#VAR{acsRubnavBord/Style});]
+  [border-color: (#VAR{acsRubnavBord/Color});]
 }
 .cRubnav .menu-item:hover>ul.hidden {
   display: block;
+}
+.Rubnav .spacer {
+  height: 10px;
 }

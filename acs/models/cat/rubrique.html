@@ -7,11 +7,13 @@
 
 Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]
-<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}{doublons}{titre_mot=Video}>
-	[(#ENV{'mode'}|?{#SET{'mode', #ENV{'mode'}}, #SET{'mode', 'Video'}})]
-	<INCLURE {fond=inc-rubrique}{self=#SELF}{env=#ENV}{id_rubrique}{mode=#GET{'mode'}}{classement}{debut_articles}{debut_breves}>
-</BOUCLE_rubrique_principal>
-<BOUCLE_rubrique_principal2(RUBRIQUES) {id_rubrique}{tout}{doublons}>
-	<INCLURE {fond=inc-rubrique}{self=#SELF}{env=#ENV}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{debut_breves}>
-</BOUCLE_rubrique_principal2>
+
+Page rubrique
+Section page
+
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})
+]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<INCLURE{fond=composants/fond/entete}{title=#TITRE}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2060}{id_rubrique}>
+<INCLURE{fond=composants/fond/pied}>
+</BOUCLE_rubrique>

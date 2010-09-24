@@ -1,17 +1,17 @@
 <div class="#PINCEAU{onglets}">
   <div id="menunav" class="#EDIT{composant-onglets-1}">
     <ul class="general">
-      <li[(#ENV{current}|=={#VAR{acsOnglets1}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets1}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets1'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets1'])}</a></li>
+      <li[(#ENV{page}|=={#VAR{acsOnglets1}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets1}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets1'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets1'])}</a></li>
       #SET{t2,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets2'])}} #SET{l2,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets2'])}}
-      [(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <li[(#ENV{current}|=={#VAR{acsOnglets2}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets2}" title="#GET{l2}">#GET{t2}</a></li>]
-      <li[(#ENV{current}|=={#VAR{acsOnglets3}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets3}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets3'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets3'])}</a></li>
+      [(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <li[(#ENV{page}|=={#VAR{acsOnglets2}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets2}" title="#GET{l2}">#GET{t2}</a></li>]
+      <li[(#ENV{page}|=={#VAR{acsOnglets3}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets3}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets3'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets3'])}</a></li>
       #SET{t4,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets4'])}} #SET{l4,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets4'])}}
-      [(#VAR{acsOngletschoix4}|=={oui}|?{' '}) <li[(#ENV{current}|=={#VAR{acsOnglets4}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets4}" title="#GET{l4}">#GET{t4}</a></li>]
+      [(#VAR{acsOngletschoix4}|=={oui}|?{' '}) <li[(#ENV{page}|=={#VAR{acsOnglets4}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets4}" title="#GET{l4}">#GET{t4}</a></li>]
       #SET{t5,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets5'])}} #SET{l5,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets5'])}}    
-      [(#VAR{acsOngletschoix5}|=={oui}|?{' '}) <li[(#ENV{current}|=={#VAR{acsOnglets5}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets5}" title="#GET{l5}">#GET{t5}</a></li>]
+      [(#VAR{acsOngletschoix5}|=={oui}|?{' '}) <li[(#ENV{page}|=={#VAR{acsOnglets5}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets5}" title="#GET{l5}">#GET{t5}</a></li>]
   
       [(#REM) Onglet publier, affiché ou non, au choix. La page login est remplacé par la page "publier" si le plugin openPublishing est activé ]
-      [(#VAR{acsOngletsPublier,oui}|=={oui}|?{<li[(#ENV{current}|=={login}|?{' '})id="current"[(#SET{pm,oui})]]><a href="[(#EVAL{defined('_DIR_PLUGIN_OPENPUBLISHING')}|?{'spip.php?page=publier','ecrire/'})]" title="<:acs:onglets__publier:> #NOM_SITE_SPIP"><i><:acs:onglets_publier:></i></a></li>})]
+      [(#VAR{acsOngletsPublier,oui}|=={oui}|?{<li[(#ENV{page}|=={login}|?{' '})id="current"[(#SET{pm,oui})]]><a href="[(#EVAL{defined('_DIR_PLUGIN_OPENPUBLISHING')}|?{'spip.php?page=publier','ecrire/'})]" title="<:acs:onglets__publier:> #NOM_SITE_SPIP"><i><:acs:onglets_publier:></i></a></li>})]
     </ul>
   </div>
 </div>

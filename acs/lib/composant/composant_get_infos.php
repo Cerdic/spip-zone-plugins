@@ -26,9 +26,9 @@ function cGetPages($c, $nic, $chemin='') {
   if (@is_dir($dir) AND @is_readable($dir) AND $d = @opendir($dir)) {
     $vars= cGetVars($c, $nic);
     if ($nic)
-    	$cpreg = '/\{fond=composants\/'.$c.'[^\}]*\}.*\{nic='.$nic.'\}/';
+    	$cpreg = '/\{fond=composants\/'.$c.'\/[^\}]*\}.*\{nic='.$nic.'\}/';
    	else
-   		$cpreg = '/\{fond=composants\/'.$c.'[^\}]*\}.*/';
+   		$cpreg = '/\{fond=composants\/'.$c.'\/[^\}]*\}.*/';
     while (($f = readdir($d)) !== false && ($nbfiles<1000)) {
       if ($f[0] != '.' # ignorer . .. .svn etc
       AND $f != 'CVS'

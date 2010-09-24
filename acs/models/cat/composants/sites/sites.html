@@ -1,0 +1,9 @@
+[(#REM)
+
+Liste des sites syndiqués ou affichage d'un site
+
+]
+<div class=#PINCEAU{sites}>[
+(#ID_SITE|!={''}|?{' '})<INCLURE{fond=composants/sites/inc-site}>][
+(#ID_SITE|=={''}|?{' '})<INCLURE{fond=composants/sites/inc-sites}>]
+</div>

@@ -15,7 +15,7 @@ pour la langue en cours.
     <ul>
     #SET{stat,#DEMOCRATIE_STATUT}
     <BOUCLE_articles(ARTICLES notations_objets) {objet=article} {par (#CLASSEMENT|=={note}|?{note_ponderee,popularite})}{inverse} {doublons} {pagination #VAR{acsArticlesPagination,10}}{note_ponderee>=#VAR{acsDemocratieSeuilPublic,0}} {statut==#GET{stat,publie}} {lang=#LANG}>
-      <INCLURE{fond=composants/articles/article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{note=#NOTE_PONDEREE}{coupe=#VAR{acsArticlesNbLettres,200}}>
+      <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{note=#NOTE_PONDEREE}{coupe=#VAR{acsArticlesNbLettres,200}}>
     </BOUCLE_articles>
     </ul>
   </div>

@@ -67,12 +67,18 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
   display: inline-block;  /* IE */
 }
 
-.liste-articles .infos_article {
+.liste-articles .infos_article, .liste-articles .texte_nav, .liste-articles .pagination {
   margin: 0;
   margin-left: 5px;
   margin-right: 5px;
-  float: #LANG_RIGHT;
   font-size: 0.65em;
+}
+
+.liste-articles .infos_article, .liste-articles .texte_nav {
+  float: #LANG_RIGHT;
+}
+.liste-articles .pagination {
+  float: #LANG_LEFT;
 }
 
 [(#REM) tableaux ]

@@ -69,13 +69,6 @@
     <type>color</type>
   </variable>
   <variable>
-    <nom>MaJ</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>oui</valeur>
-  </variable>
-  <variable>
     <nom>DeplierHaut</nom>
     <type>img</type>
     <chemin>triangles</chemin>

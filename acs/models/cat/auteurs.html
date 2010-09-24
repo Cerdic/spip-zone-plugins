@@ -6,33 +6,10 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{title,<:acs:entete_meta_page_auteurs:>[ (#NOM_SITE_SPIP|textebrut)]})]
-<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=plan}{title=#GET{title}}{mrobots=none}{mexpires=86400}>
-<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-	<div class="mg">
-		[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
-	</div><!-- fin mg -->
-</div><!-- fin colonne1 (navigation) -->
-<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=auteurs}{env=#ENV}>
-  <div id="onglet">]
-		<span id="hierarchie" style="float: #LANG_LEFT"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; auteurs</span>
-		<span class="texte_nav" style="float: #LANG_RIGHT">Faisons les présentations ...</span>
-		<br class="nettoyeur" />
-		<div class="liste-articles">
-		<BOUCLE1(AUTEURS){par nom}{unique}>
-			<ul class="plan-secteur">
-        <li class="menu-item"><p class="titre"><a href="?auteur#ID_AUTEUR">#NOM</a></p>
-        <div class="texte">[(#BIO|textebrut||coupe{500,... <small><i><a href="?auteur#ID_AUTEUR"> (<:acs:articles_lire_la_suite:>)</a></i></small>})]</div><br /></li>
-				<br class="nettoyeur" />
-			</ul>
-		</BOUCLE1>
-		</div>[(#REM) fin liste-articles ]
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-[(#REM) Pied de page ]
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=2070}{mrobots=none}{mexpires=86400}{page=auteurs}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}>

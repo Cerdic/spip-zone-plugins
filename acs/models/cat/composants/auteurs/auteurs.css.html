@@ -1,6 +1,6 @@
 #CACHE{0}
 
-.auteurs {
+.cAuteurs {
   font-size: 0.82em;
   [border-width: (#VAR{acsAuteursBord/Width});]
   [border-style: (#VAR  {acsAuteursBord/Style});]
@@ -8,43 +8,48 @@
   [background: (#VAR{acsAuteursFond});]
 }
 
-.auteurs .nomauteur, .auteurs .siteauteur, .auteurs .bioauteur, .auteurs .articlesauteur {
+.cAuteurs .nomauteur, .cAuteurs .siteauteur, .cAuteurs .bioauteur, .cAuteurs .articlesauteur {
   padding-left: 5px;
   padding-right: 5px;
   overflow: hidden;
 }
 
-.auteurs .menu-titre {
+.cAuteurs .menu-titre {
   text-align : center;
   font-weight: bold;
   [background: (#VAR{acsAuteursTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsAuteursTitreFondImage}})") repeat top left];]
 }
 
-.auteurs .menu-item .menu-titre {
+.cAuteurs .menu-item .menu-titre {
   [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBord/Color}});]
 }
 
-.auteurs .menu-item {
+.cAuteurs .menu-item {
   [background: (#VAR{acsRubnavFond});]
   [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBord/Color}});]
   text-align: #LANG_LEFT;
 }
-.auteurs .menu-item a.linkauteur {
+.cAuteurs .menu-item a.linkauteur {
   display: block;
   width: 100%;
 
 }
-[.auteurs .menu-item:hover, .auteurs .menu-item a.linkauteur:hover { background: (#VAR{acsRubnavFondHover});}]
+[.cAuteurs .menu-item:hover, .cAuteurs .menu-item a.linkauteur:hover { background: (#VAR{acsRubnavFondHover});}]
 
-.auteurs .pagination {
+.cAuteurs .pagination {
   [background: (#VAR{acsRubnavTitreFond,#VAR{acsFondColor}});]
   [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBord/Color}});]
+  text-align: center;
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 0.65em;
 }
 
-.auteurs .siteauteur {
+.cAuteurs .siteauteur {
   text-align: center;
 }
-.auteurs .bioauteur {
+.cAuteurs .bioauteur {
   text-align: justify;
   font-size: 0.71em;
 }

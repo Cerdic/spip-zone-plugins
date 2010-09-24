@@ -1,5 +1,10 @@
-<div class="#PINCEAU{articles}">
-[(#ENV{current}|=={sommaire}|?{' '})<INCLURE{fond=composants/articles/boucle-une}{self}{debut_articles}>][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
-[(#ENV{current}|=={resume}|?{' '})<INCLURE{fond=composants/articles/boucle-articles}{self}{debut_articles}>]
-[(#ENV{current}|=={plan}|?{' '})<INCLURE{fond=composants/articles/boucle-plan}{self}>]
+[(#REM)
+
+Listes d'articles (sommaire, resume, plan, rubrique)
+
+]<div class="#PINCEAU{articles}">
+[(#ID_ARTICLE|!={''}|?{' '})<INCLURE{fond=composants/articles/article}{env}{self}{id_article}>]
+[(#ENV{page}|=={sommaire}|?{' '})<INCLURE{fond=composants/articles/boucle-une}{env}{self}{debut_articles}>][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
+[(#ENV{page}|=={resume}|?{' '})<INCLURE{fond=composants/articles/boucle-resume}{env}{self}{debut_articles}>]
+[(#ENV{page}|=={plan}|?{' '})<INCLURE{fond=composants/articles/boucle-plan}{env}{self}>]
 </div>

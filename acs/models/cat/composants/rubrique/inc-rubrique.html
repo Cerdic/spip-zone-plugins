@@ -1,0 +1,27 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+  <div class="titre">
+    [(#LOGO_RUBRIQUE||image_reduire{200,200})]
+    [<h1 class="#EDIT{titre} titre">(#TITRE|supprimer_numero)</h1>]
+    [(#VAR{acsRubriqueMaJ}=={oui}|?{<span class="maj"><:dernier_ajout:> : [(#DATE|nom_jour) ][(#DATE|affdate)]</span>})]
+  </div>
+  [<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+
+  [(#REM) Articles de la rubrique ]
+  <INCLURE{fond=composants/articles/boucle-articles_rubrique}{env}{id_rubrique}{classement}{debut_articles=#ENV{debut_articles}}{rubrique=#TITRE}{ajax}>
+
+  [(#REM) Documents joints a la rubrique ]
+  <B_documents_joints>
+  <div id="documents_joints">
+      <h2><:titre_documents_joints:></h2>
+    <ul>
+    <BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par num titre, date} {doublons}>
+        <li>
+          <div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+            [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+        </li>
+    </BOUCLE_documents_joints>
+    </ul>
+  </div>
+  </B_documents_joints>
+  [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_rubrique>

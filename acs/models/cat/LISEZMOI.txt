@@ -1,12 +1,12 @@
 Modèle cat
 
-Dernière mise à jour de ce fichier le 25/04/2009, par dF (version provisoire)
+Dernière mise à jour de ce fichier le 22/09/2010, par dF (version provisoire)
 
 Cat est un modèle ACS. Cat signifie "catalogue": cat est un squelette-type multilingue dont le cahier des charges exige qu'il fonctionne avec tous les composants ACS, qu'ils soient activés ou non.
 
 Cat est à la fois un jeu de squelettes spip particulièrement riche fonctionnellement, et une plate-forme de validation de nouveaux composants ACS.
 
-Cat est un modèle xhtml1.0 en css utilisant des onglets "portes coulissantes" (en css, sans javascript). Ce choix impose des contraintes fortes aux composants de ce modèle pour fonctionner correctement sur tous les explorateurs web.
+Cat est un modèle xhtml1.0 en css. Ce choix impose des contraintes fortes aux composants de ce modèle pour fonctionner correctement sur tous les explorateurs web.
 
 La compatibilité avec le modèle cat est donc l'une des exigence de validation d'un nouveau composant, parce qu'un composant compatible cat a de très fortes chance d'être compatible avec n'importe quel squelette spip. (Dans l'avenir, d'autres modèles répondant à d'autres cahiers des charges pourront être ajoutés à ACS)
 

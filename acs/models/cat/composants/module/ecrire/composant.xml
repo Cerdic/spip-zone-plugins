@@ -144,12 +144,10 @@
   <variable>
     <nom>ShadowSize</nom>
     <type>nombre</type>
-    <valeur>5</valeur>
   </variable>
   <variable>
   	<nom>ShadowBlur</nom>
     <type>nombre</type>
-    <valeur>5</valeur>
   </variable>
   
   <variable>

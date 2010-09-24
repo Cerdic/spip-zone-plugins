@@ -1,5 +1,2 @@
-#CACHE{86400}[(#REM) Bloc auteurs, avec pagination.]
-[(#VAR{acsAuteursUse}|=={oui}|?{' '})
-<div id="ajax_auteurs" class="#PINCEAU{auteurs}">
-  <INCLURE {fond=composants/auteurs/inc-auteurs}{ajax}{self}{debut_auteurs}{id_auteur}>
-</div>]
+[(#ENV{page}|=={auteurs}|?{' '})<INCLURE{fond=composants/auteurs/boucle-auteurs}{env}{self}{debut_auteurs}{ajax}]
+[(#ENV{page}|!={auteurs}|?{' '})<INCLURE{fond=composants/auteurs/bloc-auteurs}{env}{debut_auteurs}{id_auteur}>]
