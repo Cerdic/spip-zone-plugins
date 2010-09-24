@@ -4,8 +4,8 @@
     <version>0.3</version>
     <version_base>0.2</version_base>
   	<categorie>multimedia</categorie>
-    <etat>test</etat>
-
+    <etat>stable</etat>
+	<icon>zip.png</icon>
 	<description> Zippez facilement vos documents joints.</description>
 	<install>base/zippeur.php</install>
     <prefix>zippeur</prefix>
