@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]Mots Objets[en]Authors key-words</multi></nom>
+	<nom><multi>[fr]Mots Objets[en]Objects key-words</multi></nom>
 	<auteur>Cyril Marion - [Ateliers CYM->http://www.cym.fr]</auteur>
 	
 	<icon>images/tag_purple-32.png</icon>
@@ -14,7 +14,7 @@
 	<description>
 	<multi>
 	[fr] Permet d'ajouter des mots cl&eacute; sur les auteurs et sur les documents (avec le plugin Médiathèque)
-	[en] Allows to attach key-words to SPIP  authors, and by extention, to Contacts and Organisations.
+	[en] Allows to attach key-words to SPIP authors and documents (with media Library plugin)
 	</multi>
 	</description>
 	
