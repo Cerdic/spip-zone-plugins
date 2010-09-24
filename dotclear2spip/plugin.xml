@@ -1,0 +1,21 @@
+<plugin>
+
+    <nom>Dotclear2SPIP</nom>
+
+    <categorie></categorie>
+    <auteur>Maïeul ROUQUETTE</auteur>
+    <version>0.1</version>
+    <version_base>0.1</version_base>
+  
+    <etat>dev</etat>
+
+    <description> Un plugin pour importer du contenu d'une bdd Dotclear 2 dans un site SPIP.</description>
+      <prefix>dot2</prefix>
+
+
+    <fonctions>dot2_fonctions.php</fonctions>
+    <necessite id="crud" />
+
+
+
+</plugin>
