@@ -18,12 +18,15 @@ function balise_INCLURE($p) {
 function recuperer_fond_ajax() {
 	$args = func_get_args();
 
+	$args[1]["fond"] = $args[0];
+
 	if (_request('var_no_ajax')
 	OR _request('var_mode') == 'inclure')
 		return call_user_func_array('recuperer_fond', $args);
 
 	$cle = md5(serialize($args));
 	$ajax = entites_html(encoder_contexte_ajax($args[1]));
+
 	$alt = entites_html(sinon($args[1]['ajaxloadalt'],$args[1]['fond']));
 	$message = $args[1]['ajaxload'];
 	$searching = sinon($args[1]['ajaxsearching'],
@@ -33,38 +36,37 @@ function recuperer_fond_ajax() {
 
 
 	return
-	"<div class='includeajax'>
-	<a href='$url' rel=\"$ajax\">$searching</a>
-	$message
-	</div>
-";
+		"<div class='includeajax'><a href=\"$url\" rel=\"$ajax\">$searching</a></div>";
+}
+
+function remettre_fond_ajax($matches) {
+	$url = $matches[2];
+	$c = $matches[3];
+	$c = decoder_contexte_ajax($c);
+	$page = evaluer_fond($c["fond"], $c);
+	
+	return $page["texte"];
 }
 
 function INCLUREAJAXLOAD_affichage_final($page) {
-	if ($GLOBALS['html']
-	AND strpos($page, "class='includeajax'")
-	AND $a = strpos($page, "</head>")) {
-		$script = "
-<script type='text/javascript'>
-	$(function() {
-		$('.includeajax').each(function() {
-			var me = $(this);
-			var env = $('a', this).attr('rel');
-			if (env) {
-				$('a', this).attr('href','#');
-				$.post(
-					window.location.href,
-					{ var_ajax: 'recuperer', var_ajax_env: env },
-					function(c) { me.html(c); }
-				);
-			}
-		});
-	});
-</script>
-";
-		$page = substr_replace($page, $script, $a, 0);
+
+	// Si le visiteur est un robot de moteur de recherche,
+	// reconstituer les pages completes
+	if(_IS_BOT) {
+		include_spip("inc/filtres");
+		include_spip("public/assembler");
+		$page = preg_replace_callback(",(<div class='includeajax'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax", $page);
 	}
+
 	return $page;
 }
+
+function INCLUREAJAXLOAD_insert_head($flux) {
+	$flux .= "\n<script src=\"".find_in_path('javascript/inclure-ajaxload.js')."\" type=\"text/javascript\"></script>";
+
+	return $flux;
+}
+
+
 
 ?>
