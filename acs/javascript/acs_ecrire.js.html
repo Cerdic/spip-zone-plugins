@@ -46,7 +46,7 @@ function instance_delete(msg) {
 $(document).ready(
 	function() {
     acs_ecrire_init();
-		onAjaxLoad(acs_ecrire_init);
+		onAjaxLoad(acs_ecrire_init_ajax);
 	}
 );
 
@@ -100,26 +100,6 @@ function acs_ecrire_init() {
 		}
 	);
 
-	$("#mode_source").each(
-	function(i, link) {
-	  link.onclick = function(e) {
-	    AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=source", "page_infos");
-	    document.location.href = "#page_infos";
-	      return false;
-	    }
-	  }
-	);
-
-	$("#mode_schema").each(
-	  function(i, link) {
-	    link.onclick = function(e) {
-	      AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=schema", "page_infos");
-	      document.location.href = "#page_infos";
-	      return false;
-	    }
-	  }
-	);
-
   // Mask select controls on start (they works even without javascript !)
   $(".ctlWidget").each(
     function(i,cw) {
@@ -138,5 +118,35 @@ function acs_ecrire_init() {
    [(#INCLURE{javascript/acs_dragdrop_for_older_jquery.js})]
 })]
 
+}
+
+function acs_ecrire_init_ajax() {
+  if (detail() == "") {
+    $("#page_infos .pliable").each(
+      function(i) {
+        $(this).hide();
+      }
+    );
+  }
+  
+  $("#mode_source").each(
+  function(i, link) {
+    link.onclick = function(e) {
+      AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=source", "page_infos");
+      document.location.href = "#page_infos";
+        return false;
+      }
+    }
+  );
+
+  $("#mode_schema").each(
+    function(i, link) {
+      link.onclick = function(e) {
+        AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=schema", "page_infos");
+        document.location.href = "#page_infos";
+        return false;
+      }
+    }
+  );
 }
 
