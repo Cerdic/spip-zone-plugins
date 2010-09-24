@@ -18,17 +18,22 @@ include_spip('action/editer_mot');
  * Interface C(r)UD
  */
 function crud_mots_create_dist($dummy,$set=null){
+	$crud = charger_fonction('crud','action');
 	if ($id_groupe=intval($set['id_groupe'])
-	 AND $id = sql_insertq("spip_mots", array('id_groupe' => $id_groupe)))
-		list($id,$ok,$e) = mot_update($id,$set);
-	else
+	 AND $id = sql_insertq("spip_mots", array('id_groupe' => $id_groupe))){
+		$result = $crud('update','mots',$id,$set);
+		$ok 	= $result['message'];
+		$id		= $result['result']['id'];
+		$e		= $result['sucess'];
+	 }
+	else{
 		$e = _L('create error');
+	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_mots_update_dist($id,$set=null){
 	// modifier le contenu via l'API
 	include_spip('inc/modifier');
-
 	$c = array();
 	foreach (array(
 		'titre', 'descriptif', 'texte', 'id_groupe'
