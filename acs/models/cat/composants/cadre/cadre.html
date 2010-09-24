@@ -1,0 +1,20 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2010
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Cadre est un composant conteneur pour d'autres composants
+C'est un composant instanciable: il possede un numero d'instance de composant: #NIC
+
+Cadre is a container for other components.
+Cadre is an instanciable component: it has a number that identify component's instance: #NIC
+
+Note : on transmet {nic} pour les versions de spip anciennes (1.9), qui ne le contienne pas par défaut dans {env}
+
+]<div class="#PINCEAU{cadre,#NIC}">
+  <INCLURE{fond=composants/cadre/inc-cadre} {env} {self} {lang} {nic}>
+</div>
