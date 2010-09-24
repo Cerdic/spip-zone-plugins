@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -22,7 +22,7 @@ function acs_page_get_infos($page, $mode, $detail) {
 
   // Si le fichier a été modifié depuis la mise en cache, on force le recalcul
   $pg = find_in_path($page.'.html');
-  $pg_derniere_modif = filemtime($pg);
+  $pg_derniere_modif = filemtime($pg);  
   if ($r[2] < $pg_derniere_modif)
     $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail), true);
 
@@ -64,7 +64,6 @@ function page_get_infos($page, $mode_source=false, $detail='') {
 
   $pg = find_in_path($page.'.html');
   $pg_derniere_modif = filemtime($pg);
-
   $pageContent = @file_get_contents($pg);
   $includes = analyse_page($pageContent, $mode_source);
 
@@ -124,7 +123,7 @@ function page_get_infos($page, $mode_source=false, $detail='') {
   if (isset($no_infos))
     $r = '<div>'._T('acs:page_rien_a_signaler').'</div><br />';
 
-  $r .= '<table width="100%"><tr><td><span class="onlinehelp">'._T('acs:source').' : </span><a class="lien_source" href="?exec=acs&onglet=pages&pg='.$page.'&mode=source">'.substr($pg, 3).'</a></td>';
+  $r .= '<table width="100%"><tr><td><span class="onlinehelp">'._T('acs:source').' : </span><a class="lien_source" href="?exec=acs&onglet=pages&pg='.$page.'&mode=source" title="'.read_perms($pg).'">'.substr($pg, 3).'</a></td>';
   $r .= '<td style="text-align:'.$GLOBALS['spip_lang_right'].'">'._T('acs:acsDerniereModif').' '.date('Y-m-d H:i:s', $pg_derniere_modif).'</td>';
   $r .= '</tr></table>';
 
@@ -148,4 +147,8 @@ function affiche_source($txt, $debut=0, $longueur=0) {
   return $txt;
 }
 
+function read_perms($f) {
+	$perms = fileperms($f);
+  return substr(decoct($perms), 3);
+}
 ?>
