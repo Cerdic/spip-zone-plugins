@@ -21,8 +21,7 @@ function dot2_migrer_mot_article($id_post,$id_article,$id_groupe=''){
 		}
 		else{
 			$resultat = $crud('create','mots',null,array('id_groupe'=>$id_groupe,'titre'=>$titre));
-			$id_mot	  = $resultat['result']['id_mot'];
-			var_dump($resultat);
+			$id_mot	  = $resultat['result']['id'];
 			spip_log("Créations du mot $id_mot ($titre)","dot2");
 			sql_insertq('spip_mots_articles',array('id_article'=>$id_article,'id_mot'=>$id_mot));
 			spip_log("Lier le mot $id_mot à l'article $id_article","dot2");
