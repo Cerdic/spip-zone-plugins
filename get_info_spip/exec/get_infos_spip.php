@@ -76,8 +76,9 @@ function exec_get_infos_spip_dist() {
 		$ii = 'configspip';
 		$contexte = array();
 		$comptes_auteurs = recuperer_fond('compter_auteurs', $contexte);
-		$tailles_articles = recuperer_fond('compter_articles', $contexte);
-		$tailles_rubriques = recuperer_fond('compter_rubriques', $contexte);
+		$comptes_articles = recuperer_fond('compter_articles', $contexte);
+		$comptes_rubriques = recuperer_fond('compter_rubriques', $contexte);
+		$comptes_breves = recuperer_fond('compter_breves', $contexte);
 		$comptes_forums = recuperer_fond('compter_forums', $contexte);
 		$comptes_documents = recuperer_fond('compter_documents', $contexte);
 		$comptes_sites_syndic = recuperer_fond('compter_sites_syndic', $contexte);
@@ -93,8 +94,9 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:SPIP_plugins_actifs') => liste_plugin_actifs()
 			, _T('gins:SPIP_plugins_librairies') => plugins_liste_librairies()
 			, _T('gins:SPIP_nombre_auteurs_vali/tous') => $comptes_auteurs
-			, _T('gins:SPIP_nombre_articles_publ/tous') => $tailles_articles
-			, _T('gins:SPIP_nombre_rubriques_publ/tous') => $tailles_rubriques
+			, _T('gins:SPIP_nombre_articles_publ/tous') => $comptes_articles
+			, _T('gins:SPIP_nombre_rubriques_publ/tous') => $comptes_rubriques
+			, _T('gins:SPIP_nombre_breves_publ/toutes') => $comptes_breves
 			, _T('gins:SPIP_nombre_forums_publ/tous') => $comptes_forums
 			, _T('gins:SPIP_nombre_documents_publ/tous') => $comptes_documents
 			, _T('gins:SPIP_nombre_sites_syndic') => $comptes_sites_syndic
