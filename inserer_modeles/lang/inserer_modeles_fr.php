@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A déplacer dans mediatheque
 	'nom_doc' => 'la vignette d\'un document',
 	'nom_img' => 'une image',
+	'label_lien' => 'Lien&nbsp;:',
 	'label_id_document' => 'Document num&eacute;ro&nbsp;:',
 	'label_id_image' => 'Image num&eacute;ro&nbsp;:',
 	'bouton_parcourir_docs_article' => 'Parcourir l\'article',

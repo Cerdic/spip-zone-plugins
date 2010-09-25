@@ -27,3 +27,8 @@ parametres:
         left: '<:inserer_modeles:item_left:>'
         center: '<:inserer_modeles:item_center:>'
         right: '<:inserer_modeles:item_right:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'lien'
+      label: '<:inserer_modeles:label_lien:>'
