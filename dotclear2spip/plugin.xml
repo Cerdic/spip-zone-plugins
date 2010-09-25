@@ -17,7 +17,6 @@
     <necessite id="crud" />
     <necessite id="sale" />
     <necessite id="SPIP" version="[2.1;)" />
-
-
+	<necessite id="gestdoc" />
 
 </plugin>

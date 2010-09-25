@@ -1,6 +1,7 @@
 <?php
 // Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3)  les sites puis appliquer "purge articles" et "purge rubrique"
 
+include_spip('inc/dot_medias');
 function dot2_migrer_commentaires($post_id,$id_article){
 	$ressources = sql_select('comment_id,comment_dt,comment_author,comment_email,comment_site,comment_content,comment_ip,comment_status,comment_spam_status','dc_comment','`post_id`='.$post_id);
 	$crud = charger_fonction('crud','action');
