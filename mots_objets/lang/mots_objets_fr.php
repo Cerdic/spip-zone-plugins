@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_mot_cle_auteur' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cet auteur.',
-	'icone_creer_mot_cle_document' => 'Create a new keyword and link it to this document',
+	'icone_creer_mot_cle_document' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce document',
 
 	'info_auteurs' => 'Auteurs',
 	'info_nombre_auteurs' => '@nb@ auteurs',
