@@ -25,13 +25,14 @@
 <body id="page_gins">
 <B_documents>
 	<h1><:gins:liste_doc_lies_articles:></h1>
+#ANCRE_PAGINATION
 	<table id="liste_documents">
 		<tr>
 			<th>#id_document</th>
 			<th>fichier</th>
 			<th>#id_article titre</th>
 		</tr>
-	<BOUCLE_documents(DOCUMENTS documents_liens){mode=document}{objet=article}{par fichier}>
+	<BOUCLE_documents(DOCUMENTS documents_liens){mode=document}{objet=article}{par fichier}{pagination}>
 	<tr>
 		<td class="id">#ID_DOCUMENT</td>
 		<td>#FICHIER</td>
@@ -40,6 +41,7 @@
 	</tr>
 </BOUCLE_documents>
 	</table>
+	[<p class="pagination">(#PAGINATION)</p>]
 </B_documents>
 <//B_documents>
 </body>
