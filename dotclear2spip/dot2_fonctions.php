@@ -1,5 +1,9 @@
 <?php
-// Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3)  les sites puis appliquer "purge articles" et "purge rubrique"
+// Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3)  les sites puis appliquer purifier_spip()
+
+function dot_purifier_spip(){
+	sql_updateq('spip_rubriques',array('descriptif'=>''));	
+}
 
 
 function dot2_migrer_commentaires($post_id,$id_article){

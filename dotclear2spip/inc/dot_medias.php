@@ -1,5 +1,4 @@
 <?php
-#function dot_purifier_spip()
 
 function dot_lister_medias($texte){
 	
