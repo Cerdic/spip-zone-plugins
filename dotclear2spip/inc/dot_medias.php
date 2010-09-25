@@ -62,8 +62,8 @@ function dot_ajouter_medias($medias,$post_id){
 			
 			
 			}
-			
-			$numerotation[$media['complet']] = $id_doc;
+			if ($id_doc)
+				$numerotation[$media['complet']] = $id_doc;
 			
 		}
 		else{
