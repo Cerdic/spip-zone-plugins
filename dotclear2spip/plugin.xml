@@ -16,7 +16,7 @@
     <fonctions>dot2_fonctions.php</fonctions>
     <necessite id="crud" />
     <necessite id="sale" />
-    <necessite id="SPIP" version="[2.1;" />
+    <necessite id="SPIP" version="[2.1;)" />
 
 
 
