@@ -20,4 +20,5 @@ Remarque: La restauration fonctionne par d&eacute;faut sur le fichier d'archives
 	<lien>http://www.spip-contrib.net/Mes-fichiers</lien>
 	<auteur>James &copy; 2007 - Distribu&eacute; sous licence GNU/GPL</auteur>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
