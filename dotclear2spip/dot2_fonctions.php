@@ -1,6 +1,40 @@
 <?php
-// Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3) les forums 4) les sites puis appliquer "purge articles" et "purge rubrique"
+// Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3)  les sites puis appliquer "purge articles" et "purge rubrique"
 
+function dot2_migrer_commentaires($post_id,$id_article){
+	$ressources = sql_select('comment_id,comment_dt,comment_author,comment_email,comment_site,comment_content,comment_ip,comment_status,comment_spam_status','dc_comment','`post_id`='.$post_id);
+	$crud = charger_fonction('crud','action');
+	while($post =sql_fetch($ressources)){
+		$comment_id = $post['comment_id'];
+		//Determinons le statut
+		if ($post['comment_spam_status'] == 1){
+			$statut = 'spam';
+		}
+		else if ($post['comment_status'] == 1){
+			$statut = 'publie';
+		}
+		else {
+			$statut	= 'off';	
+		}
+		// Salir le contenu
+		$texte = sale($post['comment_content']);
+		
+		// Rajouter dans la base
+		$resultat = $crud('create','forums','', array(
+			'date_heure'=>$post['comment_dt'],
+			'id_article'=>$id_article,
+			'texte'		=>$texte,
+			'auteur'	=>$post['comment_autor'],
+			'email_auteur'=>$post['comment_email'],
+			'url_site'	=>$post['comment_site'],
+			'statut'	=>$statut,
+			'ip'		=>$post['comment_ip']
+			));
+		$id_message = $resultat['result']['id'];
+		spip_log("Importation du forum $id_message (ex $comment_id) pour l'article $id_article (ex $post_id)",'dot2');
+		
+	}
+}
 
 function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 	$ressources = sql_select('post_id,user_id,cat_id,post_dt,post_format,post_lang,post_title,post_excerpt_xhtml,post_content_xhtml,post_open_comment,post_status','dc_post','`blog_id`='.sql_quote($blog_id));
@@ -40,7 +74,6 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 			'descriptif'	=> $descriptif,
 			'texte'			=> $texte,
 			'date'			=> $r['post_dt'],
-			'surtitre'		=> 'DC:'.$r['post_id'],
 			'statut'		=> $statut,
 			'lang'			=> $r['post_lang'],
 			'accepter_forum'=> $accepter_forum
@@ -56,6 +89,8 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 		sql_delete('spip_auteurs_articles','`id_article`='.$id_article." AND `id_auteur`!=".$id_auteur);
 	// Migration des mots
 		$id_groupe = dot2_migrer_mots_article($r['post_id'],$id_article,$id_groupe);
+	// Migration des commentaires
+		dot2_migrer_commentaires($r['post_id'],$id_article);
 	}
 	
 
