@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_entre' => 'La valeur doit &ecirc;tre comprise entre @min@ et @max@.',
 	'erreur_entier_max' => 'La valeur doit &ecirc;tre inf&eacute;rieure &agrave; @max@.',
 	'erreur_entier_min' => 'La valeur doit &ecirc;tre sup&eacute;rieure &agrave; @min@.',
+	'erreur_id_document' => 'Cet identifiant de document n\'est pas valide.',
 	'erreur_numerique' => 'Le format du nombre n\'est pas valide.',
 	'erreur_regex' => 'Le format de la cha&icirc;ne n\'est pas valide.',
 	'erreur_siren' => 'Le num&eacute;ro de SIREN n\'est pas valide.',
