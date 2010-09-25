@@ -16,5 +16,8 @@
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="saisies" version="[1.7.9;]" />
-	<necessite id="verifier" />
+	<necessite id="verifier" version="[0.1.1;]" />
+	
+	<necessite id="gestdoc" info="A supprimer a terme" />
+	<necessite id="formidable" info="A supprimer a terme" />
 </plugin>
