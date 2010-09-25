@@ -14,16 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Correction typographique francaise
 
-require_once _DIR_RESTREINT.'typographie/fr.php';
-
-function typographie_fr($letexte) {
-
-	# version core
-	if (!$GLOBALS['tw']) {
-		return typographie_fr_dist($letexte);
-	}
-
-	$debug = _request('var_debug_wheel');
+function typographie_fr($t) {
 
 	static $trans;
 
@@ -59,50 +50,38 @@ function typographie_fr($letexte) {
 	# cf. TYPO_PROTECTEUR dans inc/texte
 	$pro = "-\x2-";
 
-	if($debug) spip_timer('trans');
-	$letexte = str_replace(array_keys($trans), array_values($trans), $letexte);
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['trans'] += spip_timer('trans', true);
+	$t = str_replace(array_keys($trans), array_values($trans), $t);
 
-	if($debug) spip_timer('cherche1');
 	# la typo du ; risque de clasher avec les entites &xxx;
-	if (strpos($letexte, ';') !== false) {
-		$letexte = str_replace(';', '~;', $letexte);
-		$letexte = preg_replace(',(&#?[0-9a-z]+)~;,iS', '$1;', $letexte);
+	if (strpos($t, ';') !== false) {
+		$t = str_replace(';', '~;', $t);
+		$t = preg_replace(',(&#?[0-9a-z]+)~;,iS', '$1;', $t);
 	}
 
 	/* 2 */
-	$letexte = preg_replace('/&#187;| --?,|(?::| %)(?:\W|$)/S', '~$0', $letexte);
+	$t = preg_replace('/&#187;| --?,|(?::| %)(?:\W|$)/S', '~$0', $t);
 
 	/* 3 */
-	$letexte = preg_replace('/[!?][!?\.]*/S', "$pro~$0", $letexte, -1, $c);
+	$t = preg_replace('/[!?][!?\.]*/S', "$pro~$0", $t, -1, $c);
 	if ($c) {
-		$letexte = preg_replace("/([\[<\(!\?\.])$pro~/S", '$1', $letexte);
-		$letexte = str_replace("$pro", '', $letexte);
+		$t = preg_replace("/([\[<\(!\?\.])$pro~/S", '$1', $t);
+		$t = str_replace("$pro", '', $t);
 	}
 
 	/* 4 */
-	$letexte = preg_replace('/&#171;|M(?:M?\.|mes?|r\.?|&#176;) |[nN]&#176; /S', '$0~', $letexte);
+	$t = preg_replace('/&#171;|M(?:M?\.|mes?|r\.?|&#176;) |[nN]&#176; /S', '$0~', $t);
 
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['cherche1'] += spip_timer('cherche1', true);
+	if (strpos($t, '~') !== false)
+		$t = preg_replace("/ *~+ */S", "~", $t);
 
-
-	if($debug) spip_timer('chercheespaces');
-	if (strpos($letexte, '~') !== false)
-		$letexte = preg_replace("/ *~+ */S", "~", $letexte);
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['chercheespaces'] += spip_timer('chercheespaces', true);
-
-	if($debug) spip_timer('cherche2');
-	$letexte = preg_replace("/--([^-]|$)/S", "$pro&mdash;$1", $letexte, -1, $c);
+	$t = preg_replace("/--([^-]|$)/S", "$pro&mdash;$1", $t, -1, $c);
 	if ($c) {
-		$letexte = preg_replace("/([-\n])$pro&mdash;/S", "$1--", $letexte);
-		$letexte = str_replace($pro, '', $letexte);
+		$t = preg_replace("/([-\n])$pro&mdash;/S", "$1--", $t);
+		$t = str_replace($pro, '', $t);
 	}
 
-	$letexte = preg_replace(',(https?|ftp|mailto)~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S', '$1$3$4', $letexte);
-	$letexte = str_replace('~', '&nbsp;', $letexte);
+	$t = preg_replace(',(https?|ftp|mailto)~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S', '$1$3$4', $t);
+	$t = str_replace('~', '&nbsp;', $t);
 
-
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['cherche2'] += spip_timer('cherche2', true);
-
-	return $letexte;
+	return $t;
 }

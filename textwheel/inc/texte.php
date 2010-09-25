@@ -12,104 +12,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# Tests TW : par defaut TW est actif
-# passer a false pour basculer sur la version core
-$GLOBALS['tw'] = true;
-
 include_spip('inc/filtres');
 include_spip('inc/lang');
 include_spip('inc/lien');
 
-# accepter un mode debug
-if (_request('var_debug_wheel'))
-	$GLOBALS['textWheel'] = 'TextWheelDebug';
-else
-	$GLOBALS['textWheel'] = 'TextWheel';
-
-require_once _DIR_PLUGIN_TW.'engine/textwheel.php';
-$GLOBALS['spip_wheels']['raccourcis'] = array('spip/spip.yaml','spip/spip-paragrapher.yaml');
-if (test_espace_prive ())
-	$GLOBALS['spip_wheels']['raccourcis'][] = 'spip/ecrire.yaml';
-
-$GLOBALS['spip_wheels']['interdire_scripts'] = array('spip/interdire-scripts.yaml');
-$GLOBALS['spip_wheels']['echappe_js'] = array('spip/echappe-js.yaml');
-
-
-class SPIPTextWheelRuleset extends TextWheelRuleSet {
-	protected function findFile(&$file, $path=''){
-		static $default_path;
-
-		// absolute file path?
-		if (file_exists($file))
-			return $file;
-
-		// file include with texwheels, relative to calling ruleset
-		if ($path AND file_exists($f = $path.$file))
-			return $f;
-
-		return find_in_path($file,'wheels/');
-	}
-
-	public static function &loader($ruleset, $callback = '', $class = 'SPIPTextWheelRuleset', $file_cache='') {
-
-		# memoization
-		$key = 'tw-'.md5(serialize($ruleset).$callback.$class);
-
-		# lecture du cache
-		include_spip('inc/memoization');
-		if (!_request('var_mode')
-		AND $cacheruleset = cache_get($key))
-			return $cacheruleset;
-
-		# calcul de la wheel
-		$ruleset = parent::loader($ruleset, $callback, $class);
-
-		# ecriture du cache
-		cache_set($key, $ruleset);
-
-		return $ruleset;
-	}
-}
-
-// init du tableau principal des raccourcis
-
-global $spip_raccourcis_typo, $class_spip_plus, $debut_intertitre, $fin_intertitre, $debut_gras, $fin_gras, $debut_italique, $fin_italique;
-
-$spip_raccourcis_typo = array(
-			      array(
-		/* 4 */		"/(^|[^{])[{][{][{]/S",
-		/* 5 */		"/[}][}][}]($|[^}])/S",
-		/* 6 */ 	"/(( *)\n){2,}(<br\s*\/?".">)?/S",
-		/* 7 */ 	"/[{][{]/S",
-		/* 8 */ 	"/[}][}]/S",
-		/* 9 */ 	"/[{]/S",
-		/* 10 */	"/[}]/S",
-		/* 11 */	"/(?:<br\s*\/?".">){2,}/S",
-		/* 12 */	"/<p>\n*(?:<br\s*\/?".">\n*)*/S",
-		/* 13 */	"/<quote>/S",
-		/* 14 */	"/<\/quote>/S",
-		/* 15 */	"/<\/?intro>/S"
-				),
-			      array(
-		/* 4 */ 	"\$1\n\n" . $debut_intertitre,
-		/* 5 */ 	$fin_intertitre ."\n\n\$1",
-		/* 6 */ 	"<p>",
-		/* 7 */ 	$debut_gras,
-		/* 8 */ 	$fin_gras,
-		/* 9 */ 	$debut_italique,
-		/* 10 */	$fin_italique,
-		/* 11 */	"<p>",
-		/* 12 */	"<p>",
-		/* 13 */	"<blockquote$class_spip_plus><p>",
-		/* 14 */	"</blockquote><p>",
-		/* 15 */	""
-				)
-);
+include_spip('inc/textwheel');
 
 // Raccourcis dependant du sens de la langue
-
-function definir_raccourcis_alineas()
-{
+function definir_raccourcis_alineas() {
 	global $ligne_horizontale;
 	static $alineas = array();
 	$x = _DIR_RESTREINT ? lang_dir() : lang_dir($GLOBALS['spip_lang']);
@@ -339,28 +249,12 @@ function echappe_retour($letexte, $source='', $filtre = "") {
 // Reinserer le javascript de confiance (venant des modeles)
 
 // http://doc.spip.org/@echappe_retour_modeles
-function echappe_retour_modeles($letexte, $interdire_scripts=false) {
-	if ($GLOBALS['tw']) return tw_echappe_retour_modeles($letexte, $interdire_scripts);
-	return core_echappe_retour_modeles($letexte, $interdire_scripts);
-}
-
-function core_echappe_retour_modeles($letexte, $interdire_scripts=false)
-{
+function echappe_retour_modeles($letexte, $interdire_scripts=false){
 	$letexte = echappe_retour($letexte);
 
 	// Dans les appels directs hors squelette, securiser aussi ici
 	if ($interdire_scripts)
 		$letexte = interdire_scripts($letexte,true);
-
-	return trim($letexte);
-}
-
-function tw_echappe_retour_modeles($letexte, $interdire_scripts=false){
-	$letexte = echappe_retour($letexte);
-
-	// Dans les appels directs hors squelette, securiser aussi ici
-	if ($interdire_scripts)
-		$letexte = tw_interdire_scripts($letexte,true);
 
 	return trim($letexte);
 }
@@ -440,29 +334,13 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 }
 
 //
-// Les elements de propre()
+// echapper les < script ...
 //
-
-// afficher joliment les <script>
-// http://doc.spip.org/@echappe_js
-function echappe_js($t,$class=' class="echappe-js"') {
-	if ($GLOBALS['tw']) return tw_echappe_js($t,$class);
-	return core_echappe_js($t,$class);
-}
-
-function core_echappe_js($t,$class=' class="echappe-js"') {
-	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
-	foreach ($r as $regs)
-		$t = str_replace($regs[0],
-			"<code$class>".nl2br(htmlspecialchars($regs[0])).'</code>',
-			$t);
-	return $t;
-}
-
-function tw_echappe_js($t) {
+function echappe_js($t) {
 	static $wheel = null;
+
 	if (!isset($wheel))
-		$wheel = new $GLOBALS['textWheel'](
+		$wheel = new TextWheel(
 			SPIPTextWheelRuleset::loader($GLOBALS['spip_wheels']['echappe_js'])
 		);
 
@@ -500,59 +378,6 @@ function protege_js_modeles($t) {
 // aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
 // http://doc.spip.org/@interdire_scripts
 function interdire_scripts($arg) {
-	if ($GLOBALS['tw']) return tw_interdire_scripts($arg);
-	return core_interdire_scripts($arg);
-}
-
-function core_interdire_scripts($arg) {
-	// on memorise le resultat sur les arguments non triviaux
-	static $dejavu = array();
-
-	// Attention, si ce n'est pas une chaine, laisser intact
-	if (!$arg OR !is_string($arg) OR !strstr($arg, '<')) return $arg;
-
-	if (isset($dejavu[$GLOBALS['filtrer_javascript']][$arg])) return $dejavu[$GLOBALS['filtrer_javascript']][$arg];
-
-	// echapper les tags asp/php
-	$t = str_replace('<'.'%', '&lt;%', $arg);
-
-	// echapper le php
-	$t = str_replace('<'.'?', '&lt;?', $t);
-
-	// echapper le < script language=php >
-	$t = preg_replace(',<(script\b[^>]+\blanguage\b[^\w>]+php\b),UimsS', '&lt;\1', $t);
-
-	// Pour le js, trois modes : parano (-1), prive (0), ok (1)
-	switch($GLOBALS['filtrer_javascript']) {
-		case 0:
-			if (!_DIR_RESTREINT)
-				$t = echappe_js($t);
-			break;
-		case -1:
-			$t = echappe_js($t);
-			break;
-	}
-
-	// pas de <base href /> svp !
-	$t = preg_replace(',<(base\b),iS', '&lt;\1', $t);
-
-	// Reinserer les echappements des modeles
-	if (defined('_PROTEGE_JS_MODELES'))
-		$t = echappe_retour($t,"javascript"._PROTEGE_JS_MODELES);
-	if (defined('_PROTEGE_PHP_MODELES'))
-		$t = echappe_retour($t,"php"._PROTEGE_PHP_MODELES);
-
-	return $dejavu[$GLOBALS['filtrer_javascript']][$arg] = $t;
-}
-
-
-// Securite : empecher l'execution de code PHP, en le transformant en joli code
-// dans l'espace prive, cette fonction est aussi appelee par propre et typo
-// si elles sont appelees en direct
-// il ne faut pas desactiver globalement la fonction dans l'espace prive car elle protege
-// aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
-// http://doc.spip.org/@interdire_scripts
-function tw_interdire_scripts($arg) {
 	static $dejavu = array();
 	static $wheel = null;
 
@@ -561,13 +386,15 @@ function tw_interdire_scripts($arg) {
 	if (isset($dejavu[$GLOBALS['filtrer_javascript']][$arg])) return $dejavu[$GLOBALS['filtrer_javascript']][$arg];
 
 	if (!isset($wheel)){
-		$ruleset = SPIPTextWheelRuleset::loader($GLOBALS['spip_wheels']['interdire_scripts']);
+		$ruleset = SPIPTextWheelRuleset::loader(
+			$GLOBALS['spip_wheels']['interdire_scripts']
+		);
 		// Pour le js, trois modes : parano (-1), prive (0), ok (1)
 		// desactiver la regle echappe-js si besoin
 		if ($GLOBALS['filtrer_javascript']==1
 			OR ($GLOBALS['filtrer_javascript']==0 AND !test_espace_prive()))
 			$ruleset->addRules (array('securite-js'=>array('disabled'=>true)));
-		$wheel = new $GLOBALS['textWheel']($ruleset);
+		$wheel = new TextWheel($ruleset);
 	}
 
 	$t = $wheel->text($arg);
@@ -656,49 +483,47 @@ define('_TYPO_PROTECTEUR', "\x1\x2\x3\x4\x5\x6\x7\x8");
 define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,imsS");
 
 // http://doc.spip.org/@corriger_typo
-function corriger_typo($letexte, $lang='') {
-	static $typographie = array();
+function corriger_typo($t, $lang='') {
 	// Plus vite !
-	if (!$letexte) return $letexte;
+	if (!$t) return $t;
 
-	$letexte = pipeline('pre_typo', $letexte);
+	$t = pipeline('pre_typo', $t);
 
 	// Caracteres de controle "illegaux"
-	$letexte = corriger_caracteres($letexte);
+	$t = corriger_caracteres($t);
 
 	// Proteger les caracteres typographiques a l'interieur des tags html
-	if (preg_match_all(_TYPO_BALISE, $letexte, $regs, PREG_SET_ORDER)) {
+	if (preg_match_all(_TYPO_BALISE, $t, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$insert = $reg[0];
 			// hack: on transforme les caracteres a proteger en les remplacant
 			// par des caracteres "illegaux". (cf corriger_caracteres())
 			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
-			$letexte = str_replace($reg[0], $insert, $letexte);
+			$t = str_replace($reg[0], $insert, $t);
 		}
 	}
 
 	// trouver les blocs multi et les traiter a part
-	$letexte = extraire_multi($e = $letexte, $lang, true);
-	$e = ($e === $letexte);
+	$t = extraire_multi($e = $t, $lang, true);
+	$e = ($e === $t);
 
 	// Charger & appliquer les fonctions de typographie
-	if (!isset($typographie[$lang]))
-		$typographie[$lang] = charger_fonction(lang_typo($lang), 'typographie');
-	$letexte = $typographie[$lang]($letexte);
+	$typographie = charger_fonction(lang_typo($lang), 'typographie');
+	$letexte = $typographie($letexte);
 
 	// Les citations en une autre langue, s'il y a lieu
-	if (!$e) $letexte = echappe_retour($letexte, 'multi');
+	if (!$e) $t = echappe_retour($t, 'multi');
 
 	// Retablir les caracteres proteges
-	$letexte = strtr($letexte, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
+	$t = strtr($t, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
 
 	// pipeline
-	$letexte = pipeline('post_typo', $letexte);
+	$t = pipeline('post_typo', $t);
 
 	# un message pour abs_url - on est passe en mode texte
 	$GLOBALS['mode_abs_url'] = 'texte';
 
-	return $letexte;
+	return $t;
 }
 
 
@@ -1031,74 +856,11 @@ define('_RACCOURCI_PROTECTEUR', "\x1\x2\x3\x4");
 define('_RACCOURCI_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_RACCOURCI_PROTEGER)."][^<>]*>,imsS");
 
 // Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
-// http://doc.spip.org/@traiter_raccourcis
-function traiter_raccourcis($letexte) {
-	if ($GLOBALS['tw']) return tw_traiter_raccourcis($letexte);
-	return core_traiter_raccourcis($letexte);
-}
-function core_traiter_raccourcis($letexte) {
 
-	// Appeler les fonctions de pre_traitement
-	$letexte = pipeline('pre_propre', $letexte);
-
-	// Gerer les notes (ne passe pas dans le pipeline)
-	$notes = charger_fonction('notes', 'inc');
-	list($letexte, $mes_notes) = $notes($letexte);
-
-	//
-	// Tableaux
-	//
-
-	// ne pas oublier les tableaux au debut ou a la fin du texte
-	$letexte = preg_replace(",^\n?[|],S", "\n\n|", $letexte);
-	$letexte = preg_replace(",\n\n+[|],S", "\n\n\n\n|", $letexte);
-	$letexte = preg_replace(",[|](\n\n+|\n?$),S", "|\n\n\n\n", $letexte);
-
-	if (preg_match_all(',[^|](\n[|].*[|]\n)[^|],UmsS', $letexte,
-	$regs, PREG_SET_ORDER))
-	foreach ($regs as $t) {
-		$letexte = str_replace($t[1], traiter_tableau($t[1]), $letexte);
-	}
-
-	$letexte = "\n".trim($letexte);
-
-	// les listes
-	if (strpos($letexte,"\n-*")!==false OR strpos($letexte,"\n-#")!==false)
-		$letexte = traiter_listes($letexte);
-
-	// Proteger les caracteres actifs a l'interieur des tags html
-
-	if (preg_match_all(_RACCOURCI_BALISE, $letexte, $regs, PREG_SET_ORDER)) {
-		foreach ($regs as $reg) {
-			$insert = strtr($reg[0], _RACCOURCI_PROTEGER, _RACCOURCI_PROTECTEUR);
-			$letexte = str_replace($reg[0], $insert, $letexte);
-		}
-	}
-
-	// Traitement des alineas
-	list($a,$b) = definir_raccourcis_alineas();
-	$letexte = preg_replace($a, $b,	$letexte);
-	//  Introduction des attributs class_spip* et autres raccourcis
-	list($a,$b) = $GLOBALS['spip_raccourcis_typo'];
-	$letexte = preg_replace($a, $b,	$letexte);
-	$letexte = preg_replace('@^\n<br />@S', '', $letexte);
-
-	// Retablir les caracteres proteges
-	$letexte = strtr($letexte, _RACCOURCI_PROTECTEUR, _RACCOURCI_PROTEGER);
-
-	// Fermer les paragraphes ; mais ne pas forcement en creer si un seul
-	$letexte = paragrapher($letexte, $GLOBALS['toujours_paragrapher']);
-
-	// Appeler les fonctions de post-traitement
-	$letexte = pipeline('post_propre', $letexte);
-
-	if ($mes_notes) $notes($mes_notes);
-
-	return $letexte;
-}
-
-
-function tw_personaliser_raccourcis(&$ruleset){
+// mais d'abord, une callback de reconfiguration des raccourcis
+// a partir de globales (est-ce old-style ? on conserve quand meme
+// par souci de compat ascendante)
+function personnaliser_raccourcis(&$ruleset){
 	if (isset($GLOBALS['debut_intertitre']) AND $rule=$ruleset->getRule('intertitres')){
 		$rule->replace[0] = preg_replace(',<[^>]*>,Uims',$GLOBALS['debut_intertitre'],$rule->replace[0]);
 		$rule->replace[1] = preg_replace(',<[^>]*>,Uims',$GLOBALS['fin_intertitre'],$rule->replace[1]);
@@ -1125,83 +887,46 @@ function tw_personaliser_raccourcis(&$ruleset){
 	}
 }
 
-function tw_traiter_raccourcis($letexte) {
+// http://doc.spip.org/@traiter_raccourcis
+function traiter_raccourcis($t) {
 	static $wheel;
 	// Appeler les fonctions de pre_traitement
-	#$letexte = pipeline('pre_propre', $letexte);
-
-	$debug = _request('var_debug_wheel');
-
+	$t = pipeline('pre_propre', $t);
 
 	if (!isset($wheel)) {
-		if($debug) spip_timer('init');
-		$ruleset = SPIPTextWheelRuleset::loader($GLOBALS['spip_wheels']['raccourcis'],'tw_personaliser_raccourcis');
-		$wheel = new $GLOBALS['textWheel']($ruleset);
+		$ruleset = SPIPTextWheelRuleset::loader(
+			$GLOBALS['spip_wheels']['raccourcis'],'personnaliser_raccourcis'
+		);
+		$wheel = new TextWheel($ruleset);
 
-		if (_request('var_mode') == 'compile') {
+		if (_request('var_mode') == 'wheel'
+		AND autoriser('debug')) {
 			echo "<pre>";
 			echo htmlspecialchars($wheel->compile());
 			echo "</pre>\n";
 			;
 		}
-
-		if($debug) $GLOBALS['totaux']['tw_traiter_raccourcis:']['init'] += spip_timer('init', true);
 	}
 
 	// Gerer les notes (ne passe pas dans le pipeline)
-	if($debug) spip_timer('notes');
 	$notes = charger_fonction('notes', 'inc');
-	list($letexte, $mes_notes) = $notes($letexte);
-	if($debug) $GLOBALS['totaux']['tw_traiter_raccourcis:']['notes'] += spip_timer('notes', true);
+	list($t, $mes_notes) = $notes($t);
 
-	if($debug) spip_timer('text');
-	$letexte = $wheel->text($letexte);
-	if($debug) $GLOBALS['totaux']['tw_traiter_raccourcis:']['text'] += spip_timer('text', true);
+	$t = $wheel->text($t);
 
 	// Appeler les fonctions de post-traitement
-	if($debug) spip_timer('post_propre');
-	$letexte = pipeline('post_propre', $letexte);
-	if($debug) $GLOBALS['totaux']['tw_traiter_raccourcis:']['post_propre'] += spip_timer('post_propre', true);
+	$t = pipeline('post_propre', $t);
 
-	if($debug) spip_timer('mesnotes');
-	if ($mes_notes) {
+	if ($mes_notes)
 		$notes($mes_notes);
-	}
-	if($debug) $GLOBALS['totaux']['tw_traiter_raccourcis:']['mesnotes'] += spip_timer('mesnotes', true);
 
-	return $letexte;
+	return $t;
 }
 
 
 // Filtre a appliquer aux champs du type #TEXTE*
 // http://doc.spip.org/@propre
 function propre($t, $connect=null) {
-	if ($GLOBALS['tw']) return tw_propre($t,$connect);
-	return core_propre($t,$connect);
-}
-
-function core_propre($t, $connect=null) {
-	// les appels directs a cette fonction depuis le php de l'espace
-	// prive etant historiquement ecrits sans argment $connect
-	// on utilise la presence de celui-ci pour distinguer les cas
-	// ou il faut passer interdire_script explicitement
-	// les appels dans les squelettes (de l'espace prive) fournissant un $connect
-	// ne seront pas perturbes
-	$interdire_script = false;
-	if (is_null($connect)){
-		$connect = '';
-		$interdire_script = true;
-	}
-
-	return !$t ? strval($t) :
-		echappe_retour_modeles(
-			traiter_raccourcis(
-				expanser_liens(echappe_html($t),$connect)),$interdire_script);
-}
-
-
-function tw_propre($t, $connect=null) {
-
 	// les appels directs a cette fonction depuis le php de l'espace
 	// prive etant historiquement ecrits sans argment $connect
 	// on utilise la presence de celui-ci pour distinguer les cas
@@ -1216,23 +941,10 @@ function tw_propre($t, $connect=null) {
 
 	if (!$t) return strval($t);
 
-	$debug = _request('var_debug_wheel');
-
-	if($debug) spip_timer('echappe_html');
 	$t = echappe_html($t);
-	if($debug) $GLOBALS['totaux']['echappe_html'] += spip_timer('echappe_html', true);
-
-	if($debug) spip_timer('expanser_liens');
-	$t = expanser_liens_tw($t,$connect);
-	if($debug) $GLOBALS['totaux']['expanser_liens'] += spip_timer('expanser_liens', true);
-
-	if($debug) spip_timer('tw_traiter_raccourcis');
-	$t = tw_traiter_raccourcis($t);
-	if($debug) $GLOBALS['totaux']['tw_traiter_raccourcis'] += spip_timer('tw_traiter_raccourcis', true);
-
-	if($debug) spip_timer('tw_echappe_retour_modeles');
-	$t = tw_echappe_retour_modeles($t, $interdire_script);
-	if($debug) $GLOBALS['totaux']['tw_echappe_retour_modeles'] += spip_timer('tw_echappe_retour_modeles', true);
+	$t = expanser_liens($t,$connect);
+	$t = traiter_raccourcis($t);
+	$t = echappe_retour_modeles($t, $interdire_script);
 
 	return $t;
 }

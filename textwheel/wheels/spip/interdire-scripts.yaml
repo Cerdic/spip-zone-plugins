@@ -21,7 +21,7 @@ securite-script-php:
 securite-js:
   if_str: "<script"
   type: all
-  replace: "tw_echappe_js"
+  replace: "echappe_js"
   is_callback: Y
 
 securite-base:

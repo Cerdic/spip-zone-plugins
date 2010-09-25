@@ -12,19 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Correction typographique francaise
+// Correction typographique anglaise
 
-require_once _DIR_RESTREINT.'typographie/en.php';
-
-function typographie_en($letexte) {
-
-	# version core
-	if (!$GLOBALS['tw']) {
-		return typographie_en_dist($letexte);
-	}
-
-	$debug = _request('var_debug_wheel');
-
+function typographie_en($t) {
 	static $trans;
 
 	if (!isset($trans)) {
@@ -46,37 +36,24 @@ function typographie_en($letexte) {
 	# cf. TYPO_PROTECTEUR dans inc/texte
 	$pro = "-\x2-";
 
-	if($debug) spip_timer('trans');
-	$letexte = str_replace(array_keys($trans), array_values($trans), $letexte);
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['trans'] += spip_timer('trans', true);
-
-	if($debug) spip_timer('cherche1');
+	$t = str_replace(array_keys($trans), array_values($trans), $t);
 
 	/* 2 */
-	$letexte = preg_replace('/ --?,|(?: %)(?:\W|$)/S', '~$0', $letexte);
+	$t = preg_replace('/ --?,|(?: %)(?:\W|$)/S', '~$0', $t);
 
 	/* 4 */
-	$letexte = preg_replace('/Mr\.? /S', '$0~', $letexte);
+	$t = preg_replace('/Mr\.? /S', '$0~', $t);
 
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['cherche1'] += spip_timer('cherche1', true);
+	if (strpos($t, '~') !== false)
+		$t = preg_replace("/ *~+ */S", "~", $t);
 
-
-	if($debug) spip_timer('chercheespaces');
-	if (strpos($letexte, '~') !== false)
-		$letexte = preg_replace("/ *~+ */S", "~", $letexte);
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['chercheespaces'] += spip_timer('chercheespaces', true);
-
-	if($debug) spip_timer('cherche2');
-	$letexte = preg_replace("/--([^-]|$)/S", "$pro&mdash;$1", $letexte, -1, $c);
+	$t = preg_replace("/--([^-]|$)/S", "$pro&mdash;$1", $t, -1, $c);
 	if ($c) {
-		$letexte = preg_replace("/([-\n])$pro&mdash;/S", "$1--", $letexte);
-		$letexte = str_replace($pro, '', $letexte);
+		$t = preg_replace("/([-\n])$pro&mdash;/S", "$1--", $t);
+		$t = str_replace($pro, '', $t);
 	}
 
-	$letexte = str_replace('~', '&nbsp;', $letexte);
+	$t = str_replace('~', '&nbsp;', $t);
 
-
-	if($debug) $GLOBALS['totaux']['expanser_liens:']['corriger_typo:']['cherche2'] += spip_timer('cherche2', true);
-
-	return $letexte;
+	return $t;
 }
