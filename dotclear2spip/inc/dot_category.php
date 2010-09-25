@@ -38,5 +38,53 @@ function dot_category_arbre($blog_id){
 	}
 	return $rubriques;
 }
+#appelé après dot_category_arbre il transforme le résulta de cette fonction en tableau arborescent
+function dot_category_spiper_arbre($arbre){
+	$arbre2	= $arbre;
+	$arbo	= array();
+	$filiation = array();
+	$nb_racine = dot_category_spiper_nb_racine($arbre,true);
+	$racine	   = dot_category_spiper_nb_racine($arbre);
+	foreach($arbre as $branche){
+		list($arbre2,$filiation[$branche['cat_id']])	= dot_category_spiper_trouver_fils($arbre2,$branche['cat_id']);
+	}
+	
+	foreach ($racine as $secteur){
+		$arbo[$secteur]	= dot_category_spip_ramener_enfants($secteur,$filiation);
+	}
+	return $arbo;
+}
+
+function dot_category_spiper_trouver_fils($arbre,$id_pere){
+	foreach ($arbre as $branche){
+		if ($branche['id_pere'] == $id_pere){
+			$fils[$branche['cat_id']]='';
+			}
+	}
+	return array($arbre,$fils);
+}
+
+function dot_category_spiper_nb_racine($arbre,$nob=false){
+	$nb = 0;
+	$racine = array();
+	foreach($arbre as $branche){
+		if($branche['id_pere']==0)
+			$racine[] = $branche['cat_id'];
+			$nb++;
+	}
+	return $nob ? $nb : $racine;	
+}
+
+function dot_category_spip_ramener_enfants($pere,$enfants_potentiels){
+	$arbo = '';
+	if ($enfants_potentiels[$pere] != ''){
+	$arbo = array();
+		foreach($enfants_potentiels[$pere] as $pot_id=>$pot_enfant){
+			$arbo[$pere][$pot_id]	= dot_category_spip_ramener_enfants($pot_id,$enfants_potentiels);
+		}
+	
+	}
+	return $arbo;
+}
 
 ?>
