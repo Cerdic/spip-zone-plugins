@@ -1,20 +1,10 @@
 <plugin>
-
-    <nom> Sale </nom>
-
-    <categorie></categorie>
-    <auteur> Ma&iuml;eul ROUQUETTE d'apr&egrave;s la contribution "Boutons M&eacute;mo" </auteur>
-    <version>0.1</version>
-  
-    <etat>dev</etat>
-
-    <description> Proposer une fonction sale() qui permet de passer du (X)HTML vers du SPIP</description>
-      <prefix>sale</prefix>
-
-
-
-    <fonctions>sale_fonctions.php </fonctions>
-
-
-
+	<prefix>sale</prefix>
+	<nom>Sale</nom>
+	<categorie>outil</categorie>
+	<auteur> Ma&iuml;eul ROUQUETTE d'apr&egrave;s la contribution "Boutons M&eacute;mo" </auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description> Proposer une fonction sale() qui permet de passer du (X)HTML vers du SPIP</description>
+	<fonctions>sale_fonctions.php </fonctions>
 </plugin>
