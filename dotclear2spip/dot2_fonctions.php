@@ -1,8 +1,66 @@
 <?php
+// Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3) les forums 4) les sites puis appliquer "purge articles" et "purge rubrique"
 
-include_spip('inc/dot_category');
 
+function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
+	$ressources = sql_select('post_id,user_id,cat_id,post_dt,post_format,post_lang,post_title,post_excerpt_xhtml,post_content_xhtml,post_open_comment,post_status','dc_post','`blog_id`='.sql_quote($blog_id));
 
+		
+	while($r = sql_fetch($ressources)){
+	// Déterminons la rubrique
+		if($r['cat_id']==null){
+			$id_rubrique	= $rubrique_defaut;
+		}
+		else{
+			$id_rubrique	= sql_getfetsel('id_rubrique','spip_rubriques','`descriptif`='.sql_quote('DC:'.$id_rubrique));
+		}
+	
+	
+	// Créons l'auteur ou bien prenons l'auteur déja crée
+		$id_auteur				= sql_getfetsel('id_auteur','spip_auteurs','`login`='.sql_quote($r['user_id']));
+		if ($id_auteur == null){
+			$id_auteur = dot2_migrer_utilisateur($blog_id,$r['user_id']);
+			}
+
+	// Mise au sale du texte et de l'introduction : nota : il faudrait voir ce que ca donne si formaté en Dotclear
+		$texte 		= sale($r['post_content_xhtml']);
+		$descriptif	= sale($r['post_excerpt_xhtml']);
+	
+	// Forums ouvert ?
+		$r['post_open_comment'] == 1 ? $accepter_forum = 'pos' : $accepter_forum = 'non';
+		
+	// Statut
+		$r['post_status']	== 1 ?	$statut =	'publie' : $statut = 'redac';
+	
+	// Création de l'article
+		$crud = charger_fonction('crud','action');
+		$resultat	= $crud('create','articles','',array(
+			'titre'			=> $r['post_title'],
+			'id_rubrique'	=> $id_rubrique,
+			'descriptif'	=> $descriptif,
+			'texte'			=> $texte,
+			'date'			=> $r['post_dt'],
+			'surtitre'		=> 'DC:'.$r['post_id'],
+			'statut'		=> $statut,
+			'lang'			=> $r['post_lang'],
+			'accepter_forum'=> $accepter_forum
+		
+			));
+		$id_article	= $resultat['result']['id'];
+		$titre		= $r['post_title'];
+		spip_log("Création de l'article $id_article ($titre)",'dot2');
+	
+	// Attribution de l'auteur
+		sql_insertq('spip_auteurs_articles',array('id_article'=>$id_article,'id_auteur'=>$id_auteur));
+		// dans le crud on ne peut dire quel auteur on veut. Du coup il lie automatique un auteur pour l'article -> on le supprime
+		sql_delete('spip_auteurs_articles','`id_article`='.$id_article." AND `id_auteur`!=".$id_auteur);
+	// Migration des mots
+		$id_groupe = dot2_migrer_mots_article($r['post_id'],$id_article,$id_groupe);
+	}
+	
+
+	
+}
 
 function dot2_migrer_rubriques($blog_id){
 	include_spip('inc/dot_category');
@@ -91,8 +149,13 @@ function dot2_migrer_mots_article($id_post,$id_article,$id_groupe=''){
 	
 	#créer le groupe le cas échéant
 	if ($id_groupe == ''){
-		$id_groupe = sql_insertq('spip_groupes_mots',array('titre'=>_L('tags de dotclear'),'unseul'=>'non','obligatoire'=>'non','table_liees'=>'articles','minirezo'=>'oui','comite'=>'oui','forum'=>'non'));
-		spip_log("Création du groupe $id_groupe",'dot2');	
+		$id_groupe=sql_getfetsel('id_groupe','spip_groupes_mots','`titre`='.sql_quote(_L('tags de dotclear')));
+		
+		if ($id_groupe==null){
+			
+			$id_groupe = sql_insertq('spip_groupes_mots',array('titre'=>_L('tags de dotclear'),'unseul'=>'non','obligatoire'=>'non','tables_liees'=>'articles','minirezo'=>'oui','comite'=>'oui','forum'=>'non'));
+			spip_log("Création du groupe $id_groupe",'dot2');
+		}
 	}
 	
 	#les tags associés à l'articles
@@ -101,7 +164,7 @@ function dot2_migrer_mots_article($id_post,$id_article,$id_groupe=''){
 	while ($tag = sql_fetch($tags_post)){
 		#si on a déja créé ce mot
 		$titre = $tag['meta_id'];
-		if ($id_mot = sql_getfetsel('id_mot','spip_mots',array('`titre`='.sql_quote($titre),'id_groupe='.$id_groupe))){
+		if ($id_mot = sql_getfetsel('id_mot','spip_mots','`titre`='.sql_quote($titre).'AND `id_groupe`='.$id_groupe)){
 			sql_insertq('spip_mots_articles',array('id_article'=>$id_article,'id_mot'=>$id_mot));
 			spip_log("Lier le mot $id_mot à l'article $id_article","dot2");	
 		}
