@@ -2,7 +2,7 @@
 
     <nom>Dotclear2SPIP</nom>
 
-    <categorie></categorie>
+    <categorie>divers</categorie>
     <auteur>Ma&iuml;eul ROUQUETTE</auteur>
     <version>0.1</version>
     <version_base>0.1</version_base>
@@ -16,6 +16,7 @@
     <fonctions>dot2_fonctions.php</fonctions>
     <necessite id="crud" />
     <necessite id="sale" />
+    <necessite id="SPIP" version="[2.1;" />
 
 
 
