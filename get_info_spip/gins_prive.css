@@ -47,6 +47,7 @@
 	border-spacing:0;
 	border:2px solid red;
 	width:100%;
+	font-size:100%;
 }
 #page_gins table td, #page_gins table th {
 	padding:0.5ex;

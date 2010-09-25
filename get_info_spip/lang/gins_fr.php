@@ -42,9 +42,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'audit_site' => 'Audit de site',
 	'url_du_site_' => 'URL du site : ',
 	'demandeur_' => 'Demandeur : ',
+	'total_' => 'Total : ',
+	'auteur_s' => 'auteur(s).',
+	'document_s' => 'document(s).',
 	'date_audit_' => 'Date d&#39;audit : ',
+	'nb_arts' => 'nb. articles',
+	'statut' => 'Statut',
+	'0minirezo' => 'admin',
+	'inventaire_auteurs' => 'Auteurs',
 	'inventaire_doc_lies' => 'Documents li&#233;s',
 	// skels d'inventaires
+	'liste_auteurs' => 'Liste des auteurs',
 	'liste_doc_lies_articles' => 'Liste des documents li&#233;s aux articles'
 
 );

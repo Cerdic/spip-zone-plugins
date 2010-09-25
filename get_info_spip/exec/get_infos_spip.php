@@ -50,6 +50,14 @@ function exec_get_infos_spip_dist() {
 			. creer_colonne_droite('', true)
 			. bloc_des_raccourcis(
 				icone_horizontale(
+					_T('gins:inventaire_auteurs'),
+					generer_url_public(
+						'lister_auteurs'
+					),
+					$dir_icones.'tableau-24.gif','rien.gif', false
+				)
+				.
+				icone_horizontale(
 					_T('gins:inventaire_doc_lies'),
 					generer_url_public(
 						'lister_documents_liens'

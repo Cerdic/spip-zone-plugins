@@ -9,6 +9,8 @@
 	
 	Méfi! Ne référence pas les liens dans les autres articles.
 
+	@TODO: PAGINATION à 50 ou 100. 10 par défaut trop petit.
+
 -->]
 <html>
 [<!-- (#REM)
@@ -29,6 +31,7 @@
 	<h2><:gins:liste_doc_lies_articles:></h2>
 #ANCRE_PAGINATION
 	<table id="liste_documents">
+	<caption><BOUCLE_sum(DOCUMENTS){mode=document}></BOUCLE_sum>[<:gins:total_:>(#TOTAL_BOUCLE) <:gins:document_s:>]<//B_sum></caption>
 		<tr>
 			<th>#id_document</th>
 			<th>fichier</th>

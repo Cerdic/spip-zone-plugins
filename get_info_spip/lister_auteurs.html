@@ -1,0 +1,58 @@
+[<!--(#REM)
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	Si autorisé, affiche la liste des auteurs
+	et leur statut + nombre d'articles liés.
+	
+	Méfi! un article peut-être liés à n auteurs.
+	
+	@TODO: traduire STATUT à l'affichage (0minirezo en admin, etc.)
+	@TODO: PAGINATION à 50 ou 100. 10 par défaut trop petit.
+
+-->]
+<html>
+[<!-- (#REM)
+
+	Si pas de session, ne rien cacher, raccrocher.
+	En attendant meilleure solution, un bout de PHP.
+	Si quelqu'un a mieux ?
+
+-->][(#AUTORISER{voirstats,article,#ID_ARTICLE}|non)<?php exit; ?>]
+<head>
+	<title><:gins:liste_auteurs:></title>
+	[<link rel="stylesheet" href="(#CHEMIN{gins_prive.css}|direction_css)" type="text/css" media="all" />]
+</head>
+<body id="page_gins">
+	<h1><:gins:audit_site:></h1>
+	<INCLURE{fond=inc-cartouche-audit}>
+<B_documents>
+	<h2><:gins:liste_auteurs:></h2>
+#ANCRE_PAGINATION
+	<table id="liste_auteurs">
+	<caption><BOUCLE_sum(AUTEURS)></BOUCLE_sum>[<:gins:total_:>(#TOTAL_BOUCLE) <:gins:auteur_s:>]<//B_sum></caption>
+		<tr>
+			<th>#id_auteur</th>
+			<th>nom</th>
+			<th><:gins:nb_arts:></th>
+			<th><:gins:statut:></th>
+			<th>Dernière cx.</th>
+		</tr>
+	<BOUCLE_documents(AUTEURS){par id_auteur}{pagination}>
+	<tr>
+		<td class="id">#ID_AUTEUR</td>
+		<td>#NOM</td>
+		<td><BOUCLE_a(auteurs_articles){id_auteur}></BOUCLE_a>#TOTAL_BOUCLE<//B_a>
+		<td>#STATUT</td>
+		<td>#MAJ</td>
+		</td>
+	</tr>
+</BOUCLE_documents>
+	</table>
+	[<p class="pagination">(#PAGINATION)</p>]
+</B_documents>
+<//B_documents>
+</body>
+</html>
