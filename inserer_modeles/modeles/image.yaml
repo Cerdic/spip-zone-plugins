@@ -32,3 +32,9 @@ parametres:
     options:
       nom: 'lien'
       label: '<:inserer_modeles:label_lien:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'lien_class'
+      label: '<:inserer_modeles:label_lien_class:>'
+      afficher_si: '@lien@ != ""'
