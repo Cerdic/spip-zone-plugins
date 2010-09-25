@@ -36,7 +36,7 @@ It's possible to let the visitor choose it's own preferred language, that may be
 The <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> tag allows you to add a link allowing to remove this cookie. Using a parameter like: <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{my own message}</code> prompts your "own message" instead of the default one.
 </multi>
     </description>
-		<lien>http://www.spip-contrib.net/spip.php?page=article&id_article=3126</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Langue-preferee-par-l-internaute</lien> <!-- URI de documentation -->
     <chemin dir='' />
 	<prefix>languepreferee</prefix>
 	<options>languepreferee_options.php</options>
