@@ -32,7 +32,7 @@
 	<h2><:gins:liste_auteurs:></h2>
 #ANCRE_PAGINATION
 	<table id="liste_auteurs">
-	<caption><BOUCLE_sum(AUTEURS)></BOUCLE_sum>[<:gins:total_:>(#TOTAL_BOUCLE) <:gins:auteur_s:>]<//B_sum></caption>
+	<caption><:gins:total_:>[(#GRAND_TOTAL|singulier_ou_pluriel{gins:auteur, gins:auteurs_nb, nb})]</caption>
 		<tr>
 			<th>#id_auteur</th>
 			<th>nom</th>
