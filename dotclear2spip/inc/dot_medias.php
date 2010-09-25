@@ -24,12 +24,23 @@ function dot_lister_medias($texte){
 function dot_id_media_spip($id){
 	return sql_getfetsel('id_document','spip_documents','`descriptif`='.sql_quote('DC:'.$id));
 }
+function dot_corriger_url($src){
+	$src = str_replace('/.','/',$src);
+	$src = str_replace('_m.','.',$src);
+	$src = str_replace('_b.','.',$src);
+	$src = str_replace('_l.','.',$src);
+	$src = str_replace('_t.','.',$src);
+	return $src;	
+}
+
 function dot_ajouter_medias($medias){
 	$numerotation = array();
 	
 	foreach($medias as $media){
+		$media['src'] = dot_corriger_url($media['src']);
 		list($fichier,$dossier) 	= dot_decomposer_chemin_media($media['src']);		
 		$media_dot = sql_fetsel('media_title,media_upddt,media_id','dc_media','`media_file`='.sql_quote($fichier)." AND `media_dir`=".sql_quote($dossier) );
+		
 		$media_id = $media_dot['media_id'];
 		$id_doc		= dot_id_media_spip($media_id);
 		if($id_doc==null and $fichier!='#'){
