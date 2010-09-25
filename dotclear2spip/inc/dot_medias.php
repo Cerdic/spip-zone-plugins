@@ -50,7 +50,9 @@ function dot_ajouter_medias($medias){
 		
 		
 		}
-		$numerotation[$media['complet']] = $id_doc;
+		if ($fichier!='#'){
+			$numerotation[$media['complet']] = $id_doc;
+		}
 	}
 	return $numerotation;
 }
