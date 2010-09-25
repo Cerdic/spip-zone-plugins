@@ -32,7 +32,7 @@ function dot_ajouter_medias($medias){
 		$media_dot = sql_fetsel('media_title,media_upddt,media_id','dc_media','`media_file`='.sql_quote($fichier)." AND `media_dir`=".sql_quote($dossier) );
 		$media_id = $media_dot['media_id'];
 		$id_doc		= dot_id_media_spip($media_id);
-		if($id_doc==null){
+		if($id_doc==null and $fichier!='#'){
 			$crud = charger_fonction('crud','action');
 			$resultat = $crud('create','documents','',array(
 				'titre'	=>$media_dot['media_title'],
