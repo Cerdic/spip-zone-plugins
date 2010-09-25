@@ -31,16 +31,16 @@
 	<table id="liste_documents">
 	<caption><:gins:total_:>[(#GRAND_TOTAL|singulier_ou_pluriel{gins:document, gins:documents_nb, nb})]</caption>
 		<tr>
-			<th>#id_document</th>
-			<th>fichier</th>
-			<th>#id_article titre</th>
+			<th class="left id" title="id_document">#id</th>
+			<th><:gins:fichier:></th>
+			<th class="left id" title="id_article">#id</th>
+			<th><:gins:titre:></th>
 		</tr>
 	<BOUCLE_documents(DOCUMENTS documents_liens){mode=document}{objet=article}{par fichier}{pagination #ENV{pagination, 25}}>
 	<tr>
-		<td class="id">#ID_DOCUMENT</td>
+		<td class="left id" title="id_document #ID_DOCUMENT">##ID_DOCUMENT</td>
 		<td>#FICHIER</td>
-		<td><BOUCLE_a(ARTICLES){id_article=#ID_OBJET}{0,1}><span class="id">#ID_ARTICLE</span> #TITRE</BOUCLE_a>
-		</td>
+		<BOUCLE_a(ARTICLES){id_article=#ID_OBJET}{0,1}><td class="left id" title="id_article #ID_ARTICLE">##ID_ARTICLE</td><td>#TITRE</td></BOUCLE_a>
 	</tr>
 </BOUCLE_documents>
 	</table>

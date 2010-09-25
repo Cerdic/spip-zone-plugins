@@ -48,6 +48,7 @@
 	border:2px solid red;
 	width:100%;
 	font-size:100%;
+	margin:0.5em 0 1em;
 }
 #page_gins table td, #page_gins table th {
 	padding:0.5ex;
@@ -57,7 +58,20 @@
 	background-color:green;
 	color:white;
 	font-weight:700;
+	padding:0.5ex;
+}
+#page_gins table th.left {
+	text-align:left;
 }
 #page_gins table .id {
-	color:grey;
+	background-color:black;
+	color:#ccc;
+	padding:0 1ex;
+}
+#page_gins table caption {
+	text-align:left;
+	line-height:1.8em;
+	font-size:90%;
+	margin:0;
+	padding:0;
 }

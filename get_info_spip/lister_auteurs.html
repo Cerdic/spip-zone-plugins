@@ -33,20 +33,19 @@
 	<table id="liste_auteurs">
 	<caption><:gins:total_:>[(#GRAND_TOTAL|singulier_ou_pluriel{gins:auteur, gins:auteurs_nb, nb})]</caption>
 		<tr>
-			<th>#id_auteur</th>
-			<th>nom</th>
+			<th class="left id">#id</th>
+			<th><:gins:nom:></th>
 			<th><:gins:nb_arts:></th>
 			<th><:gins:statut:></th>
-			<th>Dernière cx.</th>
+			<th><:gins:derniere_cx:></th>
 		</tr>
 	<BOUCLE_documents(AUTEURS){par id_auteur}{pagination #ENV{pagination, 25}}>
 	<tr>
-		<td class="id">#ID_AUTEUR</td>
+		<td class="left id">##ID_AUTEUR</td>
 		<td>#NOM</td>
-		<td><BOUCLE_a(auteurs_articles){id_auteur}></BOUCLE_a>#TOTAL_BOUCLE<//B_a>
+		<td><BOUCLE_a(auteurs_articles){id_auteur}></BOUCLE_a>#TOTAL_BOUCLE<//B_a></td>
 		<td>#STATUT</td>
 		<td>#MAJ</td>
-		</td>
 	</tr>
 </BOUCLE_documents>
 	</table>
