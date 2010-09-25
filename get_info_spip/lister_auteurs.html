@@ -10,7 +10,6 @@
 	Méfi! un article peut-être liés à n auteurs.
 	
 	@TODO: traduire STATUT à l'affichage (0minirezo en admin, etc.)
-	@TODO: PAGINATION à 50 ou 100. 10 par défaut trop petit.
 
 -->]
 <html>
@@ -40,7 +39,7 @@
 			<th><:gins:statut:></th>
 			<th>Dernière cx.</th>
 		</tr>
-	<BOUCLE_documents(AUTEURS){par id_auteur}{pagination}>
+	<BOUCLE_documents(AUTEURS){par id_auteur}{pagination #ENV{pagination, 25}}>
 	<tr>
 		<td class="id">#ID_AUTEUR</td>
 		<td>#NOM</td>

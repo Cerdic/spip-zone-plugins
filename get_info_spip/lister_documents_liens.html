@@ -9,8 +9,6 @@
 	
 	Méfi! Ne référence pas les liens dans les autres articles.
 
-	@TODO: PAGINATION à 50 ou 100. 10 par défaut trop petit.
-
 -->]
 <html>
 [<!-- (#REM)
@@ -37,7 +35,7 @@
 			<th>fichier</th>
 			<th>#id_article titre</th>
 		</tr>
-	<BOUCLE_documents(DOCUMENTS documents_liens){mode=document}{objet=article}{par fichier}{pagination}>
+	<BOUCLE_documents(DOCUMENTS documents_liens){mode=document}{objet=article}{par fichier}{pagination #ENV{pagination, 25}}>
 	<tr>
 		<td class="id">#ID_DOCUMENT</td>
 		<td>#FICHIER</td>

@@ -7,6 +7,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_GINS_PREFIX', 'gins');
+define('_GINS_PAGINATION', 50);
 
 function exec_get_infos_spip_dist() {
 
@@ -53,16 +54,20 @@ function exec_get_infos_spip_dist() {
 				.
 				icone_horizontale(
 					_T('gins:inventaire_auteurs'),
-					generer_url_public(
-						'lister_auteurs'
+					parametre_url(
+						generer_url_public(
+							'lister_auteurs'
+						), 'pagination', _GINS_PAGINATION
 					),
 					$dir_icones.'tableau-24.gif','rien.gif', false
 				)
 				.
 				icone_horizontale(
 					_T('gins:inventaire_doc_lies'),
-					generer_url_public(
-						'lister_documents_liens'
+					parametre_url(
+						generer_url_public(
+							'lister_documents_liens'
+						), 'pagination', _GINS_PAGINATION
 					),
 					$dir_icones.'tableau-24.gif','rien.gif', false
 				)
