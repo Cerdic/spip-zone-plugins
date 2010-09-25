@@ -1,6 +1,35 @@
 <?php
 
 include_spip('inc/dot_category');
+
+function dot2_migrer_rubriques($blog_id){
+	include_spip('inc/dot_category');
+	$hierachie = dot_category_spiper_arbre(dot_category_arbre($blog_id));
+	dot2_migrer_rubriques_enfants($hierachie,0);
+}
+
+function dot2_migrer_rubriques_enfants($arbre,$id_rubrique_mere){
+	foreach($arbre as $cat_id =>$contenu){
+		$id_rubrique = dot2_migrer_rubrique($cat_id,$id_rubrique_mere);
+		if ($contenu[$cat_id]!='')
+			dot2_migrer_rubriques_enfants($contenu[$cat_id],$id_rubrique);
+	}	
+	
+	return $id_rubrique;
+}
+
+function dot2_migrer_rubrique($cat_id,$rubrique_mere){
+	$crud = charger_fonction('crud','action');
+	
+	$contenu = sql_fetsel('cat_title,cat_lft,cat_desc','dc_category','`cat_id`='.$cat_id);
+	$titre		= $contenu['cat_lft'].'0. '.$contenu['cat_title'];
+	$resultat = $crud('create','rubrique','nulls',array('descriptif'=>'DC:'.$cat_id,'id_parent'=>$rubrique_mere,'titre'=>$titre,'texte'=>sale($contenu['cat_desc'])));
+	$id_rubrique = $resultat['result']['id'];
+	
+	spip_log("Création de la rubrique $id_rubrique ($titre) rubrique parente : $rubrique_mere. Catégory originelle : $cat_id","dot2");
+	return $id_rubrique;
+}
+
 function dot2_migrer_utilisateur($user_id){
 	$users = sql_select('user_super,user_url,user_name,user_firstname,user_displayname','dc_user',"`user_id`=".sql_quote($user_id));
 	
