@@ -159,7 +159,7 @@ else if (document.body) // other Explorers
 	<th colspan="7" valign="middle" class="menu-titre">
     <img src="[(#ACS_CHEMIN)]agenda/aide.gif" class="chelp" onmouseover="afficheBulle('bullechelp', this)" onmouseout="cacheBulle('bullechelp')" alt="?" />
 		<?php
-		echo '<a id="agenda_prev" href="'.preparation_URL($self,$calendrier_mois_moins,$calendrier_annee_moins).'" title="Mois pr&eacute;c&eacute;dent" class="ajax"><img src="[(#ACS_CHEMIN)]agenda/fleche-left.png" alt="&lt;&lt;" /></a>&nbsp;&nbsp;<a href="spip.php?page=agenda&amp;annee='.$Y.'&amp;mois='.$M.'">'.$mes.' '.$Y.'</a>&nbsp;&nbsp;<a id="agenda_next" href="'.preparation_URL($self,$calendrier_mois_plus,$calendrier_annee_plus).'" title="Mois suivant" class="ajax"><img src="[(#ACS_CHEMIN)]agenda/fleche-right.png" alt="&gt;&gt;" /></a>';
+		echo '<a id="agenda_prev" href="'.preparation_URL($self,$calendrier_mois_moins,$calendrier_annee_moins).'" title="Mois pr&eacute;c&eacute;dent" class="ajax"><img src="[(#ACS_CHEMIN)]agenda/fleche-left.png" alt="&lt;&lt;" /></a>&nbsp;&nbsp;<a href="spip.php?page=agenda&amp;annee='.$Y.'&amp;mois='.$M.'&amp;type=mois&amp;jour=01">'.$mes.' '.$Y.'</a>&nbsp;&nbsp;<a id="agenda_next" href="'.preparation_URL($self,$calendrier_mois_plus,$calendrier_annee_plus).'" title="Mois suivant" class="ajax"><img src="[(#ACS_CHEMIN)]agenda/fleche-right.png" alt="&gt;&gt;" /></a>';
 		?>
     <div id="bullechelp" class="bulle" onmouseover="mouseOverBulle()" onmouseout="mouseOutBulle()">
       <div class="publie"><a href="#"><small>01h11</small>: <:acs:agenda_publie:></a></div>[
