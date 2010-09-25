@@ -12,14 +12,21 @@ function mots_objets_declarer_tables_interfaces($tables_interface){
 	$interface['table_des_tables']['mots_auteurs'] = 'mots_auteurs';
 
 	// -- Liaisons mots/auteurs
-	$interface['tables_jointures']['spip_mots_auteurs'][]= 'auteurs';
-	$interface['tables_jointures']['spip_mots_auteurs'][]= 'mots';
-	$interface['tables_jointures']['spip_mots'][]= 'mots_auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'mots_auteurs';
-	/*
-	$interface['tables_jointures']['spip_mots'][]= 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'mots';
-	*/
+	$interface['tables_jointures']['spip_mots'][]= 'mots_auteurs';
+	$interface['tables_jointures']['spip_mots'][]= 'auteurs';
+
+	$interface['tables_jointures']['spip_documents'][]= 'mots_documents';
+	$interface['tables_jointures']['spip_documents'][]= 'mots';
+	$interface['tables_jointures']['spip_mots'][]= 'mots_documents';
+	$interface['tables_jointures']['spip_mots'][]= 'documents';
+
+	// relations
+	$interface['tables_relations']['mots']['id_auteur'] = 'mots_auteurs';
+	$interface['tables_relations']['auteurs']['id_mot'] = 'mots_auteurs';
+	$interface['tables_relations']['mots']['id_document'] = 'mots_documents';
+	$interface['tables_relations']['documents']['id_mot'] = 'mots_documents';
 
 	// documents...
 	$interface['table_des_tables']['mots_documents'] = 'mots_documents';
