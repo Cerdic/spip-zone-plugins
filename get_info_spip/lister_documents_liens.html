@@ -1,0 +1,46 @@
+[<!--(#REM)
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	Si autorisé, affiche la liste des documents liés
+	et l'article qui référence ce document.
+	
+	Méfi! Ne référence pas les liens dans les autres articles.
+
+-->]
+<html>
+[<!-- (#REM)
+
+	Si pas de session, ne rien cacher, raccrocher.
+	En attendant meilleure solution, un bout de PHP.
+	Si quelqu'un a mieux ?
+
+-->][(#AUTORISER{voirstats,article,#ID_ARTICLE}|non)<?php exit; ?>]
+<head>
+	<title><:gins:liste_doc_lies_articles:></title>
+	[<link rel="stylesheet" href="(#CHEMIN{gins_prive.css}|direction_css)" type="text/css" media="all" />]
+</head>
+<body id="page_gins">
+<B_documents>
+	<h1><:gins:liste_doc_lies_articles:></h1>
+	<table id="liste_documents">
+		<tr>
+			<th>#id_document</th>
+			<th>fichier</th>
+			<th>#id_article titre</th>
+		</tr>
+	<BOUCLE_documents(DOCUMENTS documents_liens){mode=document}{objet=article}{par fichier}>
+	<tr>
+		<td class="id">#ID_DOCUMENT</td>
+		<td>#FICHIER</td>
+		<td><BOUCLE_a(ARTICLES){id_article=#ID_OBJET}{0,1}><span class="id">#ID_ARTICLE</span> #TITRE</BOUCLE_a>
+		</td>
+	</tr>
+</BOUCLE_documents>
+	</table>
+</B_documents>
+<//B_documents>
+</body>
+</html>
