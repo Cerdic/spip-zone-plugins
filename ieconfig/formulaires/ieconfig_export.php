@@ -159,7 +159,7 @@ function formulaires_ieconfig_export_charger_dist() {
 		'_saisies' => $saisies
 	);
 	
-	return array_merge(saisie_charger_champs($saisies),$contexte);
+	return array_merge(saisies_charger_champs($saisies),$contexte);
 }
 
 function formulaires_ieconfig_export_verifier_dist() {
