@@ -38,5 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'MB' => 'Mo.',
 	'GB' => 'Go.',
 	'TB' => 'To.',
+	
+	'inventaire_doc_lies' => 'Documents li&#233;s',
+	// skels d'inventaires
+	'liste_doc_lies_articles' => 'Liste des documents li&#233;s aux articles'
 
 );

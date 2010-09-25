@@ -27,3 +27,26 @@
 	background-color:green;
 	color:#fff;
 }
+
+/* les feuilles inventaires */
+#page_gins {
+	font-family:Verdana, sans-serif;
+	font-size:90%;
+}
+#page_gins table {
+	border-collapse:collapse;
+	border-spacing:0;
+	border:2px solid red;
+}
+#page_gins table td, #page_gins table th {
+	padding:0.5ex;
+	border:1px solid grey;
+}
+#page_gins table th {
+	background-color:green;
+	color:white;
+	font-weight:700;
+}
+#page_gins table .id {
+	color:grey;
+}

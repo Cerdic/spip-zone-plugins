@@ -35,6 +35,8 @@ function exec_get_infos_spip_dist() {
 	{
 
 		include_spip('inc/plugin');
+		
+		$dir_icones = _DIR_PLUGIN_GINS.'images/';
 
 		$page_result = '<div style="margin-top:3em">' . PHP_EOL
 			. gros_titre(_T('titre_configuration'),'', false)
@@ -45,7 +47,16 @@ function exec_get_infos_spip_dist() {
 				. _T('gins:info_gauche_info_spip')
 			. fin_boite_info(true)
 			. pipeline('affiche_gauche', array('args'=>array('exec'=>'info_spip'),'data'=>''))
-			. pipeline('affiche_droite', array('args'=>array('exec'=>'info_spip'),'data'=>''))
+			. creer_colonne_droite('', true)
+			. bloc_des_raccourcis(
+				icone_horizontale(
+					_T('gins:inventaire_doc_lies'),
+					generer_url_public(
+						'lister_documents_liens'
+					),
+					$dir_icones.'tableau-24.gif','rien.gif', false
+				)
+			)
 			. debut_droite($rubrique, true)
 			;
 		
