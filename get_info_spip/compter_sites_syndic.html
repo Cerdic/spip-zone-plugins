@@ -4,6 +4,12 @@
 	// $LastChangedBy$
 	// $LastChangedDate$
 
+	Dans l'ordre :
+	- sites syndiqués
+	- sites publiés (dont les syndiqués)
+	- total: publiés et non publiés
+	- nb articles publiés, issus des sites syndiqués
+
 -->]
 <BOUCLE_sy(SITES){syndication=oui}></BOUCLE_sy>#TOTAL_BOUCLE<//B_sy>/<BOUCLE_sel(SITES)></BOUCLE_sel>#TOTAL_BOUCLE<//B_sel>/<BOUCLE_tous(spip_syndic)></BOUCLE_tous>#TOTAL_BOUCLE<//B_tous> (<BOUCLE_sa(spip_syndic_articles)></BOUCLE_sa>#TOTAL_BOUCLE<//B_sa>)
 
