@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_nombre_rubriques_publ/tous' => 'Nombre de rubriques publi&#233;es/toutes',
 	'SPIP_nombre_forums_publ/tous' => 'Nombre de forums publi&#233;s/tous',
 	'SPIP_nombre_documents_publ/tous' => 'Nombre de documents publi&#233;s/tous',
+	'SPIP_nombre_sites_syndic' => 'Nombre de sites publi&#233;s/syndiqu&#233;s/total (articles)',
 	
 	'B' => 'octets',
 	'KB' => 'Ko.',
@@ -39,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'GB' => 'Go.',
 	'TB' => 'To.',
 	
+	't_inventaires' => '<br />Tableaux des inventaires :',
 	'audit_site' => 'Audit de site',
 	'url_du_site_' => 'URL du site : ',
 	'demandeur_' => 'Demandeur : ',

@@ -49,6 +49,8 @@ function exec_get_infos_spip_dist() {
 			. pipeline('affiche_gauche', array('args'=>array('exec'=>'info_spip'),'data'=>''))
 			. creer_colonne_droite('', true)
 			. bloc_des_raccourcis(
+				_T('gins:t_inventaires')
+				.
 				icone_horizontale(
 					_T('gins:inventaire_auteurs'),
 					generer_url_public(
@@ -78,6 +80,7 @@ function exec_get_infos_spip_dist() {
 		$tailles_rubriques = recuperer_fond('compter_rubriques', $contexte);
 		$comptes_forums = recuperer_fond('compter_forums', $contexte);
 		$comptes_documents = recuperer_fond('compter_documents', $contexte);
+		$comptes_sites_syndic = recuperer_fond('compter_sites_syndic', $contexte);
 		$infos = array(
 			  _T('gins:SPIP_version_code_revision_base') => $GLOBALS['spip_version_affichee']
 				. ' ('.$GLOBALS['spip_version_code'].') '
@@ -94,6 +97,7 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:SPIP_nombre_rubriques_publ/tous') => $tailles_rubriques
 			, _T('gins:SPIP_nombre_forums_publ/tous') => $comptes_forums
 			, _T('gins:SPIP_nombre_documents_publ/tous') => $comptes_documents
+			, _T('gins:SPIP_nombre_sites_syndic') => $comptes_sites_syndic
 		);
 		$corps[$ii] = gins_lister_values(
 			$infos
