@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 function controleurs_var_dist($regs) {
@@ -24,7 +24,7 @@ function controleurs_var_dist($regs) {
 		$draw = 'ctlTextarea';
 	// il faut passer champ=>source pour les comparaisons dans action/crayons_store
 	$crayon = new SecureCrayon("var-".$champ."-".$id, array($champ => $val));
-	$html .= '<div class="controle" style="width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size: '._request('font-size').';">'.
+	$html .= '<div class="acsVarControleur" style="width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size: '._request('font-size').';">'.
 		'<form id="acs" name="acs" class="formulaire_crayon" action="?action=crayons_var_store" method="post">'.
 		$crayon->code().
 		'<input type="hidden" name="oldval_'.$crayon->key.'" value="'.htmlentities($val).'" />'.
