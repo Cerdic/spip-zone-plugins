@@ -39,6 +39,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'GB' => 'Go.',
 	'TB' => 'To.',
 	
+	'audit_site' => 'Audit de site',
+	'url_du_site_' => 'URL du site : ',
+	'demandeur_' => 'Demandeur : ',
+	'date_audit_' => 'Date d&#39;audit : ',
 	'inventaire_doc_lies' => 'Documents li&#233;s',
 	// skels d'inventaires
 	'liste_doc_lies_articles' => 'Liste des documents li&#233;s aux articles'
