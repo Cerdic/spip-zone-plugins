@@ -20,17 +20,18 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="0">[(#ENV{option_intro})]</option>]
-	<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>#SET{au_moins_un,''}
-		<B_articles_originaux><optgroup label="#TITRE">
+	<BOUCLE_secteurs(RUBRIQUES){id_parent = #ENV{id_rubrique,0}}{par num titre, titre}{tout}>
+	<optgroup label="#TITRE">
+		<B_articles_originaux>
 		<BOUCLE_articles_originaux(ARTICLES){id_rubrique}{origine_traduction}>
 		[(#ENV{multiple}|oui)
-		<option value="#ID_RUBRIQUE"[(#ID_ARTICLE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
+		<option value="#ID_ARTICLE"[(#ID_ARTICLE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
 		[(#ENV{multiple}|non)
 		<option value="#ID_ARTICLE"[(#ID_ARTICLE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
 		</BOUCLE_articles_originaux>
-		</optgroup>
 		</B_articles_originaux>
 		[(#ENV{recursif}|oui)
-		<INCLURE{fond=prive/listes/articles_originaux_recursifs}{valeur=#ENV{valeur}}{id_rubrique}{multiple} />]		
+		<INCLURE{fond=prive/listes/articles_originaux_recursifs}{valeur=#ENV{valeur}}{id_rubrique}{multiple} />]
+	</optgroup>		
 	</BOUCLE_secteurs>
 </select>
