@@ -62,7 +62,7 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 		include_spip('inc/dot_medias');
 		$documents_lies	= array();
 		$medias		= dot_lister_medias($r['post_content_xhtml']);
-		$remplacer 	= dot_ajouter_medias($medias);
+		$remplacer 	= dot_ajouter_medias($medias,$r['post_id']);
 		foreach($remplacer as $depuis=>$vers){
 			$r['post_content_xhtml']=str_replace($depuis,'@!@'.$vers.'@¡@',$r['post_content_xhtml']);
 			$documents_lies[]=$vers;
