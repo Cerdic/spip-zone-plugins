@@ -19,13 +19,12 @@ function acs_page_get_infos($page, $mode, $detail) {
   $mode_source = ($mode == 'source');
   $mode = $mode_source ? '_source' : '_infos';
   $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail));
-
+  
   // Si le fichier a été modifié depuis la mise en cache, on force le recalcul
   $pg = find_in_path($page.'.html');
-  $pg_derniere_modif = filemtime($pg);  
+  $pg_derniere_modif = filemtime($pg);
   if ($r[2] < $pg_derniere_modif)
     $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail), true);
-
   return $r[0];
 }
 
@@ -67,7 +66,7 @@ function page_get_infos($page, $mode_source=false, $detail='') {
   $pageContent = @file_get_contents($pg);
   $includes = analyse_page($pageContent, $mode_source);
 
-  if (count($includes['vars']) > 0) {
+  if (!$mode_source && (count($includes['vars']) > 0)) {
     $r .= '<div class="onlinehelp">'._T('acs:variables').' : '.
           implode(' ', $includes['vars']).
           '</div><br />';

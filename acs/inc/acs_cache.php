@@ -21,7 +21,7 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
   $cachefile = _ACS_TMP_DIR.$file;
   $date = $GLOBALS['meta']['acsDerniereModif'];
 
-  if (is_readable($cachefile && !$force_recalcul)) {
+  if (is_readable($cachefile) && !$force_recalcul) {
     $cache = file_get_contents($cachefile);
     $r = unserialize($cache);
     if ($date == $r['date']) {
