@@ -1,0 +1,29 @@
+nom: '<:inserer_modeles:nom_img:>'
+logo: 'images/image-24.gif'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'image'
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'id_modele'
+      label: '<:inserer_modeles:label_id_image:>'
+      defaut: ''
+      env: 'oui'
+      obligatoire: 'oui'
+      media: 'image'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'classe'
+      label: '<:inserer_modeles:label_alignement:>'
+      defaut: ''
+      datas:
+        left: '<:inserer_modeles:item_left:>'
+        center: '<:inserer_modeles:item_center:>'
+        right: '<:inserer_modeles:item_right:>'
