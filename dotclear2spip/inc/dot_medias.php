@@ -57,9 +57,6 @@ function dot_ajouter_medias($medias,$post_id){
 						'statut'	=>'publie',
 					));
 					$id_doc=$resultat['result']['id'];
-					if(!$id_doc){
-						var_dump($media);
-					}
 					spip_log("Ajout du document $id_doc (ex $media_id)","dot2");
 				
 			
@@ -76,7 +73,6 @@ function dot_ajouter_medias($medias,$post_id){
 	return $numerotation;
 }
 function verifier_image($src){
-	var_dump($src);
 	if (match($src,'^/')){
 		return true;
 	}	
