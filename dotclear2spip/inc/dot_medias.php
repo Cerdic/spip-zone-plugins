@@ -20,6 +20,7 @@ function dot_lister_medias($texte){
 	return $analyse;
 		
 }
+
 function dot_id_media_spip($id){
 	return sql_getfetsel('id_document','spip_documents','`descriptif`='.sql_quote('DC:'.$id));
 }
@@ -37,8 +38,11 @@ function dot_ajouter_medias($medias){
 				'titre'	=>$media_dot['media_title'],
 				'date'	=>$media_dot['media_upddt'],
 				'descriptif'=>'DC:'.$media_dot['media_id'],
-				'source'=>realpath(preg_replace('#^/#','',$media['src'])),
-				'id_document'=>'non'
+				'source'=>verifier_distant($media['src']) == 'non' ? realpath(preg_replace('#^/#','',$media['src'])) : $media['src'],
+				'id_document'=>'non',
+				'statut'	=>'publie',
+				'distant'	=>verifier_distant($media['src']) == 'oui' ? $media['src'] : false,
+				'mode'		=>verifier_distant($media['src']) == 'oui' ? 'distant' : false
 			));
 			$id_doc=$resultat['result']['id'];
 			spip_log("Ajout du document $id_doc (ex $media_id)","dot2");
@@ -50,9 +54,14 @@ function dot_ajouter_medias($medias){
 	}
 	return $numerotation;
 }
+function verifier_distant($src){
+	if (match($src,'^http://'))
+		return 'oui';
+	else
+		return 'non';	
+}
 
 function dot_decomposer_chemin_media($media){
-	var_dump($media);
 	$dossier = str_replace('/public','.',preg_replace("#/[\w.]*$#",'',$media));
 	$fichier = str_replace('/','',str_replace(preg_replace("#/[\w.]*$#",'',$media),'',$media));
 	return array($fichier,$dossier);

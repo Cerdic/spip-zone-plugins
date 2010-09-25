@@ -1,7 +1,7 @@
 <?php
 // Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3)  les sites puis appliquer "purge articles" et "purge rubrique"
 
-include_spip('inc/dot_medias');
+
 function dot2_migrer_commentaires($post_id,$id_article){
 	$ressources = sql_select('comment_id,comment_dt,comment_author,comment_email,comment_site,comment_content,comment_ip,comment_status,comment_spam_status','dc_comment','`post_id`='.$post_id);
 	$crud = charger_fonction('crud','action');
@@ -17,6 +17,7 @@ function dot2_migrer_commentaires($post_id,$id_article){
 		else {
 			$statut	= 'off';	
 		}
+		
 		// Salir le contenu
 		$texte = sale($post['comment_content']);
 		
@@ -35,6 +36,7 @@ function dot2_migrer_commentaires($post_id,$id_article){
 		spip_log("Importation du forum $id_message (ex $comment_id) pour l'article $id_article (ex $post_id)",'dot2');
 		
 	}
+	
 }
 
 function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
@@ -56,16 +58,39 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 		if ($id_auteur == null){
 			$id_auteur = dot2_migrer_utilisateur($blog_id,$r['user_id']);
 			}
-
+	//	Migration des documents
+		include_spip('inc/dot_medias');
+		$documents_lies	= array();
+		$medias		= dot_lister_medias($r['post_content_xhtml']);
+		$remplacer 	= dot_ajouter_medias($medias);
+		foreach($remplacer as $depuis=>$vers){
+			$r['post_content_xhtml']=str_replace($depuis,'@!@'.$vers.'@¡@',$r['post_content_xhtml']);
+			$documents_lies[]=$vers;
+		}
+		$medias		= dot_lister_medias($r['post_excerpt_xhtml']);
+		$remplacer 	= dot_ajouter_medias($medias);
+		foreach($remplacer as $depuis=>$vers){
+			$r['post_excerpt_xhtml']=str_replace($depuis,'@!@'.$vers.'@¡@',$r['post_excerpt_xhtml']);
+			$documents_lies[]=$vers;
+		}
+		
+	
 	// Mise au sale du texte et de l'introduction : nota : il faudrait voir ce que ca donne si formaté en Dotclear
 		$texte 		= sale($r['post_content_xhtml']);
 		$descriptif	= sale($r['post_excerpt_xhtml']);
-	
+	//On n'échappe pas les @
+		$texte		= str_replace('@!@','<img',$texte);
+		$texte		= str_replace('@¡@','>',$texte);
+		$descriptif		= str_replace('@!@','<img',$descriptif);
+		$descriptif		= str_replace('@¡@','>',$descriptif);
 	// Forums ouvert ?
 		$r['post_open_comment'] == 1 ? $accepter_forum = 'pos' : $accepter_forum = 'non';
 		
 	// Statut
 		$r['post_status']	== 1 ?	$statut =	'publie' : $statut = 'redac';
+
+		
+		
 	
 	// Création de l'article
 		$crud = charger_fonction('crud','action');
@@ -92,6 +117,14 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 		$id_groupe = dot2_migrer_mots_article($r['post_id'],$id_article,$id_groupe);
 	// Migration des commentaires
 		dot2_migrer_commentaires($r['post_id'],$id_article);
+	// Lies les documents
+		foreach($documents_lies as $id_doc){
+			sql_insertq('spip_documents_liens',array(
+				'id_objet'=>$id_article,
+				'id_document'=>$id_doc,
+				'objet'	=>'article'
+			));	
+		}
 	}
 	
 
