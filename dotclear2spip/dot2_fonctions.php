@@ -1,4 +1,6 @@
 <?php
+
+include_spip('inc/dot_category');
 function dot2_migrer_utilisateur($user_id){
 	$users = sql_select('user_super,user_url,user_name,user_firstname,user_displayname','dc_user',"`user_id`=".sql_quote($user_id));
 	
