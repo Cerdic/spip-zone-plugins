@@ -38,9 +38,6 @@
 	<lien>
 	  http://www.spip-contrib.net/Balise-EXIF-recuperer-les
 	</lien>
-	<lien>
-	  http://www.spip-contrib.net/EXIF-tag-get-informations-directly
-	</lien>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	  plug_exif.php
 	</fonctions>
