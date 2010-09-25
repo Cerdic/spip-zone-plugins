@@ -10,7 +10,7 @@
         [it]modulo galleria/diaporama
     </multi>
     </description>
-    <lien>[<multi>[fr]Description sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Diapo[de]Beschreibung auf SPIP-Contrib->http://www.spip-contrib.net/Plugin-Diapo,4[it]SPIP-Contrib->http://www.spip-contrib.net/Plugin-Diapo,1</multi>]</lien>
+    <lien>http://www.spip-contrib.net/Plugin-Diapo</lien>
     <prefix>diapo</prefix>
     <chemin dir='' />
     <options>diapo_options.php</options>
