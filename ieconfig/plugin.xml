@@ -1,5 +1,5 @@
 <plugin>
-	<nom>IEconfig</nom>
+	<nom>Importeur / Exporteur de configurations</nom>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.1</version>
