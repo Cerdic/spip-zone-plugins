@@ -45,10 +45,10 @@ function spipmotion_editer_contenu_objet($flux){
 					if($document['id_orig'] > 0){
 						$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
 					}
-					$infos_audios = charger_fonction('spipmotion_infos_audios', 'inc');
-					$ajouts .= '<div id="spipmotion_infos-'.$id_document.'">';
-					$ajouts .= $infos_audios($id,$id_document,$type);
-					$ajouts .= '</div>';
+					else{
+						$infos_audios = charger_fonction('spipmotion_infos_audios', 'inc');
+						$ajouts .= $infos_audios($id,$id_document,$type);
+					}
 				}
 				if($type_form == 'case_document'){
 					$flux['data'] .= $ajouts;
@@ -177,4 +177,39 @@ function spipmotion_jquery_plugins($array){
 	return $array;
 }
 
+function spipmotion_post_spipmotion_encodage($flux){
+	if($flux['args']['reussite'] == 'oui'){
+		$origine = sql_fetsel('extension,fichier','spip_documents','id_document='.intval($flux['args']['id_document_orig']));
+		if(in_array($origine['extension'],array('mp3','flac','ogg','oga'))){
+			$extension_nouveau = sql_getfetsel('extension','spip_documents','id_document='.intval($flux['args']['id_document']));
+			if(in_array($extension_nouveau,lire_config('getid3_write',array()))){
+				include_spip('inc/documents');
+				$recuperer_id3 = charger_fonction('recuperer_id3','inc');
+				$infos_write = array(
+					'title' => 0,
+					'artist' => 0,
+					'year' => 0,
+					'date'=>0,
+					'album' => 0,
+					'genre' => 0,
+					'comment' => 0,
+					'tracknumber' => 0
+				);
+				$infos_origine = $recuperer_id3(get_spip_doc($origine['fichier']));
+				
+				$images = array();
+				foreach($infos_origine as $info_origine => $info){
+					if(preg_match('/cover/',$info_origine)){
+						$images[] = $info;
+					}
+				}
+				$infos_encode = array_intersect_key($infos_origine,$infos_write);
+				$ecrire_infos = charger_fonction('getid3_ecrire_infos','inc');
+				$ecrire_infos($flux['args']['id_document'],$infos_encode,$images);
+			}
+		}
+	}
+	
+	return $flux;
+}
 ?>

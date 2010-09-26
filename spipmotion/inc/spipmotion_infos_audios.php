@@ -66,7 +66,7 @@ function inc_spipmotion_infos_audios_dist($id, $id_document,$type,$script='',$ig
 		}
 		if(!_AJAX){
 			if($action){
-				$corps .= icone_horizontale($texte, $action, $supp, "creer.gif", false);
+				$corps .= icone_horizontale($texte, $action, find_in_path('images/spipmotion-24.png'), "creer.gif", false);
 			}else{
 				$corps .= "<p>".$texte."</p>";
 			}

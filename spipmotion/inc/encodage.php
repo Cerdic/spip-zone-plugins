@@ -473,9 +473,12 @@ function encodage($source,$doc_attente){
 			
 			include_spip('inc/modifier');
 			revision_document($x, $modifs);
+			
+			$reussite = 'oui';
 		}else{
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
 			spip_log('Il y a une erreur, le fichier n est pas copié','spipmotion');
+			$reussite = 'non';
 		}
 	}
 	/**
@@ -485,12 +488,24 @@ function encodage($source,$doc_attente){
 	else{
 		$infos_encodage['fin_encodage'] = time();
 		$infos_encodage['log'] = spip_file_get_contents($fichier_log);
+		$reussite = 'non';
 		sql_updateq("spip_spipmotion_attentes",array('encode'=>'erreur','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 	}
 
 	if(file_exists(_DIR_RACINE.$query.'-0.log')){
 		supprimer_fichier(_DIR_RACINE.$query.'-0.log');
 	}
+	
+	pipeline('post_spipmotion_encodage',
+				array(
+					'args' => array(
+						'id_document' => $x,
+						'id_document_orig' => $attente['id_document'],
+						'reussite' => $reussite
+					),
+					'data' => ''
+				)
+			);
 	/**
 	 * Invalidation du cache
 	 */
