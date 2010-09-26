@@ -89,7 +89,6 @@ class getid3_write_metaflac
 				// It's simpler on *nix
 				$commandline = 'metaflac --no-utf8-convert --remove-all-tags --import-tags-from='.$tempcommentsfilename.' '.$follow_command.' "'.$this->filename.'" 2>&1';
 				$metaflacError = `$commandline`;
-				spip_log($commandline,'getid3');
 
 			}
 

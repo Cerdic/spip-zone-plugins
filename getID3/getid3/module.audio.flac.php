@@ -157,7 +157,6 @@ class getid3_flac
 		}
 		
 		if (isset($ThisFileInfo['flac']['PICTURE'])) {
-			spip_log('on a une cover dans le flac','getid3');
 			$ThisFileInfo['flac']['APIC'] = $ThisFileInfo['flac']['PICTURE']['APIC'];
 		}
 
@@ -359,7 +358,6 @@ class getid3_flac
 		$ThisFileInfo['flac']['PICTURE']['APIC']['data'] = substr($METAdataBlockData, $offset, $ThisFileInfo['flac']['PICTURE']['APIC']['image_bytes']);
 		
 		$frame_imagetype = strtoupper(str_replace('image/', '', strtolower($ThisFileInfo['flac']['PICTURE']['APIC']['image_mime'])));
-		spip_log($frame_imagetype,'getid3');
 		if ($frame_imagetype == 'JPEG') {
 			$frame_imagetype = 'JPG';
 		}
