@@ -3,7 +3,7 @@
   <nom>Custom</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.6</version>
+  <version>0.7.1</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -15,8 +15,20 @@
   </param>
 
   <variable>
+    <nom>Align</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <valeur>center</valeur>
+  </variable>
+  <variable>
     <nom>Contenu</nom>
     <type>textarea</type>
     <lines>5</lines>
+  </variable>
+  <variable>
+    <nom>Comment</nom>
+    <type>textarea</type>
   </variable>
 </composant>
