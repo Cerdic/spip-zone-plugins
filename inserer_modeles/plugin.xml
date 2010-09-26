@@ -18,6 +18,5 @@
 	<necessite id="saisies" version="[1.7.9;]" />
 	<necessite id="verifier" version="[0.1.1;]" />
 	
-	<necessite id="gestdoc" info="A supprimer a terme" />
 	<necessite id="formidable" info="A supprimer a terme" />
 </plugin>

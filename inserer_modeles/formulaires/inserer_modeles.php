@@ -55,9 +55,16 @@ function formulaires_inserer_modeles_traiter_dist() {
 			$code .= _request('id_modele');
 		if (_request('classe') && _request('classe')!='')
 			$code .= '|'._request('classe');
-		foreach ($champs as $champ)
-			if($champ != 'modele' && $champ != 'classe' && $champ != 'id_modele' && _request($champ) && _request($champ)!='')
-				$code .= "|$champ="._request($champ);
+		if (_request('align') && _request('align')!='')
+			$code .= '|'._request('align');
+		foreach ($champs as $champ) {
+			if($champ != 'modele' && $champ != 'classe' && $champ != 'id_modele' && _request($champ) && _request($champ)!='') {
+				if($champ == _request($champ))
+					$code .= "|$champ";
+				else
+					$code .= "|$champ="._request($champ);
+			}
+		}
 		$code .= '>';
 		set_request('code_modele',$code);
 		return array('message_ok' => _T('inserer_modeles:message_copier_code'));

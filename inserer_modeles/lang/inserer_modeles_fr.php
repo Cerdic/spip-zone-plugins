@@ -18,17 +18,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_formulaire' => 'un formulaire',
 	'label_formulaire_formidable' => 'Quel formulaire&nbsp;?',
 	
-	// A déplacer dans mediatheque
+	// A déplacer si on déplace les formulaires image.yaml et doc.yaml
 	'nom_doc' => 'la vignette d\'un document',
 	'nom_img' => 'une image',
 	'label_lien' => 'Lien&nbsp;:',
 	'label_lien_class' => 'Classe CSS du lien&nbsp;:',
 	'label_id_document' => 'Document num&eacute;ro&nbsp;:',
 	'label_id_image' => 'Image num&eacute;ro&nbsp;:',
-	'bouton_parcourir_docs_article' => 'Parcourir l\'article',
-	'bouton_parcourir_docs_breve' => 'Parcourir la br&egrave;ve',
-	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique',
-	'bouton_parcourir_mediatheque' => 'Parcourir la m&eacute;diath&egrave;que',
 	
 );
 

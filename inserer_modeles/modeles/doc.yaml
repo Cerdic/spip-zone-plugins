@@ -19,7 +19,7 @@ parametres:
   -
     saisie: 'selection'
     options:
-      nom: 'classe'
+      nom: 'align'
       label: '<:inserer_modeles:label_alignement:>'
       defaut: ''
       datas:
