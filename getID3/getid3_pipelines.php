@@ -20,14 +20,13 @@ function getid3_editer_contenu_objet($flux){
 	$id_document = $flux['args']['id'];
 	if(in_array($flux['args']['type'],array('case_document'))){
 		$son = array("mp3","ogg","flac","aiff","aif","wav");
-		$sons_metas = array('mp3','ogg');
 		$document = sql_fetsel("docs.id_document, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
 		if(in_array($extension,$son) && ($flux['args']['type'] == 'case_document')){
 			$infos_son = charger_fonction('infos_son', 'inc');
-			$flux['data'] .= $infos_son($id,$id_document,$type);
+			$flux['data'] .= $infos_son($id,$id_document,$type,$extension);
 		}
 	}
 	return $flux;
@@ -152,7 +151,7 @@ function getid3_post_edition($flux){
  */
 function getid3_document_desc_actions($flux){
 	$infos = sql_fetsel('distant,extension','spip_documents','id_document='.intval($flux['args']['id_document']));
-	if(($infos['distant'] == 'non') && in_array($infos['extension'],array('mp3'))){
+	if(($infos['distant'] == 'non') && in_array($infos['extension'],array('mp3','ogg','flac','mpc'))){
 		$redirect = self();
 		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.$flux['args']['id_document']),'redirect',$redirect);
 		$texte = _T('getid3:lien_modifier_id3');
@@ -173,7 +172,7 @@ function getid3_document_desc_actions($flux){
  * @return L'array des taches complété
  * @param array $taches_generales Un array des tâches du cron de SPIP
  */
-function spipmotion_taches_generales_cron($taches_generales){
+function getid3_taches_generales_cron($taches_generales){
 	$taches_generales['getid3_taches_generales'] = 24*60*60;
 	return $taches_generales;
 }

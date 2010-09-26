@@ -7,7 +7,7 @@
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
 		[(#ENV{redirect}|oui)
-			[(#VAL{<:icone_retour:>}|icone_inline{#ENV{redirect},#CHEMIN{images/document-24.png},rien.gif,left})]
+			[(#VAL{<:icone_retour:>}|icone_inline{#ENV{redirect},[(#CHEMIN{images/document-24.png}|sinon{#CHEMIN{images/doc-24.gif}})],rien.gif,left})]
 		]
 		<:getid3:formulaire_modifier_id3:>
 		<h1>
@@ -21,24 +21,21 @@
 <div class="cadre cadre-info verdana1">
 	<div class="cadre_padding">
 		<div class='infos'>
-			<div class='numero'><:gestdoc:info_gauche_numero_document:><p>#ID_DOCUMENT</p></div>
+			<div class='numero'><:getid3:info_gauche_numero_document:><p>#ID_DOCUMENT</p></div>
 		</div>
 	</div>
 </div>
 <div class='document_utilisations'>
 <B_liens>
-		<h3>[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</h3>
+		<h3>[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{getid3:info_utilisation_unique,getid3:info_utilisation_plusieurs})]</h3>
 		<ul class='liste_items'>
 			<BOUCLE_liens(documents_liens){id_document}>
 			<li class='item #OBJET'>[(#CHEMIN{images/#OBJET|concat{-12.png}}|tag_img) ][(#ID_OBJET|lien_objet{#OBJET})]
-			[(#VU|=={oui}|oui)
-			[<span class='vu'>(#CHEMIN{images/document-vu-24.png}|tag_img|inserer_attribut{title,<:gestdoc:document_vu:>}|inserer_attribut{alt,<:gestdoc:document_vu:>})</span>]
-			]
 			</li>
 			</BOUCLE_liens>
 		</ul>
 </B_liens>
-<h3><:gestdoc:aucune_utilisation:></h3>
+<h3><:getid3:info_utilisation_aucune:></h3>
 <//B_liens>
 </div>
 <!--/#navigation-->

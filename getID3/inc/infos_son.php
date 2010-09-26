@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions'); // *action_auteur
 
-function inc_infos_son_dist($id, $id_document,$type,$script='',$ignore_flag = false) {
+function inc_infos_son_dist($id, $id_document,$type,$extension,$script='',$ignore_flag = false) {
 	global $connect_id_auteur, $connect_statut, $visiteur_session;
 
 	if(_AJAX){
@@ -45,6 +45,17 @@ function inc_infos_son_dist($id, $id_document,$type,$script='',$ignore_flag = fa
 		}
 		if(!_AJAX){
 			$corps .= icone_horizontale($texte, $action, $supp, "creer.gif", false);
+		}
+		$sons_metas = lire_config('getid3_write',array());
+		if(in_array($extension,$sons_metas)){
+			$texte_write = _T('getid3:lien_modifier_id3');
+			if (test_espace_prive()){
+				$redirect = str_replace('&amp;','&',$redirect);
+				$action = parametre_url(generer_url_ecrire('document_id3_editer', "id_document=".$id_document),"redirect",$redirect);
+			}
+			if(!_AJAX){
+				$corps .= icone_horizontale($texte_write, $action, $supp, "creer.gif", false);
+			}
 		}
 	}
 	return $corps;

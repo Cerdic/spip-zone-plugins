@@ -18,7 +18,7 @@ function formulaires_editer_id3_charger($id){
 	$config_id3 = lire_config('getid3',array());
 	$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id));
 	
-	if(!in_array($infos_doc['extension'],array('mp3'))){
+	if(!in_array($infos_doc['extension'],lire_config('getid3_write',array('mp3')))){
 		$valeurs['message_erreur'] = _T('getid3:message_extension_invalide_ecriture');
 	}else if($infos_doc['distant'] == 'oui'){
 		$valeurs['message_erreur'] = _T('getid3:message_erreur_document_distant_ecriture');
