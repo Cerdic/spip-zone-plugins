@@ -345,7 +345,7 @@ EOB;
         echo "<tr><td class=td-0>",$theserver,"</td><td class=td-0>",$theKey,
              " <br/>flag:",$r['VALUE'][$theKey]['stat']['flag'],
              " <br/>Size:",bsize($r['VALUE'][$theKey]['stat']['size']),
-             "</td><td>",chunk_split($r['VALUE'][$theKey]['value'],40),"</td>",
+             "</td><td>",htmlspecialchars(chunk_split($r['VALUE'][$theKey]['value'],40)),"</td>",
              '<td><a href="',$PHP_SELF,'&op=5&server=',(int)$_GET['server'],'&key=',base64_encode($theKey),"\">Delete</a></td>","</tr>";
         echo <<<EOB
 			</tbody></table>
@@ -442,7 +442,10 @@ function parseMemcacheResults($str){
 function dumpCacheSlab($server,$slabId,$limit){
     list($host,$port) = explode(':',$server);
     $resp = sendMemcacheCommand($host,$port,'stats cachedump '.$slabId.' '.$limit);
-
+    $g = create_function('$f', 'return strpos($f, "'.$_SERVER['HTTP_HOST'].'") === 0;');
+    foreach($resp['ITEM'] as $key=>$ignore)
+    	if (!$g($key))
+    		unset($resp['ITEM'][$key]);
    return $resp;
 
 }
