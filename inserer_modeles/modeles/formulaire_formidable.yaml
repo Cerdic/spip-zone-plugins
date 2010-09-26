@@ -1,5 +1,6 @@
 nom: '<:inserer_modeles:nom_formulaire:>'
 logo: 'images/formulaire-24.png'
+icone_barre: 'formulaire.png'
 parametres:
   -
     saisie: 'hidden'

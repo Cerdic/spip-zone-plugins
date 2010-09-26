@@ -29,7 +29,7 @@
 		</ul>
 		<p class="boutons">
 			<input type="submit" class="submit" name="inserer" value="<:inserer_modeles:bouton_inserer:>" />
-			<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />
+			[(#ENV{ne_pas_afficher_bouton_annuler}|non)<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />]
 		</p>
 	</BOUCLE_deja_choisi>
 		<B_choix>

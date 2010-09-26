@@ -34,6 +34,8 @@ function charger_infos_formulaire_modele($formulaire){
 	static $infos_formulaires_modeles = array();
 	
 	if (!isset($infos_formulaires_modeles[$formulaire])) {
+		if (substr($formulaire,-5)!='.yaml')
+			$formulaire .= '.yaml';
 		if ($chemin = find_in_path($formulaire,'modeles/')) {
 			include_spip('inc/yaml');
 			$infos_formulaires_modeles[$formulaire] = yaml_decode_file($chemin);

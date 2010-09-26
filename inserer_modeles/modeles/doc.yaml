@@ -1,5 +1,6 @@
 nom: '<:inserer_modeles:nom_doc:>'
 logo: 'images/doc-24.gif'
+icone_barre: 'document.png'
 parametres:
   -
     saisie: 'hidden'

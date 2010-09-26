@@ -4,18 +4,22 @@ function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_b
 	include_spip('inc/inserer_modeles');
 	$contexte = array();
 	
-	if (!_request('formulaire_modele') || _request('annuler')) {
+	if ((!_request('formulaire_modele') && $formulaire_modele=='') || _request('annuler')) {
 		$contexte['_liste_formulaires_modeles'] = inserer_modeles_lister_formulaires_modeles();
 	} else {
-		$infos_modele = charger_infos_formulaire_modele(_request('formulaire_modele'));
+		if ($formulaire_modele=='')
+			$formulaire_modele = _request('formulaire_modele');
+		$infos_modele = charger_infos_formulaire_modele($formulaire_modele);
 		include_spip('inc/saisies');
 		$contexte = saisies_charger_champs($infos_modele['parametres']);
-		$contexte['formulaire_modele'] = _request('formulaire_modele');
+		$contexte['formulaire_modele'] = $formulaire_modele;
 		$contexte['nom'] = _T_ou_typo($infos_modele['nom']);
 		$contexte['logo'] = $infos_modele['logo'];
 		$contexte['_saisies'] = $infos_modele['parametres'];
 		if (_request('_code_modele'))
 			$contexte['_code_modele'] = _request('_code_modele');
+		if ($formulaire_modele!='')
+			$contexte['ne_pas_afficher_bouton_annuler'] = 'on';
 	}
 	
 	if (is_numeric($id_article))

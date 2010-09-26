@@ -1,5 +1,6 @@
 nom: '<:inserer_modeles:nom_img:>'
 logo: 'images/image-24.gif'
+icone_barre: 'image.png'
 parametres:
   -
     saisie: 'hidden'
