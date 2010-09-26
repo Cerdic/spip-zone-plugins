@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_breve) {
+function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_breve,$formulaire_modele='',$modalbox='') {
 	include_spip('inc/inserer_modeles');
 	$contexte = array();
 	
@@ -14,8 +14,8 @@ function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_b
 		$contexte['nom'] = _T_ou_typo($infos_modele['nom']);
 		$contexte['logo'] = $infos_modele['logo'];
 		$contexte['_saisies'] = $infos_modele['parametres'];
-		if (_request('code_modele'))
-			$contexte['code_modele'] = _request('code_modele');
+		if (_request('_code_modele'))
+			$contexte['_code_modele'] = _request('_code_modele');
 	}
 	
 	if (is_numeric($id_article))
@@ -24,6 +24,8 @@ function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_b
 		$contexte['id_rubrique'] = $id_rubrique;
 	if (is_numeric($id_breve))
 		$contexte['id_breve'] = $id_breve;
+	if ($modalbox!='')
+		$contexte['modalbox'] = 'oui';
 	
 	return $contexte;
 }
@@ -66,7 +68,7 @@ function formulaires_inserer_modeles_traiter_dist() {
 			}
 		}
 		$code .= '>';
-		set_request('code_modele',$code);
+		set_request('_code_modele',$code);
 		return array('message_ok' => _T('inserer_modeles:message_copier_code'));
 	}
 }

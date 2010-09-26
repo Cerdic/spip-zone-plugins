@@ -12,11 +12,20 @@
 		<nom>affiche_droite</nom>
 		<inclure>inserer_modeles_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
-	<necessite id="saisies" version="[1.7.9;]" />
+	<necessite id="saisies" version="[1.8.2;]" />
 	<necessite id="verifier" version="[0.1.1;]" />
+	<necessite id="mediabox" />
 	
 	<necessite id="formidable" info="A supprimer a terme" />
 </plugin>

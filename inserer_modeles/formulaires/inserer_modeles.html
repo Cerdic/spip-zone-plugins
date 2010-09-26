@@ -12,7 +12,17 @@
 <form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<BOUCLE_deja_choisi(CONDITION){si #ENV{formulaire_modele}}>
-		[<textarea readonly="readonly" >(#ENV{code_modele})</textarea>]
+		[<textarea readonly="readonly" id="code_modele" >(#ENV**{_code_modele})</textarea>]
+		[(#REM) Si on appelle depuis le porte-plume on renvoie le code au porte-plume ]
+		[(#ENV{modalbox}|et{#ENV{_code_modele}}|oui)<script>
+			$(document).ready(function(){
+				var code_modele = $("#code_modele").text();
+				if (code_modele != '') {
+					parent.$.markItUp( { replaceWith: code_modele } );
+					jQuery.modalboxclose();
+				}
+			});
+		</script>]
 		<input type="hidden" name="formulaire_modele" value="#ENV{formulaire_modele}" />
 		<ul>
 		#GENERER_SAISIES{#ENV{_saisies}}
