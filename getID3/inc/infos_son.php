@@ -44,7 +44,7 @@ function inc_infos_son_dist($id, $id_document,$type,$extension,$script='',$ignor
 			$action = "<a href='$action'>$texte</a>";
 		}
 		if(!_AJAX){
-			$corps .= icone_horizontale($texte, $action, $supp, "creer.gif", false);
+			$corps .= icone_horizontale($texte, $action, find_in_path('images/id3v2-24.png'), "rien.gif", false);
 		}
 		$sons_metas = lire_config('getid3_write',array());
 		if(in_array($extension,$sons_metas)){
@@ -54,7 +54,7 @@ function inc_infos_son_dist($id, $id_document,$type,$extension,$script='',$ignor
 				$action = parametre_url(generer_url_ecrire('document_id3_editer', "id_document=".$id_document),"redirect",$redirect);
 			}
 			if(!_AJAX){
-				$corps .= icone_horizontale($texte_write, $action, $supp, "creer.gif", false);
+				$corps .= icone_horizontale($texte_write, $action, find_in_path('images/id3v2-24.png'), "edit.gif", false);
 			}
 		}
 	}

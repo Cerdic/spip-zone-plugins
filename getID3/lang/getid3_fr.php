@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verifier_logiciels' => 'Rev&eacute;rifier les logiciels',
 	'label_year' => 'Ann&eacute;e',
 	'legende_ecriture_tags' => '&Eacute;criture des tags',
-	'lien_modifier_id3' => 'Modifier les tags ID3',
+	'lien_modifier_id3' => 'Modifier les tags audio',
 
 	// M
 	'message_cover_defaut_modifiee' => 'Un document a &eacute;t&eacute; modifi&eacute;',
