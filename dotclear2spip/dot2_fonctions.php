@@ -291,7 +291,7 @@ function dot_migrer_blog($blog_id){
 	spip_log("#### Début migration ####",'dot2');
 	$rubrique_defaut = $crud('create','rubriques','',array('titre'=>_T('Rubrique d\'import DC')));
 	$groupe_defaut=sql_getfetsel('id_groupe','spip_groupes_mots','`titre`='.sql_quote(_L('tags de dotclear')));
-	
+	$rubrique_defaut = $rubrique_default['result']['id'];
 	dot2_migrer_rubriques($blog_id);
 	dot2_migrer_articles($blog_id,$rubrique_defaut,$groupe_defaut);
 	dot2_migrer_sites($blog_id,$rubrique_defaut);
