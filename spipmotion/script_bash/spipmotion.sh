@@ -53,14 +53,14 @@ Si non, le fichier déjà présent sera renommé."
 
 ################ ARGUMENTS ######################
 
-force = "false";
+FORCE="false";
 while test -n "${1}"; do
 	case "${1}" in
 		--help|-h) echo "$messageaide";
 		exit 0;;
 		--version|-v) echo "SPIPmotion v. "${VERSION}"";
 		exit 0;;
-		--force|-f) force="true"
+		--force|-f) FORCE="true"
 		shift;;
 		--e) entree="${2}"
 		shift;;
@@ -145,7 +145,7 @@ esac
 ########### SI LA SORTIE EXISTE DÉJÀ #############
 
 
-if [ -e "$sortie" ] && [ $force != "true" ]
+if [ -e "$sortie" ] && [ ${FORCE} != "true" ]
 	then
 	PS3='> '
 	echo "###############################################################"
