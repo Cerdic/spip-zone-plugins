@@ -67,7 +67,9 @@ function acs_restore() {
 	include_spip('inc/acs_load_vars');
 	$repertoire = _DIR_DUMP.'acs/';
 	$archive = $repertoire._request('archive').'.php';
+	$admins = $GLOBALS['meta']['ACS_ADMINS'];
 	acs_reset_vars();
+	ecrire_meta('ACS_ADMINS', $admins);
 	$r = acs_load_vars($archive);
 	ecrire_meta('acsDerniereModif', time());
 	acs_log('inc/acs_sr : restauré "'.$archive.'" '.$r);
