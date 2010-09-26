@@ -27,14 +27,16 @@ function balise_CONFIGURER_METAS_dist($p) {
 
 // A l'execution on dispose du nom du squelette, on verifie qu'il existe.
 // Pour le calcul du contexte, c'est comme la balise #FORMULAIRE_.
+// y compris le controle au retour pour faire apparaitre le message d'erreur.
 
 function balise_CONFIGURER_METAS_dyn($form) {
 
-	include_spip("balise/formulaire_");
+	include_spip('balise/formulaire_');
 	if (!existe_formulaire($form)) return '';
-	return array('formulaires/' . $form,
-		     3600, 
-		     balise_FORMULAIRE__contexte("configurer_metas", func_get_args()));
+	$args = func_get_args();
+	$contexte = balise_FORMULAIRE__contexte('configurer_metas', $args);
+	if (!is_array($contexte)) return $contexte;
+	return array('formulaires/' . $form, 3600, $contexte);
 }
 
 ?>
