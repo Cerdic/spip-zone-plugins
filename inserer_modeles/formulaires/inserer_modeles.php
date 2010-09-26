@@ -7,14 +7,20 @@ function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_b
 	if ((!_request('formulaire_modele') && $formulaire_modele=='') || _request('annuler')) {
 		$contexte['_liste_formulaires_modeles'] = inserer_modeles_lister_formulaires_modeles();
 	} else {
-		$contexte = array();
 		if ($formulaire_modele!='')
 			$contexte['ne_pas_afficher_bouton_annuler'] = 'on';
 		if ($formulaire_modele=='')
 			$formulaire_modele = _request('formulaire_modele');
 		$infos_modele = charger_infos_formulaire_modele($formulaire_modele);
 		include_spip('inc/saisies');
-		$contexte = array_merge($contexte,saisies_charger_champs($infos_modele['parametres']));
+		$champs_saisies = saisies_charger_champs($infos_modele['parametres']);
+		// On charge les valeurs éventuellement passées par l'url
+		foreach($champs_saisies as $champ => $val) {
+			if (_request($champ))
+				$champs_saisies[$champ] = _request($champ);
+		}
+		$contexte = array_merge($contexte,$champs_saisies);
+		
 		$contexte['formulaire_modele'] = $formulaire_modele;
 		$contexte['nom'] = _T_ou_typo($infos_modele['nom']);
 		$contexte['logo'] = $infos_modele['logo'];
@@ -29,8 +35,20 @@ function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_b
 		$contexte['id_rubrique'] = $id_rubrique;
 	if (is_numeric($id_breve))
 		$contexte['id_breve'] = $id_breve;
-	if ($modalbox!='')
+	if ($modalbox!='') {
 		$contexte['modalbox'] = 'oui';
+		$_modalbox_retour = url_absolue(generer_url_ecrire('inserer_modeles','',true));
+		if (substr($formulaire_modele,-5)=='.yaml')
+				$formulaire_modele = substr($formulaire_modele,0,-5);
+		$_modalbox_retour = parametre_url($_modalbox_retour,'formulaire_modele',$formulaire_modele,'&');
+		if (is_numeric($id_article))
+			$_modalbox_retour = parametre_url($_modalbox_retour,'id_article',$id_article,'&');
+		if (is_numeric($id_rubrique))
+			$_modalbox_retour = parametre_url($_modalbox_retour,'id_rubrique',$id_rubrique,'&');
+		if (is_numeric($id_breve))
+			$_modalbox_retour = parametre_url($_modalbox_retour,'id_breve',$id_breve,'&');
+		$contexte['_modalbox_retour'] = $_modalbox_retour;
+	}
 	
 	return $contexte;
 }

@@ -7,9 +7,8 @@ include_spip('inc/presentation');
 function exec_inserer_modeles(){
 
 	if (defined('_AJAX') AND _AJAX){
-		$contexte = array_merge(array('modalbox'=>'oui'),$_GET);
+		$contexte = array_merge(array('modalbox' => 'oui'),$_GET);
 		$res = '<p />'.recuperer_fond('prive/inserer_modeles',$contexte);
-
 		include_spip('inc/actions');
 		ajax_retour($res);
 		return;
