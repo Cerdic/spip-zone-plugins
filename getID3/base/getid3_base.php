@@ -1,14 +1,15 @@
 <?php
 /**
-* Plugin getid3
-* par BoOz, kent1
-*
-* Copyright (c) 2007-2010
-* Logiciel libre distribué sous licence GNU/GPL.
-*
-* Définition des tables
-*
-**/
+ * GetID3
+ * Gestion des métadonnées de fichiers sonores directement dans SPIP
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1), BoOz
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ * Définition des tables
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

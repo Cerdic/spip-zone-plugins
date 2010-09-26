@@ -1,4 +1,13 @@
 <?php
+/**
+ * GetID3
+ * Gestion des métadonnées de fichiers sonores directement dans SPIP
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1), BoOz
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
 
 function recuperer_id3_doc($id_document,$info = "", $mime = "",$retour='oui'){
 	include_spip('inc/documents');

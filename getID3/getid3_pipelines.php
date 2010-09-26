@@ -1,5 +1,15 @@
 <?php
 /**
+ * GetID3
+ * Gestion des métadonnées de fichiers sonores directement dans SPIP
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1), BoOz
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
+
+/**
  * Insertion dans le pipeline editer_contenu_objet
  * Ajout d'informations dans le bloc des documents si le document est sonore
  *
