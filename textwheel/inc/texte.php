@@ -509,7 +509,7 @@ function corriger_typo($t, $lang='') {
 
 	// Charger & appliquer les fonctions de typographie
 	$typographie = charger_fonction(lang_typo($lang), 'typographie');
-	$letexte = $typographie($letexte);
+	$t = $typographie($t);
 
 	// Les citations en une autre langue, s'il y a lieu
 	if (!$e) $t = echappe_retour($t, 'multi');
