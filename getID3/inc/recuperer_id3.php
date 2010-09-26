@@ -49,10 +49,30 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 				}
 			}
 		}
+		if(isset($file_info['flac']['APIC'])){
+			if (isset($file_info['flac']['APIC']['data']) && isset($file_info['flac']['APIC']['image_mime'])) {
+				spip_log($file_info['flac']['APIC']['image_mime'],'getid3');
+	            $extension = strtolower($file_info['flac']['APIC']['extension']);
+	            if($extension == 'jpeg')
+	            	$extension = 'jpg';
+	            $tmp_file = 'getid3-'.md5($file_info['filename'].$file_info['filesize']).'.'.$extension;
+	            $dest = sous_repertoire(_DIR_VAR, 'cache-getid3');
+				$dest = $dest.$tmp_file;
+				if ($ok = ecrire_fichier($dest, $file_info['flac']['APIC']['data'])) {
+					$id3['cover'.$cle] = $dest;
+				}
+			}
+		}
 		if(isset($file_info['comments_html'])){
 			foreach($file_info['comments_html'] as $cle=>$val){
 				$id3[$cle] = array_pop($val);
 			}
+		}
+		/**
+		 * Cas des flac et ogg (certainement)
+		 */
+		if(isset($id3['date']) && !isset($id3['year'])){
+			$id3['year'] = $id3['date']; 
 		}
 		$id3['format'] = $file_info['audio']['dataformat'];
 		$id3['lossless'] = $file_info['audio']['lossless'];

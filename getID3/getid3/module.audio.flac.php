@@ -21,7 +21,6 @@ class getid3_flac
 
 	function getid3_flac(&$fd, &$ThisFileInfo) {
 		// http://flac.sourceforge.net/format.html
-
 		fseek($fd, $ThisFileInfo['avdataoffset'], SEEK_SET);
 		$StreamMarker = fread($fd, 4);
 		if ($StreamMarker != 'fLaC') {
@@ -46,7 +45,7 @@ class getid3_flac
 			$METAdataBlockType            = getid3_lib::BigEndian2Int(substr($METAdataBlockHeader, 0, 1)) & 0x7F;
 			$METAdataBlockLength          = getid3_lib::BigEndian2Int(substr($METAdataBlockHeader, 1, 3));
 			$METAdataBlockTypeText        = getid3_flac::FLACmetaBlockTypeLookup($METAdataBlockType);
-
+			
 			if ($METAdataBlockLength < 0) {
 				$ThisFileInfo['error'][] = 'corrupt or invalid METADATA_BLOCK_HEADER.BLOCK_TYPE ('.$METAdataBlockType.') at offset '.$METAdataBlockOffset;
 				break;
@@ -99,7 +98,13 @@ class getid3_flac
 						return false;
 					}
 					break;
-
+					
+				case 'PICTURE':
+					if (!getid3_flac::FLACparsePICTURE($ThisFileInfo_flac_METAdataBlockTypeText_raw['block_data'], $ThisFileInfo)) {
+						return false;
+					}
+					break;
+					
 				default:
 					$ThisFileInfo['warning'][] = 'Unhandled METADATA_BLOCK_HEADER.BLOCK_TYPE ('.$METAdataBlockType.') at offset '.$METAdataBlockOffset;
 					break;
@@ -150,6 +155,11 @@ class getid3_flac
 		if (!empty($ThisFileInfo['ogg']['vendor'])) {
 			$ThisFileInfo['audio']['encoder'] = $ThisFileInfo['ogg']['vendor'];
 		}
+		
+		if (isset($ThisFileInfo['flac']['PICTURE'])) {
+			spip_log('on a une cover dans le flac','getid3');
+			$ThisFileInfo['flac']['APIC'] = $ThisFileInfo['flac']['PICTURE']['APIC'];
+		}
 
 		return true;
 	}
@@ -163,6 +173,7 @@ class getid3_flac
 			$FLACmetaBlockTypeLookup[3] = 'SEEKTABLE';
 			$FLACmetaBlockTypeLookup[4] = 'VORBIS_COMMENT';
 			$FLACmetaBlockTypeLookup[5] = 'CUESHEET';
+			$FLACmetaBlockTypeLookup[6] = 'PICTURE';
 		}
 		return (isset($FLACmetaBlockTypeLookup[$blocktype]) ? $FLACmetaBlockTypeLookup[$blocktype] : 'reserved');
 	}
@@ -314,7 +325,48 @@ class getid3_flac
 		
 		return true;
 	}
-
+	
+	/**
+	 * Retrieve the PICTURE informations
+	 * http://flac.sourceforge.net/format.html#metadata_block_picture
+	 * 
+	 * @param $METAdataBlockData
+	 * @param $ThisFileInfo
+	 */
+	function FLACparsePICTURE($METAdataBlockData, &$ThisFileInfo) {
+		$offset = 0;
+		$cover_type = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$ThisFileInfo['flac']['PICTURE']['APIC']['picturetypeid'] = $cover_type;
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['picturetypelength'] = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['image_mime'] = trim(substr($METAdataBlockData, $offset, $ThisFileInfo['flac']['PICTURE']['APIC']['picturetypelength']), "\0");
+		$offset +=$ThisFileInfo['flac']['PICTURE']['APIC']['picturetypelength'];
+		$ThisFileInfo['flac']['PICTURE']['APIC']['picture_desc_length'] = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['description'] = trim(substr($METAdataBlockData, $offset, $ThisFileInfo['flac']['PICTURE']['APIC']['picture_desc_length']), "\0");
+		$offset +=$ThisFileInfo['flac']['PICTURE']['APIC']['picture_desc_length'];
+		$ThisFileInfo['flac']['PICTURE']['APIC']['image_width'] = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['image_height'] = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['picture_color_depth'] = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['picture_color_nb'] = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['image_bytes'] = getid3_lib::BigEndian2Int(substr($METAdataBlockData, $offset, 4));
+		$offset += 4;
+		$ThisFileInfo['flac']['PICTURE']['APIC']['data'] = substr($METAdataBlockData, $offset, $ThisFileInfo['flac']['PICTURE']['APIC']['image_bytes']);
+		
+		$frame_imagetype = strtoupper(str_replace('image/', '', strtolower($ThisFileInfo['flac']['PICTURE']['APIC']['image_mime'])));
+		spip_log($frame_imagetype,'getid3');
+		if ($frame_imagetype == 'JPEG') {
+			$frame_imagetype = 'JPG';
+		}
+		$ThisFileInfo['flac']['PICTURE']['APIC']['extension'] = $frame_imagetype;
+		
+		return true;
+	}
 }
 
 ?>

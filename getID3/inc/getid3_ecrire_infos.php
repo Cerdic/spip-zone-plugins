@@ -28,9 +28,12 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 	
 	if($document['extension'] == 'ogg'){
 		$formats = array('vorbiscomment');
+		$infos['date'] = $infos['year'];
 	}else if($document['extension'] == 'flac'){
 		$formats = array('metaflac');
+		$infos['date'] = $infos['year'];
 	}
+	
 	if($document['distant'] != 'oui'){
 		$err = array();
 		$TagData = array();
