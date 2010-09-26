@@ -5,6 +5,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_parcourir_docs_article' => 'Parcourir l\'article',
+	'bouton_parcourir_docs_breve' => 'Parcourir la br&egrave;ve',
+	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique',
+	'bouton_parcourir_mediatheque' => 'Parcourir la m&eacute;diath&egrave;que',
+
 	// L
 	'label_annee' => 'Ann&eacute;e',
 	'label_jour' => 'Jour',
