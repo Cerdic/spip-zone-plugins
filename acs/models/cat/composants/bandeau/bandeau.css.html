@@ -1,12 +1,14 @@
 #CACHE{0}
 
-fieldset.a_la_une {
+.cBandeau fieldset.a_la_une {
   position: relative;
   font-weight: bold;
   font-style: italic;
-  [font-size: (#VAR{acsBandeauFontSize,0.88em});]
-  margin: 0;
-  padding: 0;
+  [font-size: (#VAR{acsBandeauFontSize,0.88em});
+  ]margin: 0;
+  [margin-#LANG_LEFT: (#VAR{acsBandeauLeft});
+  ][margin-#LANG_RIGHT: (#VAR{acsBandeauRight});
+  ]padding: 0;
   padding-left: 0.79em;
   padding-right: 0.79em;
   padding-bottom: 0.2em;
@@ -19,7 +21,7 @@ fieldset.a_la_une {
   [text-align: (#VAR{acsBandeauAlignement,center});]
 }
 
-fieldset.a_la_une legend {
+.cBandeau fieldset.a_la_une legend {
   position: relative;
   [border: #VAR{acsBandeauBord/Width,thin}[ (#VAR{acsBandeauBord/Style,groove}) ](#VAR{acsBandeauBord/Color});
   border-bottom: 0;
@@ -36,7 +38,7 @@ fieldset.a_la_une legend {
   margin-top: -1.2em;
 }
 
-div.a_la_une {
+.cBandeau div.a_la_une {
   font-weight: normal;
   padding-left: 8px;
   padding-right: 8px;
