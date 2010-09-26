@@ -28,24 +28,39 @@ function sale($texte){
 		$texte = preg_replace(",<t[hd]( [^>]*)?".">,Uims", " | ", $texte);
 		
 		
+		
 		// POST TRAITEMENT
 		$texte = str_replace("\r", "\n", $texte);
 		
+		//Liste a puce
+		$texte = sale_puce($texte);
+
 		// SUPPRIME LES TAGS
 		if (eregi("<title.*>(.*)</title>", $texte, $regs))
 			$titre = textebrut($regs[1]);
+		
 		$texte = textebrut($texte);
 		
 		// Suite tableaux
 		$texte = preg_replace(",\n[| ]+\n,", "", $texte);
 		$texte = preg_replace(",\n[|].+?[|].+?[|].+,", "\\0|\r", $texte);
-		
+
 		// retablir les gras
 		$texte = preg_replace(",@@b@@(.*)@@/b@@,Uims","<b>\\1</b>",$texte);
 		$texte = preg_replace(",@@/?b@@,"," ",$texte);
 		$texte = preg_split("/\r\n|\n\r|\n|\r/", $texte);
 		
-return implode("\n\n",$texte);
+		
+return str_replace("-liste*","\n-*",implode("\n\n",$texte));
+}
+
+function sale_puce($texte){
+	// Listes numérotés et listes à puces vont être mélangés, car je vois pas trop comment faire la différence (si quelqu'un trouve ...) ... mais c'est déja mieux qu'avant ... je vois pas non plus comment géré les niveau (sans doute en xml, mais j'ai pas le temps ni les compétences - Maïeul le 26/9/10)
+	$texte = preg_replace(",<li( [^>]*)?".">,Uims","-liste*",$texte);
+	return $texte;
+	
+	
+	
 }
 
 ?>
