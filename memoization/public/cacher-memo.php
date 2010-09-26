@@ -150,7 +150,7 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 		unset($page['gz']);
 	}
 
-	spip_log("Creation du cache $chemin_cache "._MEMOIZE." pour "
+	spip_log("Creation du cache $chemin_cache ". $memo->methode ." pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 
 	// Inserer ses invalideurs
