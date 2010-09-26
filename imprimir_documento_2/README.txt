@@ -7,3 +7,22 @@ A veces una persona que visita nuestra web quiere una copia del contenido de uno
 
 ==========================================================================
 NOTA: Los esqueletos empleados (imprimir_articulo.html e imprimir_breve.html) son bastante viejos y estar’a bien reformarlos quitando las tablas y respetando las normas de estilo, pero de momento pueden servir ya que funcinan aceptablemente. Tœ mism@.CopyLeft 2006 joseluis@digital77.com
+
+
+PLUGIN IMPRIMER UN DOCUMENT POUR SPIP 2
+
+Un internaute qui visite un site peut vouloir se procurer une copie de l'un de nos documents, article ou brève,
+débarrassé de son habillage ou de ses éléments de navigation. C'est ce qu'on a l'habitude d'appeller "version imprimable".
+
+C'est ce que réalise ce plugin, à installer sur votre site sous SPIP.
+
+Le plugin "Imprimer un document" pour SPIP 2 et suivants met à disposition un squelette qui permet d'imprimer le contenu de l'article ou de la brève sans habillage, menœs et dem ‡ s des éléments du web.
+
+En cliquant sur le lien, une pop-up apparaît qui permet de visauliser la version imprimable avec une icône pour lancer l'impression.
+
+INSTALLATION
+
+- Décompresser l'arhive "imprimir_documento_2.zip".
+- Mettre le dossier "imprimir_documento_2" à l'intérieur du dossier plugins de SPIP (le créer s'il n'existe pas).
+- Dans l'espace privé cliquer dans Configuration > Gestion des plugins, et activer celui-ci.
+ 
