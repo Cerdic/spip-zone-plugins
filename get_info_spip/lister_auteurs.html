@@ -39,7 +39,11 @@
 			<th><:gins:statut:></th>
 			<th><:gins:derniere_cx:></th>
 		</tr>
-	<BOUCLE_documents(AUTEURS){par id_auteur}{pagination #ENV{pagination, 25}}>
+	[<!--(#REM)
+	
+		tout: tous les auteurs, qu’ils aient écrit un article ou non.
+		
+	-->]<BOUCLE_documents(AUTEURS){tout}{par id_auteur}{pagination #ENV{pagination, 25}}>
 	<tr>
 		<td class="left id">##ID_AUTEUR</td>
 		<td>#NOM</td>
