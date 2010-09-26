@@ -279,7 +279,7 @@ function dot2_migrer_sites($blog_id,$id_rubrique){
 		$url_site = $site['link_href'];
 		
 		#aller on ajoute en BDD !
-		$resultat = $crud('create','syndic',null,array('id_rubrique'=>$id_rubrique,'nom_site'=>$nom_site,'url_site'=>$url_site));
+		$resultat = $crud('create','syndic',null,array('id_rubrique'=>$id_rubrique,'nom_site'=>$nom_site,'url_site'=>$url_site,'statut'=>'publie'));
 		$id_site  = $resultat['result']['id'];
 		spip_log("Ajout du site $id_site ($nom_site - $url_site)",'dot2_migration_site');
 	}
