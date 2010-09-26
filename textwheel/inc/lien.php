@@ -20,7 +20,7 @@ include_spip('base/abstract_sql');
 // et en plus on veut pouvoir les passer en pipeline
 //
 
-function inc_lien($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='') {
+function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='') {
 	static $u=null;
 	if (!$u) $u=url_de_base();
 	$typo = false;
@@ -363,6 +363,25 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 	return array('url' => $lien, 'titre' => $texte);
 }
 
+function liens_implicite_glose_dist($texte,$id,$type,$args,$ancre,$connect=''){
+	if (function_exists($f = 'glossaire_' . $ancre))
+		$url = $f($texte, $id);
+	else
+		$url = glossaire_std($texte);
+	return $url;
+}
+
+
+/* fonction valable pour SPIP 2.1 seulement [ en 2.3 elle est definie dans l'extension "Sites" ] // */
+function liens_implicite_site_dist($texte,$id,$type,$args,$ancre,$connect=''){
+	if (!$id = intval($id))
+		return false;
+	$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=".intval($id),'','','','',$connect);
+	return $url;
+}
+/* fin exception spip 2.1 */
+
+
 // http://doc.spip.org/@traiter_lien_implicite
 function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 {
@@ -370,13 +389,10 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	@list($type,,$id,,$args,,$ancre) = $match;
 # attention dans le cas des sites le lien doit pointer non pas sur
 # la page locale du site, mais directement sur le site lui-meme
-	if ($type == 'site')
-		$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
-	elseif ($type == 'glose') {
-		if (function_exists($f = 'glossaire_' . $ancre)) 
-		  $url = $f($texte, $id);
-		else $url = glossaire_std($texte);
-	} else $url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
+	if ($f = charger_fonction("implicite_$type","liens",true))
+		$url = $f($texte,$id,$type,$args,$ancre,$connect);
+	if (!$url)
+		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
 	if (!$url) return false;
 	if (is_array($url)) {
 		@list($type,$id) = $url;

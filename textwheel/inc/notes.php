@@ -12,9 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# Tests TW
-require_once _DIR_RESTREINT.'inc/notes.php';
-
 //
 // Notes de bas de page
 //
@@ -27,26 +24,19 @@ require_once _DIR_RESTREINT.'inc/notes.php';
 // en particulier, envoyer un tableau vide permet de tout recuperer
 // C'est stocke dans la globale $les_notes, mais pas besoin de le savoir
 
-function inc_notes($arg,$operation='traiter')
+function inc_notes_dist($arg,$operation='traiter')
 {
 	static $pile = array();
 	static $next_marqueur = 1;
 	static $marqueur = 1;
 	global $les_notes, $compt_note, $notes_vues;
-
-	# Tests TW
-	if (!$GLOBALS['tw']) {
-		return inc_notes_dist($arg, $operation);
-	}
-
 	switch ($operation){
 		case 'traiter':
 			if (is_array($arg)) return traiter_les_notes($arg);
 			else
-				return tw_traiter_raccourci_notes($arg, $marqueur>1?$marqueur:'');
+				return traiter_raccourci_notes($arg, $marqueur>1?$marqueur:'');
 			break;
 		case 'empiler':
-			#var_dump(">$compt_note:$marqueur");
 			if ($compt_note==0)
 				// si le marqueur n'a pas encore ete utilise, on le recycle dans la pile courante
 				array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,0));
@@ -68,7 +58,6 @@ function inc_notes($arg,$operation='traiter')
 			// on redepile tout suite a une fin d'inclusion ou d'un affichage des notes
 			list($les_notes, $compt_note, $notes_vues, $marqueur) = array_pop($pile);
 			#$les_notes .= $prev_notes;
-			#var_dump("<$compt_note:$marqueur");
 			// si pas de marqueur attribue, on le fait
 			if (!$marqueur){
 				$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
@@ -103,15 +92,15 @@ function inc_notes($arg,$operation='traiter')
 	}
 }
 
-define('_RACCOURCI_NOTES_TW', ',\[\[(\s*(<([^>\'"]*)>)?(.*?))\]\],msS');
+define('_RACCOURCI_NOTES', ',\[\[(\s*(<([^>\'"]*)>)?(.*?))\]\],msS');
 
-function tw_traiter_raccourci_notes($letexte, $marqueur_notes)
+function traiter_raccourci_notes($letexte, $marqueur_notes)
 {
 	global $compt_note,   $les_notes, $notes_vues;
 	global $ouvre_ref, $ferme_ref;
 
 	if (strpos($letexte, '[[') === false
-	OR !preg_match_all(_RACCOURCI_NOTES_TW, $letexte, $m, PREG_SET_ORDER))
+	OR !preg_match_all(_RACCOURCI_NOTES, $letexte, $m, PREG_SET_ORDER))
 		return array($letexte, array());
 
 	// quand il y a plusieurs series de notes sur une meme page
@@ -139,8 +128,7 @@ function tw_traiter_raccourci_notes($letexte, $marqueur_notes)
 		$att = ($notes_vues[$ancre]++) ? '' : " id='nh$ancre'";
 
 		// creer le popup 'title' sur l'appel de note
-		## attention : propre() est couteux !
-		## utiliser nettoyer_raccourcis_typo() ?
+		// propre est couteux => nettoyer_raccourcis_typo
 		if ($title = supprimer_tags(nettoyer_raccourcis_typo($note_texte))) {
 			$title = " title='" . couper($title,80) . "'";
 		}
@@ -164,7 +152,7 @@ function tw_traiter_raccourci_notes($letexte, $marqueur_notes)
 
 
 // http://doc.spip.org/@traiter_les_notes
-function tw_traiter_les_notes($notes) {
+function traiter_les_notes($notes) {
 	global $ouvre_note, $ferme_note;
 
 	$mes_notes = '';
