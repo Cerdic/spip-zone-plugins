@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_appliquer_cover_defaut' => 'Apply the default cover to all sound documents without any logo',
 
 	// E
+	'erreur_formats_ecriture_impossible' => 'Writing tags on the following format(s) is impossible&nbsp;:',
+	'erreur_logiciels_indisponibles' => 'You won\'t be able to write tags on all possible formats. On or more software is not usable.',
+	'erreur_necessite' => 'needs @soft@',
 	'explication_cover_defaut' => 'At the upload of audio files, a default thumbnail (see input URL below) is associated to the sound file. If the option to rewrite tags when the logo is changed is activated, the id3 artwork tags will also be updated.',
 
 	// F
@@ -30,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_duree_secondes' => 'Duration (seconds)',
 	'info_encoded_by' => 'Encoded by',
 	'info_encoding_time' => 'Encoding date',
+	'info_erreurs' => 'Errors',
 	'info_format' => 'Format',
 	'info_genre' => 'Genre',
 	'info_lossless' => 'Lossless',
@@ -64,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reecriture_tags_logo' => 'the logo of the document',
 	'label_reecriture_tags_titre' => 'the title of the document',
 	'label_title' => 'Title',
+	'label_verifier_logiciels' => 'Verify the softwares again',
 	'label_year' => 'Year',
 	'legende_ecriture_tags' => 'Writing tags',
 	'lien_modifier_id3' => 'Edit the ID3 tags',
@@ -74,6 +79,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_document_distant_ecriture' => 'This is a &laquo;remote&raquo; document which can not be changed.',
 	'message_extension_invalide_ecriture' => 'The format of this file is not supported.',
 	'message_fichier_maj' => 'The file has been updated.',
+	'message_texte_binaire_manquant' => 'A necessary software is not available on your server :',
+	'message_texte_binaires_informer' => 'Please inform your system administrator.',
+	'message_texte_binaires_manquant' => 'Several software needed are not available on your server :',
+	'message_titre_binaire_manquant' => 'A missing software',
+	'message_titre_binaires_manquant' => 'Plusieurs logiciels manquant',
 	'message_validation_appliquer_cover' => 'This action is definitive. It won\'t be possible to go back later.',
 	'message_valider_cover_defaut' => 'Submit the form to use the default cover',
 

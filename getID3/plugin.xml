@@ -1,6 +1,6 @@
 <plugin>
 	<nom>
-	GetId3 pour SPIP 2.0
+	GetId3 pour SPIP 2.X
 	</nom>
 	<auteur>
  	BoOz (booz@rezo.net) & Kent1 (kent1@arscenic.info)
@@ -8,10 +8,10 @@
 	<icon>images/id3v2.png</icon>
 	<licence>(c) 2008-2010 GPL</licence>
 	<version>
-	0.4.5
+	0.4.6
 	</version>
 	<version_base>
-	0.3
+	0.3.1
 	</version_base>
 	<etat>
 	test
@@ -45,6 +45,10 @@ _ [->http://getid3.sourceforge.net/]
 	<pipeline>
 		<nom>post_edition</nom>
 		<action>post_edition</action>
+		<inclure>getid3_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
 		<inclure>getid3_pipelines.php</inclure>
 	</pipeline>
 	<install>base/getid3_upgrade.php</install>

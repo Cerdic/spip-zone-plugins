@@ -164,4 +164,17 @@ function getid3_document_desc_actions($flux){
 	}	
 	return $flux;
 }
+
+/**
+ * Pipeline Cron de GetID3
+ *
+ * Vérifie chaque jour que les logiciels nécessaires sont présents
+ *
+ * @return L'array des taches complété
+ * @param array $taches_generales Un array des tâches du cron de SPIP
+ */
+function spipmotion_taches_generales_cron($taches_generales){
+	$taches_generales['getid3_taches_generales'] = 24*60*60;
+	return $taches_generales;
+}
 ?>

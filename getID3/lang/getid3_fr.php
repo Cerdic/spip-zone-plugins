@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_appliquer_cover_defaut' => 'Appliquer la pochette par d&eacute;faut &agrave; tous les documents sonores sans vignette',
 
 	// E
+	'erreur_formats_ecriture_impossible' => 'L\'&eacute;criture de tags sur les formats suivants est impossible&nbsp;:',
+	'erreur_logiciels_indisponibles' => 'Vous ne pouvez &eacute;crire les tags sur tous les formats possibles. Certains logiciels sont indisponibles.',
+	'erreur_necessite' => 'n&eacute;cessite @soft@',
 	'explication_cover_defaut' => '&Agrave; la mise en ligne de fichiers sonores, une vignette par d&eacute;faut (URL &agrave; mettre ci-dessous) est associ&eacute;e au fichier son. Si l\'option de r&eacute;&eacute;criture des tags &agrave; la modification du logoest activ&eacute;e, la pochette des tags id3 sera &eacute;galement mise &agrave; jour.',
 
 	// F
@@ -30,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_duree_secondes' => 'Dur&eacute;e (en secondes)',
 	'info_encoded_by' => 'Encod&eacute; par',
 	'info_encoding_time' => 'Date d\'encodage',
+	'info_erreurs' => 'Erreurs',
 	'info_format' => 'Format',
 	'info_genre' => 'Genre',
 	'info_lossless' => 'Aucune perte de compression',
@@ -64,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reecriture_tags_logo' => 'du logo du document',
 	'label_reecriture_tags_titre' => 'du titre du document',
 	'label_title' => 'Titre',
+	'label_verifier_logiciels' => 'Rev&eacute;rifier les logiciels',
 	'label_year' => 'Ann&eacute;e',
 	'legende_ecriture_tags' => '&Eacute;criture des tags',
 	'lien_modifier_id3' => 'Modifier les tags ID3',
@@ -74,6 +79,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_document_distant_ecriture' => 'Ce document est &laquo;distant&raquo; et ne peut donc pas &ecirc;tre modifi&eacute;.',
 	'message_extension_invalide_ecriture' => 'Le format de ce fichier n\'est pas pris en charge.',
 	'message_fichier_maj' => 'Le fichier a &eacute;t&eacute; mis &agrave; jour.',
+	'message_texte_binaire_manquant' => 'Un logiciel n&eacute;cessaire n\'est pas disponible sur votre serveur :',
+	'message_texte_binaires_informer' => 'Veuillez en informer votre administrateur.',
+	'message_texte_binaires_manquant' => 'Plusieurs logiciels n&eacute;cessaires ne sont pas disponibles sur votre serveur :',
+	'message_titre_binaire_manquant' => 'Un logiciel manquant',
+	'message_titre_binaires_manquant' => 'Plusieurs logiciels manquant',
 	'message_validation_appliquer_cover' => 'Cette action est d&eacute;finitive. Il n\'est pas possible de revenir en arri&egrave;re par la suite.',
 	'message_valider_cover_defaut' => 'Validez le formulaire pour associer la pochette par d&eacute;faut',
 	

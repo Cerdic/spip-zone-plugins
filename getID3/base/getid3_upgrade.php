@@ -22,6 +22,9 @@ function getid3_upgrade($nom_meta_base_version,$version_cible){
 		if (version_compare($current_version,'0.0','<=')){
 			include_spip('base/create');
 			maj_tables('spip_documents');
+			$getid3_binaires = charger_fonction('getid3_verifier_binaires','inc');
+			$getid3_binaires(true);
+			
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 			echo '<p>'._T('getid3:install_ajout_champs_documents').'</p>';
 		}
@@ -90,6 +93,14 @@ function getid3_upgrade($nom_meta_base_version,$version_cible){
 			
 			ecrire_meta($nom_meta_base_version,$current_version=0.3);
 			echo _T('getid3:install_mise_a_jour_base',array('version'=>'0.3'));
+		}
+		if (version_compare($current_version,'0.3.1','<')){
+			/**
+			 * Vérifier si les logiciels sont présents
+			 */
+			$getid3_binaires = charger_fonction('getid3_verifier_binaires','inc');
+			$getid3_binaires(true);
+			ecrire_meta($nom_meta_base_version,$current_version='0.3.1');
 		}
 	}
 }
