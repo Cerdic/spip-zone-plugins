@@ -6,6 +6,7 @@
 # Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+include_spip('inc/acs_load_vars');
 
 function acs_install($action){
   switch ($action)
@@ -24,12 +25,10 @@ function acs_install($action){
   }
 }
 
-
 function acs_init() {
 	// Initialisation des variables ACS
-	$loadvars = charger_fonction('acs_load_vars', 'inc');
 	$theme = find_in_path('composants/def.php');
-	$r = $loadvars($theme);
+	$r = acs_load_vars($theme);
 	if ($r == "ok")
 		acs_log('ACS init read default values from '.$theme);
 	else {
@@ -138,12 +137,6 @@ function acs_install_keywords($keywords) {
 			}
 		}
 	}
-}
-
-function acs_reset_vars() {
-  spip_query("delete FROM spip_meta where left(nom,3)='acs'");
-  lire_metas();
-  acs_log('ACS init : variables DELETED');
 }
 
 // Copie recursive d'un dossier

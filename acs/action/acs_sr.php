@@ -53,6 +53,10 @@ function acs_save($repertoire, $nom_fichier) {
 		$file = "<?php # backup of ".$meta['acsModel']."\n\$def=array(\n".
 			"'acsVersion'=>'".ACS_VERSION."',\n".
 			"'acsModel'=>'".$meta['acsModel']."',\n".
+			($meta['acsSqueletteOverACS'] ? "'acsSqueletteOverACS'=>'".$meta['acsSqueletteOverACS']."',\n" : '').
+  		"'acsVoirOngletVars'=>'".$meta['acsVoirOngletVars']."',\n".
+  		"'acsVoirPagesComposants'=>'".$meta['acsVoirPagesComposants']."',\n".
+  		"'acsVoirPagesPreviewComposants'=>'".$meta['acsVoirPagesPreviewComposants']."',\n".
 			$file.
 			");\n?>";
 		ecrire_fichier($filename, $file);
@@ -60,10 +64,11 @@ function acs_save($repertoire, $nom_fichier) {
 }
 
 function acs_restore() {
-	$loadvars = charger_fonction('acs_load_vars', 'inc');
+	include_spip('inc/acs_load_vars');
 	$repertoire = _DIR_DUMP.'acs/';
 	$archive = $repertoire._request('archive').'.php';
-	$r = $loadvars($archive);
+	acs_reset_vars();
+	$r = acs_load_vars($archive);
 	ecrire_meta('acsDerniereModif', time());
 	acs_log('inc/acs_sr : restauré "'.$archive.'" '.$r);
 }

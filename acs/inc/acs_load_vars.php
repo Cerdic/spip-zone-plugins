@@ -7,7 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 // Initialisation des variables ACS, à l'installation et lors d'une restauration
-function inc_acs_load_vars($from) {
+function acs_load_vars($from) {
   if (is_readable($from))
     include $from;
   else 
@@ -35,5 +35,11 @@ function inc_acs_load_vars($from) {
   }
   else
   	return 'no vars';
+}
+
+function acs_reset_vars() {
+  spip_query("delete FROM spip_meta where left(nom,3)='acs'");
+  lire_metas();
+  acs_log('ACS init : variables DELETED');
 }
 ?>

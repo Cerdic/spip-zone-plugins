@@ -11,6 +11,9 @@
  *
  * Utilise le cache ACS
  */
+
+include_spip('lib/composant/composants_liste');
+
 function composants_variables() {
   static $cv=array();
 
