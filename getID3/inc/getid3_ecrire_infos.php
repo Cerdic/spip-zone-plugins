@@ -91,12 +91,21 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 					$image_finale['mime'] = image_type_to_mime_type($image_infos[2]);
 					$image = $image_finale;
 				}
-				$TagData['attached_picture'][] = array(
-					'data' => file_get_contents($image['chemin']),
-					'picturetypeid' => $image['picturetypeid'],
-					'description' => $image['description'],
-					'mime' => $image['mime']
-				);
+				if($formats[0] != 'metaflac'){
+					$TagData['attached_picture'][] = array(
+						'data' => file_get_contents($image['chemin']),
+						'picturetypeid' => $image['picturetypeid'],
+						'description' => $image['description'],
+						'mime' => $image['mime']
+					);
+				}else{
+					$TagData['attached_picture'][] = array(
+						'file' => $image['chemin'],
+						'picturetypeid' => $image['picturetypeid'],
+						'description' => $image['description'],
+						'mime' => $image['mime']
+					);
+				}
 			}
 		}
 		$ecrire->tag_data = $TagData;

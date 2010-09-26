@@ -32,11 +32,18 @@ class getid3_write_metaflac
 
 			// Create file with new comments
 			$tempcommentsfilename = tempnam('*', 'getID3');
+			$follow_command = '';
 			if ($fpcomments = @fopen($tempcommentsfilename, 'wb')) {
-
 				foreach ($this->tag_data as $key => $value) {
-					foreach ($value as $commentdata) {
-						fwrite($fpcomments, $this->CleanmetaflacName($key).'='.$commentdata."\n");
+					if($key != 'ATTACHED_PICTURE'){
+						foreach ($value as $commentdata) {
+							fwrite($fpcomments, $this->CleanmetaflacName($key).'='.$commentdata."\n");
+						}
+					}else{
+						/*
+						 * --import-picture-from=[TYPE]|[MIME-TYPE]|[DESCRIPTION]|[WIDTHxHEIGHTxDEPTH[/COLORS]]|FILE
+						 */
+						$follow_command .= ' --import-picture-from="'.$value['picturetypeid'].'|'.$value['mime'].'|'.$value['description'].'||'.$value['file'].'"';
 					}
 				}
 				fclose($fpcomments);
@@ -45,7 +52,7 @@ class getid3_write_metaflac
 
 				$this->errors[] = 'failed to open temporary tags file "'.$tempcommentsfilename.'", tags not written';
 				return false;
-
+	
 			}
 
 			$oldignoreuserabort = ignore_user_abort(true);
@@ -64,7 +71,7 @@ class getid3_write_metaflac
 					clearstatcache();
 					$timestampbeforewriting = filemtime($this->filename);
 
-					$commandline = GETID3_HELPERAPPSDIR.'metaflac.exe --no-utf8-convert --remove-all-tags --import-tags-from="'.$tempcommentsfilename.'" "'.$this->filename.'" 2>&1';
+					$commandline = GETID3_HELPERAPPSDIR.'metaflac.exe --no-utf8-convert --remove-all-tags --import-tags-from="'.$tempcommentsfilename.' '.$follow_command.'" "'.$this->filename.'" 2>&1';
 					$metaflacError = `$commandline`;
 
 					if (empty($metaflacError)) {
@@ -80,8 +87,9 @@ class getid3_write_metaflac
 			} else {
 
 				// It's simpler on *nix
-				$commandline = 'metaflac --no-utf8-convert --remove-all-tags --import-tags-from='.$tempcommentsfilename.' "'.$this->filename.'" 2>&1';
+				$commandline = 'metaflac --no-utf8-convert --remove-all-tags --import-tags-from='.$tempcommentsfilename.' '.$follow_command.' "'.$this->filename.'" 2>&1';
 				$metaflacError = `$commandline`;
+				spip_log($commandline,'getid3');
 
 			}
 
@@ -156,7 +164,7 @@ class getid3_write_metaflac
 		// 0x7A inclusive (a-z).
 
 		// replace invalid chars with a space, return uppercase text
-		// Thanks Chris Bolt <chris-getid3Øbolt*cx> for improving this function
+		// Thanks Chris Bolt <chris-getid3ï¿½bolt*cx> for improving this function
 		// note: ereg_replace() replaces nulls with empty string (not space)
 		return strtoupper(ereg_replace('[^ -<>-}]', ' ', str_replace("\x00", ' ', $originalcommentname)));
 

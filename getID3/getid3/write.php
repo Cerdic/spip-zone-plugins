@@ -574,9 +574,8 @@ class getid3_writetags
 		return $tag_data_id3v2;
 	}
 
-	function FormatDataForVorbisComment() {
+	function FormatDataForVorbisComment($flac=false) {
 		$tag_data_vorbiscomment = $this->tag_data;
-
 		// check for multi-line comment values - split out to multiple comments if neccesary
 		// and convert data to UTF-8 strings
 		foreach ($tag_data_vorbiscomment as $tag_key => $valuearray) {
@@ -593,8 +592,12 @@ class getid3_writetags
 				} elseif (is_string($value) || is_numeric($value)) {
 					$tag_data_vorbiscomment[$tag_key][$key] = getid3_lib::iconv_fallback($this->tag_encoding, 'UTF-8', $value);
 				} else {
-					$this->warnings[] = '$data['.$tag_key.']['.$key.'] is not a string value - all of $data['.$tag_key.'] NOT written to VorbisComment tag';
-					unset($tag_data_vorbiscomment[$tag_key]);
+					if($flac && ($tag_key == 'ATTACHED_PICTURE') && is_array($value)){
+						$tag_data_vorbiscomment[$tag_key] = $value;
+					}else{
+						$this->warnings[] = '$data['.$tag_key.']['.$key.'] is not a string value - all of $data['.$tag_key.'] NOT written to VorbisComment tag';
+						unset($tag_data_vorbiscomment[$tag_key]);
+					}
 					break;
 				}
 			}
@@ -606,7 +609,7 @@ class getid3_writetags
 	function FormatDataForMetaFLAC() {
 		// FLAC & OggFLAC use VorbisComments same as OggVorbis
 		// but require metaflac to do the writing rather than vorbiscomment
-		return $this->FormatDataForVorbisComment();
+		return $this->FormatDataForVorbisComment(true);
 	}
 
 	function FormatDataForReal() {
