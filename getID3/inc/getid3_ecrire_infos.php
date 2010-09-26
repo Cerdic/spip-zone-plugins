@@ -24,8 +24,13 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 	if(!intval($id_document)){
 		return;
 	}
-	$document = sql_fetsel("fichier,distant", "spip_documents","id_document=".intval($id_document));
+	$document = sql_fetsel("fichier,distant,extension", "spip_documents","id_document=".intval($id_document));
 	
+	if($document['extension'] == 'ogg'){
+		$formats = array('vorbiscomment');
+	}else if($document['extension'] == 'flac'){
+		$formats = array('metaflac');
+	}
 	if($document['distant'] != 'oui'){
 		$err = array();
 		$TagData = array();
@@ -111,7 +116,7 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 		if (!empty($ecrire->errors)) {
 			$err = array_merge($err,$ecrire->errors);
 		}
-	
+		
 		$taille = filesize($document_chemin);
 		include_spip('inc/modifier');
 		revision_document($id_document, array('taille'=>$taille));

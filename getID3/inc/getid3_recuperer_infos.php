@@ -22,6 +22,7 @@ function inc_getid3_recuperer_infos($id_document){
 		return;
 	}
 	include_spip('inc/documents');
+	include_spip('inc/filtres');
 	$document = sql_fetsel("docs.id_document,docs.titre,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 	$son_chemin = get_spip_doc($document['fichier']);
 
