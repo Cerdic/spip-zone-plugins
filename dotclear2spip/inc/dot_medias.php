@@ -57,7 +57,7 @@ function dot_ajouter_medias($medias,$post_id){
 						'statut'	=>'publie',
 					));
 					$id_doc=$resultat['result']['id'];
-					spip_log("Ajout du document $id_doc (ex $media_id)","dot2");
+					spip_log("Ajout du document $id_doc (ex $media_id)","dot2_migration_documents");
 				
 			
 			

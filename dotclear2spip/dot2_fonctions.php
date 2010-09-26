@@ -1,6 +1,7 @@
 <?php
 // Attention l'ordre est important : migrer 1) les rubriques / categories 2) les articles 3)  les sites puis appliquer purifier_spip()
 
+
 function dot_purifier_spip(){
 	sql_updateq('spip_rubriques',array('descriptif'=>''));	
 }
@@ -37,7 +38,7 @@ function dot2_migrer_commentaires($post_id,$id_article){
 			'ip'		=>$post['comment_ip']
 			));
 		$id_message = $resultat['result']['id'];
-		spip_log("Importation du forum $id_message (ex $comment_id) pour l'article $id_article (ex $post_id)",'dot2');
+		spip_log("Importation du forum $id_message (ex $comment_id) pour l'article $id_article (ex $post_id)",'dot2_migration_forum');
 		
 	}
 	
@@ -72,20 +73,21 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 			$documents_lies[]=$vers;
 		}
 		$medias		= dot_lister_medias($r['post_excerpt_xhtml']);
-		$remplacer 	= dot_ajouter_medias($medias);
+		$remplacer 	= dot_ajouter_medias($medias,$r['post_id']);
 		foreach($remplacer as $depuis=>$vers){
 			$r['post_excerpt_xhtml']=str_replace($depuis,'@!@'.$vers.'@¡@',$r['post_excerpt_xhtml']);
 			$documents_lies[]=$vers;
 		}
+	
 		
 	
 	// Mise au sale du texte et de l'introduction : nota : il faudrait voir ce que ca donne si formaté en Dotclear
 		$texte 		= sale($r['post_content_xhtml']);
 		$descriptif	= sale($r['post_excerpt_xhtml']);
 	//On n'échappe pas les @
-		$texte		= str_replace('@!@','<img',$texte);
+		$texte		= str_replace('@!@','<ig',$texte);
 		$texte		= str_replace('@¡@','>',$texte);
-		$descriptif		= str_replace('@!@','<img',$descriptif);
+		$descriptif		= str_replace('@!@','<ig',$descriptif);
 		$descriptif		= str_replace('@¡@','>',$descriptif);
 	// Forums ouvert ?
 		$r['post_open_comment'] == 1 ? $accepter_forum = 'pos' : $accepter_forum = 'non';
@@ -101,7 +103,7 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 		$resultat	= $crud('create','articles','',array(
 			'titre'			=> $r['post_title'],
 			'id_rubrique'	=> $id_rubrique,
-			'descriptif'	=> $descriptif,
+			'descriptif'			=> $descriptif,
 			'texte'			=> $texte,
 			'date'			=> $r['post_dt'],
 			'statut'		=> $statut,
@@ -111,24 +113,38 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 			));
 		$id_article	= $resultat['result']['id'];
 		$titre		= $r['post_title'];
-		spip_log("Création de l'article $id_article ($titre)",'dot2');
-	
+		spip_log("Création de l'article $id_article ($titre)",'dot2_migration_article');
+	//Remplacement
+		sql_updateq('spip_articles',array(
+			'texte'		=> str_replace('<ig','<img',$texte),
+			'descriptif'=> str_replace('<ig','<img',$descriptif)
+			),
+			'`id_article`='.$id_article);
+	// Lies les documents
+		
+		foreach($documents_lies as $id_doc){
+				
+				sql_insertq('spip_documents_liens',array(
+					'id_objet'=>$id_article,
+					'id_document'=>$id_doc,
+					'objet'	=>'article',
+					'vu'	=>'oui'
+				));	
+
+		}
 	// Attribution de l'auteur
 		sql_insertq('spip_auteurs_articles',array('id_article'=>$id_article,'id_auteur'=>$id_auteur));
-		// dans le crud on ne peut dire quel auteur on veut. Du coup il lie automatique un auteur pour l'article -> on le supprime
+	// dans le crud on ne peut dire quel auteur on veut. Du coup il lie automatique un auteur pour l'article -> on le supprime
 		sql_delete('spip_auteurs_articles','`id_article`='.$id_article." AND `id_auteur`!=".$id_auteur);
 	// Migration des mots
 		$id_groupe = dot2_migrer_mots_article($r['post_id'],$id_article,$id_groupe);
 	// Migration des commentaires
 		dot2_migrer_commentaires($r['post_id'],$id_article);
-	// Lies les documents
-		foreach($documents_lies as $id_doc){
-			sql_insertq('spip_documents_liens',array(
-				'id_objet'=>$id_article,
-				'id_document'=>$id_doc,
-				'objet'	=>'article'
-			));	
-		}
+	
+	
+		$documents_lies = array();
+	
+
 	}
 	
 
@@ -159,7 +175,7 @@ function dot2_migrer_rubrique($cat_id,$rubrique_mere){
 	$resultat = $crud('create','rubrique','nulls',array('descriptif'=>'DC:'.$cat_id,'id_parent'=>$rubrique_mere,'titre'=>$titre,'texte'=>sale($contenu['cat_desc'])));
 	$id_rubrique = $resultat['result']['id'];
 	
-	spip_log("Création de la rubrique $id_rubrique ($titre) rubrique parente : $rubrique_mere. Catégory originelle : $cat_id","dot2");
+	spip_log("Création de la rubrique $id_rubrique ($titre) rubrique parente : $rubrique_mere. Catégory originelle : $cat_id","dot2_migration_rubrique");
 	return $id_rubrique;
 }
 
@@ -239,14 +255,14 @@ function dot2_migrer_mots_article($id_post,$id_article,$id_groupe=''){
 		$titre = $tag['meta_id'];
 		if ($id_mot = sql_getfetsel('id_mot','spip_mots','`titre`='.sql_quote($titre).'AND `id_groupe`='.$id_groupe)){
 			sql_insertq('spip_mots_articles',array('id_article'=>$id_article,'id_mot'=>$id_mot));
-			spip_log("Lier le mot $id_mot à l'article $id_article","dot2");	
+			spip_log("Lier le mot $id_mot à l'article $id_article","dot2_migration_mot");	
 		}
 		else{
 			$resultat = $crud('create','mots',null,array('id_groupe'=>$id_groupe,'titre'=>$titre));
 			$id_mot	  = $resultat['result']['id'];
-			spip_log("Créations du mot $id_mot ($titre)","dot2");
+			spip_log("Créations du mot $id_mot ($titre)","dot2_migration_mot");
 			sql_insertq('spip_mots_articles',array('id_article'=>$id_article,'id_mot'=>$id_mot));
-			spip_log("Lier le mot $id_mot à l'article $id_article","dot2");
+			spip_log("Lier le mot $id_mot à l'article $id_article","dot2_migration_mot");
 		}
 	}
 	
@@ -265,10 +281,23 @@ function dot2_migrer_sites($blog_id,$id_rubrique){
 		#aller on ajoute en BDD !
 		$resultat = $crud('create','syndic',null,array('id_rubrique'=>$id_rubrique,'nom_site'=>$nom_site,'url_site'=>$url_site));
 		$id_site  = $resultat['result']['id'];
-		spip_log("Ajout du site $id_site ($nom_site - $url_site)",'dot2');
+		spip_log("Ajout du site $id_site ($nom_site - $url_site)",'dot2_migration_site');
 	}
 	
 	return $id_rubrique;
+}
+function dot_migrer_blog($blog_id){
+	$crud = charger_fonction('crud','action');
+	spip_log("#### Début migration ####",'dot2');
+	$rubrique_defaut = $crud('create','rubriques','',array('titre'=>_T('Rubrique d\'import DC')));
+	$groupe_defaut=sql_getfetsel('id_groupe','spip_groupes_mots','`titre`='.sql_quote(_L('tags de dotclear')));
+	
+	dot2_migrer_rubriques($blog_id);
+	dot2_migrer_articles($blog_id,$rubrique_defaut,$groupe_defaut);
+	dot2_migrer_sites($blog_id,$rubrique_defaut);
+	dot_purifier_spip();
+	spip_log("#### fin migration $blog_id ####",'dot2');
+		
 }
 
 ?>
