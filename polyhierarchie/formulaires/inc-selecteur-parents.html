@@ -9,7 +9,7 @@
 <li class='editer_parents[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
 	<label for="parents"><:polyhier:label_parents:></label>[
 	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{parents})</span>
-	]<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}>
+	]<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>
 	<input type="hidden" name="confirme_deplace" value="oui" />
 </li>
 
