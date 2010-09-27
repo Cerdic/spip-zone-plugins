@@ -32,7 +32,7 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 						array(
 							"id"          => 'cadre_php',
 							"name"        => _T('pp_codes:outil_inserer_cadre_php'),
-							"className"   => 'outil_cadre', 
+							"className"   => 'outil_cadre_php', 
 							"openWith" => "<cadre class='php'>\n",
 							"closeWith" => "\n</cadre>",
 							"display"     => $visible,
@@ -112,8 +112,9 @@ function pp_codes_porte_plume_barre_charger($barres){
 
 function pp_codes_porte_plume_lien_classe_vers_icone($flux){
 	return array_merge($flux, array(
-		'outil_code'=>'page_white_php.png',
+		'outil_code'=>'tag.png',
 		'outil_cadre'=>'page_white_code.png',
+		'outil_cadre_php'=>'page_white_php.png',
 		'outil_pre'=>'page_white_code_red.png',
 		'outil_samp'=>'application_osx_terminal.png',
 		'outil_var'=>'tag.png',
