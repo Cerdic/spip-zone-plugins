@@ -9,7 +9,7 @@
 function mots_objets_declarer_tables_interfaces($tables_interface){
 
 	// -- Prise en compte de la nouvelle table
-	$interface['table_des_tables']['mots_auteurs'] = 'mots_auteurs';
+	$tables_interface['table_des_tables']['mots_auteurs'] = 'mots_auteurs';
 
 	// -- Liaisons mots/auteurs
 	$tables_interface['tables_jointures']['spip_auteurs']['id_auteur']= 'mots_auteurs';
@@ -22,7 +22,7 @@ function mots_objets_declarer_tables_interfaces($tables_interface){
 	// -- Liaisons mots/documents
 	$tables_interface['tables_jointures']['spip_documents'][]= 'mots_documents';
 	$tables_interface['tables_jointures']['spip_documents'][]= 'mots';
-	$tables_interface['tables_jointures']['spip_mots'][]= 'mots_documents'; // déjà déclaré dans public/interfaces
+	$tables_interface['tables_jointures']['spip_mots'][]= 'mots_documents'; // déjà déclaré dans public/interfaces ?
 	
 	return $tables_interface;
 }
