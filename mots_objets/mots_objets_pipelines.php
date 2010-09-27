@@ -38,6 +38,50 @@ function mots_objets_affiche_milieu($flux) {
 			
 		}
 	}
+	///alm
+	if (defined('_DIR_PLUGIN_GRAPPES')){
+		if ($exec = $flux['args']['exec']){
+		switch ($exec){
+			case 'mots_edit':
+				$source = 'mots';
+				$id_source = $flux['args']['id_mot'];
+				break;
+			default:
+				$source = $id_source = '';
+				break;
+		}
+		if ($source && $id_source) {
+		// grappes recup du code +prive/lister_objets.html +prive/inc-lister-auteurs.html
+			$lister_objet = charger_fonction('lister_objets','inc');
+			
+			//On affiche la liste des auteurs liés ou des documents sur la page du mot-clef (si auteur lié à groupe)
+			if($source == 'mots') {
+				$plusource='documents';
+				$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=$id_source");
+				$parent = $parent['id_groupe']; 
+				$res = sql_allfetsel('id_groupe,titre','spip_groupes_mots',"tables_liees REGEXP '(^|,)$plusource($|,)' AND id_groupe=$parent");
+				//retourne 1 seul groupe ou rien
+				foreach($res as $row) {
+				$flux['data'] .= $lister_objet($plusource,$source,$id_source);
+				}
+				
+				$plusource='auteurs';
+				$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=$id_source");
+				$parent = $parent['id_groupe']; 
+				$res = sql_allfetsel('id_groupe,titre','spip_groupes_mots',"tables_liees REGEXP '(^|,)$plusource($|,)' AND id_groupe=$parent");
+				//retourne 1 seul groupe ou rien
+				foreach($res as $row) {
+				 $flux['data'] .= $lister_objet('auteurs',$source,$id_source);	
+				}
+				
+					
+			}
+			
+		}
+	 
+	 }
+	 }
+	 
 	return $flux;
 }
 
