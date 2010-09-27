@@ -1,0 +1,28 @@
+<B_liste>
+#ANCRE_PAGINATION
+<table width="100%" cellspacing="0" cellpadding="2" border="0">
+<BOUCLE_liste(AUTEURS)
+	{commune ?}
+	{id_syndic ?}
+	{id_grappe ?}
+	{id_groupe ?}
+	{id_rubrique ?}
+	{id_article ?}
+	{id_zone ?}
+	{id_mot ?}
+	{pagination 20}
+	{recherche ?}
+	{tout}
+	{par nom}
+	>
+<tr class="tr_liste">
+	<td class='arial11'>[(#CHEMIN{images/[(#OBJET|objet_type)]-24.gif}|image_reduire{12})]</td>
+	<td class='arial11'>#NOM #PRENOM[ <small>((#LOGIN))</small>]</td>
+	<td class='arial1'><a href="#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}"><:grappes:voir:></a></td>
+	[(#ENV{editable})
+	<td class='arial1'><a class="ajax" href="[(#URL_ACTION_AUTEUR{lier_objets,[(#ENV{action})]/[(#ENV{source})]/[(#ENV{id_source})]/[(#ENV{objet})]/#ID_AUTEUR,#SELF})]">[(#VAL{grappes:}|concat{#ENV{action}}|_T)]</a></td>
+]</tr>
+</BOUCLE_liste>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_liste>

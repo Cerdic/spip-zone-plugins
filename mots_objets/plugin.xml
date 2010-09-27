@@ -13,15 +13,15 @@
 	
 	<description>
 	<multi>
-	[fr] Permet d'ajouter des mots cl&eacute; sur les auteurs et sur les documents (avec le plugin M&eacute;diath&egrave;que)
-	[en] Allows to attach key-words to SPIP authors and documents (with Media Library plugin)
+	[fr] Permet d'ajouter des mots cl&eacute; sur les auteurs et sur les documents (avec le plugin Médiathèque)
+	[en] Allows to attach key-words to SPIP authors and documents (with media Library plugin)
 	</multi>
 	</description>
 	
 	<prefix>mots_objets</prefix>
 	
 	<install>base/mots_objets_upgrade.php</install>
-	
+	<fonctions>mots_objets_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/mots_objets_tables.php</inclure>
