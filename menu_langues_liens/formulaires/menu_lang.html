@@ -29,7 +29,7 @@ On liste les langues utilisées dans le site
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 		]
 		[(#LANG|=={#ENV{lang}}|oui)
-			[<strong>(#LANG|ucfirst)</strong>]
+			[<strong title="[(#LANG|traduire_nom_langue|ucfirst|attribut_html)]">(#LANG|ucfirst)</strong>]
 		]
 	</BOUCLE_ListeLangues>
 </div>
