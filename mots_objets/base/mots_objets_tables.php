@@ -12,28 +12,17 @@ function mots_objets_declarer_tables_interfaces($tables_interface){
 	$interface['table_des_tables']['mots_auteurs'] = 'mots_auteurs';
 
 	// -- Liaisons mots/auteurs
-	$interface['tables_jointures']['spip_auteurs'][]= 'mots_auteurs';
-	$interface['tables_jointures']['spip_auteurs'][]= 'mots';
-	$interface['tables_jointures']['spip_mots'][]= 'mots_auteurs';
-	$interface['tables_jointures']['spip_mots'][]= 'auteurs';
-
-	$interface['tables_jointures']['spip_documents'][]= 'mots_documents';
-	$interface['tables_jointures']['spip_documents'][]= 'mots';
-	$interface['tables_jointures']['spip_mots'][]= 'mots_documents';
-	$interface['tables_jointures']['spip_mots'][]= 'documents';
-
-	// relations
-	$interface['tables_relations']['mots']['id_auteur'] = 'mots_auteurs';
-	$interface['tables_relations']['auteurs']['id_mot'] = 'mots_auteurs';
-	$interface['tables_relations']['mots']['id_document'] = 'mots_documents';
-	$interface['tables_relations']['documents']['id_mot'] = 'mots_documents';
+	$tables_interface['tables_jointures']['spip_auteurs']['id_auteur']= 'mots_auteurs';
+	$tables_interface['tables_jointures']['spip_mots']['id_mot']= 'mots_auteurs';
+	$tables_interface['tables_jointures']['spip_auteurs'][]= 'mots';
 
 	// documents...
 	$interface['table_des_tables']['mots_documents'] = 'mots_documents';
 
 	// -- Liaisons mots/documents
-	$interface['tables_jointures']['spip_mots_documents'][]= 'documents';
-	$interface['tables_jointures']['spip_documents'][]= 'mots_documents';
+	$tables_interface['tables_jointures']['spip_documents'][]= 'mots_documents';
+	$tables_interface['tables_jointures']['spip_documents'][]= 'mots';
+	$tables_interface['tables_jointures']['spip_mots'][]= 'mots_documents'; // déjà déclaré dans public/interfaces
 	
 	return $tables_interface;
 }
@@ -45,7 +34,7 @@ function mots_objets_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_auteur"		=> "bigint(21) NOT NULL",
 	);
 	$spip_mots_auteurs_key = array(
-		"PRIMARY KEY"	=> "id_mot, id_auteur",
+		"PRIMARY KEY"	=> "id_auteur, id_mot",
 		"KEY id_mot"	=> "id_mot"
 	);
 	$tables_auxiliaires['spip_mots_auteurs'] = array(
@@ -59,7 +48,7 @@ function mots_objets_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_document"	=> "bigint(21) NOT NULL",
 	);
 	$spip_mots_documents_key = array(
-		"PRIMARY KEY"	=> "id_mot, id_document",
+		"PRIMARY KEY"	=> "id_document, id_mot",
 		"KEY id_mot"	=> "id_mot"
 	);
 	$tables_auxiliaires['spip_mots_documents'] = array(
