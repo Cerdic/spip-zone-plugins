@@ -258,21 +258,23 @@ function noizetier_charger_contexte_noisette($noisette){
  */
 function extrait_parametres_noisette($parametres){
 	$res = array();
-	foreach($parametres as $parametre) {
-		if ($parametre['saisie']!='fieldset') {
-			$nom = $parametre['options']['nom'];
-			$res[$nom] = $parametre['options'];
-			$res[$nom]['saisie'] = $parametre['saisie'];
-			if(isset($parametre['verifier']))
-				$res[$nom]['verifier']=$parametre['verifier'];
-			if(isset($res[$nom]['label']))
-				$res[$nom]['label'] = _T_ou_typo($res[$nom]['label']);
-			if(isset($res[$nom]['datas']))
-				foreach($res[$nom]['datas'] as $cle => $valeur)
-					$res[$nom]['datas'][$cle] = _T_ou_typo($res[$nom]['datas'][$cle]);
-		}
-		else {
-			$res = array_merge($res,extrait_parametres_noisette($parametre['saisies']));
+	if (is_array($parametres) && count($parametres)>0) {
+		foreach($parametres as $parametre) {
+			if ($parametre['saisie']!='fieldset') {
+				$nom = $parametre['options']['nom'];
+				$res[$nom] = $parametre['options'];
+				$res[$nom]['saisie'] = $parametre['saisie'];
+				if(isset($parametre['verifier']))
+					$res[$nom]['verifier']=$parametre['verifier'];
+				if(isset($res[$nom]['label']))
+					$res[$nom]['label'] = _T_ou_typo($res[$nom]['label']);
+				if(isset($res[$nom]['datas']))
+					foreach($res[$nom]['datas'] as $cle => $valeur)
+						$res[$nom]['datas'][$cle] = _T_ou_typo($res[$nom]['datas'][$cle]);
+			}
+			else {
+				$res = array_merge($res,extrait_parametres_noisette($parametre['saisies']));
+			}
 		}
 	}
 	return $res;

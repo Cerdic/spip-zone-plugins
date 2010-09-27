@@ -13,11 +13,11 @@
 				]
 				<div class="titre">[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{nom}|sinon{#NOISETTE})]</div>
 					<div class="infos">
-					[(#PLUGIN{saisies}|oui)
+					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|oui|et{#PLUGIN{saisies}|oui})
 						[(#VOIR_SAISIES{#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres},[(#PARAMETRES|unserialize)]})]
 					]
 					
-					<BOUCLE_si_pas_saisies(CONDITION){si #PLUGIN{saisies}|non}>
+					<BOUCLE_si_pas_saisies(CONDITION){si #NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|non|ou{#PLUGIN{saisies}|non}}>
 					<BOUCLE_parametres(POUR){tableau #PARAMETRES|unserialize}>
 					[<span class="nom_param">(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{label}|sinon{#CLE})</span>]
 					
