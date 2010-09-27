@@ -23,7 +23,7 @@ function saisies_insert_head_css($flux){
 	$done = true;
 	
 	$css = generer_url_public('saisies.css');
-	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='projection, screen, tv' />\n";
+	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	return $flux;
 }
 
