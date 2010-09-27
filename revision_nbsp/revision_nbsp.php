@@ -95,6 +95,21 @@
 				return (strlen($debut)?"\n\n[[<>$debut ]]":'') . $letexte;
 			}
 		}
+
+
+		//  Cas deux : on recherche des notes en derniers paragraphes,
+		// commencant par (1), on les reinjecte en [[<> ... ]] et on
+		// relance la fonction sur cette onstruction.
+		else {
+			$texte = trim($texte);
+			if (preg_match_all(',^[(](\d+)[)].*$,UmS', $texte, $regs)
+			AND preg_match(',^(.*\n)([(]1[)].*)$,UmsS', $texte, $u)) {
+				$notes = $u[2];
+				$texte = $u[1];
+				return notes_automatiques("$texte\n\n[[<> $notes ]]");
+			} 
+		}
+
 	}
 
 ?>
