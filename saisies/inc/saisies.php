@@ -887,6 +887,23 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 }
 
 /*
+ * Le tableau de saisies a-t-il une option afficher_si ?
+ *
+ * @param array $saisies Un tableau de saisies
+ * @return boolean
+ */
+
+function saisies_afficher_si($saisies) {
+	$afficher_si = false;
+	$saisies = saisies_lister_par_nom($saisies,true);
+	foreach ($saisies as $saisie) {
+		if (isset($saisie['options']['afficher_si']))
+			$afficher_si = true;
+	}
+	return $afficher_si;
+}
+
+/*
  * Lorsque l'on affiche les saisies (#VOIR_SAISIES), les saisies ayant une option afficher_si
  * et dont les conditions ne sont pas remplies doivent être retirées du tableau de saisies
  *
