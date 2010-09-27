@@ -26,7 +26,7 @@ function inserer_modeles_header_prive($flux) {
 }
 
 function inserer_modeles_insert_head($flux) {
-	$flux.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_INSERER_MODELES . 'css/inserer_modeles_public.css" />' . "\n";
+	$flux.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_INSERER_MODELES . 'css/inserer_modeles_public.css" media="all" />' . "\n";
 	return $flux;
 }
 
