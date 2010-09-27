@@ -83,7 +83,7 @@ function formulaires_inserer_modeles_traiter_dist() {
 		if (_request('align') && _request('align')!='')
 			$code .= '|'._request('align');
 		foreach ($champs as $champ) {
-			if($champ != 'modele' && $champ != 'classe' && $champ != 'id_modele' && _request($champ) && _request($champ)!='') {
+			if($champ != 'modele' && $champ != 'classe' && $champ != 'id_modele' && $champ != 'align' && _request($champ) && _request($champ)!='') {
 				if($champ == _request($champ))
 					$code .= "|$champ";
 				else
