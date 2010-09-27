@@ -12,10 +12,6 @@
  * insert_head pipeline for ACS plugin.
  */
 function acs_insert_head($flux) {
-  $css_acs = find_in_path('habillage.css.html');
-  if ($css_acs)
-    //$r .= '<link rel="stylesheet" href="(#URL_PAGE{habillage.css,v=#ACS_DERNIERE_MODIF})" type="text/css" media="projection, screen, tv" />';
-    $r .= '<link rel="stylesheet" href="'.generer_url_public('habillage.css', array('v' => $GLOBALS['acsDerniereModif'])).'" type="text/css" media="projection, screen, tv" />';
   $js_acs = find_in_path('acs.js.html');
   if ($js_acs)
     $r .= '<script type="text/javascript" src="spip.php?page=acs.js"></script>';
