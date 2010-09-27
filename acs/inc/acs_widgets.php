@@ -30,8 +30,8 @@ function liste_widgets() {
       $v = $vpi.'Comment';
       $title = $GLOBALS['meta'][$v] ? $GLOBALS['meta'][$v] : _T('composant');
   		$r .= '<div id="'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
-        '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'"><img src="'.$wicon.'" style="width:20px;height:20px;vertical-align:middle" /></a>'.
-        '</td><td title="'.$title.'" style="padding-left: 5px; padding-right: 5px; width: 95%;"><div style="overflow:hidden; text-align:center">'.ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '').'</div></td></tr></table>'.
+        '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'"><img src="'.$wicon.'" /></a>'.
+        '</td><td title="'.$title.'" style="width: 95%;"><div><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'.$title.'">'.ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '').'</a></div></td></tr></table>'.
       '</div>';
   		$nbci++;
   	}

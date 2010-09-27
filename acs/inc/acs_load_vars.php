@@ -22,7 +22,7 @@ function acs_load_vars($from) {
     foreach($def as $var=>$value) {
     	if (is_array($value))
     		serialize($value);
-    	// on n'écrase pas les valeurs existantes lorsd'une installation / reinstallation du plugin
+    	// on n'écrase pas les valeurs existantes lors d'une installation / reinstallation du plugin
 	    if (!isset($GLOBALS['meta'][$var]))
 	    	ecrire_meta($var, $value);
     }

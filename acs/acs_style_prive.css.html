@@ -281,6 +281,10 @@ fieldset.apercu {
   background: url(#CHEMIN{images/composant.png}) no-repeat;
   z-index: 3;
 }
+.widget_move {
+  cursor: move;
+  z-index: 9999;
+}
 .widget:hover {
   color: black;
   background: url(#CHEMIN{images/composant_hover.png}) no-repeat;
@@ -298,10 +302,15 @@ fieldset.apercu {
   background: url(#CHEMIN{images/composant_inactif_hover.png}) no-repeat;
 }
 .widget img {
+  vertical-align:middle;
   width: 20px;
   height: 20px;
   margin-left: 5px;
   margin-right: 5px;
+  cursor:move;
+}
+.widget_unused img {
+  cursor:pointer;
 }
 .widget a, .widgy a {
   color: black;
@@ -315,6 +324,12 @@ fieldset.apercu {
 }
 .widget table tr {
   vertical-align: middle;
+}
+.widget div {
+  overflow:hidden; text-align:center;
+}
+.widget div a {
+  display:block;
 }
 
 .ctlWidget {
