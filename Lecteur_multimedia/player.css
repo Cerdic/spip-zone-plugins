@@ -1,4 +1,9 @@
-div.movieContainer { top: 0; } /* 1 pixel contenant le player */
+div.movieContainer {
+	top: 0; 
+	right:0 !important;
+	left:-256px !important;
+	top:0;
+} /* 1 pixel contenant le player + Hack pour supporter le RTL */
 
 .radiobox{
 	margin:10px 0px 10px 0px;

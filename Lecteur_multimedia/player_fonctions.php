@@ -33,7 +33,7 @@ function Player_call_js() {
 }
 
 function Player_call_css() {
-	$flux = "\n".'<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="all" />';
+	$flux = "\n".'<link rel="stylesheet" href="'.direction_css(find_in_path('player.css')).'" type="text/css" media="all" />';
 	return $flux;
 }
 
