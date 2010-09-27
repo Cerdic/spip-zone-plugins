@@ -7,6 +7,7 @@ $traductions_acs = array(
   'use' => 'Utiliser',
 
 	'fond' => ' Fond', // astuce : non traduit sans l'espace devant, car identique
+	'titrefond' => 'Fond titre',
 
   'bordcolor' => 'Bordure',
   'bordlargeur' => 'largeur de bordure',

@@ -7,6 +7,7 @@ $traductions_acs = array(
   'use' => 'Use',
 
 	'fond' => 'Background',
+	'titrefond' => 'Title background',
 
   'bordcolor' => 'Border',
   'bordlargeur' => 'border width',
