@@ -63,7 +63,7 @@ function pages_du_squelette($dir) {
 
   $dossiers = array('', 'modeles', 'formulaires');
   
-  if ($GLOBALS['meta']['acsVoirPagesComposants']) {
+  if ($GLOBALS['meta']['ACS_VOIR_PAGES_COMPOSANTS']) {
     $dossiers_composants = array_keys(composants_liste());
     foreach($dossiers_composants as $k => $v)
       $dossiers_composants[$k] = 'composants/'.$v;
@@ -96,7 +96,7 @@ function pages_du_dossier($dir, $dossier) {
             if (($pagename == 'wrap') ||
             		($pagename == 'acs.js') ||
             		($pagename == 'acs_style_prive.css') ||
-            		((substr($pagename, -8) == '_preview') && (!$GLOBALS['meta']['acsVoirPagesPreviewComposants'])) )
+            		((substr($pagename, -8) == '_preview') && (!$GLOBALS['meta']['ACS_VOIR_PAGES_PREVIEW'])) )
             	continue;
             $pages[$pagename] = true;
           }

@@ -80,7 +80,7 @@ function exec_acs() {
 	echo debut_onglet();
 	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages'), $onglet, 'pages', _DIR_PLUGIN_ACS."/images/pages-24.gif");
 	echo onglet(_T('acs:composants'), generer_url_ecrire('acs', 'onglet=composants'), $onglet, 'composants', _DIR_PLUGIN_ACS."/images/composant-24.gif");
-	if (isset($GLOBALS['meta']['acsVoirOngletVars']) && ($GLOBALS['meta']['acsVoirOngletVars'] == 'on')) 
+	if (isset($GLOBALS['meta']['ACS_VOIR_ONGLET_VARS']) && ($GLOBALS['meta']['ACS_VOIR_ONGLET_VARS'] == 'on')) 
 	  echo onglet(_T('acs:variables'), generer_url_ecrire('acs', 'onglet=vars'), $onglet, 'vars', _DIR_PLUGIN_ACS."/images/vars-24.gif");	
 	echo onglet(_T('acs:adm'), generer_url_ecrire('acs', 'onglet=adm'), $onglet, 'adm', 'cadenas-24.gif');
 	echo fin_onglet();

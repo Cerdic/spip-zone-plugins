@@ -30,9 +30,10 @@ function acs_adm() {
   if (isset($_POST['changer_pages']) && ($_POST['changer_pages'] == 'oui'))
     acs_group_update_pages(acs_grid($_POST['group']), $_POST['pages']);
   if (isset($_POST['changer_config']) && ($_POST['changer_config'] == 'oui')) {
-    ecrire_meta('acsVoirPagesComposants', $_POST['acsVoirPagesComposants']);
-    ecrire_meta('acsVoirPagesPreviewComposants', $_POST['acsVoirPagesPreviewComposants']);
-    ecrire_meta('acsVoirOngletVars', $_POST['acsVoirOngletVars']);
+    ecrire_meta('ACS_VOIR_PAGES_COMPOSANTS', $_POST['ACS_VOIR_PAGES_COMPOSANTS']);
+    ecrire_meta('ACS_VOIR_PAGES_PREVIEW', $_POST['ACS_VOIR_PAGES_PREVIEW']);
+    ecrire_meta('ACS_VOIR_ONGLET_VARS', $_POST['ACS_VOIR_ONGLET_VARS']);
+    ecrire_meta('ACS_PREVIEW_BACKGROUND', $_POST['ACS_PREVIEW_BACKGROUND']);
     ecrire_metas();
   }
   
@@ -75,7 +76,7 @@ print_r(unserialize($GLOBALS['meta']['acsCadenasse']));
         '<table style="width:100%" cellpadding="2px"><tr><td style="width:90%;" >'.
         ctlInput('acsGroups',
                 _T('acs:groupes'),
-                '<input type="text" name="acsGroups" value="'.implode(', ', array_keys(acs_groups())).'" class="formc"  style="width:100%" />'
+                '<input type="text" name="acsGroups" value="'.implode(', ', array_keys(acs_groups())).'" class="forml"  style="width:100%" />'
                 ).
         '</td><td style="text-align:'.$GLOBALS['spip_lang_right'].';"><input type="submit" name="'._T('bouton_valider').
         '" value="'._T('bouton_valider').'" class="fondo" /></td></tr></table>'.
@@ -100,23 +101,36 @@ function acs_adm_gauche() {
 
 function acs_adm_droite() {
   return acs_box(
-  	_T('acs:acs'),
-    '<div style="text-align: right"><form name="acs_config" action="?exec=acs&onglet=adm" method="post"><input type="hidden" name="changer_config" value="oui">'._T('acs:voir_onglet_vars').'<input name="acsVoirOngletVars" type="checkbox"'.($GLOBALS['meta']['acsVoirOngletVars'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_composants').'<input name="acsVoirPagesComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesComposants'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_preview_composants').'<input name="acsVoirPagesPreviewComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesPreviewComposants'] ? ' checked' : '').' /><br /><br /><input type="submit" name="'._T('bouton_valider').
-  '" value="'._T('bouton_valider').'" class="fondo" /></form></div><br />'.
-    _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", lire_meta("acsDerniereModif")).
-    '<hr /><br />'.
-    _T('version').' <a style="color: black">ACS '.ACS_VERSION.'</a>'.
-    '<br /><br />'.
-    _T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'images/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
-    _DIR_PLUGIN_ACS."images/acs_32x32.gif"
-    );
+_T('acs:acs'),
+'<form name="acs_config" action="?exec=acs&onglet=adm" method="post">
+<input type="hidden" name="changer_config" value="oui">
+<input name="ACS_VOIR_ONGLET_VARS" type="checkbox"'.
+($GLOBALS['meta']['ACS_VOIR_ONGLET_VARS'] ? ' checked' : '').' />'.
+_T('acs:voir_onglet_vars').
+'<br /><input name="ACS_VOIR_PAGES_COMPOSANTS" type="checkbox"'.
+($GLOBALS['meta']['ACS_VOIR_PAGES_COMPOSANTS'] ? ' checked' : '').' />'.
+_T('acs:voir_pages_composants').
+'<br />
+<input name="ACS_VOIR_PAGES_PREVIEW" type="checkbox"'.
+($GLOBALS['meta']['ACS_VOIR_PAGES_PREVIEW'] ? ' checked' : '').' />'
+._T('acs:voir_pages_preview_composants').'
+<br />
+<table><tr><td><input name="ACS_PREVIEW_BACKGROUND" type="text" class="palette forml" style="width:60px;" value="'.$GLOBALS['meta']['ACS_PREVIEW_BACKGROUND'].'" /></td><td>'._T('acs:preview_background').'</td></tr></table>
+<br />
+<br />
+<input type="submit" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'" class="fondo" /></form><br />'.
+_T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", lire_meta("acsDerniereModif")).
+'<hr /><br />'.
+_T('version').' <a style="color: black">ACS '.ACS_VERSION.'</a>'.
+'<br /><br />'.
+_T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'images/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>', _DIR_PLUGIN_ACS."images/acs_32x32.gif");
 }
 
 function acs_model() {
   $r = '<form name="acs_model" action="?exec=acs" method="post">'.
         '<input type="hidden" name="onglet" value="adm"><input type="hidden" name="changer_model" value="oui">';
   $r .= '<table width="100%"><tr><td>'.ctlInput('acsModel', _T('acs:model'), select_model());
-  $r .= '</td><td>'.ctlInput('acsSqueletteOverACS', _T('acs:squelette'), '<input type="text" name="acsSqueletteOverACS" value="'.$GLOBALS['meta']['acsSqueletteOverACS'].'" class="formc" />').'</td></tr></table><br />';
+  $r .= '</td><td>'.ctlInput('acsSqueletteOverACS', _T('acs:squelette'), '<input type="text" name="acsSqueletteOverACS" value="'.$GLOBALS['meta']['acsSqueletteOverACS'].'" class="forml" />').'</td></tr></table><br />';
 
   $r .= '<div style="text-align:'.$GLOBALS['spip_lang_right'].';"><input type="submit" name="'._T('bouton_valider').
   '" value="'._T('bouton_valider').'" class="fondo" /></div></form>';
@@ -131,7 +145,7 @@ function ctlInput($nom, $txt, $content) {
  * Retourne un sélecteur de squelette,
  */
 function select_model() {
-  $r = '<select name="acsModel" class="formc">';
+  $r = '<select name="acsModel" class="forml">';
   foreach(list_models() as $sq)
     $r .= '<option name="'.$sq.'" value="'.$sq.'"'.(($sq == $GLOBALS['meta']['acsModel']) ? ' selected': '').'>'.$sq.'</option>';
   $r .= '</select>';

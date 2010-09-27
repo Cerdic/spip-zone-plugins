@@ -54,9 +54,9 @@ function acs_save($repertoire, $nom_fichier) {
 			"'acsVersion'=>'".ACS_VERSION."',\n".
 			"'acsModel'=>'".$meta['acsModel']."',\n".
 			($meta['acsSqueletteOverACS'] ? "'acsSqueletteOverACS'=>'".$meta['acsSqueletteOverACS']."',\n" : '').
-  		"'acsVoirOngletVars'=>'".$meta['acsVoirOngletVars']."',\n".
-  		"'acsVoirPagesComposants'=>'".$meta['acsVoirPagesComposants']."',\n".
-  		"'acsVoirPagesPreviewComposants'=>'".$meta['acsVoirPagesPreviewComposants']."',\n".
+  		"'ACS_VOIR_ONGLET_VARS'=>'".$meta['ACS_VOIR_ONGLET_VARS']."',\n".
+  		"'ACS_VOIR_PAGES_COMPOSANTS'=>'".$meta['ACS_VOIR_PAGES_COMPOSANTS']."',\n".
+  		"'ACS_VOIR_PAGES_PREVIEW'=>'".$meta['ACS_VOIR_PAGES_PREVIEW']."',\n".
 			$file.
 			");\n?>";
 		ecrire_fichier($filename, $file);

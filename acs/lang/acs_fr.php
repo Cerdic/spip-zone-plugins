@@ -123,9 +123,10 @@ Pour personnaliser votre site, configurez ses composants.
   'locked_pages' => 'Pages protégées',
   'model' => 'Mod&egrave;le',
   'squelette' => 'Squelette(s)',
-  'voir_pages_composants' => 'Afficher les pages des composants',
-  'voir_pages_preview_composants' => 'Pages de pr&eacute;visualisation des composants',
-  'voir_onglet_vars' => 'Afficher l\'onglet Variables',
+  'voir_pages_composants' => 'Pages des composants',
+  'voir_pages_preview_composants' => 'Pages de pr&eacute;visualisation',
+  'voir_onglet_vars' => 'Onglet Variables',
+  'preview_background' => 'Fond de pr&eacute;visualisation',
   'save' => 'Sauvegarder',
   'restore' => 'Restaurer',
 
