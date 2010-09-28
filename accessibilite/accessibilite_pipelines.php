@@ -13,9 +13,9 @@ function accessibilite_pre_liens($texte){
 			if ($type[0] == 'document') {
 				// Rechercher la taille du Doc dont l'id est dans $type[2]
 				$row = sql_fetsel(
-					array('spip_documents.titre as T1', 'taille', 'spip_types_documents.titre as T2'), 
-					array('spip_documents', 'spip_types_documents'), 
-					array('id_document='.$type[2], 'spip_documents.extension=spip_types_documents.extension')
+					array('TT1.titre as T1', 'taille', 'TT2.titre as T2'), 
+					array('spip_documents AS TT1', 'spip_types_documents AS TT2'), 
+					array('id_document='.$type[2], 'TT1.extension=TT2.extension')
 					);
 				$textelien = ($intitule[0]) ? $intitule[0]:$row['T1'];
 				$langue = ($intitule[2]) ? '{'.$intitule[2].'}':'';
