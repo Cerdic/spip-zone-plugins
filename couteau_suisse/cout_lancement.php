@@ -239,7 +239,7 @@ function cs_lire_data_outil($outil, $casier='') {
 	static $datas = array();
 	if(!$casier) $casier = $outil;
 	if(!isset($datas[$casier])) {
-		if(!$GLOBALS['cs_outils']) include_spip(_DIR_CS_TMP . 'mes_outils');
+		if(!$GLOBALS['cs_outils']) include_once(_DIR_CS_TMP . 'mes_outils.php');
 		if(function_exists($f='cs_data_'.$casier)) $datas[$casier] = $f();
 	}
 	if(!isset($datas[$casier])) {
