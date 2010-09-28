@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_document_distant_ecriture' => 'Ce document est &laquo;distant&raquo; et ne peut donc pas &ecirc;tre modifi&eacute;.',
 	'message_extension_invalide_ecriture' => 'Le format de ce fichier n\'est pas pris en charge.',
 	'message_fichier_maj' => 'Le fichier a &eacute;t&eacute; mis &agrave; jour.',
+	'message_infos_document_distant' => 'Ce document est distant. Aucune information ne peut en &ecirc;tre r&eacute;cup&eacute;r&eacute;e.',
 	'message_texte_binaire_manquant' => 'Un logiciel n&eacute;cessaire n\'est pas disponible sur votre serveur :',
 	'message_texte_binaires_informer' => 'Veuillez en informer votre administrateur.',
 	'message_texte_binaires_manquant' => 'Plusieurs logiciels n&eacute;cessaires ne sont pas disponibles sur votre serveur :',

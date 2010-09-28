@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_document_distant_ecriture' => 'This is a &laquo;remote&raquo; document which can not be changed.',
 	'message_extension_invalide_ecriture' => 'The format of this file is not supported.',
 	'message_fichier_maj' => 'The file has been updated.',
+	'message_infos_document_distant' => 'This is a remote document. No information can be retrieved.',
 	'message_texte_binaire_manquant' => 'A necessary software is not available on your server :',
 	'message_texte_binaires_informer' => 'Please inform your system administrator.',
 	'message_texte_binaires_manquant' => 'Several software needed are not available on your server :',

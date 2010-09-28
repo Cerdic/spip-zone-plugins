@@ -12,6 +12,7 @@
 /**
  * Insertion dans le pipeline editer_contenu_objet
  * Ajout d'informations dans le bloc des documents si le document est sonore
+ * et que le document n'est pas distant
  *
  * @param array $flux Le contexte du pipeline
  * @return $flux le $flux modifié
@@ -20,13 +21,15 @@ function getid3_editer_contenu_objet($flux){
 	$id_document = $flux['args']['id'];
 	if(in_array($flux['args']['type'],array('case_document'))){
 		$son = array("mp3","ogg","flac","aiff","aif","wav");
-		$document = sql_fetsel("docs.id_document, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$document = sql_fetsel("docs.extension,docs.distant,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
-		if(in_array($extension,$son) && ($flux['args']['type'] == 'case_document')){
+		if(in_array($extension,$son) && ($document['distant'] == 'non')){
 			$infos_son = charger_fonction('infos_son', 'inc');
 			$flux['data'] .= $infos_son($id,$id_document,$type,$extension);
+		}else if(in_array($extension,$son) && ($document['distant'] == 'oui')){
+			$flux['data'] .= '<p>'._T('getid3:message_infos_document_distant').'</p>';
 		}
 	}
 	return $flux;
