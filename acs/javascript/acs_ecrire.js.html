@@ -46,7 +46,7 @@ function instance_delete(msg) {
 $(document).ready(
 	function() {
     acs_ecrire_init();
-    acs_ecrire_init_ajax();
+    acs_ecrire_init_ajax(false);
 		onAjaxLoad(acs_ecrire_init_ajax);
 	}
 );
@@ -92,7 +92,10 @@ function acs_ecrire_init() {
 
 }
 
-function acs_ecrire_init_ajax() {
+function acs_ecrire_init_ajax(ajax) {
+  if (ajax == null)
+    ajax=true;
+
   if (detail() == "") {
     $("#page_infos .pliable").each(
       function(i) {
@@ -123,7 +126,8 @@ function acs_ecrire_init_ajax() {
           }
         );
         if ((typeof plieur.clic) != "undefined") {
-          eval(plieur.clic + ";onclick(e);");
+          if (!ajax) 
+            eval(plieur.clic + ";onclick(e);");
         }
         return false;
       }
