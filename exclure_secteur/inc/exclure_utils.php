@@ -58,6 +58,8 @@ function id_explicite($crit,$type){
 
 function exclure_sect_choisir($crit,$type){
     $cfg =lire_config('secteur/exclure_sect');
+    if ($cfg == null) 
+    	$cfg = array();
     $sect_afficher = secteur_explicite($crit);
     $id_explicite = id_explicite($crit,$type); //l'id de la table sur laquelle on boucle est-il explicite ?
     if ($cfg = array_map('sql_quote', $cfg) and !$sect_afficher and !$id_explicite) {
