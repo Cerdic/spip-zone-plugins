@@ -77,6 +77,7 @@ function exec_get_infos_spip_dist() {
 		
 		$corps = array();
 		
+		//////////
 		// Audit SPIP
 		$ii = 'configspip';
 		$contexte = array();
@@ -111,6 +112,7 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:'.$ii)
 		);
 
+		//////////
 		// Audit systeme
 		$ii = 'configsyst';
 		$infos = array(
@@ -134,6 +136,7 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:'.$ii)
 		);
 	
+		//////////
 		// Les constantes déclarées
 		$ii = 'constantes';
 		$corps[$ii] = gins_lister_values(
@@ -141,6 +144,7 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:'.$ii)
 		);
 	
+		//////////
 		// Les valeurs de configuration PHP (php.ini, ...)
 		$ii = 'phpconfig';
 		$corps[$ii] = gins_lister_values(
@@ -148,7 +152,40 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:'.$ii)
 		);
 		
-		// Menu de haut de page
+		//////////
+		// Les tables SQL (toutes les tables, SPIP et autres)
+		$ii = 'tablessql';
+		$is_mysql = defined('_MYSQL_SET_SQL_MODE') && _MYSQL_SET_SQL_MODE;
+		$res = 
+			($is_mysql)
+			? sql_query('SHOW TABLE STATUS')
+			: sql_showbase('%')
+			;
+		
+		if($res)
+		{
+			$arr = array();
+			while($row = sql_fetch($res))
+			{
+				$arr[] = $is_mysql
+					? $row['Name']
+						. ' ('
+						. _T('gins:n_row', array('n' => ($n = $row['Rows'])))
+						. ($n ? ' : '.gins_decodeSize($row['Data_length']) : '')
+						. ')'
+					: array_shift($row)
+					;
+			}
+			
+			// ajouter le résultat aux tableaux
+			$corps[$ii] = gins_lister_values(
+				$arr
+				, _T('gins:'.$ii)
+			);
+		}
+
+		//////////
+		// Menu de haut de page (onglets)
 		$menu = '';
 		$jamaisvu = true;
 		foreach($corps as $key=>$results)
@@ -157,7 +194,6 @@ function exec_get_infos_spip_dist() {
 				._T('gins:'.$key).'</a></li>'.PHP_EOL;
 			$jamaisvu = false;
 		}
-		
 		$page_result .=
 			  '<div id="gins-menu" >'.PHP_EOL
 			. '<h2>'._T('gins:menu_proprietes').'</h2>'.PHP_EOL
@@ -167,6 +203,8 @@ function exec_get_infos_spip_dist() {
 			. '</div>'.PHP_EOL
 			;
 		
+		//////////
+		// Préparation des vues
 		$jamaisvu = true;
 		foreach($corps as $key=>$results)
 		{
@@ -178,6 +216,7 @@ function exec_get_infos_spip_dist() {
 			$jamaisvu = false;
 		}
 		
+		//////////
 		// Fin de la page
 		echo(
 			  '<div id="gins-contenu">'.PHP_EOL

@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configspip' => 'Infos SPIP',
 	'configsyst' => 'Infos Syst&#232;me',
 	'phpconfig' => 'Configuration PHP',
+	'tablessql' => 'Tables SQL',
 	
 	'constantes' => 'Constantes',
 	
@@ -40,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'MB' => 'Mo.',
 	'GB' => 'Go.',
 	'TB' => 'To.',
+	
+	'n_row' => '@n@ enregistrements',
 	
 	't_inventaires' => '<br />Tableaux des inventaires :',
 	'audit_site' => 'Audit de site',
