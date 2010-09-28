@@ -30,7 +30,7 @@ function spipmotion_editer_contenu_objet($flux){
 		$type = $document['objet'];
 		$id = $document['id_objet'];
 		if(in_array($type_form,array('case_document','document'))){
-			if($document['distant'] !== 'distant'){
+			if($document['distant'] !== 'oui'){
 				$ajouts = '';
 				if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
 					if($document['id_orig'] > 0){
