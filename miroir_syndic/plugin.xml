@@ -1,32 +1,24 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Miroir de syndication
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	fil@rezo.net
-_ &#169; 2006 - Distribue sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Miroir de syndication</nom>
+	<auteur>fil@rezo.net</auteur>
+	<licence>&#169; 2006 - Distribue sous licence GNU/GPL</licence>
+	<version>1.0.0</version>
+	<version_base>0.1.0</version_base>
+	<etat>test</etat>
 	<description>
 Ce plugin recopie les articles syndiqu&#233;s {et publi&#233;s} de spip_syndic_articles vers spip_articles. Le code est suffisamment simple pour &#234;tre modifiable en fonction des besoins.
 
 Les articles sont organis&#233;s automatiquement selon un rubriquage &laquo;intelligent&raquo;: au d&#233;part, SPIP positionne l'article dans la rubrique o&ugrave; se trouve le site syndiqu&#233;. Si l'article &#224; recopier dispose d'un tag de 'category', SPIP cr&#233;e la sous-rubrique correspondante (voire, arborescente si le tag s'&#233;crit sous la forme &laquo;Chemin/Vers/Rubrique&raquo;). S'il n'y a pas de tag de ce type, la sous-rubrique "ann&#233;e/ann&#233;e-mois" est cr&#233;&#233;e et re&#231;oit l'article. (Un param&#232;tre _MODE_RUBRIQUE_MIROIR permet de supprimer ce comportement, ou de se limiter au tri par mois.)
 
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<prefix> 
-	MiroirSyndic
-	</prefix>
+	<lien>http://trac.spip.org/trac/spip-zone/wiki/MiroirDeSyndication</lien>
+	<prefix>miroirsyndic</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<instal>miroirsyndic_installation.php</instal>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<action>ajouter_cron</action>
-		<inclure>MiroirSyndic.php</inclure>
+		<inclure>genie/miroir_syndic.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>

@@ -1,2 +1,0 @@
-Vous trouverez la documentation de ce plugin à l'adresse suivante :
-http://trac.spip.org/trac/spip-zone/wiki/MiroirDeSyndication
