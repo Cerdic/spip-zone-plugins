@@ -1,5 +1,8 @@
 <?php
 
+include_spip('inc/config');
+include_spip('configurer/pipelines');
+
 function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	$valeurs = array();
 
