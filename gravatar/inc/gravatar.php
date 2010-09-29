@@ -63,12 +63,12 @@ function gravatar_balise_img($img,$alt="",$class=""){
  * @return string               La balise IMG
  */
 function gravatar_img($email, $logo_auteur='') {
-	$hasconfig = function_exists('lire_config');
+	$config = function_exists('lire_config')?lire_config('gravatar'):unserialize($GLOBALS['meta']['gravatar']);
 	$default = '404'; // par defaut rien si ni logo ni gravatar (consigne a passer a gravatar)
 	$image_default = ''; // image
 
-	if ($hasconfig
-	  AND strlen($image_default=lire_config('gravatar/image_defaut'))
+	if ($config
+	  AND strlen($image_default=$config['image_defaut'])
 		AND strpos($image_default,".")===FALSE){
 		$default = $image_default; // c'est une consigne pour l'api gravatar
 		$image_default = 'images/gravatar.png'; // si pas d'email, fournir quand meme une image
@@ -102,7 +102,7 @@ function gravatar_img($email, $logo_auteur='') {
 		return '';
 
 	// mises en formes optionnelles du gravatar
-	if ($t=lire_config('gravatar/taille')){
+	if ($config AND $t=$config['taille']){
 		$img = filtrer('image_passe_partout',$img,$t);
 		$img = filtrer('image_recadre',$img,$t,$t,'center');
 	}
