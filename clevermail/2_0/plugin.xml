@@ -19,6 +19,8 @@ Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivant
 
 &Eacute;volutions envisag&eacute;es :
 -* Choix des modes d'abonnement possibles pour chaque liste
+-* Export CSV des abonn&eacute;s
+-* Page de gestion de profil pour les abonn&eacute;s
 -* Extraction de tous les textes sous forme de cha&#238;nes de langue
 -* Salvatorisation. [N&eacute;cessite un changement de nom du plugin->http://article.gmane.org/gmane.comp.web.spip.zone/13503]... :-(
 -* Envoi programm&eacute; d'un message d&eacute;j&agrave; cr&eacute;&eacute;
