@@ -306,4 +306,13 @@ function balise_CONFIG($p) {
 	return $p;
 }
 }
+
+if (!test_plugin_actif('cfg')){
+	include_spip('inc/config');
+	if (!function_exists('lire_config')){
+		function lire_config($cfg='', $def=null, $unserialize=true) {
+			return spip_bonux_lire_config($cfg, $def, $unserialize);
+		}
+	}
+}
 ?>
