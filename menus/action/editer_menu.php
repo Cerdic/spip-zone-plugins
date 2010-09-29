@@ -18,7 +18,7 @@ function action_editer_menu_dist($arg=null) {
 	if (!$id_menu = intval($arg)) {
 		$id_menu = insert_menu();
 	}
-
+var_dump($id_menu);
 	// Enregistre l'envoi dans la BD
 	if ($id_menu > 0) $err = menu_set($id_menu);
 
@@ -79,6 +79,7 @@ function menu_set($id_menu, $set=null) {
  * @return int id_menu
  */
 function insert_menu() {
+	$champs = array('titre'=>''); // eviter le bug de req/sqlite < 2.1.3
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
 		array(
