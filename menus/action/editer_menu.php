@@ -18,7 +18,7 @@ function action_editer_menu_dist($arg=null) {
 	if (!$id_menu = intval($arg)) {
 		$id_menu = insert_menu();
 	}
-var_dump($id_menu);
+
 	// Enregistre l'envoi dans la BD
 	if ($id_menu > 0) $err = menu_set($id_menu);
 
