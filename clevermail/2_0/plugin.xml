@@ -17,17 +17,6 @@ Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivant
 
 -* Possibilit&eacute; de regrouper les lettres par cat&eacute;gories en pr&eacute;fixant le nom de la lettre avec le nom de la cat&eacute;gorie suivi d'un "/", et utilisation du formulaire #FORMULAIRE_CLEVERMAIL_MULTIPLE
 
-&Eacute;volutions envisag&eacute;es :
--* Choix des modes d'abonnement possibles pour chaque liste
--* Export CSV des abonn&eacute;s
--* Page de gestion de profil pour les abonn&eacute;s
--* Extraction de tous les textes sous forme de cha&#238;nes de langue
--* Salvatorisation. [N&eacute;cessite un changement de nom du plugin->http://article.gmane.org/gmane.comp.web.spip.zone/13503]... :-(
--* Envoi programm&eacute; d'un message d&eacute;j&agrave; cr&eacute;&eacute;
--* Envoi en multipart avec images et CSS incluses ?
--* Utilisation de CFG pour la configuration ? (bof, une d&eacute;pendance en plus)
--* Vos id&eacute;es ?
-
 Ic&ocirc;ne issue de la collection [Futurosoft->http://www.kde-look.org/content/show.php?content=50667] de Sergio S&aacute;nchez L&oacute;pez.
 	</description>
 	<lien>[Documentation->http://www.spip-contrib.net/CleverMail]</lien>
