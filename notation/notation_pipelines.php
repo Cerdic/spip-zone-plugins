@@ -14,9 +14,9 @@ function notation_affichage_final($flux){
     if (strpos($flux, "'notation_note notation_note_on_load'") === false)
 		return $flux;
 	$incHead = "";
-	$incHead .= "<script src='".find_in_path('javascript/jquery.MetaData.js')." type='text/javascript'></script>\n";
-	$incHead .= "<script src='".find_in_path('javascript/jquery.rating.js')." type='text/javascript'></script>\n";
-	$incHead .= "<script src='".find_in_path('javascript/notation.js')." type='text/javascript'></script>\n";
+	$incHead .= "<script src='".find_in_path('javascript/jquery.MetaData.js')."' type='text/javascript'></script>\n";
+	$incHead .= "<script src='".find_in_path('javascript/jquery.rating.js')."' type='text/javascript'></script>\n";
+	$incHead .= "<script src='".find_in_path('javascript/notation.js')."' type='text/javascript'></script>\n";
 	include_spip('inc/filtres');
 	if(function_exists('compacte_head')){
 		$incHead = compacte_head($incHead);
