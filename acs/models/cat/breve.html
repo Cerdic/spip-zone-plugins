@@ -49,7 +49,7 @@ Page d'une brève.
   <div id="onglet">]
   [(#REM) Fil d'Ariane ]
   <span id="hierarchie" style="float: #LANG_LEFT"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</span>
-  <span class="texte_nav" style="float: #LANG_RIGHT">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)] </span>
+  <span class="nav" style="float: #LANG_RIGHT">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)] </span>
   <br class="nettoyeur" />
 	<div class="contre-encart">
   <div class="cartouche">
@@ -71,7 +71,7 @@ Page d'une brève.
   <br class="nettoyeur" />
   [(#REM) Forum de la breve
   NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
-  [<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="texte_nav" style="float: #LANG_RIGHT"><a href="#URL_BREVE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=composants/forums/forum}{id_breve}{ouvrir=#OUVRIR}{debut_forums}>]
+  [<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="nav" style="float: #LANG_RIGHT"><a href="#URL_BREVE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=composants/forums/forum}{id_breve}{ouvrir=#OUVRIR}{debut_forums}>]
 	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>

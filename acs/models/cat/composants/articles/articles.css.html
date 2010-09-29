@@ -10,8 +10,8 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 }
 
 .liste-articles .entete, .cartouche .entete, .plan-secteur h1 {
-  [background-color: (#VAR{acsArticlesTitresFondColor,#VAR{acsFondColor}});]
-  [background: url('[(#ACS_CHEMIN)]trame/(#VAR{acsArticlesTitresFondImage})') repeat top left;]
+  [background-color: (#VAR{acsArticlesTitreFond});]
+  [background: url('[(#ACS_CHEMIN)]trame/(#VAR{acsArticlesTitreFondImage})') repeat top left;]
  }
 
 .liste-articles .entete {
@@ -30,9 +30,11 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 .liste-articles li p { margin: 0; padding: 0; padding-left: 5px; }
 
 .liste-articles .titres {
-  float: #LANG_LEFT;
+  //float: #LANG_LEFT;
 }
-
+.liste-articles .nav {
+  float: #LANG_RIGHT;
+}
 .liste-articles .titre, .liste-articles .surtitre, .liste-articles .soustitre {
   padding-left: 5px;
   font-weight: bold;
@@ -67,14 +69,13 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
   display: inline-block;  /* IE */
 }
 
-.liste-articles .infos_article, .liste-articles .texte_nav, .liste-articles .pagination {
+.liste-articles .infos_article, .liste-articles .nav, .liste-articles .pagination {
   margin: 0;
   margin-left: 5px;
   margin-right: 5px;
-  font-size: 0.65em;
 }
 
-.liste-articles .infos_article, .liste-articles .texte_nav {
+.liste-articles .infos_article, .liste-articles .nav {
   float: #LANG_RIGHT;
 }
 .liste-articles .pagination {

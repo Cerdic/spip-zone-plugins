@@ -12,12 +12,13 @@
     [(#REM) Inclure le modele des liens de traductions ]
     #MODELE{article_traductions}
   </div>[(#REM) fin cartouche ]
-  [<div class="chapo">(#CHAPO)</div>]
+  [<div class="chapo">(#CHAPO|coupe{300, &nbsp; ... <small><i><a href="#URL_ARTICLE" style="font-weight:normal">(lire la suite)</a></i></small>})</div>#SET{done,oui}]
 
   [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-  [<div class="texte">(#TEXTE|supprimer_tags|coupe{300, &nbsp; ... <small><i><a href="#URL_ARTICLE" style="font-weight:normal">(lire la suite)</a></i></small>})
-    <div class="texte_nav">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)]</div>
-  </div>]
+  [(#GET{done}|!={oui}|?{' '})[
+  <div class="texte">(#TEXTE|supprimer_tags|coupe{300, &nbsp; ... <small><i><a href="#URL_ARTICLE" style="font-weight:normal">(lire la suite)</a></i></small>})
+    <div class="nav">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)]</div>
+  </div>]]
 </div>
 <div class="spacer"></div>
 </BOUCLE_encart>

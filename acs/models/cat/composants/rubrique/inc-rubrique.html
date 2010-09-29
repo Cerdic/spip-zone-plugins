@@ -1,10 +1,16 @@
+<B_rubrique>
+<div class="cRubrique">
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
-  <div class="titre">
-    [(#LOGO_RUBRIQUE||image_reduire{200,200})]
-    [<h1 class="#EDIT{titre} titre">(#TITRE|supprimer_numero)</h1>]
-    [(#VAR{acsRubriqueMaJ}=={oui}|?{<span class="maj"><:dernier_ajout:> : [(#DATE|nom_jour) ][(#DATE|affdate)]</span>})]
+  <div class="entete">
+    [(#VAR{acsRubriqueLogoAlign}|=={left}|?{' '})[(#LOGO_RUBRIQUE|left|image_reduire{200,200})]
+    ][(#VAR{acsRubriqueLogoAlign}|=={right}|?{' '})[(#LOGO_RUBRIQUE|right|image_reduire{200,200})]
+    ][(#VAR{acsRubriqueMaJ}=={oui}|?{<span class="maj nav"><:dernier_ajout:> : [(#DATE|nom_jour) ][(#DATE|affdate)]</span>})
+    ][<h1 class="#EDIT{titre} titre">(#TITRE|supprimer_numero)</h1>]
+    [(#VAR{acsRubriqueSouligne}|=={oui}|?{' '})<hr class="soulignement"[ style="background: #(#LOGO_RUBRIQUE|couleur_extraire)"] />
+  ]
   </div>
-  [<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+  [<div class="#EDIT{texte} texte">(#TEXTE)</div>
+  ][<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
   [(#REM) Articles de la rubrique ]
   <INCLURE{fond=composants/articles/boucle-articles_rubrique}{env}{id_rubrique}{classement}{debut_articles=#ENV{debut_articles}}{rubrique=#TITRE}{ajax}>
@@ -22,6 +28,7 @@
     </BOUCLE_documents_joints>
     </ul>
   </div>
-  </B_documents_joints>
-  [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+  </B_documents_joints>  
 </BOUCLE_rubrique>
+</div>
+</B_rubrique>

@@ -66,11 +66,11 @@
 [(#REM) Forum de l'article ]
 [(#STATUT|=={refuse}|?{' ', ''})
   <a href="" class="refus">Article refusé</a>
-  <a href="#forum" name="forum" id="forum"></a><span class="texte_nav" style="float: #LANG_RIGHT"><a href="#URL_ARTICLE&ouvrir=oui#forum" id="forum_lire_tous"><small><:lire_tous_les_messages:></small></a></span>
+  <a href="#forum" name="forum" id="forum"></a><span class="nav" style="float: #LANG_RIGHT"><a href="#URL_ARTICLE&ouvrir=oui#forum" id="forum_lire_tous"><small><:lire_tous_les_messages:></small></a></span>
   <INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}{statut=prive}{env}{self}{ajax}>
 ]
 [(#STATUT|=={publie}|?{' ', ''})
-  [(#PLUGIN{notation}|?{' '}) <span class="texte_nav" style="float:right">#FORMULAIRE_NOTATION</span>]
+  [(#PLUGIN{notation}|?{' '}) <span class="nav" style="float:right">#FORMULAIRE_NOTATION</span>]
   [(#PLUGIN{recommander}|?{' '})#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}]
   [<a id="forum_repondre" class="repondreaufil" href="spip.php?page=forum&id_article=#ID_ARTICLE"><:form_pet_message_commentaire:></a><br/>(#FORMULAIRE_FORUM)]
   <INCLURE{fond=composants/forums/forum}{ajax}{id_article}{ouvrir=#OUVRIR}{debut_forums}>

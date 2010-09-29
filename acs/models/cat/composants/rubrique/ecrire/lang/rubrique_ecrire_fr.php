@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Rubrique',
 'description' => 'Rubrique du site',
 
-'MaJ'=>'Afficher les dernières mises à jour des rubriques',
+'MaJ'=>'Dernier ajout',
 
 );
 ?>

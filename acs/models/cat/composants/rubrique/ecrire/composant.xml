@@ -16,6 +16,30 @@
   </param>
 
   <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Souligne</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+  </variable>
+  <variable>
+    <nom>LogoAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>right</option>
+    <valeur>right</valeur>
+  </variable>
+  
+  <variable>
     <nom>MaJ</nom>
     <type>choix</type>
     <option>oui</option>

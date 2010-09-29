@@ -12,7 +12,7 @@
   </param>
 
   <variable>
-    <nom>TitreFondColor</nom>
+    <nom>TitreFond</nom>
     <type>color</type>
   </variable>
   <variable>

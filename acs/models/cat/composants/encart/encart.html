@@ -1,5 +1,5 @@
 [(#VAR{acsEncartUse}|=={oui}|?{' '})
 <div class="#PINCEAU{encart}">
-  [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-democratie}{lang=#LANG}>][(#REM) Encart si composant democratie activé]
-  [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-oligarchie}{lang=#LANG}>][(#REM) Encart si composant democratie inactif]
+  [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart-democratie}{lang=#LANG}>][(#REM) Encart si composant democratie activé]
+  [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart}{lang=#LANG}>][(#REM) Encart si composant democratie inactif]
 </div>]

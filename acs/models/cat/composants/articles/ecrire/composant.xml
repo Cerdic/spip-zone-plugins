@@ -12,12 +12,12 @@
   </param>
   
   <variable>
-    <nom>TitresFondColor</nom>
+    <nom>TitreFond</nom>
     <type>color</type>
     <valeur>=acsOngletsFondColor</valeur>
   </variable>
   <variable>
-    <nom>TitresFondImage</nom>
+    <nom>TitreFondImage</nom>
     <type>img</type>
     <chemin>trame</chemin>
     <label>non</label>

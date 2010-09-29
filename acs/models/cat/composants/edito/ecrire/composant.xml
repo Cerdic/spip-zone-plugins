@@ -3,7 +3,7 @@
   <nom>Edito</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.6</version>
+  <version>0.7.1</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>

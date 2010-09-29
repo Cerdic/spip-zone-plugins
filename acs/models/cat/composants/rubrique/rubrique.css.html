@@ -1,5 +1,16 @@
-#rubrique {
+.cRubrique .titre, .cRubrique .texte, .cRubrique .notes {
   padding-left: 5px;
   padding-right: 5px;
-  text-align: justify;
+}
+
+.cRubrique .entete {
+  [background-color: (#VAR{acsRubriqueTitreFond});]
+  [background: url('[(#ACS_CHEMIN)]trame/(#VAR{acsRubriqueTitreFondImage})') repeat top left;]
+}
+.cRubrique .maj {
+  float: #LANG_RIGHT;
+}
+.cRubrique .soulignement {
+  margin :0;
+  height: 8px;
 }

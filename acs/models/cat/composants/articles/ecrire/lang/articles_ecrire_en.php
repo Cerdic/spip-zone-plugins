@@ -11,7 +11,6 @@ Access control limit access to articles tagged with keyword _ide, _aut, or _adm 
 3 lasts articles published with keyword "Communiques" displays "A la Une" (Home) '.
 'before list of last published articles.',
 
-'TitresFondColor' => 'Title background color',
 'Bord' => 'Border top',
 'MargeBas' => 'Margin bottom',
 'NbLettres' => 'Nb of letters before cut',
@@ -23,9 +22,9 @@ Access control limit access to articles tagged with keyword _ide, _aut, or _adm 
 'TabOdd' => 'Odd',
 'TabEven' => 'Even',
 
-'Dates' => 'Display articles dates',
-'Aut' => 'Display articles authors',
-'Stats' => 'Display visits',
+'Dates' => 'Dates',
+'Aut' => 'Authors',
+'Stats' => 'Visits',
 'Lock' => 'Access control',
 'Pagination' => 'Articles per page'
 );

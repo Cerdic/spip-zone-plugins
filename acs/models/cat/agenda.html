@@ -10,24 +10,9 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Affiche un agenda par périodes choisies
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mkeywords,[(#ANNEE)][,(#MOIS)][,(#JOUR)][,(#EVAL{'_T("acs:entete_meta_page_agenda").","._T("acs:entete_meta_keywords")'})]})]
-<INCLURE{fond=composants/fond/entete}{page=agenda}{self=#SELF}{env=#ENV}{title=<:acs:entete_meta_page_agenda:>}{mdescription=<:acs:entete_meta_page_agenda:>}{mkeywords=#GET{mkeywords}}>[(#REM) Entete de la page + titre du site ]
-
-[(#REM) Menu de navigation laterale (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
-    <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=21}>
-  </div>[(#REM) fin menu ]
-</div>[(#REM) fin colonne1 (navigation) ]
-
-[(#REM) Colonne 2 ]
-<div id="colonne2"><div class="spacer"></div>
-  [(#REM) Contenu principal : derniers articles publies ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=agenda}{env=#ENV}>
-  <div id="onglet">]
-		<div class="page_agenda">
-			[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=composants/agenda/agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
-		</div>
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
+(#SET{mkeywords,[(#ANNEE)][,(#MOIS)][,(#JOUR)][,(#EVAL{'_T("acs:entete_meta_page_agenda").","._T("acs:entete_meta_keywords")'})]})][
+(#SET{mdescription,<:acs:fond_meta_page_agenda:>})
+]<INCLURE{fond=composants/fond/entete}{self}{env}{title=#GET{mdescription}}{mdescription=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mrobots=none}>
+<INCLURE{fond=composants/cadre/cadre}{nic=2080}{self}{env} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>
+<INCLURE{fond=composants/fond/pied}{self}>

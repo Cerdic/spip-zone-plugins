@@ -13,7 +13,6 @@ _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administ
 <br /><br />
  Les 3 derniers articles de la rubrique avec le mot-cl&eacute; "Communiques" s\'affichent à la Une avant la liste des derniers articles publi&eacute;s.',
 
-'TitresFondColor' => 'Fond titres',
 'Bord' => 'Bord sup&eacute;rieur',
 'MargeBas' => 'Marge inf&eacute;rieure',
 'NbLettres' => 'Nb de lettres avant coupure',
@@ -25,9 +24,9 @@ _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administ
 'TabOdd' => 'Ligne paire',
 'TabEven' => 'Ligne impaire',
 
-'Dates' => 'Affiche les dates des articles',
-'Aut' => 'Affiche les auteurs des articles',
-'Stats' => 'Affiche les statistiques de visites',
+'Dates' => 'Dates',
+'Aut' => 'Auteurs',
+'Stats' => 'Statistiques de visites',
 'Lock' => 'Contrôle d\'accès',
 'Pagination' => 'Nombre d\'articles par page'
 );

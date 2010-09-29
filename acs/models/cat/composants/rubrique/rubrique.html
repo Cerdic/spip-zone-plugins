@@ -2,6 +2,6 @@
 
 Rubrique #ID_RUBRIQUE
 
-]<div id="rubrique" class="#PINCEAU{rubrique}">
-<INCLURE{fond=composants/rubrique/inc-rubrique}{lang=#LANG}{env}{id_rubrique}>
+][(#SET{id_rubrique, #ENV{id_rubrique,1}})]<div id="rubrique" class="#PINCEAU{rubrique}">
+<INCLURE{fond=composants/rubrique/inc-rubrique}{lang=#LANG}{self}{env}{id_rubrique=#GET{id_rubrique}}>
 </div>
