@@ -1,0 +1,43 @@
+#CACHE{0}[(#REM)
+
+On utilise le formulaire SPIP standard de la dist pour faciliter la maintenance.
+Cette CSS est valide pour dist SPIP 2.1.2
+
+].cLogin .formulaire_login {
+  font-size: 0.65em;
+  text-align:center;
+  margin: 0;
+  padding:0;
+}
+.cLogin .formulaire_login input.text, .cLogin .formulaire_login input.password, .cLogin .formulaire_login label {
+  text-align: #LANG_LEFT;
+  max-width: 150px;
+  width: 100%;
+}
+.cLogin .formulaire_login fieldset {
+  border: 0;
+}
+.cLogin .formulaire_login fieldset legend {
+  display: none;
+}
+.cLogin .formulaire_login p.boutons {
+  text-align: #LANG_RIGHT;
+  margin-#LANG_RIGHT: 10px;;
+}
+.cLogin {
+  font-size: 0.82em;
+  [border-width: (#VAR{acsLoginBord/Width});]
+  [border-style: (#VAR{acsLoginBord/Style});]
+  [border-color: (#VAR{acsLoginBord/Color});]
+  [background: (#VAR{acsLoginFond})]
+}
+.cLogin .menu-titre {
+  text-align : center;
+  font-weight: bold;
+  [background: (#VAR{acsLoginTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsLoginTitreFondImage}})") repeat top left];]
+  [border-bottom: 1px solid (#VAR{acsRubnavSep});]
+}
+.cLogin .logout_link {
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -1,0 +1,4 @@
+<div class="#PINCEAU{login}">
+[(#SESSION{id_auteur}|?{' '})<INCLURE{fond=composants/login/inc-logout}{env}{self}>]
+[(#SESSION{id_auteur}|?{'',' '})<INCLURE{fond=composants/login/inc-login}{env}{self}>]
+</div>

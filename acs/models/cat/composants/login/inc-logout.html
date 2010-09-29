@@ -1,0 +1,9 @@
+<div class="cLogin">
+<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}>[
+<a href="#URL_AUTEUR">(#LOGO_AUTEUR|left|image_reduire{50,50})</a>]
+<div class="menu-titre"><:spip:icone_informations_personnelles:></div>
+[ <a href="#URL_AUTEUR" class="texte">(#NOM)</a>]
+</BOUCLE_auteur>
+<br />
+<div class="logout_link right"><a href="[(#URL_LOGOUT)]" class="nav" rel="nofollow"><:icone_deconnecter:></a></div>
+</div>
