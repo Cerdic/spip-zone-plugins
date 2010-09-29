@@ -224,8 +224,13 @@ function exec_traiter_office () {
 
 		}
 		
-		if ($terminaison == "html") $nom_html = $nom_dest;
-		else @exec("unoconv --format=html $nom_dest");
+		if ($terminaison == "html") {
+			$nom_html = $nom_dest;
+		}
+		else {
+			exec("soffice");			
+			exec("unoconv --format=html $nom_dest");
+		}
 		
 		
 		if (file_exists($nom_html)) {
