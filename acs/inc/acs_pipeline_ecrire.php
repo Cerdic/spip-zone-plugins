@@ -9,6 +9,9 @@
 // Permet d'afficher l'interface d'admin d'ACS dans toutes les langues disponibles pour spip.
 $GLOBALS['meta']['langues_proposees'] = $GLOBALS['meta']['langues_multilingue'];
 
+// On lit la release avec la fonction SPIP
+define('ACS_RELEASE', version_svn_courante(_DIR_ACS));
+
 function acs_ajouterBouton($boutons_admin) {
 	// si on est admin SPIP ET admin ACS
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
