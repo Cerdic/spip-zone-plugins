@@ -153,6 +153,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'doc_jeux' => 'Allegemeine Dokumentation',
 'doc_scores' => 'Dokumentation der Ergebnisse',
+'modules_dispos' => 'Modules disponibles',
+'options' => 'Options',
 
 // Corbeille
   'jeux_corbeille_tous' => "@nb@ Spiele im M&uuml;lleimer",
