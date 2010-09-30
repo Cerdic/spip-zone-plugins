@@ -80,7 +80,7 @@ function crayons_json_encode($v) {
 
 // http://doc.spip.org/@json_export
 function crayons_json_export($var) {
-	$var = json_encode($var);
+	$var = crayons_json_encode($var);
 
 	// flag indiquant qu'on est en iframe et qu'il faut proteger nos
 	// donnees dans un <textarea> ; attention $_FILES a ete vide par array_pop
