@@ -52,8 +52,8 @@ function abomailman_traiter_abonnement($id_liste,$abonnement){
 //* Envoi de mail via facteur
 function abomailman_mail($nom, $email, $to_email,$liste_email, $sujet="", $body="", $html="", $headers="") {
 	// si $to_mail est plein, c'est Sympa, s'il est vide c'est Mailman et il faut alors utiliser $liste_email
-	if (!$to_mail)
-		$to_mail = $liste_email;
+	if (!$to_email)
+		$to_email = $liste_email;
 	$envoyer_mail = charger_fonction('envoyer_mail','inc/');
 	if($envoyer_mail($to_email, $sujet, $body, $email, $headers))
 		return true;
