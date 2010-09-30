@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'TB' => 'To.',
 	
 	'n_row' => '@n@ enregistrements',
+	'article_manquant' => 'article manquant',
 	
 	't_inventaires' => '<br />Tableaux des inventaires :',
 	'audit_site' => 'Audit de site',
