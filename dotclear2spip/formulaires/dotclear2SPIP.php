@@ -31,6 +31,15 @@ function formulaires_dotclear2spip_traiter(){
 		dot_migrer_blog($blog);
 			
 	}
+	
+	return array('message_ok'=>
+		"La migration s'est bien effectuée. Il vous reste :
+		<ul>
+			<li>A regarder le fichier tmp/prive_dot_attention.log</li> pour vérifier s'il n'y pas encore des réglages à faire à la main (notamment pour les documents).</li>
+			<li><a href='".generer_url_ecrire('admin_plugin')."'>A désactiver ce plugin</a>, voire à le supprimer du répertoire FTP</li>
+		</ul>"
+	
+	);
 }
 
 
