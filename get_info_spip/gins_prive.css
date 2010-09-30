@@ -75,3 +75,8 @@
 	margin:0;
 	padding:0;
 }
+#page_gins table td span.missing {
+	font-weight:500;
+	font-style:italic;
+	color:grey;
+}

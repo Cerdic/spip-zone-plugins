@@ -7,8 +7,6 @@
 	Si autorisé, affiche la liste des documents liés
 	et l'article qui référence ce document.
 	
-	Méfi! Ne référence pas les liens dans les autres articles.
-
 -->]
 <html>
 [<!-- (#REM)
@@ -36,11 +34,14 @@
 			<th class="left id" title="id_article">#id</th>
 			<th><:gins:titre:></th>
 		</tr>
-	<BOUCLE_documents(DOCUMENTS documents_liens){mode=document}{objet=article}{par fichier}{pagination #ENV{pagination, 25}}>
+	<BOUCLE_documents(documents_liens documents){objet=article}{par id_document}{pagination #ENV{pagination, 25}}>
 	<tr>
 		<td class="left id" title="id_document #ID_DOCUMENT">##ID_DOCUMENT</td>
 		<td>#FICHIER</td>
-		<BOUCLE_a(ARTICLES){id_article=#ID_OBJET}{0,1}><td class="left id" title="id_article #ID_ARTICLE">##ID_ARTICLE</td><td>#TITRE</td></BOUCLE_a>
+		<td class="left id" title="id_article #ID_OBJET">##ID_OBJET</td>
+		<td><B_a><BOUCLE_a(documents_liens articles){objet=article}{articles.id_article=#ID_OBJET}{0,1}>
+		#TITRE</BOUCLE_a></B_a><span class="missing">article manquant</span><//B_a>
+		</td>
 	</tr>
 </BOUCLE_documents>
 	</table>
