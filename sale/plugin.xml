@@ -2,7 +2,7 @@
 	<prefix>sale</prefix>
 	<nom>Sale</nom>
 	<categorie>outil</categorie>
-	<auteur> Ma&iuml;eul ROUQUETTE d'apr&egrave;s la contribution "Boutons M&eacute;mo" </auteur>
+	<auteur> Ma&iuml;eul ROUQUETTE d'apr&egrave;s le Travail de James ("Klike")</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description> Proposer une fonction sale() qui permet de passer du (X)HTML vers du SPIP</description>
