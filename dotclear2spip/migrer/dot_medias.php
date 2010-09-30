@@ -67,7 +67,8 @@ function dot_ajouter_medias($medias,$post_id){
 			
 		}
 		else{
-			spip_log("Attention : document du post $post_id pas transvasé (difficile)","dot_attention");
+			$titre_post 	= sql_getfetsel('post_title','dc_post','`post_id`='.$post_id);
+			spip_log("Attention : document de « $titre_post » ($post_id) pas transvasé (difficile)","dot_attention");
 		}
 	}
 	return $numerotation;
