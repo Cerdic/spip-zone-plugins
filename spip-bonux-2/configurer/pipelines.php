@@ -307,7 +307,7 @@ function balise_CONFIG($p) {
 }
 }
 
-if (!test_plugin_actif('cfg')){
+if (!defined('_DIR_PLUGIN_CFG')){
 	include_spip('inc/config');
 	if (!function_exists('lire_config')){
 		function lire_config($cfg='', $def=null, $unserialize=true) {
