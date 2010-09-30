@@ -1,3 +1,4 @@
+#CACHE{0}
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_auteur,1
@@ -10,7 +11,8 @@
 	<thead>
 		<tr class='first_row'>
 			<th class="logo"></th>
-			<th class='nom'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+			<th class='pseudo'>[(#TRI{pseudo,<:info_pseudo:>,ajax})]</th>
+			<th class="nom">[(#TRI{nom,<:info_nom:>,ajax})]</th>
 			<th class='action'></th>
 		</tr>
 	</thead>
@@ -18,7 +20,8 @@
 	<BOUCLE_liste_orga(CONTACTS){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}|image_reduire{20,26})]</a>
-			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
+			<td class='pseudo'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
+			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#organisations:NOM</a></td>
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_contact:>})],
