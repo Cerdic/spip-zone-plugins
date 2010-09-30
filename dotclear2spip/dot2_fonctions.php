@@ -11,6 +11,7 @@ function dot_purifier_spip(){
 
 
 function dot_migrer_blog($blog_id){
+	include_spip('sale_fonctions');
 	include_spip('migrer/dot_category');
 	include_spip('migrer/dot_comments');
 	include_spip('migrer/dot_contents');

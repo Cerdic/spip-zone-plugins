@@ -11,9 +11,6 @@
 
     <description> Un plugin pour importer du contenu d'une bdd Dotclear 2 dans un site SPIP.</description>
       <prefix>dot2</prefix>
-
-
-    <fonctions>dot2_fonctions.php</fonctions>
     <necessite id="crud" />
     <necessite id="sale" />
     <necessite id="SPIP" version="[2.1;)" />
