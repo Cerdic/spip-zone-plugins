@@ -57,8 +57,9 @@ function spipdf_first_clean($texte) {
 // generation de pdf
 function spipdf_affichage_final($flux) {
 
-    // on matche les pages qui contiennent la déclaration <page de HTML2PDF
-    if(strpos($flux, '<page')!==false) {
+    // l'aticle doit commencer par <spipdf nom="pdf_article_#ID_ARTICLE" />
+    // on matche les pages qui contiennent la déclaration <spipdf
+    if(strpos($flux, '<spipdf')!==false) {
 
         // supprimer barre admin Non fonctionnel
         if(defined('SPIPDF_MASQUE_FORMULAIRE_ADMIN')) {
@@ -113,6 +114,31 @@ function spipdf_affichage_final($flux) {
         // gestion de cractères soéciaux et de charset
         $flux = spipdf_first_clean($flux);
 
+        // titre du fichier récupéré dans le squelette
+        $pattern_spipdf = '<spipdf\snom="(.*)"\s\/>';
+        preg_match('/'.$pattern_spipdf.'/iUms', $flux, $match_titre);
+
+        // on a un titre
+        if(!empty($match_titre[1])) {
+            $titre_pdf = $match_titre[1];
+        } else { // sinon, soit le titre du fichier, soit un uniqid (ancien fonctionnement)
+
+            if(!empty($GLOBALS['contexte']['id_article'])) {
+                $id_article = $GLOBALS['contexte']['id_article'];
+            } else {
+                $id_article = uniqid();
+            }
+            // pattern de remplacement
+            if(defined('SPIPDF_TITRE_FICHIER')) {
+                $titre_pdf = sprintf(SPIPDF_TITRE_FICHIER, $id_article);
+            } else {
+                $titre_pdf = 'Article-'.$id_article.'.pdf';
+            }
+        }
+
+        //  supprimer spipdf
+        $flux = preg_replace('/'.$pattern_spipdf.'/iUms', '', $flux);
+
         // appel de la classe HTML2pdf
         require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
         try
@@ -123,20 +149,10 @@ function spipdf_affichage_final($flux) {
             if(defined('SPIPDF_DEBUG_HTML2PDF')) {
                 $html2pdf->setModeDebug();
             }
-
-            // identifiant de l'article
-            $id_article = $GLOBALS['contexte']['id_article'];
-
-            // titre du fichier avec pattern ou sans
-            if(defined('SPIPDF_TITRE_FICHIER')) {
-                $titre_pdf = sprintf(SPIPDF_TITRE_FICHIER, $id_article);
-            } else {
-                $titre_pdf = 'Article-'.$id_article.'.pdf';
-            }
-
             // génère et renvoi la page au browser
             $html2pdf->Output($titre_pdf);
-            return null; // stoppe le flux d'execution
+            // stoppe le flux d'execution
+            return null;
         }
         catch(HTML2PDF_exception $e) { echo $e; }
     }
