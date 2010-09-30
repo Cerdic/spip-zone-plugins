@@ -35,7 +35,8 @@ class CacheBackend_memcache extends CacheBackend {
 		// maybe_serialize
 		if (is_object($value) OR is_array($value) OR is_null($value))
 			$value = array(serialize($value));
-		$flag = strlen($value) > 16000 ? MEMCACHE_COMPRESSED : 0;
+		$flag = strlen(is_array($value) ? $value[0] : $value) > 16000
+			? MEMCACHE_COMPRESSED : 0;
 		return is_null($ttl)
 			? memcache_set($this->memcache, _CACHE_NAMESPACE.$key, $value)
 			: memcache_set($this->memcache, _CACHE_NAMESPACE.$key, $value, $flag, $ttl);
