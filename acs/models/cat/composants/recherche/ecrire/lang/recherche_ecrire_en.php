@@ -8,6 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'help' => 'Generate "formulaires/recherche.html" form style for active skeleton. Spip search engine must be activated.',
 
 'TitreFond' => 'Title',
-'Input' => 'Input'
+'Input' => 'Input',
+'InputBordColor' => 'Input border',
+'Button' => 'Button'
 );
 ?>

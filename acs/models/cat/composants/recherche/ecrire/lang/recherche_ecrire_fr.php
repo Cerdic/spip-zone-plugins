@@ -8,6 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'help' => 'G&egrave;re le style du formulaire "formulaires/recherche.html" du squelette actif ou du squelette par d&eacute;faut. Le moteur de recherche intégré de spip doit &ecirc;tre actif.',
 
 'TitreFond' => 'Titre',
-'Input' => 'Entr&eacute;e'
+'Input' => 'Entr&eacute;e',
+'InputBordColor' => 'Bord zone d\'entr&eacute;e',
+'Button' => 'Bouton'
 );
 ?>
