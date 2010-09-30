@@ -30,6 +30,7 @@ function dot_corriger_url($src){
 	$src = str_replace('_b.','.',$src);
 	$src = str_replace('_l.','.',$src);
 	$src = str_replace('_t.','.',$src);
+	$src = str_replace('_s.','.',$src);
 	return $src;	
 }
 
@@ -52,7 +53,7 @@ function dot_ajouter_medias($medias,$post_id){
 						'titre'	=>$media_dot['media_title'],
 						'date'	=>$media_dot['media_upddt'],
 						'descriptif'=>'DC:'.$media_dot['media_id'],
-						'source'=> realpath(preg_replace('#^/#','',$media['src'])),
+						'source'=> realpath('../'.preg_replace('#^/#','',$media['src'])),
 						'id_document'=>'non',
 						'statut'	=>'publie',
 					));
