@@ -54,7 +54,7 @@ function miroirsyndic_creer_article($t) {
 				'titre'=>$t['titre'],
 				'nom_site'=>$t['titre'],
 				'url_site'=>$t['url'],
-				'statut'=>'publie',
+				'statut'=>'prop',
 				'date'=>$t['date'],
 				'lang' => $lang,
 		));
@@ -157,10 +157,13 @@ function miroirsyndic_miroir($force_refresh = false) {
 				miroirsyndic_regler_rubrique($t);
 				$creation = true;
 			}
-	
+
+			$id_rubrique = sql_getfetsel("id_rubrique", "spip_articles", "id_article=".$t['id_article']);
+			autoriser_exception('publierdans','rubrique',$id_rubrique); // se donner temporairement le droit
 			autoriser_exception('modifier','article',$t['id_article']); // se donner temporairement le droit
 			$peupler_article($t['id_article'],$t);
 			autoriser_exception('modifier','article',$t['id_article'],false); // revenir a la normale
+			autoriser_exception('publierdans','rubrique',$id_rubrique,false);
 		}
 
 		spip_log($q, 'miroirsyndic');
