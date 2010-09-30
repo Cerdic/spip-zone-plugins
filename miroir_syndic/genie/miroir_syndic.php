@@ -96,7 +96,7 @@ function miroirsyndic_regler_rubrique($t) {
 
 // Cette fonction regarde les spip_syndic_articles modifies recemment
 // et les reporte dans spip_articles ; a appeler avec cron() ou autre...
-function miroirsyndic_miroir() {
+function miroirsyndic_miroir($force_refresh = false) {
 	include_spip('inc/lang');
 	include_spip('inc/filtres');
 	include_spip('base/abstract_sql');
@@ -128,15 +128,17 @@ function miroirsyndic_miroir() {
 		ON s.id_syndic = src.id_syndic",
 		// WHERE
 		"src.statut='publie'
-		AND s.statut='publie'
-		AND (a.id_article IS NULL OR s.maj > a.maj)"
+		AND s.statut='publie'"
+		. ($force_refresh?'':' AND (a.id_article IS NULL OR s.maj > a.maj)')
 		. (defined('_MIROIR_ID_SYNDIC')?" AND ".sql_in('src.id_syndic',explode(',',_MIROIR_ID_SYNDIC)):''),
 		'',
 		// ORDER BY
 		'maj DESC LIMIT 200'
 		);
-	spip_log('miroir:'.sql_count($s)." articles syndiques a mettre a jour", 'miroirsyndic');
 
+	$peupler_article = charger_fonction('peupler_article','miroir');
+	spip_log('miroir:'.sql_count($s)." articles syndiques a mettre a jour (fonction $peupler_article)", 'miroirsyndic');
+	
 	while ($t = sql_fetch($s)) {
 		$nombre ++;
 		spip_log('miroir:'.var_export($t,1), 'miroirsyndic');
@@ -157,14 +159,7 @@ function miroirsyndic_miroir() {
 			}
 	
 			autoriser_exception('modifier','article',$t['id_article']); // se donner temporairement le droit
-			articles_set($t['id_article'],array(
-				'titre'=>$t['titre'],
-				'date'=>$t['date'],
-				_MIROIR_CHAMP_LESAUTEURS=>$t['lesauteurs'],
-				_MIROIR_CHAMP_DESCRIPTIF=>$t['descriptif'],
-				_MIROIR_CHAMP_TAGS=>$t['tags'],
-				)
-			);
+			$peupler_article($t['id_article'],$t);
 			autoriser_exception('modifier','article',$t['id_article'],false); // revenir a la normale
 		}
 
