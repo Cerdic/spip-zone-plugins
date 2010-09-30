@@ -54,6 +54,11 @@
 		<url>abomailmans_tous</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
 		<args></args>
 	</bouton>
+	<bouton id='abomailmans_tous' parent="bando_edition">
+		<icone>images/abomailmans-16.png</icone>
+		<titre>abomailmans:bouton_listes_diffusion</titre>
+		<url>abomailmans_tous</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+	</bouton>
 	
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="facteur" version="[1.1;]" />
