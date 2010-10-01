@@ -26,11 +26,7 @@ function dot_id_media_spip($id){
 }
 function dot_corriger_url($src){
 	$src = str_replace('/.','/',$src);
-	$src = str_replace('_m.','.',$src);
-	$src = str_replace('_b.','.',$src);
-	$src = str_replace('_l.','.',$src);
-	$src = str_replace('_t.','.',$src);
-	$src = str_replace('_s.','.',$src);
+	$src = preg_replace(',_\w\.,','.',$src);
 	return $src;	
 }
 
