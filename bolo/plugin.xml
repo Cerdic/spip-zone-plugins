@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.1</version>
+	<version>0.2</version>
 	
 	<nom><multi>[fr]Bolo - Outils pour cr&eacute;er du faux texte[en]Bolo - Tools to create fake text</multi></nom>
 	
@@ -16,7 +16,7 @@
 	
 	<lien>http://www.spip-contrib.net/Balise-BOLO</lien>
 
-	<description><multi>[fr]Ce plugin permet d'ins&eacute;rer tr&egrave;s facilement du faux texte dans les articles ou dans les squelettes, en sp&eacute;cifiant le nombre de caract&egrave;res souhait&eacute;s. La version actuelle permet d'ins&eacute;rer du texte latin; une future version permettra d'ins&eacute;rer du texte latin ou fran&ccedil;ais accentu&eacute;.[en]This plugin allows to easily insert fake text with an ajustable number of characters, into SPIP articles or into SPIP templates. This version inserts text in latin language, a future version will offer the choice between latin or French language texts.</multi></description>
+	<description><multi>[fr]Ce plugin permet d'ins&eacute;rer tr&egrave;s facilement du faux texte dans les articles ou dans les squelettes, en sp&eacute;cifiant le nombre de caract&egrave;res souhait&eacute;s.<br /><br />On l'emploie soit directement dans les squelettes en utilisant le code <code>[(#BOLO|couper{800})]</code>, soit dans les champs #TEXTE des articles gr&acirc;ce au mod&egrave;le <code><bolo800></code>.<br /><br />La version actuelle permet seulement d'ins&eacute;rer du texte latin; une future version permettra d'ins&eacute;rer du texte latin ou fran&ccedil;ais accentu&eacute;.[en]This plugin allows to easily insert fake text with an ajustable number of characters, into SPIP articles or into SPIP templates.<br /><br />It can be used directy in templates  via the code <code>[(#BOLO|couper{800})]</code> or in the #TEXT fields of the articles via this code : <code><bolo800></code>.<br /><br />This version inserts text in latin language only, a future version will offer the choice between latin or French language texts.</multi></description>
 
 	<fonctions>bolo_fonctions.php</fonctions>
 	
