@@ -96,37 +96,6 @@ function spipdf_nettoyer_html($html) {
 	return $html;
 }
 
-// generation de pdf
-function spipdf_affichage_final($flux) {
-
-	// l'aticle doit commencer par <spipdf nom="pdf_article_#ID_ARTICLE" />
-	// on matche les pages qui contiennent la déclaration <spipdf
-	if(strpos($flux, '<spipdf')!==false) {
-
-
-
-		// appel de la classe HTML2pdf
-		require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
-		try
-		{
-			$html2pdf = new HTML2PDF('P','A4','fr', false, 'ISO-8859-15');
-			$html2pdf->setDefaultFont('Arial');
-			$html2pdf->writeHTML($flux);
-			if(defined('SPIPDF_DEBUG_HTML2PDF')) {
-				$html2pdf->setModeDebug();
-			}
-			// génère et renvoi la page au browser
-			$html2pdf->Output($titre_pdf);
-			// stoppe le flux d'execution
-			return null;
-		}
-		catch(HTML2PDF_exception $e) { echo $e; }
-	}
-
-	return $flux;
-
-}
-
 function spipdf_recuperer_fond($flux) {
 	// Le squelette est-il appelé par spipdf.html
 	if ($flux['args']['contexte']['html2pdf'] == 'oui') {
