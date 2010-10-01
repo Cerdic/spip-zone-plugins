@@ -54,7 +54,7 @@
 		<url>abomailmans_tous</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
 		<args></args>
 	</bouton>
-	<bouton id='abomailmans_tous' parent="bando_edition">
+	<bouton id='abomailmans_bando' parent="bando_edition">
 		<icone>images/abomailmans-16.png</icone>
 		<titre>abomailmans:bouton_listes_diffusion</titre>
 		<url>abomailmans_tous</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
