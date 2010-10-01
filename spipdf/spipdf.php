@@ -104,7 +104,7 @@ function spipdf_recuperer_fond($flux) {
 		require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
 		try
 		{
-			$html2pdf = new HTML2PDF('P','A4','fr', true, 'UTF-8');
+			$html2pdf = new HTML2PDF('P','A4',$flux['args']['contexte']['lang'], true, 'UTF-8');
 			$html2pdf->setDefaultFont('FreeSans');
 			$html2pdf->writeHTML($html);
 			$flux['data']['texte'] = $html2pdf->Output('', true);
