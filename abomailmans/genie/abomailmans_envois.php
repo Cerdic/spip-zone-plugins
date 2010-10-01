@@ -78,11 +78,26 @@ function liste_a_jour($id_liste) {
 	$body = array(
 	'html'=>$fond,
 	); 
-		//Si la page renvoie un contenu
-		if (strlen($fond) > 10) {
-		if (abomailman_mail($nom_site, $email_webmaster, "", $email_receipt, $sujet,$body, true, $charset)) {
-		spip_log("envoi ok = $url_genere tous les $periodicite jours sujet =".$sujet,"abomailmans");
-		}
+	
+	//Si la page renvoie un contenu
+	if (strlen($fond) > 10) {
+				
+		// email denvoi depuis config facteur
+		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+			  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
+				$from_email = $GLOBALS['meta']['facteur_adresse_envoi_email'];
+			else
+				$from_email = $email_webmaster;
+		// nom denvoi depuis config facteur
+		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+			  AND $GLOBALS['meta']['facteur_adresse_envoi_nom'])
+				$from_nom = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
+			else
+				$from_nom = $nom_site;
+				
+		if (abomailman_mail($from_nom, $from_email, "", $email_receipt, $sujet,$body, true, $charset)) {
+			spip_log("envoi ok = $url_genere tous les $periodicite jours sujet =".$sujet,"abomailmans");
+			}
 	}
 	else spip_log("maintenant=".date('Y-m-d H:i:s', time())." date demande = ".$query['date']." non envoye =$url_genere : rien de neuf depuis $periodicite jours","abomailmans"); 
 	

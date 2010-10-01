@@ -83,8 +83,22 @@ function formulaires_abomailman_envoi_liste_traiter_dist(){
 	'html'=>$fond,
 	);
 	
-	if (strlen($fond) > 10) {
-	if (abomailman_mail($nom_site, $email_webmaster, "", $email_receipt, $sujet,$body, true, $charset)) {
+	if (strlen($fond) > 10) {		
+		
+	// email denvoi depuis config facteur
+	if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+		  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
+			$from_email = $GLOBALS['meta']['facteur_adresse_envoi_email'];
+		else
+			$from_email = $email_webmaster;
+	// nom denvoi depuis config facteur
+	if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+		  AND $GLOBALS['meta']['facteur_adresse_envoi_nom'])
+			$from_nom = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
+		else
+			$from_nom = $nom_site;
+			
+	if (abomailman_mail($from_nom, $from_email, "", $email_receipt, $sujet,$body, true, $charset)) {
 	$message = _T('abomailmans:email_envoye',array('liste'=>$email_receipt));
 	} else $message = _T('pass_erreur_probleme_technique');
 	} else $message = _T('abomailmans:contenu_insuffisant');
