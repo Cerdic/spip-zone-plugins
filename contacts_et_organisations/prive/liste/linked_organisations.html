@@ -1,4 +1,4 @@
-[(#REM) Tableau complet des organisations, affiché sur la page ?exec=organisations ]
+[(#REM) Tableau simplifié des organisations, affiché sur la page ?exec=auteurs_info, permettant de visualiser les organisations auxquelles sont liéss le contact ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_auteur,1
@@ -22,9 +22,9 @@
 			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
-					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_organisation:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_organisation,[(#ID_CONTACT)/#ID_ORGANISATION],[(#ENV{retour,#SELF})]})],
-					ajax,<:contacts:confirmer_supprimer_organisation:>})],
+					[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_organisation:>})],
+					[(#URL_ACTION_AUTEUR{delier_contact,[(#ID_CONTACT)/#ID_ORGANISATION],[(#ENV{retour,#SELF})]})],
+					ajax,<:contacts:confirmer_delier_organisation:>})],
 				#ID_AUTEUR
 			})]</td>
 		</tr>

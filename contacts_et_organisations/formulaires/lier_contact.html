@@ -21,10 +21,9 @@
 		<tbody>
 	<BOUCLE_resultats(CONTACTS){recherche #ENV{recherche_contact}}{par points}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='nom'>
-			[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
-			</td>
-			<td class='action'>
+			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}|image_reduire{20,26})]</a>
+			<td class="nom"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#PRENOM) ]#NOM</a></td>
+			<td class="action">
 			[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/ajouter-16.png}|balise_img{<:contacts:lier_ce_contact:>})],
