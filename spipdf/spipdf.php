@@ -29,27 +29,26 @@ function spipdf_first_clean($texte) {
 		
 		$trans = array_flip($trans);
 		$trans["<br />\n"] = '<BR>'; // Pour éviter que le \n ne se tranforme en espace dans les <DIV class=spip_code> (TT, tag SPIP : code)
-		$trans['&#176;'] = '°';
-		$trans["&#339;"] = 'oe';
-		$trans["&#8211;"] = '-';
-		$trans["&#8216;"] = '\'';
-		$trans["&#8217;"] = '\'';		
-		$trans["&#8220;"] = '"';
-		$trans["&#8221;"] = '"';
-		$trans["&#8230;"] = '...';
-		$trans["&#8364;"] = 'Euros';
-		//$trans["&ucirc;"] = "û";
-		$trans['->'] = '-»';
-		$trans['<-'] = '«-';
+		// $trans['&#176;'] = '°';
+		// $trans["&#339;"] = 'oe';
+		// $trans["&#8211;"] = '-';
+		// $trans["&#8216;"] = '\'';
+		// $trans["&#8217;"] = '\'';
+		// $trans["&#8220;"] = '"';
+		// $trans["&#8221;"] = '"';
+		// $trans["&#8230;"] = '...';
+		// $trans["&#8364;"] = 'Euros';
+		// $trans["&ucirc;"] = "û";
+		// $trans['->'] = '-»';
+		// $trans['<-'] = '«-';
 		$trans['&nbsp;'] = ' ';
-		$trans['&mdash;'] = '-';
+		// $trans['&mdash;'] = '-';
 
 		// certains titles font paniquer l'analyse
 		$texte = preg_replace(',title=".*",msU', 'title=""', $texte);
 
-		$texte = unicode2charset(charset2unicode($texte), 'ISO-8859-1'); // repasser tout dans un charset acceptable par export PDF
-		//$texte = utf8_decode($texte); 
 		$texte = strtr($texte, $trans);
+		$texte = unicode2charset(charset2unicode($texte), 'utf-8'); // repasser tout dans un charset acceptable par export PDF
 
 		return $texte;
 }
@@ -105,8 +104,8 @@ function spipdf_recuperer_fond($flux) {
 		require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
 		try
 		{
-			$html2pdf = new HTML2PDF('P','A4','fr', false, 'ISO-8859-15');
-			$html2pdf->setDefaultFont('Arial');
+			$html2pdf = new HTML2PDF('P','A4','fr', true, 'UTF-8');
+			$html2pdf->setDefaultFont('FreeSans');
 			$html2pdf->writeHTML($html);
 			$flux['data']['texte'] = $html2pdf->Output('', true);
 		}
