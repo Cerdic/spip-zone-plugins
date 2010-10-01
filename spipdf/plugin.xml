@@ -1,22 +1,22 @@
 <plugin>
-    <nom>SpiPDF</nom>
-    <auteur>
-        Yves Tannier [contact->yvestanSANSPAM@gmail.com] / [grafactory.net->http://www.grafactory.net]
-    </auteur>
-    <icon>img_pack/spipdf.png</icon>
-    <licence>(c) 2010 GPL</licence>
-    <lien>http://www.grafactory.net/blog/tag/spip</lien>
-    <version>0.1</version>
-    <etat>test</etat>
-    <description>
-        Conversion d'un article au format PDF par le biais d'un simple squelette codé en HTML 4.01.
-        Utilise la librairie [html2pdf->http://www.html2pdf.fr]
-    </description>
-    <options>spipdf_options.php</options>
-    <prefix>spipdf</prefix>
+	<nom>SpiPDF</nom>
+	<auteur>
+		Yves Tannier [contact->yvestanSANSPAM@gmail.com] / [grafactory.net->http://www.grafactory.net]
+	</auteur>
+	<icon>img_pack/spipdf.png</icon>
+	<licence>(c) 2010 GPL</licence>
+	<lien>http://www.grafactory.net/blog/tag/spip</lien>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>
+		Conversion d'un article au format PDF par le biais d'un simple squelette cod&eacute; en HTML 4.01.<br />
+		Utilise la librairie [html2pdf->http://www.html2pdf.fr]<br />
+		ATTENTION : n&eacute;cessite PHP 5 minimum
+	</description>
+	<prefix>spipdf</prefix>
 	<necessite id="SPIP" version='[2.0.0;]' />
-    <pipeline>
-        <nom>affichage_final</nom>
-        <inclure>spipdf.php</inclure>
-    </pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>spipdf.php</inclure>
+	</pipeline>
 </plugin>
