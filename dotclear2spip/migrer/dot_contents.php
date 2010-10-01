@@ -60,6 +60,7 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 			'id_rubrique'	=> $id_rubrique,
 			'descriptif'			=> $descriptif,
 			'texte'			=> $texte,
+			'ps'			=> 'DC:'.$r['post_id'],
 			'date'			=> $r['post_dt'],
 			'statut'		=> $statut,
 			'lang'			=> $r['post_lang'],
@@ -145,7 +146,31 @@ function dot2_migrer_mots_article($id_post,$id_article,$id_groupe=''){
 	
 	return $id_groupe;
 }
+function remplacer_liens_internes_articles(){
+	$req = sql_select('id_article,texte,descriptif,chapo','spip_articles');
+;
+	while ($art = sql_fetch($req)){
+		spip_log($id_article,'liens');
+		$texte = remplacer_liens_internes($art['texte']);
+		$chapo = remplacer_liens_internes($art['chapo']);	
+		$descriptif = remplacer_liens_internes($art['descriptif']);
+		sql_updateq('spip_articles',array('texte'=>$texte,'descriptif'=>$descriptif,'chapo'=>$chapo),'`id_article`='.$art['id_article']);	
+	}
+}
 
+function remplacer_liens_internes($texte){
+
+	
+	preg_match_all('#->/index.php\?post/([(\S )]*)]#',$texte,$match);
+
+	foreach ($match[1] as $lien){
+
+		$id_post = sql_getfetsel('post_id','dc_post','`post_url`='.sql_quote(urldecode($lien)));
+		$id_article = sql_getfetsel('id_article','spip_articles','`ps`='.sql_quote('DC:'.$id_post));
+		$texte = str_replace('/index.php?post/'.$lien,'art'.$id_article,$texte);	
+	}
+	return $texte;
+}
 
 
 

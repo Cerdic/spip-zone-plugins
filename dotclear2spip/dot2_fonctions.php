@@ -4,6 +4,7 @@
 
 function dot_purifier_spip(){
 	sql_updateq('spip_rubriques',array('descriptif'=>''));	
+	sql_updateq('spip_articles',array('PS'=>''));
 }
 
 
@@ -26,6 +27,7 @@ function dot_migrer_blog($blog_id){
 	dot2_migrer_rubriques($blog_id);
 	dot2_migrer_articles($blog_id,$rubrique_defaut,$groupe_defaut);
 	dot2_migrer_sites($blog_id,$rubrique_defaut);
+	remplacer_liens_internes_articles();
 	dot_purifier_spip();
 	spip_log("#### fin migration $blog_id ####",'dot2');
 		
