@@ -1,4 +1,6 @@
+#HTTP_HEADER{Content-Type: application/pdf}
 <BOUCLE_principale(ARTICLES) {id_article}>
+<spipdf nom="pdf_article_#ID_ARTICLE.pdf" />
 <page backtop="7mm" backbottom="7mm" backleft="10mm" backright="10mm">
 
     [(#REM) Les styles de spip,  il est possible d'utiliser sa propre feuille de style !]
@@ -7,7 +9,6 @@
 
     <style type="text/css">
         /* quelques styles en plus */
-        #spip-admin { font-size: 1px; }
         table { margin-top: 10px; }
         img { margin: 10px; }
         .bloc_simple h2 {
