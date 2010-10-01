@@ -44,6 +44,12 @@ var mediaboxInit = function() {
 	}
 };
 
+/* initialiser maintenant si box_settings est deja la
+ * nb en cas de defer sur le chargement du scipt javascript principal
+ */
+if (typeof(box_settings)!='undefined')
+	(function($){ if(typeof onAjaxLoad == "function") onAjaxLoad(mediaboxInit); $(mediaboxInit); })(jQuery);
+
 ;(function ($) {
 	/*
 	 * overlayClose:	(Boolean:false) Allow click on overlay to close the dialog?

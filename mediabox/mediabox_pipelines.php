@@ -69,6 +69,9 @@ function mediabox_insert_head($flux){
 <script src="'.mediabox_timestamp(find_in_path('javascript/jquery.colorbox.js')).'" type="text/javascript"></script>
 <script src="'.mediabox_timestamp(find_in_path('javascript/spip.mediabox.js')).'" type="text/javascript"></script>';
 
+	/**
+	 * Initialiser la mediabox si jQuery est deja charge, ie on arrive apres
+	 */
 	$flux .='<script type="text/javascript">/* <![CDATA[ */
 var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'false')
 .',sel_g:"'.$config['selecteur_galerie']
