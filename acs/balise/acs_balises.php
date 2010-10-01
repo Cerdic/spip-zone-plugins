@@ -9,6 +9,27 @@
 require_once _DIR_ACS.'lib/composant/composants_ajouter_balises.php';
 composants_ajouter_balises();
 
+function balise_ACS_VERSION($p) {
+  $p->code = 'calcule_balise_acs_version()';
+  $p->statut = 'php';
+  $p->interdire_scripts = false;
+  return $p;
+}
+function calcule_balise_acs_version() {
+	include_spip('inc/acs_version');
+	return acs_version();
+}
+function balise_ACS_RELEASE($p) {
+  $p->code = 'calcule_balise_acs_release()';
+  $p->statut = 'php';
+  $p->interdire_scripts = false;
+  return $p;
+}
+function calcule_balise_acs_release() {
+	include_spip('inc/acs_version');
+	return acs_release();
+}
+
 function balise_PINCEAU($p) {
   $composant = interprete_argument_balise(1,$p);
   $nic = interprete_argument_balise(2,$p);
@@ -58,7 +79,7 @@ function balise_VAR($p) {
 	} else {
 		$p->code = 'meta_recursive($GLOBALS["meta"], '.$var.')';
 		if ($sinon)
-			$p->code = 'sinon('.$p->code.',$sinon)';
+			$p->code = 'sinon('.$p->code.','.$sinon.')';
 		else
 			$p->code = '('.$p->code.')';
 	}
