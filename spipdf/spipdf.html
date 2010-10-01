@@ -1,6 +1,6 @@
-<BOUCLE_principale(ARTICLES) {id_article}>#HTTP_HEADER{Content-Type: application/pdf}#HTTP_HEADER{Content-Disposition: attachment; filename=article_#ID_ARTICLE.pdf}
-#CACHE{24*3600}
-<spipdf />
+#HTTP_HEADER{Content-Type: application/pdf}
+<BOUCLE_principale(ARTICLES) {id_article}>
+<spipdf nom="pdf_article_#ID_ARTICLE.pdf" />
 <page backtop="7mm" backbottom="7mm" backleft="10mm" backright="10mm">
 
     [(#REM) Les styles de spip,  il est possible d'utiliser sa propre feuille de style !]
