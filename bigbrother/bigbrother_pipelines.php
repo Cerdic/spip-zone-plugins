@@ -30,12 +30,16 @@ function bigbrother_affiche_droite($flux){
 
 
 function bigbrother_insert_head($flux){
-	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />';
+	$flux .= '
+<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />
+';
 	return $flux;
 }
 
 function bigbrother_header_prive($flux){
-	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />';
+	$flux .= '
+<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />
+';
 	return $flux;
 }
 
