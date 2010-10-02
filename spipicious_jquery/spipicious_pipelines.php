@@ -29,9 +29,9 @@ function spipicious_insert_head($flux){
 	$selecteur = generer_url_public('selecteurs_tags');
     $tags_link = generer_url_public('inc-tags');
 
-	$flux .= <<<EOS
-		<script type="text/javascript"><!--
-
+	$flux .= 
+<<<EOS
+<script type="text/javascript"><!--
 	(function($) {
 		var spipicious_call = 0;
 		var appliquer_selecteur_spipicious = function() {
