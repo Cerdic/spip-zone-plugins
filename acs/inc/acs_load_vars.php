@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+include_spip('inc/acs_version');
+
 // Initialisation des variables ACS, à l'installation et lors d'une restauration
 function acs_load_vars($from) {
   if (is_readable($from))
