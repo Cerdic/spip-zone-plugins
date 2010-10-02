@@ -9,7 +9,7 @@ Habillage des forums
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
 .forum-chapo .forum-titre { display: block; margin: 0; padding: 0; font-weight: bold; text-decoration: none; color: #VAR{acsFondText,#333}; }
 .forum-chapo small {}
-.forum-texte { margin: 0; padding: 0.5em 1em 0 1em; color: #VAR{acsFondText,#333}; font-size: 0.82em; text-align: justify}
+.forum-texte { margin: 0; padding: 0.5em 1em 0 1em; color: #VAR{acsFondText,#333}; text-align: justify}
 .forum-texte .forum-lien {}
 .forum-texte .forum-repondre-message { margin: 0; padding: 0; text-align: right}
 .forum-item {padding-bottom: 10px;}
@@ -27,63 +27,56 @@ Boite d'un forum : eclaircissement ou assombrissement progressif des bords
 
 Boite de titre d'un forum : mise en couleur selon la profondeur du forum
 
-]ul .forum-chapo { border: none; border-bottom: thin dotted #VAR{acsForumsBord/Color,#B8B8B8}; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em;[ background: (#VAR{acsForumsFond1});]}
+]ul .forum-chapo { border: none; border-bottom: thin dotted #VAR{acsForumsBord/Color,#B8B8B8}; margin: 0; padding: 3px 6px 2px 6px;[ background: (#VAR{acsForumsFond1});]}
 [ul ul .forum-chapo { background: (#VAR{acsForumsFond2});}]
 [ul ul ul .forum-chapo { background: (#VAR{acsForumsFond3});}]
 [ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond4});}]
 [ul ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond5});}]
 [ul ul ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond6});}]
 
-.repondreaufil {
-  font-size: 0.82em;
-}
 
-#ajax_blocForums {
+#ajax_cForums {
   overflow : hidden;
 }
 
-.blocForums {
-  font-size: 0.82em;
+.cForums {
   [border-width: (#VAR{acsForumsBord/Width});]
   [border-style: (#VAR{acsForumsBord/Style});]
   [border-color: (#VAR{acsForumsBord/Color});]
   [background: (#VAR{acsForumsFond});]
 }
-.blocForums .menu-titre {
+.cForums .bloc-title {
   text-align : center;
-  font-weight: bold;
   [background: (#VAR{acsForumsTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsForumsTitreFondImage}})") repeat top left];]
 }
-.blocForums .menu-item {
+.cForums .bloc-title div {
+  font-weight: bold;
+}
+.cForums .bloc-title .pagination {
+  [border-top: 1px solid (#VAR{acsRubnavSep});]
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.cForums .menu-item {
   [background: (#VAR{acsForumsFond});]
   [border-top: 1px solid (#VAR{acsRubnavSep});]
   text-align: #LANG_LEFT;
 }
-.blocForums .menu-item a {
+.cForums .menu-item a {
   display: block;
   width: 100%;
 }
-.blocForums .menu-item .date-comment {
-  font-size: 0.65em;
+.cForums .menu-item .date-comment {
   vertical-align: texttop;
   color: #VAR{acsFondText};
 }
-.blocForums .menu-item .message {
+.cForums .menu-item .message {
   padding-left: 5px;
   padding-right: 5px;
   overflow: hidden;
 }
-[.blocForums .menu-item:hover, .blocForums .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
-.blocForums .pagination {
-  [background: (#VAR{acsForumsTitreFond});]
-  [border-top: 1px solid (#VAR{acsRubnavSep});]
-  text-align: center;
-  margin: 0;
-  margin-left: 5px;
-  margin-right: 5px;
-  font-size: 0.65em;
-}
-
+[.cForums .menu-item:hover, .cForums .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
 
 [(#REM) page forum repondre ]
 .formulaire_forum {

@@ -1,9 +1,32 @@
-#CACHE{0}
-[(#REM) Paramètres communs à toutes les pages ]
+#CACHE{0}[(#REM) 
+
+Paramètres communs à toutes les pages - valeurs par défaut heritees par les composants
+
+ * taille typo
+ * Base       100%
+ * -------------------------------------
+ * 20px       1.27em
+ * 19px       1.21em
+ * 18px       1.15em
+ * 17px       1.09em
+ * 16px       1.03em
+ * 15px       0.96em
+ * 14px       0.88em
+ * 13px       0.82em
+ * 12px       0.77em
+ * 11px       0.71em
+ * 10px       0.65em
+ *  9px       0.59em
+ * Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE
+ 
+La definition fontsize ci-dessous est un hack : Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS
+
+]html { font-size: 100%; }
 body {
   margin : 0;
   padding: 0;
-  font: [(#VAR{acsFondFontSize,1em})][ (#VAR{acsFondFont,Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'})][, (#VAR{acsFondFontFamily,sans-serif})];[(#REM) exemples : 
+  font-size: #VAR{acsFondPoesieFontSize, 1.05em};
+  font-family: [(#VAR{acsFondFont,Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'}),][ (#VAR{acsFondFontFamily,sans-serif})];
     font: 1.5em Edwardian Script ITC, Monotype Corsiva, URW Chancery L, French Script MT, Comic Sans MS, Cursive;
     font: 1em Verdana, 'Trebuchet MS', Arial, 'Lucida Sans', serif;]
   [background: (#VAR{acsFondColor})[ url('[(#ACS_CHEMIN)]trame/(#VAR{acsFondImage})') repeat];]
@@ -19,16 +42,231 @@ table {border-collapse: collapse;}
 [a:link, a:visited {text-decoration: none; color: (#VAR{acsFondLink});}]
 [a:hover {color: (#VAR{acsFondLinkHover});}]
 
-[(#REM) couleur du lien "article refusé" des articles refusés ]
-a.refus {
+[(#REM) couleur du lien "article refusé" des articles refusés 
+]a.refus {
   color: red;
 }
 a.refus:hover {
   color: orange;
 }
-.nav, .pagination, .notes {
-  font-size: #VAR{acsFondNavFontSize, 0.65em};
+
+[(#REM)
+
+***** Styles globaux herites par les composants *****
+
+].cat .right {
+  text-align: #LANG_RIGHT;
 }
-div.spip_poesie {
-  font-size: 140%;
+[.cat .spacer {
+  height: (#VAR{acsFondSpacer});
+  width: #VAR{acsFondSpacer};
+}]
+.cat br.nettoyeur {
+  clear : both;
+  height: 0;
+  line-height: 0;
 }
+[(#REM)
+
+***** Tailles de fontes *****
+
+tsize : titres
+stsize  sous-titres
+bsize : blocs - composants
+nsize : petits elements de navigation
+
+].tsize {
+  font-size: #VAR{acsFondTitleSize, 1.15em};
+}
+.stsize {
+  font-size: #VAR{acsFondSTSize, 1.09em};
+}
+.bsize {
+  font-size: #VAR{acsFondBlocSize, 0.82em};
+}
+.nsize, .pagination {
+  font-size: #VAR{acsFondNavSize, 0.65em};
+}
+[(#REM)
+
+***** Traductions (drapeaux) *****
+
+]div#traductions {
+  position: absolute;
+  float: #LANG_RIGHT;
+  text-align:#LANG_RIGHT;
+  top: 5px;
+  #LANG_RIGHT: 5px;
+  line-height:11px;
+  z-index: 200;
+}
+#traductions .lang_button {
+  margin: 0;
+  padding: 0;
+  padding-left: 2px;
+}
+#traductions .lang {
+  background: #dfdfdf;
+  opacity:0.5;
+  -moz-opacity:0.5;
+  filter:alpha(opacity=50);
+}
+#traductions .selected_lang {
+  background: #dfdfdf;
+  /*border: 1px inset green;*/
+}
+#traductions .lang:hover {
+  opacity:0.7;
+  -moz-opacity:0.7;
+  filter:alpha(opacity=70);
+}
+[(#REM)
+
+***** Boutons d'adminsitration de spip *****
+
+].spip-admin-float {
+  #LANG_LEFT:5px;
+  margin-top: 5px;
+}
+[(#REM)
+
+***** Personnalisation des styles spip (remplace spip_style.css) *****
+
+Cette feuille contient les styles associes au code genere par SPIP.
+Ces styles sont indispensables et doivent necessairement etre
+definis pour le bon fonctionnement de vos squelettes.
+
+Definis ici, ils sont personnalisables
+
+Prefixes par ".cat", ils ne s'appliquent que dans les elements fils d'elements de classe "cat"
+
+][(#REM)
+
+***** Intertitre ***** 
+
+].cat h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: #VAR{acsFondSTSize, 1.09em}; font-weight: bold; }
+.cat hr.spip { margin: 2em auto; }
+[(#REM)
+
+***** Listes SPIP ***** 
+
+].cat ul.spip {}
+.cat ol.spip { list-style: decimal; }
+[(#REM)
+
+***** Citations et code *****
+
+].cat blockquote.spip { margin: 2em 0; margin-left: 1em; padding-left: 1em; border-left: 1px dotted #aaa; }
+.cat .spip_code, .spip_cadre { font-family: Courier, "Courier New", monospace; color: #036; }
+.cat .spip_cadre { width: 99%; background-color: #F4F8F8; border: 1px inset; font-size:inherit; }
+div.spip_code, .spip_cadre { margin-bottom: 1em;  }
+[(#REM)
+
+***** Poesie *****
+
+].cat .spip_poesie {
+  [font-size: (#VAR{acsFondPoesieFontSize,1.05em});]
+  font-family: [(#VAR{acsFondPoesieFont,Garamond}),][ (#VAR{acsFondPoesieFontFamily,serif})];
+  border: 0;
+  margin: 0;
+  padding-left: 0;
+}
+.cat .spip_poesie div:first-letter {
+  text-transform: uppercase;
+  text-indent: 0;
+}
+[(#REM)
+
+***** Surlignage *****
+
+].cat .spip_surligne { background: #FF6; }
+[(#REM)
+
+***** Tableaux ***** 
+
+].cat table.spip {
+  max-width: 99%;
+  margin: auto;
+  margin-bottom: 1em;
+  line-height: normal;
+  border: [(#VAR{acsFondTabBord/Width,1px})][ (#VAR{acsFondTabBord/Style,solid})][ (#VAR{acsFondTabBord/Color})];
+  border-collapse: collapse;
+}
+.cat table.spip caption {
+  caption-side: top; /* bottom pas pris en compte par IE */
+  text-align: center;
+  margin: auto;
+  padding: 3px;
+  font-weight: bold;
+}
+[.cat table.spip tr.row_first { background: (#VAR{acsFondTabFirst});}]
+[.cat table.spip tr.row_odd { background: (#VAR{acsFondTabOdd});}]
+[.cat table.spip tr.row_even { background: (#VAR{acsFondTabEven});}]
+.cat table.spip th, .cat table.spip td {
+  padding: 3px;
+  text-align: #LANG_LEFT;
+  vertical-align: middle;
+}
+[(#REM) 
+
+***** Notes de bas de page ***** 
+
+][.cat .notes, .cat a.spip_note {
+  font-size: (#VAR{acsFondNavSize});
+}]
+.cat .spip_note {
+  vertical-align: super;
+}
+.cat .notes .spip_note {
+  font-size: 1em;[(#REM) empeche de reduire deux fois la taille ]
+  vertical-align: text-bottom;
+  margin:0;
+}
+[(#REM)
+
+***** Post-scriptum ***** 
+
+].cat .ps {
+  [font-size: (#VAR{acsFondNavSize});]
+}
+[(#REM)
+
+***** Logos, documents et images *****
+
+]
+.spip_logos {
+  margin: 5px;
+}
+.spip_documents { text-align: center; }
+.spip_documents_center { clear: both; width: 100%; margin: auto; }
+span.spip_documents_center { display: block; margin-top:1em; }
+.spip_documents_left { float: left; margin-right: 5px; margin-bottom: 5px; }
+.spip_documents_right { float: right; margin-left: 5px; margin-bottom: 5px; }
+.spip_doc_titre { font-weight: bold; font-size: #VAR{acsFondNavSize, 0.65em}; margin-left:auto; margin-right:auto; text-wrap: break-word; overflow: hidden}
+.spip_doc_descriptif { clear: both; font-size: #VAR{acsFondNavSize, 0.65em}; margin-left:auto; margin-right:auto; width: 200px;}
+.spip_doc_descriptif p {margin: 0;}
+[(#REM)
+
+***** modeles par defaut *****
+
+].cat .spip_modele {
+  float: right;
+  display: block;
+  padding: 1em;
+  border: 1px solid;
+  width: 180px;
+}
+[(#REM)
+
+***** Couleurs des liens de SPIP *****
+
+]a.spip_note {} /* liens vers notes de bas de page */
+a.spip_ancre {} /* liens internes a la page */
+a.spip_in {} /* liens internes */
+a.spip_mail { color: #900; }
+a.spip_mail:before { content: "\002709"; } /* liens vers un email */
+a.spip_out { color: #009; } /* liens sortants */
+a.spip_url { color: #009; } /* liens url sortants */
+a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
+a.spip_glossaire:hover { text-decoration: underline overline; }
+.on { font-weight: bold; } /* liens exposes */

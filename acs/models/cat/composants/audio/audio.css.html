@@ -1,5 +1,9 @@
 #CACHE{0}
 
+.doc_mp3player {
+  width: 150px;
+}
+
 .mp3player {
   opacity: 0.6;
 }
@@ -16,9 +20,8 @@
   padding-right: 4px;
   vertical-align: middle;
   text-align: center;
-  font-size: 10px;
-  line-height: 10px;
-  height: 10px;
+  line-height: #VAR{acsFondNavSize,0.65em};
+  height: #VAR{acsFondNavSize,0.65em};
   color: #VAR{acsAudioTrackStatus,#00afdf};
 }
 
@@ -33,11 +36,10 @@
 }
 
 .mp3player .track_status {
-  font-size: 10px;
   color: #VAR{acsAudioTrackStatus,00afdf};
 }
 
-.mp3player .track_control, .mp3player .hidden {
+.mp3player .track_control, .mp3player .hidden, .mp3player .b_pause {
   display: none;
 }
 
@@ -120,7 +122,6 @@
 }
 
 .playlist {
-  font-size: 0.82em;
   text-align: left;
   [background: (#VAR{acsAudioFond});]
   [border-width: (#VAR{acsAudioBord/Width});]
@@ -133,7 +134,7 @@
   [border-top: 1px solid (#VAR{acsRubnavSep});]
   margin : 0;
 }
-.playlist .menu-titre {
+.playlist .bloc-title {
   text-align : center;
   font-weight: bold;
   [background: (#VAR{acsAudioTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsAudioTitreImage}})") repeat top left];]
@@ -147,8 +148,6 @@
 }
 
 .playlist .track_status, .playlist .playliste .track_status  {
-  font-family : Arial, sans-serif;
-  font-size: 10px;
   color: #VAR{acsAudioTrackStatus,00afdf};
 }
 
@@ -163,7 +162,9 @@
 .playlist .playliste li.play_on {
   background: #VAR{acsAudioMp3on,#4422aa};
 }
-
+.playlist .playliste a.mp3 {
+  padding-#LANG_LEFT: 2px;
+}
 .playlist .playliste a.article {
   color: #VAR{acsAudioArticleColor,#080};
 }
@@ -173,8 +174,7 @@
 }
 
 .playlist .playliste a.podcast {
-  font-size: 0.65em;
-  padding:2px;
+  padding-#LANG_LEFT: 2px;
   color: #VAR{acsAudioPodcastColor,#f40};
 }
 

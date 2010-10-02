@@ -1,11 +1,10 @@
 <div class="cTags">
-  [(#VAR{acsTagsTitre}|=={oui}|?{' '})<div class="menu-titre"><:acs:tags_mots_cles:></div>]
+  [(#VAR{acsTagsTitre}|=={oui}|?{' '})<div class="bloc-title bsize"><:acs:tags_mots_cles:></div>]
   <div class="text">
-<B_mots><BOUCLE_mots(MOTS) {titre==(_.*)} {doublons}></BOUCLE_mots></B_mots>
-<BOUCLE_popul(MOTS){par hasard} {doublons}>
+<BOUCLE_popul(MOTS){par hasard}{titre!==(_.*)}>
    <a href="#URL_MOT" title="#TITRE"
      <BOUCLE_popul_art(ARTICLES){id_mot}></BOUCLE_popul_art>
-     style="text-decoration: none; font-size:[(#TOTAL_BOUCLE|plus{10})]px">
+     style="text-decoration: none; font-size:[(#TOTAL_BOUCLE|plus{10})]px;line-height:[(#TOTAL_BOUCLE|plus{10})]px">
      <//B_popul_art>
    #TITRE</a>
 </BOUCLE_popul>

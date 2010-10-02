@@ -3,8 +3,10 @@
 Listes d'articles (sommaire, resume, plan, rubrique)
 
 ]<div class="#PINCEAU{articles}">
-[(#ID_ARTICLE|!={''}|?{' '})<INCLURE{fond=composants/articles/article}{env}{self}{id_article}>]
-[(#ENV{page}|=={sommaire}|?{' '})<INCLURE{fond=composants/articles/boucle-une}{env}{self}{debut_articles}>][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
-[(#ENV{page}|=={resume}|?{' '})<INCLURE{fond=composants/articles/boucle-resume}{env}{self}{debut_articles}>]
-[(#ENV{page}|=={plan}|?{' '})<INCLURE{fond=composants/articles/boucle-plan}{env}{self}>]
+[(#ID_ARTICLE|!={''}|?{' '})<INCLURE{fond=composants/articles/article}{env}{self}{id_article}>#SET{ok,oui}]
+[(#ENV{page}|=={sommaire}|?{' '})<INCLURE{fond=composants/articles/boucle-une}{env}{self}{debut_articles}>#SET{ok,oui}][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
+[(#ENV{page}|=={resume}|?{' '})<INCLURE{fond=composants/articles/boucle-resume}{env}{self}{debut_articles}>#SET{ok,oui}]
+[(#ENV{page}|=={plan}|?{' '})<INCLURE{fond=composants/articles/boucle-plan}{env}{self}>#SET{ok,oui}]
+[(#REM) Affiche l'article 1 lorsque l'on modifie le composant avec son pinceau
+][(#GET{ok}|!={oui}|?{' '})<INCLURE{fond=composants/articles/article}{env}{self}{id_article=1}>]
 </div>

@@ -1,9 +1,11 @@
 [(#REM) Mots-cles trouves ]
 <B_mots>
 <div class="cKeys">#ANCRE_PAGINATION
-  <h2 class="menu-titre"><:mots_clefs:></h2>
-  [<p class="pagination">(#PAGINATION)</p>]
-  <ul>
+  <div class="bloc-title">
+    <div class="bsize"><:mots_clefs:></div>
+    [<div class="pagination">(#PAGINATION)</div>]
+  </div>
+  <ul class="bsize">
     <BOUCLE_mots(MOTS) {id_rubrique ?} {titre!==(_.*)} {pagination 5}>
     <li class="menu-item"><a href="#URL_MOT"><span class="motcle">#TITRE</span></a></li>
     </BOUCLE_mots>

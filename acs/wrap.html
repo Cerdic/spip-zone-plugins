@@ -12,15 +12,13 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Encapsule un composant pour prévisualisation ou appel Ajax
 
 Wrap (encapsulate) widgets for preview or Ajax call
+
 ]<html>
 <head>
 <meta name="robots" content="none">
-[(#SPIP_VERSION|match{^1\.9\.}|?{' ',''})<script src="spip.php?page=jquery.js" type="text/javascript"></script>]
-[(#SPIP_VERSION|match{^1\.9\.}|?{'', ' '})<script src="#CHEMIN{javascript/jquery.js}" type="text/javascript"></script>
-<script src="#CHEMIN{javascript/jquery.form.js}" type="text/javascript"></script>
-<script src="#CHEMIN{javascript/ajaxCallback.js}" type="text/javascript"></script>
-<script src="#CHEMIN{javascript/layer.js}" type="text/javascript"></script>]
-<script src="spip.php?page=acs.js&var_mode=recalcul" type="text/javascript"></script>
+<!-- insert head  -->
+#INSERT_HEAD
+<!-- /insert head  -->
 [(#REM) Global ACS generated stylesheet]
 <link rel="stylesheet" href="spip.php?page=habillage.css[&v=(#ACS_DERNIERE_MODIF)]" type="text/css" media="projection, screen, tv" />
 <?php // Widget's style is not included yet in above css if just activated

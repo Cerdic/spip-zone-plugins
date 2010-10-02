@@ -1,0 +1,20 @@
+<BOUCLE_auteur(AUTEURS){id_auteur}>
+<div class="entete">
+  [(#LOGO_AUTEUR|right|image_reduire{200,200})]
+  <h1 class="titre #EDIT{nom}">#NOM</h1>
+  [<p class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+</div>
+[<div class="texte #EDIT{bio}">(#BIO)</div><br />]
+<B_articles>[(#REM) Articles de l'auteur ]
+<div class="liste-articles">
+  #ANCRE_PAGINATION
+  [<p class="pagination">(#PAGINATION)</p>]
+  <ul>
+    <BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
+    <INCLURE{fond=composants/articles/li-article}{env=#ENV}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
+    </BOUCLE_articles>
+  </ul>
+</div>
+</B_articles>
+[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_auteur>

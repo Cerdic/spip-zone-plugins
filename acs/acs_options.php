@@ -27,7 +27,7 @@ if (is_array($plugs)) {
 
 // Uncomment for debug :
 //define('_DEBUG_CRAYONS', true);
-define('_ACS_LOG', true);
+//define('_ACS_LOG', true);
 
 
 

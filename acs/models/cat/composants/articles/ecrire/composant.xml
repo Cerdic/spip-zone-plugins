@@ -3,7 +3,7 @@
   <nom>Articles</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.7</version>
+  <version>0.7.1</version>
 	<necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -14,7 +14,6 @@
   <variable>
     <nom>TitreFond</nom>
     <type>color</type>
-    <valeur>=acsOngletsFondColor</valeur>
   </variable>
   <variable>
     <nom>TitreFondImage</nom>
@@ -73,23 +72,43 @@
   <variable>
     <nom>LogoTailleMax</nom>
     <type>nombre</type>
-    <valeur>50</valeur>
+    <valeur>100</valeur>
   </variable>
 
   <variable>
-    <nom>TabBord</nom>
-    <type>bord</type>
+    <nom>ListesLogoTailleMax</nom>
+    <type>nombre</type>
+    <valeur>50</valeur>
+  </variable>
+  
+  <variable>
+    <nom>Puce</nom>
+    <type>img</type>
+    <chemin>puces</chemin>
   </variable>
   <variable>
-    <nom>TabFirst</nom>
+    <nom>RubFond2</nom>
     <type>color</type>
+    <valeur>#fafffa</valeur>
   </variable>
   <variable>
-    <nom>TabOdd</nom>
+    <nom>RubFond3</nom>
     <type>color</type>
+    <valeur>#f5fff5</valeur>
   </variable>
   <variable>
-    <nom>TabEven</nom>
+    <nom>RubFond4</nom>
     <type>color</type>
+    <valeur>#efffef</valeur>
+  </variable>
+  <variable>
+    <nom>RubFond5</nom>
+    <type>color</type>
+    <valeur>#dfffdf</valeur>
+  </variable>
+  <variable>
+    <nom>RubFond6</nom>
+    <type>color</type>
+    <valeur>#d0ffd0</valeur>
   </variable>
 </composant>

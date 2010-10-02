@@ -1,0 +1,14 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Hierarchie</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.7.1</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>100</valeur>
+  </param>
+
+</composant>

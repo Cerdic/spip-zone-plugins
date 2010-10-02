@@ -1,22 +1,35 @@
 #CACHE{0}
 
 .cBreves {
-  font-size: 0.82em;
-  [border-width: (#VAR{acsBrevesBord/Width,#VAR{acsRubnavBord/Width}});]
-  [border-style: (#VAR{acsBrevesBord/Style,#VAR{acsRubnavBord/Style}});]
-  [border-color: (#VAR{acsBrevesBord/Color,#VAR{acsRubnavBord/Color}});]
-  [background: (#VAR{acsRubnavFondColor});]
+  [border-width: (#VAR{acsBrevesBord/Width});]
+  [border-style: (#VAR{acsBrevesBord/Style});]
+  [border-color: (#VAR{acsBrevesBord/Color});]
+  [background: (#VAR{acsBrevesFond});]
 }
 
-.cBreves .menu-titre {
+.cBreves .bloc-title {
   text-align : center;
-  font-weight: bold;
   [background: (#VAR{acsBrevesTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsBrevesTitreFondImage}})") repeat top left];]
+}
+.cBreves .bloc-title .bsize {
+  font-weight: bold;
+}
+.cBreves .bloc-title .pagination {
+  [border-top: 1px solid (#VAR{acsRubnavSep});]
 }
 .cBreves .menu-item {
   [background: (#VAR{acsRubnavFond});]
   [border-top: 1px solid (#VAR{acsRubnavSep});]
   text-align: #LANG_LEFT;
+}
+.cBreves .menu-item .message {
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow: hidden;
+}
+.cBreves .menu-item .date-comment {
+  vertical-align: texttop;
+  color: #VAR{acsFondText};
 }
 .cBreves .menu-item a {
   display: block;
@@ -26,9 +39,4 @@
 .cBreves .menu-item a ._text{
   padding-left: 5px;
   padding-right: 5px;
-}
-.cBreves .pagination {
-  text-align: center;
-  [background: (#VAR{acsRubnavTitreFond});]
-  [border-top: 1px solid (#VAR{acsRubnavSep});]
 }

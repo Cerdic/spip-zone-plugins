@@ -1,7 +1,10 @@
 <div align="center">
-  <div style="width: 200px; margin: 10px;">
-    <INCLURE{fond=composants/audio/player}{autostart=#AUTOSTART}{hp=#GET{hp}}{lp=#GET{lp}}{mmfile=#URL_DOCUMENT}{mp3id3=mp3 ID3 title infos}>
-    <a href="#CHEMIN{composants/audio/images/demo.mp3}" rel="enclosure" style="display: none">mp3 ID3 title infos</a>
+  <div style="width: 150px; margin: 10px;">
+    [(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})<a href="#CHEMIN{composants/audio/images/demo.mp3}" type="#MIME_TYPE" class="mp3" title='player demo - MP3 - nn Mo' rel="enclosure">]
+      <img src='#CHEMIN{prive/vignettes/mp3.png}' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' title='MP3 - nn Mo' />
+    [(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})</a>]
+    [(#VAR{acsAudioDownload}|=={non}|?{' '})<a href="#CHEMIN{composants/audio/images/demo.mp3}" rel="enclosure" style="display: none" title='player demo MP3 - nn Mo'>mp3 ID3 title infos</a>]
+    <INCLURE{fond=composants/audio/player}{autostart=#AUTOSTART}{hp=#GET{hp}}{lp=#GET{lp}}{mmfile=#URL_DOCUMENT}{mp3id3=mp3 ID3 title infos}>    
   </div>
   <hr />
   <div style="margin:15px; text-align: center; width: 300px">

@@ -17,14 +17,14 @@ Copyleft: licence GPL - Cf. LICENCES.txt
 
   ATTENTION: il faut absolument le charset sinon Firefox croit que
   c'est du text/html !
-]
-#CACHE{3600*100,cache-client}
+  
+]#CACHE{3600*100,cache-client}
 #SET{claire,##ENV{couleur_claire,edf3fe}}
 #SET{foncee,##ENV{couleur_foncee,3874b0}}
 
 table { margin: 0; padding: 0; border-collapse: collapse; border-spacing:0; border: 1px;}
 img { margin: 0; padding: 0; border: none;}
-hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{claire};}
+hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{foncee};}
 
 .alert{
   color: red;
@@ -95,10 +95,6 @@ hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{claire};}
   -moz-border-radius-topright: 0;
   color: #000000;
   overflow: auto;
-}
-
-.editeur_composant .acs_box_texte {
-  background: #efefef;
 }
 
 .acs_box_composants {
@@ -352,7 +348,7 @@ fieldset.apercu {
 
 .editeur_composant .select_widget {
   position:relative;
-  width: 160px;;
+  width: 160px;
 }
 
 /* Coloration syntaxique acs-spip */
@@ -408,6 +404,16 @@ l'utilisation du contrôleur par défaut qui pointe vers crayons_store standard 
   display: none;
 }
 
+.editeur_composant .acs_box_texte{
+  padding: 0;
+  background: #f4f4f4;
+}
+
+.editeur_composant .c_config {
+  padding :8px;
+  max-height:400px;
+  overflow:auto;
+}
 img.bouton_edit_composant {
   background: #e6f6e6;
   border: 2px outset #88af88;

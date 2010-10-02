@@ -1,6 +1,6 @@
 #CACHE{0}
 <B_articles_auteur>
-<h2 class="menu-titre"><a href="?auteur#ID_AUTEUR"><:meme_auteur:></a></h2>
+<h2 class="bloc-title"><a href="?auteur#ID_AUTEUR"><:meme_auteur:></a></h2>
 <ul><BOUCLE_articles_auteur(ARTICLES) {id_auteur} {par popularite} {!id_article} {inverse} {0,5} {lang ?}>
   <li class="menu-item articlesauteur"><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
 </BOUCLE_articles_auteur></ul></B_articles_auteur>

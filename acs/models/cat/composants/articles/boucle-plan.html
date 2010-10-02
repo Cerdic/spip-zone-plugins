@@ -4,21 +4,17 @@ Boucle plan du site
 <BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre, titre}>
 <div class="plan-secteur">
   <h1>
-    [<span style="float:left"><a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#VAR{acsArticlesLogoTailleMax,50},#VAR{acsArticlesLogoTailleMax,50}})</a></span>]
-    [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] >(#TITRE|supprimer_numero)</a>]
+    [<a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|right|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})</a>]
+    [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="tsize">(#TITRE|supprimer_numero)</a>]
   </h1>
-
-  <!-- Articles et sous-rubriques -->
   [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/articles/inc-bp-d}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
   [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/articles/inc-bp-n}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
-
-
   <B_rubriques>
     <ul class="plan-rubriques">
     <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
       <li class="plan-rubrique">
-      [<span style="float:left"><a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#VAR{acsArticlesLogoTailleMax,50},#VAR{acsArticlesLogoTailleMax,50}})</a></span>]
-      [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] style="float: #LANG_LEFT;">(#TITRE|supprimer_numero)</a>  &nbsp;]
+      [<a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|left|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})</a>]
+      [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="stsize">(#TITRE|supprimer_numero)</a>  &nbsp;]
       [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/articles/inc-bp-d}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
       [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/articles/inc-bp-n}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
       <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>

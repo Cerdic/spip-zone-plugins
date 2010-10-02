@@ -1,1 +1,19 @@
-404
+#CACHE{7*86400}[(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2010
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Page d'erreur 404
+Error 404 page
+
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
+(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) ][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut) - ]<:acs:fond_meta_page_sommaire:>})][
+(#SET{mkeywords,<:acs:fond_meta_keywords:>,<:acs:fond_sommaire:>})
+]<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2404}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}>

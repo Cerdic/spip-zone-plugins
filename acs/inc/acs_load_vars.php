@@ -14,10 +14,11 @@ function acs_load_vars($from) {
     return 'unable to read '.$from;
 
   if (is_array($def)) {
-  	// acsVersion est la version d'acsInstalled lors de la sauvegarde : NE PAS LA RESTAURER !
+  	// ACS_VERSION est la version d'acsInstalled lors de la sauvegarde : NE PAS LA RESTAURER !
   	// todo : gérer les version mismatches
-  	$dversion = $def['acsVersion'];
-  	unset($def['acsVersion']);
+  	$dversion = $def['ACS_VERSION'];
+  	unset($def['ACS_VERSION']);
+  	unset($def['ACS_RELEASE']);
 
     foreach($def as $var=>$value) {
     	if (is_array($value))
@@ -28,10 +29,10 @@ function acs_load_vars($from) {
     }
     ecrire_metas();
     lire_metas();
-    if ($dversion == ACS_VERSION)
+    if ($dversion == acs_version())
     	return 'ok';
     else
-    	return 'version mismatch (def '.$dversion.' vs ACS '.ACS_VERSION.')';
+    	return 'version mismatch (def '.$dversion.' vs ACS '.acs_version().')';
   }
   else
   	return 'no vars';

@@ -1,6 +1,6 @@
 #CACHE{7200}<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
-[(#REM)
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">[(#REM)
+
              ACS
          (Plugin Spip)
          Squelette Cat
@@ -8,10 +8,12 @@
 
 Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
-]
-<head>
+
+Entete de page - page header
+
+]<head>
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-  <meta name="generator" content="ACS #ACS_VERSION &amp; SPIP #SPIP_VERSION" />
+  <meta name="generator" content="ACS #ACS_VERSION[ ((#ACS_RELEASE))] - SPIP #SPIP_VERSION" />
   <meta name="rating" content="General" />
   <meta name="category" content="Document" />
   <meta name="page-topic" content="Document" />
@@ -38,22 +40,23 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   [<meta name="DC.Publisher" content="(#ENV{mpublisher,#NOM_SITE_SPIP})" />]
   [<meta name="DC.Subject" content="(#ENV{msubject,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
   <link rel="schema.DC" href="#URL_SITE_SPIP/dc" />[(#REM) DC metas ]
-  <link rel="shortcut icon" type="image/x-icon" href="[(#ACS_CHEMIN)]favicon/#VAR{acsFondFavicon,favicon.ico}" />[(#REM) Lien vers l'icone destinee a la barre de bookmarks ]
-  <link rel="alternate" type="application/rss+xml"[ title="(#ENV{rsstitle,<:syndiquer_site:>})"] href="#ENV{rssurl,#URL_PAGE{backend}}" />[(#REM) Lien vers le flux RSS du site ]
-  <link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />[(#REM) Feuille de style par defaut pour le code genere par SPIP ]
-  <link rel="stylesheet" href="[(#CHEMIN{agenda.css}|direction_css)]" type="text/css" media="projection, screen, tv" />[(#REM) Feuille de style CSS pour l'agenda Spip]
-  #INSERT_HEAD [(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css. Avant impression.css pour permettre controle sur impression des plugins ]
-  [<link rel="stylesheet" href="(#URL_PAGE{habillage.css,v=#ACS_DERNIERE_MODIF})" type="text/css" media="projection, screen, tv" />][(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
-  <link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />[(#REM) Feuille de style CSS pour l'impression ]
-  [(#EVAL{defined('_DIR_PLUGIN_CRAYONS')}|?{' '})
-    [<link rel="stylesheet" href="(#URL_PAGE{acs_style_prive.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
-  ][(#REM) Feuille de style CSS et scripts pour l'édition des composants ACS (feuilles de style de l'espace privé utilisées sur la partie publique, pour les crayons) ]
+  [(#REM) Lien vers l'icone destinee a la barre de bookmarks
+  ]<link rel="shortcut icon" type="image/x-icon" href="[(#ACS_CHEMIN)]favicon/#VAR{acsFondFavicon,favicon.ico}" />
+  [(#REM) Lien vers le flux RSS du site
+  ]<link rel="alternate" type="application/rss+xml"[ title="(#ENV{rsstitle,<:syndiquer_site:>})"] href="#ENV{rssurl,#URL_PAGE{backend}}" />
+  [(#REM) Feuille de style CSS pour l'agenda Spip, si necessaire
+  ][(#ENV{page}|=={agenda}|?{' '})<link rel="stylesheet" href="[(#CHEMIN{agenda.css}|direction_css)]" type="text/css" media="projection, screen, tv" />]
+  [(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css. Avant impression.css pour permettre controle sur impression des plugins
+  ]#INSERT_HEAD 
+  [(#REM) Feuille de style CSS pour l'affichage du site a l'ecran
+  ][<link rel="stylesheet" href="(#URL_PAGE{habillage.css,v=#ACS_DERNIERE_MODIF})" type="text/css" media="projection, screen, tv" />]
+  [(#REM) Feuille de style CSS pour l'impression 
+  ]<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
   <script type="text/javascript" src="#CHEMIN{javascript/layer.js}"></script>
 </head>
-<body[ class="page_(#ENV{pagestyle})"]>
-<div class="traductions">[(#SET{userlang,#LANG})]
+<body class="cat">[(#REM) La classe "cat" permet d'isoler la personnalisation des styles spip ]
+<div id="traductions">[(#SET{userlang,#LANG})]
 <BOUCLE_langues(ARTICLES){fusion lang}{par lang}>
-[(#TOTAL_BOUCLE|>{1}|?{' '})<span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR" class="lang_button">[(#GET{userlang}|=={#LANG}|?{'',<a href="[(#REM|sinon{spip.php?action=converser}|parametre_url{var_lang,#LANG})]&amp;redirect=<?php
-echo urlencode(self()); ?>" rel="alternate" hreflang="#LANG"[ title="(#TITRE|texte_backend)"]>})]<img src="#EVAL{_DIR_ACS}lang/flags/[(#LANG)].gif" alt="[(#LANG)]"[ title="(#LANG|traduire_nom_langue)"][ class="(#GET{userlang}|=={#LANG}|?{selected_lang,lang})"] />[(#GET{userlang}|=={#LANG}|?{'',</a>})]</span>]
+[(#TOTAL_BOUCLE|>{1}|?{' '})<span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR" class="lang_button">[(#GET{userlang}|=={#LANG}|?{'',<a href="[(#REM|sinon{spip.php?action=converser}|parametre_url{var_lang,#LANG})]&amp;redirect=[(#SELF|urlencode)]" rel="alternate" hreflang="#LANG"[ title="(#TITRE|texte_backend)"]>})]<img src="#EVAL{_DIR_ACS}lang/flags/[(#LANG)].gif" alt="[(#LANG)]"[ title="(#LANG|traduire_nom_langue)"][ class="(#GET{userlang}|=={#LANG}|?{selected_lang,lang})"] />[(#GET{userlang}|=={#LANG}|?{'',</a>})]</span>]
 </BOUCLE_langues>
 </div>

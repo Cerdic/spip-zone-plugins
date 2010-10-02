@@ -37,6 +37,7 @@ class AdminComposant {
     
     include_spip('inc/xml'); // spip_xml_load()
     include_spip('inc/traduire');
+    include_spip('inc/acs_version');
     
     $this->debug = $debug;
     $this->class = $class; // Classe de composant (nom)
@@ -272,7 +273,7 @@ class AdminComposant {
 			$r .= '<br /><div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
 						'<div class="onlinehelplayer">'.$this->get_cvars_html().'</div>';
 		$r .= '<div id="puAjax'.$n.'" class="puAjax'.$n.'"></div>';
-		$r .= '<hr /><div>'._T('version').' '.$this->class.' <b>'.(($this->version != ACS_VERSION) ? '<span class="alert">'.$this->version.'</span>' : $this->version).'</b></div>';
+		$r .= '<hr /><div>'._T('version').' '.$this->class.' <b>'.(($this->version != acs_version()) ? '<span class="alert">'.$this->version.'</span>' : $this->version).'</b></div>';
 		/*
 		if ($spip_version_code < $this->version_spip_min)
 			$r .= '<div class="alert">'._T('acs:spip_trop_ancien', array('min' => spip_version_texte($this->version_spip_min))).'</div>';
@@ -318,7 +319,7 @@ class AdminComposant {
 			$r .= '</div>';
 		}
 
-		$r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
+		$r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').' class="c_config">';
 		if (($mode != 'controleur') && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
 			$url = '../?page=wrap&c=composants/'.$this->class.'/'.$this->class.($this->nic ? '&amp;nic='.$this->nic : '').'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
 			$r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0; background:'.$GLOBALS['meta']['acsFondColor'].'" src="'.$url.'"></iframe></fieldset>';

@@ -1,7 +1,6 @@
 #CACHE{0}
 
 .cAuteurs {
-  font-size: 0.82em;
   [border-width: (#VAR{acsAuteursBord/Width});]
   [border-style: (#VAR  {acsAuteursBord/Style});]
   [border-color: (#VAR{acsAuteursBord/Color});]
@@ -14,19 +13,25 @@
   overflow: hidden;
 }
 
-.cAuteurs .menu-titre {
+.cAuteurs .bloc-title {
   text-align : center;
-  font-weight: bold;
   [background: (#VAR{acsAuteursTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsAuteursTitreFondImage}})") repeat top left];]
 }
-
-.cAuteurs .menu-item .menu-titre {
-  [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBord/Color}});]
+.cAuteurs .bloc-title .bsize {
+  font-weight: bold;
 }
-
-.cAuteurs .menu-item {
-  [background: (#VAR{acsRubnavFond});]
+.cAuteurs .bloc-title .pagination {
   [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBord/Color}});]
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+[.cAuteurs .menu-item .bloc-title {
+  border-top: 1px solid (#VAR{acsRubnavSep});
+}
+].cAuteurs .menu-item {
+  [background: (#VAR{acsRubnavFond});]
+  [border-top: 1px solid (#VAR{acsRubnavSep});]
   text-align: #LANG_LEFT;
 }
 .cAuteurs .menu-item a.linkauteur {
@@ -36,14 +41,8 @@
 }
 [.cAuteurs .menu-item:hover, .cAuteurs .menu-item a.linkauteur:hover { background: (#VAR{acsRubnavFondHover});}]
 
-.cAuteurs .pagination {
-  [background: (#VAR{acsRubnavTitreFond,#VAR{acsFondColor}});]
-  [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBord/Color}});]
-  text-align: center;
-  margin: 0;
-  margin-left: 5px;
-  margin-right: 5px;
-  font-size: 0.65em;
+.cAuteurs .menu-item a {
+  display:block;
 }
 
 .cAuteurs .siteauteur {
@@ -51,5 +50,10 @@
 }
 .cAuteurs .bioauteur {
   text-align: justify;
-  font-size: 0.71em;
+}
+.cAuteurs .bioauteur:hover {
+  [background: (#VAR{acsAuteursFond});]
+}
+.cAuteurs .bioauteur p {
+  margin:0;
 }

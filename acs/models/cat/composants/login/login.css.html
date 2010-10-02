@@ -3,9 +3,20 @@
 On utilise le formulaire SPIP standard de la dist pour faciliter la maintenance.
 Cette CSS est valide pour dist SPIP 2.1.2
 
-].cLogin .formulaire_login {
-  font-size: 0.65em;
-  text-align:center;
+].cLogin {
+  [border-width: (#VAR{acsLoginBord/Width});]
+  [border-style: (#VAR{acsLoginBord/Style});]
+  [border-color: (#VAR{acsLoginBord/Color});]
+  [background: (#VAR{acsLoginFond})];
+  min-height: 60px;
+}
+.cLogin .bloc-title {
+  text-align : center;
+  font-weight: bold;
+  [background: (#VAR{acsLoginTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsLoginTitreFondImage}})") repeat top left];]
+  [border-bottom: 1px solid (#VAR{acsRubnavSep});]
+}
+.cLogin .formulaire_login {
   margin: 0;
   padding:0;
 }
@@ -24,20 +35,8 @@ Cette CSS est valide pour dist SPIP 2.1.2
   text-align: #LANG_RIGHT;
   margin-#LANG_RIGHT: 10px;;
 }
-.cLogin {
-  font-size: 0.82em;
-  [border-width: (#VAR{acsLoginBord/Width});]
-  [border-style: (#VAR{acsLoginBord/Style});]
-  [border-color: (#VAR{acsLoginBord/Color});]
-  [background: (#VAR{acsLoginFond})]
-}
-.cLogin .menu-titre {
-  text-align : center;
-  font-weight: bold;
-  [background: (#VAR{acsLoginTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsLoginTitreFondImage}})") repeat top left];]
-  [border-bottom: 1px solid (#VAR{acsRubnavSep});]
-}
 .cLogin .logout_link {
   margin-left: 5px;
   margin-right: 5px;
+  bottom: 5px;
 }

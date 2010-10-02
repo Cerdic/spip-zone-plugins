@@ -1,17 +1,18 @@
 #CACHE{0}
 
 .cKeys {
-  font-size: 0.82em;
   [border-width: (#VAR{acsKeysBord/Width,#VAR{acsRubnavBord/Width}});]
   [border-style: (#VAR{acsKeysBord/Style,#VAR{acsRubnavBord/Style}});]
   [border-color: (#VAR{acsKeysBord/Color,#VAR{acsRubnavBord/Color}});]
   [background: (#VAR{acsRubnavFondColor});]
 }
 
-.cKeys .menu-titre {
+.cKeys .bloc-title {
   text-align : center;
-  font-weight: bold;
   [background: (#VAR{acsKeysTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsKeysTitreFondImage}})") repeat top left];]
+}
+.cKeys .bloc-title .bsize{
+   font-weight: bold;
 }
 .cKeys .menu-item {
   [background: (#VAR{acsRubnavFond});]

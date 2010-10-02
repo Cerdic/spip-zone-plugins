@@ -9,6 +9,13 @@ Copyright Daniel FAIVRE, 2007-2009
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 */
 
+
+$GLOBALS['ouvre_ref'] = '';
+$GLOBALS['ferme_ref'] = '';
+$GLOBALS['ouvre_note'] = '';
+$GLOBALS['ferme_note'] = ': ';
+
+
 /*
 *	+----------------------------------+
 *	Nom du Filtre : "Sommaire Tableau"

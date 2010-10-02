@@ -7,7 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-acs_log('ACS: crayons_composant_store');
+
 /**
  * Crayon pour un composant - Sauvegarde
  * Crayon for one component - Store changes
@@ -15,7 +15,8 @@ acs_log('ACS: crayons_composant_store');
 function action_crayons_composant_store_dist() {
   include_spip('inc/crayons');
   include_spip('action/crayons_api');
-  
+
+  acs_log('ACS: action/crayons_composant_store by '.$GLOBALS['auteur_session']['id_auteur']);
 	lang_select($GLOBALS['auteur_session']['lang']);
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 	  

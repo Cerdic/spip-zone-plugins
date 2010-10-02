@@ -38,9 +38,6 @@ $GLOBALS['ACS_CHEMIN'] = $dir_site_absolu._NOM_PERMANENTS_ACCESSIBLES.'_acs/'.$G
 
 define('_DIR_ACS', _DIR_PLUGINS.acs_get_from_active_plugin('ACS', 'dir').'/'); // Chemin valable espace public aussi, pas comme _DIR_PLUGIN_ACS, qui est à proscrire
 
-// Version - Lue dans la variable meta que spip a écrit
-define('ACS_VERSION', acs_get_from_active_plugin('ACS', 'version'));
-
 // Définition du dossier global des squelettes actifs d'ACS (avec override)
 // Global active ACS skeletons directory definition (with override)
 $dossiers_squelettes_avant_override = explode(':', $GLOBALS['dossier_squelettes']);
@@ -66,6 +63,8 @@ define('_DIR_COMPOSANTS', find_in_path('composants'));
 
 // dispatch public / privé
 if ((_DIR_RESTREINT != '') && ($_POST['action'] != 'poster_forum_prive')) {
+	// Sauts de ligne 
+	$GLOBALS['spip_pipeline']['pre_propre'] .= '|post_autobr';
   include_spip('balise/acs_balises');
 }
 else {

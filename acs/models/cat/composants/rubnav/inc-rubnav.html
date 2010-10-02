@@ -1,8 +1,8 @@
 [(#SET{guilang,[(#LANG_DIR|=={rtl}|?{_rtl})]})]
 <BOUCLE_rubriques_(RUBRIQUES) {titre_mot==(^[_].*)} {doublons _mots}></BOUCLE_rubriques_>[(#REM) On exclut les rubriques ayant un mot-clé qui commence par "_".
 ]<B_rubriques1>
-	<div class="cRubnav">
-    [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
+	<div class="cRubnav bsize">
+    [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
 		<ul>
 			<BOUCLE_rubriques1(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group1}{doublons groups}>
 				<li class="menu-item">
@@ -24,9 +24,9 @@
 </B_rubriques1>
 
 <B_rubriques2>
-  <div class="cRubnav">
+  <div class="cRubnav bsize">
     [(#GET{titre_la}|?{'',' '})
-      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
+      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
     ]<ul>
       <BOUCLE_rubriques2(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group2}{doublons groups}>
         [(#SET{AFILLES, ""})]<BOUCLE_test_sousrub2(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub2>
@@ -53,9 +53,9 @@
 </B_rubriques2>
 
 <B_rubriques3>
-  <div class="cRubnav">
+  <div class="cRubnav bsize">
     [(#GET{titre_la}|?{'',' '})
-      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
+      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
     ]<ul>
       <BOUCLE_rubriques3(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group3}{doublons groups}>
         [(#SET{AFILLES, ""})]<BOUCLE_test_sousrub3(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub3>
@@ -82,9 +82,9 @@
 </B_rubriques3>
 
 <B_rubriques>
-	<div class="cRubnav">
+	<div class="cRubnav bsize">
     [(#GET{titre_la}|?{'',' '})
-      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
+      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
     ]<ul>
 			<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre} {doublons groups} {doublons _mots}>
         [(#SET{AFILLES, ""})]<BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub>

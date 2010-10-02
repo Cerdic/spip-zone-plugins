@@ -3,8 +3,8 @@
 <div class="cKeys">
   #ANCRE_PAGINATION
   [<p class="pagination">(#PAGINATION)</p>]
-  <div class="menu-titre"><:mots_clefs_meme_groupe:></div>
-  <ul>
+  <div class="bloc-title"><:mots_clefs_meme_groupe:></div>
+  <ul class="bsize">
   <BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
     <li class="menu-item"><a href="#URL_MOT"[ class="(#EXPOSE)"]><span class="motcle">#TITRE</span></a></li>
   </BOUCLE_mots_freres>
@@ -16,8 +16,8 @@
 [(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
 <B_groupes_freres>
 <div class="cKeys">
-  <h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
-  <ul>
+  <h2 class="bloc-title"><:autres_groupes_mots_clefs:></h2>
+  <ul class="bsize">
   <BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {titre!==(_.*)} {doublons}>
   <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {!type} {0,1}>
     <li class="menu-item"><a href="#URL_MOT"><span class="motcle">#TYPE</span></a></li>

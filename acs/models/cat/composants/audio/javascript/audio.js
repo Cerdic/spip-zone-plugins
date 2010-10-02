@@ -17,7 +17,7 @@ function initSoundPlayers() {
 	jQuery(".mp3player:not(._SPok)").each(function(p) {
 		var sp = new SoundPlayer(this);
 		jQuery(this).addClass("_SPok");
-	});
+	});	
 }
 
 /* Attach SoundPlayer objects to mp3player class objects */
@@ -73,7 +73,8 @@ soundManager._writeDebug(" * create " + sndmd5 + " (" + url + ")");
 	}
 
 	this.onFinish = function() {
-		if (self.track >= self.nbtracks) self.play(1); // Loop
+		if ((self.nbtracks > 1) && (self.track >= self.nbtracks))
+			self.play(1); // Loop if in playlist
 		else self.next();
 	}
 
@@ -233,8 +234,7 @@ function spGUI(player,sp) {
 	this.bw = self.progressBarBorder.width();
 	
 	soundManager._writeDebug(" * GUI bord=" + this.bw + " " + jQuery("#" + player.attr("id")).find(".progressBarBorder").width());
-	
-	
+
 	this.hsw = player.find(".slider").width() / 2;
 	this.mode = 'play';
 	if (sp.nbtracks > 0)	player.css('opacity',1);
@@ -249,6 +249,18 @@ function spGUI(player,sp) {
 	}
 	player.find(".track_index").html("1");
 	self.position.html("000:000");
+
+	self.slider.draggable({
+		helper: "original",
+		axis: "x",
+		containment: self.progressBarBorder,
+		cursor: "e-resize",
+		stop: function(e,ui) {
+			var pos = (e.clientX - self.getOffX(self.progressBarBorder.get(0)) ) / self.bw;
+			self.lastPos = 0;
+			sp.setPosition(pos);
+		}
+	});
 
 	this.play = function(i) {
 		this.lastPos = 0;

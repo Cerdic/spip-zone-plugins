@@ -2,16 +2,16 @@
 <div class="entete">
   [(#PLUGIN{notation}|oui)<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">[(#NOTATION_ETOILE{#NOTE})]</div>]
   <div class="titres">
-    <span class="infos_article nav">
+    <span class="infos_article nav nsize">
   [(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
   [(#VAR{acsArticlesAut}|=={oui}|?{' '})[(#AUTEURS)]]
   <BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '})[(#VAR{acsArticlesDates}|=={oui}|?{ - })]<i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero|coupe{80,...})]</a></i>]</BOUCLE_Rubb2>
     </span>  
-  [<p class="surtitre">(#SURTITRE|coupe{80,...})</p>]
-  <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-  [<p class="soustitre">(#SOUSTITRE|coupe{80,...})</p>]</div>
+  [<p class="surtitre stsize">(#SURTITRE|coupe{80,...})</p>]
+  <h3 class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></h3>
+  [<p class="soustitre stsize">(#SOUSTITRE|coupe{80,...})</p>]</div>
 </div>
 <br class="nettoyeur" />
-[<div class="extrait">[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{#VAR{acsArticlesLogoTailleMax,50},#VAR{acsArticlesLogoTailleMax,50}})</a>](#TEXTE|coupe{#ENV{coupe,200},... <small><i><a href="#URL_ARTICLE"> (<:acs:articles_lire_la_suite:>)</a></i></small>})</div>]
+[<div class="extrait">[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})</a>](#TEXTE|coupe{#ENV{coupe,200},... <small><i><a href="#URL_ARTICLE"> (<:acs:articles_lire_la_suite:>)</a></i></small>})</div>]
 <br class="nettoyeur" />
 </li>

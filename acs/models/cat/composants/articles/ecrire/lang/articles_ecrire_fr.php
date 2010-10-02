@@ -18,16 +18,19 @@ _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administ
 'NbLettres' => 'Nb de lettres avant coupure',
 'LogoTailleMax' => 'Taille maxi du logo',
 
-'table' => 'Tableaux',
-'TabBordColor' => 'Bordure',
-'TabFirst' => 'Premi&egrave;re ligne',
-'TabOdd' => 'Ligne paire',
-'TabEven' => 'Ligne impaire',
-
 'Dates' => 'Dates',
 'Aut' => 'Auteurs',
 'Stats' => 'Statistiques de visites',
 'Lock' => 'Contrôle d\'accès',
-'Pagination' => 'Nombre d\'articles par page'
+
+'Pagination' => 'Nombre d\'articles par page',
+'ListesLogoTailleMax' => 'Taille maxi du logo',
+
+'Puce' => 'Puce',
+'RubFond2' => '2',
+'RubFond3' => '3',
+'RubFond4' => '4',
+'RubFond5' => '5',
+'RubFond6' => '6',
 );
 ?>

@@ -24,5 +24,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Mp3on' => 'Fond piste active',
 'Mp3hover' => 'au survol',
 
+'Download' => 'Lien de t&eacute;l&eacute;chargement',
 );
 ?>

@@ -1,2 +1,2 @@
 [(#ENV{page}|=={agenda}|?{' '})<INCLURE{fond=composants/agenda/agenda_#ENV{type,mois}}{env} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>
-][(#ENV{page}|!={agenda}|?{' '})<INCLURE{fond=composants/agenda/inc-bloc-agenda_}{ajax}{env}{calendrier_mois}{calendrier_annee}{self}{lang=}>]
+][(#ENV{page}|!={agenda}|?{' '})<div class="#PINCEAU{agenda}"><INCLURE{fond=composants/agenda/inc-bloc-agenda}{ajax}{env}{calendrier_mois}{calendrier_annee}{self}{lang=}></div>]

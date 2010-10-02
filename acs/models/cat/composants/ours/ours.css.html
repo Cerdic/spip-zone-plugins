@@ -1,8 +1,8 @@
 #CACHE{0}
 
-.ours {clear: both}
+fieldset.ours {clear: both}
 
-.ours fieldset {
+fieldset.ours  {
   border: 0;
   padding: 0;
   padding-left: 75px;
@@ -10,18 +10,17 @@
   padding-bottom: 4px;
   margin-top: 2px;
   font-style: italic;
-  font-size: 0.77em;
   text-align: center;
   [color: (#VAR{acsOursText});]
   <BOUCLE_rubrique(RUBRIQUES) {racine} {titre_mot=_Ours} {0,1}>border-top: thin dotted #VAR{acsOursText,#VAR{acsOngletsBordColor}};</BOUCLE_rubrique>
 }
 
-.ours legend {
+fieldset.ours legend {
   margin-top: 2px;
   [background : (#VAR{acsFondColor});][(#REM) pour IE ]
 }
 
-.ours img { vertical-align: middle; }
+fieldset.ours img { vertical-align: middle; }
 
-[.ours a {color: (#VAR{acsOursLink});}]
-[.ours a:hover {color: (#VAR{acsOursLinkHover});}]
+[fieldset.ours a {color: (#VAR{acsOursLink});}]
+[fieldset.ours a:hover {color: (#VAR{acsOursLinkHover});}]

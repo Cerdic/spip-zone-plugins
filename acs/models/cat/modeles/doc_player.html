@@ -1,7 +1,6 @@
-#CACHE{24 * 3600}
-[(#REM)
+#CACHE{24 * 3600}[(#REM)
 
-Copyright Daniel FAIVRE
+Copyright Daniel FAIVRE 2007-2010
 
 Modele ACS pour la balise <doc> modifié pour insérer
 un lecteur mp3 ou flv (en Flash) dans un article pour le document joint.
@@ -14,26 +13,31 @@ Si le document docnn est une vidéo au format flv, affiche le lecteur et un lien
 Affiche le TITRE, le DESCRIPTIF suivi du lecteur flash permettant de faire jouer ce fichier.
 
 Sinon, utiliser le comportement normal d'une balise doc dans un article.
-]
-<div class="screen_only">
+
+La liste des mp3 est celle des liens <a rel="enclosure" href="*.mp3"> contenus dans le parent du composant player 
+
+]<div class="screen_only">
 <BOUCLE_doc (DOCUMENTS) {id_document}>
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok' style='[float:(#ENV{align}|match{left|right}); ] width:[(#LARGEUR|=={0}|?{400,#LARGEUR})px];' >
 [(#TYPE_DOCUMENT|=={MP3}|?{' '})
-	[(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE" class="mp3" title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' rel="enclosure">]<img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})</a>]
-  <br />
-  <INCLURE{fond=composants/audio/player}{autostart=#AUTOSTART}>[(#REM) La liste des mp3 est celle des liens <a rel="enclosure" href="*.mp3"> contenus dans le parent du composant player ]
-  [<div class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></div>]
-  [<div class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</div>]
+  <div class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok doc_mp3player" style="[float:(#ENV{align}|match{left|right}); ]">
+  	[(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE" class="mp3" title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' rel="enclosure">]
+      <img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />
+    [(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})</a>]
+    [(#VAR{acsAudioDownload}|=={non}|?{' '})<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE" class="mp3"rel="enclosure" style="display:none"  title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'></a>]
+    <INCLURE{fond=composants/audio/player}{autostart=#AUTOSTART}>
+    [<div class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong class="#EDIT{titre}">(#TITRE)</strong></div>][<div class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><span class="#EDIT{descriptif}">(#DESCRIPTIF)</span>#NOTES</div>]
+  </div>
 ]
 [(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
-  <INCLURE{fond=composants/video/flv}{autostart=#AUTOSTART}{id_document}>[(#VAR{acsVideoDownload,oui}|=={oui}|?{' '})<div style="width:[(#LARGEUR|=={0}|?{400,#LARGEUR})px]"><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title="#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]"><:acs:video_download:></a></div>]
-  [<div class='spip_doc_descriptif'[ style='width:(#LARGEUR)px;']>(#DESCRIPTIF)#NOTES</div>]
+  <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok' style='[float:(#ENV{align}|match{left|right}); ] width:[(#LARGEUR|=={0}|?{400,#LARGEUR})px];' >
+    <INCLURE{fond=composants/video/flv}{autostart=#AUTOSTART}{id_document}>[(#VAR{acsVideoDownload,oui}|=={oui}|?{' '})<div style="width:[(#LARGEUR|=={0}|?{400,#LARGEUR})px]"><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title="#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]"><:acs:video_download:></a></div>]
+    [<div class='spip_doc_descriptif'[ style='width:(#LARGEUR)px;']>(#DESCRIPTIF)#NOTES</div>]
+  </div>
 ]
 [(#TYPE_DOCUMENT|match{^(Flash Video|MP3)$}|?{'',' '})
 	<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"]><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur|min{50})px]' height='[(#LOGO_DOCUMENT||hauteur|min{20})px]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' /></a>
 	[<div class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></div>]
 	[<div class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</div>]
 ]
-</div>
 </BOUCLE_doc>
 </div>

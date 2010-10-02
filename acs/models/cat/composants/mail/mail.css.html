@@ -1,7 +1,6 @@
 #CACHE{0}
 
 .cMail {
-  font-size: 0.82em;
 }
 .cMail .formulaire_spip fieldset {
   [border-width: (#VAR{acsMailBord/Width});]
@@ -15,6 +14,6 @@
   [border-color: (#VAR{acsMailBord/Color});]
   [background: (#VAR{acsMailTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsMailTitreFondImage}})") repeat top left];]
 }
-.cMail .formulaire_ecrire_auteur textarea#texte_message_auteur_1, .cMail .formulaire_ecrire_auteur input#sujet_message_auteur_1, .cMail .formulaire_ecrire_auteur input#email_message_auteur_1 {
+.cMail .formulaire_ecrire_auteur textarea, .cMail .formulaire_ecrire_auteur input.text {
   width: 100%;
 }

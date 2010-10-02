@@ -4,7 +4,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
    Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
@@ -14,21 +14,10 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 #HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
   <INCLURE{fond=composants/fond/entete}{env=#ENV}{page=login}{title=<:login_access_prive:>}>
 
-	[(#REM) Menu de navigation laterale (colonne 1)]
-	<div id="colonne1"><div class="spacer"></div>
-		<div class="mg">
-      [(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=21}>
-		</div><!-- fin mg -->
-	</div><!-- fin colonne1 (navigation) -->
-[(#REM) Colonne 2 ]
-<div id="colonne2"><div class="spacer"></div>
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>
-   <div id="onglet">]
    
     <div style="text-align: center; width: 400px; margin: 0 auto; padding: 3em 0;">
       <small><:login_acces_prive:></small>
-      #MENU_LANG_ECRIRE
+      [(#MENU_LANG_ECRIRE)]
       <div class="formulaire_spip formulaire_login">
 	  #LOGIN_PRIVE
 	  <p style="text-align: center;">
@@ -46,8 +35,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	    <small style="text-align: justify;"><:contact_txt:></i></small>
 	</div>
     </div>
-    <br />
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+
 

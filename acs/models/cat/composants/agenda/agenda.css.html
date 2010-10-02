@@ -2,7 +2,6 @@
 Feuille de style Agenda, par Daniel Faivre, 2007-2010
 ]
 .cAgenda {
-  font-size: 11px;
   color: #VAR{acsFondText,#000};
   [background: (#VAR{acsAgendaThisMonth, #VAR{acsFondColor}});]
   [border-width: (#VAR{acsAgendaBord/Width});]
@@ -11,16 +10,19 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2010
   text-align:center;
   font-style:normal;
 }
-
+.cAgenda th {
+  font-size: #VAR{acsFondBlocSize,0.82em};
+}
 .cAgenda td {
+  font-size: #VAR{acsFondNavSize,0.65em};
   padding: 2px;
 }
 
-.cAgenda .menu-titre {
+.cAgenda .title {
   [background: (#VAR{acsAgendaTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsAgendaTitreFondImage}})") repeat top left];]  
   [border-bottom: 1px solid (#VAR{acsRubnavSep});]
 }
-.cAgenda .menu-titre .chelp {
+.cAgenda .title .chelp {
   float: #LANG_RIGHT;
   margin: 2px;
 }
@@ -28,7 +30,7 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2010
 .cAgenda .calendar_head_mini {
   background: #VAR{acsAgendaHeadFondColor,#VAR{acsRubnavFondColor}};
   text-align: center;
-  font-size: 10px;
+  font-size: #VAR{acsFondNavSize,0.65em};
   color: #VAR{acsFondText,000};
   font-family: Verdana, Arial, Helvatica, sans-serif;
   font-style:normal;
@@ -68,7 +70,6 @@ z-index : 999;
 padding: 0;
 margin: 0;
 border: [(#VAR{acsAgendaBord/Width,1px})][ (#VAR{acsAgendaBord/Style,ridge})][ (#VAR{acsAgendaBord/Color})];
-font-size: 8pt;
 line-height:normal;
 text-align: #LANG_LEFT;
 }

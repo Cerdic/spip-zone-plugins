@@ -8,7 +8,7 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>150</valeur>
+    <valeur>260</valeur>
   </param>
   <param>
     <nom>optionnel</nom>
@@ -48,6 +48,12 @@
   </variable>
 
   <variable>
+    <nom>Spacer</nom>
+    <type>nombre</type>
+		<valeur>10px</valeur>
+  </variable>
+  
+  <variable>
     <nom>FontSize</nom>
     <type>nombre</type>
 		<valeur>1em</valeur>
@@ -60,12 +66,58 @@
   <variable>
     <nom>Font</nom>
     <type>text</type>
-		<valeur>Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'</valeur>
   </variable>
-  
+
   <variable>
-    <nom>NavFontSize</nom>
+    <nom>PoesieFontSize</nom>
+    <type>nombre</type>
+		<valeur>1.09em</valeur>
+  </variable>
+  <variable>
+    <nom>PoesieFontFamily</nom>
+    <type>fontFamily</type>
+    <valeur>serif</valeur>
+  </variable>
+  <variable>
+    <nom>PoesieFont</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>TitleSize</nom>
+    <type>nombre</type>
+		<valeur>1.15em</valeur>
+  </variable>
+  <variable>
+    <nom>STSize</nom>
+    <type>nombre</type>
+		<valeur>1.09em</valeur>
+  </variable>
+  <variable>
+    <nom>BlocSize</nom>
+    <type>nombre</type>
+		<valeur>0.82em</valeur>
+  </variable>
+  <variable>
+    <nom>NavSize</nom>
     <type>nombre</type>
 		<valeur>0.65em</valeur>
+  </variable>
+
+  <variable>
+    <nom>TabBord</nom>
+    <type>bord</type>
+  </variable>
+  <variable>
+    <nom>TabFirst</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabOdd</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabEven</nom>
+    <type>color</type>
   </variable>
 </composant>

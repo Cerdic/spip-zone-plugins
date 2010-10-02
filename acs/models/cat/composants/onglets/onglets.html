@@ -1,5 +1,5 @@
 <div class="#PINCEAU{onglets}">
-  <div id="menunav" class="#EDIT{composant-onglets-1}">
+  <div id="menunav" class="#EDIT{composant-onglets-1} bsize">
     <ul class="general">
       <li[(#ENV{page}|=={#VAR{acsOnglets1}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="spip.php?page=#VAR{acsOnglets1}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets1'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets1'])}</a></li>
       #SET{t2,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets2'])}} #SET{l2,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets2'])}}

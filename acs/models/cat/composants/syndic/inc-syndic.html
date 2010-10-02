@@ -1,9 +1,11 @@
 <B_syndsit>#ANCRE_PAGINATION
 <div class="cSyndic">
-  <div class="menu-titre"><a href="?page=sites"><:sur_web:></a></div>
-  [<p class="pagination">(#PAGINATION)</p>]  
+  <div class="bloc-title">
+    <div class="bsize"><a href="?page=sites"><:sur_web:></a></div>
+    [<div class="pagination">(#PAGINATION)</div>]
+  </div>
   <BOUCLE_syndsit(SITES) {id_rubrique ?} {par date} {par nom_site} {pagination #VAR{acsSyndicNbSites,5}}>
-    <ul>
+    <ul class="bsize">
       <li><div class="site"><a href="#URL_SITE" target="synd" [ title="(#NOM_SITE|texte_backend)"] class="spip_out">#NOM_SITE</a></div>
       <B_syndic>
       <ul>

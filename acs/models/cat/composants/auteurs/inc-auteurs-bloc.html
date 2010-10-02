@@ -1,23 +1,25 @@
 #CACHE{86400}[(#REM)
 Bloc auteurs, avec pagination.
 Variables: id_auteur (EXPOSE), debut_auteurs (PAGINATION), id_article (auteurs d'un article)
+
 ]<B_auteurs>#SET{debut_auteurs,#EVAL{$_GET['debut_auteurs']}}
-<div class="cAuteurs">
-  <h2 class="menu-titre"><a href="?page=auteurs"><:info_auteurs:></a></h2>
-  #ANCRE_PAGINATION
-  [<div class="menu-titre"><p class="pagination">(#PAGINATION)</p></div>]
-    <ul>
-    <BOUCLE_auteurs(AUTEURS) {par nom} {id_article ?} {statut==(0minirezo|1comite|6visiteur)} {pagination #VAR{acsAuteursNb,10}}>
-      <li class="menu-item">
-        <a href="#URL_AUTEUR[&debut_auteurs=(#GET{debut_auteurs})]" class="linkauteur[ (#EXPOSE)]"><span class="nomauteur">[(#NOM|couper{80})]</span></a>
-        [(#ID_ARTICLE|=={''}|?{'',' '})
-            [<div class="menu-item siteauteur"><a href="(#URL_SITE)">#NOM_SITE</a></div>]
-            [<div class="menu-item bioauteur">(#BIO)</div>]
-            <INCLURE {fond=composants/articles/boucle-articles_auteur}{ajax}{self}{id_auteur}>
-        ]
-      </li>
-    </BOUCLE_auteurs>
-    </ul>
+<div class="cAuteurs">#ANCRE_PAGINATION
+  <div class="bloc-title">
+    <div class="bsize"><a href="?page=auteurs"><:info_auteurs:></a></div>
+    [<div class="pagination">(#PAGINATION)</div>]
+  </div>  
+  <ul>
+  <BOUCLE_auteurs(AUTEURS) {par nom} {id_article ?} {statut==(0minirezo|1comite|6visiteur)} {pagination #VAR{acsAuteursNb,10}}>
+    <li class="menu-item bsize">
+      <a href="#URL_AUTEUR[&debut_auteurs=(#GET{debut_auteurs})]" class="linkauteur[ (#EXPOSE)]"><span class="nomauteur">[(#NOM|couper{80})]</span></a>
+      [(#ID_ARTICLE|=={''}|?{'',' '})
+          [<div class="menu-item siteauteur"><a href="(#URL_SITE)">#NOM_SITE</a></div>]
+          [<div class="menu-item bioauteur">(#BIO)</div>]
+          <INCLURE {fond=composants/articles/boucle-articles_auteur}{ajax}{self}{id_auteur}>
+      ]
+    </li>
+  </BOUCLE_auteurs>
+  </ul>
 </div>
 <div class="spacer"></div>
 </B_auteurs>

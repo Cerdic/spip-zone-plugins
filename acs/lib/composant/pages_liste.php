@@ -95,7 +95,6 @@ function pages_du_dossier($dir, $dossier) {
             $pagename = substr($f, 0, -5);
             if (($pagename == 'wrap') ||
             		($pagename == 'acs.js') ||
-            		($pagename == 'acs_style_prive.css') ||
             		((substr($pagename, -8) == '_preview') && (!$GLOBALS['meta']['ACS_VOIR_PAGES_PREVIEW'])) )
             	continue;
             $pages[$pagename] = true;

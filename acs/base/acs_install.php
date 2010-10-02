@@ -7,6 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 include_spip('inc/acs_load_vars');
+include_spip('inc/acs_version');
 
 function acs_install($action){
   switch ($action)
@@ -32,7 +33,7 @@ function acs_init() {
 	if ($r == "ok")
 		acs_log('ACS init read default values from '.$theme);
 	else {
-		acs_log('ACS init read vars for ACS version '.ACS_VERSION.' : '.$r);
+		acs_log('ACS init read vars for ACS version '.acs_version().' ('.acs_release().')'.$r);
 		echo $r;
 	}
   
@@ -76,7 +77,7 @@ function acs_init() {
   acs_install_keywords($keys);
   echo '<br />';
   // Ecrire la meta signalant la version installee
-  ecrire_meta('acsInstalled', ACS_VERSION);
+  ecrire_meta('acsInstalled', acs_version());
 }
 
 /**

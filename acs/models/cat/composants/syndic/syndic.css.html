@@ -1,23 +1,22 @@
 #CACHE{0}
 
 .cSyndic {
-  font-size: 0.82em;
   [border-width: (#VAR{acsSyndicBord/Width});]
   [border-style: (#VAR{acsSyndicBord/Style});]
   [border-color: (#VAR{acsSyndicBord/Color});]
   [background: (#VAR{acsSyndicFond});]
 }
 
-.cSyndic .menu-titre {
+.cSyndic .bloc-title {
   text-align : center;
-  font-weight: bold;
   [background: (#VAR{acsSyndicTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsSyndicTitreFondImage}})") repeat top left];]
 }
-
+.cSyndic .bloc-title .bsize{
+  font-weight: bold;
+}
 .cSyndic .article{
   [background: (#VAR{acsSyndicFond});]
   padding-left: 5px;
-  font-size: 80%;
 }
 
 .cSyndic .site, .cSyndic .pagination {
@@ -31,10 +30,6 @@
 }
 [.cSyndic .site:hover, .cSyndic .site a:hover { background: (#VAR{acsRubnavFondHover});}]
 
-[(#REM) Override des styles de la dist SPIP pour le formulaire ]
-.cSyndicAdd {
-  font-size: 0.82em;
-}
 .cSyndicAdd #description_site, .cSyndic #nom_site, .cSyndic #url_site {
   width: 100%;
 }

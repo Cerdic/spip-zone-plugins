@@ -22,6 +22,7 @@
   <variable>
     <nom>TitreFondImage</nom>
     <type>img</type>
+    <chemin>img/trame</chemin>
     <label>non</label>
   </variable>
   <variable>
@@ -32,5 +33,4 @@
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
-</composant>
 </composant>

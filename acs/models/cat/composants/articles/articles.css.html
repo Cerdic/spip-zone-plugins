@@ -2,14 +2,48 @@
 
 Listes d'articles et extraits introductifs
 Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
-]
-.liste-articles li {
+
+][(#REM)
+
+***** Mise en page d'un article *****
+
+].cArticle .entete, .cArticle .article {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+.cArticle .entete {
+  border: #VAR{acsArticlesBord/Width,thin}[ (#VAR{acsArticlesBord/Style,dotted})][ (#VAR{acsArticlesBord/Color})];
+  border-left: 0;
+  border-right:0;
+}
+.cArticle .entete p {
+  margin :0;
+}
+.cArticle .titre {
+  font-weight: bold;
+}
+.cArticle .texte {
+  text-align: justify;
+}
+.cArticle .stats {
+  float: #LANG_RIGHT;
+}
+.cArticle #forum_lire_tous, #forum_repondre {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+[(#REM)
+
+***** Mise en page des listes d'articles *****
+
+].liste-articles li {
   border-top: #VAR{acsArticlesBord/Width,thin}[ (#VAR{acsArticlesBord/Style,dotted})][ (#VAR{acsArticlesBord/Color,#VAR{acsOngletsBord/Color}})];
   [margin-bottom: (#VAR{acsArticlesMargeBas})px;]
   margin-right: 1px;
 }
 
-.liste-articles .entete, .cartouche .entete, .plan-secteur h1 {
+.liste-articles .entete, .cArticle .entete, .plan-secteur h1 {
   [background-color: (#VAR{acsArticlesTitreFond});]
   [background: url('[(#ACS_CHEMIN)]trame/(#VAR{acsArticlesTitreFondImage})') repeat top left;]
  }
@@ -29,16 +63,12 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 
 .liste-articles li p { margin: 0; padding: 0; padding-left: 5px; }
 
-.liste-articles .titres {
-  //float: #LANG_LEFT;
-}
 .liste-articles .nav {
   float: #LANG_RIGHT;
 }
 .liste-articles .titre, .liste-articles .surtitre, .liste-articles .soustitre {
   padding-left: 5px;
   font-weight: bold;
-  font-size: 0.79em;
 }
 
 .liste-articles li .titre {
@@ -64,7 +94,6 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
   padding-right: 5px;
   margin-top: 2px;
   margin-bottom: 0.1em;
-  font-size: 0.82em;
   text-align: justify;
   display: inline-block;  /* IE */
 }
@@ -82,25 +111,6 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
   float: #LANG_LEFT;
 }
 
-[(#REM) tableaux ]
-table.spip {
-  margin: auto;
-  margin-bottom: 1em;
-  border: [(#VAR{acsArticlesTabBord/Width,1px})][ (#VAR{acsArticlesTabBord/Style,solid})][ (#VAR{acsArticlesTabBord/Color})];
-  border-collapse: collapse;
-}
-table.spip caption {
-  caption-side: top; /* bottom pas pris en compte par IE */
-  text-align: center;
-  margin: auto;
-  padding: 3px;
-  font-weight: bold;
-}
-[.article table.spip tr.row_first { background: (#VAR{acsArticlesTabFirst});}]
-[.article table.spip tr.row_odd { background: (#VAR{acsArticlesTabOdd});}]
-[.article table.spip tr.row_even { background: (#VAR{acsArticlesTabEven});}]
-.article table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle;}
-
 [(#REM) Habillage specifique du plan du site ]
 .plan-secteur {position: relative; display: block; z-index: 1;} /* IE */
 
@@ -108,7 +118,6 @@ table.spip caption {
   border: 0;
   border-top: [(#VAR{acsArticlesBord/Width,1px})][ (#VAR{acsArticlesBord/Style,solid})][ (#VAR{acsArticlesBord/Color})];
   margin: 0;
-  font-size: 110%;
   font-weight: bold;
   text-align: center;
   margin-right:1px;
@@ -137,7 +146,7 @@ table.spip caption {
   -moz-border-radius-topright: 0;
   -moz-border-radius-bottomright: 0;
 */
-  min-height: #VAR{acsArticlesLogoTailleMax,50}px;
+  min-height: #VAR{acsArticlesListesLogoTailleMax,50}px;
 }
 
 .plan-rubrique .spip_logos {
@@ -159,7 +168,7 @@ span.plan-article {
   margin-right: 1em;
 }
 
-/* Eclaircissement ou assombrissement progressif des rubriques en fonction de la profondeur */
+[(#REM) Eclaircissement ou assombrissement progressif des rubriques en fonction de la profondeur ]
 
 ul .plan-rubrique {
   background: [(#VAR{acsArticlesRubFond2, #fafffa})];

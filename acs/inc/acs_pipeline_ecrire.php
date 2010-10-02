@@ -7,10 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 // Permet d'afficher l'interface d'admin d'ACS dans toutes les langues disponibles pour spip.
-$GLOBALS['meta']['langues_proposees'] = $GLOBALS['meta']['langues_multilingue'];
-
-// On lit la release avec la fonction SPIP
-define('ACS_RELEASE', version_svn_courante(_DIR_ACS));
+//$GLOBALS['meta']['langues_proposees'] = $GLOBALS['meta']['langues_multilingue'];
 
 function acs_ajouterBouton($boutons_admin) {
 	// si on est admin SPIP ET admin ACS
@@ -28,9 +25,14 @@ function acs_ajouterBouton($boutons_admin) {
 }
 
 function acs_header_prive($flux) {
+/*
   $url_css = '../spip.php?page=acs_style_prive.css&couleur_foncee='.substr($GLOBALS['couleur_foncee'],1).'&couleur_claire='.substr($GLOBALS['couleur_claire'],1);
   $r = '<link rel="stylesheet" href="'.$url_css.'" type="text/css" media="projection, screen, tv" />';
-  
+*/
+  $url_css = _ACS_DIR_SITE_ROOT.'spip.php?page=prive/acs_style_prive.css&couleur_foncee='.substr($GLOBALS['couleur_foncee'],1).'&couleur_claire='.substr($GLOBALS['couleur_claire'],1);
+	$r = '<link rel="stylesheet" href="'.$url_css.'" />';
+	
+
   $js_dragdrop = find_in_path('javascript/dragdrop_interface.js');
   
 	// A partir de spip 2.1, l'interface dragdrop de JQuery a changé de nom:

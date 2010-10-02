@@ -14,18 +14,20 @@ Access control limit access to articles tagged with keyword _ide, _aut, or _adm 
 'Bord' => 'Border top',
 'MargeBas' => 'Margin bottom',
 'NbLettres' => 'Nb of letters before cut',
-'LogoTailleMax' => 'max logo size',
-
-'table' => 'Tables',
-'TabBordColor' => 'Border',
-'TabFirst' => 'First line',
-'TabOdd' => 'Odd',
-'TabEven' => 'Even',
+'LogoTailleMax' => 'Max logo size',
 
 'Dates' => 'Dates',
 'Aut' => 'Authors',
 'Stats' => 'Visits',
 'Lock' => 'Access control',
-'Pagination' => 'Articles per page'
+'Pagination' => 'Articles per page',
+'ListesLogoTailleMax' => 'Max logo size',
+
+'Puce' => 'Bullet',
+'RubFond2' => '2',
+'RubFond3' => '3',
+'RubFond4' => '4',
+'RubFond5' => '5',
+'RubFond6' => '6',
 );
 ?>

@@ -1,6 +1,5 @@
 #CACHE{0}[(#SET{sitelangdir,[(#LANG_DIR|=={rtl}|?{_rtl})]})]
 .cRubnav {
-  font-size: 0.82em;
   [border-width: (#VAR{acsRubnavBord/Width});]
   [border-style: (#VAR{acsRubnavBord/Style});]
   [border-color: (#VAR{acsRubnavBord/Color});]
@@ -8,7 +7,7 @@
   position: static;
 }
 
-.cRubnav .menu-titre {
+.cRubnav .bloc-title {
   text-align : center;
   font-weight: bold;
   [background: (#VAR{acsRubnavTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsRubnavTitreFondImage}})") repeat top left];]
@@ -86,7 +85,4 @@
 }
 .cRubnav .menu-item:hover>ul.hidden {
   display: block;
-}
-.Rubnav .spacer {
-  height: 10px;
 }
