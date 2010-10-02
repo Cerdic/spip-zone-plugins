@@ -24,8 +24,10 @@ function multilang_insert_head($flux){
 	$config = lire_config('multilang',array());
 
 	if($config['multilang_public'] == 'on'){
-		$flux .= "\n".'<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
-		$flux .= multilang_inserer_head($flux,$config);
+		$flux .= '
+<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />
+'.multilang_inserer_head($flux,$config).'
+';
 	}
 
 	return $flux;
@@ -77,39 +79,40 @@ function multilang_inserer_head($flux,$config=array()){
 		// - document.ready
 		// - onAjaxLoad (cas des docs et de la configuration du site)
 
-		$newflux = '<script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
-				  	<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
-				  	<script type="text/javascript">
-				  	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
-				  	multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
-					multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
-				  	multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
+		$newflux = '
+<script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
+<script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
+<script type="text/javascript">
+	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
+	multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
+	multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
+	multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
 
-					// On trie les langues. Langue de l environnement en premier,
-					// puis langue principale du site puis les autres en ordre alphabetique
-					// Un utilisateur de langue anglaise souhaite logiquement traduire en anglais
-					multilang_avail_langs = jQuery.grep(multilang_avail_langs, function(value) {
-						 return (value != multilang_def_lang && value != multilang_lang_courante);
-					});
-					multilang_avail_langs.sort() ;
-					if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang) ;
-					multilang_avail_langs.unshift(multilang_lang_courante) ;
+	// On trie les langues. Langue de l environnement en premier,
+	// puis langue principale du site puis les autres en ordre alphabetique
+	// Un utilisateur de langue anglaise souhaite logiquement traduire en anglais
+	multilang_avail_langs = jQuery.grep(multilang_avail_langs, function(value) {
+		return (value != multilang_def_lang && value != multilang_lang_courante);
+	});
+	multilang_avail_langs.sort();
+	if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang);
+	multilang_avail_langs.unshift(multilang_lang_courante);
 
-				  	jQuery(document).ready(function(){
-						function multilang_init(){
-							root = "'.$root.'";
-							fields_selector = "textarea,input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
-							// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
-							forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
-							root_opt = "form:has(.multilang)";
-							fields_selector_opt = ".multilang";
-							multilang_init_lang({fields:fields_selector,root:root,forms:forms_selector});
-						}
-						multilang_init();
-						if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
-				  });
-				  </script>
-				  ';
+	jQuery(document).ready(function(){
+		function multilang_init(){
+			root = "'.$root.'";
+			fields_selector = "textarea,input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
+			// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
+			forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
+			root_opt = "form:has(.multilang)";
+			fields_selector_opt = ".multilang";
+			multilang_init_lang({fields:fields_selector,root:root,forms:forms_selector});
+		}
+		multilang_init();
+		if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
+	});
+</script>
+';
 	}
 	return $newflux;
 }
