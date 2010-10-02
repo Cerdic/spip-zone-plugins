@@ -159,13 +159,17 @@ function spipmotion_post_edition($flux){
 	return $flux;
 }
 
-function spipmotion_insert_head($flux){
-	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('spipmotion.css', 'css/', false).'" />';
+function spipmotion_insert_head_css($flux){
+	$flux .= '
+<link rel="stylesheet" href="'.direction_css(find_in_path('spipmotion.css', 'css/', false)).'" type="text/css" media="all" />
+';
 	return $flux;
 }
 
 function spipmotion_header_prive($flux){
-	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('spipmotion.css', 'css/', false).'" />';
+	$flux .= '
+<link rel="stylesheet" href="'.direction_css(find_in_path('spipmotion.css', 'css/', false)).'" type="text/css" media="all" />
+';
 	return $flux;
 }
 

@@ -7,7 +7,7 @@
 	Quentin Drouet (kent1)
 	</auteur>
 	<version>
-	0.6.2
+	0.6.3
 	</version>
 	<version_base>0.7.4</version_base>
 	<etat>
@@ -56,7 +56,7 @@
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>insert_head</nom>
+		<nom>insert_head_css</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
