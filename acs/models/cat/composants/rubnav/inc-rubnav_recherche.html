@@ -1,0 +1,14 @@
+<B_rubriques_trouves>
+  <div class="cRubnav bsize">
+    <div class="bloc-title">
+      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a><br />]
+      <:resultats_recherche:>
+    </div>
+    <ul>
+      <BOUCLE_rubriques_trouves(RUBRIQUES) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
+      <li class="menu-item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+      </BOUCLE_rubriques_trouves>
+    </ul>
+  </div>[(#REM) fin rubriques trouves]
+  <div class="spacer"></div>
+</B_rubriques>

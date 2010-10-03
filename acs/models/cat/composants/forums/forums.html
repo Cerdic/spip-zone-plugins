@@ -1,3 +1,4 @@
 <div id="ajax_cForums" class="#PINCEAU{forums}">
-  <INCLURE {fond=composants/forums/inc-forums}{ajax}{env}{debut_forums_liens}{id_article ?}{id_breve ?}{id_syndic ?}>
+[(#ENV{page}|!={recherche}|?{' '})<INCLURE {fond=composants/forums/inc-forums}{ajax}{env}{self}{debut_forums_liens}{id_article ?}{id_breve ?}{id_syndic ?}>]
+[(#ENV{page}|=={recherche}|?{' '})<INCLURE {fond=composants/forums/inc-forums_recherche}{ajax}{env}{self}{debut_forums_liens}>]
 </div>

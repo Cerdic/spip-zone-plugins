@@ -5,5 +5,8 @@ Hierarchie des pages (arborescence)
 ]<span id="hierarchie" class="nsize">[(#ENV{page}|!={sommaire}|?{<a href="#URL_SITE_SPIP/"><:accueil_site:></a>,<:accueil_site:>})]
 [(#ID_RUBRIQUE|!={''}|?{' '})<INCLURE{fond=composants/hierarchie/inc-hierarchie_rubrique_ou_article}{env}{self}>]
 [(#ID_AUTEUR|!={''}|?{' '})<INCLURE{fond=composants/hierarchie/inc-hierarchie-auteur}{env}{self}>]
-[(#ENV{page}|?{' '})#SET{pg,_T("acs:fond_meta_page_".#ENV{page})} &gt; #EVAL{#GET{pg}}]
+[(#ENV{page}|=={recherche}|?{
+   &gt; <:info_rechercher:>[ &gt; (#RECHERCHE)],
+  [(#ENV{page}|?{' '})#SET{pg,_T("acs:fond_meta_page_".#ENV{page})} &gt; #EVAL{#GET{pg}}]
+})]
 </span>

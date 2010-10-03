@@ -1,0 +1,18 @@
+[(#REM)
+
+Liens des forums esultats de la recherche
+
+]<B_forums_liens>#ANCRE_PAGINATION
+<div class="cForums cbloc">
+  <div class="bloc-title">
+    <div class="bsize" title="<:derniers_messages_forum:>"><:derniers_commentaires:></div>
+    [<p class="pagination">(#PAGINATION)</p>]
+  </div>
+  <ul>
+  <BOUCLE_forums_liens(FORUMS){recherche} {par points}{inverse (#ORDRE|?{0,1})}{pagination #VAR{acsForumsNb,10}}>
+    <li class="menu-item"><a href="[(#URL_FORUM|replace{#,&amp;ouvrir=oui#})]" [title="(#TEXTE|supprimer_tags|attribut_html|couper{500})"]><div class="message">[<span class="date-comment nsize">(#DATE|affdate_court)</span>]<span class="bsize"> #TITRE</span></div></a></li>
+  </BOUCLE_forums_liens>
+  </ul>
+</div>
+<div class="spacer"></div>
+</B_forums_liens>

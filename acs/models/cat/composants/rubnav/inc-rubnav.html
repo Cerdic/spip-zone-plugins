@@ -109,3 +109,5 @@
 	</div>[(#REM) fin rubriques]
   <div class="spacer"></div>
 </B_rubriques>
+
+[(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/rubnav/inc-rubnav_recherche}{recherche}{lang}>]

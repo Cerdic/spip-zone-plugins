@@ -1,151 +1,16 @@
-#CACHE{0}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-[(#REM)
+#CACHE{0}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">[(#REM)
+
              ACS
          (Plugin Spip)
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<INCLURE{fond=composants/fond/entete}{page=recherche}{env=#ENV}>
-<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=21}>
-</div>[(#REM) fin colonne1 (navigation) ]
-<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=recherche}{env=#ENV}>
-  <div id="onglet">]
-    [(#REM) Fil d'Ariane ]
-    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; (#RECHERCHE)]</div>
-
-    <div class="contre-encart">
-      [(#REM) Articles trouves ]
-      <B_articles>
-
-      [<div class="cartouche">
-          <form id="tri" action="#SELF" method="get" name="tri">
-            <h1 class="surtitre"><:resultats_recherche:> <b>&#171;(#RECHERCHE)&#187;</b>, <:tries_par:>
-                <input type="hidden" name="page" value="recherche" />
-                <input type="hidden" name="recherche" value="#RECHERCHE" />
-                <select class="" name="tri" onchange="submit(); " class="spip_bouton">
-                  <option value="points"[(#TRI|=={points}|?{' selected="selected" class="selected"'})] /><:pertinence:></option>
-[(#STATS_ACTIVES|=={oui}|?{" "})
-                  <option value="popularite"[(#TRI|=={popularite}|?{' selected="selected" class="selected"'})] /><:popularite:></option>
-                  <option value="visites"[(#TRI|=={visites}|?{' selected="selected" class="selected"'})] /><:nb_de_visites:></option>
-]
-                  <option value="date_redac"[(#TRI|=={date_redac}|?{' selected="selected" class="selected"'})] /><:date_de_redaction:></option>
-                  <option value="date"[(#TRI|=={date}|?{' selected="selected" class="selected"'})] /><:date_de_publication:></option>
-                </select>
-                <input type="checkbox" name="ordre" [(#ORDRE|=={on}|?{'checked '})]onchange="submit();">[(#ORDRE|?{&uarr;,&darr;})] </input>
-                <noscript>
-                  <input type="submit" value="<:trier:>" class="spip_bouton" />
-                </noscript>
-            </h1>
-          </form>
-      </div>]
-
-      <div class="liste-articles">
-          #ANCRE_PAGINATION
-          <ul>
-            <BOUCLE_articles(ARTICLES) {recherche} {par (#TRI|?{#TRI,points})} {inverse (#ORDRE|?{0,1})} {pagination} {lang}>
-                      <li>
-												<small class="infos_article">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
-                        [<p class="surtitre">(#SURTITRE)</p>]
-                        <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-                        [<p class="soustitre">(#SOUSTITRE)</p>]<br class="nettoyeur" />
-                        [<div class="extrait">(#INTRODUCTION|couper{200,... <small><i><a href="#URL_ARTICLE"> (lire la suite)</a></i></small>})</div>]
-                        <br class="nettoyeur" />
-                      </li>
-            </BOUCLE_articles>
-          </ul>
-          [<p class="pagination">(#PAGINATION)</p>]
-      </div>
-      </B_articles>
-          <p><:aucun_article:></p>
-      <//B_articles>
-    </div><!-- fin contre-encart -->
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<div id="colonne3"><div class="spacer"></div>
-      <div class="cModule40">
-
-          [(#REM) Rubriques trouvees ]
-          <B_rubriques>
-          <div class="cRubnav">
-            #ANCRE_PAGINATION
-            <h2 class="menu-titre"><:rubriques:></h2>
-            [<p class="pagination">(#PAGINATION)</p>]
-            <ul>
-                <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
-                <li class="menu-item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
-                </BOUCLE_rubriques>
-            </ul>
-          </div>
-          <div class="spacer"></div>
-          </B_rubriques>
-
-          [(#REM) Mots-cles trouves ]
-          <B_mots>
-          <div class="cKeys">
-            #ANCRE_PAGINATION
-            <h2 class="menu-titre"><:mots_clefs:></h2>
-            [<p class="pagination">(#PAGINATION)</p>]
-            <ul>
-                <BOUCLE_mots(MOTS) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
-                <li class="menu-item"><a href="#URL_MOT">#TITRE</a></li>
-                </BOUCLE_mots>
-            </ul>
-          </div>
-          <div class="spacer"></div>
-          </B_mots>
-
-          [(#REM) Breves trouvees ]
-          <B_breves>
-          <div class="cBreves">
-            #ANCRE_PAGINATION
-            <h2 class="menu-titre"><:breves:></h2>
-            [<p class="pagination">(#PAGINATION)</p>]
-            <ul>
-                <BOUCLE_breves(BREVES) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
-                <li class="menu-item"><a href="#URL_BREVE"><div class="_text">[<small>(#DATE|affdate_court) : </small>]#TITRE</div></a></li>
-                </BOUCLE_breves>
-            </ul>
-          </div>
-          <div class="spacer"></div>
-          </B_breves>
-
-          [(#REM) Messages trouves ]
-          <B_messages>
-          <div class="cForums">
-            #ANCRE_PAGINATION
-            <h2 class="menu-titre"><:messages_forum:></h2>
-            [<p class="pagination">(#PAGINATION)</p>]
-            <ul>
-                <BOUCLE_messages(FORUMS) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
-                <li class="menu-item"><a href="#URL_FORUM"><div class="message">[<small>(#DATE|affdate_court) : </small>]#TITRE</div></a></li>
-                </BOUCLE_messages>
-            </ul>
-          </div>
-          <div class="spacer"></div>
-          </B_messages>
-
-          [(#REM) Sites web trouves ]
-          <B_sites>
-          <div class="cSyndic">
-            #ANCRE_PAGINATION
-            <h2 class="menu-titre"><:sites_web:></h2>
-            [<p class="pagination">(#PAGINATION)</p>]
-            <ul>
-                <BOUCLE_sites(SITES) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
-                <li class="site"><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><div align="center">#NOM_SITE</div></a></li>
-                </BOUCLE_sites>
-            </ul>
-          </div>
-          <div class="spacer"></div>
-          </B_sites>
-
-      </div><!-- fin encart -->
-</div>
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
+(#SET{mdescription,<:info_rechercher:>[ (#RECHERCHE)]})
+]<INCLURE{fond=composants/fond/entete}{self}{title=#GET{mdescription}}{mkeywords=#GET{mdescription}}{mdescription=#GET{mdescription}}{mrobots=none}>
+<INCLURE{fond=composants/cadre/cadre}{self}{env}{nic=2090}>
+<INCLURE{fond=composants/fond/pied}{self}>

@@ -1,0 +1,14 @@
+<B_breves>#ANCRE_PAGINATION
+  <div class="cBreves">
+    <div class="bloc-title">
+      <div class="bsize"><:dernieres_breves:></div>
+      [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+    <ul>
+      <BOUCLE_breves(BREVES){recherche}{par points}{inverse (#ORDRE|?{0,1})} {pagination 5}{pagination #VAR{acsBrevesNb,10}}{lang}>
+      <li class="menu-item"><div class="message"><a href="#URL_BREVE">[<span class="date-comment nsize">(#DATE|affdate_court)</span>]<span class="bsize"> #TITRE</span></a></div></li>
+      </BOUCLE_breves>
+    </ul>
+  </div>
+  <div class="spacer"></div>
+</B_breves>

@@ -1,11 +1,11 @@
-#CACHE{7200}
-[(#REM)
+#CACHE{7200}[(#REM)
+
              ACS
          (Plugin Spip)
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page spéciale pour insérer n'importe quelle autre page dans le site
@@ -16,21 +16,9 @@ Exemple: ?page=ifrm&ifrm=http://www.machinchose.com/
 En référençant dans spip un article virtuel qui pointe sur cette adresse,
 la page distante est affichée dans le site, en gardant les menus de navigation
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]
-<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=plan}>
-
-[(#REM) Menu de navigation lateral (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
-    <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=21}>
-  </div>[(#REM) fin menu ]
-</div>[(#REM) fin colonne1 (navigation) ]
-<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
-  <div id="onglet">]
-    [(#REM) Fil d'Ariane ]
-    <span id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_SITE_SPIP/spip.php?page=ifrm&ifrm=#IFRM">#IFRM</a> <a href="#IFRM" target="_new" title="#IFRM">&uarr;</a></span>
-      <iframe src="#IFRM" name="pc" style="width:99%; min-height: 400px; max-height:718px; margin-bottom: 6px" frameborder="0"></iframe>
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
+(#SET{mdescription,""})][
+(#SET{mkeywords,<:acs:fond_meta_keywords:>})
+]<INCLURE{fond=composants/fond/entete}{self}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/cadre/cadre}{self}{env=#ENV}{nic=2110}>
+<INCLURE{fond=composants/fond/pied}{self}>

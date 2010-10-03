@@ -1,2 +1,11 @@
-[(#REM) Sites référencés et sites syndiqués ]
-<div class="#PINCEAU{syndic}"><INCLURE{fond=composants/syndic/inc-syndic}{env}{ajax}></div>
+[(#REM) 
+
+Sites référencés et sites syndiqués
+
+]<div class="#PINCEAU{syndic}">
+[(#ID_RUBRIQUE|?{' '})<INCLURE{fond=composants/syndic/inc-syndic_rub}{env}{self}{ajax}>]
+[(#ID_RUBRIQUE|?{'',' '})
+  [(#ENV{page}|!={recherche}|?{' '})<INCLURE{fond=composants/syndic/inc-syndic}{env}{self}{ajax}>]
+  [(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/syndic/inc-syndic_recherche}{env}{self}{ajax}{recherche}>]
+]
+</div>

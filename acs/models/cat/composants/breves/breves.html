@@ -1,3 +1,4 @@
 <div id="ajax_breves" class="#PINCEAU{breves}">
-  <INCLURE {fond=composants/breves/inc-breves}{ajax}{env}{self=#SELF}{debut_breves}{id_rubrique}>
+[(#ENV{page}|!={recherche}|?{' '})<INCLURE{fond=composants/breves/inc-breves}{ajax}{env}{self}{debut_breves}{id_rubrique}>]
+[(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/breves/inc-breves_recherche}{ajax}{env}{self}{debut_breves}{recherche}>]
 </div>
