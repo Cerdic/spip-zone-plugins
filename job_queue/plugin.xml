@@ -1,11 +1,11 @@
 <plugin>
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
-  <version>0.5.2</version>
+  <version>0.6.0</version>
   <version_base>0.3.4</version_base>
   <etat>test</etat>
   <description>Gestion d'une file d'attente de t&acirc;ches &agrave; ex&eacute;cuter.</description>
-  <icon>img_pack/job_queue_48.png</icon>
+  <icon>img_pack/job_queue-32.png</icon>
   <install>base/queue.php</install>
   <options>queue_options.php</options>
 	<lien></lien> <!-- URI de documentation -->
@@ -30,6 +30,11 @@
 		<nom>affichage_final</nom>
 		<inclure>queue_pipelines.php</inclure>
 	</pipeline>
+
+	<bouton id="job_queue" parent='bando_administration'>
+		<icone>images/job_queue-16.png</icone>
+		<titre>Job Queue</titre>
+	</bouton>
 
 	<categorie>performance</categorie>
 
