@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_explication_format' => 'Utilisez une virgule "," pour s&eacute;parer les formats',
 	'cfg_explication_logo_auto' => 'Utiliser la premi&egrave;re page export&eacute;e comme logo du document original s\'il n\'a pas d&eacute;j&agrave; de vignette personnalis&eacute;e.',
-	'cfg_explication_resolution' => 'D&eacute;fini la r&eacute;solution utilis&eacute;e en entr&eacute;e avant de r&eacute;aliser les exports. Pour les fichiers de type vectoriels (svg, pdf...) il est int&eacute;ressant d\'augmenter cette r&eacute;solution pour am&eacute;liorer le r&eacute;sultat final. Cependant cela ralenti fortement le temps de g&eacute;n&eacute;ration et la taille des fichiers finaux. Un bon compromis est 150 ou 300 dpi',
+	'cfg_explication_resolution' => 'D&eacute;fini la r&eacute;solution utilis&eacute;e en entr&eacute;e avant de r&eacute;aliser les exports. Pour les fichiers de type vectoriels (svg, pdf...) il est int&eacute;ressant d\'augmenter cette r&eacute;solution pour am&eacute;liorer le r&eacute;sultat final. Cependant cela ralenti fortement le temps de g&eacute;n&eacute;ration et la taille des fichiers finaux. Un bon compromis est 150 ou 300 dpi.',
 	'cfg_explication_compression' => 'D&eacute;fini la qualit&eacute; de compression finale des fichiers de sortie (en poucentage)',
 	'cfg_label_agrandissements' => 'Autoriser les agrandissements',
 	'cfg_label_compression' => 'Qualit&eacute; de compression',

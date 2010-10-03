@@ -1,9 +1,12 @@
 <plugin>
-	<nom>doc2img</nom>
+	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
 	<auteur>Camille Lafitte</auteur>
 	<version>0.92</version>
 	<etat>dev</etat>
-    <description> Ce plugin permet de convertir &#224; la vol&egrave;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle.</description>
+    <description><multi>
+    	[fr]Ce plugin permet de convertir &#224; la vol&#232;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle.
+		[en]This plugin will convert on the fly pdf, tiff ... documents in image(s). These images can then be exploited via a loop.
+	</multi></description>
     <lien>http://www.spip-contrib.net/doc2img</lien>
 
     <prefix>doc2img</prefix>
