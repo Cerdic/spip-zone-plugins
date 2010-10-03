@@ -12,11 +12,11 @@ ACS version 0.7
  - changement d'algorithme de l'analyseur de page afin d'éviter les erreurs sur de trop grosses regexp
  - amélioration du drag/drop des composants dans la partie privee
  - balises #ACS_VERSION et #ACS_RELEASE, permettant de faire des composants multi-versions
- - la css acs_style_prive.css.html passe dans le dossier prive d'ACS façon SPIP 2
  
 Modele Cat pour ACS vesion 0.7 :
  - transformation de TOUTES les pages du modèle (squelette) "cat" en pages constituées uniquement de modules (en cours)
  - modification de la feuille de style habillage.css.html, qui se contente desormais d'appeller les feuilles de style des composants.
+ - composants contextuels : les composants breves, forums, keys,rubnav et syndic affichent des resultats contextuels selon l page où ils sont utilisés. Par exemple, sur la page de resultats d'une recherche, ils donnent le résultat de la recherche.
  - modele doc_player : reactualisation
  - Mise à jour de TOUS les composants (en cours)
  - Audio : toilettage du composant / nouveau modèle. drag/drop sur le slider
@@ -24,9 +24,10 @@ Modele Cat pour ACS vesion 0.7 :
  - Edito : nouvelles variables - boutons de navigation precedent / suivant
  - Fond : définition de classes par défaut héritées par tous les composants - personnalisation des styles spip natifs -  suppression de l'appel à spip_style.css, remplacé par la rdéfinition, personnalisable, de ces styles dans la css du composant Fond (à noter : meme située AVANT dans le header, la css spip_style.css pouvait prendre le pas sur la css habillage.css.html définie APRES - bug vu avec Firefox 3.6.10 et Konqueror 3.5.10)
  - Hierarchie : composant affichant la hiérarchie de la page en cours, pour les pages rubriques, articles, et toutes les pages ayant "page" dans l'url ET une traduction correspondante définie dans le composant "Fond"
+ - IFrame : nouveau composant
  - Login : nouveau composant pour gérer la connection au site
  - Mail : dimensionnement automatique pour spip 2.1.2
- - Module : renommé -> composant Cadre
+ - Module : remplacé par le composant Cadre, qui permet en plus du contenu de définir l'apparence
  - Rubrique : nouveau composant apparence d'une rubrique
 _______________________________________
 ACS version 0.6

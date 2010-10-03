@@ -21,8 +21,7 @@ function acs_insert_head($flux) {
 
   // On ajoute une css et des javascripts rien que pour les administrateurs ACS
   if (acs_autorise()) {
-  	$r .= '<link rel="stylesheet" href="(#URL_PAGE{acs_style_prive.css}|direction_css)" type="text/css" media="projection, screen, tv" />';
-  	$r .= '<link rel="stylesheet" href="'.direction_css(generer_url_public('prive/acs_style_prive.css')).'" type="text/css" media="projection, screen, tv" />';
+  	$r .= '<link rel="stylesheet" href="'.direction_css(generer_url_public('acs_style_prive.css')).'" type="text/css" media="projection, screen, tv" />';
   	$js_dragdrop = find_in_path('javascript/dragdrop_interface.js');
   	// A partir de spip 2.1, l'interface dragdrop de JQuery a changé de nom:
   	if (!$js_dragdrop)
