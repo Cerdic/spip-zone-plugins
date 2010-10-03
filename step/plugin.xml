@@ -1,9 +1,14 @@
 <plugin>
 	<nom>Step</nom>
-	<shortdesc>Syst&egrave;me de t&#233;l&#233;chargement de plugins</shortdesc>
+	<shortdesc>
+		<multi>
+			[fr]Syst&#232;me de t&#233;l&#233;chargement de plugins
+			[en]Plugins download system
+		</multi>
+	</shortdesc>
 	<auteur>
 	Matthieu Marcillaud
-_ &#169; 2008 2009
+_ &#169; 2008 2010
 	</auteur>
 	<licence>GPL</licence>
 	<lien></lien>
@@ -13,18 +18,20 @@ _ &#169; 2008 2009
 
 	<icon>images/step-128.png</icon>
 
-
 	<etat>dev</etat>
     <description>
-	Ce plugin permet de de gerer les plugins de SPIP ainsi que leur
-	d&#233;pendances et t&#233;l&#233;chargements
+    	<multi>
+    		[fr]Ce plugin permet de de g&#233;rer les plugins de SPIP ainsi que leur
+			d&#233;pendances et t&#233;l&#233;chargements
+			[en]This plugin allows you to manage SPIP plugins, their 
+			dependencies and downloads
+		</multi>
 	</description>
 	<prefix>step</prefix>
 
     <options>step_options.php</options>
     <fonctions>step_fonctions.php</fonctions>
 
-	<!-- Ajout d'un bouton -->
 	<bouton id='step' parent='configuration'>
 		<icone>images/step-paquet-24.png</icone>
 		<titre>STEP</titre>
@@ -34,7 +41,6 @@ _ &#169; 2008 2009
 		<titre>STEP</titre>
 		<url>step</url>
 	</bouton>
-
 
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>

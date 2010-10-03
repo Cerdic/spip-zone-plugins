@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'paquet_telechargement_prochain' => 'Prochain t&eacute;l&eacute;chargement',
 	'paquet_telechargement_todo' => 'A t&eacute;l&eacute;charger',
 	'paquets_nb_telechargements_err' => 'Une erreur est survenue sur @nb@ paquets.',
-	'paquets_telechargements_termines' => 'Tous les t&eacute;l&eacute;chargements sont termin&eacute;s !',
+	'paquets_telechargements_termines' => 'Tous les t&eacute;l&eacute;chargements sont termin&eacute;s.',
 	'paquets_telecharger' => 'T&eacute;l&eacute;charger',
 	'paquets_telechargeables' => 'Paquets t&eacute;l&eacute;chargeables',
 
