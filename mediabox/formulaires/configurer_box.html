@@ -24,11 +24,11 @@
 			<p class="explication"><:mediabox:explication_traiter_toutes_images:></p>
 			<div class="choix">
 				<input type="radio" name="traiter_toutes_images" class="radio" id="traiter_images_on" value="oui" [(#ENV{traiter_toutes_images,oui}|=={oui}|oui) checked="checked"] />
-				<label for='traiter_images_on'><:oui:></label>
+				<label for='traiter_images_on'><:item_oui:></label>
 			</div>
 			<div class="choix">
 				<input type="radio" name="traiter_toutes_images" class="radio" id="traiter_images_off" value="non" [(#ENV{traiter_toutes_images,oui}|=={non}|oui) checked="checked"] />
-				<label for='traiter_images_off'><:non:></label>
+				<label for='traiter_images_off'><:item_non:></label>
 			</div>
 		</li>
 
