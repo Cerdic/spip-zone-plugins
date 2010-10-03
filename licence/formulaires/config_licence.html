@@ -12,7 +12,7 @@
 			<label for="licence_defaut"><:licence:cfg_lbl_licence_defaut:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{licence_defaut})</span>]
 			<select name="licence_defaut" id="licence_defaut">
-			<option value="0"[(#ENV{licence_defaut}|=={0}|oui) selected="selected"]><:licence:aucune_licence:></option>
+			<option value="0"[(#ENV{licence_defaut}|=={0}|oui) selected="selected"]><:licence:sans_licence:></option>
 			<BOUCLE_selection(POUR){tableau #ENV{_licences}}>
 				[(#SET{id_licence,[(#VALEUR|table_valeur{id})]})]
 				<option value="#GET{id_licence}"[(#GET{id_licence}|=={#ENV{licence_defaut}}|oui) selected="selected"]>[(#VALEUR|table_valeur{name})][ - (#VALEUR|table_valeur{description})]</option>
@@ -22,7 +22,6 @@
 	</ul>
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
-		<input type="submit" name="_cfg_delete" class="submit" value="<:cfg:bouton_effacer:>" />
 	</p>
 </div></form>
 </div>
