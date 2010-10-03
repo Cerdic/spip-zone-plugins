@@ -26,11 +26,11 @@
 								<label><:mes_fichiers:label_cfg_sauvegarde_reguliere:></label>
 								<div class="choix">
 									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_true" value="oui"[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={oui}|oui)checked="checked"] />
-									 <label for="sauvegarde_reguliere_true"><:mes_fichiers:oui:></label>
+									 <label for="sauvegarde_reguliere_true"><:item_oui:></label>
 								</div>
 								<div class="choix">
 									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_false" value="non"[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={oui}|non)checked="checked"] />
-									 <label for="sauvegarde_reguliere_false"><:mes_fichiers:non:></label>
+									 <label for="sauvegarde_reguliere_false"><:item_non:></label>
 								</div>
 							</li>
 							[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={oui}|oui)
@@ -53,11 +53,11 @@
 								<label><:mes_fichiers:label_cfg_notif_active:></label>
 								<div class="choix">
 									 <input type="radio" name="notif_active" id="notif_active_true" value="oui"[(#CONFIG{mes_fichiers/notif_active}|=={oui}|oui)checked="checked"] />
-									 <label for="notif_active_true"><:mes_fichiers:oui:></label>
+									 <label for="notif_active_true"><:item_oui:></label>
 								</div>
 								<div class="choix">
 									 <input type="radio" name="notif_active" id="notif_active_false" value="non"[(#CONFIG{mes_fichiers/notif_active}|=={oui}|non)checked="checked"] />
-									 <label for="notif_active_false"><:mes_fichiers:non:></label>
+									 <label for="notif_active_false"><:item_non:></label>
 								</div>
 							</li>
 							[(#CONFIG{mes_fichiers/notif_active}|=={oui}|oui)

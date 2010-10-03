@@ -63,12 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_zip_auteur_indetermine' => 'Undetermined',
 'message_zip_auteur_cron' => 'Cron job',
 
-// N
-'non' => 'no',
-
-// O
-'oui' => 'yes',
-
 // R
 'resume_table_telecharger' => 'List of archives you can download',
 'resume_zip_auteur' => 'Created by',

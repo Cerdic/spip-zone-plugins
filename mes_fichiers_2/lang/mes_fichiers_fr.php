@@ -63,12 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_zip_auteur_indetermine' => 'Non d&eacute;termin&eacute;',
 'message_zip_auteur_cron' => 'Tache automatique',
 
-// N
-'non' => 'non',
-
-// O
-'oui' => 'oui',
-
 // R
 'resume_table_telecharger' => 'Liste des archives disponibles au t&eacute;l&eacute;chargement',
 'resume_zip_auteur' => 'Cr&eacute;&eacute; par',
