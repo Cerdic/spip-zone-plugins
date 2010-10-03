@@ -1,5 +1,5 @@
 <plugin>
-	<nom>PolyHierarchie</nom>
+	<nom><multi>[fr]PolyHierarchie[en]PolyHierarchy</multi></nom>
 	<icon>images/polyhier-128.png</icon>
 	<auteur>[Cedric Morin->http://www.yterium.com]
 _ &#169; 2009-2010
@@ -8,10 +8,12 @@ _ &#169; 2009-2010
 	<version>0.3.0</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
-	<description>
-	Plugin permettant de cr&#233;er des liens transversaux en rattachant des rubriques
-	et articles &#224; d'autres rubriques que leur rubriques que leur parent direct.
-	</description>
+	<description><multi>
+	[fr]Plugin permettant de cr&#233;er des liens transversaux en rattachant des rubriques
+	et articles &#224; d'autres rubriques que leur parent direct.
+	[en]Plugin for creating cross-links by referencing sections
+	and articles to other sections that their their direct parent.
+	</multi></description>
 	<lien>http://www.spip-contrib.net/Polyhierarchie</lien>
 	<prefix>polyhier</prefix>
 	<install>base/polyhier.php</install>
