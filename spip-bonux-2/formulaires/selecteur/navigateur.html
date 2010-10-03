@@ -16,8 +16,8 @@
 		<div class='frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]'>[(#ENV{limite_branche}|non|ou{#ID_RUBRIQUE|in_array{#GET{rubriques_branche,#ARRAY}}}|oui)<a
 		href='[(#SELF|parametre_url{id_r,#_rub:ID_PARENT|?{#_rub:ID_PARENT,racine}})]' class='frame_close ajax'><img src='#CHEMIN{img_pack/frame-close.png}' alt='' /></a>]
 		<h2>[(#ID_RUBRIQUE|=={#ENV{limite_branche}}|?{#TITRE,<a class='ajax' href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>#TITRE</a>})]</h2>
-		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique}{env})]
-		[(#ENV{articles,0}|oui) [(#INCLURE{fond=formulaires/selecteur/inc-nav-articles}{id_rubrique}{id_article}{env})] ]
+		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=#ID_RUBRIQUE}{env})]
+		[(#ENV{articles,0}|oui) [(#INCLURE{fond=formulaires/selecteur/inc-nav-articles}{id_rubrique=#ID_RUBRIQUE}{id_article}{env})] ]
 		</div>
 		</BOUCLE_contenu>
 
