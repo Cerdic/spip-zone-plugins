@@ -9,7 +9,7 @@
 		<div class="titrem">[(#VAL{spipmotion:info_compiler_#CLE}|_T)] :</div>
 		<div class="cadre-padding">
 		<BOUCLE_compiler(POUR){tableau #_version:VALEUR}>
-			<div class="tr_liste" style="padding:5px;border-top:1px solid #AAAAAA;">[(#CLE|is_numeric|non)[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : ][(#VALEUR|?{[(#VALEUR|=={1}|?{<:spipmotion:oui:>,#VALEUR})],<:spipmotion:non:>})]</div>
+			<div class="tr_liste" style="padding:5px;border-top:1px solid #AAAAAA;">[(#CLE|is_numeric|non)[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : ][(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</div>
 		</BOUCLE_compiler>
 		</div>
 		</div>
@@ -18,7 +18,7 @@
 	</B_array>
 	[(#CLE|!={build_date}|oui)
 		[(#CLE|!={build_date_timestamp}|oui)
-			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|?{[(#VALEUR|=={1}|?{<:spipmotion:oui:>,#VALEUR})],<:spipmotion:non:>})]</p>
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</p>
 		]
 		[(#CLE|=={build_date_timestamp}|oui)
 			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|normaliser_date|affdate)]</p>
@@ -56,8 +56,8 @@
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
-		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
-		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
+		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:item_oui:>,<:item_non:>})]</td>
+		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:item_oui:>,<:item_non:>})]</td>
 	</tr>
 </BOUCLE_formats>
 	</tbody>
@@ -89,8 +89,8 @@
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
 		<td class="type">[(#VALEUR|table_valeur{type}|ffmpeg_codec_type_to_type)]</td>
-		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
-		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
+		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:item_oui:>,<:item_non:>})]</td>
+		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:item_oui:>,<:item_non:>})]</td>
 	</tr>
 </BOUCLE_codecs>
 	</tbody>

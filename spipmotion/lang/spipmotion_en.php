@@ -158,12 +158,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_titre_binaire_manquant' => 'A missing software',
 	'message_titre_binaires_manquant' => 'Plusieurs logiciels manquant',
 
-	// N
-	'non' => 'no',
-
 	// O
 	'options_config' => 'Encoding configuration',
-	'oui' => 'yes',
 
 	// P
 	'profil_encodage' => 'Encoding profile for the format : @format@',
