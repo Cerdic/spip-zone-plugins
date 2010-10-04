@@ -30,9 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Mobile',
 
 	// I
-	'item_nouveau_adresse' => 'New address',
+	'item_nouvelle_adresse' => 'New address',
 	'item_nouveau_numero' => 'New phone number',
-	'item_nouveau_email' => 'New email',
+	'item_nouvel_email' => 'New email',
 	'info_adresse_utilisee_par' => "This address used by :",
 	'info_numero_utilise_par' => "This phone number is used by :",
 	'info_email_utilise_par' => "This email is used by :",
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_email' => "Type of email",
 	'label_pays' => "Country",
 	'label_ville' => "City",
-	'label_voie' => "Street",
+	'label_voie' => "Address",
 	
 	// N
 	'numeros' => 'Phone numbers',

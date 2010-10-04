@@ -26,7 +26,7 @@ function action_editer_adresse_dist() {
 
 function insert_adresse() {
 	$champs = array(
-		'voie' => _T('cop:item_nouveau_adresse')
+		'voie' => _T('cop:item_nouvelle_adresse')
 	);
 	
 	// Envoyer aux plugins
@@ -60,7 +60,7 @@ function revisions_adresses($id_adresse, $c=false) {
 	if ($c === false) {
 		$c = array();
 		foreach (array(
-				'numero', 'voie', 'complement', 'boite_postale',
+				'voie', 'complement', 'boite_postale',
 				'code_postal', 'ville', 'pays', 'type_adresse') as $champ
 		) {
 			if (($a = _request($champ)) !== null) {

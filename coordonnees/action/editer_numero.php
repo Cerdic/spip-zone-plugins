@@ -26,7 +26,7 @@ function action_editer_numero_dist() {
 
 function insert_numero() {
 	$champs = array(
-		'numero' => _T('cop:item_nouveau_email')
+		'numero' => _T('cop:item_nouvel_email')
 	);
 	
 	// Envoyer aux plugins

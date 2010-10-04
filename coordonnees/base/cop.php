@@ -31,7 +31,7 @@ function cop_declarer_tables_principales($tables_principales){
 	$adresses = array(
 		"id_adresse"	=> "bigint(21) NOT NULL auto_increment",
 		"type_adresse"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // perso, pro, vacance...
-		"adresse"		=> "tinytext DEFAULT '' NOT NULL", // p. ex. rue de cotte
+		"voie"			=> "tinytext DEFAULT '' NOT NULL", // p. ex. 21 rue de cotte
 		"complement"	=> "tinytext DEFAULT '' NOT NULL", // p. ex. 3? ?tage
 		"boite_postale"	=> "VARCHAR(10) DEFAULT '' NOT NULL", 
 		"code_postal"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
