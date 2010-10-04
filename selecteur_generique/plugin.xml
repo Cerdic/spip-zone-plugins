@@ -3,10 +3,10 @@
 	S&#233;lecteur g&#233;n&#233;rique
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Fil kent1
+	Fil, kent1
 	</auteur>
 	<version>
-	0.5
+	0.6
 	</version>
 	<etat>
 	stable
@@ -17,6 +17,7 @@
 	<prefix>
 	SelecteurGenerique
 	</prefix>
+	<fonctions>public/selecteur_generique_criteres.php</fonctions>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>inserer_javascript</action>
