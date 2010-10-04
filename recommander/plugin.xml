@@ -14,6 +14,9 @@
 			[en]&#169; 2006-2010 - Released under GNU/GPL License
 		</multi>
 	</licence>
+	<icon>
+		images/recommander_logo.png
+	</icon>
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<description>
