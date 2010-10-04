@@ -65,7 +65,6 @@ function INCLUREAJAXLOAD_insert_head($flux) {
 	$flux .= "\n<script src=\"".find_in_path('javascript/inclure-ajaxload.js')."\" type=\"text/javascript\"></script>";
 
 $flux = '<?php if ($_COOKIE["no_js"] != "no_js") { ?>
-<!-- *** Javascript Detect Hack *** -->
 <script type="text/javascript"><!--
 document.write("<\/script><script>/*");
 //--></script>
@@ -74,7 +73,6 @@ document.write("<\/script><script>/*");
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="-1" />
 <script type="text/javascript">/* */</script>
-<!-- ********* End of hack ******** -->
 <?php } ?>'.$flux;
 
 	return $flux;
