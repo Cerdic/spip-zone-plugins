@@ -1,15 +1,24 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Recommander &#224; un ami
+	<nom>
+		<multi>
+			[fr]Recommander &#224; un ami
+			[en]Recommend to a friend
+		</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
+	<auteur>
 	[fil@rezo.net->mailto:fil@rezo.net]
-_ &#169; 2006-2010 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
+	<licence>
+		<multi>
+			[fr]&#169; 2006-2010 - Distribu&#233; sous licence GNU/GPL
+			[en]&#169; 2006-2010 - Released under GNU/GPL License
+		</multi>
+	</licence>
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<description>
-	Fonction recommander un article &#224; un ami.
+		<multi>
+			[fr]Fonction recommander un article &#224; un ami.
 
 On l'ajoute dans n'importe quel squelette sous la forme :
 <code>#RECOMMANDER{titre de la page,url de la page,intro de la page,sujet}</code>
@@ -18,8 +27,14 @@ _ par exemple
 _ l'url, l'intro et le sujet sont facultatifs
 
 L'interface est en ahah.
+			[en]"Recommend an article to a friend" functionnality.
+			
+We add it in a skeleton like this :
+<code>#RECOMMANDER{title of the page,URL of the page,introduction of the page,subject}</code>
+_ for example
+<code>#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}</code>
+_ Url, introduction and subject are optionals.</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
 	<prefix>recommander</prefix>
 	<necessite id="SPIP" version="[2.0.12;]" />
 	<categorie>communication</categorie>

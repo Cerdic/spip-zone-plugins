@@ -19,10 +19,10 @@
 		<li class="editer_recommander_message[ (#ENV**{erreurs}|table_valeur{recommander_message}|oui)erreur]">
 			<label for='recommander_message'><:forum_texte:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{recommander_message})</span>
-			]<textarea class='text forml' id='recommander_message' name='recommander_message' rows='' cols=''>#ENV*{recommander_message}</textarea>
+			]<textarea class='text forml' id='recommander_message' name='recommander_message' rows='5' cols='30'>#ENV*{recommander_message}</textarea>
 		</li>
 	</ul>
-	<div class='boutons spip_bouton'><input type='submit' class='submit' name='recommander_email' value='<:recommander:recommander_message:>' /></div>
+	<p class='boutons spip_bouton'><input type='submit' class='submit' name='recommander_email' value='<:recommander:recommander_message:>' /></p>
 	</div></form>
 ]
 </div>

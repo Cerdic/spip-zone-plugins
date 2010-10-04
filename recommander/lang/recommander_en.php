@@ -4,7 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
-	'destinataire' => "Recipient :",
+	'destinataire' => "Recipient",
 
 	// R
 	'recommander' => 'Send this article',
