@@ -1,6 +1,9 @@
 <plugin>
 	<nom>
-	Formulaires Ajax
+		<multi>
+			[fr]Formulaires Ajax
+			[en]Ajax forms
+		</multi>
 	</nom>
 	<auteur>
 	Collectif
@@ -12,7 +15,8 @@
 	test
 	</etat>
 	<description>
-	Ce plugin offre une collection de formulaires en ajax un peu rigolos ; 
+		<multi>
+			[fr]Ce plugin offre une collection de formulaires en ajax un peu rigolos, 
 	soit pour les utiliser (et pourquoi pas), soit pour s'en inspirer 
 	pour construire les siens.
 
@@ -20,7 +24,13 @@
 -* #FORMULAIRE_EDITER_LOGO
 -* #FORMULAIRE_AJOUTER_UN_DOCUMENT
 -* #FORMULAIRE_EDITER_DOCUMENT
-
+			[en]This plugin offers a collection of forms ajax a bit fun, 
+	to use them (and why not?), or for inspiration to build his own.
+-* #FORMULAIRE_QUI_ES_TU
+-* #FORMULAIRE_EDITER_LOGO
+-* #FORMULAIRE_AJOUTER_UN_DOCUMENT
+-* #FORMULAIRE_EDITER_DOCUMENT
+		</multi>
 	</description>
 	<lien>
 	</lien>
