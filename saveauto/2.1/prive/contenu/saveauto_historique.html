@@ -4,6 +4,10 @@
 #SET{sauvegardes,#GET{rep_base}|preg_files{#GET{regexp}}}
 
 <B_historique>
+<p><:saveauto:info_telecharger_sauvegardes:></p>
+#SET{jours,#CONFIG{saveauto/jours_obso,15}}
+<p><:saveauto:info_sauvegardes_obsolete{nb=#GET{jours}}:></p>
+[(#ANCRE_PAGINATION)]
 <table id="saveauto_telecharger" class="spip" summary="<:saveauto:resume_table_telecharger:>">
 	<thead>
 		<tr>
@@ -14,16 +18,17 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_historique(POUR){tableau #GET{sauvegardes}}{par valeur}{inverse}>
-		<tr id="#zip_#COMPTEUR_BOUCLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
-			<td>[<label[ for="zip_(#CLE)"]>(#VALEUR|basename)</label>]</td>
+<BOUCLE_historique(POUR){tableau #GET{sauvegardes}}{par valeur}{pagination 10}{inverse}>
+		<tr id="zip_#CLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
+			<td>[(#VALEUR|basename)]</td>
 			<td style="text-align: right">[(#VALEUR|filesize|taille_en_octets)]</td>
 			<td>[(#VAL{Y-m-d H:i:s}|date{[(#VALEUR|filemtime)]}|affdate_heure{'Y-m-d H:i:s'})]</td>
-			<td>[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{saveauto_telecharger,#VALEUR,#SELF}})]</td>
+			<td>[(#BOUTON_ACTION{<:bouton_download:>, #URL_ACTION_AUTEUR{saveauto_telecharger,#VALEUR,#SELF}})]</td>
 		</tr>
 </BOUCLE_historique>
 	</tbody>
 </table>
+[<p class="pagination">(#PAGINATION)</p>]
 </B_historique>
 <div class="cadre cadre-e" style="margin: 10px 0;">
 	<div class="cadre_padding">
