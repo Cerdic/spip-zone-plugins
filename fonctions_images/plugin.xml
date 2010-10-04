@@ -1,20 +1,34 @@
 <plugin>
-	<nom>Fonctions d'images</nom>
+	<nom>Images functions</nom>
 	<auteur>Arnaud Martin  ([->http://www.paris-beyrouth.org/-SPIP-])
-	(mis en plugin par Matthieu Marcillaud)
-_ &#169; 2007 - Distribu&#233; sous licence GPL
+	<multi>
+		[fr]
+_ mis en plugin par Matthieu Marcillaud
+		[en]
+_ released as a plugin by Matthieu Marcillaud
+	</multi>
 	</auteur>
-	<lien></lien>
+	<licence>
+		<multi>
+			[fr]&#169; 2007-2010 - Distribu&#233; sous licence GPL
+			[en]&#169; 2007-2010 - Released under GNU/GPL license
+		</multi>
+	</licence>
 	<version>0.5.1</version>
 	<etat>stable</etat>
     <description>
-Fournit des filtres pour le traitement des images, essentiellement
+    	<multi>
+    		[fr]Fournit des filtres pour le traitement des images, essentiellement
 extraits du site [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
-Une page de test permet de voir <a href="../?page=tests_fonctions_images">les filtres en action</a> une fois le plugin activ&eacute; :
+{{Filtres propos&#233;s :}}
+-* en_image (utile pour SPIP &lt; 1.9.3)
+			[en]Provides image processing filters, mainly
+extracted from the website [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
-{{Filtres propos&eacute;s :}}
--* en_image (utile pour spip &lt; 1.9.3)
+{{Proposed filters :}}
+-* en_image (usefull for SPIP &lt; 1.9.3)
+		</multi>
 -* couleur_chroma
 -* couleur_saturer
 -* couleur_teinter
