@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+	<!--  
+
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	 	
+	<nom>Site Archive (SiA)</nom>
+	<auteur>
+		[Christian Paulus->http://www.quesaco.org/]
+	</auteur>
+	<licence>&#169; 2010 [GNU/GPL 3->http://fr.wikipedia.org/wiki/Licence_publique_g%C3%A9n%C3%A9rale_GNU]</licence>
+
+	<description>
+		Maintenance d&#39;archives de rubriques ou d'articles 
+		pour une consultation hors connexion.
+	</description>
+	<icon>images/sia-64.png
+	</icon>
+	
+	<!-- documentation -->
+	<lien>http://www.quesaco.org/Archive-de-site-Website-archiver</lien>
+	
+	<version>0.1.00</version>
+	<etat>test</etat>
+	
+	<!-- espace de nommage -->
+	<prefix>sia</prefix>
+	
+	<install>sia_install.php</install>
+	
+	<fonctions>sia_fonctions.php</fonctions>
+	
+	<necessite id='SPIP' version='[2.1.2;]' />
+	
+	<utilise id="cfg" version="[1.15.0;]" />
+	
+	<categorie>maintenance</categorie>
+	
+</plugin>
