@@ -159,14 +159,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// obsolete
 	'obsolete' => 'Obsol&egrave;tes',
 	'obsolete_tous' => 'Tous',
-	'obsolete_oui' => 'Oui',
-	'obsolete_non' => 'Non',
 
 	// superieurs
 	'superieur' => 'Plus r&eacute;cents',
 	'superieur_tous' => 'Tous',
-	'superieur_oui' => 'Oui',
-	'superieur_non' => 'Non',
 
 	// champs
 	'plugin_champ_etat' => '&Eacute;tat',
