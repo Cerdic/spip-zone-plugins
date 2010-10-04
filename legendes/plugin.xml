@@ -1,5 +1,10 @@
 <plugin>
-	<nom>L&eacute;gendes</nom>
+	<nom>
+		<multi>
+			[fr]L&#233;gendes
+			[en]Captions
+		</multi>
+	</nom>
 	<auteur>b_b</auteur>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
@@ -7,10 +12,12 @@
 	<prefix>legendes</prefix>
 	<categorie>multimedia</categorie>
 	<description>
-		L&eacute;gender ses photos
+		<multi>
+			[fr]L&#233;gender ses photos
+			[en]Add captions on photos
+		</multi>
 	</description>
-	<lien></lien>
-	<licence>GPL</licence>
+	<licence>GNU/GPL</licence>
 	<icon>images/legendes-128.png</icon>
 	<lien>http://www.spip-contrib.net/Legendes</lien>
 	<fonctions>legendes_fonctions.php</fonctions>
