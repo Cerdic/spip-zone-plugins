@@ -1,11 +1,15 @@
 <plugin>
     <nom><multi>[fr]Copier coller facile[en]Easy copy / paste</multi></nom>
-    <auteur>Quentin Drouet</auteur>
+    <auteur>kent1</auteur>
     <licence>&#169; 2010 GNU/GPL</licence>
     <version>0.1</version>
+	<icon>images/zeroclipboard_logo.png</icon>
     <etat>dev</etat>
     <description>
-
+		<multi>
+			[fr]Ajoute un lien "Copier" avant chaque &#233;l&#233;ment de class <code>.copypaste</code> permettant de mettre son contenu dans presse-papier
+			[en]Adds a "Copy" link before each element with the class <code>.copypaste</code> and place its contents into the clipboard
+		</multi>
     </description>
     <prefix>zeroclipboard</prefix>
 	<options>zeroclipboard_options.php</options>
@@ -13,7 +17,7 @@
 		<nom>insert_head</nom>
 		<inclure>zeroclipboard_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="SPIP" version="[2.1.2;]" />
 	<necessite id="pcltar" version="[0.1;]" />
 	<necessite id="lib:zeroclipboard" src="http://zeroclipboard.googlecode.com/files/zeroclipboard-1.0.7.tar.gz" />
 	<categorie>divers</categorie>
