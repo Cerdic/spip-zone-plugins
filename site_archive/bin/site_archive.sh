@@ -285,7 +285,7 @@ else
 	fi
 fi
 
-notice_log "wget options: $WGET_RECUR_OPTIONS $WGET_OPTIONS"
+notice_log "wget options: $WGET_OPTIONS"
 
 # Créer si besoin le réceptacle des logs wget
 # (a dû être créé par le plugin)
