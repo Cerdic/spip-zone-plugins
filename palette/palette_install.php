@@ -7,10 +7,10 @@ function palette_upgrade($nom_meta_base_version,$version_cible){
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 	|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		if (function_exists('ecrire_config')){
-			if(is_null(lire_config('config_palette/palette_public')))
-				ecrire_config('config_palette/palette_public','');
-			if(is_null(lire_config('config_palette/palette_ecrire')))
-				ecrire_config('config_palette/palette_ecrire','on');
+			if(is_null(lire_config('palette/palette_public')))
+				ecrire_config('palette/palette_public','');
+			if(is_null(lire_config('palette/palette_ecrire')))
+				ecrire_config('palette/palette_ecrire','on');
 		}
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible, 'non');
 	}
@@ -18,7 +18,7 @@ function palette_upgrade($nom_meta_base_version,$version_cible){
 
 function palette_vider_tables($nom_meta_base_version) {
 	if (function_exists('effacer_config')){
-		effacer_config('config_palette');
+		effacer_config('palette');
 	}
 	effacer_meta($nom_meta_base_version);
 }

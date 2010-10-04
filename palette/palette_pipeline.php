@@ -1,14 +1,14 @@
 <?php
 
 function palette_insert_head($flux) {
-  $cfg = unserialize($GLOBALS['meta']['config_palette']);
+  $cfg = unserialize($GLOBALS['meta']['palette']);
   if ($cfg['palette_public'] == 'on')
 	  $flux .= palette_header_common('public');
 	return $flux;
 }
 
 function palette_header_prive($flux) {
-  $cfg = unserialize($GLOBALS['meta']['config_palette']);
+  $cfg = unserialize($GLOBALS['meta']['palette']);
 	if ($cfg['palette_ecrire'] == 'on')
 	  $flux .= palette_header_common('prive');
 	return $flux;
