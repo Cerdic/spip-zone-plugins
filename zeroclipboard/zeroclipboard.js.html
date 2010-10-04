@@ -30,6 +30,7 @@ $(function(){
 	}
 
 	$('.copypaste').each(function(){
+		clip.reposition(this);
 		$(this).before('<div class="copypaste_container" style="position:relative"><a title="<:zeroclipboard:link_title_copy:>" class="copypaste_link"><:zeroclipboard:link_text_copy:></a></div>');
 		$(this).prev('div').find('a').mouseover( function() {
 				clip.setText($(this).parent().next('.copypaste').val());
