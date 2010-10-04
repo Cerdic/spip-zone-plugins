@@ -73,6 +73,10 @@ document.write("<\/script><script>/*");
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="-1" />
 <script type="text/javascript">/* */</script>
+<?php } else { ?>
+<script type="text/javascript"><!--
+	document.cookie = "no_js=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
+--></script>
 <?php } ?>'.$flux;
 
 	return $flux;
