@@ -22,7 +22,7 @@ function saisies_insert_head_css($flux){
 	if ($done) return $flux;
 	$done = true;
 	
-	$css = generer_url_public('saisies.css', '', false, true);
+	$css = generer_url_public('saisies.css');
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	return $flux;
 }
