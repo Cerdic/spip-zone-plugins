@@ -32,8 +32,8 @@ function recuperer_fond_ajax() {
 	$searching = sinon($args[1]['ajaxsearching'],
 		"<img src='".find_in_path('images/searching.gif')."' alt='$alt' />");
 
-	$url = parametre_url(self(), 'var_no_ajax', 1);
-
+	// Le lien mène à l'action de pose du cookie no_js
+	$url = "spip.php?action=ia_nojs&amp;retour=".urlencode(parametre_url(self(),'no_js','oui'));
 
 	return
 		"<div class='includeajax'><a href=\"$url\" rel=\"$ajax\">$searching</a></div>";
