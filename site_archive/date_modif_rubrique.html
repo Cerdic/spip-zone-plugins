@@ -1,0 +1,27 @@
+[<!--(#REM)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+	Squelette pour récupérer la date de modification
+	d'une rubrique ou d'un article.
+
+	La rubrique n'a pas de champ maj
+	il faut fouiller dans les articles.
+
+	Ici, ne cherche que dans les articles niveau 0
+	de la rubrique.
+	
+	@todo: écrire un ensemble récursif, histoire
+	de récupérer le dernier article de la
+	rubrique (et donc de ses propres sous-rubriques).
+	
+	
+	par maj: par date de mise à jour
+	
+
+-->]
+<BOUCLE_a(ARTICLES){id_rubrique}{par maj}{inverse}{0,1}>
+	#DATE_MODIF
+</BOUCLE_a>

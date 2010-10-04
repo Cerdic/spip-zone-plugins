@@ -1,0 +1,29 @@
+[<!--(#REM)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+	Squelette pour définir le nom du fichier archive.
+	
+	Le nom est créé à partir du titre de la rubrique ou article.
+
+	La longueur conseillée pour un nom de fichier
+	est de
+	- 31 caractères dans le monde Mac (HFS)
+	- 255 pour Windows (FAT32), mais en comptant le chemin
+	
+	En réalité il n'y a pas de limite, le navigateur
+	(ou le sysème ?) coupe le nom trop long.
+	
+	Mais c'est plus pratique pour l'utilisateur de
+	comprendre clairement l'objet d'un fichier par son nom.
+	
+	31 - 3 (pour l'extension et son point)
+	- 9 pour le prefix et son tiret : 19
+	
+-->]
+<BOUCLE_r(RUBRIQUES){id_rubrique}{0,1}>
+	[[(#ENV{prefixe})-](#TITRE|supprimer_numero|textebrut|strtolower|translitteration|couper{19,''}|strtr{' ','-'})][-(#ENV{suffixe})]</BOUCLE_r>
+<BOUCLE_a(ARTICLES){id_article}{0,1}>
+	[[(#ENV{prefixe})-](#TITRE|supprimer_numero|textebrut|strtolower|translitteration|couper{19,''}|strtr{' ','-'})][-(#ENV{suffixe})]</BOUCLE_a>

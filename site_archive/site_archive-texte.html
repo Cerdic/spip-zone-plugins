@@ -1,0 +1,50 @@
+[<!--(#REM)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+	CP-20100825
+	
+	Objectif: archive disponible en ligne
+	au format compressé pour consultation off-line.
+	
+	Construction d'une rubrique et de ses articles
+	dans une seule page au format texte.
+	
+	A appeler via (par exemple) :
+	
+		http://foo.bar/spip.php?page=site_archive-texte&id_rubrique=2
+
+	Seuls les articles de premiers niveaux sont exportés.
+	
+	@todo: récursivité pour traverser les sous-rubriques
+
+-->]<BOUCLE_principale(RUBRIQUES){id_rubrique}>[<!--
+
+	(#REM)
+	La rubrique
+  
+-->][(#NOM_SITE_SPIP|textebrut)]
+[(#TITRE|supprimer_numero|textebrut|html_entity_decode{2,UTF-8})]
+[(#TEXTE|textebrut|html_entity_decode{2,UTF-8})][<!--
+
+	(#REM)
+	Les articles de la rubrique
+
+-->]<B_articles><BOUCLE_articles(ARTICLES){id_rubrique}{par num titre, titre}>[(#SET{titre_propre,[(#TITRE|supprimer_numero|textebrut)]})][<!-- (#REM)
+
+		Sommaire détaillé (titres <= h3, intertitres)
+		sauf pour la page "Sommaire"
+	  
+	  -->][(#GET{titre_propre}|choixsiegal{'Sommaire','',' '})
+		[<!-- (#REM)
+	  
+		Titre et texte de l'article
+	  
+	  -->][(#GET{titre_propre})]
+	  [(#TEXTE|textebrut|html_entity_decode{2,UTF-8})]
+	  ]
+  </BOUCLE_articles>
+</B_articles>
+</BOUCLE_principale>
