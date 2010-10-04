@@ -1,7 +1,5 @@
 <plugin>
-	<nom>
-	GetId3 pour SPIP 2.X
-	</nom>
+	<nom>GetId3</nom>
 	<auteur>
  	BoOz (booz@rezo.net) & Kent1 (kent1@arscenic.info)
 	</auteur>
@@ -17,7 +15,10 @@
 	test
 	</etat>
 	<description>
-	Lire et ecrire les tags ID3 sur les documents de type audio
+		<multi>
+			[fr]Lire et ecrire les tags audio sur les documents de type audio
+_ [->http://getid3.sourceforge.net/]
+			[en]Read and write audio tags to audio documents
 _ [->http://getid3.sourceforge.net/]
 	</description>
 	<options>
