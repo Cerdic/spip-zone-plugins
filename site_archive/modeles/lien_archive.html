@@ -1,0 +1,38 @@
+[<!--(#REM)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+    CP-20100824
+    
+    A appeler via un lien HTLML, directement dans le texte
+	de l'article, du style :
+	
+	<lien_archive21
+        |id_rubrique=2
+        |texte=au format HTML, en une seule page
+        |type=unique>
+	
+	Option: url_site peut pointer sur un autre site :
+	
+	<lien_archive21
+        |id_rubrique=2
+        |texte=au format HTML, en une seule page
+        |url_site=www.foo.bar
+		|type=unique> ;
+	
+	La balise renvoie un lien sur un fichier zip contenant
+	le résultat du squelette site_archive*.html
+	
+-->]
+[(#ENV{id_rubrique}|?{' ',''})
+<span class="lien-archive">
+	<a href="#URL_ARCHIVE{id_rubrique=#ENV{id_rubrique},type=#ENV{type},url_site=#URL_SITE_SPIP/}">[(#ENV*{texte}|typo)]</a>
+</span>
+]
+[(#ENV{id_article}|?{' ',''})
+<span class="lien-archive">
+	<a href="#URL_ARCHIVE{id_article=#ENV{id_article},type=#ENV{type},url_site=#URL_SITE_SPIP/}">[(#ENV*{texte}|typo)]</a>
+</span>
+]
