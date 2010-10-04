@@ -100,7 +100,7 @@ function exec_adherents() {
 		//Filtre ID
 		if ( isset ($_POST['id'])) {
 			$id=_q($_POST['id']);
-			$critere="id_auteur=$id";
+			$critere="a.id_auteur=$id";
 			if ($indexation=="id_asso") { $critere="id_asso=$id"; }
 		}
 		
