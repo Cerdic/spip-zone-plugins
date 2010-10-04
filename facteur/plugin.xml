@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
-	<nom>Facteur</nom>
+	<nom>
+		<multi>
+			[fr]Facteur
+			[en]Postman
+		</multi>
+	</nom>
 	<auteur>Collectif SPIP</auteur>
 	<version>1.6.1</version>
 	<version_base>1.1</version_base>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	<description>Facteur s'occupe de la distribution des courriels au format HTML, texte ou mixte ; via SMTP ou non</description>
+	<description>
+		<multi>
+			[fr]Facteur s'occupe de la distribution des courriels au format HTML, texte ou mixte ; via SMTP ou non
+			[en]Postman delivers emails in HTML, text or mixed format; via SMTP or not
+		</multi>
+	</description>
 	<lien>http://www.spip-contrib.net/Facteur</lien>
  	<necessite id="SPIP" version="[2.0.3;]" />
 	<utilise id="bando" version="[;]" />
