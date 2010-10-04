@@ -235,6 +235,18 @@ function sia_time_modif_objet($objet, $id_objet)
 }
 
 /**
+ * Renvoie valeur bool cfg pour une option de config
+ * */
+function sia_cfg_option_on($option)
+{
+	return(
+		   (($ii = lire_config('sia/'.$option)) && ($ii == 'on'))
+		   ? $ii
+		   : null
+	);
+}
+
+/**
  * Fonction de calcul pour la balise URL_ARCHIVE_RUBRIQUE
  * @param $id int, résulat de SPIP (fouiller dans les sources
  * pour comprendre. Je ne sais pas pourquoi ça fonctionne)
@@ -282,14 +294,6 @@ function calculer_URL_ARCHIVE()
 	// les options complémentaires (via cfg)
 	if(function_exists('lire_config'))
 	{
-		function sia_cfg_option_on($option)
-		{
-			return(
-				   (($ii = lire_config('sia/'.$option)) && ($ii == 'on'))
-				   ? $ii
-				   : null
-			);
-		}
 		$random_wait = sia_cfg_option_on('random_wait');
 		$strict_mode = sia_cfg_option_on('strict_mode');
 		$simulation_mode = sia_cfg_option_on('simulation_mode');
