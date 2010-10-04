@@ -52,7 +52,7 @@ function INCLUREAJAXLOAD_affichage_final($page) {
 
 	// Si le visiteur est un robot de moteur de recherche,
 	// reconstituer les pages completes
-	if(_IS_BOT) {
+	if(_IS_BOT || $_COOKIE["no_js"] == "no_js" ) {
 		include_spip("inc/filtres");
 		include_spip("public/assembler");
 		$page = preg_replace_callback(",(<div class='includeajax'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax", $page);
@@ -63,6 +63,19 @@ function INCLUREAJAXLOAD_affichage_final($page) {
 
 function INCLUREAJAXLOAD_insert_head($flux) {
 	$flux .= "\n<script src=\"".find_in_path('javascript/inclure-ajaxload.js')."\" type=\"text/javascript\"></script>";
+
+$flux = '<?php if ($_COOKIE["no_js"] != "no_js") { ?>
+<!-- *** Javascript Detect Hack *** -->
+<script type="text/javascript"><!--
+document.write("<\/script><script>/*");
+//--></script>
+<meta http-equiv="refresh" content="0; url=spip.php?action=ia_nojs&amp;retour=<?php echo urlencode(parametre_url(self(),\'no_js\',\'oui\'));?>" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<script type="text/javascript">/* */</script>
+<!-- ********* End of hack ******** -->
+<?php } ?>'.$flux;
 
 	return $flux;
 }
