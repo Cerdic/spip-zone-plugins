@@ -43,9 +43,10 @@ function remettre_fond_ajax($matches) {
 	$url = $matches[2];
 	$c = $matches[3];
 	$c = decoder_contexte_ajax($c);
-	$page = evaluer_fond($c["fond"], $c);
+
+	$page = recuperer_fond($c["fond"],$c,array('trim'=>false));
 	
-	return $page["texte"];
+	return $page;
 }
 
 function INCLUREAJAXLOAD_affichage_final($page) {
