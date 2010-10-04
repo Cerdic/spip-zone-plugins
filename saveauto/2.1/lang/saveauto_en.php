@@ -102,9 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_saveauto' => 'Automatic backups',
 
 	// V
-	'valeur_jours' => ' days',
-	'valeur_non' => 'No',
-	'valeur_oui' => 'Yes'
+	'valeur_jours' => ' days'
 );
 
 ?>

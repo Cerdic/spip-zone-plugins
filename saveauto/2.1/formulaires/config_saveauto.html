@@ -36,11 +36,11 @@
 					<p class="explication"><:saveauto:help_gz:></p>
 					<div class="choix">
 						 <input type="radio" name="gz" id="gz_true" value="true"[(#ENV{gz}|=={true}|oui)checked="checked"] />
-						 <label for="gz_true"><:saveauto:valeur_oui:></label>
+						 <label for="gz_true"><:item_oui:></label>
 					</div>
 					<div class="choix">
 						 <input type="radio" name="gz" id="gz_false" value="false"[(#ENV{gz}|=={false}|oui)checked="checked"] />
-						 <label for="gz_false"><:saveauto:valeur_non:></label>
+						 <label for="gz_false"><:item_non:></label>
 					</div>
 				</li>
 				<li class="fieldset">
@@ -51,22 +51,22 @@
 								<label><:saveauto:label_structure:></label>
 								<div class="choix">
 									 <input type="radio" name="structure" id="structure_true" value="true"[(#ENV{structure}|=={true}|oui)checked="checked"] />
-									 <label for="structure_true"><:saveauto:valeur_oui:></label>
+									 <label for="structure_true"><:item_oui:></label>
 								</div>
 								<div class="choix">
 									 <input type="radio" name="structure" id="structure_false" value="false"[(#ENV{structure}|=={false}|oui)checked="checked"] />
-									 <label for="structure_false"><:saveauto:valeur_non:></label>
+									 <label for="structure_false"><:item_non:></label>
 								</div>
 							</li>
 							<li class="editer_donnees">
 								<label><:saveauto:label_donnees:></label>
 								<div class="choix">
 									 <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{donnees}|=={true}|oui)checked="checked"] />
-									 <label for="donnees_true"><:saveauto:valeur_oui:></label>
+									 <label for="donnees_true"><:item_oui:></label>
 								</div>
 								<div class="choix">
 									 <input type="radio" name="donnees" id="donnees_false" value="false"[(#ENV{donnees}|=={false}|oui)checked="checked"] />
-									 <label for="donnees_false"><:saveauto:valeur_non:></label>
+									 <label for="donnees_false"><:item_non:></label>
 								</div>
 							</li>
 						</ul>
@@ -100,11 +100,11 @@
 					<p class="explication"><:saveauto:help_msg:></p>
 					<div class="choix">
 						 <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes}|=={true}|oui)checked="checked"] />
-						 <label for="ecrire_succes_true"><:saveauto:valeur_oui:></label>
+						 <label for="ecrire_succes_true"><:item_oui:></label>
 					</div>
 					<div class="choix">
 						 <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false"[(#ENV{ecrire_succes}|=={false}|oui)checked="checked"] />
-						 <label for="ecrire_succes_false"><:saveauto:valeur_non:></label>
+						 <label for="ecrire_succes_false"><:item_non:></label>
 					</div>
 				</li>
 				<li class="editer_jours_obso">

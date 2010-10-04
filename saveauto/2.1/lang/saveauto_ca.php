@@ -102,9 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_saveauto' => 'C&ograve;pia de seguretat autom&agrave;tica',
 
 	// V
-	'valeur_jours' => ' dies',
-	'valeur_non' => 'no',
-	'valeur_oui' => 'si '
+	'valeur_jours' => ' dies'
 );
 
 ?>

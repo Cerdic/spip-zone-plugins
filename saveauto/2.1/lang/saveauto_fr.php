@@ -100,9 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_saveauto' => 'Sauvegarde automatique',
 
 	// V
-	'valeur_jours' => ' jours',
-	'valeur_non' => 'non',
-	'valeur_oui' => 'oui'
+	'valeur_jours' => ' jours'
 );
 
 ?>
