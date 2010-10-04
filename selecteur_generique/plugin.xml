@@ -1,6 +1,9 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	S&#233;lecteur g&#233;n&#233;rique
+	<nom>
+		<multi>
+			[fr]S&#233;lecteur g&#233;n&#233;rique
+			[en]Generic selector
+		</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Fil, kent1
@@ -8,11 +11,15 @@
 	<version>
 	0.6
 	</version>
+	<licence>GNU/GPL</licence>
 	<etat>
 	stable
 	</etat>
 	<description>
-	Remplace les s&#233;lecteurs (auteurs, mots, rubriques) par quelque chose de plus l&#233;ger &#38; rapide, capable de traiter autant de donn&#233;es que possible
+		<multi>
+			[fr]Remplace les s&#233;lecteurs (auteurs, mots, rubriques) par quelque chose de plus l&#233;ger &#38; rapide, capable de traiter autant de donn&#233;es que possible.
+			[en]Replaces selectors (authors, words, sections) to something lighter and faster, can handle as much data as possible.
+		</multi>
 	</description>
 	<prefix>
 	SelecteurGenerique
