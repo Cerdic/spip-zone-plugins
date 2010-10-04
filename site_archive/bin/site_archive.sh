@@ -131,6 +131,14 @@ else
 fi
 
 # tente de lire un todo dans le tmp/
+TODOFILES=`ls tmp/*todo`
+if [ "$?" -ne "0" ]
+then
+	echo "Error: todo file missing."
+	exit "$?"
+fi
+
+# traiter les todo
 for ii in `ls tmp/*todo`
 do
 	SIA=""
@@ -233,6 +241,9 @@ WGET_OPTIONS="$WGET_OPTIONS --convert-links "
 # (les '?' sont sources à problèmes)
 WGET_OPTIONS="$WGET_OPTIONS --restrict-file-names=windows "
 
+# -E --adjust-extension --html-extension: forcer l'extension html si besoin
+WGET_OPTIONS="$WGET_OPTIONS -E "
+
 # Ajouter les messages au journal
 WGET_OPTIONS="$WGET_OPTIONS -a $WGET_LOG_FILE "
 
@@ -257,9 +268,6 @@ then
 else
 	WGET_RECUR_OPTIONS="$WGET_RECUR_OPTIONS -l 1 "
 fi
-
-# -E --adjust-extension --html-extension: forcer l'extension html si besoin
-WGET_RECUR_OPTIONS="$WGET_RECUR_OPTIONS -E "
 
 # -k: convert-links: convertir les liens relatifs
 WGET_RECUR_OPTIONS="$WGET_RECUR_OPTIONS -k "
@@ -409,17 +417,15 @@ then
 		# relatif à son répertoire d'accueil + extension
 		SIA_FIRST_INDEX="${SIA_TEMP_FOLDER}/${SIA_FIRST_INDEX}.html"
 			
-		if [ "$SIA_TYPE" = "unique" ]
+		if [ "$SIA_TYPE" = "unique" ] || [ "$SIA_TYPE" = "multi" ]
 		then
 			# si type unique, le fichier index.html est manquant.
 			# Le créer à partir du premier fichier chargé par wget
 			SIA_NEW_INDEX="${SIA_TEMP_FOLDER}/index.html"
 			
-			notice_log "HELO4 ${SIA_FIRST_URI} $SIA_INDEX $SIA_NEW_INDEX"
-			
 			if [ -f "$SIA_FIRST_INDEX" ]
 			then
-				notice_log "Copying ${SIA_FIRST_INDEX} as ${SIA_NEW_INDEX}"
+				notice_log "Copying ${SIA_FIRST_INDEX} to ${SIA_NEW_INDEX}"
 				cp "${SIA_FIRST_INDEX}" "${SIA_NEW_INDEX}"
 			fi
 		fi
