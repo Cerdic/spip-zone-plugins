@@ -4,7 +4,12 @@
   <version>1.0.4</version>
   <icon>img_pack/themes-128.png</icon>
   <etat>test</etat>
-  <description>Un jardin Zen pour Zpip</description>
+  <description>
+  	<multi>
+  		[fr]Un jardin Zen pour Zpip
+		[en]A Zen garden for Zpip
+	</multi>
+  </description>
   <options>zengarden_options.php</options>
 	<pipeline>
     <nom>affichage_final</nom>
@@ -34,7 +39,12 @@
   <version>1.1.1</version>
   <icon>img_pack/themes-128.png</icon>
   <etat>test</etat>
-  <description>Un jardin Zen pour Zpip</description>
+  <description>
+	<multi>
+  		[fr]Un jardin Zen pour Zpip
+		[en]A Zen garden for Zpip
+	</multi>
+  </description>
   <options>zengarden_options.php</options>
   <prefix>zengarden</prefix>
   <categorie>maintenance</categorie>
