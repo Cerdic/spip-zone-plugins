@@ -285,7 +285,7 @@ else
 	fi
 fi
 
-notice_log "wget options: $WGET_OPTIONS"
+#notice_log "wget options: $WGET_OPTIONS"
 
 # Créer si besoin le réceptacle des logs wget
 # (a dû être créé par le plugin)
@@ -321,6 +321,7 @@ then
 		exit $?
 	else
 		notice_log "Runing wget in ${SIA_TEMP_FOLDER}/"
+		notice_log "$WGET $WGET_OPTIONS $SIA_TARGET_URL"
 		
 		# wget dans un sous shell, au bon endroit
 		( cd "${SIA_TEMP_FOLDER}/"; $WGET $WGET_OPTIONS $SIA_TARGET_URL )
@@ -458,7 +459,7 @@ then
 				notice_log "Copying text file to ${SIA_SPIP_TEMP}${SIA_TXT_FILE}"
 				cp "$SIA_FIRST_INDEX" "${SIA_SPIP_TEMP}${SIA_TXT_FILE}"
 				
-				notice_log "Compressing text file to ${SIA_SPIP_TEMP}${SIA_JOB_NAME}.zip"
+				notice_log "Compressing ${SIA_ZIP_TARGET} to ${SIA_SPIP_TEMP}${SIA_JOB_NAME}.zip"
 				( cd ${SIA_SPIP_TEMP}; zip -q "${SIA_JOB_NAME}.zip" "${SIA_TXT_FILE}" )
 				ZIPRESULT="$?"
 				

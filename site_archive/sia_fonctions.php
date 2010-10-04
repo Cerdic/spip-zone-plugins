@@ -267,13 +267,13 @@ function calculer_URL_ARCHIVE()
 	// Commence par vérifier si le script shell existe
 	if(!file_exists(SIA_SCRIPT_FILE))
 	{
-		sia_error_log('Erreur: '.SIA_SCRIPT_FILE.' manquant');
+		sia_error_log('Error: '.SIA_SCRIPT_FILE.' missing');
 		return(false);
 	}
 	// et s'il est exécutable
 	else if(!is_executable(SIA_SCRIPT_FILE))
 	{
-		sia_error_log('Erreur: '.SIA_SCRIPT_FILE.' n est pas executable');
+		sia_error_log('Error: '.SIA_SCRIPT_FILE.' is not an executable file');
 		return(false);
 	}
 	
@@ -374,7 +374,7 @@ function calculer_URL_ARCHIVE()
 
 		if(!($$key = sia_chemin_exec($key)))
 		{
-			sia_error_log('Erreur: commande manquante: '.$key);
+			sia_error_log('Error: command not found: '.$key);
 			if(!isset($simulation_mode) || ($simulation_mode != 'on'))
 			{
 				$commandes_ok = false;
@@ -580,7 +580,7 @@ function calculer_URL_ARCHIVE()
 									
 									if($simulation_mode && ($simulation_mode=='on'))
 									{
-										sia_log('Simulation mode! batch command not activated for this job.');
+										sia_log('Simulation mode! batch command not activated for this job. You probably have to activate it manually.');
 									}
 									else
 									{
