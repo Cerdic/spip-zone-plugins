@@ -1,0 +1,15 @@
+
+# $LastChangedRevision$
+# $LastChangedBy$
+# $LastChangedDate$
+
+
+- vérifier pour l'appel d'articles (les tests ont été réalisés pour des rubriques)
+
+Options:
+- compresser les logs avec bz2 (plus efficace que zip, gzip)
+- vérification des droits d'accès du bin
+
+- Devrait fonctionner avec SPIP 2 ? peut-être même 1.9.1 (introduction des modeles). A vérifier.
+
+- critère squelette pour éviter formulaire (recherche, ...) Passer var en mode cookie ?

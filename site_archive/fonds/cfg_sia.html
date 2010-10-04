@@ -1,0 +1,107 @@
+#CACHE{0}
+[<!--(#REM)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+-->]
+<!-- descriptif=
+	<h4><:sia:config_sia:></h4> 
+-->
+
+<!-- head=
+<script type='text/javascript'>//<![CDATA[
+(function(){
+	$(document).ready(function() {
+		$('#sia-form img.btn-aide').click(function() {
+			$(this).next('div.txt-aide').toggle();
+			return(false);
+		}); 
+	});
+})();
+//]]></script>
+<style type="text/css">
+#navigation div.cadre {background:url(../plugins/site_archive/images/sia-64.png) no-repeat center 60px;
+	height:11em}
+#navigation div.cadre_padding {padding-top:0}
+#navigation h4 {margin-top:0.75em}
+#sia-form fieldset {border:1px solid #ccc}
+#sia-form label.element {display:block;margin:0.5em 0 0.75em}
+#sia-form img.btn-aide:hover {cursor:pointer}
+#sia-form label div.txt-aide {font-style:italic;padding-left:5ex;color:#333}
+</style>
+-->
+<!-- titre=<:sia:sia_titre:> -->
+<!-- icone=images/sia-24.png -->
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=sia -->
+
+<form method="post" action="#SELF" id="sia-form"><div>[(#ENV{_cfg_}|form_hidden)]
+
+	<fieldset>
+		<legend><:sia:comportement_:></legend>
+		
+		<label class="element">
+			<input type="checkbox" name="strict_mode"[ checked="(#CONFIG{sia/strict_mode}|=={'on'}|?{'checked'})"] class="fondl" />
+			<:sia:strict_mode_label:>
+			<span>
+				<img src="#EVAL{_DIR_IMG_PACK}aide-12.png" width="12" height="12" class="btn-aide" />
+				<div class="txt-aide" style="display:none"><:sia:strict_mode_aide:></div>
+			</span>
+		</label>
+		
+		<label class="element">
+			<input type="checkbox" name="simulation_mode"[ checked="(#CONFIG{sia/simulation_mode}|=={'on'}|?{'checked'})"] class="fondl" />
+			<:sia:simulation_mode_label:>
+			<span>
+				<img src="#EVAL{_DIR_IMG_PACK}aide-12.png" width="12" height="12" class="btn-aide" />
+				<div class="txt-aide" style="display:none"><:sia:simulation_mode_aide:></div>
+			</span>
+		</label>
+		
+	</fieldset>
+
+	<fieldset>
+		<legend><:sia:complements_:></legend>
+
+		<label class="element">
+			<input type="checkbox" name="random_wait"[ checked="(#CONFIG{sia/random_wait}|=={'on'}|?{'checked'})"] class="fondl" />
+			<:sia:random_wait_label:>
+			<span>
+				<img src="#EVAL{_DIR_IMG_PACK}aide-12.png" width="12" height="12" class="btn-aide" />
+				<div class="txt-aide" style="display:none"><:sia:random_wait_aide:></div>
+			</span>
+		</label>
+
+[<!-- (#REM)
+
+	level est la seule variable définie par défaut
+
+-->]
+		<label class="element">
+			<:sia:level_label_:>
+			<input type="text" name="level" value="[(#CONFIG{sia/level}|sinon{"1"})]" class="fondl" />
+			<span>
+				<img src="#EVAL{_DIR_IMG_PACK}aide-12.png" width="12" height="12" class="btn-aide" />
+				<div class="txt-aide" style="display:none"><:sia:level_aide:></div>
+			</span>
+		</label>
+
+		<label class="element">
+			<:sia:user_agent_label_:>
+			<input type="text" name="user_agent" value="#CONFIG{sia/user_agent}" class="fondl" />
+			<span>
+				<img src="#EVAL{_DIR_IMG_PACK}aide-12.png" width="12" height="12" class="btn-aide" />
+				<div class="txt-aide" style="display:none"><:sia:user_agent_aide:></div>
+			</span>
+		</label>
+		
+	</fieldset>
+
+	<div style="text-align:#LANG_RIGHT;">
+		<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondo" />
+	</div>
+	
+</form>
