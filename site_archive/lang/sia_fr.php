@@ -31,7 +31,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		moins un lien d&#39;appel sur un archivage (un mod&#232;le), 
 		vous pouvez lancer le script d&#39;archivage en vous pla&#231;ant
 		dans la racine de votre site via votre terminal,
-		puis en lan&#231;ant le script ./plugins/site_archive/bin/site_archive.sh',
+		puis en lan&#231;ant le script ./plugins/site_archive/bin/site_archive.sh<br />
+		D&#233;tail: si vous avez mis en place plusieurs liens d&#39;archive
+		et si vous d&#233;sirez g&#233;n&#233;rer ces archives dans ce mode, vous devez appelez
+		le script d&#39;archive manuellement autant de fois qu&#39;il y a de liens
+		(autant de fois qu&#39;il y a de fichier &#60;votre-archive&#62;.todo dans tmp/).<br />
+		Pour supprimer le job, supprimez simplement le fichier &#60;job&#62;.todo
+		et son lock du r&#233;pertoire tmp/ de votre site.',
 
 	'random_wait_label' => 'Acc&#232;s al&#233;atoires : ',
 	'random_wait_aide' => 'Attente al&#233;atoire entre chaque requ&#234;te 
