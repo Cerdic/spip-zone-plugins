@@ -2,19 +2,19 @@
 	<nom>
 		pclTar
 	</nom>
-	<auteur>
-		Quentin Drouet (kent1)
-	</auteur>
-	<version>
-		0.1
-	</version>
+	<auteur>kent1</auteur>
+	<version>0.1</version>
 	<etat>
 		experimental
 	</etat>
+	<icon>images/pcltar_logo.png</icon>
 	<description>
-		pclTar pour SPIP
-_ Ajoute la possibilit&eacute; d'avoir des libs .tgz ou .tar ou .tar.gz en plus du zip par d&eacute;faut de SPIP
-_ Vocation &agrave; int&eacute;grer le core ?
+		<multi>
+			[fr]pclTar pour SPIP
+_ Ajoute la possibilit&#233; d'avoir des libs .tgz, .tar ou .tar.gz en plus du zip par d&#233;faut de SPIP
+			[en]pclTar for SPIP
+_ Adds the ability to have .tgz, .tar or .tar.gz libraries more than only zip (SPIP default)
+		</multi>
 	</description>
 	<prefix>pcltar</prefix>
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
