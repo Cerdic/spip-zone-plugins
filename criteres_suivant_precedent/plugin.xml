@@ -1,5 +1,10 @@
 <plugin>
-	<nom>Critères Suivant / Précédent</nom>
+	<nom>
+		<multi>
+			[fr]Crit&#232;res Suivant / Précédent
+			[en]Next / Previous criteria
+		</multi>
+	</nom>
 	
 	<version>1.1.1</version>
 	
@@ -7,7 +12,10 @@
 	<icon>images/precedent_suivant-128.png</icon>
 
 	<description>
-	Ajoute des critères de boucles {suivant} et {precedent}
+		<multi>
+			[fr]Ajoute des crit&#232;res de boucles <code>{suivant}</code> et <code>{precedent}</code>
+			[en]Adds loops criteria <code>{suivant}</code> and <code>{precedent}</code>
+		</multi>
 	</description>
 	
 	<auteur>Matthieu Marcillaud</auteur>
