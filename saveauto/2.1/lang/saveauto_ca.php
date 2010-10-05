@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_mail_message_mime' => 'Aquest &eacute;s un missatge en format MIME.',
+	'info_sauvegardes_obsolete' => 'Une sauvegarde de la base est conserv&eacute;e @nb@ jours &agrave; partir du jour de sa r&eacute;alisation.', # NEW
 	'info_sql_base' => 'Base de dades: ',
 	'info_sql_compatible_phpmyadmin' => 'Fitxer SQL 100% compatible PHPMyadmin',
 	'info_sql_date' => 'Data: ',
@@ -68,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sql_serveur' => 'Servidor: ',
 	'info_sql_spip_version' => 'Versi&oacute; d\'SPIP: ',
 	'info_sql_structure_table' => 'Estructura de la taula @table@',
+	'info_telecharger_sauvegardes' => 'Le tableau ci-dessous liste l\'ensemble des sauvegardes r&eacute;alis&eacute;es pour votre site que vous pouvez t&eacute;l&eacute;charger.', # NEW
 
 	// L
 	'label_adresse' => 'A l\'adre&ccedil;a: ',

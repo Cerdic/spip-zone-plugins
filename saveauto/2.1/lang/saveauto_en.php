@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_mail_message_mime' => 'This is a MIME-formatted message.',
+	'info_sauvegardes_obsolete' => 'Une sauvegarde de la base est conserv&eacute;e @nb@ jours &agrave; partir du jour de sa r&eacute;alisation.', # NEW
 	'info_sql_base' => 'Database:',
 	'info_sql_compatible_phpmyadmin' => 'SQL file 100% compatible with PHPMyadmin',
 	'info_sql_date' => 'Date:',
@@ -68,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sql_serveur' => 'Server:',
 	'info_sql_spip_version' => 'SPIP version:',
 	'info_sql_structure_table' => 'Structure of the @table@ table',
+	'info_telecharger_sauvegardes' => 'Le tableau ci-dessous liste l\'ensemble des sauvegardes r&eacute;alis&eacute;es pour votre site que vous pouvez t&eacute;l&eacute;charger.', # NEW
 
 	// L
 	'label_adresse' => 'To the address:',
