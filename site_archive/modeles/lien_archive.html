@@ -28,11 +28,11 @@
 -->]
 [(#ENV{id_rubrique}|?{' ',''})
 <span class="lien-archive">
-	<a href="#URL_ARCHIVE{id_rubrique=#ENV{id_rubrique},type=#ENV{type},url_site=#URL_SITE_SPIP/}">[(#ENV*{texte}|typo)]</a>
+	<a href="#URL_ARCHIVE{id_rubrique=#ENV{id_rubrique},type=#ENV{type},level=#ENV{level},url_site=#URL_SITE_SPIP/}">[(#ENV*{texte}|typo)]</a>
 </span>
 ]
 [(#ENV{id_article}|?{' ',''})
 <span class="lien-archive">
-	<a href="#URL_ARCHIVE{id_article=#ENV{id_article},type=#ENV{type},url_site=#URL_SITE_SPIP/}">[(#ENV*{texte}|typo)]</a>
+	<a href="#URL_ARCHIVE{id_article=#ENV{id_article},type=#ENV{type},level=#ENV{level},url_site=#URL_SITE_SPIP/}">[(#ENV*{texte}|typo)]</a>
 </span>
 ]

@@ -43,7 +43,7 @@ define('SIA_TYPE_MULTIPLE', 'multi');
 define('SIA_LOGS_DIR', _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES.'sia/');
 
 /**
- * Envoyer u message sur la console système
+ * Envoyer un message sur la console système
  * */
 function sia_syslog($priority, $message)
 {
@@ -182,7 +182,7 @@ function sia_titre_objet($objet, $id_objet, $prefix='', $type=SIA_TYPE_UNIQUE)
  * Date de modification de l'objet
  *
  * Pas défaut, considère que c'est une rubrique
- * qui est demandé.
+ * qui est demandée.
  * 
  * $objet peut être id_article pour un article.
  * 
@@ -251,11 +251,11 @@ function sia_cfg_option_on($option)
  * @param $id int, résulat de SPIP (fouiller dans les sources
  * pour comprendre. Je ne sais pas pourquoi ça fonctionne)
  * Ici, les arguments transmis correspondent aux paramètres
- * dans le modèle lien_archive_rubrique.html,
+ * dans le modèle lien_archive.html,
  * eux-mêmes transmis en paramètres dans le corps de l'article
  * 
  * @return $url-path string de l'archive archive
- * 	ex.: '/img/zip/Titre-rubrique-u.zip'
+ * 	ex.: '/img/zip/titre-rubrique-u.zip'
  **/
 function calculer_URL_ARCHIVE()
 {
@@ -285,9 +285,14 @@ function calculer_URL_ARCHIVE()
 	$objet = false;
 	
 	// le site cible
-	$url_site = lire_meta('adresse_site') || ('http://'.$_SERVER['HTTP_HOST']);
+	$url_site = lire_meta('adresse_site');
+	$url_site = trim($url_site);
+	if(empty($url_site))
+	{
+		$url_site = 'http://'.$_SERVER['HTTP_HOST'];
+	}
 	$url_site = trim($url_site,'/').'/';
-	
+
 	// par défaut, archive en une seule page
 	$type = SIA_TYPE_UNIQUE;
 	
@@ -319,8 +324,8 @@ function calculer_URL_ARCHIVE()
 			;
 	}
 	
-	// pour le moment, 3 args acceptés
-	for($ii = 0; $ii<3; $ii++)
+	// pour le moment (20101005), 4 args acceptés
+	for($ii = 0; $ii<4; $ii++)
 	{
 		// dépiler l'argument
 		if(!($arg = func_get_arg($ii)))
@@ -333,7 +338,7 @@ function calculer_URL_ARCHIVE()
 		{
 			list($key, $val) = explode('=', $arg);
 			$val = trim($val);
-		
+
 			switch($key)
 			{
 				case 'id_article':
@@ -357,6 +362,11 @@ function calculer_URL_ARCHIVE()
 					{
 						$type = SIA_TYPE_TEXTE;
 					}
+					break;
+				case 'level':
+				case 'profondeur':
+					$val = intval($val);
+					$level = (($val < 1) || ($val > 5)) ? 1 : $val;
 					break;
 				case 'url_site':
 					$url_site = $val;
@@ -680,9 +690,10 @@ function balise_URL_ARCHIVE($p)
 {
 	($arg1 = interprete_argument_balise(1,$p))
 	&& ($arg2 = interprete_argument_balise(2,$p))
-	&& ($arg3 = interprete_argument_balise(3,$p));
+	&& ($arg3 = interprete_argument_balise(3,$p))
+	&& ($arg4 = interprete_argument_balise(4,$p));
 	
-	$p->code = "calculer_URL_ARCHIVE($arg1,$arg2,$arg3)";
+	$p->code = "calculer_URL_ARCHIVE($arg1,$arg2,$arg3,$arg4)";
 	$p->interdire_scripts = false;
 	return($p);
 }
