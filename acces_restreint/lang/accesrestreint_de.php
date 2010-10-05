@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Mir selbst Zugangsberechtigung f&uuml;r diesen Bereich erteilen',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => 'Kein Bereich',
 	'auteurs' => 'Autoren',
 
 	// B
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
+	'confirmer_ajouter_auteurs' => 'wollen sie diesen Autor wirklich dieser Zone zuordnen?',
 	'confirmer_retirer_auteur_zone' => 'M&ouml;chten Sie diesen Autor wirklich aus dem Bereich entfernen?',
 	'confirmer_retirer_auteurs' => 'M&ouml;chten wirklich alle Autoren aus dem Bereich entfernen?',
 	'confirmer_supprimer_zone' => 'Wollen Sie diesen Bereich wirklich l&ouml;schen?',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'zum Bereich zuf&uuml;gen',
 	'titre_cadre_modifier_zone' => 'Bereich &auml;ndern',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_page_config' => 'Zugangskonfiguration',
 	'titre_table' => 'Alle zugangsbeschr&auml;nkten Bereiche',
 	'titre_zones_acces' => 'Bereiche mit Zugangsbeschr&auml;nkung',
 	'toutes' => 'Alle',
