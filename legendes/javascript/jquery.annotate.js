@@ -262,12 +262,12 @@
 		.draggable({
 			containment: image.canvas,
 			drag: function(e, ui) {
-				form.css('left', area.offset().left + 'px');
-				form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
+				form.css('left', ui.offset.left + 'px');
+				form.css('top', (parseInt(ui.offset.top) + parseInt(area.height()) + 2) + 'px');
 			},
 			stop: function(e, ui) {
-				form.css('left', area.offset().left + 'px');
-				form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
+				form.css('left', ui.offset.left + 'px');
+				form.css('top', (parseInt(ui.offset.top) + parseInt(area.height()) + 2) + 'px');
 			}
 		});
 		// on aplique formulaire_dyn_ajax() de ajaxcallback.js pour activer l'ajax du CVT
