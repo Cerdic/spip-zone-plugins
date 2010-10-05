@@ -1,3 +1,0 @@
-- manage the ajax pagination of uploaded documents in the template article-annotations.html
-- allow to upload documents inside the annotate window
-- refresh the points when closing the annotate window 
