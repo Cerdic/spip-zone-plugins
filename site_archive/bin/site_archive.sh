@@ -122,7 +122,7 @@ else
 			t) type_archive="$OPTARG";;
 			:) help_usage; exit 64 ;;
 			
-			u) url_objet=$OPTARG;;
+			u) url_objet="$OPTARG";;
 			:) help_usage; exit 64 ;;
 	
 		esac
@@ -258,19 +258,15 @@ then
 fi
 
 WGET_RECUR_OPTIONS=""
-# -r: recursif
-WGET_RECUR_OPTIONS="-r "
+# -r: --recursive: recursif
+WGET_RECUR_OPTIONS="--recursive"
 
 # -l 1: profondeur récursif, 1 pour ramener les images, a minima
-if [ ! -z "$SIA_LEVEL" ] && [ "$SIA_LEVEL" -gt "1" ] && [ "$SIA_LEVEL" -le "5" ]
+if [ -z "$SIA_LEVEL" ] || [ "$SIA_LEVEL" -lt "1" ] || [ "$SIA_LEVEL" -gt "5" ]
 then
-	WGET_RECUR_OPTIONS="$WGET_RECUR_OPTIONS -l $SIA_LEVEL "
-else
-	WGET_RECUR_OPTIONS="$WGET_RECUR_OPTIONS -l 1 "
+	SIA_LEVEL="1"
 fi
-
-# -k: convert-links: convertir les liens relatifs
-WGET_RECUR_OPTIONS="$WGET_RECUR_OPTIONS -k "
+WGET_RECUR_OPTIONS="$WGET_RECUR_OPTIONS --level=$SIA_LEVEL"
 
 if [ "$SIA_TYPE" = "multi" ]
 then
@@ -321,10 +317,10 @@ then
 		exit $?
 	else
 		notice_log "Runing wget in ${SIA_TEMP_FOLDER}/"
-		notice_log "$WGET $WGET_OPTIONS $SIA_TARGET_URL"
+		notice_log "$WGET $WGET_OPTIONS \"$SIA_TARGET_URL\""
 		
 		# wget dans un sous shell, au bon endroit
-		( cd "${SIA_TEMP_FOLDER}/"; $WGET $WGET_OPTIONS $SIA_TARGET_URL )
+		( cd "${SIA_TEMP_FOLDER}/"; $WGET $WGET_OPTIONS "$SIA_TARGET_URL" )
 		
 		ERR="$?"
 		
@@ -343,7 +339,7 @@ then
 			
 			if [ "$STRICT_MODE" = "on" ] || [ "$ERR" -ne "8" ]
 			then
-				error_log "FATAL ERROR: wget error using: $WGET $WGET_OPTIONS $SIA_TARGET_URL"
+				error_log "FATAL ERROR: wget error using: $WGET $WGET_OPTIONS \"$SIA_TARGET_URL\""
 				error_log "FATAL ERROR: wget error $ERR. $MSERR"
 				exit "$ERR"
 			fi
@@ -358,10 +354,12 @@ then
 		else
 
 			# Le log de l'opération wget en cours
-			# se trouve dans le rép en cours
+			# se trouve dans le rép en cours.
+			# Il sera supprimé après traitement.
 			SIA_CURR_LOG="${SIA_TEMP_FOLDER}/${WGET_LOG_FILE}"
 		
-			# Le log wget officiel
+			# Le log wget officiel, ne sera pas supprimé
+			# sauf si trop ancien.
 			SIA_REAL_LOG="${SIA_LOGS_DIR}${SIA_JOB_NAME}.log"
 		fi
 		
