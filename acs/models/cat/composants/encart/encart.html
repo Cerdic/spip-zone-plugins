@@ -1,5 +1,10 @@
-[(#VAR{acsEncartUse}|=={oui}|?{' '})
+[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Use'}}|=={oui}|?{' '})
 <div class="#PINCEAU{encart}">
-  [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart-democratie}{lang=#LANG}>][(#REM) Encart si composant democratie activé]
-  [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart}{lang=#LANG}>][(#REM) Encart si composant democratie inactif]
+  [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|=={articles}|?{' '})
+    [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart_articles-democratie}{nic}{lang}>][(#REM) Encart si composant democratie activé]
+    [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart_articles}{nic}{lang}>][(#REM) Encart si composant democratie inactif]
+  ][(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|=={rubriques}|?{' '})
+    [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart_rubriques-democratie}{nic}{lang}>][(#REM) Encart si composant democratie activé]
+    [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart_rubriques}{nic}{lang}>][(#REM) Encart si composant democratie inactif]
+  ]
 </div>]

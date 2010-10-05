@@ -9,7 +9,7 @@
   [<p class="pagination">(#PAGINATION)</p>]
   <INCLURE{fond=composants/audio/player}{autostart=#AUTOSTART}{hp=#GET{hp}}{lp=#GET{lp}}{mmfile=#URL_DOCUMENT}>
   <ul class="playliste">
-  <BOUCLE_doc (DOCUMENTS) {extension==mp3}{!par date}{pagination #VAR{acsPlaylistNbMp3, 20}}>[(#EVAL{$NB++}|?{'',''})]
+  <BOUCLE_doc (DOCUMENTS) {extension==mp3}{!par date}{pagination #VAR{acsAudioNbMp3, 20}}>[(#EVAL{$NB++}|?{'',''})]
     <li class="play_ pl_l#EVAL{$NB}">
       [(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})<small><a href="#URL_DOCUMENT" title="<:acs:audio_download:>" class="podcast">MP3</a></small>]<a href="#FICHIER" rel="enclosure" class="mp3" title="[(#DESCRIPTIF|sinon{#FICHIER|joli_titre}|couper{100})]">[(#TITRE|sinon{#ID_DOCUMENT}|couper{28})]</a>
       <BOUCLE_ART (ARTICLES){id_document}><small><i><a href="#URL_ARTICLE" class="article" title="<:acs:audio_lire_article:>">(<:acs:audio_article:>)</a></i></small></BOUCLE_ART> <span class="track_status nsize pl_dl#EVAL{$NB}" ></span></li>
