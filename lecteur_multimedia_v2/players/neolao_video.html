@@ -130,7 +130,7 @@
 	<param name="movie" value="[(#CHEMIN{flash/player_flv_maxi.swf}|url_absolue)]" />
 	<param
 		name="FlashVars"
- 		value="#GET{flashvars}[&amp;title=(#TITRE|urlencode)][(#LOGO_DOCUMENT|extraire_attribut{src}|match{flv.png$}|non)[&amp;startimage=(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]]&amp;ondoubleclick=fullscreen&amp;autoplay=#ENV{autoplay,#ENV{autostart,0}}[&amp;srturl=(#ENV{srturl})]" />
+ 		value="#GET{flashvars}[&amp;title=(#TITRE|urlencode)][(#LOGO_DOCUMENT|extraire_attribut{src}|match{flv.png$}|non)[&amp;startimage=(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]]&amp;ondoubleclick=fullscreen&amp;autoplay=#ENV{autoplay,#ENV{autostart,0}}[&amp;srt=(#ENV{srt})]" />
 <param name="wmode" value="transparent" />
 <param name="allowFullScreen" value="true" />[
 <strong>(#TITRE)</strong>][
