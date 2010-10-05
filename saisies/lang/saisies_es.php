@@ -7,6 +7,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_parcourir_docs_article' => 'Parcourir l\'article', # NEW
+	'bouton_parcourir_docs_breve' => 'Parcourir la br&egrave;ve', # NEW
+	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique', # NEW
+	'bouton_parcourir_mediatheque' => 'Parcourir la m&eacute;diath&egrave;que', # NEW
+
 	// L
 	'label_annee' => 'Ann&eacute;e', # NEW
 	'label_jour' => 'Jour', # NEW
@@ -36,6 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_groupe_validation' => 'Validaci&oacute;n',
 	'option_info_obligatoire_explication' => 'Puede modificar la indicaci&oacute;n de campo obligatoria: <i>[Obligatorio</i>.',
 	'option_info_obligatoire_label' => 'Indicaci&oacute;n de campo obligatorio',
+	'option_inserer_barre_choix_edition' => 'barre d\'&eacute;dition compl&egrave;te', # NEW
+	'option_inserer_barre_choix_forum' => 'barre des forums', # NEW
+	'option_inserer_barre_explication' => 'Ins&egrave;re une barre d\'outils du porte-plume si ce dernier est activ&eacute;.', # NEW
+	'option_inserer_barre_label' => 'Ins&eacute;rer une barre d\'outils', # NEW
 	'option_label_case_label' => 'Etiqueta posicionada al lado de la checkbox',
 	'option_label_explication' => 'El t&iacute;tulo que se ense&ntilde;ar&aacute;',
 	'option_label_label' => 'Etiqueta',
@@ -49,6 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_pliable_label_case' => 'El grupo de campos se podr&aacute; contraer y desplegar.',
 	'option_plie_label' => 'Ya est&aacute; contraido',
 	'option_plie_label_case' => 'Si el grupo de campos se puede contraer, ya estar&aacute; contraido cuando se ense&ntilde;e el formulario.',
+	'option_previsualisation_explication' => 'Si le porte-plume est activ&eacute;, ajoute un onglet pour pr&eacute;visualiser le rendu du texte saisi.', # NEW
+	'option_previsualisation_label' => 'Activer la pr&eacute;visualisation', # NEW
 	'option_readonly_explication' => 'El campo se puede leer, seleccionar, pero no se puede modificar.',
 	'option_readonly_label' => 'S&oacute;lo lectura',
 	'option_rows_explication' => 'Altura del bloque en n&uacute;mero de l&iacute;neas. Esta opci&oacute;n no se aplica siempre, porque puede ser cancelada por los estilos CSS de su sitio.',

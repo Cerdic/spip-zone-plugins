@@ -7,6 +7,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_parcourir_docs_article' => 'Parcourir l\'article', # NEW
+	'bouton_parcourir_docs_breve' => 'Parcourir la br&egrave;ve', # NEW
+	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique', # NEW
+	'bouton_parcourir_mediatheque' => 'Parcourir la m&eacute;diath&egrave;que', # NEW
+
 	// L
 	'label_annee' => 'Jahr',
 	'label_jour' => 'Tag',
@@ -36,6 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_groupe_validation' => 'Best&auml;tigung',
 	'option_info_obligatoire_explication' => 'Sie k&ouml;nnen die Standardbezeichnung f&uuml;r Pflichtfelder &auml;ndern:<i>[Pflichtfeld]</i>.',
 	'option_info_obligatoire_label' => 'Pflichtfeld-Anzeige',
+	'option_inserer_barre_choix_edition' => 'barre d\'&eacute;dition compl&egrave;te', # NEW
+	'option_inserer_barre_choix_forum' => 'barre des forums', # NEW
+	'option_inserer_barre_explication' => 'Ins&egrave;re une barre d\'outils du porte-plume si ce dernier est activ&eacute;.', # NEW
+	'option_inserer_barre_label' => 'Ins&eacute;rer une barre d\'outils', # NEW
 	'option_label_case_label' => 'Bezeichnung neben dem Feld',
 	'option_label_explication' => 'Anzeigetitel',
 	'option_label_label' => 'Bezeichnung',
@@ -49,6 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_pliable_label_case' => 'Die Feldgruppe kann zugeklappt werden',
 	'option_plie_label' => 'Bereits zugeklappt',
 	'option_plie_label_case' => 'Wen die Feldgruppe klappbar ist, wird sie beim Anzeigen des Formulars zun&auml;chst zugeklappt angezeigt.',
+	'option_previsualisation_explication' => 'Si le porte-plume est activ&eacute;, ajoute un onglet pour pr&eacute;visualiser le rendu du texte saisi.', # NEW
+	'option_previsualisation_label' => 'Activer la pr&eacute;visualisation', # NEW
 	'option_readonly_explication' => 'Dieses Feld kann angezeigt aber nicht bearbeitet werden.',
 	'option_readonly_label' => 'Nur Lesen',
 	'option_rows_explication' => 'H&ouml;he des Blocks in Zeilen. Diese Option ist nicht immer wirksam, da sie von individuellen CSS-Stilen abgeschaltet werden kann.',

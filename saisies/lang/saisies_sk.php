@@ -7,6 +7,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_parcourir_docs_article' => 'Parcourir l\'article', # NEW
+	'bouton_parcourir_docs_breve' => 'Parcourir la br&egrave;ve', # NEW
+	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique', # NEW
+	'bouton_parcourir_mediatheque' => 'Parcourir la m&eacute;diath&egrave;que', # NEW
+
 	// L
 	'label_annee' => 'Ann&eacute;e', # NEW
 	'label_jour' => 'Jour', # NEW
@@ -36,6 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_groupe_validation' => 'Validation', # MODIF
 	'option_info_obligatoire_explication' => 'You can modify the default indication of obligation: <i>[Obligatoire]</i>.', # MODIF
 	'option_info_obligatoire_label' => 'Indication of obligation', # MODIF
+	'option_inserer_barre_choix_edition' => 'barre d\'&eacute;dition compl&egrave;te', # NEW
+	'option_inserer_barre_choix_forum' => 'barre des forums', # NEW
+	'option_inserer_barre_explication' => 'Ins&egrave;re une barre d\'outils du porte-plume si ce dernier est activ&eacute;.', # NEW
+	'option_inserer_barre_label' => 'Ins&eacute;rer une barre d\'outils', # NEW
 	'option_label_case_label' => 'Label plac&eacute; &agrave; c&ocirc;t&eacute; de la case', # NEW
 	'option_label_explication' => 'The title that will be displayed.', # MODIF
 	'option_label_label' => 'Label', # MODIF
@@ -49,6 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_pliable_label_case' => 'Le groupe de champs pourra &ecirc;tre repli&eacute;.', # NEW
 	'option_plie_label' => 'D&eacute;j&agrave; pli&eacute;', # NEW
 	'option_plie_label_case' => 'Si le groupe de champs est pliable, il sera d&eacute;j&agrave; pli&eacute; &agrave; l\'affichage du formulaire.', # NEW
+	'option_previsualisation_explication' => 'Si le porte-plume est activ&eacute;, ajoute un onglet pour pr&eacute;visualiser le rendu du texte saisi.', # NEW
+	'option_previsualisation_label' => 'Activer la pr&eacute;visualisation', # NEW
 	'option_readonly_explication' => 'The field can be viewed, selected, but not modified.', # MODIF
 	'option_readonly_label' => 'Read only', # MODIF
 	'option_rows_explication' => 'Field height in lines. This option is not always applied/used because the CSS styles of your site can cancel it.', # MODIF

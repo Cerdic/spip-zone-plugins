@@ -7,6 +7,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_parcourir_docs_article' => 'Parcourir l\'article', # NEW
+	'bouton_parcourir_docs_breve' => 'Parcourir la br&egrave;ve', # NEW
+	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique', # NEW
+	'bouton_parcourir_mediatheque' => 'Parcourir la m&eacute;diath&egrave;que', # NEW
+
 	// L
 	'label_annee' => 'Any',
 	'label_jour' => 'Dia',
@@ -36,6 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_groupe_validation' => 'Validaci&oacute;',
 	'option_info_obligatoire_explication' => 'Podeu, per defecte, modificar la indicaci&oacute; d\'obligaci&oacute;: <i>[Obligatoire]</i>.',
 	'option_info_obligatoire_label' => 'Indicaci&oacute; d\'obligaci&oacute;',
+	'option_inserer_barre_choix_edition' => 'barre d\'&eacute;dition compl&egrave;te', # NEW
+	'option_inserer_barre_choix_forum' => 'barre des forums', # NEW
+	'option_inserer_barre_explication' => 'Ins&egrave;re une barre d\'outils du porte-plume si ce dernier est activ&eacute;.', # NEW
+	'option_inserer_barre_label' => 'Ins&eacute;rer une barre d\'outils', # NEW
 	'option_label_case_label' => 'Etiqueta situada al costat de la casella',
 	'option_label_explication' => 'El t&iacute;tol que es mostrar&agrave;.',
 	'option_label_label' => 'Etiqueta',
@@ -49,6 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_pliable_label_case' => 'El grup de camps es podr&agrave; replegar.',
 	'option_plie_label' => 'Ja plegat',
 	'option_plie_label_case' => 'Si el grup de camps &eacute;s plegable, ja estar&agrave; plegat a la visualitzaci&oacute; del formulari.',
+	'option_previsualisation_explication' => 'Si le porte-plume est activ&eacute;, ajoute un onglet pour pr&eacute;visualiser le rendu du texte saisi.', # NEW
+	'option_previsualisation_label' => 'Activer la pr&eacute;visualisation', # NEW
 	'option_readonly_explication' => 'El camp es pot llegir, seleccionar, per&ograve; no modificar.',
 	'option_readonly_label' => 'Nom&eacute;s lectura',
 	'option_rows_explication' => 'Al&ccedil;ada del bloc en n&uacute;mero de l&iacute;nies. Aquesta opci&oacute; no es pot aplicar sempre ja que els estils CSS del vostre lloc el poden anul&middot;lar.',
