@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configurar els llapis',
-	'titre_crayons' => 'Els "Crayons"', # MODIF
+	'titre_crayons' => 'Llapis',
 
 	// U
 	'update_impossible' => 'L\'actualitzaci&oacute; ha fracassat',
