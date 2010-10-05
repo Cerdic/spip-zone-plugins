@@ -1,4 +1,6 @@
 <div id="ajax_cForums" class="#PINCEAU{forums}">
-[(#ENV{page}|!={recherche}|?{' '})<INCLURE {fond=composants/forums/inc-forums}{ajax}{env}{self}{debut_forums_liens}{id_article ?}{id_breve ?}{id_syndic ?}>]
-[(#ENV{page}|=={recherche}|?{' '})<INCLURE {fond=composants/forums/inc-forums_recherche}{ajax}{env}{self}{debut_forums_liens}>]
+[(#ENV{page}|!={recherche}|?{' '})
+  [(#ID_MOT|?{' '})<INCLURE {fond=composants/forums/inc-forums_mot}{ajax}{env}{self}{debut_forums_liens}{id_mot}>]
+  [(#ID_MOT|?{'',' '})<INCLURE {fond=composants/forums/inc-forums}{ajax}{env}{self}{debut_forums_liens}{id_article ?}{id_breve ?}{id_syndic ?}>]
+][(#ENV{page}|=={recherche}|?{' '})<INCLURE {fond=composants/forums/inc-forums_recherche}{ajax}{env}{self}{debut_forums_liens}>]
 </div>

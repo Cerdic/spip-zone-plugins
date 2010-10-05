@@ -35,9 +35,10 @@ $traductions_acs = array(
 	'font' => 'Fonte(s)',
 	'fontsize' => 'Taille',
 	'fontfamily' => 'Famille de fonte',
-	'text' => "Texte",
-	'link' => "Lien",
-	'linkhover' => "Au survol",
+	'text' => 'Texte',
+	'link' => 'Lien',
+	'linkhover' => 'Au survol',
+	'key' => 'Mot-clef',
 
 	'shadow' => 'Ombre',
   'shadowsize' => 'Taille',
@@ -64,7 +65,7 @@ if (_DIR_RESTREINT != '') {
 else {
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace ecrire
 
-  'configurer_site' => 'Configurer le site',
+  'configurer_site' => 'Conception du site',
   'documentation' => 'Documentation',
 
   'assistant_configuration_squelettes' => 'Assistant Configuration du Site',

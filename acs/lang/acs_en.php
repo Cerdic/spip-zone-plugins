@@ -39,6 +39,8 @@ $traductions_acs = array(
 	'link' => 'Link',
 	'linkhover' => 'Link hover',
 
+	'key' => 'Keyword',
+
 	'shadow' => 'Shadow',
   'shadowsize' => 'Size',
   'shadowblur' => 'Blur',
@@ -64,7 +66,7 @@ if (_DIR_RESTREINT != '') {
 else {
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Area ecrire
 
-  'configurer_site' => 'Configure website',
+  'configurer_site' => 'Website design',
   'documentation' => 'Documentation',
 
   'assistant_configuration_squelettes' => 'Site configuration wizard',

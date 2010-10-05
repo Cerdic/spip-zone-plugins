@@ -1,16 +1,4 @@
 #CACHE{7200}[(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]
-<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=forum}{title=<:acs:forums_meta_page_forums:>}>
-<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1) ]
-  <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=24}>
-  </div>[(#REM) fin menu ]
-</div>[(#REM) fin colonne1 (navigation) ]
-<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{env=#ENV}{current=forums}>
-  <div id="onglet">]
-    [(#REM) Fil d'Ariane ]
-    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:acs:onglets_forums:></div>
-    <INCLURE{fond=composants/articles/boucle-plan}{env=#ENV}{mode=forums}>[(#REM) Si composant democratie inactif]
-	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
-</div>[(#REM) fin colonne2]
-<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/entete}{self}{env}{page=forum}{title=<:acs:forums_meta_page_forums:>}>
+<INCLURE{fond=composants/cadre/cadre}{self}{env}{nic=2020}>
+<INCLURE{fond=composants/fond/pied}{self}{env}>

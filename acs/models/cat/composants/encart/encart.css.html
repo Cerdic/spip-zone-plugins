@@ -1,33 +1,21 @@
 #CACHE{0}
 
-.cEncart {
-  [background: (#VAR{acsEncartFond});]
-  [border-width: (#VAR{acsEncartBord/Width});]
-  [border-style: (#VAR{acsEncartBord/Style});]
-  [border-color: (#VAR{acsEncartBord/Color});]
-  -moz-border-radius: 8px;
-}
-.cEncart .cartouche {
-  [background: (#VAR{acsEncartTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsEncartTitreFondImage}})") repeat top left];]  
-  [border-bottom: 1px solid (#VAR{acsRubnavSep});]  
-  -moz-border-radius: 8px;
-  -moz-border-radius-bottomleft: 0;
-  -moz-border-radius-bottomright: 0;
-}
-.cEncart .cartouche .surtitre, .cEncart .cartouche .titre, .cEncart .cartouche .soustitre  {
+.cEncart .entete .surtitre, .cEncart .entete .titre, .cEncart .entete .soustitre  {
   padding-left: 4px;
   padding-right: 4px;
   margin: 0;
 }
-.cEncart .cartouche .titre {
+.cEncart .entete .titre {
   text-align: center;
 }
 
 .cEncart .chapo, .cEncart .texte {
+  padding-left: 4px;
+  padding-right: 4px;
   text-align: justify;
 }
 
-.cEncart .cartouche .spip_logos {
+.cEncart .entete .spip_logos {
   float: [(#ENV{ltr}|choixsiegal{left,right,left})];
   margin: 2px;
 }

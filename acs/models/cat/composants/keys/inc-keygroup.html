@@ -1,29 +1,33 @@
-[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
-<B_mots_freres>
+[(#REM) 
+
+Menu de navigation mots-cles : les autres mots cles du meme groupe
+
+]<B_mots_freres>#ANCRE_PAGINATION
 <div class="cKeys">
-  #ANCRE_PAGINATION
-  [<p class="pagination">(#PAGINATION)</p>]
-  <div class="bloc-title"><:mots_clefs_meme_groupe:></div>
+  <div class="bloc-title">
+    <div class="bsize"><:mots_clefs_meme_groupe:></div>
+    [<div class="pagination">(#PAGINATION)</div>]
+  </div>
   <ul class="bsize">
   <BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
-    <li class="menu-item"><a href="#URL_MOT"[ class="(#EXPOSE)"]><span class="motcle">#TITRE</span></a></li>
+    <li class="menu-item"><div class="motcle"><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></div></li>
   </BOUCLE_mots_freres>
   </ul>
 </div>
-<div class="spacer"></div>
+[(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_mots_freres>
 
 [(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
 <B_groupes_freres>
 <div class="cKeys">
-  <h2 class="bloc-title"><:autres_groupes_mots_clefs:></h2>
+  <h2 class="bloc-title bsize"><:autres_groupes_mots_clefs:></h2>
   <ul class="bsize">
   <BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {titre!==(_.*)} {doublons}>
   <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {!type} {0,1}>
-    <li class="menu-item"><a href="#URL_MOT"><span class="motcle">#TYPE</span></a></li>
+    <li class="menu-item"><div class="motcle"><a href="#URL_MOT">#TYPE</a></div></li>
   </BOUCLE_mot_cousin>
   </BOUCLE_groupes_freres>
   </ul>
 </div>
-<div class="spacer"></div>
+[(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_groupes_freres>

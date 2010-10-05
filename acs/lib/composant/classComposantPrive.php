@@ -184,6 +184,12 @@ class AdminComposant {
 							$nv = serialize($nv);
 			  		break;
 			  		
+					case 'key' :
+						$postedGroup = $_POST[$v.'Group_'.$md5];
+						$postedKey = $_POST[$v.'Key_'.$md5];
+						$nv = serialize(array('Group' => $postedGroup, 'Key' => $postedKey));
+						break;
+						
 			  	default:
 						// on ne traite surtout pas les variables non postées
 			  		if (!isset($_POST[$v.'_'.$md5]))

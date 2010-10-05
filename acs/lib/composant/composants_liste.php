@@ -115,7 +115,7 @@ function composant_instances($c) {
     
   $ci[$c] = array();
   $metas = $GLOBALS['meta'];
-  $reg = '/acs'.ucfirst($c).'(\d+)Use/';
+  $reg = '/acs'.ucfirst($c).'(\d+)*Use/';
   foreach ($metas as $meta=>$val) {
     if (preg_match($reg, $meta, $matches))
       $ci[$c][] = $matches[1];

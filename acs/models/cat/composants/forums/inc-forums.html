@@ -10,9 +10,9 @@ Liens des forums
   </div>
   <ul>
   <BOUCLE_forums_liens(FORUMS){id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}{inverse} {pagination #VAR{acsForumsNb,10}}>
-    <li class="menu-item"><a href="[(#URL_FORUM|replace{#,&amp;ouvrir=oui#})]" [title="(#TEXTE|supprimer_tags|attribut_html|couper{500})"]><div class="message">[<span class="date-comment nsize">(#DATE|affdate_court)</span>]<span class="bsize"> #TITRE</span></div></a></li>
+    <li class="menu-item"><div class="message"><a href="[(#URL_FORUM|replace{#,&amp;ouvrir=oui#})]" [title="(#TEXTE|supprimer_tags|attribut_html|couper{500})"]>[<span class="date-comment nsize">(#DATE|affdate_court)</span>]<span class="bsize"> #TITRE</span></a></div></li>
   </BOUCLE_forums_liens>
   </ul>
 </div>
-<div class="spacer"></div>
+[(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_forums_liens>

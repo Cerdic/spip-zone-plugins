@@ -135,14 +135,17 @@ function ctlTextarea($composant, $nic, $nom, $txt, $param, $wid) {
 // Choix oui / non
 function ctlChoix($composant, $nic, $nom, $value, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  if (!is_array($param['option'])) return 'Pas d\'options pour '.$nom;
+  if (!is_array($param['option']))
+  	return 'Pas d\'options pour '.$nom;
   $r = '<table><tr valign="middle"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label></td>';
   foreach($param['option'] as $option) {
     switch($option) {
-      case 'oui';
+      case 'oui':
+      case 'yes';
         $label = _T('item_oui');
         break;
-      case 'non';
+      case 'non':
+      case 'no':
         $label = _T('item_non');
         break;
       default:
@@ -164,6 +167,37 @@ function ctlChoix($composant, $nic, $nom, $value, $param, $wid) {
 
 function ctlUse($composant, $nic, $nom, $txt, $param, $wid) {
 	return ctlChoix($composant, $nic, $nom, (($GLOBALS['meta'][nomvar($composant, $nic, $nom)] == 'oui') ? 'oui' : 'non'), array('option' => array('oui', 'non')), $wid);
+}
+
+// Choix d'un mot-clef
+function ctlKey($composant, $nic, $nom, $value, $param, $wid) {
+	global $spip_lang, $spip_lang_left, $spip_lang_right;
+	
+	$var =  nomvar($composant, $nic, $nom);
+	$value = unserialize($value);
+	$vid_group = $value['Group'];
+	$vmot = $value['Key'];
+	$r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
+  if ($param['label'] != 'non')
+    $r .= '<td><label for "'.$var.'Key_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
+	$r .= '<td><select id="select_'.$var.'Group_'.$wid.'" name="'.$var.'Group_'.$wid.'" class="forml" onchange="submit()">';
+	$groups_query = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");	
+	while ($row_groupes = sql_fetch($groups_query)) {
+		$id_groupe = $row_groupes['id_groupe'];
+		$titre_groupe = typo($row_groupes['titre']);
+		$r .= '<option value="'.$id_groupe.'"'.($id_groupe == $vid_group ? ' selected' : '').'>'.$titre_groupe.'</option>';
+	}
+	$r .= '</select></td>';
+	$r .= '<td><select id="select_'.$var.'Key_'.$wid.'" name="'.$var.'Key_'.$wid.'" class="forml">';
+	if ($vid_group) {
+  	$keys_query = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_mots", "id_groupe=".$vid_group, "", "multi");  	
+  	while ($row_keys = sql_fetch($keys_query)) {
+  		$titre_mot = typo($row_keys['titre']);
+  		$r .= '<option value="'.$titre_mot.'"'.($titre_mot == $vmot ? ' selected' : '').'>'.$titre_mot.'</option>';
+  	}  	
+	}
+	$r .= '</select></td></tr></table></div>';
+	return $r;
 }
 
 // Choix d'un composant

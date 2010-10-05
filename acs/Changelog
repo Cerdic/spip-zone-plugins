@@ -1,17 +1,18 @@
-Suivi des principales révisions - Version ACS actuelle : 0.7.1
+Suivi des principales révisions - Version ACS actuelle : 0.7.2
 
 ACS version 0.7
  - changement des chemins d'images installées par les composants : img->IMG
  - affichage du commentaire du composant en info-bulle sur le schéma de la page
  - installation automatique de mots-clefs de composants
  - option _ACS_LOG dans acs_options.php pour gérer activation / désactivation des logs ACS
- - fonction sauvegarder / restaurer la configuration d'un modèle ACS 
+ - fonction sauvegarder / restaurer la configuration d'un modèle ACS
  - suppression du numero de release d'ACS dans plugin.xml et partout ailleurs
  - changement du schéma composant.xml : une valeur par défaut héritée se note désormais "=acsComposantVariable" et non plus  "acsComposantVariable, par souci de cohérence avec l'affectation de valeurs de propriétés héritées. 
  - changement de syntaxe pour les variables de type "bord" : #VAR{acsComposantBord/Width} au lieu  de #VAR{acsComposantBordWidth} et modification de la balise VAR pour tenir compte de ce cas récursivement
  - changement d'algorithme de l'analyseur de page afin d'éviter les erreurs sur de trop grosses regexp
  - amélioration du drag/drop des composants dans la partie privee
  - balises #ACS_VERSION et #ACS_RELEASE, permettant de faire des composants multi-versions
+ - Nouveau type de variable : key (mot-clef)
  
 Modele Cat pour ACS vesion 0.7 :
  - transformation de TOUTES les pages du modèle (squelette) "cat" en pages constituées uniquement de modules (en cours)
@@ -24,8 +25,8 @@ Modele Cat pour ACS vesion 0.7 :
  - Edito : nouvelles variables - boutons de navigation precedent / suivant
  - Fond : définition de classes par défaut héritées par tous les composants - personnalisation des styles spip natifs -  suppression de l'appel à spip_style.css, remplacé par la rdéfinition, personnalisable, de ces styles dans la css du composant Fond (à noter : meme située AVANT dans le header, la css spip_style.css pouvait prendre le pas sur la css habillage.css.html définie APRES - bug vu avec Firefox 3.6.10 et Konqueror 3.5.10)
  - Hierarchie : composant affichant la hiérarchie de la page en cours, pour les pages rubriques, articles, et toutes les pages ayant "page" dans l'url ET une traduction correspondante définie dans le composant "Fond"
- - IFrame : nouveau composant
- - Login : nouveau composant pour gérer la connection au site
+ - IFrame : nouveau composant permettant d'afficher les articles virtuels (externes) dans un iframe du site avec tous les menus
+ - Login : nouveau composant pour gérer la connection au site, affichage du nombre d'articles et de messages de l'utilisateur
  - Mail : dimensionnement automatique pour spip 2.1.2
  - Module : remplacé par le composant Cadre, qui permet en plus du contenu de définir l'apparence
  - Rubrique : nouveau composant apparence d'une rubrique

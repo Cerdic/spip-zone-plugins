@@ -3,12 +3,15 @@
   <nom>Encart</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.7.1</version>
-  <necessite id='acs' version='[0.7.1;]' />
+  <version>0.7.2</version>
+  <necessite id='acs' version='[0.7.2;]' />
 
   <param>
     <nom>preview</nom>
     <valeur>200</valeur>
+  </param>
+  <param>
+		<nom>instanciable</nom>
   </param>
 
   <variable>
@@ -28,6 +31,18 @@
   <variable>
     <nom>Bord</nom>
     <type>bord</type>
+  </variable>
+
+  <variable>
+    <nom>Type</nom>
+    <type>choix</type>
+    <option>articles</option>
+    <option>rubriques</option>
+    <value>articles</value>
+  </variable>
+  <variable>
+    <nom>Key</nom>
+    <type>key</type>
   </variable>
   <variable>
     <nom>Nb</nom>

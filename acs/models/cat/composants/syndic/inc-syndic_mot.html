@@ -4,7 +4,7 @@
     <div class="bsize"><a href="?page=sites"><:sur_web:></a></div>
     [<div class="pagination">(#PAGINATION)</div>]
   </div>
-  <BOUCLE_syndsit(SITES){recherche} {par points}{inverse (#ORDRE|?{0,1})}{pagination #VAR{acsSyndicNbSites,5}}>
+  <BOUCLE_syndsit(SITES){id_mot} {par date}{inverse}{pagination #VAR{acsSyndicNbSites,5}}>
     <ul class="bsize">
       <li><div class="site"><a href="#URL_SITE" target="synd" [ title="(#NOM_SITE|texte_backend)"] class="spip_out">#NOM_SITE</a></div></li>
     </ul>

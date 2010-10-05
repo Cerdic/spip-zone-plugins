@@ -10,4 +10,6 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Cliquez <u><a href="?exec=acs&onglet=pages&pg=composants/articles/inc-article">ici</a></u> pour d&eacute;finir le contenu de la page.
 Click <u><a href="?exec=acs&onglet=pages&pg=composants/articles/inc-article">here</a></u> to define page content.
 
+Pas de mise en cache ici pour gerer le controle d'acces 
+
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/inc-article_acces}{{env=#ENV}id_article}{self=#SELF}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>][(#VAR{acsArticlesLock}|!={oui}|?{' '}) <INCLUDE{fond=composants/articles/inc-article}{id_article}{self=#SELF}{env=#ENV}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]

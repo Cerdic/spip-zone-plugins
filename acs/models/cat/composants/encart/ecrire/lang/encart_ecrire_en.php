@@ -4,10 +4,10 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Encart',
-'description' => 'Blocks of last published articles with keyword: "Encart".',
-'help' => 'Keyword depend on language: it is defined in Encart component language file.',
+'description' => 'Blocks of last published articles with selected keyword.',
 
-'keyword' => 'Encart',
-
+'Type' => 'Type',
+'TypeArticles' => _T('articles'),
+'TypeRubriques' => _T('rubriques'),
 );
 ?>

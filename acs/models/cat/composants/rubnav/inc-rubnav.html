@@ -20,7 +20,7 @@
 			</BOUCLE_rubriques1>
 		</ul>
 	</div>[(#REM) fin rubriques]
-  <div class="spacer"></div>
+  [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_rubriques1>
 
 <B_rubriques2>
@@ -49,7 +49,7 @@
       </BOUCLE_rubriques2>
     </ul>
   </div>[(#REM) fin rubriques]
-  <div class="spacer"></div>
+  [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_rubriques2>
 
 <B_rubriques3>
@@ -78,7 +78,7 @@
       </BOUCLE_rubriques3>
     </ul>
   </div>[(#REM) fin rubriques]
-  <div class="spacer"></div>
+  [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_rubriques3>
 
 <B_rubriques>
@@ -107,7 +107,8 @@
 			</BOUCLE_rubriques>
 		</ul>
 	</div>[(#REM) fin rubriques]
-  <div class="spacer"></div>
+  [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_rubriques>
 
 [(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/rubnav/inc-rubnav_recherche}{recherche}{lang}>]
+[(#ID_MOT|?{' '})<INCLURE{fond=composants/rubnav/inc-rubnav_mot}{id_mot}{lang}>]

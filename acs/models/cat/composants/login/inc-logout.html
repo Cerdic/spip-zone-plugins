@@ -3,8 +3,15 @@
   <a href="#URL_AUTEUR">(#LOGO_AUTEUR|left|image_reduire{50,50})</a>]
   <div class="bloc-title bsize"><:spip:icone_informations_personnelles:></div>
   [ <a href="#URL_AUTEUR" class="bsize">(#NOM)</a>]
+    <div>
+    <B_articles><BOUCLE_articles(ARTICLES){id_auteur}></BOUCLE_articles></B_articles>
+    <div class="nsize">#TOTAL_BOUCLE <:articles:></div>
+    <//B_articles>
+    <B_forums><BOUCLE_forums(FORUMS){id_auteur}></BOUCLE_forums></B_forums>
+    <div class="nsize">#TOTAL_BOUCLE <:messages:></div>
+    <//B_forums>
+    </div>
   </BOUCLE_auteur>
-  <br />
   <div class="logout_link right nsize"><a href="[(#URL_LOGOUT)]" rel="nofollow"><:icone_deconnecter:></a></div>
 </div>
 [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]

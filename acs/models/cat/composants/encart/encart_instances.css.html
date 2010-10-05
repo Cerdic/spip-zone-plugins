@@ -1,0 +1,15 @@
+#CACHE{0}
+.cEncart#NIC {
+  [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Fond'}});]
+  [border-width: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Width'}});]
+  [border-style: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Style'}});]
+  [border-color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});]
+  -moz-border-radius: 8px;
+}
+.cEncart .entete {
+  [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}})[ url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}}})") repeat top left];]  
+  [border-bottom: 1px solid (#VAR{acsRubnavSep});]  
+  -moz-border-radius: 8px;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-bottomright: 0;
+}
