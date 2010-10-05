@@ -24,8 +24,11 @@
     <prefix> 
     animatedGIF
     </prefix>
+    <fonctions>
+      animated_GIF_fonctions.php
+    </fonctions>
     <pipeline>
-      <nom>_image_valeurs_trans</nom>
+      <nom>image_preparer_filtre</nom>
       <inclure>animated_GIF_pipelines.php</inclure>
     </pipeline>
 	<categorie>multimedia</categorie>
