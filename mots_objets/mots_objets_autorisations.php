@@ -7,7 +7,7 @@
  *
  */
 // fonction du pipeline, n'a rien a faire.
-function autoriser_mots_objets() {}
+function mots_objets_autoriser() {}
 
 
 // renvoyer chaque objet sur la fonction générique dans l'autorisation de rubrique.
