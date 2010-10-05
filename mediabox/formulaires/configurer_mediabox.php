@@ -56,14 +56,14 @@ function box_choisir_skin($skins,$selected,$name='skin'){
 }
 
 
-function formulaires_configurer_box_charger_dist(){
+function formulaires_configurer_mediabox_charger_dist(){
 	$valeurs = mediabox_config(true);
 	$valeurs['_skins'] = box_lister_skins();
 	
 	return $valeurs;
 }
 
-function formulaires_configurer_box_traiter_dist(){
+function formulaires_configurer_mediabox_traiter_dist(){
 	$config = mediabox_config(true);
 
 	include_spip('inc/meta');

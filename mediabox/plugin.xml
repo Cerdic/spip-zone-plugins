@@ -77,12 +77,12 @@ This plugin works on skeletons which have the <code>#INSERT_HEAD</code> tag.
 	<bouton id='mediabox' parent='configuration'>
 		<icone>prive/themes/spip/images/mediabox-24.png</icone>
 		<titre>mediabox:titre_menu_box</titre>
-		<url>config_mediabox</url>
+		<url>configurer_mediabox</url>
 	</bouton>
 	<bouton id='mediabox2' parent='bando_squelette'>
 		<icone>images/mediabox-16.png</icone>
 		<titre>mediabox:titre_menu_box</titre>
-		<url>config_mediabox</url>
+		<url>configurer_mediabox</url>
 	</bouton>
 	<categorie>multimedia</categorie>
 </plugin>
