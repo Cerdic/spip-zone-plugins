@@ -12,10 +12,10 @@
 [(#SET{hauteur,#ENV{hauteur,#HAUTEUR}})]
 
 <div class="image_legendes[ (#ENV{class})]">
-[(#TYPE_DOCUMENT|match{^(JPEG|GIF|PNG)$}|?{
+[(#EXTENSION|in_array{#ARRAY{0,jpg,1,gif,2,png}}|?{
 	[(#FICHIER
 			|image_reduire{#GET{largeur},#GET{hauteur}}
-			|inserer_attribut{class,legendes}
+			|inserer_attribut{class,legendes legende_#ID_DOCUMENT}
 			|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
 })]
 
@@ -38,8 +38,8 @@
 <script type="text/javascript">
 /*<![CDATA[*/ 
 (function($){
-	var init_notes = function() {
-		$(".legendes").annotateImage({
+	var init_notes_#ID_DOCUMENT = function() {
+		$(".legende_#ID_DOCUMENT").annotateImage({
 			editable: [(#GET{editable}|=={oui}|?{'true','false'})],
 			getUrl: "#URL_PAGE{#GET{url_get}}&id_document=#ID_DOCUMENT",
 			editUrl: "#URL_PAGE{editer_legende}",
@@ -50,7 +50,7 @@
 		});
 	}
 	$(function(){
-		init_notes();
+		init_notes_#ID_DOCUMENT();
 	});
 })(jQuery);
 /*]]>*/
