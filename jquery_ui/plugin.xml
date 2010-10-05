@@ -1,7 +1,7 @@
 <plugin>
 	<nom>jQuery UI</nom>
 	<auteur>jQuery Team</auteur>
-	<version>1.8.4</version>
+	<version>1.8.5</version>
 	<etat>stable</etat>
 	<description><multi>
 		[fr]jQuery UI pour SPIP.
@@ -11,7 +11,7 @@
 	<prefix>jqueryui</prefix>
 	<icon>images/jqueryui.png</icon>
 	<options>jqueryui_options.php</options>
-	<necessite id="lib:jquery-ui-1.8.4" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.8.4.zip" />
+	<necessite id="lib:jquery-ui-1.8.5" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.8.5.zip" />
 	<pipeline>
 		<nom>jquery_plugins</nom>
 		<inclure>jqueryui_pipelines.php</inclure>
