@@ -8,9 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer' => 'Effacer', # NEW
+	'bouton_effacer' => 'L&ouml;schen',
 	'bouton_mettre_a_jour' => 'Auf den neuesten Stand bringen',
-	'bouton_reset' => 'Reset', # NEW
+	'bouton_reset' => 'Zur&uuml;cksetzen',
 
 	// C
 	'cfg' => 'CFG',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Kein Feld in @nom@ gefunden', # MODIF
+	'pas_de_champs_dans' => 'Kein Feld in @nom@ gefunden',
 	'pas_de_changement' => 'Keine &Auml;nderung in <b>@nom@</b>',
 
 	// R
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Reset',
 
 	// S
-	'supprimer' => 'L&ouml;schen', # MODI
+	'supprimer' => 'Standardeinstellungen wieder herstellen'
 );
 
 ?>
