@@ -8,9 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autoriser_creerdans' => 'Create captions',
 	'autoriser_modifier' => 'Modify captions',
 	'autoriser_supprimer' => 'Delete captions',
-	
-	'bouton_enregistrer' => 'Save',
-	'bouton_reset' => 'Cancel',
+
 	'bouton_supprimer' => 'Delete',
 	
 	'cfg_descr_legendes' => 'The plugin "Captions" allows you to add annotations to images. This form allows you to configure its use.',

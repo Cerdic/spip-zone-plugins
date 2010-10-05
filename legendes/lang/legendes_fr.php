@@ -8,9 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autoriser_creerdans' => 'Cr&eacute;er des l&eacute;gendes',
 	'autoriser_modifier' => 'Modifier des l&eacute;gendes',
 	'autoriser_supprimer' => 'Supprimer des l&eacute;gendes',
-	
-	'bouton_enregistrer' => 'Enregistrer',
-	'bouton_reset' => 'Annuler',
+
 	'bouton_supprimer' => 'Supprimer',
 	
 	'cfg_descr_legendes' => 'Le plugin &laquo;L&eacute;gendes&raquo; permet d\'ajouter des annotations sur des images. Ce formulaire permet de configurer son utilisation.',
