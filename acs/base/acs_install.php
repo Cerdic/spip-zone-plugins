@@ -157,7 +157,7 @@ if ($dir2copy && @is_dir($dir2copy)) {
   			copy_dir($dir2copy.$file.'/', $dir_paste.$file.'/');
   		// S'il sagit d'un fichier, on le copie
   		else
-  			copy($dir2copy.$file,$dir_paste.$file );
+  			@rename($dir2copy.$file,$dir_paste.$file);
   	}
 		// On ferme $dir2copy
 		closedir($dh);
