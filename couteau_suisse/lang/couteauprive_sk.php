@@ -56,6 +56,8 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	// B
 	'balise_set:description' => 'Afin d\'all&eacute;ger les &eacute;critures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqu&eacute; &agrave; une variable passe donc dans le nom de la balise.
 
+
+
 Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPLACE{x,ons,ez}</code>.', # NEW
 	'balise_set:nom' => 'Balise #SET &eacute;tendue', # NEW
 	'barres_typo_edition' => '<MODIF>Editing contents', # MODIF
@@ -232,6 +234,16 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'detail_pipelines' => 'Pipelines:', # MODIF
 	'detail_raccourcis' => '<NEW>Voici la liste des raccourcis typographiques reconnus par cet outil.', # MODIF
 	'detail_traitements' => 'Treatment:', # MODIF
+	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
+	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
+	'devdebug:item_e_error' => 'Erreurs graves ou fatales (error)', # NEW
+	'devdebug:item_e_notice' => 'Notes d&#039;ex&#233;cution (notice)', # NEW
+	'devdebug:item_e_strict' => 'Tous les messages + les conseils PHP (strict)', # NEW
+	'devdebug:item_e_warning' => 'Avertissements (warning)', # NEW
+	'devdebug:item_espace_prive' => 'Espace priv&eacute;', # NEW
+	'devdebug:item_espace_public' => 'Espace public', # NEW
+	'devdebug:item_tout' => 'Tout SPIP', # NEW
+	'devdebug:nom' => 'D&eacute;bogueur de d&eacute;veloppement', # NEW
 	'distant_aide' => '<NEW>Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.', # MODIF
 	'distant_charge' => '<NEW>Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.', # MODIF
 	'distant_charger' => '<NEW>Lancer le t&eacute;l&eacute;chargement', # MODIF
@@ -374,6 +386,9 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:debut_urls_propres' => 'Beginning of the URLs:', # MODIF
 	'label:decoration_styles' => 'Your personalised style tags:', # MODIF
 	'label:derniere_modif_invalide' => 'Refresh immediately after a modification:', # MODIF
+	'label:devdebug_espace' => 'Filtrage de l\'espace concern&#233; :', # NEW
+	'label:devdebug_mode' => 'Activer le d&eacute;bogage', # NEW
+	'label:devdebug_niveau' => 'Filtrage du niveau d\'erreur renvoy&eacute; :', # NEW
 	'label:distant_off' => 'Deactivate:', # MODIF
 	'label:doc_Smax' => '<NEW>Taille maximale des documents :', # MODIF
 	'label:dossier_squelettes' => 'Directory(ies) to use:', # MODIF
