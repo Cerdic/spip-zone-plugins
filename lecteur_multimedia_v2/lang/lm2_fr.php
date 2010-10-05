@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_neolao_video_titlesize' => 'La taille de la police du titre',
 	'label_neolao_video_type' => 'Le type du lecteur (en fonction du type certaines valeurs de cette configuration n\'auront aucun effet)',
 	'legende_style_360player' => 'Styles du 360 player',
+	'legende_style_neolao_video' => 'Styles du player Neolao Vid&eacute;o',
 	'legende_style_players' => 'Styles du ou des lecteurs',
 
 	// T
