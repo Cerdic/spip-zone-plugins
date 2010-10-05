@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => 'Link zur Startseite.',
-	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
+	'description_menu_articles_rubrique' => 'Artikelliste einer Rubrik anzeigen',
 	'description_menu_deconnecter' => 'Wenn eine Leser angemeldet ist, zeige ihm einen Abmelde-Link.',
 	'description_menu_espace_prive' => 'Link zum Login und zum Redaktionssystem',
 	'description_menu_groupes_mots' => 'Zeige automatisch ein Men&uuml; aus Schlagworten und zugeh&ouml;rigen Artikeln. In der Grundeinstellung werden die Schlagwortgruppen mit ihren Schlagworten angezeigt. Wenn ein Skelett mit der Bezeichnung groupes_mots.html existiert, wird der Link zur Schlagwortguppe verwendet.',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => 'Startseite',
-	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
+	'nom_menu_articles_rubrique' => 'Artikel einer Rubrik',
 	'nom_menu_deconnecter' => 'Abmelden',
 	'nom_menu_espace_prive' => 'Einloggen / zum Redaktionssystem',
 	'nom_menu_groupes_mots' => 'Schlagworte und Artikel einer Schlagwortgruppe',
