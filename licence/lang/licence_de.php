@@ -21,18 +21,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_sa' => 'Creative Commons - Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen',
 	'description_cc_by_nd' => 'Creative Commons - Namensnennung-KeineBearbeitung',
 	'description_cc_by_sa' => 'Creative Commons - Namensnennung-Weitergabe unter gleichen Bedingungen',
-	'description_copyright' => '&copy; copyright the article\'s author', # NEW
-	'description_gpl' => 'GPL License', # NEW
+	'description_copyright' => '&copy; copyright auteur de l\'article', # NEW
+	'description_gpl' => 'licence GPL', # NEW
 
 	// L
 	'label_select_licence' => 'W&auml;hlen sie eine Lizenz',
 	'lien_art_libre' => 'http://artlibre.org/licence/lal/de',
-	'lien_cc_by' => 'http://creativecommons.org/licenses/by/2.0/en/', # MODIF
-	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/2.0/en/', # MODIF
-	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/2.0/en/', # MODIF
-	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/2.0/en/', # MODIF
-	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/2.0/en/', # MODIF
-	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/2.0/en/', # MODIF
+	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.de',
+	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.de',
+	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.de',
+	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de',
+	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.de',
+	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.ca',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html', # NEW
 
 	// S
