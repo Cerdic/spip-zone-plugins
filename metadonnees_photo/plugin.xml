@@ -1,19 +1,31 @@
 <plugin>
-	<nom>Metadonn&eacute;es photo (EXIF, IPTC et histogramme)</nom>
+	<nom>
+		<multi>
+			[fr]Metadonn&#233;es photo (EXIF, IPTC et histogramme)
+			[en]Photo metadata (EXIF, IPTC and histogram)
+		</multi>
+	</nom>
 	<auteur>ARNO*</auteur>
 	<version>1.2</version>
 	<icon>imgs_photo/logo-pb_plugin.png</icon>
 	<etat>stable</etat>
 	<description>
-		Ce plugin permet d'afficher les informations EXIF, GPS et IPTC d'un fichier JPEG.
+		<multi>
+			[fr]Ce plugin permet d'afficher les informations EXIF, GPS et IPTC d'un fichier JPEG.
 
-		Les informations EXIF sont manipul&eacute;es, sans recours &agrave; l'extension EXIF de PHP, gr&acirc;ce au script de Vinay Yadav (sous licence LGPL).
+Les informations EXIF sont manipul&#233;es, sans recours &#224; l'extension EXIF de PHP, gr&#226;ce au script de Vinay Yadav (sous licence LGPL).
 
-		Les informations IPTC n&eacute;cessitent la fonction "iptcparse" de PHP et utilisent la classe "class_iptc" d'Alex Arica.
+Les informations IPTC n&#233;cessitent la fonction "iptcparse" de PHP et utilisent la classe "class_iptc" d'Alex Arica.
+			[en]This plugin allows to view EXIF, IPTC and GPS data from a JPEG file.
+
+EXIF informations are handled without using the PHP's EXIF extension, but through a script by Vinay Yadav (under LGPL license).
+
+IPTC informations requires the "iptcparse" PHP function and use the class "class_iptc" by Alex Arica.
+		</multi>
 	</description>
 	<licence>LGPL</licence>
 	<fonctions>photo_infos_fonctions.php</fonctions>
-	<lien>http://plugins.spip.net/spip.php?article6</lien> <!-- URI de documentation -->
+	<lien>http://plugins.spip.net/spip.php?article6</lien>
 	<prefix>photo_infos</prefix>
 	<pipeline>
 		<nom>afficher_contenu_objet</nom>
