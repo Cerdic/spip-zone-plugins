@@ -40,8 +40,8 @@ if (find_in_path($fond.'.html')) {
 <?php
 // Use preview if exist, or component itself if not.
 $p = find_in_path($_GET['c'].'_preview.html');
-if ($p) : ?><INCLURE{fond=#EVAL{$_GET['c'].'_preview'}}{c}>
-<?php else : ?><INCLURE{fond=#ENV{c}}{self=#SELF}{env=#ENV} {nic=#ENV{nic}}>
+if ($p) : ?><INCLURE{fond=#EVAL{$_GET['c'].'_preview'}}{c}{nic=#ENV{nic}}>
+<?php else : ?><INCLURE{fond=#ENV{c}}{self}{env} {nic=#ENV{nic}}>
 <?php endif; ?>
 </body>
 </html>
