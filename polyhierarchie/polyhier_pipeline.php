@@ -126,8 +126,7 @@ function polyhier_editer_contenu_objet($flux){
 		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
 		if ($args['contexte']['id_parent'] < 0) return $flux;
 
-		$saisie = "<script type='text/javascript'>jQuery(function() {jQuery('li.editer_parent').remove();});</script>";
-		$saisie .= recuperer_fond("formulaires/inc-selecteur-parents",$args['contexte']);
+		$saisie = recuperer_fond("formulaires/inc-selecteur-parents",$args['contexte']);
 		if (strpos($flux['data'],'<!--polyhier-->')!==FALSE)
 			$flux['data'] = preg_replace(',(.*)(<!--polyhier-->),ims',"\\1$saisie\\2",$flux['data'],1);
 		elseif (preg_match(",<li [^>]*class=[\"']editer_(descriptif|virtuel|chapo|liens_sites|texte),Uims",$flux['data'],$regs)){
