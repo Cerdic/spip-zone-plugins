@@ -3,7 +3,7 @@
 	<description>
 	<multi>[fr]Ajoute la possibilité de donner des coordonnées postales (adresses, mails, téléphones)
 	aux objets de SPIP, tout particulièrement aux auteurs. Plusieurs adresses et numéros de téléphone peuvent ainsi être donnés à chaque auteur.
-	[fr]Provides the ability to add postal details (addresses, e-mail, phone numbers) to SPIP objects, specifically to authors. Several addresses or phone numbers can be given to each single author.
+	[en]Provides the ability to add postal details (addresses, e-mail, phone numbers) to SPIP objects, specifically to authors. Several addresses or phone numbers can be given to each single author.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Coordonnees</lien>
