@@ -13,9 +13,6 @@ include_spip('inc/meta');
  * @param string $version_cible
  */
 function sjcycle_upgrade($nom_meta_base_version,$version_cible){
-	echo "<br />nom_meta_base_version ".$nom_meta_base_version ;
-	echo "<br />version_cible ".$version_cible ;
-
 	$current_version = 0.5;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
