@@ -5,10 +5,13 @@
 	<etat>stable</etat>
 	<prefix>opensearch</prefix>
 	<description>
-	Plugin qui permet de proposer aux visiteurs de votre site d'ajouter un moteur de recherche personnalis&eacute;e &agrave; leur navigateur.
+		<multi>
+			[fr]Plugin qui permet de proposer aux visiteurs de votre site d'ajouter un moteur de recherche personnalis&#233;e &#224; leur navigateur.
+			[en]Plugin which enables to offer the users to add a custom search engine related to your website on their browser.
+		</multi>
 	</description>
 	<lien></lien>
-	<licence>GPL</licence>
+	<licence>GNU/GPL</licence>
 	<icon>images/opensearch-64.png</icon>
 	<pipeline>
 		<nom>insert_head</nom>
