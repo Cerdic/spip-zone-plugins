@@ -9,6 +9,7 @@
 		<multi>
 			[fr]Gestion des tags multi
 			[it]Gestione facile dei tag multi
+			[en]Easy management of the multilingual tags
 		</multi>
 	</description>
 	<prefix>multilang</prefix>
