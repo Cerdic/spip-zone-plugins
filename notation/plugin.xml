@@ -1,20 +1,28 @@
 <plugin>
-	<nom>Notation</nom>
+	<nom><multi>[fr]Notation[en]Rating</multi></nom>
 	<auteur>JEM - b_b - Matthieu Marcillaud</auteur>
 	<version>0.7.1</version>
 	<version_base>0.6.1</version_base>
 	<etat>stable</etat>
 	<prefix>notation</prefix>
 	<description>
-		<b>Attribuer une note aux &eacute;l&eacute;ments de Spip</b><hr />
-		D&eacute;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant 
-		la saise et l'affichage de la note d'un &eacute;l&eacute;ment de boucle.<br />
-		D&eacute;finition des mod&egrave;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
+		<multi>
+			[fr]<b>Attribuer une note aux &#233;l&#233;ments de SPIP</b><hr />
+		D&#233;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant 
+		la saise et l'affichage de la note d'un &#233;l&#233;ment de boucle.<br />
+		D&#233;finition des mod&#232;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
 		qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
 		et <em>&gt;notation|topten&lt;</em> qui donne les 10 meilleurs articles.
+			[en]<b>Assign a rating to SPIP elements</b><hr />
+		Defines the <code>#FORMULAIRE_NOTATION</code> tag which allows 
+		the capture and the display of the rating of a loop element.<br />
+		Defines the models <em>&gt;autxx|notation|id_article=yy&lt;</em> 
+		which gives the author's rating <i>xx</i> for the article <i>yy</i>
+		and <em>&gt;notation|topten&lt;</em> which gives the 10 best articles.
+		</multi>
 	</description>
-	<lien>[Documentation->http://www.spip-contrib.net/Notation-d-articles-SPIP]</lien>
-	<licence>GPL</licence>
+	<lien>http://www.spip-contrib.net/Notation-d-articles-SPIP</lien>
+	<licence>GNU/GPL</licence>
 	<necessite id="spip" version="[2.0.0;]" />
 	<necessite id="cfg" version="[1.10.4;]" />
 
