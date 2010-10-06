@@ -67,8 +67,11 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	// pas que Toto.pdf et toto.pdf
 	// et on aura une collision en cas de changement de file system
 	$file['name'] = strtolower(translitteration($file['name']));
+	
+	// Pouvoir definir dans mes_options.php que l'on veut titrer tous les documents par défaut
+	if (!defined('_TITRER_DOCUMENTS')) { define('_TITRER_DOCUMENTS', false); }
 
-	$titrer = isset($file['titrer'])?$file['titrer']:false;
+	$titrer = isset($file['titrer'])?$file['titrer']:_TITRER_DOCUMENTS;
 	$mode = ((isset($file['mode']) AND $file['mode'])?$file['mode']:$mode);
 
 	include_spip('inc/modifier');
@@ -107,7 +110,8 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		$type_image = ''; // au pire
 		$champs['titre'] = '';
 		if ($titrer){
-			$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $nom_envoye);
+			$titre = substr($nom_envoye,0, strrpos($nom_envoye, ".")); // Enlever l'extension du nom du fichier
+			$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
 			$champs['titre'] = preg_replace(',\.([^.]+)$,', '', $titre);
 		}
 
