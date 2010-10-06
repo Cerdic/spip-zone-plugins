@@ -262,7 +262,16 @@ function calculer_URL_ARCHIVE()
 	static $myjobs = array();
 	
 	// Désactiver si en espace privé
-	if(test_espace_prive()) { return('#'); }
+	if(test_espace_prive())
+	{
+		return('#');
+	}
+	// ou appelé par wget
+	if(substr($_SERVER['HTTP_USER_AGENT'],0,4) == 'Wget')
+	{
+		//sia_log('wget himself. Skip!');
+		return('#');
+	}
 
 	// Commence par vérifier si le script shell existe
 	if(!file_exists(SIA_SCRIPT_FILE))
