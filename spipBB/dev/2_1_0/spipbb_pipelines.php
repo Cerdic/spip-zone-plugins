@@ -81,4 +81,20 @@ function spipbb_taches_generales_cron($taches_generales){
 	return $taches_generales;
 } // spipbb_taches_generales_cron
 
+// Pour ajouter la citation
+function spipbb_formulaire_charger($flux){
+	if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
+	if ($form = $flux['args']['form'] == 'forum') {
+		//est-ce qu'un autre post est cité ?
+		$citer = _request('citer');
+		//Un autre post est citer, chargeons les variables nécessaires
+		if ($citer=='oui') {
+			$id_citer_forum = _request('id_forum');
+			$citer_auteur = sql_getfetsel("auteur", "spip_forum", "id_forum=" . intval($id_citer_forum));
+			$citer_texte= sql_getfetsel("texte", "spip_forum", "id_forum=" . intval($id_citer_forum));
+			$flux['data']['texte'] = "<quote=".$citer_auteur.">".$citer_texte."</quote>";
+		}
+	}
+	return $flux;
+}
 ?>

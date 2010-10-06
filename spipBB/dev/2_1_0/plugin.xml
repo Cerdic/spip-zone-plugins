@@ -146,6 +146,10 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
