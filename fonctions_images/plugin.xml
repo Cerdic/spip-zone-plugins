@@ -1,5 +1,10 @@
 <plugin>
-	<nom>Images functions</nom>
+	<nom>
+		<multi>
+			[fr]Fonctions d'images
+			[en]Images functions
+		</multi>
+	</nom>
 	<auteur>Arnaud Martin  ([->http://www.paris-beyrouth.org/-SPIP-])
 	<multi>
 		[fr]
