@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Effacer', # NEW
 	'bouton_mettre_a_jour' => 'Actualizar',
+	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Tienes que crear una carpeta @dir@ en tu carpeta ra&iacute;z de SPIP con permiso de escritura.',
 	'installer_lib_192' => 'Para instalar una biblioteca, descomprime manualmente el zip y copia su contenido en la carpeta @dir@.',
 
+	// L
+	'label_activer' => 'Activar',
+	'label_obligatoire' => 'Entrada obligatoria',
+
 	// N
 	'nom_table_manquant' => 'Nombre de la tabla SQL que falta',
 	'nouveau' => 'Nuevo',
@@ -43,14 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'S&Iacute;',
 
 	// P
-	'pas_de_champs_dans' => 'No se encuentra ning&uacute;n campo en @nom@',
+	'pas_de_champs_dans' => 'No se encuentra ning&uacute;n campo en @nom@', # MODIF
 	'pas_de_changement' => 'Sin cambios en <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'S&oacute;lo los administradores o administradoras del sitio est&aacute;n autorizados a modificar estos par&aacute;metros',
+	'refus_configuration_webmestre' => 'S&oacute;lo los y las webmaster del sitio est&aacute;n autorizados a modificar estos par&aacute;metros.',
 	'reset' => 'Borrar',
 
 	// S
-	'supprimer' => 'Suprimir'
+	'supprimer' => 'Suprimir', # MODI
 );
 
 ?>

@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Effacer', # NEW
 	'bouton_mettre_a_jour' => 'Actualizar',
+	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Ties que crear un direutoriu @dir@ na raiz del to sitiu SPIP, que tenga permisu d\'escritura.',
 	'installer_lib_192' => 'Pa asitiar una biblioteca, hai que descomprimir el ficheru zip a mano y copiar el so conten&iacute;u nel direutoriu @dir@.',
 
+	// L
+	'label_activer' => 'Activar',
+	'label_obligatoire' => 'Testu obligatoriu',
+
 	// N
 	'nom_table_manquant' => 'Falta\'l nome de la tabla SQL',
 	'nouveau' => 'Nuevu',
@@ -43,15 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'Val',
 
 	// P
-	'pas_de_champs_dans' => 'Nun s\'alcuentra deng&uacute;n campu en @nom@',
+	'pas_de_champs_dans' => 'Nun s\'alcuentra deng&uacute;n campu en @nom@', # MODIF
 	'pas_de_changement' => 'Ensin camb&eacute;os en <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Nam&aacute;i los(es) alministradores del sitiu tienen permisu pa modificar estos par&aacute;metros.',
 	'refus_configuration_webmestre' => 'S&oacute;lo los webmasters d\'esti sitiu tienen autorizaci&oacute;n pa camudar estos par&aacute;metros.',
 	'reset' => 'Desaniciar',
 
 	// S
-	'supprimer' => 'Desaniciar'
+	'supprimer' => 'Desaniciar', # MODI
 );
 
 ?>

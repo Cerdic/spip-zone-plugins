@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Effacer', # NEW
 	'bouton_mettre_a_jour' => 'Aduce&#355;i la zi',
+	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Trebuie s&#259; crea&#355;i un director @dir@ &icirc;n directorul r&#259;d&#259;cin&#259; al site-ului SPIP - cu drepturi de scriere.',
 	'installer_lib_192' => 'Pentru a instala o libr&#259;rie, decomprima&#355;i  zip-ul &#351;i copia&#355;i con&#355;inutul s&#259;u &icirc;n directorul @dir@.',
 
+	// L
+	'label_activer' => 'Activa&#355;i',
+	'label_obligatoire' => 'Intrare obligatorie',
+
 	// N
 	'nom_table_manquant' => 'Numele de tabel&#259; SQL lipse&#351;te',
 	'nouveau' => 'Nou',
@@ -43,14 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Nici un c&acirc;mp g&#259;sit &icirc;n @nom@',
+	'pas_de_champs_dans' => 'Nici un c&acirc;mp g&#259;sit &icirc;n @nom@', # MODIF
 	'pas_de_changement' => 'Nici o schimbare &icirc;n <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Doar administratorii site-ului sunt autoriza&#355;i s&#259; modifice ace&#351;ti parametrii.',
+	'refus_configuration_webmestre' => 'Doar webmaster-ii acestui site sunt autorizati s&#259; modifice ace&#351;ti parametrii.',
 	'reset' => '&#350;terge&#355;i',
 
 	// S
-	'supprimer' => '&#350;terge&#355;i'
+	'supprimer' => '&#350;terge&#355;i', # MODI
 );
 
 ?>

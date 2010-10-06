@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Effacer', # NEW
 	'bouton_mettre_a_jour' => 'G&uuml;ncelle',
+	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'SPIP\'inizin k&ouml;k dizininde @dir@ isimli, yazma haklar&#305;na sahip bir dizin olu&#351;turmal&#305;s&#305;n&#305;z.',
 	'installer_lib_192' => 'Bir k&uuml;t&uuml;phane kurmak i&ccedil;in zip dosyas&#305;n&#305; el ile a&ccedil;&#305;n&#305;z ve i&ccedil;eri&#287;ini @dir@ dizinine kopyalay&#305;n&#305;z.',
 
+	// L
+	'label_activer' => 'Etkinle&#351;tir',
+	'label_obligatoire' => 'Giri&#351; zorunlu',
+
 	// N
 	'nom_table_manquant' => 'SQL tablosunun ismi eksik',
 	'nouveau' => 'Yeni',
@@ -43,14 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => '@nom@\'de hi&ccedil;bir alan bulunamad&#305;',
+	'pas_de_champs_dans' => '@nom@\'de hi&ccedil;bir alan bulunamad&#305;', # MODIF
 	'pas_de_changement' => '<b>@nom@</b>\'de de&#287;i&#351;iklik yok',
 
 	// R
+	'refus_configuration_administrateur' => 'Bu parametreleri yaln&#305;z idareciler ("administrateur") de&#287;i&#351;tirebilir.',
+	'refus_configuration_webmestre' => 'Bu parametreleri yaln&#305;z site y&ouml;neticileri de&#287;i&#351;tirebilir.',
 	'reset' => 'Sil',
 
 	// S
-	'supprimer' => 'Kald&#305;r'
+	'supprimer' => 'Kald&#305;r', # MODI
 );
 
 ?>

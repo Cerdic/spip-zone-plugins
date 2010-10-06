@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Effacer', # NEW
 	'bouton_mettre_a_jour' => 'Uppdatera',
+	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Du m&aring;ste skapa en katalog med namnet @dir@ med skrivr&auml;ttigheter i rotkatalogen i din SPIP-sajt.',
 	'installer_lib_192' => 'F&ouml;r att installera en biblioteksfil, dekomprimera den komprimerade filen och kopiera inneh&aring;llet till katalogen @dir@.',
 
+	// L
+	'label_activer' => 'Activer', # NEW
+	'label_obligatoire' => 'Saisie obligatoire', # NEW
+
 	// N
 	'nom_table_manquant' => 'Tabellnamnet saknas',
 	'nouveau' => 'Ny',
@@ -43,14 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Inget f&auml;lt hittades i @nom@',
+	'pas_de_champs_dans' => 'Inget f&auml;lt hittades i @nom@', # MODIF
 	'pas_de_changement' => 'Ingen f&ouml;r&auml;ndring hittades i <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Seuls les administrateurs du site sont autoris&#233;s &#224; modifier ces param&#232;tres.', # NEW
+	'refus_configuration_webmestre' => 'Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres.', # NEW
 	'reset' => 'Radera',
 
 	// S
-	'supprimer' => 'Radera'
+	'supprimer' => 'Radera', # MODI
 );
 
 ?>

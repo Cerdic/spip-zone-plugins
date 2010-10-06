@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'L&ouml;schen',
 	'bouton_mettre_a_jour' => 'Auf den neuesten Stand bringen',
+	'bouton_reset' => 'Zur&uuml;cksetzen',
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Sie m&uuml;ssen ein beschreibbares Verzeichnis mit dem Namen @dir@ im Wurzelverzeichnis Ihrer SPIP-Website anlegen.',
 	'installer_lib_192' => 'Um eine Bibliothek zu installieren, entpacken Sie die ZIP-Datei manuell und kopieren Sie den Inhalt des Archivs in das Verzeichnis @dir@.',
 
+	// L
+	'label_activer' => 'Aktivieren',
+	'label_obligatoire' => 'Pflichtfeld',
+
 	// N
 	'nom_table_manquant' => 'Fehlender Name der SQL Tabelle',
 	'nouveau' => 'Neu',
@@ -47,10 +53,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Keine &Auml;nderung in <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Nur die Administratoren der Site d&uuml;rfen diese Einstellungen &auml;ndern.',
+	'refus_configuration_webmestre' => 'Nur ein Webmaster darf diese EInstellungen bearbeiten.',
 	'reset' => 'Reset',
 
 	// S
-	'supprimer' => 'L&ouml;schen'
+	'supprimer' => 'Standardeinstellungen wieder herstellen'
 );
 
 ?>

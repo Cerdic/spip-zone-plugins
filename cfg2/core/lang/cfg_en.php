@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Delete',
 	'bouton_mettre_a_jour' => 'Update',
+	'bouton_reset' => 'Reset',
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'You must create a directory named @dir@ with write permissions at the root of your SPIP site.',
 	'installer_lib_192' => 'To install a library, unzip the zip file manually and copy its contents to the @dir@ directory.',
 
+	// L
+	'label_activer' => 'Activate',
+	'label_obligatoire' => 'Required entry',
+
 	// N
 	'nom_table_manquant' => 'Missing SQL table name',
 	'nouveau' => 'New',
@@ -47,11 +53,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'No change found in <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Only the site administrators are authorised to change these parameters.',
 	'refus_configuration_webmestre' => 'Only the site webmasters are authorised to modify these parameters.',
 	'reset' => 'Delete',
 
 	// S
-	'supprimer' => 'Delete'
+	'supprimer' => 'Reset to the default values'
 );
 
 ?>

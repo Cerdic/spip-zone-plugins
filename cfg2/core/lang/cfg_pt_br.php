@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Effacer', # NEW
 	'bouton_mettre_a_jour' => 'Atualizar',
+	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Voc&ecirc; precisa criar um diret&oacute;rio @dir@ na raiz do seu SPIP, com permiss&atilde;o de escrita.',
 	'installer_lib_192' => 'Para instalar uma biblioteca, expanda manualmente o zip e copie o seu conte&uacute;do no diret&oacute;rio @dir@.',
 
+	// L
+	'label_activer' => 'Activer', # NEW
+	'label_obligatoire' => 'Saisie obligatoire', # NEW
+
 	// N
 	'nom_table_manquant' => 'Nome da tabela faltando',
 	'nouveau' => 'Novo',
@@ -43,14 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Nenhum campo encontrado em @nom@',
+	'pas_de_champs_dans' => 'Nenhum campo encontrado em @nom@', # MODIF
 	'pas_de_changement' => 'Nenhuma altera&ccedil;&atilde;o em <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Seuls les administrateurs du site sont autoris&#233;s &#224; modifier ces param&#232;tres.', # NEW
+	'refus_configuration_webmestre' => 'Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres.', # NEW
 	'reset' => 'Apagar',
 
 	// S
-	'supprimer' => 'Excluir'
+	'supprimer' => 'Excluir', # MODI
 );
 
 ?>

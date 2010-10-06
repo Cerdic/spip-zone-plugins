@@ -8,7 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_effacer' => 'Esborrar',
 	'bouton_mettre_a_jour' => 'Actualitzaci&oacute;',
+	'bouton_reset' => 'Reiniciar',
 
 	// C
 	'cfg' => 'CFG',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Heu de crear una carpeta @dir@ a l\'arrel del vostre SPIP que tingui permisos d\'escriptura.',
 	'installer_lib_192' => 'Per instal&middot;lar una llibreria, descomprimiu manualment el zip i copieu el seu contingut a dins de la carpeta @dir@.',
 
+	// L
+	'label_activer' => 'Activar',
+	'label_obligatoire' => 'Introducci&oacute; obligat&ograve;ria',
+
 	// N
 	'nom_table_manquant' => 'Falta el nom de la taula SQL',
 	'nouveau' => 'Nou',
@@ -47,11 +53,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Cap canvi a <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Nom&eacute;s els administradors del lloc estan autoritzats a modificar aquests par&agrave;metres.',
 	'refus_configuration_webmestre' => 'Nom&eacute;s els webmestres del lloc estan autoritzats per modificar aquests par&agrave;metres. ',
 	'reset' => 'Esborrar',
 
 	// S
-	'supprimer' => 'Suprimir'
+	'supprimer' => 'Tornar a posar els valors per defecte'
 );
 
 ?>
