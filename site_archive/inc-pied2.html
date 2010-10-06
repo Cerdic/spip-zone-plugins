@@ -1,8 +1,33 @@
-<div id="pied">
+[<!--(#REM)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+	inc-pied2.html
+	
+	Version inc-pied pour SiA.
+	
+	Plus radicale que inc-pied.html.
+	
+	Vérifie à chaque hit si appel de Wget
+	et appelle le cache si ce n'est pas le cas.
+	
+	Pour personnaliser ce squelette,
+	recopiez-le dans votre dossier de squelettes
+	sous le nom 'inc-pied.html'
+	et adaptez-le à vos besoins.
+	
+-->]<div id="pied">
 	<a href="http://www.spip.net/"
 	   title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}"
 	   alt=alt="SPIP" width="48" height="16" /></a>
-	[(#ENV{mode_archive}|!={on}|?{' '})
+	<?php
+		$me = $_SERVER['HTTP_USER_AGENT'];
+		$me = substr($me, 0, 4);
+		if($me != 'Wget')
+		{
+	?>
 	|
 	<a href="#ENV{skel}" title="<:voir_squelette:>" rel="nofollow"><:squelette:></a>[
 	(#SESSION{id_auteur}|?{' '})| <a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>
@@ -11,6 +36,9 @@
 	<a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a> | 
 	<a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a>
 	]
+	<?php
+		}
+	?>
 </div>
 [<!--(#REM)
 
