@@ -3,6 +3,4 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2008-09-07 23:27:12 +0200 (dim., 07 sept. 2008) $
 
-- le plugin ne prévoit - pour le moment - que le type d'adresses URL standard. Intégrer les URLs personnalisées (propres, propres2, etc.)  (s'inspirer de la balise LOGO_ ?). 
-
 - Traductions 
