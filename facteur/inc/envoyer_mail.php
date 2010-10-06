@@ -47,6 +47,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$facteur->From = $from;
 	if ($nom_envoyeur)
 		$facteur->FromName = $nom_envoyeur;
+	else
+		$facteur->FromName = $from;
 	if (count($pieces_jointes)) {
 		foreach ($pieces_jointes as $piece) {
 			$facteur->AddAttachment($piece['chemin'], $piece['nom'], $piece['encodage'], $piece['mime']);
