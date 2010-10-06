@@ -1,23 +1,37 @@
 <plugin>
 	<nom>Gravatar</nom>
-	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] pour <code>#GRAVATAR</code>
+	<auteur>
+		<multi>
+			[fr]Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] pour <code>#GRAVATAR</code>
 	<br />Fil - [SPIP->www.spip.net] pour <code>#LOGO_AUTEUR</code>
-	<br />Cedric pour la configuration et l'extension a monsterid/wavatar/identicons
+	<br />Cedric pour la configuration et l'extension &#224; monsterid/wavatar/identicons
+			[en]Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] for <code>#GRAVATAR</code>
+	<br />Fil - [SPIP->www.spip.net] for <code>#LOGO_AUTEUR</code>
+	<br />Cedric for the configuration and extension to monsterid/wavatar/identicons
+		</multi>
 	</auteur>
 	<icon>images/gravatar-64.png</icon>
 	<version>1.1.0</version>
 	<etat>stable</etat>
 	<description>
-Permet d'utiliser un cache pour stocker les gravatars
-_ A utiliser dans une boucle de cette mani&egrave;re : <code>#GRAVATAR{email, taille, url image par
+		<multi>
+			[fr]Permet d'utiliser un cache pour stocker les gravatars.
+_ &#192; utiliser dans une boucle de cette mani&#232;re : <code>#GRAVATAR{email, taille, url image par
 defaut}</code>
 _ Exemple : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
 
-&Eacute;tend la balise #LOGO_AUTEUR de mani&egrave;re &agrave; prendre en compte le gravatar d'un auteur s'il existe, y compris dans les forums et p&#233;titions.
+&#201;tend la balise #LOGO_AUTEUR de mani&#232;re &#224; prendre en compte le gravatar d'un auteur s'il existe, y compris dans les forums et p&#233;titions.
 _ Permet de configurer une image par defaut, et la taille des images.
 
-Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme 
+Fournit le filtre <code>|gravatar</code>, &#224; utiliser par exemple comme 
 <code>[(#EMAIL|gravatar|image_reduire{80})]</code>.
+			[en]Enables to use a cache system to store the gravatars.
+_ To use it in a loop in this manner : <code>#GRAVATAR{email, size, URL of the default image}</code>
+_ Example : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
+
+Also extend the #LOGO_AUTEUR tag in order to take into account the gravatar of an author if it exists, including in forums and petitions.
+_ Configures a default image, and image size.
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/gravatar</lien>
 	<prefix>gravatar</prefix>
