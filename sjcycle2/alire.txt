@@ -31,3 +31,4 @@ A faire :
 - Possibilité d'afficher un diapo dans une rubrique à partir des images de la rubrique
 - L'affichage via un modele ne fonctionne pas dans une rubrique avec les images dans un article car l'id qui arrive dans le modele est celui de la rubrique et non celui de l'article
 - Les effets de type turnLeft ne fonctionnent pas si le div .infobulle est en place dans le modele. En attendant de corriger, rajout dans la doc de l'incompatibilité entre infobulles et ces effets. Du coup la bordure autour de l'image ne se met pas en place non plus... A voir.
+- Peut-on ajouter en paramètre, un lien URL vers un article spip (ou exterieur), qui permettrait à un utilisateur d’aller sur un article lorsqu’il cliquerait sur l’image qui défile ?
