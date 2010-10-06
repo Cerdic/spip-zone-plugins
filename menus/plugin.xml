@@ -5,7 +5,13 @@
 	<version>0.8.2</version>
 	<version_base>0.5</version_base>
 	<etat>test</etat>
-	<description><multi>[fr]Cr&eacute;ez enfin vos menus dans la partie priv&eacute;e ![de]Men&uuml;s bequem im Redaktionssystem gestalten.</multi></description>
+	<description>
+		<multi>
+			[fr]Cr&eacute;ez enfin vos menus dans la partie priv&eacute;e !
+			[de]Men&uuml;s bequem im Redaktionssystem gestalten.
+			[de]Create your own custom menus.
+		</multi>
+	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Menus</lien>
 	<icon>images/menus-48.png</icon>
 	<prefix>menus</prefix>
