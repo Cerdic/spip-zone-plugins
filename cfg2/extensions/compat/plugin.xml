@@ -1,13 +1,22 @@
 <plugin>
-    <nom>Compatibilit&#233; : fonctionnalit&#233;s de CFG 1.10</nom>
+    <nom>
+    	<multi>
+    		[fr]CFG : Compatibilit&#233; des fonctionnalit&#233;s de CFG 1.10
+			[fr]CFG : Compatibility with CFG 1.10 functionalities
+		</multi>
+	</nom>
     <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
     <version>1.0.5</version>
     <etat>stable</etat>
     <description>
-	Assure une comptabilit&#233; avec les fonds CFG 1.10.x
+    	<multi>
+    		[fr]Assure une comptabilit&#233; avec les fonds CFG 1.10.x
 	ainsi qu'une comptabilit&#233; pour SPIP 1.9.2.
-	C'est un pansement &agrave; &#233;viter autant que possible.
+	C'est un pansement &#224; &#233;viter autant que possible.
+			[en]Ensures compatibility with CFG 1.10.x and a compatibility for SPIP 1.9.2.
+	It's a bandage to avoid as much as possible.
+		</multi>
     </description>
     <prefix>cfg_compat</prefix>
     <chemin dir='' />
