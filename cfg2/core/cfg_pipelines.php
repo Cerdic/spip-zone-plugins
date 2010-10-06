@@ -30,7 +30,7 @@ function est_cvt($form){
 function cfg_formulaire_charger($flux){
 	// s'il n'y a pas de fonction charger, on utilise le parseur de CFG
 	$form = $flux['args']['form'];
-	if (!est_cvt($form)){
+	if (!est_cvt($form) AND !count($flux['data'])){
 
 		// ici, on a le nom du fond cfg... 
 		// on recupere donc les parametres du formulaire.	
@@ -44,6 +44,9 @@ function cfg_formulaire_charger($flux){
 			'_cfg_nom' => $form,
 			'id' => $cfg_id,
 			'_param' => $config->param,
+			// passer aussi les arguments spécifiques a cfg
+			'_cfg_' => $config->creer_hash_cfg(), // passer action=cfg pour avoir un hash formulaire correct
+			'_hidden' => "<input type='hidden' name='_cfg_is_cfg' value='oui' />"
 		);
 
 		// il faut passer les noms des champs (input et consoeurs) de CFG dans l'environnement
@@ -72,7 +75,7 @@ function cfg_formulaire_charger($flux){
 function cfg_formulaire_verifier($flux){
 
 	$form = $flux['args']['form'];
-	if (!est_cvt($form)){
+	if (_request('_cfg_is_cfg') AND !est_cvt($form)){
 		include_spip('inc/cfg_formulaire');
 
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
@@ -112,7 +115,7 @@ function cfg_instancier($config=false){
 // traitement du formulaire
 function cfg_formulaire_traiter($flux){
 	$form = $flux['args']['form'];
-	if (!est_cvt($form)){
+	if (_request('_cfg_is_cfg') AND !est_cvt($form)){
 		$config = cfg_instancier();
 
 		$config->traiter(); 
