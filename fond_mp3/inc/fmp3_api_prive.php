@@ -38,10 +38,32 @@ function fmp3_gros_titre ($titre, $ze_logo='', $return = false) {
 	return($r);
 }
 
+/**
+ * infos du plugin
+ * @see: http://plugins.spip.net/Fond-MP3#forum1094
+ * */
+function fmp3_plugin_get_infos($dir)
+{
+	static $info;
+	if($info === null)
+	{
+		if(version_compare($GLOBALS['spip_version_code'],'15375','>='))
+		{
+			$get_infos = charger_fonction('get_infos','plugins');
+			$info = $get_infos(fmp3_get_plugin_meta_dir($prefix));
+		}
+		else
+		{
+			$info = plugin_get_infos(fmp3_get_plugin_meta_dir($prefix));
+		} 
+	}
+	return($info);
+}
+
 /***********************************************/
 function fmp3_html_signature ($prefix, $html = true) {
 
-	$info = plugin_get_infos(fmp3_get_plugin_meta_dir($prefix));
+	$info = fmp3_plugin_get_infos(fmp3_get_plugin_meta_dir($prefix));
 	$nom = typo($info['nom']);
 	$version = typo($info['version']);
 	$version = 
@@ -65,7 +87,7 @@ function fmp3_boite_plugin_info ($prefix) {
 	$result = false;
 	if(!empty($prefix)) {
 		$plug_infos = fmp3_get_plugin_meta_infos($prefix); // dir et version
-		$info = plugin_get_infos($plug_infos['dir']);
+		$info = fmp3_plugin_get_infos($plug_infos['dir']);
 		$icon = 
 			(isset($info['icon']))
 			? "<div "
