@@ -428,12 +428,16 @@ class Facteur extends PHPMailer {
 			return ($text);
 
 		if (function_exists('iconv') && $mode == 'texte_brut') {
-			return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text);
+			$text = str_replace('’',"'",$text);
+			$text = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text);
+			return str_replace('&#8217;',"'",$text);
 		}
 		else {
-			if ($mode == 'texte_brut')
+			if ($mode == 'texte_brut') {
 				$text = str_replace('’',"'",$text);
-			return unicode2charset(utf_8_to_unicode($text),'iso-8859-1');
+			}
+			$text = unicode2charset(utf_8_to_unicode($text),'iso-8859-1');
+			return str_replace('&#8217;',"'",$text);
 		}
 	}
 
