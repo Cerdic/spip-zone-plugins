@@ -24,7 +24,7 @@ function cop_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 
-	if (version_compare($current_version, "1.1", "<=")) { 
+	if (version_compare($current_version, "1.1", "<")) { 
 		// on ajoute le contenu du champ "numero" au champ "voie"
 		sql_update("spip_adresses",
 			array("voie" => "CONCAT(numero, ' ', voie)"),
