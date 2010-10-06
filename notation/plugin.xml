@@ -10,15 +10,15 @@
 			[fr]<b>Attribuer une note aux &#233;l&#233;ments de SPIP</b><hr />
 		D&#233;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant 
 		la saise et l'affichage de la note d'un &#233;l&#233;ment de boucle.<br />
-		D&#233;finition des mod&#232;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
+		D&#233;finition des mod&#232;les <code><autxx|notation|id_article=yy></code> 
 		qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
-		et <em>&gt;notation|topten&lt;</em> qui donne les 10 meilleurs articles.
+		et <code><notation|topten></code> qui donne les 10 meilleurs articles.
 			[en]<b>Assign a rating to SPIP elements</b><hr />
 		Defines the <code>#FORMULAIRE_NOTATION</code> tag which allows 
 		the capture and the display of the rating of a loop element.<br />
-		Defines the models <em>&gt;autxx|notation|id_article=yy&lt;</em> 
+		Defines the models <code><autxx|notation|id_article=yy></code>  
 		which gives the author's rating <i>xx</i> for the article <i>yy</i>
-		and <em>&gt;notation|topten&lt;</em> which gives the 10 best articles.
+		and <code><notation|topten></code> which gives the 10 best articles.
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Notation-d-articles-SPIP</lien>
