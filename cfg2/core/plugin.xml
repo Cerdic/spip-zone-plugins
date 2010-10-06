@@ -1,9 +1,9 @@
 <plugin>
     <nom>
     <multi>
-    [fr]cfg : moteur de configuration
-	[en]cfg: Configuration Engine
-    [de]cfg: Konfigurationsmotor
+    [fr]CFG : moteur de configuration
+	[en]CFG : Configuration Engine
+    [de]CFG : Konfigurationsmotor
     </multi>
     </nom>
     <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
