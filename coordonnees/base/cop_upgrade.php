@@ -24,11 +24,13 @@ function cop_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 
-	if ($current_version=="1.0") { //(version_compare($current_version,"1.1","<")){
+	if (version_compare($current_version, "1.1", "<=")) { 
 		// on ajoute le contenu du champ "numero" au champ "voie"
-		sql_update("TABLE spip_adresses SET `voie` = CONCAT(`numero`, ' ', `voie`) WHERE `numero` IS NOT NULL or `numero` <> ''");
+		sql_update("spip_adresses",
+			array("voie" => "CONCAT(numero, ' ', voie)"),
+			array("numero IS NOT NULL", "numero <> ''"));
 		// on supprime le champ "numero"
-		sql_alter("TABLE spip_adresses DROP COLUMN `numero`");
+		sql_alter("TABLE spip_adresses DROP COLUMN numero");
 		spip_log('Tables coordonnées correctement passsées en version 1.1','cop');
 		ecrire_meta($nom_meta_base_version, $current_version="1.1");
 	}
