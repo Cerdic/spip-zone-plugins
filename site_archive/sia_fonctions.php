@@ -272,38 +272,6 @@ function calculer_URL_ARCHIVE()
 		//sia_log('wget himself. Skip!');
 		return('#');
 	}
-
-	// Commence par vérifier si le script shell existe
-	if(!file_exists(SIA_SCRIPT_FILE))
-	{
-		sia_error_log('Error: '.SIA_SCRIPT_FILE.' missing');
-		return(false);
-	}
-	// et s'il est exécutable
-	else if(!is_executable(SIA_SCRIPT_FILE))
-	{
-		sia_error_log('Error: '.SIA_SCRIPT_FILE.' is not an executable file');
-		return(false);
-	}
-	
-	// le lien de l'archive zip transmise en retour
-	$url_zip = false;
-	
-	// $objet peut être rubrique ou article
-	// (ou autre, si vous écrivez le skel qui va)
-	$objet = false;
-	
-	// le site cible
-	$url_site = lire_meta('adresse_site');
-	$url_site = trim($url_site);
-	if(empty($url_site))
-	{
-		$url_site = 'http://'.$_SERVER['HTTP_HOST'];
-	}
-	$url_site = trim($url_site,'/').'/';
-
-	// par défaut, archive en une seule page
-	$type = SIA_TYPE_UNIQUE;
 	
 	// les options complémentaires (via cfg)
 	if(function_exists('lire_config'))
@@ -332,7 +300,53 @@ function calculer_URL_ARCHIVE()
 			: null
 			;
 	}
+
+	/**
+	 * Le mode simulation met en place les liens
+	 * sur les archives, mais ne lance pas la création
+	 * des archives.
+	 *
+	 * Vous pouvez avoir le serveur officiel
+	 * en mode simulation, préparer les archives sur un
+	 * serveur de test, et recopier ces archives
+	 * dans IMG/zip sur le serveur officiel.
+	 * 
+	 * */
+	if(!$simulation_mode)
+	{
+		// Commence par vérifier si le script shell existe
+		if(!file_exists(SIA_SCRIPT_FILE))
+		{
+			sia_error_log('Error: '.SIA_SCRIPT_FILE.' missing');
+			return(false);
+		}
+		// et s'il est exécutable
+		else if(!is_executable(SIA_SCRIPT_FILE))
+		{
+			sia_error_log('Error: '.SIA_SCRIPT_FILE.' is not an executable file');
+			return(false);
+		}
+	}
 	
+	// le lien de l'archive zip transmise en retour
+	$url_zip = false;
+	
+	// $objet peut être rubrique ou article
+	// (ou autre, si vous écrivez le skel qui va)
+	$objet = false;
+	
+	// le site cible
+	$url_site = lire_meta('adresse_site');
+	$url_site = trim($url_site);
+	if(empty($url_site))
+	{
+		$url_site = 'http://'.$_SERVER['HTTP_HOST'];
+	}
+	$url_site = trim($url_site,'/').'/';
+
+	// par défaut, archive en une seule page
+	$type = SIA_TYPE_UNIQUE;
+		
 	// pour le moment (20101005), 4 args acceptés
 	for($ii = 0; $ii<4; $ii++)
 	{
@@ -589,7 +603,7 @@ function calculer_URL_ARCHIVE()
 												. 'level: '.$level.PHP_EOL
 												. 'targeturl: '.$targeturl.PHP_EOL
 												. 'iphost: '.$_SERVER['SERVER_ADDR'].PHP_EOL
-												. 'wget: '.$wget.PHP_EOL
+												//. 'wget: '.$wget.PHP_EOL
 												. ($random_wait ? 'randomwait: '.$random_wait.PHP_EOL : '')
 												. ($strict_mode ? 'strict: '.$strict_mode.PHP_EOL : '')
 												. ($simulation_mode ? 'simulation: '.$simulation_mode.PHP_EOL : '')
