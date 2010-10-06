@@ -58,12 +58,14 @@ include_spip('inc/fmp3_api_globales');
  * Conseillé: dans inc-pied.html, juste avant SPIP_CRON
  *   (exemple: inc-pied.html dans le répertoire du plugin)
  */
-function balise_ILLUSTRATION_SONORE ($p) {
+function balise_ILLUSTRATION_SONORE ($p)
+{
 	return calculer_balise_dynamique($p,'ILLUSTRATION_SONORE', array());
 }
 
-function balise_ILLUSTRATION_SONORE_stat ($args, $filtres) {
-	fmp3_log("balise stat");
+function balise_ILLUSTRATION_SONORE_stat ($args, $filtres)
+{
+	//fmp3_log('balise stat');
 	return $filtres ? $filtres : $args;
 }
 
@@ -74,10 +76,10 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 		|| isset($GLOBALS['contexte'])
 		) {
 		
-		fmp3_log("appel balise dyn avec contexte");
+		//fmp3_log('appel balise dyn avec contexte');
 		
-		if(fmp3_spip_est_inferieur_193()) {
-
+		if(fmp3_spip_est_inferieur_193())
+		{
 			$contexte = $GLOBALS['page']['contexte'];
 			
 			$objet = $result = "";
@@ -94,22 +96,19 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 			}
 	
 		}
-		else if ($contexte = $GLOBALS['contexte']) {
+		else if($contexte = $GLOBALS['contexte'])
+		{
 			// SPIP 2 ?
-			if(is_array($contexte) && count($contexte)) {
-				$objet = preg_replace(",[0-9]+,", '', key($contexte));
-				if(isset($contexte['id_'.$objet])) {
-					$id_objet = $contexte['id_'.$objet];
-					$objet = substr($objet, 0, 3);
-				}
-				else {
-					$objet = "site";
-					$id_objet = "0";
-				}
+			$env = admin_objet();
+			if(isset($env['objet']))
+			{
+				$objet = substr($env['objet'], 0, 3);
+				
+				$id_objet = $env['id_objet'];
 			}
 		}
 
-		fmp3_log("balise: cherche son pour $objet $id_objet", null, _FMP3_DEBUG);
+		fmp3_log('balise: cherche son pour '.$objet.' '.$id_objet, null, _FMP3_DEBUG);
 		
 		if(!empty($objet))
 		{
@@ -192,10 +191,5 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 			}
 		}
 	}
-	else {
-		fmp3_log("appel balise dyn sans contexte");
-	}
 	return ($result);
 }
-
-?>
