@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_legendes' => 'Captions',
 	
 	'editer_legende' => 'Edit a caption',
+	'explications_statuts_general' => 'Each selector below set the minimum status of a user to perform a particular action.',
 	
 	'legende_enregistrer_ok' => 'Caption saved',
 	'legende_supprimer_ok' => 'Caption deleted',

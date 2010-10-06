@@ -25,7 +25,8 @@
 	<p class="boutons">
 		<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />[
 		(#ENV{id_legende}|intval|oui)
-		<input type="submit" class="submit" name="effacer" value="<:legendes:bouton_supprimer:>" />]
+		[(#AUTORISER{supprimer,legende,#ENV{id_legende}}|oui)
+		<input type="submit" class="submit" name="effacer" value="<:legendes:bouton_supprimer:>" />]]
 		<input type="reset" class="submit" name="annuler" value="<:bouton_annuler:>" />
 	</p>
 </form>]

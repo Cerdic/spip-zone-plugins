@@ -17,7 +17,7 @@ function autoriser_legende_creerdans_dist($faire,$quoi,$id,$qui,$options){
 	if (!$id) return false; // interdit de creer une legende sur un document vide !
 	// autorisation personnalisee par config
 	if(lire_config('legendes/statuts_creerdans'))
-		return  (in_array($qui['statut'],lire_config('legendes/statuts_creerdans',array('0minirezo'))));
+		return  ($qui['statut']<=lire_config('legendes/statuts_creerdans','0minirezo'));
 	// ou autorisation du document associe
 	return autoriser('modifier','document',$id,$qui);
 }
@@ -38,7 +38,7 @@ function autoriser_legende_modifier_dist($faire,$quoi,$id,$qui,$options){
 	if (!$legende['id_document']) return false;
 	// autorisation personnalisee par config
 	if (lire_config('legendes/statuts_modifier')){
-		if (in_array($qui['statut'],lire_config('legendes/statuts_modifier',array('0minirezo')))){
+		if ($qui['statut'] <= lire_config('legendes/statuts_modifier','0minirezo')){
 			if (($qui['statut'] != '0minirezo') AND ($qui['id_auteur'] != $legende['id_auteur'])) {
 				return false;
 			}
@@ -65,7 +65,8 @@ function autoriser_legende_supprimer_dist($faire,$quoi,$id,$qui,$options){
 		$id_document = sql_getfetsel('id_document','spip_legendes','id_legende='.intval($id));
 	// autorisation personnalisee par config
 	if (lire_config('legendes/statuts_supprimer')){
-		if (in_array($qui['statut'],lire_config('legendes/statuts_supprimer',array('0minirezo')))){
+		if ($qui['statut'] <= lire_config('legendes/statuts_supprimer','0minirezo')){
+			$legende = sql_getfetsel('id_auteur','spip_legendes','id_legende='.intval($id));
 			if (($qui['statut'] != '0minirezo') AND ($qui['id_auteur'] != $legende['id_auteur'])) {
 				return false;
 			}

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_legendes' => 'L&eacute;gendes',
 	
 	'editer_legende' => '&Eacute;diter une note',
-	
+	'explications_statuts_general' => 'Chaque s&eacute;lecteur ci-dessous d&eacute;fini le statut minimal d\'un utilisateur pour r&eacute;aliser une action particuli&egrave;re.',
 	'legende_enregistrer_ok' => 'Note enregistr&eacute;e',
 	'legende_supprimer_ok' => 'Note supprim&eacute;e',
 	
