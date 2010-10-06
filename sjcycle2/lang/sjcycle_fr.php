@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_config_creer_preview' => 'Attention : la génération de miniatures des images est actuellement inactive, veuillez  l\'activer dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
 	'erreur_config_image_process' => 'Attention : Méthode de fabrication des vignettes n\'a pas été choisie, veuillez  en sélectionner une dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
+	'explication_afficher_aide'=>'Afficher la boite d\'aide dans la colonne de gauche des pages d\'&eacute;dition des articles',
 	'explication_fancy'=>'Au clic, afficher l\'image originale dans une fancybox jQuery. Nécessite le plugin <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Saisir la couleur de fond au format hexadecimal (#FF0000 par exemple) ou via la palette si le plugin Palette est installé. Pour un fond transparent, saisir "transparent" (auquel cas, les images finales seront au format png).',
@@ -38,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'img_recadre' => 'Les images sont redimensionnées et recadr&eacute;es automatiquement afin de pr&eacute;server la mise en page lors de l\'insertion du diaporama au sein du texte.',
 
 	// L
+	'label_afficher_aide' => 'Afficher la boite d\'aide',
 	'label_div_background' => 'Couleur de bordure',
 	'label_div_class' => 'Nom de classe css',
 	'label_div_margin' => 'Marge externe',
@@ -56,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_timeout' => 'Temps d\'affichage',
 	'label_tooltip' => 'Afficher les infobulles',
 	'label_tooltip_carac' => 'Caractéristiques de l\'originale',
+	'legend_autres' => 'Autres param&egrave;tres',
 	'legend_cssparams' => 'Param&egrave;tres styles SjCycle',
 	'legend_imgparams' => 'Traitements images SjCycle',
 	'legend_jsparams' => 'Param&egrave;tres javascript jQuery Cycle',

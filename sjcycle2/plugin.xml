@@ -3,8 +3,8 @@
 	<auteur>
 		[Minimalteck->http://www.minimalteck.fr/]. Port&#233; pour spip 2 par Yffic
 	</auteur>
-	<version>0.6</version>
-	<version_base>0.3</version_base>
+	<version>0.7</version>
+	<version_base>0.5</version_base>
 	<etat>test</etat>
 	<description>
 Diaporama param&#233;trable pour Spip bas&#233; sur la librairie javascript <a href="http://jquery.com/" title="Site officiel de jQuery">jQuery</a> et les plugins :

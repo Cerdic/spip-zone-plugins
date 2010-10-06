@@ -255,6 +255,21 @@
 					}
 				}
 			})]
+			[(#SAISIE{fieldset,fautres,env,
+				label=<:sjcycle:legend_autres:>,
+				saisies=#ARRAY{
+					0, #ARRAY{
+						saisie, oui_non,
+						options, #ARRAY{
+							nom, afficher_aide,
+							label, <:sjcycle:label_afficher_aide:>,
+							explication, <:sjcycle:explication_afficher_aide:>,
+							obligatoire, oui,
+							defaut, oui
+						}
+					}
+				}
+			})]
       </ul>
       <p class="boutons">
          <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />

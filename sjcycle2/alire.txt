@@ -26,6 +26,9 @@ V 0.6 :
 - Ne pas mettre en place le div .infobulle dans le modèle si les infobulles ne sont pas demandées dans la config sinon les effets de type turnLeft ne fonctionnent pas
 - Correction d'une erreur d'écriture d'un effet dans le fichier de config
 
+V 0.7 :
+- Ajout d'une option permettant de ne pas afficher la boite d'aide dans les pages d'edition des articles (Paolo)
+
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
 - Possibilité d'afficher un diapo dans une rubrique à partir des images de la rubrique

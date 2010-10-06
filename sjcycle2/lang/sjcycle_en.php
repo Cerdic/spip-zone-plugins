@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_config_creer_preview' => 'Caution: the generation of miniatures of the images is currently inactive, please activate it in the <a href=".?exec=config_fonctions">advanced functions</a> of the site configuration !',
 	'erreur_config_image_process' => 'Caution: Method of thumbnails creation was not selected, please select of them one din the <a href=".?exec=config_fonctions">advanced functions</a> of the site configuration !',
+	'explication_afficher_aide'=>'Display the help box in the left column on the edition pages of articles',
 	'explication_fancy'=>'On clic, display the original image in a jQuery fancybox. Need the <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox plugin</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Type the background color in hexa format or with the palette if the Palette Plugin is available. To force transparent background, type "transparent" (in which case, the final images will be with in png format)',
@@ -38,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'img_recadre' => 'Images are automatically resized and cropped in order to preserve the page layout during the insertion of the slideshow within the text.',
 
 	// L
+	'label_afficher_aide' => 'Display the help box',
 	'label_div_background' => 'Border color',
 	'label_div_class' => 'Class name css',
 	'label_div_margin' => 'External margin',
@@ -56,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_timeout' => 'Display time',
 	'label_tooltip' => 'Display tooltips',
 	'label_tooltip_carac' => 'Characteristics of the original image',
+	'legend_autres' => 'Other parameters',
 	'legend_cssparams' => 'SjCycle styles parameters',
 	'legend_imgparams' => 'Images treatments SjCycle',
 	'legend_jsparams' => 'jQuery Cycle javascript parameters',

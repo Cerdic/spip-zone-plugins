@@ -13,6 +13,9 @@ include_spip('inc/meta');
  * @param string $version_cible
  */
 function sjcycle_upgrade($nom_meta_base_version,$version_cible){
+	echo "<br />nom_meta_base_version ".$nom_meta_base_version ;
+	echo "<br />version_cible ".$version_cible ;
+
 	$current_version = 0.5;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
@@ -39,7 +42,8 @@ function sjcycle_upgrade($nom_meta_base_version,$version_cible){
 				'img_position' => 'center',
 				'img_width' => '400',
 				'img_height' => '400',
-				'img_background' => 'ffffff'
+				'img_background' => 'ffffff',
+				'afficher_aide' => 'on'
 		), $config);
 		ecrire_meta('sjcycle', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version='0.5','non');
