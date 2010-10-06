@@ -13,7 +13,7 @@ select=1 => le selecteur se comporte comme un select, avec un seul choix possibl
 [(#REM) le container item_picker est ici pour etre voisin de item_picked ------]
 <div class='item_picker'>
 <INCLURE{fond=formulaires/selecteur/picker-ajax}{id_rubrique=#GET{id_rubrique}}{id_article}{rubriques=1}{articles=0}{ajax}{env}>
-</div>#SPIP_VERSION
+</div>
 [(#ENV{sortable,'non'}|=={oui}|oui)
 [(#SPIP_VERSION|>={2.1.0}|oui)
 <script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery-ui-1.8.5.custom.js}'></script>]
