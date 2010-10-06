@@ -13,7 +13,10 @@
 	</etat>
 	<icon>images/sparkstats-128.png</icon>
 	<description>
-	sparklines des stats d'un article, avec [->http://omnipotent.net/jquery.sparkline/]
+		<multi>
+			[fr]sparklines des stats d'un article, avec [->http://omnipotent.net/jquery.sparkline/]
+			[en]Stats sparklines of an article, with [->http://omnipotent.net/jquery.sparkline/]
+		</multi>
 	</description>
 	<prefix>
 	sparkstats
