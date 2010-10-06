@@ -10,7 +10,7 @@ function balise_CFG_EXEC_dist($p) {
 
 function lister_configs_cfg($path = 'configurer', $tous = false) {
 	$crit_nom = $tous ? 'cfg_.' : '^[^_]';
-	$configs = 
+	$configs =
 		array_unique(
 		array_values(
 		array_flip(
@@ -22,7 +22,7 @@ function lister_configs_cfg($path = 'configurer', $tous = false) {
 	return $res;
 }
 
-// retourne la liste des configurations trouves 
+// retourne la liste des configurations trouves
 // fichiers : cfg/nomSansSouligne.html
 function lister_configs() {
 	$configs = array();
@@ -44,7 +44,7 @@ function lister_configs() {
 				$nom = substr($fonds, 4);
 			}
 
-			$tmp = new cfg_formulaire($rep.'/'.$fonds); 
+			$tmp = new cfg_formulaire($rep.'/'.$fonds);
 			if ($tmp->autoriser()){
 				// restant de compat... a deplacer un jour comme il faut dans le plug cfg_compat.
 				if (defined('_DIR_PLUGIN_CFG_COMPAT')) {
@@ -78,13 +78,13 @@ function lister_configs() {
 // retourne la liste des onglets trouves pour un groupe donnee
 // #ENV{cfg}|lister_config_onglets
 function lister_config_onglets($nom) {
-	$onglets = 
+	$onglets =
 		array_unique(
 		array_values(
 		array_flip(
 		find_all_in_path('configurer/',$nom.'_'))));
 	foreach ($onglets as $i=>$o)
-		$onglets[$i] = basename($o, '.html'); 
+		$onglets[$i] = basename($o, '.html');
 	return $onglets;
 }
 
@@ -92,10 +92,10 @@ function lister_config_onglets($nom) {
 // calcule un element de liste (li) du menu de navigation
 // #ITEM_CONFIG{sarka,layout}
 function balise_ITEM_CONFIG($p) {
-	
+
 	$cfg_actif = "\$Pile[0]['cfg']";
 	$onglet_actif = "\$Pile[0]['onglet']";
-	
+
 	$cfg = interprete_argument_balise(1,$p);
 	$onglet = interprete_argument_balise(2,$p);
 
@@ -124,7 +124,7 @@ function calculer_ITEM_CONFIG($cfg, $cfg_actif, $onglet=false, $onglet_actif='')
 	if ($onglet !== false) {
 		if (!is_array($onglet)) {
 			$onglet = array($onglet);
-		}		
+		}
 		foreach ($onglet as $ong) {
 			$lien = calculer_lien_config($cfg, $ong);
 			$on = $onglet_actif && ($ong == $onglet_actif);
@@ -194,10 +194,10 @@ function calculer_cfg_trad($quoi, $nom, $onglet = '') {
 
 	$x = "$nom:$quoi"."_$nom";
 	if ($onglet) { $x .= "_$onglet"; }
-		
+
 	$text = $traduire($x,$GLOBALS['spip_lang']);
-	
-	return ($text) ? _T($x) : '';	
+
+	return ($text) ? _T($x) : '';
 }
 
 ?>
