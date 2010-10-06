@@ -14,7 +14,7 @@
 			[en]
 				Sends mail notifications for certain actions : forums posts and answers notified to users, private messages notified to redactors or articles publication notified to their authors.
 
-				[Documentation sur Spip-Contrib->http://www.spip-contrib.net/Le-plugin-notifications] (Fr. not yet available in English)
+				[Documentation on Spip-Contrib->http://www.spip-contrib.net/Le-plugin-notifications] (Fr. not yet available in English)
 		</multi>
 	</description>
 	<prefix>notifications</prefix>
