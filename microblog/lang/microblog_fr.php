@@ -12,13 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir' => 'choisir',
 	'compte_tests' => 'Compte de tests',
-	'compte_defaut' => 'Compte par d&#233;faut pour la fonction',
+	'compte_defaut' => 'Compte par d&#233;faut pour la fonction @fonction@',
 	'creer_compte_services' => 'Vous pouvez cr&#233;er un compte pour votre site SPIP sur l\'un des services suivants',
 
 	// E
 	'elements_signaler' => 'Elements &#224; signaler sur le flux public ci-dessus',
 	'erreur_verifier_configuration' => 'Il y a une erreur, veuillez v&eacute;rifiez la configuration.',
-	'explication_twitter_api_oauth' => 'L\'API oAuth de twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>. Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration puis un lien plus bas permettra d\'associer un compte twitter &agrave; ce site.',
+	'explication_twitter_api_oauth' => 'L\'API oAuth de Twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>. Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration puis un lien plus bas permettra d\'associer un compte twitter &agrave; ce site.',
 
 	// I
 	'invite' => 'Invite',
@@ -33,13 +33,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_twitter_consumer_key' => 'Cl&eacute; cliente (consumer key) de l\'API Twitter',
 	'label_twitter_consumer_secret' => 'Cl&eacute; secr&ecirc;te (consumer secret) de l\'API Twitter',
 	'label_username' => 'Nom d\'utilisateur',
-	'lien_documentation' => '<a href="http://www.spip-contrib.net/Microblog" class="spip_out">Cf. documentation</a>',
+	'lien_documentation' => 'Cf. documentation',
 
 	// P
 	'presentation_spipo' => 'le site de la communaut&#233; SPIP',
 	'presentation_laconica' => 'le site public du logiciel laconi.ca',
 
 	// N
+	'necessite_job_queue' => 'n&#233;cessite job_queue',
 	'notifications' => 'Notifications',
 	'notifications_publiques' => 'Notifications publiques',
 

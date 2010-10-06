@@ -6,9 +6,10 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{SELF}
 		<ul>
-			<li class="fieldset">
+			<li class="fieldset fieldset_microblog_account">
 				<fieldset>
-					<legend><:microblog:compte_defaut:> <code><tt>microblog()</tt></code></legend>
+					#SET{fonction,<code><tt>microblog()</tt></code>}
+					<legend><:microblog:compte_defaut{fonction=#GET{fonction}}:></legend>
 					<p class="explication"><:microblog:creer_compte_services:>&nbsp;:</p>
 
 					<ul>
@@ -99,11 +100,11 @@
 					</script>
 				</fieldset>
 			</li>
-			<li class="fieldset">
+			<li class="fieldset fieldset_microblog_invite">
 				<fieldset>
 					<legend><:microblog:invite:></legend>
 					<ul>
-						<li>
+						<li class="editer_invite">
 							<label><:microblog:invite_statut:></label>
 							<p class="explication"><:microblog:invite_statut_explications:></p>
 							<div class="choix">
@@ -115,11 +116,11 @@
 					</ul>
 				</fieldset>
 			</li>
-			<li class="fieldset">
+			<li class="fieldset fieldset_microblog_notifications">
 				<fieldset>
 					<legend><:microblog:notifications:></legend>
 					<ul>
-						<li>
+						<li class="editer_notifications">
 							<label><:microblog:notifications_publiques:></label>
 							<p class="explication"><:microblog:elements_signaler:> :</p>
 							<div class="choix">
@@ -155,15 +156,12 @@
 											(#ENV{short_url,''}|oui)checked="checked"] />
 										<label for="short_url"><:microblog:publier_articles_shorturl:></label>
 									</div>
-
 									<div class="choix">
 										<input type="text" name="attente" id="attente" value="[(#ENV{attente}|sinon{1})]" size="2" />
 										<label for="attente"><:microblog:publier_articles_attente:>
-										<small>(n&#233;cessite job_queue)</small>
+										<small>(<:microblog:necessite_job_queue:>)</small>
 										</label>
 									</div>
-
-
 								</div>
 								<script type="text/javascript">
 									function affiche_bloc_synchro(){
@@ -184,10 +182,6 @@
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
-<!--
-			<input type="reset" value="<:reset:>" class="submit" />
-			<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
--->
 		</p>
 	</div></form>
 </div>
