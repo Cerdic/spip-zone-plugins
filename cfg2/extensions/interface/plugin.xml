@@ -1,12 +1,14 @@
 <plugin>
-    <nom>Interface pour CFG</nom>
+    <nom>CFG : Interface</nom>
     <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
     <version>1.0.4</version>
     <etat>stable</etat>
     <description>
-	Permet de donner une interface pour les formulaires CFG
-	dans ?exec=cfg.
+    	<multi>
+    		[fr]Permet de donner une interface pour les formulaires CFG.
+			[en]Provide an inteface for the CFG forms.
+		</multi>
     </description>
     <prefix>cfg_interface</prefix>
     <chemin dir='' />
