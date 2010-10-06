@@ -93,13 +93,11 @@ help_usage()
 # Vérifier position en racine SPIP
 if [ -d "ecrire" ] && [ -d "squelettes-dist" ] && [ -d "tmp" ]
 then 
-	syslog_log "`basename $0` starting"
+	NOTICE="`basename $0` starting"
 else
 	error_log "`basename $0` doit être lancé à la racine du site SPIP"
 	exit -1
 fi
-
-NOTICE="Calling shell site_archive"
 
 if [ ! -n "$1" ]
 then
@@ -214,8 +212,8 @@ fi
 
 # a partir d'ici, notice_log et error_log sont utilisables
 notice_log "$NOTICE"
-notice_log "sia log file: $SIA_LOG_FILE"
-notice_log "wget log file: $WGET_LOG_FILE"
+#notice_log "sia log file: $SIA_LOG_FILE"
+#notice_log "wget log file: $WGET_LOG_FILE"
 
 #######
 WGET_OPTIONS=""
@@ -245,7 +243,17 @@ WGET_OPTIONS="$WGET_OPTIONS --restrict-file-names=windows "
 WGET_OPTIONS="$WGET_OPTIONS -E "
 
 # Ajouter les messages au journal
-WGET_OPTIONS="$WGET_OPTIONS -a $WGET_LOG_FILE "
+WGET_OPTIONS="$WGET_OPTIONS -a $WGET_LOG_FILE"
+
+# Le cookie pour compilation contextuelle
+#
+# (ne fonctionne que pour la première page appelée ! )
+# + 4. Network failure
+#WGET_OPTIONS="$WGET_OPTIONS --no-cookies --header=\"Cookie: mode_archive=on\""
+#
+# (idem ! Le cookie n'est pas transmis récursivement.)
+# + 4. Network failure
+#WGET_OPTIONS="$WGET_OPTIONS --header=\"Cookie: mode_archive=on\""
 
 # Options complémentaires
 if [ ! -z "$USER_AGENT" ]
@@ -301,8 +309,7 @@ fi
 # Le download a lieu dans un dossier qui porte
 # le nom de l'archive dans le temporaire.
 SIA_TEMP_FOLDER="${SIA_SPIP_TEMP}${SIA_JOB_NAME}"
-
-notice_log "sia temp folder: $SIA_TEMP_FOLDER"
+#notice_log "sia temp folder: $SIA_TEMP_FOLDER"
 
 # Créer le répertoire temporaire de download
 if [ ! -e "$SIA_TEMP_FOLDER" ]
@@ -466,7 +473,7 @@ then
 			fi
 		fi
 		
-		if [ "$ZIPRESULT" -ne 0 ]
+		if [ "$ZIPRESULT" -ne "0" ]
 		then
 			 error_log "Error compressing ${SIA_ZIP_TARGET}"
 		else
@@ -477,6 +484,8 @@ then
 			notice_log "Removing temp files $SIA_TEMP_FOLDER $SIA_TODO_FILE $SIA_LOCK_FILE"
 			rm -fR $SIA_TEMP_FOLDER
 			rm $SIA_TODO_FILE $SIA_LOCK_FILE
+			
+			notice_log "${SIA_JOB_NAME}. Job done!"
 		fi
 	fi
 fi
