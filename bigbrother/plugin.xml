@@ -1,24 +1,30 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom>
 		Big Brother
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 		RastaPopoulos - Distribu&eacute; sous licence GPL
+	<auteur>
+ 		RastaPopoulos
 	</auteur>
-	<version> <!-- Version du plugin -->
+	<licence>GNU/GPL</licence>
+	<version>
 		0.3.3
 	</version>
 	<version_base>
 		0.2
 	</version_base>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	<etat>
 		dev
 	</etat>
 	<icon>images/bigbrother.png</icon>
 	<description>
-		Ce plugin permet de garder en m&eacute;moire les visites de toutes les personnes ayant un compte.
+		<multi>
+			[fr]Ce plugin permet de stocker en base de donn&#233;e la r&#233;alisation d'actions pr&#233;d&#233;finies 
+		(ex: visites de personnes, dur&#233; des visites, cr&#233;ation et modifications d'objets ...)
+			[en]This plugin allows you to store in a database the achievement of predefined actions 
+		(eg: visits of persons, length of visits, creation and modification of objects ...)
+		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Big-Brother</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Big-Brother</lien>
 	<prefix>
 		bigbrother
 	</prefix>
