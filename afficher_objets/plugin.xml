@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Afficher Objets</nom>
+	<nom><multi>[fr]Afficher Objets[en]View objects</multi></nom>
 	<version>1.1.6</version>
 	<prefix>afficher_objets</prefix>
 
