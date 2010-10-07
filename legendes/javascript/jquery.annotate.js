@@ -19,6 +19,8 @@
 		// Assign defaults
 		this.getUrl = opts.getUrl;
 		this.editUrl = opts.editUrl;
+		this.listUrl = opts.listUrl;
+		this.listtarget = opts.listtarget;
 		this.addButton = opts.addButton;
 		this.id_document = opts.id_document;
 		this.echelle = opts.echelle;
@@ -93,6 +95,8 @@
 	$.fn.annotateImage.defaults = {
 		getUrl: '',
 		editUrl: '',
+		listUrl: '',
+		listtarget:null,
 		addButton: '',
 		id_document: '0',
 		echelle: '1',
@@ -121,6 +125,18 @@
 		});
 	};
 
+	$.fn.annotateImage.ajaxDestroy = function(image){
+		///	<summary>
+		///		Loads an html content from the "listUrl" inside an jQuery selector target "listtarget"
+		///	</summary>
+		if(image.listUrl && image.listtarget){
+			$.get(image.listUrl, function(data) {
+				image.listtarget.html(data);
+				console.log('on a chargé qqc');
+			});
+		}
+	}
+	
 	$.fn.annotateImage.load = function(image) {
 		///	<summary>
 		///		Loads the annotations from the notes property passed in on the
@@ -301,6 +317,7 @@
 		// on efface donc toutes les notes et on recharge
 		$.fn.annotateImage.clear(this.image);
 		$.fn.annotateImage.ajaxLoad(this.image);
+		$.fn.annotateImage.ajaxDestroy(this.image);
 	}
 
 	$.fn.annotateView = function(image, note) {

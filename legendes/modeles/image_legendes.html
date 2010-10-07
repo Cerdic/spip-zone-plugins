@@ -19,9 +19,7 @@
 			|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
 })]
 
-<BOUCLE_legendes(LEGENDES){id_document}{tout} />
-[<p class="nb_notes">(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{legendes:msg_yaunenote,legendes:msg_yadesnotes})</p>]
-<//B_legendes>
+[<p id="nb_notes_#ID_DOCUMENT" class="nb_notes">(#INCLURE{fond=liste_legende,id_document}|trim)</p>]
 
 [(#ENV{editable}|?{
 	#SET{editable,#ENV{editable}}
@@ -41,8 +39,10 @@
 	var init_notes_#ID_DOCUMENT = function() {
 		$(".legende_#ID_DOCUMENT").annotateImage({
 			editable: [(#GET{editable}|=={oui}|?{'true','false'})],
-			getUrl: "#URL_PAGE{#GET{url_get}}&id_document=#ID_DOCUMENT",
+			getUrl: "[(#URL_PAGE{#GET{url_get}}|parametre_url{id_document,#ID_DOCUMENT,&})]",
 			editUrl: "#URL_PAGE{editer_legende}",
+			listUrl: "[(#URL_PAGE{liste_legende}|parametre_url{id_document,#ID_DOCUMENT,&})]",
+			listtarget: $('#nb_notes_#ID_DOCUMENT'),
 			[addButton: "(#ENV{bouton_ajouter})",
 			]id_document: "#ID_DOCUMENT",
 			echelle: "[(#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{width}|div{#LARGEUR})]",

@@ -41,6 +41,16 @@ function legendes_post_edition($flux){
 			legendes_action_supprime_legende($legende['id_legende']);
 		}
 	}
+	/**
+	 * A la modification d'une légende, on met à jour le champs maj du document
+	 */
+	if(($flux['args']['action'] == 'modifier') && ($flux['args']['table'] == 'spip_legendes')){
+		$id_document = sql_getfetsel('id_document','spip_legendes','id_legende='.intval($flux['args']['id_objet']));
+		if(intval($id_document)){
+			include_spip('inc/modifier');
+			revision_document($id_document, $c=array('maj'=>date('Y-m-d H:i:s')));
+		}
+	}
 	return $flux;
 }
 

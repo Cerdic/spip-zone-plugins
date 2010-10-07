@@ -79,7 +79,9 @@ function legendes_action_revision_legende ($id_legende, $c=false) {
 		spip_log("editer_legende $id_legende refus " . join(' ', $c));
 		return false;
 	}
-	modifier_contenu('legende', $id_legende, array(), $c);
+	modifier_contenu('legende', $id_legende, array(
+		'invalideur' => "id='id_legende/$id_legende'"
+	), $c);
 	
 	return ''; // pas d'erreur
 }
