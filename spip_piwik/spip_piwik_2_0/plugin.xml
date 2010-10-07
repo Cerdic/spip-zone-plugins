@@ -1,8 +1,8 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom>
 	Piwik
 	</nom>
-	<auteur> <!-- Auteur du plugin -->
+	<auteur>
 	jsb, kent1
 	</auteur>
 	<version>
@@ -12,11 +12,13 @@
 	test
 	</etat>
 	<description>
-	Ajoute le script piwik (analyseur de trafic web) dans l'espace public en ins&eacute;rant le code perso de piwik dans l'espace priv&eacute;
+		<multi>
+			[fr]Ajoute le script de statistiques Piwik (analyseur de trafic web) sur les pages du site.
+			[en]Adds the Piwik statistics script (web traffic analyzer) on the pages of the site.
+		</multi>
 	</description>
 	<icon>piwik.png</icon>
-	<lien>
-		[Documentation->http://www.spip-contrib.net/?article2860]
+	<lien>http://www.spip-contrib.net/?article2860
     </lien>
 	<prefix>
 	piwik
