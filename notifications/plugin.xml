@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Notifications</nom>
 	<auteur>fil@rezo.net</auteur>
-	<version>0.5.3</version>
+	<version>0.5.4</version>
 	<etat>test</etat>
 	<icon>notifications.png</icon>
 	<description>

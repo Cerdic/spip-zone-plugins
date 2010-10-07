@@ -176,10 +176,15 @@ function email_notification_forum ($t, $email) {
 			$url = './';
 		}
 		if ($t['id_article']) {
-			$titre = sql_getfetsel("titre", "spip_articles", "id_article=".sql_quote($t['id_article']));
+			$titre = sql_getfetsel("titre", "spip_articles", "id_article=".intval($t['id_article']));
 		}
 		if ($t['id_message']) {
-			$titre = sql_getfetsel("titre", "spip_messages", "id_message=".sql_quote($t['id_message']));
+			$titre = sql_getfetsel("titre", "spip_messages", "id_message=".intval($t['id_message']));
+		}
+		if ($t['id_objet'] && $t['objet']){
+			$table = table_objet_sql($t['objet']);
+			$id_table_objet = id_table_objet($t['objet']);
+			$titre = sql_getfetsel("titre", $table, $id_table_objet."=".intval($t['id_objet']));
 		}
 
 		$t['titre_source'] = $titre;
@@ -203,16 +208,16 @@ function email_notification_forum ($t, $email) {
 		$l = lang_select($l);
 
 	$parauteur = (strlen($t['auteur']) <= 2) ? '' :
-		(" " ._T('forum_par_auteur', array(
+		("" ._T('forum_par_auteur', array(
 			'auteur' => $t['auteur'])
 		) .
 		 ($t['email_auteur'] ? ' <' . $t['email_auteur'] . '>' : ''));
 
 	$titre = textebrut(typo($t['titre_source']));
-	$forum_poste_par = ($t['id_article']
+	$forum_poste_par = (($t['id_article'] OR (($t['objet'] == 'article') && intval($t['id_objet'])))
 		? _T('forum_poste_par', array(
 			'parauteur' => $parauteur, 'titre' => $titre))
-		: $parauteur . ' (' . $titre . ')');
+		: $parauteur . ($titre ? ' (' . $titre . ')' : ''));
 
 	$t['par_auteur'] = $forum_poste_par;
 
