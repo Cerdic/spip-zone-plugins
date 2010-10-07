@@ -1,32 +1,32 @@
 #CACHE{0}
-.cEncart .entete_rub .titre {
+.cEncartClass .entete_rub .titre {
   vertical-align: middle;
-  margin-top: 5px;
+  padding-left: 4px;
+  padding-right: 4px;
+  font-weight: bold;
 }
 
-.cEncart .entete_rub .soulignement {
+.cEncartClass .entete_rub .soulignement {
   clear: both;
-  height: 4px;
+  margin: 0;
+  height: 10px;
+  margin-left:5px;
+  margin-right:5px;
 }
 
-.cEncart .entete .surtitre, .cEncart .entete .titre, .cEncart .entete .soustitre, .cEncart .chapo, .cEncart .texte,  .cEncart .nav {
+.cEncartClass .entete .surtitre, .cEncartClass .entete .titre, .cEncartClass .entete .soustitre, .cEncartClass .chapo, .cEncartClass .texte,  .cEncartClass .nav {
   padding-left: 4px;
   padding-right: 4px;
   margin: 0;
 }
-.cEncart .entete .titre {
+.cEncartClass .entete .titre {
   text-align: center;
 }
 
-.cEncart .chapo, .cEncart .texte {
+.cEncartClass .chapo, .cEncartClass .texte {
   text-align: justify;
 }
 
-.cEncart .entete .spip_logos {
-  float: [(#ENV{ltr}|choixsiegal{left,right,left})];
-  margin: 2px;
-}
-
-.cEncart .nav {
+.cEncartClass .nav {
   text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 }

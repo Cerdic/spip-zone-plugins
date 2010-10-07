@@ -1,11 +1,10 @@
 [(#SET{acsEncartKeyword,#VAR{#EVAL{'acsEncart'.'#NIC'.'Key/Key'},_Encart}})]
 <B_encart>
 <BOUCLE_encart(ARTICLES) {doublons} {titre_mot=#GET{acsEncartKeyword}} {par date} {inverse} {0,#VAR{acsEncartNb,3}} {lang ?}>
-<div class="cEncart#NIC">
+<div class="cEncartClass cEncart#NIC">
   <BOUCLE_encart_democratique(ARTICLES spip_notations_articles) {id_article} {note_ponderee>=#VAR{acsDemocratieSeuilPublic,0}} {lang ?}>
     <div class="cartouche">
-      [<div class="spip_logos"><a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE)</a></div>]
-
+      [<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE|left)</a>]
       [<p class="surtitre stsize">(#SURTITRE)</p>]
       <h1 class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></h1>
       [<p class="soustitre stsize">(#SOUSTITRE)</p>]

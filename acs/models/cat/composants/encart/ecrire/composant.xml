@@ -15,6 +15,11 @@
   </param>
 
   <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
     <nom>TitreFond</nom>
     <type>color</type>
   </variable>
@@ -32,6 +37,23 @@
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
+  <variable>
+    <nom>BordRond</nom>
+    <type>Nombre</type>
+  </variable>
+
+  <variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+  	<nom>ShadowBlur</nom>
+    <type>nombre</type>
+  </variable>
 
   <variable>
     <nom>Type</nom>
@@ -39,6 +61,17 @@
     <option>articles</option>
     <option>rubriques</option>
     <value>articles</value>
+  </variable>
+  <variable>
+    <nom>SouligneRub</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <value>oui</value>
+  </variable>
+  <variable>
+    <nom>SouligneRubHeight</nom>
+    <type>LargeurBord</type>
   </variable>
   <variable>
     <nom>Key</nom>

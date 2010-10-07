@@ -56,7 +56,7 @@
   <variable>
     <nom>FontSize</nom>
     <type>nombre</type>
-		<valeur>1em</valeur>
+		<valeur>0.88em</valeur>
   </variable>
   <variable>
     <nom>FontFamily</nom>

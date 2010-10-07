@@ -26,19 +26,26 @@ function liste_widgets() {
       $wicon = find_in_path('composants/'.$class.'/images/'.$class.'_'.$wicon.'.gif');
       if (!file_exists($wicon))
         $wicon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
-      // Si le composant possede une variable Comment on l'affiche en info-bulle
-      $v = $vpi.'Comment';
-      $title = $GLOBALS['meta'][$v] ? $GLOBALS['meta'][$v] : _T('composant');
+      // Si le composant possede une variable Nom on l'affiche en nom et le nom du composant en info-bulle
+      $v = $vpi.'Nom';
+      if ($GLOBALS['meta'][$v]) {
+      	$nom = couper($GLOBALS['meta'][$v], 50);
+      	$title = ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '');
+      }
+      else {
+      	$nom = ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '');
+      	$title = _T('composant');
+      }      
   		$r .= '<div id="'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
         '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'"><img src="'.$wicon.'" /></a>'.
-        '</td><td title="'.$title.'" style="width: 95%;"><div><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'.$title.'">'.ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '').'</a></div></td></tr></table>'.
+        '</td><td title="'.$title.'" style="width: 95%;"><div><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'.$title.'">'.$nom.'</a></div></td></tr></table>'.
       '</div>';
   		$nbci++;
   	}
   	$nbc++;
   }
   $r .= '</div>';
-  return acs_box($nbc.' '.(($nbc==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))).' ('.$nbci.')', $r, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
+  return acs_box($nbci.' '.(($nbci==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))).' ('.$nbc.')', $r, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
 }
 
 function get_widget_class($over, $on, $style) {

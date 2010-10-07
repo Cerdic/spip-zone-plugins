@@ -247,8 +247,8 @@ function widgy($composant, $param, $label='', $indentation='', $nic = '') {
     }
   }
  
-	// On recupere le commentaire du composant
-	$cvn = 'acs'.ucfirst($composant).$nic.'Comment';
+	// On recupere le Nom du composant
+	$cvn = 'acs'.ucfirst($composant).$nic.'Nom';
 	if (isset($GLOBALS['meta'][$cvn]))
 		$title = $GLOBALS['meta'][$cvn];
 	else

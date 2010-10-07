@@ -53,7 +53,7 @@ function instance_select($c) {
   	$vp = 'acs'.ucfirst($c->class);
     $r ='<select name="nic" onchange=submit()>';
     foreach($instances as $id) {
-    	$v = $vp.$id.'Comment';
+    	$v = $vp.$id.'Nom';
     	$title = $GLOBALS['meta'][$v] ? ' title="'.$GLOBALS['meta'][$v].'"' : '';
       $r .= '<option value="'.$id.'"'.($id==$c->nic ? ' selected': '').$title.'>'.$id.'</option>';
     }

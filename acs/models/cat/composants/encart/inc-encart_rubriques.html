@@ -1,17 +1,15 @@
 [(#SET{acsEncartKeyword,#VAR{#EVAL{'acsEncart'.'#NIC'.'Key/Key'},_Encart}})]
 <B_encart_rub>
-<div class="cEncart cEncart#NIC">
+<div class="cEncartClass cEncart#NIC">
 <BOUCLE_encart_rub(RUBRIQUES){titre_mot=#GET{acsEncartKeyword}}{lang ?}>
-  [(#LOGO_RUBRIQUE|left)]
-  <div class="entete_rub">
-    <div class="titre tsize"[ style="line-height: (#LOGO_RUBRIQUE|extraire_attribut{height})px"]><a href="#URL_RUBRIQUE">#TITRE</a></div>
-    <hr class="soulignement"[ style="background: #(#LOGO_RUBRIQUE|couleur_extraire)"] />
+  <div class="entete_rub">[(#LOGO_RUBRIQUE|left)]
+    <h1 class="titre tsize"[ style="line-height: (#LOGO_RUBRIQUE|extraire_attribut{height}|plus{10})px"]><a href="#URL_RUBRIQUE">#TITRE</a></h1>
+    [(#VAR{#EVAL{'acsEncart'.'#NIC'.'SouligneRub'}}|!={non}|?{' '})<hr class="soulignement"[ style="background: #(#LOGO_RUBRIQUE|couleur_extraire)"] />]
   </div>
   <B_encart>
   <BOUCLE_encart(ARTICLES){id_rubrique}{par date} {inverse}{0,#VAR{#EVAL{'acsEncart'.'#NIC'.'Nb'},3}}{lang ?}>
-      <div class="entete">
-        [<div class="spip_logos"><a href="#URL_ARTICLE">(#LOGO_ARTICLE)</a></div>]
-  
+    <div class="entete">
+      [<a href="#URL_ARTICLE">(#LOGO_ARTICLE)</a>]  
       [<p class="surtitre stsize">(#SURTITRE)</p>]
       <h1 class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></h1>
       [<p class="soustitre stsize">(#SOUSTITRE)</p>]

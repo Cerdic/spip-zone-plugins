@@ -2,7 +2,8 @@ Suivi des principales révisions - Version ACS actuelle : 0.7.2
 
 ACS version 0.7
  - changement des chemins d'images installées par les composants : img->IMG
- - affichage du commentaire du composant en info-bulle sur le schéma de la page
+ - les composants instanciables peuvent être nommés
+ - affichage du nom du composant en info-bulle sur le schéma de la page
  - installation automatique de mots-clefs de composants
  - option _ACS_LOG dans acs_options.php pour gérer activation / désactivation des logs ACS
  - fonction sauvegarder / restaurer la configuration d'un modèle ACS

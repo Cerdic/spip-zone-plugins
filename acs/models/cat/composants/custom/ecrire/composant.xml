@@ -28,7 +28,7 @@
     <lines>5</lines>
   </variable>
   <variable>
-    <nom>Comment</nom>
-    <type>textarea</type>
+    <nom>Nom</nom>
+    <type>text</type>
   </variable>
 </composant>

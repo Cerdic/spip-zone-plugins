@@ -1,10 +1,9 @@
 [(#SET{acsEncartKeyword,#VAR{#EVAL{'acsEncart'.'#NIC'.'Key/Key'},_Encart}})]
 <B_encart>
 <BOUCLE_encart(ARTICLES) {par date} {inverse} {doublons} {titre_mot=#GET{acsEncartKeyword}} {0,#VAR{#EVAL{'acsEncart'.'#NIC'.'Nb'},3}}{lang ?}>
-<div class="cEncart#NIC">
+<div class="cEncartClass cEncart#NIC">
   <div class="entete">
-      [<div class="spip_logos"><a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE)</a></div>]
-
+    [<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE|left)</a>]
     [<p class="surtitre stsize">(#SURTITRE)</p>]
     <h1 class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></h1>
     [<p class="soustitre stsize">(#SOUSTITRE)</p>]

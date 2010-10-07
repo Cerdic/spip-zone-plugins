@@ -28,7 +28,7 @@ function cGetPages($c, $nic, $chemin='') {
     if ($nic)
     	$cpreg = '/\{fond=composants\/'.$c.'\/[^\}]*\}.*\{nic='.$nic.'\}/';
    	else
-   		$cpreg = '/\{fond=composants\/'.$c.'\/[^\}]*\}.*/';
+   		$cpreg = '/\{fond=composants\/'.$c.'\/[^\}]*\}.^[\{nic='.$nic.'\}]*/';
     while (($f = readdir($d)) !== false && ($nbfiles<1000)) {
       if ($f[0] != '.' # ignorer . .. .svn etc
       AND $f != 'CVS'

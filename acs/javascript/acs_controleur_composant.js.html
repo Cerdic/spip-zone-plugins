@@ -18,37 +18,47 @@
   jQuery(".type_pinceau").each(
   	function(i, composant) {
     	jQuery(this).draggable({
-    		zIndex: 99998000,
     		helper: "clone",
     		delay: 100,
     		distance: 20,
     		ghosting: true,
-    		opacity:	0.8,
-    		revert: true,
-    		start: function(drag) {
-    			jQuery(this).parent().css("cursor", "move");
-    			jQuery(this).attr("style", "cursor:move");
-					jQuery(".cadre-composant").each(function(i, composant) {jQuery(this).attr("style","display:block;border:1px dotted orange;left:-1px;top:-1px;min-height:15px;margin-bottom:5px;");});
-				},
-    		stop: function(drag) {
-    			jQuery(this).css("cursor", "");
-					//jQuery(".cadre-composant").each(function(i, composant) {jQuery(this).attr("style","");});
-				}
+    		opacity:	0.9,
+        cursor: "move",
+        zIndex: 99999999
 			});
   	}
   );
   jQuery(".cadre-composant").droppable({
-  	accept: "type_pinceau",
-		activeclass: "ctlWidget_droppable_active",
-		hoverclass: "ctlWidget_droppable_over",
-		over: function(drag) {
+  	accept: ".type_pinceau",
+    greedy: true,
+    tolerance: "pointer",
+		activeClass: "ctlWidget_droppable_active",
+		hoverClass: "ctlWidget_droppable_over",
+		over: function(e, cc) {
 			var dropid = jQuery(this).attr("id");
-			var c = jQuery(drag).attr("class");
+      var from = cc.draggable.parent().attr("id");
+			var c = cc.draggable.attr("class");
 			c = c.match(/\b\w+-(\w+)-(\d+)\b/);
 			var com = c[1];
 			var nic = c[2];
-			window.status =  com + " " + nic + " => " + dropid + " doesn\'t work, yet : drag/drop is still under development !!!";
-		}
+			window.status =  com + " " + nic + " : " + from + " => " + dropid + " doesn\'t work, yet : drag/drop is still under development !!!";
+		},
+    drop: function(e, cc) {
+      jQuery(".cadre-composant").removeClass("ctlWidget_droppable_over");
+      var dropid = jQuery(this).attr("id");
+      var current = jQuery(this).find(".type_pinceau");
+      var current_i = current.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
+      var current_c = current_i[1];
+      var current_nic = current_i[2];
+      var from = cc.draggable.parent().attr("id");
+      var c = cc.draggable.attr("class");
+      c = c.match(/\b\w+-(\w+)-(\d+)\b/);
+      var com = c[1];
+      var nic = c[2];      
+      cc.draggable.parent().append(current);
+      jQuery(this).append(cc.draggable);
+      window.status = com + " " + nic + " : " + from + " => " + current_c + " " + current_nic + " : " + dropid;
+    }
 	});
   try {init_palette();}
   catch(e) {}

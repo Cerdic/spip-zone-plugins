@@ -206,13 +206,10 @@ fieldset.apercu {
 }
 
 .ctlWidget_droppable_active {
-  opacity: 0.6;
-  -moz-opacity: 0.6;
-  -khtml-opacity: 0.6;
-  filter: alpha(opacity=60);
+  outline: thin dashed #dfdfdf;
 }
 .ctlWidget_droppable_over {
-  outline: 1px dotted black;
+  outline: 2px dotted blue;
 }
 
 .nompage {
@@ -274,6 +271,7 @@ fieldset.apercu {
   height: 24px;
   width: 180px;
   margin: 0;
+  line-height: 10px;
   background: url(#CHEMIN{images/composant.png}) no-repeat;
   z-index: 3;
 }
@@ -407,6 +405,7 @@ l'utilisation du contrôleur par défaut qui pointe vers crayons_store standard 
 .editeur_composant .acs_box_texte{
   padding: 0;
   background: #f4f4f4;
+  font-size: 10px;
 }
 
 .editeur_composant .c_config {

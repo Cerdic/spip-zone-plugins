@@ -4,12 +4,30 @@
   [border-width: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Width'}});]
   [border-style: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Style'}});]
   [border-color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});]
-  -moz-border-radius: 8px;
+  [-moz-border-radius: (#VAR{#EVAL{'acsEncart'.'#NIC'.'BordRond'}});][
+  box-shadow: #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowBlur'},5}px (#VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}});
+  -webkit-box-shadow: #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowBlur'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}};
+  -moz-box-shadow: #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowBlur'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}};
+  filter: progid:DXImageTransform.Microsoft.dropShadow(color=#VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}}, offX=#VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'}}, offY=#VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'}}, positive=true);]
+  
 }
-.cEncart .entete {
-  [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}})[ url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}}})") repeat top left];]  
-  [border-bottom: 1px solid (#VAR{acsRubnavSep});]  
-  -moz-border-radius: 8px;
+.cEncart#NIC .entete {
+  [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}})[ url("[(#ACS_CHEMIN{trame/})](#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}})") repeat top left];]
+  [border-bottom: 1px solid (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});]
+  [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|!={rubriques}|?{' '})[
+    -moz-border-radius: (#VAR{#EVAL{'acsEncart'.'#NIC'.'BordRond'}});
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;]
+  ]
+}
+[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|=={rubriques}|?{' '})
+.cEncart#NIC .entete_rub {
+  [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}})[ url("[(#ACS_CHEMIN{trame/})](#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}})") repeat top left];][
+  -moz-border-radius: (#VAR{#EVAL{'acsEncart'.'#NIC'.'BordRond'}});
   -moz-border-radius-bottomleft: 0;
-  -moz-border-radius-bottomright: 0;
-}
+  -moz-border-radius-bottomright: 0;]
+ }
+[.cEncartClass .entete_rub .soulignement {
+  height: (#VAR{#EVAL{'acsEncart'.'#NIC'.'SouligneRubHeight'}});
+ }]
+]

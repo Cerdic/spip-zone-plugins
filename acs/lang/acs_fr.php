@@ -12,6 +12,7 @@ $traductions_acs = array(
   'bordcolor' => 'Bordure',
   'bordlargeur' => 'largeur de bordure',
   'bordstyle' => 'style de bordure',
+	'bordrond' => 'Arrondi de bordure',
   'parent' => 'valeur par d&eacute;faut',
   'none' => 'pas de bordure, &eacute;quivaut à border-width:0',
   'solid' => 'trait plein',
@@ -44,7 +45,7 @@ $traductions_acs = array(
   'shadowsize' => 'Taille',
   'shadowblur' => 'Flou',
 
-	'comment' => 'Commentaire'
+	'nom' => ' Nom'
 );
 
 // Lang file is build with components lang files
