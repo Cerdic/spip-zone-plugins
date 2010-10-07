@@ -1,11 +1,17 @@
 <plugin>
 	<version>1.5.1</version>
-	<nom>Nuage</nom>
+	<nom><multi>[fr]Nuage[en]Tag cloud</multi></nom>
 	<prefix>nuage</prefix>
-	<auteur>(c)2005-2007 Booz, Fil, James, St&#233;phane. Licence GNU/GPL</auteur>
+	<auteur>(c)2005-2007 Booz, Fil, James, St&#233;phane.</auteur>
+	<licence>GNU/GPL</licence>
 	<etat>test</etat>
-	<lien>[Nuage (de mots-cl&#233;s)->http://www.spip-contrib.net/Nuage-de-mots-cles]</lien>
-	<description>Version plugin avec mod&#232;les et filtres de la contrib nuage de tags.</description>
+	<lien>http://www.spip-contrib.net/Nuage-de-mots-cles</lien>
+	<description>
+		<multi>
+			[fr]Version plugin avec mod&#232;les et filtres de la contrib nuage de tags.
+			[en]Plugin version with the templates and filters from the contrib "tag cloud".
+		</multi>
+	</description>
 	<icon>nuage-64.png</icon>
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
