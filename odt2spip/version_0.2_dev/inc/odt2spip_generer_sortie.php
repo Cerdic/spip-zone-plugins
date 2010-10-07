@@ -104,7 +104,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
 
 	if (@count($match) > 0) {
-		if (!isset($odt2spip_retailler_img {
+		if (!isset($odt2spip_retailler_img)) {
 			$odt2spip_retailler_img = charger_fonction('odt2spip_retailler_img', 'inc');
 		}
 		if (!isset($ajouter_documents)) {
