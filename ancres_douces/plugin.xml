@@ -1,11 +1,20 @@
 <plugin>
-	<nom>Ancres Douces</nom>
-	<auteur>SarkASmeL, d'apr&egrave;s une id&eacute;e originale Fil</auteur>
+	<nom><multi>[fr]Ancres Douces[en]Sweet anchors</multi></nom>
+	<auteur>
+		<multi>
+			[fr]SarkASmeL, d'apr&#232;s une id&#233;e originale Fil
+			[en]Sarkasmel, based on an original idea of Fil
+		</multi>
+	</auteur>
 	<version>1.3</version>
 	<etat>stable</etat>
 	<description>
-Ce plugin permet un d&eacute;filement continu de la page lorsque le visiteur clique sur un lien pointant vers une ancre de l'article en cours de lecture.
-Cette fonction est aussi pr&eacute;sente dans le plugin Couteau Suisse. Si vous utilisez d&eacute;j&agrave; le Couteau Suisse, vous n'avez donc pas besoin d'Ancres Douces.
+		<multi>
+			[fr]Ce plugin permet un d&#233;filement continu de la page lorsque le visiteur clique sur un lien pointant vers une ancre de l'article en cours de lecture.
+Cette fonction est aussi pr&#233;sente dans le plugin Couteau Suisse. Si vous utilisez d&#233;j&#224; le Couteau Suisse, vous n'avez donc pas besoin d'Ancres Douces.
+			[en]This plugin allows a continuous scrolling of the page when the visitor clicks on a link to an anchor of the same page.
+This feature is also present in the plugin "Swiss knife". If you already use the "Swiss knife", so you do not need "Sweet anchors".
+		</multi>
 	</description>
 	<prefix>ancres_douces</prefix>
 	<icon>ancres_douces-64.png</icon>
