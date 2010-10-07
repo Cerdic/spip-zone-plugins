@@ -243,9 +243,7 @@ intertitres_riches= <xsl:value-of select="$IntertitresRiches" />
 		<date></date>
 		<statut>prop</statut>
 		<id_secteur></id_secteur>
-		<date_redac></date_redac>
 		<accepter_forum></accepter_forum>
-		<date_modif></date_modif>
 		<lang></lang>
 		<langue_choisie></langue_choisie>
 		<id_trad></id_trad>
