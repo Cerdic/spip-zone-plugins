@@ -38,6 +38,8 @@ function exec_get_infos_spip_dist() {
 		include_spip('inc/plugin');
 		
 		$dir_icones = _DIR_PLUGIN_GINS.'images/';
+		
+		$is_mysql = defined('_MYSQL_SET_SQL_MODE') && _MYSQL_SET_SQL_MODE;
 
 		$page_result = '<div style="margin-top:3em">' . PHP_EOL
 			. gros_titre(_T('titre_configuration'),'', false)
@@ -120,6 +122,7 @@ function exec_get_infos_spip_dist() {
 			, 'Apache version' => apache_get_version()
 			, 'Apache modules' => apache_get_modules()
 			, 'PHP version' => phpversion()
+			, 'SQL version' => gins_sqlversion()
 			, 'Zend version' => zend_version()
 			, 'jQuery' => '<script type="text/javascript">' . PHP_EOL
 					. '//<![CDATA[' . PHP_EOL
@@ -155,7 +158,6 @@ function exec_get_infos_spip_dist() {
 		//////////
 		// Les tables SQL (toutes les tables, SPIP et autres)
 		$ii = 'tablessql';
-		$is_mysql = defined('_MYSQL_SET_SQL_MODE') && _MYSQL_SET_SQL_MODE;
 		$res = 
 			($is_mysql)
 			? sql_query('SHOW TABLE STATUS')
@@ -294,4 +296,31 @@ function gins_decodeSize( $bytes )
     $types = array(_T('gins:B'), _T('gins:KB'), _T('gins:MB'), _T('gins:GB'), _T('gins:TB'));
     for( $i = 0; $bytes >= 1024 && $i < ( count( $types ) -1 ); $bytes /= 1024, $i++ );
     return( round($bytes, 2) . ' ' . $types[$i] );
+}
+
+/**
+ * Identification SQL
+ * */
+function gins_sqlversion()
+{
+	$r = array();
+	
+	if(defined('MYSQL_ASSOC'))
+	{
+		$r['MySQL'] = mysql_get_server_info();
+	}
+	
+	if(defined('PGSQL_ASSOC'))
+	{
+		// PostgreSQL 7.4 ou supérieur. ?
+		// @todo: à compléter
+		$r['PostgreSQL'] = ($s = @pg_version()) ? serialize($s) : 'inconnu';
+	}
+	
+	if(defined('SQLITE_ASSOC'))
+	{
+		$r['SQLite'] = sqlite_libversion();
+	}
+	
+	return($r);
 }
