@@ -1,0 +1,11 @@
+#CACHE{0}
+[<!-- (#REM) on vérifie les autorisations et on inclu la page d'éditon -->]
+[(#SET{id_endroit,[(#VAL{id_endroit}|_request|sinon{new})]})]
+
+[(#AUTORISER{modifier,seances_endroit})
+	[(#INCLURE{fond=prive/editer/seances_endroit,
+		id_endroit=#GET{id_endroit},
+		retour=#URL_ECRIRE{seances_endroits},
+		titre=#GET{titre}
+	})]
+]

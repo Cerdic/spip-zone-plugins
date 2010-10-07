@@ -1,0 +1,7 @@
+[(#FORMULAIRE_RECHERCHE_SEANCES)]
+<p>-- #ENV --</p>
+<B_recherche><ul>
+<BOUCLE_recherche (SEANCES articles){id_article ?= #ENV{id_article}}{id_rubrique ?= #ENV{id_rubrique}}{par date_seance}{age_seance <= 0}{statut=publie}>
+<li>[(#DATE_SEANCE|affdate_jourcourt)][ à (#DATE_SEANCE|heure_seance)] - #TITRE - #NOM_ENDROIT</li>
+</BOUCLE_recherche>
+</ul></B_recherche>

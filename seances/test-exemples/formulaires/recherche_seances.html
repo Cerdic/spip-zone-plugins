@@ -1,0 +1,21 @@
+<form action="[(#ENV{action})]" method="get" id="#FORM">
+[(#ENV{action}|form_hidden)]
+[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+<ul>
+<li><select class="select" id="id_rubrique" name="id_rubrique">
+	[<option value=""[ (#ENV{id_rubrique}|non)selected="selected"]>--</option>]
+<BOUCLE_sections (RUBRIQUES){seance=1}{par num titre, titre}>
+	[<option value="#ID_RUBRIQUE"[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|oui)selected="selected"]>(#TITRE)</option>]
+</BOUCLE_sections>
+</select></li>
+<li><select class="select" id="id_article" name="id_article">
+	[<option value=""[ (#ENV{id_article}|non)selected="selected"]>--</option>]
+<BOUCLE_spectacles (ARTICLES rubriques){seance=1}{statut=publie}{par num titre, titre}>
+	[<option value="#ID_ARTICLE"[ (#ENV{id_article}|=={#ID_ARTICLE}|oui)selected="selected"]>(#TITRE)</option>]
+</BOUCLE_spectacles>
+</select></li>
+
+</ul>
+<p class="boutons"><input type="submit" class="submit" name="ok" id="ok" value="<:action_rechercher:>" /></p>
+
+</form>

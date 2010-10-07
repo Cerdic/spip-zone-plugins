@@ -1,0 +1,44 @@
+<?php
+var_dump($GLOBALS['meta']['seances_base_version']);
+?>
+#CACHE{0}
+<h3>Liste endroits</h3>
+
+<ul>
+<BOUCLE_lieux (SEANCES_ENDROITS){par id_endroit}>
+<li>#NOM_ENDROIT - #DESCRIPTIF_ENDROIT</li>
+</BOUCLE_lieux>
+</ul>
+
+<h3>Liste seances</h3>
+
+<ul>
+<BOUCLE_lesseances (SEANCES seances_endroits){par date_seance}{statut=publie}>
+	<li>[(#DATE_SEANCE|affdate)] - #NOM_ENDROIT - #REMARQUE_SEANCE**</li>
+</BOUCLE_lesseances>
+</ul>
+
+<h3>Prochain</h3>
+<ul>
+<BOUCLE_prochains (SEANCES){par date_seance}{age_seance <= 0}>
+	<B_articles><li>
+	<BOUCLE_articles(ARTICLES){id_article}{unique}>
+	#TITRE
+	<ul>
+		<BOUCLE_seances_article (SEANCES seances_endroits){id_article}{par date_seance}>
+		<li>[(#DATE_SEANCE|affdate)] - #NOM_ENDROIT</li>
+		</BOUCLE_seances_article>
+	</ul>
+	</BOUCLE_articles>
+	</li></B_articles>
+</BOUCLE_prochains>
+</ul>
+
+
+<h3>5 prochains</h3>
+
+<ul>
+<BOUCLE_prochaines (SEANCES articles){age_seance <= 0}{par date_seance}{0,5}{statut=publie}>
+<li>[(#TITRE)] [(#DATE_SEANCE|affdate)] - [(#DATE_SEANCE|heure_seance)] - [(#NOM_ENDROIT)]</li>
+</BOUCLE_prochaines>
+</ul>
