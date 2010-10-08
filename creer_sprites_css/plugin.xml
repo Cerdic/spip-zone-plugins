@@ -1,0 +1,31 @@
+<plugin>
+	<nom>Créer sprites CSS</nom>
+	<auteur>
+		ARNO*
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+		Permet de regrouper plusieurs vignettes en une seule, affichées alors selon la technique des Sprites CSS.
+
+		Pour ajouter une image à un sprite, il suffit de la faire passer par le filtre <code>|sprite{nomsprite.png}</code>. 
+		Toutes les images passant par le même nom de sprite sont alors regroupées dans un unique fichier image (sprite). Le
+		format de ce sprite est déterminé par la terminaison de son nom. 
+
+		Il est possible, en indiquant des noms différents, d'utiliser plusieurs sprites dans une même page.
+
+		{{Nécessite GD2.}}
+	</description>
+	<prefix>
+	creer_sprites
+	</prefix>
+	<fonctions>creer_sprites_fonctions.php</fonctions>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
