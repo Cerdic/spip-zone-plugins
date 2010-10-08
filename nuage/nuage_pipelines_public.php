@@ -5,7 +5,7 @@ function nuage_insert_head_css($flux){
 		$done = true;
 		$flux .= "\n<link rel=\"stylesheet\" href=\"" .
 		direction_css(find_in_path('nuage.css')) .
-		"\" type=\"text/css\" media=\"all\" />\n";
+		"\" type=\"text/css\" media=\"screen, projection\" />\n";
 		}
 	return $flux;
 }
