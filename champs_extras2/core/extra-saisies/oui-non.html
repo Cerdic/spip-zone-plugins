@@ -3,11 +3,11 @@
 		[<span class='erreur_message'>(#ENV**{erreur_extra})</span>]
 		[<p class="explication">(#ENV{precisions_extra})</p>]
 		<div class="choix">
-			<input type='radio' class='radio' name='#ENV{champ_extra}' id='#ENV{champ_extra}_oui'[ (#ENV{valeur_extra}|oui)checked='checked'] value='oui' />
+			<input type='radio' class='radio[ (#ENV{class_extra})]' name='#ENV{champ_extra}' id='#ENV{champ_extra}_oui'[ (#ENV{valeur_extra}|oui)checked='checked'] value='oui' />
 			<label for="#ENV{champ_extra}_oui"><:item_oui:></label>
 		</div>
 		<div class="choix">
-			<input type='radio' class='radio' name='#ENV{champ_extra}' id='#ENV{champ_extra}_non'[ (#ENV{valeur_extra}|non)checked='checked'] value='' />
+			<input type='radio' class='radio[ (#ENV{class_extra})]' name='#ENV{champ_extra}' id='#ENV{champ_extra}_non'[ (#ENV{valeur_extra}|non)checked='checked'] value='' />
 			<label for="#ENV{champ_extra}_non"><:item_non:></label>
 		</div>
 </li>

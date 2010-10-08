@@ -6,7 +6,7 @@ include_spip('inc/cextras');
 
 
 // Creer les item d'un select a partir des enum
-function cextras_enum($enum, $val='', $type='valeur', $name='') {
+function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
 	$enums = array();
 	// 2 possibilites : enum deja un tableau (vient certainement d'un plugin),
 	// sinon texte a decouper (vient certainement de interfaces pour champs extra).
@@ -20,7 +20,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 	}
 
 	$val_t = explode(',', $val);
-
+	$class = $class ? " class='$class'" : '';
 	foreach($enums as $cle => $desc) {
 		switch($type) {
 			case 'valeur':
@@ -40,7 +40,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 					."\n";
 				break;
 			case 'radio':
-				$enums[$cle] = "<div class='choix'><input type='radio' name='$name' id='${name}_$cle' value=\"".entites_html($cle).'"'
+				$enums[$cle] = "<div class='choix'><input type='radio' name='$name'$class id='${name}_$cle' value=\"".entites_html($cle).'"'
 					. ($cle == $val
 						? " checked='checked'"
 						: ''
@@ -50,7 +50,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 					."\n";
 				break;
 			case 'cases':
-				$enums[$cle] = "<div class='choix'><input type='checkbox' name='${name}[]' id='${name}_$cle' value=\"".entites_html($cle).'"'
+				$enums[$cle] = "<div class='choix'><input type='checkbox' name='${name}[]'$class id='${name}_$cle' value=\"".entites_html($cle).'"'
 					. (in_array($cle, $val_t)
 						? " checked='checked'"
 						: ''
@@ -82,6 +82,7 @@ function cextras_creer_contexte($c, $contexte_flux, $prefixe='') {
 	$contexte['verifier_options_extra'] = $c->verifier_options;
 	$contexte['valeur_extra'] = $contexte_flux[$nom_champ];
 	$contexte['enum_extra'] = $c->enum;
+	$contexte['class_extra'] = $c->saisie_parametres['class']; // class CSS sur les champs (input, textarea, ...)
 	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
 	if (isset($contexte_flux['erreurs'])
 	and is_array($contexte_flux['erreurs'])

@@ -2,7 +2,7 @@
 	<nom>Interface pour Champs Extras</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<icon>images/iextras-64.png</icon>
 	<description>
 	Offre une interface pour g&eacute;rer des champs extras.

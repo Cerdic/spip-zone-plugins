@@ -4,7 +4,7 @@
 	<label for="#ENV{champ_extra}">#ENV{label_extra}</label>
 		[<span class='erreur_message'>(#ENV**{erreur_extra})</span>]
 		[<p class="explication">(#ENV{precisions_extra})</p>]
-		<select name='#ENV{champ_extra}[]'[ lang='(#LANG)'] id='#ENV{champ_extra}' multiple='multiple' size='5'>
+		<select name='#ENV{champ_extra}[]'[ lang='(#LANG)'][ class='(#ENV{class_extra})'] id='#ENV{champ_extra}' multiple='multiple' size='5'>
 			<option value="0"[(#EVAL{0}|in_array{#GET{valeur}}|oui) selected="selected"]>
 				- pas d'auteur -
 			</option>
