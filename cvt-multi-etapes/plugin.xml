@@ -5,7 +5,7 @@
 	<etat>stable</etat>
 	<description>Permet de faire facilement des CVT a plusieurs etapes. Voir le formulaires/demo dans le plugin pour plus de detail</description>
 	<prefix>cvtm</prefix>
-	<categorie>developpeur</categorie>
+	<categorie>outil</categorie>
 
 	<pipeline>
 		<nom>formulaire_charger</nom>

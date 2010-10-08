@@ -12,7 +12,7 @@
 	stable
 	</etat>
 	<description>
-	<multi>[fr]hashmask permet de confirme si vous avez tap&eacute; le bon mots de passe
+	<multi>[fr]hashmask permet de confirmer si vous avez tap&eacute; le bon mot de passe
 		Jquery propos&eacute; par Chris Dary <umbrae@gmail.com>
 		http://lab.arc90.com/2009/07/09/hashmask-another-more-secure-experiment-in-password-masking/	
 	</multi>	</description>
@@ -27,5 +27,5 @@
     images/hashmask.png
     </icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
-	<categorie>Authentification</categorie>
+	<categorie>auteur</categorie>
 </plugin>

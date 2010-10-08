@@ -10,5 +10,5 @@
 		<nom>affichage_final</nom>
 		<inclure>alerte_urgence_pipelines.php</inclure>
 	</pipeline>
-	<categorie>outils</categorie>
+	<categorie>outil</categorie>
 </plugin>

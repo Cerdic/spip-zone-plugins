@@ -17,7 +17,7 @@
 		<nom>insert_head</nom>
 		<inclure>jqplot_pipelines.php</inclure>
 	</pipeline>
-	<categorie></categorie>
+	<categorie>statistique</categorie>
 </plugin>
 
 

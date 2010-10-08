@@ -9,6 +9,6 @@
 	par appel direct.
 	</description>
 	<prefix>crud</prefix>
-	<categorie>?</categorie>
+	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>
