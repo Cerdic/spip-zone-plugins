@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//B
 	'breve_propose_sujet' => '[@nom_site_spip@] Propose : @titre@',
-	'breve_propose_titre' => 'Br&egrave;ve propos&eacutee;
+	'breve_propose_titre' => 'Br&egrave;ve propos&eacute;e
 	---------------',
 	'breve_propose_detail' => 'La br&egrave;ve "@titre@" est propos&eacute;e &agrave; la publication
 	depuis',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	dans le forum qui lui est attach&eacute;. Elle est disponible &agrave; l\'adresse :',
 	
 	'breve_publie_sujet' => '[@nom_site_spip@] PUBLIE : @titre@',
-	'breve_publie_titre' => 'Br&egrave;ve publi&eacutee;
+	'breve_publie_titre' => 'Br&egrave;ve publi&eacute;e
 	--------------',
 	'breve_publie_detail' => 'La br&egrave;ve "@titre@" vient d\'&ecirc;tre publi&eacute;e par @connect_nom@.',
 	
