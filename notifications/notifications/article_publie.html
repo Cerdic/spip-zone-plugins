@@ -5,7 +5,7 @@
   Distribue sous licence GPL
 
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
-<BOUCLE_art(ARTICLES){id_article=#ENV{id_objet}}{statut?}{tout}>
+<BOUCLE_art(ARTICLES){id_article}{statut?}{tout}>
 #SET{auteurs,#LESAUTEURS}
 [(#VAL{notifications:article_publie_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
 
