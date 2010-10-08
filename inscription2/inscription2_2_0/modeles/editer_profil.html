@@ -2,10 +2,11 @@
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
 <div id="profil">
 
-	<h1 class="#_auteur:EDIT{nom} ">#NOM</h1>
+	<h2 class="#_auteur:EDIT{nom} ">#NOM</h2>
 
 	<h3><:inscription2:infos_personnelles:></h3>
-		[<p><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></p>]
+	<div class="#_auteur:EDIT{logo} buddy">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
+	[<p><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></p>]
 	
 	<div class="#_auteur:EDIT{bio} profil_bio">
 	[(#BIO|?{#BIO,"..."})]
