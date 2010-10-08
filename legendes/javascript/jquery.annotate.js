@@ -132,7 +132,6 @@
 		if(image.listUrl && image.listtarget){
 			$.get(image.listUrl, function(data) {
 				image.listtarget.html(data);
-				console.log('on a chargé qqc');
 			});
 		}
 	}
