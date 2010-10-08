@@ -44,7 +44,7 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 				'data'=>$destinataires)
 		);
 
-		$texte = email_notification_article($id_article, $modele);
+		$texte = email_notification_objet($id_article, $modele);
 		notifications_envoyer_mails($destinataires, $texte);
 	}
 }

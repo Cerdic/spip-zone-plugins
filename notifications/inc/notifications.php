@@ -97,7 +97,7 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
 }
 
 /**
- * Notifier un evenement sur un article
+ * Notifier un evenement sur un objet
  * recupere le fond designe dans $modele,
  * prend la premiere ligne comme sujet
  * et l'interprete pour envoyer l'email
@@ -105,10 +105,10 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
  * @param int $id_article
  * @param string $modele
  */
-function email_notification_article($id_article, $modele) {
+function email_notification_objet($id_objet, $modele) {
 	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
 
-	return recuperer_fond($modele,array('id_article'=>$id_article));
+	return recuperer_fond($modele,array('id_objet'=>$id_objet));
 }
 
 // Compatibilite, ne plus utiliser
@@ -116,7 +116,7 @@ function email_notification_article($id_article, $modele) {
 function notifier_publication_article($id_article) {
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-		$texte = email_notification_article($id_article, "notifications/article_publie");
+		$texte = email_notification_objet($id_article, "notifications/article_publie");
 		notifications_envoyer_mails($adresse_suivi, $texte);
 	}
 }
@@ -126,7 +126,7 @@ function notifier_publication_article($id_article) {
 function notifier_proposition_article($id_article) {
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-		$texte = email_notification_article($id_article, "notifications/article_propose");
+		$texte = email_notification_objet($id_article, "notifications/article_propose");
 		notifications_envoyer_mails($adresse_suivi, $texte);
 	}
 }
