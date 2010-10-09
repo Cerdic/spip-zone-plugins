@@ -198,4 +198,18 @@ function bigbrother_mediane(){
 
 }
 
+
+function get_jour($week,$daynb,$year,$type='timestamp'){
+    $Jan1 = mktime(1,1,1,1,1,$year);
+    $day_thursday = ($daynb <= 4) ? (4 - $daynb) : ($daynb-4);
+    if($daynb <= 4)
+    	$dayoffset = (11-date('w',$Jan1))%7-$day_thursday;
+    else
+    	$dayoffset = (11-date('w',$Jan1))%7+$day_thursday;
+    $desiredday = strtotime(($week-1) . ' weeks '.$dayoffset.' days', $Jan1);
+    if($type == 'mysql'){
+    	$desiredday = date('Y-m-d H:i:s',$desiredday);
+    }
+    return $desiredday;
+}
 ?>
