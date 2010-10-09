@@ -1,0 +1,32 @@
+<plugin>
+	<nom>GetText</nom>
+	<auteur>Matthieu Marcillaud</auteur>
+	<version>1.0.0</version>
+	
+	<etat>dev</etat>
+	<description>
+		API pour gérer des traductions avec des fichiers .po
+	</description>
+
+	<icon>images/gettext-128.png</icon>
+	<prefix>gettext</prefix>
+<!--
+	<options>inc/gettext.php</options>
+-->
+<!-- pour tests -->
+	<bouton id='gettext' parent='bando_edition'>
+		<icone>images/gettext-24.png</icone>
+		<titre>gettext:gettext</titre>
+	</bouton>
+
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+
+	<!-- boucle POUR -->
+	<necessite id="spip_bonux" version="[1.0;]" />
+	<!-- #SAISIE -->
+	<necessite id="saisies" version="[1.0;]" />
+	<!-- cvt multi etapes -->
+	<necessite id="cvtm" version="[0.1;]" />
+
+</plugin>

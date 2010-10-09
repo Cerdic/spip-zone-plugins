@@ -1,0 +1,5 @@
+Lib Gettext :
+http://gitorious.org/file_gettext
+
+Modifiée : &new => new (3 occurrences dans Gettext.php)
+

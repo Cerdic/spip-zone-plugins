@@ -1,0 +1,36 @@
+<div class='formulaire_spip formulaire_#FORM'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#SET{dir,[(#ENV{repertoire_propose}|sinon{#ENV{repertoire}})]})]
+[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<h3 class='h3'><:gettext:etape{nb=#ENV{_etape},nbs=#ENV{_etapes}}:> - <:gettext:dans_repertoire{dir=#GET{dir}}:></h3>
+		<ul>
+		[(#ENV{todo}|=={to_po}|oui)
+			[(#SAISIE{checkbox,fichiers,
+				label=<:gettext:choisir_fichiers:>,
+				explication=<:gettext:choisir_fichiers_explication:>,
+				datas=[(#GET{dir}|liste_fichiers_lang_spip)]})]
+		]
+		[(#ENV{todo}|=={to_spip}|oui)
+			[(#SAISIE{checkbox,fichiers,
+				label=<:gettext:choisir_fichiers:>,
+				explication=<:gettext:choisir_fichiers_explication:>,
+				datas=[(#GET{dir}|liste_fichiers_lang_po)]})]
+		]
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<input type='submit' class='submit last' name="_retour_etape_1" value='<:gettext:precedent:>' />
+			[(#ENV{todo}|=={to_spip}|oui)<input type='submit' class='submit' value='<:gettext:importer_en_spip:>' />]
+			[(#ENV{todo}|=={to_po}|oui)<input type='submit' class='submit' value='<:gettext:exporter_en_po:>' />]
+		</p>
+	</div></form>
+]
+
+</div>

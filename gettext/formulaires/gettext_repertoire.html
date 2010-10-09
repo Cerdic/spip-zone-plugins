@@ -1,0 +1,45 @@
+<div class='formulaire_spip formulaire_#FORM'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+
+[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<h3 class='h3'><:gettext:etape{nb=#ENV{_etape},nbs=#ENV{_etapes}}:></h3>
+		
+		<ul>
+			[(#SAISIE{selection, repertoire_propose,
+				label=<:gettext:selection_repertoire_propose:>,
+				explication=<:gettext:selection_repertoire_propose_explication:>,
+				datas=[(#VAL|liste_repertoire_lang_spip)]})]
+				
+			[(#SAISIE{input, repertoire,
+				label=<:gettext:selection_repertoire:>,
+				explication=<:gettext:selection_repertoire_explication:>})]
+
+			[(#SAISIE{oui_non, exporter_dans_selection,
+				label=<:gettext:exporter_ailleurs:>,
+				explication=<:gettext:exporter_ailleurs_explication:>,
+				defaut=''})]
+				
+			[(#SAISIE{radio, todo,
+				label=<:gettext:selection_action:>,
+				defaut=to_po,
+				datas=[(#ARRAY{
+					to_po,<:gettext:to_po:>,
+					to_spip,<:gettext:to_spip:>
+				})]})]
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<input type='submit' class='submit' name='to_po' value='<:gettext:suivant:>' />
+		</p>
+	</div></form>
+]
+
+</div>
