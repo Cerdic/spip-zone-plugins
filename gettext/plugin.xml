@@ -5,9 +5,12 @@
 	
 	<etat>dev</etat>
 	<description>
-		API pour gérer des traductions avec des fichiers .po
+		API pour importer ou exporter des fichiers de langue .po
+		
+		Utilise une librairie issue de PEAR : File_Gettext de Michael Wallner
 	</description>
 
+	<!-- http://www.iconfinder.com/icondetails/49621/128/language_select_talk_translate_icon -->
 	<icon>images/gettext-128.png</icon>
 	<prefix>gettext</prefix>
 <!--
