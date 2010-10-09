@@ -28,19 +28,30 @@ function journal_visite_entree($opt){
 	 * Sinon on ajoute une entrée pour l'entrée sur la page de l'objet
 	 */
 	else{
-		if(is_array($opt['infos'])){
-			$opt['infos'] = serialize($opt['infos']);
+		$champs = array(
+				'id_auteur' => $opt['qui'],
+				'action' => $opt['faire'],
+				'id_objet' => $opt['id'],
+				'objet' => $opt['quoi'],
+				'infos' => $opt['infos'],
+				'date' => $opt['date'] ? $opt['date'] : date('Y-m-d H:i:s', time())
+			);
+		// Envoyer aux plugins
+		$champs = pipeline('pre_edition',
+			array(
+				'args' => array(
+					'table' => 'spip_journal',
+					'action'=>'inserer'
+				),
+				'data' => $champs
+			)
+		);
+		if(is_array($champs['infos'])){
+			$champs['infos'] = serialize($champs['infos']);
 		}
 		sql_insertq(
 				'spip_journal',
-				array(
-					'id_auteur' => $opt['qui'],
-					'action' => $opt['faire'],
-					'id_objet' => $opt['id'],
-					'objet' => $opt['quoi'],
-					'infos' => $opt['infos'],
-					'date' => $opt['date'] ? $opt['date'] : date('Y-m-d H:i:s', time())
-				)
+				$champs
 			);
 	}
 }

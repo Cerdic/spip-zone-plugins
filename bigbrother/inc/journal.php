@@ -29,31 +29,33 @@ function inc_journal_dist($phrase, $opt = array()) {
 		if((lire_config('bigbrother/enregistrer_ip') == 'oui') && !$opt['infos']['ip']){
 			$opt['infos']['ip'] = $GLOBALS['ip'];
 		}
-		// Envoyer aux plugins
-		$champs = pipeline('pre_edition',
-			array(
-				'args' => array(
-					'table' => 'spip_journal',
-					'action'=>'inserer'
-				),
-				'data' => $champs
-			)
-		);
 		if($f = charger_fonction($opt['faire'],'journal',true)){
 			$f($opt);
 		}else{
-			if(is_array($opt['infos']))
-				$opt['infos'] = serialize($opt['infos']);
-			sql_insertq(
-				'spip_journal',
-				array(
+			$champs = array(
 					'id_auteur' => $opt['qui'],
 					'action' => $opt['faire'],
 					'id_objet' => $opt['id'],
 					'objet' => $opt['quoi'],
 					'infos' => $opt['infos'],
 					'date' => $opt['date'] ? $opt['date'] : date('Y-m-d H:i:s', time())
+				);
+			// Envoyer aux plugins
+			$champs = pipeline('pre_edition',
+				array(
+					'args' => array(
+						'table' => 'spip_journal',
+						'action'=>'inserer'
+					),
+					'data' => $champs
 				)
+			);
+			if(is_array($champs['infos'])){
+				$champs['infos'] = serialize($champs['infos']);
+			}
+			sql_insertq(
+				'spip_journal',
+				$champs
 			);
 		}
 	}
