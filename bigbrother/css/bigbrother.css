@@ -37,3 +37,22 @@ div.pagination_bigbrother{
 	width:100%;
 	height:300px;
 }
+
+.bigbrother_graphs .legend > table{
+	padding-right:10px;
+	border:1px solid #ededed;	
+}
+
+.bigbrother_graphs .legend > .show_hide{
+	position:absolute;
+	top:13px;
+	right:13px;
+	z-index:20;
+	padding:5px;
+}
+
+.bigbrother_graphs .legend > .show_hide.show{
+	border:1px solid #ededed;
+	background:#fff;
+	opacity:.85;	
+}
