@@ -19,4 +19,5 @@
 		<nom>recuperer_fond</nom>
 		<inclure>spipdf.php</inclure>
 	</pipeline>
+    <categorie>edition</categorie>
 </plugin>
