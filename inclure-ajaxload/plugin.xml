@@ -1,5 +1,5 @@
 <plugin>
-	<nom>#INCLURE{ajaxload}</nom>
+	<nom>AjaxLoad pour #INCLURE</nom>
 	<auteur>
 	Fil &#169; 2009 - GNU/GPL
 	</auteur>
@@ -10,9 +10,9 @@
 	test
 	</etat>
 	<description>
-	Ajoute une option <code>{ajaxload}</code> à la balise <code>#INCLURE</code>
+	Ajoute une option <code>{ajaxload}</code> &agrave; la balise <code>#INCLURE</code>
 
-	Ce qui permet de différer le calcul du truc inclus sur un deuxième hit
+	Ce qui permet de diff&eacute;rer le calcul du truc inclus sur un deuxi&egrave;me hit
 	</description>
 	<prefix>
 	INCLUREAJAXLOAD
@@ -26,4 +26,5 @@
 	</pipeline>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<categorie>outil</categorie>
 </plugin>
