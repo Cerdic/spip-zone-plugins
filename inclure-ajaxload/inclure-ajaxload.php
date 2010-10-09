@@ -26,6 +26,7 @@ function recuperer_fond_ajax() {
 
 	$cle = md5(serialize($args));
 	$ajax = entites_html(encoder_contexte_ajax($args[1]));
+	
 
 	$alt = entites_html(sinon($args[1]['ajaxloadalt'],$args[1]['fond']));
 	$message = $args[1]['ajaxload'];
@@ -35,8 +36,13 @@ function recuperer_fond_ajax() {
 	// Le lien mène à l'action de pose du cookie no_js
 	$url = "spip.php?action=ia_nojs&amp;retour=".urlencode(parametre_url(self(),'no_js','oui'));
 
-	return
-		"<div class='includeajax'><a href=\"$url\" rel=\"$ajax\">$searching</a></div>";
+	if (isset($args[2]['ajax']) AND $args[2]['ajax']=='1') 
+		$class_ajax = " ajaxbloc env-$ajax";
+
+	$ret =
+		"<div class='includeajax$class_ajax'><a href=\"$url\" rel=\"$ajax\">$searching</a></div>";
+		
+	return $ret;
 }
 
 function remettre_fond_ajax($matches) {
