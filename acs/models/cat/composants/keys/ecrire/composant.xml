@@ -3,7 +3,7 @@
   <nom>Keys</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.7.2</version>
+  <version>0.7.3</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -30,4 +30,9 @@
     <type>bord</type>
   </variable>
 
+  <variable>
+    <nom>Nb</nom>
+    <type>nombre</type>
+    <valeur>10</valeur>
+  </variable>
 </composant>

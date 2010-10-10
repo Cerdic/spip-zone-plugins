@@ -29,8 +29,9 @@ function controleurs_composant_dist($regs) {
     'nic' => $id,
     'lang' => $GLOBALS['spip_lang']
   );
-  $html = '<div  style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
-    '<div id="'."composant-$class-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
+  $css_class = _request('class');
+  $html = '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
+    '<div id="'."composant-$class-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.98; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'"'.($css_class ? ' class="'.$css_class.'"' : '').'>'.
       recuperer_fond('vues/composant', $contexte).
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
@@ -52,9 +53,7 @@ function controleurs_composant_dist($regs) {
     ).
     '</div>'.
 	'</div>'.
-'<script language="javascript">'.
-recuperer_fond('javascript/acs_controleur_composant.js').
-'</script>';
+'<script language="javascript">	init_controleur_composant();</script>';
   $status = NULL;
 
 	return array($html, $status);

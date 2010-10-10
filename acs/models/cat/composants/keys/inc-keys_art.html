@@ -9,7 +9,7 @@ Mots-cles de l'article
     [<div class="pagination">(#PAGINATION)</div>]
   </div>
   <ul class="bsize">
-    <BOUCLE_mots(MOTS) {id_article} {titre!==(_.*)} {pagination 5}>
+    <BOUCLE_mots(MOTS) {id_article} {titre!==(_.*)} {pagination #VAR{acsKeysNb,10}}>
     <li class="menu-item"><div class="motcle"><a href="#URL_MOT">#TITRE</a></div></li>
     </BOUCLE_mots>
   </ul>

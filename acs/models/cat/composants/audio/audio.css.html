@@ -35,9 +35,9 @@
   overflow: hidden;
 }
 
-.mp3player .track_status {
-  color: #VAR{acsAudioTrackStatus,00afdf};
-}
+[.mp3player .track_status {
+  color: (#VAR{acsAudioTrackStatus});
+}]
 
 .mp3player .track_control, .mp3player .hidden, .mp3player .b_pause {
   display: none;
@@ -58,7 +58,7 @@
 }
 
 .mp3player .progressBarBorder {
-  border: 1px solid #VAR{acsAudioProgressBarBord,#VAR{acsRubnavBord/Color,#afafaf}};
+  [border: 1px solid (#VAR{acsAudioProgressBarBord});]
   height: 2px;
   margin: 6px;
   margin-left: 8px;
@@ -71,13 +71,13 @@
 .mp3player .progressBar {
   display:block;
   height: 2px;
-  background: #8d8fff;
+  [background: (#VAR{acsAudioProgressBar});]
   width: 0;
 }
 .mp3player .loadBar {
   display:block;
   height: 2px;
-  background: #8adf8a;
+  background: #VAR{acsAudioLoadBar};
   width: 0;
 }
 .mp3player .slider {

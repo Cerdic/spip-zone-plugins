@@ -27,6 +27,7 @@ function acs_insert_head($flux) {
   	if (!$js_dragdrop)
   		$js_dragdrop = find_in_path('javascript/jquery-ui-1.8-drag-drop.min.js');
   	$r .= '<script type="text/javascript" src="'.$js_dragdrop.'"></script>';
+  	$r .= '<script type="text/javascript" src="'.generer_url_public('javascript/acs_controleur_composant.js').'"></script>';
   }
   return $flux.$r;
 }

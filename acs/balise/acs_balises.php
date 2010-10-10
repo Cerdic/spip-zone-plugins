@@ -41,7 +41,8 @@ function balise_PINCEAU($p) {
 }
 
 function calculer_balise_pinceau($composant, $nic) {
-    return  'crayon composant-'.$composant.'-'.$nic.' type_pinceau';
+	$nic = $nic ? $nic : '0';
+  return  'crayon composant-'.$composant.'-'.$nic.' type_pinceau';
 }
 
 function balise_ACS_DERNIERE_MODIF($p) {
@@ -119,9 +120,8 @@ function composants_head($type) {
           $file = find_in_path($filepath.'.html');
           if (!$file) {
             $file = find_in_path($filepath);
-            if (!$file)
-              continue;
-            $r .= file_get_contents($file);
+            if ($file)
+              $r .= file_get_contents($file);
           }
           else {
             $r .= recuperer_fond($filepath)."\r";

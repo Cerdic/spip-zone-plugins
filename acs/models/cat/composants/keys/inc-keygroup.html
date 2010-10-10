@@ -9,7 +9,7 @@ Menu de navigation mots-cles : les autres mots cles du meme groupe
     [<div class="pagination">(#PAGINATION)</div>]
   </div>
   <ul class="bsize">
-  <BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
+  <BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination #VAR{acsKeysNb,10}}>
     <li class="menu-item"><div class="motcle"><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></div></li>
   </BOUCLE_mots_freres>
   </ul>

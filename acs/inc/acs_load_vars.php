@@ -43,6 +43,6 @@ function acs_load_vars($from) {
 function acs_reset_vars() {
   spip_query("delete FROM spip_meta where left(nom,3)='acs'");
   lire_metas();
-  acs_log('ACS init : variables DELETED');
+  acs_log('ACS init/restore : variables DELETED');
 }
 ?>

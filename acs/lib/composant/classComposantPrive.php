@@ -211,29 +211,28 @@ class AdminComposant {
 				ecrire_meta($v, $nv);
 				$updated = true;
 			}
-
-			if (isset($updated)) {
-			  if (isset($this->afterUpdate)) {
-					@include_once($this->rootDir.'/ecrire/'.$class.'.php');
-					$cObj = 'acs'.ucfirst($class);
-					if(class_exists($cObj)) {
-						$$cObj = @new $cObj();
-						if (($$cObj instanceof Composant) && is_callable(array($$cObj, 'afterUpdate'))) {
-						  if (!$$cObj->afterUpdate())
-								$this->errors[] = $cObj.'->afterUpdate '._T('acs:failed').' '.implode(' ', $$cObj->errors);
-						}
-						else
-						  $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_callable');
-					}
-						else
-						  $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_found');
-			  }
-			  ecrire_meta("acsDerniereModif", time());
-			  ecrire_metas(); // SPIP ecrit en BDD
-			  lire_metas(); // SPIP relit toutes les metas en BDD
-			  touch_meta(false); // Force la reecriture du cache SPIP des metas
-			  unset($updated);
-			}
+		}
+		if (isset($updated)) {
+  	  if (isset($this->afterUpdate)) {
+  			@include_once($this->rootDir.'/ecrire/'.$class.'.php');
+  			$cObj = 'acs'.ucfirst($class);
+  			if(class_exists($cObj)) {
+  				$$cObj = @new $cObj();
+  				if (($$cObj instanceof Composant) && is_callable(array($$cObj, 'afterUpdate'))) {
+  				  if (!$$cObj->afterUpdate())
+  						$this->errors[] = $cObj.'->afterUpdate '._T('acs:failed').' '.implode(' ', $$cObj->errors);
+  				}
+  				else
+  				  $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_callable');
+  			}
+  				else
+  				  $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_found');
+  	  }
+  	  ecrire_meta("acsDerniereModif", time());
+  	  ecrire_metas(); // SPIP ecrit en BDD
+  	  lire_metas(); // SPIP relit toutes les metas en BDD
+  	  touch_meta(false); // Force la reecriture du cache SPIP des metas
+  	  unset($updated);
 		}
   }
 
