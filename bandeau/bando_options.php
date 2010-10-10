@@ -56,7 +56,7 @@ if (
 		if (strncmp($u,$a,strlen($a))==0){
 			include_spip('inc/filtres_mini');
 			$u = url_absolue(self());
-			include_spip('inc/distant');
+			include_spip('inc/headers');
 			redirige_par_entete($u, '', 301);
 		}
 }
