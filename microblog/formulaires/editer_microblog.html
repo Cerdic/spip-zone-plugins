@@ -7,7 +7,7 @@
 ]
 [<div class="ajax">
 	[<p class="status"><strong><:microblog:message_envoye:></strong> (#ENV*{_status})</p>]
-	<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM-#OBJET-#ID_OBJET"[(#ENV{_hide})style="display:none;"]>
+	<div class="formulaire_spip formulaire_microblog formulaire_#FORM" id="formulaire_#FORM-#OBJET-#ID_OBJET"[(#ENV{_hide})style="display:none;"]>
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		(#ENV{editable})
@@ -21,7 +21,6 @@
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<label for="#GET{name}"><em>[(#VAL{140}|moins{#ENV*{#GET{name}}|strlen})]</em>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 					<textarea name="#GET{name}" id="#GET{name}" rows="3" cols="25">#ENV*{#GET{name}}</textarea>
-					<input type="submit" name="annuler_microblog" value="<:microblog:bouton_ne_pas_bloguer:>" />
 				</li>
 			</ul>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -30,6 +29,7 @@
 				<span class='image_loading'></span>
 				<input type='submit' class='submit' name="envoyer" value='<:microblog:bouton_envoyer_maintenant:>' />
 				<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer:>' />
+				<input type="submit" name="annuler_microblog" value="<:microblog:bouton_ne_pas_bloguer:>" />
 			</p>
 		</div></form>
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -51,7 +51,3 @@ function status_length_count(){
 jQuery('document').ready(status_length_count);
 onAjaxLoad(status_length_count);
 </script>
-<style type="text/css">
-	.formulaire_editer_microblog .editer_microblog label em {font-style:normal;display:block;float:right;color:#aaa;}
-	.formulaire_editer_microblog .editer_microblog label em.nok {color:red;}
-</style>

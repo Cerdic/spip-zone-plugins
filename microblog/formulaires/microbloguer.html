@@ -6,7 +6,7 @@
 
 ]
 [<div class='ajax'>
-<div class="formulaire_spip formulaire_#FORM">
+<div class="formulaire_spip formulaire_microblog formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
@@ -42,7 +42,3 @@ function status_length_count(){
 jQuery('document').ready(status_length_count);
 onAjaxLoad(status_length_count);
 </script>
-<style type="text/css">
-	.formulaire_microbloguer .editer_status label em {font-style:normal;display:block;float:right;color:#aaa;}
-	.formulaire_microbloguer .editer_status label em.nok {color:red;}
-</style>
