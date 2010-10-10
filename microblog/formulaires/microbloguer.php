@@ -53,8 +53,9 @@ function formulaires_microbloguer_traiter_dist(){
 		include_spip('inc/microblog');
 		$retour = microblog($status);
 		spip_log($retour,'microblog');
-		set_request('status','');
+		
 		if($retour){
+			set_request('status','');
 			$res = array('message_ok'=>$status,'editable'=>true);
 		}else{
 			$res = array('message_erreur'=>_T('microblog:erreur_verifier_configuration'),'editable'=>true);
