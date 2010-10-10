@@ -83,7 +83,8 @@ function Microblog_annonce($quoi,$contexte){
 }
 
 function envoyer_microblog($status,$liens=array(), $heure = null){
-	if (!is_null($status)) {
+	// un status vide ne provoque pas d'envoi
+	if (!is_null($status) AND strlen($status)) {
 		if (!function_exists('job_queue_add')){
 			include_spip('inc/microblog');
 			microblog($status);
