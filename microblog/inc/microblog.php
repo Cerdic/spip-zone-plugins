@@ -126,14 +126,3 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	
 	return $ret;
 }
-
-
-function microblog_affiche_droite($flux){
-	if (autoriser('microbloguer','status')
-	AND isset($GLOBALS['meta']['microblog'])
-	AND is_array($cfg = @unserialize($GLOBALS['meta']['microblog']))
-	AND $cfg['invite']) {
-		$flux['data'] .= recuperer_fond('modeles/microblog_update',array());
-	}
-	return $flux;
-}

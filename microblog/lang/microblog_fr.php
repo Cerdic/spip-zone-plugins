@@ -56,7 +56,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publier_articles_attente' => 'Espacer les publications dans le temps (minutes)',
 
 	// S
-	'service' => 'Service'
+	'service' => 'Service',
+
+	// T
+	'titre_microblog' => 'Microbloguer',
 
 );
 
