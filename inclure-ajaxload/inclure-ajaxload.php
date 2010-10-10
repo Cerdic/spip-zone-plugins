@@ -62,7 +62,7 @@ function INCLUREAJAXLOAD_affichage_final($page) {
 	if(_IS_BOT || $_COOKIE["no_js"] == "no_js" ) {
 		include_spip("inc/filtres");
 		include_spip("public/assembler");
-		$page = preg_replace_callback(",(<div class='includeajax'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax", $page);
+		$page = preg_replace_callback(",(<div class='includeajax[^\']*'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax", $page);
 	}
 
 	return $page;
