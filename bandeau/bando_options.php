@@ -55,7 +55,7 @@ if (
 	foreach($as as $a)
 		if (strncmp($u,$a,strlen($a))==0){
 			include_spip('inc/filtres_mini');
-			$u = url_absolue(self());
+			$u = url_absolue(self(),$GLOBALS['meta']['adresse_site']);
 			include_spip('inc/headers');
 			redirige_par_entete($u, '', 301);
 		}
