@@ -12,13 +12,14 @@
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
-#HTTP_HEADER{Vary: Accept-Encoding}
+#HTTP_HEADER{Vary: Accept-Encoding}[(#REM)<style>
+]
 
 #SET{claire,##ENV{couleur_claire,edf3fe}}
 #SET{foncee,##ENV{couleur_foncee,3874b0}}
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-.formulaire_spip.formulaire_microbloguer { border-color: #33CCFF; }
-.formulaire_spip.formulaire_microbloguer li.obligatoire,
-.formulaire_spip.formulaire_microbloguer .boutons { background-color: #DBEFFA; }
+.formulaire_spip.formulaire_microbloguer { background: #DBEFFA url(#CHEMIN{prive/themes/spip/images/microblog-bg.jpg}) center; border-color: #33CCFF; }
+.formulaire_spip.formulaire_microbloguer .editer_status { background: url(#CHEMIN{prive/themes/spip/images/microblog-64.png}) no-repeat 32px bottom; }
+.formulaire_spip.formulaire_microbloguer .boutons { padding-top: 0; background: none; border: 0; }
