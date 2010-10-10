@@ -71,7 +71,7 @@ function INCLUREAJAXLOAD_affichage_final($page) {
 function INCLUREAJAXLOAD_insert_head($flux) {
 	$flux .= "\n<script src=\"".find_in_path('javascript/inclure-ajaxload.js')."\" type=\"text/javascript\"></script>";
 
-$flux = '<?php if ($_COOKIE["no_js"] != "no_js") { ?>
+$flux = '<?php if ($_COOKIE["no_js"] != "no_js" && !_IS_BOT) { ?>
 <script type="text/javascript"><!--
 document.write("<\/script><script>/*");
 //--></script>
