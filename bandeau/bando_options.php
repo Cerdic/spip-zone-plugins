@@ -54,6 +54,7 @@ if (
 	$as = explode("\n",$GLOBALS['meta']['adresses_secondaires']);
 	foreach($as as $a)
 		if (strncmp($u,$a,strlen($a))==0){
+			include_spip('inc/filtres_mini');
 			$u = url_absolue(self());
 			include_spip('inc/distant');
 			redirige_par_entete($u, '', 301);
