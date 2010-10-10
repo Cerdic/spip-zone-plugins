@@ -2,7 +2,7 @@
   <nom>Bandeau 2.1</nom>
   <auteur>Collectif spip-dev</auteur>
   <licence>(c) 2009 GPL</licence>
-  <version>1.1.4</version>
+  <version>1.1.5</version>
 	<icon>bandeau-32.png</icon>
   <etat>stable</etat>
   <description>Revisitons la barre de nav de SPIP</description>

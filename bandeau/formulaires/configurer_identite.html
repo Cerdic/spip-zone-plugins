@@ -38,6 +38,13 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 	    </li>
+	  	#SET{name,adresses_secondaires}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:bando:label_adresses_secondaires:></label>
+				<p class="explication"><:bando:texte_redirection_adresses_secondaires:></p>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='7'>#ENV{#GET{name}}</textarea>
+	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->

@@ -46,4 +46,18 @@ function find_icone($icone){
 	return $icone;
 }
 
+if (
+	(!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut']!=='0minirezo')
+	AND strlen($GLOBALS['meta']['adresses_secondaires'])
+	){
+	$u = $_SERVER['HTTP_HOST'] . self('&',true);
+	$as = explode("\n",$GLOBALS['meta']['adresses_secondaires']);
+	foreach($as as $a)
+		if (strncmp($u,$a,strlen($a))==0){
+			$u = url_absolue(self());
+			include_spip('inc/distant');
+			redirige_par_entete($u, '', 301);
+		}
+}
+
 ?>

@@ -18,7 +18,7 @@ function formulaires_configurer_identite_charger_dist(){
 	lire_metas();
 	
 	$valeurs = array();
-	foreach(array('nom_site','adresse_site','slogan_site','descriptif_site','email_webmaster') as $k)
+	foreach(array('nom_site','adresse_site','slogan_site','descriptif_site','email_webmaster','adresses_secondaires') as $k)
 		$valeurs[$k] = isset($GLOBALS['meta'][$k])?$GLOBALS['meta'][$k]:'';
 		
 	return $valeurs;
@@ -45,6 +45,13 @@ function formulaires_configurer_identite_traiter_dist(){
 	include_spip('inc/meta');
 	foreach(array('nom_site','adresse_site','slogan_site','descriptif_site') as $k)
 		ecrire_meta($k,_request($k));
+
+	$second = _request('adresses_secondaires');
+	$second = explode("\n",trim($second));
+	foreach($second as $k=>$s)
+		$second[$k] = preg_replace("#^[\w]{2,6}[:]\/\/#","",trim(rtrim($s,'/')));
+	ecrire_meta('adresses_secondaires',$second = implode("\n",$second));
+	set_request('adresses_secondaires',$second);
 
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
