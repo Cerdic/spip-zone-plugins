@@ -1,8 +1,9 @@
 <plugin>
 	<nom>Microblog</nom>
 	<auteur>Fil &#169; 2009-2010</auteur>
+	<icon>prive/themes/spip/images/microblog-32.png</icon>
 	<licence>GNU/LGPL</licence>
-	<version>0.6.0</version>
+	<version>0.6.1</version>
 	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
 	<description>
@@ -17,7 +18,6 @@ Uses the library [twitteroauth->http://github.com/abraham/twitteroauth] of Abrah
 	</description>
 	<lien>http://www.spip-contrib.net/Microblog,3051</lien>
 	<prefix>microblog</prefix>
-	<icon>prive/themes/spip/images/microblog.png</icon>
 
 	<fonctions>microblog_fonctions.php</fonctions>
 	<install>base/microblog.php</install>

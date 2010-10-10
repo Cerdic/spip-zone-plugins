@@ -47,8 +47,10 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	if (!isset($api)) {
 		if (!isset($service))
 			$service = $cfg['service'];
-		if (!isset($apis[$service]))
+		if (!isset($apis[$service])){
+			spip_log("Aucune API disponible pour $service",'microblog');
 			return false;
+		}
 		$api = $apis[$service];
 	}
 	
@@ -96,8 +98,10 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	$status = unicode2charset(charset2unicode($status), 'utf-8');
 	$status = substr($status, 0, 140);
 
-	if (!strlen($status))
+	if (!strlen($status)) {
+		spip_log('Rien a bloguer','microblog');
 		return false;
+	}
 
 	$datas = array('status' => $status);
 
@@ -106,8 +110,7 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	if ($begaie == $GLOBALS['meta']['microblog_begaie']) {
 		spip_log("begaie $service $user $status", 'microblog');
 		return false;
-	} else
-		ecrire_meta('microblog_begaie', $begaie);
+	}
 
 	// ping et renvoyer la reponse xml
 	if($oAuth){
@@ -123,7 +126,11 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 		$ret = recuperer_page($api, false, false, null, $datas);
 		spip_log("$service $user $status ".strlen($ret), 'microblog');
 	}
-	
+
+	// noter l'envoi pour ne pas twitter 2 fois de suite la meme chose
+	if ($ret)
+		ecrire_meta('microblog_begaie', $begaie);
+
 	return $ret;
 }
 
