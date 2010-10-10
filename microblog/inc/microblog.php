@@ -126,3 +126,28 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	
 	return $ret;
 }
+
+
+/**
+ * Affichage du formulaire de microblog
+ *
+ * @param array $flux
+ * @return array
+ */
+function microblog_affiche_milieu($flux){
+	if ($exec = $flux['args']['exec']
+	  AND $exec='articles'
+		AND $id_article = $flux['args']['id_article']
+		AND $cfg = @unserialize($GLOBALS['meta']['microblog'])
+		AND ($cfg['evt_publierarticles'] OR $cfg['evt_proposerarticles'])){
+		$deplie = false;
+		$ids = 'formulaire_editer_microblog-article-' . $id_article;
+		$bouton = bouton_block_depliable(strtoupper(_T('microblog:titre_microblog')), $deplie, $ids);
+		$flux['data'] .= debut_cadre('e', chemin('microblog-24.gif','themes/spip/images/'),'',$bouton, '', '', true);
+		$flux['data'] .= recuperer_fond('prive/editer/microblog', array_merge($_GET, array('objet'=>'article','id_objet'=>$id_article)));
+		$flux['data'] .= fin_cadre();
+
+	}
+
+	return $flux;
+}

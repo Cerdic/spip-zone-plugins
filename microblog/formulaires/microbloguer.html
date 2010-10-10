@@ -29,12 +29,15 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 </div></div>]
 <script type="text/javascript">
+function status_length_update(me){
+	var maxlen = 140;
+	var l = jQuery(me).val();
+	l = maxlen-l.length;
+	jQuery(me).parent().find('label>em').html(l).removeClass(l>=0?'nok':'ok').addClass(l>=0?'ok':'nok');
+}
 function status_length_count(){
-	jQuery('#status').keyup(function(){
-		var maxlen = 140;
-		var l = maxlen-jQuery(this).val().length;
-		jQuery(this).parent().find('label>em').html(l).removeClass(l>=0?'nok':'ok').addClass(l>=0?'ok':'nok');
-	});
+	jQuery('#status').keyup(function(){status_length_update(this);});
+	status_length_update(jQuery('#microblog'));
 }
 jQuery('document').ready(status_length_count);
 onAjaxLoad(status_length_count);

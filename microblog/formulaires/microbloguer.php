@@ -27,11 +27,12 @@ function formulaires_microbloguer_charger_dist(){
  * Vérifie que la longueur du statut n'excède pas la longueur maximale
  */
 function formulaires_microbloguer_verifier_dist(){
+	include_spip('inc/charsets');
 	$erreurs = array();
 	if (!$status = _request('status')){
 		$erreurs['status'] = _T('info_obligatoire');
 	}
-	elseif (strlen($status)>140){
+	elseif (spip_strlen($status)>140){
 		$erreurs['status'] = _T('microblog:longueur_maxi_status');
 	}
 

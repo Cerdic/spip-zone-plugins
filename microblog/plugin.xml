@@ -2,7 +2,7 @@
 	<nom>Microblog</nom>
 	<auteur>Fil &#169; 2009-2010</auteur>
 	<licence>GNU/LGPL</licence>
-	<version>0.5.6</version>
+	<version>0.6.0</version>
 	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
 	<description>
@@ -33,6 +33,11 @@ Uses the library [twitteroauth->http://github.com/abraham/twitteroauth] of Abrah
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>genie/microblog.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>inc/microblog.php</inclure>
 	</pipeline>
 
 	<bouton id="microbloguer" parent="bando_publication">

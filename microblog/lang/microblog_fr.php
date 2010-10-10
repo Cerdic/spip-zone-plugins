@@ -8,6 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_envoyer' => 'Envoyer',
+	'bouton_envoyer_maintenant' => 'Envoyer maintenant',
+	'bouton_ne_pas_bloguer' => 'Ne rien envoyer',
 
 	// C
 	'choisir' => 'choisir',
@@ -32,8 +34,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_status' => 'Quoi de neuf ?',
 	'label_twitter_consumer_key' => 'Cl&eacute; cliente (consumer key) de l\'API Twitter',
 	'label_twitter_consumer_secret' => 'Cl&eacute; secr&ecirc;te (consumer secret) de l\'API Twitter',
+	'label_microblog'=> 'Modifier le message',
 	'label_username' => 'Nom d\'utilisateur',
 	'lien_documentation' => 'Cf. documentation',
+	'longueur_maxi_status' => 'Le message doit comporter au maximum 140 caract&egrave;res',
+
+	// M
+	'message_envoye'=> 'Message&nbsp;:',
 
 	// P
 	'presentation_spipo' => 'le site de la communaut&#233; SPIP',
