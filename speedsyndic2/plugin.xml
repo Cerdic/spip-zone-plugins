@@ -11,9 +11,7 @@
 	[en]This plugins allows for a faster syndication of certain selected feeds.
     </multi>
 	</description>
-	<lien>
-	Config: [Configuration->.?exec=cfg&amp;cfg=speedsyndic]
-	</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Speedsyndic-2</lien>
 	<necessite id="SPIP" version="[2.0;)" />
 	<necessite id='cfg' version='[1.10.0;]' />
 	
