@@ -1,0 +1,24 @@
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+<h2 class="titrem">Speedsyndic</h2>
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+<ul>
+<li class="fieldset">
+<h3 class="legend"><:speedsyndic:frequence:></h3>
+<ul>
+	<li>
+		<input type="text" name="frequence" class="text" [value="(#CONFIG{speedsyndic/frequence,600})"] />
+	</li>
+</ul>
+</li>
+<li class="fieldset">
+<h3 class="legend"><:speedsyndic:syndiclist:></h3>
+<select name="syndicatedlist[]" multiple="multiple">
+	<BOUCLE_syndic(SITES){par nom_site, url_site}{syndication=oui}>
+	<option value="#ID_SYNDIC" [(#ID_SYNDIC|in_array{#CONFIG{speedsyndic/syndicatedlist}}|oui) selected="selected"]>#NOM_SITE</option>]
+	</BOUCLE_syndic>
+</select>
+</li>
+</ul>
+<p class="boutons"><input name="_cfg_ok" type="submit" class="submit" value="<:ok:>" /></p>
+</div></form>
+</div>

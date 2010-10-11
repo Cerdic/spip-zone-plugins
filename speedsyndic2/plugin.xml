@@ -1,0 +1,25 @@
+<plugin>
+    <nom>speedsyndic2</nom>
+    <auteur>
+	Stephane, Piffeo, [Wilco->http://www.ituc-csi.org]
+	</auteur>
+	<version>0.2</version>
+    <etat>test</etat>
+    <description>
+	<multi>
+	[fr]Ce plugin permet d'avoir une syndication automatique en temps r&#233;el de certains sites syndiqu&#233;s choisis. version compatible spip 2
+	[en]This plugins allows for a faster syndication of certain selected feeds.
+    </multi>
+	</description>
+	<lien>
+	Config: [Configuration->.?exec=cfg&amp;cfg=speedsyndic]
+	</lien>
+	<necessite id="SPIP" version="[2.0;)" />
+	<necessite id='cfg' version='[1.10.0;]' />
+	
+    <prefix>speedsyndic</prefix>
+    <pipeline>
+            <nom>taches_generales_cron</nom>
+            <inclure>inc/speedsyndic.php</inclure>
+    </pipeline>
+</plugin>
