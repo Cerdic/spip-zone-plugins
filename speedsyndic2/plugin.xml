@@ -20,4 +20,5 @@
             <nom>taches_generales_cron</nom>
             <inclure>inc/speedsyndic.php</inclure>
     </pipeline>
+	<categorie>communication</categorie>
 </plugin>
