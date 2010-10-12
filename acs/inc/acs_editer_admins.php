@@ -98,14 +98,12 @@ function editer_admins_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aute
 
 //
 // Ajouter un admin
-//
-	$res = '';
-	if ($flag) {
-		$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
-		. $futurs
-		."</div>\n"
-		. $res;
-	}
+
+	if ($flag)
+		$res = $futurs;
+	else
+		$res = '';
+
   $bouton = acs_bouton_bloc_depliable($titre_boite, $flag, "admins$type$id");
   if ($id > 0){
     $formpages = '<form name="acs_pages_'.$id.'" action="?exec=acs" method="post"><input type="hidden" name="onglet" value="adm"><input type="hidden" name="changer_pages" value="oui"><input type="hidden" name="group" value="'.$id.'"><table style="width:100%;" cellpadding="2px"><tr style="vertical-align: top;"><td style="width: 20%; text-align:'.$GLOBALS['spip_lang_right'].'">'._T('acs:locked_pages').' : </td><td style="width:75%"> <input name="pages" type="text" class="formc" value="'.acs_pages($id).'" style="width:100%" /> </td><td style="text-align:'.$GLOBALS['spip_lang_right'].'"> <input type="submit"  name="'._T('bouton_valider').
@@ -253,7 +251,7 @@ function ajouter_admins_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_a
 	    $clic = _T('bouton_ajouter');
 	}
 
-	return ajax_action_post('acs_editer_admins', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='valider_ajouter_admin_$id'", "", $arg_ajax);
+	return ajax_action_post('acs_editer_admins', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, 'class="fondo visible_au_chargement" id="valider_ajouter_admin_'.$id.'" style="float:right"', "", $arg_ajax);
 }
 
 if (!is_callable('afficher_tranches_requete')) {
@@ -427,7 +425,8 @@ function selecteur_admin_ajax($type, $id, $js, $text)
 {
   include_spip('inc/chercher_rubrique');
   $url = generer_url_ecrire('acs_selectionner_admin', "admid=$id");
-
+  acs_log("inc/acs_editer_admins selecteur_admin_ajax($type, $id, $js, $text)");
+  
   // doc spip: construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
   // construit un bloc comportant une icone clicable avec image animee a cote
   // pour charger en Ajax du code a mettre sous cette icone.

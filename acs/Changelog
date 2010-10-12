@@ -16,6 +16,7 @@ ACS version 0.7
  - amélioration du drag/drop des composants dans la partie privee
  - balises #ACS_VERSION et #ACS_RELEASE, permettant de faire des composants multi-versions
  - Nouveau type de variable : key (mot-clef)
+ - remise a niveau des selecteurs d'admins
  
 Modele Cat pour ACS vesion 0.7 :
  - transformation de TOUTES les pages du modèle (squelette) "cat" en pages constituées uniquement de modules (en cours)
