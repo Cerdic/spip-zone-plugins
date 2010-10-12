@@ -8,10 +8,10 @@
 
 /**
  * Retourne un tableau des groupes d'admins
- * (acsCadenasse est structurée pour le controle d'accès)
+ * (ACS_CADENASSE est structurée pour le controle d'accès)
  */
 function acs_groups() {
-  $groups = unserialize($GLOBALS['meta']['acsGroups']);
+  $groups = unserialize($GLOBALS['meta']['ACS_GROUPS']);
   if (is_array($groups))
     return $groups;
   else
@@ -30,7 +30,7 @@ function acs_grid($id) {
  * Retourne les membres du groupe
  */
 function acs_members($grid) {
-  $groups = unserialize($GLOBALS['meta']['acsGroups']);
+  $groups = unserialize($GLOBALS['meta']['ACS_GROUPS']);
   if (is_array($groups) && isset($groups[$grid]))
     return array_keys($groups[$grid]);
   else
@@ -55,11 +55,11 @@ function acs_groups_update($newgroups) {
       if (!isset($acsGroups[$group]))
         $acsGroups[$group] = array(1=>$group);
     }
-    ecrire_meta('acsGroups', serialize($acsGroups));
+    ecrire_meta('ACS_GROUPS', serialize($acsGroups));
   }
   else {
-    ecrire_meta('acsGroups', '');
-    ecrire_meta('acsCadenasse', '');
+    ecrire_meta('ACS_GROUPS', '');
+    ecrire_meta('ACS_CADENASSE', '');
   }
   ecrire_metas();
   acs_log("acs_groups_update : ".$newgroups);
@@ -72,7 +72,7 @@ function acs_group_update_pages($grid, $pages) {
   $pages_array = explode(',', $pages);
   foreach($pages_array as $key=>$page)
     $pages_array[$key] = trim($page);
-  $acsPages = unserialize($GLOBALS['meta']['acsCadenasse']);
+  $acsPages = unserialize($GLOBALS['meta']['ACS_CADENASSE']);
   if (is_array($acsPages)) {
     foreach ($acsPages as $page=>$admins) { // remove old or empty pages from group
       if ((!count($acsPages[$page])) ||
@@ -94,7 +94,7 @@ function acs_group_update_pages($grid, $pages) {
       }
     }
   }
-  ecrire_meta('acsCadenasse', serialize($acsPages));
+  ecrire_meta('ACS_CADENASSE', serialize($acsPages));
   ecrire_metas();
   acs_log("acs_group_update_pages ($grid) : ".$pages);
 }
@@ -104,27 +104,27 @@ function acs_group_add_admin($id, $id_admin) {
   $grid = acs_grid($id);
   if (!in_array($id_admin, array_keys($groups[$grid]))) {
     $groups[$grid][$id_admin] = $grid;
-    $pages = unserialize($GLOBALS['meta']['acsCadenasse']);
+    $pages = unserialize($GLOBALS['meta']['ACS_CADENASSE']);
     foreach ($pages as $page => $admins) {
       if (in_array($page, acs_group($grid, 'pages')))
         $pages[$page] = $groups[$grid];
     }
-    ecrire_meta('acsGroups', serialize($groups));
-    ecrire_meta('acsCadenasse', serialize($pages));
+    ecrire_meta('ACS_GROUPS', serialize($groups));
+    ecrire_meta('ACS_CADENASSE', serialize($pages));
     ecrire_metas();
     acs_log("acs_group_add_admin (nouvel admin dans le groupe $id ".$grid."): ".$GLOBALS['auteur_session']['id_auteur']."+$id_admin");
   }
 }
 
 function acs_group_del_admin($id, $id_admin) {
-  $acsGroups = unserialize($GLOBALS['meta']['acsGroups']);
+  $acsGroups = unserialize($GLOBALS['meta']['ACS_GROUPS']);
   if (is_array($acsGroups)) {
     $grid = acs_grid($id);
     $admins = array_keys($acsGroups[$grid]);
     if (count($admins)) {
       if (in_array($id_admin, $admins)) {
         unset($acsGroups[$grid][$id_admin]);
-        $pages = unserialize($GLOBALS['meta']['acsCadenasse']);
+        $pages = unserialize($GLOBALS['meta']['ACS_CADENASSE']);
         foreach ($pages as $page => $admins) {
           if (in_array($page, acs_group($grid, 'pages')))
             if (count($acsGroups[$grid]) > 0)
@@ -137,8 +137,8 @@ function acs_group_del_admin($id, $id_admin) {
     else {
       unset($acsGroups[$grid]);
     }
-    ecrire_meta('acsGroups', serialize($acsGroups));
-    ecrire_meta('acsCadenasse', serialize($pages));
+    ecrire_meta('ACS_GROUPS', serialize($acsGroups));
+    ecrire_meta('ACS_CADENASSE', serialize($pages));
     ecrire_metas();
     acs_log("acs_group_del_admin (efface admin $id_admin du groupe $id $grid): ".$GLOBALS['auteur_session']['id_auteur']."-$id_admin");
   }
@@ -147,7 +147,7 @@ function acs_group_del_admin($id, $id_admin) {
 function acs_groups_from_acsCadenasse() {
   $groups = array();
 
-  $acsCadenasse = unserialize($GLOBALS['meta']['acsCadenasse']);
+  $acsCadenasse = unserialize($GLOBALS['meta']['ACS_CADENASSE']);
   if (!is_array($acsCadenasse))
     return $groups;
 
@@ -169,7 +169,7 @@ function acs_groups_from_acsCadenasse() {
 
 /**
  * Retourne les pages gérées par le groupe $grid,
- * ou les membres du groupe, à partir de la méta acsCadenasse
+ * ou les membres du groupe, à partir de la méta ACS_CADENASSE
  */
 
 function acs_group($grid, $pm) {

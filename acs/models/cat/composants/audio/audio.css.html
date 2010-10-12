@@ -22,7 +22,7 @@
   text-align: center;
   line-height: #VAR{acsFondNavSize,0.65em};
   height: #VAR{acsFondNavSize,0.65em};
-  color: #VAR{acsAudioTrackStatus,#00afdf};
+  color: #VAR{acsAudioTrackStatus,#00afdf};  
 }
 
 .mp3player .track_info {
@@ -127,12 +127,15 @@
   [border-width: (#VAR{acsAudioBord/Width});]
   [border-style: (#VAR{acsAudioBord/Style});]
   [border-color: (#VAR{acsAudioBord/Color});]
+  [(#MODELE{c_css_shadow}{c=Audio})]
 }
 .playlist .pagination {
   text-align: center;
   [background: (#VAR{acsAudioTitreFond});]
   [border-top: 1px solid (#VAR{acsRubnavSep});]
   margin : 0;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .playlist .bloc-title {
   text-align : center;

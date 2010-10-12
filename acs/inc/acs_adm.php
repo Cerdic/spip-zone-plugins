@@ -47,11 +47,11 @@ function acs_adm() {
 echo "<br>_______________________________________________\$_POST<br>\n";
 print_r($_POST);
 
-echo "<br>_______________________________________________\$GLOBALS['meta']['acsGroups']<br>\n";
-print_r(unserialize($GLOBALS['meta']['acsGroups']));
+echo "<br>_______________________________________________\$GLOBALS['meta']['ACS_GROUPS']<br>\n";
+print_r(unserialize($GLOBALS['meta']['ACS_GROUPS']));
 
-echo "<br>_______________________________________________\$GLOBALS['meta']['acsCadenasse']<br>\n";
-print_r(unserialize($GLOBALS['meta']['acsCadenasse']));
+echo "<br>_______________________________________________\$GLOBALS['meta']['ACS_CADENASSE']<br>\n";
+print_r(unserialize($GLOBALS['meta']['ACS_CADENASSE']));
 */
 
 

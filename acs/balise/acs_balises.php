@@ -112,6 +112,7 @@ function composants_head($type) {
     // composants_liste() est statique,  mise en cache,
     // et tient compte de l'override éventuel
     $done = array();
+    $jslibs = array();
     foreach (composants_liste() as $class=>$cp) {
     	foreach($cp['instances'] as $nic=>$c) {
     		if ($c['on'] != 'oui') continue;
@@ -136,9 +137,31 @@ function composants_head($type) {
        			$r .= recuperer_fond($filepath, array('nic' => $nic))."\r";
         }
       }
+      // on fait la liste des librairies javascripts a inclure (declarees dans chaque composant, dans moncomposant_balises.php,
+      // sous la forme d'une fonction moncomposant_jslib() qui retourne un tableau des librairies js a inclure pour ce composant)
+      if(strtolower($type) == 'javascript') {
+        if (is_callable($class.'_jslib')) {
+        	$c_jslibs = $class.'_jslib';
+        	foreach($c_jslibs() as $lib) {
+        		$jslibs[$lib] = true;
+        	}
+        }
+      }
+    }
+    // on recupere les librairies js requises pour tous les composants, une seule fois chacune
+    foreach($jslibs as $jslib => $ok) {
+      $file = find_in_path($jslib.'.html');
+      if (!$file) {
+        $file = find_in_path($jslib);
+        if ($file)
+          $libs .= file_get_contents($file)."\r";
+      }
+      else {
+        $libs .= recuperer_fond($jslib)."\r";
+      }
     }
   }
-  return $r;
+  return $libs.$r;
 }
 /* inutilisee pour l'instant : à elargir pour usage avec les groupes acs voire pour droits sur le public
 function balise_ACS_AUTORISE($p) {

@@ -5,11 +5,7 @@
   [border-style: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Style'}});]
   [border-color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});]
   [-moz-border-radius: (#VAR{#EVAL{'acsEncart'.'#NIC'.'BordRond'}});][
-  box-shadow: #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowBlur'},5}px (#VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}});
-  -webkit-box-shadow: #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowBlur'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}};
-  -moz-box-shadow: #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowBlur'},5}px #VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}};
-  filter: progid:DXImageTransform.Microsoft.dropShadow(color=#VAR{#EVAL{'acsEncart'.'#NIC'.'Shadow'}}, offX=#VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'}}, offY=#VAR{#EVAL{'acsEncart'.'#NIC'.'ShadowSize'}}, positive=true);]
-  
+  (#MODELE{c_css_shadow}{c=Encart}{nic=#NIC})]
 }
 .cEncart#NIC .entete {
   [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}})[ url("[(#ACS_CHEMIN{trame/})](#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}})") repeat top left];]

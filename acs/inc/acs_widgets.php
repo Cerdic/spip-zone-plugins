@@ -10,7 +10,7 @@
  * Affiche une liste contextuelle des composants - Onglet composants
  * Show a contextual widget list - Used by pages AND composants
  */
-function liste_widgets() {
+function liste_widgets($visible = true) {
 	$composants = composants_liste();
 	
 	// On renvoie directement une liste vide si aucun composant n'est trouvé
@@ -21,11 +21,13 @@ function liste_widgets() {
   	$vp = 'acs'.ucfirst($class);
   	foreach($cp['instances'] as $nic=>$c) {
   		$vpi = $vp.($nic ? $nic : '');
+  		/*
   		// Si le composant possède une propriete orientation ET une icone correspondante on oriente l'icone 
   		$wicon = (isset($GLOBALS['meta'][$vpi.'Orientation']) && $GLOBALS['meta'][$vpi.'Orientation'] == 'horizontal') ? 'horizontal' : 'icon';
       $wicon = find_in_path('composants/'.$class.'/images/'.$class.'_'.$wicon.'.gif');
       if (!file_exists($wicon))
         $wicon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
+*/
       // Si le composant possede une variable Nom on l'affiche en nom et le nom du composant en info-bulle
       $v = $vpi.'Nom';
       if ($GLOBALS['meta'][$v]) {
@@ -36,8 +38,8 @@ function liste_widgets() {
       	$nom = ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '');
       	$title = _T('composant');
       }      
-  		$r .= '<div id="'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
-        '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'"><img src="'.$wicon.'" /></a>'.
+  		$r .= '<div id="widget_'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
+        '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'">'.widget_icon($class, $nic).'</a>'.
         '</td><td title="'.$title.'" style="width: 95%;"><div><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'.$title.'">'.$nom.'</a></div></td></tr></table>'.
       '</div>';
   		$nbci++;
@@ -45,7 +47,7 @@ function liste_widgets() {
   	$nbc++;
   }
   $r .= '</div>';
-  return acs_box($nbci.' '.(($nbci==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))).' ('.$nbc.')', $r, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
+  return acs_box($nbci.' '.(($nbci==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))).' ('.$nbc.')', $r, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants'.($visible ? '' : '_hidden').'');
 }
 
 function get_widget_class($over, $on, $style) {
@@ -55,5 +57,15 @@ function get_widget_class($over, $on, $style) {
   if (!($on == 'oui'))
 		$ov .= ' '.$style.'_unused';
   return $ov;
+}
+
+function widget_icon($class, $nic, $size=24) {
+	$o = 'acs'.ucfirst($class).($nic ? $nic : '').'Orientation';
+	// Si le composant possède une propriete orientation ET une icone correspondante on oriente l'icone 
+	$wicon = (isset($GLOBALS['meta'][$o]) && $GLOBALS['meta'][$o] == 'horizontal') ? 'horizontal' : 'icon';
+  $wicon = find_in_path('composants/'.$class.'/images/'.$class.'_'.$wicon.'.gif');
+  if (!file_exists($wicon))
+    $wicon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
+	return '<img src="'.$wicon.'" height="'.$size.'px" width="'.$size.'px" />';
 }
 ?>

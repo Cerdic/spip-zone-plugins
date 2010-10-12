@@ -21,7 +21,7 @@ function ctlImg($composant, $nic, $nom, $image, $param, $wid) {
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
   if ($param['label'] != 'non')
     $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
-  $r .= '<td><input type="text" name="'.$var.'_'.$wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml" /></td>';
+  $r .= '<td><input type="text" id="'.$var.'_'.$wid.'" name="'.$var.'_'.$wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml" /></td>';
   $r .= '<td>&nbsp;</td><td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'], document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'].value, \''.$path.'\', \''._ACS_DIR_SITE_ROOT.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
   return $r;
 }

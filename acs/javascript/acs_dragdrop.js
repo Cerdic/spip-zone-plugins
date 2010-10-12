@@ -33,8 +33,9 @@
 		drop: function(event) {
 			dropid = "#select_" + event.target.id;
 			var oldval = $(dropid).val();
-			$(dropid).val(dragid);
-			if ($(dropid).val() == dragid) {
+			var val_dragid = dragid.substring(7);
+			$(dropid).val(val_dragid);
+			if ($(dropid).val() == val_dragid) {
 				if ($("#" + dragid).parent().is(".ctlWidget")) {
 					var olddropid = "#select_" + $("#" + dragid).parent().attr("id");
 					$(olddropid).val("");

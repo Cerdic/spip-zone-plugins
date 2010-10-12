@@ -44,7 +44,7 @@ function lecture_composants_variables() {
 			$r[$composant]['over'] = $tag['over'];
 
 		// Lecture des parametres : todo
-		
+
 		// Lecture des variables
     if (is_array($c['variable'])) {
       foreach($c['variable'] as $k=>$var) {

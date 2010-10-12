@@ -1,0 +1,25 @@
+[(#REM)
+                ACS
+           (Plugin Spip)
+      http://acs.geomaticien.org
+
+  Copyright Daniel FAIVRE, 2007-2010
+  Copyleft: licence GPL - Cf. LICENCES.txt
+
+Draw widget select controls on start and refresh (they works even without javascript !)
+
+]function draw_ctlWidgets() {
+  $(".ctlWidget").each(
+    function(i,cw) {
+      var selectid = "#select_" + cw.id;
+      $(selectid).css("display", "none");
+      //if ($(selectid).get(0)) $(selectid).get(0).style.visibility = "hidden"; // for IE damned browser 
+      if ($(selectid).val() != '') { 
+        var dragid = "#widget_" + $(selectid).val();
+        $("#widgets").append($(this).find(".widget"));
+        $(this).find(".widget").remove();
+        $(this).append($(dragid));
+      }
+    }
+  );
+}

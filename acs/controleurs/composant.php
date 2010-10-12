@@ -12,6 +12,7 @@ function controleurs_composant_dist($regs) {
   include_spip('public/assembler');
   include_spip('inc/acs_presentation');
   include_spip('lib/composant/classComposantPrive');
+	include_spip('inc/acs_widgets');
 
   list(,$crayon,$type,$class,$id) = $regs;
   
@@ -37,7 +38,7 @@ function controleurs_composant_dist($regs) {
     '<div style="position: relative; opacity: 1;">'.
     '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.'&amp;nic='.$id.'"><img src="'.$icon.'" alt="'.$class.'" title="'._T('crayons:editer').' '._T($champ).'"  class="bouton_edit_composant" /></a>'.
   	'</div>'.
-  	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:'.$left.'px; z-index: 99999999">'.
+  	'<div class="edit_composant" style="top:0; left:'.$left.'px">'.
     acs_box(
       $composant->T('nom').($id==0 ? '' : ' '.$id),
       '<form id="acs" name="acs" class="formulaire_crayon" action="?action=crayons_composant_store" method="post">'.
@@ -49,11 +50,16 @@ function controleurs_composant_dist($regs) {
         crayons_boutons().
       '</form>',
       $composant->icon,
-      'editeur_composant'
+      'editeur_composant',
+      (($composant->nb_widgets > 0) ? '<a class="btn_show_widgets" href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.'&amp;nic='.$id.'"><img src="'. _DIR_PLUGIN_ACS.'/images/composant-24.gif" alt="widgets" height="16px" width="16px" style="float:right" /></a>' : '')
     ).
     '</div>'.
 	'</div>'.
-'<script language="javascript">	init_controleur_composant();</script>';
+'<script language="javascript">$(document).ready(
+	function() {
+  	init_controleur_composant();
+	}
+);</script>';
   $status = NULL;
 
 	return array($html, $status);

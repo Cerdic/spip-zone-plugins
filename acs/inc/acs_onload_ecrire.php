@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -12,14 +12,14 @@
  */
 
 // Contrôle l'accès aux pages de configuration, dont celles déclarées dans $GLOBALS['ACS_ACCES'] (acs_options)
-// et celles déclarées dans $GLOBALS['meta']['acsCadenasse'] (inc/acs_adm)
+// et celles déclarées dans $GLOBALS['meta']['ACS_CADENASSE'] (inc/acs_adm)
 if (_request('exec'))
   acs_acces(_request('exec'));
 
   /**
    * Contrôle l'accès à la page $page
    * Les pages à contrôler sont déclarées dans $GLOBALS['ACS_ACCES'] (acs_options)
-   * et dans $GLOBALS['meta']['acsCadenasse'] (inc/acs_adm)
+   * et dans $GLOBALS['meta']['ACS_CADENASSE'] (inc/acs_adm)
    *
    * @param string $page
    */
@@ -39,15 +39,15 @@ function acs_acces($page) {
     'admin_vider',
     'admin_plugin');
   
-  // Les pages définies dans options, administrés par les mêmes admins qu'ACS
+  // Les pages administrés par les mêmes admins qu'ACS
   if (isset($GLOBALS['ACS_ACCES']) && is_array($GLOBALS['ACS_ACCES']) && count($GLOBALS['ACS_ACCES']))
     $enfer = array_merge($GLOBALS['ACS_ACCES'], $enfer);
   $GLOBALS['ACS_ENFER'] = $enfer; // On garde cette définition pour affichage
 
   if (isset($GLOBALS['meta']['ACS_ADMINS'])) { // Pas d'action avant initialisation d'ACS !
     // Les pages à accès contrôlé par ACS, avec choix des admins
-    if (isset($GLOBALS['meta']['acsCadenasse']) && $GLOBALS['meta']['acsCadenasse']) {
-      $acsCadenasse = unserialize($GLOBALS['meta']['acsCadenasse']);
+    if (isset($GLOBALS['meta']['ACS_CADENASSE']) && $GLOBALS['meta']['ACS_CADENASSE']) {
+      $acsCadenasse = unserialize($GLOBALS['meta']['ACS_CADENASSE']);
       if (is_array($acsCadenasse) && isset($acsCadenasse[$page])) {
         if (!in_array($GLOBALS['auteur_session']['id_auteur'], array_keys($acsCadenasse[$page])))
           acs_exit();

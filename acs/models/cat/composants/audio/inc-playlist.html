@@ -2,17 +2,15 @@
 [(#REM) affiche une playliste ]
 <B_doc>
 #ANCRE_PAGINATION
-<div class="playlist bsize">
-  <div class="bloc-title">
+<div class="playlist">
+  <div class="bloc-title bsize">
     <a style="align: left" href="spip.php?page=wrap&amp;c=composants/audio/inc-playlist" target="_playlist" title="Ouvre la playlist dans une nouvelle fenêtre"><:acs:audio_audio:></a>
   </div>
-  [<p class="pagination">(#PAGINATION)</p>]
+  [<p class="pagination nsize">(#PAGINATION)</p>]
   <INCLURE{fond=composants/audio/player}{autostart=#AUTOSTART}{hp=#GET{hp}}{lp=#GET{lp}}{mmfile=#URL_DOCUMENT}>
-  <ul class="playliste">
+  <ul class="playliste bsize">
   <BOUCLE_doc (DOCUMENTS) {extension==mp3}{!par date}{pagination #VAR{acsAudioNbMp3, 20}}>[(#EVAL{$NB++}|?{'',''})]
-    <li class="play_ pl_l#EVAL{$NB}">
-      [(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})<small><a href="#URL_DOCUMENT" title="<:acs:audio_download:>" class="podcast">MP3</a></small>]<a href="#FICHIER" rel="enclosure" class="mp3" title="[(#DESCRIPTIF|sinon{#FICHIER|joli_titre}|couper{100})]">[(#TITRE|sinon{#ID_DOCUMENT}|couper{28})]</a>
-      <BOUCLE_ART (ARTICLES){id_document}><small><i><a href="#URL_ARTICLE" class="article" title="<:acs:audio_lire_article:>">(<:acs:audio_article:>)</a></i></small></BOUCLE_ART> <span class="track_status nsize pl_dl#EVAL{$NB}" ></span></li>
+    <li class="play_ pl_l#EVAL{$NB}">[(#VAR{acsAudioDownload,oui}|=={oui}|?{' '})<a href="#URL_DOCUMENT" title="<:acs:audio_download:>" class="podcast nsize">MP3</a>&nbsp;]<a href="#FICHIER" rel="enclosure" class="mp3" title="[(#DESCRIPTIF|sinon{#FICHIER|joli_titre}|couper{100})]">[(#TITRE|sinon{#ID_DOCUMENT}|couper{28})]</a><BOUCLE_ART (ARTICLES){id_document}><i class="nsize">&nbsp;<a href="#URL_ARTICLE" class="article" title="<:acs:audio_lire_article:>">(<:acs:audio_article:>)</a></i></BOUCLE_ART><span class="track_status nsize pl_dl#EVAL{$NB}" ></span></li>
   </BOUCLE_doc>
   </ul>
 </div>

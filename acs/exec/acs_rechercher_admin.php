@@ -26,9 +26,11 @@ function exec_acs_rechercher_admin_dist()
 			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
 		$where= ("(nom LIKE " . join(" AND nom LIKE ", $where) . ")");
 	}
-
+	
+	$admid = _request('admid');
+	
 	$q = spip_query("SELECT * FROM spip_auteurs WHERE $where AND statut='0minirezo' ORDER BY nom");
 	include_spip('inc/acs_selectionner_admin');
-	ajax_retour(selectionner_admin_boucle($q, $idom));
+	ajax_retour(selectionner_admin_boucle($q, $idom, $admid));
 }
 ?>

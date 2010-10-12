@@ -54,7 +54,7 @@ function selectionner_admin_boucle($query, $idom, $admid)
 		// autour de la valeur pertinente pour que aff_selection
 		// fonctionne (faudrait concentrer tout ca).
 
-		$res .= "<a class='pashighlight'"
+		$res .= "<a class='highlight off'"
 		. "\nonclick=\"changerhighlight(this);"
 		. "findObj_forcer('nouv_admin_$admid').value="
 		. $id
@@ -66,7 +66,7 @@ function selectionner_admin_boucle($query, $idom, $admid)
 		. "'none'; return false"
 		. "\"><b>"
 		. typo(extraire_multi($row["nom"]))
-		. "</b></a>";
+		. "</b></a> ";
 	}
 
 	return $res;

@@ -11,14 +11,36 @@
   Active les controleurs de composants sur la partie publique du site et gere les drag/drop de composants
 
 ]#HTTP_HEADER{'Content-Type: text/javascript'}
+[(#INCLURE{fond=javascript/acs_lib.js})]
+
 
 function init_controleur_composant() {
+[(#ENV{jquery_version}|=={1}|?{
+   [(#INCLURE{javascript/acs_dragdrop.js})],
+   [(#INCLURE{javascript/acs_dragdrop_for_older_jquery.js})]
+})]
   jQuery(".edit_composant").each(
   	function(i, composant) {
-    	jQuery(this).draggable({zIndex: 99999000, handle: ".acs_box_titre"});
-    	jQuery(this).find(".acs_box_titre").css("cursor", "move");
+    	jQuery(this)
+        .draggable({handle: ".acs_box_titre"})
+        .find(".acs_box_titre").css("cursor", "move");
   	}
   );
+  jQuery(".btn_show_widgets, .edit_composant .ctlWidget").each(
+    function(i, btn) {
+      btn.onclick = function(e) {
+        e.preventDefault();
+        jQuery(btn).parents().find(".acs_box_composants_hidden:first")
+          .css("top", "-15px")
+          .css("left", "-203px")
+          .css("z-index", 99999002)
+          .css("display", ((jQuery(".acs_box_composants_hidden:eq(0)").css("display") == "none") ? "block" : "none"));
+        return false;
+      };
+    }
+  );
+  
+
   jQuery(".type_pinceau").each(
   	function(i, composant) {
     	jQuery(this).draggable({
@@ -39,8 +61,8 @@ function init_controleur_composant() {
 		activeClass: "ctlWidget_droppable_active",
 		hoverClass: "ctlWidget_droppable_over",
 		over: function(e, cc) {
-      var dropid = cQuery(this).attr("id");
-      var current = cQuery(this).find(".type_pinceau");
+      var dropid = jQuery(this).attr("id");
+      var current = jQuery(this).find(".type_pinceau");
       if (!current) return false;
       if (!current.attr("class")) return false;
       var current_i = current.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
@@ -53,10 +75,10 @@ function init_controleur_composant() {
       window.status = dropid + ' = ' + current_c + '-' + current_nic + ' => ' + new_c + '-' + new_nic + ' (' + from.attr("id") +')';
 		},
     drop: function(e, cc) {
-      cQuery(".cadre-composant").removeClass("ctlWidget_droppable_over");
-      cQuery(this).addClass("ctlWidget_droppable_drop");
-      var dropid = cQuery(this).attr("id");
-      var current = cQuery(this).find(".type_pinceau");
+      jQuery(".cadre-composant").removeClass("ctlWidget_droppable_over");
+      jQuery(this).addClass("ctlWidget_droppable_drop");
+      var dropid = jQuery(this).attr("id");
+      var current = jQuery(this).find(".type_pinceau");
       var current_i = current.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
       var current_c = current_i[1];
       var current_nic = current_i[2];
@@ -81,33 +103,34 @@ function init_controleur_composant() {
       var cFrom_i = cFrom.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
       var cFrom_c = cFrom_i[1];
       var cFrom_nic = cFrom_i[2];
-      var ccf = cFrom.find(".edit_composant");
-      if (!cQuery.isPlainObject(ccf)) {
+      [(#REM) on cherche si le controleur du pinceau du composant est déjà ouvert
+      ]var ccf = jQuery("#composant-" + cFrom_c + "-" + cFrom_nic + " .edit_composant");
+      if (ccf.length == 0) {
         cQuery(cFrom).opencrayon(e);
       }
       setSelectValueThreaded(from.attr("id"), current_value, cc.draggable.parent(), current, '#composant-' + cFrom_c + '-' + cFrom_nic);
 
       [(#REM) On recupere ou on ouvre le controleur du composant "cTo", qui contient le composant avec la variable de type widget "dropid"
-      ]var cTo = cQuery(this).parents('.crayon:eq(0)');
+      ]var cTo = jQuery(this).parents('.crayon:eq(0)');
       [(#REM)  Si le parent n'a pas de pinceau, prendre le grand-parent 
       ]if (!cTo.hasClass("type_pinceau")) {
-        cTo = cQuery(this).parent().parents('.crayon:eq(0)');
+        cTo = jQuery(this).parent().parents('.crayon:eq(0)');
         [(#REM) Si le grand-parent non plus n'a pas de pinceau, echec 
         ]if (!cTo.hasClass("type_pinceau")) return false;
       }
       var cTo_i = cTo.attr("class").match(/\b\w+-(\w+)-(\d+)\b/);
       var cTo_c = cTo_i[1];
       var cTo_nic = cTo_i[2];
-      var cct = cTo.find(".edit_composant");
-      if (!cQuery.isPlainObject(cct)) {
+      var cct = jQuery("#composant-" + cTo_c + "-" + cTo_nic + " .edit_composant");
+      if ((cTo_i.toString() != cFrom_i.toString()) && (cct.length == 0)) {
         cQuery(cTo).opencrayon(e);
       }
-      setSelectValueThreaded(dropid, new_value, cQuery(this), cc.draggable, '#composant-' + cTo_c + '-' + cTo_nic);      
+      setSelectValueThreaded(dropid, new_value, jQuery(this), cc.draggable, '#composant-' + cTo_c + '-' + cTo_nic);
       
       window.status = dropid + ' = ' + current_value + ' => ' + new_value + ' (' + from.attr("id") +')';
-      cQuery(this).removeClass("ctlWidget_droppable_drop");
     }
 	});
+  draw_ctlWidgets();
 }
 
 function ucfirst(txt) {
@@ -120,9 +143,10 @@ function ucfirst(txt) {
 car le chargement en ajax des controleurs de composants est asynchrone.
 
 ]var todo = new Array();
+var ccUpdateDelay = 50; // ms
 
-function setSelectValueThreaded(acsvarname, value, parent, c, crayon_c) {
-  todo[acsvarname] = new Array(value, parent, c, crayon_c);
+function setSelectValueThreaded(acsvarname, value, widget_cible, c, crayon_composant) {
+  todo[acsvarname] = new Array(value, widget_cible, c, crayon_composant);
   todo.length++;
   setSelectValueDoThreads();
 }
@@ -131,22 +155,31 @@ function setSelectValueDoThreads() {
   if (todo.length == 0) return;
   var try_again = false;
   for(var avar in todo) {
-    if (setSelectValue(avar, todo[avar][0])) {
-      cQuery(todo[avar][3]).css('opacity', '0.1');
-      todo[avar][1].append(todo[avar][2]);
-      todo[avar][2].css('visibility', 'visible').css('opacity', '1');
+    var value = todo[avar][0]; // nouvelle valeur
+    if (setSelectValue(avar, value)) {
+      var widget_cible = todo[avar][1];
+      var c = todo[avar][2];
+      var crayon_composant = todo[avar][3];
+      jQuery(crayon_composant).css('visibility', 'visible').css('opacity', '0.1');
+      widget_cible.append(c);
+      [(#REM) widget_cible.parent() est la vue du composant puisque le controleur du composant est ouvert,
+        et son parent est donc le crayon du composant qui contient ce controle de type widget
+
+      ]widget_cible.parent().parent().css('visibility', 'visible').css('opacity', '1');
+      widget_cible.removeClass("ctlWidget_droppable_drop");
       delete todo[avar];
+      draw_ctlWidgets();
       todo.length--;
     }
     else
       try_again = true;
   }
   if (try_again)
-    window.setTimeout(setSelectValueDoThreads, 100);
+    window.setTimeout(setSelectValueDoThreads, ccUpdateDelay);
 }
 
 function setSelectValue(acsvarname, value) {
-  var select =  cQuery("select[id^='select_" + acsvarname + "_']");
+  var select =  jQuery("select[id^='select_" + acsvarname + "_']");
   select.val(value);
   if (select.val() == value)
     return true;

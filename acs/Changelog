@@ -1,6 +1,8 @@
 Suivi des principales révisions - Version ACS actuelle : 0.7.2
 
 ACS version 0.7
+ - amelioration du schema de page
+ - gestion des librairies javascript requises par les composants : chaque composant déclare les librairies dont il a besoin et celles-ci ne sont incluses qu'une fois.
  - changement des chemins d'images installées par les composants : img->IMG
  - les composants instanciables peuvent être nommés
  - affichage du nom du composant en info-bulle sur le schéma de la page
@@ -21,7 +23,7 @@ Modele Cat pour ACS vesion 0.7 :
  - composants contextuels : les composants breves, forums, keys,rubnav et syndic affichent des resultats contextuels selon l page où ils sont utilisés. Par exemple, sur la page de resultats d'une recherche, ils donnent le résultat de la recherche.
  - modele doc_player : reactualisation
  - Mise à jour de TOUS les composants (en cours)
- - Audio : toilettage du composant / nouveau modèle. drag/drop sur le slider
+ - Audio : toilettage du composant / nouveau modèle. drag/drop sur le slider, gestion automatisee de l'inclusion de la librairie jQuery drag/drop pour gerer le slider du lecteur audio
  - Cadre : remplace le composant Module
  - Edito : nouvelles variables - boutons de navigation precedent / suivant
  - Fond : définition de classes par défaut héritées par tous les composants - personnalisation des styles spip natifs -  suppression de l'appel à spip_style.css, remplacé par la rdéfinition, personnalisable, de ces styles dans la css du composant Fond (à noter : meme située AVANT dans le header, la css spip_style.css pouvait prendre le pas sur la css habillage.css.html définie APRES - bug vu avec Firefox 3.6.10 et Konqueror 3.5.10)

@@ -23,11 +23,15 @@ function acs_insert_head($flux) {
   if (acs_autorise()) {
   	$r .= '<link rel="stylesheet" href="'.direction_css(generer_url_public('acs_style_prive.css')).'" type="text/css" media="projection, screen, tv" />';
   	$js_dragdrop = find_in_path('javascript/dragdrop_interface.js');
+  	$jquery_version = 0;
   	// A partir de spip 2.1, l'interface dragdrop de JQuery a changé de nom:
-  	if (!$js_dragdrop)
+  	if (!$js_dragdrop) {
   		$js_dragdrop = find_in_path('javascript/jquery-ui-1.8-drag-drop.min.js');
+  		$jquery_version = 1;
+  	}
+  	$js_params = array('jquery_version' => 1);
   	$r .= '<script type="text/javascript" src="'.$js_dragdrop.'"></script>';
-  	$r .= '<script type="text/javascript" src="'.generer_url_public('javascript/acs_controleur_composant.js').'"></script>';
+  	$r .= '<script type="text/javascript" src="'.generer_url_public('javascript/acs_controleur_composant.js', $js_params).'"></script>';
   }
   return $flux.$r;
 }

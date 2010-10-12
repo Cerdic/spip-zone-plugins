@@ -46,6 +46,8 @@ class AdminComposant {
     $this->errors = array();
     $this->vars = array();
     $this->cvars = array(); // Variables issues d'un autre composant
+    $this->necessite = array(); // Dependances du composant
+    $this->nb_widgets = 0; // Nb de variables de type widget
     $this->rootDir = find_in_path('composants/'.$class);// Dossier racine du composant
     $this->icon = $this->rootDir.'/images/'.$class.'_icon.gif';
     if (!is_readable($this->icon))
@@ -65,7 +67,6 @@ class AdminComposant {
 			include_spip('inc/backport_1.9.2');
 
 		// Lit les dépendances (necessite)
-		$this->necessite = array();
 		if (spip_xml_match_nodes(',^necessite,',$c,$needs)){
 		foreach(array_keys($c) as $tag){
 			list($tag,$att) = spip_xml_decompose_tag($tag);
@@ -121,7 +122,7 @@ class AdminComposant {
 		if (is_array($c['variable'])) {
 			foreach($c['variable'] as $k=>$var) {
 				if (!is_array($var))
-					continue; // Peut se produire en cas d'erreur dans compoant.xml
+					continue; // Peut se produire en cas d'erreur dans composant.xml
 				foreach($var as $varname=>$value) {
 					if (count($value) > 1)
 						  $v = $value;
@@ -130,6 +131,8 @@ class AdminComposant {
 					if ($this->debug)
 						$this->errors['vars'] .= $class.($nic ? '#'.$nic : '').'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v))."<br />\n"; // dbg composant
 					$this->vars[$k+1][$varname] = $v;
+					if (($varname == 'type') && ($v == 'widget'))
+						$this->nb_widgets++;
 					if ($varname == 'valeur') { // Default values
 						if (substr($v,0,4) == '=acs') {
 							if (!in_array($v, $this->cvars)) $this->cvars[ ] = $v;
@@ -361,8 +364,12 @@ class AdminComposant {
 			  	$mis_en_page[] = $nom;
 			  $mep = str_replace($tag, $html, $mep);
 			}
-			if ($mode=='controleur')
+			// en mode controleur, on ajoute si besoin est la liste des widgets, invisible
+			if ($mode=='controleur') {
 				$mep = preg_replace('%<admin>(.*?)</admin>%s', '', $mep);
+				if ($this->nb_widgets > 0)
+					$mep .= liste_widgets(false);
+			}
 		}
 		// Ajoute les contrôles non mis en page
 		foreach ($controls as $nom=>$html) {

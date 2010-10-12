@@ -108,7 +108,7 @@ function page_get_infos($page, $mode_source=false, $detail='') {
   }
   else {
     if (count($includes['tags'])) {
-      $r .= '<div class="onlinehelp">'._T('acs:structure_page').' : </div><div style="line-height: 1.5em;">';
+      $r .= '<div class="onlinehelp">'._T('acs:structure_page').' : </div><div>';
       foreach ($includes['tags'] as $debut=>$tag) {
         $schema .= ' '.$tag['contenu'];
       }

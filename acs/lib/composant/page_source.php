@@ -147,7 +147,7 @@ function pi_INCLURE($args) {
     $nic = $matches[1];
   }
   if (substr($include, 0, 11) == 'composants/') {
-    $r = affiche_widgy($include, $param, indent($args[1]['indentation']), $nic);
+    $r = affiche_widgy($include, $param, $args[1]['indentation'], $nic);
   }
   else {
     if (find_in_path($include.'.html'))
@@ -202,19 +202,6 @@ function pi_BALISE($args) {
 	return array(($args[1]['mode_source'] ? $args[0][0] : false), $html);
 }
 
-/* vieille méthode : à remplacer par une analyse des balises VAR et CONFIG 
-function pi_VAR($args) {
-  $var = $args[0][0];
-  $vars = $args[1]['vars'];
-  $v = $vars[substr($var, 3)];
-
-  $html = '<a class="col_VAR" href="?exec=acs&onglet=composants&composant='.$v['composant'].'" title="'._T('acs:composant').' '.ucfirst(str_replace('_', ' ', $v['composant'])).'">'.$var.'</a>';
-  $args[2]['vars'][$var] = $html;
-
-  if ($args[1]['mode_source']) return $html;
-  //return $html;
-}
-*/
 function affiche_widgy($include, $param, $indentation, $nic) {
   $include = substr($include, 11);
   if ($pos = strpos($include, '/')) {
@@ -229,34 +216,51 @@ function affiche_widgy($include, $param, $indentation, $nic) {
   return widgy($composant, $param, $label, $indentation, $nic);
 }
 
-function widgy($composant, $param, $label='', $indentation='', $nic = '') {
+function widgy($composant, $param, $label='', $indentation=0, $nic = '', $recursive_indent = 0, $in_horizontal = false) {
   $label = ucfirst(str_replace('_', ' ', $label));
-
+  
+  $horizontal = ($GLOBALS['meta']['acs'.ucfirst($composant).$nic.'Orientation'] == "horizontal") ? true : false;
+  $content .= $horizontal ? '<tr>' : '';  
+  
   // On recherche ce que contient le widgy, recursivement
   $cv = composants_variables();
+
   if (is_array($cv) && is_array($cv[$composant]) && is_array($cv[$composant]['vars'])) {
     foreach($cv[$composant]['vars'] as $varname=>$v) {
-    	if ($v['type'] != 'widget') continue;
+    	if ($v['type'] != 'widget')
+    		continue;
       $var = 'acs'.ucfirst($composant).$nic.ucfirst($varname);
       if (isset($GLOBALS['meta'][$var]) && $GLOBALS['meta'][$var]) {
       	$ci = explode('-', $GLOBALS['meta'][$var]);
       	$cinom = $ci[0];
       	$cinic = $ci[1];
-        $content .= '<tr class="widgy_included"><td class="widgy_included_label"><a class="nompage" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="acs'.$varname.'">'.substr($varname, strlen($composant.$nic)).'</a></td><td>'.widgy($cinom, '', $cinom, '', $cinic).'</td></tr>';
+      	$cilabel = $cinom;
+      	$content .= (!$horizontal ? '<tr>' : '');
+        $content .= '<td class="widgy_included_label"><a class="nompage" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'" title="acs'.$varname.'">'.substr($varname, strlen($composant.$nic)).'</a>'.widgy($cinom, '', $cilabel, $indentation, $cinic, 1, $horizontal).'</td>';
+        $content .= (!$horizontal ? '</tr>' : '');
       }
     }
   }
+  $content .= $horizontal ? '</tr>' : '';
  
 	// On recupere le Nom du composant
 	$cvn = 'acs'.ucfirst($composant).$nic.'Nom';
-	if (isset($GLOBALS['meta'][$cvn]))
-		$title = $GLOBALS['meta'][$cvn];
-	else
+	if (isset($GLOBALS['meta'][$cvn])) {
+		$lbl = $GLOBALS['meta'][$cvn];
+		$title = $label.($nic ? ' '.$nic : ''). ' ('.$lbl.')';
+		$lbl = str_replace(' ', '&nbsp;', couper($lbl, 18));
+	}
+	else {
+		$lbl =  $label.($nic ? '&nbsp;'.$nic : '');
 		$title = _T('acs:composant').' '.$label.' '.$nic;
-	$title = ' title="'.$title.'"';
-  // affichage du contenu du widgy
-  $r = '<table><tr><td>'.$indentation.'</td><td>';
-  $r .= '<table><tr><th><a class="'.get_widget_class('', 'oui', 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'"'.$title.'>'.$label.($nic ? '&nbsp;'.$nic : '').'</a></th></tr>';
+	}
+	$titleHTML = ' title="'.$title.'"';
+  // affichage du contenu du widgy avec l'indentation voulue
+  $indentationHTML = $in_horizontal ? '' : '<td>'.indent($indentation + $recursive_indent).'</td>';
+  $over = $cv[$composant]['over'];
+  $on = ($GLOBALS['meta']['acs'.ucfirst($composant).$nic.'Use'] == "oui") ? true : false;;
+  $r = '<table><tr>'.$indentationHTML.'<td'.($recursive_indent ? ' class="widgy_included"' : '').'>';
+  $r .= '<table><tr><th><a class="'.get_widget_class($over, $on, 'widgy').'" href="?exec=acs&onglet=composants&composant='.$composant.($nic ? '&nic='.$nic : '').'"'.$titleHTML.'>'.widget_icon($composant, $nic, 10).'&nbsp;'.$lbl.'</a></th></tr>';
   $r .= $content;
   $r .= '</table></td></tr></table>';
   return $r;
@@ -264,7 +268,7 @@ function widgy($composant, $param, $label='', $indentation='', $nic = '') {
 
 function indent($l) {
   for($i = 0; $i < $l; $i++) {
-    $r .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    $r .= '&nbsp;&nbsp;&nbsp;';
   }
   return $r;
 }

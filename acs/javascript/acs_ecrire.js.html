@@ -8,6 +8,7 @@
 
   JS interface d'admin d'ACS - ACS admin GUI
 ]#HTTP_HEADER{'Content-Type: text/javascript'}
+[(#INCLURE{fond=javascript/acs_lib.js})]
 
 function detail() {
 	imgp = $(".imgp_spip_params").attr("src");
@@ -72,19 +73,6 @@ function acs_ecrire_init() {
 		}
 	);
 
-  // Mask select controls on start (they works even without javascript !)
-  $(".ctlWidget").each(
-    function(i,cw) {
-      var selectid = "#select_" + cw.id;
-      $(selectid).attr("style", "visibility: hidden;");
-      if ($(selectid).get(0)) $(selectid).get(0).style.visibility = "hidden"; // for IE damned browser 
-      if ($(selectid).val() != '') { 
-        var dragid = "#" + $(selectid).val();
-        $(this).append($(dragid));
-      }
-    }
-  );
-
 [(#ENV{jquery_version}|=={1}|?{
    [(#INCLURE{javascript/acs_dragdrop.js})],
    [(#INCLURE{javascript/acs_dragdrop_for_older_jquery.js})]
@@ -103,6 +91,8 @@ function acs_ecrire_init_ajax(ajax) {
       }
     );
   }
+
+  draw_ctlWidgets();
 
   [(#REM) Donne leur fonction onclick aux plieurs (générique)]
   $(".acs_plieur").each(

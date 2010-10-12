@@ -100,6 +100,11 @@ hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{foncee};}
 .acs_box_composants {
   width: 208px;
 }
+.acs_box_composants_hidden {
+  width: 200px;
+  position: absolute;
+  display : none;
+}
 
 fieldset.apercu {
   margin: 0;
@@ -242,6 +247,7 @@ fieldset.apercu {
   padding-right: 5px;
   background: #e5f6e8;
   border: 1px outset #GET{foncee};
+  white-space: nowrap;
 }
 .widgy:hover {
   background: #b4e9b4;
@@ -257,13 +263,17 @@ fieldset.apercu {
   background: #dfdfdf;
 }
 .widgy_included {
-  border: thin dashed #GET{claire};
+  border: thin dotted #GET{claire};
   border-right: 0;
   border-bottom: 0;
   vertical-align: top;
 }
 .widgy_included_label {
   text-align : right;
+  vertical-align: top;
+}
+.widgy img {
+  vertical-align:middle;
 }
 
 .widget {
@@ -402,6 +412,12 @@ l'utilisation du contrôleur par défaut qui pointe vers crayons_store standard 
 }
 .crayon-changed em.crayon-traduction {
   display: none;
+}
+
+.edit_composant {
+; z-index: 99999000;
+  position: absolute;
+  display: block;
 }
 
 .editeur_composant .acs_box_texte{
