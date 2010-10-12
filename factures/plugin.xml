@@ -6,28 +6,28 @@
 	<auteur>&#169; 2010 Camille Lafitte [Webelys->http://www.webelys.com]</auteur>	
 	<licence>GPL</licence>
 	<etat>dev</etat>
-	<description>Facturer avec SPIP</description>
+	<description>Facturer avec SPIP...</description>
 	<lien></lien>
 	<prefix>factures</prefix>
 	
 	<options>factures_options.php</options>
 	
 	<onglet id="factures" parent="configuration">
-		<icone>images/factures-24.png</icone>
+		<icone>images/factures-32.png</icone>
 		<titre>factures:titre_page_dayfill</titre>
 		<url>factures</url>
 	</onglet>
 
 	<bouton id="factures21" parent="bando_configuration">
 		<icone>images/factures-16.png</icone>
-		<titre>dayfill:titre_page_factures</titre>
+		<titre>factures:titre_page_factures</titre>
 		<url>factures</url>
 	</bouton>
 
-	<pipeline>
+	<!--pipeline>
 		<nom>insert_head</nom>
 		<inclure>factures_pipelines.php</inclure>
-	</pipeline>
+	</pipeline-->
 	
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<!-- utilise id="spimine" version="[1.0;]" /-->
