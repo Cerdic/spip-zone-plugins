@@ -8,7 +8,6 @@
 [<div class="ajax">
 	[<p class="status"><strong><:microblog:message_envoye:></strong> (#ENV*{_status})</p>]
 	<div class="formulaire_spip formulaire_microblog formulaire_#FORM" id="formulaire_#FORM-#OBJET-#ID_OBJET"[(#ENV{_hide})style="display:none;"]>
-		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		(#ENV{editable})
 		<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer:>' style="display:none;"/>

@@ -64,6 +64,7 @@ function formulaires_editer_microblog_traiter_dist($objet,$id_objet){
 
 	if (_request('envoyer')){
 		include_spip('inc/microblog');
+		$primary = id_table_objet($objet);
 		$status = recuperer_fond("modeles/microblog_instituer".$objet,array($primary=>$id_objet));
 		$retour = microblog($status);
 		if($retour){
