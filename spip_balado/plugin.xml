@@ -1,0 +1,25 @@
+<plugin>
+<nom>SpipBalado</nom>
+<icon>img/balado.jpg</icon>
+<version>O.1</version>
+<etat>dev</etat>
+<description>
+<multi>
+[fr]plugin g&eacute;n&eacute;rant le flux RSS sp&eacute;cifique à iTunes
+</multi>
+</description>
+<auteur><!-- Auteur du plugin -->
+- [Jean-S&eacute;bastien Barboteu->http://www.spip-contrib.net/jsb]
+</auteur>
+<lien>http://www.spip-contrib.net/SpipBalado</lien> <!-- URI de documentation -->
+<fonctions>balado_fonctions.php</fonctions>
+<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+sur le mode Rien::
+ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+ce parametre est obligatoire et doit etre non vide
+-->
+<prefix>balado</prefix>
+<necessite id='SPIP' version='[2.0.0;]' />
+<categorie>outil</categorie>
+<fonctions>balado_fonctions.php</fonctions>
+</plugin>
