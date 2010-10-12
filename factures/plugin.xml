@@ -2,12 +2,16 @@
 	<nom><multi>[en]Invoices[fr]Factures</multi></nom>
 	<icon>images/factures-32.png</icon>
 	<version>0.0.0</version>
-	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
-	<auteur>&#169; 2010 Camille Lafitte [Webelys->http://www.webelys.com]</auteur>	
+	<version_base>1.0.0</version_base>
+	<auteur>Cyril Marion, [Ateliers CYM->http://www.cym.fr] et Camille Lafitte, [Webelys->http://www.webelys.com]</auteur>	
 	<licence>GPL</licence>
 	<etat>experimental</etat>
-	<description>Facturer avec SPIP...</description>
+	<description><multi>
+	[fr]Facturer avec SPIP...
+	[en]Invoicing with SPIP...
+	</multi></description>
 	<lien></lien>
+	
 	<prefix>factures</prefix>
 	
 	<categorie>edition</categorie>
