@@ -5,7 +5,7 @@
 	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
 	<auteur>&#169; 2010 Camille Lafitte [Webelys->http://www.webelys.com]</auteur>	
 	<licence>GPL</licence>
-	<etat>dev</etat>
+	<etat>experimental</etat>
 	<description>Facturer avec SPIP...</description>
 	<lien></lien>
 	<prefix>factures</prefix>
