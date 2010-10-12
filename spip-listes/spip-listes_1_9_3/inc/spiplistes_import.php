@@ -4,39 +4,49 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/spiplistes_api_globales');
 
-function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "non"
+function spiplistes_import(
+	$filename
+	, $realname
+	, $abos_liste
+	, $format_abo = 'non'
 	, $separateur = "\t"
 	, $flag_admin
 	, $listes_autorisees
 	, $forcer_abo = false
 ) {
-	$result_affiche = "";
+	$result_affiche = '';
 	
 	$ajouter_format = $ajouter_abonnements = false;
 	
-	if(is_readable($filename)) {
-		
-		if(!is_array($abos_liste)) {
-			if(($ii = intval($abos_liste)) <= 0) {
+	if(is_readable($filename))
+	{
+		if(!is_array($abos_liste))
+		{
+			if(($ii = intval($abos_liste)) <= 0)
+			{
 				return(false);
 			}
 			$abos_liste = array($ii);
 		}
-		else {
+		else
+		{
 			$abos_liste = array_map('intval', $abos_liste);
 		}
 		
-		// recupere les logins et mails existants pour eviter les doublons
+		// recupere les logins et mails existants dans la base
+		// pour eviter les doublons
 		
 		$current_entries = array();
-		$sql_result = sql_select(array('id_auteur', 'login', 'email', 'nom'), "spip_auteurs");
-		while($row = spip_fetch_array($sql_result)) {
+		$sql_result = sql_select(array('id_auteur', 'login', 'email', 'nom'), 'spip_auteurs');
+		
+		while($row = spip_fetch_array($sql_result))
+		{
 			// ne prendre que les comptes qui ont un email
 			if($m = $row['email']) {
 				$m = strtolower($m);
@@ -97,7 +107,9 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 			if(!empty($nouvelle_entree) && !ereg("^[/#]", $nouvelle_entree))
 			{
 				list($email, $login, $nom, $statut) = explode($separateur, $nouvelle_entree);
+				
 				$email = strtolower(trim($email));
+				
 				if(
 					!in_array($statut, $statuts_auteurs)
 				) {

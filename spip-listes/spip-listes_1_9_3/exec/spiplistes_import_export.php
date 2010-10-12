@@ -22,7 +22,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
@@ -181,23 +181,30 @@ function exec_spiplistes_import_export(){
 		
 	// import form
 	$page_result .= ""
-		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_in-24.png', true, "", _T('spiplistes:Importer'))
+		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_in-24.png', true
+									, '', _T('spiplistes:Importer'))
 		. "<p class='verdana2'>"._T('spiplistes:_aide_import')."</p>\n"
 		;
-	if($flag_import_fichier_ok) {
-		if($abos_liste && is_array($abos_liste) && count($abos_liste)) {
+	if($flag_import_fichier_ok)
+	{
+		if($abos_liste && is_array($abos_liste) && count($abos_liste))
+		{
 			include_spip('inc/spiplistes_import');
-			$page_result .= ""
+			$page_result .= ''
 				. debut_boite_info(true)
 				. spiplistes_titre_boite_info(_T('spiplistes:Resultat_import'))
-				. spiplistes_import($fichier_import['tmp_name']
-					, $fichier_import['name'], $abos_liste, $format_abo, $separateur
+				. spiplistes_import(
+					$fichier_import['tmp_name']
+					, $fichier_import['name']
+					, $abos_liste
+					, $format_abo
+					, $separateur
 					, $flag_admin
 					, $listes_moderees
 					, $forcer_abo
 					)
 				. fin_boite_info(true)
-				. "<br />"
+				. '<br />'
 				;
 		}
 	}
