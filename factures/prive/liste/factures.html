@@ -1,0 +1,128 @@
+<h1 class="grostitre"><:sm_factures:editer_facturation_titre:></h1>
+<p><:sm_factures:explication_editer_facturation_titre:></p>
+
+[(#URL_ECRIRE{menus_editer}|parametre_url{nouveau,oui}|icone{<:menus:editer_menus_nouveau:>,#CHEMIN{images/menus-nouveau-24.png},#LANG_RIGHT,creer.gif})]
+
+<div class="nettoyeur" />
+
+[(#REM) 
+
+	Affiche un tableau avec toutes les factures d'un client.
+	Utilisée dans une fiche client.
+	Utilisée aussi sur la page d'accueil
+	
+	05/03/2008 : création
+	06/03/2009 : pagination
+	10/03/2009 : optimisations; ligne qui change de couleur si c'est aussi un forfait
+	02/04/2009 : si pas de client passé, on les affiche toutes
+	05/04/2009 : utilisation pour devis; ajout du paramètre type (facture ou devis); crayons sur num_facture
+	10/04/2009 : mettre id_facture à la place de num_facture
+	25/04/2009 : meme doc pour devis et factures
+	18/05/2009 : suppression (MODELE{forfait}{num_facture}) ligne 86
+	27/05/2009 : optimisations
+	
+	24/08/2009 : ajout de la colonne "règlement"
+	05/09/2009 : ajout édit client
+	14/12/2009 : passage du id_client dans "créer facture"
+	
+]
+
+[(#REM) On construit un tableau avec tous les types de documents; clause "id_type_document IN" de la boucle ]
+	#SET{type,#ARRAY}
+	<BOUCLE_t(spipmine_types_documents)>
+	#SET{type, #GET{type}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_TYPE_DOCUMENT}}}
+	</BOUCLE_t>
+
+
+[(#REM) On construit un tableau avec tous les clients ; clause "id_client IN" de la boucle ]
+	#SET{clients,#ARRAY}
+	<BOUCLE_c(spipmine_clients ?)>
+	#SET{clients, #GET{clients}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_CLIENT}}}
+	</BOUCLE_c>
+
+
+[(#REM) On récupère les valeurs de id_client et de id_type_document éventuellement passés dans l'url ]
+	[(#EVAL{_request('id_type_document')}|?{' ',''})
+		#SET{type, #EVAL{_request('id_type_document')} }
+	]
+
+	[(#EVAL{_request('id_client')}|?{' ',''})
+		#SET{clients, #EVAL{_request('id_client')} }
+	]
+
+
+<fieldset class="liste factures" >
+
+	[(#REM) La légende dépend du type de document ]
+	<legend>
+	[(#EVAL{_request('id_type_document')}|=={''}|?{'Tous les documents',''})]
+	[(#EVAL{_request('id_type_document')}|=={'1'}|?{'Factures',''})]
+	[(#EVAL{_request('id_type_document')}|=={'2'}|?{'Devis',''})]
+	[(#EVAL{_request('id_type_document')}|=={'3'}|?{'Avoirs',''})]
+	[(#EVAL{_request('id_type_document')}|=={'4'}|?{'Factures proforma',''})]
+	</legend>
+
+<form name="type_document" action="#SELF" method="get">
+
+	[(#REM) Ces hidden là sont pour garder une trace de ce qui est déja saisi dans les forms ]
+	<input type="hidden" name="page" value="#ENV{page}" />
+	
+	<select name="id_type_document" onchange="this.form.submit()" >
+		<option value="">---</option>
+		<BOUCLE_t2(spipmine_types_documents)>
+		<option value="#ID_TYPE_DOCUMENT" [(#GET{type}|=={#ID_TYPE_DOCUMENT}|?{'selected="selected"'})]>#NOM_TYPE_DOCUMENT</option>
+		</BOUCLE_t2>
+	</select>
+	
+	<select name="id_client" onchange="this.form.submit()" >
+		<option value="">---</option>
+		<BOUCLE_cl(spipmine_clients){par nom_client}>
+		<option value="#ID_CLIENT" [(#GET{clients}|=={#ID_CLIENT}|?{'selected="selected"'})]>#NOM_CLIENT</option>
+		</BOUCLE_cl>
+	</select>
+
+	<input type="submit" value="OK" />
+
+	<input type="button" value="Cr&eacute;er facture" onclick="[document.location='(#URL_PAGE{creer_facture}|parametre_url{id_client,#EVAL{_request('id_client')}})']" />
+
+</form>	
+<B_factures>
+#PAGINATION
+<table class="spip tablesorter">
+	<thead>
+	<tr>
+		<th>ID client</th>
+		<th>Num facture</th>
+		<th>Date</th>
+		<th>Libell&eacute;</th>
+		<th>Montant</th>
+		<th>R&egrave;glement</th>
+		<th title="Il s'agit strictement du nombre d'heures vendues pour cette facture; il sagit d'un nombre à ne pas dépasser.">Nb heures<br />vendues</th>
+		<th title="Il s'agit du total des heures utilisées sur cette facture; l'objectif est que ce montant reste inférieur au nombre d'heures vendues.">Nb heures<br />utilis&eacute;es</th>
+		<th title="Il s'agit du total des heures restantes sur cette facture (calculé dans une balise SPIP)">Nb heures<br />restantes</th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_factures(spipmine_factures){id_client IN #GET{clients}}{id_type_document IN #GET{type}}{!par date_facture}{!par num_facture}{pagination 20}>
+	<tr[ id="ligne_(#NUM_FACTURE)"][ class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]><BOUCLE_n(spipmine_clients){id_client}>
+		<td class="num #EDIT{nom_court}"><a href="[(#URL_PAGE{fiche_client}|parametre_url{id_client,#ID_CLIENT})]" title="Fiche client N&deg;#ID_CLIENT, #NOM_CLIENT">#NOM_COURT</a></td></BOUCLE_n>
+		<td class="num #EDIT{num_facture}"><a href="[(#URL_PAGE{fiche_facture}|parametre_url{'id_facture',#ID_FACTURE})]">#NUM_FACTURE</a></td>
+		<td class="date #EDIT{date_facture}">[(#DATE_FACTURE|affdate{'d/m/Y'})]</td>
+		<td class="libelle #EDIT{libelle_facture}">[(#LIBELLE_FACTURE|couper{55}|sinon{'<em>éditer libellé...</em>'})]</td>
+		<td class="montant #EDIT{montant}"><a href="#" class="aide" title="[(#TOTAL_HT|monetaire)&nbsp;HT][ | (#TOTAL_HT|ttc|monetaire)&nbsp;TTC]">[?]</a>[(#MONTANT|monetaire)]</td>
+		<td class="reglement">[(#MODELE{reglement}{id_facture})]</td>
+		<td class="temps">[<span class="#EDIT{nb_heures_vendues}">(#NB_HEURES_VENDUES|horaire|sinon{'<em>saisir...</em>'})</span>]</td>
+		<td class="temps">[(#TOTAL_HEURES_UTILISEES|horaire)]</td>
+		<td class="temps">[(#TOTAL_HEURES_RESTANTES|horaire|alerte)]</td>
+	</tr>
+</BOUCLE_factures>
+	</tbody>
+</table>
+
+</B_factures>
+<//B_factures>
+
+
+</fieldset>
+
+<div class="nettoyeur" />

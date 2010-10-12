@@ -28,7 +28,12 @@
 		<nom>insert_head</nom>
 		<inclure>factures_pipelines.php</inclure>
 	</pipeline-->
-	
+
+	<bouton id='factures' parent='naviguer'> 
+			<icone>images/factures-32.png</icone> 
+			<titre>factures:bouton_factures</titre> 
+			<url>factures</url> 
+	</bouton>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<!-- utilise id="spimine" version="[1.0;]" /-->
 
