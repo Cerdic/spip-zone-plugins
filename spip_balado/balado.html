@@ -23,12 +23,12 @@
       <link>#URL_SITE_SPIP</link>
       <description>#NOM_SITE_SPIP</description>
     </image>
-        <BOUCLE_article(ARTICLES) {titre_mot='podcast'}{par date} {inverse} {0,10}>
+        <BOUCLE_article(ARTICLES) {titre_mot=podcast}{par date} {inverse} {0,10}>
 
     <item>
       <title>[(#TITRE|texte_backend)]</title>
       <link>[(#URL_ARTICLE|url_absolue|unique)]</link>
-      <description>[(#TEXTE|liens_absolus|texte_backend)]</description>
+      <description>[(#INTRODUCTION|liens_absolus|texte_backend)]</description>
       <pubDate>[(#DATE|affdate{'r'})]</pubDate>
       <BOUCLE_podcast(DOCUMENTS){id_article}{mode=document}{extension==mp3|ogg|mpeg|avi|mov|mp4}>[
                         <enclosure url="(#URL_DOCUMENT|url_absolue|unique)" length="[(#TAILLE)]" type="#MIME_TYPE" />]
@@ -37,8 +37,8 @@
       <guid isPermaLink="false">[(#URL_ARTICLE|url_absolue|unique)]</guid>
       <itunes:author><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></itunes:author>
       [<itunes:subtitle>(#SOUS_TITRE|texte_backend)</itunes:subtitle>]
-      <itunes:summary>[(#TEXTE|liens_absolus|texte_backend)]</itunes:summary>
-      <itunes:keywords><BOUCLE_articles_mots(ARTICLES) {id_mot} {!titre_mot='podcast'}>
+      <itunes:summary>[(#INTRODUCTION|liens_absolus|texte_backend)]</itunes:summary>
+      <itunes:keywords><BOUCLE_articles_mots(ARTICLES) {id_mot} {!titre_mot=podcast}>
 #TITRE
 </BOUCLE_articles_mots></itunes:keywords>  
 
