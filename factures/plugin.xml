@@ -10,6 +10,8 @@
 	<lien></lien>
 	<prefix>factures</prefix>
 	
+	<categorie>edi</categorie>
+	
 	<options>factures_options.php</options>
 	
 	<onglet id="factures" parent="configuration">
