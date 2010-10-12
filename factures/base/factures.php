@@ -50,7 +50,6 @@ function factures_declarer_tables_principales($tables_principales){
 		"fin_validite"			=>	"DATETIME NULL default NULL",
 		"id_organisation"		=>	"int(11) default NULL",
 		"id_projet"				=>	"smallint(6) default NULL",
-		"nom_client"			=>	"varchar(50) default NULL",
 		"id_type_presta"		=>	"int(11) default NULL",
 		"montant"				=>	"decimal(18,2) default NULL",
 		"charge_estimee"		=>	"float default NULL",
@@ -62,7 +61,6 @@ function factures_declarer_tables_principales($tables_principales){
 	);
 	$factures_key = array(
 		"PRIMARY KEY"			=>	"id_facture",
-		"KEY id_projet"			=>	"id_projet",
 		"KEY id_organisation"	=>	"id_organsiation",
 		"KEY date_facture"		=>	"date_facture",
 		"KEY num_facture"		=>	"num_facture"

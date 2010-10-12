@@ -10,7 +10,7 @@
 	<lien></lien>
 	<prefix>factures</prefix>
 	
-	<categorie>edi</categorie>
+	<categorie>edition</categorie>
 	
 	<options>factures_options.php</options>
 	
@@ -37,6 +37,8 @@
 			<url>factures</url> 
 	</bouton>
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="contacts" version="[1.0.0;]" />
+
 	<!-- utilise id="spimine" version="[1.0;]" /-->
 
 </plugin>
