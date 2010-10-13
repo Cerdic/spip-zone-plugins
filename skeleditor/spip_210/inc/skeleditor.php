@@ -41,7 +41,7 @@ function skeleditor_path_editable(){
 
 	// si pas de dossier skel mais qu'on peut creer squelettes/ c'est ok
 	
-	// Traiter le cas des sites mutaulises
+	// Traiter le cas des sites mutualises
 	$dir_squelettes_site = (defined('_DIR_SITE')) ? _DIR_SITE : _DIR_RACINE;
 
 	if (!$path
