@@ -24,6 +24,7 @@ function skeleditor_path_editable(){
 		// chargement optimise precompile
 		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
 	}
+
 	$c = creer_chemin();
 	while (!$path AND count($c)){
 		$d = array_shift($c);
@@ -32,6 +33,7 @@ function skeleditor_path_editable(){
 			AND strncmp($d,_DIR_RACINE.'prive/',strlen(_DIR_RACINE.'prive/'))!==0
 			AND strncmp($d,_DIR_RACINE.'squelettes-dist',strlen(_DIR_RACINE.'squelettes-dist'))!==0
 			AND $d!==_DIR_RACINE
+			AND $d!==_DIR_SITE
 			AND sous_repertoire($d,'',false,true)
 			)
 			$path = $d;
@@ -39,10 +41,13 @@ function skeleditor_path_editable(){
 
 	// si pas de dossier skel mais qu'on peut creer squelettes/ c'est ok
 	
+	// Traiter le cas des sites mutaulises
+	$dir_squelettes_site = (defined('_DIR_SITE')) ? _DIR_SITE : _DIR_RACINE;
+
 	if (!$path
-		AND !is_dir(_DIR_RACINE."squelettes")
-		AND sous_repertoire(_DIR_RACINE, "squelettes", false, true)){
-		$path = _DIR_RACINE."squelettes/";
+		AND !is_dir($dir_squelettes_site."squelettes")
+		AND sous_repertoire($dir_squelettes_site, "squelettes", false, true)){
+		$path = $dir_squelettes_site."squelettes/";
 	}
 
 	return $path;
