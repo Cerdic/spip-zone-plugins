@@ -4,10 +4,11 @@
  * Licence GPL (c) 2010
  * par Cyril Marion - Camille Lafitte
  */
+ 
+include_spip('inc/meta');
+include_spip('base/create');
 
-function factures_upgrade($nom_meta_base_version, $version_cible){
-	include_spip('inc/meta');
-	
+function factures_upgrade($nom_meta_base_version, $version_cible){	
 	/**
 	 *
 	 *  11/10/2010 : creation
@@ -19,7 +20,6 @@ function factures_upgrade($nom_meta_base_version, $version_cible){
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 	
 	if ($current_version=="0.0") {
-		include_spip('base/create');
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}

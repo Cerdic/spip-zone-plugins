@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function factures_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['factures'] = 'factures';
-	$interface['table_des_tables']['lignes_factures'] = 'numeros';
+	$interface['table_des_tables']['lignes_factures'] = 'lignes_factures';
 
 	// -- Liaisons
 	$interface['tables_jointures']['spip_factures'][]= 'organisations';
@@ -61,7 +61,6 @@ function factures_declarer_tables_principales($tables_principales){
 	);
 	$factures_key = array(
 		"PRIMARY KEY"			=>	"id_facture",
-		"KEY id_organisation"	=>	"id_organsiation",
 		"KEY date_facture"		=>	"date_facture",
 		"KEY num_facture"		=>	"num_facture"
 	);
@@ -78,17 +77,18 @@ function factures_declarer_tables_principales($tables_principales){
 		"quantite"				=>	"float default NULL",
 		"unite"					=>	"varchar(50) default NULL",
 		"designation"			=>	"text",
-		"prix unitaires_ht"		=>	"decimal(18,2) default NULL",
+		"prix_unitaires_ht"		=>	"decimal(18,2) default NULL",
 		"commentaire"			=>	"mediumtext"
 	);
 	$lignes_factures_key = array(
 		"PRIMARY KEY"			=>	"id_ligne",
 		"KEY id_facture"		=>	"id_facture"
 	);
-	$tables_principales['spip_lignes_facture'] = array(
+	$tables_principales['spip_lignes_factures'] = array(
 		'field' => &$lignes_factures,
 		'key' => &$lignes_factures_key
 	);
-
+	
+	return $tables_principales;
 }
 ?>

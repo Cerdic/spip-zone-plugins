@@ -1,8 +1,11 @@
 <plugin>
 	<nom><multi>[en]Invoices[fr]Factures</multi></nom>
 	<icon>images/factures-32.png</icon>
+
 	<version>0.0.0</version>
 	<version_base>1.0.0</version_base>
+	<install>base/factures_upgrade.php</install>
+
 	<auteur>Cyril Marion, [Ateliers CYM->http://www.cym.fr] et Camille Lafitte, [Webelys->http://www.webelys.com]</auteur>	
 	<licence>GPL</licence>
 	<etat>experimental</etat>
@@ -15,9 +18,18 @@
 	<prefix>factures</prefix>
 	
 	<categorie>edition</categorie>
-	
 	<options>factures_options.php</options>
-	
+
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/factures.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/factures.php</inclure>
+	</pipeline>
+
 	<onglet id="factures" parent="configuration">
 		<icone>images/factures-32.png</icone>
 		<titre>factures:titre_page_dayfill</titre>
@@ -30,16 +42,16 @@
 		<url>factures</url>
 	</bouton>
 
-	<!--pipeline>
-		<nom>insert_head</nom>
-		<inclure>factures_pipelines.php</inclure>
-	</pipeline-->
-
 	<bouton id='factures' parent='naviguer'> 
 			<icone>images/factures-32.png</icone> 
 			<titre>factures:bouton_factures</titre> 
 			<url>factures</url> 
 	</bouton>
+
+	<!--pipeline>
+		<nom>insert_head</nom>
+		<inclure>factures_pipelines.php</inclure>
+	</pipeline-->
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="contacts" version="[1.0.0;]" />
 
