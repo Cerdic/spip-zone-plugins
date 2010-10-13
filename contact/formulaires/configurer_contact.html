@@ -89,7 +89,7 @@
 		<legend><:contact:infos_collecte:></legend>
 		<ol id="editer_champs" class="decaler baisser10">
 			<BOUCLE_champs(POUR){tableau #GET{champs}}>
-			<li class="choix editer_champ agrandir" title="<:contact:deplacement_possible:>" style="overflow:visible;">
+			<li class="choix editer_champ agrondir img#COMPTEUR_BOUCLE" title="<:contact:deplacement_possible:>" style="overflow:visible;">
 				[(#CLE|match{mail|sujet|texte}|oui)
 				<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
 				<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
@@ -203,7 +203,7 @@
 <script type="text/javascript">
 ;(function($){
 	var contact_sortable = function(){
-		$('ul#editer_champs')
+		$('ol#editer_champs')
 			.sortable({
 				cursor : 'move',
 				axis : 'y',
