@@ -47,7 +47,7 @@ function exec_spiplistes_import_export(){
 		$$key = _request($key);
 	}
 
-	$separateur = (($separateur == 'tab') ? "\t" : ";");
+	$separateur = (($separateur == 'tab') ? "\t" : ';');
 	
 	$flag_admin = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
 	$flag_moderateur = false;
@@ -185,8 +185,14 @@ function exec_spiplistes_import_export(){
 									, '', _T('spiplistes:Importer'))
 		. "<p class='verdana2'>"._T('spiplistes:_aide_import')."</p>\n"
 		;
+	
 	if($flag_import_fichier_ok)
 	{
+		//syslog(LOG_NOTICE, 'memory_limit: ' . get_cfg_var('memory_limit'));
+		//syslog(LOG_NOTICE, 'memory_get_usage[1]: ' . memory_get_usage());
+		//syslog(LOG_NOTICE, 'memory_get_peak_usage[1]: ' . memory_get_peak_usage());
+		//syslog(LOG_NOTICE, 'filesize: ' . filesize($fichier_import['tmp_name']));
+		   
 		if($abos_liste && is_array($abos_liste) && count($abos_liste))
 		{
 			include_spip('inc/spiplistes_import');
@@ -276,7 +282,7 @@ function exec_spiplistes_import_export(){
 			. fin_cadre_relief(true)
 			//
 			// Sélection du format de réception
-			. debut_cadre_relief("", true, "", _T('spiplistes:Format_de_reception'))
+			. debut_cadre_relief("", true, "", _T('spiplistes:format_de_reception_'))
 			. "<ul class='liste-listes verdana2'>\n"
 			. "<li>"
 				. spiplistes_form_input_radio('format_abo', 'html', _T('spiplistes:html'), true, true, false)

@@ -287,6 +287,11 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Liste_de_destination_s' => 'Liste de destination : @s@'
 , 'Listes_de_destination_s' => 'Listes de destination : @s@'
 , 'pas_dimport' => 'Pas d&#8217;import. Soit le fichier est vide, soit toutes les adresses sont d&#233;j&#224; abonn&#233;es.'
+, 'nb_comptes_importees_en_ms_dont_' => '@nb@ fiches import&#233;es en @ms@ ms. dont : '
+, 'nb_fiches_crees' => '@nb@ comptes cr&#233;&#233;s'
+, 'nb_comptes_modifies' => '@nb@ comptes modifi&#233;s'
+, 'nb_comptes_ignores' => '@nb@ comptes ignor&#233;s (d&#233;j&#224; dans la base)'
+, 'format_de_reception_' => 'Format de r&#233;ception : '
 
 // exec/spiplistes_liste_edit.php
 , 'texte_dinsctription_' => 'Texte d&#8217;inscription : '
