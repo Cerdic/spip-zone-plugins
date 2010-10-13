@@ -52,7 +52,7 @@ function contacts_declarer_tables_principales($tables_principales){
         "identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
 		"activite"		=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
 		"date_creation"	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"descriptif"	=> "tinytext DEFAULT '' NOT NULL",
+		"descriptif"	=> "TEXT DEFAULT '' NOT NULL",
 		"maj"			=> "TIMESTAMP"
 		);
 	$organisations_key = array(
