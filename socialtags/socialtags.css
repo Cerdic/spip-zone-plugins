@@ -27,11 +27,9 @@ div.socialtags {
 
 .socialtags-hovers {
 	opacity: .4;
-	-moz-opacity: .4;
 	filter: alpha(opacity=40);
 }
 .socialtags-hovers:hover {
 	opacity: 1;
-	-moz-opacity: 1;
 	filter: alpha(opacity=100);
 }
