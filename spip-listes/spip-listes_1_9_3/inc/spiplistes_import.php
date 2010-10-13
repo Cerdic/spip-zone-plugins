@@ -284,7 +284,7 @@ function spiplistes_import(
 		if($bad_email) {
 			$result_affiche .= '<br />'._T('pass_erreur').' email: '._T('spiplistes:n_incorrect_mail', array('n' => $bad_email)).PHP_EOL;
 		}
-		$result_affiche = _T('spiplistes:fichier_') . ' : <strong>$realname</strong><br />'.PHP_EOL
+		$result_affiche = _T('spiplistes:fichier_') . ' : <strong>'.$realname.'</strong><br />'.PHP_EOL
 			. _T('spiplistes:' . ((count($abos_liste) > 1) ? 'Listes_de_destination_s' : 'Liste_de_destination_s')
 				 , array('s' => '#' . implode(',#', $abos_liste))) .'<br />'.PHP_EOL
 			. $result_affiche
