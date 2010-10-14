@@ -4,8 +4,8 @@
 .image-annotate-add:hover { background-color:#eee;}
 .image-annotate-canvas { border:solid 1px #ccc; background-position:left top; background-repeat:no-repeat; display:block; 
 	margin:0; position:relative; }
-.image-annotate-view { display:none; position:absolute; }
-.image-annotate-area { border:1px solid #999; position:absolute; }
+.image-annotate-view { display:none; position:absolute;left:0;top:0; }
+.image-annotate-area { border:1px solid #999; position:absolute;left:0;top:0; }
 .inner { border:1px solid #fff; display:block; height: 100%; }
 .image-annotate-area-editable { cursor:pointer; }
 .image-annotate-area-editable-hover .inner { background: transparent url(images/edit-note.png) center 50% no-repeat; }
@@ -17,10 +17,10 @@
 .image-annotate-note .note-text .author { font-style: italic; color: #666; }
 .image-annotate-note .actions { display:block; font-size:80%; }
 .nb_notes { margin-top: 5px; }
-.image-annotate-edit { display:none; }
+.image-annotate-edit { display:none;position:absolute;top:0;left:0; }
 .image-annotate-edit .loading { background: #333 url(images/loader.gif) center 50% no-repeat; }
 #image-annotate-edit-form { position:absolute; width:300px; background:#fff; border:1px solid #ddd; margin-top: 5px; padding:5px;
-	box-shadow: 1px 1px 10px #333; -webkit-box-shadow: 1px 1px 10px #333; -moz-box-shadow: 1px 1px 10px #333; }
+	box-shadow: 1px 1px 10px #333; -webkit-box-shadow: 1px 1px 10px #333; -moz-box-shadow: 1px 1px 10px #333; left:0;top:0;}
 #image-annotate-edit-form form { z-index:999; }
 #image-annotate-edit-form .formulaire_spip,
 #image-annotate-edit-form form fieldset { margin:0; }
@@ -30,7 +30,7 @@
 .image-annotate-edit-area { display:block; margin:0; padding:0 0 2px 0; width:60px; height:60px; border:1px solid #999;
 	position:absolute; top:10px; left:10px; cursor:move; }
 .image-annotate-edit-area .ui-resizable-handle { opacity:0.8; }
-.ui-resizable { position:relative; }
+.image-annotate-edit .ui-resizable { position:inherit; }
 .ui-resizable-handle { position:absolute; font-size:.1px; z-index:99999; display:block; }
 .ui-resizable-disabled .ui-resizable-handle,
 .ui-resizable-autohide .ui-resizable-handle { display:block; }
