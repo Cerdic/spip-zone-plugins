@@ -11,3 +11,7 @@
 .formulaire_upload .decrire_doc .spip_doc_descriptif { clear: none; }
 .formulaire_upload .insert_code strong { display: block; margin-bottom: 0.5em; }
 .formulaire_upload .pagination { width: 98% }
+
+@media print{
+.formulaire_upload{display: none !important;}
+}
