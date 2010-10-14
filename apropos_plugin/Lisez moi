@@ -1,0 +1,38 @@
+/***********************************************************************\
+ *  À propos des Plugins actifs                          				*                                                
+ *                        												*
+ *  Version du 14 octobre 2010, Jean-Philippe Guihard					*                                     
+ *																		*
+ \**********************************************************************/
+
+
+Ce plugin vise à afficher dans une page de type À propos du site par
+exemple, la version du SPIP utilisée et la liste des Plugins activés
+avec affichage de l'icone, le nom, la version, l'état et une
+introduction de sa fonction.
+
+J'ai créé ce plugin après avoir tenté d'utiliser la balise #PLUGIN mais
+qui ne trie par ordre alphabétique les Plugins et qui ne prend pas en
+compte les fichier plugin.xlm "mal" écrit. En effet, si dans un fichier
+plugin.xml, le tag <icon> est écrit sur 3 lignes au lieu d'une, la
+balise #PLUGIN ne récupère pas le chemin de l'icone et donc on ne peut
+l'afficher. Liste les plugins actifs et affiche une description sommaire
+de ceux-ci.
+
+J'ai ensuite utilisé les autres plugin, mais ceux-ci n'affiche pas les
+icônes. Je me suis donc lancé dans l'écriture de ce plugin.
+
+N'ayant jamais écrit de Plugin et ne connaissant rien en php, il est
+codé avec des gants de boxe. Mon principe a été de reproduire ce qui se
+fait en partie privé du site par la page ?exec=admin_plugin. J'ai donc
+farfouillé dans le code de SPIP pour retrouver des fonctions qui
+correspondraient à mon besoin et les ai modifiée pour qu'elles collent à
+ce que je souhaite.
+
+Si le plugin est actif, on peut faire apparaitre la liste dans un
+squelette en utilisant un <code><INCLURE{fond=apropos_plugin}></code>
+
+//////////------------A FAIRE -----------\\\\\\\\\\\\\\\ 
+Création d'un modele 
+Optimisation du code
+Ajouter l'icone générique si absence d'icone dans le plugin
