@@ -11,7 +11,7 @@ Liste des articles de la rubrique id_rubrique, pour la langue en cours
   <br class="nettoyeur" />
   <ul>
   <BOUCLE_articles(ARTICLES) {id_rubrique} {par (#CLASSEMENT|=={popularite}|?{popularite,date})}{inverse} {pagination #VAR{acsArticlesPagination,10}} {lang=#LANG}>
-    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}>
+    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}{urla=#URL_ARTICLE}>
   </BOUCLE_articles>
   </ul>
 </div>

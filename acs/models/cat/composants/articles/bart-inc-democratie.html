@@ -10,7 +10,7 @@ par popularité ou par date (choix du visiteur), sans doublons, pour la langue e
   <br class="nettoyeur" />
   <ul>
   <BOUCLE_articles(ARTICLES spip_notations_objets) {id_rubrique} {par (#CLASSEMENT|=={popularite}|?{popularite,date})}{inverse} {pagination #VAR{acsArticlesPagination,10}} {note_ponderee>=#VAR{acsDemocratieSeuilPublic,0}} {statut==#DEMOCRATIE_STATUT} {lang=#LANG}>
-    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}{note=#NOTE_PONDEREE}>
+    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}{urla=#URL_ARTICLE}{note=#NOTE_PONDEREE}>
   </BOUCLE_articles>
   </ul>
 </div>

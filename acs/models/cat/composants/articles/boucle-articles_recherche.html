@@ -26,7 +26,7 @@ Articles trouves
   [<p class="pagination">(#PAGINATION)</p>]
   <ul>
     <BOUCLE_articles(ARTICLES) {recherche} {par (#TRI|?{#TRI,points})} {inverse (#ORDRE|?{0,1})} {pagination} {lang}>
-      <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#VAR{acsArticlesNbLettres,200}}>
+      <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{coupe=#VAR{acsArticlesNbLettres,200}}>
     </BOUCLE_articles>
   </ul>
 </div>

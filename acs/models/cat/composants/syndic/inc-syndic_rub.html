@@ -3,12 +3,15 @@
 Sites de la rubrique
 
 ]<B_sites>
-<div class="syndic #PINCEAU{syndic}">
-  <div class="bloc-title"><:sur_web:></div>
+<div class="cSyndic">
+  <div class="bloc-title">
+    <div class="bsize"><a href="?page=sites"><:sur_web:></a></div>
+    [<div class="pagination">(#PAGINATION)</div>]
+  </div>
   <ul>
-  <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+  <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{pagination #VAR{acsSyndicNbSites,5}}>
       <li>
-        <div class="bloc-title"><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a></div>
+        <div class="bloc-title bsize"><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a></div>
         <B_syndic>
         <ul>
           <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,5}>

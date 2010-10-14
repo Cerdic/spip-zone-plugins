@@ -10,7 +10,7 @@ Liste des articles ayant le mot-clef id_mot, pour la langue en cours
   <br class="nettoyeur" />
   <ul>
   <BOUCLE_articles(ARTICLES){id_mot}{par (#CLASSEMENT|=={popularite}|?{popularite,date})}{inverse}{pagination #VAR{acsArticlesPagination,10}} {lang=#LANG}>
-    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}>
+    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{masquer_rubrique=oui}>
   </BOUCLE_articles>
   </ul>
 </div>

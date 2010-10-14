@@ -1,0 +1,23 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Stats</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
+  <version>0.7.2</version>
+  <necessite id='acs' version='[0.7.2;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>100</valeur>
+  </param>
+  
+  <variable>
+    <nom>Align</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <valeur>center</valeur>
+  </variable>
+
+</composant>

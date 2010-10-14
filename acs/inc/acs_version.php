@@ -18,11 +18,21 @@ function acs_version() {
 
 // On lit la release avec la fonction SPIP
 function acs_release() {
+	global $spip_version_code;
 	static $r;
+	
 	if ($r)
 		return $r;
+		
+	 // la fonction version_svn_courante() etait non dans inc/filtres mais dans inc/minipres
+	 // avant le changeset 9189 (05/06/2007). On fait donc un backport si c'est utile
 	include_spip('inc/filtres');
-	$r = version_svn_courante(_DIR_ACS);
+	if (is_callable('version_svn_courante'))
+		$r = version_svn_courante(_DIR_ACS);
+	else {
+		include_spip('inc/minipres');
+		$r = version_svn_courante(_DIR_ACS);
+	}
 	return $r;
 }
 ?>

@@ -70,7 +70,7 @@ else {
   'configurer_site' => 'Conception du site',
   'documentation' => 'Documentation',
 
-  'assistant_configuration_squelettes' => 'Assistant Configuration du Site',
+  'assistant_configuration_squelettes' => 'Assistant Conception du Site',
   'acs' => 'ACS',
 
   'model_actif' => 'Mod&egrave;le ACS actif: <b>@model@</b>',

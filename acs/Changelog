@@ -23,6 +23,7 @@ Modele Cat pour ACS vesion 0.7 :
  - modification de la feuille de style habillage.css.html, qui se contente desormais d'appeller les feuilles de style des composants.
  - composants contextuels : les composants breves, forums, keys,rubnav et syndic affichent des resultats contextuels selon l page où ils sont utilisés. Par exemple, sur la page de resultats d'une recherche, ils donnent le résultat de la recherche.
  - modele doc_player : reactualisation
+ - suppression des "communiqués" à la Une, avantageusement remplacés par le composant Encart
  - Mise à jour de TOUS les composants (en cours)
  - Audio : toilettage du composant / nouveau modèle. drag/drop sur le slider, gestion automatisee de l'inclusion de la librairie jQuery drag/drop pour gerer le slider du lecteur audio
  - Cadre : remplace le composant Module
@@ -33,7 +34,10 @@ Modele Cat pour ACS vesion 0.7 :
  - Login : nouveau composant pour gérer la connection au site, affichage du nombre d'articles et de messages de l'utilisateur
  - Mail : dimensionnement automatique pour spip 2.1.2
  - Module : remplacé par le composant Cadre, qui permet en plus du contenu de définir l'apparence
+ - Ours : suppression des stats, isolees dans un composant specifique : Stats
  - Rubrique : nouveau composant apparence d'une rubrique
+ - Stats : nouveau composant avec les stats globales du site
+ - Syndic : correction style du composant dans le contexte d'une rubrique ou d'un site syndiqué
 _______________________________________
 ACS version 0.6
  - mise à jour pour spip 2.1 et JQuery 1.8

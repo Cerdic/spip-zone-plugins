@@ -65,15 +65,4 @@
     <option>non</option>
     <valeur>oui</valeur>
   </variable>
-  <variable>
-    <nom>Stats</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>oui</valeur>
-  </variable>
-  <variable>
-    <nom>Custom</nom>
-    <type>textarea</type>
-  </variable>
 </composant>

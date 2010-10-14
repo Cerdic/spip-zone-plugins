@@ -71,7 +71,7 @@ else {
   'configurer_site' => 'Website design',
   'documentation' => 'Documentation',
 
-  'assistant_configuration_squelettes' => 'Site configuration wizard',
+  'assistant_configuration_squelettes' => 'Site design wizard',
   'acs' => 'ACS',
 
   'model_actif' => 'ACS active model: <b>@model@</b>',

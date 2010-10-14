@@ -1,26 +1,4 @@
 [(#REM)
-Les 3 derniers articles de la ou des rubriques
-avec le mot-clé articles_keyword (Communiques)
-par date, sans doublons, pour la langue en cours
-]
-[(#SET{acsKeyword,<:acs:articles_keyword:>})]
-<B_rubrique_communiques>
-<BOUCLE_rubrique_communiques(RUBRIQUES) {titre_mot=#GET{acsKeyword}}{doublons}>
-<B_communiques>
-  [(#ANCRE_PAGINATION)][<p class="pagination"><:acs:articles_derniers_communiques:> : (#PAGINATION)</p>]
-  <div class="liste-articles">
-      <ul>
-        <BOUCLE_communiques(ARTICLES notations_objets) {id_objet=id_article} {objet=='article'} {id_rubrique} {par date}{inverse} {doublons} {pagination 3} {statut==#DEMOCRATIE_STATUT} {lang=#LANG}>
-            <INCLURE{fond=composants/articles/article}{id_article}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#EVAL{2*#VAR{acsArticlesNbLettres,200}}}{note=#MOYENNE_PONDEREE}>
-        </BOUCLE_communiques>
-      </ul>
-  </div>
-</B_communiques>
-</BOUCLE_rubrique_communiques>
-<div style="border-bottom: 1px dashed #dfdfdf"></div>
-</B_rubrique_communiques>
-
-[(#REM)
 Les articles dont la note dépasse la note seuil de publication,
 par date, sans doublons, pour la langue en cours, dont la date de publication
 est passée.
@@ -31,7 +9,7 @@ Les articles dotés d'une date de publication future ne sont donc pas affichés.
   <div class="liste-articles">
       <ul>
         <BOUCLE_articles(ARTICLES) {notation} {par date} {inverse} {doublons} {pagination #VAR{acsArticlesPagination,10}} {age_relatif>=0} {lang=#LANG}>
-          <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#VAR{acsArticlesNbLettres,200}}{note=#NOTATION_MOYENNE_PONDEREE}>
+          <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{coupe=#VAR{acsArticlesNbLettres,200}}{note=#NOTATION_MOYENNE_PONDEREE}>
         </BOUCLE_articles>
       </ul>
   </div>

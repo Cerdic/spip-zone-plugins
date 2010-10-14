@@ -7,7 +7,7 @@
           <ul>
           <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
           <li class="menu-item">
-          <a href="?site#ID_SYNDIC" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#NOM_SITE</a>
+          <a href="?site#ID_SYNDIC" [title="(#DESCRIPTIF|textebrut|entites_html|coupe{80,...})"]>#NOM_SITE</a>
           <a href="#URL_SITE" target="_new" title="<:acces_direct:>: #URL_SITE" class="spip_out"><img src="#CHEMIN{composants/articles/images/goto.gif}" alt="&uaArr;"  title="<:acces_direct:>: #URL_SITE" /></a>
           <i>[(#DESCRIPTIF|couper{150})]</i>
           </li>

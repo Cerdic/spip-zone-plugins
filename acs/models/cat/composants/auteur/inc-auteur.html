@@ -12,7 +12,7 @@
     [<p class="pagination">(#PAGINATION)</p>]
     <ul>
       <BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
-      <INCLURE{fond=composants/articles/li-article}{env=#ENV}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
+      <INCLURE{fond=composants/articles/li-article}{env=#ENV}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}>
       </BOUCLE_articles>
     </ul>
   </div>

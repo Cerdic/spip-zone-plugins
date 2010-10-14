@@ -1,0 +1,14 @@
+[(#REM) 
+
+Articles issus de la syndication du site id_syndic
+
+]<B_articles>
+<div class="liste-articles">#ANCRE_PAGINATION
+  [<p class="pagination">(#PAGINATION)</p>]
+  <ul>
+    <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse}{pagination #VAR{acsArticlesPagination,10}}>
+    <INCLURE{fond=composants/articles/li-article}{env}{self}{titre}{surtitre}{soustitre}{texte=#DESCRIPTIF}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{tags}>
+    </BOUCLE_articles>
+  </ul> 
+</div>
+</B_articles>

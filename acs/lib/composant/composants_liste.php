@@ -130,6 +130,11 @@ function composant_instances($c) {
  */
 function composant_actif($composant) {
 	$actif = false;
+
+	// Si on upgrade depuis une vieille version, il n'y a pas d'instances de composants. Ce test pourra être supprimé ulterieurement
+	if (!is_array($composant['instances']))
+		return false;
+		
 	foreach($composant['instances'] as $nic=>$cp) {
 		if ($cp['on'] == 'oui') {
 			$actif = true;
