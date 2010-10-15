@@ -43,5 +43,5 @@ function calculer_balise_LONGITUDE() {
    $longitude = preg_replace("/<\/?Longitude>/", "", $xml[11]);
    return round($longitude, 1);
   
-
+}
 ?>
