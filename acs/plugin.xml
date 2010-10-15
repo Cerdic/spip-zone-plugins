@@ -5,7 +5,7 @@
 	<description>
 		<multi>
 			[fr]
- - <a href="?exec=acs">Assistant de Configuration du Site</a>
+ - <a href="?exec=acs">Assistant de Conception du Site</a>
  			<br />
  			ACS est un gestionnaire de composants dont l'apparence et le fonctionnement sont configurables
  			depuis le site public. ACS inclut un jeu de squelettes SPIP nomm&#233; "Mod&egrave;le Cat" enti&egrave;rement
@@ -23,7 +23,7 @@
 			 		- recommander 0.2 : recommander un article &#224; un-e ami-e<br />
 			 <br />
 		 [en]
- - <a href="?exec=acs&amp;detail=2">ACS Site Configuration Wizard</a>
+ - <a href="?exec=acs&amp;detail=2">ACS Site Design Wizard</a>
   			<br />
  			ACS is a manager for customizable components. ACS include a template set called "Model Cat" totally compôsed of customizable compoenents.<br />
  			ACS also include a website-explorer with SPIP syntax colorization and direct links to included components.
