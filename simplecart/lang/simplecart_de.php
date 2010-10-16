@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_payments_methods_explication' => 'Zeichenkette zum Aktivieren von Zahlungsmethoden. Frei lassen um alle Zahlungsmethoden f&uuml;r ein Land zu autorisieren',
 	'dineromail_seller_name' => 'H&auml;ndlername',
 	'dineromail_seller_name_explication' => 'Ersatztext f&uuml;r \'email\' im Kopf. Frei lassen um Ersetzung auszuschalten. ',
+	'dineromail_see' => 'Sehen',
 
 	// E
 	'empty' => 'Leer',

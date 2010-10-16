@@ -45,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_payments_methods_explication' => 'Cadena de texto que define los métodos de pago permitidos. Dejar en blanco para habilitar todos los disponibles en el país.',
 	'dineromail_seller_name' => 'Nombre del vendedor',
 	'dineromail_seller_name_explication' => 'Leyenda que el vendedor quiere mostrar en el encabezado. Dejar en blanco para mostrar el email asociado a la cuenta.',
+	'dineromail_see' => 'Ver',
 
 	// E
 	'empty' => 'Vaciar',
