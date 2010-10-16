@@ -26,5 +26,6 @@
 	  <nom>insert_head</nom>
 		<action>insert_head</action>
 	  <inclure>apropos_plugin_pipeline.php</inclure>
-  </pipeline>
+	</pipeline>
+	<categorie>divers</categorie>
 </plugin>
