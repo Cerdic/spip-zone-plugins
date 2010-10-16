@@ -1,8 +1,10 @@
 <plugin>
 
-	<version>0.2</version>
+	<version>0.2.1</version>
 	
-	<nom><multi>[fr]Bolo - Outils pour cr&eacute;er du faux texte[en]Bolo - Tools to create fake text</multi></nom>
+	<nom>Bolo</nom>
+	
+	<shortdesc><multi>[fr]Outils pour cr&eacute;er du faux texte[en]Bolo - Tools to create fake text</multi></shortdesc>
 	
 	<prefix>bolo</prefix>
 
