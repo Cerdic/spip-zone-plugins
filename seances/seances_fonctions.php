@@ -6,7 +6,7 @@ function heure_seance($date){
 	// pour affichage sans zéro devant
 	$h = 1*heures($date);
 	$min = minutes($date);
-	if ($mim == '00')
+	if ($min == '00')
 		$min = '';
 		
 	return $h.'h'.$min;
