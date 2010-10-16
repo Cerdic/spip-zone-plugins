@@ -57,9 +57,13 @@ function spiplistes_import(
 										   );
 			}
 		}
+		//syslog(LOG_NOTICE, 'memory_get_usage[2]: ' . memory_get_usage());
+		
 		//
 		spiplistes_log('import fichier '.$filename);
 		$new_entries = file($filename);
+		
+		//syslog(LOG_NOTICE, 'memory_get_usage[3]: ' . memory_get_usage());
 		
 		$nb_new_entries = count($new_entries);
 		
@@ -205,6 +209,8 @@ function spiplistes_import(
 			$sql_col_names = '('.implode(',', array_keys($stack_new_auteurs[0])).')';
 			$sql_col_values = '';
 			
+			//syslog(LOG_NOTICE, 'memory_get_usage[5]: ' . memory_get_usage());
+			
 			foreach($stack_new_auteurs as $auteur)
 			{
 				$values = array_map('sql_quote', $auteur);
@@ -215,6 +221,10 @@ function spiplistes_import(
 			
 			$r = sql_insert('spip_auteurs', $sql_col_names, $sql_col_values);
 			//syslog(LOG_NOTICE, 'rr:'.(is_bool($r) ? ($r?'ok':'ko') : $r));
+			
+			syslog(LOG_NOTICE, 'size of imported values: ' . strlen($sql_col_values));
+			
+			//syslog(LOG_NOTICE, 'memory_get_usage[6]: ' . memory_get_usage());
 			
 			// nouveaux abonnements
 			foreach($abos_liste as $id_liste)
