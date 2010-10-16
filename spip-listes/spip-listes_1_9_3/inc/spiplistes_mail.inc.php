@@ -6,10 +6,35 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if(!defined('_ECRIRE_INC_VERSION')) return;
+
+
 include_spip('inc/spiplistes_api_globales');
 
+function spiplistes_utiliser_facteur()
+{
+	static $utiliser;
+	if($utiliser === null)
+	{
+		$utiliser =
+			(_SPIPLISTES_UTILISER_FACTEUR == 'oui')
+			&& function_exists('liste_plugin_actifs')
+			&& ($p = liste_plugin_actifs())
+			&& isset($p['FACTEUR'])
+			&& spiplistes_log('plugin facteur')
+			;
+		if(!$utiliser) syslog(LOG_WARNING, 'pas de facteur');
+		else syslog(LOG_WARNING, 'facteur ok');
+
+	}
+	return($utiliser);
+}
+
+if(!spiplistes_utiliser_facteur())
+{
 	include_spip('phpmailer/class.phpmailer');
 	include_spip('phpmailer/class.smtp');
+}
 
 	class phpMail extends PHPMailer {
 
@@ -137,4 +162,3 @@ include_spip('inc/spiplistes_api_globales');
 
 	}
 
-?>

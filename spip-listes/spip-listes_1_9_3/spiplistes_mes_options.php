@@ -7,6 +7,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if(!defined('_ECRIRE_INC_VERSION')) return;
+
 include_spip('base/abstract_sql');
 // la declaration des tables en spiplites 192 est dans 'spip-listes.php'. Elle se trouve dans 'spiplistes_tables.php' en 193
 // include_spip ('base/spip-listes');
@@ -14,7 +16,7 @@ include_spip('base/spiplistes_tables');
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api_abstract_sql');
 
-define("_SPIPLISTES_PREFIX", "spiplistes");
+define('_SPIPLISTES_PREFIX', 'spiplistes');
 
 if (!defined('_DIR_PLUGIN_SPIPLISTES')) {
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -32,10 +34,10 @@ define('_SIGNALER_ECHOS', false); // horrible
 // mode debug dans le log, peut-etre augmente pour avoir tous
 // les messages dans spip.log (par exemple)
 // voir doc php
-define("_SPIPLISTES_LOG_DEBUG", LOG_DEBUG);
-define("_SPIPLISTES_PREFIX_LOG", 'MEL: ');
+define('_SPIPLISTES_LOG_DEBUG', LOG_DEBUG);
+define('_SPIPLISTES_PREFIX_LOG', 'MEL: ');
 
-define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
+define('_DIR_PLUGIN_SPIPLISTES_IMG_PACK', _DIR_PLUGIN_SPIPLISTES.'img_pack/');
 
 // nombre max de chiffres ajoutes au login (creation abo)
 define("_SPIPLISTES_MAX_LOGIN_NN", 32766);
@@ -63,107 +65,109 @@ define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
 
 // documentation: http://www.quesaco.org/Spiplistes-les-etats-du-courrier
-define("_SPIPLISTES_COURRIER_STATUT_REDAC", "redac"); // en cours de redac
-define("_SPIPLISTES_COURRIER_STATUT_READY", "ready"); // pret a etre envoye
-define("_SPIPLISTES_COURRIER_STATUT_ENCOURS", "encour"); // en cours par meleuse
-define("_SPIPLISTES_COURRIER_STATUT_AUTO", "auto"); // publie de liste
-define("_SPIPLISTES_COURRIER_STATUT_PUBLIE", "publie"); // publie
-define("_SPIPLISTES_COURRIER_STATUT_VIDE", "vide"); // moins de 10 car.
-define("_SPIPLISTES_COURRIER_STATUT_IGNORE", "ignore"); // pas de destinataire
-define("_SPIPLISTES_COURRIER_STATUT_STOPE", "stope"); // stope par admin
-define("_SPIPLISTES_COURRIER_STATUT_ERREUR", "erreur"); // en erreur
+define('_SPIPLISTES_COURRIER_STATUT_REDAC', 'redac'); // en cours de redac
+define('_SPIPLISTES_COURRIER_STATUT_READY', 'ready'); // pret a etre envoye
+define('_SPIPLISTES_COURRIER_STATUT_ENCOURS', 'encour'); // en cours par meleuse
+define('_SPIPLISTES_COURRIER_STATUT_AUTO', 'auto'); // publie de liste
+define('_SPIPLISTES_COURRIER_STATUT_PUBLIE', 'publie'); // publie
+define('_SPIPLISTES_COURRIER_STATUT_VIDE', 'vide'); // moins de 10 car.
+define('_SPIPLISTES_COURRIER_STATUT_IGNORE', 'ignore'); // pas de destinataire
+define('_SPIPLISTES_COURRIER_STATUT_STOPE', 'stope'); // stope par admin
+define('_SPIPLISTES_COURRIER_STATUT_ERREUR', 'erreur'); // en erreur
 
-define("_SPIPLISTES_COURRIER_TYPE_NEWSLETTER", "nl");
-define("_SPIPLISTES_COURRIER_TYPE_LISTEAUTO", "auto");
+define('_SPIPLISTES_COURRIER_TYPE_NEWSLETTER', 'nl');
+define('_SPIPLISTES_COURRIER_TYPE_LISTEAUTO', 'auto');
 
 // champ 'statut' de 'spip_listes' varchar(10)
-define("_SPIPLISTES_PUBLIC_LIST", "liste");
-define("_SPIPLISTES_PRIVATE_LIST", "inact");
-define("_SPIPLISTES_DAILY_LIST", "pub_jour"); // periode = nb jours
-define("_SPIPLISTES_HEBDO_LIST", "pub_hebdo");
-define("_SPIPLISTES_WEEKLY_LIST", "pub_7jours"); // debut de semaine
-define("_SPIPLISTES_MENSUEL_LIST", "pub_mensul"); // mensuelle
-define("_SPIPLISTES_MONTHLY_LIST", "pub_mois"); // debut de mois
-define("_SPIPLISTES_YEARLY_LIST", "pub_an");
-define("_SPIPLISTES_TRASH_LIST", "poublist");
+define('_SPIPLISTES_PUBLIC_LIST', 'liste');
+define('_SPIPLISTES_PRIVATE_LIST', 'inact');
+define('_SPIPLISTES_DAILY_LIST', 'pub_jour'); // periode = nb jours
+define('_SPIPLISTES_HEBDO_LIST', 'pub_hebdo');
+define('_SPIPLISTES_WEEKLY_LIST', 'pub_7jours'); // debut de semaine
+define('_SPIPLISTES_MENSUEL_LIST', 'pub_mensul'); // mensuelle
+define('_SPIPLISTES_MONTHLY_LIST', 'pub_mois'); // debut de mois
+define('_SPIPLISTES_YEARLY_LIST', 'pub_an');
+define('_SPIPLISTES_TRASH_LIST', 'poublist');
 
 // les statuts des periodique
-define("_SPIPLISTES_LISTES_STATUTS_PERIODIQUES", 
+define('_SPIPLISTES_LISTES_STATUTS_PERIODIQUES', 
 	_SPIPLISTES_DAILY_LIST
-	. ";" . _SPIPLISTES_HEBDO_LIST
-	. ";" . _SPIPLISTES_WEEKLY_LIST
-	. ";" . _SPIPLISTES_MENSUEL_LIST
-	. ";" . _SPIPLISTES_MONTHLY_LIST
-	. ";" . _SPIPLISTES_YEARLY_LIST
+	. ';' . _SPIPLISTES_HEBDO_LIST
+	. ';' . _SPIPLISTES_WEEKLY_LIST
+	. ';' . _SPIPLISTES_MENSUEL_LIST
+	. ';' . _SPIPLISTES_MONTHLY_LIST
+	. ';' . _SPIPLISTES_YEARLY_LIST
 	);
 
 // les statuts des listes publiees
-define("_SPIPLISTES_LISTES_STATUTS_OK", 
+define('_SPIPLISTES_LISTES_STATUTS_OK', 
 	_SPIPLISTES_PRIVATE_LIST
-	. ";" . _SPIPLISTES_PUBLIC_LIST
-	. ";" . _SPIPLISTES_LISTES_STATUTS_PERIODIQUES
+	. ';' . _SPIPLISTES_PUBLIC_LIST
+	. ';' . _SPIPLISTES_LISTES_STATUTS_PERIODIQUES
 	);
 
 // statuts des listes tels qu'affichees en liste 
-define("_SPIPLISTES_LISTES_STATUTS_TOUS", 
+define('_SPIPLISTES_LISTES_STATUTS_TOUS', 
 	_SPIPLISTES_LISTES_STATUTS_OK
-	. ";" . _SPIPLISTES_TRASH_LIST
+	. ';' . _SPIPLISTES_TRASH_LIST
 	);
 
 // statuts des courriers tels qu'affiches en liste 
-define("_SPIPLISTES_COURRIERS_STATUTS"
+define('_SPIPLISTES_COURRIERS_STATUTS'
 	,	_SPIPLISTES_COURRIER_STATUT_REDAC
-	. ";" . _SPIPLISTES_COURRIER_STATUT_READY
-	//. ";" . _SPIPLISTES_COURRIER_STATUT_ENCOURS
-	. ";" . _SPIPLISTES_COURRIER_STATUT_AUTO
-	. ";" . _SPIPLISTES_COURRIER_STATUT_PUBLIE
-	. ";" . _SPIPLISTES_COURRIER_STATUT_VIDE
-	. ";" . _SPIPLISTES_COURRIER_STATUT_IGNORE
-	. ";" . _SPIPLISTES_COURRIER_STATUT_STOPE
-	. ";" . _SPIPLISTES_COURRIER_STATUT_ERREUR
+	. ';' . _SPIPLISTES_COURRIER_STATUT_READY
+	//. ';' . _SPIPLISTES_COURRIER_STATUT_ENCOURS
+	. ';' . _SPIPLISTES_COURRIER_STATUT_AUTO
+	. ';' . _SPIPLISTES_COURRIER_STATUT_PUBLIE
+	. ';' . _SPIPLISTES_COURRIER_STATUT_VIDE
+	. ';' . _SPIPLISTES_COURRIER_STATUT_IGNORE
+	. ';' . _SPIPLISTES_COURRIER_STATUT_STOPE
+	. ';' . _SPIPLISTES_COURRIER_STATUT_ERREUR
 	);
 
 // charsets:
 // charsets autorises :
-define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-8859-15;utf-8");
+define('_SPIPLISTES_CHARSETS_ALLOWED', "iso-8859-1;iso-8859-9;iso-8859-6;iso-8859-15;utf-8");
 define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
 
-define("_SPIPLISTES_EXEC_PREFIX", _SPIPLISTES_PREFIX."_");
-define("_SPIPLISTES_EXEC_ABONNE_EDIT", _SPIPLISTES_EXEC_PREFIX."abonne_edit");
-define("_SPIPLISTES_EXEC_ABONNES_LISTE", _SPIPLISTES_EXEC_PREFIX."abonnes_tous");
-define("_SPIPLISTES_EXEC_AIDE", _SPIPLISTES_EXEC_PREFIX."aide");
-define("_SPIPLISTES_EXEC_AUTOCRON", _SPIPLISTES_EXEC_PREFIX."autocron");
-define("_SPIPLISTES_EXEC_CONFIGURE", _SPIPLISTES_EXEC_PREFIX."config");
-define("_SPIPLISTES_EXEC_COURRIER_EDIT", _SPIPLISTES_EXEC_PREFIX."courrier_edit");
-define("_SPIPLISTES_EXEC_COURRIER_GERER", _SPIPLISTES_EXEC_PREFIX."courrier_gerer");
-define("_SPIPLISTES_EXEC_COURRIER_PREVUE", _SPIPLISTES_EXEC_PREFIX."courrier_previsu");
-define("_SPIPLISTES_EXEC_COURRIERS_LISTE", _SPIPLISTES_EXEC_PREFIX."courriers_casier"); // ancien listes_toutes
-define("_SPIPLISTES_EXEC_IMPORT_EXPORT", _SPIPLISTES_EXEC_PREFIX."import_export");
-define("_SPIPLISTES_EXEC_IMPORT_PATRON", _SPIPLISTES_EXEC_PREFIX."import_patron");
-define("_SPIPLISTES_EXEC_LISTE_EDIT", _SPIPLISTES_EXEC_PREFIX."liste_edit");
-define("_SPIPLISTES_EXEC_LISTE_GERER", _SPIPLISTES_EXEC_PREFIX."liste_gerer"); //ancien listes
-define("_SPIPLISTES_EXEC_LISTES_LISTE", _SPIPLISTES_EXEC_PREFIX."listes_toutes");
-define("_SPIPLISTES_EXEC_MAINTENANCE", _SPIPLISTES_EXEC_PREFIX."maintenance");
+define('_SPIPLISTES_EXEC_PREFIX', _SPIPLISTES_PREFIX.'_');
+define('_SPIPLISTES_EXEC_ABONNE_EDIT', _SPIPLISTES_EXEC_PREFIX.'abonne_edit');
+define('_SPIPLISTES_EXEC_ABONNES_LISTE', _SPIPLISTES_EXEC_PREFIX.'abonnes_tous');
+define('_SPIPLISTES_EXEC_AIDE', _SPIPLISTES_EXEC_PREFIX.'aide');
+define('_SPIPLISTES_EXEC_AUTOCRON', _SPIPLISTES_EXEC_PREFIX.'autocron');
+define('_SPIPLISTES_EXEC_CONFIGURE', _SPIPLISTES_EXEC_PREFIX.'config');
+define('_SPIPLISTES_EXEC_COURRIER_EDIT', _SPIPLISTES_EXEC_PREFIX.'courrier_edit');
+define('_SPIPLISTES_EXEC_COURRIER_GERER', _SPIPLISTES_EXEC_PREFIX.'courrier_gerer');
+define('_SPIPLISTES_EXEC_COURRIER_PREVUE', _SPIPLISTES_EXEC_PREFIX.'courrier_previsu');
+define('_SPIPLISTES_EXEC_COURRIERS_LISTE', _SPIPLISTES_EXEC_PREFIX.'courriers_casier'); // ancien listes_toutes
+define('_SPIPLISTES_EXEC_IMPORT_EXPORT', _SPIPLISTES_EXEC_PREFIX.'import_export');
+define('_SPIPLISTES_EXEC_IMPORT_PATRON', _SPIPLISTES_EXEC_PREFIX.'import_patron');
+define('_SPIPLISTES_EXEC_LISTE_EDIT', _SPIPLISTES_EXEC_PREFIX.'liste_edit');
+define('_SPIPLISTES_EXEC_LISTE_GERER', _SPIPLISTES_EXEC_PREFIX.'liste_gerer'); //ancien listes
+define('_SPIPLISTES_EXEC_LISTES_LISTE', _SPIPLISTES_EXEC_PREFIX.'listes_toutes');
+define('_SPIPLISTES_EXEC_MAINTENANCE', _SPIPLISTES_EXEC_PREFIX.'maintenance');
 
-define("_SPIPLISTES_ACTION_PREFIX", _SPIPLISTES_PREFIX."_");
-define("_SPIPLISTES_ACTION_SUPPRIMER_ABONNER", _SPIPLISTES_ACTION_PREFIX."supprimer_abonne");
-define("_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE", _SPIPLISTES_ACTION_PREFIX."changer_statut_abonne");
-define("_SPIPLISTES_ACTION_ABONNER_AUTEUR", _SPIPLISTES_ACTION_PREFIX."listes_abonner_auteur");
-define("_SPIPLISTES_ACTION_LISTE_ABONNES", _SPIPLISTES_ACTION_PREFIX."liste_des_abonnes");
-define("_SPIPLISTES_ACTION_MOD_GERER", _SPIPLISTES_ACTION_PREFIX."moderateurs_gerer");
+define('_SPIPLISTES_ACTION_PREFIX', _SPIPLISTES_PREFIX.'_');
+define('_SPIPLISTES_ACTION_SUPPRIMER_ABONNER', _SPIPLISTES_ACTION_PREFIX.'supprimer_abonne');
+define('_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE', _SPIPLISTES_ACTION_PREFIX.'changer_statut_abonne');
+define('_SPIPLISTES_ACTION_ABONNER_AUTEUR', _SPIPLISTES_ACTION_PREFIX.'listes_abonner_auteur');
+define('_SPIPLISTES_ACTION_LISTE_ABONNES', _SPIPLISTES_ACTION_PREFIX.'liste_des_abonnes');
+define('_SPIPLISTES_ACTION_MOD_GERER', _SPIPLISTES_ACTION_PREFIX.'moderateurs_gerer');
 
 // les formats d'envoi autorises, ou non pour pseudo-desabonne
-define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
-define("_SPIPLISTES_FORMAT_DEFAULT", "html");
+define('_SPIPLISTES_FORMATS_ALLOWED', 'html;texte;non');
+define('_SPIPLISTES_FORMAT_DEFAULT', 'html');
 
-define("_SPIPLISTES_META_PREFERENCES", 'spiplistes_preferences');
+define('_SPIPLISTES_META_PREFERENCES', 'spiplistes_preferences');
 
 // tampon
-define("_SPIPLISTES_TAMPON_CLES", "editeur_nom,editeur_adresse,editeur_rcs,editeur_siret,editeur_url,editeur_logo");
+define('_SPIPLISTES_TAMPON_CLES', 'editeur_nom,editeur_adresse,editeur_rcs,editeur_siret,editeur_url,editeur_logo');
 
-define("_SPIPLISTES_TIME_1_DAY", (3600 * 24));
+define('_SPIPLISTES_TIME_1_DAY', (3600 * 24));
 
+// utiliser plugin FACTEUR si present
+define('_SPIPLISTES_UTILISER_FACTEUR', 'non');
 
 if(spiplistes_spip_est_inferieur_193()) { 
 	@define('SPIP_BOTH', MYSQL_BOTH);
@@ -477,4 +481,3 @@ spiplistes_log("version: ".$spiplistes_version . " "
 	, _SPIPLISTES_LOG_DEBUG);
 */
 
-?>

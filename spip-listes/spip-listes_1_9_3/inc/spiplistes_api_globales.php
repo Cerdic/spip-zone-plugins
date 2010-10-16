@@ -25,6 +25,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if(!defined('_ECRIRE_INC_VERSION')) return;
+
 /*
 	Les fonctions qui doivent etre chargees par tous les scripts sauf inc/spiplistes_api*
 */

@@ -1,5 +1,8 @@
 <?php
 
+if(!defined('_ECRIRE_INC_VERSION')) return;
+
+
 // Boucles SPIP-listes
 global $tables_principales,$exceptions_des_tables,$table_date;
 

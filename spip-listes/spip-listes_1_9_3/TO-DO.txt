@@ -6,7 +6,6 @@
 
 TO-DO:
 
-- import gros fichier (+ de 40 K adresses) ne passe pas. Revoir req import dans inc/spip_auteurs_elargis.php (cf.: cr mail Sylvain 20101010)
 
 Si supprimer courrier, supprimer documents attachés ?
 

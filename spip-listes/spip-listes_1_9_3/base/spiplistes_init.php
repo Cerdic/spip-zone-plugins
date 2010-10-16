@@ -181,4 +181,4 @@ function spiplistes_vider_tables () {
 	return(true);
 } //
 
-?>
+

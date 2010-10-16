@@ -46,13 +46,15 @@ function exec_spiplistes_config () {
 		
 	$flag_editable = (($connect_statut == "0minirezo") && ($connect_toutes_rubriques));
 
-	if($flag_editable) {
+	if($flag_editable)
+	{
 		$keys_complement_courrier = array(
 			'opt_personnaliser_courrier'
 			, 'opt_lien_en_tete_courrier', 'lien_patron'
 			, 'opt_ajout_tampon_editeur', 'tampon_patron'
 			);
-		$keys_complement_courrier = array_merge($keys_complement_courrier, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
+		$keys_complement_courrier = array_merge($keys_complement_courrier
+												, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
 		$tampon_labels = array_flip($_tampon_cles);
 		foreach($tampon_labels as $key=>$value) {
 			$tampon_labels[$key] = _T('spiplistes:'.$key);
@@ -109,7 +111,7 @@ function exec_spiplistes_config () {
 		}
 	
 		$doit_ecrire_metas = false;
-		$str_log = "";
+		$str_log = '';
 		if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
 			$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
 		}
