@@ -15,6 +15,9 @@
         [es]
             Un plugin para e-commerce simple, sin dolores de cabeza. Sólo javascript (y spip). 
             [Configuración->.?exec=cfg&amp;cfg=simplecart]
+		[fr]  
+		   Un plugin  e-commerce simple, sans douleur de t&ecirc;te. Juste javascript et SPIP.
+		    [Configuration ->.?exec=cfg&amp;cgf=simplecart]	
         </multi>
     </description>
     <lien>http://nqnwebs.com/blog/article/simplecart-js-para-spip</lien>
