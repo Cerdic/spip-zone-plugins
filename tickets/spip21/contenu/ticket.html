@@ -20,7 +20,7 @@
 			[<dt><:tickets:champ_severite:> :</dt><dd>(#SEVERITE|tickets_texte_severite)</dd>]
 			[<dt><:tickets:champ_type:> :</dt><dd>(#TYPE|tickets_texte_type)</dd>]
 			[<dt><:tickets:champ_date:> :</dt><dd>(#DATE|affdate_court)</dd>]
-			<B_auteur><dt>Créé par :</dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd>#NOM</dd></BOUCLE_auteur>
+			<B_auteur><dt><:tickets:champ_createur:> :</dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd><a href="#URL_AUTEUR">#NOM</a></dd></BOUCLE_auteur>
 			[<dt><:tickets:champ_projet:> :</dt><dd>(#PROJET)</dd>]
 			[<dt><:tickets:champ_composant:> :</dt><dd>(#COMPOSANT)</dd>]
 			[<dt><:tickets:champ_projet:> :</dt><dd>(#VERSION)</dd>]

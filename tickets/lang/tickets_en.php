@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_tickets' => 'Bug reports',
 	'champ_assigner' => 'Assign to',
 	'champ_composant' => 'Component',
+	'champ_createur' => 'Created by',
 	'champ_date' => 'Date',
 	'champ_date_modif' => 'Modified on',
 	'champ_description' => 'Description of the ticket',

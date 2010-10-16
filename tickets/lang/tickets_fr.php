@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'champ_assigner' => 'Assigner &agrave;',
 	'champ_composant' => 'Composant',
+	'champ_createur' => 'Cr&eacute;&eacute; par',
 	'champ_date' => 'Date',
 	'champ_date_modif' => 'Modifi&eacute; le',
 	'champ_description' => 'Description du ticket',
