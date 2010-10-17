@@ -1,11 +1,20 @@
 <plugin>
-	<nom>API de vérification</nom>
+	<nom>
+		<multi>
+			[fr]API de v&#233;rification
+			[en]Control API
+		</multi>
+	</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
 	<version>0.1.1</version>
 	<etat>dev</etat>
-	<description>Fournit une fonction unique <code>verifier($valeur, $type, $options)</code> permettant de tester la validit&eacute; d'une valeur.</description>
-
+	<description>
+		<multi>
+			[fr]Fournit une fonction unique <code>verifier($valeur, $type, $options)</code> permettant de tester la validit&#233; d'une valeur.
+			[en]Provides a unique function <code>verifier($value, $type, $options)</code> to test the validity of a value.
+		</multi>
+	</description>
 	<prefix>verifier</prefix>
 	<options>verifier_options.php</options>
 	<necessite id="SPIP" version="[2.0.10;]" />
