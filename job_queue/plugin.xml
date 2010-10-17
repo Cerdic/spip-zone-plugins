@@ -1,7 +1,7 @@
 <plugin>
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
-  <version>0.6.0</version>
+  <version>0.6.1</version>
   <version_base>0.3.4</version_base>
   <etat>test</etat>
   <description>

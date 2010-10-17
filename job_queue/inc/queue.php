@@ -194,6 +194,7 @@ function queue_start_job($row){
 		case 9:	$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8]); break;
 		case 10:$res = $fonction($args[0],$args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9]); break;
 		default:
+			# plus lent mais completement generique
 			$res = call_user_func_array($fonction, $args);
 	}
 	spip_log("queue: $fonction() end", 'queue');
@@ -202,9 +203,15 @@ function queue_start_job($row){
 }
 
 /**
- * Ordonanceur
- * Evite les requetes sql a chaque appel
- * en memorisant la date du prochain job
+ * Scheduler :
+ * takes each waiting job and launch it,
+ * according to a limit total time and number of jobs
+ *
+ * time of next job to execute is updated afrer each job done
+ * in order to relaunch scheduler only when needed.
+ *
+ * @param array $force_jobs
+ *   list of id_job to execute when provided
  */
 function queue_schedule($force_jobs = null){
 	$time = time();

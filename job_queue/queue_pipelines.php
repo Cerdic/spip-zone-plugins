@@ -25,7 +25,7 @@ function queue_affichage_cron(){
 	$texte = "";
 
 	// rien a faire si le prochain job est encore dans le futur
-	if (queue_sleep_time_to_next_job()){
+	if (queue_sleep_time_to_next_job() OR defined('_DEBUG_BLOCK_QUEUE')){
 		if (!defined('_DIRECT_CRON_INHIBE'))
 			define('_DIRECT_CRON_INHIBE',true); // ne plus faire d'appel direct au cron en fin de hit
 		return $texte;

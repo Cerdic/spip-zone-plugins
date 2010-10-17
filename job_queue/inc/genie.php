@@ -54,6 +54,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_genie_dist($taches = array()) {
 	include_spip('inc/queue');
 
+	if (_request('exec')=='job_queue')
+		return;
+
 	$force_jobs = array();
 	// l'ancienne facon de lancer une tache cron immediatement
 	// etait de la passer en parametre a ing_genie_dist

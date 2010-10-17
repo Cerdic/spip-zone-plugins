@@ -6,6 +6,14 @@
 
 ]
 #CACHE{0}
+<?php
+// bloquer la queue sur ce hit
+// pour avoir coherence entre l'affichage de la liste de jobs
+// et les jobs en base en fin de hit
+define('_DEBUG_BLOCK_QUEUE',true);
+include_spip('inc/genie');
+genie_queue_watch_dist();
+?>
 <h1>Job Queue</h1>
 <B_jobs>
 	#GRAND_TOTAL jobs in queue
@@ -13,7 +21,7 @@
 	<ul class="liste_items">
 		<BOUCLE_jobs(JOBS){par date}{pagination 20}>
 			<li class="item[ (#STATUS|?{'scheduled','pending'})]">
-				<div class="date">[(#DATE|date_relative)][ (#STATUS|non)(en cours)]</div>
+				<div class="date">[(#DATE|date_relative)][ (#STATUS|non)(en cours)][(#PRIORITE|oui)&#91;#PRIORITE&#93;]</div>
 				[<strong class="description">(#DESCRIPTIF|PtoBR)</strong>]
 				[<span class="small">| #FONCTION((#ARGS|unserialize|implode{','}))</span>]
 				[(#AUTORISER{'annuler','job',#ID_JOB}|oui)
@@ -27,8 +35,3 @@
 	</ul>
 	[<p class="pagination">(#PAGINATION)</p>]
 </B_jobs>
-
-<?php
-include_spip('inc/genie');
-genie_queue_watch_dist();
-?>
