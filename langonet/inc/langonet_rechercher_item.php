@@ -22,13 +22,18 @@ function inc_langonet_rechercher_item($pattern, $correspondance) {
 	// dans tous les fichiers de langue presents sur le site.
 	// Par economie, on se limite au scan des '/lang/xxxx_fr.php'
 	foreach (preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$') as $_fichier) {
-		foreach ($contenu = file($_fichier) as $ligne => $texte) {
-			if (preg_match_all("#^[\s\t]*['\"]([a-z0-9_]+)['\"][\s\t]*=>[\s\t]*['\"](.+)['\"]#im", $texte, $matches)) {
-				foreach ($matches[1] as $cet_item) {
-					$tous_lang[$cet_item][] = $_fichier;
-					$tous_trad[$cet_item][] = $matches[2][0];
-				}
-			}
+		// On extrait le module
+		preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $module);
+		// On recupere le tableau global des items du module
+		$var_source = 'i18n_' . $module[1] . '_fr';
+		if (empty($GLOBALS[$var_source])) {
+			$GLOBALS['idx_lang'] = $var_source;
+			include($_fichier);
+		}
+		// On stocke les items dans des tableaux contenant chacun tous les items recenses
+		foreach ($GLOBALS[$var_source] as $_item => $_traduction) {
+			$tous_lang[$_item][] = $_fichier;
+			$tous_trad[$_item][] = $_traduction;
 		}
 	}
 	ksort($tous_lang);
