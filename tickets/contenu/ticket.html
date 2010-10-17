@@ -20,7 +20,7 @@
 			[<dt><:tickets:champ_severite:> :</dt><dd>(#SEVERITE|tickets_texte_severite)</dd>]
 			[<dt><:tickets:champ_type:> :</dt><dd>(#TYPE|tickets_texte_type)</dd>]
 			[<dt><:tickets:champ_date:> :</dt><dd>(#DATE|affdate_court)</dd>]
-			<B_auteur><dt><:tickets:cree_par:> :</dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd>#NOM</dd></BOUCLE_auteur>
+			<B_auteur><dt><:tickets:champ_createur:> :</dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd>#NOM</dd></BOUCLE_auteur>
 			[<dt><:tickets:champ_projet:> :</dt><dd>(#PROJET)</dd>]
 			[<dt><:tickets:champ_composant:> :</dt><dd>(#COMPOSANT)</dd>]
 			[<dt><:tickets:champ_projet:> :</dt><dd>(#VERSION)</dd>]
@@ -49,7 +49,10 @@
 
 
 <div class="ticket_commentaires">
-	<h3>Commentaires</h3>
+	<BOUCLE_decompte(TICKETS_FORUM){id_ticket} />[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+	[(#TOTAL_BOUCLE|=={1}|?{<:tickets:commentaire:>,<:tickets:commentaires:>})]</h2>]
+	[(#TOTAL_BOUCLE|=={0}|oui)<h2><:tickets:commentaire_aucun:></h2>]
+	<//B_decompte>
 
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]
 	<B_messages>
