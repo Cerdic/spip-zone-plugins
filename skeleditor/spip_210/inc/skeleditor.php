@@ -26,8 +26,10 @@ function skeleditor_path_editable(){
 	}
 
 	$c = creer_chemin();
-	while (!$path AND count($c)){
+	while (count($c)){
 		$d = array_shift($c);
+		if ($path AND strncmp($d,$path,strlen($d))!==0)
+			break;
 		if (strncmp($d,_DIR_PLUGINS,strlen(_DIR_PLUGINS))!==0
 			AND strncmp($d,_DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS))!==0
 			AND strncmp($d,_DIR_RACINE.'prive/',strlen(_DIR_RACINE.'prive/'))!==0
@@ -143,7 +145,10 @@ function skeleditor_verifie_nouveau_nom($path_base,$filename,$img=false){
 		else {
 			list($chemin,$echec) = skeleditor_cree_chemin($path_base,$filename);
 			if (!$chemin)
-				$erreur = _T('skeleditor:erreur_creation_sous_dossier',array('dir'=>joli_repertoire("$echec")));
+				if (!is_dir($echec))
+					$erreur = _T('skeleditor:erreur_creation_sous_dossier',array('dir'=>joli_repertoire("$echec")));
+				else
+					$erreur = _T('skeleditor:erreur_ecrire_dans_sous_dossier',array('dir'=>joli_repertoire("$echec")));
 		}
 	}
 	return $erreur;
@@ -160,7 +165,7 @@ function skeleditor_cree_chemin($path_base,$file){
 		$chemin = sous_repertoire($chemin, $s, false, true);
 	}
 
-	return array($chemin, $chemin?'':"$chemin_ok/$s");
+	return array($chemin, $chemin?'':"$chemin_ok$s");
 }
 
 /**
