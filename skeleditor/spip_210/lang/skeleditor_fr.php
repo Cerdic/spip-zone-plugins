@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_interdit' => 'Ce type de fichier n\'est pas autoris&eacute;',
 	'erreur_fichier_inexistant' => 'Ce fichier n\'existe pas',
 	'erreur_creation_sous_dossier' => 'Impossible de cr&eacute;er le sous dossier @dir@',
+	'erreur_ecrire_dans_sous_dossier' => 'Impossible d\'ecrire dans le sous dossier @dir@',
 
 	'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
   'erreur_ecriture_fichier'=>"Impossible d\'&eacute;crire dans le fichier",
