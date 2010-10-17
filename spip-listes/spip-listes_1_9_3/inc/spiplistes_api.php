@@ -47,7 +47,8 @@ include_spip('inc/spiplistes_api_globales');
  * @param object $sep[optional]
  * @param object $key[optional]
  */
-function spiplistes_http_build_query($data,$prefix=null,$sep='',$key=''){
+function spiplistes_http_build_query($data,$prefix=null,$sep='',$key='')
+{
 	if(!function_exists('http_build_query')) {
 	    function http_build_query($data,$prefix=null,$sep='',$key='') {
 	        $ret = array();
@@ -463,29 +464,45 @@ function spiplistes_listes_liste_abo_ids ($id_liste) {
 	return($ids_abos);
 }
 
-// retourne nombre d'abonnes a une liste
-// si $preciser, renvoie tableau total et formats
-function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false) {
+/**
+ * Compter les abonnes.
+ * @param $id_liste int. Si > 0, abonnes a cette liste,
+ * 	sinon, nombre total d'abonnements (nb lignes dans la table)
+ * @param $preciser. Si true, renvoie tableau total et formats
+ * @return int ou array
+ * */
+function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false)
+{
 	$id_liste = intval($id_liste);
-	$sql_whereq = (($id_liste > 0) ? "id_liste=".sql_quote($id_liste) : "");
-	$total = spiplistes_sql_compter ("spip_auteurs_listes", $sql_whereq);
-	if($preciser) {
+	$sql_whereq = (
+				   ($id_liste > 0)
+				   ? 'id_liste='.sql_quote($id_liste)
+				   : ''
+				   );
+	$total = spiplistes_sql_compter('spip_auteurs_listes', $sql_whereq);
+	
+	if($preciser)
+	{
 		$selection = 
 			(spiplistes_spip_est_inferieur_193())
-			? "SELECT id_auteur FROM spip_auteurs_listes " . (!empty($sql_whereq) ? "WHERE  $sql_whereq" : "")
-			: sql_select("id_auteur", "spip_auteurs_listes", $sql_whereq,'','','','','',false)
+			? 'SELECT id_auteur FROM spip_auteurs_listes '
+				. (!empty($sql_whereq) ? 'WHERE '.$sql_whereq : '')
+			: sql_select('id_auteur', 'spip_auteurs_listes', $sql_whereq,'','','','','',false)
 			;
 		$sql_result = sql_select(
 			"`spip_listes_format` AS f, COUNT(*) AS n"
-			, "spip_auteurs_elargis"
-			, "id_auteur IN (".$selection.")"
-			, "`spip_listes_format`");
-		if( $sql_result === false) {
-			spiplistes_sqlerror_log("listes_nb_abonnes_compter");
+			, 'spip_auteurs_elargis'
+			, 'id_auteur IN ('.$selection.')'
+			, "`spip_listes_format`"
+		);
+		if($sql_result === false)
+		{
+			spiplistes_sqlerror_log('listes_nb_abonnes_compter');
 		}
 		$formats = array('html' => 0, 'texte' => 0);
 		$keys = array_keys($formats);
-		while($row = sql_fetch($sql_result)) {
+		while($row = sql_fetch($sql_result))
+		{
 			if(in_array($row['f'], $keys)) {
 				$formats[$row['f']] += $row['n'];
 			}
@@ -493,10 +510,6 @@ function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false)
 		return(array($total, $formats['html'], $formats['texte']));
 	}
 	return($total);
-}
-
-function spiplistes_desabonner_auteur ($id_auteur) {
-	
 }
 
 //CP-20080509: renvoie email emetteur d'une liste
@@ -1005,9 +1018,12 @@ function spiplistes_format_valide ($format) {
 	return(in_array($format, array("non", "texte", "html")) ? $format : false);
 }
 
-//CP-20080519
-// Les fonctions spiplistes_auteurs_*() concernent les auteurs
-// Table cible : spip_auteurs
+/**
+ ******************************************************************************
+	Les fonctions spiplistes_auteurs_*() concernent les auteurs
+	Table cible : spip_auteurs
+ ******************************************************************************
+ */
 
 // CP-20080503
 // soit update cookie du cookie transmis

@@ -363,22 +363,23 @@ function exec_spiplistes_liste_gerer () {
 			$boite_liste_abonnes = _T('spiplistes:code_en_travaux');
 		}
 		$titre_boite = _T('spiplistes:abos_cette_liste');
-		$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
-		$legend = _T('spiplistes:nbre_abonnes').$nb;
-		$legend = "<small id='legend-abos1'>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small>";
-		$grosse_boite_abonnements = ""
-			. "<!-- boite abonnes/elligibles -->\n"
-			. debut_cadre_enfonce("auteur-24.gif", true, "", $titre_boite)
+		$legend = '<small id="legend-abos1">'
+			. spiplistes_nb_abonnes_liste_str_get($id_liste)
+			. '</small>'.PHP_EOL
+			;
+		$grosse_boite_abonnements = ''
+			. '<!-- boite abonnes/elligibles -->'.PHP_EOL
+			. debut_cadre_enfonce('auteur-24.gif', true, '', $titre_boite)
 			. spiplistes_bouton_block_depliable($legend
 				, false, md5('abonnes_liste'))
-			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
+			. (spiplistes_spip_est_inferieur_193() ? $legend : '')
 			. spiplistes_debut_block_invisible(md5('abonnes_liste'))
 			. debut_cadre_relief('', true)
 			. $boite_liste_abonnes
 			. fin_cadre_relief(true)
 			. fin_block()
 			. fin_cadre_enfonce(true)
-			. "<!-- fin boite abonnes/elligibles -->\n"
+			. '<!-- fin boite abonnes/elligibles -->'.PHP_EOL
 			;
 
 		// la grosse boite des moderateurs
@@ -387,23 +388,25 @@ function exec_spiplistes_liste_gerer () {
 			);
 		$titre_boite = _T('spiplistes:mods_cette_liste');
 		$nb = spiplistes_mod_listes_compter($id_liste);
-		$legend = _T('spiplistes:nbre_mods').$nb;
-		$legend = "<small>".spiplistes_nb_moderateurs_liste_str_get($nb)."</small>";
-		$grosse_boite_moderateurs = ""
-			. "<!-- boite moderateurs -->\n"
-			. debut_cadre_enfonce("redacteurs-24.gif", true, "", $titre_boite)
+		$legend = '<small>'
+			. spiplistes_nb_moderateurs_liste_str_get($nb)
+			. '</small>'.PHP_EOL
+			;
+		$grosse_boite_moderateurs = ''
+			. '<!-- boite moderateurs -->'.PHP_EOL
+			. debut_cadre_enfonce('redacteurs-24.gif', true, '', $titre_boite)
 			. spiplistes_bouton_block_depliable($legend
 				, false, md5('mods_liste'))
-			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
+			. (spiplistes_spip_est_inferieur_193() ? $legend : '')
 			. spiplistes_debut_block_invisible(md5('mods_liste'))
 			. debut_cadre_relief('', true)
-			. "<div id='mods-conteneur'>\n"
+			. '<div id="mods-conteneur">'.PHP_EOL
 			. $boite_liste_moderateurs
-			. "</div>\n"
+			. '</div>'.PHP_EOL
 			. fin_cadre_relief(true)
 			. fin_block()
 			. fin_cadre_enfonce(true)
-			. "<!-- fin boite moderateurs -->\n"
+			. '<!-- fin boite moderateurs -->'.PHP_EOL
 			;
 
 	}
