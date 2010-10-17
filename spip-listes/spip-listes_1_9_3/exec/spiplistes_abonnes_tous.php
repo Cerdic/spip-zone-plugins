@@ -209,22 +209,6 @@ function exec_spiplistes_abonnes_tous () {
 		, fin_gauche(), fin_page();
 }
 
-//CP-200080519
-// Nombre total d'auteurs (ou visiteur, ou perso) elligibles
-// Nota: un compte 'nouveau' est un compte visiteur (inscription) qui ne s'est pas encore connecté
-// Nota2: un compte créé via l'espace privé mais pas encore connecté
-// n'a pas le statut 'nouveau' mais celui de son groupe
-function spiplistes_auteurs_elligibles_compter () {
-	static $nb;
-	if(!$nb) {
-		$sql_where = array(
-			  "statut!=".sql_quote('5poubelle')
-			, "statut!=".sql_quote('nouveau')
-			);
-		$nb = sql_countsel('spip_auteurs', $sql_where);
-	}
-	return($nb);
-}
 
 //CP-200080519
 //Total des auteurs qui ne sont pas abonnes a une liste

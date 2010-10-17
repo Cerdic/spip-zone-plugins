@@ -27,7 +27,7 @@
 // $LastChangedDate$
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
@@ -94,7 +94,8 @@ function exec_spiplistes_liste_gerer () {
 		$message_erreur =
 		$page_result = "";
 
-	if(!$id_liste) {
+	if(!$id_liste)
+	{
 	//////////////////////////////////////////////////////
 	// Creer une liste
 	////
@@ -115,14 +116,16 @@ function exec_spiplistes_liste_gerer () {
 			}
 		} 	
 	}
-	else if($id_liste > 0) {
+	else if($id_liste > 0)
+	{
 	//////////////////////////////////////////////////////
 	// Modifier une liste
 	////
 		// les admins toutes rubriques et le moderateur seuls peuvent modifier la liste
 		$flag_editable = autoriser('moderer', 'liste', $id_liste);
 
-		if($flag_editable) {
+		if($flag_editable)
+		{
 		
 			// Recupere les donnees de la liste courante pour optimiser l'update
 			$sql_select = "statut,titre,date,lang";
@@ -274,8 +277,9 @@ function exec_spiplistes_liste_gerer () {
 			} // end if($btn_modifier_courrier_auto)
 			
 			// Enregistre les modifs pour cette liste
-			if(count($sql_champs)) {
-				sql_updateq("spip_listes", $sql_champs, "id_liste=".sql_quote($id_liste)." LIMIT 1");
+			if(count($sql_champs))
+			{
+				sql_updateq('spip_listes', $sql_champs, 'id_liste='.sql_quote($id_liste).' LIMIT 1');
 			}
 			
 			// Forcer les abonnements
@@ -286,7 +290,8 @@ function exec_spiplistes_liste_gerer () {
 					? $forcer_format_reception
 					: false
 					;
-				include_spip("inc/spiplistes_listes_forcer_abonnement");
+				include_spip('inc/spiplistes_listes_forcer_abonnement');
+				
 				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo, $forcer_format_reception) ===  false) {
 					$message_erreur .= spiplistes_boite_alerte(_T('spiplistes:Forcer_abonnement_erreur'), true);
 				}
@@ -343,9 +348,20 @@ function exec_spiplistes_liste_gerer () {
 			
 		// la grosse boite des abonnes
 		$tri = _request('tri') ? _request('tri') : 'nom';
-		$boite_liste_abonnes = spiplistes_listes_boite_abonnements(
-			$id_liste, $statut, $tri, $debut, _SPIPLISTES_EXEC_LISTE_GERER
+		//
+		// CP-20101017: Si trop d'elligibles, ca gele.
+		// @todo: revoir la boite/liste des abonnes/elligibles
+		// En attendant ...
+		if(spiplistes_auteurs_elligibles_compter() < 1000)
+		{
+			$boite_liste_abonnes = spiplistes_listes_boite_abonnements(
+				$id_liste, $statut, $tri, $debut, _SPIPLISTES_EXEC_LISTE_GERER
 			);
+		}
+		else
+		{
+			$boite_liste_abonnes = _T('spiplistes:code_en_travaux');
+		}
 		$titre_boite = _T('spiplistes:abos_cette_liste');
 		$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
 		$legend = _T('spiplistes:nbre_abonnes').$nb;

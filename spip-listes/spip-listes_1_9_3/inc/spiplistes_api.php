@@ -26,7 +26,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip ("inc/utils");
 include_spip ("inc/filtres");    /* email_valide() */
@@ -1029,6 +1029,25 @@ function spiplistes_date_heure_valide ($date_heure) {
 		return(array($annee, $mois, $jour, $heures, $minutes, $secondes));
 	}
 	return(false);
+}
+
+//CP-200080519
+// Nombre total d'auteurs (ou visiteur, ou perso) elligibles
+// Nota: un compte 'nouveau' est un compte visiteur (inscription) qui ne s'est pas encore connecté
+// Nota2: un compte créé via l'espace privé mais pas encore connecté
+// n'a pas le statut 'nouveau' mais celui de son groupe
+function spiplistes_auteurs_elligibles_compter ()
+{
+	static $nb;
+	if(!$nb)
+	{
+		$sql_where = array(
+			  'statut!='.sql_quote('5poubelle')
+			, 'statut!='.sql_quote('nouveau')
+			);
+		$nb = sql_countsel('spip_auteurs', $sql_where);
+	}
+	return($nb);
 }
 
 //CP-20080511
