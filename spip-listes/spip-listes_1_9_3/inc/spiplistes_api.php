@@ -1071,7 +1071,7 @@ function spiplistes_auteurs_elligibles_compter ()
 function spiplistes_auteurs_non_abonnes_compter ()
 {
 	static $nb;
-	if(!$nb)
+	if($nb === null)
 	{
 		$selection =
 			(spiplistes_spip_est_inferieur_193())
