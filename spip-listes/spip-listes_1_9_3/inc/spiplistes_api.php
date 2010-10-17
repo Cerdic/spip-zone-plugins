@@ -150,9 +150,15 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
 	);
 }
 
-//CP-20080520
-// Les fonctions spiplistes_abonnements_*() concernent les abonnements
-// Table cible : spip_auteurs_listes
+/**
+ ******************************************************************************
+	Les fonctions spiplistes_abonnements_*() concernent les abonnements
+	
+	Table cible : spip_auteurs_listes
+	
+ ******************************************************************************
+ */
+
 
 /**
  * CP-20080324 : abonner un id_auteur a une id_liste
@@ -368,9 +374,14 @@ function spiplistes_abonnements_zombies () {
 
 }
 
-//CP-20080520
-// Les fonctions spiplistes_listes_*() concernent les listes
-// Table cible : spip_listes
+/**
+ ******************************************************************************
+	Les fonctions spiplistes_abonnements_*() concernent les listes
+	
+	Table cible : spip_listes
+	
+ ******************************************************************************
+ */
 
 //CP-20080508 : dans la table des listes
 function spiplistes_listes_compter ($sql_whereq = "") {
@@ -596,9 +607,26 @@ function spiplistes_courriers_en_queue_premier ($select, $where) {
 	);
 }
 
-//CP-20080512
-// Les fonctions spiplistes_format_abo_*() concernent les formats de reception des abos
-// Table cible : spip_auteurs_elargis
+
+/**
+ ******************************************************************************
+	Les fonctions spiplistes_format_abo_*() concernent les 
+	formats de reception des abos
+	
+	Table cible : spip_auteurs_elargis
+	
+	Table historique utilisee par d'autres plugins.
+	
+	Cette table contient le format par defaut de l'abonne'.
+	Le format final, reel, est dans le champ 'format' de
+	la table des abonnements (spip_auteurs_listes).
+	
+	Ce format est attache' a l'abonnement. Ainsi, un abonne'
+	peut s'inscrire au format HTML a' la liste 1
+	et au format TEXTE a la liste 2.
+	
+ ******************************************************************************
+ */
 
 
 // suspend les abonnements d'un compte
@@ -724,9 +752,14 @@ function spiplistes_formats_autorises ($idx = 'array') {
 	return($formats[$idx]);
 }
 
-//CP-20080512
-// Les fonctions spiplistes_mod_listes_*() concernent les abonnements
-// Table cible : spip_auteurs_mod_listes
+/**
+ ******************************************************************************
+	Les fonctions spiplistes_mod_listes_*() concernent les moderateurs
+	
+	Table cible : spip_auteurs_mod_listes
+	
+ ******************************************************************************
+ */
 
 // renvoie ID du moderateur de la liste
 // CP-20080608 : ou de toutes les listes si $id_liste = 'toutes'
@@ -1021,7 +1054,9 @@ function spiplistes_format_valide ($format) {
 /**
  ******************************************************************************
 	Les fonctions spiplistes_auteurs_*() concernent les auteurs
+	
 	Table cible : spip_auteurs
+	
  ******************************************************************************
  */
 
