@@ -17,11 +17,15 @@ function balise_NUAGE_dist($p) {
 function filtre_calculer_nuage_dist($titres, $urls, $poids, $expose) {
   $filtre_find = chercher_filtre('find');
   $resultat = array();
+  if(function_exists('lire_config'))
+  	$score_min = lire_config('nuage/score_min',0.05);
+  else
+  	$score_min = 0.05;
   $max = empty($poids)?0:max($poids);
   if($max>0) {
     foreach ($titres as $id => $t) {
       $score = $poids[$id]/$max; # entre 0 et 1
-      if($score > 0.05){
+      if($score > $score_min){
         $s = ($unite=floor($score += 0.900001)) . floor(10*($score - $unite));
         $s -= 9;
         $resultat[$t] = array(
