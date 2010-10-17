@@ -210,25 +210,6 @@ function exec_spiplistes_abonnes_tous () {
 }
 
 
-//CP-200080519
-//Total des auteurs qui ne sont pas abonnes a une liste
-function spiplistes_auteurs_non_abonnes_compter () {
-	static $nb;
-	if(!$nb) {
-		$selection =
-			(spiplistes_spip_est_inferieur_193())
-			? "SELECT id_auteur FROM spip_auteurs_listes GROUP BY id_auteur"
-			: sql_select("id_auteur", "spip_auteurs_listes", '','id_auteur','','','','',false)
-		;
-		$sql_where = array(
-			  "statut!=".sql_quote('5poubelle')
-			, "statut!=".sql_quote('nouveau')
-			, "id_auteur NOT IN (".$selection.")"
-			);
-		$nb = sql_countsel('spip_auteurs', $sql_where);
-	}
-	return($nb);
-}
 
 /*
  * @return boite de selection des auteurs trouves
