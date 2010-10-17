@@ -167,6 +167,8 @@ define('_SPIPLISTES_TAMPON_CLES', 'editeur_nom,editeur_adresse,editeur_rcs,edite
 define('_SPIPLISTES_TIME_1_DAY', (3600 * 24));
 
 // utiliser plugin FACTEUR si present
+// nota: CP-Sun Oct 17 20:26:34 CEST 2010
+//	ne pas modifier, hors dev. N'est pas operationnel.
 define('_SPIPLISTES_UTILISER_FACTEUR', 'non');
 
 if(spiplistes_spip_est_inferieur_193()) { 

@@ -17,7 +17,7 @@
 	From: SPIP-Listes-V, http://www.quesaco.org/
 */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
