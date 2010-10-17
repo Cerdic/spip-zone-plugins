@@ -13,4 +13,17 @@ $(document).ready(function() {
 			});
 		}
 	});
+	$('.includestatic').each(function() {
+		var me = $(this);
+		var env = $('a', this).attr('rel');
+		if (env) {
+			$('a', this).attr('href','#');
+			$.ajax({
+				url: env,
+				type: "GET",
+				cache: true,
+				success: function(c) { me.html(c); }
+			});
+		}
+	});
 });

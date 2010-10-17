@@ -1,18 +1,23 @@
 <plugin>
 	<nom>AjaxLoad pour #INCLURE</nom>
 	<auteur>
-	Fil &#169; 2009 - GNU/GPL
+	Fil &amp; ARNO* &#169; 2009 - GNU/GPL
 	</auteur>
 	<version>
-	0.65
+	0.7
 	</version>
 	<etat>
 	test
 	</etat>
 	<description>
-	Ajoute une option <code>{ajaxload}</code> &agrave; la balise <code>#INCLURE</code>
+	Ajoute une option <code>{ajaxload}</code> &agrave; la balise <code>#INCLURE</code>. 
+	La noisette n'est alors pas incluse, mais charg&eacute;e dynamiquement en Ajax au chargement de la page.
 
-	Ce qui permet de diff&eacute;rer le calcul du truc inclus sur un deuxi&egrave;me hit
+	Autre m&eacute;thode: <code>{ajaxload=html}</code> fabrique une noisette statique (en HTML non dynamique) 
+	dans <code>/local/cache-ajaxload</code>, son appel se faisant ainsi hors SPIP. 
+	Le cache n'est donc plus g&eacute;r&eacute; par le <code>#CACHE</code> de SPIP; il est par d&eacute;faut de 2 heures, on peut le forcer
+	en ajoutant le crit&egrave;re <code>{ttl_ajaxload=60*60*24}</code>.
+
 	</description>
 	<prefix>
 	INCLUREAJAXLOAD
@@ -25,6 +30,6 @@
 		<nom>insert_head</nom>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<categorie>outil</categorie>
 </plugin>
