@@ -1,0 +1,6 @@
+[(#REM)
+ Ce squelette n'est necessaire que pour SPIP 2.0
+ A partir de SPIP 2.1, le compilateur trouve directement extra/page-xxx
+
+]#SET{composition,#CHEMIN{extra/page-#ENV{composition}|concat{.html}}|?{page-#ENV{composition},dist}}
+#INCLURE{fond=extra/#GET{composition},env}

@@ -1,0 +1,41 @@
+<plugin>
+	<nom><multi>[fr]Squelettes Z pour SPIP (Zpip)[en]Z skeletons for SPIP (Zpip)</multi></nom>
+	<auteur>Matthieu Marcillaud, C&#233;dric Morin, Romy Tetue, Collectif SPIP</auteur>
+	<icon>img/zpip-128.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>2.0.0-dev</version>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[fr]Syst&#232;me de squelette
+_ Un squelette comme <code>squelettes-dist/</code> de SPIP,
+avec une organisation et une modularit&#233; optimis&#233;e, 
+et qui permet d'utiliser les th&#232;mes de [->http://www.spip-contrib.net/Themes]
+			[en]Skeleton system
+_ A skeleton like <code>squelettes-dist/</code> of SPIP,
+with an optimized organization and modularity,
+and which can use the themes of [-> http://www.spip-contrib.net/Themes]
+		</multi>
+	</description>
+	<prefix>Z</prefix>
+	<fonctions>z_pipelines.php</fonctions>
+	<options>z_options.php</options>
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>z_pipelines.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+</plugin>

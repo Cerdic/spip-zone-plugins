@@ -1,0 +1,7 @@
+
+<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a>[<span class="sep">
+(#SESSION{id_auteur}|oui)| </span><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>][<span class="sep">
+(#SESSION{id_auteur}|non)| </span><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a>][<span class="sep">
+(#AUTORISER{ecrire})| </span><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>]<span class="sep"> |
+</span><a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a><span class="sep"> |
+</span><a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a>

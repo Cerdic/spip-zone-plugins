@@ -1,0 +1,80 @@
+	<h1>Boites</h1>
+		#BOITE_OUVRIR{'<h1>mod </h1>'}
+			<p>box is the <b>basic</b> container, all other containers inherit from this one. This is the high performance container that should be used unless you specifically need another type of container.</p>
+			<ul class="simpleList">
+				<li>One tiny image</li>
+				<li>Expands to any height or width</li>
+				<li>Compatible with any content</li>
+				<li>Choose for any container object that doesn't require outside transparency or complex borders.</li>
+			</ul>
+		#BOITE_FERMER
+
+	<div class="line">
+		<h2>Habillage des boites</h2>
+		<h3>Contour</h3>
+		#BOITE_OUVRIR{'<h3>simple</h3>','simple'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+
+		#BOITE_OUVRIR{'<h3>info</h3>','info'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+
+		#BOITE_OUVRIR{'<h3>note</h3>','note'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+
+		#BOITE_OUVRIR{'<h3>important</h3>','important'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+
+		<h3>Fonds</h3>
+		#BOITE_OUVRIR{'<h3>basic highlight</h3>','basic highlight'}
+			<p>Combiner la classe basic avec une classe de fond</p>
+		#BOITE_FERMER
+
+		#BOITE_OUVRIR{'<h3>basic inverse</h3>','basic inverse'}
+			<p>Combiner la classe basic avec une classe de fond</p>
+		#BOITE_FERMER
+
+		<h3>Erreurs, succes, avertissement</h3>
+
+		#BOITE_OUVRIR{'<h3>success</h3>','success'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+		#BOITE_OUVRIR{'','success'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+
+		#BOITE_OUVRIR{'<h3>notice</h3>','notice'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+		#BOITE_OUVRIR{'','notice'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+
+		#BOITE_OUVRIR{'<h3>error</h3>','error'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+		#BOITE_OUVRIR{'','error'}
+			<p>Contenu</p>
+		#BOITE_FERMER
+
+	</div>
+
+	<div class="line">
+		<h2>Header de boite</h2>
+		#BOITE_OUVRIR{'<h3>simple/section</h3>','simple','section'}
+			<p>Body</p>
+		#BOITE_FERMER
+		#BOITE_OUVRIR{'<h3>simple/bam</h3>','simple','bam'}
+			<p>Body</p>
+		#BOITE_FERMER
+		#BOITE_OUVRIR{'<h3>basic/topper</h3>','basic inverse','topper'}
+			<p>Body</p>
+		#BOITE_FERMER
+
+		<h2>Block Footers</h2>
+		<div class="ft act">button here</div>
+	</div>
+	
