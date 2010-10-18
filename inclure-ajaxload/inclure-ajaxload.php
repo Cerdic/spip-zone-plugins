@@ -58,7 +58,7 @@ function recuperer_fond_ajax() {
 			$contenu = call_user_func_array('recuperer_fond', $args);
 			ecrire_fichier($fichier, $contenu);
 			// ecrire une version .gz pour content-negociation par apache, cf. [11539]
-			// ecrire_fichier("$fichier.gz",$contenu, true);
+			//ecrire_fichier("$fichier.gz",$contenu, true);
 
 		}
 		
@@ -123,10 +123,7 @@ $flux = '<?php if ($_COOKIE["no_js"] != "no_js" && !_IS_BOT) { ?>
 <script type="text/javascript"><!--
 document.write("<\/script><script>/*");
 //--></script>
-<meta http-equiv="refresh" content="0; url=spip.php?action=ia_nojs&amp;retour=<?php echo urlencode(parametre_url(self(),\'no_js\',\'oui\'));?>" />
-<meta http-equiv="pragma" content="no-cache" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="-1" />
+<meta http-equiv="refresh" content="2; url=spip.php?action=ia_nojs&amp;retour=<?php echo urlencode(parametre_url(self(),\'no_js\',\'oui\'));?>" />
 <script type="text/javascript">/* */</script>
 <?php } else { ?>
 <script type="text/javascript"><!--
