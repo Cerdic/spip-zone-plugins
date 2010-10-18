@@ -35,12 +35,15 @@ function apropos_affiche_les_extension($liste_extensions_actives){
 	}
 	return $rese;
 }
+/* Fin affiche les extensions */
 
 // affichce la liste des plugins
 $liste_des_pgI_actifs = apropos_affiche_les_PiG($lcpa,$lpf);
 
+// fin de l'affichage par un renvoi à SPIP Contrib
 echo "Pour plus d'informations sur ces plugins, rendez vous sur le site <a href=\"http://www.spip-contrib.net/\" title=\"L’espace des contributions externes, qui recense l’ensemble des fonctionnalités supplémentaires mises à disposition à la communauté par les utilisateurs de SPIP.\">http://www.spip-contrib.net</a>.";
 
+/* les fonctions utilisees pour les plugins */
 //entete liste des plugins affichage du nombre du plugin actives
 function apropos_affiche_les_PiG($lcpa,$lpf){
 		echo "<div class='plug-liste'><h3>".sinon(
