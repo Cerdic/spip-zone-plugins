@@ -1,0 +1,40 @@
+.plug-liste{
+	text-align: left;
+	}
+.plug-liste li{
+	list-style-type: none;
+	/*height: 48px;*/
+	padding-left: 36px;
+	border-bottom: thin solid #d4d4d4;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+.plug-intro{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 0;
+	text-align: left;
+}
+.plug-icon img{
+	float: left;
+	margin-left: -38px;
+}
+.plug-nom{
+	font-weight: bold;
+}
+.plug-version{
+	font-size: 0.9em;
+	}
+.plug-etat{
+	font-size: 0.9em;
+}
+.plug-description{
+	font-size: 0.9em;
+	text-align: left;
+	line-height: 1.1em;
+	padding-bottom: 6px;
+}
+.plug-resume{
+	font-size: 1em;
+	height: auto;
+}
