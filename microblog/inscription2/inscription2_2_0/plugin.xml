@@ -1,0 +1,80 @@
+<plugin>
+	<nom>
+		Inscription2
+	</nom>
+	<auteur>
+		&copy; cmtmt2003 - 2007/2009 - Distribu&eacute; sous licence GNU/GPL v3
+	</auteur>
+
+	<version>0.73</version>
+	<version_base>0.73</version_base>
+	<etat>test</etat>
+
+	<description>
+		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires.
+	</description>
+	<icon>images/inscription2.png</icon>
+	<prefix>
+		  inscription2
+	</prefix>
+	<install>base/inscription2_installer.php</install>
+	<options>
+		inscription2_mes_options.php
+	</options>
+	<fonctions>
+		inscription2_mes_fonctions.php
+	</fonctions>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/inscription2.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/inscription2.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_exceptions_des_champs_auteurs_elargis</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_verifications_specifiques</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='inscription2_adherents' parent='auteurs'>
+	    <icone>images/fiche-perso.png</icone>
+	    <titre>inscription2:icone_afficher_utilisateurs</titre>
+	</bouton>
+	<bouton id='inscription2_adherents2' parent='bando_reactions'>
+		<icone>images/inscription2-16.png</icone>
+		<titre>inscription2:icone_afficher_utilisateurs</titre>
+		<url>inscription2_adherents</url>
+	</bouton>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="cfg" version="[1.14;]" />
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id='spip_bonux' version='[1.8.2;]' />
+	<necessite id='saisies' version='[1.1;]' />
+	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_15.zip" />
+	<categorie>auteur</categorie>
+</plugin>

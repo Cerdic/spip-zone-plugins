@@ -1,0 +1,79 @@
+[(#REM)
+
+	Controleur pour le crayon 'nom-complet', uniquement html
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
+
+]
+#CACHE{0}
+<BOUCLE_b(AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}{tous}>
+<script type="text/javascript">
+/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
+
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.ÒÁ‡ËÈ‚ÍÓÙ˚ ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
+	
+			var id = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR").crayon();
+			var validator = $(id).validate({
+			event: "keyup",
+			showErrors: function(errors, errorList) {
+				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
+				$('.crayon-submit').hide();
+				validator.defaultShowErrors();
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo( element.parent("div") );
+			},
+			success: function() {$('.crayon-submit').show();},
+			rules: {
+				#ENV{name_nom_famille}: {[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
+				#ENV{name_prenom}: {[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]}
+			},
+			messages: {
+				#ENV{name_nom_famille}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+					rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+				#ENV{name_prenom}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+					rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"}
+			}
+		});
+
+		function testform(){
+			//On lance le validateur une fois pour vérifier si c est ok - si c'est pas ok on cache le bouton ok
+			if(validator.form() == false){ $('.crayon-submit').hide();}
+			else{$('.crayon-submit').show();}
+		}
+		
+	$().ready(function() {
+		testform();
+		$('.obligatoire label').not('.error').append('*');
+	});
+</script>
+
+<fieldset style="background-color:#fff;">
+	<legend><:inscription2:votre_nom_complet:></legend>
+
+	[(#CONFIG{inscription2/nom_famille}|?{' ',''})
+	#SET{nom_famille_obligatoire, false}
+	[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{' ',''})#SET{nom_famille_obligatoire, true}]
+	[(#GET{nom_famille_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]		
+	<label><:inscription2:nom_famille:></label>
+	<input class="crayon-active" name="#ENV{name_nom_famille}" style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
+	</div>]
+	
+	[(#CONFIG{inscription2/prenom}|?{' ',''})
+	#SET{prenom_obligatoire, false}
+	[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{' ',''})#SET{prenom_obligatoire, true}]
+	[(#GET{prenom_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:prenom:></label>
+	&nbsp;<input class="crayon-active" name="#ENV{name_prenom}" style="width:#ENV{largeur}px;" value="[(#PRENOM**|entites_html)]" />
+	</div>]
+
+</fieldset>
+
+</BOUCLE_b>
+<//B_b>

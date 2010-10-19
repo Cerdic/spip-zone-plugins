@@ -1,0 +1,45 @@
+<!--
+        config_i2_societes.html
+        
+        Copyright 2009 kent1 <kent1@arscenic.org>
+        
+        This program is free software; you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation; either version 2 of the License, or
+        (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+        MA 02110-1301, USA.
+-->
+
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=i2_societes -->
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<ul>
+				<li>
+					<label for="forme"><:societe:cfg_forme_affichage:></label>
+					<input type="radio" name="forme" id="forme" value="unique"[(#ENV*{forme}|=={unique}|oui) checked="checked"] /> <:societe:cfg_forme_unique:><br />
+					<input type="radio" name="forme" id="forme" value="multiple"[(#ENV*{forme}|=={multiple}|oui) checked="checked"] /> <:societe:cfg_forme_multiple:>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+				<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+			</p>
+		</fieldset>
+	</div>
+</form>

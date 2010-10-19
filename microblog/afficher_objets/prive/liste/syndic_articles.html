@@ -1,0 +1,51 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	id_article,1
+}})
+]<B_liste_art>
+#ANCRE_PAGINATION
+<div class="liste-elements syndic_articles">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:titre_articles_syndiques:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_art(SYNDIC_ARTICLES){id_syndic?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_SYNDIC_ARTICLE|puce_changement_statut{#STATUT,#ID_SYNDIC,syndic_article})]</td>
+			<td class='titre'>[<a
+					href="(#URL_ARTICLE)">#SET{a,'</a>'}]#TITRE[(#GET{a})]
+				<span class="auteurs">([(#LESAUTEURS), ][(#DATE|affdate_court)])</span>
+				[(#TAGS|afficher_enclosures)]
+				[<div style='float:#LANG_RIGHT;'>&nbsp;<em>(#TAGS|afficher_tags)</em></div>]
+				[<div style='float:#LANG_RIGHT;'>[<a href="(#URL_SOURCE)">#SET{b,'</a>'}](#SOURCE|sinon{#URL_SOURCE})#GET{b}</div>]
+			</td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='action'>[(#AUTORISER{modifier,syndic_article,#ID_SYNDIC_ARTICLE}|oui)
+				#SET{valider,' '}
+				[(#STATUT|=={publie}|oui)[(#BOUTON_ACTION{<:info_bloquer_lien:>,#URL_ACTION_AUTEUR{instituer_syndic,#ID_SYNDIC_ARTICLE-refuse,#SELF},ajax})]
+				#SET{valider,''}][
+				(#STATUT|=={refuse}|oui)[(#BOUTON_ACTION{<:info_retablir_lien:>,#URL_ACTION_AUTEUR{instituer_syndic,#ID_SYNDIC_ARTICLE-publie,#SELF},ajax})]
+				#SET{valider,''}][
+				(#STATUT|=={off}|et{#ID_SYNDIC_ARTICLE|test_syndic_article_miroir}|oui)
+				<:syndic_lien_obsolete:>
+				#SET{valider,''}][(#GET{valider}|oui)
+					[(#BOUTON_ACTION{<:info_retablir_lien:>,#URL_ACTION_AUTEUR{instituer_syndic,#ID_SYNDIC_ARTICLE-publie,#SELF},ajax})]
+				]
+			]</td>
+		</tr>
+	</BOUCLE_liste_art>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_art>[
+<div class="liste-elements syndic_articles"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_art>

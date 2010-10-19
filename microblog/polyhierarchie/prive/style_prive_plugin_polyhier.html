@@ -1,0 +1,35 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.formulaire_editer_rubrique .editer_parents,
+.formulaire_editer_article .editer_parents {padding-#GET{left}:5px;background:#eee url(#CHEMIN{images/polyhier-32.png}) no-repeat top right;}
+
+.formulaire_editer_rubrique .editer_parents label,
+.formulaire_editer_article .editer_parents label {margin-#GET{left}:0;display:block;float:left;padding:2px 0;}
+
+#chemins_transverses {	font-size: 0.9em;overflow: hidden;margin:3px 0 0; padding: 0;border-top:1px solid #eee;}
+#polyhier_enfants_indirects {padding:10px 0;background:#fff url(#CHEMIN{images/polyhier-32.png}) no-repeat top right;border:1px solid #GET{foncee};}
+#polyhier_enfants_indirects h3 {background:#GET{claire};padding:1px 3px;}
+#polyhier_enfants_indirects ul.liste_items {margin:0 5px;}
+#polyhier_enfants_indirects .liste_items li {overflow:visible;}
+#polyhier_enfants_indirects .liste_items li .date {font-size:0.9em;}
+[(#REM)</style>]

@@ -1,0 +1,14 @@
+#CACHE{0}
+<BOUCLE_lettre(LETTRES) {id_lettre}><INCLURE {fond=emails/inc-haut} {id_lettre} {lang}>
+
+<h2>#TITRE</h2>
+
+[(#DESCRIPTIF)]
+
+[(#CHAPO)]
+
+[(#TEXTE)]
+
+<p class="petit"><:lettres:desabonnement:> : <a href="%%URL_VALIDATION_DESABONNEMENTS%%" class="spip"><:lettres:se_desabonner:></a></p>
+
+<INCLURE {fond=emails/inc-bas} {id_lettre} {lang}></BOUCLE_lettre>

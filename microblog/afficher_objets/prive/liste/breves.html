@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	id_breve,1
+}})
+]<B_liste_bre>
+#ANCRE_PAGINATION
+<div class="liste-elements breves">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_breve,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_bre(BREVES){id_secteur?}{id_mot?}{id_rubrique?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+			<td class='titre'>[(#LOGO_BREVE||image_reduire{20,26})]<a href="[(#ID_BREVE|generer_url_entite{breve})]">#TITRE</a></td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,breve,#ID_BREVE}|?{
+				<a href="[(#URL_ECRIRE{breves_edit,id_breve=#ID_BREVE})]">#ID_BREVE</a>,
+				#ID_BREVE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_bre>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_bre>[
+<div class="liste-elements breves"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_bre>

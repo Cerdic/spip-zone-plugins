@@ -1,0 +1,72 @@
+<div class="formulaire_spip formulaire_inscription2[(#ENV{id_auteur}|oui)formulaire_inscription2_profil]" id="formulaire_inscription2[_(#ENV{id_auteur})]">
+
+[(#ENV**{erreurs}|table_valeur{email_connu}|oui)
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{email})</p>]
+[<p><span class='erreur'>(#ENV**{erreurs}|table_valeur{email_connu})</span></p>]
+#LOGIN_PUBLIC
+]
+[(#ENV**{erreurs}|table_valeur{email_connu}|non)
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+		[(#REM) pour reprendre la main apres la validation]
+		[(#PIPELINE{i2_confirmation,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
+	]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+
+[(#ENV{editable}|oui)
+	[(#SET{enctype,[(#ENV{id_auteur}|?{
+		[(#CONFIG{inscription2/logo_auteur_fiche_mod}|=={on}|oui)enctype="multipart/form-data"],
+		[(#CONFIG{inscription2/logo_auteur}|=={on}|oui)enctype="multipart/form-data"]
+	})]})]
+    <form action='#ENV{action}' method='post' #GET{enctype}>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+        [(#REM) pour inserer des champs au debut du formulaire]
+
+		[(#PIPELINE{i2_form_debut,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
+		
+        [(#ENV*{id_auteur}|oui)
+			<INCLURE{fond=formulaires/inscription2_modif_infos_connection}{env}>
+        	<INCLURE{fond=formulaires/inscription2_modif_infos_pro}{env}>
+        	<INCLURE{fond=formulaires/inscription2_modif_infos_perso}{env}>
+        ]
+        	
+        [(#ENV*{id_auteur}|non)
+			<INCLURE{fond=formulaires/inscription2_infos_connection}{env}>
+        	<INCLURE{fond=formulaires/inscription2_infos_perso}{env}>
+        	<INCLURE{fond=formulaires/inscription2_infos_pro}{env}>
+        ]
+
+		[(#PIPELINE{i2_form_fin,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
+
+        [(#CONFIG{inscription2/publication}|=={on}|oui)
+        <fieldset class="info_publication">
+	        <legend><:inscription2:publication:></legend>
+			<ul>
+		        <li class="editer_publication">
+	                <label for="publication"><:inscription2:publication:></label>
+		            <input type="checkbox" class="checkbox" name="publication" id="publication" [(#ENV{publication}|?{'checked="checked"'})] value="on" />
+		        </li>
+			</ul>	        
+        </fieldset>]
+
+		[(#ENV{id_auteur}|non)
+			[(#CONFIG{inscription2/reglement}|=={on}|oui)
+			<INCLURE{fond=formulaires/inscription2_reglement}{env}>
+			]
+		]
+	    <p class="boutons">
+		    <input type="submit" class="submit" value="<:bouton_valider:>" />
+	    </p>
+    </form>
+]
+]
+</div>
+<script src="[(#URL_PAGE{jquery.pwdstr-1.0.js}|parametre_url{lang,#ENV{lang}})]" type='text/javascript'></script>
+<script type='text/javascript'>
+// <![CDATA[	
+$(document).ready(function($){				
+$('#password').pwdstr('#info');
+});	
+// ]]>
+</script>

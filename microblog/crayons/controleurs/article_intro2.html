@@ -1,0 +1,17 @@
+[(#REM)
+
+	Controleur pour le crayon 'article_intro2' , uniquement html
+
+]
+#CACHE{0}
+<BOUCLE_a(ARTICLES){id_article}{statut==.}>
+<fieldset style="width:#ENV{largeur}px;#ENV{style}">
+<legend>Introduction</legend>
+<label>Descriptif</label><textarea class="crayon-active" name="#ENV{name_descriptif}"
+ style="width:100%; height:#ENV{hauteur}px;">
+[(#DESCRIPTIF**|entites_html)]</textarea>
+<label>Chapo</label><textarea class="crayon-active" name="#ENV{name_chapo}"
+ style="width:100%; height:#ENV{hauteur}|mul{2}px;">
+[(#CHAPO**|entites_html)]</textarea>
+</fieldset>
+</BOUCLE_a>

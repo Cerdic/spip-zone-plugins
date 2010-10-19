@@ -1,0 +1,49 @@
+[(#REM)<style>]
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.liste-elements{
+	margin:1em 0;
+	font-size:.85em;
+	border: 1px solid #dfdfdf;
+}
+.cadre .liste-elements{font-size:1em;}
+.liste-elements table .bouton_action_post .submit {font-size:.9em;}
+
+.liste-elements .pagination {
+	margin-top:0; padding:1px 5px;
+	background:#eee; border:none;
+}
+.liste-elements .pagination .separateur {color:#aaa;}
+
+.liste-elements table.spip {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin-bottom:0;}
+.liste-elements table.spip caption {margin:0;text-align:left;}
+#contenu .liste-elements .caption {display:block;color:#333;font-size:1.1em;padding:7px 6px 6px 30px;background:none no-repeat scroll 2px 2px #FFFFFF}
+.liste-elements table.spip tr {background:white;}
+.liste-elements table.spip tr.row_odd {background:white;}
+.liste-elements table.spip tr.row_even {background:white;}
+.liste-elements table.spip thead tr {background:#eee;}
+.liste-elements table.spip tbody tr:hover {background-color: #f8f8f8;}
+.liste-elements table.spip tr th {border-color:#dfdfdf; border-left:0; border-right:0;}
+.liste-elements table.spip tr td {border-color:#dfdfdf; border-left:0; border-right:0;}
+
+.liste-elements tr th.statut,.liste-elements tr td.statut {width: 11px; text-align:center;}
+.liste-elements tr th.auteur,.liste-elements tr td.auteur {width: 80px;}
+.liste-elements tr th.date,.liste-elements tr td.date {width: 90px;}
+.liste-elements tr td.date {font-size:0.85em;}
+.liste-elements tr th.id,.liste-elements tr td.id {width: 40px; text-align:right;}
+.liste-elements tr th.action,.liste-elements tr td.action {width: 90px; text-align:right;}
+.liste-elements tr td.action input {font-size:0.9em;}
+.liste-elements tr td.titre .auteurs {font-size:0.85em;}
+.liste-elements tr td.titre .spip_logos {float:right;}
+.liste-elements tr td.titre .visiter {font-size:0.85em;}
+.liste-elements tr td.syndication .etat {display:block;color:red;}
+
+#contenu .liste-elements.mots .caption {background-image:url(#CHEMIN{images/mot-cle-24.gif});}
+#contenu .liste-elements.rubriques .caption {background-image:url(#CHEMIN{images/rubrique-24.gif});}
+#contenu .liste-elements.articles .caption {background-image:url(#CHEMIN{images/article-24.gif});}
+#contenu .liste-elements.breves .caption {background-image:url(#CHEMIN{images/breve-24.gif});}
+#contenu .liste-elements.sites .caption {background-image:url(#CHEMIN{images/site-24.gif});}
+#contenu .liste-elements.syndic_articles .caption {background-image:url(#CHEMIN{images/site-24.gif});}

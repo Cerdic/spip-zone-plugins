@@ -1,0 +1,14 @@
+#CACHE{0}
+#HTTP_HEADER{Content-type: text/plain; charset=#CHARSET}
+<BOUCLE_lettre(LETTRES) {id_lettre}>[(#TITRE)]
+----
+[
+(#DESCRIPTIF|textebrut)
+][
+
+(#TEXTE|textebrut)
+
+]----
+<:lettres:desabonnement:> : %%URL_VALIDATION_DESABONNEMENTS%%
+</BOUCLE_lettre>
+

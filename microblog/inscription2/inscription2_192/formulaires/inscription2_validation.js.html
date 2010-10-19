@@ -1,0 +1,178 @@
+<script type="text/javascript">
+/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
+	
+	jQuery.validator.addMethod("chainenombre", function(value, element) {
+		return this.required(element) || /^[A-Za-z0-9\-\'\.сзаийвкофы ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainenombre:>");
+        
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return this.required(element) || /^[A-Za-z\-\'\.сзаийвкофы ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainelettre:>");
+
+	jQuery.validator.addMethod("postal", function(value, element) {
+		return this.required(element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:cp_valide:>");
+	
+	jQuery.validator.addMethod("numero", function(value, element) {
+		return this.required(element) || /^[0-9\+\. \-]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:numero_valide:>");
+	
+	$(document).ready(function() {
+	// validate signup form on submit
+	$("#inscription").validate({
+		event: "keyup",
+		errorPlacement: function(error, element) {
+			error.appendTo( element.parent("div") ).after("<br class='nettoyeur' />");
+		},
+		rules: {
+			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+				abonnement:{required: true},
+			]
+			[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
+				#INCLURE{fond=javascript/echoppe_inscription_rules}
+			]
+			sexe:{[(#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{required: true})]},
+			nom_famille: {[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chainenombre:true, rangeLength:[2,20]},
+			username: {[(#CONFIG{inscription2/username_obligatoire}|=={on}|?{required: true,}),]chainenombre:true, rangeLength:[4,20]},
+			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[5,1000]},
+			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
+			ville: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
+			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,80]},
+			telephone: {[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			fax: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			mobile: {[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			profession: {[(#CONFIG{inscription2/profession_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
+			societe: {[(#CONFIG{inscription2/societe_obligatoire}|=={on}|?{required: true,}),]chainenombre:true, rangeLength:[3,30]},
+			secteur:{[(#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
+			fonction: {[(#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
+			adresse_pro: {[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{required: true,}),] rangeLength:[5,1000]},
+			code_postal_pro: {[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
+			ville_pro: {[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
+			telephone_pro: {[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			fax_pro: {[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			mobile_pro: {[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			divers: {[(#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{required: true,}),]rangeLength:[3,1000]},
+			pays:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
+		},
+		messages: {
+			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+				abonnement: {
+					required:"<:inscription2:champ_obligatoire:>"},
+			]
+			[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
+				#INCLURE{fond=javascript/echoppe_inscription_messages}
+			]
+			sexe: {
+				required:"<:inscription2:champ_obligatoire:>"},
+			nom_famille: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
+			prenom:{
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
+			nom: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chainenombre:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>",
+				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
+			username: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chainenombre:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>",
+				rangeLength:"Min 4 Max 20 <:inscription2:caracteres:>"},
+			adresse: {
+				required:"<:inscription2:champ_obligatoire:>",
+				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+			code_postal: {
+				required:"<:inscription2:champ_obligatoire:>",
+				postal:"<:inscription2:cp_valide:>",
+				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+			ville: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+				rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+			pays: {
+				required:"<:inscription2:champ_obligatoire:>"},
+			email: {
+				required:"<:inscription2:champ_obligatoire:>",
+				email:"<:inscription2:email_valide:>",
+				rangeLength:"Min 5 Max 30 <:inscription2:caracteres:>"},
+			telephone: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+			fax: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+			mobile: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+			profession: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
+			societe: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>",
+				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
+			secteur:{
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
+			fonction: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
+			adresse_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+			code_postal_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				postal:"<:inscription2:cp_valide:>",
+				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+			ville_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+				rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+			pays_pro: {
+				required:"<:inscription2:champ_obligatoire:>"},
+			telephone_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+			fax_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+			mobile_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+			divers:{
+				required:"<:inscription2:champ_obligatoire:>",
+				rangeLength:"Min 3 Max 1000 <:inscription2:caracteres:>"}
+		}
+	});
+
+	// propose username and name by combining first- and lastname
+	$("#username").focus(function() {
+		var prenom = $("#prenom").val();
+		var nom = $("#nom_famille").val();
+		if(prenom && nom && !this.value) {
+			this.value = prenom + "." + nom;
+		}
+	});
+	$("#nom").focus(function() {
+		var prenom = $("#prenom").val();
+		var nom = $("#nom_famille").val();
+		if(prenom && nom && !this.value) {
+			this.value = prenom + " " + nom;
+		}
+	});
+	$('.obligatoire label').append('*');
+});
+</script>

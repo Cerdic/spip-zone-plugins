@@ -1,0 +1,23 @@
+[(#REM)
+
+	Charger la librairie pour la validation des crayons (a charger dans les controleurs)
+
+]
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+[(#ENV**{debug_crayons}|?{
+	#CACHE{0}
+,
+	#CACHE{7*24*3600,cache-client}
+})]
+
+[(#CHEMIN{lib/jquery-validate/jquery.validate.js}|pack_cQuery)]
+
+[(#ENV{lang}|=={en}|non)
+	[(#CHEMIN{lib/jquery-validate/localization/messages_[(#ENV{lang})].js}|pack_cQuery)]
+]
+[(#CHEMIN{javascript/i2_validation_controleurs.js}|pack_cQuery)]
+
+[(#URL_PAGE{i2_validation_methods.js}|parametre_url{lang,#ENV{lang}}|pack_cQuery)]
+
+[(#PIPELINE{i2_validation_methods,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]

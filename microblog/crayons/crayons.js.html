@@ -1,0 +1,35 @@
+[(#REM)
+
+	Charger la librairie crayons et ses addenda
+
+]
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+[(#ENV**{debug_crayons}|?{
+	#CACHE{0}
+,
+	#CACHE{7*24*3600,cache-client}
+})]
+
+/* cQuery est jQuery, renommee pour eviter tout conflit */
+
+[(#CHEMIN{js/jquery.js}|pack_cQuery)]
+
+cQuery.noConflict();
+
+[(#CHEMIN{js/jquery.form.js}|pack_cQuery)]
+
+[(#CHEMIN{js/jquery.px.js}|pack_cQuery)]
+
+[(#CHEMIN{js/crayons.js}|pack_cQuery)]
+
+[(#CHEMIN{js/resizehandle.js}|pack_cQuery)]
+
+[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
+	[(#CHEMIN{js/crayons-fade.js}|pack_cQuery)]
+]
+/* Executer le js d'amorcage
+http://www.stevesouders.com/blog/2008/12/27/coupling-async-scripts/
+*/
+var script = cQuery('script[src*=page=crayons.js]');
+if (script.length) eval( script.get(0).innerHTML );

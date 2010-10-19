@@ -1,0 +1,15 @@
+<?php
+	include(find_in_path("inc/domaines.php"));
+	if(sizeof($domaine)>0){
+		echo '	
+				<div  class="grand_select">
+				<p><strong><:inscription2:domaine:></strong></p>
+				<:inscription2:choix_domaine:>
+				<select id="domaines" name="domaines">';
+		foreach($domaine as $cle => $value)
+				echo '<option value="'.$cle.'">'.$cle.'</option>';
+		echo '	</select>
+				
+				</div>';
+	}
+?>

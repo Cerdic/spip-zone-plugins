@@ -1,0 +1,32 @@
+#CACHE{0}
+<BOUCLE_a(AUTEURS_ELARGIS){id=#ENV{id_auteurs_elargi}}{tout}>
+<fieldset style="background-color:#fff;">
+	<legend><:inscription2:vos_contacts_personnels:></legend>
+
+	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})
+	#SET{telephone_obl, false}
+	[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{' ',''})#SET{telephone_obl, true}]
+	[(#GET{telephone_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:telephone:></label>
+	<input class="crayon-active" name="#ENV{name_telephone}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})
+	#SET{mobile_obl, false}
+	[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{' ',''})#SET{mobile_obl, true}]
+	[(#GET{mobile_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:mobile:></label>
+	<input class="crayon-active" name="#ENV{name_mobile}" style="width:#ENV{largeur}px;" value="[(#MOBILE**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})
+	#SET{fax_obl, false}
+	[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{' ',''})#SET{fax_obl, true}]
+	[(#GET{fax_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:fax:></label>
+	<input class="crayon-active" name="#ENV{name_fax}" style="width:#ENV{largeur}px;" value="[(#FAX**|entites_html)]" />
+	</div>]
+	
+</fieldset>
+</BOUCLE_a>
+<//B_a>

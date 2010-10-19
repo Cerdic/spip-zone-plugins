@@ -1,0 +1,77 @@
+<div class="formulaire_spip formulaire_lettres ajax" id="formulaire_lettres">
+
+<br class="bugajaxie" />
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable})
+<form method="post" action="#ENV{action}#formulaire_lettres">
+
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<fieldset>
+
+<legend><:lettres:lettres_information:></legend>
+
+<ul>
+
+<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{rubriques}|oui)erreur]">
+<label><:lettres:themes:></label>
+<INCLURE {fond=formulaires/inc_themes} {env}>
+[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{rubriques})</span>]
+</li>
+
+<li>
+<label for="nom"><:lettres:nom:></label>
+<input type="text" class="text" name="nom" id="nom" value="#ENV{nom}" size="30" />
+</li>
+
+<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{email}|oui)erreur]">
+<label for="email"><:lettres:email:></label>
+<input type="text" class="text" name="email" id="email" value="#ENV{email}" size="30" />
+[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email})</span>]
+</li>
+
+<li>
+<label><:lettres:format:></label>
+<div class="choix">
+<input type="radio" class="radio" name="format" value="mixte" id="format_mixte"[ (#ENV{format}|=={mixte}|?{'checked="checked"'})] />
+<label for="format_mixte"><:lettres:format_mixte:></label>
+</div>
+<div class="choix">
+<input type="radio" class="radio" name="format" value="oui" id="format_html"[ (#ENV{format}|=={html}|?{'checked="checked"'})] />
+<label for="format_html"><:lettres:format_html:></label>
+</div>
+<div class="choix">
+<input type="radio" class="radio" name="format" value="oui" id="format_texte"[ (#ENV{format}|=={texte}|?{'checked="checked"'})] />
+<label for="format_texte"><:lettres:format_texte:></label>
+</div>
+</li>
+
+<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{choix}|oui)erreur]">
+<label><:lettres:action:></label>
+<div class="choix">
+<input type="radio" class="radio" name="choix" value="abonnements" id="abonnements"[ (#ENV{choix}|=={abonnements}|?{'checked="checked"'})] />
+<label for="abonnements"><:lettres:abonnement:></label>
+</div>
+<div class="choix">
+<input type="radio" class="radio" name="choix" value="desabonnements" id="desabonnements"[ (#ENV{choix}|=={desabonnements}|?{'checked="checked"'})] />
+<label for="desabonnements"><:lettres:desabonnement:></label>
+</div>
+<div class="choix">
+<input type="radio" class="radio" name="choix" value="changement_format" id="changement_format"[ (#ENV{choix}|=={changement_format}|?{'checked="checked"'})] />
+<label for="changement_format"><:lettres:changement_format:></label>
+</div>
+[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{choix})</span>]
+</li>
+
+</ul>
+
+</fieldset>
+
+<p class="boutons"><input type="submit" class="submit" name="valide" value="<:lettres:valider:>" /></p>
+
+</form>
+]
+</div>

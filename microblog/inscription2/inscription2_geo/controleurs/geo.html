@@ -1,0 +1,72 @@
+[(#REM)
+
+	Controleur pour le crayon 'geo', uniquement html
+	Validation JS pour les champs specifies obligatoires
+	Si les champs ne sont pas actifs dans le CFG, ils n'apparaissent pas...
+
+]
+#CACHE{0}
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
+[<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
+<script type="text/javascript">
+	var me = cQuery(".auteurs_elargi-geo-#ID_AUTEUR");
+	var id = me.crayon().find('form');
+	
+	function validation(){
+		var validator = cQuery(id).validate({
+			errorElement:"p",
+			errorClass: "erreur",
+			onkeyup:function(){
+				validation();
+			},
+			showErrors: function(errors, errorList) {
+				validator.defaultShowErrors();
+				crayon_affiche_submit(me,id);
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo(element.parent("li"));
+			},
+			success: function(label){
+				label.remove();
+				crayon_affiche_submit(me,id)
+			}
+		});
+		id.find('.obligatoire input').each(function(){
+			if(cQuery(this).val() == ""){
+				cQuery(this).addClass('error');
+				var id_label = cQuery(this).attr('name');
+				var erreur = '<p class="error" generated="true"><:inscription2:champ_obligatoire:></p>';
+				cQuery(this).parent("div").append(erreur);
+				cQuery(this).parent("div").find("p.error").show();
+				id.find('.crayon-submit').hide();
+			}
+		});
+		//On test le formulaire pour chercher les potentielles erreurs
+		validator.form();
+		crayon_affiche_submit(me,id);
+	}
+	//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+	id.find('.obligatoire label').not('.error').append('*');
+	setTimeout('validation()',500);
+
+</script>
+<div class="formulaire_spip">
+<fieldset[ style="(#ENV{style})"]>
+	<ul>
+		[(#CONFIG{inscription2/latitude_fiche_mod}|oui)
+		[(#CONFIG{inscription2/latitude_obligatoire}|=={on}|oui)#SET{latitude_obl, true}]
+		[(#GET{latitude_obl}|?{<li class="obligatoire">,<li>})]
+			<label><:i2_geo:latitude:></label>
+			<input class="crayon-active text latitude[(#GET{latitude_obl}|oui) obligatoire]" name="#ENV{name_latitude}" style="width:#ENV{largeur}px;" value="[(#LATITUDE**|entites_html)]" /> 
+		</li>]
+		[(#CONFIG{inscription2/longitude_fiche_mod}|oui)
+		[(#CONFIG{inscription2/longitude_obligatoire}|=={on}|oui)#SET{longitude_obl, true}]
+		[(#GET{longitude_obl}|?{<li class="obligatoire">,<li>})]
+			<label><:i2_geo:longitude:></label>
+			<input class="crayon-active text longitude[(#GET{longitude_obl}|oui) obligatoire]" name="#ENV{name_longitude}" style="width:#ENV{largeur}px;" value="[(#LONGITUDE**|entites_html)]" /> 
+		</li>]
+	</ul>
+</fieldset>
+</div>
+</BOUCLE_a>
+<//B_a>

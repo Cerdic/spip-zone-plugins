@@ -1,0 +1,13 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<p>(#ENV{new}|intval|?{<:societe:modifier_societe:>,''})</p>]
+	[<h1>(#ENV{new}|intval|?{#ENV{titre},<:societe:creer_societe:>})</h1>]
+</div>
+#FORMULAIRE_EDITER_SOCIETE{#ENV{new},#ENV{redirect}}
+</div>

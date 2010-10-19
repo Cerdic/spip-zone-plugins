@@ -1,0 +1,36 @@
+<plugin>
+  <nom>Job Queue</nom>
+  <auteur>Cedric&amp;Fil</auteur>
+  <version>0.5.0</version>
+  <version_base>0.3.4</version_base>
+  <etat>test</etat>
+  <description>Gestion d'une queue de Jobs</description>
+  <icon>img_pack/job_queue_48.png</icon>
+  <install>base/queue.php</install>
+  <options>queue_options.php</options>
+	<lien></lien> <!-- URI de documentation -->
+  <prefix>queue</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/queue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/queue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/queue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>queue_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>queue_pipelines.php</inclure>
+	</pipeline>
+
+	<categorie>performance</categorie>
+
+</plugin>

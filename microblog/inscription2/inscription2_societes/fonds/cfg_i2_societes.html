@@ -1,0 +1,14 @@
+<!-- titre=Soci&eacute;t&eacute;s pour Inscription2 -->
+<!-- icone=images/inscription2_icone.png-->
+[(#SET{logo, <img src='[(#CHEMIN{images/inscription2.png})]' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
+<!-- descriptif= [(#GET{logo})] <:societe:description_cfg:>
+
+<a href="#URL_ECRIRE{inscription2_adherents}"><:inscription2:liste_adherents:></a><br />
+<a href="#URL_ECRIRE{societes}"><:societe:voir_societes:></a><br />
+<a href="[(#URL_ECRIRE{editer_societe}|parametre_url{id_societe,new})]"><:societe:ajouter_societe:></a>
+-->
+
+#CACHE{0}
+<div class="formulaire_spip formulaire_editer ajax">
+#FORMULAIRE_CONFIG_I2_SOCIETES
+</div>
