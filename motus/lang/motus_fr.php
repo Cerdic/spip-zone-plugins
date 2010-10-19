@@ -6,3 +6,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 			vous pouvez selectionner les rubriques souhait&eacute;es ici.",
 	
 );
+?>
