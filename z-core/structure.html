@@ -1,11 +1,15 @@
 [<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
+[(#REM) Debut du head particulier a chaque page]
 <INCLURE{fond=head/#ENV{type},env}>
+[(#REM) Partie commune a toutes les pages, sans env]
+<INCLURE{fond=inclure/head}>
+[(#REM) Fin du head particulier a chaque page, pour inserer des js specifiques par exemple]
+<INCLURE{fond=head_js/#ENV{type},env}>
 </head>
 <body class="page_#ENV{type,page}[ #ENV{type,page}_(#ENV{composition,''})]">
 <INCLURE{fond=body,env}>
-#SPIP_CRON
 </body>
 </html>
 (#EVAL{#VAL{var_zajax}|_request}|non)][

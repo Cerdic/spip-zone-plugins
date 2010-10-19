@@ -1,23 +1,23 @@
 <?php
 /**
- * Test unitaire de la fonction z_scaffoldable
- * du fichier ../plugins/zpip/z_pipelines.php
+ * Test unitaire de la fonction zcore_echaffaudable
+ * du fichier public/styliser_par_z.php
  *
  * genere automatiquement par TestBuilder
  * le 2010-03-04 22:02
  */
 
-	$test = 'z_scaffoldable';
+	$test = 'zcore_echaffaudable';
 	$remonte = "../";
 	while (!is_dir($remonte."ecrire"))
 		$remonte = "../$remonte";
 	require $remonte.'tests/test.inc';
-	find_in_path("../plugins/zpip/z_pipelines.php",'',true);
+	find_in_path("public/styliser_par_z.php",'',true);
 
 	//
 	// hop ! on y va
 	//
-	$err = tester_fun('test_z_scaffoldable', essais_z_scaffoldable());
+	$err = tester_fun('test_zcore_echaffaudable', essais_zcore_echaffaudable());
 	
 	// si le tableau $err est pas vide ca va pas
 	if ($err) {
@@ -26,13 +26,13 @@
 
 	echo "OK";
 
-	function test_z_scaffoldable(){
+	function test_zcore_echaffaudable(){
 		$args = func_get_args();
-		$res = call_user_func_array('z_scaffoldable', $args);
+		$res = call_user_func_array('zcore_echaffaudable', $args);
 		return is_array($res)?count($res):false;
 	}
 
-	function essais_z_scaffoldable(){
+	function essais_zcore_echaffaudable(){
 		$essais = array (
   1 => 
   array (
