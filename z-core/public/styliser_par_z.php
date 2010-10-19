@@ -51,7 +51,7 @@ function public_styliser_par_z_dist($flux){
 		$squelette = $flux['data'];
 		$ext = $flux['args']['ext'];
 
-		// Ajax Parallel loading : ne pas calculer le bloc, mais renvoyer un js qui le loadera an ajax
+		// Ajax Parallel loading : ne pas calculer le bloc, mais renvoyer un js qui le loadera en ajax
 		if (defined('_Z_AJAX_PARALLEL_LOAD_OK')
 			AND $dir = explode('/',$fond)
 			AND count($dir)==2 // pas un sous repertoire
@@ -63,6 +63,10 @@ function public_styliser_par_z_dist($flux){
 			$flux['data'] = substr($pipe, 0, - strlen(".$ext"));
 			return $flux;
 		}
+
+		// surcharger aussi les squelettes venant de squelettes-dist/
+		if (preg_match(',squelettes-dist/[^/]+$,',$squelette))
+			$squelette = "";
 
 		// gerer les squelettes non trouves
 		// -> router vers les /dist.html
@@ -78,9 +82,8 @@ function public_styliser_par_z_dist($flux){
 					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
 				}
 				// si c'est un objet spip, associe a une table, utiliser le fond homonyme
-				// objet.html et page.html sont a priori equivalent
 				elseif (zcore_echaffaudable($fond)){
-					$flux['data'] = substr(find_in_path($prefix_path."objet.$ext"), 0, - strlen(".$ext"));
+					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
 				}
 			}
 
