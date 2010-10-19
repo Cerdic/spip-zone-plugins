@@ -89,7 +89,7 @@ function gravatar_img($email, $logo_auteur='') {
 	}
 
 	// si pas de config, retourner ce qu'on a
-	if (!$hasconfig)
+	if (!$config)
 		return $img;
 	
 	// ensuite le mettre en forme si les options ont ete activees
