@@ -132,7 +132,7 @@ function mutu_etape_creer_base($e, $options){
 						curl_close($ch);
 						if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							echo mutu_minipres(
-								_T('mutu:install_db_echec',array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
+								_T('mutu:install_bd_echec',array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
 								"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 								'<h3>'
 								.'<a href="'.parametre_url(self(), 'creerbase', 'oui').'">'._T('mutu:install_db_reessayer').'</a>'
