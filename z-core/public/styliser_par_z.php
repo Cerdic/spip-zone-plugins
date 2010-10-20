@@ -145,6 +145,12 @@ function public_styliser_par_z_dist($flux){
 	return $flux;
 }
 
+function zcore_blocs($espace_prive=false) {
+	if ($espace_prive)
+		return (isset($GLOBALS['z_blocs_ecrire'])?$GLOBALS['z_blocs_ecrire']:array('contenu','navigation','extra','head','hierarchie','top'));
+	return (isset($GLOBALS['z_blocs'])?$GLOBALS['z_blocs']:array('contenu','navigation','extra','head','head_js'));
+}
+
 /**
  * Trouver un bloc qui peut etre sous le nom
  * contenu/article.html
