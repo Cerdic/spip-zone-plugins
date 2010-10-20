@@ -135,6 +135,11 @@ function public_styliser_par_z_dist($flux){
 					))
 				$flux['data'] = $f;
 		}
+		elseif ($fond=='structure' 
+			AND _request('var_zajax')
+			AND $f = find_in_path($prefix_path.'ajax'.".$ext")) {
+			$flux['data'] = substr($f,0,-strlen(".$ext"));
+		}
 		// chercher le fond correspondant a la composition
 		elseif (isset($flux['args']['contexte']['composition'])
 			AND (basename($fond)=='page' OR ($squelette AND substr($squelette,-strlen($fond))==$fond))

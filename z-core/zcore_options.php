@@ -8,7 +8,7 @@
 
 
 if ($z = _request('var_zajax')) {
-	incude_spip('public/styliser_par_z');
+	include_spip('public/styliser_par_z');
 	if ($z_blocs = zcore_blocs(test_espace_prive())
 	  AND in_array($z,$z_blocs)) {
 		$GLOBALS['marqueur'] .= "$z:";
