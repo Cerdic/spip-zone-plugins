@@ -81,10 +81,10 @@ function public_styliser_par_z_dist($flux){
 				// se brancher sur contenu/xx si il existe
 				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
 				if (!isset($disponible[$fond]))
-					$disponible[$fond] = (zcore_trouver_bloc($prefix_path,$z_contenu,$fond,$ext) OR zcore_echaffaudable($fond));
+					$disponible[$fond] = zcore_contenu_disponible($prefix_path,$z_contenu,$fond,$ext);
 
 				if ($disponible[$fond])
-					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));				
+					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
 			}
 
 			// echaffaudage :
@@ -95,7 +95,11 @@ function public_styliser_par_z_dist($flux){
 				AND isset($GLOBALS['visiteur_session']['statut']) // performance
 				AND autoriser('webmestre')){
 				$type = substr($fond,strlen($z_contenu)+1);
-				if ($echaffauder AND $is = zcore_echaffaudable($type))
+				if (!isset($disponible[$type]))
+					$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
+				if ($echaffauder 
+					AND $is = $disponible[$type]
+					AND is_array($is))
 					$flux['data'] = $echaffauder($type,$is[0],$is[1],$is[2],$ext);
 			}
 
@@ -109,7 +113,7 @@ function public_styliser_par_z_dist($flux){
 					AND in_array($dir,$z_blocs)){
 					$type = substr($fond,strlen("$dir/"));
 					if ($type!=='page' AND !isset($disponible[$type]))
-						$disponible[$type] = (zcore_trouver_bloc($prefix_path,$z_contenu,$type,$ext) OR zcore_echaffaudable($type));
+						$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
 					if ($type=='page' OR $disponible[$type])
 						$flux['data'] = zcore_trouver_bloc($prefix_path,$dir,'dist',$ext);
 				}
@@ -145,10 +149,32 @@ function public_styliser_par_z_dist($flux){
 	return $flux;
 }
 
+/**
+ * Lister les blocs de la page selon le contexte prive/public
+ *
+ * @param bool $espace_prive
+ * @return array
+ */
 function zcore_blocs($espace_prive=false) {
 	if ($espace_prive)
 		return (isset($GLOBALS['z_blocs_ecrire'])?$GLOBALS['z_blocs_ecrire']:array('contenu','navigation','extra','head','hierarchie','top'));
 	return (isset($GLOBALS['z_blocs'])?$GLOBALS['z_blocs']:array('contenu','navigation','extra','head','head_js'));
+}
+
+/**
+ * Verifier qu'un type a un contenu disponible,
+ * soit parcequ'il a un fond, soit parce qu'il est echaffaudable
+ *
+ * @param string $prefix_path
+ * @param string $z_contenu
+ * @param string $type
+ * @param string $ext
+ * @return mixed
+ */
+function zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext){
+	if ($d = zcore_trouver_bloc($prefix_path,$z_contenu,$type,$ext))
+		return $d;
+	return zcore_echaffaudable($type);
 }
 
 /**
