@@ -25,6 +25,7 @@ function public_styliser_par_z_dist($flux){
 	static $z_blocs;
 	static $apl_constant;
 	static $page;
+	static $disponible = array();
 
 	if (!isset($prefix_path)) {
 		$z_blocs = zcore_blocs(test_espace_prive());
@@ -58,9 +59,9 @@ function public_styliser_par_z_dist($flux){
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs) // verifier deja qu'on est dans un bloc Z
 			AND in_array($dir,explode(',',constant($apl_constant))) // et dans un demande en APL
-			AND $pipe = find_in_path("$prefix_path$dir/z_apl.$ext") // et qui contient le squelette APL
+			AND $pipe = zcore_trouver_bloc($prefix_path,$dir,'z_apl',$ext) // et qui contient le squelette APL
 			){
-			$flux['data'] = substr($pipe, 0, - strlen(".$ext"));
+			$flux['data'] = $pipe;
 			return $flux;
 		}
 
@@ -75,16 +76,15 @@ function public_styliser_par_z_dist($flux){
 
 			// si on est sur un ?page=XX non trouve
 			if ($flux['args']['contexte'][$page] == $fond OR $flux['args']['contexte']['type'] == $fond) {
-				// se brancher sur contenu/xx si il existe
+
 				// si on est sur un ?page=XX non trouve
-				$base = "$prefix_path$z_contenu/".$fond.".".$ext;
-				if ($base = find_in_path($base)){
-					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
-				}
-				// si c'est un objet spip, associe a une table, utiliser le fond homonyme
-				elseif (zcore_echaffaudable($fond)){
-					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
-				}
+				// se brancher sur contenu/xx si il existe
+				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
+				if (!isset($disponible[$fond]))
+					$disponible[$fond] = (zcore_trouver_bloc($prefix_path,$z_contenu,$fond,$ext) OR zcore_echaffaudable($fond));
+
+				if ($disponible[$fond])
+					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));				
 			}
 
 			// echaffaudage :
@@ -108,8 +108,10 @@ function public_styliser_par_z_dist($flux){
 					AND $dir !== $z_contenu
 					AND in_array($dir,$z_blocs)){
 					$type = substr($fond,strlen("$dir/"));
-					if ($type=='page' OR find_in_path($prefix_path."$z_contenu/$type.$ext") OR zcore_echaffaudable($type))
-						$flux['data'] = substr(find_in_path($prefix_path."$dir/dist.$ext"), 0, - strlen(".$ext"));
+					if ($type!=='page' AND !isset($disponible[$type]))
+						$disponible[$type] = (zcore_trouver_bloc($prefix_path,$z_contenu,$type,$ext) OR zcore_echaffaudable($type));
+					if ($type=='page' OR $disponible[$type])
+						$flux['data'] = zcore_trouver_bloc($prefix_path,$dir,'dist',$ext);
 				}
 			}
 			$squelette = $flux['data'];
@@ -143,7 +145,28 @@ function public_styliser_par_z_dist($flux){
 	return $flux;
 }
 
-
+/**
+ * Trouver un bloc qui peut etre sous le nom
+ * contenu/article.html
+ * ou
+ * contenu/contenu.article.html
+ *
+ * @param string $prefix_path
+ *	chemin de base qui prefixe la recherche
+ * @param string $bloc
+ *	nom du bloc cherche
+ * @param string $fond
+ *	nom de la page (ou 'dist' pour le bloc par defaut)
+ * @param <type> $ext
+ *	extension du squelette
+ * @return string
+ */
+function zcore_trouver_bloc($prefix_path,$bloc,$fond,$ext){
+	if ($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext")
+		OR $f = find_in_path("$prefix_path$bloc/$fond.$ext"))
+		return substr($f, 0, - strlen(".$ext"));
+	return "";
+}
 /**
  * Tester si un type est echaffaudable
  * cad si il correspond bien a un objet en base
