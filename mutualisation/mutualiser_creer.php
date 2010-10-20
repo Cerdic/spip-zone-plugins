@@ -135,7 +135,7 @@ function mutu_etape_creer_base($e, $options){
 								_T('mutu:install_bd_echec',array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
 								"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 								'<h3>'
-								.'<a href="'.parametre_url(self(), 'creerbase', 'oui').'">'._T('mutu:install_db_reessayer').'</a>'
+								.'<a href="'.parametre_url(self(), 'creerbase', 'oui').'">'._T('mutu:install_bd_reessayer').'</a>'
 								.'</h3>'
 							);
 							exit;
