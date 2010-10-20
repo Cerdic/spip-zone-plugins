@@ -90,7 +90,7 @@ function spip_bonux_formulaires_configurer_recense($form){
 		for ($i=0;$i<2;$i++) {
 			// a la seconde iteration, evaluer le fond avec les valeurs deja trouvees
 			// permet de trouver aussi les name="#GET{truc}"
-			if ($i==1) $contenu = recuperer_fond("formulaires/$form",$valeurs);
+			if ($i==1) $contenu = recuperer_fond("formulaires/$form",array_merge($valeurs,array('editable'=>' ')));
 
 			$balises = array_merge(extraire_balises($contenu,'input'),
 				extraire_balises($contenu,'textarea'),
