@@ -89,7 +89,7 @@ if (typeof(box_settings)!='undefined')
 	$.mediaboxClose = function () {$.fn.colorbox.close();};
 
 	// API modalbox
-	$.modalbox = function (href, options) {$.fn.mediabox($.extend({href:href,overlayClose:true},options));};
+	$.modalbox = function (href, options) {$.fn.mediabox($.extend({href:href,inline:href.match(/^#/),overlayClose:true},options));};
 	$.modalboxload = function (url, options) { $.modalbox(url,options); };
 	$.modalboxclose = $.mediaboxClose;
 
