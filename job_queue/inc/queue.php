@@ -71,6 +71,9 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 			'status'=>_JQ_SCHEDULED,
 		));
 
+	// une option de debug pour verifier que les arguments en base sont bons
+	// ie cas d'un char non acceptables sur certains type de champs
+	// qui coupe la valeur
 	if (defined('_JQ_INSERT_CHECK_ARGS') AND $id_job) {
 		$args = sql_getfetsel('args', 'spip_jobs', 'id_job='.intval($id_job));
 		if ($args!==$arguments) {
