@@ -66,7 +66,7 @@ function public_styliser_par_z_dist($flux){
 		}
 
 		// surcharger aussi les squelettes venant de squelettes-dist/
-		if (preg_match(',squelettes-dist/[^/]+$,',$squelette))
+		if (preg_match(',(squelettes-dist|prive)/[^/]+$,',$squelette))
 			$squelette = "";
 
 		// gerer les squelettes non trouves
