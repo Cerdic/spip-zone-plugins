@@ -22,13 +22,13 @@
 		
 		global $spip_lang_right;
 
-		if (!autoriser('voir', 'formulaires')) {
+		$id_formulaire = intval($_GET['id_formulaire']);
+		if (!autoriser('voir', 'formulaires', $id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
 		}
 
-		$id_formulaire = intval($_GET['id_formulaire']);
 		$formulaire = new formulaire($_GET['id_formulaire']);
 		
 		pipeline('exec_init',array('args'=>array('exec'=>'formulaires','id_formulaire'=>$formulaire->id_formulaire),'data'=>''));
@@ -70,13 +70,17 @@
 		echo '<ul>';
 		if ($formulaire->statut == 'hors_ligne') {
 			echo '<li class="prepa selected">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('formulairesprive:hors_ligne').'</li>';
-			echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=en_ligne', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:a_mettre_en_ligne').'</a></li>';
+			if (autoriser('publierdans','rubrique',$formulaire->id_rubrique)) {
+				echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=en_ligne', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:a_mettre_en_ligne').'</a></li>';
+			}
+			if ($formulaire->possede_applications())
+				echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=export', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:exporter_resultats').'</a></li>';
 			echo '<li class="poubelle"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=poubelle', false, true).'">'.http_img_pack('puce-poubelle.gif', 'puce-poubelle', '')._T('formulairesprive:a_supprimer').'</a></li>';
 		}
 		if ($formulaire->statut == 'en_ligne') {
 			echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=hors_ligne', false, true).'">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('formulairesprive:a_mettre_hors_ligne').'</a></li>';
 			echo '<li class="publie selected">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:a_mettre_en_ligne').'</li>';
-			if ($formulaire->limiter_invitation == 'oui' and $formulaire->possede_applications())
+			if ($formulaire->possede_applications())
 				echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=export', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:exporter_resultats').'</a></li>';
 			echo '<li class="poubelle"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=poubelle', false, true).'">'.http_img_pack('puce-poubelle.gif', 'puce-poubelle', '')._T('formulairesprive:a_supprimer').'</a></li>';
 		}
@@ -85,7 +89,7 @@
 		echo '</ul>';
 
 		if ($formulaire->statut == 'en_ligne') {
-			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('formulairesprive:voir_en_ligne').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h">'._T('formulairesprive:voir_en_ligne').'</a></td></tr></table>';
+			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h" target="_blank"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('formulairesprive:voir_en_ligne').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h" target="_blank">'._T('formulairesprive:voir_en_ligne').'</a></td></tr></table>';
 		}
 		echo '</div>';
 		echo '</div>';
@@ -122,6 +126,7 @@
 		if ($formulaire->limiter_invitation == 'non')
 			$config.= '<tr><td>'._T('formulairesprive:limiter_applicant').'</td><td><strong>'._T('formulairesprive:'.$formulaire->limiter_applicant).'</strong></td></tr>';
 		$config.= '<tr><td>'._T('formulairesprive:notifier_auteurs').'</td><td><strong>'._T('formulairesprive:'.$formulaire->notifier_auteurs).'</strong></td></tr>';
+		$config.= '<tr><td>'._T('formulairesprive:notifier_applicant').'</td><td><strong>'._T('formulairesprive:'.$formulaire->notifier_applicant).'</strong></td></tr>';
 		$config.= '</table>';
 		$config.= fin_cadre_enfonce(true);
 
@@ -142,7 +147,7 @@
 		echo '</div>';
 		echo '</div>';
 
-		echo '<h1>'.extraire_multi($formulaire->titre).'</h1>';
+		echo '<h1>'.$formulaire->titre.'</h1>';
 		
 		echo '<br class="nettoyeur" />';
 
@@ -170,9 +175,9 @@
 
 		echo icone_inline(_T('formulairesprive:creer_nouveau_bloc'), generer_url_ecrire("blocs_edit","id_formulaire=".$formulaire->id_formulaire."&new=oui"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/bloc.png', "creer.gif", $spip_lang_right);
 
-		if ($formulaire->limiter_invitation == 'oui') {
-			echo '<br class="nettoyeur" />';
-			echo afficher_objets('application', _T('formulairesprive:liste_applications'), array('FROM' => 'spip_applications', 'WHERE' => 'id_formulaire='.intval($formulaire->id_formulaire), 'ORDER BY' => 'maj DESC'));
+		echo '<br class="nettoyeur" />';
+		echo afficher_objets('application', _T('formulairesprive:liste_applications'), array('FROM' => 'spip_applications', 'WHERE' => 'id_formulaire='.intval($formulaire->id_formulaire), 'ORDER BY' => 'maj DESC'));
+		if ($formulaire->limiter_invitation == 'oui') {	
 			echo icone_inline(_T('formulairesprive:creer_invitation'), generer_url_ecrire("invitations_edit","id_formulaire=".$formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/invitation.png', "creer.gif", $spip_lang_right);
 		}
 

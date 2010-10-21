@@ -32,6 +32,7 @@
 		var $email;
 		var $mdp;
 		var $nom;
+		var $txt;
 
 		var $existe = false;
 
@@ -61,6 +62,7 @@
 					$this->id_applicant	= $tableau['id_applicant'];
 					$this->iv			= base64_decode($tableau['iv']);
 					$this->email		= $tableau['email'];
+					$this->txt			= ($this->email!=NULL) ? $this->email : ("Visiteur n° " . $this->id_applicant);
 					$this->nom			= $tableau['nom'];
 					$this->mdp			= $tableau['mdp'];
 					$this->existe		= true;
@@ -855,7 +857,34 @@
 					case 'email_applicant':
 						if (!ereg(_REGEXP_EMAIL, $valeur))
 							return false;
-						$verification = sql_select('id_applicant', 'spip_applicants', 'email="'.addslashes($valeur).'"');
+
+						//$verification = sql_select('id_applicant', 'spip_applicants', 'email="'.addslashes($valeur).'"');
+						$verification = sql_select(
+											array(
+												'spip_applicants.id_applicant'
+											),
+											array(
+												'spip_applicants',
+												'spip_applications'
+											),
+											array(
+												'`spip_applications`.`id_applicant`=`spip_applicants`.`id_applicant`',
+												'`spip_applicants`.`email`="'.addslashes($valeur).'"',
+												'`spip_applications`.`id_formulaire`="'.addslashes($this->bloc->formulaire->id_formulaire).'"'/*,
+												'`spip_applications`.`statut`="valide"'*/
+											));
+/*
+ * Cette requête a été complètement ré-écrite
+ * pour gérer les cas où une même personne répond à plusieurs formulaires
+ * en voici un code SQL exemple complet: 
+
+SELECT spip_applicants.id_applicant
+FROM `spip_applications`, `spip_applicants` 
+WHERE `spip_applications`.`id_applicant`=`spip_applicants`.`id_applicant`
+      AND `spip_applicants`.`email`='jtlebi@gmail.com'
+      AND `spip_applications`.`id_formulaire`=18
+      AND `spip_applications`.`statut`='valide'
+ */ 
 						if (sql_count($verification) == 0) {
 							return true;
 						} else {
@@ -1013,11 +1042,9 @@
 				$this->statut = $statut;
 			}
 
-			if ($this->formulaire->notifier_auteurs == 'oui') {
+			if ($this->formulaire->notifier_auteurs == 'oui' || $this->formulaire->notifier_applicant == 'oui' ) {
 				include_spip('inc/facteur_classes');
-				$objet			= recuperer_fond('notifications/notification_nouveau_resultat_titre', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
-				$message_html	= recuperer_fond('notifications/notification_nouveau_resultat_html', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
-				$message_texte	= recuperer_fond('notifications/notification_nouveau_resultat_texte', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+				
 				// réponses aux questions de type "auteurs"
 				$resA = sql_select('A.email',
 									'spip_auteurs AS A
@@ -1034,8 +1061,8 @@
 									'spip_auteurs AS A
 									INNER JOIN spip_auteurs_formulaires AS AF ON AF.id_auteur=A.id_auteur',
 									'AF.id_formulaire='.intval($this->formulaire->id_formulaire));
+				$tableau_emails = array();
 				if (sql_count($resB) >= 1) {
-					$tableau_emails = array();
 					if (sql_count($resA) >= 1) {
 						while ($arr = sql_fetch($resA))
 							$tableau_emails[] = $arr['email'];
@@ -1043,36 +1070,61 @@
 						while ($arr = sql_fetch($resB))
 							$tableau_emails[] = $arr['email'];
 					}
-					$email_premier_auteur = $tableau_emails[0];
-					$notification = new Facteur($email_premier_auteur, $objet, $message_html, $message_texte);
-					$tableau_emails_sans_premier = array_slice($tableau_emails, 1);
-					foreach ($tableau_emails_sans_premier as $email_auteur)
-						$notification->AddAddress($email_auteur);
-					$resC = sql_select('R.valeur AS email_applicant',
+				}	
+				
+				//mail de la personne qui répond
+				$resC = sql_select('R.valeur AS email',
 										'spip_reponses AS R
 										INNER JOIN spip_questions AS Q ON Q.id_question=R.id_question
 										INNER JOIN spip_blocs AS B ON B.id_bloc=Q.id_bloc',
 										'Q.controle="email_applicant"
 											AND B.id_formulaire='.intval($this->formulaire->id_formulaire).'
 											AND R.id_application='.intval($this->id_application), '', '1');
-					if (sql_count($resC) == 1) {
-						$t = sql_fetch($resC);
-						$notification->AddReplyTo($t['email_applicant']);
-					} else {
-						$resD = sql_select('R.valeur AS email',
+				if (sql_count($resC) == 1) {
+					$t = sql_fetch($resC);
+				} else {
+					$resD = sql_select('R.valeur AS email',
 											'spip_reponses AS R
 											INNER JOIN spip_questions AS Q ON Q.id_question=R.id_question
 											INNER JOIN spip_blocs AS B ON B.id_bloc=Q.id_bloc',
 											'Q.controle="email"
 												AND B.id_formulaire='.intval($this->formulaire->id_formulaire).'
 												AND R.id_application='.intval($this->id_application), '', '1');
-						if (sql_count($resD) == 1) {
-							$t = sql_fetch($resD);
-							$notification->AddReplyTo($t['email']);
-						}
+					if (sql_count($resD) == 1) {
+						$t = sql_fetch($resC);
 					}
-					$message_envoye = $notification->Send();
 				}
+					
+				//envoye des mails
+				if ($this->formulaire->notifier_auteurs == 'oui' && count($tableau_emails)>0) {
+					$objet			= recuperer_fond('notifications/notification_nouveau_resultat_titre', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+					$message_html	= recuperer_fond('notifications/notification_nouveau_resultat_html', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+					$message_texte	= recuperer_fond('notifications/notification_nouveau_resultat_texte', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+
+					$email_premier_auteur = $tableau_emails[0];
+					$notification_auteur = new Facteur($email_premier_auteur, $objet, $message_html, $message_texte);
+					$tableau_emails_sans_premier = array_slice($tableau_emails, 1);
+					foreach ($tableau_emails_sans_premier as $email_auteur)
+						$notification_auteur->AddAddress($email_auteur);
+					if (isset($t['email'])) {
+						$notification_auteur->AddReplyTo($t['email']);
+					}
+					$message_envoye = $notification_auteur->Send();
+				}
+				if ($this->formulaire->notifier_applicant=='oui'  && isset($t['email']))  {
+					
+					$objet			= recuperer_fond('notifications/notification_nouveau_resultat_applicant_titre', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+					$message_html	= recuperer_fond('notifications/notification_nouveau_resultat_applicant_html', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+					$message_texte	= recuperer_fond('notifications/notification_nouveau_resultat_applicant_texte', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+
+					$notification_interroge = new Facteur($t['email'] ,$objet, $message_html, $message_texte);
+					foreach ($tableau_emails as $mail)
+						$notification_interroge->AddReplyTo($mail);
+					$notification_interroge->From=$tableau_emails[0];
+					$notification_interroge->FromName=$tableau_emails[0];
+					$message_envoye=$notification_interroge->Send();
+				}
+				
 			}
 		}
 

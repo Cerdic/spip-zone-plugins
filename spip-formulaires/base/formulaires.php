@@ -201,7 +201,13 @@
 
 	function formulaires_install($action) {
 		include_spip('inc/plugin');
-		$info_plugin_formulaires = plugin_get_infos(_NOM_PLUGIN_FORMULAIRES);
+		if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+			$get_infos = charger_fonction('get_infos','plugins');
+			$info_plugin_formulaires = $get_infos(_DIR_PLUGIN_SPIPBB);
+		}
+		else {
+			$info_plugin_formulaires = plugin_get_infos(_DIR_PLUGIN_SPIPBB);
+		}
 		$version_plugin = $info_plugin_formulaires['version'];
 		switch ($action) {
 			case 'test':

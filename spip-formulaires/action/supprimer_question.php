@@ -23,7 +23,7 @@
 		$id_question	= $_REQUEST['id_question'];
 		$ajax			= $_REQUEST['ajax'];
 
-		if (autoriser('editer', 'formulaires')) {
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 
 			$question = new question($id_formulaire, $id_bloc, $id_question);
 			$question->supprimer();

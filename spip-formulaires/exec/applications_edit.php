@@ -22,16 +22,16 @@
 
 		global $spip_lang_right;
 
-		if (!autoriser('editer', 'formulaires')) {
+		$id_application = intval($_GET['id_application']);
+		$t = sql_fetsel('id_formulaire, id_applicant', 'spip_applications', 'id_application='.intval($id_application));
+		$id_applicant = $t['id_applicant'];
+		$id_formulaire = $t['id_formulaire'];
+		if (!autoriser('editer', 'formulaires',$id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
 		}
 
-		$id_application = intval($_GET['id_application']);
-		$t = sql_fetsel('id_formulaire, id_applicant', 'spip_applications', 'id_application='.intval($id_application));
-		$id_formulaire = $t['id_formulaire'];
-		$id_applicant = $t['id_applicant'];
 		$application = new application($id_applicant, $id_formulaire, $id_application);
 
 		pipeline('exec_init',array('args'=>array('exec'=>'applications_edit','id_application'=>$application->id_application),'data'=>''));

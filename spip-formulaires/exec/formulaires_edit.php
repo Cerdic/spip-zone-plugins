@@ -21,15 +21,15 @@
 
 	function exec_formulaires_edit() {
 
-		if (!autoriser('editer', 'formulaires')) {
+		$id_formulaire	= $_GET['id_formulaire'];
+		$id_rubrique	= $_GET['id_rubrique'];
+		$opt['id_rubrique'] = ($id_rubrique==NULL) ? $_POST['id_parent'] : $id_rubrique;
+		if (!autoriser('editer', 'formulaires', $id_formulaire, NULL, $opt)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
 		}
 
-		$id_formulaire	= $_GET['id_formulaire'];
-		$id_rubrique	= $_GET['id_rubrique'];
-		
 		pipeline('exec_init', array('args' => array('exec' => 'formulaires_edit', 'id_formulaire' => $id_formulaire), 'data' => ''));
 
 		if (!empty($_POST['enregistrer'])) {
@@ -45,11 +45,10 @@
 			$formulaire->limiter_invitation	= $_POST['limiter_invitation'];
 			if ($formulaire->limiter_invitation	== 'oui') {
 				$formulaire->limiter_applicant = 'oui';
-				$formulaire->notifier_applicant = 'non';
 			} else {
 				$formulaire->limiter_applicant = $_POST['limiter_applicant'];
-				$formulaire->notifier_applicant = $_POST['notifier_applicant'];
 			}
+			$formulaire->notifier_applicant = $_POST['notifier_applicant'];
 			$formulaire->notifier_auteurs = $_POST['notifier_auteurs'];
 			$formulaire->texte = $_POST['texte'];
 			$formulaire->merci = $_POST['merci'];
@@ -151,6 +150,14 @@
 		echo '<option value="oui"'.(($formulaire->notifier_auteurs == 'oui') ? ' selected="selected"' : '' ).'>'._T('formulairesprive:oui').'</option>';
 		echo '</select>';
 		echo '</li>';
+		
+		echo '<li class="obligatoire">';
+		echo '<label for="notifier_applicant">'._T('formulairesprive:notifier_applicant').'</label>';
+		echo '<select name="notifier_applicant" id="notifier_applicant" class="fondl">';		
+		echo '<option value="non"'.(($formulaire->notifier_applicant == 'non') ? ' selected="selected"' : '' ).'>'._T('formulairesprive:non').'</option>';
+		echo '<option value="oui"'.(($formulaire->notifier_applicant == 'oui') ? ' selected="selected"' : '' ).'>'._T('formulairesprive:oui').'</option>';
+		echo '</select>';
+		echo '</li>';
 
 	    echo '<li class="obligatoire">';
 		echo '<label for="limiter_invitation">'._T('formulairesprive:limiter_invitation').'</label>';
@@ -205,8 +212,6 @@
 		}
 
 		echo '</ul>';
-
-		echo '<input type="hidden" name="notifier_applicant" value="non" />';
 
 	  	echo '<p class="boutons"><input type="submit" class="submit" name="enregistrer" value="'._T('formulairesprive:enregistrer').'" /></p>';
 

@@ -20,7 +20,8 @@
 
 	function exec_questions_edit() {
 	 	
-		if (!autoriser('editer', 'formulaires')) {
+		$id_formulaire	= intval($_GET['id_formulaire']);
+		if (!autoriser('editer', 'formulaires', $id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
@@ -31,7 +32,6 @@
 		else
 			$spip_lettres_actif = false;
 
-		$id_formulaire	= intval($_GET['id_formulaire']);
 		$id_bloc		= intval($_REQUEST['id_bloc']);
 		$id_question	= intval($_GET['id_question']);
 		
@@ -289,8 +289,6 @@
 		echo '		$("#crtl_texte").css("display","none");'."\n";
 		echo '}'."\n";
 		echo '</script>'."\n";
-
-		echo '<input type="hidden" name="notifier_applicant" value="non" />';
 
 	  	echo '<p class="boutons"><input type="submit" class="submit" name="enregistrer" value="'._T('formulairesprive:enregistrer').'" /></p>';
 

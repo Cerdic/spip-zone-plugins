@@ -25,7 +25,7 @@
 		$position			= $_REQUEST['position'];
 		$ajax				= $_REQUEST['ajax'];
 
-		if (autoriser('editer', 'formulaires')) {
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 
 			$choix_question = new choix_question($id_formulaire, $id_bloc, $id_question, $id_choix_question);
 			$choix_question->changer_ordre($position);

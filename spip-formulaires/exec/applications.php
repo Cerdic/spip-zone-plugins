@@ -22,22 +22,23 @@
 
 		global $spip_lang_right;
 
-		if (!autoriser('voir', 'formulaires')) {
+		$id_application = intval($_GET['id_application']);
+		$t = sql_fetsel('id_formulaire, id_applicant', 'spip_applications', 'id_application='.intval($id_application));
+		$id_formulaire = $t['id_formulaire'];
+		$id_applicant = $t['id_applicant'];
+		
+		if (!autoriser('voir', 'formulaires',$id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
 		}
 
-		$id_application = intval($_GET['id_application']);
-		$t = sql_fetsel('id_formulaire, id_applicant', 'spip_applications', 'id_application='.intval($id_application));
-		$id_formulaire = $t['id_formulaire'];
-		$id_applicant = $t['id_applicant'];
 		$application = new application($id_applicant, $id_formulaire, $id_application);
 
 		pipeline('exec_init',array('args'=>array('exec'=>'applications','id_application'=>$application->id_application),'data'=>''));
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($application->applicant->email, "naviguer", "formulaires_tous");
+		echo $commencer_page($application->applicant->txt, "naviguer", "formulaires_tous");
 
 		echo debut_gauche('', true);
 		echo '<div class="cadre cadre-info verdana1">';
@@ -85,7 +86,7 @@
 		echo '</div>';
 		echo '</div>';
 
-		echo '<h1>'.$application->applicant->email.'</h1>';
+		echo '<h1>'.$application->applicant->txt.'</h1>';
 
 		echo '<br class="nettoyeur" />';
 

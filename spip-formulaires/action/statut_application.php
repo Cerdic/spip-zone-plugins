@@ -22,7 +22,7 @@
 		list($id_formulaire, $id_applicant) = spip_fetch_array(spip_query('SELECT id_formulaire, id_applicant FROM spip_applications WHERE id_application="'.$id_application.'"'), SPIP_NUM);
 		$application = new application($id_applicant, $id_formulaire, $id_application);
 
-		if (autoriser('editer', 'formulaires')) {
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 
 			if ($_REQUEST['statut'] == 'poubelle') {
 				$application->supprimer();

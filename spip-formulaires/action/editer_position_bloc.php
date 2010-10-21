@@ -23,7 +23,7 @@
 		$position		= $_REQUEST['position'];
 		$ajax			= $_REQUEST['ajax'];
 
-		if (autoriser('editer', 'formulaires')) {
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 
 			$bloc = new bloc($id_formulaire, $id_bloc);
 			$bloc->changer_ordre($position);

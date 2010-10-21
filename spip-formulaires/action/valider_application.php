@@ -17,10 +17,10 @@
 
 
 	function action_valider_application() {
-		if (autoriser('editer', 'formulaires')) {
+		$id_formulaire = $t['id_formulaire'];
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 			$id_application = $_REQUEST['id_application'];
 			$t = sql_fetsel('id_formulaire, id_applicant', 'spip_applications', 'id_application='.intval($id_application));
-			$id_formulaire = $t['id_formulaire'];
 			$id_applicant = $t['id_applicant'];
 			$application = new application($id_applicant, $id_formulaire, $id_application);
 			if (!empty($_POST['enregistrer'])) {

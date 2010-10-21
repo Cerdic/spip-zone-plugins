@@ -24,7 +24,7 @@
 		$id_choix_question	= $_REQUEST['id_choix_question'];
 		$ajax				= $_REQUEST['ajax'];
 
-		if (autoriser('editer', 'formulaires')) {
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 
 			$choix_question = new choix_question($id_formulaire, $id_bloc, $id_question, $id_choix_question);
 			$choix_question->supprimer();

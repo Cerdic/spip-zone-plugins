@@ -22,7 +22,7 @@
 		$id_bloc		= $_REQUEST['id_bloc'];
 		$ajax			= $_REQUEST['ajax'];
 
-		if (autoriser('editer', 'formulaires')) {
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 
 			$bloc = new bloc($id_formulaire, $id_bloc);
 			$bloc->supprimer();

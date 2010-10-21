@@ -20,7 +20,8 @@
 
 	function exec_invitations_edit() {
 	 	
-		if (!autoriser('editer', 'formulaires')) {
+		$id_formulaire	= intval($_GET['id_formulaire']);
+		if (!autoriser('editer', 'formulaires', $id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
@@ -31,7 +32,6 @@
 		else
 			$spip_lettres_actif = false;
 
-		$id_formulaire	= intval($_GET['id_formulaire']);
 		$formulaire		= new formulaire($id_formulaire);
 		
 		if (!empty($_POST['enregistrer'])) {

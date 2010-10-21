@@ -20,13 +20,14 @@
 
 	function exec_blocs_edit() {
 	 	
-		if (!autoriser('editer', 'formulaires')) {
+		
+		$id_formulaire	= intval($_GET['id_formulaire']);
+		if (!autoriser('editer', 'formulaires', $id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
 		}
 
-		$id_formulaire	= intval($_GET['id_formulaire']);
 		$id_bloc		= intval($_GET['id_bloc']);
 		
 		if (!empty($_POST['enregistrer'])) {

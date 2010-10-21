@@ -20,13 +20,14 @@
 
 	function exec_blocs_tous() {
 
-		if (!autoriser('editer', 'formulaires')) {
+		$id_formulaire	= intval($_GET['id_formulaire']);
+		if (!autoriser('editer', 'formulaires', $id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
 		}
 
-		$formulaire = new formulaire($_GET['id_formulaire']);
+		$formulaire = new formulaire($id_formulaire);
 
 		echo $formulaire->afficher();
 		echo http_img_pack("searching.gif", ' ', ' id="searching-formulaire" style="position: absolute; top: 3px; right: 3px; visibility: hidden;"');

@@ -42,7 +42,7 @@
 		else
 			$vals[] = http_img_pack('puce-verte.gif', 'puce-verte', ' border="0" style="margin: 1px;"');
 
-		$vals[] = '<a href="'.generer_url_ecrire('applications','id_application='.$id_application).'">'.$application->applicant->email.'</a>';
+		$vals[] = '<a href="'.generer_url_ecrire('applications','id_application='.$id_application).'">'.$application->applicant->txt.'</a>';
 
 		$vals[] = affdate_jourcourt($maj);
 

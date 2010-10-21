@@ -21,13 +21,15 @@
 		$id_formulaire = $_GET['id_formulaire'];
 		$redirection = generer_url_ecrire('formulaires', "id_formulaire=$id_formulaire", true);
 
-		if (autoriser('editer', 'formulaires')) {
+		if (autoriser('editer', 'formulaires', $id_formulaire)) {
 
 			$formulaire = new formulaire($id_formulaire);
 
 			if (!empty($_REQUEST['statut'])) {
 				$statut = $_REQUEST['statut'];
-				$redirection = $formulaire->enregistrer_statut($statut);
+				if ($statut!="en_ligne" || autoriser('publierdans','rubrique',$formulaire->id_rubrique)) {
+					$redirection = $formulaire->enregistrer_statut($statut);
+				}
 			}
 		
 		}

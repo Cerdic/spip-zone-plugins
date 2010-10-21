@@ -16,6 +16,7 @@
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 		'un_internaute_a_valide_le_formulaire' => 'Un internaute a validé le formulaire ',
+		'vous_avez_completer_le_formulaire' => 'Vous avez complèté le formulaire ',
 		'types_fichier_autorises' => "Types de fichier autorisés",
 
 		'nouveau_mot_de_passe' => "Nouveau mot de passe",

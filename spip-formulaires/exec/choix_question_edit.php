@@ -20,7 +20,8 @@
 
 	function exec_choix_question_edit() {
 	 	
-		if (!autoriser('editer', 'formulaires')) {
+	 	$id_formulaire		= intval($_REQUEST['id_formulaire']);
+	 	if (!autoriser('editer', 'formulaires', $id_formulaire)) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
@@ -31,7 +32,6 @@
 		else
 			$spip_lettres_actif = false;
 
-		$id_formulaire		= intval($_REQUEST['id_formulaire']);
 		$id_bloc			= intval($_REQUEST['id_bloc']);
 		$id_question		= intval($_REQUEST['id_question']);
 		$id_choix_question	= intval($_REQUEST['id_choix_question']);
