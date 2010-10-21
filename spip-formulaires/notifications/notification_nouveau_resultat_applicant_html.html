@@ -1,0 +1,109 @@
+#INCLURE{fond=inc_haut_notification}
+
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire=#ENV{id_formulaire}}>
+
+<h2>#TITRE</h2>
+
+<p><:formulairespublic:vous_avez_completer_le_formulaire:> <a href="#URL_FORMULAIRE">#TITRE</a>.</p>
+
+<hr />
+
+<BOUCLE_blocs(BLOCS) {id_formulaire}>
+<h3>#TITRE</h3>
+[
+ +++++++++++++++++++++++++++++++++++++++++++
+	(#REM)		Questions
+ +++++++++++++++++++++++++++++++++++++++++++
+]
+<BOUCLE_questions(QUESTIONS) {id_bloc}>
+
+[
+ ---------------------------
+	(#REM)	champ texte
+ ---------------------------
+]
+<BOUCLE_q_champ_texte(QUESTIONS) {id_question} {type==champ_texte|email_applicant|nom_applicant}>
+[<p><strong>#TITRE :</strong> [<a href="mailto:#REPONSE">#REPONSE</a>(#CONTROLE|=={'email'}|?{' '})][#REPONSE(#CONTROLE|=={'email'}|?{'',' '})]</p>(#REPONSE|?{' '})]
+</BOUCLE_q_champ_texte>
+
+[
+ ---------------------------
+	(#REM)	zone texte
+ ---------------------------
+]
+<BOUCLE_q_zone_texte(QUESTIONS) {id_question} {type=zone_texte}>
+[<p><strong>#TITRE :</strong> (#REPONSE)</p>]
+</BOUCLE_q_zone_texte>
+
+[
+ ---------------------------
+	(#REM)	boutons radio
+ ---------------------------
+]
+<BOUCLE_q_boutons_radio(QUESTIONS) {id_question} {type=boutons_radio}>
+<B_c_boutons_radio><p><strong>#TITRE :</strong> <BOUCLE_c_boutons_radio(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_boutons_radio></p></B_c_boutons_radio>
+</BOUCLE_q_boutons_radio>
+
+[
+ ---------------------------
+	(#REM)	cases à cocher
+ ---------------------------
+]
+<BOUCLE_q_cases_a_cocher(QUESTIONS) {id_question} {type=cases_a_cocher}>
+<B_c_cases_a_cocher><p><strong>#TITRE :</strong> <BOUCLE_c_cases_a_cocher(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_cases_a_cocher></p></B_c_cases_a_cocher>
+</BOUCLE_q_cases_a_cocher>
+
+[
+ ---------------------------
+	(#REM)	liste à choix
+ ---------------------------
+]
+<BOUCLE_q_liste(QUESTIONS) {id_question} {type=liste}>
+<B_c_liste><p><strong>#TITRE :</strong> <BOUCLE_c_liste(CHOIX_QUESTION) {id_question}>[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE})]</BOUCLE_c_liste></p></B_c_liste>
+</BOUCLE_q_liste>
+
+[
+ ---------------------------
+	(#REM)	liste à choix multiples
+ ---------------------------
+]
+<BOUCLE_q_liste_multiple(QUESTIONS) {id_question} {type=liste_multiple}>
+<B_c_liste_multiple><p><strong>#TITRE :</strong> <BOUCLE_c_liste_multiple(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE})]</BOUCLE_c_liste_multiple></p></B_c_liste_multiple>
+</BOUCLE_q_liste_multiple>
+
+[
+ ---------------------------
+	(#REM)	abonnements
+ ---------------------------
+]
+<BOUCLE_q_abonnements(QUESTIONS) {id_question} {type=abonnements}>
+<B_c_abonnements><p><strong>#TITRE :</strong> <BOUCLE_c_abonnements(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_abonnements></p></B_c_abonnements>
+</BOUCLE_q_abonnements>
+
+[
+ ---------------------------
+	(#REM)	fichier
+ ---------------------------
+]
+<BOUCLE_q_fichier(QUESTIONS) {id_question} {type=fichier}>
+<B_r_fichier><p><strong>#TITRE :</strong><BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR} {tout}><br /><a href="[(#URL_DOCUMENT|url_absolue)]">#TITRE</a></BOUCLE_documents></BOUCLE_r_fichier></p></B_r_fichier>
+</BOUCLE_q_fichier>
+
+[
+ ---------------------------
+	(#REM)	auteurs
+ ---------------------------
+]
+<BOUCLE_q_auteurs(QUESTIONS) {id_question} {type=auteurs}>
+<B_c_auteurs><p><strong>#TITRE :</strong> <BOUCLE_c_auteurs(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_auteurs></p></B_c_auteurs>
+</BOUCLE_q_auteurs>
+
+</BOUCLE_questions>
+
+<hr />
+
+</BOUCLE_blocs>
+
+</BOUCLE_formulaire>
+
+#INCLURE{fond=inc_bas_notification}

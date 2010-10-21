@@ -1,0 +1,16 @@
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire=#ENV{id_formulaire}}>++++++++++++++++++++++++++++++++++++++++++++++
+[(#TITRE|textebrut)]
+++++++++++++++++++++++++++++++++++++++++++++++
+
+<:formulairespublic:vous_avez_completer_le_formulaire:> [(#TITRE|textebrut)
+
+]
+
+<BOUCLE_blocs(BLOCS) {id_formulaire}>[(#TITRE|textebrut)]
+---------------------------------
+[(#DESCRIPTIF)
+
+]<BOUCLE_questions(QUESTIONS) {id_bloc}><BOUCLE_q_texte(QUESTIONS) {id_question} {type==champ_texte|zone_texte|email_applicant|nom_applicant}>[(#TITRE|textebrut)] : [(#REPONSE)]
+</BOUCLE_q_texte><BOUCLE_q_plusieurs_reponses(QUESTIONS) {id_question} {type==boutons_radio|cases_a_cocher|liste|liste_multiple|abonnements|auteurs}><B_c>[(#TITRE|textebrut)] : <BOUCLE_c(CHOIX_QUESTION) {id_question} {" ; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{[(#TITRE|textebrut)]})]</BOUCLE_c>
+</BOUCLE_q_plusieurs_reponses><BOUCLE_q_fichier(QUESTIONS) {id_question} {type=fichier}><B_r_fichier>[(#TITRE|textebrut)] : <BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR} {tout} {" ; "}>[(#URL_DOCUMENT|url_absolue)]</BOUCLE_documents></BOUCLE_r_fichier></B_r_fichier></BOUCLE_q_fichier></BOUCLE_questions>
+</BOUCLE_blocs></BOUCLE_formulaire>
