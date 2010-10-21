@@ -10,13 +10,13 @@
 			<label for="selecteur_commun"><:mediabox:label_selecteur_commun:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_commun})</span>]
 			<p class="explication"><:mediabox:explication_selecteur:></p>
-			<input type="text" name="selecteur_commun" class="text" id="selecteur_commun" size="60" value="#ENV{selecteur_commun}" />
+			<input type="text" name="selecteur_commun" class="text" id="selecteur_commun" size="60" value="#ENV*{selecteur_commun}" />
 		</li>		
 		<li class="editer_selecteur_galerie[ (#ENV**{erreurs}|table_valeur{selecteur_galerie}|oui)erreur]">
 			<label for="selecteur_galerie"><:mediabox:label_selecteur_galerie:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_galerie})</span>]
 			<p class="explication"><:mediabox:explication_selecteur_galerie:></p>
-			<input type="text" name="selecteur_galerie" class="text" id="selecteur_galerie" size="60" value="#ENV{selecteur_galerie}" />
+			<input type="text" name="selecteur_galerie" class="text" id="selecteur_galerie" size="60" value="#ENV*{selecteur_galerie}" />
 		</li>
 
 		<li class="editer_traiter_toutes_images[ (#ENV**{erreurs}|table_valeur{traiter_toutes_images}|oui)erreur]">
@@ -48,19 +48,23 @@
 			</li>
 			<li class="editer_speed[ (#ENV**{erreurs}|table_valeur{speed}|oui)erreur]">
 				<label for='speed'><:mediabox:label_speed:></label>
-				<input type="text" name="speed" class="text" id="speed" size="10" value="#ENV{speed}" />
+				<input type="text" name="speed" class="text" id="speed" size="10" value="#ENV*{speed}" />
 			</li>
 			<li class="maxWidth[ (#ENV**{erreurs}|table_valeur{maxWidth}|oui)erreur]">
 				<label for='maxWidth'><:mediabox:label_maxWidth:></label>
-				<input type="text" name="maxWidth" class="text" id="maxWidth" size="10" value="#ENV{maxWidth}" />
+				<input type="text" name="maxWidth" class="text" id="maxWidth" size="10" value="#ENV*{maxWidth}" />
 			</li>
 			<li class="maxHeight[ (#ENV**{erreurs}|table_valeur{maxHeight}|oui)erreur]">
 				<label for='maxHeight'><:mediabox:label_maxHeight:></label>
-				<input type="text" name="maxHeight" class="text" id="maxHeight" size="10" value="#ENV{maxHeight}" />
+				<input type="text" name="maxHeight" class="text" id="maxHeight" size="10" value="#ENV*{maxHeight}" />
 			</li>
 			<li class="editer_slideshow_speed[ (#ENV**{erreurs}|table_valeur{slideshow_speed}|oui)erreur]">
 				<label for='slideshow_speed'><:mediabox:label_slideshow_speed:></label>
-				<input type="text" name="slideshow_speed" class="text" id="slideshow_speed" size="10" value="#ENV{slideshow_speed}" />
+				<input type="text" name="slideshow_speed" class="text" id="slideshow_speed" size="10" value="#ENV*{slideshow_speed}" />
+			</li>
+			<li class="editer_opacite[ (#ENV**{erreurs}|table_valeur{opacite}|oui)erreur]">
+				<label for='opacite'><:mediabox:label_opacite:></label>
+				<input type="text" name="opacite" class="text" id="opacite" size="10" value="#ENV*{opacite}" />
 			</li>
 		</ul></fieldset>
 		</li>

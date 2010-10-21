@@ -18,6 +18,7 @@ function mediabox_config($public=null){
 		'minWidth'=>'400px',
 		'minHeight'=>'',
 		'slideshow_speed' => '2500',
+		'opacite' => '0.9',
 	), $config);
 
 	if ((is_null($public) AND test_espace_prive()) OR $public===false) {
@@ -30,6 +31,7 @@ function mediabox_config($public=null){
 		'maxHeight'=>'95%',
 		'minWidth'=>'600px',
 		'minHeight'=>'300px',
+		'opacite' => '0.9',
 		));
 	}
 	
@@ -83,6 +85,7 @@ var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'
 .'",maxH:"'.$config['maxHeight']
 .'",minW:"'.$config['minWidth']
 .'",minH:"'.$config['minHeight']
+.'",opa:"'.$config['opacite']
 .'",str_ssStart:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStart')))
 .'",str_ssStop:"'.unicode2charset(html2unicode(_T('mediabox:boxstr_slideshowStop')))
 .'",str_cur:"'._T('mediabox:boxstr_current')

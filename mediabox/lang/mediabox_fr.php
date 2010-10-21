@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_slideshow_speed' => 'Temps d\'exposition des photos du diaporama (ms)',
 	'label_splash' => 'Splash Bo&icirc;te',
 	'label_splash_url' => 'URL &agrave; afficher',
+	'label_opacite' => 'Opacit&eacute; du fond',
 
 	'boxstr_slideshowStart' => 'Diaporama',
 	'boxstr_slideshowStop' => 'Arr&ecirc;ter',
