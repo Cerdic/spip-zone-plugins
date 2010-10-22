@@ -1,0 +1,71 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_media' id='formulaire_configurer_media'>
+	<h3 class='titrem'>[(#CHEMIN{images/media-24.png}|balise_img{'',cadre-icone})]<:media:info_configurer_media_titre:></h3>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_media" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		
+		<div class='explication'><:media:explication_configurer_media:></div>
+		<ul>
+			<li class='configurer_media_taille_icone[ (#ENV**{erreurs}|table_valeur{media_taille_icone_largeur}|oui)erreur][ (#ENV**{erreurs}|table_valeur{media_taille_icone_hauteur}|oui)erreur]'>
+				<label><:media:label_configurer_media_taille_icone:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_icone_largeur})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_icone_hauteur})</span>]
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_icone_largeur" value='#ENV{media_taille_icone_largeur}' id="media_taille_icone_largeur" size="4" style="width: 50px;" /> <label for="media_taille_icone_largeur"><:media:pixels_largeur:></label>
+				</div>
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_icone_hauteur" value='#ENV{media_taille_icone_hauteur}' id="media_taille_icone_hauteur" size="4" style="width: 50px;" /> <label for="media_taille_icone_hauteur"><:media:pixels_hauteur:></label>
+				</div>
+			</li>
+			<li class='configurer_media_taille_petit[ (#ENV**{erreurs}|table_valeur{media_taille_petit_largeur}|oui)erreur][ (#ENV**{erreurs}|table_valeur{media_taille_petit_hauteur}|oui)erreur]'>
+				<label><:media:label_configurer_media_taille_petit:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_petit_largeur})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_petit_hauteur})</span>]
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_petit_largeur" value='#ENV{media_taille_petit_largeur}' id="media_taille_petit_largeur" size="4" style="width: 50px;" /> <label for="media_taille_petit_largeur"><:media:pixels_largeur:></label>
+				</div>
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_petit_hauteur" value='#ENV{media_taille_petit_hauteur}' id="media_taille_petit_hauteur" size="4" style="width: 50px;" /> <label for="media_taille_petit_hauteur"><:media:pixels_hauteur:></label>
+				</div>
+			</li>
+			<li class='configurer_media_taille_moyen[ (#ENV**{erreurs}|table_valeur{media_taille_moyen_largeur}|oui)erreur][ (#ENV**{erreurs}|table_valeur{media_taille_moyen_hauteur}|oui)erreur]'>
+				<label><:media:label_configurer_media_taille_moyen:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_moyen_largeur})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_moyen_hauteur})</span>]
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_moyen_largeur" value='#ENV{media_taille_moyen_largeur}' id="media_taille_moyen_largeur" size="4" style="width: 50px;" /> <label for="media_taille_moyen_largeur"><:media:pixels_largeur:></label>
+				</div>
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_moyen_hauteur" value='#ENV{media_taille_moyen_hauteur}' id="media_taille_moyen_hauteur" size="4" style="width: 50px;" /> <label for="media_taille_moyen_hauteur"><:media:pixels_hauteur:></label>
+				</div>
+			</li>
+			<li class='configurer_media_taille_grand[ (#ENV**{erreurs}|table_valeur{media_taille_grand_largeur}|oui)erreur][ (#ENV**{erreurs}|table_valeur{media_taille_grand_hauteur}|oui)erreur]'>
+				<label><:media:label_configurer_media_taille_grand:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_grand_largeur})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_taille_grand_hauteur})</span>]
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_grand_largeur" value='#ENV{media_taille_grand_largeur}' id="media_taille_grand_largeur" size="4" style="width: 50px;" /> <label for="media_taille_grand_largeur"><:media:pixels_largeur:></label>
+				</div>
+				<div class='choix'>
+					<input class='text' type="text" name="media_taille_grand_hauteur" value='#ENV{media_taille_grand_hauteur}' id="media_taille_grand_hauteur" size="4" style="width: 50px;" /> <label for="media_taille_grand_hauteur"><:media:pixels_hauteur:></label>
+				</div>
+			</li>
+			<li class='configurer_media_largeur_legende[ (#ENV**{erreurs}|table_valeur{media_largeur_min_legende}|oui)erreur][ (#ENV**{erreurs}|table_valeur{media_largeur_max_legende}|oui)erreur]'>
+				<label><:media:label_configurer_media_largeur_legende:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_largeur_min_legende})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media_largeur_max_legende})</span>]
+				<div class='choix'>
+					<input class='text' type="text" name="media_largeur_min_legende" value='#ENV{media_largeur_min_legende}' id="media_largeur_min_legende" size="4" style="width: 50px;" /> <label for="media_largeur_min_legende"><:media:pixels_minimum:></label>
+				</div>
+				<div class='choix'>
+					<input class='text' type="text" name="media_largeur_max_legende" value='#ENV{media_largeur_max_legende}' id="media_largeur_max_legende" size="4" style="width: 50px;" /> <label for="media_largeur_max_legende"><:media:pixels_maximum:></label>
+				</div>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>

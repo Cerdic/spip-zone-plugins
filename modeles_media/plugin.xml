@@ -1,0 +1,34 @@
+<plugin>
+	<nom>Mod&egrave;les &lt;media&gt;</nom>
+	<auteur>Joseph</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Prototype de nouveaux mod&egrave;les pour l'insertion des documents. La syntaxe et le comportement peuvent &eacute;voluer (voir la doc). Ne pas utiliser sur un site en production.</description>
+	<lien>http://www.spip-contrib.net/Proposition-de-fonctionnement-alternatif-pour-l</lien>
+	<icon>images/media-24.png</icon>
+	<prefix>media</prefix>
+	<fonctions>media_balises.php</fonctions>
+	<fonctions>media_filtres.php</fonctions>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>media_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
+		<inclure>media_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>media_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>media_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>media_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+</plugin>
