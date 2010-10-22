@@ -1,6 +1,6 @@
 #CACHE{0}[(#REM)
 
-  Ecrit un ombrage dans sa css pour le composant c nic
+  Ecrit un ombrage dans sa css pour l'instance nic du composant c.
   Le composant doit posseder des variables Shadow, Shadowize, et ShadowBlur
 
 ][(#SET{c,acs#ENV{c}#ENV{nic}})][box-shadow: #VAR{#GET{c}ShadowSize,5}px #VAR{#GET{c}ShadowSize,5}px #VAR{#GET{c}ShadowBlur,5}px (#VAR{#GET{c}Shadow});

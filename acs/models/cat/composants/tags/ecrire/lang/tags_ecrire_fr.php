@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Tags',
 'description' => 'Affiche un nuage de  mots-cl&eacute;s.',
-'info' => 'Affiche un nuage de mots-clés de tailles variables selon leurs fréquences d\'utilisation.',
+'info' => 'Affiche un nuage de mots-clés de tailles variables selon leur fréquence d\'utilisation, ou anim&eacute;s.',
 'help' => 'Les mots-cl&eacute;s commençant par "_" ne sont pas affich&eacute;s.',
 
 'TitreFond' => 'Titre',
@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'AlignCenter' => 'centr&eacute;',
 'AlignJustify' => 'justifi&eacute;',
 'Titre' => 'Afficher le titre du bloc',
-'Sep' => 'S&eacute;parateur'
+'Sep' => 'S&eacute;parateur',
+'Anime' => 'Anime'
 );
 ?>

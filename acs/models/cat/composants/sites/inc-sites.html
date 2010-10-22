@@ -3,7 +3,7 @@
     <B_sites>
       <ul>
           <li>
-          <h1 class="plan-secteur">[(#LOGO_RUBRIQUE|left)][<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE|supprimer_numero)</a>]</h1></li>
+          <h1 class="plan-secteur">[(#LOGO_RUBRIQUE|left|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})][<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE|supprimer_numero)</a>]</h1></li>
           <ul>
           <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
           <li class="menu-item">

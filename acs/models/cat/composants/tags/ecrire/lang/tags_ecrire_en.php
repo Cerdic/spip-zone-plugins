@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Tags',
 'description' => 'Display a cloud of keywords.',
-'info' => 'Display a cloud of keywords sized to their frequency of use.',
+'info' => 'Display a cloud of keywords sized to their frequency of use, or animated.',
 'help' => 'Keywords beginning by "_" are not displayed',
 
 'TitreFond' => 'Title',
@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'AlignCenter' => 'center',
 'AlignJustify' => 'justify',
 'Titre' => 'Display block title',
-'Sep' => 'Separator'
+'Sep' => 'Separator',
+'Anime' => 'Animate'
 );
 ?>
