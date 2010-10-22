@@ -1,0 +1,54 @@
+[(#REM)
+	Partie contenu de la page affichant :
+	- les informations detaillees pour un depot donne y compris la liste paginee des 
+	  paquets
+]
+
+<BOUCLE_contenu_depot(DEPOTS){id_depot}>
+
+<p id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<span class="sep"> &gt; </span>
+	<a href="#URL_PAGE{depots}"><:svp:titre_page_depots:></a>
+	<span class="sep"> &gt; </span>
+	<strong class="on">#TITRE</strong>
+</p>
+
+[(#REM) Cartouche avec le titre de la page et les informations generales ]
+<div class="contenu-principal">
+	<div class="cartouche">
+		[(#LOGO_DEPOT|image_reduire{48})]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[<p class="info-publi">
+			<abbr class="published"><:svp:label_actualise_le:> (#MAJ|affdate{d-m-Y H:i})</abbr>
+		</p>]
+	</div>
+
+	<h3 class="h3"><:svp:intertitre_depot_generalites:></h3>
+	<div class="surlignable">
+		[<div class="#EDIT{descriptif} texte">(#DESCRIPTIF)</div>]
+	</div>
+
+	[<p class="hyperlien">
+		<:svp:label_fichier_depot:>&nbsp;:
+		<a href="#URL_PAQUETS" title="<:svp:bulle_telecharger_fichier_depot:>">(#URL_PAQUETS)</a>
+	</p>]
+
+	[<div class="hyperlien">
+		<div class="#EDIT{type} surlignable">(#TYPE|svp_traduire_type_depot)</div>
+	</div>]
+</div>
+<br class="nettoyeur" />
+
+[(#REM) La liste des paquets du depot correspondant a des plugins ]
+<h3 class="h3"><:svp:intertitre_depot_plugins:></h3>
+<p>[(#ID_DEPOT|svp_compter_depots{plugin})]</p>
+<INCLURE{fond=inclure/liste-plugins}{env} />
+
+[(#REM) La liste des paquets du depot correspondant a d'autres contributions ]
+[(#SET{url, [(#URL_PAQUETS|dirname|concat{/})]})]
+<h3 class="h3"><:svp:intertitre_depot_autres_contributions:></h3>
+<p>[(#ID_DEPOT|svp_compter_depots{autre})]</p>
+<INCLURE{fond=inclure/liste-autres-contributions}{env}{url_depot=#GET{url}} />
+
+</BOUCLE_contenu_depot>

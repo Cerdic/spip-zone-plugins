@@ -1,0 +1,37 @@
+[(#REM)
+	Partie contenu de la page affichant les statistiques :
+	- soit pour tous les depots (pas d'id_depot)
+	- soit pour un depot donne
+]
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<span class="sep"> &gt; </span>
+	<strong class="on"><:svp:titre_page_statistiques:></strong>
+</p>
+
+[(#REM) Cartouche avec le titre de la page et les informations generales ]
+<div class="cartouche">
+	<h1 class="h1">
+		<:svp:titre_page_statistiques:>
+		<BOUCLE_depot(DEPOTS){id_depot}>[ : (#TITRE)]</BOUCLE_depot>
+	</h1>
+</div>
+<br class="nettoyeur" />
+
+[(#REM) Statistiques globales ]
+<h3 class="h3"><:svp:intertitre_stats_globales:></h3>
+[<ul>(#ENV{id_depot}|svp_afficher_statistiques_globales)</ul><br />]
+
+[(#REM) Statistiques des plugins par categorie ]
+<h3 class="h3"><:svp:intertitre_stats_categories:></h3>
+#SET{compteur, #VAL{categorie}|svp_compter{#ENV{id_depot}}|table_valeur{categorie}}
+<p><:svp:info_stats_categories{nb_categories=#GET{compteur}}:></p>
+<p><:svp:info_stats_plugins:></p>
+[<ul>
+(#SVP_CATEGORIES|foreach{
+	statistiques-categorie, 
+	id_depot=#ENV{id_depot}})
+</ul>]
+<br class="nettoyeur" />

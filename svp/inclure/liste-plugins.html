@@ -1,0 +1,9 @@
+[(#ENV{categorie}|non)
+	[(#SVP_CATEGORIES|foreach{
+		liste-plugins-categorie, 
+		id_depot=#ENV{id_depot}})]
+]
+
+[(#ENV{categorie}|oui)
+	<INCLURE{fond=modeles/liste-plugins-categorie}{env}{id_depot}{categorie} />
+]

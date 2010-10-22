@@ -1,0 +1,25 @@
+<B_autres>
+<table class="spip" summary="" style="width: 100%;">
+	<thead>
+		<tr id="autres-contributions">
+			<th>
+				<strong><:svp:titre_liste_autres_contributions:></strong>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_autres(PAQUETS){id_plugin=0}{id_depot?}{par nom_archive}>
+		<tr id="[(#NOM_ARCHIVE|basename{.zip})][-(#ID_DEPOT)]-" class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+			<td>
+			<a[ href="(#ENV{url_depot}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" >
+				[(#NOM_ARCHIVE|basename{.zip})]
+			</a>
+			</td>
+		</tr>
+</BOUCLE_autres>
+	</tbody>
+</table>
+<br class="nettoyeur" />
+</B_autres>
+<p><:svp:info_aucune_contribution_disponible:></p>
+<//B_autres>

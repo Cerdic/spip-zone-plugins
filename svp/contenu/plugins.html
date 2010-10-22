@@ -1,0 +1,23 @@
+[(#REM)
+	Partie contenu de la page affichant :
+	- la liste simplifiee de tous les depots (pas d'id_depot)
+]
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<span class="sep"> &gt; </span>
+	<strong class="on"><:svp:titre_page_plugins:></strong>
+</p>
+
+[(#REM) Cartouche avec le titre de la page et les informations generales ]
+<div class="cartouche">
+	<h1 class="h1"><:svp:titre_page_plugins:></h1>
+	[<p class="info-publi">
+		<small>(#ENV{id_depot}|svp_compter_plugins{#ENV{categorie}})</small>
+	</p>]
+</div>
+<br class="nettoyeur" />
+
+[(#REM) Tableau des infos de synthese des plugins ]
+<INCLURE{fond=inclure/liste-plugins}{env} />

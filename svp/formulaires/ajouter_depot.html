@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_ajouter_depot" id="formulaire_ajouter_depot">
+	<h3 class='titrem'>[(#CHEMIN{prive/themes/spip/images/ajouter_depot-24.png}|balise_img{icone depot_plus-24,cadre-icone})]<:svp:titre_form_ajouter_depot:></h3>
+
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<p class="explication"><:svp:info_ajouter_depot:></p>
+					<ul>
+						<li class="editer_url_paquets obligatoire[(#ENV{erreurs}|table_valeur{url_paquets}|oui) erreur]">
+							<label for="url_paquets"><:svp:label_fichier_depot:></label>
+							<p class="explication">
+								<:svp:info_fichier_depot:>
+								<a class="spip_out" title="<:svp:bulle_ajouter_spipzone:>" href="http://files.spip.org/spip-zone/archives.xml" onclick="$('#url_paquets').attr('value',$(this).attr('href')).focus();return false;"><:svp:info_adresse_spipzone:></a>
+							</p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{url_paquets})</span>]
+							<input type="text" name="url_paquets" id="url_paquets" value="" class="text" />						
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_ajouter:>' />
+		</p>
+	</div></form>
+	]
+</div>

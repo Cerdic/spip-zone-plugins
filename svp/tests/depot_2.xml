@@ -1,0 +1,112 @@
+<!-- 
+Ce d&eacute;p&ocirc;t ne pas la nouvelle balise <code><depot></code> et sa liste de paquets est :
+-* Plugin_1 : idem le premier paquet du depot 1 pour le prefixe, les versions et l&eacute;tat conduisant &agrave son rejet pour doublon
+-* Plugin_3 : avec des informations standard mais pas de categorie
+ -->
+<archives>
+<archive id="paquet6.zip">
+<file>paquet6.zip</file>
+<size>84618</size>
+<date>1279627226</date>
+<source>_plugins_/plugin_1</source>
+<plugin>
+    <prefix>a2a</prefix>
+	<nom>
+		<multi>
+		[fr]Plugin_1
+		[en]Plugin_1
+		</multi>
+	</nom>
+    <slogan>Pour lier des articles entre eux</slogan>
+    <icon>images/a2a-64.png</icon>
+	<categorie>navigation</categorie>
+
+    <auteur>Collectif SPIP</auteur>
+    <version>0.3</version>
+    <version_base>0.3</version_base>
+    <etat>stable</etat>
+    <description>Petit plugin qui permet de lier un article &agrave; un ou plusieurs autre(s)</description>
+    <lien>http://www.spip-contrib.net/a2a</lien>
+    <fonctions>a2a_fonctions.php</fonctions>
+    <options>a2a_options.php</options>
+    <install>base/a2a_upgrade.php</install>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="cfg" version="[1.14.1;]" />
+	<necessite id="spip_bonux" version="[1.8.7;]" />
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+		<inclure>a2a_pipelines.php</inclure>
+	</pipeline>
+</plugin>
+</archive>
+
+<archive id="paquet7.zip">
+<file>paquet7.zip</file>
+<size>84618</size>
+<date>1279627226</date>
+<source>_plugins_/plugin_3</source>
+<plugin>
+	<prefix>spipmotion</prefix>
+	<nom>SPIPmotion</nom>
+	<icon>images/spipmotion.png</icon>
+
+	<auteur>Quentin Drouet (kent1)</auteur>
+	<version>0.4.7</version>
+	<version_base>0.7.3</version_base>
+	<etat>experimental</etat>
+	<description>
+	Faire un dailymotion sous spip ?
+	</description>
+	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
+	<options>spipmotion_options.php</options>
+	<fonctions>spipmotion_fonctions.php</fonctions>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<action>editer_contenu_objet</action>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<action>post_edition</action>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spipmotion.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spipmotion.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+
+	<install>base/spipmotion_upgrade.php</install>
+
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id='cfg' version='[1.13;]' />
+	<necessite id='saisies' version='[1.0;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id='getid3' version='[0.2;]' />
+	<necessite id='queue' version='[0.3.1;]' />
+	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.6.zip" />
+	<utilise id='podcast' />
+</plugin>
+</archive>
+
+</archives>

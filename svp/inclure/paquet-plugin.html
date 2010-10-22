@@ -1,0 +1,82 @@
+<B_paquet>
+<div class="paquet">
+<BOUCLE_paquet(PAQUETS){id_paquet}>
+	<h3 class="h3">
+		<BOUCLE_depot(DEPOTS){id_depot}>
+		[(#SET{url_depot, [(#URL_PAQUETS|dirname|concat{/})]})]
+		[(#SET{titre_depot, #TITRE})]
+		[(#SET{url_depot, #URL_DEPOT})]
+		<span>
+			<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_depot}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" class="telecharger">
+			<:bouton_telecharger:>
+			</a>
+		</span>
+		[(#ENV{nom_plugin})][ - (#VERSION)]
+		</BOUCLE_depot>
+	</h3>
+	<br class="nettoyeur" />
+
+	<div class="texte">[(#DESCRIPTION)]</div>
+
+	[(#LIEN*|svp_extraire_url|oui)
+	<div class="meta-publi">
+		<a[ href="(#LIEN*|svp_extraire_url)"] title="<:svp:bulle_aller_documentation:>">
+			<:en_savoir_plus:>...
+		</a>
+	</div>]
+
+	<ul class="bloc_infos">
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_version:></strong></div>
+			<div class="unit size70 lastUnit">#VERSION</div>
+		</li>
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_compatibilite_spip:></strong></div>
+			<div class="unit size70 lastUnit">[(#VERSION_SPIP|svp_afficher_version{SPIP}|sinon{<:svp:info_aucune_version_spip:>})]</div>
+		</li>
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_etat:></strong></div>
+			<div class="unit size70 lastUnit">[(#ETAT|svp_afficher_etat)]</div>
+		</li>
+	</ul>
+
+	<ul class="bloc_infos">
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_auteur:></strong></div>
+			<div class="unit size70 lastUnit">[(#AUTEUR)]</div>
+		</li>
+		[<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_licence:></strong></div>
+			<div class="unit size70 lastUnit">(#LICENCE)</div>
+		</li>]
+	</ul>
+
+	<ul class="bloc_infos">
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_archive:></strong></div>
+			<div class="unit size70 lastUnit">[(#NOM_ARCHIVE|basename)]</div>
+		</li>
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_taille:></strong></div>
+			<div class="unit size70 lastUnit">[(#NBO_ARCHIVE|taille_en_octets)]</div>
+		</li>
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_maj:></strong></div>
+			<div class="unit size70 lastUnit">[(#MAJ_ARCHIVE|affdate{d-m-Y H:i})]</div>
+		</li>
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_depot:></strong></div>
+			<div class="unit size70 lastUnit"><a[ href="(#GET{url_depot})"] title="<:svp:bulle_afficher_depot:>">[(#GET{titre_depot})]</a></div>
+		</li>
+	</ul>
+
+	[<ul class="bloc_infos">
+		<li class="liste-items">
+			<div class="unit size30"><strong><:svp:label_necessite:></strong></div>
+			<div class="unit size70 lastUnit">(#DEPENDANCES|svp_afficher_dependances{necessite})</div>
+		</li>
+	</ul>]
+</BOUCLE_paquet>
+	<br class="nettoyeur" />
+</div>
+</B_paquet>

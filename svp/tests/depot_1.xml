@@ -1,0 +1,241 @@
+<depot>
+    <titre>D&eacute;p&ocirc;t #1</titre>
+    <descriptif>
+Ce d&eacute;p&ocirc;t contient d'une part toutes les informations de la balise depot et,
+d'autre part, la liste des paquets suivants :
+-* Plugin_1 : avec toutes les informations standard y compris le slogan
+-* Plugin_2 : avec des informations standard sans les nouvelles balises slogan
+-* Plugin_2 en branche 2 : la branche &eacute;tant d&eacute;duite par le nom
+-* Plugin_2 en branche 3 : la branche &eacute;tant d&eacute;duite par le nom
+-* Plugin_1 : idem le premier paquet pour le pr&eacute;fixe, les versions et l'&eacute;tat conduisant &agrave; son rejet pour doublon
+-* memobox : un paquet avec un suffixe 2 inclus dans le nom -non multi- du plugin 
+	</descriptif>
+	<type>svn</type>
+</depot>
+
+<archives>
+<archive id="paquet1.zip">
+<file>paquet1.zip</file>
+<size>16862</size>
+<date>1274302824</date>
+<source>_plugins_/plugin_1</source>
+<plugin>
+    <prefix>plugin1</prefix>
+	<nom>
+		<multi>
+		[fr]Plugin_1
+		[en]Plugin_1 in english
+		</multi>
+	</nom>
+    <icon>images/a2a-64.png</icon>
+	<categorie>navigation</categorie>
+
+    <auteur>Collectif SPIP</auteur>
+    <version>0.3</version>
+    <version_base>0.3</version_base>
+    <etat>stable</etat>
+    <licence>GPL 3</licence>
+    <description>Petit plugin qui permet de lier un article &agrave; un ou plusieurs autre(s). Ensuite on s'en fout.</description>
+    <lien>http://www.spip-contrib.net/a2a</lien>
+    <fonctions>a2a_fonctions.php</fonctions>
+    <options>a2a_options.php</options>
+    <install>base/a2a_upgrade.php</install>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="cfg" version="[1.14.1;]" />
+	<necessite id="spip_bonux" version="[1.8.7;]" />
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+		<inclure>a2a_pipelines.php</inclure>
+	</pipeline>
+</plugin>
+</archive>
+
+<archive id="paquet2.zip">
+<file>paquet2.zip</file>
+<size>5263</size>
+<date>1275519604</date>
+<source>_plugins_/plugin_2</source>
+<plugin>
+	<prefix>plugin2</prefix>
+	<nom>Plugin_2</nom>
+	<icon>plugin-24.gif</icon>
+	<categorie>edition</categorie>
+
+	<auteur>cy_altern
+_ &#169; 2010 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Affiche un article sur la page de sommaire du site. 
+_ Les &#233;l&#233;ments de l'article choisi dans [l'interface de configuration->?exec=cfg&amp;cfg=aa] seront affich&#233;s sur la page sommaire du site:
+-* dans une balise {{&lt;div id="aa"&gt;}} si il en existe une dans le squelette {{sommaire.html}}.
+-* sinon, pour le squelette Z ou le squelette par d&#233;faut (dist), juste avant la liste des derniers articles .
+_ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il faut ajouter la balise {{&lt;div id="aa"&gt;}} dans {{sommaire.html}}
+       	</multi>
+	</description>
+    <lien>
+		[Documentation sur ->http://www.spip-contrib.net/?article1605], et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=aa]
+	</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>aa_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>aa_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.0.0;]" />
+</plugin>
+</archive>
+
+<archive id="paquet3.zip">
+<file>paquet3.zip</file>
+<size>5434</size>
+<date>1275519604</date>
+<source>_plugins_/plugin_2</source>
+<plugin>
+	<prefix>plugin2</prefix>
+	<nom>Plugin_2 2</nom>
+	<icon>plugin-24.gif</icon>
+	<categorie>edition</categorie>
+
+	<auteur>cy_altern, Eric
+_ &#169; 2010 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>2.1</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Affiche un article sur la page de sommaire du site. 
+_ Les &#233;l&#233;ments de l'article choisi dans [l'interface de configuration->?exec=cfg&amp;cfg=aa] seront affich&#233;s sur la page sommaire du site:
+-* dans une balise {{&lt;div id="aa"&gt;}} si il en existe une dans le squelette {{sommaire.html}}.
+-* sinon, pour le squelette Z ou le squelette par d&#233;faut (dist), juste avant la liste des derniers articles .
+_ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il faut ajouter la balise {{&lt;div id="aa"&gt;}} dans {{sommaire.html}}
+       	</multi>
+	</description>
+    <lien>
+		[Documentation sur ->http://www.spip-contrib.net/?article1605], et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=aa]
+	</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>aa_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>aa_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.0.0;]" />
+</plugin>
+</archive>
+
+<archive id="paquet4.zip">
+<file>paquet4.zip</file>
+<size>6221</size>
+<date>1275519604</date>
+<source>_plugins_/plugin_2</source>
+<plugin>
+	<prefix>plugin2</prefix>
+	<nom>Plugin_2 3</nom>
+	<icon>plugin-24.gif</icon>
+	<categorie>edition</categorie>
+
+	<auteur>cy_altern, Eric
+_ &#169; 2010 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>3.0</version>
+	<etat>dev</etat>
+	<description>
+		<multi>
+		[fr]Affiche un article sur la page de sommaire du site. 
+_ Les &#233;l&#233;ments de l'article choisi dans [l'interface de configuration->?exec=cfg&amp;cfg=aa] seront affich&#233;s sur la page sommaire du site:
+-* dans une balise {{&lt;div id="aa"&gt;}} si il en existe une dans le squelette {{sommaire.html}}.
+-* sinon, pour le squelette Z ou le squelette par d&#233;faut (dist), juste avant la liste des derniers articles .
+_ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il faut ajouter la balise {{&lt;div id="aa"&gt;}} dans {{sommaire.html}}
+       	</multi>
+	</description>
+    <lien>
+		[Documentation sur ->http://www.spip-contrib.net/?article1605], et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=aa]
+	</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>aa_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>aa_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.0.0;]" />
+	<necessite id="spip-bonux" version="[1.7.0;]" />
+</plugin>
+</archive>
+
+<archive id="paquet5.zip">
+<file>paquet5.zip</file>
+<size>16862</size>
+<date>1274302824</date>
+<source>_plugins_/plugin_1</source>
+<plugin>
+    <prefix>plugin1</prefix>
+	<nom>
+		<multi>
+		[fr]Plugin_1
+		[en]Plugin_1
+		</multi>
+	</nom>
+    <slogan>Pour lier des articles entre eux</slogan>
+    <icon>images/a2a-64.png</icon>
+	<categorie>navigation</categorie>
+
+    <auteur>Collectif SPIP</auteur>
+    <version>0.3</version>
+    <version_base>0.3</version_base>
+    <etat>stable</etat>
+    <licence>GPL 3</licence>
+    <description>Une autre version du plugin mais dont les versions sont identiques et donc le paquet ne sera pas pris en compte</description>
+    <lien>http://www.spip-contrib.net/a2a</lien>
+    <fonctions>a2a_fonctions.php</fonctions>
+    <options>a2a_options.php</options>
+    <install>base/a2a_upgrade.php</install>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+		<inclure>a2a_pipelines.php</inclure>
+	</pipeline>
+</plugin>
+</archive>
+
+<archive id="paquet12.zip">
+<file>paquet12.zip</file>
+<size>10830</size>
+<date>1272537538</date>
+<source>_plugins_/memobox</source>
+<plugin>
+	<prefix>memobox</prefix>
+	<nom>Memobox 2</nom>
+	<categorie>navigation</categorie>
+	
+	<auteur>[Renato Formato->mailto:renatoformato@virgilio.it]</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>
+		<multi>[it]Mostra un box per consentire agli utenti di memorizzare i link preferiti del proprio sito
+		[en]A box to let your users store their favourite links of your own site
+			[fr]Une bo&icirc;te qui permet aux utilisateurs de m&eacute;moriser leurs liens pr&eacute;f&eacute;r&eacute;s sur votre site. Mais c'est pas grave
+		</multi>
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>memobox_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
+</archive>
+</archives>

@@ -1,0 +1,44 @@
+[(#REM)
+	Partie contenu de la page affichant la liste des paquets en telechargement :
+	- soit pour tous les depots (pas d'id_depot)
+	- soit pour un depot donne
+	Le contenu peut aussi etre trie par categorie de plugins
+]
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<span class="sep"> &gt; </span>
+	<strong class="on"><:svp:titre_page_telechargements:></strong>
+</p>
+
+[(#REM) Cartouche avec le titre de la page et les informations generales ]
+<div class="cartouche">
+	<h1 class="h1"><:svp:titre_page_telechargements:></h1>
+	[<p class="info-publi">
+		<small>(#ENV{id_depot}|svp_compter_telechargements{#ENV{categorie}})</small>
+	</p>]
+</div>
+<br class="nettoyeur" />
+
+[(#REM) Liste des archives a telecharger classees par depot ]
+<B_depots>
+<BOUCLE_depots(DEPOTS){id_depot?}{!par nbr_paquets}>
+<h2 class="h2">
+	<a[ href="(#URL_DEPOT)"] title="<:svp:bulle_aller_depot:>">#TITRE</a>
+	[<span style="float: #LANG_RIGHT;">(#LOGO_DEPOT|image_reduire{32})</span>]
+</h2>
+[(#REM) Liste des paquets du depot ]
+[(#SET{url, [(#URL_PAQUETS|dirname|concat{/})]})]
+[(#REM) -- Les plugins ]
+<h3 class="h3"><:svp:intertitre_paquets_plugin:></h3>
+<INCLURE{fond=inclure/liste-paquets-plugin}{env}{id_depot}{categorie}{url_depot=#GET{url}} />
+[(#REM) -- Les autres contributions, si le filtre categorie n'est pas actif ]
+[(#ENV{categorie}|non)
+<h3 class="h3"><:svp:intertitre_paquets_contribution:></h3>
+<INCLURE{fond=inclure/liste-paquets-contribution}{env}{id_depot}{url_depot=#GET{url}} />
+]
+</BOUCLE_depots>
+</B_depots>
+	<p><:svp:info_aucun_depot_disponible:></p>
+<//B_depots>

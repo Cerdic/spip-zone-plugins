@@ -1,0 +1,27 @@
+[(#REM)
+
+  Affichage de la liste des categories de plugins destinee a etre utilisee :
+  - soit comme une filtre (ex: page telechargement)
+  - soit comme une navigation vers chaque page categorie (ex: page categorie)
+  Pour cela on passe les arguments suivants:
+  - env, qui contient a minima, les elements de l'url
+  - url_lien, url de base des liens de chaque depot 
+    (SELF pour telechargement, URL_PAGE{categorie} sinon)
+  - titre, l'intitule du bloc des liens
+  - bulle_lien, bulle d'info de chaque lien 
+  - bulle_lien, bulle d'info de chaque lien 
+  - bulle_croix, bulle d'info de l'icone de suppression du filtre en cours ou vide si on est
+    en affichage navigation
+  - categorie, alias en cours d'affichage pour exposition
+
+]
+[[<h2 class="h2">(#ENV{titre})</h2>]
+<ul class="menu-liste">
+(#SVP_CATEGORIES|foreach{
+	filnav-item-categorie, 
+	url_lien=#ENV{url_lien}, 
+	url_lien=#ENV{url_lien}, 
+	bulle_lien=#ENV{bulle_lien},
+	bulle_croix=#ENV{bulle_croix},
+	categorie=#ENV{categorie}})
+</ul>]

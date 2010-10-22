@@ -1,0 +1,26 @@
+<B_plugins>
+<table class="spip" summary="" style="width: 100%;">
+	<thead>
+		<tr id="categorie[-(#ENV{categorie}|sinon{#CLE}|sinon{aucune})]">
+			<th>
+				<strong>[(#ENV{categorie}|sinon{#CLE}|sinon{aucune}|svp_traduire_categorie)]</strong>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_plugins(PLUGINS){id_depot?}{categorie=#ENV{categorie}|sinon{#CLE}}{par multi nom}>
+		<tr id="plugin[-(#ID_DEPOT)]-#PREFIXE" class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+			<td>
+				<a[ href="(#URL_PLUGIN)"] title="<:svp:bulle_aller_plugin:>">[(#NOM)]</a>
+				[<br /> (#SLOGAN|supprimer_tags|PtoBR)]
+			</td>
+		</tr>
+</BOUCLE_plugins>
+	</tbody>
+</table>
+<br class="nettoyeur" />
+</B_plugins>
+[(#ENV{categorie}|oui)
+<p><:svp:info_aucun_plugin_disponible:></p>
+]
+<//B_plugins>

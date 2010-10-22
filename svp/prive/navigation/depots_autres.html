@@ -1,0 +1,26 @@
+<B_depots>
+<div class="cadre cadre-e" style="margin-top: 2em;">
+	<img height="24" width="24" class="cadre-icone" alt="" src="#CHEMIN{prive/themes/spip/images/depot-24.png}" />
+	[(#VAL{<:svp:titre_boite_autres_depots:>}|bouton_block_depliable{#EVAL{true}})]
+	[(#EVAL{true}|debut_block_depliable)]
+	<div class="cadre_padding">
+<BOUCLE_depots(DEPOTS){id_depot!=#ENV{id_depot}}{par titre}>
+		<div>
+			<div style="float: right; width: 32%;">
+				<a title="<:svp:bulle_modifier_depot:>"[ href="(#URL_ECRIRE{depots_edit, id_depot=#ID_DEPOT})"] style="float: right; padding-left: 4px; color: black;" class="spip_xx-small">
+					<b>N°&nbsp;#ID_DEPOT</b>
+				</a>
+			</div>
+			<div>
+				<a title="<:svp:bulle_afficher_depot:>"[ href="(#URL_ECRIRE{depots, id_depot=#ID_DEPOT})"] class="verdana1">
+					#TITRE
+				</a>
+			</div>
+			<div style="clear: both; height: 3px;"></div>
+		</div>
+</BOUCLE_depots>
+		<div class="nettoyeur"></div>
+	</div>
+	[(#VAL|fin_block)]
+</div>
+</B_depots>

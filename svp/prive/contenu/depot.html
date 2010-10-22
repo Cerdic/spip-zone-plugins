@@ -1,0 +1,18 @@
+<BOUCLE_afficher_contenu(DEPOTS){id_depot}>
+	<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+		<div class='label'><:info_nom:></div>
+		<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+	</div>
+	<div class="champ contenu_ps">
+		<div class='label'><:svp:label_fichier_depot:>&nbsp;:</div>
+		<div dir='#LANG_DIR' class='#EDIT{url_paquets} ps'><p>#URL_PAQUETS</p></div>
+	</div>
+	[<div class="champ contenu_descriptif">
+		<div class='label'><:svp:label_type_depot:></div>
+		<div dir='#LANG_DIR' class='#EDIT{type} type'><p>(#ENV{info_type})</p></div>
+	</div>]
+	<div class="champ contenu_texte[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+		<div class='label'><:info_descriptif:></div>
+		<div dir='#LANG_DIR' class='#EDIT{descriptif} texte'>#DESCRIPTIF</div>
+	</div>
+</BOUCLE_afficher_contenu>

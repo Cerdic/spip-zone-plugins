@@ -1,0 +1,24 @@
+[(#REM)
+
+  Affichage de la liste paginee des plugins destinee a etre utilisee :
+  - comme une navigation vers chaque page plugin
+  Pour cela on passe les arguments suivants:
+  - env, qui contient a minima, les elements de l'url
+  - titre, l'intitule du bloc des liens
+
+]
+<B_plugins>
+#ANCRE_PAGINATION
+[<h2 class="h2">(#ENV{titre})</h2>]
+<ul class="menu-liste">
+<BOUCLE_plugins(PLUGINS) {categorie}{pagination 10}{par nom}>
+	<li class="menu-entree">
+		[<(#EXPOSE{span, a[ href="(#URL_PLUGIN)"]})][ class="(#EXPOSE)"] title="<:svp:bulle_aller_plugin:>">
+			#NOM
+		</#EXPOSE{span, a}>
+	</li>
+</BOUCLE_plugins>
+</ul>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_plugins>
+<//B_plugins>

@@ -1,0 +1,42 @@
+[(#REM)
+	Partie contenu de la page affichant :
+	- les informations detaillees pour un plugin donne y compris la liste et les informations
+	des paquets
+]
+
+<BOUCLE_plugin(PLUGINS){id_plugin}>
+
+<p id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<span class="sep"> &gt; </span>
+	<a href="#URL_PAGE{plugins}"><:svp:titre_page_plugins:></a>
+	<span class="sep"> &gt; </span>
+	<strong class="on">#NOM</strong>
+</p>
+
+[(#REM) Cartouche avec le titre de la page et les informations generales ]
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h1 class="h1">#NOM</h1>
+		[<p class="info-publi">
+			<abbr class="published"><small>
+				<a[ href="(#URL_PAGE{plugins}|parametre_url{categorie,#CATEGORIE})"] title="<:svp:bulle_aller_categorie:>">
+					(#CATEGORIE|svp_traduire_categorie)
+				</a>
+				[, (#TAGS)]
+			</small></abbr>
+		</p>]
+	</div>
+
+	<div class="meta-publi">
+		[(#SLOGAN)]
+	</div>
+</div>
+<br class="nettoyeur" />
+
+[(#REM) Details des paquets du plugin ]
+<BOUCLE_paquets(PAQUETS){id_plugin}{!par version}>
+	<INCLURE{fond=inclure/paquet-plugin}{env}{id_paquet}{nom_plugin=#NOM} />
+</BOUCLE_paquets>
+
+</BOUCLE_plugin>
