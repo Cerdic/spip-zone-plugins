@@ -901,10 +901,9 @@ function traiter_raccourcis($t) {
 
 		if (_request('var_mode') == 'wheel'
 		AND autoriser('debug')) {
-			echo "<pre>";
-			echo htmlspecialchars($wheel->compile());
-			echo "</pre>\n";
-			;
+			$f = $wheel->compile();
+			echo "<pre>\n".htmlspecialchars($f)."</pre>\n";
+			exit;
 		}
 	}
 

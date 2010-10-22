@@ -64,34 +64,63 @@ class TextWheel {
 		return addcslashes(var_export($x, true), "\n\r\t");
 	}
 
-	public function compile() {
+	public function compile($b = null) {
 		$rules = & $this->ruleset->getRules();
 
 		## apply each in order
+		$pre = array();
 		$comp = array();
 
 		foreach ($rules as $name => $rule)
 		{
+			$rule->name = $name;
 			$this->initRule($rule);
-			$r = "/* $name */\n";
+			if (is_string($rule->replace)
+			AND $fun = $this->compiled[$rule->replace]) {
+				$pre[] = "\n###\n## $name\n###\n" . $fun;
+				preg_match(',function (\w+),', $fun, $r);
+				$rule->replace = $r[1];
+			}
+
+			$r = "\t/* $name */\n";
 
 			if ($rule->require)
-				$r .= 'require_once '.TextWheel::export($rule->require).';'."\n";
+				$r .= "\t".'require_once '.TextWheel::export($rule->require).';'."\n";
 			if ($rule->if_str)
-				$r .= 'if_str('.TextWheel::export($rule->if_str).', $t)'."\n";
+				$r .= "\t".'if (strpos($t, '.TextWheel::export($rule->if_str).') === false)'."\n";
 			if ($rule->if_stri)
-				$r .= 'if_stri('.TextWheel::export($rule->if_stri).', $t)'."\n";
+				$r .= "\t".'if (stripos($t, '.TextWheel::export($rule->if_stri).') === false)'."\n";
 			if ($rule->if_match)
-				$r .= 'if_match('.TextWheel::export($rule->if_match).', $t)'."\n";
+				$r .= "\t".'if (preg_match('.TextWheel::export($rule->if_match).', $t))'."\n";
 
 			if ($rule->func_replace !== 'replace_identity') {
 				$fun = 'TextWheel::'.$rule->func_replace;
-				$r .= '$t = '.$fun.'('.TextWheel::export($rule->match).', '.TextWheel::export($rule->replace).', $t);'."\n";
+				switch($fun) {
+					case 'TextWheel::replace_all_cb':
+						$fun = $rule->replace; # trim()...
+						break;
+					case 'TextWheel::replace_preg':
+						$fun = 'preg_replace';
+						break;
+					case 'TextWheel::replace_str':
+						$fun = 'str_replace';
+						break;
+					case 'TextWheel::replace_preg_cb':
+						$fun = 'preg_replace_callback';
+						break;
+					default:
+						break;
+				}
+				$r .= "\t".'$t = '.$fun.'('.TextWheel::export($rule->match).', '.TextWheel::export($rule->replace).', $t);'."\n";
 			}
 
 			$comp[] = $r;
 		}
-		return join ("\n", $comp);
+		$code = join ("\n", $comp);
+		$code = 'function '.$b.'($t) {' . "\n". $code . "\n\treturn \$t;\n}\n\n";
+		$code = join ("\n", $pre) . $code;
+
+		return $code;
 	}
 
 
@@ -136,7 +165,9 @@ class TextWheel {
 		}
 
 		if ($rule->create_replace){
+			$compile = $rule->replace.'($t)';
 			$rule->replace = create_function('$m', $rule->replace);
+			$this->compiled[$rule->replace] = $compile;
 			$rule->create_replace = false;
 			$rule->is_callback = true;
 		}
@@ -148,6 +179,9 @@ class TextWheel {
 				$var = '$m';
 			$code = 'return TextWheel::getSubWheel('.$n.')->text('.$var.');';
 			$rule->replace = create_function('$m', $code);
+			$cname = 'compiled_'.str_replace('-','_', $rule->name);
+			$compile = TextWheel::getSubWheel($n)->compile($cname);
+			$this->compiled[$rule->replace] = $compile;
 			$rule->is_wheel = false;
 			$rule->is_callback = true;
 		}
