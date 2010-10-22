@@ -29,7 +29,7 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 .cArticle .stats {
   float: #LANG_RIGHT;
 }
-.cArticle #forum_lire_tous, #forum_repondre {
+.cArticle #forum_lire_tous, #forum_repondre[(#PLUGIN{notation}|?{' '}), .cArticle .notation ]{
   margin-left: 5px;
   margin-right: 5px;
 }

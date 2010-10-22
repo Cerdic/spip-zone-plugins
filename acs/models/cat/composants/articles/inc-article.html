@@ -8,7 +8,7 @@ Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page d'un article.
-Si le plugin notation est présent, il est intégré.
+Si le plugin notation est présent, il est intégré automatiquement.
 
 ]<BOUCLE_article(ARTICLES) {id_article} {statut==[publie|propose|refuse]}>[(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut) - ]<:acs:entete_article:>})][(#SET{mkeywords,[(#EVAL{'_T("acs:entete_article").","._T("acs:entete_meta_keywords")'})][,(#TITRE|supprimer_tags|askeywords)][,(#SURTITRE|supprimer_tags|askeywords)][,(#SOUSTITRE|supprimer_tags|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)][,(#DESCRIPTIF|supprimer_tags|askeywords)]})][(#SET{mabstract,[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]})]
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>

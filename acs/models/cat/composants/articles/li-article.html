@@ -1,6 +1,6 @@
 <li>
   <div class="entete">
-    [(#PLUGIN{notation}|oui)<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">[(#NOTATION_ETOILE{#NOTE})]</div>]
+    [(#PLUGIN{notation}|oui)<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">[(#NOTATION_ETOILE{#ENV{note}})]</div>]
     <div class="titres">
       <span class="infos_article nav nsize">
       [(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
