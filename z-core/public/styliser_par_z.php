@@ -68,14 +68,16 @@ function public_styliser_par_z_dist($flux){
 		// surcharger aussi les squelettes venant de squelettes-dist/
 		if (preg_match(',(squelettes-dist|prive)/[^/]+$,',$squelette))
 			$squelette = "";
-
+	
 		// gerer les squelettes non trouves
 		// -> router vers les /dist.html
 		// ou scaffolding ou page automatique les contenus
 		if (!$squelette){
 
 			// si on est sur un ?page=XX non trouve
-			if ($flux['args']['contexte'][$page] == $fond OR $flux['args']['contexte']['type'] == $fond) {
+			if ($flux['args']['contexte'][$page] == $fond 
+				OR $flux['args']['contexte']['type'] == $fond
+				OR ($fond=='sommaire' AND !$flux['args']['contexte'][$page])) {
 
 				// si on est sur un ?page=XX non trouve
 				// se brancher sur contenu/xx si il existe
