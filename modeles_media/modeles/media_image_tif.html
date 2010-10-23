@@ -14,21 +14,21 @@
 	#GET{alt}
 </embed></object>]})]
 [(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
-	<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 	<dt>#GET{obj}</dt>
 	#MEDIA_LEGENDE{'dl',#GET{width}}
 	</dl>
 ]
 [(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5|non})
-	<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</span>
+	<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</span>
 ]
 [(#MEDIA_AFFICHER_LEGENDE|et{#HTML5})
-	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 	#GET{obj}
 	<figcaption>#MEDIA_LEGENDE{'dl',#GET{width}}</figcaption>
 	</figure>
 ]
 [(#MEDIA_AFFICHER_LEGENDE|non|et{#HTML5})
-	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</figure>
+	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#GET{obj}</figure>
 ]
 </BOUCLE_doc>
