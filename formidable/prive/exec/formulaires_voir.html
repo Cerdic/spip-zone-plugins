@@ -12,7 +12,7 @@
 <div class="fiche_objet">
 	[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
 	<a href="[(#URL_ECRIRE{formulaires_editer}|parametre_url{id_formulaire,#ID_FORMULAIRE})]" class="icone36" style="float:right;">
-		<img width="24" height="24" src="#CHEMIN{images/formulaire-editer-24.png}" />
+		<img width="24" height="24" src="#CHEMIN{images/formulaire-editer-24.png}" alt="" />
 		<span><:formidable:editer_modifier_formulaire:></span>
 	</a>
 	]
@@ -98,7 +98,7 @@
 	<BOUCLE_exports(POUR){tableau #VAL|echanges_formulaire_lister_disponibles|table_valeur{exporter}}>
 	<div>
 		<a href="#URL_ACTION_AUTEUR{exporter_formulaire,#ID_FORMULAIRE-#CLE}" class="cellule-h">
-			[<img src="(#CHEMIN{images/formulaire-exporter-24.png})" style="vertical-align:middle;" />]
+			[<img src="(#CHEMIN{images/formulaire-exporter-24.png})" style="vertical-align:middle;" alt="" />]
 			<span style="vertical-align:middle;">#CLE</span>
 		</a>
 	</div>
