@@ -79,7 +79,7 @@ class TextWheel {
 			AND $fun = $this->compiled[$rule->replace]) {
 				$pre[] = "\n###\n## $name\n###\n" . $fun;
 				preg_match(',function (\w+),', $fun, $r);
-				$rule->replace = $r[1];
+				$rule->compilereplace = $r[1]; # ne pas modifier ->replace sinon on casse l'execution...
 			}
 
 			$r = "\t/* $name */\n";
