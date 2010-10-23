@@ -1,8 +1,8 @@
 <!-- nom=notifications -->
 
 <div class="formulaire_spip formulaire_editer formulaire_cfg">
-	[<p class='reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
-	[<p class="reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<p class="explication"><:notifications:evenement_notification:></p>
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
