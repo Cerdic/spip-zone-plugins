@@ -213,10 +213,12 @@ function filtre_foreach($balise_deserializee, $modele ='foreach') {
 	unset($parametres[0], $parametres[1]);
 
 	$texte = '';
+	$i = 0;
 	$contexte = array();
 	if(is_array($balise_deserializee)) {
 		foreach ($balise_deserializee as $k => $v) {
-			$contexte = array_merge(array('cle' => $k), (is_array($v) ? $v : array('valeur' => $v))) ;
+			$i++;
+			$contexte = array_merge(array('iteration' => $i, 'cle' => $k), (is_array($v) ? $v : array('valeur' => $v))) ;
 			if (is_array($parametres)){
 				foreach($parametres as $_p){
 					if (preg_match(",^([^=]*)=(.*)$,", $_p, $matches)) {
