@@ -24,19 +24,23 @@ include_spip('public/geoportail_profils');
 */
 function geoportail_menu_dist(&$boutons_admin, $menu, $icone, $libelle)
 {	// Surcharge de la fonction
-	if (function_exists(geoportail_menu)) geoportail_menu($boutons_admin, $menu, $icone, $libelle);
-	else 
+	if (function_exists(geoportail_menu)) geoportail_menu($boutons_admin,$menu, $icone, $libelle);
+	else
 	{	switch ($menu)
 		{	case 'geoservice_tous':
 				if ($GLOBALS['meta']['geoportail_service'])
-					$boutons_admin['naviguer']->sousmenu[$menu] =  new Bouton ($icone, $libelle);
+				{	if ($boutons_admin['bando_edition']) $ssmenu = 'bando_edition';
+					else $ssmenu = 'naviguer';
+					$boutons_admin[$ssmenu]->sousmenu[$menu] =  new Bouton ($icone,$libelle);
+				}
 			break;
 			default:
-				$boutons_admin['configuration']->sousmenu[$menu] =  new Bouton ($icone, $libelle);
+				if ($boutons_admin['bando_configuration']) $ssmenu ='bando_configuration';
+				else $ssmenu = 'configuration';
+				$boutons_admin[$ssmenu]->sousmenu[$menu] =  new Bouton ($icone,$libelle);
 			break;
 		}
 	}
-		
 }
 
 // Ajout des boutons dans l'interface privee
