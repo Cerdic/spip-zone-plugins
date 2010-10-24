@@ -9,7 +9,7 @@
 ]
 [(#ENV{appel_menu}|oui)
 	[(#SESSION{id_auteur}|>{0}|oui)
-		<li class="menu-entree[ (#ENV{css})]">
+		<li class="menu-entree[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={auteur}|et{#ENV{env}|table_valeur{id_auteur}|=={#SESSION{id_auteur}}}) on]">
 			<a href="#URL_AUTEUR{#SESSION{id_auteur}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
 	]
 ]
