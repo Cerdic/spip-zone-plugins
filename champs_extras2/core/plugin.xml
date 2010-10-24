@@ -1,11 +1,14 @@
 <plugin>
-	<nom><multi>[fr]Champs Extras2[de]Zusatzfelder 2</multi></nom>
+	<nom><multi>[fr]Champs Extras2[de]Zusatzfelder 2[en]Extra fields 2</multi></nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.7.0</version>
-	<description><multi>
-	[fr]Creer de nouveaux champs aux objets d'&eacute;dition de SPIP
-	[de]Zus&auml;tzliche Felder f&uuml;r die Standardobjekte von SPIP anlegen</multi>
+	<description>
+		<multi>
+			[fr]Cr&#233;er de nouveaux champs aux objets d'&#233;dition de SPIP
+			[de]Zus&#228;tzliche Felder f&#252;r die Standardobjekte von SPIP anlegen
+			[en]Create new edit fields for SPIP objects
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Champs-Extras-2</lien>
 	<etat>test</etat>
