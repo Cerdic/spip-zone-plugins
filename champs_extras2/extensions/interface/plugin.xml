@@ -1,11 +1,19 @@
 <plugin>
-	<nom>Interface pour Champs Extras</nom>
+	<nom>
+		<multi>
+			[fr]Interface pour Champs Extras
+			[en]Interface for Extra fields
+		</multi>
+	</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.2.0</version>
 	<icon>images/iextras-64.png</icon>
 	<description>
-	Offre une interface pour g&eacute;rer des champs extras.
+		<multi>
+			[fr]Offre une interface pour g&#233;rer des champs extras.
+			[en]Interface to manage the extra fields on SPIP objects
+		</multi>
 	</description>
 	<etat>dev</etat>
 	<prefix>iextras</prefix>
