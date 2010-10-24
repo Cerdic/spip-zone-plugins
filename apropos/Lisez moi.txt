@@ -1,7 +1,7 @@
 /***********************************************************************\
  *  À propos des Plugins actifs                          				*                                                
  *                        												*
- *  Version du 18 octobre 2010, Jean-Philippe Guihard					*                                     
+ *  Version du 24 octobre 2010, Jean-Philippe Guihard					*                                     
  *																		*
  \**********************************************************************/
 
@@ -29,6 +29,4 @@ farfouillé dans le code de SPIP pour retrouver des fonctions qui
 correspondraient à mon besoin et les ai modifiée pour qu'elles collent à
 ce que je souhaite.
 
-Si le plugin est actif, on peut faire apparaitre la liste dans un
-squelette en utilisant un <code><INCLURE{fond=apropos_plugin}></code>
 
