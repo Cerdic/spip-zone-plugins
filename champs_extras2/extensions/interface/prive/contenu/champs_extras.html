@@ -18,7 +18,7 @@
 						<li><a href="[(#URL_ACTION_AUTEUR{iextras, [descendre_extra/(#VALEUR|table_valeur{extra_id})], #SELF})]" title="<:iextras:action_descendre_title|attribut_html:>"><:iextras:action_descendre:></a></li>			
 					]
 				]
-				<li><a href="[(#URL_ECRIRE{iextras_edit}|parametre_url{extra_id,#VALEUR|table_valeur{extra_id}})]" title="<:iextras:action_modifier_title|attribut_html:>"><:iextras:action_modifier:></a></li>
+				<li><a href="[(#ENV{url_edit_extra}|sinon{#URL_ECRIRE{iextras_edit}}|parametre_url{extra_id,#VALEUR|table_valeur{extra_id}})]" title="<:iextras:action_modifier_title|attribut_html:>"><:iextras:action_modifier:></a></li>
 				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [desassocier_extra/(#VALEUR|table_valeur{extra_id})], #SELF})]" title="<:iextras:action_desassocier_title|attribut_html:>"><:iextras:action_desassocier:></a></li>
 				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_extra/(#VALEUR|table_valeur{extra_id})], #SELF})]" class="supprimer" title="<:iextras:action_supprimer_title|attribut_html:>"><:iextras:action_supprimer:></a></li>
 				</ul>
