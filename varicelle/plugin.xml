@@ -3,7 +3,7 @@
 <icon>icon.png</icon>
 <description>De jolis boutons&nbsp;: s&eacute;duisants, l&eacute;gers et performants (en CSS3 sans image), pour styler d'un coup tous les appels &agrave; l'action du site. S'applique &agrave; tout ce qui porte le s&eacute;lecteur .submit (notamment&nbsp;: button, input, a).</description>
 <lien>http://www.spip-contrib.net/varicelle</lien>
-<version>0.1.5</version>
+<version>0.1.6</version>
 <etat>stable</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>varicelle</prefix>

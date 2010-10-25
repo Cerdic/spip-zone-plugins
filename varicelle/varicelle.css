@@ -10,7 +10,7 @@
 et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-buttons/ */
 
 .submit { position: relative; display: inline-block; width: auto; padding: 5px 1em 6px; overflow: visible; cursor: pointer;
-background: #888 url("img/varicelle-overlay.png") repeat-x; box-shadow: 0 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+background: #888 url("img/varicelle-sprite.png") left top repeat-x; box-shadow: 0 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 border: 0; border-bottom: 1px solid rgba(0,0,0,0.25); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
 font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
 * html .submit { background-image: none; border: none; color: #FFF !important; } /*IE6*/
@@ -49,7 +49,7 @@ font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba
 .white.submit:hover { background-color: #EEE; }
 
 /* styles */
-.metal.submit { background: #FFF url("img/varicelle-metal.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
+.metal.submit { background: #FFF url("img/varicelle-sprite.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
 .metal.submit:hover { background-color: #EEE; border-color: #999; color: #444; }
 
 .spip.submit { background-color: #75507B; }
