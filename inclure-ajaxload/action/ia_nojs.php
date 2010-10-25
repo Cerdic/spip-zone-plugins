@@ -5,7 +5,7 @@ function action_ia_nojs () {
 	// pour une semaine
 	setcookie("no_js", "no_js", time()+(3600*24*7));	
 		
-	@header("Refresh: 0; Url="._request("retour"));
+	@header("Refresh: 0; Url=".parametre_url(urldecode(_request("retour")), "no_js","oui", "&"));
 	echo "&nbsp;";	
 }
 
