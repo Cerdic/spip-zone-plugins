@@ -2,7 +2,7 @@
 	<nom>Plugin AMAP pour Spip 2</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems </auteur>
 	<version>2.0.1</version>
-	<version_base>0.0</version_base>
+	<version_base>0.1</version_base>
 
 	<licence>Distribu&eacute; sous licence GNU/GPL</licence>
 	<etat>dev</etat>
