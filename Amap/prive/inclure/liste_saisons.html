@@ -1,0 +1,29 @@
+<B_saisons>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:id_saison:></th>
+		<th><:amap:agenda:></th>
+		<th><:amap:contrats:></th>
+		<th><:amap:sorties:></th>
+		<th><:amap:responsables:></th>
+		<th><:amap:vacances:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_saisons(AMAP_SAISONS) {pagination 20}>
+	<tr>
+		<td><strong>#ID_SAISON</strong></td>
+		<td>#ID_AGENDA</td>
+		<td>#ID_CONTRAT</td>
+		<td>#ID_SORTIE</td>
+		<td>#ID_RESPONSABLE</td>
+		<td>#ID_VACANCE</td>
+	</tr>
+	</BOUCLE_saisons>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_saisons>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_saisons>

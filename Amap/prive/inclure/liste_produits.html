@@ -1,0 +1,23 @@
+<B_produits>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:id_produit:></th>
+		<th><:amap:paysan:></th>
+		<th><:amap:label_produit:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_produits(AMAP_PRODUITS auteurs) {pagination 20}>
+	<tr>
+		<td>#ID_PRODUIT</td>
+		<td>#NOM</td>
+		<td>#LABEL_PRODUIT</td>
+	</tr>
+	</BOUCLE_produits>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_produits>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_produits>

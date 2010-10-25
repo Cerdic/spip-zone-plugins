@@ -1,0 +1,16 @@
+<div class="formulaire_spip formulaire_amap formulaire_annuaire">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			[(#SAISIE{auteurs, id_auteur, label=<:auteur:>, statut=1comite})]
+			[(#SAISIE{input, prenom, label=<:amap:prenom:>, size=20, maxlength=20})]
+			[(#SAISIE{input, nom, label=<:amap:nom:>, size=30, maxlength=30})]
+			[(#SAISIE{input, tel_fixe, label=<:amap:tel_fixe:>, size=13, maxlength=13})]
+			[(#SAISIE{input, tel_portable, label=<:amap:tel_portable:>, size=13, maxlength=13})]
+			[(#SAISIE{input, adhesion, label=<:amap:adhesion:>, size=4, maxlength=4})]
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>"></p>
+	</div></form>
+</div>

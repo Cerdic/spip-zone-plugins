@@ -1,0 +1,31 @@
+<!--#navigation-->
+<div class="cadre-r amap-nav">
+	<INCLURE{fond=prive/navigation/config}>
+</div>
+<!--/#navigation-->
+
+<h1><:amap:configuration_saison:></h1>
+
+<INCLURE{fond=prive/entete/config}>
+
+<INCLURE{fond=prive/inc/attention}>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<:amap:saisons_enregistres:>
+	</div>
+	<div class="cadre_padding">
+		<INCLURE{fond=prive/inclure/liste_saisons}>
+	</div>
+</div>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata-add.gif}">
+		<:amap:saisons_enregistrement:>
+	</div>
+	<div class="cadre_padding ajax">
+		#FORMULAIRE_SAISON
+	</div>
+</div>

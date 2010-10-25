@@ -17,19 +17,19 @@ function amap_config_site() {
 // fonction qui permet de trouver si un groupe de mots clés existe à partir du titre
 function find_groupe($titre) {
 	$titre = addslashes($titre);
-	spip_log("1. (find_groupe) recherche des occurences dans la table spip_groupes_mots de l'id de : $titre", "soyezcreateurs_install");
+	spip_log("1. (find_groupe) recherche des occurences dans la table spip_groupes_mots de l'id de : $titre", "amap_installation");
 	$count = sql_countsel("spip_groupes_mots", "titre='$titre'");
-	spip_log("2. (find_groupe) resultat de la recherche : $count occurences pour $titre", "soyezcreateurs_install");
+	spip_log("2. (find_groupe) resultat de la recherche : $count occurences pour $titre", "amap_installation");
 	return $count;
 }
 
 // fonction pour trouver l'id du groupe de mots clés à partir du titre du groupe
 function id_groupe($titre) {
 	$titre = addslashes($titre);
-	spip_log("1. (id_groupe) selection dans la table spip_groupes_mots de l'id de : $titre", "soyezcreateurs_install");
+	spip_log("1. (id_groupe) selection dans la table spip_groupes_mots de l'id de : $titre", "amap_installation");
 	$result = sql_fetsel("id_groupe", "spip_groupes_mots", "titre='$titre'");
 	$resultat = $result['id_groupe'];
-	spip_log("2. (id_groupe) selection = $resultat pour $titre", "soyezcreateurs_install");
+	spip_log("2. (id_groupe) selection = $resultat pour $titre", "amap_installation");
 	return $resultat;
 }
 
@@ -129,7 +129,7 @@ function find_mot($titre, $id_groupe) {
 
 //fonction qui permet de trouver l'id du mot clé à partir du titre et de l'id du groupe
 function id_mot($titre, $id_groupe) {
-	spip_log("1. (id_mot) debut de recherche de l'id de $titre avec $id_groupe", "soyezcreateurs_install");
+	spip_log("1. (id_mot) debut de recherche de l'id de $titre avec $id_groupe", "amap_installation");
 	$titre = addslashes($titre);
 	$result = sql_fetsel(
 		"id_mot", 
@@ -137,7 +137,7 @@ function id_mot($titre, $id_groupe) {
 		"titre='$titre' AND id_groupe = $id_groupe"
 	);
 	$id_mot = $result['id_mot'];
-	spip_log("2. (id_mot) retour de la fonction id_mot = $id_mot", "soyezcreateurs_install");
+	spip_log("2. (id_mot) retour de la fonction id_mot = $id_mot", "amap_installation");
 	return $id_mot;
 }
 

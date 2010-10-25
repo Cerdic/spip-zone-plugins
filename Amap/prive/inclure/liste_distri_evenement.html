@@ -1,0 +1,27 @@
+<B_distri_evenement>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:date_distribution:></th>
+		<th><:amap:lieux:></th>
+		<th><:amap:responsable:> 1</th>
+		<th><:amap:responsable:> 2</th>
+		<th><:amap:responsable:> 3</th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_distri_evenement(AMAP_EVENEMENTS) {id_saison=#ENV{id_saison}} {pagination 20}>
+	<tr>
+		<td>[(#DATE_EVENEMENT|affdate{'d-m-Y'})]</td>
+		<td>#ID_LIEU</td>
+		<td>#ID_PERSONNE1</td>
+		<td>#ID_PERSONNE2</td>
+		<td>#ID_PERSONNE3</td>
+	</tr>
+	</BOUCLE_distri_evenement>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_distri_evenement>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_distri_evenement>

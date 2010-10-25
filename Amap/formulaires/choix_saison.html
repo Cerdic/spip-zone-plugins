@@ -1,0 +1,13 @@
+<div class="formulaire_spip formulaire_amap formulaire_choix_saison">
+	<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+		<label for="<:amap:choix:>"><:amap:choix:></label>
+			<select name="id_saison" id="champ_id_saison">
+				<option value="0"[ (#ENV{Choix, 0}|=={0}|?{selected="selected"})]>--</option>
+			<BOUCLE_secteurs(AMAP_SAISONS){tout}>
+				[<option value="#ID_SAISON">(#ID_SAISON)</option>]
+			</BOUCLE_secteurs>
+			</select>
+	<input type='submit' class='submit' value='<:amap:envoyer:>' />
+	</div></form>
+</div>

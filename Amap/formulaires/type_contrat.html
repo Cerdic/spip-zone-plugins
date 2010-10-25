@@ -1,0 +1,12 @@
+<div class="formulaire_spip formulaire_amap formulaire_type_contrat">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<i>id_type_contrat</i> <:amap:cle_primaire_de:> <i>spip_amap_types_contrats</i>
+			[(#SAISIE{input, label_type_contrat, label=<:amap:label_type_contrat:>, size=20, maxlength=20})]
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>"></p>
+	</div></form>
+</div>

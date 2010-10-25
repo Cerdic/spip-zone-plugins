@@ -1,0 +1,27 @@
+<B_personnes>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:prenom:></th>
+		<th><:amap:nom:></th>
+		<th><:amap:tel_fixe:></th>
+		<th><:amap:tel_portable:></th>
+		<th><:amap:adhesion:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_personnes(AMAP_PERSONNES) {pagination 20}>
+	<tr>
+		<td>#PRENOM</td>
+		<td>#NOM</td>
+		<td>#TEL_FIXE</td>
+		<td>#TEL_PORTABLE</td>
+		<td>#ADHESION</td>
+	</tr>
+	</BOUCLE_personnes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_personnes>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_personnes>

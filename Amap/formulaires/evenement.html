@@ -1,0 +1,49 @@
+<div class="formulaire_spip formulaire_amap formulaire_evenement">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			[(#SAISIE{date_jour_mois_annee, date_evenement, label=<:amap:date:>, obligatoire=oui})]
+			<?php $chaine = substr("#ENV{id_saison}",10); ?>
+			<input type="hidden" name="id_saison" value="<?php echo $chaine; ?>" />
+			<li>
+				<label for="id_lieu"><:amap:lieux:></label>
+				<select name="id_lieu" id="id_lieu">
+					<BOUCLE_lieux(AMAP_LIEUX){tout}>
+						[<option value="#LIEUX_NOM">(#LIEUX_NOM)</option>]
+					</BOUCLE_lieux>
+				</select>
+			</li>
+			<li>
+				<label for="id_personne1"><:amap:responsable:> 1</label>
+				<select name="id_personne1" id="id_personne1">
+					<option value="0"></option>
+					<BOUCLE_responsable_1(AMAP_PERSONNES){par id_personne}>
+						<option value="#PRENOM #NOM">#PRENOM #NOM</option>
+					</BOUCLE_responsable_1>
+				</select>
+			</li>
+			<li>
+				<label for="id_personne2"><:amap:responsable:> 2</label>
+				<select name="id_personne2" id="id_personne2">
+					<option value="0"></option>
+					<BOUCLE_responsable_2(AMAP_PERSONNES){tout}{par id_personne}>
+						<option value="#PRENOM #NOM">#PRENOM #NOM</option>
+					</BOUCLE_responsable_2>
+				</select>
+			</li>
+			<li>
+				<label for="id_personne3"><:amap:responsable:> 3</label>
+				<select name="id_personne3" id="id_personne3">
+					<option value="0"></option>
+					<BOUCLE_responsable_3(AMAP_PERSONNES){tout}{par id_personne}>
+						<option value="#PRENOM #NOM">#PRENOM #NOM</option>
+					</BOUCLE_responsable_3>
+				</select>
+			</li>
+
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>"></p>
+	</div></form>
+</div>

@@ -1,0 +1,42 @@
+<!--#navigation-->
+<div class="cadre-r amap-nav">
+	<INCLURE{fond=prive/navigation/distri}>
+</div>
+<!--/#navigation-->
+
+<h1><:amap:configuration_distri_evenement:></h1>
+
+<INCLURE{fond=prive/entete/distri}>
+
+<INCLURE{fond=prive/inc/attention}>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<:amap:choix_saison:>
+	</div>
+	<div class="cadre_padding">
+		#FORMULAIRE_CHOIX_SAISON
+	</div>
+</div>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<:amap:liste_evenement_distribution{id_saison=#ENV{id_saison}}:>
+	</div>
+	<div class="cadre_padding">
+		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]
+		[(#ENV{id_saison}|>={1}|oui)<INCLURE{fond=prive/inclure/liste_distri_evenement}{id_saison=#ENV{id_saison}}>]
+	</div>
+</div>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata-add.gif}">
+		<:amap:enregistrement_evenement_distribution{id_saison=#ENV{id_saison}}:>
+	</div>
+	<div class="cadre_padding ajax">
+		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]
+		[(#ENV{id_saison}|>={1}|oui)#FORMULAIRE_EVENEMENT{id_saison=#ENV{id_saison}}]
+	</div>
+</div>

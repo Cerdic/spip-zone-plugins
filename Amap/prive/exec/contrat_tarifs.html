@@ -1,0 +1,49 @@
+<!--#navigation-->
+<div class="cadre-r amap-nav">
+	<INCLURE{fond=prive/navigation/contrat}>
+</div>
+<!--/#navigation-->
+
+<h1><:amap:configuration_contrat_tarifs:></h1>
+
+<INCLURE{fond=prive/entete/contrat}>
+
+<INCLURE{fond=prive/inc/attention}>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<:amap:choix_saison:>
+	</div>
+	<div class="cadre_padding">
+	</div>
+</div>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<:amap:choix_produit:>
+	</div>
+	<div class="cadre_padding">
+	</div>
+</div>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<:amap:tarifs_enregistres_saison_produit{id_saison1=#ENV{id_saison1}}{label_produit1=#ENV{label_produit1}}:>
+	</div>
+	<div class="cadre_padding">
+		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]
+		[(#ENV{id_saison}|>={1}|oui)]
+	</div>
+</div>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata-add.gif}">
+		<:amap:tarifs_enregistrement_saison_produit{id_saison2=#ENV{id_saison2}}{label_produit2=#ENV{label_produit2}}:>
+	</div>
+	<div class="cadre_padding ajax">
+		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]
+		[(#ENV{id_saison}|>={1}|oui)]
+	</div>
+</div>

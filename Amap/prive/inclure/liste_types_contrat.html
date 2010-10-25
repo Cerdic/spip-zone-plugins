@@ -1,0 +1,21 @@
+<B_types_contrat>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:id_type_contrat:></th>
+		<th><:amap:label_type_contrat:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_types_contrat(AMAP_TYPES_CONTRATS) {pagination 20}>
+	<tr>
+		<td>#ID_TYPE_CONTRAT</td>
+		<td>#LABEL_TYPE_CONTRAT</td>
+	</tr>
+	</BOUCLE_types_contrat>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_types_contrat>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_types_contrat>

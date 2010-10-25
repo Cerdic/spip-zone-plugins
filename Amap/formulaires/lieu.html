@@ -1,0 +1,16 @@
+<div class="formulaire_spip formulaire_amap formulaire_lieu">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<i>id_lieu</i> <:amap:cle_primaire_de:> <i>spip_amap_lieux</i>
+			[(#SAISIE{input, lieux_nom, label=<:amap:lieux_nom:>,size=40, maxlength=40})]
+			[(#SAISIE{input, lieux_rue, label=<:amap:lieux_rue:>,size=40, maxlength=40})]
+			[(#SAISIE{input, lieux_cp, label=<:amap:lieux_cp:>,size=5, maxlength=5})]
+			[(#SAISIE{input, lieux_ville, label=<:amap:lieux_ville:>,size=30, maxlength=30})]
+			[(#SAISIE{input, lieux_telephone, label=<:amap:lieux_telephone:>,size=13, maxlength=13})]
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>"></p>
+	</div></form>
+</div>

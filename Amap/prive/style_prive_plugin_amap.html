@@ -1,0 +1,79 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/*  ------------------------------------------
+/*  Colonne de navigation
+/*  ------------------------------------------ */
+
+/*  Changement sur la colonne de navigation  */
+#navigation .amap-nav {margin-top:135px}
+#navigation .amap-nav ul {padding: 0}
+
+/*  Images de la colonne de navigation  */
+a.page_accueil {
+	background:url(#CHEMIN{img_pack/page_accueil.png}) no-repeat;
+	width:22px;
+	height:22px;
+	padding:0px 0px 10px 30px;
+	margin-left:5px;
+	}	
+a.options {
+	background:url(#CHEMIN{img_pack/options.png}) no-repeat;
+	width:22px;
+	height:22px;
+	padding:0px 0px 10px 30px;
+	margin-left:5px;
+	}
+a.themes {
+	background:url(#CHEMIN{img_pack/themes.png}) no-repeat;
+	width:22px;
+	height:22px;
+	padding:0px 0px 10px 30px;
+	margin-left:5px;
+	}
+li.subMenu {
+	margin-bottom:10px;
+	}
+
+/*  ------------------------------------------
+/*  Generalite plugins
+/*  ------------------------------------------ */
+li {
+	list-style-type:none;
+	padding-left:10px
+	}
+
+.onglet_off a {color: #ffffff}
+
+/*  ------------------------------------------
+/*  Surcharge formulaire_spip
+/*  ------------------------------------------ */
+.formulaire_amap input.text,
+.formulaire_amap input.password,
+.formulaire_amap textarea,
+.formulaire_amap select
+{
+	width:auto;
+	}
+
+[(#REM)</style>]

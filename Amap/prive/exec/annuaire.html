@@ -1,0 +1,48 @@
+<h1><:amap:configuration_annuaire:></h1>
+
+<INCLURE{fond=prive/entete/annuaire}>
+
+<INCLURE{fond=prive/inc/attention}>
+
+<!--
+A revoir completement, le but est de permettre à l'admin de choisir qui il affiche
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<:amap:choix_statut:>
+	</div>
+	<div class="cadre_padding">
+		<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+			<form method='post' action='#ENV{action}'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+				<label for="<:amap:choix:>"><:amap:choix:></label>
+					<select name="id_saison" id="champ_id_saison">
+					<BOUCLE_secteurs(AMAP_SAISONS){tout}>
+						[<option value="#ID_SAISON">(#ID_SAISON)</option>]
+					</BOUCLE_secteurs>
+					</select>
+			<input type='submit' class='submit' value='<:amap:envoyer:>' />
+			</div></form>
+		</div>
+	</div>
+</div>
+-->
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<:amap:annuaire_enregistres:>
+	</div>
+	<div class="cadre_padding">
+		<INCLURE{fond=prive/inclure/liste_personnes}>
+	</div>
+</div>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata-add.gif}">
+		<:amap:annuaire_enregistrement:>
+	</div>
+	<div class="cadre_padding ajax">
+		#FORMULAIRE_ANNUAIRE
+	</div>
+</div>

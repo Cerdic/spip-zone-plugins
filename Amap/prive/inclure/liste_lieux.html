@@ -1,0 +1,24 @@
+<B_lieux>
+<table class="spip">
+	<tr>
+		<th><:amap:id_lieu:></th>
+		<th><:amap:lieux_nom:></th>
+		<th><:amap:lieux_rue:></th>
+		<th><:amap:lieux_cp:></th>
+		<th><:amap:lieux_ville:></th>
+		<th><:amap:lieux_telephone:></th>
+	</tr>
+	<BOUCLE_lieux(AMAP_LIEUX) {pagination 20}>
+	<tr>
+		<td>#ID_LIEU</td>
+		<td>#LIEUX_NOM</td>
+		<td>#LIEUX_RUE</td>
+		<td>#LIEUX_CP</td>
+		<td>#LIEUX_VILLE</td>
+		<td>#LIEUX_TELEPHONE</td>
+	</tr>
+	</BOUCLE_lieux>
+</table>
+</B_lieux>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_lieux>

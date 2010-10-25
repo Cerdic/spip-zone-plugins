@@ -1,0 +1,21 @@
+<B_banques>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:id_banque:></th>
+		<th><:amap:label_banque:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_banques(AMAP_BANQUES) {pagination 20}>
+	<tr>
+		<td>#ID_BANQUE</td>
+		<td>#LABEL_BANQUE</td>
+	</tr>
+	</BOUCLE_banques>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_banques>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_banques>

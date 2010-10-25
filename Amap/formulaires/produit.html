@@ -1,0 +1,13 @@
+<div class="formulaire_spip formulaire_amap formulaire_produit">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<i>id_produit</i> <:amap:cle_primaire_de:> <i>spip_amap_produits</i>
+			[(#SAISIE{auteurs, id_auteur, label=<:amap:paysan:>, statut=1comite})]
+			[(#SAISIE{input, label_produit, label=<:amap:label_produit:>, size=20, maxlength=20})]
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>"></p>
+	</div></form>
+</div>
