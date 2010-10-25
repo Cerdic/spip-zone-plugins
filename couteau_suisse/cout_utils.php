@@ -270,14 +270,6 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 		. '</p><p style="font-size:80%; margin-left:0.4em;">' . join("<br />", $aide) . '</p>';
 }
 
-// met en forme le fichier $f en vue d'un insertion en head
-function cs_insert_header($f, $type) {
-	if($type=='css') {
-		include_spip('inc/filtres');
-		return '<link rel="stylesheet" href="'.url_absolue(direction_css($f)).'" type="text/css" media="projection, screen" />';
-	} elseif($type=='js')
-		return '<script type="text/javascript" src="'.url_absolue($f).'"></script>';
-}
 // sauve la configuration dans un fichier tmp/couteau-suisse/config.php
 function cs_sauve_configuration() {
 	global $outils, $metas_vars;
@@ -322,6 +314,7 @@ function cs_initialise_includes($count_metas_outils) {
 	$traitements_utilises =
 	// variables temporaires
 	$temp_js_html = $temp_css_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
+	@define('_CS_HIT_EXTERNE', 1500);
 	// inclure d'office outils/cout_fonctions.php
 	if($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
 		$infos_fichiers['code_fonctions'][] = $temp;
@@ -349,17 +342,15 @@ function cs_initialise_includes($count_metas_outils) {
 					// rien a faire : $traitements_utilises est rempli par is_traitements_outil()
 				}
 			}
-			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
-			// TODO : librairies distantes placees dans lib/
+			// recherche des fichiers .css, .css.html, .js et .js.html eventuellement present dans outils/
 			foreach(array('css', 'js') as $f) {
-				if($file=find_in_path("outils/$inc.$f")) $cs_metas_pipelines['header_'.$f][] = cs_insert_header($file, $f);
-/*				if(isset($outil['distant_'.$type]) && (file=find_in_path("lib/$inc/distant_{$f}_".basename($outil["distant_$f"]))))
-					$cs_metas_pipelines['header_'.$f][] = cs_insert_header($file, $f);
-*/			}
-			// en fait on peut pas compiler ici car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
-			// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
-			if($f=find_in_path("outils/$inc.css.html")) { lire_fichier($f, $ff); $temp_css_html[] = $ff; }
-			if($f=find_in_path("outils/$inc.js.html")) { lire_fichier($f, $ff); $temp_js_html[] = $ff; }
+				if($file=find_in_path("outils/$inc.$f")) { lire_fichier($file, $ff); ${'temp_'.$f}[] = $ff; }
+				// en fait on ne peut pas compiler ici car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
+				// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
+				if($file=find_in_path("outils/$inc.$f.html")) { lire_fichier($file, $ff); ${'temp_'.$f.'_html'}[] = $ff; }
+				// TODO : librairies distantes placees dans lib/
+/*				if(isset($outil['distant_'.$type]) && ($file=find_in_path("lib/$inc/distant_{$f}_".basename($outil["distant_$f"])))) etc. */
+			}
 			// recherche d'un code inline eventuellement propose
 			if(isset($outil['code:spip_options'])) $infos_fichiers['code_spip_options'][] = $outil['code:spip_options'];
 			if(isset($outil['code:options'])) $infos_fichiers['code_options'][] = $outil['code:options'];
@@ -402,9 +393,16 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	// concatenation des css inline, js inline et filtres trouves
 	if(strlen(trim($temp_css = join("\n", $temp_css)))) {
 		if(function_exists('compacte_css')) $temp_css = compacte_css($temp_css);
-		$temp = array("<style type=\"text/css\">\n$temp_css\n</style>");
+		if(strlen($temp_css)>_CS_HIT_EXTERNE) {
+			// hit externe
+			$cs_metas_pipelines['header_css_ext'] = $temp_css;
+		} else {
+			// css inline
+			$temp = array("<style type=\"text/css\">\n$temp_css\n</style>");
+			if(is_array($cs_metas_pipelines['header_css'])) $temp = array_merge($temp, $cs_metas_pipelines['header_css']);
+			$cs_metas_pipelines['header_css'] = $cs_metas_pipelines['header_css_prive'] = join("\n", $temp);
+		}
 		unset($temp_css);
-		$cs_metas_pipelines['header_css'] = is_array($cs_metas_pipelines['header_css'])?array_merge($temp, $cs_metas_pipelines['header_css']):$temp;
 	}
 	if(count($temp_jq_init)) {
 		$temp_js[] = "var cs_init = function() {\n\t".join("\n\t", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
@@ -412,21 +410,42 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		unset($temp_jq_init);
 	}
 	$temp_jq = count($temp_jq)?"\njQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});":'';
-	$temp_js[] = "if(window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"".url_absolue(find_in_path('javascript/jquery.cookie.js'))."\";$temp_jq\n}";
+	$temp_js[] = "if(window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"<cs_html>#CHEMIN{javascript/jquery.cookie.js}</cs_html>\";$temp_jq\n}";
 	unset($temp_jq);
 	if(count($temp_js)) {
-		$temp_js = join("\n", $temp_js);
+		$prive = function_exists('test_espace_prive')?test_espace_prive()
+			// compatibilite pour SPIP 1.92
+			:(defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false);
+		$temp_js = 'var cs_prive='.($prive?'1':'0').";\njQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\n" . join("\n", $temp_js);
 		if(function_exists('compacte_js')) $temp_js = compacte_js($temp_js);
-		$temp = array("<script type=\"text/javascript\"><!--
-var cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;
-jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
-$temp_js\n// --></script>\n");
+		if(strlen($temp_js)>_CS_HIT_EXTERNE) {
+			// hit externe
+			$cs_metas_pipelines['header_js_ext'] = $temp_js;
+		} else {
+			// js inline
+			$temp = array("<script type=\"text/javascript\"><!--\n$temp_js\n// --></script>\n");
+			if(is_array($cs_metas_pipelines['header_js'])) $temp = array_merge($temp, $cs_metas_pipelines['header_js']);
+			$cs_metas_pipelines['header_js'] = $cs_metas_pipelines['header_js_prive'] = join("\n", $temp);
+		}
 		unset($temp_js);
-		$cs_metas_pipelines['header_js'] = is_array($cs_metas_pipelines['header_js'])?array_merge($temp, $cs_metas_pipelines['header_js']):$temp;
 	}
+	// effacement du repertoire temporaire de controle
+	if(@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
+		while (($fichier = @readdir($handle)) !== false)
+			if($fichier[0] != '.')	supprimer_fichier(_DIR_CS_TMP.$fichier);
+		closedir($handle);
+	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// join final...
-	foreach(array('header_css', 'header_js') as $f)
-		if(is_array($cs_metas_pipelines[$f])) $cs_metas_pipelines[$f] = join("\n", $cs_metas_pipelines[$f]);
+	foreach(array('css', 'js') as $type) {
+		$f = 'header_'.$type;
+		if(isset($cs_metas_pipelines[$temp = $f.'_ext'])) {
+			$fichier_dest = _DIR_CS_TMP . "header.$type.html";
+			if(!ecrire_fichier($fichier_dest, $cs_metas_pipelines[$temp], true)) cs_log("ERREUR ECRITURE : $fichier_dest");
+			unset($cs_metas_pipelines[$temp]);
+			$infos_pipelines['header_prive']['inline'][] = "cs_header_hit(\$flux, '$type', '_prive');";
+			$infos_pipelines['insert_head'.($type=='css'?'_css':'')]['inline'][] = "cs_header_hit(\$flux, '$type');";
+		}
+	}
 	// SPIP 2.0 ajoute les parametres "TYPO" et $connect aux fonctions typo() et propre()
 	$liste_pivots = defined('_SPIP19300')
 		?array(
@@ -478,12 +497,6 @@ $temp_js\n// --></script>\n");
 	if(count($traitements_utilises))
 		$infos_fichiers['code_options'][] = "\n// Table des traitements\n" . join("\n", $traitements_utilises);
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_post_propre']=$traitements_post_propre;";
-	// effacement du repertoire temporaire de controle
-	if(@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
-		while (($fichier = @readdir($handle)) !== false)
-			if($fichier[0] != '.')	supprimer_fichier(_DIR_CS_TMP.$fichier);
-		closedir($handle);
-	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// ecriture des fichiers mes_options et mes_fonctions
 	ecrire_fichier_en_tmp($infos_fichiers, 'spip_options');
 	ecrire_fichier_en_tmp($infos_fichiers, 'options');

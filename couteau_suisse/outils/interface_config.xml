@@ -148,10 +148,6 @@
 		<nom>header_prive</nom>
 		<fonction>icone_visiter_header_prive</fonction>
 	</pipeline>
-	<pipeline>
-		<nom>header_prive2</nom>
-		<script_php>icone_visiter_header_prive2</script_php>
-	</pipeline>
 </outil>
 
 

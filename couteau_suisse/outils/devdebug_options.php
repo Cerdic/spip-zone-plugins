@@ -16,7 +16,7 @@ function devdebug_charger_debug(){
 	if(_DEVDEBUG_MODE==1){
 		$prive = function_exists('test_espace_prive')
 			?test_espace_prive()
-			// compatibilite pour avant 2.0
+			// compatibilite pour SPIP 1.92
 			:(defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false);
 		// Les liens d'erreur generes par PHP renvoient ... en local ! dans le php.ini standard
 		// On les definit du type 'http://fr.php.net/manual/en/ %s .php' (necessite une connexion)

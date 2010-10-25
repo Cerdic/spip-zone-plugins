@@ -56,7 +56,7 @@ function couteau_suisse_header_prive($flux_){
 	global $cs_metas_pipelines;
 	$flux = '';
 	if(isset($cs_metas_pipelines['header_prive'])) eval($cs_metas_pipelines['header_prive']);
-	cs_compile_header($flux,'css', false); cs_compile_header($flux,'js');
+	cs_compile_header($flux,'css', '_prive', false); cs_compile_header($flux, 'js', '_prive');
 	return $flux_ . $flux;
 }
 
@@ -80,7 +80,7 @@ function couteau_suisse_insert_head($flux_){
 	global $cs_metas_pipelines;
 	$flux = '';
 	if(isset($cs_metas_pipelines['insert_head'])) eval($cs_metas_pipelines['insert_head']);
-	cs_compile_header($flux,'js');
+	cs_compile_header($flux, 'js');
 	return $flux_ 
 		. couteau_suisse_insert_head_css() // en cas d'absence de balise #INSERT_HEAD_CSS
 		. $flux;
@@ -221,24 +221,46 @@ if(defined('_LOG_CS')) cs_log(" -- compilation d'un header. Code CSS : ".couper(
 
 // recherche et compilation par SPIP du contenu d'un fichier .html : <cs_html>contenu</cs_html>
 // $type = 'css' ou 'js'
-function cs_compile_header(&$flux, $type, $rem=true) {
+function cs_compile_header(&$flux, $type_, $suffixe='', $rem=true) {
 //if(defined('_LOG_CS')) cs_log(" -- recherche de compilations necessaires du header.");
 	global $cs_metas_pipelines;
-	$type = 'header_'.$type;
-	if(isset($cs_metas_pipelines[$type])) {
+	if(isset($cs_metas_pipelines[$type = 'header_'.$type_.$suffixe])) {
 		$header = &$cs_metas_pipelines[$type];
 		if(strpos($header, '<cs_html>')!==false) {
 			$header = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $header);
 			// sauvegarde en metas
 			ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
 			ecrire_metas();
-			ecrire_fichier(_DIR_CS_TMP.$type.'.html', "<!-- Configuration de controle pour le plugin 'Couteau Suisse' -->\n\n$header");
+			ecrire_fichier(_DIR_CS_TMP.$type.'.html', "<!-- Fichier de controle $type_ pour le plugin 'Couteau Suisse' -->\n\n$header");
 		}
 		$flux .= $header;
 	}
-	if($rem) $flux = strlen(trim($flux))
-		?"\n<!-- Debut CS -->\n$flux\n<!-- Fin CS -->\n\n":"\n<!-- CS vide -->\n\n";
+	if($rem)
+		$flux = strlen(trim($flux))?"\n<!-- Debut CS -->\n$flux\n<!-- Fin CS -->\n\n":"\n<!-- CS vide -->\n\n";
+}
 
+// construction d'un hit
+// (recherche et compilation par SPIP du contenu d'un fichier .html : <cs_html>contenu</cs_html>)
+// $type = 'css' ou 'js'
+function cs_header_hit(&$flux, $type, $suffixe='') {
+	$f = "header$suffixe.$type";
+	$nom = sous_repertoire(_DIR_VAR,'couteau-suisse') . $f;
+	$tmp = _DIR_CS_TMP . $f;
+	if(!file_exists($tmp) || !file_exists($nom) || $GLOBALS['var_mode']=='recalcul') {
+		if (lire_fichier(_DIR_CS_TMP."header.$type.html", $t) && strlen($t)) {
+			if(strpos($t, '<cs_html>')!==false)
+				$t = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $t);
+			ecrire_fichier($nom, $t, true);
+			ecrire_fichier($tmp, $t, true);
+		} else {
+			if(defined('_LOG_CS')) cs_log(" -- fichier $fo illisible. hit non construit");
+			return;
+		}
+	}
+	switch($type) {
+		case 'js': $flux .= '<script src="'.$nom.'" type="text/javascript"></script>'; break;
+		case 'css': $flux .= '<link rel="stylesheet" href="'.direction_css($nom).'" type="text/css" media="projection, screen" />'; break;
+	}
 }
 
 /**
