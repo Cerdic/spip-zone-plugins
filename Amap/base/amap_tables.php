@@ -8,31 +8,47 @@
 */
 include_spip('inc/meta');
 
-//fonction qui permet de créer les métas de config du site
-function amap_config_site() {
-	ecrire_meta('config_precise_groupes', 'oui','non');
+function amap_config_site() {	
 	ecrire_meta('articles_mots', 'oui','non');
+	spip_log("1. (amap_config_site) metas du plugins ecrite", "amap_installation");
 	return true;
 }
 
-// GROUPE
 // fonction qui permet de trouver si un groupe de mots clés existe à partir du titre
 function find_groupe($titre) {
 	$titre = addslashes($titre);
-	spip_log("1. (find_groupe) recherche des occurences dans la table spip_groupes_mots de l'id de : $titre", "amap_installation");
+	spip_log("1. (find_groupe) recherche des occurences dans la table spip_groupes_mots de l'id de : $titre", "soyezcreateurs_install");
 	$count = sql_countsel("spip_groupes_mots", "titre='$titre'");
-	spip_log("2. (find_groupe) resultat de la recherche : $count occurences pour $titre", "amap_installation");
+	spip_log("2. (find_groupe) resultat de la recherche : $count occurences pour $titre", "soyezcreateurs_install");
 	return $count;
 }
 
 // fonction pour trouver l'id du groupe de mots clés à partir du titre du groupe
 function id_groupe($titre) {
 	$titre = addslashes($titre);
-	spip_log("1. (id_groupe) selection dans la table spip_groupes_mots de l'id de : $titre", "amap_installation");
+	spip_log("1. (id_groupe) selection dans la table spip_groupes_mots de l'id de : $titre", "soyezcreateurs_install");
 	$result = sql_fetsel("id_groupe", "spip_groupes_mots", "titre='$titre'");
 	$resultat = $result['id_groupe'];
-	spip_log("2. (id_groupe) selection = $resultat pour $titre", "amap_installation");
+	spip_log("2. (id_groupe) selection = $resultat pour $titre", "soyezcreateurs_install");
 	return $resultat;
+}
+
+//fonction qui mets à jour un groupe de mots clés
+function remplacer_groupe($titre, $descriptif, $texte, $unseul, $obligatoire, $tables_liees, $minirezo, $comite, $forum) {
+	$id_groupe = id_groupe($titre);
+	sql_updateq(
+		"spip_groupes_mots", array(
+			"descriptif" => $descriptif,
+			"texte" => $texte,
+			"unseul" => $unseul,
+			"obligatoire" => $obligatoire,
+			"tables_liees" => $tables_liees,
+			"minirezo" => $minirezo,
+			"comite" => $comite,
+			"forum" => $forum
+		), "id_groupe=$id_groupe"
+	);
+	return true;
 }
 
 //fonction qui permet de créer un groupe de mots clés
@@ -74,18 +90,15 @@ function create_groupe($groupe, $descriptif='', $texte='', $unseul='non', $oblig
 	return $id_insert;
 }
 
-// fonction qui suprime des mots clef
 function supprimer_mot_groupe($nom_groupe,$nom_mot) {
 	$id_groupe = id_groupe($nom_groupe);
-	if ($id_groupe>0) {
-		$id_mot = id_mot($nom_mot, $id_groupe);
-		if ($id_mot>0) {
-			sql_delete("spip_mots", "id_mot=$id_mot");
-			sql_delete("spip_mots_articles", "id_mot=$id_mot");
-			sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
-			sql_delete("spip_mots_syndic", "id_mot=$id_mot");
-			sql_delete("spip_mots_forum", "id_mot=$id_mot");
-		}
+	$id_mot = id_mot($nom_mot, $id_groupe);
+	if ($id_mot>0) {
+		sql_delete("spip_mots", "id_mot=$id_mot");
+		sql_delete("spip_mots_articles", "id_mot=$id_mot");
+		sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
+		sql_delete("spip_mots_syndic", "id_mot=$id_mot");
+		sql_delete("spip_mots_forum", "id_mot=$id_mot");
 	}
 }
 
@@ -104,25 +117,6 @@ function vider_groupe($nom_groupe) {
 	}
 }
 
-//fonction qui mets à jour un groupe de mots clés
-function remplacer_groupe($titre, $descriptif, $texte, $unseul, $obligatoire, $tables_liees, $minirezo, $comite, $forum) {
-	$id_groupe = id_groupe($titre);
-	sql_updateq(
-		"spip_groupes_mots", array(
-			"descriptif" => $descriptif,
-			"texte" => $texte,
-			"unseul" => $unseul,
-			"obligatoire" => $obligatoire,
-			"tables_liees" => $tables_liees,
-			"minirezo" => $minirezo,
-			"comite" => $comite,
-			"forum" => $forum
-		), "id_groupe=$id_groupe"
-	);
-	return true;
-}
-
-// MOT
 // fonction qui permet de trouver si un mot clé existe à partir du titre et de l'id du groupe
 function find_mot($titre, $id_groupe) {
 	$titre = addslashes($titre);
@@ -135,7 +129,7 @@ function find_mot($titre, $id_groupe) {
 
 //fonction qui permet de trouver l'id du mot clé à partir du titre et de l'id du groupe
 function id_mot($titre, $id_groupe) {
-	spip_log("1. (id_mot) debut de recherche de l'id de $titre avec $id_groupe", "amap_installation");
+	spip_log("1. (id_mot) debut de recherche de l'id de $titre avec $id_groupe", "soyezcreateurs_install");
 	$titre = addslashes($titre);
 	$result = sql_fetsel(
 		"id_mot", 
@@ -143,7 +137,7 @@ function id_mot($titre, $id_groupe) {
 		"titre='$titre' AND id_groupe = $id_groupe"
 	);
 	$id_mot = $result['id_mot'];
-	spip_log("2. (id_mot) retour de la fonction id_mot = $id_mot", "amap_installation");
+	spip_log("2. (id_mot) retour de la fonction id_mot = $id_mot", "soyezcreateurs_install");
 	return $id_mot;
 }
 
@@ -190,69 +184,69 @@ function remplacer_mot($id_mot, $descriptif, $texte, $id_groupe, $groupe) {
 
 function amap_declarer_tables_interfaces($interface){
 	//-- Alias
-	$interface['table_des_tables']['amap_banque'] = 'amap_banque';
-	$interface['table_des_tables']['amap_contrat'] = 'amap_contrat';
+	$interface['table_des_tables']['amap_banques'] = 'amap_banques';
+	$interface['table_des_tables']['amap_contrats'] = 'amap_contrats';
 	$interface['table_des_tables']['amap_evenements'] = 'amap_evenements';
-	$interface['table_des_tables']['amap_famille_variete'] = 'amap_famille_variete';
-	$interface['table_des_tables']['amap_lieu'] = 'amap_lieu';
-	$interface['table_des_tables']['amap_panier'] = 'amap_panier';
-	$interface['table_des_tables']['amap_participation_sortie'] = 'amap_participation_sortie';
-	$interface['table_des_tables']['amap_personne'] = 'amap_personne';
+	$interface['table_des_tables']['amap_famille_varietes'] = 'amap_famille_varietes';
+	$interface['table_des_tables']['amap_lieux'] = 'amap_lieux';
+	$interface['table_des_tables']['amap_paniers'] = 'amap_paniers';
+	$interface['table_des_tables']['amap_participation_sorties'] = 'amap_participation_sorties';
+	$interface['table_des_tables']['amap_personnes'] = 'amap_personnes';
 	$interface['table_des_tables']['amap_prix'] = 'amap_prix';
-	$interface['table_des_tables']['amap_produit'] = 'amap_produit';
-	$interface['table_des_tables']['amap_produit_distribution'] = 'amap_produit_distribution';
-	$interface['table_des_tables']['amap_reglement'] = 'amap_reglement';
-	$interface['table_des_tables']['amap_saison'] = 'amap_saison';
-	$interface['table_des_tables']['amap_sortie'] = 'amap_sortie';
-	$interface['table_des_tables']['amap_type_contrat'] = 'amap_type_contrat';
-	$interface['table_des_tables']['amap_vacance'] = 'amap_vacance';
-	$interface['table_des_tables']['amap_variete'] = 'amap_variete';
+	$interface['table_des_tables']['amap_produits'] = 'amap_produits';
+	$interface['table_des_tables']['amap_produits_distributions'] = 'amap_produits_distributions';
+	$interface['table_des_tables']['amap_reglements'] = 'amap_reglemenst';
+	$interface['table_des_tables']['amap_saisons'] = 'amap_saisons';
+	$interface['table_des_tables']['amap_sorties'] = 'amap_sorties';
+	$interface['table_des_tables']['amap_types_contrats'] = 'amap_types_contrats';
+	$interface['table_des_tables']['amap_vacances'] = 'amap_vacances';
+	$interface['table_des_tables']['amap_varietes'] = 'amap_varietes';
 	return $interface;
 }
 
 function amap_declarer_tables_principales($tables_principales){
- 	//-- Table banque -------------------
-	$spip_amap_banque = array(
-		'id_banque'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'label_banque'  => 'VARCHAR(50) NOT NULL'
+ 	//-- Table banques -------------------
+	$spip_amap_banques = array(
+		'id_banque'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'label_banque'  => 'varchar(50) NOT NULL'
 		);
-	$spip_amap_banque_key = array(
+	$spip_amap_banques_key = array(
 		'PRIMARY KEY'   => 'id_banque'
 		);
-	$tables_principales['spip_amap_banque'] = array(
-		'field' => &$spip_amap_banque,
-		'key' => &$spip_amap_banque_key,
+	$tables_principales['spip_amap_banques'] = array(
+		'field' => &$spip_amap_banques,
+		'key' => &$spip_amap_banques_key,
 		);
 
-	//-- Table contrat -------------------
-	$spip_amap_contrat = array(
-		'id_contrat'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_produit'  => 'BIGINT NOT NULL',
-		'id_saison'  => 'BIGINT NOT NULL',
-		'id_personne'  => 'BIGINT NOT NULL',
-		'id_type'  => 'BIGINT NOT NULL',
-		'demi_panier'  => 'BOOLEAN NULL',
-		'debut_contrat'  => 'BIGINT NULL',
-		'nb_distribution'  => 'BIGINT NULL'
+	//-- Table contrats -------------------
+	$spip_amap_contrats = array(
+		'id_contrat'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_produit'  => 'bigint NOT NULL',
+		'id_saison'  => 'bigint NOT NULL',
+		'id_personne'  => 'bigint NOT NULL',
+		'id_type'  => 'bigint NOT NULL',
+		'demi_panier'  => 'boolean NULL',
+		'debut_contrat'  => 'bigint NULL',
+		'nb_distribution'  => 'bigint NULL'
 		);
-	$spip_amap_contrat_key = array(
+	$spip_amap_contrats_key = array(
 		'PRIMARY KEY'   => 'id_contrat'
 		);
-	$tables_principales['spip_amap_contrat'] = array(
-		'field' => &$spip_amap_contrat,
-		'key' => &$spip_amap_contrat_key,
+	$tables_principales['spip_amap_contrats'] = array(
+		'field' => &$spip_amap_contrats,
+		'key' => &$spip_amap_contrats_key,
 		'join' => array('id_produit'=>'id_produit','id_saison'=>'id_saison','id_personne'=>'id_personne','id_type'=>'id_type','debut_contrat'=>'id_evenement')
 		);
 
 	//-- Table evenements -------------------
 	$spip_amap_evenements = array(
-		'id_evenement'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'date_evenement'  => 'DATETIME DEFAULT "0000-00-00 00:00:00" NOT NULL',
-		'id_saison'  => 'BIGINT NOT NULL',
-		'id_lieu'  => 'BIGINT NULL',
-		'id_personne1'  => 'BIGINT NULL',
-		'id_personne2'  => 'BIGINT NULL',
-		'id_personne3'  => 'BIGINT NULL'
+		'id_evenement'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'date_evenement'  => 'datetime DEFAULT "0000-00-00" NOT NULL',
+		'id_saison'  => 'bigint NOT NULL',
+		'id_lieu'  => 'varchar(40) NULL',
+		'id_personne1'  => 'varchar(60) NULL',
+		'id_personne2'  => 'varchar(60) NULL',
+		'id_personne3'  => 'varchar(60) NULL'
 		);
 	$spip_amap_evenements_key = array(
 		'PRIMARY KEY'   => 'id_evenement'
@@ -260,97 +254,98 @@ function amap_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_amap_evenements'] = array(
 		'field' => &$spip_amap_evenements,
 		'key' => &$spip_amap_evenements_key,
-		'join' => array('id_saison'=>'id_saison','id_lieu'=>'id_lieu','id_personne1'=>'id_personne','id_personne2'=>'id_personne','id_personne3'=>'id_personne1')
+		'join' => array('id_saison'=>'id_saison','id_lieu'=>'id_lieu','id_personne1'=>'id_personne','id_personne2'=>'id_personne','id_personne3'=>'id_personne')
 		);
 
-	//-- Table famille_variete -------------------
-	$spip_amap_famille_variete = array(
-		'id_famille'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'label_famille'  => 'VARCHAR(30) NOT NULL',
-		'id_produit'  => 'BIGINT NOT NULL',
+	//-- Table famille_varietes -------------------
+	$spip_amap_famille_varietes = array(
+		'id_famille'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'label_famille'  => 'varchar(30) NOT NULL',
+		'id_produit'  => 'bigint NOT NULL',
 		);
-	$spip_amap_famille_variete_key = array(
+	$spip_amap_famille_varietes_key = array(
 		'PRIMARY KEY'   => 'id_famille'
 		);
-	$tables_principales['spip_amap_famille_variete'] = array(
-		'field' => &$spip_amap_famille_variete,
-		'key' => &$spip_amap_famille_variete_key,
+	$tables_principales['spip_amap_famille_varietes'] = array(
+		'field' => &$spip_amap_famille_varietes,
+		'key' => &$spip_amap_famille_varietes_key,
 		'join' => array('id_produit'=>'id_produit')
 		);
 
-	//-- Table lieu -------------------
-	$spip_amap_lieu = array(
-		'id_lieu'  	=> 'BIGINT NOT NULL AUTO_INCREMENT',
-		'nom_lieu' 	=> 'VARCHAR(40) NOT NULL',
-		'rue_lieu' 	=> 'VARCHAR(40) NULL',
-		'cp_lieu'  	=> 'VARCHAR(5) NULL',
-		'ville_lieu' => 'VARCHAR(30) NULL',
-		'telephone_lieu'    => 'VARCHAR(13) NULL'
+	//-- Table lieux -------------------
+	$spip_amap_lieux = array(
+		'id_lieu'  	=> 'bigint NOT NULL AUTO_INCREMENT',
+		'lieux_nom' 	=> 'varchar(40) NOT NULL',
+		'lieux_rue' 	=> 'varchar(40) NULL',
+		'lieux_cp'  	=> 'varchar(5) NULL',
+		'lieux_ville' => 'varchar(30) NULL',
+		'lieux_telephone'    => 'varchar(13) NULL'
 		);
-	$spip_amap_lieu_key = array(
+	$spip_amap_lieux_key = array(
 		'PRIMARY KEY'   => 'id_lieu'
 		);
-	$tables_principales['spip_amap_lieu'] = array(
-		'field' => &$spip_amap_lieu,
-		'key' => &$spip_amap_lieu_key,
+	$tables_principales['spip_amap_lieux'] = array(
+		'field' => &$spip_amap_lieux,
+		'key' => &$spip_amap_lieux_key,
 		);
 
-	//-- Table panier -------------------
-	$spip_amap_panier = array(
-		'id_produit'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_evenement'  => 'BIGINT NOT NULL',
-		'id_element'  => 'BIGINT NOT NULL',
-		'id_famille'  => 'BIGINT NOT NULL',
-		'id_variete'  => 'BIGINT NULL',
-		'quantite'  => 'BIGINT NULL',
-		'poids'  => 'VARCHAR(6) NULL'
+	//-- Table paniers -------------------
+	$spip_amap_paniers = array(
+		'id_produit'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_evenement'  => 'bigint NOT NULL',
+		'id_element'  => 'bigint NOT NULL',
+		'id_famille'  => 'bigint NOT NULL',
+		'id_variete'  => 'bigint NULL',
+		'quantite'  => 'bigint NULL',
+		'poids'  => 'varchar(6) NULL'
 		);
-	$spip_amap_panier_key = array(
+	$spip_amap_paniers_key = array(
 		'PRIMARY KEY'   => 'id_produit, id_evenement, id_element'
 		);
-	$tables_principales['spip_amap_panier'] = array(
-		'field' => &$spip_amap_panier,
-		'key' => &$spip_amap_panier_key,
+	$tables_principales['spip_amap_paniers'] = array(
+		'field' => &$spip_amap_paniers,
+		'key' => &$spip_amap_paniers_key,
 		'join' => array('id_produit'=>'id_produit','id_evenement'=>'id_evenement','id_famille'=>'id_famille','id_variete'=>'id_variete')
 		);
 
-	//-- Table participation_sortie -------------------
-	$spip_amap_participation_sortie = array(
-		'id_sortie'  => 'BIGINT NOT NULL',
-		'id_personne'  => 'BIGINT NOT NULL'
+	//-- Table participation_sorties -------------------
+	$spip_amap_participation_sorties = array(
+		'id_sortie'  => 'bigint NOT NULL',
+		'id_personne'  => 'bigint NOT NULL'
 		);
-	$spip_amap_participation_sortie_key = array(
+	$spip_amap_participation_sorties_key = array(
 		'PRIMARY KEY'   => 'id_sortie,id_personne'
 		);
-	$tables_principales['spip_amap_participation_sortie'] = array(
-		'field' => &$spip_amap_participation_sortie,
-		'key' => &$spip_amap_participation_sortie_key,
+	$tables_principales['spip_amap_participation_sorties'] = array(
+		'field' => &$spip_amap_participation_sorties,
+		'key' => &$spip_amap_participation_sorties_key,
 		'join' => array('id_sortie'=>'id_sortie','id_personne'=>'id_personne')
 		);
 
-	//-- Table personne -------------------
-	$spip_amap_personne = array(
-		'id_personne'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'prenom'  => 'VARCHAR(20) NULL',
-		'nom'  => 'VARCHAR(30) NOT NULL',
-		'fixe'  => 'VARCHAR(13) NULL',
-		'portable'  => 'VARCHAR(13) NULL',
-		'adhesion'  => 'BIGINT NULL'
+	//-- Table personnes -------------------
+	$spip_amap_personnes = array(
+		'id_personne'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_auteur'  => 'bigint NULL',
+		'prenom'  => 'varchar(20) NULL',
+		'nom'  => 'varchar(30) NOT NULL',
+		'tel_fixe'  => 'varchar(13) NULL',
+		'tel_portable'  => 'varchar(13) NULL',
+		'adhesion'  => 'bigint NULL'
 		);
-	$spip_amap_personne_key = array(
+	$spip_amap_personnes_key = array(
 		'PRIMARY KEY'   => 'id_personne'
 		);
-	$tables_principales['spip_amap_personne'] = array(
-		'field' => &$spip_amap_personne,
-		'key' => &$spip_amap_personne_key,
+	$tables_principales['spip_amap_personnes'] = array(
+		'field' => &$spip_amap_personnes,
+		'key' => &$spip_amap_personnes_key,
 		);
 
 	//-- Table prix -------------------
 	$spip_amap_prix = array(
-		'id_produit'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_saison'  => 'BIGINT NOT NULL',
-		'id_type'  => 'BIGINT NOT NULL',
-		'prix_distribution'  => 'BIGINT NOT NULL'
+		'id_produit'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_saison'  => 'bigint NOT NULL',
+		'id_type'  => 'bigint NOT NULL',
+		'prix_distribution'  => 'bigint NOT NULL'
 		);
 	$spip_amap_prix_key = array(
 		'PRIMARY KEY'   => 'id_produit,id_saison,id_type'
@@ -361,139 +356,141 @@ function amap_declarer_tables_principales($tables_principales){
 		'join' => array('id_produit'=>'id_produit','id_saison'=>'id_saison','id_type'=>'id_type')
 		);
 
-	//-- Table produit -------------------
-	$spip_amap_produit = array(
-		'id_produit'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_paysan'  => 'BIGINT NULL',
-		'label_produit'  => 'VARCHAR(20) NOT NULL',
+	//-- Table produits -------------------
+	$spip_amap_produits = array(
+		'id_produit'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_auteur'  => 'bigint NULL',
+		'label_produit'  => 'varchar(20) NOT NULL',
 		);
-	$spip_amap_produit_key = array(
+	$spip_amap_produits_key = array(
 		'PRIMARY KEY'   => 'id_produit'
 		);
-	$tables_principales['spip_amap_produit'] = array(
-		'field' => &$spip_amap_produit,
-		'key' => &$spip_amap_produit_key,
-		'join' => array('id_paysan'=>'id_personne')
+	$tables_principales['spip_amap_produits'] = array(
+		'field' => &$spip_amap_produits,
+		'key' => &$spip_amap_produits_key,
+		'join' => array('id_auteur'=>'id_personne')
 		);
 
-	//-- Table produit_distribution -------------------
-  	$spip_amap_produit_distribution = array(
-		'id_evenement'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_produit'  => 'BIGINT NOT NULL'
+	//-- Table produits_distributions -------------------
+  	$spip_amap_produits_distributions = array(
+		'id_evenement'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_produit'  => 'bigint NOT NULL'
 		);
-	$spip_amap_produit_distribution_key = array(
+	$spip_amap_produits_distributions_key = array(
 		'PRIMARY KEY'   => 'id_evenement,id_produit'
 		);
-	$tables_principales['spip_amap_produit_distribution'] = array(
-		'field' => &$spip_amap_produit_distribution,
-		'key' => &$spip_amap_produit_distribution_key,
+	$tables_principales['spip_amap_produits_distributions'] = array(
+		'field' => &$spip_amap_produits_distributions,
+		'key' => &$spip_amap_produits_distributions_key,
 		'join' => array('id_evenement'=>'id_evenement','id_produit'=>'id_produit')
 		);
 
-	//-- Table reglement -------------------
-	$spip_amap_reglement = array(
-		'id_cheque'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_contrat'  => 'BIGINT NOT NULL',
-		'id_banque'  => 'BIGINT NULL',
-		'ref_cheque'  => 'VARCHAR(12) NULL',
-		'montant_euros'  => 'VARCHAR(4) NOT NULL'
+	//-- Table reglements -------------------
+	$spip_amap_reglements = array(
+		'id_cheque'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_contrat'  => 'bigint NOT NULL',
+		'id_banque'  => 'bigint NULL',
+		'ref_cheque'  => 'varchar(12) NULL',
+		'montant_euros'  => 'varchar(4) NOT NULL'
 		);
-	$spip_amap_reglement_key = array(
+	$spip_amap_reglements_key = array(
 		'PRIMARY KEY'   => 'id_cheque'
 		);
-	$tables_principales['spip_amap_reglement'] = array(
-		'field' => &$spip_amap_reglement,
-		'key' => &$spip_amap_reglement_key,
+	$tables_principales['spip_amap_reglements'] = array(
+		'field' => &$spip_amap_reglements,
+		'key' => &$spip_amap_reglements_key,
 		'join' => array('id_contrat'=>'id_contrat','id_banque'=>'id_banque')
 		);
 
-	//-- Table saison -------------------
-	$spip_amap_saison = array(
-		'id_saison'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_agenda'  => 'BIGINT DEFAULT NULL',
-		'id_contrat'  => 'BIGINT DEFAULT NULL',
-		'id_sortie'  => 'BIGINT DEFAULT NULL',
-		'id_responsable'  => 'BIGINT DEFAULT NULL',
-		'id_vacance'  => 'BIGINT DEFAULT NULL'
+	//-- Table saisons -------------------
+	$spip_amap_saisons = array(
+		'id_saison'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_agenda'  => 'text DEFAULT NULL',
+		'id_contrat'  => 'text DEFAULT NULL',
+		'id_sortie'  => 'text DEFAULT NULL',
+		'id_responsable'  => 'text DEFAULT NULL',
+		'id_vacance'  => 'text DEFAULT NULL'
 		);
-	$spip_amap_saison_key = array(
+	$spip_amap_saisons_key = array(
 		'PRIMARY KEY'   => 'id_saison'
 		);
-	$tables_principales['spip_amap_saison'] = array(
-		'field' => &$spip_amap_saison,
-		'key' => &$spip_amap_saison_key,
+	$tables_principales['spip_amap_saisons'] = array(
+		'field' => &$spip_amap_saisons,
+		'key' => &$spip_amap_saisons_key,
 		);
 
-	//-- Table sortie -------------------
-	$spip_amap_sortie = array(
-		'id_sortie'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'date_sortie'  => 'DATETIME DEFAULT "0000-00-00 00:00:00" NOT NULL',
-		'id_saison'  => 'BIGINT NOT NULL',
-		'id_produit'  => 'BIGINT NOT NULL',
+	//-- Table sorties -------------------
+	$spip_amap_sorties = array(
+		'id_sortie'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'date_sortie'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
+		'id_saison'  => 'bigint NOT NULL',
+		'id_produit'  => 'bigint NOT NULL',
 		);
-	$spip_amap_sortie_key = array(
+	$spip_amap_sorties_key = array(
 		'PRIMARY KEY'   => 'id_sortie'
 		);
-	$tables_principales['spip_amap_sortie'] = array(
-		'field' => &$spip_amap_sortie,
-		'key' => &$spip_amap_sortie_key,
+	$tables_principales['spip_amap_sorties'] = array(
+		'field' => &$spip_amap_sorties,
+		'key' => &$spip_amap_sorties_key,
 		'join' => array('id_saison'=>'id_saison','id_produit'=>'id_produit')
 		);
 
-	//-- Table type_contrat -------------------
-	$spip_amap_type_contrat = array(
-		'id_type'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'label_type' => 'VARCHAR(20) NOT NULL'
+	//-- Table types_contrats -------------------
+	$spip_amap_types_contrats = array(
+		'id_type_contrat'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'label_type_contrat' => 'varchar(20) NOT NULL'
 		);
-	$spip_amap_type_contrat_key = array(
-		'PRIMARY KEY'   => 'id_type'
+	$spip_amap_types_contrats_key = array(
+		'PRIMARY KEY'   => 'id_type_contrat'
 		);
-	$tables_principales['spip_amap_type_contrat'] = array(
-		'field' => &$spip_amap_type_contrat,
-		'key' => &$spip_amap_type_contrat_key,
+	$tables_principales['spip_amap_types_contrats'] = array(
+		'field' => &$spip_amap_types_contrats,
+		'key' => &$spip_amap_types_contrats_key,
 		);
 
-	//-- Table vacance -------------------
-	$spip_amap_vacance = array(
-		'id_contrat'  => 'BIGINT NOT NULL',
-		'id_evenement'  => 'BIGINT NOT NULL',
-		'id_remplacant'  => 'BIGINT DEFAULT NULL',
-		'remplacant_ext'  => 'VARCHAR(150) DEFAULT NULL',
-		'paye'  => 'BOOLEAN NOT NULL'
+	//-- Table vacances -------------------
+	$spip_amap_vacances = array(
+		'id_contrat'  => 'bigint NOT NULL',
+		'id_evenement'  => 'bigint NOT NULL',
+		'id_remplacant'  => 'bigint DEFAULT NULL',
+		'remplacant_ext'  => 'varchar(150) DEFAULT NULL',
+		'paye'  => 'boolean NOT NULL'
 		);
-	$spip_amap_vacance_key = array(
+	$spip_amap_vacances_key = array(
 		'PRIMARY KEY'   => 'id_contrat,id_evenement'
 		);
-	$tables_principales['spip_amap_vacance'] = array(
-		'field' => &$spip_amap_vacance,
-		'key' => &$spip_amap_vacance_key,
+	$tables_principales['spip_amap_vacances'] = array(
+		'field' => &$spip_amap_vacances,
+		'key' => &$spip_amap_vacances_key,
 		'join' => array('id_contrat'=>'id_contrat','id_evenement'=>'id_evenement','id_remplacant'=>'id_personne')
 		);
 
-	//-- Table variete -------------------
-	$spip_amap_variete = array(
-		'id_variete'  => 'BIGINT NOT NULL AUTO_INCREMENT',
-		'id_famille'  => 'BIGINT NOT NULL',
-		'label_variete'  => 'VARCHAR(30) NOT NULL',
+	//-- Table varietes -------------------
+	$spip_amap_varietes = array(
+		'id_variete'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_famille'  => 'bigint NOT NULL',
+		'label_variete'  => 'varchar(30) NOT NULL',
 		);
-	$spip_amap_variete_key = array(
+	$spip_amap_varietes_key = array(
 		'PRIMARY KEY'   => 'id_variete'
 		);
-	$tables_principales['spip_amap_variete'] = array(
-		'field' => &$spip_amap_variete,
-		'key' => &$spip_amap_variete_key,
+	$tables_principales['spip_amap_varietes'] = array(
+		'field' => &$spip_amap_varietes,
+		'key' => &$spip_amap_varietes_key,
 		'join' => array('id_famille'=>'id_famille')
 		);
     return $tables_principales;
 }
-//fonction qui permet de créer le contenu
+
+//fonction qui permet de créer le tout
 function amap_config_motsclefs() {
 	//les groupes puis mots
-	create_groupe("modalites_affichage_article", "L'article correspondant aux distributions d'une saison donnée sera associé au mot clé « amap_agenda »", "", 'non', 'non', 'oui', 'non', 'non', 'non', 'oui', 'oui', 'oui', 'non');
-		create_mot("modalites_affichage_article", "amap_contrat", "Affecter ce mot clef à l'article concernant les contrats.", "");
-		create_mot("modalites_affichage_article", "amap_distribution", "Affecter ce mot clef à l'article concernant la distribution.", "");
-		create_mot("modalites_affichage_article", "amap_responsable", "Affecter ce mot clef à l'article concernant le responsable.", "");
-		create_mot("modalites_affichage_article", "amap_sortie", "Affecter ce mot clef à l'article concernant la sorties.", "");
-		create_mot("modalites_affichage_article", "amap_vacance", "Affecter ce mot clef à l'article concernant les vacances.", "");
+	create_groupe("_Amap_config", "Groupe pour configurer le plugin", "C'est mots clef vous servirons a configurer le plugins et créé les saisons.", 'non', 'non', 'oui', 'non', 'non', 'non', 'non', 'oui', 'non', 'non');
+		create_mot("_Amap_config", "amap_agenda", "Mettre ce mot clef à l'article de l'agenda", "");
+		create_mot("_Amap_config", "amap_contrat", "Mettre ce mot clef à l'article du contrat", "");
+		create_mot("_Amap_config", "amap_sortie", "Mettre ce mot clef à l'article de la sortie", "");
+		create_mot("_Amap_config", "amap_responsable", "Mettre ce mot clef à l'article de la responsabilite", "");
+		create_mot("_Amap_config", "amap_vacance", "Mettre ce mot clef à l'article des vacances", "");
+	return true;
 }
 ?>

@@ -2,7 +2,7 @@
 	<nom>Plugin AMAP pour Spip 2</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems </auteur>
 	<version>2.0.1</version>
-	<version_base>0.1.1</version_base>
+	<version_base>0.0</version_base>
 
 	<licence>Distribu&eacute; sous licence GNU/GPL</licence>
 	<etat>dev</etat>
@@ -21,19 +21,19 @@
 	<bouton id='amap' parent='configuration'>
 		<icone>img_pack/amapconfig-24.gif</icone>
 		<titre>amap:gestion_amap</titre>
-		<url>amap_config</url>
+		<url>config_saison</url>
 	</bouton>
 	<bouton id="amap_bandeau" parent="bando_configuration">
-		<icone>img_pack/amapconfig-12.gif</icone>
+		<icone>images/amapconfig-12.gif</icone>
 		<titre>amap:gestion_amap</titre>
-		<url>amap_config</url>
+		<url>config_saison</url>
 	</bouton>
 
 	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglet</action>
-		<inclure>amap_pipeline.php</inclure>
+		<nom>autoriser</nom>
+		<inclure>amap_autorisations.php</inclure>
 	</pipeline>
+
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/amap_tables.php</inclure>
@@ -42,6 +42,15 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/amap_tables.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>config_motsclefs</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>config_site</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
-	<categorie>divers</categorie>
+	<necessite id="saisies" version='[1.7.7;]' />
+	<necessite id="verifier" version='[0.1;]' />
 </plugin>
