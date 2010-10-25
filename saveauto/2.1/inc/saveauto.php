@@ -89,7 +89,6 @@ function inc_saveauto_dist(){
 	    /**
 	     * creation du fichier
 	     */
-	    $contenu = '';
 
 	    /**
 	     * Ecriture des entêtes du fichier de sauvegarde
@@ -104,7 +103,7 @@ function inc_saveauto_dist(){
 	     * - La liste des plugins SPIP installés
 	     * - Un commentaire
 	     */
-	    $contenu .= "# "._T('saveauto:info_sql_fichier_genere');
+	    $contenu = "# "._T('saveauto:info_sql_fichier_genere')."\n";
 	    if ($base) {
 	        $contenu .= "# "._T('saveauto:info_sql_base').$base."\n";
 	    }
@@ -197,7 +196,7 @@ function inc_saveauto_dist(){
 	        $i++;
 	    }
 	    $contenu .= "# -------"._T('saveauto:info_sql_fin_fichier')."------------"."\n";
-		$ok = ecrire_fichier($chemin_fichier, $contenu);
+		$ok = ecrire_fichier($chemin_fichier, trim($contenu));
 
 		if(!$ok){
 	    	$err .= _T('saveauto:erreur_impossible_creer_verifier',array('fichier'=>$nom_fichier,'rep_bases' => $nom_fichier))."<br />";
