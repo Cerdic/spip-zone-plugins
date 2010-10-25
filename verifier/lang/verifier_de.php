@@ -8,7 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_date' => 'Fromat des Datums ung&uuml;ltig',
+	'erreur_date' => 'Das Datum ist nicht g&uuml;ltig',
+	'erreur_date_format' => 'Format des Datums ung&uuml;ltig',
 	'erreur_email' => 'Die Mailadresse  <em>@email@</em> hat einen Syntaxfehler.',
 	'erreur_email_nondispo' => 'Die Mailadresse <em>@email@</em>  wird bereits verwendet.',
 	'erreur_entier' => 'Der Wert mu&szlig; eine ganze Zahl sein.',

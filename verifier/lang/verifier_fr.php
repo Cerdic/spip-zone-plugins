@@ -6,7 +6,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_date' => 'Le format de la date n\'est pas accept&eacute;.',
+	'erreur_date' => 'La date n\'est pas valide.',
+	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.',
 	'erreur_email' => 'L\'adresse de courriel <em>@email@</em> n\'a pas un format valide.',
 	'erreur_email_nondispo' => 'L\'adresse de courriel <em>@email@</em> est d&eacute;j&agrave; utilis&eacute;e.',
 	'erreur_entier' => 'La valeur doit &ecirc;tre un entier.',

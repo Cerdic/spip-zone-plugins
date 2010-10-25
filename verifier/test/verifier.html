@@ -140,11 +140,17 @@ var_dump($verifier($siret_non_valide, 'siren_siret',array('mode'=>'siret')));
 <?php
 $date_valide = "30-01-2009";
 $date_non_valide = "321227822";
+$date_non_valide2 = "29-02-2011";
+$date_valide2 = "29-02-2012";
 
 echo "Date JJ/MM/AAAA (avec séparateur /.-) : $date_valide ?";
 var_dump($verifier($date_valide, 'date'));
 echo "Date JJ/MM/AAAA : $date_non_valide ?";
 var_dump($verifier($date_non_valide, 'date'));
+echo "Date JJ/MM/AAAA : $date_non_valide2 ?";
+var_dump($verifier($date_non_valide2, 'date'));
+echo "Date JJ/MM/AAAA : $date_valide2 ?";
+var_dump($verifier($date_valide2, 'date'));
 ?>
 </pre>
 

@@ -8,7 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_date' => 'El format de la data no &eacute;s correcte.',
+	'erreur_date' => 'La data no &eacute;s correcte.',
+	'erreur_date_format' => 'El format de la data no &eacute;s correcte.',
 	'erreur_email' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> no t&eacute; un format v&agrave;lid.',
 	'erreur_email_nondispo' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> ja s\'utilitza.',
 	'erreur_entier' => 'El valor ha de ser un nombre enter.',

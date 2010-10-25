@@ -8,7 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_date' => 'The date format is invalid.',
+	'erreur_date' => 'The date is invalid.',
+	'erreur_date_format' => 'The date format is invalid.',
 	'erreur_email' => 'The email address <em>@email@</em> is not correctly formatted.',
 	'erreur_email_nondispo' => 'The email address <em>@email@</em> has already been used.',
 	'erreur_entier' => 'The value must be an integer.',
