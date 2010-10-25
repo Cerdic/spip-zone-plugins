@@ -53,4 +53,5 @@
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id="saisies" version='[1.7.7;]' />
 	<necessite id="verifier" version='[0.1;]' />
+	<categorie>divers</categorie>
 </plugin>
