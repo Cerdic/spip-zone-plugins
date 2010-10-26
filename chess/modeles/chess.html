@@ -2,7 +2,7 @@
 
 [(#REM) Test pour savoir si la configuration a été validée à un moment et sinon, ça appelle le plugin de configuration avec la page de configuration de chess]
 
-[(#CONFIG{chess/vitesse}|choixsivide{[(#REM|sinon{<:chess:erreur_config:>}|replace{@url@,#URL_ECRIRE{cfg,cfg=chess}})] , ""})]
+[<p>(#CONFIG{chess/vitesse}|choixsivide{[(#REM|sinon{<:chess:erreur_config:>}|replace{@url@,#URL_ECRIRE{cfg,cfg=chess}})] , ""})</p>]
 
 <div id="mainContainer">
 
@@ -100,17 +100,17 @@
 
 var chess_languageCode = '[(#ENV{lang})]';
 
-var chessObj = new DHTMLGoodies.Chess({ bgImageDarkSquares:'[(#CHEMIN{images/piece_bg_[(#CONFIG{chess/taille})]_dark5.png})]',
-bgImageLightSquares:'[(#CHEMIN{images/piece_bg_[(#CONFIG{chess/taille})]_light.png})]',
-animationSpeed:[(#CONFIG{chess/vitesse})],
-autoplayDelayBeforeComments:[(#CONFIG{chess/delai})],
-stopAutoplayBeforeComments:[(#CONFIG{chess/arreter})],
+var chessObj = new DHTMLGoodies.Chess({ bgImageDarkSquares:'[(#CHEMIN{images/piece_bg_[(#CONFIG{chess/taille,30})]_dark5.png})]',
+bgImageLightSquares:'[(#CHEMIN{images/piece_bg_[(#CONFIG{chess/taille,30})]_light.png})]',
+animationSpeed:[(#CONFIG{chess/vitesse,0.1})],
+autoplayDelayBeforeComments:[(#CONFIG{chess/delai,3})],
+stopAutoplayBeforeComments:[(#CONFIG{chess/arreter,true})],
 callbackOnSwitchPgn:'showGames',
 callbackOnGameLoaded:'showDetails',
 parentRef:'board',
 pgnFile:<BOUCLE_documentseul(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{0,1}{extension==pgn}>'../../[(#URL_DOCUMENT)]'</BOUCLE_documentseul>,
-chessSet:'[(#CONFIG{chess/pieces})]',
-squareSize:[(#CONFIG{chess/taille})],
+chessSet:'[(#CONFIG{chess/pieces,alpha})]',
+squareSize:[(#CONFIG{chess/taille,30})],
 serverFile:'[(#CHEMIN{chess.php})]',
 elMovesInline:'divMoves',
 elPlayerNames:'players',
@@ -118,8 +118,8 @@ elActiveMove:'activeMove',
 elGameAttributes:{ round:'details_round',white:'details_white',black:'details_black',event:'details_event',result:'details_result', WhiteElo:'details_white_elo', BlackElo:'details_black_elo',date:'details_date' } } );
 chessObj.__createDefaultPieces();
 chessObj.displayGameListInTable('gameListTable','view,white,black,result',{ jsObject:"chessObj",viewGameLink:'<:chess:parties_voir:>' });
-createScrollTable('gameListTable','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille})]})]');
-createScrollTable('listOfPgnFiles','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille})]})]');
+createScrollTable('gameListTable','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
+createScrollTable('listOfPgnFiles','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
 </script>
 <div id="debug"></div>
 <hr class="nettoyeur" />
