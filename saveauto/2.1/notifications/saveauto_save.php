@@ -12,6 +12,7 @@ function notifications_saveauto_save_dist($quoi, $id, $options){
 		/**
 		 * Notifier une erreur dans la génération d'une sauvegarde
 		 */
+		$serveur = $_SERVER['SERVER_NAME'];
 		if($options['err']){
 			$tous = $cfg['destinataire_save'] ? $cfg['destinataire_save'] : $GLOBALS['meta']['email_webmaster'];
 			$destinataires = pipeline('notifications_destinataires',
@@ -21,17 +22,20 @@ function notifications_saveauto_save_dist($quoi, $id, $options){
 					'data'=>$tous)
 			);
 			$sujet_mail = "[".nettoyer_titre_email($GLOBALS['meta']['nom_site'])."] "._T('saveauto:erreur_mail_sujet')." "._T('saveauto:info_sql_base').$cfg['base'];
-			$msg_mail = _T('saveauto:sauvegarde_erreur_mail')."\n\r"._T('saveauto:info_sql_base').$cfg['base']."\n\r"._T('saveauto:info_sql_serveur').$_SERVER['SERVER_NAME']."\n\r"._T('saveauto:info_sql_date').date('d/m/Y H:i')
-						."\n\r"._T('saveauto:erreur_sauvegarde_intro')."\n\r".$options['err'];
+			$msg_mail = recuperer_fond('notifications/saveauto_save_pas_ok',array('cfg'=>$cfg,'erreur'=>$options['err'],'serveur'=>$serveur));
 			notifications_envoyer_mails($destinataires, $msg_mail,$sujet_mail);
 		}
 		/**
 		 * La sauvegarde a apparemment fonctionné
 		 */
 		else{
+			$filesize = (filesize($options['chemin_fichier']) / 1000000);
+			$fichier = str_replace($racine,'',$options['chemin_fichier']);
+			
 			$tous = $cfg['destinataire_save'];
-			$msg_mail = _T('saveauto:sauvegarde_ok_mail')."\n\r"._T('saveauto:info_sql_base').$cfg['base']."\n\r"._T('saveauto:info_sql_serveur').$_SERVER['SERVER_NAME']."\n\r"._T('saveauto:info_sql_date').date('d/m/Y H:i')."\n\r";
+			
 	        $sujet_mail = "[".nettoyer_titre_email($GLOBALS['meta']['nom_site'])."] "._T('saveauto:titre_saveauto')." "._T('saveauto:info_sql_base').$cfg['base'];
+	        $msg_mail = recuperer_fond('notifications/saveauto_save_ok',array('cfg'=>$cfg,'filesize'=>$filesize,'serveur'=>$serveur,'fichier_racine'=>$fichier));
 	        $destinataires = pipeline('notifications_destinataires',
 				array(
 					'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options)
@@ -48,8 +52,8 @@ function notifications_saveauto_save_dist($quoi, $id, $options){
 				);
 			}else{
 				$corps = $msg_mail;
-				$fichier = str_replace($racine,'',$options['chemin_fichier']);
-				$corps .= _T('saveauto:erreur_mail_fichier_lourd',array('fichier'=>$fichier));
+				
+				//$corps .= _T('saveauto:erreur_mail_fichier_lourd',array('fichier'=>$fichier));
 			}
 			$envoyer_mail = charger_fonction('envoyer_mail','inc');
 			$envoyer_mail($destinataires, $sujet_mail, $corps, $from = "", $headers = "");
