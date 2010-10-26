@@ -1,7 +1,7 @@
 <plugin>
 <nom>Corrections typographiques (guillemets)</nom>
 <icon>icon.png</icon>
-<version>1.2</version>
+<version>1.3</version>
 <prefix>typo_guillemets</prefix>
 <etat>stable</etat>
 <auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
