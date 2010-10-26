@@ -12,7 +12,7 @@
  */
 
 include_spip('inc/acs_presentation');
-include_spip('lib/composant/page_source');
+include_spip('inc/composant/page_source');
 
 function acs_page_get_infos($page, $mode, $detail) {
   include_spip('inc/acs_cache');

@@ -10,8 +10,8 @@
  * Retourne les pages du squelette qui utilisent l'instance $nic du composant $c
  */
 function composant_infos($c, $nic) {
-  include (_DIR_PLUGIN_ACS.'lib/composant/composant_get_infos.php');
-  include_spip('lib/composant/composants_liste');
+  include (_DIR_PLUGIN_ACS.'inc/composant/composant_get_infos.php');
+  include_spip('inc/composant/composants_liste');
   $r ='<br />';
   
   // On calcule la liste de toutes les instances de composants actifs
@@ -36,13 +36,19 @@ function composant_infos($c, $nic) {
 
   // On retourne la liste de tous les composants qui contiennent ce composant
   if (count($ca)) {
-    include_spip('lib/composant/composants_variables');
+    include_spip('inc/composant/composants_variables');
     $lv = liste_variables();
     if (is_array($lv)) {
       $r .= '<span class="onlinehelp">'._T('acs:used_in').'</span> ';
       foreach ($ca as $var) {
-        if (isset($lv[$var]['c']))
-          $r .= '<a class="nompage" href="?exec=acs&onglet=composants&composant='.$lv[$var]['c'].($lv[$var]['nic'] ? '&nic='.$lv[$var]['nic'] : '').'" title="'._T('acs:variable').' '.$var.'">'.ucfirst($lv[$var]['c']).(isset($lv[$var]['nic']) ? $lv[$var]['nic'] : '').'</a> ';
+        if (isset($lv[$var]['c'])) {
+        	$pc = $lv[$var]['c'];
+        	$pnic = $lv[$var]['nic'];
+        	$title = _T('acs:variable').' '.$var;
+        	if (isset($GLOBALS['meta']['acs'.ucfirst($pc).$pnic.'Nom']))
+        		$title = $GLOBALS['meta']['acs'.ucfirst($pc).$pnic.'Nom'].' ('.$title.')';
+          $r .= '<a class="nompage" href="?exec=acs&onglet=composants&composant='.$pc.($pnic ? '&nic='.$pnic : '').'" title="'.$title.'">'.ucfirst($pc).(isset($pnic) ? $pnic : '').'</a> ';
+        }
       }
       $r .= '<hr />';
     }

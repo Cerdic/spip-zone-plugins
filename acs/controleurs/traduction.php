@@ -12,7 +12,7 @@
 function controleurs_traduction_dist($regs) {
 	global $spip_lang;
 	include_spip('inc/filtres');
-	include_spip('lib/composant/composant_traduction');
+	include_spip('inc/composant/composant_traduction');
 	
 	list(,$crayon,$type,$champ,$id,$class) = $regs;
 	

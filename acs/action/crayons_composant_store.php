@@ -30,7 +30,7 @@ function action_crayons_composant_store_dist() {
 	$wid = $_POST['crayons'][0];
 	$c = 'composants/'.$_POST['composant'].'/'.$_POST['composant'];	
 	// MàJ du composant - Update component : l'instanciation d'un objet composant fait la mise a jour
-	include_spip('lib/composant/classComposantPrive');
+	include_spip('inc/composant/classComposantPrive');
 	$cprovi = new AdminComposant($_POST['composant'], $_POST['nic']);
 	// Retourne la vue - Return vue 
 	$return['$erreur'] ='';

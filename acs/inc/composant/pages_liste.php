@@ -8,7 +8,7 @@
 
 define('_SPIP_DIST_DIR', _DIR_RACINE.'dist');
 
-include_spip('lib/composant/composants_liste');
+include_spip('inc/composant/composants_liste');
 /**
  * Retourne un tableau des pages squelettes du site (Utilise le cache ACS)
  *

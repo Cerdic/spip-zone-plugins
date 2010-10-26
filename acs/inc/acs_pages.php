@@ -40,7 +40,7 @@ function acs_pages_droite($page) {
  * Lit la liste des pages, modèles, et formulaires
  */
 function liste_pages_du_site($onglet, $large=false) {
-  include_spip('lib/composant/pages_liste');
+  include_spip('inc/composant/pages_liste');
 
   if ($large)
     $r = '<table width="100%" class="liste_pages">';

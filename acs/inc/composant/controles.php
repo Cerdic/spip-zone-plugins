@@ -203,7 +203,7 @@ function ctlKey($composant, $nic, $nom, $value, $param, $wid) {
 // Choix d'un composant
 function ctlWidget($composant, $nic, $nom, $value, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  require_once(_DIR_PLUGIN_ACS.'lib/composant/composants_variables.php');
+  require_once(_DIR_PLUGIN_ACS.'inc/composant/composants_variables.php');
   $vars = composants_variables();
 
   $r = '<table><tr>';

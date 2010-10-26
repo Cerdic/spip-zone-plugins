@@ -60,7 +60,7 @@ else {
 
 echo '<html><head><title>'._T('choix_image').'</title>
 <link rel="stylesheet" type="text/css" href="?page=style_prive" />
-<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ACS.'lib/picker/filepicker.css" />
+<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ACS.'inc/picker/filepicker.css" />
 </head><body>
 <script 	language="JavaScript">
 var P = opener.TFP;

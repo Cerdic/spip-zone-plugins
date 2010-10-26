@@ -39,7 +39,7 @@ function acs_init() {
   
   // Installation des composants
   $keys = array();
-  include_spip('lib/composant/composant_liste');  
+  include_spip('inc/composant/composant_liste');  
   foreach(composants_liste() as $class=>$tag) {
   	echo "<br />$class";
   	$install_dir = find_in_path('composants/'.$class.'/install');

@@ -9,8 +9,8 @@
 function controleurs_var_dist($regs) {
 	global $spip_lang;
 	include_spip('inc/filtres');
-	include_spip('lib/composant/controles');
-	include_spip('lib/composant/composants_variables');
+	include_spip('inc/composant/controles');
+	include_spip('inc/composant/composants_variables');
 
 	$cv = composants_variables();
 	list(,$crayon,$type,$champ,$id) = $regs;

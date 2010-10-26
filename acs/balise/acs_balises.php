@@ -6,7 +6,9 @@
 # Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-require_once _DIR_ACS.'lib/composant/composants_ajouter_balises.php';
+require_once _DIR_ACS.'inc/composant/composants_ajouter_balises.php';
+
+// On ajoute les balises de chaque composant actif - We add tags for every active component
 composants_ajouter_balises();
 
 function balise_ACS_VERSION($p) {
@@ -107,7 +109,7 @@ function composants_head_cache($type) {
 
 // Retourne les css ou javascripts des composants, concaténés
 function composants_head($type) {
-  require_once _DIR_ACS.'lib/composant/composants_liste.php';
+  require_once _DIR_ACS.'inc/composant/composants_liste.php';
   if (is_array(composants_liste())) {
     // composants_liste() est statique,  mise en cache,
     // et tient compte de l'override éventuel
@@ -173,12 +175,4 @@ function balise_ACS_AUTORISE($p) {
   return $p;
 }
 */
-/**
- * Indique si un composant optionnel est activé
- * Return true if an optionnal component is on
- */
-function isUsed($c) {
-  if ($GLOBALS['meta']['acs'.ucfirst($c).'Use'] == 'oui') return true;
-  return false;
-}
 

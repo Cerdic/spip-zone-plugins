@@ -11,6 +11,6 @@
  */
 
 function action_filepickerwrapper() {
-	include(_DIR_PLUGIN_ACS.'lib/picker/filepicker.php');
+	include(_DIR_PLUGIN_ACS.'inc/picker/filepicker.php');
 }
 ?>

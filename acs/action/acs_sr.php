@@ -40,7 +40,7 @@ function action_acs_sr() {
 
 // Sauvegarder
 function acs_save($repertoire, $nom_fichier) {
-	include_spip('lib/composant/composants_variables');
+	include_spip('inc/composant/composants_variables');
 	include_spip('inc/acs_version');
 	$filename = $repertoire.$nom_fichier.'.php';
 	

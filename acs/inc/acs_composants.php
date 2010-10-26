@@ -9,14 +9,14 @@
 /**
  * Page composant
  */
-include_spip('lib/composant/classComposantPrive');
+include_spip('inc/composant/classComposantPrive');
 
 function composants_gauche($c) {
 	return acs_box(_T('acs:composant'), $c->gauche(), $c->icon, false, '<img src="'._DIR_PLUGIN_ACS.'/images/info.png" />');
 }
 
 function composants($c) {
-	include_spip('lib/composant/composants_liste');
+	include_spip('inc/composant/composants_liste');
 	$cl = composants_liste();	
 	if ($cl[$c->class]['over'])
 		$over = '<img src="'._DIR_PLUGIN_ACS.'images/over.gif" alt="over" title="'._T('acs:squelette').' '.$GLOBALS['meta']['acsSqueletteOverACS'].'" />';

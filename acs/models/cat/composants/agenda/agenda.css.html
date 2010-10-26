@@ -3,12 +3,13 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2010
 ]
 .cAgenda {
   color: #VAR{acsFondText,#000};
-  [background: (#VAR{acsAgendaThisMonth, #VAR{acsFondColor}});]
+  [background: (#VAR{acsAgendaThisMonth});]
   [border-width: (#VAR{acsAgendaBord/Width});]
   [border-style: (#VAR{acsAgendaBord/Style});]
   [border-color: (#VAR{acsAgendaBord/Color});]
   text-align:center;
   font-style:normal;
+  [(#MODELE{c_css_shadow}{c=Agenda})]
 }
 .cAgenda th {
   font-size: #VAR{acsFondBlocSize,0.82em};

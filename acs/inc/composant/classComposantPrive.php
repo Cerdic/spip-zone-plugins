@@ -299,8 +299,8 @@ class AdminComposant {
  */
   function edit($mode=false) {
 		include_spip('public/assembler');
-  	include_spip('lib/composant/controles');
-		$r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
+  	include_spip('inc/composant/controles');
+		$r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'inc/picker/picker.js"></script>';
 		$r .= "<input type='hidden' name='maj_composant' value='oui' />".
 					'<input type="hidden" name="composant" value="'.$this->class.'" />'.
 					'<input type="hidden" name="nic" value="'.$this->nic.'" />';

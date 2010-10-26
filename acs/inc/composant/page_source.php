@@ -6,8 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-include_spip('lib/composant/composants_variables');
-include_spip('lib/composant/pages_liste');
+include_spip('inc/composant/composants_variables');
+include_spip('inc/composant/pages_liste');
 
 /**
  * Analyse une page

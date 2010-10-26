@@ -42,7 +42,7 @@ function acs_header_prive($flux) {
 	$r .= 
 '<script type="text/javascript" src="'.$js_dragdrop.'"></script>'.
 '<script type="text/javascript" src="../spip.php?page=javascript/acs_ecrire.js&jquery_version='.$jquery_version.'"></script>'.
-'<script type="text/javascript" src="'._DIR_ACS.'lib/picker/picker.js"></script>'."\r";	
+'<script type="text/javascript" src="'._DIR_ACS.'inc/picker/picker.js"></script>'."\r";	
 	return $flux.$r;
 }
 

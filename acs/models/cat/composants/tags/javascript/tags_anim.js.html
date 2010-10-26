@@ -37,9 +37,9 @@ Adapted by Daniel FAIVRE from StringBall 2.1 :
   var roteang=0;
   var looptimer=0;
 
-  var itxpos = target.offset().left | 0;
+  var itxpos = target.offset() ? target.offset().left : 0;
   var itw = target.width();
-  var itypos = target.offset().top | 0;
+  var itypos = target.offset() ? target.offset().top : 0;
   var ith = target.height();
   var camd = Math.max(itw, ith);
   var scrz = camd / 3;

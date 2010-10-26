@@ -17,6 +17,7 @@ ACS version 0.7
  - balises #ACS_VERSION et #ACS_RELEASE, permettant de faire des composants multi-versions
  - Nouveau type de variable : key (mot-clef)
  - remise a niveau des selecteurs d'admins
+ - suppression du dossier lib pour eviter la confusion avec une librairie spip, et transfert des sous-dossiers composant et picker dans inc
  
 Modele Cat pour ACS vesion 0.7 :
  - transformation de TOUTES les pages du modèle (squelette) "cat" en pages constituées uniquement de modules (en cours)
@@ -25,7 +26,10 @@ Modele Cat pour ACS vesion 0.7 :
  - modele doc_player : reactualisation
  - suppression des "communiqués" à la Une, avantageusement remplacés par le composant Encart
  - Mise à jour de TOUS les composants (en cours)
+ - Agenda : variables ombrage
+ - Auteur : fichiers de langue fr et en
  - Audio : toilettage du composant / nouveau modèle. drag/drop sur le slider, gestion automatisee de l'inclusion de la librairie jQuery drag/drop pour gerer le slider du lecteur audio
+ - Banniere : mise en page du composant + traduction pour alignement vertical du fond
  - Cadre : remplace le composant Module
  - Edito : nouvelles variables - boutons de navigation precedent / suivant
  - Fond : définition de classes par défaut héritées par tous les composants - personnalisation des styles spip natifs -  suppression de l'appel à spip_style.css, remplacé par la rdéfinition, personnalisable, de ces styles dans la css du composant Fond (à noter : meme située AVANT dans le header, la css spip_style.css pouvait prendre le pas sur la css habillage.css.html définie APRES - bug vu avec Firefox 3.6.10 et Konqueror 3.5.10)
@@ -38,6 +42,7 @@ Modele Cat pour ACS vesion 0.7 :
  - Rubrique : nouveau composant apparence d'une rubrique
  - Stats : nouveau composant avec les stats globales du site
  - Syndic : correction style du composant dans le contexte d'une rubrique ou d'un site syndiqué
+ - Tags : fonction animation (nuage de mots-clefs animes)
 _______________________________________
 ACS version 0.6
  - mise à jour pour spip 2.1 et JQuery 1.8

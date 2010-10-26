@@ -18,7 +18,7 @@ if (!is_callable('ajax_retour'))
 	include_spip('inc/actions');
 
 include_spip('inc/acs_cache');
-include_spip('lib/composant/composant_infos');
+include_spip('inc/composant/composant_infos');
 
 function exec_composant_get_infos() {
   $c = _request('c');

@@ -13,6 +13,7 @@ Un lien vers une page particuli&egrave;re peut être affich&eacute; en option da
 'FondImageRepeatX' => 'Répèter l\'image en X',
 'FondImageRepeatY' => 'Répèter l\'image en Y',
 'FondAlign' => _T('acs:align'),
+'FondVerticalAlign' => _T('acs:valign'),
 'Hauteur' => 'Hauteur',
 'Logo' => 'Afficher le logo du site',
 'LogoAlign' => _T('acs:align'),

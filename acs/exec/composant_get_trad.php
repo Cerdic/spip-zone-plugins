@@ -21,7 +21,7 @@ function exec_composant_get_trad() {
   $trcmp = _request('trcmp');
   $cadre = _request('cadre');
 
-  include_spip('lib/composant/composant_traduction');
+  include_spip('inc/composant/composant_traduction');
   $r .=  composant_traduction($c, $trcmp, $cadre);
 
   ajax_retour($r);

@@ -7,7 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 //include_spip('inc/acs_presentation');//(implicite)
-include_spip('lib/composant/composants_variables');
+include_spip('inc/composant/composants_variables');
 
 function acs_vars_gauche(){
 	return acs_info_box(_T('acs:variables'), _T('acs:toutes_les_variables'), $help, $info, _DIR_PLUGIN_ACS.'/images/vars-24.gif');

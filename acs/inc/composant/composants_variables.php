@@ -12,7 +12,7 @@
  * Utilise le cache ACS
  */
 
-include_spip('lib/composant/composants_liste');
+include_spip('inc/composant/composants_liste');
 
 function composants_variables() {
   static $cv=array();
@@ -31,7 +31,7 @@ function composants_variables() {
 // On profite de la lecture du fichier composant.xml pour récupérer en une seule fois toutes les informations utiles:
 // lien variable<->composant, type de variable, actif/inactif
 function lecture_composants_variables() {
-  require_once _DIR_ACS.'lib/composant/composants_liste.php';
+  require_once _DIR_ACS.'inc/composant/composants_liste.php';
 
   include_spip('inc/xml');
   $r = array();

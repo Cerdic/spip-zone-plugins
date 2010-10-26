@@ -10,7 +10,7 @@
  * Inclut les balises spip définies par les composants actifs
  * Include components defined spip-tags
  */
-require_once _DIR_ACS.'lib/composant/composants_liste.php';
+require_once _DIR_ACS.'inc/composant/composants_liste.php';
 
 function composants_ajouter_balises() {
   foreach (composants_liste() as $c =>$composant) {

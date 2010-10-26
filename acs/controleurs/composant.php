@@ -11,7 +11,7 @@ function controleurs_composant_dist($regs) {
   
   include_spip('public/assembler');
   include_spip('inc/acs_presentation');
-  include_spip('lib/composant/classComposantPrive');
+  include_spip('inc/composant/classComposantPrive');
 	include_spip('inc/acs_widgets');
 
   list(,$crayon,$type,$class,$id) = $regs;

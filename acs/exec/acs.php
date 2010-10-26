@@ -63,7 +63,7 @@ function exec_acs() {
       
     case 'composants':
       include_spip('inc/acs_composants');
-      include_spip('lib/composant/classComposantPrive');
+      include_spip('inc/composant/classComposantPrive');
       include_spip('inc/acs_widgets');
 
       // Crée l'objet composant - Create current component object
