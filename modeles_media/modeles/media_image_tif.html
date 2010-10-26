@@ -10,9 +10,11 @@
 	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
 	[(#ENV*|env_to_params{#MEDIA_IGNORE_PARAMS})]
 	[(#ENV{toolbar}|non)<param name='toolbar' value='off' />]
-	<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'][(#ENV{toolbar}|non)toolbar='off'] /> >
+	<!--[if lte IE 6 ]>
+	<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'][(#ENV{toolbar}|non)toolbar='off'] /></embed>
+	<![endif]-->
 	#GET{alt}
-</embed></object>]})]
+</object>]})]
 [(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
 	<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 	<dt>#GET{obj}</dt>

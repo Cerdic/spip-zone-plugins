@@ -6,10 +6,10 @@
 	Si HTML5, utilisation de figure.
 ]
 [(#REM) Existe-il un modèle spécifique à cette extension ?]
-[(#CHEMIN{modeles/media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION.html}|oui)
-	[(#INCLURE{fond=modeles/media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION}{id=#ID_DOCUMENT}{env})]
+[(#CHEMIN{modeles/media_image_#EXTENSION.html}|oui)
+	[(#INCLURE{fond=modeles/media_image_#EXTENSION}{id=#ID_DOCUMENT}{env})]
 ]
-[(#CHEMIN{modeles/media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION.html}|non)
+[(#CHEMIN{modeles/media_image_#EXTENSION.html}|non)
 	[(#REM) Cas d'une inclusion avec <img>.]
 	[(#INCLUS|=={image}|oui)
 		[(#SET{img,#MEDIA_IMAGE_RETAILLEE{#FICHIER}})]
@@ -41,9 +41,11 @@
 			<param name='src' value='#URL_DOCUMENT' />
 			[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
 			[(#ENV*|env_to_params{#MEDIA_IGNORE_PARAMS})]
-			<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] >
+			<!--[if lte IE 6 ]>
+			<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] ></embed>
+			<![endif]-->
 			#GET{alt}
-		</embed></object>]})]
+		</object>]})]
 		[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
 			<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 			<dt>#GET{obj}</dt>
