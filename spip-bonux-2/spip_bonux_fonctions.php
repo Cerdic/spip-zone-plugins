@@ -34,7 +34,8 @@ function aoustrong($url,$libelle,$on=false,$class="",$title="",$rel=""){
  * @return string
  */
 function tag_img($img,$alt="",$class=""){
-	return balise_img($img,$alt,$class);
+	$balise_img = chercher_filtre('balise_img');
+	return $balise_img($img,$alt,$class);
 }
 
 /**

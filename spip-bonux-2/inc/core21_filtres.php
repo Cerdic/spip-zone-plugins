@@ -39,7 +39,7 @@ function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel=""){
 }
 }
 
-if (!function_exists('balise_img')){
+if (!function_exists('filtre_balise_img_dist')){
 /**
  * une fonction pour generer une balise img a partir d'un nom de fichier
  *
@@ -48,7 +48,7 @@ if (!function_exists('balise_img')){
  * @param string $class
  * @return string
  */
-function balise_img($img,$alt="",$class=""){
+function filtre_balise_img_dist($img,$alt="",$class=""){
 	$taille = taille_image($img);
 	list($hauteur,$largeur) = $taille;
 	if (!$hauteur OR !$largeur)
