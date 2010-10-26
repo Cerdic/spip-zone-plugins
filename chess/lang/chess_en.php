@@ -35,6 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_info_evennement' => 'Event:',
 'details_info_date' => 'Date:',
 'details_info_round' => 'Round:',
-'erreur_config' => '<strong>You need to validate the options to display the chess plugin, <a href=ecrire/?exec=cfg&amp;cfg=chess >click here</a> to access to the configuration&apos;s page.</strong>',
+'erreur_config' => '<strong>You need to validate the options to display the chess plugin, <a href="@url@">click here</a> to access to the configuration&apos;s page.</strong>',
 );
 ?>
