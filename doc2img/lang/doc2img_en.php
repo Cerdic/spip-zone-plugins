@@ -24,6 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_formats_entree' => 'Input',
 	'cfg_legende_formats_sortie' => 'Outputs',
 	'cfg_legende_relation_original' => 'Relations with the original document',
+	
+	// D
+	'doc2img_reconvertir_doc' => 'Convertir (again?) this document into a series of images',
 
 	// E
 	'erreur_autorisation' => 'You are not allowed to convert this document',
