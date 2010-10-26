@@ -162,9 +162,10 @@
 		if ($m = _request('message')
 			AND in_array($m,array('test_ok','test_ko','renvoi_ok','renvoi_ko','envoi_termine'))) {
 			$ok = in_array($m,array('test_ok','renvoi_ok','envoi_termine'))?'success':'error';
+			$balise_img = chercher_filtre('balise_img');
 			echo "<div class='$ok'>";
 			echo '<div style="float: right;"><a href="'.parametre_url(self(), 'message','')
-			  .'">'.balise_img(find_in_path('img_pack/frame-close.png'),"x").'</a></div>';
+			  .'">'.$balise_img(find_in_path('img_pack/frame-close.png'),"x").'</a></div>';
 			echo _T('lettresprive:'.$m);
 			echo '</div>';
 		}
