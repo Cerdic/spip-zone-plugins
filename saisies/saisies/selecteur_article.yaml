@@ -1,7 +1,7 @@
 
-titre: '<:saisies:saisie_selecteur_rubrique_article_titre:>'
-description: '<:saisies:saisie_selecteur_rubrique_article_explication:>'
-icone: 'images/saisies_selecteur_rubrique_article.png'
+titre: '<:saisies:saisie_selecteur_article_titre:>'
+description: '<:saisies:saisie_selecteur_article_explication:>'
+icone: 'images/saisies_selecteur_article.png'
 options:
   -
     saisie: 'fieldset'

@@ -101,6 +101,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_selection_multiple_explication' => 'Permet de choisir plusieurs options avec une liste.',
 	'saisie_selection_multiple_titre' => 'S&eacute;lection multiple',
 	'saisie_selection_titre' => 'Liste d&eacute;roulante',
+	'saisie_selecteur_article' => 'Affiche un navigateur de sélection d\'article',
+	'saisie_selecteur_article_titre' => 'S&eacute;lecteur d\'article',
+	'saisie_selecteur_rubrique' => 'Affiche un navigateur de sélection de rubrique',
+	'saisie_selecteur_rubrique_titre' => 'S&eacute;lecteur de rubrique',
+	'saisie_selecteur_rubrique_article' => 'Affiche un navigateur de sélection d\'article ou de rubrique',
+	'saisie_selecteur_rubrique_article_titre' => 'S&eacute;lecteur d\'article ou rubrique',
 	'saisie_textarea_explication' => 'Un champ de texte sur plusieurs lignes.',
 	'saisie_textarea_titre' => 'Bloc de texte',
 
