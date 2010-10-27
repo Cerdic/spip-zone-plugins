@@ -564,9 +564,10 @@ function saisies_generer_html($champ, $env=array()){
  *
  * @param array $saisie Un tableau décrivant une saisie
  * @param array $env L'environnement, contenant normalement la réponse à la saisie
+ * @param array $env_obligatoire
  * @return string Retour le HTML des vues
  */
-function saisies_generer_vue($saisie, $env=array()){
+function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	// Si le paramètre n'est pas bon, on génère du vide
 	if (!is_array($saisie))
 		return '';
@@ -589,7 +590,8 @@ function saisies_generer_vue($saisie, $env=array()){
 	if(isset($contexte['env']) or is_array($saisie['saisies'])){
 		unset($contexte['env']);
 		
-		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
+		// À partir du moment où on passe tout l'environnement, il faut enlever 
+		// certains éléments qui ne doivent absolument provenir que des options
 		$saisies_disponibles = saisies_lister_disponibles();
 		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
 			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
@@ -623,7 +625,10 @@ function saisies_generer_vue($saisie, $env=array()){
 	// Si ya des enfants on les remonte dans le contexte
 	if (is_array($saisie['saisies']))
 		$contexte['saisies'] = $saisie['saisies'];
-	
+
+	if (is_array($env_obligatoire)) {
+		$contexte = array_merge($contexte, $env_obligatoire);
+	}
 	// On génère la saisie
 	return recuperer_fond(
 		'saisies-vues/_base',

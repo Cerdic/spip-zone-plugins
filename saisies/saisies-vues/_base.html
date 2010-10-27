@@ -1,3 +1,5 @@
+[(#ENV{sans_reponse}|is_null|oui) [(#SET{sans_reponse,<:saisies:vue_sans_reponse:>})] ]
+[(#ENV{sans_reponse}|is_null|non) [(#SET{sans_reponse,#ENV{sans_reponse}})] ]
 
 #SET{valeur_uniquement,#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|?{' ',''}}
 #SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
@@ -16,7 +18,7 @@
 			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
 		]
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
-			[(#ENV*{valeur}|sinon{<:saisies:vue_sans_reponse:>}|propre)]
+			[(#ENV*{valeur}|sinon{#GET{sans_reponse}}|propre)]
 		]
 		</div>
 	]
@@ -34,7 +36,7 @@
 			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
 		]
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
-			[(#ENV*{valeur}|sinon{<:saisies:vue_sans_reponse:>}|propre)]
+			[(#ENV*{valeur}|sinon{#GET{sans_reponse}}|propre)]
 		]
 	]
 ]
