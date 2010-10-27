@@ -413,10 +413,8 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	$temp_js[] = "if(window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"<cs_html>#CHEMIN{javascript/jquery.cookie.js}</cs_html>\";$temp_jq\n}";
 	unset($temp_jq);
 	if(count($temp_js)) {
-		$prive = function_exists('test_espace_prive')?test_espace_prive()
-			// compatibilite pour SPIP 1.92
-			:(defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false);
-		$temp_js = 'var cs_prive='.($prive?'1':'0').";\njQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\n" . join("\n", $temp_js);
+		$temp_js = "var cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;
+jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\n" . join("\n", $temp_js);
 		if(function_exists('compacte_js')) $temp_js = compacte_js($temp_js);
 		if(strlen($temp_js)>_CS_HIT_EXTERNE) {
 			// hit externe
