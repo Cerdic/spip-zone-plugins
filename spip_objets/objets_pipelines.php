@@ -101,7 +101,7 @@ function objets_affiche_enfants($flux){
 					
 					// alias sur l'id pour simplifier la gestion dans la fonction presenter_boucle
 					$requete=array(
-						"SELECT"=> "o.id_".$nom_objet." as id_objet,o.titre,o.statut", //.sql_quote($objet)." as type_objet"
+						"SELECT"=> "o.id_".$nom_objet." as id_objet,o.titre,o.statut,'".$objet."' as objet", 
 						"FROM"=> "spip_".$objet." o,spip_".$objet."_liens ol",
 						"WHERE"=> "o.id_".$nom_objet."=ol.id_".$nom_objet." AND ol.objet='article' AND ol.id_objet='".$id_article."'", //$id_article
 						"ORDERBY"=>"o.id_".$nom_objet." DESC"
@@ -128,13 +128,12 @@ function presenter_objet_boucle($row,$afficher){
 	//$row recoit chaque ligne de la requete passé a presenter_liste
 	//on va aller chercher les puces pour pouvoir changer de statut 
 	include_spip('inc/objets_puce');
-	
-
-	
+		
 	$id_objet=$row['id_objet'];
 	$titre=$row['titre'];
 	$statut=$row['statut'];
 	$objet=$row['objet'];
+	$nom_objet=objets_nom_objet($objet);
 	$id_rubrique=_request('id_rubrique');
 	$id_article=_request('id_article');
 	

@@ -10,14 +10,19 @@ function objets_declarer_tables_interfaces($interface){
 	//on récupére uin tableau des objets déjà installés
 	$objets_installes=liste_objets_meta();
 	
+	global $table_des_tables;
 	foreach ($objets_installes as $objet) {
 		if($objet!=""){
 			$interface['table_des_tables'][$objet] = $objet;
 			$interface['table_des_traitements']['TITRE'][$objet] = _TRAITEMENT_TYPO; // corrections de francais
 		  //si on le lie aux articles
-			// $interface['tables_jointures']['spip_articles'][]= $objet.'_liens';
+			$interface['tables_jointures']['spip_articles'][]= $objet.'_liens';
 			//si on le lie aux rubriques
-			// $interface['tables_jointures']['spip_rubriques'][]= $objet.'_liens';
+			$interface['tables_jointures']['spip_rubriques'][]= $objet.'_liens';
+			
+			$interface['tables_jointures']['spip_'.$objet][]= $objet.'_liens';
+			
+			$table_des_tables[$objet]=$objet;
 		}
 	}
 	
