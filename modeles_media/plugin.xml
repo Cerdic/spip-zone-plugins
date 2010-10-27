@@ -29,10 +29,11 @@
 		<nom>header_prive</nom>
 		<inclure>media_pipelines.php</inclure>
 	</pipeline>
-		<pipeline>
+	<pipeline>
 		<nom>ieconfig_metas</nom>
 		<inclure>media_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
+	<utilise id="inserer_modeles" version="[0.3;]" />
 </plugin>

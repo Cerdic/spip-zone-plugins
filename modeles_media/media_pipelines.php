@@ -32,7 +32,7 @@ function media_insert_head_css($flux){
 	return $flux;
 }
 
-function mediabox_insert_head($flux){
+function media_insert_head($flux){
 	$flux = media_insert_head_css($flux); // au cas ou il n'est pas implemente
 	return $flux;
 }
