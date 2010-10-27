@@ -1,0 +1,82 @@
+<plugin>
+	<nom>Spip objets suppl&eacute;mentaires ou tables extra</nom>
+	<auteur>Yoann NOGUES</auteur>
+	<version>1.0</version>
+	<version_base>1.0</version_base>
+	<install>base/objets_upgrade.php</install>
+	<etat>dev</etat>
+	<description> 
+		Permettre d ajouter des nouveaux objets dans SPIP de mani&egrave;re simple avec quelques clics.
+	</description>
+	
+	<icon>images/actu-128.gif</icon>
+	<prefix>objets</prefix>
+
+	<fonctions>objets_fonctions.php</fonctions>
+	<options>objets_options.php</options>
+		 
+	<!--
+	<bouton id='objets' parent='naviguer'>
+		<icone>images/actu-24.gif</icone>
+		<titre>objets:actus</titre>
+	</bouton>
+	-->
+	<!-- On gere les 2 cas bandeau ou pas -->
+	<bouton id='objets_configuration' parent='bando_configuration'>
+		<icone>images/objets-24.png</icone>
+		<titre>objets:gestion_objets</titre>
+	</bouton>
+	<onglet id='objets_configuration' parent='configuration'>
+		<icone>images/objets-24.png</icone>
+		<titre>objets:gestion_objets</titre>
+	</onglet>
+
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/objets.php</inclure>
+	</pipeline>
+	
+	<pipeline> 
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/objets.php</inclure>
+	</pipeline>
+	 <pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/objets.php</inclure>
+	</pipeline>
+	
+	
+
+	<!-- avec plugin champs extras 2 -->
+
+	
+	
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>objets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>objets_pipelines.php</inclure>
+	</pipeline>
+	
+	<!--<pipeline>
+		<nom>encart_objets</nom>
+		<inclure>objets_pipelines.php</inclure>
+	</pipeline>-->
+	<pipeline>
+		<nom>affiche_enfants</nom>
+		<inclure>objets_pipelines.php</inclure>
+	</pipeline>
+	
+
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<!-- facilitons les champs de formulaires -->
+	<necessite id="saisies" version="[1.8.5;]" />
+	<!-- filtre |icone et boucles CONDITIONS -->
+	<necessite id="spip_bonux" version="[1.8.4;]" />
+	<necessite id="cextras" version="[1.6.1;]" />
+	<categorie>outil</categorie>
+</plugin>

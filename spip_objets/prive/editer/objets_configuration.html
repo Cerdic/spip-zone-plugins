@@ -1,0 +1,14 @@
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<:objets:info_objets_configuration:>
+	<h1>(#ENV{titre,<:objets:texte_objets_configuration:>})</h1>]
+</div>
+#FORMULAIRE_EDITER_OBJETS_CONFIGURATION
+</div>
+<div>
+<h2>Voici la liste des objets d&eacute;j&agrave; g&eacute;r&eacute;</h2>
+<BOUCLE_objets_exitants(POUR){tableau #ENV{existant}}>
+[<p>(#VALEUR)  <a href="[(#URL_ACTION{supprimer_objets_configuration}|parametre_url{objet,#VALEUR})]">[(#CHEMIN{images/croix-rouge.gif}|balise_img{supprimer cet objet})]</a></p>]
+</BOUCLE_objets_exitants>
+</div>

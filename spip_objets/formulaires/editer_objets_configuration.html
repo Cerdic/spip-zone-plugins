@@ -1,0 +1,18 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		  [(#SAISIE{input, nom_objet,
+			 label=<:objets:nom_objet_supplementaire:>,
+			 obligatoire=oui})]
+		</ul>
+		[(#REM) pas besoin d'extra ici on parle de configuration ... ']		
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
