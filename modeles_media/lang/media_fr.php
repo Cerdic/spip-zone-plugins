@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_configurer_media_taille_petit' => 'Taille \'petit\'&nbsp;:',
 	'label_configurer_media_taille_moyen' => 'Taille \'moyen\'&nbsp;:',
 	'label_configurer_media_taille_grand' => 'Taille \'grand\'&nbsp;:',
+	'modeles_media' => 'Mod&egrave;les &lt;media&gt;',
 	'pixels_minimum' => 'pixels minimum',
 	'pixels_maximum' => 'pixels maximum',
 	'pixels_largeur' => 'pixels de largeur',

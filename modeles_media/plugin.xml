@@ -29,6 +29,10 @@
 		<nom>header_prive</nom>
 		<inclure>media_pipelines.php</inclure>
 	</pipeline>
+		<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>media_pipelines.php</inclure>
+	</pipeline>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>

@@ -42,5 +42,11 @@ function media_header_prive($flux){
 	return $flux;
 }
 
+function media_ieconfig_metas($table){
+	$table['media']['titre'] = _T('media:modeles_media');
+	$table['media']['icone'] = 'images/media-24.png';
+	$table['media']['metas_brutes'] = 'media_taille_icone_largeur,media_taille_icone_hauteur,media_taille_petit_largeur,media_taille_petit_hauteur,media_taille_moyen_largeur,media_taille_moyen_hauteur,media_taille_grand_largeur,media_taille_grand_hauteur,media_largeur_min_legende,media_largeur_max_legende';
+	return $table;
+}
 
 ?>
