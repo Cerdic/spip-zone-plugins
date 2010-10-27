@@ -65,6 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'importer_formulaire_fichier_label' => 'Fichier &agrave; importer',
 'importer_formulaire_format_label' => 'Format du fichier',
 
+'modele_nom_formulaire' => 'un formulaire',
+'modele_label_formulaire_formidable' => 'Quel formulaire&nbsp;?',
+
 'reponse_intro' => '@auteur@ a r&eacute;pondu au formulaire @formulaire@',
 'reponse_numero' => 'R&eacute;ponse num&eacute;ro :',
 'reponse_statut' => 'Cette r&eacute;ponse est :',
