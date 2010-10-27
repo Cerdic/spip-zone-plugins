@@ -75,24 +75,31 @@ function formulaires_inserer_modeles_traiter_dist() {
 		include_spip('inc/inserer_modeles');
 		$infos = charger_infos_formulaire_modele(_request('formulaire_modele'));
 		$champs = saisies_lister_champs($infos['parametres'],false);
-		$code = '<'._request('modele');
-		if (_request('id_modele') && _request('id_modele')!='')
-			$code .= _request('id_modele');
-		if (_request('variante') && _request('variante')!='')
-			$code .= '|'._request('variante');
-		if (_request('classe') && _request('classe')!='')
-			$code .= '|'._request('classe');
-		if (_request('align') && _request('align')!='')
-			$code .= '|'._request('align');
-		foreach ($champs as $champ) {
-			if($champ != 'modele' && $champ != 'variante' && $champ != 'classe' && $champ != 'id_modele' && $champ != 'align' && _request($champ) && _request($champ)!='') {
-				if($champ == _request($champ))
-					$code .= "|$champ";
-				else
-					$code .= "|$champ="._request($champ);
+		if(isset($infos['traiter']))
+			$f = charger_fonction($infos['traiter'],'formulaires',true);
+		else $f=false;
+		if ($f)
+			$code = $f($champs);
+		else {
+			$code = '<'._request('modele');
+			if (_request('id_modele') && _request('id_modele')!='')
+				$code .= _request('id_modele');
+			if (_request('variante') && _request('variante')!='')
+				$code .= '|'._request('variante');
+			if (_request('classe') && _request('classe')!='')
+				$code .= '|'._request('classe');
+			if (_request('align') && _request('align')!='')
+				$code .= '|'._request('align');
+			foreach ($champs as $champ) {
+				if($champ != 'modele' && $champ != 'variante' && $champ != 'classe' && $champ != 'id_modele' && $champ != 'align' && _request($champ) && _request($champ)!='') {
+					if($champ == _request($champ))
+						$code .= "|$champ";
+					else
+						$code .= "|$champ="._request($champ);
+				}
 			}
+			$code .= '>';
 		}
-		$code .= '>';
 		set_request('_code_modele',$code);
 		return array('message_ok' => _T('inserer_modeles:message_copier_code'));
 	}

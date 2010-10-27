@@ -11,6 +11,7 @@
   - option_vide : chaine de langue pour le cas où on ne rebvoie rien
   - option_identique : chaine de langue pour le cas où param=param
   - option_personnalise : chaîne de lanque pour le cas où on saisie une valeur personnalisée
+  - explication_personnalise : explication pour le champs personnalise
 ]
 #SET{type,#ENV{type,text}}
 [(#REM) Ajout d'un marqueur unique au cas où le formulaire serait présent deux fois dans la page ]
@@ -22,6 +23,7 @@
 	<option value="personnalise" [(#GET{valeur}|!={#ENV{nom}}|et{#GET{valeur}|oui}) selected="selected"]>#ENV{option_personnalise}</option>
 </select>
 
+[<p class="explication explication_#ENV{nom}_#GET{id_unique}">(#ENV{explication_personnalise})</p>]
 <input type="#GET{type}" name="#ENV{nom}" class="[(#GET{type})] champ_#ENV{nom}_#GET{id_unique}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#GET{valeur})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
 
 <script type="text/javascript">// <![CDATA[
@@ -31,13 +33,16 @@
 			if($(".select_#ENV{nom}_#GET{id_unique}").val() == ''){
 				$(".champ_#ENV{nom}_#GET{id_unique}").val('');
 				$(".champ_#ENV{nom}_#GET{id_unique}").hide(400);
+				$(".explication_#ENV{nom}_#GET{id_unique}").hide(400);
 			}
 			if($(".select_#ENV{nom}_#GET{id_unique}").val() == 'identique'){
 				$(".champ_#ENV{nom}_#GET{id_unique}").val('#ENV{nom}');
 				$(".champ_#ENV{nom}_#GET{id_unique}").hide(400);
+				$(".explication_#ENV{nom}_#GET{id_unique}").hide(400);
 			}
 			if($(".select_#ENV{nom}_#GET{id_unique}").val() == 'personnalise'){
 				$(".champ_#ENV{nom}_#GET{id_unique}").show(400);
+				$(".explication_#ENV{nom}_#GET{id_unique}").show(400);
 			}
 		};
 		verifier_#ENV{nom}_#GET{id_unique}();
