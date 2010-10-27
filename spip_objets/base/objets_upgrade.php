@@ -29,6 +29,7 @@ function objets_vider_tables($nom_meta_base_version) {
 	foreach ($objets_installes as $objet) {
 		sql_drop_table("spip_".$objet);
 		sql_drop_table("spip_".$objet."_liens");
+		
 	}
 	effacer_meta("objets_installes");
 	effacer_meta($nom_meta_base_version);

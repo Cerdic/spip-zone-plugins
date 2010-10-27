@@ -41,7 +41,7 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/objets.php</inclure>
 	</pipeline>
-	 <pipeline>
+	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/objets.php</inclure>
 	</pipeline>
@@ -61,15 +61,23 @@
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
 	
-	<!--<pipeline>
-		<nom>encart_objets</nom>
+	<!-- ajoute le bloc des documents -->
+	<pipeline>
+		<nom>affiche_gauche</nom>
 		<inclure>objets_pipelines.php</inclure>
-	</pipeline>-->
+	</pipeline>
+	
+	
+	<!-- ajoute les listes dobjets dans articles et rubriques -->
 	<pipeline>
 		<nom>affiche_enfants</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
 	
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>objets_pipelines.php</inclure>
+	</pipeline>
 
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
@@ -78,5 +86,6 @@
 	<!-- filtre |icone et boucles CONDITIONS -->
 	<necessite id="spip_bonux" version="[1.8.4;]" />
 	<necessite id="cextras" version="[1.6.1;]" />
+	<necessite id="gestdoc" version="[1.4.2;]" />
 	<categorie>outil</categorie>
 </plugin>

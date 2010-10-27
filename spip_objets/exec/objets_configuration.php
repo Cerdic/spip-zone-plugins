@@ -12,8 +12,6 @@ function exec_objets_configuration_dist(){
 	
 	
 	
-	
-	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	pipeline('exec_init',array('args'=>array('exec'=>'objets_configuration'),'data'=>''));
 	

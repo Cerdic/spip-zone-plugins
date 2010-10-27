@@ -6,9 +6,11 @@
 </div>
 #FORMULAIRE_EDITER_OBJETS_CONFIGURATION
 </div>
-<div>
+<B_objets_exitants>
 <h2>Voici la liste des objets d&eacute;j&agrave; g&eacute;r&eacute;</h2>
+<ul>
 <BOUCLE_objets_exitants(POUR){tableau #ENV{existant}}>
-[<p>(#VALEUR)  <a href="[(#URL_ACTION{supprimer_objets_configuration}|parametre_url{objet,#VALEUR})]">[(#CHEMIN{images/croix-rouge.gif}|balise_img{supprimer cet objet})]</a></p>]
+[<li>(#VALEUR) <a href="[(#URL_ACTION_AUTEUR{supprimer_objets_configuration,#VALEUR})]">[(#CHEMIN{images/croix-rouge.gif}|balise_img{supprimer cet objet})]</a></li>]
 </BOUCLE_objets_exitants>
-</div>
+</ul>
+</B_objets_exitants>

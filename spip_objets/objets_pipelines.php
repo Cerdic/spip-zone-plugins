@@ -65,7 +65,7 @@ function objets_affiche_enfants($flux){
 					$requete=array(
 						"SELECT"=> "o.id_".$nom_objet." as id_objet,o.titre,o.statut", //.sql_quote($objet)." as type_objet"
 						"FROM"=> "spip_".$objet." o,spip_".$objet."_liens ol",
-						"WHERE"=> "o.id_".$nom_objet."=ol.id_".$nom_objet." AND ol.objet='rubrique' AND ol.id_objet='2'",
+						"WHERE"=> "o.id_".$nom_objet."=ol.id_".$nom_objet." AND ol.objet='rubrique' AND ol.id_objet='".$id_rubrique."'",
 						"ORDERBY"=>"o.id_".$nom_objet." DESC"
 						);
 						
@@ -147,18 +147,17 @@ function presenter_objet_boucle($row,$afficher){
 	return $vals;
 }
 
-/*
-function actus_encart_actus($flux){
-//ajout des documents
-	
-//	$flux.=afficher_documents_colonne(_request('id_actu'), 'actu');
 
-	include_spip('inc/documents');
-	//$documenter_objet = charger_fonction('documenter_objet','inc');
-	//$onglet_documents = $documenter_objet($flux['args']['id_rubrique'], "rubrique", 'naviguer', $flag_editable);
-	$flux['data'].=afficher_documents_colonne($flux['args']['id_actu'], 'actu');
+function objets_affiche_gauche($flux){
+	if($flux['args']['exec']=='objet_edit'){
+		//ajout des documents
+		$objet=$flux['args']['objet'];
+		$nom_objet=objets_nom_objet($objet);
+		$documenter_objet=charger_fonction('documenter_objet','inc');
+		$flux['data'].=$documenter_objet($flux['args']['id_objet'], $nom_objet,true); // ce 3eme parametre est obscur car pas utilisé par mediatheque...
+	}
 	return $flux;
 }
-*/
+
 
 ?>

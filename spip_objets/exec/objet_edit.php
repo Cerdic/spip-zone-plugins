@@ -58,6 +58,7 @@ function exec_objet_edit_dist(){
   }
   */
 
+  //on ajoute les documents dans affiche_gauche 
   echo pipeline('affiche_gauche',array('args'=>array('exec'=>'objet_edit','objet'=>$objet,'id_objet'=>$id_objet),'data'=>''));
   echo creer_colonne_droite("",true);
   echo pipeline('affiche_droite',array('args'=>array('exec'=>'objet_edit','objet'=>$objet,'id_objet'=>$id_objet),'data'=>''));
@@ -72,7 +73,9 @@ function exec_objet_edit_dist(){
 		'id_rubrique'=>$id_rubrique,
 		'id_article'=>$id_article,	
 		'retour'=>_request('retour'),
-		'icone_retour'=>icone_inline(_T('icone_retour'), parametre_url(generer_url_ecrire('naviguer'),'id_rubrique',$id_rubrique), find_in_path("images/iextras-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
+		//TODO : modifier le findinpath pour l'icone ici ...
+		'icone_retour'=>icone_inline(_T('icone_retour'), parametre_url(generer_url_ecrire('naviguer'),'id_rubrique',$id_rubrique), find_in_path("images/objet-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
+	
 	);
 		
 	//TODO : on va plutôt aller chercher le fichier spécifique  a l'objet s'il existe,

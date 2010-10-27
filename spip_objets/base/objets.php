@@ -15,7 +15,9 @@ function objets_declarer_tables_interfaces($interface){
 		if($objet!=""){
 			$interface['table_des_tables'][$objet] = $objet;
 			$interface['table_des_traitements']['TITRE'][$objet] = _TRAITEMENT_TYPO; // corrections de francais
-		  //si on le lie aux articles
+		  
+			//permet de faire les jointures et donc permettre les criteres {id_article} et {id_rubrique} dans les boucles
+			//si on le lie aux articles
 			$interface['tables_jointures']['spip_articles'][]= $objet.'_liens';
 			//si on le lie aux rubriques
 			$interface['tables_jointures']['spip_rubriques'][]= $objet.'_liens';
