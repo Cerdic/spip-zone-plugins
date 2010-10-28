@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_options_taille_petit' => 'Small',
 'details_options_taille_moyen' => 'Medium',
 'details_options_taille_grand' => 'Large',
+'details_options_coldroite' => 'Largeur de la colonne de droite (en pixels, 230 par d&eacute;faut) :',
 'details_options_habillage' => 'Chess set',
 'details_options_vitesse' => 'Automatic play game speed : one move every ',
 'details_options_vitsec' => 'secondes <strong>(default : 0.1)</strong>',

@@ -13,7 +13,7 @@
 Configuration du plugin Chess
 </h4>
 Certains param&egrave;tres &agrave; modifier pour rendre l'interface plus adapt&eacute;e au site.<br />
-<hr>
+<hr />
 S&eacute;lectionnez le type de boucle pour que la liste des fichiers concerne<br />
 - l&apos;article XX,<br />
 - la rubrique XX,<br />
@@ -33,6 +33,10 @@ S&eacute;lectionnez le type de boucle pour que la liste des fichiers concerne<br
     <option value="45" [(#ENV{taille,30}|=={"45"}|?{selected="selected",''})]><:chess:details_options_taille_moyen:> - 45x45</option>
     <option value="60" [(#ENV{taille,30}|=={"60"}|?{selected="selected",''})]><:chess:details_options_taille_grand:> - 60x60</option>
   </select>
+  </p>
+  <p>
+  <label><:chess:details_options_coldroite:></label>
+  <label><input type="text" name="coldroite" value="[(#ENV{coldroite, 230})]" size="3" /></label>
   </p>
   <p>
   <label><:chess:details_options_vitesse:></label>

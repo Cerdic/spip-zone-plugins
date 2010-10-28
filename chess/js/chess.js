@@ -440,9 +440,9 @@ DHTMLGoodies.Chess = function(props)
 	this.coordLastMove.from = new Object();
 	this.coordLastMove.to = new Object();
 	this.animate = true;
-	this.cssPath = 'plugins/chess/css/chess.css';
+	this.cssPath = chess_cssPath;
 	this.parentRef = document.body;
-	this.imageFolder = 'plugins/chess/images/';
+	this.imageFolder = chess_imageFolder;
 	this.boardLabels = true;
 	this.flipBoardWhenBlackToStart = true;
 	this.flipBoardWhenBlackWins = true;
@@ -3293,7 +3293,7 @@ DHTMLGoodies.Chess.prototype = {
 	__loadCss : function(cssFile)
 	{
 		var lt = document.createElement('LINK');
-		lt.href = cssFile + '?rand=' + Math.random();			
+		lt.href = cssFile + chess_queryStringSeparator + 'rand=' + Math.random();			
 		lt.rel = 'stylesheet';
 		lt.media = 'screen';
 		lt.type = 'text/css';

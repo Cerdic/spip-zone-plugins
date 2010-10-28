@@ -6,11 +6,11 @@
 	</multi>
 	</nom>
 	<auteur>
-	S&#233;bastien Boureux, Jacques Bouthier, <br />
+	S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville<br />
   original script Alf Magne Kalleland owner of DHTMLGoodies
 	</auteur>
 	<version>
-	0.6
+	0.7
 	</version>
 	<etat>
 	dev
@@ -38,6 +38,6 @@ _ Documentation sur [Spip&#212;Toulouse->http://www.spipotoulouse.org/spip.php?a
         <inclure>chess_fonctions.php</inclure>
     </pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
-	<necessite id="cfg" version="[1.0.6;]" />
+	<necessite id="SPIP" VERSION="[1.9.0;]" />
+	<necessite id="cfg" VERSION="[1.0.6;]" />
 </plugin>

@@ -28,6 +28,8 @@ Owner of DHTMLgoodies.com
 
 require_once("ChessConfig.php");
 
+define('FILE_CACHE_OK', defined('FILE_CACHE_FOLDER') && FILE_CACHE_FOLDER!='');
+
 class PgnParser
 {
 	var $pgnString;
@@ -49,7 +51,7 @@ class PgnParser
 	function getPgnNameWithoutExtension()
 	{
 		$ret = "";
-		return preg_replace("/[\/\.]/s","",$this->pgnFile);
+		return preg_replace("/[\/\.]/s","",basename($this->pgnFile));
 	}
 	
 	/* Specify pgn file */
@@ -296,6 +298,7 @@ class PgnParser
 	{
 		$this->pgnFile = $pgnFile;
 		$fh = fopen($pgnFile,"r");
+//	die($pgnFile);
 		$this->pgnString = trim(fread($fh,filesize($pgnFile)));
 		fclose($fh);	
 	}
@@ -321,7 +324,7 @@ class PgnParser
 	/* Output game list in JSON format */
 	function getGameListAsJson()
 	{
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){
+		if(FILE_CACHE_OK){
 			$fileName = FILE_CACHE_FOLDER."/gameList".$this->getPgnNameWithoutExtension().".cache";
 			if(file_exists($fileName) && $this->__getPgnTimestamp()<$this->__getFiletimestamp($fileName)){
 				$this->outputFileFromCache($fileName);
@@ -349,7 +352,7 @@ class PgnParser
 		$retVal.="\n}";
 		$retVal = $this->getSafeJsString($retVal);
 		
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){	
+		if(FILE_CACHE_OK){	
 			$this->writeContentToFileCache($fileName,$retVal);
 		}
 			
@@ -361,7 +364,7 @@ class PgnParser
 		if(!$props){
 			$props = array("white","black","result");
 		}
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){
+		if(FILE_CACHE_OK){
 			$params = implode("_",$props);
 			$params.=$objName;
 			$fileName = FILE_CACHE_FOLDER."/phpgametable".$this->getPgnNameWithoutExtension().$params.".cache";
@@ -382,7 +385,7 @@ class PgnParser
 			}
 			$retVal.="</tr>\n";
 		}		
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){	
+		if(FILE_CACHE_OK){	
 			$this->writeContentToFileCache($fileName,$retVal);
 		}		
 		echo $retVal;				
@@ -421,7 +424,7 @@ class PgnParser
 	
 	function getNumberOfGames()
 	{		
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){
+		if(FILE_CACHE_OK){
 			$fileName = FILE_CACHE_FOLDER."/pgnNumberOfGames".$this->getPgnNameWithoutExtension().".cache";
 			if(file_exists($fileName)){
 				$this->outputFileFromCache($fileName);
@@ -434,7 +437,7 @@ class PgnParser
 		}
 		
 		$ret = count($this->games);
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){	
+		if(FILE_CACHE_OK){	
 			$this->writeContentToFileCache($fileName,$ret);
 		}
 				
@@ -463,7 +466,7 @@ class PgnParser
 			echo "false";	// Time stamp sent to this method and there are no changes, just output "false". This means that this method has been called by an liveUpdate call.
 			exit;
 		}
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){
+		if(FILE_CACHE_OK){
 			$fileName = FILE_CACHE_FOLDER."/gameDetails".$this->getPgnNameWithoutExtension()."_gameIndex$gameIndex.cache";
 			if(file_exists($fileName) && $this->__getPgnTimestamp()<$this->__getFiletimestamp($fileName)){
 				$this->outputFileFromCache($fileName);
@@ -558,7 +561,7 @@ class PgnParser
 		$retVal.="\n}";
 		$retVal = $this->getSafeJsString($retVal);
 		
-		if(FILE_CACHE_FOLDER && FILE_CACHE_FOLDER!=''){	
+		if(FILE_CACHE_OK){	
 			$this->writeContentToFileCache($fileName,$retVal);
 		}
 				

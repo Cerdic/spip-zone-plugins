@@ -11,12 +11,12 @@ function chess_insert_head($flux)
 	
 	$selector = $metacfg['selector'];
 	$jsFile = generer_url_public('chess.js');
-	$cssFile = $metacfg['cssFile'];
+	$cssFile = generer_url_public($metacfg['cssFile'].'.css');
 	$imgPath = dirname(find_in_path($metacfg['imgPath']));
 
 	$incHead = <<<EOH
-<link rel="stylesheet" href="spip.php?page={$cssFile}.css" type="text/css" media="all" />
-<script src="{$jsFile}" type="text/javascript"></script>
+<!-- link rel="stylesheet" href="$cssFile" type="text/css" media="all" / -->
+<script src="$jsFile" type="text/javascript"></script>
 <script type="text/javascript">
 	if(!window.$)window.$ = function(e) { return document.getElementById(e); };
 	function showDetails(gameDetails){
@@ -87,10 +87,10 @@ EOH;
 }
 
 function chess_header_prive($flux) {
-    $flux .= "<link rel='stylesheet' type='text/css' href='spip.php?page=chess.css' />";
-	$flux .= "<script src='spip.php?page=chess.js' type='text/javascript'></script>" . "\n";
+//    $flux .= "<link rel='stylesheet' type='text/css' href='".generer_url_public('chess.css')."' />";
+	$flux .= "<script src='".generer_url_public('chess.js')."' type='text/javascript'></script>" . "\n";
     return $flux;
- 	}
+}
 
 	
 ?>

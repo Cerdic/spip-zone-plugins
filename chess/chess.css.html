@@ -6,22 +6,22 @@
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 /* Css rules for board with adjustables pixel squares */
-.ChessBoardInner[(#CONFIG{chess/taille})]{	/* The actual chess board div */
-	width:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px; /* largueur de 8 carreaux de taille variable */
-	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px; /* hauteur de 8 carreaux de taille variable */
+.ChessBoardInner[(#CONFIG{chess/taille,30})]{	/* The actual chess board div */
+	width:[(#EVAL{8 * [(#CONFIG{chess/taille,30})]})]px; /* largueur de 8 carreaux de taille variable */
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille,30})]})]px; /* hauteur de 8 carreaux de taille variable */
 	border:1px solid #000;
 	top:0px;
 }
 
-.ChessBoard[(#CONFIG{chess/taille})]{	/* Chess board for adjustables pixel squares - total size of board including labels around the board (A-H,1-8) */ 
-	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille})])})]px;
-	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+.ChessBoard[(#CONFIG{chess/taille,30})]{	/* Chess board for adjustables pixel squares - total size of board including labels around the board (A-H,1-8) */ 
+	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille,30})])})]px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille,30})])})]px;
 	padding:0px;
 
 }
-.ChessPiece[(#CONFIG{chess/taille})]{	/* adjustables pixel chess pieces */
-	width:[(#CONFIG{chess/taille})]px;
-	height:[(#CONFIG{chess/taille})]px;
+.ChessPiece[(#CONFIG{chess/taille,30})]{	/* adjustables pixel chess pieces */
+	width:[(#CONFIG{chess/taille,30})]px;
+	height:[(#CONFIG{chess/taille,30})]px;
 }
 
 .ChessBoardLabel{	/* Labels A-F, 1-8 around chess board */
@@ -44,7 +44,7 @@ a.ActiveInlineChessMove{	/* How to highlight active chess move in the inline lis
 
 
   #mainContainer{
-	width:[(#EVAL{330 + (8 * [(#CONFIG{chess/taille})])})]px;
+	width:[(#EVAL{[(#CONFIG{chess/coldroite,230})] + 33 + (8 * [(#CONFIG{chess/taille,30})])})]px;
 	border: 1px gray solid; 
 /*	background-color:#2f5e80; */	
  }
@@ -52,28 +52,28 @@ a.ActiveInlineChessMove{	/* How to highlight active chess move in the inline lis
 #boardContainer{
 	padding-left:4px;
 	padding-top:10px;
-	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille})])})]px;
+	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille,30})])})]px;
 	height:auto;
 	float:left;
 }
 
 #board {
-	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille})])})]px;
-	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille,30})])})]px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille,30})])})]px;
 	float:left;*/
 }
 
 #rightColumn{
-	width:290px;
-	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+	width:[(#CONFIG{chess/coldroite,230})]px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille,30})])})]px;
 	float:left;
 	position:relative;
 	margin-top:4px;
 }
 
 #gameListContainer{
-	width:290px;
-	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+	width:[(#CONFIG{chess/coldroite,230})]px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille,30})])})]px;
 	background-repeat:no-repeat;
 	padding-top:10px;
 	padding-left:2px;
@@ -133,8 +133,8 @@ a.ActiveInlineVariationChessMove{
 	clear:both;
 	font-size:0.9em;
 	font-style:italic;
-	width:290px;
-	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px;
+/*	width:[(#CONFIG{chess/coldroite,230})]px; */
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille,30})]})]px;
 	overflow:auto;
 	background-color:#FFF;
 	margin-top:10px;
@@ -145,7 +145,7 @@ a.ActiveInlineVariationChessMove{
 #divMoves a{
 	text-decoration:none;
 }
-a{
+#gameList a{
 	color:#363636;
 	text-decoration:underline;
 }
@@ -214,35 +214,37 @@ clear:left;
   margin-top:5px;
 	text-align:center;
 	clear:both;
-	font-size:[(#CONFIG{chess/taille|=={30}|?{'1.1','1.3'})]em;
+	font-size:[(#CONFIG{chess/taille,30}|=={30}|?{'1.1','1.3'})]em;
 	font-weight:bold;
-	height:[(#CONFIG{chess/taille|=={30}|?{'24','30'})]px;
+	height:[(#CONFIG{chess/taille,30}|=={30}|?{'24','30'})]px;
 	width:100%;
 	color:#00000;
 }
 
 #moveTab{
 	display:none;
+   	width:[(#CONFIG{chess/coldroite,230})]px;
 }
 #gameList{
   margin-top:10px;
-	width:290px;
-	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px;
+	width:[(#CONFIG{chess/coldroite,230})]px;
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille,30})]})]px;
 }
 #tabs{
-	width:290px;
+	width:[(#CONFIG{chess/coldroite,230})]px;
 	left:2px;
 	text-align:center;
 }
   #tabs div{
 	float:left; 
-	margin-left:5px;
+	margin:0 6px;
 	background-repeat:no-repeat;
-	width:80px; 
+/*	width:80px; */
 	height:15px;
 	font-size:0.8em;
 	text-align:left;
 	line-height:25px;
+    cursor:pointer;
 }
 #tabs div span{
 	font-weight:bold;
@@ -250,7 +252,7 @@ clear:left;
 }
 #scrollDivGames{
 	overflow: auto; 
-	width: 290px; 
+	width: [(#CONFIG{chess/coldroite,230})]px; 
 	height: auto;  /* hauteur auto pour essayer d'adapter la boite */
 	border-left: 1px gray solid; 
 	border-bottom: 1px gray solid;
@@ -265,8 +267,8 @@ clear:left;
 	display:none;
 }
  #divListOfPgns{	/* Box where the actual pgn links are located */
-	width: 290px; 
-	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px;
+	width: [(#CONFIG{chess/coldroite,230})]px; 
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille,30})]})]px;
 	background-color:#FFF;
 	margin-top:15px;
 } 
@@ -316,7 +318,7 @@ div.ChessMoveIndicator{
 	filter:alpha(opacity=50);
 }
 
-div.ChessBoardInner[(#CONFIG{chess/taille})]{
+div.ChessBoardInner[(#CONFIG{chess/taille,30})]{
 	border:1px solid #70472a;
 	border-left:1px solid #54351f;
 	border-bottom:1px solid #54351f;
@@ -339,7 +341,7 @@ div.ChessBoardInner[(#CONFIG{chess/taille})]{
 	overflow:scroll;
 	overflow-y:scroll;
 	overflow:-moz-scrollbars-vertical;
-	height:[(#EVAL{20 + 8 * [(#CONFIG{chess/taille})]})]px;
+	height:[(#EVAL{20 + 8 * [(#CONFIG{chess/taille,30})]})]px;
 }
 html>body div.widget_tableDiv {
 	overflow: hidden;

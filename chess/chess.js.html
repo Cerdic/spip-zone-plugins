@@ -2,10 +2,15 @@
  	
  	        Charger la librairie chess
  	
- 	]
- 	#CACHE{7*24*3600,cache-client}
- 	#HTTP_HEADER{'Content-Type: text/javascript'}
- 	
- 	[(#CHEMIN{js/chess.js}|spip_file_get_contents)]
-	[(#CHEMIN{js/ajax.js}|spip_file_get_contents)]
-	[(#CHEMIN{js/scroll-table.js}|spip_file_get_contents)]
+]
+#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+var chess_queryStringSeparator = '&';
+//var chess_cssPath = '#EVAL{_DIR_PLUGIN_CHESS}css/chess.css'; // 'plugins/chess/css/chess.css'
+var chess_cssPath = '[(#URL_PAGE{chess.css}|url_absolue|addslashes)]'; // 'plugins/chess/css/chess.css'
+var chess_imageFolder = '[(#EVAL{_DIR_PLUGIN_CHESS.'images/'}|url_absolue|addslashes)]'; //  'plugins/chess/images/'
+
+[(#CHEMIN{js/chess.js}|spip_file_get_contents)]
+[(#CHEMIN{js/ajax.js}|spip_file_get_contents)]
+[(#CHEMIN{js/scroll-table.js}|spip_file_get_contents)]

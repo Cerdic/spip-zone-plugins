@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_options_taille_petit' => 'Pequeño',
 'details_options_taille_moyen' => 'Medio',
 'details_options_taille_grand' => 'Grande',
+'details_options_coldroite' => 'Largeur de la colonne de droite (en pixels, 230 par d&eacute;faut) :',
 'details_options_habillage' => 'Habillage des pi&egrave;ces',
 'details_options_vitesse' => 'Vitesse de lecture automatique : un coup toutes les ',
 'details_options_vitsec' => 'secondes <strong>(Par d&eacute;faut : 0.1)</strong>',

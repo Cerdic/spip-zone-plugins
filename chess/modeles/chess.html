@@ -48,9 +48,9 @@
 	
 	<div id="rightColumn">
 		<div id="tabs">
-			<div id="tabDetails" onclick="showDetails()" class="tabInactive"><span><:chess:liste_details:></span></div>
-			<div id="tabGames" onclick="showGames()" class="tabActive"><span><:chess:liste_parties:></span></div>
-			<div id="tabPgns" onclick="showPgns()" class="tabInactive"><span><:chess:liste_fichiers_pgn:></span></div>
+			<div id="tabDetails" onclick="showDetails()" class="tabInactive noajax"><span><:chess:liste_details:></span></div>
+			<div id="tabGames" onclick="showGames()" class="tabActive noajax"><span><:chess:liste_parties:></span></div>
+			<div id="tabPgns" onclick="showPgns()" class="tabInactive noajax"><span><:chess:liste_fichiers_pgn:></span></div>
 			
 		</div>	
 		<div id="gameListContainer">
@@ -65,7 +65,7 @@
 						<tbody>
 <BOUCLE_documents(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{extension==pgn}>
 <tr>
-		<td><a href="#" onclick="chessObj.setPgn('../../[(#URL_DOCUMENT)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE)]</a></td>
+		<td><a href="#" onclick="chessObj.setPgn('[(#URL_DOCUMENT|realpath|addslashes)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td>
 							</tr>
 </BOUCLE_documents>
 </tbody>
@@ -108,18 +108,18 @@ stopAutoplayBeforeComments:[(#CONFIG{chess/arreter,true})],
 callbackOnSwitchPgn:'showGames',
 callbackOnGameLoaded:'showDetails',
 parentRef:'board',
-pgnFile:<BOUCLE_documentseul(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{0,1}{extension==pgn}>'../../[(#URL_DOCUMENT)]'</BOUCLE_documentseul>,
+pgnFile:<BOUCLE_documentseul(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{0,1}{extension==pgn}>'[(#URL_DOCUMENT|realpath|addslashes)]'</BOUCLE_documentseul>,
 chessSet:'[(#CONFIG{chess/pieces,alpha})]',
 squareSize:[(#CONFIG{chess/taille,30})],
-serverFile:'[(#CHEMIN{chess.php})]',
+serverFile:'[(#URL_PAGE{serveur_chess})]',
 elMovesInline:'divMoves',
 elPlayerNames:'players',
 elActiveMove:'activeMove',
 elGameAttributes:{ round:'details_round',white:'details_white',black:'details_black',event:'details_event',result:'details_result', WhiteElo:'details_white_elo', BlackElo:'details_black_elo',date:'details_date' } } );
 chessObj.__createDefaultPieces();
 chessObj.displayGameListInTable('gameListTable','view,white,black,result',{ jsObject:"chessObj",viewGameLink:'<:chess:parties_voir:>' });
-createScrollTable('gameListTable','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
-createScrollTable('listOfPgnFiles','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
+createScrollTable('gameListTable','[(#CONFIG{chess/coldroite,230})]','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
+createScrollTable('listOfPgnFiles','[(#CONFIG{chess/coldroite,230})]','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
 </script>
 <div id="debug"></div>
 <hr class="nettoyeur" />

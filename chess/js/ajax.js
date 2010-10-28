@@ -9,7 +9,7 @@ function sack(file) {
 
 	this.resetData = function() {
 		this.method = "POST";
-  		this.queryStringSeparator = "?";
+  		this.queryStringSeparator = chess_queryStringSeparator;
 		this.argumentSeparator = "&";
 		this.URLString = "";
 		this.encodeURIString = true;
