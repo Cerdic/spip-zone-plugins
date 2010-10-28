@@ -12,24 +12,22 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/autoriser');
 include_spip ('inc/navigation_modules');
 	
 function exec_voir_adherent(){
 		
-	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	$id_auteur= intval($_GET['id']);
+	if (!autoriser('configurer') OR !$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur")) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_auteur= intval($_GET['id']);
 		$indexation = $GLOBALS['association_metas']['indexation'];
-		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
-		while ($data = sql_fetch($query)) { 
-			$id_asso=$data['id_asso'];
-			$nom_famille=$data['nom_famille'];
-			$prenom=$data['prenom'];
-			$validite=$data['validite'];
-		}
+		$id_asso=$data['id_asso'];
+		$nom_famille=$data['nom_famille'];
+		$prenom=$data['prenom'];
+		$validite=$data['validite'];
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		//debut_page(_T(), "", "");
@@ -47,10 +45,9 @@ function exec_voir_adherent(){
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		 echo fin_boite_info(true);
 		
-		
 		 echo association_retour();
 
-		echo debut_droite("",true);
+		 echo debut_droite("",true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_historique_membre'));
 		
