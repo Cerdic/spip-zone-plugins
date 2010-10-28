@@ -9,13 +9,13 @@
 <div class="afficher[ afficher_(#ENV{nom})][ saisie_(#ENV{type_saisie})][ (#ENV{li_class})]">
 	[(#REM) S'il y a des enfants on inclut que la vue ]
 	[(#GET{enfants}|oui)
-		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env,sans_reponse=#GET{sans_reponse}}
 	]
 	[(#GET{enfants}|non|et{#ENV{type_saisie}|!={explication}})
 		[<strong>(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong>]
 		<div class="valeur">
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|oui)
-			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env,sans_reponse=#GET{sans_reponse}}
 		]
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
 			[(#ENV*{valeur}|sinon{#GET{sans_reponse}}|propre)]
@@ -29,11 +29,11 @@
 [(#GET{valeur_uniquement}|oui)
 	[(#REM) S'il y a des enfants on inclut que la vue ]
 	[(#GET{enfants}|oui)
-		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env,sans_reponse=#GET{sans_reponse}}
 	]
 	[(#GET{enfants}|non)
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|oui)
-			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env,sans_reponse=#GET{sans_reponse}}
 		]
 		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
 			[(#ENV*{valeur}|sinon{#GET{sans_reponse}}|propre)]
