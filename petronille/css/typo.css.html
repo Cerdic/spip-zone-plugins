@@ -14,6 +14,7 @@
 /* Valeurs par defaut :
 #SET{font-size,#CONFIG{petronille/typo/font-size}} [ font-size: (#GET{font-size});]
 #SET{line-height,#CONFIG{petronille/typo/line-height}} [ line-height: (#GET{line-height});]
+#SET{margin-bottom,#CONFIG{petronille/typo/margin-bottom}} [ margin-bottom: (#GET{margin-bottom});]
 #SET{text-indent,#CONFIG{petronille/typo/text-indent}} [ text-indent: (#GET{text-indent});]
 #SET{font-family,#CONFIG{petronille/typo/font-family}} [ font-family: (#GET{font-family});]
 #SET{background-color,#CONFIG{petronille/typo/background-color}} [ background-color : (#GET{background-color});]
@@ -21,13 +22,12 @@
 */
 
 html { font-size: 100%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { [(#REM)background: #fff; font: 1em/1.5em sans-serif; color: #666;
-]background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
+body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
 
 /* Titraille / Intertitres */
 h1,h2,h3,h4,h5,h6,
-.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0;[margin-bottom:  (#GET{line-height});] padding: 0; font-size: 100%; font-weight: normal; }
-hr { height: 1px; margin:[ (#GET{line-height})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
+.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0;[ margin-bottom: (#GET{margin-bottom});] padding: 0; font-size: 100%; font-weight: normal; }
+hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
 
 /*h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: .5em; }
 h2,.h2 { font-size: 2em; margin-bottom: .75em; }
@@ -95,14 +95,14 @@ address { font-style: italic; }
 
 pre,code,kbd,samp,var,tt,
 .spip_code,.spip_cadre { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
-pre { margin:[ (#GET{line-height}) ]0; white-space: pre; }
+pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
 kbd { background-color: #GET{color}; color: #GET{background-color}; }
 samp { font-weight: bold; }
 var { font-style: italic; }
 
 /* Paragraphes */
 p, .p, dl, dd, blockquote, address, pre, table, fieldset,
-div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: #GET{line-height}; }
+div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: #GET{margin-bottom}; }
 
 /* Liens */
 a {}

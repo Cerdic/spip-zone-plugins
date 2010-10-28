@@ -5,11 +5,11 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="_meta_casier" value="petronille/typo" />
 		<fieldset>
-			<legend>R&eacute;glage de la base typographique generale du site (typo.css)</legend>
+			<legend>R&eacute;glage de la base typographique g&eacute;n&eacute;rale du site (typo.css)</legend>
 			<p class="explication">Indiquez vos valeurs en CSS. Pour voir, affichez la page de test ?page=demo/typo ou mieux, ins&eacute;rez le mod&egrave;le &lt;typo|&gt; dans un de vos articles.</p>
 			<ul>
 				<li class="petronille_font-family[ (#ENV**{erreurs}|table_valeur{font-family}|oui)erreur]">
-					<label for="font-family">Famille typo</label>[
+					<label for="font-family">Police</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-family})</span>
 					]<input type="text" class="text" name="font-family" id="font-family" [ value="(#ENV{font-family}|sinon{sans-serif})"] />
 					<p class="explication">Exemple :  Verdana, Geneva, sans-serif</p>
@@ -20,9 +20,14 @@
 					]<input type="text" class="text" name="font-size" id="font-size" [ value="(#ENV{font-size}|sinon{1em})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_line-height[ (#ENV**{erreurs}|table_valeur{line-height}|oui)erreur]">
-					<label for="line-height">Interlignage</label>[
+					<label for="line-height">Interligne</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{line-height})</span>
 					]<input type="text" class="text" name="line-height" id="line-height" [ value="(#ENV{line-height}|sinon{1.5em})"] style="width: 6em;" />
+				</li>
+				<li class="petronille_margin-bottom[ (#ENV**{erreurs}|table_valeur{margin-bottom}|oui)erreur]">
+					<label for="margin-bottom">Paragraphes</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{margin-bottom})</span>
+					]<input type="text" class="text" name="margin-bottom" id="margin-bottom" [ value="(#ENV{margin-bottom}|sinon{[(#ENV{line-height})]})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_text-indent[ (#ENV**{erreurs}|table_valeur{text-indent}|oui)erreur]">
 					<label for="text-indent">Alin&eacute;a</label>[
