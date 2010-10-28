@@ -1,0 +1,30 @@
+#CACHE{0}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+<?php
+
+// File cache
+// This means that the script saves json details to files so that it doesn't have to convert pgn to json each time
+// define("FILE_CACHE_FOLDER","../../tmp/cache/1/");
+define('FILE_CACHE_FOLDER', sous_repertoire(_DIR_TMP, "chess"));
+// Leave empty if you don't want to enable file cache
+#define("FILE_CACHE_FOLDER","");
+
+include_spip('PgnParser.class');
+
+if(isset($_GET['pgnFile']) && isset($_GET['getGameList'])){	/* Return game list */
+	$pgnObj = new PGNParser($_GET['pgnFile']);
+	echo $pgnObj->getGameListAsJson();
+}	
+
+if(isset($_GET['pgnFile']) && isset($_GET['getGameDetails']) && isset($_GET['gameIndex'])){	/* Return game list */
+	$pgnObj = new PGNParser($_GET['pgnFile']);
+	echo $pgnObj->getGameDetailsAsJson($_GET['gameIndex'],$_GET['timestamp']);
+}
+
+if(isset($_GET['pgnFile']) && isset($_GET['getNumberOfGames'])){
+	$pgnObj = new PGNParser($_GET['pgnFile']);
+	echo $pgnObj->getNumberOfGames();
+}
+
+die();
+?>
