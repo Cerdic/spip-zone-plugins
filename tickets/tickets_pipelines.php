@@ -200,9 +200,12 @@ function tickets_affiche_milieu($flux){
 }
 
 /**
- * Insertion dans le pipeline formulaire_traiter pour les notifications de forums des tickets en 2.1
- * @param string $flux
- * @return string $flux
+ * Insertion dans le pipeline formulaire_traiter (SPIP)
+ * 
+ * pour les notifications de forums des tickets en 2.1
+ * 
+ * @param array $flux
+ * @return array $flux
  */
 function tickets_formulaire_traiter($flux){
 	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][3]=='ticket')) {
@@ -218,14 +221,26 @@ function tickets_formulaire_traiter($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline forum_objets_depuis_env (plugin forums balises/formulaire_forum.php)
+ * 
+ * Permet de récupérer l'id du ticket dans le formulaire de forum
+ * 
+ * @param array $objets
+ * @return array $objets
+ */
 function tickets_forum_objets_depuis_env($objets){
 	$objets['ticket'] = id_table_objet('ticket');
 	return $objets;
 }
 
 /**
- * Insertion dans le pipeline declarer_url_objets (ecrire/inc/urls)
+ * Insertion dans le pipeline declarer_url_objets (SPIP ecrire/inc/urls)
+ * 
+ * Ajoute les tickets comme objet pouvant avoir des urls spécifiques (propres...)
+ * 
  * @param array $flux Les objets ayant des urls
+ * @return array $flux
  */
 function tickets_declarer_url_objets($flux){
 	$flux[] = 'ticket';
