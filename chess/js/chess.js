@@ -806,6 +806,7 @@ DHTMLGoodies.Chess.prototype = {
      *  @param Array props - which properties to show, i.e. columns in the table. example ['view','white','black','result','event'], all properties except "view" are properties in the pgn file.
      *	@param Object viewProperties - view properties, this is an associative array and the only property so far is "viewGameLink" which is the label of the link which displays the game.
      *				example of this argument:  { viewGameLink:'View game' } 
+	 *  +Added : viewGameTitle // example of this argument:  { viewGameTitle:'View all the details' } 
      *
      * @public
      */		
@@ -865,7 +866,7 @@ DHTMLGoodies.Chess.prototype = {
 		for(var no2=0;no2<props.length;no2++){
 			for(var no2=0;no2<props.length;no2++){
 				if(props[no2]=='view'){
-					rowTemplate = rowTemplate + '<td><a href="#" id="game<ID>" onclick="D_chessObjects[' + ind + '].showGame(<ID>);return false"><PROPERTY_view></a></td>';
+					rowTemplate = rowTemplate + '<td><a href="#" id="game<ID>" onclick="D_chessObjects[' + ind + '].showGame(<ID>);return false" title="<PROPERTY_title>"><PROPERTY_view></a></td>';
 				}else{
 					rowTemplate = rowTemplate + '<td><PROPERTY_' + props[no2] + '></td>';
 				}				
@@ -880,6 +881,7 @@ DHTMLGoodies.Chess.prototype = {
 			thisRow = rowTemplate.replace(/<ID>/g,no);
 			thisRow = thisRow.replace(/<CLASSNAME>/g,currentRowClassName);
 			thisRow = thisRow.replace('<PROPERTY_view>',this.gameListProperties.viewGameLink);
+			thisRow = thisRow.replace('<PROPERTY_title>',this.gameListProperties.viewGameTitle);
 			for(var no2=0;no2<props.length;no2++){
 				thisRow = thisRow.replace('<PROPERTY_' + props[no2] + '>',gameList[no][props[no2]]);			
 				

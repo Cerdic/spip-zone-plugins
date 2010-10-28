@@ -63,7 +63,7 @@
 						</thead>
 						<tbody>
 <BOUCLE_documents(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{extension==pgn}{tout}>
-<tr class="[(#COMPTEUR_BOUCLE|alterner{GameListEvenRow,GameListOddRow})]"><td><a href="#" onclick="chessObj.setPgn('[(#URL_DOCUMENT|realpath|addslashes)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td></tr>
+<tr class="[(#COMPTEUR_BOUCLE|alterner{GameListEvenRow,GameListOddRow})]"><td><a href="#" title="<:chess:voir_parties:>" onclick="chessObj.setPgn('[(#URL_DOCUMENT|realpath|addslashes)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td></tr>
 </BOUCLE_documents>
 </tbody>
 					</table>
@@ -114,7 +114,7 @@ elPlayerNames:'players',
 elActiveMove:'activeMove',
 elGameAttributes:{ round:'details_round',white:'details_white',black:'details_black',event:'details_event',result:'details_result', WhiteElo:'details_white_elo', BlackElo:'details_black_elo',date:'details_date' } } );
 chessObj.__createDefaultPieces();
-chessObj.displayGameListInTable('gameListTable','view,white,black,result',{ jsObject:"chessObj",viewGameLink:'<:chess:parties_voir:>' });
+chessObj.displayGameListInTable('gameListTable','view,white,black,result',{ jsObject:"chessObj",viewGameLink:'<:chess:parties_voir:>',viewGameTitle:'<:chess:voir_details:>' });
 createScrollTable('gameListTable','[(#CONFIG{chess/coldroite,230})]','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
 createScrollTable('listOfPgnFiles','[(#CONFIG{chess/coldroite,230})]','[(#EVAL{20+ 8*[(#CONFIG{chess/taille,30})]})]');
 </script>
