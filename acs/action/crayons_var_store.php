@@ -16,6 +16,9 @@ function action_crayons_var_store_dist() {
   // Inclusion de l'action crayons_store du plugin crayons, comme librairie
   include_spip('action/crayons_store');
   include_spip('action/crayons_api');
+  // Inclusion de la definition de la vue d'une variable
+  include_spip('inc/acs_vars');
+  include_spip('inc/texte'); // pour fonction couper() utilisee dans acs_vars
   
 	lang_select($GLOBALS['auteur_session']['lang']);
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
@@ -46,14 +49,29 @@ function action_crayons_var_store_dist() {
 	if ($oldval != $GLOBALS['meta'][$var]) {
     echo api_crayons_var2js(array('$erreur' => _U('crayons:modifie_par_ailleurs')));
     exit;
+  }
+  $type = $_POST['type_'.$wid];
+  switch($type) {
+    case 'bord':
+    	$newColor = $_POST[$var.'Color_'.$wid];
+    	$newStyle = $_POST[$var.'Style_'.$wid];
+    	$newWidth = $_POST[$var.'Width_'.$wid];
+    	$newval = serialize(array('Color' => $newColor, 'Style' => $newStyle, 'Width' => $newWidth));
+    	break;
+    case 'key':
+    	$newGroup = $_POST[$var.'Group_'.$wid];
+    	$newKey = $_POST[$var.'Key_'.$wid];
+    	$newval = serialize(array('Group' => $newGroup, 'Key' => $newKey));
+    	break;
+    default:
+    	$newval = $_POST[$var.'_'.$wid];
   }	
-	$newval = $_POST[$var.'_'.$wid];
 	ecrire_meta($var, $newval);
 	ecrire_meta("acsDerniereModif", time()); // forcera un recalcul
 	acs_log('ACS action/crayons_var_store '.$var."=>".$newval);
 	// Retourne la vue - Return vue 
 	$return['$erreur'] = NULL;
-  $return[$wid] = $newval;
+  $return[$wid] = affiche_variable($type, $var);
 	echo api_crayons_var2js($return);
 	exit;
 }

@@ -1,13 +1,14 @@
 [(#REM)
 
-Boucle plan du site
+Boucle plan du site ou plan d'une rubrique
 
-]<BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre, titre}>
+]<BOUCLE_secteurs(RUBRIQUES) {id_rubrique ?} {par num titre, titre}>
 <div class="plan-secteur">
+  [(#ENV{masquer_titre_rubrique}!={oui}|?{' '})
   <h1>
     [<a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|right|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})</a>]
     [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="tsize">(#TITRE|supprimer_numero)</a>]
-  </h1>
+  </h1>]
   [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/articles/inc-bp-d}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
   [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/articles/inc-bp-n}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
   <B_rubriques>

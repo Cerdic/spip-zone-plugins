@@ -29,6 +29,19 @@
     <nom>Bord</nom>
     <type>bord</type>
   </variable> 
+
+	<variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+  	<nom>ShadowBlur</nom>
+    <type>nombre</type>
+  </variable>
   
   <variable>
     <nom>Nb</nom>

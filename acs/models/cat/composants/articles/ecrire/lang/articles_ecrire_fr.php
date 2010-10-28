@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  La fonction contrôle d\'accès limite l\'accès aux articles avec mot-clé 
 _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administrateurs.
 <br /><br />
- Les 3 derniers articles de la rubrique avec le mot-cl&eacute; "Communiques" s\'affichent à la Une avant la liste des derniers articles publi&eacute;s.',
+Sommaire ins&egrave;re un sommaire d\'article &agrave; partir des intertitres.',
 
 'Bord' => 'Bord sup&eacute;rieur',
 'MargeBas' => 'Marge inf&eacute;rieure',
@@ -20,6 +20,7 @@ _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administ
 
 'Dates' => 'Dates',
 'Aut' => 'Auteurs',
+'Sommaire' => 'Sommaire',
 'Stats' => 'Statistiques de visites',
 'Lock' => 'Contrôle d\'accès',
 

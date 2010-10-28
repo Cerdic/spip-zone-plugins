@@ -26,6 +26,14 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 .cArticle .texte, .cArticle .chapo {
   text-align: justify;
 }
+.cArticle .sommaire {
+  float:  #LANG_RIGHT;
+  margin: 5px;
+  border: #VAR{acsArticlesBord/Width,thin}[ (#VAR{acsArticlesBord/Style,dotted})][ (#VAR{acsArticlesBord/Color})];
+}
+.cArticle .titresommaire {
+  text-align: center;
+}
 .cArticle .stats {
   float: #LANG_RIGHT;
 }
@@ -68,6 +76,7 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 }
 .liste-articles .titre, .liste-articles .surtitre, .liste-articles .soustitre {
   padding-left: 5px;
+  padding-right: 5px;
   font-weight: bold;
 }
 

@@ -89,7 +89,7 @@ function lit_liste_composants($dirc, $tag=''){
 					if ($tag)
        			$lc[$f]['over'] = $tag;
       		foreach($instances as $nic) {
-      			$lc[$f]['instances'][$nic]['on'] = $GLOBALS['meta']['acs'.ucfirst($f).'Use'];
+      			$lc[$f]['instances'][$nic]['on'] = $GLOBALS['meta']['acs'.ucfirst($f).$nic.'Use'];
       		}
       	}
       	else {

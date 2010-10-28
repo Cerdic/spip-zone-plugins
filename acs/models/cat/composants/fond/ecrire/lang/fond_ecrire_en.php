@@ -33,6 +33,9 @@ Size for little navigation links set the size of pagination, notes, post-scriptu
 'NavSize' => 'Size for little navigation links',
 'BlocSize' => 'Size for blocks',
 
+'TitleSize' => 'Title size',
+'STSize' => 'Subtitle size',
+
 'Spacer' => 'Default space between blocks',
 
 'PoesieFont' => 'Font for &lt;poesie&gt;',

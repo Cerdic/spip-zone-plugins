@@ -33,6 +33,9 @@ La taille des petits liens de navigation s\'applique aux paginations, aux notes,
 'NavSize' => 'Taille des petits liens de navigation',
 'BlocSize' => 'Taille des blocs',
 
+'TitleSize' => 'Taille de titre',
+'STSize' => 'Taille de sous-titre',
+
 'Spacer' => 'Espace par d&eacute;faut entre les blocs',
 
 'PoesieFont' => 'Fonte &lt;poesie&gt;',

@@ -34,16 +34,12 @@ Boite de titre d'un forum : mise en couleur selon la profondeur du forum
 [ul ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond5});}]
 [ul ul ul ul ul ul .forum-chapo { background: (#VAR{acsForumsFond6});}]
 
-
-#ajax_cForums {
-  overflow : hidden;
-}
-
 .cForums {
   [border-width: (#VAR{acsForumsBord/Width});]
   [border-style: (#VAR{acsForumsBord/Style});]
   [border-color: (#VAR{acsForumsBord/Color});]
   [background: (#VAR{acsForumsFond});]
+  [(#MODELE{c_css_shadow}{c=Forums})]
 }
 .cForums .bloc-title {
   text-align : center;

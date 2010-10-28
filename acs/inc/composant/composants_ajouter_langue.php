@@ -7,7 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 require_once _DIR_ACS.'inc/composant/composants_liste.php';
-	
+
 /**
  * Inclut les fichiers de langue des composants actifs
  * Include components lang files
@@ -20,7 +20,6 @@ require_once _DIR_ACS.'inc/composant/composants_liste.php';
  * 
  * @params : $dir est soit vide soit egal a "ecrire"
  */
-
 function composants_ajouter_langue($dir='') {
   $idx = $GLOBALS['idx_lang'];
   $idx_tmp = $idx.'_tmp';
@@ -50,6 +49,7 @@ function composants_ajouter_langue($dir='') {
 
 /**
  * Ajoute un fichier de langue à la langue en cours
+ * @param $langfile
  */
 function acs_addLang($langfile) {
 	$current = $GLOBALS[$GLOBALS['idx_lang']];
@@ -61,6 +61,7 @@ function acs_addLang($langfile) {
 
 /**
  * Utiliser la langue fournie en parametre
+ * @ param $lang (fr, en, ...)
  */
 function acs_langue($lang) {
   // Lang file is build with components lang files

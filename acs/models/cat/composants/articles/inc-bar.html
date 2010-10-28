@@ -2,7 +2,8 @@
 [(#REM)
 
 Liste des articles de la rubrique id_rubrique, pour la langue en cours.
-Si les stats SPIP sont actives, les articles peuvent être classes par date ou par popularite
+Si les stats SPIP sont actives, les articles peuvent être classes par date ou par popularite.
+Affiche le plan de la rubrique si celle-ci ne contient aucun article.
 
 ]<B_articles>
 #ANCRE_PAGINATION
@@ -17,3 +18,5 @@ Si les stats SPIP sont actives, les articles peuvent être classes par date ou p
   </ul>
 </div>
 </B_articles>
+  <INCLURE{fond=composants/articles/boucle-plan}{env}{self}{id_rubrique}{masquer_titre_rubrique=oui}>
+<//B_articles>

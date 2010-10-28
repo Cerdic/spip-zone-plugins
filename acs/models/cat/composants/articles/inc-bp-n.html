@@ -7,8 +7,7 @@
 <INCLURE {fond=composants/forums/nbmessages}{id_article}{lang ?}>
 </span>]
 [(#MODE|!={forums}|?{' '})
-<span class="plan-article">[<img src="#ACS_CHEMIN{puces/}(#VAR{acsArticlesPuce})" alt="¤" />]
-<a href="#URL_ARTICLE[(#MODE|=={forums}|?{'&ouvrir=oui#forum'})]" [title="(#INTRODUCTION|textebrut|entites_html)"]>#TITRE</a>
+<span class="plan-article">[<img src="#ACS_CHEMIN{puces/}(#VAR{acsArticlesPuce})" alt="¤" />]&nbsp;<a href="#URL_ARTICLE[(#MODE|=={forums}|?{'&ouvrir=oui#forum'})]" [title="(#INTRODUCTION|textebrut|entites_html)"]>#TITRE</a>
 </span>]
 </BOUCLE_articles>
 </div>

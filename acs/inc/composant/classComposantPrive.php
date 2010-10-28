@@ -7,31 +7,35 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
- * Classe Composant
+ * Classe CEdit
  *
  * Chaque composant ACS peut définir une classe <MonComposant>
- * qui étend la classe Composant en définissant des méthodes de l'interface Icomposant
- * Ce sont des points d'entrée logiciels pour les objets de classe Composant,
+ * qui étend la classe CEdit en définissant des méthodes de l'interface ICEdit
+ * Ce sont des points d'entrée logiciels pour les objets de classe CEdit,
  * un peu comparables aux pipelines spip, mais en technologie objet
  */
 
-abstract class Composant implements Icomposant {
+abstract class CEdit implements ICEdit {
 }
 
-interface Icomposant {
-  public function afterUpdate();
+interface ICEdit {
+  public function update();
 }
 
 /**
  * Classe AdminComposant
  *
- * "Interface d'admin de composants pour ACS
+ * Interface d'admin de composants pour ACS
  */
-
 class AdminComposant {
-  // Constructeur
-  // Instancie (au besoin) un objet Composant à l'éxécution
-  // pour en adopter les méthodes implémentées.
+  /**
+   * Constructeur
+   * Instancie (au besoin) un objet CEdit à l'éxécution
+   * pour en adopter les méthodes implémentées.
+   * @param $class classe du composant
+   * @param $nic numero d'instance du composant
+   * @param $debug mode debug
+   */
   function __construct($class, $nic=0, $debug = false) {
     global $_POST;
     
@@ -216,20 +220,20 @@ class AdminComposant {
 			}
 		}
 		if (isset($updated)) {
-  	  if (isset($this->afterUpdate)) {
+  	  if (isset($this->update)) {
   			@include_once($this->rootDir.'/ecrire/'.$class.'.php');
-  			$cObj = 'acs'.ucfirst($class);
+  			$cObj = 'acs'.ucfirst($class).'Edit';
   			if(class_exists($cObj)) {
   				$$cObj = @new $cObj();
-  				if (($$cObj instanceof Composant) && is_callable(array($$cObj, 'afterUpdate'))) {
-  				  if (!$$cObj->afterUpdate())
-  						$this->errors[] = $cObj.'->afterUpdate '._T('acs:failed').' '.implode(' ', $$cObj->errors);
+  				if (($$cObj instanceof CEdit) && is_callable(array($$cObj, 'update'))) {
+  				  if (!$$cObj->update())
+  						$this->errors[] = $cObj.'->update '._T('acs:failed').' '.implode(' ', $$cObj->errors);
   				}
   				else
-  				  $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_callable');
+  				  $this->errors[] = $cObj.'->update '._T('acs:not_callable');
   			}
   				else
-  				  $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_found');
+  				  $this->errors[] = $cObj.'->update '._T('acs:not_found');
   	  }
   	  ecrire_meta("acsDerniereModif", time());
   	  ecrire_metas(); // SPIP ecrit en BDD
@@ -384,13 +388,6 @@ class AdminComposant {
 		$r .= '</td>';
 		$r .= '</tr></table>';
 		return $r;
-  }
-/**
- * Méthode page: retourne un tableau des pages qui utilisent ce composant
- */
-  function pages() {
-		include_once(_DIR_PLUGIN_ACS.'lib/cGetPages.php');
-		return cGetPages($this->class);
   }
 /**
  * Méthode nextInstance: retourne un numéro d'instance de composant inutilisé

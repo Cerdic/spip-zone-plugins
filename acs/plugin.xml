@@ -19,7 +19,7 @@
 			 - crayons 1.7 (&gt;38974) : &eacute;dition du contenu et du design depuis le site public.<br />
 			 - palette 1.3.1 (&gt;40258) : choix visuel des couleurs.<br />
 			 - en option :<br />
-			 		- notation 0.6.3 : publication par notation pour le mod&egrave;le Cat.<br />
+			 		- notation 0.7.1 : publication par notation pour le mod&egrave;le Cat.<br />
 			 		- recommander 0.2 : recommander un article &#224; un-e ami-e<br />
 			 <br />
 		 [en]
@@ -76,7 +76,7 @@
 	<utilise id='cfg' version='[1.12.3;]' />
 	<utilise id='crayons' version='[1.7;]' />
 	<utilise id='palette' version='[1.2;]' />
-	<utilise id='notation' version='[0.6.3;]' />
+	<utilise id='notation' version='[0.7.1;]' />
 	<utilise id='recommander' version='[0.2;]' />
 	<categorie>outil</categorie>
 </plugin>

@@ -7,8 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Blocks of last published articles or of last published articles in section(s) with selected keyword.',
 
 'Type' => 'Type',
-'TypeArticles' => _T('articles'),
-'TypeRubriques' => _T('rubriques'),
+'TypeArticles' => 'articles',
+'TypeRubriques' => 'sections',
 
 'SouligneRub' => 'underline section',
 'SouligneRubHeight' => 'Section underline height'

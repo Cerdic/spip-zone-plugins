@@ -6,10 +6,19 @@
 # Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+// Requis pour fonction typo() utilisee dans ctlKey() :
+include_spip('inc/texte');
+
 // Choix de couleur - Color choice
 function ctlColor($composant, $nic, $nom, $couleur, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'_'.$wid.'" size="16" value="'.$couleur.'"></td></tr></table></div>';
+  if (substr($couleur, 0, 4) == "=acs")
+  	$color = meta_recursive($GLOBALS['meta'], substr($couleur, 1));
+  	if (!$color)
+  		$color = meta_recursive($GLOBALS['meta'], substr($couleur, 1).'/Color'); // Cas des variables de type "Bord", par exemple
+  else
+ 		$color = meta_recursive($GLOBALS['meta'], $var);
+  return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'_'.$wid.'" size="16" value="'.$couleur.'" style="background: '.$color.'"></td></tr></table></div>';
 }
 
 // Choix d'image - Image choice

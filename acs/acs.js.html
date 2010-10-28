@@ -9,8 +9,15 @@
 
 [(#HEADER_COMPOSANTS{javascript})]
 
-[(#REM) Transforme une url spip pour "wrapper" un composant (requis pour Ajax)] 
-function wrapUrl(url, c) {
+[(#REM)
+/**
+ * @fn wrapUrl(url, c)
+ * @brief Transforme une url spip pour "wrapper" un composant (requis pour Ajax)
+ * @param url URL
+ * @param c composant
+ * @return URL
+ */
+]function wrapUrl(url, c) {
   url = url.replace(/\#[\w]*/, "");
   creg = '&c=' + c;
   url = url.replace(creg, "");

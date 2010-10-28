@@ -8,8 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info' => 'Colors 2 to 6 are for rubrics level 2 to 6 in sitemap
  <br /><br />
 Access control limit access to articles tagged with keyword _ide, _aut, or _adm to registered members, authors, and administrors.
-3 lasts articles published with keyword "Communiques" displays "A la Une" (Home) '.
-'before list of last published articles.',
+Summary embed a summary from subtitles.',
 
 'Bord' => 'Border top',
 'MargeBas' => 'Margin bottom',
@@ -18,6 +17,7 @@ Access control limit access to articles tagged with keyword _ide, _aut, or _adm 
 
 'Dates' => 'Dates',
 'Aut' => 'Authors',
+'Sommaire' => 'Summary',
 'Stats' => 'Visits',
 'Lock' => 'Access control',
 'Pagination' => 'Articles per page',

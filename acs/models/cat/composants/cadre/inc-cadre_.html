@@ -8,14 +8,14 @@ Copyright Daniel FAIVRE, 2007-2010
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#ENV{orientation,vertical}|=={horizontal}|?{" "}) #SET{orientation,style="float: #LANG_LEFT"}]
-#SET{use1,#VAR{#EVAL{acs(#ENV{c1}|ucfirst)Use}}}
-#SET{use2,#VAR{#EVAL{acs(#ENV{c2}|ucfirst)Use}}}
-#SET{use3,#VAR{#EVAL{acs(#ENV{c3}|ucfirst)Use}}}
-#SET{use4,#VAR{#EVAL{acs(#ENV{c4}|ucfirst)Use}}}
-#SET{use5,#VAR{#EVAL{acs(#ENV{c5}|ucfirst)Use}}}
-#SET{use6,#VAR{#EVAL{acs(#ENV{c6}|ucfirst)Use}}}
-#SET{use7,#VAR{#EVAL{acs(#ENV{c7}|ucfirst)Use}}}
-#SET{use8,#VAR{#EVAL{acs(#ENV{c8}|ucfirst)Use}}}
+#SET{use1,#VAR{#EVAL{acs(#ENV{c1}|ucfirst)(#ENV{n1})Use}}}
+#SET{use2,#VAR{#EVAL{acs(#ENV{c2}|ucfirst)(#ENV{n2})Use}}}
+#SET{use3,#VAR{#EVAL{acs(#ENV{c3}|ucfirst)(#ENV{n3})Use}}}
+#SET{use4,#VAR{#EVAL{acs(#ENV{c4}|ucfirst)(#ENV{n4})Use}}}
+#SET{use5,#VAR{#EVAL{acs(#ENV{c5}|ucfirst)(#ENV{n5})Use}}}
+#SET{use6,#VAR{#EVAL{acs(#ENV{c6}|ucfirst)(#ENV{n6)Use}}}
+#SET{use7,#VAR{#EVAL{acs(#ENV{c7}|ucfirst)(#ENV{n7})Use}}}
+#SET{use8,#VAR{#EVAL{acs(#ENV{c8}|ucfirst)(#ENV{n8})Use}}}
 [(#GET{use1}|=={oui}|?{' '})[(#SET{c11,composants/[(#ENV{c1})]/[(#ENV{c1})]})]<div id="#ENV{v1}" class="cadre-composant[ (#ENV{v1})style]"[ (#GET{orientation})]><INCLURE{fond=#GET{c11}} {env} {self} {lang} {nic=#ENV{n1}}></div>]
 [(#GET{use2}|=={oui}|?{' '})[(#SET{c12,composants/[(#ENV{c2})]/[(#ENV{c2})]})]<div id="#ENV{v2}" class="cadre-composant[ (#ENV{v2})style]"[ (#GET{orientation})]><INCLURE{fond=#GET{c12}} {env} {self} {lang} {nic=#ENV{n2}}></div>]
 [(#GET{use3}|=={oui}|?{' '})[(#SET{c13,composants/[(#ENV{c3})]/[(#ENV{c3})]})]<div id="#ENV{v3}" class="cadre-composant[ (#ENV{v3})style]"[ (#GET{orientation})]><INCLURE{fond=#GET{c13}} {env} {self} {lang} {nic=#ENV{n3}}></div>]

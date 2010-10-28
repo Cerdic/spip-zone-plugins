@@ -1,6 +1,7 @@
 [(#REM)
 Les articles de la rubrique id_rubrique dont la note dépasse la note seuil de publication,
-par popularité ou par date (choix du visiteur), sans doublons, pour la langue en cours
+par popularité ou par date (choix du visiteur), sans doublons, pour la langue en cours.
+Affiche le plan de la rubrique si celle-ci ne contient aucun article.
 
 ]<B_articles>
 #ANCRE_PAGINATION
@@ -15,3 +16,5 @@ par popularité ou par date (choix du visiteur), sans doublons, pour la langue e
   </ul>
 </div>
 </B_articles>
+  <INCLURE{fond=composants/articles/boucle-plan}{env}{self}{id_rubrique}{masquer_titre_rubrique=oui}>
+<//B_articles>

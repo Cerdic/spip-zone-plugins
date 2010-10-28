@@ -23,11 +23,8 @@ function acs_page_get_all_variables() {
   $cv = composants_variables();
 
   $r .= '<table frame="void" rules="cols" cellpadding="2" cellspacing="0" style="width: 100%; border: '.$GLOBALS['couleur_claire'].' 0 groove;">';
-  $r .= '<tr style="text-align: center; border-bottom: '.$GLOBALS['couleur_claire'].' thin groove;"><th class="verdana1"><b>'._T('nom')."</b></th>\n<th class='verdana1'><b>"._T('acs:valeur')."</b></th>\n</tr>\n";
+  $r .= '<tr style="text-align: center; border-bottom: '.$GLOBALS['couleur_claire'].' thin groove;"><th class="verdana1"><b>'._T('acs:variable')."</b></th>\n<th class='verdana1'><b>"._T('acs:valeur')."</b></th>\n</tr>\n";
   foreach($cv as $c=>$p) {
-		foreach($p['vars'] as $var=>$vp) {
-			$r .= affiche_composant_variables($c, $var, false, $vp);
-		}
   	foreach(composant_instances($c) as $nic) {
   		foreach($p['vars'] as $var=>$vp) {
 				$r .= affiche_composant_variables($c, $var, $nic, $vp);
@@ -54,17 +51,43 @@ function affiche_composant_variables($c, $v, $nic, $vp) {
     $after = '';
   }
   $varname = 'acs'.ucfirst($c).$nic.$v; 
-	if ($vp['type'] == 'bord')
-		$v2 = array($varname.'Color', $varname.'Width', $varname.'Style');
-	else 
-		$v2 = array($varname);
 	$r = '<td class="verdana2"><a href="?exec=acs&onglet=composants&composant='.$c.($nic ? '&nic='.$nic : '').'" class="nompage">'.
       $before.'<span style="color:#8d8d8f">acs'.ucfirst($c).$nic.'</span>'.$v.$after.'</a></td>'.
-      '<td class="crayon var-'.$c.'_'.$v.'-'.($nic ? $nic : 0).' type_pinceau crayon_'.$c.$v.' arial2">';
-  foreach($v2 as $vn) {
-		$r .= (isset($GLOBALS['meta'][$vn]) ? couper(htmlspecialchars($GLOBALS['meta'][$vn]), 150).' ' : '<span style="color:darkviolet">'._T('acs:undefined').'</span> ');
-  }
-  $r .= '</td>';
+      '<td class="crayon var-'.$c.'_'.$v.'-'.($nic ? $nic : 0).' type_pinceau crayon_'.$c.$v.' arial2">'.
+			affiche_variable($vp['type'], $varname).
+  		'</td>';
   return '<tr style="background: '.$bgcolor.'; vertical-align: top;">'.$r.'</tr>';
+}
+
+/**
+ * Affiche une vue de la variable
+ * @param $varname
+ */
+function affiche_variable($type, $varname) {
+  if (isset($GLOBALS['meta'][$varname])) {
+  	$var = $GLOBALS['meta'][$varname];
+  	if (is_array(unserialize($var))) {
+  		foreach(unserialize($var) as $svn => $svv) {
+  			$r .= affiche_variable_2($svv, $type);
+  		}
+  	}
+  	else
+  		$r .= affiche_variable_2($var, $type);
+  }
+  else
+  	$r .= '<span style="color:darkviolet">'._T('acs:undefined').'</span> ';
+  return $r;
+}
+
+function affiche_variable_2($v, $type) {
+	if ($type == "color") {
+		if (substr($v, 0, 4) == "=acs")
+			$color = meta_recursive($GLOBALS['meta'], substr($v,1));
+		else
+			$color = $v;
+		$r = '<div class="acsColorBlock" style="background:'.$color.'"></div>';
+	}
+	$r = couper(htmlspecialchars($v), 150).' '.$r;
+	return $r;
 }
 ?>

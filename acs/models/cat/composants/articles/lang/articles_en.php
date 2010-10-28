@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'classes_par_popularite' => 'ordered by <u>popularity</u>',
 'classes_par_note_ponderee' => 'ordered by <u>votes</u>',
 'lire_la_suite' => 'read after',
-'derniers_communiques' => 'Breaking news',
 'derniers_textes' => 'Last texts published',
 'redige' => 'written',
 'publie' => 'published',
 'maj' => 'updated',
 'table' => 'Table',
+'sommaire' => 'Summary',
 
 'aucun_article_note' => 'No article rated'
 

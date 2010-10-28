@@ -209,16 +209,6 @@ fieldset.apercu {
 .btc_4 {
   background: #f8fff2;
 }
-
-.ctlWidget_droppable_active {
-  outline: thin dashed #dfdfdf;
-}
-.ctlWidget_droppable_over {
-  outline: 2px dotted blue;
-}
-.ctlWidget_droppable_drop {
-  outline: 2px dotted red;
-}
 .nompage {
   color: black;
 }
@@ -343,9 +333,22 @@ fieldset.apercu {
   height: 24px;
   text-align: center;
   border: 1px inset #GET{foncee};
-  -moz-border-radius: 12px;
   background: #f0f0f8;
 }
+.ctlWidget, .c_config .ctlWidget_droppable_active, .c_config .ctlWidget_droppable_over, .c_config .ctlWidget_droppable_drop {
+  -moz-border-radius: 12px;
+  -moz-outline-radius: 12px;
+}
+.ctlWidget_droppable_active {
+  outline: thin dashed #dfdfdf;
+}
+.ctlWidget_droppable_over {
+  outline: thin dotted blue;
+}
+.ctlWidget_droppable_drop {
+  outline: thin dotted red;
+}
+
 .select_widget {
   position:absolute;
   width: 160px;
@@ -458,6 +461,13 @@ img.bouton_edit_composant:hover {
   z-index: 99999999;
   border : [(#GET{foncee})] 0px solid;
   -moz-border-radius: 0;
+}
+.acsColorBlock {
+  float: right;
+  border:thin solid #000;
+  height:10px;
+  width:10px;
+  margin: 1px;
 }
 [(#REM) Position de l'image signalant un chargement en ajax 
 ].image_loading {

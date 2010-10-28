@@ -30,11 +30,12 @@ function init_controleur_composant() {
     function(i, btn) {
       btn.onclick = function(e) {
         e.preventDefault();
-        jQuery(btn).parents().find(".acs_box_composants_hidden:first")
-          .css("top", "-15px")
-          .css("left", "-203px")
+        var editeur = jQuery(btn).parents(".editeur_composant");
+        editeur.find(".acs_box_composants_hidden")
+          .css("top", e.pageY - editeur.offset().top)
+          .css("left", e.pageX - editeur.offset().left)
           .css("z-index", 99999002)
-          .css("display", ((jQuery(".acs_box_composants_hidden:eq(0)").css("display") == "none") ? "block" : "none"));
+          .css("display", ((editeur.find(".acs_box_composants_hidden").css("display") == "none") ? "block" : "none"));
         return false;
       };
     }

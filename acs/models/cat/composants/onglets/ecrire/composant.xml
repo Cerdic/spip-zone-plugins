@@ -8,10 +8,10 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>70</valeur>
+    <valeur>80</valeur>
   </param>
   <param>
-    <nom>afterUpdate</nom>
+    <nom>update</nom>
   </param>
 
   <variable>

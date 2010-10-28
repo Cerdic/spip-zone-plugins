@@ -4,13 +4,12 @@
  * ACS
  * Copyright Daniel FAIVRE 2008-2010 - Copyleft licence GPL
  *
- * Implémentation d'une classe acsOnglets qui étend Composant,
- * avec sa méthode afterUpdate() pour personnaliser
+ * La classe acsOngletsEdit étend CEdit,
+ * et implémente sa méthode update() pour personnaliser
  * les images d'onglets "portes coulissantes CSS".
  */
-
-class acsOnglets extends Composant {
-  function afterUpdate() {
+class acsOngletsEdit extends CEdit {
+  function update() {
   $bc = metacol('acsOngletsBordColor');
   $ac = metacol('acsOngletsFondColor');
   $ic = metacol('acsOngletsCouleurInactif');

@@ -7,10 +7,10 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
- * Page acs_onload
+ * @file acs_onload.php
+ * appellé depuis acs_options.php dans TOUS les cas
+ * acs_options est le premier fichier du plugin chargé, avant même autoriser.php de la dist
  */
-// appellé depuis acs_options.php dans TOUS les cas
-// acs_options est le premier fichier du plugin chargé, avant même autoriser.php de la dist
 
 // Dossier des paramètres et images utilisateur
 // User images and parameters

@@ -1,3 +1,17 @@
-Règle "contrôle strict" : « nul ne peut intervenir sur les fichiers de cette branche sans avoir au préalable envoyé un patch au format diff -pu aux responsables de la branche, et reçu de l'un d'eux un "OK" formel. »
+Règle "contrôle strict" : « nul ne peut intervenir sur les fichiers de cette branche
+sans avoir au préalable envoyé un patch au format diff -pu aux responsables de la branche,
+et reçu de l'un d'eux un "OK" formel. »
 
 Des règles particulières existent pour les créateurs de nouveaux modèles ACS: voir /models/_REGLES_DE_COMMIT.txt dans le dossier /models/
+
+----------------------------------------------------------------------------------------------------------------
+Conventions de presentation du code source :
+
+- tabulations egales à deux espaces
+
+- commentaires multilingues pour Doxygen :
+		\~english
+		English comment
+		\~french
+		Commentaire français
+
