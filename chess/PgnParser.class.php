@@ -26,8 +26,6 @@ Owner of DHTMLgoodies.com
 
 ************************************************************************************************************/	
 
-require_once("ChessConfig.php");
-
 define('FILE_CACHE_OK', defined('FILE_CACHE_FOLDER') && FILE_CACHE_FOLDER!='');
 
 class PgnParser
@@ -51,7 +49,8 @@ class PgnParser
 	function getPgnNameWithoutExtension()
 	{
 		$ret = "";
-		return preg_replace("/[\/\.]/s","",basename($this->pgnFile));
+		// return preg_replace("/[\/\.]/s","",$this->pgnFile);
+		return md5(dirname($this->pgnFile)).'_'.basename($this->pgnFile);
 	}
 	
 	/* Specify pgn file */
@@ -325,7 +324,7 @@ class PgnParser
 	function getGameListAsJson()
 	{
 		if(FILE_CACHE_OK){
-			$fileName = FILE_CACHE_FOLDER."/gameList".$this->getPgnNameWithoutExtension().".cache";
+			$fileName = FILE_CACHE_FOLDER."/gameList_".$this->getPgnNameWithoutExtension().".json";
 			if(file_exists($fileName) && $this->__getPgnTimestamp()<$this->__getFiletimestamp($fileName)){
 				$this->outputFileFromCache($fileName);
 				exit;
@@ -367,7 +366,7 @@ class PgnParser
 		if(FILE_CACHE_OK){
 			$params = implode("_",$props);
 			$params.=$objName;
-			$fileName = FILE_CACHE_FOLDER."/phpgametable".$this->getPgnNameWithoutExtension().$params.".cache";
+			$fileName = FILE_CACHE_FOLDER."/phpgametable_".$this->getPgnNameWithoutExtension().$params.".json";
 			if(file_exists($fileName) && $this->__getPgnTimestamp()<$this->__getFiletimestamp($fileName)){
 				$this->outputFileFromCache($fileName);
 				return;
@@ -425,7 +424,7 @@ class PgnParser
 	function getNumberOfGames()
 	{		
 		if(FILE_CACHE_OK){
-			$fileName = FILE_CACHE_FOLDER."/pgnNumberOfGames".$this->getPgnNameWithoutExtension().".cache";
+			$fileName = FILE_CACHE_FOLDER."/pgnNumberOfGames_".$this->getPgnNameWithoutExtension().".json";
 			if(file_exists($fileName)){
 				$this->outputFileFromCache($fileName);
 				exit;
@@ -467,7 +466,7 @@ class PgnParser
 			exit;
 		}
 		if(FILE_CACHE_OK){
-			$fileName = FILE_CACHE_FOLDER."/gameDetails".$this->getPgnNameWithoutExtension()."_gameIndex$gameIndex.cache";
+			$fileName = FILE_CACHE_FOLDER."/gameDetails_".$this->getPgnNameWithoutExtension()."_gameIndex$gameIndex.json";
 			if(file_exists($fileName) && $this->__getPgnTimestamp()<$this->__getFiletimestamp($fileName)){
 				$this->outputFileFromCache($fileName);
 				exit;
