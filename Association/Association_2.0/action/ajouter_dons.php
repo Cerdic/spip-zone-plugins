@@ -25,16 +25,23 @@ function action_ajouter_dons() {
 	$valeur = _request('valeur');
 	$contrepartie = _request('contrepartie');
 	$commentaire = _request('commentaire');
-	don_insert($id_adherent, $argent, $valeur, $journal, $contrepartie, $date_don, $bienfaiteur, $colis, $commentaire);
+
+	don_insert($id_adherent, $date_don, $argent, $bienfaiteur, $valeur, $journal, $contrepartie, $colis, $commentaire);
 }
 
 // il faudrait retrouver id par bienfaiteur et reciproquement
 
-function don_insert($id_adherent, $argent, $valeur, $journal, $contrepartie, $date_don, $bienfaiteur='', $colis='', $commentaire='')
+function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='', $journal='', $contrepartie='', $colis='', $commentaire='')
 {
 	include_spip('base/association');		
+	$id_adherent = intval($id_adherent);
+	if (!$bienfaiteur AND $id_adherent)
+	  $bienfaiteur = sql_getfetsel('nom_famille', _ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_adherent");
+	
+	if (!$valeur) $valeur = $argent;
+	$date = $date_don ? $date_don : date("Y-m-d");
 	$id_don = sql_insertq('spip_asso_dons', array(
-					    'date_don' => $date_don,
+					    'date_don' => $date,
 					    'bienfaiteur' => $bienfaiteur,
 					    'id_adherent' => $id_adherent,
 					    'argent' => $argent,
@@ -42,12 +49,12 @@ function don_insert($id_adherent, $argent, $valeur, $journal, $contrepartie, $da
 					    'valeur' => $valeur,
 					    'contrepartie' => $contrepartie,
 					    'commentaire' => $commentaire));
-
+	$qui = $id_adherent ?  "- [$bienfaiteur" . "->membre$id_adherent]" : '';
 	sql_insertq('spip_asso_comptes', array(
-		    'date' => $date_don,
+		    'date' => $date,
 		    'imputation' => $GLOBALS['association_metas']['pc_dons'],
 		    'recette' => $argent,
 		    'journal' => $journal,
-		    'justification' => "[->don$id_don] - [$bienfaiteur" . "->membre$id_adherent]"));
+		    'justification' => "[->don$id_don]$qui"));
 }
 ?>

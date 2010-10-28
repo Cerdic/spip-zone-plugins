@@ -16,7 +16,7 @@ function action_supprimer_dons() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_don= $securiser_action();
 
-	sql_delete('spip_asso_comptes', "id_journal=$id_don AND imputation=".$GLOBALS['association_metas']['pc_dons']);  
+	sql_delete('spip_asso_comptes', "id_journal=$id_don AND imputation=".sql_quote($GLOBALS['association_metas']['pc_dons']));  
 	sql_delete('spip_asso_dons', "id_don=$id_don");
 }
 
