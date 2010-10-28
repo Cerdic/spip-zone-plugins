@@ -224,11 +224,12 @@ clear:left;
 #moveTab{
 	display:none;
    	width:[(#CONFIG{chess/coldroite,230})]px;
+    margin-top:15px;
 }
 #gameList{
-  margin-top:10px;
 	width:[(#CONFIG{chess/coldroite,230})]px;
 	height:[(#EVAL{8 * [(#CONFIG{chess/taille,30})]})]px;
+	margin-top:15px;
 }
 #tabs{
 	width:[(#CONFIG{chess/coldroite,230})]px;
@@ -237,18 +238,21 @@ clear:left;
 }
   #tabs div{
 	float:left; 
-	margin:0 6px;
+	margin-left:6px;
 	background-repeat:no-repeat;
 /*	width:80px; */
 	height:15px;
 	font-size:0.8em;
 	text-align:left;
 	line-height:25px;
-    cursor:pointer;
 }
-#tabs div span{
+.tabInactive span{
+    cursor:pointer;
+	font-weight:normal;
+    text-decoration:underline;
+}
+.tabActive span {
 	font-weight:bold;
-	display:block;
 }
 #scrollDivGames{
 	overflow: auto; 

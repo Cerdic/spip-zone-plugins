@@ -6,6 +6,9 @@
 #CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
 
+#SET{selector,#contenu .texte}
+#SET{imgPath,images/wk.png}
+
 var chess_queryStringSeparator = '&';
 //var chess_cssPath = '#EVAL{_DIR_PLUGIN_CHESS}css/chess.css'; // 'plugins/chess/css/chess.css'
 var chess_cssPath = '[(#URL_PAGE{chess.css}|url_absolue|addslashes)]'; // 'plugins/chess/css/chess.css'
@@ -14,3 +17,59 @@ var chess_imageFolder = '[(#EVAL{_DIR_PLUGIN_CHESS.'images/'}|url_absolue|addsla
 [(#CHEMIN{js/chess.js}|spip_file_get_contents)]
 [(#CHEMIN{js/ajax.js}|spip_file_get_contents)]
 [(#CHEMIN{js/scroll-table.js}|spip_file_get_contents)]
+
+if(!window.$)window.$ = function(e) { return document.getElementById(e); };
+
+function showDetails(gameDetails) {
+    // when called from callback event, gameDetails will contain information about the game.
+    document.getElementById('moveTab').style.display='block';
+    document.getElementById('gameList').style.display='none';
+    document.getElementById('pgnList').style.display='none';
+    document.getElementById('tabDetails').className = 'tabActive';
+    document.getElementById('tabGames').className = 'tabInactive';
+    document.getElementById('tabPgns').className = 'tabInactive';
+}
+
+function showGames() {
+    document.getElementById('moveTab').style.display='none';
+    document.getElementById('pgnList').style.display='none';
+    document.getElementById('gameList').style.display='block';
+    document.getElementById('tabGames').className = 'tabActive';
+    document.getElementById('tabDetails').className = 'tabInactive';		
+    document.getElementById('tabPgns').className = 'tabInactive';
+}
+
+function showPgns() {
+    document.getElementById('moveTab').style.display='none';
+    document.getElementById('gameList').style.display='none';
+    document.getElementById('pgnList').style.display='block';
+    document.getElementById('tabGames').className = 'tabInactive';
+    document.getElementById('tabDetails').className = 'tabInactive';		
+    document.getElementById('tabPgns').className = 'tabActive';		
+}
+
+function guessedWrongMove() {	
+    alert('sorry - that move was wrong');
+}
+
+function correctMove() {    
+}
+
+$(document).ready(function(){
+    $("#mainContainer").dblclick(function(){
+    	return false;
+    });
+});
+
+document.onkeyup = KeyCheck;
+function KeyCheck(e){
+    var keyID = (window.event) ? event.keyCode : e.keyCode;
+    switch(keyID){
+        case 37:
+            chessObj.move(-1);
+            break;
+        case 39:
+            chessObj.move(1);
+            break;
+    }
+};

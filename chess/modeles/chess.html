@@ -47,9 +47,9 @@
 	
 	<div id="rightColumn">
 		<div id="tabs">
-			<div id="tabDetails" onclick="showDetails()" class="tabInactive noajax"><span><:chess:liste_details:></span></div>
-			<div id="tabGames" onclick="showGames()" class="tabActive noajax"><span><:chess:liste_parties:></span></div>
-			<div id="tabPgns" onclick="showPgns()" class="tabInactive noajax"><span><:chess:liste_fichiers_pgn:></span></div>
+			<div id="tabPgns" onclick="showPgns()" class="tabInactive"><span><:info_documents:></span></div>
+<div>&gt;</div>			<div id="tabGames" onclick="showGames()" class="tabActive"><span><:chess:liste_parties:></span></div>
+<div>&gt;</div>			<div id="tabDetails" onclick="showDetails()" class="tabInactive"><span><:chess:liste_details:></span></div>
 			
 		</div>	
 		<div id="gameListContainer">
@@ -63,9 +63,7 @@
 						</thead>
 						<tbody>
 <BOUCLE_documents(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{extension==pgn}{tout}>
-<tr>
-		<td><a href="#" onclick="chessObj.setPgn('[(#URL_DOCUMENT|realpath|addslashes)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td>
-							</tr>
+<tr class="[(#COMPTEUR_BOUCLE|alterner{GameListEvenRow,GameListOddRow})]"><td><a href="#" onclick="chessObj.setPgn('[(#URL_DOCUMENT|realpath|addslashes)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td></tr>
 </BOUCLE_documents>
 </tbody>
 					</table>
