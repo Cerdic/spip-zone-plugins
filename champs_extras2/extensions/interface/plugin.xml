@@ -36,7 +36,7 @@
 	</onglet>
 	
 	<bouton id='iextras' parent='bando_configuration'>
-		<icone>images/iextras-24.png</icone>
+		<icone>images/iextras-16.png</icone>
 		<titre>iextras:champs_extras</titre>
 	</bouton>
 	<categorie>outil</categorie>
