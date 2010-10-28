@@ -62,7 +62,7 @@
 							</tr>
 						</thead>
 						<tbody>
-<BOUCLE_documents(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{extension==pgn}>
+<BOUCLE_documents(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{extension==pgn}{tout}>
 <tr>
 		<td><a href="#" onclick="chessObj.setPgn('[(#URL_DOCUMENT|realpath|addslashes)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td>
 							</tr>
@@ -107,7 +107,7 @@ stopAutoplayBeforeComments:[(#CONFIG{chess/arreter,true})],
 callbackOnSwitchPgn:'showGames',
 callbackOnGameLoaded:'showDetails',
 parentRef:'board',
-pgnFile:<BOUCLE_documentseul(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{0,1}{extension==pgn}>'[(#URL_DOCUMENT|realpath|addslashes)]'</BOUCLE_documentseul>,
+pgnFile:<BOUCLE_documentseul(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{0,1}{extension==pgn}{tout}>'[(#URL_DOCUMENT|realpath|addslashes)]'</BOUCLE_documentseul>,
 chessSet:'[(#CONFIG{chess/pieces,alpha})]',
 squareSize:[(#CONFIG{chess/taille,30})],
 serverFile:'[(#URL_PAGE{serveur_chess})]',
