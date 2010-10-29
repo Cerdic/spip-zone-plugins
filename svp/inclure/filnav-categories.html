@@ -16,7 +16,7 @@
 ]
 [[<h2 class="h2">(#ENV{titre})</h2>]
 <ul class="menu-liste">
-(#SVP_CATEGORIES|foreach{
+(#SVP_CATEGORIES|iterer_modele{
 	filnav-item-categorie, 
 	url_lien=#ENV{url_lien}, 
 	bulle_lien=#ENV{bulle_lien},

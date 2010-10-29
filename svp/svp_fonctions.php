@@ -207,7 +207,8 @@ function svp_traduire_type_depot($type) {
 // Surcharge du filtre foreach pour qu'il passe des parametres au modele
 // Pour l'instant ces parametres sont passes sous la forme Vi=Ei
 // mais peut-etre qu'un tableau serait plus approprie ???
-function filtre_foreach($balise_deserializee, $modele ='foreach') {
+// Le foreach est toutefois renomme
+function filtre_iterer_modele($balise_deserializee, $modele ='foreach') {
 		
 	$parametres = func_get_args();
 	unset($parametres[0], $parametres[1]);

@@ -30,7 +30,7 @@
 <p><:svp:info_stats_categories{nb_categories=#GET{compteur}}:></p>
 <p><:svp:info_stats_plugins:></p>
 [<ul>
-(#SVP_CATEGORIES|foreach{
+(#SVP_CATEGORIES|iterer_modele{
 	statistiques-categorie, 
 	id_depot=#ENV{id_depot}})
 </ul>]
