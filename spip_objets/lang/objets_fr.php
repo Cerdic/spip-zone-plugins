@@ -54,8 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// T
 	'texte_nouvelle_actu' => 'Pas de titre',
-	'titre_liste'=>'Actualit&eacute;s associ&eacute;es',
+	'titre_liste'=>'Liste des objets associ&eacute;s : ',
 	'titre_actu_refusee'=>'Actualit&eacute;s refus&eacute;e',
+	'titre_logo'=>'Logo',
   //texte_objets_configuration
   //titre_page_objet_edit
   'texte_nouvel_objet'=>'Saisissez votre '

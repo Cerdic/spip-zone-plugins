@@ -24,7 +24,6 @@ function objets_declarer_tables_interfaces($interface){
 			
 			$interface['tables_jointures']['spip_'.$objet][]= $objet.'_liens';
 			
-			$table_des_tables[$objet]=$objet;
 		}
 	}
 	
@@ -47,6 +46,7 @@ function objets_declarer_tables_principales($tables_principales){
 				"id_".$nom_objet	=> "bigint(21) NOT NULL",
 				"titre"	=> "text DEFAULT '' NOT NULL",
 				"statut"	=> "VARCHAR(10) DEFAULT 'prepa' NOT NULL",
+				"id_secteur"	=> "bigint(21) NOT NULL",
 				"maj"	=> "TIMESTAMP"
 				);
 		
@@ -80,7 +80,7 @@ function objets_declarer_tables_auxiliaires($tables_auxiliaires){
 			"id_".$nom_objet	=> "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
 			"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
-			"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
+			"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL"); //le vu je ne sais pas a quoi il sert ... 
 	
 			$spip_objets_liens_key = array(
 					"PRIMARY KEY"		=> "id_".$nom_objet.",id_objet,objet",

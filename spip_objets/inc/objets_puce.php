@@ -4,10 +4,9 @@
 function objets_puce_statut($id_objet, $statut, $id_rubrique, $objet, $ajax='') {
   global $lang_objet;
   static $coord = array('publie' => 1,
-            'prop' => 0,
-  					'prepa' => 0,	
-            'refuse' => 2,
-            'poubelle' => 3);
+            'prop' => 0,	
+            'poubelle' => 2,
+            'prepa' => 3);
 
   $lang_dir = lang_dir($lang_objet);
   $puces = array(
@@ -23,8 +22,8 @@ function objets_puce_statut($id_objet, $statut, $id_rubrique, $objet, $ajax='') 
       $title = _T('objets:titre_objet_proposee');
       break;
     case 'prepa':
-      $clip = 0;
-      $puce = $puces[0];
+      $clip = 3;
+      $puce = $puces[3];
       $title = _T('objets:titre_objet_prepa');
       break;
     case 'publie':
@@ -38,13 +37,15 @@ function objets_puce_statut($id_objet, $statut, $id_rubrique, $objet, $ajax='') 
       $title = _T('objets:titre_objet_refusee');
       break;
     default:
-      $clip = 0;
+      $clip = 3;
       $puce = $puces[3];
       $title = '';
   }
 
   $type1 = "statut$objet$id_objet"; 
-  $inser_puce = http_img_pack($puce, $title, "id='img$type1' style='margin: 1px;'");
+  $inser_puce = http_img_pack($puce, $title, "id='img".$type1."' style='margin: 1px;'");
+  
+  $nom_objet=objets_nom_objet($objet);
 
   if (!autoriser('publierdans','rubrique',$id_rubrique)
   OR !_ACTIVER_PUCE_RAPIDE)
@@ -62,22 +63,28 @@ function objets_puce_statut($id_objet, $statut, $id_rubrique, $objet, $ajax='') 
   if ($ajax){
     return  "<span class='puce_objet_fixe'>"
     . $inser_puce
-    . "</span>"
-    . "<span class='puce_objet_popup' id='statutdecal$objet$id_objet' style='margin-left: -$clip"."px;'>"
-    . afficher_script_statut($id_objet, $objet, -1, $puces[0], 'prop', $titles['orange'])
-    . afficher_script_statut($id_objet, $objet, -10, $puces[1], 'publie', $titles['verte'])
-      . afficher_script_statut($id_objet, $objet, -19, $puces[2], 'refuse', $titles['rouge'])
-      . "</span>";
+    . "</span>" ;
+    /* 
+     * TODO : gestion du statut de l'objet ... a priori il faudrait aussi un fichier action/instituer_OBJET 
+     * 
+     * 
+    . "<span class='puce_article_popup' id='statutdecal$objet$id_objet' style='margin-left: -".$clip."px;'>" //TODO : la classe n'est super bonne mais ca marche
+		. afficher_script_statut($id_objet, $nom_objet, -1, $puces[3], 'prepa', $titles['blanche'])
+    . afficher_script_statut($id_objet, $nom_objet, -10, $puces[1], 'publie', $titles['verte'])
+    . afficher_script_statut($id_objet, $nom_objet, -19, $puces[2], 'refuse', $titles['rouge'])
+    . "</span>";
+    
+    */
   }
 
-  $nom = "puce_statut_".$objet.$id_objet;
+  $nom = "puce_statut_";
 
   if (! _SPIP_AJAX) 
     $over ='';
   else {
-    $action = generer_url_ecrire('puce_statut',"",true);
-    $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$objet', '$id_objet', '$action'); }";
-    $over = "\nonmouseover=\"$action\"";
+    $action = generer_url_ecrire('puce_statut',$objet,false);
+    $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$nom_objet', '$id_objet', '$action'); }";
+    $over = " onmouseover=\"$action\"";
   }
 
   return  "<span class='puce_$objet' id='$nom$objet$id_objet' dir='$lang_dir'$over>"

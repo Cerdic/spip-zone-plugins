@@ -59,7 +59,7 @@ function exec_objet_edit_dist(){
   */
 
   //on ajoute les documents dans affiche_gauche 
-  echo pipeline('affiche_gauche',array('args'=>array('exec'=>'objet_edit','objet'=>$objet,'id_objet'=>$id_objet),'data'=>''));
+  echo pipeline('affiche_gauche',array('args'=>array('exec'=>'objet_edit','objet'=>$objet,'id_objet'=>$id_objet,'id_rubrique'=>$id_rubrique,'id_article'=>$id_article),'data'=>''));
   echo creer_colonne_droite("",true);
   echo pipeline('affiche_droite',array('args'=>array('exec'=>'objet_edit','objet'=>$objet,'id_objet'=>$id_objet),'data'=>''));
   echo debut_droite("",true);
@@ -73,6 +73,7 @@ function exec_objet_edit_dist(){
 		'id_rubrique'=>$id_rubrique,
 		'id_article'=>$id_article,	
 		'retour'=>_request('retour'),
+		//'parents'=>objets_get_parents($id_objet,$objet),
 		//TODO : modifier le findinpath pour l'icone ici ...
 		'icone_retour'=>icone_inline(_T('icone_retour'), parametre_url(generer_url_ecrire('naviguer'),'id_rubrique',$id_rubrique), find_in_path("images/objet-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
 	

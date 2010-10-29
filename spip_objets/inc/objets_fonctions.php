@@ -24,7 +24,12 @@ function objets_vignette_objet($objet,$taille,$extension){
 }
 
 
-
+/* TODO : a supprimer du code pour passer aux fonctions :
+ * table_objet_sql : transforme le nom d'un objet en sa table SQL correspondante
+ * id_table_objet : retourne le nom de l'id_objet de la table correspondante du type de l'objet
+ * objet_type
+ * table_objet
+ */
 function objets_nom_objet($objet){
 	return substr($objet,0,-1);
 }
@@ -32,14 +37,13 @@ function objets_nom_objet($objet){
 // utilisé dans action/editer_objets
 //permet de récupérer les liaisons d'un objet du plugin avec les autres objets  
 function objets_get_parents($id_objet,$objet,$serveur=''){
-	if(!is_int($id_objet)) return array();
+	if(!$id_objet) return array();
 	$nom_objet=objets_nom_objet($objet);
 	
 	$where = "id_".$nom_objet."=".$id_objet;
 	$id_parents = sql_allfetsel(array("id_objet","objet"),"spip_".$objet."_liens",$where,"","","","",$serveur);
-	//$id_parents = array_map('reset',$id_parents); 
-
 	
+		
 	//on reconstruit le format des tableaux de liaison 'rubrique|1' 'article|1'
 	$retour=array();
 	foreach ($id_parents as $ligne) {

@@ -49,10 +49,7 @@
 	
 
 	<!-- avec plugin champs extras 2 -->
-
-	
-	
-	<pipeline>
+  <pipeline>
 		<nom>objets_extensibles</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
@@ -61,12 +58,16 @@
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
 	
+	
 	<!-- ajoute le bloc des documents -->
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
-	
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>objets_pipelines.php</inclure>
+	</pipeline>
 	
 	<!-- ajoute les listes dobjets dans articles et rubriques -->
 	<pipeline>
@@ -74,6 +75,9 @@
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
 	
+	
+	
+	<!-- Gestion des urls de ces nouveaux objets -->
 	<pipeline>
 		<nom>declarer_url_objets</nom>
 		<inclure>objets_pipelines.php</inclure>
@@ -85,7 +89,7 @@
 	<necessite id="saisies" version="[1.8.5;]" />
 	<!-- filtre |icone et boucles CONDITIONS -->
 	<necessite id="spip_bonux" version="[1.8.4;]" />
-	<necessite id="cextras" version="[1.6.1;]" />
+	<necessite id="cextras" version="[1.7.1;]" />
 	<necessite id="gestdoc" version="[1.4.2;]" />
 	<categorie>outil</categorie>
 </plugin>

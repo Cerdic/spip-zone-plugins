@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 function objets_objets_extensibles($objets){
 	//Cette fonction permet d'ajouter les objets, aux objets auxquels on peut ajouter des champs extra
 	
@@ -12,9 +15,12 @@ function objets_objets_extensibles($objets){
 		//il faut un tableau array('table','nom_objet','lien_article','lien_rubrique',...) et ce pour chaque nouvel objet
 			
 		
-		// TODO : il y a une limitation dans Chaps extra avec les noms des table et les nom des objets
-		// les tables prenne des S a la fin alors que les objets non
-		//ici il faut donc supprimer le s final de notre objet pour que cela fonctionne 
+		/* TODO : il y a une limitation dans Chaps extra avec les noms des table et les nom des objets
+		* les tables prennent des S a la fin alors que les objets non
+		* ici il faut donc supprimer le s final de notre objet pour que cela fonctionne
+		* 
+		*  Il faut bien utiliser les fonctions natives de SPIP table_objet , 
+	 */ 
 		
 		//TODO : attention a ce nommage utiliser plutot le pipeline declarer_tables_objets_surnoms /ecrire/base/connect_sql
 		//du coup il faut saisir l'objet sans le s
@@ -63,7 +69,7 @@ function objets_affiche_enfants($flux){
 					
 					// alias sur l'id pour simplifier la gestion dans la fonction presenter_boucle
 					$requete=array(
-						"SELECT"=> "o.id_".$nom_objet." as id_objet,o.titre,o.statut", //.sql_quote($objet)." as type_objet"
+						"SELECT"=> "o.id_".$nom_objet." as id_objet,o.titre,o.statut,'".$objet."' as objet", //.sql_quote($objet)." as type_objet"
 						"FROM"=> "spip_".$objet." o,spip_".$objet."_liens ol",
 						"WHERE"=> "o.id_".$nom_objet."=ol.id_".$nom_objet." AND ol.objet='rubrique' AND ol.id_objet='".$id_rubrique."'",
 						"ORDERBY"=>"o.id_".$nom_objet." DESC"
@@ -76,7 +82,7 @@ function objets_affiche_enfants($flux){
 					//il faut générer une variable spécifique pour éviter les conflits dans les retours ajax 
 					$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 					
-					$flux['data'].=$presenter_liste($requete,'presenter_objet_boucle',$les_objets,true,false,$styles,$tmp_var,_T('objets:titre_liste'),objets_vignette_objet($objet,"24","gif"));
+					$flux['data'].=$presenter_liste($requete,'presenter_objet_boucle',$les_objets,true,false,$styles,$tmp_var,_T('objets:titre_liste').$nom_objet,objets_vignette_objet($objet,"24","gif"));
 					
 				}
 			}
@@ -101,7 +107,7 @@ function objets_affiche_enfants($flux){
 					
 					// alias sur l'id pour simplifier la gestion dans la fonction presenter_boucle
 					$requete=array(
-						"SELECT"=> "o.id_".$nom_objet." as id_objet,o.titre,o.statut,'".$objet."' as objet", 
+						"SELECT"=> "o.id_".$nom_objet." as id_objet,o.titre,o.statut,'".$objet."' as objet", //on est obligé d'avoir le objet a ce niveau 
 						"FROM"=> "spip_".$objet." o,spip_".$objet."_liens ol",
 						"WHERE"=> "o.id_".$nom_objet."=ol.id_".$nom_objet." AND ol.objet='article' AND ol.id_objet='".$id_article."'", //$id_article
 						"ORDERBY"=>"o.id_".$nom_objet." DESC"
@@ -114,7 +120,7 @@ function objets_affiche_enfants($flux){
 					//il faut générer une variable spécifique pour éviter les conflits dans les retours ajax 
 					$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 					
-					$flux['data'].=$presenter_liste($requete,'presenter_objet_boucle',$les_objets,true,false,$styles,$tmp_var,_T('objets:titre_liste'),objets_vignette_objet($objet,"24","gif"));
+					$flux['data'].=$presenter_liste($requete,'presenter_objet_boucle',$les_objets,true,false,$styles,$tmp_var,_T('objets:titre_liste').$nom_objet,objets_vignette_objet($objet,"24","gif"));
 					
 				}
 			}
@@ -133,28 +139,56 @@ function presenter_objet_boucle($row,$afficher){
 	$titre=$row['titre'];
 	$statut=$row['statut'];
 	$objet=$row['objet'];
+	
 	$nom_objet=objets_nom_objet($objet);
 	$id_rubrique=_request('id_rubrique');
 	$id_article=_request('id_article');
 	
+	
+	
 		
 	$s = "<a href='" . generer_url_ecrire("objet_edit","id_objet=".$id_objet."&objet=".$objet."&id_rubrique=".$id_rubrique."&id_article=".$id_article) . "' style='display: block;'>";
 	
-	$s .= http_img_pack("$puce", "", "width='14' height='7'");
-	$s .= "&nbsp;&nbsp;". objets_puce_statut($id_objet, $statut, $id_rubrique, $nom_objet);
+	//$s .= http_img_pack("$puce", "", "width='14' height='7'");
+	$s .= "&nbsp;&nbsp;". objets_puce_statut($id_objet, $statut, $id_rubrique, $objet,true); // le true permet d'avoir l'ajax 
 	$s.=typo($titre)."</a>";
 	$vals[] = $s;
 	return $vals;
-}
+} 
 
+
+/* Gestion de l'affichage des documents */
+
+$GLOBALS['gestdoc_exec_colonne_document'][] = 'objet_edit';
+
+//TODO parser sur tous les champs extra ceux qui ont un traitement propre pour les ajouter ici
+//$GLOBALS['gestdoc_liste_champs'][] = 'descriptif';
+
+
+
+function objets_post_edition($flux){}
 
 function objets_affiche_gauche($flux){
 	if($flux['args']['exec']=='objet_edit'){
 		//ajout des documents
 		$objet=$flux['args']['objet'];
 		$nom_objet=objets_nom_objet($objet);
-		$documenter_objet=charger_fonction('documenter_objet','inc');
-		$flux['data'].=$documenter_objet($flux['args']['id_objet'], $nom_objet,true); // ce 3eme parametre est obscur car pas utilisé par mediatheque...
+		
+		$GLOBALS['logo_libelles']['id_'.$nom_objet]= _T('objets:titre_logo');
+		
+		$iconifier = charger_fonction('iconifier', 'inc'); 
+		//TODO : gestion des droits a ce niveau
+		//$flag_editable = autoriser('modifier', 'evenement', $id_evenement, null, array('id_article' => $id_article));
+		
+		// Gestion du logo 
+		$flux['data'] .= $iconifier('id_'.$nom_objet, $flux['args']['id_objet'], 'objet_edit', $flag_editable);
+		
+		// Gestion des documents
+		// TODO : on ne peut pas gerer ca avec mediatheque car il se base sur le nom de l'objet déduit de l'exec et donc objet_edit, et donc il récupére "objet"
+		// Mais cela revient quasiment au même ppuisque c'est le code de mediatheque qui est reporté ici
+		$flux['data'].=recuperer_fond('prive/editer/colonne_document',array('objet'=>$objet,'id_objet'=>$flux['args']['id_objet'])); 		
+		
+		
 	}
 	return $flux;
 }
