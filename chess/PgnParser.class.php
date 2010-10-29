@@ -295,9 +295,9 @@ class PgnParser
 	
 	function readPgnData($pgnFile)
 	{
+		if (!file_exists($pgnFile)) return; 
 		$this->pgnFile = $pgnFile;
 		$fh = fopen($pgnFile,"r");
-//	die($pgnFile);
 		$this->pgnString = trim(fread($fh,filesize($pgnFile)));
 		fclose($fh);	
 	}
