@@ -18,7 +18,7 @@
  * @return
  * @param object $time
  */
-function genie_spipmotion_taches_generales($time){
+function genie_getid3_taches_generales($time){
 	$verifier_binaires = charger_fonction('getid3_verifier_binaires','inc');
 	$verifier_binaires(true);
 
