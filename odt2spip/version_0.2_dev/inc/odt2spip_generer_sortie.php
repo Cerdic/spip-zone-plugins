@@ -120,7 +120,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 				$hauteur = round($Tdims[2] * $conversion_image);
 				$odt2spip_retailler_img($rep_pictures . $img, $largeur, $hauteur);
 				$type = 'image';
-				if ($id_document = $ajouter_documents($rep_pictures . $img, $img, "article", '', $type, 0, '')) {
+				if ($id_document = $ajouter_documents($rep_pictures . $img, $img, "article", '', $type, 0, $actifs)) {
 					$xml_sortie = str_replace($ch, $id_document, $xml_sortie);
 					$T_images[] = $id_document;
 				}
