@@ -1,5 +1,7 @@
 <?php
 
+function bigbrother_autoriser(){}
+
 /**
  * Autorisation à supprimer des données du journal
  * Retourne par défaut les mêmes droits qu'un webmestre
