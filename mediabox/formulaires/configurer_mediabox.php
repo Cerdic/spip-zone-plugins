@@ -43,8 +43,9 @@ function box_choisir_skin($skins,$selected,$name='skin'){
 	foreach($skins as $k=>$skin){
 		$id = "$name_".preg_replace(",[^a-z0-9_],i", "_", $k);
 		$sel = ($selected=="$k" ?" checked='checked'":'');
+		$balise_img = chercher_filtre('balise_img');
 		$label = isset($skin['img'])?
-		  '<a href="'.$skin['img'].'" class="mediabox" rel="habillage">'.filtre_balise_img_dist($skin['img'],$skin['nom'])."</a>"
+		  '<a href="'.$skin['img'].'" class="mediabox" rel="habillage">'.$balise_img($skin['img'],$skin['nom'])."</a>"
 			:$skin['nom'];
 
 		$out .= "<div class='choix'>";
