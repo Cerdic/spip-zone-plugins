@@ -55,6 +55,6 @@ function exec_action_ressources_args($id_ressource)
 	echo redirige_action_post('supprimer_ressources', $id_ressource, 'ressources', '', $res);
 	
 	echo fin_cadre_relief(true);
-	echo fin_gauche(), fin_page();
+	echo fin_page_association();
 }
 ?>

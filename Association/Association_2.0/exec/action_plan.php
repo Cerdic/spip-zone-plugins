@@ -52,7 +52,7 @@ function exec_action_plan(){
 		echo redirige_action_post('supprimer_plans', $id_plan, 'plan', '', $res);
 		fin_cadre_relief();  
 			
-		echo fin_gauche(),fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

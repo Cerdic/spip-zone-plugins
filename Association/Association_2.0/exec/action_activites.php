@@ -64,7 +64,7 @@ function exec_action_activites(){
 			echo generer_action_auteur('supprimer_activites', $count, $url_retour, $res, " method='post'");
 		}
 		fin_cadre_relief();
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

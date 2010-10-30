@@ -109,7 +109,7 @@ function exec_edit_vente() {
 		echo '</div></form>';
 		
 		fin_cadre_relief();  
-		 echo fin_gauche(),fin_page(); 
+		 echo fin_page_association(); 
 	}  
 }
 ?>

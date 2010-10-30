@@ -60,7 +60,7 @@ function exec_action_comptes(){
 			echo redirige_action_post('valider_comptes', count($_REQUEST['valide']), 'comptes', "", $res);
 		}
 		fin_cadre_relief();  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 

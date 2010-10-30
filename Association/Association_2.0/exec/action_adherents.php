@@ -39,7 +39,7 @@ function exec_action_adherents_args()
 	echo '<p>'. _T('asso:adherent_message_confirmer_suppression').' : </p>';
 	echo supprimer_adherents($_POST["delete"]);
 	echo fin_cadre_relief(true);
-	echo fin_gauche(),fin_page(); 
+	echo fin_page_association(); 
 }
 
 function supprimer_adherents($delete_tab)

@@ -51,7 +51,7 @@ function exec_action_categorie(){
 		echo redirige_action_post('supprimer_categories', $id_categorie, 'categories', '', $res);
 
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page(); 
+		echo fin_page_association(); 
 	}
 }
 ?>

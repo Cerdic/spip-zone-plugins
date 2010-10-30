@@ -90,7 +90,7 @@ function exec_prets(){
 		echo'</table>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

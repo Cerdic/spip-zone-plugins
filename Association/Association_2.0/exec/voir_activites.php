@@ -134,7 +134,7 @@ function exec_voir_activites(){
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

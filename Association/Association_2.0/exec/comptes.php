@@ -147,7 +147,7 @@ function exec_comptes() {
 
 	echo generer_form_ecrire('action_comptes', $table . $table2);
 	fin_cadre_relief();  
-	echo fin_gauche(),fin_page(); 
+	echo fin_page_association(); 
 	}
 	}
 }

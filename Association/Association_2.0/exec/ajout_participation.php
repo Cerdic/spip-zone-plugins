@@ -67,7 +67,7 @@ function exec_ajout_participation() {
 		echo redirige_action_post('ajouter_participations', $id_evenement, 'voir_activites', '', "\n<div>$res</div>", '', _T('asso:bouton_ajoute'));
 
 		echo fin_cadre_relief(true);  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

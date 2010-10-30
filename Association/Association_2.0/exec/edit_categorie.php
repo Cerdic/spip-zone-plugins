@@ -78,7 +78,7 @@ function exec_edit_categorie(){
 
 		echo redirige_action_post($action . '_categories' , $id, 'categories', "", "<div>$res</div>");		
 		echo fin_cadre_relief(true);  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

@@ -100,7 +100,7 @@ function exec_edit_plan(){
 		echo redirige_action_post($action . '_plans' , $id_plan, 'plan', "", "<div>$res</div>");
 
 		fin_cadre_relief();  	
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

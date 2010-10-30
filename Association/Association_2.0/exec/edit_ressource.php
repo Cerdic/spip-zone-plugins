@@ -105,7 +105,7 @@ function exec_edit_ressource(){
 		echo redirige_action_post($action . '_ressources', $id, 'ressources', '', "\n<div>$res</div>\n");
 		
 		echo fin_cadre_relief(true);
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

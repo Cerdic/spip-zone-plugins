@@ -97,7 +97,7 @@ function exec_edit_compte() {
 		echo redirige_action_post($action . '_comptes', $id_compte, 'comptes', '', "<div>$res</div>");
 
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

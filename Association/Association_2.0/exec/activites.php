@@ -36,7 +36,7 @@ function exec_activites(){
 		if (isset($liste['AGENDA']))
 			exec_activites_evenements(_request('mot'));
 		else echo _T('asso:config_libelle_activites');
-		echo fin_gauche(),fin_page(); 
+		echo fin_page_association(); 
 	}
 }
 

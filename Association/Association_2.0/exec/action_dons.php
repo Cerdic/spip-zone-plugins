@@ -48,7 +48,7 @@ function exec_action_dons_args($id_don) {
 
 		echo redirige_action_post('supprimer_dons', $id_don, 'dons', '', "<div>$res</div>");
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page(); 
+		echo fin_page_association(); 
 	}
 } 
 ?>

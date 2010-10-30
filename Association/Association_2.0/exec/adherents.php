@@ -131,7 +131,7 @@ function exec_adherents() {
 		//Affichage de la liste
 		echo adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $indexation);
 		echo fin_cadre_relief(true);  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 

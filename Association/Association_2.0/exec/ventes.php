@@ -119,7 +119,7 @@ function exec_ventes(){
 			echo generer_form_ecrire('agir_ventes', $corps, '', _T('asso:bouton_supprimer'));
 		}
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page(); 
+		echo fin_page_association(); 
 	}
 }
 ?>

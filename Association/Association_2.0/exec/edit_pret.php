@@ -129,7 +129,7 @@ function exec_edit_pret(){
 
 		echo redirige_action_post($action .'_prets', $id_pret, 'prets', "id=$id_ressource", $res);
 		fin_cadre_relief();  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 		}
 	}
 ?>

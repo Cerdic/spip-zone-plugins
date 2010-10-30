@@ -105,7 +105,7 @@ function exec_edit_activite_args($id_activite, $id_evenement)
 		echo redirige_action_post(($id_activite ? 'modifier_activites' : 'ajouter_activites'), $id_activite, 'voir_activites', '', "\n<div>$res</div>");
 
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

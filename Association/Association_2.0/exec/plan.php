@@ -108,7 +108,7 @@ function exec_plan(){
 		
 		fin_cadre_relief();  
 		
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

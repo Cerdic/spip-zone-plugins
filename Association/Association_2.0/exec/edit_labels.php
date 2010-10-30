@@ -81,7 +81,7 @@ function exec_edit_labels(){
 			echo generer_form_ecrire('action_labels', $corps, '', _T('asso:Etiquettes'));
 		}
 		fin_cadre_relief();  
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 

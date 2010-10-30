@@ -93,7 +93,7 @@ function exec_agir_ventes(){
 			echo redirige_action_auteur('supprimer_ventes', $count, 'ventes', '', $res, '  method="post"');
 
 			fin_cadre_relief();  
-			echo fin_gauche(), fin_page();
+			echo fin_page_association();
 		}
 	}
 }

@@ -87,7 +87,7 @@ function exec_edit_relances(){
 		echo generer_form_ecrire('action_relances', $corps, '', $bouton);
 	}
 	fin_cadre_relief();  
-	echo fin_gauche(),fin_page(); 
+	echo fin_page_association(); 
 }
 
 function relances_while($indexation, $statut_interne)

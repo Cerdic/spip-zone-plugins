@@ -29,7 +29,7 @@ function exec_ajout_cotisation(){
 		association_onglets();
 		echo debut_gauche("",true);
 		ajout_cotisation($id_auteur, $row);
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 	

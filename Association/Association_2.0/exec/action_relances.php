@@ -71,7 +71,7 @@ function exec_action_relances(){
 		echo redirige_action_post('modifier_relances', $count, 'adherents', '', "\n<div>$res</div>\n");
 
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page(); 
+		echo fin_page_association(); 
 	}
 } 
 ?>

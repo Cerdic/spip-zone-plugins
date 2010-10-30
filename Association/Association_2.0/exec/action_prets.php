@@ -60,7 +60,7 @@ function exec_action_prets(){
 		echo redirige_action_post('supprimer_prets', "$id_pret-$id_ressource", 'prets', '', $res);
 			
 		echo fin_cadre_relief(true);
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>

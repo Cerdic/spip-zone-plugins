@@ -73,7 +73,7 @@ function exec_edit_adherent_args($id_auteur)
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
 		echo edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_interne, $commentaire);
 		fin_cadre_relief();
-		echo fin_gauche(),fin_page(); 
+		echo fin_page_association(); 
 	}
 }
 

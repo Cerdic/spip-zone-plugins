@@ -38,8 +38,8 @@ function exec_association() {
 		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);	
 		echo debut_cadre_formulaire("",true);
-		echo gros_titre(_T('asso:votre_asso'),'',false);
-		echo "<br />\n";		
+#		echo gros_titre(_T('asso:votre_asso'),'',false);
+#		echo "<br />\n";		
 		echo '<strong>'.$GLOBALS['association_metas']['nom'].'</strong><br/>';
 		echo $GLOBALS['association_metas']['rue']."<br />\n";
 		echo $GLOBALS['association_metas']['cp'].'&nbsp;';
@@ -102,7 +102,7 @@ function exec_association() {
 		echo '</table>';
 		
 		echo fin_cadre_relief(true);	
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
 		sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 

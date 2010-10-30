@@ -12,7 +12,12 @@
 
 function association_onglets(){
 	
-	echo debut_onglet();
+	echo "<h2>",
+	  _T('asso:gestion_de_lassoc'),
+	  ' ',
+	  $GLOBALS['association_metas']['nom'],
+	  "</h2><div class='bandeau_actions'>",
+	  debut_onglet();
 		
 	$link1= generer_url_ecrire('adherents');
 	$link2= generer_url_ecrire('dons');
@@ -38,6 +43,14 @@ function association_onglets(){
 		echo onglet(_T('asso:menu2_titre_livres_comptes'), $link6, '', 'Comptes', _DIR_PLUGIN_ASSOCIATION_ICONES.'comptes.gif','rien.gif' ); 
 	}
 	
-	echo fin_onglet();
+	echo fin_onglet(), '</div>';
 	}
+
+function fin_page_association()
+{
+	$copyright = fin_page();
+	// Pour eliminer le copyright a l'impression
+	$copyright = str_replace("<div class='table_page'>", "<div class='table_page contenu_nom_site'>", $copyright);
+	return fin_gauche() . $copyright;
+}
 ?>

@@ -61,7 +61,7 @@ function exec_categories(){
 		echo'</table>';
 		
 		echo fin_cadre_relief(true);  		
-		echo fin_gauche(), fin_page();
+		echo fin_page_association();
 	}
 }
 ?>
