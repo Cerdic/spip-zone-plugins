@@ -42,7 +42,8 @@ function exec_edit_adherent_args($id_auteur)
 		$categorie=$data['categorie'];
 		$validite=$data['validite'];
 		$commentaire=$data['commentaire'];
-
+		$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
+	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		include_spip ('inc/navigation');
@@ -56,7 +57,12 @@ function exec_edit_adherent_args($id_auteur)
 		echo '<span class="spip_xx-large">';
 		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
 		echo '</span></div>';
-		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom_famille.' '.$prenom.'</div>';
+		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">',
+			"<a href='$adh' title=\"",
+			_T('asso:adherent_label_voir_membre'),
+			"\">",
+			htmlspecialchars($nom_famille.' '.$prenom),
+			 "</a></td></div>\n";
 		echo '<br /><div>'.association_date_du_jour().'</div>';	
 		echo fin_boite_info(true);
 		

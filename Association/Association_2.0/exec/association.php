@@ -77,11 +77,24 @@ function exec_association() {
 			    . _L('Ecrire &agrave;') . ' ' . $email . "'>"
 			    . ($tel ? $tel : 'mail')
 			    . '</a>';
-
+			$auteur = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur");
+			$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
 			echo "\n<tr style='background-color: #EEEEEE;'>\n";
-			echo '<td class="arial11 border1"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur"). "\"\ntitle=\"" . _L('Modifier l\'administrateur') . '">'.htmlspecialchars($data['nom']). "</a></td>\n";
 
-			echo '<td class="arial1 border1">'.htmlspecialchars($data['fonction']).'</td>';
+			echo "<td class='arial11 border1'>",
+				"<a href='$auteur' title=\"",
+				_T('lien_voir_auteur'),
+				'">',
+				htmlspecialchars($data['nom']),
+				 "</a></td>\n";
+
+			echo "<td class='arial11 border1'>",
+				"<a href='$adh' title=\"",
+				_T('asso:adherent_label_voir_membre'),
+				"\">",
+				htmlspecialchars($data['fonction']),
+				 "</a></td>\n";
+
 			echo '<td class="arial1 border1">'.$mobile.'</td>';
 			echo '<td class="arial1 border1" style="text-align:center">'.$tel.'</td>';
 			echo "</tr>\n";

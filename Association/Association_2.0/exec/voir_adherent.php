@@ -27,7 +27,7 @@ function exec_voir_adherent(){
 		$nom_famille=$data['nom_famille'];
 		$prenom=$data['prenom'];
 		$validite=$data['validite'];
-
+		$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		//debut_page(_T(), "", "");
@@ -41,7 +41,12 @@ function exec_voir_adherent(){
 		echo '<span class="spip_xx-large">';
 		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
 		echo '</span></div>';
-		echo '<br /><div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'.$nom_famille.' '.$prenom.'</div>';
+		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">',
+			"<a href='$adh' title=\"",
+			_T('asso:adherent_label_modifier_membre'),
+			"\">",
+			htmlspecialchars($nom_famille.' '.$prenom),
+			 "</a></td></div>\n";
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		 echo fin_boite_info(true);
 		
@@ -49,8 +54,8 @@ function exec_voir_adherent(){
 
 		 echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_historique_membre'));
-		
+		 debut_cadre_relief(  "", false, "", $titre = $nom_famille.' '.$prenom);
+
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
