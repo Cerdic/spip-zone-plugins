@@ -17,8 +17,12 @@
 		<nom>post_edition</nom>
 		<inclure>docs_logos_agenda2_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>formulaire_admin</nom>
+		<inclure>docs_logos_agenda2_pipelines.php</inclure>
+	</pipeline>
 	<categorie>outil</categorie>
-	<necessite id='SPIP' version='[2.0.3;]' />
+	<necessite id='SPIP' version='[2.1;]' />
 	<necessite id="agenda" version='[2.0.3;]'/>
 	<utilise id="gestdoc" version='[1.3.5;]'/>
 </plugin>
