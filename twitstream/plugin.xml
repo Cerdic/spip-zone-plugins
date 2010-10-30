@@ -23,5 +23,5 @@
             <inclure>twitstream_pipelines.php</inclure>
 	</pipeline>
         <necessite id="SPIP" version="[2.1.0;]" />
-	<categorie>communication</categorie>
+	<categorie>divers</categorie>
 </plugin>
