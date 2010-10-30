@@ -26,69 +26,83 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 	// Doit-on afficher une légende ?
 	if ($env_legende || $env_titre || $env_descriptif || $env_credits || $env_poids || $env_type) {
 		$width = is_numeric($width) ? min($GLOBALS['meta']['media_largeur_max_legende'],max($GLOBALS['meta']['media_largeur_min_legende'],intval($width))) : $GLOBALS['meta']['media_largeur_max_legende'];
-		$width = 'width: '.$width.'px;';
-		$dt = $conteneur=='dl' ? 'dt' : 'div';
-		$dd = $conteneur=='dl' ? 'dd' : 'div';
-		// Titre
-		if ($env_titre && $env_titre!='titre') {
-			$titre = typo($env_titre);
-			$crayons_titre = '';
-		} elseif ($env_titre=='titre' || $env_legende) {
-			$titre = typo($sql_titre);
-			$crayons_titre = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon document-titre-'.$sql_id_document : '';
+		// Y a-t-il un modèle légende à utiliser ?
+		if ($env_legende && find_in_path('modeles/legende_'.$env_legende.'.html')) {
+			$ret = recuperer_fond('modeles/legende_'.$env_legende,array(
+				'id' => $sql_id_document,
+				'titre' => $env_titre,
+				'descriptif' => $env_descriptif,
+				'credits' => $env_credits,
+				'type' => $env_type,
+				'poids' => $env_poids,
+				'width' => $width,
+				'conteneur' => $conteneur
+			));
 		} else {
-			$titre = '';
-			$crayons_titre = '';
+			$width = 'width: '.$width.'px;';
+			$dt = $conteneur=='dl' ? 'dt' : 'div';
+			$dd = $conteneur=='dl' ? 'dd' : 'div';
+			// Titre
+			if ($env_titre && $env_titre!='titre') {
+				$titre = typo($env_titre);
+				$crayons_titre = '';
+			} elseif ($env_titre=='titre' || $env_legende) {
+				$titre = typo($sql_titre);
+				$crayons_titre = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon document-titre-'.$sql_id_document : '';
+			} else {
+				$titre = '';
+				$crayons_titre = '';
+			}
+			// Descriptif
+			if ($env_descriptif && $env_descriptif!='descriptif') {
+				$descriptif = propre($env_descriptif);
+				$crayons_descriptif = '';
+			} elseif ($env_descriptif=='descriptif' || $env_legende) {
+				$descriptif = propre($sql_descriptif);
+				$crayons_descriptif = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon document-descriptif-'.$sql_id_document : '';
+			} else {
+				$descriptif = '';
+				$crayons_descriptif = '';
+			}
+			// Notes
+			$notes = calculer_notes();
+			if ($notes)
+				$notes = '<p class="notes">'.PtoBR($notes).'</p>';
+			// Crédits
+			if ($env_credits && $env_credits!='credits') {
+				$credits = typo($env_credits);
+				$crayons_credits = '';
+			} elseif ($env_credits=='credits' || $env_legende=='complete') {
+				$credits = typo($sql_credits);
+				$crayons_credits = defined('_DIR_PLUGIN_CRAYONS') && defined('_DIR_PLUGIN_GESTDOC') ? ' crayon document-credits-'.$sql_id_document : '';
+			} else {
+				$credits = '';
+				$crayons_credits = '';
+			}
+			// Type de document
+			if ($env_type && $env_type!='type') 
+				$type = typo($env_type);
+			elseif ($env_type=='type' || $env_legende=='complete')
+				$type = typo($sql_type);
+			else
+				$type = '';
+			// Poids du document
+			if ($env_poids || $env_legende=='complete')
+				$poids = taille_en_octets($sql_poids);
+			else
+				$poids = '';
+			if ($type && $poids)
+				$poids = ' - '.$poids;
+			
+			if ($titre)
+				$ret .= "<$dt class='spip_doc_titre$crayons_titre' style='$width'><strong>$titre</strong></$dt>";
+			if ($descriptif)
+				$ret .= "<$dd class='spip_doc_descriptif$crayons_descriptif' style='$width'>".PtoBR($descriptif).$notes."</$dd>";
+			if ($credits)
+				$ret .= "<$dd class='spip_doc_credits$crayons_credits' style='$width'>"._T('media:credits')." <span class='credit'>$credits</span></$dd>";
+			if ($type || $poids)
+				$ret .= "<$dd class='spip_doc_infos' style='$width'>$type$poids</$dd>";
 		}
-		// Descriptif
-		if ($env_descriptif && $env_descriptif!='descriptif') {
-			$descriptif = propre($env_descriptif);
-			$crayons_descriptif = '';
-		} elseif ($env_descriptif=='descriptif' || $env_legende) {
-			$descriptif = propre($sql_descriptif);
-			$crayons_descriptif = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon document-descriptif-'.$sql_id_document : '';
-		} else {
-			$descriptif = '';
-			$crayons_descriptif = '';
-		}
-		// Notes
-		$notes = calculer_notes();
-		if ($notes)
-			$notes = '<p class="notes">'.PtoBR($notes).'</p>';
-		// Crédits
-		if ($env_credits && $env_credits!='credits') {
-			$credits = typo($env_credits);
-			$crayons_credits = '';
-		} elseif ($env_credits=='credits' || $env_legende=='complete') {
-			$credits = typo($sql_credits);
-			$crayons_credits = defined('_DIR_PLUGIN_CRAYONS') && defined('_DIR_PLUGIN_GESTDOC') ? ' crayon document-credits-'.$sql_id_document : '';
-		} else {
-			$credits = '';
-			$crayons_credits = '';
-		}
-		// Type de document
-		if ($env_type && $env_type!='type') 
-			$type = typo($env_type);
-		elseif ($env_type=='type' || $env_legende=='complete')
-			$type = typo($sql_type);
-		else
-			$type = '';
-		// Poids du document
-		if ($env_poids || $env_legende=='complete')
-			$poids = taille_en_octets($sql_poids);
-		else
-			$poids = '';
-		if ($type && $poids)
-			$poids = ' - '.$poids;
-		
-		if ($titre)
-			$ret .= "<$dt class='spip_doc_titre$crayons_titre' style='$width'><strong>$titre</strong></$dt>";
-		if ($descriptif)
-			$ret .= "<$dd class='spip_doc_descriptif$crayons_descriptif' style='$width'>".PtoBR($descriptif).$notes."</$dd>";
-		if ($credits)
-			$ret .= "<$dd class='spip_doc_credits$crayons_credits' style='$width'>"._T('media:credits')." <span class='credit'>$credits</span></$dd>";
-		if ($type || $poids)
-			$ret .= "<$dd class='spip_doc_infos' style='$width'>$type$poids</$dd>";
 	}
 	return $ret;
 }

@@ -1,0 +1,17 @@
+<BOUCLE_doc (DOCUMENTS) {id_document=#ENV{id}} {tout}>
+[(#SET{titre,[(#ENV{titre}|et{#ENV{titre}|!={titre}}|?{#ENV{titre}|typo})]})]
+[(#SET{descriptif,[(#ENV{descriptif}|et{#ENV{descriptif}|!={descriptif}}|?{#ENV{descriptif}|propre})]})]
+[(#SET{credits,[(#ENV{credits}|et{#ENV{credits}|!={credits}}|?{#ENV{credits}|typo})]})]
+[(#ENV{conteneur}|=={dl}|oui)
+	[<dt class='spip_doc_titre[(#GET{titre}|non)#EDIT{titre}]'[ style='width:(#ENV{width})px;']><strong>(#GET{titre,#TITRE})</strong></dt>][
+	<dd class='spip_doc_descriptif[(#GET{descriptif}|non)#EDIT{descriptif}]'[ style='width:(#ENV{width})px;']>(#GET{descriptif,#DESCRIPTIF}|PtoBR)[<p class="notes">(#NOTES|PtoBR)</p>]</dd>][
+	<dd class='spip_doc_credits[(#GET{credits}|non)#EDIT{credits}]'[ style='width:(#ENV{width})px;']><:media:credits:> <span class='credit'>(#GET{credits,#CREDITS})</span></dd>]
+	<dd class='spip_doc_infos'[ style='width:(#ENV{width})px;']>#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]</dd>
+]
+[(#ENV{conteneur}|=={dl}|non)
+	[<div class='spip_doc_titre[(#GET{titre}|non)#EDIT{titre}]'[ style='width:(#ENV{width})px;']><strong>(#GET{titre,#TITRE})</strong></div>][
+	<div class='spip_doc_descriptif[(#GET{descriptif}|non)#EDIT{descriptif}]'[ style='width:(#ENV{width})px;']>(#GET{descriptif,#DESCRIPTIF}|PtoBR)[<p class="notes">(#NOTES|PtoBR)</p>]</div>][
+	<div class='spip_doc_credits[(#GET{credits}|non)#EDIT{credits}]'[ style='width:(#ENV{width})px;']><:media:credits:> <span class='credit'>(#GET{credits,#CREDITS})</span></div>]
+	<div class='spip_doc_infos'[ style='width:(#ENV{width})px;']>#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]</div>
+]
+</BOUCLE_doc>

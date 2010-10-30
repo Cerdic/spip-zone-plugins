@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Mod&egrave;les &lt;media&gt;</nom>
 	<auteur>Joseph</auteur>
-	<version>0.1</version>
+	<version>0.2.0</version>
 	<etat>test</etat>
 	<description>Prototype de nouveaux mod&egrave;les pour l'insertion des documents. La syntaxe et le comportement peuvent &eacute;voluer (voir la doc). Ne pas utiliser sur un site en production.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3593</lien>
