@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_svp' => 'Serveur d\'information sur les plugins',
 	'bulle_actualiser_depot' => 'Actualiser les paquets du d&eacute;p&ocirc;t',
 	'bulle_afficher_depot' => 'Afficher les informations du d&eacute;p&ocirc;t',
-	'bulle_afficher_depot' => 'Afficher les informations du d&eacute;p&ocirc;t',
 	'bulle_ajouter_spipzone' => 'Ajouter le d&eacute;p&ocirc;t SPIP-Zone',
 	'bulle_aller_categorie' => 'Se rendre sur la page des plugins de cette cat&eacute;gorie',
 	'bulle_aller_depot' => 'Se rendre sur la page de ce d&eacute;p&ocirc;t',
