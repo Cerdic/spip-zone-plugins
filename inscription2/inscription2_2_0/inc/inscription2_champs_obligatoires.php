@@ -9,7 +9,7 @@
 
 function inc_inscription2_champs_obligatoires_dist() {
 	$valeurs = array();
-	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_champs_auteurs_elargis',array());
+	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 
 	//spip_log($exceptions_des_champs_auteurs_elargis,"logilog"); // vide, encore un coup de Kent1 ??
 
