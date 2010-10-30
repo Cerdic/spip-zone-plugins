@@ -49,12 +49,13 @@ function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='
 					    'valeur' => $valeur,
 					    'contrepartie' => $contrepartie,
 					    'commentaire' => $commentaire));
-	$qui = $id_adherent ?  "- [$bienfaiteur" . "->membre$id_adherent]" : '';
+	$qui = $id_adherent ?  " [$bienfaiteur" . "->membre$id_adherent]" : '';
 	sql_insertq('spip_asso_comptes', array(
 		    'date' => $date,
 		    'imputation' => $GLOBALS['association_metas']['pc_dons'],
 		    'recette' => $argent,
 		    'journal' => $journal,
+		    'id_journal' => $id_don,
 		    'justification' => "[->don$id_don]$qui"));
 }
 ?>

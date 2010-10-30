@@ -61,21 +61,15 @@ function exec_voir_adherent(){
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<th style="text-align:right;">'._T('asso:adherent_entete_id').'</th>';
-		echo '<th>'._T('asso:adherent_entete_date').'</th>';
-		echo '<th style="text-align:right;">'._T('asso:adherent_entete_paiement').'</th>';
-		echo '<th>'._T('asso:adherent_entete_justification').'</th>';
 		echo '<th>'._T('asso:adherent_entete_journal').'</th>';
+		echo '<th>'._T('asso:adherent_entete_date').'</th>';
+		echo '<th>'._T('asso:adherent_entete_justification').'</th>';
+		echo '<th style="text-align:right;">'._T('asso:montant').'</th>';
 		echo '</tr>';
 		
 		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_auteur ", '', "date DESC" );
 		while ($data = sql_fetch($query)) {
-			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_compte']."</td>\n";
-			echo '<td class="arial11 border1">'.association_datefr($data['date'])."</td>\n";
-			echo '<td class="arial11 border1" style="text-align:right;">'.$data['recette'].' &euro;</td>';
-			echo '<td class="arial11 border1">'.propre($data['justification'])."</td>\n";
-			echo '<td class="arial11 border1">'.$data['journal']."</td>\n";
-			echo '</tr>';
+		  voir_adherent_cotisation($data['id_compte'], $data['date'], $data['recette'], $data['justification'], $data['journal']);
 		}
 		echo '</table>';
 		echo '</fieldset>';
@@ -131,14 +125,7 @@ function exec_voir_adherent(){
 			if($indexation=='id_asso'){$critere='id_acheteur='._q($id_asso);} 
 			$query = sql_select("*", "spip_asso_ventes", $critere, '', "date_vente DESC" );			
 			while ($data = sql_fetch($query)) {
-				echo '<tr style="background-color: #EEEEEE;">';
-				echo '<td class="arial11 border1" style="text-align:right;">'.$data['id_vente']."</td>\n";
-				echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($data['date_vente'])."</td>\n";
-				echo '<td class="arial11 border1">'.$data['article']."</td>\n";
-				echo '<td class="arial11 border1" style="text-align:right;">'.$data['quantite']."</td>\n";
-				echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($data['date_envoi'])."</td>\n";
-				echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:adherent_bouton_maj_vente'), 'edit-12.gif', 'edit_vente','id='.$data['id_vente']), "</td>\n";
-				echo '</tr>';
+			  voir_adherent_vente($data['id_vente'], $data['article'], $data['quantite'], $data['date_vente'], $data['date_envoi']);
 			}
 			echo '</table>';
 			echo '</fieldset>';
@@ -146,15 +133,27 @@ function exec_voir_adherent(){
 		// FICHE HISTORIQUE DONS
 		if ($GLOBALS['association_metas']['dons']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>';
-			echo _T('asso:a_developper');
-			echo '</fieldset>';
+			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+			echo "<tr style='background-color: #DBE1C5;'>\n";
+			echo '<th style="text-align:right;">'._T('asso:adherent_entete_id').'</th>';
+			echo '<th>'._T('asso:adherent_entete_journal').'</th>';
+			echo '<th>'._T('asso:adherent_entete_date').'</th>';
+			echo '<th>'._T('asso:adherent_entete_justification').'</th>';
+			echo '<th style="text-align:right;">'._T('asso:montant').'</th>';
+			$query = sql_select("*", "spip_asso_dons", 'id_adherent='.$id_auteur, '', "date_don DESC" );			
+			while ($data = sql_fetch($query)) {
+			  voir_adherent_cotisation($data['id_don'], $data['date_don'], $data['argent'], $data['bienfaiteur'], 
+						   // jointure pour le journal
+						   '');
+			}
+			echo '</table></fieldset>';
 		}
 		// FICHE HISTORIQUE PRETS
 		if ($GLOBALS['association_metas']['prets']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_prets').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
-			echo '<td>&nbsp;</td>';
+			echo '<th>&nbsp;</th>';
 			echo '<th style="text-align:right;">'._T('asso:entete_id')."</th>\n";
 			echo '<th>'._T('asso:vente_entete_article')."</th>\n";
 			echo '<th style="text-align:right;">'._T('asso:prets_entete_date_sortie')."</th>\n";
@@ -189,5 +188,28 @@ function exec_voir_adherent(){
 		echo fin_cadre_relief(true);
 		echo fin_page_association();
 	} 
+}
+
+function voir_adherent_cotisation($id, $date, $montant, $justification, $journal)
+{
+	echo '<tr style="background-color: #EEEEEE;">';
+	echo '<td class="arial11 border1" style="text-align:right;">'.$id."</td>\n";
+	echo '<td class="arial11 border1">'.$journal."</td>\n";
+	echo '<td class="arial11 border1">'.association_datefr($date)."</td>\n";
+	echo '<td class="arial11 border1">'.propre($justification)."</td>\n";
+	echo '<td class="arial11 border1" style="text-align:right;">'.$montant.' &euro;</td>';
+	echo '</tr>';
+}
+
+function voir_adherent_vente($id, $article, $quantite, $date_vente, $date_envoi)
+{
+	echo '<tr style="background-color: #EEEEEE;">';
+	echo '<td class="arial11 border1" style="text-align:right;">'.$id."</td>\n";
+	echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($date_vente)."</td>\n";
+	echo '<td class="arial11 border1">'.$article."</td>\n";
+	echo '<td class="arial11 border1" style="text-align:right;">'.$quantite."</td>\n";
+	echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($date_envoi)."</td>\n";
+	echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:adherent_bouton_maj_vente'), 'edit-12.gif', 'edit_vente','id='.$id), "</td>\n";
+	echo '</tr>';
 }
 ?>
