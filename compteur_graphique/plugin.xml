@@ -27,11 +27,10 @@
     CompteurGraphique_mes_options.php
     </options>
     <install>CompteurGraphique_install.php</install>
-    <pipeline>
-        <nom>ajouter_boutons</nom>
-        <action>AjouterBouton</action>
-		<inclure>CompteurGraphique_pipeline.php</inclure>
-    </pipeline>
+	<bouton id='compteur_graphique' parent='statistiques_visites'>
+      <icone>img_pack/CompteurGraphique.gif</icone>
+      <titre>Compteurs graphiques</titre>
+  	</bouton>
     <pipeline>
         <nom>affiche_gauche</nom>
         <action>AfficheGauche</action>
