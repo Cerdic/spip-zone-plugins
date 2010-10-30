@@ -1,0 +1,46 @@
+[(#REM)
+	Pour afficher ce squelette de lecteur HTML / js dans votre site,
+	utiliser le code suivant :
+	<div id="player">
+		<INCLURE{fond=players/player_dist,env}>
+	</div>
+]
+<style type="text/css">
+#sm2_player_volume, #sm2_player_mute{margin-left:5px}
+#sm2_controllers{float:left}
+#sm2_scrollbar{float:right;width:500px;clear:none;margin:5px 35px 0;}
+#sm2_console{width:900px;}
+#sm2_title{position:absolute;top:-20px}
+#sm2_title_next{position:absolute;bottom:-20px}
+</style>
+<div id="sm2_player">
+	<div id="sm2_controllers">
+		<div class="button prev" id="sm2_player_prev">&nbsp;</div>
+		<div class="button play" id="sm2_player_play">&nbsp;</div>
+		<div class="button pause" id="sm2_player_pause">&nbsp;</div>
+		<div class="button next" id="sm2_player_next">&nbsp;</div>
+		<div class="button mute" id="sm2_player_mute">&nbsp;</div>
+		<div class="button volume" id="sm2_player_volume">&nbsp;</div>
+	</div>
+
+	<div id="sm2_console">
+		<div class="sm2_timer"><span class="sm2_position">0:00</span> / <span class="sm2_duration">0:00</span></div>
+		<div id="sm2_scrollbar">
+			<div id="sm2_title"><span id="sm2_title_value"></span></div>
+			<div id="sm2_loading"></div>
+			<div id="sm2_position"></div>
+			<div id="sm2_title_next">>> <span id="sm2_title_next_value"></span></div>
+		</div>
+	</div>
+	
+</div>
+
+<div class="nettoyeur">
+</div>
+
+<div style="display:none">
+<BOUCLE_art(ARTICLES spip_documents_liens spip_documents){extension=='mp3'}{!par popularite}>#SET{pop,#ID_ARTICLE}</BOUCLE_art>
+[(#ENV{type}|!={article}|oui)
+	[(#INCLURE{fond=inclure/documents}{id_article=#GET{pop}})]
+]
+</div>

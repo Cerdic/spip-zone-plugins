@@ -22,7 +22,7 @@ function lm2_insert_head($flux){
 
 	return $flux;
 }
-
+ 
  /**
  * Ajout d'un rel="enclosure" sur les liens mp3.
  * Permet de traiter les [mon son->http://monsite/mon_son.mp3] dans un texte.
@@ -35,9 +35,9 @@ function lm2_insert_head($flux){
  */
 
 function lm2_pre_liens($texte) {
-
+	
 	define('_RACCOURCI_LIEN_MP3', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*\.mp3)\]/msS");
-
+	
 	if (preg_match_all(_RACCOURCI_LIEN_MP3, $texte, $regs, PREG_SET_ORDER)) {
 
 		foreach ($regs as $k => $reg) {
@@ -48,7 +48,7 @@ function lm2_pre_liens($texte) {
 			}
 			$p = $reg[0];
 			$texte = str_replace($p,$l,$texte);
-		}
+		} 
 	}
 
 	return $texte;
