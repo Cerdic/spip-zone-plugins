@@ -76,7 +76,7 @@ function exec_dons() {
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11 border1">'.$data['id_don']."</td>\n";
 			echo '<td class="arial11 border1">'.association_datefr($data['date_don'])."</td>\n";
-			echo '<td class="arial11 border1">'.$data['bienfaiteur']."</td>\n";
+			echo '<td class="arial11 border1">'.propre($data['bienfaiteur'])."</td>\n";
 			echo '<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['argent']).'&nbsp;&euro;</td>';
 			echo '<td class="arial11 border1">'.$data['colis']."</td>\n";
 			echo '<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['valeur']).'&nbsp;&euro;</td>';

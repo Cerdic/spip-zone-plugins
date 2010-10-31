@@ -14,7 +14,7 @@ include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 	
 function exec_comptes() {
-		
+
 	include_spip('inc/autoriser');
 	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
@@ -130,8 +130,7 @@ function exec_comptes() {
 
 	//SOUS-PAGINATION
 
-	$query = sql_select('*', 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");
-	$nombre_selection=sql_count($query);
+	$nombre_selection=sql_countsel('spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 	$nav = '';
 	if ($pages != 1) { 

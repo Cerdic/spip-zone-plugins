@@ -40,6 +40,9 @@ function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='
 	
 	if (!$valeur) $valeur = $argent;
 	$date = $date_don ? $date_don : date("Y-m-d");
+	if ($id_adherent) {
+		$bienfaiteur = "[$bienfaiteur" . "->membre$id_adherent]";
+	}
 	$id_don = sql_insertq('spip_asso_dons', array(
 					    'date_don' => $date,
 					    'bienfaiteur' => $bienfaiteur,
@@ -49,13 +52,13 @@ function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='
 					    'valeur' => $valeur,
 					    'contrepartie' => $contrepartie,
 					    'commentaire' => $commentaire));
-	$qui = $id_adherent ?  " [$bienfaiteur" . "->membre$id_adherent]" : '';
+
 	sql_insertq('spip_asso_comptes', array(
 		    'date' => $date,
 		    'imputation' => $GLOBALS['association_metas']['pc_dons'],
 		    'recette' => $argent,
 		    'journal' => $journal,
 		    'id_journal' => $id_don,
-		    'justification' => "[->don$id_don]$qui"));
+		    'justification' => "[->don$id_don] - $bienfaiteur"));
 }
 ?>

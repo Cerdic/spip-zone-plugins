@@ -69,7 +69,7 @@ function exec_voir_adherent(){
 		
 		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_auteur ", '', "date DESC" );
 		while ($data = sql_fetch($query)) {
-		  voir_adherent_cotisation($data['id_compte'], $data['date'], $data['recette'], $data['justification'], $data['journal']);
+		  voir_adherent_paiement($data['id_compte'], $data['date'], $data['recette'], $data['justification'], $data['journal']);
 		}
 		echo '</table>';
 		echo '</fieldset>';
@@ -141,10 +141,8 @@ function exec_voir_adherent(){
 			echo '<th>'._T('asso:adherent_entete_justification').'</th>';
 			echo '<th style="text-align:right;">'._T('asso:montant').'</th>';
 			$query = sql_select("*", "spip_asso_dons", 'id_adherent='.$id_auteur, '', "date_don DESC" );			
-			while ($data = sql_fetch($query)) {
-			  voir_adherent_cotisation($data['id_don'], $data['date_don'], $data['argent'], $data['bienfaiteur'], 
-						   // jointure pour le journal
-						   '');
+			foreach(voir_adherent_dons($id_auteur) as $data) {
+				voir_adherent_paiement($data['id_don'], $data['date_don'], $data['argent'], $data['justification'], $data['journal']);
 			}
 			echo '</table></fieldset>';
 		}
@@ -190,7 +188,7 @@ function exec_voir_adherent(){
 	} 
 }
 
-function voir_adherent_cotisation($id, $date, $montant, $justification, $journal)
+function voir_adherent_paiement($id, $date, $montant, $justification, $journal)
 {
 	echo '<tr style="background-color: #EEEEEE;">';
 	echo '<td class="arial11 border1" style="text-align:right;">'.$id."</td>\n";
@@ -211,5 +209,14 @@ function voir_adherent_vente($id, $article, $quantite, $date_vente, $date_envoi)
 	echo '<td class="arial11 border1" style="text-align:right;">'.association_datefr($date_envoi)."</td>\n";
 	echo '<td class="arial11 border1" style="text-align:center;">', association_bouton(_T('asso:adherent_bouton_maj_vente'), 'edit-12.gif', 'edit_vente','id='.$id), "</td>\n";
 	echo '</tr>';
+}
+
+function voir_adherent_dons($id_auteur)
+{
+	return sql_allfetsel("*", 
+			     "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don",
+			     'C.imputation=' . sql_quote($GLOBALS['association_metas']['pc_dons']) . ' AND '. 'id_adherent='.$id_auteur, 
+			     '',
+			     "D.date_don DESC" );			
 }
 ?>
