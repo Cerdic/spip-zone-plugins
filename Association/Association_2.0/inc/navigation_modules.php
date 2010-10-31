@@ -12,13 +12,13 @@
 
 function association_onglets(){
 	
-	echo "<h2>",
-	  _T('asso:gestion_de_lassoc'),
-	  ' ',
-	  $GLOBALS['association_metas']['nom'],
-	  "</h2><div class='bandeau_actions'>",
-	  debut_onglet();
-		
+	echo gros_titre(
+		_T('asso:gestion_de_lassoc') .
+		' ' .
+		$GLOBALS['association_metas']['nom'], '', false);
+
+	if (!autoriser('configurer')) return;
+
 	$link1= generer_url_ecrire('adherents');
 	$link2= generer_url_ecrire('dons');
 	$link4= generer_url_ecrire('ventes');
@@ -26,6 +26,8 @@ function association_onglets(){
 	$link6= generer_url_ecrire('comptes');
 	$link7= generer_url_ecrire('ressources');
 	
+	echo "<div class='bandeau_actions'>", debut_onglet();
+		
 	echo onglet(_T('asso:menu2_titre_gestion_membres'), $link1, '', 'Membres', _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif','rien.gif' );  
 	if ($GLOBALS['association_metas']['dons']) {
 		echo onglet(_T('asso:menu2_titre_gestion_dons'), $link2, '', 'Dons', _DIR_PLUGIN_ASSOCIATION_ICONES.'dons.gif','rien.gif' ); 
@@ -44,7 +46,7 @@ function association_onglets(){
 	}
 	
 	echo fin_onglet(), '</div>';
-	}
+}
 
 function fin_page_association()
 {

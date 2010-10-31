@@ -18,7 +18,9 @@ include_spip ('inc/navigation_modules');
 function exec_voir_adherent(){
 		
 	$id_auteur= intval($_GET['id']);
-	if (!autoriser('configurer') OR !$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur")) {
+	$full = autoriser('configurer');
+	
+	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur")) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -27,7 +29,7 @@ function exec_voir_adherent(){
 		$nom_famille=$data['nom_famille'];
 		$prenom=$data['prenom'];
 		$validite=$data['validite'];
-		$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		//debut_page(_T(), "", "");
@@ -41,12 +43,18 @@ function exec_voir_adherent(){
 		echo '<span class="spip_xx-large">';
 		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
 		echo '</span></div>';
-		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">',
-			"<a href='$adh' title=\"",
-			_T('asso:adherent_label_modifier_membre'),
-			"\">",
-			htmlspecialchars($nom_famille.' '.$prenom),
-			 "</a></td></div>\n";
+
+		$nom = htmlspecialchars($nom_famille.' '.$prenom);
+		if ($full) {
+			$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
+			$nom = "<a href='$adh' title=\"" .
+			  _T('asso:adherent_label_modifier_membre') .
+			  "\">" .
+			  $nom .
+			  "</a>";
+		}
+		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', $nom, "</div>\n";
+
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		 echo fin_boite_info(true);
 		
@@ -69,7 +77,9 @@ function exec_voir_adherent(){
 		
 		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_auteur ", '', "date DESC" );
 		while ($data = sql_fetch($query)) {
-		  voir_adherent_paiement($data['id_compte'], $data['date'], $data['recette'], $data['justification'], $data['journal']);
+		  $j = $full ? $data['justification']
+		  : nettoyer_raccourcis_typo($data['justification']);
+		  voir_adherent_paiement($data['id_compte'], $data['date'], $data['recette'], $j, $data['journal']);
 		}
 		echo '</table>';
 		echo '</fieldset>';
@@ -142,7 +152,9 @@ function exec_voir_adherent(){
 			echo '<th style="text-align:right;">'._T('asso:montant').'</th>';
 			$query = sql_select("*", "spip_asso_dons", 'id_adherent='.$id_auteur, '', "date_don DESC" );			
 			foreach(voir_adherent_dons($id_auteur) as $data) {
-				voir_adherent_paiement($data['id_don'], $data['date_don'], $data['argent'], $data['justification'], $data['journal']);
+				$j = $full ? $data['justification']
+				: nettoyer_raccourcis_typo($data['justification']);
+				voir_adherent_paiement($data['id_don'], $data['date_don'], $data['argent'], $j, $data['journal']);
 			}
 			echo '</table></fieldset>';
 		}
