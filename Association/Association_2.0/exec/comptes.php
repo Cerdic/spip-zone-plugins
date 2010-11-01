@@ -160,7 +160,6 @@ function comptes_while($annee, $imputation, $debut, $max_par_page)
 		if ($data['recette'] >0) { $class= "pair";}
 		else { $class="impair";}	   
 		$id = $data['id_compte'];
-		$valide = (isset($data['valide']) AND ($data['valide']=='oui'));
 		$auteurs .= "\n<tr>"
 		. '<td class="'
 		. $class. ' border1" style="text-align:right;">'
@@ -181,7 +180,7 @@ function comptes_while($annee, $imputation, $debut, $max_par_page)
 		. $class. ' border1">'
 		. $data['journal']
 		. '</td>'
-		. ($valide ?
+		. ($data['vu'] ?
 			("<td class='$class' colspan='3' style='border-top: 1px solid #CCCCCC;'>&nbsp;</td>\n")
 		   :  ("<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:mettre_a_jour'), 'edit-12.gif', 'edit_compte', 'id='.$id) . "</td>\n"
 			. "<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:supprimer'), 'poubelle.gif', 'action_comptes', 'id='.$id) . "</td>\n"

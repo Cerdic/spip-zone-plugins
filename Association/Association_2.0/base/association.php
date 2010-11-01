@@ -91,7 +91,7 @@ $spip_asso_comptes = array(
 	"imputation" 	=> "text",
 	"journal" 	=> "tinytext",
 	"id_journal" 	=> "int(11) NOT NULL default '0'",
-	"valide"	=>  "text",
+	"vu"		=> "boolean default 0",
 	"maj" 		=> "timestamp(14) NOT NULL"
 );						
 $spip_asso_comptes_key = array(

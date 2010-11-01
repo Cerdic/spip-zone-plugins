@@ -17,6 +17,6 @@ function action_valider_comptes() {
 	$securiser_action();
 	include_spip('base/association');
 	$where = sql_in('id_compte', $_POST["definitif"]);
-	sql_updateq('spip_asso_comptes', array('valide' => 'oui'), $where);
+	sql_updateq('spip_asso_comptes', array('vu' => 1), $where);
 }
 ?>

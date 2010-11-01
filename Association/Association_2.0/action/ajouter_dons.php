@@ -29,7 +29,7 @@ function action_ajouter_dons() {
 	don_insert($id_adherent, $date_don, $argent, $bienfaiteur, $valeur, $journal, $contrepartie, $colis, $commentaire);
 }
 
-function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='', $journal='', $contrepartie='', $colis='', $commentaire='', $valide='')
+function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='', $journal='', $contrepartie='', $colis='', $commentaire='', $valide=0)
 {
 	include_spip('base/association');		
 	$id_adherent = intval($id_adherent);
@@ -53,7 +53,7 @@ function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='
 
 	sql_insertq('spip_asso_comptes', array(
 		    'date' => $date,
-		    'valide' => $valide,
+		    'vu' => 0,
 		    'imputation' => $GLOBALS['association_metas']['pc_dons'],
 		    'recette' => $argent,
 		    'journal' => $journal,

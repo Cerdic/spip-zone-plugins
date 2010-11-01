@@ -1,10 +1,10 @@
 <plugin>
 	<nom>Association_2</nom>
-	<auteur>												<!-- Auteur du plugin -->
+	<auteur>
 	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James
 	</auteur>
 	<version>0.65</version>
-	<version_base>38578</version_base>
+	<version_base>42024</version_base>
 	<meta>association_metas</meta>
 	<etat>test</etat>
 	<description>Gestion d'associations</description>

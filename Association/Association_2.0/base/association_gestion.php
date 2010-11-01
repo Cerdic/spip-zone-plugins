@@ -159,4 +159,13 @@ $GLOBALS['association_maj'][38258] = array(array('sql_create','spip_asso_membres
 					);
 $GLOBALS['association_maj'][38578] = array(
 	array('spip_query', 'rename table spip_asso_metas TO spip_association_metas'));
+
+function association_maj_42024()
+{
+	sql_alter("TABLE spip_asso_comptes ADD vu BOOLEAN default 0");
+	sql_update('spip_asso_comptes', array('vu' => 1), "valide='oui'");
+	sql_alter("TABLE spip_asso_comptes DROP valide");
+}
+
+$GLOBALS['association_maj'][42024] = array(array('association_maj_42024'));
 ?>
