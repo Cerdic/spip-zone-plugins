@@ -457,23 +457,25 @@ soundManager.onready(function() {
 		
 		var thisSound = soundManager.getSoundById('media'+liveTrackIndex);
 		
-		// console.log(thisSound);
-		
-		var thisTitle =  $(thisSound._data.oLink).html() ;
-		$("#sm2_title_value").html(thisTitle.substr(0,80));
-		
-		var nextTrack = tIndex + 1 ;
-		var nextSound = soundManager.getSoundById('media'+ nextTrack);
-		if(nextSound)
-			var nextTitle = $(nextSound._data.oLink).html() ;
-
-		$("#sm2_title_next_value").css("cursor","pointer").html("").html(nextTitle);
-		$("#sm2_title_next_value").click(function(e){
-			e.preventDefault();
-			if(liveTrackIndex != (inlinePlayer.soundsByURL.length - 1)){
-				sm2_play_pause(liveTrackIndex + 1);
-			}
-		});
+		if(thisSound){
+			// console.log(thisSound);
+			
+			var thisTitle =  $(thisSound._data.oLink).html() ;
+			$("#sm2_title_value").html(thisTitle.substr(0,80));
+			
+			var nextTrack = tIndex + 1 ;
+			var nextSound = soundManager.getSoundById('media'+ nextTrack);
+			if(nextSound)
+				var nextTitle = $(nextSound._data.oLink).html() ;
+	
+			$("#sm2_title_next_value").css("cursor","pointer").html("").html(nextTitle);
+			$("#sm2_title_next_value").click(function(e){
+				e.preventDefault();
+				if(liveTrackIndex != (inlinePlayer.soundsByURL.length - 1)){
+					sm2_play_pause(liveTrackIndex + 1);
+				}
+			});
+		}	
 	}
 	
 
