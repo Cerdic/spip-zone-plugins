@@ -99,7 +99,7 @@ function exec_comptes() {
 		echo '<option value="%" ';
 		if ($imputation=="%") { echo ' selected="selected"'; }
 		echo '>Tous</option>';
-		$sql = sqL_select('*', 'spip_asso_plan','', '', "classe,code");
+		$sql = sqL_select('code, classe, intitule', 'spip_asso_plan','', '', "classe,code");
 		while ($plan = sql_fetch($sql)) {
 			echo '<option value="'.$plan['code'].'" ';
 			if ($imputation==$plan['code']) { echo ' selected="selected"'; }
