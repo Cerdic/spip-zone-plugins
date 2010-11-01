@@ -38,6 +38,18 @@ options:
       -
         saisie: 'oui_non'
         options:
+          nom: 'afficher_langue'
+          label: '<:saisies:option_aff_langue_label:>'
+          explication: '<:saisies:option_aff_langue_explication:>'
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'afficher_rub_dans_langue_interface'
+          label: '<:saisies:option_aff_rub_interface_label:>'
+          explication: '<:saisies:option_aff_rub_interface_explication:>'
+      -
+        saisie: 'oui_non'
+        options:
           nom: 'disable'
           label: '<:saisies:option_disable_label:>'
           explication: '<:saisies:option_disable_explication:>'
