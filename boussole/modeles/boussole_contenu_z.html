@@ -1,0 +1,38 @@
+<B_groupe>
+<div class="contenu-principal">
+[(#ENV{cartouche_boussole}|=={oui}|oui)
+	<div class="cartouche">
+		[(#CHEMIN{prive/themes/spip/images/boussole[-(#ENV{boussole})].png}|image_reduire{#ENV{taille_logo}}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,logo #ENV{boussole}})]
+		[<h1 class="h1">(#ENV{boussole}|boussole_traduire{nom_boussole})</h1>]
+		[<p class="info-publi">
+			(#ENV{boussole}|boussole_traduire{slogan_boussole})
+		</p>]
+	</div>
+]
+	<div class="surlignable">
+<BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
+	[(#REM) <!-- Liste des site du groupe en cours -->]
+	<B_site>
+	[(#ENV{titre_groupe}|=={oui}|oui)
+		[<h3 class="h3">(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})</h3>]
+	]
+	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
+		[<p>
+			<strong>
+				<a class="spip_out" rel="external" href="#URL_SITE"[ title="(#AKA_BOUSSOLE|boussole_traduire{slogan_site, #AKA_SITE})"]>
+					(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})
+				</a>
+			</strong>
+		[(#ENV{slogan_site}|=={oui}|oui)
+			[&nbsp;:&nbsp;(#AKA_BOUSSOLE|boussole_traduire{slogan_site, #AKA_SITE})]
+		]
+		[(#ENV{descriptif_site}|=={oui}|oui)
+			[<br />(#AKA_BOUSSOLE|boussole_traduire{descriptif_site, #AKA_SITE})]
+		]
+		</p>]
+	</BOUCLE_site>
+	</B_site>
+</BOUCLE_groupe>
+	</div>
+</div>
+</B_groupe>

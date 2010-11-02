@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>Demo Boussole</title>
+<style type="text/css">
+body { padding: 0 10%; text-align: left; }
+</style>
+</head>
+
+<body>
+	<hr />
+	<:boussole:label_modele:> : boussole_liste_simple
+	<hr />
+	[(#MODELE{boussole_liste_simple, boussole=spip, titre_boussole=oui, div_class=boussole})]
+	<hr />
+	<:boussole:label_modele:> : boussole_liste_par_groupe
+	<hr />
+	[(#MODELE{boussole_liste_par_groupe, boussole=spip, titre_boussole=oui, titre_groupe=oui})]
+	<hr />
+	<:boussole:label_modele:> : boussole_liste_avec_logo
+	<hr />
+	[(#MODELE{boussole_liste_avec_logo, boussole=spip, titre_boussole=oui, type_description=slogan_site, taille_logo=48})]
+	<hr />
+	<:boussole:label_modele:> : boussole_contenu_z
+	<hr />
+	[(#MODELE{boussole_contenu_z, boussole=spip, cartouche_boussole=oui, taille_logo=40, titre_groupe=oui, slogan_site=oui, descriptif_site=oui})]
+	<hr />
+	<:boussole:label_modele:> : boussole_tableau
+	<hr />
+	[(#MODELE{boussole_tableau, boussole=spip, cartouche_boussole=oui, titre_groupe=oui, taille_logo=32})]
+</body>
+</html>

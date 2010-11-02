@@ -1,0 +1,11 @@
+<div class="infos">
+	<div class='numero'>
+		<:boussole:titre_boite_infos_boussole:>
+		<p>#ENV{alias}</p>
+	</div>
+	<ul id="instituer-boussole-#ENV{alias}" class="instituer_boussole instituer">
+		<li>[<:boussole:label_version:> (#ENV{version})]</li>
+		<li>[(#ENV{nbr_sites}) [(#ENV{nbr_sites}|singulier_ou_pluriel{<:boussole:label_1_site:>, <:boussole:label_n_sites:>})]]</li>
+		<li><p>[<:svp:label_actualise_le:><br />(#ENV{maj}|affdate), [(#ENV{maj}|affdate{H:i})]]</p></li>
+	</ul>
+</div>

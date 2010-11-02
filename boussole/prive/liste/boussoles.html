@@ -1,0 +1,22 @@
+<div class="fiche_objet" style="margin-bottom: 20px;">
+	<div id="boite_onglet_1" class="boite_onglet">
+		<h1><:boussole:titre_liste_boussoles:></h1>
+
+		[<p><:boussole:info_liste_boussoles:></p>
+		<div id="boussoles">
+			[(#CHEMIN{prive/themes/spip/images/boussole_icone-24.png}|debut_cadre_enfonce{#EVAL{true}})]
+			[(#VAL{<:boussole:titre_bloc_boussoles:>}|bouton_block_depliable{#EVAL{true}, boussoles_depliable})]
+			<div id="boussoles_depliable" class="bloc_depliable blocdeplie">
+				<div class="cadre cadre-liste">
+					<table summary="<:boussole:resume_table_boussoles:>" width="100%" cellspacing="0" cellpadding="2" border="0"><tbody>
+						(#BOUSSOLE_INFOS|foreach{resume-boussole})
+					</tbody></table>
+				</div>
+			</div>
+			[(#EVAL{true}|fin_cadre_enfonce)]
+		</div>]
+
+		[(#BOUSSOLE_INFOS|count|non)
+			<p><:boussole:info_liste_aucune_boussole:></p>]
+	</div>
+</div>

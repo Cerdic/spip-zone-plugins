@@ -1,0 +1,20 @@
+<B_groupe>
+<div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
+[(#ENV{titre_boussole}|=={oui}|oui)
+	[<h2>(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
+]
+<BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
+	[(#REM) <!-- Liste des site du groupe en cours -->]
+	<B_site>
+[(#ENV{titre_groupe}|=={oui}|oui)
+	[<h3>(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})</h3>]
+]
+	<ul>
+	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
+		[<li><a href="#URL_SITE"[ title="(#AKA_BOUSSOLE|boussole_traduire{slogan_site, #AKA_SITE})"]>(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})</a></li>]
+	</BOUCLE_site>
+	</ul>
+	</B_site>
+</BOUCLE_groupe>
+</div>
+</B_groupe>

@@ -1,0 +1,14 @@
+<boussole alias="sarka" version="0.3">
+
+	<!-- Sites de reference Sarka-SPIP -->
+	<groupe type="reference">
+		<site alias="net" src="http://www.sarka-spip.net/" />
+		<site alias="zest" src="http://zest.shizuka.fr/" />
+	</groupe>
+
+	<!-- Sites de decouverte -->
+	<groupe type="decouverte">
+		<site alias="delicious" src="http://www.delicious.com/sarkaspip/" />
+	</groupe>
+
+</boussole>

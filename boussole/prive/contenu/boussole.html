@@ -1,0 +1,12 @@
+[<div class="champ contenu_descriptif">
+	<div class="label"><:boussole:label_slogan:></div>
+	<div dir="#LANG_DIR" class="#EDIT{type} type"><p>(#ENV{slogan})</p></div>
+</div>]
+[<div class="champ contenu_ps">
+	<div class="label"><:boussole:label_fichier_xml:>&nbsp;:</div>
+	<div dir="#LANG_DIR" class="ps"><p>(#ENV{url})</p></div>
+</div>]
+[<div class="champ contenu_texte[ (#ENV*{descriptif}|strlen|?{'',vide})]">
+	<div class="label"><:label_descriptif:></div>
+	<div dir="#LANG_DIR" class="texte">(#ENV{descriptif})</div>
+</div>]

@@ -1,0 +1,44 @@
+<plugin>
+	<nom>Boussole</nom>
+	<auteur>Eric Lupinacci</auteur>
+	<licence>GPL</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<icon>prive/themes/spip/images/boussole_icone-64.png</icon>
+	<etat>dev</etat>
+    <description>
+Un navigateur pour voyager dans une galaxie de sites.
+_ Ce plugin range en base de données une liste des sites regroup&eacute;s sous le vocable boussole; cette liste est d&eacute;finie dans un fichier xml.
+_ Le plugin fourni un fichier xml standard avec tous les sites de galaxie SPIP mais rien ne vous empêche d'en cr&eacute;er un vous-m&ecirc;me.
+Les sites d'une boussole sont alors affichables dans vos sites en utilisant les mod&egrave;les propos&eacute;s par le plugin ou cr&eacute;&eacute;s par vos soins.
+	</description>
+	<lien></lien>
+	<prefix>boussole</prefix>
+	<categorie>navigation</categorie>
+
+	<fonctions>boussole_fonctions.php</fonctions>
+	<install>base/boussole_installer.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/boussole_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/boussole_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>boussole_pipelines.php</inclure>
+	</pipeline>
+
+	<bouton id="boussole" parent="configuration">
+		<icone>prive/themes/spip/images/boussole_icone-24.png</icone>
+		<titre>boussole:bouton_boussole</titre>
+		<url>boussoles_gerer</url>
+	</bouton>
+	<bouton id='boussole_21' parent='bando_squelette'>
+		<icone>images/boussole_icone-16.png</icone>
+		<titre>boussole:bouton_boussole</titre>
+		<url>boussoles_gerer</url>
+	</bouton>
+</plugin>

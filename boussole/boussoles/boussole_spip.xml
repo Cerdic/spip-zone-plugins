@@ -1,0 +1,43 @@
+<boussole alias="spip" version="0.1">
+
+	<!-- Sites de reference SPIP -->
+	<groupe type="reference">
+		<site alias="net" src="http://www.spip.net/" />
+		<site alias="doc" src="http://doc.spip.org/" />
+		<site alias="programmer" src="http://programmer.spip.org/" />
+	</groupe>
+
+	<!-- Sites d'aide & echanges autour de SPIP -->
+	<groupe type="aide">
+		<site alias="forum" src="http://forum.spip.org/" />
+		<site alias="user" src="http://listes.rezo.net/mailman/listinfo/spip/" />
+		<site alias="irc" src="http://www.spip.net/irc/" />
+		<site alias="party" src="http://www.spip-party.net/" />
+		<site alias="twit" src="http://spip.org/" />
+	</groupe>
+
+	<!-- Sites de decouverte des realisations SPIP -->
+	<groupe type="decouverte">
+		<site alias="info" src="http://www.spip-info.net/" />
+		<site alias="herbier" src="http://www.spip-herbier.net/" />
+		<site alias="video" src="http://video.spip.org/" />
+		<site alias="demo" src="http://demo.spip.org/" />
+		<site alias="test" src="http://grml.eu/" />
+	</groupe>
+
+	<!-- Sites des actualites SPIP -->
+	<groupe type="actualite">
+		<site alias="blog" src="http://www.spip-blog.net/" />
+		<site alias="zine" src="http://zine.spip.org/" />
+		<site alias="mag" src="http://mag.spip.net/" />
+		<site alias="sedna" src="http://sedna.spip.org/" />
+	</groupe>
+	
+	<!-- Sites des extensions & contributions SPIP -->
+	<groupe type="extension">
+		<site alias="plugin" src="http://plugins.spip.net/" />
+		<site alias="contrib" src="http://www.spip-contrib.net/" />
+		<site alias="zone" src="http://zone.spip.org/" />
+	</groupe>
+
+</boussole>

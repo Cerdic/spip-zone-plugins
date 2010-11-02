@@ -1,0 +1,67 @@
+<div class="formulaire_spip formulaire_ajouter_boussole" id="formulaire_ajouter_boussole">
+	<h3 class="titrem">
+		[(#CHEMIN{prive/themes/spip/images/boussole_ajout-24.png}|balise_img{icone boussole_plus-24,cadre-icone})]
+		<:boussole:titre_form_ajouter_boussole:>
+	</h3>
+
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<p class="explication"><:boussole:info_ajouter_boussole:></p>
+					<ul>
+						<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
+							<label><:boussole:label_mode:></label>
+							<div class="choix">
+								<input type="radio" value="standard" id="mode_standard" class="radio" name="mode" [(#ENV{mode, standard}|=={standard}|oui) checked="checked"] />
+								<label for="mode_standard"><:boussole:label_mode_standard:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" value="url_perso" id="mode_url_perso" class="radio" name="mode" [(#ENV{mode, standard}|=={url_perso}|oui) checked="checked"] />
+								<label for="mode_url_perso"><:boussole:label_mode_url_perso:></label>
+							</div>
+						</li>
+						<li class="editer_url_boussole obligatoire[(#ENV{erreurs}|table_valeur{url_boussole}|oui) erreur]" id="option_url_perso">
+							<p class="explication">
+								<:boussole:info_fichier_boussole:>
+							</p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{url_boussole})</span>]
+							<input type="text" name="url_boussole" id="url_boussole" value="" class="text" />						
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{mode, standard}|=={url_perso}|non)
+			jQuery("#option_url_perso").hide();
+		]
+		jQuery("input[name='mode']").change(function() {
+			if (jQuery("input[name='mode']:checked").val() == 'standard') {
+				jQuery("#option_url_perso").hide();
+			}
+			else {
+				jQuery("#option_url_perso").show();
+			}
+			jQuery(this).blur();
+		});	
+	});
+//]]>
+</script>

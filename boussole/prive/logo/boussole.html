@@ -1,0 +1,24 @@
+<div id="iconifier-#ENV{alias}" class="iconifier">
+	<a accesskey="b" href="#access-b" id="access-b"></a>
+	<div class="cadre cadre-r">
+		<img height="24" width="24" class="cadre-icone" alt="" src="#CHEMIN{prive/images/image-24.gif}" />
+		[(#VAL{<:boussole:titre_boite_logo_boussole:>}|bouton_block_depliable{#EVAL{true}})]
+		[(#EVAL{true}|debut_block_depliable)]
+		<div>
+			#SET{logo, #CHEMIN{prive/themes/spip/images/boussole-#ENV{alias}.png}}
+			[<div>
+				<a [ href="(#GET{logo})"]>
+					(#GET{logo}|image_reduire{256}|inserer_attribut{class,miniature_logo}|inserer_attribut{alt,logo #ENV{alias}})
+				</a>
+			</div>]
+			<div>
+				<div class="cadre-padding">
+					<div class="spip_xx-small">[(#GET{logo}|boussole_informer_taille)]</div>
+				</div>
+			</div>
+			<div class="nettoyeur"></div>
+		</div>
+		<div class="nettoyeur"></div>
+		[(#VAL|fin_block)]
+	</div>
+</div>

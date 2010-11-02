@@ -1,0 +1,53 @@
+<B_groupe>
+<ul[ id="boussole-(#ENV{alias})"] class="menus_entrees">
+<BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{alias}}{par rang_groupe}>
+	<B_site>
+	[(#REM) <!-- Insertion de la ligne correspondant au groupe -->]
+	[(#SET{logo, #CHEMIN{prive/themes/spip/images/groupe-24.png}})]
+	<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#GET{logo}|image_reduire{24}|extraire_attribut{src}))"]>
+		<div class="ligne">
+			<div class="description arial2">
+				<div class="titre">
+					[(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})]
+					[<i>((#AKA_GROUPE))</i>]
+				</div>
+			</div>
+			#INCLURE{fond=formulaires/inc-editer_boutons,
+				type=groupe,
+				alias=#AKA_GROUPE,
+				rang=#RANG_GROUPE,
+				total=#_groupe:TOTAL_BOUCLE,
+				compteur=#_groupe:COMPTEUR_BOUCLE}
+			<div class="nettoyeur"></div>
+		</div>
+
+		[(#REM) <!-- Insertion des sites du groupe -->]
+		<ul[ id="groupe-(#AKA_GROUPE)"] class="menus_entrees">
+	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{par rang_site}>
+			[(#SET{logo, [(#CHEMIN{prive/themes/spip/images/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png})]})]
+			<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#GET{logo}|image_reduire{24}|extraire_attribut{src}))"]>
+				<div class="ligne #AFFICHE">
+					<div class="description arial2">
+						<div class="titre">
+							[(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
+							[<i>((#AKA_SITE))</i>]
+						</div>
+						<div class="infos">[(#AKA_BOUSSOLE|boussole_traduire{slogan_site, #AKA_SITE})]</div>
+					</div>
+					#INCLURE{fond=formulaires/inc-editer_boutons,
+						type=site,
+						id_site=#ID_SITE,
+						rang=#RANG_SITE,
+						affiche=#AFFICHE,
+						total=#_site:TOTAL_BOUCLE,
+						compteur=#_site:COMPTEUR_BOUCLE}
+					<div class="nettoyeur"></div>
+				</div>
+			</li>
+	</BOUCLE_site>
+		</ul>
+	</li>
+	</B_site>
+</BOUCLE_groupe>
+</ul>
+</B_groupe>

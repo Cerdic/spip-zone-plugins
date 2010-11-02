@@ -1,0 +1,26 @@
+<B_boussoles>
+<div class="cadre cadre-e" style="margin-top: 2em;">
+	<img height="24" width="24" class="cadre-icone" alt="" src="#CHEMIN{prive/themes/spip/images/boussole_icone-24.png}" />
+	[(#VAL{<:boussole:titre_boite_autres_boussoles:>}|bouton_block_depliable{#EVAL{true}})]
+	[(#EVAL{true}|debut_block_depliable)]
+	<div class="cadre_padding">
+<BOUCLE_boussoles(BOUSSOLES){fusion aka_boussole}{aka_boussole!=#ENV{alias}}>
+		<div>
+			<div style="float: right; width: 32%;">
+				<a title="<:boussole:bulle_configurer_boussole:>"[ href="(#URL_ECRIRE{boussoles}|parametre_url{alias, #AKA_BOUSSOLE})"] style="float: right; padding-left: 4px; color: black;" class="spip_xx-small">
+					<b>#AKA_BOUSSOLE</b>
+				</a>
+			</div>
+			<div>
+				<a title="<:boussole:bulle_configurer_boussole:>"[ href="(#URL_ECRIRE{boussoles}|parametre_url{alias, #AKA_BOUSSOLE})"] class="verdana1">
+					[(#AKA_BOUSSOLE|boussole_traduire{nom_boussole})]
+				</a>
+			</div>
+			<div style="clear: both; height: 3px;"></div>
+		</div>
+</BOUCLE_boussoles>
+		<div class="nettoyeur"></div>
+	</div>
+	[(#VAL|fin_block)]
+</div>
+</B_boussoles>
