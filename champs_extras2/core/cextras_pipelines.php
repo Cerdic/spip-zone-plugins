@@ -299,9 +299,18 @@ function cextras_afficher_contenu_objet($flux){
 			{
 
 				$contexte = cextras_creer_contexte($c, $contexte);
-
+				$saisie_externe = false;
+				
 				// calculer le bon squelette et l'ajouter
-				if (!find_in_path(
+				if($c->saisie_externe && find_in_path(
+				($f = 'saisies-vues/'.$c->type).'.html')){
+					$contexte['valeur'] = $contexte[$c->champ];
+					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas'])
+						$contexte['datas'] = $c->saisie_parametres['datas'];
+						
+					$saisie_externe = true;
+				}
+				else if (!find_in_path(
 				($f = 'extra-vues/'.$c->type).'.html')) {
 					// si on ne sait pas, on se base sur le contenu
 					// pour choisir ligne ou bloc
@@ -310,6 +319,9 @@ function cextras_afficher_contenu_objet($flux){
 						: 'extra-vues/ligne';
 				}
 				$extra = recuperer_fond($f, $contexte);
+				if($saisie_externe){
+					$extra = '<div class="'.$c->champ.'"><strong>'._T($c->label).'</strong>'.$extra.'</div>';
+				}
 				$flux['data'] .= "\n".$extra;
 			}
 		}
