@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_ajouter_explication">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  [(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='pipeline' value='#ENV{pipeline}' />
+	  <input type='hidden' name='arg_exec' value='#ENV{exec}' />
+
+	  <div class="[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+		<label for="surtitre"><:explications:texte_explication:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+		]<textarea class='text multilang' name='texte_explication' rows="10">[(#ENV**{texte})]</textarea>
+	  </div>
+	  
+	  <p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
