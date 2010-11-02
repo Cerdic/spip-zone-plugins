@@ -59,7 +59,7 @@ function boussole_ajouter($url, &$erreur=''){
 		boussole_supprimer($infos['boussole']['alias']);
 	// -- insertion de la nouvelle liste de sites pour cette boussole
 	if (!$ids = sql_insertq_multi('spip_boussoles', $infos['sites'])) {
-		$erreur = _T('boussole:message_nok_ecriture_bdd', array('fichier' => $url));
+		$erreur = _T('boussole:message_nok_ecriture_bdd');
 		return false;
 	}
 	// -- consignation des informations de mise a jour de cette boussole dans la table spip_meta

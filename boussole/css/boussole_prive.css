@@ -1,7 +1,7 @@
-.formulaire_configurer_affichage_boussole{
+.formulaire_editer_boussole{
 	position:relative;
 }
-.formulaire_configurer_affichage_boussole .image_loading{
+.formulaire_editer_boussole .image_loading{
 	position:absolute;
 	top:50%;
 	left:50%;
@@ -13,7 +13,6 @@
 }
 .formulaire_spip ul.menus_entrees ul.menus_entrees{
 	border-left:1px solid #ccc;
-	border-top:1px solid #ccc;
 }
 
 .formulaire_spip ul.menus_entrees li.entree{
@@ -24,7 +23,7 @@
 	padding-top:0;
 	background-position:5px 10px;
 	background-repeat:no-repeat;
-	border-bottom:1px solid #ccc;
+	border-top:1px solid #ccc;
 }
 
 .formulaire_spip ul.menus_entrees .ligne{
@@ -33,7 +32,7 @@
 }
 
 .formulaire_spip ul.menus_entrees .non{
-	color: #888;
+	color: #999;
 	background: url('../prive/themes/spip/images/fond-non.gif') repeat;
 }
 

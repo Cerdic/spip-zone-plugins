@@ -27,7 +27,7 @@ function formulaires_editer_boussole_traiter($aka_boussole){
 		$affiche = $matches[2];
 		$ok = sql_updateq('spip_boussoles',	array('affiche' => $affiche), 'id_site='. sql_quote($id_site));
 		if (!$ok)
-			$retours['message_erreur'] = _T('boussole:msg_nok_mise_a_jour_bdd');
+			$retours['message_erreur'] = _T('boussole:message_nok_ecriture_bdd');
 	}
 
 	// Si on demande a deplacer un groupe -----------------------------------
@@ -71,7 +71,7 @@ function formulaires_editer_boussole_traiter($aka_boussole){
 		}
 
 		if (!$ok) 
-			$retours['message_erreur'] = _T('menus:msg_nok_mise_a_jour_bdd');
+			$retours['message_erreur'] = _T('boussole:message_nok_ecriture_bdd');
 	}
 
 	// Si on demande a deplacer un site -------------------------------------
@@ -102,7 +102,7 @@ function formulaires_editer_boussole_traiter($aka_boussole){
 								'id_site='. sql_quote($id_site));
 
 		if (!$ok) 
-			$retours['message_erreur'] = _T('menus:msg_nok_mise_a_jour_bdd');
+			$retours['message_erreur'] = _T('boussole:message_nok_ecriture_bdd');
 	}
 
 	$retours['editable'] = true;
