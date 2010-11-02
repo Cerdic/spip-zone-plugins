@@ -29,6 +29,12 @@
 
 .formulaire_spip ul.menus_entrees .ligne{
 	position:relative;
+	min-height: 33px;
+}
+
+.formulaire_spip ul.menus_entrees .non{
+	color: #888;
+	background: url('../prive/themes/spip/images/fond-non.gif') repeat;
 }
 
 .formulaire_spip ul.menus_entrees .actions{
@@ -44,7 +50,7 @@
 }
 .formulaire_spip ul.menus_entrees .infos{
 	font-size:0.9em;
-	margin-bottom:5px;
+	margin-bottom:0;
 }
 
 .formulaire_spip ul.menus_entrees .actions button{
