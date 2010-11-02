@@ -17,13 +17,17 @@
 		label=<:plugin:choisir_le_menu:>})] 
 ]
 [(#SET{val,#ENV{valeur,#ENV{defaut}}})]
+
+[(#SET{filtrer_langue_article,[(#ENV{afficher_art_dans_langue_interface,0}|oui) #ENV{lang}]})]
+[(#SET{filtrer_langue_rubrique,[(#ENV{afficher_rub_dans_langue_interface,0}|oui) #ENV{lang}]})]
 [(#REM) Donner a manger a CFG si aucune valeur definie ]
 <!--<input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
 <INCLURE{fond=formulaires/selecteur/articles}
 	{selected=#GET{val}}
 	{name=#ENV{nom}}
 	{afficher_langue=#ENV{afficher_langue,''}}
-	{afficher_art_dans_langue_interface=#ENV{afficher_art_dans_langue_interface,''}}
-	{afficher_rub_dans_langue_interface=#ENV{afficher_rub_dans_langue_interface,''}}
+	{filtrer_langue_article=#GET{filtrer_langue_article,''}}
+	{filtrer_langue_rubrique=#GET{filtrer_langue_rubrique,''}}
 	{select=(#ENV{multiple}|?{0,1})}
 	{rubriques=1} />
+
