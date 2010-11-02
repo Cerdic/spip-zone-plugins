@@ -3,9 +3,7 @@
 	<auteur>format d&#233;fini par yaml.org ; librairie php d&#233;velopp&#233;e par Fabien Potencier pour Symfony
 	License MIT
 	</auteur>
-	<version>
-	1.3
-	</version>
+	<version>1.4.0</version>
 	<etat>
 	stable
 	</etat>

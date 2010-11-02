@@ -73,4 +73,28 @@ function yaml_decode_file($fichier){
 	return $retour;
 }
 
+/*
+ * Charge les inclusions de YAML dans un tableau
+ * Les inclusions sont indiquées dans le tableau via la valeur 'inclure_yaml:rep/fichier.yaml' où rep indique le chemin relatif.
+ * On passe donc par find_in_path() pour trouver le fichier
+ * @param array $tableau
+ */
+
+function yaml_charger_inclusions($tableau){
+	if (is_array($tableau)){
+		foreach($tableau as $cle => $valeur) {
+			if (is_string($valeur)) {
+				if (substr($valeur,0,13)=='inclure_yaml:')
+					$tableau[$cle] = yaml_charger_inclusions(yaml_decode_file(find_in_path(substr($valeur,13))));
+			} elseif (is_array($valeur)) {
+				$tableau[$cle] = yaml_charger_inclusions($valeur);
+			}
+		}
+	}
+	elseif (is_string($tableau) && substr($tableau,0,13)=='inclure_yaml:')
+		$tableau = yaml_charger_inclusions(yaml_decode_file(find_in_path(substr($tableau,13))));
+	
+	return $tableau;
+}
+
 ?>
