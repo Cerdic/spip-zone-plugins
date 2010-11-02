@@ -17,7 +17,6 @@
 */
 
 /* Blocs */
-.column { float: left; margin-right: #GET{line-height}; }
 .bloc { display: block; margin-bottom: #GET{margin-bottom}; }
 .box { display: block; margin-bottom: #GET{margin-bottom}; padding: #GET{line-height}; background: #EEE; }
 
@@ -30,6 +29,11 @@
 
 /* Alignements */
 .center { text-align: center; margin-right: auto; margin-left: auto; }
+
+/* Espaceur de blocs */
+.clear { clear: both; }
+br.clear,.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+hr.clear { visibility: hidden; }
 
 /* clearfix : http://www.positioniseverything.net/easyclearing.html */
 .clearfix:after {
@@ -46,11 +50,6 @@
 .clearfix { height: 1%; }
 .clearfix { display: block; }
 /* End hide from IE-mac */
-
-/* Espaceur de blocs */
-.clear { clear: both; }
-br.clear,.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
-hr.clear { visibility: hidden; }
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
