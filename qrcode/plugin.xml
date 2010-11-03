@@ -29,6 +29,7 @@ Il est distibué selon les termes de la licence [GPLv2->http://www.gnu.org/licen
        <action>insert_head</action>
        <inclure>qrcode_fonctions.php</inclure>
    </pipeline>
+   <fonctions>qrcode_fonctions.php</fonctions>
 
    <categorie>communication</categorie>
    <necessite id="cfg" version="[1.15.2;]" />
