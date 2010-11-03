@@ -1,0 +1,4 @@
+#SET{size, (#ENV{taille}|sinon{#CONFIG{'qrcode/taille'}}|sinon{1})}
+#SET{ecc, (#CONFIG{'qrcode/ecc'}|sinon{'L'})}
+#SET{texte, (#ENV{texte}|url_encode)}
+<img[ class="(#CONFIG{'qrcode/css'})"][ style="(#CONFIG{'qrcode/style'})"][src="(#URL_PAGE{qrcode})&data=#GET{texte}&size=#GET{size}&ecc=#CONFIG{'qrcode/ecc'}"] alt="<:qrcode:aide:>"/>

@@ -1,0 +1,36 @@
+<plugin>
+    <nom> QrCode </nom>
+
+    <auteur> Frédéric Bonnaud  </auteur>
+    <version>0.2</version>
+    <version_base>0.2</version_base>
+  
+    <etat>experimental</etat>
+    <icon>qrcode.png</icon>
+    <description>
+Ce plugin ajoute à SPIP la possibilité d'utiliser les QRcodes. Il peut ajouter un QrCode (utilisable par exemple avec votre portable) aux liens des documents joints.
+
+Il ajoute : 
+-* le modèle <code><qrcode|texte=...|taille=...></code>,
+-* le filtre <code>|qrcode</code>
+
+qui permettent de générer des QRcodes aux contenus variés.</div>
+	
+Il se configure via [CFG->?exec=cfg&cfg=qrcode].
+
+Il est distibué selon les termes de la licence [GPLv2->http://www.gnu.org/licenses/gpl-2.0.html].
+</description>
+    <lien></lien>
+
+    <prefix>qrcode</prefix>
+
+    <pipeline>
+       <nom>insert_head</nom>
+       <action>insert_head</action>
+       <inclure>qrcode_fonctions.php</inclure>
+   </pipeline>
+
+   <necessite id="cfg" version="[1.15.2;]" />
+   <necessite id="lib:phpqrcode" src="http://prgm.spipu.net/_files/zip/php/qrcode.zip"/>
+   
+</plugin>
