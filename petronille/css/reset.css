@@ -37,6 +37,8 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: n
 fieldset,img { border: 0; }
 
 input,textarea,select,button { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; }
-input[type="submit"],input.submit,button { cursor: pointer; }
+input[type="submit"],input.submit,
+input[type="button"],input.button,
+button { cursor: pointer; }
 
 /* end */
