@@ -55,7 +55,7 @@ function ajout_cotisation($id_auteur, $row)
 		list($annee, $mois, $jour) = explode("-",date('Y-m-d'));
 	$mois+=$categorie['duree'];
 	$validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
-	$justification = _L('Cotisation') . ' ' . $nom_famille . ' ' . $prenom;
+	$justification = _T('nouvel_cotisation') . ' ' . $nom_famille . ' ' . $prenom;
 
 
 	echo debut_droite("",true);
