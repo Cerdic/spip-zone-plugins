@@ -30,6 +30,7 @@ Il est distibué selon les termes de la licence [GPLv2->http://www.gnu.org/licen
        <inclure>qrcode_fonctions.php</inclure>
    </pipeline>
 
+   <categorie>communication</categorie>
    <necessite id="cfg" version="[1.15.2;]" />
    <necessite id="lib:phpqrcode" src="http://prgm.spipu.net/_files/zip/php/qrcode.zip"/>
    
