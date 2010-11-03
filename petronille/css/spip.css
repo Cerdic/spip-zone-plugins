@@ -38,13 +38,9 @@ dl.spip_documents,
 .erreur_message { color: red; }
 .reponse_formulaire_ok { color: green; }
 
-.erreur_message { color: red; }
-li.erreur input.text,
-li.erreur input.password,
-li.erreur textarea { background-color: #F8F8F8; border-color: red; }
-li.erreur input.text:focus,
-li.erreur input.password:focus,
-li.erreur textarea:focus { border-color: #C30; }
+li.erreur input[type="text"], li.erreur input.text,
+li.erreur input[type="password"], li.erreur input.password,
+li.erreur textarea { border-color: red; }
 
 .spip_surligne { background-color: yellow; }
 
