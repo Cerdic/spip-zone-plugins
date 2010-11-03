@@ -1,0 +1,42 @@
+<BOUCLE_si_autorise(CONDITION){si (#ID_PRODUIT|intval|et{#AUTORISER{voir,produit,#ID_PRODUIT}})}>
+<BOUCLE_produit(PRODUITS){id_produit}{tout}>
+<div class='fiche_objet'>
+	[(#AUTORISER{modifier,produit,#ID_PRODUIT})
+		<div class='bandeau_actions'>
+			[(#URL_ECRIRE{produit_edit}
+				|parametre_url{id_produit,#ID_PRODUIT}
+				|parametre_url{id_rubrique,#RUBRIQUE}
+				|parametre_url{retour,#SELF}
+				|icone{<:boutique:action_modifier:>, #CHEMIN{images/bag1_32.png}, #LANG_RIGHT, edit.gif})]
+		</div>
+	]
+
+
+	<h1>#NOM</h1>
+
+	<div id='wysiwyg'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,produit,
+				id_objet,#ID_PRODUIT,
+				contexte,[(#ARRAY{
+					id_produit,#ID_PRODUIT})]})],
+			data,[(#INCLURE{fond=prive/contenu/produit,id=#ID_PRODUIT})]})]})]
+	</div>
+</div>
+
+<!--#navigation-->
+[(#REM) Ce pipeline charge prive/infos/$type ]
+<div class='cadre cadre-info'><BOUCLE_produit_info(PRODUITS){id_produit=#ENV{id_produit}}{tout}>
+<div class='infos'>
+	<div class='numero'>
+		<:boutique:info_gauche_numero_produit:>
+		<p>#ID_PRODUIT</p>
+	</div>
+</div>
+</BOUCLE_produit_info>
+
+</div>
+<!--/#navigation-->
+</BOUCLE_produit>
+</BOUCLE_si_autorise>

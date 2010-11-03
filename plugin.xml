@@ -1,0 +1,56 @@
+<plugin>
+	<nom>Petite Boutique</nom>
+	<auteur>Bernard Blazin</auteur>
+	<version>1.0</version>
+	<version_base>1.1</version_base>
+	<etat>test</etat>
+	<categorie>divers</categorie>
+	<description>
+		Ce plugin est une petite boutique en ligne dans et avec SPIP en utilisant les br&egrave;ves.
+	</description>
+	<!-- <lien>http://www.bernardblazin.com/?article344</lien> -->
+	<icon>images/bag1_32.png</icon>
+	<prefix>boutique</prefix>
+		<install>base/boutique_upgrade.php</install>
+	<bouton id='boutique' parent='naviguer'>
+		<icone>images/boutique24.png</icone>
+		<titre>Boutique:Boutique</titre>
+	</bouton>
+	 <fonctions>boutique_fonctions.php</fonctions>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/boutique.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/boutique.php</inclure>
+	</pipeline>
+	<pipeline>
+               <nom>affiche_milieu</nom>
+               <inclure>inc/boutique_pipeline_affiche_milieu.php</inclure>
+               <action>affiche_milieu</action>
+       </pipeline>
+	<!-- avec plugin champs extras 2 -->
+<pipeline>
+	<nom>objets_extensibles</nom>
+	<inclure>boutique_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+<nom>insert_head</nom>
+<inclure>boutique_head.php</inclure>
+</pipeline>
+ <pipeline>
+            <nom>rechercher_liste_des_champs</nom>
+            <inclure>boutique_fonctions.php</inclure>
+    </pipeline> 
+	<pipeline>
+  	      <nom>declarer_tables_objets_surnoms</nom>
+  	      <inclure>base/boutique.php</inclure>
+	</pipeline> 		
+	 <necessite id="CFG" version="[1.15.2;]" /> 
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<!-- facilitons les champs de formulaires -->
+	<necessite id="saisies" version="[1.5.1;]" />
+	<!-- filtre |icone et boucles CONDITIONS -->
+	<necessite id="spip_bonux" version="[1.8.4;]" />
+</plugin>

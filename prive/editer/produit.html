@@ -1,0 +1,8 @@
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<:boutique:info_modifier_produit:>
+	<h1>(#ENV{titre,<:boutique:texte_nouveau_produit:>})</h1>]
+</div>
+#FORMULAIRE_EDITER_PRODUIT{#ENV{id_produit,new},#ENV{redirect,#URL_ECRIRE{produit_voir}}}
+</div>
