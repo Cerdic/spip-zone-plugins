@@ -32,6 +32,8 @@ function voir_adherent_cotisations($id_auteur, $full=false)
 {
 	$row = sql_allfetsel('id_compte AS id, recette AS montant, date, justification, journal', "spip_asso_comptes", "id_journal=$id_auteur AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']), '', "date DESC" );
 
+	if (!$row) return '';
+
 	return "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 	. "<tr style='background-color: #DBE1C5;'>\n"
 	. '<th style="text-align:right;">'._T('asso:adherent_entete_id').'</th>'
@@ -52,6 +54,8 @@ function voir_adherent_dons($id_auteur, $full=false)
 			     '',
 			     "D.date_don DESC" );			
 
+	if (!$row) return '';
+
 	return "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 	.  "<tr style='background-color: #DBE1C5;'>\n"
 	.  '<th style="text-align:right;">'._T('asso:adherent_entete_id').'</th>'
@@ -66,6 +70,8 @@ function voir_adherent_dons($id_auteur, $full=false)
 function voir_adherent_ventes($critere)
 {
 	$row = sql_allfetsel('id_vente AS id ,article, quantite, date_vente, date_envoi', "spip_asso_ventes", $critere, '', "date_vente DESC" );			
+	if (!$row) return '';
+
 	foreach($row as $k => $v) { 
 		$row[$k] = '<tr style="background-color: #EEEEEE;">'
 		. '<td class="arial11 border1" style="text-align:right;">'.$v['id']."</td>\n"

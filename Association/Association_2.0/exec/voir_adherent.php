@@ -108,15 +108,13 @@ function exec_voir_adherent(){
 		if ($GLOBALS['association_metas']['ventes']=="on"){
 			$critere='id_acheteur='. (($indexation !=='id_asso') ? $id_auteur : sql_quote($id_asso));
 
-			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>';
-			echo voir_adherent_ventes($critere);
-			echo '</fieldset>';
+			if ($r = voir_adherent_ventes($critere))
+			  echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>', $r, '</fieldset>';
 		}
 		// FICHE HISTORIQUE DONS
 		if ($GLOBALS['association_metas']['dons']=="on"){
-			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>';
-			echo voir_adherent_dons($id_auteur, $full);
-			echo '</fieldset>';
+			if ($r = voir_adherent_dons($id_auteur, $full))
+				echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>', $r, '</fieldset>';
 		}
 		// FICHE HISTORIQUE PRETS
 		if ($GLOBALS['association_metas']['prets']=="on"){
