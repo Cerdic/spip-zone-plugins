@@ -1,0 +1,143 @@
+    .itemContainer{
+        width:100%;
+        float:left;
+    }
+    
+    .itemContainer div{
+        float:left;
+        margin: 5px 20px 5px 20px ;
+    }
+    
+    .itemContainer a{
+        text-decoration:none;
+		outline: none;
+
+    }
+
+    
+    .cartHeaders div{
+        float:left;
+        margin: 5px 10px;
+    }
+    
+.item_thumb{
+    display:none;
+}
+
+.itemincrement a{
+
+	display:block;
+
+	background:url(../images/loupe_plus.gif) -12px -12px;
+
+	width:12px;
+
+	height:12px;
+
+	text-indent:-9999px;
+
+	overflow:hidden;
+
+	margin:3px 0 0 0;
+
+}
+
+.itemdecrement a{
+
+	display:block;
+
+	background:url(../images/loupe_moins.gif) -12px -12px;
+
+	width:12px;
+
+	height:12px;
+
+	text-indent:-9999px;
+
+	overflow:hidden;
+
+	margin:3px 0 0 0;
+
+}
+
+.simpleCart_shelfItem{
+    float:left;
+    margin:5px 10px;
+    width:250px;
+    height:141px;
+    line-height:100%;
+    position:relative;
+    font-size: 12px;
+}
+.item_image{
+    float:left;
+    margin-right:15px;
+}
+.item_name{
+    margin-top:15px;
+}
+.item_Description{
+    font-size:11px;
+    padding:5px 0;
+}
+
+
+
+.item_add{
+    display:block;
+    font-size: 1.2em;
+    height:25px;
+	outline: none;
+
+}
+
+.cartHeaders{
+    display:none;
+}
+
+.itemQuantity input{
+    background:none;
+    border:1px;
+    width:21px;
+    height:17px;
+    text-align:center;
+    font:bold 11px Arial, sans-serif;
+    padding:0 9px;
+    margin:0 5px 0 0;
+    vertical-align:top;
+    padding-top:3px;
+}
+
+.itemQuantity input:focus{
+    outline:none;
+}
+
+#cartTotal{
+    clear:both;
+    text-align:right;
+    font:11px Arial, sans-serif;
+    text-shadow:none;
+    margin-top:23px;
+    float:left;
+    width:100%;
+    margin-left:-65px;
+}
+
+.simpleCart_checkout {
+    float: right;
+    font-size: 1.3em;
+    padding:6px;
+    text-decoration:none;
+}
+
+.simpleCart_empty {
+    float: right;
+    font-size: 1.3em;
+    padding:6px;
+    text-decoration:none;
+}
+
+.simpleCart_clear {
+    clear:both;
+    margin-bottom:5px;
+}

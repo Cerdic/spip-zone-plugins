@@ -1,0 +1,18 @@
+<BOUCLE_a(PRODUITS){id_produit?}>#SET{titre,#NOM}<BOUCLE_shelfItem(DOCUMENTS){id_produit}{id_document=#ENV{id}}{tout}>
+
+<div class="simpleCart_shelfItem">
+
+   
+ 
+
+  [<h5 class="item_name">(#GET{titre})</h5>]
+    [<p class="item_Description">
+                    (#DESCRIPTIF|textebrut)
+                </p>] 
+  [<div class="item_price" style="padding:3px;">Prix: € (#PRIX)</div>]
+  <a href="javascript:;" class="item_add"><:boutique:add_to_cart:></a>
+
+<span class="item_thumb">[(#FICHIER|image_reduire{75}|extraire_attribut{'src'})]</span>
+</div>
+
+</BOUCLE_shelfItem></BOUCLE_a>

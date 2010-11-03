@@ -1,0 +1,28 @@
+<BOUCLE_afficher_contenu(PRODUITS){id_produit=#ENV{id}}{tout}>
+<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<div class='label'><:boutique:label_nom:></div>
+	<div dir='#LANG_DIR' class='#EDIT{nom} nom'>#NOM</div>
+</div>
+
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class='label'><:boutique:label_race:></div>
+	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
+</div>
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<div class='label'><:boutique:label_infos:></div>
+	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>#TEXTE</div>
+</div>
+
+<div class="champ contenu_prix[ (#PRIX*|strlen|?{'',vide})]">
+	<div class='label'><:boutique:label_annee_naissance:></div>
+	<div dir='#LANG_DIR' class='#EDIT{prix} prix'>#PRIX</div>
+</div>
+<div class="champ contenu_reference[ (#REFERENCE*|strlen|?{'',vide})]">
+	<div class='label'><:boutique:label_robe:></div>
+	<div dir='#LANG_DIR' class='#EDIT{reference} reference'>#REFERENCE</div>
+</div>
+<div class="champ contenu_rubrique[ (#RUBRIQUE*|strlen|?{'',vide})]">
+	<div class='label'><:boutique:rubrique:></div>
+	<div dir='#LANG_DIR' class='#EDIT{rubrique} rubrique'>#RUBRIQUE</div>
+</div>
+</BOUCLE_afficher_contenu>

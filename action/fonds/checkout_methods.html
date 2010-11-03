@@ -1,0 +1,16 @@
+#CACHE{0}
+
+<div class="simpleCart_methods">
+    <h3><:boutique:checkout_methods:></h3>
+
+    <ul>
+    [(#CONFIG{boutique/method_paypal}|oui)
+        <li><img src="#CHEMIN{images/paypal.png}" title="paypal"><input type="radio" name="method" class="simpleCart_to_paypal"> </li>]
+    [(#CONFIG{boutique/method_google_checkout}|oui)
+        <li><img src="#CHEMIN{images/payment_google-checkout.jpg}" title="google checkout"><input type="radio" name="method" class="simpleCart_to_googlecheckout"></li>]
+    [(#CONFIG{boutique/method_cheque}|oui)
+        <li><img src="#CHEMIN{images/banktransfer.gif}" title="cheque"><input type="radio" name="method" class="simpleCart_to_cheque"></li>]
+    [(#CONFIG{boutique/method_email}|oui)
+        <li><label><:boutique:c_email:></label><input type="radio" name="method" class="simpleCart_to_email" ></li>]
+    </ul>
+</div>
