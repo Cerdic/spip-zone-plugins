@@ -1,7 +1,6 @@
 #HTTP_HEADER{Content-type: image/png}
 #CACHE{0}<?php
 
-	include(find_in_path('lib/phpqrcode/qrlib.php')) ;
 	$errorCorrectionLevel = 'L' ;
 	if (isset($_REQUEST['level']) && in_array($_REQUEST['level'], array('L','M','Q','H')))
 		$errorCorrectionLevel = $_REQUEST['level'];
@@ -12,6 +11,7 @@
 	if (isset($_GET['data']))
 		$data = $_GET['data'] ;
 
-	QRcode::png($data , false, $errorCorrectionLevel, $matrixPointSize ) ;
+	$filename = qrcode_getpng($data, $matrixPointSize, $errorCorrectionLevel) ;
+	readfile($filename) ;
 
 ?>
