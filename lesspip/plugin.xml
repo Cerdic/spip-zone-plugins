@@ -4,6 +4,7 @@
   <auteur>Jean-Baptiste Bourgoin</auteur>
   <licence>MIT</licence>
   <version>0.1</version>
+  <categorie>outils</categorie>
   <description>
   LESSpip est un plugin d'intégration de l'implémentation php de LESS.
   
