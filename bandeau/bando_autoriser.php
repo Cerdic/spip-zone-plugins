@@ -170,7 +170,9 @@ function autoriser_auteur_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL
 }
 
 function autoriser_mot_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('creer','mot');
+	return
+		($GLOBALS['meta']['articles_mots'] != 'non' OR sql_countsel('spip_groupes_mots'))
+		AND autoriser('creer','mot');
 }
 
 function autoriser_site_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
