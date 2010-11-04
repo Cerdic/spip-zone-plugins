@@ -6,7 +6,7 @@
 
 -------------------------------------------------------------- */
 
-/*html,body { font-size: 100%; line-height: 1; }*/
+/* D'apres le reset d'E.Meyer : http://meyerweb.com/eric/thoughts/2008/01/15/resetting-again/ */
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -20,10 +20,12 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	/*outline: 0;*/
 	font-size: 100%;
 	vertical-align: baseline;
 	background: transparent;
 }
+
 
 h1,h2,h3,h4,h5,h6 { font-size: 100%; font-weight: normal; }
 /*address,caption,cite,code,dfn,em,strong,th,var { font-style: normal; font-weight: normal; }*/
@@ -38,7 +40,7 @@ fieldset,img { border: 0; }
 
 input,textarea,select,button { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; }
 input[type="submit"],input.submit,
-input[type="button"],input.button,
+input[type="button"],input.button
 button { cursor: pointer; }
 
 /* end */
