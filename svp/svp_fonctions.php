@@ -118,6 +118,7 @@ function svp_compter_plugins($id_depot, $categorie){
 function svp_compter($entite, $id_depot=0, $categorie=0){
 	$compteurs = array();
 
+	$group_by = array();
 	$where = array();
 	if ($id_depot)
 		$where[] = "t1.id_depot=" . sql_quote($id_depot);
@@ -151,7 +152,10 @@ function svp_compter($entite, $id_depot=0, $categorie=0){
 			$ids = array_map('reset', $ids);
 			$where = array(sql_in('t2.id_plugin', $ids));
 		}
-		$group_by = array('t2.categorie');
+		if ($categorie)
+			$where[] = "t2.categorie=" . sql_quote($categorie);
+		else
+			$group_by = array('t2.categorie');
 		$compteurs['categorie'] = sql_countsel($from, $where, $group_by); 
 	}
 
@@ -178,6 +182,8 @@ function calcul_svp_categories($categorie) {
 			$retour = _T('svp:categorie_' . strtolower($categorie));
 		else {
 			sort($svp_categories);
+			// On positionne l'absence de categorie en fin du tableau
+			$svp_categories[] = array_shift($svp_categories);
 			foreach ($svp_categories as $_alias)
 				$retour[$_alias] = svp_traduire_categorie($_alias);
 		}

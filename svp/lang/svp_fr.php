@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_telecharger_fichier_depot' => 'T&eacute;l&eacute;charger le fichier XML du d&eacute;p&ocirc;t',
 
 // C
-	'categorie_aucune' => 'Erreur ! Aucune cat&eacute;gorie d&eacute;finie',
+	'categorie_aucune' => 'Sans cat&eacute;gorie',
 	'categorie_auteur' => 'Authentification, auteur, autorisation',
 	'categorie_communication' => 'Communication, interactivit&eacute;, messagerie',
 	'categorie_date' => 'Agendas, calendrier, date',

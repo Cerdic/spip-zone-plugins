@@ -198,17 +198,21 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
 			$insert_plugin = $champs['plugin'];
 
-			// On loge l'absence de categorie ou une categorie erronee
+			// On loge l'absence de categorie ou une categorie erronee et on positionne la categorie
+			// par defaut "aucune"
 			// Provisoire tant que la DTD n'est pas en fonction
 			if (!$insert_plugin['categorie']) {
 				spip_log("Categorie absente dans le paquet issu de <". $insert_paquet['src_archive'] . 
 						"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets');
+				$insert_plugin['categorie'] = 'aucune';
 			}
 			else {
 				$svp_categories = unserialize($GLOBALS['meta']['svp_categories']);
-				if (!in_array($insert_plugin['categorie'], $svp_categories))
+				if (!in_array($insert_plugin['categorie'], $svp_categories)) {
 					spip_log("Categorie &#107;" . $insert_plugin['categorie'] . "&#108; incorrecte dans le paquet issu de <". $insert_paquet['src_archive'] . 
 							"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets');
+					$insert_plugin['categorie'] = 'aucune';
+				}
 			}
 				
 			// On evite les doublons de paquet

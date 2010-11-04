@@ -13,7 +13,7 @@ function svp_upgrade($nom_meta_base_version, $version_cible){
 		creer_base();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 		ecrire_meta('svp_categories', 
-					serialize(array('auteur', 'communication', 'date', 'divers', 'edition', 'maintenance', 'multimedia', 'navigation', 'outil', 'performance', 'statistique', 'squelette', 'theme')));
+					serialize(array('auteur', 'communication', 'date', 'divers', 'edition', 'maintenance', 'multimedia', 'navigation', 'outil', 'performance', 'statistique', 'squelette', 'theme', 'aucune')));
 
 		spip_log('INSTALLATION BDD','svp');
 	}

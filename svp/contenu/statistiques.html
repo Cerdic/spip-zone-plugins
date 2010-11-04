@@ -26,7 +26,8 @@
 
 [(#REM) Statistiques des plugins par categorie ]
 <h3 class="h3"><:svp:intertitre_stats_categories:></h3>
-#SET{compteur, #VAL{categorie}|svp_compter{#ENV{id_depot}}|table_valeur{categorie}}
+#SET{aucune, #VAL{categorie}|svp_compter{#ENV{id_depot}, aucune}|table_valeur{categorie}}
+#SET{compteur, #VAL{categorie}|svp_compter{#ENV{id_depot}}|table_valeur{categorie}|moins{#GET{aucune}}}
 <p><:svp:info_stats_categories{nb_categories=#GET{compteur}}:></p>
 <p><:svp:info_stats_plugins:></p>
 [<ul>
