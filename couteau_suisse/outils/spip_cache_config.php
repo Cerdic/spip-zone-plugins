@@ -53,18 +53,18 @@ array(
 	'nom' => 'duree_cache_mutu',
 	'format' => _format_NOMBRE,
 	'defaut' => "24", // 1 jour
-	'code' => "define('_DUREE_CACHE_DEFAUT', %s*3600);\n",
+	'code:%s!=24' => "define('_DUREE_CACHE_DEFAUT', %s*3600);\n",
 ), array(
 	'nom' => 'quota_cache',
 	'format' => _format_NOMBRE,
 	'defaut' => 10, // 10 Mo
-	'code' => "\$GLOBALS['quota_cache']=%s;\n",
+	'code:%s!=10' => "\$GLOBALS['quota_cache']=%s;\n",
 ), array(
 	'nom' => 'derniere_modif_invalide',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
 	'defaut' => 0,
-	'code' => "\$GLOBALS['derniere_modif_invalide']=%s;\n",
+	'code:%s' => "\$GLOBALS['derniere_modif_invalide']=false;\n",
 ));
 
 }

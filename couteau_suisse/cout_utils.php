@@ -565,7 +565,7 @@ function cs_php_format($valeur, $is_chaine = true, $dblguill=false) {
 }
 
 // retourne le code compile d'une variable en fonction de sa valeur
-function cs_get_code_variable($variable, $valeur) {
+function cs_get_code_php_variable($variable, $valeur) {
 	global $cs_variables;
 	// si la variable n'a pas ete declaree
 	if(!isset($cs_variables[$variable])) return _L("/* Variable '$variable' inconnue ! */");
@@ -580,7 +580,7 @@ function cs_get_code_variable($variable, $valeur) {
 		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;
 		eval($eval);
-		if($test) $code .= str_replace('%s', $valeur, $param);
+		$code .= $test?str_replace('%s', $valeur, $param):'';
 	}
 	return $code;
 }
@@ -595,12 +595,13 @@ function cs_parse_code_php($code, $debut='%%', $fin='%%') {
 		$nom = $matches[2];
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if(isset($metas_vars[$nom])) {
-			$rempl = cs_get_code_variable($nom, $metas_vars[$nom]);
+			$rempl = cs_get_code_php_variable($nom, $metas_vars[$nom]);
+			if(!strlen($rempl)) $code = "/* Pour info : $nom = $metas_vars[$nom] */\n" . $code;
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
 			$defaut = cs_get_defaut($nom);
-			$rempl = cs_get_code_variable($nom, $defaut);
-			$code = "/* Valeur par defaut : {$nom} = $defaut */\n" . $code;
+			$rempl = cs_get_code_php_variable($nom, $defaut);
+			$code = "/* Par defaut : {$nom} = $defaut */\n" . $code;
 		}
 //echo '<br>',$nom, ':',isset($metas_vars[$nom]), " - $code";
 		if($cotes) $rempl = str_replace("'", "\'", $rempl);
