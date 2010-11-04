@@ -33,6 +33,6 @@ Il est distibué selon les termes de la licence [GPLv2->http://www.gnu.org/licen
 
    <categorie>communication</categorie>
    <necessite id="cfg" version="[1.15.2;]" />
-   <necessite id="lib:phpqrcode" src="http://prgm.spipu.net/_files/zip/php/qrcode.zip"/>
+   <necessite id="lib:phpqrcode" src="http://freefr.dl.sourceforge.net/project/phpqrcode/releases/phpqrcode-2010100721_1.1.4.zip"/>
    
 </plugin>
