@@ -1,7 +1,7 @@
 /***********************************************************************\
  *  À propos des Plugins actifs                          				*                                                
  *                        												*
- *  Version du 24 octobre 2010, Jean-Philippe Guihard					*                                     
+ *  Version du 04 novembre 2010, Jean-Philippe Guihard					*                                     
  *																		*
  \**********************************************************************/
 
@@ -12,12 +12,7 @@ avec affichage de l'icone, le nom, la version, l'état et une
 introduction de sa fonction.
 
 J'ai créé ce plugin après avoir tenté d'utiliser la balise #PLUGIN mais
-qui ne trie par ordre alphabétique les Plugins et qui ne prend pas en
-compte les fichier plugin.xlm "mal" écrit. En effet, si dans un fichier
-plugin.xml, le tag <icon> est écrit sur 3 lignes au lieu d'une, la
-balise #PLUGIN ne récupère pas le chemin de l'icone et donc on ne peut
-l'afficher. Liste les plugins actifs et affiche une description sommaire
-de ceux-ci.
+qui ne trie par ordre alphabétique les Plugins.
 
 J'ai ensuite utilisé les autres plugin, mais ceux-ci n'affiche pas les
 icônes. Je me suis donc lancé dans l'écriture de ce plugin.
@@ -29,4 +24,6 @@ farfouillé dans le code de SPIP pour retrouver des fonctions qui
 correspondraient à mon besoin et les ai modifiée pour qu'elles collent à
 ce que je souhaite.
 
-
+Évolutions envisagées :
+- Lors d'une prochaine mise à jour du core de SPIP, le parseur XML sera opérationnel
+- utiliser la balise #PLUGIN

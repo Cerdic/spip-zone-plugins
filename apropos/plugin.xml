@@ -1,21 +1,21 @@
 <plugin>
     <nom>À propos des Plugins actifs</nom>
-    <auteur>[Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>0.ß4</version>
-    <etat>dev</etat>
+    <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
+    <version>0.ß6</version>
+    <etat>test</etat>
     <description>
     <multi>
 	[fr] Liste les plugins actifs et affiche une description sommaire de ceux-ci.
     
     Il sert à afficher sur une page de type à propos du site un récapitulatif des plugins actifs, y compris l'icone de ceux-ci.
     <br />
-	
-	Pour afficher la liste dans un article, il faut utiliser le modele <code><apropos|x></code>. En d'autres termes, copiez-collez <code><apropos|x></code> dans le texte de votre article.
+	Vous pouvez utiliser la nouvelle  balise #APROPOS dans vos squelettes. Pour personaliser ce qu'affiche cete balise, modifiez le fichier modeles/apropos.html que vous aurez préalablement copié dans le dossier squelettes/modeles.
+	<br />Pour afficher la liste dans un article, il faut utiliser le modele <code><apropos|x></code>. En d'autres termes, copiez-collez <code><apropos|x></code> dans le texte de votre article.
 	[en]Lists the active plugins and displays a brief description of them.
 	It is used to display a page of type about the site a summary of active plugins, including the icon of these.
 	<br />
-
-	To view the list in an article, you must use the model <code><apropos|x></code>. In other words, copy and paste <code><apropos_plugin|x></code> in the text of your article.
+	You can use the new balise #APROPOS into your templates. To personalize the informations which are displayed, modify the file modeles/apropos.html after copying it into your folder squelettes/modeles. 
+	<br />To view the list in an article, you must use the model <code><apropos|x></code>. In other words, copy and paste <code><apropos|x></code> in the text of your article.
     </multi>
 	</description>
 	<icon>apropos.png</icon>
