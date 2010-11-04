@@ -40,7 +40,7 @@ class Cache {
 
 		switch($methode) {
 			case 'apc':
-				return function_exists('apc_add');
+				return function_exists('apc_exists');
 			case 'xcache':
 				return function_exists('xcache_set');
 			case 'memcache':
