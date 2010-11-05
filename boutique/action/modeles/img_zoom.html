@@ -1,7 +1,0 @@
-<BOUCLE_document (DOCUMENTS) {id_document=#ENV{id}}{tout}>
-[<div style="[float:(#ENV{align}|match{left|right});]" class='imgWrapper'>
-<img class="iZoom" id="myPic1" style="[width:(#LOGO_DOCUMENT||image_reduire{#ENV{size,#CONFIG{vsize,520}},0}|largeur)];[height:(#LOGO_DOCUMENT||image_reduire{#ENV{size,#CONFIG{vsize,520}},0}|hauteur)]"  src="(#URL_DOCUMENT||image_reduire{#ENV{size,#CONFIG{vsize,520}},0}|extraire_attribut{src})" [alt="(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT})"] /></a>
-</div>
-[(#ENV{align}|match{left|right}|?{' ',''})<div style="clear:both;"></div>]]
-</BOUCLE_document>
-

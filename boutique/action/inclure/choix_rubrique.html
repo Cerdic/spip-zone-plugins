@@ -1,5 +1,0 @@
-<li class="editer_parent"><label for="id_parent"><:titre_cadre_interieur_rubrique:></label><select name="rubrique" id="idselect">
-<option>Choissisez votre rubrique</option><BOUCLE_choix(RUBRIQUES){tout}>
- 
-<option value="#ID_RUBRIQUE"[(#EVAL{_request('id_rubrique')}|=={#ID_RUBRIQUE}|?{' selected="selected"',''})]>#TITRE</option></BOUCLE_choix>
-</select></li>
