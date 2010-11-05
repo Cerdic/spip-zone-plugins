@@ -23,6 +23,9 @@ function voir_adherent_paiements($data, $lien)
 		  . '<td class="arial11 border1">'.association_datefr($row['date'])."</td>\n"
 		  . '<td class="arial11 border1">'.propre($j)."</td>\n"
 		  . '<td class="arial11 border1" style="text-align:right;">'.$row['montant'].' &euro;</td>'
+		  . '<td class="arial11 border1" style="text-align:right;">'
+		  . ($row['vu'] ? _T('asso:adherent_libelle_oui') : _T('asso:adherent_libelle_non'))
+		  . '</td>'
 		  . '</tr>';
 	}
 	return $data;
@@ -30,7 +33,7 @@ function voir_adherent_paiements($data, $lien)
 
 function voir_adherent_cotisations($id_auteur, $full=false)
 {
-	$row = sql_allfetsel('id_compte AS id, recette AS montant, date, justification, journal', "spip_asso_comptes", "id_journal=$id_auteur AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']), '', "date DESC" );
+	$row = sql_allfetsel('id_compte AS id, recette AS montant, date, justification, journal, vu', "spip_asso_comptes", "id_journal=$id_auteur AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']), '', "date DESC" );
 
 	if (!$row) return '';
 
@@ -41,6 +44,7 @@ function voir_adherent_cotisations($id_auteur, $full=false)
 	. '<th>'._T('asso:adherent_entete_date').'</th>'
 	. '<th>'._T('asso:adherent_entete_justification').'</th>'
 	. '<th style="text-align:right;">'._T('asso:montant').'</th>'
+	. '<th style="text-align:right;">'._T('asso:validite').'</th>'
 	. '</tr>'
 	. join("\n", voir_adherent_paiements($row, $full))
 	. '</table>';
@@ -63,6 +67,7 @@ function voir_adherent_dons($id_auteur, $full=false)
 	.  '<th>'._T('asso:adherent_entete_date').'</th>'
 	.  '<th>'._T('asso:adherent_entete_justification').'</th>'
 	.  '<th style="text-align:right;">'._T('asso:montant').'</th>'
+	. '<th style="text-align:right;">'._T('asso:validite').'</th>'
 	.  join("\n", voir_adherent_paiements($row, $full))
 	  .  '</table>';
 }
