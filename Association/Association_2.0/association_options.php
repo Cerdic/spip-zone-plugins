@@ -18,7 +18,7 @@ if (!defined('_ASSOCIATION_INSCRIPTION2'))
     define('_ASSOCIATION_INSCRIPTION2', true); // false si on sait s'en passer
 
 define('_ASSOCIATION_AUTEURS_ELARGIS', 
-       @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1") ? 
+       (_ASSOCIATION_INSCRIPTION2 AND @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1")) ? 
        'spip_auteurs_elargis' : 'spip_asso_membres');
 
 // Le premier element indique un ancien membre
