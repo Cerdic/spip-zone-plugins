@@ -64,6 +64,7 @@
 
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
+	
 	<h2>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
 	<div class='pagination tri'>
 		[(#TRI{'<',#CHEMIN{img_pack/tri_asc-16.png}|tag_img{<:gestdoc:par_tri_croissant:>}}) |]
@@ -149,4 +150,8 @@
 	</B_galerie>
 	<h2>[(#VAL{gestdoc:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
 	<//B_galerie>
+	[(#SESSION{statut}|=={0minirezo}|oui) 
+	[(#INCLURE{fond=prive/bouton/inc-supprimer-orphelins,env})]
+	]
+	</B_docs_supprimables>
 </div><!--#galerie-->

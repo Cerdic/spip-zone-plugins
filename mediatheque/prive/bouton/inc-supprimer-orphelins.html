@@ -1,0 +1,6 @@
+
+	#SET{documents_supprimables,#ARRAY}
+	<BOUCLE_docs_supprimables(DOCUMENTS){orphelins}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{statut==.*}{media ?}>#ID_DOCUMENT[(#AUTORISER{supprimer,document,#ID_DOCUMENT})[(#SET{documents_supprimables,#GET{documents_supprimables}|push{#ID_DOCUMENT}})]]</BOUCLE_docs_supprimables>
+	<span class='tout_supprimer'>[(#BOUTON_ACTION{<:gestdoc:bouton_supprimer_tous_orphelins:>,#URL_ACTION_AUTEUR{supprimer_tous_orphelins,#GET{documents_supprimables}|implode{-},#SELF},ajax})]</span>
+	</B_docs_supprimables>
+
