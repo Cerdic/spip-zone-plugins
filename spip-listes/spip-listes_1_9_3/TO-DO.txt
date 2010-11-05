@@ -9,6 +9,8 @@ TO-DO:
 
 Si supprimer courrier, supprimer documents attachés ?
 
++ a verifier: semble ne pas tenir compte des options d habillage dans le calcul du poids du mail. cf.:
+http://www.spip-contrib.net/SPIP-Listes#comment436451
 
 + a verifier: un courrier a destination d'une liste qui n'existe plus n'est pas supprime'. Boucle
 infinie. A supprimer par la meleuse. (la trieuse ne peut plus rien y faire).
