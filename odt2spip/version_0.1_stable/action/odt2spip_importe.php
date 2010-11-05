@@ -118,8 +118,9 @@ function action_odt2spip_importe() {
 
   // traitements complémentaires du flux de sortie
     // remplacer les &gt; et &lt;
-    $a_remplacer = array('&#60;','&#62;','&lt;','&gt;', '"', "<date/>");
-    $remplace = array('<','>','<','>', "'", '<date>'.(date("Y-m-d H:i:s")).'</date>');
+    // bogue de revisions_articles() dans snippets/articles/importer.php ligne 79 cf http://www.spip-contrib.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum434725
+    $a_remplacer = array('&#60;','&#62;','&lt;','&gt;', '"', "<date/>", "<date_redac/>", "<date_modif/>");
+    $remplace = array('<','>','<','>', "'", '<date>'.(date("Y-m-d H:i:s")).'</date>', '<date_redac>0000-00-00 00:00:00</date_redac>', '<date_modif>'.(date("Y-m-d H:i:s")).'</date_modif>');
     $xml_sortie = str_replace($a_remplacer, $remplace, $xml_sortie);
     
     // gerer la conversion des <math>Object X</math> => on delegue a /inc/odt2spip_traiter_mathml.php
