@@ -48,6 +48,8 @@
 <xsl:param name="ModeImages"/>
 <!-- LanguePublication = code de la langue de publication de l'article -->
 <xsl:param name="LanguePublication"/>
+<!-- DateJour = date du jour au format SQl -->
+<xsl:param name="DateJour"/>
 
 <!-- gestion des titres de façon la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
@@ -243,12 +245,12 @@ ModeImages= <xsl:value-of select="$ModeImages" />
         <xsl:apply-templates select="office:body/office:text"/>
     </texte>
 		<ps></ps>
-		<date></date>
+		<date><xsl:value-of select="$DateJour" /></date>
 		<statut>prop</statut>
 		<id_secteur></id_secteur>
-		<date_redac></date_redac>
+		<date_redac><xsl:text >0000-00-00 00:00:00</xsl:text></date_redac>
 		<accepter_forum></accepter_forum>
-		<date_modif></date_modif>
+		<date_modif><xsl:value-of select="$DateJour" /></date_modif>
 		<lang><xsl:value-of select="$LanguePublication" /></lang>
 		<langue_choisie></langue_choisie>
 		<id_trad></id_trad>

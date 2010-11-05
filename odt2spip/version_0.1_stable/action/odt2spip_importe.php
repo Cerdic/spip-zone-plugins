@@ -57,6 +57,9 @@ function action_odt2spip_importe() {
   // fichier de sortie
     $fichier_sortie = $rep_dezip.'snippet_odt2spip.xml';
 
+  // date pour les champs date et date_modif
+	$date_jour = date("Y-m-d H:i:s");
+
   // determiner si le plugin enluminure_typo ou intertitres_enrichis est present & actif
     include_spip('inc/plugin');
     $Tplugins = liste_plugin_actifs();
@@ -87,7 +90,8 @@ function action_odt2spip_importe() {
       // definition de l'array des parametres a passer a la xslt
         $params = array('IntertitresRiches' => $intertitres_riches, 
                         'ModeImages' => $ModeImages,
-                        'LanguePublication' => $LanguePublication
+                        'LanguePublication' => $LanguePublication,
+                        'DateJour' => $date_jour
                         );
         
       // lancer le parseur
@@ -105,6 +109,7 @@ function action_odt2spip_importe() {
         $proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);
         $proc->setParameter(null, 'ModeImages', $ModeImages);
         $proc->setParameter(null, 'LanguePublication', $LanguePublication);
+        $proc->setParameter(null, 'DateJour', $date_jour);
         
         $xml = new DOMDocument();
         $xml->load($xml_entre);
@@ -118,9 +123,16 @@ function action_odt2spip_importe() {
 
   // traitements complémentaires du flux de sortie
     // remplacer les &gt; et &lt;
-    // bogue de revisions_articles() dans snippets/articles/importer.php ligne 79 cf http://www.spip-contrib.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum434725
-    $a_remplacer = array('&#60;','&#62;','&lt;','&gt;', '"', "<date/>", "<date_redac/>", "<date_modif/>");
-    $remplace = array('<','>','<','>', "'", '<date>'.(date("Y-m-d H:i:s")).'</date>', '<date_redac>0000-00-00 00:00:00</date_redac>', '<date_modif>'.(date("Y-m-d H:i:s")).'</date_modif>');
+    $a_remplacer = array('&#60;','&#62;','&lt;','&gt;', '"');
+    $remplace = array('<','>','<','>', "'");
+
+    // si plugin TYPOENLUMINE est en version 3 (ou plus) utiliser la syntaxe {{{**titre 2}}} a la place de {2{titre 2}2}
+    // (cf http://www.spip-contrib.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum435614)
+    if (array_key_exists('TYPOENLUMINEE', $Tplugins) AND intval(substr($Tplugins['TYPOENLUMINEE']['version'], 0, 1)) >= 3) {
+		array_push($a_remplacer, '{2{', '}2}', '{3{', '}3}', '{4{', '}4}', '{5{', '}5}');
+		array_push($remplace, '{{{**', '}}}', '{{{***', '}}}', '{{{****', '}}}', '{{{*****', '}}}');
+	}
+		
     $xml_sortie = str_replace($a_remplacer, $remplace, $xml_sortie);
     
     // gerer la conversion des <math>Object X</math> => on delegue a /inc/odt2spip_traiter_mathml.php
@@ -145,7 +157,8 @@ function action_odt2spip_importe() {
     if(preg_match('/<titre>([ ]*?)<\/titre>/', $xml_sortie, $match) == 1)
         $xml_sortie = preg_replace('/<titre>[ ]*?<\/titre>/', 
                                    '<titre>'.str_replace(array('_','-','.odt'), array(' ',' ',''), $fichier_zip).'</titre>', 
-                                   $xml_sortie);    
+                                   $xml_sortie);
+    
 
     // traiter les images: dans tous les cas il faut les intégrer dans la table documents
     // en 1.9.2 c'est mode vignette + il faut les intégrer dans la table de liaison 
