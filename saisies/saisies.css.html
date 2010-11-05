@@ -27,3 +27,11 @@ li.fieldset.plie > fieldset > h3 span{
 .saisie_date_jour_mois_annee .choix+.choix {margin-left:1em;}
 .saisie_date_jour_mois_annee .choix label{display:block; width:auto;}
 .saisie_date_jour_mois_annee .choix .text{width:auto;}
+
+[(#REM) Styles prives de bonux pour la mise en forme du selecteur d'article et/ou de rubrique ]
+[(#INCLURE{fond=prive/style_prive_plugin_bonux,ltr=#LANG_LEFT})] 
+
+[(#REM) On ecrase le style de bonux qui met tous les labels a droite (ou gauche). Sinon le p.explication du selecteur ne va pas a la ligne ]
+.formulaire_spip li.selecteur_item > label {
+	float:none;
+}

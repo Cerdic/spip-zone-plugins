@@ -10,15 +10,25 @@
   Parametres :
   - multiple : si oui, on peut selectionner plusieurs rubliques
   - afficher_langue : si oui, on affiche la langue de l'objet selectionne
-	 
+  - afficher_rub_dans_langue_interface : si oui, on n'affiche que les rubriques de la langue de l'interface
+
   Exemple d'appel :
 	[(#SAISIE{selecteur_rubrique,rubriques_menu,
 		multiple=oui,
 		label=<:plugin:article_en_une:>})] 
 ]
-[(#SET{val,#ENV{valeur,#ENV{defaut}}})]
 [(#REM) Donner a manger a CFG si aucune valeur definie ]
-<!--<input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
+[(#SET{val,#ENV{valeur,#ENV{defaut}}})]
+
+[(#SET{filtrer_langue_rubrique,[(#ENV{afficher_rub_dans_langue_interface,0}|oui) #ENV{lang}]})]
+
+[(#REM) input necessaire au tag label for 
+	Mais si on le garde, la saisie enregistree en base, n'est pas correcte
+   On pourrait rajouter l'id dans le input cree par Bonux, mais du coup manque la chaine "champ_"
+   Comme ca a l'air un peu tordu tout ca, tant pis pour l'erreur HTML
+   Yffic
+]
+<!--<input type="hidden" name="[(#ENV{nom,id_item})][]" id="[champ_(#ENV{nom,id_item})]" value="" />-->
 <INCLURE{fond=formulaires/selecteur/rubriques}
 	{selected=#GET{val}}
 	{name=#ENV{nom}}

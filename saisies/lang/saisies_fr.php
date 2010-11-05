@@ -18,8 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'option_aff_art_interface_explication' => 'Afficher uniquement les articles de la langue de l\'utilisateur',
+	'option_aff_art_interface_label' => 'Affichage multilingue',
 	'option_aff_rub_interface_explication' => 'Afficher uniquement les rubriques de la langue de l\'utilisateur',
-	'option_aff_interface_label' => 'Affichage multilingue',
+	'option_aff_rub_interface_label' => 'Affichage multilingue',
 	'option_aff_langue_explication' => 'Affiche la langue de l\'article ou rubrique s&eacute;lectionn&eacute; devant le titre',
 	'option_aff_langue_label' => 'Afficher la langue',
 	'option_attention_explication' => 'Un message plus important que l\'explication.',
