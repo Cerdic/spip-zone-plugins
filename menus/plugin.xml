@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]Menus[de]Men&uuml;s</multi></nom>
+	<nom><multi>[fr]Menus[de]Men&uuml;s[en]Menus</multi></nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
 	<version>0.8.2</version>
