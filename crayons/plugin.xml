@@ -6,6 +6,7 @@
 	[it]Pennarelli
 	[de]Der Stift
 	[en]Pencils
+	[ru]Карандаш
 	</multi>
 	</nom>
 	<auteur>
@@ -30,6 +31,7 @@
 _ <code><h1 class="#EDIT{titre} &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#1575;&#1582;&#1585;&#1609;">#TITRE</h1></code>.
 	[de]&#196;nderungen in &#246;ffentlichen Seiten direkt erledigen, Vorausetzung f&#252;r Wikis mit SPIP
 	[en]Quick editing from the public pages of the site.
+	[ru]Позволяет редактировать информацию прямо на сайте, не заходя в административную часть.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Les-Crayons</lien>
