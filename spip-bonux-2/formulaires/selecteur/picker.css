@@ -1,4 +1,4 @@
-.item_picker .chemin {border-bottom:1px sold #eee;margin:0.5em 0 0.25em;}
+.item_picker .chemin {border-bottom:1px solid #eee;margin:0.5em 0 0.25em;}
 
 .item_picker .frame {border:1px solid #999;width:180px;height:400px;float:left;overflow:auto;}
 .item_picker .frame h2 {margin:0;padding:5px;background:#999;}
