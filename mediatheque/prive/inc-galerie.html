@@ -150,7 +150,7 @@
 	</B_galerie>
 	<h2>[(#VAL{gestdoc:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
 	<//B_galerie>
-	[(#SESSION{statut}|=={0minirezo}|oui) 
+	[(#ENV{orphelins}|et{#AUTORISER{supprimer,orphelins,'',#SESSION{id_auteur}}})
 	[(#INCLURE{fond=prive/bouton/inc-supprimer-orphelins,env})]
 	]
 	</B_docs_supprimables>

@@ -130,3 +130,9 @@ function autoriser_document_supprimer($faire, $type, $id, $qui, $opt){
 
 	return autoriser('modifier','document',$id,$qui,$opt);
 }
+
+function autoriser_orphelins_supprimer($faire, $type, $id, $qui, $opt){
+	if ($qui['statut'] == '0minirezo'
+	AND !$qui['restreint'])
+		return true;
+}		
