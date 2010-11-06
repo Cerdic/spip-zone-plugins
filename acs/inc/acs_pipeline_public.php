@@ -29,9 +29,9 @@ function acs_insert_head($flux) {
   		$js_dragdrop = find_in_path('javascript/jquery-ui-1.8-drag-drop.min.js');
   		$jquery_version = 1;
   	}
-  	$js_params = array('jquery_version' => 1);
+  	$js_params = array('jquery_version' => $jquery_version);
   	$r .= '<script type="text/javascript" src="'.$js_dragdrop.'"></script>';
-  	$r .= '<script type="text/javascript" src="'.generer_url_public('javascript/acs_controleur_composant.js', $js_params).'"></script>';
+  	$r .= '<script type="text/javascript" src="'.urldecode(generer_url_public('javascript/acs_controleur_composant.js', $js_params)).'"></script>';
   }
   return $flux.$r;
 }

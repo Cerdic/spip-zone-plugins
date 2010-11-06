@@ -115,6 +115,9 @@ function mkdir_recursive($pathname) {
  * Lit une variable meta à la façon de l'API cfg, suivant un chemin,
  * avec en plus la récursivité ACS (une variable ACS peut référencer une autre variable ACS)
  * Utilisé par la fonction balise_VAR()
+ * @param src : tableau source
+ * @param meta : nom de la variable meta à lire
+ * @return : valeur de la variable (récursive)
  */
 function meta_recursive($src, $meta) {
 	$chemin = strtok($meta, '/');
@@ -131,13 +134,19 @@ function meta_recursive($src, $meta) {
 	}
 	return $val;
 }
-
+/**
+ * Journalise les actions du plugin ACS si _ACS_LOG vaut "true" dans acs_options.php
+ * @param : texte à journaliser
+ */
 function acs_log($txt) {
 	if (_ACS_LOG === true)
 		spip_log($txt, 'acs');
 }
 /**
  * Retourne un objet ou un tableau sous forme de tableau affichable en html
+ * @param r : objet ou tableau
+ * @param html : retourne du html si vrai
+ * @return : objet ou tableau en mode texte ou html lisible
  */
 function dbg($r, $html=false) {
    if (is_object($r) or is_array($r)) {

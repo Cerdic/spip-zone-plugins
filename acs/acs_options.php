@@ -11,7 +11,7 @@
  * First file of the plugin loaded.
  * Debug options and plugin load.
  * \~french
- * Premier fichier du plugin charge.
+ * Premier fichier du plugin chargé.
  * Options de debug et chargement du plugin.
  */
 

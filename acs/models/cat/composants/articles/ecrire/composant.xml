@@ -51,13 +51,6 @@
     <valeur>oui</valeur>
   </variable>
   <variable>
-    <nom>Sommaire</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>non</valeur>
-  </variable>
-  <variable>
     <nom>Stats</nom>
     <type>choix</type>
     <option>oui</option>

@@ -118,12 +118,11 @@ _T('acs:voir_pages_composants').
 <br />
 <table><tr><td><input name="ACS_PREVIEW_BACKGROUND" type="text" class="palette forml" style="width:60px;" value="'.$GLOBALS['meta']['ACS_PREVIEW_BACKGROUND'].'" /></td><td>'._T('acs:preview_background').'</td></tr></table>
 <br />
-<br />
-<input type="submit" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'" class="fondo" /></form><br />'.
+<div style="text-align:'.$GLOBALS['spip_lang_right'].';"><input type="submit" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'" class="fondo" /></div></form><br />'.
 _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", lire_meta("acsDerniereModif")).
-'<hr /><br />'.
+'<hr />'.
 _T('version').' <a style="color: black">ACS '.acs_version().'</a> '.(acs_release() ? '('.acs_release().')' : '').
-'<br /><br />'.
+'<br />'.
 _T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'images/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>', _DIR_PLUGIN_ACS."images/acs_32x32.gif");
 }
 

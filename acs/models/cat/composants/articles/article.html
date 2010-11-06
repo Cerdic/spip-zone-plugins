@@ -17,8 +17,7 @@
   [<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
   
   [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-  [(#VAR{acsArticlesSommaire}|=={oui}?{' '})[<div class="#EDIT{texte} texte">(#TEXTE*|sommaire{true}|propre)</div>]]
-  [(#VAR{acsArticlesSommaire}|!={oui}?{' '})[<div class="#EDIT{texte} texte">(#TEXTE)</div>]]
+  [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
   #FIN_SURLIGNE
   [(#REM)
 

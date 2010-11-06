@@ -90,7 +90,7 @@ echo '<table width="100%" style="position: fixed; background: #dfdfdf"><tr><td w
 // Show gallery
 if ($d = @opendir($dir)) {
 	while (false !== ($file = @readdir($d))) {
-  	if ($file != "." && $file != "..") {
+  	if (is_file($dir.'/'.$file) && ($file != ".") && ($file != "..")) {
       $s = @getimagesize($dir.'/'.$file);
       if ($s)
       	$s = $s[0].'x'.$s[1];

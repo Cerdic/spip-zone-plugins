@@ -1,9 +1,8 @@
 <?php
-
+# ACS
+# Copyright Daniel FAIVRE 2008-2010 - Copyleft licence GPL
+#
 /**
- * ACS
- * Copyright Daniel FAIVRE 2008-2010 - Copyleft licence GPL
- *
  * La classe acsOngletsEdit étend CEdit,
  * et implémente sa méthode update() pour personnaliser
  * les images d'onglets "portes coulissantes CSS".
