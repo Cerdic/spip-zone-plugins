@@ -7,16 +7,16 @@
 	La largeur de la legende est egale a la largeur de l'image
 	avec un minimum de 120px, et un maximum de 350px.
 
-	Dans le cas d'une simple image (mode=image), on affiche
+	Dans le cas d'une simple image (jpg,png,gif), on affiche
 	le document lui-meme, sans lien de telechargement
 ]
-[(#MODE|=={image}|oui)
+[(#EXTENSION|match{gif|png|jpg}|oui)
 	#SET{fichier,#URL_DOCUMENT}
 	#SET{width,#LARGEUR}
 	#SET{height,#HAUTEUR}
 	#SET{url,#ENV{lien}}
 ]
-[(#MODE|=={image}|non)
+[(#EXTENSION|match{gif|png|jpg}|oui)
 	[(#SET{fichier,[(#LOGO_DOCUMENT||extraire_attribut{src})]})]
 	[(#SET{width,[(#LOGO_DOCUMENT||extraire_attribut{width})]})]
 	[(#SET{height,[(#LOGO_DOCUMENT||extraire_attribut{height})]})]
