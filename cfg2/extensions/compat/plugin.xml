@@ -5,7 +5,7 @@
 			[fr]CFG : Compatibility with CFG 1.10 functionalities
 		</multi>
 	</nom>
-    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
+    <auteur>Bertrand Gugger, Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
     <version>1.0.5</version>
     <etat>stable</etat>
