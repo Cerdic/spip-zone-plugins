@@ -1,12 +1,16 @@
 <plugin>
-	<nom>M&eacute;tas</nom>
+	<nom><multi>[fr]M&eacute;tas[en]Meta[ru]Мета-данные</multi></nom>
 	<version>1.3.1</version>
 	<version_base>1.0</version_base>
 	<etat>stable</etat>
 	<icon>images/metas-24.png</icon>
 	<auteur>[Quentin de Serres-Justiniac->http://www.spip-contrib.net/?auteur10451]
 _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
-	<description>Gestion des m&eacute;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.</description>
+	<description><multi>
+	[fr]Gestion des m&eacute;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.
+    [en]This plugin makes possible to create and edit the META data for articles and rubriques of SPIP site.
+    [ru]Плагин позволяет создавать и редактировать META заголовки для страниц и разделов сайта. Перевод плагина - http://www.aloha.kiev.ua.
+	</description>
 	<lien>http://www.spip-contrib.net/?rubrique1250</lien>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<prefix>metas</prefix>
