@@ -1,6 +1,6 @@
 <plugin>
     <nom>CFG : Interface</nom>
-    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
+    <auteur>Bertrand Gugger, Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
     <version>1.0.4</version>
     <etat>stable</etat>
