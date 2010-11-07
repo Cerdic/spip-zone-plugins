@@ -22,6 +22,7 @@ function boutique_upgrade($nom_meta_base_version, $version_cible){
 
 function boutique_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_produits");
+	sql_drop_table("spip_avis_boutique");
 	effacer_meta($nom_meta_base_version);
 }
 
