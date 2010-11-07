@@ -16,6 +16,5 @@
 	</multi></description>
 	<prefix>forum</prefix>
 	<necessite id="SPIP" version="[2.0.8;]" />
-	<necessite id="spip_bonux" version="[1.4;]" />
 	<categorie>communication</categorie>
 </plugin>

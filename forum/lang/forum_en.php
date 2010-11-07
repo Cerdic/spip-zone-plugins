@@ -5,8 +5,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'aucun_post_forum' => 'No post forum',
-'un_post_forum' => '1 post forum',
-'nombre_posts_forum' => '@nb@ forum posts',
+'info_1_message_forum' => '1 post forum',
+'info_nb_messages_forum' => '@nb@ forum posts',
 
 'icone_bruler_post' => "Report as Spam",
 'icone_valider_repondre_post' => 'Confirm & Reply to this post',
