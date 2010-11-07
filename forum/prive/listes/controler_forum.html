@@ -1,10 +1,7 @@
 #SET{self,#SELF|parametre_url{id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum,''}}
-[(#ENV{objet}|et{#ENV{id_objet}})
-<a class='annule_filtre' href='[(#GET{self}|parametre_url{id_objet|objet,''})]' title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|balise_img|inserer_attribut{alt,<:forum:tout_voir:>})]</a>
-<:forum:texte_messages_publics:><h1><a href='[(#INFO_URL{#OBJET,#ID_OBJET}|ancre_url{forum#ID_FORUM})]'>[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></h1>
-]
-<p><a href="[(#SELF|parametre_url{type_form,cvt})]"><:forum:interface_formulaire:></a></p>
-
+<BOUCLE_repart(ARTICLES){id_article}><a class='annule_filtre' href='[(#GET{self}|parametre_url{id_article,''})]' title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|tag_img|inserer_attribut{alt,<:forum:tout_voir:>})]</a> 
+<:texte_messages_publics:><h1><a href='[(#URL_ARTICLE|ancre_url{forum#ID_FORUM})]'>#TITRE</a></h1> 
+</BOUCLE_repart> 
 [<h1><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h1>]
 #FORMULAIRE_RECHERCHE_ECRIRE{#GET{self}}
 
@@ -51,7 +48,7 @@
 
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items forums'>
-<BOUCLE_forum(FORUMS){id_forum?}{id_objet?}{objet?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination 10}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
+<BOUCLE_forum(FORUMS){id_forum?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{id_message?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination 10}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
 <li class="item forum statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM'>
 [(#INCLURE{fond=prive/modeles/forum}{id_forum}{self})]
 </li>
