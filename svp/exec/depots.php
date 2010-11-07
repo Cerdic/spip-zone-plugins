@@ -14,13 +14,12 @@ include_spip('inc/actions');
 
 function exec_depots_dist()
 {
-	if (!autoriser('webmestre')) {
+	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		die();
 	}
-
-	exec_depots_args(intval(_request('id_depot')));
+	else
+		exec_depots_args(intval(_request('id_depot')));
 }
 
 function exec_depots_args($id_depot)

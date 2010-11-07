@@ -10,46 +10,47 @@ function exec_depots_gerer_dist(){
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		die();
 	}
+	else {
 
-	// pipeline d'initialisation
-	pipeline('exec_init', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
-
-	// entetes
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	echo "<br />\n";
-	echo "<br />\n";
+		// pipeline d'initialisation
+		pipeline('exec_init', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
 	
-	// titre
-	echo gros_titre(_T('icone_admin_plugin'),'', false);
+		// entetes
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
+		echo "<br />\n";
+		echo "<br />\n";
+		
+		// titre
+		echo gros_titre(_T('icone_admin_plugin'),'', false);
+		
+		// barre d'onglets
+		echo barre_onglets("plugins", "svp_depots");
+		
+		// colonne gauche
+		echo debut_gauche('', true);
+		// -- Boite d'infos
+		$boite = _T('info_gauche_admin_tech');
+		if ($boite)
+			echo debut_boite_info(true) . $boite . fin_boite_info(true); 
+		echo pipeline('affiche_gauche', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
+		
+		// colonne droite
+		echo creer_colonne_droite('', true);
+		echo pipeline('affiche_droite', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
+		
+		// centre
+		echo debut_droite('', true);
 	
-	// barre d'onglets
-	echo barre_onglets("plugins", "svp_depots");
+		// contenu
+		echo recuperer_fond('prive/contenu/depots_gerer',  array());
 	
-	// colonne gauche
-	echo debut_gauche('', true);
-	// -- Boite d'infos
-	$boite = _T('info_gauche_admin_tech');
-    if ($boite)
-        echo debut_boite_info(true) . $boite . fin_boite_info(true); 
-	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
+		// fin contenu
+		echo pipeline('affiche_milieu', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
 	
-	// colonne droite
-	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
-	
-	// centre
-	echo debut_droite('', true);
-
-	// contenu
-	echo recuperer_fond('prive/contenu/depots_gerer',  array());
-
-	// fin contenu
-	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
-
-	echo fin_gauche(), fin_page();
+		echo fin_gauche(), fin_page();
+	}
 }
 
 ?>
