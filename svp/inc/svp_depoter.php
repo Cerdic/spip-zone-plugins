@@ -365,10 +365,10 @@ function svp_remplir_champs_sql($p) {
 			'prefixe' => $p['prefix'],
 			'nom' => $nom,
 			'slogan' => $slogan,
-			'logo' => $p['icon'],
 			'categorie' => $p['categorie'],
 			'tags' => $p['tags']),
 		'paquet' => array(
+			'logo' => $p['icon'],
 			'description' => $p['description'],
 			'auteur' => $p['auteur'],
 			'version' => $p['version'],

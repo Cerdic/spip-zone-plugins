@@ -29,8 +29,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"nom"			=> "text DEFAULT '' NOT NULL",
 		"slogan"		=> "text DEFAULT '' NOT NULL",
 		"categorie"		=> "varchar(100) DEFAULT '' NOT NULL",
-		"tags"			=> "text DEFAULT '' NOT NULL",
-		"logo"			=> "varchar(255) DEFAULT '' NOT NULL" // chemin du logo depuis la racine du plugin
+		"tags"			=> "text DEFAULT '' NOT NULL"
 	);
 	
 	$plugins_key = array(
@@ -45,6 +44,7 @@ function svp_declarer_tables_principales($tables_principales) {
 	$paquets = array(
 		"id_paquet"		=> "bigint(21) NOT NULL",
 		"id_plugin"		=> "bigint(21) NOT NULL",
+		"logo"			=> "varchar(255) DEFAULT '' NOT NULL", // chemin du logo depuis la racine du plugin
 		"version"		=> "varchar(24) DEFAULT '' NOT NULL",
 		"version_base"	=> "varchar(24) DEFAULT '' NOT NULL",
 		"version_spip"	=> "varchar(24) DEFAULT '' NOT NULL",
