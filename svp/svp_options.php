@@ -17,6 +17,7 @@ define('_SVP_LOG_PAQUETS', true);
 $GLOBALS['logo_libelles']['id_depot'] = _T('svp:titre_boite_logo_depot');
 
 // Infos *temporaires* du plugin de prefixe 'theme'
+define('_SVP_PREFIXE_PLUGIN_THEME', 'THEME');
 define('_SVP_NOM_PLUGIN_THEME', 'Thèmes SPIP');
 define('_SVP_SLOGAN_PLUGIN_THEME', 'Des thèmes pour habiller les squelettes SPIP');
 

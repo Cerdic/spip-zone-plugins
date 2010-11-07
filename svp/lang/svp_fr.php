@@ -54,9 +54,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_paquet_disponible' => 'Aucun paquet disponible.',
 	'info_aucune_contribution_disponible' => 'Aucune autre contribution disponible en dehors es plugins',
 	'info_aucune_version_spip' => 'Non communiqu&eacute;e',
-	'info_fichier_depot' => 'Saisissez l\'url du fichier de description du d&eacute;p&ocirc;t &agrave; ajouter.<br /> Pour ajouter la Zone des plugins SPIP cliquez sur ce lien : ',
 	'info_adresse_spipzone' => 'SPIP-Zone',
+	'info_boite_charger_plugin' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle vous permet de rechercher des plugins mis &agrave; disposition par les d&eacute;p&ocirc;ts enregistr&eacute;s dans votre configuration et de les installer physiquement sur votre serveur. Les plugins d&eacute;j&agrave; install&eacute;s ne sont pas propos&eacute;s.</p>',
+	'info_boite_depot_gerer' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de l\'ajout et l\'actualisation des d&eacute;p&ocirc;ts de plugins. Il est aussi possible de se rendre sur la page d’&eacute;dition de chaque d&eacute;p&ocirc;t.</p>',
+	'info_charger_plugin' => 'Ce formulaire vous permez de rechercher des plugins suivant plusieurs crit&egrave;res parmi lesquels la cat&eacute;gorie ou l\'&eacute;tat. Les plugins trouv&eacute;s sont tous compatibles avec la version install&eacute;e de SPIP, &agrave; savoir, @version@.',
+	'info_critere_phrase' => 'Saisissez les mots-cl&eacute;s &agrave; chercher dans les noms, slogans et descriptions des plugins',
 	'info_depots_disponibles' => '@total_depots@ d&eacute;p&ocirc;t(s)',
+	'info_fichier_depot' => 'Saisissez l\'url du fichier de description du d&eacute;p&ocirc;t &agrave; ajouter.<br /> Pour ajouter la Zone des plugins SPIP cliquez sur ce lien : ',
 	'info_liste_aucun_depot' => 'Aucun d&eacute;p&ocirc;t n\'a encore &eacute;t&eacute; charg&eacute; dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_liste_depots' => 'Vous trouverez ci-dessous la liste des d&eacute;p&ocirc;ts ajout&eacute;s &agrave; votre base. Tous les plugins h&eacute;berg&eacute;s par ces d&eacute;p&ocirc;ts ont eux aussi &eacute;t&eacute; charg&eacute;s.',
 	'info_paquets_disponibles' => '@total_paquets@ paquet(s) disponible(s)',
@@ -82,6 +86,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_paquet' => 'paquet',
 	'label_1_plugin' => 'plugin',
 	'label_actualise_le' => 'Actualis&eacute; le',
+	'label_critere_phrase' => 'Rechercher des plugins',
+	'label_critere_categorie' => 'dans',
+	'label_critere_etat' => 'et pour',
 	'label_fichier_depot' => 'Fichier des paquets du d&eacute;p&ocirc;t',
 	'label_modifier_depot' => 'Modifier le d&eacute;p&ocirc;t',
 	'label_n_autres_contributions' => 'autres contributions',
@@ -119,6 +126,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // O
 	'onglet_depots' => 'G&eacute;rer les d&eacute;p&ocirc;ts',
 	'onglet_plugins' => 'Rechercher un plugin',
+	'option_categorie_toute' => 'Toutes les cat&eacute;gories',
+	'option_etat_tout' => 'Tous les &eacute;tats',
 
 // R
 	'resume_table_depots' => 'Liste des d&eacute;p&ocirc;ts ajout&eacute;s',

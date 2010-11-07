@@ -125,9 +125,9 @@ function svp_rechercher_liste_des_champs($tables) {
 	// On déclare les champs de recherche dans les tables plugins et paquets
 	// -- Table spip_plugins
 	$tables['plugin']['nom'] = 8;
-	$tables['plugin']['slogan'] = 5;
+	$tables['plugin']['slogan'] = 4;
 	// -- Table spip_paquets
-	$tables['paquet']['descriptif'] = 3;
+	$tables['paquet']['descriptif'] = 2;
 
 	return $tables;
 }

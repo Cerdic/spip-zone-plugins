@@ -2,7 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 // ----------------------- Traitements des depots ---------------------------------
 
 /**
@@ -226,7 +225,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					't1.version_base=' . sql_quote($insert_paquet['version_base']),
 					't1.etatnum=' . sql_quote($insert_paquet['etatnum']),
 					't2.prefixe=' . sql_quote($insert_plugin['prefixe']));
-			if (($insert_plugin['prefixe'] == 'theme')
+			if (($insert_plugin['prefixe'] == _SVP_PREFIXE_PLUGIN_THEME)
 			OR (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1, spip_plugins AS t2', $where))) {
 				// On traite d'abord le plugin du paquet pour recuperer l'id_plugin
 				// On rajoute le plugin dans la table spip_plugins si celui-ci n'y est pas encore ou on recuperer_page
@@ -309,13 +308,17 @@ function svp_remplir_champs_sql($p) {
 
 	if (!$p)
 		return array();
-		
+
+	// On passe le prefixe en lettres majuscules comme ce qui est fait dans SPIP
+	// Ainsi les valeurs dans la table spip_plugins coincideront avec celles de la meta plugin
+	$p['prefix'] = strtoupper($p['prefix']);
+
 	// calcul du tableau de dependances
 	$dependances = array();
 	$v_spip = '';
 	if (is_array($p['necessite'])) {
 		foreach ($p['necessite'] as $c=>$n) {
-			$p['necessite'][$c]['id'] = strtolower($n['id']);
+			$p['necessite'][$c]['id'] = strtoupper($n['id']);
 			if ($n['id'] == 'SPIP') {
 				$v_spip = $n['version'];
 			}
@@ -325,7 +328,7 @@ function svp_remplir_champs_sql($p) {
 	
 	if (is_array($p['utilise'])) {
 		foreach ($p['utilise'] as $c=>$n) {
-			$p['utilise'][$c]['id'] = strtolower($n['id']);
+			$p['utilise'][$c]['id'] = strtoupper($n['id']);
 		}
 		$dependances['utilise'] = $p['utilise'];
 	}
@@ -342,7 +345,7 @@ function svp_remplir_champs_sql($p) {
 	$p['licence'] = unicode2charset(html2unicode($p['licence']));
 
 	// Nom, slogan et branche
-	if ($p['prefix'] == 'theme') {
+	if ($p['prefix'] == _SVP_PREFIXE_PLUGIN_THEME) {
 		// Traitement specifique des themes qui aujourd'hui sont consideres comme des paquets
 		// d'un plugin unique de prefixe "theme"
 		$nom = _SVP_NOM_PLUGIN_THEME;
@@ -560,5 +563,111 @@ function svp_xml_parse_plugin($arbre){
 
 	return $plug_arbre;
 }
+
+
+// ----------------------- Recherches de plugins ---------------------------------
+
+/**
+ * Actualisation des plugins du depot uniquement. Sert aussi pour une premiere insertion
+ *
+ * @param string $phrase
+ * @param string $categorie
+ * @param string $etat
+ * @param string $version
+ * @param array $exclusions
+ * @return array
+ */
+
+// $version		=> version SPIP affichee
+// $exclusions	=> tableau d'id de plugin
+function svp_rechercher_plugins($phrase, $categorie, $etat, $exclusions=array(), $version='') {
+
+	$plugins = array();
+	
+	// Selectionne les informations completes des paquets qui repondent aux criteres categorie, etat et exclusions
+	// -- Preparation de la requete
+	$from = array('spip_plugins AS t1', 'spip_paquets AS t2');
+	$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 
+					't2.description AS description', 't2.version_spip AS version_spip', 't2.etat AS etat',
+					't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
+					't2.logo AS logo', 't2.version AS version', 't2.id_paquet AS id_paquet');
+	$where = array('t1.id_plugin=t2.id_plugin');
+	if ((!$categorie) OR ($categorie != 'categorie_toute'))
+		$where[] = 't1.categorie=' . sql_quote($categorie);
+	if ((!$etat) OR ($etat != 'etat_tout'))
+		$where[] = 't2.etat=' . sql_quote($etat);
+	if ($exclusions)
+		$where[] = sql_in('t2.id_plugin', $exclusions, 'NOT');
+
+	// -- Controle des resultats avec la compatibilite SPIP et la phrase 
+	if ($resultats = sql_select($select, $from, $where)) {
+		// On normalise la phrase a chercher en une regexp utilisable
+		$phrase = svp_normaliser_phrase($phrase);
+		while ($paquets = sql_fetch($resultats)) {
+			if (svp_verifier_compatibilite_spip($paquets['version_spip'])
+			AND (!phrase OR svp_rechercher_phrase($phrase, extraire_multi($paquets['nom']), 
+												extraire_multi($paquets['slogan']), 
+												extraire_multi($paquets['description']),
+												$score))) {
+				// Le paquet remplit tous les criteres, on le selectionne
+				$paquets['score'] = $score;
+				$plugins[] = $paquets;
+			}
+		}
+	}
+	
+	return $plugins;
+}
+
+/**
+ * Recuperation des id des plugins a exclure car deja installes
+ *
+ * @return array
+ */
+
+function svp_lister_plugins_installes(){
+
+	$ids = array();
+
+	// On recupere la liste des plugins installes physiquement sur le site
+	// Pour l'instant ce n'est pas possible avec les fonctions natives de SPIP
+	// donc on se contente des plugins actifs
+	// - liste des prefixes en lettres majuscules des plugins actifs
+	include_spip('inc/plugin');
+	$plugins = liste_plugin_actifs();
+
+	// - liste des id de plugin correspondants
+	//   Il se peut que certains plugins ne soient pas trouves dans la bdd car aucun zip n'est disponible
+	//   (donc pas inclus dans archives.xml). C'est le cas des extensions du core
+	$ids = sql_allfetsel('id_plugin', 'spip_plugins', sql_in('prefixe', array_keys($plugins)));
+	$ids = array_map('reset', $ids);
+	$ids = array_map('intval', $ids);
+
+	return $ids;
+}
+
+function svp_verifier_compatibilite_spip($version){
+	include_spip('inc/plugin');
+	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
+	return plugin_version_compatible($version, $version_spip);
+}
+
+function svp_rechercher_phrase($phrase, $nom, $slogan, $description, &$score){
+	$score = 0;
+	
+	if (strripos($nom, $phrase) !== false)
+		$score += 8;
+	if (strripos($slogan, $phrase) !== false)
+		$score += 4;
+	if (strripos($description, $phrase) !== false)
+		$score += 2;
+	
+	return ($score>0);
+}
+
+function svp_normaliser_phrase($phrase){
+	return $phrase;
+}
+
 
 ?>

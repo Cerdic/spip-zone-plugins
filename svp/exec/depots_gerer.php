@@ -4,7 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
 function exec_depots_gerer_dist(){
-	global $spip_lang_right;
 
 	// si pas autorise : message d'erreur
 	if (!autoriser('configurer', 'plugins')) {
@@ -31,7 +30,7 @@ function exec_depots_gerer_dist(){
 		// colonne gauche
 		echo debut_gauche('', true);
 		// -- Boite d'infos
-		$boite = _T('info_gauche_admin_tech');
+		$boite = _T('svp:info_boite_depot_gerer');
 		if ($boite)
 			echo debut_boite_info(true) . $boite . fin_boite_info(true); 
 		echo pipeline('affiche_gauche', array('args'=>array('exec'=>'depots_gerer'),'data'=>''));
