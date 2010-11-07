@@ -53,7 +53,7 @@ function changer_la_date(me) {
 	mois = li.find('.date_mois').attr('value').trim();
 	annee = li.find('.date_annee').attr('value').trim();
 	date = li.find('.datetime').attr('value').trim();
-	while(jour.lengh < 2) {jour = '0' + jour;}
+	while(jour.length < 2) {jour = '0' + jour;}
 	while(mois.length < 2) {mois = '0' + mois;}
 	while(annee.length < 4) {annee = '0' + annee;}
 	date = annee + '-' + mois + '-' + jour + date.substring(10);
