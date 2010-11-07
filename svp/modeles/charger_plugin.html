@@ -1,0 +1,14 @@
+<li class="item"[ id="(#ENV{valeur}|table_valeur{prefixe})-#ENV{iteration}"]>
+	[(#REM) <!-- Icone de telechargement -->]
+	<div class="download">
+	</div>
+
+	[(#REM) <!-- Resume du plugin -->]
+	<div class="resume">
+		<h3 class="nom">[(#ENV{nom})]</h3>
+		<span class="version">[(#ENV{version})]</span>
+		<span class="etat">[ - (#ENV{etat})]</span>
+		<div class="short">[(#ENV{slogan})]</div>
+		<div class="icon">[(#ENV{logo}|image_reduire{32})]</div>
+	</div>
+</li>

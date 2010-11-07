@@ -2,7 +2,6 @@
 	<h3 class='titrem'>[(#CHEMIN{prive/themes/spip/images/ajouter_plugin-24.gif}|balise_img{icone ajouter_plugin-24,cadre-icone})]<:plugin_titre_automatique_ajouter:></h3>
 
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
 	<form method="post" action="#ENV{action}"><div>
@@ -43,9 +42,18 @@
 			</li>
 		</ul>
 
-		<p class='boutons'>
-			<input type='submit' class='submit' value='<:info_rechercher:>' />
-		</p>
+		<p class='boutons'><input type='submit' class='submit' value='<:info_rechercher:>' /></p>
+
+		[<ul>
+			<li class="fieldset">
+				<fieldset>
+					<p class="explication">(#ENV*{message_ok}|table_valeur{resume})</p>
+					[<ul class="liste-items plugins distants">
+						(#ENV*{message_ok}|table_valeur{plugins}|iterer_modele{charger_plugin})
+					</ul>]
+				</fieldset>
+			</li>
+		</ul>]
 	</div></form>
 	]
 </div>

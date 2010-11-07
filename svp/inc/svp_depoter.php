@@ -604,12 +604,16 @@ function svp_rechercher_plugins($phrase, $categorie, $etat, $exclusions=array(),
 		// On normalise la phrase a chercher en une regexp utilisable
 		$phrase = svp_normaliser_phrase($phrase);
 		while ($paquets = sql_fetch($resultats)) {
+			$nom = extraire_multi($paquets['nom']);
+			$slogan = extraire_multi($paquets['slogan']);
+			$description = extraire_multi($paquets['description']);
 			if (svp_verifier_compatibilite_spip($paquets['version_spip'])
-			AND svp_rechercher_phrase($phrase, extraire_multi($paquets['nom']), 
-												extraire_multi($paquets['slogan']), 
-												extraire_multi($paquets['description']),
-												$score)) {
+			AND svp_rechercher_phrase($phrase, $nom, $slogan, $description,	$score)) {
 				// Le paquet remplit tous les criteres, on le selectionne
+				// On garde uniquement la langue du site et on ajoute le score
+				$paquets['nom'] = $nom;
+				$paquets['slogan'] = $slogan;
+				$paquets['description'] = $description;
 				$paquets['score'] = $score;
 				$plugins[] = $paquets;
 			}

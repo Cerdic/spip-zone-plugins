@@ -119,7 +119,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_url_depot_incorrecte' => 'L\'adresse &#171; @url@ &#187; est incorrecte',
 	'message_nok_xml_non_conforme' => 'Le fichier XML &#171; @fichier@ &#187; de description du d&eacute;p&ocirc;t n\'est pas conforme',
 	'message_nok_depot_deja_ajoute' => 'L\'adresse &#171; @url@ &#187; correspond &agrave; un d&eacute;p&ocirc;t d&eacute;j&agrave; ajout&eacute;',
+	'message_ok_aucun_plugin_trouve' => 'Aucun plugin ne correspond aux crit&egrave;res choisis.',
 	'message_ok_depot_ajoute' => 'Le d&eacute;p&ocirc;t &#171; @url@ &#187; a &eacute;t&eacute; ajout&eacute;.',
+	'message_ok_plugins_trouves' => '@nb_plugins@ plugin(s) correspondent aux crit&egrave;res choisis. Sélectionnez ci-dessous les plugins que SPIP t&eacute;l&eacute;chargera et installera sur votre serveur.',
 
 // N
 
