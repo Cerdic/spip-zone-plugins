@@ -1,13 +1,15 @@
 <plugin>
-	<nom>Date d'inscription</nom>
+	<nom><multi>[fr]Date d'inscription [en]Registration date [es]Fecha de inscripci&oacute;n</multi></nom>
 	<auteur>b_b</auteur>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<prefix>date_inscription</prefix>
-	<description>
-	Un champ suppl&eacute;mentaire pour la table auteurs : date_inscription
-	</description>
+	<description><multi>
+	[fr] Un champ suppl&eacute;mentaire pour la table auteurs : date_inscription
+	[en] An additional field on authors table: date_inscription (registration date)
+	[es] Un nuevo campo en la table de autores: date_inscription (fecha de inscripci&oacute;n)
+	</multi></description>
 	<lien>http://www.spip-contrib.net/Date-d-inscription</lien>
 	<licence>GPL</licence>
 	<icon></icon>
