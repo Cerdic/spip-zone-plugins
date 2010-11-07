@@ -12,7 +12,7 @@
 			[en]Plugin version with the templates and filters from the contrib "tag cloud".
 		</multi>
 	</description>
-	<icon>nuage-64.png</icon>
+	<icon>images/nuage-64.png</icon>
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head_css</nom> 
