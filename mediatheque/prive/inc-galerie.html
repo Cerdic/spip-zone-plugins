@@ -147,6 +147,7 @@
 	</BOUCLE_galerie>
 	</table>
 	[<p class="pagination">(#PAGINATION{page})</p>]
+	#SET{nb_orphelins,#GRAND_TOTAL}
 	</B_galerie>
 	<h2>[(#VAL{gestdoc:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
 	<//B_galerie>
