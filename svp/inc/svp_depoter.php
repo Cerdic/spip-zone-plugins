@@ -605,10 +605,10 @@ function svp_rechercher_plugins($phrase, $categorie, $etat, $exclusions=array(),
 		$phrase = svp_normaliser_phrase($phrase);
 		while ($paquets = sql_fetch($resultats)) {
 			if (svp_verifier_compatibilite_spip($paquets['version_spip'])
-			AND (!phrase OR svp_rechercher_phrase($phrase, extraire_multi($paquets['nom']), 
+			AND svp_rechercher_phrase($phrase, extraire_multi($paquets['nom']), 
 												extraire_multi($paquets['slogan']), 
 												extraire_multi($paquets['description']),
-												$score))) {
+												$score)) {
 				// Le paquet remplit tous les criteres, on le selectionne
 				$paquets['score'] = $score;
 				$plugins[] = $paquets;
@@ -653,16 +653,21 @@ function svp_verifier_compatibilite_spip($version){
 }
 
 function svp_rechercher_phrase($phrase, $nom, $slogan, $description, &$score){
+	$trouve = false;
 	$score = 0;
-	
-	if (strripos($nom, $phrase) !== false)
-		$score += 8;
-	if (strripos($slogan, $phrase) !== false)
-		$score += 4;
-	if (strripos($description, $phrase) !== false)
-		$score += 2;
-	
-	return ($score>0);
+
+	if (!$phrase)
+		$trouve = true;
+	else {
+		if (stripos($nom, $phrase) !== false)
+			$score += 8;
+		if (stripos($slogan, $phrase) !== false)
+			$score += 4;
+		if (stripos($description, $phrase) !== false)
+			$score += 2;
+		$trouve = ($score>0);
+	}
+	return $trouve;
 }
 
 function svp_normaliser_phrase($phrase){
