@@ -3,7 +3,7 @@
   <nom>LESSpip</nom>
   <auteur>Jean-Baptiste Bourgoin</auteur>
   <licence>MIT</licence>
-  <version>0.1</version>
+  <version>0.2</version>
   <categorie>outils</categorie>
   <description>
   LESSpip est un plugin d'intégration de l'implémentation php de LESS.
@@ -12,9 +12,8 @@
   les opérations, les imbrications au langage. Facilitant ainsi
   l'écriture de feuilles de style complexes.
 
-  Ce plugin créé un fichier "habillage_less.css" dans votre dossier de
-  thème courant, ou dans votre dossier squelette, à partir d'un
-  fichier less initial : "habillage.less".
+  Ce plugin créé les fichiers css correspondant à vos fichiers less dans
+  le répertoire où ces derniers ont été créés.
   </description>
   <etat>dev</etat>
   <prefix>lesspip</prefix>
@@ -22,10 +21,4 @@
   <lien>http://leafo.net/lessphp/</lien>
 
   <fonctions>lessphp/gen_styles.php</fonctions>
-
-  <pipeline>
-    <nom>insert_head</nom>
-    <inclure>lessphp/less_head.php</inclure>
-  </pipeline>
-  
 </plugin>
