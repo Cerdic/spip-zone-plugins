@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_attacher_document' => 'Attacher',
 	'bouton_enlever_document' => 'Detacher',
 	'bouton_enlever_supprimer_document' => 'Supprimer',
-	'bouton_enlever_supprimer_document_confirmation' => 'Etes-vous sûr de vouloir supprimer le document ?',
+	'bouton_enlever_supprimer_document_confirmation' => 'Etes-vous s&ucirc;r de vouloir supprimer le document ?',
 	'bouton_modifier_document' => 'Modifier',
 	'bouton_parcourir' => 'Parcourir...',
 	'bouton_refresh_document' => 'Rafraichir le document',
@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_supprimer_tous_orphelins' => 'Supprimer tous les orphelins',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Etes-vous s&ucirc;r de vouloir supprimer @nb@ orphelins ?',
 	'bouton_upload' => 'T&eacute;l&eacute;charger',
 
 	

@@ -151,7 +151,7 @@
 	<h2>[(#VAL{gestdoc:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
 	<//B_galerie>
 	[(#ENV{orphelins}|et{#AUTORISER{supprimer,orphelins,'',#SESSION{id_auteur}}})
-	[(#INCLURE{fond=prive/bouton/inc-supprimer-orphelins,env})]
+	[(#INCLURE{fond=prive/bouton/inc-supprimer-orphelins,env,nb_orphelins=#GET{nb_orphelins}})]
 	]
 	</B_docs_supprimables>
 </div><!--#galerie-->
