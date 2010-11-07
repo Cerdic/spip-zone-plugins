@@ -9,7 +9,7 @@ function action_supprimer_tous_orphelins() {
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$arg = $securiser_action();
 
-	list($media,$distant,$sanstitre) = explode('/',$arg); //on récupère le contexte pour ne supprimer les orphelins que de ce dernier
+	list($media,$distant,$statut,$sanstitre) = explode('/',$arg); //on récupère le contexte pour ne supprimer les orphelins que de ce dernier
 	
 	if($media) {
 		$select = sql_get_select("extension","spip_types_documents as nnnn","media='$media'");
@@ -17,6 +17,8 @@ function action_supprimer_tous_orphelins() {
 	}
 	if($distant)
 		$where[] = "distant=$distant"; //critere sur le distant
+	if($statut)
+		$where[] = "statut REGEXP '($statut)'"; //critere sur le statut
 	if($sanstitre)
 		$where[] = "titre=''"; //critere sur le sanstitre
 		
