@@ -28,7 +28,7 @@ function exec_boussoles_gerer_dist(){
 	// colonne gauche
 	echo debut_gauche('', true);
 	// -- Boite d'infos
-	$boite = _T('boussole:info_boussoles_gerer');
+	$boite = _T('boussole:info_boite_boussoles_gerer');
     if ($boite)
         echo debut_boite_info(true) . $boite . fin_boite_info(true); 
 	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'boussoles_gerer'),'data'=>''));
