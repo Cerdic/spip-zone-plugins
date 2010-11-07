@@ -33,9 +33,10 @@
 		<:boutique:info_gauche_numero_produit:>
 		<p>#ID_PRODUIT</p>
 	</div>
+	
 </div>
 </BOUCLE_produit_info>
-
+<div style="text-align:center"><BOUCLE_forum(AVIS_BOUTIQUE){id_produit=#ID_PRODUIT}></BOUCLE_forum>[<a href='[(#URL_ECRIRE{produit_avis}|parametre_url{id_produit,#ID_PRODUIT})]'>(#TOTAL_BOUCLE) avis sur ce produit</a>]<//B_forum></div>
 </div>
 <!--/#navigation-->
 </BOUCLE_produit>
