@@ -25,10 +25,14 @@
 [(#REM) Le corps ---------------------------------------------------------]
 [<div class='#EDIT{texte} texte'>(#TEXTE|lignes_longues)</div>]
 [<div class='site'><a href='#URL_SITE'>(#NOM_SITE|sinon{#URL_SITE}|lignes_longues)</a></div>]
-[<div 
-class="urls">(#TITRE|extraire_balises{a}|extraire_attribut{href}|implode{", "}|textebrut|nl2br)</div>]
-[<div 
-class="urls">(#TEXTE|extraire_balises{a}|extraire_attribut{href}|implode{", "}|textebrut|nl2br)</div>]
+[<div class="urls">
+	<p><:forum:info_liens_titre:> :</p>
+(#TITRE|extraire_balises{a}|extraire_attribut{href}|implode{", "}|textebrut|nl2br)
+</div>]
+[<div class="urls">
+	<p><:forum:info_liens_texte:> :</p>
+	(#TEXTE|extraire_balises{a}|extraire_attribut{href}|implode{", "}|textebrut|nl2br)
+</div>]
 
 [(#REM) Les boutons ---------------------------------------------------------]
 [(#INCLURE{fond=prive/modeles/forum-actions-#ENV{boutons,moderer}}{id_forum}{id_article}{id_breve}{id_rubrique}{id_syndic}{statut}{self})]
