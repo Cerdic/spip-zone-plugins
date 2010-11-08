@@ -1,0 +1,29 @@
+/* --------------------------------------------------------------
+
+   form.css
+   Base pour formulaires
+   Petronille - romy.tetue.net - 2010
+
+-------------------------------------------------------------- */
+
+input,textarea,select,button { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; }
+input[type="submit"],input.submit,
+input[type="button"],input.button,
+button { cursor: pointer; }
+
+/* Previsu */
+.previsu {}
+
+/* Reponses */
+.reponse_formulaire { font-size: 120%; }
+.reponse_formulaire_erreur,
+.erreur_message { color: red; }
+.reponse_formulaire_ok { color: green; }
+
+li.erreur input[type="text"], li.erreur input.text,
+li.erreur input[type="password"], li.erreur input.password,
+li.erreur textarea { border-color: red; }
+
+.spip_surligne { background-color: yellow; }
+
+/* end */

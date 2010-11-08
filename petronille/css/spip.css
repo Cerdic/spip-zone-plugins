@@ -29,21 +29,6 @@ dl.spip_documents,
 /* Modeles par defaut */
 .spip_modele { float: right; display: block; width: 25%; border: 1px dotted #666; }
 
-/* Previsu */
-.previsu {}
-
-/* Reponses */
-.reponse_formulaire { font-size: 120%; }
-.reponse_formulaire_erreur,
-.erreur_message { color: red; }
-.reponse_formulaire_ok { color: green; }
-
-li.erreur input[type="text"], li.erreur input.text,
-li.erreur input[type="password"], li.erreur input.password,
-li.erreur textarea { border-color: red; }
-
-.spip_surligne { background-color: yellow; }
-
 /* Liens de SPIP */
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
 a.spip_in {} /* liens internes */
