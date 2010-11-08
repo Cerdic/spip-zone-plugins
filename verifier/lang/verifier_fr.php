@@ -6,6 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
+	'erreur_code_postal' => 'Ce code postal est incorrect.',
 	'erreur_date' => 'La date n\'est pas valide.',
 	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.',
 	'erreur_email' => 'L\'adresse de courriel <em>@email@</em> n\'a pas un format valide.',
