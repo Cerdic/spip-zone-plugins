@@ -2,7 +2,7 @@
 #SET{self,#SELF|parametre_url{debut_forum|email_auteur|ip|id_auteur|auteur,''}}
 [(#REM) Le cartouche ---------------------------------------------------------]
 <div class='cartouche'>
-<h3 class='titre'><span class='info_statut'>[(#CHEMIN{#VAL{images/forum-statut-}|concat{#STATUT,-24.png}}|tag_img|inserer_attribut{alt,#VAL{forum:statut_}|concat{#STATUT}|_T})]</span>
+<h3 class='titre'><span class='info_statut'>[(#CHEMIN{#VAL{images/forum-statut-}|concat{#STATUT,-24.png}}|balise_img|inserer_attribut{alt,#VAL{forum:statut_}|concat{#STATUT}|_T})]</span>
 <a href='#forum#ID_FORUM' title='[<:info_numero_abbreviation|attribut_html:> (#ID_FORUM)]'>[(#TITRE|sinon{<:info_sans_titre:>})]</a></h3>
 <div class='date'>[(#DATE_HEURE|date_interface)]</div>
 
