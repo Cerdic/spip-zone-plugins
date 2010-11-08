@@ -7,7 +7,7 @@
 -------------------------------------------------------------- */
 
 /* Logos, documents et images */
-.spip_logos { margin: 0; padding: 0; border: none; }
+.spip_logos { float: left; margin: 0 10px .1em 0; padding: 0; border: none; }
 dl.spip_documents,
 .spip_documents dt,
 .spip_documents dd { margin: 0 auto; padding: 0; background: none; }
