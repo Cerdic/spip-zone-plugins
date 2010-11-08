@@ -39,13 +39,13 @@
 
 		<div class='par'><:par:>[
 		(#ID_AUTEUR|oui)
-		<a class='ajax' href='[(#GET{self}|parametre_url{id_auteur,#ID_AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >#MODELE{auteur_nom,id_auteur}</a> &mdash;
+		<a class='ajax' href='[(#GET{self}|parametre_url{id_auteur,#ID_AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >#MODELE{auteur_nom,id_auteur}</a>
 
-		][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a> &mdash;]
+		][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a>]
 
-		][<a class='ajax' href='[(#GET{self}|parametre_url{email_auteur,#EMAIL_AUTEUR})]' title='<:forum:messages_meme_email|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a> &mdash;
+		][ &mdash; <a class='ajax' href='[(#GET{self}|parametre_url{email_auteur,#EMAIL_AUTEUR})]' title='<:forum:messages_meme_email|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a>
 
-		][ IP <a class='ajax' href='[(#GET{self}|parametre_url{ip,#IP})]' title='<:forum:messages_meme_ip|attribut_html:>' >(#IP)</a>]</div>
+		][(#STATUT|!={publie}|oui)[ &mdash; IP <a class='ajax' href='[(#GET{self}|parametre_url{ip,#IP})]' title='<:forum:messages_meme_ip|attribut_html:>' >(#IP)</a>]]</div>
 
 		<BOUCLE_art(ARTICLES){id_article}{id_article!=#ENV{id_article}}><div class='reponse_a'><:lien_reponse_article:> <a class='ajax' href='[(#GET{self}|parametre_url{id_article,#ID_ARTICLE})]'>#TITRE</a></div></BOUCLE_art>
 		<BOUCLE_rub(RUBRIQUES){id_rubrique}><div class='reponse_a'><:lien_reponse_rubrique:> <a class='ajax' href='[(#URL_RUBRIQUE|ancre_url{forum#ID_FORUM})]'>#TITRE</a></div></BOUCLE_rub>
