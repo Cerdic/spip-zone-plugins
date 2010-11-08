@@ -18,7 +18,7 @@ function verifier_email_dist($valeur, $options=array()){
 	
 	// Disponibilite des courriels en base AUTEURS
 	// Si l'adresse n'est pas disponible, on stoppe tout sinon on continue
-	if ($options['disponible'] and !verifier_disponibilite_email($valeur)){
+	if ($options['disponible'] and !verifier_disponibilite_email($valeur,isset($options['id_auteur'])?$options['id_auteur']:null)){
 		return _T('verifier:erreur_email_nondispo', array('email' => echapper_tags($valeur)));
 	}
 	
@@ -95,10 +95,10 @@ function verifier_email_de_maniere_stricte($valeur){
  * @param string $valeur La valeur à vérifier
  * @return boolean Retourne false lorsque le mail est déjà utilisé
  */
-function verifier_disponibilite_email($valeur){
+function verifier_disponibilite_email($valeur,$exclure_id_auteur=null){
 	include_spip('base/abstract_sql');
 
-	if(sql_getfetsel('id_auteur', 'spip_auteurs', 'email='.sql_quote($valeur)))
+	if(sql_getfetsel('id_auteur', 'spip_auteurs', 'email='.sql_quote($valeur).(!is_null($exclure_id_auteur)?' AND id_auteur<>'.intval($exclure_id_auteur):'')))
 		return false;
 	else
 		return true;
