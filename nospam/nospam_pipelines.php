@@ -124,11 +124,6 @@ function nospam_formulaire_verifier($flux){
 			include_spip("inc/texte");
 			// regarder si il y a du contenu en dehors des liens !
 			$message = _request('message');
-			$caracteres = compter_caracteres_utiles($message);
-			if ($caracteres < 10){
-				$flux['data']['message_erreur'] = _T('forum_attention_dix_caracteres');
-				unset($flux['data']['previsu']);
-			}
 			// on analyse le texte
 			$infos_texte = analyser_spams($message);
 			if ($infos_texte['nombre_liens'] > 0) {
