@@ -14,17 +14,15 @@ function verifier_telephone_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_telephone');
 	$ok = '';
 
+	// On accepte differentes notations, les points, les tirets, les espaces, les slashes
+	$tel = preg_replace("#\.|/|-| #i",'',$valeur);
 	switch($options['pays']){
 		case 'FR':
+			if(!preg_match("/^(0|\+33)[0-9]{9}$/",$tel)) return $erreur;
 		default:
-			// On accepte differentes notations, les points, les tirets, les espaces, les slashes
-			$tel = preg_replace("#\.|/|-| #i",'',$valeur);
-
 			// On interdit les 000 etc. mais je pense qu'on peut faire plus malin
 			// TODO finaliser les numéros à la con
 			if($tel == '0000000000') return $erreur;
-
-			if(!preg_match("/^(0|\+33)[0-9]{9}$/",$tel)) return $erreur;
 			break;
 	}
 	
