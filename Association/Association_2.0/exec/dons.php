@@ -69,18 +69,22 @@ function exec_dons() {
 		echo '<th>' . _T('asso:contrepartie') . "</th>\n";
 		echo '<th colspan="2">' . _T('asso:action') . "</th>\n";
 		echo '</tr>';
-		$query = sql_select('*', "spip_asso_dons", "date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
+		$query = sql_select('*', "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don", 'C.imputation=' . sql_quote($GLOBALS['association_metas']['pc_dons']) . " AND date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
+		$exec_dons = generer_url_ecrire('dons');
 		while ($data = sql_fetch($query)) {
 			$id_don = $data['id_don'];
 
-			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11 border1">'.$data['id_don']."</td>\n";
+			echo "<tr id='don$id_don' style='background-color: #EEEEEE;'>";
+			echo "<td class='arial11 border1'>$id_don</td>\n";
 			echo '<td class="arial11 border1">'.association_datefr($data['date_don'])."</td>\n";
 			echo '<td class="arial11 border1">'.propre($data['bienfaiteur'])."</td>\n";
 			echo '<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['argent']).'&nbsp;&euro;</td>';
 			echo '<td class="arial11 border1">'.$data['colis']."</td>\n";
-			echo '<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['valeur']).'&nbsp;&euro;</td>';
-			echo '<td class="arial11 border1">'.propre($data['contrepartie'])."</td>\n";
+			echo ($data['vu'] ?
+				("<td class='$class' colspan='2' style='border-top: 1px solid #CCCCCC;'>&nbsp;</td>\n")
+			      : ('<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['valeur']).'&nbsp;&euro;</td>'
+				 . '<td class="arial11 border1">'.propre($data['contrepartie'])."</td>\n"));
+
 			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:supprimer_le_don'), 'poubelle-12.gif', 'action_dons', "id=$id_don") . "</td>\n";
 			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:mettre_a_jour_le_don'), 'edit-12.gif', 'edit_don', "agir=modifier&id=$id_don") . "</td>\n";;
 			echo '</tr>';
