@@ -1,7 +1,7 @@
 #CACHE{0}
 <B_forum>
 <p class="explication">
-[(#GRAND_TOTAL|singulier_ou_pluriel{forum:un_message_forum,forum:nombre_messages_forum}|sinon{<:forum:aucun_message_forum:>})]
+[(#GRAND_TOTAL|singulier_ou_pluriel{forum:info_1_messages_forum,forum:info_nb_messages_forum}|sinon{<:forum:aucun_message_forum:>})]
 #SET{self,#SELF|parametre_url{id_article|id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum|statut,''}}
 [(#ENV{id_forum}
 	|ou{#ENV{id_rubrique}}
