@@ -22,10 +22,11 @@ function formulaires_charger_plugin_traiter_dist(){
 	$etat = _request('etat');
 
 	// On recupere la liste des paquets:
+	// - sans doublons, ie on ne garde que la version la plus recente 
 	// - correspondant a ces criteres
 	// - compatible avec la version SPIP installee sur le site
 	// - et n'etant pas deja installes
-	$plugins = svp_rechercher_plugins($phrase, $categorie, $etat, svp_lister_plugins_installes());
+	$plugins = svp_rechercher_plugins($phrase, $categorie, $etat, false, svp_lister_plugins_installes());
 
 	// Determination des messages de retour
 	if (!$plugins)

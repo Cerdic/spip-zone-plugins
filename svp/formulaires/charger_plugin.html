@@ -1,59 +1,61 @@
-<div class="formulaire_spip formulaire_charger_plugin" id="formulaire_charger_plugin">
-	<h3 class='titrem'>[(#CHEMIN{prive/themes/spip/images/ajouter_plugin-24.gif}|balise_img{icone ajouter_plugin-24,cadre-icone})]<:plugin_titre_automatique_ajouter:></h3>
-
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<!-- <br class='bugajaxie' /> -->
-	[(#ENV{editable})
-	<form method="post" action="#ENV{action}"><div>
-		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
-		parametre : url d'action --> ]
-		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="fieldset">
-				<fieldset>
-					<p class="explication"><:svp:info_charger_plugin{version=#SPIP_VERSION}:></p>
-					<ul>
-						<li class="editer_phrase obligatoire[(#ENV{erreurs}|table_valeur{phrase}|oui) erreur]">
-							<label for="phrase"><:svp:label_critere_phrase:></label>
-							<p class="explication"><:svp:info_critere_phrase:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{phrase})</span>]
-							<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" />						
-						</li>
-						<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
-							<label for="categorie"><:svp:label_critere_categorie:></label>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
-							[<select name="categorie" id="categorie">
-								(#SVP_CATEGORIES|iterer_modele{select_option_categorie, categorie=#ENV{categorie}})
-							</select>]
-						</li>
-						<li class="editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
-							<label for="etat"><:svp:label_critere_etat:></label>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{etat})</span>]
-							<select name="etat" id="etat">
-								<option value="etat_tout"[ (#ENV{etat}|=={etat_tout}|oui)selected="selected"]><:svp:option_etat_tout:></option>
-								<option value="stable"[ (#ENV{etat}|=={stable}|oui)selected="selected"]><:plugin_etat_stable|ucfirst:></option>
-								<option value="test"[ (#ENV{etat}|=={test}|oui)selected="selected"]><:plugin_etat_test|ucfirst:></option>
-								<option value="dev"[ (#ENV{etat}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
-								<option value="experimental"[ (#ENV{etat}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
-							</select>
-						</li>
-					</ul>
-				</fieldset>
-			</li>
-		</ul>
-
-		<p class='boutons'><input type='submit' class='submit' value='<:info_rechercher:>' /></p>
-
-		[<ul>
-			<li class="fieldset">
-				<fieldset>
-					<p class="explication">(#ENV*{message_ok}|table_valeur{resume})</p>
-					[<ul class="liste-items plugins distants">
-						(#ENV*{message_ok}|table_valeur{plugins}|iterer_modele{charger_plugin})
-					</ul>]
-				</fieldset>
-			</li>
-		</ul>]
-	</div></form>
-	]
+<div class="liste-plugins formulaire_spip formulaire_charger_plugin" id="formulaire_charger_plugin">
+	<div class="cadre cadre-trait-couleur">
+		<h3 class='titrem'>[(#CHEMIN{prive/themes/spip/images/ajouter_plugin-24.gif}|balise_img{icone ajouter_plugin-24,cadre-icone})]<:plugin_titre_automatique_ajouter:></h3>
+	
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		<!-- <br class='bugajaxie' /> -->
+		[(#ENV{editable})
+		<form method="post" action="#ENV{action}"><div>
+			[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action --> ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<p class="explication"><:svp:info_charger_plugin{version=#SPIP_VERSION}:></p>
+						<ul>
+							<li class="editer_phrase obligatoire[(#ENV{erreurs}|table_valeur{phrase}|oui) erreur]">
+								<label for="phrase"><:svp:label_critere_phrase:></label>
+								<p class="explication"><:svp:info_critere_phrase:></p>
+								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{phrase})</span>]
+								<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" />						
+							</li>
+							<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
+								<label for="categorie"><:svp:label_critere_categorie:></label>
+								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
+								[<select name="categorie" id="categorie">
+									(#SVP_CATEGORIES|iterer_modele{select_option_categorie, categorie=#ENV{categorie}})
+								</select>]
+							</li>
+							<li class="editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
+								<label for="etat"><:svp:label_critere_etat:></label>
+								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{etat})</span>]
+								<select name="etat" id="etat">
+									<option value="tout_etat"[ (#ENV{etat}|=={tout_etat}|oui)selected="selected"]><:svp:option_etat_tout:></option>
+									<option value="stable"[ (#ENV{etat}|=={stable}|oui)selected="selected"]><:plugin_etat_stable|ucfirst:></option>
+									<option value="test"[ (#ENV{etat}|=={test}|oui)selected="selected"]><:plugin_etat_test|ucfirst:></option>
+									<option value="dev"[ (#ENV{etat}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
+									<option value="experimental"[ (#ENV{etat}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
+								</select>
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+	
+			<p class='boutons'><input type='submit' class='submit' value='<:info_rechercher:>' /></p>
+	
+			[<ul>
+				<li class="fieldset">
+					<fieldset>
+						<p class="explication">(#ENV*{message_ok}|table_valeur{resume})</p>
+						[<ul class="liste-items plugins distants">
+							(#ENV*{message_ok}|table_valeur{plugins}|iterer_modele{charger_plugin})
+						</ul>]
+					</fieldset>
+				</li>
+			</ul>]
+		</div></form>
+		]
+	</div>
 </div>

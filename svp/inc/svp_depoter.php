@@ -573,14 +573,16 @@ function svp_xml_parse_plugin($arbre){
  * @param string $phrase
  * @param string $categorie
  * @param string $etat
- * @param string $version
+ * @param string $doublons
  * @param array $exclusions
+ * @param string $version
  * @return array
  */
 
 // $version		=> version SPIP affichee
+// $doublons	=> indique si on accepte des doublons de plugins (meme prefixe, version differente)
 // $exclusions	=> tableau d'id de plugin
-function svp_rechercher_plugins($phrase, $categorie, $etat, $exclusions=array(), $version='') {
+function svp_rechercher_plugins($phrase, $categorie, $etat, $doublons=false, $exclusions=array(), $version='') {
 
 	$plugins = array();
 	
@@ -588,13 +590,13 @@ function svp_rechercher_plugins($phrase, $categorie, $etat, $exclusions=array(),
 	// -- Preparation de la requete
 	$from = array('spip_plugins AS t1', 'spip_paquets AS t2');
 	$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 
-					't2.description AS description', 't2.version_spip AS version_spip', 't2.etat AS etat',
+					't2.description AS description', 't2.version_spip AS version_spip',
 					't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
 					't2.logo AS logo', 't2.version AS version', 't2.id_paquet AS id_paquet');
 	$where = array('t1.id_plugin=t2.id_plugin');
-	if ((!$categorie) OR ($categorie != 'categorie_toute'))
+	if (($categorie) AND ($categorie != 'toute_categorie'))
 		$where[] = 't1.categorie=' . sql_quote($categorie);
-	if ((!$etat) OR ($etat != 'etat_tout'))
+	if (($etat) AND ($etat != 'tout_etat'))
 		$where[] = 't2.etat=' . sql_quote($etat);
 	if ($exclusions)
 		$where[] = sql_in('t2.id_plugin', $exclusions, 'NOT');
@@ -603,19 +605,33 @@ function svp_rechercher_plugins($phrase, $categorie, $etat, $exclusions=array(),
 	if ($resultats = sql_select($select, $from, $where)) {
 		// On normalise la phrase a chercher en une regexp utilisable
 		$phrase = svp_normaliser_phrase($phrase);
+
 		while ($paquets = sql_fetch($resultats)) {
+			$prefixe = $paquets['prefixe'];
+			$version = $paquets['version'];
 			$nom = extraire_multi($paquets['nom']);
 			$slogan = extraire_multi($paquets['slogan']);
 			$description = extraire_multi($paquets['description']);
 			if (svp_verifier_compatibilite_spip($paquets['version_spip'])
 			AND svp_rechercher_phrase($phrase, $nom, $slogan, $description,	$score)) {
-				// Le paquet remplit tous les criteres, on le selectionne
-				// On garde uniquement la langue du site et on ajoute le score
+				// Le paquet remplit tous les criteres, on peut le selectionner
+				// -- on utilise uniquement la langue du site et on ajoute le score
 				$paquets['nom'] = $nom;
 				$paquets['slogan'] = $slogan;
 				$paquets['description'] = $description;
 				$paquets['score'] = $score;
-				$plugins[] = $paquets;
+				if ($doublons)
+					// ajout systematique du paquet
+					$plugins[] = $paquets;
+				else {
+					// ajout 
+					// - si pas encore trouve 
+					// - ou si sa version est inferieure (on garde que la derniere version)
+					if (!$plugins[$prefixe]
+					OR ($plugins[$prefixe] AND spip_version_compare($plugins[$prefixe]['version'], $version, '<'))) {
+						$plugins[$prefixe] = $paquets;
+					}
+				}
 			}
 		}
 	}
@@ -628,7 +644,6 @@ function svp_rechercher_plugins($phrase, $categorie, $etat, $exclusions=array(),
  *
  * @return array
  */
-
 function svp_lister_plugins_installes(){
 
 	$ids = array();
@@ -650,12 +665,6 @@ function svp_lister_plugins_installes(){
 	return $ids;
 }
 
-function svp_verifier_compatibilite_spip($version){
-	include_spip('inc/plugin');
-	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	return plugin_version_compatible($version, $version_spip);
-}
-
 function svp_rechercher_phrase($phrase, $nom, $slogan, $description, &$score){
 	$trouve = false;
 	$score = 0;
@@ -672,6 +681,12 @@ function svp_rechercher_phrase($phrase, $nom, $slogan, $description, &$score){
 		$trouve = ($score>0);
 	}
 	return $trouve;
+}
+
+function svp_verifier_compatibilite_spip($version){
+	include_spip('inc/plugin');
+	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
+	return plugin_version_compatible($version, $version_spip);
 }
 
 function svp_normaliser_phrase($phrase){
