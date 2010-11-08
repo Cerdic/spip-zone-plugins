@@ -17,6 +17,7 @@
  partie d&#39;un article dans un autre article (en citant le titre, extrait ou rien).
 
 Ce plug-in est sous licence GNU/GPL v2</description>
+  <lien>http://www.spip-contrib.net/Des-intertitres-hierarchises-et</lien>
 	<options>
 		intertitres_tdm_options.php
 	</options>
