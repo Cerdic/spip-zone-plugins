@@ -3,32 +3,26 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Untitled Document</title>
+<title>#NOM_SITE_SPIP</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 #INSERT_HEAD
 <style>#navcontainer ul
 {
-margin: 0; width:200px;
-padding: 0;
 list-style-type: none;
-text-align: center;
 }
 
 #navcontainer ul li { display: inline; }</style>
 </head>
 
 <body>
-<h5><:simplecart:your_cart:> contient #BOUTIQUE_QUANTITE produit(s)</h5>
-<!--#SIMPLECART_TAX_COST  --> 
-<!-- <div class="simpleCart_shelfItem"></div>-->
-<div class="simpleCart_items"></div>
-<!-- TVA :<span class="simpleCart_taxRate"></span> --> 
+<h5><:boutique:your_cart:> contient #BOUTIQUE_QUANTITE produit(s)</h5>
+#BOUTIQUE_ITEMS
 </div>
 <div>
 Frais d'envoi :#BOUTIQUE_SHIPPING_COST 
 </div>
 <div>
-<strong>Total :<span class="simpleCart_finalTotal"></span></strong>  
+<strong>Total :<span>#BOUTIQUE_FINAL_TOTAL</span></strong>  
 </div>
 <div id="navcontainer">#BOUTIQUE_METHODE </div>
 <a href="javascript:;" class="simpleCart_checkout">Valider la commande</a>
