@@ -21,10 +21,24 @@ function verifier_telephone_dist($valeur, $options=array()){
 		$options['pays'] = 'FR';
 		$tel = preg_replace('/^\+33/','0',$valeur);
 	}
+	if (preg_match("/^\+34/", $tel)) {
+		$options['pays'] = 'ES';
+		$tel = preg_replace('/^\+34/','',$valeur);
+	}
+	if (preg_match("/^\+41/", $tel)) {
+		$options['pays'] = 'CH';
+		$tel = preg_replace('/^\+41/','0',$valeur);
+	}
 
 	switch($options['pays']){
+		case 'CH':
+			if (!preg_match("/^0[1-9]{9}$/",$tel)) return $erreur;
+			break;
+		case 'ES':
+			if (!preg_match("/^[69][0-9]{8}$/",$tel)) return $erreur;
+			break;
 		case 'FR':
-			if(!preg_match("/^0[0-9]{9}$/",$tel)) return $erreur;
+			if (!preg_match("/^0[1-9][0-9]{8}$/",$tel)) return $erreur;
 		default:
 			// On interdit les 000 etc. mais je pense qu'on peut faire plus malin
 			// TODO finaliser les numéros à la con
