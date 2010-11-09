@@ -7,6 +7,10 @@
 TO-DO:
 
 
+Vérifier adresse emetteur : ?exec=spiplistes_config : - "Adresse d’envoi par défaut" écrase
+"Adresse de retour par défaut pour les erreurs" au niveau de l’affichage ::
+http://www.spip-contrib.net/SPIP-Listes#comment436613
+
 Si supprimer courrier, supprimer documents attachés ?
 
 + a verifier: semble ne pas tenir compte des options d habillage dans le calcul du poids du mail. cf.:
