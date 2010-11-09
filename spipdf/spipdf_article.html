@@ -34,14 +34,14 @@
 
 	<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)][ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
 
-	[<div class="chapo_simple">(#CHAPO|image_reduire{500,0})</div>]
+	[<div class="chapo_simple">(#CHAPO|abs_url|image_reduire{500,0})</div>]
 
-	[(#TEXTE|image_reduire{500,0})]
+	[(#TEXTE|abs_url|image_reduire{500,0})]
 
 	[<p class="hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 	
-	[<div class="bloc_simple postscriptum"><h2><:info_ps:></h2>(#PS|image_reduire{500,0})</div>]
+	[<div class="bloc_simple postscriptum"><h2><:info_ps:></h2>(#PS|abs_url|image_reduire{500,0})</div>]
 
-	[<div class="bloc_simple notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	[<div class="bloc_simple notes"><h2><:info_notes:></h2>(#NOTES|abs_url)</div>]
 </page>
 </BOUCLE_principale>
