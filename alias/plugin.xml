@@ -1,9 +1,21 @@
 <plugin>
-	<nom>Alias Articles</nom>
+	<nom>
+		<multi>
+			[fr]Alias Articles
+			[en]Articles Alias
+			[ru]Ссылки на статьи
+		</multi>
+	</nom>
 	<auteur>cedric.morin@yterium.com</auteur>
 	<version>0.1</version>
 	<etat>stable</etat>
-	<description>Creer des Alias d'articles</description>
+	<description>
+		<multi>
+			[fr]Creer des Alias d'articles
+			[en]Allow to create aliases for articles
+			[ru]Позволяет создавать ссылки или ярлыки на статьи
+		</multi>
+	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>alias</prefix>
 	<pipeline>
