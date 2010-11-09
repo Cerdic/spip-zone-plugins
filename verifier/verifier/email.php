@@ -98,7 +98,7 @@ function verifier_email_de_maniere_stricte($valeur){
 function verifier_disponibilite_email($valeur,$exclure_id_auteur=null){
 	include_spip('base/abstract_sql');
 
-	if(sql_getfetsel('id_auteur', 'spip_auteurs', 'email='.sql_quote($valeur).(!is_null($exclure_id_auteur)?' AND id_auteur<>'.intval($exclure_id_auteur):'')))
+	if(sql_getfetsel('id_auteur', 'spip_auteurs', 'email='.sql_quote($valeur).(!is_null($exclure_id_auteur)?"AND statut<>'5poubelle' AND id_auteur<>".intval($exclure_id_auteur):'')))
 		return false;
 	else
 		return true;
