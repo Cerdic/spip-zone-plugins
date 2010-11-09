@@ -4,10 +4,10 @@
 	Fil &amp; ARNO* &#169; 2009 - GNU/GPL
 	</auteur>
 	<version>
-	0.8
+	1.0
 	</version>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 	Ajoute une option <code>{ajaxload}</code> &agrave; la balise <code>#INCLURE</code>. 
@@ -17,6 +17,11 @@
 	dans <code>/local/cache-ajaxload</code>, son appel se faisant ainsi hors SPIP. 
 	Le cache n'est donc plus g&eacute;r&eacute; par le <code>#CACHE</code> de SPIP; il est par d&eacute;faut de 2 heures, on peut le forcer
 	en ajoutant le crit&egrave;re <code>{ttl_ajaxload=60*60*24}</code>.
+
+	Pour g&eacute;rer les chargements Ajax &laquo;&nbsp;&agrave; la main&nbsp;&raquo;, on peut r&eacute;cup&eacute;rer l'URL des noisettes en
+	modifiant le crit&egrave;re:
+-- <code>{ajaxload=url}</code> retourne l'URL de la noisette dynamique;
+-- <code>{ajaxload=url_html}</code> retourne l'URL du fichier HTML statique.
 
 	</description>
 	<prefix>

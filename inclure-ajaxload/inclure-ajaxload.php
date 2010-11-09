@@ -40,15 +40,40 @@ function recuperer_fond_ajax() {
 		$class_ajax = " ajaxbloc env-$ajax";
 
 	// Appliquer la methode: 
-	// - soit laisser les automatismes Ajax de SPIP,
-	// - soit sauvergarder "en dur" le resultat HTML
+	// - soit laisser les automatismes Ajax de SPIP {ajaxload}
+	// - soit sauvergarder "en dur" le resultat HTML {ajaxload=html}
+	// - soit retourner l'url de la noisette {ajaxload=url}
+	// - soit retourner l'url du fichier html {ajaxload=url_html}
 	$methode = $args[1]["ajaxload"];
-	if ($methode == "html") {
+
+	$ttl = _DUREE_CACHE_AJAXSTATIC;
+	if ($args[1]['ttl_ajaxload']) $ttl = valeur_numerique($args[1]['ttl_ajaxload']);
+
+	if ($methode == "url") {
+		$ajax = urlencode($ajax);
+		$ret = "spip.php?var_ajax=recuperer&amp;var_ajax_env=$ajax";
+		
+	} else if ($methode == "url_html") {
+		$fichier = sous_repertoire(_DIR_VAR, 'cache-ajaxload').$cle.".html";
+
+		// Test sur le fichier
+		if (!file_exists($fichier) || _request('var_mode') == "recalcul"
+				|| (file_exists($fichier) && date("U") - @filemtime($fichier) > $ttl)
+			){
+			//echo "RECALCULER";
+			$contenu = call_user_func_array('recuperer_fond', $args);
+			ecrire_fichier($fichier, $contenu);
+			// ecrire une version .gz pour content-negociation par apache, cf. [11539]
+			//ecrire_fichier("$fichier.gz",$contenu, true);
+
+		}
+		
+		$ret = $fichier;
+		
+	} else if ($methode == "html") {
 		
 		$fichier = sous_repertoire(_DIR_VAR, 'cache-ajaxload').$cle.".html";
 		
-		$ttl = _DUREE_CACHE_AJAXSTATIC;
-		if ($args[1]['ttl_ajaxload']) $ttl = valeur_numerique($args[1]['ttl_ajaxload']);
 		
 		// Test sur le fichier
 		if (!file_exists($fichier) || _request('var_mode') == "recalcul"
