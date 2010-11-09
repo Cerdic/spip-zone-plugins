@@ -56,6 +56,13 @@ function spipdf_first_clean($texte) {
             $trans['->'] = '-»';
             $trans['<-'] = '«-';
             $trans['&mdash;'] = '-';
+            $trans['&deg;']='°';
+            $trans['œ']='oe';
+            $trans['Œ']='OE';
+            $trans['…']='...';
+            $trans['&euro;']='Euros';
+            $trans['€']='Euros';
+            $trans['&copy;'] ='©';
         }
         // pas d'insécable
 		$trans['&nbsp;'] = ' ';
