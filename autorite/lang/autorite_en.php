@@ -65,7 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_wiki_mots_cles_detail' => '	Choose below the keywords that activate the wiki, being editable by everyone from the public space (you have provided an interface, such as pencils)',
 'espace_wiki_mots_cles_qui' => 'Would you open the wiki beyond administrators:',
 'espace_wiki_qui' => 'Would you open this wiki - beyond the administrators:',
-
+'espace_publieur' => 'Open publishing space',
+'espace_publieur_detail' => 'Choose below a sector to be treated as a open publishing space for visitors and / or editors (you have provided an interface, such as pencils and a form to submit article):',
+'espace_publieur_qui' => 'Would you open this section - beyond the administrators:',
 
 //F
 'forums_qui' => '<strong>Forums :</strong>  who may modify the contents of the Forums:',

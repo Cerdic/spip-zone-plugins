@@ -169,6 +169,58 @@
 
 </fieldset>
 ]
+[(#REM) ------------------------ ESPACE PUBLIEUR ------------------------ ]
+<fieldset>
+<legend>
+<:autorite:espace_publieur:>	
+</legend>
+
+<p>
+<label>
+<:autorite:espace_publieur_detail:>
+
+<br />
+
+
+#SET{selected,#CONFIG{autorite/espace_publieur,#ARRAY}}
+<select name="espace_publieur[]" multiple="multiple" size="5" id="espace_publieur">
+<BOUCLE_publieurs_rubrique(RUBRIQUES){racine}{tout}{par num titre, titre}>
+	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
+	#TITRE
+	</option>
+</BOUCLE_publieurs_rubrique>
+</select>
+
+<small><br /><:autorite:infos_selection:>
+<br /><a onclick="$('#espace_publieur').find('option').attr('selected', false).end().trigger('change');">x</a><:autorite:tout_deselectionner:></small>
+
+</label>
+</p>
+
+<p id="espace_publieur_qui">
+<:autorite:espace_publieur_qui:>
+<br />
+<label><input type="checkbox" name="espace_publieur_redacteurs" [checked="(#ENV{espace_publieur_redacteurs}|?{checked})"] /> <:autorite:redacs:>
+</label>
+<br />
+<label><input type="checkbox" name="espace_publieur_visiteurs" [checked="(#ENV{espace_publieur_visiteurs}|?{checked})"] /> <:autorite:visiteurs_enregistres:>
+</label>
+</p>
+
+</fieldset>
+
+[(#REM) Code jQuery de l'espace publieur ; plier/deplier la moderation ]
+<script type="text/javascript"><!--
+	$('#espace_publieur')
+	.bind('change', function() {
+		if (parseInt(this.value))
+			$('#espace_publieur_qui:hidden').slideDown('slow');
+		else
+			$('#espace_publieur_qui:visible').slideUp('slow');
+	})
+	if ($('#espace_publieur option:selected').length == 0)
+		$('#espace_publieur_qui').hide();
+// --></script>
 
 [(#REM) ------------------------ ESPACE WIKI ------------------------ ]
 <fieldset>

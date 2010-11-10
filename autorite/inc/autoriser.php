@@ -71,7 +71,36 @@ if (!defined('_ID_WEBMESTRES')
 // Les FONCTIONS
 //
 
+##
+## une fonction qui gere les droits publieurs
+##
 
+if ($GLOBALS['autorite']['espace_publieur']) {
+if (!function_exists('autorisation_publie_visiteur')) {
+	function autorisation_publie_visiteur($qui, $id_secteur) {
+		// espace publieur est un array(secteur1, secteur2), ou un id_secteur
+		if (
+			(is_array($GLOBALS['autorite']['espace_publieur'])
+			AND !in_array($id_secteur,$GLOBALS['autorite']['espace_publieur']))
+		AND
+			$id_secteur != $GLOBALS['autorite']['espace_publieur']
+		)
+			return false;
+
+		switch($qui['statut']) {
+			case '0minirezo':
+			case '1comite':
+				if ($GLOBALS['autorite']['espace_publieur_redacteurs'])
+				return true;
+			case '6forum':
+				if ($GLOBALS['autorite']['espace_publieur_visiteurs'])
+				return true;
+		}
+		return false;
+	}
+	} else
+		$autorite_erreurs[] = 'autorisation_publie_visiteur';
+}
 
 ##
 ## une fonction qui gere les droits wiki
@@ -162,8 +191,14 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	"SELECT id_rubrique,id_secteur,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = sql_fetch($s);
 	include_spip('inc/auth');
+	if (!$GLOBALS['autorite']['espace_publieur'])
+	$a = autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt);
+	else {
+	if (!in_array($qui['statut'],array('1comite', '6forum')))
+	$a = autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt);	
+	}
 	return
-		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
+		$a
 		OR (
 			// Cas du wiki, on appelle la fonction qui verifie les droits wiki
 			$GLOBALS['autorite']['espace_wiki']
@@ -235,8 +270,19 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 		&& ($qui['statut'] == '1comite'))
 			return true;
 	*/
+	// Sinon, verifier si la rubrique est ouverte aux publieurs
+	// et si on est bien enregistre 
+	if ($GLOBALS['autorite']['espace_publieur']) {
+		$s = spip_query(
+		"SELECT id_secteur FROM spip_rubriques WHERE id_rubrique="._q($id));
+		$r = sql_fetch($s);
 
+		if (autorisation_publie_visiteur($qui, $r['id_secteur'])
+		AND ($qui['statut'])
+		)
+			return true;
 
+	}
 	// Sinon, verifier si la rubrique est wiki
 	// et si on est bien enregistre (sauf cas de creation anonyme explicitement autorisee)
 	if ($GLOBALS['autorite']['espace_wiki']) {

@@ -67,7 +67,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_wiki_mots_cles_detail' => 'Choisissez ci-dessous les mots clef qui activeront le mode wiki, c&#39;est-&#224;-dire &#233;ditable par tous depuis l&#39;espace public (&#224; condition d&#39;avoir une interface, par exemple les crayons)',
 'espace_wiki_mots_cles_qui' => 'Voulez-vous ouvrir ce wiki au-del&#224; des administrateurs :',
 'espace_wiki_qui' => 'Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs :',
-
+'espace_publieur' => 'Espace de publication ouverte',
+'espace_publieur_detail' => 'Choisissez ci-dessous un secteur &#224; traiter comme un espace de publication ouverte pour les r&#233;dacteurs et / ou visiteurs enregistr&#233;s (&#224; condition d&#39;avoir une interface, par exemple les crayons et un formulaire pour soumettre l\'article) :',
+'espace_publieur_qui' => 'Voulez-vous ouvrir la publication &mdash; au-del&#224; des administrateurs :',
 
 //F
 'forums_qui' => '<strong>Forums :</strong> qui peut modifier le contenu des forums :',
