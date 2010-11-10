@@ -17,8 +17,8 @@ function verifier_entier_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_entier');
 	
 	// Pas de tableau ni d'objet
-	if (is_numeric($valeur)){
-		// Si c'est une chaine on convertit en entier et si c'est un flottant on ne garde que l'entier
+	if (is_numeric($valeur) and $valeur == intval($valeur)){
+		// Si c'est une chaine on convertit en entier
 		$valeur = intval($valeur);
 		$ok = true;
 		$erreur = '';
