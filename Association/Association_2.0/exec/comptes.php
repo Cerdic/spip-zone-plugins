@@ -3,7 +3,7 @@
 	* Plugin Association
 	*
 	* Copyright (c) 2007
-	* Bernard Blazin & François de Montlivault
+	* Bernard Blazin & rançois de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
@@ -19,54 +19,32 @@ function exec_comptes() {
 	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
-
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
-		
-		$url_comptes = generer_url_ecrire('comptes');
-		
+		$annee= intval(_request('annee'));
+		if(empty($annee)){$annee = date('Y');}
+		$valide = _request('valide');
+		if (!is_numeric($valide)) $valide = '';
+
 		if ( isset ($_REQUEST['imputation'] )) { $imputation = $_REQUEST['imputation']; }
 		else { $imputation= "%"; }
 		
-		$annee= intval(_request('annee'));
-		if(empty($annee)){$annee = date('Y');}
-		
+		$where = "imputation like " . sql_quote($imputation)
+		  . (!is_numeric($valide) ? '' : (" AND vu=$valide"));
+
+		$sel = comptes_select_annee($where, $annee,'imputation='.$imputation . "&valide=$valide");
+		$where .= " AND date_format( date, '%Y' ) = $annee";
+
+		$totaux = comptes_totaux($where, $imputation, $annee);
+
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
-		
+
 		echo debut_gauche("",true);
-		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo '<p>', _T('asso:en_bleu_recettes_en_rose_depenses'), '</p>'; 
-		
-		// TOTAUX
-		$query = sql_select("sum(recette) AS somme_recettes, sum(depense) AS somme_depenses", 'spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");
-		while ($data = sql_fetch($query)) {
-			$somme_recettes = $data['somme_recettes'];
-			$somme_depenses = $data['somme_depenses'];
-			$solde= $somme_recettes - $somme_depenses;
-			
-			echo '<table width="100%">';
-			echo '<tr>';
-			echo '<td colspan="2"><strong>' . _L('Totaux '.$imputation.' '.$annee).' :</strong></td>';
-			echo '</tr>';
-			echo '<tr>';
-			echo '<td><strong style="color:blue;">'. _T('asso:entrees') . '</strong></td>';
-			echo '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>';
-			echo '</tr>';
-			echo '<tr>';
-			echo '<td><strong style="color:blue;">' . _T('asso:sorties') . '</strong></td>';
-			echo '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>';
-			echo '</tr>';
-			echo '<tr>';
-			echo '<td><strong style="color: #9F1C30;">' . _T('asso:solde') . '</strong></td>';
-			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
-			echo '</tr>';
-			echo '</table>';
-		}
-		
+		echo $totaux;
 		echo fin_boite_info(true);	
 		
 		$url_bilan = generer_url_ecrire('bilan', "annee=$annee");		
@@ -77,24 +55,15 @@ function exec_comptes() {
 		
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:informations_comptables'));
+		debut_cadre_relief(  "", false, "",  _T('asso:informations_comptables'));
 		
 		echo "\n<table width='100%'>";
-		
-		// FILTRES
-		echo '<tr>';
-		echo '<td>';
-		
-		$query = sql_select("date_format( date, '%Y' )  AS annee", "spip_asso_comptes", "imputation like '$imputation' ", "annee", "annee");
-		
-		while ($data = sql_fetch($query)) {
-			if ($data['annee']==$annee)	{echo ' <strong>'.$data['annee'].' </strong>';}
-			else {echo '<a href="'. generer_url_ecrire('comptes','annee='.$data['annee'].'&imputation='.$imputation).'">'.$data['annee'].'</a> ';}
-		}
-		echo '</td>';
+		echo '<tr><td>', $sel,'</td>';
 		
 		echo '<td style="text-align:right;">';
-		echo '<form method="post" action="'.$url_comptes.'"><div>';
+		echo '<form method="post" action="';
+		echo generer_url_ecrire('comptes');
+		echo '"><div>';
 		echo '<select name ="imputation" class="fondl" onchange="form.submit()">';
 		echo '<option value="%" ';
 		if ($imputation=="%") { echo ' selected="selected"'; }
@@ -109,11 +78,11 @@ function exec_comptes() {
 		echo '</tr></table>';
 
 	//TABLEAU
-	$max_par_page=30;
-	$debut= intval(_request('debut'));
-	$auteurs = comptes_while($annee, $imputation, $debut, $max_par_page);
+		$max_par_page = 30;
+		$limit = intval(_request('debut')) . "," . $max_par_page;
+		$auteurs = comptes_while($where, $limit);
 
-	if ($auteurs) {
+		if ($auteurs) {
 
 	$table = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 	. "<tr style='background-color: #DBE1C5;'>\n"
@@ -130,7 +99,7 @@ function exec_comptes() {
 
 	//SOUS-PAGINATION
 
-	$nombre_selection=sql_countsel('spip_asso_comptes', "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'");
+	$nombre_selection=sql_countsel('spip_asso_comptes', $where);
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 	$nav = '';
 	if ($pages != 1) { 
@@ -147,13 +116,13 @@ function exec_comptes() {
 	echo generer_form_ecrire('action_comptes', $table . $table2);
 	fin_cadre_relief();  
 	echo fin_page_association(); 
-	}
+		}
 	}
 }
 
-function comptes_while($annee, $imputation, $debut, $max_par_page)
+function comptes_while($where, $limit)
 {
-	$query = sql_select('*', "spip_asso_comptes", "date_format( date, '%Y' ) = $annee AND imputation like '$imputation'", '',  'date DESC', "$debut,$max_par_page");
+	$query = sql_select('*', "spip_asso_comptes", $where,'',  'date DESC', $limit);
 	$auteurs = '';
 
 	while ($data = sql_fetch($query)) {
@@ -188,5 +157,47 @@ function comptes_while($annee, $imputation, $debut, $max_par_page)
 		 . '</tr>';
 	}
 	return $auteurs;
+}
+
+function comptes_totaux($where, $imputation, $annee)
+{
+	$data = sql_fetsel("sum(recette) AS somme_recettes, sum(depense) AS somme_depenses", 'spip_asso_comptes', $where);
+	$somme_recettes = $data['somme_recettes'];
+	$somme_depenses = $data['somme_depenses'];
+	$solde= $somme_recettes - $somme_depenses;
+			
+	return '<table width="100%">' . 
+	 '<tr>' . 
+	 '<td colspan="2"><strong>' . 
+	  _L('Totaux ') . ($imputation=='%' ? '' : $imputation) . 
+	 ' ' . $annee . 
+	 ' :</strong></td>' . 
+	 '</tr>' . 
+	 '<tr>' . 
+	 '<td><strong style="color:blue;">'. _T('asso:entrees') . '</strong></td>' . 
+	 '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>' . 
+	 '</tr>' . 
+	 '<tr>' . 
+	 '<td><strong style="color:pink;">' . _T('asso:sorties') . '</strong></td>' . 
+	 '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>' . 
+	 '</tr>' . 
+	 '<tr>' . 
+	 '<td><strong style="color: #9F1C30;">' . _T('asso:solde') . '</strong></td>' . 
+	 '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>' . 
+	 '</tr>' . 
+	 '</table>';
+}
+
+function comptes_select_annee($where, $annee, $args)
+{
+	$tous = sql_allfetsel("date_format( date, '%Y' )  AS annee", "spip_asso_comptes", $where, "annee", "annee");
+		
+	foreach ($tous as $k => $data) {
+		$an = $data['annee'];
+		if ($an==$annee)	
+		  $tous[$k] = ' <strong>'.$an.' </strong>';
+		else $tous[$k] = '<a href="'. generer_url_ecrire('comptes','annee='.$an.'&'. $args).'">'.$an.'</a>';
+	}
+	return join("\n", $tous);
 }
 ?>
