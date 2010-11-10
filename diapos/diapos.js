@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$(".cadre_imagepo").css({'width' : imageReelWidthPo});
 	//choix_image + diapos function
 	rotate = function(){	
-		var triggerID = $active.attr("rel") - 1; //Quantite des images
+		var triggerID = $active.attr("rel") - 1; //Declencheur de la rotation (active moins une image)
 		var cadre_imagePositionPa = triggerID * imageWidthPa; //Determine la largeur a cadre_image
 		var cadre_imagePositionPo = triggerID * imageWidthPo; //Determine la largeur a cadre_image
 		$(".choix_image a").removeClass('active'); //Nettoie
