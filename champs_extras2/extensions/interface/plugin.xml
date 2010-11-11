@@ -3,6 +3,7 @@
 		<multi>
 			[fr]Interface pour Champs Extras
 			[en]Interface for Extra fields
+			[it]Interfaccia per i Campi Extra
 		</multi>
 	</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
@@ -13,6 +14,7 @@
 		<multi>
 			[fr]Offre une interface pour g&#233;rer des champs extras.
 			[en]Interface to manage the extra fields on SPIP objects
+			[it]Interfaccia per gestire i campi extra.
 		</multi>
 	</description>
 	<etat>dev</etat>
