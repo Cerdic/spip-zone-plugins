@@ -1,19 +1,19 @@
 <?php
 
+$GLOBALS["sprites"] = false;
 
 function sprite ($img, $nom) {
-	global $sprites;
 
 	if (@file_exists($img)) $src = $img;	
 	else $src = extraire_attribut($img, "src");
-	$sprites["$nom"]["fichiers"][] = $src;
+	$GLOBALS["sprites"]["$nom"]["fichiers"][] = $src;
 	
 	$largeur = largeur($img);
 	$hauteur = hauteur($img);
 	
-	if ($largeur > $sprites["$nom"]["largeur"]) $sprites["$nom"]["largeur"] = $largeur;
-	$hauteur_old = max(0, $sprites["$nom"]["hauteur"]);
-	$sprites["$nom"]["hauteur"] += $hauteur;
+	if ($largeur > $GLOBALS["sprites"]["$nom"]["largeur"]) $GLOBALS["sprites"]["$nom"]["largeur"] = $largeur;
+	$hauteur_old = max(0, $GLOBALS["sprites"]["$nom"]["hauteur"]);
+	$GLOBALS["sprites"]["$nom"]["hauteur"] += $hauteur;
 	
 	$alt = extraire_attribut($img, "alt");
 	$class = extraire_attribut($img, "class");
@@ -21,14 +21,14 @@ function sprite ($img, $nom) {
 	$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites').$nom;
 	
 	$date_src = @filemtime($src);
-	if ($date_src > $sprites["$nom"]["date"]) $sprites["$nom"]["date"] = $date_src;
+	if ($date_src > $GLOBALS["sprites"]["$nom"]["date"]) $GLOBALS["sprites"]["$nom"]["date"] = $date_src;
 
 
 	
 	return "<img src='rien.gif' style='width: ".$largeur."px; height: ".$hauteur."px; background: url($fichier) 0px -".$hauteur_old."px;' alt='$alt' class='$class' />";
 }
 
-function _terminaison_fichier_image($fichier) {
+function creer_sprites_terminaison_fichier_image($fichier) {
 	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
 		$terminaison = $regs[1];
 		return $terminaison;
@@ -38,8 +38,8 @@ function _terminaison_fichier_image($fichier) {
 
 }
 
-function creer_sprites_recuperer_fond ($flux) {
-	global $sprites;
+function creer_sprites($flux) {
+	$sprites = $GLOBALS["sprites"];
 	
 	if ($sprites) {
 	
@@ -68,7 +68,7 @@ function creer_sprites_recuperer_fond ($flux) {
 				$y_total = 0;
 				foreach($sprite["fichiers"] as $img) {
 				
-					$f = "imagecreatefrom".str_replace("jpg","jpeg",_terminaison_fichier_image($img));
+					$f = "imagecreatefrom".str_replace("jpg","jpeg",creer_sprites_terminaison_fichier_image($img));
 					$im_ = $f($img);
 					@imagepalettetotruecolor($im_);
 					
@@ -82,7 +82,7 @@ function creer_sprites_recuperer_fond ($flux) {
 	
 				$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 				_image_imagepng($im, "$nom_fichier.png");
-				$f = _terminaison_fichier_image($fichier);
+				$f = creer_sprites_terminaison_fichier_image($fichier);
 				if ($f != "png") {
 					$new = extraire_attribut( image_aplatir("$nom_fichier.png", $f, "ffffff"), "src");
 					@copy($new, $fichier);
@@ -95,8 +95,13 @@ function creer_sprites_recuperer_fond ($flux) {
 			}
 		}
 	}
-		
-	return $flux;
+	$GLOBALS["sprites"] = false;	
+	return $flux;	
+}
+
+function creer_sprites_recuperer_fond ($flux) {
+	return creer_sprites($flux);
+
 }
 
 
