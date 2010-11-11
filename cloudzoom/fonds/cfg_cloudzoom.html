@@ -1,0 +1,85 @@
+<!-- descriptif=
+
+<img src="[(#CHEMIN{img/cloudzoom-64.png})]"> <h3>Configuration de cloudzoom</h3>
+
+Ici vous pouvez configurer l'affichage de votre page
+
+
+-->
+
+<!-- titre=plugin cloudzoom -->
+
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<p>
+	<fieldset>
+		<legend>Vos préférences d'affichage</legend>
+
+		<label>zoomwidth</label>
+		<input type="text" name="width" size="10" value="#CONFIG{cloudzoom/width}">
+	<br/> <br/>
+	
+		<label>zoomheight</label>
+		<input type="text" name="height" size="10" value="#CONFIG{cloudzoom/height}">
+	<br/> <br/>
+	
+		
+		<label>position</label>
+			<select name="position">
+			<option value="left"[(#CONFIG{cloudzoom/position}|=={left}|?{selected="selected",''})]>gauche</option>
+			<option value="right"[(#CONFIG{cloudzoom/position}|=={right}|?{selected="selected",''})]>droite</option>
+			<option value="top"[(#CONFIG{cloudzoom/position}|=={top}|?{selected="selected",''})]>au dessus</option>
+			<option value="bottom"[(#CONFIG{cloudzoom/position}|=={bottom}|?{selected="selected",''})]>au dessous</option>
+			<option value="inside"[(#CONFIG{cloudzoom/position}|=={inside}|?{selected="selected",''})]>à l'intérieur</option>
+			</select>
+	<br/> <br/>
+	
+		<label>adjustx (pixel)</label>
+		<input type="text" name="adjustx" size="10" value="#CONFIG{cloudzoom/adjustx}">
+	<br/> <br/>
+	
+		<label>adjusty (pixel)</label>
+		<input type="text" name="adjusty" size="10" value="#CONFIG{cloudzoom/adjusty}">
+	<br/> <br/>
+	
+		<label>tint (hex format, ex:#fff) (doesn't work with softfocus)</label>
+		<input type="text" name="tint" size="10" value="#CONFIG{cloudzoom/tint}">
+	<br/> <br/>
+	
+		<label>tint opacity (between 0 ans 1)</label>
+		<input type="text" name="tintopacity" size="10" value="#CONFIG{cloudzoom/tintopacity}">
+	<br/> <br/>
+	
+		<label>lens opacity (between 0 ans 1)</label>
+		<input type="text" name="lensopacity" size="10" value="#CONFIG{cloudzoom/lensopacity}">
+	<br/> <br/>
+	
+		<label>softfocus (doesn't work with tint)</label>
+			<select name="softfocus">
+			<option value="false"[(#CONFIG{cloudzoom/softfocus}|=={false}|?{selected="selected",''})]>false</option>
+			<option value="true"[(#CONFIG{cloudzoom/softfocus}|=={true}|?{selected="selected",''})]>true</option>
+			</select>
+	<br/><br/>
+
+		<label>showtitle</label>
+			<select name="showtitle">
+			<option value="false"[(#CONFIG{cloudzoom/showtitle}|=={false}|?{selected="selected",''})]>false</option>
+			<option value="true"[(#CONFIG{cloudzoom/showtitle}|=={true}|?{selected="selected",''})]>true</option>
+			</select>
+	<br/><br/>
+	
+		<label>title opacity (between 0 ans 1)</label>
+		<input type="text" name="titleopacity" size="10" value="#CONFIG{cloudzoom/titleopacity}">
+	<br/> <br/>
+	
+	</fieldset>
+	
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="reset" value="<:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</p>
+</form>
+
+
+
