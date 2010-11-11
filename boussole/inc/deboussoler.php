@@ -6,68 +6,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ----------------------- Traitements des boussoles ---------------------------------
 
 /**
- * Teste l'existence d'un xml de boussole et renvoie le path complet ou l'url absolue
- *
- * @param string $xml
- * @return string
- */
-function boussole_localiser_xml($xml, $mode) {
-
-	include_spip('inc/distant');
-	$retour = '';
-
-	// On calcul une url absolue dans tous les cas
-	if ($mode == 'standard')
-		// La boussole SPIP
-		$url = url_absolue(find_in_path('boussole_spip.xml', 'boussoles/'));
-	else
-		if (preg_match(",^(http|ftp)://,",$xml))
-			// Mode perso : on a passe une url
-			$url = url_absolue($xml);
-		else
-			// Mode perso : on a passe un fichier seul, 
-			// on calcule l'url sachant que le fichier doit etre dans boussoles/
-			$url = url_absolue(find_in_path($xml, 'boussoles/'));
-
-	// On verifie que le fichier existe
-	if (recuperer_page($url, false, false))
-		$retour = $url;
-
-	return $retour;
-}
-
-/**
- * Teste la validite du fichier xml de la boussole en fonction de la DTD boussole.dtd
- *
- * @param string $url
- * @param array &$erreur
- * @return boolean
- */
-
-// $url	=> url absolue du fichier xml de description de la boussole
-// $erreur	=> tableau des erreurs collectees suite a la validation xml
-function boussole_valider_xml($url, &$erreur) {
-
-	include_spip('inc/distant');
-	$ok = true;
-
-	// On verifie la validite du contenu en fonction de la dtd
-	$valider_xml = charger_fonction('valider', 'xml');
-	$retour = $valider_xml(recuperer_page($url));
-
-// 	if ($retour[1] === false) {
-// 		$ok = false;
-// 	}
-// 	else if (count($retour[1] > 0)) {
-// 		$erreur['detail'] = $retour[1];
-// 		$ok = false;
-// 	}
-
-	return $ok;
-}
-
-
-/**
  * Ajout du depot et de ses extensions dans la base de donnees
  *
  * @param string $url
@@ -128,6 +66,69 @@ function boussole_supprimer($aka_boussole) {
 
 
 // ----------------------- Traitements des fichiers xml ---------------------------------
+
+/**
+ * Teste l'existence d'un xml de boussole et renvoie le path complet ou l'url absolue
+ *
+ * @param string $xml
+ * @return string
+ */
+function boussole_localiser_xml($xml, $mode) {
+
+	include_spip('inc/distant');
+	$retour = '';
+
+	// On calcul une url absolue dans tous les cas
+	if ($mode == 'standard')
+		// La boussole SPIP
+		$url = url_absolue(find_in_path('boussole_spip.xml', 'boussoles/'));
+	else
+		if (preg_match(",^(http|ftp)://,",$xml))
+			// Mode perso : on a passe une url
+			$url = url_absolue($xml);
+		else
+			// Mode perso : on a passe un fichier seul, 
+			// on calcule l'url sachant que le fichier doit etre dans boussoles/
+			$url = url_absolue(find_in_path($xml, 'boussoles/'));
+
+	// On verifie que le fichier existe
+	if (recuperer_page($url, false, false))
+		$retour = $url;
+
+	return $retour;
+}
+
+
+/**
+ * Teste la validite du fichier xml de la boussole en fonction de la DTD boussole.dtd
+ *
+ * @param string $url
+ * @param array &$erreur
+ * @return boolean
+ */
+
+// $url	=> url absolue du fichier xml de description de la boussole
+// $erreur	=> tableau des erreurs collectees suite a la validation xml
+function boussole_valider_xml($url, &$erreur) {
+
+	include_spip('inc/distant');
+	$ok = true;
+
+	// On verifie la validite du contenu en fonction de la dtd
+	$valider_xml = charger_fonction('valider', 'xml');
+	$retour = $valider_xml(recuperer_page($url));
+
+// 	if ($retour[1] === false) {
+// 		$ok = false;
+// 	}
+// 	else if (count($retour[1] > 0)) {
+// 		$erreur['detail'] = $retour[1];
+// 		$ok = false;
+// 	}
+
+	return $ok;
+}
+
 
 /**
  * Renvoie, a partir du fichier xml de la boussole, un tableau des sites de la boussole
