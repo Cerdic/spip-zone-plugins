@@ -127,7 +127,7 @@ function svp_rechercher_liste_des_champs($tables) {
 	$tables['plugin']['nom'] = 8;
 	$tables['plugin']['slogan'] = 4;
 	// -- Table spip_paquets
-	$tables['paquet']['descriptif'] = 2;
+	$tables['paquet']['description'] = 2;
 
 	return $tables;
 }

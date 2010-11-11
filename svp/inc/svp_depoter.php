@@ -567,6 +567,83 @@ function svp_xml_parse_plugin($arbre){
 
 // ----------------------- Recherches de plugins ---------------------------------
 
+function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $doublons=false, $exclusions=array(), $version='') {
+
+	include_spip('inc/rechercher');
+	$plugins = array();
+
+	// On prepare l'utilisation de la recherche en base SPIP en la limitant aux tables spip_plugins
+	// et spip_paquets
+	$liste = liste_des_champs();
+	$tables = array('plugin' => $liste['plugin'], 'paquet' =>$liste['paquet']);
+	$options = array('jointures' => true, 'score' => true);
+
+	// On cherche dans tous les enregistrements de ces tables des correspondances les plugins qui
+	// correspondent a la phrase recherchee
+	// -- On obtient une liste d'id de plugins et d'id de paquets
+	$resultats = recherche_en_base($phrase, $tables, $options);
+	// -- On convertit les id de plugins en id de paquets
+	$ids_plugin = array_keys($resultats['plugin']);
+	$where[] = sql_in('id_plugin', $ids_plugin);
+	$ids_paquets = sql_allfetsel('id_paquet', 'spip_paquets', $where);
+	$ids_paquets = array_map('reset', $ids_paquets);
+	$ids_paquets = array_map('intval', $ids_paquets);
+	// -- On merge les deux tableaux de paquets sans doublon
+	$ids_paquets = array_unique(array_merge(array_keys($resultats['paquet']), $ids_paquets));
+	sort($ids_paquets);
+
+	// Maintenant, on continue la recherche en appliquant, sur la liste des id de paquets,
+	// les filtres complementaires : categorie, etat, exclusions et compatibilite spip
+	// -- Preparation de la requete
+	$from = array('spip_plugins AS t1', 'spip_paquets AS t2');
+	$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 
+					't2.id_paquet AS id_paquet', 't2.description AS description', 't2.version_spip AS version_spip',
+					't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
+					't2.logo AS logo', 't2.version AS version', 't2.id_paquet AS id_paquet');
+	$where = array('t1.id_plugin=t2.id_plugin');
+	if ($ids_paquets)
+		$where[] = sql_in('t2.id_paquet', $ids_paquets);
+	if (($categorie) AND ($categorie != 'toute_categorie'))
+		$where[] = 't1.categorie=' . sql_quote($categorie);
+	if (($etat) AND ($etat != 'tout_etat'))
+		$where[] = 't2.etat=' . sql_quote($etat);
+	if ($exclusions)
+		$where[] = sql_in('t2.id_plugin', $exclusions, 'NOT');
+
+	if ($resultats = sql_select($select, $from, $where)) {
+		while ($paquets = sql_fetch($resultats)) {
+			$prefixe = $paquets['prefixe'];
+			$version = $paquets['version'];
+			$nom = extraire_multi($paquets['nom']);
+			$slogan = extraire_multi($paquets['slogan']);
+			$description = extraire_multi($paquets['description']);
+			if (svp_verifier_compatibilite_spip($paquets['version_spip'])) {
+				// Le paquet remplit tous les criteres, on peut le selectionner
+				// -- on utilise uniquement la langue du site et on ajoute le score
+				$paquets['nom'] = $nom;
+				$paquets['slogan'] = $slogan;
+				$paquets['description'] = $description;
+				$paquets['score'] = $score;
+				if ($doublons)
+					// ajout systematique du paquet
+					$plugins[] = $paquets;
+				else {
+					// ajout 
+					// - si pas encore trouve 
+					// - ou si sa version est inferieure (on garde que la derniere version)
+					if (!$plugins[$prefixe]
+					OR ($plugins[$prefixe] AND spip_version_compare($plugins[$prefixe]['version'], $version, '<'))) {
+						$plugins[$prefixe] = $paquets;
+					}
+				}
+			}
+		}
+	}
+
+	return $plugins;
+}
+
+
 /**
  * Actualisation des plugins du depot uniquement. Sert aussi pour une premiere insertion
  *
@@ -638,6 +715,7 @@ function svp_rechercher_plugins($phrase, $categorie, $etat, $doublons=false, $ex
 	
 	return $plugins;
 }
+
 
 /**
  * Recuperation des id des plugins a exclure car deja installes
