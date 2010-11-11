@@ -14,10 +14,22 @@ function balise_INCLURE($p) {
 
 	if (false !== strpos($f->code, "'ajaxload'"))
 		$f->code = preg_replace('/recuperer_fond/', 'recuperer_fond_ajax',
-		$f->code, 1);
+						$f->code, 1);
+						
+	// inserer UNE FOIS le X-Spip_Filtre:INCLUREAJAXLOAD_affichemeta
+	// equivalent a #FILTRE{INCLUREAJAXLOAD_affichemeta}
+	if(!defined("_INCLURE_AJAX_LOAD_INSERT")) {
+		define("_INCLURE_AJAX_LOAD_INSERT", "oui");
+		$f->code .= ".'<' . '"
+			.'?php header("X-Spip-Filtre: \'.'
+				."INCLUREAJAXLOAD_affichemeta"
+			. " . '\"); ?'.'>'";
 
+		$f->interdire_scripts = false;
+	}
 	return $f;
 }
+
 
 // cree un appel ahah vers ce recuperer_fond
 function recuperer_fond_ajax() {
@@ -127,34 +139,34 @@ function remettre_fond_ajax_static($matches) {
 	return $page;
 }
 
-function INCLUREAJAXLOAD_affichage_final($page) {
-
+function INCLUREAJAXLOAD_affichemeta($page) {
 	if (strpos($page, "includeajax") > 0 || strpos($page, "includestatic") > 0) {
-		// Si le visiteur est un robot de moteur de recherche,
-		// reconstituer les pages completes
-		if(_IS_BOT || $_COOKIE["no_js"] == "no_js" || _request("no_js") == "oui" ) {
-			include_spip("inc/filtres");
-			include_spip("public/assembler");
-			$page = preg_replace_callback(",(<div class='includeajax[^\']*'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax", $page);
-			$page = preg_replace_callback(",(<div class='includestatic[^\']*'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax_static", $page);
-			
-			$javascript = '
-				<script type="text/javascript"><!--
-					document.cookie = "no_js=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
-				--></script>	
-			';
-		} else {
-			$javascript = '
-				<script type="text/javascript"><!--
-				document.write("<\/script><script>/*");
-				//--></script>
-				<meta http-equiv="refresh" content="2; url='.$GLOBALS["meta"]["adresse_site"].'/spip.php?action=ia_nojs&amp;retour='.urlencode(self('&')).'" />
-				<script type="text/javascript">/* */</script>
-			';
-	
-		}
+
+		$javascript = '<?php if ($_COOKIE["no_js"] != "no_js" && !_IS_BOT && _request("no_js") != "oui") { ?>
+<script type="text/javascript"><!--
+document.write("<\/script><script>/*");
+//--></script>
+<meta http-equiv="refresh" content="2; url='.$GLOBALS["meta"]["adresse_site"].'/spip.php?action=ia_nojs&amp;retour=<?php echo urlencode(self(\'&\'));?>" />
+<script type="text/javascript">/* */</script>
+<?php } else { ?>
+<script type="text/javascript"><!--
+	document.cookie = "no_js=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
+--></script>
+<?php } ?>'.$javascript;
 		
 		$page = str_replace("</head>", "$javascript</head>", $page);
+	}
+	return $page;
+}
+
+function INCLUREAJAXLOAD_affichage_final($page) {
+	// Si le visiteur est un robot de moteur de recherche,
+	// reconstituer les pages completes
+	if(_IS_BOT || $_COOKIE["no_js"] == "no_js" || _request("no_js") == "oui" ) {
+		include_spip("inc/filtres");
+		include_spip("public/assembler");
+		$page = preg_replace_callback(",(<div class='includeajax[^\']*'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax", $page);
+		$page = preg_replace_callback(",(<div class='includestatic[^\']*'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax_static", $page);
 	}
 
 	return $page;
