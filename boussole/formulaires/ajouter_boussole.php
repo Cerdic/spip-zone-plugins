@@ -40,7 +40,7 @@ function formulaires_ajouter_boussole_traiter_dist(){
 		if (!boussole_valider_xml($url, $erreur)) {
 			// Le fichier ne suit pas la DTD (boussole.dtd)
 			$retour['message_erreur'] = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
-			spip_log("ERREUR DTD : " . var_export($erreur['detail'], true), 'boussole');
+			spip_log("ERREUR DTD" . var_export($erreur['detail'], true), 'boussole');
 		}
 		else {
 			// On insere la boussole dans la base
@@ -51,6 +51,7 @@ function formulaires_ajouter_boussole_traiter_dist(){
 			// Determination des messages de retour
 			if (!$ok)
 				$retour['message_erreur'] = $erreur;
+				spip_log("ERREUR AJOUT", 'boussole');
 			else {
 				$retour['message_ok'] = _T('boussole:message_ok_boussole_ajoutee', array('fichier' => $url));
 				spip_log("ACTION AJOUTER BOUSSOLE : url = ". $url, 'boussole');
