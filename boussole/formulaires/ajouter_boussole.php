@@ -49,9 +49,10 @@ function formulaires_ajouter_boussole_traiter_dist(){
 			$ok = boussole_ajouter($url, $erreur);
 		
 			// Determination des messages de retour
-			if (!$ok)
+			if (!$ok) {
 				$retour['message_erreur'] = $erreur;
 				spip_log("ERREUR AJOUT", 'boussole');
+			}
 			else {
 				$retour['message_ok'] = _T('boussole:message_ok_boussole_ajoutee', array('fichier' => $url));
 				spip_log("ACTION AJOUTER BOUSSOLE : url = ". $url, 'boussole');
