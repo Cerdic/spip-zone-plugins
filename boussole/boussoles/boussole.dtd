@@ -1,18 +1,17 @@
 <!ENTITY % NAME "CDATA"> <!-- identificateur -->
 <!ENTITY % URI "CDATA"> <!-- lien sur le Web -->
-<!ENTITY % PATH "CDATA"> <!-- chemin d'acces a un fichier ou repertoire -->
 <!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
-<!ENTITY % GROUP "CDATA"> <!-- pour SPIP appartient a la liste (reference|aide|extension|decouverte|actualite) -->
+<!ENTITY % GROUP "(reference|aide|extension|decouverte|actualite)">
 
-<!ELEMENT boussole groupe+ >
+<!ELEMENT boussole groupe+>
 <!ATTLIST boussole
-	alias %NAME #REQUIRED
+	alias %NAME; #REQUIRED
 	version %VNUM; #REQUIRED
 >
 
 <!ELEMENT groupe site+>
 <!ATTLIST groupe
-	type %GROUP #REQUIRED
+	type %GROUP; #REQUIRED
 >
 
 <!ELEMENT site>

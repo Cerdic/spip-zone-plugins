@@ -1,4 +1,4 @@
-<boussole alias="spip" version="0.1">
+<boussole alias="spip" version="0.2">
 
 	<!-- Sites de reference SPIP -->
 	<groupe type="reference">
@@ -13,7 +13,6 @@
 		<site alias="user" src="http://listes.rezo.net/mailman/listinfo/spip/" />
 		<site alias="irc" src="http://www.spip.net/irc/" />
 		<site alias="party" src="http://www.spip-party.net/" />
-		<site alias="twit" src="http://spip.org/" />
 	</groupe>
 
 	<!-- Sites de decouverte des realisations SPIP -->
@@ -30,6 +29,7 @@
 		<site alias="blog" src="http://www.spip-blog.net/" />
 		<site alias="zine" src="http://zine.spip.org/" />
 		<site alias="mag" src="http://mag.spip.net/" />
+		<site alias="twit" src="http://spip.org/" />
 		<site alias="sedna" src="http://sedna.spip.org/" />
 	</groupe>
 	

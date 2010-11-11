@@ -6,31 +6,64 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ----------------------- Traitements des boussoles ---------------------------------
 
 /**
- * Teste la validite d'une url d'une description de boussole
- *
- * @param string $url
- * @return boolean
- */
-
-// $url	=> url du fichier xml de description de la boussole (choix perso)
-function boussole_verifier_adresse($url){
-	include_spip('inc/distant');
-	return (!$xml = recuperer_page($url)) ? false : true;
-}
-
-
-/**
- * Teste la validite d'un xml de boussole d'apres la DTD
+ * Teste l'existence d'un xml de boussole et renvoie le path complet ou l'url absolue
  *
  * @param string $xml
+ * @return string
+ */
+function boussole_localiser_xml($xml, $mode) {
+
+	include_spip('inc/distant');
+	$retour = '';
+
+	// On calcul une url absolue dans tous les cas
+	if ($mode == 'standard')
+		// La boussole SPIP
+		$url = url_absolue(find_in_path('boussole_spip.xml', 'boussoles/'));
+	else
+		if (preg_match(",^(http|ftp)://,",$xml))
+			// Mode perso : on a passe une url
+			$url = url_absolue($xml);
+		else
+			// Mode perso : on a passe un fichier seul, 
+			// on calcule l'url sachant que le fichier doit etre dans boussoles/
+			$url = url_absolue(find_in_path($xml, 'boussoles/'));
+
+	// On verifie que le fichier existe
+	if (recuperer_page($url, false, false))
+		$retour = $url;
+
+	return $retour;
+}
+
+/**
+ * Teste la validite du fichier xml de la boussole en fonction de la DTD boussole.dtd
+ *
+ * @param string $url
+ * @param array &$erreur
  * @return boolean
  */
 
-// $xml	=> url du fichier xml de description de la boussole
-function boussole_verifier_xml($xml){
+// $url	=> url absolue du fichier xml de description de la boussole
+// $erreur	=> tableau des erreurs collectees suite a la validation xml
+function boussole_valider_xml($url, &$erreur) {
 
-	// A IMPLEMENTER
-	return true;
+	include_spip('inc/distant');
+	$ok = true;
+
+	// On verifie la validite du contenu en fonction de la dtd
+	$valider_xml = charger_fonction('valider', 'xml');
+	$retour = $valider_xml(recuperer_page($url));
+
+// 	if ($retour[1] === false) {
+// 		$ok = false;
+// 	}
+// 	else if (count($retour[1] > 0)) {
+// 		$erreur['detail'] = $retour[1];
+// 		$ok = false;
+// 	}
+
+	return $ok;
 }
 
 
@@ -44,10 +77,11 @@ function boussole_verifier_xml($xml){
 
 // $url	=> url ou path du fichier xml de description de la boussole
 // $erreur	=> message d'erreur deja traduit
-function boussole_ajouter($url, &$erreur=''){
+function boussole_ajouter($url, &$erreur='') {
 
 	// On recupere les infos du fichier xml de description de la balise
-	if (!$infos = boussole_parser_xml($url)){
+	$infos = boussole_parser_xml($url);
+	if (!infos OR !$infos['boussole']['alias']){
 		$erreur = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
 		return false;
 	}
@@ -79,7 +113,7 @@ function boussole_ajouter($url, &$erreur=''){
  */
 
 // $aka_boussole	=> alias de la boussole, par defaut, spip
-function boussole_supprimer($aka_boussole){
+function boussole_supprimer($aka_boussole) {
 	
 	// Alias non conforme
 	if (!$aka_boussole)
@@ -104,7 +138,7 @@ function boussole_supprimer($aka_boussole){
  */
 
 // $url	=> url ou path du fichier xml de description de la boussole
-function boussole_parser_xml($url){
+function boussole_parser_xml($url) {
 
 	$infos = array();
 

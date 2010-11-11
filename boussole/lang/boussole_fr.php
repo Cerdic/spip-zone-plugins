@@ -69,9 +69,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_boussole_inconnue' => 'Aucune boussole ne correspond &agrave l\'alias &#171; @alias@ &#187;',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
 	'message_nok_ecriture_bdd' => 'Erreur d\'&eacute;criture en base de donn&eacute;es',
-	'message_nok_xml_introuvable' => 'Le fichier &#171; @url@ &#187; est introuvable',
-	'message_nok_xml_invalide' => 'Le fichier XML &#171; @fichier@ &#187; de description de la boussole n\'est pas conforme',
-	'message_ok_boussole_ajoutee' => 'La boussole &#171; @url@ &#187; a &eacute;t&eacute; ajout&eacute;e.',
+	'message_nok_xml_introuvable' => 'Le fichier &#171; @fichier@ &#187; est introuvable',
+	'message_nok_xml_invalide' => 'Le fichier XML &#171; @fichier@ &#187; de description de la boussole n\'est pas conforme &agrave; la DTD',
+	'message_ok_boussole_ajoutee' => 'La boussole &#171; @fichier@ &#187; a &eacute;t&eacute; ajout&eacute;e.',
 
 // N
 // -- Noms de la boussole, des groupes et des sites de la galaxie SPIP
