@@ -58,7 +58,7 @@ if(!function_exists('__plugin_html_signature')) {
 	// du style "Dossier plugin [version]"
 	function __plugin_html_signature ($prefix, $return = false, $html = true) {
 	
-		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
+		$info = barrac_plugin_get_infos(__plugin_get_meta_dir($prefix));
 		$nom = typo($info['nom']);
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
@@ -68,7 +68,7 @@ if(!function_exists('__plugin_html_signature')) {
 			$version = (($version) ? " <span style='color:gray;'>".$version."</span>" : "");
 			$base_version = (($base_version) ? " <span style='color:#66c;'>&lt;".$base_version."&gt;</span>" : "");
 		}
-		$result = ""
+		$result = ''
 			. $nom
 			. $version
 			. $base_version
@@ -89,7 +89,7 @@ if(!function_exists('__plugin_boite_meta_info')) {
 		$result = false;
 		if(!empty($prefix)) {
 			$meta_info = __plugin_get_meta_infos($prefix); // dir et version
-			$info = plugin_get_infos($meta_info['dir']);
+			$info = barrac_plugin_get_infos($meta_info['dir']);
 			$icon = 
 				(isset($info['icon']))
 				? "<div "
@@ -159,4 +159,21 @@ if(!function_exists("__boite_alerte")) {
 }
 
 
-?>
+/**
+ * plugin_get_infos() n'est plus dans SPIP 2.n
+ * En attendant de completer...
+ **/
+function barrac_plugin_get_infos($s)
+{
+	$info = array('nom' => null, 'version' => null, 'icon' => null);
+	
+	// SPIP < 2.n
+	if(function_exists('plugin_get_infos'))
+	{
+		$info = plugin_get_infos($s);
+	}
+	else{
+		// @todo: a ecrire
+	}
+	return($info);
+}

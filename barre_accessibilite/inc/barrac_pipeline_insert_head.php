@@ -424,7 +424,7 @@ $barrac_js_code_result = "
 <script type='text/javascript'>
 //<![CDATA[
 " 
-. preg_replace('=[[:space:]]+=', ' ', compacte_js($barrac_js_code_result)) 
+. preg_replace('=[[:space:]]+=', ' ', barrac_compacte_js($barrac_js_code_result)) 
 //. $barrac_js_code_result
 . "
 //]]>
@@ -435,7 +435,7 @@ $barrac_js_code_result = "
 	$barrac_flux_complements .= $barrac_js_code_result . $barrac_js_ie_complements;
 	
 	// compresser
-	$barrac_flux_styles = compacte_css($barrac_flux_styles);
+	$barrac_flux_styles = barrac_compacte_css($barrac_flux_styles);
 
 	$flux .= $barrac_flux_styles . $barrac_flux_complements;
 
@@ -498,5 +498,3 @@ function barrac_javascript_cookie ($action_parent, $value) {
 function barrac_confirmer_valeur_var ($var, $acceptables, $defaut) {
 	return ((!empty($var) && in_array($var, $acceptables)) ? $var : $defaut);
 }
-
-?>

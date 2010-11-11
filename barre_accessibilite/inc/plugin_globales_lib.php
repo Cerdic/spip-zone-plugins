@@ -246,7 +246,7 @@ if(!function_exists('__plugin_boite_meta_info')) {
 		$result = false;
 		if(!empty($prefix)) {
 			$meta_info = __plugin_get_meta_infos($prefix); // dir et version
-			$info = plugin_get_infos($meta_info['dir']);
+			$info = barrac_plugin_get_infos($meta_info['dir']);
 			$icon = 
 				(isset($info['icon']))
 				? "<div "
@@ -320,7 +320,7 @@ if(!function_exists('__plugin_html_signature')) {
 	// du style "Dossier plugin [version]"
 	function __plugin_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
 
-		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
+		$info = barrac_plugin_get_infos(__plugin_get_meta_dir($prefix));
 		$nom = typo($info['nom']);
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
@@ -676,4 +676,34 @@ if(!function_exists("array_fill_keys")) {
 	}
 } 
 
-?>
+/**
+ * compacte_js() n'est plus dans SPIP 2.n
+ * En attendant de completer...
+ **/
+function barrac_compacte_js($s)
+{
+	if(function_exists('compacte_js'))
+	{
+		$s = compacte_js($s);
+	}
+	else{
+		// @todo: a ecrire
+	}
+	return($s);
+}
+
+/**
+ * compacte_css() n'est plus dans SPIP 2.n
+ * En attendant de completer...
+ **/
+function barrac_compacte_css($s)
+{
+	if(function_exists('compacte_js'))
+	{
+		$s = compacte_css($s);
+	}
+	else{
+		// @todo: a ecrire
+	}
+	return($s);
+}
