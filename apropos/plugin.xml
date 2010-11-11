@@ -9,7 +9,7 @@
     
     Il sert à afficher sur une page de type à propos du site un récapitulatif des plugins actifs, y compris l'icone de ceux-ci.
     <br />
-	Vous pouvez utiliser la nouvelle  balise #APROPOS dans vos squelettes. Pour personaliser ce qu'affiche cete balise, modifiez le fichier modeles/apropos.html que vous aurez préalablement copié dans le dossier squelettes/modeles.
+	Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Pour personnaliser ce qu'affiche cette balise, modifiez le fichier modeles/apropos.html que vous aurez préalablement copié dans le dossier squelettes/modeles.
 	<br />Pour afficher la liste dans un article, il faut utiliser le modele <code><apropos|x></code>. En d'autres termes, copiez-collez <code><apropos|x></code> dans le texte de votre article.
 	[en]Lists the active plugins and displays a brief description of them.
 	It is used to display a page of type about the site a summary of active plugins, including the icon of these.
