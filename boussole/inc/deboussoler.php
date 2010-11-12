@@ -81,15 +81,15 @@ function boussole_localiser_xml($xml, $mode) {
 	// On calcul une url absolue dans tous les cas
 	if ($mode == 'standard')
 		// La boussole SPIP
-		$url = url_absolue(find_in_path('boussole_spip.xml', 'boussoles/'));
+		$url = url_absolue(find_in_path('boussole_spip.xml'));
 	else
 		if (preg_match(",^(http|ftp)://,",$xml))
 			// Mode perso : on a passe une url
 			$url = url_absolue($xml);
 		else
 			// Mode perso : on a passe un fichier seul, 
-			// on calcule l'url sachant que le fichier doit etre dans boussoles/
-			$url = url_absolue(find_in_path($xml, 'boussoles/'));
+			// on calcule l'url sachant que le fichier doit etre dans a la racine
+			$url = url_absolue(find_in_path($xml));
 
 	// On verifie que le fichier existe
 	if (recuperer_page($url, false, false))
