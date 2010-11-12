@@ -1,0 +1,13 @@
+.formulaire_favori {float:right;}
+.formulaire_favori form button {cursor: pointer;border:0;background-color:transparent;text-align:right;padding:2px 0;}
+
+/* Icone favoris 16px */
+.formulaire_favori form button.ajouter_favori img {visibility: hidden;}
+.formulaire_favori form button.ajouter_favori {background: url(images/favoris-grey-add-16.png) no-repeat center right;}
+.formulaire_favori form button.ajouter_favori:hover {background-image: url(images/favoris-add-16.png);}
+
+.formulaire_favori form button.retirer_favori img {visibility: hidden;}
+.formulaire_favori form button.retirer_favori span {visibility:hidden;}
+.formulaire_favori form button.retirer_favori {background: url(images/favoris-16.png) no-repeat center right;}
+.formulaire_favori form button.retirer_favori:hover {background-image: url(images/favoris-grey-remove-16.png);}
+.formulaire_favori form button.retirer_favori:hover span {visibility:visible;}
