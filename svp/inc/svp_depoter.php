@@ -582,15 +582,29 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $doublons=false
 	// correspondent a la phrase recherchee
 	// -- On obtient une liste d'id de plugins et d'id de paquets
 	$resultats = recherche_en_base($phrase, $tables, $options);
+	// -- On prepare le tableau des scores avec les paquets trouves par la recherche
+	$scores = array();
+	foreach ($resultats['paquet'] as $_id => $_score) {
+		$scores[$_id] = intval($resultats['paquet'][$_id]['score']);
+	}
 	// -- On convertit les id de plugins en id de paquets
 	$ids_plugin = array_keys($resultats['plugin']);
 	$where[] = sql_in('id_plugin', $ids_plugin);
-	$ids_paquets = sql_allfetsel('id_paquet', 'spip_paquets', $where);
-	$ids_paquets = array_map('reset', $ids_paquets);
-	$ids_paquets = array_map('intval', $ids_paquets);
-	// -- On merge les deux tableaux de paquets sans doublon
-	$ids_paquets = array_unique(array_merge(array_keys($resultats['paquet']), $ids_paquets));
-	sort($ids_paquets);
+	$ids = sql_allfetsel('id_paquet, id_plugin', 'spip_paquets', $where);
+	// -- On merge les deux tableaux de paquets sans doublon en mettant a jour un tableau des scores
+	$ids_paquets = array_keys($resultats['paquet']);
+	foreach ($ids as $_ids) {
+		$id_paquet = intval($_ids['id_paquet']);
+		$id_plugin = intval($_ids['id_plugin']);
+		if (array_search($id_paquet, $ids_paquets) === false) {
+			$ids_paquets[] = $id_paquet;
+			$scores[$id_paquet] = intval($resultats['plugin'][$id_plugin]['score']);
+		}
+		else {
+			$scores[$id_paquet] = intval($resultats['paquet'][$id_paquet]['score']) 
+								+ intval($resultats['plugin'][$id_plugin]['score']);
+		}
+	}
 
 	// Maintenant, on continue la recherche en appliquant, sur la liste des id de paquets,
 	// les filtres complementaires : categorie, etat, exclusions et compatibilite spip
@@ -623,7 +637,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $doublons=false
 				$paquets['nom'] = $nom;
 				$paquets['slogan'] = $slogan;
 				$paquets['description'] = $description;
-				$paquets['score'] = $score;
+				$paquets['score'] = $scores[intval($paquets['id_paquet'])];
 				if ($doublons)
 					// ajout systematique du paquet
 					$plugins[] = $paquets;
@@ -639,8 +653,25 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $doublons=false
 			}
 		}
 	}
+	
+	// On trie les tableau par score décroissant
+	if ($doublons)
+		usort($plugins, 'svp_trier_par_score');
+	else
+		uasort($plugins, 'svp_trier_par_score');
 
 	return $plugins;
+}
+
+
+function svp_trier_par_score($p1, $p2){
+	
+	if ($p1['score'] == $p2['score']) 
+		$retour = 0;
+	else 
+		$retour = ($p1['score'] < $p2['score']) ? 1 : -1;
+
+	return $retour;
 }
 
 

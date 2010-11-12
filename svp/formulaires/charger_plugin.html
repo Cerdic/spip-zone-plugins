@@ -39,7 +39,7 @@
 								</select>
 							</li>
 							<li class="editer_mode obligatoire[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
-								<label for="mode">Mode</label>
+								<label for="mode">Mode (debug)</label>
 								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{mode})</span>]
 								<select name="mode" id="mode">
 									<option value="spip"[ (#ENV{mode}|=={spip}|oui)selected="selected"]>Recherche type SPIP</option>
