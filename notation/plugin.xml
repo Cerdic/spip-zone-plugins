@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Notation[en]Rating</multi></nom>
 	<auteur>JEM - b_b - Matthieu Marcillaud</auteur>
-	<version>0.7.1</version>
+	<version>0.8.0</version>
 	<version_base>0.6.1</version_base>
 	<etat>stable</etat>
 	<prefix>notation</prefix>
@@ -24,7 +24,7 @@
 	<lien>http://www.spip-contrib.net/Notation-d-articles-SPIP</lien>
 	<licence>GNU/GPL</licence>
 	<necessite id="spip" version="[2.0.0;]" />
-	<necessite id="cfg" version="[1.10.4;]" />
+	<utilise id="cfg" version="[1.10.4;]" />
 
 	<icon>img_pack/note.gif</icon>
 

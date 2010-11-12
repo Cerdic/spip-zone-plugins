@@ -45,6 +45,7 @@ function notation_commencer_page(){
 function notation_get_ponderation(){
 	static $ponderation="";
 	if (!$ponderation) {
+		include_spip('inc/config'); // lire_config
 		$ponderation = lire_config('notation/ponderation',30);
 		$ponderation = intval($ponderation);
 		if ($ponderation < 1) $ponderation = 1;
@@ -62,6 +63,7 @@ function notation_get_ponderation(){
 function notation_get_nb_notes(){
 	static $nb = "";
 	if (!$nb) {
+		include_spip('inc/config'); // lire_config
 		$nb = intval(lire_config('notation/nombre', 5));
 		if ($nb < 1) $nb = 5;
 		if ($nb > 10) $nb = 10;

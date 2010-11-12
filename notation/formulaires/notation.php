@@ -14,15 +14,26 @@ include_spip('inc/notation_autorisations');
 include_spip('base/abstract_sql');
 include_spip('inc/session');
 
+/**
+ * Charger la notation d'un objet
+ * Attention : $objet est ici en fait le nom de la table
+ * "articles" et pas "article", ce nommage est malheureux
+ * 
+ * @param <type> $objet
+ * @param <type> $id_objet
+ * @return boolean
+ */
 function formulaires_notation_charger_dist($objet, $id_objet){
 
+	$type = objet_type($objet); // securite
+	$table = table_objet($type);
 	// definition des valeurs de base du formulaire
 	$valeurs = array(
-		'objet'=>$objet,
-		'id_objet'=>$id_objet,
+		'_objet'=>$table,
+		'_id_objet'=>$id_objet,
 		'editable'=>true,
 		'_note_max' => notation_get_nb_notes(),
-		'_form_id' => "-$objet$id_objet"
+		'_form_id' => "-$table$id_objet"
 	);
 
 	// l'auteur ou l'ip a-t-il deja vote ?
@@ -38,7 +49,7 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		}
 
 		$where = array(
-			"objet=" . sql_quote(objet_type($objet)),
+			"objet=" . sql_quote($type),
 			"id_objet=" . sql_quote($id_objet),
 			);
 		if ($id_auteur)
@@ -54,7 +65,7 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	}
 	// peut voter ou modifier son vote ?
 	include_spip('inc/autoriser');
-	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
+	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$type, 'id_objet'=>$id_objet))) {
 		$valeurs['editable']=false;
 	}
 
@@ -64,11 +75,13 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 
 function formulaires_notation_verifier_dist($objet, $id_objet){
 	$erreurs = array();
+	$type = objet_type($objet); // securite
+	$table = table_objet($type);
 
 	//  s'assurer que l'objet existe bien
 	// et que le champ robot n'est pas rempli
 	$trouver_table = charger_fonction('trouver_table','base');
-	$table_objet = $trouver_table($objet);
+	$table_objet = $trouver_table($table);
 	$_id_objet = id_table_objet($table_objet['table']);
 
 	if (!sql_countsel($table_objet['table'], "$_id_objet=" . sql_quote($id_objet))
@@ -86,6 +99,8 @@ function formulaires_notation_verifier_dist($objet, $id_objet){
 }
 
 function formulaires_notation_traiter_dist($objet, $id_objet){
+	$type = objet_type($objet); // securite
+	$table = table_objet($type);
 
 	// indiquer dans sa session que ce visiteur a vote
 	// grace a ce cookie on dira a charger() qu'il faut regarder
@@ -95,7 +110,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 
 	// invalider les caches
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_notation/$objet/$id_objet'");
+	suivre_invalideur("id='id_notation/$type/$id_objet'");
 
 	if ($GLOBALS["auteur_session"]) {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
@@ -105,14 +120,13 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	$ip	= $GLOBALS['ip'];
 
 	// recuperation des champs
-	$note = intval(_request("notation-$objet$id_objet"));
+	$note = intval(_request("notation-$table$id_objet"));
 	$id_donnees	= _request('notation_id_donnees'); // ne sert a rien ?
 
 	// Si pas inscrit : recuperer la note de l'objet sur l'IP
 	// Sinon rechercher la note de l'auteur
-	$objet = objet_type($objet);
 	$where = array(
-		"objet=" . sql_quote($objet),
+		"objet=" . sql_quote($type),
 		"id_objet=" . sql_quote($id_objet),
 		);
 	if ($id_auteur != 0) $where[] = "id_auteur=" . sql_quote($id_auteur);
@@ -139,7 +153,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 		else {
 			// Modifier la note
 			$c = array(
-				"objet" => $objet,
+				"objet" => $type,
 				"id_objet" => $id_objet,
 				"note" => $note,
 				"id_auteur" => $id_auteur,
@@ -159,14 +173,14 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 		// font que je le laisse encore, comme calculer l'objet le mieux note :
 		// 	<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
 		// qu'il n'est pas possible de traduire dans une boucle NOTATION facilement.
-		notation_recalculer_total($objet,$id_objet);
+		notation_recalculer_total($type,$id_objet);
 	}
 
 	$res = array("editable"=>true,"message_ok"=>_T("notation:jainote"),'id_notation'=>$id_notation);
 
 	// peut il modifier son vote ?
 	include_spip('inc/autoriser');
-	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
+	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$type, 'id_objet'=>$id_objet))) {
 		$res['editable']=false;
 	}
 	return $res;

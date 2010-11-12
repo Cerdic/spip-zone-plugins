@@ -12,6 +12,7 @@
 function notation_autoriser(){}
 
 function autoriser_notation_modifier_dist($faire, $type, $id, $qui, $opt){
+	include_spip('inc/config'); // lire_config
 	// la config interdit de modifier la note ?
 	if ($id AND !lire_config('notation/change_note'))
 		return false;
