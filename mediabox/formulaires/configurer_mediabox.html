@@ -50,9 +50,17 @@
 				<label for='speed'><:mediabox:label_speed:></label>
 				<input type="text" name="speed" class="text" id="speed" size="10" value="#ENV*{speed}" />
 			</li>
+			<li class="minWidth[ (#ENV**{erreurs}|table_valeur{minWidth}|oui)erreur]">
+				<label for='minWidth'><:mediabox:label_minWidth:></label>
+				<input type="text" name="minWidth" class="text" id="minWidth" size="10" value="#ENV*{minWidth}" />
+			</li>
 			<li class="maxWidth[ (#ENV**{erreurs}|table_valeur{maxWidth}|oui)erreur]">
 				<label for='maxWidth'><:mediabox:label_maxWidth:></label>
 				<input type="text" name="maxWidth" class="text" id="maxWidth" size="10" value="#ENV*{maxWidth}" />
+			</li>
+			<li class="minHeight[ (#ENV**{erreurs}|table_valeur{minHeight}|oui)erreur]">
+				<label for='minHeight'><:mediabox:label_minHeight:></label>
+				<input type="text" name="minHeight" class="text" id="minHeight" size="10" value="#ENV*{minHeight}" />
 			</li>
 			<li class="maxHeight[ (#ENV**{erreurs}|table_valeur{maxHeight}|oui)erreur]">
 				<label for='maxHeight'><:mediabox:label_maxHeight:></label>
