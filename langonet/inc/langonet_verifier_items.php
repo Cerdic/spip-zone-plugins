@@ -50,21 +50,24 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 				$trouver_item = _LANGONET_TROUVER_ITEM_HP;
 			}
 			if (preg_match_all($trouver_item, $texte, $matches)) {
-				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
 				// On traite les cas particuliers ou l'item est entierement une expression ou une variable:
 				// on duplique l'item dans le suffixe ce qui est en fait bien le cas
-				if ((substr($matches[2][0], 0, 1) == "$") OR (substr($matches[2][0], 0, 2) == "'.") OR (substr($matches[2][0], 0, 2) == '".')) {
+				// On sauvegarde le matches[2] pour calculer les lignes concernees pus tard
+				$matches[4] = $matches[2];
+				$suffixe = preg_replace(',\s*,', '', $matches[2][0]);
+				if ((substr($suffixe, 0, 1) == "$") OR (substr($suffixe, 0, 2) == "'.") OR (substr($suffixe, 0, 2) == '".')) {
+					$matches[2][0] = str_replace('$', '\$', $suffixe);
 					$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[2]);
 				}
 				else {
 					$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
 				}
+				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
 				$utilises_brut['modules'] = array_merge($utilises_brut['modules'], $matches[1]);
 				// On collecte pour chaque item trouve les lignes et fichiers dans lesquels il est utilise
-				foreach ($matches[2] as $item_val) {
-					$item_val = str_replace('$', '\$', $item_val);
-					preg_match("#.{0,8}".$item_val.".{0,20}#is", $texte, $extrait);
-					$item_tous[$item_val][$_fichier][$ligne][] = trim($extrait[0]);
+				foreach ($matches[4] as $_cle_val => $_item_val) {
+					preg_match("#.{0,8}" . str_replace('$', '\$', $_item_val) . ".{0,20}#is", $texte, $extrait);
+					$item_tous[$matches[2][$_cle_val]][$_fichier][$ligne][] = trim($extrait[0]);
 				}
 			}
 		}
@@ -162,10 +165,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 					// cet item est en fait une variable ou une expression.
 					// On ajoute ces cas aussi aux incertains (pas essentiel)
 					if (!$item_trouve) {
-						if (substr($_valeur, 0, 1) == "$")
-							$_item = $_valeur;
-						else
-							$_item = substr($_valeur, 2, strlen($_valeur)-2);
+						$_item = ltrim($_valeur, '\'".\\');
 						$item_peut_etre[] = $_item;
 						if (is_array($item_tous[$_valeur])) {
 							$fichier_peut_etre[$_item] = $item_tous[$_valeur];

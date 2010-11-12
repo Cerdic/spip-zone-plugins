@@ -28,7 +28,7 @@ function langonet_tester_definition() {
 	$essai = _T('langonet:test_item_1_'.$variable);
 	$essai = _T('test_item_2_'.$variable);
 	$essai = _T("langonet:$fond1");
-	$essai = _T('langonet:'.$fond2);
+	$essai = _T('langonet:' . $fond2);
 	$essai = _T("langonet:".$fond3);
 
 	// VERIFICATION _L() : Erreurs
