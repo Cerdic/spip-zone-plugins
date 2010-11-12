@@ -307,12 +307,5 @@ function balise_CONFIG($p) {
 }
 }
 
-if (!defined('_DIR_PLUGIN_CFG')){
-	include_spip('inc/config');
-	if (!function_exists('lire_config')){
-		function lire_config($cfg='', $def=null, $unserialize=true) {
-			return spip_bonux_lire_config($cfg, $def, $unserialize);
-		}
-	}
-}
+include_spip('inc/config');
 ?>
