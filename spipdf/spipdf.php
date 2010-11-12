@@ -14,15 +14,17 @@
  * @version      0.1
  */
 
- // charset
-//define('SPIPDF_CHARSET', 'UTF-8');
-define('SPIPDF_CHARSET', 'ISO-8859-15');
+// Charset (qui peut être défini dans un fichier d'options
+if (!defined('SPIPDF_CHARSET')) {
+	//define('SPIPDF_CHARSET', 'UTF-8');
+	define('SPIPDF_CHARSET', 'ISO-8859-15');
+}
 
 // utilisé pour le constructeur de HTML2PDF
 if(SPIPDF_CHARSET=='UTF-8') {
-    define('SPIPDF_UNICODE', true);
+	define('SPIPDF_UNICODE', true);
 } else {
-    define('SPIPDF_UNICODE', false);
+	define('SPIPDF_UNICODE', false);
 }
 
 // pour les function unicode2charset
@@ -41,38 +43,41 @@ function spipdf_first_clean($texte) {
 		$trans = array_flip($trans);
 		$trans["<br />\n"] = '<BR>'; // Pour éviter que le \n ne se tranforme en espace dans les <DIV class=spip_code> (TT, tag SPIP : code)
 
-        // gestion d'un encodage latin1
-        if(SPIPDF_CHARSET=='ISO-8859-15' || SPIPDF_CHARSET=='iso-8859-15') {
-            $trans['&#176;'] = '°';
-            $trans["&#339;"] = 'oe';
-            $trans["&#8211;"] = '-';
-            $trans["&#8216;"] = '\'';
-            $trans["&#8217;"] = '\'';
-            $trans["&#8220;"] = '"';
-            $trans["&#8221;"] = '"';
-            $trans["&#8230;"] = '...';
-            $trans["&#8364;"] = 'Euros';
-            $trans["&ucirc;"] = "û";
-            $trans['->'] = '-»';
-            $trans['<-'] = '«-';
-            $trans['&mdash;'] = '-';
-            $trans['&deg;']='°';
-            $trans['œ']='oe';
-            $trans['Œ']='OE';
-            $trans['…']='...';
-            $trans['&euro;']='Euros';
-            $trans['€']='Euros';
-            $trans['&copy;'] ='©';
-        }
-        // pas d'insécable
+		// gestion d'un encodage latin1
+		if(SPIPDF_CHARSET=='ISO-8859-15' || SPIPDF_CHARSET=='iso-8859-15') {
+			$trans['&#176;'] = '°';
+			$trans["&#339;"] = 'oe';
+			$trans["&#8211;"] = '-';
+			$trans["&#8216;"] = '\'';
+			$trans["&#8217;"] = '\'';
+			$trans["&#8220;"] = '"';
+			$trans["&#8221;"] = '"';
+			$trans["&#8230;"] = '...';
+			$trans["&#8364;"] = 'Euros';
+			$trans["&ucirc;"] = "û";
+			$trans['->'] = '-»';
+			$trans['<-'] = '«-';
+			$trans['&mdash;'] = '-';
+			$trans['&deg;']='°';
+			$trans['œ']='oe';
+			$trans['Œ']='OE';
+			$trans['…']='...';
+			$trans['&euro;']='Euros';
+			$trans['€']='Euros';
+			$trans['&copy;'] ='©';
+		}
+		// pas d'insécable
 		$trans['&nbsp;'] = ' ';
 
 		// certains titles font paniquer l'analyse
 		$texte = preg_replace(',title=".*",msU', 'title=""', $texte);
 
 		$texte = strtr($texte, $trans);
-		$texte = unicode2charset(charset2unicode($texte), SPIPDF_CHARSET); // repasser tout dans un charset acceptable par export PDF
-
+		if(SPIPDF_CHARSET=='UTF-8')
+			$texte = charset2unicode($texte);
+		else
+			$texte = unicode2charset(charset2unicode($texte), SPIPDF_CHARSET); // repasser tout dans un charset acceptable par export PDF
+		
 		return $texte;
 }
 
