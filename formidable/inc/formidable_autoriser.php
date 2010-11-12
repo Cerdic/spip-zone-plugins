@@ -17,6 +17,9 @@ function autoriser_formulaires_bouton_dist($faire, $type, $id, $qui, $options){
 	if (isset($qui['statut']) and $qui['statut'] <= '1comite') return true;
 	else return false;
 }
+function autoriser_formulaires21_bouton_dist($faire, $type, $id, $qui, $options){
+	return autoriser('bouton', 'formulaires', $id, $qui, $options);
+}
 
 // On peut répondre à un formulaire si :
 // - c'est un formulaire classique
