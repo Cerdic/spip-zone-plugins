@@ -14,7 +14,7 @@
 	type %GROUP; #REQUIRED
 >
 
-<!ELEMENT site>
+<!ELEMENT site EMPTY>
 <!ATTLIST site
 	alias %NAME; #REQUIRED
 	src %URI; #REQUIRED

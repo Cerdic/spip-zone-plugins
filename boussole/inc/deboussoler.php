@@ -117,14 +117,13 @@ function boussole_valider_xml($url, &$erreur) {
 	// On verifie la validite du contenu en fonction de la dtd
 	$valider_xml = charger_fonction('valider', 'xml');
 	$retour = $valider_xml(recuperer_page($url));
-
-// 	if ($retour[1] === false) {
-// 		$ok = false;
-// 	}
-// 	else if (count($retour[1] > 0)) {
-// 		$erreur['detail'] = $retour[1];
-// 		$ok = false;
-// 	}
+	if ($retour[1] === false) {
+		$ok = false;
+	}
+	else if ($retour[1]) {
+		$erreur['detail'] = $retour[1];
+		$ok = false;
+	}
 
 	return $ok;
 }
