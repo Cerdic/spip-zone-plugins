@@ -34,13 +34,10 @@ include_spip('inc/charsets') ;
 // http://zone.spip.org/trac/spip-zone/browser/_plugins_/article_pdf
 function spipdf_first_clean($texte) {
 
-		//Translation des codes iso PB avec l'utilisation de <code>
-		$trans = get_html_translation_table(HTML_ENTITIES);
-
 		// supprimer les remarques HTML (du Couteau Suisse ?)
 		$texte = preg_replace(',<!-- .* -->,msU', '', $texte);
 		
-		$trans = array_flip($trans);
+		$trans = array();
 		$trans["<br />\n"] = '<BR>'; // Pour éviter que le \n ne se tranforme en espace dans les <DIV class=spip_code> (TT, tag SPIP : code)
 
 		// gestion d'un encodage latin1
@@ -76,7 +73,10 @@ function spipdf_first_clean($texte) {
 		if(SPIPDF_CHARSET=='UTF-8')
 			$texte = charset2unicode($texte);
 		else
-			$texte = unicode2charset(charset2unicode($texte), SPIPDF_CHARSET); // repasser tout dans un charset acceptable par export PDF
+			$texte = unicode2charset(charset2unicode($texte), SPIPDF_CHARSET); // Repasser tout dans le charset demandé
+		
+		// Décoder les codes HTML dans le charset final
+		$texte = html_entity_decode($texte, ENT_NOQUOTES, SPIPDF_CHARSET);
 		
 		return $texte;
 }
