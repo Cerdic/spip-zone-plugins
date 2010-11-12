@@ -159,14 +159,14 @@ function presenter_objet_boucle($row,$afficher){
 
 /* Gestion de l'affichage des documents */
 
-$GLOBALS['gestdoc_exec_colonne_document'][] = 'objet_edit';
+//$GLOBALS['gestdoc_exec_colonne_document'][] = 'objet_edit';
 
 //TODO parser sur tous les champs extra ceux qui ont un traitement propre pour les ajouter ici
 //$GLOBALS['gestdoc_liste_champs'][] = 'descriptif';
 
 
 
-function objets_post_edition($flux){}
+//function objets_post_edition($flux){}
 
 function objets_affiche_gauche($flux){
 	if($flux['args']['exec']=='objet_edit'){
@@ -200,6 +200,26 @@ function objets_affiche_gauche($flux){
 		
 	}
 	return $flux;
+}
+
+
+function objets_declarer_url_objets($objets){
+	$objets_installes=liste_objets_meta();
+	return array_merge($objets,$objets_installes);
+	
+}
+
+// Si pas de critère "statut", on affiche que les réponses publiées
+function objets_pre_boucle($boucle){
+	$objets_installes=liste_objets_meta();
+	if (in_array($boucle->type_requete,$objets_installes)) {
+		$id_table = $boucle->id_table;
+		$statut = "$id_table.statut";
+		if (!isset($boucle->modificateur['criteres']['statut']) and !isset($boucle->modificateur['tout'])){
+			$boucle->where[] = array("'='", "'$statut'", "sql_quote('publie')");
+		}
+	}
+	return $boucle;
 }
 
 

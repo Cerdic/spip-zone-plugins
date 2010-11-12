@@ -24,10 +24,12 @@ function objets_declarer_tables_interfaces($interface){
 			
 			$interface['tables_jointures']['spip_'.$objet][]= $objet.'_liens';
 			
+			//permet de prendre le titre dans la génération des urls
+			$interface['table_titre'][$objet] = "titre,'' as lang";
+
 		}
 	}
-	
-	
+		
 	return $interface;
 }
 
@@ -47,7 +49,8 @@ function objets_declarer_tables_principales($tables_principales){
 				"titre"	=> "text DEFAULT '' NOT NULL",
 				"statut"	=> "VARCHAR(10) DEFAULT 'prepa' NOT NULL",
 				"id_secteur"	=> "bigint(21) NOT NULL",
-				"maj"	=> "TIMESTAMP"
+				"maj"	=> "TIMESTAMP",
+			  "date"  => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 				);
 		
 		 $objets_key = array(
@@ -56,9 +59,7 @@ function objets_declarer_tables_principales($tables_principales){
 		
 		$tables_principales['spip_'.$objet] =
 			array('field' => $objets, 'key' => $objets_key);
-
-
-			
+		
 			
 		}
 		

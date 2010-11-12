@@ -64,14 +64,14 @@ function revisions_objet($id_objet, $c=false) {
     $c = array();
     
     $champs = array(
-      'titre' => _request('titre')
+      'titre' => _request('titre'),
+      'statut'=> _request('statut')
     );
 
     //on récupére les champs extra de l'objet
     include_spip('inc/cextras_gerer');
     $champs=array_merge($champs,extras_champs(table_objet_sql($objet),''));
 
-        
     
     foreach ($champs as $champ=>$desc_sql) {
       if (($a = _request($champ)) !== null) {
@@ -89,8 +89,11 @@ function revisions_objet($id_objet, $c=false) {
     ),
     $c);
   include_spip('inc/objets_fonctions');
-  // on fait les liaisons entre les objets et les parents
+  // on fait les liaisons entre les objets et les parents ( article ou rubrique ou autre )
   objets_set_parents($objet,$id_objet,_request('parents'));
+  
+  
+  
 } 
 
 

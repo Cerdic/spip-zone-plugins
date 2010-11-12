@@ -82,6 +82,11 @@
 		<nom>declarer_url_objets</nom>
 		<inclure>objets_pipelines.php</inclure>
 	</pipeline>
+	<!-- permet dajouter le critere statut publie automatiquement -->
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>objets_pipelines.php</inclure>
+	</pipeline>
 
 	
 	<necessite id="SPIP" version="[2.1.0;]" />

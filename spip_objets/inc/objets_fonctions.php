@@ -18,9 +18,10 @@ function objets_vignette_objet($objet,$taille,$extension){
 	//on va matcher sur tous les paramétres 
 	if($vignette=find_in_path("images/".$objet."-".$taille.".".$extension)) return $vignette;
 
+	if($vignette=find_in_path("images/objet-".$taille.".png")) return $vignette;
 	// TODO : a gérer les autres cas ... autre extension, autre taille dispo, .. etc
 	//attention on gére dans le code les différentes dimensions de vignettes 
-	return find_in_path("images/objet-".$taille.".png");
+	return find_in_path("images/objet-24.png");
 }
 
 

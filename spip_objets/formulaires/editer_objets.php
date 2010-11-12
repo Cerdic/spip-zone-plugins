@@ -28,11 +28,7 @@ function formulaires_editer_objets_charger_dist($objet,$id_objet='new', $retour=
 			$valeurs['id_secteur']=sql_getfetsel("id_secteur","spip_rubriques","id_rubrique=".(int)$id_rubrique);
 		}
 	}else{//ce n'est pas un objet en cours de création
-		if($statut=_request('statut')){
-			$valeurs['statut']=$statut;
-		}else {
 			$valeurs['statut']=sql_getfetsel("statut","spip_".$objet,'id_'.$nom_objet."=".(int)$id_objet);
-		}
 	}
 	
 	
@@ -47,7 +43,15 @@ function formulaires_editer_objets_verifier_dist($objet,$id_objet='new', $retour
 
 function formulaires_editer_objets_traiter_dist($objet,$id_objet='new', $retour=''){
 	$nom_objet=objets_nom_objet($objet);
-	return formulaires_editer_objet_traiter($objet, $id_objet, '', '', $retour, '');
+	
+	if($id_objet!="new"){
+		//on peut modifier le statut d'un objet existant
+		sql_update('spip_'.$objet,array('statut'=>_request('statut')),'id_'.$nom_objet.'='.$id_objet);
+	}
+		
+	$retour=formulaires_editer_objet_traiter($objet, $id_objet, '', '', $retour, '');
+	
+	return $retour;
 }
 
 ?>
