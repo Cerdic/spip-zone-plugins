@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_objets_configuration' => 'Saisissez le nom du nouvel objet a g&eacute;rer :', //icone_creer_sous_rubrique
 	'icone_creer_objet' => 'Cr&eacute;er un nouveau',
 	'item_nouveau'=>'Nouvel objet',
+	'info_modifier_objet'=>'Saisissez votre  @objet@',
 
 	// L
 	'label_objet'=>"Choisissez le nom de l'objet a gérer",
@@ -45,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_descriptif' => 'Descriptif',
 	'label_texte' => 'Texte',
 	'liste_des_actus' => 'Liste des actualit&eacute;s',
+	'logo'=>"Logo",
 
 	// N
 	'nom_objet_supplementaire'=>"nom_objet_supplementaire",
@@ -59,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo'=>'Logo',
   //texte_objets_configuration
   //titre_page_objet_edit
-  'texte_nouvel_objet'=>'Saisissez votre '
+  'texte_nouvel_objet'=>'Remplissez les différentes zones de saisie puis validez'
 
 	
 );

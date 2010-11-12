@@ -9,7 +9,7 @@
 		Permettre d ajouter des nouveaux objets dans SPIP de mani&egrave;re simple avec quelques clics.
 	</description>
 	
-	<icon>images/actu-128.gif</icon>
+	<icon>images/objet-24.png</icon>
 	<prefix>objets</prefix>
 
 	<fonctions>objets_fonctions.php</fonctions>
@@ -17,17 +17,17 @@
 		 
 	<!--
 	<bouton id='objets' parent='naviguer'>
-		<icone>images/actu-24.gif</icone>
+		<icone>images/objet-24.png</icone>
 		<titre>objets:actus</titre>
 	</bouton>
 	-->
 	<!-- On gere les 2 cas bandeau ou pas -->
 	<bouton id='objets_configuration' parent='bando_configuration'>
-		<icone>images/objets-24.png</icone>
+		<icone>images/objet-24.png</icone>
 		<titre>objets:gestion_objets</titre>
 	</bouton>
 	<onglet id='objets_configuration' parent='configuration'>
-		<icone>images/objets-24.png</icone>
+		<icone>images/objet-24.png</icone>
 		<titre>objets:gestion_objets</titre>
 	</onglet>
 
@@ -89,7 +89,7 @@
 	<necessite id="saisies" version="[1.8.5;]" />
 	<!-- filtre |icone et boucles CONDITIONS -->
 	<necessite id="spip_bonux" version="[1.8.4;]" />
-	<necessite id="cextras" version="[1.7.1;]" />
+	<necessite id="cextras" version="[1.6.1;]" />
 	<necessite id="gestdoc" version="[1.4.2;]" />
 	<categorie>outil</categorie>
 </plugin>

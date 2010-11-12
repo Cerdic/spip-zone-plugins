@@ -1,8 +1,8 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	#ENV**{icone_retour}
-	[<:objets:info_modifier_objet:>
-	<h1>(#ENV{titre,<:objets:texte_nouvel_objet:> [(#ENV{nom_objet})] })</h1>]
+	<:objets:info_modifier_objet{objet=#ENV{nom_objet}}:>
+	<h1>[(#ENV{titre,<:objets:texte_nouvel_objet:>})]</h1>
 </div>
 #SET{retour,(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique,#ENV{id_rubrique,0}})}
 

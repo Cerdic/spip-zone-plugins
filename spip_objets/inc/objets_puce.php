@@ -61,14 +61,17 @@ function objets_puce_statut($id_objet, $statut, $id_rubrique, $objet, $ajax='') 
   $clip = 1+ (11*$coord[$statut]);
 
   if ($ajax){
-    return  "<span class='puce_objet_fixe'>"
+    //Pour le moment on est toujours dans ce cas la ... en attendant de bien le gérer
+  	return  "<span class='puce_objet_fixe'>"
     . $inser_puce
     . "</span>" ;
+    
     /* 
      * TODO : gestion du statut de l'objet ... a priori il faudrait aussi un fichier action/instituer_OBJET 
      * 
      * 
-    . "<span class='puce_article_popup' id='statutdecal$objet$id_objet' style='margin-left: -".$clip."px;'>" //TODO : la classe n'est super bonne mais ca marche
+    . "<span class='puce_article_popup' id='statutdecal$objet$id_objet' style='margin-left: -".$clip."px;'>" 
+    //TODO : la classe n'est super bonne mais ca marche
 		. afficher_script_statut($id_objet, $nom_objet, -1, $puces[3], 'prepa', $titles['blanche'])
     . afficher_script_statut($id_objet, $nom_objet, -10, $puces[1], 'publie', $titles['verte'])
     . afficher_script_statut($id_objet, $nom_objet, -19, $puces[2], 'refuse', $titles['rouge'])

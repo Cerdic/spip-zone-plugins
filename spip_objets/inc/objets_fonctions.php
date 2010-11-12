@@ -37,7 +37,7 @@ function objets_nom_objet($objet){
 // utilisé dans action/editer_objets
 //permet de récupérer les liaisons d'un objet du plugin avec les autres objets  
 function objets_get_parents($id_objet,$objet,$serveur=''){
-	if(!$id_objet) return array();
+	if(!$id_objet || $id_objet=="new") return array();
 	$nom_objet=objets_nom_objet($objet);
 	
 	$where = "id_".$nom_objet."=".$id_objet;
@@ -45,6 +45,7 @@ function objets_get_parents($id_objet,$objet,$serveur=''){
 	
 		
 	//on reconstruit le format des tableaux de liaison 'rubrique|1' 'article|1'
+	//ce tableau de liaison sera réutiliser avec le sélecteur générique
 	$retour=array();
 	foreach ($id_parents as $ligne) {
 		$retour[]=$ligne['objet']."|".$ligne['id_objet'];

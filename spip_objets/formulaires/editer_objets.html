@@ -1,30 +1,38 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_actu,new}'>
-	
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	[(#ENV{editable}|oui)
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
+
         <input type='hidden' name='id_objet' value='#ENV{id_objet}' />
         <input type='hidden' name='objet' value='#ENV{objet}' />
+        <input type='hidden' name='id_#ENV{nom_objet}' value='#ENV{id_objet}' />
         <input type='hidden' name='nom_objet' value='#ENV{nom_objet}' />
         <input type='hidden' name='redirect' value='#ENV{redirect}' />
-        
+        <input type='hidden' name='id_secteur' value='#ENV{id_secteur}' />
+        <input type='hidden' name='action' value='editer_objets' />
 		<ul>
 		[(#SAISIE{input, titre,
 			label=<:objets:label_titre:>,
 			obligatoire=oui})]
-			
+    <li>
+      <label>Statut</label>
+      <select name="statut">
+        <option value="prepa" [(#ENV{statut}|=={prepa}|oui) selected] >En cours de Rédaction</option>
+        <option value="publie" [(#ENV{statut}|=={publie}|oui) selected]>Publié</option>
+      </select>
+    </li>  
 		<li>
 			<label>Choisissez la rubrique associée</label>
       <INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>
 		</li>
-		<li>
+		<!-- <li>
 			<label>Choisissez l'article associé</label>
 			<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>
-		</li>	
+		</li>	-->
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

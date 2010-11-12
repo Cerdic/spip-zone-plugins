@@ -174,6 +174,7 @@ function objets_affiche_gauche($flux){
 		$objet=$flux['args']['objet'];
 		$nom_objet=objets_nom_objet($objet);
 		
+		// le titre du bloc logo est dans une globale
 		$GLOBALS['logo_libelles']['id_'.$nom_objet]= _T('objets:titre_logo');
 		
 		$iconifier = charger_fonction('iconifier', 'inc'); 
@@ -181,12 +182,20 @@ function objets_affiche_gauche($flux){
 		//$flag_editable = autoriser('modifier', 'evenement', $id_evenement, null, array('id_article' => $id_article));
 		
 		// Gestion du logo 
-		$flux['data'] .= $iconifier('id_'.$nom_objet, $flux['args']['id_objet'], 'objet_edit', $flag_editable);
+		//$flux['data'] .= $iconifier('id_'.$nom_objet, $flux['args']['id_objet'], 'objet_edit', $flag_editable);
+		$contexte = array(
+			'id_objet'=>$flux['args']['id_objet'],
+			'objet'=>$flux['args']['objet'],
+			'nom_objet'=>$nom_objet,
+			'retour'=>generer_url_ecrire("objet_edit","id_objet=".$flux['args']['id_objet']."&objet=".$flux['args']['objet']."&id_rubrique=".$flux['args']['id_rubrique']."&id_article=".$flux['args']['id_article'])
+		);
+    $flux['data'].= recuperer_fond("prive/navigation/logo_objets",$contexte);
 		
+				
 		// Gestion des documents
 		// TODO : on ne peut pas gerer ca avec mediatheque car il se base sur le nom de l'objet déduit de l'exec et donc objet_edit, et donc il récupére "objet"
 		// Mais cela revient quasiment au même ppuisque c'est le code de mediatheque qui est reporté ici
-		$flux['data'].=recuperer_fond('prive/editer/colonne_document',array('objet'=>$objet,'id_objet'=>$flux['args']['id_objet'])); 		
+		$flux['data'].="<div class='cadre'>".recuperer_fond('prive/editer/colonne_document',array('objet'=>$objet,'id_objet'=>$flux['args']['id_objet']))."</div>"; 		
 		
 		
 	}

@@ -14,9 +14,27 @@ function formulaires_editer_objets_charger_dist($objet,$id_objet='new', $retour=
 	$valeurs['objet']=$objet;
 	$valeurs['id_objet']=$id_objet;
 	$valeurs['nom_objet']=$nom_objet;
+	$valeurs['id_'.$nom_objet]=$id_objet;
 	$valeurs['redirect']=$retour;
+	
 	// si on est dans le cas ou id_objet est new on récupére un tableau vide, c'est directement géré dans la fonction
 	$valeurs['parents']=objets_get_parents($id_objet,$objet);
+	
+	//on récupére id_secteur de la rubrique dans laquelle on est
+	if($id_objet=="new") {
+		if($id_article=_request('id_article')){
+			$valeurs['id_secteur']=sql_getfetsel("id_secteur","spip_articles","id_article=".(int)$id_article);
+		}elseif($id_rubrique=_request('id_rubrique')){
+			$valeurs['id_secteur']=sql_getfetsel("id_secteur","spip_rubriques","id_rubrique=".(int)$id_rubrique);
+		}
+	}else{//ce n'est pas un objet en cours de création
+		if($statut=_request('statut')){
+			$valeurs['statut']=$statut;
+		}else {
+			$valeurs['statut']=sql_getfetsel("statut","spip_".$objet,'id_'.$nom_objet."=".(int)$id_objet);
+		}
+	}
+	
 	
 	return $valeurs;
 }
