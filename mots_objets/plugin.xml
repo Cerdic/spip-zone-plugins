@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]Mots Objets[en]Key-words Objects</multi></nom>
+	<nom><multi>[fr]Mots Objets[en]Key-words Objects[ru]Добавление кейвордов</multi></nom>
 	<auteur>Cyril Marion - [Ateliers CYM->http://www.cym.fr]</auteur>
 	
 	<icon>images/tag_purple-32.png</icon>
@@ -15,6 +15,7 @@
 	<multi>
 	[fr] Permet d'ajouter des mots cl&eacute; sur les auteurs et sur les documents (avec le plugin M&eacute;diath&egrave;que)
 	[en] Allows to attach key-words to SPIP authors and documents (with Media Library plugin) 
+	[ru] Позволяет добавлять ключевые слова к авторам и документам (с плагином  M&eacute;diath&egrave;que) 
 	</multi>
 	</description>
 	
@@ -38,13 +39,13 @@
 		<inclure>mots_objets_autorisations.php</inclure>
 	</pipeline>
 
-	<!-- pouvoir ajouter des mots-cl� aux objets de type auteur -->
+	<!-- pouvoir ajouter des mots-cl aux objets de type auteur -->
 	<pipeline>
 		<nom>libelle_association_mots</nom>
 		<inclure>mots_objets_pipelines.php</inclure>
 	</pipeline>	
 
-	<!-- afficher le bloc des mots cl� dans la colonne du milieu de la page vue auteur-->
+	<!-- afficher le bloc des mots cl dans la colonne du milieu de la page vue auteur-->
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>mots_objets_pipelines.php</inclure>
