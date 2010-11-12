@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meta_keywords' => 'meta keywords',
 
 // Panneau de configuration
-'configuration_metas' => 'Metas tags',
+'configuration_metas' => 'Meta tags',
 'aide_ecrire_metas' => '<h4>Meta tags</h4>
 <p>Here you can configure the Meta tags for your website.</p>
 <p>for more information, please read its <a href="http://www.spip-contrib.net/?rubrique1250">online manual</a>.</p>',
