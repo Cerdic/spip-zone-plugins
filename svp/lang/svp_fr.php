@@ -88,7 +88,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'Actualis&eacute; le',
 	'label_critere_phrase' => 'Rechercher des plugins',
 	'label_critere_categorie' => 'dans',
-	'label_critere_etat' => 'et pour',
+	'label_critere_etat' => 'pour',
+	'label_critere_doublon' => 'et',
 	'label_fichier_depot' => 'Fichier des paquets du d&eacute;p&ocirc;t',
 	'label_modifier_depot' => 'Modifier le d&eacute;p&ocirc;t',
 	'label_n_autres_contributions' => 'autres contributions',
@@ -129,6 +130,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_depots' => 'G&eacute;rer les d&eacute;p&ocirc;ts',
 	'onglet_plugins' => 'Rechercher un plugin',
 	'option_categorie_toute' => 'Toutes les cat&eacute;gories',
+	'option_doublon_non' => 'La version la plus r&eacute;cente',
+	'option_doublon_oui' => 'Toutes les versions compatibles',
 	'option_etat_tout' => 'Tous les &eacute;tats',
 
 // R

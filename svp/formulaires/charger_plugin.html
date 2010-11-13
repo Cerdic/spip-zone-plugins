@@ -38,12 +38,12 @@
 									<option value="experimental"[ (#ENV{etat}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
 								</select>
 							</li>
-							<li class="editer_mode obligatoire[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
-								<label for="mode">Mode (debug)</label>
-								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{mode})</span>]
-								<select name="mode" id="mode">
-									<option value="spip"[ (#ENV{mode}|=={spip}|oui)selected="selected"]>Recherche type SPIP</option>
-									<option value="svp"[ (#ENV{mode}|=={svp}|oui)selected="selected"]>Recherche type SVP</option>
+							<li class="editer_doublon obligatoire[(#ENV{erreurs}|table_valeur{doublon}|oui) erreur]">
+								<label for="doublon"><:svp:label_critere_doublon:></label>
+								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{doublon})</span>]
+								<select name="doublon" id="doublon">
+									<option value="non"[ (#ENV{doublon}|=={non}|oui)selected="selected"]><:svp:option_doublon_non:></option>
+									<option value="oui"[ (#ENV{doublon}|=={oui}|oui)selected="selected"]><:svp:option_doublon_oui:></option>
 								</select>
 							</li>
 						</ul>
