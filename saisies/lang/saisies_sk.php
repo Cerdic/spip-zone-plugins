@@ -19,13 +19,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mois' => 'Mois', # NEW
 
 	// O
+	'option_aff_art_interface_explication' => 'Afficher uniquement les articles de la langue de l\'utilisateur', # NEW
+	'option_aff_art_interface_label' => 'Affichage multilingue', # NEW
+	'option_aff_langue_explication' => 'Affiche la langue de l\'article ou rubrique s&eacute;lectionn&eacute; devant le titre', # NEW
+	'option_aff_langue_label' => 'Afficher la langue', # NEW
+	'option_aff_rub_interface_explication' => 'Afficher uniquement les rubriques de la langue de l\'utilisateur', # NEW
+	'option_aff_rub_interface_label' => 'Affichage multilingue', # NEW
 	'option_attention_explication' => '<NEW>Spr&aacute;va d&ocirc;le&#382;itej&#353;ia ako vysvetl&iacute;vka.',
 	'option_attention_label' => '<NEW>Upozornenie',
 	'option_cacher_option_intro_label' => 'Cacher le premier choix vide', # NEW
 	'option_choix_destinataires_explication' => '<NEW>Autori, z ktor&yacute;ch si pou&#382;&iacute;vate&#318; m&ocirc;&#382;e vybra&#357;. Ak si nevyberie, bude to autor, ktor&yacute; nain&#353;taloval str&aacute;nku, ktor&aacute; m&aacute; by&#357; vybran&aacute;.',
 	'option_choix_destinataires_label' => '<NEW>Mo&#382;n&iacute; pr&iacute;jemcovia',
 	'option_class_label' => '<NEW>&#270;al&#353;ie CSS triedy',
-	'option_cols_explication' => '<NEW>&#352;&iacute;rka po&#318;a v znakoch. T&aacute;to mo&#382;nos&#357; sa v&#382;dy nepou&#382;&iacute;va, lebo CSS &#353;t&yacute;ly va&#353;ej str&aacute;nky to m&ocirc;&#382;u zru&#353;i&#357;.',
+	'option_cols_explication' => '<NEW>&#352;&iacute;rka po&#318;a v znakoch. T&aacute;to mo&#382;nos&#357; sa v&#382;dy nepou&#382;&iacute;va, lebo CSS &#353;t&yacute;ly va&#353;ej str&aacute;nky to m&ocirc;&#382;u zru&#353;i&#357;.', # MODIF
 	'option_cols_label' => '<NEW>&#352;&iacute;rka',
 	'option_datas_explication' => 'Vous devez indiquez un choix par ligne sous la forme "cle|Label du choix"', # NEW
 	'option_datas_label' => 'Liste des choix possibles', # NEW
@@ -51,6 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_label_label' => 'Label', # MODIF
 	'option_maxlength_explication' => 'The user can not type more characters than this number.', # MODIF
 	'option_maxlength_label' => 'Maximum number of characters', # MODIF
+	'option_multiple_explication' => 'L\'utilisateur pourra s&eacute;lectionner plusieurs valeurs', # NEW
+	'option_multiple_label' => 'S&eacute;lection multiple', # NEW
 	'option_nom_explication' => 'A digital name that identifies the field. It should contain only lowercase alphanumeric characters or the character "_".', # MODIF
 	'option_nom_label' => 'Field name', # MODIF
 	'option_obligatoire_label' => 'Required field', # MODIF
@@ -79,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_case_explication' => 'Permet d\'activer ou de d&eacute;sactiver quelque chose.', # NEW
 	'saisie_case_titre' => 'Case unique', # NEW
 	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.', # NEW
-	'saisie_checkbox_titre' => 'Cases à cocher', # NEW
+	'saisie_checkbox_titre' => 'Cases &agrave; cocher', # NEW
 	'saisie_destinataires_explication' => '<NEW><MODIF>Umo&#382;&#328;uje vybra&#357; jedn&eacute;ho alebo viacer&yacute;ch pr&iacute;jemcov z predvolen&yacute;ch autorov .',
 	'saisie_destinataires_titre' => '<NEW>Pr&iacute;jemcovia',
 	'saisie_explication_explication' => 'Un texte explicatif g&eacute;n&eacute;ral.', # NEW
@@ -99,7 +107,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_radio_defaut_choix3' => 'Trois', # NEW
 	'saisie_radio_explication' => 'Permet de choisir une option parmis plusieurs disponibles.', # NEW
 	'saisie_radio_titre' => 'Boutons radios', # NEW
-	'saisie_selection_explication' => 'Choisir une option dans une liste déroulante.', # NEW
+	'saisie_selecteur_article' => 'Affiche un navigateur de s&eacute;lection d\'article', # NEW
+	'saisie_selecteur_article_titre' => 'S&eacute;lecteur d\'article', # NEW
+	'saisie_selecteur_rubrique' => 'Affiche un navigateur de s&eacute;lection de rubrique', # NEW
+	'saisie_selecteur_rubrique_article' => 'Affiche un navigateur de s&eacute;lection d\'article ou de rubrique', # NEW
+	'saisie_selecteur_rubrique_article_titre' => 'S&eacute;lecteur d\'article ou rubrique', # NEW
+	'saisie_selecteur_rubrique_titre' => 'S&eacute;lecteur de rubrique', # NEW
+	'saisie_selection_explication' => 'Choisir une option dans une liste d&eacute;roulante.', # NEW
 	'saisie_selection_multiple_explication' => 'Permet de choisir plusieurs options avec une liste.', # NEW
 	'saisie_selection_multiple_titre' => 'S&eacute;lection multiple', # NEW
 	'saisie_selection_titre' => 'Liste d&eacute;roulante', # NEW
@@ -110,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_visiteurs' => '<NEW>V&#353;etci n&aacute;v&#353;tevn&iacute;ci (aj nezaregistrovan&iacute;)',
 
 	// V
-	'vue_sans_reponse' => '<i>Sans réponse</i>', # NEW
+	'vue_sans_reponse' => '<i>Sans r&eacute;ponse</i>', # NEW
 
 	// Z
 	'z' => 'zzz', # MODI
