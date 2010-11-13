@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Thèmes pour l'interface privée</nom>
 	<auteur>ARNO*</auteur>
-	<version>0.4</version>
-	<etat>dev</etat>
+	<version>0.5</version>
+	<etat>stable</etat>
 	<description>
 		Des interfaces alternatives pour SPIP 2.1.
 	</description>
@@ -15,7 +15,7 @@
 		<inclure>themes_interface_privee_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.0-beta;]" />
-	<necessite id="css_imbriques" version="[0.9;]" />
+	<necessite id="css_imbriques" version="[1.3;]" />
 	<categorie>maintenance</categorie>
 </plugin>
 

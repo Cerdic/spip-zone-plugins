@@ -23,8 +23,50 @@
 
 
 body {
-	background-color: [#(#ENV{couleur_claire}|couleur_saturation{0.03})]
+	background-color: [#(#ENV{couleur_claire}|couleur_saturation{0.03})];
 }
+
+
+#bandeau-principal  .bandeau_sec {
+		-spip-border-bottom-left-radius: 4px;
+		-spip-border-bottom-right-radius: 4px;
+}
+.icone36 {
+	a img, img {
+		-spip-border-radius: 4px;
+	}
+}
+.cadre, .dater {
+	-spip-border-radius: 4px;
+	
+	.titrem {
+		-spip-border-top-left-radius: 4px;
+		-spip-border-top-right-radius: 4px;
+	}
+}
+.cadre-forum {
+	-spip-border-bottom-left-radius: 0px;
+	-spip-border-bottom-right-radius: 0px;
+}
+.cadre-thread-forum {
+	-spip-border-radius: 0px;
+}
+.fiche_objet, .no_onglets .fiche_objet {
+	-spip-border-radius: 4px;
+}
+
+div.liste, div.cadre-liste {
+	-spip-border-bottom-left-radius: 0px;
+	-spip-border-bottom-right-radius: 0px;
+}
+.entete-formulaire {
+		-spip-border-top-left-radius: 4px;
+		-spip-border-top-right-radius: 4px;
+}
+
+
+
+
 
 /* elements du formulaire */
 .formulaire_spip input.text,
@@ -51,7 +93,7 @@ body {
 	position:relative;
 	display:inline;
 
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{eeeeee, center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{e0e0e0, center [(#GET{right})] no-repeat })]
 
 	color: #4444;
 	line-height: 11px;
@@ -89,7 +131,7 @@ body {
 	color: #444444;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{e0e0e0, bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip li.editer_parent.obligatoire label,
@@ -118,7 +160,7 @@ body {
 	display: block;
 	margin: 0px;
 	padding-top: 7px;
-	padding-bottom: 13px;
+	padding-bottom: 7px;
 	padding-#GET{left}: 10px;
 	padding-#GET{right}: 5px;
 	font-family: verdana, arial, helvetica, sans;
@@ -126,12 +168,12 @@ body {
 	font-weight: normal;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+	-spip-gradient: top, #f0f0f0, #cccccc;
 }
 
 .formulaire_spip fieldset li label {
 	color: #444444;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{eeeeee, center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{e0e0e0, center [(#GET{right})] no-repeat })]
 }
 
 .formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
@@ -162,15 +204,21 @@ body {
 
 /* Bouton de validation */
 input[type="submit"] {
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_claire})], center center })]
+	background-color: [#(#ENV{couleur_claire}|couleur_luminance{0.3})];
+	-spip-gradient: top, [#(#ENV{couleur_claire}|couleur_luminance{0.2})], [#(#ENV{couleur_claire}|couleur_luminance{0.4})];
+	-spip-border-radius: 12px;
 	border: 1px solid [(#GET{claire})];
-	padding: 3px 6px;
+	padding: 3px 10px;
 	font-weight: bold;
-	color: [#(#GET{foncee}|couleur_foncer)];
+	color: black;
+	-spip-transition-property: background-color color border-color;
+	-spip-transition-duration: 0.1s;
 }
 input[type="submit"]:hover {
 	border: 1px solid [(#GET{foncee})];
-	color: black;
+	color: white;
+	background-color: [#(#ENV{couleur_claire}|couleur_luminance{0.7})];
+	-spip-gradient: top, [#(#ENV{couleur_claire}|couleur_luminance{0.6})], [#(#ENV{couleur_claire}|couleur_luminance{0.8})];
 }
 
 
@@ -218,19 +266,21 @@ input[type="submit"]:hover {
 
 
 .accueil #navigation .cadre-r .titrem {
-	background-color: white;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{#GET{claire}, bottom [(#GET{left})] no-repeat })]
+	background-color: [#(#ENV{couleur_foncee}|couleur_luminance{0.3})];
+	-spip-gradient: top, [#(#ENV{couleur_foncee}|couleur_luminance{0.2})], [#(#ENV{couleur_foncee}|couleur_luminance{0.4})];
 	padding-top: 6px;
-	padding-bottom: 10px;
+	padding-bottom: 6px;
 }
 
 .configuration #contenu .cadre-couleur .cadre_padding .titrem,
 .configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { 
 	text-transform: none;
 	background-color: white;
-	padding-bottom: 11px;
 	color: #444444;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+	padding-top: 6px;
+	padding-bottom: 6px;
+	background-color: #eeeeee;
+	-spip-gradient: top, #f0f0f0, #cccccc;
 }
 .configuration #contenu .cadre-couleur .titrem { background-color: #GET{claire}; }
 
@@ -243,3 +293,4 @@ input[type="submit"]:hover {
 	border-left: 0px;
 }
 
+#FILTRE{css_imbriques_decouper}
