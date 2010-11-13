@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/simplecart/lang/
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -43,9 +45,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_merchant_id_explication' => 'Num&eacute;ro d\'identification de votre compte DineroMail sans l\'indicateur digital ',
 	'dineromail_payments_methods' => 'Moyen de paiement DineroMail',
 	'dineromail_payments_methods_explication' => 'Chaine de texte qui d&eacute;finit les moyens de paiement autoris&eacute;s. Laisser en blanc pour toutes les disponibilit&eacute;s dans le pays.',
+	'dineromail_see' => 'Voir',
 	'dineromail_seller_name' => 'Nom du vendeur',
 	'dineromail_seller_name_explication' => 'L&eacute;gende que le vendeur vut montrer dans l\'en-t&ecirc;te',
-	'dineromail_see' => 'Voir',
+
 	// E
 	'empty' => 'Vider',
 	'error_url' => 'URL achat erronn&eacute;',
@@ -84,7 +87,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'shipping_total_rate' => 'Co&ucirc;t d\'envoi en pourcentage de la somme totale',
 	'shipping_total_rate_explication' => 'Ajouter un co&ucirc;t d\'envoi proportionnel au co&ucirc;t de la commande',
 	'subtotal' => 'Sous-total',
-	
 
 	// T
 	'tax_and_shipping' => 'Frais et co&ucirc;t d\'envoi',

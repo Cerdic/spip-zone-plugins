@@ -45,9 +45,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_merchant_id_explication' => 'Merchant number ID of your DineroMail account, without verification digit',
 	'dineromail_payments_methods' => 'DineroMail\'s payment methods',
 	'dineromail_payments_methods_explication' => 'String to set payment methods enabled. Keep it blank to enable all methods available for the country',
+	'dineromail_see' => 'Ver', # NEW
 	'dineromail_seller_name' => 'Seller name',
 	'dineromail_seller_name_explication' => 'Text replacement for \'email\' in the header. Keep it blank for don\'t replace. ',
-	'dineromail_see' => 'See',
 
 	// E
 	'empty' => 'Empty',

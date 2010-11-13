@@ -45,9 +45,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_merchant_id_explication' => 'N&uacute;mero d\'identificaci&oacute; del teu compte DineroMail sense el d&iacute;git verificador',
 	'dineromail_payments_methods' => 'Mitjans de pagament a DineroMail',
 	'dineromail_payments_methods_explication' => 'Cadena de text que defineix els m&egrave;todes de pagament permesos. Deixar en blanc per habilitat tots els disponibles al pa&iacute;s.',
+	'dineromail_see' => 'Ver', # NEW
 	'dineromail_seller_name' => 'Nom del venedor',
 	'dineromail_seller_name_explication' => 'Llegenda que el venedor vol mostrar a l\'encap&ccedil;alament. Deixar en blanc per mostrar l\'e-mail associat al compte.',
-	'dineromail_see' => 'Ver',
+
 	// E
 	'empty' => 'Buidar',
 	'error_url' => 'URL compra err&ograve;nia',
