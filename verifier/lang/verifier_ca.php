@@ -8,15 +8,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_date' => 'La data no &eacute;s correcte.',
-	'erreur_date_format' => 'El format de la data no &eacute;s correcte.',
+	'erreur_code_postal' => 'Ce code postal est incorrect.', # NEW
+	'erreur_date' => 'El format de la data no &eacute;s correcte.', # MODIF
+	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.', # NEW
 	'erreur_email' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> no t&eacute; un format v&agrave;lid.',
 	'erreur_email_nondispo' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> ja s\'utilitza.',
 	'erreur_entier' => 'El valor ha de ser un nombre enter.',
 	'erreur_entier_entre' => 'El valor ha d\'estar compr&egrave;s entre @min@ i @max@.',
 	'erreur_entier_max' => 'El valor ha de ser inferior a @max@.',
 	'erreur_entier_min' => 'El valor ha de ser superior a @min@.',
-	'erreur_id_document' => 'Cet identifiant de document n\'est pas valide.', # NEW
+	'erreur_id_document' => 'Aquest identificador de document no &eacute;s v&agrave;lid.',
 	'erreur_numerique' => 'El format del n&uacute;mero no &eacute;s v&agrave;lid.',
 	'erreur_regex' => 'El format de la cadena no &eacute;s v&agrave;lida.',
 	'erreur_siren' => 'N&uacute;mero SIREN no v&agrave;lid.',

@@ -8,15 +8,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_date' => 'Das Datum ist nicht g&uuml;ltig',
-	'erreur_date_format' => 'Format des Datums ung&uuml;ltig',
+	'erreur_code_postal' => 'Ce code postal est incorrect.', # NEW
+	'erreur_date' => 'Fromat des Datums ung&uuml;ltig', # MODIF
+	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.', # NEW
 	'erreur_email' => 'Die Mailadresse  <em>@email@</em> hat einen Syntaxfehler.',
 	'erreur_email_nondispo' => 'Die Mailadresse <em>@email@</em>  wird bereits verwendet.',
 	'erreur_entier' => 'Der Wert mu&szlig; eine ganze Zahl sein.',
 	'erreur_entier_entre' => 'Der Wert mu&szlig; zwischen  @min@ und @max@ liegen.',
 	'erreur_entier_max' => 'Der Wert mu&szlig; kleiner als @max@ sein.',
 	'erreur_entier_min' => 'Der Wert mu&szlig; gr&ouml;&szlig;er als @min@ sein.',
-	'erreur_id_document' => 'Cet identifiant de document n\'est pas valide.', # NEW
+	'erreur_id_document' => 'Diese Dokumenten-ID ist ung&uuml;ltig',
 	'erreur_numerique' => 'Zahlenformat ung&uuml;ltig',
 	'erreur_regex' => 'Zeichenkettenformat ung&uuml;ltig',
 	'erreur_siren' => 'SIREN Nummer ung&uuml;ltig',

@@ -8,15 +8,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_date' => 'The date is invalid.',
-	'erreur_date_format' => 'The date format is invalid.',
+	'erreur_code_postal' => 'Ce code postal est incorrect.', # NEW
+	'erreur_date' => 'The date format is invalid.', # MODIF
+	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.', # NEW
 	'erreur_email' => 'The email address <em>@email@</em> is not correctly formatted.',
 	'erreur_email_nondispo' => 'The email address <em>@email@</em> has already been used.',
 	'erreur_entier' => 'The value must be an integer.',
 	'erreur_entier_entre' => 'The value must be between @min@ and @max@.',
 	'erreur_entier_max' => 'The value must be less than @max@.',
 	'erreur_entier_min' => 'The value must be greater than @min@.',
-	'erreur_id_document' => 'Cet identifiant de document n\'est pas valide.', # NEW
+	'erreur_id_document' => 'This document identifier is not valid.',
 	'erreur_numerique' => 'The number format is invalid.',
 	'erreur_regex' => 'The regex string is incorrectly formatted.',
 	'erreur_siren' => 'The SIREN number is invalid.',
