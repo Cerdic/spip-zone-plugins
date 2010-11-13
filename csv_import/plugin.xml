@@ -13,12 +13,18 @@ _ &#169; 2006-2009 - Licence GPL
 	<etat>
 	stable
 	</etat>
-	<description>
-	Import / Export de fichiers CSV pour les tables SPIP.
+	<description><multi>
+	[fr]Import / Export de fichiers CSV pour les tables SPIP.
 _ Le plugin permet &#224; l'administrateur de d&#233;finir les tables pour lesquelles import et/ou export sont autoris&#233;s : 
 Ce peut #234;tre les tables spip ou n'importe quelle autre table de la base.
 _ Les tables autoris&#233;es pour l'import/export qui ne sont pas des tables de spip sont declar&#233;es dynamiquement
 afin d'&#234;tre sauvegard&#233;es automatiquement par le plugin Super_Dump
+  [it]Importazione / Esportazione di file CSV per le tabelle di SPIP.
+_ Il plugin permette all'amministratore di definire le tabelle per le quali l'importazione e/o l'esportazione sono autorizzate: 
+Queste ultime possono essere tabelle di SPIP o qualsiasi altra tabella nel database.
+_ Le tabelle autorizzate per l'importazione/esportazione che non sono tabelle di SPIP vengono dichiarate dinamicamente
+al fine di essere salvate dal plugin Super_Dump
+  </multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Utilisation-du-plugin-CSV_IMPORT</lien> <!-- URI de documentation -->
 	<prefix> 
