@@ -30,7 +30,7 @@ function formulaires_charger_plugin_traiter_dist(){
 	// - correspondant a ces criteres
 	// - compatible avec la version SPIP installee sur le site
 	// - et n'etant pas deja installes
-	// tries selon la methode choisie ou nom si pas de phrase fournie
+	// tries par nom ou score
 	$plugins = svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip,
 											svp_lister_plugins_installes(),	$doublon, $tri);
 
@@ -38,7 +38,10 @@ function formulaires_charger_plugin_traiter_dist(){
 	if (!$plugins)
 		$retour['message_erreur'] = _T('svp:message_ok_aucun_plugin_trouve');
 	else {
-		$retour['message_ok']['resume'] = _T('svp:message_ok_plugins_trouves', array('nb_plugins' => count($plugins)));
+		$retour['message_ok']['resume'] = _T('svp:message_ok_plugins_trouves', 
+											array(
+												'nb_plugins' => count($plugins),
+												'tri' => _T('svp:info_tri_' . $tri)));
 		$retour['message_ok']['plugins'] = $plugins;
 	}
 	$retour['editable'] = true;
