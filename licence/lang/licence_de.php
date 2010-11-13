@@ -21,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_sa' => 'Creative Commons - Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen',
 	'description_cc_by_nd' => 'Creative Commons - Namensnennung-KeineBearbeitung',
 	'description_cc_by_sa' => 'Creative Commons - Namensnennung-Weitergabe unter gleichen Bedingungen',
-	'description_copyright' => '&copy; copyright auteur de l\'article', # NEW
-	'description_gpl' => 'licence GPL', # NEW
+	'description_copyright' => '&copy; Copyright liegt beim Autor des Artikels',
+	'description_gpl' => 'GPL-Lizenz',
 
 	// L
 	'label_select_licence' => 'W&auml;hlen sie eine Lizenz',
@@ -33,19 +33,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de',
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.de',
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.ca',
-	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html', # NEW
+	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 
 	// S
 	'sans_licence' => 'ohne Lizenz',
 
 	// T
 	'titre_art_libre' => 'LZK',
-	'titre_cc_by' => 'CC by', # NEW
-	'titre_cc_by_nc' => 'CC by-nc', # NEW
-	'titre_cc_by_nc_nd' => 'CC by-nc-nd', # NEW
-	'titre_cc_by_nc_sa' => 'CC by-nc-sa', # NEW
-	'titre_cc_by_nd' => 'CC by-nd', # NEW
-	'titre_cc_by_sa' => 'CC by-sa', # NEW
+	'titre_cc_by' => 'CC by',
+	'titre_cc_by_nc' => 'CC by-nc',
+	'titre_cc_by_nc_nd' => 'CC by-nc-nd',
+	'titre_cc_by_nc_sa' => 'CC by-nc-sa',
+	'titre_cc_by_nd' => 'CC by-nd',
+	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
 	'titre_gpl' => 'GNU GPL'
 );
