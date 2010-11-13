@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_menu_accueil' => 'Link to website\'s home page.',
-	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.', # NEW
+	'description_menu_articles_rubrique' => 'Display the list of articles in a section.',
 	'description_menu_deconnecter' => 'If the visitor is connected, add an entry offering disconnection.',
 	'description_menu_espace_prive' => 'Link enabling the connection to the site if you aren\'t already connected, and then to enter the private space if you are authorised to do so.',
 	'description_menu_groupes_mots' => 'Automatically lists the keyword groups and the articles linked to them. By default the list shows keyword groups and the keywords within them. If a groupes_mots.html template exists, the link to the group is used.',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_menu_accueil' => 'Home Page',
-	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
+	'nom_menu_articles_rubrique' => 'Articles of a section',
 	'nom_menu_deconnecter' => 'Disconnect',
 	'nom_menu_espace_prive' => 'Login / link to the private zone',
 	'nom_menu_groupes_mots' => 'Keywords and Articles of a group of keywords',
