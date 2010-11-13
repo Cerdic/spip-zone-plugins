@@ -29,12 +29,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   the maximum size (in pixels) Example: 100. (0 = never)',
 
 	// L
-	'label_activer_barre_typo' => 'Activate the typographical bar for &laquo;crayons&raquo;?',
-	'label_activer_crayons_prive' => 'Activate &laquo;crayons&raquo; for the editing area.',
+	'label_activer_barre_typo' => 'Activate the typographical bar for "Pencils"?',
+	'label_activer_crayons_prive' => 'Activate "Pencils" for the editing area.',
 	'label_barre_typo' => 'Typographical bar',
 	'label_clickhide' => 'A click outside the area closes &laquo;caryons&raquo;',
 	'label_effets' => 'Choice of effects',
-	'label_espaceprive' => 'Use &laquo;crayons&raquo; in the editing area?',
+	'label_espaceprive' => 'Use "Pencils" in the editing area?',
 	'label_exec_autorise' => 'Pages authorised',
 	'label_filet' => 'Line',
 	'label_message' => 'Show a message',
@@ -64,8 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'svp_copier_coller' => 'Sorry, copy/paste your changes and retry',
 
 	// T
-	'titre_config_crayons' => 'Configure &laquo;crayons&raquo;',
-	'titre_crayons' => 'Crayons', # MODIF
+	'titre_config_crayons' => 'Configure "Pencils"',
+	'titre_crayons' => 'Pencils',
 
 	// U
 	'update_impossible' => 'The update did not succeed.',
