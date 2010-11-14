@@ -48,7 +48,15 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 		$r['post_open_comment'] == 1 ? $accepter_forum = 'pos' : $accepter_forum = 'non';
 		
 	// Statut
-		$r['post_status']	== 1 ?	$statut =	'publie' : $r['post_statut'] == 0 ? $statut = 'refuse' : $statut = 'prop' ;
+		if ($r['post_status']== 1){
+			$statut =	'publie';
+		}
+		else if ($r['post_statut'] == 0){
+			$statut = 'refuse' ;
+		}
+		else{
+			$statut = 'prop' ;
+		}
 
 		
 		
