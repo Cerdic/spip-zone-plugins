@@ -1,5 +1,12 @@
-<li class="editer_parent"><label for="id_parent"><:titre_cadre_interieur_rubrique:></label><select name="rubrique" id="idselect">
-<option>Choissisez votre rubrique</option><BOUCLE_choix(RUBRIQUES){tout}>
- 
-<option value="#ID_RUBRIQUE"[(#EVAL{_request('id_rubrique')}|=={#ID_RUBRIQUE}|?{' selected="selected"',''})]>#TITRE</option></BOUCLE_choix>
-</select></li>
+<li class="editer_parent">
+<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">
+&nbsp;<a class='aide'
+href='[(#URL_ECRIRE{aide_index,aide=rubrub}|parametre_url{lang,#LANG})]'
+onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"><img src='#CHEMIN{images/aide-12.png}'alt="AIDE"  title="<:titre_image_aide:>" class='aide' width='12' height='12' /></a></em></label>
+
+<select id='id_parent' name='rubrique'class='selecteur_parent verdana1' size='1'>
+<option>Choissisez votre rubrique</option><BOUCLE_choix(RUBRIQUES){meme_parent}{tout}><BOUCLE_tu(RUBRIQUES){id_secteur}{tout}>
+<option value="#ID_RUBRIQUE"[(#EVAL{_request('id_rubrique')}|=={#ID_RUBRIQUE}|?{' selected="selected"',''})] class='niveau_#ID_PARENT selec_rub' style="[(#ID_PARENT|!={0}|?{'padding-left: 16px; margin-left: 16px;background:#fff;','padding-left: 16px; margin-left: 0px;'})]">#TITRE</option>
+</BOUCLE_tu></BOUCLE_choix>
+</select>
+</li>
