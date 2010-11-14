@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>Mots techniques pour SPIP 2</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Joseph, marcimat et toutes les bonnes volont&eacute;s - 2008-09
+	<auteur>
+	Joseph, Matthieu Marcillaud et toutes les bonnes volont&eacute;s - 2008-09
 	</auteur>
 	<version>0.7</version>
 	<version_base>0.3</version_base>

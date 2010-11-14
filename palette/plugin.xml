@@ -1,8 +1,7 @@
 <plugin>
     <nom>Palette</nom>
-    <auteur>Daniel FAIVRE (&#224; partir de travaux de Marcimat)
-_ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license[de]Vertrieb unter Lizenz</multi> GNU/LGPL
-    </auteur>
+    <auteur>Daniel FAIVRE (&#224; partir de travaux de Matthieu Marcillaud)</auteur>
+    <licence>&#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license[de]Vertrieb unter Lizenz</multi> GNU/LGPL</licence>
     <version>1.3.2</version>
 	<version_base>0.1</version_base>
     <etat>
