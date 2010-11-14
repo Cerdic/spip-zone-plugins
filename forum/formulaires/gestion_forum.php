@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function formulaires_gestion_forum_charger_dist($id_forum='', $id_rubrique='', $id_article='', $id_breve='', $id_syndic='', $id_message='', $id_auteur='', $auteur='', $email_auteur='', $ip='') {
+function formulaires_gestion_forum_charger_dist($id_forum='', $id_rubrique='', $id_article='', $id_breve='', $id_syndic='', $id_message='', $id_auteur='', $auteur='', $email_auteur='', $ip='', $recherche='') {
 	
 	$valeurs = array(
 		'editable'=>true
@@ -32,6 +32,8 @@ function formulaires_gestion_forum_charger_dist($id_forum='', $id_rubrique='', $
 	$valeurs['email_auteur'] = _request('email_auteur');
 	$valeurs['ip'] = _request('ip');
 	$valeurs['debut_forum'] = _request('debut_forum');
+	$valeurs['recherche'] = _request('recherche');
+
 	
 	return $valeurs;
 }
