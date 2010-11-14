@@ -16,7 +16,7 @@ function exec_boussoles_gerer_dist(){
 
 	// entetes
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('boussole:titre_page_boussole'), "configuration", "plugin");
+	echo $commencer_page(_T('boussole:titre_page_boussole'), "configuration", "boussole");
 	echo "<br />\n";
 	echo "<br />\n";
 	
@@ -24,6 +24,7 @@ function exec_boussoles_gerer_dist(){
 	echo gros_titre(_T('boussole:titre_page_boussole'),'', false);
 	
 	// barre d'onglets
+	echo barre_onglets("boussoles", "gerer");
 	
 	// colonne gauche
 	echo debut_gauche('', true);

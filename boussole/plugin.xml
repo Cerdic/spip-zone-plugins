@@ -41,4 +41,10 @@ Les sites d'une boussole sont alors affichables dans vos sites en utilisant les 
 		<titre>boussole:bouton_boussole</titre>
 		<url>boussoles_gerer</url>
 	</bouton>
+
+	<onglet id='gerer' parent='boussoles'>
+		<icone>prive/themes/spip/images/boussole_icone-24.png</icone>
+		<titre>boussole:onglet_boussoles</titre>
+		<url>boussoles_gerer</url>
+	</onglet>
 </plugin>

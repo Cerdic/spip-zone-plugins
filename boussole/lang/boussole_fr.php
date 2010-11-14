@@ -103,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_zone' => 'SPIP Zone',
 
 // O
+	'onglet_boussoles' => 'G&eacute;rer les boussoles',
 
 // R
 	'resume_table_boussoles' => 'Liste des boussoles ajout&eacute;es',
@@ -140,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_formulaire_configurer' => 'Configuration de l\'affichage de la boussole',
 	'titre_liste_boussoles' => 'Liste des boussoles disponibles',
 	'titre_page_boussole' => 'Boussole',
+	'titre_page_edition_boussole' => '&Eacute;dition d\'une boussole',
 
 );
 

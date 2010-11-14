@@ -23,16 +23,26 @@ function exec_boussoles_dist()
 		$boussole = unserialize($meta['valeur']);
 		$boussole['maj'] = $meta['maj'];
 
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		$entete = $commencer_page('&laquo; ' . boussole_traduire($boussole['alias'], 'nom_boussole') . ' &raquo;', 'configuration', 'boussoles');
+		$entete .= "<br />\n";
+		$entete .= "<br />\n";
+		
+		// titre
+		$entete .= gros_titre(_T('boussole:titre_page_edition_boussole'),'', false);
+		
+		// barre d'onglets
+		$entete .= barre_onglets("boussoles", "");
+
 		$page = debut_gauche('accueil', true)
 			.  afficher_boussole($alias, $boussole)
 			. "<br /><br /><div class='centered'>"
 			. "</div>"
 			. fin_gauche();
 
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page('&laquo; ' . boussole_traduire($boussole['alias'], 'nom_boussole') . ' &raquo;', 'naviguer', 'boussoles');
 
-		echo debut_grand_cadre(true),
+		echo $entete,
+			debut_grand_cadre(true),
 			fin_grand_cadre(true),
 			$page,
 			fin_page();
