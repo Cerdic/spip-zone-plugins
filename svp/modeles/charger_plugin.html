@@ -1,9 +1,11 @@
-<li class="item"[ id="(#ENV{prefixe}|strtolower)-#ENV{iteration}-#ENV{score}"]>
+<li class="item"[(#ENV{installe}|oui)[ style="background: url((#CHEMIN{prive/themes/spip/images/fond-installe.gif})) repeat;"]][ id="(#ENV{prefixe}|strtolower)-#ENV{iteration}-#ENV{score}"]>
 	[(#REM) <!-- Icone de telechargement -->]
 	<div class="download">
+	[(#ENV{installe}|non)
 		<a[ href="(#URL_ACTION_AUTEUR{charger_plugin, charger_zip,./}|parametre_url{url_zip_plugin, #ENV{url_archive}})"] title="<:plugin_charger:>">
 			[(#CHEMIN{images/telecharger-16.png}|balise_img{<:plugin_charger:>e})]
 		</a>
+	]
 	</div>
 
 	[(#REM) <!-- Resume du plugin -->]
@@ -11,6 +13,7 @@
 		<h3 class="nom">[(#ENV{nom})]</h3>
 		<span class="version">[(#ENV{version})]</span>
 		<span class="etat">[ - (#ENV{etat})]</span>
+		[<span style="color: red;"> - (#ENV{installe}|oui)<:svp:info_plugin_installe:></span>]
 		<div class="short">[(#ENV{slogan})]</div>
 		<div class="icon">[(#ENV{logo}|image_reduire{32})]</div>
 	</div>

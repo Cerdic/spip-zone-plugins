@@ -567,7 +567,8 @@ function svp_xml_parse_plugin($arbre){
 
 // ----------------------- Recherches de plugins ---------------------------------
 
-function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='', $exclusions=array(), $doublon=false, $tri='nom') {
+function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='', 
+									$exclusions=array(), $afficher_exclusions=false, $doublon=false, $tri='nom') {
 
 	include_spip('inc/rechercher');
 	
@@ -625,7 +626,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='
 	// -- Preparation de la requete
 	if (!$phrase OR $resultats) {
 		$from = array('spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3');
-		$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 
+		$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 't1.id_plugin AS id_plugin', 
 						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.version_spip AS version_spip',
 						't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
 						't2.logo AS logo', 't2.version AS version', 't2.nom_archive AS nom_archive',
@@ -637,7 +638,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='
 			$where[] = 't1.categorie=' . sql_quote($categorie);
 		if (($etat) AND ($etat != 'tout_etat'))
 			$where[] = 't2.etat=' . sql_quote($etat);
-		if ($exclusions)
+		if ($exclusions AND !$afficher_exclusions)
 			$where[] = sql_in('t2.id_plugin', $exclusions, 'NOT');
 	
 		if ($resultats = sql_select($select, $from, $where)) {
@@ -660,6 +661,12 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='
 						$paquets['score'] = 0;
 					// -- on construit l'url de l'archive
 					$paquets['url_archive'] = dirname($paquets['url_paquets']) . '/' . $paquets['nom_archive'];
+					// -- on gere les exclusions si elle doivent etre affichees
+					if ($afficher_exclusions AND in_array($paquets['id_plugin'], $exclusions))
+						$paquets['installe'] = true;
+					else
+						$paquets['installe'] = false;
+					// -- On traite les doublons (meme plugin, versions differentes)
 					if ($doublon)
 						// ajout systematique du paquet
 						$plugins[] = $paquets;

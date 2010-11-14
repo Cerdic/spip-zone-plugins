@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_paquets_disponibles' => '@total_paquets@ paquet(s) disponible(s)',
 	'info_plugins_disponibles' => '@total_plugins@ plugin(s) disponible(s)',
 	'info_plugins_heberges' => '@total_plugins@ plugin(s) h&eacute;berg&eacute;(s)',
+	'info_plugin_installe' => 'd&eacute;j&agrave; install&eacute;',
 	'info_contributions_hebergees' => '@total_autres@ autre(s) contribution(s) h&eacute;berg&eacute;e(s)',
 	'info_type_depot_git' => 'D&eacute;p&ocirc;t g&eacute;r&eacute; sous GIT',
 	'info_type_depot_manuel' => 'D&eacute;p&ocirc;t g&eacute;r&eacute; manuellement',
