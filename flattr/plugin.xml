@@ -5,7 +5,7 @@
 	&#169; 2010 - GNU/GPL
 	</auteur>
 	<version>
-	0.2
+	0.2.1
 	</version>
 	<etat>
 	test
@@ -18,7 +18,7 @@
 	flattr
 	</prefix>
 	<icon>
-	images/flattr.png
+	img/flattr.png
 	</icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<utilise id="cfg" />

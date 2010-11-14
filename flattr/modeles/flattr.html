@@ -26,7 +26,7 @@ function flattr_init#ENV{buttonid}() {
 
 // Inserer l'image si on a js (sinon, pas de flattr)
 $('#flattr-#ENV{buttonid}')
-.html('<img src="#CHEMIN{images/flattr-#CONFIG{flattr/button,default}.png}" alt="Flattr" id="img-flattr-#ENV{buttonid}"\/>');
+.html('<img src="#CHEMIN{img/flattr-#CONFIG{flattr/button,default}.png}" alt="Flattr" id="img-flattr-#ENV{buttonid}"\/>');
 
 // charger le script s'il n'est pas deja dans le inc-head
 if (typeof FlattrLoader != 'object')
