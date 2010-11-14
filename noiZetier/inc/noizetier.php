@@ -599,6 +599,8 @@ function noizetier_tableau_export() {
 	if (is_array($noizetier_compositions) AND count($noizetier_compositions)>0)
 		$data['noizetier_compositions'] = $noizetier_compositions;
 	
+	$data = pipeline('noizetier_config_export',$data);
+	
 	return $data;
 }
 
@@ -615,6 +617,8 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 		$type_import = 'fusion';
 	if ($import_compos!='oui')
 		$import_compos = 'non';
+	
+	$config = pipeline('noizetier_config_import',$config);
 	
 	// On s'occupe déjà des noisettes
 	$noisettes = $config['noisettes'];

@@ -2,7 +2,7 @@
 	<nom>noiZetier</nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8.0</version>
+	<version>0.8.1</version>
 	<version_base>0.3</version_base>
 	<etat>test</etat>
 	<description>Prototype de gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.<p />
@@ -14,7 +14,6 @@
 	<icon>img/noizetier-128.png</icon>
 	<prefix>noizetier</prefix>
 	<fonctions>inc/noizetier.php</fonctions>
-
 	<install>base/noizetier_installation.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
