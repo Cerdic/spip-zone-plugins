@@ -573,31 +573,37 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='
 	
 	$plugins = array();
 	$scores = array();
-	$resultats = array();
 	$ids_paquets = array();
 
 	// On prepare l'utilisation de la recherche en base SPIP en la limitant aux tables spip_plugins
 	// et spip_paquets  si elle n'est pas vide
 	if ($phrase) {
 		$liste = liste_des_champs();
-		$tables = array('plugin' => $liste['plugin'], 'paquet' =>$liste['paquet']);
+		$tables = array('plugin' => $liste['plugin'], 'paquet' => $liste['paquet']);
 		$options = array('jointures' => true, 'score' => true);
 	
 		// On cherche dans tous les enregistrements de ces tables des correspondances les plugins qui
 		// correspondent a la phrase recherchee
 		// -- On obtient une liste d'id de plugins et d'id de paquets
+		$resultats = array('plugin' => array(), 'paquet' => array());
 		$resultats = recherche_en_base($phrase, $tables, $options);
 		// -- On prepare le tableau des scores avec les paquets trouves par la recherche
 		if ($resultats) {
-			foreach ($resultats['paquet'] as $_id => $_score) {
-				$scores[$_id] = intval($resultats['paquet'][$_id]['score']);
-			}
 			// -- On convertit les id de plugins en id de paquets
-			$ids_plugin = array_keys($resultats['plugin']);
-			$where[] = sql_in('id_plugin', $ids_plugin);
-			$ids = sql_allfetsel('id_paquet, id_plugin', 'spip_paquets', $where);
+			$ids = array();
+			if ($resultats['plugin']) {
+				$ids_plugin = array_keys($resultats['plugin']);
+				$where[] = sql_in('id_plugin', $ids_plugin);
+				$ids = sql_allfetsel('id_paquet, id_plugin', 'spip_paquets', $where);
+			}
+			// -- On prepare les listes des id de paquet et des scores de ces memes paquets
+			if ($resultats['paquet']) {
+				$ids_paquets = array_keys($resultats['paquet']);
+				foreach ($resultats['paquet'] as $_id => $_score) {
+					$scores[$_id] = intval($resultats['paquet'][$_id]['score']);
+				}
+			}
 			// -- On merge les deux tableaux de paquets sans doublon en mettant a jour un tableau des scores
-			$ids_paquets = array_keys($resultats['paquet']);
 			foreach ($ids as $_ids) {
 				$id_paquet = intval($_ids['id_paquet']);
 				$id_plugin = intval($_ids['id_plugin']);
