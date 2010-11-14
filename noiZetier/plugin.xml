@@ -2,7 +2,7 @@
 	<nom>noiZetier</nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.7.1</version>
+	<version>0.8.0</version>
 	<version_base>0.3</version_base>
 	<etat>test</etat>
 	<description>Prototype de gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.<p />
@@ -61,6 +61,8 @@
 	<categorie>maintenance</categorie>
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
-	<utilise id="saisies" />
+	<necessite id="YAML" version="[1.4.1;]" />
+	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="verifier"  />
 	<utilise id="compositions" version="[1.0.1;]" />
 </plugin>

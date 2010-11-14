@@ -9,34 +9,18 @@
 				[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|non)
 					<img src="#CHEMIN{images/warning.gif}" alt="WARNING"/>
 					<strong style="color:red"><:noizetier:warning_noisette_plus_disponible:></strong>
-					<p><:noizetier:warning_noisette_plus_disponible_details{squelette=noisettes/#NOISETTE.html}:></p>
 				]
 				<div class="titre">[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{nom}|sinon{#NOISETTE})]</div>
-					<div class="infos">
-					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|oui|et{#PLUGIN{saisies}|oui})
+					[<div class="infos">
+					(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|oui)
 						[(#VOIR_SAISIES{#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres},[(#PARAMETRES|unserialize)]})]
+					</div>]
+					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|count|=={0}|oui)
+						<div class="infos"><:noizetier:formulaire_noisette_sans_parametre:></div>
 					]
-					
-					<BOUCLE_si_pas_saisies(CONDITION){si #NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|non|ou{#PLUGIN{saisies}|non}}>
-					<BOUCLE_parametres(POUR){tableau #PARAMETRES|unserialize}>
-					[<span class="nom_param">(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{label}|sinon{#CLE})</span>]
-					
-					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|oui)
-						[(#VALEUR|oui) <:item_oui:>][(#VALEUR|non) <:item_non:>]
-					]
-					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|oui)
-						[(#VALEUR**|propre)]
-						[<div class="notes">(#NOTES)</div>]
-					]
-					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|non)
-						[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|non)
-							#VALEUR
-						]
-					]
-					<br />
-					</BOUCLE_parametres>
-					</BOUCLE_si_pas_saisies>
-					</div>
+					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|non)
+						<div class="infos"><:noizetier:warning_noisette_plus_disponible_details{squelette=noisettes/#NOISETTE.html}:></div>
+				]
 			</div>
 			[(#AUTORISER{configurer,noizetier}|et{#ENV{id_noisette}|non}|et{#ENV{bloc_page_nouvelle_noisette}|non})
 			<div class="actions">

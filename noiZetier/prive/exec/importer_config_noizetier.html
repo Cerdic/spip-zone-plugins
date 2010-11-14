@@ -6,20 +6,16 @@
 		</a>
 		<h1><:noizetier:editer_noizetier_importer_configuration:></h1>
 		<:noizetier:editer_noizetier_importer_configuration_explication:>
-		[<p>(#PLUGIN{yaml}|non)<:noizetier:yaml_non_installe:></p>]
 	</div>
 	
 	[(#AUTORISER{configurer,noizetier}|oui)
-	[(#PLUGIN{yaml}|oui)
 	#FORMULAIRE_IMPORTER_CONFIG_NOIZETIER
-	]
 	]
 </div>
 
 <div class="nettoyeur" />
 
 <!--#navigation-->
-[(#PLUGIN{yaml}|oui)
 <div class="cadre infos cadre-info">
 	<div>
 		<a href="#URL_ACTION_AUTEUR{exporter_config_noizetier}" class="cellule-h">
@@ -28,7 +24,6 @@
 		</a>
 	</div>
 </div>
-]
 
 <!--/#navigation-->
 

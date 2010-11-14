@@ -86,15 +86,9 @@ function noizetier_obtenir_infos_noisettes_direct(){
 		foreach($liste as $squelette=>$chemin) {
 			$noisette = preg_replace(',[.]html$,i', '', $squelette);
 			$dossier = str_replace($squelette, '', $chemin);
-			// On ne garde que les squelettes ayant un fichier YAML de config (si yaml est activé)
-			if (file_exists("$dossier$noisette.yaml") AND defined('_DIR_PLUGIN_YAML')
+			// On ne garde que les squelettes ayant un fichier YAML de config
+			if (file_exists("$dossier$noisette.yaml")
 				AND ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
-			){
-				$liste_noisettes[$noisette] = $infos_noisette;
-			}
-			// ou les squelettes ayant un XML de config
-			elseif (file_exists("$dossier$noisette.xml")
-				AND ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
 			){
 				$liste_noisettes[$noisette] = $infos_noisette;
 			}
@@ -112,67 +106,6 @@ function noizetier_obtenir_infos_noisettes_direct(){
 }
 
 
-
-
-/**
- * Charger les informations contenues dans le xml d'une noisette
- *
- * @param string $noisette
- * @param string $info
- * @return array
- */
-function noizetier_charger_infos_noisette_xml($noisette, $info=""){
-		// on peut appeler avec le nom du squelette
-		$fichier = preg_replace(',[.]html$,i','',$noisette).".xml";
-		include_spip('inc/xml');
-		include_spip('inc/texte');
-		$infos_noisette = array();
-		if ($xml = spip_xml_load($fichier, false)){
-			if (count($xml['noisette'])){
-				$xml = reset($xml['noisette']);
-				$infos_noisette['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
-				$infos_noisette['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
-				$infos_noisette['icon'] = isset($xml['icon']) ? reset($xml['icon']) : '';
-				// Décomposition des paramètres (enregistrer sous la forme d'un tableau respectant la norme de saisies
-				$infos_noisette['parametres'] = array();
-				if (spip_xml_match_nodes(',^parametre,', $xml, $parametres)){
-					foreach (array_keys($parametres) as $parametre){
-						list($balise, $attributs) = spip_xml_decompose_tag($parametre);
-						$infos_noisette['parametres'][] = array(
-							'saisie' => $attributs['saisie'] ? $attributs['saisie'] : 'input',
-							'options' => array(
-								'nom' => $attributs['nom'],
-								'label' => $attributs['label'] ? _T($attributs['label']) : $attributs['nom'],
-								'defaut' => $attributs['defaut'],
-								'obligatoire' => $attributs['obligatoire'] == 'oui' ? 'oui' : 'non'
-							)
-						);
-					}
-				}
-				if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)){
-					$infos_noisette['necessite'] = array();
-					foreach (array_keys($necessites) as $necessite){
-						list($balise, $attributs) = spip_xml_decompose_tag($necessite);
-						$infos_noisette['necessite'][] = $attributs['id'];
-					}
-				}
-				// Décomposition informations du contexte a utiliser
-				if (spip_xml_match_nodes(',^contexte,', $xml, $contextes)){
-					$infos_noisette['contexte'] = array();
-					foreach (array_keys($contextes) as $contexte){
-						list($balise, $attributs) = spip_xml_decompose_tag($contexte);
-						$infos_noisette['contexte'][] = $attributs['nom'];
-					}
-				}
-			}
-		}
-		if (!$info)
-			return $infos_noisette;
-		else 
-			return isset($infos_noisette[$info]) ? $infos_noisette[$info] : "";
-}
-
-
 /**
  * Charger les informations contenues dans le YAML d'une noisette
  *
@@ -186,7 +119,7 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info=""){
 		include_spip('inc/yaml');
 		include_spip('inc/texte');
 		$infos_noisette = array();
-		if ($infos_noisette = yaml_decode_file($fichier)) {
+		if ($infos_noisette = yaml_charger_inclusions(yaml_decode_file($fichier))) {
 			if (isset($infos_noisette['nom']))
 				$infos_noisette['nom'] = _T_ou_typo($infos_noisette['nom']);
 			if (isset($infos_noisette['description']))
@@ -251,7 +184,7 @@ function noizetier_charger_contexte_noisette($noisette){
 
 /**
  * Transforme un tableau au format du plugin saisies en un tableau de parametres dont les clés sont les noms des paramètres
- * S'il y a de fieldset, les paramètres sont extraits de son entrée saisie
+ * S'il y a de fieldset, les paramètres sont extraits de son entrée saisies
  *
  * @param string $parametres
  * @return array
