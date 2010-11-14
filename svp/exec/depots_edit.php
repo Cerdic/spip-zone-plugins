@@ -39,10 +39,15 @@ function exec_depots_edit_args($id_depot) {
 	
 		// Titre, partie, sous-partie (pour le menu)
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('svp:titre_head_modifier_depot', array('depot' => $nom)), 'naviguer', 'depots', $id_depot);
-	
-		// Intitule de la page
-		// -- Aucun
+		echo $commencer_page(_T('svp:titre_head_modifier_depot', array('depot' => $nom)), 'configuration', 'depots', $id_depot);
+		echo "<br />\n";
+		echo "<br />\n";
+		
+		// titre
+		echo gros_titre(_T('svp:titre_page_edition_depot'),'', false);
+		
+		// barre d'onglets
+		echo barre_onglets("plugins", "");
 	
 		// Colonne gauche
 		echo debut_gauche('', true);

@@ -745,7 +745,7 @@ function svp_trier_par_score($p1, $p2){
 
 /**
  * Tri croissant des resultats par nom. 
- * Si le nom est didentique on classe par version decroissante 
+ * Si le nom est identique on classe par version decroissante 
  * Cette fonction est appelee par un usort ou uasort
  *
  * @return int

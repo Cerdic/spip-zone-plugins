@@ -33,33 +33,29 @@ function exec_depots_args($id_depot)
 	else {
 		$depot['titre'] = sinon($depot['titre'], _T('svp:titre_nouveau_depot'));
 
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		$entete = $commencer_page('&laquo; ' . $depot['titre'] . ' &raquo;', 'configuration', 'depots');
+		$entete .= "<br />\n";
+		$entete .= "<br />\n";
+		
+		// titre
+		$entete .= gros_titre(_T('svp:titre_page_edition_depot'),'', false);
+		
+		// barre d'onglets
+		$entete .= barre_onglets("plugins", "");
+
 		$page = debut_gauche('accueil', true)
 			.  afficher_depot($id_depot, $depot)
 			. "<br /><br /><div class='centered'>"
 			. "</div>"
 			. fin_gauche();
 
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page('&laquo; ' . $depot['titre'] . ' &raquo;', 'naviguer', 'depots');
-
-		echo debut_grand_cadre(true),
-			afficher_lien_gerer_depots(),
+		echo $entete,
+			debut_grand_cadre(true),
 			fin_grand_cadre(true),
 			$page,
 			fin_page();
 	}
-}
-
-function afficher_lien_gerer_depots() {
-	
-	$lien = '<ul dir="' . lang_dir($GLOBALS['spip_lang']) . '" class="verdana3" id="chemin">' .
-			'<li><span class="bloc">' .
-			'<a class="racine on" href="' . generer_url_ecrire('depots_gerer') . '" title="' . _T('svp:bulle_aller_gerer_depots') . '">' .
-			_T('svp:lien_gerer_depots') .
-			'</a>' .
-			'</span></li>' .
-			'</ul>';
-	return $lien;
 }
 
 function afficher_depot($id_depot, $depot) {

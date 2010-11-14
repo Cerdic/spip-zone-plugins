@@ -157,6 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_navigation_plugin' => 'Dans la m&ecirc;me cat&eacute;gorie',
 	'titre_nouveau_depot' => 'Nouveau d&eacute;p&ocirc;t',
 	'titre_page_depots' => 'D&eacute;p&ocirc;ts',
+	'titre_page_edition_depot' => '&Eacute;dition d\'un d&eacute;p&ocirc;t',
 	'titre_page_plugins' => 'Plugins',
 	'titre_page_svp' => 'SerVeur d\'information sur les Plugins',
 	'titre_page_statistiques' => 'Statistiques',
