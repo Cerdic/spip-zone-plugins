@@ -18,8 +18,8 @@ function formulaires_gestion_forum_charger_dist($id_forum='', $id_rubrique='', $
 	
 	$valeurs['id_forums'] = array();
 	$valeurs['pagination'] = _request('pagination');
-	$valeurs['select_type'] = _request('select_type');
-	$valeurs['select_statut'] = _request('select_statut');
+	$valeurs['type_message'] = _request('type_message');
+	$valeurs['statut'] = _request('statut');
 	
 	$valeurs['id_forum'] = _request('id_forum');
 	$valeurs['id_rubrique'] = _request('id_rubrique');

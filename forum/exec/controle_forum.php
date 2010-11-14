@@ -13,7 +13,7 @@ function exec_controle_forum_dist()
 	  OR ($id_article = _request('id_article') AND autoriser('modererforum', 'article', $id_article))
 	  OR ($id_forum=_request('debut_id_forum') AND $id_article = sql_getfetsel('id_article', 'spip_forum', 'id_forum='.intval($id_forum)) AND autoriser('modererforum', 'article', $id_article))
 	  ) {
-		exec_controle_forum_args(_request('type'),$_GET,'prive/controler_forum');
+		exec_controle_forum_args(_request('type_message'),$_GET,'prive/controler_forum');
 	} 
 	else {
 		include_spip('inc/minipres');
@@ -25,17 +25,26 @@ function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/control
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
+		
+		echo gros_titre(_T('titre_forum_suivi')."<html>".aide("suiviforum")."</html>",'',false);
 
 		echo debut_gauche('', true);
-		echo debut_boite_info(true);
-		echo _T('info_gauche_suivi_forum_2'), aide("suiviforum");
-
-		// Afficher le lien RSS
-
-		$type = $type?$type:"public";
-		echo bouton_spip_rss("forums_$type");
-
-		echo fin_boite_info(true);
+		
+		if(_request('type_form') != 'cvt' ){
+			echo debut_boite_info(true);
+			echo _T('info_gauche_suivi_forum_2'), aide("suiviforum");
+	
+			// Afficher le lien RSS
+	
+			$type = $type?$type:"public";
+			echo bouton_spip_rss("forums_$type");
+	
+			echo fin_boite_info(true);
+		}else{
+			echo recuperer_fond("prive/nav_gestion_forum",$contexte);
+			$type = $type?$type:"public";
+			echo bouton_spip_rss("forums_$type");
+		}
 
 		if ($id_article=$contexte['id_article']){
 			$res = icone_horizontale(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false);
@@ -52,7 +61,6 @@ function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/control
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 			
 		echo debut_droite('', true);
-		echo gros_titre(_T('titre_forum_suivi'),'',false);
 		
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
