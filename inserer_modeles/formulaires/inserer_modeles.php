@@ -22,7 +22,7 @@ function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_b
 		$contexte = array_merge($contexte,$champs_saisies);
 		
 		$contexte['formulaire_modele'] = $formulaire_modele;
-		$contexte['nom'] = _T_ou_typo($infos_modele['nom']);
+		$contexte['_nom'] = _T_ou_typo($infos_modele['nom']);
 		$contexte['logo'] = $infos_modele['logo'];
 		$contexte['_saisies'] = $infos_modele['parametres'];
 		if (_request('_code_modele'))
