@@ -19,7 +19,7 @@
                   	couleur=[(#COULEUR|sinon{[(#CONFIG{choix_police/couleur_typo})]}|choix_police_suprime_diese)],
                   	padding=[(#PADDING|sinon{[(#CONFIG{choix_police/padding_typo})]})],
                     largeur=[(#LARGEUR|sinon{[(#CONFIG{choix_police/largeur_typo})]})] }
-		    |inserer_attribut{alt, #TEXTE|attribut_html}
+        |inserer_attribut{alt, #TEXTE|attribut_html}
         |inserer_attribut{style, [margin-top: (#MARGEV|sinon{[(#CONFIG{choix_police/marge_verticale})]});]
         						 [margin-bottom: (#MARGEV|sinon{[(#CONFIG{choix_police/marge_verticale})]});]
                                  [margin-right: (#MARGEH|sinon{[(#CONFIG{choix_police/marge_horizontale})]});]

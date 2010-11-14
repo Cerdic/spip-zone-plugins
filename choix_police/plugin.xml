@@ -6,8 +6,8 @@ _ &#169; 2010 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien></lien>
 	<icon>choix_police-64.png</icon>
-	<version>0.1</version>
-	<etat>dev</etat>
+	<version>0.2</version>
+	<etat>test</etat>
   <description>
 Ce plugin permet de choisir une police pour les images typo 
 parmi toutes celles disponibles et de configurer ses param&#232;tres par d&#233;faut via une [interface cfg->?exec=cfg&amp;cfg=choix_police].
@@ -36,10 +36,11 @@ _ |margeh=0px
 _ |valign=top&gt;
 	</description>
 	<prefix>choix_police</prefix>
-  <fonctions>choix_police_fonctions.php</fonctions>
+    <fonctions>choix_police_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="cfg" version="[1.10.2;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="palette" version="[1.0;]" />
 	<chemin dir='' />
+	<categorie>edition</categorie>
 </plugin>

@@ -1,6 +1,6 @@
-<!-- titre=<:choix_police:choix_police:> -->
+<!-- titre=<:choixpolice:titre_choix_police:> -->
 <!-- icone=choix_police-32.png-->
-<!-- boite=<:choix_police:configuration_parametres_par_defaut:> -->
+<!-- boite=<:choixpolice:titre_descriptif_configuration:> -->
 
 [(#PLUGIN{autorite}|oui)
 <!-- autoriser=webmestre -->
@@ -16,7 +16,8 @@ modifier ces param&#232;tres.  -->
 
 
 <!-- descriptif=
-<h4><:choix_police:descriptif_configuration:></h4>
+<h4><:choixpolice:configuration_parametres_par_defaut:></h4>
+<p><:choixpolice:descriptif_configuration:></p>
 -->
 
 <!-- head=
@@ -33,62 +34,69 @@ modifier ces param&#232;tres.  -->
 
 [(#REM) ------------------------ PARAMETRAGES -------------------------------- ]
 <fieldset>
-    <legend><:choix_police:parametrage_typo:></legend>
+    <legend><:choixpolice:parametrage_typo:></legend>
     <p>
-    	<label><:choix_police:couleur_typo:></label>
+    	<label><:choixpolice:couleur_typo:></label>
     	<input type="text" name="couleur_typo" class="palette"
             value="[(#ENV{couleur_typo,#000000})]" style="width: 80px" />
-    	<br/><small><:choix_police:explication_palette:></small>
+    	<br/><small><:choixpolice:explication_couleur_typo:>
+    	<br/><:choixpolice:explication_palette:></small>
     </p>
     <p>
-        <label><:choix_police:taille_typo:>:</label>
+        <label><:choixpolice:taille_typo:>:</label>
         <input type="text" name="taille_typo" 
         value="[(#ENV{taille_typo,45})]" style="width: 80px" />
     </p>
     <p>
-        <label><:choix_police:padding_typo:>:</label>
+        <label><:choixpolice:padding_typo:>:</label>
         <input type="text" name="padding_typo" 
         value="[(#ENV{padding_typo,5})]" style="width: 80px" />
+        <br/><small><:choixpolice:explication_padding_typo:></small>
     </p>
     <p>
-        <label><:choix_police:largeur_typo:>:</label>
+        <label><:choixpolice:largeur_typo:>:</label>
         <input type="text" name="largeur_typo" 
         value="[(#ENV{largeur_typo,520})]" style="width: 80px" />
+        <br/><small><:choixpolice:explication_largeur_typo:></small>
     </p>
 </fieldset>
 
-[(#REM) ------------------------ MARGES -------------------------------------- ]
+[(#REM) ------------------------ STYLES CSS -------------------------------------- ]
 <fieldset>
-    <legend><:choix_police:style_css_image_typo:></legend>
-    <small><:choix_police:explication_marges:></small>
+    <legend><:choixpolice:style_css_image_typo:></legend>
+    <br/><small><:choixpolice:explication_styles_css:></small>
     <p>
-        <label><:choix_police:marge_verticale:>:</label>
+        <label><:choixpolice:marge_verticale:>:</label>
         <input type="text" name="marge_verticale" 
         value="[(#ENV{marge_verticale,0px})]" style="width: 80px" />
+        <br/><small><:choixpolice:explication_marge_verticale:></small>
     </p>
     <p>
-        <label><:choix_police:marge_horizontale:>:</label>
+        <label><:choixpolice:marge_horizontale:>:</label>
         <input type="text" name="marge_horizontale" 
         value="[(#ENV{marge_horizontale,0px})]" style="width: 80px" />
+        <br/><small><:choixpolice:explication_marge_horizontale:></small>
     </p>
     <p>
-        <label><:choix_police:alignement_vertical:>:</label>
+        <label><:choixpolice:alignement_vertical:>:</label>
         <select name="vertical_align">
         	<option value="bottom"[ (#ENV{vertical_align}|=={bottom}|oui)selected="selected"]>bottom</option>
             <option value="baseline"[ (#ENV{vertical_align}|=={baseline}|oui)selected="selected"]>baseline</option>
             <option value="middle"[ (#ENV{vertical_align}|=={middle}|oui)selected="selected"]>middle</option>
             <option value="top"[ (#ENV{vertical_align}|=={top}|oui)selected="selected"]>top</option>
         </select>
+        <br/><small><:choixpolice:explication_alignement_vertical:></small>
     </p>
 </fieldset>
 
 
 [(#REM) ------------------------ POLICE IMAGES TYPO -------------------------- ]
 <fieldset>
-    <legend><:choix_police:choix_police:></legend>
+    <legend><:choixpolice:choix_police:></legend>
     <p>
-    	<label><:choix_police:supprimer_accents:> :</label>
+    	<label><:choixpolice:supprimer_accents:> :</label>
     	<input type="checkbox" name="supprimer_accents" [checked="(#ENV{supprimer_accents})"] />
+    	<br/><small><:choixpolice:explication_supprimer_accents:></small>
     </p>
     [(#SET{Tpolices,[(#NOOP{#CHEMIN{polices}}|choix_police_polices_disponibles)]})]
     <BOUCLE_polices2(pour){tableau #GET{Tpolices}}>
@@ -103,11 +111,8 @@ modifier ces param&#232;tres.  -->
 
 [(#REM) ------------------------ BOUTON OK ----------------------------------- ]
 <div>
-<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
-<input type="reset" value="<:Reset:>" class="fondo" />
-<!--
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
--->
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:cfg:ok:>" class="fondo" />
+<input type="reset" value="<:cfg:reset:>" class="fondo" />
 </div>
 
 </form>
