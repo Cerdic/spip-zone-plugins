@@ -33,9 +33,9 @@
 	<li class="gestion_forum boutons">
 		<div id="pagination">
 		Afficher:
-			<a href="[(#SELF|parametre_url{pagination,10})]"[(#ENV*{pagination,10}|=={10}|oui) class="selected"]>10</a>
-			<a href="[(#SELF|parametre_url{pagination,50})]"[(#ENV*{pagination}|=={50}|oui) class="selected"]>50</a>
-			<a href="[(#SELF|parametre_url{pagination,100})]"[(#ENV*{pagination}|=={100}|oui) class="selected"]>100</a>
+			<a href="[(#SELF|parametre_url{pagination,10})]" class="ajax[(#ENV*{pagination,10}|=={10}|oui) selected]">10</a>
+			<a href="[(#SELF|parametre_url{pagination,50})]" class="ajax[(#ENV*{pagination}|=={50}|oui) selected]">50</a>
+			<a href="[(#SELF|parametre_url{pagination,100})]" class="ajax[(#ENV*{pagination}|=={100}|oui) selected]">100</a>
 		messages.	
 		</div>
 		Sélectionner : 
