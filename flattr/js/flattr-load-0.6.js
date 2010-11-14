@@ -44,8 +44,8 @@ var FlattrLoader = {
 
 		var iframe = document.createElement('iframe');
 		iframe.setAttribute('src', ( this.getParam('https') == 1 ? 'https' : 'http' ) +'://'+ this.getParam('domain', 'api.flattr.com') + '/button/view/?'+ this.encodeData(data));
-		iframe.setAttribute('width', (compact == true ? 100 : 50) );
-		iframe.setAttribute('height', (compact == true ? 17 : 60) );
+		iframe.setAttribute('width', (compact == true ? 110 : 55) );
+		iframe.setAttribute('height', (compact == true ? 20 : 62) );
 		iframe.setAttribute('frameBorder', 0);
 		iframe.setAttribute('scrolling', 'no');
 		iframe.setAttribute('border', 0);
