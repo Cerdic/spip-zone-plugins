@@ -15,8 +15,9 @@
     <necessite id="sale" />
     <necessite id="SPIP" version="[2.1;)" />
 	<necessite id="gestdoc" />
-	<bouton id="dotclear2spip" parent="bando_administration">
+	<bouton id="dotclear2spip2" parent="bando_administration">
 		<icone>dc.png</icone>
+		<url>dotclear2spip</url>
 		<titre>Migration depuis Dotclear</titre>
 	</bouton>
 	
