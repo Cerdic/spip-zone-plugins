@@ -1,8 +1,8 @@
 <plugin>
-<nom>P&eacute;tronille</nom>
+<nom>P&eacute;tronille 1</nom>
 <icon>icon.png</icon>
-<description>Framework CSS pour SPIP, encore exp&eacute;rimental, P&eacute;tronille fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.</description>
-<version>0.5.7</version>
+<description>Framework CSS pour SPIP, P&eacute;tronille fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.</description>
+<version>1.0</version>
 <etat>dev</etat>
 <categorie>outil</categorie>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
