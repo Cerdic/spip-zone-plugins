@@ -306,7 +306,7 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 
 		$step2 .= "<li><label for='separateur'>"._T("csvimport:caracteres_separation")."</label>";
 		$step2 .= "<input type='text' name='delim' id='separateur' class='text' style='width:2em;' maxlength='1' value='$delim' /></li>";
-		$step2 .= "<li><label for='entete'>"._L("csvimport:ligne_entete")."</label>";
+		$step2 .= "<li><label for='entete'>"._T("csvimport:ligne_entete")."</label>";
 		$step2 .= "<input type='checkbox' name='head' id='entete' class='fondl' style='width:2em;' value='true'";
 		if ($head==true)
 		  $step2 .= " checked='checked'";
@@ -400,7 +400,7 @@ function exec_csvimport_import(){
 		$retour = generer_url_ecrire('csvimport_tous');
 	
 	$titre = _T("csvimport:import_csv",array('table'=>$table));
-	$icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
+	$icone = _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 	$operations = array();
 
 	if ($table===NULL && $id_form) {
@@ -438,8 +438,8 @@ function exec_csvimport_import(){
 	
 	echo debut_gauche('',true);
 	
-	$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
-	$raccourcis .= icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+	$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+	$raccourcis .= icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
 
 	echo bloc_des_raccourcis($raccourcis);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'csvimport_import','table'=>$table),'data'=>''));
