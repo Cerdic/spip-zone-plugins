@@ -40,6 +40,11 @@
 		<titre>Infos SPIP</titre>
 		<url>get_infos_spip</url>
 	</bouton>
+	<bouton id='get_infos_spip2' parent='bando_configuration'>
+		<icone>images/gins-24.png</icone>
+		<titre>Infos SPIP</titre>
+		<url>get_infos_spip</url>
+	</bouton>
 	
 	<necessite id='SPIP' version='[2.1.2;]' />
 	
