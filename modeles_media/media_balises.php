@@ -154,8 +154,10 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$taille,$hauteur,$largeur,
 	else
 		$largeur = 100000;
 	// Doit-on redimensionner ?
-	if ($height > $hauteur || $width > $largeur)
+	if ($height > $hauteur || $width > $largeur) {
+		include_spip('inc/filtres_images_mini');
 		$img = image_reduire($src,$largeur,$hauteur);
+		}
 	else
 		$img = "<img src=\"$src\" style=\"height: $height px; width: $width px;\" height=\"$height\" width=\"$width\" />";
 	// Ajouter une alternative
