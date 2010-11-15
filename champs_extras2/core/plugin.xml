@@ -3,6 +3,7 @@
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.7.1</version>
+	<icon>images/cextras-64.png</icon>
 	<description>
 		<multi>
 			[fr]Cr&#233;er de nouveaux champs aux objets d'&#233;dition de SPIP
