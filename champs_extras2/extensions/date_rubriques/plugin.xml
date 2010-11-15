@@ -4,6 +4,7 @@
 	<licence>GNU/GPL</licence>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
+	<icon>images/drextras-64.png</icon>
 	<description>
 		<multi>
 		[fr]Ajoute un champ "date" sur les rubriques de SPIP
