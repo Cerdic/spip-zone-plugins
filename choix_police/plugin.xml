@@ -35,6 +35,7 @@ _ |margev=30px
 _ |margeh=0px
 _ |valign=top&gt;
 	</description>
+	<lien>http://www.spip-contrib.net/Choix-Police-Typo</lien>
 	<prefix>choix_police</prefix>
     <fonctions>choix_police_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.10;]" />
