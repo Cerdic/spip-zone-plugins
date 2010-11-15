@@ -59,11 +59,10 @@ function pages_formulaire_charger($flux){
 	
 		// Si on est dans un article de type page
 		if (_request('type') == 'page' or ($flux['data']['page'] and _request('type') != 'article')){
-		
 			$flux['data']['type'] = 'page';
-		
+			$flux['data']['champ_page'] = $flux['data']['page'];
 		}
-	
+		unset($flux['data']['page']);
 	}
 	
 	return $flux;
@@ -105,7 +104,8 @@ function pages_editer_contenu_objet($flux){
     	$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
     	if ($erreurs['champ_page'])
     		$remplace .= '<span class="erreur_message">'.$erreurs['champ_page'].'</span>';
-    	$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$args['contexte']['page'].'" />';
+    	$value = $args['contexte']['champ_page'] ? $args['contexte']['champ_page'] : $args['contexte']['page'];
+    	$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$value.'" />';
     	$remplace .= '</li>';
 		$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
 	
@@ -118,7 +118,6 @@ function pages_editer_contenu_objet($flux){
 
 // Ajouter le champ page reçu par POST dans les champs à mettre à jour
 function pages_pre_edition_ajouter_page($flux){
-
 	if (is_array($flux) and $flux['args']['type'] == 'article'){
 	
 		// Si elle existe on récupère la page dans ce qui a été posté
@@ -128,14 +127,11 @@ function pages_pre_edition_ajouter_page($flux){
 			$flux['data']['page'] = $page;
 			// Et on force l'id_rubrique à -1
 			$flux['data']['id_rubrique'] = '-1';
-		
+			// si l'id_parent est supérieur à 0 on pense à vider le champ "page"
+			if (_request('id_parent') > 0){
+				$flux['data']['page'] = '';
+			}
 		}
-		
-		// si l'id_parent est supérieur à 0 on pense à vider le champ "page"
-		if (_request('id_parent') > 0){
-			$flux['data']['page'] = '';
-		}
-	
 	}
 	
 	return $flux;
