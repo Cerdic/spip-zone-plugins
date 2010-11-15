@@ -6,7 +6,7 @@
 	<icon>img_pack/spipdf.png</icon>
 	<licence>(c) 2010 GPL</licence>
 	<lien>http://www.grafactory.net/blog/tag/spip</lien>
-	<version>0.1</version>
+	<version>0.1.1</version>
 	<etat>test</etat>
 	<description>
 		Conversion d'un article au format PDF par le biais d'un simple squelette cod&eacute; en HTML 4.01.<br />
@@ -19,5 +19,9 @@
 		<nom>recuperer_fond</nom>
 		<inclure>spipdf.php</inclure>
 	</pipeline>
-    <categorie>edition</categorie>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>spipdf.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
 </plugin>

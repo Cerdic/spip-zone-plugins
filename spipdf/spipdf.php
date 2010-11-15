@@ -16,8 +16,8 @@
 
 // Charset (qui peut être défini dans un fichier d'options
 if (!defined('SPIPDF_CHARSET')) {
-	//define('SPIPDF_CHARSET', 'UTF-8');
-	define('SPIPDF_CHARSET', 'ISO-8859-15');
+	define('SPIPDF_CHARSET', 'UTF-8');
+	//define('SPIPDF_CHARSET', 'ISO-8859-15');
 }
 
 // utilisé pour le constructeur de HTML2PDF
@@ -151,10 +151,17 @@ function spipdf_recuperer_fond($flux) {
             }
             // envoyer le code binaire du PDF dans le flux
 			$flux['data']['texte'] = $html2pdf->Output('', true);
+			
+			// On échappe les suites de caractères <? pour éviter des erreurs d'évaluation PHP (seront remis en place avec affichage_final)
+			$flux['data']['texte'] = preg_replace('/<\?/','<§§§§§>',$flux['data']['texte']);
 		}
 		catch(HTML2PDF_exception $e) { echo $e; }
 	}
 	return $flux;
+}
 
+// On rétablit les <? du code PDF
+function spipdf_affichage_final($texte) {
+	return preg_replace('/<§§§§§>/','<?',$texte);
 }
 ?>
