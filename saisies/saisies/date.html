@@ -1,0 +1,12 @@
+[(#REM) Zone de saisie de date utilsant le dateur de Bonux si présent.
+		  Sur les sites en HTML5, utilise type="date"
+        sur le input, et type="text" par défaut pour les autres.
+        Pour tous on utilise class="date" pour activer le dateur.
+		  La date est proposée au format jj/mm/aaaa
+]
+#SET{valeur,#ENV{valeur,#ENV{defaut}}}
+[(#INCLURE{fond=saisies/input}{env}
+	{valeur=#GET{valeur}|affdate{'d/m/Y'}}
+	{type=#HTML5|?{date,text}}
+	{class=date})]
+[(#INCLURE{fond=formulaires/dateur/inc-dateur})]
