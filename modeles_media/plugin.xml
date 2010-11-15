@@ -3,7 +3,7 @@
 	<auteur>Joseph</auteur>
 	<version>0.2.0</version>
 	<etat>test</etat>
-	<description>Prototype de nouveaux mod&egrave;les pour l'insertion des documents. La syntaxe et le comportement peuvent &eacute;voluer (voir la doc). Ne pas utiliser sur un site en production.</description>
+	<description>Mod&egrave;les alternatifs pour l'insertion des documents.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3593</lien>
 	<icon>images/media-24.png</icon>
 	<prefix>media</prefix>
@@ -35,5 +35,6 @@
 	</pipeline>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="gestdoc" />
 	<utilise id="inserer_modeles" version="[0.3;]" />
 </plugin>
