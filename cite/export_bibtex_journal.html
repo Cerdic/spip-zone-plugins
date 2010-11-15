@@ -1,0 +1,13 @@
+#HTTP_HEADER{Content-Type: application/x-bibtex}#HTTP_HEADER{Content-Disposition: attachment; filename=export.bib}
+@Article{,
+	[title = {(#ENV{title}|trim)},]
+	[journal = {(#ENV{journal}|trim)},]
+	[(#ENV{authors}|cite_authors_bibtex)]
+	[year = {(#ENV{year}|trim)},]
+	[volume = {(#ENV{volume}|trim)},]
+	[number = {(#ENV{issue}|trim)},]
+	[pages = {(#ENV{pages}|trim|replace{'-','--'})},]
+	[issn = {(#ENV{issn}|trim)},]
+	[doi = {(#ENV{doi}|trim)},]
+	[url = {(#ENV{url}|trim)},]
+}#FILTRE{bibtex_encode}

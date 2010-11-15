@@ -1,0 +1,71 @@
+nom: '<:cite:reference_bibliographie:>'
+logo: 'images/cite-24.png'
+icone_barre: 'cite.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'cite'
+
+    saisie: 'selection'
+    options:
+      nom: 'variante'
+      label: '<:cite:label_variante:>'
+      obligatoire: 'oui'
+      cacher_option_intro: 'oui'
+      defaut: 'journal'
+      datas:
+        journal: '<:cite:item_journal:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'authors'
+      label: '<:cite:label_authors:>'
+      explication: '<:cite:explication_authors:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'title'
+      label: '<:cite:label_title:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'journal'
+      label: '<:cite:label_journal:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'year'
+      label: '<:cite:label_year:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'volume'
+      label: '<:cite:label_volume:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'issue'
+      label: '<:cite:label_issue:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'pages'
+      label: '<:cite:label_pages:>'
+      explication: '<:cite:explication_pages:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'url'
+      label: '<:cite:label_url:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'doi'
+      label: '<:cite:label_doi:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'issn'
+      label: '<:cite:label_issn:>'

@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Mod&egrave;les &lt;cite&gt;</nom>
+	<auteur>Joseph</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Ce plugin fournit des mod&egrave;les pour ins&eacute;rer des r&eacute;f&eacute;rences bibliographiques.</description>
+	<lien></lien>
+	<icon>images/cite-64.png</icon>
+	<prefix>cite</prefix>
+	<fonctions>cite_fonctions.php</fonctions>
+	<categorie>edition</categorie>
+</plugin>
