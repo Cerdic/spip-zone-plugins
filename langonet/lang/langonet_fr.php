@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
+	'bouton_corriger_definition' => 'T&eacute;l&eacute;charger le fichier de langue corrig&eacute;',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_langonet' => 'V&eacute;rifier les langues',
 	'bouton_lister' => 'Afficher',
@@ -12,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_verifier' => 'V&eacute;rifier',
 	'bulle_afficher_fichier_log' => 'Afficher le log du @date@',
 	'bulle_afficher_fichier_lang' => 'Afficher le fichier de langue g&eacute;n&eacute;r&eacute; le @date@',
+	'bulle_corriger_definition' => 'T&eacute;l&eacute;charger le fichier de langue corrig&eacute;',
 	'bulle_telecharger_fichier_lang' => 'T&eacute;l&eacute;charger le fichier de langue g&eacute;n&eacute;r&eacute; le @date@',
 	'bulle_telecharger_fichier_log' => 'T&eacute;l&eacute;charger le log du @date@',
 

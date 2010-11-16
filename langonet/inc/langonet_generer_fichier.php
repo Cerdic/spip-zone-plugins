@@ -9,7 +9,7 @@
  * @param string $mode [optional]
  * @return 
  */
-function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='html') {
+function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='html', $oublis=array()) {
 	$resultats = array();
 
 	include_spip('inc/traduire');
@@ -39,8 +39,13 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	$i = 0;
 	$initiale = '';
 	$texte = '';
+	$source = array();
 	$source = $GLOBALS[$var_source];
-	ksort($source);
+	// Si on demande de generer le fichier corrige alors on fournit la liste des items a ajouter
+	if ($oublis)
+		$source = array_merge($source, $oublis);
+	if ($source) 
+		ksort($source);
 	foreach ($source as $_item => $_valeur) {
 		$i++;
 		if ($initiale != strtoupper(substr($_item, 0, 1))) {
@@ -63,6 +68,8 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 					$valeur_cible = addslashes($_valeur);
 				else if ($mode == 'vide')
 					$valeur_cible = '';
+				else if ($mode == 'oubli')
+					$valeur_cible = '<LANGONET>';
 				else
 					$valeur_cible = $_item;
 				$texte .= "\t'" . $_item . "' => '" . $valeur_cible . "',\n";
@@ -98,6 +105,7 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 										array('langue' => $langue_cible, 'module' => $module));
 	}
 	else {
+		$resultats['fichier'] = $f;
 		$resultats['message_ok'] = _T('langonet:message_ok_fichier_genere', 
 									array('langue' => $langue_cible, 'module' => $module, 'fichier' => $f));
 	}

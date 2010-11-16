@@ -27,17 +27,17 @@
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:langonet:bouton_lister:>" />
 		</p>
-
-		[(#REM) <!-- Affichage des resultats --> ]
-		[<ul>
-			<li class="fieldset" style="overflow: visible;">
-				<fieldset>
-					<h3 class="legend"><:langonet:legende_table:></h3>
-					[<p class="explication">(#ENV*{message_ok}|table_valeur{explication})</p>]
-					(#ENV*{message_ok}|table_valeur{table})
-				</fieldset>
-			</li>
-		</ul>]
 	</div></form>
 	]
+
+	[(#REM) <!-- Affichage des resultats --> ]
+	[<ul>
+		<li class="fieldset" style="overflow: visible;">
+			<fieldset>
+				<h3 class="legend"><:langonet:legende_table:></h3>
+				[<p class="explication">(#ENV*{message_ok}|table_valeur{explication})</p>]
+				(#ENV*{message_ok}|table_valeur{table})
+			</fieldset>
+		</li>
+	</ul>]
 </div>

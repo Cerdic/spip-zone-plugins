@@ -51,6 +51,16 @@ function formulaires_langonet_verifier_traiter() {
 		// Verification et formatage des resultats pour affichage
 		$retour = array();
 		$resultats = $langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification);
+		
+		// Creation du fichier de langue corrige avec les items detectes comme non definis
+		if (($verification == 'definition') 
+		AND (count($resultats['item_non']) > 0)) {
+			$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
+			$oublis = array();
+			foreach ($resultats['item_non'] as $_item)
+				$oublis[$_item] = '';
+			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode='oubli', $encodage='html', $oublis);
+		}
 	}
 	else {
 		// Chargement de la fonction de verification
@@ -66,7 +76,7 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour = formater_resultats($verification, $resultats);
+		$retour = formater_resultats($verification, $resultats, $corrections);
 	}
 	$retour['editable'] = true;
 	return $retour;
@@ -77,6 +87,7 @@ function formulaires_langonet_verifier_traiter() {
  *
  * @param string $verification
  * @param string $resultats
+ * @param string $corrections
  * @return array
  */
 
@@ -95,7 +106,10 @@ function formulaires_langonet_verifier_traiter() {
 //                    ["item_peut_etre"][] => intitule partiel item
 //                    ["fichier_peut_etre"][item][fichier utilisant][num de la ligne][] => extrait ligne
 // $verification => type de verification effectuee (definition ou utilisation)
-function formater_resultats($verification, $resultats) {
+// $corrections  => tableau des resultats de la generation du fichier de langue corrige
+function formater_resultats($verification, $resultats, $corrections) {
+
+	include_spip('inc/actions');
 
 	// On charge le filtre de coloration si le plugin Coloration Code est actif
 	// Pour un bonne presentation il faut utiliser une version >= 0.6
@@ -123,7 +137,11 @@ function formater_resultats($verification, $resultats) {
 			}
 			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non'] .= afficher_lignes('non', $resultats['fichier_non'], array(), $f_coloriser);
-			$texte['non'] .= "</div>\n</div>\n";
+			$texte['non'] .= "</div><br />\n";
+			$texte['non'] .= bouton_action(_T('langonet:bouton_corriger_definition'), 
+											generer_action_auteur('langonet_telecharger', $corrections['fichier']),
+											"", "", _T('langonet:bulle_corriger_definition'));
+			$texte['non'] .= "</div>\n";
 		}
 		else {
 			$texte['non'] .= '<div class="success">' . "\n";

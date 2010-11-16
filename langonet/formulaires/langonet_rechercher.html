@@ -41,17 +41,17 @@
 		<p class='boutons'>
 			<input type='submit' class='submit' value='<:langonet:bouton_rechercher:>' />
 		</p>
-
-		[(#REM) <!-- Affichage des resultats --> ]
-		[(#SET{total_trouves, [(#ENV*{message_ok}|table_valeur{total})]})]
-		[<ul>
-			<li class="fieldset">
-				<fieldset>
-					<h3 class="legend"><:langonet:legende_trouves{total=#GET{total_trouves}}:></h3>
-					(#ENV*{message_ok}|table_valeur{trouves})
-				</fieldset>
-			</li>
-		</ul>]
 	</div></form>
 	]
+
+	[(#REM) <!-- Affichage des resultats --> ]
+	[(#SET{total_trouves, [(#ENV*{message_ok}|table_valeur{total})]})]
+	[<ul>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:langonet:legende_trouves{total=#GET{total_trouves}}:></h3>
+				(#ENV*{message_ok}|table_valeur{trouves})
+			</fieldset>
+		</li>
+	</ul>]
 </div>
