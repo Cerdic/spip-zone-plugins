@@ -38,6 +38,7 @@
 	[(#ENV{type_saisie}|in_array{#GET{saisies_autonomes}}|non)
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
 		#SET{li_class,#ENV{type_saisie}|substr{0,9}|=={selecteur}|?{selecteur_item,''}}
+		<!--!inserer_saisie_editer-->
 		<li class="editer editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{li_class})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ (#GET{masquer_li}|oui)style="display:none;"]>
 			#ENV*{inserer_debut}
 			[<label[(#ENV{type_saisie}|match{oui_non|radio|checkbox}|non) for="champ_#ENV{nom}"]>(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
