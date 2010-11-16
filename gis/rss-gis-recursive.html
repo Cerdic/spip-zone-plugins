@@ -22,7 +22,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 		[<guid>(#ID_ARTICLE)</guid>]
 		[<link>(#URL_ARTICLE|url_absolue)</link>]
 		<description><![CDATA[
-			[<p>(#TEXTE|supprimer_tags|texte_backend)</p>]
+			[<p>(#CHAPO|sinon{#DESCRIPTIF}|supprimer_tags|texte_backend)</p>]
 			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}><a href='[(#URL_DOCUMENT|url_absolue)]' [title='(#TITRE|texte_backend)']><img src='[(#LOGO_DOCUMENT||fichier|url_absolue)]' [height='(#LOGO_DOCUMENT||hauteur)'] [width='(#LOGO_DOCUMENT||largeur)'] alt='[(#TITRE|texte_backend|sinon{Image})]' /></a></BOUCLE_imaxe>
 			<span>[(#DATE|date_iso)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> <a href='[(#URL_AUTEUR|url_absolue)]'>(#NOM|texte_backend)</a>]</BOUCLE_autores></span>
 		]]></description>
