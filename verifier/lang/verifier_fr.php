@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'type_date' => 'Date',
 	'type_date_description' => 'V&eacute;rifie que la valeur est une date au format JJ/MM/AAAA. Le s&eacute;parateur est libre (&quot;.&quot;, &quot;/&quot;, etc).',
-	'type_decimal' => 'Nombre &agrave; d&eacute;cimal',
+	'type_decimal' => 'Nombre d&eacute;cimal',
 	'type_decimal_description' => 'V&eacute;rifie que la valeur est un nombre d&eacute;cimal, avec la possibilit&eacute; de restreindre entre deux valeurs et de pr&eacute;ciser le nombre de d&eacute;cimales apr&egrave;s la virgule.',
 	'type_email' => 'Adresse de courriel',
 	'type_email_description' => 'V&eacute;rifie que l\'adresse de courriel a un format correct.',
