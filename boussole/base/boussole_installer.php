@@ -15,6 +15,14 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 
 		spip_log('INSTALLATION BDD','boussole');
 	}
+		
+	if (!isset($GLOBALS['meta']['boussole_infos_spip'])) {
+		include_spip('inc/deboussoler');
+		// On ajoute la boussole SPIP par defaut.
+		// Cependant on ne teste ni la validite du fichier xml fourni ni la bonne insertion en bdd
+		$url = boussole_localiser_xml('', 'standard');
+		boussole_ajouter($url, $erreur);
+	}
 }
 
 function boussole_vider_tables($nom_meta_base_version) {
