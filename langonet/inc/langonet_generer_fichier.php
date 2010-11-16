@@ -39,11 +39,12 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	$i = 0;
 	$initiale = '';
 	$texte = '';
-	$source = array();
+	// On recupere les items du fichier de langue si celui ci n'est pas vide
 	$source = $GLOBALS[$var_source];
+	$source = (!$source) ? array() : $source;
 	// Si on demande de generer le fichier corrige alors on fournit la liste des items a ajouter
-	if ($oublis)
-		$source = array_merge($source, $oublis);
+	$source = ($oublis) ? array_merge($source, $oublis) : $source;
+	// On range les items dans l'ordre alphabetique
 	if ($source) 
 		ksort($source);
 	foreach ($source as $_item => $_valeur) {
