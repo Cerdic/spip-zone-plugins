@@ -17,7 +17,7 @@ function inserer_modeles_lister_formulaires_modeles(){
 		if (count($liste)){
 			include_spip('inc/yaml');
 			foreach($liste as $formulaire => $chemin)
-				$liste_formulaires_modeles[$formulaire] = yaml_decode_file($chemin);
+				$liste_formulaires_modeles[$formulaire] = yaml_charger_inclusions(yaml_decode_file($chemin));
 		}
 	}
 	
@@ -38,7 +38,7 @@ function charger_infos_formulaire_modele($formulaire){
 			$formulaire .= '.yaml';
 		if ($chemin = find_in_path($formulaire,'modeles/')) {
 			include_spip('inc/yaml');
-			$infos_formulaires_modeles[$formulaire] = yaml_decode_file($chemin);
+			$infos_formulaires_modeles[$formulaire] = yaml_charger_inclusions(yaml_decode_file($chemin));
 		}
 	}
 	
