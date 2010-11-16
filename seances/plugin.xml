@@ -1,7 +1,7 @@
 <plugin>
 	<nom>S&eacute;ances</nom>
 	<auteur>Dominique Wojylac</auteur>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>stable</etat>
 	<icon>images/seances-48.png</icon>
 	<licence>GPL 3 - &#169; 2010</licence>
@@ -51,5 +51,5 @@
 		<inclure>genie/seances_nettoyer_base.php</inclure>
 	</pipeline>
 	<categorie>date</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.0.10;]" />
 </plugin>
