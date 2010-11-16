@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_code_postal' => 'Ce code postal est incorrect.',
 	'erreur_date' => 'La date n\'est pas valide.',
 	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.',
+	'erreur_decimal' => 'La valeur doit &ecirc;tre un nombre d&eacute;cimal.',
+	'erreur_decimal_nb_decimales' => 'Le nombre ne doit pas avoir plus de @nb_decimales@ chiffres apr&egrave;s la virgule.',
 	'erreur_email' => 'L\'adresse de courriel <em>@email@</em> n\'a pas un format valide.',
 	'erreur_email_nondispo' => 'L\'adresse de courriel <em>@email@</em> est d&eacute;j&agrave; utilis&eacute;e.',
 	'erreur_entier' => 'La valeur doit &ecirc;tre un entier.',
@@ -28,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'L\'adresse n\\\'est pas valide.',
 
 	// O
+	'option_decimal_nb_decimales_label' => 'Nombre de d&eacute;cimales apr&egrave;s la virgule',
 	'option_email_disponible_label' => 'Adresse disponible',
 	'option_email_disponible_label_case' => 'V&eacute;rifier que l\'adresse n\'est pas d&eacute;j&agrave; utilis&eacute;e par un utilisateur',
 	'option_email_mode_5322' => 'V&eacute;rification la plus conforme aux standards disponibles',
@@ -46,11 +49,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'type_date' => 'Date',
 	'type_date_description' => 'V&eacute;rifie que la valeur est une date au format JJ/MM/AAAA. Le s&eacute;parateur est libre (&quot;.&quot;, &quot;/&quot;, etc).',
+	'type_decimal' => 'Nombre &agrave; d&eacute;cimal',
+	'type_decimal_description' => 'V&eacute;rifie que la valeur est un nombre d&eacute;cimal, avec la possibilit&eacute; de restreindre entre deux valeurs et de pr&eacute;ciser le nombre de d&eacute;cimales apr&egrave;s la virgule.',
 	'type_email' => 'Adresse de courriel',
 	'type_email_description' => 'V&eacute;rifie que l\'adresse de courriel a un format correct.',
 	'type_email_disponible' => 'Disponibilit&eacute; d\'une adresse de courriel',
 	'type_email_disponible_description' => 'V&eacute;rifie que l\'adresse de courriel n\'est pas d&eacute;j&agrave; utilis&eacute; par un autre utilisateur du syst&egrave;me.',
-	'type_entier' => 'Entier',
+	'type_entier' => 'Nombre entier',
 	'type_entier_description' => 'V&eacute;rifie que la valeur est un entier, avec la possibilit&eacute; de restreindre entre deux valeurs.',
 	'type_regex' => 'Expression r&eacute;guli&egrave;re',
 	'type_regex_description' => 'V&eacute;rifie que la valeur correspond au masque demand&eacute;. Pour l\'utilisation des masques, reportez-vous à <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l\'aide en ligne de PHP</a>.',
