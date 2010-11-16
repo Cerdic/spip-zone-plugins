@@ -52,14 +52,20 @@ function formulaires_langonet_verifier_traiter() {
 		$retour = array();
 		$resultats = $langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification);
 		
-		// Creation du fichier de langue corrige avec les items detectes comme non definis
-		if (($verification == 'definition') 
-		AND (count($resultats['item_non']) > 0)) {
+		// Creation du fichier de langue corrige avec les items detectes comme non definis ou obsoletes
+		// suivant la verification en cours
+		if (count($resultats['item_non']) > 0) {
 			$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-			$oublis = array();
-			foreach ($resultats['item_non'] as $_item)
-				$oublis[$_item] = '';
-			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode='oubli', $encodage='html', $oublis);
+			if ($verification == 'definition') {
+				$oublies = array();
+				foreach ($resultats['item_non'] as $_item)
+					$oublies[$_item] = '';
+				$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode='oublie', $encodage='html', $oublies);
+			}
+			else {
+				$inutiles = $resultats['item_non'];
+				$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode='inutile', $encodage='html', $inutiles);
+			}
 		}
 	}
 	else {
@@ -225,7 +231,11 @@ function formater_resultats($verification, $resultats, $corrections) {
 			foreach($resultats['item_non'] as $_cle => $_item) {
 				$texte['non'] .= "<div class=\"titrem\">\n" . $_item . "</div>\n";
 			}
-			$texte['non'] .= "</div>\n</div>\n";
+			$texte['non'] .= "</div><br />\n";
+			$texte['non'] .= bouton_action(_T('langonet:bouton_corriger_definition'), 
+											generer_action_auteur('langonet_telecharger', $corrections['fichier']),
+											"", "", _T('langonet:bulle_corriger_definition'));
+			$texte['non'] .= "</div>\n";
 		}
 		else {
 			$texte['non'] .= '<div class="success">' . "\n";

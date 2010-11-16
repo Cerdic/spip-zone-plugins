@@ -7,9 +7,11 @@
  * @param string $ou_langue
  * @param string $langue_cible [optional]
  * @param string $mode [optional]
+ * @param string $encodage [optional]
+ * @param array $oublis_inutiles [optional]
  * @return 
  */
-function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='html', $oublis=array()) {
+function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='html', $oublis_inutiles=array()) {
 	$resultats = array();
 
 	include_spip('inc/traduire');
@@ -43,7 +45,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	$source = $GLOBALS[$var_source];
 	$source = (!$source) ? array() : $source;
 	// Si on demande de generer le fichier corrige alors on fournit la liste des items a ajouter
-	$source = ($oublis) ? array_merge($source, $oublis) : $source;
+	$source = ($mode == 'oublie') ? array_merge($source, $oublis_inutiles) : $source;
 	// On range les items dans l'ordre alphabetique
 	if ($source) 
 		ksort($source);
@@ -55,7 +57,11 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 		}
 		$valeur_cible = $GLOBALS[$var_cible][$_item];
 		if ($GLOBALS[$var_cible][$_item]) {
-			$texte .= "\t'" . $_item . "' => '" . addslashes($valeur_cible) . "',\n";
+			$definition = "\t'" . $_item . "' => '" . addslashes($valeur_cible) . "',\n";
+			if (($mode == 'inutile') AND in_array($_item, $oublis_inutiles))
+				$texte .= "/*\t<LANGONET_DEFINITION_OBSOLETE>\n" . $definition . "*/\n";
+			else
+				$texte .= $definition;
 		}
 		else {
 			if ($mode != 'pas_item') {
@@ -69,8 +75,8 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 					$valeur_cible = addslashes($_valeur);
 				else if ($mode == 'vide')
 					$valeur_cible = '';
-				else if ($mode == 'oubli')
-					$valeur_cible = '<LANGONET>';
+				else if ($mode == 'oublie')
+					$valeur_cible = '<LANGONET_DEFINITION_MANQUANTE>';
 				else
 					$valeur_cible = $_item;
 				$texte .= "\t'" . $_item . "' => '" . $valeur_cible . "',\n";
