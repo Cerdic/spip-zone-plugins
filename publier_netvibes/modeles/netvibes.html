@@ -8,8 +8,8 @@
 [(#SET{fic_xml, [(#EVAL{_DIR_CACHE}|concat{[(#UNIVERS)],_,[(#GET{url_xml}|md5)],.xml})] })]
 [(#GET{url_xml}|recuperer_page{[(#GET{fic_xml})]})]
 
-url_xml: #GET{url_xml}<br>
-fic_xml: #GET{fic_xml}<br>
+<:publiernetvibes:url_xml:> url_xml: #GET{url_xml}<br>
+<:publiernetvibes:fichier_xml:> fic_xml: #GET{fic_xml}<br>
 <br>
 
 <div class="tabs_netvibes">
