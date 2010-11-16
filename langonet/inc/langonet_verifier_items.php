@@ -177,27 +177,29 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	}
 	else {
 		// On construit la liste des items definis mais plus utilises
-		foreach ($GLOBALS[$var_source] as $_item => $_traduction) {
-			if (!in_array ($_item, $utilises['items'])) {
-				// L'item est soit non utilise, soit utilise dans un contexte variable
-				$contexte_variable = false;
-				foreach($utilises['items'] as $_cle => $_valeur) {
-					if ($utilises['suffixes'][$_cle]) {
-						if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
-							$contexte_variable = true;
-							break;
+		if ($GLOBALS[$var_source]) {
+			foreach ($GLOBALS[$var_source] as $_item => $_traduction) {
+				if (!in_array ($_item, $utilises['items'])) {
+					// L'item est soit non utilise, soit utilise dans un contexte variable
+					$contexte_variable = false;
+					foreach($utilises['items'] as $_cle => $_valeur) {
+						if ($utilises['suffixes'][$_cle]) {
+							if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
+								$contexte_variable = true;
+								break;
+							}
 						}
 					}
-				}
-				if (!$contexte_variable) {
-					// L'item est vraiment non utilise
-					$item_non[] = $_item;
-				}
-				else {
-					// L'item est utilise dans un contexte variable
-					$item_peut_etre[] = $_item;
-					if (is_array($item_tous[$_valeur])) {
-						$fichier_peut_etre[$_item] = $item_tous[$_valeur];
+					if (!$contexte_variable) {
+						// L'item est vraiment non utilise
+						$item_non[] = $_item;
+					}
+					else {
+						// L'item est utilise dans un contexte variable
+						$item_peut_etre[] = $_item;
+						if (is_array($item_tous[$_valeur])) {
+							$fichier_peut_etre[$_item] = $item_tous[$_valeur];
+						}
 					}
 				}
 			}
