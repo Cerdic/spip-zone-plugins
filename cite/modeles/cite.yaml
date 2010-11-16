@@ -17,27 +17,37 @@ parametres:
       defaut: 'journal'
       datas:
         journal: '<:cite:item_journal:>'
+        book: '<:cite:item_book:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'title'
+      label: '<:cite:label_title:>'
+      obligatoire: 'oui'
   -
     saisie: 'input'
     options:
       nom: 'authors'
       label: '<:cite:label_authors:>'
       explication: '<:cite:explication_authors:>'
-  -
-    saisie: 'input'
-    options:
-      nom: 'title'
-      label: '<:cite:label_title:>'
+      obligatoire: 'oui'
   -
     saisie: 'input'
     options:
       nom: 'journal'
       label: '<:cite:label_journal:>'
+      afficher_si: '@variante@ == "journal"'
   -
     saisie: 'input'
     options:
       nom: 'year'
       label: '<:cite:label_year:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'series'
+      label: '<:cite:label_series:>'
+      afficher_si: '@variante@ == "book"'
   -
     saisie: 'input'
     options:
@@ -48,6 +58,34 @@ parametres:
     options:
       nom: 'issue'
       label: '<:cite:label_issue:>'
+      afficher_si: '@variante@ == "journal"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'edition'
+      label: '<:cite:label_edition:>'
+      explication: '<:cite:explication_edition:>'
+      afficher_si: '@variante@ == "book"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'editors'
+      label: '<:cite:label_editors:>'
+      explication: '<:cite:explication_editors:>'
+      afficher_si: '@variante@ == "chapter"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'publisher'
+      label: '<:cite:label_publisher:>'
+      explication: '<:cite:explication_publisher:>'
+      afficher_si: '@variante@ == "book"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'place'
+      label: '<:cite:label_place:>'
+      afficher_si: '@variante@ == "book"'
   -
     saisie: 'input'
     options:

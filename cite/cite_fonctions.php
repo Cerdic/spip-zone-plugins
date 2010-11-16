@@ -45,6 +45,40 @@ function cite_pages_ris ($pages) {
 	return $ret;
 }
 
+function cite_editors_coins ($auts) {
+	$ret = '';
+	$auts = explode(';',$auts);
+	foreach ($auts as $aut) {
+		$aut = explode(',',$aut,2);
+		$ret .= '&rft.contributor='.urlencode(trim($aut[0]).',');
+		if ($aut[1])
+			$ret .= urlencode(' '.trim($aut[1]));
+	}
+	return $ret;
+}
+
+function cite_editors_ris ($auts) {
+	$auts = explode(';',$auts);
+	foreach ($auts as $cle => $aut) {
+		$aut = explode(',',$aut,2);
+		$auts[$cle] = 'ED  - '.trim($aut[0]).',';
+		if ($aut[1])
+			$auts[$cle] .= trim($aut[1]);
+	}
+	return implode("\n",$auts);
+}
+
+function cite_editors_bibtex ($auts) {
+	$auts = explode(';',$auts);
+	foreach ($auts as $cle => $aut) {
+		$aut = explode(',',$aut,2);
+		$auts[$cle] = trim($aut[0]).',';
+		if ($aut[1])
+			$auts[$cle] .= " ".trim($aut[1]);
+	}
+	return 'editor = {'.implode(" and ",$auts).'},';
+}
+
 function bibtex_encode($texte) {
 	include_spip('inc/transtab_unicode_bibtex');
 	foreach (transtab_unicode_bibtex() as $utf8 => $bibtex)
