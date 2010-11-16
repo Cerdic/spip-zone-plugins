@@ -7,7 +7,7 @@ parametres:
     options:
       nom: 'modele'
       defaut: 'cite'
-
+  -
     saisie: 'selection'
     options:
       nom: 'variante'
