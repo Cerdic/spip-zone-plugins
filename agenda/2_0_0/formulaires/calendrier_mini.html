@@ -49,7 +49,7 @@
 			{date_fin >= #GET{'borne_debut_mois'}}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
 				#DESCRIPTIF,#LIEU,
-				#ENV{self},'',#ENV{var_date}})]})
+				#ENV{self},'',#ENV{var_date}})
 			]</BOUCLE_calendrier>
 			[(#REM) le "courante" ci-dessus peut etre remplace par "debut" pour retrouver l'ancien comportement]
 			
