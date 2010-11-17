@@ -13,7 +13,7 @@
 [en]cy_altern, Eric Lupinacci, kent1 from a contribution of Silicium (silicium@japanim.net)
 		</multi>
 	</auteur>
-	<version>0.7.4</version>
+	<version>0.7.5</version>
 	<version_base>0.1.0</version_base>
 	<etat>dev</etat>
 	<prefix>saveauto</prefix>
@@ -31,7 +31,7 @@ Une interface permet de d&#233;clencher manuellement les sauvegardes et de g&#23
 
 [it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
 Il file .zip (o .sql) ottenuto &#232; memorizzato all'interno di una cartella (in maniera predefinita /tmp/dump, configurabile)
-e pu&ograve; essere inviato per posta elettronica.
+e pu&#242; essere inviato per posta elettronica.
 
 I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
 vengono automaticamente cancellati.
@@ -45,6 +45,7 @@ The stored backups considered obsolete (according to the corresponding config se
 	</description>
 	<lien>[->http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde]</lien>
 	<icon>img_pack/saveauto-24.png</icon>
+	<options>saveauto_options.php</options>
 	<pipeline>
 		<nom>mes_fichiers_a_sauver</nom>
 		<inclure>saveauto_pipelines.php</inclure>
