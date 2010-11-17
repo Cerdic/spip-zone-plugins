@@ -3,13 +3,14 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 ff=unix fenc=utf8: */
 
 /**
- * Génération d'article spip au format pdf
+ * Génération d'article SPIP au format PDF
  *
- * @package      spipdf
+ * @package      spiPDF
  * @author       Yves Tannier [grafactory.net]
  * @copyright    2010 Yves Tannier
+ * @link         http://www.spip-contrib.net/spiPDF-generer-des-contenus-sur-mesure-en-PDF
+ * @link         http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipdf
  * @link         http://www.grafactory.net/
- * @link         http://github.com/yvestan/spipdf
  * @license      GPL Gnu Public Licence
  * @version      0.1
  */
@@ -125,6 +126,7 @@ function spipdf_nettoyer_html($html) {
 
 }
 
+// traitement principal. avec ce pipeline, le PDF est mis en cache et recalculé "normalement"
 function spipdf_recuperer_fond($flux) {
 
 	// Le squelette est-il appelé par spipdf.html
@@ -153,11 +155,14 @@ function spipdf_recuperer_fond($flux) {
 			$flux['data']['texte'] = $html2pdf->Output('', true);
 			
 			// On échappe les suites de caractères <? pour éviter des erreurs d'évaluation PHP (seront remis en place avec affichage_final)
+            // l'erreur d'évaluation est liée à la directive short_open_tag=On dans la configuration de PHP
 			$flux['data']['texte'] = preg_replace('/<\?/','<§§§§§>',$flux['data']['texte']);
 		}
 		catch(HTML2PDF_exception $e) { echo $e; }
 	}
+
 	return $flux;
+
 }
 
 // On rétablit les <? du code PDF
