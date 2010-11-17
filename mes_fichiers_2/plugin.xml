@@ -5,16 +5,21 @@
 			[en]My files
 		</multi>
 	</nom>
-	<auteur>Eric Lupinacci, Quentin, d'apr&egrave;s la version initiale de James</auteur>
-	<version>1.0.0</version>
+	<auteur>
+		<multi>
+			[fr]Eric Lupinacci, kent1, d'apr&#232;s la version initiale de James
+			[en]Eric Lupinacci, kent1, according to the initial version of James
+		</multi>
+	</auteur>
+	<version>1.0.1</version>
 	<etat>test</etat>
-	<licence>GPL 3</licence>
+	<licence>GPL v3</licence>
 	<icon>prive/themes/spip/images/mes_fichiers-64.png</icon>
 	<description><multi>
-[fr]Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
-Le fichier d'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
+[fr]Ce plugin fabrique un fichier d'archives contenant les donn&#233;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&#233;s, le dossier images...
+Le fichier d'archives est cr&#233;&#233; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
 
-Il est aussi possible de lancer une sauvegarde journali&egrave;re automatique de tous les fichiers de personnalisation.
+Il est aussi possible de lancer une sauvegarde journali&#232;re automatique de tous les fichiers de personnalisation.
 [en]This plugin makes an archive file containing the customization datas of the site as the last database dump, the skeleton(s) file(s), the images folder...
 The archive file is created in <code>tmp/mes_fichiers/</code> and is called <code>mf2_aaaammjj_hhmmss.zip</code>.
 
