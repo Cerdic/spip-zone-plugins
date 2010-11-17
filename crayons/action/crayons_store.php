@@ -27,7 +27,7 @@ function post_crayons() {
             		$content[$field] = false;
             		# cf. valeur passee dans crayon->md5() : false ou filemtime() du logo
             } else {
-            	$content[$field] = $_POST['content_'.$crayon.'_'.$field];
+            	$content[$field] = is_array($_POST['content_'.$crayon.'_'.$field])?implode(',',$_POST['content_'.$crayon.'_'.$field]):$_POST['content_'.$crayon.'_'.$field];
             	// Compatibilite charset autre que utf8 ; en effet on recoit
             	// obligatoirement les donnees en utf-8, par la magie d'ajax
             	// ... sauf dans le cas d'un envoi de fichier !
