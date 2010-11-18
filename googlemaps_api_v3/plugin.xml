@@ -1,0 +1,45 @@
+<plugin>
+	<nom> <multi> [fr]Google Maps API v3 </multi> </nom>
+	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
+	<licence>GPL &#169; 2010</licence>
+	<version>0.2</version>
+	<version_base>0.2</version_base>
+	<icon>theme/img/gmaps_v3-32.png</icon>
+	<etat>dev</etat>
+	<description><multi>Interface Google Maps API v3</multi></description>
+	<!-- <lien>http://www.spip-contrib.net/XXXXXX/</lien> -->
+	<prefix>gmaps_v3</prefix>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>pipelines/gmaps_v3_insert_head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>pipelines/gmaps_v3_insert_head.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+        <inclure>pipelines/gmaps_v3_affiche_milieu.php</inclure>
+    </pipeline>
+		
+	<install>base/gmaps_v3_install.php</install>
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/gmaps_v3.php</inclure>
+	</pipeline>
+
+	<bouton id='gmaps_v3' parent='configuration'>
+		<icone>theme/img/gmaps_v3-24.png</icone>
+		<titre>gmaps_v3:titre_admin</titre>
+		<url>configurer_gmaps_v3</url>
+	</bouton>
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="cextras" version="[1.7.1;]" />
+	<utilise id="cfg" version="[1.9.4;]" />
+	
+	<categorie>divers</categorie>
+</plugin>

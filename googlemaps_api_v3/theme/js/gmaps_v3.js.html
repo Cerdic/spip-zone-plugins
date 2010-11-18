@@ -1,0 +1,44 @@
+[(#REM)  
+/*
+ * Initialiser l'API v3 de Google Maps
+ *
+ */
+]
+[(#SET{latitude,#ENV{latitude}|sinon{#CONFIG{config_gmaps_v3/latitude}}|sinon{42.112614}})]
+[(#SET{longitude,#ENV{longitude}|sinon{#CONFIG{config_gmaps_v3/longitude}}|sinon{8.701987}})]
+[(#SET{zoom,#ENV{zoom}|sinon{#CONFIG{config_gmaps_v3/zoom}}|sinon{15}})]
+[(#SET{mapType,#ENV{mapType}|sinon{#CONFIG{config_gmaps_v3/mapType}}|sinon{SATELLITE}})]
+[(#SET{nomCarte,#ENV{nomCarte}|sinon{#CONFIG{config_gmaps_v3/nomCarte}}|sinon{carte_gmaps_v3}})]
+
+[(#SET{json,#URL_PAGE{#ENV{json}}|sinon{#URL_PAGE{json-tousLesArticles}}})]
+[(#SET{icon,#ENV{icon}|sinon{#CHEMIN{theme/img/gmaps_v3-24.png}}})]
+
+<script type="text/javascript" charset="utf-8">	
+function affichageNormal(){
+	var latLng = new google.maps.LatLng(#GET{latitude},#GET{longitude});
+	var options = {
+		center: latLng,
+		zoom: #GET{zoom},
+		mapTypeId: google.maps.MapTypeId.#GET{mapType}
+	};
+	var laCarte = new google.maps.Map(document.getElementById("#GET{nomCarte}"), options);
+	var infoWindow = new google.maps.InfoWindow();	
+	
+	var url="#GET{json}";
+	jQuery.getJSON(url,function(lesMarqueurs){
+		jQuery.each(lesMarqueurs,function(i,leMarqueur){
+			var marqueur = new google.maps.Marker({
+				position: new google.maps.LatLng(leMarqueur.latitude,leMarqueur.longitude),
+				title: leMarqueur.titre,
+				map: laCarte,
+				icon: '[(#GET{icon})]'
+				// draggable: true,
+			});
+		});
+	});
+}
+
+jQuery(document).ready(function() {	
+	affichageNormal();
+});
+</script>

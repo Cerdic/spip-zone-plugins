@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+	<head>
+		<title>SPIP - Test Plugin - Google Maps API v3</title>
+		#INSERT_HEAD
+	</head>
+
+	<body>
+		[(#REM) Appel Normal ]
+		<!-- <INCLURE{fond=theme/js/gmaps_v3.js} />
+		<div id="carte_gmaps_v3" style="width:100%; height:50%"></div> -->
+
+		[(#REM) Appel d'une page spécifique et d'une carte specifique ]
+		<!-- <INCLURE{fond=theme/js/gmaps_v3.js,json=json-tousLesArticles,nomCarte=carteDeTest} />
+		<div id="carteDeTest" style="width:100%; height:50%"></div> -->
+		
+		[(#REM) Appel presque complet ]
+		<INCLURE{fond=theme/js/gmaps_v3.js,nomCarte=carteComplete,mapType=HYBRID,json=json-tousLesArticles,zoom=17} />
+		<div id="carteComplete" style="width:100%; height:50%"></div>
+	</body>
+</html>

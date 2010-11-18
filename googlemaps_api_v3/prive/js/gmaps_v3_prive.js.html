@@ -1,0 +1,65 @@
+[(#REM)  
+/*
+ * Initialiser l'API v3 de Google Maps
+ *
+ */
+]
+[(#SET{latitude,#CONFIG{config_gmaps_v3/latitude}|sinon{42.112614}})]
+[(#SET{longitude,#CONFIG{config_gmaps_v3/longitude}|sinon{8.701987}})]
+[(#SET{zoom,#CONFIG{config_gmaps_v3/zoom}|sinon{15}})]
+[(#SET{mapType,#CONFIG{config_gmaps_v3/mapType}|sinon{SATELLITE}})]
+[(#SET{nomCarte,#CONFIG{config_gmaps_v3/nomCarte}|sinon{carte}})]
+[(#SET{icon,#ENV{icon}|sinon{#CHEMIN{theme/img/gmaps_v3-24.png}}})]
+
+[(#REM) 
+	Si les valeurs sont forcées on écrase
+]
+[(#ENV{latitude}|oui)[(#SET{latitude,#ENV{latitude}})]]
+[(#ENV{longitude}|oui)[(#SET{longitude,#ENV{longitude}})]]
+[(#ENV{icon}|oui)[(#SET{icon,#ENV{icon}})]]
+
+<script type="text/javascript" charset="utf-8">	
+function geoLocalisation(){
+	var latLng = new google.maps.LatLng(#GET{latitude},#GET{longitude});
+	var options = {
+		center: latLng,
+		zoom: #GET{zoom},
+		mapTypeId: google.maps.MapTypeId.#GET{mapType}
+	};
+	var laCarte = new google.maps.Map(document.getElementById("#GET{nomCarte}"), options);
+	var infoWindow = new google.maps.InfoWindow();
+	
+	var marker = new google.maps.Marker({
+		map: laCarte,
+		position: latLng,
+		icon: '#GET{icon}'
+		// draggable:true
+	});
+	
+	/*
+		TODO Rendre le point déplacable ET surtout envoyer les résultats pour qu'ils puissent être stockés
+	*/
+	// 
+	// google.maps.event.addListener(marker, 'dragend', function() {
+	// 	var info = "<b>[(#ENV{address}|sinon{'Ajuster la position GPS'})]</b> <br/>"+marker.getPosition().toUrlValue('6');
+	// 	infoWindow.setContent(info);
+	// 	var nouvLat = marker.getPosition().lat()
+	// 	var nouvLng = marker.getPosition().lng()
+	// 	jQuery('#latitude').val(nouvLat);
+	// 	jQuery('#longitude').val(nouvLng);
+	// 	// jQuery.post() ou jQuery.ajax
+	// 	// infoWindow.open(carte, marker);
+	// });
+	// var bounds = new google.maps.LatLngBounds();
+	
+}
+
+jQuery(document).ready(function() {
+	// Un peu de style, sans sortir les CSS... Oui c'est mal :D
+	if(jQuery('.carte_gmaps_v3_prive').length){
+		jQuery('.etroit .carte_gmaps_v3_prive').css({width:"450px", height:"250px"});
+		jQuery('.large .carte_gmaps_v3_prive').css({width:"490px", height:"250px"});
+	}
+	geoLocalisation();
+});
+</script>

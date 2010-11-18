@@ -1,0 +1,57 @@
+<!-- titre=<:gmaps_v3:titre_admin:>-->
+[(#REM) autoriser=configurer ]
+#CACHE{0}
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_contenu' id='formulaire_configurer_forums_contenu'>
+<h3 class='titrem'><:gmaps_v3:titre_admin:>&nbsp;<img src="[(#CHEMIN{theme/img/gmaps_v3-24.png})]" class='icone' /></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF"><div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class=''>
+				<label for="latitude"><:gmaps_v3:cfg_label_latitude:></label>
+				<div class='explication'><:gmaps_v3:cfg_explication_latitude:></div>
+				[(#SET{defaut,42.112614})]
+				<input type="text" name="latitude" value="[(#ENV{latitude}|sinon{#GET{defaut}})]" id="latitude" class="text" />
+			</li>
+			<li class=''>
+				<label for="longitude"><:gmaps_v3:cfg_label_longitude:></label>
+				<div class='explication'><:gmaps_v3:cfg_explication_longitude:></div>
+				[(#SET{defaut,8.701987})]
+				<input type="text" name="longitude" value="[(#ENV{longitude}|sinon{#GET{defaut}})]" id="longitude" class="text" />
+			</li>
+			<li class=''>
+				<label for="zoom"><:gmaps_v3:cfg_label_zoom:></label>
+				<div class='explication'><:gmaps_v3:cfg_explication_zoom:></div>
+				[(#SET{defaut,15})]
+				<input type="text" name="zoom" value="[(#ENV{zoom}|sinon{#GET{defaut}})]" id="zoom" class="text" />
+			</li>
+			<hr />
+			<li class=''>
+				<label for="nomCarte"><:gmaps_v3:cfg_label_nomcarte:></label>
+				<div class='explication'><:gmaps_v3:cfg_explication_nomcarte:></div>
+				[(#SET{defaut,carte_gmaps_v3})]
+				<input type="text" name="nomCarte" value="[(#ENV{nomCarte}|sinon{#GET{defaut}})]" id="nomCarte" class="text" />
+			</li>
+			<hr />
+			<li class=''>
+				<label for="mapType"><:gmaps_v3:cfg_label_maptype:></label>
+				<div class='explication'><:gmaps_v3:cfg_explication_maptype:></div>
+				[(#SET{defaut,SATELLITE})]
+				[(#SET{maptype,[(#ENV{mapType}|sinon{#GET{defaut}})]})]
+				<select name="mapType" id="maptype" size="1">
+					<option value="ROADMAP"[(#ENV{maptype}|=={ROADMAP}|oui) selected='selected']>Roadmap</option>
+					<option value="SATELLITE"[(#ENV{maptype}|=={SATELLITE}|oui) selected='selected']>Satellite</option>
+					<option value="HYBRID"[(#ENV{maptype}|=={HYBRID}|oui) selected='selected']>Hybrid</option>
+					<option value="TERRAIN"[(#ENV{maptype}|=={TERRAIN}|oui) selected='selected']>Terrain</option>
+					
+				</select>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+
+</div><!-- #formulaire_configurer_forums_contenu -->

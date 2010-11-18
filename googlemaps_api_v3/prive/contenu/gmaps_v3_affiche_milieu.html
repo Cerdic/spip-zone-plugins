@@ -1,0 +1,13 @@
+<div class='cadre cadre-e'>
+	<img src="[(#CHEMIN{theme/img/gmaps_v3-24.png})]" class='cadre-icone' />
+	<div onmouseover="jQuery(this).depliant('#gmaps');" class="titrem replie">
+		<a class="titremancre" onclick="return jQuery(this).depliant_clicancre('#gmaps');" href="#"></a>
+		<:gmaps_v3:titre_admin:>
+		<div class='cadre_padding'>
+			<div id='gmaps' class='bloc_depliable blocreplie'>
+				<!-- <div class='ajax'>FORMULAIRE_AFFICHE_MILIEU_GMAPS_V3</div> -->
+				<div class='ajax'>#FORMULAIRE_GEOCODAGE{#ENV{id_article}}</div>
+			</div>	
+		</div><!-- .cadre_padding -->
+	</div><!-- .titrem -->
+</div><!-- .cadre .cadre-e --> 

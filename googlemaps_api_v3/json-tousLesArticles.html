@@ -1,0 +1,16 @@
+[(#CACHE{0})][(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]
+[(#SET{lesMarqueurs, #ARRAY})]
+<BOUCLE_LesArticles(ARTICLES){par num titre}>
+	[(#SET{leTitre,[(#TITRE|textebrut)]})]
+	[(#SET_PUSH{ 'lesMarqueurs', #ARRAY{
+		titre,#GET{leTitre},
+		latitude,#LATITUDE,
+		longitude,#LONGITUDE}})]
+		
+	[(#REM)
+		- pour ajouter un logo qui serait porté par la rubrique par exemple
+		SET_PUSH{ 'lesMarqueurs', #ARRAY{titre,#GET{leTitre},latitude,#LATITUDE,longitude,#LONGITUDE,icon,#LOGO_RUBRIQUE_NORMAL} })
+	]
+</BOUCLE_LesArticles>
+[(#SET{tousLesMarqueurs,#ARRAY{tousLesMarqueurs,#GET{lesMarqueurs}}})]
+[(#GET{lesMarqueurs}|json_encode)]
