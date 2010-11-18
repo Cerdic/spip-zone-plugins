@@ -18,6 +18,7 @@ parametres:
       datas:
         journal: '<:cite:item_journal:>'
         book: '<:cite:item_book:>'
+        chapter: '<:cite:item_chapter:>'
   -
     saisie: 'input'
     options:
@@ -40,32 +41,9 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'year'
-      label: '<:cite:label_year:>'
-  -
-    saisie: 'input'
-    options:
-      nom: 'series'
-      label: '<:cite:label_series:>'
-      afficher_si: '@variante@ == "book"'
-  -
-    saisie: 'input'
-    options:
-      nom: 'volume'
-      label: '<:cite:label_volume:>'
-  -
-    saisie: 'input'
-    options:
-      nom: 'issue'
-      label: '<:cite:label_issue:>'
-      afficher_si: '@variante@ == "journal"'
-  -
-    saisie: 'input'
-    options:
-      nom: 'edition'
-      label: '<:cite:label_edition:>'
-      explication: '<:cite:explication_edition:>'
-      afficher_si: '@variante@ == "book"'
+      nom: 'booktitle'
+      label: '<:cite:label_booktitle:>'
+      afficher_si: '@variante@ == "chapter"'
   -
     saisie: 'input'
     options:
@@ -76,16 +54,45 @@ parametres:
   -
     saisie: 'input'
     options:
+      nom: 'year'
+      label: '<:cite:label_year:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'series'
+      label: '<:cite:label_series:>'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'volume'
+      label: '<:cite:label_volume:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'issue'
+      label: '<:cite:label_issue:>'
+      afficher_si: '@variante@ == "journal" || @variante@ == "chapter"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'edition'
+      label: '<:cite:label_edition:>'
+      explication: '<:cite:explication_edition:>'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter"'
+  -
+    saisie: 'input'
+    options:
       nom: 'publisher'
       label: '<:cite:label_publisher:>'
       explication: '<:cite:explication_publisher:>'
-      afficher_si: '@variante@ == "book"'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter"'
   -
     saisie: 'input'
     options:
       nom: 'place'
       label: '<:cite:label_place:>'
-      afficher_si: '@variante@ == "book"'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter"'
   -
     saisie: 'input'
     options:
@@ -105,5 +112,12 @@ parametres:
   -
     saisie: 'input'
     options:
+      nom: 'isbn'
+      label: '<:cite:label_isbn:>'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter"'
+  -
+    saisie: 'input'
+    options:
       nom: 'issn'
       label: '<:cite:label_issn:>'
+      afficher_si: '@variante@ == "journal"'
