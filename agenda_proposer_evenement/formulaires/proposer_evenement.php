@@ -197,8 +197,8 @@ function formulaires_proposer_evenement_traiter_dist(){
 			$set = array('titre' => $set_article['titre']);
 			$set['horaire'] = _request('horaire')=='non'?'non':'oui';
 			include_spip('inc/agenda_gestion');
-			$date_debut = agenda_verifier_corriger_date_saisie('debut',$c['horaire']=='oui',$erreurs);
-			$date_fin = agenda_verifier_corriger_date_saisie('fin',$c['horaire']=='oui',$erreurs);
+			$date_debut = agenda_verifier_corriger_date_saisie('debut',$set['horaire']=='oui',$erreurs);
+			$date_fin = agenda_verifier_corriger_date_saisie('fin',$set['horaire']=='oui',$erreurs);
 
 			$set['date_debut'] = date('Y-m-d H:i:s',$date_debut);
 			$set['date_fin'] = date('Y-m-d H:i:s',$date_fin);
