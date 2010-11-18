@@ -297,18 +297,18 @@
 			if (eltclass.indexOf("boxWidth-")!==-1) { 
 				var w = eltclass.match(/boxWidth-([^\s'">]*)/); 
 				w = w[1].replace(/pc/,'%'); // % not allowed in html attribute ; use 100pc instead of 100% 
-				data = $.extend(data,{width:w}); 
+				$.data(this, colorbox, $.extend($.data(this, colorbox),{width:w})); 
 			}
 			if (eltclass.indexOf("boxHeight-")!==-1) { 
 				var h = eltclass.match(/boxHeight-([^\s'">]*)/); 
 				h = h[1].replace(/pc/,'%'); // % not allowed in html attribute ; use 100pc instead of 100% 
-				data = $.extend(data,{height:h}); 
+				$.data(this, colorbox, $.extend($.data(this, colorbox),{height:h})); 
 			}
 			if (eltclass.indexOf("boxIframe")!==-1) { 
-				data = $.extend(data,{iframe:true}); 
+				$.data(this, colorbox, $.extend($.data(this, colorbox),{iframe:true})); 
 			}
 			if (eltclass.indexOf("boxSlideshow_off")!==-1) { 
-				data = $.extend(data,{slideshow:false}); 
+				$.data(this, colorbox, $.extend($.data(this, colorbox),{slideshow:false})); 
 			}
 			$(this).addClass(boxElement);
 		});
