@@ -8,10 +8,10 @@
 #SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
 #SET{debut,#ENV{debutaut,#EVAL{_request("debutaut");}}}
 #ANCRE_PAGINATION
-[<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
+[(#ENV{recherche}|et{#ENV{exec}|!={recherche}}|oui)<h3><:info_resultat_recherche:> &laquo;#ENV{recherche}&raquo;</h3>]
 <div class="liste-elements auteurs">
 <table class='spip liste'>
-[<caption><strong class="caption">#GRAND_TOTAL (#ENV*{titre,<:info_auteurs:>})</strong></caption>]
+[<caption><strong class="caption">(#ENV*{titre,<:info_auteurs:>}) ([(#GRAND_TOTAL)])</strong></caption>]
 	<thead>
 
 		<B_lettre><tr><td colspan="5"><p class='pagination'><BOUCLE_lettre(AUTEURS){tout}{id_auteur?}{where?}{statut?}{recherche?}{par multi nom}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
@@ -44,6 +44,6 @@
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_aut>[<h3>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</h3>(#ENV{recherche}|oui)][
+</B_liste_aut>[<h3>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</h3>(#ENV{recherche}|et{#ENV{exec}|!={recherche}}|oui)][
 <div class="liste-elements auteurs"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_aut>
