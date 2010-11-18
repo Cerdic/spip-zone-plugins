@@ -1,7 +1,7 @@
 <plugin>
   <nom>Cache Cool</nom>
   <auteur>[Cedric->yterium.net]</auteur>
-  <version>0.2.3</version>
+  <version>0.2.4</version>
   <etat>test</etat>
 	<icon>images/cache_cool-128.png</icon>
   <description>Servir le cache froid pour aller plus vite, et calculer en diff&eacute;r&eacute; en t&acirc;che de fond

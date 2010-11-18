@@ -129,13 +129,16 @@ function cache_cool_global_context($push){
 	static $pile = array();
 	// restaurer le contexte
 	if ($push===false AND count($pile)) {
-		cache_cool_set_global_contexte(array_shift($pile));
+		$pull = array_shift($pile);
+		lang_select();
+		cache_cool_set_global_contexte();
 	}
 	// definir un nouveau contexte
 	else {
 		// on empile le contexte actuel
 		array_unshift($pile, cache_cool_get_global_context());
-		// et on le modifie
+		// et on le modifie en commencant par la langue courante
+		lang_select($push['spip_lang']);
 		cache_cool_set_global_contexte($push);
 	}
 }
@@ -175,6 +178,10 @@ function cache_cool_get_global_context(){
  */
 function cache_cool_set_global_contexte($c){
 	if (!is_array($c)) return; // ne rien faire
+	// precaution : spip_lang ne peut etre affecte brutalement
+	// il faut passer par lang_select()
+	unset($c['spip_lang']);
+	
 	url_de_base($c['url_de_base']); unset($c['url_de_base']);
 	nettoyer_uri($c['nettoyer_uri']); unset($c['nettoyer_uri']);
 	foreach($c as $k=>$v){
