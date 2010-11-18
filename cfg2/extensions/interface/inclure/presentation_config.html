@@ -1,5 +1,5 @@
 <div class='config'>
-	[<div class='logo'>(#CHEMIN{#ENV{logo}}|image_reduire{64,64})</div>]
+	[(#ENV{logo}|oui)[<div class='logo'>(#CHEMIN{#ENV{logo}}|image_reduire{64,64})</div>]]
 	[<h1><a href='#ENV{lien}' title="<:cfg_interface:configurer:> [(#ENV*{titre}|attribut_html)]">(#ENV*{titre})</a></h1>]
 	[<p>(#ENV*{descriptif})</p>]
 </div>
