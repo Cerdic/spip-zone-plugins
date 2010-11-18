@@ -38,15 +38,15 @@
 			</li>
 			<hr />
 			<li class=''>
-				<label for="mapType"><:gmaps_v3:cfg_label_maptype:></label>
-				<div class='explication'><:gmaps_v3:cfg_explication_maptype:></div>
+				<label for="mapType"><:gmaps_v3:cfg_label_mapType:></label>
+				<div class='explication'><:gmaps_v3:cfg_explication_mapType:></div>
 				[(#SET{defaut,SATELLITE})]
-				[(#SET{maptype,[(#ENV{mapType}|sinon{#GET{defaut}})]})]
-				<select name="mapType" id="maptype" size="1">
-					<option value="ROADMAP"[(#ENV{maptype}|=={ROADMAP}|oui) selected='selected']>Roadmap</option>
-					<option value="SATELLITE"[(#ENV{maptype}|=={SATELLITE}|oui) selected='selected']>Satellite</option>
-					<option value="HYBRID"[(#ENV{maptype}|=={HYBRID}|oui) selected='selected']>Hybrid</option>
-					<option value="TERRAIN"[(#ENV{maptype}|=={TERRAIN}|oui) selected='selected']>Terrain</option>
+				[(#SET{mapType,[(#ENV{mapType}|sinon{#GET{defaut}})]})]
+				<select name="mapType" id="mapType" size="1">
+					<option value="ROADMAP"[(#ENV{mapType}|=={ROADMAP}|oui) selected='selected']>Roadmap</option>
+					<option value="SATELLITE"[(#ENV{mapType}|=={SATELLITE}|oui) selected='selected']>Satellite</option>
+					<option value="HYBRID"[(#ENV{mapType}|=={HYBRID}|oui) selected='selected']>Hybrid</option>
+					<option value="TERRAIN"[(#ENV{mapType}|=={TERRAIN}|oui) selected='selected']>Terrain</option>
 					
 				</select>
 			</li>
