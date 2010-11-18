@@ -18,6 +18,11 @@
 	<lien>http://www.spip-contrib.net/Social-tags</lien>
 	<prefix>socialtags</prefix>
 	<pipeline>
+		<nom>insert_head_css</nom>
+		<action>insert_head_css</action>
+		<inclure>socialtags_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
 		<inclure>socialtags_fonctions.php</inclure>

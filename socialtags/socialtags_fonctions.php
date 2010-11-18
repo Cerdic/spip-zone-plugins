@@ -3,8 +3,20 @@
 //
 // ajout feuille de style
 //
+function socialtags_insert_head_css($flux){
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />'."\n";
+	}
+	return $flux;
+}
+
+//
+// ajout cookie + js
+//
 function socialtags_insert_head($flux){
-	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />'."\n";
+	$flux = socialtags_insert_head_css($flux); // au cas ou il n'est pas implemente
 
 	// on a besoin de jquery.cookie
 	if (!strpos($flux, 'jquery.cookie.js'))
