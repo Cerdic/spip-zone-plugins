@@ -55,7 +55,6 @@ function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left=fa
 
 	$boucle->from['articles'] = 'spip_articles';
 	$boucle->from_type['articles'] = 'left';
-	spip_log($_statut,'test');
 	$boucle->join['articles'] = array("'auteurs_articles'","'id_article'","'id_article'","'(articles.statut IS NULL OR '.sql_in('articles.statut',sql_quote($_statut)$not).')'");
 
 	$boucle->select[]= "COUNT(articles.id_article) AS compteur_articles";
