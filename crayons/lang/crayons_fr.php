@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_yellow_fade' => 'Fade',
 	'legend_controleur_logo' => 'Choisir un logo&nbsp;:',
 	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:',
-	'legend_introduction_article' => 'Texte introductif de l\'article',
 	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)',
+	'legend_introduction_article' => 'Texte introductif de l\'article',
 
 	// M
 	'message_image_obligatoire' => 'Il faut choisir une image',

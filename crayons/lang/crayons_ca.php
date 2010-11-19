@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effets' => 'Efectes',
 	'explication_exec_autorise' => 'P&agrave;gines autoritzades a ser modificades
   (?exec=...) : (, per separar les exec).',
+	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'Reduir el logotip si sobrepassa la mida m&agrave;xima indicada en p&iacute;xels. Exemple: 100. (0 = mai)',
 
 	// L
@@ -44,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_logo' => 'Escollir un logotip:',
 	'legend_controleur_vignette' => 'Escollir una vinyeta:',
 	'legend_editer_prive' => 'Editar l\'espai privat (experimental)',
+	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 
 	// M
 	'message_image_obligatoire' => 'Cal escollir una imatge',

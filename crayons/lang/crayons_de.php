@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effets' => 'Effekte',
 	'explication_exec_autorise' => 'Zur Bearbeitung zugelassene Seiten
   (?exec=...) : (exec-Skripte mit Komma trennen).',
+	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'Logo verkleinern wenn es
  gr&amp;ouml;&amp;szlig;er als x Pixel ist.Beispiel: 100. (0 = niemals)',
 
@@ -45,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_logo' => 'Logoe w&auml;hlen:',
 	'legend_controleur_vignette' => 'Thumbnail w&auml;hlen:',
 	'legend_editer_prive' => 'Stifte im Redaktionssystem (experimentell)',
+	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 
 	// M
 	'message_image_obligatoire' => 'Es mu&szlig; ein Bild gew&auml;hlt werden.',
