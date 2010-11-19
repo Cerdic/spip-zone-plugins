@@ -1,7 +1,15 @@
 <?php
-
+/**
+ * Insertion dans le pipeline affiche_droite (SPIP)
+ * 
+ * Affiche un lien vers la page de statistiques de l'auteur sur sa page auteur
+ * Affiche un lien vers la page de statistiques de l'article sur la page article
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return array $flux Le contexte modifié
+ */
 function bigbrother_affiche_droite($flux){
-	if ($flux['args']['exec'] == 'auteur_infos'){
+	if (($flux['args']['exec'] == 'auteur_infos') && ($flux['args']['id_auteur'] > 0)){
 		$boite = debut_boite_info(true)
 			. icone_horizontale(
 				_T('bigbrother:voir_statistiques_auteur'),
