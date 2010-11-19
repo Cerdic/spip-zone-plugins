@@ -1,0 +1,27 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+{"id": "rubriques",
+"name": "Rubriques",
+"data": {},
+"children": [
+<BOUCLE_rubriques(RUBRIQUES){id_parent=#ENV{id_rubrique,0}}{par num titre, titre}{tout}{","}>
+{
+	"id": "rub_#ID_RUBRIQUE",
+	"name": [(#TITRE|json_encode)],
+	"data": {},
+<B_miniplan>
+	"children": [
+<BOUCLE_miniplan(RUBRIQUES){id_parent}{par num titre, titre}{tout}{","}>
+		{
+			"id": "rub_#ID_RUBRIQUE",
+			"name": [(#TITRE|json_encode)],
+			"data": {},
+			<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
+		}
+</BOUCLE_miniplan>
+	]
+</B_miniplan>
+	"children": []
+<//B_miniplan>
+}
+</BOUCLE_rubriques>
+]}

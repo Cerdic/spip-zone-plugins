@@ -1,0 +1,20 @@
+<plugin>
+	<nom>JIT</nom>
+	<auteur>JavaScript InfoVis Toolkit Team</auteur>
+	<version>2.0.0b</version>
+	<etat>dev</etat>
+	<description><multi>
+		[fr]JavaScript InfoVis Toolkit pour SPIP.
+		[en]JavaScript InfoVis Toolkit for SPIP.
+	</multi></description>
+	<lien>http://thejit.org/</lien>
+	<prefix>jit</prefix>
+	<icon></icon>
+	<options>jit_options.php</options>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>jit_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="lib:Jit" src="http://thejit.org/downloads/Jit-2.0.0b.zip" />
+	<categorie>outil</categorie>
+</plugin>
