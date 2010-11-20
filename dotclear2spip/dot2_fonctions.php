@@ -8,7 +8,7 @@ function dot_purifier_spip(){
 }
 
 function generer_htacess($id,$url,$type){
-	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES."htacesss.txt" : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES."htacesss.txt";
+	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES."htacesss.txt" : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES."htaccesss.txt";
 	var_dump($chemin);
 	$contenu = '';
 	lire_fichier($chemin,$contenu);
