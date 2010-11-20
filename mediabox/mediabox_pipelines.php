@@ -94,7 +94,7 @@ var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'
 .'",str_close:"'._T('mediabox:boxstr_close')
 .'",splash_url:"'.$config['splash_url']
 .'"};
-if (window.jQuery) (function($){ if(typeof onAjaxLoad == "function") onAjaxLoad(mediaboxInit); $(mediaboxInit); })(jQuery);
+if (window.jQuery) (jQuery(function(){ if(typeof onAjaxLoad == "function") onAjaxLoad(mediaboxInit); jQuery(mediaboxInit); }));
 /* ]]> */</script>'."\n";
 	
 	if ($config['splash_url'])
