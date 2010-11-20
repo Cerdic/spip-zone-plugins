@@ -18,7 +18,7 @@ function formulaires_media_inserer_modeles_traiter_dist($champs){
 			elseif (_request('legende')!='personnalisee' && in_array($champ,array('titre','descriptif','credits','type','poids')))
 				$code .= '';
 			// Cas de la taille
-			if($champ == 'taille' && _request($champ)=='personnalisee')
+			elseif($champ == 'taille' && _request($champ)=='personnalisee')
 				$code .= '';
 			elseif (_request('taille')!='personnalisee' && in_array($champ,array('hauteur','largeur')))
 				$code .= '';
