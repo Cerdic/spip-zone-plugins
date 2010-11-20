@@ -8,10 +8,8 @@
 &#169; 2009 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<lien>http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens</lien>
-	<version>0.9.0</version>
-	<etat>
-	test
-	</etat>
+	<version>1.0.0</version>
+	<etat>test</etat>
 	<description>
 Remplace le menu d&eacute;roulant de langues de SPIP par un menu clicable.
 
@@ -22,12 +20,9 @@ Ce menu n'est affich&eacute; {{que}} s'il y a au moins 2 langues vraiment utilis
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<prefix> 
-	mll
-	</prefix>
-	<icon>
-	img_pack/menu_langues_liens.png
-	</icon>
+	<prefix>mll</prefix>
+	<icon>img_pack/menu_langues_liens.png</icon>
+	<options>mll_options.php</options>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<categorie>navigation</categorie>
 </plugin>
