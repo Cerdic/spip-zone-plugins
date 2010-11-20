@@ -1,14 +1,12 @@
 #HTTP_HEADER{Content-Type: application/x-bibtex}#HTTP_HEADER{Content-Disposition: attachment; filename=export.bib}
-@Book{,[
+@Techreport{,[
 	title = {(#ENV{title}|trim)},][
-	series = {(#ENV{series}|trim)},][
+	type = {(#ENV{type}|trim)},][
 	(#ENV{authors}|cite_authors_bibtex)][
-	(#ENV{editors}|cite_editors_bibtex)][
 	year = {(#ENV{year}|trim)},][
-	number = {(#ENV{volume}|trim)},][
-	edition = {(#ENV{edition}|trim)},][
+	number = {(#ENV{number}|trim)},][
 	address = {(#ENV{place}|trim)},][
-	publisher = {(#ENV{publisher}|trim)},][
+	institution = {(#ENV{institution}|trim)},][
 	pages = {(#ENV{pages}|trim|replace{'-','--'})},][
 	isbn = {(#ENV{isbn}|trim)},][
 	doi = {(#ENV{doi}|trim)},][
