@@ -15,7 +15,7 @@ Si non, rien
 [(#REM)
 On liste les langues utilisées dans le site
 ]
-	<BOUCLE_ListeLangues(ARTICLES){par lang}{fusion lang}>
+	<BOUCLE_ListeLangues(ARTICLES){par lang}{fusion lang}{lang!=}>
 		[(#REM)
 		Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
 		- fixer le cookie de langue sur la langue demandée
