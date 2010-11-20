@@ -56,7 +56,7 @@ else {
 	jQuery('.editer_password').hide();
 }
 };"
-	."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');"
+	."jQuery(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');"
 	.($scriptopenid?"if (!jQuery('.editer_password').is('.erreur')) toggle_password(false);":"")
 	."$scriptopenid});"
 	."/*]]>*/"

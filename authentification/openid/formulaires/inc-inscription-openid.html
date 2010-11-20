@@ -37,10 +37,10 @@
 			jQuery('#bouton_insc_conv').hide();
 		}
 	}
-	jQuery(document).ready(initinscform);
+	jQuery(initinscform);
 	onAjaxLoad(initinscform);
 	[(#ENV{message_erreur}|non|et{#ENV{openid,''}|et{#ENV{nom_inscription,''}}|et{#ENV{mail_inscription,''}}})
-	jQuery(document).ready(function(){setTimeout(
+	jQuery(function(){setTimeout(
 		function(){jQuery('#formulaire_inscription input#EVAL{chr(91)}type=submit#EVAL{chr(93)}').get(0).click();},
 		10
 	)});
