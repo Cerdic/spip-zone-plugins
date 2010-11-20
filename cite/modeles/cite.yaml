@@ -1,6 +1,7 @@
 nom: '<:cite:reference_bibliographie:>'
 logo: 'images/cite-24.png'
 icone_barre: 'cite.png'
+traiter: 'cite_inserer_modeles_traiter'
 parametres:
   -
     saisie: 'hidden'
@@ -57,6 +58,7 @@ parametres:
     options:
       nom: 'year'
       label: '<:cite:label_year:>'
+      obligatoire: 'oui'
   -
     saisie: 'input'
     options:
