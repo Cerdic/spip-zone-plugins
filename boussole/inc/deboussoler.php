@@ -23,6 +23,16 @@ function boussole_ajouter($url, &$erreur='') {
 		$erreur = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
 		return false;
 	}
+	// On complete les infos de chaque site par l'id_syndic si ce site est deja reference 
+	// dans la table spip_syndic. On reconnait le site par son url
+	foreach ($infos['sites'] as $_cle => $_info) {
+		// On construit deux urls : l'une avec / l'autre sans
+		$urls = array();
+		$urls[] = $_info['url_site'];
+		$urls[] = (substr($_info['url_site'], -1, 1) == '/') ? substr($_info['url_site'], 0, -1) : $_info['url_site'] . '/';
+		if ($id_syndic = sql_getfetsel('id_syndic', 'spip_syndic', sql_in('url_site', $urls)))
+			$infos['sites'][$_cle]['id_syndic'] = intval($id_syndic);
+	}
 	
 	// On insere le tableau des sites collecte dans la table spip_boussoles
 	$meta_boussole = 'boussole_infos_' . $infos['boussole']['alias'];
@@ -175,6 +185,7 @@ function boussole_parser_xml($url) {
 					$site['url_site'] = $attributs_site['src'];
 					$site['rang_site'] = ++$rang_site;
 					$site['affiche'] = 'oui';
+					$site['id_syndic'] = 0;
 					// On ajoute le site ainsi defini aux tableau des sites
 					$infos['sites'][] = $site;
 				}

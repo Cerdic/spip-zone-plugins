@@ -29,7 +29,9 @@
 				<div class="ligne #AFFICHE">
 					<div class="description arial2">
 						<div class="titre">
+							[(#ID_SYNDIC|oui)<a[ href="(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC})"] title="<:boussole:bulle_aller_site:>">]
 							[(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
+							[(#ID_SYNDIC|oui)</a>]
 							[<i>((#AKA_SITE))</i>]
 						</div>
 						<div class="infos">[(#AKA_BOUSSOLE|boussole_traduire{slogan_site, #AKA_SITE})]</div>

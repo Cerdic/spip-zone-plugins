@@ -5,6 +5,7 @@ function boussole_declarer_tables_principales($tables_principales) {
 	// Tables des boussoles : spip_boussoles
 	$boussoles = array(
 		"id_site"		=> "bigint(21) NOT NULL",
+		"id_syndic"		=> "bigint(21) DEFAULT 0 NOT NULL",
 		"aka_boussole"	=> "varchar(32) DEFAULT '' NOT NULL",
 		"aka_site"		=> "varchar(32) DEFAULT '' NOT NULL",
 		"url_site"		=> "varchar(255) DEFAULT '' NOT NULL",
