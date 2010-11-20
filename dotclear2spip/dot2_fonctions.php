@@ -7,6 +7,13 @@ function dot_purifier_spip(){
 	sql_updateq('spip_articles',array('PS'=>''));
 }
 
+function generer_htacess($id,$url,$type){
+	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES."htacesss.txt" : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES."htacesss.txt";
+	var_dump($chemin);
+	$contenu = '';
+	lire_fichier($chemin,$contenu);
+	ecrire_fichier($chemin,$contenu."RedirectPermanent \"/$url\" http://exemple.tld/spip.php?$type$id\n");
+}
 
 
 

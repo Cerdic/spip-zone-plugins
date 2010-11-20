@@ -106,11 +106,11 @@ function dot2_migrer_rubriques_enfants($arbre,$id_rubrique_mere){
 function dot2_migrer_rubrique($cat_id,$rubrique_mere){
 	$crud = charger_fonction('crud','action');
 	
-	$contenu = sql_fetsel('cat_title,cat_lft,cat_desc','dc_category','`cat_id`='.$cat_id);
+	$contenu = sql_fetsel('cat_title,cat_lft,cat_desc,cat_url','dc_category','`cat_id`='.$cat_id);
 	$titre		= $contenu['cat_lft'].'0. '.$contenu['cat_title'];
 	$resultat = $crud('create','rubrique','nulls',array('descriptif'=>'DC:'.$cat_id,'id_parent'=>$rubrique_mere,'titre'=>$titre,'texte'=>sale($contenu['cat_desc'])));
 	$id_rubrique = $resultat['result']['id'];
-	
+	generer_htacess($id_rubrique,"index.php?cat/".$contenu['cat_url'],'rubrique');
 	spip_log("Création de la rubrique $id_rubrique ($titre) rubrique parente : $rubrique_mere. Catégory originelle : $cat_id","dot2_migration_rubrique");
 	return $id_rubrique;
 }

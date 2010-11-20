@@ -1,6 +1,6 @@
 <?php
 function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
-	$ressources = sql_select('post_id,user_id,cat_id,post_dt,post_format,post_lang,post_title,post_excerpt_xhtml,post_content_xhtml,post_open_comment,post_status','dc_post','`blog_id`='.sql_quote($blog_id));
+	$ressources = sql_select('post_id,user_id,cat_id,post_dt,post_format,post_lang,post_title,post_excerpt_xhtml,post_content_xhtml,post_open_comment,post_status,post_url','dc_post','`blog_id`='.sql_quote($blog_id));
 
 		
 	while($r = sql_fetch($ressources)){
@@ -104,9 +104,10 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 		$id_groupe = dot2_migrer_mots_article($r['post_id'],$id_article,$id_groupe);
 	// Migration des commentaires
 		dot2_migrer_commentaires($r['post_id'],$id_article);
+	// Génération du htaccess
+		generer_htacess($id_article,"index.php?post/".$r['post_url'],'articles');
 	
-	
-		$documents_lies = array();
+	//	$documents_lies = array();
 	
 
 	}
@@ -114,9 +115,6 @@ function dot2_migrer_articles($blog_id,$rubrique_defaut='',$id_groupe=''){
 
 	
 }
-
-
-
 
 function dot2_migrer_mots_article($id_post,$id_article,$id_groupe=''){
 	$crud = charger_fonction('crud','action');
@@ -145,6 +143,7 @@ function dot2_migrer_mots_article($id_post,$id_article,$id_groupe=''){
 		else{
 			$resultat = $crud('create','mots',null,array('id_groupe'=>$id_groupe,'titre'=>$titre));
 			$id_mot	  = $resultat['result']['id'];
+			generer_htacess($id_mot,"index.php?tag/".$titre,'mot');
 			spip_log("Créations du mot $id_mot ($titre)","dot2_migration_mot");
 			sql_insertq('spip_mots_articles',array('id_article'=>$id_article,'id_mot'=>$id_mot));
 			spip_log("Lier le mot $id_mot à l'article $id_article","dot2_migration_mot");
@@ -156,7 +155,6 @@ function dot2_migrer_mots_article($id_post,$id_article,$id_groupe=''){
 }
 function remplacer_liens_internes_articles(){
 	$req = sql_select('id_article,texte,descriptif,chapo','spip_articles');
-;
 	while ($art = sql_fetch($req)){
 		spip_log($id_article,'liens');
 		$texte = remplacer_liens_internes($art['texte']);
