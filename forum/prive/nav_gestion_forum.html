@@ -1,22 +1,37 @@
+#SET{self,#SELF|parametre_url{debut_forum,''}}
+
 <div id="forum_nav">
 	<ul id="forum_nav_type">
-		<li[(#ENV{type_message,public}|=={public}|oui) class="selected"]><a href="[(#SELF|parametre_url{type_message,public})]">Messages publics</a></li>
-		<li[(#ENV{type_message,public}|=={interne}|oui) class="selected"]><a href="[(#SELF|parametre_url{type_message,interne})]">Messages internes</a></li>
+		<li[(#ENV{type_message,public}|=={public}|oui) class="selected"]><a href="[(#GET{self}|parametre_url{type_message,public})]">Messages publics</a></li>
+		<li[(#ENV{type_message,public}|=={interne}|oui) class="selected"]><a href="[(#GET{self}|parametre_url{type_message,interne})]">Messages internes</a></li>
 	</ul>
 	
 	<ul id="forum_nav_statut">
-		<li[(#ENV{statut,tous}|=={tous}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,''})]"><:forum:messages_tous:></a></li>
-		[(#ENV{type_message,public}|=={public}|oui)
-		<li[(#ENV{statut}|=={publie}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,publie})]"><:forum:messages_publie:></a></li>
-		<li[(#ENV{statut}|=={prop}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,prop})]"><:forum:messages_prop:></a></li>
-		<li[(#ENV{statut}|=={spam}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,spam})]"><:forum:messages_spam:></a></li>
-		<li[(#ENV{statut}|=={off}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,off})]"><:forum:messages_off:></a></li>
-		]
-		[(#ENV{type_message}|=={interne}|oui)
-		<li[(#ENV{statut}|=={prive}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,prive})]"><:forum:messages_prive:></a></li>
-		<li[(#ENV{statut}|=={privrac}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,privrac})]"><:forum:messages_privrac:></a></li>
-		<li[(#ENV{statut}|=={privadm}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,privadm})]"><:forum:messages_privadm:></a></li>
-		<li[(#ENV{statut}|=={privoff}|oui) class="selected"]><a href="[(#SELF|parametre_url{statut,privoff})]"><:forum:messages_privoff:></a></li>
-		]
+		<li[(#ENV{statut,tous}|=={tous}|oui) class="selected"]><a href="[(#GET{self}|parametre_url{statut,''})]"><:forum:messages_tous:></a></li>
+		
+		#SET{statut,#ENV{type_message,public}|=={interne}|?{'prive','publie'}}
+		<BOUCLE_cpt_1(FORUMS)
+			{id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{recherche?} />
+		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}[ (#ENV{statut,''}|=={#GET{statut}}|oui)selected]'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_1>
+
+		#SET{statut,#ENV{type_message,public}|=={interne}|?{'privrac','prop'}}
+		<BOUCLE_cpt_2(FORUMS)
+			{id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{recherche?} />
+		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}[ (#ENV{statut,''}|=={#GET{statut}}|oui)selected]'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_2>
+		
+		#SET{statut,#ENV{type_message,public}|=={interne}|?{'privadm','spam'}}
+		<BOUCLE_cpt_3(FORUMS)
+			{id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{recherche?} />
+		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}[ (#ENV{statut,''}|=={#GET{statut}}|oui)selected]'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_3>
+		
+		#SET{statut,#ENV{type_message,public}|=={interne}|?{'privoff','off'}}
+		<BOUCLE_cpt_4(FORUMS)
+			{id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{recherche?} />
+		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}[ (#ENV{statut,''}|=={#GET{statut}}|oui)selected]'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_4>
+		
+		
 	</ul>
+	<BOUCLE_cpt_5(FORUMS){statut !LIKE ''}{texte LIKE ''} />
+		[(#TOTAL_BOUCLE|oui)<ul id="forum_sans_texte">
+ <li class='#GET{statut}[ (#ENV{type_message,''}|=={vide}|oui)selected]'>[(#GET{self}|parametre_url{type_message,vide}|parametre_url{statut,#ENV{statut}}|lien_ou_expose{#VAL{<:onglet_messages_vide:>}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{type_message,''}|=={vide},'ajax'})]</li></ul>]<//B_cpt_5>
 </div>
