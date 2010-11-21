@@ -30,6 +30,10 @@ Les sites d'une boussole sont alors affichables dans vos sites en utilisant les 
 		<nom>header_prive</nom>
 		<inclure>boussole_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>boussole_pipelines.php</inclure>
+	</pipeline>
 
 	<bouton id="boussole" parent="configuration">
 		<icone>prive/themes/spip/images/boussole_icone-24.png</icone>

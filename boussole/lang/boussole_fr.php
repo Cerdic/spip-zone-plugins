@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_configurer' => 'Configurer',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_aller_site' => 'Se rendre sur la page du site r&eacute;f&eacute;renc&eacute;',
+	'bulle_aller_boussole' => 'Se rendre sur la page de la boussole',
 	'bulle_afficher' => 'Afficher dans les mod&egrave;les',
 	'bulle_cacher' => 'Ne pas afficher dans les mod&egrave;les',
 	'bulle_configurer_boussole' => 'Configurer l\'affichage de la boussole',
@@ -48,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_fichier_boussole' => 'Saisissez l\'url du fichier de description de votre boussole',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore &eacute;t&eacute; charg&eacute;e dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_liste_boussoles' => 'Vous trouverez ci-dessous la liste des boussoles ajout&eacute;es &agrave; votre base.',
+	'info_site_boussole' => 'Ce site fait partie de la boussole &#171; @boussole@ &#187;',
 
 // L
 	'label_1_site' => 'site',
