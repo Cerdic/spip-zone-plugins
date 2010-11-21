@@ -30,7 +30,7 @@ function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/control
 
 		echo debut_gauche('', true);
 		
-		if(_request('type_form') != 'cvt' ){
+		if(_request('type_form') == 'onglets' ){
 			echo debut_boite_info(true);
 			echo _T('info_gauche_suivi_forum_2'), aide("suiviforum");
 	
@@ -52,7 +52,7 @@ function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/control
 			echo bloc_des_raccourcis($res);
 		}
 		
-		$type_interface = (_request('type_form') == 'cvt' ) ? '<p><a href="' . generer_url_ecrire('controle_forum') . '">'. _T('forum:interface_onglets') .'</a></p>' : '<p><a href="'.generer_url_ecrire('controle_forum','type_form=cvt') .'">'._T('forum:interface_formulaire') .'</a></p>' ;
+		$type_interface = (_request('type_form') != 'onglets' ) ? '<p><a href="' . generer_url_ecrire('controle_forum','type_form=onglets') . '">'. _T('forum:interface_onglets') .'</a></p>' : '<p><a href="'.generer_url_ecrire('controle_forum') .'">'._T('forum:interface_formulaire') .'</a></p>' ;
 		echo $type_interface ;
 
 

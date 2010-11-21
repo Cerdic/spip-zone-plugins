@@ -1,5 +1,6 @@
-[(#ENV{type_form}|=={cvt}|non)
-[(#INCLURE{fond=prive/listes/controler_forum}{env}{id_forum=#ENV{id_forum,#ENV{debut_id_forum}}})]
-][(#ENV{type_form}|=={cvt}|oui)
+[(#ENV{type_form}|=={onglets}|non)
 [(#INCLURE{fond=prive/listes/controler_forum_cvt}{env}{id_forum=#ENV{id_forum,#ENV{debut_id_forum}}})]
+]
+[(#ENV{type_form}|=={onglets}|oui)
+[(#INCLURE{fond=prive/listes/controler_forum}{env}{id_forum=#ENV{id_forum,#ENV{debut_id_forum}}})]
 ]
