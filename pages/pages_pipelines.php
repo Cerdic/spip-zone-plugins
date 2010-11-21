@@ -116,29 +116,47 @@ function pages_editer_contenu_objet($flux){
 }
 
 
-// Ajouter le champ page reçu par POST dans les champs à mettre à jour
+/**
+ * Insertion dans le pipeline pre_edition (SPIP)
+ * 
+ * Si on édite un article :
+ * - Si on récupère un champ "champ_page" dans les _request() et qu'il est différent de "article", 
+ * on transforme l'article en page unique, id_rubrique devient -1 
+ * - Si on ne récupère pas de champ_page et que id_parent est supérieur à 0, on le passe en article et on vide
+ * son champ page pour pouvoir réaliser le processus inverse dans le futur
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return array $flux Le contexte modifié
+ */
 function pages_pre_edition_ajouter_page($flux){
 	if (is_array($flux) and $flux['args']['type'] == 'article'){
-	
-		// Si elle existe on récupère la page dans ce qui a été posté
 		if ((($page = _request('champ_page')) != '') AND ($page != 'article')){
-		
-			// Et on l'ajoute à ce qu'il faut mettre à jour
+			/**
+			 * On ajoute le "champ_page" du formulaire qui deviendra "page" dans la table
+			 * On force l'id_rubrique à -1
+			 */
 			$flux['data']['page'] = $page;
-			// Et on force l'id_rubrique à -1
 			$flux['data']['id_rubrique'] = '-1';
-			// si l'id_parent est supérieur à 0 on pense à vider le champ "page"
-			if (_request('id_parent') > 0){
-				$flux['data']['page'] = '';
-			}
+		}
+		/**
+		 * si l'id_parent est supérieur à 0 on que l'on ne récupère pas de champ_page,
+		 * on pense à vider le champ "page", pour pouvoir revenir après coup en page
+		 */
+		if (!_request('champ_page') && (_request('id_parent') > 0)){
+			$flux['data']['page'] = '';
 		}
 	}
-	
 	return $flux;
-
 }
 
-// Ajouter un lien pour transformer une article normal en page ou l'inverse
+/**
+ * Insertion dans le pipeline boite_infos
+ * 
+ * Ajouter un lien pour transformer une article normal en page inversement
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return array $flux Le contexte modifié
+ */
 function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
 		if ($flux['args']['row']['page'] == ''){

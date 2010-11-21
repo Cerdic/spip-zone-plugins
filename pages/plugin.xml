@@ -1,14 +1,14 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom>
 		<multi>[fr]Pages[en]Pages[ar]&#1589;&#1601;&#1581;&#1575;&#1578;</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
+	<auteur>
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
-	<version> <!-- Version du plugin -->
-		0.3.2
+	<version>
+		0.3.3
 	</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	<etat>
 		test
 	</etat>
 	<icon>
@@ -27,7 +27,7 @@ This allows the creation of pages of legal information, about, contact, etc..
 &#1610;&#1571;&#1584;&#1606; &#1604;&#1604;&#1573;&#1606;&#1588;&#1575;&#1569; &#1589;&#1601;&#1581;&#1577; &#1605;&#1606; &#1575;&#1604;&#1605;&#1593;&#1604;&#1608;&#1605;&#1575;&#1578; &#1575;&#1604;&#1602;&#1575;&#1606;&#1608;&#1606;&#1610;&#1577; &#1548; &#1605;&#1606; &#1606;&#1581;&#1606; &#1548; &#1575;&#1578;&#1589;&#1575;&#1604; &#1548; &#1608;&#1605;&#1575; &#1573;&#1604;&#1609; &#1584;&#1604;&#1603;&#46;
 </multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Pages-uniques</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Pages-uniques</lien>
 	<prefix> 
 		pages
 	</prefix>
