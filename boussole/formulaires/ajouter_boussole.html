@@ -12,6 +12,7 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#SET{boussole_spip, [(#VAL{spip}|boussole_traduire{nom_boussole})]})]
 		<ul>
 			<li class="fieldset">
 				<fieldset>
@@ -21,7 +22,7 @@
 							<label><:boussole:label_mode:></label>
 							<div class="choix">
 								<input type="radio" value="standard" id="mode_standard" class="radio" name="mode" [(#ENV{mode, standard}|=={standard}|oui) checked="checked"] />
-								<label for="mode_standard"><:boussole:label_mode_standard:></label>
+								<label for="mode_standard"><:boussole:label_mode_standard{boussole=#GET{boussole_spip}}:></label>
 							</div>
 							<div class="choix">
 								<input type="radio" value="url_perso" id="mode_url_perso" class="radio" name="mode" [(#ENV{mode, standard}|=={url_perso}|oui) checked="checked"] />

@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_descriptif' => 'Descriptif',
 	'label_fichier_xml' => 'Fichier XML',
 	'label_logo' => 'Logo',
-	'label_mode_standard' => 'Boussole officielle des sites de la galaxie SPIP',
+	'label_mode_standard' => '&#171; @boussole@ &#187;, boussole officielle des sites SPIP',
 	'label_mode_url_perso' => 'Boussole personnelle',
 	'label_mode' => 'Choisissez une boussole',
 	'label_modele' => 'Mod&egrave;le',
@@ -139,6 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 	'titre_bloc_boussoles' => 'BOUSSOLES',
 	'titre_boite_autres_boussoles' => 'Autres boussoles',
+	'titre_boite_autres_sites' => 'Dans la m&ecirc;me boussole',
 	'titre_boite_infos_boussole' => 'BOUSSOLE D\'ALIAS',
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',
 	'titre_form_ajouter_boussole' => 'Ajouter ou mettre &agrave; jour une boussole',
