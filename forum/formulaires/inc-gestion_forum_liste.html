@@ -3,7 +3,7 @@
 <B_forum>
 <p class="explication">
 [(#GRAND_TOTAL|singulier_ou_pluriel{forum:info_1_message_forum,forum:info_nb_messages_forum}|sinon{<:forum:aucun_message_forum:>})]
-#SET{self,#SELF|parametre_url{id_article|id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum|statut,''}}
+#SET{self,#SELF|parametre_url{id_article|id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum|statut|recherche,''}}
 [(#ENV{id_forum}
 	|ou{#ENV{id_rubrique}}
 	|ou{#ENV{id_article}}
@@ -15,13 +15,14 @@
 	|ou{#ENV{auteur}}
 	|ou{#ENV{email_auteur}}
 	|ou{#ENV{ip}}
+	|ou{#ENV{recherche}}
 	|oui)<a class='annule_filtre ajax' href='#GET{self}' title="<:forum:tout_voir|attribut_html:>"><strong><:forum:tout_voir:></strong></a>]
 </p>
 [(#REM) désactiver l'ancre de pagination qui est déjà présente dans le squelette appelant ]
 #SET{virer_ancre,#ANCRE_PAGINATION}
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items forums'>
-	<BOUCLE_forum(FORUMS){id_forum?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{id_message?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination #ENV{pagination}}{statut?}{statut LIKE #ENV{prive}}{statut !LIKE #ENV{public}}{texte LIKE #GET{vide}}{recherche?}>
+	<BOUCLE_forum(FORUMS){plat}{id_forum?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{id_message?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination #ENV{pagination}}{statut?}{statut LIKE #ENV{prive}}{statut !LIKE #ENV{public}}{texte LIKE #GET{vide}}{recherche?}>
 	<li class="item forum statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM'>
 		
 		<input type="checkbox" class="checkbox select_forum" name="forum_ids[]" value="#ID_FORUM"[(#ENV{id_forum}|oui) checked="checked"] />
