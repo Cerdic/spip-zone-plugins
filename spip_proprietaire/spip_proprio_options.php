@@ -257,7 +257,10 @@ function creer_fichier_textes_proprietaire($array_langue){
 		include_spip('inc/flock');
 		$contenu = var_export($array_langue, true);
 		$contenu_final = '<'."?php\n\$GLOBALS['$globale'] = $contenu;\n?".'>';
-		$a = ecrire_fichier(_DIR_PLUGIN_SPIP_PROPRIO.'/lang/'.$file.'.php', $contenu_final);
+		$dir = _DIR_PLUGIN_SPIP_PROPRIO;
+		$a = ecrire_fichier(
+			($dir[strlen($dir)-1] == '/' ? substr($dir, 0, -1) : $dir).'/lang/'.$file.'.php', $contenu_final
+		);
 		return $a;
 	}
 }
