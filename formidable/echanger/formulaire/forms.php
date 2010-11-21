@@ -50,6 +50,7 @@ function echanger_formulaire_forms_importer_dist($fichier){
 								$saisie['options']['type'] = 'password';
 								break;
 							case 'date':
+								$saisie['saisie'] = 'date';
 								$saisie['verifier'] = array(
 									'type' => 'date'
 								);
