@@ -4,7 +4,7 @@
 
 		[<p><:boussole:info_liste_boussoles:></p>
 		<div id="boussoles">
-			[(#CHEMIN{prive/themes/spip/images/boussole_icone-24.png}|debut_cadre_enfonce{#EVAL{true}})]
+			[(#VAL{1}|debut_cadre_enfonce{#EVAL{true}})]
 			[(#VAL{<:boussole:titre_bloc_boussoles:>}|bouton_block_depliable{#EVAL{true}, boussoles_depliable})]
 			<div id="boussoles_depliable" class="bloc_depliable blocdeplie">
 				<div class="cadre cadre-liste">

@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_zone' => 'Description du site SPIP Zone',
 
 // I
-	'info_ajouter_boussole' => 'En ajoutant des boussoles &agrave; votre base de donn&eacute;es, vous aurez la possiblit&eacute; d\'utiliser les mod&egrave;les fournis pour les afficher dans vos pages publiques.<br />Une boussole est d&eacute;crite par un fichier XML contenant les informations sur la boussole et ses sites.',
+	'info_ajouter_boussole' => 'En ajoutant des boussoles &agrave; votre base de donn&eacute;es, vous aurez la possiblit&eacute; d\'utiliser les mod&egrave;les fournis pour les afficher dans vos pages publiques.<br />Une boussole est d&eacute;crite par un fichier XML contenant les informations sur la boussole et ses sites.<br /><br />Si la boussole existe d&eacute;j&agrave; ce formulaire permettra de la mettre &agrave; jour en conservant la configuration d\'affichage.',
 	'info_aucun_logo_boussole' => 'La boussole ne poss&egrave;de pas de logo',
 	'info_boite_boussoles_gerer' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise &agrave; jour et la suppression des boussoles. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole.</p>',
 	'info_configurer_boussole' => 'Ce formulaire vous permez de configurer l\'affichage de la boussole en choisissant les sites &agrave; afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affich&eacute;s sont rep&eacute;r&eacute;s par un fond hachur&eacute; et une police grise.',
@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_ecriture_bdd' => 'Erreur d\'&eacute;criture en base de donn&eacute;es',
 	'message_nok_xml_introuvable' => 'Le fichier &#171; @fichier@ &#187; est introuvable',
 	'message_nok_xml_invalide' => 'Le fichier XML &#171; @fichier@ &#187; de description de la boussole n\'est pas conforme &agrave; la DTD',
+	'message_ok_boussole_actualisee' => 'La boussole &#171; @fichier@ &#187; a &eacute;t&eacute; mise &agrave; jour.',
 	'message_ok_boussole_ajoutee' => 'La boussole &#171; @fichier@ &#187; a &eacute;t&eacute; ajout&eacute;e.',
 
 // N

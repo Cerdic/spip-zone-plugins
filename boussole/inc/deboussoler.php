@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ----------------------- Traitements des boussoles ---------------------------------
 
 /**
- * Ajout du depot et de ses extensions dans la base de donnees
+ * Ajout de la boussole dans la base de donnees
  *
  * @param string $url
  * @param string &$erreur
@@ -15,46 +15,67 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // $url	=> url ou path du fichier xml de description de la boussole
 // $erreur	=> message d'erreur deja traduit
-function boussole_ajouter($url, &$erreur='') {
+function boussole_ajouter($url, &$message='') {
 
 	// On recupere les infos du fichier xml de description de la balise
 	$infos = boussole_parser_xml($url);
 	if (!infos OR !$infos['boussole']['alias']){
-		$erreur = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
+		$message = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
 		return false;
 	}
-	// On complete les infos de chaque site par l'id_syndic si ce site est deja reference 
-	// dans la table spip_syndic. On reconnait le site par son url
+
+	// On complete les infos de chaque site 
+	// - par l'id_syndic si ce site est deja reference dans la table spip_syndic. 
+	//   On reconnait le site par son url
+	// - par la configuration de l'affichage si la boussole existe deja
 	foreach ($infos['sites'] as $_cle => $_info) {
-		// On construit deux urls : l'une avec / l'autre sans
+		// -- On recherche l'id_syndic en construisant deux urls possibles : l'une avec / l'autre sans
 		$urls = array();
 		$urls[] = $_info['url_site'];
 		$urls[] = (substr($_info['url_site'], -1, 1) == '/') ? substr($_info['url_site'], 0, -1) : $_info['url_site'] . '/';
 		if ($id_syndic = sql_getfetsel('id_syndic', 'spip_syndic', sql_in('url_site', $urls)))
 			$infos['sites'][$_cle]['id_syndic'] = intval($id_syndic);
+		// -- On recherche une configuration d'affichage (si elle existe)
+		$where = array('aka_boussole=' .sql_quote($infos['boussole']['alias']),
+					'aka_site=' . sql_quote($_info['aka_site']));
+		if ($resultats = sql_fetsel('rang_groupe, rang_site, affiche', 'spip_boussoles', $where)) {
+			$infos['sites'][$_cle]['rang_groupe'] = intval($resultats['rang_groupe']);
+			$infos['sites'][$_cle]['rang_site'] = intval($resultats['rang_site']);
+			$infos['sites'][$_cle]['affiche'] = $resultats['affiche'];
+		}
 	}
 	
 	// On insere le tableau des sites collecte dans la table spip_boussoles
 	$meta_boussole = 'boussole_infos_' . $infos['boussole']['alias'];
 	// -- suppression au prealable des sites appartenant a la meme boussole si elle existe
-	if (lire_meta($meta_boussole))
+	//    et determination du type d'action (ajout ou actualisation)
+	$actualisation = false;
+	if (lire_meta($meta_boussole)) {
+		$actualisation = true;
 		boussole_supprimer($infos['boussole']['alias']);
+	}
 	// -- insertion de la nouvelle liste de sites pour cette boussole
 	if (!$ids = sql_insertq_multi('spip_boussoles', $infos['sites'])) {
-		$erreur = _T('boussole:message_nok_ecriture_bdd');
+		$message = _T('boussole:message_nok_ecriture_bdd');
 		return false;
 	}
 	// -- consignation des informations de mise a jour de cette boussole dans la table spip_meta
 	$infos['boussole']['nbr_sites'] = count($infos['sites']);
 	$infos['boussole']['xml'] = $url;
 	ecrire_meta($meta_boussole, serialize($infos['boussole']));
+
+	// On definit le message de retour ok (actualisation ou ajout)
+	if ($actualisation)
+		$message = _T('boussole:message_ok_boussole_actualisee', array('fichier' => $url));
+	else
+		$message = _T('boussole:message_ok_boussole_ajoutee', array('fichier' => $url));
 	
 	return true;
 }
 
 
 /**
- * Suppression du depot et de ses extensions dans la base de donnees
+ * Suppression de la boussole dans la base de donnees
  *
  * @param int $aka_boussole
  * @return boolean

@@ -46,15 +46,15 @@ function formulaires_ajouter_boussole_traiter_dist(){
 			// On insere la boussole dans la base
 			// et on traite le cas d'erreur fichier ($retour['message_erreur']) non conforme
 			// si c'est encore possible apres avoir valide le fichier avec la dtd
-			$ok = boussole_ajouter($url, $erreur);
+			$ok = boussole_ajouter($url, $message);
 		
 			// Determination des messages de retour
 			if (!$ok) {
-				$retour['message_erreur'] = $erreur;
+				$retour['message_erreur'] = $message;
 				spip_log("ERREUR AJOUT", 'boussole');
 			}
 			else {
-				$retour['message_ok'] = _T('boussole:message_ok_boussole_ajoutee', array('fichier' => $url));
+				$retour['message_ok'] = $message;
 				spip_log("ACTION AJOUTER BOUSSOLE : url = ". $url, 'boussole');
 			}
 		}
