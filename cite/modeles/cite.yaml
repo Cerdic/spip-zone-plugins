@@ -58,7 +58,6 @@ parametres:
     options:
       nom: 'year'
       label: '<:cite:label_year:>'
-      obligatoire: 'oui'
   -
     saisie: 'input'
     options:

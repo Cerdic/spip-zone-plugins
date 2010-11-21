@@ -10,14 +10,14 @@ function formulaires_cite_inserer_modeles_traiter_dist($champs){
 		//$code .= '|'._request('classe');
 	//if (_request('align') && _request('align')!='')
 		//$code .= '|'._request('align');
-	// On accole l'année à la variante (car il ne faut surtout pas d'espace après la variante)
-	if (_request('year') && _request('year')!='')
-		$code .= '|year='._request('year');
+	// On accole le titre à la variante (car il ne faut surtout pas d'espace après la variante)
+	if (_request('title'))
+		$code .= '|title='._request('title');
 	// Pour les autres champs, on fait un retour à la ligne afin d'avoir une syntaxe plus aérée
 	// On supprime les champs inutilisés pour une variante donnée
 	// (champs qui peuvent être renseignés si l'utilisateur a modifié la variante après une première saisie du formulaire)
 	foreach ($champs as $champ) {
-		if($champ != 'modele' && $champ != 'variante' && $champ != 'classe' && $champ != 'id_modele' && $champ != 'align' && $champ != 'year' && _request($champ) && _request($champ)!='') {
+		if($champ != 'modele' && $champ != 'variante' && $champ != 'classe' && $champ != 'id_modele' && $champ != 'align' && $champ != 'title' && _request($champ) && _request($champ)!='') {
 			// journal
 			if ($champ=='journal' && !in_array(_request('variante'),array('journal')))
 				$code .= '';
