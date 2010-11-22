@@ -94,12 +94,43 @@
 
 <BOUCLE_principale_mot(MOTS) {id_mot=#ENV{id_mot}}>
         <div class="cartouche">
-            [(#LOGO_MOT|image_reduire{200,200})]
+            [(#LOGO_MOT|image_reduire{100,100})]
             <h1 class="">#TITRE</h1>
         </div>
         [<div class="texte">(#TEXTE*|popup_liens_retour|propre|image_reduire{400,400})</div>]
         [<div class="notes comment"><h2><:info_notes:></h2>(#NOTES|popup_liens_retour)</div>]
 </BOUCLE_principale_mot>
+
+[(#REM) Pour les documents ]
+[(#REM) Cas des images : on affiche (modele 'emb' classique SPIP) ]
+<BOUCLE_principale_document(DOCUMENTS) {id_document} {mode=document}{extension IN png,jpg,gif}>
+[(#MODELE{emb}|image_reduire{500,0})]
+</BOUCLE_principale_document>
+[(#REM) Sinon : on affiche les infos et le lien de telechargement ]
+<BOUCLE_documents_joints(DOCUMENTS spip_documents_liens) {id_document} {extension !IN gif,jpg,png}>
+<BOUCLE_secondaire_article(ARTICLES) {id_article=#ID_OBJET}>[(#OBJET|=={article}|oui)
+	[(#LOGO_ARTICLE||image_reduire{100,100})]
+	<h1>#TITRE</h1>
+	<div id="espacetexte">
+		[<p class="soustitre">(#SOUSTITRE|popup_liens_retour)</p>]
+		[<div class="chapo">(#CHAPO*|popup_liens_retour|propre|image_reduire{400,400})</div>]
+	</div>
+]</BOUCLE_secondaire_article>
+<BOUCLE_secondaire_rubrique(RUBRIQUES) {id_rubrique=#ID_OBJET}>[(#OBJET|=={rubrique}|oui)
+	[(#LOGO_RUBRIQUE||image_reduire{100,100})]
+	<h1>#TITRE</h1>
+	<div id="espacetexte">
+        [<div class="chapo">(#TEXTE*|popup_liens_retour|propre|image_reduire{400,400})</div>]
+	</div>
+]</BOUCLE_secondaire_rubrique>
+        <div class="texte">
+            <h2><:titre_documents_joints:></h2>
+            <strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+        	[(#DESCRIPTIF*|popup_liens_retour|propre)]
+        </div>
+</BOUCLE_documents_joints>
+<//B_principale_document>
 
 		</div>
 	</div>

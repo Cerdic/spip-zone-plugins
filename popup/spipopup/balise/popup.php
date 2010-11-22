@@ -12,8 +12,14 @@ function balise_POPUP_dyn($param='', $page=false, $width=false, $height=false, $
 	if(!$width) $width = POPUP_WIDTH;
 	if(!$height) $height = POPUP_HEIGHT;
 	if (preg_match(_RACCOURCI_URL, $param, $match)) {
-		if(in_array($match[1], array('art', 'article', 'breve', 'auteur', 'syndic', 'mot'))){
-			$type = ($match[1] == 'art') ? 'article' : $match[1];
+		if(in_array($match[1], array(
+			'art', 'article', 'breve', 'auteur', 'syndic', 'mot', 'document', 'doc', 'site'
+		))){
+			$type = ($match[1] == 'art') ? 'article' : (
+				($match[1] == 'site') ? 'syndic' : (
+					($match[1] == 'doc') ? 'document' : $match[1]
+				)
+			);
 			$param = "id_$type=".$match[2];
 		}
 	}
