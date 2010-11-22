@@ -12,9 +12,9 @@ function exec_malettre_archive(){
 	include_spip("inc_presentation");
 
   // parametre
-  $path_archive = "IMG/lettre";
-  $path = _DIR_RACINE.$path_archive;
-
+  $path_archive = "lettre";
+  $path = _DIR_IMG.$path_archive;
+  $path_url_public_archive = "../IMG/lettre";
 
   // main ------------------------------------------------------
 
@@ -74,11 +74,11 @@ function exec_malettre_archive(){
           $output .= "<tr>";
           $output .= "<td><small>$lang</small></td>";
           $output .= "<td>"._T('malettre:lettre_du')."  $date_lettre</td>";
-          $output .= "<td><a href='#' onclick=\"malettref.location.href='../$path_archive/$lettre_path'\" style='color:green;'>"._T('malettre:voir')."</a></td>";
-          $output .= "<td><a href='../$path_archive/$lettre_path' target='_blank' style='color:green;'>HTML</a></td>";
+          $output .= "<td><a href='#' onclick=\"malettref.location.href='$path_url_public_archive/$lettre_path'\" style='color:green;'>"._T('malettre:voir')."</a></td>";
+          $output .= "<td><a href='$path_url_public_archive/$lettre_path' target='_blank' style='color:green;'>HTML</a></td>";
           // txt ?
           $lettre_path_txt = substr($lettre_path,0,-4)."txt";          
-          if (is_file($path."/".$lettre_path_txt)) $output .= "<td><a href='../$path_archive/$lettre_path_txt' target='_blank' style='color:green;'>TXT</a></td>";
+          if (is_file($path."/".$lettre_path_txt)) $output .= "<td><a href='$path_url_public_archive/$lettre_path_txt' target='_blank' style='color:green;'>TXT</a></td>";
                                               else $output .= "<td></td>";
           $output .= "<td><a href='?exec=malettre_archive&amp;agir=del&amp;f=$lettre_path'  onclick='return confirm(\""._T('malettre:effacer_confirm')."\");' style='color:red;'>"._T('malettre:effacer')."</a></td>";
           $output .= "</tr>";

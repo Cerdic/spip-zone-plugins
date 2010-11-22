@@ -25,11 +25,11 @@ function exec_malettre(){
   include_spip("inc_presentation");
   
   // chemin
-  $path = _DIR_RACINE;  
-  $path_archive = "IMG/lettre";
+  $path = _DIR_IMG;
+  $path_archive = "lettre";
   $path_archive_full = $path.$path_archive;
   $path_url = lire_meta("adresse_site");
-
+  $path_url_archive = $path_url."/IMG";
 
   $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__file__))));
   define('_DIR_PLUGIN_MALETTRE',(_DIR_PLUGINS.end($p)));
@@ -228,8 +228,8 @@ function exec_malettre(){
             
             // hash            
             $lettre_hash = substr(md5(time()),0,5);
-            $url_lettre_archive = "$path_url/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
-            $url_lettre_archive_txt = "$path_url/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
+            $url_lettre_archive = "$path_url_archive/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
+            $url_lettre_archive_txt = "$path_url_archive/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
             
             // recup contenu HTML
             $texte = $path_archive_full."/.malettre.html";
