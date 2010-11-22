@@ -1,0 +1,39 @@
+<plugin>
+	<nom> <multi> [fr]Vidéo(s) </multi> </nom>
+	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
+	<licence>GPL &#169; 2010</licence>
+	<version>0.1</version>
+	<icon>theme/img/videos-32.png</icon>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			Interface de gestion et modèles d'insertion de(s) vidéo(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
+			- Fichiers H264/OGG
+			- Dailymotion
+			- Viméo
+			- Youtube
+		</multi></description>
+	<lien>http://www.spip-contrib.net/?article3636</lien>
+	<prefix>videos</prefix>
+	
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>pipelines/videos_jquery_plugins.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>affiche_gauche</nom>
+		<action>affiche_gauche</action>
+        <inclure>pipelines/videos_affiche_boite.php</inclure>
+    </pipeline>
+
+	<bouton id='videos' parent='configuration'>
+		<icone>theme/img/videos-24.png</icone>
+		<titre>videos:titre_admin</titre>
+		<url>configurer_videos</url>
+	</bouton>
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<utilise id="cfg" version="[1.9.4;]" />
+	
+	<categorie>multimedia</categorie>
+</plugin>

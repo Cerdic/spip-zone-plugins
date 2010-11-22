@@ -1,0 +1,14 @@
+[<p class='formulaire_ok2'><strong>(#ENV*{message_ok})</strong></p>]
+[<p class='formulaire_ok' class='erreur' style='color:red;'><strong>(#ENV*{erreurs}|table_valeur{message_erreur})</strong></p>]
+
+<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p>[<em>*(#ENV*{message_ok}|oui)Ajouter une autre vidéo</em><br />]
+		<:videos:label_url:><input type="text" size="22" name="url" value="[(#ENV*{message_ok}|non)#ENV{url}]"/>
+	</p>
+	<p>
+		<input type="hidden" name="id_article" value="#ENV{id_article}" />
+		<input type="submit" value="<:videos:valider:>" name='valider' />
+	</p>
+
+</form>
