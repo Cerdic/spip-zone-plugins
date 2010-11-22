@@ -1,19 +1,20 @@
 <plugin>
 	<nom>
-	Google analytics
+	Google Analytics
 	</nom>
 	<auteur>
 	Phil
 	</auteur>
 	<version>
-	0.3.1
+	0.4.0
 	</version>
 	<etat>
 	stable
 	</etat>
+	<licence>GNU/GPL</licence>
 	<description>
 		<multi>
-			[fr]Ajoute le script Google analytics dans l'espace public en ins&#233;rant le code perso de google analytics dans la configuration.
+			[fr]Ajoute automatiquement le script Google Analytics dans l'espace public en ins&#233;rant le code personnel de Google Analytics dans la configuration.
  			[en]Adds the Google Analytics script in public space by inserting google analytics code in the configuration.
 		</multi>
 	</description>

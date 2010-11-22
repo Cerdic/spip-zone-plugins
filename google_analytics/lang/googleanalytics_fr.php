@@ -4,13 +4,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
-	'cfg_titre' => 'Google analytics',
+	'cfg_descriptif' => 'Ici vous pouvez indiquer votre identifiant Google Analytics.',
+	'cfg_titre' => 'Google Analytics',
 
-	// T
-	'textes_id_google' => 'Votre identifiant google',
-	'texte_votre_identifiant' => 'Votre identifiant google analytics du type UA-12345',
-	
-	// R
-	'retour_a_spip' => 'Retour &agrave; la page compl&egrave;te',
+	// E
+	'explication_id_google' => 'Si "_" ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut).',
+
+	// L
+	'label_id_google' => 'Votre identifiant Google Analytics du type "UA-12345"',
 );
 ?>
