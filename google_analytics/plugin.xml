@@ -1,8 +1,8 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom>
 	Google analytics
 	</nom>
-	<auteur> <!-- Auteur du plugin -->
+	<auteur>
 	Phil
 	</auteur>
 	<version>
@@ -12,14 +12,13 @@
 	stable
 	</etat>
 	<description>
-	Ajoute le script Google analytics dans l'espace public en ins&eacute;rant le code perso de google analytics dans l'espace
- priv&eacute;
- <h4>[Configuration->.?exec=cfg&amp;cfg=googleanalytics]</h4>
+		<multi>
+			[fr]Ajoute le script Google analytics dans l'espace public en ins&#233;rant le code perso de google analytics dans la configuration.
+ 			[en]Adds the Google Analytics script in public space by inserting google analytics code in the configuration.
+		</multi>
 	</description>
-	<icon>ga.png</icon>
-	<lien>
-		[Documentation->http://www.spip-contrib.net/?article2495]
-    </lien>
+	<icon>images/ga.png</icon>
+	<lien>http://www.spip-contrib.net/?article2495</lien>
 	<prefix>
 	googleanalytics
 	</prefix>

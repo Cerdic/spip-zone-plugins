@@ -1,0 +1,24 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=googleanalytics -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		
+	<form method="post" action="#ENV{action}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_idGoogle">
+				<label for="idgoogle"><:googleanalytics:texte_votre_identifiant:></label>
+				<p class="explication">* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
+				<input type="text" name="idGoogle" class="text" id="idgoogle" size="60" value="#ENV{idGoogle,UA-xxxxxx}" />
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+	</form>
+</div>
