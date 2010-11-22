@@ -56,6 +56,11 @@ function action_inscrire_openid_dist() {
 			$redirect = parametre_url($redirect,'openid',$auteur['openid']);
 			$redirect = parametre_url($redirect,'nom_inscription',$auteur['login']);
 			$redirect = parametre_url($redirect,'mail_inscription',$auteur['email']);
+			
+			$redirect = pipeline('openid_inscrire_redirect',array(
+				'args'=> array('url' => $redirect,'infos_auteur' =>$auteur),
+				'data'=> $redirect
+			));
 
 		}
 

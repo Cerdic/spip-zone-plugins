@@ -5,8 +5,10 @@
   Distribue sous licence GPL
 
 ]
-<a id="bouton_insc_openid" href="#" onclick="insc_with_openid(true);return false;"><img src="#CHEMIN{images/openid_badge.png}" width="71" height="21" alt="<:openid:form_forum_openid|attribut_html:>" /></a>
-<a id="bouton_insc_conv" href="#" onclick="insc_with_openid(false);return false;">Retour</a>
+<div class="openid_openid">
+	<a id="bouton_insc_openid" href="#" onclick="insc_with_openid(true);return false;"><img src="#CHEMIN{images/openid_badge.png}" width="71" height="21" alt="<:openid:form_forum_openid|attribut_html:>" /></a>
+	<a id="bouton_insc_conv" href="#" onclick="insc_with_openid(false);return false;">Retour</a>
+</div>
 <ul>
 	<li class='saisie_url_openid obligatoire[ (#ENV*{erreurs}|table_valeur{url_openid}|oui)erreur]'>
 		<label for="url_openid"><:openid:form_pet_votre_openid:></label>[

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin OpenID
- * Licence GPL (c) 2007-2009 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
+ * Licence GPL (c) 2007-2010 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
  *
  */
 
@@ -224,7 +224,7 @@ function demander_authentification_openid($url_openid, $retour){
 		// on demande quelques informations, dont le login obligatoire
 		if ($sreg_request = Auth_OpenID_SRegRequest::build(
 				array('nickname'), // Required
-				array('fullname', 'email')) // Optional
+				array('fullname', 'email', 'postcode', 'country', 'dob', 'gender')) // Optional
   		) {
 			openid_log("Ajout des extensions demandees", 3);
         	$auth_request->addExtension($sreg_request);
@@ -369,6 +369,9 @@ function terminer_authentification_openid($retour){
 			// login a defaut du nom, sinon c'est 'Nouvel auteur' qui est enregistre
 			'nom' => isset($sreg['fullname']) ? $sreg['fullname'] : $sreg['nickname'],
 			'openid' => $openid
+		);
+		$identite = pipeline('openid_recuperer_identite',
+			array('args' => $sreg,'data' => $identite)
 		);
 		return $identite;
 	}
