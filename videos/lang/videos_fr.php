@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_html5' => 'Configuration HTML5 / Alternative',
 	'cfg_titre_configurations_vimeo' => 'Configurations Vim&eacute;o',
 	'cfg_titre_configurations_youtube' => 'Configurations Youtube',
+	'confirmation_ajout' => 'La vid&eacute;o "@type@:@titre@" a bien &eacute;t&eacute; ajout&eacute;e.',
 	
 	'label_ajouter_video' => "Ajouter une vid&eacute;o",
 	'label_url' => "Adresse de la vid&eacute;o",

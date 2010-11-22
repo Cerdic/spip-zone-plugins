@@ -63,11 +63,6 @@ function formulaires_insertion_video_traiter_dist($id_article){
 	$fichier = _request('laVideo');
 	$titre = $infosVideo->title;
 	$descriptif = $infosVideo->description;
-	/*
-		TODO A brancher sur présence de Mediatheque
-	*/
-	// $duree = $infosVideo->duration;
-	// $auteur = $infosVideo->author;
 	// $logoDocument = $infosVideo->thumbnails->0->url; // A brancher sur la copie de document
 	
 	// On va pour l'instant utiliser le champ extension pour stocker la source
@@ -79,27 +74,31 @@ function formulaires_insertion_video_traiter_dist($id_article){
 		'fichier'=>$fichier,
 		'distant'=>'oui'
 	);
-	/*
-		TODO IF Mediatheque
-		$champs['statut'] = 'publie';
-		$champs['extrait'] = 'err';
-		$champs['duree'] = $duree;
-		$champs['credits'] = $author;
-	*/
-	$document = sql_insertq('spip_documents',$champs);
-	$document_lien = sql_insertq(
-		'spip_documents_liens',
-		array(
-			'id_document'=>$document,
-			'id_objet'=>$id_article,
-			'objet'=>'article',
-			'vu'=>'non'
-		)
-	);
 	
-	/*
-		TODO Passer en variable de langue
-	*/
-	$message_ok = "La vidéo '"._request('type').":"._request('laVideo')."' a bien été ajoutée.";
+	/** Gérer le cas de la présence de Médiathèque (parce que Mediatheque c'est le BIEN) **/
+	if(filtre_info_plugin_dist('gestdoc','est_actif')){
+		// Récupérer les infos
+		$taille = $infosVideo->duration;
+		$auteur = $infosVideo->author;
+		// Remplir quelques champs de plus
+		$champs['taille'] = $taille;
+		$champs['credits'] = $auteur;
+		$champs['statut'] = 'publie';
+	}
+
+	$document = sql_insertq('spip_documents',$champs);
+	if($document){
+		$document_lien = sql_insertq(
+			'spip_documents_liens',
+			array(
+				'id_document'=>$document,
+				'id_objet'=>$id_article,
+				'objet'=>'article',
+				'vu'=>'non'
+			)
+		);
+	}
+	
+	$message_ok = _T('videos:confirmation_ajout', array('type'=>$type,'titre'=>$titre));
 	return array("message_ok" => $message_ok);
 }
