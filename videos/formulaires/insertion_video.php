@@ -33,23 +33,49 @@ function formulaires_insertion_video_verifier_dist(){
 
 	if(!$laVideo) $erreurs['pas_valide'] = _T('Adresse non valide.');
 	else set_request('laVideo',$laVideo);
+	
+	include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
+	$Videopian = new Videopian();
+	$infosVideo = $Videopian->get(_request('url'));
+		
+	// $fichier = serialize(array(_request('type'),_request('laVideo'))); // pour tout ranger dans #FICHIER
+	// $titreArticle = sql_getfetsel('titre','spip_articles',"id_article=".$id_article);
+	// $titre = $type."-".$fichier."-".$titreArticle;
+	$type = _request('type');
+	$fichier = _request('laVideo');
+
 	return $erreurs;
 }
 
 function formulaires_insertion_video_traiter_dist($id_article){
 	include_spip('inc/acces');
+	include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
+	/*
+		TODO Si on veut être compatible gentiment, il faut tester si on est bien en PHP5 sinon il ne faut pas utiliser la Classe Videopian et décommenter les 3 lignes suivantes
+	*/
+	$Videopian = new Videopian();
+	$infosVideo = $Videopian->get(_request('url'));
 		
 	// $fichier = serialize(array(_request('type'),_request('laVideo'))); // pour tout ranger dans #FICHIER
+	// $titreArticle = sql_getfetsel('titre','spip_articles',"id_article=".$id_article);
+	// $titre = $type."-".$fichier."-".$titreArticle;
 	$type = _request('type');
 	$fichier = _request('laVideo');
-	$titreArticle = sql_getfetsel('titre','spip_articles',"id_article=".$id_article);
-	$titre = $type."-".$fichier."-".$titreArticle;
+	$titre = $infosVideo->title;
+	$descriptif = $infosVideo->description;
+	/*
+		TODO A brancher sur présence de Mediatheque
+	*/
+	// $duree = $infosVideo->duration;
+	// $auteur = $infosVideo->author;
+	// $logoDocument = $infosVideo->thumbnails->0->url; // A brancher sur la copie de document
 	
 	// On va pour l'instant utiliser le champ extension pour stocker la source
 	$champs = array(
 		'titre'=>$titre,
 		'extension'=>$type,
 		'date' => date("Y-m-d H:i:s",time()),
+		'descriptif' => $descriptif,
 		'fichier'=>$fichier,
 		'distant'=>'oui'
 	);
@@ -57,6 +83,8 @@ function formulaires_insertion_video_traiter_dist($id_article){
 		TODO IF Mediatheque
 		$champs['statut'] = 'publie';
 		$champs['extrait'] = 'err';
+		$champs['duree'] = $duree;
+		$champs['credits'] = $author;
 	*/
 	$document = sql_insertq('spip_documents',$champs);
 	$document_lien = sql_insertq(
