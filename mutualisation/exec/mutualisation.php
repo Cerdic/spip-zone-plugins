@@ -134,7 +134,7 @@ function exec_mutualisation_dist() {
 	}
 
 	$page .= '<div style="text-align:center;"><img src="'
-		. _DIR_IMG.'mutualiser.png'
+		. find_in_path('mutualisation/mutualiser.png')
 		. '" alt="" /></div>';
 
 	$page = minipres($titre, $page);
