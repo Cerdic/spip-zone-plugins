@@ -92,29 +92,23 @@ function exec_edit_relances(){
 
 function relances_while($indexation, $statut_interne)
 {
-	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " b.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
+  $_id = ($indexation=="id_asso") ? "id_asso" : "a.id_auteur";
+  $query = sql_select("$_id as id, a.id_auteur, a.email, nom_famille, prenom, telephone, mobile,  statut_interne, validite",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " b.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 
 	$res = '';
 	while ($data = sql_fetch($query)) {
 		$id_auteur=$data['id_auteur'];
 		$email=$data["email"];
-		//$statut_interne=$data['statut_interne'];
-		switch($data['statut_interne']) {
-				case "echu": $class= "impair"; break;
-				case "ok": $class="valide"; break;
-				case "relance": $class="pair"; break;
-				case "prospect": $class="prospect"; break;	   
-		}
-
-		$res .= '<tr> '
-		.'<td class="'.$class. ' border1" style="text-align:right">'
-		.(($indexation=="id_asso") ? $data["id_asso"]: $data["a.id_auteur"])
+		$class = $GLOBALS['association_styles_des_statuts'][$data['statut_interne']] . " border1";
+		$res .= "\n<tr>"
+		.'<td class="$class" style="text-align:right">'
+		. $data['id']
 		."</td>\n"
-		.'<td class="'.$class. ' border1">'.$data["nom_famille"].' '.$data['prenom']."</td>\n"
-		.'<td class="'.$class. ' border1">'.$data['telephone']."</td>\n"
-		.'<td class="'.$class. ' border1">'.$data['mobile']."</td>\n"
-		.'<td class="'.$class. ' border1">'.association_datefr($data['validite'])."</td>\n"
-		.'<td class="'.$class. ' border1" style="text-align:center;">'
+		.'<td class="$class">'.$data["nom_famille"].' '.$data['prenom']."</td>\n"
+		.'<td class="$class">'.$data['telephone']."</td>\n"
+		.'<td class="$class">'.$data['mobile']."</td>\n"
+		.'<td class="$class">'.association_datefr($data['validite'])."</td>\n"
+		.'<td class="$class" style="text-align:center;">'
 		.'<input name="id[]" type="checkbox" value="'.$id_auteur.'" checked="checked" />'
 		.'<input name="statut[]" type="hidden" value="'.$statut_interne.'" />'
 		.'<input name="email[]" type="hidden" value="'.$email.'" />'

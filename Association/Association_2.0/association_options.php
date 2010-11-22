@@ -31,6 +31,15 @@ $GLOBALS['association_liste_des_statuts2'] =
 	? $GLOBALS['association_liste_des_statuts']
 	: array('sorti','ok','echu','relance', lire_config('inscription2/statut_interne'));
 
+$GLOBALS['association_styles_des_statuts'] = array(
+	"echu" => "impair",
+	"ok" => "valide",
+	"prospect" => "prospect",
+	"relance" => "pair",
+	"sorti" => "sortie"
+);
+
+
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
 function association_icone($texte, $lien, $image, $sup='rien.gif')

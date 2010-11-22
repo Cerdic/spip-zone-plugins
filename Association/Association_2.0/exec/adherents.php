@@ -147,13 +147,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
-		switch($data['statut_interne'])	{
-		case "echu": $class= "impair"; break;
-		case "ok": $class="valide";	break;
-		case "relance": $class="pair"; break;
-		case "sorti": $class="sortie"; break;
-		default : $class="prospect"; break;	   
-		}
+		$class = $GLOBALS['association_styles_des_statuts'][$data['statut_interne']] . " border1";
 		
 		$logo = $chercher_logo($id_auteur, 'id_auteur');
 		if ($logo) {
@@ -182,36 +176,36 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		}
 
 		$auteurs .= "\n<tr>"
-		. '<td style="text-align:right;" class="'.$class. ' border1">'
+		. '<td style="text-align:right;" class="'.$class. '">'
 		. (($indexation=="id_asso") ? $data["id_asso"] : $id_auteur)
 		. '</td>'
-		. '<td class="'.$class. ' border1">'
+		. '<td class="'.$class. '">'
 		. "<img src=$logo" . ' alt="&nbsp;"  title="'
 		. $data["nom_famille"].' '.$data["prenom"].'" />'
 		. "</td>\n"
-		. '<td class="'.$class. ' border1">'
+		. '<td class="'.$class. '">'
 		. $mail . "</td>\n"
-		. '<td class="'.$class. ' border1">'.$data["prenom"]."</td>\n"
-		. '<td class="'.$class. ' border1">'
+		. '<td class="'.$class. '">'.$data["prenom"]."</td>\n"
+		. '<td class="'.$class. '">'
 		. affiche_categorie($data["categorie"])
 		. "</td>\n"
-		. '<td class="'.$class. ' border1">' . $valide . "</td>\n"
-		. '<td class="'.$class. ' border1">'
+		. '<td class="'.$class. '">' . $valide . "</td>\n"
+		. '<td class="'.$class. '">'
 		. '<a href="'
 		. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur)
 		.'">'
 		. http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur'))
 		."</a></td>\n"
-		. '<td class="'.$class. ' border1">'
+		. '<td class="'.$class. '">'
 		. association_bouton(_T('asso:adherent_label_ajouter_cotisation'), 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur)
 		."</td>\n"
-		. '<td class="'.$class. ' border1">'
+		. '<td class="'.$class. '">'
 		. association_bouton(_T('asso:adherent_label_modifier_membre'), 'edit-12.gif', 'edit_adherent','id='.$id_auteur)
 		."</td>\n"
-		. '<td class="'.$class. ' border1">'
+		. '<td class="'.$class. '">'
 		. association_bouton(_T('asso:adherent_label_voir_membre'), 'voir-12.png', 'voir_adherent','id='.$id_auteur)
 		. "</td>\n"
-		. '<td class="'.$class. ' border1"><input name="delete[]" type="checkbox" value="'.$id_auteur.'" /></td>'
+		. '<td class="'.$class. '"><input name="delete[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. "</tr>\n";
 	}
 	
