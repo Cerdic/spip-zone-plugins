@@ -21,6 +21,31 @@ define('_ASSOCIATION_AUTEURS_ELARGIS',
        (_ASSOCIATION_INSCRIPTION2 AND @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1")) ? 
        'spip_auteurs_elargis' : 'spip_asso_membres');
 
+// quand on n'a pas INSCRIPTION2, creation auteur => creation d'un membre 
+
+function association_post_edition($flux){
+	$id = $flux['args']['id_objet'];
+	if ($id
+	AND $flux['args']['table']=='spip_auteurs'
+	AND !_ASSOCIATION_INSCRIPTION2
+	AND !sql_fetsel('id_auteur', 'spip_asso_membres', "id_auteur=$id")
+	AND $data = $flux['data']) {
+		if (! ($nom = $data['nom']))
+	 		$nom = sql_getfetsel('nom', 'spip_auteurs', "id_auteur=$id");
+		if ($nom) 
+			list($nom, $prenom) = preg_split('/\s+/', $nom, 2);
+		else {$nom = _T('asso:activite_entete_adherent'); $prenom = $id;}
+ 		sql_replace('spip_asso_membres', array(
+			'nom_famille' => $nom,
+			'prenom' => $prenom,
+			'email' => $data['email'],
+			'fonction' => $data['bio'],
+			'id_auteur' => $id,
+			'statut_interne' => 'echu'));
+	}
+	return $data;
+}
+
 // Le premier element indique un ancien membre
 $GLOBALS['association_liste_des_statuts'] =
   array('sorti','prospect','ok','echu','relance');
@@ -138,8 +163,7 @@ function association_flottant($s)
 function association_header_prive($flux){
 	$c = direction_css(find_in_path('association.css'));
 	return "$flux\n<link rel='stylesheet' type='text/css' href='$c' />";
-		
-	}
+}
 
 // Pour ne pas avoir a ecrire le prefixe "spip_" dans les squelettes etc
 // (cf trouver_table)
@@ -165,7 +189,7 @@ include _DIR_PLUGIN_ASSOCIATION . 'base/association.php';
 
 // Raccourcis
 // Les tables ayant 2 prefixes ("spip_asso_")
-// le raccouci "don" implique de declarer le raccourci "asso_don" etc.
+// le raccourci "don" implique de declarer le raccourci "asso_don" etc.
 
 function generer_url_asso_don($id, $param='', $ancre='') {
 	return  generer_url_ecrire('edit_don', "id=" . intval($id));

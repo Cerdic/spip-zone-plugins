@@ -29,6 +29,10 @@
 		<action>header_prive</action>		
 	</pipeline>
 	
+	<pipeline>
+		<nom>post_edition</nom>
+	</pipeline>
+	
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.1;]" />
 </plugin>
