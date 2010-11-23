@@ -4,6 +4,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function mathjax_spip_insert_head($flux){
+	$flux .= mathjax_spip_flux();
+	return $flux;
+}
+
+function mathjax_spip_header_prive($flux){
+	$flux .= mathjax_spip_flux();
+	return $flux;
+}
+	
+function mathjax_spip_flux(){
+	
 	$js = find_in_path('lib/mathjax-v1.0.1a/MathJax.js');
 	$param = <<<EOF
 		MathJax.Hub.Config({
@@ -17,7 +28,7 @@ function mathjax_spip_insert_head($flux){
     	});
 	</script>
 EOF;
-	$flux .= "\n<script type='text/javascript' src='$js'>
+	$flux = "\n<script type='text/javascript' src='$js'>
 		$param
 	</script>\n";
 	return $flux;

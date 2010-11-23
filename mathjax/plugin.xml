@@ -22,6 +22,10 @@
     	<nom>insert_head</nom>
     	<inclure>mathjax_spip_pipelines.php</inclure>
     </pipeline>
+    <pipeline>
+    	<nom>header_prive</nom>
+    	<inclure>mathjax_spip_pipelines.php</inclure>
+    </pipeline>
     
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="lib:mathjax-v1.0.1a" src="http://downloads.sourceforge.net/project/mathjax/MathJax/v1.0.1/MathJax-v1.0.1a.zip?r=&ts=1290546744&use_mirror=freefr" />
