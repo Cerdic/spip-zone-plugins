@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_redirection_adresses_secondaires' => 'Los ALIAS son las URL alternativas que tambi&eacute;n permiten el acceso a vustro sitio.
-	Estas direcciones son dirigidas autom&aacute;ticamente hacia le direcci&oacute;n principal. Indique un ALIAS por l&iacute;nea.',
+	Estas direcciones son dirigidas autom&aacute;ticamente hacia la direcci&oacute;n principal. Indique un ALIAS por l&iacute;nea.',
 	'titre_config_langage' => 'Configurar la lengua',
 	'titre_configurer_preferences' => 'Configurar sus preferencias',
 	'titre_identite_site' => 'Identidad del sitio'
