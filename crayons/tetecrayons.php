@@ -116,6 +116,23 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 	));
 
 
+	// Est-ce que PortePlume est la ?
+	$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
+	if ($meta_crayon['barretypo']) {
+		if (function_exists('chercher_filtre')
+		AND $f = chercher_filtre('info_plugin')
+		AND $f('PORTE_PLUME','est_actif')) {
+			$pp = <<<EOF
+	/* Ajouter une barre porte plume sur les crayons */
+	if (typeof(jQuery.fn.barre_outils) == 'function') {
+		function barrebouilles_crayons(){
+			jQuery('.formulaire_crayon textarea.crayon-active').barre_outils('edition');
+		}
+		barrebouilles_crayons();
+		onAjaxLoad(barrebouilles_crayons);
+	}
+EOF;
+
 	$incHead = <<<EOH
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
@@ -130,36 +147,13 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 	var configCrayons;
 	function startCrayons() {
     configCrayons = new cQuery.prototype.cfgCrayons({$config});
-    ( window.jQuery ? jQuery : cQuery )(document).ready(cQuery.fn.crayonsstart);
+    ( window.jQuery ? jQuery : cQuery )(cQuery.fn.crayonsstart);
     // cQuery.ready() plante le jQuery.ready() sous MSIE
+    {$pp}
 	}
 /* ]]> */</script>
 EOH;
 
-	// Est-ce que PortePlume est la ?
-	$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
-	if ($meta_crayon['barretypo']) {
-		if (function_exists('chercher_filtre')
-		AND $f = chercher_filtre('info_plugin')
-		AND $f('PORTE_PLUME','est_actif')) {
-			$incHead .= <<<EOF
-<script type="text/javascript">
-<!--
-(function($){
-$(document).ready(function(){
-	/* Ajouter une barre porte plume sur les crayons */
-	function barrebouilles_crayons(){
-		if (typeof($.fn.barre_outils) == 'function') {
-			$('.formulaire_crayon textarea.crayon-active').barre_outils('edition');
-		}
-	}
-	barrebouilles_crayons();
-	onAjaxLoad(barrebouilles_crayons);
-});
-})(jQuery);
--->
-</script>
-EOF;
 		}
 	}
 
