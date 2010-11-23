@@ -32,7 +32,7 @@
 		<url>configurer_videos</url>
 	</bouton>
 	
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	
 	<categorie>multimedia</categorie>
