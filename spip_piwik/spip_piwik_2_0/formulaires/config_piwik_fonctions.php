@@ -5,8 +5,15 @@
  * 
  */
 function cfg_config_piwik_verifier(&$cfg){
+	$obligatoires = array('token','user','urlpiwik');
+	foreach($obligatoires as $obligatoire){
+		if(!$cfg->val[$obligatoire]){
+			$erreur[$obligatoire] = _T('info_obligatoire');
+		}
+	}
+	
 	$piwik_token = $cfg->val['token'];
-	if (!preg_match('/^[a-f0-9]{32}$/i',$piwik_token)) {
+	if (!$erreur['token'] && !preg_match('/^[a-f0-9]{32}$/i',$piwik_token)) {
 		$erreur['token'] = _T('piwik:cfg_erreur_token');
 		return $erreur;
 	}
@@ -22,7 +29,7 @@ function cfg_config_piwik_verifier(&$cfg){
 	$options_user = array('userLogin'=>$cfg->val['user']);
 	$datas_user = $piwik_recuperer_data($piwik_url,$piwik_token,'',$method_verif_user,'PHP',$options_user);
 	if(is_array($datas_user = unserialize($datas_user))){
-		if($datas_user['result'] == 'error'){
+		if(!$erreur['user'] && $datas_user['result'] == 'error'){
 			$erreur['user'] = _T('piwik:cfg_erreur_user_token');
 		}else{
 			/**
@@ -46,11 +53,11 @@ function cfg_config_piwik_verifier(&$cfg){
 	 */
 	$method = 'SitesManager.getSitesWithAdminAccess';
 	$datas = $piwik_recuperer_data($piwik_url,$piwik_token,'',$method,'PHP');
-	if(!is_array(unserialize($datas))){
+	if(!$erreur['urlpiwik'] && !is_array(unserialize($datas))){
 		$erreur['urlpiwik'] = _T('piwik:cfg_erreur_recuperation_data');
+	}else{
+		ecrire_meta('piwik_sites_dispo', $datas);	
 	}
-	
-	ecrire_meta('piwik_sites_dispo', $datas);
 	
 	return $erreur;
 }

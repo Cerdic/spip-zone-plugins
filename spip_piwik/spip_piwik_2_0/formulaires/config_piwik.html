@@ -32,9 +32,12 @@
 			})]
 			[(#CONFIG{piwik/token}|et{#CONFIG{piwik/user}}|oui)
 				[(#CONFIG{piwik_sites_dispo}|oui)
+					[(#SET{defaut,[(#URL_SITE_SPIP|replace{'http://',''})]})]
 					[(#SAISIE{sites_piwik,idpiwik,
 						label=<:piwik:label_identifiant_site:>,
 						explication=<:piwik:explication_identifiant_site:>,
+						option_intro='-',
+						defaut=#GET{defaut},
 						size=5
 					})]
 				]

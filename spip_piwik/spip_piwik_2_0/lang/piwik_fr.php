@@ -24,6 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_restreindre_statut_public' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans la partie publique',
 	'explication_token' => 'Le token d\'identification est disponible dans vos pr&eacute;f&eacute;rences personnelles ou dans la partie API de votre serveur Piwik',
 
+	// I
+	'info_aucun_site_compte' => 'Aucun site n\'est associ&eacute; &agrave; votre compte Piwik.',
+	'info_aucun_site_compte_demander_admin' => 'Vous devez demander &agrave; un administrateur de votre serveur Piwik d\'ajouter un site correspondant.',
+
 	// L
 	'label_adresse_serveur' => 'Adresse URL du serveur (https:// ou http://)',
 	'label_comptabiliser_prive' => 'Comptabiliser les visites de l\'espace priv&eacute;',
