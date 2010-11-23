@@ -31,21 +31,27 @@
 				size=50
 			})]
 			[(#CONFIG{piwik/token}|et{#CONFIG{piwik/user}}|oui)
-				[(#CONFIG{piwik_sites_dispo}|oui)
-					[(#SET{defaut,[(#URL_SITE_SPIP|replace{'http://',''})]})]
-					[(#SAISIE{sites_piwik,idpiwik,
-						label=<:piwik:label_identifiant_site:>,
-						explication=<:piwik:explication_identifiant_site:>,
-						option_intro='-',
-						defaut=#GET{defaut},
-						size=5
-					})]
-				]
+				
+				[(#SET{defaut,[(#URL_SITE_SPIP|replace{'http://',''})]})]
+				[(#SAISIE{sites_piwik,idpiwik,
+					label=<:piwik:label_identifiant_site:>,
+					explication=<:piwik:explication_identifiant_site:>,
+					option_intro='-',
+					defaut=#GET{defaut},
+					size=5
+				})]
 				[(#CONFIG{piwik_admin}|=={oui}|oui)
 				<li>
 					<label><:piwik:label_creer_site:></label>
 					<p class="explication"><:piwik:explication_creer_site:></p>
 					<a href="[(#URL_ACTION_AUTEUR{piwik_creer_site,test&urlsite=[(#CONFIG{piwik/urlpiwik})]&token=[(#CONFIG{piwik/token})],#SELF})]"><:piwik:action_creer_site:></a>
+					<a href="[(#URL_ACTION_AUTEUR{piwik_recuperer_liste,test,#SELF})]"><:piwik:action_recuperer_liste:></a>
+				</li>]
+				[(#CONFIG{piwik_admin}|=={non}|oui)
+				<li>
+					<label><:piwik:label_recuperer_liste:></label>
+					<p class="explication"><:piwik:explication_recuperer_liste:></p>
+					<a href="[(#URL_ACTION_AUTEUR{piwik_recuperer_liste,test,#SELF})]"><:piwik:action_recuperer_liste:></a>
 				</li>]
 				[(#SAISIE{radio, mode_insertion,
 					label=<:piwik:label_mode_insertion:>,

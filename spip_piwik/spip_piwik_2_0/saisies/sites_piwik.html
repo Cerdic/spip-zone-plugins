@@ -5,7 +5,6 @@
   - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
   	Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
-    (seulement si non multiple)
 
   Exemple d'appel :
 	[(#SAISIE{sites_piwik,idpiwik,
@@ -29,6 +28,5 @@
 </B_selection>
 <p><:piwik:info_aucun_site_compte:></p>
 [(#CONFIG{piwik_admin}|=={non}|oui)
-<p><:piwik:info_aucun_site_compte_demander_admin:></p>
-]
+<p><:piwik:info_aucun_site_compte_demander_admin:></p>]
 <//B_selection>

@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_creer_site' => 'Cr&eacute;er le site',
+	'action_recuperer_liste' => 'R&eacute;cup&eacute;rer la liste des sites',
 
 	// C
 	'cfg_description_piwik' => 'Ici vous pouvez indiquer votre identifiant piwik, ainsi que l\'adresse du serveur g&eacute;rant vos statistiques.',
@@ -20,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_exclure_ips' => 'Pour exclure plusieurs adresses, s&eacute;parez les par des points virgules',
 	'explication_identifiant_site' => 'La liste des sites disponibles sur le serveur Piwik a &eacute;t&eacute; r&eacute;cup&eacute;r&eacute;e automatiquement gr&agrave;ce aux informations soumises. S&eacute;lectionnez dans la liste ci-dessous celui qui vous convient',
 	'explication_mode_insertion' => 'Il existe deux modes d\'insertion dans les pages du code n&eacute;cessaire au bon fonctionnement du plugin. Par le pipeline "insert_head" (m&eacute;thode automatique mais peu configurable), ou par l\'insertion d\'une balise (m&eacute;thode manuelle en insérant dans le pied de vos pages la balise #PIWIK) qui, quant &agrave; elle est pleinement configurable.',
+	'explication_recuperer_liste' => 'Le lien ci-dessous vous permet de r&eacute;cup&eacute;rer la liste des sites que votre compte peut administrer sur le serveur Piwik.',
 	'explication_restreindre_statut_prive' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans l\'espace priv&eacute;',
 	'explication_restreindre_statut_public' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans la partie publique',
 	'explication_token' => 'Le token d\'identification est disponible dans vos pr&eacute;f&eacute;rences personnelles ou dans la partie API de votre serveur Piwik',
@@ -36,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_identifiant_site' => 'L\'identifiant de votre site sur le serveur Piwik',
 	'label_mode_insertion' => 'Mode d\'insertion dans les pages publiques',
 	'label_piwik_user' => 'Compte utilisateur Piwik',
+	'label_recuperer_liste' => 'R&eacute;cup&eacute;rer la liste des sites sur le serveur Piwik',
 	'label_restreindre_auteurs_prive' => 'Restreindre certains utilisateurs connect&eacute;s (priv&eacute;)',
 	'label_restreindre_auteurs_public' => 'Restreindre certains utilisateurs connect&eacute;s (public)',
 	'label_restreindre_statut_prive' => 'Restreindre certains statuts d\'utilisateurs dans l\'espace priv&eacute;',

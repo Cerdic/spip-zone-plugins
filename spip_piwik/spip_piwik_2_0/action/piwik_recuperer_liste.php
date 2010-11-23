@@ -12,20 +12,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_piwik_recuperer_liste(){
-	$piwik_site = _request('urlsite');
-	$piwik_token = _request('token');
+	$config = lire_config('piwik');
+	$piwik_site = $config['urlpiwik'];
+	$piwik_token = $config['token'];
 	
 	$piwik_url = 'http://'.$piwik_site.'/';
 	
-	if (!preg_match('/^[a-f0-9]{32}$/i',$piwik_token)) {
-		$erreur = 'Invalid Piwik Token.';
-	}
 	$format = _request('format')?_request('format'):'PHP';
+	
+	$piwik_api = charger_fonction('piwik_recuperer_data','inc');
+	
+	/**
+	 * Récupération de la liste des sites où cet utilisateur 
+	 * a les droits d'admin
+	 */
 	$method = 'SitesManager.getSitesWithAdminAccess';
-	
-	$piwik_api = charger_fonction('inc/piwik_recuperer_data');
-	$content = $piwik_api($piwik_url,$piwik_token,'API',$method,$format)
-	
-	ecrire_meta('piwik_sites_dispo', $content);
+	$datas = $piwik_api($piwik_url,$piwik_token,'',$method,$format);
+	spip_log($datas,'test');
+	ecrire_meta('piwik_sites_dispo', $datas);
 }
 ?>
