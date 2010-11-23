@@ -194,7 +194,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 	static $memo;
 	if (!isset($memo)) {
 		$cfg = @unserialize($GLOBALS['meta']['memoization']);
-		$memo = new Cache($cfg['pages'] ? $cfg['pages'] : $cfg['methode']);
+		$memo = new MCache($cfg['pages'] ? $cfg['pages'] : $cfg['methode']);
 	}
 
 	// Second appel, destine a l'enregistrement du cache sur le disque

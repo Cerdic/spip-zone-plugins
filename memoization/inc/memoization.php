@@ -1,7 +1,7 @@
 <?php
 
 /* prototype de backend */
-class CacheBackend {
+class MCacheBackend {
 	function get($key) {}
 	function set($key, $value, $ttl=null) {}
 	function exists($key) {}
@@ -13,8 +13,8 @@ class CacheBackend {
 	function init($params = null) {}
 }
 
-/* objet Cache */
-class Cache {
+/* objet MCache */
+class MCache {
 	var $methode;
 	var $backend;
 
@@ -22,11 +22,11 @@ class Cache {
 		return !in_array($this->methode, array('filecache', 'nocache'));
 	}
 
-	function Cache($methode=null, $params=array()) {
+	function MCache($methode=null, $params=array()) {
 		// autodetect
 		$this->methode = $methode ? $methode : $this->methode();
 		require_once dirname(dirname(__FILE__)).'/memo/'.$this->methode.'.inc';
-		$obj = 'CacheBackend_'.$this->methode;
+		$obj = 'MCacheBackend_'.$this->methode;
 		$this->backend = new $obj;
 		$this->backend->init($params);
 	}
@@ -34,7 +34,7 @@ class Cache {
 	function methode($methode = null) {
 		if (!$methode) {
 			$methodes = array('apc', 'xcache', 'eaccelerator', 'filecache', 'nocache');
-			while (!Cache::methode($methode = array_shift($methodes))){};
+			while (!MCache::methode($methode = array_shift($methodes))){};
 			return $methode;
 		}
 
@@ -99,7 +99,7 @@ class Cache {
 global $Memoization;
 
 $cfg = @unserialize($GLOBALS['meta']['memoization']);
-$Memoization = new Cache($cfg['methode']);
+$Memoization = new MCache($cfg['methode']);
 
 
 

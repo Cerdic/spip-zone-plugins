@@ -1,5 +1,5 @@
 <?php
 
-class CacheBackend_nocache extends CacheBackend {}
+class MCacheBackend_nocache extends MCacheBackend {}
 
 ?>

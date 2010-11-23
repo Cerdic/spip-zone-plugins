@@ -5,7 +5,7 @@
 @define('_LOCK_MAX', 30); # max lock time (seconds)
 
 
-class CacheBackend_xcache extends CacheBackend {
+class MCacheBackend_xcache extends MCacheBackend {
 
 	function get($key) {
 		$a = xcache_get(_CACHE_NAMESPACE.$key);

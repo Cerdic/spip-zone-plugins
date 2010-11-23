@@ -4,7 +4,7 @@
 
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 
-class CacheBackend_eaccelerator extends CacheBackend {
+class MCacheBackend_eaccelerator extends MCacheBackend {
 
 	function get($key) {
 		return ($v = eaccelerator_get(_CACHE_NAMESPACE.$key))

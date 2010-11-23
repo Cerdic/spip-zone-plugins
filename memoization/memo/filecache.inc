@@ -3,7 +3,7 @@
 if (!defined('_DIR_TMP')) define('_DIR_TMP', 'tmp/');
 if (!defined('_DIR_FILECACHE')) define('_DIR_FILECACHE', 'cache/');
 
-class CacheBackend_filecache extends CacheBackend {
+class MCacheBackend_filecache extends MCacheBackend {
 
 	// file named tmp/cache/ab/cd
 	// that's a maximum of 16^4 files in 256 directories

@@ -2,7 +2,7 @@
 
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 
-class CacheBackend_apc extends CacheBackend {
+class MCacheBackend_apc extends MCacheBackend {
 
 	function key_for_lock($str) {
 		return _CACHE_NAMESPACE.md5($str."locked");
