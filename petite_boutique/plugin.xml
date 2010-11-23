@@ -16,6 +16,11 @@
 		<icone>images/boutique24.png</icone>
 		<titre>Boutique:Boutique</titre>
 	</bouton>
+	<bouton id='boutique2' parent='bando_edition'>
+		<url>boutique</url>
+		<icone>images/boutique24.png</icone>
+		<titre>Boutique:Boutique</titre>
+	</bouton>
 	 <fonctions>boutique_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
