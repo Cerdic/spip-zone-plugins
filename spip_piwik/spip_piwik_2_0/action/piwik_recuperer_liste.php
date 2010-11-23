@@ -8,7 +8,9 @@
  * 
  * @return 
  */
-	
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function action_piwik_recuperer_liste(){
 	$piwik_site = _request('urlsite');
 	$piwik_token = _request('token');

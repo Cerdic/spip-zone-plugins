@@ -9,6 +9,8 @@
  * @return 
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function action_piwik_creer_site_dist(){
 	include_spip('inc/filtres');
 	$piwik_site = _request('urlsite');
@@ -18,10 +20,10 @@ function action_piwik_creer_site_dist(){
 
 	$options['siteName'] = extraire_multi($GLOBALS['meta']['nom_site']);
 	$options['urls'] = $GLOBALS['meta']['adresse_site'];
-	$methode = 'SitesManager.addSite';
 	
 	$piwik_recuperer_data = charger_fonction('piwik_recuperer_data','inc');
-
+	
+	$methode = 'SitesManager.addSite';
 	$datas = $piwik_recuperer_data($piwik_url,$piwik_token,'',$methode,'PHP',$options);
 	
 	$methode_bis = 'SitesManager.getSitesWithAdminAccess';
