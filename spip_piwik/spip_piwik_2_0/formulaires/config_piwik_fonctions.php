@@ -28,23 +28,24 @@ function cfg_config_piwik_verifier(&$cfg){
 	$method_verif_user = 'UsersManager.getUser';
 	$options_user = array('userLogin'=>$cfg->val['user']);
 	$datas_user = $piwik_recuperer_data($piwik_url,$piwik_token,'',$method_verif_user,'PHP',$options_user);
+	spip_log($datas_user,'test');
 	if(is_array($datas_user = unserialize($datas_user))){
 		if(!$erreur['user'] && $datas_user['result'] == 'error'){
 			$erreur['user'] = _T('piwik:cfg_erreur_user_token');
-		}else{
-			/**
-			 * Vérifier que ce token est un token admin
-			 * Si non : mettre une meta comme quoi il n'est pas admin pour créer des sites
-			 */
-			$method_verif_user_bis = 'UsersManager.getUsers';
-			$datas_user_bis = $piwik_recuperer_data($piwik_url,$piwik_token,'',$method_verif_user_bis,'PHP');
-			$datas_user_bis = unserialize($datas_user_bis);
-			if(is_array($datas_user_bis) && ($datas_user_bis['result'] == 'error')){
-				ecrire_meta('piwik_admin', 'non');
-			}else{
-				ecrire_meta('piwik_admin', 'oui');
-			}
-		}	
+		}
+		/**
+		 * Vérifier que ce token est un token admin
+		 * Si non : mettre une meta comme quoi il n'est pas admin pour créer des sites
+		 */
+		$method_verif_user_bis = 'UsersManager.getUsers';
+		$datas_user_bis = $piwik_recuperer_data($piwik_url,$piwik_token,'',$method_verif_user_bis,'PHP');
+		$datas_user_bis = unserialize($datas_user_bis);
+		if(is_array($datas_user_bis) && ($datas_user_bis['result'] == 'error')){
+			ecrire_meta('piwik_admin', 'non');
+		}else if(!$erreur['user']){
+			ecrire_meta('piwik_admin', 'oui');
+			unset($erreur['user']);
+		}
 	}
 
 	/**
