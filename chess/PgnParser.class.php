@@ -199,7 +199,7 @@ class PgnParser
 		$moveString = preg_replace('/\([^\)]*?\)/s',"",$moveString); // Removing variations for now.
 		$matches = array();
 		if(substr($moveString,0,1)=="{"){	/* Opening comment */
-			$comment = preg_replace("/{(.*)?}.*/s","\\1",$moveString);
+			$comment = preg_replace("/{(.*?)}.*/s","\\1",$moveString);
 			$matches['prefaceComment'] = $comment;
 		}		
 		$matchFound = true;
