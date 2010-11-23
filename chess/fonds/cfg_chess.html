@@ -27,7 +27,7 @@ S&eacute;lectionnez le type de boucle pour que la liste des fichiers concerne<br
 
 <fieldset><legend><:chess:details_options:></legend>
   <p>
-  <label><:chess:details_options_taille:></label>
+  #PUCE <label><:chess:details_options_taille:></label>
   <select name="taille">
     <option value="30" [(#ENV{taille,30}|=={"30"}|?{selected="selected",''})]><:chess:details_options_taille_petit:> - 30x30</option>
     <option value="45" [(#ENV{taille,30}|=={"45"}|?{selected="selected",''})]><:chess:details_options_taille_moyen:> - 45x45</option>
@@ -35,15 +35,15 @@ S&eacute;lectionnez le type de boucle pour que la liste des fichiers concerne<br
   </select>
   </p>
   <p>
-  <label><:chess:details_options_coldroite:></label>
+  #PUCE <label><:chess:details_options_coldroite:></label>
   <label><input type="text" name="coldroite" value="[(#ENV{coldroite, 230})]" size="3" /></label>
   </p>
   <p>
-  <label><:chess:details_options_vitesse:></label>
+  #PUCE <label><:chess:details_options_vitesse:></label>
   <label><input type="text" name="vitesse" value="[(#ENV{vitesse, 0.1})]" size="3" /> <:chess:details_options_vitsec:></label>
   </p>
     <p>
-  <label><:chess:details_options_pieces:></label>
+  #PUCE <label><:chess:details_options_pieces:></label>
   <select name="pieces">
     <option value="alpha" [(#ENV{pieces,alpha}|=={"alpha"}|?{selected="selected",''})]>alpha</option>
     <option value="cases" [(#ENV{pieces,alpha}|=={"cases"}|?{selected="selected",''})]>cases</option>
@@ -55,9 +55,13 @@ S&eacute;lectionnez le type de boucle pour que la liste des fichiers concerne<br
   </select>
   </p>
   <p>
-  <label><:chess:details_options_lecture:></label><br />
-	<input type="radio" name="arreter" value="true" [(#ENV{arreter,true}|=={true}|?{checked,''})]><:chess:details_options_lecture_arret:><br />
-	<input type="radio" name="arreter" value="false" [(#ENV{arreter,true}|=={false}|?{checked,''})]><:chess:details_options_lecture_continuer:><input type="text" name="delai" value="[(#ENV{delai, 3})]" size="3" /><:chess:details_options_lecture_contsec:></label>
+  #PUCE <label><:chess:details_options_lecture:></label><br />
+	<input style="margin-left:2em" type="radio" name="arreter" value="true" [(#ENV{arreter,true}|=={true}|?{checked,''})]><:chess:details_options_lecture_arret:><br />
+	<input  style="margin-left:2em" type="radio" name="arreter" value="false" [(#ENV{arreter,true}|=={false}|?{checked,''})]><:chess:details_options_lecture_continuer:><input type="text" name="delai" value="[(#ENV{delai, 3})]" size="3" /><:chess:details_options_lecture_contsec:></label>
+  </p>
+  <p>
+  #PUCE <label><:chess:details_options_charset:></label>
+  <input type="text" name="charset" value="[(#ENV{charset, iso-8859-1})]" size="15" />
   </p>
 </fieldset>
 

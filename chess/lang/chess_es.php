@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_options_lecture_continuer' => ' continuer la lecture au bout de ',
 'details_options_lecture_contsec' => ' secondes <strong>(Par d&eacute;faut : 3)</strong>',
 'details_options_pieces' => 'Mod&egrave;le des pi&egrave;ces de l&apos;&eacute;chiquier :',
+'details_options_charset' => 'Charset des fichiers PGN :',
 'details_options_taille' => 'Dimension du plateau',
 'details_options_taille_petit' => 'Pequeño',
 'details_options_taille_moyen' => 'Medio',
@@ -38,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_info_evennement' => 'Evenemente:',
 'details_info_date' => 'Data:',
 'details_info_round'=> 'Ronda:',
+'details_info_vide' => '...',
 'erreur_config' => '<strong>L&apos;affichage de ce plugin n&eacute;cessite une validation des options, <a href="@url@">cliquez ici</a> pour acc&eacute;der &agrave; l&apos;interface de gestion.</strong>',
 );
 ?>

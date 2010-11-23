@@ -23,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_options_lecture_arret' => ' stop the play.',
 'details_options_lecture_continuer' => ' continue to play after ',
 'details_options_lecture_contsec' => ' seconds <strong>(Default : 3)</strong>',
-'details_options_pieces' => 'Choose chess set :',
+'details_options_charset' => 'Charset des fichiers PGN:',
+'details_options_pieces' => 'Choose chess set:',
 'details_options_taille' => 'Board size',
 'details_options_taille_petit' => 'Small',
 'details_options_taille_moyen' => 'Medium',
@@ -38,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_info_evennement' => 'Event:',
 'details_info_date' => 'Date:',
 'details_info_round' => 'Round:',
+'details_info_vide' => '...',
 'erreur_config' => '<strong>You need to validate the options to display the chess plugin, <a href="@url@">click here</a> to access to the configuration&apos;s page.</strong>',
 );
 ?>

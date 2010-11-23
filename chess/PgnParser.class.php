@@ -1,4 +1,5 @@
 <?php
+
 /************************************************************************************************************
 Chess Widget
 Copyright (C) 2007  DTHMLGoodies.com, Alf Magne Kalleland
@@ -305,8 +306,9 @@ class PgnParser
 	function outputFileFromCache($filePath)
 	{	
 		$fp = fopen($filePath,'r');
-		fpassthru($fp);	
+		$t = fread($fp,filesize($filePath));
 		fclose($fp);
+		return $t;
 	}
 	
 	function writeContentToFileCache($filePath,$content)
@@ -326,8 +328,7 @@ class PgnParser
 		if(FILE_CACHE_OK){
 			$fileName = FILE_CACHE_FOLDER."/gameList_".$this->getPgnNameWithoutExtension().".json";
 			if(file_exists($fileName) && $this->__getPgnTimestamp()<$this->__getFiletimestamp($fileName)){
-				$this->outputFileFromCache($fileName);
-				exit;
+				return $this->outputFileFromCache($fileName);
 			}	
 		}
 		$retVal = "{\n";
@@ -426,8 +427,7 @@ class PgnParser
 		if(FILE_CACHE_OK){
 			$fileName = FILE_CACHE_FOLDER."/pgnNumberOfGames_".$this->getPgnNameWithoutExtension().".json";
 			if(file_exists($fileName)){
-				$this->outputFileFromCache($fileName);
-				exit;
+				return $this->outputFileFromCache($fileName);
 			}	
 		}
 		
@@ -462,14 +462,12 @@ class PgnParser
 	{		
 		$timestampPgn = $this->__getPgnTimestamp();
 		if($lastUpdateTimeStamp && $lastUpdateTimeStamp>$timestampPgn){
-			echo "false";	// Time stamp sent to this method and there are no changes, just output "false". This means that this method has been called by an liveUpdate call.
-			exit;
+			return "false";	// Time stamp sent to this method and there are no changes, just output "false". This means that this method has been called by an liveUpdate call.
 		}
 		if(FILE_CACHE_OK){
 			$fileName = FILE_CACHE_FOLDER."/gameDetails_".$this->getPgnNameWithoutExtension()."_gameIndex$gameIndex.json";
 			if(file_exists($fileName) && $this->__getPgnTimestamp()<$this->__getFiletimestamp($fileName)){
-				$this->outputFileFromCache($fileName);
-				exit;
+				return $this->outputFileFromCache($fileName);
 			}	
 		}
 				
