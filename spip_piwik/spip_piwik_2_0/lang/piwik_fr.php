@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_description_piwik' => 'Ici vous pouvez indiquer votre identifiant piwik, ainsi que l\'adresse du serveur g&eacute;rant vos statistiques.',
 	'cfg_erreur_recuperation_data' => 'Il y a une erreur de communication avec le serveur, veuillez v&eacute;rifier l\'adresse et le token',
 	'cfg_erreur_token' => 'Votre token d\'identification est invalide',
+	'cfg_erreur_user_token' => 'La correspondance Nom d\'utilisateur / Token n\'est pas correcte.',
 
 	// E
 	'explication_adresse_serveur' => 'Entrez l\'adresse sans "http://" ni "https://" ni slash final',
@@ -30,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_exclure_ips' => 'Exclure certaines adresses IP',
 	'label_identifiant_site' => 'L\'identifiant de votre site sur le serveur Piwik',
 	'label_mode_insertion' => 'Mode d\'insertion dans les pages publiques',
+	'label_piwik_user' => 'Compte utilisateur Piwik',
 	'label_restreindre_auteurs_prive' => 'Restreindre certains utilisateurs connect&eacute;s (priv&eacute;)',
 	'label_restreindre_auteurs_public' => 'Restreindre certains utilisateurs connect&eacute;s (public)',
 	'label_restreindre_statut_prive' => 'Restreindre certains statuts d\'utilisateurs dans l\'espace priv&eacute;',

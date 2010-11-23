@@ -14,15 +14,23 @@
 			[(#SAISIE{input,urlpiwik,
 				label=<:piwik:label_adresse_serveur:>,
 				explication=<:piwik:explication_adresse_serveur:>,
+				obligatoire=oui,
 				size=50
 			})]
-
+			
+			[(#SAISIE{input,user,
+				label=<:piwik:label_piwik_user:>,
+				obligatoire=oui,
+				size=50
+			})]
+			
 			[(#SAISIE{input,token,
 				label=<:piwik:label_token:>,
 				explication=<:piwik:explication_token:>,
+				obligatoire=oui,
 				size=50
 			})]
-			[(#CONFIG{piwik/token}|oui)
+			[(#CONFIG{piwik/token}|et{#CONFIG{piwik/user}}|oui)
 				[(#CONFIG{piwik_sites_dispo}|oui)
 					[(#SAISIE{sites_piwik,idpiwik,
 						label=<:piwik:label_identifiant_site:>,
