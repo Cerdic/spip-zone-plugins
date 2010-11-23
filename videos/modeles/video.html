@@ -5,6 +5,13 @@
 #SET{largeur,#ENV{largeur,#CONFIG{videos/largeur,'560'}}}
 #SET{hauteur,#ENV{hauteur,#CONFIG{videos/hauteur,'315'}}}
 
+[(#REM) "Extensions" gérées ou rajoutées par le plugin ]
+[(#SET{lesExtensions,
+	#ARRAY{	1,dailym,
+			2,youtube,
+			3,vimeo}
+})]
+
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
 	[(#SET{fichier,[(#FICHIER|replace{'IMG/',''})]})]
 
@@ -90,4 +97,14 @@
 		</section>
 	</div> <!-- Fermeture de ID : playerVideo -->
 	]
+	
+	
+[(#REM)
+/** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
+]
+	[(#ENV{html5}|=={oui}|non)
+	[(#GET{lesExtensions}|find{#EXTENSION}|non)
+		[(#INCLURE{fond=prive/modeles/video,id=#GET{document},env,emb=' '})]
+	]]
+
 </BOUCLE_LaVideo>
