@@ -202,12 +202,28 @@ function calculer_balise_REFBASE($env, $option=''){
 			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-3);
 		elseif (preg_match('#^[0-9]{1,3}an$#',$depuis))
 			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-2);
+		elseif (preg_match('#^[0-9]{1,3}a$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-1);
 		elseif (preg_match('#^[0-9]{1,3}y$#',$depuis))
 			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-1);
 		elseif (preg_match('#^[0-9]{1,3}year$#',$depuis))
 			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-4);
 		elseif (preg_match('#^[0-9]{1,3}years$#',$depuis))
 			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-5);
+		elseif (preg_match('#^[0-9]{1,3} ans$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-4);
+		elseif (preg_match('#^[0-9]{1,3} an$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-3);
+		elseif (preg_match('#^[0-9]{1,3} a$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-2);
+		elseif (preg_match('#^[0-9]{1,3} y$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-2);
+		elseif (preg_match('#^[0-9]{1,3} year$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-5);
+		elseif (preg_match('#^[0-9]{1,3} years$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-6);
+		if (preg_match('#^[0-9]{3}$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.$depuis;
 	}
 	
 	if ($env['doi']) $requete .= '&where=doi%20RLIKE%20%22'.urlencode(trim($env['doi'])).'%22';
