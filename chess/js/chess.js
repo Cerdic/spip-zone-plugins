@@ -416,11 +416,15 @@ DHTMLGoodies.Chess = function(props)
 	this.animationSpeed = 1;
 	this.liveUpdateInterval = 0;
 	this.elMovesInTable = new Array();
-	this.languageCode = 'en';
+	this.languageCode = chess_languageCode;
 	this.officers = new Object();
 
 	this.officers.en = ['B','R','Q','N','K'];
 	this.officers.no = ['L','T','D','S','K'];
+	this.officers.fr = ['F','T','D','C','R'];
+	this.officers.it = ['A','T','D','C','R'];
+	this.officers.es = ['A','T','D','C','R'];
+	this.officers.de = ['L','T','D','S','K'];
 
 	/*
 	this.colorLightSquares = '#E1B78F';
@@ -448,9 +452,9 @@ DHTMLGoodies.Chess = function(props)
 	this.coordLastMove.from = new Object();
 	this.coordLastMove.to = new Object();
 	this.animate = true;
-	this.cssPath = 'css/chess.css';
+	this.cssPath = chess_cssPath;
 	this.parentRef = document.body;
-	this.imageFolder = 'images/';
+	this.imageFolder = chess_imageFolder;
 	this.boardLabels = true;
 	this.flipBoardWhenBlackToStart = true;
 	this.flipBoardWhenBlackWins = true;
@@ -992,6 +996,7 @@ DHTMLGoodies.Chess.prototype = {
 	*  @param Array props - which properties to show, i.e. columns in the table. example ['view','white','black','result','event'], all properties except "view" are properties in the pgn file.
 	*	@param Object viewProperties - view properties, this is an associative array and the only property so far is "viewGameLink" which is the label of the link which displays the game.
 	*				example of this argument:  { viewGameLink:'View game' } 
+	*  +Added : viewGameTitle // example of this argument:  { viewGameTitle:'View all the details' } 
 	*
 	* @public
 	*/
@@ -1052,7 +1057,7 @@ DHTMLGoodies.Chess.prototype = {
 		for(var no2=0;no2<props.length;no2++){
 			for(var no2=0;no2<props.length;no2++){
 				if(props[no2]=='view'){
-					rowTemplate = rowTemplate + '<td><a href="#" id="game<ID>" onclick="D_chessObjects[' + ind + '].showGame(<ID>);return false"><PROPERTY_view></a></td>';
+					rowTemplate = rowTemplate + '<td><a href="#" id="game<ID>" onclick="D_chessObjects[' + ind + '].showGame(<ID>);return false" title="<PROPERTY_title>"><PROPERTY_view></a></td>';
 				}else{
 					rowTemplate = rowTemplate + '<td><PROPERTY_' + props[no2] + '></td>';
 				}
@@ -1068,6 +1073,7 @@ DHTMLGoodies.Chess.prototype = {
 			thisRow = thisRow.replace(/<CLASSNAME>/g,currentRowClassName);
 			var txt = this.gameListProperties.viewGameLink;
 			if(txt == 'gameNumber')txt = (no/1+1)+'';
+			thisRow = thisRow.replace('<PROPERTY_title>',this.gameListProperties.viewGameTitle);
 			thisRow = thisRow.replace('<PROPERTY_view>',txt);
 			for(var no2=0;no2<props.length;no2++){
 				thisRow = thisRow.replace('<PROPERTY_' + props[no2] + '>',gameList[no][props[no2]]);
@@ -3035,8 +3041,12 @@ DHTMLGoodies.Chess.prototype = {
 		board.style.left='0px';
 		board.style.top='0px';
 		element.appendChild(boardOuter);
-		if(this.boardLabels)this.__addBoardLabels(boardOuter);
-
+		if(this.boardLabels) {
+			this.boardFrame.style.position = 'absolute';
+			this.boardFrame.style.top='0px';
+			this.boardFrame.style.right='0px';
+			this.__addBoardLabels(boardOuter);
+		}
 		this.__createSquares(this.divBoard);
 		this.__createIndicators();
 		return board;
@@ -3141,7 +3151,7 @@ DHTMLGoodies.Chess.prototype = {
 
 		var borderWidth = this.__getStyle(this.divBoard,'borderLeftWidth').replace('px','')/1;
 
-		var posDiff = borderWidth;
+		var posDiff = borderWidth?borderWidth:0;
 		try{
 			var left = this.__getLeftPos(this.divBoard);
 			var leftOuter = this.__getLeftPos(this.boardFrame);
@@ -3531,7 +3541,7 @@ DHTMLGoodies.Chess.prototype = {
 	__loadCss : function(cssFile)
 	{
 		var lt = document.createElement('LINK');
-		lt.href = cssFile + '?rand=' + Math.random();
+		lt.href = cssFile + chess_queryStringSeparator + 'rand=' + Math.random();			
 		lt.rel = 'stylesheet';
 		lt.media = 'screen';
 		lt.type = 'text/css';
