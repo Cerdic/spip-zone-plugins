@@ -163,7 +163,7 @@ function cache_unlock($key) {
 
 /* filtre pour la page de cfg */
 function memoization_methode($methode=null) {
-	return Cache::methode($methode);
+	return MCache::methode($methode);
 }
 
 

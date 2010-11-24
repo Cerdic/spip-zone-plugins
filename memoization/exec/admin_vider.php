@@ -105,7 +105,7 @@ function exec_admin_vider_dist()
 
 			default:
 				$quota_cache = '';
-				$memo = new Cache($cfg['methode']);
+				$memo = new MCache($cfg['methode']);
 				$info = _L('Le cache des pages utilise la m&#233;moization @type@', array('type' => $memo->methode));
 				$info2 = _L("Taille totale non disponible");
 				$bouton = _L('Invalider le cache');
