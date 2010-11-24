@@ -73,7 +73,7 @@ function calculer_balise_REFBASE($env, $option=''){
 	else
 		$requete .= '&showLinks=1';
 	// Nombre maximum de liens affiches
-	$max = $env['liens'] ? trim($env['max']) : trim(lire_config('refbase/max'));
+	$max = $env['max'] ? trim($env['max']) : trim(lire_config('refbase/max'));
 	if ($env['showRows']) $max = trim($env['showRows']);
 	if (!$max) $max = '100';
 	$requete .= '&showRows='.$max;
