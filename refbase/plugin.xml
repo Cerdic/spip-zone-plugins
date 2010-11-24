@@ -3,9 +3,9 @@
 	<multi>Refbase</multi>
 	</nom>
 	<icon>img_pack/refbase-48.png</icon>
-	<auteur>[Joseph->http://joseph.larmarange.net]</auteur>
+	<auteur>Joseph</auteur>
 	<licence>GPL</licence>
-	<version>0.2.1</version>
+	<version>1.0</version>
 	<etat>stable</etat>
 	<description>
 	<multi>
@@ -25,6 +25,7 @@ _ (Use of [cfg->http://www.spip-contrib.net/Config-cfg] is facultative but highl
 	</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3036</lien> <!-- URI de documentation -->
 	<prefix>refbase</prefix>
+	<fonctions>refbase_balise.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>refbase_pipeline.php</inclure>
@@ -38,6 +39,6 @@ _ (Use of [cfg->http://www.spip-contrib.net/Config-cfg] is facultative but highl
 		<inclure>refbase_ieconfig_metas.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version='[1.9.2;]' />
+	<necessite id="SPIP" version='[2.1.2;]' />
 	<utilise id="cfg" />
 </plugin>

@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_tri_type' => 'Type de publication (type)',
 'cfg_tri_typeannee' => 'Type de publication puis par ann&eacute;e (type-annee)',
 'cfg_tri_datecreation' => 'Date de cr&eacute;ation (date-creation)',
-'cfg_url_refbase' => 'URL de la base refbase avec le / final (url_refbase)&nbsp;:',
+'cfg_url_refbase' => 'URL de la base refbase (url_refbase)&nbsp;:',
 'cfg_vue' => 'Vue utilis&eacute;e (vue)&nbsp;:',
 'cfg_vue_citations' => 'Citations (citations)',
 'cfg_vue_liste' => 'Liste en colonnes (liste)',
@@ -25,7 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_refbase' => 'Configuration du plugin refbase',
 'non' => 'non',
 'option_style' => 'Avanc&eacute; : option de style (facultatif)',
-'oui' => 'oui'
+'oui' => 'oui',
+'voir_references' => 'Voir les r&eacute;f&eacute;rences.',
 
 );
 ?>
