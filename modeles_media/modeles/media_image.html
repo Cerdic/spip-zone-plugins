@@ -41,9 +41,9 @@
 			<param name='src' value='#URL_DOCUMENT' />
 			[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
 			[(#ENV*|env_to_params{#MEDIA_IGNORE_PARAMS})]
-			<!--[if lte IE 6 ]>
+			<!--#EVAL**{chr(91)}if lte IE 6 #EVAL**{chr(93)}>
 			<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs{#MEDIA_IGNORE_PARAMS})][ width='(#MEDIA_TAILLE{largeur})'][ height='(#MEDIA_TAILLE{hauteur})'] ></embed>
-			<![endif]-->
+			<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
 			#GET{alt}
 		</object>]})]
 		[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
