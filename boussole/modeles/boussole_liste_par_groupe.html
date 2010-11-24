@@ -1,17 +1,48 @@
+[(#REM) <!--  MODELE DE BOUSSOLE
+
+	BOUSSOLE_LISTE_PAR_GROUPE
+	Pour chaque groupe, une liste ul/li simple avec nom et bulle d'info pour chaque site.
+	Les titres des groupes peuvet etre affiches.
+	Seuls les sites configures comme tel sont affiches.
+	Le classement se fait par rang de groupe, puis rang de site dans le groupe.
+-->]
+
+[(#REM) <!-- UTILISATION
+
+	- boussole :		alias de la boussole a afficher. spip, pour la galaxie SPIP
+	- titre_boussole :	indicateur oui/non d'affichage du titre de la boussole. Vide correspond a non
+	- titre_groupe :	indicateur oui/non d'affichage du titre de chaque groupe. Vide correspond a non
+	- type_bulle :		type de bulle d'info parmi dont les valeurs possibles sont :
+						+ nom_site
+						+ slogan_site
+						+ nom_slogan_site correspond a la chaine "nom, slogan"
+						+ descriptif_site correspond a une intro de 100 caracteres du descriptif
+						Pour ce modele, vide correspond a slogan_site
+	- div_id :			id du div englobant. Vide correspond a aucun id
+	- div_class :		classe css du div englobant. Vide correspond a aucune classe
+	- ul_class :		classe css du ul englobant la liste. Vide correspond a aucune classe
+	- li_class :		classe css du li de chaque element de la liste. Vide correspond a aucune classe
+-->]
+
 <B_groupe>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
-[(#ENV{titre_boussole}|=={oui}|oui)
+[(#ENV{titre_boussole, non}|=={oui}|oui)
 	[<h2>(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
 ]
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
 	[(#REM) <!-- Liste des site du groupe en cours -->]
 	<B_site>
-[(#ENV{titre_groupe}|=={oui}|oui)
+[(#ENV{titre_groupe, non}|=={oui}|oui)
 	[<h3>(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})</h3>]
 ]
-	<ul>
+	<ul[ class="(#ENV{ul_class})"]>
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
-		[<li><a href="#URL_SITE"[ title="(#AKA_BOUSSOLE|boussole_traduire{slogan_site, #AKA_SITE})"]>(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})</a></li>]
+		[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle, slogan_site}, #AKA_SITE}|couper{100})]})]
+		[<li[ class="(#ENV{li_class})"]>
+			<a href="#URL_SITE"[ title="(#GET{bulle})"]>
+				(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})
+			</a>
+		</li>]
 	</BOUCLE_site>
 	</ul>
 	</B_site>

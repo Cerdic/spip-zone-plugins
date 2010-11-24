@@ -62,14 +62,18 @@ function calcul_boussole_infos($alias) {
 // $alias			=> alias du groupe ou du site
 function boussole_traduire($aka_boussole, $champ, $alias='') {
 	$champs_boussole = array('nom_boussole', 'slogan_boussole','descriptif_boussole');
-	$champs_groupe_site = array('nom_groupe', 'nom_site', 'slogan_site', 'descriptif_site');
+	$champs_groupe_site = array('nom_groupe', 'nom_site', 'slogan_site', 'nom_slogan_site', 'descriptif_site');
 
 	$traduction = '';
 	if ($aka_boussole) {
 		if (in_array($champ, $champs_boussole))
 			$traduction = _T('boussole:' . $champ . '_' . $aka_boussole);
 		elseif (in_array($champ, $champs_groupe_site))
-			$traduction = _T('boussole:' . $champ . '_' . $aka_boussole . '_' . $alias);
+			if ($champ != 'nom_slogan_site')
+				$traduction = _T('boussole:' . $champ . '_' . $aka_boussole . '_' . $alias);
+			else
+				$traduction = _T('boussole:nom_site_' . $aka_boussole . '_' . $alias) . ' - ' .
+							  _T('boussole:slogan_site_' . $aka_boussole . '_' . $alias);
 	}
 
 	return $traduction;
