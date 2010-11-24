@@ -183,7 +183,7 @@ function queue_start_job($row){
 		return false;
 	}
 
-	spip_log("queue: $fonction() start", 'queue');
+	spip_log("queue [".$row['id_job']."]: $fonction() start", 'queue');
 	switch (count($args)) {
 		case 0:	$res = $fonction(); break;
 		case 1:	$res = $fonction($args[0]); break;
@@ -200,7 +200,7 @@ function queue_start_job($row){
 			# plus lent mais completement generique
 			$res = call_user_func_array($fonction, $args);
 	}
-	spip_log("queue: $fonction() end", 'queue');
+	spip_log("queue [".$row['id_job']."]: $fonction() end", 'queue');
 	return $res;
 
 }
@@ -260,13 +260,13 @@ function queue_schedule($force_jobs = null){
 		if ($row = array_shift($res)){
 			$nbj++;
 			// il faut un verrou, a base de sql_delete
-			if (sql_delete('spip_jobs',"id_job=".intval($row['id_job']."AND status=".intval(_JQ_SCHEDULED)))){
+			if (sql_delete('spip_jobs',"id_job=".intval($row['id_job'])." AND status=".intval(_JQ_SCHEDULED))){
 				#spip_log("JQ schedule job ".$nbj." OK",'jq');
 				// on reinsert dans la base aussitot avec un status=_JQ_PENDING
 				$row['status'] = _JQ_PENDING;
 				$row['date'] = $time;
 				sql_insertq('spip_jobs', $row);
-	
+
 				// on a la main sur le job :
 				// l'executer
 				$result = queue_start_job($row);
@@ -278,7 +278,7 @@ function queue_schedule($force_jobs = null){
 		#spip_log("JQ schedule job end time ".$time,'jq');
 	} while ($nbj<_JQ_MAX_JOBS_EXECUTE AND $row AND $time<$end_time);
 	#spip_log("JQ schedule end time ".time(),'jq');
-	
+
 	if ($row = array_shift($res)){
 		queue_update_next_job_time(0); // on sait qu'il y a encore des jobs a lancer ASAP
 		#spip_log("JQ encore !",'jq');
@@ -381,7 +381,7 @@ function queue_update_next_job_time($next_time=null){
 		foreach ($res as $row)
 			queue_close_job($row,$time);
 	}
-	
+
 	// chercher la date du prochain job si pas connu
 	if (is_null($next) OR is_null(queue_sleep_time_to_next_job())){
 		$date = sql_getfetsel('date','spip_jobs',"status=".intval(_JQ_SCHEDULED),'','date','0,1');
@@ -423,14 +423,14 @@ function queue_set_next_job_time($next) {
 			OR $curr_next>$next // le prochain job est plus tot que la date planifiee actuelle
 		) {
 		if (include_spip('inc/memoization') AND defined('_MEMOIZE_MEMORY') AND _MEMOIZE_MEMORY) {
-			cache_set(_JQ_NEXT_JOB_TIME_FILENAME,$queue_next_job_time);
+			cache_set(_JQ_NEXT_JOB_TIME_FILENAME,intval($next));
 		}
 		else {
 			ecrire_fichier(_JQ_NEXT_JOB_TIME_FILENAME,intval($next));
 		}
 		queue_sleep_time_to_next_job($next);
 	}
-	
+
 	return queue_sleep_time_to_next_job();
 }
 ?>
