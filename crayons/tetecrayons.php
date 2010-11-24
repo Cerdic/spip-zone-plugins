@@ -133,6 +133,10 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 	}
 EOF;
 
+		}
+	}
+
+
 	$incHead = <<<EOH
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
@@ -153,9 +157,6 @@ EOF;
 	}
 /* ]]> */</script>
 EOH;
-
-		}
-	}
 
 	if ($mode == 'head')
 		return $page . $incHead;
