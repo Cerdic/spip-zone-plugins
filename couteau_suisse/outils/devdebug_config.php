@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Ajout de l'outil 'devdebug'
 function outils_devdebug_config_dist() {
 	// Pour ne pas voir les erreurs dans le formulaire CS
-	ini_set('display_errors','1'); 
+	@ini_set('display_errors','1'); 
 	error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 	// Defaut
 	@define('_DEVDEBUG_MODE_DEF', 0);

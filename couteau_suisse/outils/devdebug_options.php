@@ -45,24 +45,24 @@ function devdebug_charger_debug(){
 		if(defined('_DEVDEBUG_ESPACE')) switch(_DEVDEBUG_ESPACE) {
 			case 'public' :
 				if(!$prive) {
-					ini_set('display_errors',1); 
+					@ini_set('display_errors',1); 
 					eval("error_reporting($niveau);");
 				}
-				else ini_set('display_errors',0);
+				else @ini_set('display_errors',0);
 				break;
 			case 'prive' :
 				if($prive) {
-					ini_set('display_errors',1); 
+					@ini_set('display_errors',1); 
 					eval("error_reporting($niveau);");
 				}
-				else ini_set('display_errors',0);
+				else @ini_set('display_errors',0);
 				break;
 			default :
-				ini_set('display_errors',1); 
+				@ini_set('display_errors',1); 
 				eval("error_reporting($niveau);");
 		}
 	}
-	elseif(_DEVDEBUG_MODE==0) ini_set('display_errors',0);
+	elseif(_DEVDEBUG_MODE==0) @ini_set('display_errors',0);
 }
 
 /**
