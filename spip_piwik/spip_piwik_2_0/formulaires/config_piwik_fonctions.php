@@ -28,7 +28,6 @@ function cfg_config_piwik_verifier(&$cfg){
 	$method_verif_user = 'UsersManager.getUser';
 	$options_user = array('userLogin'=>$cfg->val['user']);
 	$datas_user = $piwik_recuperer_data($piwik_url,$piwik_token,'',$method_verif_user,'PHP',$options_user);
-	spip_log($datas_user,'test');
 	if(is_array($datas_user = unserialize($datas_user))){
 		if(!$erreur['user'] && $datas_user['result'] == 'error'){
 			$erreur['user'] = _T('piwik:cfg_erreur_user_token');
@@ -42,7 +41,7 @@ function cfg_config_piwik_verifier(&$cfg){
 		$datas_user_bis = unserialize($datas_user_bis);
 		if(is_array($datas_user_bis) && ($datas_user_bis['result'] == 'error')){
 			ecrire_meta('piwik_admin', 'non');
-		}else if(!$erreur['user']){
+		}else{
 			ecrire_meta('piwik_admin', 'oui');
 			unset($erreur['user']);
 		}
