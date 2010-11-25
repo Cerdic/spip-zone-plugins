@@ -86,6 +86,7 @@ function formulaires_configurer_ck_charger_dist(){
 		'docs_max_size' => _DOC_MAX_SIZE?_DOC_MAX_SIZE:'',
 		'imgs_max_size' => _IMG_MAX_SIZE?_IMG_MAX_SIZE:'',
 		'imgs_max_width' => _IMG_MAX_WIDTH?_IMG_MAX_WIDTH:'',
+		'imgs_max_height' => _IMG_MAX_HEIGHT?_IMG_MAX_HEIGHT:'',
 
 		'longueur_login_mini' => _LOGIN_TROP_COURT+1,
 		'nb_objets_tranches' => _TRANCHES,
@@ -168,6 +169,8 @@ function formulaires_configurer_ck_traiter_dist(){
 		$code .= ck_code_constante('_IMG_MAX_SIZE',intval($t));
 	if ($t = _request('imgs_max_width'))
 		$code .= ck_code_constante('_IMG_MAX_WIDTH',intval($t));
+	if ($t = _request('imgs_max_height'))
+		$code .= ck_code_constante('_IMG_MAX_HEIGHT',intval($t));
 	
 
 	// ecrire
