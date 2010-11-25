@@ -2,7 +2,7 @@
 	<nom>Multilang</nom>
 	<auteur>Renato Formato</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>
@@ -22,6 +22,10 @@
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>insert_head_prive</action>
+		<inclure>multilang_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
 		<inclure>multilang_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

@@ -1,15 +1,38 @@
 <?php
 
 /**
+ * Insertion dans le pipeline insert_head_css
+ * si on a configuré multilang pour s'insérer dans l'espace public
+ *
+ * @param $flux
+ */
+function multilang_insert_head_css($flux){
+
+	$config = lire_config('multilang',array());
+	if($config['multilang_public'] == 'on'){
+
+		static $done = false;
+
+		if (!$done) {
+
+			$done = true;
+			$flux .= '<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
+		}
+	}
+	return $flux;
+}
+
+/**
  * Insertion dans le pipeline insert_head_prive
  * Ajoute css et javascript dans le <head> privé
  *
  * @param string $flux Le contenu du head privé
  */
 function multilang_insert_head_prive($flux){
+
 	$config = lire_config('multilang',array());
 
-	$flux .= multilang_inserer_head($flux,$config);
+	$flux .= multilang_inserer_head($config);
 
 	return $flux;
 }
@@ -21,15 +44,13 @@ function multilang_insert_head_prive($flux){
  * @param $flux
  */
 function multilang_insert_head($flux){
+
 	$config = lire_config('multilang',array());
 
 	if($config['multilang_public'] == 'on'){
-		$flux .= '
-<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />
-'.multilang_inserer_head($flux,$config).'
-';
+		$flux .= multilang_insert_head_css($flux); // au cas ou il n'est pas implemente
+		$flux .= multilang_inserer_head($config);
 	}
-
 	return $flux;
 }
 
@@ -40,7 +61,7 @@ function multilang_insert_head($flux){
  * @param string $flux Le head de la page où l'on se trouve
  * @param array $config La configuration du plugin
  */
-function multilang_inserer_head($flux,$config=array()){
+function multilang_inserer_head($config=array()){
 	if(count(explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
 		// Insertion de la css
 		$root = '' ;
@@ -79,7 +100,7 @@ function multilang_inserer_head($flux,$config=array()){
 		// - document.ready
 		// - onAjaxLoad (cas des docs et de la configuration du site)
 
-		$newflux = '
+		$data = '
 <script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
 <script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
 <script type="text/javascript">
@@ -114,6 +135,6 @@ function multilang_inserer_head($flux,$config=array()){
 </script>
 ';
 	}
-	return $newflux;
+	return $data;
 }
 ?>
