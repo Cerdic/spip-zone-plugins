@@ -1,13 +1,12 @@
 #HTTP_HEADER{Content-Type: application/x-bibtex}#HTTP_HEADER{Content-Disposition: attachment; filename=export.bib}
-@Article{[,
+@phdthesis{[,
 	title = {(#ENV{title}|trim)}][,
-	journal = {(#ENV{journal}|trim)}][,
+	type = {(#ENV{thesis_type}|trim)}][,
 	(#ENV{authors}|cite_authors_bibtex)][,
 	year = {(#ENV{year}|trim)}][,
-	volume = {(#ENV{volume}|trim)}][,
-	number = {(#ENV{issue}|trim)}][,
+	number = {(#ENV{number}|trim)}][,
+	address = {(#ENV{place}|trim)}][,
+	school = {(#ENV{university}|trim)}][,
 	pages = {(#ENV{pages}|trim|replace{'-','--'})}][,
-	issn = {(#ENV{issn}|trim)}][,
-	doi = {(#ENV{doi}|trim)}][,
 	url = {(#ENV{url}|trim)}]
 }#FILTRE{bibtex_encode}

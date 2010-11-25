@@ -21,6 +21,7 @@ parametres:
         book: '<:cite:item_book:>'
         chapter: '<:cite:item_chapter:>'
         report: '<:cite:item_report:>'
+        thesis: '<:cite:item_thesis:>'
   -
     saisie: 'input'
     options:
@@ -67,9 +68,15 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'type'
-      label: '<:cite:label_type:>'
+      nom: 'report_type'
+      label: '<:cite:label_report_type:>'
       afficher_si: '@variante@ == "report"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'thesis_type'
+      label: '<:cite:label_thesis_type:>'
+      afficher_si: '@variante@ == "thesis"'
   -
     saisie: 'input'
     options:
@@ -111,9 +118,15 @@ parametres:
   -
     saisie: 'input'
     options:
+      nom: 'university'
+      label: '<:cite:label_university:>'
+      afficher_si: '@variante@ == "thesis"'
+  -
+    saisie: 'input'
+    options:
       nom: 'place'
       label: '<:cite:label_place:>'
-      afficher_si: '@variante@ == "book" || @variante@ == "chapter" || @variante@ == "report"'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter" || @variante@ == "report" || @variante@ == "thesis"'
   -
     saisie: 'input'
     options:
@@ -130,12 +143,13 @@ parametres:
     options:
       nom: 'doi'
       label: '<:cite:label_doi:>'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter" || @variante@ == "journal"'
   -
     saisie: 'input'
     options:
       nom: 'isbn'
       label: '<:cite:label_isbn:>'
-      afficher_si: '@variante@ == "book" || @variante@ == "chapter" || @variante@ == "report"'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter"'
   -
     saisie: 'input'
     options:

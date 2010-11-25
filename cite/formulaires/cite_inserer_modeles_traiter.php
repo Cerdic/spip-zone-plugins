@@ -30,8 +30,11 @@ function formulaires_cite_inserer_modeles_traiter_dist($champs){
 			// series
 			elseif ($champ=='series' && !in_array(_request('variante'),array('book','chapter')))
 				$code .= '';
-			// type
-			elseif ($champ=='type' && !in_array(_request('variante'),array('report')))
+			// report_type
+			elseif ($champ=='report_type' && !in_array(_request('variante'),array('report')))
+				$code .= '';
+			// thesis_type
+			elseif ($champ=='thesis_type' && !in_array(_request('variante'),array('thesis')))
 				$code .= '';
 			// volume
 			elseif ($champ=='volume' && !in_array(_request('variante'),array('journal','book','chapter')))
@@ -51,14 +54,20 @@ function formulaires_cite_inserer_modeles_traiter_dist($champs){
 			// institution
 			elseif ($champ=='institution' && !in_array(_request('variante'),array('report')))
 				$code .= '';
+			// university
+			elseif ($champ=='university' && !in_array(_request('variante'),array('thesis')))
+				$code .= '';
 			// place
-			elseif ($champ=='place' && !in_array(_request('variante'),array('book','chapter','report')))
+			elseif ($champ=='place' && !in_array(_request('variante'),array('book','chapter','report','thesis')))
 				$code .= '';
 			// isbn
-			elseif ($champ=='isbn' && !in_array(_request('variante'),array('book','chapter','report')))
+			elseif ($champ=='isbn' && !in_array(_request('variante'),array('book','chapter')))
 				$code .= '';
 			// issn
 			elseif ($champ=='issn' && !in_array(_request('variante'),array('journal')))
+				$code .= '';
+			// doi
+			elseif ($champ=='doi' && !in_array(_request('variante'),array('book','chapter','journal')))
 				$code .= '';
 			// Cas général
 			else

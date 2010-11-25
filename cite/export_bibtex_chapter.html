@@ -1,17 +1,17 @@
 #HTTP_HEADER{Content-Type: application/x-bibtex}#HTTP_HEADER{Content-Disposition: attachment; filename=export.bib}
-@Incollection{,[
-	title = {(#ENV{title}|trim)},][
-	series = {(#ENV{series}|trim)},][
-	(#ENV{authors}|cite_authors_bibtex)][
-	(#ENV{editors}|cite_editors_bibtex)][
-	booktitle = {(#ENV{booktitle}|trim)},][
-	year = {(#ENV{year}|trim)},][
-	number = {(#ENV{volume}|trim)},][
-	edition = {(#ENV{edition}|trim)},][
-	address = {(#ENV{place}|trim)},][
-	publisher = {(#ENV{publisher}|trim)},][
-	pages = {(#ENV{pages}|trim|replace{'-','--'})},][
-	isbn = {(#ENV{isbn}|trim)},][
-	doi = {(#ENV{doi}|trim)},][
-	url = {(#ENV{url}|trim)},]
+@Incollection{[,
+	title = {(#ENV{title}|trim)}][,
+	series = {(#ENV{series}|trim)}][,
+	(#ENV{authors}|cite_authors_bibtex)][,
+	(#ENV{editors}|cite_editors_bibtex)][,
+	booktitle = {(#ENV{booktitle}|trim)}][,
+	year = {(#ENV{year}|trim)}][,
+	number = {(#ENV{volume}|trim)}][,
+	edition = {(#ENV{edition}|trim)}][,
+	address = {(#ENV{place}|trim)}][,
+	publisher = {(#ENV{publisher}|trim)}][,
+	pages = {(#ENV{pages}|trim|replace{'-','--'})}][,
+	isbn = {(#ENV{isbn}|trim)}][,
+	doi = {(#ENV{doi}|trim)}][,
+	url = {(#ENV{url}|trim)}]
 }#FILTRE{bibtex_encode}
