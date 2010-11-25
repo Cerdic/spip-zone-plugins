@@ -28,8 +28,6 @@ cQuery.noConflict();
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
 	[(#CHEMIN{js/crayons-fade.js}|pack_cQuery)]
 ]
-/* Executer le js d'amorcage
-http://www.stevesouders.com/blog/2008/12/27/coupling-async-scripts/
-*/
-var script = cQuery('script[src*=page=crayons.js]');
-if (script.length) eval( script.get(0).innerHTML );
+
+[(#REM) Appeler la callback si demandee ]
+[(#ENV{callback})();]
