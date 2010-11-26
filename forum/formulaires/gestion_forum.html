@@ -45,9 +45,11 @@
 		<a href="#" id="select_prop"><:forum:messages_prop:></a>
 	</li>
 	<li class="gestion_forum boutons">
-	<input type="submit" class="submit" name="valider" value="<:forum:icone_valider_messages:>" />
-	<input type="submit" class="submit" name="bruler" value="<:forum:icone_bruler_messages:>" />
-	<input type="submit" class="submit" name="supprimer" value="<:forum:icone_supprimer_messages:>" />
+		<div class="actions_moderation">
+			<input type="submit" class="submit" name="valider" value="<:forum:icone_valider_messages:>" />
+			<input type="submit" class="submit" name="bruler" value="<:forum:icone_bruler_messages:>" />
+			<input type="submit" class="submit" name="supprimer" value="<:forum:icone_supprimer_messages:>" />
+		</div>	
 	</li>
 	<li class="messages">
 		[(#INCLURE{fond=formulaires/inc-gestion_forum_liste}{statut=#ENV*{statut}}{prive=#GET{prive}}{public=#GET{public}}{pagination=#GET{pagination}}{env})]
@@ -55,9 +57,11 @@
 </ul>
 
 <p class="boutons">
-	<input type="submit" class="submit" name="valider" value="<:forum:icone_valider_messages:>" />
-	<input type="submit" class="submit" name="bruler" value="<:forum:icone_bruler_messages:>" />
-	<input type="submit" class="submit" name="supprimer" value="<:forum:icone_supprimer_messages:>" />
+	<div class="actions_moderation">
+		<input type="submit" class="submit" name="valider" value="<:forum:icone_valider_messages:>" />
+		<input type="submit" class="submit" name="bruler" value="<:forum:icone_bruler_messages:>" />
+		<input type="submit" class="submit" name="supprimer" value="<:forum:icone_supprimer_messages:>" />
+	</div>	
 </p>
 
 </div></form>]
