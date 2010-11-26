@@ -1,55 +1,70 @@
 <?php
 
 function cite_authors_ris ($auts) {
-	$auts = explode(';',$auts);
-	foreach ($auts as $cle => $aut) {
-		$aut = explode(',',$aut,2);
-		$auts[$cle] = 'A1  - '.trim($aut[0]).',';
-		if ($aut[1])
-			$auts[$cle] .= trim($aut[1]);
+	if (trim($auts)) {
+		$auts = explode(';',$auts);
+		foreach ($auts as $cle => $aut) {
+			$aut = explode(',',$aut,2);
+			$auts[$cle] = 'A1  - '.trim($aut[0]).',';
+			if ($aut[1])
+				$auts[$cle] .= trim($aut[1]);
+		}
+		return implode("\n",$auts);
 	}
-	return implode("\n",$auts);
+	else return '';
 }
 
 function cite_authors_bibtex ($auts) {
-	$auts = explode(';',$auts);
-	foreach ($auts as $cle => $aut) {
-		$aut = explode(',',$aut,2);
-		$auts[$cle] = trim($aut[0]).',';
-		if ($aut[1])
-			$auts[$cle] .= " ".trim($aut[1]);
+	if (trim($auts)) {
+		$auts = explode(';',$auts);
+		foreach ($auts as $cle => $aut) {
+			$aut = explode(',',$aut,2);
+			$auts[$cle] = trim($aut[0]).',';
+			if ($aut[1])
+				$auts[$cle] .= " ".trim($aut[1]);
+		}
+		return 'author = {'.implode(" and ",$auts).'}';
 	}
-	return 'author = {'.implode(" and ",$auts).'}';
+	else return '';
 }
 
 function cite_pages_ris ($pages) {
-	$pages = explode('-',trim($pages));
-	$ret = "SP  - ".$pages[0];
-	if (isset($pages[1]))
-		$ret .= "\nEP  - ".$pages[1];
-	return $ret;
+	if (trim($pages)) {
+		$pages = explode('-',trim($pages));
+		$ret = "SP  - ".$pages[0];
+		if (isset($pages[1]))
+			$ret .= "\nEP  - ".$pages[1];
+		return $ret;
+	}
+	else return '';
 }
 
 function cite_editors_ris ($auts) {
-	$auts = explode(';',$auts);
-	foreach ($auts as $cle => $aut) {
-		$aut = explode(',',$aut,2);
-		$auts[$cle] = 'ED  - '.trim($aut[0]).',';
-		if ($aut[1])
-			$auts[$cle] .= trim($aut[1]);
+	if (trim($auts)) {
+		$auts = explode(';',$auts);
+		foreach ($auts as $cle => $aut) {
+			$aut = explode(',',$aut,2);
+			$auts[$cle] = 'ED  - '.trim($aut[0]).',';
+			if ($aut[1])
+				$auts[$cle] .= trim($aut[1]);
+		}
+		return implode("\n",$auts);
 	}
-	return implode("\n",$auts);
+	else return '';
 }
 
 function cite_editors_bibtex ($auts) {
-	$auts = explode(';',$auts);
-	foreach ($auts as $cle => $aut) {
-		$aut = explode(',',$aut,2);
-		$auts[$cle] = trim($aut[0]).',';
-		if ($aut[1])
-			$auts[$cle] .= " ".trim($aut[1]);
+	if (trim($auts)) {
+		$auts = explode(';',$auts);
+		foreach ($auts as $cle => $aut) {
+			$aut = explode(',',$aut,2);
+			$auts[$cle] = trim($aut[0]).',';
+			if ($aut[1])
+				$auts[$cle] .= " ".trim($aut[1]);
+		}
+		return 'editor = {'.implode(" and ",$auts).'}';
 	}
-	return 'editor = {'.implode(" and ",$auts).'}';
+	else return '';
 }
 
 function bibtex_encode($texte) {
