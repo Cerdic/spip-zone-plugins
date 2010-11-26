@@ -139,6 +139,10 @@ function spipdf_recuperer_fond($flux) {
 		{
             // les paramétres d'orientation et de format son écrasé par ceux défini dans la balise <page> du squelette
 			$html2pdf = new HTML2PDF('P','A4',$flux['args']['contexte']['lang'], SPIPDF_UNICODE, SPIPDF_CHARSET);
+            // mode debug de HTML2PDF
+            if(defined('SPIPDF_DEBUG_HTML2PDF')) {
+                $html2pdf->setModeDebug();
+            }
             // police différente selon unicode ou latin
             if(SPIPDF_UNICODE) {
                 $police_caractere = 'FreeSans';
@@ -147,10 +151,6 @@ function spipdf_recuperer_fond($flux) {
             }
             $html2pdf->setDefaultFont($police_caractere);
 			$html2pdf->writeHTML($html);
-            // mode debug de HTML2PDF
-            if(defined('SPIPDF_DEBUG_HTML2PDF')) {
-                $html2pdf->setModeDebug();
-            }
             // envoyer le code binaire du PDF dans le flux
 			$flux['data']['texte'] = $html2pdf->Output('', true);
 			
