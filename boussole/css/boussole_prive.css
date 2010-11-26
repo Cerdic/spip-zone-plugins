@@ -1,4 +1,4 @@
-.formulaire_editer_boussole{
+.formulaire_editer_boussole, .formulaire_ajouter_boussole{
 	position:relative;
 }
 .formulaire_editer_boussole .image_loading{

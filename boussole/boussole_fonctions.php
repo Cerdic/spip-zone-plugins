@@ -104,7 +104,8 @@ function boussole_informer_taille($logo) {
 
 // -------------------- Filtres de compatibilite avec SPIP 2.0 ------------------------
 
-if (!function_exists('bouton_action')) {
+include_spip('inc/plugin');
+if (spip_version_compare($GLOBALS['spip_version_branche'], '2.1', '<')) {
 	function bouton_action($libelle, $url, $class="", $confirm="", $title=""){
 		$onclick = $confirm?" onclick='return confirm(\"" . attribut_html($confirm) . "\");'":"";
 		$title = $title ? " title='$title'" : "";
@@ -112,9 +113,7 @@ if (!function_exists('bouton_action')) {
 		return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
 			."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
 	}
-}
 
-if (!function_exists('singulier_ou_pluriel')) {
 	function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
 		if (!$nb=intval($nb)) return "";
 		if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
