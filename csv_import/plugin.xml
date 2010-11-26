@@ -8,8 +8,9 @@
 _ &#169; 2006-2009 - Licence GPL
 	</auteur>
 	<version>
-	0.2
+	0.2.1
 	</version>
+	<icon>img_pack/csvimport-24.png</icon>
 	<etat>
 	stable
 	</etat>

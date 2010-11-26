@@ -155,11 +155,12 @@ function exec_csvimport_admin(){
 	//
 	// Afficher une liste de tables importables
 	//
+	$icone = _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T("csvimport:import_csv"), "csvimport");
 	echo debut_gauche('',true);
 	
-	$raccourcis = icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+	$raccourcis = icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), $icone, "", false);
 	echo bloc_des_raccourcis($raccourcis);
 	
 	echo debut_droite('',true);
@@ -171,7 +172,6 @@ function exec_csvimport_admin(){
 	$retour = _request('retour');
 	if (!$retour)
 		$retour = generer_url_ecrire('csvimport_tous');
-	$icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 	
 	$titre = _T('csvimport:administrer_tables');
 	//

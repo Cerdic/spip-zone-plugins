@@ -49,7 +49,7 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 	global $connect_statut;
         $vals = $table = array();
 
-	if (!$icone) $icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
+	if (!$icone) $icone = _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 
 	if (count($csvimport_tables_auth)) {
 		echo debut_cadre_enfonce($icone, true, '', $titre_table);

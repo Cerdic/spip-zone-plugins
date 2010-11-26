@@ -17,6 +17,7 @@ include_spip("inc/presentation");
  * Afficher une liste de tables importables / exportables
  */
 function exec_csvimport_tous(){
+	$icone = _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	
 	pipeline('exec_init',array('args'=>$_GET,'data'=>''));
@@ -24,7 +25,7 @@ function exec_csvimport_tous(){
 	echo $commencer_page(_T("csvimport:import_csv"),"csvimport");
 	echo debut_gauche('',true);
 	
-	$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+	$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), $icone, "", false);
 	echo bloc_des_raccourcis($raccourcis);
 
 	echo debut_droite('',true);

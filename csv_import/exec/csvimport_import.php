@@ -438,8 +438,8 @@ function exec_csvimport_import(){
 	
 	echo debut_gauche('',true);
 	
-	$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
-	$raccourcis .= icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+	$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), $icone, "", false);
+	$raccourcis .= icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), $icone, "", false);
 
 	echo bloc_des_raccourcis($raccourcis);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'csvimport_import','table'=>$table),'data'=>''));
