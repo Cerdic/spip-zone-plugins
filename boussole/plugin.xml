@@ -51,4 +51,6 @@ Les sites d'une boussole sont alors affichables dans vos sites en utilisant les 
 		<titre>boussole:onglet_boussoles</titre>
 		<url>boussoles_gerer</url>
 	</onglet>
+
+	<necessite id="SPIP" version='[2.0;]' />
 </plugin>
