@@ -1,5 +1,7 @@
 <?php
 
+// ----------------------- Balises propres a Boussole ---------------------------------
+
 /**
  * La balise #BOUSSOLE_INFOS renvoie :
  * - soit le tableau des infos contenues dans la meta boussole_infos_<alias> si l'alias est fourni
@@ -48,6 +50,8 @@ function calcul_boussole_infos($alias) {
 }
 
 
+// ----------------------- Filtres propres a Boussole ---------------------------------
+
 /**
  * Renvoie la traduction d'un champ d'une boussole, d'un groupe ou d'un site
  *
@@ -79,6 +83,14 @@ function boussole_traduire($aka_boussole, $champ, $alias='') {
 	return $traduction;
 }
 
+/**
+ * Renvoie la la chaine habituelle informant sur la taille d'un logo (lxh pixels)
+ *
+ * @param string $logo
+ * @return string
+ */
+
+// $logo	=> fichier logo
 function boussole_informer_taille($logo) {
 	$taille = '';
 	if ($taille = @getimagesize($logo))
@@ -87,6 +99,27 @@ function boussole_informer_taille($logo) {
 		$taille = _T('boussole:info_aucun_logo_boussole');
 	
 	return $taille;
+}
+
+
+// -------------------- Filtres de compatibilite avec SPIP 2.0 ------------------------
+
+if (!function_exists('bouton_action')) {
+	function bouton_action($libelle, $url, $class="", $confirm="", $title=""){
+		$onclick = $confirm?" onclick='return confirm(\"" . attribut_html($confirm) . "\");'":"";
+		$title = $title ? " title='$title'" : "";
+	
+		return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
+			."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
+	}
+}
+
+if (!function_exists('singulier_ou_pluriel')) {
+	function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
+		if (!$nb=intval($nb)) return "";
+		if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
+		else return _T($chaine_un);
+	}
 }
 
 ?>
