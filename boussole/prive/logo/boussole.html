@@ -5,7 +5,7 @@
 		[(#VAL{<:boussole:titre_boite_logo_boussole:>}|bouton_block_depliable{#EVAL{true}})]
 		[(#EVAL{true}|debut_block_depliable)]
 		<div>
-			#SET{logo, #CHEMIN{prive/themes/spip/images/boussole-#ENV{alias}.png}}
+			[(#SET{logo, [(#CHEMIN{[prive/themes/spip/images/boussole-(#ENV{alias}).png]})]})]
 			[<div>
 				<a [ href="(#GET{logo})"]>
 					(#GET{logo}|image_reduire{256}|inserer_attribut{class,miniature_logo}|inserer_attribut{alt,logo #ENV{alias}})
