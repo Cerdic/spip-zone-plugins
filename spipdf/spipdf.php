@@ -68,7 +68,10 @@ function spipdf_first_clean($texte) {
 		$trans['&nbsp;'] = ' ';
 
 		// certains titles font paniquer l'analyse
-		$texte = preg_replace(',title=".*",msU', 'title=""', $texte);
+		// TODO : a peaufiner car ils sont necessaires pour les signets
+		// <bookmark title="Compatibilité" level="0" ></bookmark>
+		// http://wiki.spipu.net/doku.php?id=html2pdf:fr:v4:bookmark
+		//$texte = preg_replace(',title=".*",msU', 'title=""', $texte);
 
 		$texte = strtr($texte, $trans);
 		if(SPIPDF_CHARSET=='UTF-8')
