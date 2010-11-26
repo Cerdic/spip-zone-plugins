@@ -3,7 +3,7 @@
 <:texte_messages_publics:><h1><a href='[(#URL_ARTICLE|ancre_url{forum#ID_FORUM})]'>#TITRE</a></h1>
 </BOUCLE_repart>
 [<h1><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h1>]
-#FORMULAIRE_RECHERCHE{#GET{self}}
+#FORMULAIRE_RECHERCHE_ECRIRE_FORUM{#GET{self}}
 
 [<div class="ajax">
 (#FORMULAIRE_GESTION_FORUM{
