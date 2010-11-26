@@ -143,10 +143,15 @@ function boussole_localiser_xml($xml, $mode) {
 function boussole_valider_xml($url, &$erreur) {
 
 	include_spip('inc/distant');
+	include_spip('inc/plugin');
 	$ok = true;
 
 	// On verifie la validite du contenu en fonction de la dtd
 	$valider_xml = charger_fonction('valider', 'xml');
+	// -- Compatibilite SPIP 2.0 : pas possible de verifer, on renvoie systematiquement true
+	if (spip_version_compare($GLOBALS['spip_version_branche'], '2.1', '<'))
+		return $ok;
+	// -- En SPIP >= 2.1 on peut effectuer la validation
 	$retour = $valider_xml(recuperer_page($url));
 	if ($retour[1] === false) {
 		$ok = false;
