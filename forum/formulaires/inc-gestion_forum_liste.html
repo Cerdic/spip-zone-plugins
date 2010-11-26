@@ -43,7 +43,7 @@
 		(#ID_AUTEUR|oui)
 		<a class='ajax' href='[(#GET{self}|parametre_url{id_auteur,#ID_AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >#MODELE{auteur_nom,id_auteur}</a>
 
-		][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a>]
+		][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' ><strong>(#AUTEUR)</strong></a>]
 
 		][ &mdash; <a class='ajax' href='[(#GET{self}|parametre_url{email_auteur,#EMAIL_AUTEUR})]' title='<:forum:messages_meme_email|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a>
 
