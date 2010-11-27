@@ -183,7 +183,7 @@ if ($document){
 	//Todo : s'assurer que c'est une image
 
 	// c'est une image
-	$logo_banniere = '<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0">';
+	$logo_banniere = '<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
 
 		}
 
@@ -199,7 +199,7 @@ if ($document){
 	list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
 
 	// si on a trouve on l'affiche
-	$logo_banniere = '<img src="'.$logo['0'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0">';
+	$logo_banniere = '<img src="'.$logo['0'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
 }
 
 	// rechercher l'url de destination
