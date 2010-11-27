@@ -35,6 +35,9 @@
 		
 		#SET{self,#SELF|parametre_url{debut_forum|email_auteur|ip|id_auteur|auteur,''}}
 		<div class='cartouche'>
+		<div class='statut'>
+			[(#VAL{forum:statut_}|concat{#STATUT}|_T)]
+		</div>
 		<h3 class='titre'><span class='info_statut'>[(#CHEMIN{#VAL{themes/spip/images/forum-statut-}|concat{#STATUT,-24.png}}|balise_img|inserer_attribut{alt,#VAL{forum:statut_}|concat{#STATUT}|_T})]</span>
 		<a href='[(#GET{self}|parametre_url{id_forum,#ID_FORUM})]' class="ajax" title='[<:info_numero_abbreviation|attribut_html:> (#ID_FORUM)]'>[(#TITRE|sinon{<:info_sans_titre:>})]</a></h3>
 		<div class='date'>[(#DATE_HEURE|date_interface)]</div>
