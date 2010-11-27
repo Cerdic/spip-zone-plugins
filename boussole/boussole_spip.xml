@@ -6,6 +6,13 @@
 		<site alias="doc" src="http://doc.spip.org/" />
 		<site alias="programmer" src="http://programmer.spip.org/" />
 	</groupe>
+	
+	<!-- Sites des extensions & contributions SPIP -->
+	<groupe type="extension">
+		<site alias="plugin" src="http://plugins.spip.net/" />
+		<site alias="contrib" src="http://www.spip-contrib.net/" />
+		<site alias="zone" src="http://zone.spip.org/" />
+	</groupe>
 
 	<!-- Sites d'aide & echanges autour de SPIP -->
 	<groupe type="aide">
@@ -31,13 +38,6 @@
 		<site alias="mag" src="http://mag.spip.net/" />
 		<site alias="twit" src="http://spip.org/" />
 		<site alias="sedna" src="http://sedna.spip.org/" />
-	</groupe>
-	
-	<!-- Sites des extensions & contributions SPIP -->
-	<groupe type="extension">
-		<site alias="plugin" src="http://plugins.spip.net/" />
-		<site alias="contrib" src="http://www.spip-contrib.net/" />
-		<site alias="zone" src="http://zone.spip.org/" />
 	</groupe>
 
 </boussole>
