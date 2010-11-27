@@ -162,8 +162,14 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 	'bp_tri_auteurs' => 'Les tris d\'auteurs',
 	'bp_urls_propres' => 'Les URLs propres',
-	'brouteur:description' => 'Utiliser le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s)',
-	'brouteur:nom' => 'R&eacute;glage du s&eacute;lecteur de rubrique',
+	'brouteur:description' => '@puce@ {{S&eacute;lecteur de rubrique (brouteur)}}. Utilisez le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s).
+
+@puce@ {{S&eacute;lection de mots-clefs}}. Utilisez un champ de recherche au lieu d\'une liste de s&eacute;lection &agrave; partir de %select_mots_clefs% mot(s)-clef(s).
+
+@puce@ {{S&eacute;lection d\'auteurs}}. L\'ajout d\'un auteur se fait par mini-navigateur dans la fourchette suivante :
+<q1>&bull; Une liste de s&eacute;lection pour moins de %select_min_auteurs% auteurs(s).
+_ &bull; Un champ de recherche &agrave; partir de %select_max_auteurs% auteurs(s).</q1>',
+	'brouteur:nom' => 'R&eacute;glage des s&eacute;lecteurs',
 
 	// C
 	'cache_controle' => 'Contr&ocirc;le du cache',

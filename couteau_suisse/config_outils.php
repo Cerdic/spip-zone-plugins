@@ -1200,11 +1200,11 @@ add_outil( array(
 	'contrib' => 3223,
 ));
 
-// reglage du nombre de case pour le brouteur
+// reglage des differents selecteurs en partie privee
 add_outil( array(
 	'id' => 'brouteur',
 	'categorie' => 'interface',
-	'code:options' => "%%rubrique_brouteur%%"
+	'code:spip_options' => "%%rubrique_brouteur%%%%select_mots_clefs%%%%select_min_auteurs%%%%select_max_auteurs%%"
 ));
 add_variable( array(
 	'nom' => 'rubrique_brouteur',
@@ -1212,6 +1212,25 @@ add_variable( array(
 	'defaut' => 20,
 	'code:%s' => "define('_SPIP_SELECT_RUBRIQUES', %s);"
 ));
+add_variable( array(
+	'nom' => 'select_mots_clefs',
+	'format' => _format_NOMBRE,
+	'defaut' => 50,
+	'code:%s<>50' => "define('_MAX_MOTS_LISTE', %s);"
+));
+add_variable( array(
+	'nom' => 'select_min_auteurs',
+	'format' => _format_NOMBRE,
+	'defaut' => 30,
+	'code:%s<>30' => "define('_SPIP_SELECT_MIN_AUTEURS', %s);"
+));
+add_variable( array(
+	'nom' => 'select_max_auteurs',
+	'format' => _format_NOMBRE,
+	'defaut' => 30,
+	'code:%s<>30' => "define('_SPIP_SELECT_MAX_AUTEURS', %s);"
+));
+
 
 // Recuperer tous les outils (et leurs variables) de la forme outils/toto_config.xml
 foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {
