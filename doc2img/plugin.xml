@@ -8,7 +8,7 @@
 		[en]This plugin will convert on the fly pdf, tiff ... documents in image(s). These images can then be exploited via a loop.
 	</multi></description>
     <lien>http://www.spip-contrib.net/doc2img</lien>
-
+	<icon>images/doc2img-128.png</icon>
     <prefix>doc2img</prefix>
 	<install>base/doc2img_install.php</install>
     <fonctions>doc2img_fonctions.php</fonctions>
