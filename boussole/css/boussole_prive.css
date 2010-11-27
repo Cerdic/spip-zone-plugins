@@ -1,21 +1,16 @@
 .formulaire_editer_boussole, .formulaire_ajouter_boussole{
 	position:relative;
 }
-.formulaire_editer_boussole .image_loading{
-	position:absolute;
-	top:50%;
-	left:50%;
-}
 
-.formulaire_spip ul.menus_entrees{
+.formulaire_spip ul.groupe_entrees{
 	padding-top:0;
 	clear:both;
 }
-.formulaire_spip ul.menus_entrees ul.menus_entrees{
+.formulaire_spip ul.groupe_entrees ul.groupe_entrees{
 	border-left:1px solid #ccc;
 }
 
-.formulaire_spip ul.menus_entrees li.entree{
+.formulaire_spip ul.groupe_entrees li.entree{
 	clear:both;
 	padding-left : 34px;
 	padding-right:0;
@@ -26,39 +21,39 @@
 	border-top:1px solid #ccc;
 }
 
-.formulaire_spip ul.menus_entrees .ligne{
+.formulaire_spip ul.groupe_entrees .ligne{
 	position:relative;
 	min-height: 33px;
 }
 
-.formulaire_spip ul.menus_entrees .non{
+.formulaire_spip ul.groupe_entrees .non{
 	color: #999;
 	background: url('../prive/themes/spip/images/fond-non.gif') repeat;
 }
 
-.formulaire_spip ul.menus_entrees .actions{
+.formulaire_spip ul.groupe_entrees .actions{
 	position:absolute;
 	right:5px;
 	top:5px;
 	text-align:right;
 }
 
-.formulaire_spip ul.menus_entrees .titre{
+.formulaire_spip ul.groupe_entrees .titre{
 	font-weight:bold;
 	line-height:29px;
 }
-.formulaire_spip ul.menus_entrees .infos{
+.formulaire_spip ul.groupe_entrees .infos{
 	font-size:0.9em;
 	margin-bottom:0;
 }
 
-.formulaire_spip ul.menus_entrees .actions button{
+.formulaire_spip ul.groupe_entrees .actions button{
 	border:none;
 	padding:0;
 	margin:0;
 	cursor:pointer;
 
 }
-.formulaire_spip ul.menus_entrees img{
+.formulaire_spip ul.groupe_entrees img{
 	vertical-align:middle;
 }

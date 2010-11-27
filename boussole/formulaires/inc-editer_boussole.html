@@ -1,5 +1,5 @@
 <B_groupe>
-<ul[ id="boussole-(#ENV{alias})"] class="menus_entrees" style="border-bottom: 1px solid #ccc">
+<ul[ id="boussole-(#ENV{alias})"] class="groupe_entrees" style="border-bottom: 1px solid #ccc">
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{alias}}{par rang_groupe}>
 	<B_site>
 	[(#REM) <!-- Insertion de la ligne correspondant au groupe -->]
@@ -22,7 +22,7 @@
 		</div>
 
 		[(#REM) <!-- Insertion des sites du groupe -->]
-		<ul[ id="groupe-(#AKA_GROUPE)"] class="menus_entrees">
+		<ul[ id="groupe-(#AKA_GROUPE)"] class="groupe_entrees">
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{par rang_site}>
 			[(#SET{logo, [(#CHEMIN{prive/themes/spip/images/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png})]})]
 			<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#GET{logo}|image_reduire{24}|extraire_attribut{src}))"]>
