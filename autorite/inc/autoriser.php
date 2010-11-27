@@ -224,6 +224,12 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 			$GLOBALS['autorite']['redacteur_mod_article']
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND $r['statut']=='prop'
+		)
+		OR (
+			// un auteur peut modifier son propre article lorsqu'il est proposé ou en cours de rédaction
+			in_array($qui['statut'], array('0minirezo', '1comite'))
+			AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
+			AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
 		);
 }
 } else
