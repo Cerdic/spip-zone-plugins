@@ -1,0 +1,19 @@
+<BOUCLE_docs(DOCUMENTS){id_article}{extension=pdf}>
+
+
+<entry>
+<title>[(#TITRE|texte_backend)]</title>
+<id>[(#URL_ARTICLE|url_absolue)]</id>
+<author>
+  [</name>(#_docs:AUTEUR|supprimer_tags|texte_backend)</name>]
+  <uri>[(#_docs:URL_AUTEUR|url_absolue)]</uri>
+</author>
+<updated>[(#DATE|date_iso)]</updated>
+<dcterms:language>#LANG</dcterms:language>
+<summary>[(#DESCRIPTION|texte_backend)]</summary>
+<dcterms:source>#URL_SITE_SPIP</dcterms:source>
+<link [ type="(#MIME_TYPE)"] href="[(#URL_DOCUMENT|url_absolue)]" />
+
+</entry>
+</BOUCLE_docs>
+

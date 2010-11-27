@@ -1,0 +1,24 @@
+<plugin>
+<nom>eBibliothèque</nom>
+<icon>img/feedbook.png</icon>
+<version>O.1</version>
+<etat>dev</etat>
+<description>
+<multi>
+[fr]squelette générant un service de livre électronique en ligne. Tous les documents .epub/.pdf de votre site sont intégrés dans la structure.
+</multi>
+</description>
+<auteur><!-- Auteur du plugin -->
+- [Jean-S&eacute;bastien Barboteu->http://www.spip-contrib.net/jsb]
+</auteur>
+<lien>http://www.spip-contrib.net/ebiblio</lien> <!-- URI de documentation -->
+<fonctions>ebiblio_fonctions.php</fonctions>
+<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+sur le mode Rien::
+ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+ce parametre est obligatoire et doit etre non vide
+-->
+<prefix>ebiblio</prefix>
+
+<chemin dir='' />
+</plugin>

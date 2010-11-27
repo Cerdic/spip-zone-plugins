@@ -1,0 +1,30 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: application/atom+xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+
+<feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xml:lang="en-US" xmlns:app="http://www.w3.org/2007/app" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2005/Atom" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:opds="http://opds-spec.org/2010/catalog" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <id>#URL_SITE_SPIP</id>
+  <link type="text/html" href="#URL_SITE_SPIP" rel="alternate"/>
+  <link type="application/atom+xml" href="#URL_PAGE{elivres|url_absolue}" rel="self"/>
+  <title>[Livres publiés sur (#NOM_SITE_SPIP|texte_backend)]</title>
+<BOUCLE_Update(ARTICLES){titre_mot=ebook}{par date}{inverse}{0,1}>
+  <updated>[(#DATE|date_iso)]</updated></BOUCLE_Update>
+
+  [<icon>(#LOGO_SITE_SPIP|image_reduire{40,40}|extraire_attribut{src}|url_absolue|texte_backend)</icon>]
+  <author>
+    [<name>(#NOM_SITE_SPIP|texte_backend))</name>]
+    <uri>[(#URL_SITE_SPIP|url_absolue)]</uri>
+    [<email>(#EMAIL_WEBMASTER|texte_backend)</email>]
+  </author>
+
+  
+<opensearch:totalResults>4</opensearch:totalResults>
+<opensearch:itemsPerPage>20</opensearch:itemsPerPage>
+
+<BOUCLE_listeLivres(ARTICLES){titre_mot=ebook}{par date}{inverse}{unique}>
+<INCLURE{fond=inc-elivres}{id_article}>
+</BOUCLE_listeLivres>
+
+
+</feed>
