@@ -199,13 +199,13 @@ if ($document){
 	list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
 
 	// si on a trouve on l'affiche
-	$logo_banniere = '<img src="'.$logo['0'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
+	$logo_banniere = '<img src="'.$logo['0'].'" alt="'.$document['titre'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
 }
 
 	// rechercher l'url de destination
 	if($url = sql_getfetsel ('site', 'spip_bannieres', 'id_banniere='.$id)) {
-		$lien = '<a href="'.generer_url_action('visit_url','banniere='.$id.'&url='.rawurlencode($url)).'" title="">';
-		$lien .= $logo_banniere.'</a>';
+		$lien = '<a href="'.generer_url_action('visit_url','banniere='.$id.'&url='.rawurlencode($url)).'" title="'.$document['titre'].'">';
+		$lien .= $logo_banniere.$document['descriptif'].'</a>';
 	} else {
 		$lien = $logo_banniere;
 	}
