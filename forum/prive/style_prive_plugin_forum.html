@@ -75,20 +75,30 @@ ul#forum_sans_texte{ border-top:1px solid[ #(#GET{claire}|couleur_eclaircir)]; m
 
 .statut{ float:right; width:20%; font-style:italic; text-align:right; }
 
+.liste-items .item:hover, .liste-items .item.odd:hover, .liste_items .item:hover, .liste_items .item.odd:hover{ background-color:transparent; }
+
 /* Habillage des forums en liste pour moderation
 ---------------------------------------------- */
 ul.forums li.item { margin: 0; padding: 0 0 .8em 0; background: #F8F8F8 url(#CHEMIN{images/forum-bg-item.png}); border: 0; border-top: 5px solid #ccc; }
-ul.forums li.item.odd { background-color: #F4F4F4; }
+ul.forums li.item.odd, ul.forums li.item.odd:hover { background-color: #F4F4F4; }
 
 ul.forums li.statut_publie { background-image: none; border-color: #B2BF6B; }
 ul.forums li.statut_off,
 ul.forums li.statut_privoff,
 ul.forums li.statut_off.odd,
-ul.forums li.statut_privoff.odd { background-color: #edd3d3; border-color: #FF5F5F; }
+ul.forums li.statut_privoff.odd,
+ul.forums li.statut_off:hover,
+ul.forums li.statut_privoff:hover,
+ul.forums li.statut_off.odd:hover,
+ul.forums li.statut_privoff.odd:hover { background-color: #edd3d3; border-color: #FF5F5F; }
 ul.forums li.statut_spam,
-ul.forums li.statut_spam.odd { background-color: #ddd; border-color: #666; }
+ul.forums li.statut_spam.odd,
+ul.forums li.statut_spam:hover,
+ul.forums li.statut_spam.odd:hover  { background-color: #ddd; border-color: #666; }
 ul.forums li.statut_prop,
-ul.forums li.statut_prop.odd { background-color: #FFFBEF; border-color: #EFCA68; }
+ul.forums li.statut_prop.odd,
+ul.forums li.statut_prop:hover,
+ul.forums li.statut_prop.odd:hover { background-color: #FFFBEF; border-color: #EFCA68; }
 
 ul.forums li .cartouche { min-height: 30px; padding: 5px; padding-#GET{left}: 30px; border-bottom: 1px solid #eee; }
 ul.forums li.statut_off .cartouche,
