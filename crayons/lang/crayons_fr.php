@@ -41,10 +41,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si pas de changement',
 	'label_reduire_logo' => 'R&eacute;duire les logos',
 	'label_yellow_fade' => 'Fade',
+	'legend_controleur_hyperlien' => 'Hyperlien',
 	'legend_controleur_logo' => 'Choisir un logo&nbsp;:',
+	'legend_controleur_logo_remplacer' => 'Remplacer ce logo',
+	'legend_controleur_qui' => 'Qui ?',
 	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:',
-	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)',
+	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette',
 	'legend_introduction_article' => 'Texte introductif de l\'article',
+	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)',
 
 	// M
 	'message_image_obligatoire' => 'Il faut choisir une image',
