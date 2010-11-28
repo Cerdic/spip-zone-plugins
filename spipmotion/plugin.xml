@@ -1,18 +1,10 @@
 <plugin>
-	<nom>
-		SPIPmotion
-	</nom>
+	<nom>SPIPmotion</nom>
 	<icon>images/spipmotion.png</icon>
-	<auteur>
-	Quentin Drouet (kent1)
-	</auteur>
-	<version>
-	0.6.3
-	</version>
+	<auteur>Quentin Drouet (kent1)</auteur>
+	<version>0.6.4</version>
 	<version_base>0.7.4</version_base>
-	<etat>
-	experimental
-	</etat>
+	<etat>test</etat>
 	<description>
 	<multi>
 	[fr] Faire un Youtube ou Dailymotion avec SPIP...
@@ -67,6 +59,10 @@
 		<nom>post_spipmotion_encodage</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>spipmotion_autoriser.php</inclure>
+    </pipeline>
 	<bouton id='spipmotion_file' parent='naviguer'>
 		<titre>spipmotion:titre_page_file</titre>
 		<icone>images/spipmotion-24.png</icone>

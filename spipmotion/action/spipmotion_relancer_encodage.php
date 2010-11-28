@@ -27,10 +27,13 @@ function action_spipmotion_relancer_encodage_dist(){
 	include_spip('inc/autoriser');
 
 	$update = 'nok';
-	if(autoriser('configurer','',$visiteur_session) &&
+	if(is_numeric($arg) && autoriser('relancerencodage','spipmotion',$arg,$visiteur_session) &&
 		(sql_getfetsel('encode','spip_spipmotion_attentes','id_spipmotion_attente='.intval($arg)) == 'erreur')){
 		sql_updateq('spip_spipmotion_attentes',array('encode'=>'non'),'id_spipmotion_attente='.intval($arg));
 		$update = 'ok';
+	}else if(($arg == 'tout') && autoriser('configurer','','',$visiteur_session)){
+		sql_updateq('spip_spipmotion_attentes',array('encode'=>'non'),'encode="erreur"');
+		$update = 'ok_tout';
 	}
 	if(_request('redirect')){
 		$redirect = urldecode(_request('redirect'));

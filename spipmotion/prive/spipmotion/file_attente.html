@@ -38,9 +38,10 @@
 		</td>
 		<td>[(#MAJ)]</td>
 		<td>[(#ENCODE|=={erreur}|oui)
-				[(#AUTORISER{configurer}|oui)
-					[(#BOUTON_ACTION{[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)],#URL_ACTION_AUTEUR{spipmotion_relancer_encodage,#ID_SPIPMOTION_ATTENTE,#SELF},'','',<:spipmotion:label_relancer_encodage|attribut_html:>})]]
-				[(#AUTORISER{configurer}|non)[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)]]
+				#SET{erreur,oui}
+				[(#AUTORISER{relancer_encodage,spipmotion,#ID_SPIPMOTION_ATTENTE}|oui)
+					[(#BOUTON_ACTION{[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)],[(#URL_ACTION_AUTEUR{spipmotion_relancer_encodage,#ID_SPIPMOTION_ATTENTE,[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],'','',<:spipmotion:label_relancer_encodage|attribut_html:>})]]
+				[(#AUTORISER{relancer_encodage,spipmotion,#ID_SPIPMOTION_ATTENTE}|non)[(#VAL{spipmotion:info_statut_encode_#ENCODE}|_T)]]
 				[(#INFOS|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_SPIPMOTION_ATTENTE})]" class="ajax"><:spipmotion:info_voir_log_erreur:></a>]
 			]
 			[(#ENCODE|=={erreur}|non)
@@ -52,6 +53,10 @@
 	</tbody>
 </table>
 [<div class="pagination pagination_spipmotion">(#PAGINATION{page_precedent_suivant})</div>]
+[(#GET{erreur}|=={oui}|et{#AUTORISER{configurer}}|oui)
+<div class="actions">
+	[(#BOUTON_ACTION{<:spipmotion:info_relancer_erreurs:>,[(#URL_ACTION_AUTEUR{spipmotion_relancer_encodage,'tout',[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],'','',''})]
+</div>]
 </B_spipmotion_file>
 <p><:spipmotion:info_aucun_resultat_attente:></p>
 <//B_spipmotion_file>
