@@ -2,7 +2,7 @@
 	<nom>SPIPmotion</nom>
 	<icon>images/spipmotion.png</icon>
 	<auteur>Quentin Drouet (kent1)</auteur>
-	<version>0.6.4</version>
+	<version>0.6.5</version>
 	<version_base>0.7.4</version_base>
 	<etat>test</etat>
 	<description>
@@ -68,9 +68,19 @@
 		<icone>images/spipmotion-24.png</icone>
 		<url>spipmotion_file</url>
 	</bouton>
+	<bouton id='bando_spipmotion_file' parent='bando_edition'>
+		<titre>spipmotion:titre_page_file</titre>
+		<icone>images/spipmotion-16.png</icone>
+		<url>spipmotion_file</url>
+	</bouton>
 	<bouton id='ffmpeg_infos' parent='configuration'>
 		<titre>spipmotion:titre_page_ffmpeg_infos</titre>
 		<icone>images/spipmotion-24.png</icone>
+		<url>ffmpeg_infos</url>
+	</bouton>
+	<bouton id='bando_ffmpeg_infos' parent="bando_configuration">
+		<titre>spipmotion:titre_page_ffmpeg_infos</titre>
+		<icone>images/spipmotion-16.png</icone>
 		<url>ffmpeg_infos</url>
 	</bouton>
 	<install>base/spipmotion_upgrade.php</install>

@@ -192,6 +192,8 @@ function encodage($source,$doc_attente){
 			if($acodec == '--acodec libfaac'){
 				unset($audiosamplerates[0]);
 				unset($audiosamplerates[1]);
+				unset($audiosamplerates[2]);
+				unset($audiosamplerates[3]);
 			}
 			if(!in_array($source['audiosamplerate'],$audiosamplerates)){
 				$audiosamplerate_final = min($audiosamplerates);
