@@ -13,7 +13,7 @@
 	0.9
 	</version>
 	<etat>
-	dev
+	stable
 	</etat>
 	<description>
 Ce plugin est destin&#233; &#224; lire des parties d&#39;&#233;checs grace &agrave; des fichiers PGN.
