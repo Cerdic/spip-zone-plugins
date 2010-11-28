@@ -5,6 +5,7 @@
 		<site alias="net" src="http://www.spip.net/" />
 		<site alias="doc" src="http://doc.spip.org/" />
 		<site alias="programmer" src="http://programmer.spip.org/" />
+		<site alias="core" src="http://core.spip.org/trac/spip/" />
 	</groupe>
 	
 	<!-- Sites des extensions & contributions SPIP -->
