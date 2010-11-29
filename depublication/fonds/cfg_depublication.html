@@ -1,0 +1,73 @@
+[(#REM) titre=Dépublication]
+[(#REM) boite=Dépublication d'un article ou d'un auteur]
+[(#REM) icone=img/depublication-24.png]
+
+
+[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../img/depublication.png' alt='' style="float:#LANG_RIGHT;" /> })]
+
+<!-- descriptif= 
+	[(#GET{logo})] Ce plugin permet de spécifier une date de dépublication pour un article. Ici, vous spécifiez l'état dans lequel l'article doit se retrouver après la dépublication.
+-->
+#CACHE{0}
+
+<div id="container-1">
+	
+	<div id="fragment-1">
+		<form name="environnement" method="post" action="#SELF">
+
+			<div>[(#ENV{_cfg_}|form_hidden)]</div>
+	
+			<fieldset>
+				<legend>
+					<:depublication:configuration:>
+				</legend>
+				<div>
+					<br/><br/>
+					<label>
+						<:depublication:description:>
+						<div align="center">
+							<br/>
+							<select name="etatdep">
+								<option value="prepa" [(#CONFIG{depublication/etatdep}|=={prepa}|?{'selected="selected"'})] style='background-color: white'><:spip:texte_statut_en_cours_redaction:></option>
+								<option value="prop" [(#CONFIG{depublication/etatdep}|=={prop}|?{'selected="selected"'})]  style='background-color: #FFF1C6'><:spip:texte_statut_propose_evaluation:></option>
+								<option value="poubelle" [(#CONFIG{depublication/etatdep}|=={poubelle}|?{'selected="selected"'})] style='background: url("#CHEMIN{images/rayures-sup.gif}");'><:spip:texte_statut_poubelle:></option>
+								<option value="refuse" [(#CONFIG{depublication/etatdep}|=={refuse}|?{'selected="selected"'})] style='background-color: #FFA4A4'><:spip:texte_statut_refuse:></option>
+							</select>
+						</div>
+					</label>
+					<br/><br/>
+					<:depublication:nouvel_etat:>
+					<input type="text" name="nouvetat" value="#CONFIG{depublication/nouvetat}" size="50" maxlength="100"/>
+					<br/>
+					<span style="color: gray"><:depublication:att_nouvel_etat:></span>
+					<br/><br/>
+					<:depublication:delai:>
+					<div align="center">
+						<br/>
+						<select name="delai">
+							<?php 
+								$value = '#CONFIG{depublication/delai}';
+								for ($i = 1; $i <= 50; $i++) { 
+							?>
+									<option value="<?php echo $i; ?>"<?php echo (($value == $i) ? 'selected="selected"' : ''); ?> style='background-color: white'>+ <?php echo $i;?></option>
+							<?php } ?>
+							
+						</select>
+						<select name="delaiunite">
+							<option value="secondes" [(#CONFIG{depublication/delaiunite}|=={secondes}|?{'selected="selected"'})]><:depublication:delai_unite_secondes:></option>
+							<option value="minutes" [(#CONFIG{depublication/delaiunite}|=={minutes}|?{'selected="selected"'})]><:depublication:delai_unite_minutes:></option>
+							<option value="heures" [(#CONFIG{depublication/delaiunite}|=={heures}|?{'selected="selected"'})]><:depublication:delai_unite_heures:></option>
+							<option value="jours" [(#CONFIG{depublication/delaiunite}|=={jours}|?{'selected="selected"'})]><:depublication:delai_unite_jours:></option>
+							<option value="semaines" [(#CONFIG{depublication/delaiunite}|=={semaines}|?{'selected="selected"'})]><:depublication:delai_unite_semaines:></option>
+							<option value="mois" [(#CONFIG{depublication/delaiunite}|=={mois}|?{'selected="selected"'})]><:depublication:delai_unite_mois:></option>
+							<option value="annees" [(#CONFIG{depublication/delaiunite}|=={annees}|?{'selected="selected"'})]><:depublication:delai_unite_annees:></option>
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			
+			<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+			<br/>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,74 @@
+<plugin>
+        <nom>Dépublication</nom>
+        <icon>images/depublication.png</icon>
+        <auteur>
+        	[Equipe Nouveaux Territoires->mailto:equipe@nouveauxterritoires.fr] 
+        	<br/>
+        	[NouveauxTerritoires->http://www.nouveauxterritoires.fr]
+ 			<br/><br/>
+ 			- Copyright &#169; 2007-2010 NouveauxTerritoires
+ 		</auteur>
+ 		<icone>img/depublication-24.png</icone>
+ 		<licence>(&copy;) 2007-2010 [GNU/GPL v3->http://www.gnu.org/copyleft/gpl.html]&nbsp;<a href="http://www.gnu.org/copyleft/gpl.html"><img src="../plugins/depublication/images/gplv3-88x31.png"/></a></licence>
+        
+        <version>0.8.2</version>
+        <version_base>0.8</version_base>
+        
+        <etat>stable</etat>
+        <description>
+        	Permet de spécifier une date de dépubication automatique pour les articles ou une date d'expiration pour les auteurs. 
+        	Les articles passent alors dans un état prédéfini (proposé,validé,poubelle ou un état spécifique créé par l'utilisateur), les auteurs passent eux à la poubelle.
+        </description>
+        <lien>http://spipdoc.nouveauxterritoires.fr/Comment-depublier-un-article-a-une.html</lien>
+        <prefix>depublication</prefix>
+		
+		<install>base/depublication_install.php</install>
+		
+		<necessite id='SPIP' version='[2.0.0;]' />
+		<necessite id='cfg' version='[1.10.0;]' />
+		<!--<necessite id="lib:DataTables-1.7.2" src="http://www.datatables.net/releases/DataTables-1.7.2.zip" />-->
+		
+		
+		<chemin dir='' />
+	
+		<bouton id='depublication_list' parent='naviguer'>
+			<icone>images/depublication-24.png</icone>
+			<titre>depublication:articles_dep</titre>
+	  	</bouton>
+	  	
+		<!--<options>depublication_options.php</options>	
+		<fonctions>depublication_fonctions.php</fonctions>
+		-->
+		<pipeline>
+			<nom>affiche_milieu</nom>
+			<action>execution</action>
+			<inclure>depublication_pipelines.php</inclure>
+		</pipeline>
+		<pipeline>
+			<nom>header_prive</nom>		
+			<inclure>depublication_pipelines.php</inclure>
+		</pipeline>
+		
+		<pipeline>
+			<nom>declarer_tables_objets_surnoms</nom>
+			<inclure>base/depublication.php</inclure>
+		</pipeline>
+		<pipeline>
+	        <nom>declarer_tables_interfaces</nom>
+	        <inclure>base/depublication.php</inclure>
+		</pipeline>
+		<pipeline>
+	        <nom>declarer_tables_principales</nom>
+	        <inclure>base/depublication.php</inclure>
+		</pipeline>
+		<pipeline>
+	        <nom>declarer_tables_auxiliaires</nom>
+	        <inclure>base/depublication.php</inclure>
+		</pipeline>
+	
+		<pipeline>
+			<nom>taches_generales_cron</nom>
+			<inclure>depublication_pipelines.php</inclure>
+		</pipeline>
+	
+</plugin>
