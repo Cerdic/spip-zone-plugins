@@ -146,7 +146,7 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 		$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$leNom);
 		$i = "<div class='apropos-icon'>$i</div>";
 	} else {
-		$generic = $dir_plugins."apropos/generique.png"; //mettre une icone generique si pas d'icone de defini
+		$generic = _DIR_PLUGIN_APROPOS."img/generique.png"; //mettre une icone generique si pas d'icone de defini
 		include_spip("inc/filtres_images_mini");
 		$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$leNom);
 		$i = "<div class='apropos-icon'>$i</div>";
@@ -156,7 +156,7 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 	// on recherche la trace d'une arobase pour remplacer par 1 image
 	$lemail = strpos($auteur,'@') ;
 	if ($lemail !== false) {
-	$larobase = "<img src=\"".$dir_plugins."apropos/arob.png\" alt=\"remplacant\" />";
+	$larobase = "<img src=\""._DIR_PLUGIN_APROPOS."img/arob.png\" alt=\"remplacant\" />";
 	$auteur = preg_replace('/@/', $larobase, $auteur);
 	}
 	// on recherche la trace d'un tag <br /> pour le supprimer

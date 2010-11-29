@@ -1,8 +1,8 @@
 <plugin>
     <nom>À propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>0.ß6</version>
-    <etat>test</etat>
+    <version>0.1</version>
+    <etat>stable</etat>
     <description>
     <multi>
 	[fr] Liste les plugins actifs et affiche une description sommaire de ceux-ci.
