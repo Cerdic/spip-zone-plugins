@@ -55,7 +55,7 @@ function depublication_execution($flux) {
 
 function depublication_taches_generales_cron($taches) {
 
-	$taches['depublication'] = 10; // par exemple toutes les 10 minutes, ne pas descendre en dessous de 30 secondes !
+	$taches['depublication'] = 60; // par exemple toutes les 10 minutes, ne pas descendre en dessous de 30 secondes !
 	spip_log('execution tache cron dépublication','depublication');
 	return $taches;
 }
