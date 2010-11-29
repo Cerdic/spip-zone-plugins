@@ -49,16 +49,15 @@ Vous pouvez également installer le plugin Crayons avec lequel ce plugin est ent
         <nom>declarer_champs_extras</nom>
         <inclure>base/seminaire.php</inclure>
 	</pipeline>
-	<categorie>date</categorie>
-	
-		<pipeline>
-		<nom>post_edition</nom>
-		<inclure>seminaires_pipelines.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>affiche_gauche</nom>
-		<inclure>seminaires_pipelines.php</inclure>
+		<inclure>base/seminaire.php</inclure>
 	</pipeline>
-	
-	
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>base/seminaire.php</inclure>
+	</pipeline>
+
+		<categorie>date</categorie>
+
 </plugin>
