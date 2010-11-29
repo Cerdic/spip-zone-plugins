@@ -19,7 +19,7 @@ function docs_logos_agenda2_affiche_gauche($flux){
 	}
     return $flux;
 }
-
+/* pas encore au point
 function docs_logos_agenda2_formulaire_admin($flux) {
 	if (
 	 isset($flux['args']['contexte']['objet'])
@@ -38,6 +38,6 @@ function docs_logos_agenda2_formulaire_admin($flux) {
 			$flux['data'] = preg_replace('%(</div>)%is', $btn.'$1', $flux['data'].'');			
 		}
 	return $flux;
-}
+} */
 
 ?>
