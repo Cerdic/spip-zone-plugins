@@ -48,7 +48,7 @@ function multilang_insert_head($flux){
 	$config = lire_config('multilang',array());
 
 	if($config['multilang_public'] == 'on'){
-		$flux .= multilang_insert_head_css($flux); // au cas ou il n'est pas implemente
+		$flux .= multilang_insert_head_css(''); // au cas ou il n'est pas implemente
 		$flux .= multilang_inserer_head($config);
 	}
 	return $flux;
@@ -63,7 +63,7 @@ function multilang_insert_head($flux){
  */
 function multilang_inserer_head($config=array()){
 	if(count(explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
-		// Insertion de la css
+
 		$root = '' ;
 
 		if($config['siteconfig']){
