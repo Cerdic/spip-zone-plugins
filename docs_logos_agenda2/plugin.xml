@@ -1,12 +1,24 @@
 <plugin>
-	<nom>Documents et Logos sur les &eacute;v&egrave;nements agenda 2</nom>
+	<nom>
+	<multi>
+	[fr]Documents et Logo sur les &eacute;v&egrave;nements agenda 2
+	[es]Documentos y el logotipo en los eventos
+	[en]Documents and logo on the events
+	[de]Dokumente und logo auf der Event
+	</multi>
+	</nom>
 	<auteur>Guy Cesaro</auteur>
-	<version>1.0</version>
+	<version>1.1</version>
 	<prefix>docs_logos_agenda2</prefix>
 	<icon>img/logos_docs_evenement.png</icon>
 	<etat>dev</etat>
 	<description>
-	Des documents et logos sur les &eacute;v&egrave;nements d&#39;Agenda 2
+	<multi>
+	[fr]Des documents et logos sur les &eacute;v&egrave;nements d&#39;Agenda 2
+	[es]Documentos y logos en los eventos del Agenda 2
+	[en]Documents and logos on the events of Agenda 2
+	[de]Dokumente und Logos die auf die event der Agenda 2
+	</multi>
 	</description>
 	<fonctions>agenda_fonctions.php</fonctions>
 	<pipeline>
