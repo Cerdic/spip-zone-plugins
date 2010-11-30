@@ -13,7 +13,7 @@ function heure_seance($date){
 }
 
 /**
-pour calaculer l'heure de fin en fonction de la durée
+pour calculer l'heure de fin en fonction de la durée
 **/
 function heure_fin_seance($date, $duree = 0){
 	$Y = annee($date);

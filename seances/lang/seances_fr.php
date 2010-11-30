@@ -63,12 +63,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour' => 'Retour',
 
 // S
+'seance_a' => 'à',
 'seances_extra2' => 'Séances',
 'seances_endroits_extra2' => 'Séances_endroits',
 'seances_activer_rubrique' => 'SÉANCES POUR CETTE RUBRIQUE',
 'seances_configuration' => 'Configuration plugin Séances',
 'seances_endroit' => 'Endroit',
 'seances_endroits' => 'Séances / Endroits',
+'symbole_heure' => 'h',
+'symbole_minute' => 'min',
 
 );
 ?>
