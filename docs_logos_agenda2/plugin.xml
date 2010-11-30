@@ -20,5 +20,5 @@
 	<categorie>outil</categorie>
 	<necessite id='SPIP' version='[2.0;]' />
 	<necessite id="agenda" version='[2.0.3;]'/>
-	<utilise id="gestdoc" version='[1.3.5;]'/>
+	<necessite id="gestdoc" version='[1.3.5;]'/>
 </plugin>
