@@ -77,7 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apres_depub' => 'Statut après dépublication',
 	'supp_date_article' => 'Supprimer la date de dépublication',
 	'supp_date_auteur' => 'Supprimer la date d\'expiration',
-
+	'statut_apres_depublication' => 'Statut après dépublication',
+	
 	// T
 	'title_infos' => 'Liste des articles dépubliés',
 	'titre' => 'Titre de l\'article',
