@@ -38,7 +38,7 @@
 		<url>controle_guestbook</url>
 	</bouton>
 	<bouton id='bando_livredor' parent='bando_edition'>
-		<icone>prive/images/guestbook.png</icone>
+		<icone>images/guestbook.png</icone>
 		<titre>Livre d'or</titre>
 		<url>controle_guestbook</url>
 	</bouton>
