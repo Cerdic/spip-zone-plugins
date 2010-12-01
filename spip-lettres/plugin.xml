@@ -14,7 +14,7 @@
 	<categorie>communication</categorie>
 	<utilise id="bando" version="[;]" />
 	<install>base/lettres.php</install>
-	<lien>http://www.artego.fr/-Lettre-d-information-</lien>
+	<lien>http://www.spip-contrib.net/DocSpipLettres</lien>
 	<icon>prive/images/lettre-48.png</icon>
 	<options>lettres_options.php</options>
 	<fonctions>lettres_fonctions.php</fonctions>
