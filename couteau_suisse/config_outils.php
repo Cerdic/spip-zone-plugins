@@ -351,6 +351,7 @@ add_variables( array(
 	'nom' => 'spip_options_on',
 	'check' => 'couteauprive:cs_spip_options_on',
 	'defaut' => 0,
+	'commentaire' => 'cs_outils_concernes("code:spip_options");',
 ), array(
 	'nom' => 'distant_off',
 	'check' => 'couteauprive:cs_distant_off',
@@ -361,14 +362,7 @@ add_variables( array(
 	'check' => 'couteauprive:cs_distant_outils_off',
 	'defaut' => 0,
 	'code:%s' => "define('_CS_PAS_D_OUTIL_DISTANT','oui');",
-	'commentaire' => 'fct_distant_outils_off();
-function fct_distant_outils_off(){
-	global $outils; $s="";
-	foreach($outils as $o) if(isset($o["fichiers_distants"])) $s.=($s?" - ":"")."[.->$o[id]]";
-	if(!$s) return "";
-	$s=_T("couteauprive:outils_".(%s?"desactives":"concernes")).$s;
-	return "<q1><q3>$s</q3></q1>";
-}',
+	'commentaire' => 'cs_outils_concernes("fichiers_distants",%s);',
 ));
 add_outil( array(
 	'id' => 'cs_comportement',

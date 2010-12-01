@@ -97,11 +97,12 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if(strlen($temp = cs_action_fichiers_distants($outil) . cs_action_rapide($outil_id, $actif))) 
 		$s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	$s .= propre($descrip);
-
 	$serial = serialize(array_keys($outil));
 	$p = '';
 	if(preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
-		$p .=  _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));
+		$p .=  '<p>' . _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*')) . '</p>';
+	if(isset($outil['code:spip_options']) && strlen($outil['code:spip_options']) && ($outil_id<>'cs_comportement'))
+		$p .= '<p>' . _T('couteauprive:detail_spip_options'.(defined('_CS_SPIP_OPTIONS_OK')?'_ok':''), array('lien'=>description_outil_liens_callback(array(1=>'cs_comportement')))) . '</p>';
 	if(isset($outil['jquery']) && $outil['jquery']=='oui')
 		$p .= '<p>' . _T('couteauprive:detail_jquery2') . '</p>';
 	if(isset($outil['auteur']) && strlen($outil['auteur']))

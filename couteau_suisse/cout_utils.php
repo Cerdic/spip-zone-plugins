@@ -678,4 +678,11 @@ if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 	ecrire_metas();
 }
 
+function cs_outils_concernes($key, $off=false){
+	global $outils, $metas_outils; $s='';
+	foreach($outils as $o) if(isset($o[$key])) $s .= ($s?' - ':'')."[.->$o[id]]".(isset($o['actif']) && $o['actif']?' ('._T('couteauprive:outil_actif_court').')':'');
+	if(!$s) return '';
+	$s = _T('couteauprive:outils_'.($off?'desactives':'concernes')).$s;
+	return "<q1><q3>$s</q3></q1>";
+}
 ?>

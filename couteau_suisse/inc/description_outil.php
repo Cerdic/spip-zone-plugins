@@ -123,7 +123,9 @@ function description_outil_input2_callback($matches) {
 }
 
 function description_outil_liens_callback($matches) {
-	$nom = _T("couteauprive:$matches[1]:nom");
+	global $outils;
+	$nom = isset($outils[$matches[1]]['nom'])?$outils[$matches[1]]['nom']:_T("couteauprive:$matches[1]:nom");
+	if(strpos($nom, '<:')!==false) $nom = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $nom);
 	return '<a href="'.generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil='.$matches[1])
 		."\" id=\"href_$matches[1]\" onclick=\"javascript:return cs_href_click(this);\">$nom</a>";
 }
@@ -165,7 +167,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			));
 		}
 	}
-	if (strpos($descrip, "<:")!==false) {
+	if (strpos($descrip, '<:')!==false) {
 		if(!isset($outil['perso']))
 			// lames natives : reconstitution d'une description eventuellement morcelee
 			// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
@@ -174,7 +176,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		// chaines de langue personnalisees
 		$descrip = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
 	}
-	if (strpos($outil['nom'], "<:")!==false)
+	if (strpos($outil['nom'], '<:')!==false)
 		$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
 	// envoi de la description en pipeline
 #	list(,$descrip) = pipeline('init_description_outil', array($outil_, $descrip));
