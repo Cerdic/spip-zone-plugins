@@ -1,0 +1,15 @@
+<B_actualites>
+[<h2>(#GRAND_TOTAL|corbeille_affiche_un_ou_plusieurs{actualites:corbeille_actualites_un,vu:corbeille_actualites_tous})</h2>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items actualites checkables'>
+<BOUCLE_actualites(ACTUALITES){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='actualite-#ID_ACTUALITE'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_ACTUALITE'[ (#ID_ACTUALITE|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h3>[##ID_ACTUALITE - (#TITRE|sinon{<:info_sans_titre:>})]</h3>
+<small>[(#DATE|affdate)]</small>
+<p class='actions'>[<a href='#URL_ECRIRE{actualites_voir,id_actualite=#ID_ACTUALITE}'><:corbeille:voir:></a>]</p>
+</li>
+</BOUCLE_actualites>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_actualites>

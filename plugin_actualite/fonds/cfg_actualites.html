@@ -1,0 +1,28 @@
+<!-- titre=<:actualites:cfg_titre:> -->
+<!-- icone=img_pack/actualites_24.png -->
+
+<!-- descriptif=<:actualites:cfg_descriptif:> -->
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+
+<h3><:actualites:cfg_soustitre1:></h3>
+<p><:actualites:cfg_explication1:></p>
+<fieldset>
+<table>
+	<tr>
+		<td><:actualites:cfg_label_actualite:></td>
+		<td>	
+			<label><input type="radio" name="objet_actualite" class="radio" [(#ENV{objet_actualite}|=={on}|oui)checked="checked"] value="on" checked="checked" /><:oui:></label>
+			<label><input type="radio" name="objet_actualite" class="radio" [(#ENV{objet_actualite}|=={off}|oui)checked="checked"] value="off" /><:non:></label>
+		</td>
+	</tr>
+</table>
+</fieldset>
+
+<div style="text-align:#LANG_RIGHT;">
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondo" />
+</div>
+
+</div></form>

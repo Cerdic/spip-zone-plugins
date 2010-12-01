@@ -1,0 +1,16 @@
+[(#REM)
+	Fond appele par 'exec/actualites_edit.php', qui
+	calcule et affiche le formulaire d'edition
+	d'une actualite.
+	Appelle le formulaire CVT par les fichiers
+	suivant : 'formulaire/actualite.html' et
+	'formulaire/actualite.php'.
+]
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<:actualites:etiquette_formulaire_actualite:><h1>(#ENV{titre})</h1>]
+</div>
+#FORMULAIRE_EDITER_ACTUALITE{#ENV{new},'',#ENV{redirect},#ENV{lier_trad},#ENV{config_fonc}}
+</div>

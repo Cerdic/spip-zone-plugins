@@ -1,0 +1,162 @@
+<plugin>
+	<nom>Plugin actualites</nom>
+	<auteur>klelugi</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+
+	<icon>img_pack/actualites_64.png</icon>
+	<description>
+		Plugins de saisie d'objets de type actualites
+		Ce plugin propose un nouvel objet pour SPIP.
+	</description>
+	<lien></lien>
+	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
+
+	<etat>test</etat>
+
+	<prefix>actualites</prefix>
+	<options>actualites_options.php</options>
+
+	<!-- Installation, mise a jour ou desinstallation des tables supplementaire sur le serveur -->
+	<install>base/actualites_upgrade.php</install>
+	
+	<!-- Pipeline : les autorisations specifiques au plugin -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>actualites_autoriser.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : declarer a SPIP les tables principales -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/actualites_base.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : declarer a SPIP les tables auxiliaires -->
+	<pipeline>
+	        <nom>declarer_tables_auxiliaires</nom>
+ 	       <inclure>base/actualites_base.php</inclure>
+	</pipeline> 
+
+	<!-- Pipeline : declarer a SPIP les interfaces -->
+	<pipeline>
+  	      <nom>declarer_tables_interfaces</nom>
+  	      <inclure>base/actualites_base.php</inclure>
+	</pipeline> 
+
+	<!-- Pipeline : declarer a SPIP les surnoms -->
+	<pipeline>
+  	      <nom>declarer_tables_objets_surnoms</nom>
+  	      <inclure>base/actualites_base.php</inclure>
+	</pipeline> 
+	
+	<!-- Pipeline : declarer a SPIP les champs de recherche des nouveaux objets -->
+	<pipeline>
+  	      <nom>rechercher_liste_des_champs</nom>
+  	      <inclure>actualites_pipelines.php</inclure>
+	</pipeline> 
+
+
+	<pipeline>
+			<nom>insert_head</nom>
+			<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : entete des pages de l'espace prive -->
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : boites d'infos des objets dans 'exec/actualites_voir' -->
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : permettre la selection des nouveaux objets dans les groupes de mots -->
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : permet d'associer un libelle aux types d'objets, notamment dans 'exec/mots_tous' -->
+	<pipeline>
+		<nom>libelle_association_mots</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>   
+
+	<!-- Pipeline : compatibilite avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : integration dans la page d'accueil : le cartouche d'info -->
+	<pipeline>
+		<nom>accueil_informations</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : integration dans la page d'accueil : en attente de validation -->
+	<pipeline>
+		<nom>accueil_encours</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : ajout d'url_propres pour actualites / #URL_ACTUALITE -->
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+	
+	<!-- ajoute les listes dobjets dans articles et rubriques -->
+	<pipeline>
+		<nom>affiche_enfants</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- ajoute le bloc des documents -->
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>actualites_pipelines.php</inclure>
+	</pipeline>
+
+
+	<necessite id="spip" version="[2.1.0;]" />
+	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="spip_bonux" version="[1.8.4;]" />
+	<necessite id="cextras" version="[1.6.1;]" />
+	<necessite id="gestdoc" version="[1.4.2;]" />
+	<utilise id='CFG' version='[1.0;]' /> 
+
+	<!-- Ajouter bouton de navigation dans l'interface privee -->
+	<bouton id="actualites_tous" parent="naviguer">
+		<!-- icone du nouveau bouton -->
+		<icone>img_pack/actualites_24.png</icone>
+		<!-- texte du nouveau bouton -->
+		<titre>Plugin actualites</titre>	
+		<!-- action a effectuer lors du clic : ici, execution de exec/actualites_tous.php -->
+		<url>actualites_tous</url>	
+	</bouton>
+
+	<bouton id='actualites_tous2' parent='bando_edition'>
+       <icone>img_pack/actualites_24.png</icone>
+       <titre>actualites</titre>
+       <url>actualites_tous</url> 
+   </bouton>
+   <bouton id='actualite_creer' parent="outils_rapides">
+		<icone>img_pack/actualites_16.png</icone>
+		<titre>actualites:nouvelle_actualite</titre>
+		<url>actualites_edit</url>
+		<args>type=actualite&new=oui</args>
+	</bouton>
+	
+	<categorie>divers</categorie>
+
+</plugin>

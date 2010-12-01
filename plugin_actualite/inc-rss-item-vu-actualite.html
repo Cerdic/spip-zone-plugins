@@ -1,0 +1,14 @@
+#CACHE{3600}
+<BOUCLE_actualite(ACTUALITES){id_actualite}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		<dc:language></dc:language>
+		<category>actualites !</category>
+
+		<description></description>
+		<content:encoded></content:encoded>
+
+	</item>
+</BOUCLE_actualite>

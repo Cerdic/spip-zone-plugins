@@ -1,0 +1,25 @@
+[(#REM)
+	Boite infos pour la page privee 'exec/actualites_voir.php'
+	Corresponds a l'encart qui affiche l'id de l'objet et
+	le formulaire de changement de statut a la volee.
+]
+
+<BOUCLE_infos(ACTUALITES){id_actualite=#ENV{id}}{statut?}{!lang_select}>
+	<div class='infos'>
+		<div class='numero'><:actualites:info_gauche_numero_actualite:><p>#ID_ACTUALITE</p></div>
+		
+		[(#REM)	
+			Bloc de changement de statut : fait appel a 
+			la fonction instituer_objet (prive/infos/actualite_fonctions.php) 
+		]
+
+		[(#ID_ACTUALITE|instituer_actualite{#STATUT})]
+
+		[(#REM)
+
+			Bouton voir en ligne
+
+		][(#VAL{actualite}|actualite_voir_en_ligne{#ID_ACTUALITE,#STATUT,racine-24.gif,0,0})]
+		
+	</div>
+</BOUCLE_infos>

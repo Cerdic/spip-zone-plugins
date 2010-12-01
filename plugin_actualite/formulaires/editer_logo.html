@@ -1,0 +1,50 @@
+#CACHE{0}
+<div class='cadre formulaire_spip formulaire_editer formulaire_editer_logo formulaire_editer_logo_#ENV{objet}'>
+	<img height="24" width="24" class="cadre-icone" alt="" src="#CHEMIN{images/image-24.gif}">
+  <h3 class="titrem"><:actualites:logo:></h3>  
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
+				<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options}|table_valeur{label}|sinon{<:actualites:logo_ajouter:>})]</label>[
+				<div class="spip_logos">(#ENV{logo_on}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{50})]}|inserer_attribut{alt,logo_on})</div>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
+				]<input type='file' class='file' name='logo_on' size="[(#ENV{_options}|table_valeur{size_input}|sinon{15})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
+				[(#ENV{logo_on}|oui)
+					[(#ENV{logo_off}|non)
+					<div class="choix">
+						<input type='checkbox' class='checkbox' id="supprimer_logo_on_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_on" value='1' />
+						<label for="supprimer_logo_on_#ENV{objet}_#ENV{id_objet}"><:lien_supprimer|ucfirst:></label>
+					</div>
+					]
+				]
+	    </li>
+		[(#ENV{logo_survol}|oui)
+	    <li class="editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
+				<label for="logo_off"><:ajaxform:logo_survol:></label>[
+				<div class="spip_logos">(#ENV{logo_off}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{50})]}|inserer_attribut{alt,logo_off})</div>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
+				]<input type='file' class='file' name='logo_off' size="15" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
+				[(#ENV{logo_off}|oui)
+					<div class="choix">
+						<input type='checkbox' class='checkbox' id="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_off" value='1' />
+						<label for="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}"><:lien_supprimer:></label>
+					</div>
+				]
+	    </li>
+		]
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_valider:>' /></p>
+    <div class="nettoyeur"></div>
+	</div></form>
+	]
+  <div class="nettoyeur"></div>
+</div>
+

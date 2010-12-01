@@ -1,0 +1,27 @@
+/* PLUGIN ACTUALITES ! */
+/* Cette feuille contient les styles associes au plugin ACTUALITES ! pour SPIP 2 */
+/* Ces styles ne sont pas indispensables mais ameliorent nettement la lisibilite... ;) */
+
+
+/*	Page /exec : actualites_tous.php		*/
+.logo_plugin { display: block; margin-left: auto; margin-right: auto; }
+.description_plugin { text-align: center; color: gray; }
+
+/* 	Page /exec : actualites_voir.php 		*/
+.bouton_actions { margin: auto; }
+
+.titre_objet { font-weight: bold; font-size: 1.1em; }
+.type_objet { font-style: italic; font-size: 0.9em; }
+.source_objet { font-style: italic; }
+
+.boutons_nav ul { margin: 0; padding: 0; list-style: none; }
+.boutons_nav li  
+{  float: left; 
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+.boutons_nav a { display: block; }
+
+/*	Plugin Corbeille (compatibilite) */
+

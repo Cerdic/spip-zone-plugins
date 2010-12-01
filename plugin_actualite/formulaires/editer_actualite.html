@@ -1,0 +1,60 @@
+[(#REM)
+
+	Fichier HTML du formulaire CVT : editer_actualite. Etroitement 	
+	lie aux fonctions PHP dans le fichier du meme nom. Pour plus d'infos
+	sur les formulaires CVT : http://www.spip.net/fr_article3800.html.	
+	Ces deux sont conjointement appeles par la balise #FORMULAIRE_EDITER_actualite
+	dans le fond 'prive/editer/actualite.html'.					
+
+]
+
+<div class='formulaire_spip formulaire_editer formulaire_editer_actualite formulaire_editer_actualite-#ENV{id_actualite,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_actualite' value='#ENV{id_actualite}' />
+	  <ul>
+
+	[(#REM) 'Titre' est un champ commun - et obligatoire]
+	   	<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+		    	<label for="titre"><:actualites:info_titre:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+			]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{actualites:titre_nouvelle_actualite}|_T})]"
+			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+		</li>
+		<li>
+			<label><:actualites:choisir_rubrique_associee:></label>
+			<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>
+		</li>
+	    
+
+	    [(#SESSION{statut}|=={0minirezo}|oui)
+	 	<li class="fieldset">
+			<fieldset>
+			<h3 class="legend"><:actualites:info_legend_statut:></h3>
+			<ul>
+			<li class="editer_statut obligatoire">
+				<label for='statut'><:actualites:info_actualite_publiee:></label>
+				<select name='statut' id='statut' size='1'>
+					<option value='prop'[(#ENV**{statut}|=={prop}|?{' selected="selected"'})] style='background-color: white'><:actualites:item_actualite_proposee:></option>
+					<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] class='danger'><:actualites:item_actualite_refusee:></option>
+					<option value='publie'[(#ENV**{statut}|=={publie}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:actualites:item_actualite_validee:></option>
+				</select>
+			</li>
+			</ul>
+			</fieldset>
+		</li>
+			]
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
