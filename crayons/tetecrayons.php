@@ -137,9 +137,8 @@ EOF;
 	}
 
 
-	$incHead = <<<EOH
-
-<link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
+	$incCSS = "<link rel=\"stylesheet\" href=\"{$cssFile}\" type=\"text/css\" media=\"all\" />";
+	$incJS = <<<EOH
 <script type="text/javascript">/* <![CDATA[ */
 	var configCrayons;
 	function startCrayons() {
@@ -148,25 +147,33 @@ EOF;
     // cQuery.ready() plante le jQuery.ready() sous MSIE
     {$pp}
 	}
-
 	var cr = document.createElement('script');
 	cr.type = 'text/javascript'; cr.async = true;
 	cr.src = '{$jsFile}\x26callback=startCrayons';
 	var s = document.getElementsByTagName('script')[0];
 	s.parentNode.insertBefore(cr, s);
-
 /* ]]> */</script>
+
 EOH;
 
 	if ($mode == 'head')
-		return $page . $incHead;
+		return $page . $incJS . $incCSS; //js inline avant les css, sinon ca bloque le chargement
 
 	$pos_head = strpos($page, '</head>');
 	if ($pos_head === false)
 		return $page;
 
-	return substr_replace($page, $incHead, $pos_head, 0);
+  // js inline avant la premiere css, ou sinon avant la fin du head
+	$pos_link = strpos($page, '<link ');
+  if (!$pos_link)
+	  $pos_link = $pos_head;
+  $page = substr_replace($page, $incJS, $pos_link, 0);
 
+	// css avant la fin du head
+  $pos_head = strpos($page, '</head>');
+	$page = substr_replace($page, $incCSS, $pos_head, 0);
+	
+	return $page;
 }
 
 // #EDIT{ps} pour appeler le crayon ps ;
