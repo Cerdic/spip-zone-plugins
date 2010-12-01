@@ -3,7 +3,7 @@
 	<auteur>
 		[Minimalteck->http://www.minimalteck.fr/]. Port&#233; pour spip 2 par Yffic
 	</auteur>
-	<version>0.7</version>
+	<version>0.5.1</version>
 	<version_base>0.5</version_base>
 	<etat>test</etat>
 	<description>
@@ -40,7 +40,7 @@ Int&#233;gration pour Spip [2.0.x]
 		<inclure>sjcycle_prive_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10;]" />
-	<necessite id="SPIP" version="[2.0.x;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="palette" version="[1.2.2;]" />
