@@ -61,10 +61,11 @@ function depublication_verifier_base() {
 		if (version_compare($current_version,"0.8","<=")) {
 			creer_base();
 			
-			sql_alter("TABLE spip_articles_depublication CHANGE id_art_depub id_article_depubublication BIGINT(21) NOT NULL AUTO_INCREMENT");
+			sql_alter("TABLE spip_articles_depublication CHANGE id_art_depub id_article_depublication BIGINT(21) NOT NULL AUTO_INCREMENT");
 			
 			spip_log('Tables du plugin Depublication correctement passsées en version 0.8','depublication');
 			ecrire_meta('depublication_base_version', $current_version = "0.8");
+			ecrire_meta('depublication_version', "0.9");
 		}
 	}	
 }

@@ -47,9 +47,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'delai_unite_mois' => 'mois',
 	'delai_unite_annees' => 'année(s)',
 	'delai' => 'Vous pouvez ici sélectionner le délai avant la dépublication d\'un article ou l\'expiration d\'un auteur. Par défaut, la valeur est de 1 mois.',
+	'depublication' => 'Dépublication',	
+	'depublication_articles' => 'Dépublication des articles prévus',
 	
 
 	// E
+	'expiration_auteurs' => 'Expiration des auteurs prévus',
 	
 	// I
 	'info_page' => 'Affichage de tous les articles qui ont été dépubliés par le plugin.<img align="right" src="'._DIR_PLUGIN_DEPUBLICATION.'/images/depublication.png" alt="depublication" title="depublication"/><br/><br/> Vous pouvez donc leur changer l\'état afin qu\'il réapparaisse dans la partie administration.<br/><br/>',
@@ -58,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvel_etat' => 'Vous pouvez ici ajouter un nouvel état dans lequel passera votre article lors de la dépublication.',
 	'nodate' => 'Pas de date fixée pour l\'instant',
 	'numero' => 'Id',
+	'nom_auteur' => 'Nom de l\'auteur',
 
 	// P
 	'prepa'=> 'en cours de rédaction',
@@ -77,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'title_infos' => 'Liste des articles dépubliés',
 	'titre' => 'Titre de l\'article',
+	'titre_articles' => 'Titre de l\'article'
 
 
 

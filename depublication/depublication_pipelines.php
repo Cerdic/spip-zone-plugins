@@ -82,10 +82,10 @@ function depublication_header_prive($flux) {
 		$flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('depublication', $paramcss) .'" />';
 		
 		// Insertion des librairies js
-		$flux .='<script src="'.url_absolue(find_in_path('lib/DataTables-1.7.2/media/js/jquery.dataTables.js')).'" type="text/javascript"></script>'."\n";
+		$flux .='<script src="'.url_absolue(find_in_path('lib/DataTables-1.7.4/media/js/jquery.dataTables.js')).'" type="text/javascript"></script>'."\n";
 		
 		// Inclusion des styles propres a dataTables
-		$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('lib/DataTables-1.7.2/media/css/demo_table.css')).'" type="text/css" media="all" />';
+		$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('lib/DataTables-1.7.4/media/css/demo_table.css')).'" type="text/css" media="all" />';
 		
 	}
 	

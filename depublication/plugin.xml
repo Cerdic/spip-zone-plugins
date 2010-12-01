@@ -1,6 +1,5 @@
 <plugin>
         <nom>Dépublication</nom>
-        <icon>images/depublication.png</icon>
         <auteur>
         	[Equipe Nouveaux Territoires->mailto:equipe@nouveauxterritoires.fr] 
         	<br/>
@@ -8,13 +7,13 @@
  			<br/><br/>
  			- Copyright &#169; 2007-2010 NouveauxTerritoires
  		</auteur>
- 		<icone>img/depublication-24.png</icone>
+ 		<icon>img/depublication-24.png</icon>
  		<licence>(&copy;) 2007-2010 [GNU/GPL v3->http://www.gnu.org/copyleft/gpl.html]&nbsp;<a href="http://www.gnu.org/copyleft/gpl.html"><img src="../plugins/depublication/images/gplv3-88x31.png"/></a></licence>
         
-        <version>0.8.2</version>
+        <version>0.9</version>
         <version_base>0.8</version_base>
         
-        <etat>stable</etat>
+        <etat>test</etat>
         <description>
         	Permet de spécifier une date de dépubication automatique pour les articles ou une date d'expiration pour les auteurs. 
         	Les articles passent alors dans un état prédéfini (proposé,validé,poubelle ou un état spécifique créé par l'utilisateur), les auteurs passent eux à la poubelle.
@@ -26,19 +25,42 @@
 		
 		<necessite id='SPIP' version='[2.0.0;]' />
 		<necessite id='cfg' version='[1.10.0;]' />
-		<!--<necessite id="lib:DataTables-1.7.2" src="http://www.datatables.net/releases/DataTables-1.7.2.zip" />-->
+		<necessite id="lib:DataTables-1.7.4" src="http://www.datatables.net/releases/DataTables-1.7.4.zip" />
 		
 		
 		<chemin dir='' />
-	
+		<categorie>maintenance</categorie>
+		
 		<bouton id='depublication_list' parent='naviguer'>
-			<icone>images/depublication-24.png</icone>
-			<titre>depublication:articles_dep</titre>
+			<icone>img/depublication-24.png</icone>
+			<titre>depublication:depublication</titre>
+			<url>depublication_list_articles</url>
 	  	</bouton>
-	  	
+	  	<bouton id='depublication_list2' parent='bando_edition'>
+			<icone>img/depublication-24.png</icone>
+			<titre>depublication:depublication</titre>
+			<url>depublication_list_articles</url>
+	  	</bouton>	  	
+
+
+	
+	  	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 		<!--<options>depublication_options.php</options>	
 		<fonctions>depublication_fonctions.php</fonctions>
 		-->
+		
+		<onglet id='depublication_list_articles' parent='depublication_list'>
+			<icone>img/depublication-24.png</icone>
+			<titre>depublication:depublication_articles</titre>
+			<url>depublication_list_articles</url>
+		</onglet>
+		<onglet id='depublication_list_auteurs' parent='depublication_list'>
+			<icone>img/depublication-24.png</icone>
+			<titre>depublication:expiration_auteurs</titre>
+			<url>depublication_list_auteurs</url>
+		</onglet>
+	
+	
 		<pipeline>
 			<nom>affiche_milieu</nom>
 			<action>execution</action>
