@@ -14,7 +14,9 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 #minibando #bando1_bando_accueil { background: #f8f8f8 url(images/accueil.png) center 50% no-repeat; }
 #minibando #bando1_bando_edition { background: #f8f8f8 url(images/edition.png) center 50% no-repeat; }
 #minibando #bando1_bando_publication { background: #f8f8f8 url(images/publication.png) center 50% no-repeat; }
+#minibando #bando1_bando_reactions,
 #minibando #bando1_bando_activite { background: #f8f8f8 url(images/activite.png) center 50% no-repeat; }
+#minibando #bando1_bando_squelette { background: #f8f8f8 url(images/squelettes.png) center 50% no-repeat; }
 #minibando #bando1_bando_administration { background: #f8f8f8 url(images/administration.png) center 50% no-repeat; }
 #minibando #bando1_bando_configuration { background: #f8f8f8 url(images/configuration.png) center 50% no-repeat; }
 #minibando #minibando_outils_rapides > a { background: #f8f8f8 url(images/outils_rapides.png) center 50% no-repeat; }

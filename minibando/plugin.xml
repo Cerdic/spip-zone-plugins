@@ -18,6 +18,28 @@
 		<nom>formulaire_admin</nom>
 		<inclure>minibando_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.2.0 dev;)" />
+	<necessite id="SPIP" version="[2.0.3;2.2.0-dev]" />
+	<necessite id="bando" version="[1.1.5;]" />
+</plugin>
+<plugin spip='[2.2.0-dev;]'>
+	<nom>minibando</nom>
+	<auteur>b_b</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<prefix>minibando</prefix>
+	<description>
+	Un mini bandeau pour SPIP qui remplace les boutons d'administation.
+	</description>
+	<lien></lien>
+	<licence>GPL</licence>
+	<icon></icon>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>minibando_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_admin</nom>
+		<inclure>minibando_pipelines.php</inclure>
+	</pipeline>
 	<utilise id="stats" version="[0.1.1;)" />
 </plugin>
