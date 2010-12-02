@@ -5,7 +5,7 @@
 	<br/>
 	<h2><:depublication:expiration_auteurs:></h2>
 	<div align="center">
-		<:depublication:statut_apres_depublication:> : <b>poubelle</b>
+		<:depublication:statut_apres_expiration:> : <b>poubelle</b>
 	</div>
 	
 	<br/>
@@ -20,8 +20,10 @@
 		</thead>
 		<tbody>
 		<BOUCLE_auteurs_depub(AUTEURS_DEPUBLICATION){par maj}{inverse}{depublication!='0000-00-00 00:00:00'}>
-			<tr>
-				<BOUCLE_statut(AUTEURS){id_auteur}{tout}{statut IN #GET{statuts}}>
+		   <BOUCLE_statut(AUTEURS){id_auteur}{tout}{statut IN #GET{statuts}}>
+		   
+		   	[(#AUTORISER{modifier,auteur,#ID_AUTEUR})
+				<tr>
 					<td align="center">
 						<a href="#URL_AUTEUR">#NOM</a>
 						</td>
@@ -33,37 +35,38 @@
 						[(#STATUT|=={'5poubelle'}|?{' '})<:spip:texte_statut_poubelle:>]
 						</b>
 					</td>
-				</BOUCLE_statut>
-				<td>
-					[(#DEPUBLICATION|affdate)] à [(#DEPUBLICATION|affdate{H:i})]
-				</td>
-				<td>
-					[(#MAJ|affdate)] à [(#MAJ|affdate{H:i})]
-				</td>
-				[(#REM) <td class="statut #GET{statutdepub}">
-					<form method="post" action="#ENV{action}">
-						#ACTION_FORMULAIRE{#ENV{action}}
-						
-						<select name="[(#ID_ARTICLE)]_state" class="etats">
-							<option value="prepa" style="background-color: white" [(#GET{statutdepub}|=={0minirezo}|?{' selected="selected" '})]>
-								<img src="#CHEMIN{prive/images/puce-blanche.gif}" alt="Article en cours de rédaction" height="9" width="9"><:spip:0minirezo:>
-							</option>
-							<option value="prop" style='background-color: #FFF1C6' [(#GET{statutdepub}|=={1comite}|?{' selected="selected" '})]>
-								<img src="#CHEMIN{prive/images/puce-orange.gif}" alt="Article proposé" height="9" width="9"><:spip:1comite:>
-							</option>
-							<option value="poubelle" style='background: url("#CHEMIN{images/rayures-sup.gif}");' [(#GET{statutdepub}|=={poubelle}|?{' selected="selected" '})]>
-								<img src="#CHEMIN{prive/images/puce-poubelle.gif}" alt="Article supprimé" height="9" width="9"><:spip:texte_statut_poubelle:>
-							</option>
-							[(#REM) <option value="publie" style="background-color: #9DBA00" [(#GET{statutdepub}|=={6forum}|?{' selected="selected" '})]>
-								<img src="#CHEMIN{prive/images/puce-verte.gif}" alt="Article publié" height="9" width="9"><:spip:6forum:>
-							</option>]
-						</select>
-						
-						<input type="submit" name="Valider" value="<:bouton_valider:>" class="fondo" />
-						<br/>
-					</form>
-				</td>]
-			</tr>
+					<td>
+						[(#DEPUBLICATION|affdate)] à [(#DEPUBLICATION|affdate{H:i})]
+					</td>
+					<td>
+						[(#MAJ|affdate)] à [(#MAJ|affdate{H:i})]
+					</td>
+					[(#REM) <td class="statut #GET{statutdepub}">
+						<form method="post" action="#ENV{action}">
+							#ACTION_FORMULAIRE{#ENV{action}}
+							
+							<select name="[(#ID_ARTICLE)]_state" class="etats">
+								<option value="prepa" style="background-color: white" [(#GET{statutdepub}|=={0minirezo}|?{' selected="selected" '})]>
+									<img src="#CHEMIN{prive/images/puce-blanche.gif}" alt="Article en cours de rédaction" height="9" width="9"><:spip:0minirezo:>
+								</option>
+								<option value="prop" style='background-color: #FFF1C6' [(#GET{statutdepub}|=={1comite}|?{' selected="selected" '})]>
+									<img src="#CHEMIN{prive/images/puce-orange.gif}" alt="Article proposé" height="9" width="9"><:spip:1comite:>
+								</option>
+								<option value="poubelle" style='background: url("#CHEMIN{images/rayures-sup.gif}");' [(#GET{statutdepub}|=={poubelle}|?{' selected="selected" '})]>
+									<img src="#CHEMIN{prive/images/puce-poubelle.gif}" alt="Article supprimé" height="9" width="9"><:spip:texte_statut_poubelle:>
+								</option>
+								[(#REM) <option value="publie" style="background-color: #9DBA00" [(#GET{statutdepub}|=={6forum}|?{' selected="selected" '})]>
+									<img src="#CHEMIN{prive/images/puce-verte.gif}" alt="Article publié" height="9" width="9"><:spip:6forum:>
+								</option>]
+							</select>
+							
+							<input type="submit" name="Valider" value="<:bouton_valider:>" class="fondo" />
+							<br/>
+						</form>
+					</td>]
+				</tr>
+			]
+			</BOUCLE_statut>
 		</BOUCLE_auteurs_depub>
 		</tbody>
 	</table> 

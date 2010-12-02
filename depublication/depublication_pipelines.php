@@ -23,6 +23,7 @@
 
 
 function depublication_execution($flux) {
+	global $connect_statut;
 	
 	//determine la page demandée 
 	switch ($flux['args']['exec']) {
@@ -32,7 +33,7 @@ function depublication_execution($flux) {
 			include_once('inc/depublication.php');
 			$id_article = $flux['args']['id_article'];
 			//recupere le complement d'affichage
-			$flux['data'] .= inc_depublication_dist($id_article);
+			$flux['data'] .= inc_depublication_dist($id_article,$flag, $connect_statut);
 			break;
 			
 		case "auteur_infos" :
@@ -40,7 +41,7 @@ function depublication_execution($flux) {
 			include_once('inc/depublication.php');
 			$id_auteur = $flux['args']['id_auteur'];
 			//recupere le complement d'affichage
-			$flux['data'] .= inc_depublication_dist($id_auteur, 'auteur_infos');
+			$flux['data'] .= inc_depublication_dist($id_auteur,$flag ,$connect_statut,'auteur_infos');
 			break;
 			
 		default :

@@ -1,12 +1,12 @@
 [(#REM) titre=Dépublication]
-[(#REM) boite=Dépublication d'un article ou d'un auteur]
+[(#REM) boite=Dépublication d'un article ou expiration d'un auteur]
 [(#REM) icone=img/depublication-24.png]
 
 
 [(#SET{logo, <img src='#DOSSIER_SQUELETTE/../img/depublication.png' alt='' style="float:#LANG_RIGHT;" /> })]
 
 <!-- descriptif= 
-	[(#GET{logo})] Ce plugin permet de spécifier une date de dépublication pour un article. Ici, vous spécifiez l'état dans lequel l'article doit se retrouver après la dépublication.
+	[(#GET{logo})] Ce plugin permet de spécifier une date de dépublication pour un article ou une date d'expiration pour un auteur. Spécifiez ici si vous souhaitez activer la date d'expiration des auteurs, l'état dans lequel l'article doit se retrouver après la dépublication. <br/><br/>La documentation du plugin est disponible sur <a href="http://www.spip-contrib.net/Depublication,3642">spip-contrib</a>.
 -->
 #CACHE{0}
 
@@ -17,6 +17,40 @@
 
 			<div>[(#ENV{_cfg_}|form_hidden)]</div>
 	
+			<fieldset>
+				<legend>
+					<:depublication:options:>
+				</legend>
+				<input type="checkbox" name="depub_auteur" value="true" [(#CONFIG{depublication/depub_auteur}|=={true}|?{'checked="checked"'})] id="depubauteur">
+				<label for="depubauteur"><:depublication:active_depub_auteur:></label>
+				<br/><br/>
+				<:depublication:delai:>
+					<div align="center">
+						<br/>
+						<select name="delai">
+							<?php 
+								$value = '#CONFIG{depublication/delai}';
+								for ($i = 1; $i <= 50; $i++) { 
+							?>
+									<option value="<?php echo $i; ?>"<?php echo (($value == $i) ? 'selected="selected"' : ''); ?> style='background-color: white'>+ <?php echo $i;?></option>
+							<?php } ?>
+							
+						</select>
+						<select name="delaiunite">
+							<option value="secondes" [(#CONFIG{depublication/delaiunite}|=={secondes}|?{'selected="selected"'})]><:depublication:delai_unite_secondes:></option>
+							<option value="minutes" [(#CONFIG{depublication/delaiunite}|=={minutes}|?{'selected="selected"'})]><:depublication:delai_unite_minutes:></option>
+							<option value="heures" [(#CONFIG{depublication/delaiunite}|=={heures}|?{'selected="selected"'})]><:depublication:delai_unite_heures:></option>
+							<option value="jours" [(#CONFIG{depublication/delaiunite}|=={jours}|?{'selected="selected"'})]><:depublication:delai_unite_jours:></option>
+							<option value="semaines" [(#CONFIG{depublication/delaiunite}|=={semaines}|?{'selected="selected"'})]><:depublication:delai_unite_semaines:></option>
+							<option value="mois" [(#CONFIG{depublication/delaiunite}|=={mois}|?{'selected="selected"'})]><:depublication:delai_unite_mois:></option>
+							<option value="annees" [(#CONFIG{depublication/delaiunite}|=={annees}|?{'selected="selected"'})]><:depublication:delai_unite_annees:></option>
+						</select>
+					</div>
+					<div style="color: gray; text-align: center"><:depublication:default_delai:></div>
+			</fieldset>
+			
+			<br/>
+			
 			<fieldset>
 				<legend>
 					<:depublication:configuration:>
@@ -40,29 +74,6 @@
 					<input type="text" name="nouvetat" value="#CONFIG{depublication/nouvetat}" size="50" maxlength="100"/>
 					<br/>
 					<span style="color: gray"><:depublication:att_nouvel_etat:></span>
-					<br/><br/>
-					<:depublication:delai:>
-					<div align="center">
-						<br/>
-						<select name="delai">
-							<?php 
-								$value = '#CONFIG{depublication/delai}';
-								for ($i = 1; $i <= 50; $i++) { 
-							?>
-									<option value="<?php echo $i; ?>"<?php echo (($value == $i) ? 'selected="selected"' : ''); ?> style='background-color: white'>+ <?php echo $i;?></option>
-							<?php } ?>
-							
-						</select>
-						<select name="delaiunite">
-							<option value="secondes" [(#CONFIG{depublication/delaiunite}|=={secondes}|?{'selected="selected"'})]><:depublication:delai_unite_secondes:></option>
-							<option value="minutes" [(#CONFIG{depublication/delaiunite}|=={minutes}|?{'selected="selected"'})]><:depublication:delai_unite_minutes:></option>
-							<option value="heures" [(#CONFIG{depublication/delaiunite}|=={heures}|?{'selected="selected"'})]><:depublication:delai_unite_heures:></option>
-							<option value="jours" [(#CONFIG{depublication/delaiunite}|=={jours}|?{'selected="selected"'})]><:depublication:delai_unite_jours:></option>
-							<option value="semaines" [(#CONFIG{depublication/delaiunite}|=={semaines}|?{'selected="selected"'})]><:depublication:delai_unite_semaines:></option>
-							<option value="mois" [(#CONFIG{depublication/delaiunite}|=={mois}|?{'selected="selected"'})]><:depublication:delai_unite_mois:></option>
-							<option value="annees" [(#CONFIG{depublication/delaiunite}|=={annees}|?{'selected="selected"'})]><:depublication:delai_unite_annees:></option>
-						</select>
-					</div>
 				</div>
 			</fieldset>
 			

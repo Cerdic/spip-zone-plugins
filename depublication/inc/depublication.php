@@ -31,191 +31,259 @@ include_spip('inc/plugin');         // xml function
 
 include_spip('inc/date');
 
-
-//ajoute un div de selection archive oui/non
-function inc_depublication_dist($id_objet, $type = 'articles') {
+// $id, $type = 'articles'
+function inc_depublication_dist($id, $flag, $statut, $type= 'articles', $script, $date, $date_redac='') {
 	
 	global $spip_lang_left, $spip_lang_right, $options;
-	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
-
 
 	//ne fait rien si le plugin n'est pas initialisé ie n'a pas de version
 	if (!isset($GLOBALS['meta']['depublication_base_version'])) {
 		return "";
-		exit;
 	}
 	
+	$depub_auteur = lire_config('depublication/depub_auteur');
+	if (! $depub_auteur) {
+		return "";
+	}
+	
+		switch ($type) {
+			case 'auteur_infos':
+				$date = sql_getfetsel("depublication", "spip_auteurs_depublication", "id_auteur=$id"); 
+				if ($date == '0000-00-00 00:00:00') {
+					$date = '';
+				}
+				break;
+				
+			case 'articles':
+			default : 
+				$date = sql_getfetsel("depublication", "spip_articles_depublication", "id_article=$id"); 
+				if ($date == '0000-00-00 00:00:00') {
+					$date = '';
+				}
+				break;
+		}
+	
+	
+	
+		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date, $regs)) {
+			$annee = $regs[1];
+			$mois = $regs[2];
+			$jour = $regs[3];
+			$heures = $regs[5];
+			$minutes = $regs[6];
+		} else {
+		
+			// on regarde la conf pour savoir la valeur à ajouter à la date
+			$delai = lire_config('depublication/delai');
+			$delaiunite = lire_config('depublication/delaiunite');
+			
+			$secondes = date('s');
+			$minutes = date('i');
+			$heures = date('H');
+			$jours = date('d');
+			$semaines = date('d');
+			$mois = date('m');
+			$annees = date('Y');
+			
+			switch ($delaiunite) {
+			
+				case 'secondes':
+					$secondes += $delai;
+					break;
+				
+				case 'minutes':
+					$minutes += $delai;
+					break;
+				case 'heures':
+					$heures += $delai;
+					break;
+				case 'jours':
+					$jours += $delai;
+					break;
+				case 'semaines':
+					$semaines += ($delai * 7);
+					break;
+				case 'mois':
+					$mois += $delai;
+					break;
+				case 'annees':
+					$annees += $delai;
+					break;
+			}
+			
+			$dateDelai = mktime($heures, $minutes, $secondes, $mois , $jours, $annees);
+			
+			$annee = date('Y', $dateDelai);
+			$mois = date('m', $dateDelai);
+			$jour = date('d', $dateDelai);
+			$heures = date('H', $dateDelai);
+			$minutes = date('i', $dateDelai);
+			
+		}
+		
+		
+		
+		if ($date != '') {
+			$date = 'le '.majuscules(affdate_heure($date));
+		} else {
+			$date = _T('depublication:nodate');
+		}
+	
+	include_spip('inc/autoriser');
+	if (autoriser('depublication',$type,$id,null,array('statut'=>$statut))) {
+	
+		/*$js = "size='1' class='fondl'
+			onchange=\"findObj_forcer('valider_depublication').style.visibility='visible';\"";*/
+		
+		$js = " onchange=\"findObj_forcer('valider_depublication').style.visibility='visible';\"";
+		$invite =  "<b><span class='verdana1'>"
+			. _T('texte_date_depublication_article')
+			. '</span> '
+			.  majuscules(affdate($date))
+			.  "</b>"
+			. aide('artdate');
 
-	// on récupère la date de dépublication de l'article
-	/*$result = spip_query('select depublication from spip_articles_depublication where id_article='.$id_article);
-	$row = spip_fetch_array($result);
-	if ($row['depublication']) {
-		$date = $row['depublication'];
-	} else {
-		$date = '';
-	}*/
-	
-	switch ($type) {
+
+		$idom = "depublication" . "_objet_$id";
 		
-		case 'auteur_infos':
-			$date = sql_getfetsel("depublication", "spip_auteurs_depublication", "id_auteur=$id_objet"); 
-			if ($date == '0000-00-00 00:00:00') {
-				$date = '';
-			}
-			break;
+		switch ($type) {
 			
-		case 'articles':
-		default : 
-			$date = sql_getfetsel("depublication", "spip_articles_depublication", "id_article=$id_objet"); 
-			if ($date == '0000-00-00 00:00:00') {
-				$date = '';
-			}
-			break;
+			case 'auteur_infos':
+				$bouton = bouton_block_depliable(_T('depublication:depublication_auteur')." :<span  align='center'>".$date."</span>",'ajax',$idom);
+				/*$masque = '<input type="checkbox" name="supp" id="supp" value="supp"/><label for="supp">'._T('depublication:supp_date_auteur').'</label><br/><br/>'
+					. _T('depublication:date_depub_auteur')."<br/>"
+					. afficher_jour($jour, "name='jour' id='jour' $js", true) 
+					. afficher_mois($mois, "name='mois' id='mois' $js", true)
+					. afficher_annee($annee, "name='annee' id='annee' $js")
+					. (' - '
+						. afficher_heure($heures, "name='heure' id='heure' $js")
+			      		. afficher_minute($minutes, "name='minute' id='minute' $js"))
+			  		. "&nbsp;\n";*/
+			  		
+			  	$masque =
+					 //_T('depublication:date_depub_auteur')."<br/>"
+					afficher_jour($jour, "name='jour' id='jour' $js", false)
+					. afficher_mois($mois, "name='mois' id='mois' $js", false)
+					. afficher_annee($annee, "name='annee' id='annee' $js", $debut_date_publication)
+					. (' - '
+						. afficher_heure($heures, "name='heure' id='heure' $js")
+						. afficher_minute($minutes, "name='minute' id='minute' $js"))
+					. "&nbsp;\n"
+					.(($date == _T('depublication:nodate')) ? '' : '<br/><br/><input type="checkbox" name="supp" id="supp" value="supp" '.$js.'/><label for="supp">'._T('depublication:supp_date_article').'</label>');
+			  		
+			  		
+			  		
+			  	/*$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
+					.  ajax_action_post("depublication_auteur", 
+						"$id",
+						$script,
+						"id=$id",
+						$masque,
+						_T('bouton_changer'),
+				    	   " class='fondo'", "",
+						"&id=$id")
+					.  "</div>";*/
+					
+				$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
+						.  ajax_action_post("depublication_auteur",
+							"$id",
+							$script,
+							"id=$id",
+							$masque,
+							_T('bouton_changer'),
+							" class='visible_au_chargement' id='valider_depublication' style='float: right' ", "",
+							"&id=$id")
+						.  "</div>";
+				
+
 	
-	}
-	
-	
-	
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date, $regs)) {
-		$annee = $regs[1];
-		$mois = $regs[2];
-		$jour = $regs[3];
-		$heures = $regs[5];
-		$minutes = $regs[6];
+				$res = debut_cadre_enfonce(find_in_path("img/depublication-24.png"), true, "", $bouton)
+					. debut_block_depliable($flag === 'ajax',$idom)
+					. $contenu
+					. fin_block()
+					. fin_cadre_enfonce(true);
+				
+				return ajax_action_greffe("depublication_auteur",$id, $res);
+				
+			case 'articles':
+			default : 
+				$bouton = bouton_block_depliable(_T('depublication:depublication_article')." :<span align='center'>&nbsp;&nbsp;".$date."</span>",'ajax',$idom);
+				/*$masque = '<input type="checkbox" name="supp" id="supp" value="supp"/><label for="supp">'._T('depublication:supp_date_article').'</label><br/><br/>'
+					. _T('depublication:date_depub_article')."<br/>"
+					. afficher_jour($jour, "name='jour' id='jour' $js", true) 
+					. afficher_mois($mois, "name='mois' id='mois' $js", true)
+					. afficher_annee($annee, "name='annee' id='annee' $js")
+					. (' - '
+						. afficher_heure($heures, "name='heure' id='heure' $js")
+			      		. afficher_minute($minutes, "name='minute' id='minute' $js"))
+			  		. "&nbsp;\n";
+			  		*/
+			  	$masque =
+					 //_T('depublication:date_depub_article')."<br/>"
+					afficher_jour($jour, "name='jour' id='jour' $js", false)
+					. afficher_mois($mois, "name='mois' id='mois' $js", false)
+					. afficher_annee($annee, "name='annee' id='annee' $js", $debut_date_publication)
+					. (' - '
+						. afficher_heure($heures, "name='heure' id='heure' $js")
+						. afficher_minute($minutes, "name='minute' id='minute' $js"))
+					. "&nbsp;\n"
+					.(($date == _T('depublication:nodate')) ? '' : '<br/><br/><input type="checkbox" name="supp" id="supp" value="supp" '.$js.'/><label for="supp">'._T('depublication:supp_date_article').'</label>');
+			  		
+			  	/*$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
+					.  ajax_action_post("depublication_article", 
+						"$id",
+						$script,
+						"id=$id",
+						$masque,
+						_T('bouton_changer'),
+				    	   " class='fondo'", "",
+						"&id=$id")
+					.  "</div>";*/
+				
+				$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
+						.  ajax_action_post("depublication_article",
+							"$id",
+							$script,
+							"id=$id",
+							$masque,
+							_T('bouton_changer'),
+							" class='visible_au_chargement' id='valider_depublication' style='float: right' ", "",
+							"&id=$id")
+						.  "</div>";
+
+				$res = debut_cadre_enfonce(find_in_path("img/depublication-24.png"), true, "", $bouton)
+					. debut_block_depliable($flag === 'ajax',$idom)
+					. $contenu
+					. fin_block()
+					. fin_cadre_enfonce(true);
+				
+			  	return ajax_action_greffe("depublication_article",$id, $res);
+		}
 	} else {
 	
-		// on regarde la conf pour savoir la valeur à ajouter à la date
-		$delai = lire_config('depublication/delai');
-		$delaiunite = lire_config('depublication/delaiunite');
+		switch($type) {
 		
-		$secondes = date('s');
-		$minutes = date('i');
-		$heures = date('H');
-		$jours = date('d');
-		$semaines = date('d');
-		$mois = date('m');
-		$annees = date('Y');
-		
-		switch ($delaiunite) {
-		
-			case 'secondes':
-				$secondes += $delai;
+			case 'auteur_infos':
+				$contenu = "<b>"._T('depublication:depublication_auteur')." :  <span  align='center'>".$date."</span></b>";
+				$res = debut_cadre_enfonce(find_in_path("img/depublication-24.png"), true, "", $bouton)
+					. $contenu
+					. fin_cadre_enfonce(true);
+				
 				break;
-			
-			case 'minutes':
-				$minutes += $delai;
-				break;
-			case 'heures':
-				$heures += $delai;
-				break;
-			case 'jours':
-				$jours += $delai;
-				break;
-			case 'semaines':
-				$semaines += ($delai * 7);
-				break;
-			case 'mois':
-				$mois += $delai;
-				break;
-			case 'annees':
-				$annees += $delai;
+				
+				
+			case 'articles':
+				$contenu = "<b>"._T('depublication:depublication_article')." :  <span  align='center'>".$date."</span></b>";
+				$res = debut_cadre_enfonce(find_in_path("img/depublication-24.png"), true, "", $bouton)
+					. $contenu
+					. fin_cadre_enfonce(true);
+				
 				break;
 		}
 		
-		$dateDelai = mktime($heures, $minutes, $secondes, $mois , $jours, $annees);
-		
-		$annee = date('Y', $dateDelai);
-		$mois = date('m', $dateDelai);
-		$jour = date('d', $dateDelai);
-		$heures = date('H', $dateDelai);
-		$minutes = date('i', $dateDelai);
+		return ajax_action_greffe("depublication_article",$id, $res);
 		
 	}
-	
-	
-	
-	if ($date != '') {
-		$date = 'le '.majuscules(affdate_heure($date));
-	} else {
-		$date = _T('depublication:nodate');
-	}
-
-	$js = "size='1' class='fondl'
-		onchange=\"findObj_forcer('valider_depublication').style.visibility='visible';\"";
-	
-	$idom = "depublication" . "_objet_$id";
-	
-	switch ($type) {
-		
-		case 'auteur_infos':
-			$bouton = bouton_block_depliable(_T('depublication:depublication_auteur')." :<br/><div align='center'>".$date."</div>",'ajax',$idom);
-			$masque = '<input type="checkbox" name="supp" id="supp" value="supp"/><label for="supp">'._T('depublication:supp_date_auteur').'</label><br/><br/>'
-				. _T('depublication:date_depub_auteur')."<br/>"
-				. afficher_jour($jour, "name='jour' id='jour' $js", true) 
-				. afficher_mois($mois, "name='mois' id='mois' $js", true)
-				. afficher_annee($annee, "name='annee' id='annee' $js")
-				. (' - '
-					. afficher_heure($heures, "name='heure' id='heure' $js")
-		      		. afficher_minute($minutes, "name='minute' id='minute' $js"))
-		  		. "&nbsp;\n";
-		  		
-		  	$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
-				.  ajax_action_post("depublication_auteur", 
-					"$id_objet",
-					$script,
-					"id=$id_objet",
-					$masque,
-					_T('bouton_changer'),
-			    	   " class='fondo'", "",
-					"&id=$id_objet")
-				.  "</div>";
-			
-
-	
-			$res = debut_cadre_enfonce(find_in_path("images/depublication-24.png"), true, "", $bouton)
-				. debut_block_depliable($flag === 'ajax',$idom)
-				. $contenu
-				. fin_block()
-				. fin_cadre_enfonce(true);
-			
-			return ajax_action_greffe("depublication_auteur",$id_objet, $res);
-			
-		case 'articles':
-		default : 
-			$bouton = bouton_block_depliable(_T('depublication:depublication_article')." :<br/><div align='center'>".$date."</div>",'ajax',$idom);
-			$masque = '<input type="checkbox" name="supp" id="supp" value="supp"/><label for="supp">'._T('depublication:supp_date_article').'</label><br/><br/>'
-				. _T('depublication:date_depub_article')."<br/>"
-				. afficher_jour($jour, "name='jour' id='jour' $js", true) 
-				. afficher_mois($mois, "name='mois' id='mois' $js", true)
-				. afficher_annee($annee, "name='annee' id='annee' $js")
-				. (' - '
-					. afficher_heure($heures, "name='heure' id='heure' $js")
-		      		. afficher_minute($minutes, "name='minute' id='minute' $js"))
-		  		. "&nbsp;\n";
-		  		
-		  		
-		  	$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
-				.  ajax_action_post("depublication_article", 
-					"$id_objet",
-					$script,
-					"id=$id_objet",
-					$masque,
-					_T('bouton_changer'),
-			    	   " class='fondo'", "",
-					"&id=$id_objet")
-				.  "</div>";
-			
-
-	
-			$res = debut_cadre_enfonce(find_in_path("images/depublication-24.png"), true, "", $bouton)
-				. debut_block_depliable($flag === 'ajax',$idom)
-				. $contenu
-				. fin_block()
-				. fin_cadre_enfonce(true);
-				
-		  	return ajax_action_greffe("depublication_article",$id_objet, $res);
-	}
-	
 }
 
 

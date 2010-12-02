@@ -26,16 +26,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'articles_dep' => 'Articles dépubliés',
 	'att_nouvel_etat' => 'Attention: Si vous spécifiez ici une valeur, celle-ci sera prioritaire et utilisée par rapport aux valeurs de la liste ci-dessus.',
+	'active_depub_auteur' => 'Active la gestion de la date d\'expiration sur les auteurs',
 	
 	// C
-	'configuration' => 'Etat après dépublication',
+	'configuration' => 'Etat après dépublication d\'un article',
 
 	// D
 	'description' => 'Lors de la dépublication d\'un article à la date fixée, le système change l\'etat de l\'article. Veuillez donc sélectionner l\'etat dans lequel doit être l\'article après la dépublication. Par défaut, l\'article est mis dans l\'état \'à la poubelle\'',
 	'date_depub_article' => "Veuillez sélectionner la date de dépublication de votre article",
 	'date_depub_auteur' => 'Veuillez sélectionner la date d\'expiration de l\'auteur',
-	'depublication_article' => 'Dépublication automatique',
-	'depublication_auteur' => 'Expiration automatique',
+	'depublication_article' => 'DATE DE DEPUBLICATION',
+	'depublication_auteur' => 'DATE D\'EXPIRATION',
 	'date_depub' => 'Date de dépublication',
 	'depublication_articles' => 'Dépublication',
 	'date_modif'	=> 'Date de mise à jour',
@@ -46,10 +47,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'delai_unite_semaines' => 'semaine(s)',
 	'delai_unite_mois' => 'mois',
 	'delai_unite_annees' => 'année(s)',
-	'delai' => 'Vous pouvez ici sélectionner le délai avant la dépublication d\'un article ou l\'expiration d\'un auteur. Par défaut, la valeur est de 1 mois.',
+	'delai' => 'Spécifiez ici le délai par défaut de la dépublication d\'un article ou l\'expiration d\'un auteur. Cette valeur est utilisé lorsque vous validez la dépublication d\'un article ou l\'expiration d\'un auteur sans modifier la date.',
 	'depublication' => 'Dépublication',	
 	'depublication_articles' => 'Dépublication des articles prévus',
-	
+	'default_delai' => 'Par défaut, le délai est de 1 mois',
 
 	// E
 	'expiration_auteurs' => 'Expiration des auteurs prévus',
@@ -63,6 +64,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'numero' => 'Id',
 	'nom_auteur' => 'Nom de l\'auteur',
 
+	// O
+	'options' => 'Options',
+	
 	// P
 	'prepa'=> 'en cours de rédaction',
 	'prop' => 'proposé à l\'évaluation',
@@ -78,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supp_date_article' => 'Supprimer la date de dépublication',
 	'supp_date_auteur' => 'Supprimer la date d\'expiration',
 	'statut_apres_depublication' => 'Statut après dépublication',
-	
+	'statut_apres_expiration' => 'Statut après expiration',
 	// T
 	'title_infos' => 'Liste des articles dépubliés',
 	'titre' => 'Titre de l\'article',

@@ -23,40 +23,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_depublication_list_articles_dist() {
-	global $connect_statut, $connect_toutes_rubriques, $couleur_claire, $spip_lang_right, $changer_config;
-	
-	if ($connect_statut == "0minirezo" ) {
-		if ($changer_config == 'oui') {
-			appliquer_modifs();
-		}
-		lire_metas();
-	}
+function debuplication_autoriser(){}
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	$out = $commencer_page(_T('depublication:page_zones_acces'), "configuration");
-	
-	$depub_auteur = lire_config('depublication/depub_auteur');
-	if ($depub_auteur) {
-		$out .= barre_onglets("depublication_list", "depublication");
-	}
-	
-	$contexte = array();
-	foreach($_GET as $key=>$val)
-		$contexte[$key] = $val;
-	
-	
-	$out .= debut_grand_cadre(true);
-	$out .=  recuperer_fond("prive/navigation/depublication_articles",$contexte);
-	$out .=  recuperer_fond("prive/contenu/depublication_articles",$contexte);
-	
-	$out .= debut_gauche("depublication_list_articles",true);
-	$out .= debut_droite('depublication_list_articles',true);
-	
-	$out .= fin_gauche('depublication_list_articles',true);
-	
-	$out .= fin_page();
 
-	echo $out;
+function autoriser_depublication_dist($faire, $type, $id, $qui, $opt) {
+	
+	return autoriser('modifier', $type, $id, $qui, $opt);
+	
 }
+
+
 ?>
