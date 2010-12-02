@@ -140,15 +140,15 @@ function bind_formulaire_forum(){
 		}
 	});
 }
-if (window.jQuery)(function($){
-	if (!$.cookie){
-		$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',function(){
+if (window.jQuery) jQuery(function(){
+	if (!jQuery.cookie){
+		jQuery.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',function(){
 			bind_formulaire_forum();
 		});
 	}else{
 		bind_formulaire_forum();
 	}
 	onAjaxLoad(cookie_formulaire_forum);
-}(jQuery));
+});
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 ]
