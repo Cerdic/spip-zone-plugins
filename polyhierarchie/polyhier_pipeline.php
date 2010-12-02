@@ -23,7 +23,7 @@ function polyhier_affiche_hierarchie($flux){
 			$out[] = "[->rubrique$p]";
 		if (count($out)){
 			$out = implode(', ',$out);
-			$out = _T('polyhier:label_autres_parents')." ".$out;
+			$out = (count($out) > 1) ? _T('polyhier:label_autres_parents')." ".$out : _T('polyhier:label_autre_parent')." ".$out;
 			$out = PtoBR(propre($out));
 			$flux['data'] .= "<div id='chemins_transverses'>$out</div>";
 		}

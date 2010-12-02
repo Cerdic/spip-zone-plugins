@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// L
 	'label_parents' => 'In the sections',
+	'label_autre_parent' => 'Also in the section',
 	'label_autres_parents' => 'Also in the sections',
 	
 	// M
