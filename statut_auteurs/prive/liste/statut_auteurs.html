@@ -1,0 +1,65 @@
+<div class="cadre">
+<form action="#SELF" method="post">
+<fieldset>
+<legend>Recherche des auteurs</legend>
+
+<p><label for="statut">Choisir les statuts affichés :</label><br/>
+<input type="radio" name="statut" value=""[(#ENV{statut}|=={''}|oui) checked]/> Tous
+<input type="radio" name="statut" value="6forum"[(#ENV{statut}|=={'6forum'}|oui) checked]/> Visiteur
+<input type="radio" name="statut" value="1comite"[(#ENV{statut}|=={'1comite'}|oui) checked]/> Rédacteur
+<input type="radio" name="statut" value="0minirezo"[(#ENV{statut}|=={'0minirezo'}|oui) checked]/> Administrateur
+[(#VAL|statut_auteurs_autre_statut)]
+</p>
+<p>
+<legend for="nb_resultat" class="bloc">Nombre d'auteurs affichées par page :</legend>
+<select name="nb_resultat">
+<option value="5"[(#ENV{nb_resultat}|=={'5'}|oui) selected]>5</option>
+<option value="10"[(#ENV{nb_resultat}|=={'10'}|ou{#ENV{nb_resultat}|=={''}}|oui) selected]>10</option>
+<option value="20"[(#ENV{nb_resultat}|=={'20'}|oui) selected]>20</option>
+<option value="50"[(#ENV{nb_resultat}|=={'50'}|oui) selected]>50</option>
+<option value="100"[(#ENV{nb_resultat}|=={'100'}|oui) selected]>100</option>
+<option value="200"[(#ENV{nb_resultat}|=={'200'}|oui) selected]>200</option>
+</select>
+</p>
+
+<!-- <p><legend for="tri">Trier les résultats par :</legend>
+<input type="radio" name="tri" value="id_auteur"[(#ENV{tri}|=={'id_auteur'}|oui) checked]/> id_auteur
+<input type="radio" name="tri" value="nom"[(#ENV{tri}|=={'nom'}|oui) checked]/> Nom
+<input type="radio" name="tri" value="email"[(#ENV{tri}|=={'email'}|oui) checked]/> Email
+</p>-->
+
+<p>Rechercher : <input type="text" name="recherche" value="#ENV{recherche}"/></p>
+
+<p><input type="submit" name="<:rechercher:>" value="<:rechercher:>" /></p>
+</fieldset>
+</form> 
+</div>
+<B_auteurs>
+#ANCRE_PAGINATION
+<div class='pagination tri'>
+    [(#TRI{'<',#CHEMIN{img_pack/tri_asc-16.png}|tag_img{<:gestdoc:par_tri_croissant:>}}) |]
+    [(#TRI{'>',#CHEMIN{img_pack/tri_desc-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>}}) |]
+    [(#TRI{id_auteur,<:statut_auteurs:par_id_auteur:>}) |]
+    [(#TRI{nom,<:statut_auteurs:par_nom:>}) |]
+    [(#TRI{email,<:statut_auteurs:par_email:>}) |]
+</div>
+[<p class="pagination">(#PAGINATION)</p>]
+<table>
+<tr>
+<th>ID</th>
+<th>Statut</th>
+<th>Nom</th>
+<th>Email</th>
+</tr>
+<BOUCLE_auteurs(AUTEURS){recherche ?}{statut==#ENV{statut,.*}}{tri #ENV{tri,'id_auteur'}}{pagination #ENV{nb_resultat,10}}>
+<tr>
+<td>#ID_AUTEUR</td>
+<td>[(#STATUT|traduire_statut_auteur)]</td> 
+<td><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
+<td>[<a href="mailto:(#EMAIL)">#EMAIL</a>]</td>
+</tr>
+</BOUCLE_auteurs>
+</table>
+</B_auteurs>
+<p>Il n'y a pas de résultat pour votre recherche</p>
+<//B_auteurs>

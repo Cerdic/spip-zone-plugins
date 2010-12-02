@@ -1,0 +1,32 @@
+#CACHE{0}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+  <h1>
+    <:statut_auteurs:gestion_statut:>
+  </h1>
+  <p><:statut_auteurs:gestion_statut_introduction:></p>
+</div>
+<div class="entete-formulaire">
+  <p>
+    <:statut_auteurs:statut_spip:>
+  </p>
+
+  #SET{statut_spip,(#VAL|statut_auteurs_get_statuts)}
+  <B_statut>
+  <p>
+    <:statut_auteurs:statut_personnalise:>
+  </p>
+  <ul>
+  <BOUCLE_statut(POUR){tableau #GET{statut_spip}}>
+  <li>#CLE <a href="[(#URL_ACTION_AUTEUR{supp_statut,#CLE})]" title="#CLE" onclick="return window.confirm('<:statut_auteurs:confirmer_suppression:>');">[(#CHEMIN{images/croix-rouge.gif}|balise_img{x})] Supprimer ce statut : [(#CLE|statut_auteur_get_libelle)]</a></li>
+  </BOUCLE_statut>
+  </ul>
+  </B_statut>
+  <p><statut_auteurs:aucun_statut:></p>
+  <//B_statut>
+  
+</div>
+<div class="noajax">
+#FORMULAIRE_GESTION_STATUT_AUTEUR
+</div>
+</div>

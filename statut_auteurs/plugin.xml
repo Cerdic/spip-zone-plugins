@@ -1,0 +1,49 @@
+<plugin>
+	<nom>Statut auteur personnalis&eacute;</nom>
+	<auteur>Yoann NOGUES</auteur>
+	<version>1.0</version>
+	<version_base>1.0</version_base>
+	<install>base/statut_auteurs_upgrade.php</install>
+	<etat>dev</etat>
+	<description> 
+		Permettre d ajouter des nouveaux statuts aux auteurs SPIP.
+	</description>
+	
+	<icon>images/statut_auteurs-32.png</icon>
+	<prefix>statut_auteurs</prefix>
+
+	<options>statut_auteurs_options.php</options>
+	<fonctions>statut_auteurs_fonctions.php</fonctions>
+
+	<!-- On gere les 2 cas bandeau ou pas -->
+	<bouton id='statut_auteurs' parent='bando_edition'>
+		<icone>images/statut_auteurs-16.png</icone>
+		<titre>statut_auteurs:liste_auteurs</titre>
+	</bouton>
+	<onglet id='statut_auteurs' parent='naviguer'>
+		<icone>images/statut_auteurs-24.png</icone>
+		<titre>statut_auteurs:liste_auteurs</titre>
+	</onglet>
+	
+	<!-- Bouton pour gerer les nouveaux statuts -->
+	<bouton id='gestion_statut_auteurs' parent='bando_configuration'>
+		<icone>images/statut_auteurs-16.png</icone>
+		<titre>statut_auteurs:gestion_statut_config</titre>
+	</bouton>
+	<onglet id='gestion_statut_auteurs' parent='configuration'>
+		<icone>images/statut_auteurs-24.png</icone>
+		<titre>statut_auteurs:gestion_statut_config</titre>
+	</onglet>
+
+
+<!--	<pipeline>
+		<nom>traduire_statut_auteur</nom>
+		<inclure>statut_auteurs_pipelines.php</inclure>
+	</pipeline>
+	-->
+
+	
+	<necessite id="SPIP" version="[2.1.2;]" />
+	<necessite id="spip_bonux" version="[2.2.9;]" />
+	<categorie>outil</categorie>
+</plugin>
