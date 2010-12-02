@@ -150,7 +150,12 @@ function notation_calculer_id($p){
  * <BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES ...
  */
 function balise_NOTATION_NOMBRE_VOTES_dist($p) {
-	$p->code = '$Pile[$SP][\'nombre_votes\']';
+	if (($_objet = interprete_argument_balise(1,$p))!==NULL
+		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
+		$p->code = "notation_generer_info($_id,$_objet,'nombre_votes')";
+	}
+	else
+		$p->code = rindex_pile($p, 'nombre_votes', 'notation');
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -161,7 +166,12 @@ function balise_NOTATION_NOMBRE_VOTES_dist($p) {
  * <BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES ...
  */
 function balise_NOTATION_MOYENNE_dist($p) {
-	$p->code = '$Pile[$SP][\'moyenne\']';
+	if (($_objet = interprete_argument_balise(1,$p))!==NULL
+		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
+		$p->code = "notation_generer_info($_id,$_objet,'moyenne')";
+	}
+	else
+		$p->code = rindex_pile($p, 'moyenne', 'notation');
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -172,9 +182,30 @@ function balise_NOTATION_MOYENNE_dist($p) {
  * <BOUCLE_(ARTICLES){notation}>#NOTATION_NOMBRE_VOTES ...
  */
 function balise_NOTATION_MOYENNE_PONDEREE_dist($p) {
-	$p->code = '$Pile[$SP][\'moyenne_ponderee\']';
+	if (($_objet = interprete_argument_balise(1,$p))!==NULL
+		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
+		$p->code = "notation_generer_info($_id,$_objet,'moyenne_ponderee')";
+	}
+	else
+		$p->code = rindex_pile($p, 'moyenne_ponderee', 'notation');
 	$p->interdire_scripts = false;
 	return $p;
+}
+
+function notation_generer_info($id_objet,$objet,$info){
+	static $infos = array();
+	if (!in_array($info,array('nombre_votes','moyenne','moyenne_ponderee')))
+		return '';
+
+  if (!isset($infos[$objet][$id_objet])){
+	  include_spip('inc/notation');
+	  $infos[$objet][$id_objet] = sql_fetsel(
+		  'note as moyenne,note_ponderee as moyenne_ponderee,nombre_votes',
+		  'spip_notations_objets',
+		  "objet=".sql_quote($objet)." AND id_objet=".intval($id_objet)
+	  );
+  }
+  return $infos[$objet][$id_objet][$info];
 }
 
 

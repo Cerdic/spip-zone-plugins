@@ -1,17 +1,17 @@
 <?php
 
 function notation_header_prive($flux){
-	$flux = notation_insert_head($flux);
+	$flux = notation_insert_head_css($flux);
 	return $flux;
 }
 
-function notation_insert_head($flux){
+function notation_insert_head_css($flux){
 	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/notation.v2.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
 function notation_affichage_final($flux){
-    if (strpos($flux, "'notation_note notation_note_on_load'") === false)
+	if (strpos($flux, "'notation_note notation_note_on_load'") === false)
 		return $flux;
 	$incHead = "";
 	$incHead .= "<script src='".find_in_path('javascript/jquery.MetaData.js')."' type='text/javascript'></script>\n";
