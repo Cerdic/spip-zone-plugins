@@ -42,7 +42,7 @@ function inc_depublication_dist($id, $flag, $statut, $type= 'articles', $script,
 	}
 	
 	$depub_auteur = lire_config('depublication/depub_auteur');
-	if (! $depub_auteur) {
+	if (! $depub_auteur && $type == 'auteur_infos') {
 		return "";
 	}
 	

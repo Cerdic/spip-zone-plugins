@@ -97,5 +97,3 @@ function depublication_header_prive($flux) {
 
 
 ?>
-
-

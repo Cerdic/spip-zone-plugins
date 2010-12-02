@@ -79,5 +79,3 @@ function action_depublication_article_dist() {
 }
 
 ?>
-
-
