@@ -35,7 +35,7 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
             // Insertion d'une première configuration
             if(!is_array(lire_config('doc2img'))){
 	            $cfg = array(
-	                "format_document" => "pdf",
+	                "format_document" => "pdf,bmp,tiff",
 	                "repertoire_cible" => "doc2img",
 	                "format_cible" => "png",
 	                "proportion" => "on"
@@ -49,7 +49,7 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
             //définition des paramètres de base
 			if(!is_array(lire_config('doc2img'))){
 	            $cfg = array(
-	                "format_document" => "pdf",
+	                "format_document" => "pdf,bmp,tiff",
 	                "repertoire_cible" => "doc2img",
 	                "format_cible" => "png",
 	                "proportion" => "on"

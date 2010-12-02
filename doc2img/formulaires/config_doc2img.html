@@ -16,14 +16,14 @@
                         <li class="editer_format_document[ (#ENV**{erreurs}|table_valeur{format_document}|oui)erreur]">
 		                    <label for="format_document"><:doc2img:cfg_label_format:></label>
 							<p class="explication"><:doc2img:cfg_explication_format:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{format_document})</span>]
 		                    <input type="text" name="format_document" id="format_document" value="#ENV{format_document}" class="text" />
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{format_document})</span>]
 						</li>
 						<li class="editer_resolution[ (#ENV**{erreurs}|table_valeur{resolution}|oui)erreur]">
 			                <label for="resolution"><:doc2img:cfg_label_resolution:></label>
 							<p class="explication"><:doc2img:cfg_explication_resolution:></p>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{resolution})</span>]
 			                <input type="text" name="resolution" id="resolution" value="#ENV{resolution}" class="text" style="width:5em;"/> dpi
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{resolution})</span>]
 		                </li>
 					</ul>
                 </fieldset>
@@ -34,11 +34,12 @@
                     <ul>
 		                <li class="editer_repertoire_cible[ (#ENV**{erreurs}|table_valeur{repertoire_cible}|oui)erreur]">
 			                <label for="repertoire_cible"><:doc2img:cfg_label_repertoire_sortie:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{repertoire_cible})</span>]
 			                <input type="text" name="repertoire_cible" id="repertoire_cible" value="#ENV{repertoire_cible}" class="text" />
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{repertoire_cible})</span>]
 		                </li>
 		                <li class="editer_format_cible[ (#ENV**{erreurs}|table_valeur{format_cible}|oui)erreur]">
 			                <label for="format_cible"><:doc2img:cfg_label_format_sortie:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_cible})</span>]
 			                <B_typedoc>
 			                <select name="format_cible" id="format_cible">
 			                <BOUCLE_typedoc(TYPES_DOCUMENTS) {mime_type==^image} {titre!=djvu}>
@@ -46,33 +47,32 @@
                             </BOUCLE_typedoc>
                             </select>
                             </B_typedoc>
-                            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_cible})</span>]
 		                </li>
 		                <li class="editer_largeur[ (#ENV**{erreurs}|table_valeur{largeur}|oui)erreur]">
 			                <label for="largeur"><:doc2img:cfg_label_largeur:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{largeur})</span>]
 			                <input type="text" name="largeur" id="largeur" value="#ENV{largeur}" class="text" style="width:5em;" /> px
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{largeur})</span>]
 		                </li>
 		                <li class="editer_hauteur[ (#ENV**{erreurs}|table_valeur{hauteur}|oui)erreur]">
 			                <label for="hauteur"><:doc2img:cfg_label_hauteur:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{hauteur})</span>]
 			                <input type="text" name="hauteur" id="hauteur" value="#ENV{hauteur}" class="text" style="width:5em;"/> px
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{hauteur})</span>]
 		                </li>
 						<li class="editer_compression[ (#ENV**{erreurs}|table_valeur{compression}|oui)erreur]">
 			                <label for="compression"><:doc2img:cfg_label_compression:></label>
 							<p class="explication"><:doc2img:cfg_explication_compression:></p>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{compression})</span>]
 			                <input type="text" name="compression" id="compression" value="#ENV{compression}" class="text" style="width:3em;"/> %
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{compression})</span>]
 		                </li>
 		                <li class="editer_proportion[ (#ENV**{erreurs}|table_valeur{proportion}|oui)erreur]">
 			                <label for="proportion"><:doc2img:cfg_label_proportions:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{proportion})</span>]
 			                <input type="checkbox" name="proportion" id="proportion"[(#ENV{proportion}|=={on}|oui)checked="checked"]/>
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{proportion})</span>]
 		                </li>
 		                <li class="editer_agrandir[ (#ENV**{erreurs}|table_valeur{agrandir}|oui)erreur]">
 			                <label for="agrandir"><:doc2img:cfg_label_agrandissements:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{agrandir})</span>]
 			                <input type="checkbox" name="agrandir" id="agrandir"[(#ENV{agrandir}|=={on}|oui)checked="checked"]/>
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{agrandir})</span>]
 		                </li>
                    </ul>
                 </fieldset>
@@ -83,14 +83,14 @@
 					<ul>
 						<li class="editer_conversion_auto[ (#ENV**{erreurs}|table_valeur{conversion_auto}|oui)erreur]">
 			                <label for="conversion_auto"><:doc2img:cfg_label_conversion_auto:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conversion_auto})</span>]
 			                <input type="checkbox" name="conversion_auto" id="conversion_auto"[(#ENV{conversion_auto}|=={on}|oui)checked="checked"]/>
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conversion_auto})</span>]
 		                </li>
 						<li class="editer_logo_auto[ (#ENV**{erreurs}|table_valeur{logo_auto}|oui)erreur]">
 			                <label for="logo_auto"><:doc2img:cfg_label_logo_auto:></label>
 							<p class="explication"><:doc2img:cfg_explication_logo_auto:></p>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_auto})</span>]
 			                <input type="checkbox" name="logo_auto" id="logo_auto"[(#ENV{logo_auto}|=={on}|oui)checked="checked"]/>
-			                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_auto})</span>]
 		                </li>
 					</ul>
 				</fieldset>

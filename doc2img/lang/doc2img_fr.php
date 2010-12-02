@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_autorisation' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; convertir ce document',
+	'erreur_format_document' => 'Un format de document ne peut &ecirc;tre pris en compte : @type@',
+	'erreur_formats_documents' => 'Plusieurs formats de document ne peuvent &ecirc;tre pris en compte : @types@',
 
 	// F
 	'formulaire_erreur_pas_doc' => 'Aucun document ne correspond pour cet article',

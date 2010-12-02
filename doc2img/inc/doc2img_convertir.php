@@ -23,7 +23,7 @@ function inc_doc2img_convertir($id_document) {
 
 	    $config = lire_config('doc2img');
 
-	    ecrire_config('php::doc2img/'.$id_document.'/statut','encours');
+	    //ecrire_config('php::doc2img/'.$id_document.'/statut','encours');
 
 	    //racine du site c'est a dire url_site/
 	    //une action se repere à la racine du site
@@ -75,7 +75,7 @@ function inc_doc2img_convertir($id_document) {
 	        $nb_pages = imagick_getlistsize($handle);
 	    }
 
-	    ecrire_config('php::doc2img/'.$id_document.'/pages',$nb_pages);
+	    //ecrire_config('php::doc2img/'.$id_document.'/pages',$nb_pages);
 
 	    $frame = 0;
 
@@ -142,7 +142,14 @@ function inc_doc2img_convertir($id_document) {
 	        }
 
 	        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($config['format_cible'],array('png','jpg'))){
-	        	if(($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)){
+	        	if(
+	        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
+	        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
+	        	){
+	        		if(is_numeric($id_vignette)){
+	        			spip_log('on supprime '.$id_vignette,'test');
+	        			sql_delete('spip_documents','id_document='.intval($id_vignette));
+	        		}
 		        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 					$x = $ajouter_documents($document['cible_url']['absolute'].$document['frame'], $document['cible_url']['absolute'].$document['frame'],
 							    'document', $id, 'vignette', $id_document, $actifs);
@@ -167,7 +174,7 @@ function inc_doc2img_convertir($id_document) {
 
 	    // libération du verrou
 	    spip_fclose_unlock($fp);
-	    ecrire_config('php::doc2img/'.$id_document.'/statut','ok');
+	    //ecrire_config('doc2img/'.$id_document.'/statut','ok');
 
 	    spip_log($id_document." document ok",'doc2img');
 

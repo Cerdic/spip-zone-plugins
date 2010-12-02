@@ -1,8 +1,8 @@
 <plugin>
 	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
 	<auteur>Camille Lafitte</auteur>
-	<version>0.92</version>
-	<etat>dev</etat>
+	<version>1.0</version>
+	<etat>stable</etat>
     <description><multi>
     	[fr]Ce plugin permet de convertir &#224; la vol&#232;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle.
 		[en]This plugin will convert on the fly pdf, tiff ... documents in image(s). These images can then be exploited via a loop.
