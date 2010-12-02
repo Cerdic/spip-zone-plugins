@@ -1,0 +1,59 @@
+<!-- autoriser=webmestre -->
+<!-- nom=qrcode -->
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend><:qrcode:options:></legend>
+		<table>
+			<tr>
+				<th><label for="taille"><:qrcode:taille:></label></th>
+				<td><select name="taille">
+					<option value=""[(#ENV{taille}|=={''}|?{' selected'})]>non configuré</option>
+					<option value="1"[(#ENV{taille}|=={1}|?{' selected'})]>1 pixel</option>
+					<option value="2"[(#ENV{taille}|=={2}|?{' selected'})]>2 pixels</option>
+					<option value="3"[(#ENV{taille}|=={3}|?{' selected'})]>3 pixels</option>
+					<option value="4"[(#ENV{taille}|=={4}|?{' selected'})]>4 pixels</option>
+					<option value="5"[(#ENV{taille}|=={5}|?{' selected'})]>5 pixels</option>
+					<option value="6"[(#ENV{taille}|=={6}|?{' selected'})]>6 pixels</option>
+					<option value="7"[(#ENV{taille}|=={7}|?{' selected'})]>7 pixels</option>
+					<option value="8"[(#ENV{taille}|=={8}|?{' selected'})]>8 pixels</option>
+					<option value="9"[(#ENV{taille}|=={9}|?{' selected'})]>9 pixels</option>
+					<option value="10"[(#ENV{taille}|=={10}|?{' selected'})]>10 pixels</option>
+				</select></td>
+				<td><:qrcode:taille_aide:></td>
+			</tr>
+			<tr>
+				<th><label for="ecc"><:qrcode:ecc:></label></th>
+				<td><select name="ecc">
+					<option value=""[(#ENV{ecc}|=={''}|?{' selected'})]>non configuré</option>
+					<option value="L"[(#ENV{ecc}|=={'L'}|?{' selected'})]>&nbsp;7%</option>
+					<option value="M"[(#ENV{ecc}|=={'M'}|?{' selected'})]>15%</option>
+					<option value="Q"[(#ENV{ecc}|=={'Q'}|?{' selected'})]>25%</option>
+					<option value="H"[(#ENV{ecc}|=={'H'}|?{' selected'})]>30%</option>
+				</select></td>
+				<td><:qrcode:ecc_aide:></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="checkbox" name="documents"[(#ENV{documents}|?{' checked'})]/><:qrcode:utiliser_pour_documents_joints:></td>
+			</tr>
+			<tr>
+				<th><label for="css"><:qrcode:css:></label></th>
+				<td><input type="text" name="css" value="#ENV{css}"/></td>
+				<td><:qrcode:css_aide:></td>
+			</tr>
+			<tr>
+				<th><label for="style"><:qrcode:style:></label></th>
+				<td><input type="text" name="style" value="#ENV{style}"/></td>
+				<td><:qrcode:style_aide:></td>
+			</tr>
+		</table>
+
+	</fieldset>
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</div></form>
