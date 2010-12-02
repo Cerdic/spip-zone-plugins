@@ -20,6 +20,7 @@
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.3;2.2.0-dev]" />
 	<necessite id="bando" version="[1.1.5;]" />
+	<categorie>maintenance</categorie>
 </plugin>
 <plugin spip='[2.2.0-dev;]'>
 	<nom>minibando</nom>
@@ -42,4 +43,5 @@
 		<inclure>minibando_pipelines.php</inclure>
 	</pipeline>
 	<utilise id="stats" version="[0.1.1;)" />
+	<categorie>maintenance</categorie>
 </plugin>
