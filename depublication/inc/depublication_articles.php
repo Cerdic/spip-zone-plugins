@@ -32,7 +32,7 @@ include_spip('inc/plugin');         // xml function
 include_spip('inc/date');
 
 // $id, $type = 'articles'
-function inc_depublication_dist($id, $flag, $statut, $type= 'articles', $script, $date, $date_redac='') {
+function inc_depublication_articles_dist($id, $flag, $statut, $type= 'articles', $script, $date, $date_redac='') {
 	
 	global $spip_lang_left, $spip_lang_right, $options;
 
@@ -41,27 +41,11 @@ function inc_depublication_dist($id, $flag, $statut, $type= 'articles', $script,
 		return "";
 	}
 	
-	$depub_auteur = lire_config('depublication/depub_auteur');
-	if (! $depub_auteur && $type == 'auteur_infos') {
-		return "";
-	}
-	
-		switch ($type) {
-			case 'auteur_infos':
-				$date = sql_getfetsel("depublication", "spip_auteurs_depublication", "id_auteur=$id"); 
-				if ($date == '0000-00-00 00:00:00') {
-					$date = '';
-				}
-				break;
-				
-			case 'articles':
-			default : 
+
 				$date = sql_getfetsel("depublication", "spip_articles_depublication", "id_article=$id"); 
 				if ($date == '0000-00-00 00:00:00') {
 					$date = '';
 				}
-				break;
-		}
 	
 	
 	
@@ -130,83 +114,19 @@ function inc_depublication_dist($id, $flag, $statut, $type= 'articles', $script,
 		}
 	
 	include_spip('inc/autoriser');
+
 	if (autoriser('depublication',$type,$id,null,array('statut'=>$statut))) {
 	
 		/*$js = "size='1' class='fondl'
 			onchange=\"findObj_forcer('valider_depublication').style.visibility='visible';\"";*/
 		
-		$js = " onchange=\"findObj_forcer('valider_depublication').style.visibility='visible';\"";
-		$invite =  "<b><span class='verdana1'>"
-			. _T('texte_date_depublication_article')
-			. '</span> '
-			.  majuscules(affdate($date))
-			.  "</b>"
-			. aide('artdate');
-
-
+		if ($date != _T('depublication:nodate')) {
+			$js = " onchange=\"findObj_forcer('valider_depublication').style.visibility='visible';\"";
+		}
+		
 		$idom = "depublication" . "_objet_$id";
 		
-		switch ($type) {
-			
-			case 'auteur_infos':
-				$bouton = bouton_block_depliable(_T('depublication:depublication_auteur')." :<span  align='center'>".$date."</span>",'ajax',$idom);
-				/*$masque = '<input type="checkbox" name="supp" id="supp" value="supp"/><label for="supp">'._T('depublication:supp_date_auteur').'</label><br/><br/>'
-					. _T('depublication:date_depub_auteur')."<br/>"
-					. afficher_jour($jour, "name='jour' id='jour' $js", true) 
-					. afficher_mois($mois, "name='mois' id='mois' $js", true)
-					. afficher_annee($annee, "name='annee' id='annee' $js")
-					. (' - '
-						. afficher_heure($heures, "name='heure' id='heure' $js")
-			      		. afficher_minute($minutes, "name='minute' id='minute' $js"))
-			  		. "&nbsp;\n";*/
-			  		
-			  	$masque =
-					 //_T('depublication:date_depub_auteur')."<br/>"
-					afficher_jour($jour, "name='jour' id='jour' $js", false)
-					. afficher_mois($mois, "name='mois' id='mois' $js", false)
-					. afficher_annee($annee, "name='annee' id='annee' $js", $debut_date_publication)
-					. (' - '
-						. afficher_heure($heures, "name='heure' id='heure' $js")
-						. afficher_minute($minutes, "name='minute' id='minute' $js"))
-					. "&nbsp;\n"
-					.(($date == _T('depublication:nodate')) ? '' : '<br/><br/><input type="checkbox" name="supp" id="supp" value="supp" '.$js.'/><label for="supp">'._T('depublication:supp_date_article').'</label>');
-			  		
-			  		
-			  		
-			  	/*$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
-					.  ajax_action_post("depublication_auteur", 
-						"$id",
-						$script,
-						"id=$id",
-						$masque,
-						_T('bouton_changer'),
-				    	   " class='fondo'", "",
-						"&id=$id")
-					.  "</div>";*/
-					
-				$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
-						.  ajax_action_post("depublication_auteur",
-							"$id",
-							$script,
-							"id=$id",
-							$masque,
-							_T('bouton_changer'),
-							" class='visible_au_chargement' id='valider_depublication' style='float: right' ", "",
-							"&id=$id")
-						.  "</div>";
-				
-
-	
-				$res = debut_cadre_enfonce(find_in_path("img/depublication-24.png"), true, "", $bouton)
-					. debut_block_depliable($flag === 'ajax',$idom)
-					. $contenu
-					. fin_block()
-					. fin_cadre_enfonce(true);
-				
-				return ajax_action_greffe("depublication_auteur",$id, $res);
-				
-			case 'articles':
-			default : 
+		
 				$bouton = bouton_block_depliable(_T('depublication:depublication_article')." :<span align='center'>&nbsp;&nbsp;".$date."</span>",'ajax',$idom);
 				/*$masque = '<input type="checkbox" name="supp" id="supp" value="supp"/><label for="supp">'._T('depublication:supp_date_article').'</label><br/><br/>'
 					. _T('depublication:date_depub_article')."<br/>"
@@ -241,13 +161,13 @@ function inc_depublication_dist($id, $flag, $statut, $type= 'articles', $script,
 					.  "</div>";*/
 				
 				$contenu = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
-						.  ajax_action_post("depublication_article",
+						.  ajax_action_post("depublication_articles",
 							"$id",
 							$script,
 							"id=$id",
 							$masque,
 							_T('bouton_changer'),
-							" class='visible_au_chargement' id='valider_depublication' style='float: right' ", "",
+							(($date == _T('depublication:nodate')) ? '' : " class='visible_au_chargement'")." id='valider_depublication' style='float: right' ", "",
 							"&id=$id")
 						.  "</div>";
 
@@ -257,31 +177,17 @@ function inc_depublication_dist($id, $flag, $statut, $type= 'articles', $script,
 					. fin_block()
 					. fin_cadre_enfonce(true);
 				
-			  	return ajax_action_greffe("depublication_article",$id, $res);
-		}
+			  	return ajax_action_greffe("depublication_articles",$id, $res);
+		
 	} else {
 	
-		switch($type) {
-		
-			case 'auteur_infos':
-				$contenu = "<b>"._T('depublication:depublication_auteur')." :  <span  align='center'>".$date."</span></b>";
-				$res = debut_cadre_enfonce(find_in_path("img/depublication-24.png"), true, "", $bouton)
-					. $contenu
-					. fin_cadre_enfonce(true);
-				
-				break;
-				
-				
-			case 'articles':
 				$contenu = "<b>"._T('depublication:depublication_article')." :  <span  align='center'>".$date."</span></b>";
 				$res = debut_cadre_enfonce(find_in_path("img/depublication-24.png"), true, "", $bouton)
 					. $contenu
 					. fin_cadre_enfonce(true);
-				
-				break;
-		}
+				return ajax_action_greffe("depublication_articles",$id, $res);
 		
-		return ajax_action_greffe("depublication_article",$id, $res);
+		
 		
 	}
 }

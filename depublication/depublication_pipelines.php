@@ -30,18 +30,18 @@ function depublication_execution($flux) {
 		//la page articles est demandée
 		case "articles" :
 			//charge les fonctions necessaire
-			include_once('inc/depublication.php');
+			include_once('inc/depublication_articles.php');
 			$id_article = $flux['args']['id_article'];
 			//recupere le complement d'affichage
-			$flux['data'] .= inc_depublication_dist($id_article,$flag, $connect_statut);
+			$flux['data'] .= inc_depublication_articles_dist($id_article,$flag, $connect_statut);
 			break;
 			
 		case "auteur_infos" :
 			//charge les fonctions necessaire
-			include_once('inc/depublication.php');
+			include_once('inc/depublication_auteurs.php');
 			$id_auteur = $flux['args']['id_auteur'];
 			//recupere le complement d'affichage
-			$flux['data'] .= inc_depublication_dist($id_auteur,$flag ,$connect_statut,'auteur_infos');
+			$flux['data'] .= inc_depublication_auteurs_dist($id_auteur,$flag ,$connect_statut);
 			break;
 			
 		default :

@@ -1,6 +1,6 @@
 <?php
 /******************************************************************************************
- * Dépublication permet de dépublier un article à une date donnée.						  *
+ * Dépublication permet de dépublier un article, un auteur à une date donnée.			  *
  * Copyright (C) 2005-2010 Nouveaux Territoires support<at>nouveauxterritoires.fr		  *
  * http://www.nouveauxterritoires.fr							    					  *
  *                                                                                        *
@@ -21,11 +21,11 @@
  * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   *
  ******************************************************************************************/
 
-function action_depublication_article_dist() {
+function action_depublication_auteurs_dist() {
 
-	// on sauvegarde en base la date de dépublication dans la table spip_articles_depublication
+	// on sauvegarde en base la date de dépublication dans la table spip_auteurs_depublication
 	
-	$id_article = _request("arg");
+	$id_auteur = _request("arg");
 	
 	$jour = _request('jour');
 	
@@ -45,35 +45,35 @@ function action_depublication_article_dist() {
 	echo "annee : ", $annee, "<br/>";
 	echo "heures : ", $heures, "<br/>";
 	echo "minutes : ", $minutes, "<br/>";
-	echo "id_article : ", $id_article, "<br/>";
+	echo "id_auteur : ", $id_auteur, "<br/>";
 	
 	*/
-	//sql_delete("spip_articles_depublication","id_article=$id_article");
+	//sql_delete("spip_auteurs_depublication","id_auteur=$id_auteur");
 	
 	if ($jour != '00' && $mois != '' && $annee != '' && $supp!='supp') {
 		
-		$statut = sql_getfetsel("statut","spip_articles","id_article=$id_article");
+		$statut = sql_getfetsel("statut","spip_auteurs","id_auteur=$id_auteur");
 		
-		$id_art_depub = sql_getfetsel("id_art_depub","spip_articles_depublication","id_article=$id_article");
-		if ($id_art_depub) {
-			$id = sql_updateq("spip_articles_depublication", array(
+		$id_auteur_depublication = sql_getfetsel("id_auteur_depublication","spip_auteurs_depublication","id_auteur=$id_auteur");
+		if ($id_auteur_depublication) {
+			$id = sql_updateq("spip_auteurs_depublication", array(
 				"depublication"	=> $depublication,
-				"id_article"	=> $id_article, 
+				"id_auteur"	=> $id_auteur, 
 				"maj"			=> "NOW()",
 				"statut" 	=> $statut),
-				"id_art_depub=$id_art_depub");
+				"id_auteur_depublication=$id_auteur_depublication");
 		} else {
-			$id = sql_insertq("spip_articles_depublication", array(
-				"id_article"	=> $id_article, 
+			$id = sql_insertq("spip_auteurs_depublication", array(
+				"id_auteur"	=> $id_auteur, 
 				"depublication"	=> $depublication,
 				"maj"			=> "NOW()",
 				"statut" 	=> $statut));
 		}
 	} else if ($supp == 'supp') {
-		$id = sql_updateq("spip_articles_depublication", array(
+		$id = sql_updateq("spip_auteurs_depublication", array(
 			"depublication"	=> '0000-00-00 00:00:00',
 			"maj"			=> "NOW()"),
-			"id_article=$id_article");
+			"id_auteur=$id_auteur");
 		
 	}
 }

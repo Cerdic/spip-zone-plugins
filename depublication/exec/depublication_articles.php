@@ -24,11 +24,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function exec_depublication_article_dist() {
+function exec_depublication_articles_dist() {
 
 	$id = intval(_request('id'));
 	
-	$depublication = charger_fonction('depublication', 'inc');
+	$depublication = charger_fonction('depublication_articles', 'inc');
 	
 	
 	include_spip('inc/actions');
