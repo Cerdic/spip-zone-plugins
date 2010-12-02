@@ -153,11 +153,11 @@ function balise_NOTATION_NOMBRE_VOTES_dist($p) {
 	if (($_objet = interprete_argument_balise(1,$p))!==NULL
 		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
 		$p->code = "notation_generer_info($_id,$_objet,'nombre_votes')";
+		$p->interdire_scripts = false;
+		return $p;
 	}
 	else
-		$p->code = rindex_pile($p, 'nombre_votes', 'notation');
-	$p->interdire_scripts = false;
-	return $p;
+		return rindex_pile($p, 'nombre_votes', 'notation');
 }
 
 /**
@@ -169,11 +169,11 @@ function balise_NOTATION_MOYENNE_dist($p) {
 	if (($_objet = interprete_argument_balise(1,$p))!==NULL
 		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
 		$p->code = "notation_generer_info($_id,$_objet,'moyenne')";
+		$p->interdire_scripts = false;
+		return $p;
 	}
 	else
-		$p->code = rindex_pile($p, 'moyenne', 'notation');
-	$p->interdire_scripts = false;
-	return $p;
+		return rindex_pile($p, 'moyenne', 'notation');
 }
 
 /**
@@ -185,11 +185,11 @@ function balise_NOTATION_MOYENNE_PONDEREE_dist($p) {
 	if (($_objet = interprete_argument_balise(1,$p))!==NULL
 		AND ($_id = interprete_argument_balise(2,$p))!==NULL) {
 		$p->code = "notation_generer_info($_id,$_objet,'moyenne_ponderee')";
+		$p->interdire_scripts = false;
+		return $p;
 	}
 	else
-		$p->code = rindex_pile($p, 'moyenne_ponderee', 'notation');
-	$p->interdire_scripts = false;
-	return $p;
+		return rindex_pile($p, 'moyenne_ponderee', 'notation');
 }
 
 function notation_generer_info($id_objet,$objet,$info){
