@@ -65,7 +65,7 @@ function depublication_verifier_base() {
 			
 			spip_log('Tables du plugin Depublication correctement passsées en version 0.8','depublication');
 			ecrire_meta('depublication_base_version', $current_version = "0.8");
-			ecrire_meta('depublication_version', "1.0");
+			ecrire_meta('depublication_version', "1.0.2");
 		}
 	}	
 }
