@@ -8,6 +8,18 @@
 	<description>
 		Plugins de saisie d'objets de type actualites
 		Ce plugin propose un nouvel objet pour SPIP.
+		Par défaut, on ne peut que : 
+		
+		- donner un titre, 
+		- choisir une rubrique et 
+		- modifier le statut d'une actualité.
+		
+		La configuration des champs d'une actualité devra être faite à l'aide du plugin champs extra 2, il vous appartient donc de choisir les champs que vous souhaitez faire apparaître lors de l'ajout d'une actualité.
+
+		A l'aide des fichiers de ce plugin, on peut alors aisément créer d'autres types d'objets (livres, bonsplans, astuces,...). 
+		Pour ce faire, remplacer toutes les occurences du terme "actualite" par votre nouvel objet, aussi bien pour le nom des fichiers que pour leur contenu, en prenant soin de respecter la case (cas des boucles en majuscules).
+
+		Ainsi, à chaque nouvel objet, le plugin champs extra 2 permettra d'associer des champs bien différents.
 	</description>
 	<lien></lien>
 	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
