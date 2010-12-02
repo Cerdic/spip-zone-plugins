@@ -25,6 +25,8 @@ function action_doc2img_convert_dist(){
     if ($id_document = intval($arg)) {
     	$convertir = charger_fonction('doc2img_convertir','inc');
     	$convertir($id_document);
+    	include_spip('inc/invalideur');
+    	suivre_invalideur("id='id_document/$id_document'");
     }
 
     $redirect = _request('redirect');
