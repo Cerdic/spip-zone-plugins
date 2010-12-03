@@ -133,7 +133,7 @@ function miroirsyndic_miroir($force_refresh = false) {
 		. (defined('_MIROIR_ID_SYNDIC')?" AND ".sql_in('src.id_syndic',explode(',',_MIROIR_ID_SYNDIC)):''),
 		'',
 		// ORDER BY
-		'maj DESC LIMIT 200'
+		's.maj DESC LIMIT 200'
 		);
 
 	$peupler_article = charger_fonction('peupler_article','miroir');
