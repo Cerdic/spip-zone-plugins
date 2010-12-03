@@ -74,7 +74,7 @@
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
                                          class="#GET{cssbox}"
                                          rel="#GET{cssbox}"
-                                         title="[(#TITRE|supprimer_numero|attribut_html)]"
+                                         [(#CONFIG{sjcycle/tooltip}|=={on}|non) title="[(#TITRE|supprimer_numero|attribut_html)]"]
                                          style="display:block;padding:0px;margin:0px;">
          ]
          [(#GET{img_background}|=={'transparent'}|oui)
