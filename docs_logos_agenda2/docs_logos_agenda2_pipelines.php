@@ -7,7 +7,7 @@ function docs_logos_agenda2_affiche_gauche($flux){
 		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
 		AND $type = objet_type($table)
 		AND $id_table_objet = id_table_objet($type)
-		AND ($id = intval($flux['args'][$id_table_objet])){
+		AND $id = intval($flux['args'][$id_table_objet])){
 		if ($id_evenement = $flux['args']['id_evenement']) {
 		$GLOBALS['logo_libelles']['id_evenement'] = _T('docs_logos_agenda2:logo_evenement');
 		$iconifier = charger_fonction('iconifier', 'inc');
