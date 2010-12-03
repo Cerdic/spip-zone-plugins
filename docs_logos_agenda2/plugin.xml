@@ -8,10 +8,10 @@
 	</multi>
 	</nom>
 	<auteur>Guy Cesaro</auteur>
-	<version>1.1</version>
+	<version>1.2</version>
 	<prefix>docs_logos_agenda2</prefix>
 	<icon>img/logos_docs_evenement.png</icon>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>
 	<multi>
 	[fr]Des documents et logos sur les &eacute;v&egrave;nements d&#39;Agenda 2
