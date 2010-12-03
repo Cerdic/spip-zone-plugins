@@ -9,7 +9,7 @@
 	</description>
 	<lien></lien>
 	<licence>GPL</licence>
-	<icon></icon>
+	<icon>images/minibando-64.png</icon>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>minibando_pipelines.php</inclure>
@@ -33,7 +33,7 @@
 	</description>
 	<lien></lien>
 	<licence>GPL</licence>
-	<icon></icon>
+	<icon>images/minibando-64.png</icon>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>minibando_pipelines.php</inclure>
