@@ -11,7 +11,7 @@ function googleanalytics_insert_head($flux){
 	$flux .= '
 <script type="text/javascript">
 	var _gaq = _gaq || [];
-	_gaq.push(["_setAccount", "UA-823028-18"]);
+	_gaq.push(["_setAccount", "'.$id_google.'"]);
 	_gaq.push(["_trackPageview"]);
 
 	(function() {
