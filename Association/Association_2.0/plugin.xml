@@ -26,11 +26,11 @@
 	
 	<pipeline>
 		<nom>header_prive</nom>
-		<action>header_prive</action>		
 	</pipeline>
 	
 	<pipeline>
 		<nom>post_edition</nom>
+		<inclure>inc/post_edition.php</inclure>
 	</pipeline>
 	
 	<categorie>divers</categorie>
