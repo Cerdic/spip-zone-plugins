@@ -84,8 +84,7 @@ function exec_comptes_args($annee, $vu, $imputation, $debut)
 
 	//TABLEAU
 	$max_par_page = 30;
-	$limit = intval(_request('debut')) . "," . $max_par_page;
-	$table = comptes_while($where, $limit);
+	$table = comptes_while($where, intval($debut) . "," . $max_par_page);
 
 	if ($table) {
 
