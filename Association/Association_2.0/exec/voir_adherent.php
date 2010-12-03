@@ -30,6 +30,11 @@ function exec_voir_adherent(){
 		$nom_famille=$data['nom_famille'];
 		$prenom=$data['prenom'];
 		$validite=$data['validite'];
+		$adresse = $data['adresse'];
+		$cp = $data['code_postal'];
+		$ville = $data['ville'];
+		$telephone = $data["telephone"];
+  		$mobile = $data["mobile"];
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
@@ -51,8 +56,12 @@ function exec_voir_adherent(){
 			  "\">" .
 			  $nom .
 			  "</a>";
-		}
-		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', $nom, "</div>\n";
+
+			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresse . '<br />' . $cp . ' ' . $ville . '<br/>' . $telephone . '<br />' . $mobile .  "</div>\n";
+
+		} else $coord = '';
+
+		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', $nom, "</div>\n", $coord;
 
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		 echo fin_boite_info(true);
