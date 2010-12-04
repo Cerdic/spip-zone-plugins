@@ -33,8 +33,7 @@ function minibando($boutons, $contexte = array()) {
                  . "<a href='$url' id='bando1_$page'>"
                  . _T($detail->libelle)
                  . "</a>";
-                if(!$first)
-                	$res .= "<span></span>";
+               	$res .= "<span></span>";
                	$res .= $bulle_accueil;
                 if($first) {
                 	$res .= "<li class='minibando_sep'>&nbsp;</li>";
