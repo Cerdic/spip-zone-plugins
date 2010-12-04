@@ -7,7 +7,7 @@ function minibando_outils_rapides($boutons, $contexte = array()){
 
 	// la barre de raccourcis rapides
 	if (isset($boutons['outils_rapides']))
-			$res .= "<ul><li><p>Cr&eacute;er</p></li>"
+			$res .= "<ul><li><p>"._T('minibando:titre_outils_rapides')."</p></li>"
 				. bando_lister_sous_menu($boutons['outils_rapides']->sousmenu,$contexte,'bouton',true)
 				. "</ul>";
 

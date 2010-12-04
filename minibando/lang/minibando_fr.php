@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mode_inclure' => 'Mode inclure',
 	
 	'titre_debug' => 'Debug',
-	'titre_outils_rapides' => 'Cr&eacute;er',
+	'titre_outils_rapides' => 'Cr&eacute;ation',
 
 );
 
