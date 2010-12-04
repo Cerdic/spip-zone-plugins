@@ -259,7 +259,7 @@ function cs_header_hit(&$flux, $type, $suffixe='') {
 	}
 	switch($type) {
 		case 'js': $flux .= '<script src="'.$nom.'" type="text/javascript"></script>'; break;
-		case 'css': $flux .= '<link rel="stylesheet" href="'.direction_css($nom).'" type="text/css" media="projection, screen" />'; break;
+		case 'css': $flux .= '<link rel="stylesheet" href="'.direction_css($nom).'" type="text/css" media="all" />'; break;
 	}
 }
 
