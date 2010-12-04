@@ -28,12 +28,14 @@ function minibando($boutons, $contexte = array()) {
              ($detail->libelle AND is_array($detail->sousmenu) AND count($detail->sousmenu))
              OR ($detail->libelle AND $detail->url AND $detail->url!='navigation')) {
                 $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg,$contexte);
+                $bulle_accueil = ($detail->url == 'accueil') ? "<ul><li><p>" . _T('public:espace_prive') . "</p></li></ul>" : '';
                 $res .= "<li$first>"
                  . "<a href='$url' id='bando1_$page'>"
                  . _T($detail->libelle)
                  . "</a>";
                 if(!$first)
                 	$res .= "<span></span>";
+               	$res .= $bulle_accueil;
                 if($first) {
                 	$res .= "<li class='minibando_sep'>&nbsp;</li>";
                 	$res .= minibando_outils_rapides($boutons, $contexte);
