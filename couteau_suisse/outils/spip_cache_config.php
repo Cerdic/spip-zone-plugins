@@ -9,7 +9,6 @@ function outils_spip_cache_config_dist() {
 // Ajout de l'outil 'spip_cache'
 add_outil(array(
 	'id' => 'spip_cache',
-	'code:options' => defined('_SPIP19300')?'%%compacte_css%%%%compacte_js%%':'',
 	'code:spip_options' => "%%radio_desactive_cache"
 		.(defined('_SPIP19300')?'4%%%%compacte_prive%%%%compacte_tout':'3')
 		."%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%derniere_modif_invalide%%",
@@ -88,13 +87,11 @@ array(
 	'externe' => "\$GLOBALS['meta']['auto_compress_css']=='oui'",
 	// action lors d'un changement de valeur
 	'action' => "ecrire_meta('auto_compress_css', %s?'oui':non);",
-	'code' => '',
 ), array(
 	'nom' => 'compacte_js',
 	'check' => 'couteauprive:compacte_js',
 	'externe' => "\$GLOBALS['meta']['auto_compress_js']=='oui'",
 	'action' => "ecrire_meta('auto_compress_js', %s?'oui':non);",
-	'code' => '',
 ));
 
 }
