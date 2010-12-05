@@ -14,7 +14,7 @@
 		<:auteur:>((#ENV{id_auteur}))</a><span></span><ul><li><p><:bouton_modifier:></p></li></ul></li>]
 	<li id="minibando_bouton_recalcul"><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" id="var_mode">
 		<:admin_recalculer:>[(#ENV{use_cache})]</a><span></span><ul><li><p><:admin_recalculer:></p></li></ul></li>
-	<!--extra-->[<a href="(#ENV{preview})" id="preview"><:previsualisation:></a>]
+	<!--extra-->[<a href="(#ENV{preview})" id="preview"><:previsualisation:></a>][(#SESSION{statut}|=={0minirezo}|oui)
 	<li class="minibando_sep">&nbsp;</li>
 	<li id="minibando_bouton_debug"><a href="#">
 		<:minibando:titre_debug:></a><span></span><ul><li><p><:minibando:titre_debug:></p></li>[
@@ -22,5 +22,5 @@
 	<li><a href="(#ENV{analyser})" id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a></li>]
 		<li><a href="[(#SELF|parametre_url{var_mode,debug})]"><:minibando:mode_debug:></a></li>
 		<li><a href="[(#SELF|parametre_url{var_profile,1})]"><:minibando:mode_profile:></a></li>
-		<li><a href="[(#SELF|parametre_url{var_mode,inclure})]"><:minibando:mode_inclure:></a></li></ul></li>
+		<li><a href="[(#SELF|parametre_url{var_mode,inclure})]"><:minibando:mode_inclure:></a></li></ul></li>]
 </ul></div>
