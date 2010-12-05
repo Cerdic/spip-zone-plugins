@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 // -- Slogan de la boussole et des sites de la galaxie SPIP
-	'slogan_boussole_spip' => 'Un navigateur pour traverser la galaxie SPIP',
+	'slogan_boussole_spip' => 'Ne soyez plus perdu dans la galaxie SPIP !',
 	'slogan_site_spip_blog' => 'Du logiciel libre et de la tendresse',
 	'slogan_site_spip_contrib' => 'L\'espace des contributions &agrave; SPIP',
 	'slogan_site_spip_core' => 'La zone de d&eacute;veloppement des version de SPIP',
@@ -131,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_party' => 'L\'agenda des ap&eacute;ros et autres rencontres SPIP',
 	'slogan_site_spip_plugin' => 'L\'annuaire des plugins SPIP',
 	'slogan_site_spip_programmer' => 'La documentation des d&eacute;veloppeurs SPIP',
-	'slogan_site_spip_sedna' => 'Toute l\'actualit&eacute; de la galaxie SPIP sur un fil... RSS',
+	'slogan_site_spip_sedna' => 'Toute l\'actualit&eacute; de la galaxie SPIP',
 	'slogan_site_spip_test' => 'Tester l\'installation et la mise en &oelig;uvre d’un site SPIP',
 	'slogan_site_spip_twit' => 'Le r&eacute;seau social de la communaut&eacute; SPIP',
 	'slogan_site_spip_user' => 'La liste d\'entraide des utilisateurs de SPIP',
