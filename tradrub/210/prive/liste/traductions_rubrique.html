@@ -20,13 +20,19 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
 				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|?{
-					[<img src="(#CHEMIN{images/langues-12.gif})" alt="" />],
-					[<img src="(#CHEMIN{images/langues-off-12.gif})" alt="" />]
+					[<img src="(#CHEMIN{images/langues-12.gif})" alt="" class="no_action" />],
+					[(#AUTORISER{modifier,rubrique,#ID_TRAD}|?{
+						[(#BOUTON_ACTION{
+							[(#CHEMIN{images/langues-off-12.gif}
+								|balise_img)],
+								[(#URL_ACTION_AUTEUR{referencer_traduction_rubrique,rubrique/#ID_TRAD/#ID_RUBRIQUE,#SELF})],ajax,'',<:tradrub:definir_comme_rubrique_de_reference:>})],
+						[<img src="(#CHEMIN{images/langues-off-12.gif})" alt="" class="no_action" />]
+					})]
 				})]
 				[(#LOGO_RUBRIQUE||image_reduire{20,26})]
 				[(#EXPOSE|?{
-					[(#RANG). ]#TITRE,
-					<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" hreflang="#LANG">[(#RANG). ]#TITRE</a>
+					[(#RANG). ][(#TITRE|supprimer_numero)],
+					<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" hreflang="#LANG">[(#RANG). ][(#TITRE|supprimer_numero)]</a>
 				})]
 				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|oui)
 					(<:tradrub:rubrique_de_reference:>)

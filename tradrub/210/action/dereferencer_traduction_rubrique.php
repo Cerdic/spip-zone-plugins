@@ -10,7 +10,7 @@ function action_dereferencer_traduction_rubrique_dist() {
 			include_spip('inc/minipres');
 			minipres('Arguments incompris');
 		} else {
-			spip_log('Arguments incompris dans action deferencer_traduction_rubrique');
+			spip_log('Arguments incompris dans action dereferencer_traduction_rubrique');
 			return false;
 		}
 	}
