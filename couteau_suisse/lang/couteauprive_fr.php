@@ -913,6 +913,12 @@ _ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ign
 _ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
 
 _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
+'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.',
+	'label:compacte_css' => 'Compression du HEAD :',
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)',
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e',
+	'compacte_js' => 'Compacter le Javacript',
+	'compacte_css' => 'Compacter les CSS',
 	'spip_cache:nom' => 'SPIP et le cache&hellip;',
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran',

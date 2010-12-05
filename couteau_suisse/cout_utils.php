@@ -140,6 +140,7 @@ function cs_get_defaut($variable) {
 		return false;
 	}
 	$variable = &$cs_variables[$variable];
+	if(isset($variable['externe'])) $variable['defaut'] = $variable['externe'];
 	$defaut = function_exists($f='initialiser_variable_'.$variable['nom'])?$f()
 		:(!isset($variable['defaut'])?'':$variable['defaut']);
 	if(!strlen($defaut)) $defaut = "''";

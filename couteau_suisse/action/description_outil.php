@@ -31,16 +31,21 @@ cs_log($metas_vars, 'metas_vars :');
 	// besoin des outils pour l'autorisation de modifier les variables
 	include_spip('cout_utils');
 	include_spip('config_outils');
-	global $outils;
+	global $outils, $cs_variables;
 	// on traite chaque variable
 	foreach($variables as $var) if(autoriser('configurer', 'variable', 0, NULL, array('nom'=>$var, 'outil'=>$outils[$outil]))) {
 		// on recupere dans le POST la nouvelle valeur de la variable
 		$final = corriger_caracteres(_request($var));
 		if (in_array($var, $metas_vars['_nombres'])) $final = intval($final);
+		spip_log("Outil du Couteau Suisse ($outil). Demande de modification sur une variable par l'auteur id=$connect_id_auteur : %$var% = $final");
 		// et on modifie les metas !
-		$metas_vars[$var] = $final;
-cs_log(" -- outil $index ($outil) : %$var% prend la valeur '$final'");
-		spip_log("Outil du Couteau Suisse n°$index. Modification d'une variable par l'auteur id=$connect_id_auteur : %$var% = $final");
+		if(!isset($cs_variables[$var]['externe'])) $metas_vars[$var] = $final;
+		if(isset($cs_variables[$var]['action'])) {
+			$action = str_replace('%s', $final, $cs_variables[$var]['action']);
+			spip_log("Outil du Couteau Suisse ($outil). Demande d'action sur cette variable : ".$action);
+			eval($action);
+		}
+			
 	} else 
 		spip_log("Outil du Couteau Suisse n°$index. Modification interdite de la variable %$var% par l'auteur id=$connect_id_auteur !!");
 //cs_log($metas_vars, " -- metas_vars = ");

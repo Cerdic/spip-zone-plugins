@@ -9,10 +9,16 @@ function outils_spip_cache_config_dist() {
 // Ajout de l'outil 'spip_cache'
 add_outil(array(
 	'id' => 'spip_cache',
-	'code:spip_options' => "%%radio_desactive_cache".(defined('_SPIP19300')?'4':'3')
+	'code:options' => defined('_SPIP19300')?'%%compacte_css%%%%compacte_js%%':'',
+	'code:spip_options' => "%%radio_desactive_cache"
+		.(defined('_SPIP19300')?'4%%%%compacte_prive%%%%compacte_tout':'3')
 		."%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%derniere_modif_invalide%%",
 	'categorie' => 'admin',
-	'description' => (defined('_SPIP19300')?'<:spip_cache:2:>':'<:spip_cache:1:>').'<:spip_cache::>',
+	'description' => 
+		(defined('_SPIP19300')
+			?'<:spip_cache:2:><:spip_cache::><:spip_cache:3:> [[%compacte_css%]][[->%compacte_js%]][[->%compacte_prive%]]'
+				.(defined('_SPIP20200')?'[[->%compacte_tout%]]':'')
+			:'<:spip_cache:1:><:spip_cache::>'),
 ));
 
 // Ajout des variables utilisees ci-dessus
@@ -65,6 +71,30 @@ array(
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
 	'defaut' => 0,
 	'code:%s' => "\$GLOBALS['derniere_modif_invalide']=false;\n",
+), array(
+	'nom' => 'compacte_tout',
+	'check' => 'couteauprive:compacte_tout',
+	'defaut' => 0,
+	'code:%s' => "define('_INTERDIRE_COMPACTE_HEAD',1);\n",
+), array(
+	'nom' => 'compacte_prive',
+	'check' => 'couteauprive:compacte_prive',
+	'defaut' => 0,
+	'code:%s' => "define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',1);\n",
+), array(
+	'nom' => 'compacte_css',
+	'check' => 'couteauprive:compacte_css',
+	// variable externe au Couteau Suisse
+	'externe' => "\$GLOBALS['meta']['auto_compress_css']=='oui'",
+	// action lors d'un changement de valeur
+	'action' => "ecrire_meta('auto_compress_css', %s?'oui':non);",
+	'code' => '',
+), array(
+	'nom' => 'compacte_js',
+	'check' => 'couteauprive:compacte_js',
+	'externe' => "\$GLOBALS['meta']['auto_compress_js']=='oui'",
+	'action' => "ecrire_meta('auto_compress_js', %s?'oui':non);",
+	'code' => '',
 ));
 
 }

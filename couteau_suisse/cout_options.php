@@ -32,8 +32,10 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 // pour les serveurs qui aiment les virgules...
 $GLOBALS['spip_version_code'] = str_replace(',','.',$GLOBALS['spip_version_code']);
 // constantes de compatibilite
-// (pour info : SPIP 2.0 => 12691, SPIP 2.1 => 15133)
-if ($GLOBALS['spip_version_code']>=15133) 
+// (pour info : SPIP 2.0 => 12691, SPIP 2.1 => 15133, SPIP 2.2 => 15375)
+if ($GLOBALS['spip_version_code']>=15375) 
+	{ @define('_SPIP20200', 1); @define('_SPIP20100', 1); @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
+elseif ($GLOBALS['spip_version_code']>=15133) 
 	{ @define('_SPIP20100', 1); @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
 elseif (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) 
 	{ @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
