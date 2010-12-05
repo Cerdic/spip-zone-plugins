@@ -44,10 +44,12 @@
 
 
 	function lettres_calculer_rubriques($flux) {
+		// maj les statuts des rubriques
 		$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_lettres AS fille", "rub.id_rubrique = fille.id_rubrique AND rub.date_tmp <= fille.date AND fille.statut='envoyee' ", "rub.id_rubrique");
 		while ($row = sql_fetch($r))
 		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']), "id_rubrique=".$row['id']);
-		$orphelins = sql_select('AR.id_rubrique AS id_rubrique', 'spip_abonnes_rubriques AS AR LEFT JOIN spip_rubriques AS R ON R.id_rubrique=AR.id_rubrique', 'ISNULL(R.id_rubrique)', 'AR.id_rubrique');
+		// Effacer les abonnements à des rubriques qui n'existent plus
+		$orphelins = sql_select('AR.id_rubrique AS id_rubrique', 'spip_abonnes_rubriques AS AR LEFT JOIN spip_rubriques AS R ON R.id_rubrique=AR.id_rubrique', 'ISNULL(R.id_rubrique) AND AR.id_rubrique!=0', 'AR.id_rubrique');
 		while ($arr = sql_fetch($orphelins))
 			sql_delete('spip_abonnes_rubriques', 'id_rubrique='.intval($arr['id_rubrique']));
 		return $flux;
