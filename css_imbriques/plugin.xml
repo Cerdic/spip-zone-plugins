@@ -1,9 +1,15 @@
 <plugin>
 	<nom>CSS imbriqu&eacute;s</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.5</version>
+	<version>1.6</version>
 	<etat>stable</etat>
-	<description>Ce plugin permet de traiter des CSS imbriqu&eacute;s.</description>
+	<description>
+		Ce plugin permet de traiter des CSS imbriqu&eacute;s.
+		
+		Par ailleurs, il introduit des pseudo-styles permettant de coder 
+		rapidement des comportements qui demandent des notations
+		différentes pour viser différents navigateurs.
+	</description>
 	<lien>http://plugins.spip.net/css-imbriques</lien>
 	<prefix>css_imbriques</prefix>
 	<fonctions>css_imbriques_fonctions.php</fonctions>
