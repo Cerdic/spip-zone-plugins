@@ -98,7 +98,7 @@ function spip_bonux_formulaires_configurer_recense($form){
 
 			foreach($balises as $b) {
 				if ($n = extraire_attribut($b, 'name')
-					AND preg_match(",^([\w\-]+)(\[\w*\])?$,",$n,$r)
+					AND preg_match(",^([\w\-]+)(\[\w*\])*$,",$n,$r)
 					AND !in_array($n,array('formulaire_action','formulaire_action_args'))
 					AND extraire_attribut($b,'type')!=='submit') {
 						$valeurs[$r[1]] = '';
