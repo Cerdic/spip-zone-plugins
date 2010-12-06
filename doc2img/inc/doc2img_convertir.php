@@ -49,7 +49,6 @@ function inc_doc2img_convertir($id_document) {
 
 	    //creation du repertoire cible
 	    if (!is_dir($document['cible_url']['absolute']) && !@mkdir($document['cible_url']['absolute'])) {
-	        spip_log('erreur repertoire '.$id_document,'doc2img');
 	        return "erreur impossible de creer le repertoire";
 	    }
 
@@ -65,8 +64,6 @@ function inc_doc2img_convertir($id_document) {
 	        $identify = $image->identifyImage();
 	        $identify2 = $image->getImageProperties();
 	        $nb_pages = $image->getNumberImages();
-	        spip_log($identify,'doc2img');
-	        spip_log($identify2,'doc2img');
 	        $image->clear();
 	        $image->destroy();
 	    } else {
@@ -83,7 +80,6 @@ function inc_doc2img_convertir($id_document) {
 	    // par son numéro de page
 	    do {
 	        //charge la premiere image
-	        spip_log($id_document.'-'.$frame,'doc2img');
 
 	        //on accede à la page $frame
 	        if ($version == '0.9') {
@@ -119,7 +115,6 @@ function inc_doc2img_convertir($id_document) {
 	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
 	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
 	            $taille = $image_frame->getImageLength();
-	            spip_log('ecriture frame '.$frame,'doc2img');
 	        }
 
 	        $largeur = $dimensions['largeur'];
@@ -137,7 +132,6 @@ function inc_doc2img_convertir($id_document) {
 	                "taille" => $taille
 	            )
 	        )) {
-	            spip_log("erreur sql","doc2img");
 	            return "erreur base de donnée";
 	        }
 
@@ -147,7 +141,6 @@ function inc_doc2img_convertir($id_document) {
 	        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
 	        	){
 	        		if(is_numeric($id_vignette)){
-	        			spip_log('on supprime '.$id_vignette,'test');
 	        			sql_delete('spip_documents','id_document='.intval($id_vignette));
 	        		}
 		        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
@@ -175,8 +168,6 @@ function inc_doc2img_convertir($id_document) {
 	    // libération du verrou
 	    spip_fclose_unlock($fp);
 	    //ecrire_config('doc2img/'.$id_document.'/statut','ok');
-
-	    spip_log($id_document." document ok",'doc2img');
 
 	    return true;
 	}else{
@@ -320,6 +311,9 @@ function doc2img_document($id_document) {
 
     //creation du repertoire cible
     //url relative du repertoire cible
+    if(!is_dir(_DIR_IMG.lire_config('doc2img/repertoire_cible'))){
+    	sous_repertoire(_DIR_IMG, lire_config('doc2img/repertoire_cible'));
+    }
     $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
     $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
 
