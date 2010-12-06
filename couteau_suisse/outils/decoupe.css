@@ -15,7 +15,7 @@ div.onglets_bloc {
 	clear:both;
 }
 
-div.onglets_bloc h2.onglets_titre a {
+div.onglets_bloc h2.onglets_titre {
 	text-decoration:none;
 	height:22px;
 /*	cursor:	inherit;
@@ -55,20 +55,19 @@ div.onglets_bloc h2.onglets_titre.selected {
 	border-bottom-width:0px;
 }
 
-div.onglets_bloc h2.onglets_titre.selected, div.onglets_bloc h2.onglets_titre.selected a {
+div.onglets_bloc h2.onglets_titre.selected, div.onglets_bloc h2.onglets_titre.selected {
 	cursor:default;
 }
 
-div.onglets_bloc h2.onglets_titre, div.onglets_bloc h2.onglets_titre a {
+div.onglets_bloc h2.onglets_titre, div.onglets_bloc h2.onglets_titre {
 	color:black;
 }
-div.onglets_bloc h2.hover a {
+div.onglets_bloc h2.hover {
 	color:blue;
 }
-div.onglets_bloc h2.onglets_titre.selected a {
+div.onglets_bloc h2.onglets_titre.selected {
 	color:black;
 }
-
 
 div.onglets_bloc .onglets_liste {
 	white-space:nowrap;
