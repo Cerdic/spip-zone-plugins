@@ -52,7 +52,7 @@ _ <multi>
 		<titre>corbeille:corbeille</titre>
 		<icone>img_pack/trash-full-24.png</icone>
 	</bouton>
-	<bouton id='corbeille2' parent='bando_configuration'>
+	<bouton id='corbeille2' parent='bando_administration'>
 		<titre>corbeille:corbeille</titre>
 		<icone>images/trash-full-16.png</icone>
 		<url>corbeille</url>
