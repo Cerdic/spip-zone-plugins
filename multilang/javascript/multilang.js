@@ -118,7 +118,7 @@ function multilang_init_lang(options) {
  */
 function multilang_init_multi(options) {
 	var target = options ? options.target : null;
-	var init_forms, forms_opt_size;
+	var init_forms;
 	//Update the list of form if this is an update
 	if(target) {
 		//Verify the target is really a form to be internationalized (in case of an ajax request fired by onAjaxLoad)
@@ -156,10 +156,9 @@ function multilang_init_multi(options) {
 	 * les éléments qui on la class optionnelle) sinon on prend tous les champs qui
 	 * matchent
 	 */
-	forms_opt_size = $(multilang_fields_selector).parents(root_opt).size();
 	$(multilang_fields_selector,init_forms).each(function(){
 	    var me = $(this);
-	    if(forms_opt_size>0){
+	    if(me.closest(root_opt).length){
 	        if(me.is(multilang_fields_selector_opt)){
 	        	multilang_init_field(this,this.form.form_lang);
 	        }
