@@ -118,7 +118,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))
 	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')//MODIFICATION insertion du formulaire de la mediathèque
 	  .recuperer_fond('prive/editer/docs',array('objet'=>'articles','id_objet'=>$id_article,'editable'=>'ok'),array('ajax'=>true))
-	  .afficher_documents_colonne($id_article, 'article')	  
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 	$extra = creer_colonne_droite('', true)
