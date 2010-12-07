@@ -6,7 +6,7 @@
 
 <B_auteurs_tags>
 <p><:spipicious:liste_auteurs_tag:>
-<BOUCLE_auteurs_tags(SPIPICIOUS auteurs){id_mot}{fusion id_mot}{',&nbsp;'}{tout}>
+<BOUCLE_auteurs_tags(SPIPICIOUS auteurs){id_mot}{fusion spipicious.id_auteur}{',&nbsp;'}{tout}>
 	<a href="#URL_AUTEUR" title="#NOM">#LOGIN</a>
 	<BOUCLE_nb(SPIPICIOUS){id_mot}{id_auteur} />
 	#SET{total,#TOTAL_BOUCLE}

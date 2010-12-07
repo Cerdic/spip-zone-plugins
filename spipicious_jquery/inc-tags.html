@@ -20,8 +20,9 @@
 		<BOUCLE_motsElement(SPIPICIOUS mots){id_objet}{objet}{fusion spipicious.id_mot}{mots.id_groupe=#GET{id_groupe}}>
 			<li><a href="#URL_MOT" rel="tag">#TITRE</a>
 			<BOUCLE_nb(SPIPICIOUS){id_mot}{objet}{id_objet}> </BOUCLE_nb>
-				[(#TOTAL_BOUCLE|>{1}|oui)(<abbr title="<:spipicious:title_tag_utilise_nb{nb=[(#TOTAL_BOUCLE)]}:>">#TOTAL_BOUCLE</abbr>)]
-				[(#TOTAL_BOUCLE|=={1}|oui)(<abbr title="<:spipicious:title_tag_utilise_un:>">#TOTAL_BOUCLE</abbr>)]
+				#SET{total,#TOTAL_BOUCLE}
+				[(#TOTAL_BOUCLE|>{1}|oui)(<abbr title="<:spipicious:title_tag_utilise_nb{nb=#GET{total}}:>">#TOTAL_BOUCLE</abbr>)]
+				[(#TOTAL_BOUCLE|=={1}|oui)(<abbr title="<:spipicious:title_tag_utilise_un:>">#TOTAL_BOUCLE</abbr>)]		
 			</B_nb>
 			</li>
 		</BOUCLE_motsElement>
