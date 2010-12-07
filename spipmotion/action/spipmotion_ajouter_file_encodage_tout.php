@@ -32,7 +32,7 @@ function action_spipmotion_ajouter_file_encodage_tout_post(){
 	$formats = array_merge(lire_config('spipmotion/fichiers_videos_encodage',array()),lire_config('spipmotion/fichiers_audios_encodage',array()));
 	$fichiers = sql_select('*','spip_documents',sql_in('extension',$formats).' AND id_orig=0');
 	while($fichier = sql_fetch($fichiers)){
-		//spipmotion_genere_file($fichier['id_document'],'','','');
+		spipmotion_genere_file($fichier['id_document'],'','','');
 	}
 }
 
