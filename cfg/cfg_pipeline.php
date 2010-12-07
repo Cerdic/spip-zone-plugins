@@ -13,6 +13,7 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_INSERT_HEAD_CFG")) define('_INSERT_HEAD_CFG',false);
 
 /**
  * Ajoute le bouton d'amin aux webmestres
@@ -94,7 +95,8 @@ function cfg_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= '<link rel="stylesheet" href="' . generer_url_public('cfg.css'). '" type="text/css" media="all" />';
+		if (_INSERT_HEAD_CFG)
+			$flux .= '<link rel="stylesheet" href="' . generer_url_public('cfg.css'). '" type="text/css" media="all" />';
 	}
 	return $flux;
 }
