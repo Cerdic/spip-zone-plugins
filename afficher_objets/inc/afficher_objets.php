@@ -59,7 +59,7 @@ function inc_afficher_objets($type, $titre,$requete,$formater='', $force=false){
 			$contexte['where'] = str_replace("A.","",$contexte['where']);
 		}
 		if (preg_match(",(lien|L).id_mot=([0-9]+),i",$contexte['where'],$regs)){
-			$contexte['id_mot'] = $regs[1];
+			$contexte['id_mot'] = $regs[2];
 			$contexte['where'] = str_replace($regs[0],"(1=1)",$contexte['where']);
 		}
 
