@@ -13,7 +13,7 @@
 			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{pagination 10}>
 				<li class="item">
 					<a href="#INFO_URL{#OBJET,#ID_OBJET}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
-					<span class="date"><span class="sep"> - </span>[<:ajoute_le:> (#MAJ|affdate_court)]</span>
+					<span class="date"><span class="sep"> - </span>[<:mesfavoris:ajoute_le:> (#MAJ|affdate_court)]</span>
 					[(#BOUTON_ACTION{<:mesfavoris:remove:>,#URL_ACTION_AUTEUR{supprimer_favori,#ID_FAVORI,#SELF},ajax})]
 				</li>
 			</BOUCLE_selections>
