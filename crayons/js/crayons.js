@@ -117,6 +117,7 @@ $.fn.opencrayon = function(evt, percent) {
 				'font-family': $(this).css('fontFamily'),
 				'font-weight': $(this).css('fontWeight'),
 				'line-height': $(this).css('lineHeight'),
+				'text-align': $(this).css('textAlign'),
 				'background-color': $(this).css('backgroundColor'),
 				'self': configCrayons.self
 			};

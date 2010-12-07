@@ -122,15 +122,17 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 		if (function_exists('chercher_filtre')
 		AND $f = chercher_filtre('info_plugin')
 		AND $f('PORTE_PLUME','est_actif')) {
-			$pp = <<<EOF
-	/* Ajouter une barre porte plume sur les crayons */
-	if (typeof(jQuery.fn.barre_outils) == 'function') {
-		function barrebouilles_crayons(){
-			jQuery('.formulaire_crayon textarea.crayon-active').barre_outils('edition');
+
+		$pp = <<<EOF
+cQuery(function() {
+	if (typeof onAjaxLoad == 'function') {
+		function barrebouilles_crayons() {
+			$('.formulaire_crayon textarea.crayon-active')
+			.barre_outils('edition');
 		}
-		barrebouilles_crayons();
 		onAjaxLoad(barrebouilles_crayons);
 	}
+});
 EOF;
 
 		}
@@ -140,18 +142,17 @@ EOF;
 	$incCSS = "<link rel=\"stylesheet\" href=\"{$cssFile}\" type=\"text/css\" media=\"all\" />";
 	$incJS = <<<EOH
 <script type="text/javascript">/* <![CDATA[ */
-	var configCrayons;
-	function startCrayons() {
-    configCrayons = new cQuery.prototype.cfgCrayons({$config});
-    ( window.jQuery ? jQuery : cQuery )(cQuery.fn.crayonsstart);
-    // cQuery.ready() plante le jQuery.ready() sous MSIE
-    {$pp}
-	}
-	var cr = document.createElement('script');
-	cr.type = 'text/javascript'; cr.async = true;
-	cr.src = '{$jsFile}\x26callback=startCrayons';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(cr, s);
+var configCrayons;
+function startCrayons() {
+	configCrayons = new cQuery.prototype.cfgCrayons({$config});
+	cQuery.fn.crayonsstart();
+{$pp}
+}
+var cr = document.createElement('script');
+cr.type = 'text/javascript'; cr.async = true;
+cr.src = '{$jsFile}\x26callback=startCrayons';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(cr, s);
 /* ]]> */</script>
 
 EOH;
