@@ -1,20 +1,22 @@
 <plugin>
 	<nom>spip.icio.us</nom>
-	<auteur>[kent1->http://kent1.sklunk.net]
+	<auteur>kent1 (kent1@arscenic.info)
 _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
-_ &#169; 2007-2009 - Licence GPL
 	</auteur>
+	<licence>
+		&#169; 2007-2010 - GNU/GPL v2
+	</licence>
 	<version>0.6.1</version>
 	<version_base>0.6</version_base>
 	<etat>stable</etat>
 	<description>
 	<multi>
-[fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles de SPIP.
+[fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles ou autres objets de SPIP.
 _ N&#233;cessite le plugin "s&#233;lecteur g&#233;n&#233;rique"
 _ N&#233;cessite le plugin CFG
 _ Les mots-cl&#233;s sont ajout&#233;s dans un groupe configurable (par d&#233;faut '{{- tags -}}')
 _ Icone de [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/projects/microformats-icons/]
-[en]Help authenticated users to add keywords/tags to articles from the public area.
+[en]Help authenticated users to add keywords/tags to articles or other objects from the public area.
 _ Need the "Generic selector" plugin
 _ Need the "CFG" plugin
 _ Keywords are added to a group we can configure ('{{- tags -}}' by default)
