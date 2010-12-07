@@ -4,15 +4,20 @@
 	&#169; 2009-2010 - GNU/LGPL || MIT
 	</auteur>
 	<version>
-	0.9.2
+	0.9.3
 	</version>
 	<etat>
 	test
 	</etat>
 	<description>
-	Un outil de m&#233;mo&#239;zation, destin&#233; &#224; acc&#233;l&#233;rer.
+		<multi>
+			[fr]Un outil de m&#233;mo&#239;zation, destin&#233; &#224; acc&#233;l&#233;rer.
 
 	(icone : [laszlo-photo->http://www.flickr.com/photos/laszlo-photo/149047693/])
+			[en]Memoization tool designed to accelerate.
+
+	(icon : [laszlo-photo->http://www.flickr.com/photos/laszlo-photo/149047693/])
+		</multi>
 	</description>
     <lien>http://zzz.rezo.net/Memoization.html</lien>
 	<prefix>
