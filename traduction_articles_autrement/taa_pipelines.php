@@ -1,10 +1,5 @@
 <?php
 
-function taa_affiche_gauche($flux) {
-
-
-    return $flux;
-}
 
 function taa_header_prive($flux){
 
