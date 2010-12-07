@@ -13,10 +13,6 @@
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>taa_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_gauche</nom>
-		<inclure>taa_pipelines.php</inclure>
 	</pipeline>	
 	
 	<fonctions>taa_fonctions.php</fonctions>
