@@ -35,8 +35,10 @@ var multilang_match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n|\s)*?)(?=\[[a-z_
 var multilang_root, //root of the search (jQuery object)
     multilang_root_opt,
     multilang_fields_selector,
+    multilang_fields_selector_opt,
     multilang_menu_selector,
     multilang_containers,
+    multilang_forms_toadd,
     multilang_forms, //forms to be processed (jQuery object)
     multilang_menu_lang, //template of the menu (jQuery object)
     multilang_forms_selector, //selector of the forms to be processed (string)
@@ -83,6 +85,7 @@ function multilang_init_lang(options) {
 
 	//init fields
 	multilang_fields_selector = options.fields;
+	multilang_fields_selector_opt = options.fields_opt;
 
 	//store all the internationalized forms
 	multilang_forms_selector = options.forms || "form";
@@ -135,7 +138,7 @@ function multilang_init_multi(options) {
 	//add a container for the language menu inside the form
 	init_forms.each(function() {
 		$(this).find('input[type=submit],button').click(function(){
-			$(this).parents('form').multilang_multi_submit();
+			$(this).parents('form').get(0).multilang_multi_submit();
 			//$(this).parents('form').submit();
 			//return false;
 		});
@@ -153,11 +156,11 @@ function multilang_init_multi(options) {
 	 * les éléments qui on la class optionnelle) sinon on prend tous les champs qui
 	 * matchent
 	 */
-	forms_opt_size = $(multilang_fields_selector).parents(root_opt).size() ;
+	forms_opt_size = $(multilang_fields_selector).parents(root_opt).size();
 	$(multilang_fields_selector,init_forms).each(function(){
 	    var me = $(this);
 	    if(forms_opt_size>0){
-	        if(me.is(fields_selector_opt)){
+	        if(me.is(multilang_fields_selector_opt)){
 	        	multilang_init_field(this,this.form.form_lang);
 	        }
 	    }else{
@@ -365,7 +368,7 @@ function multilang_init_field(el,lang,force) {
 	if(!force && (el.id=='titre' || el.id.match(/^titre_document[0-9]+/))){
 		numid=el.id+'_numero';
 		$(el).parent()
-				.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" class="text nomulti"></input></li>');
+				.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="3" class="text nomulti"></input></li>');
 		$('#'+numid).totreat = false;
 	}
 }
@@ -390,7 +393,7 @@ function multilang_change_lang(el,container,target) {
 		multilang_forms_fields[target_id].each(function(){
 			var me = $(this);
 			if(me.parents(root_opt).size()>0){
-		        if(me.is(fields_selector_opt)){
+		        if(me.is(multilang_fields_selector_opt)){
 		        	multilang_init_field(this,lang,true);
 		        }
 		    }else{
