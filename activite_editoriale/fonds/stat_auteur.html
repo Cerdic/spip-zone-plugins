@@ -1,0 +1,22 @@
+<B_row>
+	<table>
+	<thead>
+		<tr>
+			<th><:activite_editoriale:redacteurs:></th>
+			<th><:activite_editoriale:nb_art_secteur:></th>
+			<th><:activite_editoriale:nb_art_branche:></th>
+			<th><:activite_editoriale:nb_art_total:></th>
+		</tr>
+	</thead>
+	<tbody>	
+		<BOUCLE_row(POUR){tableau #ENV{liste}}>
+		<tr>
+			<BOUCLE_col(POUR){tableau #VALEUR}>
+				<td>#VALEUR</td>
+			</BOUCLE_col>
+			</tr>
+		</BOUCLE_row>
+	</tbody>
+	</table>
+	
+</B_row>

@@ -1,0 +1,8 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<h2><:activite_editoriale:detail_mots_cles:><br/><small><:activite_editoriale:secteur:> [(#TITRE|supprimer_numero)]</small></h2>
+
+<div class='cadre cadre-liste'>
+	[(#NB_ARTICLES_NOTAG{#ID_SECTEUR, #ID_RUBRIQUE,#ENV{max},#ENV{date_debut},#ENV{date_fin}})]
+	
+</div>
+</BOUCLE_rubrique>

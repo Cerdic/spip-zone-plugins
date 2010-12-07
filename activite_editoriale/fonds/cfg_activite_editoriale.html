@@ -13,7 +13,36 @@
                     
                 </select>
             </li>
-        
+			<li>
+				<label for="activer_non"><:activite_editoriale:activer_stats:></label>
+				
+				<select name="stats_rubriques" id="activer_non" >
+					<option value="0" [(#ENV{stats_rubriques}|=={0}|oui) selected="selected"]><:activite_editoriale:activer_stat_non:></option>
+					<option value="1" [(#ENV{stats_rubriques}|=={1}|oui) selected="selected"]><:activite_editoriale:activer_stat_oui:></option>
+					
+				</select>
+				
+			</li>
+			
+			<li>
+				<label for="activer_non"><:activite_editoriale:activer_mots_cles:></label>
+				
+				<select name="mots_cles" id="activer_non" >
+					<option value="0" [(#ENV{mots_cles}|=={0}|oui) selected="selected"]><:activite_editoriale:activer_stat_non:></option>
+					<option value="1" [(#ENV{mots_cles}|=={1}|oui) selected="selected"]><:activite_editoriale:activer_stat_oui:></option>
+					
+				</select>
+				
+			</li>
+			<li>
+				<label>Groupes de mots clés pris en compte</label>
+				<BOUCLE_groupes(GROUPES_MOTS)>
+				<div class="choix">
+					<input type="checkbox" name="groupe_#ID_GROUPE" id="groupe_#ID_GROUPE" value="#ID_GROUPE"[ (#ENV{groupe_#ID_GROUPE}|=={[(#ID_GROUPE)]}|oui) checked="checked"]/>
+					<label>#TITRE</label>
+				</div>
+				</BOUCLE_groupes>
+			</li>
         </ul>
     <p class="boutons">
 	<input type="submit" name="_cfg_ok" value="<:OK:>" />

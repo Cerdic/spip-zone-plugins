@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Activit&eacute; &eacute;ditoriale</nom>
-	<auteur>Stéphanie Caron de [Clever Age->http://www.clever-age.com/] et Maïeul ROUQUETTE (amélioration)</auteur>
+	<auteur>Stéphanie Caron de [Clever Age->http://www.clever-age.com/] , Maïeul ROUQUETTE (amélioration) et Thierry Cazalet [Phracktale->http://www.phracktale.com/]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.2</version>
+	<version>0.3</version>
 	<version_base>0.1</version_base>
 	<description>Ce plugin a pour objectif de compl&eacute;ter les fonctionnalit&eacute;s de suivi de l'activit&eacute; &eacute;ditoriale de SPIP.
 
@@ -10,6 +10,8 @@ Sont d&eacute;j&agrave; propos&eacute;s :
 - l'ajout de deux champs aux rubriques pour indiquer un d&eacute;lai en jour au dela duquel elle doivent &ecirc;tre aliment&eacute;es, ainsi que les personnes &agrave; pr&eacute;venir
 - des alertes par e-mail selon ces deux param&egrave;tres
 - un tableau de bord pr&eacute;sentant les m&ecirc;mes informations
+- Le top des auteurs en terme d'articles, activable par cfg
+- La liste des articles non tagués, activable également par cfg avec choix des groupes de mots-clé cible.
 
 Envisag&eacute; dans l'avenir :
 - une relance de m&ecirc;me nature pour les articles propos&eacute;s depuis longtemps &agrave; la publication
@@ -28,6 +30,10 @@ Envisag&eacute; dans l'avenir :
 		<nom>taches_generales_cron</nom>
 		<inclure>activite_editoriale_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>activite_editoriale_pipelines.php</inclure>
+	</pipeline>
 	<fonctions>activite_editoriale_fonctions.php</fonctions>
 	<bouton id='activite_editoriale' parent='activite'>
 		<titre>activite_editoriale:activite_editoriale</titre>
@@ -38,4 +44,7 @@ Envisag&eacute; dans l'avenir :
 		<icone>activite_editoriale.png</icone>
 	</bouton>
 	<categorie>edition</categorie>
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id='spip_bonux' version='[1.9.1;]' />
+	<necessite id='cfg' version='[1.9.1;]' />
 </plugin>

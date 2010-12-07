@@ -1,0 +1,25 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<div class='cadre cadre-liste'>
+	<ul>
+		<li>
+			#SET{total, 0}
+			<BOUCLE_rubriques(RUBRIQUES){id_parent}> </BOUCLE_rubriques>#SET{total, #TOTAL_BOUCLE}</B_rubriques>
+			<:activite_editoriale:nb_rubriques:> #GET{total, 0}
+		</li>
+		<li>
+			#SET{total, 0}
+			<BOUCLE_articles(ARTICLES){id_rubrique}> </BOUCLE_articles>#SET{total, #TOTAL_BOUCLE}</B_articles>
+			<:activite_editoriale:nb_articles:> #GET{total, 0}
+		</li>
+		<li>
+			
+			
+	  <:activite_editoriale:nb_total_rubriques:> [(#NB_RUBRIQUES_BRANCHE{#ID_RUBRIQUE})]
+		</li>
+		<li>
+			
+			<:activite_editoriale:nb_total_articles:> [(#NB_ARTICLES_BRANCHE{#ID_RUBRIQUE})]
+		</li>
+	</ul>
+	</div>
+</BOUCLE_rubrique>

@@ -1,0 +1,8 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<h2><:activite_editoriale:top_auteurs:><br/><small><:activite_editoriale:secteur:> [(#TITRE|supprimer_numero)]</small></h2>
+
+<div class='cadre cadre-liste' style='margin-top: 20px;'>
+	[(#NB_ARTICLES_PAR_AUTEUR{#ID_SECTEUR, #ID_RUBRIQUE,#ENV{max},#ENV{date_debut},#ENV{date_fin}})]
+	
+</div>
+</BOUCLE_rubrique>
