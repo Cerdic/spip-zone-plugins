@@ -74,6 +74,57 @@ function spipmotion_editer_contenu_objet($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline document_desc_actions (Mediathèque)
+ * On ajoute un lien pour récupérer le logo et relancer les encodages
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return $flux Le contexte du pipeline complété
+ */
+function spipmotion_document_desc_actions($flux){
+	$id_document = $flux['args']['id_document'];
+	$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
+	if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array()))){
+		include_spip('inc/documents');
+		if(file_exists(get_spip_doc($infos_doc['fichier']))){
+			$redirect = ancre_url(self(),"doc".$id_document);
+			$url_action_logo = generer_action_auteur('spipmotion_logo', "0/article/$id_document", $redirect);
+			$texte_logo = _T('spipmotion:recuperer_logo');
+			$flux['data'] .= " | <a href='$url_action_logo'>$texte_logo</a>";
+			
+			$texte2 = _T('spipmotion:recuperer_infos');
+			$action2 = generer_action_auteur('spipmotion_infos', "0/article/$id_document", $redirect);
+			$flux['data'] .= " | <a href='$action2'>$texte2</a>";
+			
+			$texte3 = _T('spipmotion:encoder_video');
+			if(in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
+				$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
+				if($statut_encodage == 'en_cours'){
+					$action3 = '';
+					$texte3 = _T('spipmotion:document_en_cours_encodage');
+				}elseif ($statut_encodage == 'non'){
+					$action3 = '';
+					$texte3 = _T('spipmotion:document_dans_file_attente');
+				}else{
+					$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "0/article/$id_document", $redirect);
+					$action3 = "<a href='$action3'>$texte3</a>";
+				}
+			}
+			
+			if(($infos_doc['id_orig'] == 0) && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
+				if($action3)
+					$flux['data'] .= " | <a href='$action3'>$texte3</a>";
+				else
+					$flux['data'] .= " | $texte3";
+			}
+		}else{
+			$texte = _T('spipmotion:erreur_document_plus_disponible');
+			$flux['data'] .= " | $texte";
+		}
+	}
+	return $flux;
+}
 /**
  * Pipeline Cron de SPIPmotion
  *
