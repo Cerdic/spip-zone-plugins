@@ -1,69 +1,81 @@
-[(#REM) titre=M&#233;moization]
-[(#REM) autoriser=webmestre ]
-
-<!-- descriptif=
-M&#233;moization.
-Cette page de configuration est r&#233;serv&#233;e au webmestre du site.
--->
+<!-- titre=<:memoization:cfg_titre:> -->
+<!-- autoriser=webmestre -->
+<!-- descriptif=<:memoization:cfg_description:> -->
+<!-- icone=images/memoization-24.png-->
+<!-- logo=images/memoization-64.jpg-->
 
 #CACHE{0}
 
 
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-
+<form method="post" action="#SELF" class="formulaire_cfg formulaire_spip"><div>[(#ENV{_cfg_}|form_hidden)]
+<ul>
 [(#REM) ------------------------ Memoization --------------------- ]
-<fieldset>
-<legend>
-	M&#233;thode de m&#233;moization
-</legend>
+	<li class="fieldset">
+		<h3 class="legend"><:memoization:legend_cache_methode:></h3>
+		<ul>
+			<li class="editer_methode">
+				<label for="methode"><:memoization:label_methode:></label>
+				
+				<select name="methode" id="methode">
+					<option value=""><:memoization:option_methode_defaut:>[
+						((#VAL|memoization_methode))]</option>
+					<option value="apc"[
+						selected="(#ENV{apc}|=={apc}|?{selected})"][
+							disabled="(#VAL{apc}|memoization_methode|non|?{disabled})"]
+							><:memoization:option_methode_apc:></option>
+					<option value="xcache"[
+						selected="(#ENV{methode}|=={xcache}|?{selected})"][
+							disabled="(#VAL{xcache}|memoization_methode|non|?{disabled})"]
+							><:memoization:option_methode_xcache:></option>
+					<option value="eaccelerator"[
+						selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
+							disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
+							><:memoization:option_methode_eaccelerator:></option>
+					<option value="memcache"[
+						selected="(#ENV{methode}|=={memcache}|?{selected})"][
+							disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
+							><:memoization:option_methode_memcache:></option>
+					<option value="filecache"[
+						selected="(#ENV{methode}|=={filecache}|?{selected})"][
+							disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
+							><:memoization:option_methode_filecache:></option>
+					<option value="nocache"[
+						selected="(#ENV{methode}|=={nocache}|?{selected})"][
+							disabled="(#VAL{nocache}|memoization_methode|non|?{disabled})"]
+							><:memoization:option_methode_nocache:></option>
+				</select>
+			</li>
+		</ul>
+	</li>
 
-<label for="methode">Choisir le mode de m&#233;moization</label>
-
-<select name="methode" id="methode">
-	<option value="">Auto-d&#233;tection[
-		((#VAL|memoization_methode))]</option>
-	<option value="apc"[
-		selected="(#ENV{apc}|=={apc}|?{selected})"][
-			disabled="(#VAL{apc}|memoization_methode|non|?{disabled})"]
-			>APC</option>
-	<option value="xcache"[
-		selected="(#ENV{methode}|=={xcache}|?{selected})"][
-			disabled="(#VAL{xcache}|memoization_methode|non|?{disabled})"]
-			>XCache</option>
-	<option value="eaccelerator"[
-		selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
-			disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
-			>EAccelerator</option>
-	<option value="memcache"[
-		selected="(#ENV{methode}|=={memcache}|?{selected})"][
-			disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
-			>Memcache</option>
-	<option value="filecache"[
-		selected="(#ENV{methode}|=={filecache}|?{selected})"][
-			disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
-			>Fichiers (filecache)</option>
-	<option value="nocache"[
-		selected="(#ENV{methode}|=={nocache}|?{selected})"][
-			disabled="(#VAL{nocache}|memoization_methode|non|?{disabled})"]
-			>D&#233;sactiv&#233; (nocache)</option>
-</select>
-
-
-</fieldset>
-
-<fieldset id="memcache_options">
-<legend>
-	R&#233;glages de memcache
-</legend>
-
-<label for="memcache_servers">
-Serveur(s) memcache&#160;:
-</label>
-<br /><textarea name="memcache_servers" class="textarea">[(#ENV{memcache_servers}|sinon{localhost:11211})]</textarea>
-<div class="xx-small">(indiquer un serveur par ligne, sous la forme <kbd>host:port</kbd>)</div>
-
-<p><a href="#URL_ECRIRE{admin_memcache}">Administrer memcache</a></p>
-</fieldset>
+	<li class="fieldset" id="memcache_options">
+		<h3 class="legend"><:memoization:legend_memcache:></h3>
+		<ul>
+			<li class="editer_memcache_servers">
+				<label for="memcache_servers"><:memoization:label_memcache_serveurs:></label>
+				<p class="explication">(<:memoization:explication_memcache_servers:>)</p>
+				<textarea name="memcache_servers" class="textarea">[(#ENV{memcache_servers}|sinon{localhost:11211})]</textarea>
+				<p class="lien_memcache"><a href="#URL_ECRIRE{admin_memcache}"><:memoization:lien_administration_memcache:></a></p>
+			</li>
+		</ul>
+	</li>
+	
+	<li class="fieldset">
+		<h3 class="legend"><:memoization:legend_cache_pages:></h3>
+		<ul>
+			<li class="editer_pages">
+				<label for="pages"><:memoization:label_cache_pages:></label>
+				<select name="pages" id="pages">
+					<option value=""><:memoization:option_cache_defaut:></option>
+					<option value="filecache"[
+						selected="(#ENV{pages}|=={filecache}|?{selected})"]><:memoization:option_cache_filepage:></option>
+					<option value="file"[
+						selected="(#ENV{pages}|=={file}|?{selected})"]><:memoization:option_cache_file:></option>
+				</select>
+			</li>
+		</ul>
+	</li>
+</ul>
 <script type="text/javascript"><!--
 	var methode_memcache = function() {
 		if ($("#methode").val() == 'memcache')
@@ -77,35 +89,9 @@ Serveur(s) memcache&#160;:
 
 // -->
 </script>
-
-
-
-<fieldset>
-<legend>
-	Cache des pages
-</legend>
-
-<label for="pages">G&#233;rer le cache des pages</label>
-
-<select name="pages" id="pages">
-	<option value="">Par la m&#233;moization d&#233;finie ci-dessus</option>
-	<option value="filecache"[
-		selected="(#ENV{pages}|=={filecache}|?{selected})"]>Par la m&#233;moization filecache</option>
-	<option value="file"[
-		selected="(#ENV{pages}|=={file}|?{selected})"]>Ancienne m&#233;thode du core</option>
-</select>
-
-
-</fieldset>
-
-
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
-<div>
-<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
-<!--
-<input type="reset" value="<:Reset:>" class="fondo" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
--->
+<div class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
 </div>
-
+</div>
 </form>
