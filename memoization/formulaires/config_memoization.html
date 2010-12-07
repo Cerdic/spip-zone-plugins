@@ -1,0 +1,99 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=memoization -->
+
+<div class="formulaire_spip formulaire_config formulaire_config_memoization">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		[(#REM) ------------------------ Memoization --------------------- ]
+			<li class="fieldset">
+				<h3 class="legend"><:memoization:legend_cache_methode:></h3>
+				<ul>
+					<li class="editer_methode">
+						<label for="methode"><:memoization:label_methode:></label>
+						
+						<select name="methode" id="methode">
+							<option value=""><:memoization:option_methode_defaut:>[
+								((#VAL|memoization_methode))]</option>
+							<option value="apc"[
+								selected="(#ENV{apc}|=={apc}|?{selected})"][
+									disabled="(#VAL{apc}|memoization_methode|non|?{disabled})"]
+									><:memoization:option_methode_apc:></option>
+							<option value="xcache"[
+								selected="(#ENV{methode}|=={xcache}|?{selected})"][
+									disabled="(#VAL{xcache}|memoization_methode|non|?{disabled})"]
+									><:memoization:option_methode_xcache:></option>
+							<option value="eaccelerator"[
+								selected="(#ENV{methode}|=={eaccelerator}|?{selected})"][
+									disabled="(#VAL{eaccelerator}|memoization_methode|non|?{disabled})"]
+									><:memoization:option_methode_eaccelerator:></option>
+							<option value="memcache"[
+								selected="(#ENV{methode}|=={memcache}|?{selected})"][
+									disabled="(#VAL{memcache}|memoization_methode|non|?{disabled})"]
+									><:memoization:option_methode_memcache:></option>
+							<option value="filecache"[
+								selected="(#ENV{methode}|=={filecache}|?{selected})"][
+									disabled="(#VAL{filecache}|memoization_methode|non|?{disabled})"]
+									><:memoization:option_methode_filecache:></option>
+							<option value="nocache"[
+								selected="(#ENV{methode}|=={nocache}|?{selected})"][
+									disabled="(#VAL{nocache}|memoization_methode|non|?{disabled})"]
+									><:memoization:option_methode_nocache:></option>
+						</select>
+					</li>
+				</ul>
+			</li>
+		
+			<li class="fieldset" id="memcache_options">
+				<h3 class="legend"><:memoization:legend_memcache:></h3>
+				<ul>
+					<li class="editer_memcache_servers">
+						<label for="memcache_servers"><:memoization:label_memcache_serveurs:></label>
+						<p class="explication">(<:memoization:explication_memcache_servers:>)</p>
+						<textarea name="memcache_servers" class="textarea">[(#ENV{memcache_servers}|sinon{localhost:11211})]</textarea>
+						<p class="lien_memcache"><a href="#URL_ECRIRE{admin_memcache}"><:memoization:lien_administration_memcache:></a></p>
+					</li>
+				</ul>
+			</li>
+			
+			<li class="fieldset">
+				<h3 class="legend"><:memoization:legend_cache_pages:></h3>
+				<ul>
+					<li class="editer_pages">
+						<label for="pages"><:memoization:label_cache_pages:></label>
+						<select name="pages" id="pages">
+							<option value=""><:memoization:option_cache_defaut:></option>
+							<option value="filecache"[
+								selected="(#ENV{pages}|=={filecache}|?{selected})"]><:memoization:option_cache_filepage:></option>
+							<option value="file"[
+								selected="(#ENV{pages}|=={file}|?{selected})"]><:memoization:option_cache_file:></option>
+						</select>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<script type="text/javascript"><!--
+			var methode_memcache = function() {
+				if ($("#methode").val() == 'memcache')
+					$('#memcache_options').slideDown();
+				else
+					$('#memcache_options').hide();
+			};
+			methode_memcache();
+			$("#methode")
+			.bind('change', methode_memcache);
+		
+		// -->
+		</script>
+		[(#REM) ------------------------ BOUTON OK ------------------------ ]
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+</form>
+</div>
