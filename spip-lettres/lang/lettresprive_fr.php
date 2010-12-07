@@ -196,6 +196,11 @@
 		'ajouter_rubrique' => "Ajouter une rubrique",
 		'aucun_envoi_programme' => "Aucun envoi programmé.",
 		
+// Themes par defaut
+		'theme_par_defaut' 			=> 'Abonnement par défaut',
+		'theme_par_defaut_actuel' 	=> 'Abonnement par défaut actuel : ',
+		'theme_racine' 				=> 'Tous les thèmes',
+		'theme_par_defaut_modifier'	=> "Modifier l'abonnement par défaut",
 		
 		'Z' => 'ZZzZZzzz'
 

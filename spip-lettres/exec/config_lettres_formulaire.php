@@ -37,15 +37,27 @@
 			$url = generer_url_ecrire('config_lettres_formulaire');
 			header('Location: '.$url);
 			exit();
-		}
+		};
+
+		// rubrique par défaut pour un nouvel abonné	
+		if ($_REQUEST['pardefaut']=='oui') {
+			if (isset($_POST['supprimer'])) // pas d'abo par défaut
+				ecrire_meta('spip_lettres_abonnement_par_defaut', -1); 
+			else
+				ecrire_meta('spip_lettres_abonnement_par_defaut', 
+							$_POST['id_parent']);
+			ecrire_metas();
+			$url = generer_url_ecrire('config_lettres_formulaire');
+			header('Location: '.$url);
+			exit();
+		}			
 
 		if (!empty($_GET['supprimer_theme'])) {
 			sql_delete('spip_themes', 'id_theme='.intval($_GET['supprimer_theme']));
 			$url = generer_url_ecrire('config_lettres_formulaire');
 			header('Location: '.$url);
 			exit();
-		}
-
+		}			
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_configuration'), "configuration", "configuration");
@@ -78,10 +90,16 @@
 			echo fin_boite_info(true);
 		}
 
-		echo '<form method="post" action="'.generer_url_ecrire('config_lettres_formulaire').'">';
+		echo '<form class="formulaire_spip_not" method="post" action="'.generer_url_ecrire('config_lettres_formulaire').'">';
 		echo debut_cadre_trait_couleur("", true, "", _T('lettresprive:ajouter_theme'));
+		
 	    echo '<p>';
-		echo '<label for="titre">'._T('lettresprive:titre').'</label>&nbsp;&nbsp;&nbsp;';
+		// Ajout d'un message d'erreur (avec un style inline car ne n'est pas un CVT)
+		if (empty($_REQUEST['pardefaut']) and !empty($_POST['id_parent']) and empty($_POST['titre']))
+			echo '<span style="color:red;">'._T('info_obligatoire').'</span><br/>';
+		echo '<label for="titre">';
+		echo _T('lettresprive:titre').'</label>&nbsp;&nbsp;&nbsp;';
+
 		echo '<input type="text" class="text" name="titre" id="titre" value="" />';
 		echo '</p>';
 	    echo '<p>';
@@ -89,17 +107,41 @@
 		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 		echo $selecteur_rubrique(0, 'rubrique', false);
 		echo '</p>';
+
 		echo '<p style="text-align: right;"><input class="fondo" name="ajouter" type="submit" value="'._T('lettresprive:ajouter').'" /></p>';
 		echo fin_cadre_trait_couleur(true);
 		echo '</form>';
-
+		
+		// rubrique par défaut pour un nouvel abonné créé via la partie privée	
+		$nbt= lettres_nombre_themes();
+		if ($nbt==1) {
+			ecrire_meta('spip_lettres_abonnement_par_defaut', 
+						lettres_rubrique_theme_par_defaut());
+			ecrire_metas();
+			echo '<p>'._T('lettresprive:theme_par_defaut_actuel')
+				.lettres_titre_theme_par_defaut();
+		}
+		else if ($nbt>1) {
+			echo '<form method="post" action="'.generer_url_ecrire('config_lettres_formulaire',"pardefaut=oui").'">';
+			echo debut_cadre_trait_couleur("", true, "", _T('lettresprive:theme_par_defaut'));
+						
+			echo '<p>'._T('lettresprive:theme_par_defaut_actuel')
+						.lettres_titre_theme_par_defaut();;
+			if ($GLOBALS['meta']['spip_lettres_abonnement_par_defaut']>=0)
+				echo '<input class="fondo" style="float: right;" name="supprimer" type="submit" value="'._T('lettresprive:supprimer').'" />';
+			echo '</p><p>';
+			echo '<label for="id_parent">'._T('lettresprive:theme_par_defaut_modifier').'</label>';
+			echo $selecteur_rubrique(0, 'rubrique', false);
+			echo '</p>';
+			echo '<p style="text-align: right;"><input class="fondo" name="enregistrer" type="submit" value="'._T('lettresprive:enregistrer').'" /></p>';
+			echo fin_cadre_trait_couleur(true);
+			echo '</form>';
+		};
+		
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_lettres_formulaire'),'data'=>''));
-
+		
 		echo fin_gauche();
 
 		echo fin_page();
-
 	}
-
-
 ?>

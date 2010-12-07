@@ -1,5 +1,4 @@
 <div class="formulaire_spip formulaire_lettres ajax" id="formulaire_lettres">
-
 <br class="bugajaxie" />
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -12,16 +11,21 @@
 
 <fieldset>
 
-<legend><:lettres:lettres_information:></legend>
+[<legend>
+(#NOOP|lettres_un_seul_theme|?{
+	<:lettres:lettre_information> : [(#NOOP|lettres_titre_theme_par_defaut)]",
+	<:lettres:lettres_information:>})
+</legend>
+]
 
 <ul>
-
-<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{rubriques}|oui)erreur]">
-<label><:lettres:themes:></label>
-<INCLURE {fond=formulaires/inc_themes} {env}>
-[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{rubriques})</span>]
+[(#NOOP|lettres_un_seul_theme|non)
+	<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{rubriques}|oui)erreur]">
+	<label><:lettres:themes:></label>
+	<INCLURE {fond=formulaires/inc_themes} {env}>
+	[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{rubriques})</span>]
 </li>
-
+]
 <li>
 <label for="nom"><:lettres:nom:></label>
 <input type="text" class="text" name="nom" id="nom" value="#ENV{nom}" size="30" />

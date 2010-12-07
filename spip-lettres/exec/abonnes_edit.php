@@ -40,11 +40,19 @@
 				$abonne->format	= $_POST['format'];
 				$abonne->enregistrer();
 
-				if (isset($_POST['id_rubrique'])) {
-					$abonne->enregistrer_abonnement($_POST['id_rubrique']);
-					$abonne->valider_abonnement($_POST['id_rubrique']);
+				// on associe un abonnement si l'url le demande (lien raccourci)
+				// ou si il y a un abo par défaut.
+				if (isset($_POST['id_rubrique']) and (intval($_POST['id_rubrique'])>0))	
+					$abo_init = intval($_POST['id_rubrique']);
+				else 
+					$abo_init = lettres_rubrique_theme_par_defaut();
+				// si 0 : abo à la racine
+				// si -1 : pas d'abo par défaut
+				if ($abo_init > -1)  {
+					$abonne->enregistrer_abonnement($abo_init);
+					$abonne->valider_abonnement($abo_init);
 				}
-
+				
 				$url = generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne, true);
 				header('Location: ' . $url);
 				exit();

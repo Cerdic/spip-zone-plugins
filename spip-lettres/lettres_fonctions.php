@@ -126,6 +126,31 @@
 			return $array;
 		}
 	}
+	
+//
+// thèmes et thème par défaut, pour le privé et les squelettes
+//
+		function lettres_un_seul_theme() {
+			return sql_countsel ("spip_themes") == 1;
+		}	
+		function lettres_nombre_themes() {
+			return sql_countsel ("spip_themes");
+		}
+		
+		// id de la rubrique ou -1 si il n'y a pas de thème par défaut
+		function lettres_rubrique_theme_par_defaut () {
+			if (lettres_un_seul_theme())
+				return sql_getfetsel ("id_rubrique", "spip_themes");
+			else return $GLOBALS['meta']['spip_lettres_abonnement_par_defaut'];	
+		};
 
-
+		// titre du thème par défaut
+		function lettres_titre_theme_par_defaut () {
+			if ($GLOBALS['meta']['spip_lettres_abonnement_par_defaut'] > 0)
+				return sql_getfetsel ("TH.titre", "spip_themes AS TH LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=TH.id_rubrique", "RUB.id_rubrique=".$GLOBALS['meta']['spip_lettres_abonnement_par_defaut']);
+			else if ($GLOBALS['meta']['spip_lettres_abonnement_par_defaut'] == -1)
+				return _T('lettresprive:aucun_theme_selectionne');
+			else
+				return _T('lettres:tout_le_site');
+		};
 ?>
