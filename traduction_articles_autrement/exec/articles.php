@@ -93,6 +93,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$dater = charger_fonction('dater', 'inc');
 	$editer_mots = charger_fonction('editer_mots', 'inc');
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
+	$edition_seule=lire_config('taa/edition_seule');
 	
 	/* MODIFICATION Cacher le menu sélection langue
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc'); 
@@ -111,13 +112,13 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 			'row' => $row
 		)
 	));
-
+	  if($edition_seule)$form_docs=recuperer_fond('prive/editer/docs',array('objet'=>'articles','id_objet'=>$id_article,'editable'=>'ok'),array('ajax'=>true)) ;
 	$navigation =
 	  debut_boite_info(true). $boite . fin_boite_info(true)
 	  . $icone
 		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))
 	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')//MODIFICATION insertion du formulaire de la mediathèque
-	  .recuperer_fond('prive/editer/docs',array('objet'=>'articles','id_objet'=>$id_article,'editable'=>'ok'),array('ajax'=>true))
+	 .$form_docs
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 	$extra = creer_colonne_droite('', true)
@@ -130,7 +131,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	
 	/* MODIFICATION Cacher le bouton si édition seule active dans cfg*/
 	
-	if(!$edition_seule=lire_config('taa/edition_seule') ){
+	if(!$edition_seule){
 		$actions =($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "");
   		}
 
