@@ -17,5 +17,6 @@
 	<fonctions>taa_fonctions.php</fonctions>
 	<categorie>traduction</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<utilise id="gestdoc" version='[1.3.5;]'/>
 </plugin>
 
