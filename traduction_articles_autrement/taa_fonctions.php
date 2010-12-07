@@ -1,19 +1,5 @@
 <?php
 
-	
-
-function icone_statut($statut){
-
-	switch($statut){
-		case 'prepa': $chemin_puce=chemin('images/puce-blanche.gif');
-		break;
-		case 'publie': $chemin_puce=chemin('images/puce-verte.gif');
-		break;
-		}
-	return $chemin_puce;
-}
-
-
 // changement de droits dans le cas de la médiathèque formulaires_joindre_document_charger_dist
 
 function formulaires_joindre_document_charger($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false, 	$proposer_media=true, $proposer_ftp=true){
