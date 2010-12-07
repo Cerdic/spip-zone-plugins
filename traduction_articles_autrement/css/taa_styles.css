@@ -1,0 +1,55 @@
+.onglets_traduction{
+	width:100%;height : 70px;
+	vertical-align: baseline;
+}
+
+.onglets_traduction div.options{
+	margin :0;
+	padding:0; 
+}
+
+.onglets_traduction div.onglet{
+	vertical-align: text-bottom;
+	 margin-right:2px; float:left;
+	  -moz-border-radius: 5px;
+	 -webkit-border-radius :5px;
+	 -khtml-border-radius :5px; 
+	 border-radius: 5px;
+}
+
+.onglets_traduction div.options a {
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+
+
+.onglets_traduction div.options a span{
+	display:none;
+}
+
+.onglets_traduction div.options a:hover span{
+	display:block;
+	position:absolute;
+	width:72px;
+	text-align:center;
+	background:#ffffff;
+	height :auto;
+}
+
+div.non_traduit{
+	background-color: #EEEEEE ;
+}
+
+.pagination{
+	text-align:left;
+}
+
+.onglets_traduction .danger{
+	background: #ffffff ;	
+}
+
+
+.form_lier{
+	text-align:right;
+}
