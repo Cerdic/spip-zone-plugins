@@ -6,7 +6,7 @@
 </BOUCLE_log>
 <B_spipmotion_file>
 #SET{total,#GRAND_TOTAL}
-<p><:spipmotion:info_nombre_encodage_attente{nb=#GET{total}}:></p>
+[<p>(#GET{total}|singulier_ou_pluriel{<:spipmotion:info_nombre_encodage_attente:>,<:spipmotion:info_nombre_encodages_attentes:>})</p>]
 #ANCRE_PAGINATION
 <table class="spipmotion">
 	<thead>

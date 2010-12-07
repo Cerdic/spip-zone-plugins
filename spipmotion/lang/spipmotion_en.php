@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bitrate' => 'Video bitrate of the output in kb/s : ',
 	'bitrate_audio' => 'Audio bitrate of the output in kb/s : ',
 	'bouton_encoder' => 'Encode',
+	'bouton_reencoder_tout' => 'Encode again all files',
+	'bouton_reencoder_tout_message' => 'Are you sure you want to encode again all files. This can be very long.',
 
 	// C
 	'caption_avfilter_geres' => 'Video filters (avfilters) managed',
@@ -99,7 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_encoder_ftp' => 'As Administrator, you can install (with FTP) .AVI .MPG .MP4 or .MOV files in the directory "tmp/upload" for encoding these files here.',
 	'info_mime' => 'Mime type : ',
 	'info_nom_fichier' => 'File name : ',
-	'info_nombre_encodage_attente' => 'There are 3 document(s) waiting for encoding',
+	'info_nombre_encodage_attente' => 'One document is awaiting encoding',
+	'info_nombre_encodages_attentes' => 'There are @nb@ documents awaiting encoding',
 	'info_nombre_encodes' => '@nb@ files have been properly encoded.',
 	'info_objet_non_publie' => 'Not published',
 	'info_page_ffmpeg_infos' => 'This page is only available for information. It shows the complete configuration of the FFMpeg installation on your system.',

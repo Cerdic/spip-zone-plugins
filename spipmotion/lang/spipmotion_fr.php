@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bitrate' => 'Bitrate vid&eacute;o de la sortie en kb/s : ',
 	'bitrate_audio' => 'Bitrate audio de la sortie en kb/s : ',
 	'bouton_encoder' => 'Encoder',
+	'bouton_reencoder_tout' => 'R&eacute;encoder tous les fichiers',
+	'bouton_reencoder_tout_message' => '&Ecirc;tes vous s&ucirc;r de vouloir relancer l\'encodage de tous les fichiers. Cette op&eacute;ration peut &ecirc;tre tr&egrave;s longue.',
 
 	// C
 	'caption_avfilter_geres' => 'Filtres vid&eacute;os (avfilters) g&eacute;r&eacute;s',
@@ -99,7 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_encoder_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .AVI, .MPG, .MP4 ou .MOV dans le dossier "tmp/upload" pour ensuite les encoder au format FLV ici.',
 	'info_mime' => 'Type mime : ',
 	'info_nom_fichier' => 'Nom du fichier : ',
-	'info_nombre_encodage_attente' => 'Il y a @nb@ document(s) en attente d\'encodage',
+	'info_nombre_encodage_attente' => 'Un document est en attente d\'encodage',
+	'info_nombre_encodages_attentes' => 'Il y a @nb@ documents en attente d\'encodage',
 	'info_nombre_encodes' => '@nb@ fichiers ont &eacute;t&eacute; correctement encod&eacute;s.',
 	'info_objet_non_publie' => 'Non publi&eacute;',
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
