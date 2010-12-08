@@ -28,7 +28,7 @@ function action_super_cron_dist(){
 	        isset($parts['port'])?$parts['port']:80,
 	        $errno, $errstr, 30);
 		if ($fp) {
-	    	$out = "GET ".$url." HTTP/1.1\r\n";
+	    	$out = "GET ".$parts['path']."?".$parts['query']." HTTP/1.1\r\n";
     		$out.= "Host: ".$parts['host']."\r\n";
     		$out.= "Connection: Close\r\n\r\n";
 			fwrite($fp, $out);
