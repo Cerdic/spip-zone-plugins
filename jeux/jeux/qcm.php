@@ -19,6 +19,7 @@ separateurs optionnels   : [titre], [texte], [config], [score]
 parametres de configurations par defaut :
 	trou=auto // taille du trou affiche en cas de proposition unique
 	une_par_une=non // affiche les questions une par une
+	corrections=oui // corrige chaque reponse (juste ou fausse) et affiche les precisions eventuelles
 	solution=non // donne la(les) bonne(s) reponse(s) lors de la correction
 	points=oui // affiche eventuellement les points dans les questions
 	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
@@ -130,10 +131,11 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
   } // foreach
 } // function
 
-function qcm_les_points($phrase, $points) {
-	if (!jeux_config('points')) return $phrase;
+function qcm_les_points($phrase, $points, $veto=false) {
+	if (!jeux_config('points') || $veto) return $phrase;
     $pointsHTML = '<span class="jeux_points"> ('.$points. _T('jeux:point'.(abs($points)>1?'s':'')).')</span>';
-  	if (preg_match(',^(.*)( ?: *)$,', $phrase, $regs)) $phrase = $regs[1].$pointsHTML.$regs[2];
+  	if (preg_match(',( ?: *)$,', $phrase, $regs)) 
+		$phrase = substr_replace($phrase, $pointsHTML, strlen($phrase)-strlen($regs[1]), 0);
 	  else $phrase .= $pointsHTML;
 	return $phrase;  
 }
@@ -201,6 +203,8 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 	 if (!is_array($reponse)) $reponse=trim($reponse);
 	 $bonneReponse = false; $qrm_score = 0;
  	 if ($reponse) {
+		// chaque question est-elle corrigee ?
+		$affiche_correction = jeux_config('corrections');
 		// les points de la reponse donnee...
 		$pointsR = 0;
 		if (is_array($reponse)) foreach($reponse as $r) $pointsR += $qcms[$indexQCM]['points'][$r]>0?$qcms[$indexQCM]['points'][$r]:0;
@@ -212,7 +216,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 		if (!$qrm) {
 			// la reponse donnee & precision des points eventuels de la mauvaise reponse...
 			$codeHTML.='<div class="qcm_reponse">'
-				 .((($pointsR==$pointsQ) || ($pointsR==0))?$intro:qcm_les_points($intro, $pointsR))
+				 .((($pointsR==$pointsQ) || ($pointsR==0))?$intro:qcm_les_points($intro, $pointsR, !$affiche_correction))
 				 .($trou?$reponse:$qcms[$indexQCM]['propositions'][$reponse])
 				 .'</div>';
 
@@ -225,19 +229,21 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 			// on renseigne le resultat detaille
 			$qcm_score_detaille[] = $trou?"T$indexQCM_1:$reponse:".($bonneReponse?$pointsR:'0')
 				:"Q$indexQCM_1:R$reponse:$pointsR";
-				
-			// les precisions eventuelles
-			$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
-			if (strlen($prec)) $codeHTML.="<div class=\"qcm_precision\">$prec</div>";
-	
-			$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
-				._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
+
+			if($affiche_correction) {
+				// reponse juste ou fausse ?
+				$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
+					._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
+				// les precisions eventuelles
+				$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
+				if (strlen($prec)) $codeHTML.="<div class=\"qcm_precision\">$prec</div>";
+			}
 
 		// question a reponses multiples
 		} else foreach($reponse as $r) {
 			// la reponse donnee & precision des points de la mauvaise reponse...
 			$codeHTML.='<div class="qcm_reponse">'
-				 .qcm_les_points($intro, $qcms[$indexQCM]['points'][$r])
+				 .qcm_les_points($intro, $qcms[$indexQCM]['points'][$r], !$affiche_correction)
 				 .$qcms[$indexQCM]['propositions'][$r]
 				 .'</div>';
 
@@ -249,12 +255,14 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 			$qcm_score_detaille[] = "Q$indexQCM_1:R$r:".$qcms[$indexQCM]['points'][$r];
 			$qrm_score += $qcms[$indexQCM]['points'][$r];
 				
-			$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
-				._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
-
-			// les precisions eventuelles
-			$prec = $qcms[$indexQCM]['precisions'][$r];
-			if (strlen($prec)) $codeHTML.="<div class=\"qcm_precision\">$prec</div>";
+			if($affiche_correction) {
+				// reponse juste ou fausse ?
+				$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
+					._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
+				// les precisions eventuelles
+				$prec = $qcms[$indexQCM]['precisions'][$r];
+				if (strlen($prec)) $codeHTML.="<div class=\"qcm_precision\">$prec</div>";
+			}
 		}
 
 	// pas de reponse postee...
@@ -318,6 +326,7 @@ function jeux_qcm_init() {
 	return "
 		trou=auto	// taille du trou affiche en cas de proposition unique
 		une_par_une=non // affiche les questions une par une
+		corrections=oui // corrige chaque reponse (juste ou fausse) et affiche les precisions eventuelles
 		solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
 		points=oui // affiche eventuellement les points dans les questions
 		max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
