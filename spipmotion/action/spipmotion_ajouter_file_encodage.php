@@ -35,6 +35,27 @@ function action_spipmotion_ajouter_file_encodage_post($r){
 	spipmotion_genere_file($id_document,$type,$id,$format);
 
 	$redirect = urldecode(_request('redirect'));
+	
+	/**
+	 * Si on a fsockopen
+	 * On essaie de lancer un encodage directement
+	 */
+	if(function_exists('fsockopen')){
+		spip_log('Appel de spipmotion_encoder en fsokopen après l ajout dans la file d un document','spipmotion');
+		$url = generer_url_action('spipmotion_encoder');
+		$parts=parse_url($url);
+		$fp = fsockopen($parts['host'],
+	        isset($parts['port'])?$parts['port']:80,
+	        $errno, $errstr, 30);
+		if ($fp) {
+	    	$out = "GET ".$parts['path']."?".$parts['query']." HTTP/1.1\r\n";
+    		$out.= "Host: ".$parts['host']."\r\n";
+    		$out.= "Connection: Close\r\n\r\n";
+			fwrite($fp, $out);
+			fclose($fp);
+			return $redirect;
+		}
+	}
 
 	return $redirect;
 }

@@ -290,9 +290,8 @@ function spipmotion_post_spipmotion_encodage($flux){
 	 * On essaie de relancer un encodage directement
 	 */
 	if(function_exists('fsockopen')){
-		spip_log('Appel de spipmotion_encoder en fsokopen après l ajout dans la file d un document','spipmotion');
+		spip_log('Appel de spipmotion_encoder en fsokopen après l ajout dans la réussite d un encodage','spipmotion');
 		$url = generer_url_action('spipmotion_encoder');
-		spip_log($url,'test');
 		$parts=parse_url($url);
 		$fp = fsockopen($parts['host'],
 	        isset($parts['port'])?$parts['port']:80,
