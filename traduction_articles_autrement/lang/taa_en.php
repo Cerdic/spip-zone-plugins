@@ -12,5 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // O
 'options' => "Options",
 
+// T
+'titre_plugin' => "Article translations differently",
+
 );
 ?>
