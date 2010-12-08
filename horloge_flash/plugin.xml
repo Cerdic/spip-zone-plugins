@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Horloge Flash</nom>
+	<auteur>
+	[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] 
+_ &#169; 2010 - Distribu&#233; sous licence GPL (m&ecirc;me num&eacute;ro que celle de SPIP)
+	</auteur>
+	<lien></lien>
+	<version>1.0.0</version>
+	<etat>stable</etat>
+	<description>Modèle d'horloge recevant la TimeZone en paramètre</description>
+	<icon>img_pack/horloge_48.png</icon>
+ 	<prefix>horlogeflash</prefix>
+	<categorie>squelette</categorie>
+	<chemin dir='' />
+</plugin>
