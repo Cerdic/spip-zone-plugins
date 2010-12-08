@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Publication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/" ID="Administrations" type="Administrations">
+  <dc:title>Tous les lieux publics (administrations, sport, culture, tourisme, ...) de A à Z</dc:title>
+  <dc:description>Toutes les coordonnées des lieux publics (administrations, sport, culture, tourisme, ...) classés par ordre alphabétique</dc:description>
+  <dc:type>Administrations</dc:type>
+</Publication>

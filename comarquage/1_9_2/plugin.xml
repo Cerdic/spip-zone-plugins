@@ -1,0 +1,59 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		Comarquage Service public avec la Documentation fran&#231;aise flux V2 (&#224; partir de SPIP 1.9.0)
+	</nom>
+	<categorie>divers</categorie>
+	<auteur>	<!-- Auteur du plugin -->
+	[Vernalis Interactive->http://vernalis-interactive.fr] d'après le [plugin Comarquage (flux v1)->http://www.spip-contrib.net/Comarquage] de Cedric MORIN et les fichiers XSL de la  [ville de Pont-Audemer->http://www.ville-pont-audemer.fr/]..  
+_ Licence GPL
+	</auteur>
+	<version>
+		0.20
+	</version>
+	<etat>
+		test
+	</etat>
+	<description>
+{{Gestion du flux XML v2 - mis en service en septembre 2010 - de la documentation fran&#231;aise et insertion du comarquage dans le site}}
+_ 
+_ Le flux s'ins&#232;re dans un article au moyen du tag :
+_ {&lt;comarquage|categorie=particuliers&gt;}
+		
+_ 
+_ Vous pouvez pr&#233;ciser une page pr&#233;cise en d&#233;finissant les attributs xml et xsl de l'url :
+_ {&lt;comarquage|categorie=particuliers|xml=N333.xml|xsl=spNoeud.xsl&gt;}
+_ 		
+_ Par exemple pour appeler la page principale de la rubrique 'Comment faire si' utilisez ce code :
+_ { &lt;comarquage|categorie=particuliers|xml=N13042.xml|xsl=spNoeud.xsl&gt;}
+_ 		
+_ Pour appeler la page principale de la rubrique 'Associations', insérer ce code :
+_ { &lt;comarquage|categorie=associations|xml=N20.xml|xsl=spNoeud.xsl&gt; }
+_ 		
+_ Les param&#232;tres de connexion &#224; la documentation fran&#231;aise sont ajustables &#224; la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
+_ 
+_ Ce plugin n&#233;ecessite la pr&#233;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&#233;e.
+_ 	
+_ N&#233;cessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1 et SPIP 1.9.2.
+	</description>
+	<lien>http://spip-contrib.net/?articleXXX</lien> <!-- URI de documentation -->
+	<prefix> 
+		comarquage
+	</prefix>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>post_propre</action>
+		<inclure>comarquage_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>comarquage_pipeline.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>comarquage_pipeline.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
