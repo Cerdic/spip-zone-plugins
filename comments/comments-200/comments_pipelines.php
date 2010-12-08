@@ -6,6 +6,9 @@
  *
  */
 
+/* pour que le pipeline ne rale pas ! */
+function comments_autoriser(){}
+
 /**
  * Generer les boutons d'admin des forum selon les droits du visiteur
  * en SPIP 2.1 uniquement
