@@ -54,7 +54,7 @@ body { font-size:0.625em; margin-bottom:1em;}
 #bando_haut ul.deroulant li ul li {float:none;position:static;}
 /*#bando_haut ul.deroulant li:hover,*/
 #bando_haut ul.deroulant li.actif,
-#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; z-index: 100;}
 #bando_haut ul.deroulant li ul {border: 1px solid #666; border-top: 0; text-align:#GET{left}; height: auto; width: auto; display: block; position:absolute; #GET{left}:-3000em; }
 /*#bando_haut ul.deroulant li:hover ul,*/
 #bando_haut ul.deroulant li.actif ul,
@@ -75,7 +75,7 @@ body { font-size:0.625em; margin-bottom:1em;}
 #bando_identite a { color: #fff; }
 #bando_identite a:hover { text-decoration: underline; }
 
-#bando_outils { /*position:fixed;*/ bottom:0px; width:100%; line-height:1.5em;clear:both; background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; border-bottom: 1px solid #888; z-index:10000;}
+#bando_outils { /*position:fixed;*/ bottom:0px; width:100%; line-height:1.5em;clear:both; background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; border-bottom: 1px solid #888; }
 
 #bando_outils li.boussole {margin-#GET{right}:20px;}
 #bando_outils li.boussole a#boutonbandeautoutsite {display:block;line-height:1em;}
