@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * et on relance la même fonction
  * 
  */
-function action_spipmotion_encoder(){
+function action_spipmotion_encoder_dist(){
 	$action = _request('action');
 	spip_log($action,'spipmotion');
 	$actions_autorisees = array(

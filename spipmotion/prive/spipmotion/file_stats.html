@@ -1,0 +1,44 @@
+[(#REM)
+	On crée deux arrays pour compter les encodages par jour
+	=> troisième boucle
+]
+#SET{dates, #ARRAY}
+#SET{nombre_date,#ARRAY}
+<B_profils>
+<table class="spipmotion">
+	<thead>
+		<tr class="row_first">
+			<th><:spipmotion:thead_template_encodage:></th>
+			<th><:spipmotion:thead_stat_duree:></th>
+			<th><:spipmotion:thead_stat_octet:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_profils(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}}>
+		#SET{stat_#VALEUR,0}
+		<BOUCLE_last10(SPIPMOTION_ATTENTES documents){extension = #VALEUR}{encode = oui}{0,20}{!par id_spipmotion_attente}>
+		
+		[(#SET{duree_encodage,[(#INFOS|table_valeur{fin_encodage}|moins{#INFOS|table_valeur{debut_encodage}})]})]
+		
+		#SET{encodage_duree_seconde,#DUREE|div{#GET{duree_encodage}}}
+		#SET{encodage_octet_seconde,#TAILLE|div{#GET{duree_encodage}}}
+		
+		#SET{stat_duree_#EXTENSION,#GET{stat_duree_#EXTENSION}|plus{#GET{encodage_duree_seconde}}}
+		#SET{stat_octet_#EXTENSION,#GET{stat_octet_#EXTENSION}|plus{#GET{encodage_octet_seconde}}}
+		</BOUCLE_last10>
+		<tr class="tr_liste">
+			<td>
+				#VALEUR
+			</td>
+			<td>
+				[(#GET{stat_duree_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE})]
+			</td>
+			<td>
+				 [(#GET{stat_octet_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE}|taille_en_octets)]
+			</td>
+		</tr>
+		</B_last10>
+	</BOUCLE_profils>
+	</tbody>
+</table>
+</B_profils>

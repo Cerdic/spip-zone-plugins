@@ -13,6 +13,14 @@
 		#INCLURE{fond=prive/spipmotion/file_encodes,env,ajax}
 	</div>
 </div>
+
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		<h1><:spipmotion:titre_page_file_stats:></h1>
+		#INCLURE{fond=prive/spipmotion/file_stats,env,ajax}
+	</div>
+</div>
+
 <!--#navigation-->
 <BOUCLE_autoriser_relancer(CONDITION){si #AUTORISER{configurer}|oui}>
 <div class="cadre cadre-r">
