@@ -14,6 +14,11 @@
 		<nom>header_prive</nom>
 		<inclure>taa_pipelines.php</inclure>
 	</pipeline>	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>taa_pipelines.php</inclure>
+	</pipeline>		
+	
 	<fonctions>taa_fonctions.php</fonctions>
 	<categorie>traduction</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
