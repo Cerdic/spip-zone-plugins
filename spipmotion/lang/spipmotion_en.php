@@ -15,7 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bitrate_audio' => 'Audio bitrate of the output in kb/s : ',
 	'bouton_encoder' => 'Encode',
 	'bouton_reencoder_tout' => 'Encode again all files',
+	'bouton_reencoder_tout_format' => 'Encode again all files in @format@',
 	'bouton_reencoder_tout_message' => 'Are you sure you want to encode again all files. This can be very long.',
+	'bouton_reencoder_tout_message_format' => 'Are you sure you want to encode again all files in @format@. This can be very long.',
 
 	// C
 	'caption_avfilter_geres' => 'Video filters (avfilters) managed',
@@ -110,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_profils_son' => 'Audio encoding profile(s)',
 	'info_profils_video' => 'Video encoding profile(s)',
 	'info_pixelformat' =>'Pixel format : ',
+	'info_reencoder' => 'Encode (again)',
 	'info_relancer_erreurs' => 'Resume all encodings in error',
 	'info_selectionner_fichier_encoder' => 'You can encode one of the following files',
 	'info_statut_encode_en_cours' => 'Ongoing',

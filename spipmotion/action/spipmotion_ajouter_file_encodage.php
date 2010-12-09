@@ -27,14 +27,17 @@ function action_spipmotion_ajouter_file_encodage_dist(){
 		return;
 	}
 	action_spipmotion_ajouter_file_encodage_post($r);
+	if(_request('redirect')){
+		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+		redirige_par_entete($redirect);
+	}
+	return;
 }
 
 function action_spipmotion_ajouter_file_encodage_post($r){
 	list(, $sign, $id, $type, $id_document,$format) = $r;
 
 	spipmotion_genere_file($id_document,$type,$id,$format);
-
-	$redirect = urldecode(_request('redirect'));
 	
 	/**
 	 * Si on a fsockopen
@@ -53,11 +56,8 @@ function action_spipmotion_ajouter_file_encodage_post($r){
     		$out.= "Connection: Close\r\n\r\n";
 			fwrite($fp, $out);
 			fclose($fp);
-			return $redirect;
 		}
 	}
-
-	return $redirect;
 }
 
 /**

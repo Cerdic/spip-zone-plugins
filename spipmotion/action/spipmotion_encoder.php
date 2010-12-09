@@ -31,6 +31,9 @@ function action_spipmotion_encoder(){
 	    echo minipres();
 	    exit;
 	}
+	include_spip('inc/genie');
+	genie_queue_watch_dist();
+	spip_log('genie_queue_watch','spipmotion');
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log('Appel de la fonction d encodage','spipmotion');
 	spip_log("Il y a $nb_encodages vidéo(s) à encoder","spipmotion");
@@ -73,4 +76,6 @@ function action_spipmotion_encoder(){
 	}else if(!$process){
 		spip_log("Trop de processus en cours de ffmpeg sur le serveur","spipmotion");
 	}
+	
+	return;
 }

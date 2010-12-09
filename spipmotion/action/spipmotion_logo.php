@@ -19,7 +19,9 @@ function action_spipmotion_logo_dist(){
 	
 	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\d*)$,", $arg, $r)){
 		spip_log("action_logo_video_dist incompris: " . $arg);
-	} else action_infos_video_post($r);
+	} else {
+		$id_logo = action_infos_video_post($r);
+	}
 	
 	if(_request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
@@ -32,10 +34,9 @@ function action_infos_video_post($r){
 	$recuperer_logo = charger_fonction('spipmotion_recuperer_logo','inc');
 	$x = $recuperer_logo($id_document);
 
-	// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_document/$id_document'");
-	
+
 	return $x;
 }
 

@@ -93,10 +93,11 @@ function spipmotion_document_desc_actions($flux){
 				$url_action_logo = generer_action_auteur('spipmotion_logo', "0/article/$id_document", $redirect);
 				$texte_logo = _T('spipmotion:recuperer_logo');
 				$flux['data'] .= " | <a href='$url_action_logo'>$texte_logo</a>";
-			
-				$texte2 = _T('spipmotion:recuperer_infos');
-				$action2 = generer_action_auteur('spipmotion_infos', "0/article/$id_document", $redirect);
-				$flux['data'] .= " | <a href='$action2'>$texte2</a>";
+				if(extension_loaded('ffmpeg')){
+					$texte2 = _T('spipmotion:recuperer_infos');
+					$action2 = generer_action_auteur('spipmotion_infos', "0/article/$id_document", $redirect);
+					$flux['data'] .= " | <a href='$action2'>$texte2</a>";
+				}
 			}
 
 			$sorties_audio = lire_config('spipmotion/fichiers_audios_sortie',array());
@@ -114,7 +115,6 @@ function spipmotion_document_desc_actions($flux){
 				}else{
 					$texte3 = _T('spipmotion:encoder_video');
 					$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "0/article/$id_document", $redirect);
-					$action3 = "<a href='$action3'>$texte3</a>";
 				}
 			}else if(
 				($infos_doc['id_orig'] == 0)
@@ -130,8 +130,7 @@ function spipmotion_document_desc_actions($flux){
 					$texte3 = _T('spipmotion:document_dans_file_attente');
 				}else{
 					$texte3 = _T('spipmotion:encoder_son');
-					$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "$id/$type/$id_document", $redirect);
-					$action3 = "<a href='$action3'>$texte3</a>";
+					$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "0/article/$id_document", $redirect);
 				}
 			}
 			if($action3)
@@ -146,7 +145,7 @@ function spipmotion_document_desc_actions($flux){
 	return $flux;
 }
 /**
- * Pipeline Cron de SPIPmotion
+ * Pipeline Cron de SPIPmotion (SPIP)
  *
  * Vérifie la présence à intervalle régulier de fichiers à encoder
  * dans la file d'attente

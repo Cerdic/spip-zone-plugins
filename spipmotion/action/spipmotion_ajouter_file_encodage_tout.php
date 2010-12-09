@@ -19,20 +19,39 @@ include_spip('inc/actions');
  */
 function action_spipmotion_ajouter_file_encodage_tout_dist(){
 
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+	
 	include_spip('inc/autoriser');
 	if(autoriser('configurer')){
-		action_spipmotion_ajouter_file_encodage_tout_post();
+		if (preg_match(",^(\w+)$,", $arg, $r)){
+			spip_log("Demande de réencodage complet au format: $arg","spipmotion");
+			$format = $arg;
+		}else{
+			spip_log("On réencode tous les fichiers","spipmotion");
+		}
+		action_spipmotion_ajouter_file_encodage_tout_post($arg);
 	}
-	$redirect = urldecode(_request('redirect'));
-
-	return $redirect;
+	if(_request('redirect')){
+		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+		redirige_par_entete($redirect);
+	}
+	return;
 }
 
-function action_spipmotion_ajouter_file_encodage_tout_post(){
-	$formats = array_merge(lire_config('spipmotion/fichiers_videos_encodage',array()),lire_config('spipmotion/fichiers_audios_encodage',array()));
+function action_spipmotion_ajouter_file_encodage_tout_post($format=false){
+	if($format){
+		if(in_array($format,lire_config('spipmotion/fichiers_audios_sortie',array()))){
+			$formats = lire_config('spipmotion/fichiers_audios_encodage',array());
+		}else if(in_array($format,lire_config('spipmotion/fichiers_videos_sortie',array()))){
+			$formats = lire_config('spipmotion/fichiers_videos_encodage',array());
+		}
+	}else{
+		$formats = array_merge(lire_config('spipmotion/fichiers_videos_encodage',array()),lire_config('spipmotion/fichiers_audios_encodage',array()));
+	}
 	$fichiers = sql_select('*','spip_documents',sql_in('extension',$formats).' AND id_orig=0');
 	while($fichier = sql_fetch($fichiers)){
-		spipmotion_genere_file($fichier['id_document'],'','','');
+		spipmotion_genere_file($fichier['id_document'],'','',$format);
 	}
 	/**
 	 * Si on a fsockopen

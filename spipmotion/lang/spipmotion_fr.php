@@ -15,7 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bitrate_audio' => 'Bitrate audio de la sortie en kb/s : ',
 	'bouton_encoder' => 'Encoder',
 	'bouton_reencoder_tout' => 'R&eacute;encoder tous les fichiers',
+	'bouton_reencoder_tout_format' => 'R&eacute;encoder tous les fichiers au format @format@',
 	'bouton_reencoder_tout_message' => '&Ecirc;tes vous s&ucirc;r de vouloir relancer l\'encodage de tous les fichiers. Cette op&eacute;ration peut &ecirc;tre tr&egrave;s longue.',
+	'bouton_reencoder_tout_message_format' => '&Ecirc;tes vous s&ucirc;r de vouloir relancer l\'encodage de tous les fichiers au format @format@. Cette op&eacute;ration peut &ecirc;tre tr&egrave;s longue.',
 
 	// C
 	'caption_avfilter_geres' => 'Filtres vid&eacute;os (avfilters) g&eacute;r&eacute;s',
@@ -110,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_poid_fichier' => 'Taille du fichier',
 	'info_profils_son' => 'Profil(s) d\'encodage son',
 	'info_profils_video' => 'Profil(s) d\'encodage vid&eacute;o',
+	'info_reencoder' => '(R&eacute;)encoder',
 	'info_relancer_erreurs' => 'Relancer tous les encodages en erreur',
 	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
 	'info_statut_encode_en_cours' => 'En cours',

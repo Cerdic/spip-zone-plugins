@@ -6,25 +6,40 @@
 <!-- descriptif= <p><:spipmotion:spipmotion_descriptif:></p>
 <B_profils_son>
 <h4><:spipmotion:info_profils_son:></h4>
-<ul>
+<ul class="menu-liste liste-item">
 <BOUCLE_profils_son(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
-	<li><a href="#encodage_#VALEUR">#VALEUR</a></li>
+	<li class="menu-entree"><a href="#encodage_#VALEUR">#VALEUR</a></li>
 </BOUCLE_profils_son>
 </ul>
 </B_profils_son>
 <B_profils_video>
 <h4><:spipmotion:info_profils_video:></h4>
-<ul>
+<ul class="menu-liste liste-item">
 <BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
-	<li><a href="#encodage_#VALEUR">#VALEUR</a></li>
+	<li class="menu-entree"><a href="#encodage_#VALEUR">#VALEUR</a></li>
 </BOUCLE_profils_video>
 </ul>
 </B_profils_video>
-<p><:spipmotion:spipmotion_liens:></p>
-<ul>
-<li><a href="http://kent1.sklunk.net/LINUX-Compiler-FFmpeg"><:spipmotion:lien_ffmpeg_linux:></a></li>
-<li><a href="http://kent1.sklunk.net/Compiler-ffmeg-sur-OSX-10-5"><:spipmotion:lien_ffmpeg_mac:></a></li>
-<li><a href="http://kent1.sklunk.net/UBUNTU-Compiler-Flvtool2-sur"><:spipmotion:lien_flvtool:></a></li>
+<B_profils_reencoder>
+<h4><:spipmotion:info_reencoder:></h4>
+<ul class="menu-liste liste-item">
+	<li class="menu-entree">
+		[(#AUTORISER{configurer}|oui)
+		[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,'',#SELF},'',<:spipmotion:bouton_reencoder_tout_message:>})]]
+	</li class="menu-entree">
+	<BOUCLE_profils_reencoder(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}}>
+		<li class="menu-entree">
+			[(#AUTORISER{configurer}|oui)
+			[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout_format{format=#VALEUR}:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,#VALEUR,#SELF},'',<:spipmotion:bouton_reencoder_tout_message_format{format=#VALEUR}:>})]]
+		</li class="menu-entree">
+	</BOUCLE_profils_reencoder>
+</ul>
+</B_profils_reencoder>
+<h4><:spipmotion:spipmotion_liens:></h4>
+<ul class="menu-liste liste-item">
+<li class="menu-entree"><a href="http://kent1.sklunk.net/LINUX-Compiler-FFmpeg" class="spip_out"><:spipmotion:lien_ffmpeg_linux:></a></li>
+<li class="menu-entree"><a href="http://kent1.sklunk.net/Compiler-ffmeg-sur-OSX-10-5" class="spip_out"><:spipmotion:lien_ffmpeg_mac:></a></li>
+<li class="menu-entree"><a href="http://kent1.sklunk.net/UBUNTU-Compiler-Flvtool2-sur" class="spip_out"><:spipmotion:lien_flvtool:></a></li>
 </ul>
 -->
 
