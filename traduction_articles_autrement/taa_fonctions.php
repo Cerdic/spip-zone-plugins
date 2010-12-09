@@ -158,4 +158,6 @@ function puce_stat($statut, $atts='') {
 	}
 	return http_img_pack($img, $alt, $atts);
 }
+
+
 ?>
