@@ -14,12 +14,14 @@
 	</div>
 </div>
 
+<BOUCLE_un_encodage(SPIPMOTION_ATTENTES){encode = oui}{0,1}> </BOUCLE_un_encodage>
 <div class="cadre cadre-r">
 	<div class="cadre_padding">
 		<h1><:spipmotion:titre_page_file_stats:></h1>
 		#INCLURE{fond=prive/spipmotion/file_stats,env,ajax}
 	</div>
 </div>
+</B_un_encodage>
 
 <!--#navigation-->
 <BOUCLE_autoriser_relancer(CONDITION){si #AUTORISER{configurer}|oui}>
