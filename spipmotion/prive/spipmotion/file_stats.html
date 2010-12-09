@@ -5,7 +5,7 @@
 #SET{dates, #ARRAY}
 #SET{nombre_date,#ARRAY}
 <B_profils>
-<table class="spipmotion">
+<table class="spipmotion" id="graph_stats_table">
 	<thead>
 		<tr class="row_first">
 			<th><:spipmotion:thead_template_encodage:></th>
@@ -27,18 +27,111 @@
 		#SET{stat_octet_#EXTENSION,#GET{stat_octet_#EXTENSION}|plus{#GET{encodage_octet_seconde}}}
 		</BOUCLE_last10>
 		<tr class="tr_liste">
-			<td>
+			<td class="format">
 				#VALEUR
 			</td>
-			<td>
-				[(#GET{stat_duree_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE})]
+			<td class="stat_duree">
+				[(#GET{stat_duree_#VALEUR}|div{#TOTAL_BOUCLE}|round{2})]
 			</td>
-			<td>
-				 [(#GET{stat_octet_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE}|taille_en_octets)]
+			<td class="stat_taille">
+				<abbr title="[(#GET{stat_octet_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE}|div{1024}|div{1024}|round{2})]">
+				[(#GET{stat_octet_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE}|taille_en_octets)]
+				</abbr>
 			</td>
 		</tr>
 		</B_last10>
 	</BOUCLE_profils>
 	</tbody>
 </table>
+<h4><:spipmotion:thead_stat_duree:></h4>
+<div id="graph_stats_encodages_duree" class="spipmotion_graphs"></div>
+<h4><:spipmotion:thead_stat_octet:></h4>
+<div id="graph_stats_encodages_taille" class="spipmotion_graphs"></div>
+<script type="text/javascript"><!--
+	jQuery(document).ready(function(){
+		var stats_duree = [];
+		var stats_taille = [];
+		var formats_labels = [];
+		var formats_ticks = [];
+
+		i=0;
+		$('#graph_stats_table tr.tr_liste').each(function(){
+			var format = spipmotion_plot_trim($(this).find('.format').text());
+			formats_ticks.push([i,format]);
+			formats_labels.push(format);
+			var duree = spipmotion_plot_trim($(this).find('.stat_duree').text());
+			stats_duree.push([i,duree]);
+			var taille = spipmotion_plot_trim($(this).find('.stat_taille abbr').attr('title'));
+			stats_taille.push([i,taille]);
+			i++;
+		});
+		var data_duree = [{ data: stats_duree }];
+		var options_duree = {
+			bars : {show:true},
+			yaxis : {},
+			xaxis : {ticks:formats_ticks},
+			grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+		};
+
+		$.plot($("#graph_stats_encodages_duree"), data_duree, options_duree);
+
+		var previousPoint = null;
+		$("#graph_stats_encodages_duree").bind("plothover", function (event, pos, item) {
+			if (item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+					$("#spipmotion_tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					var index = item.dataIndex;
+					content = formats_labels[index];
+					content += '<br />'+item.datapoint[1];
+					spipmotion_plot_showtooltip(
+						item.pageX,
+						item.pageY,
+						content,'spipmotion_tooltip');
+				}
+			}
+			else {
+				$("#spipmotion_tooltip").remove();
+				previousPoint = null;
+			}
+		});
+		
+		var data_taille = [{ data: stats_taille }];
+		var options_taille = {
+			bars : {show:true},
+			yaxis : {},
+			xaxis : {ticks:formats_ticks},
+			grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+		};
+		
+		$.plot($("#graph_stats_encodages_taille"), data_taille, options_taille);
+		
+		var previousPoint_taille = null;
+		$("#graph_stats_encodages_taille").bind("plothover", function (event, pos, item) {
+			if (item) {
+				if (previousPoint_taille != item.dataIndex) {
+					previousPoint_taille = item.dataIndex;
+					$("#spipmotion_tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					var index = item.dataIndex;
+					content = formats_labels[index];
+					content += '<br />'+item.datapoint[1]+'Mb';
+					spipmotion_plot_showtooltip(
+						item.pageX,
+						item.pageY,
+						content,'spipmotion_tooltip');
+				}
+			}
+			else {
+				$("#spipmotion_tooltip").remove();
+				previousPoint_taille = null;
+			}
+		});
+	});
+//--></script>
 </B_profils>
