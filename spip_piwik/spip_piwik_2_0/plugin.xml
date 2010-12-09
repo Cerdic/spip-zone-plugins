@@ -1,9 +1,10 @@
 <plugin>
 	<nom>Piwik</nom>
 	<auteur>jsb, kent1</auteur>
-	<version>0.4.5</version>
+	<version>0.4.6</version>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
+	<version_base>0.1</version_base>
 	<description>
 		<multi>
 			[fr]Ajoute le script de statistiques Piwik (analyseur de trafic web) sur les pages du site.
@@ -12,9 +13,8 @@
 	</description>
 	<icon>piwik.png</icon>
 	<lien>http://www.spip-contrib.net/?article2860</lien>
-	<prefix>
-	piwik
-	</prefix>
+	<prefix>piwik</prefix>
+	<install>base/piwik_upgrade.php</install>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>piwik_pipelines.php</inclure>
