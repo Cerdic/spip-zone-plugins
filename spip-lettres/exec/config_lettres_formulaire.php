@@ -90,7 +90,7 @@
 			echo fin_boite_info(true);
 		}
 
-		echo '<form class="formulaire_spip_not" method="post" action="'.generer_url_ecrire('config_lettres_formulaire').'">';
+		echo '<form method="post" action="'.generer_url_ecrire('config_lettres_formulaire').'">';
 		echo debut_cadre_trait_couleur("", true, "", _T('lettresprive:ajouter_theme'));
 		
 	    echo '<p>';
