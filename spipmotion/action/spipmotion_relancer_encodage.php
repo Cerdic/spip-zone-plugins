@@ -35,6 +35,10 @@ function action_spipmotion_relancer_encodage_dist(){
 		sql_updateq('spip_spipmotion_attentes',array('encode'=>'non'),'encode="erreur"');
 		$update = 'ok_tout';
 	}
+	
+	$encodage_direct = charger_fonction('spipmotion_encodage_direct','inc');
+	$encodage_direct();
+	
 	if(_request('redirect')){
 		$redirect = urldecode(_request('redirect'));
 		redirige_par_entete(parametre_url($redirect,'relance',$update,'&'));

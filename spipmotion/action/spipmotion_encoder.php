@@ -25,7 +25,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  */
 function action_spipmotion_encoder(){
-	if(($_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR']) && (_request('action') != 'forcer_job')){
+	$action = _request('action');
+	spip_log($action,'spipmotion');
+	$actions_autorisees = array(
+		'cron',
+		'super_cron',
+		'forcer_job',
+		'spipmotion_relancer_encodage',
+		'spipmotion_ajouter_file_encodage',
+		'spipmotion_ajouter_file_encodage_tout'
+	);
+	
+	if(($_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR']) && (!in_array($action,$actions_autorisees))){
 		spip_log('Echec : Appel de spipmotion_encoder depuis '.$_SERVER['REMOTE_ADDR'],'spipmotion');
 		include_spip('inc/minipres');
 	    echo minipres();
@@ -36,7 +47,7 @@ function action_spipmotion_encoder(){
 	spip_log('genie_queue_watch','spipmotion');
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log('Appel de la fonction d encodage','spipmotion');
-	spip_log("Il y a $nb_encodages vidéo(s) à encoder","spipmotion");
+	spip_log("Il y a $nb_encodages document(s) à encoder","spipmotion");
 	$en_cours = sql_fetsel('id_spipmotion_attente,maj','spip_spipmotion_attentes',"encode='en_cours'");
 	
 	/**
@@ -71,10 +82,10 @@ function action_spipmotion_encoder(){
 		spip_log("L'id". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage depuis plus de 5 h (".$en_cours['maj']."), on doit le réinitialiser",'spipmotion');
 		sql_updateq('spip_spipmotion_attentes',array('encode' => 'non'),'id_spipmotion_attente ='.intval($en_cours['id_spipmotion_attente']));
 	}else if(intval($en_cours['id_spipmotion_attente'])){
-		spip_log("L'id". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage",'spipmotion');
+		spip_log("L'id ". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage",'spipmotion');
 		spip_log("On attend sa fin avant d'en commencer un nouveau",'spipmotion');
 	}else if(!$process){
-		spip_log("Trop de processus en cours de ffmpeg sur le serveur","spipmotion");
+		spip_log("Trop de processus en cours de ffmpeg sur le serveur, on attend","spipmotion");
 	}
 	
 	return;
