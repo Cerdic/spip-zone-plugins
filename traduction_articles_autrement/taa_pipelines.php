@@ -5,5 +5,11 @@ function taa_header_prive($flux){
  	return $flux;	
 
  }
- 
+ function taa_formulaire_charger($flux){
+    $form = $flux['args']['form'];
+   if ($form=='editer_article'){
+       $flux['data']['_hidden'] .= '<input type="hidden" name="lang" value="'._request('lang').'"/>';
+    }
+    return $flux;
+}
 ?>
