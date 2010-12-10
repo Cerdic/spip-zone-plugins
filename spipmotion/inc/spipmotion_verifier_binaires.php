@@ -1,7 +1,7 @@
 <?php
 /**
  * SPIPmotion
- * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans SPIP
  *
  * Auteurs :
  * Quentin Drouet (kent1)
@@ -32,7 +32,7 @@
  * @param boolean $notif : On notifie ou pas?
  */
 function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
-	spip_log('Verification des binaires','spipmotion');
+	spip_log('SPIPmotion : Vérification des binaires','spipmotion');
 	$erreurs = array();
 	
 	/**
@@ -64,8 +64,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		}
 	}else{
 		exec('ffmpeg --help',$retour,$retour_int);
-		spip_log($retour,'test_binaires');
-		spip_log($retour_int,'test_binaires');
 		if($retour_int != 0){
 			ecrire_config('spipmotion_casse', 'oui');
 			$erreurs[] = 'ffmpeg';
@@ -73,8 +71,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 			$config = lire_config('spipmotion');
 			$config['chemin'] = 'ffmpeg';
 			ecrire_meta('spipmotion',serialize($config));
-			spip_log($config,'spipmotion');
-			spip_log('on met juste "ffmpeg" comme chemin pour ffmpeg','spipmotion');
 			if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
 				effacer_config('spipmotion_casse');
 			}
