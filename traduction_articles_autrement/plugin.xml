@@ -13,6 +13,10 @@
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>taa_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_fiche_objet</nom>
+		<inclure>taa_pipelines.php</inclure>
 	</pipeline>	
 	<pipeline>
 		<nom>formulaire_charger</nom>
