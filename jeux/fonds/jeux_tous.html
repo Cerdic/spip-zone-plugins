@@ -49,7 +49,7 @@
 	<th><:jeux:jeu_type:></th>
 </tr></thead>
 #PAGINATION 
-<BOUCLE_articles(ARTICLES){par date}{inverse}{pagination 10}{statut?}{recherche "</jeux>"}>
+<BOUCLE_articles(ARTICLES){par date}{inverse}{pagination 10}{statut?}{recherche &lt;/jeux&gt;}>
 <tr class ="tr_liste"  style="text-align:center" >
 	<td>[(#STATUT|puce_statut)]</td>
 	<td style="text-align:center"><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#ID_ARTICLE</a></td>
