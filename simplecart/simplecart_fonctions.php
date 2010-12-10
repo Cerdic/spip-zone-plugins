@@ -3,6 +3,37 @@ include_spip('inc/utils');
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function iso_devise($devise){
+	  switch($devise){
+            case CHF:
+                return "CHF&nbsp;";
+            case CZK:
+                return "CZK&nbsp;";
+            case DKK:
+                return "DKK&nbsp;";
+            case HUF:
+                return "HUF&nbsp;";
+            case NOK:
+                return "NOK&nbsp;";
+            case PLN:
+                return "PLN&nbsp;";
+            case SEK:
+                return "SEK&nbsp;";
+            case JPY:
+                return "&yen;";
+            case EUR:
+                return "&euro;";
+            case GBP:
+                return "&pound;";
+            case USD:
+            	 return "$";
+            case SGD:
+                return "&#36;";
+            default:
+                return "";
+          }
+}
+
 function balise_SIMPLECART_QUANTITY_dist($p) {
      $p->code = "'<span class=\"simpleCart_quantity\"></span>'";
     return $p;

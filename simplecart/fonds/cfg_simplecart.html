@@ -33,7 +33,27 @@
     </div>
 </li></ul>
 
+<h3 class="legend"><:simplecart:devise_choix:></h3>
+<ul>
+ <li>
+      <label><:simplecart:devise:></label>
+        <p class="explication"><:simplecart:devise_explication:></p>
 
+       <select name="devise_id" class="text">
+            <option value="EUR" [(#ENV{devise_id}|=={EUR}|?{selected="selected"})]>&euro; (EUR)</option>
+            <option value="USD" [(#ENV{devise_id}|=={USD}|?{selected="selected"})]>$ (USD)</option>
+            <option value="GBP" [(#ENV{devise_id}|=={GBP}|?{selected="selected"})]>&pound; (GBP)</option>
+            <option value="JPY" [(#ENV{devise_id}|=={JPY}|?{selected="selected"})]>&yen; (JPY)</option>
+            <option value="CHF" [(#ENV{devise_id}|=={CHF}|?{selected="selected"})]>CHF</option>
+            <option value="CZK" [(#ENV{devise_id}|=={CZK}|?{selected="selected"})]>CZK</option>
+            <option value="DKK" [(#ENV{devise_id}|=={DKK}|?{selected="selected"})]>DKK</option>
+            <option value="HUF" [(#ENV{devise_id}|=={HUF}|?{selected="selected"})]>HUF</option>
+            <option value="NOK" [(#ENV{devise_id}|=={NOK}|?{selected="selected"})]>NOK</option>
+            <option value="PLN" [(#ENV{devise_id}|=={PLN}|?{selected="selected"})]>PLN</option>
+            <option value="SEK" [(#ENV{devise_id}|=={SEK}|?{selected="selected"})]>SEK</option>
+       </select>
+    </li>
+</ul>
 
 <h3 class="legend"><:simplecart:c_paypal:></h3>
 <ul>

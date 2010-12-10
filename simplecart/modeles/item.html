@@ -9,7 +9,7 @@
     [<p class="item_Description">
                     (#DESCRIPTIF|textebrut)
                 </p>]
-  [<span class="item_price">$ (#ENV{price})</span>]
+  [<span class="item_price">[(#CONFIG{simplecart/devise_id}|iso_devise|sinon{$})] (#ENV{price})</span>]
   <a href="javascript:;" class="item_add"><:simplecart:add_to_cart:></a>
 
 <span class="item_thumb">[(#FICHIER|image_reduire{100}|extraire_attribut{'src'})]</span>

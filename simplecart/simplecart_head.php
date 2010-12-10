@@ -30,6 +30,8 @@ include_spip('inc/utils');
                 $js .= lire_config('simplecart/dineromail_currency') == 2 ? 'simpleCart.dmCurrency=USD;': '';
                 $js .= lire_config('simplecart/dineromail_seller_name') ? 'simpleCart.dmSellerName="'.lire_config('simplecart/dineromail_seller_name').'";': '';
                 $js .= lire_config('simplecart/dineromail_header_image') ? 'simpleCart.dmHeaderImage="'.lire_config('simplecart/dineromail_header_image').'";': '';             
+            }else{
+            $js .= lire_config('simplecart/devise_id') ? 'simpleCart.currency="'.lire_config('simplecart/devise_id').'";': '';             
             }
             
             $js .=  '</script>';
