@@ -3,8 +3,10 @@
 function jqueryui_jquery_plugins($plugins){
 	$config = @unserialize($GLOBALS['meta']['jqueryui']);
 	
-	if (!is_array($config) OR !is_array($config['plugins']))
+	if (!is_array($config) OR !is_array($config['plugins'])) {
 		$config['plugins'] = array();
+		$ecrire_meta = 'oui';
+	}
 	
 	$config['plugins'] = array_unique(array_merge(sinon(pipeline('jqueryui_forcer'),array()),$config['plugins']));
 	
@@ -110,6 +112,12 @@ function jqueryui_jquery_plugins($plugins){
 		$plugins[] = _DIR_JQUERYUI_JS.$val.".js";
 	}
 	
+	// si pas de config en base, on enregistre les scripts issu du pipeline jqueryui_forcer + leurs dépendances
+	if ($ecrire_meta == 'oui') {
+		include_spip('inc/meta');
+		ecrire_meta('jqueryui',serialize($config));
+	}
+
 	return $plugins;
 }
 
