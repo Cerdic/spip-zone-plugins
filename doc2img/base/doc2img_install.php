@@ -25,12 +25,13 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
 
 		if (version_compare($current_version,'0.0','<=')){
 			include_spip('base/create');
+			include_spip('inc/flock');
 			// A la première installation on crée les tables
 			creer_base();
 
 			// Creation du répertoire de destination pour compat
 			$dir_doc2img = _DIR_IMG.'doc2img/';
-            @mkdir($dir_doc2img);
+			sous_repertoire(_DIR_IMG, 'doc2img');
 
             // Insertion d'une première configuration
             if(!is_array(lire_config('doc2img'))){
