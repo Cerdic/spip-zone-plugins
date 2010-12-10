@@ -1,5 +1,13 @@
-#CACHE{0}<B_jeux>
-<table  class='arial2'cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
+#CACHE{0}
+[(#VAL|debut_gauche{1})]
+[(#VAL|boite_infos_accueil)]
+[(#VAL|creer_colonne_droite{1})]
+[(#VAL|debut_droite{1})]
+<B_jeux>
+[(#VAL|debut_cadre_relief{1})]
+<:jeux:liste_jeux|gros_titre{'',0}:>
+[(#VAL{liste}|debut_cadre)]
+<table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
 <tr class="titrem" style="text-align:center">
 	<th></th>
 	<th>[(#ENV{par}|!={id_jeu}|oui)<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!={id_jeu}|oui)</a>]</th>
@@ -10,18 +18,54 @@
 	<th style="text-align:center"><:jeux:type_resultat:></th>
 </tr></thead>
 #PAGINATION 
-<BOUCLE_jeux(JEUX){par #ENV{par,date}}{inverse #ENV{par}|!={id_jeu}|?{1,0}}{pagination 30}><!--{statut==refuse|publie}-->
+<BOUCLE_jeux(JEUX){par #ENV{par,date}}{inverse #ENV{par}|!={id_jeu}|?{1,0}}{pagination 10}><!--{statut==refuse|publie}-->
 <tr class ="tr_liste"  style="text-align:center" >
 	<td>[(#STATUT|puce_statut)]</td>
-	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
-	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TYPE_JEU</a></td>
-	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TITRE_PRIVE</a></td>
+	<td style="text-align:center"><a href="#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU}">#ID_JEU</a></td>
+	<td style="text-align:center"><a href="#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU}">#TYPE_JEU</a></td>
+	<td style="text-align:center"><a href="#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU}">#TITRE_PRIVE</a></td>
 	<td style="text-align:center">[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
 	<td style="text-align:center"><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>[(#TOTAL_BOUCLE|jeux_lien_jeu{jeux_resultats_jeu,#ID_JEU})]<//B_resultats></td>
 	<td style="text-align:center">#TYPE_RESULTAT_COURT</td>
 </tr>
 </BOUCLE_jeux>
 </table>
+[(#VAL{liste}|fin_cadre)]
+[(#VAL{1}|fin_cadre_relief)]
 </B_jeux>
 <:jeux:aucun_jeu:>
 <//B_jeux>
+
+<B_articles>
+[(#VAL|debut_cadre_relief{1})]
+<:jeux:liste_articles_jeux|gros_titre{'',0}:>
+[(#VAL{liste}|debut_cadre)]
+<table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
+<tr class="titrem" style="text-align:center">
+	<th></th>
+	<th><:jeux:jeu_numero_court:></th>
+	<th><:jeux:jeu_titre:></th>
+	<th><:jeux:derniere_modif:></th>
+	<th><:jeux:jeu_type:></th>
+</tr></thead>
+#PAGINATION 
+<BOUCLE_articles(ARTICLES){par date}{inverse}{pagination 10}{statut?}{recherche /jeux>}>
+<tr class ="tr_liste"  style="text-align:center" >
+	<td>[(#STATUT|puce_statut)]</td>
+	<td style="text-align:center"><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#ID_ARTICLE</a></td>
+	<td style="text-align:center"><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#TITRE</a></td>
+	<td style="text-align:center">[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
+	<td style="text-align:center">[(#TEXTE**|type_jeu)]</td>
+</tr>
+</BOUCLE_articles>
+</table>
+[(#VAL{liste}|fin_cadre)]
+[(#VAL{1}|fin_cadre_relief)]
+</B_articles>
+<//B_articles>
+
+[(#CHEMIN{img/jeux-tous.png}|debut_cadre_enfonce{1, '', <:jeux:modules_dispos|bouton_block_depliable{invisible, modules}:>})]
+[(#VAL{0}|debut_block_depliable{modules})]
+[(#VAL|table_jeux_caracteristiques)]
+[(#VAL|fin_block)]
+[(#VAL{1}|fin_cadre_enfonce)]

@@ -71,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'modifier_ce_jeu' => 'Dieses Spiel bearbeiten',
 'voir_jeu' => 'Spiel ansehen',
 'liste_jeux' => 'Liste der Spiele',
+'liste_articles_jeux' => 'Liste des articles contenant du jeu "inline"',
 'retourner_jeu' => 'Zur&uuml;ck zum Spiel',
 'jeu_titre_prive' => 'Interner Titel',
 'jeu_titre_public' => '&Ouml;ffentlicher Titel',

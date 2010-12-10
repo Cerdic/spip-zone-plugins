@@ -57,6 +57,12 @@ function titre_jeu($texte) {
 	return jeux_trouver_titre_public($texte);
 }
 
+// renvoie le type du jeu
+function type_jeu($texte) {
+	include_spip('jeux_utils');
+	return jeux_trouver_nom($texte);
+}
+
 /* Quelques balises "raccourcis" */
 
 // extraction du titre public, equivalent a : #CONTENU*|titre_jeu

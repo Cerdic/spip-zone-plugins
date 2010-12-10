@@ -8,25 +8,12 @@ function exec_jeux_tous(){
 	$par = _request('par');
 	($par =='') ? $par='date' : $par = $par;
     $commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T("jeux:liste_jeux"));
-
-	echo debut_gauche('',true);
-	echo boite_infos_accueil();
-
-	echo creer_colonne_droite('',true);
-	echo debut_droite('',true);
-
-	debut_cadre_relief();
-	echo gros_titre(_T("jeux:liste_jeux"), '', false);
-	debut_cadre('liste');
 	include_spip('public/assembler');
-	echo recuperer_fond('fonds/jeux_tous', array('par'=>$par));
-	fin_cadre('liste');
-	fin_cadre_relief();
+	echo $commencer_page(_T("jeux:liste_jeux")),
+		recuperer_fond('fonds/jeux_tous', array('par'=>$par));
+}
 
-	debut_cadre_relief();
-	debut_cadre('modules');
-	echo gros_titre(_T("jeux:modules_dispos"), '', false), '<br/>';
+function table_jeux_caracteristiques() {
 	global $jeux_caracteristiques;
 	$res = '|{{'._T('jeux:jeux').'}}|{{'._T('public:signatures_petition').'}}|{{'._T('jeux:options').'}}|{{'._T('spip:icone_configuration_site').'}}|';
 	foreach($jeux_caracteristiques['TYPES'] as $j=>$t) {
@@ -37,12 +24,7 @@ function exec_jeux_tous(){
 			. join("]\n_ &#91;",array_diff($jeux_caracteristiques['SEPARATEURS'][$j],$jeux_caracteristiques['SIGNATURES'][$j])) . ']|'
 			. preg_replace(array(',//.*,', ',[\n\r]+,'), array('', "\n_ "), $config) . '|';
 	}
-	echo propre($res);
-	fin_cadre('modules');
-	fin_cadre_relief();
-
-	echo fin_gauche(), fin_page();
+	return propre($res);
 }
-
 
 ?>
