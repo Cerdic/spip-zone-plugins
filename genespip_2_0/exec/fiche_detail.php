@@ -88,7 +88,7 @@ function exec_fiche_detail(){
 	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:detail_fiche'));
 
 
-	$result = sql_select('*', 'GENESPIP_INDIVIDU', 'id_individu = '.$id_individu);
+	$result = sql_select('*', 'spip_genespip_individu', 'id_individu = '.$id_individu);
 	while ($fiche = spip_fetch_array($result)) {
 	echo "<table width='100%'>";
 	echo '<form action="'.$url_action_accueil.'" method="post">';
@@ -106,7 +106,7 @@ function exec_fiche_detail(){
 	echo "<table width='100%'>";
 	echo "<form action=".$url_action_fiche." method=post>";
 
-	//affichage de la fiche complète
+	//affichage de la fiche complete
 	$nom=stripslashes($fiche["nom"]);
 	$prenom=stripslashes($fiche["prenom"]);
 	echo "<tr><td>"._T('genespip:nom')."</td>";
