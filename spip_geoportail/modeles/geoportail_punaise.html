@@ -1,0 +1,17 @@
+[(#REM) 
+	Affichage d'une punaise dans une carte geoportail
+	
+	Pour afficher le document xx :
+	<geoportailxx|punaise|titre=punaise|taille=10> 
+	
+	Parametres :
+	- id_geoportail : id de la carte ou afficher l'image
+	- lon, lat : position
+	- taille : taille de l'image sur la carte
+	- bord : taille du bord (en px)
+	- couleur : couleur du bord
+	- align : top, left, bottom, right ou combinaison : top-left...
+]
+<script language=javascript>
+    $.geoportail.addImg ([(#ENV{id_geoportail,0})], 0, "#ENV{titre,punaise}", #LON, #LAT, "[(#CHEMIN{img/punaise.png})]", "[(#ENV{align})]", "[(#ENV{taille,10})]", {});
+</script>
