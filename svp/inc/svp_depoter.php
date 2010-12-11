@@ -388,36 +388,27 @@ function svp_remplir_champs_sql($p) {
 function svp_remplir_slogan($description) {
 	include_spip('inc/texte');
 
-	// On extrait les multi
-	$descriptions = extraire_trads($description);
+	// On extrait les traductions de l'eventuel multi
+	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
+	$descriptions = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $description, $nbr_replace));
+	$multi = ($nbr_replace > 0) ? true : false;
 
 	// On boucle sur chaque multi ou sur la chaine elle-meme en extrayant le slogan
 	// dans les differentes langues
 	$slogan = '';
 	foreach ($descriptions as $_lang => $_descr) {
-		if (!$_lang) {
-			if ($_descr != '<multi>') {
-				// Ce n'est pas un multi, c'est directement la chaine
-				$multi = false;
-				$position = strpos($_descr, '.');
-				$slogan = ($position) ? substr($_descr, 0, $position) : couper($_descr, 150, '');
-			}
-			else {
-				// C'est un multi
-				$multi = true;
-			}
-		}
-		if ($_lang) {
-			// C'est un multi, on construit slogan en multi
-			$position = strpos($_descr, '.');
-			$slogan .= '[' . $_lang . ']' . (($position) ? substr($_descr, 0, $position) : couper($_descr, 150, ''));
-		}
+		$_descr = trim($_descr);
+		if (!$_lang)
+			$_lang = 'fr';
+		$nbr_matches = preg_match(',^(.+)[.!?\r\n\f],Um', $_descr, $matches);
+		$slogan .= (($multi) ? '[' . $_lang . ']' : '') . 
+					(($nbr_matches > 0) ? trim($matches[1]) : couper($_descr, 150, ''));
 	}
 
-	if ($multi)
-		// On renvoie le slogan multi
-		$slogan = '<multi>' . $slogan . '</multi>';
-		
+	if ($slogan)
+		// On renvoie un nouveau slogan multi ou pas
+		$slogan = (($multi) ? '<multi>' : '') . $slogan . (($multi) ? '</multi>' : '');
+
 	return $slogan;
 }
 
@@ -498,8 +489,9 @@ function svp_xml_parse_depot($url){
 				'plugin' => $plugin, 
 				'file' => $url,
 				'size' => $c['size'][0],
-				'date' => $c['date'][0],
-				'source' => $c['source'][0]
+				'date' => $c['date'][0],	// c'est la date de generation du zip
+				'source' => $c['source'][0],
+				'dernier_commit' => $c['commit'][0]
 			);
 		}
 	}

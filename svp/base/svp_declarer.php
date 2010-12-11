@@ -55,6 +55,8 @@ function svp_declarer_tables_principales($tables_principales) {
 		"etat"			=> "varchar(16) DEFAULT '' NOT NULL",
 		"etatnum"		=> "int(1) DEFAULT 0 NOT NULL", // 0 aucune indication - 1 exp - 2 dev - 3 test - 4 stable
 		"dependances"	=> "text DEFAULT '' NOT NULL",
+		"date_crea"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"id_depot"		=> "bigint(21) DEFAULT 0 NOT NULL",
 		"nom_archive"	=> "VARCHAR(255) DEFAULT '' NOT NULL", // nom du zip du paquet, depuis l'adresse de la zone
 		"nbo_archive"	=> "integer DEFAULT 0 NOT NULL", // taille de l'archive en octets
