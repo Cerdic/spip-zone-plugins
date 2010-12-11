@@ -1,22 +1,19 @@
-
-                    [(#REM) journal ]
-            <B_journal>
-            <br />
-              <div id="article">
-               <div id="titre_rubrique">
-               <div id="logo"><img src="#CHEMIN{img_pack/journal.png}" alt=""></div>
-               <:genespip:journal:>
-               </div>
-                <div id="texte" style="text-align:left">
-                        <BOUCLE_journal(SPIP_GENESPIP_JOURNAL) {par date_update}{inverse} {0,6}>
-                        [(#REM|sinon{genespip:}|concat{#DESCRIPTIF}|_T)]
-                        <BOUCLE_individu(SPIP_GENESPIP_INDIVIDU) {id_individu=#ID_INDIVIDU}>
-                        <i>[(#NOM)] [(#PRENOM)]
-                        </BOUCLE_individu>
-                        <small>[(#DATE_UPDATE)]</small> [(#AUTEUR)]</i> <br />
-                        </BOUCLE_journal>
-                </div>
-               </div>
-            </B_journal>
-
-
+[(#REM) journal ]
+	<B_journal>
+	<br />
+	<div id="article">
+		<div id="titre_rubrique">
+		<div id="logo"><img src="#CHEMIN{img_pack/journal.png}" alt="<:genespip:journal:>"></div>
+		<:genespip:journal:>
+		</div>
+		<div id="texte" style="text-align:left">
+		<BOUCLE_journal(GENESPIP_JOURNAL) {par date_update}{inverse} {0,6}>
+		[(#REM|sinon{genespip:}|concat{#DESCRIPTIF}|_T)]
+			<BOUCLE_individu(GENESPIP_INDIVIDU) {id_individu=#ID_INDIVIDU}>
+			<i>[(#NOM)] [(#PRENOM)]
+			</BOUCLE_individu>
+		<small>[(#DATE_UPDATE)]</small> [(#AUTEUR)]</i> <br />
+		</BOUCLE_journal>
+		</div>
+	</div>
+	</B_journal>

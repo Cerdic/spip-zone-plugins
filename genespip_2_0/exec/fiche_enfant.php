@@ -11,7 +11,7 @@ function exec_fiche_enfant(){
 	global $connect_statut, $connect_toutes_rubriques;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('Fiche'), "", "");
+	echo $commencer_page(_T('genealogie:fiche_enfant'), "", "");
 	$id_individu = $_GET['id_individu'].$_POST['id_individu'];
 
 	echo debut_gauche('',true);
@@ -20,10 +20,10 @@ function exec_fiche_enfant(){
 	include_spip('inc/raccourcis_fiche');
 	echo debut_droite('',true);
 
-	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:fiche enfant'));
+	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:fiche_enfant'));
 
 	echo gros_titre(_T(genespip_nom_prenom($id_individu,3)), '', false);
-	echo "<br /><fieldset><legend>"._T('genespip:liste des enfants')."</b></i></legend>";
+	echo "<br /><fieldset><legend>"._T('genespip:liste_des_enfants')."</b></i></legend>";
 	echo genespip_nom_prenom($id_individu,2);
 	echo "</fieldset>";
 
@@ -32,6 +32,3 @@ function exec_fiche_enfant(){
 	echo fin_page();
 }
 ?>
-
-
-

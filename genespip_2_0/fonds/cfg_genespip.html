@@ -1,9 +1,6 @@
-[(#REM) titre=GeneSpip]
+[(#REM) titre=<:genespip:descriptif_cfg:>]
 [(#REM) icone=logo_genespip.png]
-[(#REM) descriptif=
-<p>Cette zone permet de configurer les variables de base du plugin.</p>
-<p> Pour fonctionner correctement ce plugin doit &ecirc;tre install&eacute; en parall&egrave;le avec le plugin cfg</p>
-]
+[(#REM) descriptif=<:genespip:descriptif_cfg:>]
 
 #CACHE{0}
 [(#REM|debut_cadre_trait_couleur{1,'xxx',<:genespip:theme:>})]
@@ -12,7 +9,7 @@
 		<br />
 	[(#REM)THEME]
 	<fieldset>	
-		<legend>Thème</legend>
+		<legend><:genespip:themes:></legend>
 		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="747DFF" [(#ENV{theme}|=={'747DFF'}|?{checked="checked"})] /><span style="background:#747DFF">747DFF</span></div>
 		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="A1DF1C" [(#ENV{theme}|=={A1DF1C}|?{checked="checked"})] /><span style="background:#A1DF1C">A1DF1C</span></div>
 		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="B07575" [(#ENV{theme}|=={B07575}|?{checked="checked"})] /><span style="background:#B07575">B07575</span></div>
@@ -56,5 +53,5 @@
 		</select>
 		<div><i><:genespip:info_restriction_acces:></i></div>
 	</fieldset>
-	<div><input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" /></div>
+	<div><input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:genespip:valider:>" class="fondo" /></div>
 </form>

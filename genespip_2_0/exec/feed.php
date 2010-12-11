@@ -7,24 +7,24 @@ $url_site = $_SERVER['HTTP_REFERER'];
 
 echo "<rss version='2.0'>";
 echo "<channel>";
-echo "<title>Liste de patronymes</title>";
+echo "<title>"._T('genespip:liste_patronyme')."</title>";
 echo "<link>$url_site</link>";
-echo "<description>Site de genealogie par GENESPIP</description>";
+echo "<description>"._T('genespip:site_genealogie_genespip')."</description>";
 echo "<language>fr</language>";
 echo "<ttl>5</ttl>";
 
 echo "<item>";
-echo "<title>Liste de NOMS</title>";
+echo "<title>"._T('genespip:liste_noms')."</title>";
 echo "<link>$url_lien_distant</link>";
-echo "<category>PATRONYME</category>";
+echo "<category>"._T('genespip:patronymes')."</category>";
 echo "<description>";
-$result_individu = spip_query("SELECT nom, count(id_individu) as comptenom FROM spip_genespip_individu where poubelle<>1 group by nom");
+$result_individu = sql_select('nom, count(id_individu) as comptenom', 'spip_genespip_individu', 'poubelle<>1', 'nom');
         while ($indi = spip_fetch_array($result_individu)) {
         echo $indi['nom']." (".$indi['comptenom']."), ";
         }
 echo "</description>";
 echo "<pubDate>";
-$result_individu = spip_query("SELECT date_update FROM spip_genespip_liste ORDER BY date_update DESC limit 0,1");
+$result_individu = sql_select('date_update', 'spip_genespip_liste', 'date_update DESC limit 0,1');
         while ($indi = spip_fetch_array($result_individu)) {
         echo $indi['date_update'];
         }

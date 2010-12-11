@@ -10,11 +10,8 @@ $chemin=_DIR_PLUGIN_GENESPIP.'IMG/';
 $split = split('/',$_FILES['image']['type']);
 echo $chemin;
 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-   echo "Fichier ". $_FILES['image']['name'] ." t&eacute;l&eacute;charg&eacute; avec succ&egrave;s.\n";
+   echo _T('genespip:fichier'). . $_FILES['image']['name'] . ._T('genespip:telecharger_succes').".\n";
    move_uploaded_file ( $_FILES['image']['tmp_name'],$chemin."portrait".$_POST['id_individu'].".".$split[1]);
 genespip_modif_fiche_portrait(1,$_POST['id_individu'],$split[1]);
 }
-
-
 ?>
-

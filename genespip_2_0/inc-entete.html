@@ -8,7 +8,7 @@
  </td>
  <td rowspan="2" width="160px">
   <table cellpadding="0" cellspacing="0">
-<BOUCLE_multilingue(SPIP_GENESPIP_PARAMETRES){multilingue=1}>
+<BOUCLE_multilingue(GENESPIP_PARAMETRES){multilingue=1}>
  <tr>
   <td style="text-align:right"><img src="#CHEMIN{img_pack/rondg.png}" /></td>
   <td style="background-color:#F5F5F5;text-align:center">
@@ -34,18 +34,18 @@
 [(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
         <li><a href="#URL_PAGE{inscription}&lang=#ENV{lang}"><:genespip:inscription:></a></li>
 ]
-       <BOUCLE_patronymes(SPIP_GENESPIP_LISTE)>
+       <BOUCLE_patronymes(GENESPIP_LISTE)>
        </BOUCLE_patronymes>
-       [(#TOTAL_BOUCLE|=={0}|?{'',' '})<li><a href="#URL_PAGE{patronyme}&lang=#ENV{lang}"><:genespip:patronymes:></a></li>]
+       [(#TOTAL_BOUCLE|=={0}|oui)<li><a href="#URL_PAGE{patronyme}&lang=#ENV{lang}"><:genespip:patronymes:></a></li>]
        </B_patronymes>
-       <BOUCLE_lieux(SPIP_GENESPIP_LIEUX)>
+       <BOUCLE_lieux(GENESPIP_LIEUX)>
        </BOUCLE_lieux>
-       [(#TOTAL_BOUCLE|<{2}|?{'',' '})<li><a href="#URL_PAGE{lieu}&lang=#ENV{lang}"><:genespip:lieux:></a></li>]
+       [(#TOTAL_BOUCLE|<{2}|oui)<li><a href="#URL_PAGE{lieu}&lang=#ENV{lang}"><:genespip:lieux:></a></li>]
        </B_lieux>
-<BOUCLE_acces(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
-       <BOUCLE_galerie(SPIP_GENESPIP_INDIVIDU){portrait=1}>
+<BOUCLE_acces(GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+       <BOUCLE_galerie(GENESPIP_INDIVIDU){portrait=1}>
        </BOUCLE_galerie>
-       [(#TOTAL_BOUCLE|=={0}|?{'',' '})<li><a href="#URL_PAGE{galerie}&lang=#ENV{lang}"><:genespip:galerie:> [<small>((#TOTAL_BOUCLE))</small>]</a></li>]
+       [(#TOTAL_BOUCLE|=={0}|oui)<li><a href="#URL_PAGE{galerie}&lang=#ENV{lang}"><:genespip:galerie:> [<small>((#TOTAL_BOUCLE))</small>]</a></li>]
        </B_galerie>
        <li><a href="#URL_PAGE{statistiques}&lang=#ENV{lang}"><:genespip:statistiques:></a></li>
 </BOUCLE_acces>

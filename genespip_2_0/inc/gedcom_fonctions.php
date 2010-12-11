@@ -30,7 +30,7 @@ function genespip_Traitementaccent($texte)
 {
 
  $origine = Array('âe','áe','áa','ðc','ãu','ãi','ãe','ão');
- $convert = Array('é','è','à','ç','û','î','ê','ô');
+ $convert = Array('&eacute;','è','à','ç','û','î','ê','ô');
 
  /* Remplacement */
  $texte = str_replace($origine, $convert, $texte);
@@ -67,10 +67,10 @@ foreach ($lines as $line_num => $line) {
     $info=preg_replace('/'.$detail.'/','',$line);
     $info=genespip_Traitementaccent($info);
     $info=addslashes(utf8_encode(trim($info)));
-    $insert_tempo1="INSERT INTO spip_genespip_tempo (num_tableau ,num_info, type, info) VALUES ('".$rang."', ".trim($split[0]).", '".trim($split[1])."', '".$info."')";
+    $insert_tempo1="INSERT INTO spip_genespip_tempo (num_tableau ,num_info, type, info)', '('".$rang."', ".trim($split[0]).", '".trim($split[1])."', '".$info."')";
     $insert_tempo1=spip_query($insert_tempo1);
     }
-$result_tempo1 = spip_query("SELECT * FROM spip_genespip_tempo where type='PLAC' order by id_tempo limit 0,10");
+$result_tempo1 = sql_select('*', 'spip_genespip_tempo', 'type=PLAC', 'id_tempo limit 0,10');
 echo _T('genespip:info_gedcom_etape2')."<br /><br />";
       echo "<table>";
 while ($tempo1 = spip_fetch_array($result_tempo1)) {
@@ -86,8 +86,8 @@ while ($tempo1 = spip_fetch_array($result_tempo1)) {
 break;
 case 2:
 set_time_limit(0);
-//Création de la table des lieux
-$result_tempo1 = spip_query("SELECT * FROM spip_genespip_tempo where id_tempo=".$_POST['id_tempo']."");
+//Cr&eacute;ation de la table des lieux
+$result_tempo1 = sql_select('*', 'spip_genespip_tempo', 'id_tempo='.sql_quote(_request('id_tempo')));
         echo _T('genespip:info_gedcom_etape3')."<br /><br />";
         echo "<table>";
         echo "<form action='$url_action_accueil' method='post'>";
@@ -101,7 +101,7 @@ $result_tempo1 = spip_query("SELECT * FROM spip_genespip_tempo where id_tempo=".
         echo "<option value=''></option>";
         echo "<option value='ville'>"._T('genespip:ville')."</option>";
         echo "<option value='departement'>"._T('genespip:departement')."</option>";
-        echo "<option value='code_departement'>"._T('genespip:num departement')."</option>";
+        echo "<option value='code_departement'>"._T('genespip:num_departement')."</option>";
         echo "<option value='region'>"._T('genespip:region')."</option>";
         echo "<option value='pays'>"._T('genespip:pays')."</option>";
         echo "</select></td><td>".$split_plac[$j]."</td>";
@@ -118,7 +118,7 @@ $result_tempo1 = spip_query("SELECT * FROM spip_genespip_tempo where id_tempo=".
 break;
 case 3:
 set_time_limit(0);
-         $result_tempo1 = spip_query("SELECT info FROM spip_genespip_tempo where type='PLAC' group by info");
+         $result_tempo1 = sql_select('info', 'spip_genespip_tempo', 'type=PLAC', 'info');
          while ($tempo1 = spip_fetch_array($result_tempo1)) {
          $j=0;
          $ville=NULL;
@@ -131,15 +131,15 @@ set_time_limit(0);
          if ($_POST['champ'.$j]=='pays'){$pays=$split_plac[$j];}
          $j++;
          }
-         $req_lieu="INSERT INTO spip_genespip_lieux (ville, code_departement, departement, region, pays) VALUES ('".$ville."','".$code_departement."','".$departement."','".$region."','".$pays."')";
+         $req_lieu=sql_insert('spip_genespip_lieux', '(ville, code_departement, departement, region, pays)', '('".$ville."','".$code_departement."','".$departement."','".$region."','".$pays."')');
          $req_lieu=spip_query($req_lieu);
          $id_req_lieu=mysql_insert_id();
-         $action_sql = spip_query("UPDATE spip_genespip_tempo SET info = '".$id_req_lieu."' WHERE type='PLAC' and info = '".$tempo1['info']."'");
+         $action_sql = sql_update('spip_genespip_tempo', 'info = '".$id_req_lieu."'', 'type=PLAC and info = '".$tempo1['info']");
          }
       echo "<table>";
-      echo "<tr><td>Table de lieux cr&eacute;&eacute;e.</td>";
+      echo "<tr><td>"._T('genespip:table_lieux_cree').".</td>";
       echo "<form action='$url_action_accueil' method='post'>";
-      echo "<td><input type='submit' value='"._T('genespip:Continuer')."' class='fondo' /></td></tr>";
+      echo "<td><input type='submit' value='"._T('genespip:continuer')."' class='fondo' /></td></tr>";
       echo "<input type='hidden' name='etape' value='4' />";
       echo "<input type='hidden' name='action' value='gedcom' />";
       echo "</form>";
@@ -148,7 +148,7 @@ break;
 case 4:
 set_time_limit(0);
 //*********************************
-$result_tempo1 = spip_query("SELECT * FROM spip_genespip_tempo");
+$result_tempo1 = sql_select('*', 'spip_genespip_tempo');
         while ($tempo1 = spip_fetch_array($result_tempo1)) {
 
 $splitpointeur = split('-',$tempo1['num_tableau']);
@@ -158,32 +158,32 @@ $pointeur2=$splitpointeur[1];
 if ($pointeur1!=1){
 //FAM
    if ($tempo1['info']=='FAM'){
-   echo "<u>FAMILLE</u><br />";
+   echo "<u>"._T('genespip:famille')."</u><br />";
    }
 //INDI
    if ($tempo1['info']=='INDI' and trim($tempo1['type'])!='TYPE'){
  $id_individu=preg_replace('/@/','',trim($tempo1['type']));
  $id_individu=preg_replace('/IND/','',$id_individu);
  $id_individu=preg_replace('/I/','',$id_individu);
-      echo "<u>INDIVIDU $id_individu</u><br />";
-        $result = spip_query("SELECT id_individu FROM spip_genespip_individu where id_individu=".$id_individu);
+      echo "<u>"._T('genespip:individu')." $id_individu</u><br />";
+        $result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$id_individu'');
         echo "<font color='#480000'>id_individu=$id_individu</font><br />";
         $pointeurindividu=$pointeur1;
         if (spip_num_rows($result)==0){
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_individu (id_individu, id_auteur, date_update) VALUES (".$id_individu.", ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
+        $insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, id_auteur, date_update)', '('".$id_individu."', '".$GLOBALS['connect_id_auteur']."', '".$date_update."')');
         }
    }
 //NOTE
    if ($tempo1['info']=='NOTE'){
         echo $id_individu ."/NOTE type:".$tempo1['type'];
-        $resultnote = spip_query("SELECT * FROM spip_genespip_individu where id_individu=".$id_individu);
+        $resultnote = sql_select('*', 'spip_genespip_individu', 'id_individu='.$id_individu'');
         while ($note = spip_fetch_array($resultnote)) {
         $pointeurnote=$pointeur1;
         $id_individu=$note['id_individu'];
-        echo "<u>NOTE INDIVIDU $id_individu</u><br />";
+        echo "<u>"._T('genespip:note_individu')." $id_individu</u><br />";
         }
    }
-//Détail FAM et INDI
+//D&eacute;tail FAM et INDI
       switch ($tempo1['type']){
       case "NAME":
         $pointeurNAME=$pointeur1;
@@ -192,20 +192,20 @@ if ($pointeur1!=1){
         $splitNAME = split('/',$tempo1['info']);
         echo "<font color='#480000'> prenom=$splitNAME[0], nom=$splitNAME[1]</font><br />";
         if (trim($splitNAME[1])==NULL){$nom='?';}else{$nom=$splitNAME[1];}
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET nom = '".$nom."', prenom = '".$splitNAME[0]."' WHERE id_individu = ".$id_individu);
+        $action_sql = sql_update('spip_genespip_individu', 'nom = '".$nom."', prenom = '".$splitNAME[0]."'', 'id_individu = '.$id_individu);
         }
       break;
       case "SEX":
           if (trim($tempo1['info'])=='M'){$sexe=0;}elseif(trim($tempo1['info'])=='F'){$sexe=1;}
-          echo "<font color='#480000'> sexe=$sexe (".trim($tempo1['info']).")</font><br />";
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET sexe = ".$sexe." WHERE id_individu = ".$id_individu);
+          echo "<font color='#480000'> "._T('genespip:sexe')."=$sexe (".trim($tempo1['info']).")</font><br />";
+        $action_sql = sql_update('GENESPIP_INDIVIDU', 'sexe = ".$sexe."', 'id_individu = '.$id_individu);
       break;
       case "HUSB":
       $pointeurHUSB=$pointeur1;
         $epoux=preg_replace('/@/','',trim($tempo1['info']));
         $epoux=preg_replace('/IND/','',$epoux);
         $epoux=preg_replace('/I/','',$epoux);
-        echo "<font color='#480000'> epoux=$epoux</font><br />";
+        echo "<font color='#480000'> "._T('genespip:epoux')."=$epoux</font><br />";
       break;
       case "WIFE":
       $pointeurWIFE=$pointeur1;
@@ -213,12 +213,12 @@ if ($pointeur1!=1){
         $epouse=preg_replace('/IND/','',$epouse);
         $epouse=preg_replace('/I/','',$epouse);
       if ($pointeur1==$pointeurHUSB){$individu=$epoux;}
-        $result = spip_query("SELECT * FROM spip_genespip_evenements where id_individu=".$individu." and id_epoux=".$epouse);
+        $result = sql_select('*', 'spip_genespp_evenements', 'id_individu='.$individu.' and id_epoux='.$epouse'');
         if (spip_num_rows($result)==0){
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_evenements (id_individu, id_type_evenement, id_lieu, id_epoux, date_update) VALUES (".$individu.",3,1, ".$epouse.", '".$date_update."')");
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_evenements (id_individu, id_type_evenement, id_lieu, id_epoux, date_update) VALUES (".$epouse.",3,1, ".$individu.", '".$date_update."')");
+        $insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, id_lieu, id_epoux, date_update)', '('".$individu."',3,1, '".$epouse."', '".$date_update."')');
+        $insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, id_lieu, id_epoux, date_update)', '('".$epouse."',3,1, '".$individu."', '".$date_update."')');
         }
-        echo "<font color='#480000'> epouse=$epouse</font><br />";
+        echo "<font color='#480000'> "._T('genespip:epouse')."=$epouse</font><br />";
       break;
       case "CHIL":
         $individu=preg_replace('/@/','',trim($tempo1['info']));
@@ -227,37 +227,37 @@ if ($pointeur1!=1){
       $enfant=1;
       if ($pointeur1==$pointeurHUSB){$pere=$epoux;}else{$pere=0;}
       if ($pointeur1==$pointeurWIFE){$mere=$epouse;}else{$mere=0;}
-        $result = spip_query("SELECT id_individu FROM spip_genespip_individu where id_individu=".$individu);
+        $result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$individu'');
         if (spip_num_rows($result)==0){
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_individu (id_individu, pere, mere, id_auteur, date_update) VALUES (".$individu.", ".$epoux.", ".$epouse.", ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
+        $insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, pere, mere, id_auteur, date_update)', '('".$individu."', '".$epoux."', '".$epouse."', '".$GLOBALS['connect_id_auteur']."', '".$date_update."')');
         }else{
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET pere = ".$epoux.", mere = ".$epouse."  WHERE id_individu = ".$individu);
+        $action_sql = sql_update('spip_genespip_individu', 'pere = ".$epoux.", mere = ".$epouse." ', 'id_individu = '.$individu);
         }
-        $result = spip_query("SELECT id_individu FROM spip_genespip_individu where id_individu=".$pere);
+        $result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$pere'');
         if (spip_num_rows($result)==0){
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_individu (id_individu, enfant, id_auteur, date_update) VALUES (".$pere.", ".$enfant.", ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
+        $insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, enfant, id_auteur, date_update)', '('".$pere."', '".$enfant."', '".$GLOBALS['connect_id_auteur'].",' '".$date_update."')');
         }else{
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET enfant = ".$enfant." WHERE id_individu = ".$pere);
+        $action_sql = sql_update('spip_genespip_individu', 'enfant = ".$enfant."', 'id_individu = '.$pere);
         }
-        $result = spip_query("SELECT id_individu FROM spip_genespip_individu where id_individu=".$mere);
+        $result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$mere'');
         if (spip_num_rows($result)==0){
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_individu (id_individu, enfant, id_auteur, date_update) VALUES (".$mere.", ".$enfant.", ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
+        $insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, enfant, id_auteur, date_update)', '('".$mere."', '".$enfant."', '".$GLOBALS['connect_id_auteur']."', '".$date_update."')');
         }else{
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET enfant = ".$enfant." WHERE id_individu = ".$mere);
+        $action_sql = sql_update('spip_genespip_individu', 'enfant = ".$enfant."', 'id_individu = '.$mere);
         }
-        echo "<font color='#480000'> enfant=$individu, pere=$epoux, mere=$epouse</font><br />";
+        echo "<font color='#480000'> "._T('genespip:enfant')."=$individu, "._T('genespip:pere')."=$epoux, "._T('genespip:mere')."=$epouse</font><br />";
       break;
       case "MARR":
       $pointeurmarr=$pointeur2;
-        echo "<font color='#480000'> Info mariage&raquo;</font><br />";
+        echo "<font color='#480000'> "._T('genespip:info_mariage')."&raquo;</font><br />";
       break;
       case "BIRT":
       $pointeurnaissance=$pointeur2;
-       echo "<font color='#480000'> Info naissance&raquo;</font><br />";
+       echo "<font color='#480000'> "._T('genespip:info_naissance')."&raquo;</font><br />";
       break;
       case "DEAT":
       $pointeurdeces=$pointeur2;
-       echo "<font color='#480000'> Info deces&raquo;</font><br />";
+       echo "<font color='#480000'> "._T('genespip:info_deces')."&raquo;</font><br />";
       break;
       case "DATE":
      if ($pointeur2==$pointeurnaissance or $pointeur2==$pointeurdeces or $pointeur2==$pointeurmarr){
@@ -267,12 +267,12 @@ if ($pointeur1!=1){
          $splitDATE = split(' ',$tempo1['info']);
 
         //     0   1    2    3
-        //0 = numérique
+        //0 = num&eacute;rique
         //cas1 jj  mmm  aaaa
         //cas2 mmm aaaa             -> precision_date=~
         //cas3 aaaa                 -> precision_date=~
         //cas0
-        //0 <> numérique
+        //0 <> num&eacute;rique
         //cas4 PRE jj   mmm  aaaa   -> precision_date=PRE
         //cas5 PRE mmm  aaaa        -> precision_date=PRE
         //cas6 PRE aaaa             -> precision_date=PRE
@@ -327,89 +327,89 @@ echo "cas4";
         }*/
      }
       if ($pointeur2==$pointeurnaissance){
-        echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;naissance=$precision_date $date</font><br />";
+        echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;"._T('genespip:naissance')."=$precision_date $date</font><br />";
       $id_type_evenement=1;
-        $result = spip_query("SELECT * FROM spip_genespip_evenements where id_type_evenement=".$id_type_evenement." and id_individu = ".$id_individu);
+        $result = sql_select('*', 'spip_genespip_evenements', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$id_individu);
         if (spip_num_rows($result)==0){
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_evenements (id_individu, id_type_evenement, date_evenement, precision_date, id_lieu) VALUES (".$id_individu.",".$id_type_evenement.",'".$date."', '".$precision_date."',1)");
+        $insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, date_evenement, precision_date, id_lieu)', '(".$id_individu.",".$id_type_evenement.",'".$date."', '".$precision_date."',1)');
         }else{
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET date_evenement = '".$date."', precision_date = '".$precision_date."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$id_individu);
+        $action_sql = sql_update('GENESPIP_EVENEMENTS', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement=".$id_type_evenement." and id_individu = '.$id_individu);
         }
       }
       if ($pointeur2==$pointeurdeces){
-        echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;deces=$precision_date $date</font><br />";
+        echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;"._T('genespip:deces')."=$precision_date $date</font><br />";
       $id_type_evenement=2;
-        $result = spip_query("SELECT * FROM spip_genespip_evenements where id_type_evenement=".$id_type_evenement." and id_individu = ".$id_individu);
+        $result = sql_select('*', 'spip_genespip_evenements', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$id_individu);
         if (spip_num_rows($result)==0){
-        $insert_fiche=spip_query("INSERT INTO spip_genespip_evenements (id_individu, id_type_evenement, date_evenement, precision_date, id_lieu) VALUES (".$id_individu.",'".$id_type_evenement."' ,'".$date."', '".$precision_date."',1)");
+        $insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, date_evenement, precision_date, id_lieu)', '(".$id_individu.",'".$id_type_evenement."' ,'".$date."', '".$precision_date."',1)');
         }else{
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET date_evenement = '".$date."', precision_date = '".$precision_date."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$id_individu);
+        $action_sql = sql_update('spip_genespip_evenements', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement=".$id_type_evenement." and id_individu = '.$id_individu);
         }
       }
       if ($pointeur2==$pointeurmarr){
-        echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;mariage=$precision_date $date</font><br />";
+        echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;"._T('genespip:mariage')."=$precision_date $date</font><br />";
       $id_type_evenement=3;
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET date_evenement = '".$date."', precision_date = '".$precision_date."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$epoux." and id_epoux=".$epouse);
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET date_evenement = '".$date."', precision_date = '".$precision_date."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$epouse." and id_epoux=".$epoux);
+        $action_sql = sql_update('spip_genespip_evenements', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epoux.'" and id_epoux="'.$epouse);
+        $action_sql = sql_update('spip_genespip_evenements', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epouse.'" and id_epoux="'.$epoux);
       }
       break;
       case "PLAC":
         $id_lieu=$tempo1['info'];
       if ($pointeur2==$pointeurnaissance){
       $id_type_evenement=1;
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET id_lieu = '".$id_lieu."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$id_individu);
+        $action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement=".$id_type_evenement." and id_individu = "'.$id_individu);
       }
       if ($pointeur2==$pointeurdeces){
       $id_type_evenement=2;
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET id_lieu = '".$id_lieu."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$id_individu);
+        $action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement=".$id_type_evenement." and id_individu = "'.$id_individu);
       }
       if ($pointeur2==$pointeurmarr){
       $id_type_evenement=3;
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET id_lieu = '".$id_lieu."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$epoux." and id_epoux=".$epouse);
-        $action_sql = spip_query("UPDATE spip_genespip_evenements SET id_lieu = '".$id_lieu."' WHERE id_type_evenement=".$id_type_evenement." and id_individu = ".$epouse." and id_epoux=".$epoux);
+        $action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epoux.'" and id_epoux="'.$epouse);
+        $action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epouse.'" and id_epoux="'.$epoux);
       }
 
       break;
       case "NOTE":
         $note=$tempo1['info'];
         if ($pointeur1==$pointeurindividu){
-        echo "<b>NOTE</b> <font color='#480000'> Note=(INDIVIDU $id_individu) $note </font><br />";
-        //$resultnote = spip_query("SELECT * FROM spip_genespip_individu where id_individu=".$id_individu);
+        echo "<b>NOTE</b> <font color='#480000'> "._T('genespip:note')."=(INDIVIDU $id_individu) $note </font><br />";
+        //$resultnote = sql_select('*', 'GENESPIP_INDIVIDU', 'id_individu=".$id_individu);
         //while ($noteold = spip_fetch_array($resultnote)) {
         //$note=$noteold['note']."\r".$note;
         //}
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET note = '".$note."' WHERE id_individu = ".$id_individu);
+        $action_sql = sql_update('spip_genespip_individu', 'note = '".$note."'', 'id_individu = "'.$id_individu);
         }
       break;
       case "CONC":
         $note=$tempo1['info'];
         if ($pointeur1==$pointeurindividu or $pointeur1==$pointeurnote){
-        echo "<b>CONC</b> <font color='#480000'> Note=(INDIVIDU $id_individu) $note </font><br />";
-        $resultnote = spip_query("SELECT * FROM spip_genespip_individu where id_individu=".$id_individu);
+        echo "<b>CONC</b> <font color='#480000'> "._T('genespip:note')."=(INDIVIDU $id_individu) $note </font><br />";
+        $resultnote = sql_select('*', 'spip_genespip_individu', 'id_individu="'.$id_individu);
         while ($noteold = spip_fetch_array($resultnote)) {
         $note=$noteold['note']." ".$note;
         }
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET note = '".$note."' WHERE id_individu = ".$id_individu);
+        $action_sql = sql_update('spip_genespip_individu', 'note = '".$note."'', 'id_individu = '.$id_individu);
         $note=NULL;
         }
       break;
       case "CONT":
         $note=$tempo1['info'];
         if ($pointeur1==$pointeurindividu or $pointeur1==$pointeurnote){
-        echo "<b>CONT</b> <font color='#480000'> Note=(INDIVIDU $id_individu) $note </font><br />";
-        $resultnote = spip_query("SELECT * FROM spip_genespip_individu where id_individu=".$id_individu);
+        echo "<b>CONT</b> <font color='#480000'> "._T('genespip:note')."=(INDIVIDU $id_individu) $note </font><br />";
+        $resultnote = sql_select('*', 'spip_genespip_individu', 'id_individu="'.$id_individu);
         while ($noteold = spip_fetch_array($resultnote)) {
         $note=$noteold['note']." ".$note;
         }
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET note = '".$note."' WHERE id_individu = ".$id_individu);
+        $action_sql = sql_update('spip_genespip_individu', 'note = '".$note."'', 'id_individu = '".$id_individu"'');
         $note=NULL;
         }
       break;
       case "RESI":
         $adresse=$tempo1['info'];
         if ($pointeur1==$pointeurindividu){
-        echo "<font color='#480000'> Adresse= $adresse </font><br />";
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET adresse = '".$adresse."' WHERE id_individu = ".$id_individu);
+        echo "<font color='#480000'> "._T('genespip:adresse')."= $adresse </font><br />";
+        $action_sql = sql_update('GENESPIP_INDIVIDU', 'adresse = '".$adresse."'', 'id_individu = '".$id_individu"'');
         }
       break;
 
@@ -417,8 +417,8 @@ echo "cas4";
         $occu=$tempo1['info'];
         if ($pointeur1==$pointeurindividu){
         //$splitNAME = split('/',$tempo1['info']);
-        echo "<font color='#480000'> Metier= $occu </font><br />";
-        $action_sql = spip_query("UPDATE spip_genespip_individu SET metier = '".$occu."' WHERE id_individu = ".$id_individu);
+        echo "<font color='#480000'> "._T('genespip:metier')."= $occu </font><br />";
+        $action_sql = sql_update('spip_genespip_individu', 'metier = '".$occu."'', 'id_individu = '".$id_individu"'');
         }
       break;
 
@@ -427,21 +427,21 @@ echo "cas4";
       }
 }
 }
-//Suppression des entrées avec des noms vides
-echo "<br />Nettoyage champ NOM";
-$nettoyage=spip_query("DELETE from spip_genespip_individu where nom like ''");
+//Suppression des entr&eacute;es avec des noms vides
+echo "<br />"._T('genespip:nettoyage_champ_nom').;
+$nettoyage=spip_query("DELETE', 'GENESPIP_INDIVIDU', 'nom like ''");
 echo "--> <font color='red'>OK</font>";
-//Nettoyage champs spip_genespip_lieux non utilisés
-echo "<br />Nettoyage table LIEUX";
-            $result = spip_query("SELECT * FROM spip_genespip_lieux order by ville");
+//Nettoyage champs GENESPIP_LIEUX non utilisés
+echo "<br />"._T('genespip:nettoyage_table_lieux').;
+            $result = sql_select('*', 'spip_genespip_lieux', 'ville');
             while ($lieux = spip_fetch_array($result)) {
-            $resultnb = spip_query("SELECT * FROM spip_genespip_evenements where id_lieu=".$lieux['id_lieu']);
+            $resultnb = sql_select('*', 'spip_genespip_evenements', 'id_lieu="'.$lieux['id_lieu']);
             if(spip_num_rows($resultnb)==0){
-            spip_query("DELETE FROM spip_genespip_lieux WHERE id_lieu = ".$lieux['id_lieu']);
+            spip_query("DELETE', 'GENESPIP_LIEUX', 'id_lieu = ".$lieux['id_lieu']);
             }}
 echo "--> <font color='red'>OK</font>";
 //Suppression table tempo
-echo "<br />Suppression table temporaire";
+echo "<br />"._T('genespip:suppression_table_temporaire')."";
 $supptempo=spip_query("DROP TABLE spip_genespip_tempo");
 echo "--> <font color='red'>OK</font>";
 //MAJ liste patronyme

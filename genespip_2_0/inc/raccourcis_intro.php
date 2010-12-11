@@ -5,12 +5,12 @@
 ------Christophe RENOU--------
 */
 	if ($_GET['id_individu']!=NULL){$id_individu = $_GET['id_individu'];}else{$id_individu=$_POST['id_individu'];}
-	$result = spip_query("SELECT id_individu FROM spip_genespip_individu where poubelle = '1'");
+	$result = sql_select('id_individu', 'spip_genespip_individu', 'poubelle=1');
 	$compte = mysql_num_rows($result);
 	
-	$rac=icone_horizontale(_T('genespip:liste patronyme'), generer_url_ecrire("genespip"), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
+	$rac=icone_horizontale(_T('genespip:liste_patronyme'), generer_url_ecrire("genespip"), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
 	if ($id_individu){
-		$rac.=icone_horizontale(_T('genespip:retour fiche'), generer_url_ecrire("fiche_detail&id_individu=".$id_individu), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
+		$rac.=icone_horizontale(_T('genespip:retour_fiche'), generer_url_ecrire("fiche_detail&id_individu=".$id_individu), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
 	}
 	$rac.=icone_horizontale(_T('genespip:lieux'), generer_url_ecrire("fiche_lieux&id_individu=".$id_individu), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
 	$rac.=icone_horizontale(_T('genespip:gedcom'), generer_url_ecrire("genespip_database"), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);

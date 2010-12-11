@@ -3,7 +3,7 @@
        [(#SESSION{statut}|=={'1comite'}|?{<:genespip:redacteur:>,''})<br />]
        [(#SESSION{statut}|=={'6forum'}|?{<:genespip:visiteur:>,''})<br />]
        [(#SESSION{statut}|=={'0minirezo'}|?{<:genespip:administrateur:> ,''})<br />]
-       <BOUCLE_acces1(SPIP_GENESPIP_PARAMETRES){acces>=(#ACCESS{statut}|acces)}>
+       <BOUCLE_acces1(GENESPIP_PARAMETRES){acces>=(#ACCESS{statut}|acces)}>
        <:genespip:acces_oui:>
        </BOUCLE_acces1>
        <:genespip:acces_non:>
@@ -27,7 +27,7 @@
         #LOGIN_PUBLIC
     <br />
             <B_parametres1>
-                   <BOUCLE_parametres1(SPIP_GENESPIP_PARAMETRES)>
+                   <BOUCLE_parametres1(GENESPIP_PARAMETRES)>
             <B_documentacte>
             <div id="liste_individu" style="text-align:left;font-size:12px">
               <BOUCLE_rubacte(RUBRIQUES){!lang_select}{id_rubrique=#RUBRIQUE}>
@@ -63,5 +63,3 @@
                         </BOUCLE_forums_liens>
                 </fieldset>
             </B_forums_liens>
-
-

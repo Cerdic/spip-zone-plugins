@@ -22,12 +22,12 @@
     <div id="centre">
     <INCLURE{fond=inc-patronyme}{nom}>
       <div id="genespip_listenom">
-       <BOUCLE_acces(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
-       <BOUCLE_listing(SPIP_GENESPIP_LISTE){par nom}>
+       <BOUCLE_acces(GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+       <BOUCLE_listing(GENESPIP_LISTE){par nom}>
        [<br /><div id="genespip_lettre">(#NOM|couper{1}|unique)</div>]<a href="#URL_PAGE{patronyme,nom=#NOM}&lang=#ENV{lang}">[(#NOM|majuscules)]</a>[ ((#NOMBRE)), ]
        </BOUCLE_listing>
        </BOUCLE_acces>
-       <BOUCLE_listingnon(SPIP_GENESPIP_LISTE){par nom}>
+       <BOUCLE_listingnon(GENESPIP_LISTE){par nom}>
        [<br /><div id="genespip_lettre">(#NOM|couper{1}|unique)</div>][(#NOM|majuscules)][ ((#NOMBRE)), ]
        </BOUCLE_listingnon>
        <//B_acces>

@@ -8,9 +8,9 @@ function quand($resultat) {
     $id_epoux = $split[2];
   if($id_individu){
     if($id_epoux){
-    $req = "SELECT date_evenement, precision_date FROM spip_genespip_evenements, spip_genespip_type_evenements WHERE spip_genespip_evenements.id_individu=$id_individu and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement' and id_epoux=".$id_epoux;
+    $req = sql_select('date_evenement, precision_date', 'spip_genespip_evenements, spip_genespip_type_evenements', 'spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement' and id_epoux='.$id_epoux);
     }else{
-    $req = "SELECT date_evenement, precision_date FROM spip_genespip_evenements, spip_genespip_type_evenements WHERE spip_genespip_evenements.id_individu=$id_individu and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement'";
+    $req = sql_select('date_evenement, precision_date', 'spip_genespip_evenements, spip_genespip_type_evenements', 'spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement);
     }
     $result = spip_query($req);
      while ($row = spip_fetch_array($result)){
@@ -24,16 +24,16 @@ if (!($GLOBALS['auteur_session']['statut'] == '0minirezo' or $GLOBALS['auteur_se
     {
 // on vérifie si le site accepte les date de moins de 100 ans oui si centans=0, non si centans=1
 //si non on affiche le cadenas à la place de la date
-      $verifcentans=spip_query("SELECT centans FROM spip_genespip_parametres");
+      $verifcentans=sql_select('centans', 'spip_genespip_parametres');
       if ($rowverifcentans = spip_fetch_array($verifcentans)){$centans=$rowverifcentans['centans'];}
       if ($centans==1 and $depasse=="oui"){
-         $resultat="<img src='"._DIR_PLUGIN_GENESPIP."img_pack/limit.png' width='15px' alt='Restreint'>";
+         $resultat="<img src='"._DIR_PLUGIN_GENESPIP."img_pack/limit.png' width='15px' alt='"._T('genespip:restreint')."'>";
          }else{
 // si oui on test au cas par cas en fonction du champ limitation
-          $verif=spip_query("SELECT limitation FROM spip_genespip_individu where id_individu=".$id_individu);
+          $verif=sql_select('limitation', 'spip_genespip_individu', 'id_individu=.$id_individu');
           if ($rowverif = spip_fetch_array($verif)){$limitation=$rowverif['limitation'];}
           if ($limitation==1){
-          $resultat="<img src='"._DIR_PLUGIN_GENESPIP."img_pack/limit.png' width='15px' alt='Restreint'>";
+          $resultat="<img src='"._DIR_PLUGIN_GENESPIP."img_pack/limit.png' width='15px' alt='"._T('genespip:restreint')."'>";
           }
          }
     }
@@ -48,9 +48,9 @@ function m_j($resultat) {
     $id_epoux = $split[2];
   if($id_individu){
     if($id_epoux){
-    $req = "SELECT date_evenement, precision_date FROM spip_genespip_evenements, spip_genespip_type_evenements WHERE spip_genespip_evenements.id_individu=$id_individu and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement' and id_epoux=".$id_epoux;
+    $req = sql_select('date_evenement, precision_date', 'spip_genespip_evenements, spip_genespip_type_evenements', 'spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement' and id_epoux='.$id_epoux);
     }else{
-    $req = "SELECT date_evenement, precision_date FROM spip_genespip_evenements, spip_genespip_type_evenements WHERE spip_genespip_evenements.id_individu=$id_individu and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement'";
+    $req = sql_select('date_evenement, precision_date', 'spip_genespip_evenements, spip_genespip_type_evenements', 'spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement);
     }
     $result = spip_query($req);
      while ($row = spip_fetch_array($result)){
@@ -66,7 +66,7 @@ function lieu($resultat) {
     $id_individu = $split[0];
     $type_evenement = $split[1];
   if($id_individu){
-$result=spip_query("SELECT * FROM spip_genespip_evenements, spip_genespip_type_evenements, spip_genespip_lieux WHERE id_individu=$id_individu and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and spip_genespip_type_evenements.type_evenement='$type_evenement' and spip_genespip_lieux.id_lieu=spip_genespip_evenements.id_lieu");
+$result=sql_select('*', 'spip_genespip_evenements,spip_genespip_type_evenements,spip_genespip_lieux', 'id_individu=$id_individu and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and spip_genespip_type_evenements.type_evenement='$type_evenement' and spip_genespip_lieux.id_lieu=spip_genespip_evenements.id_lieu');
 if (spip_num_rows($result)==NULL){$resultat="";}
 while($row = spip_fetch_array($result)){
 $resultat =  $row['ville'].", ".$row['departement'].", ".$row['code_departement'].", ".$row['region'].", ".$row['pays'];
@@ -148,7 +148,7 @@ if ($tab[$col]<>0){$cellp=$cellp+1;}
 $cols=pow(2,$val2+1);
 $res .= "<td colspan='$cols' width='$lar%' style='text-align:center;min-height:60px;vartical-align:top'>";
 
-  $result = mysql_query("SELECT * FROM spip_genespip_individu where id_individu='$tab[$col]'") or die ("Requête1 invalide");
+  $result = mysql_query(sql_select('*', 'spip_genespip_individu', 'id_individu='$tab[$col]) or die ('Requête1 '._T('genespip:invalide'));
 while($row = spip_fetch_array($result)){
 if ($row['sexe']==1){$color_fond='#FFBADD';}else{$color_fond='#CECEFF';}
 $res .= "<div style='text-align:center;border:1px solid black;background-color:".$color_fond.";font-size:9px;min-height:60px;min-width:75px'>";
@@ -172,7 +172,7 @@ $val2=$val2-1;
 $lar=$lar/2;
 }
 $calc=($cellp*100)/$cell;
-$reponse = "Cellules cr&eacute;&eacute;es:$cell, Cellules occup&eacute;es:$cellp, Le tableau est occup&eacute; &agrave; $calc% ";
+$reponse = ._T('genespip:cellules_creees').:$cell, _T('genespip:cellules_occupees').:$cellp, _T('genespip:tableau_ocupe_a'). $calc% ;
 
 $res .= "</table>";
 $res .= "<br /><div style='font-size:10px'><b>[$reponse]</b></div>";
@@ -222,7 +222,7 @@ function balise_MARIAGE($p){
 //----------Balise photo----------
 function requete_photo($id_individu,$format_portrait,$portrait){
 if ($portrait==1){
-$resultat = "<img src='"._DIR_PLUGIN_GENESPIP."IMG/portrait".$id_individu.".".$format_portrait."' alt='Portrait'>";
+$resultat = "<img src='"._DIR_PLUGIN_GENESPIP."IMG/portrait".$id_individu.".".$format_portrait."' alt='"._T('genespip:portrait')."'>";
 }
   return $resultat;
 }
@@ -235,7 +235,7 @@ function balise_PHOTO($p){
 //----------Balise signature----------
 function requete_signature($id_individu,$format_signature,$signature){
 if ($signature==1){
-$resultat = "<img src='"._DIR_PLUGIN_GENESPIP."IMG/signature".$id_individu.".".$format_signature."' alt='Signature'>";
+$resultat = "<img src='"._DIR_PLUGIN_GENESPIP."IMG/signature".$id_individu.".".$format_signature."' alt='"._T('genespip:signature')."'>";
 }
   return $resultat;
 }

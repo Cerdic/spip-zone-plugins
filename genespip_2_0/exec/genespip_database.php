@@ -29,7 +29,7 @@ function exec_genespip_database() {
 	echo propre(_T('genespip:info_doc'));
 	echo fin_boite_info(true);
 	
-	$rac=icone_horizontale(_T('genespip:liste patronyme'), generer_url_ecrire("genespip"), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
+	$rac=icone_horizontale(_T('genespip:liste_patronyme'), generer_url_ecrire("genespip"), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
 	echo bloc_des_raccourcis($rac);
 	
 	echo debut_droite('',true);
@@ -45,16 +45,16 @@ function exec_genespip_database() {
 		if (is_uploaded_file($_FILES['gedcomfic']['tmp_name'])) {
 		   move_uploaded_file ( $_FILES['gedcomfic']['tmp_name'],$fic);
 		   }
-		echo "<u>debut gedcom ".$fic."</u><br />";
+		echo "<u>"._T('genespip:debut_gedcom')." ".$fic."</u><br />";
 		genespip_gedcom($fic);
-		echo "<a href='".$url_action_accueil."'>&raquo;&nbsp;Fermer</a>";
+		echo "<a href='".$url_action_accueil."'>&raquo;&nbsp;"._T('genespip:fermer')."</a>";
 	}else{
-		$ret .="Mettre &agrave; jour la base avec un fichier GedCom (1 Mo Max).<br /><br />";
+		$ret .=	_T('genespip:mettre_jour_base_fichier_gedcom')."<br /><br />";
 		$ret .= "<FORM ACTION='".$url_action_accueil."' method='POST' ENCTYPE='multipart/form-data'>";
 		$ret .= "<input type='hidden' name='action' value='gedcom'>";
-		$ret .= "<input type='hidden' name='max_file_size' value='10000000'>";
+		$ret .= "<input type='hidden' name='max_file_size' value='1048576'>";
 		$ret .= "Fichier Gedcom : <input type='file' name='gedcomfic' size='15'><br />";
-		$ret .= "<INPUT TYPE='submit' name='telecharger' value='Charger' class='fondo'>";
+		$ret .= "<INPUT TYPE='submit' name='telecharger' value='"._T('genespip:charger')."' class='fondo'>";
 		$ret .= "</form>";
 		echo $ret;
 	}
@@ -68,7 +68,7 @@ function exec_genespip_database() {
 	echo "<br />";
 	$ret1 .= "<FORM ACTION='".$url_action_accueil."' method='POST' ENCTYPE='multipart/form-data'>";
 	$ret1 .= "<input type='hidden' name='action' value='gedcom_export'>";
-	$ret1 .= "<INPUT TYPE='submit' name='exporter' value='Exporter' class='fondo'>";
+	$ret1 .= "<INPUT TYPE='submit' name='exporter' value='"._T('genespip:exporter')."' class='fondo'>";
 	$ret1 .= "</form>";
 	echo $ret1;
 	echo fin_cadre_relief(true);

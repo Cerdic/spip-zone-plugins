@@ -2,23 +2,34 @@
     <nom>GeneSPIP</nom>
     <auteur>Christophe RENOU</auteur>
     <version>2.0</version>
+    <version_base>0.1</version_base>
     <etat>test</etat>
     <description>genespip pour SPIP 2.0</description>
     <prefix>genespip</prefix>
     <icon>logo_genespip.png</icon>
-    <fonctions>genespip_fonctions.php</fonctions>    <!-- fichier charge a chaque recalul de page (espace public) -->
-    <install>base/gestion_base.php</install>
-    <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-    <pipeline>
-        <nom>ajouter_boutons</nom>
-        <action>ajouterBoutons</action>
-        <inclure>genespip_pipelines.php</inclure>
-    </pipeline>
-    
-    <pipeline>
-        <nom>header_prive</nom>
-        <action>header_prive</action>       
-        <inclure>genespip_fonctions.php</inclure>
-    </pipeline>
+    <install>base/genespip_base.php</install>
 
+	<bouton id='genespip_bandeau' parent='bando_edition'>
+		<icone>logo_genespip.png</icone>
+		<titre>genespip:genespip</titre>
+		<url>genespip</url>
+	</bouton>
+	<bouton id='genespip' parent='naviguer'>
+		<icone>logo_genespip.png</icone>
+		<titre>genespip:genespip</titre>
+		<url>genespip</url>
+	</bouton>
+
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/genespip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/genespip.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="CFG" version='[1.15.2;]' />
+	<necessite id="saisies" version='[1.8.11;]' />
 </plugin>

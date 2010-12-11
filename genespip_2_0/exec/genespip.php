@@ -21,8 +21,6 @@ function exec_genespip() {
 		exit;
 	}
 
-	genespip_verifier_base();
-
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('genespip:genealogie'), "naviguer", "genealogie");
 
@@ -45,12 +43,13 @@ function exec_genespip() {
 	echo propre(_T('genespip:info_doc'));
 	echo fin_boite_info(true);
 	
-	echo genespip_nouvelle_fiche($url_action_accueil);
+	include_spip('inc/nouvelle_fiche');
+	//echo genespip_nouvelle_fiche($url_action_accueil);
 	
 	include_spip('inc/raccourcis_intro');
 	
 	echo debut_droite('',true);	
-	$inventaire = spip_query("SELECT id_individu FROM spip_genespip_individu");
+	$inventaire = sql_select('id_individu', 'spip_genespip_individu');
 	$compteinventaire = mysql_num_rows($inventaire);
 	spip_mysql_free($inventaire);
 	if ($compteinventaire==0){
@@ -65,16 +64,16 @@ function exec_genespip() {
 			if (is_uploaded_file($_FILES['gedcomfic']['tmp_name'])) {
 			   move_uploaded_file ( $_FILES['gedcomfic']['tmp_name'],$fic);
 			}
-			echo "<u>debut gedcom ".$fic."</u><br />";
+			echo "<u>"._T('genespip:debut_gedcom')." ".$fic."</u><br />";
 			genespip_gedcom($fic);
-			echo "<a href='".$url_action_accueil."'>&raquo;&nbsp;Fermer</a>";
+			echo "<a href='".$url_action_accueil."'>&raquo;&nbsp;"._T('genespip:fermer')."</a>";
 		}else{
 			echo _T('genespip:info_gedcom_etape1');
 			$ret .= "<FORM ACTION='".$url_action_accueil."' method='POST' ENCTYPE='multipart/form-data'>";
 			$ret .= "<input type='hidden' name='action' value='gedcom'>";
-			$ret .= "<input type='hidden' name='max_file_size' value='5000000'>";
-			$ret .= "Fichier Gedcom : <input type='file' name='gedcomfic' size='15'><br />";
-			$ret .= "<INPUT TYPE='submit' name='telecharger' value='Charger' class='fondo'>";
+			$ret .= "<input type='hidden' name='max_file_size' value='1048576'>";
+			$ret .= _T('genespip:fichier_gedcom')." : <input type='file' name='gedcomfic' size='15'><br />";
+			$ret .= "<INPUT TYPE='submit' name='telecharger' value='"._T('genespip:charger')."' class='fondo'>";
 			$ret .= "</form>";
 			echo $ret;
 		}
@@ -82,17 +81,17 @@ function exec_genespip() {
 	}
 	echo debut_cadre_formulaire('',true);
 	
-	$result = spip_query("SELECT id_individu FROM spip_genespip_individu where poubelle <> '1'");
+	$result = sql_select('id_individu', 'spip_genespip_individu', 'poubelle <> 1');
 	$compte = mysql_num_rows($result);
 	spip_mysql_free($result);
-	$result = spip_query("SELECT nom, count(id_individu) as compte2 FROM spip_genespip_individu where poubelle <> '1' group by nom");
+	$result = sql_select('nom, count(id_individu) as compte2', 'spip_genespip_individu', 'poubelle <> 1', 'nom');
 	$comptenom = mysql_num_rows($result);
     
-	echo gros_titre(_T('genespip:Base GeneSPIP'), '', false);
+	echo gros_titre(_T('genespip:base_genespip'), '', false);
     echo "<table border='0' width='100%'>";
     echo "<tr><td width='50%'>";
-    echo "<p>La base contient:<br/> - <font color='#6A0000'><b>".$compte."</b></font> fiches<br />",
-         " - <font color='#6A0000'><b>".$comptenom."</b></font> patronymes</p><br />";
+    echo "<p>"._T('genespip:base_contient')." : <br/> - <font color='#6A0000'><b>".$compte."</b></font> "._T('genespip:fiches')."<br />",
+         " - <font color='#6A0000'><b>".$comptenom."</b></font> "._T('genespip:patronymes')."</p><br />";
     echo "</td><td style='vertical-align:right;text-align:top'>";
     echo "<form action='$url_action_accueil' method='post'>";
     echo "<select name='individu'>";
@@ -100,7 +99,7 @@ function exec_genespip() {
         echo "<option>$nom</a>:[$compte2]</option>";
     }
     echo "</select>";
-    echo "<br /><input type='submit' value='Valider ...' />";
+    echo "<br /><input type='submit' value='"._T('genespip:valider')." ...' />";
     echo "</form>";
     echo "</td></tr></table>";
 	echo fin_cadre_formulaire(true);
@@ -109,33 +108,33 @@ function exec_genespip() {
 	//Test nouvelle fiche si pas de doublon avant validation.
 	
 	if ($_POST['edit']=="nouvellefiche"){
-		$result = spip_query("SELECT id_individu, nom, prenom FROM spip_genespip_individu where nom = '".$_POST['nom']."' and prenom = '".$_POST['prenom']."'");
+		$result = sql_select('id_individu, nom, prenom', 'spip_genespip_individu', 'nom='.sql_quote(_request('nom')).' AND prenom='.sql_quote(_request('prenom')));
 		$compte = mysql_num_rows($result);
 		
 		echo debut_cadre_relief(true);
-		echo gros_titre(_T('genespip:nouvelle fiche'), '', false);
+		echo gros_titre(_T('genespip:nouvelle_fiche'), '', false);
 		echo "<br />";
 		echo "<form action='".$url_choix_nom."' method='post'>";
 		if ($compte>0){
 			//Si doublon, il faut confirmer
 			while (list ($id_individu, $nom, $prenom) = mysql_fetch_array($result)) {
-				$resultN = spip_query("SELECT date_evenement FROM spip_genespip_evenements where id_type_evenement='1' and id_individu = ".$id_individu);
+				$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.$id_individu);
 				$naissance=NULL;
 				while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 					$naissance=genespip_datefr($date_evenement);
 				}
-				$resultD = spip_query("SELECT date_evenement FROM spip_genespip_evenements where id_type_evenement='2' and id_individu = ".$id_individu);
+				$resultD = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=2 and id_individu ='.$id_individu);
 				$deces=NULL;
 				while (list ($date_evenement) = mysql_fetch_array($resultD)) {
 					$deces=genespip_datefr($date_evenement);
 				}
-				echo $nom." ".$prenom."(&deg;".$naissance." - &dagger;".$deces.") est pr&eacute;sent dans la base.<br />";
+				echo $nom." ".$prenom."(&deg;".$naissance." - &dagger;".$deces.") "._T('genespip:est_present_dans_base').".<br />";
 			}
-			echo "<br /><input type='submit' name='actionnew' value='Confirmer' class='fondo' />",
-			 "&nbsp;&nbsp;<input type='submit' name='actionnew' value='Annuler' class='fondo' />";
+			echo "<br /><input type='submit' name='actionnew' value='"._T('genespip:confirmer')."' class='fondo' />",
+			 "&nbsp;&nbsp;<input type='submit' name='actionnew' value='"._T('genespip:annuler')."' class='fondo' />";
 		}else{
 			//Si pas de doublon, on envoi sur detail_fiche
-			echo "Cr&eacute;ation de la fiche ".$_POST['nom']." ".$_POST['prenom'];
+			echo _T('genespip:creation_fiche')." ".$_POST['nom']." ".$_POST['prenom'];
 			$url = $url_choix_nom."&nom=".$_POST['nom']."&prenom=".$_POST['prenom']."&sexe=".$_POST['sexe']."&actionnew=Confirmer";
 			genespip_rediriger_javascript($url);
 		}
@@ -147,13 +146,13 @@ function exec_genespip() {
 
 	//Affichage des personnes en fonction du nom sélectionné.
 	if ($_POST['individu']<>""){
-		$result = spip_query('SELECT id_individu, nom, prenom, sexe FROM spip_genespip_individu where poubelle<>1 and nom = "'.$nom_select.'" order by prenom');
+		$result = sql_select('id_individu, nom, prenom, sexe', 'spip_genespip_individu', 'poubelle<>1 and nom ='.$nom_select.'', 'prenom');
 		
 		echo debut_cadre_relief(true);
 		echo gros_titre(_T('genespip:'.$nom_select), '', false);
 		echo '<br />';
 		while (list ($id_individu, $nom, $prenom, $sexe) = mysql_fetch_array($result)) {
-			$resultN = spip_query("SELECT date_evenement FROM spip_genespip_evenements where id_type_evenement='1' and id_individu = ".$id_individu);
+			$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.$id_individu);
 			$naissance=NULL;
 			while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 				$naissance=genespip_datefr($date_evenement);
@@ -172,24 +171,24 @@ function exec_genespip() {
 
 	//Affichage de la Corbeille
 	if ($_GET['poubelle']=="1"){
-		$result = spip_query("SELECT id_individu, nom, prenom, sexe FROM spip_genespip_individu where poubelle=1");
+		$result = sql_select('id_individu, nom, prenom, sexe', 'spip_genespip_individu', 'poubelle=1');
 		echo debut_cadre_relief(true);
 		echo "<table width='100%'>";
-		echo '<form action="'.$PHP_SELF.'" method="post">';
+		echo "<form action='".$PHP_SELF."' method='post'>";
 		echo "<tr><td>";
 		echo gros_titre(_T('genespip:poubelle'), '', false);
 		echo "</td>";
 		echo "<td style='vertical-align:right'><input name='submit' type='image' src='"._DIR_PLUGIN_GENESPIP."img_pack/poubelle.gif' class='fondo'></td></tr>";
 		echo "</table>";
 		echo "<table width='70%'>";
-		echo '<form action="'.$PHP_SELF.'" method="post">';
+		echo "<form action='".$PHP_SELF."' method='post'>";
 		while (list ($id_individu, $nom, $prenom, $sexe) = mysql_fetch_array($result)) {
-			$resultN = spip_query("SELECT date_evenement FROM spip_genespip_evenements where id_type_evenement='1' and id_individu = ".$id_individu);
+			$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.$id_individu);
 			$naissance=NULL;
 			while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 				$naissance=genespip_datefr($date_evenement);
 			}
-			$resultD = spip_query("SELECT date_evenement FROM spip_genespip_evenements where id_type_evenement='2' and id_individu = ".$id_individu);
+			$resultD = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=2 and id_individu ='.$id_individu);
 			$deces=NULL;
 			while (list ($date_evenement) = mysql_fetch_array($resultD)) {
 				$deces=genespip_datefr($date_evenement);
@@ -198,8 +197,8 @@ function exec_genespip() {
 			"<td><input type='checkbox' name='action_fiche[]' value='".$id_individu."' /></td></tr>";
 		}
 		//echo "<input name='action' type='hidden' value='videpoubelle' />";
-		echo "<tr><td colspan='2'><input name='actionpoubelle' type='submit' value='Supprimer' class='fondo' />",
-			 "&nbsp;&nbsp;<input name='actionpoubelle' type='submit' value='Restaurer' class='fondo' />",
+		echo "<tr><td colspan='2'><input name='actionpoubelle' type='submit' value='"._T('genespip:supprimer')."' class='fondo' />",
+			 "&nbsp;&nbsp;<input name='actionpoubelle' type='submit' value='actionpoubelle' class='fondo' />",
 			 "</td></tr>";
 		echo '</form></table>';
 		echo fin_cadre_relief(true);

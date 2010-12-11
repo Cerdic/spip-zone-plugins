@@ -9,10 +9,10 @@
 <body style='text-align:left'>
     [(#NOM_SITE_SPIP|image_typo{police=album-avantquelombre.ttf,taille=17,padding=12,couleur=#202020}|image_alpha{30})]
 
-    <div id="hierarchie"><img src="#CHEMIN{img_pack/arbreasc.png}" alt="">&nbsp;<a href="#URL_SITE_SPIP/?lang=#ENV{lang}"><:accueil_site:></a> > <:genespip:arbre_asc:></div>
+    <div id="hierarchie"><img src="#CHEMIN{img_pack/arbreasc.png}" alt="<:genespip:arbre_asc:>">&nbsp;<a href="#URL_SITE_SPIP/?lang=#ENV{lang}"><:accueil_site:></a> > <:genespip:arbre_asc:></div>
     <div>
 
-      <BOUCLE_test(SPIP_GENESPIP_INDIVIDU){id_individu}>
+      <BOUCLE_test(GENESPIP_INDIVIDU){id_individu}>
        [(#ARBRE)]
       </BOUCLE_test>
 

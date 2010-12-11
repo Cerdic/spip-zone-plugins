@@ -21,14 +21,14 @@
     </div>
     <div id="centre">
       <div id="genespip_listenom">
-       <BOUCLE_acces_lieu(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+       <BOUCLE_acces_lieu(GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
       <B_lieu>
       <fieldset>
-      <BOUCLE_lieu(SPIP_GENESPIP_LIEUX){id_lieu}>
+      <BOUCLE_lieu(GENESPIP_LIEUX){id_lieu}>
       <legend>[(#PAYS|drapeau) ][&raquo;(#REGION)][&raquo;(#DEPARTEMENT)][((#CODE_DEPARTEMENT))][&raquo;(#VILLE)] <a href="http://fr.wikipedia.org/wiki/#VILLE" target="_blank"><img src="http://fr.wikipedia.org/favicon.ico" /></a> </legend>
       </BOUCLE_lieu>
-      <BOUCLE_fiche(SPIP_GENESPIP_INDIVIDU){par nom}{par prenom}>
-      <BOUCLE_evtnaissance(SPIP_GENESPIP_EVENEMENTS){id_individu}{id_lieu}{id_type_evenement==1}>
+      <BOUCLE_fiche(GENESPIP_INDIVIDU){par nom}{par prenom}>
+      <BOUCLE_evtnaissance(GENESPIP_EVENEMENTS){id_individu}{id_lieu}{id_type_evenement==1}>
       [<u>(#NOM|unique)</u><br />]
            - <a href="#URL_PAGE{individu,id_individu=#ID_INDIVIDU}&lang=#ENV{lang}">[(#PRENOM)]</a>
          ([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])<br />
@@ -40,10 +40,10 @@
        </BOUCLE_acces_lieu>
       <INCLURE{fond=inc-acces}>
        <//B_acces_lieu>
-       <BOUCLE_acces_pays(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+       <BOUCLE_acces_pays(GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
       <B_pays>
-       <BOUCLE_pays(SPIP_GENESPIP_LIEUX){par pays}{par region}{par code_departement}{par ville}{doublons}>
-          <BOUCLE_compte(SPIP_GENESPIP_EVENEMENTS){id_lieu}{id_type_evenement==1}>
+       <BOUCLE_pays(GENESPIP_LIEUX){par pays}{par region}{par code_departement}{par ville}{doublons}>
+          <BOUCLE_compte(GENESPIP_EVENEMENTS){id_lieu}{id_type_evenement==1}>
           </BOUCLE_compte>
        [<div style="margin-top:15px">(#PAYS|drapeau|unique)</div>]
         [<div style="margin-top:10px;border-top:1px solid black"><blockquote style="background-color:#E7E7E7">(#REGION|unique)</blockquote></div>]
@@ -54,8 +54,8 @@
       </B_pays>
        </BOUCLE_acces_pays>
       <B_pays_non>
-       <BOUCLE_pays_non(SPIP_GENESPIP_LIEUX){par pays}{par region}{par code_departement}{par ville}{doublons}>
-          <BOUCLE_compte_non(SPIP_GENESPIP_EVENEMENTS){id_lieu}{id_type_evenement==1}>
+       <BOUCLE_pays_non(GENESPIP_LIEUX){par pays}{par region}{par code_departement}{par ville}{doublons}>
+          <BOUCLE_compte_non(GENESPIP_EVENEMENTS){id_lieu}{id_type_evenement==1}>
           </BOUCLE_compte_non>
        [<div style="margin-top:15px">(#PAYS|drapeau|unique)</div>]
         [<div style="margin-top:10px;border-top:1px solid black"><blockquote style="background-color:#E7E7E7">(#REGION|unique)</blockquote></div>]

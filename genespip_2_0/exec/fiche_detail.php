@@ -12,7 +12,7 @@ function exec_fiche_detail(){
 	global $connect_statut, $connect_toutes_rubriques;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('Fiche'), "", "");
+	echo $commencer_page(_T('genespip:fiche_detail'), "", "");
 	
 	$url_action_fiche=generer_url_ecrire('fiche_detail');
 	$url_action_accueil=generer_url_ecrire('genespip');
@@ -26,7 +26,7 @@ function exec_fiche_detail(){
 		genespip_rediriger_javascript($url);
 	}elseif($actionnew=='Annuler'){
 		echo "<img src='"._DIR_PLUGIN_GENESPIP."img_pack/loader.gif' />&nbsp;&nbsp;";
-		echo "Cr&eacute;ation annul&eacute;e";
+		echo _T('genespip:creation_annulee');
 		genespip_rediriger_javascript($url_action_accueil);
 	}
 
@@ -67,29 +67,28 @@ function exec_fiche_detail(){
 	$ret .= "<FORM ACTION='".$url_action_fiche."' method='POST' ENCTYPE='multipart/form-data'>";
 	$ret .= "<input type='hidden' name='edit' value='image'>";
 	$ret .= "<input name='id_individu' type='hidden' value='".$id_individu."'>";
-	$ret .= "<input type='hidden' name='max_file_size' value='100000'>";
+	$ret .= "<input type='hidden' name='max_file_size' value='102400'>";
 	$ret .= _T('genespip:media').":<input TYPE='file' NAME='image' size='10'><br />";
 	$ret .= "<select name='media'>";
 	$ret .= "<option value='photo'>"._T('genespip:photo')."</option>";
 	$ret .= "<option value='signature'>"._T('genespip:signature')."</option>";
 	$ret .= "</select>";
-	$ret .= "<INPUT TYPE='submit' NAME='telecharger' VALUE='T&eacute;l&eacute;charger' class='fondo'>";
+	$ret .= "<INPUT TYPE='submit' NAME='telecharger' VALUE='"._T('genespip:telecharger')."' class='fondo'>";
 	$ret .=_T('genespip:indication_format_photo');
 	$ret .= "</form>";
 	$ret .= fin_cadre_relief(true);
 	echo $ret;
 	//fin formulaire photo
 
-	echo genespip_nouvelle_fiche($url_action_accueil);
 	include_spip('inc/raccourcis_fiche');
 	
 
 	echo debut_droite('',true); 
 
-	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:detail fiche'));
+	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:detail_fiche'));
 
 
-	$result = spip_query("SELECT * FROM spip_genespip_individu where id_individu = ".$id_individu);
+	$result = sql_select('*', 'GENESPIP_INDIVIDU', 'id_individu = '.$id_individu);
 	while ($fiche = spip_fetch_array($result)) {
 	echo "<table width='100%'>";
 	echo '<form action="'.$url_action_accueil.'" method="post">';
@@ -100,12 +99,12 @@ function exec_fiche_detail(){
 	echo "<input name='edit' type='hidden' value='poubelle'>";
 	echo "<input name='poubelle' type='hidden' value='1'>";
 	echo "<input name='id_individu' type='hidden' value='".$id_individu."'>";
-	echo '</form></table>';
+	echo "</form></table>";
 	if ($fiche['sexe']==0){$sexegar="checked";}else{$sexefille="checked";}
 
-	echo "<br /><fieldset><legend>"._T('genespip:derniere modification')." &ndash;&rsaquo;<i><b>".$fiche['date_update']."</b></legend>";
-	echo '<table width="100%">';
-	echo '<form action="'.$url_action_fiche.'" method="post">';
+	echo "<br /><fieldset><legend>"._T('genespip:derniere_modification')." &ndash;&rsaquo;<i><b>".$fiche['date_update']."</b></legend>";
+	echo "<table width='100%'>";
+	echo "<form action=".$url_action_fiche." method=post>";
 
 	//affichage de la fiche complète
 	$nom=stripslashes($fiche["nom"]);
@@ -114,7 +113,7 @@ function exec_fiche_detail(){
 	echo '<td><input type="text" name="nom" value="'.$nom.'" size="20" /></td>';
 	echo "<td rowspan='4'>";
 	if ($fiche['portrait']==1){
-	echo "<center><img src='"._DIR_IMG."/gene_portrait_".$id_individu.".".$fiche['format_portrait']."' alt=><br />",
+	echo "<center><img src='"._DIR_IMG."/gene_portrait_".$id_individu.".".$fiche['format_portrait']."' alt=''><br />",
 		 "<a href='".$url_action_fiche."&actionportrait=0&id_individu=".$id_individu."'>&lsaquo;"._T('genespip:supprimer')."&rsaquo;</a></center>";
 	}
 	echo "</td></tr>";
@@ -136,13 +135,13 @@ function exec_fiche_detail(){
 	$adresse=stripslashes($fiche["adresse"]);
 	$source=stripslashes($fiche["source"]);
 	echo "<tr><td>"._T('genespip:metier')."</td>";
-	echo '<td colspan="2"><input type="text" name="metier" value="'.$metier.'" size="40" /></td></tr>';
+	echo "<td colspan='2'><input type='text' name='metier' value='".$metier."' size='40' /></td></tr>";
 	echo "<tr><td>"._T('genespip:adresse')."</td>";
-	echo '<td colspan="2"><input type="text" name="adresse" value="'.$adresse.'" size="40" /></td></tr>';
+	echo "<td colspan='2'><input type='text' name='adresse' value='".$adresse."' size='40' /></td></tr>";
 	echo "<tr><td style='vertical-align:top'>"._T('genespip:note')."</td><td colspan='2'><textarea name='note' rows='10' cols='45'>".stripslashes($fiche['note'])."</textarea></td></tr>";
 
 	echo "<tr><td>"._T('genespip:source')."</td>";
-	echo '<td colspan="2"><input type="text" name="source" value="'.$source.'" size="40" /></td></tr>';
+	echo "<td colspan='2'><input type='text' name='source' value='".$source."' size='40' /></td></tr>";
 	echo "<tr><td colspan='3'>";
 	if ($fiche['signature']==1){
 		echo "<center><img src='"._DIR_IMG."/gene_signature_".$id_individu.".".$fiche['format_signature']."' alt=><br />",
@@ -157,11 +156,11 @@ function exec_fiche_detail(){
 	echo "<input name='id_individu' type='hidden' value='".$id_individu."'>";
 	}
 
-	echo '<tr><td colspan="3"><hr /><input name="submit" type="submit" value="Valider" class="fondo"></td></tr>';
-	echo '</form>';
+	echo "<tr><td colspan='3'><hr /><input name='submit' type='submit' value='"._T('genespip:valider')."' class='fondo'></td></tr>";
+	echo "</form>";
 
-	echo '</table>';
-	echo '</fieldset>';
+	echo "</table>";
+	echo "</fieldset>";
 
 	echo fin_cadre_relief(true);
 	
@@ -176,17 +175,17 @@ function exec_fiche_detail(){
 		genespip_add_evt($id_individu);
 	}
 	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:evenements'));
-	$resultevt = spip_query("SELECT * FROM spip_genespip_type_evenements");
+	$resultevt = sql_select('*', 'spip_genespip_type_evenements');
 	while ($evt = spip_fetch_array($resultevt)) {
 		genespip_evt($evt['id_type_evenement'],$id_individu);
 	}
 	if ($_POST['edit']!='choix_evt'){
 		echo "<br /><fieldset><legend>$id"._T('genespip:ajout_evenement')."</legend>";
 		echo "<table width='100%'>";
-		echo '<form action="'.$url_action_fiche.'#bottom" method="post">';
+		echo "<form action='".$url_action_fiche."#bottom' method='post'>";
 		echo "<tr><td>"._T('genespip:evenement');
 		echo "&nbsp;&nbsp;<select name='id_type_evenement' size='1'>";
-		$resultevt = spip_query("SELECT * FROM spip_genespip_type_evenements");
+		$resultevt = sql_select('*', 'spip_genespip_type_evenements');
 		while ($evt = spip_fetch_array($resultevt)) {
 			echo "<option value='".$evt['id_type_evenement']."'>".$evt['clair_evenement']."</option>";
 		}

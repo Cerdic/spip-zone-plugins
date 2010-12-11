@@ -20,14 +20,14 @@
     <INCLURE{fond=inc-droite}><br />
     </div>
     <div id="centre">
-<BOUCLE_acces_galerie(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+<BOUCLE_acces_galerie(GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
       <div id="genespip_listenom" style="text-align:center">
       [(#SET{texte, <:genespip:photos:>})]
           [(#GET{texte}|image_typo{police=album-avantquelombre.ttf,taille=17,padding=14,couleur=#202020}|image_alpha{30})]
 
       <br /> <br />
-       <BOUCLE_date(SPIP_GENESPIP_EVENEMENTS){par date_evenement}{id_type_evenement=1}>
-       <BOUCLE_listingphoto(SPIP_GENESPIP_INDIVIDU){id_individu}{portrait=1}>
+       <BOUCLE_date(GENESPIP_EVENEMENTS){par date_evenement}{id_type_evenement=1}>
+       <BOUCLE_listingphoto(GENESPIP_INDIVIDU){id_individu}{portrait=1}>
        [<div style="border:1px solid #4D4D4D;background-color:#EBEBEB;padding:2px;margin:2px;position:relative;width:60px;float:right">
        <a href="[(#URL_PAGE{individu,id_individu=#ID_INDIVIDU})]" alt="#NOM #PRENOM" title="#NOM #PRENOM">(#PHOTO|image_reduire{60})</a>
        </div>]
@@ -41,7 +41,7 @@
           [(#GET{texte}|image_typo{police=album-avantquelombre.ttf,taille=17,padding=14,couleur=#202020}|image_alpha{30})]
 
       <br /> <br />
-       <BOUCLE_listingsign(SPIP_GENESPIP_INDIVIDU){signature=1}>
+       <BOUCLE_listingsign(GENESPIP_INDIVIDU){signature=1}>
        <fieldset><legend>#NOM #PRENOM</legend>
        <div style="border:1px solid #4D4D4D;background-color:white;padding:2px;margin:2px;text-align:center">
        [<a href="[(#URL_PAGE{individu,id_individu=#ID_INDIVIDU})]" alt="#NOM #PRENOM" title="#NOM #PRENOM">(#SIGNATURE|image_reduire{200})</a>]

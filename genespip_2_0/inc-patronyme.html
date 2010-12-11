@@ -1,16 +1,16 @@
     [(#REM) Liste patronyme selectione ]
-       <BOUCLE_acces_patronyme(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+       <BOUCLE_acces_patronyme(GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
         <B_fiche>
         <fieldset style="text-align:left">
            <legend>#NOM</legend>
            <div style="margin:4px"><img src="#CHEMIN{img_pack/arbredesc.png}" alt=""> <a href="#URL_PAGE{arbre,nom=#NOM,lang=#ENV{lang}}&lang=#ENV{lang}">&raquo; <:genespip:arborescence_des:> "#NOM"</a></div>
         <table style="font-size:9px">
         <tr><td></td><td style="border-right:1px dotted #353535"><:genespip:prenom:></td><td style="border-right:1px dotted #353535"><:genespip:naissance:></td><td><:genespip:deces:></td></tr>
-        <BOUCLE_fiche(SPIP_GENESPIP_INDIVIDU){nom}{par prenom}{poubelle!=1}>
+        <BOUCLE_fiche(GENESPIP_INDIVIDU){nom}{par prenom}{poubelle!=1}>
          <tr><td>
-         [(#SEXE|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/fille.gif}">]
-         [(#SEXE|=={1}|?{'',' '})<img src="#CHEMIN{img_pack/garcon.gif}">]
-         [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]</td>
+         [(#SEXE|=={0}|oui)<img src="#CHEMIN{img_pack/fille.gif}">]
+         [(#SEXE|=={1}|oui)<img src="#CHEMIN{img_pack/garcon.gif}">]
+         [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]</td>
          <td style="border-right:1px dotted #353535"><a href="#URL_PAGE{individu,id_individu=#ID_INDIVIDU}&lang=#ENV{lang}">#PRENOM</a></td>
          <td style="border-right:1px dotted #353535"><small>[&ordm;(#NAISSANCE|quand)][, (#NAISSANCE|lieu|ville)]</small></td><td><small>[&dagger;(#DECES|quand)][, (#DECES|lieu|ville)]</small></td></tr>
         </BOUCLE_fiche>
