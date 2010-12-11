@@ -6,6 +6,8 @@
  *
  */
 
+// demander a SPIP de definir 'type' dans le contexte du premier squelette
+define('_DEFINIR_CONTEXTE_TYPE',true);
 
 if ($z = _request('var_zajax')) {
 	include_spip('public/styliser_par_z');

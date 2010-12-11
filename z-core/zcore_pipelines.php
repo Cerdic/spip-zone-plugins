@@ -11,8 +11,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // definition des balises et filtres boites
 include_spip('inc/filtres_boites');
 
-// demander a SPIP de definir 'type' dans le contexte du premier squelette
-define('_DEFINIR_CONTEXTE_TYPE',true);
 // verifier une seule fois que l'on peut utiliser APL si demande
 if (defined('_Z_AJAX_PARALLEL_LOAD')) {
 	// les pages APL contiennent un <noscript>
