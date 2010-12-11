@@ -1,77 +1,5 @@
 <?php
 
-// changement de droits dans le cas de la médiathèque formulaires_joindre_document_charger_dist
-
-function formulaires_joindre_document_charger($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false, 	$proposer_media=true, $proposer_ftp=true){
-
-	include_spip('formulaires/joindre_document');
-	$valeurs = array();
-	$mode = joindre_determiner_mode($mode,$id_document,$objet);
-	
-	$valeurs['id'] = $id_document;
-	$valeurs['mode'] = $mode;
-	
-	$valeurs['url'] = 'http://';
-	$valeurs['fichier_upload'] = '';
-	
-	$valeurs['_options_upload_ftp'] = '';
-	$valeurs['_dir_upload_ftp'] = '';
-	
-	$valeurs['joindre_upload']=''; 
-	$valeurs['joindre_distant']=''; 
-	$valeurs['joindre_ftp']='';
-	$valeurs['joindre_mediatheque']='';
-
-	$valeurs['editable'] = ' ';
- 	if (intval($id_document)){
-		$valeurs['editable'] = autoriser('modifier','document',$id_document)?' ':'';
-	}
- 	
-	$valeurs['editable'] = 'ok';
-	
-	$valeurs['proposer_media'] = is_string($proposer_media) ? (preg_match('/^(false|non|no)$/i', $proposer_media) ? false : true) : $proposer_media;
-	$valeurs['proposer_ftp'] = is_string($proposer_ftp) ? (preg_match('/^(false|non|no)$/i', $proposer_ftp) ? false : true) : $proposer_ftp;
-	
-	# regarder si un choix d'upload FTP est vraiment possible
-	if (
-	 $valeurs['proposer_ftp']
-	 AND test_espace_prive() # ??
-	 AND ($mode == 'document' OR $mode == 'choix') # si c'est pour un document
-	 //AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
-	 AND $GLOBALS['flag_upload']
-	 ) {
-		include_spip('inc/actions');
-		if ($dir = determine_upload('documents')) {
-			// quels sont les docs accessibles en ftp ?
-			$valeurs['_options_upload_ftp'] = joindre_options_upload_ftp($dir, $mode);
-			// s'il n'y en a pas, on affiche un message d'aide
-			// en mode document, mais pas en mode image
-			if ($valeurs['_options_upload_ftp'] OR ($mode == 'document' OR $mode=='choix'))
-				$valeurs['_dir_upload_ftp'] = "<b>".joli_repertoire($dir)."</b>";
-		}
-	}
-	// On ne propose le FTP que si on a des choses a afficher
-	$valeurs['proposer_ftp'] = ($valeurs['_options_upload_ftp'] or $valeurs['_dir_upload_ftp']);
-	
-	if ($galerie){
-		# colonne documents ou portfolio ?
-		$valeurs['_galerie'] = $galerie;
-	}
-	if ($objet AND $id_objet){
-		$valeurs['id_objet'] = $id_objet;
-		$valeurs['objet'] = $objet;
-		$valeurs['refdoc_joindre'] = '';
-		
-		// changement de droits dans le cas de la médiathèque pour les articles
-		if ($valeurs['editable'] and objet!='articles'){
-			include_spip('inc/autoriser');
-			$valeurs['editable'] = autoriser('modifier',$objet,$id_objet)?' ':'';
-		}
-	}
-		$valeurs['editable'] = 'ok';
-	return $valeurs;
-}
-
 // http://doc.spip.org/@puce_statut_article_dist
 function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
 	global $lang_objet;
@@ -160,4 +88,157 @@ function puce_stat($statut, $atts='') {
 }
 
 
+// Provisoire, en attendant la solution des surcharge du plugin afficher objet
+function filtre_test_syndic_article_miroir($id){
+	global $my_sites;
+	if (isset($my_sites[$id]['miroir']) AND $my_sites[$id]['miroir'] == 'oui')
+		return ' ';
+	return '';
+}
+
+
+/**
+ * {where}
+ * tout simplement
+ *
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ */
+function critere_where_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if (isset($crit->param[0]))
+		$_where = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+	else
+		$_where = '@$Pile[0]["where"]';
+
+	if ($crit->cond)
+		$_where = "(($_where) ? ($_where) : '')";
+
+	if ($crit->not)
+		$_where = "array('NOT',$_where)";
+
+	$boucle->where[]= $_where;
+}
+
+/**
+ * Compter les articles publies lies a un auteur, dans une boucle auteurs
+ * pour la vue prive/liste/auteurs.html
+ * 
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ * @param <type> $left
+ */
+function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left=false){
+	$boucle = &$boucles[$idb];
+
+	$_statut = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+
+	$not="";
+	if ($crit->not)
+		$not=", 'NOT'";
+	$boucle->from['auteurs_articles'] = 'spip_auteurs_articles';
+	$boucle->from_type['auteurs_articles'] = 'left';
+	$boucle->join['auteurs_articles'] = array("'auteurs'","'id_auteur'");
+
+	$boucle->from['articles'] = 'spip_articles';
+	$boucle->from_type['articles'] = 'left';
+	$boucle->join['articles'] = array("'auteurs_articles'","'id_article'","'id_article'","'(articles.statut IS NULL OR '.sql_in('articles.statut',sql_quote($_statut)$not).')'");
+
+	$boucle->select[]= "COUNT(articles.id_article) AS compteur_articles";
+	$boucle->group[] = 'auteurs.id_auteur';
+}
+/**
+ * Compter les articles publies lies a un auteur, dans une boucle auteurs
+ * pour la vue prive/liste/auteurs.html
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_COMPTEUR_ARTICLES_dist($p) {
+	return rindex_pile($p, 'compteur_articles', 'compteur_articles_filtres');
+}
+
+
+/**
+ * Calculer l'initiale d'un nom
+ * 
+ * @param <type> $nom
+ * @return <type>
+ */
+function initiale($nom){
+	return spip_substr(trim(strtoupper($nom)),0,1);
+}
+
+/**
+ * Afficher l'initiale pour la navigation par lettres
+ * 
+ * @staticvar string $memo
+ * @param <type> $url
+ * @param <type> $initiale
+ * @param <type> $compteur
+ * @param <type> $debut
+ * @param <type> $pas
+ * @return <type>
+ */
+function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
+	static $memo = null;
+	$res = '';
+	if (!$memo 
+		OR (!$initiale AND !$url)
+		OR ($initiale!==$memo['initiale'])
+		){
+		$newcompt = intval(floor(($compteur-1)/$pas)*$pas);
+		#var_dump("$initiale:$newcompt");
+		if ($memo){
+			$on = (($memo['compteur']<=$debut)
+				AND (
+						$newcompt>$debut OR ($newcompt==$debut AND $newcompt==$memo['compteur'])
+						));
+			$res = lien_ou_expose($memo['url'],$memo['initiale'],$on,'lien_pagination');
+		}
+		if ($initiale)
+			$memo = array('initiale'=>$initiale,'url'=>parametre_url($url,'i',$initiale),'compteur'=>$newcompt);
+	}
+	return $res;
+}
+
+/**
+ * Calculer l'url vers la messagerie :
+ * - si l'auteur accepte les messages internes et que la messagerie est activee
+ * et qu'il est en ligne, on propose le lien vers la messagerie interne
+ * - sinon on propose un lien vers un email si possible
+ * - sinon rien
+ *
+ * @staticvar string $time
+ * @param int $id_auteur
+ * @param date $en_ligne
+ * @param string $statut
+ * @param string $imessage
+ * @param string $email
+ * @return string
+ */
+function auteur_lien_messagerie($id_auteur,$en_ligne,$statut,$imessage,$email){
+	static $time = null;
+	if (!in_array($statut, array('0minirezo', '1comite')))
+		return '';
+
+	if (is_null($time))
+		$time = time();
+	$parti = (($time-strtotime($en_ligne))>15*60);
+
+	if ($imessage != 'non' AND !$parti AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
+		return generer_action_auteur("editer_message","normal/$id_auteur");
+	
+	elseif (strlen($email) AND autoriser('voir', 'auteur', $id_auteur))
+		return 'mailto:' . $email;
+
+	else
+		return '';
+
+	return "<a href='$href' title=\""
+	  .  _T('info_envoyer_message_prive')
+	  . "\" class='message'>&nbsp;</a>";
+}
 ?>

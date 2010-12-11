@@ -23,6 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'titre_plugin' => "Traducción de articulos repensada",
-
+'traductions' => "Traducciones",
 );
 ?>
