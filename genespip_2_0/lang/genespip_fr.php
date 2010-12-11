@@ -75,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 	'famille' => 'Famille',
 	'fermer' => 'Fermer',
-	'fiche' => 'Fiche',
 	'fiche_de' => 'Fiche de',
 	'fiche_document' => 'Fiche document',
 	'fiche_detail' => 'Fiche d&eacute;tail',
@@ -158,7 +157,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'Nom',
 	'nombre_de_fiches' => 'Nombre de fiches',
 	'nombre_de_patronymes' => 'Nombre de patronymes',
-	'note' => 'Notes',
+	'note' => 'Note',
+	'note_individu' => 'Note individu',
 	'nouvelle_fiche' => 'Nouvelle fiche',
 	'nouvelle_liaison_document_realise' => 'Nouvelle liaison &rdquo;document&ldquo; r&eacute;alis&eacute;e',
 	'nouvelle_union' => 'Nouvelle union',
