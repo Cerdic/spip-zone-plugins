@@ -14,7 +14,8 @@
 *	<geoportailX|image|id_doc=YY|xmin=2.444775|ymin=48.92170|xmax=2.448227|ymax=48.92357>
 **/
 
-function initSpipMap[(#ENV{id_geoportail,0})](map,id)
+$.geoportail.onLoad([(#ENV{id_geoportail,0})] ,
+function onloadSpipMap[(#ENV{id_geoportail,0})](map,id)
 {	
 	var xmin = [(#ENV{xmin,2.444775})];
 	var ymin = [(#ENV{ymin,48.92170})];
@@ -39,7 +40,7 @@ function initSpipMap[(#ENV{id_geoportail,0})](map,id)
 	};
 
 	var graphic = new OpenLayers.Layer.Image(
-                '[(#TITRE)]',
+                '[(#TITRE|sinon{image})]',
                 '[(#FICHIER)]',
                 new OpenLayers.Bounds(pt1.x, pt1.y, pt2.x, pt2.y),
                 new OpenLayers.Size([(#LARGEUR)], [(#HAUTEUR)]),
@@ -48,5 +49,6 @@ function initSpipMap[(#ENV{id_geoportail,0})](map,id)
 	map.getMap().addLayer(graphic);
 	map.getMap().setCenterAtLonLat((xmin+xmax)/2,( ymin+ymax)/2, [(#ENV{zoom,15})]);
 }
+);
 </script>
 </BOUCLE_img>
