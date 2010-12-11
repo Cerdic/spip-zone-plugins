@@ -1,7 +1,0 @@
-<select name="#ENV{nom}[]" id="champ_#ENV{nom}" [ value="(#ENV{valeur})"]>
-[(#ENV{cacher_option_intro}|non)
-	<option value="0">[(#ENV{option_intro})]</option>]
-<BOUCLE_mots(MOTS){type=Type}>
-	<option value="#ID_MOT" [(#ID_MOT|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
-</BOUCLE_mots>
-</select>
