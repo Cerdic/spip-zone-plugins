@@ -21,27 +21,27 @@
       <div id="arbre" style="border-bottom:1px dotted #808080;margin-bottom:2em;margin-right:1em;">
          <a href="#URL_PAGE{individu,id_individu=#ID_INDIVIDU}&lang=#ENV{lang}">[(#SEXE|=={0}|?{"<font color='#000053'>","<font color='#7F0092'>"})]#NOM #PRENOM</font></a>
          <small><i>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</i></small>
-         [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+         [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
          <BOUCLE_mariage(GENESPIP_EVENEMENTS){id_individu=#ID_INDIVIDU}{id_type_evenement=3}{par date_evenement}>
           <blockquote>
           <b>X</b><small><i> [<:genespip:le:> (#MARIAGE|quand) <:genespip:avec:>] </i></small>
           <BOUCLE_epoux(GENESPIP_INDIVIDU){id_individu=#ID_EPOUX}>
           <a href="#URL_PAGE{individu,id_individu=#ID_INDIVIDU}&lang=#ENV{lang}">[(#SEXE|=={0}|?{"<font color='#000053'>","<font color='#7F0092'>"})]#NOM #PRENOM</font></a>
-          [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+          [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
           </BOUCLE_epoux>
           </blockquote>
          </BOUCLE_mariage>
          <div id="arbre">
                  <BOUCLE_arbre2(GENESPIP_INDIVIDU){pere=#ID_INDIVIDU}{poubelle!=1}>
                  <a href="[(#URL_PAGE{individu,id_individu=#ID_INDIVIDU})]">[(#SEXE|=={0}|?{"<font color='#000053'>","<font color='#7F0092'>"})]#NOM #PRENOM</font></a>
-                 [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                 [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
                  <small><i>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</i></small>
          <BOUCLE_mariage2(GENESPIP_EVENEMENTS){id_individu=#ID_INDIVIDU}{id_type_evenement=3}{par date_evenement}>
           <blockquote>
           <b>X</b><small><i> [<:genespip:le:> (#MARIAGE|quand) <:genespip:avec:>] </i></small>
           <BOUCLE_epoux2(GENESPIP_INDIVIDU){id_individu=#ID_EPOUX}>
           <a href="[(#URL_PAGE{individu,id_individu=#ID_INDIVIDU})]">[(#SEXE|=={0}|?{"<font color='#000053'>","<font color='#7F0092'>"})]#NOM #PRENOM</font></a>
-          [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+          [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
           </BOUCLE_epoux2>
           </blockquote>
          </BOUCLE_mariage2>
