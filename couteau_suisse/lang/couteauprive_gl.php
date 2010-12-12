@@ -123,7 +123,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'bp_tri_auteurs' => 'As ordenaci&oacute;ns de autores',
 	'bp_urls_propres' => 'Os URL propios',
 	'brouteur:description' => 'Utilizar o selector de secci&oacute;n en AJAX a partir da %rubrique_brouteur% secci&oacute;n(s)', # MODIF
-	'brouteur:nom' => 'Reglaxe do selector da secci&oacute;n',
+	'brouteur:nom' => 'Reglaxe do selector da secci&oacute;n', # MODIF
 
 	// C
 	'cache_controle' => 'Control da cach&eacute;',
@@ -179,6 +179,10 @@ Ollo : modificando este segundo par&aacute;metro, p&eacute;rdense os estilos est
 	'code_js' => 'Javascript',
 	'code_options' => 'Opci&oacute;ns',
 	'code_spip_options' => 'Opci&oacute;ns de SPIP',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'M&aacute;is informaci&oacute;n: @url@',
 	'corbeille:description' => 'SPIP suprime automaticamente os obxectos rexeitados logo de 24 horas, en xeral a iso das 4 horas da ma&ntilde;&aacute;, grazas a unha tarefa &laquo;CRON&raquo; (lanzemento peri&oacute;dico e/ou autom&aacute;tico de procesos preprogramados). Pode impedir desde aqu&iacute; ese proceso co fin de xestionar mellor a s&uacute;a papeleira.[[%arret_optimisation%]]',
 	'corbeille:nom' => 'A papeleira',
@@ -254,6 +258,8 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 	'detail_jquery3' => '{{Aviso}} : esta utilidade necesita o plugin [jQuery para SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] para funcionar correctamente con esta versi&oacute;n de  SPIP.',
 	'detail_pipelines' => 'Tubar&iacute;as (pipelines) :',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => 'Tratamentos :',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -400,6 +406,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:bloc_unique' => 'Un s&oacute; bloque aberto na p&aacute;xina:',
 	'label:blocs_cookie' => 'Utulizaci&oacute;n das cookies',
 	'label:blocs_slide' => 'Tipo de animaci&oacute;n:',
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :', # NEW
 	'label:couleurs_fonds' => 'Permitir os fondos :',
 	'label:cs_rss' => 'Activar :',
@@ -534,6 +541,7 @@ Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le cr
 	'orientation:description' => '3 criterios novos para os seus esqueletos : <code>{portrait}</code>, <code>{carre}</code> e <code>{paysage}</code>. Ideal para a ordenaci&oacute;n de fotos en funci&oacute;n da s&uacute;a forma.',
 	'orientation:nom' => 'Orientaci&oacute;n das imaxes',
 	'outil_actif' => 'Utilidade activa',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar a ferramenta',
 	'outil_cacher' => 'Non volver a mostrar',
@@ -676,6 +684,7 @@ _ • {Uso normal} : SPIP calcula todas as p&aacute;xinas p&uacute;blicas e col&
 _ • {Cach&eacute; permanente} : os per&iacute;odos de invalidaci&oacute;n da cach&eacute; son ignorados.
 _ • {Sen cach&eacute;} : desactivar temporariamente a cach&eacute; pode axudar ao desenvolvemento do web. Aqu&iacute;, nada &eacute; gardado no disco.
 _ • {Control da cach&eacute;} : opci&oacute;n id&eacute;ntica &aacute; precedente, con unha escritura sobre o disco de todos os resultados co fin de poder controlalos eventualmente.</q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP e a memoria cach&eacute;…',
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW

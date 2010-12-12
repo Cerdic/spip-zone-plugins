@@ -115,8 +115,14 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'boites_privees:nom' => 'Cajas privadas',
 	'bp_tri_auteurs' => 'El orden de autores',
 	'bp_urls_propres' => 'Las URLs propias',
-	'brouteur:description' => 'Utiliser le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s)', # NEW
-	'brouteur:nom' => 'R&eacute;glage du s&eacute;lecteur de rubrique', # NEW
+	'brouteur:description' => '@puce@ {{S&eacute;lecteur de rubrique (brouteur)}}. Utilisez le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s).
+
+@puce@ {{S&eacute;lection de mots-clefs}}. Utilisez un champ de recherche au lieu d\'une liste de s&eacute;lection &agrave; partir de %select_mots_clefs% mot(s)-clef(s).
+
+@puce@ {{S&eacute;lection d\'auteurs}}. L\'ajout d\'un auteur se fait par mini-navigateur dans la fourchette suivante :
+<q1>&bull; Une liste de s&eacute;lection pour moins de %select_min_auteurs% auteurs(s).
+_ &bull; Un champ de recherche &agrave; partir de %select_max_auteurs% auteurs(s).</q1>', # NEW
+	'brouteur:nom' => 'R&eacute;glage des s&eacute;lecteurs', # NEW
 
 	// C
 	'cache_controle' => 'Control de la cach&eacute;',
@@ -167,6 +173,10 @@ Nota: al modificar este segundo estilo, tambi&eacute;n pierdes los estilos est&a
 	'code_js' => 'JavaScript',
 	'code_options' => 'Opciones',
 	'code_spip_options' => 'Opciones de SPIP',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'M&aacute;s informaci&oacute;n: @url@',
 	'corbeille:description' => 'SPIP suprime autom&aacute;ticamente los objetos tirados a la basura en un plazo de 24 horas, en general hacia las 4 de la madrugada, gracias a una tarea &laquo;CRON&raquo; (lanzamiento peri&oacute;dico y/o autom&aacute;tico de procesos preprogramados). Aqu&iacute; puedes impedir ese proceso para gestionar mejor la papelera.[[%arret_optimisation%]]',
 	'corbeille:nom' => 'La papelera',
@@ -242,6 +252,8 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', 
 	'detail_jquery3' => '{{Atenci&oacute;n}}: esta herramienta necesita el plugin [jQuery para SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] para funcionar correctamente con esta versi&oacute;n de SPIP.',
 	'detail_pipelines' => 'Pipelines:',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => 'Procesado:',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -393,6 +405,7 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'label:bloc_unique' => 'Un solo bloque abierto en la p&aacute;gina:',
 	'label:blocs_cookie' => 'Utilisation des cookies :', # NEW
 	'label:blocs_slide' => 'Type d\'animation&nbsp;:', # NEW
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :', # NEW
 	'label:couleurs_fonds' => 'Permitir los fondos:',
 	'label:cs_rss' => 'Activar:',
@@ -530,6 +543,7 @@ Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le cr
 	'orientation:description' => '3 nuevos criterios para tus esqueletos : <code>{portrait}</code> (retrato), <code>{carre}</code> (cuadrado) y <code>{paysage}</code> (paisaje). Ideal para la clasificaci&oacute;n de las fotos en funci&oacute;n de su forma.',
 	'orientation:nom' => 'Orientaci&oacute;n de las im&aacute;genes',
 	'outil_actif' => 'Herramienta activa',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar la herramienta',
 	'outil_cacher' => 'No volver a mostrar',
@@ -670,6 +684,7 @@ _ • {Uso normal}: SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las 
 _ • {Cach&eacute; permanente}: los intervalos de invalidaci&oacute;n de la cach&eacute; se ignoran.
 _ • {Sin cach&eacute;}: desactivar temporalmente la cach&eacute; puede ayudar mientras se desarrolla el sitio. Aqu&iacute;, no se guarda nada en el disco.
 _ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, con escritura en el disco de todos los resultados para poder controlarlos si hace falta.</q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP y la cach&eacute;…',
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW

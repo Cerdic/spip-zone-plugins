@@ -121,8 +121,14 @@ BLOC_FIN#</code></quote>
 	'boites_privees:nom' => '&#1605;&#1585;&#1576;&#1593;&#1575;&#1578; &#1582;&#1575;&#1589;&#1577;',
 	'bp_tri_auteurs' => '&#1601;&#1585;&#1586; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601;&#1610;&#1606;',
 	'bp_urls_propres' => '&#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1575;&#1604;&#1606;&#1592;&#1610;&#1601;&#1577;',
-	'brouteur:description' => 'Utiliser le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s)', # NEW
-	'brouteur:nom' => 'R&eacute;glage du s&eacute;lecteur de rubrique', # NEW
+	'brouteur:description' => '@puce@ {{S&eacute;lecteur de rubrique (brouteur)}}. Utilisez le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s).
+
+@puce@ {{S&eacute;lection de mots-clefs}}. Utilisez un champ de recherche au lieu d\'une liste de s&eacute;lection &agrave; partir de %select_mots_clefs% mot(s)-clef(s).
+
+@puce@ {{S&eacute;lection d\'auteurs}}. L\'ajout d\'un auteur se fait par mini-navigateur dans la fourchette suivante :
+<q1>&bull; Une liste de s&eacute;lection pour moins de %select_min_auteurs% auteurs(s).
+_ &bull; Un champ de recherche &agrave; partir de %select_max_auteurs% auteurs(s).</q1>', # NEW
+	'brouteur:nom' => 'R&eacute;glage des s&eacute;lecteurs', # NEW
 
 	// C
 	'cache_controle' => '&#1575;&#1604;&#1578;&#1581;&#1603;&#1605; &#1576;&#1575;&#1604;&#1584;&#1575;&#1603;&#1585;&#1577; &#1575;&#1604;&#1582;&#1576;&#1571;&#1577;',
@@ -177,6 +183,10 @@ _ {{&#1634;.}} &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &lt;tabl
 	'code_js' => '&#1580;&#1575;&#1601;&#1575;&#1587;&#1603;&#1585;&#1610;&#1576;&#1578;',
 	'code_options' => '&#1575;&#1604;&#1582;&#1610;&#1575;&#1585;&#1575;&#1578;',
 	'code_spip_options' => '&#1582;&#1610;&#1575;&#1585;&#1575;&#1578; SPIP',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => '&#1604;&#1605;&#1586;&#1610;&#1583; &#1605;&#1606; &#1575;&#1604;&#1605;&#1593;&#1604;&#1608;&#1605;&#1575;&#1578;: @url@',
 	'corbeille:description' => '&#1610;&#1581;&#1584;&#1601; SPIP &#1570;&#1604;&#1610;&#1575;&#1611; &#1575;&#1604;&#1593;&#1606;&#1575;&#1589;&#1585; &#1575;&#1604;&#1605;&#1608;&#1590;&#1608;&#1593;&#1577; &#1601;&#1610; &#1587;&#1604;&#1577; &#1575;&#1604;&#1605;&#1607;&#1605;&#1604;&#1575;&#1578; &#1576;&#1593;&#1583; &#1634;&#1636; &#1587;&#1575;&#1593;&#1577;&#1548; &#1573;&#1580;&#1605;&#1575;&#1604;&#1575;&#1611; &#1581;&#1608;&#1575;&#1604;&#1610; &#1575;&#1604;&#1587;&#1575;&#1593;&#1577; &#1575;&#1604;&#1585;&#1575;&#1576;&#1593;&#1577; &#1601;&#1580;&#1585;&#1575;&#1611;&#1548; &#1608;&#1584;&#1604;&#1603; &#1576;&#1601;&#1590;&#1604; &#1608;&#1592;&#1610;&#1601;&#1577; &laquo;cron&raquo; (&#1578;&#1606;&#1601;&#1610;&#1584; &#1583;&#1608;&#1585;&#1610; &#1575;&#1608; &#1570;&#1604;&#1610; &#1604;&#1593;&#1605;&#1604;&#1610;&#1575;&#1578; &#1578;&#1605;&#1578; &#1576;&#1585;&#1605;&#1580;&#1578;&#1607;&#1575; &#1605;&#1587;&#1576;&#1602;&#1575;&#1611;). &#1610;&#1605;&#1603;&#1606;&#1603; &#1607;&#1606;&#1575;&#1603; &#1573;&#1610;&#1602;&#1575;&#1601; &#1607;&#1584;&#1607; &#1575;&#1604;&#1608;&#1592;&#1610;&#1601;&#1577; &#1604;&#1604;&#1578;&#1581;&#1603;&#1605; &#1576;&#1588;&#1603;&#1604; &#1571;&#1601;&#1590;&#1604; &#1576;&#1587;&#1604;&#1577; &#1605;&#1607;&#1605;&#1604;&#1575;&#1578;&#1603;.[[%arret_optimisation%]]',
 	'corbeille:nom' => '&#1587;&#1604;&#1577; &#1575;&#1604;&#1605;&#1607;&#1605;&#1604;&#1575;&#1578;',
@@ -254,6 +264,8 @@ _ {{&#1634;.}} &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &lt;tabl
 	'detail_jquery3' => '{{&#1578;&#1606;&#1576;&#1610;&#1607;}}: &#1607;&#1584;&#1607; &#1575;&#1604;&#1571;&#1583;&#1575;&#1577; &#1578;&#1578;&#1591;&#1604;&#1576; &#1605;&#1604;&#1581;&#1602; [jQuery &#1604;&#1600;SPIP &#1633;.&#1641;&#1634;->files.spip.org/spip-zone/jquery_192.zip] &#1604;&#1603;&#1610; &#1578;&#1593;&#1605;&#1604; &#1576;&#1588;&#1603;&#1604; &#1587;&#1604;&#1610;&#1605; &#1605;&#1593; &#1607;&#1584;&#1575; &#1575;&#1604;&#1573;&#1589;&#1583;&#1575;&#1585; &#1605;&#1606; SPIP.',
 	'detail_pipelines' => '&#1582;&#1591;&#1608;&#1591; &#1575;&#1604;&#1605;&#1608;&#1575;&#1587;&#1610;&#1585;:',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => '&#1575;&#1604;&#1605;&#1593;&#1575;&#1604;&#1580;&#1575;&#1578;:',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -414,6 +426,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :', # NEW
 	'label:blocs_cookie' => 'Utilisation des cookies :', # NEW
 	'label:blocs_slide' => 'Type d\'animation&nbsp;:', # NEW
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :', # NEW
 	'label:couleurs_fonds' => '&#1575;&#1578;&#1575;&#1581;&#1577; &#1575;&#1604;&#1582;&#1604;&#1601;&#1610;&#1575;&#1578;:',
 	'label:cs_rss' => '&#1578;&#1601;&#1593;&#1610;&#1604;:',
@@ -551,6 +564,7 @@ Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le cr
 	'orientation:description' => '3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.', # NEW
 	'orientation:nom' => '&#1575;&#1578;&#1580;&#1575;&#1607; &#1575;&#1604;&#1589;&#1608;&#1585;',
 	'outil_actif' => '&#1571;&#1583;&#1575;&#1577; &#1606;&#1588;&#1591;&#1577;',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => '&#1578;&#1601;&#1593;&#1610;&#1604;',
 	'outil_activer_le' => '&#1578;&#1601;&#1593;&#1610;&#1604; &#1575;&#1604;&#1571;&#1583;&#1575;&#1577;',
 	'outil_cacher' => '&#1573;&#1582;&#1601;&#1575;&#1569;',
@@ -692,6 +706,7 @@ _ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ign
 _ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
 
 _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]', # NEW
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP et le cache&hellip;', # NEW
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW

@@ -107,8 +107,8 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 	'bp_tri_auteurs' => 'Les tris d\'auteurs',
 	'bp_urls_propres' => 'Les URLs propres',
-	'brouteur:description' => 'Utiliser le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s)',
-	'brouteur:nom' => 'R&eacute;glage du s&eacute;lecteur de rubrique',
+	'brouteur:description' => 'Utiliser le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s)', # MODIF
+	'brouteur:nom' => 'R&eacute;glage du s&eacute;lecteur de rubrique', # MODIF
 
 	// C
 	'cache_controle' => 'Contr&ocirc;le du cache',
@@ -164,6 +164,10 @@ Note bien : en modifiant ce deuxi&egrave;me style, tu perds alors les styles sta
 	'code_js' => 'JavaScript',
 	'code_options' => 'Options',
 	'code_spip_options' => 'Options SPIP',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'Plus d\'infos : @url@',
 	'corbeille:description' => 'SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Tu peux ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer ta corbeille.[[%arret_optimisation%]]',
 	'corbeille:nom' => 'La corbeille',
@@ -242,6 +246,8 @@ Cet outil peut &ecirc;tre coupl&eacute; avec  &laquo;&nbsp;[.->sommaire]&nbsp;&r
 	'detail_jquery3' => '{{Attention}} : cet outil n&eacute;cessite le plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pour fonctionner correctement avec cette version de SPIP.',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.',
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => 'Traitements :',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -389,6 +395,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
 	'label:blocs_cookie' => 'Utilisation des cookies :',
 	'label:blocs_slide' => 'Type d\'animation&nbsp;:',
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :',
 	'label:couleurs_fonds' => 'Permettre les fonds :',
 	'label:cs_rss' => 'Activer :',
@@ -521,6 +528,7 @@ Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le cr
 	'orientation:description' => '3 nouveaux crit&egrave;res pour tes squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
 	'orientation:nom' => 'Orientation des images',
 	'outil_actif' => 'Outil actif',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activer',
 	'outil_activer_le' => 'Activer l\'outil',
 	'outil_cacher' => 'Ne plus afficher',
@@ -675,6 +683,7 @@ _ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans
 _ • {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
 _ • {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
 _ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP et le cache…',
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran',

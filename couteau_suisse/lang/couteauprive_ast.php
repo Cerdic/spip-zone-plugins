@@ -120,7 +120,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'bp_tri_auteurs' => 'Ordenaciones d\'autores',
 	'bp_urls_propres' => 'Les URLs propies',
 	'brouteur:description' => 'Utilizar el selector d\'estaya n\'AJAX a partir de %rubrique_brouteur% estaya(es)', # MODIF
-	'brouteur:nom' => 'Axuste del selector d\'estaya',
+	'brouteur:nom' => 'Axuste del selector d\'estaya', # MODIF
 
 	// C
 	'cache_controle' => 'Control de la cach&eacute;',
@@ -176,6 +176,10 @@ Dec&aacute;tate: al modificar esti segundu estilu, pierdes los estilos est&aacut
 	'code_js' => 'JavaScript',
 	'code_options' => 'Opciones',
 	'code_spip_options' => 'Opciones de SPIP',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'M&aacute;s info: @url@',
 	'corbeille:description' => 'SPIP desanicia autom&aacute;ticamente los oxetos tiraos a la basoria en pasando 24 hores, en xeneral hacia les 4 de la ma&ntilde;ana, gracies a un trabayu &laquo;CRON&raquo; (llanzamientu peri&oacute;dicu y/o autom&aacute;ticu de procesos preprogramaos). Equ&iacute; pues encaboxar esi procesu col fin de xestionar meyor la papelera.[[%arret_optimisation%]]',
 	'corbeille:nom' => 'La papelera',
@@ -251,6 +255,8 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.', # MODIF
 	'detail_jquery3' => '{{Atenci&oacute;n}}: esta ferramienta necesita el plugin [jQuery pa SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pa funcionar correutamente con esta versi&oacute;n de SPIP.',
 	'detail_pipelines' => 'Tuber&iacute;es:',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => 'Tratamientos:',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -398,6 +404,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:bloc_unique' => 'Solo un bloque abiertu na p&aacute;xina:',
 	'label:blocs_cookie' => 'Utilizaci&oacute;n de cookies:',
 	'label:blocs_slide' => 'Type d\'animation&nbsp;:', # NEW
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :', # NEW
 	'label:couleurs_fonds' => 'Permitir los fondos:',
 	'label:cs_rss' => 'Activar:',
@@ -536,6 +543,7 @@ Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le cr
 	'orientation:description' => '3 nuevos criterios pa les cadarmes: <code>{portrait}</code> (retratu), <code>{carre}</code> (cuadr&aacute;u) y <code>{paysage}</code> (paisaxe). Ideal pa la clasificaci&oacute;n de les fotos en funci&oacute;n de la so forma.',
 	'orientation:nom' => 'Orientaci&oacute;n de les imaxes',
 	'outil_actif' => 'Ferramienta activa',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar la ferramienta',
 	'outil_cacher' => 'Nun amosar m&aacute;s',
@@ -678,6 +686,7 @@ _ • {Usu normal}: SPIP calcula toles p&aacute;xines p&uacute;bliques y les pon
 _ • {Cach&eacute; permanente}: los plazos d\'anovaci&oacute;n de la cach&eacute; inorense.
 _ • {Ensin cach&eacute;}: desactivar temporalmente la cach&eacute; pue aidar nel desarrollo del sitiu. Equ&iacute;, nada nun se guarda nel discu.
 _ • {Control de cach&eacute;}: opci&oacute;n identica a la precedente, con escritura nel discu de tolos resultaos a la fin de podelos controlar si fai falta.</q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP y la cach&eacute;…',
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW

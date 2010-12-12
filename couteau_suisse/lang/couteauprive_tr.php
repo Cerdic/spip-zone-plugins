@@ -111,7 +111,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'bp_tri_auteurs' => 'Yazar s&#305;ralamalar&#305;',
 	'bp_urls_propres' => 'Ki&#351;isel URL\'ler',
 	'brouteur:description' => 'AJAX\'ta %rubrique_brouteur% ba&#351;l&#305;klar&#305;ndan yola &ccedil;&#305;karak ba&#351;l&#305;k se&ccedil;icisini kullanmak', # MODIF
-	'brouteur:nom' => 'Ba&#351;l&#305;k se&ccedil;isinin ayarlanmas&#305;',
+	'brouteur:nom' => 'Ba&#351;l&#305;k se&ccedil;isinin ayarlanmas&#305;', # MODIF
 
 	// C
 	'cache_controle' => '&Ouml;nbellek kontrol&uuml;',
@@ -163,6 +163,10 @@ _ {{2.}} &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; et les liste
 	'code_js' => 'Javascript',
 	'code_options' => 'Se&ccedil;enekler',
 	'code_spip_options' => 'SPIP se&ccedil;enekleri',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'Daha fazla bilgi : @url@',
 	'corbeille:description' => 'SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]',
 	'corbeille:nom' => '&Ccedil;&ouml;p kutusu',
@@ -232,6 +236,8 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 	'detail_jquery3' => '{{Dikkat}} : bu gere&ccedil; sorunsuz &ccedil;al&#305;&#351;abilmek i&ccedil;in [SPIP 1.92-i&ccedil;in jQuery>http://files.spip.org/spip-zone/jquery_192.zip] eklentisi gerektirir.',
 	'detail_pipelines' => 'Boru hatlar&#305; (pipeline) :',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => '&#304;&#351;lemler :',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -373,6 +379,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:bloc_unique' => 'Sayfada sadece bir blok a&ccedil;&#305;k :',
 	'label:blocs_cookie' => 'Kurabiye kullan&#305;m&#305; :',
 	'label:blocs_slide' => 'Type d\'animation&nbsp;:', # NEW
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :', # NEW
 	'label:couleurs_fonds' => 'Arka alanlara izin ver :',
 	'label:cs_rss' => 'Aktive et :',
@@ -510,6 +517,7 @@ Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le cr
 	'orientation:description' => '&#304;skeletleriniz i&ccedil;in 3 yeni kriter : <code>{portrait}</code>, <code>{carre}</code> ve <code>{paysage}</code>. Foto&#287;raflar&#305;n &#351;ekilleri bak&#305;m&#305;ndan s&#305;n&#305;fland&#305;r&#305;lmas&#305; i&ccedil;in ideal.',
 	'orientation:nom' => 'Resimlerin y&ouml;n&uuml;',
 	'outil_actif' => 'Aktif alet',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Aktive et',
 	'outil_activer_le' => 'Aleti aktive et',
 	'outil_cacher' => 'Art&#305;k g&ouml;sterme',
@@ -650,6 +658,7 @@ _ • {Normal kullan&#305;m} : SPIP, varsay&#305;lan durumda incelemeyi h&#305;z
 _ • {Kal&#305;c&#305; &ouml;nbellek} : &ouml;nbelle&#287;i ge&ccedil;ersiz k&#305;lan s&uuml;re iptal edilir..
 _ • {&Ouml;nbellek yok} : &Ouml;nbelle&#287;i ge&ccedil;ici olarak kapatmak sitenin geli&#351;imine yard&#305;mc&#305; olabilir. Diske hi&ccedil;bir &#351;ey kaydedilmez.
 _ • {&Ouml;nbelle&#287;in kontrol&uuml;} : bu se&ccedil;enek bir &ouml;ncekiyle ayn&#305;d&#305;r ama t&uuml;m sonu&ccedil;lar ileride kontrol edilebilmeleri i&ccedil;in diske yaz&#305;l&#305;r. </q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP ve &ouml;nbellek…',
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW

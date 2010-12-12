@@ -163,8 +163,8 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 	'boites_privees:nom' => 'Requadres privats',
 	'bp_tri_auteurs' => 'Les classificacions d\'autors',
 	'bp_urls_propres' => 'Els URLs propis',
-	'brouteur:description' => 'Utilitzar el selector de secci&oacute; a AJAX a partir de %rubrique_brouteur secci&oacute;(seccions)',
-	'brouteur:nom' => 'Regulaci&oacute; del selector de secci&oacute;',
+	'brouteur:description' => 'Utilitzar el selector de secci&oacute; a AJAX a partir de %rubrique_brouteur secci&oacute;(seccions)', # MODIF
+	'brouteur:nom' => 'Regulaci&oacute; del selector de secci&oacute;', # MODIF
 
 	// C
 	'cache_controle' => 'Control de la mem&ograve;ria cau',
@@ -245,6 +245,10 @@ Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave
 	'code_js' => 'JavaScript',
 	'code_options' => 'Opcions',
 	'code_spip_options' => 'Opcions SPIP',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'M&eacute;s informacions: @url@',
 	'corbeille:description' => 'SPIP suprimeix autom&agrave;ticament els objectes llen&ccedil;ats a la paperera les &uacute;ltimes 24 hores, en general des de les 4 de la matinada, gr&agrave;cies a una tasca &laquo;CRON&raquo; (llan&ccedil;ament peri&ograve;dic i/o autom&agrave;tic dels processos programats pr&egrave;viament). Aqu&iacute; podeu impedir aquest proc&eacute;s per tal de gestionar millor la vostra paperera. [[%arret_optimisation%]]',
 	'corbeille:nom' => 'La paperera',
@@ -359,6 +363,8 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'detail_jquery3' => '{{Atenci&oacute;}} : aquesta eina necessita el plugin [jQuery per SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] per funcionar correctament amb aquesta versi&oacute; d\'SPIP.',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_raccourcis' => 'Llista de dreceres tipogr&agrave;fiques reconegudes per aquesta eina.',
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => 'Tractaments :',
 	'devdebug:description' => '{{Aquesta eina us permet veure els errors PHP a la pantalla.}}<br />Podeu escollir el nivell d\'errors d\'execuci&oacute; PHP que es mostrar&agrave; si el depurador est&agrave; actiu, aix&iacute; com l\'espai SPIP sobre el que s\'aplicaran aquests par&agrave;metres.',
 	'devdebug:item_e_all' => 'Tots els missatges d\'error (all)',
@@ -547,6 +553,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:bloc_unique' => 'Nom&eacute;s un bloc obert a la p&agrave;gina:',
 	'label:blocs_cookie' => 'Utilitzaci&oacute; de galetes:',
 	'label:blocs_slide' => 'Tipus d\'animaci&oacute;:',
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Espai m&agrave;xim reservat a les c&ograve;pies locals:',
 	'label:couleurs_fonds' => 'Permetre els fons:',
 	'label:cs_rss' => 'Activar:',
@@ -699,6 +706,7 @@ Per for&ccedil;ar la publicaci&oacute; de continguts amagats, n\'hi ha prou afeg
 	'orientation:description' => '3 nous criteris pels vostres esquelets: <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Ideal per la classificaci&oacute; de les fotografies en funci&oacute; de la seva forma. ',
 	'orientation:nom' => 'Orientaci&oacute; de les imatges',
 	'outil_actif' => 'Eina activa',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar l\'eina',
 	'outil_cacher' => 'No visualitzar m&eacute;s',
@@ -906,6 +914,7 @@ _ • {Mem&ograve;ria cau permanent}: els terminis d\'invalidaci&oacute; de la m
 _ • {Sense mem&ograve;ria cau}: desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc Web. Aqu&iacute;, no s\'emmagatzema res al disc.
 
 _ • {Control de la mem&ograve;ria cau}: opci&oacute; id&egrave;ntica a l\'anterior, amb una escriptura al disc de tots els resultats per tal de poder, eventualment, controlar-los.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP i la mem&ograve;ria cau…',
 	'spip_ecran:description' => 'Determina l\'amplada de la pantalla imposada a tots a la part privada. Una pantalla estreta presentar&agrave; dues columnes i una pantalla ampla en presentar&agrave; tres. &eacute;sentera trois. La configuraci&oacute; per defecta deixa que l\'usuari trii, emmagatzemant en una galeta la tria feta.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Amplada de pantalla',

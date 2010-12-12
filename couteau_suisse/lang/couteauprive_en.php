@@ -158,8 +158,8 @@ Examples: <code>#SET{x,1}#SET_PLUS{x,2}</code> or <code>#SET{x,avions}#SET_REPLA
 	'boites_privees:nom' => 'Private boxes',
 	'bp_tri_auteurs' => 'Order of authors',
 	'bp_urls_propres' => 'See clean URLs',
-	'brouteur:description' => 'Use the AJAX section selector when there are %rubrique_brouteur% section(s) or more',
-	'brouteur:nom' => 'Configuration of the section selector',
+	'brouteur:description' => 'Use the AJAX section selector when there are %rubrique_brouteur% section(s) or more', # MODIF
+	'brouteur:nom' => 'Configuration of the section selector', # MODIF
 
 	// C
 	'cache_controle' => 'Cache control',
@@ -240,6 +240,10 @@ N.B.: by changing the second parameter you will lose any standard styles associa
 	'code_js' => 'JavaScript',
 	'code_options' => 'Options',
 	'code_spip_options' => 'SPIP options',
+	'compacte_css' => 'Compacter les CSS', # NEW
+	'compacte_js' => 'Compacter le Javacript', # NEW
+	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
+	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'More information: @url@',
 	'corbeille:description' => 'SPIP automatically deletes objets which have been put in the dustbin after one day. This is done by a "Cron" job, usually at 4 am. Here, you can block this process taking place in order to regulate the dustbin emptying yourself. [[%arret_optimisation%]]',
 	'corbeille:nom' => 'Wastebin',
@@ -352,6 +356,8 @@ This tool may be combined with "[.->sommaire]".',
 	'detail_jquery3' => '{{N.B.}}: this tool requires the plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] in order to function correctly with this version of SPIP.',
 	'detail_pipelines' => 'Pipelines:',
 	'detail_raccourcis' => 'Here is a list of the typographical short-cuts recognised by this tool.',
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
 	'detail_traitements' => 'Treatment:',
 	'devdebug:description' => '{{This tool enables you to see any PHP errors on the screen.}}<br />You can choose the level of PHP execution errors that will be displayed whenever the debugger is active, as well as the SPIP space to which these settings will apply.',
 	'devdebug:item_e_all' => 'All messages errors (all)',
@@ -540,6 +546,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:bloc_unique' => 'Only one block open on the page:',
 	'label:blocs_cookie' => 'Cookie usage:',
 	'label:blocs_slide' => 'Type of animation:',
+	'label:compacte_css' => 'Compression du HEAD :', # NEW
 	'label:copie_Smax' => 'Maximum space reserved for local copies:',
 	'label:couleurs_fonds' => 'Allow backgrounds:',
 	'label:cs_rss' => 'Activate:',
@@ -692,6 +699,7 @@ To override and force the display of such hidden content, just add the <code>{to
 	'orientation:description' => '3 new criteria for your templates: <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Ideal for sorting photos according to their format (carre = square; paysage = landscape).',
 	'orientation:nom' => 'Picture orientation',
 	'outil_actif' => 'Activated tool',
+	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activate',
 	'outil_activer_le' => 'Activate the tool',
 	'outil_cacher' => 'No longer show',
@@ -899,6 +907,7 @@ _ • {Permanent cache}: the cache is never recalculated (time limits in the tem
 _ • {No cache}: temporarily deactivating the cache can be useful when the site is being developed. With this option, nothing is cached on disk.
 
 _ • {Cache checking}: similar to the preceding option. However, all results are written to disk in order to be able to check them.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP and the cache',
 	'spip_ecran:description' => 'Specify the screen width imposed on everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Screen width',
