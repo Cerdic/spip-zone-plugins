@@ -207,8 +207,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tableau_ocupe_a' => 'Tableau occup&eacute; &agrave;',
 	'telecharger' => 'T&eacute;l&eacute;charger',
 	'telecharger_succes' => 'T&eacute;l&eacute;charger avec succ&eacute;s',
-	'theme' => 'theme',
-	'themes' => 'themes',
+	'theme' => 'Th&egrave;me',
+	'themes' => 'Th&egrave;mes',
 	'titre_menu_genespip' => 'GeneSPIP',
 
 // U
