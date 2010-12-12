@@ -146,7 +146,8 @@ function exec_genespip() {
 
 	//Affichage des personnes en fonction du nom sélectionné.
 	if ($_POST['individu']<>""){
-		$result = sql_select('id_individu, nom, prenom, sexe', 'spip_genespip_individu', 'poubelle<>1 and nom ='.$nom_select.'', 'prenom');
+//		$result = sql_select('id_individu, nom, prenom, sexe', 'spip_genespip_individu', 'poubelle<>1 and nom ='.$nom_select.'', 'prenom');
+		$result = sql_select("id_individu, nom, prenom, sexe", "spip_genespip_individu", "poubelle<>1 and nom ='$nom_select'", "prenom");
 
 		echo debut_cadre_relief(true);
 		echo gros_titre(_T('genespip:'.$nom_select), '', false);
