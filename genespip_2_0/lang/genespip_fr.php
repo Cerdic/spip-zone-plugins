@@ -1,16 +1,11 @@
 <?php
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Produit automatiquement par le plugin LangOnet a partir de la langue source fr
-// Module: genespip
-// Langue: fr
-// Date: 05-12-2010 10:53:04
-// Items: 170
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/genespip_2_0/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
+	// A
 	'acces_non' => 'Droits d&acute;acc&egrave;s &raquo; restreint',
 	'acces_oui' => 'Droits d&acute;acc&egrave;s &raquo; d&eacute;tails des fiches',
 	'acces_restreint' => 'L&acute;acc&egrave;s &agrave; ce site est limit&eacute;',
@@ -27,11 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_fiche_possede_numero' => 'Aucune fiche poss&egrave;de ce num&eacute;ro',
 	'avec' => 'avec',
 
-// B
+	// B
 	'base_contient' => 'La base contient',
 	'base_genespip' => 'Base GeneSpip',
 
-// C
+	// C
 	'cellules_creees' => 'Cellules cr&eacute;&eacute;es',
 	'cellules_occupees' => 'Cellules occup&eacute;es',
 	'centans' => 'Interdire l&lsquo;affichage des dates de moins de 100 ans',
@@ -46,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer' => 'Cr&eacute;er',
 	'creer_document' => '&rsaquo;&rsaquo;&nbsp;Cr&eacute;er un document&nbsp;&rsaquo;&rsaquo;',
 
-// D
+	// D
 	'date' => 'Date',
 	'debut_gedcom' => 'D&eacute;but GedCom',
 	'deces' => 'D&eacute;c&egrave;s',
@@ -58,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'detail_fiche' => 'D&eacute;tail fiche',
 	'document' => 'Documents',
 
-// E
+	// E
 	'enfant' => 'enfant',
 	'enfants' => 'Enfants',
 	'enfants_couple' => 'Enfants du couple',
@@ -72,12 +67,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'export_termine' => 'Export termin&eacute;',
 	'exporter' => 'Exporter',
 
-// F
+	// F
 	'famille' => 'Famille',
 	'fermer' => 'Fermer',
 	'fiche_de' => 'Fiche de',
-	'fiche_document' => 'Fiche document',
 	'fiche_detail' => 'Fiche d&eacute;tail',
+	'fiche_document' => 'Fiche document',
 	'fiche_enfant' => 'Fiche enfant',
 	'fiche_evt_par_lieu' => 'Fiche &eacute;v&egrave;nements par lieu',
 	'fiche_lieux' => 'Fiche lieux',
@@ -89,13 +84,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier' => 'Fichier',
 	'fichier_gedcom' => 'Fichier GedCom',
 
-// G
+	// G
 	'galerie' => 'Galerie',
 	'gedcom' => 'GedCom',
 	'genealogie' => 'G&eacute;n&eacute;alogie',
 	'genespip' => 'GeneSPIP',
 
-// I
+	// I
 	'indication_format_photo' => '<br />Poid max. 100 ko',
 	'individu' => 'individu',
 	'info_centans' => '<p>Interdire syst&eacute;matiquement l&lsquo;affichage des dates ayant moins de 100 ans.<br />Cette option ne s&lsquo;applique que pour les visiteurs<br />Si cette option est d&eacute;sactiv&eacute;e, il est possible de limiter l&lsquo;affichage fiche par fiche.</p>',
@@ -117,10 +112,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription' => 'Inscription',
 	'invalide' => 'Invalide',
 
-// J
+	// J
 	'journal' => 'Journal d&lsquo;&eacute;v&egrave;nements',
 
-// L
+	// L
 	'le' => 'le',
 	'les_3_dernieres_publications_dans' => 'Les 3 derni&egrave;res publications dans',
 	'lieu' => 'lieu',
@@ -136,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_noms' => 'Liste des noms',
 	'liste_patronyme' => 'Liste des patronymes',
 
-// M
+	// M
 	'mariage' => 'mariage',
 	'mariage_le' => 'Mariage le',
 	'media' => 'M&eacute;dia',
@@ -150,10 +145,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mon_pagerank' => 'Mon PageRank',
 	'multilingue' => 'Site multilingue',
 
-// N
+	// N
 	'naissance' => 'Naissance',
-	'nettoyage_table_lieux' => 'Nettoyage table LIEUX',
 	'nettoyage_champ_nom' => 'Nettoyage champ NOM',
+	'nettoyage_table_lieux' => 'Nettoyage table LIEUX',
 	'nom' => 'Nom',
 	'nombre_de_fiches' => 'Nombre de fiches',
 	'nombre_de_patronymes' => 'Nombre de patronymes',
@@ -164,7 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvelle_union' => 'Nouvelle union',
 	'num_departement' => 'N&ordm; D&eacute;p.',
 
-// P
+	// P
 	'pagerank_actuel' => 'PageRank actuel',
 	'parente' => 'Parent&eacute;',
 	'parents' => 'Parents',
@@ -180,7 +175,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pub' => 'pub',
 	'publication' => 'Publication',
 
-// R
+	// R
 	'redacteur' => 'R&eacute;dacteur',
 	'region' => 'R&eacute;gion',
 	'requete' => 'Requ&ecirc;te',
@@ -192,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour_sur_fiche' => 'Retour sur la fiche',
 	'retour_sur_fiche_sans_enregistrer' => 'Retour sur la fiche sans enregistrer',
 
-// S
+	// S
 	'sexe' => 'Sexe',
 	'signature' => 'Signature',
 	'signatures' => 'Signatures',
@@ -202,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suppression_table_temporaire' => 'Suppresion de la table temporaire',
 	'supprimer' => 'Supprimer',
 
-// T
+	// T
 	'table_lieux_cree' => 'Table des lieux cr&eacute;&eacute;',
 	'tableau_ocupe_a' => 'Tableau occup&eacute; &agrave;',
 	'telecharger' => 'T&eacute;l&eacute;charger',
@@ -211,17 +206,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'themes' => 'Th&egrave;mes',
 	'titre_menu_genespip' => 'GeneSPIP',
 
-// U
+	// U
 	'union' => 'Unions, mariages',
 	'union_fiche_no' => 'Union fiche n&ordm',
 
-// V
+	// V
 	'valider' => 'Valider',
 	'version_base_genespip' => 'Version Base GeneSPIP',
 	'version_plugin' => 'Version Plugin',
 	'version_squelette' => 'Version Squelette',
 	'ville' => 'Ville',
-	'visiteur' => 'Visiteur',
-
+	'visiteur' => 'Visiteur'
 );
+
 ?>
