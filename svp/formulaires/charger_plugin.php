@@ -8,6 +8,7 @@ function formulaires_charger_plugin_charger_dist(){
 	return array('phrase' => _request('phrase'),
 				'categorie' => _request('categorie'),
 				'etat' => _request('etat'),
+				'depot' => _request('depot'),
 				'doublon' => _request('doublon'));
 }
 
@@ -21,6 +22,7 @@ function formulaires_charger_plugin_traiter_dist(){
 	$phrase = _request('phrase');
 	$categorie = _request('categorie');
 	$etat = _request('etat');
+	$depot = _request('depot');
 	$doublon = (_request('doublon') == 'oui') ? true : false;
 	$tri = ($phrase) ? 'score' : 'nom';
 	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
@@ -32,7 +34,7 @@ function formulaires_charger_plugin_traiter_dist(){
 	// - compatible avec la version SPIP installee sur le site
 	// - et n'etant pas deja installes (ces paquets peuvent toutefois etre affiches)
 	// tries par nom ou score
-	$plugins = svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip,
+	$plugins = svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $version_spip,
 											svp_lister_plugins_installes(), $afficher_exclusions, $doublon, $tri);
 
 	// Determination des messages de retour

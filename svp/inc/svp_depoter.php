@@ -25,12 +25,13 @@ function svp_verifier_adresse_depot($url){
  * @return boolean
  */
 
-// $url	=> url du fichier xml de description du depot
+// $url		=> url du fichier xml de description du depot
+// $erreur	=> message d'erreur a afficher
 function svp_ajouter_depot($url, &$erreur=''){
 	// On considere que l'url a deja ete validee (correcte et nouveau depot)
 	$url = trim($url);
 
-	// lire les donnees d'un depot de paquets
+	// Lire les donnees d'un depot de paquets
 	$infos = svp_xml_parse_depot($url);
 	if (!$infos) {
 		$erreur = _T('svp:message_nok_xml_non_conforme', array('fichier' => $url));
@@ -47,7 +48,6 @@ function svp_ajouter_depot($url, &$erreur=''){
 	$id_depot = sql_insertq('spip_depots', $champs);
 		
 	// Ajout des paquets dans spip_paquets et actualisation des plugins dans spip_plugins
-	// On passe l'url en premier argument car l'id n'est pas encore connu
 	$ok = svp_actualiser_paquets($id_depot, $infos['paquets'], $nb_paquets, $nb_plugins, $nb_autres);
 	if (!$ok OR ($nb_paquets == 0)) {
 		// Si une erreur s'est produite, on supprime le depot deja insere
@@ -74,12 +74,12 @@ function svp_ajouter_depot($url, &$erreur=''){
  * @return boolean
  */
 
-// $id	=> id_depot de l'objet depot dans la table spip_depots ou url du depot
+// $id	=> id_depot de l'objet depot dans la table spip_depots
 function svp_supprimer_depot($id){
-	$id = trim($id);
+	$id = intval($id);
 	
-	// Pas de depot a cette adresse ?
-	if (!$id_depot = sql_getfetsel('id_depot', 'spip_depots', 'url_paquets=' . sql_quote($id) . ' OR id_depot='. sql_quote($id)) ){
+	// Pas de depot a cet id ?
+	if (!$id_depot = sql_getfetsel('id_depot', 'spip_depots', 'id_depot='. sql_quote($id)) ){
 		return false;
 	}
 
@@ -88,7 +88,7 @@ function svp_supprimer_depot($id){
 	// On supprime ensuite :
 	// - les liens des plugins avec le depot (table spip_depots_plugins)
 	// - les plugins dont aucun paquet n'est encore heberge par un depot restant (table spip_plugins)
-	svp_nettoyer_plugins($id_depot);
+	svp_supprimer_plugins($id_depot);
 	// On supprime le depot lui-meme
 	sql_delete('spip_depots','id_depot='.sql_quote($id_depot));
 	return true;
@@ -96,18 +96,17 @@ function svp_supprimer_depot($id){
 
 
 /**
- * Actualisation des plugins du depot uniquement. Sert aussi pour une premiere insertion
- *
+ * Actualisation des plugins d'un depot deja cree.
  * @param int $id
  * @return boolean
  */
 
-// $id	=> id_depot de l'objet depot dans la table spip_depots ou url du depot
+// $id	=> id_depot de l'objet depot dans la table spip_depots
 function svp_actualiser_depot($id){
-	$id = trim($id);
+	$id = intval($id);
 	
-	// pas de depot a cette adresse ?
-	if (!$depot = sql_fetsel('*', 'spip_depots', 'url_paquets=' . sql_quote($id) . ' OR id_depot='. sql_quote($id)) ){
+	// pas de depot a cet id ?
+	if (!$depot = sql_fetsel('*', 'spip_depots', 'id_depot='. sql_quote($id)) ){
 		return false;
 	}
 
@@ -173,7 +172,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	
 	// On commence par vider les paquets et les plugins du depot
 	sql_delete('spip_paquets','id_depot=' . sql_quote($id_depot));
-	svp_nettoyer_plugins($id_depot);
+	svp_supprimer_plugins($id_depot);
 
 	// Ensuite on recree chaque paquet a partir du contenu du fichier xml
 	// comme pour la premiere insertion
@@ -279,7 +278,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	return true;
 }
 
-function svp_nettoyer_plugins($id_depot) {
+function svp_supprimer_plugins($id_depot) {
 
 	// On rapatrie la liste des plugins du depot
 	$liens = sql_allfetsel('id_plugin', 'spip_depots_plugins', 'id_depot='.sql_quote($id_depot));
@@ -559,7 +558,7 @@ function svp_xml_parse_plugin($arbre){
 
 // ----------------------- Recherches de plugins ---------------------------------
 
-function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='', 
+function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $version_spip='',
 									$exclusions=array(), $afficher_exclusions=false, $doublon=false, $tri='nom') {
 
 	include_spip('inc/rechercher');
@@ -630,6 +629,8 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $version_spip='
 			$where[] = 't1.categorie=' . sql_quote($categorie);
 		if (($etat) AND ($etat != 'tout_etat'))
 			$where[] = 't2.etat=' . sql_quote($etat);
+		if (($depot) AND ($depot != 'tout_depot'))
+			$where[] = 't2.id_depot=' . sql_quote($depot);
 		if ($exclusions AND !$afficher_exclusions)
 			$where[] = sql_in('t2.id_plugin', $exclusions, 'NOT');
 	
