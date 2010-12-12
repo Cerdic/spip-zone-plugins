@@ -42,8 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si no hi ha canvi',
 	'label_reduire_logo' => 'Reduir els logotips',
 	'label_yellow_fade' => 'Sense inter&egrave;s',
+	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
 	'legend_controleur_logo' => 'Escollir un logotip:',
+	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
+	'legend_controleur_qui' => 'Qui ?', # NEW
 	'legend_controleur_vignette' => 'Escollir una vinyeta:',
+	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
 	'legend_editer_prive' => 'Editar l\'espai privat (experimental)',
 	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 

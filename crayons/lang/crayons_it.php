@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effets' => 'Effetti',
 	'explication_exec_autorise' => 'Pagine autorizzate per la modifica
   (?exec=...) : (, per separare gli exec).',
-	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
+	'explication_introduction_article' => 'L\'introduzione di un articolo mostra la descrizione di un articolo, altrimenti mostra i suoi primi 600 caratteri (cappello pi&ugrave; testo)',
 	'explication_reduire_logo' => 'Riduci il logo se supera
   la dimensione massima indicata in pixel. Esempio: 100. (0 = mai)',
 
@@ -43,10 +43,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Se non c\'&egrave; nessuna modifica',
 	'label_reduire_logo' => 'Riduci i logo',
 	'label_yellow_fade' => 'Fade',
+	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
 	'legend_controleur_logo' => 'Scegli un logo:',
+	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
+	'legend_controleur_qui' => 'Qui ?', # NEW
 	'legend_controleur_vignette' => 'Scegli una miniatura:',
+	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
 	'legend_editer_prive' => 'Modifica lo spazio redazionale (sperimentale)',
-	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
+	'legend_introduction_article' => 'Testo introduttivo dell\'articolo',
 
 	// M
 	'message_image_obligatoire' => 'Devi scegliere un\'immagine',

@@ -43,8 +43,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'wenn keine &amp;Auml;nderung',
 	'label_reduire_logo' => 'Logos verkleinern',
 	'label_yellow_fade' => 'Ausblenden',
+	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
 	'legend_controleur_logo' => 'Logoe w&auml;hlen:',
+	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
+	'legend_controleur_qui' => 'Qui ?', # NEW
 	'legend_controleur_vignette' => 'Thumbnail w&auml;hlen:',
+	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
 	'legend_editer_prive' => 'Stifte im Redaktionssystem (experimentell)',
 	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 

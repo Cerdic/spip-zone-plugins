@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => 'Qui ?',
 	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:',
 	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette',
-	'legend_introduction_article' => 'Texte introductif de l\'article',
 	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)',
+	'legend_introduction_article' => 'Texte introductif de l\'article',
 
 	// M
 	'message_image_obligatoire' => 'Il faut choisir une image',
