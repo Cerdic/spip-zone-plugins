@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_modules' => 'Module configuration',
 
 	// E
-	'erreur_copie_fichier' => 'It is impossible to copythe file @fichier@ to its final destination',
+	'erreur_copie_fichier' => 'It is impossible to copy the file @fichier@ to its final destination',
 	'erreur_enregistrement' => 'An error occurred while saving <b>@nom@</b>',
 	'erreur_lecture' => 'Impossible to read @nom@',
 	'erreur_open_w_fichier' => 'Impossible to open @fichier@ for modification',
