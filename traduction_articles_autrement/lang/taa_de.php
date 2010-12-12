@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'affichage_liste_compacte' => "Kompakte Artikel Liste",
-'affichage_edition_seule' => "Artikel direkt bearbeiten - ohne Vorschau",
+'affichage_edition_seule' => "Modus Artikel direkt bearbeiten - ohne Vorschau",
 
 // C
 'changer_langue' => "Die Sprache des Artikels ändern",

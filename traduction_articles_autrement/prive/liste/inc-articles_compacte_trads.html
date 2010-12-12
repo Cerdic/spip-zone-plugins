@@ -1,0 +1,6 @@
+<td>
+	<BOUCLE_art_trads(ARTICLES){id_trad}{id_trad!=0}{statut IN prepa,publie,prop}{id_article!=#ENV{id_trad}}>
+		<span>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]&nbsp;[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{<a href="[(#ID_ARTICLE|generer_url_entite{article})]" title="#TITRE / <:info_numero_abbreviation:>#ID_ARTICLE">#LANG</a>,#LANG})]
+		</span>
+		</BOUCLE_art_trads>
+</td>

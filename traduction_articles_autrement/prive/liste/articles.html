@@ -1,4 +1,5 @@
 [(#CONFIG{taa/liste_compacte}|oui)#SET{type,_compacte}]
+[(#CONFIG{taa/edition_seule}|oui)#SET{mode,edition_seule}]
 
 
-<INCLURE{fond=prive/liste/inc-articles#GET{type}}{env}/>
+<INCLURE{fond=prive/liste/inc-articles#GET{type}}{mode=#GET{mode}}{env}/>

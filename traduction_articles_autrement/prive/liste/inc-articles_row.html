@@ -1,0 +1,25 @@
+<tr class="#ENV{class}">
+<BOUCLE_art(ARTICLES){id_article}{statut?}>#SET{id_trad,#ID_TRAD}
+	<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+	<td class='titre'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">[(#RANG). ]#TITRE</a>
+	[(#ENV{trads}|oui)
+		[(#ID_TRAD|>{0}|oui)
+			[(#ENV{voir}|=={#ID_TRAD}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>">-</a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#ID_TRAD})]" title="<:taa:voir_traductions:>">+</a>})]
+			]
+		]</td>
+	<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+	<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+	<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+		<a href="[(#ENV{mode}|=={edition_seule}|?{[(#ID_ARTICLE|generer_url_entite{article})],[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]})]">#ID_ARTICLE</a>,
+		#ID_ARTICLE
+		})]</td>
+
+[(#ENV{trads}|oui)<INCLURE{fond=prive/liste/inc-articles_compacte_trads}{id_trad}{id_article}{env}/>]
+</BOUCLE_art>
+<tr>
+
+	[(#ENV{voir}|=={#GET{id_trad}}|oui)
+		<INCLURE{fond=prive/liste/inc-articles_trads_detail}{id_trad=#GET{id_trad}}/>
+		]
+	
+

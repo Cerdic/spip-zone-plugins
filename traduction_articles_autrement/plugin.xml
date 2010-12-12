@@ -1,10 +1,13 @@
 <plugin>
 	<nom><multi>[fr]Traduction d'articles autrement[en]Article translations differently[es]Traducción de artículos repensada[de]Artikel Übersetzung mal Anders</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.1.4</version>
+	<version>0.1.5</version>
 	<etat>test</etat>
 	<description>
-		<multi>[fr]Modification de l'interface priv&eacute;de spip afin de permettre &agrave; l'utilisateur une autre approche pour la traductions des articles, tout en maintenant le syst&egrave;me de traduction original de spip.Int&egrave;gre quelques scripts du plugin afficher objets en attendant de r&eacute;ussir &agrave; le faire cohabiter avec ce plugin[en]Modification of the backoffice to allow another visual approach for the translation of articles.[es]Modificación del espacio interno de spip para facilitar la traducción de los artículos sin cambiar el sistema original de traducción[de]Änderung des SPIP Backoffices mit dem Ziel die Übersetzung der Artikel visuell anders anzugehen</multi>	
+		<multi>[fr]Modification de l'interface priv&eacute;de spip afin de permettre &agrave; l'utilisateur une autre approche pour la traductions des articles; tout en maintenant le syst&egrave;me de traduction original de spip. Pour pouvoir utiliser l'affichage compacte des listes d'article (option disponible via cfg), il faut installer le plugin [afficher_objets->http://www.codes-libres.org/zip-plugins/afficher_objets.zip]
+		[en]Modification of the backoffice to allow another visual approach for the translation of articles. If you want to use the compact mode for the articles list (available through cfg) you need to install the plugin [afficher_objets->http://www.codes-libres.org/zip-plugins/afficher_objets.zip]
+		[es]Modificación del espacio interno de spip para facilitar la traducción de los artículos sin cambiar el sistema original de traducción. Si quiere aprovechar de la opción "lista compacta de artículos" (activada desde cfg), hace falta instalar el plugin [afficher_objets->http://www.codes-libres.org/zip-plugins/afficher_objets.zip]
+		[de]Änderung des SPIP Backoffices mit dem Ziel die Übersetzung der Artikel visuell anders anzugehen. Wenn sie die "Kompakte Artikel Listen" benutzen wollen (kann via cfg aktiviert werden), müssen Sie das plugin [afficher_objets->http://www.codes-libres.org/zip-plugins/afficher_objets.zip] installieren</multi>	
 	</description>
 	<lien>http://www.spip-contrib.net/Traductions-d-articles-autrement</lien>
 	<licence>GPL 3</licence>
@@ -29,5 +32,7 @@
 	<fonctions>taa_fonctions.php</fonctions>
 	<categorie>traduction</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<utilise id="afficher_objets" version="[1.1.8;]" />	
+	<utilise id="cfg" version="[ 1.15.1;]" />		
 </plugin>
 
