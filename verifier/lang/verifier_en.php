@@ -8,9 +8,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_code_postal' => 'Ce code postal est incorrect.', # NEW
-	'erreur_date' => 'The date format is invalid.', # MODIF
-	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.', # NEW
+	'erreur_code_postal' => 'This post code is invalid.',
+	'erreur_date' => 'The date is invalid.',
+	'erreur_date_format' => 'The date format is invalid.',
+	'erreur_decimal' => 'La valeur doit &ecirc;tre un nombre d&eacute;cimal.', # NEW
+	'erreur_decimal_nb_decimales' => 'Le nombre ne doit pas avoir plus de @nb_decimales@ chiffres apr&egrave;s la virgule.', # NEW
 	'erreur_email' => 'The email address <em>@email@</em> is not correctly formatted.',
 	'erreur_email_nondispo' => 'The email address <em>@email@</em> has already been used.',
 	'erreur_entier' => 'The value must be an integer.',
@@ -30,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'The URL address is invalid.',
 
 	// O
+	'option_decimal_nb_decimales_label' => 'Nombre de d&eacute;cimales apr&egrave;s la virgule', # NEW
 	'option_email_disponible_label' => 'Available address',
 	'option_email_disponible_label_case' => 'Check that the address has not already be used by another user',
 	'option_email_mode_5322' => 'Check against the strictest standards available',
@@ -48,11 +51,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'type_date' => 'Date',
 	'type_date_description' => 'Check that the value is date in the DD/MM/YYYY format. The separator character can be anything (".", "/", etc).',
+	'type_decimal' => 'Nombre d&eacute;cimal', # NEW
+	'type_decimal_description' => 'V&eacute;rifie que la valeur est un nombre d&eacute;cimal, avec la possibilit&eacute; de restreindre entre deux valeurs et de pr&eacute;ciser le nombre de d&eacute;cimales apr&egrave;s la virgule.', # NEW
 	'type_email' => 'Email address',
 	'type_email_description' => 'Check that the email address is correctly formatted.',
 	'type_email_disponible' => 'Availability of an email address',
 	'type_email_disponible_description' => 'Check that the email address has not already been used by another system user.',
-	'type_entier' => 'Integer',
+	'type_entier' => 'Integer', # MODIF
 	'type_entier_description' => 'Check that the value is an integer, with the option of being restricted between two range values.',
 	'type_regex' => 'Regular expression',
 	'type_regex_description' => 'Check that the value matches the defined expression. For more information on using regular expressions, please refer to <a href="http://fr2.php.net/manual/en/reference.pcre.pattern.syntax.php">the online PHP help</a>.',

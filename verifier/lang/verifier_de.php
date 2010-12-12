@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_code_postal' => 'Ce code postal est incorrect.', # NEW
 	'erreur_date' => 'Fromat des Datums ung&uuml;ltig', # MODIF
 	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.', # NEW
+	'erreur_decimal' => 'La valeur doit &ecirc;tre un nombre d&eacute;cimal.', # NEW
+	'erreur_decimal_nb_decimales' => 'Le nombre ne doit pas avoir plus de @nb_decimales@ chiffres apr&egrave;s la virgule.', # NEW
 	'erreur_email' => 'Die Mailadresse  <em>@email@</em> hat einen Syntaxfehler.',
 	'erreur_email_nondispo' => 'Die Mailadresse <em>@email@</em>  wird bereits verwendet.',
 	'erreur_entier' => 'Der Wert mu&szlig; eine ganze Zahl sein.',
@@ -30,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'Adresse ung&uuml;ltig',
 
 	// O
+	'option_decimal_nb_decimales_label' => 'Nombre de d&eacute;cimales apr&egrave;s la virgule', # NEW
 	'option_email_disponible_label' => 'Adresse verf&uuml;gbar',
 	'option_email_disponible_label_case' => '&Uuml;berpr&uuml;fen, ob die Adresse bereits verwendet wird.',
 	'option_email_mode_5322' => 'Streng standardgem&auml;&szlig;e &Uuml;berpr&uuml;fung',
@@ -48,11 +51,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'type_date' => 'Datum',
 	'type_date_description' => '&Uuml;berpr&uuml;ft den Wert auf das Datumsformat  JJ/MM/AAAA. Verschiedene Trenner sind m&ouml;glich (".", "/", etc).',
+	'type_decimal' => 'Nombre d&eacute;cimal', # NEW
+	'type_decimal_description' => 'V&eacute;rifie que la valeur est un nombre d&eacute;cimal, avec la possibilit&eacute; de restreindre entre deux valeurs et de pr&eacute;ciser le nombre de d&eacute;cimales apr&egrave;s la virgule.', # NEW
 	'type_email' => 'Mailadresse',
 	'type_email_description' => '&Uuml;berpr&uuml;ft das Format der Mailadresse',
 	'type_email_disponible' => 'Verf&uuml;gbarkeit einer Mailadresse',
 	'type_email_disponible_description' => '&Uuml;berpr&uuml;ft ob die Mailadresse bereits von einem anderen Nutzer des System verwendet wird.',
-	'type_entier' => 'Ganzzahl',
+	'type_entier' => 'Ganzzahl', # MODIF
 	'type_entier_description' => '&Uuml;berpr&uuml;ft ob der Wert eine Ganzzahl ist; bietet die M&ouml;glichkeit, einen Bereich zwischen zwei Zahlen anzugeben.',
 	'type_regex' => 'Regul&auml;rer Ausdruck',
 	'type_regex_description' => 'Pr&uuml;ft ob der Wert mit der vorgegebenen Maske &uuml;bereinstimmt. Zur Verwendung der Masken <a href="http://www.php.net/manual/de/reference.pcre.pattern.syntax.php">lesen sie bitte die PHP Dokumentation</a>.',

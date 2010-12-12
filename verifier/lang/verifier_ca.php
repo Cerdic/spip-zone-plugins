@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_code_postal' => 'Ce code postal est incorrect.', # NEW
 	'erreur_date' => 'El format de la data no &eacute;s correcte.', # MODIF
 	'erreur_date_format' => 'Le format de la date n\'est pas accept&eacute;.', # NEW
+	'erreur_decimal' => 'La valeur doit &ecirc;tre un nombre d&eacute;cimal.', # NEW
+	'erreur_decimal_nb_decimales' => 'Le nombre ne doit pas avoir plus de @nb_decimales@ chiffres apr&egrave;s la virgule.', # NEW
 	'erreur_email' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> no t&eacute; un format v&agrave;lid.',
 	'erreur_email_nondispo' => 'L\'adre&ccedil;a de correu electr&ograve;nic <em>@email@</em> ja s\'utilitza.',
 	'erreur_entier' => 'El valor ha de ser un nombre enter.',
@@ -30,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'L\'adre&ccedil;a no &eacute;s v&agrave;lida.',
 
 	// O
+	'option_decimal_nb_decimales_label' => 'Nombre de d&eacute;cimales apr&egrave;s la virgule', # NEW
 	'option_email_disponible_label' => 'Adre&ccedil;a disponible',
 	'option_email_disponible_label_case' => 'Verificar que l\'adre&ccedil;a no l\'utilitzi ja un altre usuari',
 	'option_email_mode_5322' => 'Verificaci&oacute; la m&eacute;s compatible amb els est&agrave;ndards disponibles ',
@@ -48,11 +51,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'type_date' => 'Data',
 	'type_date_description' => 'Verifica que el valor &eacute;s una data en format JJ/MM/AAAA. El separador &eacute;s lliure (".", "/", etc.).',
+	'type_decimal' => 'Nombre d&eacute;cimal', # NEW
+	'type_decimal_description' => 'V&eacute;rifie que la valeur est un nombre d&eacute;cimal, avec la possibilit&eacute; de restreindre entre deux valeurs et de pr&eacute;ciser le nombre de d&eacute;cimales apr&egrave;s la virgule.', # NEW
 	'type_email' => 'Adre&ccedil;a de correu electr&ograve;nic',
 	'type_email_description' => 'Verifica que el format de l\'adre&ccedil;a de correu electr&ograve;nica sigui correcte.',
 	'type_email_disponible' => 'Disponibilitat d\'una adre&ccedil;a de correu electr&ograve;nic',
 	'type_email_disponible_description' => 'Verifica que l\'adre&ccedil;a de correu electr&ograve;nica no sigui utilitzada ja per un altre usuari del sistema.',
-	'type_entier' => 'N&uacute;mero enter',
+	'type_entier' => 'N&uacute;mero enter', # MODIF
 	'type_entier_description' => 'Verifica que el valor sigui un n&uacute;mero enter, amb la possibilitat de restringir entre dos valors.',
 	'type_regex' => 'Expressi&oacute; regular ',
 	'type_regex_description' => 'Verifica que el valor correspon a la m&agrave;scara demanada. Per l\'&uacute;s de m&agrave;scares, aneu a <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l\'ajuda en l&iacute;nia de PHP</a>.',
