@@ -19,7 +19,7 @@
 <tr>
 
 	[(#ENV{voir}|=={#GET{id_trad}}|oui)
-		<INCLURE{fond=prive/liste/inc-articles_trads_detail}{id_trad=#GET{id_trad}}/>
+		<INCLURE{fond=prive/liste/inc-articles_trads_detail}{id_trad=#GET{id_trad}}{env}/>
 		]
 	
 

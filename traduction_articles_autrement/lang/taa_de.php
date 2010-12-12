@@ -25,5 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_plugin' => "Artikel Übersetzung mal Anders",
 'traductions' => "Übersetzungen",
 
+// V
+'voir_traductions' => "Detaillierte Ansicht der Übersetzungen",
+
 );
 ?>
