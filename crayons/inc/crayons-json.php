@@ -64,13 +64,13 @@ function crayons_var2js($var) {
 
 // Un json_encode qui marche en iso (la spec JSON exige utf-8)
 function crayons_json_encode($v) {
-	if ($GLOBALS['charset'] == 'utf-8'
+	if ($GLOBALS['meta']['charset'] == 'utf-8'
 	AND function_exists('json_encode'))
 		return json_encode($v);
 
 	$v = crayons_var2js($v);
 
-	if ($GLOBALS['charset'] != 'utf-8') {
+	if ($GLOBALS['meta']['charset'] != 'utf-8') {
 		include_spip('inc/charsets');
 		$v = unicode2charset(charset2unicode($v), 'utf-8');
 	}
