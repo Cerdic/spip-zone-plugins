@@ -34,7 +34,7 @@
 							- background
 							- highlight
 ]
-	[(#EXTENSION|=={dailym}|oui)
+	[(#EXTENSION|=={dist_daily}|oui)
 		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
 	
 		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&theme=none&foreground=%23F7FFFD&highlight=%23FFC300&background=%23171D1B&start=[&animatedTitle=(#TITRE)]&iframe=1&additionalInfos=0&autoPlay=0&hideInfos=0"></iframe>
@@ -44,7 +44,7 @@
 /** Traiter Viméo **/
 	http://vimeo.com/api
 ]
-	[(#EXTENSION|=={vimeo}|oui)
+	[(#EXTENSION|=={dist_vimeo}|oui)
 	<iframe src="http://player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
 	]
 	
@@ -73,7 +73,7 @@
 	- showinfo			|| Values: 0 or 1. Default is 1. Setting to 0 causes the player to not display information like the video title and rating before the video starts playing.
 	- iv_load_policy	|| Values: 1 or 3. Default is 1. Setting to 1 will cause video annotations to be shown by default, whereas setting to 3 will cause video annotation to not be shown by default.
 	- cc_load_policy	|| Values: 1. Default is based on user preference. Setting to 1 will cause closed captions to be shown by default, even if the user has turned captions off.]
-	[(#EXTENSION|=={youtube}|oui)
+	[(#EXTENSION|=={dist_youtu}|oui)
 	<iframe title="YouTube video player" class="youtube-player" type="text/html" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1" frameborder="0"></iframe>
 	]
 	
