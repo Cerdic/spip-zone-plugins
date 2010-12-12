@@ -14,7 +14,10 @@
 		#ID_ARTICLE
 		})]</td>
 
-[(#ENV{trads}|oui)<INCLURE{fond=prive/liste/inc-articles_compacte_trads}{id_trad}{id_article}{env}/>]
+[(#ENV{trads}|oui)
+	[(#ENV{voir}|=={#ID_TRAD}|non)
+		<INCLURE{fond=prive/liste/inc-articles_compacte_trads}{id_trad}{id_article}{env}/>]
+		]
 </BOUCLE_art>
 <tr>
 
