@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_lus' => 'Messages already read',
 	'msg_messagerie' => 'Contact messaging',
 	'msg_nouveaux' => 'New messages',
-	'msg_pas_nouveaux' => 'You havn\'t new messages.',
+	'msg_pas_nouveaux' => 'You haven\'t new messages.',
 	'msg_revenir_accueil' => 'Return to the list of contact messages.',
 	'msg_supprimer_message' => 'Delete this message',
 
