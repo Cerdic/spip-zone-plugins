@@ -6,6 +6,7 @@
 */
 
 include_spip('inc/presentation');
+include_spip('genespip_fonctions');
 
 function exec_fiche_parent(){
 	global $connect_statut, $connect_toutes_rubriques;
@@ -43,9 +44,9 @@ function exec_fiche_parent(){
 		echo "<form action='".$url_action_fiche."' method='post'>";
 		echo "<tr><td><b>"._T('genespip:pere')." : </b></td><td>";
 		echo "<select size='1' name='pere'>";
-		$result_pere = sql_select('*', 'spip_genespip_individu', 'id_individu="'.$numi_pere.'" and poubelle <> 1');
+		$result_pere = sql_select("*", "spip_genespip_individu", "id_individu='".$numi_pere."' and poubelle <> 1");
 		while ($fiche_pere = spip_fetch_array($result_pere)) {
-			$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu' => sql_quote($fiche_pere['id_individu']).);
+			$resultN = sql_select("date_evenement", "spip_genespip_evenements", "id_type_evenement=1 and id_individu='$fiche_pere'");
 			$naissance=NULL;
 			while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 				$naissance=genespip_datefr($date_evenement);
@@ -56,7 +57,7 @@ function exec_fiche_parent(){
 		$result_pere = sql_select('*', 'spip_genespip_individu', 'sexe = 0 and poubelle <> 1', 'nom');
 		echo "<option value=''>--"._T('genespip:pere_inconnu')."--</option>";
 		while ($fiche_pere = spip_fetch_array($result_pere)) {
-				$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu = "'.$fiche_pere['id_individu']);
+				$resultN = sql_select("date_evenement", "spip_genespip_evenements", "id_type_evenement=1 and id_individu ='$fiche_pere'");
 				$naissance=NULL;
 				while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 				$naissance=genespip_datefr($date_evenement);

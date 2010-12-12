@@ -6,6 +6,7 @@
 */
 
 include_spip('inc/presentation');
+include_spip('genespip_fonctions');
 
 function exec_fiche_enfant(){
 	global $connect_statut, $connect_toutes_rubriques;
