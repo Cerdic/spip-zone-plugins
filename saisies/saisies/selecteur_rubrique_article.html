@@ -32,12 +32,12 @@
 ]
 <!-- <input type="hidden" name="[(#ENV{nom,id_item})][]" id="[champ_(#ENV{nom,id_item})]" value="" /> -->
 
-<INCLURE{fond=formulaires/selecteur/articles}
-	{selected=#GET{val}}
-	{name=#ENV{nom}}
-	{afficher_langue=#ENV{afficher_langue,''}}
-	{filtrer_langue_article=#GET{filtrer_langue_article,''}}
-	{filtrer_langue_rubrique=#GET{filtrer_langue_rubrique,''}}
-	{select=(#ENV{multiple}|?{0,1})}
-	{rubriques=1} />
+[(#INCLURE{fond=formulaires/selecteur/articles,
+	selected=#GET{val},
+	name=#ENV{nom},
+	afficher_langue=#ENV{afficher_langue,''},
+	filtrer_langue_article=#GET{filtrer_langue_article,''},
+	filtrer_langue_rubrique=#GET{filtrer_langue_rubrique,''},
+	select=[(#ENV{multiple}|?{0,1})],
+	rubriques=1} )]
 

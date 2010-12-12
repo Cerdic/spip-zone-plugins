@@ -28,10 +28,10 @@
    Yffic
 ]
 <!--<input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
-<INCLURE{fond=formulaires/selecteur/articles}
-	{selected=#GET{val}}
-	{name=#ENV{nom}}
-	{afficher_langue=#ENV{afficher_langue,''}}
-	{filtrer_langue_article=#GET{filtrer_langue_article,''}}
-	{select=(#ENV{multiple}|?{0,1})}
-	{rubriques=0} />
+[(#INCLURE{fond=formulaires/selecteur/articles,
+	selected=#GET{val},
+	name=#ENV{nom},
+	afficher_langue=#ENV{afficher_langue,''},
+	filtrer_langue_article=#GET{filtrer_langue_article,''},
+	select=[(#ENV{multiple}|?{0,1})],
+	rubriques=0 )]
