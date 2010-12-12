@@ -13,15 +13,15 @@ function formulaires_insertion_video_verifier_dist(){
 	$url = preg_replace('%(#.*$|http://|www.)%', '', trim(_request('url')));
 	
 	if(preg_match('/dailymotion/',$url)){
-		set_request('type','dailym');
+		set_request('type','dist_daily');
 		$laVideo = preg_replace('#dailymotion\.com/video/#','',$url);
 	}
 	else if(preg_match('/vimeo/',$url)){
-		set_request('type','vimeo');
+		set_request('type','dist_vimeo');
 		$laVideo = preg_replace('#vimeo\.com/#','',$url);
 	}
 	else if(preg_match('/(youtube|youtu\.be)/',$url)){
-		set_request('type','youtube');
+		set_request('type','dist_youtu');
 		$laVideo = preg_replace('#(youtu\.be/|youtube\.com/watch\?v=|&.*$|\?hd=1)#','',$url);
 	}
 

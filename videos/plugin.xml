@@ -2,7 +2,10 @@
 	<nom> <multi> [fr]Vidéo(s) </multi> </nom>
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
-	<version>0.3</version>
+	
+	<version>0.4</version>
+	<version_base>0.1</version_base>
+	
 	<icon>theme/img/videos-32.png</icon>
 	<etat>dev</etat>
 	<description>
@@ -15,6 +18,8 @@
 		</multi></description>
 	<lien>http://www.spip-contrib.net/?article3636</lien>
 	<prefix>videos</prefix>
+	<!-- Base de données -->
+	<install>base/videos_sql.php</install>
 	
 	<pipeline>
 		<nom>jquery_plugins</nom>
