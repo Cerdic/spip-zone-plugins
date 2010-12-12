@@ -6,10 +6,13 @@
 #SET{hauteur,#ENV{hauteur,#CONFIG{videos/hauteur,'315'}}}
 
 [(#REM) "Extensions" gérées ou rajoutées par le plugin ]
+<!--
+	TODO Foutre ça dans une globale ou un autre truc histoire de pas oublier de le modifier...
+-->
 [(#SET{lesExtensions,
-	#ARRAY{	1,dailym,
-			2,youtube,
-			3,vimeo}
+	#ARRAY{	1,dist_daily,
+			2,dist_youtu,
+			3,dist_vimeo}
 })]
 
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
