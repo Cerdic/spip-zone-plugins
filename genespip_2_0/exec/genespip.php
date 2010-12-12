@@ -9,6 +9,7 @@
     include_spip('inc/presentation');
     include_spip('base/gestion_base');
     include_spip('inc/version');
+    include_spip('genespip_fonctions');
 
 function exec_genespip() {
 	global $connect_statut, $connect_toutes_rubriques;
@@ -30,7 +31,7 @@ function exec_genespip() {
 	$nom_select=$nom_select[0];
 
 	echo debut_gauche('',true);
-	
+
 	echo debut_boite_info(true);
 	//Mettre à la poubelle
 	if ($_POST['edit']=='poubelle'){
@@ -42,13 +43,12 @@ function exec_genespip() {
 	}
 	echo propre(_T('genespip:info_doc'));
 	echo fin_boite_info(true);
-	
-	include_spip('inc/nouvelle_fiche');
-	//echo genespip_nouvelle_fiche($url_action_accueil);
-	
+
+	echo genespip_nouvelle_fiche($url_action_accueil);
+
 	include_spip('inc/raccourcis_intro');
-	
-	echo debut_droite('',true);	
+
+	echo debut_droite('',true);
 	$inventaire = sql_select('id_individu', 'spip_genespip_individu');
 	$compteinventaire = mysql_num_rows($inventaire);
 	spip_mysql_free($inventaire);
@@ -77,16 +77,16 @@ function exec_genespip() {
 			$ret .= "</form>";
 			echo $ret;
 		}
-		echo fin_cadre_relief(true);	
+		echo fin_cadre_relief(true);
 	}
 	echo debut_cadre_formulaire('',true);
-	
+
 	$result = sql_select('id_individu', 'spip_genespip_individu', 'poubelle <> 1');
 	$compte = mysql_num_rows($result);
 	spip_mysql_free($result);
 	$result = sql_select('nom, count(id_individu) as compte2', 'spip_genespip_individu', 'poubelle <> 1', 'nom');
 	$comptenom = mysql_num_rows($result);
-    
+
 	echo gros_titre(_T('genespip:base_genespip'), '', false);
     echo "<table border='0' width='100%'>";
     echo "<tr><td width='50%'>";
@@ -106,11 +106,11 @@ function exec_genespip() {
 
 	echo '<br />';
 	//Test nouvelle fiche si pas de doublon avant validation.
-	
+
 	if ($_POST['edit']=="nouvellefiche"){
 		$result = sql_select('id_individu, nom, prenom', 'spip_genespip_individu', 'nom='.sql_quote(_request('nom')).' AND prenom='.sql_quote(_request('prenom')));
 		$compte = mysql_num_rows($result);
-		
+
 		echo debut_cadre_relief(true);
 		echo gros_titre(_T('genespip:nouvelle_fiche'), '', false);
 		echo "<br />";
@@ -147,7 +147,7 @@ function exec_genespip() {
 	//Affichage des personnes en fonction du nom sélectionné.
 	if ($_POST['individu']<>""){
 		$result = sql_select('id_individu, nom, prenom, sexe', 'spip_genespip_individu', 'poubelle<>1 and nom ='.$nom_select.'', 'prenom');
-		
+
 		echo debut_cadre_relief(true);
 		echo gros_titre(_T('genespip:'.$nom_select), '', false);
 		echo '<br />';
@@ -164,7 +164,7 @@ function exec_genespip() {
 			}
 			echo "&nbsp;-&nbsp;<img src='".$sexe."' /> <a href='".$url_choix_nom."&id_individu=".$id_individu."'>".$nom." ".$prenom."</a> (&deg;".$naissance.")<br />";
 		}
-		
+
 		echo fin_cadre_relief(true);
 		//spip_free_result($result);
 	}

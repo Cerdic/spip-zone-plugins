@@ -7,6 +7,7 @@
 
 include_spip('inc/presentation');
 include_spip('exec/genespip_evt');
+include_spip('genespip_fonctions');
 
 function exec_fiche_detail(){
 	global $connect_statut, $connect_toutes_rubriques;
@@ -14,14 +15,14 @@ function exec_fiche_detail(){
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('genespip:fiche_detail'), "", "");
 	
-	$url_action_fiche=generer_url_ecrire('fiche_detail');
-	$url_action_accueil=generer_url_ecrire('genespip');
+	$url_action_fiche = generer_url_ecrire('fiche_detail');
+	$url_action_accueil = generer_url_ecrire('genespip');
 	$url_retour = $_SERVER['HTTP_REFERER'];
 	
 	if ($_GET['id_individu']!=NULL){$id_individu = $_GET['id_individu'];}else{$id_individu=$_POST['id_individu'];}
 	$actionnew = $_GET['actionnew'].$_POST['actionnew'];
 	if ($actionnew=='Confirmer'){
-		$id_individu=genespip_ajout_fiche();
+		$id_individu = genespip_ajout_fiche();
 		$url = $url_action_fiche."&id_individu=".$id_individu;
 		genespip_rediriger_javascript($url);
 	}elseif($actionnew=='Annuler'){
