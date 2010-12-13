@@ -19,7 +19,7 @@ function agenda_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_evenements'][] = 'evenements_participants';
 	$interface['tables_jointures']['spip_auteurs'][] = 'evenements_participants';
 
-	$interface['table_des_traitements']['LIEU'][]= 'propre(%s)';
+	$interface['table_des_traitements']['LIEU'][]= 'typo(%s)';
 	
 	// permet d'utiliser les criteres racine, meme_parent, id_parent
 	$interface['exceptions_des_tables']['evenements']['id_parent']='id_evenement_source';
