@@ -27,9 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description' => 'Un carrito de compras simple en javascript',
-	'devise'=> 'Moneda',#NEW
-	'devise_choix'=> 'Elección de la moneda',#NEW
-	'devise_explication'=>"La moneda que se utilizará para el pago (Compruebe la compatibilidad antes de m&eacute;todo de pago)",#NEW
+	'devise' => 'Moneda', # NEW
+	'devise_choix' => 'Elección de la moneda', # NEW
+	'devise_explication' => 'La moneda que se utilizará para el pago (Compruebe la compatibilidad antes de m&eacute;todo de pago)',
 	'dineromail_country' => 'País',
 	'dineromail_country_argentine' => 'Argentina',
 	'dineromail_country_brazil' => 'Brasil',

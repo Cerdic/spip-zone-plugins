@@ -29,6 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description' => 'Una cistella de compres simple en Javascript',
+	'devise' => 'Moneda', # NEW NEW
+	'devise_choix' => 'Elección de la moneda', # NEW NEW
+	'devise_explication' => 'La moneda que se utilizará para el pago (Compruebe la compatibilidad antes de m&eacute;todo de pago)', # NEW
 	'dineromail_country' => 'Pa&iacute;s',
 	'dineromail_country_argentine' => 'Argentina',
 	'dineromail_country_brazil' => 'Brasil',
