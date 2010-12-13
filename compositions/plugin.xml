@@ -5,13 +5,18 @@
  	[Cedric Morin->http://www.yterium.com] &#169; 2007-2009
 	</auteur>
 	<licence>GPL</licence>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<version_base>0.3.0</version_base>
 	<etat>stable</etat>
 	<description>
-	Ce plugin vous permet de d&eacute;finir plusieurs variantes de compositions pour chaque type objet&nbsp;SPIP (article, rubrique, etc.) et de les appliquer simplement, cas par cas, depuis l'espace priv&eacute;.
+		<multi>
+			[fr]Ce plugin vous permet de d&#233;finir plusieurs variantes de compositions pour chaque type objet&#32;SPIP (article, rubrique, etc.) et de les appliquer simplement, cas par cas, depuis l'espace priv&#233;.
 
-Les rubriques peuvent aussi se voir attribuer un article d'accueil. Les champs id_article_accueil et composition peuvent ensuite etre utilis&eacute; par les squelettes.
+Les rubriques peuvent aussi se voir attribuer un article d'accueil. Les champs id_article_accueil et composition peuvent ensuite etre utilis&#233; par les squelettes.
+			[en]This plugin allows you to define several variants of compositions for each kind of SPIP objects (article, sections, etc..) and to easily apply them, case by case, from the private area.
+
+Articles may also be assigned a as home of a section. Fields "id_article_accueil" and "composition" can then be used by the skeletons.
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/compositions</lien> <!-- URI de documentation -->
 	<install>base/compositions.php</install>
