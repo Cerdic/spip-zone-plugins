@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_accueil' => 'Mis tareas',
-	'icone_administration' => 'Wartung',
+	'icone_administration' => 'Administraci&oacute;n',
 	'icone_configuration' => 'Configuraci&oacute;n',
 	'icone_edition' => 'Edici&oacute;n',
 	'icone_langage' => 'Mi lengua',
