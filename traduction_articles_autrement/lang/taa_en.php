@@ -18,6 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //L
 'lier_traduction' => "Attach a translation",
 
+//N
+'necesite_afficher_objet' => "This function requires the installation of the plugin",
+
 // O
 'options' => "Options",
 

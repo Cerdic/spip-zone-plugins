@@ -18,6 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //L
 'lier_traduction' => "Eine übersetzung anhängen",
 
+//>N
+'necesite_afficher_objet' => "Diese Fuktion erfordert die Installierung des Plugins",
+
 // O
 'options' => "Optionen",
 

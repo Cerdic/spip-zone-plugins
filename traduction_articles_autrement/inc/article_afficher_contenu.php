@@ -39,8 +39,9 @@ function inc_article_afficher_contenu_dist($id_article){
 		
 		$dater = charger_fonction('dater', 'inc');
 		$editer_mots = charger_fonction('editer_mots', 'inc');
+		
 		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
-		$edition_seule=lire_config('taa/edition_seule');
+		if ($flag_editable) $edition_seule=lire_config('taa/edition_seule');
 		
 		if(!$edition_seule)$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 		
@@ -90,7 +91,7 @@ function inc_article_afficher_contenu_dist($id_article){
 		$options = '<div class="options delier">'.icone_inline($clic, ajax_action_auteur("referencer_traduction","$id_article,-$id_trad",'articles', "id_article=$id_article",array($clic)), "traductions-24.gif", "supprimer.gif",'right', false).'</div>';		
 		}
 	else{
-			$id_trad=$id_article;
+		$id_trad=$id_article;
 		$row=sql_fetsel('lang,id_article','spip_articles','id_article='.$id_article);
 		$traductions[$row['lang']]=$row['id_article'];
 		

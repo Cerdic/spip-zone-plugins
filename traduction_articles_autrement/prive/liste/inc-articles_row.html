@@ -1,7 +1,7 @@
 <tr class="#ENV{class}">
 <BOUCLE_art(ARTICLES){id_article}{statut?}>#SET{id_trad,#ID_TRAD}
 	<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
-	<td class='titre'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">[(#RANG). ]#TITRE</a>
+	<td class='titre'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a>
 	[(#ENV{trads}|oui)
 		[(#ID_TRAD|>{0}|oui)
 			[(#ENV{voir}|=={#ID_TRAD}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>">-</a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#ID_TRAD})]" title="<:taa:voir_traductions:>">+</a>})]

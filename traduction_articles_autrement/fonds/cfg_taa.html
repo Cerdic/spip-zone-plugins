@@ -5,27 +5,28 @@
 
 #CACHE{0}
 
-<:taa:titre_plugin:>
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 <fieldset><legend><:taa:options:></legend>
 
-
-
-<p>
+<div>
 
 	<label for="edition_seule"><:taa:affichage_liste_compacte:> : </label>	
 
-	<div>
-		<input type="checkbox" name="liste_compacte" id="liste_compacte" [(#ENV{liste_compacte}|oui) checked="checked"] />
-	</div>
+	<p>
+		[(#PLUGIN{afficher_objets}|?{
+			<input type="checkbox" name="liste_compacte" id="liste_compacte" [(#ENV{liste_compacte}|oui) checked="checked"] />,
+			<b><:taa:necesite_afficher_objet:> <a href="http://files.spip.org/spip-zone/afficher_objets.zip">Afficher Objets</a> !</b>
+			})]	
+
+	</p>
 	
 	<label for="edition_seule"><:taa:affichage_edition_seule:> : </label>	
-	<div>
+	<p>
 		<input type="checkbox" name="edition_seule" id="edition_seule" [(#ENV{edition_seule}|oui) checked="checked"] />
-	</div>	
+	</p>	
 
-</p>
+</div>
 
 </fieldset>
 
