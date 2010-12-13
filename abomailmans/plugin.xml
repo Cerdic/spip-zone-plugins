@@ -1,7 +1,11 @@
 <plugin>
-	<nom><multi>
-	[fr]Abonnement &#224; des listes de diff. mailman et sympa[de]Mailinglisten
-	</multi></nom>
+	<nom>
+		<multi>
+			[fr]Abonnement &#224; des listes de diff. mailman et sympa
+			[de]Mailinglisten
+			[en]Mailing lists subscription (Mailman and sympa)
+		</multi>
+	</nom>
 	<icon>img_pack/mailman.gif</icon>
 	<auteur>
 	MaZiaR [NetAktiv->http://www.netaktiv.com]
@@ -11,12 +15,13 @@
 	<prefix>abomailmans</prefix>
 	<etat>dev</etat>
 	<description><multi>
-	[fr]Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d&rsquo;afficher un formulaire d&rsquo;abonnement &agrave; l&rsquo;ensemble des listes renseign&eacute;es Mailman.
-	Cette inscription se fait via l&rsquo;interface priv&eacute;e de SPIP par le menu &laquo; Edition &gt; Abomailmans &gt; les listes de diffusions mailman &raquo;
-	Ensuite il vous est possible de s&eacute;lectionner des articles de votre SPIP, par des crit&egrave;res de date, de rubrique et/ou de mot cl&eacute; et envoyer leurs contenus &agrave; ces listes, en utilisant des squelettes de mise en page du contenu.
-    Le lien avec les listes Mailman et Sympa se fait par des envois d&rsquo;e-mail.
-	[de]Dieses Plugin ermöglich mit dem TAG  #FORMULAIRE_ABOMAILMAN das Abnonnieren von Mailinglisten.
-	Dem Adminstrator steht ein Interface zur Verwaltung dieser Listen zur Verf&uuml;gung.
+	[fr]Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d'afficher un formulaire d'abonnement &#224; l'ensemble des listes [Mailman->http://www.gnu.org/software/mailman/] ou [Sympa->http://www.sympa.org] renseign&#233;es.
+	Cette inscription se fait via l'interface priv&#233;e de SPIP par le menu "Edition Abomailmans les listes de diffusions mailman"
+	Ensuite il vous est possible de s&#233;lectionner des articles de votre SPIP, par des crit&#232;res de date, de rubrique et/ou de mot cl&#233; et envoyer leurs contenus &#224; ces listes, en utilisant des squelettes de mise en page du contenu.
+    Le lien avec les listes Mailman et Sympa se fait par des envois d'e-mail.
+	[de]Dieses Plugin erm&#246;glich mit dem TAG  #FORMULAIRE_ABOMAILMAN das Abnonnieren von Mailinglisten.
+	Dem Adminstrator steht ein Interface zur Verwaltung dieser Listen zur Verf&#252;gung.
+	[en]This plugin adds a form of registration to mailing lists services as [Mailman->http://www.gnu.org/software/mailman/] or [Sympa->http://www.sympa.org] the administrator can manage from the private space via a dedicated interface.
 	</multi></description>
 	<lien>[Spip-Contrib->http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des]</lien>
 	<fonctions>abomailmans_fonctions.php</fonctions>
