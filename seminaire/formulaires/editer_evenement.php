@@ -31,9 +31,14 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	}
 
 	// les mots
-	$valeurs['_hidden'] .= "<input type='hidden' name='mots[]' value='#ID_MOT' />";
-	$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_evenements','id_evenement='.intval($id_evenement));
-
+//	$valeurs['_hidden'] .= "<input type='hidden' name='mots[]' value='#ID_MOT' />";
+//	$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_evenements','id_evenement='.intval($id_evenement));
+	// les mots
+	$valeurs['mots'] = array();
+	if (intval($id_evenement))
+		$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_evenements','id_evenement='.intval($id_evenement));
+		
+		
 	// les repetitions
 	$valeurs['repetitions'] = '';
 	if (intval($id_evenement)){

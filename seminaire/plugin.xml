@@ -13,34 +13,26 @@
 <description>
 	<multi>
 [fr]
-Petite verrue au plugin Agenda2 (duquel il est entièrement dépendant) pour, typiquement,  gérer les séminaires et autres événements d'un laboratoire. On pourra aussi l'utiliser pour gérer les événements dune galerie d'art sans trop de difficultés.
+Ajout au plugin Agenda2  pour  gérer les séminaires et autres événements d'un laboratoire de recherche. Idéalement complété par le plugin Documents et Logos sur les événements de Guy Césaro.
 
-<quote>Ce plugin gère les événements en installant des champs supplémentaires dans la table evenements et des mots clés associés. Pour cette raison, elle n'est compatible qu'avec {{Spip 2}}. Vous devez de plus installer et activer les plugins suivants :</quote>
+Ce plugin gère les événements en installant des champs supplémentaires dans la table evenements et des mots clés associés. Pour cette raison, elle n'est compatible qu'avec {{Spip 2}}. Vous devez de plus installer et activer les plugins suivants :
 
--** CFG
--** SPIP Bonux
--** Agenda 2 
--** Champs extras 2
--** Saisies
-
-Vous pouvez les installer facilement en créant un répertoire nommé auto dans le répertoire plugins en veillant à ce que le serveur ait les droits en écriture dessus puis les sélectionner à partir de la liste tenue à jour que vous verrez apparaître en bas de la page.
+-* Agenda 2 
+-* Champs extras 2
 
 Vous pouvez également installer le plugin Crayons avec lequel ce plugin est entièrement compatible et qui facilitera la vie de vos rédacteurs.
 
 [en]
 </multi>
+</description>
 
-	</description>
 	<lien></lien>
 	<icon>images/logo_seminaire.png</icon>
 	<prefix>seminaire</prefix>
 
-	<necessite id="cfg" version="[1.3.6;]" src="http://files.spip.org/spip-zone/cfg.zip"/>
 	<necessite id="agenda" version="[2.0;]" src="http://files.spip.org/spip-zone/agenda2.zip"/>
 	<necessite id="cextras" version="[1.0.1;]" />
-	<necessite id="saisies" version="[1.5.1;]" />
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<necessite id="gestdoc" version='[1.3.5;]'/>
 
 	<options>seminaire_options.php</options>
 	<install>base/seminaire_install.php</install>
@@ -49,15 +41,7 @@ Vous pouvez également installer le plugin Crayons avec lequel ce plugin est ent
         <nom>declarer_champs_extras</nom>
         <inclure>base/seminaire.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>affiche_gauche</nom>
-		<inclure>base/seminaire.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>pre_edition</nom>
-		<inclure>base/seminaire.php</inclure>
-	</pipeline>
 
-		<categorie>date</categorie>
+	<categorie>date</categorie>
 
 </plugin>

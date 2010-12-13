@@ -21,13 +21,13 @@
 	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 	    	]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
 	    </li>
-		[(#SAISIE{type,mots,
-					obligatoire=oui,
-					label=<:seminaire:type:>,
-					cacher_option_intro=non,
-					defaut=1,
-					attention=<:seminaire:attention_type:>,
-					})]
+	    
+	    [(#REM)gestion des mots clés]
+		 [<li class="editer_mots[ (#ENV**{erreurs}|table_valeur{mots}|oui)erreur]">
+	    <label for="mots"><:titre_page_mots_tous:></label>(#INCLURE{fond=formulaires/inc-mots_evenements}{name=mots}{id_evenement}{selected=#ENV{mots}}|trim)
+	    </li>]
+
+
 	    <li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
 	    <ul>
 	    <li class="editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
@@ -74,6 +74,7 @@
 				]<input type='text' class='text' name='places' id='places' value="[(#ENV{places})]" />
 				</div>
 	</li>
+
 	</ul>]
 	<p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>

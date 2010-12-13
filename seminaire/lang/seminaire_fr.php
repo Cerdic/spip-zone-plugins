@@ -1,8 +1,5 @@
 <?php
-$GLOBALS[$GLOBALS['idx_lang']] = array(
-	//titre pour le logo de l'evenement
-	'logo_evenement'			 =>		'Logo de l&rsquo;&eacute;v&eacute;nement',
-	
+$GLOBALS[$GLOBALS['idx_lang']] = array(	
 	//pour le formulaire de s&eacute;minaires
 	'titre_evenement'			 =>		'Titre à préciser',
 	'evenement_titre'			 =>		'Titre de l&rsquo;expos&eacute;',
