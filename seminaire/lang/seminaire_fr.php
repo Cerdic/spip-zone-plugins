@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apreciser'					 =>		'A pr&eacute;ciser',
 	'plus'						 =>		'En savoir plus',
 	'a_venir'					 =>		'Les prochains s&eacute;minaires',
+	'choix_mot'					 =>		'Type d&rsquo;&eacute;v&eacute;nement',
 	'attention_type'			 =>		'Le choix du type d&rsquo;&eacute;v&eacute;nement d&eacute;termine le tri qui lui sera appliqu&eacute;.',
 	'oubli_titre'				 =>		'Ne pas oublier de mettre le titre de l&rsquo;&eacute;v&eacute;nement',
 	'exemple'					 =>		'Par exemple : CMI - Salle R164',
