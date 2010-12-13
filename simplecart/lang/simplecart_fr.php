@@ -29,6 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description' => 'Un panier d\'achat simple en javascript',
+	'devise'=> 'Devise',
+	'devise_choix'=> 'Choix de la devise',
+	'devise_explication'=>"La devise qui sera utilis&eacute;e pour le paiement (V&eacute;rifiez avant la compatibilit&eacute; avec le moyen de paiement)",
 	'dineromail_country' => 'Pays',
 	'dineromail_country_argentine' => 'Argentine',
 	'dineromail_country_brazil' => 'Bresil',
