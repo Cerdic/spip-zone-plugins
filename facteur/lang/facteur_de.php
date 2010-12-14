@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_mail' => 'Funktion mail() von PHP verwenden',
 	'utiliser_reglages_site' => 'Einstellungen von SPIP verwenden: als Name wird die Bezeichnung der SPIP-Website verwendet und als Adresse die des Webmasters.',
-	'utiliser_smtp' => 'Utiliser SMTP',
+	'utiliser_smtp' => 'SMTP verwenden',
 	
 	// V
 	'valider' => ' OK ',
