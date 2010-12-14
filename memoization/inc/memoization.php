@@ -193,7 +193,7 @@ if (!function_exists('debug_backtrace')) {
 			.serialize($trace['args'])
 			.serialize($vars)
 		);
-		if (!cache_isset($key)) {
+		if (!cache_exists($key)) {
 			cache_set($key, null, $ttl);
 			$r = call_user_func_array($fun, $trace['args']);
 			cache_set($key, $r, $ttl);

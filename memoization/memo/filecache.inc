@@ -59,7 +59,7 @@ class MCacheBackend_filecache extends MCacheBackend {
 		if ($c = @file_get_contents($this->filename($key))
 		AND $r = @unserialize($c)
 		AND $r[1] == $key
-		AND $r[2] <= time())
+		AND $r[2] >= time())
 			return true;
 		else
 			return false;
@@ -71,7 +71,7 @@ class MCacheBackend_filecache extends MCacheBackend {
 			AND $s = supprimer_fichier($f)
 			AND $r = @unserialize($c)
 			AND $r[1] == $key
-			AND $r[2] <= time()
+			AND $r[2] >= time()
 		);
 	}
 	
