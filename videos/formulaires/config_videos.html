@@ -1,52 +1,78 @@
 <!-- titre=<:videos:titre_admin:>-->
-[(#REM) autoriser=configurer ]
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=videos -->
 #CACHE{0}
 
 [(#REM)
 /** Valeurs par défaut **/
 ]
+[(#SET{hauteur_defaut,315})]
 [(#SET{largeur_defaut,560})]
-[(#SET{largeur_defaut,315})]
 
-
-<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_contenu' id='formulaire_configurer_forums_contenu'>
-<h3 class='titrem'><img src="[(#CHEMIN{theme/img/videos-24.png})]" class='icone' />&nbsp;<:videos:titre_admin:></h3>
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	<form method="post" action="#SELF"><div>
 		#ACTION_FORMULAIRE{SELF}
-		<h4><:videos:cfg_titre_configurations_communes:></h4>
 		<ul>
-			<li>
-				<label for="largeur"><:videos:cfg_label_largeur:></label>
-				<div class='explication'><:videos:cfg_explication_largeur:></div>
-				<input type="text" name="largeur" value="[(#ENV{largeur}|sinon{#GET{largeur_defaut}})]" id="largeur" class="text" />
+			<li class="fieldset">
+				<h3 class="legend"><:videos:cfg_titre_configurations_communes:></h3>
+				<ul>
+					<li>
+						<label for="largeur"><:videos:cfg_label_largeur:></label>
+						<p class='explication'><:videos:cfg_explication_largeur:></p>
+						<input type="text" name="largeur" value="[(#ENV{largeur}|sinon{#GET{largeur_defaut}})]" id="largeur" class="text" />
+					</li>
+					<li>
+						<label for="hauteur"><:videos:cfg_label_hauteur:></label>
+						<p class='explication'><:videos:cfg_explication_hauteur:></p>
+						<input type="text" name="hauteur" value="[(#ENV{hauteur}|sinon{#GET{hauteur_defaut}})]" id="hauteur" class="text" />
+					</li>
+				</ul>
 			</li>
-			<li>
-				<label for="hauteur"><:videos:cfg_label_hauteur:></label>
-				<div class='explication'><:videos:cfg_explication_hauteur:></div>
-				<input type="text" name="hauteur" value="[(#ENV{hauteur}|sinon{#GET{hauteur_defaut}})]" id="hauteur" class="text" />
-			</li>
+		[(#REM)
+			<li class="fieldset">
+				<h3 class="legend"><:videos:cfg_titre_configurations_dailymotion:></h3>
+				<ul>
+					<li>
+						<p>En travaux...</p>
+					</li>
+				</ul>
+			</li>]
+
+		[(#REM)
+			<li class="fieldset">
+				<h3 class="legend"><:videos:cfg_titre_configurations_vimeo:></h3>
+				<ul>
+					<li>
+						<p>En travaux...</p>
+					</li>
+				</ul>
+			</li>]
+		
+		[(#REM)
+			<li class="fieldset">
+				<h3 class="legend"><:videos:cfg_titre_configurations_youtube:></h3>
+				<ul>
+					<li>
+						<p>En travaux...</p>
+					</li>
+				</ul>
+			</li>]
+
+		[(#REM)
+			<li class="fieldset">
+				<h3 class="legend"><:videos:cfg_titre_configurations_html5:></h3>
+				<ul>
+					<li>
+						<p>En travaux...</p>
+					</li>
+				</ul>
+			</li>]
 		</ul>
-		
-		<h4><:videos:cfg_titre_configurations_dailymotion:></h4>
-		<p>En travaux...</p>
-
-		<hr />
-		<h4><:videos:cfg_titre_configurations_vimeo:></h4>
-		<p>En travaux...</p>
-		
-		<hr />
-		<h4><:videos:cfg_titre_configurations_youtube:></h4>
-		<p>En travaux...</p>
-
-		<hr />
-		<h4><:videos:cfg_titre_configurations_html5:></h4>
-		<p>En travaux...</p>
-		
 		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
 	</div></form>
-
-</div><!-- #formulaire_configurer_forums_contenu -->
+</div>

@@ -4,6 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
+	'cfg_description_doc' => 'Documentation',
+	'cfg_description_titre' => 'Setup of the Video(s) plugin',
 	'cfg_explication_hauteur' => 'Choose the default height for your videos. This option can be overloaded in the call to the model.',
 	'cfg_explication_largeur' => 'Choose the default width for your videos. This option can be overloaded in the call to the model.',
 	'cfg_label_hauteur' => 'Default height',

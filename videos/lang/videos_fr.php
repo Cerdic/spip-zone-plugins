@@ -4,6 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
+	'cfg_description_doc' => 'Documentation',
+	'cfg_description_titre' => 'Configuration du plugin Vid&eacute;o(s)',
 	'cfg_explication_hauteur' => "Choisissez la hauteur par d&eacute;faut pour vos vid&eacute;os. Cette option reste surchargeable dans l&#x27;appel au mod&egrave;le.",
 	'cfg_explication_largeur' => "Choisissez la largeur par d&eacute;faut pour vos vid&eacute;os. Cette option reste surchargeable dans l&#x27;appel au mod&egrave;le.",
 	'cfg_label_hauteur' => "Hauteur par d&eacute;faut",	
