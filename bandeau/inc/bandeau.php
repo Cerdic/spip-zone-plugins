@@ -271,8 +271,14 @@ function bando_outils_rapides($boutons, $contexte = array()){
 				. "</ul>";
 	}
 	$res .= formulaire_recherche("recherche")."</div>";
-
-	return "<div id='bando_outils'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
+	
+	// Préférence utilisateur de masquage de la barre
+	if (!$GLOBALS['visiteur_session']['prefs']['display_outils'])
+		$masque = " style='display:none;'";
+	else
+		$masque = "";
+	
+	return "<div id='bando_outils'$masque><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
 }
 
 function bando_liens_acces_rapide(){

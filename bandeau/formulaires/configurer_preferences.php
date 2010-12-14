@@ -16,9 +16,10 @@ function formulaires_configurer_preferences_charger_dist(){
 	// travailler sur des meta fraiches
 	include_spip('inc/meta');
 	lire_metas();
-
+	
 	$valeurs = array();
 	$valeurs['display_navigation'] = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])?$GLOBALS['visiteur_session']['prefs']['display_navigation']:'navigation_avec_icones';
+	$valeurs['display_outils'] = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])?$GLOBALS['visiteur_session']['prefs']['display_outils']:'oui';
 	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) AND $GLOBALS['visiteur_session']['prefs']['display']>0)?$GLOBALS['visiteur_session']['prefs']['display']:1;
 	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) AND $GLOBALS['visiteur_session']['prefs']['couleur']>0)?$GLOBALS['visiteur_session']['prefs']['couleur']:1;
 	$valeurs['spip_ecran'] = $GLOBALS['spip_ecran'];
@@ -60,7 +61,10 @@ function formulaires_configurer_preferences_traiter_dist(){
 	if ($display_navigation = _request('display_navigation')) {
 		$GLOBALS['visiteur_session']['prefs']['display_navigation'] = $display_navigation;
 	}
-
+	if (!is_null($display_outils = _request('display_outils'))) {
+		$GLOBALS['visiteur_session']['prefs']['display_outils'] = $display_outils;
+	}
+	
 	if (intval($GLOBALS['visiteur_session']['id_auteur']))
 		sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
 

@@ -38,6 +38,21 @@
 				<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
 			</div>
 		</li>
+		#SET{name,display_outils}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label><:bando:label_bando_outils:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|oui)checked="checked" ]value="oui" 
+				onchange="if (this.checked) jQuery('#bando_outils').show(); else jQuery('#bando_outils').hide();"/>
+				<label for="[(#GET{name})]_1"><:bando:label_bando_outils_afficher:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|non)checked="checked" ]value=""
+				onchange="if (!this.checked) jQuery('#bando_outils').show(); else jQuery('#bando_outils').hide();"/>
+				<label for="[(#GET{name})]_2"><:bando:label_bando_outils_masquer:></label>
+			</div>
+		</li>
 	  	#SET{name,display}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label><:bando:label_texte_et_icones_page:></label>[
