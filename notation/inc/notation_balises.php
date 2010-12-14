@@ -107,41 +107,81 @@ function notation_calculer_id($p){
  * 
  * On peut ajouter un selecteur dans le critere sur les 3 champs calcules :
  * {notation moyenne>3} ou {notation nombre_votes>0}
+ *
+ * ou designer une table qui n'est pas la table principale de la boucle
+ * <BOUCLE_a(AUTEURS articles){notation article}> 
  */
  function critere_notation($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
-	$objet = objet_type($boucle->type_requete);
-	$id_table = $boucle->id_table . '.' . $boucle->primary;
 
-	include_spip('inc/notation');
-	$ponderation = notation_get_ponderation();
-	$boucle->select[]= 'COUNT(notations.note) AS nombre_votes';
-	$boucle->select[]= 'ROUND(AVG(notations.note),2) AS moyenne';
-	$boucle->select[]= 'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee';
-	# jointure sur spip_notations
-	$boucle->from['notations'] = "spip_notations"; 
-	$boucle->from_type['notations'] = "LEFT"; 
-	# Ordre des choses : 
-	# $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
-	# exemple : notations = spip_documents, id_objet, id_document, notations.objet=document
-	$boucle->join["notations"]= array("'$boucle->id_table'","'id_objet'","'$boucle->primary'","'notations.objet='.sql_quote('$objet')");
+	$table = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 
-	$boucle->group[]=$id_table;
+	if (!preg_match(",^'\w+'$,",$table)){
+		$table = $boucle->type_requete;
+		$id_table = $boucle->id_table;
+		$objet = objet_type($table);
+		$primary = id_table_objet($objet);
+		$group = $id_table . '.' . $primary;
+
+		include_spip('inc/notation');
+		$ponderation = notation_get_ponderation();
+		$boucle->select[]= 'COUNT(notations.note) AS nombre_votes';
+		$boucle->select[]= 'ROUND(AVG(notations.note),2) AS moyenne';
+		$boucle->select[]= 'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee';
+		# jointure sur spip_notations
+		$boucle->from['notations'] = "spip_notations";
+		$boucle->from_type['notations'] = "LEFT";
+		# Ordre des choses :
+		# $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
+		# exemple : notations = spip_documents, id_objet, id_document, notations.objet=document
+		$boucle->join["notations"]= array("'$id_table'","'id_objet'","'$primary'","'notations.objet='.sql_quote('$objet')");
+
+		$boucle->group[]=$group;
 	
-	// Cas d'un {notation moyenne>3}
-	$op='';
-	$params = $crit->param;
-	$type = array_shift($params);
-	$type = $type[0]->texte;
-	if(preg_match(',^(\w+)([<>=]+)([0-9]+)$,',$type,$r)){
-		$type=$r[1];
-		$op=$r[2];
-		$op_val=$r[3];
+		// Cas d'un {notation moyenne>3}
+		$op='';
+		$params = $crit->param;
+		$type = array_shift($params);
+		$type = $type[0]->texte;
+		if(preg_match(',^(\w+)([<>=]+)([0-9]+)$,',$type,$r)){
+			$type=$r[1];
+			$op=$r[2];
+			$op_val=$r[3];
+		}
+		if ($op)
+			$boucle->having[]= array("'".$op."'", "'".$type."'",$op_val);
 	}
-	$type_id = 'notations.'.$type;
-	$type_requete = $boucle->type_requete;
-	if ($op)
-		$boucle->having[]= array("'".$op."'", "'".$type."'",$op_val);	
+	// on utilise la notation sur une table jointe
+	// donc evitons d'utiliser un group-by et preferons la table spip_notations_objets
+  else {
+	  $table = trim($table,"'");
+	  $objet = objet_type($table);
+	  $id_table = array_search(table_objet_sql($table),$boucle->from);
+	  $primary = id_table_objet($objet);
+
+	  $boucle->select[]= 'notations.nombre_votes AS nombre_votes';
+	  $boucle->select[]= 'notations.note AS moyenne';
+	  $boucle->select[]= 'notations.note_ponderee AS moyenne_ponderee';
+	  $boucle->from['notations'] = "spip_notations_objets";
+	  $boucle->from_type['notations'] = "LEFT";
+		# Ordre des choses :
+		# $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
+		# exemple : notations = spip_documents, id_objet, id_document, notations.objet=document
+		$boucle->join["notations"]= array("'$id_table'","'id_objet'","'$primary'","'notations.objet='.sql_quote('$objet')");
+  }
+}
+
+
+function critere_notation_jointe_dist($idb, &$boucles, $crit){
+	$boucle = &$boucles[$idb];
+	$table = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+	
+	$table = $boucle->type_requete;
+	$id_table = $boucle->id_table;
+	$objet = objet_type($table);
+	$primary = id_table_objet($objet);
+	$group = $id_table . '.' . $primary;
+
 }
 
 /**
