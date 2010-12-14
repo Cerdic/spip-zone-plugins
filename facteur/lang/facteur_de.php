@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_mailer' => 'Konfiguration des Mailers',
 	'configuration_smtp' => 'Auswahl der Versandmethode',
 	'configuration_smtp_descriptif' => 'Im Zweifel hier die mail() Funktion von PHP eintragen.',
-	'corps_email_de_test' => 'Das ist ein Versandtest mit Sondärzeichen: Bär Größe Maß accentué',  // Laisser tel quel, car
+	'corps_email_de_test' => 'Das ist ein Versandtest mit SondÃ¤rzeichen: BÃ¤r GrÃ¶ÃŸe MaÃŸ accentuÃ©',  // Laisser tel quel, car
 	
 	// E
 	'email_test_envoye' => 'Die Testmail wurde fehlerfrei versand. Falls sie nicht richtig ankommt,
