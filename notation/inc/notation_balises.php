@@ -172,18 +172,6 @@ function notation_calculer_id($p){
 }
 
 
-function critere_notation_jointe_dist($idb, &$boucles, $crit){
-	$boucle = &$boucles[$idb];
-	$table = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
-	
-	$table = $boucle->type_requete;
-	$id_table = $boucle->id_table;
-	$objet = objet_type($table);
-	$primary = id_table_objet($objet);
-	$group = $id_table . '.' . $primary;
-
-}
-
 /**
  * Retourne le nombre de vote sur un objet de SPIP.
  * Necessite le critere {notation} sur la boucle
