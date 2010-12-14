@@ -12,6 +12,10 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'administrateur_aussi_comment' => 'Cochez cette case si la structure dont il s\'agit est &eacute;galement <b>administrateur</b> du site.',
 	'au_capital_de' => ' au capital de ',
 
+// B //
+	'bouton_importer' => 'Lancer l&#039;importation',
+	'bouton_exporter' => 'Lancer l&#039;exportation',
+
 // C //
 	'conditions_utilisation' => 'Conditions d\'utilisation',
 	'code_postal_label' => 'Code postal',
@@ -42,11 +46,16 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 
 // E //
 	'erreur_config' => '!! - Une erreur inconnue est survenue _',
+	'erreur_export' => '!! - Une erreur inconnue est survenue _',
+	'erreur_import' => '!! - Une erreur inconnue est survenue _',
 	'enregistrement_organisme_label' => 'Enregistr&eacute; aupr&egrave;s de',
 	'enregistrement_organisme_comment' => 'Registre du Commerce et des Soci&eacute;t&eacute;s, Maison des artistes ...',
 	'enregistrement_numero_label' => 'Sous le N&deg;',
 	'enregistree_pres' => ' enregistr&eacute;e aupr&egrave;s ',
 	'enregistre_pres' => ' enregistr&eacute; aupr&egrave;s ',
+	'exporter_importer' => 'Exporter/Importer',
+	'exporter_configuration' => 'Exporter la configuration (<i>informations sur le propri&eacute;taire, l\'&eacute;diteur ...</i>)',
+	'exporter_fichiers_langues' => 'Exporter les cha&icirc;nes de langues propres au site',
 
 // F //
 	'fonction_administrateur' => 'Administrateur',
@@ -66,6 +75,7 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'infos_idem' => 'M&ecirc;me structure',
 	'idem_label' => 'M&ecirc;me structure que l\'&eacute;diteur',
 	'idem_comment' => 'Cochez cette case si l\'organisme propri&eacute;taire est &eacute;galement @type@ du site.',
+	'importer_dump' => 'Importer une sauvegarde (<i>cela effacera votre configuration courante et vos cha&icirc;nes de langue</i>) ! Importer le fichier : ',
 
 // L //
 	'le' => 'le ',
@@ -89,7 +99,11 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 
 // O //
 	'ok_config' => 'OK - Les valeurs ont &eacute;t&eacute; enregistr&eacute;es _',
+	'ok_export' => 'OK - Votre configuration a &eacute;t&eacute; exportat&eacute;e dans le fichier :<br />"<strong>@fichier@</strong>"',
+	'ok_import' => 'OK - Votre configuration a bien &eacute;t&eacute; restaur&eacute;e',
 	'outils_de_communication' => 'Outils de communication',
+	'outil_importer' => 'Outil de restauration',
+	'outil_exporter' => 'Outil de sauvegarde',
 
 // P //
 	'pays_label' => 'Pays',
@@ -177,6 +191,10 @@ Le plugin {{SPIP Propri&eacute;taire}} propose &eacute;galement un ensemble d’
 Il propose par exemple un mod&egrave;le de "carte de visite" du site ainsi qu’une "v-Card" ({Virtual Card permettant de charger automatiquement vos informations de contact dans un gestionnaire de mails ou un carnet d’adresse}).
 
 Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’information ({cette page prend en compte les informations saisies dans les diff&eacute;rents formulaires du plugin, il est donc n&eacute;cessaire d’en remplir au minimum quelques uns pour visualisation ...}).',
+	// Import/Export
+	'proprietaire_export_import' => 'SPIP Propri&eacute;taire : maintenance',
+	'proprietaire_retour_plateforme' => 'Retour &agrave; la plateforme',
+	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos cha&icirc;nes personnelles de langues, ou les restaurer depuis une pr&eacute;c&eacute;dente sauvegarde ...<br /><br />',
 	// Pages
 	'proprietaire_titre_page' => 'Plateforme propri&eacute;taire',
 	'proprietaire_titre_page_short' => 'Plateforme',
@@ -205,6 +223,7 @@ Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’infor
 	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de d&eacute;finir les informations concernant les <b>Cr&eacute;teur</b> et <b>H&eacute;bergeur</b> du site afin de mettre en place automatiquement des <b>Mentions L&eacute;gales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes repr&eacute;sentent <u>le minimum l&eacute;gal pour tout site web</u> et sont tr&egrave;s g&eacute;n&eacute;riques ... Ils doivent &ecirc;tre consid&eacute;r&eacute;s comme une base de travail pour cr&eacute;er vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propri&eacute;taire\' si vous activez l\'option ci-dessous.',
 	'pskels_legal_legend_createur' => 'Informations sur le cr&eacute;ateur du site',
 	'pskels_legal_legend_hebergeur' => 'Informations sur l\'h&eacute;bergeur du site',
+	
 
 // R //
 	'retour' => 'Retour',
