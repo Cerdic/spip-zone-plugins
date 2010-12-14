@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'personnaliser' => 'Individuelle Einstellungen',
 	
 	// T
-	'tester' => 'Tester',
+	'tester' => 'Testen',
 	'tester_la_configuration' => 'Konfiguration testen',
 	
 	// U
