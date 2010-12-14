@@ -1,0 +1,25 @@
+<plugin>
+	<nom>YQL - Yahoo Query Language
+	</nom>
+	<auteur>
+	Fil
+	</auteur>
+	<licence>
+		&#169; 2010 - GNU/GPL
+	</licence>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Faire des boucles YQL/Flickr
+	</description>
+	<prefix>
+	YQL
+	</prefix>
+	<chemin dir='' />
+	<categorie>divers</categorie>
+	<necessite id="SPIP" version="[2.3.0;]" />
+</plugin>
