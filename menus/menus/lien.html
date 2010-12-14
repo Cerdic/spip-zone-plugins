@@ -6,5 +6,5 @@
 ]
 [(#ENV{appel_menu}|oui)
 	<li class="menu-entree[ (#ENV{css})]">
-		<a href="#ENV{url}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
+		<a href="#ENV{url}" title="[(#GET{titre}|attribut_html)]"[ class="(#ENV{css_lien})"]>#GET{titre}</a>
 ]
