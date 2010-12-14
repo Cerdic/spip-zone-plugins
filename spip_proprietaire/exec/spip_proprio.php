@@ -30,6 +30,9 @@ function exec_spip_proprio() {
 	$info_texte = _T('spip_proprio:proprietaire_texte');
 	$info_supp = _T("spip_proprio:proprietaire_texte_supp");
 	$icone = find_in_path('images/idisk-dir-24.png');
+	$lien_export = debut_boite_info(true)."\n<div class='verdana2' style='text-align: justify'>"
+			.icone_horizontale(_T('spip_proprio:exporter_importer'), generer_url_ecrire('spip_proprio_tech'), find_in_path('images/stock_export.png'), 'rien.gif', false)
+			."</div>". fin_boite_info(true);
 
 	// on force le chargement de proprietaire_fr si present
 	spip_proprio_proprietaire_texte();
@@ -186,6 +189,7 @@ function exec_spip_proprio() {
 		debut_gauche('', true),
 		debut_cadre_relief($icone, true, "", $titre_page), $info_texte, fin_cadre_relief(true), 
 		($info_supp ? debut_cadre_enfonce('', true, '', '')."<b>"._T('spip_proprio:notes')."</b><br />".$info_supp.fin_cadre_enfonce(true) : ''), 
+		(!$page ? $lien_export : ''), 
 		$boutons, "<br class='nettoyeur' />",
 		creer_colonne_droite('', true), debut_droite('', true),
 		$contenu, fin_gauche(), fin_page();
