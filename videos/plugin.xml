@@ -1,5 +1,10 @@
 <plugin>
-	<nom> <multi> [fr]Vidéo(s) </multi> </nom>
+	<nom>
+		<multi>
+			[fr]Vidéo(s)
+			[en]Video(s)
+		</multi>
+	</nom>
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
 	
@@ -10,11 +15,16 @@
 	<etat>dev</etat>
 	<description>
 		<multi>
-			Interface de gestion et modèles d'insertion de(s) vidéo(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
-			- Fichiers H264/OGG
-			- Dailymotion
-			- Viméo
-			- Youtube
+			[fr]Interface de gestion et modèles d'insertion de(s) vidéo(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
+			-* Fichiers H264/OGG
+			-* Dailymotion
+			-* Viméo
+			-* Youtube
+			[en]Management interface and integration models of video(s) (HTML5, multi navs, iPad, iPhone, Android, etc..)
+			-* H264/OGG files
+			-* Dailymotion
+			-* Vimeo
+			-* Youtube
 		</multi></description>
 	<lien>http://www.spip-contrib.net/?article3636</lien>
 	<prefix>videos</prefix>

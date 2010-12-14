@@ -1,0 +1,27 @@
+<?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+	// C
+	'cfg_explication_hauteur' => 'Choose the default height for your videos. This option can be overloaded in the call to the model.',
+	'cfg_explication_largeur' => 'Choose the default width for your videos. This option can be overloaded in the call to the model.',
+	'cfg_label_hauteur' => 'Default height',
+	'cfg_label_largeur' => 'Default width',	
+	'cfg_titre_configurations_communes' => 'Shared settings',
+	'cfg_titre_configurations_dailymotion' => 'Dailymotion settings',
+	'cfg_titre_configurations_html5' => 'HTML5 / Alternative settings',
+	'cfg_titre_configurations_vimeo' => 'Vimeo settings',
+	'cfg_titre_configurations_youtube' => 'Youtube settings',
+	'confirmation_ajout' => 'The video "@type@:@titre@" has been added.',
+	
+	// L
+	'label_ajouter_video' => "Add a video",
+	'label_url' => "Video address",
+	
+	// T
+	'titre_admin' => 'Video(s) plugin',
+	
+	// V
+	'valider' => "Add the video"
+);

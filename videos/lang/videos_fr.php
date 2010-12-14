@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	// C
 	'cfg_explication_hauteur' => "Choisissez la hauteur par d&eacute;faut pour vos vid&eacute;os. Cette option reste surchargeable dans l&#x27;appel au mod&egrave;le.",
 	'cfg_explication_largeur' => "Choisissez la largeur par d&eacute;faut pour vos vid&eacute;os. Cette option reste surchargeable dans l&#x27;appel au mod&egrave;le.",
 	'cfg_label_hauteur' => "Hauteur par d&eacute;faut",	
@@ -15,10 +15,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_youtube' => 'Configurations Youtube',
 	'confirmation_ajout' => 'La vid&eacute;o "@type@:@titre@" a bien &eacute;t&eacute; ajout&eacute;e.',
 	
+	// L
 	'label_ajouter_video' => "Ajouter une vid&eacute;o",
 	'label_url' => "Adresse de la vid&eacute;o",
 	
+	// T
 	'titre_admin' => 'Plugin Vid&eacute;o(s)',
 	
+	// V
 	'valider' => "Ajouter la vid&eacute;o"
 );
