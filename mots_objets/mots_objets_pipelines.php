@@ -142,6 +142,7 @@ function mots_objets_ajouter_selecteur_mots_grappes($flux) {
 			
 		}
 	 }
+	 return $flux;
 }
 
 
