@@ -87,6 +87,9 @@ function multilang_inserer_head($config=array()){
 		if($config['site']) { // Sites
 			$root .= ',div.formulaire_editer_site';
 		}
+		if($config['evenement']) { // Evenements
+			$root .= ',div.formulaire_editer_evenement';
+		}
 		if($config['motcle']) { // Mots
 			$root .= ',div.formulaire_editer_mot,div.formulaire_editer_groupe_mot';
 		}
