@@ -9,10 +9,14 @@
 
 </head>
 <body>
+
 <BOUCLE_article(ARTICLES){id_article}>
 <div class="fond_page">
 
-<INCLURE{fond=inc_teteforum}{id_article}>		
+<INCLURE{fond=inc_teteforum}{id_article}>
+<!-- On fait le lien vers le panneau de modération -->
+<a href="[(#URL_PAGE{moderation_forum}|parametre_url{id_article,#ID_ARTICLE})]">[Panneau de modération]</a>
+		
 		<!-- Les fils de discussion non spécifiques (postit, annonce, fermé etc...) -->
 			<div class="forumbg">
 				<ul class="topiclist topics">

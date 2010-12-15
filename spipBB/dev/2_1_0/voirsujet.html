@@ -35,7 +35,7 @@
 						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
 					</li>
 					<li class="delete-icon">
-						<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
+						<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">Supprimer</a>
 					</li>
 					<li class="delete-icon">
 						[(#BOUTON_ACTION{'supprimer',#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
@@ -48,7 +48,7 @@
 					</li>
 				</ul>
 				<h3 class="first"><span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span></h3>
-				<p class="author"><:spipbb:de_:>#NOM<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span></p>
+				<p class="author"><:spipbb:de_:>#NOM<span>&nbsp;<:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span></p>
 				<div class="#EDIT{texte} content">
 					[(#TEXTE|lignes_longues)]
 				</div>
@@ -77,11 +77,11 @@
 		</div>
 	<hr class="divider" />
 	</BOUCLE_posts>
-	<p class="space_10">
+	<div class="pagination">
 		#GRAND_TOTAL
 		[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_post_s:>,<:spipbb:pagine_post_:>})]
 		[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
-	</p>
+	</div>
 	</B_posts>
 
 	<p class="space_10"></p>

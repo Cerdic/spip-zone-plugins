@@ -263,7 +263,7 @@ dl.icon dt {
 	background-position: 5px 95%;		/* Position of topic icon */
 }
 
-dd.posts, dd.topics, dd.views {
+dd.posts, dd.topics, dd.views, dd.checkbox {
 	width: 8%;
 	text-align: center;
 	/* line-height: 2.2em; */
