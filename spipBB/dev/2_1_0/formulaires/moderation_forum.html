@@ -1,0 +1,47 @@
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+<form method="post" id="mcp" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<div class="forumbg">
+		<ul class="topiclist topics">
+			<li class="header">
+				<dl class="icon">
+					<dt><:spipbb:sujet_s:></dt>
+					<dd class="posts"><:spipbb:reponse_s_:></dd>
+					<dd class="lastpost"><span><:spipbb:messages_derniers:></span></dd>
+					<dd class="checkbox"><:spipbb:cocher:></dd>
+				</dl>
+			</li>
+			<BOUCLE_sujets(FORUMS){id_article}{par date}{inverse}>
+			<ul>
+				#SET{erreurs,#ENV**{erreurs}|table_valeur{moderation_forum}}
+				<li class="editer_#ID_FORUM row">
+					<dl class="icon">
+						<dt title="Pas de nouveau message">
+							<div class="[(#EDIT{titre})]"><a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a></div>
+						</dt>
+						<BOUCLE_reponses(FORUMS){id_thread}{plat}{exclus}></BOUCLE_reponses>
+						<dd class="posts">#TOTAL_BOUCLE</dd>
+						<//B_reponses>
+						<dd class="lastpost">
+							<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{!par date}{0,1}>
+							[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)]<br />
+							<:spipbb:par_:>
+							<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
+								<a>#NOM</a>
+							</BOUCLE_auteurpr>
+							</B_auteurpr>
+								[(#NOM|sinon{<:spipbb:anonyme:>})]
+							<//B_auteurpr>
+							<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_forum}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;</a>
+							</BOUCLE_dernier_message> - <//B_dernier_message>
+						</dd>
+						<dd class="checkbox"><input type="checkbox" name="" value="#ID_FORUM" /></dd>
+					</dl>
+				</li>
+			</ul>
+			</BOUCLE_sujets>
+		</ul>
+	</div>
+</form>
