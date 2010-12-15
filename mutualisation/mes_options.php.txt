@@ -1,6 +1,10 @@
 <?php
 
 	if (!defined("_ECRIRE_INC_VERSION")) return;
+	if (!is_readable (_DIR_RACINE.'mutualisation/mutualiser.php')) {
+		echo _L("Fichier 'mutualisation/mutualiser.php' manquant dans la racine " . _DIR_RACINE);
+		exit;
+	}
 	require _DIR_RACINE.'mutualisation/mutualiser.php';
 
 	/* placer dans ce tableau les sites ou l'on ne veut pas la redirection canonique */ 
