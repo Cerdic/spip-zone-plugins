@@ -178,12 +178,14 @@ class cfg_depot{
 // lire_config('montruc/sub') est l'element "sub" de cette config
 // $def: un defaut optionnel
 
-// $unserialize est mis par l'histoire, et affecte le depot 'meta' 
-function lire_config($cfg='', $def=null, $unserialize=true) {
-	$depot = cfg_charger_depot($cfg);
-	$r = $depot->lire_config($unserialize);
-	if (is_null($r)) return $def;
-	return $r;
+// $unserialize est mis par l'histoire, et affecte le depot 'meta'
+if (!function_exists('lire_config')) {
+	function lire_config($cfg='', $def=null, $unserialize=true) {
+		$depot = cfg_charger_depot($cfg);
+		$r = $depot->lire_config($unserialize);
+		if (is_null($r)) return $def;
+		return $r;
+	}
 }
 
 
@@ -194,9 +196,11 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
 // permet d'enregistrer une configuration
 // 
 //
-function ecrire_config($cfg='', $valeur=null){
-	$depot = cfg_charger_depot($cfg);
-	return $depot->ecrire_config($valeur);
+if (!function_exists('ecrire_config')) {
+	function ecrire_config($cfg='', $valeur=null){
+		$depot = cfg_charger_depot($cfg);
+		return $depot->ecrire_config($valeur);
+	}
 }
 
 
@@ -204,9 +208,11 @@ function ecrire_config($cfg='', $valeur=null){
 // effacer_config($chemin) 
 // permet de supprimer une config 
 //
-function effacer_config($cfg=''){
-	$depot = cfg_charger_depot($cfg);
-	return $depot->effacer_config();	
+if (!function_exists('effacer_config')) {
+	function effacer_config($cfg=''){
+		$depot = cfg_charger_depot($cfg);
+		return $depot->effacer_config();	
+	}
 }
 
 

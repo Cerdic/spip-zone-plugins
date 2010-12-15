@@ -8,6 +8,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 // inclure les fonctions lire_config(), ecrire_config() et effacer_config()
+include_spip('inc/config'); // spip 2.3+
 include_spip('inc/cfg_config');
 
 // signaler le pipeline de notification
