@@ -37,11 +37,24 @@
 							<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_forum}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;</a>
 							</BOUCLE_dernier_message> - <//B_dernier_message>
 						</dd>
-						<dd class="checkbox"><input type="checkbox" name="" value="#ID_FORUM" /></dd>
+						<dd class="checkbox"><input type="checkbox" name="forum_#ID_FORUM" value="#ID_FORUM" /></dd>
 					</dl>
 				</li>
 			</ul>
 			</BOUCLE_sujets>
 		</ul>
 	</div>
+	<fieldset class="display-actions">
+		<select name="action">
+			<option value="" selected="selected">Sélectionner l’action désirée</option>
+			<option value="delete_topic">Supprimer</option>
+			<option value="merge_topics">Fusionner</option>
+			<option value="move">Déplacer</option>
+			<option value="fork">Copier</option>
+			<option value="lock">Verrouiller</option>
+			<option value="unlock">Déverrouiller</option>
+			<option value="resync">Resynchroniser</option>
+		</select>
+		<input class="button2" type="submit" value="Envoyer" />
+	</fieldset>
 </form>
