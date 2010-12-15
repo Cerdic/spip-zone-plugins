@@ -4,7 +4,7 @@
 <BOUCLE_liste(DOCUMENTS){id_article?}{id_rubrique?}{id_mot?}{tout}{pagination 10}{par titre,fichier}>
 <tr class="tr_liste">
 	<td class='arial11'>[(#LOGO_DOCUMENT|image_reduire{24})]</td>
-	<td class='arial11'>[(#TITRE|sinon{[(#FICHIER|clean_fichier)]})]</td>
+	<td class='arial11'>[(#TITRE|sinon{[(#FICHIER*)]})]</td>
 	<td class='arial1'><a href="#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}"><:grappes:voir:></a></td>
 	[(#ENV{editable})
 	<td class='arial1'>

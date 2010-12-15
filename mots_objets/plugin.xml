@@ -5,7 +5,7 @@
 	<icon>images/tag_purple-32.png</icon>
 	
 	<licence>GNU/GPL</licence>
-	<version>0.2.2</version>
+	<version>0.2.3</version>
 	<version_base>0.2</version_base>
 	
 	<etat>test</etat>
@@ -22,7 +22,6 @@
 	<prefix>mots_objets</prefix>
 	
 	<install>base/mots_objets_upgrade.php</install>
-	<fonctions>mots_objets_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/mots_objets_tables.php</inclure>

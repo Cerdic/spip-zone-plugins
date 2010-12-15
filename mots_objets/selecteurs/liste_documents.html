@@ -1,8 +1,8 @@
 [(#REM) Chercher les documents correspondant a la requete titre -sinon fichier ]
 <BOUCLE_s(DOCUMENTS){titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
-[(#TITRE|sinon{[(#FICHIER|clean_fichier)]})]|[(#TITRE|sinon{[(#FICHIER|clean_fichier)]}|textebrut)]|#ID_DOCUMENT
+[(#TITRE|sinon{[(#FICHIER*)]})]|[(#TITRE|sinon{[(#FICHIER*)]}|textebrut)]|#ID_DOCUMENT
 </BOUCLE_s><BOUCLE_f(DOCUMENTS){fichier LIKE %(#ENV{q})%}{0,20}{par multi titre}>
-[(#FICHIER|clean_fichier)]|[(#FICHIER|clean_fichier|textebrut)]|#ID_DOCUMENT
+[(#FICHIER*)]|[(#FICHIER*|textebrut)]|#ID_DOCUMENT
 </BOUCLE_f>
 
 [(#REM) Vraiment on n'a rien trouve ]
