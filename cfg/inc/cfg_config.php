@@ -31,25 +31,16 @@
  * @return Object
  */
 function cfg_charger_depot($args){
-	static $depots = false;
-	if ($depots === false) {
-		$depots = array();
-	}
-	
 	$r = explode('::',$args,2);
-	if (count($r) > 1) {
-		list($depot, $args) = $r;
-	} else {
+	if (count($r) > 1)
+		list($depot,$args) = $r;
+	else {
 		// si un seul argument, il faut trouver le depot
 		$depot = cfg_charger_depot_args($args);
 	}
-	
-	if (!isset($depots[$depot])) {
-		$depots[$depot] = new cfg_depot($depot);
-	}
-	$cfg_depot = $depots[$depot];
-	$cfg_depot->charger_args($args);
-	return $cfg_depot;
+	$depot = new cfg_depot($depot);
+	$depot->charger_args($args);
+	return $depot;
 }
 
 function cfg_charger_depot_args($args){
@@ -140,8 +131,6 @@ class cfg_depot{
 		$this->version = $this->depot->version;
 		$this->nom = $depot;
 	}
-
-
 	
 	/**
 	 * ajoute les parametres transmis dans l'objet du depot
@@ -252,7 +241,6 @@ class cfg_depot{
 	 * @return boolean
 	 */
 	function charger_args($args){
-		$this->depot->init();
 		if (method_exists($this->depot, 'charger_args')){
 			return $this->depot->charger_args($args);	
 		}
