@@ -185,7 +185,6 @@ function bando_navigation($boutons, $contexte = array())
 	// Le bouton pour afficher/masque la barre d'outils
 	$display_outils = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])?$GLOBALS['visiteur_session']['prefs']['display_outils']:'oui';
 	if ($display_outils){
-		$texte_4 = _T('module_raccourci');
 		$toggle_texte_1 = _T('bando:label_bando_outils_masquer');
 		$toggle_texte_2 = _T('bando:label_bando_outils_afficher');
 		$toggle_action_1 = generer_action_auteur('preferer', 'display_outils:');
@@ -194,7 +193,6 @@ function bando_navigation($boutons, $contexte = array())
 		$toggle_class_2 = 'navigation_sans_outils';
 	}
 	else{
-		$texte_4 = _T('module_raccourci');
 		$toggle_texte_1 = _T('bando:label_bando_outils_afficher');
 		$toggle_texte_2 = _T('bando:label_bando_outils_masquer');
 		$toggle_action_1 = generer_action_auteur('preferer', 'display_outils:oui');
@@ -202,7 +200,7 @@ function bando_navigation($boutons, $contexte = array())
 		$toggle_class_1 = 'navigation_sans_outils';
 		$toggle_class_2 = 'navigation_avec_outils';
 	}
-	$toggle_outils = "<span class=\"little\">$texte_4 </span><a id='masquer_outils' href='$toggle_action_1' title='$toggle_texte_1' onclick='if (jQuery(\"body\").is(\".$toggle_class_1\")){ jQuery(\"body\").removeClass(\"$toggle_class_1\").addClass(\"$toggle_class_2\"); $(this).attr(\"href\", \"$toggle_action_1\").attr(\"title\", \"$toggle_texte_2\").children(\"span\").text(\"$toggle_texte_2\"); } else{ jQuery(\"body\").removeClass(\"$toggle_class_2\").addClass(\"$toggle_class_1\"); $(this).attr(\"href\", \"$toggle_action_2\").attr(\"title\", \"$toggle_texte_1\").children(\"span\").text(\"$toggle_texte_1\"); } $.get(this.href); return false;'><span>$toggle_texte_1</span></a>";
+	$toggle_outils = "<a id='masquer_outils' href='$toggle_action_1' title='$toggle_texte_1' onclick='if (jQuery(\"body\").is(\".$toggle_class_1\")){ jQuery(\"body\").removeClass(\"$toggle_class_1\").addClass(\"$toggle_class_2\"); $(this).attr(\"href\", \"$toggle_action_1\").attr(\"title\", \"$toggle_texte_2\").children(\"span\").text(\"$toggle_texte_2\"); } else{ jQuery(\"body\").removeClass(\"$toggle_class_2\").addClass(\"$toggle_class_1\"); $(this).attr(\"href\", \"$toggle_action_2\").attr(\"title\", \"$toggle_texte_1\").children(\"span\").text(\"$toggle_texte_1\"); } $.get(this.href); return false;'><span>$toggle_texte_1</span></a>";
 
 	return "<div id='bando_navigation'><div class='largeur'><ul class='deroulant'>\n$res</ul>$toggle_outils<div class='nettoyeur'></div></div></div>";
 }
