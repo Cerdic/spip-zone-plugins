@@ -13,18 +13,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// Demarrer un site dans le sous-repertoire sites/$f/
+// Demarrer un site dans le sous-repertoire des sites
 // Options :
 // creer_site => on va creer les repertoires qui vont bien (defaut: false)
 // cookie_prefix, table_prefix => regler les prefixes (defaut: true)
 // http://doc.spip.org/@demarrer_site
 function demarrer_site($site = '', $options = array()) {
+
 	if (!$site) return;
 
-	// On test si on a une information de port dans l'url ex: http://$site:80/
-	// Si il y a un port de défini on renvoie vers le bon dossier squelette
-	@list($site, $port) = explode(':', $site);
-	
 	$options = array_merge(
 		array(
 			'creer_site' => false,
@@ -42,11 +39,17 @@ function demarrer_site($site = '', $options = array()) {
 	);
 
 	$GLOBALS['mutualisation_dir'] = $options['repertoire'];
-	
+
+	// definir une constante qui contient l'adresse du repertoire du site mutualise
+	// peut servir dans les fichiers mes_options des sites inclus
+	// par exemple avec  $GLOBALS['dossier_squelettes'] = _DIR_SITE . 'squelettes:' . _DIR_SITE . 'cheznous:dist';
+
+	define('_DIR_SITE', _DIR_RACINE . $GLOBALS['mutualisation_dir'] .'/' . $site . '/');
+
 	if ($options['cookie_prefix'])
-		$GLOBALS['cookie_prefix'] = prefixe_mutualisation($site);
+		$GLOBALS['cookie_prefix'] = _INSTALL_SITE_PREF;
 	if ($options['table_prefix'])
-		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
+		$GLOBALS['table_prefix'] = _INSTALL_SITE_PREF;
 
 	/*
 	 * Si le dossier du site n'existe pas
@@ -55,16 +58,16 @@ function demarrer_site($site = '', $options = array()) {
 	 * 
 	 * Il faut lancer la creation de mutualisation
 	 */
-	if  ($a_installer = (!is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')
-	    OR !(defined('_DIR_CONNECT')?
+	 if  ($a_installer = (!is_dir(_DIR_SITE) 
+	 	OR !(defined('_DIR_CONNECT')?
 			(defined('_FILE_CONNECT_INS')?
 				   file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.php'):
 				   file_exists(_DIR_CONNECT . 'connect.php')):
 			(defined('_FILE_CONNECT_INS')?
-				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php'):
-				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php'))
+				   file_exists(_DIR_SITE . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php'):
+				   file_exists(_DIR_SITE . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php'))
 			)
-		))
+			       ))
 	{	
 		/*
 		 * - Recuperer les identifiants manquants
@@ -141,7 +144,7 @@ function demarrer_site($site = '', $options = array()) {
 			 */
 			define('_MUTU_INSTALLATION_FILE','mutu_tmp_install.txt');
 			
-			if (!is_dir($e) || is_file($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE)){
+			if (!is_dir(_DIR_SITE) || is_file(_DIR_SITE . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE)){
 				spip_initialisation(
 					(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
 					(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
@@ -149,7 +152,7 @@ function demarrer_site($site = '', $options = array()) {
 					(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
 				);
 				include_once dirname(__FILE__).'/mutualiser_creer.php';
-				mutualiser_creer($e, $options);
+				mutualiser_creer(_DIR_SITE, $options);
 				exit;
 			}
 		}
@@ -160,31 +163,26 @@ function demarrer_site($site = '', $options = array()) {
 	 * Tout est pret, on execute la mutualisation.
 	 */
 	define('_SPIP_PATH',
-		$e . ':' .
+		_DIR_SITE . ':' .
 		_DIR_RACINE .':' . 
 		_DIR_RACINE .'squelettes-dist/:' .
 		_DIR_RACINE .'prive/:' .
 		_DIR_RESTREINT);
 
-	// definir une constante qui contient l'adresse du repertoire du site mutualise
-	// peut servir dans les fichiers mes_options des sites inclus
-	// par exemple avec  $GLOBALS['dossier_squelettes'] = _DIR_SITE . 'squelettes:' . _DIR_SITE . 'cheznous:dist';
-	define('_DIR_SITE' , $e);
-
-	if (is_dir($e.'squelettes'))
+	if (is_dir(_DIR_SITE.'squelettes'))
 		$GLOBALS['dossier_squelettes'] = $options['repertoire'].'/' . $site . '/squelettes';
 
-	if (is_readable($f = $e._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')) 
+	if (is_readable($f = _DIR_SITE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')) 
 		include($f); // attention cet include n'est pas en globals
 
 	$init = function_exists('spip_initialisation_core') 
 		?'spip_initialisation_core' // mieux pour la 2.0, mais absente avant...
 		:'spip_initialisation';
 	$init(
-		($e . _NOM_PERMANENTS_INACCESSIBLES),
-		($e . _NOM_PERMANENTS_ACCESSIBLES),
-		($e . _NOM_TEMPORAIRES_INACCESSIBLES),
-		($e . _NOM_TEMPORAIRES_ACCESSIBLES)
+		(_DIR_SITE . _NOM_PERMANENTS_INACCESSIBLES),
+		(_DIR_SITE . _NOM_PERMANENTS_ACCESSIBLES),
+		(_DIR_SITE . _NOM_TEMPORAIRES_INACCESSIBLES),
+		(_DIR_SITE . _NOM_TEMPORAIRES_ACCESSIBLES)
 	);	
 
 	/*
