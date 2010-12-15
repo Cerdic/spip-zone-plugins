@@ -21,5 +21,5 @@
 	</prefix>
 	<chemin dir='' />
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.3.0;]" />
+	<necessite id="SPIP" version="[2.2.0;]" />
 </plugin>
