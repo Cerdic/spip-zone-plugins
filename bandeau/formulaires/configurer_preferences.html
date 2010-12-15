@@ -44,12 +44,12 @@
 			<span class='erreur_message'>(#GET{erreurs})</span>
 			]<div class="choix">
 				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|oui)checked="checked" ]value="oui" 
-				onchange="if (this.checked) jQuery('#bando_outils').show(); else jQuery('#bando_outils').hide();"/>
+				onchange="if (this.checked) jQuery('body').addClass('navigation_avec_outils').removeClass('navigation_sans_outils'); else jQuery('body').removeClass('navigation_avec_outils').addClass('navigation_sans_outils');"/>
 				<label for="[(#GET{name})]_1"><:bando:label_bando_outils_afficher:></label>
 			</div>
 			<div class="choix">
 				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|non)checked="checked" ]value=""
-				onchange="if (!this.checked) jQuery('#bando_outils').show(); else jQuery('#bando_outils').hide();"/>
+				onchange="if (!this.checked) jQuery('body').addClass('navigation_avec_outils').removeClass('navigation_sans_outils'); else jQuery('body').removeClass('navigation_avec_outils').addClass('navigation_sans_outils');"/>
 				<label for="[(#GET{name})]_2"><:bando:label_bando_outils_masquer:></label>
 			</div>
 		</li>

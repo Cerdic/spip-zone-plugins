@@ -74,10 +74,13 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	$spip_display_navigation = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])
 		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
 		: 'navigation_avec_icones';
+	$spip_display_outils = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])
+		? ($GLOBALS['visiteur_session']['prefs']['display_outils']?'navigation_avec_outils':'navigation_sans_outils')
+		: 'navigation_avec_outils';
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 	$res = pipeline('body_prive',"<body class='"
-			. $GLOBALS['spip_ecran'] . " $spip_display_navigation $rubrique $sous_rubrique "._request('exec')."'"
+			. $GLOBALS['spip_ecran'] . " $spip_display_navigation $spip_display_outils $rubrique $sous_rubrique "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
 
