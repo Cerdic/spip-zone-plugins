@@ -20,7 +20,8 @@ if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
 	include_spip('inc/compat_cfg');
 	
 // inclure les fonctions lire_config(), ecrire_config() et effacer_config()
-include_spip('inc/cfg_config');
+include_spip('inc/config'); // d'abord charger les fonctions du core (spip 2.3) 
+include_spip('inc/cfg_config'); // ensuite celles de CFG...
 
 // signaler le pipeline de notification
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";

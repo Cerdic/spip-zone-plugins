@@ -31,16 +31,25 @@
  * @return Object
  */
 function cfg_charger_depot($args){
+	static $depots = false;
+	if ($depots === false) {
+		$depots = array();
+	}
+	
 	$r = explode('::',$args,2);
-	if (count($r) > 1)
-		list($depot,$args) = $r;
-	else {
+	if (count($r) > 1) {
+		list($depot, $args) = $r;
+	} else {
 		// si un seul argument, il faut trouver le depot
 		$depot = cfg_charger_depot_args($args);
 	}
-	$depot = new cfg_depot($depot);
-	$depot->charger_args($args);
-	return $depot;
+	
+	if (!isset($depots[$depot])) {
+		$depots[$depot] = new cfg_depot($depot);
+	}
+	$cfg_depot = $depots[$depot];
+	$cfg_depot->charger_args($args);
+	return $cfg_depot;
 }
 
 function cfg_charger_depot_args($args){
@@ -131,6 +140,8 @@ class cfg_depot{
 		$this->version = $this->depot->version;
 		$this->nom = $depot;
 	}
+
+
 	
 	/**
 	 * ajoute les parametres transmis dans l'objet du depot
@@ -241,6 +252,7 @@ class cfg_depot{
 	 * @return boolean
 	 */
 	function charger_args($args){
+		$this->depot->init();
 		if (method_exists($this->depot, 'charger_args')){
 			return $this->depot->charger_args($args);	
 		}
@@ -266,13 +278,14 @@ class cfg_depot{
  * @param  boolean $unserialize  n'affecte que le depot 'meta'
  * @return string
  */
-function lire_config($cfg='', $def=null, $unserialize=true) {
-	$depot = cfg_charger_depot($cfg);
-	$r = $depot->lire_config($unserialize);
-	if (is_null($r)) return $def;
-	return $r;
+if (!function_exists('lire_config')) {
+	function lire_config($cfg='', $def=null, $unserialize=true) {
+		$depot = cfg_charger_depot($cfg);
+		$r = $depot->lire_config($unserialize);
+		if (is_null($r)) return $def;
+		return $r;
+	}
 }
-
 
 /**
  * enregistrer une configuration
@@ -281,9 +294,11 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
  * @param  mixed  $valeur
  * @return boolean
  */
-function ecrire_config($cfg='', $valeur=null){
-	$depot = cfg_charger_depot($cfg);
-	return $depot->ecrire_config($valeur);
+ if (!function_exists('ecrire_config')) {
+	function ecrire_config($cfg='', $valeur=null){
+		$depot = cfg_charger_depot($cfg);
+		return $depot->ecrire_config($valeur);
+	}
 }
 
 
@@ -293,9 +308,11 @@ function ecrire_config($cfg='', $valeur=null){
  * @param  string $cfg
  * @return boolean
  */
-function effacer_config($cfg=''){
-	$depot = cfg_charger_depot($cfg);
-	return $depot->effacer_config();	
+ if (!function_exists('effacer_config')) {
+	function effacer_config($cfg=''){
+		$depot = cfg_charger_depot($cfg);
+		return $depot->effacer_config();	
+	}
 }
 
 
