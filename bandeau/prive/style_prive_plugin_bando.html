@@ -129,7 +129,7 @@ body { font-size:0.625em; margin-bottom:1em;}
 #bando_outils ul.rapides li.bouton a:hover{background-color:white;}
 #bando_outils ul.rapides li.bouton{ margin-top:0px;}
 
-#bando_outils #rapides {float:#GET{right}; margin-right:25px; }
+#bando_outils #rapides {float:#GET{right};}
 #bando_outils #rapides .spip_recherche {padding:3px 0;}
 #bando_outils #rapides .spip_recherche form {display:inline;}
 #bando_outils #rapides .spip_recherche .recherche {margin-bottom:0;margin-top:1px;}
@@ -148,7 +148,8 @@ body { font-size:0.625em; margin-bottom:1em;}
 #bando_navigation ul.deroulant > li > a { color:#333;}
 
 #bando_navigation .largeur { position:relative; }
-#bando_navigation #masquer_outils{ position:absolute; right:0; bottom:-17px; border:1px solid #999; height:15px; width:15px; background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)] url([(#VAL{images/deplierbas.gif}|find_in_theme)]) center center no-repeat;}
+#bando_navigation #masquer_outils{ position:absolute; top:8px; right:0;  height:15px; width:15px; background:transparent url([(#VAL{images/deplierbas.gif}|find_in_theme)]) center center no-repeat;outline:none;}
+.little {font-weight:bold;position:relative;float:right;display:block;right:16px;top:8px;}
 .navigation_sans_outils #bando_navigation #masquer_outils{background-image:url([(#VAL{images/deplierhaut.gif}|find_in_theme)]); }
 #bando_navigation #masquer_outils span{ display: none; }
 
