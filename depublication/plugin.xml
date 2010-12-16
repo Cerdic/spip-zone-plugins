@@ -10,7 +10,7 @@
  		<icon>img/depublication-24.png</icon>
  		<licence>(&copy;) 2007-2010 [GNU/GPL v3->http://www.gnu.org/copyleft/gpl.html]&nbsp;<a href="http://www.gnu.org/copyleft/gpl.html"><img src="../plugins/depublication/images/gplv3-88x31.png"/></a></licence>
         
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <version_base>0.8</version_base>
         
         <etat>test</etat>

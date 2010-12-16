@@ -32,7 +32,7 @@ include_spip('inc/plugin');         // xml function
 include_spip('inc/date');
 
 // $id, $type = 'auteurs_infos'
-function inc_depublication_auteurs_dist($id, $flag, $statut, $type= 'auteur_infos') {
+function inc_depublication_auteurs_dist($id, $flag, $statut='', $type= 'auteur_infos') {
 	
 	global $spip_lang_left, $spip_lang_right, $options;
 
