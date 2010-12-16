@@ -29,7 +29,8 @@ function svp_declarer_tables_principales($tables_principales) {
 		"nom"			=> "text DEFAULT '' NOT NULL",
 		"slogan"		=> "text DEFAULT '' NOT NULL",
 		"categorie"		=> "varchar(100) DEFAULT '' NOT NULL",
-		"tags"			=> "text DEFAULT '' NOT NULL"
+		"tags"			=> "text DEFAULT '' NOT NULL",
+		"vmax"			=> "varchar(24) DEFAULT '' NOT NULL" // version la plus elevee des paquets du plugin
 	);
 	
 	$plugins_key = array(
