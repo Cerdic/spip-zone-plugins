@@ -11,14 +11,23 @@ function mots_objets_autoriser() {}
 
 
 // renvoyer chaque objet sur la fonction générique dans l'autorisation de rubrique.
-
+include_spip('inc/gouverneur_de_mots');
+foreach (gouverneur_de_mots() as $objet) {
+	$obj = $objet->objet;
+	$function = "
+		function autoriser_${obj}_editermots_dist(\$faire,\$quoi,\$id,\$qui,\$opts) {
+			return autoriser_rubrique_editermots_dist(\$faire, '$obj', 0, \$qui, \$opts);
+		}";
+	eval($function);
+}
+/*
 function autoriser_auteur_editermots_dist($faire,$quoi,$id,$qui,$opts) {
 	return autoriser_rubrique_editermots_dist($faire, 'auteur', 0, $qui, $opts);
 }
 
 function autoriser_document_editermots_dist($faire,$quoi,$id,$qui,$opts) {
 	return autoriser_rubrique_editermots_dist($faire, 'document', 0, $qui, $opts);
-}
+}*/
 
 
 

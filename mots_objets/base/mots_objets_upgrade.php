@@ -27,7 +27,6 @@ function mots_objets_upgrade($nom_meta_base_version, $version_cible){
 
 }
 function mots_objets_vider_tables($nom_meta_base_version) {
-
 	sql_drop_table("spip_mots_auteurs");
 	sql_drop_table("spip_mots_documents");
 	effacer_meta($nom_meta_base_version);

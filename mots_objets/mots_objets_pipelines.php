@@ -7,6 +7,9 @@
  *
  */
 
+include_spip('inc/gouverneur_de_mots');
+ 
+
 
 /**
  * Ajout du bloc d'attribution de mot-clé
@@ -14,25 +17,20 @@
 **/
 function mots_objets_affiche_milieu($flux) {
 
-	static $ou = array(
-		'auteur_infos' => array(
-			'objet' => 'auteur',
-		),
-		'documents_edit' => array(
-			'objet' => 'document',
-		),
-	);
-	
+	static $ou = false;
+	if ($ou === false) {
+		$ou = mots_objets_get_affiche_milieu();
+	}
+
 	// si on est sur une page ou il faut inserer les mots cles...
 	if (in_array($flux['args']['exec'], array_keys($ou))) {
 
 		$me = $ou[ $flux['args']['exec'] ];
-		$objet = $me['objet']; // auteur
-		$_id_objet = id_table_objet($objet); // id_auteur
-		
+
 		// on récupère l'identifiant de l'objet...
-		if ($id_objet = $flux['args'][ $_id_objet ]) {
-			$flux['data'] .= mots_objets_ajouter_selecteur_mots($objet, $id_objet, array(
+		if ($id_objet = $flux['args'][ $me->_id_objet ]
+		OR  $id_objet = _request($me->_id_objet) ) {
+			$flux['data'] .= mots_objets_ajouter_selecteur_mots($me->objet, $id_objet, array(
 				'exec_url' => $flux['args']['exec']
 			));
 			
@@ -150,8 +148,12 @@ function mots_objets_ajouter_selecteur_mots_grappes($flux) {
 
 // Ajout de l'objet de type auteur
 function mots_objets_libelle_association_mots($flux){
-	$flux['auteurs'] = 'mots_objets:objet_auteurs';
-	$flux['documents'] = 'gestdoc:objet_documents';
+	$objets_mots = gouverneur_de_mots();
+	foreach ($objets_mots as $objet) {
+		if ($objet->libelle_objet) {
+			$flux[ $objet->nom ] = _T( $objet->libelle_objet );
+		}
+	}
 	return $flux;
 }
 
@@ -159,22 +161,20 @@ function mots_objets_libelle_association_mots($flux){
 // Ajout du contenu aux formulaires CVT du core.
 function mots_objets_editer_contenu_objet($flux){
 
-	$liste = array(
-		'auteurs'   => _T('mots_objets:item_mots_cles_association_auteurs'),
-		'documents' => _T('mots_objets:item_mots_cles_association_documents'),
-	);
-		
 	// Concernant le formulaire CVT 'editer_groupe_mot', on veut faire apparaitre l'objet auteurs
 	if ($flux['args']['type']=='groupe_mot') {
+
+		$liste = gouverneur_de_mots();
+		
 		// Si le formulaire concerne les groupes de mots-cles, alors recupere le resultat
 		// de la compilation du squelette 'inc-groupe-mot-mots_objets.html' qui contient les lignes
 		// a ajouter au formulaire CVT,
 		$mots_objets_checkbox = '';
-		foreach ($liste as $table_objet=>$nom) {
+		foreach ($liste as $objet) {
 			$mots_objets_checkbox .=
 				recuperer_fond('formulaires/inc-groupe-mot-mots_objets', array_merge($flux['args']['contexte'], array(
-					'table' => $table_objet,
-					'label' => $nom,
+					'table' => $objet->nom,
+					'label' => _T( $objet->libelle_liaisons_objets ),
 				)));
 		}
 		// que l'on insere ensuite a l'endroit approprie, a savoir avant le texte <!--choix_tables--> du formulaire
@@ -187,25 +187,17 @@ function mots_objets_editer_contenu_objet($flux){
 
 // compter le nombre d'auteurs sur les mots cles 
 function mots_objets_afficher_nombre_objets_associes_a($flux){
-	static $ou = array(
-		'auteurs' => array(
-			'singulier' => "mots_objets:info_un_auteur",
-			'pluriel'   => "mots_objets:info_nombre_auteurs",
-		),
-		'documents' => array(
-			'singulier' => "gestdoc:un_document", //"mediatheque:un_document",
-			'pluriel'   => "gestdoc:des_documents", //"mediatheque:des_documents",
-		)
-	);
 	
 	if ($flux['args']['objet'] == 'mot'
 	  AND $id_mot = $flux['args']['id_objet'])
 	{
-		foreach ($ou as $table_objet => $texte) {
-			if ($nb = sql_countsel('spip_mots_' . $table_objet, "id_mot=".intval($id_mot))) {
+		$liste = gouverneur_de_mots();
+		
+		foreach ($liste as $objet) {
+			if ($nb = sql_countsel('spip_mots_' . $objet->nom, "id_mot=".intval($id_mot))) {
 				$flux['data'][] = singulier_ou_pluriel($nb,
-					$texte['singulier'],
-					$texte['pluriel']
+					_T( $objet->singulier ),
+					_T( $objet->pluriel )
 				);
 			}
 		}
