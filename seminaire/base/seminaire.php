@@ -8,7 +8,7 @@ function seminaire_declarer_champs_extras($champs = array()){
 		'label' => 'seminaire:name', // chaine de langue 'prefix:cle'
 		'precisions' => 'seminaire:precisions_name', //precisions sur le champ name
 		'type' => 'ligne', // type de saisie
-		'sql' => "varchar(50) NOT NULL DEFAULT ''", // declaration sql
+		'sql' => "varchar(144) NOT NULL DEFAULT ''", // declaration sql
 	));
 	$champs[] = new ChampExtra(array(
 		'table' => 'evenements', // sur quelle table ?
@@ -16,7 +16,7 @@ function seminaire_declarer_champs_extras($champs = array()){
 		'label' => 'seminaire:origin', // chaine de langue 'prefix:cle'
 		'precisions' => 'seminaire:precisions_origin', //precisions sur le champ origin
 		'type' => 'ligne', // type de saisie
-		'sql' => "varchar(50) NOT NULL DEFAULT ''", // declaration sql
+		'sql' => "varchar(144) NOT NULL DEFAULT ''", // declaration sql
 	));
 	$champs[] = new ChampExtra(array(
 		'table' => 'evenements', // sur quelle table ?
