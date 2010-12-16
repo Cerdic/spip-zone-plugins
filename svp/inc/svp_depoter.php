@@ -1,6 +1,7 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/plugin');
 
 // ----------------------- Traitements des depots ---------------------------------
 
@@ -163,6 +164,7 @@ function svp_actualiser_depot($id){
 // &$nb_autres	=> Nombre de contributions non issues de plugin parmi les paquets inseres
 function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins, &$nb_autres) {
 
+	// Initialisation des compteurs
 	$nb_paquets = 0;
 	$nb_plugins = 0;
 	$nb_autres = 0;
@@ -170,29 +172,30 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	if ((!$id_depot) OR (!is_array($paquets)))
 		return false;
 	
-	// On commence par vider les paquets et les plugins du depot
-	sql_delete('spip_paquets','id_depot=' . sql_quote($id_depot));
-	svp_supprimer_plugins($id_depot);
+	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
+	$ids_a_supprimer = array();
+	$ids = sql_allfetsel('id_paquet, id_plugin', 'spip_paquets', array('id_depot='. sql_quote($id_depot)));
+	foreach ($ids as $_ids)
+		$ids_a_supprimer[$_ids['id_paquet']] = $_ids['id_plugin'];
 
-	// Ensuite on recree chaque paquet a partir du contenu du fichier xml
-	// comme pour la premiere insertion
+	// On met a jour ou on cree chaque paquet a partir du contenu du fichier xml
 	// On ne fait pas cas de la compatibilite avec la version de SPIP installee
-	// car la mise a jour doit permettre de collecter tous les paquets
+	// car l'operation doit permettre de collecter tous les paquets
 	foreach ($paquets as $_archive => $_infos) {
 		$insert_paquet = array();
-		// On initialise les informations communes de tous les paquets :
+		// On initialise les informations specifiques au paquet :
 		// l'id du depot et les infos de l'archive
 		$insert_paquet['id_depot'] = $id_depot;
 		$insert_paquet['nom_archive'] = $_archive;
 		$insert_paquet['nbo_archive'] = $_infos['size'];
 		$insert_paquet['maj_archive'] = date('Y-m-d H:i:s', $_infos['date']);
 		$insert_paquet['src_archive'] = $_infos['source'];
+		$insert_paquet['date_modif'] = $_infos['last_commit'];
 
-		$collision = false;
-
+		// On verifie si le paquet est celui d'un plugin ou pas
 		if ($champs = svp_remplir_champs_sql($_infos['plugin'])) {
-			// On est en presence d'un PLUGIN
-			// ------------------------------
+			$paquet_plugin = true;
+			// On complete les informations du paquet et du plugin
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
 			$insert_plugin = $champs['plugin'];
 
@@ -212,71 +215,183 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					$insert_plugin['categorie'] = 'aucune';
 				}
 			}
-				
-			// On evite les doublons de paquet
-			// Pour determiner un doublon on verifie actuellement :
-			// - le prefixe
-			// - la version du paquet et de la base
-			// - l'etat
-			// - et on exclu les themes car leur prefixe est toujours = a "theme"
-			$where = array('t1.id_plugin=t2.id_plugin',
-					't1.version=' . sql_quote($insert_paquet['version']),
-					't1.version_base=' . sql_quote($insert_paquet['version_base']),
-					't1.etatnum=' . sql_quote($insert_paquet['etatnum']),
-					't2.prefixe=' . sql_quote($insert_plugin['prefixe']));
-			if (($insert_plugin['prefixe'] == _SVP_PREFIXE_PLUGIN_THEME)
-			OR (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1, spip_plugins AS t2', $where))) {
-				// On traite d'abord le plugin du paquet pour recuperer l'id_plugin
-				// On rajoute le plugin dans la table spip_plugins si celui-ci n'y est pas encore ou on recuperer_page
-				// l'id si il existe deja
-				if (!$id_plugin = sql_getfetsel('id_plugin', 'spip_plugins',
-					array('prefixe=' . sql_quote($insert_plugin['prefixe'])))) {
-					$id_plugin = sql_insertq('spip_plugins', $insert_plugin);
-				}
-
-				// On traite maintenant le paquet connaissant l'id du plugin
-				$insert_paquet['id_plugin'] = $id_plugin;
-				sql_insertq('spip_paquets',$insert_paquet);
-				$nb_paquets += 1;
-
-				// On rajoute le plugin comme heberge par le depot si celui-ci n'est pas encore
-				// enregistre comme tel
-				if (!sql_countsel('spip_depots_plugins',
-					array('id_plugin=' . sql_quote($id_plugin),
-						'id_depot=' . sql_quote($id_depot)))) {
-					sql_insertq('spip_depots_plugins', array('id_depot' => $id_depot, 'id_plugin' => $id_plugin));
-					$nb_plugins += 1;
-				}
-			}
-			else
-				$collision = true;
 		}
 		else {
-			// On est en presence d'une CONTRIBUTION NON PLUGIN
-			// ------------------------------------------------
-			$where = array(
-					't1.id_depot=' . sql_quote($insert_paquet['id_depot']),
-					't1.nom_archive=' . sql_quote($insert_paquet['nom_archive']));
-			if (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1', $where)) {
-				// Ce n'est pas un plugin, donc id_plugin=0 et toutes les infos plugin sont nulles 
-				$insert_paquet['id_plugin'] = 0;
-				sql_insertq('spip_paquets',$insert_paquet);
-				$nb_paquets += 1;
-				$nb_autres += 1;
-			}
-			else
-				$collision = true;
+			$paquet_plugin = false;
 		}
-		// On loge le paquet ayant ete refuse dans un fichier a part afin de les verifier
-		// apres coup
-		if ($collision AND _SVP_LOG_PAQUETS) {
-			spip_log("Collision avec le paquet <". $insert_paquet['nom_archive'] . 
-					" / " . $insert_paquet['src_archive'] . "> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets');
+
+		// On teste l'existence du paquet dans la base avec les champs id_depot, nom_archive et src_archive
+		// pour etre sur de l'unicite.
+		// - si le paquet existe on ne fait qu'un update
+		// - sinon on insere le paquet
+		if (!$paquet = sql_fetsel('*', 'spip_paquets', array('id_depot='. sql_quote($insert_paquet['id_depot']),
+															'nom_archive='. sql_quote($insert_paquet['nom_archive']),
+															'src_archive='. sql_quote($insert_paquet['src_archive'])))) {
+			// Le paquet n'existe pas encore en base de donnees
+			// ------------------------------------------------
+			
+			// On positionne la date de creation a celle du dernier commit ce qui est bien le cas
+			$insert_paquet['date_crea'] = $insert_paquet['date_modif'];
+
+			// Les collisions ne sont possibles que si on ajoute un nouveau paquet
+			$collision = false;
+
+			if ($paquet_plugin) {
+				// On est en presence d'un PLUGIN
+				// ------------------------------
+				// On evite les doublons de paquet
+				// Pour determiner un doublon on verifie actuellement :
+				// - le prefixe
+				// - la version du paquet et de la base
+				// - l'etat
+				// - et on exclu les themes car leur prefixe est toujours = a "theme"
+				$where = array('t1.id_plugin=t2.id_plugin',
+						't1.version=' . sql_quote($insert_paquet['version']),
+						't1.version_base=' . sql_quote($insert_paquet['version_base']),
+						't1.etatnum=' . sql_quote($insert_paquet['etatnum']),
+						't2.prefixe=' . sql_quote($insert_plugin['prefixe']));
+				if (($insert_plugin['prefixe'] == _SVP_PREFIXE_PLUGIN_THEME)
+				OR (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1, spip_plugins AS t2', $where))) {
+					// On traite d'abord le plugin du paquet pour recuperer l'id_plugin
+					// On rajoute le plugin dans la table spip_plugins si celui-ci n'y est pas encore ou on recupere
+					// l'id si il existe deja et on le met a jour si la version du paquet est plus elevee
+					if (!$plugin = sql_fetsel('id_plugin, vmax', 'spip_plugins',
+						array('prefixe=' . sql_quote($insert_plugin['prefixe'])))) {
+						$id_plugin = sql_insertq('spip_plugins', 
+												array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])));
+					}
+					else {
+						if (spip_version_compare($insert_paquet['version'], $plugin['vmax'], '<'))
+							sql_updateq('spip_plugins',
+										array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])),
+										'id_plugin=' . sql_quote($plugin['id_plugin']));
+					}
+	
+					// On traite maintenant le paquet connaissant l'id du plugin
+					// et on ajoute le paquet dans la liste des paquets traites
+					$insert_paquet['id_plugin'] = $id_plugin;
+					sql_insertq('spip_paquets', $insert_paquet);
+	
+					// On rajoute le plugin comme heberge par le depot si celui-ci n'est pas encore
+					// enregistre comme tel
+					if (!sql_countsel('spip_depots_plugins',
+						array('id_plugin=' . sql_quote($id_plugin),
+							'id_depot=' . sql_quote($id_depot)))) {
+						sql_insertq('spip_depots_plugins', array('id_depot' => $id_depot, 'id_plugin' => $id_plugin));
+					}
+				}
+				else
+					$collision = true;
+			}
+			else {
+				// On est en presence d'une CONTRIBUTION NON PLUGIN
+				// ------------------------------------------------
+				$where = array(
+						't1.id_depot=' . sql_quote($insert_paquet['id_depot']),
+						't1.nom_archive=' . sql_quote($insert_paquet['nom_archive']));
+				if (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1', $where)) {
+					// Ce n'est pas un plugin, donc id_plugin=0 et toutes les infos plugin sont nulles 
+					// et on ajoute le paquet dans la liste des paquets traites
+					$insert_paquet['id_plugin'] = 0;
+					sql_insertq('spip_paquets', $insert_paquet);
+				}
+				else
+					$collision = true;
+			}
+			// On loge le paquet ayant ete refuse dans un fichier a part afin de les verifier
+			// apres coup
+			if ($collision AND _SVP_LOG_PAQUETS) {
+				spip_log("Collision avec le paquet <". $insert_paquet['nom_archive'] . 
+						" / " . $insert_paquet['src_archive'] . "> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets');
+			}
+		}
+		else {
+			// Le paquet existe deja en base de donnees
+			// ----------------------------------------
+			
+			// On met a jour le paquet en premier lieu qu'il soit un plugin ou une contribution
+			sql_updateq('spip_paquets', $insert_paquet,
+						'id_paquet=' . sql_quote($paquet['id_paquet']));
+
+			// Ensuite, si on est en presence d'un plugin, on le met a jour si le paquet est de version
+			// plus elevee
+			if ($paquet_plugin) {
+				if ($vmax = sql_getfetsel('vmax', 'spip_plugins', array('id_plugin=' . sql_quote($paquet['id_plugin']))))
+					if (spip_version_compare($vmax, $insert_paquet['version'], '<'))
+						sql_updateq('spip_plugins',
+									array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])),
+									'id_plugin=' . sql_quote($paquet['id_plugin']));
+			}
+				
+			// On ne change rien sur la table spip_depots_plugins, c'est inutile
+
+			// On retire le paquet mis a jour de la liste des paquets a supprimer a la fin de l'actualisation
+			if ($ids_a_supprimer[$paquet['id_paquet']])
+				unset($ids_a_supprimer[$paquet['id_paquet']]);
+		}
+	}
+	
+	// Il faut maintenant nettoyer la liste des paquets et plugins qui ont disparus du depot
+	if (count($ids_a_supprimer) > 0)
+		svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer);
+	
+	// Calcul des compteurs de paquets, plugins et contributions
+	include_spip(svp_fonctions);
+	$nb_paquets = sql_countsel('spip_paquets', 'id_depot=' . sql_quote($id_depot));
+	$nb_plugins = sql_countsel('spip_depots_plugins', 'id_depot=' . sql_quote($id_depot));
+	$nb_autres = sql_countsel('spip_paquets', array('id_depot=' . sql_quote($id_depot), 'id_plugin=0'));
+	
+	return true;
+}
+
+
+function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer) {
+
+	// Si on rentre dans cette fonction c'est que le tableau des paquets a supprimer est non vide
+	// On prepare la liste des paquets a supprimer
+	// et des plugins a verifier
+	$paquets_a_supprimer = array();
+	$ids_plugin = array();
+	foreach ($ids_a_supprimer as $_id_paquet => $_id_plugin) {
+		$paquets_a_supprimer[] = $_id_paquet;
+		if (!in_array($_id_plugin, $ids_plugin) AND ($_id_plugin != 0)) 
+			$ids_plugin[] = $_id_plugin;
+	}
+
+	// On supprime les paquets inutiles
+	sql_delete('spip_paquets', sql_in('id_paquet', $paquets_a_supprimer));
+
+	if ($ids_plugin) {
+		// On cherche pour chaque plugin de la liste si un paquet existe encore dans le meme depot
+		// Si aucun autre paquet n'existe on peut supprimer le plugin de la table spip_depots_plugins
+		if ($resultats = sql_select('id_plugin', 'spip_paquets', 
+									array('id_depot=' . sql_quote($id_depot), sql_in('id_plugin', $ids_plugin)))) {
+			while ($paquet = sql_fetch($resultats)) {
+				if ($i = array_search($paquet['id_plugin'], $ids_plugin))
+					unset($ids_plugin[$i]);
+			}
+		}
+		if (count($ids_plugin) > 0) {
+			// On supprime les liens des plugins n'etant plus heberges par le depot
+			sql_delete('spip_depots_plugins', array('id_depot=' . sql_quote($id_depot), sql_in('id_plugin', $ids_plugin)));
+				
+			// Maintenant on verifie si les plugins supprimes sont encore heberges par d'autre depot 
+			// Si non, on peut supprimer le plugin lui-meme de la table spip_plugins
+			if ($liens = sql_allfetsel('id_plugin', 'spip_depots_plugins', sql_in('id_plugin', $ids_plugin))) {
+				$plugins_heberges = array_map('reset', $liens);
+				// L'intersection des deux tableaux renvoie les plugins a supprimer	
+				$plugins_a_supprimer = array_diff($ids_plugin, $plugins_heberges);
+			
+				// On supprime les plugins identifies
+				if ($plugins_a_supprimer)
+					sql_delete('spip_plugins', sql_in('id_plugin', $plugins_a_supprimer));
+			}
 		}
 	}
 	
 	return true;
 }
+
 
 function svp_supprimer_plugins($id_depot) {
 
@@ -440,7 +555,7 @@ function svp_normaliser_nom($nom) {
 // ----------------------- Analyses XML ---------------------------------
 
 // parse un fichier de source dont l'url est donnee
-// ce fichier est un fichier XML contenant <depot><...</depot>
+// ce fichier est un fichier XML contenant <depot>...</depot>
 // et <archives>...</archives>
 function svp_xml_parse_depot($url){
 	include_spip('inc/xml');
@@ -490,7 +605,7 @@ function svp_xml_parse_depot($url){
 				'size' => $c['size'][0],
 				'date' => $c['date'][0],	// c'est la date de generation du zip
 				'source' => $c['source'][0],
-				'dernier_commit' => $c['commit'][0]
+				'last_commit' => $c['last_commit'][0]
 			);
 		}
 	}
