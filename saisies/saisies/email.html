@@ -2,6 +2,7 @@
         sur le input, et type="text" par défaut pour les autres.
         Dans ce dernier cas, on renseigne quand même class="email".
 
-][(#INCLURE{fond=saisies/input}{env}
-	{type=#HTML5|?{email,text}}
-	{class=#HTML5|?{'',email}})]
+][(#INCLURE{fond=saisies/input,
+				env,
+            type=#HTML5|?{email,text},
+            class=#HTML5|?{'',email}})]

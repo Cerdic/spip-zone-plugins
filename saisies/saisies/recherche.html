@@ -4,6 +4,7 @@
         ("recherche" serait mieux, mais la saisie input utilise automatiquement
         la valeur de #ENV{type}).
 
-][(#INCLURE{fond=saisies/input}{env}
-	{type=#HTML5|?{search,text}}
-	{class=#HTML5|?{'',search}})]
+][(#INCLURE{fond=saisies/input,
+				env,
+            type=#HTML5|?{search,text},
+            class=#HTML5|?{'',search}})]

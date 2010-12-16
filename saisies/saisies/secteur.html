@@ -23,6 +23,6 @@
 		[(#ENV{multiple}|non)
 		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
 		[(#ENV{recursif}|oui)
-		<INCLURE{fond=prive/listes/rubriques_recursives}{valeur=#ENV{valeur}}{id_rubrique}{multiple} />]
+		<INCLURE{fond=prive/listes/rubriques_recursives,valeur=#ENV{valeur},id_rubrique,multiple} />]
 	</BOUCLE_secteurs>
 </select>

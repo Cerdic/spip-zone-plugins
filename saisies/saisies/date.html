@@ -7,8 +7,9 @@
 ]
 #SET{valeur,#ENV{valeur,#ENV{defaut}}}
 [(#GET{valeur}|strpos{-}|oui) #SET{valeur,#GET{valeur}|affdate{'d/m/Y'}]
-[(#INCLURE{fond=saisies/input}{env}
-	{valeur=#GET{valeur}}
-	{type=#HTML5|?{date,text}}
-	{class=date})]
+[(#INCLURE{	fond=saisies/input,
+				env,
+            valeur=#GET{valeur},
+            type=#HTML5|?{date,text},
+            class=date})]
 [(#INCLURE{fond=formulaires/dateur/inc-dateur})]

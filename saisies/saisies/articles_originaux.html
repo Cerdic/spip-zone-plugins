@@ -37,7 +37,7 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
 		</BOUCLE_articles_originaux>
 		</B_articles_originaux>
 		[(#ENV{recursif}|oui)
-		<INCLURE{fond=prive/listes/articles_originaux_recursifs}{valeur=#ENV{valeur}}{id_rubrique}{multiple} />]
+		<INCLURE{fond=prive/listes/articles_originaux_recursifs,valeur=#ENV{valeur},id_rubrique,multiple} />]
 	</optgroup>		
 	</BOUCLE_secteurs>
 </select>

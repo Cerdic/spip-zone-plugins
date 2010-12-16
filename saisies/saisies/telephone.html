@@ -4,6 +4,7 @@
         Dans ce dernier cas, on renseigne quand même class="tel" pour
         avoir une classe cohérente avec ou sans HTML5.
 
-][(#INCLURE{fond=saisies/input}{env}
-	{type=#HTML5|?{tel,text}}
-	{class=#HTML5|?{'',tel}})]
+][(#INCLURE{fond=saisies/input,
+				env,
+            type=#HTML5|?{tel,text},
+            class=#HTML5|?{'',tel}})]
