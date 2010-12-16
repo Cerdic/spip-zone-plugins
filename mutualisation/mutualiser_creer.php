@@ -266,16 +266,14 @@ function mutu_etape_creer_base($e, $options){
  */
 function mutu_etape_creer_repertoires($e, $options){
 	if ($options['creer_site']) {
-		$ok_dir =
-		is_dir(_DIR_RACINE . $options['repertoire'])
-		AND is_writable(_DIR_RACINE . $options['repertoire']);
+		$ok_dir = _DIR_RACINE . $options['repertoire'];
 
-		if (!$ok_dir) {
+		if (!(is_dir($ok_dir)  AND is_writable($ok_dir))) {
 			echo mutu_minipres(
 				_T('mutu:install_creation_repertoire', array ('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')),
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
 				.'<h3>'. _T('mutu:install_err') .'</h3>'
-				. _T('mutu:install_repertoire_inaccessible', array( 'repertoire' => '<tt>'.$options['repertoire'].'/</tt>'))
+				. _T('mutu:install_repertoire_inaccessible', array( 'repertoire' => '<tt>'.$ok_dir.'/</tt>'))
 			);
 			exit;
 		}
