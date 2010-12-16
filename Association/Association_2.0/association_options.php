@@ -141,6 +141,11 @@ function association_header_prive($flux){
 	return "$flux\n<link rel='stylesheet' type='text/css' href='$c' />";
 }
 
+function association_delete_tables($flux){
+  spip_unlink(cache_meta('association_metas'));
+}
+
+
 // Pour ne pas avoir a ecrire le prefixe "spip_" dans les squelettes etc
 // (cf trouver_table)
 global $table_des_tables;

@@ -15,17 +15,14 @@
     </lien>
     <icon>img_pack/annonce.gif</icon>
 
-	<!-- fichier charge a chaque hit -->
 	<options>association_options.php</options>
 
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline><nom>header_prive</nom></pipeline>
+	<pipeline><nom>delete_tables</nom></pipeline>
+
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-	</pipeline>
-	
-	<pipeline>
-		<nom>header_prive</nom>
 	</pipeline>
 	
 	<pipeline>
