@@ -154,6 +154,107 @@ var_dump($verifier($date_valide2, 'date'));
 ?>
 </pre>
 
+<h2>Vérifions des URL :</h2>
+<pre>
+<?php
+
+// Bon c'est pas terrible tout ce code... Faut revoir ca avec le plugin test builder
+$url_web_valide1 = "Http://www.domaine.tld";
+$url_web_valide2 = "https://www.Domaine.tld";
+$url_ftp_valide = "sftp://www.domaine.tld";
+$url_mail_valide = "pop3://www.domaine.tld";
+$url_exact_valide = "ssh://www.domaine.tld";
+$url_tous_valide = "rtsp://www.domaine.tld";
+
+echo "protocole_seul : url_web_valide1 : $url_web_valide1 ?";
+var_dump($verifier($url_web_valide1, 'url', array('mode'=>'protocole_seul','type_protocole'=>'web')));
+echo "protocole_seul : url_web_valide2 : $url_web_valide2 ?";
+var_dump($verifier($url_web_valide2, 'url', array('mode'=>'protocole_seul','type_protocole'=>'web')));
+echo "protocole_seul : url_ftp_valide : $url_ftp_valide ?";
+var_dump($verifier($url_ftp_valide, 'url', array('mode'=>'protocole_seul','type_protocole'=>'ftp')));
+echo "protocole_seul : url_mail_valide : $url_mail_valide ?";
+var_dump($verifier($url_mail_valide, 'url', array('mode'=>'protocole_seul','type_protocole'=>'mail')));
+echo "protocole_seul : url_exact_valide : $url_exact_valide ?";
+var_dump($verifier($url_exact_valide, 'url', array('mode'=>'protocole_seul','type_protocole'=>'exact','protocole'=>'ssh')));
+echo "protocole_seul : url_tous_valide : $url_tous_valide ?";
+var_dump($verifier($url_tous_valide, 'url', array('mode'=>'protocole_seul','type_protocole'=>'tous')));
+
+$url_web_invalide1 = "htpp://www.domaine.tld";
+$url_web_invalide2 = "http:/www.domaine.tld";
+$url_web_invalide3 = "ftp://www.domaine.tld";
+
+echo "protocole_seul : url_web_invalide1 : $url_web_invalide1 ?";
+var_dump($verifier($url_web_invalide1, 'url', array('mode'=>'protocole_seul','type_protocole'=>'web')));
+echo "protocole_seul : url_web_invalide2 : $url_web_invalide2 ?";
+var_dump($verifier($url_web_invalide2, 'url', array('mode'=>'protocole_seul','type_protocole'=>'web')));
+echo "protocole_seul : url_web_invalide3 : $url_web_invalide3 ?";
+var_dump($verifier($url_web_invalide3, 'url', array('mode'=>'protocole_seul','type_protocole'=>'web')));
+
+$url_web_valide1 = "http://www.domaine.co.tld";
+$url_web_valide2 = "http://www.domaine.tld/repertoire";
+$url_web_valide3 = "http://www.DOMAINE.tld/repertoire";
+$url_web_valide4 = "http://www.domaine.tld/fichier%20.html";
+$url_web_valide5 = "http://www.domaine.tld/fichier.html#ancre";
+$url_web_valide6 = "http://www.domaine.tld/spip.php?page=test/verifier&toto=1";
+$url_web_valide7 = "http://www.domaine.tld/Presentation,432.html";
+$url_web_valide8 = "http://toto:t8_&$!@192.168.0.1:8000";
+$url_web_invalide1 = "http://www.domaïne.tld";
+$url_web_invalide2 = "http://www.domaine.tld\toto";
+$url_web_invalide3 = "http://www.domaine.tld/toto titi";
+
+
+echo "complet : url_web_valide1 : $url_web_valide1 ?";
+var_dump($verifier($url_web_valide1, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_valide2 : $url_web_valide2 ?";
+var_dump($verifier($url_web_valide2, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_valide3 : $url_web_valide3 ?";
+var_dump($verifier($url_web_valide3, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_valide4 : $url_web_valide4 ?";
+var_dump($verifier($url_web_valide4, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_valide5 : $url_web_valide5 ?";
+var_dump($verifier($url_web_valide5, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_valide6 : $url_web_valide6 ?";
+var_dump($verifier($url_web_valide6, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_valide7 : $url_web_valide7 ?";
+var_dump($verifier($url_web_valide7, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_valide8 : $url_web_valide8 ?";
+var_dump($verifier($url_web_valide8, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+
+echo "complet : url_web_invalide1 : $url_web_invalide1 ?";
+var_dump($verifier($url_web_invalide1, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_invalide2 : $url_web_invalide2 ?";
+var_dump($verifier($url_web_invalide2, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+echo "complet : url_web_invalide3 : $url_web_invalide3 ?";
+var_dump($verifier($url_web_invalide3, 'url', array('mode'=>'complet','type_protocole'=>'web')));
+
+
+echo "php_filter : url_web_valide1 : $url_web_valide1 ?";
+var_dump($verifier($url_web_valide1, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_valide2 : $url_web_valide2 ?";
+var_dump($verifier($url_web_valide2, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_valide3 : $url_web_valide3 ?";
+var_dump($verifier($url_web_valide3, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_valide4 : $url_web_valide4 ?";
+var_dump($verifier($url_web_valide4, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_valide5 : $url_web_valide5 ?";
+var_dump($verifier($url_web_valide5, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_valide6 : $url_web_valide6 ?";
+var_dump($verifier($url_web_valide6, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_valide7 : $url_web_valide7 ?";
+var_dump($verifier($url_web_valide7, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_valide8 : $url_web_valide8 ?";
+var_dump($verifier($url_web_valide8, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+
+echo "php_filter : url_web_invalide1 : $url_web_invalide1 ?";
+var_dump($verifier($url_web_invalide1, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_invalide2 : $url_web_invalide2 ?";
+var_dump($verifier($url_web_invalide2, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+echo "php_filter : url_web_invalide3 : $url_web_invalide3 ?";
+var_dump($verifier($url_web_invalide3, 'url', array('mode'=>'php_filter','type_protocole'=>'web')));
+
+?>
+</pre>
+
 
 </body>
 </html>

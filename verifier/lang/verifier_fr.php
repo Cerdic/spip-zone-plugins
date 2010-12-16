@@ -27,7 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_max' => 'La valeur doit comprendre au maximum @max@ caract&egrave;res.',
 	'erreur_taille_min' => 'La valeur doit comprendre au minimum @min@ caract&egrave;res.',
 	'erreur_telephone' => 'Le numéro n\'est pas valide.',
-	'erreur_url' => 'L\'adresse n\\\'est pas valide.',
+	'erreur_url' => 'L\'adresse <em>@url@</em> n\'est pas valide.',
+	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@',
+	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)',
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Nombre de d&eacute;cimales apr&egrave;s la virgule',
@@ -45,6 +47,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_siren_siret_mode_siret' => 'le SIRET',
 	'option_taille_max_label' => 'Taille maximum',
 	'option_taille_min_label' => 'Taille minimum',
+	'option_url_mode_complet' => 'V&eacute;rification compl&egrave;te de l\'url',
+	'option_url_mode_label' => 'Mode de v&eacute;rification des urls',
+	'option_url_mode_php_filter' => 'V&eacute;rification compl&egrave;te de l\'url via le filtre FILTER_VALIDATE_URL de php',
+	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole',
+	'option_url_protocole_label' => 'Nom du protocole &agrave; v&eacute;rifier',
+	'option_url_type_protocole_label' => 'Type de protocole &agrave; v&eacute;rifier',
+	'option_url_type_protocole_tous' => 'Tous protocoles accept&eacute;s',
+	'option_url_type_protocole_web' => 'Protocoles web : http ou https',
+	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp',
+	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp',
+	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous&nbsp;:',
 
 	// T
 	'type_date' => 'Date',
@@ -64,7 +77,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_taille' => 'Taille',
 	'type_taille_description' => 'V&eacute;rifie que la taille de la valeur correspond au minimum et/ou au maximum demand&eacute;.',
 	'type_telephone' => 'Num&eacute;ro de t&eacute;l&eacute;phone',
-	'type_telephone_description' => 'V&eacute;rifie que le num&eacute;ro de t&eacute;l&eacute;phone correspond &agrave; un sch&eacute;ma reconnu.'
+	'type_telephone_description' => 'V&eacute;rifie que le num&eacute;ro de t&eacute;l&eacute;phone correspond &agrave; un sch&eacute;ma reconnu.',
+	'type_url' => 'URL',
+	'type_url_description' => 'V&eacute;rifie que l\'url correspond &agrave; un sch&eacute;ma reconnu.'
 );
 
 ?>
