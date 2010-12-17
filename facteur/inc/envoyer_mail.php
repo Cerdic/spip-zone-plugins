@@ -55,8 +55,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		}
 	}
 	$head = $facteur->CreateHeader();
-	spip_log("mail via facteur\n$head\nDestinataire: $destinataire",'mail');
-	spip_log("mail\n$head\nDestinataire: $destinataire",'facteur');
+	spip_log("mail via facteur\n$headDestinataire: $destinataire\n",'mail');
+	spip_log("mail\n$headDestinataire: $destinataire\n",'facteur');
 	return $facteur->Send();
 }
 
