@@ -1,0 +1,9 @@
+
+<title>
+	<:marquepages:tous_les_marquepages:>
+	<B_etiquettes>
+	<:marquepages:avec_etiquettes:>
+	<BOUCLE_etiquettes(MOTS){titre IN #ENV{mots}}{", "}>#TITRE</BOUCLE_etiquettes>[
+	(#ENV{recherche}|oui)(<:marquepages:contenant{recherche=#ENV{recherche}}:>)][
+	- (#CONFIG{marquepages/titremp}|sinon{#NOM_SITE_SPIP}|textebrut)]
+</title>

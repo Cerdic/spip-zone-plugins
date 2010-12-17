@@ -1,0 +1,11 @@
+
+<BOUCLE_auteur(AUTEURS){tous}{login}>
+<title>
+	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:mes_marquepages:>,<:marquepages:titre_marquepages_de{auteur=#NOM}:>})]
+	<B_etiquettes>
+	<:marquepages:avec_etiquettes:>
+	<BOUCLE_etiquettes(MOTS){titre IN #ENV{mots}}{", "}>#TITRE</BOUCLE_etiquettes>[
+	(#ENV{recherche}|oui)(<:marquepages:contenant{recherche=#ENV{recherche}}:>)][
+	- (#CONFIG{marquepages/titremp}|sinon{#NOM_SITE_SPIP}|textebrut)]
+</title>
+</BOUCLE_auteur>
