@@ -16,10 +16,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_vimeo' => 'Vimeo settings',
 	'cfg_titre_configurations_youtube' => 'Youtube settings',
 	'confirmation_ajout' => 'The video "@type@:@titre@" has been added.',
-	
+
+	// E
+	'erreur_adresse_invalide' => 'This URL address is not valid',
+
 	// L
 	'label_ajouter_video' => "Add a video",
-	'label_url' => "Video address",
+	'label_url' => "Video URL",
 	
 	// T
 	'titre_admin' => 'Video(s) plugin',

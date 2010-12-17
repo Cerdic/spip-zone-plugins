@@ -1,41 +1,42 @@
 <?php
-function formulaires_insertion_video_charger_dist($id_article){
+function formulaires_insertion_video_charger_dist($id_objet,$objet){
 	$valeurs = array(
-		'id_article' => $id_article,
-		'url' => ''
+		'id_objet' => $id_objet,
+		'objet' => $objet,
+		'video_url' => ''
 		);
 	return $valeurs;
 }
 
-function formulaires_insertion_video_verifier_dist(){
+function formulaires_insertion_video_verifier_dist($id_objet,$objet){
 	$erreurs = array();
 	// Retirer les trucs qui emmerdent : tous les arguments d'ancre / les espaces foireux les http:// et les www. éventuels
-	$url = preg_replace('%(#.*$|http://|www.)%', '', trim(_request('url')));
+	$url = preg_replace('%(#.*$|http://|www.)%', '', trim(_request('video_url')));
 	
 	if(preg_match('/dailymotion/',$url)){
 		set_request('type','dist_daily');
-		$laVideo = preg_replace('#dailymotion\.com/video/#','',$url);
+		$lavideo = preg_replace('#dailymotion\.com/video/#','',$url);
 	}
 	else if(preg_match('/vimeo/',$url)){
 		set_request('type','dist_vimeo');
-		$laVideo = preg_replace('#vimeo\.com/#','',$url);
+		$lavideo = preg_replace('#vimeo\.com/#','',$url);
 	}
 	else if(preg_match('/(youtube|youtu\.be)/',$url)){
 		set_request('type','dist_youtu');
-		$laVideo = preg_replace('#(youtu\.be/|youtube\.com/watch\?v=|&.*$|\?hd=1)#','',$url);
+		$lavideo = preg_replace('#(youtu\.be/|youtube\.com/watch\?v=|&.*$|\?hd=1)#','',$url);
 	}
 
-	if(!$laVideo) $erreurs['pas_valide'] = _T('Adresse non valide.');
-	else set_request('laVideo',$laVideo);
+	if(!$lavideo) $erreurs['message_erreur'] = _T('videos:erreur_adresse_invalide');
+	else set_request('lavideo',$lavideo);
 
 	return $erreurs;
 }
 
-function formulaires_insertion_video_traiter_dist($id_article){
+function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	include_spip('inc/acces');	
 	$type = _request('type');
-	$fichier = _request('laVideo');
-	$url = _request('url');
+	$fichier = _request('lavideo');
+	$url = _request('video_url');
 	
 	if(!preg_match('/youtu\.be/',$url)){
 		/*
@@ -52,7 +53,7 @@ function formulaires_insertion_video_traiter_dist($id_article){
 		// $logoDocument = $infosVideo->thumbnails->0->url; // A brancher sur la copie de document
 	}
 	else{
-		$titre = sql_getfetsel('titre','spip_articles',"id_article=".$id_article);
+		$titre = sql_getfetsel('titre',table_objet_sql($objet),id_table_objet($objet)."=".$id_objet);
 	}
 	
 	// On va pour l'instant utiliser le champ extension pour stocker le type de source
@@ -82,8 +83,8 @@ function formulaires_insertion_video_traiter_dist($id_article){
 			'spip_documents_liens',
 			array(
 				'id_document'=>$document,
-				'id_objet'=>$id_article,
-				'objet'=>'article',
+				'id_objet'=>$id_objet,
+				'objet'=>$objet,
 				'vu'=>'non'
 			)
 		);

@@ -17,6 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_youtube' => 'Configurations Youtube',
 	'confirmation_ajout' => 'La vid&eacute;o "@type@:@titre@" a bien &eacute;t&eacute; ajout&eacute;e.',
 	
+	// E
+	'erreur_adresse_invalide' => 'Cette adresse n\'est pas valide',
+
 	// L
 	'label_ajouter_video' => "Ajouter une vid&eacute;o",
 	'label_url' => "Adresse de la vid&eacute;o",
