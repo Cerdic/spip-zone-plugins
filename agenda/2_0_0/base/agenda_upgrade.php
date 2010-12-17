@@ -6,7 +6,7 @@
  *
  */
 
-	$GLOBALS['agenda_base_version'] = 0.22;
+	$GLOBALS['agenda_base_version'] = 0.23;
 	function agenda_verifier_base(){
 		$version_base = $GLOBALS['agenda_base_version'];
 		$current_version = 0.0;
@@ -68,6 +68,14 @@
 				include_spip('base/auxiliaires');
 				maj_tables('spip_evenements_participants');
 				ecrire_meta('agenda_base_version',$current_version=0.22,'non');
+			}
+			if (version_compare($current_version,"0.23","<")){
+				include_spip('base/abstract_sql');
+				sql_alter("TABLE spip_evenements CHANGE titre titre text NOT NULL DEFAULT ''");
+				sql_alter("TABLE spip_evenements CHANGE descriptif descriptif text NOT NULL DEFAULT ''");
+				sql_alter("TABLE spip_evenements CHANGE lieu lieu text NOT NULL DEFAULT ''");
+				sql_alter("TABLE spip_evenements CHANGE adresse adresse text NOT NULL DEFAULT ''");
+				ecrire_meta('agenda_base_version',$current_version=0.23,'non');
 			}
 		}
 	}
