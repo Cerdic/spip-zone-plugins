@@ -1,0 +1,9 @@
+[(#SET{type,#ENV{type,article}})]
+[(#SET{compositions,[(#ENV{_compositions,[(#GET{type}|compositions_lister_disponibles|reset)]})]})]
+[(#ENV{composition_vide}|!={non}|oui)
+	[(#SET{composition_vide,[(#ARRAY{'',[(#ARRAY{nom,<:compositions:label_pas_de_composition:>,description,'',icon,'',configuration,''})]})]})]
+	[(#SET{compositions,[(#GET{composition_vide}|array_merge{#GET{compositions}})]})]
+]
+<div class="composition">
+[(#INCLURE{fond=formulaires/inc-selecteur_composition,_compositions=#GET{compositions},name=#ENV{nom},selected=#ENV{valeur},env})]
+</div>
