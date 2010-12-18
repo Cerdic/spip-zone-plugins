@@ -219,7 +219,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		else {
 			$paquet_plugin = false;
 		}
-
 		// On teste l'existence du paquet dans la base avec les champs id_depot, nom_archive et src_archive
 		// pour etre sur de l'unicite.
 		// - si le paquet existe on ne fait qu'un update
@@ -261,14 +260,14 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 												array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])));
 					}
 					else {
-						if (spip_version_compare($insert_paquet['version'], $plugin['vmax'], '<'))
+						$id_plugin = $plugin['id_plugin'];
+						if (spip_version_compare($plugin['vmax'], $insert_paquet['version'], '<='))
 							sql_updateq('spip_plugins',
 										array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])),
-										'id_plugin=' . sql_quote($plugin['id_plugin']));
+										'id_plugin=' . sql_quote($id_plugin));
 					}
 	
 					// On traite maintenant le paquet connaissant l'id du plugin
-					// et on ajoute le paquet dans la liste des paquets traites
 					$insert_paquet['id_plugin'] = $id_plugin;
 					sql_insertq('spip_paquets', $insert_paquet);
 	
@@ -291,7 +290,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 						't1.nom_archive=' . sql_quote($insert_paquet['nom_archive']));
 				if (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1', $where)) {
 					// Ce n'est pas un plugin, donc id_plugin=0 et toutes les infos plugin sont nulles 
-					// et on ajoute le paquet dans la liste des paquets traites
 					$insert_paquet['id_plugin'] = 0;
 					sql_insertq('spip_paquets', $insert_paquet);
 				}
@@ -314,10 +312,10 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 						'id_paquet=' . sql_quote($paquet['id_paquet']));
 
 			// Ensuite, si on est en presence d'un plugin, on le met a jour si le paquet est de version
-			// plus elevee
+			// plus elevee ou egale (on gere ainsi les oublis d'incrementation)
 			if ($paquet_plugin) {
 				if ($vmax = sql_getfetsel('vmax', 'spip_plugins', array('id_plugin=' . sql_quote($paquet['id_plugin']))))
-					if (spip_version_compare($vmax, $insert_paquet['version'], '<'))
+					if (spip_version_compare($vmax, $insert_paquet['version'], '<='))
 						sql_updateq('spip_plugins',
 									array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])),
 									'id_plugin=' . sql_quote($paquet['id_plugin']));
@@ -326,7 +324,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			// On ne change rien sur la table spip_depots_plugins, c'est inutile
 
 			// On retire le paquet mis a jour de la liste des paquets a supprimer a la fin de l'actualisation
-			if ($ids_a_supprimer[$paquet['id_paquet']])
+			if (isset($ids_a_supprimer[$paquet['id_paquet']]))
 				unset($ids_a_supprimer[$paquet['id_paquet']]);
 		}
 	}
@@ -336,7 +334,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer);
 	
 	// Calcul des compteurs de paquets, plugins et contributions
-	include_spip(svp_fonctions);
 	$nb_paquets = sql_countsel('spip_paquets', 'id_depot=' . sql_quote($id_depot));
 	$nb_plugins = sql_countsel('spip_depots_plugins', 'id_depot=' . sql_quote($id_depot));
 	$nb_autres = sql_countsel('spip_paquets', array('id_depot=' . sql_quote($id_depot), 'id_plugin=0'));
@@ -367,8 +364,9 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer) {
 		if ($resultats = sql_select('id_plugin', 'spip_paquets', 
 									array('id_depot=' . sql_quote($id_depot), sql_in('id_plugin', $ids_plugin)))) {
 			while ($paquet = sql_fetch($resultats)) {
-				if ($i = array_search($paquet['id_plugin'], $ids_plugin))
-					unset($ids_plugin[$i]);
+				$cle = array_search($paquet['id_plugin'], $ids_plugin);
+				if ($cle !== false)
+					unset($ids_plugin[$cle]);
 			}
 		}
 		if (count($ids_plugin) > 0) {
@@ -377,15 +375,16 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer) {
 				
 			// Maintenant on verifie si les plugins supprimes sont encore heberges par d'autre depot 
 			// Si non, on peut supprimer le plugin lui-meme de la table spip_plugins
+			$plugins_a_supprimer = $ids_plugin;
 			if ($liens = sql_allfetsel('id_plugin', 'spip_depots_plugins', sql_in('id_plugin', $ids_plugin))) {
 				$plugins_heberges = array_map('reset', $liens);
 				// L'intersection des deux tableaux renvoie les plugins a supprimer	
 				$plugins_a_supprimer = array_diff($ids_plugin, $plugins_heberges);
-			
-				// On supprime les plugins identifies
-				if ($plugins_a_supprimer)
-					sql_delete('spip_plugins', sql_in('id_plugin', $plugins_a_supprimer));
 			}
+			
+			// On supprime les plugins identifies
+			if ($plugins_a_supprimer)
+				sql_delete('spip_plugins', sql_in('id_plugin', $plugins_a_supprimer));
 		}
 	}
 	

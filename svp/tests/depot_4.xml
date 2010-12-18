@@ -367,12 +367,12 @@ Compatibilit&#224; : SPIP v1.92x, v2.0.x e v2.1.0
 <archive id="sktheme2.zip">
 <file>sktheme2.zip</file>
 <size>150872</size>
-<date>1280223844</date>
+<date>1280225944</date>
 <source>_plugins_/sktheme2</source>
-<last_commit>2010-09-28 21:39:15</last_commit>
+<last_commit>2010-11-28 20:39:15</last_commit>
 <plugin>
  <nom>SkTheme2</nom>
- <version>0.3</version>
+ <version>0.5</version>
  <etat>stable</etat>
  <auteur>Skedus - Phil pour spip2
 <multi>
@@ -382,12 +382,52 @@ _ &copy; January 2007 - distributed under GNU/GPL licence.
 </auteur>
 <description>
 <multi>
-Small theme manager for SPIP
+Small theme manager for SPIP 2
 _ Activate this plugin and manage themes in the {{Configuration}} menu.
 _ Notes that sktheme use theme.xml files to detect 'squelette' distribution and 'habillage' distribution
 _ This version do not add switcher
 [fr]
-Gestion des th&egrave;mes de SPIP
+Gestion des th&egrave;mes de SPIP 2
+_ Activez ce plugin et g&eacute;rez les th&egrave;mes dans le menu {{Configuration}}.
+_ Notez que sktheme utilise les fichiers theme.xml pour detecter les disdribution de 'squelette' et d''habillage'
+_ Cette version ne contient pas de switcher
+</multi>
+</description>
+	<lien>[->http://www.spip-contrib.net/Plugin-Sktheme]</lien> <!-- URI de documentation -->
+ <prefix>sktheme</prefix>
+ <options>sktheme_options.php</options>
+ <pipeline>
+    <nom>ajouter_boutons</nom>
+    <inclure>sktheme_fonctions.php</inclure>
+ </pipeline>
+ <categorie>maintenance</categorie>
+ </plugin>
+</archive>
+
+<archive id="sktheme3.zip">
+<file>sktheme3.zip</file>
+<size>250872</size>
+<date>1280225944</date>
+<source>_plugins_/sktheme3</source>
+<last_commit>2010-12-02 20:39:15</last_commit>
+<plugin>
+ <nom>SkTheme2</nom>
+ <version>1.0</version>
+ <etat>stable</etat>
+ <auteur>Skedus - Phil pour spip2
+<multi>
+_ &copy; January 2007 - distributed under GNU/GPL licence.
+[fr]_ &copy; January 2007 - distribu&eacute; sous license GNU/GPL.
+</multi>
+</auteur>
+<description>
+<multi>
+Small theme manager for SPIP - New
+_ Activate this plugin and manage themes in the {{Configuration}} menu.
+_ Notes that sktheme use theme.xml files to detect 'squelette' distribution and 'habillage' distribution
+_ This version do not add switcher
+[fr]
+Gestion des th&egrave;mes de SPIP - Nouveau
 _ Activez ce plugin et g&eacute;rez les th&egrave;mes dans le menu {{Configuration}}.
 _ Notez que sktheme utilise les fichiers theme.xml pour detecter les disdribution de 'squelette' et d''habillage'
 _ Cette version ne contient pas de switcher
