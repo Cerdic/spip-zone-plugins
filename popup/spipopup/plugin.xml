@@ -19,7 +19,7 @@ Gestion d'une fen&ecirc;tre popup ({fen&ecirc;tre externe}) unique sous forme de
 - {{height}} : la hauteur de la fen&ecirc;tre en pixels ({optionnel - {{640px}} par d&eacute;faut}).
 - {{titre}} : le titre ajout&eacute; au lien.
 
-{{Utilisation du mod&egrave;le dans les article}}
+{{Utilisation du mod&egrave;le dans les articles}}
 <quote><code>
 <popup
 	|texte=le texte du lien (necessaire)
