@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Acc&egrave;s Restreint  - Utilitaires</nom>
+	<etat>dev</etat>
+	<icon>img/zones-acces-48.png</icon>
+	<version>1.0.1</version>
+	<auteur>Cyril MARION</auteur>
+	<description>Propose une petite boite de contr&ocirc;le de l'acc&egrave;s sur la page rubrique.</description>
+	<prefix>ar_utils</prefix>
+	
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>ar_utils.php</inclure>
+	</pipeline>
+
+	<necessite id="accesrestreint" version="[3.0;]" />
+	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="saisies" version="[1.5.0;]" />
+	<necessite id="afficher_objets" version="[1.0.0;]" />
+	
+</plugin>
