@@ -26,6 +26,7 @@ function public_styliser_par_z_dist($flux){
 	static $apl_constant;
 	static $page;
 	static $disponible = array();
+	static $echaffauder;
 
 	if (!isset($prefix_path)) {
 		$z_blocs = zcore_blocs(test_espace_prive());
@@ -35,6 +36,7 @@ function public_styliser_par_z_dist($flux){
 			$apl_constant = '_ECRIRE_AJAX_PARALLEL_LOAD';
 			$page = 'exec';
 			$echaffauder = ""; // pas d'echaffaudage dans ecrire/ pour le moment
+			define('_ZCORE_EXCLURE_PATH','');
 		}
 		else {
 			$prefix_path = "";
@@ -42,6 +44,7 @@ function public_styliser_par_z_dist($flux){
 			$apl_constant = '_Z_AJAX_PARALLEL_LOAD';
 			$page = _SPIP_PAGE;
 			$echaffauder = charger_fonction('echaffauder','public',true);
+		  define('_ZCORE_EXCLURE_PATH','squelettes-dist|prive');
 		}
 	}
 	$z_contenu = reset($z_blocs); // contenu par defaut
@@ -66,8 +69,10 @@ function public_styliser_par_z_dist($flux){
 		}
 
 		// surcharger aussi les squelettes venant de squelettes-dist/
-		if (preg_match(',(squelettes-dist|prive)/[^/]+$,',$squelette))
+		if ($squelette AND !zcore_fond_valide($squelette)){
 			$squelette = "";
+		  $echaffauder = "";
+		}
 	
 		// gerer les squelettes non trouves
 		// -> router vers les /dist.html
@@ -83,7 +88,7 @@ function public_styliser_par_z_dist($flux){
 				// se brancher sur contenu/xx si il existe
 				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
 				if (!isset($disponible[$fond]))
-					$disponible[$fond] = zcore_contenu_disponible($prefix_path,$z_contenu,$fond,$ext);
+					$disponible[$fond] = zcore_contenu_disponible($prefix_path,$z_contenu,$fond,$ext,$echaffauder);
 
 				if ($disponible[$fond])
 					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
@@ -98,7 +103,7 @@ function public_styliser_par_z_dist($flux){
 				AND autoriser('webmestre')){
 				$type = substr($fond,strlen($z_contenu)+1);
 				if (!isset($disponible[$type]))
-					$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
+					$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder);
 				if ($echaffauder 
 					AND $is = $disponible[$type]
 					AND is_array($is))
@@ -115,7 +120,7 @@ function public_styliser_par_z_dist($flux){
 					AND in_array($dir,$z_blocs)){
 					$type = substr($fond,strlen("$dir/"));
 					if ($type!=='page' AND !isset($disponible[$type]))
-						$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
+						$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder);
 					if ($type=='page' OR $disponible[$type])
 						$flux['data'] = zcore_trouver_bloc($prefix_path,$dir,'dist',$ext);
 				}
@@ -178,10 +183,17 @@ function zcore_blocs($espace_prive=false) {
  * @param string $ext
  * @return mixed
  */
-function zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext){
+function zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder=true){
 	if ($d = zcore_trouver_bloc($prefix_path,$z_contenu,$type,$ext))
 		return $d;
-	return zcore_echaffaudable($type);
+	return $echaffauder AND zcore_echaffaudable($type);
+}
+
+function zcore_fond_valide($squelette){
+	if (!_ZCORE_EXCLURE_PATH
+		OR !preg_match(',('._ZCORE_EXCLURE_PATH.')/,',$squelette))
+		return true;
+  return false;
 }
 
 /**
@@ -201,9 +213,12 @@ function zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext){
  * @return string
  */
 function zcore_trouver_bloc($prefix_path,$bloc,$fond,$ext){
-	if ($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext")
-		OR $f = find_in_path("$prefix_path$bloc/$fond.$ext"))
+	if (
+		($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") AND zcore_fond_valide($f))
+		OR ($f = find_in_path("$prefix_path$bloc/$fond.$ext") AND zcore_fond_valide($f))
+		){
 		return substr($f, 0, - strlen(".$ext"));
+	}
 	return "";
 }
 /**
