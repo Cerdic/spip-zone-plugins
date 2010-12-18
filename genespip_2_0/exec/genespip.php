@@ -69,13 +69,12 @@ function exec_genespip() {
 			echo "<a href='".$url_action_accueil."'>&raquo;&nbsp;"._T('genespip:fermer')."</a>";
 		}else{
 			echo _T('genespip:info_gedcom_etape1');
-			$ret .= "<FORM ACTION='".$url_action_accueil."' method='POST' ENCTYPE='multipart/form-data'>";
-			$ret .= "<input type='hidden' name='action' value='gedcom'>";
-			$ret .= "<input type='hidden' name='max_file_size' value='1048576'>";
-			$ret .= _T('genespip:fichier_gedcom')." : <input type='file' name='gedcomfic' size='15'><br />";
-			$ret .= "<INPUT TYPE='submit' name='telecharger' value='"._T('genespip:charger')."' class='fondo'>";
-			$ret .= "</form>";
-			echo $ret;
+			echo "<FORM ACTION='".$url_action_accueil."' method='POST' ENCTYPE='multipart/form-data'>";
+			echo "<input type='hidden' name='action' value='gedcom'>";
+			echo "<input type='hidden' name='max_file_size' value='1048576'>";
+			echo _T('genespip:fichier_gedcom')." : <input type='file' name='gedcomfic' size='15'><br />";
+			echo "<INPUT TYPE='submit' name='telecharger' value='"._T('genespip:charger')."' class='fondo'>";
+			echo "</form>";
 		}
 		echo fin_cadre_relief(true);
 	}

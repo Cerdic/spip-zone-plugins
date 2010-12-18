@@ -1,7 +1,7 @@
 <?php
 function genespip_evt($id_type_evenement,$id_individu){
 
-	$resultevt = sql_select('* ', 'spip_genespip_evenements,spip_genespip_lieux,spip_genespip_type_evenements', 'spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenement.id_type_evenement and spip_genespip_evenement.id_type_evenement=".$id_type_evenement." and GENESPIP_EVENEMENTS.id_lieu=spip_genespip_lieux.id_lieu and spip_genespip_evenement.id_individu = ".$id_individu');
+	$resultevt = sql_select("*", "spip_genespip_evenements,spip_genespip_lieux,spip_genespip_type_evenements", "spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and spip_genespip_evenements.id_type_evenement='".$id_type_evenement."' and spip_genespip_evenements.id_lieu=spip_genespip_lieux.id_lieu and spip_genespip_evenements.id_individu = '".$id_individu."'");
 	while ($evt = spip_fetch_array($resultevt)) {
 		$date_evt=genespip_datefr($evt['date_evenement']);
 		if ($evt['id_epoux']!=0){$union="<b>"._T('genespip:avec')." ".genespip_nom_prenom($evt['id_epoux'],1)."</b>";}else{$union=NULL;}

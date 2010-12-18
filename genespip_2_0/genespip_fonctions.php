@@ -6,10 +6,10 @@
 */
 
 
-	function genespip_header_prive($flux){
-		$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('genespip.css')).'" />';
-		return $flux;
-	}
+//	function genespip_header_prive($flux){
+//		$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('genespip.css')).'" />';
+//		return $flux;
+//	}
 
 	function genespip_rediriger_javascript($url) {
 		echo '<script language="javascript" type="text/javascript">window.location.replace("'.$url.'");</script>';
@@ -61,6 +61,7 @@
 					$date_min=$split[0];
 				}
 			}else{$date_min="?";}
+
 			$result_date_max = sql_select("date_evenement", "spip_genespip_individu,spip_genespip_evenements", "spip_genespip_individu.id_individu=spip_genespip_evenements.id_individu and nom = '".$indi['nom']."' and id_type_evenement='1' and date_evenement <> 0000-00-00 ORDER BY date_evenement DESC limit 0,1" );
 			if (mysql_num_rows($result_date_max)!=0){
 				while ($max = spip_fetch_array($result_date_max)) {
@@ -68,13 +69,14 @@
 					$date_couverte=$date_min."-".$split[0];
 				}
 			}else{$date_couverte=$date_min."-?";}
+
 			$result_liste = sql_select("*", "spip_genespip_liste", "nom = ".$indi['nom']);
 			$result_liste = spip_query($result_liste);
-			/*echo mysql_num_rows($result_liste);*/
+			//echo mysql_num_rows($result_liste);
 			if (mysql_num_rows($result_liste)==0){
-				$insert_liste = 'INSERT INTO spip_genespip_liste (nom, nombre, date_couverte, date_update)", "("'.$indi["nom"].'", '.$indi["comptenom"].', "'.$date_couverte.'", "'.$date_update.'")';
+				$insert_liste = sql_insert("spip_genespip_liste", "(nom, nombre, date_couverte, date_update)", "('".$indi['nom'].", ".$indi['comptenom'].", ".$date_couverte.", ".$date_update."')");
 				/*echo $insert_liste."<br />";*/
-				$insert_liste = spip_query($insert_liste) or die (_T('genespip:requete')." insert_liste"._T('genespip:invalide')."<br />");
+				$insert_liste = spip_query($insert_liste) or die (_T('genespip:requete')." insert_liste "._T('genespip:invalide')."<br />");
 			}else{
 				while ($liste = spip_fetch_array($result_liste)) {
 					if ($liste['nombre']!=$indi['comptenom']){
@@ -89,7 +91,7 @@
 			while ($liste_inv = spip_fetch_array($result_liste_inverse)) {
 				$result_individu_inverse = sql_select("nom", "spip_genespip_individu", "poubelle<>1 and nom = '".$liste_inv['nom']);
 				if (mysql_num_rows($result_individu_inverse)==0){
-					$delete_liste = sql_delete("spip_genespip_liste", "nom = .$nom") or die (_T('genespip:requete').' delete_liste '._T('genespip:invalide'));
+					$delete_liste = sql_delete("spip_genespip_liste", "nom = ".$nom) or die (_T('genespip:requete')." delete_liste "._T('genespip:invalide'));
 				}
 			}
 		echo "&nbsp;<font color='red'>OK</font><br />";
@@ -359,12 +361,12 @@
 	
 	//Verif rubrique documents
 	function genespip_creer_rubrique(){
-		$date_update=date("Y-m-d H:i:s");
+		$date_update = date("Y-m-d H:i:s");
 		$result = sql_select("spip_genespip_parametres.rubrique, spip_rubriques.id_rubrique, spip_rubriques.titre", "spip_genespip_parametres, spip_rubriques", "spip_rubriques.id_rubrique = spip_genespip_parametres.rubrique");
 		$compte = mysql_num_rows($result);
 		if ($compte==0){
 			$insert_rubrique = sql_insert("spip_rubriques", "(titre, statut, date, idx, statut_tmp, date_tmp)", "('Documents, actes', 'publie', '".$date_update."', 'oui', 'publie', '".$date_update."')");
-			$id_rubrique .=spip_insert_id();
+			$id_rubrique .= spip_insert_id();
 			$insert_rubrique = sql_update("spip_genespip_parametres", array("rubrique" => sql_quote($id_rubrique)));
 		}else{
 		while ($fiche = spip_fetch_array($result)) {

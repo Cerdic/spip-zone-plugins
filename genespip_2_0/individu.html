@@ -28,7 +28,7 @@
         <div id="fiche">
              <div id="auteurfiche">
                   <BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}>
-                  <small>[Déposé par <i>(#NOM)</i> - ]
+                  <small>[<:genespip:depose_par:> <i>(#NOM)</i> - ]
                   </BOUCLE_auteur>
                   [<:genespip:derniere_modif_le:> (#DATE_UPDATE|affdate)<br />]</small>
              </div><!-- fin auteurfiche -->
@@ -63,18 +63,18 @@
                   <legend><:genespip:parents:></legend>
                   <BOUCLE_pere(GENESPIP_INDIVIDU){id_individu=#PERE}>
                   <u><i><:genespip:pere:></i></u> : <a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
-                  [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                  [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
                   <BOUCLE_liste_documents_pere(GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_pere>
-                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                  [(#TOTAL_BOUCLE|=={0}|oui)[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="<:genespip:documents:>">)]
                   <//B_liste_documents_pere>
                   <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
                   <br />
                   </BOUCLE_pere>
                   <BOUCLE_mere(GENESPIP_INDIVIDU){id_individu=#MERE}>
                   <u><i><:genespip:mere:></i></u> : <a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
-                  [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                  [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
                   <BOUCLE_liste_documents_mere(GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_mere>
-                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                  [(#TOTAL_BOUCLE|=={0}|oui)[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="<:genespip:documents:>">)]
                   <//B_liste_documents_mere>
                   <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
                   </BOUCLE_mere>
@@ -94,9 +94,9 @@
                            <u><i><:genespip:enfants_couple:></i></u>
                            <BOUCLE_enfant_pere(GENESPIP_INDIVIDU){pere=#ID_INDIVIDU}{mere=#ID_EPOUX}>
                            [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
-                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                           [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
                            <BOUCLE_liste_documents_enfant_pere(GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_enfant_pere>
-                           [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                           [(#TOTAL_BOUCLE|=={0}|oui)[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="<:genespip:documents:>">)]
                            <//B_liste_documents_enfant_pere>
                            <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
                            </BOUCLE_enfant_pere>
@@ -105,9 +105,9 @@
                            <u><i><:genespip:enfants_couple:></i></u>
                            <BOUCLE_enfant_mere(GENESPIP_INDIVIDU){mere=#ID_INDIVIDU}{pere=#ID_EPOUX}>
                            [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
-                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                           [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
                            <BOUCLE_liste_documents_enfant_mere(GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_enfant_mere>
-                           [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                           [(#TOTAL_BOUCLE|=={0}|oui)[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="<:genespip:documents:>">)]
                            <//B_liste_documents_enfant_mere>
                            <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
                            </BOUCLE_enfant_mere>
@@ -123,9 +123,9 @@
                            <u><i><:genespip:enfants:></i></u>
                            <BOUCLE_enfant_sans_mere(GENESPIP_INDIVIDU){pere=#ID_INDIVIDU}>
                            [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
-                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
-                  <BOUCLE_liste_documents_sans_mere(GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_sans_mere>
-                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                           [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
+                  <BOUCLE_liste_documents_sans_mere(GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}> </BOUCLE_liste_documents_sans_mere>
+                  [(#TOTAL_BOUCLE|=={0}|oui)[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="<:genespip:documents:>">)]
                   <//B_liste_documents_sans_mere>
                            <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
                            </BOUCLE_enfant_sans_mere>
@@ -134,9 +134,9 @@
                            <u><i><:genespip:enfants:></i></u>
                            <BOUCLE_enfant_sans_pere(GENESPIP_INDIVIDU){mere=#ID_INDIVIDU}>
                            [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
-                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                           [(#PORTRAIT|=={0}|oui)<img src="#CHEMIN{img_pack/portrait.png}" alt="<:genespip:portrait:>">]
                   <BOUCLE_liste_documents_sans_pere(GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_sans_pere>
-                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                  [(#TOTAL_BOUCLE|=={0}|oui)[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="<:genespip:documents:>">)]
                   <//B_liste_documents_sans_pere>
                            <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
                            </BOUCLE_enfant_sans_pere>

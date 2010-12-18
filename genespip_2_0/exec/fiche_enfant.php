@@ -12,13 +12,13 @@ function exec_fiche_enfant(){
 	global $connect_statut, $connect_toutes_rubriques;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('genealogie:fiche_enfant'), "", "");
+	echo $commencer_page(_T('genespip:fiche_enfant'), "", "");
 	$id_individu = $_GET['id_individu'].$_POST['id_individu'];
 
 	echo debut_gauche('',true);
 	include_spip('inc/boite_info');
-
 	include_spip('inc/raccourcis_fiche');
+
 	echo debut_droite('',true);
 
 	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:fiche_enfant'));

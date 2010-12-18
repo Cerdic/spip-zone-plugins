@@ -2,7 +2,7 @@
     <nom>GeneSPIP</nom>
     <auteur>Christophe RENOU</auteur>
     <version>2.0</version>
-    <version_base>0.1</version_base>
+    <version_base>0.2</version_base>
     <etat>test</etat>
     <description>genespip pour SPIP 2.0</description>
     <prefix>genespip</prefix>
@@ -29,7 +29,8 @@
 		<inclure>base/genespip.php</inclure>
 	</pipeline>
 
+	<fonctions>genespip_fonctions.php</fonctions>
+
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id="CFG" version='[1.15.2;]' />
-	<necessite id="saisies" version='[1.8.11;]' />
 </plugin>

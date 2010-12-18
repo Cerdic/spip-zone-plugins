@@ -63,7 +63,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
     foreach (array('individu', 'article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
         $id_type = id_table_objet($type);
         if ($n = intval($$id_type)) {
-            $s = sql_select('$id_type', 'spip_'".table_objet($type).", '$id_type='.$$id_type);
+            $s = sql_select($id_type, "spip_".table_objet($type), $id_type = $id_type);
             if ($s AND spip_num_rows($s)) {
                 $$id_type = $n;
                 $objet_affiche = $type;
@@ -136,7 +136,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
         OR $objet_affiche == 'breve'
         OR $objet_affiche == 'rubrique'
         OR $objet_affiche == 'syndic')
-          $preview = spip_num_rows(sql_select('id_$objet_affiche', 'spip_'".table_objet($objet_affiche).", '".id_table_objet($objet_affiche)."'='".$$id_type." AND ((statut IN (prop, prive)) '" . (!$p ? '' : "'OR (statut=publie AND date>NOW())") .")"))';
+          $preview = spip_num_rows(sql_select("id_'$objet_affiche'", "spip_".table_objet('$objet_affiche'), ".id_table_objet('$objet_affiche') = $$id_type AND ((statut IN (prop, prive)) . (!$p ? :  OR (statut=publie AND date>NOW())"));
     }
 
     //

@@ -8,6 +8,7 @@
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
 include_spip('inc/meta');
+include_spip('base/genespip_peupler_base');
 
 function genespip_declarer_tables_interfaces($interface){
 	//-- Alias
