@@ -1,0 +1,19 @@
+<plugin>
+  <nom>liScroll</nom>
+  <auteur>RealET</auteur>
+  <version>0.2.0</version>
+  <etat>dev</etat>
+  <description>Fonctionalit&#233; de News Ticker</description>
+  <lien>http://www.gcmingati.net/wordpress/wp-content/lab/jquery/newsticker/jq-liscroll/scrollanimate.html</lien> <!-- URI de documentation -->
+  <fonctions>liscroll_fonctions.php</fonctions>
+  <prefix>liscroll</prefix>
+  <pipeline>
+  	<nom>insert_head_css</nom>
+  	<inclure>liscroll_fonctions.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>liscroll_fonctions.php</inclure>
+  </pipeline>
+	<necessite id="SPIP" version="[2.1.2;]" />
+</plugin>
