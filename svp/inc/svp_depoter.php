@@ -174,9 +174,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	
 	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
 	$ids_a_supprimer = array();
-	$ids = sql_allfetsel('id_paquet, id_plugin', 'spip_paquets', array('id_depot='. sql_quote($id_depot)));
-	foreach ($ids as $_ids)
+	$versions_a_supprimer = array();
+	$ids = sql_allfetsel('id_paquet, id_plugin, version', 'spip_paquets', array('id_depot='. sql_quote($id_depot)));
+	foreach ($ids as $_ids) {
 		$ids_a_supprimer[$_ids['id_paquet']] = $_ids['id_plugin'];
+		$versions_a_supprimer[$_ids['id_paquet']] = $_ids['version'];
+	}
 
 	// On met a jour ou on cree chaque paquet a partir du contenu du fichier xml
 	// On ne fait pas cas de la compatibilite avec la version de SPIP installee
@@ -324,14 +327,16 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			// On ne change rien sur la table spip_depots_plugins, c'est inutile
 
 			// On retire le paquet mis a jour de la liste des paquets a supprimer a la fin de l'actualisation
-			if (isset($ids_a_supprimer[$paquet['id_paquet']]))
+			if (isset($ids_a_supprimer[$paquet['id_paquet']])) {
 				unset($ids_a_supprimer[$paquet['id_paquet']]);
+				unset($versions_a_supprimer[$paquet['id_paquet']]);
+			}
 		}
 	}
 	
 	// Il faut maintenant nettoyer la liste des paquets et plugins qui ont disparus du depot
 	if (count($ids_a_supprimer) > 0)
-		svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer);
+		svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions_a_supprimer);
 	
 	// Calcul des compteurs de paquets, plugins et contributions
 	$nb_paquets = sql_countsel('spip_paquets', 'id_depot=' . sql_quote($id_depot));
@@ -342,21 +347,42 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 }
 
 
-function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer) {
+function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions_a_supprimer) {
 
+						if (spip_version_compare($plugin['vmax'], $insert_paquet['version'], '<='))
 	// Si on rentre dans cette fonction c'est que le tableau des paquets a supprimer est non vide
-	// On prepare la liste des paquets a supprimer
-	// et des plugins a verifier
+	// On prepare : 
+	// - la liste des paquets a supprimer
+	// - la liste des plugins a verifier
+	// - la liste des versions pour les plugins a verifier
 	$paquets_a_supprimer = array();
 	$ids_plugin = array();
+	$vmax = array();
 	foreach ($ids_a_supprimer as $_id_paquet => $_id_plugin) {
 		$paquets_a_supprimer[] = $_id_paquet;
-		if (!in_array($_id_plugin, $ids_plugin) AND ($_id_plugin != 0)) 
+		if (!in_array($_id_plugin, $ids_plugin) AND ($_id_plugin != 0)) {
 			$ids_plugin[] = $_id_plugin;
+			if (!isset($vmax[$id_plugin]) 
+			OR (spip_version_compare($vmax[$id_plugin], $versions_a_supprimer[$_id_paquet], '<'))) 
+				$vmax[$_id_plugin] = $versions_a_supprimer[$_id_paquet];
+		}
 	}
 
 	// On supprime les paquets inutiles
 	sql_delete('spip_paquets', sql_in('id_paquet', $paquets_a_supprimer));
+
+	// On verifie pour chaque plugin concerne par la disparition de paquets si c'est la version
+	// la plus elevee qui a ete supprimee.
+	// Si oui, on positionne le vmax a 0, ce qui permettra de remettre a jour le plugin systematiquement
+	// a la prochaine actualisation. 
+	// Cette operation est necessaire car on n'impose pas que les informations du plugin soient identiques
+	// pour chaque paquet !!!
+	if ($resultats = sql_select('id_plugin, vmax', 'spip_plugins', sql_in('id_plugin', $ids_plugin))) {
+		while ($plugin = sql_fetch($resultats)) {
+			if (spip_version_compare($plugin['vmax'], $vmax[$plugin['id_plugin']], '='))
+				sql_updateq('spip_plugins',	array('vmax' => '0.0'),	'id_plugin=' . sql_quote($plugin['id_plugin']));
+		}
+	}
 
 	if ($ids_plugin) {
 		// On cherche pour chaque plugin de la liste si un paquet existe encore dans le meme depot
@@ -377,9 +403,9 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer) {
 			// Si non, on peut supprimer le plugin lui-meme de la table spip_plugins
 			$plugins_a_supprimer = $ids_plugin;
 			if ($liens = sql_allfetsel('id_plugin', 'spip_depots_plugins', sql_in('id_plugin', $ids_plugin))) {
-				$plugins_heberges = array_map('reset', $liens);
+				$plugins_a_conserver = array_map('reset', $liens);
 				// L'intersection des deux tableaux renvoie les plugins a supprimer	
-				$plugins_a_supprimer = array_diff($ids_plugin, $plugins_heberges);
+				$plugins_a_supprimer = array_diff($ids_plugin, $plugins_a_conserver);
 			}
 			
 			// On supprime les plugins identifies
