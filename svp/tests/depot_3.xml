@@ -340,4 +340,45 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 </plugin>
 
 </archive>
+
+
+<archive id="sktheme4.zip">
+<file>sktheme4.zip</file>
+<size>2508721</size>
+<date>1280235944</date>
+<source>_plugins_/sktheme4</source>
+<last_commit>2010-12-12 20:39:15</last_commit>
+<plugin>
+ <nom>SkTheme3</nom>
+ <version>1.3.2</version>
+ <etat>dev</etat>
+ <auteur>Skedus - Phil pour spip2
+<multi>
+_ &copy; January 2007 - distributed under GNU/GPL licence.
+[fr]_ &copy; January 2007 - distribu&eacute; sous license GNU/GPL.
+</multi>
+</auteur>
+<description>
+<multi>
+Small theme manager for SPIP - Last
+_ Activate this plugin and manage themes in the {{Configuration}} menu.
+_ Notes that sktheme use theme.xml files to detect 'squelette' distribution and 'habillage' distribution
+_ This version do not add switcher
+[fr]
+Gestion des th&egrave;mes de SPIP - Dernier
+_ Activez ce plugin et g&eacute;rez les th&egrave;mes dans le menu {{Configuration}}.
+_ Notez que sktheme utilise les fichiers theme.xml pour detecter les disdribution de 'squelette' et d''habillage'
+_ Cette version ne contient pas de switcher
+</multi>
+</description>
+	<lien>[->http://www.spip-contrib.net/Plugin-Sktheme]</lien> <!-- URI de documentation -->
+ <prefix>sktheme</prefix>
+ <options>sktheme_options.php</options>
+ <pipeline>
+    <nom>ajouter_boutons</nom>
+    <inclure>sktheme_fonctions.php</inclure>
+ </pipeline>
+ <categorie>maintenance</categorie>
+ </plugin>
+</archive>
 </archives>
