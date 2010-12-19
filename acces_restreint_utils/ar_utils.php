@@ -28,4 +28,23 @@ function ar_utils_affiche_gauche($flux) {
 	return $flux;
 }
 
+function action_proteger_rubrique_dist() {
+
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+	$id_rubrique = intval($arg);
+	$les_auteurs = array(1,2,45);
+
+	// Protection rubrique
+	if (!$id_zone=proteger_rubrique($id_rubrique,$les_auteurs)) {
+		return false;
+	}
+
+	// Retour
+	include_spip('inc/headers');
+	redirige_par_entete(urldecode(_request('redirect')));
+
+}
+
+
 ?>

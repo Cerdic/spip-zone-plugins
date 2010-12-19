@@ -2,7 +2,7 @@
 	<nom>Acc&egrave;s Restreint  - Utilitaires</nom>
 	<etat>dev</etat>
 	<icon>img/zones-acces-48.png</icon>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<auteur>Cyril MARION</auteur>
 	<description>Propose une petite boite de contr&ocirc;le de l'acc&egrave;s sur la page rubrique.</description>
 	<prefix>ar_utils</prefix>
