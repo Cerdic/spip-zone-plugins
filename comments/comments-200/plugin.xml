@@ -2,8 +2,8 @@
 <nom>Comments</nom>
 <icon>icon.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
-<version>2.1.4</version>
-<etat>stable</etat>
+<version>2.1.5</version>
+<etat>dev</etat>
 <description>Aussit&ocirc;t activ&eacute; ce plugin affiche les messages en liste de commentaires de type blog, avec formulaire simplifi&eacute;.</description>
 <lien>[Comments&nbsp;2.0 pour SPIP&nbsp;2.0->http://www.spip-contrib.net/?article3448]</lien>
 <prefix>comments</prefix>
@@ -16,6 +16,10 @@
 </pipeline>
 <pipeline>
 	<nom>autoriser</nom>
+	<inclure>comments_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head_css</nom>
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>
 <pipeline>

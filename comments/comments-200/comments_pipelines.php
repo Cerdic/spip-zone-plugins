@@ -9,6 +9,14 @@
 /* pour que le pipeline ne rale pas ! */
 function comments_autoriser(){}
 
+/* Inserer des styles */
+function comments_insert_head_css($flux){
+	if ($f = find_in_path("css/comments.css"))
+		$flux .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="all" />';
+	return $flux;
+}
+
+
 /**
  * Generer les boutons d'admin des forum selon les droits du visiteur
  * en SPIP 2.1 uniquement
