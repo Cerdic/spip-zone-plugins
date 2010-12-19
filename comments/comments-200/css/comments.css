@@ -11,10 +11,13 @@
 .comment .comment-meta .permalink { float: right; font-size: 2em; text-decoration: none; }
 .comment .comment-meta abbr { border: 0; text-transform: none; font-variant: normal; }
 
+.comment .spip-admin { display: none; }
+.comment:hover .spip-admin { display: block; }
+
 /* Liste des commentaires */
 .comments-list {}
 .comments-list .comments-ul { border-top: 1px dashed; }
-.comments-list .comment-li { padding-top: 1.5em; border-bottom: 1px dashed; }
+.comments-list .comment-li { border-bottom: 1px dashed; }
 
 /* Formulaire de commentaire */
 #formulaire_forum {}
