@@ -7,8 +7,8 @@
 
 /* Commentaire */
 .comment { overflow: hidden; }
-.comment .comment-meta img.avatar { float: left; margin: 0 1.5em 1.5em 0; }
-.comment .comment-meta .permalink { float: right; margin: 0 0 1.5em 1.5em; font-size: 2em; text-decoration: none; }
+.comment .comment-meta img.avatar {}
+.comment .comment-meta .permalink { float: right; font-size: 2em; text-decoration: none; }
 .comment .comment-meta abbr { border: 0; text-transform: none; font-variant: normal; }
 
 /* Liste des commentaires */
