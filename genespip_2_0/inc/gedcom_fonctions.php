@@ -54,7 +54,6 @@ function genespip_gedcom($fic) {
 			$info=genespip_Traitementaccent($info);
 			$info=addslashes(utf8_encode(trim($info)));
 			$insert_tempo1 = sql_insert("spip_genespip_tempo", "(num_tableau ,num_info, type, info)", "('".$rang."', ".trim($split[0]).", '".trim($split[1])."', '".$info."')");
-			$insert_tempo1 = spip_query($insert_tempo1);
 			}
 		$result_tempo1 = sql_select('*', 'spip_genespip_tempo', 'type=PLAC', 'id_tempo limit 0,10');
 		echo _T('genespip:info_gedcom_etape2')."<br /><br />";
@@ -118,7 +117,6 @@ function genespip_gedcom($fic) {
 				 $j++;
 				 }
 				 $req_lieu=sql_insert('spip_genespip_lieux', '(ville, code_departement, departement, region, pays)', '('".$ville."','".$code_departement."','".$departement."','".$region."','".$pays."')');
-				 $req_lieu=spip_query($req_lieu);
 				 $id_req_lieu=mysql_insert_id();
 				 $action_sql = sql_update('spip_genespip_tempo', 'info = '".$id_req_lieu."'', 'type=PLAC and info = '".$tempo1['info']");
 				 }
@@ -428,7 +426,7 @@ function genespip_gedcom($fic) {
 		echo "--> <font color='green'>OK</font>";
 		//Suppression table tempo
 		echo "<br />"._T('genespip:suppression_table_temporaire')."";
-		$supptempo = spip_query("DROP TABLE spip_genespip_tempo");
+		$supptempo = sql_drop_table("spip_genespip_tempo");
 		echo "--> <font color='red'>OK</font>";
 		//MAJ liste patronyme
 		genespip_maj_liste();

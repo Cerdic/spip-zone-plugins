@@ -12,7 +12,6 @@ function quand($resultat) {
     }else{
     $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement'");
     }
-    $result = spip_query($req);
      while ($row = spip_fetch_array($result)){
 //test si l'année de l'évènement est inférieure à 100 ans
       $splitcentans = split('-',$row['date_evenement']);
@@ -52,7 +51,6 @@ function m_j($resultat) {
     }else{
     $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement'");
     }
-    $result = spip_query($req);
      while ($row = spip_fetch_array($result)){
      $split = split('-',$row['date_evenement']);
      $resultat = $split[1]."-".$split[2];

@@ -42,7 +42,6 @@
 	//*******************THEME du SITE*******************************
 	function genespip_modif_theme($theme, $pub, $multilingue, $acces, $centans) {
 		$update_theme = sql_update("spip_genespip_parametres", array("theme = '".$theme."', pub = ".$pub.", multilingue = ".$multilingue.", acces = ".$acces.", centans = ".$centans));
-		$update_theme = spip_query($update_theme);
 	}
 	//***************************************************************
 
@@ -71,18 +70,15 @@
 			}else{$date_couverte=$date_min."-?";}
 
 			$result_liste = sql_select("*", "spip_genespip_liste", "nom = ".$indi['nom']);
-			$result_liste = spip_query($result_liste);
 			//echo mysql_num_rows($result_liste);
 			if (mysql_num_rows($result_liste)==0){
 				$insert_liste = sql_insert("spip_genespip_liste", "(nom, nombre, date_couverte, date_update)", "('".$indi['nom'].", ".$indi['comptenom'].", ".$date_couverte.", ".$date_update."')");
 				/*echo $insert_liste."<br />";*/
-				$insert_liste = spip_query($insert_liste) or die (_T('genespip:requete')." insert_liste "._T('genespip:invalide')."<br />");
 			}else{
 				while ($liste = spip_fetch_array($result_liste)) {
 					if ($liste['nombre']!=$indi['comptenom']){
 						$update_liste = sql_update("spip_genespip_liste", array("nombre = ".$indi['comptenom'].", date_couverte= '".$date_couverte."', date_update= '".$date_update."'", "nom = '".$indi['nom']));
 						/*echo $update_liste."<br />";*/
-						$update_liste = spip_query($update_liste) or die (_T('genespip:requete')." update_liste "._T('genespip:invalide')."<br />");
 					}
 				}
 			}
@@ -133,69 +129,55 @@
 		$naissance=genespip_dateus($_POST['naissance']);
 		$deces=genespip_dateus($_POST['deces']);
 		$action_sql = sql_update("spip_genespip_individu", array("nom = '".addslashes($_POST['nom'])."', prenom = '".addslashes($_POST['prenom'])."', sexe ='".$_POST['sexe']."', metier = '".addslashes($_POST['metier'])."', enfant = '".$_POST['enfant']."', note = '".addslashes($_POST['note'])."', portrait='".$_POST['portrait']."', source= '".addslashes($_POST['source'])."', adresse= '".addslashes($_POST['adresse'])."', date_update= '".$date_update."', limitation= '".$_POST['limitation']."'", "id_individu = ".$id_individu));
-		$sqlmodif =spip_query($action_sql) or die (_T('genespip:requete')." update_fiche "._T('genespip:invalide')."");
 		// ### Journal ###
 		$insert_journal=sql_insert("spip_genespip_journal", "(action, descriptif, id_individu, id_auteur, date_update)", "('modification fiche', '2', '".$id_individu."', '".$GLOBALS['connect_id_auteur']."', '".$date_update."')");
-		$sqlJOURNAL =spip_query($insert_journal) or die (_T('genespip:requete')." JOURNAL "._T('genespip:invalide')."");
 	}
 	  //Modif Evenement  - create (22-03-2008)
 	function genespip_up_evt($id_individu,$id_type_evenement) {
 		$date_update=date("Y-m-d H:i:s");
 		$date_evenement=genespip_dateus($_POST['date_evenement']);
 		$action_sql = sql_update("spip_genespip_evenements", array("date_evenement ='".$date_evenement."', precision_date = '".$_POST['precision_date']."', id_lieu = '".$_POST['id_lieu']."', id_epoux = '".$_POST['id_epoux']."', date_update= '".$date_update."'", "id_type_evenement = ".$id_type_evenement." and id_epoux = '".$_POST['id_epoux']."' and id_individu = ".$id_individu));
-		$sqlup =spip_query($action_sql) or die (_T('genespip:requete')." update_evenement "._T('genespip:invalide')."");
 		if ($_POST['id_epoux']<>NULL){
 			$action_sql = sql_update("spip_genespip_evenements", array("date_evenement ='".$date_evenement."', precision_date = '".$_POST['precision_date']."', id_lieu = '".$_POST['id_lieu']."', id_epoux = '".$id_individu."', date_update= '".$date_update."'", "id_type_evenement = ".$id_type_evenement." and id_epoux = ".$id_individu." and id_individu = ".$_POST['id_epoux']));
-			$sqlup =spip_query($action_sql) or die (_T('genespip:requete')." update_evenement_epoux "._T('genespip:invalide')."");
 		}
 		// ### Journal ###
 		$insert_journal = sql_insert("spip_genespip_journal", "(action, descriptif, id_individu, id_auteur, date_update)", "('modification evenement', '3', '".$id_individu."', ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
-		$sqlJOURNAL = spip_query($insert_journal) or die (_T('genespip:requete')." JOURNAL "._T('genespip:invalide')."");
 	}
 	  //Supp Evenement  - create (22-03-2008)
 	function genespip_del_evt($id_evenement) {
 		$date_update = date("Y-m-d H:i:s");
 		$action_sql = sql_delete("spip_genespip_evenements", "id_evenement = ".$id_evenement);
-		$sqldel = spip_query($action_sql) or die (_T('genespip:requete')." delete_evenement "._T('genespip:invalide')."");
 		// ### Journal ###
 		$insert_journal = sql_insert("spip_genespip_journal", "(action, descriptif, id_individu, id_auteur, date_update)", "('suppression evenement', '4', '".$id_individu."', ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
-		$sqlJOURNAL = spip_query($insert_journal) or die (_T('genespip:requete')." JOURNAL "._T('genespip:invalide'));
 	}
 	  //Ajout Evenement  - create (22-03-2008)
 	function genespip_add_evt($id_individu) {
 		$date_update = date("Y-m-d H:i:s");
 		$date_evenement = genespip_dateus($_POST['date_evenement']);
 		$action_sql = sql_insert("spip_genespip_evenements", "(id_individu, id_type_evenement, date_evenement ,precision_date, id_lieu, id_epoux, date_update)", "(".$id_individu.", ".$_POST['id_type_evenement'].", '".$date_evenement."', '".$_POST['precision_date']."', '".$_POST['id_lieu']."','".$_POST['id_epoux']."', '".$date_update."')");
-		$sqladd = spip_query($action_sql) or die (_T('genespip:requete')." ajout_evenement "._T('genespip:invalide')."");
 		if ($_POST['id_epoux']<>NULL){
 			$action_sql = sql_insert("spip_genespip_evenements", "(id_individu, id_type_evenement, date_evenement ,precision_date, id_lieu, id_epoux, date_update)", "(".$_POST['id_epoux'].", ".$_POST['id_type_evenement'].", '".$date_evenement."', '".$_POST['precision_date']."', '".$_POST['id_lieu']."','".$id_individu."', '".$date_update."')");
-			$sqladd = spip_query($action_sql) or die (_T('genespip:requete')." ajout_evenement_epoux "._T('genespip:invalide')."");
 		}
 		// ### Journal ###
 		$insert_journal = sql_insert("spip_genespip_journal", "(action, descriptif, id_individu, id_auteur, date_update)", "('creation evenement', '5', '".$id_individu."', ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
-		$sqlJOURNAL = spip_query($insert_journal) or die (_T('genespip:requete')." JOURNAL "._T('genespip:invalide')."");
 	}
 
 	//Modification d'une fiche - Ajout indicateur portrait
 	function genespip_modif_fiche_portrait($portrait,$id_individu,$format_portrait) {
 		$date_update = date("Y-m-d H:i:s");
 		$action_sql = sql_update("spip_genespip_individu", array("portrait = ".$portrait.", format_portrait = '".$format_portrait."', date_update= '".$date_update."'", "id_individu = ".$id_individu));
-		$sqlmodif = spip_query($action_sql) or die (_T('genespip:requete')." update_portrait "._T('genespip:invalide')."");
 		// ### Journal ###
 		if ($portrait==1){
 			$insert_journal = sql_insert("spip_genespip_journal", "(action, descriptif, id_individu, id_auteur, date_update)", "('ajout portrait', '6', '".$id_individu."', ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
-			$sqlJOURNAL = spip_query($insert_journal) or die (_T('genespip:requete')." JOURNAL "._T('genespip:invalide')."");
 		}
 	}
 	//Modification d'une fiche - Ajout indicateur signature
 	function genespip_modif_fiche_signature($signature,$id_individu,$format_signature) {
 		$date_update = date("Y-m-d H:i:s");
 		$action_sql = sql_update("spip_genespip_individu", array("signature = ".$signature.", format_signature = '".$format_signature."', date_update= '".$date_update."'", "id_individu = ".$id_individu));
-		$sqlmodif = spip_query($action_sql) or die (_T('genespip:requete')." update_signature "._T('genespip:invalide')."");
 		// ### Journal ###
 		if ($signature==1){
 			$insert_journal = sql_insert("spip_genespip_journal", "(action, descriptif, id_individu, id_auteur, date_update)", "('ajout signature', '7', '".$id_individu."', ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
-			$sqlJOURNAL = spip_query($insert_journal) or die (_T('genespip:requete')." JOURNAL "._T('genespip:invalide')."");
 		}
 	}
 
@@ -203,25 +185,21 @@
 	function genespip_modif_parent($id_individu) {
 		$date_update=date("Y-m-d H:i:s");
 		$action_sql=sql_update("spip_genespip_individu", array("pere = '".$_POST['pere']."', mere = '".$_POST['mere']."', date_update= '".$date_update."'", "id_individu = ".$id_individu));
-		$sqlmodif =spip_query($action_sql) or die (_T('genespip:requete')." update_parent "._T('genespip:invalide')."");
 	}
 	//***************Lieu***********************
 	//Modif Lieu  - create (25-03-2008)
 	function genespip_up_lieu($id_lieu) {
 		$action_sql = sql_update("spip_genespip_lieux", array("ville ='".addslashes($_POST['ville'])."', departement = '".addslashes($_POST['departement'])."', code_departement = '".$_POST['code_departement']."', region = '".addslashes($_POST['region'])."', pays= '".addslashes($_POST['pays'])."'", "id_lieu = ".$id_lieu));
-		$sqlup =spip_query($action_sql) or die (_T('genespip:requete')." update_lieu "._T('genespip:invalide')."");
 	}
 	
 	//Delete Lieu  - create (25-03-2008)
 	function genespip_del_lieu($id_lieu) {
 		$action_sql = sql_delete("spip_genespip_lieux", "id_lieu = ".$id_lieu);
-		$sqldel =spip_query($action_sql) or die (_T('genespip:requete')." delete_lieu "._T('genespip:invalide')."");
 	}
 	
 	//Add Lieu  - create (25-03-2008)
 	function genespip_add_lieu() {
 		$action_sql=sql_insert("spip_genespip_lieux (ville, departement, code_departement , region, pays)", "('".addslashes($_POST['ville'])."', '".addslashes($_POST['departement'])."', '".$_POST['code_departement']."', '".addslashes($_POST['region'])."', '".addslashes($_POST['pays'])."')");
-		$sqladd =spip_query($action_sql) or die (_T('genespip:requete')." ajout_lieu "._T('genespip:invalide')."");
 	}
 
 	//***************Corbeille***********************
@@ -229,12 +207,10 @@
 	function genespip_poubelle_fiche($id_individu) {
 		$date_update = date("Y-m-d H:i:s");
 		$action_sql = sql_update("spip_genespip_individu", array("poubelle = '".$_POST['poubelle']."'", "id_individu = ".$id_individu));
-		$sqlmodif = spip_query($action_sql) or die (_T('genespip:requete')." update_poubelle "._T('genespip:invalide')."");
-		echo "<font color='red'>".$date_update." : La fiche N&ordm;".$id_individu." a &eacute;t&eacute; mise &agrave; la poubelle.</font>";
+		echo "<font color='red'>".$date_update." : "._T('genespip:fiche_no')." ".$id_individu." "._T('genespip:a_ete_mise_a_la_poubelle').".</font>";
 		genespip_maj_liste();
 		// ### Journal ###
 		$insert_journal=sql_insert("spip_genespip_journal (action, descriptif, id_individu, id_auteur, date_update)", "('suppression fiche', '8', '".$id_individu."', ".$GLOBALS['connect_id_auteur'].", '".$date_update."')");
-		$sqlJOURNAL =spip_query($insert_journal) or die (_T('genespip:requete')." JOURNAL "._T('genespip:invalide')."");
 	}
 	
 	function genespip_supp_fiche($action) {
@@ -258,7 +234,6 @@
 			   {
 			$date_update = date("Y-m-d H:i:s");
 			$action_sql = sql_update("spip_genespip_individu", array("poubelle = 0", "id_individu = ".$valeur[$i]));
-			$sqlmodif = spip_query($action_sql) or die (_T('genespip:requete')." update "._T('genespip:invalide')."");
 					echo "<font color='red'>"._T('genespip:fiche_no')." ".$valeur[$i]." "._T('genespip:restaure')."</font><br />";
 			   }
 			genespip_maj_liste();
@@ -288,7 +263,6 @@
 	function genespip_ajout_document($id_individu, $id_article) {
 		$date_update = date("Y-m-d H:i:s");
 		$requete_insert = sql_insert("spip_genespip_documents", "(id_individu, id_article)", "($id_individu, $id_article)");
-		$insert_document = spip_query($requete_insert);
 		echo "<br /><font color='red'>".$date_update." : "._T('genespip:nouvelle_liaison_document_realise')."</font>";
 		$result = sql_select("*", "spip_articles", "id_article=".$id_article);
 		while ($fiche = spip_fetch_array($result)) {
@@ -307,7 +281,7 @@
 
 	//Suppression lien document
 	function genespip_supp_document($id_individu, $id_article) {
-		$sqldel=spip_query("DELETE", "spip_genespip_documents", "id_individu = ".$id_individu." and id_article = ".$id_article) or die (_T('genespip:requete')." delete_documents "._T('genespip:invalide')."");
+		$sqldel = sql_delete("spip_genespip_documents", "id_individu = ".$id_individu." and id_article = ".$id_article) or die (_T('genespip:requete')." delete_documents "._T('genespip:invalide')."");
 	}
 	
 	//Selection article

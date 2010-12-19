@@ -101,7 +101,6 @@ function exec_fiche_lieux(){
 	   if ($key==$lieux['pays'] or $val==$lieux['pays']){
 	if ($val==$lieux['pays']){
 	$action_sql = sql_update('spip_genespip_lieux', array('pays' => sql_quote($key), 'id_lieu' => sql_quote($id_lieu)));
-	$sqlup =spip_query($action_sql) or die (_T('genespip:requete')." update_lieu "._T('genespip:requete'));
 	}
 	   echo "<option value='$key'>$val</option>\n";
 	   }}

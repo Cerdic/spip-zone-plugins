@@ -60,7 +60,6 @@ $sql = 'CREATE TABLE `spip_genespip_famtempo` ('
         . ' `date_evt` TEXT NOT NULL, '
         . ' `place_evt` TEXT NOT NULL '
         . ' )';
-$sql = spip_query($sql) or die (_T('genespip:requete')." creation table "._T('genespip:invalide')."<br />");
 }
 function genespip_famille_remplir() {
 //entrees HUSB et WIFE
