@@ -44,6 +44,7 @@ function svp_ajouter_depot($url, &$erreur=''){
 	$champs = array('titre' => filtrer_entites($infos['depot']['titre']), 
 					'descriptif' => filtrer_entites($infos['depot']['descriptif']),
 					'type' => $infos['depot']['type'],
+					'url_source' => $infos['depot']['source'],
 					'url_paquets'=> $url,
 					'sha_paquets'=> sha1_file($url));
 	$id_depot = sql_insertq('spip_depots', $champs);
@@ -221,8 +222,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	$nb_plugins = 0;
 	$nb_autres = 0;
 	
+	// Si aucun depot ou aucun paquet on renvoie une erreur
 	if ((!$id_depot) OR (!is_array($paquets)))
 		return false;
+		
+	// On initialise l'url de base des sources du depot et son type afin de calculer l'url complete de chaque logo
+	$depot = sql_fetsel('url_source, type', 'spip_depots', 'id_depot=' . sql_quote($id_depot));
 	
 	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
 	$ids_a_supprimer = array();
@@ -253,6 +258,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			// On complete les informations du paquet et du plugin
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
 			$insert_plugin = $champs['plugin'];
+			// On construit l'url complete du logo
+			if ($insert_paquet['logo'])
+				$insert_paquet['logo'] = $depot['url_source'] . '/'
+									   . (($depot['type'] == 'svn') ? 'export/HEAD' : '') . '/'
+									   . $insert_paquet['src_archive'] . '/'
+									   . $insert_paquet['logo'];
 
 			// On loge l'absence de categorie ou une categorie erronee et on positionne la categorie
 			// par defaut "aucune"
@@ -633,7 +644,7 @@ function svp_xml_parse_depot($url){
 	// On extrait les informations du depot si elles existent (balise <depot>)
 	$infos = array('depot' => array(), 'paquets' => array());
 	if (is_array($depot = $arbre['depot'][0]))
-		$infos['depot'] = svp_xml_aplatit_multiple(array('titre','descriptif','type'), $depot);
+		$infos['depot'] = svp_xml_aplatit_multiple(array('titre', 'descriptif', 'type', 'source'), $depot);
 	if (!$infos['depot']['titre'])
 		$infos['depot']['titre'] = _T('svp:titre_nouveau_depot');
 	if (!$infos['depot']['type'])

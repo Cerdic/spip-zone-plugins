@@ -8,6 +8,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"titre"			=> "text DEFAULT '' NOT NULL",
 		"descriptif"	=> "text DEFAULT '' NOT NULL",
 		"type" 			=> "varchar(10) DEFAULT '' NOT NULL",
+		"url_source"	=> "varchar(255) DEFAULT '' NOT NULL",
 		"url_paquets"	=> "varchar(255) DEFAULT '' NOT NULL",
 		"sha_paquets"	=> "varchar(40) DEFAULT '' NOT NULL",
 		"nbr_paquets" 	=> "integer DEFAULT 0 NOT NULL",
