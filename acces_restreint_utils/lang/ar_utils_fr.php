@@ -8,9 +8,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_zone' => 'zone @id_zone@.',
 	'info_rubrique_non_protegee' => 'L\'acc&egrave;s &agrave; la rubrique @id_rubrique@ n\'est pas pas prot&eacute;g&eacute;.',
 	'info_lien_action_proteger' => ' pour prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.',
-	
+
+	// L
+	'lien_cliquez' => 'Cliquez',
+	'lien_ici' => 'ici',
+
 	// T
 	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;',
 	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;',
+	
 );
 ?>
