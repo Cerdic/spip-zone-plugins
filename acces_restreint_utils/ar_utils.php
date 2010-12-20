@@ -3,10 +3,7 @@
  * Plugin acces_restreint_utils pour Spip 2.0
  * Des utilitaires pour faciliter l'utilisation du plugin Acces Restreint
  * Auteur : Cyril Marion
- * à intégrer au plugin de base dès que possible
- * - sur une rubrique : bouton pour créer une zone; ajoute par défaut les webmestres
- * TODO :
- * - sur une zone : bouton pour accéder à la rubrique protégée
+ * TODO : à intégrer au plugin de base dès que possible !
  */
 
 

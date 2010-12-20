@@ -1,7 +1,9 @@
 <?php
 /**
  * Plugin acces_restreint_utils pour Spip 2.0
- * Licence GPL (c) 2009 - 2010 Ateliers CYM
+ * Des utilitaires pour faciliter l'utilisation du plugin Acces Restreint
+ * Auteur : Cyril Marion
+ * TODO : à intégrer au plugin de base dès que possible !
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

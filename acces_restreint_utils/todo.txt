@@ -1,0 +1,13 @@
+TODO
+----
+
+Page vue rubrique :
+- indiquer si une rubrique est dans plusieurs zones
+- indiquer la ou les zones des rubriques parents
+
+Fonction protéger rubrique :
+- trouver les webmestre est les inclure dans la zone à la création
+
+Page vue zone :
+- ajout des fonctions de recherche d'auteurs sur la page d'une zone (idem ajout d'un contact dans C&O)
+- bouton pour accéder à la rubrique protégée
