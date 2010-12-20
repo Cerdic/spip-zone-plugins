@@ -1,14 +1,21 @@
 <plugin>
-	<nom>Porte Plume Partout</nom>
-	<auteur>Pascal M&eacute;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
+	<nom>
+		<multi>
+			[fr]Porte Plume Partout
+			[en]Quill everywhere
+		</multi>
+	</nom>
+	<auteur>Pascal M&#233;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<icon>images/configure_toolbars-48.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-Porte-plume-partout</lien>
 
 	<description>
-		Porte Plume Partout sert &agrave; ajouter la barre
-		d'outil aux champs DESCRIPTIF, CHAPO et PS
+		<multi>
+			[fr]Porte Plume Partout sert &#224; ajouter la barre d'&#233;dition aux champs DESCRIPTIF, CHAPO et PS
+			[en]Quill everywhere enables the editing toolbar on other text fields (standfirst, description,ps)
+		</multi>
 	</description>
 	<etat>test</etat>
 	<prefix>ppp</prefix> <!--important, sert de lien au fichier de pipeline et aussi dans la définition de la fonction incluse-->
