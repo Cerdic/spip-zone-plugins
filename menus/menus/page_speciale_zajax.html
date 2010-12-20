@@ -4,7 +4,7 @@
 
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
-	<div class="infos"><:menus:info_page_speciale{page=#ENV{nom}}:></div>
+	<div class="infos"><:menus:info_page_speciale_zajax{page=#ENV{nom},bloc=#ENV{bloc}}:></div>
 ]
 [(#ENV{appel_menu}|oui)
 	<li class="menu-entree[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={#ENV{nom}}}) on]">

@@ -84,6 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_numero_menu' => 'MENU NUM&Eacute;RO :',
+	'info_page_speciale_zajax'=>'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187',
 	'info_page_speciale' => 'Lien vers la page &#171; @page@ &#187;',
 	'info_tous_groupes_mots' => 'Tous les groupes de mots',
 	'info_tri' => 'Tri :',
