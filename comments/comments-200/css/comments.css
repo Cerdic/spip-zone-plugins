@@ -26,7 +26,7 @@
 #formulaire_forum li { clear: both; display: block; margin-bottom: 1.5em; }
 #formulaire_forum li label { float: left; display: block; width: 180px; }
 #formulaire_forum li input.text { width: 180px; }
-
+#formulaire_forum .markItUpContainer li{clear:none}
 #formulaire_forum li.saisie_texte label { display: none; }
 #formulaire_forum textarea { height: 12em; margin-bottom: 1.5em; }
 
