@@ -1,10 +1,17 @@
 <?php
+/**
+ * Plugin acces_restreint_utils pour Spip 2.0
+ * Des utilitaires pour faciliter l'utilisation du plugin Acces Restreint
+ * Auteur : Cyril Marion
+ * à intégrer au plugin de base dès que possible
+ * - sur une rubrique : bouton pour créer une zone; ajoute par défaut les webmestres
+ * TODO :
+ * - sur une zone : bouton pour accéder à la rubrique protégée
+ */
 
 
 function ar_utils_affiche_gauche($flux) {
 
-	// echo'<script type="text/javascript">alert("OK affiche gauche")</script>';
-	
 	$exec =  $flux['args']['exec'];
 	
 	// si on est sur la page ?exec=naviguer
@@ -19,7 +26,7 @@ function ar_utils_affiche_gauche($flux) {
 			foreach($_GET as $key=>$val)
 				$contexte[$key] = $val;
 				
-			// on charge le bout de squelette 
+			// on charge la petite boite
 			$acces = recuperer_fond('prive/contenu/acces_rubrique',$contexte);
 			$flux['data'] .= $acces;
 		}
@@ -28,23 +35,41 @@ function ar_utils_affiche_gauche($flux) {
 	return $flux;
 }
 
-function action_proteger_rubrique_dist() {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-	$id_rubrique = intval($arg);
-	$les_auteurs = array(1,2,45);
+function proteger_rubrique($id_rubrique,$les_auteurs='',$la_zone=''){
+	/**
+	 * Protège une rubrique :
+	 * - crée une zone du même nom
+	 * - autorise des auteurs s'il y en a
+	 * // - sinon autorise les webmestres
+	 * - retourne le numero de la nouvelle zone
+	 */
+	 
+	// Récupére le titre de la rubrique		
+	$le_titre = sql_getfetsel("titre", "spip_rubriques","id_rubrique=" .$id_rubrique);	
 
-	// Protection rubrique
-	if (!$id_zone=proteger_rubrique($id_rubrique,$les_auteurs)) {
-		return false;
+	// Création d'une zone portant le même nom et récupération de son id
+	$la_zone = sql_insertq("spip_zones", array(titre=>$le_titre,publique=>'oui',privee=>'oui'));
+	
+	// Création d'un couple zone/rubrique
+	sql_insertq("spip_zones_rubriques", array(id_zone=>$la_zone,id_rubrique=>$id_rubrique));
+
+	// Autorisation de certains auteurs, direct...
+	if ($les_auteurs) {
+		foreach ($les_auteurs as $un_auteur) {
+			sql_insertq("spip_zones_auteurs", array(id_zone=>$la_zone,id_auteur=>$un_auteur));
+		}
+	} 
+	// Si aucun auteur passé, autorise les webmestres
+	else {
+		sql_insertq("spip_zones_auteurs", array(id_zone=>$la_zone,id_auteur=>1));
+		/*
+		echo'<script type="text/javascript">alert("OK pour inserer 1 auteur dans fonction proteger_rubrique dans spipmine_fonctions")</script>';
+		*/
 	}
-
-	// Retour
-	include_spip('inc/headers');
-	redirige_par_entete(urldecode(_request('redirect')));
-
+	
+	// Renvoie le numéro de la nouvelle zone
+	return $la_zone;
 }
-
 
 ?>
