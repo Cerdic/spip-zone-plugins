@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Affiche automatiquement un menu listant les articles li&eacute;s au mot cl&eacute;.',
 	'description_menu_objet' => 'Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l\'entr&eacute;e aura le titre de l\'objet.',
 	'description_menu_page_speciale' => 'Ajoute un lien vers un squelette page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ces pages sont souvent fournies par des plugins.',
+	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.',
 	'description_menu_rubriques' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 	'description_menu_secteurlangue' => 'Cette entr&eacute;e est sp&eacute;cifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant &agrave; la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => 'Cr&eacute;er un nouveau menu',
 	'editer_menus_titre' => 'Menus du site',
 	'entree_aucun' => 'Aucun',
+	'entree_bloc'  => 'Bloc Zpip',
 	'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
 	'entree_css' => 'Classes CSS de l\'entr&eacute;e (du conteneur)',
 	'entree_css_lien' => 'Classes CSS du lien',
@@ -99,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Articles d\'un Mot-cl&eacute;',
 	'nom_menu_objet' => 'Article, rubrique ou autre objet SPIP',
 	'nom_menu_page_speciale' => 'Lien vers un squelette page',
+	'nom_menu_page_speciale_zajax'=>'Un bloc d\'une page Zpip',
 	'nom_menu_rubriques' => 'Liste ou arborescence de rubriques',
 	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques',
 	'nom_menu_secteurlangue' => 'Secteurs de langue'
