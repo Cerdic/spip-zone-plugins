@@ -9,4 +9,5 @@
 	<parametre nom="parametres" label="menus:entree_parametres" />
 	<parametre nom="css" label="menus:entree_css" />
 	<necessite type="plugin" nom="mediabox" />
+	<necessite type="plugin" nom="zpip" />
 </entree>
