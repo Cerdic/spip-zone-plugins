@@ -1,9 +1,7 @@
 [(#CONFIG{langues_multilingue}|?{#SET{langues_dispos,#CONFIG{langues_multilingue}},#SET{langues_dispos,#CONFIG{langues_utilisees}}})]
 #SET{langues_dispos,#GET{langues_dispos}|explode{','}}
-
-
-
-<BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>
+#ENV{id_objet}
+<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_objet}}{tout}>
 	#SET{lang,#LANG}
 	#SET{langues_traduites,#ARRAY}
 	#SET{id_trad,#ID_RUBRIQUE}	
@@ -29,23 +27,17 @@
 	
 </BOUCLE_rub>
 
-
-
-
-
-
-
 		[(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
-			[(#ENV{voir}|non)<a class="bouton_options ajax" href="[(#SELF|parametre_url{voir,options})]" title="<:taa:options:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
-			[(#ENV{voir}|oui)<a class="bouton_options ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
+			[(#ENV{voir}|non)<a class="bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:taa:options:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
+			[(#ENV{voir}|oui)<a class="bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
 			]
 
 
 
-[(#ENV{voir}|oui)#OPTIONS 
+[(#ENV{voir}|oui) 
 
 [<div class="changer"><h2><:taa:changer_langue:></h2>
 
-(#CHANGER_TRADUCTION)</div>]
+(#FORMULAIRE_AJOUTER_TRADUCTION{#ID_OBJET})</div>]
 
 ]

@@ -51,11 +51,18 @@ return $flux;
 /*Modifie l'affichage de la rubrique dans l'espace interne*/
  function trad_rub_afficher_contenu_objet($args){
     if ($args["args"]["type"] == "rubrique") {
-    	$contenu .= recuperer_fond("prive/barre_traductions",
-            array('id_rubrique' => $args["args"]["id_objet"]));
-    	$contenu .= recuperer_fond('prive/contenu/rubrique',$args['args']['contexte']);
+
+   		 $contexte=array(
+			'id_objet'=>$args['args']['id_objet'],
+			'voir'=>_request('voir'),
+			'id_trad'=>_request('voir'),			    
+			);	
+		$contenu .= recuperer_fond("prive/barre_traductions",
+		$contexte,array('ajax'=>true));
+    	$contenu .= recuperer_fond('prive/contenu/rubrique',$args['contexte']);
         $args["data"] = $contenu;
     }
-    return $args;}
+    return $args;
+}
 
 ?>
