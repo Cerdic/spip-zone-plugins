@@ -8,9 +8,9 @@ function quand($resultat) {
     $id_epoux = $split[2];
   if($id_individu){
     if($id_epoux){
-    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement' and id_epoux='$id_epoux'");
+    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='".sql_quote($id_individu)."' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='".sql_quote($id_individu)."' and id_epoux='".sql_quote($id_epoux));
     }else{
-    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement'");
+    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='".sql_quote($id_individu)."' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='".sql_quote($type_evenement));
     }
      while ($row = spip_fetch_array($result)){
 //test si l'année de l'évènement est inférieure à 100 ans
@@ -47,9 +47,9 @@ function m_j($resultat) {
     $id_epoux = $split[2];
   if($id_individu){
     if($id_epoux){
-    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement' and id_epoux='$id_epoux'");
+    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='".sql_quote($id_individu)."' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='".sql_quote($type_evenement)."' and id_epoux='".sql_quote($id_epoux));
     }else{
-    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='$type_evenement'");
+    $req = sql_select("date_evenement, precision_date", "spip_genespip_evenements, spip_genespip_type_evenements", "spip_genespip_evenements.id_individu='".sql_quote($id_individu)."' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and type_evenement='".sql_quote($type_evenement));
     }
      while ($row = spip_fetch_array($result)){
      $split = split('-',$row['date_evenement']);
@@ -64,7 +64,7 @@ function lieu($resultat) {
     $id_individu = $split[0];
     $type_evenement = $split[1];
   if($id_individu){
-$result=sql_select("*", "spip_genespip_evenements,spip_genespip_type_evenements,spip_genespip_lieux", "id_individu='$id_individu' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and spip_genespip_type_evenements.type_evenement='$type_evenement' and spip_genespip_lieux.id_lieu=spip_genespip_evenements.id_lieu");
+$result=sql_select("*", "spip_genespip_evenements,spip_genespip_type_evenements,spip_genespip_lieux", "id_individu='".sql_quote($id_individu)."' and spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and spip_genespip_type_evenements.type_evenement='".sql_quote($type_evenement)."' and spip_genespip_lieux.id_lieu=spip_genespip_evenements.id_lieu");
 if (spip_num_rows($result)==NULL){$resultat="";}
 while($row = spip_fetch_array($result)){
 $resultat =  $row['ville'].", ".$row['departement'].", ".$row['code_departement'].", ".$row['region'].", ".$row['pays'];
@@ -152,7 +152,7 @@ function requete_arbre($id_individu){
 			$cols=pow(2,$val2+1);
 			$res .= "<td colspan='$cols' width='$lar%' style='text-align:center;min-height:60px;vartical-align:top'>";
 
-			  $result = mysql_query(sql_select("*", "spip_genespip_individu", "id_individu='$tab[$col]'") or die ('Requête1 '._T('genespip:invalide')));
+			  $result = mysql_query(sql_select("*", "spip_genespip_individu", "id_individu='".sql_quote($tab[$col])) or die ('Requête1 '._T('genespip:invalide')));
 			while($row = spip_fetch_array($result)){
 				if ($row['sexe']==1){$color_fond='#FFBADD';}else{$color_fond='#CECEFF';}
 				$res .= "<div style='text-align:center;border:1px solid black;background-color:".$color_fond.";font-size:9px;min-height:60px;min-width:75px'>";

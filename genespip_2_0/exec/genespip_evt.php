@@ -1,7 +1,7 @@
 <?php
 function genespip_evt($id_type_evenement,$id_individu){
 
-	$resultevt = sql_select("*", "spip_genespip_evenements,spip_genespip_lieux,spip_genespip_type_evenements", "spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and spip_genespip_evenements.id_type_evenement='".$id_type_evenement."' and spip_genespip_evenements.id_lieu=spip_genespip_lieux.id_lieu and spip_genespip_evenements.id_individu = '".$id_individu."'");
+	$resultevt = sql_select("*", "spip_genespip_evenements,spip_genespip_lieux,spip_genespip_type_evenements", "spip_genespip_type_evenements.id_type_evenement=spip_genespip_evenements.id_type_evenement and spip_genespip_evenements.id_type_evenement='".sql_quote($id_type_evenement)."' and spip_genespip_evenements.id_lieu=spip_genespip_lieux.id_lieu and spip_genespip_evenements.id_individu = '".sql_quote($id_type_evenement)."'");
 	while ($evt = spip_fetch_array($resultevt)) {
 		$date_evt=genespip_datefr($evt['date_evenement']);
 		if ($evt['id_epoux']!=0){$union="<b>"._T('genespip:avec')." ".genespip_nom_prenom($evt['id_epoux'],1)."</b>";}else{$union=NULL;}
@@ -49,7 +49,7 @@ function genespip_evt($id_type_evenement,$id_individu){
 }
 
 function genespip_new_evt($id_individu,$id_type_evenement){
-	$resultevt = sql_select('* ', 'spip_genespip_type_evenements', 'id_type_evenement='.$id_type_evenement);
+	$resultevt = sql_select('* ', 'spip_genespip_type_evenements', 'id_type_evenement='.sql_quote($id_type_evenement));
 	while ($evt = spip_fetch_array($resultevt)) {
 		$clair_evenement=$evt['clair_evenement'];
 		$type_evenement=$evt['type_evenement'];
@@ -90,7 +90,7 @@ function genespip_new_evt($id_individu,$id_type_evenement){
 			}
 			$result_epoux = sql_select('id_individu, nom, prenom', 'spip_genespip_individu', 'sexe!=$sexe_res and nom='.sql_quote(_request('choix_nom')).' and poubelle <> 1', 'prenom');
 			while ($liste = spip_fetch_array($result_epoux)) {
-				$result_date = sql_select('id_type_evenement,date_evenement', 'spip_genespip_evenements', 'id_individu="'.$liste['id_individu'].'" and id_type_evenement<>3');
+				$result_date = sql_select('id_type_evenement,date_evenement', 'spip_genespip_evenements', 'id_individu="'.sql_quote($liste['id_individu']).'" and id_type_evenement<>3');
 				$date_BD="(&ordm;inconnu-&dagger;inconnu)";
 				while ($liste_date = spip_fetch_array($result_date)) {
 					if ($liste_date['id_type_evenement']==1){$date_naissance=genespip_datefr($liste_date['date_evenement']);}else{$date_naissance="inconnu";}

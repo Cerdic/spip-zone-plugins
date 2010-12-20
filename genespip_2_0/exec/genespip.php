@@ -117,12 +117,12 @@ function exec_genespip() {
 		if ($compte>0){
 			//Si doublon, il faut confirmer
 			while (list ($id_individu, $nom, $prenom) = mysql_fetch_array($result)) {
-				$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.$id_individu);
+				$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.sql_quote($id_individu));
 				$naissance=NULL;
 				while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 					$naissance=genespip_datefr($date_evenement);
 				}
-				$resultD = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=2 and id_individu ='.$id_individu);
+				$resultD = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=2 and id_individu ='.sql_quote($id_individu));
 				$deces=NULL;
 				while (list ($date_evenement) = mysql_fetch_array($resultD)) {
 					$deces=genespip_datefr($date_evenement);
@@ -151,7 +151,7 @@ function exec_genespip() {
 		echo gros_titre(_T('genespip:'.$nom_select), '', false);
 		echo '<br />';
 		while (list ($id_individu, $nom, $prenom, $sexe) = mysql_fetch_array($result)) {
-			$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.$id_individu);
+			$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.sql_quote($id_individu));
 			$naissance=NULL;
 			while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 				$naissance=genespip_datefr($date_evenement);
@@ -182,12 +182,12 @@ function exec_genespip() {
 		echo "<table width='70%'>";
 		echo "<form action='".$PHP_SELF."' method='post'>";
 		while (list ($id_individu, $nom, $prenom, $sexe) = mysql_fetch_array($result)) {
-			$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.$id_individu);
+			$resultN = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=1 and id_individu ='.sql_quote($id_individu));
 			$naissance=NULL;
 			while (list ($date_evenement) = mysql_fetch_array($resultN)) {
 				$naissance=genespip_datefr($date_evenement);
 			}
-			$resultD = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=2 and id_individu ='.$id_individu);
+			$resultD = sql_select('date_evenement', 'spip_genespip_evenements', 'id_type_evenement=2 and id_individu ='.sql_quote($id_individu));
 			$deces=NULL;
 			while (list ($date_evenement) = mysql_fetch_array($resultD)) {
 				$deces=genespip_datefr($date_evenement);

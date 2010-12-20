@@ -52,21 +52,26 @@ return $indi;
 }
 //creation table famille temp
 function genespip_famille() {
-$sql = 'CREATE TABLE `spip_genespip_famtempo` ('
-        . ' `id_fam` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, '
-        . ' `fam` TEXT NOT NULL, '
-        . ' `type` TEXT NOT NULL, '
-        . ' `id_individu` INT NOT NULL, '
-        . ' `date_evt` TEXT NOT NULL, '
-        . ' `place_evt` TEXT NOT NULL '
-        . ' )';
+	$sql = sql_create("spip_genespip_famtempo", 
+			array(
+			"id_fam" => "INT NOT NULL AUTO_INCREMENT PRIMARY KEY",
+			"fam" => "TEXT NOT NULL",
+			"type" => "TEXT NOT NULL",
+			"id_individu" => "INT NOT NULL",
+			"date_evt" => "TEXT NOT NULL",
+			"place_evt" => "TEXT NOT NULL",
+			)
+			array(
+			"PRIMARY KEY" => "id_fam",
+			)
+		);
 }
 function genespip_famille_remplir() {
 //entrees HUSB et WIFE
   //selection des hommes dans la bd
   $result_individu = sql_select('*', 'spip_genespip_individu', 'poubelle!=1 and sexe=0');
      while ($I = spip_fetch_array($result_individu)) {
-        $result_evt = sql_select('*', 'spip_genespip_evenements', 'id_type_evenement=3 and id_individu='.$I['id_individu']);
+        $result_evt = sql_select('*', 'spip_genespip_evenements', 'id_type_evenement=3 and id_individu='.sql_quote($I['id_individu']));
            while ($evt = spip_fetch_array($result_evt)) {
             $date_evt = "2 DATE ".genespip_dategedfr($evt['precision_date'],$evt['date_evenement']);
              if ($evt['id_lieu']!=1){
@@ -76,8 +81,8 @@ function genespip_famille_remplir() {
               }
              }
             $num_fam=$evt['id_individu']."-".$evt['id_epoux'];
-            $insert=sql_insert("spip_genespip_famtempo (fam, type, id_individu)", "('".$num_fam."', 'HUSB', ".$evt['id_individu'].")");
-            $insert=sql_insert("spip_genespip_famtempo (fam, type, id_individu, date_evt, place_evt)", "('".$num_fam."', 'WIFE', ".$evt['id_epoux']." ,'".$date_evt."', '".$place_evt."')");
+            $insert = sql_insert("spip_genespip_famtempo", "(fam, type, id_individu)", "('".sql_quote($num_fam)."', 'HUSB', ".sql_quote($evt['id_individu']).")");
+            $insert = sql_insert("spip_genespip_famtempo", " (fam, type, id_individu, date_evt, place_evt)", "('".sql_quote($num_fam)."', 'WIFE', ".sql_quote($evt['id_epoux'])." ,'".sql_quote($date_evt)."', '".sql_quote($place_evt)."')");
             $date_evt=NULL;
             $place_evt=NULL;
             }
@@ -87,15 +92,15 @@ function genespip_famille_remplir() {
      while ($I = spip_fetch_array($result_individu)) {
    // a pere et mere > num fam = pere-mere
       if ($I['pere']!=0 and $I['mere']!=0){
-       $insert=sql_insert("spip_genespip_famtempo (fam, type, id_individu)", "('".$I['pere']."-".$I['mere']."', 'CHIL', ".$I['id_individu'].")");
+       $insert = sql_insert("spip_genespip_famtempo (fam, type, id_individu)", "('".sql_quote($I['pere'])."-".sql_quote($I['mere'])."', 'CHIL', ".sql_quote($I['id_individu']).")");
       }
    // a pere uniquement > num fam = pere
       elseif ($I['pere']!=0 and $I['pere']==0){
-       $insert=sql_insert("spip_genespip_famtempo (fam, type, id_individu)", "(".$I['pere'].", 'CHIL', ".$I['id_individu'].")");
+       $insert = sql_insert("spip_genespip_famtempo (fam, type, id_individu)", "(".sql_quote($I['pere']).", 'CHIL', ".sql_quote($I['id_individu']).")");
       }
    // a mere uniquement > num fam = mere
       elseif ($I['pere']!=0 and $I['pere']==0){
-       $insert=sql_insert("spip_genespip_famtempo (fam, type, id_individu)", "(".$I['mere'].", 'CHIL', ".$I['id_individu'].")");
+       $insert = sql_insert("spip_genespip_famtempo (fam, type, id_individu)", "(".sql_quote($I['pere']).", 'CHIL', ".sql_quote($I['id_individu']).")");
       }
      }
 }
@@ -126,7 +131,7 @@ $entete .="2 FORM town , Area code , County , Region , Country\r\n";
 fwrite($handle, $entete);
 //INDIVIDU
 $pointeurnote=0;
-  $result_individu = sql_select('*', 'spip_genespip_individu', 'poubelle!=1');
+  $result_individu = sql_select("*", "spip_genespip_individu", "poubelle!=1");
   while ($I = spip_fetch_array($result_individu)) {
    if ($I['sexe']==1){$sexe="F";}else{$sexe="M";}
     $indi .= "0 @I".$I['id_individu']."@ INDI\r\n";
@@ -139,12 +144,12 @@ $pointeurnote=0;
      if ($I['metier']!=NULL){$indi .= "1 OCCU ".utf8_decode($I['metier'])."\r\n";}
      if ($I['adresse']!=NULL){$indi .= "1 RESI ".utf8_decode($I['adresse'])."\r\n";}
 //déclaration famille des parents
-    $result_fams=sql_select('*', 'spip_genespip_famtempo', 'id_individu="'.$I['id_individu'].'" and type=CHIL');
+    $result_fams = sql_select("*", "spip_genespip_famtempo", "id_individu=".sql_quote($I['id_individu'])." and type=CHIL");
      while ($FAMS = spip_fetch_array($result_fams)) {
       $indi .= "1 FAMC @F".$FAMS['fam']."@\r\n";
      }
 //déclaration famille du couple
-    $result_fams=sql_select('*', 'spip_genespip_famtempo', 'id_individu="'.$I['id_individu'].'" and type=HUSB or id_individu="'.$I['id_individu'].'" and type=WIFE');
+    $result_fams=sql_select("*", "spip_genespip_famtempo", "id_individu=".$I['id_individu']." and type=HUSB or id_individu=".sql_quote($I['id_individu'])." and type=WIFE");
      while ($FAMS = spip_fetch_array($result_fams)) {
       $indi .= "1 FAMS @F".$FAMS['fam']."@\r\n";
      }
@@ -160,10 +165,10 @@ $note = str_replace("\n", "1 CONT ", $I['note']);
   }
 
 //FAMILLE
-  $result_fams=sql_select('fam', 'spip_genespip_famtempo', 'fam');
+  $result_fams = sql_select("fam", "spip_genespip_famtempo", "fam");
   while ($FAMS = spip_fetch_array($result_fams)) {
    $fam .= "0 @F".$FAMS['fam']."@ FAM\r\n";
-   $result_membre_fams=sql_select('*', 'spip_genespip_famtempo', 'fam='.sql_quote(_request('fam')));
+   $result_membre_fams = sql_select("*", "spip_genespip_famtempo", "fam=".sql_quote(_request("fam")));
     while ($FAMS_M = spip_fetch_array($result_membre_fams)) {
      $fam .= "1 ".$FAMS_M['type']." @I".$FAMS_M['id_individu']."@\r\n";
       if ($FAMS_M['type']=="WIFE"){

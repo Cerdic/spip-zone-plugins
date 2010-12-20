@@ -30,7 +30,18 @@ function genespip_Traitementaccent($texte){
 }
 
 function genespip_cree_tabletempo() {
-	$sql = sql_create('spip_genespip_tempo' ('id_tempo` INT NOT NULL AUTO_INCREMENT PRIMARY KEY', 'num_tableau` TEXT NOT NULL', 'num_info` INT NOT NULL', 'type` TEXT NOT NULL', 'info` TEXT NOT NULL'));
+	$sql = sql_create("spip_genespip_tempo", 
+			array(
+			"id_tempo" => "INT NOT NULL AUTO_INCREMENT PRIMARY KEY",
+			"num_tableau" => "TEXT NOT NULL",
+			"num_info" => "int NOT NULL",
+			"type" => "TEXT NOT NULL",
+			"info" => "TEXT NOT NULL",
+			)
+			array(
+			"PRIMARY KEY" => "id_tempo",
+			)
+		);
 }
 
 function genespip_gedcom($fic) {
@@ -53,9 +64,9 @@ function genespip_gedcom($fic) {
 			$info=preg_replace('/'.$detail.'/','',$line);
 			$info=genespip_Traitementaccent($info);
 			$info=addslashes(utf8_encode(trim($info)));
-			$insert_tempo1 = sql_insert("spip_genespip_tempo", "(num_tableau ,num_info, type, info)", "('".$rang."', ".trim($split[0]).", '".trim($split[1])."', '".$info."')");
+			$insert_tempo1 = sql_insert("spip_genespip_tempo", "(num_tableau ,num_info, type, info)", "('".sql_quote($rang)."', ".trim($split[0]).", '".trim($split[1])."', '".$info."')");
 			}
-		$result_tempo1 = sql_select('*', 'spip_genespip_tempo', 'type=PLAC', 'id_tempo limit 0,10');
+		$result_tempo1 = sql_select("*", "spip_genespip_tempo", "type=PLAC", "id_tempo limit 0,10");
 		echo _T('genespip:info_gedcom_etape2')."<br /><br />";
 		echo "<table>";
 		while ($tempo1 = spip_fetch_array($result_tempo1)) {
@@ -72,7 +83,7 @@ function genespip_gedcom($fic) {
 		case 2:
 		set_time_limit(0);
 		//Cr&eacute;ation de la table des lieux
-		$result_tempo1 = sql_select('*', 'spip_genespip_tempo', 'id_tempo='.sql_quote(_request('id_tempo')));
+		$result_tempo1 = sql_select("*", "spip_genespip_tempo", "id_tempo=".sql_quote(_request("id_tempo")));
 				echo _T('genespip:info_gedcom_etape3')."<br /><br />";
 				echo "<table>";
 				echo "<form action='$url_action_accueil' method='post'>";
@@ -103,7 +114,7 @@ function genespip_gedcom($fic) {
 		break;
 		case 3:
 		set_time_limit(0);
-				 $result_tempo1 = sql_select('info', 'spip_genespip_tempo', 'type=PLAC', 'info');
+				 $result_tempo1 = sql_select("info", "spip_genespip_tempo", "type=PLAC", "info");
 				 while ($tempo1 = spip_fetch_array($result_tempo1)) {
 				 $j=0;
 				 $ville=NULL;
@@ -116,9 +127,9 @@ function genespip_gedcom($fic) {
 				 if ($_POST['champ'.$j]=='pays'){$pays=$split_plac[$j];}
 				 $j++;
 				 }
-				 $req_lieu=sql_insert('spip_genespip_lieux', '(ville, code_departement, departement, region, pays)', '('".$ville."','".$code_departement."','".$departement."','".$region."','".$pays."')');
-				 $id_req_lieu=mysql_insert_id();
-				 $action_sql = sql_update('spip_genespip_tempo', 'info = '".$id_req_lieu."'', 'type=PLAC and info = '".$tempo1['info']");
+				 $req_lieu = sql_insert("spip_genespip_lieux", "(ville, code_departement, departement, region, pays)", "(".sql_quote($ville).",".sql_quote($code_departement).",".sql_quote($departement).",".sql_quote($region).","sql_quote(.$pays).")");
+				 $id_req_lieu = mysql_insert_id();
+				 $action_sql = sql_update("spip_genespip_tempo", array("info = ".sql_quote($id_req_lieu)., "type=PLAC and info = ".sql_quote($tempo1["info"])));
 				 }
 			  echo "<table>";
 			  echo "<tr><td>"._T('genespip:table_lieux_cree').".</td>";
@@ -132,7 +143,7 @@ function genespip_gedcom($fic) {
 		case 4:
 		set_time_limit(0);
 		//*********************************
-		$result_tempo1 = sql_select('*', 'spip_genespip_tempo');
+		$result_tempo1 = sql_select("*", "spip_genespip_tempo");
 				while ($tempo1 = spip_fetch_array($result_tempo1)) {
 
 		$splitpointeur = split('-',$tempo1['num_tableau']);
@@ -150,17 +161,17 @@ function genespip_gedcom($fic) {
 		 $id_individu=preg_replace('/IND/','',$id_individu);
 		 $id_individu=preg_replace('/I/','',$id_individu);
 			  echo "<u>"._T('genespip:individu')." $id_individu</u><br />";
-				$result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$id_individu'');
+				$result = sql_select("id_individu", "spip_genespip_individu", "id_individu=".sql_quote($id_individu));
 				echo "<font color='#480000'>id_individu=$id_individu</font><br />";
 				$pointeurindividu=$pointeur1;
 				if (spip_num_rows($result)==0){
-				$insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, id_auteur, date_update)', '('".$id_individu."', '".$GLOBALS['connect_id_auteur']."', '".$date_update."')');
+				$insert_fiche = sql_insert("spip_genespip_individu", "(id_individu, id_auteur, date_update)", "(".sql_quote($id_individu).", ".sql_quote($GLOBALS["connect_id_auteur"]).", ".sql_quote($date_update).")");
 				}
 		   }
 		//NOTE
 		   if ($tempo1['info']=='NOTE'){
 				echo $id_individu ."/NOTE type:".$tempo1['type'];
-				$resultnote = sql_select('*', 'spip_genespip_individu', 'id_individu='.$id_individu'');
+				$resultnote = sql_select("*", "spip_genespip_individu", "id_individu=".sql_quote($id_individu));
 				while ($note = spip_fetch_array($resultnote)) {
 				$pointeurnote=$pointeur1;
 				$id_individu=$note['id_individu'];
@@ -176,13 +187,13 @@ function genespip_gedcom($fic) {
 				$splitNAME = split('/',$tempo1['info']);
 				echo "<font color='#480000'> prenom=$splitNAME[0], nom=$splitNAME[1]</font><br />";
 				if (trim($splitNAME[1])==NULL){$nom='?';}else{$nom=$splitNAME[1];}
-				$action_sql = sql_update('spip_genespip_individu', 'nom = '".$nom."', prenom = '".$splitNAME[0]."'', 'id_individu = '.$id_individu);
+				$action_sql = sql_update("spip_genespip_individu", "nom = ".sql_quote($nom), "prenom = ".sql_quote($splitNAME[0]), "id_individu = ".sql_quote($id_individu));
 				}
 			  break;
 			  case "SEX":
 				  if (trim($tempo1['info'])=='M'){$sexe=0;}elseif(trim($tempo1['info'])=='F'){$sexe=1;}
 				  echo "<font color='#480000'> "._T('genespip:sexe')."=$sexe (".trim($tempo1['info']).")</font><br />";
-				$action_sql = sql_update('GENESPIP_INDIVIDU', 'sexe = ".$sexe."', 'id_individu = '.$id_individu);
+				$action_sql = sql_update("spip_genespip_individu", "sexe = ".sql_quote($sexe), "id_individu = ".sql_quote($id_individu));
 			  break;
 			  case "HUSB":
 			  $pointeurHUSB=$pointeur1;
@@ -197,10 +208,10 @@ function genespip_gedcom($fic) {
 				$epouse=preg_replace('/IND/','',$epouse);
 				$epouse=preg_replace('/I/','',$epouse);
 			  if ($pointeur1==$pointeurHUSB){$individu=$epoux;}
-				$result = sql_select('*', 'spip_genespp_evenements', 'id_individu='.$individu.' and id_epoux='.$epouse'');
+				$result = sql_select("*", "spip_genespp_evenements", "id_individu=".sql_quote($individu)." and id_epoux=".sql_quote($epouse));
 				if (spip_num_rows($result)==0){
-				$insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, id_lieu, id_epoux, date_update)', '('".$individu."',3,1, '".$epouse."', '".$date_update."')');
-				$insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, id_lieu, id_epoux, date_update)', '('".$epouse."',3,1, '".$individu."', '".$date_update."')');
+				$insert_fiche = sql_insert("spip_genespip_evenements", "(id_individu, id_type_evenement, id_lieu, id_epoux, date_update)", "(".sql_quote($individu).",3,1, ".sql_quote($epouse).", ".sql_quote($date_update)));
+				$insert_fiche = sql_insert("spip_genespip_evenements", "(id_individu, id_type_evenement, id_lieu, id_epoux, date_update)", "(".sql_quote($epouse).",3,1, ".sql_quote($individu).", ".sql_quote($date_update)));
 				}
 				echo "<font color='#480000'> "._T('genespip:epouse')."=$epouse</font><br />";
 			  break;
@@ -211,23 +222,23 @@ function genespip_gedcom($fic) {
 			  $enfant=1;
 			  if ($pointeur1==$pointeurHUSB){$pere=$epoux;}else{$pere=0;}
 			  if ($pointeur1==$pointeurWIFE){$mere=$epouse;}else{$mere=0;}
-				$result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$individu'');
+				$result = sql_select("id_individu", "spip_genespip_individu", "id_individu=".sql_quote($individu));
 				if (spip_num_rows($result)==0){
-				$insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, pere, mere, id_auteur, date_update)', '('".$individu."', '".$epoux."', '".$epouse."', '".$GLOBALS['connect_id_auteur']."', '".$date_update."')');
+				$insert_fiche = sql_insert("spip_genespip_individu", "(id_individu, pere, mere, id_auteur, date_update)", "(".sql_quote($individu).", ".sql_quote($epoux).", ".sql_quote($epouse).", ".sql_quote($GLOBALS['connect_id_auteur']).", ".sql_quote($date_update)")");
 				}else{
-				$action_sql = sql_update('spip_genespip_individu', 'pere = ".$epoux.", mere = ".$epouse." ', 'id_individu = '.$individu);
+				$action_sql = sql_update("spip_genespip_individu", array("pere" => sql_quote($epoux).", mere" => sql_quote($epouse), "id_individu" => sql_quote($individu)));
 				}
-				$result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$pere'');
+				$result = sql_select("id_individu", "spip_genespip_individu", "id_individu=".sql_quote($pere));
 				if (spip_num_rows($result)==0){
-				$insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, enfant, id_auteur, date_update)', '('".$pere."', '".$enfant."', '".$GLOBALS['connect_id_auteur'].",' '".$date_update."')');
+				$insert_fiche = sql_insert("spip_genespip_individu", "(id_individu, enfant, id_auteur, date_update)", "(".sql_quote($pere), sql_quote($enfant), sql_quote($GLOBALS['connect_id_auteur']), sql_quote($date_update)")");
 				}else{
-				$action_sql = sql_update('spip_genespip_individu', 'enfant = ".$enfant."', 'id_individu = '.$pere);
+				$action_sql = sql_update("spip_genespip_individu", array("enfant" => sql_quote($enfant), "id_individu" => sql_quote($pere)));
 				}
-				$result = sql_select('id_individu', 'spip_genespip_individu', 'id_individu='.$mere'');
+				$result = sql_select("id_individu", "spip_genespip_individu", "id_individu=".sql_quote($mere));
 				if (spip_num_rows($result)==0){
-				$insert_fiche=sql_insert('spip_genespip_individu', '(id_individu, enfant, id_auteur, date_update)', '('".$mere."', '".$enfant."', '".$GLOBALS['connect_id_auteur']."', '".$date_update."')');
+				$insert_fiche = sql_insert("spip_genespip_individu", "(id_individu, enfant, id_auteur, date_update)", "(".sql_quote($mere), sql_quote($enfant), sql_quote($GLOBALS['connect_id_auteur']), sql_quote($date_update)")");
 				}else{
-				$action_sql = sql_update('spip_genespip_individu', 'enfant = ".$enfant."', 'id_individu = '.$mere);
+				$action_sql = sql_update("spip_genespip_individu", array("enfant" => sql_quote($enfant), "id_individu" => sql_quote($mere)));
 				}
 				echo "<font color='#480000'> "._T('genespip:enfant')."=$individu, "._T('genespip:pere')."=$epoux, "._T('genespip:mere')."=$epouse</font><br />";
 			  break;
@@ -313,44 +324,44 @@ function genespip_gedcom($fic) {
 			  if ($pointeur2==$pointeurnaissance){
 				echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;"._T('genespip:naissance')."=$precision_date $date</font><br />";
 			  $id_type_evenement=1;
-				$result = sql_select('*', 'spip_genespip_evenements', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$id_individu);
+				$result = sql_select("*", "spip_genespip_evenements", "id_type_evenement=".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($id_individu));
 				if (spip_num_rows($result)==0){
-				$insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, date_evenement, precision_date, id_lieu)', '(".$id_individu.",".$id_type_evenement.",'".$date."', '".$precision_date."',1)');
+				$insert_fiche = sql_insert("spip_genespip_evenements", "(id_individu, id_type_evenement, date_evenement, precision_date, id_lieu)", "(".sql_quote($id_individu), sql_quote($id_type_evenement), sql_quote($date), sql_quote($precision_date), '1'")");
 				}else{
-				$action_sql = sql_update('GENESPIP_EVENEMENTS', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement=".$id_type_evenement." and id_individu = '.$id_individu);
+				$action_sql = sql_update("spip_genespip_evenements", "date_evenement = ".sql_quote($date), "precision_date = ".sql_quote($precision_date), "id_type_evenement=".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($id_individu));
 				}
 			  }
 			  if ($pointeur2==$pointeurdeces){
 				echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;"._T('genespip:deces')."=$precision_date $date</font><br />";
 			  $id_type_evenement=2;
-				$result = sql_select('*', 'spip_genespip_evenements', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$id_individu);
+				$result = sql_select("*", "spip_genespip_evenements", "id_type_evenement=".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($id_individu));
 				if (spip_num_rows($result)==0){
-				$insert_fiche=sql_insert('spip_genespip_evenements', '(id_individu, id_type_evenement, date_evenement, precision_date, id_lieu)', '(".$id_individu.",'".$id_type_evenement."' ,'".$date."', '".$precision_date."',1)');
+				$insert_fiche=sql_insert("spip_genespip_evenements", "(id_individu, id_type_evenement, date_evenement, precision_date, id_lieu)", "(".sql_quote($id_individu), sql_quote($id_type_evenement), sql_quote($date), sql_quote($precision_date), '1' ")");
 				}else{
-				$action_sql = sql_update('spip_genespip_evenements', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement=".$id_type_evenement." and id_individu = '.$id_individu);
+				$action_sql = sql_update("spip_genespip_evenements", "date_evenement = ".sql_quote($date).", precision_date = ".sql_quote($precison_date).", id_type_evenement = ".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($id_individu));
 				}
 			  }
 			  if ($pointeur2==$pointeurmarr){
 				echo "<font color='#480000'>&nbsp;&nbsp;&nbsp;"._T('genespip:mariage')."=$precision_date $date</font><br />";
 			  $id_type_evenement=3;
-				$action_sql = sql_update('spip_genespip_evenements', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epoux.'" and id_epoux="'.$epouse);
-				$action_sql = sql_update('spip_genespip_evenements', 'date_evenement = '".$date."', precision_date = '".$precision_date."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epouse.'" and id_epoux="'.$epoux);
+				$action_sql = sql_update("spip_genespip_evenements", "date_evenement = ".sql_quote($date), "precision_date = ".sql_quote($precision_date), "id_type_evenement = ".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($epoux)." and id_epoux = ".sql_quote($epouse));
+				$action_sql = sql_update("spip_genespip_evenements", "date_evenement = ".sql_quote($date), "precision_date = ".sql_quote($precision_date), "id_type_evenement = ".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($epouse)." and id_epoux = ".sql_quote($epoux));
 			  }
 			  break;
 			  case "PLAC":
 				$id_lieu=$tempo1['info'];
 			  if ($pointeur2==$pointeurnaissance){
 			  $id_type_evenement=1;
-				$action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement=".$id_type_evenement." and id_individu = "'.$id_individu);
+				$action_sql = sql_update("spip_genespip_evenements", "id_lieu = ".sql_quote($id_lieu), "id_type_evenement=".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($id_individu));
 			  }
 			  if ($pointeur2==$pointeurdeces){
 			  $id_type_evenement=2;
-				$action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement=".$id_type_evenement." and id_individu = "'.$id_individu);
+				$action_sql = sql_update("spip_genespip_evenements", "id_lieu = ".sql_quote($id_lieu), "id_type_evenement=".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($id_individu));
 			  }
 			  if ($pointeur2==$pointeurmarr){
 			  $id_type_evenement=3;
-				$action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epoux.'" and id_epoux="'.$epouse);
-				$action_sql = sql_update('spip_genespip_evenements', 'id_lieu = '".$id_lieu."'', 'id_type_evenement="'.$id_type_evenement.'" and id_individu = "'.$epouse.'" and id_epoux="'.$epoux);
+				$action_sql = sql_update("spip_genespip_evenements", "id_lieu = ".sql_quote($id_lieu), "id_type_evenement=".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($epoux)." and id_epoux = ".sql_quote($epouse));
+				$action_sql = sql_update("spip_genespip_evenements", "id_lieu = ".sql_quote($id_lieu), "id_type_evenement=".sql_quote($id_type_evenement)." and id_individu = ".sql_quote($epouse)." and id_epoux = ".sql_quote($epoux));
 			  }
 
 			  break;
@@ -362,18 +373,18 @@ function genespip_gedcom($fic) {
 				//while ($noteold = spip_fetch_array($resultnote)) {
 				//$note=$noteold['note']."\r".$note;
 				//}
-				$action_sql = sql_update("spip_genespip_individu", "note = ".$note., "id_individu = ".$id_individu);
+				$action_sql = sql_update("spip_genespip_individu", "note = ".sql_quote($note), "id_individu = ".sql_quote($id_individu));
 				}
 			  break;
 			  case "CONC":
 				$note=$tempo1['info'];
 				if ($pointeur1==$pointeurindividu or $pointeur1==$pointeurnote){
 				echo "<b>CONC</b> <font color='#480000'> "._T('genespip:note')."=(INDIVIDU $id_individu) $note </font><br />";
-				$resultnote = sql_select("*", "spip_genespip_individu", "id_individu=".$id_individu);
+				$resultnote = sql_select("*", "spip_genespip_individu", "id_individu = ".sql_quote($id_individu));
 				while ($noteold = spip_fetch_array($resultnote)) {
 				$note=$noteold['note']." ".$note;
 				}
-				$action_sql = sql_update("spip_genespip_individu", "note = ".$note., "id_individu = ".$id_individu);
+				$action_sql = sql_update("spip_genespip_individu", "note = ".sql_quote($note), "id_individu = ".sql_quote($id_individu));
 				$note=NULL;
 				}
 			  break;
@@ -381,11 +392,11 @@ function genespip_gedcom($fic) {
 				$note=$tempo1['info'];
 				if ($pointeur1==$pointeurindividu or $pointeur1==$pointeurnote){
 				echo "<b>CONT</b> <font color='#480000'> "._T('genespip:note')."=(INDIVIDU $id_individu) $note </font><br />";
-				$resultnote = sql_select("*", "spip_genespip_individu", "id_individu=".$id_individu);
+				$resultnote = sql_select("*", "spip_genespip_individu", "id_individu = ".sql_quote($id_individu));
 				while ($noteold = spip_fetch_array($resultnote)) {
 				$note=$noteold['note']." ".$note;
 				}
-				$action_sql = sql_update("spip_genespip_individu", "note = ".$note., "id_individu = ".$id_individu);
+				$action_sql = sql_update("spip_genespip_individu", "note = ".sql_quote($note), "id_individu = ".sql_quote($id_individu));
 				$note=NULL;
 				}
 			  break;
@@ -393,7 +404,7 @@ function genespip_gedcom($fic) {
 				$adresse=$tempo1['info'];
 				if ($pointeur1==$pointeurindividu){
 				echo "<font color='#480000'> "._T('genespip:adresse')."= $adresse </font><br />";
-				$action_sql = sql_update("spip_genespip_individu", "adresse = ".$adresse., "id_individu = ".$id_individu);
+				$action_sql = sql_update("spip_genespip_individu", "adresse = ".sql_quote($adresse), "id_individu = ".sql_quote($id_individu));
 				}
 			  break;
 
@@ -402,7 +413,7 @@ function genespip_gedcom($fic) {
 				if ($pointeur1==$pointeurindividu){
 				//$splitNAME = split('/',$tempo1['info']);
 				echo "<font color='#480000'> "._T('genespip:metier')."= $occu </font><br />";
-				$action_sql = sql_update("spip_genespip_individu", "metier = ".$occu. , "id_individu = ".$id_individu);
+				$action_sql = sql_update("spip_genespip_individu", "metier = ".sql_quote($occu) , "id_individu = ".sql_quote($id_individu));
 				}
 			  break;
 

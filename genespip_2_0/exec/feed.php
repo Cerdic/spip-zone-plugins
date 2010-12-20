@@ -20,7 +20,7 @@ echo "<category>"._T('genespip:patronymes')."</category>";
 echo "<description>";
 $result_individu = sql_select('nom, count(id_individu) as comptenom', 'spip_genespip_individu', 'poubelle<>1', 'nom');
         while ($indi = spip_fetch_array($result_individu)) {
-        echo $indi['nom']." (".$indi['comptenom']."), ";
+        echo $indi['nom']." (".sql_quote(indi['comptenom']."), ";
         }
 echo "</description>";
 echo "<pubDate>";
