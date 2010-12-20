@@ -19,8 +19,11 @@ function compositions_chemin(){
 	$config_chemin = defined('_DIR_PLUGIN_Z')?'contenu/':'compositions/';
 	if (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
-		$config_chemin = rtrim($config['chemin_compositions'],'/').'/';
+		if (isset ($config['chemin_compositions'])){
+			$config_chemin = rtrim($config['chemin_compositions'],'/').'/';
+		}
 	}
+	
 	return $config_chemin;
 }
 
