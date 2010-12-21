@@ -7,6 +7,7 @@
 	<etat>stable</etat>
 	<description>Gestion de mod&egrave;les pour les &eacute;l&eacute;ments de SPIP.</description>
 	<lien></lien>
+	<categorie>edition</categorie>
 	<options>canevas_options.php</options>
 	<fonctions>canevas_fonctions.php</fonctions>
 	<prefix>canevas</prefix>
