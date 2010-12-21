@@ -1,0 +1,33 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_gabarit formulaire_editer_gabarit-#ENV{id_gabarit,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+	    	<label for="titre"><:info_titre:></label>[
+	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+	    	]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
+	    </li>
+	    <li class="editer_statut[ (#ENV**{erreurs}|table_valeur{statut}|oui)erreur]">
+	    	<label for="statut"><:gabarits:label_statut:></label>[
+	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{statut})</span>
+	    	]<select name="statut" id="statut">
+				<option value='public'[(#ENV{statut}|=={'public'}|oui)selected='selected']><:gabarits:statut_public:></option>
+				<option value='prive'[(#ENV{statut}|=={'prive'}|oui)selected='selected']><:gabarits:statut_prive:></option>
+	    	</select>
+	    </li>
+	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+			<label for="texte"><:info_texte:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+			]<textarea name='texte' rows='8' id='texte'>[(#ENV{texte})]</textarea>
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_gabarit}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+	</div></form>]
+</div>

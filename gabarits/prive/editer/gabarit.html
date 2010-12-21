@@ -1,0 +1,8 @@
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[(#ENV**{new}|intval|?{<:gabarits:titre_cadre_modifier_gabarit:>,<:gabarits:titre_cadre_ajouter_gabarit:>})
+	<h1>#ENV{titre}</h1>]
+</div>
+#FORMULAIRE_EDITER_GABARIT{#ENV{new},#ENV{redirect}}
+</div>

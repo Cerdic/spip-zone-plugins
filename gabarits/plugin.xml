@@ -1,0 +1,48 @@
+<plugin>
+	<nom>Gabarits</nom>
+	<icon>prive/themes/spip/images/gabarits-64.png</icon>
+	<auteur>[b_b->http://www.spip-contrib.net/b_b]</auteur>
+	<licence>GPL 3</licence>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>Gestion de gabarits pour les &eacute;l&eacute;ments de SPIP.</description>
+	<lien>http://www.spip-contrib.net/Gabarits</lien>
+	<categorie>edition</categorie>
+	<options>gabarits_options.php</options>
+	<fonctions>gabarits_fonctions.php</fonctions>
+	<prefix>gabarits</prefix>
+	<install>base/gabarits_upgrade.php</install>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>gabarits_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/gabarits.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/gabarits.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>gabarits_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>gabarits_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>gabarits_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='gabarits' parent='bando_edition'>
+		<icone>images/gabarits-16.png</icone>
+		<titre>gabarits:gabarits</titre>
+		<url>gabarits_tous</url>
+	</bouton>
+	<necessite id='SPIP' version='[2.1;]' />
+	<necessite id='afficher_objets' version='[1.1.3;]' />
+	<necessite id="spip_bonux" version="[2.2.2;]" />
+</plugin>

@@ -1,0 +1,66 @@
+<li class="editer_gabarits fieldset">
+	<fieldset>
+		<h3 class="legend"><:gabarits:titre_bloc_gabarits:></h3>
+		<ul>
+			<li class="cgabarits_liste">
+				<label for="select_gabarits"><:gabarits:label_select_gabarits:></label>
+				<select size="5" class="selecteur_gabarits" name="select_gabarits" id="select_gabarits">
+					<B_vos_gabarits>
+					<optgroup label="<:gabarits:label_vos_gabarits|attribut_html:>">
+					<BOUCLE_vos_gabarits(GABARITS){id_auteur=#SESSION{id_auteur}}{!par id_gabarit}{doublons}>
+					<option class="item[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" value="#ID_GABARIT">#TITRE</option>
+					</BOUCLE_vos_gabarits>
+					</optgroup>
+					</B_vos_gabarits>
+					<B_autres_gabarits>
+					<optgroup label="<:gabarits:label_autres_gabarits|attribut_html:>">
+					<BOUCLE_autres_gabarits(GABARITS){!par id_gabarit}{statut=public}{doublons}>
+					<option class="item[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" value="#ID_GABARIT">#TITRE</option>
+					</BOUCLE_autres_gabarits>
+					</optgroup>
+					</B_autres_gabarits>
+				</select>
+			</li>
+			<li class="gabarits_previsu">
+				<div id="texte_previsu" name="texte_previsu"><:gabarits:label_previsu_gabarits:></div>
+			</li>
+		</ul>
+		<p class='boutons'>
+			&#91;<a href="#" id="inserer_gabarits"><:gabarits:inserer_texte:></a>&#93;
+		</p>
+	</fieldset>
+	<script type="text/javascript">
+	(function($){
+	$(function(){
+		$('input.check').click(function(){
+			$(this).parent().toggleClass('nomplugin_on');
+		});
+		$('#select_gabarits option').click(function(){
+			var id = $(this).attr('value');
+			$('#texte_previsu').html('')
+				.prepend(ajax_image_searching)
+				.load('[(#URL_ECRIRE|parametre_url{action,gabarit_previsu})]',{'id_gabarit':id});
+			return false;
+		});
+		$('#inserer_gabarits').click(function(){
+			var id = $('#select_gabarits option:selected').attr('value');
+			$('#text_area').prepend(ajax_image_searching)
+				.val(function(index, texte){
+					$.ajax({
+						type: 'POST',
+						async: false,
+						url: '[(#URL_ECRIRE|parametre_url{action,gabarit_previsu})]',
+						data: ({'id_gabarit':id,'brut':'oui'}),
+						success: function(data){
+							texte = texte + '\n\n' + data;
+						}
+					});
+					return texte;
+				});
+				
+			return false;
+		});
+	});
+	})(jQuery);
+	</script>
+</li>

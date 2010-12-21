@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	statut,1
+}})
+]<B_gabarits>
+#ANCRE_PAGINATION
+<div class="liste-elements gabarits">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur'><:auteur:></th>
+			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_gabarits(GABARITS){id_gabarit?}{id_auteur ?}{where?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_GABARIT|puce_changement_statut{#STATUT,'',gabarit})]</td>
+			<td class='titre'><a href="[(#URL_ECRIRE{gabarits_edit,id_gabarit=#ID_GABARIT})]">#TITRE</a></td>
+			<td class='auteur'><BOUCLE_auteur(AUTEURS){id_auteur}{tout}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteur></td>
+			<td class='date'>[(#DATE|affdate_court)]</td>
+			<td class='action'>[(#AUTORISER{supprimer,gabarit,#ID_GABARIT}|oui)
+				[(#BOUTON_ACTION{<:gabarits:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_gabarit,#ID_GABARIT,#SELF},ajax,<:gabarits:supprimer_confirmation:>})]
+			]</td>
+		</tr>
+	</BOUCLE_gabarits>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_gabarits>[
+<div class="liste-elements gabarits"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_gabarits>

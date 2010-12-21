@@ -1,0 +1,14 @@
+[(#INCLURE{fond=prive/liste/gabarits,
+	id_auteur=#SESSION{id_auteur},
+	titre=<:gabarits:liste_vos:>,
+	sinon=<:gabarits:aucun_gabarit:>,
+	env,
+	ajax})]
+
+[(#SESSION{statut}|=={0minirezo}|oui)
+[(#INCLURE{fond=prive/liste/gabarits,
+	titre=<:gabarits:liste_tous:>,
+	sinon=<:gabarits:aucun_gabarit:>,
+	env,
+	ajax})]
+]
