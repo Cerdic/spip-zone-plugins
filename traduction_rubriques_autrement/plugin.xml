@@ -1,0 +1,47 @@
+<plugin>
+	<nom><multi>[fr]Traduction rubriques[en]Section translation[es]Traducción de secciones [de]Rubriken Übersetzung</multi></nom>
+	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
+	<version>0.0.1</version>
+	<version_base>0.1</version_base>
+	<install>base/trad_rub_install.php</install>
+	<etat>dev</etat>
+	<description>
+		<multi>[fr]Rajout de traduction ppour les rubriques, pas termin&eacute;</multi>	
+	</description>
+	<lien>http://www.spip-contrib.net/Traductions-d-articles-autrement</lien>
+	<licence>GPL 3</licence>
+	<prefix>trad_rub</prefix>
+	<icon>img_pack/Translation-icon_32.png</icon>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>		
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/trad_rub_tables.php</inclure>
+	</pipeline>		
+	<fonctions>trad_rub_fonctions.php</fonctions>
+	<categorie>traduction</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="spip_bonux" version="[2.2.14;]" />	
+	<utilise id="afficher_objets" version="[1.1.8;]" />	
+	<utilise id="taa" version="[0.1.5;]" />		
+<!--	<utilise id="cfg" version="[ 1.15.1;]" />		-->
+</plugin>
+
