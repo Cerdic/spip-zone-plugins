@@ -193,4 +193,17 @@ function contacts_objets_extensibles($objets){
 			'organisation' => _T('contacts:organisations'),
 		));
 }
+
+/**
+ * Ajoute une feuille de style pour la v-card
+ * Peut être surchargé ensuite
+**/
+function contacts_insert_head($flux){
+
+	$flux .= '<!-- insertion de la css contacts--><link rel="stylesheet" type="text/css" href="'.find_in_path('contacts.css').'" media="all" />';
+
+	return $flux;
+}
+
+
 ?>

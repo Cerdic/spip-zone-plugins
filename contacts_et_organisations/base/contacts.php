@@ -36,7 +36,7 @@ function contacts_declarer_tables_interfaces($interface){
 
 	// titre
 	$interface['table_titre']['contacts'] = "CONCAT(nom,' ',prenom) AS titre, '' AS lang";
-	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang";
+	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang, ";
 	
 	return $interface;
 }
@@ -45,23 +45,23 @@ function contacts_declarer_tables_interfaces($interface){
 function contacts_declarer_tables_principales($tables_principales){
 	//-- Table organisations ------------------------------------------
 	$organisations = array(
-		"id_organisation" => "bigint(21) NOT NULL auto_increment",
-		"id_auteur"		=> "bigint(21) NOT NULL",
-		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
+		"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
+		"id_auteur"			=> "bigint(21) NOT NULL",
+		"nom" 				=> "tinytext DEFAULT '' NOT NULL",
         "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
         "identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
-		"activite"		=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
-		"date_creation"	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"descriptif"	=> "TEXT DEFAULT '' NOT NULL",
-		"maj"			=> "TIMESTAMP"
+		"activite"			=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
+		"date_creation"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"descriptif"		=> "TEXT DEFAULT '' NOT NULL",
+		"maj"				=> "TIMESTAMP"
 		);
 	$organisations_key = array(
-		"PRIMARY KEY"	=> "id_organisation",
+		"PRIMARY KEY"		=> "id_organisation",
 		"UNIQUE KEY id_auteur" => "id_auteur"
 		);
 	$organisations_join = array(
-		"id_auteur" => "id_auteur",
-		"id_organisation" => "id_organisation"
+		"id_auteur" 		=> "id_auteur",
+		"id_organisation" 	=> "id_organisation"
 	);
 	$tables_principales['spip_organisations'] =
 		array('field' => &$organisations, 'key' => &$organisations_key, 'join' => &$organisations_join);

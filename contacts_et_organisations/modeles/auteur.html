@@ -1,0 +1,42 @@
+[(#REM)
+	Modèle pour l'affichage d'un auteur de type contact.
+]
+<fieldset class="co_vcard">
+
+	<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+		<BOUCLE_c(CONTACTS){id_auteur}>
+		
+			<legend>[<span class="#EDIT{prenom}">(#PRENOM)</span>&nbsp;][<span class="#EDIT{nom}">(#NOM)]</legend>
+			
+			<dl>
+
+				<B_o>
+				<dt><:contacts:label_nom_organisation:></dt>
+				<BOUCLE_o(ORGANISATIONS spip_organisations_contacts){id_contact}>
+				<dd class="#EDIT{nom}">#NOM</dd>
+				</BOUCLE_o>
+				</B_o><dd>pas d'organisation trouvée</dd>
+				<//B_o>
+			
+				<dt><:contacts:label_fonction:></dt>
+				<dd class="#EDIT{fonction}">[(#FONCTION|sinon{'...'})]</dd>
+				
+				[(#PLUGIN{cop}|oui)]
+				<B_num>
+				<dt><:contacts:label_telephone:></dt>
+				<BOUCLE_num(NUMEROS){id_auteur}>
+				<dd class="#EDIT{numero}">#NUMERO[ (#TYPE)]</dd>
+				</BOUCLE_num>
+				
+				<B_mail>
+				<dt><:contacts:label_email:></dt>
+				<BOUCLE_mail(emails){id_auteur}>
+				<dd class="#EDIT{titre}">#EMAIL</dd>
+				</BOUCLE_mail>
+				
+			
+			<dl>
+		</BOUCLE_c>
+	</BOUCLE_a>
+
+</fieldset>

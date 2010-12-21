@@ -10,30 +10,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// C
 	'contacts' => 'Contacts',
-	'confirmer_supprimer_contact' => "Êtes-vous sûr de vouloir supprimer
-		les informations relatives à ce contact ?",
-	'confirmer_supprimer_organisation' => "Êtes-vous sûr de vouloir supprimer
-		les informations relatives à cette organisation ?",
-	'confirmer_delier_organisation' => "Êtes-vous sûr de vouloir délier ce contact de cette organisation ?",
-	'confirmer_delier_contact' => "Êtes-vous sûr de vouloir délier cette organisation de ce contact ?",
+	'confirmer_supprimer_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
+		les informations relatives &agrave; ce contact ?",
+	'confirmer_supprimer_organisation' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
+		les informations relatives &agrave; cette organisation ?",
+	'confirmer_delier_organisation' => "&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier ce contact de cette organisation ?",
+	'confirmer_delier_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier cette organisation de ce contact ?",
 	
 	// D
-	'definir_auteur_comme_contact' => "Définir comme contact",
-	'definir_auteur_comme_organisation' => "Déf. comme organisation",
+	'definir_auteur_comme_contact' => "D&eacute;finir comme contact",
+	'definir_auteur_comme_organisation' => "D&eacute;f. comme organisation",
 
 	// E
-	'est_un_contact' => "Cet auteur est défini comme étant un contact.",
-	'est_une_organisation' => "Cet auteur est défini comme étant une organisation.",
+	'est_un_contact' => "Cet auteur est d&eacute;fini comme &eacute;tant un contact.",
+	'est_une_organisation' => "Cet auteur est d&eacute;fini comme &eacute;tant une organisation.",
 	'explication_statut_juridique' => "SA, SARL, association...",
-	'explication_activite' => 'Activité de l\'organisation : humanitaire, formation, édition...',
-	'explication_contacts_ou_organisations' => "Vous pouvez définir cet auteur
-		comme étant un contact ou comme étant une organisation.
-		Ces attributions donnent accès à des champs de saisies supplémentaires
+	'explication_activite' => 'Activit&eacute; de l\'organisation : humanitaire, formation, &eacute;dition...',
+	'explication_contacts_ou_organisations' => "Vous pouvez d&eacute;finir cet auteur
+		comme &eacute;tant un contact ou comme &eacute;tant une organisation.
+		Ces attributions donnent acc&egrave;s &agrave; des champs de saisies suppl&eacute;mentaires
 		dans la fiche de renseignement de l'auteur.",
 	'explication_supprimer_contact' => "La suppression du contact supprimera
-		toutes les informations supplémentaires renseignées sur l'auteur.",
+		toutes les informations suppl&eacute;mentaires renseign&eacute;es sur l'auteur.",
 	'explication_supprimer_organisation' => "La suppression de l'organisation supprimera
-		toutes les informations supplémentaires renseignées sur l'auteur.",
+		toutes les informations suppl&eacute;mentaires renseign&eacute;es sur l'auteur.",
 	'explication_identification' => 'Identifiant de l\'organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
 	'explications_page_contacts' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
 	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
@@ -48,24 +48,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_contacts_organisation' => "Contacts de l'organisation",
 	
 	// L
-	'label_activite' => "Activité",
-	'label_civilite' => "Civilité",
-	'label_fonction' => "Fonction",
-	'label_nom' => "Nom",
-	'label_prenom' => "Prénom",
+	'label_activite' => "Activit&eacute;",
+	'label_civilite' => "Civilit&eacute;",
+	'label_date_creation' => "Date de cr&eacute;ation",
 	'label_date_naissance' => "Date de naissance",
-	'label_date_creation' => "Date de création",
 	'label_descriptif' => "Description",
+	'label_email' => 'Email',
+	'label_fonction' => "Fonction",
 	'label_identification' => "Identification",
+	'label_nom' => "Nom",
+	'label_nom_organisation' => "Organisation",
 	'label_organisation' => 'Organisation li&eacute;e',
+	'label_prenom' => "Pr&eacute;nom",
 	'label_pseudo' => 'Pseudo',
-	'label_statut_juridique' => "Statut juridique",
 	'label_recherche_contacts' => "Chercher dans les contacts",
 	'label_recherche_organisations' => "Chercher dans les organisations",
-	'lier_contact' => "Lier un contact",
-	'lier_organisation' => "Lier une organisation",
+	'label_statut_juridique' => "Statut juridique",
+	'label_telephone' => 'T&eacute;l.',
 	'lier_ce_contact' => "Lier ce contact",
 	'lier_cette_organisation' => "Lier cette organisation",
+	'lier_contact' => "Lier un contact",
+	'lier_organisation' => "Lier une organisation",
 	'liste_contacts' => 'Liste les contacts de la base',
 	'liste_organisations' => 'Liste les organisations de la base',
 
