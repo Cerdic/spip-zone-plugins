@@ -8,11 +8,12 @@
  width='50' height='50'>
 	<param name='movie' value='#CHEMIN{flash/horloge.swf}[?(#GET{flashparams})]' />
 	<param name="quality" value="high" />
+	<param name="wmode" value="transparent" />
 	
 	<!--#EVAL**{chr(91)}if !IE#EVAL**{chr(93)}> <-->
 	<object data="#CHEMIN{flash/horloge.swf}[?(#GET{flashparams})]" width='50' height='50' type="application/x-shockwave-flash">
 		<param name="quality" value="high" />
-		
+		<param name="wmode" value="transparent" />
 		<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
 	</object>
 	<!--> <!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
