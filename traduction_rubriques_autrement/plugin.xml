@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Traduction rubriques[en]Section translation[es]Traducción de secciones [de]Rubriken Übersetzung</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.0.1</version>
+	<version>0.1.1</version>
 	<version_base>0.1</version_base>
 	<install>base/trad_rub_install.php</install>
 	<etat>dev</etat>
@@ -39,9 +39,11 @@
 	<fonctions>trad_rub_fonctions.php</fonctions>
 	<categorie>traduction</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<necessite id="spip_bonux" version="[2.2.14;]" />	
+	<necessite id="spip_bonux" version="[2.2.14;]" />
+	<necessite id="tradrub" version="[2.1.0;]" />	
+	<necessite id="saisies" version="[1.8.12;]" />		
 	<utilise id="afficher_objets" version="[1.1.8;]" />	
 	<utilise id="taa" version="[0.1.5;]" />		
-<!--	<utilise id="cfg" version="[ 1.15.1;]" />		-->
+
 </plugin>
 
