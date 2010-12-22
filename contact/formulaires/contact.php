@@ -162,7 +162,11 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 					$infos_pj[$cle]['nom'] = $nom_pj;
 					// On en déduit l'extension et du coup la vignette
 					$infos_pj[$cle]['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $nom_pj));
-					$infos_pj[$cle]['vignette'] = vignette_par_defaut($infos_pj[$cle]['extension'], false, true);
+					if (function_exists('vignette_par_defaut'))
+						$vignette = 'vignette_par_defaut';
+					else
+						$vignette = charger_fonction('vignette', 'inc');
+					$infos_pj[$cle]['vignette'] = $vignette($infos_pj[$cle]['extension'], false, true);
 					//On récupère le tye MIME du fichier aussi
 					$infos_pj[$cle]['mime'] = $pj_fichiers['type'][$cle];
 				}
