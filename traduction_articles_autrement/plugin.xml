@@ -5,9 +5,26 @@
 	<etat>test</etat>
 	<description>
 		<multi>[fr]Modification de l'interface priv&eacute;de spip afin de permettre &agrave; l'utilisateur une autre approche pour la traductions des articles; tout en maintenant le syst&egrave;me de traduction original de spip. Pour pouvoir utiliser l'affichage compacte des listes d'article (option disponible via cfg), il faut installer le plugin [afficher_objets->http://files.spip.org/spip-zone/afficher_objets.zip]
-			[en]Modification of the backoffice to allow another visual approach for the translation of articles. If you want to use the compact mode for the articles list (available through cfg) you need to install the plugin [afficher_objets->http://files.spip.org/spip-zone/afficher_objets.zip]
+			
+		Avec la dernière version du plugin les listes compactes fonctionnent maintenant également sur un site avec du multilinguisme par section.
+			
+		Il faut pour cela installerle plugin [Traduction entre rubrique->http://www.spip-contrib.net/IMG/zip/tradrub.zip] . 
+			
+		Et pour pour pouvoir profiter d'un système de traduction dans le sens du présent plugin, installez en plus le plugin [Traductions rubriques autrement->http://www.spip-contrib.net/IMG/zip/traduction_rubriques_autrement.zip]. Les onglets de traduction seront affiché en haut de la rubrique avec la possibilité de créer les traduction manquantes en cliquant sur l'onglet en gris. Le plugin essayera de chercher la rubrique correspondante dans le secteur de la langue, si la rubrique parente est bien traduite	
+		
+		[en]Modification of the backoffice to allow another visual approach for the translation of articles. If you want to use the compact mode for the articles list (available through cfg) you need to install the plugin [afficher_objets->http://files.spip.org/spip-zone/afficher_objets.zip].
+			
+		If your site structure is based on one section per language you may consider installing the plugins  [Translation between sections->http://www.spip-contrib.net/IMG/zip/tradrub.zip] .and [Section translations differently->http://www.spip-contrib.net/IMG/zip/traduction_rubriques_autrement.zip]
+	
 		[es]Modificación del espacio interno de spip para facilitar la traducción de los artículos sin cambiar el sistema original de traducción. Si quiere aprovechar de la opción "lista compacta de artículos" (activada desde cfg), hace falta instalar el plugin [afficher_objets->http://www.codes-libres.org/zip-plugins/afficher_objets.zip]
-			[de]Änderung des SPIP Backoffices mit dem Ziel die Übersetzung der Artikel visuell anders anzugehen. Wenn sie die "Kompakte Artikel Listen" benutzen wollen (kann via cfg aktiviert werden), müssen Sie das plugin [afficher_objets->http://files.spip.org/spip-zone/afficher_objets.zip] installieren</multi>	
+			
+		Si tu sitio està hecho con una estructura de un idioma por sección, te sugiero instalar también los dos siguientes plugins [Translation between sections->http://www.spip-contrib.net/IMG/zip/tradrub.zip]  y [Section translations differently->http://www.spip-contrib.net/IMG/zip/traduction_rubriques_autrement.zip]
+	
+		[de]Änderung des SPIP Backoffices mit dem Ziel die Übersetzung der Artikel visuell anders anzugehen. Wenn sie die "Kompakte Artikel Listen" benutzen wollen (kann via cfg aktiviert werden), müssen Sie das plugin [afficher_objets->http://files.spip.org/spip-zone/afficher_objets.zip] installieren. 
+
+		Für Sites mit Sprache per Rubrik Strukturen, empfehle, ich ebenfalls folgende zwei Plugins 
+		[Translation between sections->http://www.spip-contrib.net/IMG/zip/tradrub.zip]. 	
+		und [Section translations differently->http://www.spip-contrib.net/IMG/zip/traduction_rubriques_autrement.zip]</multi>	
 	</description>
 	<lien>http://www.spip-contrib.net/Traductions-d-articles-autrement</lien>
 	<licence>GPL 3</licence>
