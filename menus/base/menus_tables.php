@@ -8,6 +8,9 @@ function menus_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['menus']='menus';
 	$interface['table_des_tables']['menus_entrees']='menus_entrees';
 	
+	// Titres
+	$interface['table_titre']['menus'] = 'titre, "" as lang';
+	
 	return $interface;
 }
 
