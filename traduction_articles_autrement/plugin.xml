@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Traduction d'articles autrement[en]Article translations differently[es]Traducción de artículos repensada[de]Artikel Übersetzung mal Anders</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.1.5</version>
+	<version>0.1.6</version>
 	<etat>test</etat>
 	<description>
 		<multi>[fr]Modification de l'interface priv&eacute;de spip afin de permettre &agrave; l'utilisateur une autre approche pour la traductions des articles; tout en maintenant le syst&egrave;me de traduction original de spip. Pour pouvoir utiliser l'affichage compacte des listes d'article (option disponible via cfg), il faut installer le plugin [afficher_objets->http://files.spip.org/spip-zone/afficher_objets.zip]
@@ -28,7 +28,7 @@
 	<pipeline>
 		<nom>pre_insertion</nom>
 		<inclure>taa_pipelines.php</inclure>
-	</pipeline>		
+	</pipeline>	
 	<fonctions>taa_fonctions.php</fonctions>
 	<categorie>traduction</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />

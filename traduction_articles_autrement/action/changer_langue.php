@@ -10,8 +10,6 @@ function action_changer_langue_dist() {
 
 	$id_article = intval(_request('arg'));
 
-
-	
 		$row = sql_fetsel("id_rubrique", "spip_articles", "id_article=$id_article");
 	
 		$id_rubrique =$row['id_rubrique'];		
@@ -23,10 +21,6 @@ function action_changer_langue_dist() {
 		include_spip('action/referencer_traduction');
 		instituer_langue_article($id_article, $id_rubrique) ;
 	}
-		
-		
-		
-		
 	
 }
 ?>

@@ -76,6 +76,8 @@ function inc_article_afficher_contenu_dist($id_article){
 	if (lire_config('langues_multilingue')) $langues_dispos=explode(',',lire_config('langues_multilingue'));
 	else $langues_dispos=explode(',',lire_config('langues_utilisees'));
 	
+
+	
 	$traductions	= array();
 	
 	if($langues_dispos){		
@@ -112,10 +114,21 @@ function inc_article_afficher_contenu_dist($id_article){
 				$onglets_traduction.='<div class="traduit onglet ajax"><a href="?exec=articles&id_article='.$traductions[$value].'">'.traduire_nom_langue($value).'</a></div>';					
 			}
 			else{
-				$onglets_traduction.= '<div class="non_traduit onglet"><a href="?exec=articles_edit&new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique.'&lang_dest='.$value.'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';
+				include_spip('ecrire/inc/plugin');
+				$plugins = liste_chemin_plugin_actifs();
+				// Si le plugin traduction rubriques est activé on regarde si on trouve la rubrique traduite
+				if($plugins['TRADRUB']){
+					$id_rubrique=rubrique_traduction($value,$id_rubrique);
+					$section='oui';
+					}
+				$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire('articles_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';
 			
 				$action=generer_action_auteur ('changer_langue',$id_article,$retour);
-				$changer_traduction.='<div class="lang onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></div>';	
+				// Si le plugin traduction rubriques est activé on affiche pas les onglets changement de langue car la langue se change en modifiant la rubrique
+				if(!$section){
+					$changer_traduction.='<div class="lang onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></div>';					
+					}
+
 				}
 			}
 		else{
@@ -138,7 +151,7 @@ function inc_article_afficher_contenu_dist($id_article){
 	. gros_titre($titre, '' , false)
 	. (_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" 
 			. typo($soustitre) . "</b></span>" /*ajout des onglets traductions*/
-	. recuperer_fond('prive/editer/barre_traductions',$contexte,array('ajax'=>true)));
+	. recuperer_fond('prive/editer/barre_traductions_article',$contexte,array('ajax'=>true)));
 	
 	//MODIFICATION insertion du formulaire d&eacute;edition
 	if($edition_seule AND autoriser('modifier','article',$id_article)){ 
@@ -159,7 +172,7 @@ function inc_article_afficher_contenu_dist($id_article){
 		
 		$onglet_edition  = recuperer_fond("prive/editer/article_mod",$contexte,array('ajax'=>true));
 		}
-	else{
+	else{echo '1';
 		$onglet_contenu =afficher_corps_articles($id_article,$virtuel,$row);
 		}
 	

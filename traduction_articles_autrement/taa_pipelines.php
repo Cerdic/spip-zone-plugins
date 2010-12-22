@@ -42,4 +42,21 @@ return $flux;
 return $flux;
 }
 
+// /*Modifie l'affichage de la rubrique dans l'espace interne*/
+//  function taa_afficher_contenu_objet($args){
+//     if ($args["args"]["type"] == "rubrique") {
+// 
+//    		 $contexte=array(
+// 			'id_rubrique'=>$args['args']['id_objet'],
+// 			'voir'=>_request('voir'),
+// 			'id_trad'=>_request('voir'),			    
+// 			);	
+// 		$contenu .= recuperer_fond("prive/editer/barre_traductions_rubrique",
+// 		$contexte,array('ajax'=>true));
+//     	$contenu .= recuperer_fond('prive/contenu/rubrique',$args['args']['contexte']);
+//         $args["data"] = $contenu;
+//     }
+//     return $args;
+// }
+
 ?>
