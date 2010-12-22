@@ -172,7 +172,7 @@ function inc_article_afficher_contenu_dist($id_article){
 		
 		$onglet_edition  = recuperer_fond("prive/editer/article_mod",$contexte,array('ajax'=>true));
 		}
-	else{echo '1';
+	else{
 		$onglet_contenu =afficher_corps_articles($id_article,$virtuel,$row);
 		}
 	
