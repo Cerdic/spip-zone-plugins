@@ -25,7 +25,7 @@ function exec_fiche_document(){
 	include_spip('inc/raccourcis_fiche');
 	echo debut_droite('',true);
 
-	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:fiche_document'));
+	echo debut_cadre_relief("", false, "", $titre = _T('genespip:fiche_document'));
 
 	echo gros_titre(_T(genespip_nom_prenom($id_individu,3)), '', false);
 	echo "<br /><fieldset><legend>"._T('genespip:liste_des_articles')."</b></i></legend>";

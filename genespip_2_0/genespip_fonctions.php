@@ -128,7 +128,7 @@
 		$date_update=date("Y-m-d H:i:s");
 		$naissance=genespip_dateus($_POST['naissance']);
 		$deces=genespip_dateus($_POST['deces']);
-		$action_sql = sql_update("spip_genespip_individu", array("nom = '".addslashes($_POST['nom'])."', prenom = '".addslashes($_POST['prenom'])."', sexe ='".addslashes($_POST['sexe'])."', metier = '".addslashes($_POST['metier'])."', enfant = '".addslashes($_POST['enfant'])."', note = '".addslashes($_POST['note'])."', portrait='".addslashes($_POST['portrait']."', source= '".addslashes($_POST['source'])."', adresse= '".addslashes($_POST['adresse'])."', date_update= '".sql_quote($date_update)."', limitation= '".addslashes($_POST['limitation'])."'", "id_individu = ".sql_quote($id_individu))));
+		$action_sql = sql_update("spip_genespip_individu", array("nom = '".addslashes($_POST['nom'])."', prenom = '".addslashes($_POST['prenom'])."', sexe ='".addslashes($_POST['sexe'])."', metier = '".addslashes($_POST['metier'])."', enfant = '".addslashes($_POST['enfant'])."', note = '".addslashes($_POST['note'])."', portrait='".addslashes($_POST['portrait'])."', source= '".addslashes($_POST['source'])."', adresse= '".addslashes($_POST['adresse'])."', date_update= '".sql_quote($date_update)."', limitation= '".addslashes($_POST['limitation'])."'", "id_individu = ".sql_quote($id_individu)));
 		// ### Journal ###
 		$insert_journal = sql_insert("spip_genespip_journal", "(action, descriptif, id_individu, id_auteur, date_update)", "('modification fiche', '2', '".sql_quote($id_individu)."', '".sql_quote($GLOBALS['connect_id_auteur'])."', '".sql_quote($date_update)."')");
 	}
