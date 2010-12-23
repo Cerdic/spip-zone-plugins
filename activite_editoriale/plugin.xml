@@ -35,11 +35,11 @@ Envisag&eacute; dans l'avenir :
 		<inclure>activite_editoriale_pipelines.php</inclure>
 	</pipeline>
 	<fonctions>activite_editoriale_fonctions.php</fonctions>
-	<bouton id='activite_editoriale' parent='activite'>
+	<bouton id='activite_editoriale' parent='naviguer'>
 		<titre>activite_editoriale:activite_editoriale</titre>
 		<icone>activite_editoriale.png</icone>
 	</bouton>
-	<bouton id='activite_editoriale' parent='bando_publication'>
+	<bouton id='activite_editoriale2' parent='bando_publication'>
 		<titre>activite_editoriale:activite_editoriale</titre>
 		<icone>activite_editoriale.png</icone>
 	</bouton>
