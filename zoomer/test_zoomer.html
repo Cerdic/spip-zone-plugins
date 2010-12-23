@@ -1,0 +1,55 @@
+<html>
+<head>
+#INSERT_HEAD
+
+<script type="text/javascript">
+
+jQuery(document).ready(function($){
+/* 
+// par defaut sur toutes les images avec a class .zoomer 
+// a modifier au besoin dans zoomer.js
+
+	$('.zoomer img').addimagezoom({
+		zoomrange: [3, 20],
+		magnifiersize: [300,300],
+		magnifierpos: 'right'
+	})
+*/		
+	$('#image1').addimagezoom({
+		zoomrange: [3, 10],
+		magnifiersize: [300,300],
+		magnifierpos: 'right',
+		largeimage: '#CHEMIN{img/olonzac.jpg}' //<-- No comma after last option!
+	})
+	
+	$('#image2').addimagezoom({
+		zoomrange: [5, 5],
+		magnifiersize: [400,400],
+		magnifierpos: 'right',
+		largeimage: '#CHEMIN{img/olonzac.jpg}' //<-- No comma after last option!
+	})
+
+	$('#image3').addimagezoom()
+
+})
+
+</script>
+</head>
+<body>
+class .zoomer sur le href avec molette et traduction dans le span
+<p><a class="zoomer" href="#CHEMIN{img/olonzac.jpg}">
+<img src="[(#CHEMIN{img/olonzac.jpg}|image_reduire{300}|extraire_attribut{src})]" />
+<span class="invisible"><:zoomer:utiliser_molette:></span></a><p>
+
+avec un id et un largeimage dans le js  avec molette
+<p><img id="image1" src="[(#CHEMIN{img/olonzac.jpg}|image_reduire{300}|extraire_attribut{src})]" /><p>
+
+avec un id et un largeimage dans le js sans molette
+<p><img id="image2" src="[(#CHEMIN{img/olonzac.jpg}|image_reduire{300}|extraire_attribut{src})]" /><p>
+
+La meme image mais reduite a gauche en style css
+<p><img id="image3" src="#CHEMIN{img/olonzac.jpg}" style="width:225px;height:300px" /><p>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<BOUCLE_document (DOCUMENTS) {id_document} {mode?} {tout}>
+[(#REM)
+
+	Modele pour <imgxxx|zoom|width=300|left>
+
+	Si on est en mode "image" ou "vignette", ou appele avec embed=oui,
+	on affiche l'image complete ; sinon le logo
+
+	Si un lien est passe #ENV{lien} on ajoute le a href
+	ou on truque le #URL_DOCUMENT
+
+]
+[(#SET{
+	image,
+		#MODE|match{'image|vignette'}
+		|sinon{#ENV{embed}}
+		|?{' '}
+})]
+[(#SET{
+	width,
+		#ENV{width}
+		|sinon{#LARGEUR}
+		}
+)]
+[
+
+	(#REM) image complete ?
+
+]
+
+[(#GET{image}|oui)
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'
+[ style='float:(#ENV{align}|match{left|right});']>
+[<a href="(#ENV{lien,#URL_DOCUMENT})" class="#ENV{lien_class} zoomer" type="#MIME_TYPE">]
+<img src='[(#URL_DOCUMENT|image_reduire{#GET{width}}|extraire_attribut{src})]'
+[ width="(#LARGEUR|oui)[(#URL_DOCUMENT|image_reduire{#GET{width}}|extraire_attribut{width})]"] 
+[ height="(#HAUTEUR|oui)[(#URL_DOCUMENT|image_reduire{#GET{width}}|extraire_attribut{height})]"] 
+alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] /><span class="invisible"><:zoomer:utiliser_molette:></span>
+[(#ENV{lien,#URL_DOCUMENT}|?{</a>})]</span>
+][
+
+	(#REM) sinon logo document + lien + alt + title etc
+
+][(#GET{image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+<span 
+class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]']>
+[<a href="(#ENV{lien,#URL_DOCUMENT})" class="#ENV{lien_class} zoomer" type="#MIME_TYPE">]
+<img src='#GET{fichier}' 
+width='#GET{width}' 
+height='#GET{height}' 
+alt='[(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT})]' [ title="(#TITRE|texte_backend)"]/>
+<span class="invisible"><:zoomer:utiliser_molette:></span></a>
+</span>
+]</BOUCLE_document>
