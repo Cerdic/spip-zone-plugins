@@ -107,11 +107,18 @@ function inc_article_afficher_contenu_dist($id_article){
 			" class='fondl'").'</div>';
 		}
 	
-	$retour = generer_url_ecrire("articles","id_article=$id_article",false);
+	$retour = generer_url_ecrire("articles","id_article=$id_article",false);					$span_content='<span>'._T('spip:trad_reference').'</span>';	
+	
 	foreach($langues_dispos as $key => $value){
+	$class='';
+	$span='';	
 		if($traductions[$value]!=$id_article){
 			if(array_key_exists($value,$traductions)){
-				$onglets_traduction.='<div class="traduit onglet ajax"><a href="?exec=articles&id_article='.$traductions[$value].'">'.traduire_nom_langue($value).'</a></div>';					
+				if($traductions[$value]==$id_trad){
+					$class=' ref';
+					$span=$span_content;					
+					}
+				$onglets_traduction.='<div class="traduit onglet ajax'. $class.'"><a href="?exec=articles&id_article='.$traductions[$value].'">'.traduire_nom_langue($value).$span.'</a></div>';					
 			}
 			else{
 				include_spip('ecrire/inc/plugin');
@@ -120,7 +127,7 @@ function inc_article_afficher_contenu_dist($id_article){
 				if($plugins['TRADRUB']){
 					$id_rubrique=rubrique_traduction($value,$id_rubrique);
 					$section='oui';
-					}
+					}	
 				$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire('articles_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';
 			
 				$action=generer_action_auteur ('changer_langue',$id_article,$retour);
@@ -132,7 +139,11 @@ function inc_article_afficher_contenu_dist($id_article){
 				}
 			}
 		else{
-			$onglets_traduction.='<div class="onglet_off onglet">'.traduire_nom_langue($value).'</div>';
+			if($traductions[$value]==$id_trad){
+					$class=' ref';
+					$span=$span_content;					
+					}
+			$onglets_traduction.='<div class="onglet_off onglet'.$class.'">'.traduire_nom_langue($value).$span.'</div>';
 			}
 		}
 	}
