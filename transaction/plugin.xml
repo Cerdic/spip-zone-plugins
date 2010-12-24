@@ -5,7 +5,7 @@
 	<version>0.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Champs aditionnels de paiement en ligne pour le plugin Formidable</description>
+	<description>Champs additionnels de paiement en ligne pour le plugin Formidable</description>
 	<lien></lien>
 	<icon>images/transaction-64.png</icon>
 	
