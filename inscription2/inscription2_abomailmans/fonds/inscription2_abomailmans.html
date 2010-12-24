@@ -1,0 +1,34 @@
+#SET{checked,#CONFIG{inscription2/liste,#ARRAY}}
+#SET{selected,#CONFIG{inscription2/listes,#ARRAY}}
+<li class="fieldset" id="i2_abomailmans">
+	<fieldset>
+	<h3 class="legend"><:i2_abomailmans:liste:></h3>
+	<ul>
+		<li>
+			<input type="checkbox" name="liste" onclick="showhide(this, '#news-abomailmans')"[ (#GET{checked}|=={on}|?{checked="checked"})] id="liste" />
+			<label for="liste"><strong><:i2_abomailmans:liste_label:></strong></label>
+			<div id="news-abomailmans" style="[(#GET{checked}|=={on}|?{display: block;, display:none;})]">
+			
+			<p class="explications"><:i2_abomailmans:choisir_listes:></p>
+			<B_listes>
+			<select name="listes[]" multiple="multiple" size="[(#TOTAL_BOUCLE|<{6}|?{ [(#TOTAL_BOUCLE|plus{1})] , 5 })]" id="listes">
+
+			<BOUCLE_listes(ABOMAILMANS){par titre}{pagination 10}>
+				<option value="#ID_ABOMAILMAN"[(#ID_ABOMAILMAN|in_array{#GET{selected,#ARRAY}}|?{ selected="selected"})]>
+				#TITRE
+				</option>
+			</BOUCLE_listes>
+
+			</select>				
+			<small><br /><:i2_abomailmans:select_listes:><br />
+			<a href="#i2_abomailmans" onclick="jQuery('#listes').find('option').attr('selected', false);return false"><:i2_abomailmans:deselect_listes:></a></small><br />
+			</B_listes>			
+
+				<label for="output"><strong><:i2_abomailmans:optout:></strong></label>
+				<input type="checkbox" name="optout" [(#CONFIG{inscription2/optout}|=={on}|?{checked="checked"})] id="optout" />
+				
+			</div>
+		</li>
+	</ul>
+	</fieldset>
+</li>

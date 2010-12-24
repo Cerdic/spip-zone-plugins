@@ -1,0 +1,42 @@
+<fieldset class="info_listes">
+    <legend>
+        <:i2_abomailmans:liste:>
+    </legend>
+	<ul>
+	<li>
+    
+	[(#REM) Format de réception par défaut]
+	<input type="hidden" name="liste" id="liste" value="html">
+
+
+    [(#REM) Tableau des listes en selection par défaut]
+    #SET{selected,#CONFIG{inscription2/listes,#ARRAY}}
+	
+    <B_listes>
+    [<p class="explications">(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{<:i2_abomailmans:exp_liste:>,<:i2_abomailmans:exp_liste:>})</p>]
+    <ul>
+
+	<BOUCLE_listes(ABOMAILMANS){par titre}{pagination 10}>
+	    <li class="editer_listes">
+			<label for="listes-#ID_ABOMAILMAN">
+            <input type="checkbox" class="checkbox" name="listes[]" id="listes-#ID_ABOMAILMAN" value="#ID_ABOMAILMAN" 
+            [(#CONFIG{inscription2/optout}|=={on}|?{
+				[(#ID_ABOMAILMAN|in_any{#ENV{listes}}|oui) checked="checked"]
+				,
+				[(#ID_ABOMAILMAN|in_array{#GET{selected}}|oui) checked="checked"]
+            })] 
+			/>
+            <span class='liste_titre'>#TITRE[ (#TEXTE|oui): ]</span>
+            [<span class='listeDescriptif#ID_ABOMAILMAN liste_descriptif'>(#TEXTE|textebrut|couper{160})</span>]
+            </label>
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{listes-#ID_ABOMAILMAN})</p>]
+        </li>
+    </BOUCLE_listes>
+
+    </ul>     
+    </B_listes><//B_listes>     
+     
+    [<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{listes})</p>]
+	</li>
+	</ul>
+</fieldset>

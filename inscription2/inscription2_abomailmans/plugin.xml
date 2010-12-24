@@ -1,0 +1,38 @@
+<plugin>
+	<nom>Abomailmans pour Inscription2</nom>
+	<auteur>olivier &lt;olivier@durif.fr&gt;
+_ &#169; 2010 - Distribu&#233; sous licence GPL   
+	</auteur>
+	<lien></lien>
+	<version>0.1</version>
+	<etat>exp</etat>
+    <description>
+		Gestion des listes de diffusion spip-listes dans le plugin inscription2
+	</description>
+	<prefix>i2_abomailmans</prefix>
+	<pipeline>
+		<nom>I2_cfg_form</nom>
+		<inclure>i2_abomailmans_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_form_fin</nom>
+		<inclure>i2_abomailmans_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_charger_formulaire</nom>
+		<inclure>i2_abomailmans_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_traiter_formulaire</nom>
+		<inclure>i2_abomailmans_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_exceptions_des_champs_auteurs_elargis</nom>
+		<inclure>i2_abomailmans_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id='inscription2' version='[0.71;]' />
+	<necessite id='abomailmans' version='[0.6;]' />
+	<chemin dir='' />
+	<categorie>auteur</categorie>
+</plugin>
