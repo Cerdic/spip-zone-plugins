@@ -1,0 +1,35 @@
+Note : Documentation issue de Thélia à adapter éventuellement
+-------------------------------------------------
+
+
+Ce plugin CIC permet de gérer le paiement via cet organisme bancaire.
+
+INSTALLATION
+============
+
+- editez le fichier config.php et donnez des valeurs aux variables suivantes :
+
+$tpe="";	 // N° TPE
+$soc="";	 // N° de société
+$key="";	 // clé
+$motdepasse=""; // mot de passe
+$retourok=""; // url de retour si paiement OK
+$retourko=""; // url de retour si paiement non OK
+
+La banque vous fournira toutes les valeurs (exceptées les url de retour)
+
+Pour utiliser la réponse automatique, vous devrez fournir l'url à appeler à votre banque.
+
+Renommez confirmation.php en personnalisant le nom du fichier (sécurité)
+
+Ex : http://www.monsite.com/client/paiement/cic/confirmation_blabla.php
+
+
+Information
+============
+
+Le retour de paiement n'est pas une information suffisante. Vérifiez toujours sur l'interface de votre banque qu'un paiement est bien passé en paiement
+avant de le considérer réellement comme "payé"
+
+Vérifier que les répertoires de votre site ne sont pas listable (ex http://www.votresite.com/plugins/transaction/paiement/).
+Si tel est le cas veuillez ajouter un fichier htaccess afin de sécuriser le tout.
