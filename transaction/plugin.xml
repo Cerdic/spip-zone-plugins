@@ -1,0 +1,27 @@
+<plugin>
+	<nom>Transaction, module de paiement pour Formidable</nom>
+	<auteur>Arnault Pachot</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Champs aditionnels de paiement en ligne pour le plugin Formidable</description>
+	<lien></lien>
+	<icon>images/transaction-64.png</icon>
+	
+	<prefix>transaction</prefix>
+	
+	<options>transaction_options.php</options>
+	<fonctions>inc/transaction.php</fonctions>
+	
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="spip_bonux" version="[1.9.3;]" />
+	<necessite id="saisies" version="[1.7.5;]" />
+	<necessite id="verifier" version="[0.1;]" />
+	<necessite id="yaml" version="[1.1;]" />
+	<necessite id="facteur" version="[1.5.3;]" />
+	<necessite id="formidable" version="[0.5.3;]" />
+	<categorie>communication</categorie>
+</plugin>
+
