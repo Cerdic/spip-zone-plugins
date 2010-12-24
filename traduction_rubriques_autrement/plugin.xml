@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Traduction rubriques[en]Section translation[es]Traducción de secciones [de]Rubriken Übersetzung</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<version_base>0.1</version_base>
 	<install>base/trad_rub_install.php</install>
 	<etat>dev</etat>
