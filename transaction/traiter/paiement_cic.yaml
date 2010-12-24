@@ -3,10 +3,10 @@ titre: '<:transaction:traiter_paiement_cic_titre:>'
 description: '<:transaction:traiter_paiement_cic_description:>'
 options:
   -
-    saisie: 'champ'
+    saisie: 'hidden'
     options:
-      nom: 'champ_destinataires'
-      label: '<:formidable:traiter_email_option_destinataires_label:>'
-      explication: '<:formidable:traiter_email_option_destinataires_explication:>'
-      forcer_type: [destinataires,hidden]
+      nom: 'champ_paiement_cic_activation'
+      label: '<:formidable:traiter_paiement_cic_activation_label:>'
+      explication: '<:formidable:traiter_paiement_cic_activation_explication:>'
+      forcer_type: [cic_paiement_activation,hidden]
       env: true

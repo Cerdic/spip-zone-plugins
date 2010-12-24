@@ -13,7 +13,7 @@ function traiter_paiement_cic_dist($args, $retours){
 	$retourko="";
 	
 	$dir="/";
-	$serveur="http://ssl.paiement.cic-banques.fr";
+	$serveur="https://ssl.paiement.cic-banques.fr";
 	
 	$retours['redirect'] = $serveur;
 	
