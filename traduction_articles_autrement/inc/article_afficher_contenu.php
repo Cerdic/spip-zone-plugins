@@ -107,7 +107,8 @@ function inc_article_afficher_contenu_dist($id_article){
 			" class='fondl'").'</div>';
 		}
 	
-	$retour = generer_url_ecrire("articles","id_article=$id_article",false);					$span_content='<span>'._T('spip:trad_reference').'</span>';	
+	$retour = generer_url_ecrire("articles","id_article=$id_article",false);
+	$span_content='<span>'._T('spip:trad_reference').'</span>';	
 	
 	foreach($langues_dispos as $key => $value){
 	$class='';
