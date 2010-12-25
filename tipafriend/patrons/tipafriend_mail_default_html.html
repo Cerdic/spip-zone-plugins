@@ -1,4 +1,7 @@
-#CACHE{0}[(#SET{contenu,#EVAL{tipafriend_config(contenu_objets)}})]
+[(#REM)
+	Necessite le plugin FACTEUR
+	=> inclusion de 'inc-haut' et 'inc-bas' de ce plugin
+]#CACHE{0}[(#SET{contenu,#EVAL{tipafriend_config(contenu_objets)}})]
 #HTTP_HEADER{Content-Type:text/html}
 #INCLURE{fond=emails/inc-haut}
 

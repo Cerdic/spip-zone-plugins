@@ -15,7 +15,7 @@
  * Comme pour l'ensemble du plugin, si le squelette n'est pas trouvé, le squelette par défaut sera
  * chargé à la place.
  *
- * Arguments complets possibles :
+ * Arguments complets possibles (cf. 'tipafriend_options.php') :
  * => 1: type de squelette (cf. ci-dessus)
  * => 2: URL
  * => 3: email expediteur

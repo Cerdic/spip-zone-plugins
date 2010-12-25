@@ -3,6 +3,8 @@
 |                                                                        |
 |  Copyright (c) 2009 | Piero Wbmstr                                     |
 +------------------------------------------------------------------------+
+dev sur le SVN de spip-zone :
+<http://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend>
 
 -----
 [ TODOS ]
@@ -16,7 +18,10 @@
 
 [ version 1.0 ]
 passage en état 'stable'
-
+25/12/2010 - 013
+- Mise en développement sur le SVN de la zone :
+	-> repository : http://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend
+- Ajout à "archivelist.txt" pour création de zip par la zone
 25/12/2010 - 012
 - Refonte de la doc : squelette "universel" et doc en fichier de langue
 - Structure du DOM de la popup pour correspondance SPIP et Zpip : deux div "conteneur" et "contenu"

@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Fonction renvoyant les valeurs globales pour le contexte d'appel des patrons
  *
  * Surchargé par le traitement du formulaire.
- * @return	Array Array du contexte pour l'intégration des patrons de mail
+ * @return	Array Tableau du contexte pour l'intégration des patrons de mail
  */
 function tipafriend_contexte(){
 	return array(

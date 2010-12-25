@@ -2,7 +2,7 @@
 /**
  * Construction et envoi du mail
  *
- * Utilisation du plugin facteur, si présente, pour envoyer un mail HTML (avec version texte initiale
+ * Utilisation du plugin facteur, si présent, pour envoyer un mail HTML (avec version texte initiale
  * jointe).
  * @name 		FormulaireEnvoi
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>

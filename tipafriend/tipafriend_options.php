@@ -11,7 +11,7 @@
  *
  * Il est réglé pour permettre l'envoi d'un mail d'information pour toute page d'un site SPIP : 
  * il va charger s'il peut les objets et ID-objets de SPIP (<i>articles, brèves ...</i>),
- * l'url de la page courante sinon.
+ * l'url et le titre de la page courante sinon.
  *
  * <b>UTILISATION</b>
  * 
@@ -44,14 +44,16 @@
  * - pour '<b>adresse de l'expéditeur</b>' : à l'adresse mail qui sera pré-remplie dans le formulaire
  * (<i>s'il s'agit d'un utilisateur connecté, elle sera ajoutée automatiquement</i>) ;
  * - pour '<b>nom de l'expéditeur</b>' : au nom qui sera pré-rempli dans le formulaire
- * (<i>s'il s'agit d'un utilisateur connu il sera ajoutée automatiquement</i>) ;
+ * (<i>s'il s'agit d'un utilisateur connu il sera ajouté automatiquement</i>) ;
  * - pour '<b>adresse de destination</b>' : la ou les adresses mail qui seront pré-remplies dans le formulaire
  * à séparer par un point-virgule.
  *
- * La balise calcule automatiquement le type de boucles et l'ID de l'objet dans laquelle elle se trouve et
- * intègre vos réglages personnels si vous disposez du plugin CFG (<i>cf. ci-dessous</i>).
+ * La balise calcule automatiquement le type de boucles et l'ID de l'objet dans laquelle elle 
+ * se trouve et intègre vos réglages personnels si vous disposez du plugin CFG (<i>cf. ci-dessous</i>).
  *
  * <b>NOTES</b>
+ *
+ * Le plugin inscrit des logs commençant par 'TIPAFRIEND' (muy original !)
  *
  * Un debugger est installé pour vous permettre de visualiser les différents paramètres passés
  * de fonction en fonction. Pour le voir, vous devez passer la gobale '_TIAPFRIEND_TEST' sur 'true'.
@@ -78,6 +80,10 @@ define('_TIPAFRIEND_POPUP_HEIGHT', 460);
 
 /**
  * Config par défaut
+ *
+ * Il est préférable de les modifier en utilisant CONFIG
+ * (donc ne pas modifier ici tant qu'à faire : on reste sûr de pouvoir récupérer des valeurs
+ * correctes ...)
  */
 $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 	// patron par defaut du corps du mail
