@@ -3,7 +3,7 @@
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
 	<version>1.0</version>
 	<licence>&#169; 2009 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 Ce plugin propose un formulaire complet pour envoyer une page d'un site SPIP ({n'importe laquelle}) &#224; une liste d'adresses e-mail.
 
