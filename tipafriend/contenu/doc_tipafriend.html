@@ -1,0 +1,90 @@
+<div style="border:1px solid red;margin:.2em;padding:.4em;font-weight:bold;text-align:center;"><:tipafriend:info_doc{link=#info_doc}|propre:></div>
+
+[(#REM) Fil d'Ariane ]
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:tipafriend:doc_titre_court:></strong></div>
+
+<div class="cartouche">
+	<h1 class="entry-title"><:tipafriend:doc_titre_page:></h1>
+</div>
+		
+<div class="chapo"><:tipafriend:doc_chapo|propre:></div>
+
+[(#ENV{model}|=={''}|non)
+        <p><strong><:tipafriend:page_test_titre_inclusion_model{model=#ENV{model}}:></strong></p><hr />
+		<pre class="taf_dbg_pre">[(#INCLURE{fond=patrons/#ENV{model}}{env}{
+			document_titre="Titre page",
+			document_url=[(#SELF|url_absolue)],
+			destinataires="destinataire1@mail.com ; destinataire2@mail.com",
+			expediteur_nom="Mon nom",
+			expediteur_adresse="mon@adress.mail",
+			expediteur_message="ABCD efgh",
+		})]</pre>
+		<hr /><p><strong><:tipafriend:page_test_fin_simulation:></strong></p>
+]
+
+<BOUCLE_brev(BREVES) {id_breve=#ENV{id_breve}}>
+        <p><strong><:tipafriend:page_test_titre_inclusion_objet{objet='breve',id_objet=#ENV{id_breve}}:></strong></p><hr />
+		<div class="cartouche"><p class="entry-title">#TITRE</p></div>
+		[<div class="chapo">(#INTRODUCTION)</div>]
+		#TIPAFRIEND{#ENV{arg,''}}
+		<hr /><p><strong><:tipafriend:page_test_fin_simulation:></strong></p>
+</BOUCLE_brev>
+
+<BOUCLE_artic(ARTICLES) {id_article=#ENV{id_article}}>
+        <p><strong><:tipafriend:page_test_titre_inclusion_objet{objet='article',id_objet=#ENV{id_article}}:></strong></p><hr />
+		<div class="cartouche"><p class="entry-title">#TITRE</p></div>
+		[<div class="chapo">(#INTRODUCTION)</div>]
+		#TIPAFRIEND{#ENV{arg,''}}
+		<hr /><p><strong><:tipafriend:page_test_fin_simulation:></strong></p>
+</BOUCLE_artic>
+
+<div class="texte entry-content">
+[(#SET{cfg_param,[(#EVAL{function_exists('lire_config')}|=={1}|?{
+			[(#CFG_ARBO{tipafriend}|propre)],
+			<small><:tipafriend:page_test_cfg_pas_installe|propre:></small>
+})]})]
+[(#SET{url_article,[(#SELF|parametre_url{id_article,1}|parametre_url{id_breve,''})]})]
+[(#SET{url_breve,[(#SELF|parametre_url{id_article,''}|parametre_url{id_breve,2})]})]
+[(#SET{url_recalcul,[(#SELF|parametre_url{var_mode,recalcul})]})]
+[(#SET{url_vierge,[(#SELF|parametre_url{id_article,''}|parametre_url{id_breve,''}|parametre_url{var_mode,''}|parametre_url{model,''})]})]
+[(#SET{url_model,[(#SELF|parametre_url{var_mode,recalcul}|parametre_url{model,tipafriend_mail_default})]})]
+[(#SET{url_model_brut,[(#SELF
+				|parametre_url{page,patrons/tipafriend_mail_default}
+				|parametre_url{id_article,1}
+				|parametre_url{document_titre,Titre page}
+				|parametre_url{document_url,[(#SELF|url_absolue)]}
+				|parametre_url{expediteur_nom,Mon nom}
+				|parametre_url{expediteur_adresse,mon@adress.mail}
+				|parametre_url{expediteur_message,ABCD efgh}
+				|parametre_url{pre,oui}
+)]})]
+[(#SET{url_model_html,[(#SELF
+				|parametre_url{page,patrons/tipafriend_mail_default_html}
+				|parametre_url{id_article,1}
+				|parametre_url{document_titre,Titre page}
+				|parametre_url{document_url,[(#SELF|url_absolue)]}
+				|parametre_url{expediteur_nom,Mon nom}
+				|parametre_url{expediteur_adresse,mon@adress.mail}
+				|parametre_url{expediteur_message,ABCD efgh}
+)]})]
+	<:tipafriend:documentation{cfg_param=#GET{cfg_param},url_article=#GET{url_article},url_breve=#GET{url_breve},url_recalcul=#GET{url_recalcul},url_vierge=#GET{url_vierge},url_model=#GET{url_model},url_model_brut=#GET{url_model_brut},url_model_html=#GET{url_model_html}}|propre:>
+</div>
+
+<:tipafriend:docskel_sep|propre:>
+
+[<div class="notes"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+<div id="bloc_licence" class="cartouche" style="border:1px solid #404040;margin:.2em;padding:.8em;line-height:1.4em;">
+	<img class='spip_logos' alt="" src="#CHEMIN{img/letter_64.png}" width='64' height='64' style='height:64px;width:64px;' />
+	<p class="soustitre"><:tipafriend:tipafriend:></p>
+	<p><small><:tipafriend:licence|propre:></small></p>
+	<p><small><:tipafriend:doc_en_ligne:> : <a href="http://www.spip-contrib.net/?article3638" class="spip_out">Tip-A-Friend-envoyer-une-page-SPIP-par-e-mail</a></small></p>
+</div>
+
+<div id="info_doc" style="background:#eee;color:#000;margin:.2em;padding:.4em;border:1px solid red;font-size:96%;">
+[(#SET{urldocbrut,[(#URL_PAGE{tipafriend_documentation}|parametre_url{docmode,brut})]})]
+[(#SET{urldoczpip,[(#URL_PAGE{tipafriend_documentation}|parametre_url{docmode,zpip})]})]
+[(#SET{urldocspip,[(#URL_PAGE{tipafriend_documentation}|parametre_url{docmode,spip})]})]
+<h3><:tipafriend:info_doc_titre:></h3>
+<:tipafriend:info_skel_doc{mode_brut=#GET{urldocbrut},mode_zpip=#GET{urldoczpip},mode_spip=#GET{urldocspip}}|propre:>
+</div>

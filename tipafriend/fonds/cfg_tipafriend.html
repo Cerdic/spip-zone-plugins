@@ -1,0 +1,119 @@
+<!-- titre=<:tipafriend:tipafriend:> -->
+<!-- icone=img/letter_16.png -->
+[(#SET{logo,
+<img src="[(#CHEMIN{img/letter_32.png})]" width="32" height="32" alt="Logo <:tipafriend:tipafriend:>" style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
+<h4><:tipafriend:cfg_titre_descr:></h4>
+<p><:tipafriend:cfg_texte_descr:></p>
+<br />
+<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>
+<tr><td>
+<a href='http://www.spip-contrib.net/?article3638' class='cellule-h'>
+	<span class='cell-i'>
+		<img src='#CHEMIN{img/spip_contrib-24.gif}' alt="Contrib"  style='background: url(#CHEMIN{img/spip_contrib-24.gif}) center center no-repeat;' />
+	</span>
+</a>
+</td>
+<td class='cellule-h-lien'>
+	<a href='http://www.spip-contrib.net/?article3638' class='cellule-h'><:tipafriend:doc_en_ligne:></a>
+</td></tr>
+<tr><td>
+<a href='#URL_SITE_SPIP/?page=tipafriend_documentation' class='cellule-h'>
+	<span class='cell-i'>
+		<img src='#CHEMIN{images/article-24.gif}' alt="Test"  style='background: url(#CHEMIN{images/article-24.gif}) center center no-repeat;' />
+	</span>
+</a>
+</td>
+<td class='cellule-h-lien'>
+	<a href='#URL_SITE_SPIP/?page=tipafriend_documentation' class='cellule-h'><:tipafriend:page_test:></a>
+</td></tr>
+</table>
+[<a href='#URL_SITE_SPIP/?page=tipafriend_documentation' target='_blank' title='<:tipafriend:page_test_in_new_window:>'><:tipafriend:new_window:></a>]
+<br />
+-->
+<!-- boite=<:tipafriend:cfg_titre_descr:> -->
+#CACHE{0}
+
+<form method="post" action="#SELF" id="top_taf_form"><div>
+[(#SET{config,#EVAL{tipafriend_config()}})]
+	<div>
+		[(#ENV{_cfg_}|form_hidden)]
+		<input type="hidden" name="modele" id="modele" value="[(#GET{config}|table_valeur{modele})]" />
+	</div>
+
+<fieldset><legend>&nbsp;<b><:tipafriend:cfg_legend_patron:></b></legend>
+	<div style="padding:0.2em; padding-right: 1.2em">
+		<p class="comment"><:tipafriend:cfgform_info_patrons:></p>
+		<p class="forml">
+			<label for="patron"><strong><:tipafriend:cfgform_titre_patron:>&nbsp;:</strong></label>
+			<br /><input type="text" name="patron" id="patron" value="[(#GET{config}|table_valeur{patron})]" size="50" />
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_patron:></span>
+		</p>
+		<p class="forml">
+			<label for="contenu_objets"><strong><:tipafriend:cfgform_titre_contenu:>&nbsp;:</strong></label>
+			<br /><select name="contenu_objets" id="contenu_objets" class="forml">
+				<option value="tout"[(#GET{config}|table_valeur{contenu_objets}|=={tout}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_tout:></option>
+				<option value="introduction"[(#GET{config}|table_valeur{contenu_objets}|=={introduction}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_introduction:></option>
+				<option value="rien"[(#GET{config}|table_valeur{contenu_objets}|=={rien}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_rien:></option>
+			</select>
+			<span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_contenu:></span>
+		</p>
+		<p class="comment"><:tipafriend:cfgform_info_patron_html:></p>
+		<p class="forml">
+			<label for="patron_html"><strong><:tipafriend:cfgform_titre_patron_html:>&nbsp;:</strong></label>
+			<br /><input type="text" name="patron_html" id="patron_html" value="[(#GET{config}|table_valeur{patron_html})]" size="50" />
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_patron_html:></span>
+		</p>
+	</div>
+</fieldset>
+<br />
+<fieldset><legend>&nbsp;<b><:tipafriend:cfg_legend_squelette:></b></legend>
+	<div style="padding:0.2em; padding-right: 1.2em">
+		<p class="comment"><:tipafriend:cfgform_info_squelettes:></p>
+		<p class="forml">
+			<label for="squelette"><strong><:tipafriend:cfgform_titre_squelette:>&nbsp;:</strong></label>
+			<br /><input type="text" name="squelette" id="squelette" value="[(#GET{config}|table_valeur{squelette})]" size="50" />
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_squelette:></span>
+		</p>
+		<p class="forml">
+			<label for="header"><strong><:tipafriend:cfgform_titre_header:>&nbsp;:</strong></label>
+			<br />&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="header" value="oui"[(#GET{config}|table_valeur{header}|=={oui}|oui) checked="checked"] />&nbsp;<:item_oui:>
+				&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+				<input type="radio" name="header" value="non"[(#GET{config}|table_valeur{header}|=={non}|oui) checked="checked"] />&nbsp;<:item_non:>
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_header:></span>
+		</p>
+	</div>
+</fieldset>
+<br />
+<fieldset><legend>&nbsp;<b><:tipafriend:cfg_legend_balise:></b></legend>
+	<div style="padding:0.2em; padding-right: 1.2em">
+		<p class="comment"><:tipafriend:cfgform_info_balise:></p>
+		<p class="forml">
+			<label for="options"><strong><:tipafriend:cfgform_titre_options:>&nbsp;:</strong></label>
+			<br /><input type="text" name="options" id="options" value="[(#GET{config}|table_valeur{options})]" size="50" />
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_options:></span>
+		</p>
+		<p class="forml">
+			<label for="javascript_standard"><strong><:tipafriend:cfgform_titre_javascript:>&nbsp;:</strong></label>
+			<br />&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="javascript_standard" value="oui"[(#GET{config}|table_valeur{javascript_standard}|=={oui}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_activer:>
+				&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+				<input type="radio" name="javascript_standard" value="non"[(#GET{config}|table_valeur{javascript_standard}|=={non}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_desactiver:>
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_javascript:></span>
+		</p>
+		<p class="forml">
+			<label for="form_reset"><strong><:tipafriend:cfgform_titre_reset:>&nbsp;:</strong></label>
+			<br /><input type="text" name="form_reset" id="form_reset" value="[(#GET{config}|table_valeur{form_reset})]" size="50" />
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_reset:></span>
+		</p>
+	</div>
+</fieldset>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:tipafriend:bouton_reset:>" class="fondo" />
+	</p>
+</div></form>

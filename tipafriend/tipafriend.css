@@ -1,0 +1,37 @@
+/* --------------------------------------------------------------
+
+   tipafriend.css
+   Style du modèle et formulaire
+
+-------------------------------------------------------------- */
+
+/* ---- Formulaire ---- */
+input.taf_left{float:left}
+label.taf_inline {padding:0;margin:0;width:auto;padding-right:1em;float:left}
+
+/* ---- Popup ---- */
+
+/* Conteneurs de la page 
+On precise un width minimum a 96% pour "conteneur" et "contenu" 
+	=> pour reset des CSS par defaut de SPIP et Zpip 
+	=> 96 plutot que 100% pour etre sur de ne pas depasser ... */
+#taf_page { position: relative; margin: 0 auto; text-align: left; width: 96%; height: 100%}
+#taf_page #conteneur, #taf_page #contenu { min-width: 96%}
+
+/* Conteneur du formulaire 
+On met ici un overflow auto pour les cas de presentation en 'thickbox' ou 'fancybox' 
+	scroller interne invisible en popup logiquement */
+.taf_content {height:100%;overflow-x:hidden;overflow-y:auto}
+
+/* Pied de page */
+#footer_popup {margin-bottom:1em}
+
+/* Typo des liens type boutons (ici nada mais vous pouvez les styliser!) */
+a.popup_liens {}
+
+
+/* ---- Blocs de debug ... ---- */
+.taf_dbg_global {color:black;border:1px solid #ddd;margin:.1em;padding:0;background:#fff}
+.taf_dbg_title {height:20px;background-color:#ddd;border-bottom:1px solid #ddd;padding-left:1em;padding-top:.4em}
+pre.taf_dbg_pre {max-height:280px;overflow:auto;color:black;padding:.6em;margin:0}
+pre.taf_dbg_pre ul li {margin-bottom:.6em}

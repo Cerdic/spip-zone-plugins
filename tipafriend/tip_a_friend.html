@@ -1,0 +1,31 @@
+#CACHE{0}
+[(#ENV{header}|=={non}|non)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:tipafriend:popup_name|textebrut:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+<body>
+<div id="taf_page">
+]
+	<div id="conteneur">
+	<div id="contenu" class="ajax">
+		#FORMULAIRE_TIPAFRIEND_FORM{env}
+		<div id="footer_popup"> </div>
+	</div>
+	</div>
+
+[(#ENV{header}|=={non}|non)
+<script type='text/javascript'>
+<!--
+var close_div = document.getElementById("footer_popup");
+if (close_div)
+	close_div.innerHTML = "<a class=\"popup_liens\" href=\"javascript:window.close();window.opener.focus();\"><:tipafriend:bouton_fermer:><\/a>";
+//-->
+</script>
+</div>
+</body>
+</html>
+]

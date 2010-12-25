@@ -1,0 +1,116 @@
+#CACHE{0}[(#SET{contenu,#EVAL{tipafriend_config(contenu_objets)}} )][(#ENV{pre}|=={oui}|oui)<pre>]
+<:tipafriend:mail_body_01{nom_exped=#ENV{expediteur_nom},mail_exped=#ENV{expediteur_adresse},nom_site=#NOM_SITE_SPIP}|textebrut:>
+[-------
+<:tipafriend:mail_body_02{nom_exped=#ENV{expediteur_nom}}|textebrut:>
+'(#ENV{expediteur_message}|textebrut)'
+]-------[(#ENV{document_titre}|!={''}|oui)
+<:tipafriend:mail_body_03{titre_document=#ENV{document_titre}}|textebrut:>]
+<:tipafriend:mail_body_04{url_document=#ENV{document_url}}|textebrut:>
+-------<BOUCLE_mailrub(RUBRIQUES) {id_rubrique}>[(#GET{contenu}|=={rien}|non)[[(#GET{contenu}|!={rien}|oui)
+<:tipafriend:mail_body_05:>
+
+]&laquo;
+(#TITRE|supprimer_tags|textebrut)[(#GET{contenu}|=={introduction}|oui)[
+
+<:tipafriend:mail_body_extrait:>
+(#INTRODUCTION|supprimer_tags|textebrut)]][(#GET{contenu}|=={tout}|oui)[
+
+(#TEXTE|image_reduire{0,0}|supprimer_tags|textebrut)][
+
+<:info_notes:>
+(#NOTES|supprimer_tags|textebrut)]]
+&raquo;]
+]</BOUCLE_mailrub><BOUCLE_mailart(ARTICLES) {id_article}>[(#GET{contenu}|=={rien}|non)[[(#GET{contenu}|!={rien}|oui)
+<:tipafriend:mail_body_05:>
+
+]&laquo;[(#GET{contenu}|=={tout}|oui)[
+(#SURTITRE|supprimer_tags|textebrut)]]
+(#TITRE|supprimer_tags|textebrut)[(#GET{contenu}|=={tout}|oui)[
+(#SOUSTITRE|supprimer_tags|textebrut)
+]][(#GET{contenu}|=={introduction}|oui)[
+
+<:tipafriend:mail_body_extrait:>
+(#INTRODUCTION|supprimer_tags|textebrut)]][(#GET{contenu}|=={tout}|oui)[
+(#CHAPO|image_reduire{0,0}|supprimer_tags|textebrut)][
+
+(#TEXTE|image_reduire{0,0}|supprimer_tags|textebrut)][
+
+<:voir_en_ligne:>
+(#URL_SITE|textebrut|url_absolue) [ - (#NOM_SITE)]][
+
+<:info_notes:>
+(#NOTES|supprimer_tags|textebrut)][
+
+<:info_ps:>
+(#PS|supprimer_tags|textebrut)]]
+&raquo;]
+]</BOUCLE_mailart><BOUCLE_mailmot(MOTS) {id_mot} {doublons}>[(#GET{contenu}|=={rien}|non)[[(#GET{contenu}|!={rien}|oui)
+<:tipafriend:mail_body_05:>
+
+]&laquo;
+(#TITRE|supprimer_tags|textebrut)[(#GET{contenu}|=={introduction}|oui)[
+
+<:tipafriend:mail_body_extrait:>
+(#DESCRIPTIF|image_reduire{0,0}|supprimer_tags|textebrut)]][(#GET{contenu}|=={tout}|oui)[
+
+(#TEXTE|image_reduire{0,0}|supprimer_tags|textebrut)][
+
+<:info_notes:>
+(#NOTES|supprimer_tags|textebrut)]]
+&raquo;]
+]</BOUCLE_mailmot><BOUCLE_mailsyndic(SITES){id_syndic}>[(#GET{contenu}|=={rien}|non)[[(#GET{contenu}|!={rien}|oui)
+<:tipafriend:mail_body_05:>
+
+]&laquo;
+(#NOM_SITE|supprimer_tags|textebrut)[
+
+<:voir_en_ligne:> : (#URL_SITE|textebrut|url_absolue) [ - (#NOM_SITE)]][(#GET{contenu}|=={introduction}|oui)[
+
+<:tipafriend:mail_body_extrait:>
+(#DESCRIPTIF|image_reduire{0,0}|supprimer_tags|textebrut|couper{500})]][(#GET{contenu}|=={tout}|oui)[
+
+(#DESCRIPTIF|image_reduire{0,0}|supprimer_tags|textebrut)][
+
+<:bouton_radio_syndication:> (#URL_SYNDIC|textebrut|url_absolue)][
+
+<:info_notes:>
+(#NOTES|supprimer_tags|textebrut)]]
+&raquo;]
+]</BOUCLE_mailsyndic><BOUCLE_mailbreve(BREVES) {id_breve}>[(#GET{contenu}|=={rien}|non)[[(#GET{contenu}|!={rien}|oui)
+<:tipafriend:mail_body_05:>
+
+]&laquo;
+(#TITRE|supprimer_tags|textebrut)[(#GET{contenu}|=={introduction}|oui)[
+
+<:tipafriend:mail_body_extrait:>
+(#INTRODUCTION|supprimer_tags|textebrut)]][(#GET{contenu}|=={tout}|oui)[
+
+(#TEXTE|image_reduire{0,0}|supprimer_tags|textebrut)][
+
+<:voir_en_ligne:>
+(#URL_SITE|textebrut|url_absolue) [ - (#NOM_SITE)]][
+
+<:info_notes:>
+(#NOTES|supprimer_tags|textebrut)]]
+&raquo;]
+]</BOUCLE_mailbreve><BOUCLE_mailaut(AUTEURS) {id_auteur}>[(#GET{contenu}|=={rien}|non)[[(#GET{contenu}|!={rien}|oui)
+<:tipafriend:mail_body_05:>
+
+]&laquo;
+(#NOM|textebrut)[(#GET{contenu}|=={introduction}|oui)[
+
+<:tipafriend:mail_body_extrait:>
+(#BIO|image_reduire{0,0}|supprimer_tags|textebrut|couper{500})]][(#GET{contenu}|=={tout}|oui)[
+
+(#BIO|image_reduire{0,0}|supprimer_tags|textebrut)][
+
+<:voir_en_ligne:>
+(#URL_SITE|textebrut|url_absolue) [ - (#NOM_SITE)]][
+
+<:info_notes:>
+(#NOTES|supprimer_tags|textebrut)]]
+&raquo;]
+]</BOUCLE_mailaut>[(#GET{contenu}|!={rien}|oui)
+-------]
+#NOM_SITE_SPIP : #URL_SITE_SPIP/
+[(#ENV{pre}|=={oui}|oui)</pre>]

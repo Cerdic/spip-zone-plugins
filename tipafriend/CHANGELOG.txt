@@ -1,0 +1,99 @@
++------------------------------------------------------------------------+
+|  TIP A FRIEND , plugin pour SPIP 2.0                                   |
+|                                                                        |
+|  Copyright (c) 2009 | Piero Wbmstr                                     |
++------------------------------------------------------------------------+
+
+-----
+[ TODOS ]
+
+- mettre en place le système de choix de squelette comme dans SPIP 'modele_article_en' ...
+- verifier la nouvelle structure de la fenetre sur differents navigateurs
+	(cf. liste BROWSERS ci-dessous)
+
+-----
+[ CHANGELOG ]
+
+[ version 1.0 ]
+passage en état 'stable'
+
+25/12/2010 - 012
+- Refonte de la doc : squelette "universel" et doc en fichier de langue
+- Structure du DOM de la popup pour correspondance SPIP et Zpip : deux div "conteneur" et "contenu"
+ajoutées (avec def CSS, notamment "min-width:96%")
+- Correction de la balise : modèle en argument ok
+- Corrections mineures sur la page de config
+
+[ version 0.9 ]
+19/12/2010 - 011
+- Ajout du modèle 'tipafriend_typo.html' qui permet d'appeler la balise depuis le contenu
+des objets éditoriaux : "<tipafriend_typo|>"
+19/12/2010 - 010
+- Valeurs par défauts pour le modèle "tipafriend" suite à erreur (erreur impossible d'ailleurs
+mais bon ...)
+
+[ version 0.8 ]
+17/12/2010 - 009
+- Ajout de l'utilisation de Facteur pour envoi HTML
+- Ajout d'un champ de config pour squelette HTML
+- Squelette HTML par défaut sur la base du mail d'exemple de Facteur
+
+[ version 0.7 ]
+16/12/2010 - 008
+- Ajout d'une option de config pour ajouter ou non les en-têtes au squelette du formulaire
+16/12/2010 - 007
+- Nettoyage de 'options.php' et mises en place de 'fonctions.php', qui n'est pas intégré à 'plugin.xml'
+car inutile, il est juste inclus par le php du formulaire
+16/12/2010 - 006
+- Vérifications générales des squelettes :
+	- personnalisation (s'ils sont dans le répertoire perso de squelettes) => OK
+	- Gestion des CSS => OK
+	- Vérification des contenus selon objet SPIP et option choisie => OK
+- Externalisation des CSS pour personnification
+
+[ version 0.6 ]
+15/12/2010 - 005
+- Nouvelle version car vérification complète des configs et envoi
+- Mise en place du debugger plus propre et internationalisable
+
+[ version 0.5 ]
+15/12/2010 - 004
+- Ajout d'une entrée de config sur la page privée permettant de définir l'action du bouton 'Annuler' du formulaire
+- Modification du formulaire standard pour cacher les champs si l'envoi a eu lieu, et afficher
+un bouton 'Fermer' s'il ne s'agit pas d'une popup
+15/12/2010 - 003
+- Rectification mineure du commentaire de la page de CFG suite au ticket d'Eric 
+<http://www.spip-contrib.net/?article3638#forum438154>
+- Modifications mineures de plusieurs textes de la page de CFG (clareté)
+
+[ version 0.4 ]
+23/11/2010 - 002
+- Réparation du modèle et vérifications pour mise en ligne sur le site de sources "http://sources.pierowbmstr.fr/SPIP/tipafriend.zip"
+- Proposition sur Contrib (article 3638)
+
+[ version 0.3 ]
+29/05/2010 - Bug 001
+- SPIP 2.1 : problème dans le patron 'mail_default' (cf. debug SPIP)
+
+-----
+[ BROWSERS ]
+
+Firefox (3.6.12) sous MacOSX 
+	=> ok
+
+Safari (5.0.3) sous MacOSX 
+	=> ok
+
+Opera (10.63) sous MacOSX 
+	=> ok, navigation par tabulation dans le formulaire nickel
+
+OperaMini (5.0) sur iPodTouch (iOS4) 
+	=> ok 
+	=> pas de popup mais ouverture dans la même fenêtre et récupération de la page précédente au clic sur "Fermer"
+
+Safari (?) sur iPodTouch (iOS4) 
+	=> ok 
+	=> ouverture de la popup en 2nde fenêtre, ouverture dans la même fenêtre au second clic
+	=> bouton "Fermer" ok
+	=> problème de zoom après remplissage des champs (zoom automatique mais dézoom pas automatique)
+	=> mais fonctionne correctement

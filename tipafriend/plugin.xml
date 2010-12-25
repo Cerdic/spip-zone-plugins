@@ -1,0 +1,25 @@
+<plugin>
+	<nom><multi>Tip A Friend[fr]Tip A Friend : Envoyer une page par e-mail[en]Tip A Friend : Send a page by e-mail</multi></nom>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<version>1.0</version>
+	<licence>&#169; 2009 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+	<etat>test</etat>
+	<description>
+Ce plugin propose un formulaire complet pour envoyer une page d'un site SPIP ({n'importe laquelle}) &#224; une liste d'adresses e-mail.
+
+Il s'utilise en pla&#231;ant la balise {{&#035;TIPAFRIEND}} dans vos squelettes ; le formulaire appara&#238;t en fen&#234;tre popup par d&#233;faut, mais peut &#234;tre int&#233;gr&#233; en div type {{thickbox}} ({plugin SPIP}) via le panneau de configuration accessible depuis le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} ({optionnel}).
+
+Logo et certaines images du plugin : [->http://pixel-mixer.com/]
+	</description>
+	<lien>[Documentation->http://www.spip-contrib.net/?article3638]</lien>
+	<icon>img/letter_32.png</icon>
+	<options>tipafriend_options.php</options>
+	<prefix>tipafriend</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>tipafriend_options.php</inclure>
+	</pipeline>
+	<categorie>communication</categorie>
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<utilise id='cfg' version='[1.0;]' />
+</plugin>

@@ -1,0 +1,115 @@
+#CACHE{0}[(#SET{contenu,#EVAL{tipafriend_config(contenu_objets)}})]
+#HTTP_HEADER{Content-Type:text/html}
+#INCLURE{fond=emails/inc-haut}
+
+<p><:tipafriend:mail_body_01_html{nom_exped=#ENV{expediteur_nom},mail_exped=#ENV{expediteur_adresse},nom_site=#NOM_SITE_SPIP}:></p>
+
+[<hr />
+<p><:tipafriend:mail_body_02_html{nom_exped=#ENV{expediteur_nom}}:></p>
+'(#ENV{expediteur_message})'
+]
+
+<hr />
+[<p>(#ENV{document_titre}|!={''}|oui)<:tipafriend:mail_body_03_html{titre_document=#ENV{document_titre}}:></p>]
+<p><:tipafriend:mail_body_04_html{url_document=#ENV{document_url}}:></p>
+<hr />
+
+<BOUCLE_mailrub(RUBRIQUES) {id_rubrique}>[(#GET{contenu}|=={rien}|non)[
+[<p>(#GET{contenu}|!={rien}|oui)<:tipafriend:mail_body_05_html:></p>]
+&laquo;
+<h2>(#TITRE)</h2>
+[(#GET{contenu}|=={introduction}|oui)
+	[<:tipafriend:mail_body_extrait:><div style="font-weight:bold;">(#INTRODUCTION)</div>]
+]
+[(#GET{contenu}|=={tout}|oui)
+	[<div>(#TEXTE|image_reduire{100})</div>]
+	[<div><h3><:info_notes:></h3>(#NOTES)</div>]
+]
+&raquo;
+]]</BOUCLE_mailrub>
+
+<BOUCLE_mailart(ARTICLES) {id_article}>[(#GET{contenu}|=={rien}|non)[
+[<p>(#GET{contenu}|!={rien}|oui)<:tipafriend:mail_body_05_html:></p>]
+&laquo;
+[(#GET{contenu}|=={tout}|oui)[<p><strong>(#SURTITRE)</strong></p>]]
+<h2>(#TITRE)</h2>
+[(#GET{contenu}|=={tout}|oui)[<p><strong>(#SOUSTITRE)</strong></p>]]
+[(#GET{contenu}|=={introduction}|oui)
+	[<:tipafriend:mail_body_extrait:><div style="font-weight:bold;">(#INTRODUCTION)</div>]
+]
+[(#GET{contenu}|=={tout}|oui)
+	[<div style="font-weight:bold;">(#CHAPO)</div>]
+	[<div>(#TEXTE|image_reduire{100})</div>]
+	[<p><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{#URL_SITE})]</a></p>]
+	[<div><h3><:info_notes:></h3>(#NOTES)</div>]
+	[<div><h3><:info_ps:></h3>(#PS)</div>]
+]
+&raquo;
+]]</BOUCLE_mailart>
+
+<BOUCLE_mailmot(MOTS) {id_mot} {doublons}>[(#GET{contenu}|=={rien}|non)[
+[<p>(#GET{contenu}|!={rien}|oui)<:tipafriend:mail_body_05_html:></p>]
+&laquo;
+<h2>(#TITRE)</h2>
+[(#GET{contenu}|=={introduction}|oui)
+	[<:tipafriend:mail_body_extrait:><div style="font-weight:bold;">(#DESCRIPTIF)</div>]
+]
+[(#GET{contenu}|=={tout}|oui)
+	[<div>(#TEXTE|image_reduire{100})</div>]
+	[<div><h3><:info_notes:></h3>(#NOTES)</div>]
+]
+&raquo;
+]]</BOUCLE_mailmot>
+
+<BOUCLE_mailsyndic(SITES){id_syndic}>[(#GET{contenu}|=={rien}|non)[
+[<p>(#GET{contenu}|!={rien}|oui)<:tipafriend:mail_body_05_html:></p>]
+&laquo;
+<h2>(#NOM_SITE)</h2>
+[(#GET{contenu}|=={tout}|oui)
+	[<div>(#DESCRIPTIF|image_reduire{100})</div>]
+]
+[(#GET{contenu}|=={introduction}|oui)
+	[<:tipafriend:mail_body_extrait:><div style="font-weight:bold;">(#DESCRIPTIF|image_reduire{100}|couper{500})</div>]
+]
+[<p><:voir_en_ligne:> : <a href="#URL_SITE">(#URL_SITE|url_absolue)</a></p>]
+[<p><:bouton_radio_syndication:> <a href="#URL_SYNDIC">(#URL_SYNDIC|url_absolue)</a></p>]
+[(#GET{contenu}|=={tout}|oui)
+	[<div><h3><:info_notes:></h3>(#NOTES)</div>]
+]
+&raquo;
+]]</BOUCLE_mailsyndic>
+
+<BOUCLE_mailbreve(BREVES) {id_breve}>[(#GET{contenu}|=={rien}|non)[
+[<p>(#GET{contenu}|!={rien}|oui)<:tipafriend:mail_body_05_html:></p>]
+&laquo;
+<h2>(#TITRE)</h2>
+[(#GET{contenu}|=={introduction}|oui)
+	[<:tipafriend:mail_body_extrait:><div style="font-weight:bold;">(#INTRODUCTION)</div>]
+]
+[(#GET{contenu}|=={tout}|oui)
+	[<div>(#TEXTE|image_reduire{100})</div>]
+	[<p><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{#URL_SITE})]</a></p>]
+	[<div><h3><:info_notes:></h3>(#NOTES)</div>]
+]
+&raquo;
+]]</BOUCLE_mailbreve>
+
+<BOUCLE_mailaut(AUTEURS) {id_auteur}>[(#GET{contenu}|=={rien}|non)[
+[<p>(#GET{contenu}|!={rien}|oui)<:tipafriend:mail_body_05_html:></p>]
+&laquo;
+<h2>(#NOM)</h2>
+[(#GET{contenu}|=={introduction}|oui)
+	[<:tipafriend:mail_body_extrait:><div style="font-weight:bold;">(#BIO|image_reduire{100}|couper{500})</div>]
+]
+[(#GET{contenu}|=={tout}|oui)
+	[<div>(#BIO|image_reduire{100})</div>]
+	[<p><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{#URL_SITE})]</a></p>]
+	[<div><h3><:info_notes:></h3>(#NOTES)</div>]
+]
+&raquo;
+]]</BOUCLE_mailaut>
+
+[(#GET{contenu}|=={rien}|non)<hr />]
+#NOM_SITE_SPIP : <a href="#URL_SITE_SPIP/">#URL_SITE_SPIP/</a>
+
+#INCLURE{fond=emails/inc-bas}

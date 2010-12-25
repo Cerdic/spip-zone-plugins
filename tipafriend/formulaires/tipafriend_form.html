@@ -1,0 +1,67 @@
+[(#REM) Inclusion des CSS si pas eu les en tetes ]
+[(#ENV**{header_deja}|=={oui}|non)
+	[<link rel="stylesheet" href="(#CHEMIN{tipafriend.css}|direction_css)" type="text/css" media="all" />]
+]
+[(#REM) Ne pas montrer les boutons admin ]
+<style type="text/css">
+.spip-admin-float { display:none; }
+</style>
+[(#REM) And let s go ...]
+<div class="taf_content">
+<h1><:tipafriend:form_title:></h1>
+<div class="formulaire_spip formulaire_tipafriend ajax">
+	<br class="bugajaxie" />
+	<:tipafriend:form_intro|propre:>
+
+	[<br /><p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+	[(#REM) Si deja eu les en tetes, pas la peine de montrer le bouton, il est deja present en pied ]
+	[(#ENV**{header_deja}|=={oui}|non)
+		<a class="popup_liens" href="javascript:#ENV{form_reset,window.close();}"><:tipafriend:bouton_fermer:></a>
+	]<br />]
+
+	[<br /><p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p><br />]
+
+[(#ENV{editable})
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id" value="#ENV{id,''}" />
+		<input type="hidden" name="type" value="#ENV{type,''}" />
+		<input type="hidden" name="url" value="#ENV{url}" />
+		<input type="hidden" name="titre" value="#ENV{'titre'}" />
+		<input type="hidden" name="self" value="[(#SELF|url_absolue)]" />
+		<ul>
+			<li class="editer[ (#ENV**{erreurs}|table_valeur{destinataires}|oui)erreur]">
+				<label for="destinataires"><:tipafriend:form_dest_label:>&nbsp;:</label>
+				<input type="text" class="text" name="destinataires" id="destinataires" value="[(#ENV**{destinataires})]" />
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinataires})</span>]
+				<p class="comment"><:tipafriend:form_separe_virgule:></p>
+			</li>
+			<li class="editer[ (#ENV**{erreurs}|table_valeur{expediteur}|oui)erreur]">
+				<label for="expediteur"><:tipafriend:form_exp_label:>&nbsp;:</label>
+				<input type="text" class="text taf_left" name="expediteur" id="expediteur" value="[(#ENV**{expediteur})]" />
+		    	<label class="taf_inline">
+					<input type="checkbox" class="checkbox" name="expediteur_send" id="expediteur_send" value="oui"[ (#ENV**{expediteur_send}|=={oui}|oui)checked="cheked"] />
+					<small><:tipafriend:form_exp_send_label:></small>
+				</label>
+				[<span class="erreur_message" style="clear:both;">(#ENV**{erreurs}|table_valeur{expediteur})</span>]
+			</li>
+			<li class="editer[ (#ENV**{erreurs}|table_valeur{expediteur_nom}|oui)erreur]">
+				<label for="expediteur_nom"><:tipafriend:form_exp_nom_label:>&nbsp;:</label>
+				<input type="text" class="text" name="expediteur_nom" id="expediteur_nom" value="[(#ENV**{expediteur_nom})]" />
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{expediteur_nom})</span>]
+			</li>
+			<li class="editer">
+				<label for="message_text"><:tipafriend:form_message_label:>&nbsp;:</label>
+				<textarea name="message_text" rows="3" wrap="physical" id="message_text">[(#ENV**{message_text})]</textarea>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:tipafriend:bouton_envoyer:>" />
+			<input type="button" class="submit" value="<:tipafriend:bouton_annuler:>" 
+				onclick="#ENV{form_reset,window.close();}" />
+		</p>
+	</div></form>
+]
+
+</div>
+</div>
