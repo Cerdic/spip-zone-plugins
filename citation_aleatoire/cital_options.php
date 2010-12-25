@@ -52,13 +52,12 @@
 
 // _DIR_PLUGIN_CITAL pour SPIP 1.9.1
 if(!defined('_DIR_PLUGIN_CITAL')) {
-	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	$p = explode(basename(_DIR_PLUGINS).'/',str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_CITAL',(_DIR_PLUGINS.end($p)).'/');
 }
-define("_DIR_CITAL_IMG_PACK", _DIR_PLUGIN_CITAL."images/");
-define("_DIR_CITATIONS", "citations/");
-define("_DIR_CITAL_CITATIONS", _DIR_PLUGIN_CITAL._DIR_CITATIONS);
+define('_DIR_CITAL_IMG_PACK', _DIR_PLUGIN_CITAL.'images/');
+define('_DIR_CITATIONS', 'citations/');
+define('_DIR_CITAL_CITATIONS', _DIR_PLUGIN_CITAL._DIR_CITATIONS);
 
-define("_CITAL_PREFIX", "cital");
+define('_CITAL_PREFIX', 'cital');
 
-?>

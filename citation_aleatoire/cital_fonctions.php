@@ -141,5 +141,3 @@ function calcul_CITATION ($params) {
 	return($result);
 }
 
-
-?>

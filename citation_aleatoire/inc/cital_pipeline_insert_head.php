@@ -48,18 +48,17 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/cital_api_globales');
 
 function cital_insert_head ($flux) {
 
-	$flux .= "\n"
-			. "<!-- " . _T('cital:cital') . " -->\n"
+	$flux .= PHP_EOL
+			. '<!-- ' . _T('cital:cital') . ' -->' . PHP_EOL
 			;
 
 	return($flux);
 
 }
 
-?>
