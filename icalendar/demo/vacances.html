@@ -6,16 +6,15 @@
 
 <BOUCLE_vacances(DATA)
 {datasource http://media.education.gouv.fr/ics/Calendrier_Scolaire_Zone_#VALEUR.ics,ics}
-{par dtstart/value/year}{par dtstart/value/month}{par dtstart/value/day}
+{par dtstart/str}
 {summary/value != ''}
 >
-[<h2>(#VALEUR{summary/value}|match{Zone.*$}|unique)</h2>]
+[<h2>Vacances (#VALEUR{summary/value}|match{Zone.*$}|unique)</h2>]
 [
 <dt>
-[(#SET{date,#VALEUR{dtstart/value/year}-#VALEUR{dtstart/value/month}-#VALEUR{dtstart/value/day}})]
+[(#SET{date,#VALEUR{dtstart/str}})]
 [(#GET{date}|jour) ][(#GET{date}|nom_mois)]
-[(#SET{date,#VALEUR{dtstart/value/year}-#VALEUR{dtend/value/month}-#VALEUR{dtend/value/day}})]
-[(#SET{date,#GET{date}|ajouter_jours{-3}})]
+[(#SET{date,#VALEUR{dtend/str}|moins{3}})]
 [ &mdash; (#GET{date}|jour) ][(#GET{date}|nom_mois)]
 </dt>
 <dd>(#VALEUR{summary/value}|replace{- Zone.*$}|unique{#_zone:VALEUR})</dd>
