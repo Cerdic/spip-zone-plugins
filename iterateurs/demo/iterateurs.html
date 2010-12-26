@@ -1,0 +1,22 @@
+#CACHE{0}
+
+<h1>It&#233;rateurs</h1>
+
+<B_demos>
+<ul>
+<BOUCLE_demos(DATA){datasource #EVAL{_DIR_PLUGIN_ITERATEURS}demo/iter_*.html,glob}>
+
+<li><a href="spip.php?page=demo/iterateurs&amp;demo=[(#VALEUR|basename{.html})]">[(#VALEUR|basename{.html})]</a></li>
+
+</BOUCLE_demos>
+</ul>
+</B_demos>
+
+(Pas de demo d'it&#233;rateur)
+
+<//B_demos>
+
+
+[(#ENV{demo}|et{#CHEMIN{demo/#ENV{demo}.html}}|?{
+	#INCLURE{fond=demo/#ENV{demo}}{env}}
+)]

@@ -1,0 +1,27 @@
+#CACHE{0}
+
+<h2>Manipulation de CSV</h2>
+
+<B_csv>
+<table border="1">
+<tr>
+<th>champ 0</th>
+<th>champ 1</th>
+<th>champ 2</th>
+<th>champ 3</th>
+</tr>
+<BOUCLE_csv(DATA){datasource #CHEMIN{demo/iter_adresses.csv},csv}
+{!par /0}{'<br />'}>
+<tr>
+<td>#VALEUR{0}</td>
+<td>#VALEUR{1}</td>
+<td>#VALEUR{2}</td>
+<td>#VALEUR{3}</td>
+</tr>
+</BOUCLE_csv>
+</table>
+</B_csv>
+
+(pas de donn&#233;es)
+
+<//B_csv>

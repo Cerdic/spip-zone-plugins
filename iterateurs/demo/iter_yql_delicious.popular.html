@@ -1,0 +1,14 @@
+<h2>delicious.feeds.popular</h2>
+
+<BOUCLE_r12(DATA)
+{datasource select * from delicious.feeds.popular where tag='spip', yql}
+{datapath query/results/item}
+>
+<dt><a href='#LINK'>#TITLE</a></dt>
+<dd><B_tags>
+Tags:
+
+<BOUCLE_tags(DATA){datasource #CATEGORY,table}{", "}>
+#CONTENT</BOUCLE_tags>
+</dd>
+</BOUCLE_r12>
