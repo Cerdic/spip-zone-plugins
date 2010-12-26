@@ -18,13 +18,16 @@ function inc_ics_to_array($u) {
 
 	supprimer_fichier($tmp);
 
+	$table_valeur = function_exists('Iterateurs_table_valeur')
+		? 'Iterateurs_table_valeur' : 'table_valeur';
+
 	# noter les dates cles dans un format plus facile a recuperer
 	foreach($cal->components as $k => &$v) {
 		foreach(array('dtstart', 'dtend', 'dtstamp', 'lastmodified', 'created')
 		as $champ) {
 			if (isset($v->$champ)) {
 				$w = &$v->$champ;
-				$date = table_valeur($w, "/value");
+				$date = $table_valeur($w, "/value");
 				$w['str'] = sprintf('%04d-%02d-%02d %02d:%02d:%02d',
 					$date['year'],
 					$date['month'],
