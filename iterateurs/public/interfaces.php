@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
@@ -80,6 +79,7 @@ class Boucle {
 	var $cptrows = false;
 	var $ligne = 0;
 	var $descr =  array(); # noms des fichiers source et but etc
+	var $iterateur = ''; // type d'iterateur
 
 	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat ..., utilisable par les plugins egalement
 

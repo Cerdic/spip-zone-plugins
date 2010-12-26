@@ -35,7 +35,7 @@ define('BALISE_POLYGLOTTE',',<multi>(.*)</multi>,Uims');
 define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^\|=>]*=[^\|>]*)})?((\|[^>]*)?:>),iS');
 
 define('SQL_ARGS', '(\([^)]*\))');
-define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9.]*)' . SQL_ARGS . '?`?');
+define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_\/][A-Z_\/0-9.]*)' . SQL_ARGS . '?`?');
 
 // http://doc.spip.org/@phraser_inclure
 function phraser_inclure($texte, $ligne, $result) {
@@ -447,9 +447,8 @@ function phraser_criteres($params, &$result) {
 // plus d'un argument et pas le critere IN:
 // detecter comme on peut si c'est le critere implicite LIMIT debut, fin
 
-			if (($var->type != 'texte') ||
-			    (strpos("0123456789-", $param[strlen($param)-1])
-			     !== false)) {
+			if ($var->type != 'texte'
+			OR preg_match("/^(n|(n-)?\d+)$/S", $param)) {
 			  $op = ',';
 			  $not = "";
 			} else {
@@ -461,8 +460,14 @@ function phraser_criteres($params, &$result) {
 			  // et mettre son reliquat eventuel
 			  // Recopier pour ne pas alterer le texte source
 			  // utile au debusqueur
-
 			  if ($m[3]) {
+			    // une maniere tres sale de supprimer les "' autour de {critere "xxx","yyy"}
+			    if (preg_match(',^(["\'])(.*)\1$,', $m[3])) {
+			    	$c = null;
+			    	eval ('$c = '.$m[3].';');
+			    	if (isset($c))
+			    		$m[3] = $c;
+			    }
 			    $texte = new Texte;
 			    $texte->texte = $m[3]; 
 			    $v[1][0]= $texte;
