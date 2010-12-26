@@ -2,9 +2,9 @@
 	<nom>Multilang</nom>
 	<auteur>Renato Formato</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1.0</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>
 		<multi>
 			[fr]Gestion des tags multi

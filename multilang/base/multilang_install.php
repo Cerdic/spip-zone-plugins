@@ -28,7 +28,9 @@ function multilang_upgrade($nom_meta_base_version,$version_cible){
 					'auteur' => 'on',
 					'document' => 'on',
 					'motcle' => '',
-					'site' => ''
+					'site' => '',
+					'formidable' => 'on',
+					'evenement' => ''
 			), $config);
 			ecrire_meta('multilang', serialize($config));
 			ecrire_meta($nom_meta_base_version,$current_version='0.1','non');
