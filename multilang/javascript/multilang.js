@@ -33,7 +33,6 @@ all chars not greedy
  */
 var multilang_match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n|\s)*?)(?=\[[a-z_]+\]|$)/ig;
 var multilang_root, //root of the search (jQuery object)
-    multilang_root_opt,
     multilang_fields_selector,
     multilang_fields_selector_opt,
     multilang_menu_selector,
@@ -61,8 +60,7 @@ function multilang_init_lang(options) {
 	//set the root element of all processing
 
 	var root = options.root || document;
-	multilang_root = $(root).add($(root_opt).parent());
-	multilang_root_opt = $(root_opt);
+	multilang_root = $(root).add($(options.root_opt).parent());
 
 	/**
 	 * set the main menu element

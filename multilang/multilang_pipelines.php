@@ -131,9 +131,11 @@ function multilang_inserer_head($config=array()){
 			fields_selector = "textarea,input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
 			// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
 			forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
+			// Les div qui ont un formulaire de classe multilang (pour accélérer la recherche dans le DOM,
+			// on passe le form et le parent sera trouvé dans lors de l\'init)
 			root_opt = "form:has(.multilang)";
 			fields_selector_opt = ".multilang";
-			multilang_init_lang({fields:fields_selector,root:root,forms:forms_selector});
+			multilang_init_lang({fields:fields_selector,root:root,root_opt:root_opt,forms:forms_selector});
 		}
 		multilang_init();
 		if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
