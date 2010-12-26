@@ -37,7 +37,7 @@
 		<inclure>base/trad_rub_tables.php</inclure>
 	</pipeline>		
 	<fonctions>trad_rub_fonctions.php</fonctions>
-	<categorie>traduction</categorie>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="spip_bonux" version="[2.2.14;]" />
 	<necessite id="tradrub" version="[2.1.0;]" />	
