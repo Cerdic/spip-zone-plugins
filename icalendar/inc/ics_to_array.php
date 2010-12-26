@@ -1,7 +1,12 @@
 <?php
 
+
+# hors de la fonction, de facon a ce que la class soit chargee
+# meme si le resultat est deja dans le cache (sinon le cache est inexploitable).
+# cf. iterateur/data.php
+include_spip('lib/iCalcreator.class');
+
 function inc_ics_to_array($u) {
-	include_spip('lib/iCalcreator.class');
 
 	# on passe par un fichier temp car notre librairie fonctionne comme ca
 	$tmp = _DIR_TMP . 'ics-'.md5($u);
