@@ -125,7 +125,7 @@ class IterateurDATA implements Iterator {
 			if (isset($this->command['sourcemode']))
 				charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
 
-			$cle = 'datasource_'.md5($this->command['sourcemode'].':'.$this->command['source']);
+			$cle = 'datasource_'.md5($this->command['sourcemode'].':'.serialize($this->command['source']));
 			# avons-nous un cache dispo ?
 			$cache = $this->cache_get($cle);
 			if (isset($this->command['datacache']))
@@ -149,7 +149,8 @@ class IterateurDATA implements Iterator {
 					array('table', 'array', 'tableau'))
 				) {
 					if (is_array($a = $this->command['source'])
-					OR is_array($a = unserialize($this->command['source'])))
+					OR (is_string($a) AND is_array($a = @unserialize($a)))
+					)
 						$this->tableau = $a;
 				}
 				else if (preg_match(',^https?://,', $this->command['source'])) {
@@ -164,19 +165,17 @@ class IterateurDATA implements Iterator {
 					if (!isset($ttl)) $ttl = 10;
 				}
 
-				if ($u) {
-					if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
-						if (is_array($a = $g($u))) {
-							$this->tableau = $a;
-						} else {
-							$this->err = true;
-							spip_log("erreur sur $g(): $u");
-						}
+				if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
+					if (is_array($a = $g($u))) {
+						$this->tableau = $a;
+					} else {
+						$this->err = true;
+						spip_log("erreur sur $g(): $u");
 					}
-
-					if (!$this->err AND $ttl>0)
-						$this->cache_set($cle, $ttl);
 				}
+
+				if (!$this->err AND $ttl>0)
+					$this->cache_set($cle, $ttl);
 
 				# en cas d'erreur http, utiliser le cache si encore dispo
 				if ($this->err) {
