@@ -19,4 +19,12 @@
 
 [(#ENV{demo}|et{#CHEMIN{demo/#ENV{demo}.html}}|?{
 	#INCLURE{fond=demo/#ENV{demo}}{env}}
+
 )]
+
+[
+<h2>Squelette :</h2>
+<pre>
+(#CHEMIN{demo/#ENV{demo}.html}|spip_file_get_contents|htmlspecialchars)
+</pre>
+]
