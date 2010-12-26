@@ -47,7 +47,7 @@
 		<inclure>taa_pipelines.php</inclure>
 	</pipeline>	
 	<fonctions>taa_fonctions.php</fonctions>
-	<categorie>traduction</categorie>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<utilise id="afficher_objets" version="[1.1.8;]" />	
 	<utilise id="cfg" version="[ 1.15.1;]" />		
