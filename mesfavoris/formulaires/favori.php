@@ -18,6 +18,9 @@ function formulaires_favori_charger_dist($objet, $id_objet){
 		'_deja_favori'=>false,
 		'_objet'=>$objet
 	);
+	if (defined('_MESFAVORIS_PERSO_ID_OBJET'))
+		$valeur['_id_objet'] = $id_objet;
+	
 	if (!isset($GLOBALS['visiteur_session']['statut'])){
 		$valeur['editable'] = false;
 	}
