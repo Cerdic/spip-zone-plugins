@@ -23,13 +23,14 @@
 	$site = str_replace('www.', '', $_SERVER['HTTP_HOST']);
 	if ($site != $_SERVER['HTTP_HOST'] AND !in_array($site, $www)) {
 		include_spip('inc/headers');
+		$req = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
 		if (isset($_SERVER['HTTPS']) 
 		AND test_valeur_serveur($_SERVER['HTTPS']))
 			$protocole = 'https';
 		elseif (!isset($_SERVER["SCRIPT_URI"]) OR !($p = strpos($_SERVER["SCRIPT_URI"], '://')))
 			$protocole = 'http';
 		else $protocole = substr($_SERVER["SCRIPT_URI"],0,$p);
-		redirige_par_entete($protocole . '://' . $site .'/');
+		redirige_par_entete($protocole . '://' . $site . $req);
 	}
 
 	// Compatibilite avec le ":" de $dossier_squelettes
