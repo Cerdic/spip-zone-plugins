@@ -27,25 +27,23 @@ function minibando($boutons, $contexte = array()) {
             if (
              ($detail->libelle AND is_array($detail->sousmenu) AND count($detail->sousmenu))
              OR ($detail->libelle AND $detail->url AND $detail->url!='navigation')) {
-                $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg,$contexte);
-                $bulle_accueil = ($detail->url == 'accueil') ? "<ul><li><p>" . _T('public:espace_prive') . "</p></li></ul>" : '';
-                $res .= "<li$first>"
-                 . "<a href='$url' id='bando1_$page'>"
-                 . _T($detail->libelle)
-                 . "</a>";
-               	$res .= "<span></span>";
-               	$res .= $bulle_accueil;
-                if($first) {
+               $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg,$contexte);
+               $bulle_accueil = ($detail->url == 'accueil') ? "<ul><li><p>" . _T('public:espace_prive') . "</p></li></ul>" : '';
+               $res .= "<li$first>" . "<a href='$url' id='bando1_$page'>" . _T($detail->libelle) . "</a>";
+               $res .= "<span></span>";
+               $res .= $bulle_accueil;
+               if($first) {
+               	$res .= "</li>";
                 	$res .= "<li class='minibando_sep'>&nbsp;</li>";
                 	$res .= minibando_outils_rapides($boutons, $contexte);
                 	$res .= "<li class='minibando_sep'>&nbsp;</li>";
-				}
+					}
             }
 
             $sous = bando_lister_sous_menu($detail->sousmenu, $contexte);
             $res .= $sous ? "<ul><li><p>"._T($detail->libelle)."</p></li>$sous</ul>":"";
 
-            $res .= "</li>";
+            if(!$first) $res .= "</li>";
             $first = "";
         }
 	}
