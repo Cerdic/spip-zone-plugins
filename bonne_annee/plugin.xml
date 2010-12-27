@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Bonne ann&eacute;e</nom>
+	<auteur>Phil</auteur>
+	<version>0.0</version>
+	<etat>stable</etat>
+	<description>
+		- Affiche tous les ansvun message souhaitant une bonne ann&eacute;e
+		- Ajouter <code>&lt;INCLURE{fond=bonne_annee}&gt;</code> dans vos pages.
+	</description>
+	
+	<prefix>bonne_annee</prefix>
+	<lien></lien>	
+</plugin>
