@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Booksearch
+	</nom>
+	<auteur>
+	Fil
+	</auteur>
+	<licence>
+		&#169; 2010 - GNU/GPL
+	</licence>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Faire des boucles sur des livres (recherche sur Amazon)
+	</description>
+	<prefix>
+	booksearch
+	</prefix>
+	<chemin dir='' />
+	<categorie>divers</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+</plugin>

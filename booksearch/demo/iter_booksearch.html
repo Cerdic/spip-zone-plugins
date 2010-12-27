@@ -1,0 +1,35 @@
+#CACHE{0}
+
+<h1>booksearch</h1>
+
+<BOUCLE_books(DATA) {datasource #ENV{titre,SPIP},booksearch}
+>
+
+[<h1>(#VALEUR{Title}|typo)</h1>]
+
+[<h2>(#VALEUR{Author}|is_array|?{#VALEUR{Author}|join{' - '}, #VALEUR{Author}})</h2>]
+
+<h3>#VALEUR{Publisher}</h3>
+
+<dt>ISBN</dt>
+<dd>#VALEUR{ASIN}</dd>
+
+<dt>Pages</dt>
+<dd>#VALEUR{NumberOfPages}</dd>
+
+<dt>Prix</dt>
+<dd>#VALEUR{ListPrice/FormattedPrice}</dd>
+
+<dt>Publié :</dt>
+<dd>[(#VALEUR{PublicationDate}|affdate)]</dd>
+
+<dt>SalesRank</dt><dd>#VALEUR{SalesRank}</dd>
+
+[<img src="(#VALEUR{MediumImage/URL})" height="[(#VALEUR{MediumImage/Height/_})]" width="[(#VALEUR{MediumImage/Width/_})]" />
+]
+
+<hr />
+
+</BOUCLE_books>
+
+
