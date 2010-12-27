@@ -13,7 +13,10 @@ function action_editer_seance_dist() {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}
-		$id_seance = insert_seance();
+		if ($arg == _request('duplicate'))
+			$id_seance = duplicate_seance($arg);
+		else
+			$id_seance = insert_seance();
 	}
 	if ($id_seance == intval($id_seance))
 		$err = revisions_seance($id_seance);
@@ -24,7 +27,8 @@ function action_editer_seance_dist() {
 // inserer seances_endroit
 function insert_seance() {
 	$champs = array(
-		'id_article' => 0
+		/* 'id_article' => 0, */
+		'date_seance' => '0000-00-00 00:00:00'
 	);
 
 	// Envoyer aux plugins
@@ -35,7 +39,17 @@ function insert_seance() {
 		'data' => $champs
 	));
 	
-	$id_seance = sql_insertq("spip_seances", $champs);
+	$id_seance = sql_insertq('spip_seances', $champs);
+	return $id_seance;
+}
+
+// dupliquer une seance
+function duplicate_seance($id_seance){
+	// select * pour dupliquer aussi les champs extra eventuels
+	$row = sql_fetsel('*', 'spip_seances', 'id_seance = '.$id_seance);
+	// pour eviter erreur duplicate sur cle primaire autoincrement
+	unset($row['id_seance']); 
+	$id_seance = sql_insertq('spip_seances', $row);
 	return $id_seance;
 }
 
@@ -49,9 +63,7 @@ function revisions_seance($id_seance, $c=false) {
 			}
 		}
 	}
-	// si on passe par la voie officielle pb pour la duplication 
-	// include_spip('inc/modifier');
-	// modifier_contenu ('seance', $id_seance, array(),$c);
-	sql_updateq('spip_seances',$c,'id_seance = '.intval($id_seance));
+	include_spip('inc/modifier');
+	modifier_contenu ('seance', $id_seance, array(),$c);
 }
 ?>

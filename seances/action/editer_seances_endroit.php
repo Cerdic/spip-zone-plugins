@@ -52,8 +52,7 @@ function revisions_seances_endroit($id_endroit, $c=false) {
 	include_spip('inc/modifier');
 	modifier_contenu ('seances_endroit', $id_endroit, array(
 			'nonvide' => array('nom' => _T('info_sans_titre')),
-			'invalideur' => "id='id_endroit/$id_endroit'"
-		),
+			'invalideur' => "id='id_endroit/$id_endroit'"),
 		$c);
 }
 ?>
