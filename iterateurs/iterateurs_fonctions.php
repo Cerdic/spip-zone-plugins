@@ -169,14 +169,14 @@ function balise_SAUTER($p){
 
 // #VALEUR renvoie le champ valeur
 // #VALEUR{x} renvoie #VALEUR|Iterateurs_table_valeur{x}
-// #VALEUR{a.b} renvoie #VALEUR|Iterateurs_table_valeur{a.b}
+// #VALEUR{a/b} renvoie #VALEUR|Iterateurs_table_valeur{a/b}
 function balise_VALEUR($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	$p->code = index_pile($p->id_boucle, 'valeur', $p->boucles, $b);;
 	if (($v = interprete_argument_balise(1,$p))!==NULL){
 		$p->code = 'Iterateurs_table_valeur('.$p->code.', '.$v.')';
 	}
-	$p->interdire_scripts = false;
+	$p->interdire_scripts = true;
 	return $p;
 }
 
