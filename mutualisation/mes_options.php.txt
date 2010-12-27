@@ -1,5 +1,15 @@
 <?php
 
+	/*
+	 * Inscrire ici le nom du site d'administration du tableau de bord
+	 * de la mutualisation (ou plusieurs, separes par des virgules)
+	 * (dans cet exemple, 'scriibe.net' est le top level domain, TLD)
+	 * pour autoriser tous les sites, ne pas definir la constante ;
+	 * Si le site maitre n'est pas dans sites/ mais a la racine, mettre ''
+	 * et ajouter 'mutualisation' dans $dossier_squelettes
+	 */
+	define ('_SITES_ADMIN_MUTUALISATION', 'scriibe.net');
+
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	if (!is_readable (_DIR_RACINE.'mutualisation/mutualiser.php')) {
 		echo _L("Fichier 'mutualisation/mutualiser.php' manquant dans la racine " . _DIR_RACINE);
@@ -13,7 +23,13 @@
 	$site = str_replace('www.', '', $_SERVER['HTTP_HOST']);
 	if ($site != $_SERVER['HTTP_HOST'] AND !in_array($site, $www)) {
 		include_spip('inc/headers');
-		redirige_par_entete('http://'.$site.'/');
+		if (isset($_SERVER['HTTPS']) 
+		AND test_valeur_serveur($_SERVER['HTTPS']))
+			$protocole = 'https';
+		elseif (!isset($_SERVER["SCRIPT_URI"]) OR !($p = strpos($_SERVER["SCRIPT_URI"], '://')))
+			$protocole = 'http';
+		else $protocole = substr($_SERVER["SCRIPT_URI"],0,$p);
+		redirige_par_entete($protocole . '://' . $site .'/');
 	}
 
 	// Compatibilite avec le ":" de $dossier_squelettes
@@ -97,17 +113,6 @@
 	 * grace a ?var_mode=creer_htaccess_img
 	 * 
 	 */
-	
-	/*
-	 * Inscrire ici le nom du site d'administration du tableau de bord
-	 * de la mutualisation (ou plusieurs, separes par des virgules)
-	 * (dans cet exemple, 'scriibe.net' est le top level domain, TLD)
-	 * pour autoriser tous les sites, ne pas definir la constante ;
-	 * Si le site maitre n'est pas dans sites/ mais a la racine, mettre ''
-	 * et ajouter 'mutualisation' dans $dossier_squelettes
-	 */
-	define ('_SITES_ADMIN_MUTUALISATION', 'scriibe.net');
-
 	
 	demarrer_site($site,
 		array(
