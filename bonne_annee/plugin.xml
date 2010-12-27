@@ -9,5 +9,6 @@
 	</description>
 	<categorie>date</categorie>
 	<prefix>bonne_annee</prefix>
+	<icon>bonne_annee.png</icon>
 	<lien></lien>	
 </plugin>
