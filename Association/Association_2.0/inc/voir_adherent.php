@@ -11,6 +11,8 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/texte'); // pour nettoyer_raccourci_typo
+
 function voir_adherent_paiements($data, $lien)
 {
 	foreach($data as $k => $row) {
