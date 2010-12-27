@@ -2,28 +2,40 @@
 
 <h1>booksearch</h1>
 
-<BOUCLE_books(DATA) {datasource #ENV{titre,SPIP},booksearch}
+#SET{titre,#ENV{titre,SPIP}}
+
+<form action="#SELF" method="POST">
+[(#SELF|form_hidden)]
+<input type="text" name="titre" value="#GET{titre}" />
+<input type="submit" name="go" value="go" />
+</form>
+
+
+<BOUCLE_books(DATA) {datasource #GET{titre},booksearch}
+{Publisher!=Books LLC}
 >
 
 [<h1>(#VALEUR{Title}|typo)</h1>]
 
-[<h2>(#VALEUR{Author}|is_array|?{#VALEUR{Author}|join{' - '}, #VALEUR{Author}})</h2>]
+[<h2>(#VALEUR{Author}|print|typo)</h2>]
 
-<h3>#VALEUR{Publisher}</h3>
+[<h3>(#VALEUR{Publisher}|print|typo)</h3>]
 
-<dt>ISBN</dt>
-<dd>#VALEUR{ASIN}</dd>
+[<dt>ISBN</dt>
+<dd>(#VALEUR{ASIN})</dd>]
 
-<dt>Pages</dt>
-<dd>#VALEUR{NumberOfPages}</dd>
+[<dt>Pages</dt>
+<dd>(#VALEUR{NumberOfPages})</dd>]
 
-<dt>Prix</dt>
-<dd>#VALEUR{ListPrice/FormattedPrice}</dd>
+[<dt>Prix</dt>
+<dd>(#VALEUR{ListPrice/FormattedPrice})</dd>]
 
-<dt>Publié :</dt>
-<dd>[(#VALEUR{PublicationDate}|affdate)]</dd>
+[<dt>Publié :</dt>
+<dd>(#VALEUR{PublicationDate}|affdate)</dd>]
 
-<dt>SalesRank</dt><dd>#VALEUR{SalesRank}</dd>
+[<dt>SalesRank</dt><dd>(#VALEUR{SalesRank})</dd>]
+
+[<dt>Langue</dt><dd>(#VALEUR{Languages/Language/0/Name})</dd>]
 
 [<img src="(#VALEUR{MediumImage/URL})" height="[(#VALEUR{MediumImage/Height/_})]" width="[(#VALEUR{MediumImage/Width/_})]" />
 ]
