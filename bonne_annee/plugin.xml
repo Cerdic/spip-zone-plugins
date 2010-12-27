@@ -7,7 +7,7 @@
 		- Affiche tous les ansvun message souhaitant une bonne ann&eacute;e
 		- Ajouter <code>&lt;INCLURE{fond=bonne_annee}&gt;</code> dans vos pages.
 	</description>
-	
+	<categorie>date</categorie>
 	<prefix>bonne_annee</prefix>
 	<lien></lien>	
 </plugin>
