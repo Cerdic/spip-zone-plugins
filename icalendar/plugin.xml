@@ -20,6 +20,7 @@
 	icalendar
 	</prefix>
 	<chemin dir='' />
-	<categorie>divers</categorie>
+	<icon>icalendar.png</icon>
+	<categorie>date</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>
