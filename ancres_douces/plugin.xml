@@ -23,5 +23,6 @@ This feature is also present in the plugin "Swiss knife". If you already use the
 		<inclure>ancres_douces_pipelines.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
+	<lien>http://www.spip-contrib.net/Ancres-douces</lien>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
