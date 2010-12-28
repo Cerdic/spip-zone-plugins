@@ -19,29 +19,38 @@ include_spip('lib/AmazonECS.class');
 
 function inc_booksearch_to_array($u) {
 
+  try {
+
     $amazonEcs = new AmazonECS(AWS_API_KEY, AWS_API_SECRET_KEY, 'FR');
 
     // from now on you want to have pure arrays as response
     $amazonEcs->setReturnType(AmazonECS::RETURN_TYPE_ARRAY);
 
     $response = $amazonEcs
-    	->responseGroup('Large')
-    	->category('Books')
-    	->search($u);
+      ->responseGroup('Large')
+      ->category('Books')
+      ->search($u);
 
-	// on se limite a la premiere page de resultats
-    $u = $response['Items']['Item'];
+    // on se limite a la premiere page de resultats
+    $u = @$response['Items']['Item'];
 
-	// simplifier le tableau des resultats, on se fiche des liens amazon
+    // simplifier le tableau des resultats, on se fiche des liens amazon
+    if (is_array($u))
     foreach($u as $k => &$v) {
-    	#unset($u[$k]['DetailPageURL']);
-    	#unset($u[$k]['ItemLinks']);
-    	foreach ($u[$k]['ItemAttributes'] as $k2 => $v2)
-    		$u[$k][$k2] = $v2;
-    	unset($u[$k]['ItemAttributes']);
+      #unset($u[$k]['DetailPageURL']);
+      #unset($u[$k]['ItemLinks']);
+      foreach ($u[$k]['ItemAttributes'] as $k2 => $v2)
+        $u[$k][$k2] = $v2;
+      unset($u[$k]['ItemAttributes']);
     }
+    # cas a 0 reponse
+    else
+      $u = array();
+  } catch (Exception $e) {
+    return $e;
+  }
 
-	return $u;
+  return $u;
 
 }
 
