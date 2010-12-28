@@ -15,6 +15,7 @@
 	<prefix>
 	YAML
 	</prefix>
+	<icon>yaml.png</icon>
 	<fonctions>yaml_fonctions.php</fonctions>
 	<categorie>outil</categorie>
 	<chemin dir='' />
