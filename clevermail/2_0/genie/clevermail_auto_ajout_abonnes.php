@@ -29,6 +29,6 @@ function genie_clevermail_auto_ajout_abonnes_dist() {
 	    }
 		}
 	}
-	return 0;
+	return 1;
 }
 ?>

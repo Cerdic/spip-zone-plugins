@@ -95,6 +95,6 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 			}
 		}
 	}
-	return 0;
+	return 1;
 }
 ?>

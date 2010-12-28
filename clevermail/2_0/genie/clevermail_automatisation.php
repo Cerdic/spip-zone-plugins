@@ -36,6 +36,6 @@ function genie_clevermail_automatisation_dist() {
 		  }
 		}
 	}
-	return 0;
+	return 1;
 }
 ?>
