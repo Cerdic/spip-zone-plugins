@@ -20,8 +20,10 @@
 	</prefix>
 	<chemin dir='' />
 
+	<icon>iterateurs.png</icon>
+
 	<fonctions>iterateurs_fonctions.php</fonctions>
 
-	<categorie>redaction</categorie>
+	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>
