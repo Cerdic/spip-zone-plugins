@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<plugin>
+	<nom>CM Cic</nom>
+ 	<version>1.0</version>
+ 	<prefix>cmcic</prefix>
+	<type>classique</type>
+ 	<auteur>Yoan De Macedo - yoan@octolys.fr</auteur>
+ 	<thelia>1.4.0</thelia>
+ 	<description>Module de paiement CmCIC.</description>
+	<lien>http://contrib.thelia.fr/spip.php?article143</lien>
+	<documentation>Readme.txt</documentation>
+ 	<etat>production</etat>
+	<install>http://contrib.thelia.fr/IMG/zip/cmcic.zip</install>
+</plugin>
