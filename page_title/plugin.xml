@@ -2,7 +2,7 @@
 	<nom>Page title</nom>
 	<auteur>
 	Fil
-	&#169; 2009 - GNU/GPL
+	&#169; 2009-2010 - GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -21,4 +21,5 @@
 		<inclure>page_title.php</inclure>
 	</pipeline>
 	<categorie>statistique</categorie>
+	<lien>http://www.spip-contrib.net/Plugin-Page-title</lien>
 </plugin>
