@@ -21,6 +21,7 @@
 	</prefix>
 	<chemin dir='' />
 	<icon>icalendar.png</icon>
+	<lien>http://www.spip-contrib.net/Plugin-iCalendar</lien>
 	<categorie>date</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>
