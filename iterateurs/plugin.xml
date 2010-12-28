@@ -23,6 +23,7 @@
 	<icon>iterateurs.png</icon>
 
 	<fonctions>iterateurs_fonctions.php</fonctions>
+	<lien>http://www.spip-contrib.net/3667</lien>
 
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
