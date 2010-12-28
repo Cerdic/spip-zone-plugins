@@ -19,7 +19,7 @@ var blocs_millisec = %%blocs_millisec%%;
 var blocs_slide = [[%blocs_slide%]];<cs_html>
 var blocs_title_sep = /[(#EVAL{_BLOC_TITLE_SEP}|preg_quote)]/g;
 #SET{x,#VAL{couteau:bloc_replier}|_T}
-var blocs_title_def = '<:couteau:bloc_deplier|concat{#EVAL{_BLOC_TITLE_SEP},#GET{x}}|html2unicode|addslashes|unicode_to_javascript:>';
+var blocs_title_def = '<:couteau:bloc_deplier|concat{#EVAL{_BLOC_TITLE_SEP},#GET{x}}|cs_javascript:>';
 </cs_html>",
 	'code:jq_init' => 'blocs_init.apply(this);',
 	// utilisation des cookies pour conserver l'etat des blocs numerotes si on quitte la page

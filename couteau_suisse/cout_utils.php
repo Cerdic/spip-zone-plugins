@@ -81,7 +81,7 @@ function add_outils_xml($f) {
 		add_variable(parse_variable_xml($a));
 	if(isset($arbre['outil'])) foreach($arbre['outil'] as $a) {
 		$out = parse_outil_xml($a);
-		if(is_string($out['nom']) && strlen($out['nom']) && !preg_match(',couteau_suisse/outils/,', $f))
+		if(isset($out['nom']) && is_string($out['nom']) && strlen($out['nom']) && !preg_match(',couteau_suisse/outils/,', $f))
 			$outil['nom'] = "<i>$out[nom]</i>";
 		add_outil($out);
 	}

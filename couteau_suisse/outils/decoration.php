@@ -17,16 +17,25 @@ cs_log("decoration_installe()");
 		if (preg_match('/(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
 			// les class/lang
 			list($auto, $div, $racc, $attr, $valeur) = array($regs[1]=='auto', $regs[1], trim($regs[2]), trim($regs[3]), trim($regs[4]));
-			$BT[] = array($racc, $auto, $div);
-			$attr="$attr=\"$valeur\"";
-			if ($auto) {
-				$auto_balises[] = $racc; 
-				$auto_remplace[$racc] = "$attr>";
-			} else {
+			if (defined('_SPIP20100') && $attr=='lang') {
+				// Pour SPIP>=2.1 on utilise l'astuce <multi>[XX]...</multi> pour beneficier ensuite de la typo appropriee
+				$BT[] = array($racc, true, $div);
 				$aide[] = $racc; 
-				$trouve[] = "<$racc>"; $trouve[] = "</$racc>"; $trouve[] = "<$racc/>";
-				$remplace[] = $a = "<$div $attr>"; 
-				$remplace[] = $b = "</$div>"; $remplace[] = $a.$b;
+				$trouve[] = "<$racc>"; $trouve[] = "</$racc>";
+				$remplace[] = $a = "<multi>[$valeur]"; 
+				$remplace[] = $b = "</multi>";
+			} else {
+				$attr="style=\"$style\"";
+				$BT[] = array($racc, $auto, $div);
+				if ($auto) {
+					$auto_balises[] = $racc; 
+					$auto_remplace[$racc] = "$attr>";
+				} else {
+					$aide[] = $racc; 
+					$trouve[] = "<$racc>"; $trouve[] = "</$racc>"; $trouve[] = "<$racc/>";
+					$remplace[] = $a = "<$div $attr>"; 
+					$remplace[] = $b = "</$div>"; $remplace[] = $a.$b;
+				}
 			}
 		} elseif (preg_match('/(span|div|auto)\.([^=]+)=(.+)$/', $balise, $regs)) {
 			// les styles inline
