@@ -23,9 +23,7 @@ function sprite ($img, $nom) {
 	$date_src = @filemtime($src);
 	if ($date_src > $GLOBALS["sprites"]["$nom"]["date"]) $GLOBALS["sprites"]["$nom"]["date"] = $date_src;
 
-
-	
-	return "<img src='rien.gif' style='width: ".$largeur."px; height: ".$hauteur."px; background: url($fichier) 0px -".$hauteur_old."px;' alt='$alt' class='$class' />";
+	return "<img src='rien.gif' width='".$largeur."px' height='".$hauteur."px' style='width: ".$largeur."px; height: ".$hauteur."px; background: url($fichier) 0px -".$hauteur_old."px;' alt='$alt' class='$class' />";
 }
 
 function creer_sprites_terminaison_fichier_image($fichier) {
