@@ -47,6 +47,8 @@
 		<inclure>notifications_pipelines.php</inclure>
 	</pipeline>
 
+	<lien>http://www.spip-contrib.net/Notifications,2360</lien>
+
 	<necessite id='spip' version='[2.0.10;]' />
 	<necessite id='cfg' version='[1.0;]' />
 	<categorie>communication</categorie>
