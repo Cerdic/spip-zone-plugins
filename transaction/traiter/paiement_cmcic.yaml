@@ -1,0 +1,12 @@
+
+titre: '<:transaction:traiter_paiement_cmcic_titre:>'
+description: '<:transaction:traiter_paiement_cmcic_description:>'
+options:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'champ_paiement_cmcic_activation'
+      label: '<:formidable:traiter_paiement_cmcic_activation_label:>'
+      explication: '<:formidable:traiter_paiement_cmcic_activation_explication:>'
+      forcer_type: [cmcic_paiement_activation,hidden]
+      env: true
