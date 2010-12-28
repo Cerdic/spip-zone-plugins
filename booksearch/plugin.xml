@@ -20,6 +20,7 @@
 	booksearch
 	</prefix>
 	<icon>booksearch.png</icon>
+	<lien>http://www.spip-contrib.net/Plugin-Booksearch</lien>
 	<chemin dir='' />
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
