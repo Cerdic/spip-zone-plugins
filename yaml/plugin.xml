@@ -15,6 +15,7 @@
 	<prefix>
 	YAML
 	</prefix>
+	<lien>http://www.spip-contrib.net/Le-plugin-YAML</lien>
 	<icon>yaml.png</icon>
 	<fonctions>yaml_fonctions.php</fonctions>
 	<categorie>outil</categorie>
