@@ -3,13 +3,13 @@
 	<auteur>format d&#233;fini par yaml.org ; librairie php d&#233;velopp&#233;e par Fabien Potencier pour Symfony
 	License MIT
 	</auteur>
-	<version>1.4.1</version>
+	<version>1.5</version>
 	<etat>
 	stable
 	</etat>
 	<description>
 	Fournit les fonctions de lecture/&#233;criture du format YAML:
-	<code>yaml_decode()</code> et <code>yaml_encode()</code>.
+	<code>yaml_decode()</code> et <code>yaml_encode()</code>. Fournit aussi le format yaml pour la boucle (DATA).
 	</description>
 	<lien>http://yaml.org/</lien>
 	<prefix>
