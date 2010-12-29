@@ -1,0 +1,52 @@
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+/*CSS Meneame style pagination*/
+.pagination-meneame .sep,.pagination-meneame .label {display:none;}
+
+.pagination-meneame {
+	padding: 3px;
+	margin: 3px;
+	text-align:center;
+	color:#ff6500;
+	font-size:80%;
+}
+
+.pagination-meneame .lien_pagination {
+	border: 1px solid #ff9600;
+	margin-right:3px;
+	padding:5px 7px;
+
+	background-image:url(meneame.jpg);
+	background-position:bottom;
+	text-decoration: none;
+
+	color: #ff6500;
+}
+.pagination-meneame .tbc {margin-right:3px;}
+.pagination-meneame .lien_pagination:hover, div.meneame .lien_pagination:active {
+	border: 1px solid #ff9600;
+	background-image:none;
+	background-color:#ffc794;
+	color: #ff6500;
+}
+.pagination-meneame .on {
+	margin-right:3px;
+	padding:5px 7px;
+	border: 1px solid #ff6500;
+
+	font-weight: bold;
+	background-color: #ffbe94;
+	color: #ff6500;
+}
+.pagination-meneame .disabled .on {
+	margin-right:3px;
+	padding:5px 7px;
+	border: 1px solid #ffe3c6;
+	font-weight:normal;
+	background:none;
+	color: #ffe3c6;
+}

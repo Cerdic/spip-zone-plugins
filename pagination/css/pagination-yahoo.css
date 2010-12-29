@@ -1,0 +1,67 @@
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+/*CSS Yahoo new version style pagination*/
+.pagination-yahoo .sep,.pagination-yahoo .label {display:none;}
+
+.pagination-yahoo {
+	padding: 3px;
+	margin: 3px;
+	text-align:center;
+	font-family:Tahoma,Helvetica,sans-serif;
+	font-size:.85em;
+}
+
+.pagination-yahoo .lien_pagination {
+	border: 1px solid #ccdbe4;
+	margin-right:3px;
+	padding:2px 8px;
+
+	background-position:bottom;
+	text-decoration: none;
+
+	color: #0061de;
+}
+.pagination-yahoo .tbc {
+	margin-right:3px;
+}
+
+.pagination-yahoo .lien_pagination:hover, .pagination-yahoo .lien_pagination:active {
+	border: 1px solid #2b55af;
+	background-image:none;
+	background-color:#3666d4;
+	color: #fff;
+}
+.pagination-yahoo .on {
+	margin-right:3px;
+	padding:2px 6px;
+
+	font-weight: bold;
+	color: #000;
+}
+.pagination-yahoo .disabled {
+	display:none;
+}
+.pagination-yahoo .next .lien_pagination{
+	border:2px solid #ccdbe4;
+	margin:0 0 0 10px;
+}
+.pagination-yahoo .next .lien_pagination:hover{
+	border:2px solid #2b55af;
+}
+.pagination-yahoo .prev .lien_pagination{
+	border:2px solid #ccdbe4;
+	margin:0 10px 0 0;
+}
+.pagination-yahoo .prev .lien_pagination:hover{
+	border:2px solid #2b55af;
+}

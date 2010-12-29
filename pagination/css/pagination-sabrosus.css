@@ -1,0 +1,48 @@
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+
+/*CSS Sabrosus style pagination*/
+.pagination-sabrosus .sep,.pagination-sabrosus .label {display:none;}
+
+.pagination-sabrosus {
+	padding:3px;
+	margin:3px;
+	text-align:center;
+}
+
+.pagination-sabrosus .lien_pagination {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #9aafe5;
+
+	text-decoration: none;
+	color: #2e6ab1;
+}
+.pagination-sabrosus .tbc {
+	margin-right: 2px;
+}
+.pagination-sabrosus .lien_pagination:hover, .pagination-sabrosus .lien_pagination:active {
+	border: 1px solid #2b66a5;
+	color: #000;
+	background-color: lightyellow;
+}
+.pagination-sabrosus .on {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid navy;
+	font-weight: bold;
+	background-color: #2e6ab1;
+	color: #FFF;
+}
+.pagination-sabrosus .disabled .on {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #929292;
+	color: #929292;
+	font-weight: normal;
+	background: none;
+}

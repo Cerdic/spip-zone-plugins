@@ -1,0 +1,49 @@
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+.pagination-green-black .sep,.pagination-green-black .label {display:none;}
+.pagination-green-black {
+	padding:3px;
+	margin:3px;
+	text-align:center;
+	font-family: Lucida Grande,Arial,Sans-serif;
+	font-size:16px;
+	line-height:1.5em;
+}
+
+.pagination-green-black .lien_pagination {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #2C2C2C;
+	text-decoration: none;
+	color: #fff;
+	background: #2C2C2C url(image1.gif);
+}
+.pagination-green-black .tbc {margin-right:2px;}
+
+.pagination-green-black .lien_pagination:hover, .pagination-green-black .lien_pagination:active {
+	border:1px solid #AAD83E;
+	color: #FFF;
+	background: #AAD83E url(image2.gif);
+}
+
+.pagination-green-black .on {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #AAD83E;
+  font-weight: bold;
+	background: #AAD83E url(image2.gif);
+	color: #FFF;
+}
+
+.pagination-green-black .disabled .on {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #f3f3f3;
+	color: #ccc;
+	background: none;
+	font-weight:normal;
+}

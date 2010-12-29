@@ -1,0 +1,14 @@
+<plugin>
+<nom>Pagination</nom>
+<icon>icon.png</icon>
+<description>Modele et styles de pagination</description>
+<version>0.1.0</version>
+<etat>test</etat>
+<categorie>outil</categorie>
+<auteur>[Cedric->http://yterium.net]</auteur>
+<description>Adaptation de http://mis-algoritmos.com/2007/03/16/some-styles-for-your-pagination/ pour SPIP</description>
+<licence>GPL</licence>
+<prefix>pagination</prefix>
+<necessite id="SPIP" version="[;]" />
+<necessite id="spip_bonux" version="[1.8;]" />
+</plugin>

@@ -1,0 +1,14 @@
+<h3>#ENV{p}</h3>
+<style type="text/css">
+	@import "[(#CHEMIN{css/pagination-[(#ENV{p})].css})]";
+</style>
+<B_art>
+	[<p class="pagination[ pagination-(#ENV{p})]">(#PAGINATION)</p>]
+	<ul>
+		<BOUCLE_art(ARTICLES){pagination 5}>
+		<li>#ID_ARTICLE - #TITRE</li>
+		</BOUCLE_art>
+	</ul>
+	[<p class="pagination[ pagination-(#ENV{p})]">(#PAGINATION)</p>]
+</B_art>
+<hr />

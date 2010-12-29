@@ -1,0 +1,44 @@
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+/*CSS Digg style pagination*/
+.pagination-digg .sep,.pagination-digg .label {display:none;}
+.pagination-digg {
+	padding: 3px;
+	margin: 3px;
+	text-align:center;
+}
+
+.pagination-digg .lien_pagination {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #AAAADD;
+
+	text-decoration: none; /* no underline */
+	color: #000099;
+}
+.pagination-digg .lien_pagination:hover, div.digg .lien_pagination:active {
+	border: 1px solid #000099;
+
+	color: #000;
+}
+.pagination-digg .on {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #000099;
+
+	font-weight: bold;
+	background-color: #000099;
+	color: #FFF;
+}
+.pagination-digg .disabled .on {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #EEE;
+	background: none;
+	font-weight:normal;
+	color: #DDD;
+}
