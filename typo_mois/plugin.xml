@@ -1,7 +1,7 @@
 <plugin>
-	<nom>Corrections typographiques des dates (<code>"1er mars"</code> donne <code>"1er&nbsp;mars"</code>)</nom>
+	<nom>Typograhie : dates (<code>"1er mars"</code> donne <code>"1er&nbsp;mars"</code>)</nom>
 	<version>1.0</version>
-	<prefix>typo</prefix>
+	<prefix>typo_mois</prefix>
 	<etat>stable</etat>
 	<auteur>Fil</auteur>
 	<description></description>
@@ -11,5 +11,7 @@
 		<inclure>typo_mois_fonctions.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
+	<lien>http://www.spip-contrib.net/typo-mois</lien>
+	<icon>typo_mois.png</icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

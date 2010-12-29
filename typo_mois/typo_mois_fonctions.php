@@ -1,6 +1,6 @@
 <?php
 
-function typo_mois($texte){
+function typo_mois_mois($texte){
 	static $typo;
 	if(!$typo) {
 		$typo = array();
