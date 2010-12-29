@@ -386,7 +386,18 @@ function spip_array_listdbs($serveur='') {
 
 function spip_array_showbase($match, $serveur='')
 {
-	return false;
+	$res = array('pour'=>array('table'=>'pour'),'condition'=>array('table'=>'condition'));
+	$match = str_replace('_','.',$match);
+	$match = str_replace('%','.*',$match);
+	$match = str_replace('\.*','%',$match);
+	$match = str_replace('\.','_',$match);
+	$match = ",^$match$,i";
+	foreach(array_keys($res) as $k)
+		if (!preg_match($match,$k))
+			unset($res[$k]);
+
+	$hash = array_results(false,$res);
+	return $hash;
 }
 
 
