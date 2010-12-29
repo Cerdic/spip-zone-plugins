@@ -28,4 +28,7 @@ if(!$GLOBALS['cs_init']) {
 	$cs_log('ESSAI : cout_fonctions, mais initialisation en cours');
 }
 
+// raccourci pour le JavaScript
+function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2unicode($chaine))); }
+
 ?>

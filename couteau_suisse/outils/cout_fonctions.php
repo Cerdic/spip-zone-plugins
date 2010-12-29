@@ -94,7 +94,4 @@ function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL') {
 	return $texte;
 }
 
-// raccourci pour le JavaScript
-function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2unicode($chaine))); }
-
 ?>

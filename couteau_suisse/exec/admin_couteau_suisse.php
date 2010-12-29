@@ -256,7 +256,5 @@ cs_log(" FIN : exec_admin_couteau_suisse()");
 
 // callback pour les contribs
 function cs_couper_25($matches) { return couper(_T($matches[1]), 25); }
-// raccourci pour le JavaScript
-function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2unicode($chaine))); }
 
 ?>
