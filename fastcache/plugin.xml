@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Fast Cache</nom>
 	<auteur>Fil
-	&#169; 2007-2009 - licence GNU/GPL
+	&#169; 2007-2011 - licence GNU/GPL
 	</auteur>
 	<version>
 	0.4
@@ -33,7 +33,7 @@
 	</ul>
 
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Le-plugin-Fastcache</lien>
 	<prefix>
  	Fastcache
 	</prefix>

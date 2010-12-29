@@ -4,8 +4,8 @@
     [en]Format convertor</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	[erational->http://www.erational.org], [Fil]
-_ &#169; 2006-2008 - Licence GPL
+	[erational->http://www.erational.org], Fil
+_ &#169; 2006-2011 - Licence GPL
 	</auteur>
 	<version>
 	0.2
@@ -17,7 +17,7 @@ _ &#169; 2006-2008 - Licence GPL
     	<multi>[fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; integre au besoin les textes convertis dans des articles ; on peut uploader plusierus textes en un seul coup en les zippant au prealable
     	[en]Converts various formats (wiki, phpBB) into SPIP format</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Convertisseur</lien>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

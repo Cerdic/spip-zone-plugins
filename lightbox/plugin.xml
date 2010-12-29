@@ -22,7 +22,6 @@
 </code>
 
 	</description>
-	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalcul -->

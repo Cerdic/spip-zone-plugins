@@ -6,7 +6,7 @@
   <version>1.2.3</version>
   <etat>test</etat>
   <description>Permet d'afficher les &#233;l&#233;ments qui ont plusieurs mots cl&#233;s en communs, via la variable $mots[] pass&#233;e dans l'environnement</description>
-  <lien></lien>
+  <lien>http://www.spip-contrib.net/Critere-mots</lien>
   <fonctions>critere_mots_fonctions.php</fonctions>
   <prefix>critere_mots</prefix>
   <necessite id='SPIP' version='[2.0.0;]' />

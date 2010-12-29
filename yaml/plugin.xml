@@ -11,7 +11,6 @@
 	Fournit les fonctions de lecture/&#233;criture du format YAML:
 	<code>yaml_decode()</code> et <code>yaml_encode()</code>. Fournit aussi le format yaml pour la boucle (DATA).
 	</description>
-	<lien>http://yaml.org/</lien>
 	<prefix>
 	YAML
 	</prefix>
