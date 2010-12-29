@@ -13,10 +13,8 @@
   </etat>
   <description>
   Remplacement de SafeHTML par [HTML Purifier->http://htmlpurifier.org/].
-  
-  C'est un peu plus lent, mais plus efficace contre les [?XSS].
   </description>
-	<lien>http://htmlpurifier.org/</lien>
+	<lien>http://www.spip-contrib.net/HTML-Purifier,3671</lien>
   <prefix>
   htmlpurifier
   </prefix>
