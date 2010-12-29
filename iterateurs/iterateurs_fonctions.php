@@ -38,6 +38,15 @@ function critere_datacache($idb, &$boucles, $crit) {
 	$command[\'datacache\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';';
 }
 
+// {tableau #XX} pour compatibilite ascendante boucle POUR
+// ... preferer la notation {datasource #XX,table}
+function critere_tableau($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$boucle->hash .= '
+	$command[\'source\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
+	$command[\'sourcemode\'] = \'table\';';
+}
+
 
 /*
  * Pour passer des arguments a un iterateur non-spip

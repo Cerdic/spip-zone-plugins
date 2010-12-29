@@ -1,20 +1,35 @@
 #CACHE{0}
+<html>
+<head>
+<title>D&#233;mo des it&#233;rateurs[: (#ENV{demo})]</title>
+
+</head>
+
+<body>
+
 <div style="width:200px;float:right;border-left:solid gray 3px;">
 
 <h1>It&#233;rateurs</h1>
 
+
+<BOUCLE_chemin(DATA){datasource #EVAL{_chemin()},table}{par valeur}>
+
+<B_demos>
+<h2>[(#VALEUR|basename)]</h2>
 <ul>
 
-<BOUCLE_chemin(DATA){datasource #EVAL{_chemin()},table}>
 <BOUCLE_demos(DATA){datasource #VALEURdemo/iter_*.html,glob}>
 
 <li><a href="spip.php?page=demo/iterateurs&amp;demo=[(#VALEUR
-	|basename{.html})]">[(#VALEUR|basename{.html})]</a></li>
+	|basename{.html})]">[(#VALEUR|basename{.html}
+	|replace{^iter_}|replace{_,': '})]</a></li>
 
 </BOUCLE_demos>
+</ul>
+</B_demos>
+
 </BOUCLE_chemin>
 
-</ul>
 </div>
 
 
@@ -32,3 +47,5 @@
 ]
 
 
+</body>
+</html>
