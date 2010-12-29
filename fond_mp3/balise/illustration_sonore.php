@@ -91,15 +91,41 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 				$objet = substr($objet, 0, 3);
 			}
 			else if(count($contexte) == 2) {
-				$objet = "site";
-				$id_objet = "0";
+				$objet = 'site';
+				$id_objet = '0';
 			}
 	
 		}
 		else if($contexte = $GLOBALS['contexte'])
 		{
 			// SPIP 2 ?
-			$env = admin_objet();
+
+			// Dérivé de admin_objet()
+			// @see: ecrire/balise/formulaire_admin.php
+			function fmp3_detect_objet()
+			{
+				include_spip('inc/urls');
+				$env = array();
+			
+				foreach(array('rubrique', 'breve', 'article') as $obj)
+				{
+					$id = $obj;
+					$_id_type = id_table_objet($id);
+					if (isset($GLOBALS['contexte'][$_id_type])
+						&& ($id_type = $GLOBALS['contexte'][$_id_type]))
+					{
+						$id_type = sql_getfetsel($_id_type, table_objet_sql($id)
+												 , $_id_type.'='.intval($id_type));
+						if ($id_type) {
+							$env['objet'] = $id;
+							$env['id_objet'] = $id_type;
+						}
+					}
+				}
+				return($env);
+			}
+
+			$env = fmp3_detect_objet();
 			if(isset($env['objet']))
 			{
 				$objet = substr($env['objet'], 0, 3);
@@ -165,7 +191,7 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 				$son_exists = file_exists($son_dest);
 			}
 			
-			if($son_exists){ 
+			if($son_exists) { 
 			
 				include_spip('inc/filtres');
 				

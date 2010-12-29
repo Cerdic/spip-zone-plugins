@@ -51,7 +51,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Pour activer (forcer) le mode debug, valider la ligne suivante
-// define('_FMP3_DEBUG', true);
+//define('_FMP3_DEBUG', true); 
 
 include_spip('inc/fmp3_api_globales');
 
@@ -82,4 +82,3 @@ define("_FMP3_PREFERENCES_DEFAULT",
 
 define("_FMP3_META_PREFERENCES", 'fmp3_preferences');
 
-?>
