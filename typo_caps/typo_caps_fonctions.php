@@ -32,7 +32,7 @@ function _cap_wrapper( $matchobj )
     }
 }
 
-function typo_caps($t){
+function typo_caps_caps($t){
 	// eviter les tags
 	$t = preg_split(',(<[^>]+>),UmsS', $t, null, PREG_SPLIT_DELIM_CAPTURE);
 	$cap_finder = "/(

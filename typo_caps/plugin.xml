@@ -1,7 +1,7 @@
 <plugin>
-	<nom>Corrections typographiques des caps (<code>ONU</code> devient <code><span class="caps">ONU</span></code>)</nom>
+	<nom>Typographie : CAPS (<code>ONU</code> devient <code><span class="caps">ONU</span></code>)</nom>
 	<version>1.0</version>
-	<prefix>typo</prefix>
+	<prefix>typo_caps</prefix>
 	<etat>stable</etat>
 	<auteur>Fil</auteur>
 	<description></description>
@@ -11,5 +11,7 @@
 		<inclure>typo_caps_fonctions.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
+	<lien>http://www.spip-contrib.net/typo-caps</lien>
+	<icon>typo_caps.png</icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
