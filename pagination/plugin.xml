@@ -10,5 +10,5 @@
 <licence>GPL</licence>
 <prefix>pagination</prefix>
 <necessite id="SPIP" version="[;]" />
-<necessite id="spip_bonux" version="[1.8;]" />
+<utilise id="spip_bonux" version="[1.8;]" />
 </plugin>
