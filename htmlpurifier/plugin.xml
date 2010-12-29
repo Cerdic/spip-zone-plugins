@@ -1,12 +1,12 @@
 <plugin>
   <nom> <!-- Nom du plugin -->
-  HTML Purifier (remplacement de Safe HTML : S&#233;curit&#233; accrue)
+  HTML Purifier (pour remplacer SafeHTML)
   </nom>
   <auteur>        <!-- Auteur du plugin -->
   Edward Z. Yang (http://htmlpurifier.org/), Mise en plugin SPIP : RealET &#38; Fil
   </auteur>
   <version>
-  2.0.0
+  4.2.0
   </version>
   <etat>
   stable
@@ -16,11 +16,10 @@
   
   C'est un peu plus lent, mais plus efficace contre les [?XSS].
   </description>
-	<lien>[->http://htmlpurifier.org/]</lien> <!-- URI de documentation -->
-  <options>
-  </options>
+	<lien>http://htmlpurifier.org/</lien>
   <prefix>
   htmlpurifier
   </prefix>
+	<icon>htmlpurifier.png</icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
