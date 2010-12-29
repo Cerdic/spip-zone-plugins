@@ -156,8 +156,18 @@ function notation_calculer_id($p){
   else {
 	  $table = trim($table,"'");
 	  $objet = objet_type($table);
-	  $id_table = array_search(table_objet_sql($table),$boucle->from);
 	  $primary = id_table_objet($objet);
+
+		//Trouver une jointure
+		$desc = $boucle->show;
+		//Seulement si necessaire
+		if (!array_key_exists($primary, $desc['field'])) {
+			if (!$cle = array_search(table_objet_sql($table),$boucle->from))
+				$cle = trouver_jointure_champ($primary, $boucle);
+		}
+		else {
+			$cle = $boucle->id_table;
+		}
 
 	  $boucle->select[]= 'notations.nombre_votes AS nombre_votes';
 	  $boucle->select[]= 'notations.note AS moyenne';
@@ -167,7 +177,7 @@ function notation_calculer_id($p){
 		# Ordre des choses :
 		# $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
 		# exemple : notations = spip_documents, id_objet, id_document, notations.objet=document
-		$boucle->join["notations"]= array("'$id_table'","'id_objet'","'$primary'","'notations.objet='.sql_quote('$objet')");
+		$boucle->join["notations"]= array("'$cle'","'id_objet'","'$primary'","'notations.objet='.sql_quote('$objet')");
   }
 }
 
