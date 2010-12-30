@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Typograhie : dates (<code>"1er mars"</code> donne <code>"1er&nbsp;mars"</code>)</nom>
+	<nom>Typographie : dates (<code>"1er mars"</code> donne <code>"1er&nbsp;mars"</code>)</nom>
 	<version>1.0</version>
 	<prefix>typo_mois</prefix>
 	<etat>stable</etat>
