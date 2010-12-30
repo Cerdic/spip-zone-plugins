@@ -9,4 +9,5 @@ options:
       label: '<:formidable:traiter_paiement_cic_activation_label:>'
       explication: '<:formidable:traiter_paiement_cic_activation_explication:>'
       forcer_type: [cic_paiement_activation,hidden]
+      cacher_option_intro: false
       env: true

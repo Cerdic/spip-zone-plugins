@@ -3,10 +3,24 @@ titre: '<:transaction:traiter_paiement_cmcic_titre:>'
 description: '<:transaction:traiter_paiement_cmcic_description:>'
 options:
   -
-    saisie: 'hidden'
+    saisie: 'selection'
     options:
-      nom: 'champ_paiement_cmcic_activation'
-      label: '<:formidable:traiter_paiement_cmcic_activation_label:>'
-      explication: '<:formidable:traiter_paiement_cmcic_activation_explication:>'
-      forcer_type: [cmcic_paiement_activation,hidden]
+      nom: 'champ_banque'
+      label: '<:transaction:traiter_choix_banque_label:>'
+      explication: '<:transaction:traiter_choix_banque_explication:>'
+      cacher_option_intro: 'oui'
+      datas: 
+        banque1: '<:transaction:banque_selection_1:>'
+        banque2: '<:transaction:banque_selection_2:>'
+        banque3: '<:transaction:banque_selection_3:>'
       env: true
+  -
+    saisie: 'radio'
+    options:
+      nom: 'champ_test'
+      label: '<:transaction:traiter_choix_test_label:>'
+      explication: '<:transaction:traiter_choix_test_explication:>'
+      datas: 
+        test: '<:transaction:banque_test:>'
+        prod: '<:transaction:banque_prod:>'
+      defaut: 'test'

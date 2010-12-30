@@ -9,6 +9,6 @@
  	<description>Module de paiement CmCIC.</description>
 	<lien>http://contrib.thelia.fr/spip.php?article143</lien>
 	<documentation>Readme.txt</documentation>
- 	<etat>production</etat>
+ 	<etat>dev</etat>
 	<install>http://contrib.thelia.fr/IMG/zip/cmcic.zip</install>
 </plugin>

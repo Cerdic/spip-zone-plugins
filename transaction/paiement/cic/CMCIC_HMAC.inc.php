@@ -1,7 +1,8 @@
 <?php
 
-include_once(realpath(dirname(__FILE__)) . "/config.php");
-
+// include_once(realpath(dirname(__FILE__)) . "/config.php");
+// fonction THELIA
+include_once("config.php");
 /*****************************************************************************
  *
  * CM_CIC_Paiement "open source" kit for CyberMUT-P@iement(TM) and

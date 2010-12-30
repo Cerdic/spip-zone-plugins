@@ -12,19 +12,12 @@ define ("CMCIC_CLE", "12345678901234567890123456789012345678P0");
 define ("CMCIC_TPE", "0000001");
 
 
-//code société
+//code sociŽtŽ fourni par votre Žtablissement bancaire 
 define ("CMCIC_CODESOCIETE", "codesociete");
 
 
 //ne pas toucher
 define ("CMCIC_VERSION", "3.0");
-
-//serveur de paiement
-//serveur de test, supprimer une fois vos tests effectués
-define ("CMCIC_SERVEUR", "https://ssl.paiement.cic-banques.fr/test/");
-//serveur de production, décommenter lorsque votre statut est en production en supprimant les deux // au début de la ligne suivante
-//define ("CMCIC_SERVEUR", "https://ssl.paiement.cic-banques.fr/");
-
 
 //url de retour ok
 define ("CMCIC_URLOK", "http://urlthelia/merci.php");

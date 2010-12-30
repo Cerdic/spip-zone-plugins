@@ -20,11 +20,17 @@
 // TPE Settings
 // Warning !! CMCIC_Config contains the key, you have to protect this file with all the mechanism available in your development environment.
 // You may for instance put this file in another directory and/or change its name. If so, don't forget to adapt the include path below.
-require_once("config.php");
+
+session_start();
+
+// On récupère la banque à utiliser
+define ("CMCIC_SERVEUR", $_SESSION['banque']);
+
+require_once("config.php");    
 
 // PHP implementation of RFC2104 hmac sha1 ---
 require_once("CMCIC_Tpe.inc.php");
-session_start();
+
 
 $sOptions = "";
 
@@ -45,7 +51,7 @@ $total = $_SESSION['navig']->panier->total(1,$_SESSION['navig']->commande->remis
 if($total<$_SESSION['navig']->commande->port)
 	$total = $_SESSION['navig']->commande->port;*/
 	
-$total = $_SESSION['total']; // test
+$total = $_SESSION['total'];
 
 $sMontant = $total;
 

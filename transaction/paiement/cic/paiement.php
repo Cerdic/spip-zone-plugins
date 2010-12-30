@@ -37,7 +37,7 @@
 ?>
 
 <?php
-   $total = 200; // test
+   $total = $_REQUEST['champ_montant_selection_1']; // test
 ?>
 
 <HTML>

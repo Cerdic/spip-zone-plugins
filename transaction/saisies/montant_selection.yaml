@@ -106,6 +106,6 @@ defaut:
   options:
     label: '<:transaction:saisie_montant_selection_titre:>'
     datas:
-      choix1: '<:transaction:saisie_radio_defaut_choix1:>'
-      choix2: '<:transaction:saisie_radio_defaut_choix2:>'
-      choix3: '<:transaction:saisie_radio_defaut_choix3:>'
+      15: '<:transaction:saisie_radio_defaut_choix1:>'
+      50: '<:transaction:saisie_radio_defaut_choix2:>'
+      100: '<:transaction:saisie_radio_defaut_choix3:>'
