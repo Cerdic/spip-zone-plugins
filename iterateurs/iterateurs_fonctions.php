@@ -145,6 +145,22 @@ function critere_pagination($idb, &$boucles, $crit) {
 
 
 ###### BALISES
+/**
+ * #LISTE{a,b,c,d,e} cree un #ARRAY avec les valeurs, sans preciser les cles
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_LISTE($p) {
+	$_code = array();
+	$n=1;
+	while ($_val = interprete_argument_balise($n++,$p))
+		$_code[] = $_val;
+	$p->code = 'array(' . join(', ',$_code).')';
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 
 /**
  * #SAUTER{n} permet de sauter en avant n resultats dans une boucle
