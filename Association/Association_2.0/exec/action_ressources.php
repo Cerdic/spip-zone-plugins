@@ -18,7 +18,7 @@ function exec_action_ressources(){
 		
 	$id_ressource=intval(_request('id'));
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer') OR !$id_ressource) {
+	if (!autoriser('associer', 'ressources') OR !$id_ressource) {
 			include_spip('inc/minipres');
 			echo minipres();
 

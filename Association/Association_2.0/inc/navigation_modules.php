@@ -12,40 +12,37 @@
 
 function association_onglets(){
 	
+	$res = association_onglet1(_T('asso:menu2_titre_gestion_membres'), 'adherents', 'Membres', 'annonce.gif');  
+
+	if ($GLOBALS['association_metas']['dons']) {
+		$res .= association_onglet1(_T('asso:menu2_titre_gestion_dons'), 'dons', 'Dons', 'dons.gif'); 
+	}
+	if ($GLOBALS['association_metas']['ventes']) {
+		$res .= association_onglet1(_T('asso:menu2_titre_ventes_asso'), 'ventes', 'Ventes', 'ventes.gif'); 
+	}
+	if ($GLOBALS['association_metas']['activites']) {
+		$res .= association_onglet1(_T('asso:menu2_titre_gestion_activites'), 'activites', 'Activites', 'activites.gif'); 
+	}
+	if ($GLOBALS['association_metas']['prets']) {
+		$res .= association_onglet1(_T('asso:menu2_titre_gestion_prets'), 'ressources', 'Prets', 'pret1.gif'); 
+	}
+	if ($GLOBALS['association_metas']['comptes']) {
+		$res .= association_onglet1(_T('asso:menu2_titre_livres_comptes'), 'comptes', 'Comptes', 'comptes.gif'); 
+	}
+	
 	echo gros_titre(
 		_T('asso:gestion_de_lassoc') .
 		' ' .
 		$GLOBALS['association_metas']['nom'], '', false);
 
-	if (!autoriser('configurer')) return;
+	if ($res) echo "<div class='bandeau_actions'>", debut_onglet(), $r, fin_onglet(), '</div>';
+}
 
-	$link1= generer_url_ecrire('adherents');
-	$link2= generer_url_ecrire('dons');
-	$link4= generer_url_ecrire('ventes');
-	$link5= generer_url_ecrire('activites');
-	$link6= generer_url_ecrire('comptes');
-	$link7= generer_url_ecrire('ressources');
-	
-	echo "<div class='bandeau_actions'>", debut_onglet();
-		
-	echo onglet(_T('asso:menu2_titre_gestion_membres'), $link1, '', 'Membres', _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif','rien.gif' );  
-	if ($GLOBALS['association_metas']['dons']) {
-		echo onglet(_T('asso:menu2_titre_gestion_dons'), $link2, '', 'Dons', _DIR_PLUGIN_ASSOCIATION_ICONES.'dons.gif','rien.gif' ); 
-	}
-	if ($GLOBALS['association_metas']['ventes']) {
-		echo onglet(_T('asso:menu2_titre_ventes_asso'), $link4, '', 'Ventes', _DIR_PLUGIN_ASSOCIATION_ICONES.'ventes.gif','rien.gif' ); 
-	}
-	if ($GLOBALS['association_metas']['activites']) {
-		echo onglet(_T('asso:menu2_titre_gestion_activites'), $link5, '', 'Activites', _DIR_PLUGIN_ASSOCIATION_ICONES.'activites.gif','rien.gif' ); 
-	}
-	if ($GLOBALS['association_metas']['prets']) {
-		echo onglet(_T('asso:menu2_titre_gestion_prets'), $link7, '', 'Prets', _DIR_PLUGIN_ASSOCIATION_ICONES.'pret1.gif','rien.gif' ); 
-	}
-	if ($GLOBALS['association_metas']['comptes']) {
-		echo onglet(_T('asso:menu2_titre_livres_comptes'), $link6, '', 'Comptes', _DIR_PLUGIN_ASSOCIATION_ICONES.'comptes.gif','rien.gif' ); 
-	}
-	
-	echo fin_onglet(), '</div>';
+function association_onglet1($texte, $objet, $libelle, $image)
+{
+	if (autoriser('associer', $objet))
+		return onglet($texte, generer_url_ecrire($objet), '', $libelle, _DIR_PLUGIN_ASSOCIATION_ICONES . $image, 'rien.gif');
+	else return '';
 }
 
 function fin_page_association()

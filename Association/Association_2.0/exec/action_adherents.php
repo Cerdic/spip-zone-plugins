@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 function exec_action_adherents() {
 		
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'adherents')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} elseif (is_array($_POST["delete"]) AND $_POST["delete"]) 

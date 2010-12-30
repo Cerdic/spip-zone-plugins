@@ -20,7 +20,7 @@ include_spip ('inc/mail');
 function exec_action_relances(){
 		
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'comptes')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {

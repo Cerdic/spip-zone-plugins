@@ -18,7 +18,7 @@ function exec_edit_compte() {
 		
 	$id_compte= intval(_request('id'));
 
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

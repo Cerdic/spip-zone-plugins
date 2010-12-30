@@ -16,13 +16,13 @@ include_spip ('inc/navigation_modules');
 	
 function exec_prets(){
 		
+	$id_ressource = intval($_REQUEST['id']);
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'activites', $id_ressource)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 
-		$id_ressource=intval($_REQUEST['id']);
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_liste_reservations')) ;
 		association_onglets();

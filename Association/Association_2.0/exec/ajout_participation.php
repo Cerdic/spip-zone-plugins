@@ -15,8 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_ajout_participation() {
 		
+	$id_activite=intval($_GET['id']);
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'activites', $id_activite)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -31,8 +32,6 @@ function exec_ajout_participation() {
 		echo association_retour();
 		echo debut_droite("",true);
 		echo debut_cadre_relief("", true, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
-		
-		$id_activite=intval($_GET['id']);
 		
 		$data = sql_fetsel("*", "spip_asso_activites", "id_activite=$id_activite ");
 		$nom=$data['nom'];

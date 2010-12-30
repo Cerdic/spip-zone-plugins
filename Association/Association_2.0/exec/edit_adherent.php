@@ -19,7 +19,7 @@ function exec_edit_adherent() {
 	$id_auteur= intval(_request('id'));
 
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'adherents')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else exec_edit_adherent_args($id_auteur);

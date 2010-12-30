@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_action_comptes(){
 		
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

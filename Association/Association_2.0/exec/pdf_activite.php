@@ -6,7 +6,7 @@ include_spip('pdf/extends');
 
 function exec_pdf_activite()
 {
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

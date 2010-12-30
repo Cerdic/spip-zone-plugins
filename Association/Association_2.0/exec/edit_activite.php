@@ -16,7 +16,7 @@ include_spip ('inc/navigation_modules');
 function exec_edit_activite(){
 		
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else  exec_edit_activite_args(intval(_request('id')),  intval(_request('id_evenement')));

@@ -11,18 +11,17 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
 	
 function exec_edit_pret(){
 		
-		include_spip('inc/autoriser');
-		if (!autoriser('configurer')) {
+	$id_pret= intval(_request('id_pret'));
+	include_spip('inc/autoriser');
+	if (!autoriser('associer', 'activites', $id_pret)) {
 			include_spip('inc/minipres');
 			echo minipres();
-		} else {		
-
-		$id_pret= intval(_request('id_pret'));
+	} else {		
 		$data = !$id_pret ? '' : sql_fetsel('*', 'spip_asso_prets', "id_pret=$id_pret");
 		if ($data) {
 			$id_ressource=intval($data['id_ressource']);

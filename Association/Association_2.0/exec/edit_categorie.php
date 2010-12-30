@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 function exec_edit_categorie(){
 		
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer')) {
+	if (!autoriser('associer', 'comptes')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {

@@ -20,7 +20,7 @@ function exec_ajout_cotisation(){
 		
 	$id_auteur = intval(_request('id'));
 	$row = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
-	if (!autoriser('configurer') OR !$row) {
+	if (!autoriser('associer', 'adherents', $id_auteur) OR !$row) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
