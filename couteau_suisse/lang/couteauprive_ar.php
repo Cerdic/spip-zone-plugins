@@ -264,8 +264,8 @@ _ {{&#1634;.}} &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &lt;tabl
 	'detail_jquery3' => '{{&#1578;&#1606;&#1576;&#1610;&#1607;}}: &#1607;&#1584;&#1607; &#1575;&#1604;&#1571;&#1583;&#1575;&#1577; &#1578;&#1578;&#1591;&#1604;&#1576; &#1605;&#1604;&#1581;&#1602; [jQuery &#1604;&#1600;SPIP &#1633;.&#1641;&#1634;->files.spip.org/spip-zone/jquery_192.zip] &#1604;&#1603;&#1610; &#1578;&#1593;&#1605;&#1604; &#1576;&#1588;&#1603;&#1604; &#1587;&#1604;&#1610;&#1605; &#1605;&#1593; &#1607;&#1584;&#1575; &#1575;&#1604;&#1573;&#1589;&#1583;&#1575;&#1585; &#1605;&#1606; SPIP.',
 	'detail_pipelines' => '&#1582;&#1591;&#1608;&#1591; &#1575;&#1604;&#1605;&#1608;&#1575;&#1587;&#1610;&#1585;:',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
-	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
-	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
 	'detail_traitements' => '&#1575;&#1604;&#1605;&#1593;&#1575;&#1604;&#1580;&#1575;&#1578;:',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -706,7 +706,7 @@ _ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ign
 _ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
 
 _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]', # NEW
-	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
+	'spip_cache:description3' => '@puce@ L\'extension &laquo; Compresseur &raquo; pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP et le cache&hellip;', # NEW
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW

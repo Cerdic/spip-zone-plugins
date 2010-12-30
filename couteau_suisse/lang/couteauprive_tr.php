@@ -236,8 +236,8 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 	'detail_jquery3' => '{{Dikkat}} : bu gere&ccedil; sorunsuz &ccedil;al&#305;&#351;abilmek i&ccedil;in [SPIP 1.92-i&ccedil;in jQuery>http://files.spip.org/spip-zone/jquery_192.zip] eklentisi gerektirir.',
 	'detail_pipelines' => 'Boru hatlar&#305; (pipeline) :',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
-	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
-	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil «@lien@».', # NEW
+	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
+	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
 	'detail_traitements' => '&#304;&#351;lemler :',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW
@@ -658,7 +658,7 @@ _ • {Normal kullan&#305;m} : SPIP, varsay&#305;lan durumda incelemeyi h&#305;z
 _ • {Kal&#305;c&#305; &ouml;nbellek} : &ouml;nbelle&#287;i ge&ccedil;ersiz k&#305;lan s&uuml;re iptal edilir..
 _ • {&Ouml;nbellek yok} : &Ouml;nbelle&#287;i ge&ccedil;ici olarak kapatmak sitenin geli&#351;imine yard&#305;mc&#305; olabilir. Diske hi&ccedil;bir &#351;ey kaydedilmez.
 _ • {&Ouml;nbelle&#287;in kontrol&uuml;} : bu se&ccedil;enek bir &ouml;ncekiyle ayn&#305;d&#305;r ama t&uuml;m sonu&ccedil;lar ileride kontrol edilebilmeleri i&ccedil;in diske yaz&#305;l&#305;r. </q1>[[%radio_desactive_cache4%]]', # MODIF
-	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
+	'spip_cache:description3' => '@puce@ L\'extension &laquo; Compresseur &raquo; pr&eacute;sente dans SPIP permet de compacter les diff&eacute;rents &eacute;l&eacute;ments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela acc&eacute;l&egrave;re l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers &agrave; obtenir.', # NEW
 	'spip_cache:nom' => 'SPIP ve &ouml;nbellek…',
 	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW
