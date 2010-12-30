@@ -19,8 +19,6 @@ include_spip('lib/AmazonECS.class');
 
 function inc_booksearch_to_array($u) {
 
-  try {
-
     $amazonEcs = new AmazonECS(AWS_API_KEY, AWS_API_SECRET_KEY, 'FR');
 
     // from now on you want to have pure arrays as response
@@ -46,9 +44,6 @@ function inc_booksearch_to_array($u) {
     # cas a 0 reponse
     else
       $u = array();
-  } catch (Exception $e) {
-    return $e;
-  }
 
   return $u;
 
