@@ -143,7 +143,7 @@
 		}
 
 
-		function enregistrer_statut($statut, $cron=false, $xml=false) {
+		function enregistrer_statut($statut, $avec_envoi_aux_abonnes=true) {
 			$ancien_statut = $this->statut;
 			switch ($statut) {
 				case 'brouillon':
@@ -160,9 +160,11 @@
 							propager_les_secteurs();
 							calculer_langues_rubriques();
 						}
+						if ($avec_envoi_aux_abonnes) {
 						// appel a passer en job qeue
 						include_spip('inc/delivrer');
 						lettres_programmer_envois($this->id_lettre);
+						};
 					}
 					break;
 				case 'envoyee':
