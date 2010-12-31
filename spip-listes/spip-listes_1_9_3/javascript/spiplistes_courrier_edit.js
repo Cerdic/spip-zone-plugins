@@ -31,11 +31,14 @@ jQuery(document).ready(function(){
 		}
 		else {
 		// c'est le bouton de previsu qui valide
-			var data = jQuery('input['+jqss+'name=titre],input['+jqss+'name=id_courrier],input['+jqss+'type=checkbox]['+jqss+'checked],input['+jqss+'type=radio]['+jqss+'checked],select,textarea',this).serialize();
+			var data = jQuery('input['+jqss+'name=titre],input['+jqss+'name=avec_patron],input['+jqss+'name=id_courrier],input['+jqss+'type=checkbox]['+jqss+'checked],input['+jqss+'type=radio]['+jqss+'checked],select,textarea',this).serialize();
 			jQuery.ajax({ type: 'POST', 
 						url: './?exec=spiplistes_courrier_previsu', 
-						data: data, 
-						success: function(msg){  jQuery('#apercu-courrier').html(msg); }
+						data: data,
+						async:false,
+						success: function(msg){
+							jQuery('#apercu-courrier').html(msg);
+						}
 				});
 			}
 		return (false);

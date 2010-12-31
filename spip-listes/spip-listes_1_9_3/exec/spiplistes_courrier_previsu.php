@@ -1,7 +1,6 @@
 <?php
 
 // exec/spiplistes_courrier_previsu.php
-// _SPIPLISTES_EXEC_COURRIER_PREVISUE
 
 // utilise par _SPIPLISTES_EXEC_COURRIER_EDIT
 
@@ -52,6 +51,8 @@ include_spip('inc/spiplistes_api_globales');
 
 function exec_spiplistes_courrier_previsu () {
 
+	spiplistes_log('ACTION: exec_spiplistes_courrier_previsu()', _SPIPLISTES_LOG_DEBUG);
+
 	global $meta;
 
 	include_spip('base/abstract_sql');
@@ -67,7 +68,7 @@ function exec_spiplistes_courrier_previsu () {
 	include_spip('inc/spiplistes_api_abstract_sql');
 	include_spip('public/assembler');
 	
-	$eol = "\n";
+	$eol = PHP_EOL;
 	
 	$int_values = array(
 		'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
@@ -86,6 +87,10 @@ function exec_spiplistes_courrier_previsu () {
 	);
 	foreach(array_merge($str_values, $int_values) as $key) {
 		$$key = _request($key);
+		// méfiance sur jQuery 1.4.4 qui semble
+		// ne plus transmettre les vars qu'en 1.4.2
+		// @todo: a creuser, verifier les autres vars ajax transmises
+		//spiplistes_log('PREVISU: '.$key.': '.$$key, _SPIPLISTES_LOG_DEBUG);
 	}
 	foreach($int_values as $key) {
 		$$key = intval($$key);
@@ -111,7 +116,7 @@ function exec_spiplistes_courrier_previsu () {
 		
 	$texte_intro = $texte_patron =
 		$tampon_html = $tampon_texte =
-		$sommaire_html = "";
+		$sommaire_html = '';
 	
 	if(spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui') {
 		list($tampon_html, $tampon_texte) = spiplistes_tampon_assembler_patron();
@@ -184,13 +189,15 @@ function exec_spiplistes_courrier_previsu () {
 	// si nouveau courrier (pas dans la base), generer un apercu
 	else {
 		
+		spiplistes_log('ACTION: generate preview', _SPIPLISTES_LOG_DEBUG);
+
 		$intro_html = $intro_texte = 
-			$sommaire_html = $sommaire_texte = "";
+			$sommaire_html = $sommaire_texte = '';
 		
 		if($avec_intro == 'oui') {
 			$ii = propre($message_intro);
-			$intro_html = "<div>$ii</div>\n";
-			$intro_texte = spiplistes_courrier_version_texte($ii)."\n\n";
+			$intro_html = '<div>'.$ii.'</div>'.$eol;
+			$intro_texte = spiplistes_courrier_version_texte($ii).$eol.$eol;
 		} 
 
 		if($avec_patron == 'oui') {
@@ -207,8 +214,8 @@ function exec_spiplistes_courrier_previsu () {
 				, 'message' => $message
 			);
 			
-			$titre_html = _T('spiplistes:lettre_info')." ".$nomsite;
-			$titre_texte = spiplistes_courrier_version_texte($titre_html) . "\n";
+			$titre_html = _T('spiplistes:lettre_info').' '.$nomsite;
+			$titre_texte = spiplistes_courrier_version_texte($titre_html) . $eol;
 
 			list($message_html, $message_texte) = spiplistes_courriers_assembler_patron (
 				_SPIPLISTES_PATRONS_DIR . $patron
@@ -219,15 +226,15 @@ function exec_spiplistes_courrier_previsu () {
 		else {
 			$titre_html = propre($titre);
 			$message_html = propre($message);
-			$titre_texte = spiplistes_courrier_version_texte($titre_html) . "\n";
-			$message_texte = spiplistes_courrier_version_texte($message_html) . "\n";
+			$titre_texte = spiplistes_courrier_version_texte($titre_html) . $eol;
+			$message_texte = spiplistes_courrier_version_texte($message_html) . $eol;
 		}
 		
 		if($avec_sommaire == 'oui') {
 
 			if($id_rubrique > 0) {
 
-				$sql_where = array("id_rubrique=".sql_quote($id_rubrique)
+				$sql_where = array('id_rubrique='.sql_quote($id_rubrique)
 					, "statut=".sql_quote('publie'));
 				
 				if($date_sommaire == 'oui') {
@@ -244,8 +251,8 @@ function exec_spiplistes_courrier_previsu () {
 							: generer_url_entite($row['id_article'], 'article')
 							;
 						$ii = typo($row['titre']);
-						$sommaire_html .= "<li> <a href='" . $url . "'>" . $ii . "</a></li>\n";
-						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . "\n";
+						$sommaire_html .= "<li> <a href='" . $url . "'>" . $ii . '</a></li>'.$eol;
+						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . $eol;
 					}
 				}
 			}
@@ -267,7 +274,7 @@ function exec_spiplistes_courrier_previsu () {
 							: generer_url_entite($row['id_article'], 'article')
 							;
 						$sommaire_html .= "<li> <a href='" . $url . "'> " . $ii . "</a></li>\n";
-						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . "\n";
+						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . $eol;
 					}
 				}
 			}
@@ -281,22 +288,25 @@ function exec_spiplistes_courrier_previsu () {
 					;
 				$message_texte = 
 					($patron_pos == "avant")
-					? $message_texte . "\n" . $sommaire_texte
-					: $sommaire_texte . "\n" . $message_texte
+					? $message_texte . $eol . $sommaire_texte
+					: $sommaire_texte . $eol . $message_texte
 					;
 			}
 		
 		} // end if($avec_sommaire == 'oui')
 
+
 		$form_action = ($id_courrier) 
-			? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
+			? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER, 'id_courrier='.$id_courrier)
 			: generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER)
 			;
 		
 		$message_html = liens_absolus($intro_html . $message_html);
 		$message_texte = liens_absolus($intro_texte . $message_texte);
 		
-		$page_result = ""
+		spiplistes_log('ACTION: generate page', _SPIPLISTES_LOG_DEBUG);
+
+		$page_result = ''
 			// boite courrier au format html
 			. debut_cadre_couleur('', true)
 			. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>\n"
@@ -341,6 +351,7 @@ function exec_spiplistes_courrier_previsu () {
 			. "<br />\n"
 			;
 		echo($page_result);
+
 	}
 	exit(0);
 }	
@@ -363,4 +374,3 @@ function exec_spiplistes_courrier_previsu () {
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-?>
