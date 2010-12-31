@@ -6,10 +6,11 @@
 		[(#ENV{nom_plugin})][ - (#VERSION)]
 		<BOUCLE_depot(DEPOTS){id_depot}>
 		[(#SET{url_depot, #URL_DEPOT})]
+		[(#SET{url_archives, #URL_ARCHIVES})]
 		[(#SET{titre_depot, #TITRE})]
 		</BOUCLE_depot>
 		<div>
-			<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#URL_ARCHIVES|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" class="telecharger">
+			<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_archives}|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" class="telecharger">
 			<:bouton_telecharger:>
 			</a>
 		</div>
