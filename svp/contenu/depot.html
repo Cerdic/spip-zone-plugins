@@ -31,7 +31,7 @@
 
 	[<p class="hyperlien">
 		<:svp:label_fichier_depot:>&nbsp;:
-		<a href="#URL_PAQUETS" title="<:svp:bulle_telecharger_fichier_depot:>">(#URL_PAQUETS)</a>
+		<a href="#XML_PAQUETS" title="<:svp:bulle_telecharger_fichier_depot:>">(#XML_PAQUETS)</a>
 	</p>]
 
 	[<div class="hyperlien">
@@ -46,7 +46,7 @@
 <INCLURE{fond=inclure/liste-plugins}{env} />
 
 [(#REM) La liste des paquets du depot correspondant a d'autres contributions ]
-[(#SET{url, [(#URL_PAQUETS|dirname|concat{/})]})]
+[(#SET{url, [(#URL_ARCHIVES|concat{/})]})]
 <h3 class="h3"><:svp:intertitre_depot_autres_contributions:></h3>
 <p>[(#ID_DEPOT|svp_compter_depots{autre})]</p>
 <INCLURE{fond=inclure/liste-autres-contributions}{env}{url_depot=#GET{url}} />

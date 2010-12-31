@@ -103,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_depot_git' => 'D&eacute;p&ocirc;t sous GIT',
 	'label_type_depot_manuel' => 'D&eacute;p&ocirc;t manuel',
 	'label_type_depot_svn' => 'D&eacute;p&ocirc;t sous SVN',
+	'label_url_archives' => 'URL du conteneur des archives',
 	'lien_gerer_depots' => 'Tous les d&eacute;p&ocirc;ts',
 
 	'label_categorie' => 'Catégorie',

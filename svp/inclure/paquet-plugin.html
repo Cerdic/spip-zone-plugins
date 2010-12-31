@@ -5,14 +5,14 @@
 		[(#LOGO|image_reduire{48}|inserer_attribut{class, spip_logos})]
 		[(#ENV{nom_plugin})][ - (#VERSION)]
 		<BOUCLE_depot(DEPOTS){id_depot}>
-		[(#SET{url_depot, [(#URL_PAQUETS|dirname|concat{/})]})]
+		[(#SET{url_depot, #URL_DEPOT})]
 		[(#SET{titre_depot, #TITRE})]
+		</BOUCLE_depot>
 		<div>
-			<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_depot}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" class="telecharger">
+			<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#URL_ARCHIVES|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" class="telecharger">
 			<:bouton_telecharger:>
 			</a>
 		</div>
-		</BOUCLE_depot>
 	</h3>
 	<br class="nettoyeur" />
 

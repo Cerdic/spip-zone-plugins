@@ -14,14 +14,14 @@
 				<fieldset>
 					<p class="explication"><:svp:info_ajouter_depot:></p>
 					<ul>
-						<li class="editer_url_paquets obligatoire[(#ENV{erreurs}|table_valeur{url_paquets}|oui) erreur]">
-							<label for="url_paquets"><:svp:label_fichier_depot:></label>
+						<li class="editer_xml_paquets obligatoire[(#ENV{erreurs}|table_valeur{xml_paquets}|oui) erreur]">
+							<label for="xml_paquets"><:svp:label_fichier_depot:></label>
 							<p class="explication">
 								<:svp:info_fichier_depot:>
-								<a class="spip_out" title="<:svp:bulle_ajouter_spipzone:>" href="http://files.spip.org/spip-zone/archives.xml" onclick="$('#url_paquets').attr('value',$(this).attr('href')).focus();return false;"><:svp:info_adresse_spipzone:></a>
+								<a class="spip_out" title="<:svp:bulle_ajouter_spipzone:>" href="http://files.spip.org/spip-zone/archives.xml" onclick="$('#xml_paquets').attr('value',$(this).attr('href')).focus();return false;"><:svp:info_adresse_spipzone:></a>
 							</p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{url_paquets})</span>]
-							<input type="text" name="url_paquets" id="url_paquets" value="" class="text" />						
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml_paquets})</span>]
+							<input type="text" name="xml_paquets" id="xml_paquets" value="" class="text" />						
 						</li>
 					</ul>
 				</fieldset>

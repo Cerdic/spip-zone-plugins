@@ -44,8 +44,9 @@ function svp_ajouter_depot($url, &$erreur=''){
 	$champs = array('titre' => filtrer_entites($infos['depot']['titre']), 
 					'descriptif' => filtrer_entites($infos['depot']['descriptif']),
 					'type' => $infos['depot']['type'],
-					'url_source' => $infos['depot']['source'],
-					'url_paquets'=> $url,
+					'url_serveur' => $infos['depot']['url_serveur'],
+					'url_archives' => $infos['depot']['url_archives'],
+					'xml_paquets'=> $url,
 					'sha_paquets'=> sha1_file($url));
 	$id_depot = sql_insertq('spip_depots', $champs);
 		
@@ -164,7 +165,7 @@ function svp_actualiser_depot($id){
 		return false;
 	}
 
-	$sha = sha1_file($depot['url_paquets']);
+	$sha = sha1_file($depot['xml_paquets']);
 	if ($depot['sha_paquets'] == $sha) {
 		// Le fichier n'a pas change (meme sha1) alors on ne fait qu'actualiser la date 
 		// de mise a jour du depot en mettant a jour *inutilement* le sha1
@@ -173,7 +174,7 @@ function svp_actualiser_depot($id){
 	}
 	else {
 		// Le fichier a bien change il faut actualiser tout le depot
-		$infos = svp_xml_parse_depot($depot['url_paquets']);
+		$infos = svp_xml_parse_depot($depot['xml_paquets']);
 		if (!$infos)
 			return false;
 	
@@ -799,7 +800,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.version_spip AS version_spip',
 						't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
 						't2.logo AS logo', 't2.version AS version', 't2.nom_archive AS nom_archive',
-						't3.url_paquets AS url_paquets', );
+						't3.url_archives AS url_archives', );
 		$where = array('t1.id_plugin=t2.id_plugin', 't2.id_depot=t3.id_depot');
 		if ($ids_paquets)
 			$where[] = sql_in('t2.id_paquet', $ids_paquets);
@@ -831,7 +832,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 					else
 						$paquets['score'] = 0;
 					// -- on construit l'url de l'archive
-					$paquets['url_archive'] = dirname($paquets['url_paquets']) . '/' . $paquets['nom_archive'];
+					$paquets['url_archive'] = $paquets['url_archives'] . '/' . $paquets['nom_archive'];
 					// -- on gere les exclusions si elle doivent etre affichees
 					if ($afficher_exclusions AND in_array($paquets['id_plugin'], $exclusions))
 						$paquets['installe'] = true;

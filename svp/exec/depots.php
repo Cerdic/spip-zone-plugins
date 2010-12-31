@@ -64,7 +64,8 @@ function afficher_depot($id_depot, $depot) {
 	$titre = $depot['titre'];
 	$descriptif = $depot['descriptif'];
 	$type = $depot['type'];
-	$url = $depot['url_paquets'];
+	$url_archives = $depot['url_archives'];
+	$xml = $depot['xml_paquets'];
 	$nbr_paquets = $depot['nbr_paquets'];
 	$nbr_plugins = $depot['nbr_plugins'];
 	$nbr_autres = $depot['nbr_autres'];

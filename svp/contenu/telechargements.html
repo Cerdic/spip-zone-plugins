@@ -29,7 +29,7 @@
 	[<span style="float: #LANG_RIGHT;">(#LOGO_DEPOT|image_reduire{32})</span>]
 </h2>
 [(#REM) Liste des paquets du depot ]
-[(#SET{url, [(#URL_PAQUETS|dirname|concat{/})]})]
+[(#SET{url, [(#URL_ARCHIVES|concat{/})]})]
 [(#REM) -- Les plugins ]
 <h3 class="h3"><:svp:intertitre_paquets_plugin:></h3>
 <INCLURE{fond=inclure/liste-paquets-plugin}{env}{id_depot}{categorie}{url_depot=#GET{url}} />
