@@ -191,6 +191,10 @@ function spiplistes_courrier_propre_bloog($texte) {
  * d'apres Clever Mail (-> NHoizey), mais en mieux.
 ****/
 
+/**
+ * @param $in string, contenu html du courrier a envoyer
+ * @return string, version texte seul (ascii) du courrier
+ **/
 function spiplistes_courrier_version_texte($in) {
 
 	$eol = PHP_EOL;
@@ -230,6 +234,7 @@ function spiplistes_courrier_version_texte($in) {
 	$out = preg_replace('/<sup>([0-9]+)<\/sup>/', '[\\1]', $out);
 	
 	// etrange parfum de regex dans un str_replace ?
+	// @todo: a verifier
 	//$out = str_replace('<p[^>]*>', $eol.$eol, $out);
 	
 	//$out = str_replace('<br /><img class=\'spip_puce\' src=\'puce.gif\' alt=\'-\' border=\'0\'>', "\n".'-', $out);
@@ -261,18 +266,20 @@ function spiplistes_courrier_version_texte($in) {
 	$out = supprimer_tags($out);
 	
 	$out = str_replace('\x0B', '', $out); 
-	$out = preg_replace("/\t/", '', $out) ;
+	$out = str_replace("\t", '', $out) ;
 	$out = preg_replace('/[ ]{3,}/', '', $out);
 	
 	// espace en debut de ligne
 	$out = preg_replace("/(\r\n|\n|\r)[ ]+/m", $eol, $out);
 	
-	// Bring down number of empty lines to 3 max
+	// Bring down number of empty lines to 2 max
+	// sauts de ligne >= 3 reduits a 2
 	$out = preg_replace("/(\r\n|\n|\r){3,}/m", $eol.$eol, $out);
 	
 	//retablir les saut de ligne
-	$out = preg_replace('/(_SAUT_){3,}/m', '_SAUT__SAUT__SAUT_', $out);
-	$out = preg_replace('/_SAUT_/', $eol, $out);
+	//Réduire les > 3 à 3
+	$out = preg_replace('/(_SAUT_){4,}/m', '_SAUT__SAUT__SAUT_', $out);
+	$out = str_replace('_SAUT_', $eol, $out);
 	
 	//saut de lignes en debut et fin de texte
 	$out = $eol.$eol.trim($out).$eol.$eol;
