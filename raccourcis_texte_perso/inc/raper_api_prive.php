@@ -224,7 +224,16 @@ function raper_boite_plugin_info () {
 	include_spip('inc/meta');
 	include_spip('inc/plugin');
 
-	$info = plugin_get_infos(_DIR_PLUGIN_RAPER);
+	// 20101231, correcion de doriaN
+	// http://www.quesaco.org/Surcharger-les-raccourcis-texte#forum720
+	if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$info = $get_infos(_DIR_PLUGIN_RAPER);
+	}
+	else {
+		$info = plugin_get_infos(_DIR_PLUGIN_RAPER);
+	}
+
 	$icon = 
 		(isset($info['icon']))
 		? "<div class='icone' "
