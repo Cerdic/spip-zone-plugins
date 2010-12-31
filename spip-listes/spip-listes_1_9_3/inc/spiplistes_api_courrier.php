@@ -267,17 +267,15 @@ function spiplistes_courrier_version_texte($in) {
 	// espace en debut de ligne
 	$out = preg_replace("/(\r\n|\n|\r)[ ]+/m", $eol, $out);
 	
-//marche po
-	// Bring down number of empty lines to 4 max
+	// Bring down number of empty lines to 3 max
 	$out = preg_replace("/(\r\n|\n|\r){3,}/m", $eol.$eol, $out);
 	
 	//retablir les saut de ligne
 	$out = preg_replace('/(_SAUT_){3,}/m', '_SAUT__SAUT__SAUT_', $out);
 	$out = preg_replace('/_SAUT_/', $eol, $out);
-	//saut de lignes en debut de texte
-	$out = preg_replace("/^(\r\n|\n|\r)+/", $eol.$eol, $out);
-	//saut de lignes en fin de texte
-	$out = preg_replace("/(\r\n|\n|\r)+$/", $eol.$eol, $out);
+	
+	//saut de lignes en debut et fin de texte
+	$out = $eol.$eol.trim($out).$eol.$eol;
 	
 	// Faire des lignes de 75 caracteres maximum
 	$out = wordwrap($out);
