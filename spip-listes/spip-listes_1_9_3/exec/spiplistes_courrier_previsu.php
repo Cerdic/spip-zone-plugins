@@ -51,7 +51,7 @@ include_spip('inc/spiplistes_api_globales');
 
 function exec_spiplistes_courrier_previsu () {
 
-	spiplistes_log('ACTION: exec_spiplistes_courrier_previsu()', _SPIPLISTES_LOG_DEBUG);
+	//spiplistes_log('ACTION: exec_spiplistes_courrier_previsu()', _SPIPLISTES_LOG_DEBUG);
 
 	global $meta;
 
@@ -189,7 +189,7 @@ function exec_spiplistes_courrier_previsu () {
 	// si nouveau courrier (pas dans la base), generer un apercu
 	else {
 		
-		spiplistes_log('ACTION: generate preview', _SPIPLISTES_LOG_DEBUG);
+		//spiplistes_log('ACTION: generate preview', _SPIPLISTES_LOG_DEBUG);
 
 		$intro_html = $intro_texte = 
 			$sommaire_html = $sommaire_texte = '';
