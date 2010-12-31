@@ -13,8 +13,10 @@ function exec_get_infos_spip_dist() {
 
 	global $connect_statut;
 	
+	$eol = PHP_EOL;
+	
 	// Accès aux admins
-	$flag_editable = ($connect_statut == "0minirezo");
+	$flag_editable = ($connect_statut == '0minirezo');
 
 ////////////////////////////////////
 // PAGE CONTENU
@@ -41,9 +43,9 @@ function exec_get_infos_spip_dist() {
 		
 		$is_mysql = defined('_MYSQL_SET_SQL_MODE') && _MYSQL_SET_SQL_MODE;
 
-		$page_result = '<div style="margin-top:3em">' . PHP_EOL
+		$page_result = '<div style="margin-top:3em">' . $eol
 			. gros_titre(_T('titre_configuration'),'', false)
-			. '</div>' . PHP_EOL
+			. '</div>' . $eol
 			. debut_gauche($rubrique, true)
 			. debut_boite_info(true)
 				. '<div id="gins-logo" style="background-image: url('._DIR_PLUGIN_GINS.'/images/gins-128.png'.');"></div>'
@@ -124,14 +126,14 @@ function exec_get_infos_spip_dist() {
 			, 'PHP version' => phpversion()
 			, 'SQL version' => gins_sqlversion()
 			, 'Zend version' => zend_version()
-			, 'jQuery' => '<script type="text/javascript">' . PHP_EOL
-					. '//<![CDATA[' . PHP_EOL
-					. 'document.write("<span style=\"color:green\">" + jQuery.fn.jquery + "</span>")' . PHP_EOL
-					. '//]]>' . PHP_EOL
-					. '</script>' . PHP_EOL
+			, 'jQuery' => '<script type="text/javascript">' . $eol
+					. '//<![CDATA[' . $eol
+					. 'document.write("<span style=\"color:green\">" + jQuery.fn.jquery + "</span>")' . $eol
+					. '//]]>' . $eol
+					. '</script>' . $eol
 					. '<noscript>'
 					. '<span style="color:red">' . _T('gins:jquery_inactif') . '</span>'
-					. '</noscript>' . PHP_EOL
+					. '</noscript>' . $eol
 			, 'Place disque libre' => gins_decodeSize(disk_free_space(_DIR_RACINE))
 		);
 		$corps[$ii] = gins_lister_values(
@@ -193,16 +195,16 @@ function exec_get_infos_spip_dist() {
 		foreach($corps as $key=>$results)
 		{
 			$menu .= '<li><a href="#gins-'.$key.'" class="'.($jamaisvu ? 'highlight' : '').'" name="'.$key.'">'
-				._T('gins:'.$key).'</a></li>'.PHP_EOL;
+				._T('gins:'.$key).'</a></li>'.$eol;
 			$jamaisvu = false;
 		}
 		$page_result .=
-			  '<div id="gins-menu" >'.PHP_EOL
-			. '<h2>'._T('gins:menu_proprietes').'</h2>'.PHP_EOL
-			. '<lu>'.PHP_EOL
+			  '<div id="gins-menu" >'.$eol
+			. '<h2>'._T('gins:menu_proprietes').'</h2>'.$eol
+			. '<lu>'.$eol
 			. $menu
-			. '</lu>'.PHP_EOL
-			. '</div>'.PHP_EOL
+			. '</lu>'.$eol
+			. '</div>'.$eol
 			;
 		
 		//////////
@@ -213,7 +215,7 @@ function exec_get_infos_spip_dist() {
 			$page_result .=
 				  '<div id="gins-'.$key.'" class="gins-item '.$key.($jamaisvu ? ' highlight' : '').'">'
 				. $results
-				. '</div>'.PHP_EOL
+				. '</div>'.$eol
 				;
 			$jamaisvu = false;
 		}
@@ -221,9 +223,9 @@ function exec_get_infos_spip_dist() {
 		//////////
 		// Fin de la page
 		echo(
-			  '<div id="gins-contenu">'.PHP_EOL
-			. $page_result.PHP_EOL
-			. '</div>'.PHP_EOL
+			  '<div id="gins-contenu">'.$eol
+			. $page_result.$eol
+			. '</div>'.$eol
 		);
 		
 		echo pipeline('affiche_milieu', array('args'=>array('exec'=>$sous_rubrique),'data'=>''));
@@ -241,16 +243,18 @@ function exec_get_infos_spip_dist() {
  **/
 function gins_lister_values($array, $titre)
 {
+	$eol = PHP_EOL;
+	
 	$result = '';
 	foreach($array as $key => $val)
 	{
-		$result .= '<li><strong>'.$key.'</strong>: '.gins_dump_value($val).'</li>'.PHP_EOL;
+		$result .= '<li><strong>'.$key.'</strong>: '.gins_dump_value($val).'</li>'.$eol;
 	}
 	$result = ''
 		. debut_cadre_trait_couleur($icone, true, '', $titre)
-		. '<ul>' . PHP_EOL
+		. '<ul>' . $eol
 		. $result
-		. '</ul>' . PHP_EOL
+		. '</ul>' . $eol
 		. fin_cadre_trait_couleur(true)
 		;
 	return($result);
@@ -262,26 +266,28 @@ function gins_lister_values($array, $titre)
  **/
 function gins_dump_value($value)
 {
+	$eol = PHP_EOL;
+	
 	if(($g = gettype($value)) == 'array')
 	{
 		$r = '';
 		foreach($value as $key=>$val)
 		{
-			$r .= '<li>'.$key.': '.gins_dump_value($val).'</li>'.PHP_EOL;
+			$r .= '<li>'.$key.': '.gins_dump_value($val).'</li>'.$eol;
 		}
 		$value =
-			  '<ul>'.PHP_EOL
-			. $r.PHP_EOL
-			. '</ul>'.PHP_EOL
+			  '<ul>'.$eol
+			. $r.$eol
+			. '</ul>'.$eol
 			;
 	}
 	elseif($g == 'boolean')
 	{
-		$value = '<span style=\"color:blue\">'.($value ? 'TRUE' : 'FALSE').'</span>'.PHP_EOL;
+		$value = '<span style=\"color:blue\">'.($value ? 'TRUE' : 'FALSE').'</span>'.$eol;
 	}
 	elseif($value === NULL)
 	{
-		$value = '<span style=\"color:grey\">NULL</span>'.PHP_EOL;
+		$value = '<span style=\"color:grey\">NULL</span>'.$eol;
 	}
 	return($value);
 }
