@@ -115,7 +115,7 @@ function foni_insert_head ($flux) {
 			var loaded, reviens, maxt = 5;
 			boucle = function() {
 				loaded = $.fontAvailable("' . $family . '");
-				console.log("Fonte ' . $family . ' loaded: " + loaded);
+				/* console.log("Fonte ' . $family . ' loaded: " + loaded); /* */
 				maxt--;
 				if(loaded || maxt<=0) {
 					console.log("finish");
@@ -126,14 +126,14 @@ function foni_insert_head ($flux) {
 				}
 			}
 			if(!reviens) {
-				console.log("setinterval call");
+				/* console.log("setinterval call"); /* */
 				reviens = setInterval(function(){ boucle(); }, 1000);
 			}
 		}
 
-		/* console.log("Fonte ' . $family . ' loaded: " + $.fontAvailable("' . $family . '")); */
+		/* console.log("Fonte ' . $family . ' loaded: " + $.fontAvailable("' . $family . '")); /* */
 		$("#tete-baseline").click(function () {  
-			console.log("Fonte ' . $family . ' loaded: " + $.fontAvailable("' . $family . '"));
+			/* console.log("Fonte ' . $family . ' loaded: " + $.fontAvailable("' . $family . '")); /* */
 	    });
 	});
 // --></script>
