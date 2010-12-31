@@ -20,8 +20,8 @@
 	include_spip('public/lettres_boucles');
 	include_spip('facteur_fonctions');
 	
-	// définit l'API (filtres) d'envoi des lettres à des mails issus de tables externes 
-	// (hors abonnement)
+	// API d'envoi des lettres à des mails issus de requêtes SQL 
+	// (sous-sélection d'abonnés ou tables externes)
 	include_spip('inc/delivrer_hors_abo');
 	
 	function lettres_verifier_validite_email($email) {

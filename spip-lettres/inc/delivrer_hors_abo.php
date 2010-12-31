@@ -2,19 +2,10 @@
 //
 // spip-lettres
 //
-// API (filtres) d'envoi des lettres à des emails issus d'une requête SQL
-// et n'utilisant pas nécessairement la table spip_abonnes
+// API d'envoi des lettres à des mails issus de requêtes SQL 
+// (sous-sélection d'abonnés ou tables externes)
 //
 // Auteur : JLuc
-//
-// Exemple d'usage dans un squelette pour l'envoi de la lettre 3 : 
-// <BOUCLE_go(CONTACTS){abonnement>0}>
-// 	[(#EMAIL|lettres_programmer_envois_email{3})]
-// </BOUCLE_go>
-//
-// ou bien 
-//
-// [(#VAL{3}|lettres_sql_programmer_envois{'email,prenom,nom',CONTACTS,email like '%@spip.net'})]
 //
 
 include_spip('inc/lettres_fonctions');
@@ -22,17 +13,15 @@ include_spip('classes/lettre');
 include_spip('base/abstract_sql');
 @define('_LETTRES_MAX_TRY_SEND',5);
 
-// Utilisable en filtre dans un squelette, 
-// pour envoyer une lettre aux mails résultats d'une requête.
 //
-// La requête doit produire un 'email', éventuellement un 'code' et d'autres champs
-// dont les valeurs seront substituées aux %%CHAMPS%% présents dans le mail
-// Si 'code' est fourni, %%URL_VALIDATION_DESABONNEMENTS%% sera substitué
-// avec les bons paramètres email et code pour la page de désabonnement par défaut; 
-// à savoir 'validation_desabonnements_sql' qu'il faut se construire sur mesure, 
-// selon l'origine des données, en s'inspirant de validation_desabonnements
-//
+// Programme l'envoi de la lettre aux destinataires issus d'une requête sql
 // En complément de $id_lettre, les paramètres sont ceux de sql_select
+// La requête reçue doit produire un 'email', éventuellement un 'code' et d'autres champs
+// dont les valeurs seront substituées aux %%CHAMPS%% présents dans le mail
+// Si 'code' est fourni, %%URL_VALIDATION_DESABONNEMENTS%% et %%URL_VALIDATION_DESABONNEMENTS_PERSO%% seront substitués
+// avec les bons paramètres email et code pour la page de désabonnement par défaut; 
+// à savoir 'validation_desabonnements' (ou 'validation_desabonnements_perso' qu'il faut se construire sur mesure)
+//
 function lettres_sql_programmer_envois ($id_lettre, $select = array(), $from = "spip_abonnes", $where = array(), $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {
 
 	$lettre = new lettre($id_lettre,false); 
@@ -53,8 +42,7 @@ function lettres_sql_programmer_envois ($id_lettre, $select = array(), $from = "
 	return $count ? $count : '';
 }
 
-// utilisable dans un squelette
-// $champs est un tableau associatif de (raccourcis à substituer, valeurs)
+// $champs est un tableau associatif de (raccourcis à substituer, valeur)
 function lettres_programmer_envoi_email ($id_lettre, $email, $champs=array()) {
 	spip_log ("lettres_programmer_envoi_email ($id_lettre, $email,".print_r($champs,true).")", 'lettre_mail_req');
 
@@ -84,9 +72,12 @@ function lettres_envoyer_une_lettre_email ($id_lettre, $email, $champs=array(), 
 	// Si un code est fournit par la requête, alors on peut aussi traiter le désabonnement
 	if (isset ($champs['code'])) {
 		$parametres = 'lang='.$lettre->lang.'&rubriques[]=-1&code='.$champs['code'].'&email='.$email;
-		$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements_sql', $parametres, true));
+		$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
 		$message_html	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
 		$message_texte	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
+		$url_action_validation_desabonnements_perso = url_absolue(generer_url_action('validation_desabonnements_perso', $parametres, true));
+		$message_html	= str_replace("%%URL_VALIDATION_DESABONNEMENTS_PERSO%%", $url_action_validation_desabonnements_perso, $message_html);
+		$message_texte	= str_replace("%%URL_VALIDATION_DESABONNEMENTS_PERSO%%", $url_action_validation_desabonnements_perso, $message_texte);
 	};
 	
 	foreach ($champs as $c => $v) {
@@ -96,7 +87,7 @@ function lettres_envoyer_une_lettre_email ($id_lettre, $email, $champs=array(), 
 		$message_texte = lettres_remplacer_raccourci($c, $v, $message_texte);
 	};
 
-	// ici on pourrait gérer un éventuel $champ['format']
+	// ici on pourrait gérer l'indication d'un éventuel $champ['format']
 	$corps = array('html' => $message_html, 'texte' => $message_texte);
 	
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
