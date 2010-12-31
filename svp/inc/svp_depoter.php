@@ -227,8 +227,9 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	if ((!$id_depot) OR (!is_array($paquets)))
 		return false;
 		
-	// On initialise l'url de base des sources du depot et son type afin de calculer l'url complete de chaque logo
-	$depot = sql_fetsel('url_serveur, type', 'spip_depots', 'id_depot=' . sql_quote($id_depot));
+	// On initialise l'url de base des logos du depot et son type afin de calculer l'url complete de chaque logo
+	// A REVOIR COMPLETEMENT !!!!
+	$depot = sql_fetsel('url_archives, type', 'spip_depots', 'id_depot=' . sql_quote($id_depot));
 	
 	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
 	$ids_a_supprimer = array();
@@ -260,9 +261,9 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
 			$insert_plugin = $champs['plugin'];
 			// On construit l'url complete du logo
+			// A REVOIR COMPLETEMENT !!!
 			if ($insert_paquet['logo'])
-				$insert_paquet['logo'] = $depot['url_serveur'] . '/'
-									   . (($depot['type'] == 'svn') ? 'export/HEAD' : '') . '/'
+				$insert_paquet['logo'] = $depot['url_archives'] . '/'
 									   . $insert_paquet['src_archive'] . '/'
 									   . $insert_paquet['logo'];
 
