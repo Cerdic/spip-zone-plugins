@@ -119,8 +119,8 @@ function exec_get_infos_spip_dist() {
 		$ii = 'configsyst';
 		$infos = array(
 			  'OS' => php_uname() . ' - ' . (PHP_INT_SIZE * 8).' bits'
-			, 'Apache version' => apache_get_version()
-			, 'Apache modules' => apache_get_modules()
+			, 'Apache version' => (function_exists('apache_get_version') ? apache_get_version() : null)
+			, 'Apache modules' => (function_exists('apache_get_modules') ? apache_get_modules() : null)
 			, 'PHP version' => phpversion()
 			, 'SQL version' => gins_sqlversion()
 			, 'Zend version' => zend_version()
