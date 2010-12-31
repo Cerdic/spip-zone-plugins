@@ -228,7 +228,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		return false;
 		
 	// On initialise l'url de base des sources du depot et son type afin de calculer l'url complete de chaque logo
-	$depot = sql_fetsel('url_source, type', 'spip_depots', 'id_depot=' . sql_quote($id_depot));
+	$depot = sql_fetsel('url_serveur, type', 'spip_depots', 'id_depot=' . sql_quote($id_depot));
 	
 	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
 	$ids_a_supprimer = array();
@@ -261,7 +261,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			$insert_plugin = $champs['plugin'];
 			// On construit l'url complete du logo
 			if ($insert_paquet['logo'])
-				$insert_paquet['logo'] = $depot['url_source'] . '/'
+				$insert_paquet['logo'] = $depot['url_serveur'] . '/'
 									   . (($depot['type'] == 'svn') ? 'export/HEAD' : '') . '/'
 									   . $insert_paquet['src_archive'] . '/'
 									   . $insert_paquet['logo'];
@@ -645,7 +645,7 @@ function svp_xml_parse_depot($url){
 	// On extrait les informations du depot si elles existent (balise <depot>)
 	$infos = array('depot' => array(), 'paquets' => array());
 	if (is_array($depot = $arbre['depot'][0]))
-		$infos['depot'] = svp_xml_aplatit_multiple(array('titre', 'descriptif', 'type', 'source'), $depot);
+		$infos['depot'] = svp_xml_aplatit_multiple(array('titre', 'descriptif', 'type', 'url_serveur', 'url_archives'), $depot);
 	if (!$infos['depot']['titre'])
 		$infos['depot']['titre'] = _T('svp:titre_nouveau_depot');
 	if (!$infos['depot']['type'])

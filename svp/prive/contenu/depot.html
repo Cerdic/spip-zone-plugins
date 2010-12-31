@@ -11,9 +11,11 @@
 		<div class='label'><:svp:label_url_archives:>&nbsp;:</div>
 		<div dir='#LANG_DIR' class='#EDIT{url_archives} ps'><p>#URL_ARCHIVES</p></div>
 	</div>
-	[<div class="champ contenu_descriptif">
+	[<div class="champ contenu_ps">
 		<div class='label'><:svp:label_type_depot:></div>
 		<div dir='#LANG_DIR' class='#EDIT{type} type'><p>(#ENV{info_type})</p></div>
+		[<div class='label'><:svp:label_url_serveur:>&nbsp;:</div>
+		<div dir='#LANG_DIR' class='#EDIT{url_serveur} ps'><p>(#URL_SERVEUR)</p></div>]
 	</div>]
 	<div class="champ contenu_texte[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 		<div class='label'><:info_descriptif:></div>
