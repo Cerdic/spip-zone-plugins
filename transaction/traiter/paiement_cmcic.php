@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function traiter_paiement_cmcic_dist($args, $retours){
+	
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
@@ -39,10 +40,17 @@ function traiter_paiement_cmcic_dist($args, $retours){
     if ($_REQUEST['montant_1']) $_SESSION['total'] = $_REQUEST['montant_1'];
     if ($_REQUEST['montant_selection_1']) $_SESSION['total'] = $_REQUEST['montant_selection_1'];
     
-    
+    // ID unique de la transaction
     $_SESSION['ref'] = uniqid();
-     
-	$retours['redirect'] = find_in_path("paiement/cmcic/paiement.php");
+    
+    //On envoi vers la banque uniquement si aucun autre mode de paiement
+    foreach($traitements as $type_traitement=>$options){
+		if ($type_traitement == "paiement_cheque"){
+		 	break;
+		} else {
+			$retours['redirect'] = find_in_path("paiement/cmcic/paiement.php");
+		}
+	}
 	
 	return $retours;
 }

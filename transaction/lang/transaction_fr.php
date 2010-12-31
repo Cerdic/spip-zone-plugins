@@ -22,7 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_choix_test_label' => 'Mode API',
 	'traiter_choix_test_explication' => 'Quel mode doit &ecirc;tre utilis&eacute; pour les communications avec les serveurs de la banque ?',
 	'banque_test' => 'Mode de test',
-	'banque_prod' => 'Mode de production'
+	'banque_prod' => 'Mode de production',
+		'traiter_paiement_cheque_titre' => 'Paiement par ch&egrave;que',
+	'traiter_paiement_cheque_description' => 'Proposer le paiement par ch&egrave;que',
+	'traiter_cheque_label' => 'Message de retour',
+	'traiter_cheque_explication' => 'Indiquez ici le message de retour ainsi que l\'adresse &agrave; laquelle le ch&egrave;que devra &ecirc;tre envoy&eacute;',
+	'traiter_cheque_message_defaut' => 'Merci de votre don. Veuillez envoyer le ch&egrave;que &agrave; l\'adresse : adresse de votre organisme.',
+	'traiter_cheque_message_cmcic' => 'Effectuer le paiement par carte bancaire.'
 	
 );
 
