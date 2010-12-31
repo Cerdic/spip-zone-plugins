@@ -2,6 +2,13 @@
 Ce d&eacute;p&ocirc;t ne pas la nouvelle balise <code><depot></code> et sa liste de paquets est :
 -* fancyboxy en balise plugin multiple dans une seule archive: il faut donc crŽer les deux paquets avec la mme archive
  -->
+<depot>
+    <titre>D&eacute;p&ocirc;t #4</titre>
+	<type>svn</type>
+	<url_archives>http://files.spip.org/spip-zone</url_archives>
+	<url_serveur>svn://zone.spip.org/spip-zone</url_serveur>
+</depot>
+
 <archives>
 <archive id="fancyboxy.zip">
 <file>fancyboxy.zip</file>

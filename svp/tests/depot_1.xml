@@ -10,7 +10,7 @@ d'autre part, la liste des paquets suivants :
 -* Plugin_1 : idem le premier paquet pour le pr&eacute;fixe, les versions et l'&eacute;tat conduisant &agrave; son rejet pour doublon
 -* memobox : un paquet avec un suffixe 2 inclus dans le nom -non multi- du plugin 
 	</descriptif>
-	<type>svn</type>
+	<type>git</type>
 </depot>
 
 <archives>
