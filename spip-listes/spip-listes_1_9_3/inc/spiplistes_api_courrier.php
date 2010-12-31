@@ -193,8 +193,11 @@ function spiplistes_courrier_propre_bloog($texte) {
 
 function spiplistes_courrier_version_texte($in) {
 
+	$eol = PHP_EOL;
+	
 	// Nettoyage des liens des notes de bas de page
-	$out = ereg_replace("<a href=\"#n(b|h)[0-9]+-[0-9]+\" name=\"n(b|h)[0-9]+-[0-9]+\" class=\"spip_note\">([0-9]+)</a>", "\\3", $in);
+	$out = preg_replace("@<a href=\"#n(b|h)[0-9]+-[0-9]+\" name=\"n(b|h)[0-9]+-[0-9]+\" class=\"spip_note\">([0-9]+)</a>@"
+						, "\\3", $in);
 	
 	// Supprimer tous les liens internes
 	$patterns = array("/\<a href=['\"]#(.*?)['\"][^>]*>(.*?)<\/a>/ims");
@@ -202,10 +205,10 @@ function spiplistes_courrier_version_texte($in) {
 	$out = preg_replace($patterns,$replacements, $out);
 	
 	// Supprime feuille style
-	$out = ereg_replace("<style[^>]*>[^<]*</style>", "", $out);
+	$out = preg_replace("/<style[^>]*>[^<]*<\/style>/", '', $out);
 	
 	// les puces
-	$out = str_replace($GLOBALS['puce'], "\n".'-', $out);
+	$out = str_replace($GLOBALS['puce'], $eol.'-', $out);
 	
 	// Remplace tous les liens	
 	$patterns = array("/\<a href=['\"](.*?)['\"][^>]*>(.*?)<\/a>/ims");
@@ -215,65 +218,66 @@ function spiplistes_courrier_version_texte($in) {
 	$_traits = str_repeat('-', 40);
 	$_points = str_repeat('.', 20);
 	
-	$out = ereg_replace("<h1[^>]*>", "_SAUT__SAUT_".$_traits."_SAUT_", $out);
-	$out = str_replace("</h1>", "_SAUT__SAUT_".$_traits."_SAUT__SAUT_", $out);
-	$out = ereg_replace("<h2[^>]*>", "_SAUT__SAUT_".$_points." ", $out);
-	$out = str_replace("</h2>", " ".$_points."_SAUT__SAUT_", $out);
-	$out = ereg_replace("<h3[^>]*>", "_SAUT__SAUT_*", $out);
-	$out = str_replace("</h3>", "*_SAUT__SAUT_", $out);
+	$out = preg_replace('/<h1[^>]*>/', '_SAUT__SAUT_'.$_traits.'_SAUT_', $out);
+	$out = str_replace('</h1>', '_SAUT__SAUT_'.$_traits.'_SAUT__SAUT_', $out);
+	$out = preg_replace('/<h2[^>]*>/', '_SAUT__SAUT_'.$_points.' ', $out);
+	$out = str_replace('</h2>', ' '.$_points.'_SAUT__SAUT_', $out);
+	$out = preg_replace('/<h3[^>]*>/', '_SAUT__SAUT_*', $out);
+	$out = str_replace('</h3>', '*_SAUT__SAUT_', $out);
 	
 	// Les notes de bas de page
-	$out = str_replace("<p class=\"spip_note\">", "\n", $out);
-	$out = ereg_replace("<sup>([0-9]+)</sup>", "[\\1]", $out);
+	$out = str_replace('<p class="spip_note">', $eol, $out);
+	$out = preg_replace('/<sup>([0-9]+)<\/sup>/', '[\\1]', $out);
 	
-	$out = str_replace("<p[^>]*>", "\n\n", $out);
+	// etrange parfum de regex dans un str_replace ?
+	//$out = str_replace('<p[^>]*>', $eol.$eol, $out);
 	
 	//$out = str_replace('<br /><img class=\'spip_puce\' src=\'puce.gif\' alt=\'-\' border=\'0\'>', "\n".'-', $out);
-	$out = ereg_replace ('<li[^>]>', "\n".'-', $out);
+	$out = preg_replace('/<li[^>]>/', $eol.'-', $out);
 	//$out = str_replace('<li>', "\n".'-', $out);
 	
 	
 	// accentuation du gras -
 	// <b>texte</b> -> *texte*
-	$out = ereg_replace ('<b[^>|r]*>','*' ,$out);
+	$out = preg_replace('/<b[^>|r]*>/','*' ,$out);
 	$out = str_replace ('</b>','*' ,$out);
 	
 	// accentuation du gras -
 	// <strong>texte</strong> -> *texte*
-	$out = ereg_replace ('<strong[^>]*>','*' ,$out);
+	$out = preg_replace('/<strong[^>]*>/','*' ,$out);
 	$out = str_replace ('</strong>','*' ,$out);
 	
 	
 	// accentuation de l'italique
 	// <i>texte</i> -> *texte*
-	$out = ereg_replace ('<i[^>|mg]*>','*' ,$out);
-	$out = str_replace ('</i>','*' ,$out);
+	$out = preg_replace('/<i[^>|mg]*>/','*' ,$out);
+	$out = str_replace ('</i>', '*', $out);
 	
 	$out = str_replace('&oelig;', 'oe', $out);
-	$out = str_replace("&nbsp;", " ", $out);
+	$out = str_replace('&nbsp;', ' ', $out);
 	$out = filtrer_entites($out);
 	
 	//attention, trop brutal pour les logs irc <@RealET>
 	$out = supprimer_tags($out);
 	
-	$out = str_replace("\x0B", "", $out); 
-	$out = ereg_replace("\t", "", $out) ;
-	$out = ereg_replace("[ ]{3,}", "", $out);
+	$out = str_replace('\x0B', '', $out); 
+	$out = preg_replace("/\t/", '', $out) ;
+	$out = preg_replace('/[ ]{3,}/', '', $out);
 	
 	// espace en debut de ligne
-	$out = preg_replace("/(\r\n|\n|\r)[ ]+/", "\n", $out);
+	$out = preg_replace("/(\r\n|\n|\r)[ ]+/m", $eol, $out);
 	
 //marche po
 	// Bring down number of empty lines to 4 max
-	$out = preg_replace("/(\r\n|\n|\r){3,}/m", "\n\n", $out);
+	$out = preg_replace("/(\r\n|\n|\r){3,}/m", $eol.$eol, $out);
 	
 	//retablir les saut de ligne
-	$out = preg_replace("/(_SAUT_){3,}/m", "_SAUT__SAUT__SAUT_", $out);
-	$out = preg_replace("/_SAUT_/", "\n", $out);
+	$out = preg_replace('/(_SAUT_){3,}/m', '_SAUT__SAUT__SAUT_', $out);
+	$out = preg_replace('/_SAUT_/', $eol, $out);
 	//saut de lignes en debut de texte
-	$out = preg_replace("/^(\r\n|\n|\r)+/", "\n\n", $out);
-	//saut de lignes en debut ou fin de texte
-	$out = preg_replace("/(\r\n|\n|\r)+$/", "\n\n", $out);
+	$out = preg_replace("/^(\r\n|\n|\r)+/", $eol.$eol, $out);
+	//saut de lignes en fin de texte
+	$out = preg_replace("/(\r\n|\n|\r)+$/", $eol.$eol, $out);
 	
 	// Faire des lignes de 75 caracteres maximum
 	$out = wordwrap($out);
