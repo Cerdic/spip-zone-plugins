@@ -175,7 +175,7 @@ function cextras_get_extras_match($nom) {
 		$nom = objet_type(table_objet($nom));
 		foreach ($champs as $c) {
 			// attention aux cas compliques site->syndic !
-			if ($nom == objet_type(table_objet($c->table)) and $c->champ and $c->sql) {
+			if ($nom == $c->_type and $c->champ and $c->sql) {
 				$extras[] = $c;
 			}
 		}
@@ -215,7 +215,7 @@ function cextras_editer_contenu_objet($flux){
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la saisie est autorisee
-			$type = objet_type($c->table).'_'.$c->champ;
+			$type = $c->_type . '_' . $c->champ;
 			include_spip('inc/autoriser');
 			if (autoriser('modifierextra', $type, $flux['args']['id'], '', array(
 				'type' => $flux['args']['type'],
@@ -290,7 +290,7 @@ function cextras_afficher_contenu_objet($flux){
 		foreach($extras as $c) {
 
 			// on affiche seulement les champs dont la vue est autorisee
-			$type = objet_type($c->table).'_'.$c->champ;
+			$type = $c->_type . '_' . $c->champ;
 			include_spip('inc/autoriser');
 			if (autoriser('voirextra', $type, $flux['args']['id_objet'], '', array(
 				'type' => $flux['args']['type'],
@@ -365,7 +365,7 @@ function cextras_formulaire_verifier($flux){
 				// obligatoire, mais qu'il n'est pas visible dans le formulaire
 				// (si affiche uniquement pour la rubrique XX par exemple).
 				// On teste seulement les champs dont la modification est autorisee
-				$type = objet_type($c->table).'_'.$c->champ;
+				$type = $c->_type . '_' . $c->champ;
 				$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
 
 				// l'autorisation n'a pas de contexte a transmettre
@@ -373,7 +373,7 @@ function cextras_formulaire_verifier($flux){
 				// du coup, on risque de se retrouver parfois avec des
 				// resultats differents... Il faudra surveiller.
 				if (autoriser('modifierextra', $type, $id_objet, '', array(
-					'type' => $c->table,
+					'type' => $c->_type,
 					'id_objet' => $id_objet)))
 				{	
 					if ($c->obligatoire AND !_request($prefixe . $c->champ)) {
@@ -410,7 +410,7 @@ function cextras_rechercher_liste_des_champs($tables){
 					$priorite = intval($c->rechercher);
 				}
 				if ($priorite) {
-					$t[objet_type($c->table)][$c->champ] = $priorite;
+					$t[$c->_type][$c->champ] = $priorite;
 				}
 			}
 		}

@@ -29,7 +29,7 @@ function cextras_objets_valides(){
 	foreach ($objets_extensibles as $objet => $traduction) {
 		$objets[$objet] = array(
 			'table' => table_objet_sql($objet), 
-			'type' => objet_type($objet), 
+			'type' => objet_type(table_objet($objet)), 
 			'nom' => $traduction,
 		);
 	}
@@ -113,7 +113,7 @@ function creer_champs_extras($champs) {
 	// on recupere juste les differentes tables a mettre a jour
 	$tables = array();
 	foreach ($champs as $c){ 
-		if ($table = table_objet_sql($c->table)) {
+		if ($table = $c->_table_sql) {
 			$tables[$table] = $table;
 		} else {
 			// ici on est bien ennuye, vu qu'on ne pourra pas creer ce champ.
@@ -152,7 +152,7 @@ function creer_champs_extras($champs) {
 	$trouver_table(''); // recreer la description des tables.
 	$retour = true;
 	foreach ($champs as $c){
-		if ($objet = table_objet($c->table)) {
+		if ($objet = $c->_objet) {
 			$desc = $trouver_table($objet);
 			if (!isset($desc['field'][$c->champ])) {
 				extras_log("Le champ extra '" . $c->champ . "' sur $objet n'a pas ete cree :(", true);
@@ -185,7 +185,7 @@ function vider_champs_extras($champs) {
 		
 	// on efface chaque champ trouve
 	foreach ($champs as $c){ 
-		if ($table = table_objet_sql($c->table) and $c->champ and $c->sql) {
+		if ($table = $c->_table_sql and $c->champ and $c->sql) {
 			sql_alter("TABLE $table DROP $c->champ");
 		}
 	}	

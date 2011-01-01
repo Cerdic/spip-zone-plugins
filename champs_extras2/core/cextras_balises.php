@@ -73,7 +73,7 @@ function calculer_balise_LISTER_VALEURS($objet, $_id_objet, $colonne, $id_objet,
 	foreach ($champs as $c) {
 		
 		if ($c->enum // sinon pas la peine de continuer
-		and $objet == objet_type(table_objet($c->table)) // attention aux cas compliques site->syndic !
+		and $objet == $c->_type // attention aux cas compliques site->syndic !
 		and ($colonne == $c->champ)
 		and $c->sql) {
 			// HOP on a trouve le champs extra

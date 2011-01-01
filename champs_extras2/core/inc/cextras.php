@@ -17,6 +17,11 @@ class ChampExtra{
 
 	var $_id = ''; // identifiant de ce champ extra
 
+	// calcules a la volee
+	var $_type = ''; // rubrique
+	var $_objet = ''; // rubriques
+	var $_table_sql = ''; // spip_rubriques
+
 	// experimental (avec saisies)
 	var $saisie_externe = false;
 	var $saisie_parametres = array();
@@ -41,6 +46,12 @@ class ChampExtra{
 				$this->$cle = $valeur;
 			}
 		}
+		
+		// calculer _objet et _table_sql
+		$this->_type      = objet_type(table_objet($this->table)); // article
+		$this->_objet     = table_objet($this->_type); // articles
+		$this->_table_sql = table_objet_sql($this->table); // spip_articles
+		
 		// calculer l'id du champ extra
 		$this->make_id();
 	}
@@ -75,7 +86,7 @@ class ChampExtra{
 function declarer_champs_extras($champs, $tables){
 	// ajoutons les champs un par un
 	foreach ($champs as $c){
-		$table = table_objet_sql($c->table);
+		$table = $c->_table_sql;
 		if (isset($tables[$table]) and $c->champ and $c->sql) {
 			$tables[$table]['field'][$c->champ] = $c->sql;
 		}
@@ -88,7 +99,7 @@ function declarer_champs_extras_interfaces($champs, $interface){
 	// ajoutons les filtres sur les champs
 	foreach ($champs as $c){
 		if ($c->traitements and $c->champ and $c->sql) {
-			$tobjet = table_objet($c->table);
+			$tobjet = $c->_objet;
 			$balise = strtoupper($c->champ);
 			// definir
 			if (!isset($interface['table_des_traitements'][$balise])) {
