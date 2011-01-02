@@ -308,6 +308,7 @@ function jeux_rem($rem, $index=false, $jeu='', $balise='div') {
 // pour inserer un css
 function jeux_stylesheet($b) {
  $f = find_in_path("styles/$b.css");
+ include_spip('inc/filtres');
  return $f?'<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />'."\n":'';
 }
 
