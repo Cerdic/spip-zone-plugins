@@ -1,7 +1,7 @@
 <plugin>
   <nom>Zen-Garden</nom>
   <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <icon>img_pack/themes-128.png</icon>
   <etat>test</etat>
   <description>
@@ -36,7 +36,7 @@
 <plugin spip="[2.1.0-beta;]">
   <nom>Zen-Garden</nom>
   <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
   <icon>img_pack/themes-128.png</icon>
   <etat>test</etat>
   <description>

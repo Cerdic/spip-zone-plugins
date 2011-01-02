@@ -51,10 +51,8 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	}
 }
 
-// Déclaration des pipelines permettant d'ajouter traitements lors de la preview et de l'activiation
-$GLOBALS['spip_pipeline']['zengarden_apercevoir_theme'] = '';
+// Déclaration du pipeline permettant d'ajouter traitements lors de la preview et de l'activiation
 $GLOBALS['spip_pipeline']['zengarden_activer_theme'] = '';
-$GLOBALS['spip_pipeline']['zengarden_effacer_theme'] = '';
 
 function zengarden_affichage_final($texte){
 	if ($GLOBALS['html'] and isset($GLOBALS['meta']['zengarden_switcher'])){
