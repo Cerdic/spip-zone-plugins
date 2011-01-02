@@ -54,6 +54,7 @@ function exec_mutualisation_dist() {
 	include_spip('inc/plugin');
 	$liste_plug = liste_plugin_files();
 	$liste_plug_compat = liste_plugin_valides($liste_plug);
+	$liste_plug_compat_base = $liste_plug_compat[2];
 	$liste_plug_compat = $liste_plug_compat[0];
 	
 	foreach ($sites as $v) {
@@ -82,7 +83,7 @@ function exec_mutualisation_dist() {
 			// Pour cela, on cree un bouton avec un secret, que mutualiser.php
 			// va intercepter (pas terrible ?)
 			$erreur = test_upgrade_site($meta);
-			$adminplugin = adminplugin_site($meta, $liste_plug_compat);
+			$adminplugin = adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base);
 			$version_installee = ' <em><small>'.$meta['version_installee'].'</small></em>';
 		}
 		else {
@@ -181,16 +182,19 @@ EOF;
 	}
 }
 
-function adminplugin_site($meta, $liste_plug_compat) {
+function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base) {
 	if ($cfg = @unserialize($meta['plugin'])) {
 		$plugins = array_keys($cfg);
 		ksort($plugins);
 		foreach ($plugins as $plugin) {
+			$vplugin_base = $meta[strtolower($plugin).'_base_version'];
+			$nouvelle_version_plugin_base = $liste_plug_compat_base[$liste_plug_compat[$plugin]['dir_type']][$liste_plug_compat[$plugin]['dir']]['version_base'];
 			if ($cfg[$plugin]['version'] != $liste_plug_compat[$plugin]['version']
-			AND !is_null($liste_plug_compat[$plugin]['version'])) {
+			AND !is_null($liste_plug_compat[$plugin]['version'])
+			AND ($vplugin_base != $nouvelle_version_plugin_base) ) {
 				$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
 				$secret = md5($secret);
-				$vplugin = $cfg[$plugin]['version'] . '&rarr;' . $liste_plug_compat[$plugin]['version'];
+				$vplugin = $vplugin_base . '&rarr;' . $nouvelle_version_plugin_base;
 				return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
 <div>
