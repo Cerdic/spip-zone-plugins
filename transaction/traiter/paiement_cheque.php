@@ -11,19 +11,14 @@ function traiter_paiement_cheque_dist($args, $retours){
 	$traitements = unserialize($formulaire['traitements']);
 	$champs = saisies_lister_champs($saisies);
 	
+	
+
 	if ($options['champ_adresse_cheque']){
-		$retours['message_ok'] .= "\n<br/>". $options['champ_adresse_cheque'] . $options['champ_banque'];
+		$retours['message_ok'] .= "<span class='transaction_ok cheque'>" . $options['champ_adresse_cheque'] . "</span>";
 	} else {
-		$retours['message_ok'] .= "\n<br/>". _T('transaction:traiter_cheque_message_defaut');
+		$retours['message_ok'] .= "<span class='transaction_ok cheque defaut'>" . _T('transaction:traiter_cheque_message_defaut') . "</span>";
 	}
-	
-	 //On ajoute les liens vers paiements CMCIC
-    foreach($traitements as $type_traitement=>$options){
-		if ($type_traitement == "paiement_cmcic"){
-		 	$retours['message_ok'] .= "\n<br/><a href='".find_in_path("paiement/cmcic/paiement.php")."'>"._T('transaction:traiter_cheque_message_cmcic')."</a>";
-		}
-	}
-	
+
 	
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;

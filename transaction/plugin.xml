@@ -14,6 +14,12 @@
 	<options>transaction_options.php</options>
 	<fonctions>inc/transaction.php</fonctions>
 	
+      <pipeline>
+          <nom>insert_head</nom>
+          <inclure>transaction_pipelines.php</inclure>
+      </pipeline>
+
+	
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />

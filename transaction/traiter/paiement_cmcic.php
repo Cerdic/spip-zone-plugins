@@ -35,21 +35,26 @@ function traiter_paiement_cmcic_dist($args, $retours){
 	        break;
 		}
 	}
-
     
     if ($_REQUEST['montant_1']) $_SESSION['total'] = $_REQUEST['montant_1'];
     if ($_REQUEST['montant_selection_1']) $_SESSION['total'] = $_REQUEST['montant_selection_1'];
     
     // ID unique de la transaction
     $_SESSION['ref'] = uniqid();
-    
-    //On envoi vers la banque uniquement si aucun autre mode de paiement
+
+	$nb_paiement = 0;
+    //On compte le nombre de paiement utilisé par le formulaire
     foreach($traitements as $type_traitement=>$options){
-		if ($type_traitement == "paiement_cheque"){
-		 	break;
-		} else {
-			$retours['redirect'] = find_in_path("paiement/cmcic/paiement.php");
-		}
+		if (substr($type_traitement,0,9) == "paiement_") $nb_paiement++;
+	}
+	
+	//On envoi vers la banque si CMCIC est le seul mode de paiement sinon on affiche les choix possibles
+	if ($nb_paiement == 1) {
+		$retours['redirect'] = find_in_path("paiement/cmcic/paiement.php");
+	} else {
+		// Le formulaire a été validé, on le masque
+		$retours['editable'] = false;
+		$retours['message_ok'] .=  "<span class='transaction_ok cmcic'><a href='".find_in_path("paiement/cmcic/paiement.php")."'>"._T('transaction:traiter_cheque_message_cmcic')."</a></span>";
 	}
 	
 	return $retours;

@@ -1,0 +1,22 @@
+.transaction_ok { 
+	display:block;
+    padding:2em 2em 2em 10em;
+
+}
+
+.cheque{
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    background: url('../images/cheque.png') no-repeat top left;
+    
+}
+
+.cmcic{
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    background: url('../images/visa.png') no-repeat top left;
+}
+
+.transaction_info { font-size: 0.6em;}

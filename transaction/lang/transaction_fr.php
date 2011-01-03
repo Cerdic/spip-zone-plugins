@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_paiement_cheque_description' => 'Proposer le paiement par ch&egrave;que',
 	'traiter_cheque_label' => 'Message de retour',
 	'traiter_cheque_explication' => 'Indiquez ici le message de retour ainsi que l\'adresse &agrave; laquelle le ch&egrave;que devra &ecirc;tre envoy&eacute;',
-	'traiter_cheque_message_defaut' => 'Merci de votre don. Veuillez envoyer le ch&egrave;que &agrave; l\'adresse : adresse de votre organisme.',
-	'traiter_cheque_message_cmcic' => 'Effectuer le paiement par carte bancaire.'
+	'traiter_cheque_message_defaut' => '<h1>Merci de votre don.</h1>Veuillez envoyer votre r&egrave;glement par ch&egrave;que &agrave; l\'ordre de Mon Organisme et &agrave; l\'adresse : adresse de votre organisme.',
+	'traiter_cheque_message_cmcic' => 'Veuillez cliquer sur ce lien pour finaliser votre paiement par carte bancaire sur le serveur s&eacute;curis&eacute; de notre banque.'
 	
 );
 
