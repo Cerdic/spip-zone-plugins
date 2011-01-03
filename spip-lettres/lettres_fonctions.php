@@ -12,23 +12,17 @@
 	 *  
 	 **/
 
-
 	include_spip('inc/lettres_filtres');
 	include_spip('classes/lettre');
 	include_spip('inc/lettres_pipelines');
 	include_spip('public/lettres_balises');
 	include_spip('public/lettres_boucles');
 	include_spip('facteur_fonctions');
-	
-	// API d'envoi des lettres à des mails issus de requêtes SQL 
-	// (sous-sélection d'abonnés ou tables externes)
-	include_spip('inc/delivrer_hors_abo');
-	
+		
 	function lettres_verifier_validite_email($email) {
 		include_spip('inc/filtres');
 		return email_valide($email);
 	}
-
 
 	function lettres_tester_parmi_desabonnes($email) {
 		$test = sql_countsel('spip_desabonnes', 'email='.sql_quote($email));

@@ -19,6 +19,7 @@
 ]
 
 <ul>
+[(#NOOP|lettres_un_seul_theme|oui)<li><input type="hidden" name="rubriques&#91;&#93;" value="[(#NOOP|lettres_rubrique_theme_par_defaut)]"/></li>]
 [(#NOOP|lettres_un_seul_theme|non)
 	<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{rubriques}|oui)erreur]">
 	<label><:lettres:themes:></label>
