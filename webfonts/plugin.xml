@@ -21,7 +21,7 @@
 	</pipeline>
 
 	<bouton id='webfonts' parent='configuration'>
-		<icone>prive/themes/spip/images/webfonts-24</icone>
+		<icone>images/webfonts-24.png</icone>
 		<titre>webfonts:titre_menu_webfonts</titre>
 		<url>webfonts</url>
 	</bouton>
