@@ -17,7 +17,6 @@
 	include_spip('inc/presentation');
 	include_spip('lettres_fonctions');
 
-
 	function exec_naviguer_purge() {
 		$id_rubrique	= $_REQUEST['id_rubrique'];
 		$purger			= $_REQUEST['purger'];
@@ -50,9 +49,9 @@
 
 		echo debut_gauche('', true);
 
-		echo debut_boite_info(true);
+		echo debut_boite_alerte(true);
 		echo _T('lettresprive:aide_naviguer_purge');
-		echo fin_boite_info(true);
+		echo fin_boite_alerte(true);
 
 		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'rien.gif', false);
 		if ($id_rubrique)

@@ -144,7 +144,9 @@
 		'erreur_upload' => "Erreur durant l'upload",
 		'rubrique_destination' => "RUBRIQUE DESTINATION",
 		'valider' => "Valider",
-		'aide_naviguer_purge' => "Seuls les abonnés \"directs\" seront supprimés.",
+		'aide_naviguer_purge' => "Attention : Purger une rubrique en supprime TOUS les abonnés.
+		
+		Seuls les abonnés \"directs\" seront supprimés.",
 		'nb_abonnements_supprimes' => "Nombre d'abonnements supprimés",
 		'config_formulaire' => "Configuration du formulaire d'abonnement",
 		'config_squelettes' => "Configuration avancée du plugin",
