@@ -75,9 +75,7 @@ function inc_article_afficher_contenu_dist($id_article){
 	
 	if (lire_config('langues_multilingue')) $langues_dispos=explode(',',lire_config('langues_multilingue'));
 	else $langues_dispos=explode(',',lire_config('langues_utilisees'));
-	
 
-	
 	$traductions	= array();
 	
 	if($langues_dispos){		
@@ -108,7 +106,7 @@ function inc_article_afficher_contenu_dist($id_article){
 		}
 	
 	$retour = generer_url_ecrire("articles","id_article=$id_article",false);
-	$span_content='<span>'._T('spip:trad_reference').'</span>';	
+	$span_content='<div class="ref">*<span>'._T('spip:trad_reference').'</span></div>';	
 	
 	foreach($langues_dispos as $key => $value){
 	$class='';
@@ -116,10 +114,9 @@ function inc_article_afficher_contenu_dist($id_article){
 		if($traductions[$value]!=$id_article){
 			if(array_key_exists($value,$traductions)){
 				if($traductions[$value]==$id_trad){
-					$class=' ref';
 					$span=$span_content;					
 					}
-				$onglets_traduction.='<div class="traduit onglet ajax'. $class.'"><a href="?exec=articles&id_article='.$traductions[$value].'">'.traduire_nom_langue($value).$span.'</a></div>';					
+				$onglets_traduction.='<div class="traduit onglet ajax">'.$span.'<a href="?exec=articles&id_article='.$traductions[$value].'">'.traduire_nom_langue($value).'</a></div>';					
 			}
 			else{
 				include_spip('ecrire/inc/plugin');
@@ -141,10 +138,9 @@ function inc_article_afficher_contenu_dist($id_article){
 			}
 		else{
 			if($traductions[$value]==$id_trad){
-					$class=' ref';
 					$span=$span_content;					
 					}
-			$onglets_traduction.='<div class="onglet_off onglet'.$class.'">'.traduire_nom_langue($value).$span.'</div>';
+			$onglets_traduction.='<div class="onglet_off onglet">'.$span.traduire_nom_langue($value).'</div>';
 			}
 		}
 	}
