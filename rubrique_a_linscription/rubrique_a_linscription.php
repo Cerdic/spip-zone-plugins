@@ -59,6 +59,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		//Envoyer mails
 		
 		if ($meta['mail_public'] or $meta['mail_prive']){
+			
 			$envoyer_mail 	= charger_fonction('envoyer_mail','inc');
 			
 			$corps		  	= _T('rubrique_a_linscription:mail_adresse_rubrique');
@@ -72,7 +73,8 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 				$corps 		.= 	"-".generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."\n";
 			}
 			include_spip('inc/filtres');
-			$envoyer_mail($mail,'['.extraire_multi(lire_meta('nom_site')).']'. _T('rubrique_a_linscription:titre_mail_adresse_rubrique'),$corps,lire_meta('email_webmaster'));
+			
+			$envoyer_mail($mail,'['.extraire_multi(lire_meta('nom_site')).']'. _T('rubrique_a_linscription:titre_mail_adresse_rubrique'),$corps);
 		}
 		
 	}
