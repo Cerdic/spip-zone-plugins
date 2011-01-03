@@ -9,6 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajouter_traduction' => "Ajouter une traduction",
 
 // R
-'rubrique_reference' => "Rubrique de r&eacute;f&eacute;rence",
+'rubrique_reference' => "(rubrique de r&eacute;f&eacute;rence)",
 );
 ?>

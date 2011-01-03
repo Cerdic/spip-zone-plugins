@@ -18,11 +18,11 @@
 		[(#GET{langues_traduites}|table_valeur{#VALEUR}|=={#GET{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
 			[(#VALEUR|array_key_exists{#GET{langues_traduites}}|?{
 				[(#VALEUR|=={#GET{lang}}|?{
-					<div class="onglet_off onglet[ (#GET{ref_#VALEUR}|oui)ref]">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</div>,
-					<div class="traduit onglet[ (#GET{ref_#VALEUR}|oui)ref]"><a href="[(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique,#GET{langues_traduites}|table_valeur{#VALEUR}})]">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</a></div>
+					<div class="onglet_off onglet">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:tra:rubrique_reference:></span></div>][(#VALEUR|traduire_nom_langue)]</div>,
+					<div class="traduit onglet">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:tra:rubrique_reference:></span></div>]<a href="[(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique,#GET{langues_traduites}|table_valeur{#VALEUR}})]">[(#VALEUR|traduire_nom_langue)]</a></div>
 					})],#SET{non_traduits,oui}
 					[(#VALEUR|=={#GET{lang}}|?{
-						<div class="onglet_off onglet[ (#GET{ref_#VALEUR}|oui)ref]">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</div>,
+						<div class="onglet_off onglet">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</div>,
 						#SET{parent_trad,#VALEUR|destination_traduction{#GET{id_trad}}}
 						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<div class="non_traduit onglet"><a href="[(#URL_ECRIRE{rubriques_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></div>]
 						})]	

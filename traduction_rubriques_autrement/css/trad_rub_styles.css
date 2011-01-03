@@ -79,13 +79,11 @@ div.non_traduit{
     background-color: transparent;
 	;}
 	
-div.ref{background-image: url("images/ref.png");
-	background-repeat: no-repeat;
-	background-position: top right;
+div.ref{float:right; margin:-3px -2px 0 0;cursor:help
+
 	}	
 div.ref span {display:none;}
 
-div.ref :hover span {display:block;position:absolute;color:red;
-
- margin-top:-45px;	
+.rubriques div.ref :hover span {display:block;position:absolute;color: #000000;
+	margin-top:-43px;	
 	} 
