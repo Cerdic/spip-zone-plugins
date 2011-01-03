@@ -32,7 +32,8 @@ all chars not greedy
  *
  */
 var multilang_match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n|\s)*?)(?=\[[a-z_]+\]|$)/ig;
-var multilang_root, //root of the search (jQuery object)
+var multilang_jq_root, //root of the search (jQuery object)
+    multilang_root_opt,
     multilang_fields_selector,
     multilang_fields_selector_opt,
     multilang_menu_selector,
@@ -60,13 +61,14 @@ function multilang_init_lang(options) {
 	//set the root element of all processing
 
 	var root = options.root || document;
-	multilang_root = $(root).add($(options.root_opt).parent());
+	multilang_jq_root = $(root).add($(options.root_opt).parent());
+	multilang_root_opt = options.root_opt;
 
 	/**
 	 * set the main menu element
 	 * Plus utilisé pour l'instant
 	 */
-	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $([]);
+	multilang_containers = options.main_menu ? $(options.main_menu,multilang_jq_root) : $([]);
 
 	multilang_forms_toadd = $([]);
 
@@ -89,9 +91,9 @@ function multilang_init_lang(options) {
 	multilang_forms_selector = options.forms || "form";
 
 	if(multilang_init){
-		multilang_forms_toadd = $(multilang_forms_selector,multilang_root).not($(multilang_forms));
+		multilang_forms_toadd = $(multilang_forms_selector,multilang_jq_root).not($(multilang_forms));
 	}
-	multilang_forms = $(multilang_forms_selector,multilang_root);
+	multilang_forms = $(multilang_forms_selector,multilang_jq_root);
 	if(!multilang_init){
 		multilang_forms_toadd = multilang_forms;
 	}
@@ -121,7 +123,7 @@ function multilang_init_multi(options) {
 	if(target) {
 		//Verify the target is really a form to be internationalized (in case of an ajax request fired by onAjaxLoad)
 		if(target==document) return;
-		init_forms = $(target).find('form').in_set($(multilang_forms_selector,multilang_root));
+		init_forms = $(target).find('form').in_set($(multilang_forms_selector,multilang_jq_root));
 		if(!init_forms.length) return;
 		multilang_forms.add(init_forms.each(multilang_attach_submit).get());
 	} else {
@@ -156,7 +158,7 @@ function multilang_init_multi(options) {
 	 */
 	$(multilang_fields_selector,init_forms).each(function(){
 	    var me = $(this);
-	    if(me.closest(root_opt).length){
+	    if(me.closest(multilang_root_opt).length){
 	        if(me.is(multilang_fields_selector_opt)){
 	        	multilang_init_field(this,this.form.form_lang);
 	        }
@@ -389,7 +391,7 @@ function multilang_change_lang(el,container,target) {
 		// Maj du menu de langues avant multilang_init_field
 		multilang_forms_fields[target_id].each(function(){
 			var me = $(this);
-			if(me.parents(root_opt).size()>0){
+			if(me.parents(multilang_root_opt).size()>0){
 		        if(me.is(multilang_fields_selector_opt)){
 		        	multilang_init_field(this,lang,true);
 		        }

@@ -87,9 +87,6 @@ function multilang_inserer_head($config=array()){
 		if($config['site']) { // Sites
 			$root .= ',div.formulaire_editer_site';
 		}
-		if($config['formidable']) { // formidable
-			$root .= ',div.formulaire_editer_formulaire_champs,div.formulaire_editer_formulaire';
-		}
 		if($config['evenement']) { // Evenements
 			$root .= ',div.formulaire_editer_evenement';
 		}
@@ -127,15 +124,15 @@ function multilang_inserer_head($config=array()){
 
 	jQuery(document).ready(function(){
 		function multilang_init(){
-			root = "'.$root.'";
-			fields_selector = "textarea,input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
+			var root = "'.$root.'";
+			var fields_selector = "textarea,input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
 			// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
-			forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
+			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 			// Les div qui ont un formulaire de classe multilang (pour accélérer la recherche dans le DOM,
 			// on passe le form et le parent sera trouvé dans lors de l\'init)
-			root_opt = "form:has(.multilang)";
-			fields_selector_opt = ".multilang";
-			multilang_init_lang({fields:fields_selector,root:root,root_opt:root_opt,forms:forms_selector});
+			var root_opt = "form:has(.multilang)";
+			var fields_selector_opt = ".multilang";
+			multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:root,root_opt:root_opt,forms:forms_selector});
 		}
 		multilang_init();
 		if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
