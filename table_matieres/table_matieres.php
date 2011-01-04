@@ -76,12 +76,14 @@ function TableMatieres_AjouterAncres($texte) {
 	static $textes = array();
 	$md5 = md5($texte);
 	if(!isset($textes[$md5])) {
-		$texte_ancre = echappe_html($texte, 'TDM');
+		// 3e à true pour ne pas utiliser les fonctions d'echappement predefinis
+		// et garder les textes tels quels (ex: <code><balise></code>)
+		// sinon la transformation est effectuee 2 fois.
+		$texte_ancre = echappe_html($texte, 'TDM', true); 
 		$texte_ancre = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte_ancre);
 		$nb_ancres = TableMatieres_Callback('', true);
 		if ($nb_ancres >= _MIN_ANCRE) {
-			$texte_ancre = echappe_retour($texte_ancre, 'TDM');
-			$textes[$md5] = $texte_ancre;
+			$textes[$md5] = echappe_retour($texte_ancre, 'TDM');
 		} else {
 			$textes[$md5] = $texte;
 		}
