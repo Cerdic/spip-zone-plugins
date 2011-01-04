@@ -18,7 +18,7 @@ function traiter_paiement_cmcic_dist($args, $retours){
     session_start();
     
     // Le serveur doit-il être appelé en mode test ou prod ?
-    if ($options['champ_test'] == "test"){ $test = "test/"; }
+    if ($options['champ_test'] == "test"){ $test = "test/"; $retours['message_ok'] .=  "<span class='transaction_erreur cmcic'>"._T('transaction:traiter_message_cmcic_erreur')."</span>";}
     if ($options['champ_test'] == "prod"){ $test = ""; }
         
     // On récupère la banque à utiliser et on établi une variable de session contenant l'adresse du serveur
@@ -26,12 +26,15 @@ function traiter_paiement_cmcic_dist($args, $retours){
 		switch ($options['champ_banque']) {
 	    case "banque1":
 	        $_SESSION['banque'] = "https://ssl.paiement.cic-banques.fr/" . $test;
+	        $_SESSION['banque_nom'] = "CIC";
 	        break;
 	    case "banque2":
 	        $_SESSION['banque'] = "https://paiement.creditmutuel.fr/" . $test;
+	        $_SESSION['banque_nom'] = "Cr&eacute;dit Mutuel";
 	        break;
 	    case "banque3":
 	        $_SESSION['banque'] = "https://ssl.paiement.banque-obc.fr/" . $test;
+	        $_SESSION['banque_nom'] = "OBC";
 	        break;
 		}
 	}
@@ -54,7 +57,7 @@ function traiter_paiement_cmcic_dist($args, $retours){
 	} else {
 		// Le formulaire a été validé, on le masque
 		$retours['editable'] = false;
-		$retours['message_ok'] .=  "<span class='transaction_ok cmcic'><a href='".find_in_path("paiement/cmcic/paiement.php")."'>"._T('transaction:traiter_cheque_message_cmcic')."</a></span>";
+		$retours['message_ok'] .=  "<span class='transaction_ok cmcic'>"._T('transaction:traiter_message_cmcic')."</span>";
 	}
 	
 	return $retours;
