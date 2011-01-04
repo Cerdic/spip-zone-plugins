@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]Traduction de rubriques autrement[en]Section translation differently[es]Traducción de secciones  repensada[de]Rubriken Übersetzung mal Anders</multi></nom>
+	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducción de secciones repensada[de]Rubrikenübersetzung mal Anders</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
 	<version>0.1.3</version>
 	<version_base>0.1</version_base>
