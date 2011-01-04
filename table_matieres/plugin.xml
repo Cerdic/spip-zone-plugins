@@ -1,8 +1,7 @@
 <plugin>
 	<nom>Table des Mati&#232;res</nom>
-	<version>1.0</version>
+	<version>1.1</version>
 	<prefix>TableMatieres</prefix>
-	<options>tdm_options.php</options>
 	<fonctions>table_matieres.php</fonctions>
 	<auteur>James (c)2007 - Licence GNU/GPL</auteur>
 	<description>Introduit une ancre translitter&#233;e pour chaque intertitre du champ #TEXTE des ARTICLES,
@@ -10,5 +9,9 @@
 	<etat>stable</etat>
 	<lien>[Documentation sur spip-contrib.net->http://www.spip-contrib.net/Table-des-Matieres]</lien>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0;]" />
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>tdm_pipelines.php</inclure>
+	</pipeline>
 </plugin>

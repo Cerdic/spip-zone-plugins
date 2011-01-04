@@ -2,6 +2,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+// tester la presence de CFG
+$tm = @unserialize($GLOBALS['meta']['table_matieres']);
+
+define('_LG_ANCRE', isset($tm['lg']) ? $tm['lg'] : 35);
+define('_SEP_ANCRE', isset($tm['sep']) ? $tm['sep'] : '-');
+define('_MIN_ANCRE', isset($tm['min']) ? $tm['min'] : 3);
+define('_RETOUR_TDM', '<a href="#tdm" class="tdm"><img src="' .
+	find_in_path('images/tdm.png') . 
+	'" /></a>');
+
+
 function TableMatieres_Table($url = '', $titre = '', $cId = 0, $vider_table = false) {
 	static $table = array();
 	if($vider_table) return ($table = array());
@@ -9,6 +21,14 @@ function TableMatieres_Table($url = '', $titre = '', $cId = 0, $vider_table = fa
 	$url = array_key_exists($url, $table) ? $url.$cId : $url;
 	$table[$url] = $titre;
 	return $url;
+}
+
+function TableMatieres_SiNombreSuffisantIntertitres() {
+	$table = TableMatieres_Table();
+	if (count($table) < _MIN_ANCRE)
+		return array();
+	return $table;
+	
 }
 
 function TableMatieres_ViderTable() {
@@ -59,8 +79,12 @@ function TableMatieres_AjouterAncres($texte) {
 		$texte_ancre = echappe_html($texte, 'TDM');
 		$texte_ancre = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte_ancre);
 		$nb_ancres = TableMatieres_Callback('', true);
-		$texte_ancre = echappe_retour($texte_ancre, 'TDM');
-		$textes[$md5] = $texte_ancre;
+		if ($nb_ancres >= _MIN_ANCRE) {
+			$texte_ancre = echappe_retour($texte_ancre, 'TDM');
+			$textes[$md5] = $texte_ancre;
+		} else {
+			$textes[$md5] = $texte;
+		}
 	}
 	return $textes[$md5];
 }
@@ -69,6 +93,13 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 	$_RETOUR_TDM = preg_replace(',<img,i',
 	'<img alt="'._T('tdm:retour_table_matiere').'" title="'._T('tdm:retour_table_matiere').'"',
 	_RETOUR_TDM);
+
+	// s'il y a moins d'ancres que ce que la config demande, on n'affiche rien
+	if ($affiche_table AND !TableMatieres_SiNombreSuffisantIntertitres()) {
+		return $texte;
+	}
+
+	// code HTML de la table des matieres
 	$_table = recuperer_fond('modeles/table_matieres');
 
 	# version en javascript (pas tres propre, a refaire avec un js externe)
@@ -78,7 +109,7 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 		$_table = inserer_attribut('<div class="encart"></div>',
 			'rel', $_table)
 			.'<script type="text/javascript"><!--
-			$("div.encart").html($("div.encart").attr("rel"));
+			$("div.encart").html($("div.encart").attr("rel")).attr("rel","");
 			--></script>';
 		$_RETOUR_TDM = '<script type="text/javascript"><!--
 		document.write("'.str_replace('"', '\\"', $_RETOUR_TDM).'");
@@ -92,6 +123,11 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 		str_replace('@@RETOUR_TDM@@', $_RETOUR_TDM, $texte));
 }
 
+/**
+ * Balise #TABLE_MATIERES
+ * Affiche la table des matieres à l'endroit indique
+ * A utiliser dans une boucle Articles
+**/
 function balise_TABLE_MATIERES_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
@@ -112,11 +148,12 @@ function balise_TABLE_MATIERES_dist($p) {
 	return $p;
 }
 
+
 function balise_TDM_dist($p) {
 	if(function_exists('balise_ENV'))
-		return balise_ENV($p, 'TableMatieres_Table()');
+		return balise_ENV($p, 'TableMatieres_SiNombreSuffisantIntertitres()');
 	else
-		return balise_ENV_dist($p, 'TableMatieres_Table()');
+		return balise_ENV_dist($p, 'TableMatieres_SiNombreSuffisantIntertitres()');
 	return $p;
 }
 
