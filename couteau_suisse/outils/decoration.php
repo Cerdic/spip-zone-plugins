@@ -25,7 +25,7 @@ cs_log("decoration_installe()");
 				$remplace[] = $a = "<multi>[$valeur]"; 
 				$remplace[] = $b = "</multi>";
 			} else {
-				$attr="style=\"$style\"";
+				$attr="$attr=\"$valeur\"";
 				$BT[] = array($racc, $auto, $div);
 				if ($auto) {
 					$auto_balises[] = $racc; 
