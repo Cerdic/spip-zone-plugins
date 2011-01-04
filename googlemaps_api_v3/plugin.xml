@@ -2,12 +2,12 @@
 	<nom> <multi> [fr]Google Maps API v3 </multi> </nom>
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
-	<version>0.2</version>
+	<version>0.3</version>
 	<version_base>0.2</version_base>
 	<icon>theme/img/gmaps_v3-32.png</icon>
 	<etat>dev</etat>
 	<description><multi>Interface Google Maps API v3</multi></description>
-	<!-- <lien>http://www.spip-contrib.net/XXXXXX/</lien> -->
+	<!-- <lien>http://www.spip-contrib.net/?article3632</lien> -->
 	<prefix>gmaps_v3</prefix>
 	
 	<pipeline>

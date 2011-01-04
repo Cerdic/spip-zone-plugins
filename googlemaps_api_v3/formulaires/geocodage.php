@@ -20,29 +20,22 @@ function formulaires_geocodage_charger_dist($id_article){
 function formulaires_geocodage_verifier_dist(){
 	// Effectuer le placement sur la carte
 	if(_request('address')){
-		$address = _request('address')."\n\n";	
-		include_spip('inc/distant');
-		include_spip('inc/xml');
-		$url = 'http://maps.google.com/maps/api/geocode/xml';
-		$url = parametre_url($url, 'sensor', 'false', '&');
-		$url = parametre_url($url, 'address', $address, '&');
+		
+		$address = _request('address');	
+		include_spip('inc/google');		
+		$geocodeResponse = geocodageGoogleJson($address);
 
-		$url = recuperer_page($url);
-		$url = spip_xml_parse($url);
-
-		// recuperation du resultat si OK
-		$statut = $url['GeocodeResponse']['0']['status']['0'];
+		// Travailler si OK
+		$statut = $geocodeResponse->status;
 		if ( $statut != 'OK') {
-			set_request('address', 'faute');
-			return array("message_erreur" => "Pas de chance, faux retour de l'ami Google !");
+			return array("message_erreur" => "Google n'a pas trouvé !");
 		}
-
-		// envoi au charger
-		$lat = $url['GeocodeResponse'][0]['result'][0]['geometry'][0]['location'][0]['lat'][0];
-		$lng = $url['GeocodeResponse'][0]['result'][0]['geometry'][0]['location'][0]['lng'][0];
+				
+		// Envoyer au HTML et au Charger
+		$lat = $geocodeResponse->results[0]->geometry->location->lat;
+		$lng = $geocodeResponse->results[0]->geometry->location->lng;
 		set_request('latitude', $lat);
 		set_request('longitude', $lng);
-		
 	}	
 	
 	$erreurs = array();
