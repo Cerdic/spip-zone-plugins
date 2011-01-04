@@ -22,11 +22,10 @@ function mathjax_spip_flux(){
     	    jax: ["input/TeX", "output/HTML-CSS"],
     	    tex2jax: {
     	        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-    	        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    	        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
     	    },
     	    "HTML-CSS": { availableFonts: ["TeX"] }
     	});
-	</script>
 EOF;
 	$flux = "\n<script type='text/javascript' src='$js'>
 		$param
