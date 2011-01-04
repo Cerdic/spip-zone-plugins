@@ -35,7 +35,7 @@ function association_onglets(){
 		' ' .
 		$GLOBALS['association_metas']['nom'], '', false);
 
-	if ($res) echo "<div class='bandeau_actions'>", debut_onglet(), $r, fin_onglet(), '</div>';
+	if ($res) echo "<div class='bandeau_actions'>", debut_onglet(), $res, fin_onglet(), '</div>';
 }
 
 function association_onglet1($texte, $objet, $libelle, $image)
