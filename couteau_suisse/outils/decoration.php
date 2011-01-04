@@ -67,6 +67,7 @@ cs_log("decoration_installe()");
 		}
 	// liste des balises disponibles
 	$aide = array_merge($aide, $auto_balises);
+	$n = count($auto_balises);
 	// protection $auto_balises pour la future regExpr
 	array_walk($auto_balises, 'cs_preg_quote');
 	// renvoi des donnees compilees
@@ -76,7 +77,7 @@ cs_log("decoration_installe()");
 		// remplacement des balises fixes
 		$remplace,
 		// RegExpr pour les balises automatiques
-		count($auto_balises)?',<('.join('|', $auto_balises).')>(.*?)</\1>,ms':'',
+		$n?($n==1?",<($auto_balises[0])>(.*?)</$auto_balises[0]>,ms":',<('.join('|', $auto_balises).')>(.*?)</\\1>,ms'):'',
 		// association pour les balises automatiques
 		$auto_remplace,
 		// balises disponibles
