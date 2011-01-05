@@ -30,10 +30,12 @@ function minibando($boutons, $contexte = array()) {
                $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg,$contexte);
                $bulle_accueil = ($detail->url == 'accueil') ? "<ul><li><p>" . _T('public:espace_prive') . "</p></li></ul>" : '';
                $res .= "<li$first>" . "<a href='$url' id='bando1_$page'>" . _T($detail->libelle) . "</a>";
+					$li_ouvert = true ;
                $res .= "<span></span>";
                $res .= $bulle_accueil;
                if($first) {
                	$res .= "</li>";
+						$li_ouvert = false ;
                 	$res .= "<li class='minibando_sep'>&nbsp;</li>";
                 	$res .= minibando_outils_rapides($boutons, $contexte);
                 	$res .= "<li class='minibando_sep'>&nbsp;</li>";
@@ -43,7 +45,10 @@ function minibando($boutons, $contexte = array()) {
             $sous = bando_lister_sous_menu($detail->sousmenu, $contexte);
             $res .= $sous ? "<ul><li><p>"._T($detail->libelle)."</p></li>$sous</ul>":"";
 
-            if(!$first) $res .= "</li>";
+            if($li_ouvert) {
+					$res .= "</li>";
+					$li_ouvert = false ;
+				}
             $first = "";
         }
 	}
