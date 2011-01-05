@@ -8,8 +8,8 @@
 			<BOUCLE_type_noisettes(POUR){tableau #ENV{_noisettes_type}}{par valeur}>
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
 				[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
-				<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
-				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
+				<input type="radio" class="radio" name="noisette" id="noisette_#CLE" value="#CLE" style="vertical-align:top;" />
+				<label for="noisette_#CLE">[(#VALEUR|table_valeur{nom})]</label>
 			</div>
 			</BOUCLE_type_noisettes>
 		
@@ -20,8 +20,8 @@
 			<BOUCLE_composition_noisettes(POUR){tableau #ENV{_noisettes_composition}}{par valeur}>
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
 				[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
-				<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
-				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
+				<input type="radio" class="radio" name="noisette" id="noisette_#CLE" value="#CLE" style="vertical-align:top;" />
+				<label for="noisette_#CLE">[(#VALEUR|table_valeur{nom})]</label>
 			</div>
 			</BOUCLE_composition_noisettes>
 		</BOUCLE_test_composition>
@@ -31,8 +31,8 @@
 		<BOUCLE_page_noisettes(POUR){tableau #ENV{_noisettes_toutes_pages}}{par valeur}>
 		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
 			[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
-			<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
-			<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
+			<input type="radio" class="radio" name="noisette" id="noisette_#CLE" value="#CLE" style="vertical-align:top;" />
+			<label for="noisette_#CLE">[(#VALEUR|table_valeur{nom})]</label>
 		</div>
 		</BOUCLE_page_noisettes>
 	</li>
