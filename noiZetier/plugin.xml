@@ -2,7 +2,7 @@
 	<nom>noiZetier</nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8.1</version>
+	<version>0.8.2</version>
 	<version_base>0.3</version_base>
 	<etat>test</etat>
 	<description>Prototype de gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.<p />
@@ -47,6 +47,10 @@
 		<nom>ieconfig</nom>
 		<inclure>noizetier_ieconfig.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='noizetier' parent="configuration">
 		<url>noizetier</url>
 		<titre>noizetier:editer_noizetier_titre</titre>
@@ -62,6 +66,7 @@
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="YAML" version="[1.4.1;]" />
 	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="jqueryui" version="[1.8.5;]" />
 	<necessite id="verifier"  />
 	<utilise id="compositions" version="[1.0.1;]" />
 </plugin>

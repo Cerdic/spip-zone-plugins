@@ -202,7 +202,29 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 		if (!$ok) $retours['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
 	}
 	
-	// Si on demande à déplacer une noisette -------------------------------------
+	// Si on demande à déplacer une noisette avec dragndrop -------------------------------------
+
+	if ($params = _request('dragndrop_noisette')){
+		$rang_noisettes = _request('rang_noisettes');
+		
+		foreach ($rang_noisettes as $rang=>$id_noisette){
+			$rang = $rang + 1;
+			$ok = sql_updateq('spip_noisettes',array('rang' => intval($rang)),"id_noisette = $id_noisette");
+		}
+		
+		// On invalide le cache
+		include_spip('inc/invalideur');
+		// necessaire tout ça ?
+		$cle_invalidation = _request('bloc').'/'._request('type');
+		if (_request('composition') != '')
+			$cle_invalidation .= '-'._request('composition');
+		// doit suffire '1' 
+		suivre_invalideur($cle_invalidation);
+		
+		if (!$ok) $retours['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
+	}
+
+	// Si on demande à déplacer une noisette sans dragndrop -------------------------------------
 	
 	if ($params = _request('deplacer_noisette')){
 		preg_match('/^([\d]+)-(bas|haut)$/', $params, $params);

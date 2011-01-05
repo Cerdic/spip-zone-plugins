@@ -2,6 +2,7 @@
 <ul id="bloc-#ENV{bloc}" class="noisettes">
 	<BOUCLE_noisettes(NOISETTES){type}{composition}{bloc}{par rang}>
 	<li class="noisette plie"[ style="background-image:url((#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{icon}|chemin|image_reduire{24}|extraire_attribut{src}))"]>
+		<input type="hidden" name="rang_noisettes[]" value="#ID_NOISETTE" />
 		<BOUCLE_test_modifier(CONDITION){si #ENV{id_noisette}|=={#ID_NOISETTE}|non}>
 		<div class="ligne">
 			<div class="description arial2">
@@ -71,3 +72,27 @@
 		<//B_pas_demande_noisette>
 	</li>
 </ul>
+[(#AUTORISER{configurer,noizetier}|et{#ENV{id_noisette}|non}|et{#ENV{bloc_page_nouvelle_noisette}|non})
+<p class='boutons' style="display: none;">
+	<input type="submit" class="submit link" name="annuler_deplacer_noisette" value="<:bouton_annuler:>" />
+	<input type="submit" class="submit" name="dragndrop_noisette" value="<:bouton_enregistrer:>" />
+</p>
+<script type="text/javascript">
+<!--
+(function($){
+	$(function(){
+		$('button[(#VAL{91}|chr)]name=deplacer_noisette[(#VAL{93}|chr)]').hide();
+		$('#bloc-[(#ENV{bloc})]').sortable({
+			items: 'li.noisette',
+			opacity: 0.8,
+			forcePlaceholderSize: true,
+			cursor: 'move',
+			update: function(event, ui) {
+				$(this).children('.editer_noisette').hide();
+				$(this).next('p.boutons').show();
+			}
+		});
+	});
+})(jQuery);
+-->
+</script>]
