@@ -30,7 +30,7 @@ function boucle_LISTES($id_boucle, &$boucles) {
 //
 // <BOUCLE(AUTEURS_LISTES)>
 //
-if(spiplistes_spip_est_inferieur_193()) {
+if(function_exists('spiplistes_spip_est_inferieur_193') AND spiplistes_spip_est_inferieur_193()) {
 	function boucle_AUTEURS_LISTES($id_boucle, &$boucles) {
 		global $table_des_tables;
 		$boucle = &$boucles[$id_boucle];
@@ -126,7 +126,7 @@ function date_depuis($date) {
 /* CP-20090109
  * Deux filtres SPIP2 bien sympathiques pour le formulaire.
  * */
-if (spiplistes_spip_est_inferieur_193()) {
+if (function_exists('spiplistes_spip_est_inferieur_193') AND spiplistes_spip_est_inferieur_193()) {
 	if(!function_exists('oui')) {
 		function oui($c) { return($c ? ' ' : ''); }
 	}
