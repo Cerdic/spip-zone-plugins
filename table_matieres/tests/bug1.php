@@ -23,13 +23,13 @@ if (!defined('_SPIP_TEST_INC')) {
 
 
 	//deux textes differents ne doivent pas renvoye un texte identique
-	if(TableMatieres_AjouterAncres($c) ==
-	TableMatieres_AjouterAncres($d))
+	if(table_matieres($c) ==
+	table_matieres($d))
 		die('bug reproduit');
 
 	//un texte qui passe une deuxieme fois pour afficher la balise #TABLE_MATIERE
-	if(TableMatieres_AjouterAncres($c) !=
-	TableMatieres_AjouterAncres($c))
+	if(table_matieres($c) !=
+	table_matieres($c))
 		die('bug introduit');
 
 	die('OK');

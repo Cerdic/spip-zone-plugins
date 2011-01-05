@@ -1,15 +1,26 @@
-[(#REM) icone=images/tdm.png]
-[(#REM) titre= Table des Mati&egrave;res]
-[(#REM) descriptif= Les param&egrave;tres configurables de la Table des Mati&egrave;res sont les suivants&nbsp;:<ul>
+<!-- icone=images/tdm.png -->
+<!-- titre= Table des Mati&egrave;res -->
+<!-- descriptif= Les param&egrave;tres configurables de la Table des Mati&egrave;res sont les suivants&nbsp;:<ul>
 <li>la <strong>longueur</strong> d&eacute;finit le nombre de caract&egrave;res maximum que consituera chaque ancres,</li>
 <li>le <strong>s&eacute;parateur</strong> d&eacute;finit le caract&egrave;re qui s'intercalera entre chaque mot pour remplacer les espaces,</li>
 <li>et le nombre d'<strong>intertitres minimum</strong> d&eacute;finit le nombre d'intertitres d'un texte &agrave; partir duquel une table des mati&egrave;res sera affich&eacute;e.</li>
-<ul>]#CACHE{0}
+<ul>
+-->#CACHE{0}
 <form method="post">[
 	(#ENV{_cfg_}|form_hidden)
 	]<fieldset>
 		<legend><:tdm:config:>&nbsp;:</legend>
 
+		<p>
+			<label for= "auto"><:tdm:automatique:>&nbsp;:</label>
+			<label for="auto_oui"><:tdm:automatique_oui:></label>
+			<input type="radio" name="auto" id="auto_oui" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|=={oui}|?{checked})"] value='oui' />
+			<label for="auto_non"><:tdm:automatique_non:></label>
+			<input type="radio" name="auto" id="auto_non" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|!={oui}|?{checked})"] value='non' />
+			<p class='explications'>(<:tdm:automatique_desription:>)</p>
+		</p>
+		<hr />
+		
 		<p>
 			<label for= "lg"><:tdm:longueur:>&nbsp;: </label>
 			<input type="text" name="lg" size="4" value="#ENV{lg,#EVAL{_LG_ANCRE}}" />

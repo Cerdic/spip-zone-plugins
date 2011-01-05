@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Table des Mati&#232;res</nom>
-	<version>1.1</version>
+	<version>2.0</version>
 	<prefix>TableMatieres</prefix>
 	<fonctions>table_matieres.php</fonctions>
 	<auteur>James (c)2007 - Licence GNU/GPL</auteur>
