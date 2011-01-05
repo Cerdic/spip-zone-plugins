@@ -60,22 +60,7 @@
 					</li>
 				</ul>
 			</li>
-			
-			<li class="fieldset">
-				<h3 class="legend"><:memoization:legend_cache_pages:></h3>
-				<ul>
-					<li class="editer_pages">
-						<label for="pages"><:memoization:label_cache_pages:></label>
-						<select name="pages" id="pages">
-							<option value=""><:memoization:option_cache_defaut:></option>
-							<option value="filecache"[
-								selected="(#ENV{pages}|=={filecache}|?{selected})"]><:memoization:option_cache_filepage:></option>
-							<option value="file"[
-								selected="(#ENV{pages}|=={file}|?{selected})"]><:memoization:option_cache_file:></option>
-						</select>
-					</li>
-				</ul>
-			</li>
+
 		</ul>
 		<script type="text/javascript"><!--
 			var methode_memcache = function() {

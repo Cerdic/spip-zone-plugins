@@ -1,20 +1,21 @@
 <plugin>
 	<nom>Memoization</nom>
 	<auteur>Fil
-	&#169; 2009-2010 - GNU/LGPL || MIT
+	&#169; 2009-2011 - GNU/LGPL || MIT
 	</auteur>
 	<version>
-	0.9.4
+	0.9.5
 	</version>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 		<multi>
-			[fr]Un outil de m&#233;mo&#239;zation, destin&#233; &#224; acc&#233;l&#233;rer.
+			[fr] Gestion du cache de SPIP par diverses m&#233;thodes.
 
 	(icone : [laszlo-photo->http://www.flickr.com/photos/laszlo-photo/149047693/])
-			[en]Memoization tool designed to accelerate.
+
+			[en] Various methods to process SPIP's cache.
 
 	(icon : [laszlo-photo->http://www.flickr.com/photos/laszlo-photo/149047693/])
 		</multi>

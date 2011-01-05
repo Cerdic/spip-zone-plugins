@@ -50,7 +50,7 @@ function afficher_taille_cache_vignettes() {
 // http://doc.spip.org/@exec_admin_vider_dist
 function exec_admin_vider_dist()
 {
-	global $quota_cache, $spip_lang;
+	global $spip_lang;
 
 	// autorisation a affiner 
 	if (!autoriser('configurer', 'admin_vider')){
@@ -81,59 +81,38 @@ function exec_admin_vider_dist()
 
 		echo "\n<div>&nbsp;</div>";
 
-//
-// Quota et taille du cache
-//
+	//
+	// taille du cache
+	//
 
-		$cfg = @unserialize($GLOBALS['meta']['memoization']);
-		switch ($cfg['pages']) {
-			case 'file':
-				include_spip('inc/invalideur');
-				if (($n = taille_du_cache())>250*1024)
-					$info = _T('taille_cache_octets', array('octets' => taille_en_octets($n)));
-				else
-					$info = _T('taille_cache_vide');
+		$m = &$GLOBALS['Memoization'];
+		$info = _L('Le cache des pages est g&#233;r&#233; par la m&#233;thode @type@', array('type' => $m->methode));
+		if (is_int($n = $m->size())) {
+			if ($n > 0*250*1024)
+				$info2 = _T('taille_cache_octets', array('octets' => taille_en_octets($n)));
+			else
+				$info2 = _T('taille_cache_vide');
+		}
+		else
+			$info2 = _L("Taille totale non disponible");
+		$bouton = _L('Invalider le cache');
 
-				$info2 = ($quota_cache
-					? _T('taille_cache_maxi',
-						array('octets' => taille_en_octets($quota_cache*1024*1024)))
-					: _T('taille_cache_infinie')
-					)
-					. ' (' . _T('cache_modifiable_webmestre').')';
-				$bouton = _T('bouton_vider_cache');
-				break;
+		echo debut_cadre_relief("", true, "", _T('taille_repertoire_cache'));
 
-			default:
-				$quota_cache = '';
-				$memo = new MCache($cfg['methode']);
-				$info = _L('Le cache des pages utilise la m&#233;moization @type@', array('type' => $memo->methode));
-				$info2 = _L("Taille totale non disponible");
-				$bouton = _L('Invalider le cache');
-				break;
+		echo "<p style='text-align: justify;'><b>$info</b></p>\n";
+
+		if ($info2) {
+			echo "\n<p style='text-align: justify;'>";
+			echo $info2;
+			echo "</p>";
 		}
 
-		
-
-		if ($info) {
-
-			echo debut_cadre_relief("", true, "", _T('taille_repertoire_cache'));
-
-			echo "<p style='text-align: justify;'><b>$info</b></p>\n";
-
-			if ($info2) {
-				echo "\n<p style='text-align: justify;'>";
-				echo $info2;
-				echo "</p>";
-			}
-
-			echo
-				redirige_action_post('purger', 'cache', "admin_vider", '',
-					 "\n<div style='text-align: right'><input  type='submit' value=\"" .
-			 str_replace('"', '&quot;', $bouton) .
-					 "\" /></div>");
-			echo fin_cadre_relief(true);
-
-		}
+		echo
+			redirige_action_post('purger', 'cache', "admin_vider", '',
+				 "\n<div style='text-align: right'><input  type='submit' value=\"" .
+		 str_replace('"', '&quot;', $bouton) .
+				 "\" /></div>");
+		echo fin_cadre_relief(true);
 
 		echo debut_cadre_relief("image-24.gif", true, "", _T('info_images_auto'));
 

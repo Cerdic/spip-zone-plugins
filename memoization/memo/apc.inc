@@ -59,6 +59,17 @@ class MCacheBackend_apc extends MCacheBackend {
 		return apc_delete($this->key_for_lock($key));
 	}
 
+	function size() {
+		if (!class_exists('APCIterator'))
+			return false;
+		$a = 0;
+		$time = $GLOBALS['meta']['cache_mark'];
+		foreach (new APCIterator('user') as $f)
+			if ($f['mtime'] > $time)
+				$a += $f['mem_size'];
+		return $a;
+	}
+
 }
 
 ?>

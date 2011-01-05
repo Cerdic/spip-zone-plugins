@@ -20,9 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_administration_memcache' => 'Manage memcache',
 
 	// O
-	'option_cache_defaut' => 'By the memoization method defined above',
-	'option_cache_file' => 'Old method of the core',
-	'option_cache_filepage' => 'By filecache memoization',
 	'option_methode_apc' => 'APC',
 	'option_methode_defaut' => 'Auto-detection',
 	'option_methode_eaccelerator' => 'EAccelerator',

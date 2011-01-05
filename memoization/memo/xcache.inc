@@ -82,7 +82,13 @@ class MCacheBackend_xcache extends MCacheBackend {
 	function unlock($key) {
 		$this->lock($key, true);
 	}
-	
+
+	function size() {
+		# necessite xcache.admin.user
+		#$a = xcache_list();
+		#var_dump($a);
+		return false;
+	}
 }
 
 ?>

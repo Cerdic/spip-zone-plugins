@@ -92,7 +92,12 @@ class MCache {
 	function unlock($key) {
 		return $this->backend->unlock($key);
 	}
-	
+
+	/* mixed */
+	function size() {
+		if (method_exists($this->backend, 'size'))
+			return $this->backend->size();
+	}
 }
 
 
