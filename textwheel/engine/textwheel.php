@@ -38,7 +38,7 @@ class TextWheel {
 	 */
 	public function setRuleSet($ruleset){
 		if (!is_object($ruleset))
-			$ruleset = new TextWheelRuleSet ();
+			$ruleset = new TextWheelRuleSet ($ruleset);
 		$this->ruleset = $ruleset;
 	}
 
