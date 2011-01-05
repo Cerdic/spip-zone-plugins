@@ -19,6 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_memcache' => 'Memcache settings',
 	'lien_administration_memcache' => 'Manage memcache',
 
+	// M
+	'methodes_grisees' => 'Greyed-out methods are not available on this server',
+
 	// O
 	'option_methode_apc' => 'APC',
 	'option_methode_defaut' => 'Auto-detection',

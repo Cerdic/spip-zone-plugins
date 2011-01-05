@@ -19,6 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_memcache' => 'R&#233;glages de memcache',
 	'lien_administration_memcache' => 'Administrer memcache',
 
+	// M
+	'methodes_grisees' => 'Les m&#233;thodes indiqu&#233;es en gris&#233; ne sont pas disponibles sur ce serveur',
+
 	// O
 	'option_methode_apc' => 'APC',
 	'option_methode_defaut' => 'Auto-d&#233;tection',
