@@ -1,7 +1,7 @@
 <plugin>
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
-  <version>0.6.2</version>
+  <version>0.6.3</version>
   <version_base>0.3.4</version_base>
   <etat>test</etat>
   <description>
@@ -26,6 +26,10 @@
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/queue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>queue_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>

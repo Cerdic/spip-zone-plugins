@@ -89,4 +89,17 @@ function queue_affichage_final(&$texte){
 	return $texte;
 }
 
+/**
+ * fonction utilisee par SPIP pour charger les autorisations
+ * @return void
+ */
+function queue_autoriser(){}
+
+/**
+ * Autoriser la purge de la queue : il faut etre webmestre
+ * @return mixed
+ */
+function autoriser_queue_purger_dist(){
+	return autoriser('webmestre');
+}
 ?>

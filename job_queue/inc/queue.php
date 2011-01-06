@@ -89,6 +89,19 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 
 }
 
+/**
+ * Purge the whole queue
+ * and replan cron jobs
+ * 
+ * @return void
+ */
+function queue_purger(){
+	include_spip('base/abstract_sql');
+	sql_delete('spip_jobs');
+  sql_delete("spip_jobs_liens","id_job NOT IN (".sql_get_select("id_job","spip_jobs").")");
+  include_spip('inc/genie');
+  genie_queue_watch_dist();
+}
 
 /**
  * Remove a job from the queue.
