@@ -8,17 +8,9 @@ function sjcycle_insert_head_css($flux){
 		if($conf_jcycle["tooltip"]) {
 			$flux .="\n".'<link rel="stylesheet" href="'.url_absolue(find_in_path('javascript/jquery.tooltip.css')).'" type="text/css" media="all" />';
 		}
-		
-		$flux .= "\n".'<style type="text/css" media="all">
-.'.$conf_jcycle["div_class"].'{
-padding:0px;
-margin:auto;
-display:block;
-clear:both;
-}
-</style>
-'; 
+		$flux .= '<link rel="stylesheet" href="'.url_absolue(generer_url_public('sjcycle.css')).'" type="text/css" media="all" />';
 	}
+
 	return $flux;
 }
 

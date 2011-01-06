@@ -29,6 +29,10 @@ V 0.6 :
 V 0.7 :
 - Ajout d'une option permettant de ne pas afficher la boite d'aide dans les pages d'edition des articles (Paolo)
 
+V 0.8 :
+- Ajout d'un modele qui genere un diaporama a partir d'images choisies aleatoirement dans les articles du site
+- Ajout d'une feuille de style
+
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
 - Possibilité d'afficher un diapo dans une rubrique à partir des images de la rubrique

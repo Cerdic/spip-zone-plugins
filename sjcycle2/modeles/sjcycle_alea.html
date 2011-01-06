@@ -1,0 +1,30 @@
+[(#REM) Diaporama d'images aleatoires ]
+[(#SET{nb,[(#ENV{nb,10})]})]
+[(#SET{fx,[(#ENV{fx,fade})]})]
+[(#SET{duree,[(#ENV{duree,5000})]})]
+[(#SET{largeur,[(#ENV{largeur,200})]})]
+[(#SET{hauteur,[(#ENV{hauteur,0})]})]
+[(#SET{texte,[(#ENV{texte,''})]})]
+
+<script language="javascript" type="text/javascript">
+<!-- http://malsup.com/jquery/cycle/
+jQuery(document).ready(function() {
+	$('#sjcycle_alea').cycle({ 
+		fx:'#GET{fx}',
+		speed:1500, 
+		timeout:[(#GET{duree})],
+		pause:1
+	});
+});
+-->
+</script>
+
+<B_docAuHazard>
+	<div id="sjcycle_alea">	
+<BOUCLE_docAuHazard(DOCUMENTS){extension==jpg|png|gif}{par hasard}{0, #GET{nb}}>
+		<div class="sjcycle_alea_img">
+			[(#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}})]
+		</div>
+</BOUCLE_docAuHazard>
+	</div>
+</B_docAuHazard>
