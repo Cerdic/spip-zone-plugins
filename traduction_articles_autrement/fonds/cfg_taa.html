@@ -3,36 +3,7 @@
 <!-- autoriser=webmestre -->
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
 
-#CACHE{0}
-
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-
-<fieldset><legend><:taa:options:></legend>
-
-<div>
-
-	<label for="edition_seule"><:taa:affichage_liste_compacte:> : </label>	
-
-	<p>
-		[(#PLUGIN{afficher_objets}|?{
-			<input type="checkbox" name="liste_compacte" id="liste_compacte" [(#ENV{liste_compacte}|oui) checked="checked"] />,
-			<b><:taa:necesite_afficher_objet:> <a href="http://files.spip.org/spip-zone/afficher_objets.zip">Afficher Objets</a> !</b>
-			})]	
-
-	</p>
-	
-	<label for="edition_seule"><:taa:affichage_edition_seule:> : </label>	
-	<p>
-		<input type="checkbox" name="edition_seule" id="edition_seule" [(#ENV{edition_seule}|oui) checked="checked"] />
-	</p>	
-
+<div class='ajax'>
+#FORMULAIRE_CONFIGURER_TAA
 </div>
-
-</fieldset>
-
-<div>
-	<input type="submit" name="_cfg_ok" class="fondo" value="<:cfg:ok:>" />
-	<input type="submit" name="_cfg_delete" class="fondo" value="<:cfg:effacer:>" />
-</div>
-</form>
 
