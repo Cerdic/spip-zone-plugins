@@ -15,7 +15,7 @@
 <tr class="tr_liste">
 	<td class='arial11'>[(#CHEMIN{images/[(#OBJET|objet_type)]-24.gif}|image_reduire{12})]</td>
 	<td class='arial11'>#TITRE</td>
-	<td class='arial1'><a href="#URL_MOT"><:grappes:voir:></a></td>
+	<td class='arial1'><a href="[(#ID_MOT|generer_url_entite{mot})]"><:grappes:voir:></a></td>
 	[(#ENV{editable})
 	<td class='arial1'><a class="ajax" href="[(#URL_ACTION_AUTEUR{lier_objets,[(#ENV{action})]/[(#ENV{source})]/[(#ENV{id_source})]/[(#ENV{objet})]/#ID_MOT,#SELF})]">[(#VAL{grappes:}|concat{#ENV{action}}|_T)]</a></td>
 ]</tr>

@@ -13,7 +13,7 @@
 <tr class="tr_liste">
 	<td class='arial11'>[(#CHEMIN{images/[(#OBJET|objet_type)]-24.gif}|image_reduire{12})] #ENV*{fin_icone}
 	<td class='arial11'>#NOM_SITE #ENV*{fin_titre}
-	<td class='arial1'><a href="#URL_SITE"><:grappes:voir:></a>#ENV*{fin_voir,</span>}
+	<td class='arial1'><a href="[(#ID_SITE|generer_url_entite{site})]"><:grappes:voir:></a>#ENV*{fin_voir,</span>}
 	[(#ENV{editable})
 	<td class='arial1'><a class="ajax" href="[(#URL_ACTION_AUTEUR{lier_objets,[(#ENV{action})]/[(#ENV{source})]/[(#ENV{id_source})]/[(#ENV{objet})]/#ID_SYNDIC,#SELF})]">[(#VAL{grappes:}|concat{#ENV{action}}|_T)]</a>#ENV*{fin_lier,</span>}
 ]</tr>
