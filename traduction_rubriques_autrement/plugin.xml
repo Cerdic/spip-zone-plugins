@@ -14,7 +14,6 @@
 	<icon>img_pack/Translation-icon_32.png</icon>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>trad_rub_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>afficher_contenu_objet</nom>
@@ -31,10 +30,6 @@
 	<pipeline>
 		<nom>pre_insertion</nom>
 		<inclure>trad_rub_pipelines.php</inclure>
-	</pipeline>	
-	<pipeline>
-		<nom>declarer_tables_principales</nom>
-		<inclure>base/trad_rub_tables.php</inclure>
 	</pipeline>		
 	<fonctions>trad_rub_fonctions.php</fonctions>
 	<categorie>edition</categorie>
