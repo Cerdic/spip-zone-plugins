@@ -1,15 +1,14 @@
 <plugin>
-  <nom>Cache Cool</nom>
-  <auteur>[Cedric->yterium.net]</auteur>
-  <version>0.2.4</version>
-  <etat>test</etat>
+	<nom>Cache Cool</nom>
+	<auteur>[Cedric->yterium.net]</auteur>
+	<version>0.2.4</version>
+	<etat>test</etat>
 	<icon>images/cache_cool-128.png</icon>
-  <description>Servir le cache froid pour aller plus vite, et calculer en diff&eacute;r&eacute; en t&acirc;che de fond
-	Necessite la version de dev 2.1 ou le patch http://trac.rezo.net/trac/spip/changeset/14708
-	</description>
-  <options>cache_cool_options.php</options>
+	<description>Servir le cache froid pour aller plus vite, et calculer en diff&eacute;r&eacute; en t&acirc;che de fond</description>
+	<options>cache_cool_options.php</options>
 	<lien>http://www.spip-contrib.net/Cache-Cool</lien> <!-- URI de documentation -->
-  <prefix>cache_cool</prefix>
+	<prefix>cache_cool</prefix>
 	<categorie>performance</categorie>
+	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id="queue" version="[0.2.1;]" />
 </plugin>
