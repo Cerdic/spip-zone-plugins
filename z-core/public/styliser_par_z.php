@@ -27,6 +27,7 @@ function public_styliser_par_z_dist($flux){
 	static $page;
 	static $disponible = array();
 	static $echaffauder;
+	static $prepend = "";
 
 	if (!isset($prefix_path)) {
 		$z_blocs = zcore_blocs(test_espace_prive());
@@ -46,11 +47,12 @@ function public_styliser_par_z_dist($flux){
 			$echaffauder = charger_fonction('echaffauder','public',true);
 		  define('_ZCORE_EXCLURE_PATH','squelettes-dist|prive');
 		}
+	  $prepend = (defined('_Z_PREPEND_PATH')?_Z_PREPEND_PATH:"");
 	}
 	$z_contenu = reset($z_blocs); // contenu par defaut
 
 	$fond = $flux['args']['fond'];
-	if (strncmp($fond,$prefix_path,$prefix_length)==0) {
+	if ($prepend OR strncmp($fond,$prefix_path,$prefix_length)==0) {
 		$fond = substr($fond, $prefix_length);
 		$squelette = $flux['data'];
 		$ext = $flux['args']['ext'];
@@ -62,7 +64,7 @@ function public_styliser_par_z_dist($flux){
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs) // verifier deja qu'on est dans un bloc Z
 			AND in_array($dir,explode(',',constant($apl_constant))) // et dans un demande en APL
-			AND $pipe = zcore_trouver_bloc($prefix_path,$dir,'z_apl',$ext) // et qui contient le squelette APL
+			AND $pipe = zcore_trouver_bloc($prefix_path.$prepend,$dir,'z_apl',$ext) // et qui contient le squelette APL
 			){
 			$flux['data'] = $pipe;
 			return $flux;
@@ -73,7 +75,12 @@ function public_styliser_par_z_dist($flux){
 			$squelette = "";
 		  $echaffauder = "";
 		}
-	
+	  if ($prepend){
+		  $squelette = substr(find_in_path($prefix_path.$prepend."$fond.$ext"), 0, - strlen(".$ext"));
+	    if ($squelette)
+		    $flux['data'] = $squelette;
+	  }
+
 		// gerer les squelettes non trouves
 		// -> router vers les /dist.html
 		// ou scaffolding ou page automatique les contenus
@@ -88,7 +95,7 @@ function public_styliser_par_z_dist($flux){
 				// se brancher sur contenu/xx si il existe
 				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
 				if (!isset($disponible[$fond]))
-					$disponible[$fond] = zcore_contenu_disponible($prefix_path,$z_contenu,$fond,$ext,$echaffauder);
+					$disponible[$fond] = zcore_contenu_disponible($prefix_path.$prepend,$z_contenu,$fond,$ext,$echaffauder);
 
 				if ($disponible[$fond])
 					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
@@ -103,8 +110,10 @@ function public_styliser_par_z_dist($flux){
 				AND autoriser('webmestre')){
 				$type = substr($fond,strlen($z_contenu)+1);
 				if (!isset($disponible[$type]))
-					$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder);
-				if ($echaffauder 
+					$disponible[$type] = zcore_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
+				if (is_string($disponible[$type]))
+					$flux['data'] = $disponible[$type];
+				elseif ($echaffauder
 					AND $is = $disponible[$type]
 					AND is_array($is))
 					$flux['data'] = $echaffauder($type,$is[0],$is[1],$is[2],$ext);
@@ -120,9 +129,9 @@ function public_styliser_par_z_dist($flux){
 					AND in_array($dir,$z_blocs)){
 					$type = substr($fond,strlen("$dir/"));
 					if ($type!=='page' AND !isset($disponible[$type]))
-						$disponible[$type] = zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder);
+						$disponible[$type] = zcore_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
 					if ($type=='page' OR $disponible[$type])
-						$flux['data'] = zcore_trouver_bloc($prefix_path,$dir,'dist',$ext);
+						$flux['data'] = zcore_trouver_bloc($prefix_path.$prepend,$dir,'dist',$ext);
 				}
 			}
 			$squelette = $flux['data'];
@@ -144,7 +153,7 @@ function public_styliser_par_z_dist($flux){
 		}
 		elseif ($fond=='structure' 
 			AND _request('var_zajax')
-			AND $f = find_in_path($prefix_path.'ajax'.".$ext")) {
+			AND $f = find_in_path($prefix_path.$prepend.'ajax'.".$ext")) {
 			$flux['data'] = substr($f,0,-strlen(".$ext"));
 		}
 		// chercher le fond correspondant a la composition
@@ -154,7 +163,7 @@ function public_styliser_par_z_dist($flux){
 			AND $dir = explode('/',$dir)
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs)
-			AND $f=find_in_path($prefix_path.$fond."-".$flux['args']['contexte']['composition'].".$ext")){
+			AND $f=find_in_path($prefix_path.$prepend.$fond."-".$flux['args']['contexte']['composition'].".$ext")){
 			$flux['data'] = substr($f,0,-strlen(".$ext"));
 		}
 	}
@@ -186,7 +195,7 @@ function zcore_blocs($espace_prive=false) {
 function zcore_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder=true){
 	if ($d = zcore_trouver_bloc($prefix_path,$z_contenu,$type,$ext))
 		return $d;
-	return $echaffauder AND zcore_echaffaudable($type);
+	return $echaffauder?zcore_echaffaudable($type):false;
 }
 
 function zcore_fond_valide($squelette){
