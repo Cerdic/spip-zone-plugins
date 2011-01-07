@@ -275,6 +275,16 @@ function tb_test_essais($funcname,$filetest,$essais_new=null){
 	return eval($function);
 }
 
+/**
+ * Recalculer le resultat des tests
+ * pour cela on passe par un hit public car les tests
+ * se deroulent dans le public
+ * 
+ * @param  $filename
+ * @param  $funcname
+ * @param  $filetest
+ * @return void
+ */
 function tb_refresh_test($filename,$funcname,$filetest){
 	include_spip('inc/securiser_action');
 	$arg = "$filename|$funcname|".substr($filetest,strlen(_DIR_RACINE));
@@ -282,7 +292,8 @@ function tb_refresh_test($filename,$funcname,$filetest){
 	$url = generer_url_action("tb_set_test_output", "arg=$arg&hash=$hash",true,true);
 	#var_dump($url);
 	include_spip("inc/distant");
-	recuperer_page($url);
+	if (recuperer_page($url)) return true;
+	return false;
 }
 
 function tb_error_handler($output)

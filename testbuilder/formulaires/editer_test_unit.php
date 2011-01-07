@@ -96,6 +96,7 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 	if (!$filetest=tb_hastest($funcname))
 		$filetest = tb_generate_new_blank_test($filename,$funcname);
 	$message_ok = "";
+	$message_echec = "";
 
 	$essais = tb_test_essais($funcname,$filetest);
 	if (_request('enregistrer')){
@@ -137,10 +138,13 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 			$essais[$k] = $e;
 		}
 		tb_test_essais($funcname,$filetest,$essais);
-		tb_refresh_test($filename,$funcname,$filetest);
-		set_request('args');
-		set_request('resultat');
-		$message_ok = _T('tb:ok_test_recalcules');
+		if (tb_refresh_test($filename,$funcname,$filetest)){
+			set_request('args');
+			set_request('resultat');
+			$message_ok = _T('tb:ok_test_recalcules');
+		}
+	  else
+		  $message_echec = _T('tb:echec');
 	}
 	elseif(_request('supprimer_tous')){
 		tb_test_essais($funcname,$filetest,array());
@@ -160,7 +164,10 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 			$message_ok = _T("tb:ok_test_supprime");
 		}
 	}
-	return array('message_ok'=>$message_ok,'fichier_test'=>$filetest,'editable'=>true);
+	return
+		$message_echec ?
+			array('message_erreur'=>$message_echec,'fichier_test'=>$filetest,'editable'=>true)
+			: array('message_ok'=>$message_ok,'fichier_test'=>$filetest,'editable'=>true);
 	
 }
 
