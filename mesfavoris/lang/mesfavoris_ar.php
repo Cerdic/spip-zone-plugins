@@ -1,17 +1,10 @@
 ﻿<?php
-
-
-	/**
-	 * SPIP-Formulaires
+	/*
+	 * Plugin mesfavoris
+	 * (c) 2009-2010 Olivier Sallou, Cedric Morin
+	 * Distribue sous licence GPL
 	 *
-	 * Copyright (c) 2006-2009
-	 * Agence Artégo http://www.artego.fr
-	 *  
-	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
-	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
-	 *  
-	 **/
-
+	 */
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 		'add' => 'إضافة',
@@ -25,5 +18,3 @@
 		'login_first' => '.المعذرة، يجب عليك التسجيل قبل القيام بهذه الخطوة. الرجاء إدخال إسمك وشفرتك السرية ثم إعادة المحاولة'
 		
 	);
-
-?>
