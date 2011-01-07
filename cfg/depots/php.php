@@ -240,7 +240,7 @@ $cfg = ' . var_export($contenu, true) . ';
 			$args = $fichier;
 			$fichier = _DIR_VAR . 'cfg/' . $fichier . '.php';	
 		}
-
+		$this->param['fichier'] = $fichier;
 		$arbre = explode('/',$args);
 		$this->param['nom'] = array_shift($arbre);
 		if ($champ = array_pop($arbre))
