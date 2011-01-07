@@ -119,14 +119,12 @@ function inc_article_afficher_contenu_dist($id_article){
 				$onglets_traduction.='<div class="traduit onglet ajax">'.$span.'<a href="?exec=articles&id_article='.$traductions[$value].'">'.traduire_nom_langue($value).'</a></div>';					
 			}
 			else{
-				include_spip('ecrire/inc/plugin');
-				$plugins = liste_chemin_plugin_actifs();
 				// Si le plugin traduction rubriques est activé on regarde si on trouve la rubrique traduite
-				if($plugins['TRADRUB']){
-					$id_rubrique=rubrique_traduction($value,$id_rubrique);
+				if (test_plugin_actif('tradrub')) {
+					$id_rubrique_traduite=rubrique_traduction($value,$id_rubrique);
 					$section='oui';
 					}	
-				$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire('articles_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';
+				$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire('articles_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';
 			
 				$action=generer_action_auteur ('changer_langue',$id_article,$retour);
 				// Si le plugin traduction rubriques est activé on affiche pas les onglets changement de langue car la langue se change en modifiant la rubrique
@@ -183,7 +181,7 @@ function inc_article_afficher_contenu_dist($id_article){
 	else{
 		$onglet_contenu =afficher_corps_articles($id_article,$virtuel,$row);
 		}
-	
+
 	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :"")
 	. $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	. $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
