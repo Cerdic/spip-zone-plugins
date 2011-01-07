@@ -14,10 +14,16 @@
 	require $remonte.'tests/test.inc';
 	find_in_path("@filename@",'',true);
 
+	// chercher la fonction si elle n'existe pas
+	if (!function_exists($f='@funcname@')){
+		find_in_path("inc/filtres.php",'',true);
+		$f = chercher_filtre($f);
+	}
+
 	//
 	// hop ! on y va
 	//
-	$err = tester_fun('@funcname@', @essais_funcname@());
+	$err = tester_fun($f, @essais_funcname@());
 	
 	// si le tableau $err est pas vide ca va pas
 	if ($err) {

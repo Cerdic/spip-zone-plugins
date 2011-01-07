@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Test Builder</nom>
 	<auteur>Cedric [->http://www.yterium.com]</auteur>
-	<version>0.3.1</version>
+	<version>0.3.2</version>
 	<icon>images/tb-32.png</icon>
 	<etat>test</etat>
 	<description>Construite des tests systematiques</description>
@@ -20,4 +20,26 @@
 		<url>testbuilder</url>
 	</bouton>
 	<necessite id='spip_bonux' version='[1.9.0;]' />
+</plugin>
+<plugin spip='[2.3.0-dev;]'>
+	<nom>Test Builder</nom>
+	<auteur>Cedric [->http://www.yterium.com]</auteur>
+	<version>0.3.2</version>
+	<icon>images/tb-32.png</icon>
+	<etat>test</etat>
+	<description>Construite des tests systematiques</description>
+	<lien>http://www.spip-contrib.net/TestBuilder</lien> <!-- URI de documentation -->
+	<prefix>tb</prefix>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<categorie>outil</categorie>
+	<bouton id="tb" parent="configuration">
+		<icone>images/tb-24.png</icone>
+		<titre>tb:testbuilder</titre>
+		<url>testbuilder</url>
+	</bouton>
+	<bouton id="tb2" parent="bando_administration">
+		<icone>images/tb-16.png</icone>
+		<titre>tb:testbuilder</titre>
+		<url>testbuilder</url>
+	</bouton>
 </plugin>
