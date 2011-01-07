@@ -102,6 +102,7 @@ function zcore_insert_head($flux){
 // mais retourne toujours dans un <p> comme propre
 //
 // http://doc.spip.org/@filtre_introduction_dist
+if (!function_exists('filtre_introduction')){
 function filtre_introduction($descriptif, $texte, $longueur, $connect) {
 	include_spip('public/composer');
 	$texte = filtre_introduction_dist($descriptif, $texte, $longueur, $connect);
@@ -112,16 +113,19 @@ function filtre_introduction($descriptif, $texte, $longueur, $connect) {
 
 	return $texte;
 }
+}
 
 /**
  * Tester la presence sur une page
  * @param <type> $p
  * @return <type>
  */
+if (!function_exists('balise_SI_PAGE_dist')){
 function balise_SI_PAGE_dist($p) {
 	$_page = interprete_argument_balise(1,$p);
 	$p->code = "(((\$Pile[0][_SPIP_PAGE]==(\$zp=$_page)) OR (\$Pile[0]['composition']==\$zp AND \$Pile[0]['type']=='page'))?' ':'')";
 	$p->interdire_scripts = false;
 	return $p;
+}
 }
 ?>
