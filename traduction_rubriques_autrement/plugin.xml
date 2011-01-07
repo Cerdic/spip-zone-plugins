@@ -12,6 +12,7 @@
 	<icon>img_pack/Translation-icon_32.png</icon>
 	<pipeline>
 		<nom>header_prive</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>afficher_contenu_objet</nom>
