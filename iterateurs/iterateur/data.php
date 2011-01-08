@@ -15,10 +15,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('iterateur/iterateur');
 
 
-//
-// creer une boucle sur un iterateur DATA
-// annonce au compilo les "champs" disponibles
-//
+/**
+ * creer une boucle sur un iterateur DATA
+ * annonce au compilo les "champs" disponibles
+ *
+ * @param  $b
+ * @return
+ */
 function iterateur_DATA_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
 	$b->show = array(
@@ -86,10 +89,19 @@ class IterateurDATA implements Iterator {
 		list($this->cle, $this->valeur) = each($this->tableau);
 	}
 
+	/**
+	 * Declarer les criteres exceptions
+	 * @return array
+	 */
 	public function exception_des_criteres() {
 		return array('tableau');
 	}
 
+	/**
+	 * Recuperer depuis le cache si possible
+	 * @param  $cle
+	 * @return
+	 */
 	protected function cache_get($cle) {
 		if (!$cle) return;
 		# utiliser memoization si dispo
@@ -98,6 +110,12 @@ class IterateurDATA implements Iterator {
 		return cache_get($cle);
 	}
 
+	/**
+	 * Srtocker en cache si possible
+	 * @param  $cle
+	 * @param  $ttl
+	 * @return
+	 */
 	protected function cache_set($cle, $ttl) {
 		if (!$cle) return;
 		# utiliser memoization si dispo
@@ -114,6 +132,13 @@ class IterateurDATA implements Iterator {
 			# pour le cas ou le serveur distant ne repond plus
 	}
 
+	/**
+	 * Aller chercher les donnees de la boucle DATA
+	 *
+	 * @throws Exception
+	 * @param  $command
+	 * @return void
+	 */
 	protected function select($command) {
 		// les commandes connues pour l'iterateur POUR/DATA
 		// sont : {tableau #ARRAY} ; cle=...; valeur=...
@@ -234,19 +259,33 @@ class IterateurDATA implements Iterator {
 		// tri {par x}
 		if ($this->command['orderby']) {
 			$sortfunc = '';
+			$aleas = 0;
 			foreach($this->command['orderby'] as $tri) {
 				if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', $tri, $r)) {
-					if ($r[1] == 'valeur')
-						$tv = '%s';
-					else if ($r[1] == 'alea') # {par hasard}
-						$tv = 'rand(0,1)';
-					else
-						$tv = 'Iterateurs_table_valeur(%s, '.var_export($r[1],true).')';
-					$sortfunc .= '
-					$a = '.sprintf($tv,'$aa').';
-					$b = '.sprintf($tv,'$bb').';
-					if ($a <> $b)
-						return ($a ' . ($r[2] ? '>' : '<').' $b) ? -1 : 1;';
+					// tri par cle
+					if ($r[1] == 'cle'){
+						ksort($this->tableau);
+					}
+					else {
+						# {par valeur}
+						if ($r[1] == 'valeur')
+							$tv = '%s';
+						# {par hasard}
+						else if ($r[1] == 'alea') {
+							if (!$aleas)
+							$sortfunc .= 'static $aleas = array();';
+							$aleas ++;
+							$tv = '(isset($aleas['.$aleas.'][$v=%s])?$aleas['.$aleas.'][$v]:($aleas['.$aleas.'][$v]=rand(0,1)))';
+						}
+						# {par valeur/xx/yy} ??
+						else
+							$tv = 'Iterateurs_table_valeur(%s, '.var_export($r[1],true).')';
+						$sortfunc .= '
+						$a = '.sprintf($tv,'$aa').';
+						$b = '.sprintf($tv,'$bb').';
+						if ($a <> $b)
+							return ($a ' . ($r[2] ? '>' : '<').' $b) ? -1 : 1;';
+					}
 				}
 			}
 
@@ -320,17 +359,44 @@ class IterateurDATA implements Iterator {
 	}
 }
 
+/*
+ * Fonctions de transformation donnee => tableau
+ */
 
+/**
+ * file -> tableau
+ *
+ * @param  string $u
+ * @return array
+ */
 function inc_file_to_array_dist($u) {
 	return preg_split('/\r?\n/', $u);
 }
-function inc_plugins_to_array_dist($u) {
+
+/**
+ * plugins -> tableau
+ * @return unknown
+ */
+function inc_plugins_to_array_dist() {
 	include_spip('inc/plugin');
 	return liste_chemin_plugin_actifs();
 }
+
+/**
+ * xml -> tableau
+ * @param  string $u
+ * @return array
+ */
 function inc_xml_to_array_dist($u) {
 	return @ObjectToArray(new SimpleXmlIterator($u));
 }
+
+/**
+ * yql -> tableau
+ * @throws Exception
+ * @param  string $u
+ * @return array|bool
+ */
 function inc_yql_to_array_dist($u) {
 	define('_YQL_ENDPOINT', 'http://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
 	$v = recuperer_page($url = _YQL_ENDPOINT.urlencode($u).'&format=json');
@@ -341,6 +407,12 @@ function inc_yql_to_array_dist($u) {
 	}
 	return (array) $w;
 }
+
+/**
+ * sql -> tableau
+ * @param string $u
+ * @return array|bool
+ */
 function inc_sql_to_array_dist($u) {
 	# sortir le connecteur de $u
 	preg_match(',^(?:(\w+):)?(.*)$,S', $u, $v);
@@ -354,11 +426,23 @@ function inc_sql_to_array_dist($u) {
 	}
 	return false;
 }
+
+/**
+ * json -> tableau
+ * @param string $u
+ * @return array|bool
+ */
 function inc_json_to_array_dist($u) {
 	if (is_array($json = json_decode($u))
 	OR is_object($json))
 		return (array) $json;
 }
+
+/**
+ * csv -> tableau
+ * @param string $u
+ * @return array|bool
+ */
 function inc_csv_to_array_dist($u) {
 	include_spip('inc/csv');
 	list($entete,$csv) = analyse_csv($u);
@@ -372,25 +456,48 @@ function inc_csv_to_array_dist($u) {
 	}
 	return $csv;
 }
+
+/**
+ * RSS -> tableau
+ * @param string $u
+ * @return array|bool
+ */
 function inc_rss_to_array_dist($u) {
 	include_spip('inc/syndic');
 	if (is_array($rss = analyser_backend($u)))
 		$tableau = $rss;
 	return $tableau;
 }
-// atom, alias de rss
+
+/**
+ * atom, alias de rss -> tableau
+ * @param string $u
+ * @return array|bool
+ */
 function inc_atom_to_array_dist($u) {
 	$g = charger_fonction('rss_to_array', 'inc');
 	return $g($u);
 }
-// glob : lister des fichiers selon un masque, pour la syntaxe cf php.net/glob
+
+/**
+ * glob -> tableau
+ * lister des fichiers selon un masque, pour la syntaxe cf php.net/glob
+ * @param string $u
+ * @return array|bool
+ */
 function inc_glob_to_array_dist($u) {
 	return (array) glob($u,
 		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
 	);
 }
-// ls : lister des fichiers selon un masque glob
-// et renvoyer aussi leurs donnees php.net/stat
+
+/**
+ * ls -> tableau
+ * ls : lister des fichiers selon un masque glob
+ * et renvoyer aussi leurs donnees php.net/stat
+ * @param string $u
+ * @return array|bool
+ */
 function inc_ls_to_array_dist($u) {
 	$glob = charger_fonction('glob_to_array', 'inc');
 	$a = $glob($u);
@@ -407,6 +514,11 @@ function inc_ls_to_array_dist($u) {
 	return $a;
 }
 
+/**
+ * Object -> tableau
+ * @param Object $object
+ * @return array|bool
+ */
 function ObjectToArray($object){
 	$xml_array = array();
 	for( $object->rewind(); $object->valid(); $object->next() ) {
