@@ -20,7 +20,10 @@ function formulaires_configurer_metas_charger_dist($form)
 	else {
 		$infos = formulaires_configurer_metas_infos($form);
 		if (!is_array($infos)) return $infos;
-		return $GLOBALS[$infos['meta']];
+		if (isset($infos['meta']) AND isset($GLOBALS[$infos['meta']]))
+		    return $GLOBALS[$infos['meta']];
+		spip_log("configurer_meta, charger: table des meta pour $form inconnue" . $infos['meta']);
+		return array();
 	}
 }
 
