@@ -66,7 +66,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_n_sites' => 'sites',
 	'label_nom' => 'Nom',
 	'label_slogan' => 'Slogan',
-	'label_url' => 'URL',
+	'label_filtre_groupe' => 'Groupes &agrave; afficher',
+	'label_div_class' => 'Classe du div englobant',
+	'label_div_id' => 'Id du div englobant',
+	'label_ul_class' => 'Classe de la balise ul de la liste',
+	'label_li_class' => 'Classe de chaque balise li de la liste',
+	'label_titre_boussole' => 'Afficher le titre de la boussole ?',
+	'label_type_bulle' => 'Information affcih&eacute;e dans la bulle de chaque lien',
 	'label_version' => 'Version',
 
 // M
@@ -80,6 +86,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
 // -- Noms de la boussole, des groupes et des sites de la galaxie SPIP
+	'noisette_nom_boussole_spip' => 'Boussole SPIP',
+	'noisette_description_boussole_spip' => 'Sites de la galaxie SPIP pr&eacute;sent&eacute;e sous forme d\'une liste de liens avec nom et bulle d\'information pour chaque site',
 	'nom_boussole_spip' => 'Galaxie SPIP',
 	'nom_groupe_spip_actualite' => 'Actualit&eacute; de SPIP',
 	'nom_groupe_spip_aide' => 'Aide et &eacute;changes autour de SPIP',
@@ -110,6 +118,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // O
 	'onglet_boussoles' => 'G&eacute;rer les boussoles',
+	'option_nom_slogan_site' => 'Nom et slogan du site',
+	'option_nom_site' => 'Nom du site',
+	'option_slogan_site' => 'Slogan du site',
+	'option_descriptif_site' => 'Descriptif du site',
+	'option_tous_groupes' => 'Tous les groupes de la boussole',
 
 // R
 	'resume_table_boussoles' => 'Liste des boussoles ajout&eacute;es',

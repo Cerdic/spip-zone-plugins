@@ -1,0 +1,61 @@
+nom: '<:boussole:noisette_nom_boussole_spip:>'
+description: '<:boussole:noisette_description_boussole_spip:>'
+icon: 'prive/themes/spip/images/boussole_icone-24.png'
+parametres:
+  -
+    saisie: 'radio'
+    options:
+      nom: 'titre_boussole'
+      label: '<:boussole:label_titre_boussole:>'
+      defaut: 'non'
+      datas:
+        oui: '<:oui:>'
+        non: '<:non:>'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'type_bulle'
+      label: '<:boussole:label_type_bulle:>'
+      defaut: 'nom_slogan_site'
+      datas:
+        nom_slogan_site: '<:boussole:option_nom_slogan_site:>'
+        nom_site: '<:boussole:option_nom_site:>'
+        slogan_site: '<:boussole:option_slogan_site:>'
+        descriptif_site: '<:boussole:option_descriptif_site:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'div_id'
+      label: '<:boussole:label_div_id:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'div_class'
+      label: '<:boussole:label_div_class:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'ul_class'
+      label: '<:boussole:label_ul_class:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'li_class'
+      label: '<:boussole:label_li_class:>'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      nom: 'aka_groupe'
+      label: '<:boussole:label_filtre_groupe:>'
+      defaut: ''
+      datas:
+        '': '<:boussole:option_tous_groupes:>'
+        reference: '<:boussole:nom_groupe_spip_reference:>'
+        extension: '<:boussole:nom_groupe_spip_extension:>'
+        aide: '<:boussole:nom_groupe_spip_aide:>'
+        actualite: '<:boussole:nom_groupe_spip_actualite:>'
+        decouverte: '<:boussole:nom_groupe_spip_decouverte:>'
