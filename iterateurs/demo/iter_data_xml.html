@@ -1,10 +1,10 @@
 <h2>R&#233;cursion XML</h2>
 
-<BOUCLE_r8(DATA){datasource #CHEMIN{demo/iter_flowers.xml}, xml}{datapath }>
+<BOUCLE_r8(DATA){source xml, #CHEMIN{demo/iter_flowers.xml}}{datapath }>
 "#CLE":
 <B_f>
 <ul class="xoxo">
-<BOUCLE_f(DATA){datasource #VALEUR**,table}>
+<BOUCLE_f(DATA){source table, #VALEUR**}>
 <B_g>
 <li>"#CLE":
 	<BOUCLE_g(BOUCLE_f)/>

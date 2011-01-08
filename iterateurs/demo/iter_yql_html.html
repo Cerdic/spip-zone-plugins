@@ -6,7 +6,7 @@
 
 <ul>
 <BOUCLE_files(DATA)
-{datasource 'select * from html where url="http://files.spip.org/spip-zone/" and xpath="/html/body/div[1]/div[3]/div/div/div/ul[2]";', yql}
+{source yql, 'select * from html where url="http://files.spip.org/spip-zone/" and xpath="/html/body/div[1]/div[3]/div/div/div/ul[2]";'}
 {datapath query/results/ul/li}
 {pagination 20}
 >

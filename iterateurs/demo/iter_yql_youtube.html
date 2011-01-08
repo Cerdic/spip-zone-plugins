@@ -1,6 +1,6 @@
 <h2>yql youtube.search</h2>
 
-<BOUCLE_youtube(DATA){datasource "select * from youtube.search(150) where query='spip'", yql}
+<BOUCLE_youtube(DATA){source yql, "select * from youtube.search(150) where query='spip'"}
 {datapath /query/results/video}
 {pagination 5}
 >

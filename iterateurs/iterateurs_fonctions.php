@@ -24,11 +24,29 @@ function Iterateurs_table_valeur($table,$cle,$defaut=''){
 }
 
 
+// {source mode, "xxxxxx", arg, arg, arg}
+function critere_source($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
 
+	$args = array();
+	foreach ($crit->param as &$param)
+		array_push($args,
+		calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent));
+
+	$boucle->hash .= '
+	$command[\'sourcemode\'] = '. array_shift($args). ";\n";
+
+	$boucle->hash .= '
+	$command[\'source\'] = array('. join(', ', $args). ");\n";
+
+}
+
+
+// {datasource "xxxxxx", mode}  <= deprecated
 function critere_datasource($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
-	$command[\'source\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
+	$command[\'source\'] = array('.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).');
 	$command[\'sourcemode\'] = '.calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent).';';
 }
 
@@ -43,7 +61,7 @@ function critere_datacache($idb, &$boucles, $crit) {
 function critere_tableau($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
-	$command[\'source\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
+	$command[\'source\'] = array('.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).');
 	$command[\'sourcemode\'] = \'table\';';
 }
 

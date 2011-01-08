@@ -15,7 +15,7 @@
 </form>
 
 <BOUCLE_ce(DATA)
-{datasource select * from geo.places where text=(#GET{place}|_q),yql}
+{source yql, select * from geo.places where text=(#GET{place}|_q)}
 {datapath query/results/place}
 >
 <div style="position:absolute; top:[(#VAL{180}|moins{[(#VALEUR{centroid/latitude}|intval|mult{2})]})]px;

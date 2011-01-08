@@ -10,7 +10,7 @@
 
 <B_csv>
 <table border="1">
-<BOUCLE_csv(DATA){datasource https://spreadsheets.google.com/pub?key=#GET{key}&hl=en&dsds&output=csv,csv}
+<BOUCLE_csv(DATA){source csv, https://spreadsheets.google.com/pub?key=#GET{key}&hl=en&dsds&output=csv}
 >
 #SET{td,(#COMPTEUR_BOUCLE|=={1}|?{th,td})}
 <tr>
@@ -29,7 +29,7 @@
 
 <h3>Format RSS/List</h3>
 
-<BOUCLE_list(DATA){datasource https://spreadsheets.google.com/feeds/list/#GET{key}/od6/public/basic?alt=rss,rss}>
+<BOUCLE_list(DATA){source rss, https://spreadsheets.google.com/feeds/list/#GET{key}/od6/public/basic?alt=rss}>
 
 <dt>#TITRE</dt><dd>#VALEUR{descriptif}</dd>
 
@@ -40,7 +40,7 @@
 <h3>Format RSS/Cells</h3>
 
 
-<BOUCLE_cells(DATA){datasource https://spreadsheets.google.com/feeds/cells/#GET{key}/od6/public/basic?alt=rss,rss}>
+<BOUCLE_cells(DATA){source rss, https://spreadsheets.google.com/feeds/cells/#GET{key}/od6/public/basic?alt=rss}>
 
 <dt>#TITRE</dt><dd>#VALEUR{descriptif}</dd>
 

@@ -8,7 +8,7 @@
 #PAGINATION
 <br />#TOTAL_BOUCLE/#GRAND_TOTAL
 <BOUCLE_r1(DATA)
-	{datasource http://per.sonn.es/Fil.json, json}
+	{source json, http://per.sonn.es/Fil.json}
 	{pagination 5}>
 <dt>#CLE</dt>
 <dd> [(#VALEUR|print)] </dd>

@@ -5,7 +5,7 @@
 
 <dt><kbd>#GET{req}</kbd></dt>
 <dd>
-<BOUCLE_sqln(DATA){datasource #GET{req},sql}>
+<BOUCLE_sqln(DATA){source sql, #GET{req}}>
 [(#TOTAL) valeurs metas dans spip_meta]
 </BOUCLE_sqln>
 </dd>
@@ -15,7 +15,7 @@
 
 <dt><kbd>#GET{req}</kbd></dt>
 <dd>
-<BOUCLE_sql(DATA){datasource #GET{req},sql}>
+<BOUCLE_sql(DATA){source sql, #GET{req}}>
 titre: "#TITRE"
 </BOUCLE_sql>
 </dd>
@@ -25,7 +25,7 @@ titre: "#TITRE"
 <dt><kbd>#GET{req}</kbd></dt>
 <dd>
 <ul>
-<BOUCLE_show(DATA){datasource #GET{req},sql}>
+<BOUCLE_show(DATA){source sql, #GET{req}}>
 <li>[(#VALEUR{Field})][ - (#VALEUR{Type})][ - (#VALEUR{Extra})]</li>
 </BOUCLE_show>
 </ul>

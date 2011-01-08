@@ -4,7 +4,7 @@
 #SET{query,select * from flickr.photos.search(6) where text="#VALEUR" AND extras='url_sq'}
 
 <BOUCLE_trad(DATA)
-{datasource select * from google.translate where q="#VALEUR" and target="fr",yql}
+{source yql, select * from google.translate where q="#VALEUR" and target="fr"}
 >
 <h3>[(#_topic:VALEUR) =] #VALEUR{results/translatedText}</h3>
 
@@ -14,7 +14,7 @@
 <p><kbd>#GET{query}</kbd></p>
 
 <BOUCLE_r10(DATA)
-{datasource #GET{query}, yql}
+{source yql, #GET{query}}
 {datapath query/results/photo}
 {par hasard}
 >

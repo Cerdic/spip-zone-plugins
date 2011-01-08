@@ -12,13 +12,13 @@
 <h1>It&#233;rateurs</h1>
 
 
-<BOUCLE_chemin(DATA){datasource #EVAL{_chemin()},table}{par valeur}>
+<BOUCLE_chemin(DATA){source table, #EVAL{_chemin()}}{par valeur}>
 
 <B_demos>
 <h2>[(#VALEUR|basename)]</h2>
 <ul>
 
-<BOUCLE_demos(DATA){datasource #VALEURdemo/iter_*.html,glob}>
+<BOUCLE_demos(DATA){source glob, #VALEURdemo/iter_*.html}>
 
 <li><a href="spip.php?page=demo/iterateurs&amp;demo=[(#VALEUR
 	|basename{.html})]">[(#VALEUR|basename{.html}

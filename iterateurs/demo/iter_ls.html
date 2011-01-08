@@ -2,14 +2,14 @@
 
 <B_ls>
 <dl>
-<BOUCLE_ls(DATA){datasource #EVAL{_DIR_PLUGINS}*/demo/iter_*.html,ls}
+<BOUCLE_ls(DATA){source ls, #EVAL{_DIR_PLUGINS}*/demo/iter_*.html}
 {par #ENV{tri,basename}}
 >
 #SET{afficher,(#COMPTEUR_BOUCLE|=={1})}
 <B_tri>
  <dt><em>Champs disponibles</em></dt>
  <dd><strong>
-<BOUCLE_tri(DATA){datasource #VALEUR,table}{", "}{si #GET{afficher}}>
+<BOUCLE_tri(DATA){source table, #VALEUR}{", "}{si #GET{afficher}}>
    <a href="[(#SELF|parametre_url{tri,#CLE})]">#CLE</a>
 </BOUCLE_tri>
    </strong><hr /></dd>
