@@ -5,10 +5,11 @@
 	#SET{lang,#LANG}
 	#SET{langues_traduites,#ARRAY}
 	#SET{id_trad,#ID_RUBRIQUE}
-		
+	#SET{trad_new,oui}	
 	<BOUCLE_trad(RUBRIQUES){traduction}{id_trad!=0}{tout}>
 	#SET{id_trad,#ID_TRAD}		
 	#SET{langues_traduites,	#GET{langues_traduites}|array_merge{#ARRAY{#LANG,#ID_RUBRIQUE}}}
+	#SET{trad_new,''}	
 	</BOUCLE_trad>
 	#SET{trads,#TOTAL_BOUCLE}
 	</B_trad>	
@@ -24,7 +25,7 @@
 					[(#VALEUR|=={#GET{lang}}|?{
 						<div class="onglet_off onglet">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</div>,
 						#SET{parent_trad,#VALEUR|destination_traduction{#GET{id_trad}}}
-						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<div class="non_traduit onglet"><a href="[(#URL_ECRIRE{rubriques_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></div>]
+						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<div class="non_traduit onglet"><a href="[(#URL_ECRIRE{rubriques_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{trad_new,#GET{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></div>]
 						})]	
 				})]		
 

@@ -8,17 +8,19 @@ function trad_rub_header_prive($flux){
  
 /*Ajoute la langue de traduction dans le chargement du formulaire edition_article*/ 
  function trad_rub_formulaire_charger($flux){
-    $form = $flux['args']['form'];
+   $form = $flux['args']['form'];
    if ($form=='editer_rubrique'){
    	$id_trad=_request('lier_trad');
-	$flux['data']['lang_dest'] .= _request('lang_dest');
-	if($id_trad AND $flux['data']['lang_dest']){
-		$trads=destination_traduction($flux['data']['lang_dest'],$id_trad);	
-		$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="'.$trads['id_parent'].'"/>';		
+   	$flux['data']['lang_dest'] = _request('lang_dest');	
+   	if($id_trad AND $flux['data']['lang_dest']){
+   		$id_parent='0';
+		$trads=destination_traduction($flux['data']['lang_dest'],$id_trad);	 		
+ 		if($trads)$id_parent=$trads;
+		$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="'.$id_parent.'"/>';	
+		
 		}
-	
-	
 	$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'._request('lang_dest').'"/>';
+	$flux['data']['id_parent'] = _request('id_parent');
     }
     return $flux;
 }
@@ -39,10 +41,10 @@ function trad_rub_header_prive($flux){
     if ($flux['args']['table']=='spip_rubriques'){
     
 		if($lang=_request('lang_dest')){
-		$id_trad=_request('lier_trad');
+			$id_trad=_request('lier_trad');
 			$flux['data']['lang'] =  $lang;
 			$flux['data']['langue_choisie'] =  'oui';
-			$flux['data']['id_trad'] =  $id_trad;					 	
+			$flux['data']['id_trad'] =  $id_trad;						 	
 			}
     	}
 return $flux;
