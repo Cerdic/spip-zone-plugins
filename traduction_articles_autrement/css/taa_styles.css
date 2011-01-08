@@ -33,7 +33,7 @@
 	height :auto;
 }
 
-div.non_traduit{background-color: #EEEEEE;}
+div.non_traduit{background-color: #EEEEEE;font-style:italic;}
 
 .pagination{text-align:left;}
 
