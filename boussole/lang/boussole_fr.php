@@ -73,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_li_class' => 'Classe de chaque balise li de la liste',
 	'label_titre_boussole' => 'Afficher le titre de la boussole ?',
 	'label_type_bulle' => 'Information affcih&eacute;e dans la bulle de chaque lien',
+	'label_url' => 'URL',
 	'label_version' => 'Version',
 
 // M
