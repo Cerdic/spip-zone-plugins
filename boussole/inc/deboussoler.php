@@ -212,8 +212,9 @@ function boussole_parser_xml($url) {
 					$site['rang_site'] = ++$rang_site;
 					$site['affiche'] = 'oui';
 					$site['id_syndic'] = 0;
-					// On ajoute le site ainsi defini aux tableau des sites
-					$infos['sites'][] = $site;
+					// On ajoute le site ainsi defini aux tableau des sites si celui-ci est actif
+					if ($attributs_site['actif'] == 'oui')
+						$infos['sites'][] = $site;
 				}
 			}
 		}
