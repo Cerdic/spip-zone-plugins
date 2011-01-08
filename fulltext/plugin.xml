@@ -1,8 +1,6 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>
-	[fr]Recherche FULLTEXT
-	</multi>
+	<nom>
+	Fulltext
 	</nom>
 	<auteur>Fil</auteur>
 	<version>0.3</version>
@@ -10,6 +8,7 @@
 	<etat>
 	dev
 	</etat>
+	<licence>&#169; 2009-2011 - GNU/GPL</licence>
 	<description>
 Indexation FULLTEXT du contenu pour acc&#233;l&#233;rer le moteur de recherche
 -* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
