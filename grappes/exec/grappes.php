@@ -116,9 +116,9 @@ function exec_grappes_dist()
 		}
 
 		// afficher les objets lies
-		$lister_objet = charger_fonction('lister_objets','inc');
+		$grappes_lister_objets = charger_fonction('grappes_lister_objets','inc');
 		foreach($tables_liees as $objet){
-			echo $lister_objet($objet,'grappe',$id_grappe);
+			echo $grappes_lister_objets($objet,'grappe',$id_grappe);
 		}
 	
 		if ($editable){

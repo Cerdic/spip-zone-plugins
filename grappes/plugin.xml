@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Grappes [en]Bunches of grapes [es]Racimos[de]Trauben</multi></nom>
 	<auteur>Matthieu Marcillaud</auteur>
-	<version>0.2.5</version>
+	<version>0.3.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<prefix>grappes</prefix>

@@ -15,7 +15,7 @@
  * @param string $titre_bouton titre de la boite, par defaut : <:grappes:info_lier_$objet:>
  * @return 
 **/
-function inc_lister_objets_dist($objet, $source, $id_source, $titre_bouton=''){
+function inc_grappes_lister_objets_dist($objet, $source, $id_source, $titre_bouton=''){
 		$objet = table_objet($objet);
 		$source = table_objet($source);
 		$contexte = array(
