@@ -10,7 +10,7 @@ function action_supprimer_boussole_dist(){
 	$alias = $securiser_action();
 
 	// Verification des autorisations
-	if (!autoriser('webmestre')) {
+	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit();

@@ -5,7 +5,7 @@ include_spip('boussole_fonctions');
 
 function exec_boussoles_dist()
 {
-	if (!autoriser('webmestre')) {
+	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		die();

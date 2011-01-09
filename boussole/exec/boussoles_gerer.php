@@ -5,7 +5,7 @@ include_spip('inc/presentation');
 function exec_boussoles_gerer_dist(){
 
 	// si pas autorise : message d'erreur
-	if (!autoriser('webmestre')) {
+	if (!autoriser('configurer')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		die();
