@@ -1191,6 +1191,7 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 			$fromname = unicode2charset(charset2unicode($fromname),$charset);
 		}
 	}
+	// @TODO: voir email_reply_to ?
 	$reply_to = "no-reply".preg_replace("|.*(@[a-z.]+)|i", "$1", email_valide($from));
 	
 	if($opt_simuler_envoi == 'oui') {
