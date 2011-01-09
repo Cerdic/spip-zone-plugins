@@ -1295,11 +1295,7 @@ function spiplistes_listes_langue ($id_liste) {
 /*
  */
 function spiplistes_return_path ($from) {
-	$return_path = spiplistes_pref_lire('email_return_path_defaut');
-	if(!$return_path) {
-		$return_path = $from;
-	}
-	return($return_path);
+	return(spiplistes_pref_lire_defaut ('email_return_path_defaut', $from));
 }
 
 /**
