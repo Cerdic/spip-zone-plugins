@@ -188,6 +188,8 @@ function generer_url_membre($id, $param='', $ancre='') {
 	return  array('asso_membre', $id);
 }
 
+// pour executer les squelettes comportant la balise Meta
+include_spip('balise/meta');
 // charger les metas donnees
 $inc_meta = charger_fonction('meta', 'inc'); // inc_version l'a deja chargee
 $inc_meta('association_metas'); 
