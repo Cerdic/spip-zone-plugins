@@ -1302,6 +1302,19 @@ function spiplistes_return_path ($from) {
 	return($return_path);
 }
 
+/**
+ * Lire la valeur de $key dans les prefs (meta)
+ * Si erreur (manquante) appliquer $defaut
+ **/
+function spiplistes_pref_lire_defaut ($key, $default)
+{
+	$value = spiplistes_pref_lire($key);
+	if(!$value) {
+		$value = $default;
+	}
+	return($value);
+}
+
 function spiplistes_str_auteurs ($nb)
 {
 	$result =

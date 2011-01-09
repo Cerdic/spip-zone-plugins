@@ -227,7 +227,9 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 				// break; // garder pour incrementer les erreurs des listes
 			}
 			
-			$return_path = spiplistes_return_path($from);
+			$email_reply_to = spiplistes_pref_lire_defaut('email_reply_to', $from);
+			
+			$return_path = spiplistes_pref_lire_defaut('email_return_path_defaut', $from);
 			
 			////////////////////////////////////
 			// Prepare la version texte
@@ -288,7 +290,7 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 			if($fromname) $email_a_envoyer['texte']->FromName = $fromname ;
 			// Errors-To:,    Non-standard @see: http://www.ietf.org/rfc/rfc2076.txt
 			//$email_a_envoyer['texte']->AddCustomHeader('Errors-To: '.$return_path); 
-			$email_a_envoyer['texte']->AddCustomHeader('Reply-To: '.$from); 
+			$email_a_envoyer['texte']->AddCustomHeader('Reply-To: '.$email_reply_to); 
 			$email_a_envoyer['texte']->AddCustomHeader('Return-Path: '.$return_path); 
 			$email_a_envoyer['texte']->SMTPKeepAlive = true;
 
@@ -298,11 +300,11 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 				$email_a_envoyer['html']->FromName = $fromname ;
 			}
 			//$email_a_envoyer['html']->AddCustomHeader('Errors-To: '.$return_path); 
-			$email_a_envoyer['html']->AddCustomHeader('Reply-To: '.$from); 
+			$email_a_envoyer['html']->AddCustomHeader('Reply-To: '.$email_reply_to); 
 			$email_a_envoyer['html']->AddCustomHeader('Return-Path: '.$return_path); 	
 			$email_a_envoyer['html']->SMTPKeepAlive = true;
 		
-			$str_log .= ' REPLY-TO: '.$from.' RETURN-PATH: '.$return_path;
+			$str_log .= ' REPLY-TO: '.$email_reply_to.' RETURN-PATH: '.$return_path;
 			
 			if($total_abonnes) {
 		

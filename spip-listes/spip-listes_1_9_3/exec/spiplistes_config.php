@@ -51,7 +51,6 @@ function exec_spiplistes_config () {
 	if($flag_editable)
 	{
 
-		// Parametrages des envois
 		$adresse_defaut =
 			(email_valide($GLOBALS['meta']['email_defaut']))
 			? $GLOBALS['meta']['email_defaut']
