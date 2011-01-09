@@ -20,9 +20,10 @@ jQuery(document).ready(function() {
 
 <B_docAuHazard>
 	<div id="sjcycle_alea">	
-<BOUCLE_docAuHazard(DOCUMENTS){extension==jpg|png|gif}{par hasard}{0, #GET{nb}}>
+<BOUCLE_docAuHazard(documents documents_liens){objet=article}{documents.extension==jpg|png|gif}{par hasard}{0, #GET{nb}}>
 		<div class="sjcycle_alea_img">
-			[(#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}})]
+			[<a href="#URL_ARTICLE{#ID_OBJET}">(#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}|inserer_attribut{alt,""})</a>]
+         [<br /><span class="legende">(#MODELE{sjcycle_legende}{id_article=#ID_OBJET})</span>]
 		</div>
 </BOUCLE_docAuHazard>
 	</div>
