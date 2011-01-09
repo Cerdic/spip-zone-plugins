@@ -58,7 +58,7 @@ function gestdoc_affiche_gauche($flux){
 }
 
 function gestdoc_objets_extensibles($objets){
-	return array_merge($objets, array('document' => _T('gestdoc:objet_documents')));
+	return array_merge($objets, array('document' => _T('medias:objet_documents')));
 }
 
 function gestdoc_document_desc_actions($flux){

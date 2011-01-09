@@ -6,14 +6,14 @@
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<ul>
 			<li class="editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
-				<label for="fichier"><:gestdoc:label_fichier_vignette:></label>[
+				<label for="fichier"><:medias:label_fichier_vignette:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]
 				[
 				(#ENV*{vignette}|image_reduire{#CONFIG{taille_preview}})
-				][(#ENV*{vignette}|non)<:gestdoc:aucune_vignette:>]
+				][(#ENV*{vignette}|non)<:medias:aucune_vignette:>]
 				<p class='actions'>
-				[(#ENV{id_vignette}|oui)  <input type='submit' class='submit' name='supprimer' value='<:gestdoc:bouton_supprimer|attribut_html:>' />]
+				[(#ENV{id_vignette}|oui)  <input type='submit' class='submit' name='supprimer' value='<:medias:bouton_supprimer|attribut_html:>' />]
 				&#91;<a href='#' onclick='jQuery("#illustrer_document").toggle("fast");return false;'><:bouton_changer:></a>&#93;
 				</p>
 				<div id='illustrer_document' style='display:none;'>

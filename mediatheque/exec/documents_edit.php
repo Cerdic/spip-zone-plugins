@@ -74,7 +74,7 @@ function documents_edit_ok($row, $id_document, $parent, $new)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	pipeline('exec_init',array('args'=>array('exec'=>'documents_edit','id_document'=>$id_document),'data'=>''));
 
-	echo $commencer_page(_T('gestdoc:titre_page_documents_edit', array('titre' => $titre)), "naviguer", "documents");
+	echo $commencer_page(_T('medias:titre_page_documents_edit', array('titre' => $titre)), "naviguer", "documents");
 
 	echo debut_gauche('', true);
 	$boite = pipeline ('boite_infos', array('data' => '',

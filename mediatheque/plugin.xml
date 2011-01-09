@@ -69,12 +69,12 @@
 		<inclure>gestdoc_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='documents' parent='naviguer'>
-		<titre>gestdoc:documents</titre>
+		<titre>medias:documents</titre>
 		<icone>img_pack/portfolio-24.png</icone>
 		<url>portfolio</url>
 	</bouton>
 	<bouton id='documents21' parent='bando_edition'>
-		<titre>gestdoc:documents</titre>
+		<titre>medias:documents</titre>
 		<icone>images/portfolio-16.png</icone>
 		<url>portfolio</url>
 	</bouton>

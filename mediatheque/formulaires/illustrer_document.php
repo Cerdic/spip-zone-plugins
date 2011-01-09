@@ -51,7 +51,7 @@ function formulaires_illustrer_document_traiter_dist($id_document){
 		$supprimer_document = charger_fonction('supprimer_document','action');
 		if ($id_vignette)
 			$supprimer_document($id_vignette);
-		$res['message_ok'] = _T('gestdoc:vignette_supprimee');
+		$res['message_ok'] = _T('medias:vignette_supprimee');
 	}
 	else {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
@@ -66,7 +66,7 @@ function formulaires_illustrer_document_traiter_dist($id_document){
 			$id_vignette = reset($ajoute);
 			include_spip('action/editer_document');
 			document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
-			$res['message_ok'] = _T('gestdoc:document_installe_succes');
+			$res['message_ok'] = _T('medias:document_installe_succes');
 		}
 		else
 			$res['message_erreur'] = reset($ajoute);

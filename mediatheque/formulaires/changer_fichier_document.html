@@ -6,12 +6,12 @@
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<ul>
 			<li class="editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
-				<label for="fichier"><:gestdoc:label_fichier:></label>[
+				<label for="fichier"><:medias:label_fichier:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]
 				[(#ENV{fichier}) ] 
 				<p class='actions'>
-				[(#ENV{distant}|=={oui}|oui)  <input type='submit' class='submit' name='copier_local' value='<:gestdoc:bouton_copier_local|attribut_html:>' />]
+				[(#ENV{distant}|=={oui}|oui)  <input type='submit' class='submit' name='copier_local' value='<:medias:bouton_copier_local|attribut_html:>' />]
 				&#91;<a href='#' onclick='jQuery("#changer_fichier_document").toggle("fast");return false;'><:bouton_changer:></a>&#93;
 				</p>
 				<div id='changer_fichier_document' style='display:none;'>

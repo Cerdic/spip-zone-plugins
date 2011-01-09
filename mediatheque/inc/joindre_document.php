@@ -48,7 +48,7 @@ function joindre_trouver_fichier_envoye(){
 							if (is_string($err = joindre_upload_error($test['error'])))
 								return $err; // un erreur upload
 							if (!verifier_upload_autorise($test['name']))
-								return _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$test['name']));
+								return _T('medias:erreur_upload_type_interdit',array('nom'=>$test['name']));
 							$files[]=$test;
 						}
 		  		}
@@ -59,20 +59,20 @@ function joindre_trouver_fichier_envoye(){
 						if (is_string($err = joindre_upload_error($file['error'])))
 							return $err; // un erreur upload
 						if (!verifier_upload_autorise($file['name']))
-							return _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$file['name']));
+							return _T('medias:erreur_upload_type_interdit',array('nom'=>$file['name']));
 						$files[]=$file;
 					}
 		  	}
 			}
 			if (!count($files))
-				return _T('gestdoc:erreur_indiquez_un_fichier');
+				return _T('medias:erreur_indiquez_un_fichier');
 		}
 		return $files;
 	}
 	elseif (_request('joindre_distant')){
 		$path = _request('url');
 		if (!strlen($path) OR $path=='http://')
-			return _T('gestdoc:erreur_indiquez_un_fichier');
+			return _T('medias:erreur_indiquez_un_fichier');
 		include_spip('action/ajouter_documents');
 		$infos = renseigner_source_distante($path);
 		if (!is_array($infos))
@@ -88,7 +88,7 @@ function joindre_trouver_fichier_envoye(){
 	}
 	elseif (_request('joindre_ftp')){
 		$path = _request('cheminftp');
-		if (!$path || strstr($path, '..')) return _T('gestdoc:erreur_indiquez_un_fichier');
+		if (!$path || strstr($path, '..')) return _T('medias:erreur_indiquez_un_fichier');
 		
 		include_spip('inc/actions');
 		$upload = determine_upload();
@@ -242,7 +242,7 @@ function joindre_decrire_contenu_zip($zip) {
 		else
 			// pas de message pour les dossiers et fichiers caches
 			if (substr($f,-1)!=='/' AND substr(basename($f),0,1)!=='.')
-				$erreurs[] = _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$f));
+				$erreurs[] = _T('medias:erreur_upload_type_interdit',array('nom'=>$f));
 	}
 	ksort($fichiers);
 	return array($fichiers,$erreurs);

@@ -41,7 +41,7 @@ function formulaires_changer_fichier_document_traiter_dist($id_document){
 		$copier_local = charger_fonction('copier_local','action');
 		$res = array('editable'=>true);
 		if (($err=$copier_local($id_document))===true)
-			$res['message_ok'] = _T('gestdoc:document_copie_locale_succes');
+			$res['message_ok'] = _T('medias:document_copie_locale_succes');
 		else
 			$res['message_erreur'] = $err;
 	}

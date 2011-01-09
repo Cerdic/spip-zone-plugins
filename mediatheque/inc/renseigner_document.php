@@ -41,7 +41,7 @@ function renseigner_source_distante($source){
 		return $infos[$source];
 	}
 
-	return _T('gestdoc:erreur_chemin_distant',array('nom'=>$source));
+	return _T('medias:erreur_chemin_distant',array('nom'=>$source));
 }
 
 /**
@@ -62,7 +62,7 @@ function renseigner_taille_dimension_image($fichier,$ext){
 	 OR !@file_exists($fichier)
 	 OR !$infos['taille'] = @intval(filesize($fichier))) {
 		spip_log ("Echec copie du fichier $fichier");
-		return _T('gestdoc:erreur_copie_fichier',array('nom'=> $fichier));
+		return _T('medias:erreur_copie_fichier',array('nom'=> $fichier));
 	}
 
 	// VIDEOS : Prevoir traitement specifique ?

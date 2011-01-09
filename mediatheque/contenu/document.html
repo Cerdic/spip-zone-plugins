@@ -1,6 +1,6 @@
 <BOUCLE_contenu_document(DOCUMENTS){id_document}>
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>&gt; <:gestdoc:objet_documents:>&gt; [<strong class="on">(#TITRE|sinon{<:info_sans_titre:>}|couper{80})</strong>]</p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>&gt; <:medias:objet_documents:>&gt; [<strong class="on">(#TITRE|sinon{<:info_sans_titre:>}|couper{80})</strong>]</p>
 
 <div class="cartouche">
 	<h1 class="h1 #EDIT{titre}">[(#TITRE|sinon{<:info_sans_titre:>})]</h1>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="#EDIT{chapo} chapo">
-<:gestdoc:label_caracteristiques:><br />
+<:medias:label_caracteristiques:><br />
 [<span class='type'>(#TYPE_DOCUMENT) - </span>]
 <span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})] -
 				][(#TAILLE|taille_en_octets|texte_backend)]</span>

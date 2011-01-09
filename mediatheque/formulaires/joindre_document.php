@@ -98,7 +98,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 	if (_request('joindre_mediatheque')){
     $refdoc_joindre = intval(preg_replace(',^(doc|document|img),','',_request('refdoc_joindre')));
 		if (!sql_getfetsel('id_document','spip_documents','id_document='.intval($refdoc_joindre)))
-			$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_document');
+			$erreurs['message_erreur'] = _T('medias:erreur_aucun_document');
 	}
 	// sinon c'est un upload
 	else {
@@ -109,7 +109,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 		elseif(is_array($files)){
 			// erreur si on a pas trouve de fichier
 			if (!count($files))
-				$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
+				$erreurs['message_erreur'] = _T('medias:erreur_aucun_fichier');
 
 			else{
 				// regarder si on a eu une erreur sur l'upload d'un fichier
@@ -119,7 +119,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 							if (is_string($test))
 								$erreurs['message_erreur'] = $test;
 							else
-								$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
+								$erreurs['message_erreur'] = _T('medias:erreur_aucun_fichier');
 					}
 				}
 
@@ -154,7 +154,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 			document_set($refdoc_joindre,$champs);
 			set_request('refdoc_joindre',''); // vider la saisie
 			$ancre = $refdoc_joindre;
-			$res['message_ok'] = _T('gestdoc:document_attache_succes');
+			$res['message_ok'] = _T('medias:document_attache_succes');
 		}
 	}
 	// sinon c'est un upload
@@ -186,7 +186,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 			$res['message_erreur'] = implode('<br />',$messages_erreur);
 		if ($nb_docs){
 			$autoopen = "<script type='text/javascript'>setTimeout(function(){if (window.jQuery) jQuery('#doc$ancre a.editbox').get(0).focus();},30);</script>";
-			$res['message_ok'] = $nb_docs==1? _T('gestdoc:document_installe_succes').$autoopen:_T('gestdoc:nb_documents_installe_succes',array('nb'=>$nb_docs));
+			$res['message_ok'] = $nb_docs==1? _T('medias:document_installe_succes').$autoopen:_T('medias:nb_documents_installe_succes',array('nb'=>$nb_docs));
 		}
 		if ($ancre)
 			$res['redirect'] = "#doc$ancre";
@@ -289,7 +289,7 @@ function joindre_liste_erreurs_to_li($erreurs){
 	$res = implode("</li><li>",$erreurs);
 	if (strlen($res)) $res = "<li>$res</li>";
 	if (count($erreurs)>4){
-		$res = "<li><span style='cursor:pointer;' onclick='jQuery(this).siblings(\"ul\").toggle();return false;'>"._T("gestdoc:erreurs_voir",array('nb'=>count($erreurs)))."</span><ul style='display:none;'>".$res."</ul></li>";
+		$res = "<li><span style='cursor:pointer;' onclick='jQuery(this).siblings(\"ul\").toggle();return false;'>"._T("medias:erreurs_voir",array('nb'=>count($erreurs)))."</span><ul style='display:none;'>".$res."</ul></li>";
 	}
 	return $res;
 }

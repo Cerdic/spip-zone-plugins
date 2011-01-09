@@ -98,7 +98,7 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 
 	if (!$date = recup_date(_request('saisie_date').' '._request('saisie_heure').':00')
 	  OR !($date = mktime($date[3],$date[4],0,$date[1],$date[2],$date[0])))
-	  $erreurs['saisie_date'] = _T('gestdoc:format_date_incorrect');
+	  $erreurs['saisie_date'] = _T('medias:format_date_incorrect');
 	else {
 		set_request('saisie_date',date('d/m/Y',$date));
 		set_request('saisie_heure',date('H:i',$date));
@@ -128,7 +128,7 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 			$copier_local = charger_fonction('copier_local','action');
 			$res = array('editable'=>true);
 			if (($err=$copier_local($id_document))===true)
-				$res['message_ok'] = (isset($res['message_ok'])?$res['message_ok'].'<br />':'')._T('gestdoc:document_copie_locale_succes');
+				$res['message_ok'] = (isset($res['message_ok'])?$res['message_ok'].'<br />':'')._T('medias:document_copie_locale_succes');
 			else
 				$res['message_erreur'] = (isset($res['message_erreur'])?$res['message_erreur'].'<br />':'').$err;
 		}

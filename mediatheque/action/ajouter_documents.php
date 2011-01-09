@@ -68,7 +68,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	// et on aura une collision en cas de changement de file system
 	$file['name'] = strtolower(translitteration($file['name']));
 	
-	// Pouvoir definir dans mes_options.php que l'on veut titrer tous les documents par défaut
+	// Pouvoir definir dans mes_options.php que l'on veut titrer tous les documents par dï¿½faut
 	if (!defined('_TITRER_DOCUMENTS')) { define('_TITRER_DOCUMENTS', false); }
 
 	$titrer = isset($file['titrer'])?$file['titrer']:_TITRER_DOCUMENTS;
@@ -314,10 +314,10 @@ function verifier_taille_document_acceptable($infos){
 	if (!$infos['type_image']) {
 		if (_DOC_MAX_SIZE > 0
 		 AND $infos['taille'] > _DOC_MAX_SIZE*1024)
-			return _T('gestdoc:info_doc_max_poids', array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024), 'actuel' => taille_en_octets($infos['taille'])));
+			return _T('medias:info_doc_max_poids', array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024), 'actuel' => taille_en_octets($infos['taille'])));
 
 		if ($infos['mode'] == 'image')
-			return _T('gestdoc:erreur_format_fichier_image',array('nom'=> $infos['fichier']));
+			return _T('medias:erreur_format_fichier_image',array('nom'=> $infos['fichier']));
 	}
 	
 	// si c'est une image
@@ -325,7 +325,7 @@ function verifier_taille_document_acceptable($infos){
 
 		if (_IMG_MAX_SIZE > 0
 		 AND $infos['taille'] > _IMG_MAX_SIZE*1024)
-			return _T('gestdoc:info_image_max_poids', array('maxi' => taille_en_octets(_IMG_MAX_SIZE*1024), 'actuel' => taille_en_octets($infos['taille'])));
+			return _T('medias:info_image_max_poids', array('maxi' => taille_en_octets(_IMG_MAX_SIZE*1024), 'actuel' => taille_en_octets($infos['taille'])));
 	
 		if (_IMG_MAX_WIDTH * _IMG_MAX_HEIGHT
 		 AND ($infos['largeur'] > _IMG_MAX_WIDTH
@@ -347,10 +347,10 @@ function verifier_taille_document_acceptable($infos){
 	// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
 	if ($infos['mode'] == 'vignette') {
 		if ($infos['inclus'] != 'image')
-			return _T('gestdoc:erreur_format_fichier_image',array('nom'=> $infos['fichier'])); #SVG
+			return _T('medias:erreur_format_fichier_image',array('nom'=> $infos['fichier'])); #SVG
 
 		if (!($infos['largeur'] OR $infos['hauteur']))
-			return _T('gestdoc:erreur_upload_vignette',array('nom'=>$infos['fichier']));
+			return _T('medias:erreur_upload_vignette',array('nom'=>$infos['fichier']));
 	}
 
 	return true;
