@@ -10,7 +10,7 @@
 	</nom>
 	<icon>img_pack/portfolio-64.png</icon>
 	<auteur>[Cedric MORIN->http://www.yterium.net] &amp; [romy.tetue.net->http://romy.tetue.net] &amp; superyms--(traduction)</auteur>
-	<version>1.4.6</version>
+	<version>1.5.0</version>
 	<version_base>0.10</version_base>
 	<etat>stable</etat>
 	<description><multi>
@@ -78,6 +78,8 @@
 		<icone>images/portfolio-16.png</icone>
 		<url>portfolio</url>
 	</bouton>
+	<chemin dir="" />
+	<chemin dir="squelettes" />
 	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="Z" version="[1.2.1;]" />
