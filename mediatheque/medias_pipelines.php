@@ -6,7 +6,7 @@
  */
 
 
-function gestdoc_post_edition($flux){
+function medias_post_edition($flux){
 	// si on ajoute un document, mettre son statut a jour
 	if($flux['args']['operation']=='ajouter_document'){
 		include_spip('action/editer_document');
@@ -40,12 +40,12 @@ function gestdoc_post_edition($flux){
 }
 
 // liste des exec avec la colonne document
-$GLOBALS['gestdoc_exec_colonne_document'][] = 'articles_edit';
-$GLOBALS['gestdoc_exec_colonne_document'][] = 'breves_edit';
-$GLOBALS['gestdoc_exec_colonne_document'][] = 'rubriques_edit';
+$GLOBALS['medias_exec_colonne_document'][] = 'articles_edit';
+$GLOBALS['medias_exec_colonne_document'][] = 'breves_edit';
+$GLOBALS['medias_exec_colonne_document'][] = 'rubriques_edit';
 
-function gestdoc_affiche_gauche($flux){
-	if (in_array($flux['args']['exec'],$GLOBALS['gestdoc_exec_colonne_document'])
+function medias_affiche_gauche($flux){
+	if (in_array($flux['args']['exec'],$GLOBALS['medias_exec_colonne_document'])
 		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
 		AND $type = objet_type($table)
 		AND $id_table_objet = id_table_objet($type)
@@ -57,14 +57,14 @@ function gestdoc_affiche_gauche($flux){
 	return $flux;
 }
 
-function gestdoc_objets_extensibles($objets){
+function medias_objets_extensibles($objets){
 	return array_merge($objets, array('document' => _T('medias:objet_documents')));
 }
 
-function gestdoc_document_desc_actions($flux){
+function medias_document_desc_actions($flux){
 	return $flux;
 }
 
-function gestdoc_editer_document_actions($flux){
+function medias_editer_document_actions($flux){
 	return $flux;
 }

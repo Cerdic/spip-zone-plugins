@@ -22,28 +22,28 @@
 	[de]Dokumentenverwaltung mit &Uuml;bersichtsseite f&uuml;r alle Dokumente der Website und erweiterten Funktionen f&uuml;r Dokumente in Artikeln und Rubriken.
 	</multi></description>
 	<lien>http://www.spip-contrib.net/mediatheque</lien> <!-- URI de documentation -->
-	<install>base/gestdoc.php</install>
-	<fonctions>gestdoc_fonctions.php</fonctions>
-	<prefix>gestdoc</prefix>
+	<install>base/medias.php</install>
+	<fonctions>medias_fonctions.php</fonctions>
+	<prefix>medias</prefix>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/gestdoc.php</inclure>
+		<inclure>base/medias.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/gestdoc.php</inclure>
+		<inclure>base/medias.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/gestdoc.php</inclure>
+		<inclure>base/medias.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_edition</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_gauche</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
@@ -53,20 +53,20 @@
 
 	<pipeline>
 		<nom>autoriser</nom>
-		<inclure>gestdoc_autoriser.php</inclure>
+		<inclure>medias_autoriser.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>document_desc_actions</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>editer_document_actions</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='documents' parent='naviguer'>
 		<titre>medias:documents</titre>

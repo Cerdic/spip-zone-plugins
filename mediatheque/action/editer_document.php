@@ -140,9 +140,9 @@ function instituer_document($id_document,$champs=array()){
 	$statut=isset($champs['statut'])?$champs['statut']:null;
 	$date_publication = isset($champs['date_publication'])?$champs['date_publication']:null;
 	if (isset($champs['parents']))
-		gestdoc_revision_document_parents($id_document,$champs['parents']);
+		medias_revision_document_parents($id_document,$champs['parents']);
 	if (isset($champs['ajout_parents']))
-		gestdoc_revision_document_parents($id_document,$champs['ajout_parents'],true);
+		medias_revision_document_parents($id_document,$champs['ajout_parents'],true);
 	
 	$row = sql_fetsel("statut,date_publication", "spip_documents", "id_document=$id_document");
 	$statut_ancien = $row['statut'];
@@ -200,7 +200,7 @@ function instituer_document($id_document,$champs=array()){
  * @param unknown_type $id_document
  * @param unknown_type $parents
  */
-function gestdoc_revision_document_parents($id_document, $parents=null, $ajout=false){
+function medias_revision_document_parents($id_document, $parents=null, $ajout=false){
 	if (!is_array($parents))
 		return;
 	

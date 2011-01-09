@@ -99,7 +99,7 @@
 			<strong>#ID_DOCUMENT</strong>
 		</td>
 		<td class='statut'>
-		[(#ID_DOCUMENT|gestdoc_puce_statut_document{#STATUT})]
+		[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
 		</td>
 		<td class="logo">
 		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}

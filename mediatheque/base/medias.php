@@ -5,12 +5,12 @@
  *
  */
 
-function gestdoc_declarer_tables_interfaces($interface){
+function medias_declarer_tables_interfaces($interface){
 	$interface['exceptions_des_tables']['documents']['media']=array('types_documents', 'media');
 	return $interface;
 }
 
-function gestdoc_declarer_tables_principales($tables_principales){
+function medias_declarer_tables_principales($tables_principales){
 	
 	$tables_principales['spip_documents']['field']['fichier'] = "text NOT NULL DEFAULT ''";
 	$tables_principales['spip_types_documents']['field']['media'] = "varchar(10) DEFAULT 'file' NOT NULL";
@@ -21,20 +21,20 @@ function gestdoc_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-function gestdoc_declarer_tables_auxiliaires($tables_auxiliaires){
+function medias_declarer_tables_auxiliaires($tables_auxiliaires){
 
 
 	return $tables_auxiliaires;
 }
 
-function gestdoc_upgrade($nom_meta_base_version,$version_cible){
+function medias_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		if (version_compare($current_version,'0.2','<')){
 			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
-			gestdoc_check_type_media();
+			medias_check_type_media();
 			sql_alter("TABLE spip_documents ADD statut varchar(10) DEFAULT '0' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
@@ -70,7 +70,7 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 		if (version_compare($current_version,'0.6','<')){
 			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
-			gestdoc_check_type_media();
+			medias_check_type_media();
 			ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
 		}
 		if (version_compare($current_version,'0.7','<')){
@@ -92,11 +92,11 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version,$current_version="0.10",'non');
 		}
 	}
-	gestdoc_check_statuts();
-	gestdoc_check_type_media();
+	medias_check_statuts();
+	medias_check_type_media();
 }
 
-function gestdoc_check_type_media(){
+function medias_check_type_media(){
 	include_spip('base/abstract_sql');
 	// mettre a jour les bonnes valeurs
 	// les cas evidents
@@ -108,7 +108,7 @@ function gestdoc_check_type_media(){
 	sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
 	sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
 }
-function gestdoc_check_statuts(){
+function medias_check_statuts(){
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table('documents');
 	if (!isset($desc['field']['statut']))
@@ -123,20 +123,20 @@ function gestdoc_check_statuts(){
 	}
 }
 
-function gestdoc_install($action,$prefix,$version_cible){
+function medias_install($action,$prefix,$version_cible){
 	$version_base = $GLOBALS[$prefix."_base_version"];
 	switch ($action){
 		case 'test':
-			gestdoc_check_statuts();
-			gestdoc_check_type_media();
+			medias_check_statuts();
+			medias_check_type_media();
 			return (isset($GLOBALS['meta'][$prefix."_base_version"])
 				AND version_compare($GLOBALS['meta'][$prefix."_base_version"],$version_cible,">="));
 			break;
 		case 'install':
-			gestdoc_upgrade('gestdoc_base_version',$version_cible);
+			medias_upgrade('medias_base_version',$version_cible);
 			break;
 		case 'uninstall':
-			//gestdoc_vider_tables();
+			//medias_vider_tables();
 			break;
 	}
 }

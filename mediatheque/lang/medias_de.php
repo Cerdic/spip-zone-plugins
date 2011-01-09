@@ -1,5 +1,5 @@
 <?php
-// gestdoc_de.php
+// medias_de.php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image_document' => 'Durch ein Dokument oder Bild ersetzen',
 	'bouton_supprimer' => 'L&ouml;schen',	
 	'bouton_supprimer_tous_orphelins' => 'L&ouml;schen alle dokument ungenutzt',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Wollen Sie wirklich bis @nb@ unbenutzte löschen ?',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Wollen Sie wirklich bis @nb@ unbenutzte lï¿½schen ?',
 	'bouton_upload' => '&Uuml;bertragen',
 	
 	// D

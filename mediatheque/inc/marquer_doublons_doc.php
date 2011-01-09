@@ -8,13 +8,13 @@
 
 // On liste tous les champs susceptibles de contenir des documents ou images si on veut que ces derniers soient lies a l objet lorsqu on y fait reference par imgXX docXX ou embXX
 // la dist ne regarde que chapo et texte, on laisse comme ca, mais ca permet d etendre a descriptif ou toto depuis d autre plugin comme agenda ou grappe
-$GLOBALS['gestdoc_liste_champs'][] = 'texte';
-$GLOBALS['gestdoc_liste_champs'][] = 'chapo';
+$GLOBALS['medias_liste_champs'][] = 'texte';
+$GLOBALS['medias_liste_champs'][] = 'chapo';
  
 // http://doc.spip.org/@marquer_doublons_documents
 function inc_marquer_doublons_doc_dist($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
 	$champs_selection=array();
-		foreach ($GLOBALS['gestdoc_liste_champs'] as $champs_choisis) {
+		foreach ($GLOBALS['medias_liste_champs'] as $champs_choisis) {
 			if ( isset($champs[$champs_choisis]) )
 			array_push($champs_selection,$champs_choisis);
 		}

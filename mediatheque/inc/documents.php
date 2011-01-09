@@ -319,8 +319,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 // http://doc.spip.org/@afficher_documents_colonne
 // TO BE DELETED
 function afficher_documents_colonne($id, $type="article",$script=NULL) {
-	if (!is_array($GLOBALS['gestdoc_exec_colonne_document']) OR !in_array(_request('exec'),$GLOBALS['gestdoc_exec_colonne_document']))
-		$GLOBALS['gestdoc_exec_colonne_document'][] = _request('exec');
+	if (!is_array($GLOBALS['medias_exec_colonne_document']) OR !in_array(_request('exec'),$GLOBALS['medias_exec_colonne_document']))
+		$GLOBALS['medias_exec_colonne_document'][] = _request('exec');
 	return "";
 	include_spip('inc/autoriser');
 

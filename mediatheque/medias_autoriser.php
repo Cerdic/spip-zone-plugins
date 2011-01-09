@@ -6,7 +6,7 @@
  */
 
 /* Pour que le pipeline de rale pas ! */
-function gestdoc_autoriser(){}
+function medias_autoriser(){}
 
 
 function autoriser_portfolio_administrer_dist($faire,$quoi,$id,$qui,$options) {

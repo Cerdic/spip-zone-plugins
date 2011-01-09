@@ -15,7 +15,7 @@
  * @param unknown_type $ajax
  * @return unknown
  */
-function gestdoc_puce_statut_document($id_document, $statut){
+function medias_puce_statut_document($id_document, $statut){
 	if ($statut=='publie') {
 		$puce='puce-verte.gif';
 	}

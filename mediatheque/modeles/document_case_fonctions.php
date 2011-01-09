@@ -9,7 +9,7 @@
 define('_BOUTON_MODE_IMAGE', true);
 
 include_spip('inc/documents'); // pour la fonction affiche_raccourci_doc
-function gestdoc_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,$hauteur,$mode,$vu){
+function medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,$hauteur,$mode,$vu){
 	$raccourci = '';
 	$doc = 'doc';
 
