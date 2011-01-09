@@ -8,12 +8,7 @@ function noizetier_autoriser(){}
 
 
 function autoriser_noizetier_configurer_dist($faire, $type, $id, $qui, $opt) {
-	$config = unserialize($GLOBALS['meta']['noizetier']);
-	return
-		$qui['webmestre']=='oui'
-		AND $qui['statut'] == '0minirezo'
-		AND !$qui['restreint']
-		;
+	return autoriser('webmestre');
 }
 
 function autoriser_noizetier_bouton_dist($faire, $type, $id, $qui, $opt) {
