@@ -79,7 +79,8 @@ function exec_spiplistes_config () {
 			, 'spiplistes_charset_envoi'
 			);
 		$keys_str_param_valider = array(
-			'email_return_path_defaut' // adresse mail de retour pour les erreurs
+			  'email_reply_to' // adresse mail de retour 
+			, 'email_return_path_defaut' // adresse mail de retour pour les erreurs
 		);
 		$keys_opts_param_valider = array(
 			'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
@@ -209,8 +210,17 @@ function exec_spiplistes_config () {
 			? $GLOBALS['meta']['email_defaut']
 			: $GLOBALS['meta']['email_webmaster']
 			;
+		//
+		// Adresse mail pour les retours (Reply-to:)
+		// @see: http://www.w3.org/Protocols/rfc822/
+		$email_reply_to =
+			($ii = email_valide($email_reply_to))
+			? $ii
+			: $adresse_defaut
+			;
 		// Adresse mail pour les retours en erreur (Return-path:)
 		// @see: http://www.w3.org/Protocols/rfc822/
+		// Plus ou moins obsolete
 		$email_return_path_defaut =
 			($ii = email_valide($email_return_path_defaut))
 			? $ii
@@ -366,6 +376,18 @@ function exec_spiplistes_config () {
 		. fin_cadre_trait_couleur(true)
 		;
 
+
+	function spiplistes_cadre_input_text($titre, $name, $value, $size=30, $class='forml')
+	{
+		static $eol = PHP_EOL;
+		
+		$str = debut_cadre_relief('', true, '', $titre)
+		. '<input type="text" name="'.$name.'" value="'.$value.'" size="'.$size.'" class="'.$class.'" />' . $eol
+		. fin_cadre_relief(true);
+		
+		return($str);
+	}
+	
 	//////////////////////////////////////////////////////
 	// Boite parametrage envoi du courrier
 	$page_result .= ''
@@ -373,24 +395,24 @@ function exec_spiplistes_config () {
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// adresse email de retour (reply-to)
-		. debut_cadre_relief('', true, '', _T('spiplistes:adresse_envoi_defaut'))
-		. "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' class='forml' />" . $eol
-		. fin_cadre_relief(true)
+		. spiplistes_cadre_input_text(_T('spiplistes:adresse_envoi_defaut')
+									  , 'email_defaut' , $adresse_defaut
+			)
 		//
 		// adresse email du smtp sender
-		. debut_cadre_relief('', true, '', _T('spiplistes:adresse_smtp'))
-		. "<input type='text' name='smtp_sender' value='".$smtp_sender."' size='30' class='forml' />" . $eol
-		. fin_cadre_relief(true)
+		. spiplistes_cadre_input_text(_T('spiplistes:adresse_smtp')
+									  , 'smtp_sender' , $smtp_sender
+			)
 		//
 		// adresse de retour (reply-to)
-		. debut_cadre_relief('', true, '', _T('spiplistes:adresse_email_reply_to'))
-		. "<input type='text' name='email_return_path_defaut' value='".$email_reply_to."' size='30' class='forml' />" . $eol
-		. fin_cadre_relief(true)
+		. spiplistes_cadre_input_text(_T('spiplistes:adresse_email_reply_to')
+									  , 'email_reply_to' , $email_reply_to
+			)
 		//
 		// adresse return-path de retour (on-error reply-to)
-		. debut_cadre_relief('', true, '', _T('spiplistes:adresse_on_error_defaut'))
-		. "<input type='text' name='email_return_path_defaut' value='".$email_return_path_defaut."' size='30' class='forml' />" . $eol
-		. fin_cadre_relief(true)
+		. spiplistes_cadre_input_text(_T('spiplistes:adresse_on_error_defaut')
+									  , 'email_return_path_defaut' , $email_return_path_defaut
+			)
 		//
 		// Méthode d'envoi 
 		. debut_cadre_relief('', true, '', _T('spiplistes:methode_envoi'))
@@ -596,4 +618,3 @@ function spiplistes_array_values_in_keys($array) {
 
 
 
-?>

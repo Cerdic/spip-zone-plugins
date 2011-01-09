@@ -127,7 +127,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	<p class="verdana2">Pour valider les diff&#233;rentes options de SPIP-Listes, rendez-vous <a href="@url_config@">sur 
 	la page de configuration</a>.</p>'
 , 'adresse_envoi_defaut' => 'Adresse d&#8217;envoi par d&#233;faut'
-, 'adresse_on_error_defaut' => 'Adresse de retour par d&#233;faut pour les erreurs'
+, 'adresse_email_reply_to' => 'Adresse de retour (reply-to)'
+, 'adresse_on_error_defaut' => 'Adresse de retour par d&#233;faut pour les erreurs (return-path)'
 , 'pas_sur' => '<p>Si vous n&#8217;&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.</p>'
 , 'Complement_des_courriers' => 'Compl&#233;ment des courriers'
 , 'Complement_lien_en_tete' => 'Lien sur le courrier'
