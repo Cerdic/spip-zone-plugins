@@ -135,4 +135,3 @@ if (function_exists('spiplistes_spip_est_inferieur_193') AND spiplistes_spip_est
 	}
 }
 
-?>

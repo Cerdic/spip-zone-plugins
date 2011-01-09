@@ -50,6 +50,14 @@ function exec_spiplistes_config () {
 
 	if($flag_editable)
 	{
+
+		// Parametrages des envois
+		$adresse_defaut =
+			(email_valide($GLOBALS['meta']['email_defaut']))
+			? $GLOBALS['meta']['email_defaut']
+			: $GLOBALS['meta']['email_webmaster']
+			;
+
 		$keys_complement_courrier = array(
 			'opt_personnaliser_courrier'
 			, 'opt_lien_en_tete_courrier', 'lien_patron'
@@ -126,13 +134,14 @@ function exec_spiplistes_config () {
 		}
 	
 		if($btn_formabo_valider) {
-			foreach($keys_opt_formabo as $key) {spiplistes_log("$key ".$$key);
+			foreach($keys_opt_formabo as $key) {
+				//spiplistes_log("$key ".$$key);
 				spiplistes_ecrire_key_in_serialized_meta(
 					$key
 					, ($$key = (!empty($$key) ? $$key : 'non'))
 					, _SPIPLISTES_META_PREFERENCES
 					);
-				$str_log .= $key." = ".$$key.", ";
+				$str_log .= $key.' = '.$$key.', ';
 			}
 			$doit_ecrire_metas = true;
 		}
@@ -144,24 +153,36 @@ function exec_spiplistes_config () {
 					, ($$key = (!empty($$key) ? $$key : 'non'))
 					, _SPIPLISTES_META_PREFERENCES
 					);
-				$str_log .= $key." = ".$$key.", ";
+				$str_log .= $key.' = '.$$key.', ';
 			}
 			$doit_ecrire_metas = true;
 		}
 		
 		if($btn_param_valider) {
-			foreach($keys_param_valider as $key) {
+			foreach($keys_param_valider as $key)
+			{
 				if(($key != 'email_defaut') || email_valide($email_defaut)) {
-					$str_log .= $key." = " 
-						. (($key == 'smtp_pass') ? str_repeat("*", strlen($$key)) : $$key)
-						. ", ";
+					$str_log .= $key.' = ' 
+						. (($key == 'smtp_pass') ? str_repeat('*', strlen($$key)) : $$key)
+						. ', ';
 					ecrire_meta($key, trim($$key));
 				}
 			}
 			foreach($keys_str_param_valider as $key) {
-				$$key = (!empty($$key)) ? $$key : '';
+				
+				if(
+				   ($key == 'email_reply_to')
+					|| ($key == 'email_return_path_defaut')
+				  ) {
+					$$key = 
+						($ii = email_valide($$key))
+						? $ii
+						: $adresse_defaut
+						;
+				}
+				
 				spiplistes_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
-				$str_log .= $key." = ".$$key.", ";
+				$str_log .= $key.' = '.$$key.', ';
 			}
 			foreach($keys_opts_param_valider as $key) {
 				$$key = (!empty($$key)) ? $$key : 'non';
@@ -204,28 +225,16 @@ function exec_spiplistes_config () {
 			spiplistes_log("CONFIGURE id_auteur #$connect_id_auteur : ".$str_log);
 		}
 	
-		// Paramétrages des envois
-		$adresse_defaut =
-			(email_valide($GLOBALS['meta']['email_defaut']))
-			? $GLOBALS['meta']['email_defaut']
-			: $GLOBALS['meta']['email_webmaster']
-			;
 		//
 		// Adresse mail pour les retours (Reply-to:)
 		// @see: http://www.w3.org/Protocols/rfc822/
-		$email_reply_to =
-			($ii = email_valide($email_reply_to))
-			? $ii
-			: $adresse_defaut
-			;
+		$email_reply_to = spiplistes_pref_lire('email_reply_to');
+		
 		// Adresse mail pour les retours en erreur (Return-path:)
 		// @see: http://www.w3.org/Protocols/rfc822/
-		// Plus ou moins obsolete
-		$email_return_path_defaut =
-			($ii = email_valide($email_return_path_defaut))
-			? $ii
-			: $adresse_defaut
-			;
+		// Plus ou moins obsolete, ou non respecte'
+		$email_return_path_defaut = spiplistes_pref_lire('email_return_path_defaut');
+
 		$smtp_identification = (isset($GLOBALS['meta']['smtp_identification']) && ($GLOBALS['meta']['smtp_identification']=='oui')) ? "oui" : "non";
 		$mailer_smtp = (isset($GLOBALS['meta']['mailer_smtp']) && ($GLOBALS['meta']['mailer_smtp']=='oui')) ? "oui" : "non";
 		$smtp_port = (isset($GLOBALS['meta']['smtp_port']) && (!empty($GLOBALS['meta']['smtp_port']))) ? $GLOBALS['meta']['smtp_port'] : "25";
