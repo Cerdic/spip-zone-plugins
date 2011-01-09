@@ -109,5 +109,14 @@
 		<img src="#CHEMIN{opml.png}" alt="" style="border:0;" /> opml
 	</a>
 </small>
+
+[(#PLUGIN{boussole}|oui)
+[<h1>(#VAL{spip}|boussole_traduire{nom_boussole})</h1>]
+[(#MODELE{boussole_liste_simple, 
+	boussole=spip, 
+	titre_boussole=non})]
+]
+
 [(#INCLURE{fond=sedna_galaxie})]
+
 #MENU_LANG
