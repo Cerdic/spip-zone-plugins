@@ -276,17 +276,19 @@ function exec_spiplistes_config () {
 	//////////////////////////////////////////////////////
 	// Boite Mode d'inscription des visiteurs
 	$checked1 = $checked2 = '';
+	
 	($GLOBALS['meta']['abonnement_config'] == 'simple') ? $checked1 = "checked='checked'"  : $checked2 = "checked='checked'" ;
+	
 	$page_result .= ''
 		. debut_cadre_trait_couleur("redacteurs-24.gif", true, '', _T('spiplistes:mode_inscription'))
 		. '<form action="' . generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE) . '" method="post">' . $eol
 		. "<p class='verdana2'>" . $eol
 		. "<input type='radio' name='abonnement_config' value='simple' $checked1 id='statut_simple' />" . $eol
-		. "<label for='statut_simple'>"._T('spiplistes:abonnement_simple')."</label>" . $eol
+		. "<label for='statut_simple'>"._T('spiplistes:abonnement_simple').'</label>' . $eol
 		. "</p>" . $eol
 		. "<p class='verdana2'>" . $eol
 		. "<input type='radio' name='abonnement_config' value='membre' $checked2 id='statut_membre' />" . $eol
-		. "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces')."</label>" . $eol
+		. "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces').'</label>' . $eol
 		. "</p>" . $eol
 		// bouton de validation
 		. "<div style='text-align:right;'><input type='submit' name='abonnement_valider' class='fondo' value='"._T('bouton_valider')."' /></div>" . $eol
@@ -302,7 +304,7 @@ function exec_spiplistes_config () {
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>" . $eol
 		. "<p class='verdana2'>" . $eol
 		. "<input type='checkbox' name='opt_plier_deplier_formabo' value='oui' $checked1 id='plier_deplier' />" . $eol
-		. "<label for='plier_deplier'>"._T('spiplistes:formulaire_abonnement_effet')."</label>" . $eol
+		. "<label for='plier_deplier'>"._T('spiplistes:formulaire_abonnement_effet').'</label>' . $eol
 		. "</p>" . $eol
 		// bouton de validation
 		. "<div style='text-align:right;'><input type='submit' name='btn_formabo_valider' class='fondo' value='"._T('bouton_valider')."' /></div>" . $eol
@@ -317,7 +319,8 @@ function exec_spiplistes_config () {
 	$lien_patron = spiplistes_pref_lire('lien_patron');
 	$opt_ajout_tampon_editeur = (spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui');
 	$tampon_patron = spiplistes_pref_lire('tampon_patron');
-	foreach($_tampon_cles as $key) {
+	foreach($_tampon_cles as $key)
+	{
 		$$key = spiplistes_pref_lire($key);
 	}
 	$page_result .= ''
@@ -331,8 +334,8 @@ function exec_spiplistes_config () {
 		. "<label class='verdana2'>"
    	. "<input type='checkbox' name='opt_personnaliser_courrier' value='oui' "
 			. (($opt_personnaliser_courrier == 'oui') ? "checked='checked'" : '')
-			. " />" . $eol
-   	. _T('spiplistes:personnaliser_le_courrier_label')."</label>" . $eol
+			. ' />' . $eol
+   	. _T('spiplistes:personnaliser_le_courrier_label').'</label>' . $eol
 		. fin_cadre_relief(true)
 		//
 		// ajout du renvoi de tete, lien courrier
@@ -341,13 +344,14 @@ function exec_spiplistes_config () {
    	. "<input type='checkbox' name='opt_lien_en_tete_courrier' value='oui' id='opt-lien-en-tete-courrier' "
 			. (($opt_lien_en_tete_courrier) ? "checked='checked'" : '')
 			. " />" . $eol
-   	. "<label class='verdana2' for='opt-lien-en-tete-courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete')."</label>" . $eol
+   	. "<label class='verdana2' for='opt-lien-en-tete-courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete').'</label>' . $eol
 		//
-		// lien courrier: boite de sélection
+		// lien courrier: boite de selection
 		. "<div id='div-lien-en-tete-courrier' style='".(!$opt_lien_en_tete_courrier ? "display:none;" : '')."margin-top:1em;'>"
-   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:Patron_du_lien').":" . $eol
+   	. '<label class="verdana2" style="padding-left:2ex;">'
+		. _T('spiplistes:Patron_du_lien').'.' . $eol
 		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_TETE_DIR, "lien_patron", 1)
-		. "</label>" . $eol
+		. '</label>' . $eol
 		. "</div>" . $eol // fin bloc div-lien-en-tete-courrier
 		. fin_cadre_relief(true)
 		//
@@ -357,14 +361,14 @@ function exec_spiplistes_config () {
    	. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt-ajout-tampon-editeur' "
 			. ($opt_ajout_tampon_editeur ? "checked='checked'" : '')
 			. " />" . $eol
-   	. "<label class='verdana2' for='opt-ajout-tampon-editeur'>"._T('spiplistes:Complement_tampon_editeur_label')."</label>" . $eol
+   	. "<label class='verdana2' for='opt-ajout-tampon-editeur'>"._T('spiplistes:Complement_tampon_editeur_label').'</label>' . $eol
 		//
 		// coordonnées editeur: bloc coordonnes_editeur
 		. "<div id='div-ajout-tampon-editeur' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : '')."margin-top:1em;'>"
 		// tampon sélecteur
-   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:Patron_du_tampon').":" . $eol
+   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:Patron_du_tampon').'.' . $eol
 		. spiplistes_boite_selection_patrons($tampon_patron, true, _SPIPLISTES_PATRONS_TAMPON_DIR, "tampon_patron", 1)
-		. "</label>"
+		. '</label>'
 		. "<ul class='verdana2' style='list-style:none;padding-left:2ex;'>" . $eol
 		;
 		foreach($_tampon_cles as $key) {

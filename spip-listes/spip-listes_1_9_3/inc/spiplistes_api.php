@@ -1170,7 +1170,7 @@ function spiplistes_auteurs_auteur_valider ($id_auteur, $as_redact = false) {
 
 //CP-20080511
 // CP-20090111: utiliser l'api pour pouvoir envoyer par smtp si besoin
-function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $headers = "", $format = 'texte') {
+function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $headers = '', $format = 'texte') {
 	
 	static $opt_simuler_envoi;
 
