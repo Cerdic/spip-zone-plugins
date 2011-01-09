@@ -644,9 +644,11 @@ add_variables( array(
 	'defaut' => 16,
 ), array(
 	'nom' => 'i_couleur',
+	'format' => _format_CHAINE,
 	'defaut' => "'black'",
 ), array(
 	'nom' => 'i_police',
+	'format' => _format_CHAINE,
 	'defaut' => "'dustismo.ttf'",
 ));
 add_outil( array(
