@@ -55,6 +55,12 @@ function action_geoportail_config_dist()
  			ecrire_metas();
  		}
  		
+ 		// Modif des objets a georef
+ 		if (isset($_POST['sysref']))
+ 		{	ecrire_meta('geoportail_sysref',$_POST['syscode']);
+ 			ecrire_metas();
+ 		}
+ 		
  		// RGC
  		if (isset($_POST['geoportail_norgc']))
  		{	spip_query_db ("TRUNCATE TABLE spip_georgc");

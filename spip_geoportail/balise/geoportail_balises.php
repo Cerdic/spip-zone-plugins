@@ -38,6 +38,20 @@ function balise_MAPKEY($p)
 	return $p;
 }
 
+/** Affichage du systeme pour la saisie des coordonnees */
+// Cle geoportail
+function geoportail_syscoord()
+{	return $GLOBALS['meta']['geoportail_sysref'];
+}
+
+// La Cle
+function balise_SYSCOORD($p)
+{	// Code...
+	$p->code = "geoportail_syscoord()";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 /** Affichage du RGC utilise */
 function geoportail_rgc($p=null)
 {	if ($p=="par") 

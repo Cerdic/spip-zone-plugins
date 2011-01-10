@@ -55,6 +55,8 @@ if ("#ID_OBJET"!="0") {
 <script language=javascript>
 // Gestion du formulaire
 var carte_formulaire = null;
+var carte_formulaire_transfo = null;
+
 function initSpipMapFormulaire (map, id, OpenLayers)
 {	carte_formulaire = map;
 	jQuery('#id_zone').val(map.territory);
@@ -62,6 +64,13 @@ function initSpipMapFormulaire (map, id, OpenLayers)
 	// Gestion des controles x,y => affichage sur la carte
 	$("#lon").change( function () { geoportail_formulaire_centrer(Number($('#lon').val()), Number($('#lat').val()));} );
 	$("#lat").change( function () { geoportail_formulaire_centrer(Number($('#lon').val()), Number($('#lat').val()));} );
+	
+	// Pour transformation dans le systeme de saisie
+	[carte_formulaire_transfo =
+	{	'proj1' : new OpenLayers.Projection('IGNF:RGF93G'),
+		'proj2' : new OpenLayers.Projection('(#SYSCOORD)'),
+		'point' : OpenLayers.Geometry.Point
+	}]
 	
 	// Layer de localisation pour accueillir des info
 	map.formulaire = new OpenLayers.Layer.Vector.Locator
@@ -87,8 +96,20 @@ function geoportail_formulaire_geocode()
 
 // Placer au centre
 function geoportail_formulaire_centrer(x, y, zoom)
-{	if (carte_formulaire)
-	{	// Afficher le point
+{	x = Number(x);
+	y = Number(y);
+	if (carte_formulaire)
+	{	// Coordonnee non geodesique => tente une transfo...
+		if (carte_formulaire_transfo && (x>180 || y>90)) 
+		{	if (x>180 && y>90) 
+			{	var pt = new carte_formulaire_transfo['point'](x,y);
+				pt.transform (carte_formulaire_transfo['proj2'], carte_formulaire_transfo['proj1']);
+				geoportail_formulaire_lon_lat (pt.x,pt.y);
+			}
+			return;
+		}
+
+		// Afficher le point
 		if (!carte_formulaire.formulaire.locate(x,y)) 
 		{	alert ("Hors zone !");
 			return;

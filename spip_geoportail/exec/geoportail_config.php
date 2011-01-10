@@ -38,6 +38,7 @@ function exec_geoportail_config()
  		$gbreve = ($GLOBALS['meta']['geoportail_geobreve'])?"CHECKED":"";
  		$gsyndic = ($GLOBALS['meta']['geoportail_geosyndic'])?"CHECKED":"";
 		$gservice = ($GLOBALS['meta']['geoportail_service'])?"CHECKED":"";
+ 		$geoportail_sysref = $GLOBALS['meta']['geoportail_sysref'];
 
 		/* Cle Geoportail */
 		$form = debut_cadre_trait_couleur("redacteurs-24.gif", true, "", _T('geoportail:cle'))
@@ -85,6 +86,19 @@ function exec_geoportail_config()
 
 			.fin_cadre_trait_couleur(true);
 		
+		/* Systeme de reference */
+		$form .= debut_cadre_trait_couleur("site-24.gif", true, "", _T('geoportail:geoportail_sysref'))
+			.debut_cadre_relief("",true)
+			. _T('geoportail:geoportail_sysinfo')
+			.fin_cadre_relief(true);
+		$code = explode(',',_T('geoportail:system_code'));
+		$name = explode(',',_T('geoportail:system_name'));
+		$form .= _T('geoportail:geoportail_sysref')." : <select name='syscode' class='fondl'>";
+		for ($i=0; $i<sizeof($code); $i++) $form .= "<option value='".$code[$i].($code[$i]==$geoportail_sysref?"' selected>":"'>").$name[$i]."</option>";
+		$form .= "</select>";
+		$form .= "<input type='submit' name='sysref' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+			.fin_cadre_relief(true);
+
 		/* RGC */
     // Pas de RGC installe
     $row = spip_fetch_array(spip_query("SELECT * FROM spip_georgc LIMIT 0,1"));

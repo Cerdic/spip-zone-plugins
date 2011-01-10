@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'geoportail_objet'	=> 'Types d\'objets &agrave; g&eacute;or&eacute;f&eacute;rencer',
 'geoobjet_info'		=> 'S&eacute;lectionner les objets pour lesquels vous voulez g&eacute;rer un g&eacute;or&eacute;f&eacute;rencement. <br/><i>En v.2, SPIP peut r&eacute;cup&eacute;rer automatiquement la position des fichers g&eacute;otagg&eacute;, les GPX et les KML.</i>',
 'info_documents_auto'	=> 'Extraire depuis le fichier',
+'geoportail_sysref'	=> 'Systh&egrave;me de saisie',
+'geoportail_sysinfo'=> 'Vous pouvez choisir un systh&egrave;me de coordonn&eacute;es pour la saisie dans les formulaires.<br/>Dans ce cas, vous devrez entrer les deux coordon&eacute;es dans le systh&egrave;me choisi, elles seront transform&eacute;es &agrave; la vol&eacute;e en g&eacute;ographique avant d\'&ecirc;tre envoy&eacute;es au formulaire.<br/>Vous pourrez n&eacute;anmoins continuer &agrave; saisir en g&eacute;od&eacute;sique.',
+'system_code'		=> ',IGNF:LAMBE,IGNF:LAMB93',
+'system_name'		=> 'vide,Lambert 2e,Lambert 93',
 
 'rgc'			=> 'R&eacute;pertoire G&eacute;ographique des Communes',
 'rgc_info'		=> 'Vous pouvez utiliser un r&eacute;pertoire de communes pour associer le num&eacute;ro de d&eacute;partement et de commune aux positions de vos objets.<br/>Vous devez d&eacute;poser les fichiers des r&eacute;pertoires de communes dans le dossier /rgc du plugin.',
