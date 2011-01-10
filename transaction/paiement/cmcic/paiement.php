@@ -15,8 +15,6 @@
  *****************************************************************************/
 
 
-//include_once(realpath(dirname(__FILE__)) . "/../../../classes/Navigation.class.php");
-//include_once(realpath(dirname(__FILE__)) . "/../../../classes/Variable.class.php");
 // TPE Settings
 // Warning !! CMCIC_Config contains the key, you have to protect this file with all the mechanism available in your development environment.
 // You may for instance put this file in another directory and/or change its name. If so, don't forget to adapt the include path below.
@@ -45,11 +43,6 @@ $sReference = $_SESSION['ref'];
 // Amount : format  "xxxxx.yy" (no spaces)
 $total = 0;
 
-/*
-$total = $_SESSION['navig']->panier->total(1,$_SESSION['navig']->commande->remise) + $_SESSION['navig']->commande->port;
-
-if($total<$_SESSION['navig']->commande->port)
-	$total = $_SESSION['navig']->commande->port;*/
 	
 $total = $_SESSION['total'];
 
@@ -68,7 +61,7 @@ $sDate = date("d/m/Y:H:i:s");
 $sLangue = "FR";
 
 // customer email
-$sEmail = $_SESSION["navig"]->client->email;
+$sEmail = '';//$_SESSION["navig"]->client->email;
 
 // ----------------------------------------------------------------------------
 

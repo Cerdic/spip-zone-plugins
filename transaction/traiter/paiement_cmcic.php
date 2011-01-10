@@ -4,7 +4,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function traiter_paiement_cmcic_dist($args, $retours){
-	
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
@@ -59,6 +58,12 @@ function traiter_paiement_cmcic_dist($args, $retours){
 		$retours['editable'] = false;
 		$retours['message_ok'] .=  "<span class='transaction_ok cmcic'>"._T('transaction:traiter_message_cmcic')."</span>";
 	}
+	
+//debut enregistrement
+
+
+
+//fin enregistrement
 	
 	return $retours;
 }

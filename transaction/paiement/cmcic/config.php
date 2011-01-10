@@ -20,11 +20,11 @@ define ("CMCIC_CODESOCIETE", "codesociete");
 define ("CMCIC_VERSION", "3.0");
 
 //url de retour ok
-define ("CMCIC_URLOK", "http://urlthelia/merci.php");
+define ("CMCIC_URLOK", "http://urlsite/?page=transaction_merci");
 
 
 //url de retour ko
-define ("CMCIC_URLKO", "http://urlthelia/regret.php");
+define ("CMCIC_URLKO", "http://urlsite/?transaction_regret");
 
 
 ?>
