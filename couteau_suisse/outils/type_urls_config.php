@@ -11,6 +11,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 # Fichier de configuration pris en compte par config_outils.php et specialement dedie a la configuration des URLs
 # ---------------------------------------------------------------------------------------------------------------
 
+# TODO : implementer les constantes _url_propres_sep_id, _URLS_ARBO_MIN, etc. !!
+
 function outils_type_urls_config_dist() {
 
 // Ajout de l'outil 'type_urls'
@@ -19,12 +21,12 @@ add_outil(array(
 	'code:spip_options' => "%%radio_type_urls3%%%%spip_script%%
 switch(\$GLOBALS['type_urls']) {
 	case 'page':%%terminaison_urls_page%%%%separateur_urls_page%%break;
-	case 'propres':%%debut_urls_propres%%%%terminaison_urls_propres%%%%marqueurs_urls_propres%%break;
-	case 'propres2':%%debut_urls_propres2%%%%marqueurs_urls_propres2%%break;
-	case 'libres':%%debut_urls_libres%%%%terminaison_urls_libres%%break;
-	case 'arbo':%%url_arbo_minuscules%%%%url_arbo_sep_id%%%%terminaison_urls_arbo%%%%urls_arbo_sans_type%%break;
-	case 'propres_qs':%%terminaison_urls_propres_qs%%%%marqueurs_urls_propres_qs%%break;
-	case 'propres-qs':%%terminaison_urls_propres_qs%%break;
+	case 'propres':%%url_max_propres%%%%debut_urls_propres%%%%terminaison_urls_propres%%%%marqueurs_urls_propres%%break;
+	case 'propres2':%%url_max_propres2%%%%debut_urls_propres2%%%%marqueurs_urls_propres2%%break;
+	case 'libres':%%url_max_libres%%%%debut_urls_libres%%%%terminaison_urls_libres%%break;
+	case 'arbo':%%url_max_arbo%%%%url_arbo_minuscules%%%%url_arbo_sep_id%%%%terminaison_urls_arbo%%%%urls_arbo_sans_type%%break;
+	case 'propres_qs':%%url_max_propres_qs%%%%terminaison_urls_propres_qs%%%%marqueurs_urls_propres_qs%%break;
+	case 'propres-qs':%%url_max_propres_qs%%%%terminaison_urls_propres_qs%%break;
 }",
 	'categorie' => 'admin',
 	// TODO : Dependance du plugin "Urls Etendues" sous SPIP 2.1
