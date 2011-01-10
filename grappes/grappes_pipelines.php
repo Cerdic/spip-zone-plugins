@@ -91,8 +91,8 @@ function grappes_affiche_milieu($flux){
 		if ($source && $id_source) {
 			// seulement s'il existe une grappe liable a cet objet
 			if (sql_countsel('spip_grappes',"liaisons REGEXP '(^|,)$source($|,)'")) {
-				$lister_objet = charger_fonction('lister_objets','inc');
-				$flux['data'] .= $lister_objet('grappe',$source,$id_source);
+				$grappes_lister_objets = charger_fonction('grappes_lister_objets','inc');
+				$flux['data'] .= $grappes_lister_objets('grappe',$source,$id_source);
 			}
 		}
 	}
