@@ -380,8 +380,8 @@ jQuery.geoportail =
 			// Alignement
 			align = align.split('-');
 			for (i = 0; i < align.length; i++) switch (align[i]) {
-				case 'right': feature.style.graphicXOffset = 0; break;
-				case 'left': feature.style.graphicXOffset = -2 * size; break;
+				case 'left': feature.style.graphicXOffset = 0; break;
+				case 'right': feature.style.graphicXOffset = -2 * size; break;
 				case 'top': feature.style.graphicYOffset = 0; break;
 				case 'bottom': feature.style.graphicYOffset = -2 * size; break;
 				default: break;
