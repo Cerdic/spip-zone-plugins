@@ -1,0 +1,33 @@
+<form method="post" action="#ENV{action}">#ACTION_FORMULAIRE<div><br />
+
+<fieldset><legend>URLs</legend>
+<table width="100%">
+<tr><td><:spipal:paiement_paypal:></td>
+<td><input type="text" name="url_paypal" [value="(#ENV{url_paypal})"] size="60"/></td></tr>
+<tr><td><:spipal:validation_paypal:></td>
+<td><input type="text" name="notify_url" [value="(#ENV{notify_url})"] size="60"/></td></tr>
+<tr><td><:spipal:retour_paypal:></td>
+<td><input type="text" name="url_retour" [value="(#ENV{url_retour})"] size="60"/></td></tr>
+<tr><td><:spipal:compte_paypal:></td>
+<td><input type="text" name="compte_paypal" [value="(#ENV{compte_paypal})"] size="60"/></td></tr>
+</table>
+</fieldset>
+
+<fieldset><legend><:avendre:presentation:></legend>
+<table>
+<tr><td><:spipal:style_paypal:></td>
+<td><input type="text" name="style_page" [value="(#ENV{style_page})"]/></td></tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Options</legend>
+<table>
+<tr><td><input type="checkbox" name="vendre" [checked="(#ENV{vendre})"] /></td><td><:spipal:vendre:></td></tr>
+<tr><td><input type="checkbox" name="donner" [checked="(#ENV{donner})"]/></td><td> <:spipal:donner:></td></tr>
+<tr><td><input type="checkbox" name="garder_notification" [checked="(#ENV{garder_notification})"]/></td><td> <:spipal:garder_notification:></td></tr>
+</table>
+</fieldset>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" value="<:OK:>" class="fondo" /></div>
+
+</form>
