@@ -463,7 +463,7 @@ function exec_spiplistes_config () {
 			spiplistes_array_values_in_keys(explode(";", _SPIPLISTES_LOTS_PERMIS)), $GLOBALS['meta']['spiplistes_lots']
 				, 'spiplistes_lots', 'spiplistes_lots'
 				, 1, '', 'fondo', _T('spiplistes:nombre_lot')." : ", '', 'verdana2')
-		. "<br />" . $eol
+		. '<br />' . $eol
 		//
 		// sélection du charset d'envoi
 		. spiplistes_boite_select_de_formulaire (
