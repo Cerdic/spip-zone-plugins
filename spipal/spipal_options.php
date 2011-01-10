@@ -16,12 +16,8 @@ define ('AV_VENTE_GRATUIT', 0);
 define ('AV_VENTE_ACHAT',   1);
 define ('AV_VENTE_DON',     2); //prix de vente = 0;
 
-function est_a_vendre($id_article, $return_row = true) {
-	$res = sql_select('*', 'spip_spipal_produits', "id_article=" . intval($id_article));
-	$n = sql_count($res);
-	if ( !$return_row )
-	  return ( $n == 1 );
-        return ( $n == 1 )? sql_fetch($res):null;
+function est_a_vendre($id_article) {
+	return sql_fetsel('*', 'spip_spipal_produits', "id_article=" . intval($id_article));
 }
 
 // pour executer les squelettes comportant la balise Meta

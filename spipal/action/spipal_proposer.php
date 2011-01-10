@@ -22,7 +22,7 @@ function action_spipal_proposer_dist() {
     $options = array();
     if ( $action ) {
         $_REQUEST['id_article'] = _request('arg');
-        $options['action']      = (est_a_vendre($_REQUEST['id_article'], false))?'maj':'creer';
+        $options['action']      = est_a_vendre($_REQUEST['id_article'])?'maj':'creer';
         $_REQUEST['don']        = ( _request('action_vente') == AV_VENTE_DON )?1:0;
         if ( !_request('ref_produit') )
             $_REQUEST['ref_produit'] = $_REQUEST['id_article'];

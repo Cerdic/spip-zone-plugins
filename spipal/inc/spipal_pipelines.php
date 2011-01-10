@@ -19,12 +19,15 @@ function spipal_ajouter_boutons($flux){
 }
 
 // il faudrait rajouter la gestion des droits
-// et conditionner a des rubriques d'articles
+
 function spipal_affiche_milieu($flux) {
-	$exec =  $flux['args']['exec'];
-	if ($exec=='articles') {
+	if ($flux['args']['exec'] !== 'articles') return $flux;
+	$id_article = $flux['args']['id_article'];
+	$id = sql_fetsel("id_rubrique", "spip_articles", "id_article=$id_article");
+	if (empty($GLOBALS['spipal_metas']['rubriques'])
+	OR preg_match("/\b$id\b/", $GLOBALS['spipal_metas']['rubriques'])) {
 		$f = charger_fonction('spipal_article', 'inc');
-		$flux['data'] .= $f($flux['args']['id_article']);
+		$flux['data'] .= $f($id_article);
 	}
 	return $flux;
 }

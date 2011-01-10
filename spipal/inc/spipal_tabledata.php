@@ -36,17 +36,16 @@ static $cpt_id = 0;
 
     $trouver_table = charger_fonction('trouver_table', 'base');
     $abstract = $trouver_table($table_mysql);
-    if (!$abstract) return '';
-    $fields = $abstract['field'];
+    if (!$abstract  OR !$idLigne) return '';
     $keys   = $abstract['key'];
-
-    $ligne = !$idLigne ? array() :
-      sql_fetsel(array_keys($prop_champs), $table_mysql, $keys['PRIMARY KEY'] ."=" . sql_quote($idLigne));
+    $fields = $abstract['field'];
+    $ufields = array_keys($prop_champs);
+    $ligne = sql_fetsel($ufields, $table_mysql, $keys['PRIMARY KEY'] ."=" . sql_quote($idLigne));
 
     $hiddens = '';
     $total   = array();
-    foreach ($ligne as $k => $v) {
-        
+    foreach ($ufields as $k) {
+        $v = $ligne ? $ligne[$k] : '';
         preg_match("/^ *([A-Za-z]+) *(\(([^)]+)\))?(.*default *'(.*)')?/i", $fields[$k], $m);
         $type = strtoupper($m[1]);
         $s = ($m[5] ? " value='$m[5]' " : '');
@@ -173,9 +172,7 @@ function mbt_maj_table_depuis_form($table_mysql, $options = null) {
 $bavard       = isset($options['bavard'])?$options['bavard']:false;
 $action       = isset($options['action'])?$options['action']:'';     //creer, maj ou supprimer
 $confirmation = isset($options['confirmation'])?$options['confirmation']:false;
-$apercu       = isset($_REQUEST['apercu'])?true:false;
 
-    include_spip('base/abstract_sql');
     $trouver_table = charger_fonction('trouver_table', 'base');
     $abstract = $trouver_table($table_mysql);
     $fields = $abstract['field'];
@@ -186,9 +183,6 @@ $apercu       = isset($_REQUEST['apercu'])?true:false;
         $pks[$k] = trim($v);
     }
     $keys['PRIMARY KEY'] = implode(',', $pks);
-    
-    if ( $action == '' && isset($_REQUEST['action']) )
-        $action = $_REQUEST['action'];
     
     $requete = 'sql';
    
@@ -255,8 +249,7 @@ $apercu       = isset($_REQUEST['apercu'])?true:false;
                             break;
                         }
                     }
-                    if ( !$apercu )
-                        spip_query("DELETE FROM $table_mysql WHERE $requete");
+		    spip_query("DELETE FROM $table_mysql WHERE $requete");
                 }
             }
             else {
@@ -273,12 +266,10 @@ $apercu       = isset($_REQUEST['apercu'])?true:false;
         echo fin_boite_info();
     }
     
-    if ( !$apercu ) {
-        spip_query($requete);
-        if ( $action == 'creer' ) {
+    spip_query($requete);
+    if ( $action == 'creer' ) {
             if ( !isset($_REQUEST[$pks[0]]) || $_REQUEST[$pks[0]] == '' ) {
                 $_REQUEST[$pks[0]] = mysql_insert_id();
-            }
         }
     }
 }
