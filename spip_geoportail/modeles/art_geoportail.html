@@ -1,0 +1,26 @@
+[(#REM) Affichage d'un article sur une carte
+- id_geoportail : id de la carte ou afficher l'image
+- taille     : taille des icones : 20px
+- align		 : center : se centrer sur l'article
+- couleur    : couleur du bord : #FFFFFF 
+- bord       : taille du bord : 4
+exemple :<artxx|geoportail>
+]
+<BOUCLE_geo_article(ARTICLES){geoposition}{id_article=#ID}>
+<script language=javascript>
+	// Ajouter l'article
+	[(#SET{largeur,[(#LOGO_ARTICLE||image_reduire{40}|largeur|plus{[(#ENV{bord,4})]})]})]
+	[(#SET{hauteur,[(#LOGO_ARTICLE||image_reduire{40}|hauteur|plus{[(#ENV{bord,4})]})]})]
+	var img = "[(#LOGO_ARTICLE||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]";
+	var align = "";
+	if (!img) 
+	{	img = "[(#CHEMIN{img/punaise.png})]";
+		align = "bottom-left";
+	}
+	$.geoportail.addImg ([(#ENV{id_geoportail,0})], 0, "#TITRE", #LON, #LAT, img, align, "[(#ENV{taille,20})]", {});
+    
+    if ("[(#ENV{align})]" == "center")
+		$.geoportail.onLoad([(#ENV{id_geoportail,0})], function centerMap(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );
+
+</script>
+</BOUCLE_geo_article>
