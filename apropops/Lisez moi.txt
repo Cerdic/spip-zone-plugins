@@ -1,0 +1,37 @@
+/***********************************************************************\
+ *  À propos des Plugins actifs                          				*                                                
+ *                        												*
+ *  Version du 08 janvier 2011, Jean-Philippe Guihard					*                                     
+ *																		*
+ \**********************************************************************/
+
+
+Ce plugin vise à afficher dans une page de type À propos du site par
+exemple, la version du SPIP utilisée et la liste des Plugins activés
+avec affichage de l'icone, le nom, la version, l'état et une
+introduction de sa fonction.
+
+J'ai créé ce plugin après avoir tenté d'utiliser la balise #PLUGIN mais
+qui ne trie par ordre alphabétique les Plugins.
+
+J'ai ensuite utilisé les autres plugin, mais ceux-ci n'affiche pas les
+icônes. Je me suis donc lancé dans l'écriture de ce plugin.
+
+N'ayant jamais écrit de Plugin et ne connaissant rien en php, il est
+codé avec des gants de boxe. Mon principe a été de reproduire ce qui se
+fait en partie privé du site par la page ?exec=admin_plugin. J'ai donc
+farfouillé dans le code de SPIP pour retrouver des fonctions qui
+correspondraient à mon besoin et les ai modifiée pour qu'elles collent à
+ce que je souhaite.
+
+Évolutions envisagées :
+- Lors d'une prochaine mise à jour du core de SPIP, le parseur XML sera opérationnel
+- utiliser la balise #PLUGIN
+
+Historique :
+08 janvier 2011
+ajout de 2 paramètres pour retourner le nombre de plugins activés ou le nombre d'extensions activées.
+06 janvier 2011
+Suite à la demande de l'ajout d'un paramètre pour ne retrourner que le nombre de plugins et d'extensions actif 
+06 novembre 2010
+Publication de la première version stable

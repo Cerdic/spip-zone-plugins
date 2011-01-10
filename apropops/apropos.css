@@ -1,0 +1,53 @@
+.apropos-liste{
+	text-align: left;
+	}
+.apropos-liste h3{
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-top: 1em;
+}
+.apropos-liste img{
+	margin-left: 5px;
+}
+.apropos-liste li{
+	list-style-type: none;
+	/*height: 48px;*/
+	padding-left: 36px;
+	border-bottom: thin solid #d4d4d4;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+.apropos-intro{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 0;
+	text-align: left;
+}
+.apropos-icon img{
+	float: left;
+	margin-left: -38px;
+}
+.apropos-nom{
+	font-weight: bold;
+}
+.apropos-version{
+	font-size: 0.9em;
+	}
+.apropos-etat{
+	font-size: 0.9em;
+}
+.apropos-description{
+	font-size: 0.9em;
+	text-align: left;
+	line-height: 1.1em;
+	padding-bottom: 6px;
+}
+.apropos-resume{
+	font-size: 1em;
+	height: auto;
+}
+.apropos-auteur{
+	font-style: italic;
+	margin-top: 1.2em;
+	font-size: 0.9em;
+}
