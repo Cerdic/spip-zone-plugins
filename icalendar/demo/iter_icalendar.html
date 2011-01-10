@@ -8,7 +8,7 @@
 
 <BOUCLE_zone(DATA){liste A,B,C}>
 <BOUCLE_vacances(DATA)
-{datasource http://media.education.gouv.fr/ics/Calendrier_Scolaire_Zone_#VALEUR.ics,ics}
+{source ics, http://media.education.gouv.fr/ics/Calendrier_Scolaire_Zone_#VALEUR.ics}
 {par dtstart/str}
 {summary/value != ''}
 {dtend/str>=#GET{today}}

@@ -10,7 +10,7 @@ function inc_ics_to_array($u) {
 
 	# on passe par un fichier temp car notre librairie fonctionne comme ca
 	$tmp = _DIR_TMP . 'ics-'.md5($u);
-	ecrire_fichier($tmp, $u);
+	ecrire_fichier($tmp, str_replace("\r\n", "\n", $u));
 
 	$cal = new vcalendar();
 	$cal->setConfig( 'filename', $tmp );
