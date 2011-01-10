@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -53,8 +53,8 @@ function action_spipmotion_encoder_dist(){
 	/**
 	 * On essaie de voir s'il y a d'autres processus ffmpeg en cours sur le serveur (autres sites?)
 	 */
-	$ps_ffmpeg = exec('ps -e |grep ffmpeg',$retour,$retour_int);
-	if(($retour_int == 1) && (count($retour) >= 3)){
+	$ps_ffmpeg = exec('ps -C ffmpeg',$retour,$retour_int);
+	if(($retour_int == 1) && (count($retour) >= 2)){
 		$process = false;
 	}else{
 		$process = true;
