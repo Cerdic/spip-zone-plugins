@@ -4,7 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_paiement_cmcic_confirmation_dist($arg=null) {
-
+spip_log("debugarn1");
 	include_spip('base/abstract_sql');
 	/*****************************************************************************
  *
@@ -40,6 +40,7 @@ header("Content-type: text/plain");
 			$oTpe = new CMCIC_Tpe();
 			$oHmac = new CMCIC_Hmac($oTpe);
 
+
 			// Message Authentication
 			$cgi2_fields = sprintf(CMCIC_CGI2_FIELDS, $oTpe->sNumero,
 								  $CMCIC_bruteVars["date"],
@@ -64,39 +65,36 @@ header("Content-type: text/plain");
 								);
 
 
+			
 			if ($oHmac->computeHmac($cgi2_fields) == strtolower($CMCIC_bruteVars['MAC']))
 				{
-				switch($CMCIC_bruteVars['code-retour']) {
+switch($CMCIC_bruteVars['code-retour']) {
 					case "Annulation" :
-						// Payment has been refused
+						
+// Payment has been refused
 						// put your code here (email sending / Database update)
 						// Attention : an autorization may still be delivered for this payment
 						break;
 
 					case "payetest":
-						// Payment has been accepeted on the test server
-						// put your code here (email sending / Database update)
-						/*$commande = new Commande();
-						$commande->charger_trans($CMCIC_bruteVars['reference']);
-						$commande->statut=2;
-						$commande->genfact();
-						$commande->maj();
-						modules_fonction("confirmation", $commande);*/
-						spip_updateq('spip_formulaires_reponses', array('statut_transaction' => 1), 'ref_transaction=' . $CMCIC_bruteVars['reference']);
+						
+						sql_updateq('spip_formulaires_reponses', array('statut_transaction' => 1), 'ref_transaction=' . sql_quote($CMCIC_bruteVars['reference']));
 						break;
 
 					case "paiement":
-						spip_updateq('spip_formulaires_reponses', array('statut_transaction' => 1), 'ref_transaction=' . $CMCIC_bruteVars['reference']);
+spip_updateq('spip_formulaires_reponses', array('statut_transaction' => 1), 'ref_transaction=' . $CMCIC_bruteVars['reference']);
 						break;
 				}
 
-				$receipt = CMCIC_CGI2_MACOK;
+				
+$receipt = CMCIC_CGI2_MACOK;
 
 			}
 			else
 			{
 				// your code if the HMAC doesn't match
-				$receipt = CMCIC_CGI2_MACNOTOK.$cgi2_fields;
+				$receipt = CMCIC_CGI2_MACNOTOK.$cgi2_fields;spip_log("debugarn8");
+
 			}
 
 		//-----------------------------------------------------------------------------
