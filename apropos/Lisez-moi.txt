@@ -1,7 +1,7 @@
 /***********************************************************************\
  *  À propos des Plugins actifs                          				*                                                
  *                        												*
- *  Version du 04 novembre 2010, Jean-Philippe Guihard					*                                     
+ *  Version du 08 janvier 2011, Jean-Philippe Guihard					*                                     
  *																		*
  \**********************************************************************/
 
@@ -27,3 +27,11 @@ ce que je souhaite.
 Évolutions envisagées :
 - Lors d'une prochaine mise à jour du core de SPIP, le parseur XML sera opérationnel
 - utiliser la balise #PLUGIN
+
+Historique :
+08 janvier 2011
+ajout de 2 paramètres pour retourner le nombre de plugins activés ou le nombre d'extensions activées.
+06 janvier 2011
+Suite à la demande de l'ajout d'un paramètre pour ne retrourner que le nombre de plugins et d'extensions actif 
+06 novembre 2010
+Publication de la première version stable

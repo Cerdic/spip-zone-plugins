@@ -4,7 +4,8 @@
  * Liste les plugins actifs avec affichage icon, nom, version, etat, short description
  * Utilisation intensive des fonctions faisant cela dans le code de SPIP
  * Auteur Jean-Philippe Guihard
- * version 0.ß6 du 04 novembre 2010, 15h40
+ * version 0.2 du 06 janvier 2011, 23h40
+ * ajout de la possibilite de n'afficher que le nombre de plugin et extension  
  * code emprunte dans le code source de SPIP
  */
  
@@ -15,12 +16,22 @@ include_spip('inc/charsets');
 
 //Creation de la balise #APROPOS
 function balise_APROPOS_dist($p) {
-	$p->code = 'calcul_info_apropos()';
+	//recupere un eventuel argument 
+	$premier = interprete_argument_balise(1, $p);
+	//s'il y en a 1, on traite la chose
+	if ($premier != ''){
+	$p->code = 'calcul_info_apropos(' . $premier . ')';
+	}else{
+	//si pas d\'argument, on affiche la liste des plugins
+	$p->code = 'calcul_info_apropos("liste")';
+	}
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-function calcul_info_apropos(){
+function calcul_info_apropos($params){
+// si parametre full, alors tout afficher
+if ($params == "liste"){
 $affiche = charger_fonction('admin_plugin','exec');
 $lcpa = liste_chemin_plugin_actifs();
 $lpf = liste_plugin_files();
@@ -31,13 +42,30 @@ $liste_extensions_actives = apropos_affiche_les_extension(_DIR_EXTENSIONS);
 $liste_des_pgI_actifs = apropos_affiche_les_PiG($lcpa,$lpf);
 return $liste_des_pgI_actifs.$liste_extensions_actives;
 }
+// si parametre nombre, alors afficher que le nombre de plugin et extensions
+if ($params == "nombre"){
+$pig = liste_chemin_plugin_actifs();
+$ext = liste_plugin_files(_DIR_EXTENSIONS);
+$nbre_pig = count($pig);
+$nbre_ext = count($ext);
+return $nbre_ext+$nbre_pig;
+}
+if ($params == "plugins"){
+$pig = liste_chemin_plugin_actifs();
+$nbre_pig = count($pig);
+return $nbre_pig;
+}if ($params == "extensions"){
+$ext = liste_plugin_files(_DIR_EXTENSIONS);
+$nbre_ext = count($ext);
+return $nbre_ext;
+}}
 
 
 function apropos_affiche_les_extension($liste_extensions_actives){
 	$rese = "";
 	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
 		$rese .= "<div class='apropos-liste'>";
-		$rese .= "<h3>"._T('plugins_liste_extensions')." activées automatiquement.</h3>";
+		$rese .= "<h3>".count($liste_extensions)." extensions activées automatiquement.</h3>";
 		$format = 'liste'; 
 		$rese .= apropos_plugins_afficher_list_dist(self(), $liste_extensions,$liste_extensions, _DIR_EXTENSIONS);// surcharge de fonction
 		$rese .= "</div>\n";
