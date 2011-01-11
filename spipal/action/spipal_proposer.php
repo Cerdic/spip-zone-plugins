@@ -19,20 +19,19 @@ function action_spipal_proposer_dist() {
     $arg = $securiser_action();
     
     $action     = _request('action_vente');
-    $options = array();
     if ( $action ) {
-        $_REQUEST['id_article'] = _request('arg');
-        $options['action']      = est_a_vendre($_REQUEST['id_article'])?'maj':'creer';
-        $_REQUEST['don']        = ( _request('action_vente') == AV_VENTE_DON )?1:0;
+        $_REQUEST['id_article'] = $arg;
+        $_REQUEST['don']        = ($action == AV_VENTE_DON )?1:0;
+        $action      = est_a_vendre($_REQUEST['id_article'])?'maj':'creer';
+
         if ( !_request('ref_produit') )
-            $_REQUEST['ref_produit'] = $_REQUEST['id_article'];
+	  $_REQUEST['ref_produit'] = $_REQUEST['id_article'];
+	mbt_maj_table_depuis_form('spip_spipal_produits', $action);
     }
     else {
-        $_REQUEST['r_pks']       = _request('arg');
-        $options['action']       = 'supprimer';
-        $options['confirmation'] = true;
+      supprimer_item('spip_spipal_produits', 'id_article', $arg);
     }
-    mbt_maj_table_depuis_form('spip_spipal_produits', $options);
+
 }
 
 ?>

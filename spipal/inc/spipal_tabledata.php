@@ -168,110 +168,54 @@ static $cpt_id = 0;
     return $hiddens . '<table>' . join("\n", $total) . '</table>';
 }
 
-function mbt_maj_table_depuis_form($table_mysql, $options = null) {
-$bavard       = isset($options['bavard'])?$options['bavard']:false;
-$action       = isset($options['action'])?$options['action']:'';     //creer, maj ou supprimer
-$confirmation = isset($options['confirmation'])?$options['confirmation']:false;
-
+function mbt_maj_table_depuis_form($table_mysql, $action)
+{
     $trouver_table = charger_fonction('trouver_table', 'base');
     $abstract = $trouver_table($table_mysql);
     $fields = $abstract['field'];
-    $keys   = $abstract['key'];
     
-    $pks    = explode(',', $keys['PRIMARY KEY']);
-    foreach ( $pks as $k => $v) {
-        $pks[$k] = trim($v);
-    }
-    $keys['PRIMARY KEY'] = implode(',', $pks);
+    $pks    = explode(',', $abstract['key']['PRIMARY KEY']);
+    foreach ( $pks as $k => $v) $pks[$k] = trim($v);
+
+    if ($action == 'maj')
+      return maj_item($table_data, $fields, $pks);
     
-    $requete = 'sql';
-   
-    switch ( $action ) {
-        case 'ajouter':
-            $action = 'creer';
-        case 'creer':
-            $fieldsList = '';
-            $valuesList = '';
-            foreach ($fields as $k => $v) {
-                if ( $v == 'TIMESTAMP' )
-                    continue;
-                if ( !isset($_REQUEST[$k]) )
-                    continue;
-                if ( in_array($k, $pks) ) {
-                    //if ( strpos(strtoupper($v), 'VARCHAR') === null ) { // cas de la clé primaire qui n'est pas auto incrémentée
-                    //    continue;
-                    //}
-                }
-                $fieldsList .= $virg.$k;
-                $valuesList .= $virg.'"'.$_REQUEST[$k].'"';
-                $virg = ',';
-            }
-            $requete = "INSERT INTO $table_mysql ($fieldsList) VALUES ($valuesList)";
-            break;
-        case 'maj':
-            $requete = "UPDATE $table_mysql SET ";
-            $virg = '';
-            foreach ($fields as $k => $v) {
-                if ( $v == 'TIMESTAMP')
-                    continue;
-                $requete .= $virg." ".$k."=\"".$_REQUEST[$k]."\"";
-                $virg = ',';
-            }
-            $requete .= " WHERE ";
-            $and = '';
-            foreach ( $pks as $pk ) {
-                if ( isset($_REQUEST[$pk]) ) {
-                    $requete .= $and."($pk='".$_REQUEST[$pk]."')";
-                    $and = ' and ';
-                }
-                else {
-                    $requete = 'cl&eacute; primaire incomplete !';
-                    break;
-                }
-            }
-            break;
-        case 'supprimer':
-            if ( $confirmation ||isset($_REQUEST['confirmation']) ) {
-                if ( !is_array($_REQUEST['r_pks']) ) 
-                    $_REQUEST['r_pks'] = array($_REQUEST['r_pks']);
-                foreach ($_REQUEST['r_pks'] as $r_pk) {
-                    $r_pk = explode(',', $r_pk);
-                    $requete = "";
-                    $and = '';
-                    $i = 0;
-                    foreach ( $pks as $pk ) {
-                        if ( isset($r_pk[$i]) ) {
-                            $requete .= $and."($pk='{$r_pk[$i++]}')";
-                            $and = ' and ';
-                        }
-                        else {
-                            $requete = 'cl&eacute; primaire incomplete !';
-                            break;
-                        }
-                    }
-		    spip_query("DELETE FROM $table_mysql WHERE $requete");
-                }
-            }
-            else {
-                $requete = "suppression non confirm&eacute; !";
-            }
-            break;
-        default :
-            return;
+    $args = array();
+    foreach ($fields as $k => $v) {
+      if ( $v !== 'TIMESTAMP' AND isset($_REQUEST[$k]) ) {
+	$args[$k]= $_REQUEST[$k];
+
+      }
     }
-    
-    if ( $bavard ) {
-        echo debut_boite_info();
-        echo htmlentities($requete);
-        echo fin_boite_info();
-    }
-    
-    spip_query($requete);
-    if ( $action == 'creer' ) {
-            if ( !isset($_REQUEST[$pks[0]]) || $_REQUEST[$pks[0]] == '' ) {
-                $_REQUEST[$pks[0]] = mysql_insert_id();
-        }
-    }
+    return sql_insertq($table_mysql, $args);
 }
 
+
+function maj_item($table_data, $fields, $pks)
+{
+	$fields = array();
+	foreach ($fields as $k => $v) {
+                if ( $v !== 'TIMESTAMP')
+		  $fields[$k] = $_REQUEST[$k];
+	}
+
+	$and = array();
+	foreach ( $pks as $pk ) {
+                if ( isset($_REQUEST[$pk]) ) {
+		  $and[]="$pk=" . sql_quote($_REQUEST[$pk]);
+                }
+                else {
+		  $and = false;
+		  break;
+                }
+	}
+
+	if ($and !== false)
+	  sql_updateq($table_mysql, $fields, join(" AND ", $and));
+}
+
+function supprimer_item($table_data, $pk, $id)
+{
+	sql_delete($table_data, "$pk=" . intval($id));
+}
 ?>
