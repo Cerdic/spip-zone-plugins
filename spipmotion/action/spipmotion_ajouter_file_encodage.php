@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 

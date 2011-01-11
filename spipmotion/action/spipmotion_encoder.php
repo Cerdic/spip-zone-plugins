@@ -44,7 +44,6 @@ function action_spipmotion_encoder_dist(){
 	}
 	include_spip('inc/genie');
 	genie_queue_watch_dist();
-	spip_log('genie_queue_watch','spipmotion');
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log('Appel de la fonction d encodage','spipmotion');
 	spip_log("Il y a $nb_encodages document(s) à encoder","spipmotion");
@@ -54,7 +53,7 @@ function action_spipmotion_encoder_dist(){
 	 * On essaie de voir s'il y a d'autres processus ffmpeg en cours sur le serveur (autres sites?)
 	 */
 	$ps_ffmpeg = exec('ps -C ffmpeg',$retour,$retour_int);
-	if(($retour_int == 1) && (count($retour) >= 2)){
+	if(($retour_int == 1) && (count($retour) >= 3)){
 		$process = false;
 	}else{
 		$process = true;
@@ -76,9 +75,6 @@ function action_spipmotion_encoder_dist(){
 	}else if(lire_config('spipmotion_casse') == 'oui'){
 		spip_log('Attention, problème dans la configuration','spipmotion');
 	}else if(intval($en_cours['id_spipmotion_attente']) && ($en_cours['maj'] < date('Y-m-d H:i:s',mktime(date('H')-5)))){
-		/**
-		 * Il est peut être nécessaire de vérifier qu'un processus n'est pas en cours?
-		 */
 		spip_log("L'id". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage depuis plus de 5 h (".$en_cours['maj']."), on doit le réinitialiser",'spipmotion');
 		sql_updateq('spip_spipmotion_attentes',array('encode' => 'non'),'id_spipmotion_attente ='.intval($en_cours['id_spipmotion_attente']));
 	}else if(intval($en_cours['id_spipmotion_attente'])){
