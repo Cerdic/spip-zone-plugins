@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_ajout' => 'The video "@type@:@titre@" has been added.',
 
 	// E
-	'erreur_adresse_invalide' => 'This URL address is not valid',
+	'erreur_adresse_invalide' => 'This URL address is not valid. If you are trying to import an MP4 video, you must use the SPIP\'s document upload form.',
 
 	// L
 	'label_ajouter_video' => "Add a video",

@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_ajout' => 'La vid&eacute;o "@type@:@titre@" a bien &eacute;t&eacute; ajout&eacute;e.',
 	
 	// E
-	'erreur_adresse_invalide' => 'Cette adresse n\'est pas valide',
+	'erreur_adresse_invalide' => "Cette adresse n'est pas valide. Si vous tentez d'importer un fichier vid&eacute;o (MP4 ou autre), merci d'utiliser l'ajout de document classique de SPIP.",
 
 	// L
 	'label_ajouter_video' => "Ajouter une vid&eacute;o",
