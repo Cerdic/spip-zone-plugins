@@ -5,6 +5,5 @@
 		<INCLURE{fond=agenda/navigation/agenda_evenements}{env}>[(#REM)navigation mensuelle]
 		]
 		<INCLURE{fond=agenda/contenu/agenda_evenements}{env}{self}><!-- liste des seminaires-->
-		<a class="bouton ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]">ical</a>
 </BOUCLE_seminaire>
 </div><!--fin du bloc seminaire-->

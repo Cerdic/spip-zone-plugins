@@ -30,7 +30,8 @@
 	<!-- On n'affiche le formulaire d'édition des événements que si la personne connectée est autorisée à modifier l'événement (edit, on verra les autorisations plus tard) (edit+ encore moins puisqu'il semblerait que ce ne soit pas nécessaire)-->
 
 <div class='espace'></div>
-<span class="bouton">
+<span class="bouton">[(#REM)bouton de création d'événement]
 <a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
 </span>
+<a class="bouton ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>">iCal</a>[(#REM)bouton d'abonnement au calendrier]
 <div class='espace'></div>
