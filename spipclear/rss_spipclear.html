@@ -1,0 +1,55 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)][(#ENV{type}|=={co}|oui) : commentaires]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description></description>
+	<language>#LANG</language>
+
+	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>#URL_SITE_SPIP/images/logo.png</url>
+		<link>#URL_SITE_SPIP/</link>
+		<description></description>
+	</image>
+
+
+<BOUCLE_feinte(ARTICLES){0,1}>[(#ENV{type}|!={co}|?{' '})]</BOUCLE_feinte>
+	<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+	<BOUCLE3(ARTICLES){branche}{par date}{inverse}{0,10}>
+		<item>
+			<title>[(#TITRE|texte_backend)]</title>
+			<link>[(#URL_ARTICLE|url_absolue)]</link>
+			<dc:date>[(#DATE|date_iso)]</dc:date>
+			<description>[(#LOGO_ARTICLE|left||liens_absolus|texte_backend)][(#INTRODUCTION|texte_backend)]</description>
+			[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_ARTICLE|right||image_reduire{150,150}|texte_backend)
+					][&lt;div class='rss_chapo'&gt;(#CHAPO|texte_backend)&lt;/div&gt;
+					][&lt;div class='rss_texte'&gt;(#TEXTE|
+						image_reduire{500,0}|texte_backend)&lt;/div&gt;
+					][&lt;hr /&gt;
+					&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;
+					][&lt;div class='rss_ps'&gt;(#PS|texte_backend)&lt;/div&gt;]
+					</content:encoded>]
+			<dc:creator>(<BOUCLE23(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE23>)</dc:creator>
+		</item>
+	</BOUCLE3>
+	</BOUCLE_rub>
+</B_feinte>
+	<BOUCLE_1(FORUMS spip_articles){id_article?}{id_secteur IN #CONFIG{spipclear/secteurs}}{plat}{par date}{inverse}{0,25}>
+		<item>
+			<title>[(#TITRE|texte_backend)](1)</title>
+			<link>[(#URL_FORUM|url_absolue)]</link>
+			<dc:date>[(#DATE|date_iso)]</dc:date>
+			<description>[(#LOGO_ARTICLE|left||liens_absolus|texte_backend)][(#TEXTE|liens_absolus|texte_backend)]</description>
+		</item>
+	</BOUCLE_1>
+<//B_feinte>
+
+</channel>
+
+</rss>
