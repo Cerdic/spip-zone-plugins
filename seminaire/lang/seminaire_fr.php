@@ -31,6 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_evenement'			 =>		'Ajouter un &eacute;v&eacute;nement', 
 	'erreur_install_groupe_categories' => 'erreur &agrave; la cr&eacute;ation du groupe',
 	'mots_cles_categories'		 =>		'Les diff&eacute;rentes cat&eacute;gories de s&eacute;minaires, groupes de travail et &eacute;v&eacute;nements exceptionnels',
-	'abonnement'				 =>		's&rsquo;abonner au calendrier',
+	'abonnement'				 =>		'S&rsquo;abonner au calendrier',
 );
 ?>
