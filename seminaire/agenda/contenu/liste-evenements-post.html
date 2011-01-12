@@ -33,5 +33,5 @@
 <span class="bouton">[(#REM)bouton de création d'événement]
 <a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
 </span>
-<a class="ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>">iCal</a>[(#REM)bouton d'abonnement au calendrier]
+<a class="ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>"><img src="#CHEMIN{images/calendrier.png}"/><span class="texte">iCal</span></a>[(#REM)bouton d'abonnement au calendrier]
 <div class='espace'></div>
