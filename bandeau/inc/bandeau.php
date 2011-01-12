@@ -33,7 +33,7 @@ function definir_barre_contexte(){
 
 /**
  * definir la liste des boutons du haut et de ses sous-menus
- * On defini les boutons a metrtre selon les droits de l'utilisateur
+ * On defini les boutons a mettre selon les droits de l'utilisateur
  * puis on balance le tout au pipeline "ajouter_boutons" pour que des plugins
  * puissent y mettre leur grain de sel
  *
@@ -50,37 +50,39 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 	// avant l'icone de configuration
 	if (function_exists('boutons_plugins')
 	  AND is_array($liste_boutons_plugins = boutons_plugins())){
+		// On traite en premier les boutons principaux
+		// car certains enfants peuvent être définis avant leur parent dans $liste_boutons_plugins
 		foreach($liste_boutons_plugins as $id => $infos){
 			// les boutons principaux ne sont pas soumis a autorisation
-			if (!($parent = $infos['parent']) OR !$autorise OR autoriser('bouton',$id,0,NULL,array('contexte'=>$contexte))){
-				if ($parent AND isset($boutons_admin[$parent])){
-					if (!is_array($boutons_admin[$parent]->sousmenu))
-						$boutons_admin[$parent]->sousmenu = array();
-					$position = (strlen($infos['position'])?intval($infos['position']):count($boutons_admin[$parent]->sousmenu));
-					$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
-					+ array($id=> new Bouton(
-					  ($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
-					  $infos['titre'],	// titre
-					  $infos['url']?$infos['url']:null,
-					  $infos['args']?$infos['args']:null
-					  ))
-					+ array_slice($boutons_admin[$parent]->sousmenu,$position,100);
-				}
-				if (!$parent
-				// provisoire, eviter les vieux boutons
-				AND (!in_array($id,array('forum','statistiques_visites')))
-
-				) {
-					$position = $infos['position']?$infos['position']:count($boutons_admin);
-					$boutons_admin = array_slice($boutons_admin,0,$position)
-					+array($id=> new Bouton(
-					  ($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
-					  $infos['titre'],	// titre
-					  $infos['url']?$infos['url']:null,
-					  $infos['args']?$infos['args']:null
-					  ))
-					+ array_slice($boutons_admin,$position,100);
-				}
+			if (!($parent = $infos['parent']) 
+			// provisoire, eviter les vieux boutons
+			AND (!in_array($id,array('forum','statistiques_visites')))
+			){
+				$position = $infos['position']?$infos['position']:count($boutons_admin);
+				$boutons_admin = array_slice($boutons_admin,0,$position)
+				+array($id=> new Bouton(
+				  ($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
+				  $infos['titre'],	// titre
+				  $infos['url']?$infos['url']:null,
+				  $infos['args']?$infos['args']:null
+				  ))
+				+ array_slice($boutons_admin,$position,100);
+			}
+		}
+		// On traite les enfants, selon les droits utilisateurs
+		foreach($liste_boutons_plugins as $id => $infos){
+			if ($parent = $infos['parent'] AND isset($boutons_admin[$parent]) AND (!$autorise OR autoriser('bouton',$id,0,NULL,array('contexte'=>$contexte)))){
+				if (!is_array($boutons_admin[$parent]->sousmenu))
+					$boutons_admin[$parent]->sousmenu = array();
+				$position = (strlen($infos['position'])?intval($infos['position']):count($boutons_admin[$parent]->sousmenu));
+				$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
+				+ array($id=> new Bouton(
+				  ($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
+				  $infos['titre'],	// titre
+				  $infos['url']?$infos['url']:null,
+				  $infos['args']?$infos['args']:null
+				  ))
+				+ array_slice($boutons_admin[$parent]->sousmenu,$position,100);
 			}
 		}
 	}
