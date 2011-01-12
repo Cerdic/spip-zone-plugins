@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 // -- Descriptifs de la boussole et des sites de la galaxie SPIP
-	'descriptif_boussole_spip' => 'Description de la boussole SPIP',
+	'descriptif_boussole_spip' => 'La boussole SPIP regroupe l\'ensemble des sites &#171; officiels &#187; de la galaxie SPIP. Elle d&eacute;finit pour chaque site, son logo, son nom, son slogan et sa description. N\'hésitez donc pas &agrave; l\'utiliser dans vos propres sites pour aiguiller vos visiteurs dans la galaxie SPIP.',
 	'descriptif_site_spip_blog' => 'Description du site SPIP Blog',
 	'descriptif_site_spip_contrib' => 'Description du site SPIP-Contrib',
 	'descriptif_site_spip_core' => 'Description du site SPIP-Core',

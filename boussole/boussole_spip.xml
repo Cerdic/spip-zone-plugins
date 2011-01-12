@@ -1,4 +1,4 @@
-<boussole alias="spip" version="0.2">
+<boussole alias="spip" version="0.3">
 
 	<!-- Sites de reference SPIP -->
 	<groupe type="reference">
@@ -27,7 +27,7 @@
 	<groupe type="decouverte">
 		<site alias="info" src="http://www.spip-info.net/" actif="oui" />
 		<site alias="herbier" src="http://www.spip-herbier.net/" actif="oui" />
-		<site alias="video" src="http://video.spip.org/" actif="oui" />
+		<site alias="video" src="http://medias.spip.org/" actif="oui" />
 		<site alias="demo" src="http://demo.spip.org/" actif="oui" />
 		<site alias="test" src="http://grml.eu/" actif="oui" />
 	</groupe>
