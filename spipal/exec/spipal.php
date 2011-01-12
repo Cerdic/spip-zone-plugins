@@ -31,7 +31,7 @@ function exec_spipal(){
 	echo bloc_des_raccourcis($res);
 
 	echo debut_droite('',true);
-	echo gros_titre(_T('avendre:admin_titre_editer'), '', '', true);
+	echo gros_titre(_T('spipal:admin_titre_editer'), '', '', true);
 
         $form = charger_fonction('recuperer_liste_versements', 'inc');
         echo $form();

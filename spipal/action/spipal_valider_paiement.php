@@ -17,13 +17,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_spipal_valider_paiement()
 {
-  //file_put_contents('paypal.log', "-------------------------------------\r\n");
-//file_put_contents('paypal.log', print_r($_REQUEST, true)."\r\n", FILE_APPEND);
-  $res = spipal_validation_arg($_POST, $GLOBALS['spipal_metas']['notify_url']);
-  //file_put_contents('paypal.log', print_r($res, true), FILE_APPEND);
-  if (!is_string($res)) $res = var_dump($res, true);
-  spip_log($res);
-#  echo $res;
+	#spip_log("\r\n-------------------------------------\r\n", 'paypal');
+	#spip_log(print_r($_REQUEST, true)."\r\n", 'paypal');
+	$res = spipal_validation_arg($_POST, $GLOBALS['spipal_metas']['notify_url']);
+	#spip_log(print_r($res, true), 'paypal');
+	if (!is_string($res)) $res = var_dump($res, true);
 }
 
 function spipal_validation_arg($env, $url)
@@ -35,6 +33,7 @@ function spipal_validation_arg($env, $url)
 	  validation_pp_http_VERIFIED($res, $GLOBALS['spipal_metas']['garder_notification']);
 }
 
+// a refaire avec "recuperer_page" qui gere les redirections.
 function validation_pp_http_post($env, $url)
 {
 	if (!$env) return $GLOBALS['spipal_test'];
@@ -43,14 +42,12 @@ function validation_pp_http_post($env, $url)
 	$body   = validation_pp_http_body($env);
 	$header = validation_pp_http_header(strlen($body));
 
-//file_put_contents('paypal.log', "----------------------------\r\n$header$body\r\n", FILE_APPEND);
+	# spip_log("\r\n----------------------------\r\n$header$body\r\n", 'paypal');
 	fputs ($fp, $header . $body);
 	$res = '';
-	while (!feof($fp)) {
-	  $res .= fgets ($fp, 1024);
-	}
+	while (!feof($fp)) $res .= fgets ($fp, 1024);
 	fclose ($fp);
-//file_put_contents('paypal.log', "----------------------------\r\n$res", FILE_APPEND);
+	# spip_log("\r\n----------------------------\r\n$res", 'paypal');
 	return (strpos ($res, "VERIFIED") !== false) ? $env :
 	  ((strpos ($res, "INVALID") !== false) ? "INVALID" : "???");
 }
@@ -74,9 +71,12 @@ function validation_pp_http_header($length) {
 // la transaction est valide et les informations sont fiables
 
 function validation_pp_http_VERIFIED($env, $trace) {
-	if ($env['payment_status'] !== 'Completed' ) return array();
         include_spip('base/abstract_sql');
-        $custom = unserialize($env['custom']);
+        $custom = @unserialize($env['custom']);
+	if (!isset($custom['id_auteur']) OR $env['payment_status'] !== 'Completed') {
+	  spip_log("Retour paypal invalide " . serialize($env));
+	  return array();	  
+	}
 	$res = array('item_number' => $env['item_number'],
 		     'id_auteur' => $custom['id_auteur'],
 		     'versement_ht' => (($env['payment_gross']?$env['payment_gross']:$env['mc_gross']) - $env['tax']),
@@ -85,7 +85,8 @@ function validation_pp_http_VERIFIED($env, $trace) {
 		     'devise' => $env['mc_currency']?$env['mc_currency']:'USD',
 		     'date_versement' => "NOW()",
 		     'notification' => $trace ? serialize($env) : '');
-	sql_insertq("spip_spipal_versements", $res);
+	$n = sql_insertq("spip_spipal_versements", $res);
+	# spip_log("Nouveau paiment $n par " . $custom['id_auteur']);
 	return $res;
 }
 
