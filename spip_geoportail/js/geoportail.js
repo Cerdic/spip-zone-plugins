@@ -327,13 +327,7 @@ jQuery.geoportail =
 					if (this.features.length) {
 						this.extent = new OpenLayers.Bounds();
 						// this.extent.extend (map.getMap().center);
-						for (var i = 0; i < this.features.length; i++) {
-							this.extent.extend(this.features[i].geometry.getBounds());
-							// Bug KML (en beta2)
-							if (this.features[i].style && !this.features[i].style.strokeColor) {
-								this.features[i].style = this.styleMap.styles['default'].defaultStyle;
-							}
-						}
+						for (var i = 0; i < this.features.length; i++) this.extent.extend(this.features[i].geometry.getBounds());
 						map.getMap().zoomToExtent(this.extent);
 					}
 					// Fonction utilisateur onLoadSpipDoc#ID_DOCUMENT (layer)
