@@ -85,33 +85,45 @@ function demarrer_site($site = '', $options = array()) {
 		 * Voir http://www.spip-contrib.net/Service-d-hebergement-mutualise
 		 */
 		if ($options['utiliser_panel']) {
-			include_spip('inc/minipres');
-			include_spip('base/abstract_sql');
-			include_once(dirname(__FILE__).'/base/abstract_mutu.php');
-			
-			// On cherche en BD si le site est enregistre et on recupere
-			// password et code d'activation
-			$link = @mutu_connect_db(_INSTALL_PANEL_HOST_DB, 0, _INSTALL_PANEL_USER_DB, _INSTALL_PANEL_PASS_DB, '', _INSTALL_SERVER_DB);
-			@sql_selectdb(_INSTALL_PANEL_NAME_DB, _INSTALL_SERVER_DB);
-			$result=@sql_query("SELECT "
-						. _INSTALL_PANEL_FIELD_CODE . " AS code," 
-						. _INSTALL_PANEL_FIELD_PASS . " AS pass," 
-						. _INSTALL_PANEL_FIELD_SITE . " AS site," 
-						. " FROM " . _INSTALL_PANEL_NAME_TABLE 
-						. " WHERE "._INSTALL_PANEL_FIELD_SITE . " = '$site'"
-						, _INSTALL_SERVER_DB);
-			if (sql_count($result)>0) {
-				$data = sql_fetch($result);
-				$options['code'] = $data['code'];
-				define ('_INSTALL_NAME_DB', _INSTALL_NAME_DB);
-				define ('_INSTALL_USER_DB', _INSTALL_NAME_DB);
-				define ('_INSTALL_PASS_DB', $data['pass']);
-			}
-			else {
-				echo minipres(
-					_L('<h2>Erreur 404 : page inexistante</h2>')
-				);
-				exit;
+			if(defined(_INSTALL_PANEL_HOST_DB)){
+				include_spip('inc/minipres');
+				include_spip('base/abstract_sql');
+				include_once(dirname(__FILE__).'/base/abstract_mutu.php');
+
+				// On cherche en BD si le site est enregistre et on recupere
+				// password et code d'activation
+				$link = @mutu_connect_db(_INSTALL_PANEL_HOST_DB, 0, _INSTALL_PANEL_USER_DB, _INSTALL_PANEL_PASS_DB, '', _INSTALL_SERVER_DB);
+				@sql_selectdb(_INSTALL_PANEL_NAME_DB, _INSTALL_SERVER_DB);
+				$result=@sql_query("SELECT "
+							. _INSTALL_PANEL_FIELD_CODE . " AS code,"
+							. _INSTALL_PANEL_FIELD_PASS . " AS pass,"
+							. _INSTALL_PANEL_FIELD_SITE . " AS site,"
+							. " FROM " . _INSTALL_PANEL_NAME_TABLE
+							. " WHERE "._INSTALL_PANEL_FIELD_SITE . " = '$site'"
+							, _INSTALL_SERVER_DB);
+				if (sql_count($result)>0) {
+					$data = sql_fetch($result);
+					$options['code'] = $data['code'];
+					define ('_INSTALL_NAME_DB', _INSTALL_NAME_DB);
+					define ('_INSTALL_USER_DB', _INSTALL_NAME_DB);
+					define ('_INSTALL_PASS_DB', $data['pass']);
+				}
+				else {
+					echo minipres(
+						_L('<h2>Erreur 404 : page inexistante</h2>')
+					);
+					exit;
+				}
+			}else{
+				if(is_dir($options['repertoire'].'/'._SITES_ADMIN_MUTUALISATION)){
+					include_spip('base/abstract_sql');
+					define(_FILE_CONNECT,$options['repertoire'].'/'._SITES_ADMIN_MUTUALISATION.'/config/connect.php');
+					$mutu = sql_fetsel('id_admin,id_mutu,statut','spip_mutus','url='.sql_quote($site));
+					$options['id_mutu'] = $mutu['id_mutu'];
+					$options['statut'] = $mutu['statut'];
+					$options['login'] = sql_getfetsel('login','spip_auteurs','id_auteur='.intval($mutu['id_admin']));
+					define(_FILE_CONNECT,'');
+				}
 			}
 		/*
 		 * > Cas de creation d'utilisateur de la base SQL

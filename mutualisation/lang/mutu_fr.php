@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'install_code' => 'Veuillez entrer le code d\'activation du site :',
+'install_code_panel' => 'Veuillez entrer votre mot de passe habituel ou le code d\'activation fourni par l\'h&eacute;bergeur :',
 'install_err' => 'Erreur...',
 'install_site' => 'Installation de votre site SPIP',
 'install_bd_echec' => 'La cr&#233;ation de la base de donn&#233;es @nombase@ a &#233;chou&#233;.',
@@ -31,8 +32,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_creation_rep_ok_1' => 'Cr&#233;ation des r&#233;pertoires OK. Vous pouvez ',
 'install_creation_rep_ok_2' => 'continuer...',
 'install_creation_site' => 'Creation du site @site@',
-'install_reps_crees' => 'Les r&#233;pertoires du site @site@ ont &#233;t&#233; cr&#233;&#233;s.'
+'install_reps_crees' => 'Les r&#233;pertoires du site @site@ ont &#233;t&#233; cr&#233;&#233;s.',
 
+// M
+'message_site_desactive' => 'Veuillez contacter l\'<a href="@lien@">h&eacute;bergeur</a> pour de plus amples d&eacute;tails',
+
+// S
+'site_supprime' => 'Ce site est en attente de suppression d&eacute;finitive.',
+'site_suspendu' => 'Ce site est suspendu.',
+'site_non_active' => 'Ce site n\'a pas encore &eacute;t&eacute; valid&eacute; par un administrateur.',
+'site_non_demande' => 'Ce site n\'existe pas.',
 );
 
 ?>
