@@ -10,11 +10,11 @@
 	<lien>http://www.spip-contrib.net/spip.php?article3612</lien>
 	<prefix>jqueryui</prefix>
 	<icon>images/jqueryui.png</icon>
-	<options>jqueryui_options.php</options>
 	<pipeline>
 		<nom>jquery_plugins</nom>
 		<inclure>jqueryui_pipelines.php</inclure>
 	</pipeline>
+	<pipeline><nom>jqueryui_forcer</nom></pipeline>
 	<necessite id="lib:jquery-ui-1.8.5" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.8.5.zip" />
 	<categorie>outil</categorie>
 </plugin>
