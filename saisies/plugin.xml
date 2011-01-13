@@ -31,8 +31,7 @@
     
     <fonctions>balise/saisie.php</fonctions>
     <fonctions>inc/saisies.php</fonctions>
-    <options>saisies_options.php</options>
-    
+
     <pipeline>
     	<nom>header_prive</nom>
     	<inclure>saisies_pipelines.php</inclure>
@@ -41,6 +40,10 @@
     	<nom>affichage_final</nom>
     	<inclure>saisies_pipelines.php</inclure>
     </pipeline>
+		<pipeline>
+			<nom>saisies_autonomes</nom>
+			<inclure>saisies_pipelines.php</inclure>
+		</pipeline>
     
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="verifier" />

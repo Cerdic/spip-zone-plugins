@@ -23,4 +23,6 @@ function saisies_affichage_final($flux){
 	return $flux;
 }
 
+// declaration du pipeline
+function saisies_saisies_autonomes($flux) { return $flux;}
 ?>
