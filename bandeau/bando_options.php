@@ -27,15 +27,15 @@ function lister_themes_prives(){
 	return $themes;
 }
 
-function find_in_theme($file, $dirname='', $include=false){
+function find_in_theme($file, $dirname='', $include=false, $found = true){
 	$themes = lister_themes_prives();
 	foreach($themes as $theme){
-		if ($f = find_in_path($file,"prive/themes/$theme/$dirname",$include))
-			return $f;
+		if ($f = find_in_path($file,$g="prive/themes/$theme/$dirname",$include))
+			return $found?$f:"$g$file";
 	}
 	// fall back transitoire sur prive/images/
-	if ($f = find_in_path($file,"",$include))
-		return $f;
+	if ($f = find_in_path($g = $file,"",$include))
+		return $found?$f:$g;
 	spip_log("$dirname/$file introuvable dans le theme ".reset($themes),'theme');
 	return "";
 }
