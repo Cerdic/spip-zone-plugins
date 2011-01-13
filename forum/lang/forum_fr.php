@@ -22,7 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_messages_forum' => '@nb@ messages de forum',
 
 	// M
+	'message_marque_comme_spam' => 'Un message marqu&eacute; comme spam',
+	'message_publie' => 'Un message publi&eacute;',
+	'message_rien_a_faire' => 'Aucun forum n\'a &eacute;t&eacute; s&eacute;lectionn&eacute;',
+	'message_supprime' => 'Un message supprim&eacute;',
 	'messages_aucun' => 'Aucun',
+	'messages_marques_comme_spam' => '@nb@ messages marqu&eacute;s comme spam',
 	'messages_meme_auteur' => 'Tous les messages de cet auteur',
 	'messages_meme_email' => 'Tous les messages de cet email',
 	'messages_meme_ip' => 'Tous les messages de cette IP',
@@ -34,7 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_privadm' => 'Administrateurs',
 	'messages_prop' => 'Propos&eacute;s',
 	'messages_publie' => 'Publi&eacute;s',
+	'messages_publies' => '@nb@ messages publi&eacute;s',
 	'messages_spam' => 'Spam',
+	'messages_supprimes' => '@nb@ messages supprim&eacute;s',
 	'messages_tous' => 'Tous',
 
 	// S
