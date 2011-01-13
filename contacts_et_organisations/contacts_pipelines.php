@@ -45,7 +45,7 @@ function contacts_formulaire_charger($flux){
 	if ($flux['args']['form'] == 'editer_auteur') {
 		
 		// test des contacts, sinon des organisations
-		$res = sql_fetsel('*', 'spip_contacts', 'id_auteur='.sql_quote($flux['data']['id_auteur']));
+		$res = sql_fetsel('*', "spip_contacts_liens LEFT JOIN spip_contacts USING(id_contact)", 'id_objet='.sql_quote($flux['data']['id_auteur'])." AND objet = 'auteur'");
 		if (!$res) {
 			$res =  sql_fetsel('*', 'spip_organisations', 'id_auteur='.sql_quote($flux['data']['id_auteur']));
 		}
@@ -74,7 +74,7 @@ function contacts_formulaire_verifier($flux){
 		$id_auteur = $flux['args']['args'][0];
 		
 		// test des contacts, sinon des organisations
-		if (sql_countsel('spip_contacts', 'id_auteur='.sql_quote($id_auteur))) {
+		if (sql_countsel('spip_contacts_liens', 'id_objet='.sql_quote($id_auteur)." AND objet = 'auteur'")) {
 			$objet = 'contact';
 		} elseif (sql_countsel('spip_organisations', 'id_auteur='.sql_quote($id_auteur))) {
 			$objet = 'organisation';
@@ -116,7 +116,7 @@ function contacts_formulaire_traiter($flux){
 		$id_auteur = intval($flux['data']['id_auteur']);
 		
 		// test des contacts, sinon des organisations
-		if ($res = sql_fetsel('*', 'spip_contacts', 'id_auteur='.sql_quote($id_auteur))) {
+    	if ($res = sql_fetsel('*', "spip_contacts_liens LEFT JOIN spip_contacts USING(id_contact)", 'id_objet='.sql_quote($flux['data']['id_auteur'])." AND objet = 'auteur'")) {
 			$objet = 'contact';
 		} elseif ($res = sql_fetsel('*', 'spip_organisations', 'id_auteur='.sql_quote($id_auteur))) {
 			$objet = 'organisation';
