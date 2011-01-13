@@ -7,6 +7,7 @@
 	Licence GNU/GPL
 */
 
+include_spip('minical_fonctions');
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function balise_CALENDRIER_MINI($p) {

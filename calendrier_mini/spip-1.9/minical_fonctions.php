@@ -7,6 +7,7 @@
 */
 
 include_spip('inc/vieilles_defs');
+if (!defined('VAR_DATE')) define('VAR_DATE', 'archives');
 
 function balise_DATE_ARCHIVES($p) {
 	$p->code = "_request('".VAR_DATE."')";
