@@ -33,6 +33,10 @@
 		<nom>pre_liens</nom>
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>lm2_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="lib:soundmanagerv296a-20100624" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv296a-20100624.zip" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<necessite id="SPIP" version="[2.1.0;]" />

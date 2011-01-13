@@ -22,6 +22,19 @@ function lm2_insert_head($flux){
 
 	return $flux;
 }
+
+# inserer les liens dans la page
+function lm2_affichage_final(&$page) {
+	// Ajouter javascript/lm2_inlineplayer.js s'il n'y est pas déjà et qu'on a des enclosures dans la page
+	if (!strpos($page, 'javascript/lm2_inlineplayer.js')){
+		if(strpos($page, 'rel="enclosure"')  OR strpos($page, "rel='enclosure'")){
+			$script = recuperer_fond('head/lm2_inlineplayer');
+			$page = substr_replace($page, $script, strpos($page, '</body>'), 0);
+		}
+	}	
+	return $page;
+}
+
  
  /**
  * Ajout d'un rel="enclosure" sur les liens mp3.

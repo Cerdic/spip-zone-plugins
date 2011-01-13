@@ -1,0 +1,4 @@
+<BOUCLE_doc(DOCUMENTS){id_document}>
+<BOUCLE_article(ARTICLES){id_document}>#SET{titre_art,#TITRE}</BOUCLE_article>
+[<a href="(#URL_DOCUMENT)" rel="enclosure" title="Ecouter">[(#TITRE|sinon{#GET{titre_art}})]</a> - <a href="[(#URL_DOCUMENT)]" title="Télécharger le fichier - [(#TAILLE|taille_en_octets|texte_backend)]">[<small>(#TYPE_DOCUMENT|strtolower)</small>]</a>]
+</BOUCLE_doc>
