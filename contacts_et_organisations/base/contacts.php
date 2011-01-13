@@ -108,6 +108,21 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
     );
 	$tables_auxiliaires['spip_organisations_contacts'] =
 		array('field' => &$organisations_contacts, 'key' => &$organisations_contacts_key);
+
+
+    //-- Table organisations_contacts -------------------------------------
+    $contacts_liens = array(
+        "id_contact"     => "BIGINT(21) NOT NULL",
+        "id_objet"    => "BIGINT(21) NOT NULL",
+        "objet"    => "VARCHAR(25) NOT NULL",
+    );
+    $contacts_liens_key = array(
+        "PRIMARY KEY"	=> "id_contact, id_objet, objet",
+		"KEY id_contact"	=> "id_contact"
+    );
+	$tables_auxiliaires['spip_contacts_liens'] =
+		array('field' => &$contacts_liens, 'key' => &$contacts_liens_key);
+
 	
 	return $tables_auxiliaires;
 }
