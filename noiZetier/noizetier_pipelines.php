@@ -117,4 +117,10 @@ function noizetier_jqueryui_forcer($plugins){
 	return $plugins;
 }
 
+
+function noizetier_noizetier_lister_pages($flux){return $flux;}
+function noizetier_noizetier_blocs_defaut($flux){return $flux;}
+function noizetier_noizetier_config_export($flux){return $flux;}
+function noizetier_noizetier_config_import($flux){return $flux;}
+
 ?>

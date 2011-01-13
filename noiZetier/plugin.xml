@@ -2,7 +2,7 @@
 	<nom>noiZetier</nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8.2</version>
+	<version>0.8.3</version>
 	<version_base>0.3</version_base>
 	<etat>test</etat>
 	<description>Prototype de gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.
@@ -51,6 +51,25 @@
 		<nom>jqueryui_forcer</nom>
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>
+
+	<pipeline>
+		<nom>noizetier_lister_pages</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>noizetier_blocs_defaut</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>noizetier_config_export</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>noizetier_config_import</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+
+
 	<bouton id='noizetier' parent="configuration">
 		<url>noizetier</url>
 		<titre>noizetier:editer_noizetier_titre</titre>
