@@ -69,7 +69,6 @@ function contacts_declarer_tables_principales($tables_principales){
 	//-- Table contacts ------------------------------------------
 	$contacts = array(
 		"id_contact"	=> "bigint(21) NOT NULL auto_increment", 
-		"id_auteur"		=> "bigint(21) NOT NULL",
 		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
 		"prenom"		=> "tinytext NOT NULL DEFAULT ''",

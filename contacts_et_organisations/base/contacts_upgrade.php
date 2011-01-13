@@ -94,14 +94,37 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.1");
 	}
 
+	if (version_compare($current_version,"1.3.2","<")){
+		maj_tables('spip_contacts_liens');
+		$res = sql_select(array("id_auteur","id_contact"),"spip_contacts");
+		while ($row = sql_fetch($res)) {
+		    sql_insertq(
+		        'spip_contacts_liens',
+                array(
+                    "id_objet" => $row['id_auteur'],
+                    "objet" => "auteur",
+                    "id_contact" => $row['id_contact']
+                )
+		    );
+		}
 
+		if (!sql_alter("TABLE spip_contacts DROP id_auteur")) {
+			spip_log('Probleme lors de la modif de la table spip_contacts','contacts');
+		} else {
+			spip_log('Table spip_contacts correctement passsée en version 1.3.2','contacts');
+		}
+
+		
+		spip_log('Tables correctement passsées en version 1.3.2','contacts');
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.2");
+    }
 }
 
 function contacts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_organisations");
 	sql_drop_table("spip_contacts");
-	sql_drop_table("spip_contacts_liens");
 	sql_drop_table("spip_organisations_contacts");	
+	sql_drop_table("spip_organisations_contacts");
 	
 	effacer_meta($nom_meta_base_version);
 }
