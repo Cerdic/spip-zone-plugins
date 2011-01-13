@@ -4,7 +4,7 @@
 	&#169; 2009-2011 - GNU/LGPL || MIT
 	</auteur>
 	<version>
-	0.9.5
+	0.9.6
 	</version>
 	<etat>
 	stable
@@ -24,9 +24,8 @@
 	<prefix>
 	Memoization
 	</prefix>
-    <icon>memoization.png</icon>
-    <options>inc/memoization.php</options>
-	<chemin dir='' />
+	<icon>memoization.png</icon>
+	<options>inc/memoization.php</options>
 	<categorie>performance</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
