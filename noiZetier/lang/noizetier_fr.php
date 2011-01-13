@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_bloc_extra' => 'Extra',
 	
 	'nom_bloctexte' => 'Bloc de texte libre',
-	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder vos modifications.',
+	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder l\'ordre des noisettes.',
 	
 	'ieconfig_probleme_import_config' => 'Un probl&egrave;me a &eacute;t&eacute; rencontr&eacute; lors de l\'importation de la configuration du noiZetier.',
 	'ieconfig_ne_pas_importer' => 'Ne pas importer',
