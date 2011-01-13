@@ -129,6 +129,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	    
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="saisies" version="[1.7.7;]" />
+	<necessite id="spip_bonux" version="[2;]" />
 	<!-- coordonnees postales : cop -->
 	<utilise id="cop" version="[1.0.0;]" />
 	
