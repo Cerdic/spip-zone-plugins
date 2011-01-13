@@ -27,7 +27,7 @@ function exec_spipal(){
         echo _T('spipal:admin_texte_intro');
         echo fin_boite_info(true);
     
-	$res=association_icone(_T('configuration'),  '?exec=configurer_spipal', 'assoc_qui.png');
+	$res= icone_horizontale(_T('configuration'),  generer_url_ecrire('configurer_spipal'), _DIR_IMG_PACK. 'cfg-16.png', '', false);
 	echo bloc_des_raccourcis($res);
 
 	echo debut_droite('',true);
