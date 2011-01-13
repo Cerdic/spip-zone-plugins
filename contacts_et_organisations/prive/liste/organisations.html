@@ -23,7 +23,7 @@
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_organisation:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_organisation,[(#ID_CONTACT)/#ID_ORGANISATION],[(#ENV{retour,#SELF})]})],
+					[(#URL_ACTION_AUTEUR{supprimer_contact,[organisation/(#ID_ORGANISATION)],[(#ENV{retour,#SELF})]})],
 					ajax,<:contacts:confirmer_supprimer_organisation:>})],
 				#ID_AUTEUR
 			})]</td>
