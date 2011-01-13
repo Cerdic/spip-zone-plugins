@@ -12,7 +12,7 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
 	<version_base>0.3</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
@@ -62,7 +62,6 @@
 	</pipeline>
 	<pipeline>
 		<nom>recuperer_fond</nom>
-		<inclure>openid_pipelines.php</inclure>
 	</pipeline>
 	<categorie>auteur</categorie>
 </plugin>
@@ -82,7 +81,7 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>1.1.6</version>
+	<version>1.1.7</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
@@ -123,10 +122,6 @@
 	</pipeline>
  	<pipeline>
 		<nom>pre_edition</nom>
-		<inclure>openid_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>recuperer_fond</nom>
 		<inclure>openid_pipelines.php</inclure>
 	</pipeline>
 	<categorie>auteur</categorie>
