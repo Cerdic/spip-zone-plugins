@@ -90,6 +90,7 @@
 			update: function(event, ui) {
 				$(this).children('.editer_noisette').hide();
 				$(this).next('p.boutons').show();
+				$(this).next('p.boutons').children('input[(#VAL{91}|chr)]name=dragndrop_noisette[(#VAL{93}|chr)]').val('<:noizetier:bouton_enregistrer_rang|texte_script:>');
 				$('#bloc-[(#ENV{bloc})] div.actions button').hide();
 			}
 		});
