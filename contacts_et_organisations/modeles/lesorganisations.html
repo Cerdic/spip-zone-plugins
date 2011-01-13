@@ -1,5 +1,11 @@
-
+[(#REM)
+	note : remplacé 
+		#URL_ORGANISATION
+	par :
+		[(#ID_AUTEUR|generer_url_entite{auteur})]
+	car la page organisation n'existe pas
+]
 
 <BOUCLE_o(ORGANISATIONS) {id_contact} {par nom} {", "}>
-<span class="vcard author"><a class="url fn spip_in" href="#URL_ORGANISATION">#NOM</a></span>
+<span class="vcard author"><a class="url fn spip_in" href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></span>
 </BOUCLE_o>

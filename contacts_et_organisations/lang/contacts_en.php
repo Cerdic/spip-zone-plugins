@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom_organisation' => "Organisation",
 	'label_organisation' => 'Linked organisation',
 	'label_prenom' => "First name",
+	'label_prenom_nom' => "First + last name",
 	'label_pseudo' => 'Pseudo',
 	'label_recherche_contacts' => "Search in contacts",
 	'label_recherche_organisations' => "Search in organisations",
