@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // B
-    'bye' => '.L\'adresse @email@ a été retirée de notre liste de diffusion, merci.',
+    'bye' => 'L\'adresse @email@ a été retirée de notre liste de diffusion, merci.',
     
     // E
     'export_abonnes' => 'Exporter les abonnés au format :',
