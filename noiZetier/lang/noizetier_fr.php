@@ -37,8 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_noizetier_importer_configuration' => 'Importer une configuration',
 	'editer_noizetier_importer_configuration_explication' => 'Vouz pouvez importer une configuration du noizetier que vous auriez pr&eacute;alablement export&eacute;e ou bien une configuration fournie par un plugin.',
 	
-	'bouton_enregistrer_rang' => 'Enregistrer l\'ordre des noisettes',
-	
 	'erreur_aucune_noisette' => 'Aucune noisette trouv&eacute;e.',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise &agrave; jour de la base de donn&eacute;e.',
@@ -95,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_bloc_extra' => 'Extra',
 	
 	'nom_bloctexte' => 'Bloc de texte libre',
+	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder vos modifications.',
 	
 	'ieconfig_probleme_import_config' => 'Un probl&egrave;me a &eacute;t&eacute; rencontr&eacute; lors de l\'importation de la configuration du noiZetier.',
 	'ieconfig_ne_pas_importer' => 'Ne pas importer',
