@@ -11,8 +11,9 @@
 </form>
 
 
-<BOUCLE_books(DATA) {datasource #GET{titre},booksearch}
+<BOUCLE_books(DATA) {source booksearch, #GET{titre}}
 {Publisher!=Books LLC}
+{!par PublicationDate}
 >
 
 [<h1>(#VALEUR{Title}|typo)</h1>]
