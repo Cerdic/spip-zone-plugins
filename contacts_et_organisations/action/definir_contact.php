@@ -43,7 +43,6 @@ function insert_contact($id_auteur=0) {
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
 
 	$champs = array(
-		'id_auteur' => $id_auteur,
 		'nom' => $nom
 	);
 	
@@ -56,6 +55,7 @@ function insert_contact($id_auteur=0) {
 	));
 
 	$id_contact = sql_insertq("spip_contacts", $champs);
+	sql_insertq('spip_contacts_liens',array('id_objet' => $id_auteur,'objet' => 'auteur',"id_contact"=>$id_contact));
 	return $id_contact;
 }
 
