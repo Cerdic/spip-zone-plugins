@@ -4,7 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'message_urgent'=>'Urgent&nbsp;: vos articles ne s\'affichent plus ce matin&nbsp;? [Un correctif est disponible->http://www.spip.net/fr_article5248.html]'
+	'message_urgent'=>'Alerte&nbsp;: correction d\'une importante faille de s&eacute;curit&eacute;. Vous &ecirc;tes invit&eacute;s &agrave; mettre &agrave; jour votre SPIP dans la [version 2.1.8->http://files.spip.org/spip/archives/SPIP-v2-1.8.zip]'
 );
 
 ?>
