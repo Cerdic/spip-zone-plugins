@@ -4,7 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'message_urgent'=>'Alerte&nbsp;: correction d\'une importante faille de s&eacute;curit&eacute;. Vous &ecirc;tes invit&eacute;s &agrave; mettre &agrave; jour votre SPIP dans la [version 2.1.8->http://files.spip.org/spip/archives/SPIP-v2-1.8.zip]'
+	'message_urgent'=>'Alerte&nbsp;: correction d\'une importante faille de s&eacute;curit&eacute;. Vous &ecirc;tes invit&eacute;s &agrave; mettre &agrave; jour votre SPIP dans la [version 2.1.8->http://www.spip-contrib.net/SPIP-2-1-8-corrige-une-importante-faille-de-securite]'
 );
 
 ?>
