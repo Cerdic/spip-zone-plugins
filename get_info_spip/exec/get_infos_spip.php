@@ -4,7 +4,7 @@
 	// $LastChangedBy$
 	// $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_GINS_PREFIX', 'gins');
 define('_GINS_PAGINATION', 50);
@@ -169,22 +169,31 @@ function exec_get_infos_spip_dist() {
 		if($res)
 		{
 			$arr = array();
+			$sum = 0;
 			while($row = sql_fetch($res))
 			{
-				$arr[] = $is_mysql
-					? $row['Name']
+				if($is_mysql) {
+					
+					$dl = $row['Data_length'];
+					$sum += $dl;
+					
+					$arr[] = $row['Name']
 						. ' ('
 						. _T('gins:n_row', array('n' => ($n = $row['Rows'])))
-						. ($n ? ' : '.gins_decodeSize($row['Data_length']) : '')
+						. ($n ? ' : '.gins_decodeSize($dl) : '')
 						. ')'
-					: array_shift($row)
-					;
+						;
+				}
+				else {
+					$arr[] = array_shift($row);
+				}
 			}
 			
 			// ajouter le résultat aux tableaux
 			$corps[$ii] = gins_lister_values(
 				$arr
 				, _T('gins:'.$ii)
+				, ($sum ? ' ('.gins_decodeSize($sum).')' : '')
 			);
 		}
 
@@ -241,7 +250,7 @@ function exec_get_infos_spip_dist() {
  * Les valeurs à afficher en listes
  * @return string html code
  **/
-function gins_lister_values($array, $titre)
+function gins_lister_values($array, $titre, $stitre = '')
 {
 	$eol = PHP_EOL;
 	
@@ -251,7 +260,7 @@ function gins_lister_values($array, $titre)
 		$result .= '<li><strong>'.$key.'</strong>: '.gins_dump_value($val).'</li>'.$eol;
 	}
 	$result = ''
-		. debut_cadre_trait_couleur($icone, true, '', $titre)
+		. debut_cadre_trait_couleur($icone, true, '', $titre.$stitre)
 		. '<ul>' . $eol
 		. $result
 		. '</ul>' . $eol
@@ -283,11 +292,11 @@ function gins_dump_value($value)
 	}
 	elseif($g == 'boolean')
 	{
-		$value = '<span style=\"color:blue\">'.($value ? 'TRUE' : 'FALSE').'</span>'.$eol;
+		$value = '<span style="color:blue">'.($value ? 'TRUE' : 'FALSE').'</span>'.$eol;
 	}
 	elseif($value === NULL)
 	{
-		$value = '<span style=\"color:grey\">NULL</span>'.$eol;
+		$value = '<span style="color:grey">NULL</span>'.$eol;
 	}
 	return($value);
 }
