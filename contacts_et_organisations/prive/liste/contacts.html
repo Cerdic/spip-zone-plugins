@@ -2,7 +2,7 @@
 [(#REM) Tableau complet des contacts, affiché sur la page ?exec=contacts ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
-	id_auteur,1
+	id_contact,1
 }})
 ]<B_liste_orga>
 #ANCRE_PAGINATION
@@ -19,22 +19,20 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_orga(CONTACTS){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
-	<BOUCLE_auteur(AUTEURS) {id_contact}>
+	<BOUCLE_liste_orga(CONTACTS contacts_liens){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}|image_reduire{20,26})]</a>
-			<td class='pseudo'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#MODELE{nom_auteur}</a></td>
-			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
+			<td class="logo"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#LOGO_{#OBJET}|sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}|image_reduire{20,26})]</a>
+			<td class='pseudo'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#MODELE{nom_auteur}</a></td>
+			<td class='nom'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
 			<td class='organsiation'>#ORGANISATIONS</td>			
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_contact:>})],
 					[(#URL_ACTION_AUTEUR{supprimer_contact,[contact/(#ID_CONTACT)],[(#ENV{retour,#SELF})]})],
 					ajax,<:contacts:confirmer_supprimer_organisation:>})],
-				#ID_AUTEUR
+				#ID_OBJET
 			})]</td>
 		</tr>
-	</BOUCLE_auteur>
 	</BOUCLE_liste_orga>
 	</tbody>
 </table>
