@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_supprimer_boussole' => 'Supprimer la boussole de la base de donn&eacute;es',
 
 // D
+	'description_noisette_boussole' => 'Affichage standard d\'une boussole. Vous pouvez choisir le mod&egrave;le d\'affichage (liens textuels, logos...) ainsi que sa configuration pr&eacute;cise',
 // -- Descriptifs de la boussole et des sites de la galaxie SPIP
 	'descriptif_boussole_spip' => 'La boussole SPIP regroupe l\'ensemble des sites &#171; officiels &#187; de la galaxie SPIP. Elle d&eacute;finit pour chaque site, son logo, son nom, son slogan et sa description. N\'hésitez donc pas &agrave; l\'utiliser dans vos propres sites pour aiguiller vos visiteurs dans la galaxie SPIP.',
 	'descriptif_site_spip_blog' => 'Description du site SPIP Blog',
@@ -56,23 +57,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_site' => 'site',
 	'label_actualise_le' => 'Actualis&eacute; le',
 	'label_affiche' => 'Affich&eacute; ?',
+	'label_boussole' => 'Boussole &agrave; afficher',
 	'label_descriptif' => 'Descriptif',
 	'label_fichier_xml' => 'Fichier XML',
 	'label_logo' => 'Logo',
 	'label_mode_standard' => '&#171; @boussole@ &#187;, boussole officielle des sites SPIP',
 	'label_mode_url_perso' => 'Boussole personnelle',
 	'label_mode' => 'Choisissez une boussole',
-	'label_modele' => 'Mod&egrave;le',
+	'label_modele' => 'Mod&egrave;le d\'affichage',
 	'label_n_sites' => 'sites',
 	'label_nom' => 'Nom',
 	'label_slogan' => 'Slogan',
 	'label_filtre_groupe' => 'Groupes &agrave; afficher',
+	'label_a_class' => 'Classe de l\'ancre englobant le logo',
 	'label_div_class' => 'Classe du div englobant',
 	'label_div_id' => 'Id du div englobant',
 	'label_ul_class' => 'Classe de la balise ul de la liste',
 	'label_li_class' => 'Classe de chaque balise li de la liste',
+	'label_sepia' => 'Code de la couleur de s&eacute;pia (sans #)',
+	'label_taille_logo' => 'Taille max du logo (en pixels)',
 	'label_titre_boussole' => 'Afficher le titre de la boussole ?',
-	'label_type_bulle' => 'Information affcih&eacute;e dans la bulle de chaque lien',
+	'label_titre_groupe' => 'Afficher le titre du groupe ?',
+	'label_type_description' => 'Description affich&eacute;e &agrave; cot&eacute; du logo',
+	'label_type_bulle' => 'Information affich&eacute;e dans la bulle de chaque lien',
 	'label_url' => 'URL',
 	'label_version' => 'Version',
 
@@ -84,11 +91,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_xml_invalide' => 'Le fichier XML &#171; @fichier@ &#187; de description de la boussole n\'est pas conforme &agrave; la DTD',
 	'message_ok_boussole_actualisee' => 'La boussole &#171; @fichier@ &#187; a &eacute;t&eacute; mise &agrave; jour.',
 	'message_ok_boussole_ajoutee' => 'La boussole &#171; @fichier@ &#187; a &eacute;t&eacute; ajout&eacute;e.',
+	'modele_boussole_liste_simple' => 'Liste simple de liens textuels',
+	'modele_boussole_liste_avec_logo' => 'Liste de liens avec noms, logos et description',
+	'modele_boussole_liste_par_groupe' => 'Liste de liens textuels par groupe',
+	'modele_boussole_panorama' => 'Galerie des logos',
+	'modele_boussole_panorama_sepia' => 'Galerie des logos avec effet s&eacute;pia',
 
 // N
 // -- Noms de la boussole, des groupes et des sites de la galaxie SPIP
-	'noisette_nom_boussole_spip' => 'Boussole SPIP',
-	'noisette_description_boussole_spip' => 'Sites de la galaxie SPIP pr&eacute;sent&eacute;e sous forme d\'une liste de liens avec nom et bulle d\'information pour chaque site',
+	'nom_noisette_boussole' => 'Boussole',
 	'nom_boussole_spip' => 'Galaxie SPIP',
 	'nom_groupe_spip_actualite' => 'Actualit&eacute; de SPIP',
 	'nom_groupe_spip_aide' => 'Aide et &eacute;changes autour de SPIP',
@@ -119,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // O
 	'onglet_boussoles' => 'G&eacute;rer les boussoles',
+	'option_aucune_description' => 'Aucune description',
 	'option_nom_slogan_site' => 'Nom et slogan du site',
 	'option_nom_site' => 'Nom du site',
 	'option_slogan_site' => 'Slogan du site',
