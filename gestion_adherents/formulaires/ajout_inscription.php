@@ -68,7 +68,7 @@ if ($statut_adherent =="M") $statut="1comite"; else $statut="6forum";
 ))) {		$res = array('message_ok' => "auteur OK", 'id_auteur'=>$id_auteur);
 		$pass = creer_pass_pour_auteur($id_auteur);
 
-		if ($id_fichier = sql_insertq('fichiers', array(
+		if ($id_fichier = sql_insertq('spip_adherents', array(
 
 'id_auteur' => sql_getfetsel('id_auteur','spip_auteurs','nom='.sql_quote($pseudo)),
 'nom_adherent' => $nom_adherent,
@@ -76,14 +76,14 @@ if ($statut_adherent =="M") $statut="1comite"; else $statut="6forum";
 'adresse_postale' => $adresse_postale,
 'code_postal' => $code_postal,
 'localite' => $localite,
-'no_fichier' => $no_fichier,
+'no_adherent' => $no_fichier,
 'statut_adherent' => $statut_adherent,
 'cotisation' => $cotisation,
 'sexe' => $sexe, 
 'telephone' => $tel,
 'gsm' => $gsm
 )))
-		$res = array('message_ok' => "Enregistrement fichier OK", 'id_fichier'=>$id_fichier);}
+		$res = array('message_ok' => "Enregistrement adherent OK", 'id_fichier'=>$id_fichier);}
 
 	return $res;
 }

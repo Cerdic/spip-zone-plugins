@@ -7,10 +7,10 @@
 
 // table spip_adherents
 	$spip_fichiers = array(
-		"id_adherents" => "bigint(21) NOT NULL auto_increment",
+		"id_adherent" => "bigint(21) NOT NULL auto_increment",
 		"id_auteur" => "bigint(21) NOT NULL",
 		"maj" => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
-		"no_adherents" => "bigint(21) NOT NULL",
+		"no_adherent" => "bigint(21) NOT NULL",
 		"adresse_postale" => "tinytext NOT NULL",
 		"code_postal" => "text NOT NULL",
 		"localite" => "tinytext NOT NULL",
@@ -24,10 +24,10 @@
 	);
 
 	$spip_fichiers_key = array(
-		"PRIMARY KEY" => "id_adherents",
+		"PRIMARY KEY" => "id_adherent",
 		"KEY" => "statut_adherent",
 		"KEY" => "id_auteur",
-		"KEY" => "no_adherents"
+		"KEY" => "no_adherent"
 	);
 
 	$tables_principales['spip_adherents'] = array(

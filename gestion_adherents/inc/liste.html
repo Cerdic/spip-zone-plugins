@@ -38,7 +38,7 @@
 <B_alpha>
   <div style="float:left;">Par initiale:</div>
   <ul>
-<BOUCLE_alpha(fichiers){tout} {statut_adherent?}{par nom_adherent} {fusion LEFT(nom_adherent,1)}>
+<BOUCLE_alpha(ADHERENTS){tout} {statut_adherent?}{par nom_adherent} {fusion LEFT(nom_adherent,1)}>
   [<li><a href='[(#SELF|parametre_url{lettre, [(#NOM_ADHERENT|substr{0,1})]}|parametre_url{debut_donnees,0})]' class="ajax[ (#ENV{lettre}|=={#NOM_ADHERENT|substr{0,1}}|?{'on',''})]">
   (#NOM_ADHERENT|substr{0,1})
   </a></li>]
@@ -57,11 +57,11 @@
 <td>Adresse postale</td><td>CP</td><td>Localite</td><td>Tel</td><td>GSM</td><td>Pseudo</td><td>e-mail</td>
 <td>Acc&egrave;s<br/>Membre</td><td>EDIT</td>
 </tr>
-<BOUCLE_donnees(fichiers){par nom_adherent}{par no_fichier}{pagination 25}{statut_adherent?}{cotisation?}{nom_adherent LIKE %#ENV{recherche}%}{nom_adherent==^(#ENV{lettre})}>
+<BOUCLE_donnees(ADHERENTS){par nom_adherent}{par no_adherent}{pagination 25}{statut_adherent?}{cotisation?}{nom_adherent LIKE %#ENV{recherche}%}{nom_adherent==^(#ENV{lettre})}>
 <tr>
 <td style="border: dotted 1px;"><span  class="#EDIT{statut_adherent}">[(#STATUT_ADHERENT|?{#STATUT_ADHERENT,'++'})]</span></td>
 <td style="border: dotted 1px;"><span  class="#EDIT{cotisation}">[(#COTISATION|?{#COTISATION,'++'})]</span></td>
-<td style="border: dotted 1px;"><span  class="#EDIT{no_fichier}">[(#NO_FICHIER|?{#NO_FICHIER,'++'})]</span></td>
+<td style="border: dotted 1px;"><span  class="#EDIT{no_fichier}">[(#NO_ADHERENT|?{#NO_ADHERENT,'++'})]</span></td>
 
 <td style="border: dotted 1px;"><span  class="#EDIT{nom_adherent}">[(#NOM_ADHERENT|?{#NOM_ADHERENT,'++'})]</span></td>
 <td style="border: dotted 1px;"><span  class="#EDIT{prenom}">[(#PRENOM|?{#PRENOM,'++'})]</span></td>
