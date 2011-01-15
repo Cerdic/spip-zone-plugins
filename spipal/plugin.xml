@@ -9,25 +9,30 @@
 	 <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	<etat>dev</etat>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.6;]" />
+	<necessite id="SPIP" version="[2.1.8;]" />
 	<meta>spipal_metas</meta>
 	<description>
 	Paiement via Paypal pour un site sous SPIP.
 
-Une fois le plugin activ&eacute;, cliquer l'icone des outils en face de son nom.
-Vous aurez besoin au minimum d'un identifiant d'un compte Paypal (autrement dit une adresse mail) acceptant les paiements.
- 
+Une fois le plugin activ&eacute;, cliquer sur l'icone des outils en face de son nom.
+Vous aurez besoin au minimum d'un identifiant d'un compte Paypal, autrement dit une adresse mail, celle du webmestre étant prise par d&eacute;faut. 
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>spipal</prefix>
 	<install>base/spipal_gestion.php</install>
 	<options>spipal_options.php</options>
 	<pipeline>
-		<nom>ajouter_boutons</nom> 
-		<inclure>inc/spipal_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>inc/spipal_pipelines.php</inclure>
 	</pipeline>
+	<bouton id='spipal' parent='naviguer'>
+		<titre>spipal:versements</titre>
+		<icone>img_pack/av_edit.png</icone>
+		<url>spipal</url>
+	</bouton>
+	<bouton id='spipal2' parent='bando_edition'>
+	  <titre>spipal:versements</titre>
+	  <icone>img_pack/av_edit.png</icone>
+	  <url>spipal</url>
+	</bouton>
 </plugin>

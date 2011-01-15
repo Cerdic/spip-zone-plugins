@@ -11,13 +11,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function spipal_ajouter_boutons($flux){
-	$flux['naviguer']->sousmenu['spipal']= 
-	  new Bouton(_DIR_PLUGIN_SPIPAL_ICONES."/av_edit.png",_T('spipal:menu_editer'));
-    
-	return $flux;
-}
-
 // il faudrait rajouter la gestion des droits
 
 function spipal_affiche_milieu($flux) {
