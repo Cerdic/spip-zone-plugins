@@ -2,18 +2,19 @@
 	<nom><multi>[fr]Gestion adh&#233;rents</multi></nom>
 	<auteur>Suske, cy_altern
 _ &#169; 2010   Distribu&#233; sous licence GNU/GPL</auteur>
-	<version>0.1</version>
+	<version>0.1.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<prefix>fichier</prefix>
-	<icon>images/fichier.gif</icon>
+	<prefix>adherents</prefix>
+	<icon>images/adherents.gif</icon>
 	<description><multi>
 	[fr]Gestion d'un fichier de membres, sympathisants, adh&#233;rents...
 	</multi></description>
 	<lien></lien>
-	<options>fichier_options.php</options>
-	<install>base/fichier_install.php</install>
+	<options>adherents_options.php</options>
+	<install>base/adherents_install.php</install>
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="Crayons" version="[1.6.3;]" />
+	<necessite id="accesrestreint" version="[3.0.0;]" />
 	<categorie>divers</categorie>
 </plugin>

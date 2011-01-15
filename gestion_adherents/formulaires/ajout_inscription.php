@@ -121,8 +121,9 @@ function test_login($nom, $mail) {
 // http://doc.spip.org/@creer_pass_pour_auteur
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
+	include_spip('auth/sha256.inc');
 	$pass = creer_pass_aleatoire(8, $id_auteur);
-	$mdpass = md5($pass);
+	$mdpass = sha256($pass);
 	$htpass = generer_htpass($pass);
 	sql_updateq('spip_auteurs', array('pass'=>$mdpass, 'htpass'=>$htpass),"id_auteur = ".intval($id_auteur));
 	ecrire_acces();

@@ -5,12 +5,12 @@
 	global $tables_principales;
 	global $table_des_tables;  
 
-// table spip_fichiers
+// table spip_adherents
 	$spip_fichiers = array(
-		"id_fichier" => "bigint(21) NOT NULL auto_increment",
+		"id_adherents" => "bigint(21) NOT NULL auto_increment",
 		"id_auteur" => "bigint(21) NOT NULL",
 		"maj" => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
-		"no_fichier" => "bigint(21) NOT NULL",
+		"no_adherents" => "bigint(21) NOT NULL",
 		"adresse_postale" => "tinytext NOT NULL",
 		"code_postal" => "text NOT NULL",
 		"localite" => "tinytext NOT NULL",
@@ -24,17 +24,17 @@
 	);
 
 	$spip_fichiers_key = array(
-		"PRIMARY KEY" => "id_fichier",
+		"PRIMARY KEY" => "id_adherents",
 		"KEY" => "statut_adherent",
 		"KEY" => "id_auteur",
-		"KEY" => "no_fichier"
+		"KEY" => "no_adherents"
 	);
 
-	$tables_principales['spip_fichiers'] = array(
-		'field' => &$spip_fichiers,
-		'key' => &$spip_fichiers_key
+	$tables_principales['spip_adherents'] = array(
+		'field' => &$spip_adherents,
+		'key' => &$spip_adherents_key
 	);
 
-	$table_des_tables['fichiers'] = 'fichiers';
+	$table_des_tables['adherents'] = 'adherents';
 
 ?>

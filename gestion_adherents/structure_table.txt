@@ -1,27 +1,35 @@
 -- phpMyAdmin SQL Dump
+-- version 3.2.1
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Lun 07 Juin 2010 à 11:31
--- Version du serveur: 5.0.51
+-- Généré le : Sam 15 Janvier 2011 à 00:57
+-- Version du serveur: 5.1.37
+-- Version de PHP: 5.2.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Base de données: `base_donnees`
+-- Base de données: `spip_dev21`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fichiers`
+-- Structure de la table `spip_adherents`
 --
 
-CREATE TABLE IF NOT EXISTS `fichiers` (
-  `id_fichier` bigint(21) NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `spip_adherents` (
+  `id_adherents` bigint(21) NOT NULL AUTO_INCREMENT,
   `id_auteur` bigint(21) NOT NULL,
-  `maj` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `no_fichier` bigint(21) NOT NULL,
+  `maj` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `no_adherents` bigint(21) NOT NULL,
   `adresse_postale` tinytext NOT NULL,
   `code_postal` text NOT NULL,
   `localite` tinytext NOT NULL,
@@ -32,9 +40,6 @@ CREATE TABLE IF NOT EXISTS `fichiers` (
   `sexe` varchar(1) NOT NULL,
   `cotisation` varchar(4) NOT NULL,
   `statut_ecolo` varchar(1) NOT NULL,
-  PRIMARY KEY  (`id_fichier`),
-  KEY `statut_ecolo` (`statut_ecolo`),
-  KEY `id_auteur` (`id_auteur`),
-  KEY `no_fichier` (`no_fichier`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
+  PRIMARY KEY (`id_adherents`),
+  KEY `no_fichier` (`no_adherents`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
