@@ -17,7 +17,7 @@
 		<div class="contenu" id="principal" style="width:99%;">
 
 			<div id="intro" class="coins_ronds">
-				<div class="maj">Vous &ecirc;tes ici: &nbsp;<a href="/">Accueil</a>&nbsp;>&nbsp;<a href="[(#URL_PAGE{fichier})]">Gestion du fichier des adh&eacute;rents</a>
+				<div class="maj">Vous &ecirc;tes ici: &nbsp;<a href="/">Accueil</a>&nbsp;>&nbsp;<a href="[(#URL_PAGE{adherents})]">Gestion du fichier des adh&eacute;rents</a>
 			</div>
 
 			<div class="liste-articles">
@@ -30,7 +30,7 @@
 						<li[ class="(#ENV{choix}|=={selection}|oui)on"]><a href="[(#SELF|parametre_url{choix,selection})]#liste" >S&eacute;lection / Edition / Impression</a> </li>
 						<li[ class="(#ENV{choix}|=={correction}|oui)on"]> <a href="[(#SELF|parametre_url{choix,correction})]#liste" >Membres : Anomalies / Corrections</a></li>
 						<li[ class="(#ENV{choix}|=={inscription}|oui)on"]><a href="[(#SELF|parametre_url{choix,inscription})]#liste" >Nouvelle inscription</a></li>
-						<li[ class="(#ENV{choix}|non)on"]><a href="[(#SELF)]#liste">Derni&egrave;res modifications</a></li>
+						<li[ class="(#ENV{choix}|non)on"]><a href="[(#SELF|parametre_url{choix,''})]#liste">Derni&egrave;res modifications</a></li>
 						<li[ class="(#ENV{choix}|=={statistiques}|oui)on"]><a href="[(#SELF|parametre_url{choix,statistiques})]#liste">Statistiques</a></li>
 					</ul>
 				</div>
