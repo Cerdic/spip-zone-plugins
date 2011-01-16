@@ -179,7 +179,7 @@ function inscription2_i2_verifications_specifiques($array){
 	// Les logins : fonction inc/inscription2_valide_login
 	$array['login'] = 'valide_login';
 
-	// Les logins : fonction inc/inscription2_valide_login
+	// Les logins : fonction inc/inscription2_valide_nom
 	$array['nom'] = 'valide_nom';
 
 	// Les statuts : fonction inc/inscription2_valide_statut
