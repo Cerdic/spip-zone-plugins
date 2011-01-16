@@ -13,6 +13,12 @@ function inc_inscription2_valide_login_dist($login,$id_auteur=NULL) {
 		return false;
 	}
 	else{
+		// Vérifier si login correct
+		if (preg_match("/[A-Za-z0-9_-]*/",$login)){
+			return _T('inscription2:caracteres_interdit');	
+		}
+
+
 		// Vérifier si le login est déjà utilisé
 		if (sql_getfetsel("id_auteur","spip_auteurs","id_auteur !='".intval($id_auteur)."' AND login = '$login'")) {
 			return _T('inscription2:formulaire_login_deja_utilise');

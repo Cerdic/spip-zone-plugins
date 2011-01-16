@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caracteres' => 'caract&egrave;res',
+	'caracteres' => 'Caract&egrave;res interdits !',
 	'categorie' => 'Cat&eacute;gorie de cotisation',
 	'chaine_valide' => 'Veuillez ins&eacute;rer une chaine de caract&egrave;re',
 	'chainelettre' => '(compos&eacute;e uniquement de lettres)',

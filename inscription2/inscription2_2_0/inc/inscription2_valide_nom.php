@@ -15,7 +15,7 @@ function inc_inscription2_valide_nom_dist($nom,$id_auteur=NULL) {
 	else{
 		// Vérifier si nom correct
 		if (preg_match("/[A-Za-z0-9_-]*/",$nom)){
-			return _T('caracteres_interdit');	
+			return _T('inscription2:caracteres_interdit');	
 		}
 
 		// Vérifier si le nom est déjà utilisé
