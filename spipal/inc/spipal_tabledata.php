@@ -178,7 +178,7 @@ function mbt_maj_table_depuis_form($table_mysql, $action)
     foreach ( $pks as $k => $v) $pks[$k] = trim($v);
 
     if ($action == 'maj')
-      return maj_item($table_data, $fields, $pks);
+      return maj_item($table_mysql, $fields, $pks);
     
     $args = array();
     foreach ($fields as $k => $v) {
@@ -191,10 +191,10 @@ function mbt_maj_table_depuis_form($table_mysql, $action)
 }
 
 
-function maj_item($table_data, $fields, $pks)
+function maj_item($table_mysql, $desc, $pks)
 {
 	$fields = array();
-	foreach ($fields as $k => $v) {
+	foreach ($desc as $k => $v) {
                 if ( $v !== 'TIMESTAMP')
 		  $fields[$k] = $_REQUEST[$k];
 	}
@@ -209,13 +209,12 @@ function maj_item($table_data, $fields, $pks)
 		  break;
                 }
 	}
-
 	if ($and !== false)
 	  sql_updateq($table_mysql, $fields, join(" AND ", $and));
 }
 
-function supprimer_item($table_data, $pk, $id)
+function supprimer_item($table_mysql, $pk, $id)
 {
-	sql_delete($table_data, "$pk=" . intval($id));
+	sql_delete($table_mysql, "$pk=" . intval($id));
 }
 ?>

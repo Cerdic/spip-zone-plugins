@@ -13,57 +13,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-function balise_FORMULAIRE_PAYER($p) {
-    return calculer_balise_dynamique($p, 'FORMULAIRE_PAYER', array('id_article'));
-}
-
-function balise_FORMULAIRE_PAYER_stat($args, $filtres) {
-    if ( !$args[0] )
-        return erreur_squelette(
-            _T('zbug_champ_hors_motif',
-                array ('champ' => '#FORMULAIRE_PAYER',
-                       'motif' => 'pas de contexte ARTICLES')), '');
-    
-    $row = sql_fetsel(
+function formulaires_payer_charger($id_article)
+{
+	// compatibilite partielle avec l'ancienne version
+	if (!$id_article) $id_article = _request('id_article');
+	$row = sql_fetsel(
         'id_article, ref_produit,don,prix_unitaire_ht,tva,nom_com',
 	'spip_spipal_produits',
-	'id_article='.intval($args[0])
-    );
+	'id_article='. intval($id_article));
 
-    return $row;
-}
+	if (!$row) return "Rien a payer";
 
-function balise_FORMULAIRE_PAYER_dyn($id_article, $ref_produit, $don, $prix_unitaire_ht, $tva, $nom_com) {
-    $quantite          = _request('quantite');
-    $taxes = 0.0;
-    if ( !$don ) 
-        $taxes = round($prix_unitaire_ht * ($tva / 100), 2);
-    $prix_unitaire_ttc = $taxes + $prix_unitaire_ht;
-    
-    if ( $quantite === null ) {
-        $quantite = 1;
-    }
-    else {
-        $quantite = intval($quantite);
-    }
-    
-    return array(
-        'formulaires/formulaire_payer', 
-        0, 
-        array(
-            'custom'            => serialize(array('id_auteur' => (isset($GLOBALS['auteur_session']['id_auteur']))?$GLOBALS['auteur_session']['id_auteur']:0)),
-            'id_article'        => $id_article,
-            'ref_produit'       => $ref_produit,
-            'nom_com'           => $nom_com,
-            'don'               => $don,
-            'quantite'          => $quantite,
-            'prix_unitaire_ht'  => $prix_unitaire_ht,
-            'taxes'             => $taxes,
-            'prix_unitaire_ttc' => $prix_unitaire_ttc,
-            'monnaie'           => 'EUR',
-            'total_ttc'         => $quantite * $prix_unitaire_ttc,
-            'dir_notification'  => _DIR_PLUGIN_SPIPAL
-        )
-    );
+	$row['quantite'] = _request('quantite');
+	if (!is_numeric($row['quantite'])) $row['quantite'] = 1;
+
+	$row['taxes'] = $don ? 0 
+	  : round($row['prix_unitaire_ht'] * $row['tva'] / 100, 2);
+	$row['prix_unitaire_ttc'] = $row['taxes'] + $row['prix_unitaire_ht'];
+	$row['total_ttc'] = $row['quantite'] * $row['prix_unitaire_ttc'];
+	$row['monnaie'] = 'EUR';
+	$row['custom'] = serialize(array('id_auteur' => (isset($GLOBALS['auteur_session']['id_auteur']))?$GLOBALS['auteur_session']['id_auteur']:0));
+
+	return $row;
 }
 ?>

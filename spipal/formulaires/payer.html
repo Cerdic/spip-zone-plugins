@@ -1,5 +1,5 @@
 <form id="_xclick" action="#META{/spipal/url_paypal}" method="post">
-    <div style="text-align: right;font-size: 10px">
+    <div style="text-align: right;font-size: 10px">#ACTION_FORMULAIRE
         <input type="hidden" name="lc" value="#LANG" />
         <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="item_number" value="#ENV{ref_produit}" />
@@ -17,8 +17,7 @@
             </select>
             <img src="https://www.paypal.com/<:spipal:lang_lang:>/i/btn/x-click-but04.gif" style="margin: 0px; border: 0px none transparent; cursor:pointer; vertical-align: middle;" onclick="document.getElementById('_xclick').submit();" alt=""/>
 ][(#ENV{don}|=={1}|?{' ', ''})
-            ,
-            <input type="text" name="quantity" value="1" size="5" readonly="readonly" style="text-align: center" /> x
+            <input type="text" name="quantity" value="#ENV{quantity}" size="5" readonly="readonly" style="text-align: center" /> x
             <input type="text" name="amount_ttc" size="5" style="text-align: right" disabled="disabled" value="[(#ENV{prix_unitaire_ttc})"] />
             <input type="hidden" name="amount" size="5" style="text-align: right" value="#ENV{prix_unitaire_ht}" />
             <input type="text" name="currency_code" value="#ENV{monnaie}" readonly="readonly" size="3"/>

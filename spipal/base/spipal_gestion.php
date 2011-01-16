@@ -40,9 +40,8 @@ function spipal_base_init($table)
 	foreach(array(
                     'url_paypal'          => 'https://www.paypal.com/cgi-bin/webscr',  //prod
                     //'url_paypal'          => 'https://www.sandbox.paypal.com/fr/cgi-bin/webscr',  //test
-                    'notify_url'          => 'www.paypal.com',  //prod
-                    //'notify_url'          => 'www.sandbox.paypal.com',  //test
-                    'url_retour'          => generer_url_action('spipal_valider_paiement','','',true),
+                    'notify_url'          => generer_url_action('spipal_valider_paiement','','',true),
+                    'url_retour'          => $GLOBALS['meta']['adresse_site'],
                     'compte_paypal'       => $GLOBALS['meta']['email_webmaster'],
                     'style_page'          => 'PayPal',
                     'donner'              => 'on',
