@@ -1,9 +1,10 @@
+[<pre>(#ENV**|unserialize|print_r{1})</pre>]
 [(#REM)  L'appel depuis un article se fait par < sjcycleXX >, alors id_sjcycle=XX
 	ou par un modele  CROCHET(# MODELE{sjcycle}{id_article=XX})CROCHET , alors id_article=XX
 	(A noter que CROCHET(# MODELE{sjcycle}{id=XX})CROCHET ne fonctionne pas si le modele se trouve
    dans une boucle, id prenant l'id de l'objet de la boucle. Donc on evite cette ecriture)
 ]
-[(#SET{id_objet,       [(#ENV{id_sjcycle,     #ENV{id_article}})]})]
+[(#SET{id_objet,       [(#ENV{id_sjcycle,     0})]})]
 [(#SET{id_diapo,   	  [(#ENV{id_diapo,       0})]})]
 [(#SET{img_width,      [(#ENV{width,     		 #CONFIG{sjcycle/img_width}})]})]
 [(#SET{img_height,     [(#ENV{height,    		 #CONFIG{sjcycle/img_height}})]})]
