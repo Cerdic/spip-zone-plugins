@@ -30,7 +30,7 @@ function spiplistes_utiliser_facteur()
 	return($utiliser);
 }
 
-if(!spiplistes_utiliser_facteur())
+if(!spiplistes_utiliser_facteur() && !class_exists('PHPMailer'))
 {
 	include_spip('phpmailer/class.phpmailer');
 	include_spip('phpmailer/class.smtp');
