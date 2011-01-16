@@ -134,7 +134,8 @@ function charger_lectures($langue, $jour){
 		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=saint&date=".date("Ymd", strtotime($date));
 		$page = recuperer_page($url);
 		$balise = extraire_balises($page, 'a');
-		$tableau['saint']['titre'] = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
+		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
+		$tableau['saint']['titre'] = preg_replace(',†,UimsS', '&dagger;', $titre);
 		// -- Traitement des textes
 		$attribut = extraire_attribut($balise, 'onclick');
 		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
