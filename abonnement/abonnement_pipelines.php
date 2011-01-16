@@ -54,6 +54,7 @@ function abonnement_post_edition($flux){
 		$abonnements = _request('abonnements') ;
 		$echeances = _request('validites') ;
 				
+		if ($abonnements && is_array($abonnements)) {
 			foreach($abonnements as $key => $id_abonnement)	{
 			  if($echeances[$key])	
 				if (($id = sql_getfetsel('id_auteur','spip_auteurs_elargis_abonnements','id_auteur='.$id_auteur.' and id_abonnement='.sql_quote($id_abonnement).' and validite > NOW()'))){
@@ -90,7 +91,7 @@ function abonnement_post_edition($flux){
 		
 		
 			}	
-		
+		}
 		
 		// Notifications, gestion des revisions, reindexation...
 		pipeline('post_edition',
