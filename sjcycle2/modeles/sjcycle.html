@@ -1,4 +1,10 @@
-[(#SET{id_diapo,   	  [(#ENV{id_diapo, 0})]})]
+[(#REM)  L'appel depuis un article se fait par < sjcycleXX >, alors id_sjcycle=XX
+	ou par un modele  CROCHET(# MODELE{sjcycle}{id_article=XX})CROCHET , alors id_article=XX
+	(A noter que CROCHET(# MODELE{sjcycle}{id=XX})CROCHET ne fonctionne pas si le modele se trouve
+   dans une boucle, id prenant l'id de l'objet de la boucle. Donc on evite cette ecriture)
+]
+[(#SET{id_objet,       [(#ENV{id_sjcycle,     #ENV{id_article}})]})]
+[(#SET{id_diapo,   	  [(#ENV{id_diapo,       0})]})]
 [(#SET{img_width,      [(#ENV{width,     		 #CONFIG{sjcycle/img_width}})]})]
 [(#SET{img_height,     [(#ENV{height,    		 #CONFIG{sjcycle/img_height}})]})]
 [(#SET{img_position,   [(#ENV{position,  		 #CONFIG{sjcycle/img_position}})]})]
@@ -58,7 +64,7 @@
 
 	[(#REM) Solution de denisb pour eviter de dupliquer le code Cf http://article.gmane.org/gmane.comp.web.spip.zone/18622 ]
 
-	<BOUCLE_img(DOCUMENTS){id_article=#ENV{id}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
+	<BOUCLE_img(DOCUMENTS){id_article=#GET{id_objet}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
    
    		[(#REM) Les effets de type turnLeft ne fonctionnent pas si ce div est en place. En attendant de corriger
          rajout dans la doc de l'incompatibilité entre infobulles et ces effets. Du coup la bordure autour de l'image
