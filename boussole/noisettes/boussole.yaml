@@ -106,21 +106,6 @@ parametres:
       defaut: ''
       afficher_si: '@modele@=="boussole_panorama" || @modele@=="boussole_panorama_sepia"'
   -
-    saisie: 'selection'
-    options:
-      nom: 'aka_groupe'
-      label: '<:boussole:label_filtre_groupe:>'
-      cacher_option_intro: 'oui'
-      defaut: ''
-      datas:
-        '': '<:boussole:option_tous_groupes:>'
-        reference: '<:boussole:nom_groupe_spip_reference:>'
-        extension: '<:boussole:nom_groupe_spip_extension:>'
-        aide: '<:boussole:nom_groupe_spip_aide:>'
-        actualite: '<:boussole:nom_groupe_spip_actualite:>'
-        decouverte: '<:boussole:nom_groupe_spip_decouverte:>'
-      afficher_si: '@modele@!="boussole_liste_par_groupe"'
-  -
     saisie: 'couleur'
     options:
       nom: 'sepia'

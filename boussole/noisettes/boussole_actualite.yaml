@@ -1,0 +1,65 @@
+nom: '<:boussole:nom_noisette_boussole_actualite:>'
+description: '<:boussole:description_noisette_boussole_actualite:>'
+icon: 'prive/themes/spip/images/boussole_icone-24.png'
+contexte: 'aucun'
+parametres:
+  -
+    saisie: 'boussole'
+    options:
+      nom: 'boussole'
+      label: '<:boussole:label_boussole:>'
+      cacher_option_intro: 'oui'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'titre_actualite'
+      label: '<:boussole:label_titre_actualite:>'
+      defaut: 'non'
+      datas:
+        oui: '<:oui:>'
+        non: '<:non:>'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'titre_site'
+      label: '<:boussole:label_titre_site:>'
+      defaut: 'oui'
+      datas:
+        oui: '<:oui:>'
+        non: '<:non:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'max_sites'
+      label: '<:boussole:label_max_sites:>'
+      defaut: '3'
+  -
+    saisie: 'input'
+    options:
+      nom: 'max_articles'
+      label: '<:boussole:label_max_articles:>'
+      defaut: '5'
+  -
+    saisie: 'input'
+    options:
+      nom: 'div_id'
+      label: '<:boussole:label_div_id:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'div_class'
+      label: '<:boussole:label_div_class:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'ul_class'
+      label: '<:boussole:label_ul_class:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'li_class'
+      label: '<:boussole:label_li_class:>'
+      defaut: ''

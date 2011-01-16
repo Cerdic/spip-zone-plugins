@@ -65,7 +65,7 @@ function calcul_boussole_infos($alias) {
 // $champ			=> champ a traduire
 // $alias			=> alias du groupe ou du site
 function boussole_traduire($aka_boussole, $champ, $alias='') {
-	$champs_boussole = array('nom_boussole', 'slogan_boussole','descriptif_boussole');
+	$champs_boussole = array('nom_boussole', 'slogan_boussole','descriptif_boussole', 'titre_actualite');
 	$champs_groupe_site = array('nom_groupe', 'nom_site', 'slogan_site', 'nom_slogan_site', 'descriptif_site');
 
 	$traduction = '';
