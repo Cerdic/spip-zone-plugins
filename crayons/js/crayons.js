@@ -350,12 +350,12 @@ $.fn.activatecrayon = function(percent) {
 							.find("form.formulaire_crayon")
 							.submit();
 					}
-				})
-				.keypress(function(e){
 					if (e.keyCode == 27) {
 						me
 						.cancelcrayon();
 					}
+				})
+				.keypress(function(e){
 					// Clavier pour sauver
 					if (
 					(e.ctrlKey && (
