@@ -1,3 +1,24 @@
+div.pagination {
+	display:block;
+	text-align:center;
+}
+
+div.pagination img {
+	border:0pt none;
+	margin:0pt;
+	padding:0pt;
+}
+
+div.pagination a.decoupe_img {
+	border:0pt none;
+}
+
+span.cs_pagination_off {
+	color:lightgrey;
+	font-weight:bold;
+	text-decoration:underline;
+}
+
 div.onglets_print {
 	margin:1em;
 	padding:0.6em;

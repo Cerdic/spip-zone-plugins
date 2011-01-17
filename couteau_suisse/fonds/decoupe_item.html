@@ -7,4 +7,4 @@
 		2 si le nombre ne doit pas etre affiche
 		3 s'il faut afficher '...'
 
-]#SET{type,#ENV*{page}|decoupe_type_pagination{#ENV*{artpage},#ENV*{derniere_page}}}#SET{separateur,'&nbsp;'}[(#GET{type}|=={3}|oui)...#GET{separateur}][(#GET{type}|=={1}|oui)[(#ENV*{page}|=={#ENV*{artpage}}|oui)[<span class="cs_pagination_off">(#ENV*{page})</span>]][(#ENV*{page}|=={#ENV*{artpage}}|non)[<a title="#ENV*{title_page}" href="[(#ENV*{self}|decoupe_url{#ENV*{page},#ENV*{derniere_page}})]">(#ENV*{page})</a>]][(#ENV*{page}|<{#ENV*{derniere_page}}|?{#GET{separateur},''})]]
+]#SET{type,#ENV*{page}|decoupe_type_pagination{#ENV*{artpage},#ENV*{derniere_page}}}#SET{separateur,'&nbsp;'}[(#GET{type}|=={3}|oui)...#GET{separateur}][(#GET{type}|=={1}|oui)[(#ENV*{page}|=={#ENV*{artpage}}|oui)[<span class="cs_pagination_off">(#ENV*{page})</span>]][(#ENV*{page}|=={#ENV*{artpage}}|non)[<a title="#ENV*{title_page}" href="[(#ENV*{self}|decoupe_url{#ENV*{page},#ENV*{derniere_page}})]" class="decoupe_page">(#ENV*{page})</a>]][(#ENV*{page}|<{#ENV*{derniere_page}}|?{#GET{separateur},''})]]

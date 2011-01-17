@@ -31,13 +31,13 @@
 [(#ENV*{artpage}|=={1}|non)
 	[(#ENV*{derniere_page}|>={#GET{etendue}}|oui)
 		[(#GET{debut_on}|oui)
-			<a title="<:couteau:page_debut:>" href="[(#ENV*{self}|decoupe_url{1,#ENV*{derniere_page}})]"><img class="no_image_filtrer" alt="<:couteau:page_debut:>" title="<:couteau:page_debut:>" src="#GET{debut_on}"/></a>
+			<a title="<:couteau:page_debut:>" href="[(#ENV*{self}|decoupe_url{1,#ENV*{derniere_page}})]" class="decoupe_img"><img class="no_image_filtrer" alt="<:couteau:page_debut:>" title="<:couteau:page_debut:>" src="#GET{debut_on}"/></a>
 		]
 		[(#GET{debut_on}|non)
-			<a title="<:couteau:page_debut:>" href="[(#ENV*{self}|decoupe_url{1,#ENV*{derniere_page}})]"><img class="no_image_filtrer" alt="<:couteau:page_debut:>" title="<:couteau:page_debut:>" src="#GET{prec_on}"/><img class="no_image_filtrer" alt="<:couteau:page_debut:>" title="<:couteau:page_debut:>" src="#GET{prec_on}"/></a>
+			<a title="<:couteau:page_debut:>" href="[(#ENV*{self}|decoupe_url{1,#ENV*{derniere_page}})]" class="decoupe_img"><img class="no_image_filtrer" alt="<:couteau:page_debut:>" title="<:couteau:page_debut:>" src="#GET{prec_on}"/><img class="no_image_filtrer" alt="<:couteau:page_debut:>" title="<:couteau:page_debut:>" src="#GET{prec_on}"/></a>
 		]
 	]
-	<a title="<:couteau:page_precedente:>" href="[(#ENV*{self}|decoupe_url{#GET{precpage},#ENV*{derniere_page}})]"><img class="no_image_filtrer" alt="<:couteau:page_precedente:>" title="<:couteau:page_precedente:>" src="#GET{prec_on}"/></a>
+	<a title="<:couteau:page_precedente:>" href="[(#ENV*{self}|decoupe_url{#GET{precpage},#ENV*{derniere_page}})]" class="decoupe_img"><img class="no_image_filtrer" alt="<:couteau:page_precedente:>" title="<:couteau:page_precedente:>" src="#GET{prec_on}"/></a>
 ]
 [(#ENV*{items})]
 [(#ENV*{artpage}|=={#ENV*{derniere_page}}|oui)
@@ -52,13 +52,13 @@
 	]
 ]
 [(#ENV*{artpage}|=={#ENV*{derniere_page}}|non)
-	<a href="[(#ENV*{self}|decoupe_url{#GET{suivpage},#ENV*{derniere_page}})]"><img class="no_image_filtrer" alt="<:couteau:page_suivante:>" title="<:couteau:page_suivante:>" src="#GET{suiv_on}"/></a>
+	<a href="[(#ENV*{self}|decoupe_url{#GET{suivpage},#ENV*{derniere_page}})]" class="decoupe_img"><img class="no_image_filtrer" alt="<:couteau:page_suivante:>" title="<:couteau:page_suivante:>" src="#GET{suiv_on}"/></a>
 	[(#ENV*{derniere_page}|>={#GET{etendue}}|oui)
 		[(#GET{fin_on}|oui)
-			<a title="<:couteau:page_fin:>" href="[(#ENV*{self}|decoupe_url{#ENV*{derniere_page},#ENV*{derniere_page}})]"><img class="no_image_filtrer" alt="<:couteau:page_fin:>" title="<:couteau:page_fin:>" src="#GET{fin_on}"/></a>
+			<a title="<:couteau:page_fin:>" href="[(#ENV*{self}|decoupe_url{#ENV*{derniere_page},#ENV*{derniere_page}})]" class="decoupe_img"><img class="no_image_filtrer" alt="<:couteau:page_fin:>" title="<:couteau:page_fin:>" src="#GET{fin_on}"/></a>
 		]
 		[(#GET{fin_on}|non)
-			<a title="<:couteau:page_fin:>" href="[(#ENV*{self}|decoupe_url{#ENV*{derniere_page},#ENV*{derniere_page}})]"><img class="no_image_filtrer" alt="<:couteau:page_fin:>" title="<:couteau:page_fin:>" src="#GET{suiv_on}"/><img class="no_image_filtrer" alt="<:couteau:page_fin:>" title="<:couteau:page_fin:>" src="#GET{suiv_on}"/></a>
+			<a title="<:couteau:page_fin:>" href="[(#ENV*{self}|decoupe_url{#ENV*{derniere_page},#ENV*{derniere_page}})]" class="decoupe_img"><img class="no_image_filtrer" alt="<:couteau:page_fin:>" title="<:couteau:page_fin:>" src="#GET{suiv_on}"/><img class="no_image_filtrer" alt="<:couteau:page_fin:>" title="<:couteau:page_fin:>" src="#GET{suiv_on}"/></a>
 		]
 	]
 ]
