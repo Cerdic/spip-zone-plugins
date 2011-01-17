@@ -8,7 +8,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function decoration_installe() {
-	if(!defined('_decoration_BALISES')) return;
+	if(!defined('_decoration_BALISES')) return NULL;
 cs_log("decoration_installe()");
 	// on decode les balises entrees dans la config
 	$deco_balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));

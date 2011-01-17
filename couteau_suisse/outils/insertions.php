@@ -6,7 +6,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function insertions_installe() {
-	if(!defined('_insertions_LISTE')) return;
+	if(!defined('_insertions_LISTE')) return NULL;
 cs_log("insertions_installe()");
 	// on decode la liste entree dans la config
 	$liste = preg_split("/[\r\n]+/", trim(_insertions_LISTE));

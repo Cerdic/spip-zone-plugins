@@ -1,7 +1,7 @@
 <?php
 function jcorner_installe() {
 cs_log("jcorner_installe()");
-	if(!defined('_jcorner_CLASSES')) return;
+	if(!defined('_jcorner_CLASSES')) return NULL;
 
 	// on decode les balises entrees dans la config
 	$classes = preg_split("/[\r\n]+/", trim(_jcorner_CLASSES));

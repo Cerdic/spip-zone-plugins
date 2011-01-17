@@ -239,13 +239,15 @@ function cs_lire_data_outil($outil, $casier='') {
 	static $datas = array();
 	if(!$casier) $casier = $outil;
 	if(!isset($datas[$casier])) {
+		// recherche dans le fichier cache
 		if(!$GLOBALS['cs_outils']) include_once(_DIR_CS_TMP . 'mes_outils.php');
-		if(function_exists($f='cs_data_'.$casier)) $datas[$casier] = $f();
-	}
-	if(!isset($datas[$casier])) {
-		include_spip('outils/'.$outil);
-		$f = $outil.'_installe';
-		$datas[$casier] = $f();
+		if(function_exists($f='cs_data_'.$casier)) 
+			$datas[$casier] = $f();
+		else {
+			// installation de l'outil
+			include_spip('outils/'.$outil);
+			$datas[$casier] = function_exists($f=$outil.'_installe')?$f():NULL;
+		}
 	}
 	return $datas[$casier];
 }

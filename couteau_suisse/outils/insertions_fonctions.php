@@ -3,6 +3,7 @@
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function insertions_rempl($texte) {
 	$ins = cs_lire_data_outil('insertions');
+	if(!$ins) return $texte;
 	$texte = str_replace($ins[0][0], $ins[0][1], $texte);
 	return preg_replace($ins[1][0], $ins[1][1], $texte);
 }
