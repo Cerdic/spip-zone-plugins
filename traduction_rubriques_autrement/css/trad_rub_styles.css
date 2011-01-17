@@ -58,9 +58,7 @@ div.non_traduit{
 
 .lang{ margin-right:5px;}
 
-.changer{float:left;    margin:10px 0 20px 0; padding:5px;
-
-    position: relative;
+.changer{float:left;margin:10px 0 20px 0; padding:5px;position: relative;width:98%;
 }
 .defaut{width:98%}
 .liste-elements table.spip tr.trads{background:#dfdfdf}
