@@ -93,7 +93,7 @@ function exec_geoservice()
 				echo "<div style='padding:2em 3em 1em 1em; text-align:center;'>";
 				echo generer_action_auteur('geoservice_edit',
 					$id_geoservice,
-					generer_url_ecrire('geoservice'),
+					'./?exec=geoservice',	// BUG ? generer_url_ecrire('geoservice'),
 					$form,
 					" method='post' name='formulaire'"
 				);

@@ -85,7 +85,7 @@ function exec_geoservice_edit()
 		// Formulaire
 		echo generer_action_auteur('geoservice_edit',
 			$id_geoservice ? $id_geoservice : 0,
-			generer_url_ecrire('geoservice'),
+			'./?exec=geoservice',	// BUG ? generer_url_ecrire(''),
 			$form,
 			" method='post' name='formulaire'"
 		);

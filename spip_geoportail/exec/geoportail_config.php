@@ -140,7 +140,7 @@ function exec_geoportail_config()
 		// Formulaire
 		echo generer_action_auteur('geoportail_config',
 			'geoportail_config',
-			generer_url_ecrire('geoportail_config'),
+			'./?exec=geoportail_config',	// BUG ? generer_url_ecrire('geoportail_config'),
 			$form,
 			" method='post' name='formulaire'"
 		);
