@@ -12,10 +12,6 @@
 	<install>base/titre_logo_upgrade.php</install>
 	<options>titre_logo_options.php</options>
 	<pipeline>
-		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/titre_logo_install.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/titre_logo_install.php</inclure>
 	</pipeline>
