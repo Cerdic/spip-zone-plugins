@@ -63,7 +63,7 @@
 							<input type="password" name="twitter_consumer_secret" value="[(#ENV{twitter_consumer_secret})]" id="twitter_consumer_secret" class="text" />
 						</li>
 						[(#ENV{service}|=={twitter}|oui)
-						[(#ENV{twitter_consumer_key}|strlen|et{#ENV{twitter_consumer_key}|strlen}|oui)
+						[(#ENV{twitter_consumer_key}|strlen|et{#ENV{twitter_consumer_secret}|strlen}|oui)
 						<li class="associer_twitter_compte twitter_conf">
 							[(#SET{infos_compte,[(#VAL{account/verify_credentials}|microblog_twitter_api)]})]
 							[(#SET{name,#GET{infos_compte}|table_valeur{screen_name}})]
