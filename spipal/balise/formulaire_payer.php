@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-function formulaires_payer_charger($id_article)
+function formulaires_payer_charger($id_article, $validation='valider')
 {
 	// compatibilite partielle avec l'ancienne version
 	if (!$id_article) $id_article = _request('id_article');
@@ -37,7 +37,7 @@ function formulaires_payer_charger($id_article)
 	  ? $GLOBALS['auteur_session']['id_auteur']
 	  :0;
 
-	$row['custom'] = serialize(array('id_auteur' => $id, 'validation' =>'valider'));
+	$row['custom'] = serialize(array('id_auteur' => $id, 'validation' => $validation));
 
 	return $row;
 }
