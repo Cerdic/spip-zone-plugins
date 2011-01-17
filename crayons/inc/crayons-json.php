@@ -28,7 +28,7 @@ function crayons_var2js($var) {
 		case is_null($var) :
 			return 'null';
 		case is_string($var) :
-			return '"' .addcslashes($var, "\"\\\n\r/") . '"';
+			return '"' .addcslashes($var, "\"\\\n\r\t/") . '"';
 		case is_bool($var) :
 			return $var ? 'true' : 'false';
 		case is_scalar($var) :
@@ -72,7 +72,7 @@ function crayons_json_encode($v) {
 
 	if ($GLOBALS['meta']['charset'] != 'utf-8') {
 		include_spip('inc/charsets');
-		$v = unicode2charset(charset2unicode($v), 'utf-8');
+		$v = charset2unicode($v);
 	}
 
 	return $v;
