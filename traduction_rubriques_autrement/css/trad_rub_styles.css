@@ -48,9 +48,7 @@ div.non_traduit{
 	background: #ffffff ;	
 }
 
-.bouton_options{float:right;clear:both; margin-top:5px;text-align:right;
-
-}
+.bouton_options{float:left; margin-left:5px;text-align:right;}
 
 .nettoyeur{clear:both;}
 
