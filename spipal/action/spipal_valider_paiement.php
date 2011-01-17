@@ -17,26 +17,32 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_spipal_valider_paiement()
 {
-	#spip_log("\r\n-------------------------------------\r\n", 'paypal');
-	#spip_log(print_r($_REQUEST, true)."\r\n", 'paypal');
-	$res = spipal_validation_arg($_POST, $GLOBALS['spipal_metas']['notify_url']);
-	#spip_log(print_r($res, true), 'paypal');
-	if (!is_string($res)) $res = var_dump($res, true);
+	spipal_validation_arg($_POST, $GLOBALS['spipal_metas']['notify_url']);
 }
 
 function spipal_validation_arg($env, $url)
 {
 	unset($env['action']);
+	if (!$env) {
+		$env = $GLOBALS['spipal_test'];
+		$test = true;
+	} else $test = false;
+	if ($test) {
+		spip_log("\r\n-------------------------------------\r\n", 'paypal');
+		spip_log(print_r($env, true)."\r\n", 'paypal');
+	}
 	$res = validation_pp_http_post($env, $url);
-	return is_string($res) ?
+	$res = is_string($res) ?
 	  validation_pp_http_ERREUR($res) :
 	  validation_pp_http_VERIFIED($res, $GLOBALS['spipal_metas']['garder_notification']);
+	if ($test) 
+		spip_log(print_r($res, true), 'paypal');
+	return $res;
 }
 
-// a refaire avec "recuperer_page" qui gere les redirections.
+// a refaire avec "recuperer_page" qui gere les redirections et les port != 80
 function validation_pp_http_post($env, $url)
 {
-	if (!$env) return $GLOBALS['spipal_test'];
 	$fp = fsockopen ($url, 80, $errno, $errstr, 30);
 	if (!$fp) return false;
 	$body   = validation_pp_http_body($env);
@@ -86,7 +92,7 @@ function validation_pp_http_VERIFIED($env, $trace) {
 		     'date_versement' => "NOW()",
 		     'notification' => $trace ? serialize($env) : '');
 	$n = sql_insertq("spip_spipal_versements", $res);
-	# spip_log("Nouveau paiment $n par " . $custom['id_auteur']);
+	# spip_log("Nouveau paiement $n par " . $custom['id_auteur']);
 	return $res;
 }
 
@@ -94,8 +100,13 @@ function validation_pp_http_ERREUR($erreur) {
 	return "erreur plugin [spipal][validation_pp_http][$erreur]";
 }
 
+// pour utiliser le simulateur de notification de Paypal ici:
+// https://developer.paypal.com/us/cgi-bin/devscr?cmd=_ipn-link-session
+// y choisir "Web-Accept" comme type de transaction et mettre dans "custom":
+// a:1:{s:9:"id_auteur";i:1;}
+
 $GLOBALS['spipal_test'] = array(
-	'custom' => serialize(array('id_auteur' => 1)),
+	'custom' => serialize(array('id_auteur' => 1)), 
 	'item_number' => 'Essai',
 	'tax' => 3,
 	'payment_gross' => 4,
