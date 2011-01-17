@@ -34,7 +34,7 @@ function spipal_validation_arg($env, $url)
 	$res = validation_pp_http_post($env, $url);
 	$res = is_string($res) ?
 	  validation_pp_http_ERREUR($res) :
-	  validation_pp_http_VERIFIED($res, $GLOBALS['spipal_metas']['garder_notification']);
+	  validation_pp_http_VERIFIED($res);
 	if ($test) 
 		spip_log(print_r($res, true), 'paypal');
 	return $res;
@@ -74,15 +74,29 @@ function validation_pp_http_header($length) {
 }
 
 // Quand le serveur paypal transmet un message comportant VERIFIED, 
-// la transaction est valide et les informations sont fiables
+// la transaction a ete faite si le statut est "completed"
+// et on recupere la valeur de personnalisation pour valider.
+// Il faudrait traiter le pb des notifications concurrentes, cf:
+// https://www.x.com/docs/DOC-1084
 
-function validation_pp_http_VERIFIED($env, $trace) {
-        include_spip('base/abstract_sql');
-        $custom = @unserialize($env['custom']);
-	if (!isset($custom['id_auteur']) OR $env['payment_status'] !== 'Completed') {
+function validation_pp_http_VERIFIED($env) {
+	if ($env['payment_status'] !== 'Completed') {
 	  spip_log("Retour paypal invalide " . serialize($env));
-	  return array();	  
+	  return array();
 	}
+        $custom = @unserialize($env['custom']);
+	$f = isset($custom['validation']) ? charger_fonction($custom['validation'] . '_spipal', 'inc', true) : false;
+	if (!$f) {
+	  spip_log("Retour paypal sans continuation " . serialize($env));
+	  return array();
+	}
+	return $f($env);
+}
+
+// Fonction de validation par defaut
+function inc_valider_spipal_dist($env)
+{
+	$custom = @unserialize($env['custom']);
 	$res = array('item_number' => $env['item_number'],
 		     'id_auteur' => $custom['id_auteur'],
 		     'versement_ht' => (($env['payment_gross']?$env['payment_gross']:$env['mc_gross']) - $env['tax']),
@@ -90,9 +104,9 @@ function validation_pp_http_VERIFIED($env, $trace) {
 		     'versement_charges' => $env['payment_fee']?$env['payment_fee']:$env['mc_fee'],
 		     'devise' => $env['mc_currency']?$env['mc_currency']:'USD',
 		     'date_versement' => "NOW()",
-		     'notification' => $trace ? serialize($env) : '');
+		     'notification' => $GLOBALS['spipal_metas']['garder_notification'] ? serialize($env) : '');
 	$n = sql_insertq("spip_spipal_versements", $res);
-	# spip_log("Nouveau paiement $n par " . $custom['id_auteur']);
+	spip_log("Nouveau paiement $n par " . $custom['id_auteur']);
 	return $res;
 }
 
@@ -100,13 +114,8 @@ function validation_pp_http_ERREUR($erreur) {
 	return "erreur plugin [spipal][validation_pp_http][$erreur]";
 }
 
-// pour utiliser le simulateur de notification de Paypal ici:
-// https://developer.paypal.com/us/cgi-bin/devscr?cmd=_ipn-link-session
-// y choisir "Web-Accept" comme type de transaction et mettre dans "custom":
-// a:1:{s:9:"id_auteur";i:1;}
-
 $GLOBALS['spipal_test'] = array(
-	'custom' => serialize(array('id_auteur' => 1)), 
+	'custom' => serialize(array('validation' => 'valider', 'id_auteur' => 1)), 
 	'item_number' => 'Essai',
 	'tax' => 3,
 	'payment_gross' => 4,
@@ -117,4 +126,10 @@ $GLOBALS['spipal_test'] = array(
 	'date_versement' => "NOW()",
 	'payment_status' => 'Completed'
 				);
+
+// pour utiliser le simulateur de notification de Paypal
+// https://developer.paypal.com/us/cgi-bin/devscr?cmd=_ipn-link-session
+// y choisir "Web-Accept" comme type de transaction et mettre dans "custom":
+// a:2:{s:10:"validation";s:7:"valider";s:9:"id_auteur";i:1;}
+// echo $GLOBALS['spipal_test']['custom'];exit;
 ?>

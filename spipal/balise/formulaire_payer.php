@@ -32,7 +32,12 @@ function formulaires_payer_charger($id_article)
 	$row['prix_unitaire_ttc'] = $row['taxes'] + $row['prix_unitaire_ht'];
 	$row['total_ttc'] = $row['quantite'] * $row['prix_unitaire_ttc'];
 	$row['monnaie'] = 'EUR';
-	$row['custom'] = serialize(array('id_auteur' => (isset($GLOBALS['auteur_session']['id_auteur']))?$GLOBALS['auteur_session']['id_auteur']:0));
+
+	$id = isset($GLOBALS['auteur_session']['id_auteur'])
+	  ? $GLOBALS['auteur_session']['id_auteur']
+	  :0;
+
+	$row['custom'] = serialize(array('id_auteur' => $id, 'validation' =>'valider'));
 
 	return $row;
 }

@@ -40,7 +40,7 @@ function spipal_base_init($table)
 	foreach(array(
                     'url_paypal'          => 'https://www.paypal.com/cgi-bin/webscr',  //prod
                     //'url_paypal'          => 'https://www.sandbox.paypal.com/fr/cgi-bin/webscr',  //test
-                    'notify_url'          => 'www.paypal.com'; 
+                    'notify_url'          => 'www.paypal.com',
                     'url_retour'          => $GLOBALS['meta']['adresse_site'],
                     'compte_paypal'       => $GLOBALS['meta']['email_webmaster'],
                     'style_page'          => 'PayPal',
