@@ -59,7 +59,8 @@ function noizetier_obtenir_infos_noisettes() {
 		lire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, $noisettes);
 		$noisettes = @unserialize($noisettes);
 		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
-		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
+		// ou si le cache est désactivé
+		if (!$noisettes or (_request('var_mode') == 'recalcul') or (defined('_NO_CACHE') and _NO_CACHE!=0)) {
 			$noisettes = noizetier_obtenir_infos_noisettes_direct();
 			ecrire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
 		}
