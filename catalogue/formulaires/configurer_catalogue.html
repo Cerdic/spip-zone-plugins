@@ -1,0 +1,19 @@
+<!-- nom=catalogue -->
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+<h3 class='titrem'><:catalogue:configurer_le_catalogue:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE
+		<ul>
+			[(#SAISIE{selecteur_rubrique,branches,
+				label=<:catalogue:rubriques_catalogue:>,
+				multiple=oui})]
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+
+</div>

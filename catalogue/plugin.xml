@@ -75,8 +75,10 @@
 	</pipeline>
 	
 	<categorie>divers</categorie>
+	
 	<necessite id="SPIP" version="[2.1.0;]" />
-	<utilise id="contacts" version="[1.0]" src="http://files.spip.org/spip-zone/contacts.zip" />
+	<necessite id="spip_bonux" version="[2.2.0;]" />
+	<necessite id="saisies" version="[1.8.0;]" />
 	
 </plugin>
 
