@@ -1,0 +1,62 @@
+
+[(#SET{plie,0})][(#SET{form,0})]
+[(#REM)
+	si on est en ajax, on peut recevoir un id_xx
+	pour afficher le formulaire correspondant
+]
+[(#ENV{id_cat_variante}|oui)
+	[(#SET{plie,1})]
+	[(#SET{form,1})]
+]
+[(#SET{retour,[(#ENV{retour,#SELF}
+		|parametre_url{id_cat_variante,''})]})]
+
+
+<div id="editer_cat_variantes-#ID_ARTICLE" class="ajax-action editer_variante">
+
+	<div class="cadre cadre-e">
+	
+		<img src="#CHEMIN{img/picto_catalogue_32x32.png}" class="cadre-icone" alt="" width="24" height="24" />
+		
+		<div class='titrem[ (#GET{plie}|?{deplie,replie})]' onMouseOver="jQuery(this).depliant('#variantes_article');">
+			<a href='#' onClick="return jQuery(this).depliant_clicancre('#variantes_article');" class='titremancre'></a>
+			<:catalogue:titre_bloc_catalogue:>
+		</div>
+		
+		<div class='cadre_padding'>
+
+			[(#INCLURE{fond=prive/liste/cat_variantes, id_article, retour=#GET{retour}})]
+		
+			<div id="variantes_article" class="bloc_depliable[ (#GET{plie}|?{blocdeplie,blocreplie})]">
+				<a id='access-v' href='#access-v' accesskey='v'></a>
+				[(#AUTORISER{modifier,article,#ENV{id_article}})
+					[(#GET{form}|oui)
+						[(#ENV{id_cat_variante}|oui)
+							<h3>[(#ENV{id_cat_variante}|intval|?{<:catalogue:editer_variante:>,<:catalogue:nouvelle_variante:>})]</h3>
+							<div class='ajax'>[(#FORMULAIRE_EDITER_CAT_VARIANTE{#ENV{id_cat_variante},#ENV{id_article},#GET{retour}#editer_cat_variantes-#ENV{id_article}})]</div>
+						]
+					]
+				]
+
+			<div class='boutons'>
+			[(#BOUTON_ACTION{[(#CHEMIN{img/variante-add-24.png}
+				|balise_img{<:catalogue:ajouter_variante:>}
+				|concat{' ',<:catalogue:ajouter_variante:>})],
+				[(#URL_ECRIRE{variante_edit}
+					|parametre_url{id_article,#ENV{id_article}}
+					|parametre_url{id_cat_variante,new}
+					|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
+			</div>
+			
+			</div><!-- fin de variante_article -->
+				
+			<div class='nettoyeur'></div>
+
+		</div><!-- fin de cadre_padding -->
+		
+	</div><!-- fin de cadre cadre-e -->
+	
+</div><!-- fin de editer_variante -->
+
+
+

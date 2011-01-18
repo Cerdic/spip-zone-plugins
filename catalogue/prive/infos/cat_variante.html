@@ -1,0 +1,19 @@
+<BOUCLE_cat_variante_info(CAT_VARIANTES){id_cat_variante=#ENV{id}}{tout}>
+<div class='infos'>
+	<div class='numero'>
+		<:catalogue:info_gauche_numero_variante:>
+		<p>#ID_CAT_VARIANTE</p>
+	</div>
+
+	<div class='utilisation'>
+		<B_variante_utilisee>
+		<:catalogue:info_variante_utilisee_par:>
+		<ul>
+		<BOUCLE_variante_utilisee(ARTICLES){id_article}{par titre}>
+			<li><a href="[(#ID_OBJET|generer_url_entite{article})]">#TITRE</a></li>
+		</BOUCLE_variante_utilisee>
+		</ul>
+		</B_variante_utilisee>
+	</div>
+</div>
+</BOUCLE_cat_variante_info>

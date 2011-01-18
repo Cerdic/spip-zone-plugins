@@ -1,39 +1,32 @@
+[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
+	<!--#hierarchie-->
+	<ul id="chemin">
+		<li><span class="bloc"><:catalogue:editer_variante:></li>
+		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_cat_variante}|intval|?{<:catalogue:editer_variante:>,<:catalogue:nouvelle_variante:>})]</span></li>
+	</ul>
+	<!--/#hierarchie-->
+	 
+	<!--#navigation-->
+	[(#REM) Ce pipeline charge prive/infos/$type ]
+	[(#VAL{inc/presentation}|include_spip|non)]
+	[<div class='cadre cadre-info'>
+		(#PIPELINE{boite_infos,[(#ARRAY{
+			args,[(#ARRAY{
+				type,cat_variante,
+				id,#ENV{id_cat_variante}})],
+			data,''})]})
+	</div>]
+	<!--/#navigation-->
 
 
-<BOUCLE_v(CAT_VARIANTES){id_cat_variante}>
+	<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ENV{retour,#SELF}|icone{<:icone_retour:>, #CHEMIN{img/variante-24.png}, #LANG_LEFT})]
 
-<!--#hierarchie-->
-<ul id="chemin">
-	<li><span class="bloc"><a href="?exec=naviguer&id_rubrique=0">Racine du site</a></li>
-	<li><span class="bloc"><em> &gt; </em><a href="?exec=catalogue"><:catalogue:catalogue:></a></span></li>
-	<li><span class="bloc"><em> &gt; </em><a href="?exec=articles&id_article=#ID_ARTICLE"><:catalogue:retour_article:>#ID_ARTICLE</a></span></li>
-</ul>
-<!--/#hierarchie-->
- 
-
-<!--#navigation-->
-<div class='cadre-info'>
-<:catalogue:info_variante_edit:></div>
-<!--/#navigation-->
- 
-<!--#extra-->
-<!-- Du contenu en plus dans la colonne extra.-->
-<!--/#extra-->
-
-
-<h1><:catalogue:edition_variante:></h1>
-#INCLURE{fond=inc/blocs/variante,id_cat_variante,env} 
-#FORMULAIRE_EDITION_VARIANTE
-
-</BOUCLE_v>
-
-</B_v>
-[(#BOUTON_ACTION{
-	<:catalogue:bouton_ajouter_variante:>,
-	[(#URL_ACTION_AUTEUR{ajouter_variante,#ID_ARTICLE}|parametre_url{redirect,#SELF})],
-	ajax,
-	<:catalogue:ajouter_variante_question:>
-})]
-<//B_v>
-
-
+		<h1>[(#ENV{id_cat_variante}|intval|?{<:catalogue:editer_variante:>,<:catalogue:nouvelle_variante:>})]</h1>
+	</div>
+		<div class='ajax'>
+		#FORMULAIRE_EDITER_CAT_VARIANTE{#ENV{id_cat_variante,new},#ENV{id_article},#ENV{retour}}
+		</div>
+	</div>
+]

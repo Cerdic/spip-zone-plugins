@@ -1,0 +1,48 @@
+
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_cat_variante,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_cat_variante' value='#ENV{id_cat_variante}' />
+			<input type='hidden' name='id_article' value='#ENV{id_article}' />
+			<ul>
+				[(#SAISIE{input, titre, label=<:catalogue:label_titre:>})]
+				
+				[(#SAISIE{textarea, descriptif,
+					label=<:catalogue:label_descriptif:>,
+					rows=5})]
+					
+				[(#SAISIE{input, prix_ht, label=<:catalogue:label_prix_ht:>})]
+				[(#SAISIE{input, tva, label=<:catalogue:label_tva:>})]
+
+				[(#SAISIE{date, date,
+					label=<:catalogue:label_date:>,
+					defaut=#ENV{maintenant}})]
+					
+				[(#SAISIE{date, date_redac,
+					label=<:catalogue:label_date_redac:>,
+					defaut=#ENV{maintenant}})]
+
+				[(#SAISIE{selection, statut,
+					label=<:catalogue:label_statut:>,
+					datas=[(#ARRAY{
+						redac,<:catalogue:label_statut_redac:>,
+						prop,<:catalogue:label_statut_prop:>,
+						publie,<:catalogue:label_statut_publie:>})],
+					defaut=redac,
+					cacher_option_intro=1})]
+						
+			</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+			
+		</div></form>
+	]
+</div>

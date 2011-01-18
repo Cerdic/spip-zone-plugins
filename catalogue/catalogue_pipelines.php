@@ -21,8 +21,8 @@ function catalogue_affiche_milieu($flux) {
 
 		if (afficher_catalogue_dans_rubrique($id_rubrique)) {
 			// a corriger $_GET... trop permissif
-			$catalogue = recuperer_fond('prive/contenu/catalogue_article', $_GET); // hum hum...
-			$flux['data'] .= $catalogue;
+			$contexte = $_GET;
+			$flux['data'] .= recuperer_fond('prive/boite/catalogue_article', $contexte, array('ajax'=>true));
 		}
 	}
 
