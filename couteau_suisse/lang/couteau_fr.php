@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lutte_spam' => 'Lutte contre le SPAM',
 
 	// M
+	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.',
 	'maj_actu' => 'Forcer l\'actualisation distante',
 	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :',
 	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',

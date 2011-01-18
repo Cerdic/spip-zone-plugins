@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 // module inclu dans la description de l'outil en page de configuration
 
@@ -14,10 +14,18 @@ define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
 
 function maj_auto_action_rapide() {
-	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
+	global $spip_version_affichee, $spip_version_base;
+	$arg_chargeur = $spip_version_base>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
 	$time = time();
 	$timeout = ini_get('max_execution_time');
 	$timeout = $timeout?min(30,floor($timeout/2)):10;
+	$style = 'style="padding:0.4em;"';
+	// verification des mises a jour de SPIP>=2.1
+	include_spip('inc/presentation');
+	$html1 = (function_exists('info_maj_spip') && ($html1=info_maj_spip()))
+		?"<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>'SPIP '.$spip_version_affichee)).'</legend>'.propre("\n|{{{$html1}}}|").'<p>'._T('couteau:maj_spip').'</p></fieldset>'
+		:'';
+	// verification des plugins
 	include_spip('inc/plugin');
 	$plugins_actifs = array_values(liste_chemin_plugin_actifs());
 	// tous, mais les actifs d'abord...
@@ -62,8 +70,8 @@ function maj_auto_action_rapide() {
 		}
 		${$actif?'html_actifs':'html_inactifs'}[] = "|$bouton|$nom|$rev|";
 	}
-
-	$html1 = "\n<div style='padding:0.4em;' id='maj_auto_div'><fieldset><legend style='padding:0.4em;'>"
+	
+	$html1 = "\n<div $style id='maj_auto_div'>$html1<fieldset><legend $style>"
 		. _T('couteau:maj_liste').'</legend>'
 		. propre(
 			(count($html_actifs)? "\n|{{" . _T('couteau:plug_actifs') . "}}|<|<|\n" . join("\n",$html_actifs) . "\n" : '')
@@ -171,6 +179,8 @@ function plugin_get_infos_maj($p, $timeout=false) {
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
 function maj_auto_maj_auto_forcer_action() {
+	// forcer la lecture de la derniere version de SPIP
+	if($cron = charger_fonction('mise_a_jour', 'genie')) $cron(0);
 	// forcer la lecture des revisions distantes de plugins
 	ecrire_meta('tweaks_maj_auto', serialize(array()));
 	ecrire_metas();
