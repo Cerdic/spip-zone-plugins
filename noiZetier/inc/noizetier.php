@@ -436,20 +436,18 @@ function noizetier_lister_blocs_avec_noisettes(){
 		$liste_blocs = array();
 		include_spip('base/abstract_sql');
 		$resultats = sql_allfetsel (
-			"CONCAT(`bloc`,'/',`type`,'-',`composition`)",
+			array('bloc', 'type', 'composition'),
 			'spip_noisettes',
 			'1',
-			'`bloc`,`type`,`composition`'
+			array('bloc', 'type', 'composition')
 		);
 		foreach ($resultats as $res) {
-			$res = array_values($res);
-			if (substr($res[0],-1)=='-')
-				$liste_blocs[] = substr($res[0],0,-1);
+			if ($res['composition'])
+				$liste_blocs[] = $res['bloc'].'/'.$res['type'].'-'.$res['composition'];
 			else
-				$liste_blocs[] = $res[0];
+				$liste_blocs[] = $res['bloc'].'/'.$res['type'];
 		}
 	}
-	
 	return $liste_blocs;
 }
 
