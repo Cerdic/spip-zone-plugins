@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_spipal_valider_paiement()
 {
-	spipal_validation_arg($_POST, $GLOBALS['spipal_metas']['notify_url']);
+	spipal_validation_arg($_POST, $GLOBALS['spipal_metas']['url_paypal']);
 }
 
 function spipal_validation_arg($env, $url)
