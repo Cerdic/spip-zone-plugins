@@ -4,10 +4,6 @@
  * Licence GPL (c) 2009 - 2010 Ateliers CYM
  */
 
-function catalogue_insert_head($flux){
-	$flux .= '<!-- insertion css catalogue --><link rel="stylesheet" type="text/css" href="'.find_in_path('catalogue.css').'" media="all" />';
-	return $flux;
-}
 
 
 if(!function_exists('monetaire')){

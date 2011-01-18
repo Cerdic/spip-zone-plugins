@@ -4,7 +4,7 @@
 
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 
-	<version>1.0.4</version>
+	<version>1.5.0</version>
 	
 	<version_base>1.5</version_base>
 	
@@ -29,9 +29,8 @@
 	<prefix>catalogue</prefix>
 	
 	<pipeline>
-		<nom>insert_head</nom>
-		<action>insert_head</action>
-		<inclure>catalogue_fonctions.php</inclure>
+		<nom>insert_head_css</nom>
+		<inclure>catalogue_pipelines.php</inclure>
 	</pipeline>
 
 	<pipeline>
@@ -76,7 +75,7 @@
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<utilise id="contacts" version="[1.0]" src="http://files.spip.org/spip-zone/contacts.zip" />
 	
 </plugin>

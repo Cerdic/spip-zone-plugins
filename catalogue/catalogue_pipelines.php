@@ -3,7 +3,10 @@
  * Plugin Catalogue pour Spip 2.0
  * Licence GPL (c) 2009-2010 - Ateliers CYM
  */
-
+function catalogue_insert_head_css($flux){
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('catalogue.css').'" media="all" />';
+	return $flux;
+}
 
 function catalogue_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
