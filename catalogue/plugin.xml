@@ -48,8 +48,6 @@
 	
 	<fonctions>catalogue_fonctions.php</fonctions>
 	
-	<options>catalogue_options.php</options>
-	
 	<!-- les boutons dans l'interface d'admin -->
 	<bouton id='catalogue' parent='naviguer'>
 		<icone>img/picto_catalogue_32x32.png</icone>
