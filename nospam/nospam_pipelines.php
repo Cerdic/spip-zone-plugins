@@ -210,8 +210,10 @@ function nospam_pre_edition($flux){
 						$seuil = $seuils[0];
 
 					foreach($seuil as $s=>$stat)
-						if ($infos['nombre_liens'] >= $s)
+						if ($infos['nombre_liens'] >= $s){
 							$flux['data']['statut'] = $stat;
+							spip_log("\t".$flux['data']['auteur']."\t".$GLOBALS['ip']."\t"."requalifié en ".$stat." car nombre_liens >= ". $s,'nospam');
+						}	
 				}
 			}
 
