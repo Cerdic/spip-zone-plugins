@@ -43,7 +43,7 @@ function inc_article_afficher_contenu_dist($id_article){
 		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 		if ($flag_editable) $edition_seule=lire_config('taa/edition_seule');
 		
-		if(!$edition_seule)$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
+		//if(!$edition_seule)$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 		
 		$discuter = charger_fonction('discuter', 'inc');
 		
