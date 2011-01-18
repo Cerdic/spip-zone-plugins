@@ -1191,6 +1191,7 @@ add_outil( array(
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
 	'contrib' => 3223,
+	'distant' => defined('_SPIP20100')?NULL:'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/genie/mise_a_jour.php',
 ));
 
 // reglage des differents selecteurs en partie privee

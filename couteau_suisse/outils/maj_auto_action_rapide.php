@@ -5,6 +5,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 include_spip('inc/actions');
 include_spip('inc/distant');
+include_spip('inc/presentation');
 
 define('_MAJ_SVN_FILE', 'file:///home/svn/repository/spip-zone/');
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
@@ -12,6 +13,47 @@ define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
 define('_MAJ_LOG_DEBUT', 'http://zone.spip.org/trac/spip-zone/log/');
 define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
+
+// Pour SPIP = 2.0.X
+if(!function_exists('info_maj_spip')) {
+	function info_maj_spip(){
+		if (!autoriser('webmestre')) return "";
+		// derniere version de SPIP
+		$maj = $GLOBALS['meta']['info_maj_spip'];
+		if (!$maj) return "";
+		$maj = explode('|',$maj);
+		// c'est une ancienne notif, on a fait la maj depuis !
+		if ($GLOBALS['spip_version_branche']!==array_shift($maj)) {
+			// compat_maj_spip(true);
+			return "";
+		}
+		// derniere version de SPIP 2.?.?
+		$maj = implode('|',$maj);
+		if (strncmp($maj,"<a",2)==0) $maj = extraire_attribut ($maj, 'title');
+		$lien = "http://www.spip.net/".$GLOBALS['spip_lang']."_download";
+		$maj = _T('couteau:maj_rev_ok',array('revision'=>$maj, 'url'=>$lien, 'zip'=>''));
+		// derniere version de SPIP 2.0.?
+		include_spip('lib/maj_auto/distant_mise_a_jour');
+		if(function_exists('info_maj_cache')) {
+			list(,,$rev) = preg_split('/\D+/', $GLOBALS['spip_version_branche']);
+			$nom = _DIR_CACHE_XML . _VERSIONS_LISTE;
+			$page = info_maj_cache($nom, 'spip', !file_exists($nom) ? '' : file_get_contents($nom));
+			preg_match_all(',/SPIP\D+2\D+0(\D+(\d+))?.*?[.]zip",i', $page, $m,  PREG_SET_ORDER);
+			$page=0;
+			foreach ($m as $v) if ($v[2]>$rev && $v[2]>$page) $page = $v[2];
+			if($page) {
+				$lien = "http://files.spip.org/spip/archives/SPIP-v2-0-$page.zip"; // 'http://files.spip.org/spip/archives/#SPIP-v2-0-'.$page;
+				$maj = _T('couteau:maj_rev_ok',array('revision'=>'2.0.'.$page, 'url'=>$lien, 'zip'=>'')) . '<br/>' . $maj;
+			}
+		}
+		// liens morts
+		return preg_replace(',\[([^[]+)->\],', '$1', $maj);
+	}
+	function compat_maj_spip($forcer=false) {
+		include_spip('lib/maj_auto/distant_mise_a_jour');
+		if(function_exists('genie_mise_a_jour_dist') && $forcer) return genie_mise_a_jour_dist(0);
+	}
+}
 
 function maj_auto_action_rapide() {
 	global $spip_version_affichee, $spip_version_base;
@@ -22,8 +64,10 @@ function maj_auto_action_rapide() {
 	$style = 'style="padding:0.4em;"';
 	// verification des mises a jour de SPIP>=2.1
 	include_spip('inc/presentation');
+	list($m1,$m2) = preg_split('/\D+/', $GLOBALS['spip_version_branche']);
 	$html1 = (function_exists('info_maj_spip') && ($html1=info_maj_spip()))
-		?"<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>'SPIP '.$spip_version_affichee)).'</legend>'.propre("\n|{{{$html1}}}|").'<p>'._T('couteau:maj_spip').'</p></fieldset>'
+		?"<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>'SPIP '.$spip_version_affichee)).'</legend>'.propre("\n|{{{$html1}}}|")
+			.(preg_match(",$m1\.$m2\.\d+,",$html1)?'<p>'._T('couteau:maj_spip').'</p>':'').'</fieldset>'
 		:'';
 	// verification des plugins
 	include_spip('inc/plugin');
@@ -180,8 +224,10 @@ function plugin_get_infos_maj($p, $timeout=false) {
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
 function maj_auto_maj_auto_forcer_action() {
 	// forcer la lecture de la derniere version de SPIP
-	if($cron = charger_fonction('mise_a_jour', 'genie')) $cron(0);
+	if(function_exists('compat_maj_spip')) compat_maj_spip(true); // pour SPIP < 2.1
+	elseif($cron = charger_fonction('mise_a_jour', 'genie')) $cron(0);
 	// forcer la lecture des revisions distantes de plugins
+return;
 	ecrire_meta('tweaks_maj_auto', serialize(array()));
 	ecrire_metas();
 }
