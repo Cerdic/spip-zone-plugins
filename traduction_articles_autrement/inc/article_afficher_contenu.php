@@ -199,7 +199,7 @@ function inc_article_afficher_contenu_dist($id_article){
 	
 	return
 	$navigation
-	. $extra
+	//. $extra
 	. "<div class='fiche_objet'>"
 		. $haut
 		. afficher_onglets_pages(
