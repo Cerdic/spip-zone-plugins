@@ -10,12 +10,12 @@ function action_supprimer_variante_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	$id_variante = intval($arg);
+	$id_cat_variante = intval($arg);
 
 	// echo'<script type="text/javascript">alert("Suppression variante " + '.$id_variante.')</script>';
 	
 	// suppression
-	sql_delete('spip_variantes', 'id_variante='.$id_variante);
+	sql_delete('spip_cat_variantes', 'id_cat_variante='.$id_cat_variante);
 
 	// retour
 	include_spip('inc/headers');

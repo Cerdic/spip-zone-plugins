@@ -6,7 +6,7 @@
 
 	<version>1.0.4</version>
 	
-	<version_base>1.3</version_base>
+	<version_base>1.4</version_base>
 	
 	<etat>test</etat>
 	
@@ -36,6 +36,11 @@
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
+		<inclure>base/catalogue.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/catalogue.php</inclure>
 	</pipeline>
 	

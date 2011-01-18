@@ -18,10 +18,10 @@
 
 <B_options>
 <h3><:catalogue:options_dispo:></h3>
-<BOUCLE_options(OPTIONS){id_article=#ID}{statut=publie}{!par prix_ht}>
+<BOUCLE_options(CAT_OPTIONS){id_article=#ID}{statut=publie}{!par prix_ht}>
 <dl class='fiche'>
-	<dd class="radio"><input type="checkbox" name="id_option[(#VAL{91}|chr)][(#VAL{93}|chr)]" id="option_#ID_OPTION" value="#ID_OPTION" /></dd>
-	<dd class="desc #EDIT{titre}"><label for="option_#ID_OPTION">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR)</span>]</label></dd>
+	<dd class="radio"><input type="checkbox" name="id_cat_option[(#VAL{91}|chr)][(#VAL{93}|chr)]" id="option_#ID_OPTION" value="#ID_CAT_OPTION" /></dd>
+	<dd class="desc #EDIT{titre}"><label for="option_#ID_CAT_OPTION">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR)</span>]</label></dd>
 	[<dd class="prix #EDIT{prix_ht}">(#PRIX_HT|monetaire)</dd>]
 </dl>
 </BOUCLE_options>

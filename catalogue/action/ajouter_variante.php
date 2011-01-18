@@ -14,7 +14,7 @@ function action_ajouter_variante_dist() {
 
 	// echo'<script type="text/javascript">alert("Ajout variante article " + '.$id_article.')</script>';
 	
-	sql_insertq('spip_variantes', array(
+	sql_insertq('spip_cat_variantes', array(
 		'id_article' => $id_article,
 		'date' => date("Y-m-d H:i:s"),
 		'statut' => 'prepa'

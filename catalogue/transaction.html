@@ -11,15 +11,15 @@
 ]
 
 [(#REM) On récupère le numéro de la variante depuis le formulaire "fiche" ]
-[(#SET{choix_variante, [(#EVAL{_request('id_variante')})]})]
+[(#SET{choix_variante, [(#EVAL{_request('id_cat_variante')})]})]
 
 
 [(#REM) On récupère le tabelau des options depuis le formulaire "fiche" ]
-[(#SET{choix_options, [(#EVAL{_request('id_option')})]})]
+[(#SET{choix_options, [(#EVAL{_request('id_cat_option')})]})]
 
 
 [(#REM) On récupère les détails de la variante ]
-<BOUCLE_v(VARIANTES){id_variante=#GET{choix_variante}}>
+<BOUCLE_v(CAT_VARIANTES){id_cat_variante=#GET{choix_variante}}>
 
 	[(#SESSION_SET{variante, #TITRE})]
 	[(#SET{montant_variante, #PRIX_HT})]
@@ -44,7 +44,7 @@
 
 [(#REM) Même calcul sur les options ]
 <BOUCLE_options(POUR){tableau #GET{choix_options}}>
-<BOUCLE_o(OPTIONS){id_option=#VALEUR}>
+<BOUCLE_o(CAT_OPTIONS){id_cat_option=#VALEUR}>
 [(#SET{liste_options, 
 	[(#GET{liste_options,''})]
 	[(#_options:COMPTEUR_BOUCLE|!={1}|oui), ]

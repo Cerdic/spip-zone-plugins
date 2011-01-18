@@ -21,7 +21,7 @@
 	
 	[<dl class='formulaire_erreur clearfix'>
 		<dd>(#ENV*{message_erreur})</dd>
-		[<dd>(#ENV**{erreurs}|table_valeur{id_variante})</dd>]
+		[<dd>(#ENV**{erreurs}|table_valeur{id_cat_variante})</dd>]
 	</dl>]
 	
 	[(#INCLURE{fond=inc/liste_formules,env})]

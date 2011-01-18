@@ -2,10 +2,10 @@
 
 <!-- formulaire formulaire/edition-variante.html -->
 
-[(#SET{variante,[(#EVAL{_request(id_variante)})]})]
+[(#SET{variante,[(#EVAL{_request(id_cat_variante)})]})]
 La variante est la [(#GET{variante})]<br />
 
-<BOUCLE_v(VARIANTES){id_variante=#GET{variante}}>
+<BOUCLE_v(CAT_VARIANTES){id_cat_variante=#GET{variante}}>
 Formulaire pour la variante #TITRE
 </BOUCLE_v>
 

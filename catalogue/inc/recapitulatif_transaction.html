@@ -5,7 +5,7 @@
 
 [(#REM) Le montant doit etre calculé dans l'étape précédente : variante + toutes les options ]
 
-<BOUCLE_choix(VARIANTES){id_variante=#EVAL{_request('id_variante')}}>
+<BOUCLE_choix(CAT_VARIANTES){id_cat_variante=#EVAL{_request('id_cat_variante')}}>
 <BOUCLE_article(ARTICLES){id_article}>
 <p>Votre choix : "#TITRE", "#_choix:TITRE"[, (#EVAL{_request('options')}|sinon{aucune option})][, montant total transaction : (#EVAL{_request('montant_total')}|monetaire)]</p>
 </BOUCLE_article>

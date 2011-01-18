@@ -7,29 +7,31 @@
 // xxx_declarer_tables_interfaces est l'endroit ou l'on indique les raccourcis à utiliser comme table de boucle SPIP
 function catalogue_declarer_tables_interfaces($interface){
 	
-	$interface['table_des_tables']['variantes'] = 'variantes';
-	$interface['table_des_tables']['options'] = 'options';
-	$interface['table_des_tables']['options_articles'] = 'options_articles';
-	$interface['table_des_tables']['transactions'] = 'transactions';
-	$interface['table_des_tables']['lignes_transactions'] = 'lignes_transactions';
+	$interface['table_des_tables']['cat_variantes'] = 'cat_variantes';
+	$interface['table_des_tables']['cat_options'] = 'cat_options';
+	$interface['table_des_tables']['cat_options_articles'] = 'cat_options_articles';
+	$interface['table_des_tables']['cat_transactions'] = 'cat_transactions';
+	$interface['table_des_tables']['cat_lignes_transactions'] = 'cat_lignes_transactions';
 	
 	/**
 	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
 	 *
 	 */
-	$interface['tables_jointures']['spip_articles'][]= 'variantes';
-	$interface['tables_jointures']['spip_variantes'][]= 'articles';
-	$interface['tables_jointures']['spip_options']['id_option']= 'spip_options_articles';
-	$interface['tables_jointures']['spip_articles']['id_article']= 'spip_options_articles';
+	$interface['tables_jointures']['spip_articles'][]= 'cat_variantes';
+	$interface['tables_jointures']['spip_cat_variantes'][]= 'articles';
+	$interface['tables_jointures']['spip_cat_options']['id_cat_option']= 'spip_cat_options_articles';
+	$interface['tables_jointures']['spip_articles']['id_article']= 'spip_cat_options_articles';
 
 	
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
 	 *
 	 */
-	$interface['table_des_traitements']['TITRE'][] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['STATUT'][] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['DESCRIPTIF'][] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['STATUT']['cat_variantes'] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['STATUT']['cat_options'] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['DESCRIPTIF']['cat_variantes'] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['DESCRIPTIF']['cat_options'] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['DESCRIPTIF']['cat_transactions'] = _TRAITEMENT_RACCOURCIS;
 
 	return $interface;
 }
@@ -38,8 +40,8 @@ function catalogue_declarer_tables_interfaces($interface){
 function catalogue_declarer_tables_principales($tables_principales){
 
 	//-- Table variantes ------------------------------------------
-	$variantes = array(
-		"id_variante" 	=> "bigint(21) NOT NULL auto_increment",
+	$cat_variantes = array(
+		"id_cat_variante" 	=> "bigint(21) NOT NULL auto_increment",
 		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
 		"descriptif" 	=> "text DEFAULT '' NOT NULL",
@@ -50,17 +52,17 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"date_redac" 	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
 		);
-	$variantes_key = array(
-		"PRIMARY KEY"	=> "id_variante",
+	$cat_variantes_key = array(
+		"PRIMARY KEY"	=> "id_cat_variante",
 		"KEY id_article" => "id_article"
 		);
-	$tables_principales['spip_variantes'] =
-		array('field' => &$variantes,'key' => &$variantes_key,'join' => array('id_variante'=>'id_variante','id_article'=>'id_article'));
+	$tables_principales['spip_cat_variantes'] =
+		array('field' => &$cat_variantes,'key' => &$cat_variantes_key,'join' => array('id_cat_variante'=>'id_cat_variante','id_article'=>'id_article'));
 
 
 	//-- Table options ------------------------------------------
-	$options = array(
-		"id_option" 	=> "bigint(21) NOT NULL auto_increment",
+	$cat_options = array(
+		"id_cat_option" 	=> "bigint(21) NOT NULL auto_increment",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
 		"descriptif" 	=> "text DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
@@ -69,24 +71,13 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
 		);
-	$options_key = array(
-		"PRIMARY KEY"	=> "id_option"
+	$cat_options_key = array(
+		"PRIMARY KEY"	=> "id_cat_option"
 		);
-	$tables_principales['spip_options'] =
-		array('field' => &$options, 'key' => &$options_key);
+	$tables_principales['spip_cat_options'] =
+		array('field' => &$cat_options, 'key' => &$cat_options_key);
 
-
-	//-- Table options_articles ------------------------------------------
-	$options_articles = array(
-		"id_option" 	=> "bigint(21) NOT NULL DEFAULT 0",
-		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
-		);
-	$options_articles_key = array(
-		"PRIMARY KEY"	=> "id_option, id_article"
-		);
-	$tables_principales['spip_options_articles'] =
-		array('field' => &$options_articles, 'key' => &$options_articles_key);
-		
+	
 
 	//-- Table transactions ------------------------------------------
 	/**
@@ -98,19 +89,20 @@ function catalogue_declarer_tables_principales($tables_principales){
 	 * Elle a eu lieu à une certaine date
 	 * elle pourrait etre extensible
 	 */
-	$transactions = array(
-		"id_transaction"=> "bigint(21) NOT NULL auto_increment",
+	$cat_transactions = array(
+		"id_cat_transaction"=> "bigint(21) NOT NULL auto_increment",
+		// devrait etre id_auteur la-dessous...
 		"id_contact"	=> "bigint(21) NOT NULL DEFAULT 0",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
 		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		);
-	$transactions_key = array(
-		"PRIMARY KEY"	=> "id_transaction",
+	$cat_transactions_key = array(
+		"PRIMARY KEY"	=> "id_cat_transaction",
 		"KEY"			=> "id_contact"
 		);
-	$tables_principales['spip_transactions'] =
-		array('field' => &$transactions, 'key' => &$transactions_key);
+	$tables_principales['spip_cat_transactions'] =
+		array('field' => &$cat_transactions, 'key' => &$cat_transactions_key);
 
 	//-- Table lignes_transactions ------------------------------------------
 	/** 
@@ -125,9 +117,9 @@ function catalogue_declarer_tables_principales($tables_principales){
 	 * - 1 "voyage 8 jours" à 795€ + option "all inclusive" à 119€, pas de TVA
 	 * - 3 tee-shirts bleus extra à 18€ HT pièce, TVA 19.6
 	 */
-	$lignes_transactions = array(
-		"id_ligne"		=> "bigint(21) NOT NULL auto_increment",
-		"id_transaction"	=> "bigint(21) NOT NULL DEFAULT 0",
+	$cat_lignes_transactions = array(
+		"id_cat_ligne"		=> "bigint(21) NOT NULL auto_increment",
+		"id_cat_transaction"	=> "bigint(21) NOT NULL DEFAULT 0",
 		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0",
  		"objet"			=> "varchar(25) NOT NULL", // peut etre une variante ou une option
 		"quantite"		=> "float default NULL",
@@ -136,16 +128,32 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"tva"			=> "decimal(4,3) default '0.196'",
 		"maj"			=> "TIMESTAMP"		
 		);
-	$lignes_transactions_key = array(
-		"PRIMARY KEY"	=> "id_ligne",
-		"KEY"			=> "id_transaction, id_objet, objet"
+	$cat_lignes_transactions_key = array(
+		"PRIMARY KEY"	=> "id_cat_ligne",
+		"KEY"			=> "id_cat_transaction, id_objet, objet"
 		);
-	$tables_principales['spip_lignes_transactions'] =
-		array('field' => &$lignes_transactions, 'key' => &$lignes_transactions_key);
+	$tables_principales['spip_cat_lignes_transactions'] =
+		array('field' => &$cat_lignes_transactions, 'key' => &$cat_lignes_transactions_key);
 	
 	return $tables_principales;
 
 }
 
+function catalogue_declarer_tables_auxiliaires($tables_auxiliaires){
+
+	//-- Table options_articles ------------------------------------------
+	$cat_options_articles = array(
+		"id_cat_option" => "bigint(21) NOT NULL DEFAULT 0",
+		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
+		);
+	$cat_options_articles_key = array(
+		"PRIMARY KEY"	=> "id_cat_option, id_article"
+		);
+	$tables_principales['spip_cat_options_articles'] =
+		array('field' => &$cat_options_articles, 'key' => &$cat_options_articles_key);
+
+	
+	return $tables_auxiliaires;
+}
 
 ?>

@@ -10,10 +10,10 @@ function catalogue_insert_head($flux){
 }
 
 
-if(!function_exists(monetaire)){
+if(!function_exists('monetaire')){
 
     function monetaire($montant) {
-        // affiche un montant en euro correctement formatt�
+        // affiche un montant en euro correctement formatte
         setlocale(LC_MONETARY, 'fr_FR');
 		
 		// Si l'on vient du formulaire, le type des variables est soit en double, soit en string!
@@ -25,8 +25,8 @@ if(!function_exists(monetaire)){
 		}
 		
         $montant = money_format('%i', $montant);
-        $montant = ereg_replace("EUR", "&euro;", $montant);
-        $montant = ereg_replace(" ", "&nbsp;", $montant);
+        $montant = preg_replace("/EUR/", "&euro;", $montant);
+        $montant = preg_replace("/ /", "&nbsp;", $montant);
         return $montant;
 	}
 }
