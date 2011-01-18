@@ -1186,7 +1186,11 @@ add_outil( array(
 	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
-add_outil( array(
+add_outil(defined('_SPIP20100')?array(
+	'id' => 'maj_auto',
+	'categorie' => 'admin',
+	'contrib' => 3223,
+):array(
 	'id' => 'maj_auto',
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
