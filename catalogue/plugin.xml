@@ -56,7 +56,7 @@
 	</bouton>
 	<bouton id='catalogue21' parent='bando_edition'>
 		<icone>img/picto_catalogue_16x16.png</icone>
-		<titre>catalogue:nom_plugin</titre>
+		<titre>catalogue:catalogue</titre>
 		<url>catalogue</url>
 	</bouton>
 

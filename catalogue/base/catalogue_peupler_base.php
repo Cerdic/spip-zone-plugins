@@ -5,6 +5,55 @@
  */
 
 function catalogue_peupler_base() {
+	// On insère 3 articles
+	// article 1 : abonnements e-Competitions
+	$_art1 = array(
+		'titre' => '1 year subscription to the e-Competitions Bulletin',
+		);
+	$_art2 = array(
+		'titre' => '1 year subscription to Concurrences Review',
+		);
+	$_art3 = array(
+		'titre' => '1 year subscription to e-Competitions (+ e-Archives) and to Concurrences',
+		);
+	$_var1_art1 = array(
+		'titre' => '1 year subscription to the e-Competitions Bulletin',
+		'descriptif' = 'online and e-archives',
+		'prix_ht' = 585,
+		'tva' = ,
+		);
+	$_var1_art2 = array(
+		'titre' => '1 year subscription to Concurrences Review',
+		'descriptif' = 'paper only',
+		'prix_ht' = 405,
+		'tva' = 19.60,
+		);
+	$_var2_art2 = array(
+		'titre' => '1 year subscription to Concurrences Review',
+		'descriptif' = 'online only',
+		'prix_ht' = 455,
+		'tva' = 19.60,
+		);
+	$_var3_art2 = array(
+		'titre' => '1 year subscription to Concurrences Review',
+		'descriptif' = 'paper and online versions',
+		'prix_ht' = 655,
+		'tva' = 19.60,
+		);
+	$_var1_art3 = array(
+		'titre' => '1 year subscription to e-Competitions (+ e-Archives) and to Concurrences',
+		'descriptif' = 'online only',
+		'prix_ht' = 755,
+		'tva' = 19.60,
+		);
+	$_var2_art3 = array(
+		'titre' => '1 year subscription to e-Competitions (+ e-Archives) and to Concurrences',
+		'descriptif' = 'paper and online versions',
+		'prix_ht' = 855,
+		'tva' = 19.60,
+		);
+
+
 	// Attention, spécifier le NOM des TABLES et non le nom des BOUCLES !
 	sql_insertq_multi('spip_variantes', array(
 		array(
