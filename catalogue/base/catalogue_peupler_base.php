@@ -55,7 +55,7 @@ function catalogue_peupler_base() {
 
 
 	// Attention, spécifier le NOM des TABLES et non le nom des BOUCLES !
-	sql_insertq_multi('spip_variantes', array(
+	sql_insertq_multi('spip_cat_variantes', array(
 		array(
 			'id_article' => 2,
 			'titre' => 'Standard price',
@@ -171,30 +171,30 @@ function catalogue_peupler_base() {
 		)
 	);
   
-	sql_insertq_multi('spip_options', array(
+	sql_insertq_multi('spip_cat_options', array(
 		array(
-			'id_option' => 1,
+			'id_cat_option' => 1,
 			'titre' => 'Suppl&eacute;ment chambre single semaine',
 			'statut' => 'publie',
 			'prix_ht' => '98.00',
 			'tva' => 0
 			),
 		array(
-			'id_option' => 2,
+			'id_cat_option' => 2,
 			'titre' => 'Suppl&eacute;ment All inclusive semaine',
 			'statut' => 'publie',
 			'prix_ht' => '119.00',
 			'tva' => 0,
 			),
 		array(
-			'id_option' => 3,
+			'id_cat_option' => 3,
 			'titre' => 'Suppl&eacute;ment chambre single week-end',
 			'statut' => 'publie',
 			'prix_ht' => '56.00',
 			'tva' => 0,
 			),
 		array(
-			'id_option' => 4,
+			'id_cat_option' => 4,
 			'titre' => 'Suppl&eacute;ment All inclusive week-end',
 			'statut' => 'publie',
 			'prix_ht' => '68.00',
@@ -203,74 +203,26 @@ function catalogue_peupler_base() {
 		)
 	);
 	
-	sql_insertq_multi('spip_options_articles', array(
+	sql_insertq_multi('spip_cat_options_articles', array(
 		array(
-			'id_option' => 1,
+			'id_cat_option' => 1,
 			'id_article' => 80,
 			),
 		array(
-			'id_option' => 2,
+			'id_cat_option' => 2,
 			'id_article' => 80,
 			),
 		array(
-			'id_option' => 3,
+			'id_cat_option' => 3,
 			'id_article' => 81,
 			),
 		array(
-			'id_option' => 4,
+			'id_cat_option' => 4,
 			'id_article' => 81,
 			),
 		)
 	);
 
-	sql_insertq_multi('spip_transactions', array(
-		array(
-			'id_transaction'=> 1,
-			'id_contact'	=> 1, // CM
-			'titre' 		=> 'Commande conference ANTITRUST',
-			'descriptif' 	=> 'Celle de fevrier.',
-			'date' 			=> '2010-01-10 22:00:00'
-			),
-		array(
-			'id_transaction'=> 2,
-			'id_contact'	=> 3, // DL
-			'titre' 		=> 'Voyage Tunisie',
-			'descriptif' 	=> '',
-			'date' 			=> '2010-01-10 22:10:00'
-			)
-		)
-	);
-
-	sql_insertq_multi('spip_lignes_transactions', array(
-		array( // insciption tarif prof
-			'id_ligne'		=> 1,
-			'id_transaction'=> 1,
-			'id_objet'		=> 4,
-			'objet'			=> 'variante',
-			'quantite'		=> 1,
-			'prix_ht' 		=> 250,
-			'tva'			=> 0.196
-			),
-		array( // commande voyage
-			'id_ligne'		=> 2,
-			'id_transaction'=> 2,
-			'id_objet'		=> 6,
-			'objet'			=> 'variante',
-			'quantite'		=> 1,
-			'prix_ht' 		=> 795,
-			'tva'			=> 0
-			),
-		array( // commande option
-			'id_ligne'		=> 3,
-			'id_transaction'=> 2,
-			'id_objet'		=> 2,
-			'objet'			=> 'option',
-			'quantite'		=> 1,
-			'prix_ht' 		=> 119,
-			'tva'			=> 0
-			)
-		)
-	);
 
 }
 ?>

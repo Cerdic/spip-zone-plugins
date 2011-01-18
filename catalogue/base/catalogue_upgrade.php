@@ -40,7 +40,8 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.1");
 		spip_log('Tables du plugin Catalogue correctement passsées en version 1.3.1','catalogue');
 	}
-	
+
+	// prefixer les tables
 	if (version_compare($current_version,"1.4.0","<")){
 
 		// changements de tables
@@ -61,12 +62,18 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.4.0");
 		spip_log('Tables du plugin Catalogue correctement passsées en version 1.4.0','catalogue');
 	}
+
+	// pas de gestion de transactions dans ce plugin !
+	if (version_compare($current_version,"1.5.0","<")){
+		sql_drop_table("spip_lignes_transactions");
+		sql_drop_table("spip_transactions");
+		ecrire_meta($nom_meta_base_version, $current_version="1.5.0");
+		spip_log('Tables du plugin Catalogue correctement passsées en version 1.5.0','catalogue');		
+	}
 }
 
 
 function catalogue_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_lignes_transactions");
-	sql_drop_table("spip_transactions");
 	sql_drop_table("spip_options_articles");
 	sql_drop_table("spip_options");
 	sql_drop_table("spip_variantes");
