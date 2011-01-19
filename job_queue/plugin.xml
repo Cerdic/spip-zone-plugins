@@ -6,7 +6,7 @@
   <etat>test</etat>
   <description>
   	<multi>
-  		[fr]Gestion d'une file d'attente de t&#226;ches &#224; ex&#224;cuter.
+  		[fr]Gestion d'une file d'attente de t&#226;ches &#224; ex&#233;cuter.
 		[en]Managing a queue of jobs to perform.
 	</multi>
   </description>
