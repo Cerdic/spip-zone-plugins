@@ -227,7 +227,6 @@ function maj_auto_maj_auto_forcer_action() {
 	if(function_exists('compat_maj_spip')) compat_maj_spip(true); // pour SPIP < 2.1
 	elseif($cron = charger_fonction('mise_a_jour', 'genie')) $cron(0);
 	// forcer la lecture des revisions distantes de plugins
-return;
 	ecrire_meta('tweaks_maj_auto', serialize(array()));
 	ecrire_metas();
 }
