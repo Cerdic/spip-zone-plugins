@@ -1,0 +1,10 @@
+#HTTP_HEADER{Content-Type: application/x-bibtex}#HTTP_HEADER{Content-Disposition: attachment; filename=export.bib}
+@Misc{[,
+	title = {(#ENV{title}|trim)}][,
+	journal = {(#ENV{site}|trim)}][,
+	(#ENV{authors}|cite_authors_bibtex)][,
+	year = {(#ENV{year}|trim)}][,
+	month = {(#ENV{month}|trim|bibtex_month)}][,
+	howpublished = {\url{(#ENV{url}|trim)}}][,
+	url = {(#ENV{url}|trim)}]
+}#FILTRE{bibtex_encode}

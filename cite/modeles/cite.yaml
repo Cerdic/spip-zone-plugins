@@ -138,6 +138,11 @@ parametres:
     options:
       nom: 'url'
       label: '<:cite:label_url:>'
+    verifier:
+      type: 'url'
+      options:
+        mode: 'complet'
+        type_protocole: 'web'
   -
     saisie: 'input'
     options:

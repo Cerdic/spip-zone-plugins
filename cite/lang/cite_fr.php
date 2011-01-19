@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_volume' => 'Volume&nbsp;:',
 	'label_year' => 'Ann&eacute;e&nbsp;:',
 	'number' => 'num&eacute;ro',
+	'page_consultee_le' => 'page consult&eacute;e le',
 	'raccourci_pages' => 'p.',
 	'reference_bibliographie' => 'une r&eacute;f&eacute;rence bibliographique',
 	'series' => 'collection &laquo;&nbsp;@series@&nbsp;&raquo;',
