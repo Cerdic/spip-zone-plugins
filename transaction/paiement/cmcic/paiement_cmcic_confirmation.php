@@ -1,11 +1,29 @@
 <?php
 
-// Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+	//Charger SPIP
+	if (!defined('_ECRIRE_INC_VERSION')) {
+		// recherche du loader SPIP.
+		$deep = 2;
+		$lanceur ='ecrire/inc_version.php';
+		$include = '../../'.$lanceur;
+		while (!defined('_ECRIRE_INC_VERSION') && $deep++ < 6) { 
+			// attention a pas descendre trop loin tout de meme ! 
+			// plugins/zone/stable/nom/version/tests/ maximum cherche
+			$include = '../' . $include;
+			if (file_exists($include)) {
+				chdir(dirname(dirname($include)));
+				require $lanceur;
+			}
+		}	
+	}
+	if (!defined('_ECRIRE_INC_VERSION')) {
+		die("<strong>Echec :</strong> SPIP ne peut pas etre demarre.<br />
+			Vous utilisez certainement un lien symbolique dans votre repertoire plugins.");
+	}
 
-function action_paiement_cmcic_confirmation_dist($arg=null) {
-spip_log("debugarn1");
+
 	include_spip('base/abstract_sql');
+
 	/*****************************************************************************
  *
  * "Open source" kit for CM-CIC P@iement(TM).
@@ -105,5 +123,4 @@ $receipt = CMCIC_CGI2_MACOK;
 		// Copyright (c) 2009 Euro-Information ( mailto:centrecom@e-i.com )
 		// All rights reserved. ---
 
-}
 ?>
