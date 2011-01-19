@@ -16,7 +16,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_organisations'][]= 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'organisations';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
-	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organsiations';
+	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
 	$interface['tables_jointures']['spip_contacts'][]= 'organisations_contacts';
 	$interface['tables_jointures']['spip_organisations'][]= 'organisations_contacts';
 
@@ -79,10 +79,8 @@ function contacts_declarer_tables_principales($tables_principales){
 		);
 	$contacts_key = array(
 		"PRIMARY KEY"	=> "id_contact",
-		"UNIQUE KEY id_auteur" => "id_auteur"
 		);
 	$contacts_join = array(
-		"id_auteur" => "id_auteur",
 		"id_contact" => "id_contact"
 	);
 	$tables_principales['spip_contacts'] =
