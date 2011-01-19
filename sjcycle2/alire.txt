@@ -36,6 +36,8 @@ V 0.8 :
 V 0.9 :
 - Correction : pouvoir appeler le modèle depuis une boucle article ou rubrique
 
+V 1.0 :
+- Ajout de la possibilité de légender le diaporama avec un texte libre, le titre des images ou à partir d'un modèle
 
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG

@@ -12,7 +12,7 @@
 [(#SET{div_background, [(#ENV{border_color,   #CONFIG{sjcycle/div_background}})]})]
 [(#SET{div_margin,     [(#ENV{div_margin,   	 #CONFIG{sjcycle/div_margin}})]})]
 [(#SET{img_bordure,    [(#ENV{border_width,   #CONFIG{sjcycle/img_bordure}})]})]
-
+[(#SET{legende,        [(#ENV{legende,        0})]})]
 [(#REM) largeur div = largeur image + 2*bordure ]
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
 [(#SET{div_height, #GET{img_bordure}|mult{2}|plus{#GET{img_height}} })]
@@ -59,13 +59,14 @@
 
 	</script>
 	[(#REM) diaporama documents images conteneur jquery cycle ]
-
-	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height}|>{0}|oui)px;][background:(#GET{div_background})]'>
+	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height}|>{0}|oui)px;][background:(#GET{div_background})]})]
+   
+	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='#GET{style}'>
 
 	[(#REM) Solution de denisb pour eviter de dupliquer le code Cf http://article.gmane.org/gmane.comp.web.spip.zone/18622 ]
 
 	<BOUCLE_img(DOCUMENTS){id_article=#GET{id_objet}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
-   
+   	<div>
    		[(#REM) Les effets de type turnLeft ne fonctionnent pas si ce div est en place. En attendant de corriger
          rajout dans la doc de l'incompatibilité entre infobulles et ces effets. Du coup la bordure autour de l'image
          ne se met pas en place non plus ]
@@ -117,6 +118,22 @@
             </div>
          </div> <!-- .infobulle -->
          ]
+         [(#GET{legende}|oui|et{#GET{legende}|=={1}|oui})
+            [(#REM) La legende est cree a partir du titre de chaque image ]
+            [<div class="sjcycle_legende">(#TITRE)</div>]
+         ]
+		</div>
 	</BOUCLE_img>
 	</div><!-- sjcycle-->
+
+   [(#GET{legende}|oui|et{#GET{legende}|=={modele}|oui})
+         [(#REM) La legende est cree a partir du modele sjcycle_legende ]
+         [<div class="sjcycle_legende"  style='#GET{style}'>(#MODELE{sjcycle_legende}{id_article=#GET{id_objet}})</div>]
+   ]
+
+   [(#GET{legende}|oui|et{#GET{legende}|=={1}|non}|et{#GET{legende}|=={modele}|non})
+         [(#REM) La legende est cree a partir du texte fourni ]
+         [<div class="sjcycle_legende"  style='#GET{style}'>(#GET{legende})</div>]
+   ]
+
 </B_img>
