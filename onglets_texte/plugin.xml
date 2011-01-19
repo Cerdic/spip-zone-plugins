@@ -1,0 +1,21 @@
+<plugin>
+
+ <nom>
+En onglets dans le texte
+</nom>
+ <version>
+1.0
+</version>
+<etat>
+stable
+</etat>
+<prefix>
+onglets_texte
+</prefix>
+<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+
+
+</plugin>
