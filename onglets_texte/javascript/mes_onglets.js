@@ -89,9 +89,15 @@ function WebFXTabPane( el, bUseCookie ) {
 	// loop through child nodes and add them
 	var cs = el.childNodes;
 	var n;
+  var numTab = 0;
 	for (var i = 0; i < cs.length; i++) {
 		if (cs[i].nodeType == 1 && cs[i].className == "tab-page") {
+      if (window.location.hash == '#' + cs[i].id) {
+          // select the tab identified by the hash in the URL
+          this.selectedIndex = numTab;
+      }
 			this.addTabPage( cs[i] );
+      numTab++;
 		}
 	}
 }
