@@ -12,6 +12,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/* compat SPIP 1.9 */
+if(!function_exists('test_espace_prive')) {
+	function test_espace_prive() {
+		return !!_DIR_RACINE;
+	}
+}
+
+
 // http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte, $page) {
 	// l'indicateur sert a savoir un peu de quoi il s'agit
@@ -154,9 +162,11 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 
 	// Inserer ses invalideurs
-	include_spip('inc/invalideur');
-	maj_invalideurs($chemin_cache, $page);
-
+	/* compat SPIP 1.9 : ne pas appeler les invalideurs du tout */
+	if (!(isset($GLOBALS['spip_version']) AND $GLOBALS['spip_version']<2)) {
+		include_spip('inc/invalideur');
+		maj_invalideurs($chemin_cache, $page);
+	}
 }
 
 
@@ -191,6 +201,11 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 
 // http://doc.spip.org/@public_cacher_dist
 function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
+
+	/* compat SPIP 1.9 */
+	if (is_null($contexte) AND function_exists('nettoyer_uri'))
+		$contexte = array('uri' => nettoyer_uri());
+
 	static $memo;
 	if (!isset($memo)) {
 		$cfg = @unserialize($GLOBALS['meta']['memoization']);
@@ -259,7 +274,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 	) {
 		$page = array('contexte_implicite'=>$contexte_implicite); // ignorer le cache deja lu
 		include_spip('inc/invalideur');
-		retire_caches($chemin_cache); # API invalideur inutile
+		if (function_exists('retire_caches')) retire_caches($chemin_cache); # API invalideur inutile
 		$memo->del($chemin_cache);
 		if ($chemin_cache_session)
 			$memo->del($chemin_cache_session);
