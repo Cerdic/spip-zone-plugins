@@ -153,7 +153,6 @@ jQuery(document).ready(function() {
 // si le pattern est NULL, renvoie un simple 'is_file_exists'
 function maj_auto_rev_distante($url, $timeout=false, $pattern=NULL, $lastmodified=0, $force=false) {
 	$force |= in_array(_request('var_mode'), array('calcul', 'recalcul'));
-
 	// pour la version distante, on regarde toutes les 24h00 (meme en cas d'echec)
 	$maj_ = isset($GLOBALS['meta']['tweaks_maj_auto'])?unserialize($GLOBALS['meta']['tweaks_maj_auto']):array();
 	if(!isset($maj_[$url_=md5($url)])) $maj_[$url_] = array(0, false);
@@ -162,7 +161,7 @@ function maj_auto_rev_distante($url, $timeout=false, $pattern=NULL, $lastmodifie
 	if (!$force && $maj[1]!==false && ($lastmodified<$maj[0]) && (time()-$maj[0] < 24*3600))
 		$distant = $maj[1];
 	elseif($timeout)
-		return -1;
+		return '-1';
 	else {
 		$distant = $maj[1] = ($pattern!==NULL)
 			?(($distant = recuperer_page($url))
@@ -172,8 +171,8 @@ function maj_auto_rev_distante($url, $timeout=false, $pattern=NULL, $lastmodifie
 		$maj[0] = time();
 		ecrire_meta('tweaks_maj_auto', serialize($maj_));
 		ecrire_metas();
-	}		
-	return intval($distant);
+	}
+	return $distant;
 }
 
 function plugin_get_infos_maj($p, $timeout=false) {
@@ -202,18 +201,18 @@ function plugin_get_infos_maj($p, $timeout=false) {
 	}
 	$infos['url_origine'] = strlen($url_origine)?$url_origine._MAJ_LOG_FIN:'';
 	$infos['rev_local'] = abs($rev_local);
-	$infos['rev_rss'] = maj_auto_rev_distante($infos['url_origine'], $timeout, ', \[(\d+)\],', $lastmodified);
+	$infos['rev_rss'] = intval(maj_auto_rev_distante($infos['url_origine'], $timeout, ', \[(\d+)\],', $lastmodified));
 	$infos['maj_dispo'] = $infos['rev_rss']>0 && $infos['rev_local']>0 && $infos['rev_rss']>$infos['rev_local'];
 	// fichiers zip
 	$infos['zip_log'] = $infos['zip_trac'] = '';
 	$p2 = preg_match(',^auto/(.*)$,', $p, $regs)?$regs[1]:'';
 	if(strlen($p2)) {
 		// supposition du nom d'archive sur files.spip.org
-		if(maj_auto_rev_distante($f = _MAJ_ZIP.$p2.'.zip', $timeout)) $infos['zip_trac'] = $f;
+		if(intval(maj_auto_rev_distante($f = _MAJ_ZIP.$p2.'.zip', $timeout))) $infos['zip_trac'] = $f;
 		// nom de l'archive recemment installee par chargeur
 		if(lire_fichier(sous_repertoire(_DIR_CACHE, 'chargeur').$p2.'/install.log', $log)
 				&& preg_match(',[\n\r]source: *([^\n\r]+),msi', $log, $regs)
-				&& maj_auto_rev_distante($regs[1], $timeout))
+				&& intval(maj_auto_rev_distante($regs[1], $timeout)))
 			$infos['zip_log'] = $regs[1];
 		// au final on prend le bon
 		if(!$infos['zip_trac']) $infos['zip_trac'] = $infos['zip_log'];

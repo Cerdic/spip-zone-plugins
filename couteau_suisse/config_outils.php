@@ -344,6 +344,38 @@ add_outil( array(
 ));
 
 add_variables( array(
+	'nom' => 'ecran_actif',
+	'check' => 'couteauprive:ecran_activer',
+	'defaut' => 1,
+	// code en realpath() pour config/mes_options.php
+	'code:%s' => "if(!defined('_ECRAN_SECURITE') && @file_exists(\$f=\"".str_replace('\\','/',realpath(dirname(__FILE__)))."/lib/ecran_securite/distant_ecran_securite.php\")) include \$f;",
+), array(
+	'nom' => 'ecran_load',
+	'format' => _format_NOMBRE,
+	'defaut' => 4,
+	'code:%s' => "define('_ECRAN_SECURITE_LOAD',%s);\n",
+));
+add_outil( array(
+	'id' => 'ecran_securite',
+	'code:spip_options' => '%%ecran_load%%%%ecran_actif%%',
+	'categorie' => 'admin',
+	'distant' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt',
+	'pipelinecode:pre_description_outil' => 'if($id=="ecran_securite") {
+$conf=@file_exists(_DIR_RACINE.($f=_NOM_PERMANENTS_INACCESSIBLES."ecran_securite.php"))?"<hr/>\\n@puce@ <span style=\"color: red;\">"._T("couteauprive:ecran_conflit", array("file"=>$f))."</span>":"";
+if(defined("_ECRAN_SECURITE")) {
+	$vers=_ECRAN_SECURITE;
+	include_spip("outils/maj_auto_action_rapide");
+	$maj=maj_auto_rev_distante("http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt",false,",(\\d+\\.\\d+(\\.\\d+)?),",0,true);
+	if($maj{0}!="-") 
+		$tmp="\\n".(_ECRAN_SECURITE!=$maj?"- "._T("couteauprive:ecran_maj_ko", array("n"=>"<span style=\"color: red;\">$maj</span>")):_T("couteauprive:ecran_maj_ok"));
+} else $vers=_T("couteauprive:ecran_ko");
+if(!defined("_CS_SPIP_OPTIONS_OK")) $tmp.="\\n- "._T("couteauprive:detail_spip_options2");
+$texte=str_replace(array("@_ECRAN_SECURITE@","@_ECRAN_CONFLIT@","@_ECRAN_SUITE@"),array($vers,$conf,$tmp),$texte);
+}',
+	'description' => "<:ecran_securite::>{{@_ECRAN_SECURITE@}}@_ECRAN_SUITE@",
+));
+
+add_variables( array(
 	'nom' => 'log_couteau_suisse',
 	'check' => 'couteauprive:cs_log_couteau_suisse',
 	'defaut' => 0,
