@@ -4,6 +4,9 @@ http://www.spip-contrib.net/SPIP-Proprio
 ----------------------------------------
 ## Spip Proprio - CHANGELOG ##
 
+version 1.2 -> 1.3
+	(montée en version pour compatibilité avec SPIP 2.1.8, qui nécessite
+	donc la version 1.3 minimum)
 
 20/01/2010 - Commit 43710
 - Correction de l'inclusion des squelettes par la fonction 'recuperer_fond()' qui
