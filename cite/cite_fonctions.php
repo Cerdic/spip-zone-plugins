@@ -92,4 +92,9 @@ function bibtex_month($month) {
 	return $mois[intval($month)];
 }
 
+function cite_date($date){
+	// On tolère différents séparateurs que l'on tranforme en -
+	return preg_replace("#\.|/| #i",'-',$date);
+}
+
 ?>

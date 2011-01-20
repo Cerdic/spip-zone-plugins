@@ -66,30 +66,19 @@ parametres:
     options:
       nom: 'year'
       label: '<:cite:label_year:>'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter" || @variante@ == "journal" || @variante@ == "report" || @variante@ == "thesis"'
     verifier:
       type: 'entier'
   -
     saisie: 'input'
     options:
-      nom: 'month'
-      label: '<:cite:label_month:>'
+      nom: 'accessdate'
+      label: '<:cite:label_accessdate:>'
       afficher_si: '@variante@ == "web"'
     verifier:
-      type: 'entier'
+      type: 'date'
       options:
-        min: 1
-        max: 12
-  -
-    saisie: 'input'
-    options:
-      nom: 'day'
-      label: '<:cite:label_day:>'
-      afficher_si: '@variante@ == "web"'
-    verifier:
-      type: 'entier'
-      options:
-        min: 1
-        max: 31
+        format: 'amj'
   -
     saisie: 'input'
     options:

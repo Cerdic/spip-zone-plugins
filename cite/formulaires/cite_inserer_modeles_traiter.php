@@ -64,7 +64,7 @@ function formulaires_cite_inserer_modeles_traiter_dist($champs){
 			elseif ($champ=='place' && !in_array(_request('variante'),array('book','chapter','report','thesis')))
 				$code .= '';
 			// page
-			elseif ($champ=='place' && !in_array(_request('variante'),array('book','chapter','journal','report','thesis')))
+			elseif ($champ=='page' && !in_array(_request('variante'),array('book','chapter','journal','report','thesis')))
 				$code .= '';
 			// isbn
 			elseif ($champ=='isbn' && !in_array(_request('variante'),array('book','chapter')))
@@ -75,11 +75,11 @@ function formulaires_cite_inserer_modeles_traiter_dist($champs){
 			// doi
 			elseif ($champ=='doi' && !in_array(_request('variante'),array('book','chapter','journal')))
 				$code .= '';
-			// month
-			if ($champ=='month' && !in_array(_request('variante'),array('web')))
+			// year
+			elseif ($champ=='year' && !in_array(_request('variante'),array('book','chapter','journal','report','thesis')))
 				$code .= '';
-			// day
-			if ($champ=='day' && !in_array(_request('variante'),array('web')))
+			// accessdate
+			if ($champ=='accessdate' && !in_array(_request('variante'),array('web')))
 				$code .= '';
 			// Cas général
 			else
