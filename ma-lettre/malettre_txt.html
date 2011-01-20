@@ -34,7 +34,18 @@ EDITO
 #URL_SITE_SPIP/[(#URL_ARTICLE|substr{3})]
 </BOUCLE_artx></BOUCLE_selection_bonux>
 
-
+#SET{selection_eve,#ENV**{selection_eve}|explode{","}}
+<B_eveselection_bonux>
+*********************************
+<:agenda:agenda:>
+<BOUCLE_eveselection_bonux(POUR){tableau #GET{selection_eve}}><BOUCLE_eveartx(EVENEMENTS){id_evenement=#VALEUR}>
+    
+[(#TITRE|textebrut|supprimer_numero)] 
+-------------------------------------------------
+[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,''})]
+[(#DESCRIPTIF|liens_absolus|couper{300}|PtoBR|textebrut)]
+#URL_SITE_SPIP/[(#URL_EVENEMENT)]
+</BOUCLE_eveartx></BOUCLE_eveselection_bonux>
 
 --
 #NOM_SITE_SPIP

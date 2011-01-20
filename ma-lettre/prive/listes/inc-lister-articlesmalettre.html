@@ -1,0 +1,31 @@
+<B_liste>
+<p><:malettre:compose_cochant:></p>
+<table class="spip" width="100%" border="0">
+<tbody>
+<BOUCLE_liste(ARTICLES)
+	{id_grappe ?}
+	{id_groupe ?}
+	{id_auteur ?}
+	{id_rubrique ?}
+	{id_mot ?}
+	{0,20}
+	{recherche ?}
+	{!par id_article}
+	>	
+<tr width="100%">
+<td bgcolor="[(#COMPTEUR_BOUCLE|alterner{#fff,#eee})]"><a href="?exec=articles&amp;id_article=#ID_ARTICLE">n&#176;#ID_ARTICLE - #TITRE</a></td>
+<td bgcolor="[(#COMPTEUR_BOUCLE|alterner{#fff,#eee})]" align="center"><input type="checkbox" value="#ID_ARTICLE" name="add[]">
+</td></tr>
+</BOUCLE_liste>
+<tr><td colspan="2">
+<p><:malettre:compose_liste:>
+<textarea name="art_csv" id="art_csv" cols="50" rows="5"></textarea>
+</p>
+</td></tr>
+</tbody>
+</table>
+</B_liste>
+
+
+
+

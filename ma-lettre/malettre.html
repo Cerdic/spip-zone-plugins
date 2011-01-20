@@ -44,7 +44,7 @@
           <div style="clear:both;"></div>
            
           [(#REM) selection d'articles]
-          #SET{selection,#ENV**{selection}|explode{","}}
+           #SET{selection,#ENV**{selection}|explode{","}}
           <BOUCLE_selection_bonux(POUR){tableau #GET{selection}}><BOUCLE_artx(ARTICLES){id_article=#VALEUR}>                
                 <div style="clear:both;border-top:1px solid #ededed;"></div>
                
@@ -57,7 +57,19 @@
                 </div>          
           </BOUCLE_artx></BOUCLE_selection_bonux>
           <div style="clear:both;"></div>
-           
+          
+          [(#REM) selection d'evenements)]
+         
+          #SET{selection_eve,#ENV**{selection_eve}|explode{","}}
+        <B_eveselection_bonux>
+         <h3 style="font-family:Arial;font-size:1.2em;color:#666;"><:agenda:agenda:></h3>
+        <table width="600" bgcolor="#FFFFFF" border="0" style="font: 12px Arial, Helvetica, sans-serif;margin:0.4em 0;padding:0;">
+	<BOUCLE_eveselection_bonux(POUR){tableau #GET{selection_eve}}><BOUCLE_eveartx(EVENEMENTS){id_evenement=#VALEUR}>
+	#INCLURE{fond=inclure/agenda_lettre,id_evenement}
+	</BOUCLE_eveartx></BOUCLE_eveselection_bonux>
+	</table>
+         </B_eveselection_bonux>
+         
            <!-- pied -->
            <div style="width:700px;padding:5px;background:#F0EEE1;font-family:Arial;font-size:0.8em;color:#333333;">
                        <strong>#NOM_SITE_SPIP</strong><br />

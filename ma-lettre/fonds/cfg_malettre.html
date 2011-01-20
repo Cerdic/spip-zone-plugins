@@ -1,85 +1,18 @@
+<!-- titre=<:malettre:ma_lettre:> -->
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- icone=img/icon_malettre.png-->
+<!-- logo=malettre.png-->
+
+<!-- descriptif=
+[(#CHEMIN{img/malettre.png}|balise_img{<:malettre:config:>, right})] 
+
+<:malettre:lien_documentation:>
+-->
+
 #CACHE{0}
-[(#REM) descriptif=<p>Choisir l'&eacute;dito et les adresses emails courantes pour vos envois</p>]
-[(#REM) titre=Ma lettre]
-[(#REM) icone=img/icon_malettre.png]
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-  <h4>Edito</h4>
-  <label>Numéro de l'article édito</label>
-  <input type="text" name="id_article_edito" value="#ENV{id_article_edito, 1}"  id="choix_edito" /><br />
+<div class="ajax">
+#FORMULAIRE_CONFIG_MALETTRE
+</div>
 
-  <h4>Exp&eacute;diteurs</h4>
-  <table>
-    <tr>
-          <td></td>
-          <td>Nom</td>
-          <td>Email</td>
-    </tr>
-    <tr>
-          <td>Adresse 1</td>
-          <td><input type="text" name="expediteur_nom1" value="#ENV{expediteur_nom1, pierre dupond}"  id="expediteur_nom1" /></td>
-          <td><input type="text" name="expediteur_email1" value="#ENV{expediteur_email1, p@mondomaine.org}"  id="expediteur_email1" /></td>
-    </tr>
-    <tr>
-          <td>Adresse 2</td>
-          <td><input type="text" name="expediteur_nom2" value="#ENV{expediteur_nom2,}"  id="expediteur_nom2" /></td>
-          <td><input type="text" name="expediteur_email2" value="#ENV{expediteur_email2,}"  id="expediteur_email2" /></td>
-    </tr>
-    <tr>
-          <td>Adresse 3</td>
-          <td><input type="text" name="expediteur_nom3" value="#ENV{expediteur_nom3,}"  id="expediteur_nom3" /></td>
-          <td><input type="text" name="expediteur_email3" value="#ENV{expediteur_email3,}"  id="expediteur_email3" /></td>
-    </tr>
-  </table>
-  
-
-    
-  <h4>Destinataires</h4>
-  <table>
-    <tr>
-          <td></td>
-          <td>Nom</td>
-          <td>Email</td>
-    </tr>
-    <tr>
-          <td>Adresse 1</td>
-          <td><input type="text" name="adresse_nom1" value="#ENV{adresse_nom1, lettre d'information}"  id="adresse_nom1" /></td>
-          <td><input type="text" name="adresse_email1" value="#ENV{adresse_email1, info@liste.mondomaine.org}"  id="adresse_email1" /></td>
-    </tr>
-    <tr>
-          <td>Adresse 2</td>
-          <td><input type="text" name="adresse_nom2" value="#ENV{adresse_nom2,}"  id="adresse_nom2" /></td>
-          <td><input type="text" name="adresse_email2" value="#ENV{adresse_email2,}"  id="adresse_email2" /></td>
-    </tr>
-    <tr>
-          <td>Adresse 3</td>
-          <td><input type="text" name="adresse_nom3" value="#ENV{adresse_nom3,}"  id="adresse_nom3" /></td>
-          <td><input type="text" name="adresse_email3" value="#ENV{adresse_email3,}"  id="adresse_email3" /></td>
-    </tr>
-    <tr>
-          <td>Adresse 4</td>
-          <td><input type="text" name="adresse_nom4" value="#ENV{adresse_nom4,}"  id="adresse_nom4" /></td>
-          <td><input type="text" name="adresse_email4" value="#ENV{adresse_email4,}"  id="adresse_email4" /></td>
-    </tr>
-    <tr>
-          <td>Adresse 5</td>
-          <td><input type="text" name="adresse_nom5" value="#ENV{adresse_nom5,}"  id="adresse_nom5" /></td>
-          <td><input type="text" name="adresse_email5" value="#ENV{adresse_email5,}"  id="adresse_email5" /></td>
-    </tr>
-        <tr>
-          <td>Adresse 6</td>
-          <td><input type="text" name="adresse_nom6" value="#ENV{adresse_nom6,}"  id="adresse_nom6" /></td>
-          <td><input type="text" name="adresse_email6" value="#ENV{adresse_email6,}"  id="adresse_email6" /></td>
-    </tr>
-        <tr>
-          <td>Adresse 7</td>
-          <td><input type="text" name="adresse_nom7" value="#ENV{adresse_nom7,}"  id="adresse_nom7" /></td>
-          <td><input type="text" name="adresse_email7" value="#ENV{adresse_email7,}"  id="adresse_email7" /></td>
-    </tr>
-  </table>
-
- 
-  <input type="submit" name="_cfg_ok" value="<:OK:>" />
-  <input type="reset" value="<:Reset:>" />
-  <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
-</form>

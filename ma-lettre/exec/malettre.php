@@ -13,6 +13,7 @@ include_spip('inc/meta');
 include_spip('inc/filtres');
 include_spip('inc/lang');
 
+
 // -------------------------------
 // Main: Ma Lettre
 // -------------------------------
@@ -50,6 +51,9 @@ function exec_malettre(){
   // si cfg dispo, on charge les valeurs
   if (function_exists(lire_config))  {
       $id_article_edito = lire_config('malettre/id_article_edito');
+      //choix listes
+      $lister_articles=lire_config('malettre/lister_articles');
+      $lister_evenements=lire_config('malettre/lister_evenements');
       $expediteurs = array();
       for ($i=1;$i<4;$i++) {
         if (trim(lire_config("malettre/expediteur_email$i"))!="")
@@ -60,7 +64,7 @@ function exec_malettre(){
         if (trim(lire_config("malettre/adresse_email$i"))!="")
               $adresses[lire_config("malettre/adresse_nom$i")] = lire_config("malettre/adresse_email$i");
       }
-  } 
+  } else $lister_articles="on";
     
   
 
@@ -133,18 +137,31 @@ function exec_malettre(){
                 if (is_array($add))   
                     $selection = implode(",", $add);
       							
-                // csv							
+                // csv articles						
       					$art_csv = _request('art_csv'); 
       					$csv = explode(",", $art_csv);
       					if (is_array($csv)) {							  
       							foreach ($csv as $value2) {								
         					   	$selection .= ",".trim($value2);
         						}
+      					}
+      		// radio button
+                $addeve = _request('addeve');
+                if (is_array($addeve))   
+                    $selection_eve = implode(",", $addeve);
+            
+      		// csv evenements						
+      					$eve_csv = _request('eve_csv'); 
+      					$csv_eve = explode(",", $eve_csv);
+      					if (is_array($csv_eve)) {							  
+      							foreach ($csv_eve as $value2) {								
+        					   	$selection_eve .= ",".trim($value2);
+        						}
       					}	
                 
                 // calcul du patron				
-    						$sourceHTML .= malettre_get_contents("malettre",$id_article_edito,$selection,$lang);                 
-    						$sourceTXT  .= malettre_get_contents("malettre_txt",$id_article_edito,$selection,$lang); 
+    						$sourceHTML .= malettre_get_contents("malettre",$id_article_edito,$selection,$selection_eve,$lang);                 
+    						$sourceTXT  .= malettre_get_contents("malettre_txt",$id_article_edito,$selection,$selection_eve,$lang); 
       							
       					// ecriture fichier       											
     						if ($handle = fopen($path_archive_full."/.malettre.html", w)) { 						    
@@ -355,11 +372,24 @@ function exec_malettre(){
               if ($lang_select!="") $cond_lang_sql = "AND lang='$lang_select'";
                               else  $cond_lang_sql = "";
               
-              $result = sql_select(
-               "id_article,titre","spip_articles",
-               "statut = 'publie' $cond_lang_sql","", 
-               "id_article DESC", "0,50" 
-              ); 
+              if($lister_articles=="on"){
+              	      #on peut affiner le contexte au besoin
+              	      $contexte = array(
+			'lang'=> $cond_lang_sql,
+			);
+                $malettre_articles=recuperer_fond("prive/listes/inc-lister-articlesmalettre",$contexte, array('ajax'=>true));	
+
+              }
+              
+              if($lister_evenements=="on"){
+              	 #on peut affiner le contexte au besoin
+              	      $contexte = array(
+			'lang'=> $cond_lang_sql,
+			);
+                $malettre_evenements=recuperer_fond("prive/listes/inc-lister-evenementsmalettre",$contexte, array('ajax'=>true));	
+     
+              }; 
+              
                                       
 	                							
               echo "<form method='post' agir='?exec=malettre'>"; 
@@ -390,32 +420,13 @@ function exec_malettre(){
 								echo "<iframe width='600' height='500' src='$path_url/spip.php?page=malettre_edito&amp;id_article=$id_article_edito'></iframe>\n";
 								echo $stro;								
 							
-								echo "<br />"._T('malettre:compose_cochant');
-                echo "<table class='spip' style='width:100%;border:0;'>";
-                        
-                                //affichage des 50 documents 
-                                while($row = sql_fetch($result)){
-                                        $id_document=$row['id_article'];                                        
-                                        $titre=charset2unicode($row['titre']);  // BUG pb de charset  filtrer_entites ?
-                                        
-                                        if ($compteur%2) $couleur="#FFFFFF";
-                                        else $couleur="#EEEEEE";
-                                        $compteur++;
-                                        
-                                        echo "<tr width=\"100%\"><td bgcolor='$couleur'>";
-                                        echo "<a href='?exec=articles&amp;id_article=$id_document'>";
-                                        echo typo("n&deg;".$id_document." - ".$titre);
-                                        echo "</a>";                
-                                        echo "</td>";										
-                                        echo "<td align='center' bgcolor='$couleur'><input type=checkbox name=add[] value=\"$id_document\"></TD>";
-                                        echo "</tr>\n";
-                                }
-								
-								echo "<tr><td>"._T('malettre:compose_liste')."<br />";
-								echo "<textarea rows='15' cols='50' id='art_csv' name='art_csv'></textarea></td></tr>";
-								
-                                
-                echo "</table><br /><input type='submit' value='"._T('malettre:compose_submit')."' />\n";
+			//afficher la liste des articles
+       			echo $malettre_articles;
+       			//afficher la liste des evenements
+			echo $malettre_evenements;
+ 
+ 
+                echo"<input type='submit' value='"._T('malettre:compose_submit')."' />\n";
 								echo "</fieldset>\n";
 								echo "</form>\n\n";
 
