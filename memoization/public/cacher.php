@@ -214,7 +214,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	/* compat SPIP 1.9 */
 	if (is_array($page) AND !isset($page['entetes']['X-Spip-Cache']))
-		$page['duree'] = $page['entetes']['X-Spip-Cache'] = 3600;
+		$page['duree'] = $page['entetes']['X-Spip-Cache'] = $GLOBALS['delais'];
 
 	// Second appel, destine a l'enregistrement du cache sur le disque
 	if (isset($chemin_cache)) return creer_cache($page, $chemin_cache, $memo);
