@@ -101,7 +101,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$p = '';
 	if(preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
 		$p .=  '<p>' . _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*')) . '</p>';
-	if(isset($outil['code:spip_options']) && strlen($outil['code:spip_options']) && ($outil_id<>'cs_comportement'))
+	if($actif && isset($outil['code:spip_options']) && strlen($outil['code:spip_options']) && ($outil_id<>'cs_comportement'))
 		$p .= '<p>' . _T('couteauprive:detail_spip_options'.(defined('_CS_SPIP_OPTIONS_OK')?'_ok':''), array('lien'=>description_outil_liens_callback(array(1=>'cs_comportement')))) . '</p>';
 	if(isset($outil['jquery']) && $outil['jquery']=='oui')
 		$p .= '<p>' . _T('couteauprive:detail_jquery2') . '</p>';
@@ -234,7 +234,8 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	foreach($outil['fichiers_distants'] as $i) {
 		$erreur = false;
 		$dir = sous_repertoire($lib, $outil['id']);
-		$f = 'distant_' . basename($outil[$i]);
+		preg_match('/[^?]*/', basename($outil[$i]), $reg); 
+		$f = 'distant_' . $reg[0];
 		$file = $dir.$f;
 		$size = ($forcer || @(!file_exists($file)) ? 0 : filesize($file));
 		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
