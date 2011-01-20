@@ -28,6 +28,20 @@ function cite_authors_bibtex ($auts) {
 	else return '';
 }
 
+function cite_authors_html ($auts) {
+	if (trim($auts)) {
+		$auts = explode(';',$auts);
+		foreach ($auts as $cle => $aut) {
+			$aut = explode(',',$aut,2);
+			$auts[$cle] = trim($aut[0]);
+			if ($aut[1])
+				$auts[$cle] .= " ".trim($aut[1]);
+		}
+		return implode(', ',$auts);
+	}
+	else return '';
+}
+
 function cite_pages_ris ($pages) {
 	if (trim($pages)) {
 		$pages = explode('-',trim($pages));
