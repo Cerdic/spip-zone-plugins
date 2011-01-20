@@ -15,6 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
+/* compat SPIP 1.9 */
+if (!function_exists('redirige_action_post')) {
+function redirige_action_post($action, $arg, $ret, $gra, $corps, $att='') {
+	$r = _DIR_RESTREINT . generer_url_ecrire($ret, $gra, false, true);
+	return generer_action_auteur($action, $arg, $r, $corps, $att . " method='post'");
+}
+}
 
 // http://doc.spip.org/@calculer_taille_dossier
 function calculer_taille_dossier ($dir) {
@@ -53,11 +60,11 @@ function exec_admin_vider_dist()
 	global $spip_lang;
 
 	// autorisation a affiner 
-	if (!autoriser('configurer', 'admin_vider')){
+	if (function_exists('autoriser') AND !autoriser('configurer', 'admin_vider')){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
+		if ($commencer_page = charger_fonction('commencer_page', 'inc', true))
 		echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
 
 		echo "<br /><br /><br />";

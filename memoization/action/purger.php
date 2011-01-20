@@ -15,8 +15,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 // http://doc.spip.org/@action_purger_dist
 function action_purger_dist()
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if ($securiser_action = charger_fonction('securiser_action', 'inc', true))
+		$arg = $securiser_action();
+	else {
+		/* compat SPIP 1.9 */
+		$arg = _request('arg');
+		$redirect = 'ecrire/'._request('redirect');
+		include_spip('inc/meta');
+		function spip_unlink($u) {
+			return unlink($u);
+		}
+	}
 
 	include_spip('inc/invalideur');
 
@@ -42,6 +51,8 @@ function action_purger_dist()
 
 		# ajouter une mark pour les autres methodes de memoization
 		ecrire_meta('cache_mark', time());
+		/* compat SPIP 1.9 */
+		if (function_exists('ecrire_metas')) ecrire_metas();
 
 		break;
 
@@ -56,6 +67,12 @@ function action_purger_dist()
 		break;
 	}
 
+
+	/* compat SPIP 1.9 */
+	if (isset($redirect)) {
+		include_spip('inc/headers');
+		redirige_par_entete($redirect);
+	}
 }
 
 ?>
