@@ -5,7 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Une date au format JJ/MM/AAAA (avec séparateurs souples : espace / - .)
- * TODO : introduire via les options le FORMAT de la date, pour accepter différentes écritures
+ * Options :
+ * - format : permet de préciser le format de la date  jma pour jour/mois/année (par défaut), mja (pour mois / jour / année), amj (année/mois/jour)
+ * TODO : compléter les formats 
  * On pourrait faire mieux, genre vérifier les jours en fonction du mois
  * Mais c'est pas très important, on reste simple
  *
@@ -21,9 +23,22 @@ function verifier_date_dist($valeur, $options=array()){
 	$valeur = preg_replace("#\.|/| #i",'-',$valeur);
 	
 	// On vérifie la validité du format
-	if(!preg_match('#^[0-9]{2}-[0-9]{2}-[0-9]{4}$#',$valeur)) return $erreur;
-	// On vérifie vite fait que les dates existent, genre le 32 pour un jour NON, (mais on pourrait aller plus loin et vérifier en fonction du mois)
-	list($jour,$mois,$annee) = explode('-',$valeur);
+	$format = isset($options['format']) ? $options['format'] : 'jma'; 
+	
+	print_r($format);
+	
+	if ($format=='mja') {
+		if(!preg_match('#^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$#',$valeur)) return $erreur;
+		list($mois,$jour,$annee) = explode('-',$valeur);
+	} elseif ($format=='amj') {
+		if(!preg_match('#^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$#',$valeur)) return $erreur;
+		list($annee,$mois,$jour) = explode('-',$valeur);
+	} else {
+	// Format jma par défaut
+		if(!preg_match('#^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$#',$valeur)) return $erreur;
+		list($jour,$mois,$annee) = explode('-',$valeur);
+	}
+
 	// validité de la date
 	$erreur = _T('verifier:erreur_date');
 	if (!checkdate($mois, $jour, $annee)) return $erreur;
