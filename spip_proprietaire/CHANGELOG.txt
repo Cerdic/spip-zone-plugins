@@ -8,7 +8,7 @@ version 1.2 -> 1.3
 	(monte en version pour compatibilit avec SPIP 2.1.8, qui ncessite
 	donc la version 1.3 minimum)
 
-20/01/2010 - Commit 43710
+20/01/2011 - Commit 43710
 - Correction de l'inclusion des squelettes par la fonction 'recuperer_fond()' qui
 renvoyait une erreur sur SPIP 2.1.8 (les inclusions renvoyaient des pages 404 !)
 => retrait des premiers slashs dans le chemin des fichiers ˆ rcuprer :
