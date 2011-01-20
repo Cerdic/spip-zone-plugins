@@ -20,7 +20,7 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 #minibando #bando1_bando_administration { background: #f8f8f8 url(images/administration.png) center 50% no-repeat; }
 #minibando #bando1_bando_configuration { background: #f8f8f8 url(images/configuration.png) center 50% no-repeat; }
 #minibando #minibando_outils_rapides > a { background: #f8f8f8 url(images/outils_rapides.png) center 50% no-repeat; }
-#minibando #minibando_bouton_modifier > a { background: #f8f8f8 url(images/edition.png) center 50% no-repeat; }
+#minibando #minibando_bouton_modifier > a { background: #f8f8f8 url(images/modification.png) center 50% no-repeat; }
 #minibando #minibando_bouton_statistiques > a { background: #f8f8f8 url(images/statistiques.png) center 50% no-repeat; }
 #minibando #minibando_bouton_recalcul > a { background: #f8f8f8 url(images/reload.png) center 50% no-repeat; }
 #minibando #minibando_bouton_debug > a { background: #f8f8f8 url(images/debug.png) center 50% no-repeat; }
