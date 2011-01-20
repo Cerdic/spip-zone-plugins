@@ -78,19 +78,19 @@ function balise_PROPRIETAIRE_dyn($wich='', $who='', $separator='<br />') {
 			$contexte['who'] = $who;
 			if( $wich == 'carte_visite_image' )
 				$contexte['type'] = 'image';
-			$div .= recuperer_fond("/modeles/carte_visite", $contexte);
+			$div .= recuperer_fond("modeles/carte_visite", $contexte);
 			break;
 		case 'googlemap' :
 			if(!strlen($who)) $who = 'proprietaire';
 			$contexte['googlemap_string'] = make_google_map_proprietaire($conf, $who);
-			$div .= recuperer_fond("/modeles/noisette_googlemap", $contexte);
+			$div .= recuperer_fond("modeles/noisette_googlemap", $contexte);
 			break;
 		case 'logo' :
 		default :
 			$contexte = $conf;
 			$contexte['separator'] = $separator;
 			if($wich == 'logo') $contexte['logo'] = 'oui';
-			$div .= recuperer_fond("/modeles/noisette_proprietaire", $contexte);
+			$div .= recuperer_fond("modeles/noisette_proprietaire", $contexte);
 			break;
 	}
 

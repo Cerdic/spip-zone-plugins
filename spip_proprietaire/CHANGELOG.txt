@@ -5,6 +5,20 @@ http://www.spip-contrib.net/SPIP-Proprio
 ## Spip Proprio - CHANGELOG ##
 
 
+20/01/2010 - Commit 43710
+- Correction de l'inclusion des squelettes par la fonction 'recuperer_fond()' qui
+renvoyait une erreur sur SPIP 2.1.8 (les inclusions renvoyaient des pages 404 !)
+=> retrait des premiers slashs dans le chemin des fichiers à récupérer :
+    recuperer_fond("/modeles/noisette_proprietaire", $contexte);
+devient :
+    recuperer_fond("modeles/noisette_proprietaire", $contexte);
+- Après vérification, la correction ne semble pas poser de problème sur les SPIP
+plus anciennes (et pour cause: la fonction devrait toujours être utilisée comme ça!)
+
+14/12/2010 - Commit 42913 et 42914
+Ajout d'une plateforme d'exportation/importation des réglages du plugin d'un
+site à l'autre
+
 20/09/2010 - MISE EN DEV SVN SUR SPIP-ZONE :
 http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip_proprietaire
 

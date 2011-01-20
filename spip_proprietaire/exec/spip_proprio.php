@@ -57,7 +57,7 @@ function exec_spip_proprio() {
 				. _T('spip_proprio:ptexte_info_titre')."</div><div id='ptexte-info' class='bloc_depliable blocreplie'>"._T('spip_proprio:ptexte_info_texte')."</div><br class='nettoyeur' />"
 				. "<div class='titrem $form_depliement' onmouseover=\"jQuery(this).depliant('#ptexte-form');\"><a href='#' onclick=\"return jQuery(this).depliant_clicancre('#ptexte-form');\" class='titremancre'></a>"
 				. _T('spip_proprio:ptexte_form_titre')."</div><div id='ptexte-form' class='bloc_depliable bloc$form_depliement'>"
-				. recuperer_fond("/prive/proprietaire_textes", array('raccourci' => $raccourci))
+				. recuperer_fond("prive/proprietaire_textes", array('raccourci' => $raccourci))
 				. "</div><br class='nettoyeur' />"
 				. charger_textes_proprietaire(false)
 				. fin_boite_info(true);
@@ -70,11 +70,11 @@ function exec_spip_proprio() {
 				. _T("spip_proprio:pconfig_texte_lien_doc") . $lien_page_test; 
 			$info_supp = _T("spip_proprio:pconfig_texte_notes") . _T("spip_proprio:pconfig_texte_ajouts");
 
-			$infos_necessaires = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_necessaires'));
-			$adresse = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'adresse'));
-			$infos_legales = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_legales'));
-			$cnil = recuperer_fond("/prive/proprietaire_formulaires", array('form'=>'cnil'));
-			$copyright = recuperer_fond("/prive/proprietaire_formulaires", array('form'=>'copyright'));
+			$infos_necessaires = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_necessaires'));
+			$adresse = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'adresse'));
+			$infos_legales = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_legales'));
+			$cnil = recuperer_fond("prive/proprietaire_formulaires", array('form'=>'cnil'));
+			$copyright = recuperer_fond("prive/proprietaire_formulaires", array('form'=>'copyright'));
 
 			$contenu = $warning . debut_cadre_trait_couleur(find_in_path("images/idisk-dir-24.png"), true, "", _T('spip_proprio:infos_legend'))
 				. pipeline('affiche_milieu', array('args'=>array('exec'=>'spip_proprio'), 'data'=>$infos_necessaires))
@@ -100,11 +100,11 @@ function exec_spip_proprio() {
 				. _T("spip_proprio:pconfig_texte_lien_doc") . $lien_page_test; 
 			$info_supp = _T("spip_proprio:pconfig_texte_notes") . _T("spip_proprio:pconfig_texte_ajouts");
 
-			$idem = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'idem'));
-			$infos_necessaires = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_necessaires'));
-			$adresse = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'adresse'));
-			$infos_legales = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_legales'));
-			$serveur = recuperer_fond("/prive/proprietaire_formulaires", array('form'=>'serveur'));
+			$idem = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'idem'));
+			$infos_necessaires = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_necessaires'));
+			$adresse = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'adresse'));
+			$infos_legales = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_legales'));
+			$serveur = recuperer_fond("prive/proprietaire_formulaires", array('form'=>'serveur'));
 
 			$contenu = $warning . debut_cadre_trait_couleur(find_in_path("images/stock_about.png"), true, "", _T('spip_proprio:infos_idem'))
 				. pipeline('affiche_milieu', array('args'=>array('exec'=>'spip_proprio'), 'data'=>$idem))
@@ -130,11 +130,11 @@ function exec_spip_proprio() {
 				. _T("spip_proprio:pconfig_texte_lien_doc") . $lien_page_test; 
 			$info_supp = _T("spip_proprio:pconfig_texte_notes") . _T("spip_proprio:pconfig_texte_ajouts");
 
-			$idem = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'idem'));
-			$infos_necessaires = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_necessaires'));
-			$adresse = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'adresse'));
-			$infos_legales = recuperer_fond("/prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_legales'));
-			$createur = recuperer_fond("/prive/proprietaire_formulaires", array('form'=>'createur'));
+			$idem = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'idem'));
+			$infos_necessaires = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_necessaires'));
+			$adresse = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'adresse'));
+			$infos_legales = recuperer_fond("prive/proprietaire_formulaires", array('who'=>$page, 'form'=>'infos_legales'));
+			$createur = recuperer_fond("prive/proprietaire_formulaires", array('form'=>'createur'));
 
 			$contenu = $warning . debut_cadre_trait_couleur(find_in_path("images/stock_about.png"), true, "", _T('spip_proprio:infos_idem'))
 				. pipeline('affiche_milieu', array('args'=>array('exec'=>'spip_proprio'), 'data'=>$idem))
@@ -163,9 +163,9 @@ function exec_spip_proprio() {
 			$info_texte = _T("spip_proprio:pcskels_texte") . $lien_page_test;
 			$info_supp = _T("spip_proprio:pconfig_texte_notes");
 
-			$copyright = recuperer_fond("/prive/proprietaire_formulaires", array('form'=>'copyright'));
-			$infos_legales_createur = recuperer_fond("/prive/proprietaire_formulaires", array('form'=>'infos_legales_createur'));
-			$infos_legales_hebergeur = recuperer_fond("/prive/proprietaire_formulaires", array('form'=>'infos_legales_hebergeur'));
+			$copyright = recuperer_fond("prive/proprietaire_formulaires", array('form'=>'copyright'));
+			$infos_legales_createur = recuperer_fond("prive/proprietaire_formulaires", array('form'=>'infos_legales_createur'));
+			$infos_legales_hebergeur = recuperer_fond("prive/proprietaire_formulaires", array('form'=>'infos_legales_hebergeur'));
 
 			$contenu = debut_cadre_trait_couleur(find_in_path("images/gnome-application-pgp-24.png"), true, "", _T('spip_proprio:pconfig_copyright_legend'))
 				. pipeline('affiche_milieu', array('args'=>array('exec'=>'spip_proprio'), 'data'=>$copyright))
