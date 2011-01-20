@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 // module inclu dans la description de l'outil en page de configuration
 
