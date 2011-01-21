@@ -52,12 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_mode_php_filter' => 'V&eacute;rification compl&egrave;te de l\'url via le filtre FILTER_VALIDATE_URL de php',
 	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole',
 	'option_url_protocole_label' => 'Nom du protocole &agrave; v&eacute;rifier',
+	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous&nbsp;:',
+	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp',
 	'option_url_type_protocole_label' => 'Type de protocole &agrave; v&eacute;rifier',
+	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp',
 	'option_url_type_protocole_tous' => 'Tous protocoles accept&eacute;s',
 	'option_url_type_protocole_web' => 'Protocoles web : http ou https',
-	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp',
-	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp',
-	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous&nbsp;:',
 
 	// T
 	'type_date' => 'Date',

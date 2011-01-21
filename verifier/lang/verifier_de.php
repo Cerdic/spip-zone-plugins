@@ -29,7 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_max' => 'Der Wert darf maximal @max@ Zeichen haben.',
 	'erreur_taille_min' => 'Der Wert mu&szlig; mindestens @min@ Zeichen haben.',
 	'erreur_telephone' => 'Zahl ung&uuml;ltig',
-	'erreur_url' => 'Adresse ung&uuml;ltig',
+	'erreur_url' => 'Adresse ung&uuml;ltig', # MODIF
+	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # NEW
+	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # NEW
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Nombre de d&eacute;cimales apr&egrave;s la virgule', # NEW
@@ -47,6 +49,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_siren_siret_mode_siret' => 'SIRET (frz. geographische Unternehmens ID)',
 	'option_taille_max_label' => 'Maximalgr&ouml;&szlig;e',
 	'option_taille_min_label' => 'Minimalgr&ouml;&szlig;e',
+	'option_url_mode_complet' => 'V&eacute;rification compl&egrave;te de l\'url', # NEW
+	'option_url_mode_label' => 'Mode de v&eacute;rification des urls', # NEW
+	'option_url_mode_php_filter' => 'V&eacute;rification compl&egrave;te de l\'url via le filtre FILTER_VALIDATE_URL de php', # NEW
+	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole', # NEW
+	'option_url_protocole_label' => 'Nom du protocole &agrave; v&eacute;rifier', # NEW
+	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous&nbsp;:', # NEW
+	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp', # NEW
+	'option_url_type_protocole_label' => 'Type de protocole &agrave; v&eacute;rifier', # NEW
+	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp', # NEW
+	'option_url_type_protocole_tous' => 'Tous protocoles accept&eacute;s', # NEW
+	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
 
 	// T
 	'type_date' => 'Datum',
@@ -66,7 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_taille' => 'Gr&ouml;&szlig;e',
 	'type_taille_description' => '&Uuml;berpr&uuml;ft ob der Wert zum geforderten Minimal- oder Maximalwert pa&szlig;t.',
 	'type_telephone' => 'Telefonnummer',
-	'type_telephone_description' => 'Pr&uuml;ft ob die Telefonnummer einem bekannten Schema entspricht.'
+	'type_telephone_description' => 'Pr&uuml;ft ob die Telefonnummer einem bekannten Schema entspricht.',
+	'type_url' => 'URL', # NEW
+	'type_url_description' => 'V&eacute;rifie que l\'url correspond &agrave; un sch&eacute;ma reconnu.', # NE
 );
 
 ?>

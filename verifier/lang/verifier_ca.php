@@ -29,7 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_max' => 'El valor ha de comprendre com a molt @max@ car&agrave;cters.',
 	'erreur_taille_min' => 'El valor ha de tenir com a m&iacute;nim @min@ car&agrave;cters.',
 	'erreur_telephone' => 'El n&uacute;mero no &eacute;s v&agrave;lid.',
-	'erreur_url' => 'L\'adre&ccedil;a no &eacute;s v&agrave;lida.',
+	'erreur_url' => 'L\'adre&ccedil;a no &eacute;s v&agrave;lida.', # MODIF
+	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # NEW
+	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # NEW
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Nombre de d&eacute;cimales apr&egrave;s la virgule', # NEW
@@ -47,6 +49,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_siren_siret_mode_siret' => 'el SIRET',
 	'option_taille_max_label' => 'Mida m&agrave;xima',
 	'option_taille_min_label' => 'Mida m&iacute;nima',
+	'option_url_mode_complet' => 'V&eacute;rification compl&egrave;te de l\'url', # NEW
+	'option_url_mode_label' => 'Mode de v&eacute;rification des urls', # NEW
+	'option_url_mode_php_filter' => 'V&eacute;rification compl&egrave;te de l\'url via le filtre FILTER_VALIDATE_URL de php', # NEW
+	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole', # NEW
+	'option_url_protocole_label' => 'Nom du protocole &agrave; v&eacute;rifier', # NEW
+	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous&nbsp;:', # NEW
+	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp', # NEW
+	'option_url_type_protocole_label' => 'Type de protocole &agrave; v&eacute;rifier', # NEW
+	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp', # NEW
+	'option_url_type_protocole_tous' => 'Tous protocoles accept&eacute;s', # NEW
+	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
 
 	// T
 	'type_date' => 'Data',
@@ -66,7 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_taille' => 'Mida',
 	'type_taille_description' => 'Verifica que la mida del valor correspon al m&iacute;nim i/o al m&agrave;xim demanat.',
 	'type_telephone' => 'N&uacute;mero de tel&egrave;fon',
-	'type_telephone_description' => 'Verifica que el n&uacute;mero de tel&egrave;fon correspon a un esquema reconegut.'
+	'type_telephone_description' => 'Verifica que el n&uacute;mero de tel&egrave;fon correspon a un esquema reconegut.',
+	'type_url' => 'URL', # NEW
+	'type_url_description' => 'V&eacute;rifie que l\'url correspond &agrave; un sch&eacute;ma reconnu.', # NE
 );
 
 ?>
