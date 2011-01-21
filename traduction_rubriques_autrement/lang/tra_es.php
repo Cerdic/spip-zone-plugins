@@ -1,14 +1,17 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nommé  genere le NOW()
-// langue / language = es
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-'ajouter_traduction' => "Añadir una traducción",
+	// A
+	'ajouter_traduction' => 'Añadir una traducción',
 
-// R
-'rubrique_reference' => "(sección de referencia)",
+	// R
+	'rubrique_reference' => '(sección de referencia)'
 );
+
 ?>
