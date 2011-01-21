@@ -9,7 +9,8 @@
 <form action="#ENV{action}#formulaire_forum" method="post" enctype="multipart/form-data"><div>
 [(#ACTION_FORMULAIRE{[(#ENV{action})]})]
 
-#SET{pagination,#ENV{pagination,10}}
+#SET{pagination,#ENV{pagination,25}}
+
 #SET{prive,#ENV{type_message,public}|=={interne}|?{'priv%','%'}}
 #SET{public,#ENV{type_message,public}|=={public}|?{'priv%',''}}
 
