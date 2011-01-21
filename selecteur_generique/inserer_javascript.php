@@ -5,12 +5,8 @@ function SelecteurGenerique_inserer_auteur() {
 	$ac = generer_url_ecrire('selecteur_generique');
 	$id_article = _request('id_article');
 	$statut = _request('statut');
-	if (_request('exec') == 'auteurs'){
-		$input = 'input[name=recherche][autocomplete!=off]';
-	}
-	else{
-		$input = 'input[name=cherche_auteur][autocomplete!=off]';
-	}
+	$input = 'input[name=cherche_auteur][autocomplete!=off]';
+
 	return <<<EOS
 
 (function($) {
@@ -197,8 +193,7 @@ function SelecteurGenerique_inserer_javascript($flux) {
 	$js = '';
 
 	if (_request('exec') == 'articles'
-	OR _request('exec') == 'acces_restreint_edit'
-	OR _request('exec') == 'auteurs') {
+	OR _request('exec') == 'acces_restreint_edit') {
 		$js .= SelecteurGenerique_inserer_auteur();
 	}
 
