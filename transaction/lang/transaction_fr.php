@@ -29,7 +29,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_cheque_explication' => 'Indiquez ici le message de retour ainsi que l\'adresse &agrave; laquelle le ch&egrave;que devra &ecirc;tre envoy&eacute;',
 	'traiter_cheque_message_defaut' => '<h1>Paiement par ch&egrave;que.</h1><p>Veuillez envoyer votre r&egrave;glement par ch&egrave;que &agrave; l\'ordre de Mon Organisme et &agrave; l\'adresse :</p> <p>adresse de votre organisme</p>',
 	'traiter_message_cmcic' => '<h1>Paiement s&eacute;curis&eacute;</h1><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction s\'effectue via l\'&eacute;tablissement bancaire '.$_SESSION['banque_nom'].' qui seul dispose des informations bancaires fournies au moment du paiement.</p><p><a href="'.find_in_path("paiement/cmcic/paiement.php").'"  class="valider"><span>Validez le paiement</span></a></p>',
-	'traiter_message_cmcic_erreur' => 'Le paiement s&eacute;curis&eacute; est actuellement en mode test, aucune transaction ne sera effectu&eacute;e sur votre carte bancaire.'
+	'traiter_message_cmcic_erreur' => 'Le paiement s&eacute;curis&eacute; est actuellement en mode test, aucune transaction ne sera effectu&eacute;e sur votre carte bancaire.',
+	'statut_transaction_0' => 'Non pay&eacute;',
+	'statut_transaction_1' => 'Pay&eacute;',
+	'reference_transaction' => 'R&eacute;f&eacute;rence',
+	'statut_transaction' => 'Statut'
+
 	
 );
 
