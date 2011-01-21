@@ -8,6 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'a_ete_mise_a_la_poubelle' => 'a &eacute;t&eacute; mise &agrave; la poubelle', # NEW
 	'acces_non' => 'Direitos de acesso\\" restrito',
 	'acces_oui' => 'Direitos de acesso\\" detalhes das fichas',
 	'acces_restreint' => 'O acesso &agrave; este s&iacute;tio &eacute; limitado',
