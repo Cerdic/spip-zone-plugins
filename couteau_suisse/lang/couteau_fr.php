@@ -35,7 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lutte_spam' => 'Lutte contre le SPAM',
 
 	// M
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.',
 	'maj_actu' => 'Forcer l\'actualisation distante',
 	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :',
 	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
@@ -43,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev' => 'R&eacute;v.&nbsp;@revision@',
 	'maj_rev_ko' => 'La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
 	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
+	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.',
 	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
 	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
 	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',

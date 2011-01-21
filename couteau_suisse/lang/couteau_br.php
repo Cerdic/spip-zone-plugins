@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev' => 'Adwel.&nbsp;@revision@',
 	'maj_rev_ko' => 'N\'eus ket bet gallet kavout an [adweladenn a-bell->@url@].',
 	'maj_rev_ok' => 'gallout a reer [kavout->@zip@] an [@revision@->@url@].',
+	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
 	'maj_svn' => 'Evit doare eo bet [hizivaet->@url@] an adveziant SVN-ma&ntilde;.',
 	'maj_verif' => 'Gwiriit da genta&ntilde; an diell a zere deoc\'h :',
 	'maj_verif2' => 'Diwallit : goude beza&ntilde; kliket war ar bouton a-us, gwiriit mat e klot an diell pellgarget gant an adveziant zo da hizivaat.',

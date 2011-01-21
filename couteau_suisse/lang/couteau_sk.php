@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev' => 'Ver.&nbsp;@revision@', # MODIF
 	'maj_rev_ko' => 'The [remote version->@url@] could not be found.', # MODIF
 	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].', # MODIF
+	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
 	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].', # MODIF
 	'maj_verif' => 'First check which file is right for you:', # MODIF
 	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.', # MODIF
