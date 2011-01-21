@@ -1,34 +1,40 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nommé  genere le NOW()
-// langue / language = en
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-'affichage_liste_compacte' => "Lista de artículos compacto",
-'affichage_edition_seule' => "Solo mode de edición para los artículos",
+	// A
+	'affichage_edition_seule' => 'Solo mode de edición para los artículos',
+	'affichage_liste_compacte' => 'Lista de artículos compacto',
 
-// C
-'changer_langue' => "Cambiar el idioma del artículo",
+	// C
+	'changer_langue' => 'Cambiar el idioma del artículo',
 
-// F
-'fermer' => "Cerrar",
+	// F
+	'fermer' => 'Cerrar',
 
-//L
-'lier_traduction' => "Añadir una traducción",
+	// L
+	'lier_traduction' => 'Añadir una traducción',
 
-//N
-'necesite_afficher_objet' => "Esta opción necesita la instalación del plugin",
+	// M
+	'modifier_options_langue' => 'options', # NEW
 
-// O
-'options' => "Opciones",
+	// N
+	'necesite_afficher_objet' => 'Esta opción necesita la instalación del plugin',
 
-// T
-'titre_plugin' => "Traducción de articulos repensada",
-'traductions' => "Traducciones",
+	// O
+	'options' => 'Opciones',
 
-// V
-'voir_traductions' => "Ver las traducciones en detalle",
+	// T
+	'titre_plugin' => 'Traducción de articulos repensada',
+	'traductions' => 'Traducciones',
+
+	// V
+	'voir_traductions' => 'Ver las traducciones en detalle'
 );
+
 ?>

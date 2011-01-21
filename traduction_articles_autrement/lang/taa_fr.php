@@ -1,38 +1,38 @@
 <?php
-
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nommé  genere le NOW()
-// langue / language = fr
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/traduction_articles_autrement/lang/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-'affichage_liste_compacte' => "Affichage compacte des liste des articles",
-'affichage_edition_seule' => "Affichage des articles seulement en mode édition",
+	// A
+	'affichage_edition_seule' => 'Affichage des articles seulement en mode édition',
+	'affichage_liste_compacte' => 'Affichage compacte des liste des articles',
 
-// C
-'changer_langue' => "Changer la langue de l'article",
+	// C
+	'changer_langue' => 'Changer la langue de l\'article',
 
-// F
-'fermer' => "Fermer",
+	// F
+	'fermer' => 'Fermer',
 
-//L
-'lier_traduction' => "Attacher une traduction",
+	// L
+	'lier_traduction' => 'Attacher une traduction',
 
-//M
-'modifier_options_langue' => "options",
+	// M
+	'modifier_options_langue' => 'options',
 
-//N
-'necesite_afficher_objet' => "Pour pouvoir utiliser cette fonction vous devez installer le plugin",
+	// N
+	'necesite_afficher_objet' => 'Pour pouvoir utiliser cette fonction vous devez installer le plugin',
 
-// O
-'options' => "Options",
+	// O
+	'options' => 'Options',
 
-// T
-'titre_plugin' => "Traduction d'articles autrement",
-'traductions' => "Traductions",
+	// T
+	'titre_plugin' => 'Traduction d\'articles autrement',
+	'traductions' => 'Traductions',
 
-// V
-'voir_traductions' => "Voir le d&eacute;tail des traductions",
-
+	// V
+	'voir_traductions' => 'Voir le d&eacute;tail des traductions'
 );
+
 ?>

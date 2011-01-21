@@ -1,35 +1,40 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nommé  genere le NOW()
-// langue / language = en
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-'affichage_liste_compacte' => "Kompakte Artikel Liste",
-'affichage_edition_seule' => "Modus Artikel direkt bearbeiten - ohne Vorschau",
+	// A
+	'affichage_edition_seule' => 'Modus Artikel direkt bearbeiten - ohne Vorschau',
+	'affichage_liste_compacte' => 'Kompakte Artikel Liste',
 
-// C
-'changer_langue' => "Die Sprache des Artikels ändern",
+	// C
+	'changer_langue' => 'Die Sprache des Artikels ändern',
 
-// F
-'fermer' => "Schliessen",
+	// F
+	'fermer' => 'Schliessen',
 
-//L
-'lier_traduction' => "Eine übersetzung anhängen",
+	// L
+	'lier_traduction' => 'Eine übersetzung anhängen',
 
-//>N
-'necesite_afficher_objet' => "Diese Fuktion erfordert die Installierung des Plugins",
+	// M
+	'modifier_options_langue' => 'options', # NEW
 
-// O
-'options' => "Optionen",
+	// N
+	'necesite_afficher_objet' => 'Diese Fuktion erfordert die Installierung des Plugins',
 
-// T
-'titre_plugin' => "Artikel Übersetzung mal Anders",
-'traductions' => "Übersetzungen",
+	// O
+	'options' => 'Optionen',
 
-// V
-'voir_traductions' => "Detaillierte Ansicht der Übersetzungen",
+	// T
+	'titre_plugin' => 'Artikel Übersetzung mal Anders',
+	'traductions' => 'Übersetzungen',
 
+	// V
+	'voir_traductions' => 'Detaillierte Ansicht der Übersetzungen'
 );
+
 ?>
