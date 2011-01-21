@@ -54,7 +54,14 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$facteur->AddAttachment($piece['chemin'], $piece['nom'], $piece['encodage'], $piece['mime']);
 		}
 	}
+	
+	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
+	$facteur = pipeline('facteur_pre_envoi', $facteur);
+	
+	// On génère les headers
 	$head = $facteur->CreateHeader();
+	
+	// Et c'est parti on envoie enfin
 	spip_log("mail via facteur\n$head"."Destinataire: 
 $destinataire\n",'mail');
 	spip_log("mail\n$head"."Destinataire: 
@@ -62,5 +69,9 @@ $destinataire\n",'facteur');
 	return $facteur->Send();
 }
 
+// Juste pour déclarer le pipeline
+function facteur_facteur_pre_envoi($facteur){
+	return $facteur;
+}
 
 ?>

@@ -28,6 +28,10 @@
 		<inclure>inc/facteur_autorisations.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>facteur_pre_envoi</nom>
+		<inclure>inc/envoyer_mail.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ieconfig_metas</nom>
 		<inclure>facteur_ieconfig_metas.php</inclure>
 	</pipeline>
