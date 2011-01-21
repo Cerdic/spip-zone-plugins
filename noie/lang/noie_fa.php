@@ -8,14 +8,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
-	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
-	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
+	'noie_info' => '&#1576;&#1585;&#1575;&#1610; &#1711;&#1584;&#1585; &#1575;&#1586; &#1605;&#1610;&#1575;&#1606; &#1589;&#1601;&#1581;&#1575;&#1578; &#1575;&#1610;&#1606; &#1587;&#1575;&#1610;&#1578; &#1608; &#1575;&#1610;&#1606;&#1578;&#1585;&#1606;&#1578; &#1576;&#1607; &#1588;&#1605;&#1575; &#1578;&#1608;&#1589;&#1610;&#1607; &#1605;&#1610;&#8204;&#1603;&#1606;&#1610;&#1605; &#1575;&#1610;&#1606;&#1578;&#1585;&#1606;&#1578; &#1575;&#1603;&#1587;&#1662;&#1604;&#1608;&#1585;&#1585; &#1582;&#1608;&#1583; &#1585;&#1575; &#1585;&#1608;&#1586;&#1570;&#1605;&#1583; &#1587;&#1575;&#1586;&#1610;&#1583;<a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> &#1610;&#1575; &#1575;&#1586; &#1605;&#1585;&#1608;&#1585;&#1711;&#1585; &#1583;&#1610;&#1711;&#1585;&#1610; &#1605;&#1575;&#1606;&#1606;&#1583; &#1575;&#1610;&#1606;&#8204;&#1607;&#1575; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1606;&#1605;&#1575;&#1610;&#1610;&#1583; <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.',
+	'noie_titre' => '&#1578;&#1608;&#1580;&#1607;! &#1575;&#1610;&#1606;&#1578;&#1585;&#1606;&#1578; &#1575;&#1603;&#1587;&#1662;&#1604;&#1608;&#1585;&#1585; &#1588;&#1605;&#1575; &#1585;&#1608;&#1586;&#1570;&#1605;&#1583; &#1606;&#1610;&#1587;&#1578;!',
 
 	// T
-	'toocool_alt' => 'Trop cool pour IE', # NEW
-	'toocool_info' => 'Le site que vous tentez d\'afficher a &eacute;t&eacute; jug&eacute; &laquo;&nbsp;trop bien pour Internet Explorer&nbsp;&raquo;.
-<br />Prenez, s\'il vous pla&icirc;t, un moment afin d\'essayer l\'un de ces excellents navigateurs : <a href="http://www.w3junkies.com/toocool/index.php?language=fr">http://www.w3junkies.com/toocool/</a>', # NEW
-	'toocool_titre' => 'Trop Cool pour Internet Explorer', # NE
+	'toocool_alt' => '&#1582;&#1610;&#1604;&#1610; &#1605;&#1606;&#1575;&#1587;&#1576; &#1576;&#1585;&#1575;&#1610; &#1570;&#1610;.&#1575;&#1610;(&#1575;&#1610;&#1606;&#1578;&#1585;&#1606;&#1578; &#1575;&#1603;&#1587;&#1662;&#1604;&#1608;&#1585;&#1585;) ',
+	'toocool_info' => '&#1587;&#1575;&#1610;&#1578;&#1610; &#1603;&#1607; &#1587;&#1593;&#1610; &#1583;&#1575;&#1585;&#1610;&#1583; &#1576;&#1576;&#1610;&#1606;&#1610;&#1583; &laquo;&#1582;&#1610;&#1604;&#1610; &#1582;&#1608;&#1576; &#1576;&#1585;&#1575;&#1610; &#1570;&#1610;.&#1575;&#1610;&raquo; &#1578;&#1588;&#1582;&#1610;&#1589; &#1583;&#1575;&#1583;&#1607; &#1588;&#1583;&#1607; &#1575;&#1587;&#1578;.
+<br />&#1604;&#1591;&#1601;&#1575;&#1611; &#1603;&#1605;&#1610; &#1608;&#1602;&#1578; &#1576;&#1711;&#1584;&#1575;&#1585;&#1610;&#1583; &#1608; &#1575;&#1610;&#1606; &#1605;&#1585;&#1608;&#1585;&#1711;&#1585;&#1607;&#1575;&#1610; &#1576;&#1586;&#1585;&#1711; &#1585;&#1575; &#1575;&#1605;&#1578;&#1581;&#1575;&#1606; &#1603;&#1606;&#1610;&#1583;: <a href="http://www.w3junkies.com/toocool/index.php?language=fr">http://www.w3junkies.com/toocool/</a>',
+	'toocool_titre' => '&#1582;&#1610;&#1604;&#1610; &#1605;&#1606;&#1575;&#1587;&#1576; &#1576;&#1585;&#1575;&#1610; &#1575;&#1610;&#1606;&#1578;&#1585;&#1606;&#1578; &#1575;&#1603;&#1587;&#1662;&#1604;&#1608;&#1585;&#1585;'
 );
 
 ?>
