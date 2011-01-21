@@ -145,6 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.', # MODIF
 	'choix_squelettes' => 'You are allowed to used other templates, but the selected files replacing groupeforum.html and filforum.html must already exist!', # MODIF
 	'citer' => 'Quote', # MODIF
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar', # MODIF
 	'col_date_crea' => 'Registration date', # MODIF
 	'col_marquer' => 'Mark', # MODIF

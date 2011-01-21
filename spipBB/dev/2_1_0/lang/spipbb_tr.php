@@ -145,6 +145,7 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'choix_rubrique_selection' => 'Forumlara temel olu&#351;turacak bir sekt&ouml;r se&ccedil;iniz. Bu sekt&ouml;r&uuml;n i&ccedil;inde, her alt ba&#351;l&#305;k bir forum grubu olacakt&#305;r, yay&#305;nlanan her makale bir forum a&ccedil;acakt&#305;r.',
 	'choix_squelettes' => 'Ba&#351;kalar&#305;n&#305; da se&ccedil;ebilirsiniz ama groupeforum.html ve filforum.html dosyalar&#305;n&#305;n yerine konan dosyalar mevcut olmal&#305;d&#305;r !',
 	'citer' => 'Listele',
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Kay&#305;t tarihi',
 	'col_marquer' => '&#304;&#351;aretle',

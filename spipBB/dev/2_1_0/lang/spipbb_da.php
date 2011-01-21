@@ -145,6 +145,7 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'choix_rubrique_selection' => 'Vælg det afsnit (rubrique) der skal være det afsnit der bliver dit forum. I denne , vil hver underafsnit være et "underforum" (en forum group), hver ny offentliggjort artikel åbner et nyt forum.',
 	'choix_squelettes' => 'Du må gerne bruge andre lay out (Squelette), husk blot at filerne der skal erstatte groupeforum.html og filforum.html skal ekistere når du skifter!',
 	'citer' => 'citer',
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar', # NEW
 	'col_date_crea' => 'Date inscription', # NEW
 	'col_marquer' => 'Marquer', # NEW

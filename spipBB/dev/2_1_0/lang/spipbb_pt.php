@@ -144,6 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_rubrique_selection' => 'Seleccionar um sector que ser&aacute; a base dos vossos f&oacute;runs. Interior, cada subt&iacute;tulo ser&aacute; um grupo de f&oacute;runs, cada artigo publicado abrir&aacute; um f&oacute;rum.',
 	'choix_squelettes' => 'Pode escolher outros, mas os ficheiros que substituem groupeforum.html e filforum.html devem existir!',
 	'citer' => 'Citar',
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Data inscri&ccedil;&atilde;o',
 	'col_marquer' => 'Marcar',

@@ -145,6 +145,7 @@ Bitte ziehen sie die [Dokumentation auf Spip-Contrib->http://www.spip-contrib.ne
 	'choix_rubrique_selection' => 'Eine Rubrik der obersten Ebene ausw&auml;hlen, die als Basis der Foren dienen soll. Jede ihrer Unterrubriken bildet eine Gruppe Foren, jeder ver&ouml;ffentlichte Artikel entspricht einem einzelnen Forum.',
 	'choix_squelettes' => 'Sie k&ouml;nnen andere ausw&auml;hlen, jedoch m&uuml;ssen die Dateien existieren, welche groupeforum.html und filforum.html  ersetzen!',
 	'citer' => 'Zitieren',
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Mitglied seit',
 	'col_marquer' => 'Markieren',

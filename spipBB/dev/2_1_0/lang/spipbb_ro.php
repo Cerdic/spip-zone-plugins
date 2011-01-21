@@ -145,6 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_rubrique_selection' => 'Selec&#355;iona&#355;i un sector care va fi baza forum-urilor dumneavoastr&#259;. &Icirc;n&#259;untru, fiecare sub-rubric&#259; va fi un grup de forum-uri; fiecare articol publicat va deschide un forum.',
 	'choix_squelettes' => 'Pute&#355;i s&#259; alege&#355;i &#351;i altele, dar fi&#351;ierele care &icirc;nlocuiesc groupeforum.html et filforum.html trebuie s&#259; existe !',
 	'citer' => 'Cita&#355;i',
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Dat&#259; &icirc;nscriere',
 	'col_marquer' => 'Marca&#355;i',

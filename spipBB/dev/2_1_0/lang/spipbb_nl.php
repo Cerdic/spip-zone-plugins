@@ -145,6 +145,7 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'choix_rubrique_selection' => 'Een sector selecteren die de basis van uw forums zal zijn. Het binnenste, elke sous-rubrique zullen een groep forums zijn, elk gepubliceerd artikel zal een forum openen.',
 	'choix_squelettes' => 'U kunt anderen ervan kiezen, maar de bestanden die groupeforum.html en filforum.html vervangen moeten bestaan !',
 	'citer' => 'Citeren',
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Tegenslag',
 	'col_date_crea' => 'Datum inschrijving',
 	'col_marquer' => 'Markeren',

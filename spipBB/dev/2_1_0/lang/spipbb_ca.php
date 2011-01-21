@@ -145,6 +145,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'choix_rubrique_selection' => 'Seleccionar un sector que ser&agrave; la base dels vostres f&ograve;rums. A dins, cada subsecci&oacute; ser&agrave; un grup de f&ograve;rums, cada article publicat obrir&agrave; un f&ograve;rum. ',
 	'choix_squelettes' => 'Podeu escollir-ne altres, per&ograve; els fitxers que substitueixen groupeforum.html i filforum.html han d\'existir!',
 	'citer' => 'Citar',
+	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Data registre',
 	'col_marquer' => 'Marcar',
