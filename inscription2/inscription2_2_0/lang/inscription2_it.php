@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bio' => 'Biografia',
 
 	// C
-	'caracteres' => 'caratteri',
+	'caracteres' => 'caratteri', # MODIF
 	'categorie' => 'Categoria di contribuzione',
 	'chaine_valide' => 'Inserisci una stringa di caratteri',
 	'chainelettre' => '(composta unicamente da lettere)',
