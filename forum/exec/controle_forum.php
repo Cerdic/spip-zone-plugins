@@ -51,10 +51,6 @@ function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/control
 			$res .= icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
 			echo bloc_des_raccourcis($res);
 		}
-		
-		$type_interface = (_request('type_form') != 'onglets' ) ? '<p><a href="' . generer_url_ecrire('controle_forum','type_form=onglets') . '">'. _T('forum:interface_onglets') .'</a></p>' : '<p><a href="'.generer_url_ecrire('controle_forum') .'">'._T('forum:interface_formulaire') .'</a></p>' ;
-		echo $type_interface ;
-
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 		echo creer_colonne_droite('', true);
