@@ -139,6 +139,7 @@ _ &bull; Un champ de recherche &agrave; partir de %select_max_auteurs% auteurs(s
 	'categ:divers' => '60. &#1605;&#1578;&#1606;&#1608;&#1593;',
 	'categ:interface' => '10. &#1575;&#1604;&#1608;&#1575;&#1580;&#1607;&#1577; &#1575;&#1604;&#1582;&#1575;&#1589;&#1577;',
 	'categ:public' => '40. &#1593;&#1585;&#1590; &#1601;&#1610; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593; &#1593;&#1605;&#1608;&#1605;&#1610;',
+	'categ:securite' => '5. S&eacute;curit&eacute;', # NEW
 	'categ:spip' => '50. &#1593;&#1604;&#1575;&#1605;&#1575;&#1578;&#1548; &#1605;&#1585;&#1588;&#1581;&#1575;&#1578;&#1548; &#1605;&#1593;&#1575;&#1610;&#1610;&#1585;',
 	'categ:typo-corr' => '20. &#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1604;&#1606;&#1589;&#1608;&#1589;',
 	'categ:typo-racc' => '30. &#1575;&#1582;&#1578;&#1589;&#1575;&#1585;&#1575;&#1578; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;',
@@ -265,6 +266,7 @@ _ {{&#1634;.}} &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &lt;tabl
 	'detail_pipelines' => '&#1582;&#1591;&#1608;&#1591; &#1575;&#1604;&#1605;&#1608;&#1575;&#1587;&#1610;&#1585;:',
 	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
 	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
+	'detail_spip_options2' => 'Il est recommand&eacute; de placer les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;[.->cs_comportement]&raquo;.', # NEW
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
 	'detail_traitements' => '&#1575;&#1604;&#1605;&#1593;&#1575;&#1604;&#1580;&#1575;&#1578;:',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
@@ -287,6 +289,23 @@ _ {{&#1634;.}} &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &lt;tabl
 	'dossier_squelettes:nom' => '&#1605;&#1580;&#1604;&#1583; &#1575;&#1604;&#1589;&#1601;&#1581;&#1575;&#1578; &#1575;&#1604;&#1606;&#1605;&#1608;&#1584;&#1580;&#1610;&#1577;',
 
 	// E
+	'ecran_activer' => 'Activer l\'&eacute;cran de s&eacute;curit&eacute;', # NEW
+	'ecran_conflit' => 'Attention : le fichier &laquo;@file@&raquo; entre en conflit et doit &ecirc;tre supprim&eacute; !', # NEW
+	'ecran_ko' => 'Ecran inactif !', # NEW
+	'ecran_maj_ko' => 'La version {{@n@}} de l\'&eacute;cran de s&eacute;curit&eacute; est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
+	'ecran_maj_ok' => '(semble &agrave; jour).', # NEW
+	'ecran_securite:description' => 'L\'&eacute;cran de s&eacute;curit&eacute; est un fichier PHP directement t&eacute;l&eacute;charg&eacute; du site officiel de SPIP, qui prot&egrave;ge vos sites en bloquant certaines attaques li&eacute;es &agrave; des trous de s&eacute;curit&eacute;. Ce syst&egrave;me permet de r&eacute;agir tr&egrave;s rapidement lorsqu\'un probl&egrave;me est d&eacute;couvert, en colmatant le trou sans pour autant devoir mettre &agrave; niveau tout son site ni appliquer un &laquo; patch &raquo; complexe.
+
+A savoir : l\'&eacute;cran verrouille certaines variables. Ainsi, par exemple, les  variables nomm&eacute;es <code>id_xxx</code> sont toutes  contr&ocirc;l&eacute;es comme &eacute;tant obligatoirement des valeurs num&eacute;riques enti&egrave;res, afin d\'&eacute;viter toute injection de code SQL via ce genre de variable tr&egrave;s courante. Certains plugins ne sont pas compatibles avec toutes les r&egrave;gles de l\'&eacute;cran, utilisant par exemple <code>&id_x=new</code> pour cr&eacute;er un objet {x}.
+
+Outre la s&eacute;curit&eacute;, cet &eacute;cran a la capacit&eacute; r&eacute;glable de moduler les acc&egrave;s des robots  d\'indexation aux scripts PHP, de mani&egrave;re &agrave; leur dire de &laquo;&nbsp;revenir plus tard&nbsp;&raquo;  lorsque le serveur est satur&eacute;.[[ %ecran_actif%]][[->
+@puce@ R&eacute;gler la protection anti-robots quand la charge du serveur (load)  exc&egrave;de la valeur : %ecran_load%
+_ {La valeur par d&eacute;faut est 4. Mettre 0 pour d&eacute;sactiver ce processus.}@_ECRAN_CONFLIT@]]
+
+En cas de mise &agrave; jour officielle, actualisez le fichier distant associ&eacute; (cliquez ci-dessus sur [actualiser]) afin de b&eacute;n&eacute;ficier de la protection la plus r&eacute;cente.
+
+- Version du fichier local : ', # NEW
+	'ecran_securite:nom' => 'Ecran de s&eacute;curit&eacute;', # NEW
 	'effaces' => '&#1605;&#1581;&#1584;&#1608;&#1601;',
 	'en_travaux:description' => '&#1582;&#1604;&#1575;&#1604; &#1601;&#1578;&#1585;&#1577; &#1575;&#1604;&#1589;&#1610;&#1575;&#1606;&#1577;&#1548; &#1578;&#1578;&#1610;&#1581; &#1593;&#1585;&#1590; &#1585;&#1587;&#1575;&#1604;&#1577; &#1610;&#1605;&#1603;&#1606; &#1578;&#1582;&#1589;&#1610;&#1589;&#1607;&#1575; &#1601;&#1610; &#1603;&#1604; &#1589;&#1601;&#1581;&#1575;&#1578; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593; &#1608;&#1575;&#1584;&#1575; &#1575;&#1602;&#1578;&#1590;&#1578; &#1575;&#1604;&#1581;&#1575;&#1580;&#1577; &#1601;&#1610; &#1575;&#1604;&#1605;&#1580;&#1575;&#1604; &#1575;&#1604;&#1582;&#1575;&#1589;.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
@@ -441,6 +460,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:dossier_squelettes' => '&#1575;&#1604;&#1605;&#1580;&#1604;&#1583; (&#1575;&#1604;&#1605;&#1580;&#1604;&#1575;&#1578;) &#1575;&#1604;&#1605;&#1591;&#1604;&#1608;&#1576; &#1575;&#1587;&#1578;&#1582;&#1583;&#1575;&#1605;&#1607;&#1575;:',
 	'label:duree_cache' => '&#1593;&#1605;&#1585; &#1575;&#1604;&#1584;&#1575;&#1603;&#1585;&#1577; &#1575;&#1604;&#1605;&#1582;&#1576;&#1571;&#1577; &#1575;&#1604;&#1605;&#1581;&#1604;&#1610;&#1577;:',
 	'label:duree_cache_mutu' => '&#1593;&#1605;&#1585; &#1575;&#1604;&#1584;&#1575;&#1603;&#1585;&#1577; &#1575;&#1604;&#1605;&#1582;&#1576;&#1571;&#1577; &#1575;&#1604;&#1605;&#1588;&#1578;&#1585;&#1603;&#1577;:',
+	'label:ecran_actif' => '@_CS_CHOIX@', # NEW
 	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :', # NEW
 	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>', # NEW
 	'label:forum_lgrmaxi' => '&#1575;&#1604;&#1602;&#1610;&#1605;&#1577; (&#1576;&#1575;&#1604;&#1575;&#1581;&#1585;&#1601;):',
