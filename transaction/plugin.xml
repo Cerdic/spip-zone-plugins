@@ -8,18 +8,22 @@
 	<description>Champs additionnels de paiement en ligne pour le plugin Formidable</description>
 	<lien></lien>
 	<icon>images/transaction-64.png</icon>
-	
 	<prefix>transaction</prefix>
-	
-	<options>transaction_options.php</options>
-	<fonctions>inc/transaction.php</fonctions>
-	
-      <pipeline>
-          <nom>insert_head</nom>
-          <inclure>transaction_pipelines.php</inclure>
-      </pipeline>
-
-	
+	<install>base/transaction_upgrade.php</install>
+	<options></options>
+	<fonctions></fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>transaction_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+	  	<inclure>base/transaction.php</inclure>
+	</pipeline>
+	<pipeline>
+	  	<nom>declarer_tables_principales</nom>
+	  	<inclure>base/transaction.php</inclure>
+	</pipeline>
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
