@@ -29,9 +29,9 @@
 			{id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{recherche?} />
 		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}[ (#ENV{statut,''}|=={#GET{statut}}|oui)selected]'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_4>
 		
-		
 	</ul>
 	<BOUCLE_cpt_5(FORUMS){statut !LIKE ''}{texte LIKE ''} />
-		[(#TOTAL_BOUCLE|oui)<ul id="forum_sans_texte">
- <li class='#GET{statut}[ (#ENV{type_message,''}|=={vide}|oui)selected]'>[(#GET{self}|parametre_url{type_message,vide}|parametre_url{statut,#ENV{statut}}|lien_ou_expose{#VAL{<:onglet_messages_vide:>}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{type_message,''}|=={vide},'ajax'})]</li></ul>]<//B_cpt_5>
+	[(#TOTAL_BOUCLE|oui)<ul id="forum_sans_texte">
+ 		<li class='#GET{statut}[ (#ENV{type_message,''}|=={vide}|oui)selected]'>[(#GET{self}|parametre_url{type_message,vide}|parametre_url{statut,#ENV{statut}}|lien_ou_expose{#VAL{<:onglet_messages_vide:>}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{type_message,''}|=={vide},'ajax'})]</li>
+ 	</ul>]<//B_cpt_5>
 </div>
