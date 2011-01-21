@@ -121,8 +121,11 @@ function liste_outils() {
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
 	foreach($outils as $outil) {
 		// liste des categories
-		if(!isset($categ[$cat=&$outil['categorie']]))
-			$categ[$cat] = strncmp($tmp=_T('couteauprive:categ:'.$cat), 'categ', 5)==0?$cat:$tmp;
+		if(!isset($categ[$cat=&$outil['categorie']])) {
+			$tmp = _T('couteauprive:categ:'.$cat);
+			if($tmp{1}=='.') $tmp='0'.$tmp; // classement sur deux chiffres
+			$categ[$cat] = strncmp($tmp, 'categ', 5)==0?$cat:$tmp;
+		}
 		// ressensement des autorisations
 		if(!autoriser('configurer', 'outil', 0, NULL, $outil))
 			$outils[$outil['id']]['interdit'] = $metas_caches[$outil['id']]['cache'] = 1;

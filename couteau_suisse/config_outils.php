@@ -153,7 +153,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'filtrer_javascript',
 	'code:options' => "%%radio_filtrer_javascript3%%",
-	'categorie' => 'admin',
+	'categorie' => 'securite',
 	'version-min' => '1.9200',
 ));
 
@@ -168,7 +168,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'forum_lgrmaxi',
 	'code:spip_options' => "%%forum_lgrmaxi%%",
-	'categorie' => 'admin',
+	'categorie' => 'securite',
 	'version-min' => '1.9200',
 ));
 
@@ -228,7 +228,7 @@ add_variables( array(
 add_outil( array(
 	'id' => 'SPIP_tailles',
 	'code:spip_options' => "%%logo_Hmax%%%%logo_Wmax%%%%logo_Smax%%%%img_Hmax%%%%img_Wmax%%%%img_Smax%%%%doc_Smax%%%%img_GDmax%%%%img_GDqual%%%%copie_Smax%%",
-	'categorie' => 'admin',
+	'categorie' => 'securite',
 ));
 
 add_outil( array(
@@ -281,7 +281,7 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'auteur_forum',
-	'categorie'	 => 'admin',
+	'categorie'	 => 'securite',
 	'jquery'	=> 'oui',
 	'code:jq_init' => 'cs_auteur_forum.apply(this);',
 	'code:js' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
@@ -326,14 +326,14 @@ add_outil( array(
 	'code:options' => "%%spam_mots%%\n%%spam_ips%%",
 	// sauvegarde de l'IP pour tests
 	'code:spip_options' => '$ip_=$ip;',
-	'categorie' => 'admin',
+	'categorie' => 'securite',
 ));
 
 // a placer apres l'outil 'spam' pour compatibilite IP
 add_outil( array(
 	'id' => 'no_IP',
 	'code:spip_options' => '$ip = substr(md5($ip),0,16);',
-	'categorie' => 'admin',
+	'categorie' => 'securite',
 ));
 
 add_outil( array(
@@ -360,7 +360,7 @@ if(!defined('_ECRAN_SECURITE') && @file_exists(\$f=\"".str_replace('\\','/',real
 add_outil( array(
 	'id' => 'ecran_securite',
 	'code:spip_options' => '%%ecran_load%%%%ecran_actif%%',
-	'categorie' => 'admin',
+	'categorie' => 'securite',
 	'distant' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt',
 	'pipelinecode:pre_description_outil' => 'if($id=="ecran_securite") {
 $conf=@file_exists(_DIR_RACINE.($f=_NOM_PERMANENTS_INACCESSIBLES."ecran_securite.php"))?"<hr/>\\n@puce@ <span style=\"color: red;\">"._T("couteauprive:ecran_conflit", array("file"=>$f))."</span>":"";
@@ -1014,7 +1014,7 @@ add_outil( array(
 // attention : mailcrypt doit etre place apres liens_orphelins
 add_outil( array(
 	'id' => 'mailcrypt',
-	'categorie'	=> 'typo-corr',
+	'categorie'	=> 'securite',
 	'auteur' 	=> "Alexis Roussel, Paolo, Pat",
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
@@ -1222,7 +1222,7 @@ add_outil( array(
 
 add_outil(defined('_SPIP20100')?array(
 	'id' => 'maj_auto',
-	'categorie' => 'admin',
+	'categorie' => 'securite',
 	'contrib' => 3223,
 ):array(
 	'id' => 'maj_auto',

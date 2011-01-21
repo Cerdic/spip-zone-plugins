@@ -195,6 +195,7 @@ _ &bull; Un champ de recherche &agrave; partir de %select_max_auteurs% auteurs(s
 	'cache_permanent' => 'Cache permanent',
 	'cache_sans' => 'Pas de cache',
 	'categ:admin' => '1. Administration',
+	'categ:securite' => '5. S&eacute;curit&eacute;',
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interface priv&eacute;e',
 	'categ:public' => '40. Affichage public',
