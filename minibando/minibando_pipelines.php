@@ -1,10 +1,5 @@
 <?php
 
-function minibando_insert_head($flux) {
-	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_MINIBANDO.'minibando.css" type="text/css" media="projection, screen, tv" />';
-	return $flux;
-}
-
 // surcharger les boutons d'administration
 function minibando_formulaire_admin($flux) {
 
