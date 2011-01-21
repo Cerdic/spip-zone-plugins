@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => 'Cr&eacute;er un nouveau menu',
 	'editer_menus_titre' => 'Menus du site',
 	'entree_aucun' => 'Aucun',
-	'entree_bloc'  => 'Bloc Zpip',
+	'entree_bloc' => 'Bloc Zpip',
 	'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
 	'entree_css' => 'Classes CSS de l\'entr&eacute;e (du conteneur)',
 	'entree_css_lien' => 'Classes CSS du lien',
@@ -84,8 +84,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_numero_menu' => 'MENU NUM&Eacute;RO :',
-	'info_page_speciale_zajax'=>'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187',
 	'info_page_speciale' => 'Lien vers la page &#171; @page@ &#187;',
+	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187',
 	'info_tous_groupes_mots' => 'Tous les groupes de mots',
 	'info_tri' => 'Tri :',
 	'info_tri_alpha' => '(alphab&eacute;tique)',
@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Articles d\'un Mot-cl&eacute;',
 	'nom_menu_objet' => 'Article, rubrique ou autre objet SPIP',
 	'nom_menu_page_speciale' => 'Lien vers un squelette page',
-	'nom_menu_page_speciale_zajax'=>'Un bloc d\'une page Zpip',
+	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip',
 	'nom_menu_rubriques' => 'Liste ou arborescence de rubriques',
 	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques',
 	'nom_menu_secteurlangue' => 'Secteurs de langue'

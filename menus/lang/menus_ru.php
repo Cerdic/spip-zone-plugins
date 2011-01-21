@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Affiche automatiquement un menu listant les articles li&eacute;s au mot cl&eacute;.', # NEW
 	'description_menu_objet' => 'Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l\'entr&eacute;e aura le titre de l\'objet.', # NEW
 	'description_menu_page_speciale' => 'Ajoute un lien vers un squelette page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ces pages sont souvent fournies par des plugins.', # NEW
+	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).', # NEW
 	'description_menu_secteurlangue' => 'Cette entr&eacute;e est sp&eacute;cifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant &agrave; la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).', # NEW
 
@@ -28,8 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => '&#1057;&#1086;&#1079;&#1076;&#1072;&#1090;&#1100; &#1085;&#1086;&#1074;&#1086;&#1077; &#1084;&#1077;&#1085;&#1102;',
 	'editer_menus_titre' => '&#1052;&#1077;&#1085;&#1102; &#1089;&#1072;&#1081;&#1090;&#1072;',
 	'entree_aucun' => 'Aucun', # NEW
+	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => '&#1042;&#1099;&#1073;&#1088;&#1072;&#1090;&#1100; &#1090;&#1080;&#1087; &#1087;&#1091;&#1085;&#1082;&#1090;&#1072; &#1084;&#1077;&#1085;&#1102;:',
-	'entree_css' => 'CSS &#1082;&#1083;&#1072;&#1089;&#1089;',
+	'entree_css' => 'CSS &#1082;&#1083;&#1072;&#1089;&#1089;', # MODIF
+	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => 'Num&eacute;ro du groupe de mot cl&eacute;', # NEW
 	'entree_id_mot' => 'Num&eacute;ro du mot cl&eacute;', # NEW
 	'entree_id_objet' => '&#1053;&#1086;&#1084;&#1077;&#1088;',
@@ -84,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_numero_menu' => '&#1053;&#1054;&#1052;&#1045;&#1056; &#1052;&#1045;&#1053;&#1070;:',
 	'info_page_speciale' => 'Lien vers la page &#171; @page@ &#187;', # NEW
+	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => 'Tous les groupes de mots', # NEW
 	'info_tri' => 'Tri :', # NEW
 	'info_tri_alpha' => '(alphab&eacute;tique)', # NEW
@@ -100,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Articles d\'un Mot-cl&eacute;', # NEW
 	'nom_menu_objet' => 'Article, rubrique ou autre objet SPIP', # NEW
 	'nom_menu_page_speciale' => 'Lien vers un squelette page', # NEW
+	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Liste ou arborescence de rubriques', # NEW
 	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques', # NEW
 	'nom_menu_secteurlangue' => 'Secteurs de langue', # NE

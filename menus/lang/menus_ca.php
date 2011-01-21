@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Mostra autom&agrave;ticament un men&uacute; que llista els articles lligats a la paraula clau.',
 	'description_menu_objet' => 'Crea un enlla&ccedil; cap a un objecte d\'SPIP: article, secci&oacute; o un altre. Per defecte, l\'entrada tindr&agrave; el t&iacute;tol de l\'objecte.',
 	'description_menu_page_speciale' => 'Afegeix un enlla&ccedil; cap a un esquelet accessible per un URL del tipus <code>spip.php?page=nom&amp;param1=xx&amp;param2=yyy...</code> Aquestes p&agrave;gines sovint s&oacute;n subministrades per connectors.',
+	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Mostra una llista de seccions i, si es vol, les subseccions a diferents nivells. Per defecte, mostra totes les seccions des de l\'arrel, ordenats per t&iacute;tol (num&egrave;ricament i despr&eacute;s afab&egrave;ticament).',
 	'description_menu_secteurlangue' => 'Aquesta entrada &eacute;s espec&iacute;fica pels llocs que utilitzen un sector per llengua. Mostra autom&agrave;ticament un men&uacute; que llista les seccions del sector corresponent a la llengua de la p&agrave;gina i, si es vol, les subseccions a diferents nivells. Per defecte, mostra totes les seccions des de l\'arrel, ordenades per t&iacute;tol (num&egrave;ricament i despr&eacute;s alfab&egrave;ticament).',
 
@@ -28,8 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => 'Creeu un nou men&uacute;',
 	'editer_menus_titre' => 'Men&uacute;s del lloc',
 	'entree_aucun' => 'Cap',
+	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Escolliu el tipus d\'entrada que voleu afegir:',
-	'entree_css' => 'Classes CSS de l\'entrada',
+	'entree_css' => 'Classes CSS de l\'entrada', # MODIF
+	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => 'N&uacute;mero del grup de paraula clau',
 	'entree_id_mot' => 'N&uacute;mero de la paraula clau',
 	'entree_id_objet' => 'N&uacute;mero',
@@ -84,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_numero_menu' => 'MEN&Uacute; N&Uacute;MERO:',
 	'info_page_speciale' => 'Enlla&ccedil; cap a la p&agrave;gina &laquo;@page@&raquo;',
+	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => 'Tots els grups de paraules',
 	'info_tri' => 'Ordena:',
 	'info_tri_alpha' => '(alfab&egrave;tica)',
@@ -100,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Articles d\'una Paraula clau',
 	'nom_menu_objet' => 'Article, secci&oacute; o un altre objecte SPIP',
 	'nom_menu_page_speciale' => 'Enlla&ccedil; cap a una p&agrave;gina esquelet',
+	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Llista o arboresc&egrave;ncia de seccions',
 	'nom_menu_rubriques_evenements' => 'Esdeveniments de les seccions',
 	'nom_menu_secteurlangue' => 'Sectors de llengua'

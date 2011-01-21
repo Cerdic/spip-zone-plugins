@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Mostra automaticamente un men&ugrave; che elenca gli articoli collegati alla parola chiave.',
 	'description_menu_objet' => 'Crea un link verso un oggetto di SPIP: articolo, rubrica o altro. In maniera predefinita, il link avr&agrave; il titolo dell\'oggetto.',
 	'description_menu_page_speciale' => 'Aggiunge un link verso un modello accessibile con un url del tipo <code>spip.php?page=nome&amp;param1=xx&amp;param2=yyy...</code> Queste pagina sono spesso fornite dai plugin.',
+	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Mostra una lista di rubriche e, se si vuole, le sotto rubriche su pi&ugrave; livelli. Normalmente, mostra tutte le rubriche dalla radice, ordinate per titolo (numericamente e poi alfabeticamente).',
 	'description_menu_secteurlangue' => 'Questa voce &egrave; specifica per i siti che utilizzano un settore per lingua. Mostra automaticamente un men&ugrave; che elenca le rubriche del settore corrispondente alla lingua della pagina e, se si vuole, le sotto rubriche su pi&ugrave; livelli. Normalmente, mostra tutte le rubriche dalla radice, ordinate per titolo (numericamente e poi alfabeticamente).',
 
@@ -28,8 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => 'Crea un nuovo men&ugrave;',
 	'editer_menus_titre' => 'Men&ugrave; del sito',
 	'entree_aucun' => 'Nessun',
+	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Scegli il tipo di voce che vuoi aggiungere:',
-	'entree_css' => 'Classi CSS della voce',
+	'entree_css' => 'Classi CSS della voce', # MODIF
+	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => 'Numero di gruppo della parola chiave',
 	'entree_id_mot' => 'Numero della parola chiave',
 	'entree_id_objet' => 'Numero',
@@ -84,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_numero_menu' => 'MENU NUMERO:',
 	'info_page_speciale' => 'Link verso la pagina "@page@"',
+	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => 'Tutti i gruppi di parole chiave',
 	'info_tri' => 'Ordina:',
 	'info_tri_alpha' => '(alfabetico)',
@@ -100,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Articoli di un a parola chiave',
 	'nom_menu_objet' => 'Articolo, rubrica o altro oggetto SPIP',
 	'nom_menu_page_speciale' => 'Link verso una pagina di modello',
+	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Lista o gerarchia di rubriche',
 	'nom_menu_rubriques_evenements' => 'Eventi delle rubriche',
 	'nom_menu_secteurlangue' => 'Settore di lingua'

@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => '<NEW>Automaticky zobraz&iacute; menu s &#269;l&aacute;nkami s k&#318;&uacute;&#269;ov&yacute;m slovom.',
 	'description_menu_objet' => '<NEW>Vytvor&iacute; odkaz na objekt SPIP: &#269;l&aacute;nok, rubriku alebo in&yacute;. &#352;tandardne bude polo&#382;ka nies&#357; n&aacute;zov objektu.',
 	'description_menu_page_speciale' => '<NEW>Prid&aacute; odkaz na str&aacute;nku &#353;abl&oacute;ny pomocou adresy formul&aacute;ra <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Tak&eacute;to str&aacute;nky &#269;asto vyu&#382;&iacute;vaj&uacute; z&aacute;suvn&eacute; moduly.',
+	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).', # MODIF
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).', # MODIF
 
@@ -28,8 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => '<NEW>Vytvori&#357; nov&eacute; menu',
 	'editer_menus_titre' => '<NEW>Menu str&aacute;nky',
 	'entree_aucun' => '<NEW>&#381;iadny',
+	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => '<NEW>Vyberte typ polo&#382;ky, ktor&uacute; chcete prida&#357;:',
-	'entree_css' => '<NEW>CSS triedy tejto polo&#382;ky',
+	'entree_css' => '<NEW>CSS triedy tejto polo&#382;ky', # MODIF
+	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => '<NEW>&#268;&iacute;slo skupiny k&#318;&uacute;&#269;ov&yacute;ch slov',
 	'entree_id_mot' => '<NEW>&#268;&iacute;slo k&#318;&uacute;&#269;ov&eacute;ho slova',
 	'entree_id_objet' => '<NEW>&#268;&iacute;slo',
@@ -84,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_numero_menu' => '<NEW>MENU &#268;&Iacute;SLO:',
 	'info_page_speciale' => '<NEW>Odkaz na str&aacute;nku &#132;@page@&#147;',
+	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => '<NEW>V&#353;etky skupiny k&#318;&uacute;&#269;ov&yacute;ch slov',
 	'info_tri' => '<NEW>Triedenie:',
 	'info_tri_alpha' => '<NEW>(abecedn&eacute;)',
@@ -100,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => '<NEW>&#268;l&aacute;nky s k&#318;&uacute;&#269;ov&yacute;m slovom',
 	'nom_menu_objet' => '<NEW>&#268;l&aacute;nok, rubrika alebo in&yacute; objekt SPIPu',
 	'nom_menu_page_speciale' => '<NEW>Odkaz na str&aacute;nku &#353;abl&oacute;n',
+	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => '<NEW>Zoznam alebo strom rubr&iacute;k',
 	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques', # NEW
 	'nom_menu_secteurlangue' => '<NEW>Jazykov&eacute; sektory'

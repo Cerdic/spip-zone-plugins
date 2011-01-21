@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Automatically shows a menu listing the articles linked to a keyword.',
 	'description_menu_objet' => 'Creates a link to s SPIP object: article, section or other. By default, the entry will bear the the title of the object.',
 	'description_menu_page_speciale' => 'Adds a link to a page template using a URL of the form <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Such pages are often used by plugins.',
+	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 
@@ -28,9 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => 'Create a new menu',
 	'editer_menus_titre' => 'Site menus',
 	'entree_aucun' => 'None',
+	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Choose the type of item you want to add:',
-	'entree_css' => 'CSS classes of this item (of the container)',
-	'entree_css_lien' => 'CSS classes of the link',
+	'entree_css' => 'CSS classes of this item', # MODIF
+	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => 'Number of the keyword group',
 	'entree_id_mot' => 'Number of the keyword',
 	'entree_id_objet' => 'Number',
@@ -85,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page &laquo; @page@ &raquo;',
+	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => 'All keyword groups',
 	'info_tri' => 'Sort:',
 	'info_tri_alpha' => '(alphabetical)',
@@ -101,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Articles of a keyword',
 	'nom_menu_objet' => 'Article, section or other SPIP object',
 	'nom_menu_page_speciale' => 'Link to a page template',
+	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'List or tree of sections',
 	'nom_menu_rubriques_evenements' => 'Section-related events',
 	'nom_menu_secteurlangue' => 'Language sectors'
