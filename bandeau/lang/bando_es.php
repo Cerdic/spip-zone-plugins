@@ -9,20 +9,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_accueil' => 'Mis tareas',
-	'icone_administration' => 'Administraci&oacute;n',
+	'icone_administration' => 'Wartung',
 	'icone_configuration' => 'Configuraci&oacute;n',
 	'icone_edition' => 'Edici&oacute;n',
 	'icone_langage' => 'Mi lengua',
 	'icone_mes_infos' => 'Mis informaciones',
 	'icone_preferences' => 'Mis preferencias',
 	'icone_reactions' => 'Actividad',
-	'icone_squelette' => 'Esqueletos',
+	'icone_squelette' => 'Skelette',
 	'icone_suivi_edito' => 'Publicaci&oacute;n',
 	'icone_suivi_publication' => 'Seguir la publicaci&oacute;n',
 	'icone_visiter_site' => 'Ver el sitio p&uacute;blico',
 
 	// L
 	'label_adresses_secondaires' => 'Direcciones ALIAS del sitio p&uacute;blico',
+	'label_bando_outils' => 'Barre d\'outils', # NEW
+	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
+	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 	'label_choix_langue' => 'Seleccine su lengua',
 	'label_slogan_site' => 'Slogan del sitio',
 	'label_taille_ecran' => 'Largo de la pantalla',

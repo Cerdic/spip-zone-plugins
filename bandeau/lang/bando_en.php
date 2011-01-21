@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_adresses_secondaires' => 'ALIAS addresses for the public site',
+	'label_bando_outils' => 'Barre d\'outils', # NEW
+	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
+	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 	'label_choix_langue' => 'Manage your language ',
 	'label_slogan_site' => 'Slogan',
 	'label_taille_ecran' => 'Display',
