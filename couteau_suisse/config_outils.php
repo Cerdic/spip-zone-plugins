@@ -348,7 +348,9 @@ add_variables( array(
 	'check' => 'couteauprive:ecran_activer',
 	'defaut' => 1,
 	// code en realpath() pour config/mes_options.php
-	'code:%s' => "if(!defined('_ECRAN_SECURITE') && @file_exists(\$f=\"".str_replace('\\','/',realpath(dirname(__FILE__)))."/lib/ecran_securite/distant_ecran_securite.php\")) include \$f;",
+	'code:%s' => "// bug SPIP 1.92?, 2.0 et 2.1
+if(isset(\$_REQUEST['exec']) && strncmp('admin_couteau_suisse',\$_REQUEST['exec'],20)==0) \$_REQUEST['exec']='admin_couteau_suisse';
+if(!defined('_ECRAN_SECURITE') && @file_exists(\$f=\"".str_replace('\\','/',realpath(dirname(__FILE__)))."/lib/ecran_securite/distant_ecran_securite.php\")) include \$f;",
 ), array(
 	'nom' => 'ecran_load',
 	'format' => _format_NOMBRE,
