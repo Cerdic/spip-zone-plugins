@@ -14,7 +14,7 @@ function inc_inscription2_valide_login_dist($login,$id_auteur=NULL) {
 	}
 	else{
 		// Vérifier si login correct
-		if (preg_match("/[A-Za-z0-9_-]*/",$login)){
+		if (! preg_match("/[A-Za-z0-9_-]*/",$login)){
 			return _T('inscription2:caracteres_interdit');	
 		}
 
