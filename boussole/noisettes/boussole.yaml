@@ -29,8 +29,8 @@ parametres:
       label: '<:boussole:label_titre_boussole:>'
       defaut: 'non'
       datas:
-        oui: '<:oui:>'
-        non: '<:non:>'
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
   -
     saisie: 'selection'
     options:
@@ -50,8 +50,8 @@ parametres:
       label: '<:boussole:label_titre_groupe:>'
       defaut: 'non'
       datas:
-        oui: '<:oui:>'
-        non: '<:non:>'
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
       afficher_si: '@modele@=="boussole_liste_par_groupe"'
   -
     saisie: 'input'
@@ -79,24 +79,32 @@ parametres:
       label: '<:boussole:label_div_id:>'
       defaut: ''
   -
-    saisie: 'input'
+    saisie: 'hidden'
     options:
       nom: 'div_class'
       label: '<:boussole:label_div_class:>'
-      defaut: ''
+      defaut: 'liste'
+      afficher_si: '@modele@=="boussole_liste_simple" || @modele@=="boussole_liste_avec_logo" || @modele@=="boussole_liste_par_groupe"'
   -
-    saisie: 'input'
+    saisie: 'hidden'
+    options:
+      nom: 'div_class'
+      label: '<:boussole:label_div_class:>'
+      defaut: 'galerie'
+      afficher_si: '@modele@=="boussole_panorama" || @modele@=="boussole_panorama_sepia"'
+  -
+    saisie: 'hidden'
     options:
       nom: 'ul_class'
       label: '<:boussole:label_ul_class:>'
-      defaut: ''
+      defaut: 'liste-items'
       afficher_si: '@modele@=="boussole_liste_simple" || @modele@=="boussole_liste_avec_logo" || @modele@=="boussole_liste_par_groupe"'
   -
-    saisie: 'input'
+    saisie: 'hidden'
     options:
       nom: 'li_class'
       label: '<:boussole:label_li_class:>'
-      defaut: ''
+      defaut: 'item'
       afficher_si: '@modele@=="boussole_liste_simple" || @modele@=="boussole_liste_avec_logo" || @modele@=="boussole_liste_par_groupe"'
   -
     saisie: 'input'

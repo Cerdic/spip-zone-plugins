@@ -16,8 +16,8 @@ parametres:
       label: '<:boussole:label_titre_actualite:>'
       defaut: 'non'
       datas:
-        oui: '<:oui:>'
-        non: '<:non:>'
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
   -
     saisie: 'radio'
     options:
@@ -25,8 +25,8 @@ parametres:
       label: '<:boussole:label_titre_site:>'
       defaut: 'oui'
       datas:
-        oui: '<:oui:>'
-        non: '<:non:>'
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
   -
     saisie: 'input'
     options:
@@ -46,20 +46,20 @@ parametres:
       label: '<:boussole:label_div_id:>'
       defaut: ''
   -
-    saisie: 'input'
+    saisie: 'hidden'
     options:
       nom: 'div_class'
       label: '<:boussole:label_div_class:>'
-      defaut: ''
+      defaut: 'liste'
   -
-    saisie: 'input'
+    saisie: 'hidden'
     options:
       nom: 'ul_class'
       label: '<:boussole:label_ul_class:>'
-      defaut: ''
+      defaut: 'liste-items'
   -
-    saisie: 'input'
+    saisie: 'hidden'
     options:
       nom: 'li_class'
       label: '<:boussole:label_li_class:>'
-      defaut: ''
+      defaut: 'item'
