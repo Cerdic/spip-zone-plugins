@@ -97,91 +97,112 @@ while test -n "${1}"; do
 		shift;;
 		--fpre) fpre="-fpre ${2}"
 		shift;;
+		--info) info="${2}"
+		shift;;
+		--log) log="${2}"
+		shift;;
 	esac
 	shift
 done
 
-########## TRAITEMENT DES ARGUMENTS ###############
-
-case "$entree" in
-  "") echo "$pasfichierentree"; exit 1;;
-esac
-
-case "$sortie" in
-  "") "$sortie" = "$entree.flv"
-esac
-
 case "$chemin" in
-  "") chemin="/usr/local/bin/ffmpeg"
+  "") chemin=$(which ffmpeg)
 esac
 
-########### Arguments spécifiques aux videos
+function spipmotion_encodage (){
 
-case "$size" in
-  "") size="-s 320x240"
-esac
-
-case "$bitrate" in
-  "") bitrate="-vb 448k"
-esac
-
-case "$fps" in
-  "") fps="-r 15"
-esac
-
-case "$vcodec" in
-	"libx264")
-	case "$params_sup" in
-  		"") params_sup="-vpre default" ;;
-  	esac
-  	shift;;
-	"")
+	########## TRAITEMENT DES ARGUMENTS ###############
+	
+	case "$entree" in
+	  "") echo "$pasfichierentree"; exit 1;;
+	esac
+	
 	case "$sortie" in
-  		*".flv") vcodec="-vcodec flv" ;;
-  		*".ogg"|*".ogv") vcodec="-vcodec libtheora" ;;
-  	esac
-  	shift;;
-esac
-########### SI LA SORTIE EXISTE DÉJÀ #############
+	  "") "$sortie" = "$entree.flv"
+	esac
+	
+	########### Arguments spécifiques aux videos
+	
+	case "$size" in
+	  "") size="-s 320x240"
+	esac
+	
+	case "$bitrate" in
+	  "") bitrate="-vb 448k"
+	esac
+	
+	case "$fps" in
+	  "") fps="-r 15"
+	esac
+	
+	case "$vcodec" in
+		"libx264")
+		case "$params_sup" in
+	  		"") params_sup="-vpre default" ;;
+	  	esac
+	  	shift;;
+		"")
+		case "$sortie" in
+	  		*".flv") vcodec="-vcodec flv" ;;
+	  		*".ogg"|*".ogv") vcodec="-vcodec libtheora" ;;
+	  	esac
+	  	shift;;
+	esac
+	
+	########### SI LA SORTIE EXISTE DÉJÀ #############
+	if [ -e "$sortie" ] && [ ${FORCE} != "true" ]
+		then
+		PS3='> '
+		echo "###############################################################"
+		echo "$textedejala";
+		LISTE=("[y] $oui" "[n] $non")  # liste de choix disponibles
+		select CHOIX in "${LISTE[@]}" ; do
+		    case $REPLY in
+		        1|y)
+		        rm $sortie
+		        break
+		        ;;
+		        2|n)
+		        mv $sortie $sortie-backup
+		        break
+		        ;;
+		    esac
+		done
+	fi
+	
+	############# ON UTILISE FFMPEG ################
+	
+	case "$sortie" in
+	  *".mp3"|*".flac"|*".ogg"|*".oga" )
+	  	echo "SPIPmotion v$VERSION
+	
+	On encode un son
+	"
+	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie"
+	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie ;;
+	  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
+	  	echo "SPIPmotion v$VERSION
+	
+	On encode une video
+	"
+	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie"
+	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie ;;
+	esac
+}
 
+function ffmpeg_infos ()
+{
+	[ -z "$info" ] && return 1
+	if [ -z "$log" ];then
+		log="/dev/null"
+	fi
+	ffmpeg $1 2> /dev/null >> $log 
+}
 
-if [ -e "$sortie" ] && [ ${FORCE} != "true" ]
-	then
-	PS3='> '
-	echo "###############################################################"
-	echo "$textedejala";
-	LISTE=("[y] $oui" "[n] $non")  # liste de choix disponibles
-	select CHOIX in "${LISTE[@]}" ; do
-	    case $REPLY in
-	        1|y)
-	        rm $sortie
-	        break
-	        ;;
-	        2|n)
-	        mv $sortie $sortie-backup
-	        break
-	        ;;
-	    esac
-	done
+if [ ! -z "$info" ];then
+	ffmpeg_infos
+else
+	spipmotion_encodage
 fi
-
-############# ON UTILISE FFMPEG ################
-
-case "$sortie" in
-  *".mp3"|*".flac"|*".ogg"|*".oga" )
-  	echo "SPIPmotion v$VERSION
-
-On encode un son
-"
-  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie"
-  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie ;;
-  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
-  	echo "SPIPmotion v$VERSION
-
-On encode une video
-"
-  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie"
-  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie ;;
-esac
 
 exit $?

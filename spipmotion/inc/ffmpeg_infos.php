@@ -23,28 +23,39 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		if(!is_dir(_DIR_CACHE.'spipmotion')){
 			sous_repertoire(_DIR_CACHE,'spipmotion');
 		}
-		$chemin = lire_config('spipmotion/chemin','');
+		$chemin = lire_config('spipmotion/chemin','ffmpeg');
 		$chemin_fichier = _DIR_CACHE.'spipmotion/ffmpeg_codecs';
+		$chemin_out = _DIR_CACHE.'spipmotion/out';
 
 		if(!$chemin){
 			return false;
 		}
 
+		if($GLOBALS['meta']['spipmotion_safe_mode'] == 'oui'){
+			$spipmotion_sh = $GLOBALS['meta']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
+		}else{
+			$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
+		}
 		/**
 		 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
 		 */
-		exec($chemin.' -formats &> '.$chemin_fichier,$retour,$bool);
-		exec('echo "==CODECS==" >> '.$chemin_fichier,$retour,$bool);
-		exec($chemin.' -codecs >> '.$chemin_fichier,$retour,$bool);
-		exec('echo "==BSFS==" >> '.$chemin_fichier,$retour,$bool);
-		exec($chemin.' -bsfs >> '.$chemin_fichier,$retour,$bool);
-		exec('echo "==PROTOCOLS==" >> '.$chemin_fichier,$retour,$bool);
-		exec($chemin.' -protocols >> '.$chemin_fichier,$retour,$bool);
-		exec('echo "==FILTERS==" >> '.$chemin_fichier,$retour,$bool);
-		exec($chemin.' -filters >> '.$chemin_fichier,$retour,$bool);
-		exec('echo "==PIX_FMTS==" >> '.$chemin_fichier,$retour,$bool);
-		exec($chemin.' -pix_fmts >> '.$chemin_fichier,$retour,$bool);
-		exec('echo "==fin==" >> '.$chemin_fichier,$retour,$bool);
+		supprimer_fichier($chemin_fichier);
+		
+		spimotion_write($chemin_fichier,"==VERSION==");
+		exec($spipmotion_sh.' --info "-version" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"==FORMATS==");
+		exec($spipmotion_sh.' --info "-formats" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"==CODECS==");
+		exec($spipmotion_sh.' --info "-codecs" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"==BSFS==");
+		exec($spipmotion_sh.' --info "-bsfs" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"==PROTOCOLS==");
+		exec($spipmotion_sh.' --info "-protocols" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"==FILTERS==");
+		exec($spipmotion_sh.' --info "-filters" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"==PIX_FMTS==");
+		exec($spipmotion_sh.' --info "-pix_fmts" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"==fin==");
 
 		if (lire_fichier($chemin_fichier, $contenu)){
 			$data = array();
@@ -193,14 +204,13 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			 * On regarde si ffmpeg2theora est installé
 			 * Si oui on ajoute sa version dans les metas aussi
 			 */
-			$ffmpeg2theora = exec('ffmpeg2theora',$retour,$int);
-			if(!empty($retour)){
-				$info = $retour[0];
+			$ffmpeg2theora = exec('ffmpeg2theora',$retour_theora,$int);
+			if(!empty($retour_theora)){
+				$info = $retour_theora[0];
 				preg_match('/ffmpeg2theora ([0-9a-z].*) - ([A-Z].*)/s',$info,$infos);
 				$data['spipmotion_ffmpeg2theora']['ffmpeg2theora'] = true;
 				$data['spipmotion_ffmpeg2theora']['version'] = $infos[1];
 				$data['spipmotion_ffmpeg2theora']['libtheora_version'] = $infos[2];
-				spip_log($data['spipmotion_ffmpeg2theora'],'test');
 				ecrire_meta('spipmotion_ffmpeg2theora',serialize($data['spipmotion_ffmpeg2theora']));
 			}
 		}
@@ -214,5 +224,13 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		$data['spipmotion_ffmpeg2theora'] = unserialize($GLOBALS['meta']['spipmotion_ffmpeg2theora']);
 	}
 	return $data;
+}
+
+function spimotion_write($chemin_fichier,$what){
+	$f = @fopen($chemin_fichier, "ab");
+	if ($f) {
+		fputs($f, "$what\n");
+		fclose($f);
+	}
 }
 ?>
