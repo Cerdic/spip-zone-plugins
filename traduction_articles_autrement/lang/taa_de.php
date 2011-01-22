@@ -18,10 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fermer' => 'Schliessen',
 
 	// L
-	'lier_traduction' => 'Eine übersetzung anhängen',
+	'lier_traduction' => 'Eine Übersetzung anfügen',
 
 	// M
-	'modifier_options_langue' => 'options', # NEW
+	'modifier_options_langue' => 'Sprachoption verändern', # NEW
 
 	// N
 	'necesite_afficher_objet' => 'Diese Fuktion erfordert die Installierung des Plugins',

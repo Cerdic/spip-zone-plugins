@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_traduction' => 'Añadir una traducción',
 
 	// M
-	'modifier_options_langue' => 'options', # NEW
+	'modifier_options_langue' => 'Modificar las opciones de idioma', # NEW
 
 	// N
 	'necesite_afficher_objet' => 'Esta opción necesita la instalación del plugin',

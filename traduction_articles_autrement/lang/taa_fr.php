@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'necesite_afficher_objet' => 'Pour pouvoir utiliser cette fonction vous devez installer le plugin',
 
 	// O
-	'options' => 'Options',
+	'options' => 'Modifier les options de langues',
 
 	// T
 	'titre_plugin' => 'Traduction d\'articles autrement',
