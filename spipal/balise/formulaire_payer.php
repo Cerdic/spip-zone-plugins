@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-function formulaires_payer_charger($id_article, $validation='valider')
+function formulaires_payer_charger($id_article=0, $validation='valider')
 {
 	// compatibilite partielle avec l'ancienne version
 	if (!$id_article) $id_article = _request('id_article');
