@@ -74,7 +74,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				$crayons_credits = '';
 			} elseif ($env_credits=='credits' || $env_legende=='complete') {
 				$credits = typo($sql_credits);
-				$crayons_credits = defined('_DIR_PLUGIN_CRAYONS') && defined('_DIR_PLUGIN_GESTDOC') ? ' crayon document-credits-'.$sql_id_document : '';
+				$crayons_credits = defined('_DIR_PLUGIN_CRAYONS') && defined('_DIR_PLUGIN_MEDIAS') ? ' crayon document-credits-'.$sql_id_document : '';
 			} else {
 				$credits = '';
 				$crayons_credits = '';
