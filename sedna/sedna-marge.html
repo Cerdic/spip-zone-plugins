@@ -111,7 +111,7 @@
 </small>
 
 [(#PLUGIN{boussole}|oui)
-[<h1>(#VAL{spip}|boussole_traduire{nom_boussole})</h1>]
+[<h1>(#VAL{spip}|appliquer_filtre{boussole_traduire, nom_boussole})</h1>]
 [(#MODELE{boussole_liste_simple, 
 	boussole=spip, 
 	titre_boussole=non})]
