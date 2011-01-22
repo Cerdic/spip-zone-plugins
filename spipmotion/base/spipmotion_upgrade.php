@@ -28,6 +28,45 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 
 			$ffmpeg_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
 			$ffmpeg_binaires('',true);
+			
+			global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
+			$tables_mime['ts'] = 'video/MP2T';
+			$tables_mime['mts'] = 'video/MP2T';
+			$tables_mime['m2ts'] = 'video/MP2T';
+			
+			$tables_sequences['ts'] = 'MPEG transport stream';
+			$tables_sequences['mts'] = 'AVCHD MPEG-2 transport stream';
+			$tables_sequences['m2ts'] = 'BDAV MPEG-2 Transport Stream';
+			
+			// Init ou Re-init ==> replace pas insert
+		
+			$freplace = sql_serveur('replace', $serveur);
+			foreach ($tables_mime as $extension => $type_mime) {
+				if (isset($tables_images[$extension])) {
+					$titre = $tables_images[$extension];
+					$inclus='image';
+				}
+				else if (isset($tables_sequences[$extension])) {
+					$titre = $tables_sequences[$extension];
+					$inclus='embed';
+				}
+				else {
+					$inclus='non';
+					if (isset($tables_documents[$extension]))
+						$titre = $tables_documents[$extension];
+					else
+						$titre = '';
+				}
+		
+				$freplace('spip_types_documents',
+					array('mime_type' => $type_mime,
+						'titre' => $titre,
+						'inclus' => $inclus,
+						'extension' => $extension,
+						'upload' => 'oui'
+					),
+					'', $serveur);
+			}
 
 			echo '<p>'._T('spipmotion:install_creation_base').'</p>';
 			echo '<p>'._T('spipmotion:install_ajout_champs_documents').'</p>';
