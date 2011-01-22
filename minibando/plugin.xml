@@ -31,10 +31,6 @@
 	<licence>GPL</licence>
 	<icon>images/minibando-64.png</icon>
 	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>minibando_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>formulaire_admin</nom>
 		<inclure>minibando_pipelines.php</inclure>
 	</pipeline>
