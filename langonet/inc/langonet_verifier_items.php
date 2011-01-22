@@ -41,7 +41,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	// On ne scanne pas dans les ultimes sous-repertoires charsets/ ,
 	// lang/ , req/ . On ne scanne que les fichiers php, html ou xml
 	// (voir le fichier regexp.txt).
-	foreach (preg_files(_DIR_RACINE.$ou_fichier, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml))$') as $_fichier) {
+	foreach (preg_files(_DIR_RACINE.$ou_fichier, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$') as $_fichier) {
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
 			if (strpos($_fichier, '.xml')) {
 				$trouver_item = _LANGONET_TROUVER_ITEM_X;
