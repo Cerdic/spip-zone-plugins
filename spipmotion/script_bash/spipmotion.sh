@@ -7,7 +7,7 @@
 #
 # Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
 
-VERSION="0.3.1"
+VERSION="0.3.2"
 
 ################ LOCALISATION #####################
 messageaide="
@@ -109,6 +109,10 @@ case "$chemin" in
   "") chemin=$(which ffmpeg)
 esac
 
+if [ -z "$log" ];then
+	log="/dev/null"
+fi
+        
 function spipmotion_encodage (){
 
 	########## TRAITEMENT DES ARGUMENTS ###############
@@ -178,25 +182,27 @@ function spipmotion_encodage (){
 	
 	On encode un son
 	"
-	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie"
-	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie ;;
+	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie 2> $log >> $log"
+	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie 2> $log >> $log ;;
 	  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
 	  	echo "SPIPmotion v$VERSION
 	
 	On encode une video
 	"
-	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie"
-	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie ;;
+	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie 2> $log >> $log"
+	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie  2> $log >> $log ;;
 	esac
 }
 
 function ffmpeg_infos ()
 {
-	[ -z "$info" ] && return 1
-	if [ -z "$log" ];then
-		log="/dev/null"
-	fi
-	ffmpeg $1 2> /dev/null >> $log 
+        [ -z "$info" ] && return 1
+
+        if [ "$info" == "-version" ];then
+                ffmpeg $info 2>> $log >> $log
+        else
+                ffmpeg $info 2>> /dev/null >> $log
+        fi
 }
 
 if [ ! -z "$info" ];then
