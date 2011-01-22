@@ -52,25 +52,30 @@ function action_spipmotion_encoder_dist(){
 	/**
 	 * On essaie de voir s'il y a d'autres processus ffmpeg en cours sur le serveur (autres sites?)
 	 */
-	$ps_ffmpeg = exec('ps -C ffmpeg',$retour,$retour_int);
-	if(($retour_int == 1) && (count($retour) >= 3)){
-		$process = false;
-	}else{
-		$process = true;
-	}
-	if(($nb_encodages>0) && $process && ($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !intval($en_cours['id_spipmotion_attente'])){
-		$doc_attente = sql_fetsel("*","spip_spipmotion_attentes","encode='non'","","id_spipmotion_attente ASC","1");
-		$id_document = $doc_attente['id_document'];
-		$id_doc_attente = $doc_attente['id_spipmotion_attente'];
-		$format = $doc_attente['extension'];
-		$document = sql_fetsel('*','spip_documents','id_document='.sql_quote($id_document));
-		if($document['id_document']){
-			spip_log('on encode le doc '.$id_document,'spipmotion');
-			$encoder = charger_fonction('encodage','inc');
-			$encoder($document,$id_doc_attente,$format);
+	if(($nb_encodages>0) && ($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !intval($en_cours['id_spipmotion_attente'])){
+		$ps_ffmpeg = exec('ps -C ffmpeg',$retour,$retour_int);
+		if(($retour_int == 1) && (count($retour) >= 3)){
+			$process = false;
 		}else{
-			sql_delete('spip_spipmotion_attentes','id_document='.sql_quote($id_document));
-			genie_spipmotion_file($time);
+			$process = true;
+		}
+		if($process){
+			$doc_attente = sql_fetsel("*","spip_spipmotion_attentes","encode='non'","","id_spipmotion_attente ASC","1");
+			$id_document = $doc_attente['id_document'];
+			$id_doc_attente = $doc_attente['id_spipmotion_attente'];
+			$format = $doc_attente['extension'];
+			$document = sql_fetsel('*','spip_documents','id_document='.sql_quote($id_document));
+			if($document['id_document']){
+				spip_log('on encode le doc '.$id_document,'spipmotion');
+				$encoder = charger_fonction('encodage','inc');
+				$encoder($document,$id_doc_attente,$format);
+			}else{
+				sql_delete('spip_spipmotion_attentes','id_document='.sql_quote($id_document));
+				genie_spipmotion_file($time);
+			}
+		}
+		else{
+			spip_log("Trop de processus en cours de ffmpeg sur le serveur, on attend","spipmotion");
 		}
 	}else if(lire_config('spipmotion_casse') == 'oui'){
 		spip_log('Attention, problème dans la configuration','spipmotion');
@@ -80,8 +85,6 @@ function action_spipmotion_encoder_dist(){
 	}else if(intval($en_cours['id_spipmotion_attente'])){
 		spip_log("L'id ". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage",'spipmotion');
 		spip_log("On attend sa fin avant d'en commencer un nouveau",'spipmotion');
-	}else if(!$process){
-		spip_log("Trop de processus en cours de ffmpeg sur le serveur, on attend","spipmotion");
 	}
 	
 	return;
