@@ -83,15 +83,19 @@ function cs_supprime_notes($texte) {
 // => permet d'utiliser les balises etoilees : #TEXTE*|mon_filtre|cs_traitements{TEXTE,articles}
 // ce mecanisme est a preferer au traditionnel #TEXTE*|mon_filtre|propre
 // cs_traitements() consulte simplement la globale $table_des_traitements et applique le traitement adequat
-function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL') {
+// $exclusions est une chaine ou un tableau de filtres a exclure du traitement
+function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL', $exclusions=NULL) {
 	global $table_des_traitements;
 	if(!isset($table_des_traitements[$nom_champ])) return $texte;
 	$ps = $table_des_traitements[$nom_champ];
 	if(is_array($ps)) $ps = $ps[isset($ps[$type_objet]) ? $type_objet : 0];
 	if(!$ps) return $texte;
+	// retirer les filtres a exclure
+	if($exclusions!==NULL) $ps = str_replace($exclusions, 'cs_noop', $ps);
 	// remplacer le placeholder %s par le texte fourni
 	eval('$texte=' . str_replace('%s', '$texte', $ps) . ';');
 	return $texte;
 }
+function cs_noop($t='',$a=NULL,$b=NULL,$c=NULL) { return $t; }
 
 ?>
