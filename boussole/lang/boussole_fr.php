@@ -69,7 +69,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_n_sites' => 'sites',
 	'label_nom' => 'Nom',
 	'label_slogan' => 'Slogan',
-	'label_filtre_groupe' => 'Groupes &agrave; afficher',
 	'label_a_class' => 'Classe de l\'ancre englobant le logo',
 	'label_max_sites' => 'Nombre max de sites',
 	'label_max_articles' => 'Nombre max d\'articles affich&eacute;s par site',
@@ -141,7 +140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_site' => 'Nom du site',
 	'option_slogan_site' => 'Slogan du site',
 	'option_descriptif_site' => 'Descriptif du site',
-	'option_tous_groupes' => 'Tous les groupes de la boussole',
 
 // R
 	'resume_table_boussoles' => 'Liste des boussoles ajout&eacute;es',
@@ -175,7 +173,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_actualite_spip' => 'Actualit&eacute;s de la Galaxie SPIP',
 	'titre_bloc_boussoles' => 'BOUSSOLES',
 	'titre_boite_autres_boussoles' => 'Autres boussoles',
-	'titre_boite_autres_sites' => 'Dans la m&ecirc;me boussole',
 	'titre_boite_infos_boussole' => 'BOUSSOLE D\'ALIAS',
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',
 	'titre_form_ajouter_boussole' => 'Ajouter ou mettre &agrave; jour une boussole',
