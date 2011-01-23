@@ -40,8 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Section Interface
 'derouler_panneau_auto' => 'Ouvrir par d&eacute;faut',
-'derouler_panneau_auto_explication' => 'D&eacute;rouler le panneau "chat" au chargement de la page',
-'seulement_si_autojoin' => 'Ceci est possible uniquement si vous avez choisi d\'entrer automatiquement sur les salons.',
+'derouler_panneau_auto_explication' => 'D&eacute;rouler le panneau "chat" lors de l\'entr&eacute;e sur le salon',
 'langue_interface' => 'Langue',
 'langue_interface_explication' => 'Langue de l\'interface du mini-chat.',
 'langue_interface_defaut' => 'Langue du site',
