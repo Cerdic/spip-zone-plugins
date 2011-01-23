@@ -150,7 +150,7 @@ function encodage($source,$doc_attente){
 		if(in_array(lire_config("spipmotion/acodec_$extension_attente",''),array('vorbis','libvorbis'))){
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
 			$audiobitrate_ffmpeg2theora = "--audioquality $qualite";
-			$audiobitrate_ffmpeg = "--audioquality ".$qualite;
+			$audiobitrate_ffmpeg = "--audioquality $qualite";
 		}else{
 			if(intval($source['audiobitrate']) && (intval($source['audiobitrate']) < (lire_config("spipmotion/bitrate_audio_$extension_attente","64")*1000))){
 				$audiobitrates = array('32000','64000','96000','128000','192000','256000');
@@ -317,10 +317,10 @@ function encodage($source,$doc_attente){
 		if(intval($source['videobitrate']) && (intval($source['videobitrate']) < (lire_config("spipmotion/bitrate_$extension_attente","448"))*1000)){
 			$vbitrate = null;
 			$infos_sup_normal .= ' -sameq ';
-			$bitrate_ffmpeg2theora = "-V ".$source['videobitrate'];
+			$bitrate = "--bitrate ".$source['videobitrate'];
 		}else{
 			$vbitrate = lire_config("spipmotion/bitrate_$extension_attente","448");
-			$bitrate_ffmpeg2theora = "-V $vbitrate";
+			$bitrate = "--bitrate $vbitrate";
 		}
 
 		$texte .= intval($vbitrate) ? "vb=".$vbitrate."000\n" : "";
@@ -370,7 +370,8 @@ function encodage($source,$doc_attente){
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
-			$encodage = "ffmpeg2theora $chemin -v ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $bitrate_ffmpeg2theora --soft-target $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
+			//$encodage = "ffmpeg2theora $chemin -v  $bitrate_ffmpeg2theora --soft-target $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
+			$encodage = $spipmotion_sh." --force true $video_size --e $chemin --videoquality ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $fps $bitrate $audiofreq $audiobitrate_ffmpeg2theora $audiochannels_ffmpeg2theora --s $fichier_temp $deux_passes --log $fichier_log --encodeur ffmpeg2theora";
 			spip_log($encodage,'spipmotion');
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
 			spip_log($retour_int,'spipmotion');
