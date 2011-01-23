@@ -1,0 +1,114 @@
+#CACHE{0}
+<!-- descriptif=<:jappix_mini:introduction_configuration:> -->
+<!-- autoriser=configurer -->
+<!-- titre=<:jappix_mini:jappix_mini:> -->
+<!-- nom=jappix_mini -->
+<!-- icone=images/jappix-24.png -->
+<!-- logo=images/jappix.png -->
+<div class="formulaire_spip" "formulaire_cfg">
+<form method="post" action="#SELF">
+[(#ENV{_cfg_}|form_hidden)]
+<ul>
+<li class="fieldset">
+    <h3 class="legend"><:jappix_mini:section_jappix:></h3>
+    <ul>
+        <li class="editer_url_jappix">
+            <label for="url_jappix"><:jappix_mini:url_jappix:></label>
+            <p class="explication"><:jappix_mini:url_jappix_explication:></p>
+            <input type="text" name="url_jappix" id="url_jappix" class="text url" value="#ENV{url_jappix}" />
+        </li>
+    </ul>
+</li>
+
+<li class="fieldset">
+    <h3 class="legend"><:jappix_mini:section_jabber:></h3>
+    <ul>
+        <li class="editer_user_jabber">
+            <label for="utilisateur_jabber"><:jappix_mini:utilisateur_jabber:></label>
+            <p class="explication"><:jappix_mini:utilisateur_jabber_explication:></p>
+            <input type="text" name="user_jabber" id="user_jabber" class="text" autocomplete="off" value="#ENV{user_jabber}" />
+        </li>
+        <li class="editer_pass_jabber">
+            <label for="pass_jabber"><:jappix_mini:pass_jabber:></label>
+            <p class="explication"><:jappix_mini:pass_jabber_explication:></p>
+            <input type="password" name="pass_jabber" id="pass_jabber" class="password" autocomplete="off" value="#ENV{pass_jabber}" />
+        </li>
+        <li class="editer_domaine_jabber">
+            <label for="domaine_jabber"><:jappix_mini:domaine_jabber:></label>
+            <p class="explication"><:jappix_mini:domaine_jabber_explication:></p>
+            <input type="text" name="domaine_jabber" id="domaine_jabber" class="text" value="#ENV{domaine_jabber}" />
+        </li>
+        <li class="editer_ressource">
+            <label for="ressource"><:jappix_mini:ressource:></label>
+            <p class="explication"><:jappix_mini:ressource_explication:></p>
+            <input type="text" name="ressource" id="ressource" class="text" value="#ENV{ressource}" />
+        </li>
+    </ul>
+</li>
+
+<li class="fieldset">
+    <h3 class="legend"><:jappix_mini:section_salons:></h3>
+    <ul>
+        <li class="editer_salons">
+            <label for="salons"><:jappix_mini:liste_salons:></label>
+            <p class="explication"><:jappix_mini:liste_salons_explication:></p>
+            <textarea name="salons" id="salons">#ENV{salons}</textarea>
+        </li>
+        <li class="editer_pass_salons">
+            <label for="pass_salons"><:jappix_mini:liste_pass_salons:></label>
+            <p class="explication"><:jappix_mini:liste_pass_salons_explication:></p>
+            <textarea name="pass_salons" id="pass_salons">#ENV{pass_salons}</textarea>
+        </li>
+        <li class="editer_autojoin">
+            <label for="autojoin"><:jappix_mini:entrer_automatiquement:></label>
+            <div class="choix">
+                <input type="checkbox" name="autojoin" id="autojoin" class="checkbox" value="on" [(#ENV{autojoin}|oui)checked="checked"] />
+                <label for="autojoin"><:jappix_mini:entrer_automatiquement_explication:></label>
+            </div>
+        </li>
+        <li class="editer_pseudo">
+            <label for="pseudo"><:jappix_mini:pseudo_salons:></label>
+            <p class="explication"><:jappix_mini:pseudo_salons_explication:></p>
+            <input type="text" name="pseudo" id="pseudo" class="text" value="#ENV{pseudo}" />
+        </li>
+    </ul>
+</li>
+
+<li class="fieldset">
+    <h3 class="legend"><:jappix_mini:section_interface:></h3>
+    <ul>
+        <li class="editer_ouvrir_auto">
+            <label for="ouvrir_auto"><:jappix_mini:derouler_panneau_auto:></label>
+            <div class="choix">
+                <input type="checkbox" name="ouvrir_auto" id="ouvrir_auto" class="checkbox" value="on" toto="#ENV{ouvrir_auto}" [(#ENV{ouvrir_auto}|oui)checked="checked"] />
+                <label for="ouvrir_auto"><:jappix_mini:derouler_panneau_auto_explication:></label>
+                <p class="attention"><:jappix_mini:seulement_si_autojoin:></p>
+            </div>
+        </li>
+        <li class="langue">
+            <label for="langue"><:jappix_mini:langue_interface:></label>
+            <p class="explication"><:jappix_mini:langue_interface_explication:></p>
+            <select name="langue" id="langue">
+                <option value=""[(#ENV{langue}|non) selected="selected"]><:jappix_mini:langue_interface_defaut:></option>
+                <option value="de"[(#ENV{langue}|=={de}|oui) selected="selected"]>[(#VAL{de}|traduire_nom_langue)]</option>
+                <option value="en"[(#ENV{langue}|=={en}|oui) selected="selected"]>[(#VAL{en}|traduire_nom_langue)]</option>
+                <option value="eo"[(#ENV{langue}|=={eo}|oui) selected="selected"]>[(#VAL{eo}|traduire_nom_langue)]</option>
+                <option value="es"[(#ENV{langue}|=={es}|oui) selected="selected"]>[(#VAL{es}|traduire_nom_langue)]</option>
+                <option value="fr"[(#ENV{langue}|=={fr}|oui) selected="selected"]>[(#VAL{fr}|traduire_nom_langue)]</option>
+                <option value="it"[(#ENV{langue}|=={it}|oui) selected="selected"]>[(#VAL{it}|traduire_nom_langue)]</option>
+                <option value="ja"[(#ENV{langue}|=={ja}|oui) selected="selected"]>[(#VAL{ja}|traduire_nom_langue)]</option>
+                <option value="nl"[(#ENV{langue}|=={nl}|oui) selected="selected"]>[(#VAL{nl}|traduire_nom_langue)]</option>
+                <option value="pl"[(#ENV{langue}|=={pl}|oui) selected="selected"]>[(#VAL{pl}|traduire_nom_langue)]</option>
+                <option value="ru"[(#ENV{langue}|=={ru}|oui) selected="selected"]>[(#VAL{ru}|traduire_nom_langue)]</option>
+                <option value="sv"[(#ENV{langue}|=={sv}|oui) selected="selected"]>[(#VAL{sv}|traduire_nom_langue)]</option>
+            </select>
+        </li>
+    </ul>
+</li>
+</ul>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+</div>

@@ -1,0 +1,12 @@
+<plugin>
+	<nom>Jappix Mini</nom>
+	<auteur>[davux->http://da.weeno.net/]</auteur>
+	<icon>images/jappix.png</icon>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>
+	Intégration d'un mini chat ([Jappix Mini->http://mini.jappix.com/]) dans les pages SPIP.</description>
+	<prefix>jappix_mini</prefix>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<utilise id="cfg" version="[1.10.5;]" />
+</plugin>

@@ -1,0 +1,16 @@
+<script type="text/javascript" src="[(#ENV{url}|sinon{#CONFIG{jappix_mini/url_jappix}}|sinon{https://static.jappix.com})]/php/get.php?[l=(#ENV{lang}|sinon{#CONFIG{jappix_mini/langue}|sinon{#LANG}})&amp;]t=js&amp;g=mini.xml&amp;f=jquery.js"></script>
+ 
+<script type="text/javascript">
+        jQuery(document).ready(function() {
+                [MINI_GROUPCHATS = (#ENV{salons}|liste_js{;}|sinon{#CONFIG{jappix_mini/salons}|liste_js});
+                ][MINI_PASSWORDS = (#ENV{pass_salons}|liste_js{;}|sinon{#CONFIG{jappix_mini/pass_salons}|liste_js});
+                ][MINI_NICKNAME = "(#ENV{pseudo}|sinon{#CONFIG{jappix_mini/pseudo}})";
+                ][MINI_RESOURCE = "(#ENV{ressource}|sinon{#CONFIG{jappix_mini/ressource}})";
+                ][(#SET{conn,[(#ENV{connecter}|sinon{#CONFIG{jappix_mini/autojoin}|?{true,false}})]})
+                ][(#SET{pann,[(#ENV{ouvert}|sinon{#CONFIG{jappix_mini/ouvrir_auto}|?{true,false}})]})
+                ][(#SET{domaine,[(#ENV{domaine}|sinon{#CONFIG{jappix_mini/domaine_jabber}}|sinon{'anonymous.jappix.com'})]})
+                ][(#SET{user,[(#ENV{user}|sinon{#CONFIG{jappix_mini/user_jabber}})]})
+                ][(#SET{pass,[(#ENV{pass}|sinon{#CONFIG{jappix_mini/pass_jabber}})]})
+                ]launchMini(#GET{conn}, #GET{pann}, "#GET{domaine}"[, "(#GET{user})", "#GET{pass}"]);
+        });
+</script>
