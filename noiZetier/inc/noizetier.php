@@ -517,7 +517,6 @@ function noizetier_lister_config(){
  * @return 
 **/
 function noizetier_choisir_contexte($noisette, $contexte_entrant) {
-	if (!$parametres) $parametres = array();
 	if (!$contexte_entrant) $contexte_entrant = array();
 	$contexte_noisette = array_flip(noizetier_obtenir_contexte($noisette));
 
@@ -556,8 +555,8 @@ function noizetier_obtenir_contexte($noisette) {
 			include_spip('inc/noizetier');
 			$infos = noizetier_lister_noisettes();
 			$noisettes = array();
-			foreach ($infos as $noisette => $infos) {
-				$noisettes[$noisette] = ($infos['contexte'] ? $infos['contexte'] : array());
+			foreach ($infos as $cle_noisette => $infos) {
+				$noisettes[$cle_noisette] = ($infos['contexte'] ? $infos['contexte'] : array());
 			}
 			ecrire_fichier_securise(_DIR_CACHE . _CACHE_CONTEXTE_NOISETTES, serialize($noisettes));
 		}
