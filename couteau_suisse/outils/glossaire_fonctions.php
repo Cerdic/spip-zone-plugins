@@ -153,11 +153,13 @@ function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
-function cs_rempl_glossaire($texte) {
+// si $liste=true alors la fonction renvoie la liste des mots trouves
+// chaque element du tableau renvoye est array('mot trouve', id_mot, 'lien mot', 'titre mot');
+function cs_rempl_glossaire($texte, $liste=false) {
 	global $gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id;
 	// si [!glossaire] est trouve on sort
 	if(strpos($texte, _CS_SANS_GLOSSAIRE)!==false)
-		return str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
+		return $liste?array():str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
 	static $limit, $glossaire_generer_url, $glossaire_generer_mot, $glossaire_array = NULL;
@@ -205,27 +207,70 @@ function cs_rempl_glossaire($texte) {
 		if($mot_present) {
 			$lien = $glossaire_generer_url($gloss_id, $titre);
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
-			$table1[$gloss_id] = "href='$lien' name='mot$gloss_id"; // name est complete plus tard pour eviter les doublons
-			$table2[$gloss_id] = recuperer_fond(
-				defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
-				array('id_mot' => $gloss_id, 'titre' => $les_titres, 
-					'texte' => glossaire_safe($mot['texte']), 
-					'descriptif' => glossaire_safe($mot['descriptif'])));
+			if($liste)
+				$table1[$gloss_id] = array($gloss_id, $lien, $les_titres);
+			else {
+				$table1[$gloss_id] = "href='$lien' name='mot$gloss_id"; // name est complete plus tard pour eviter les doublons
+				$table2[$gloss_id] = recuperer_fond(
+					defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
+					array('id_mot' => $gloss_id, 'titre' => $les_titres, 
+						'texte' => glossaire_safe($mot['texte']), 
+						'descriptif' => glossaire_safe($mot['descriptif'])));
+			}
 		}
 	}
 	$GLOBALS['toujours_paragrapher'] = $mem;
-	// remplacement des echappements
-	$texte = preg_replace(",@@E(\d+)@@,e", '$GLOBALS[\'gloss_ech\'][\\1]', $texte);
-	// remplacement final des balises posees ci-dessus
 	$GLOBALS['gl_i'] = 0;
-	$texte = preg_replace(",@@M(\d+)#(\d+)@@,e", $glossaire_generer_mot, $texte);
+	if($liste) $texte = (preg_match_all(',@@M(\d+)#(\d+)@@,', $texte, $reg, PREG_SET_ORDER) 
+			&& array_walk($reg,
+		create_function('&$v,$k,&$t1', '$v=array_merge(array($GLOBALS[\'gloss_mots\'][$v[1]]),$t1[$v[2]]);'), $table1)
+		)?$reg:array();
+	else {
+		// remplacement des echappements
+		$texte = preg_replace(',@@E(\d+)@@,e', '$GLOBALS[\'gloss_ech\'][\\1]', $texte);
+		// remplacement final des balises posees ci-dessus
+		$texte = preg_replace(',@@M(\d+)#(\d+)@@,e', $glossaire_generer_mot, $texte);
+	}
 	// nettoyage
 	unset($gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id);
 	return $texte;
 }
 
+// filtre appliquant l'insertion du glossaire
 function cs_glossaire($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte);
+}
+
+// filtre renvoyant la liste des mots trouves dans le texte
+function cs_mots_glossaire($texte, $type='', $sep='') {
+	if(strpos($texte, "<span class='gl_mot'>")!==false && preg_match_all(",'gl_mot'>(.*?)</span>,", $texte, $reg))
+		// glossaire deja present, on simplifie donc le texte
+		$texte = join('  ', $reg[1]);
+	$mots = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte, true);
+	$lien = '$v="<a href=\"$v[2]\"';
+	$titre = strpos($type,'_unique')===false?'str_replace("<br />"," / ", $v[3])':'array_shift(explode(_GLOSSAIRE_TITRE_SEP, $v[3]))';
+	switch($type) {
+		case '':return $mots;
+		case 'id_mot':
+			array_walk($mots, create_function('&$v', '$v=$v[1];'));
+			break;
+		case 'lien_mot':
+			array_walk($mots, create_function('&$v', $lien.'>$v[0]</a>";'));
+			break;
+		case 'lien_titre': case 'lien_titre_unique':
+			array_walk($mots, create_function('&$v', $lien.'>".'.$titre.'."</a>";'));
+			break;
+		case 'nuage': case 'nuage_unique':
+			$stats = array(); $min = 999999; $max = 0;
+			foreach($mots as $m) $stats[$m[1]]++;
+			$m = min($stats); $d = max($stats) - $m;
+			array_walk($stats, create_function('&$v', "\$v=round((\$v-$m)*9/$d)+1;")); // valeurs de 1 a 10
+			array_walk($mots, create_function('&$v,$k,&$s', $lien.' class=\"nuage".$s[$v[1]]."\">".'.$titre.'."</a>";'), $stats);
+			break;
+		default:return "#GLOSSAIRE/$type?";
+	}
+	$mots = array_unique($mots);
+	return strlen($sep)?join($sep, $mots):$mots;
 }
 
 ?>
