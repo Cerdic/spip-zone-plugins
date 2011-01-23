@@ -112,7 +112,7 @@ while test -n "${1}"; do
 		--fpre) fpre="-fpre ${2}"
 		shift;;
 		--two-pass) deux_passes="--two-pass"
-		shifft;;
+		shift;;
 		--info) info="${2}"
 		shift;;
 		--log) log="${2}"
