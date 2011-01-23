@@ -16,10 +16,10 @@ SPIPmotion v$VERSION
 Utilisation : ./spipmotion arguments
 ou arguments doit inclure le fichier source et le fichier de sortie et éventuellement :
 * la taille de la video ex : --size 320x240
-* le bitrate de la video ex : --bitrate 448kbs
+* le bitrate de la video ex : --bitrate 448
 * le nombre d'image par seconde ex : --fps 15
-* le bitrate audio ex : --audiobitrate 64kbs
-* la fréquence d'echantillonnage sonnore ex : --bitrate 22050
+* le bitrate audio ex : --audiobitrate 64
+* la fréquence d'echantillonnage sonore ex : --audiofreq 22050
 * le chemin vers l'executable ffmpeg (--p). /usr/local/bin/ffmpeg est la valeur par défaut.
 
 
@@ -73,9 +73,11 @@ while test -n "${1}"; do
 		shift;;
 		--pass) pass="-pass ${2}"
 		shift;;
-		--size) size="-s ${2}"
+		--size) size="${2}"
 		shift;;
-		--bitrate) bitrate="-vb ${2}.k"
+		--bitrate) 
+			bitrate_ffmpeg="-vb ${2}.k"
+			bitrate_ffmpeg2theora="-V ${2}"
 		shift;;
 		--acodec) acodec="-acodec ${2}"
 		shift;;
@@ -83,37 +85,58 @@ while test -n "${1}"; do
 		shift;;
 		--params_supp) params_sup=" ${2}"
 		shift;;
-		--audiobitrate) audiobitrate_quality="-ab ${2}.k"
+		--audiobitrate) 
+			audiobitrate_quality_ffmpeg="-ab ${2}.k"
+			audiobitrate_quality_ffmpeg2theora="--audiobitrate ${2}"
 		shift;;
-		--audioquality) audiobitrate_quality="-aq ${2}"
+		--audioquality) 
+			audiobitrate_quality_ffmpeg="-aq ${2}"
+			audiobitrate_quality_ffmpeg2theora="--audioquality ${2}"
 		shift;;
-		--audiofreq) audiofreq="-ar ${2}"
+		--videoquality) videoquality="${2}"
 		shift;;
-		--fps) fps="-r ${2}"
+		--audiofreq) 
+			audiofreq_ffmpeg="-ar ${2}"
+			audiofreq_ffmpeg2theora="-H ${2}"
 		shift;;
-		--ac) ac="-ac ${2}"
+		--fps) 
+			fps_ffmpeg="-r ${2}"
+			fps_ffmpeg2theora="-F ${2}"
+		shift;;
+		--ac) 
+			ac_ffmpeg="-ac ${2}"
+			ac_ffmpeg2theora="-c ${2}"
 		shift;;
 		--p) chemin="${2}"
 		shift;;
 		--fpre) fpre="-fpre ${2}"
 		shift;;
+		--two-pass) deux_passes="--two-pass"
+		shifft;;
 		--info) info="${2}"
 		shift;;
 		--log) log="${2}"
+		shift;;
+		--encodeur) encodeur="${2}"
 		shift;;
 	esac
 	shift
 done
 
 case "$chemin" in
-  "") chemin=$(which ffmpeg)
+	"") 
+	if [ "$encodeur" == "ffmpeg2theora" ]; then
+		chemin=$(which ffmpeg2theora)
+  	else
+  		chemin=$(which ffmpeg)
+	fi
 esac
 
 if [ -z "$log" ];then
 	log="/dev/null"
 fi
         
-function spipmotion_encodage (){
+function spipmotion_encodage_ffmpeg (){
 
 	########## TRAITEMENT DES ARGUMENTS ###############
 	
@@ -128,15 +151,15 @@ function spipmotion_encodage (){
 	########### Arguments spécifiques aux videos
 	
 	case "$size" in
-	  "") size="-s 320x240"
+	  "") size="320x240"
 	esac
 	
-	case "$bitrate" in
-	  "") bitrate="-vb 448k"
+	case "$bitrate_ffmpeg" in
+	  "") bitrate_ffmpeg="-vb 448k"
 	esac
 	
-	case "$fps" in
-	  "") fps="-r 15"
+	case "$fps_ffmpeg" in
+	  "") fps_ffmpeg="15"
 	esac
 	
 	case "$vcodec" in
@@ -182,33 +205,45 @@ function spipmotion_encodage (){
 	
 	On encode un son
 	"
-	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie 2> $log >> $log"
-	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality $audiofreq $ac -y $sortie 2> $log >> $log ;;
+		echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2> $log >> $log" >> $log
+	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2> $log >> $log ;;
 	  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
 	  	echo "SPIPmotion v$VERSION
 	
 	On encode une video
 	"
-	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie 2> $log >> $log"
-	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality $ac $audiofreq $pass $fps $size $vcodec $bitrate $params_sup $fpre -y $sortie  2> $log >> $log ;;
+	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2> $log >> $log" >> $log
+	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2> $log >> $log ;;
 	esac
+}
+
+function spipmotion_encodage_ffmpeg2theora ()
+{
+	echo "SPIPmotion v$VERSION
+	
+	On encode une video via ffmpeg2theora
+	"
+	echo "$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log" >> $log
+	$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log	
 }
 
 function ffmpeg_infos ()
 {
-        [ -z "$info" ] && return 1
+	[ -z "$info" ] && return 1
 
-        if [ "$info" == "-version" ];then
-                ffmpeg $info 2>> $log >> $log
-        else
-                ffmpeg $info 2>> /dev/null >> $log
-        fi
+	if [ "$info" == "-version" ];then
+		ffmpeg $info 2>> $log >> $log
+	else
+		ffmpeg $info 2>> /dev/null >> $log
+	fi
 }
 
 if [ ! -z "$info" ];then
 	ffmpeg_infos
+elif [ "$encodeur" == "ffmpeg2theora" ];then
+	spipmotion_encodage_ffmpeg2theora
 else
-	spipmotion_encodage
+	spipmotion_encodage_ffmpeg
 fi
 
 exit $?
