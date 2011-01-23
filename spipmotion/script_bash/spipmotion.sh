@@ -215,6 +215,7 @@ function spipmotion_encodage_ffmpeg (){
 	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2> $log >> $log" >> $log
 	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2> $log >> $log ;;
 	esac
+	exit $?
 }
 
 function spipmotion_encodage_ffmpeg2theora ()
@@ -224,7 +225,8 @@ function spipmotion_encodage_ffmpeg2theora ()
 	On encode une video via ffmpeg2theora
 	"
 	echo "$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log" >> $log
-	$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log	
+	$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log
+	exit $?	
 }
 
 function ffmpeg_infos ()
@@ -232,10 +234,11 @@ function ffmpeg_infos ()
 	[ -z "$info" ] && return 1
 
 	if [ "$info" == "-version" ];then
-		ffmpeg $info 2>> $log >> $log
+		$chemin $info 2>> $log >> $log
 	else
-		ffmpeg $info 2>> /dev/null >> $log
+		$chemin $info 2>> /dev/null >> $log
 	fi
+	return $?
 }
 
 if [ ! -z "$info" ];then
