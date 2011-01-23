@@ -2,14 +2,14 @@
 	<nom>Boussole</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GPL</licence>
-	<version>0.3</version>
+	<version>0.4.0</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/boussole_icone-64.png</icon>
-	<etat>stable</etat>
+	<etat>dev</etat>
     <description>
 Les bonnes adresses de la galaxie SPIP !
 _ Installez ce plugin sur votre site et vous aurez acc&egrave;s, dans vos squelettes, &agrave; l'ensemble des sites de la Galaxie SPIP en utilisant
-les mod&egrave;les ou noisettes propos&eacute;s.
+les mod&egrave;les, les noisettes ou la page Z propos&eacute;s.
 Pour les bricoleurs, vous pouvez aussi utiliser ce plugin pour afficher votre propre liste de sites et concevoir vos propres affichages.
 	</description>
 	<lien></lien>

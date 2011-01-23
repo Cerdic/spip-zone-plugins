@@ -1,0 +1,24 @@
+[(#REM)	<!-- 
+	Partie contenu de la page boussole affichant le detail complet d'une boussole donnee
+	Un seul parametre d'appel, l'alias de la boussole nomme "boussole"
+	Si on utilise le noiZetier, il est necessaire d'inclure la noisette de contenu Z via la configuration
+ -->]
+      
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<span class="sep"> &gt; </span>
+	[<strong class="on">(#ENV{boussole}|appliquer_filtre{boussole_traduire, nom_boussole})</strong>]
+</p>
+
+[(#PLUGIN{NOIZETIER}|non)
+[(#REM) <!-- Cartouche et contenu de la boussole --> ]
+[(#MODELE{
+	boussole_contenu_z,
+	boussole=#ENV{boussole},
+	cartouche_boussole=oui, 
+	taille_logo=64, 
+	titre_groupe=oui, 
+	slogan_site=oui, 
+	descriptif_site=oui})]
+]

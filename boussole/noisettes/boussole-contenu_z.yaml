@@ -1,0 +1,66 @@
+nom: '<:boussole:nom_noisette_boussole_contenu_z:>'
+description: '<:boussole:description_noisette_boussole_contenu_z:>'
+icon: 'prive/themes/spip/images/boussole_icone-24.png'
+contexte: 'boussole'
+parametres:
+  -
+    saisie: 'radio'
+    options:
+      nom: 'cartouche_boussole'
+      label: '<:boussole:label_cartouche_boussole:>'
+      defaut: 'oui'
+      datas:
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'taille_logo'
+      label: '<:boussole:label_taille_logo_boussole:>'
+      defaut: '64'
+      afficher_si: '@cartouche_boussole@=="oui"'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'titre_groupe'
+      label: '<:boussole:label_titre_groupe:>'
+      defaut: 'oui'
+      datas:
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'type_bulle'
+      label: '<:boussole:label_type_bulle:>'
+      cacher_option_intro: 'oui'
+      defaut: 'nom_slogan_site'
+      datas:
+        nom_slogan_site: '<:boussole:option_nom_slogan_site:>'
+        nom_site: '<:boussole:option_nom_site:>'
+        slogan_site: '<:boussole:option_slogan_site:>'
+        descriptif_site: '<:boussole:option_descriptif_site:>'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'slogan_site'
+      label: '<:boussole:label_afficher_slogan:>'
+      defaut: 'oui'
+      datas:
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'descriptif_site'
+      label: '<:boussole:label_afficher_descriptif:>'
+      defaut: 'oui'
+      datas:
+        oui: '<:item_oui:>'
+        non: '<:item_non:>'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'p_class'
+      label: '<:boussole:label_p_class:>'
+      defaut: ''

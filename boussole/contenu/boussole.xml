@@ -1,0 +1,5 @@
+<page>
+	<nom><:boussole:nom_page_boussole:></nom>
+	<description><:boussole:description_page_boussole:></description>
+	<icon>prive/themes/spip/images/boussole_icone-24.png</icon>
+</page>
