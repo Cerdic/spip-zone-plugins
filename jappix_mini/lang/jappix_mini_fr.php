@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'seulement_si_autojoin' => 'Ceci est possible uniquement si vous avez choisi d\'entrer automatiquement sur les salons.',
 'langue_interface' => 'Langue',
 'langue_interface_explication' => 'Langue de l\'interface du mini-chat.',
+'langue_interface_defaut' => 'Langue du site',
 
 );
 
