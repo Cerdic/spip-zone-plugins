@@ -3,6 +3,7 @@
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>images/jappix.png</icon>
 	<version>0.1</version>
+        <categorie>communication</categorie>
 	<etat>test</etat>
 	<description>
 	Intégration d'un mini chat ([Jappix Mini->http://mini.jappix.com/]) dans les pages SPIP.</description>
