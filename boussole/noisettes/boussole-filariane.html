@@ -1,0 +1,7 @@
+[(#SET{ariane_separateur, #ENV{ariane_separateur}|is_null|non|?{#ENV{ariane_separateur},'&gt;'}})]
+[(#SET{taille_titre, #ENV{taille_titre}|sinon{80}})]
+<p id="hierarchie">
+	[(#ENV{afficher_lien_accueil}|oui)<a href="#URL_SITE_SPIP/"><:accueil_site:></a>]
+	[<span class="sep">(#GET{ariane_separateur})</span>]
+	[<strong class="on">(#ENV{boussole}|appliquer_filtre{boussole_traduire, nom_boussole}|couper{#GET{taille_titre}})</strong>]
+</p>

@@ -1,0 +1,27 @@
+nom: '<:boussole:nom_noisette_boussole_fil_ariane:>'
+description: '<:boussole:description_noisette_boussole_fil_ariane:>'
+icon: 'prive/themes/spip/images/boussole_icone-24.png'
+contexte: 'boussole'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_lien_accueil'
+      label: '<:boussole:label_afficher_lien_accueil:>'
+      defaut: 'on'
+  -
+    saisie: 'input'
+    options:
+      nom: 'ariane_separateur'
+      label: '<:boussole:label_ariane_separateur:>'
+      obligatoire: 'oui'
+      defaut: '&gt;'
+  -
+    saisie: 'input'
+    options:
+      nom: 'taille_titre'
+      label: '<:boussole:label_taille_titre:>'
+      defaut: 80
+    verifier:
+      type: 'entier'
+      min: 10
