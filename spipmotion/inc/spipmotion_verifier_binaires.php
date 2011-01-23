@@ -19,6 +19,7 @@
  * -* qt-faststart
  * -* le script spipmotion.sh
  * -* la class ffmpeg-php
+ * -* mediainfo
  *
  * Si le safe_mode est activé, on l'inscrit dans les metas ainsi que son exec_dir
  * afin de retrouver le script spipmotion.sh qui doit s'y trouver
@@ -52,31 +53,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		$valeurs = lire_config('spipmotion');
 
 	/**
-	 * Tester ffmpeg
-	 */
-	if($valeurs['chemin'] != ''){
-		exec($valeurs['chemin'].' --help',$retour,$retour_int);
-		if($retour_int != 0){
-			ecrire_config('spipmotion_ffmpeg_casse', 'oui');
-			$erreurs[] = 'ffmpeg';
-		}else{
-			effacer_config('spipmotion_ffmpeg_casse');
-		}
-	}else{
-		exec('ffmpeg --help',$retour,$retour_int);
-		if($retour_int != 0){
-			ecrire_config('spipmotion_casse', 'oui');
-			$erreurs[] = 'ffmpeg';
-		}else{
-			$config = lire_config('spipmotion');
-			$config['chemin'] = 'ffmpeg';
-			ecrire_meta('spipmotion',serialize($config));
-			if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
-				effacer_config('spipmotion_casse');
-			}
-		}
-	}
-	/**
 	 * Tester ffmpeg2theora
 	 */
 	exec('ffmpeg2theora',$retour_ffmpeg2theora,$retour_ffmpeg2theora_int);
@@ -108,17 +84,32 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	}else{
 		effacer_config('spipmotion_qt-faststart_casse');
 	}
+	
+	/**
+	 * Tester mediainfo
+	 * MediaInfo n'est pas indispensable au bon fonctionnement
+	 * On n'envoie pas de mail de notification
+	 * On ne bloquera pas les encodages
+	 */
+	exec('mediainfo --help',$retour_mediainfo,$retour_mediainfo_int);
+	spip_log($retour_mediainfo,'test');
+	spip_log($retour_mediainfo_int,'test');
+	if(!in_array($retour_mediainfo_int,array(0,255))){
+		ecrire_config('spipmotion_mediainfo_casse', 'oui');
+	}else{
+		effacer_config('spipmotion_mediainfo_casse');
+	}
 
 	/**
 	 * Tester le script spipmotion.sh présent dans script_bash/
 	 * Si le safe_mode est activé, il doit se trouver dans le répertoire des scripts autorisés
 	 */
 	if($safe_mode == 1){
-		$spipmotion_sh = $safe_mode_path.'/spipmotion.sh --help';
+		$spipmotion_sh = $safe_mode_path.'/spipmotion.sh';
 	}else{
-		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh').' --help';
+		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
 	}
-	exec($spipmotion_sh,$retour_spipmotionsh,$retour_spipmotionsh_int);
+	exec($spipmotion_sh." --help",$retour_spipmotionsh,$retour_spipmotionsh_int);
 	if($retour_spipmotionsh_int != 0){
 		ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
 		$erreurs[] = 'spipmotion.sh';
@@ -126,6 +117,32 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		effacer_config('spipmotion_spipmotionsh_casse');
 	}
 
+	/**
+	 * Tester ffmpeg
+	 */
+	if($valeurs['chemin'] != ''){
+		exec($spipmotion_sh." --p ".$valeurs['chemin']." --info '-version'",$retour_ffmpeg,$retour_int_ffmpeg);
+		spip_log($retour_ffmpeg);
+		spip_log($retour_int_ffmpeg);
+		if($retour_int_ffmpeg != 0){
+			ecrire_config('spipmotion_ffmpeg_casse', 'oui');
+			$erreurs[] = 'ffmpeg';
+		}else{
+			effacer_config('spipmotion_ffmpeg_casse');
+		}
+	}else{
+		exec($spipmotion_sh." --info -version",$retour_ffmpeg,$retour_int_ffmpeg);
+		spip_log($retour_ffmpeg);
+		spip_log($retour_int_ffmpeg);
+		if($retour_int_ffmpeg != 0){
+			ecrire_config('spipmotion_casse', 'oui');
+			$erreurs[] = 'ffmpeg';
+		}else{
+			if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
+				effacer_config('spipmotion_casse');
+			}
+		}
+	}
 	if (!class_exists('ffmpeg_movie')) {
 		ecrire_config('spipmotion_ffmpeg-php_casse', 'oui');
 		$erreurs[] = 'ffmpeg-php';
