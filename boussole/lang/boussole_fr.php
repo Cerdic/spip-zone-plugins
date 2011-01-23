@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 	'description_noisette_boussole' => 'Affichage standard d\'une boussole. Vous pouvez choisir le mod&egrave;le d\'affichage (liens textuels, logos...) ainsi que sa configuration pr&eacute;cise',
 	'description_noisette_boussole_actualite' => 'Affichage des articles syndiqu&eacute;s des sites d\'une boussole selon le mod&egrave;le d\'affichage <code>boussole_liste_actualite</code>.',
-	'description_noisette_boussole_contenu_z' => 'Affichage de toutes les informations d\'une boussole dans une page Z selon le mod&egrave;le d\'affichage <code>boussole_contenu_z</code>.',
+	'description_noisette_boussole_contenu_z' => 'Affichage de toutes les informations d\'une boussole comme contenu principal d\'une page Z et selon le mod&egrave;le d\'affichage <code>boussole_contenu_z</code>.',
 	'description_page_boussole' => 'Page des informations d&eacute;taill&eacute;es d\'une boussole',
 // -- Descriptifs de la boussole et des sites de la galaxie SPIP
 	'descriptif_boussole_spip' => 'La boussole SPIP regroupe l\'ensemble des sites &#171; officiels &#187; de la galaxie SPIP. Elle d&eacute;finit pour chaque site, son logo, son nom, son slogan et sa description. N\'hésitez donc pas &agrave; l\'utiliser dans vos propres sites pour aiguiller vos visiteurs dans la galaxie SPIP.',
@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // -- Noms de la boussole, des groupes et des sites de la galaxie SPIP
 	'nom_noisette_boussole' => 'Boussole',
 	'nom_noisette_boussole_actualite' => 'Boussole - Actualit&eacute;s',
-	'nom_noisette_boussole_contenu_z' => 'Boussole - Contenu d\'une page Z',
+	'nom_noisette_boussole_contenu_z' => 'Boussole - Contenu principal d\'une page Z',
 	'nom_page_boussole' => 'Boussole',
 	'nom_boussole_spip' => 'Galaxie SPIP',
 	'nom_groupe_spip_actualite' => 'Actualit&eacute; de SPIP',
