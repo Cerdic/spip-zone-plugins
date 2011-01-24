@@ -112,7 +112,7 @@ function boussole_localiser_xml($xml, $mode) {
 	// On calcul une url absolue dans tous les cas
 	if ($mode == 'standard')
 		// La boussole SPIP
-		$url = url_absolue(find_in_path('boussole_spip.xml'));
+		$url = url_absolue('http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole_spip.xml');
 	else
 		if (preg_match(",^(http|ftp)://,",$xml))
 			// Mode perso : on a passe une url
