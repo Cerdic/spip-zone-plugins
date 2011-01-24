@@ -478,25 +478,25 @@ function exec_spiplistes_config () {
 		. debut_cadre_relief('', true, '', _T('spiplistes:mode_suspendre_trieuse'))
 		. spiplistes_form_input_checkbox (
 			'opt_suspendre_trieuse'
-			, "oui", _T('spiplistes:Suspendre_le_tri_des_listes')
-			, (spiplistes_pref_lire('opt_suspendre_trieuse') == "oui"), true, false)
+			, 'oui', _T('spiplistes:Suspendre_le_tri_des_listes')
+			, (spiplistes_pref_lire('opt_suspendre_trieuse') == 'oui'), true, false)
 		. fin_cadre_relief(true)
 		//
 		. debut_cadre_relief('', true, '', _T('spiplistes:mode_suspendre_meleuse'))
 		. spiplistes_form_input_checkbox (
 			'opt_suspendre_meleuse'
-			, "oui", _T('spiplistes:suspendre_lenvoi_des_courriers')
-			, (spiplistes_pref_lire('opt_suspendre_meleuse') == "oui"), true, false)
+			, 'oui', _T('spiplistes:suspendre_lenvoi_des_courriers')
+			, (spiplistes_pref_lire('opt_suspendre_meleuse') == 'oui'), true, false)
 		. fin_cadre_relief(true)
 		//
 		. debut_cadre_relief('', true, '', _T('spiplistes:mode_simulation'))
 		. spiplistes_form_input_checkbox (
 			'opt_simuler_envoi'
-			, "oui", _T('spiplistes:simuler_les_envois')
-			, (spiplistes_pref_lire('opt_simuler_envoi') == "oui"), true, false)
+			, 'oui', _T('spiplistes:simuler_les_envois')
+			, (spiplistes_pref_lire('opt_simuler_envoi') == 'oui'), true, false)
 		. fin_cadre_relief(true)
 		//
-		. spiplistes_form_bouton_valider("btn_param_valider", _T('bouton_valider'), true)
+		. spiplistes_form_bouton_valider('btn_param_valider', _T('bouton_valider'), true)
 		. spiplistes_form_fin(true)
 		. fin_cadre_trait_couleur(true)
 		;
@@ -504,29 +504,29 @@ function exec_spiplistes_config () {
 	//////////////////////////////////////////////////////
 	// La console
 		$page_result .= ''
-			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."console-24.gif", true, '', _T('spiplistes:log_console'))
+			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'console-24.gif', true, '', _T('spiplistes:log_console'))
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 			. debut_cadre_relief('', true, '', _T('spiplistes:log_details_console'))
 			. spiplistes_form_input_checkbox (
 				'opt_log_voir_destinataire'
-				, "oui", _T('spiplistes:log_voir_destinataire')
-				, (spiplistes_pref_lire('opt_log_voir_destinataire') == "oui"), true, false)
+				, 'oui', _T('spiplistes:log_voir_destinataire')
+				, (spiplistes_pref_lire('opt_log_voir_destinataire') == 'oui'), true, false)
 			. fin_cadre_relief(true)
 			;
 		// Paramétrer la console de debug/logs si sur LAN
 		if(spiplistes_server_rezo_local()) {
 			$page_result .= ''
 				. debut_cadre_relief('', true, '', _T('spiplistes:log_console_syslog'))
-				. "<p class='verdana2'>"._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>" . $eol
+				. '<p class="verdana2">'._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR'])).'</p>' . $eol
 				. spiplistes_form_input_checkbox (
 					'opt_console_syslog'
-					, "oui", _T('spiplistes:log_console_syslog_texte')
-					, (spiplistes_pref_lire('opt_console_syslog') == "oui"), true, false)
+					, 'oui', _T('spiplistes:log_console_syslog_texte')
+					, (spiplistes_pref_lire('opt_console_syslog') == 'oui'), true, false)
 					. fin_cadre_relief(true)
 				;
 		}
-		$page_result .= $_SERVER['SERVER_ADDR'] . ''
-			. spiplistes_form_bouton_valider("btn_console_syslog")
+		$page_result .= ''
+			. spiplistes_form_bouton_valider('btn_console_syslog')
 			. spiplistes_form_fin(true)
 			;
 		// voir les journaux SPIP

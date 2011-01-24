@@ -74,11 +74,19 @@ function spiplistes_log($texte, $level = LOG_WARNING) {
 }
 
 function spiplistes_server_rezo_local () {
-	static $lan;
-	if($lan === null) {
-		$lan = preg_match('/^(192\.168|127\.0)/', $_SERVER['SERVER_ADDR']);
+	
+	static $islan;
+	
+	if($islan === null) {
+		$adr = $_SERVER['SERVER_ADDR'];
+		$islan =
+			($adr && (
+					  (strpos(192.168, $adr) === false)
+				   || (strpos(127.0, $adr) === false)
+				   )
+			);
 	}
-	return($lan);
+	return($islan);
 }
 
 // CP-20080324
