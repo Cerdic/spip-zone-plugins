@@ -193,8 +193,8 @@ function cs_version_erreur(&$outil) {
 function cs_log($variable, $prefixe='', $stat='') {
 	static $rand;
 	if($stat) $rand = $stat;
-	if(!defined('_LOG_CS') /*|| !defined('_CS_REPORTALL')*/ || !strlen($variable)) return;
 	if (!is_string($variable)) $variable = var_export($variable, true);
+	if(!defined('_LOG_CS') /*|| !defined('_CS_REPORTALL')*/ || !strlen($variable)) return;
 	spip_log($variable = $rand.$prefixe.$variable);
 	if (defined('_CS_REPORTALL')) echo '<br />',htmlentities($variable);
 }
