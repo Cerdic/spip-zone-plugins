@@ -45,7 +45,7 @@ En application de la [loi n° 78-17 du 6 janvier 1978 relative &agrave; l’info
 ',
 	'conditions_utilisation_cookies' => '{{{Cookies}}}
 
-Certaines informations nominatives et certains marqueurs t&eacute;moins peuvent &ecirc;tre enregistr&eacute;es par {{[@nom_site@->@url_site@]}} sur l’ordinateur personnel de l’internaute sans expression de la volonté de ce dernier ({"cookies" ou "applets JAVA"}). Sauf indication contraire explicite &#091;*&#093;, ces proc&eacute;d&eacute;s techniques ne sont pas indispensables au bon fonctionnement de {{[@nom_site@->@url_site@]}} et leur utilisation peut bien entendu &ecirc;tre d&eacute;sactiv&eacute;e dans le navigateur utilis&eacute; par l’internaute sans que sa navigation en soit affect&eacut;e. {{Aucune de ces informations n’est conservée par le site apr&egrave;s d&eacute;connexion de l’internaute.}}
+Certaines informations nominatives et certains marqueurs t&eacute;moins peuvent &ecirc;tre enregistr&eacute;es par {{[@nom_site@->@url_site@]}} sur l’ordinateur personnel de l’internaute sans expression de la volonté de ce dernier ({"cookies" ou "applets JAVA"}). Sauf indication contraire explicite &#091;*&#093;, ces proc&eacute;d&eacute;s techniques ne sont pas indispensables au bon fonctionnement de {{[@nom_site@->@url_site@]}} et leur utilisation peut bien entendu &ecirc;tre d&eacute;sactiv&eacute;e dans le navigateur utilis&eacute; par l’internaute sans que sa navigation en soit affect&eacute;e. {{Aucune de ces informations n’est conservée par le site apr&egrave;s d&eacute;connexion de l’internaute.}}
 
 <small>&#091;*&#093; Il est utile de pr&eacute;ciser ici que les acc&egrave;s aux diff&eacute;rents espaces priv&eacute;s du site peuvent n&eacute;cessiter l’acceptation par l’internaute du d&eacute;p&ocirc;t d’un cookie sur son ordinateur personnel pour une question de s&eacute;curit&eacute;.</small>
 ',
@@ -64,8 +64,8 @@ L’&eacute;tablissement de lien vers {{[@nom_site@->@url_site@]}} ne requiert p
 |<a href="@url_site@" title="@nom_site@ - @descriptif_site@">@url_site@</a>|<code>
 <a href="@url_site@" title="@nom_site@ - @descriptif_site@">@url_site@</a>
 </code>|
-|<a href=href="@url_site@" title="@nom_site@ - @descriptif_site@"><img src="@logo_site@" border="0" /></a>|<code>
-<a href=href="@url_site@" title="@nom_site@ - @descriptif_site@"><img src="@logo_site@" border="0" /></a>
+|<a href="@url_site@" title="@nom_site@ - @descriptif_site@"><img src="@logo_site@" border="0" /></a>|<code>
+<a href="@url_site@" title="@nom_site@ - @descriptif_site@"><img src="@logo_site@" border="0" /></a>
 </code>|
 ',
 
