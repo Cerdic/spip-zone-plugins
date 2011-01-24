@@ -18,7 +18,7 @@ Pour envoyer des documents sur S3, utiliser la m&#233;diath&#232;que ou <a href=
 <legend>
 	Stockage Amazon S3
 </legend>
-<p><:gestdoc:envoyer_explication:>:</p>
+<p><:medias:envoyer_explication:>:</p>
 
 <select name="provider">
 	<option value="amazon">Amazon S3</option>
@@ -31,20 +31,20 @@ Pour envoyer des documents sur S3, utiliser la m&#233;diath&#232;que ou <a href=
 </select>
 
 
-<p><label><:gestdoc:cle_publique:>: <small><i>Cf.</i> <a href="http://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key">http://aws-portal.amazon.com/gp/...</a></small>
+<p><label><:medias:cle_publique:>: <small><i>Cf.</i> <a href="http://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key">http://aws-portal.amazon.com/gp/...</a></small>
 <br /><input type="text" name="s3publickey" value="[(#ENV**{s3publickey}|entites_html)]" class="forml" /></label>
 </p>
 
-<p><label><:gestdoc:cle_secrete:>:
+<p><label><:medias:cle_secrete:>:
 <br /><input type="text" name="s3secretkey" value="[(#ENV**{s3secretkey}|entites_html)]" class="forml" /></label>
 </p>
 
-<p><label><:gestdoc:bucket_nom:>:
+<p><label><:medias:bucket_nom:>:
 <br /><input type="text" name="s3bucket" value="[(#ENV**{s3bucket}|entites_html)]" class="forml" /></label>
 </p>
 
 
-<p><label><:gestdoc:chemin_base_bucket:>[ (#ENV{s3bucket})] :
+<p><label><:medias:chemin_base_bucket:>[ (#ENV{s3bucket})] :
 
 <br /><input type="text" name="s3path" value="[(#ENV**{s3path}|entites_html)]" /></label>
 
@@ -66,7 +66,7 @@ Pour Amazon S3, choisir la zone g&#233;ographique du bucket&nbsp;:
 
 
 <div>
-<label><:gestdoc:url_s3:>:
+<label><:medias:url_s3:>:
 <br />
 <select name="s3baseurl">
 	<option value="">[http://(#ENV{provider}|s3_endpoint)/][(#ENV{s3bucket}|sinon{$bucket$})][/(#ENV{s3path})]/</option>
@@ -85,7 +85,7 @@ Pour Amazon S3, choisir la zone g&#233;ographique du bucket&nbsp;:
 	[(#ENV{s3bucket}|checkdnsrr{CNAME}|?{
 		<tt>[(#ENV{s3bucket})] CNAME [(#ENV{s3bucket}|filtrer{dns_get_record,#EVAL{DNS_CNAME}}|var_export{1})]</tt>
 	,
-		[(#ENV{s3bucket}|sinon{$bucket$})] <:gestdoc:registrement_cname_erreur:> <tt>CNAME</tt>
+		[(#ENV{s3bucket}|sinon{$bucket$})] <:medias:registrement_cname_erreur:> <tt>CNAME</tt>
 	})]
 	</small></blockquote>
 ]

@@ -67,7 +67,7 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	);
 	
 	/** Gérer le cas de la présence de Médiathèque (parce que Mediatheque c'est le BIEN) **/
-	if(filtre_info_plugin_dist('gestdoc','est_actif')){
+	if(filtre_info_plugin_dist('medias','est_actif')){
 		// Récupérer les infos
 		$taille = $infosVideo->duration;
 		$auteur = $infosVideo->author;

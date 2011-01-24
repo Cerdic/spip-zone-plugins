@@ -56,6 +56,6 @@ _ &#169; 2008 - Licence GPL
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
 	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id="gestdoc" version="[1.3.1;]" />
+	<necessite id="medias" version="[1.5.0;]" />
 	<categorie>multimedia</categorie>
 </plugin>

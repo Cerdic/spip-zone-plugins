@@ -55,6 +55,6 @@ _ [->http://getid3.sourceforge.net/]
 	<install>base/getid3_upgrade.php</install>
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<utilise id="cfg" />
-	<utilise id="gestdoc" />
+	<utilise id="medias" />
 	<categorie>multimedia</categorie>
 </plugin>

@@ -70,9 +70,9 @@ function gouverneur_de_mots() {
 			'documents' => new declaration_liaison_mots('documents', array(
 				'exec_formulaire_liaison' => "documents_edit",
 
-				'singulier' => "gestdoc:un_document", //"mediatheque:un_document",
-				'pluriel'   => "gestdoc:des_documents", //"mediatheque:des_documents",
-				'libelle_objet' => "gestdoc:objet_documents",
+				'singulier' => "medias:un_document", //"mediatheque:un_document",
+				'pluriel'   => "medias:des_documents", //"mediatheque:des_documents",
+				'libelle_objet' => "medias:objet_documents",
 				'libelle_liaisons_objets' => "mots_objets:item_mots_cles_association_documents",
 			))
 		));

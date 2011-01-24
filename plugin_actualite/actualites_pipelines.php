@@ -169,13 +169,13 @@ function actualites_affiche_enfants($flux){
 }
 
 /* Gestion de l'affichage des documents */
-//$GLOBALS['gestdoc_exec_colonne_document'][] = 'actualites_edit';
+//$GLOBALS['medias_exec_colonne_document'][] = 'actualites_edit';
 //TODO parser sur tous les champs extra ceux qui ont un traitement propre pour les ajouter ici
-//$GLOBALS['gestdoc_liste_champs'][] = 'descriptif';
+//$GLOBALS['medias_liste_champs'][] = 'descriptif';
 
 //function objets_post_edition($flux){}
 
-$GLOBALS['gestdoc_exec_colonne_document'][] = 'actualites_edit';
+$GLOBALS['medias_exec_colonne_document'][] = 'actualites_edit';
 
 function actualites_affiche_gauche($flux){
 	if($flux['args']['exec']=='actualites_edit'){

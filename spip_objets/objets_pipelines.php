@@ -159,10 +159,10 @@ function presenter_objet_boucle($row,$afficher){
 
 /* Gestion de l'affichage des documents */
 
-//$GLOBALS['gestdoc_exec_colonne_document'][] = 'objet_edit';
+//$GLOBALS['medias_exec_colonne_document'][] = 'objet_edit';
 
 //TODO parser sur tous les champs extra ceux qui ont un traitement propre pour les ajouter ici
-//$GLOBALS['gestdoc_liste_champs'][] = 'descriptif';
+//$GLOBALS['medias_liste_champs'][] = 'descriptif';
 
 
 

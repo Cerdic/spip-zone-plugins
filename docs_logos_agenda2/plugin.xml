@@ -32,5 +32,5 @@
 	<categorie>outil</categorie>
 	<necessite id='SPIP' version='[2.0;]' />
 	<necessite id="agenda" version='[2.0.3;]'/>
-	<necessite id="medias" version='[1.4.5;]'/>
+	<necessite id="medias" version='[1.5.0;]'/>
 </plugin>

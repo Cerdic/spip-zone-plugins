@@ -1,6 +1,6 @@
 <?php
-$GLOBALS['gestdoc_exec_colonne_document'][] = 'evenements_edit';
-$GLOBALS['gestdoc_liste_champs'][] = 'descriptif';
+$GLOBALS['medias_exec_colonne_document'][] = 'evenements_edit';
+$GLOBALS['medias_liste_champs'][] = 'descriptif';
 function docs_logos_agenda2_post_edition($flux){}
 function docs_logos_agenda2_affiche_gauche($flux){
     if (($flux['args']['exec'] == 'evenements_edit')

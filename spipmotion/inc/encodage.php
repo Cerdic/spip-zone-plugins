@@ -468,7 +468,7 @@ function encodage($source,$doc_attente){
 				$champs_recup['explicit'] = 0;
 			if(_DIR_PLUGIN_LICENCES)
 				$champs_recup['id_licence'] = 0;
-			if(_DIR_PLUGIN_GESTDOC)
+			if(_DIR_PLUGIN_MEDIAS)
 				$champs_recup['credits'] = 0;
 				
 			$modifs = array_intersect_key($source, $champs_recup);

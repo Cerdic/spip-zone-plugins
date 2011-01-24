@@ -144,7 +144,7 @@
 	<necessite id="saisies" version="[1.8.5;]" />
 	<necessite id="spip_bonux" version="[1.8.4;]" />
 	<necessite id="cextras" version="[1.6.1;]" />
-	<necessite id="gestdoc" version="[1.4.2;]" />
+	<necessite id="medias" version="[1.5.0;]" />
 	<utilise id='CFG' version='[1.0;]' /> 
 
 	<!-- Ajouter bouton de navigation dans l'interface privee -->

@@ -22,7 +22,7 @@ function crud_documents_create_dist($dummy,$set=null){
 		$chemin = $set['source'];
 		$f = chercher_filtre('info_plugin');
 		// gerer la mediatheque aussi avant son entree dans le core
-		if ($f('gestdoc', 'est_actif')) {
+		if ($f('medias', 'est_actif')) {
 			$f = charger_fonction('ajouter_documents','action');
 			$id = $f('new', array(array('tmp_name' => $chemin, 'name' => basename($chemin))), $set['type'], $set['id_objet'], $set['mode']);
 		}

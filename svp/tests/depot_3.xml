@@ -180,7 +180,7 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 <date>1278511202</date>
 <source>_plugins_/gestion_documents</source>
 <plugin>
-	<prefix>gestdoc</prefix>
+	<prefix>medias</prefix>
 	<nom>
 	<multi>[fr]Mediath&egrave;que
 	[it]Gestione dei documenti
@@ -205,27 +205,27 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 	[de]Dokumentenverwaltung mit &Uuml;bersichtsseite f&uuml;r alle Dokumente der Website und erweiterten Funktionen f&uuml;r Dokumente in Artikeln und Rubriken.
 	</multi></description>
 	<lien>http://www.spip-contrib.net/mediatheque</lien> <!-- URI de documentation -->
-	<install>base/gestdoc.php</install>
-	<fonctions>gestdoc_fonctions.php</fonctions>
+	<install>base/medias.php</install>
+	<fonctions>medias_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/gestdoc.php</inclure>
+		<inclure>base/medias.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/gestdoc.php</inclure>
+		<inclure>base/medias.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/gestdoc.php</inclure>
+		<inclure>base/medias.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_edition</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_gauche</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
@@ -234,28 +234,28 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 	</pipeline>
 	<pipeline>
 		<nom>autoriser</nom>
-		<inclure>gestdoc_autoriser.php</inclure>
+		<inclure>medias_autoriser.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>document_desc_actions</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>editer_document_actions</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
-		<inclure>gestdoc_pipelines.php</inclure>
+		<inclure>medias_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='documents' parent='naviguer'>
-		<titre>gestdoc:documents</titre>
+		<titre>medias:documents</titre>
 		<icone>img_pack/portfolio-24.png</icone>
 		<url>portfolio</url>
 	</bouton>
 	<bouton id='documents21' parent='bando_edition'>
-		<titre>gestdoc:documents</titre>
+		<titre>medias:documents</titre>
 		<icone>images/portfolio-16.png</icone>
 		<url>portfolio</url>
 	</bouton>
