@@ -254,6 +254,12 @@ function cs_mots_glossaire($texte, $type='', $sep='') {
 		case 'id_mot':
 			array_walk($mots, create_function('&$v', '$v=$v[1];'));
 			break;
+		case 'mot':
+			array_walk($mots, create_function('&$v', '$v=$v[0];'));
+			break;
+		case 'titre': case 'titre_unique':
+			array_walk($mots, create_function('&$v', "\$v=$titre;"));
+			break;
 		case 'lien_mot':
 			array_walk($mots, create_function('&$v', $lien.'>$v[0]</a>";'));
 			break;
