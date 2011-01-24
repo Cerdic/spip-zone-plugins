@@ -264,7 +264,7 @@ function cs_mots_glossaire($texte, $type='', $sep='') {
 			$stats = array(); $min = 999999; $max = 0;
 			foreach($mots as $m) $stats[$m[1]]++;
 			$m = min($stats); $d = max($stats) - $m;
-			array_walk($stats, create_function('&$v', "\$v=round((\$v-$m)*9/$d)+1;")); // valeurs de 1 a 10
+			array_walk($stats, create_function('&$v',  $d?"\$v=round((\$v-$m)*9/$d)+1;":'$v=1;')); // valeurs de 1 a 10
 			array_walk($mots, create_function('&$v,$k,&$s', $lien.' class=\"nuage".$s[$v[1]]."\">".'.$titre.'."</a>";'), $stats);
 			break;
 		default:return "#GLOSSAIRE/$type?";
