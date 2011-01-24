@@ -95,6 +95,6 @@
 	<!-- filtre |icone et boucles CONDITIONS -->
 	<necessite id="spip_bonux" version="[1.8.4;]" />
 	<necessite id="cextras" version="[1.6.1;]" />
-	<necessite id="gestdoc" version="[1.4.2;]" />
+	<necessite id="medias" version="[1.4.2;]" />
 	<categorie>outil</categorie>
 </plugin>
