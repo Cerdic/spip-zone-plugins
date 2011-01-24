@@ -2,6 +2,7 @@
 	<nom>Jappix Mini</nom>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>images/jappix.png</icon>
+	<lien>http://www.spip-contrib.net/Jappix-Mini</lien>
 	<version>0.1</version>
         <categorie>communication</categorie>
 	<etat>test</etat>
