@@ -16,9 +16,10 @@
 	</multi></description>
 	<prefix>forum</prefix>
 	<necessite id="SPIP" version="[2.0.8;]" />
+	<necessite id="spip_bonux" version="[1.4;]" /> 
 	<categorie>communication</categorie>
 </plugin>
-<plugin  spip='[;2.1)'>
+<plugin spip='[2.1.0-beta;]'>
 	<nom><multi>
 	[fr]Interface d'administration des forums
 	[en]Interface administration forums
@@ -35,7 +36,6 @@
 	[ar]&#1608;&#1575;&#1580;&#1607;&#1577; &#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1606;&#1578;&#1583;&#1609;
 	</multi></description>
 	<prefix>forum</prefix>
-	<necessite id="SPIP" version="[2.0.8;]" />
-	<necessite id="spip_bonux" version="[1.4;]" /> 
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<categorie>communication</categorie>
 </plugin>

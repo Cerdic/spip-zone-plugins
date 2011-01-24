@@ -10,12 +10,14 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+include_spip('inc/core21_filtres');
+
 function formulaires_gestion_forum_charger_dist($id_forum='', $id_rubrique='', $id_article='', $id_breve='', $id_syndic='', $id_message='', $id_auteur='', $auteur='', $email_auteur='', $ip='', $recherche='') {
 	
 	$valeurs = array(
 		'editable'=>true
 		);
-	
+
 	$valeurs['id_forums'] = array();
 	$valeurs['pagination'] = _request('pagination');
 	$valeurs['type_message'] = _request('type_message');
@@ -65,10 +67,12 @@ function formulaires_gestion_forum_traiter_dist($id_forum='', $id_rubrique='', $
 	$select_statut = _request('select_statut');
 	$pagination = _request('pagination');
 	$pagination_ancien = _request('pagination_ancien');
-
-	set_request('select_type',$select_type);
-	set_request('voir_staut',$select_statut);
 	
+	set_request('voir_statut',$select_statut);
+	set_request('select_type',$select_type);
+	set_request('statut',_request('statut_ancien'));
+	set_request('pagination',$pagination_ancien);
+
 	if ($pagination != $pagination_ancien)
 		set_request('debut_forum','');
 	
@@ -92,9 +96,8 @@ function formulaires_gestion_forum_traiter_dist($id_forum='', $id_rubrique='', $
 		$row = sql_fetsel("*", "spip_forum", "id_forum=$id");
 		instituer_un_forum($statut,$row);
 	}
-	
+
 	return $retour;
-	
 }
 
 ?>

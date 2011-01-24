@@ -27,23 +27,22 @@
 <input type="hidden" name="recherche" id="recherche" value="#ENV{recherche}" />
 
 <input type="hidden" name="debut_forum" id="debut_forum" value="#ENV{debut_forum}" />
-<input type="hidden" name="pagination_ancien" id="pagination_ancien" value="#ENV{pagination,10}" />
-
-
+<input type="hidden" name="pagination_ancien" id="pagination_ancien" value="#ENV{pagination,25}" />
+<input type="hidden" name="statut_ancien" id="statut_ancien" value="#ENV{statut}" />
 
 <ul>
 	<li class="gestion_forum boutons">
 		<div id="pagination">
 		Afficher:
-			<a href="[(#SELF|parametre_url{pagination,10})]" class="ajax[(#ENV*{pagination,10}|=={10}|oui) selected]">10</a>
-			<a href="[(#SELF|parametre_url{pagination,50})]" class="ajax[(#ENV*{pagination}|=={50}|oui) selected]">50</a>
-			<a href="[(#SELF|parametre_url{pagination,100})]" class="ajax[(#ENV*{pagination}|=={100}|oui) selected]">100</a>
+			<a href="[(#SELF|parametre_url{statut,#ENV{statut}}|parametre_url{pagination,25})]" class="ajax[(#ENV*{pagination,25}|=={25}|oui) selected]">25</a>
+			<a href="[(#SELF|parametre_url{statut,#ENV{statut}}|parametre_url{pagination,50})]" class="ajax[(#ENV*{pagination}|=={50}|oui) selected]">50</a>
+			<a href="[(#SELF|parametre_url{statut,#ENV{statut}}|parametre_url{pagination,100})]" class="ajax[(#ENV*{pagination}|=={100}|oui) selected]">100</a>
 		messages.	
 		</div>
 		Sélectionner : 
-		<a href="#" id="select_tous"><:forum:messages_tous:></a>
-		<a href="#" id="select_aucun"><:forum:messages_aucun:></a>
-		<a href="#" id="select_prop"><:forum:messages_prop:></a>
+		<a href="#" class="select_tous"><:forum:messages_tous:></a>
+		<a href="#" class="select_aucun"><:forum:messages_aucun:></a>
+		<a href="#" class="select_prop"><:forum:messages_prop:></a>
 	</li>
 	<li class="gestion_forum boutons">
 		<div class="actions_moderation">
@@ -57,26 +56,30 @@
 	</li>
 </ul>
 
-<p class="boutons">
+<div class="gestion_forum boutons">
+	Sélectionner : 
+	<a href="#" class="select_tous"><:forum:messages_tous:></a>
+	<a href="#" class="select_aucun"><:forum:messages_aucun:></a>
+	<a href="#" class="select_prop"><:forum:messages_prop:></a>
 	<div class="actions_moderation">
 		<input type="submit" class="submit" name="valider" value="<:forum:icone_valider_messages:>" />
 		<input type="submit" class="submit" name="bruler" value="<:forum:icone_bruler_messages:>" />
 		<input type="submit" class="submit" name="supprimer" value="<:forum:icone_supprimer_messages:>" />
 	</div>	
-</p>
+</div>
 
 </div></form>]
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 if (window.jQuery)(function($){
-	$("#select_tous").click(function(){
+	$(".select_tous").click(function(){
 		$("input.select_forum").attr("checked","checked");
 		return false;
 	});
-	$("#select_aucun").click(function(){
+	$(".select_aucun").click(function(){
 		$("input.select_forum").attr("checked","");
 		return false;
 	});
-	$("#select_prop").click(function(){
+	$(".select_prop").click(function(){
 		$("input.select_forum").attr("checked","");
 		$("li.statut_prop input.select_forum").attr("checked","checked");
 		return false;
