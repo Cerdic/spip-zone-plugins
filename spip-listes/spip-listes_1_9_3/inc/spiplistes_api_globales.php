@@ -81,8 +81,8 @@ function spiplistes_server_rezo_local () {
 		$adr = $_SERVER['SERVER_ADDR'];
 		$islan =
 			($adr && (
-					  (strpos(192.168, $adr) === false)
-				   || (strpos(127.0, $adr) === false)
+					  (strpos($adr, '192.168') !== false)
+				   || (strpos($adr, '127.0') !== false)
 				   )
 			);
 	}
