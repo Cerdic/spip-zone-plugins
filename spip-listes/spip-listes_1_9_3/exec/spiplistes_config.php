@@ -192,7 +192,7 @@ function exec_spiplistes_config () {
 		}
 			
 		if($btn_console_syslog) {
-			if(!spiplistes_in_private_ip_adresses()) {
+			if(!spiplistes_server_rezo_local()) {
 			}
 			foreach($keys_console_syslog as $key) {
 				if($key == $opt_log_voir_destinataire) {
@@ -202,7 +202,7 @@ function exec_spiplistes_config () {
 					// si pas sur réseau privé et option syslog validé,
 					// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
 					($key == 'opt_console_syslog')
-					&& !spiplistes_in_private_ip_adresses()
+					&& !spiplistes_server_rezo_local()
 				) {
 					$$key = 'non';
 				} else {
@@ -514,7 +514,7 @@ function exec_spiplistes_config () {
 			. fin_cadre_relief(true)
 			;
 		// Paramétrer la console de debug/logs si sur LAN
-		if(spiplistes_in_private_ip_adresses()) {
+		if(spiplistes_server_rezo_local()) {
 			$page_result .= ''
 				. debut_cadre_relief('', true, '', _T('spiplistes:log_console_syslog'))
 				. "<p class='verdana2'>"._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>" . $eol
@@ -525,7 +525,7 @@ function exec_spiplistes_config () {
 					. fin_cadre_relief(true)
 				;
 		}
-		$page_result .= ''
+		$page_result .= $_SERVER['SERVER_ADDR'] . ''
 			. spiplistes_form_bouton_valider("btn_console_syslog")
 			. spiplistes_form_fin(true)
 			;
@@ -558,19 +558,6 @@ function exec_spiplistes_config () {
 	
 	
 } // exec_config()
-
-/*
- * verifie si le serveur est dans Adresses IP privees de classe C (Private IP addresses)
- * renvoie true si serveur dans classe privee
- */
-function spiplistes_in_private_ip_adresses() {
-	static $onlan;
-	if($on === null) {
-		$onlan = preg_match('/^192\.168/', $_SERVER['SERVER_ADDR']);
-	}
-	return($onlan);
-}
-
 
 /*
  * renvoie une boite select pour un formulaire
