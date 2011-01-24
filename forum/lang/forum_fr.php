@@ -17,9 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_liens_titre' => 'Lien(s) contenu(s) dans le titre du message',
 	'interface_onglets' => 'Interface avec onglets',
 	'interface_formulaire' => 'Interface formulaire',
-
 	'info_1_message_forum' => '1 message de forum',
 	'info_nb_messages_forum' => '@nb@ messages de forum',
+
+	// L
+	'label_afficher' => 'Afficher&nbsp;:',
+	'label_nb_messages' => 'messages',
+	'label_selectionner' => 'S&eacute;lectionner&nbsp;:',
 
 	// M
 	'message_marque_comme_spam' => 'Un message marqu&eacute; comme spam',

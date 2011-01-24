@@ -33,13 +33,13 @@
 <ul>
 	<li class="gestion_forum boutons">
 		<div id="pagination">
-		Afficher:
+		<:forum:label_afficher:>
 			<a href="[(#SELF|parametre_url{statut,#ENV{statut}}|parametre_url{pagination,25})]" class="ajax[(#ENV*{pagination,25}|=={25}|oui) selected]">25</a>
 			<a href="[(#SELF|parametre_url{statut,#ENV{statut}}|parametre_url{pagination,50})]" class="ajax[(#ENV*{pagination}|=={50}|oui) selected]">50</a>
 			<a href="[(#SELF|parametre_url{statut,#ENV{statut}}|parametre_url{pagination,100})]" class="ajax[(#ENV*{pagination}|=={100}|oui) selected]">100</a>
-		messages.	
+		<forum:label_nb_messages:>	
 		</div>
-		Sélectionner : 
+		<:forum:label_selectionner:>
 		<a href="#" class="select_tous"><:forum:messages_tous:></a>
 		<a href="#" class="select_aucun"><:forum:messages_aucun:></a>
 		<a href="#" class="select_prop"><:forum:messages_prop:></a>
@@ -57,7 +57,7 @@
 </ul>
 
 <div class="gestion_forum boutons">
-	Sélectionner : 
+	<:forum:label_selectionner:>
 	<a href="#" class="select_tous"><:forum:messages_tous:></a>
 	<a href="#" class="select_aucun"><:forum:messages_aucun:></a>
 	<a href="#" class="select_prop"><:forum:messages_prop:></a>
