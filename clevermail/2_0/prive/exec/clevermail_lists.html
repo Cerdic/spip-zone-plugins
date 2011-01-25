@@ -47,7 +47,7 @@
         [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_list_remove,#LST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]
 	    ]
 	    |
-      [(#BOUTON_ACTION{<:clevermail:nouveau_message:>,#URL_ACTION_AUTEUR{clevermail_post_create,#LST_ID,./?exec=clevermail_posts&amp;lst_id=#LST_ID}})]
+      [(#BOUTON_ACTION{<:clevermail:nouveau_message:>,#URL_ACTION_AUTEUR{clevermail_post_create,#LST_ID,#URL_ECRIRE{clevermail_posts,lst_id=#LST_ID}}})]
     </div>
   </li>
 </BOUCLE_lists>
