@@ -21,7 +21,8 @@
 			#GET{alt}
 		</object>
 		<!--> <!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
-		#GET{alt}
+		<!--#EVAL**{chr(91)}if IE#EVAL**{chr(93)}>#GET{alt}<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
+
 	</object>]})]
 	[(#MEDIA_AFFICHER_LEGENDE)
 		<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_application media_application_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
