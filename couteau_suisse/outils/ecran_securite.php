@@ -2,17 +2,6 @@
 
 function ecran_securite_pre_description_outil($flux) {
 	if($flux['outil']!="ecran_securite") return $flux;
-$f = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES."ecran_securite.php";
-echo "<br>0. ", _DIR_SITE,
-	"<br>1. ", $f, file_exists($f)?" ok":" ko", 
-	"<br>2. ", $f=realpath($f), file_exists($f)?" ok":" ko", 
-	"<br>A. ", $f=realpath(dirname(cs_spip_file_options(1))), file_exists($f)?" ok":" ko", 
-	"<br>B. ", $f=realpath(dirname(cs_spip_file_options(2))), file_exists($f)?" ok":" ko", 
-	"<br>C. ", $f=realpath(dirname(cs_spip_file_options(3))), file_exists($f)?" ok":" ko", 
-	"<br>D. ", $f=realpath(dirname(cs_spip_file_options(4))), file_exists($f)?" ok":" ko", 
-	"<br>5. ", $f=__FILE__, file_exists($f)?" ok":" ko";
-echo $flux['non']?" => non!":"=> oui!";
-
 	// ecran de securite dans config/
 	$f = dirname(cs_spip_file_options(3))."/ecran_securite.php";
 	// conflit/doublon potentiel ?
