@@ -71,7 +71,7 @@ function encarts_upgrade($nom_meta_base_version,$version_cible){
 	if ($current_version=="0.0") {
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
-		spip_log('Base de données encarts correctement créée','encarts');
+		spip_log('Base de donnees encarts correctement creee','encarts');
 	}
 }
 
@@ -79,7 +79,7 @@ function encarts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_encarts");
 	sql_drop_table("spip_encarts_liens");
 
-	spip_log('Plugin encarts correctement désinstallé.','encarts');
+	spip_log('Plugin encarts correctement desinstalle.','encarts');
 	effacer_meta($nom_meta_base_version);
 }
 
