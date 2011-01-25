@@ -347,10 +347,10 @@ add_variables( array(
 	'nom' => 'ecran_actif',
 	'check' => 'couteauprive:ecran_activer',
 	'defaut' => 1,
-	// code en realpath() pour config/mes_options.php
-	'code:%s' => "// bug SPIP 1.92?, 2.0 et 2.1
+	// code d'appel en realpath() pour config/mes_options.php (SPIP < 2.1)
+	'code:%s' => "// bug SPIP 1.92, 2.0 et 2.1
 if(isset(\$_REQUEST['exec']) && strncmp('admin_couteau_suisse',\$_REQUEST['exec'],20)==0) \$_REQUEST['exec']='admin_couteau_suisse';
-if(!defined('_ECRAN_SECURITE') && @file_exists(\$f=\"".str_replace('\\','/',realpath(dirname(__FILE__)))."/lib/ecran_securite/distant_ecran_securite.php\")) include \$f;",
+".(!defined('_SPIP20100'))?"if(!defined('_ECRAN_SECURITE') && @file_exists(\$f=\"".str_replace('\\','/',realpath(dirname(__FILE__)))."/lib/ecran_securite/distant_ecran_securite.php\")) include \$f;":'',
 ), array(
 	'nom' => 'ecran_load',
 	'format' => _format_NOMBRE,
@@ -362,7 +362,7 @@ add_outil( array(
 	'code:spip_options' => '%%ecran_load%%%%ecran_actif%%',
 	'categorie' => 'securite',
 	'distant' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt',
-	'pipelinecode:fichier_distant' => 'ecran_securite_fichier_distant', 
+	'pipeline:fichier_distant' => defined('_SPIP20100')?'ecran_securite_fichier_distant':'', 
 	'pipelinecode:pre_description_outil' => 'if($id=="ecran_securite") $flux["non"] = !%%ecran_actif%% || !$flux["actif"];',
 	'pipeline:pre_description_outil' => 'ecran_securite_pre_description_outil',
 	'description' => "<:ecran_securite::>{{@_ECRAN_SECURITE@}}@_ECRAN_SUITE@",

@@ -6,7 +6,7 @@ function ecran_securite_pre_description_outil($flux) {
 	$f = dirname(cs_spip_file_options(4))."/ecran_securite.php";
 	// conflit/doublon potentiel ?
 	// $flux['non'] est vrai si le Couteau Suisse ne lance aucun fichier par lui-meme
-	$conf = @file_exists($f) || (defined("_ECRAN_SECURITE") && $flux['non'])
+	$conf = (@file_exists($f) && !defined('_SPIP20100')) || (defined("_ECRAN_SECURITE") && $flux['non'])
 		?"<hr/>\n@puce@ <span style=\"color: red;\">"._T("couteauprive:ecran_conflit".($flux['non']?"2":""), array("file"=>_NOM_PERMANENTS_INACCESSIBLES."ecran_securite.php"))."</span>"
 		:"";
 	if(defined('_ECRAN_SECURITE')) {
@@ -26,10 +26,12 @@ function ecran_securite_pre_description_outil($flux) {
 
 # TODO : eviter l'insertion et recopier le fichier dans config/mes_options.php pour SPIP>=2.1
 function ecran_securite_fichier_distant($flux) {
+	// besoin du 1er appel uniquement
+	if($flux['outil']!='ecran_securite' || isset($flux['texte'])) return $flux;
 	// fichier global de config (y compris la mutu)
-	$f = dirname(cs_spip_file_options(4));
+	$flux['fichier_local'] = dirname(cs_spip_file_options(4)).'/ecran_securite.php';
 	// fichier local de config
-	$f = dirname(cs_spip_file_options(3));
+	#$flux['fichier_local'] = dirname(cs_spip_file_options(3)).'/ecran_securite.php';
 	return $flux;
 }
 

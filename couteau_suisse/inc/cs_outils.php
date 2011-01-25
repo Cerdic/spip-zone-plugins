@@ -236,15 +236,23 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	$a = array();
 	foreach($outil['fichiers_distants'] as $i) {
 		$erreur = false;
+		$res_pipe = '';
 		$dir = sous_repertoire($lib, $outil['id']);
 		preg_match('/[^?]*/', basename($outil[$i]), $reg); 
 		$f = 'distant_' . $reg[0];
-		$file = $dir.$f;
+		$file = pipeline('fichier_distant', array('outil'=>$outil['id'], 'fichier_local'=>$dir.$f));
+		$file = $file['fichier_local'];
+		$f = basename($file);
 		$size = ($forcer || @(!file_exists($file)) ? 0 : filesize($file));
 		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
 		elseif($outil['actif'] || $forcer) {
 			include_spip('inc/distant');
 			if($distant = recuperer_page($outil[$i])) {
+				$distant = pipeline('fichier_distant', array('outil'=>$outil['id'], 'fichier_local'=>$file, 
+						'fichier_distant'=>$outil[$i], 'message'=>'', 'texte'=>$distant, 'actif'=>$outil['actif']));
+				$file = $distant['fichier_local'];
+				$message = $distant['message'] . "\n_ " . _T('couteauprive:copie_vers', array('dir'=>dirname($distant['fichier_local']).'/'));
+				$distant = $distant['texte'];
 				if(preg_match(',\.php\d?$,', $file)) {
 					$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
 					if(!@eval("return true; $test")) $distant = false;
@@ -255,7 +263,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 			if($distant) $statut = '<span style="color:green">'._T('couteauprive:distant_charge').'</span>';
 			else $erreur = $statut = '<span style="color:red">'._T('couteauprive:distant_echoue').'</span>';
 		} else $erreur = $statut = _T('couteauprive:distant_inactif');
-		$a[] = "[{$f}->{$outil[$i]}]\n_ $statut";
+		$a[] = "[{$f}->{$outil[$i]}]\n_ ".$statut.$message;
 	}
 	if($tester) return $a;
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
