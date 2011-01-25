@@ -247,6 +247,7 @@ function cs_mots_glossaire($texte, $type='', $sep='') {
 		// glossaire deja present, on simplifie donc le texte
 		$texte = join('  ', $reg[1]);
 	$mots = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte, true);
+	if(!count($mots)) return strlen($sep)?'':$mots;
 	$lien = '$v="<a href=\"$v[2]\"';
 	$titre = strpos($type,'_unique')===false?'str_replace("<br />"," / ", $v[3])':'array_shift(explode(_GLOSSAIRE_TITRE_SEP, $v[3]))';
 	switch($type) {
