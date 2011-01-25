@@ -18,7 +18,6 @@ function daterubriques_pre_edition($flux){
 				} else {
 					$flux['data']['ce_date'] = date("Y-m-d");
 				}
-				echo "Date : ".$flux['data']['ce_date'];
 			}
 		}
 	}
