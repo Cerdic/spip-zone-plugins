@@ -25,7 +25,7 @@ function recherche_tables_liens() {
 }
 
 // methodes sql
-function inc_recherche_to_array_dist($recherche, $options) {
+function inc_recherche_to_array_dist($recherche, $options=null) {
 
 	$requete = array(
 	"SELECT"=>array(),
@@ -38,7 +38,8 @@ function inc_recherche_to_array_dist($recherche, $options) {
 	);
 
 	$options = array_merge((array)$options,
-		array('table' => 'article')
+		array('table' => 'article',
+		)
 	);
 
 	$table = $options['table'];
