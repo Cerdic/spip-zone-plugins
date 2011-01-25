@@ -37,9 +37,14 @@ function inc_recherche_to_array_dist($recherche, $options) {
 	"HAVING"=>array()
 	);
 
+	$options = array_merge((array)$options,
+		array('table' => 'article')
+	);
+
 	$table = $options['table'];
 	$serveur = $options['serveur'];
 
+	include_spip('inc/rechercher');
 	list($methode, $q, $preg) = expression_recherche($recherche, $options);
 
 	$l = liste_des_champs();
