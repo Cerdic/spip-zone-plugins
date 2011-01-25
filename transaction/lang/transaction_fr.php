@@ -33,9 +33,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_transaction_0' => 'Non pay&eacute;',
 	'statut_transaction_1' => 'Pay&eacute;',
 	'reference_transaction' => 'R&eacute;f&eacute;rence',
-	'statut_transaction' => 'Statut'
-
+	'statut_transaction' => 'Statut',
+	'merci' => 'Merci de nous avoir fait confiance',
+	'texte_merci' => 'Votre r&egrave;glement a bien &eacute;t&eacute; enregistr&eacute;. Notre organisme vous remercie de votre soutien. ',
+	'regret' => 'Erreur de paiement',
+	'texte_regret' => 'Nous vous informons que la proc&eacute;dure de paiement n\'a pas pu aboutir, si vous n\'&ecirc;tes pas &agrave; l\'origine de cet &eacute;chec veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.<br/><br/>Bonne navigation et &agrave; bient&ocirc;t.'
 	
 );
 
 ?>
+
+
+
