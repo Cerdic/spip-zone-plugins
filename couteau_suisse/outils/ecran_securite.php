@@ -3,7 +3,7 @@
 function ecran_securite_pre_description_outil($flux) {
 	if($flux['outil']!="ecran_securite") return $flux;
 	// ecran de securite dans config/
-	$f = dirname(cs_spip_file_options(3))."/ecran_securite.php";
+	$f = dirname(cs_spip_file_options(4))."/ecran_securite.php";
 	// conflit/doublon potentiel ?
 	// $flux['non'] est vrai si le Couteau Suisse ne lance aucun fichier par lui-meme
 	$conf = @file_exists($f) || (defined("_ECRAN_SECURITE") && $flux['non'])
