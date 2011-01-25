@@ -362,18 +362,9 @@ add_outil( array(
 	'code:spip_options' => '%%ecran_load%%%%ecran_actif%%',
 	'categorie' => 'securite',
 	'distant' => 'http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt',
-	'pipelinecode:pre_description_outil' => 'if($id=="ecran_securite") {
-$conf=@file_exists(_DIR_RACINE.($f=_NOM_PERMANENTS_INACCESSIBLES."ecran_securite.php"))?"<hr/>\\n@puce@ <span style=\"color: red;\">"._T("couteauprive:ecran_conflit", array("file"=>$f))."</span>":"";
-if(defined("_ECRAN_SECURITE")) {
-	$vers=_ECRAN_SECURITE;
-	include_spip("outils/maj_auto_action_rapide");
-	$maj=maj_auto_rev_distante("http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt",false,",(\\d+\\.\\d+(\\.\\d+)?),",0,true);
-	if($maj{0}!="-") 
-		$tmp="\\n".(_ECRAN_SECURITE!=$maj?"- "._T("couteauprive:ecran_maj_ko", array("n"=>"<span style=\"color: red;\">$maj</span>")):_T("couteauprive:ecran_maj_ok"));
-} else $vers=_T("couteauprive:ecran_ko");
-if(!defined("_CS_SPIP_OPTIONS_OK")) $tmp.="\\n- "._T("couteauprive:detail_spip_options2");
-$texte=str_replace(array("@_ECRAN_SECURITE@","@_ECRAN_CONFLIT@","@_ECRAN_SUITE@"),array($vers,$conf,$tmp),$texte);
-}',
+	'pipelinecode:fichier_distant' => 'ecran_securite_fichier_distant', 
+	'pipelinecode:pre_description_outil' => 'if($id=="ecran_securite") $flux["non"] = !%%ecran_actif%% || !$flux["actif"];',
+	'pipeline:pre_description_outil' => 'ecran_securite_pre_description_outil',
 	'description' => "<:ecran_securite::>{{@_ECRAN_SECURITE@}}@_ECRAN_SUITE@",
 ));
 

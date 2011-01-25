@@ -212,6 +212,14 @@ function couteau_suisse_pre_description_outil($flux) {
 		eval($cs_metas_pipelines['pre_description_outil']);
 	return $flux;
 }
+// A l'issue du telechargement d'un fichier distant
+function couteau_suisse_fichier_distant($flux) {
+	global $cs_metas_pipelines;
+	$id = &$flux['outil']; $texte = &$flux['texte'];
+	if(isset($cs_metas_pipelines['pre_description_outil']))
+		eval($cs_metas_pipelines['pre_description_outil']);
+	return $flux;
+}
 
 // callback pour la fonction cs_compile_pipe()
 function cs_compile_header_callback($matches) {

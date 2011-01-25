@@ -14,6 +14,8 @@ if (!isset($GLOBALS['spip_pipeline']['pre_description_outil']))
 	$GLOBALS['spip_pipeline']['pre_description_outil']='';
 // post_description_outil : 2e pipeline de pre_affichage, ici le texte est quasi definitif
 #$GLOBALS['spip_pipeline']['post_description_outil']='';
+// a l'issue du telechargement d'un fichier distant
+$GLOBALS['spip_pipeline']['fichier_distant']='';
 
 // Declaration d'un pipeline servant a inserer un bouton sous la baniere du Couteau Suisse
 if (!isset($GLOBALS['spip_pipeline']['porte_plume_cs_pre_charger']))
@@ -232,17 +234,23 @@ function cs_date_court($numdate) {
 
 // Fichier d'options
 function cs_spip_file_options($code) {
+	// Config generale
+	$glo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
 	// Attention a la mutualisation
 	if(defined('_DIR_SITE')) {
+		// Config locale uniquement
 		$nfo = $fo = _DIR_SITE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
 	} else {
+		// Fichier de config, s'il est present
 		$fo = (defined('_FILE_OPTIONS') && strlen(_FILE_OPTIONS))?_FILE_OPTIONS:false;
-		$nfo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+		// Nom du fichier a creer en cas d'absence
+		$nfo = $glo;
 	}
 	switch($code) {
 		case 1: return $fo;
 		case 2: return $nfo;
 		case 3: return $fo?$fo:$nfo;
+		case 4: return $glo;
 	}
 }
 
