@@ -1,0 +1,45 @@
+<plugin>
+
+	<nom>Encarts</nom>
+
+	<auteur>Camille Lafitte [Webelys->http://www.webelys.com], Cyril MARION [Ateliers CYM->http://www.cym.fr]</auteur>
+
+	<licence>&#169; 2011 - GNU/LGPL</licence>
+
+	<version>1.0</version>
+	
+	<version_base>1.0</version_base>
+
+	<icon>img/frame_edit-32.png</icon>
+
+	<etat>dev</etat>
+
+	<description>Permet aux r&eacute;dacteurs d'ajouter des encarts (ou encadr&eacute;s) dans leurs articles, et aux graphistes les placer n'importe o&ugrave; dans leurs mises-en-page.</description>
+
+	<prefix>encarts</prefix>
+
+	<fonctions>encarts_fonctions.php</fonctions>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/encarts.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/encarts.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/encarts.php</inclure>
+	</pipeline>
+
+	<install>base/encarts.php</install>
+	
+
+	<categorie>outils</categorie>
+
+	<necessite id="SPIP" version="[2.0.10;]" />
+
+</plugin>
