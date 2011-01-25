@@ -24,7 +24,14 @@ if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entrava
 	)){
 		include_spip('inc/autoriser');
 		if (!autoriser('travaux')){
-			echo recuperer_fond("en_travaux",array());
+			$travaux = recuperer_fond("en_travaux",array());
+			// fallback : le fond renvoie parfois du vide ...
+			if (!strlen($travaux)){
+				@define('_SPIP_SCRIPT','spip.php');
+				echo "Acces interdit (en travaux) <a href='"
+				.generer_url_action('logout',"logout=public",false,true)
+				."'>Deconnexion</a>";
+			}
 			die();
 		}
 	}
