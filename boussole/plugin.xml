@@ -2,7 +2,7 @@
 	<nom>Boussole</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GPL</licence>
-	<version>0.4.0</version>
+	<version>0.5.0</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/boussole_icone-64.png</icon>
 	<etat>dev</etat>
@@ -33,6 +33,10 @@ Pour les bricoleurs, vous pouvez aussi utiliser ce plugin pour afficher votre pr
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>boussole_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/boussole_taches_generales_cron.php</inclure>
 	</pipeline>
 
 	<bouton id="boussole" parent="configuration">
