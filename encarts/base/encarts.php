@@ -11,9 +11,6 @@ include_spip('base/create');
 
 function encarts_declarer_tables_interfaces($interface){
 	
-	spip_log('On declare les tables.','encarts');
-
-	
 	$interface['table_des_tables']['encarts'] = 'encarts';
 	
 	$interface['tables_jointures']['spip_articles'][]= 'encarts';
