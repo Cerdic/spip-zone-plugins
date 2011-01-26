@@ -37,11 +37,11 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 	"HAVING"=>array()
 	);
 
-	$options = array_merge((array)$options,
+	$options = array_merge(
 		array('table' => 'article',
-		)
+		),
+		(array)$options
 	);
-
 	$table = $options['table'];
 	$serveur = $options['serveur'];
 
