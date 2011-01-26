@@ -5,10 +5,11 @@
 #SET{largeur,#ENV{largeur,#CONFIG{videos/largeur,'560'}}}
 #SET{hauteur,#ENV{hauteur,#CONFIG{videos/hauteur,'315'}}}
 
-[(#REM) "Extensions" gérées ou rajoutées par le plugin ]
+[(#REM) "Extensions" gérées ou rajoutées par le plugin
 <!--
 	TODO Foutre ça dans une globale ou un autre truc histoire de pas oublier de le modifier...
 -->
+]
 [(#SET{lesExtensions,
 	#ARRAY{	1,dist_daily,
 			2,dist_youtu,
@@ -83,10 +84,10 @@
 	
 [(#REM)
 /** Traiter les vidéos H264 en HTML5 **/
-]
 <!--
 	TODO Automatiser intelligement l'appel à html5=oui, voir comment identifier le H264 qui est le seul qui pourra être lu par Flash > 9.
 -->
+]
 	[(#ENV{html5}|=={oui}|oui)
 	<div class="playerVideo">
 		<section>
