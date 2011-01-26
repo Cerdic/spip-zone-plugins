@@ -16,13 +16,8 @@ require_once("spipal_tabledata.php");
 
 function inc_spipal_article($id_article) {
 
-    $mod = "<div style='text-align:center'>"._T('spipal:exec_articles_vendre_ou_non');
-    $mod .= '<select onchange="$(\'#truc\').show()" name="action_vente"><option value="0">'._T('spipal:exec_article_pas_vendre')."</option>";
-    
-    $selected = '';
     $pour = '';
-    $prix = 0;
-    if ( $row = est_a_vendre($id_article) ) {
+    if ( $row = est_payable($id_article) ) {
         $prix = $row['prix_unitaire_ht'];
         $selected__1 = '';
         $selected__2 = '';
@@ -37,19 +32,19 @@ function inc_spipal_article($id_article) {
         }
         
     }
+    $mod = "<div style='text-align:center'>"._T('spipal:exec_articles_vendre_ou_non');
+    $mod .= '<select onchange="$(\'#truc\').show()" name="action_vente">';
+    $mod .= '<option value="' . AV_VENTE_GRATUIT . '">'._T('spipal:exec_article_pas_vendre')."</option>";
+    
     if ( $GLOBALS['spipal_metas']['vendre'] )
-        $mod .= "<option value='1' $selected_1>"._T('spipal:exec_article_a_vendre')."</option>";
+        $mod .= "<option value='" . AV_VENTE_ACHAT . "' $selected_1>"._T('spipal:exec_article_a_vendre')."</option>";
     if ( $GLOBALS['spipal_metas']['donner'] )
-        $mod .= "<option value='2' $selected_2>"._T('spipal:exec_article_a_votre_bon_coeur')."</option>";
-    $mod .= '</select>'.$pour;
+        $mod .= "<option value='" . AV_VENTE_DON . "' $selected_2>"._T('spipal:exec_article_a_votre_bon_coeur')."</option>";
+
+    $mod .= '</select> '.$pour;
     $mod .= '</div>';
     
-    $mod .= "<div id='truc' style='display:none; margin-top:10px'>";
-    $mod .= mbt_echo_form_table(
-        'spip_spipal_produits', 
-        '', 
-        $id_article,
-        array(
+    $sizes = array(
             'ref_produit' => array(
                 'size' => 30,
             ),
@@ -62,13 +57,13 @@ function inc_spipal_article($id_article) {
             'tva' => array(
                 'size' => 10
             )
-        ),
-	'spipal',
-        false
-    );
+		  );
 
-    $mod .= "<button type='submit'>maj</button>";
-    $mod .="</div>";
+
+    $mod .= "<div id='truc' style='display:none; margin-top:10px'>"
+      .  mbt_echo_form_table('spip_spipal_produits', '',  $id_article, $sizes,'spipal', false)
+      . "<button type='submit'>maj</button>"
+      . "</div>";
     
     return debut_cadre_relief(_DIR_PLUGIN_SPIPAL_ICONES.'avendre.png', true, '', '')
       . redirige_action_auteur("spipal_proposer", $id_article, 'articles', "id_article=$id_article", $mod)

@@ -168,20 +168,10 @@ static $cpt_id = 0;
     return $hiddens . '<table>' . join("\n", $total) . '</table>';
 }
 
-function mbt_maj_table_depuis_form($table_mysql, $action)
+function declare_item($table_mysql, $desc)
 {
-    $trouver_table = charger_fonction('trouver_table', 'base');
-    $abstract = $trouver_table($table_mysql);
-    $fields = $abstract['field'];
-    
-    $pks    = explode(',', $abstract['key']['PRIMARY KEY']);
-    foreach ( $pks as $k => $v) $pks[$k] = trim($v);
-
-    if ($action == 'maj')
-      return maj_item($table_mysql, $fields, $pks);
-    
     $args = array();
-    foreach ($fields as $k => $v) {
+    foreach ($desc['field'] as $k => $v) {
       if ( $v !== 'TIMESTAMP' AND isset($_REQUEST[$k]) ) {
 	$args[$k]= $_REQUEST[$k];
 
@@ -191,10 +181,11 @@ function mbt_maj_table_depuis_form($table_mysql, $action)
 }
 
 
-function maj_item($table_mysql, $desc, $pks)
+function maj_item($table_mysql, $desc)
 {
+	$pks    = preg_split('/\s*,\s*/', $desc['key']['PRIMARY KEY']);
 	$fields = array();
-	foreach ($desc as $k => $v) {
+	foreach ($desc['field'] as $k => $v) {
                 if ( $v !== 'TIMESTAMP')
 		  $fields[$k] = $_REQUEST[$k];
 	}
@@ -211,10 +202,5 @@ function maj_item($table_mysql, $desc, $pks)
 	}
 	if ($and !== false)
 	  sql_updateq($table_mysql, $fields, join(" AND ", $and));
-}
-
-function supprimer_item($table_mysql, $pk, $id)
-{
-	sql_delete($table_mysql, "$pk=" . intval($id));
 }
 ?>

@@ -13,10 +13,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_DIR_PLUGIN_SPIPAL_ICONES', _DIR_PLUGIN_SPIPAL.'img_pack/');
 define ('AV_VENTE_GRATUIT', 0);
-define ('AV_VENTE_ACHAT',   1);
-define ('AV_VENTE_DON',     2); //prix de vente = 0;
+define ('AV_VENTE_DON',     1);
+define ('AV_VENTE_ACHAT',   2);
 
-function est_a_vendre($id_article) {
+function est_payable($id_article) {
 	return sql_fetsel('*', 'spip_spipal_produits', "id_article=" . intval($id_article));
 }
 

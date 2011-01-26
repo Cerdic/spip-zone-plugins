@@ -27,7 +27,7 @@ function formulaires_payer_charger($id_article=0, $validation='valider')
 	$row['quantite'] = _request('quantite');
 	if (!is_numeric($row['quantite'])) $row['quantite'] = 1;
 
-	$row['taxes'] = $don ? 0 
+	$row['taxes'] = $row['don'] <=1 ? 0 
 	  : round($row['prix_unitaire_ht'] * $row['tva'] / 100, 2);
 	$row['prix_unitaire_ttc'] = $row['taxes'] + $row['prix_unitaire_ht'];
 	$row['total_ttc'] = $row['quantite'] * $row['prix_unitaire_ttc'];

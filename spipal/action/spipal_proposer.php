@@ -12,26 +12,26 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip("inc/spipal_tabledata");
-
 function action_spipal_proposer_dist() {
     $securiser_action = charger_fonction('securiser_action', 'inc');
-    $arg = $securiser_action();
+    $arg = intval($securiser_action());
     
-    $action     = _request('action_vente');
-    if ( $action ) {
+    $action     =  _request('action_vente');
+    if (!$action )
+      sql_delete('spip_spipal_produits', "id_article=" . $arg);
+    else  {
         $_REQUEST['id_article'] = $arg;
-        $_REQUEST['don']        = ($action == AV_VENTE_DON )?1:0;
-        $action      = est_a_vendre($_REQUEST['id_article'])?'maj':'creer';
+        $_REQUEST['don']        = $action;
 
-        if ( !_request('ref_produit') )
-	  $_REQUEST['ref_produit'] = $_REQUEST['id_article'];
-	mbt_maj_table_depuis_form('spip_spipal_produits', $action);
-    }
-    else {
-      supprimer_item('spip_spipal_produits', 'id_article', $arg);
-    }
+        if ( !_request('ref_produit') )	  $_REQUEST['ref_produit'] = $arg;
 
+	include_spip("inc/spipal_tabledata");
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table('spip_spipal_produits');
+	if (est_payable($arg))
+	  maj_item('spip_spipal_produits', $desc);
+	else declare_item('spip_spipal_produits', $desc);
+    }
 }
 
 ?>
