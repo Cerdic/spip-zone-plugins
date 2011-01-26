@@ -274,7 +274,7 @@ class Crayon {
 					break;
 				case 'ligne':
 				default:
-					$input = '<input class="crayon-active" type="text"'
+					$input = '<input class="crayon-active text" type="text"'
 					. ' name="content_'.$this->key.'_'.$champ.'"'
 					. ' value="'
 					. entites_html($val)
