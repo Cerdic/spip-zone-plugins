@@ -32,7 +32,6 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 		}
 		
 		// On change la version
-		echo "Mise à jour du plugin menus en version $version_cible<br/>";
 		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 	
 	}
