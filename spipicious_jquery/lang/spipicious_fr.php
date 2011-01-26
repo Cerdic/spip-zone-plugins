@@ -40,12 +40,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipicious' => 'Spip.icio.us',
 
 	// T
-	'tag_ajoute' => 'Vous avez ajout&eacute; un tag:<br />@name@',
+	'tag_ajoute' => 'Vous avez ajout&eacute; un tag&nbsp;:<br />@name@',
 	'tag_deja_present' => 'Vous aviez d&eacute;j&agrave; ajout&eacute; ce tag.',
-	'tag_supprime' => 'Vous avez supprim&eacute; le tag :<br />@name@',
+	'tag_supprime' => 'Vous avez supprim&eacute; le tag&nbsp;:<br />@name@',
 	'tags' => 'Tags :',
-	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags :<br />@name@',
-	'tags_supprimes' => 'Vous avez supprim&eacute; plusieurs tags :<br />@name@',
+	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags&nbsp;:<br />@name@',
+	'tags_supprimes' => 'Vous avez supprim&eacute; plusieurs tags&nbsp;:<br />@name@',
 	'title_tag_utilise_nb' => 'Ce mot cl&eacute; est associ&eacute; par @nb@ personnes.',
 	'title_tag_utilise_un' => 'Ce mot cl&eacute; est associ&eacute; par une personne.',
 	'to' => 'avec',

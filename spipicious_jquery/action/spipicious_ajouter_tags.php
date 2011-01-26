@@ -4,10 +4,10 @@
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
- * Quentin Drouet
+ * kent1 (kent1@arscenic.info)
  * Erational
  *
- * 2007-2009 - Distribue sous licence GNU/GPL
+ * © 2007-2011 - Distribue sous licence GNU/GPL
  *
  */
 

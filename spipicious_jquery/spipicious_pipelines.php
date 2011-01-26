@@ -5,17 +5,18 @@
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
- * Quentin Drouet
+ * kent1 (kent1@arscenic.info)
  * Erational
  *
- * 2007-2009 - Distribue sous licence GNU/GPL
- *
+ * © 2007-2011 - Distribue sous licence GNU/GPL
+ * 
+ * Fichiers des pipelines du plugin
  */
 
 /**
  * Insertion du code javascript nécessaire dans le head
  *
- * @param object $flux
+ * @param string $flux
  * @return
  */
 function spipicious_insert_head($flux){
