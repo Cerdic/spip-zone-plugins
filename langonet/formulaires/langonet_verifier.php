@@ -338,7 +338,8 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 					// Traitement de la coloration de l'extrait. C'est la fonction de coloration qui s'occupe des
 					// entites html
 					$infos = pathinfo($fichier);
-					$extension = ($infos['extension'] == 'html') ? 'html4strict' : $infos['extension'];
+					$extension = ($infos['extension'] == 'html') ? 'html4strict' : 
+								 (($infos['extension'] == 'yaml') ? 'spip' : $infos['extension']);
 					$T = $f_coloriser('... '.$ligne_t[0].' ...',  $extension, 'code', 'span');
 				}
 				else
