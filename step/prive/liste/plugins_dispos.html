@@ -2,7 +2,7 @@
 [(#SET{totodo,[(#ENV**{_todo}|unserialize)]})]<B_plugins>
 <div class="liste-elements plugins_dispos">
 <table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,<:step:plugins_trouves:> : #GRAND_TOTAL})</strong></caption>]
+[<caption><strong class="caption">(#ENV*{titre,[(#GRAND_TOTAL|singulier_ou_pluriel{<:step:plugin_trouve:>,<:step:plugins_trouves:>})]})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='logo'></th>

@@ -60,7 +60,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_finale_stop_ok' => 'La d&eacute;sinstallation du plugin &laquo;@plugin@&raquo; (version : @version@) s\'est correctement d&eacute;roul&eacute;e',
 	'message_action_finale_up_fail' => 'La mise &agrave; jour du plugin &laquo;@plugin@&raquo; (version : @version@) ne s\'est pas correctement d&eacute;roul&eacute;e',
 	'message_action_finale_up_ok' => 'La mise &agrave; jour du plugin &laquo;@plugin@&raquo; (version : @version@) s\'est correctement d&eacute;roul&eacute;e',
-	'messages_actions_realisees' => 'L\'ensemble des actions demand&eacute;es ont &eacute;t&eacute; realis&eacute;es.',
+	'message_action_lib' => 'R&eacute;cup&eacute;rer et installer la librairie &laquo;@plugin@&raquo; (depuis : <a href="@version" class="spip_out">@version@</a>)',
+	'message_action_finale_lib_fail' => 'L\'installation de la librairie &laquo;@plugin@&raquo; a &eacute;chou&eacute;',
+	'message_action_finale_lib_ok' => 'La librairie &laquo;@plugin@&raquo; a &eacute;t&eacute; install&eacute;e',
+	'messages_actions_realisees' => 'L\'ensemble des actions demand&eacute;es ont &eacute;t&eacute; r&eacute;alis&eacute;es.',
 	'message_dependance_plugin' => 'Le plugin @plugin@ d&eacute;pend de @dependance@.',
 	'message_dependance_plugin_version' => 'Le plugin @plugin@ d&eacute;pend de @dependance@ @version@',
 	'message_erreur_ecriture_lib' => '&laquo;@plugin@&raquo; a besion de la librairie <a href=\'@lib_url@\'>@lib@</a>
@@ -100,7 +103,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// champs des plugins
 	'pas_de_plugin_trouve' => 'Aucun plugin trouv&eacute; correspondant &agrave; vos crit&egrave;res.',
 	'plugin_nom' => 'Nom',
-	'plugins_trouves' => 'Plugins trouv&eacute;s',
+	'plugin_trouve' => 'Un plugin correspondant &agrave; vos crit&egrave;res.',
+	'plugins_trouves' => '@nb@ plugins correspondant &agrave; vos crit&egrave;res.',
 	'plugin_upgrade_possible' => 'Mise &agrave; jour disponible',
 	'plugin_upgrade_possible_version' => 'La version @version@ est disponible',
 	'plugins_utilises_recemment' => 'Plugins utilis&eacute;s r&eacute;cemment',

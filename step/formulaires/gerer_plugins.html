@@ -10,7 +10,7 @@
 		(function ($){
 		$(document).ready(function() {
 			$('.cacher').hide();
-			var i = i;
+			var i = 1;
 			var img_plus = '[(#CHEMIN{images/rechercher-plus-16.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>}|texte_script)]';
 			var img_moins = '[(#CHEMIN{images/replier-12.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>}|texte_script)]';
 			var text_plus = '<:step:rechercher_plus|texte_script:>';
@@ -28,7 +28,7 @@
 				}
 				var append = '<li class="editer_more">';
 				append += '<label for="rechercher"> <\/label>';
-				append += '<button name="more' + i + '" class="button rechercher_'+action+'" title="'+text+'">';
+				append += '<button name="more'+i+'" class="button rechercher_'+action+'" title="'+text+'">';
 				append += img;
 				append += '<\/button><\/li>';
 				$(this).prev('ul').append(append);
@@ -105,7 +105,7 @@
 			<ul>
 				<li class="editer_recherche">
 					<label for='step_selection'><:step:rechercher:></label>
-					<input type='text' name='recherche' class='text' id='step_selection' value='#ENV{recherche}' />
+					<input type='text' name='recherche' class='text' id='step_selection' value='#ENV{recherche}' size="40" />
 					<input type='submit' name='rechercher' class='submit' style="display:none;" value='<:info_rechercher:>' />
 				</li>
 				[(#SET{afficher,[(#ENV{actif}|!={''}

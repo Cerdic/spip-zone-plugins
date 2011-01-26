@@ -1,6 +1,6 @@
 <div class='formulaire_spip formulaire_#FORM'>
 	<h3 class='titrem'><:step:actions_proposees:></h3>
-
+	<div class="reponses">
 	[<p class="reponse_formulaire reponse_formulaire_ok">
 		(#ENV**{erreurs}|table_valeur{actionneur_action})
 	</p>]
@@ -8,6 +8,7 @@
 	[<div class="reponse_formulaire reponse_formulaire_actions">
 		(#ENV**{erreurs}|table_valeur{actionneur_actions})
 	</div>]
+	</div>
 
 	<form method='post' action='#ENV{action}'[ class="(#ENV{gogogo}|>{0}|?{ok})"]><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
