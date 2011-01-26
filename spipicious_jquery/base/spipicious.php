@@ -57,7 +57,7 @@ function spipicious_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	$spip_mots_documents_key = array(
 			"PRIMARY KEY"	=> "id_mot, id_document",
-			"KEY id_evenement"	=> "id_document");
+			"KEY id_document"	=> "id_document");
 
 	$tables_auxiliaires['spip_mots_documents'] = array(
 		'field' => &$spip_mots_documents,
