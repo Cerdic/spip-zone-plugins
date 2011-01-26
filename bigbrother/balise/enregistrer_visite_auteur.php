@@ -16,10 +16,7 @@ function balise_ENREGISTRER_VISITE_AUTEUR($p) {
     if (lire_config('bigbrother/visite_entree') != 'oui')
     	return null;
 
-    if(!$i_boucle){
-		spip_log($GLOBALS['contexte'],'test');
-		spip_log($GLOBALS['page'],'test');
-    }else{
+    if($i_boucle)
 	    return calculer_balise_dynamique(
 	    	$p,
 	    	'ENREGISTRER_VISITE_AUTEUR',array(
@@ -27,7 +24,6 @@ function balise_ENREGISTRER_VISITE_AUTEUR($p) {
 				$_id_objet
 			)
 	    );
-    }
 }
 
 function balise_ENREGISTRER_VISITE_AUTEUR_stat($args, $context_compil) {
