@@ -4,13 +4,13 @@
         <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="item_number" value="#ENV{ref_produit}" />
         <input type="hidden" name="business" value="#META{/spipal/compte_paypal}" />
- [(#ENV{don}|>{1}|?{'', ' '})
+ [(#ENV{taxes}|?{'', ' '})
 		<input type="hidden" name="quantity" value="1" />
-		<input type="[(#ENV{prix_unitaire_ttc}|=={0}|?{hidden,text})]"
+		<input type="text"
 			name="amount"
 			value="#ENV{prix_unitaire_ttc}"
 			size="5" style="text-align: right"  />
-][(#ENV{don}|>{1}|?{' ', ''})
+][(#ENV{taxes}|?{' ', ''})
 		<input type="text" name="quantity" value="#ENV{quantity,1}" size="5" readonly="readonly" style="text-align: center" /> x
 		<input type="text" name="amount_ttc" size="5" style="text-align: right" disabled="disabled" value="[(#ENV{prix_unitaire_ttc})]" />
 		<alt type="hidden" name="tax" value="#ENV{taxes}" />
@@ -23,6 +23,6 @@
         <input type="hidden" name="custom" value="#ENV{custom}" />
         <input type="hidden" name="return" value="#META{/spipal/url_retour}" />
         <input type="hidden" name="notify_url" value="#META{/spipal/notify_url}" />
-            <img src="https://www.paypal.com/<:spipal:lang_lang:>/i/btn/x-click-but0[(#ENV{don}|=={1}|?{4,2})].gif" style="margin: 0px; border: 0px none transparent; cursor:pointer; vertical-align: middle;" onclick="document.getElementById('_xclick').submit();" alt=""/>
+            <img src="https://www.paypal.com/<:spipal:lang_lang:>/i/btn/x-click-but0[(#ENV{taxes}|?{4,2})].gif" style="margin: 0px; border: 0px none transparent; cursor:pointer; vertical-align: middle;" onclick="document.getElementById('_xclick').submit();" alt=""/>
     </div>    
 </form>

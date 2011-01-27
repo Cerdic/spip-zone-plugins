@@ -97,8 +97,9 @@ function validation_pp_http_VERIFIED($env) {
 function inc_valider_spipal_dist($env)
 {
 	$custom = @unserialize($env['custom']);
+	$id = ($custom['id_auteur'] < 0) ? (0-$custom['id_auteur']) : $custom['id_auteur'];
 	$res = array('item_number' => $env['item_number'],
-		     'id_auteur' => $custom['id_auteur'],
+		     'id_auteur' => $id,
 		     'versement_ht' => (($env['payment_gross']?$env['payment_gross']:$env['mc_gross']) - $env['tax']),
 		     'versement_taxes' => $env['tax'],
 		     'versement_charges' => $env['payment_fee']?$env['payment_fee']:$env['mc_fee'],
