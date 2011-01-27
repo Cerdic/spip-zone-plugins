@@ -1,12 +1,12 @@
 <plugin>
 	<nom>Association_2</nom>
 	<auteur>
-	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James - Jeannolapin
+	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James
 	</auteur>
 	<version>0.65</version>
-	<version_base>43909</version_base>
+	<version_base>42024</version_base>
 	<meta>association_metas</meta>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
@@ -31,5 +31,5 @@
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.1.1;]" />
 </plugin>

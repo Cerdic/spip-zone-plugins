@@ -49,12 +49,10 @@ function exec_edit_plan(){
 			$commentaire=$data["commentaire"];
 			$solde_anterieur=$data['solde_anterieur'];
 			$date_anterieure=$data['date_anterieure'];
-			$direction=$data['direction'];
 			$action = 'modifier';
 		} else {
 			$code=$classe=$intitule=$reference=$actif=$commentaire=$solde_anterieur='';
 			$date_anterieure= date('Y-m-d');
-			$direction = 'credit';
 			$action = 'ajouter';
 		}
 		$checked = ($actif=="oui" || $action=="ajouter");
@@ -67,31 +65,15 @@ function exec_edit_plan(){
 		. '<input name="classe" type="text" value="'
 		. $classe
 		. '" id="classe" class="formo" />'
-		. '<label for="intitule"><strong>' . _T('asso:intitule') . '&nbsp;:</strong></label>'
+		. '<label for="intitule"><strong>' . _T('asso:intitule') . '&nbsp;;</strong></label>'
 		. '<input name="intitule" type="text" value="'
 		. $intitule
 		. '" id="intitule" class="formo" />'
 		. '<label for="reference"><strong>' . _T('asso:reference') . '&nbsp;:</strong></label>'
 		. '<input name="reference" type="text" value="'
 		. $reference
-		. '" id="reference" class="formo" />';
-		if ($GLOBALS['association_metas']['comptes_stricts']=="on") {
-			if ($direction == "credit") {
-				$select_credit = 'selected="selected"';
-				$select_debit = '';
-			}
-			else
-			{
-				$select_credit = '';
-				$select_debit = 'selected="selected"';
-			}
-			$res .= '<label for="direction"><strong>' . _T('asso:direction_plan'). '</strong></label>'
-			. '<select name="direction" id="direction" class="formo">'
-			. '<option value="credit"'.$select_credit.'>credit</option>'
-			. '<option value="debit"'.$select_debit.'>debit</option>'
-			. '</select>';
-		}
-		$res .= '<label for="solde_anterieur"><strong>' . _T('asso:solde_reporte_en_euros') . '</strong></label>'
+		. '" id="reference" class="formo" />'
+		. '<label for="solde_anterieur"><strong>' . _T('asso:solde_reporte_en_euros') . '</strong></label>'
 		. '<input name="solde_anterieur" type="text" value="'
 		. $solde_anterieur
 		. '" id="solde_anterieur" class="formo" />'

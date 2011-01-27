@@ -14,9 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_supprimer_comptes() {
 		
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_compte = $securiser_action();
-	sql_delete('spip_asso_comptes', 'id_compte=' . $id_compte);
-	/* on efface de la table destination_op toutes les entrees correspondant a cette operation */
-	sql_delete('spip_asso_destination_op', 'id_compte=' . $id_compte);
+	sql_delete('spip_asso_comptes', 'id_compte=' . $securiser_action());
 }
 ?>

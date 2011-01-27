@@ -32,7 +32,7 @@ function association_vider_tables($nom_meta, $table){
 		sql_drop_table($nom);
 	foreach($association_tables_auxiliaires as $nom => $desc)
 		sql_drop_table($nom);
-	spip_log("$table $nom_meta desinstalle");
+	spip_log("plugin association desinstalle");
 }
 
 // MAJ des tables de la base SQL
@@ -40,6 +40,7 @@ function association_vider_tables($nom_meta, $table){
 
 function association_upgrade($meta, $courante, $table='meta')
 {
+
   // Compatibilite: le nom de la meta donnant le numero de version
   // n'etait pas std puis est parti dans une autre table puis encore une autre
 
@@ -54,17 +55,14 @@ function association_upgrade($meta, $courante, $table='meta')
 	} else $n = $GLOBALS['association_metas']['base_version'];
 	effacer_meta('association_base_version');
 	spip_log("association upgrade: $table $meta = $n =>> $courante");
-	if (!$n) {
-		include_spip('base/create');
-		alterer_base($GLOBALS['association_tables_principales'],
-			     $GLOBALS['association_tables_auxiliaires']);
-		ecrire_meta($meta, $courante, NULL, $table);
-		return 0; // Reussite (supposee !)
-	} else {
+	if (!$n)
+		return association_maj_0($courante, $meta, $table);
+	else {
 	// compatibilite avec les numeros de version non entiers
 		$installee = ($n > 1) ? $n : ($n * 100);
 		$GLOBALS['association_maj_erreur'] = 0;
 		if ($courante > $installee) {
+			include_spip('base/association');
 			include_spip('base/upgrade');
 			$n = maj_while($installee, $courante, $GLOBALS['association_maj'], $meta, $table);
 			$n = $n ? $n[0] : $GLOBALS['association_maj_erreur'];
@@ -74,6 +72,17 @@ function association_upgrade($meta, $courante, $table='meta')
 		return $GLOBALS['association_maj_erreur'];
 	}
 }
+
+function association_maj_0($version, $meta, $table){
+	global $association_tables_principales, $association_tables_auxiliaires;
+	foreach($association_tables_principales as $nom => $desc)
+		sql_create($nom, $desc['field'], $desc['key'], true, false);
+	foreach($association_tables_auxiliaires as $nom => $desc)
+		sql_create($nom, $desc['field'], $desc['key'], false, false);
+	ecrire_meta($meta, $version, NULL, $table);
+	return 0; // Reussite (supposee !)
+}
+			
 
 $GLOBALS['association_maj'][21] = array(array('sql_alter',"TABLE spip_asso_adherents ADD publication text NOT NULL AFTER secteur"));
 
@@ -159,20 +168,4 @@ function association_maj_42024()
 }
 
 $GLOBALS['association_maj'][42024] = array(array('association_maj_42024'));
-
-function association_maj_43909()
-{
-	global $association_tables_principales;
-
-	sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'");
-	sql_create('spip_asso_destination', 
-		$association_tables_principales['spip_asso_destination']['field'],
-		$association_tables_principales['spip_asso_destination']['key']);
-	sql_create('spip_asso_destination_op', 
-		$association_tables_principales['spip_asso_destination_op']['field'],
-		$association_tables_principales['spip_asso_destination_op']['key']);
-}
-
-$GLOBALS['association_maj'][43909] = array(array('association_maj_43909'));
-
 ?>
