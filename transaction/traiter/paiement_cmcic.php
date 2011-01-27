@@ -53,14 +53,9 @@ function traiter_paiement_cmcic_dist($args, $retours){
 		if (substr($type_traitement,0,9) == "paiement_") $nb_paiement++;
 	}
 	
-	//On envoi vers la banque si CMCIC est le seul mode de paiement sinon on affiche les choix possibles
-	if ($nb_paiement == 1) {
-		$retours['redirect'] = find_in_path("paiement/cmcic/paiement.php");
-	} else {
-		// Le formulaire a été validé, on le masque
-		$retours['editable'] = false;
-		$retours['message_ok'] .=  "<span class='transaction_ok cmcic'>"._T('transaction:traiter_message_cmcic')."</span>";
-	}
+	// Le formulaire a été validé, on le masque
+	$retours['editable'] = false;
+	$retours['message_ok'] .=  "<span class='transaction_ok cmcic'>"._T('transaction:traiter_message_cmcic')."</span>";
 
 	//enregistrement des résultats
 	$options = $args['options'];
