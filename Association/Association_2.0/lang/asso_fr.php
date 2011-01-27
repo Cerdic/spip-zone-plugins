@@ -1,67 +1,67 @@
 <?php
 
-	// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 		
-		# Titres globaux
-			'titre_gestion_pour_association' => 'Gestion pour Association',
-			'titre_relance' => 'Renouvellement de votre cotisation',
-			'titre_menu_gestion_association' => 'Gestion Association',
-			'titre_page_config' => 'Configuration du plugin',
+# Titres globaux
+	'titre_gestion_pour_association' => 'Gestion pour Association',
+	'titre_relance' => 'Renouvellement de votre cotisation',
+	'titre_menu_gestion_association' => 'Gestion Association',
+	'titre_page_config' => 'Configuration du plugin',
 		
-		# Navigation
-			'menu2_titre_gestion_membres' => 'Gestion des membres',
-			'menu2_titre_relances_cotisations' => 'Relances des cotisations',
-			'menu2_titre_gestion_dons' => 'Gestion des dons',
-			'menu2_titre_ventes_asso' => 'Ventes associatives',
-			'menu2_titre_gestion_activites' => 'Gestion des activit&eacute;s',
-			'menu2_titre_livres_comptes' => 'Livres de comptes',
-			'menu2_titre_gestion_prets' => 'Gestion des pr&ecirc;ts',
+# Navigation
+	'menu2_titre_gestion_membres' => 'Gestion des membres',
+	'menu2_titre_relances_cotisations' => 'Relances des cotisations',
+	'menu2_titre_gestion_dons' => 'Gestion des dons',
+	'menu2_titre_ventes_asso' => 'Ventes associatives',
+	'menu2_titre_gestion_activites' => 'Gestion des activit&eacute;s',
+	'menu2_titre_livres_comptes' => 'Livres de comptes',
+	'menu2_titre_gestion_prets' => 'Gestion des pr&ecirc;ts',
 			
-	#Configuration
-		# Libellé
-			'config_libelle_nom' => 'Nom',
-			'config_libelle_email' => 'Adresse courriel',
-			'config_libelle_adresse' => 'Adresse',
-			'config_libelle_rue' => 'Rue',
-			'config_libelle_num_rue' => 'N&deg;',
-			'config_libelle_ville' => 'Ville',
-			'config_libelle_codepostal' => 'Code Postal',
-			'config_libelle_telephone' => 'T&eacute;l&eacute;phone',
-			'config_libelle_siret' => 'N&deg; SIRET',
-			'config_libelle_declaration' => 'N&deg; de d&eacute;claration',
-			'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
-			'config_info_asso' => 'Donn&eacute;es de l\'association',
-			'config_info_plugin' => 'Options du plugin',
-			'config_libelle_classe_banques' => 'Classe des comptes financiers',
-			'config_libelle_dons'=> 'Gestion des dons et colis',
-			'config_libelle_ventes'=> 'Gestion des ventes associatives',
-			'config_libelle_comptes'=> 'Gestion comptable',
-			'config_libelle_destinations'=> 'Gestion des destinations comptables',
-			'config_libelle_comptes_stricts'=> 'Activer le mode strict de comptabilit&eacute;(comptes unidirectionnels dans le plan comptable)',
-			'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
-			'config_libelle_prets'=> 'Gestion des pr&egrave;ts et ressources',
-			'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
-			'config_libelle_id_adherent'=>'Automatis&eacute;e',
-			'config_libelle_id_asso'=>'Libre',
-			'config_libelle_num_pc'=>'R&eacute;f. comptable',
-			'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',	
-			'config_libelle_spip_listes'=> 'Liste de diffusion par d&eacute;faut (n&eacute;cessite le plugin Spip_listes)',
+#Configuration
+	# Libellé
+	'config_libelle_nom' => 'Nom',
+	'config_libelle_email' => 'Adresse courriel',
+	'config_libelle_adresse' => 'Adresse',
+	'config_libelle_rue' => 'Rue',
+	'config_libelle_num_rue' => 'N&deg;',
+	'config_libelle_ville' => 'Ville',
+	'config_libelle_codepostal' => 'Code Postal',
+	'config_libelle_telephone' => 'T&eacute;l&eacute;phone',
+	'config_libelle_siret' => 'N&deg; SIRET',
+	'config_libelle_declaration' => 'N&deg; de d&eacute;claration',
+	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
+	'config_info_asso' => 'Donn&eacute;es de l\'association',
+	'config_info_plugin' => 'Options du plugin',
+	'config_libelle_classe_banques' => 'Classe des comptes financiers',
+	'config_libelle_dons'=> 'Gestion des dons et colis',
+	'config_libelle_ventes'=> 'Gestion des ventes associatives',
+	'config_libelle_comptes'=> 'Gestion comptable',
+	'config_libelle_destinations'=> 'Gestion des destinations comptables',
+	'config_libelle_comptes_stricts'=> 'Activer le mode strict de comptabilit&eacute;(comptes unidirectionnels dans le plan comptable)',
+	'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
+	'config_libelle_prets'=> 'Gestion des pr&egrave;ts et ressources',
+	'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
+	'config_libelle_id_adherent'=>'Automatis&eacute;e',
+	'config_libelle_id_asso'=>'Libre',
+	'config_libelle_num_pc'=>'R&eacute;f. comptable',
+	'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',	
+	'config_libelle_spip_listes'=> 'Liste de diffusion par d&eacute;faut (n&eacute;cessite le plugin Spip_listes)',
 		
-		# Entetes globales
-			'entete_id' => 'ID',
-			'entete_action' => 'Action',
+	# Entetes globales
+	'entete_id' => 'ID',
+	'entete_action' => 'Action',
 		
-		# Boutons globaux
-			'bouton_retour' => 'Retour',
-			'bouton_confirmer' => 'Confirmer',
-			'bouton_modifie' => 'Modifier',
-			'bouton_ajoute' => 'Ajouter',
-			'bouton_envoyer' => 'Envoyer',
-			'bouton_soumettre' => 'Soumettre',
-			'bouton_supprimer' => 'Supprimer',
-			'bouton_impression' => 'Impression',
+	# Boutons globaux
+	'bouton_retour' => 'Retour',
+	'bouton_confirmer' => 'Confirmer',
+	'bouton_modifie' => 'Modifier',
+	'bouton_ajoute' => 'Ajouter',
+	'bouton_envoyer' => 'Envoyer',
+	'bouton_soumettre' => 'Soumettre',
+	'bouton_supprimer' => 'Supprimer',
+	'bouton_impression' => 'Impression',
 	
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'toutes_categories_de_cotisations' => 'Toutes les cat&eacute;gories de cotisations',
