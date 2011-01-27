@@ -36,6 +36,11 @@
 	</pipeline>
 
 	<install>base/encarts.php</install>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>encarts_pipelines.php</inclure>
+	</pipeline>
 	
 
 	<categorie>outils</categorie>

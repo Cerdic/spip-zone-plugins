@@ -1,0 +1,23 @@
+
+<div id="encarts">
+
+	<h3><:encarts:titre_bloc_encarts:></h3>
+	
+	<div class="liste_items encarts">
+	
+		<BOUCLE_encarts_article(ENCARTS spip_encarts_liens){id_article}{statut?}>
+		<div id="encart_#ID_ENCART" class="item encart">
+		
+			<h4 class="titrem #EDIT{titre}">N&deg;&nbsp;#ID_ENCART[ - (#TITRE|sinon{<:encarts:sans_titre:>})]</h4>
+			<div class="infos #EDITE{date}">#DATE</div>
+			<div class="texte #EDIT{texte}">#TEXTE</div>
+		
+		</div>
+		</BOUCLE_encarts_article>
+		</B_encarts_article>
+		<div class="cadre cadre-couleur"><:encarts:message_aucun_encart:></div>
+		<//B_encarts_article>
+	
+	</div>
+	
+</div>	

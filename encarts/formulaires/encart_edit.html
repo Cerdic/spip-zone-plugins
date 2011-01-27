@@ -1,0 +1,27 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_encart,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_encart' value='#ENV{id_encart}' />
+			<input type='hidden' name='id_article' value='#ENV{id_article}' />
+			<ul>
+				[(#SAISIE{input, titre, label=<:encarts:label_titre:>})]
+				
+				[(#SAISIE{textarea, texte,
+					label=<:encarts:label_texte:>,
+					rows=5})]
+				
+			</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+			
+		</div></form>
+	]
+</div>
