@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_titre' => 'Titre',
+	'label_texte' => 'Texte',
 	
 	// M
 	'message_aucun_encart' => 'Cet article ne poss&egrave;de aucun encadr&eacute; pour le moment.',
