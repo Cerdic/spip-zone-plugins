@@ -10,8 +10,8 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	$livre		= $livre_al[$livre_lang];
 	
 	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,'false')));
-
-	$param_cache = array('ref'=>$ref,'wissen'=>$wissen);
+	
+	$param_cache = array('ref'=>$ref,'wissen'=>$wissen,'version_wissen'=>1);
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
 		include_spip('inc/bible_cache');
@@ -28,16 +28,15 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	
 	if (in_array(strtolower($livre),$petit_livre)) {
 		
-		$ref = str_replace($livre_or,$livre.'1,',$ref);
+		$ref = str_replace($livre,$livre.'1,',$ref);
 	} 
 	else {
-		$ref = str_replace($livre_or,$livre,$ref);
+		$ref = str_replace($livre,$livre,$ref);
 	}
 		
 
 	//recuperation du passage
-	
-	
+
 	$url = "http://www.bibelwissenschaft.de/nc/online-bibeln/".$wissen."/lesen-im-bibeltext/bibelstelle/".$ref."/anzeige/single/#iv";
 	
 	include_spip("inc/distant");
