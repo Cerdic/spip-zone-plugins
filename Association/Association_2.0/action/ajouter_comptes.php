@@ -45,10 +45,10 @@ function action_ajouter_comptes() {
 	else
 	{
 		if ($recette_req = _request('recette')){
-			$recette = intval($recette_req);
+			$recette = floatval($recette_req);
 		}
 		if ($depense_req = _request('depense')){
-			$depense = intval($depense_req);
+			$depense = floatval($depense_req);
 		}
 	}
 	$justification= _request('justification');
@@ -103,7 +103,7 @@ function action_ajouter_comptes() {
 				echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_destination_dupliquee').'<br/><h1><a href="'.$url_retour.'">Retour</a><h1>');
 				exit;
 			}
-			$montant = intval(_request('montant_'.$destination_id));
+			$montant = floatval(_request('montant_'.$destination_id));
 			$total_destination += $montant;
 			sql_insertq('spip_asso_destination_op', array(
 			    'id_compte' => $id_compte,
