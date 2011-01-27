@@ -168,4 +168,18 @@ function association_maj_42024()
 }
 
 $GLOBALS['association_maj'][42024] = array(array('association_maj_42024'));
+
+function association_maj_43909()
+{
+	sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'");
+	sql_create('spip_asso_destination', 
+		$association_tables_principales['spip_asso_destination']['field'],
+		$association_tables_principales['spip_asso_destination']['key']);
+	sql_create('spip_asso_destination_op', 
+		$association_tables_principales['spip_asso_destination_op']['field'],
+		$association_tables_principales['spip_asso_destination_op']['key']);
+}
+
+$GLOBALS['association_maj'][43909] = array(array('association_maj_43909'));
+
 ?>

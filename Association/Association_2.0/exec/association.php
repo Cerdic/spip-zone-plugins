@@ -33,7 +33,8 @@ function exec_association() {
 		
 		$res=association_icone(_T('asso:profil_de_lassociation'),  '?exec=configurer_association', 'assoc_qui.png');
 		$res.=association_icone(_T('asso:categories_de_cotisations'),  generer_url_ecrire("categories"), 'cotisation.png',  '');
-		$res.=association_icone(_T('asso:plan_comptable'),  generer_url_ecrire("plan"), 'plan_compte.png',  '');	
+		$res.=association_icone(_T('asso:plan_comptable'),  generer_url_ecrire("plan"), 'plan_compte.png',  '');
+		if ($GLOBALS['association_metas']['destinations']=="on") $res.=association_icone(_T('asso:destination_comptable'),  generer_url_ecrire("destination"), 'plan_compte.png',  '');
 
 		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);	

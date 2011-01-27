@@ -38,6 +38,14 @@
 		<span class="spip_form_erreur">Aucune classe définie au plan comptable !</span>
 		<//B_classe_banques>
 		<p>
+		<input type="checkbox" name="destinations" [(#ENV{destinations}|?{checked="checked"})] id="destinations" />
+		<label><strong><:asso:config_libelle_destinations:></strong></label><br />
+		</p>
+		<p>
+		<input type="checkbox" name="comptes_stricts" [(#ENV{comptes_stricts}|?{checked="checked"})] id="comptes_stricts" />
+		<label><strong><:asso:config_libelle_comptes_stricts:></strong></label><br />
+		</p>
+		<p>
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
 		<B_pc_cotisations>
 		<select name="pc_cotisations" id="pc_cotisations"> 

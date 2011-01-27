@@ -38,6 +38,8 @@
 			'config_libelle_dons'=> 'Gestion des dons et colis',
 			'config_libelle_ventes'=> 'Gestion des ventes associatives',
 			'config_libelle_comptes'=> 'Gestion comptable',
+			'config_libelle_destinations'=> 'Gestion des destinations comptables',
+			'config_libelle_comptes_stricts'=> 'Activer le mode strict de comptabilit&eacute;(comptes unidirectionnels dans le plan comptable)',
 			'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
 			'config_libelle_prets'=> 'Gestion des pr&egrave;ts et ressources',
 			'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
@@ -399,7 +401,24 @@ Commentaire: @commentaire@
 			'plan_libelle_comptes_desactives' => 'Comptes d&eacute;sactiv&eacute;s',
 			'plan_libelle_oui' => 'oui',
 			'plan_libelle_non' => 'non',
+			'direction_plan' => 'Type d\'op&eacute;rations',
+	# Destination comptable
+			'ajouter_destination' => 'ajouter une destination',
+			'supprimer_destination' => 'supprimer',
+		# Titres
+			'destination_comptable' => 'Destination comptable',
+		
+		# Navigation
+			'destination_nav_ajouter' => 'Ajouter une destination comptable',
+		# Bilan
+			'toutes_destination' => 'toutes destinations',
 
+	# Verifications
+			'erreur_titre' => 'Erreur',
+			'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas etre n&eacute;gatives',
+			'erreur_montant_destination' => 'La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l\'op&eacute;ration',
+			'erreur_destination_dupliquee' => 'Une meme destination a &eacute;t&eacute; s&eacute;lectionn&eacute;e plusieurs fois',
+			'erreur_code_plan' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-etre d&eacute;sactiv&eacute;e)',
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',
@@ -425,8 +444,11 @@ Commentaire: @commentaire@
 'compte' => 'Compte',
 'contre_valeur_en_e__' => 'Contre-valeur (en &euro;) :',
 'contrepartie' => 'Contrepartie',
+'crediteur' => 'compte cr&eacute;diteur',
+'debiteur' => 'compte d&eacute;biteur',
 'depense' => 'D&eacute;pense :',
 'depenses' => 'D&eacute;penses',
+'destination' => "Destinations",
 'date_aaaa_mm_jj' => 'Date (AAAA-MM-JJ) :',
 'date_report_aaa_mm_jj' => 'Date report (AAA-MM-JJ) :',
 'date' => 'Date',
@@ -488,6 +510,7 @@ Commentaire: @commentaire@
 'vous_vous_appretez_a_effacer_la_ligne_de_compte' => 'Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte',
 'vous_vous_appretez_a_effacer_le_categorie' => 'Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie',
 'vous_vous_appretez_a_effacer_le_compte' => 'Vous vous appr&ecirc;tez &agrave; effacer le compte',
+'vous_vous_appretez_a_effacer_la_destination' => 'Vous vous appr&ecirc;tez &agrave; effacer la destination',
 'vous_vous_appretez_a_effacer_le_don' => 'Vous vous appr&ecirc;tez &agrave; effacer le don',
 'vous_vous_appretez_a_envoyer' => 'Vous vous appr&ecirc;tez &agrave; envoyer',
 'vous_vous_appretez_a_valider_les_operations' => 'Vous vous appr&ecirc;tez &agrave; valider les op&eacute;rations&nbsp;:',
@@ -507,6 +530,7 @@ Commentaire: @commentaire@
 'modification_des_comptes' => 'Modification des comptes',
 'relance_de_cotisations' => 'Relance de cotisations',
 'suppression_de_compte' => 'Suppression de compte',
+'suppression_de_destination' => 'Suppression de destination',
 'tous_les_dons' => 'Tous les dons',
 'toutes_les_ventes' => 'Toutes les ventes',
 'montant_paye_en_euros' => 'Montant pay&eacute; (en euros)',

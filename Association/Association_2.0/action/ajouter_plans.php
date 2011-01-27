@@ -24,11 +24,27 @@ function action_ajouter_plans() {
 	$solde_anterieur = _request('solde_anterieur');
 	$commentaire = _request('commentaire');
 	$date_anterieure = _request('date_anterieure');
-	plan_insert($actif, $intitule, $reference, $code, $solde_anterieur, $date_anterieure, $classe, $commentaire);
+	if ($GLOBALS['association_metas']['comptes_stricts']=="on") {
+		$direction = _request('direction');
+	}
+	else {
+		$direction = '';
+	}
+
+	/* on verifie que le code n'est pas deja attribue a une ligne du plan */
+	if (sql_fetsel('code', 'spip_asso_plan', "code=$code"))	{
+		include_spip('inc/minipres');
+		$url_retour = generer_url_ecrire('edit_plan');
+		echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_code_plan').'<br/><h1><a href="'.$url_retour.'">Retour</a><h1>');
+		exit;
+	}
+
+	plan_insert($actif, $intitule, $reference, $code, $solde_anterieur, $date_anterieure, $classe, $commentaire, $direction);
+
 }
 
 
-function plan_insert($actif, $intitule, $reference, $code, $solde_anterieur, $date_anterieure, $classe, $commentaire)
+function plan_insert($actif, $intitule, $reference, $code, $solde_anterieur, $date_anterieure, $classe, $commentaire, $direction)
 {
 	include_spip('base/association');		
 
@@ -40,6 +56,7 @@ function plan_insert($actif, $intitule, $reference, $code, $solde_anterieur, $da
 				'classe' => $classe,
 				'reference' => $reference,
 				'solde_anterieur' => $solde_anterieur,
-				'commentaire' => $commentaire));
+				'commentaire' => $commentaire,
+				'direction' => $direction));
 }
 ?>

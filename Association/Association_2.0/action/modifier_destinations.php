@@ -11,12 +11,18 @@
 	**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_supprimer_comptes() {
+function action_modifier_destinations() {
 		
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_compte = $securiser_action();
-	sql_delete('spip_asso_comptes', 'id_compte=' . $id_compte);
-	/* on efface de la table destination_op toutes les entrees correspondant a cette operation */
-	sql_delete('spip_asso_destination_op', 'id_compte=' . $id_compte);
+	$id_destination=$securiser_action();
+
+	$intitule = _request('intitule');
+	$commentaire = _request('commentaire');
+
+	include_spip('base/association');
+	sql_updateq('spip_asso_destination', array(
+				'intitule' => $intitule,
+				'commentaire' => $commentaire),
+		    "id_destination=$id_destination");
 }
 ?>

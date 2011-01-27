@@ -109,6 +109,7 @@ $spip_asso_plan = array(
 	"intitule" 			=> "text NOT NULL",
 	"classe"			=>"text NOT NULL",
 	"reference" 		=> "text NOT NULL",
+	"direction"		=> "ENUM('credit','debit') NOT NULL default 'credit'",
 	"solde_anterieur"	=> "float NOT NULL default '0'",
 	"date_anterieure"	=> "date NOT NULL default '0000-00-00'",
 	"commentaire" 		=> "text NOT NULL",
@@ -123,6 +124,34 @@ $association_tables_principales['spip_asso_plan'] = array(
 	'key' => &$spip_asso_plan_key
 );
 
+//-- Tables DESTINATION ----------------------------------------
+$spip_asso_destination = array(
+	"id_destination"	=> "int(11) NOT NULL auto_increment",
+	"intitule" 		=> "text NOT NULL",	
+	"commentaire" 		=> "text NOT NULL",
+);
+$spip_asso_destination_key = array(
+	"PRIMARY KEY" => "id_destination"
+);
+$association_tables_principales['spip_asso_destination'] = array(
+	'field' => &$spip_asso_destination, 
+	'key' => &$spip_asso_destination_key
+);
+
+$spip_asso_destination_op = array(
+	"id_dest_op"	=> "int(11) NOT NULL auto_increment",
+	"id_compte" 		=> "int(11) NOT NULL",	
+	"id_destination"	=> "int(11) NOT NULL",
+	"recette" 	=> "float NOT NULL default '0'",
+	"depense" 	=> "float NOT NULL default '0'",
+);
+$spip_asso_destination_op_key = array(
+	"PRIMARY KEY" => "id_dest_op"
+);
+$association_tables_principales['spip_asso_destination_op'] = array(
+	'field' => &$spip_asso_destination_op, 
+	'key' => &$spip_asso_destination_op_key
+);
 //-- Table RESSOURCES ------------------------------------------
 $spip_asso_ressources = array(
 	"id_ressource"		=> "bigint(20) NOT NULL auto_increment",
