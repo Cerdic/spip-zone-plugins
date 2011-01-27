@@ -1,0 +1,12 @@
+[(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
+arbocallback({
+  "rubrique":[<BOUCLE_rubrique(RUBRIQUES){par num titre, titre}{id_parent}{", "}>
+  {"id":"#ID_RUBRIQUE","titre":"#TITRE"}</BOUCLE_rubrique>
+  ],
+  "article":[<BOUCLE_article(ARTICLES){!par date}{id_rubrique}{0,100}{", "}>
+  {"id":"#ID_ARTICLE","titre":"#TITRE"}</BOUCLE_article>
+  ],
+  "ariane":[<BOUCLE_ariane(HIERARCHIE){tout}{", "}>
+  {"id":"#ID_RUBRIQUE","titre":"[(#TITRE|couper{15})]"}  
+  </BOUCLE_ariane>]  
+});

@@ -1,0 +1,17 @@
+#CACHE{0}
+[(#SET{id_partageur,[(#VAL{id_partageur}|_request|sinon{new})]})]
+<BOUCLE_si_autorise(CONDITION){si (#AUTORISER{editer,partageur,#GET{id_partageur}})}>
+
+	[(#SET{retour, #URL_ECRIRE{partageurs}})]
+	<BOUCLE_titre(PARTAGEURS){id_partageur=#GET{id_partageur}}{tout}>
+		[(#SET{titre, #NOM})]	
+	</BOUCLE_titre>
+		
+	[(#INCLURE{fond=prive/editer/partageur,
+		id_partageur=#GET{id_partageur},
+		icone_retour=[(#ENV{retour,#GET{retour}}
+			|icone{<:icone_retour:>, #CHEMIN{img/partageur-24.png}, #LANG_LEFT })],
+		titre=#GET{titre}
+	})]
+	
+</BOUCLE_si_autorise>

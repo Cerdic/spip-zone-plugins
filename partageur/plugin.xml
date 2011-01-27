@@ -1,0 +1,42 @@
+<plugin>
+  <nom>Partageur</nom>
+  <auteur>[erational->http://www.erational.org]</auteur>
+  <licence>&#169; 2011 - GNU/GPL</licence>
+  <version>0.1</version>
+  <etat>test</etat>
+  <description>Partage manuel &agrave; l'identique d'articles entre sites SPIP</description>
+  <lien></lien>
+  <prefix>partageur</prefix>
+  <categorie>edition</categorie>
+  <icon>img/partageur.png</icon>
+  <install>base/partageur_upgrade.php</install>
+  <bouton id="partageurs" parent="naviguer">
+	   <icone>img/partageur-24.png</icone>
+	   <titre>partageur:partageur</titre>		
+  </bouton>
+  <!-- pipelines -->
+   <pipeline>
+      <nom>autoriser</nom> 
+      <inclure>partageur_autoriser.php</inclure> 
+  </pipeline>
+  <pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/partageur.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/partageur.php</inclure>
+	</pipeline>
+  <pipeline>
+		<nom>affiche_enfants</nom>
+		<inclure>partageur_pipelines.php</inclure>
+	</pipeline>
+  <pipeline>
+		<nom>header_prive</nom>
+		<inclure>partageur_pipelines.php</inclure>
+	</pipeline>    
+  <!-- requis -->
+	<necessite id="SPIP" version="[2.1.6;]" />
+	<necessite id="cfg" version="[1.16;]" />
+	<necessite id="saisies" version="[1.5.1;]" />
+</plugin>
