@@ -5,22 +5,24 @@
 
 	[(#ENV{editable}|oui)
 	<form method='post' action='#ENV{action}'><div>
-		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' name='id_partageur' value='#ENV{id_partageur}' />
-		<ul>
-		
-		[(#SAISIE{input, titre,
-			label=<:partageur:label_titre:>,
-			obligatoire=oui})]
-			
-		[(#SAISIE{input, url_site,
-			label=<:partageur:label_url:>,
-			defaut=http://,
-			obligatoire=oui})]	
-			
+		#ACTION_FORMULAIRE{#ENV{action}}		
+		<ul>			
+  		#SET{erreurs,#ENV**{erreurs}|table_valeur{titre}}
+  		<li class="editer_url_site[ (#GET{erreurs}|oui)erreur]">
+  			<label for="champ_titre"><:partageur:label_titre:></label>
+  			[<span class='erreur_message'>(#GET{erreurs})</span>]
+  			<input name='titre' id='champ_titre'  size="32" value='#ENV{titre}' />
+  		</li>
+      
+      #SET{erreurs,#ENV**{erreurs}|table_valeur{url_site}}
+  		<li class="editer_url_site[ (#GET{erreurs}|oui)erreur]">
+  			<label for="champ_url_site"><:partageur:label_url:></label>
+  			[<span class='erreur_message'>(#GET{erreurs})</span>]
+  			<input name='url_site' id='champ_url_site' size="32" value='[(#ENV{url_site}|?{#ENV{url_site},http://})]' />
+  		</li>	
+      
 		</ul>
-		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		<!--extra-->
+
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]

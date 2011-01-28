@@ -38,5 +38,4 @@
   <!-- requis -->
 	<necessite id="SPIP" version="[2.1.6;]" />
 	<necessite id="cfg" version="[1.16;]" />
-	<necessite id="saisies" version="[1.5.1;]" />
 </plugin>

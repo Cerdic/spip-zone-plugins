@@ -21,6 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_rubrique_invalide' => ' Erreur: rubrique destination inconnue',
   'event_ok' => 'Ajout d\'un &eacute;v&eacute;nement ',
   
+  // F
+  'flux_inconnu' => 'Erreur: le site proposé ne semble pas avoir installé le plugin partageur. Le flux suivant est inaccessible:',
+  'flux_doublon' => 'Erreur (doublon): le site est déjà inscrit dans les sites partageurs',
+  
   // G
   'gestion_site_partage' => 'Sites partageurs',
   
@@ -32,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // L
   'label_titre' => 'Nom du site',
-  'label_url' => 'URL',
+  'label_url' => 'Adresse du site',
   'label_effacer' => 'Effacer',
   
   // P
