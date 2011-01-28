@@ -111,18 +111,18 @@ function exec_edit_compte() {
 			$res .= '<label for="montant"><strong>' 
 			. _T('asso:montant') . '</strong></label>'
 			. '<input name="montant" value="'
-			. ($recette+$depense).'" type="text" id="montant" class="formo" />'; // on a soit recette soit depense egal a 0, on fait la somme pour avoir toujours celui qui nous 
+			. association_nbrefr($recette+$depense).'" type="text" id="montant" class="formo" />'; // on a soit recette soit depense egal a 0, on fait la somme pour avoir toujours celui qui nous 
 		}
 		else
 		{
 			$res .= '<label for="recette"><strong>' 
 			. _T('asso:recette') . '</strong></label>'
 			. '<input name="recette" value="'
-			. $recette.'" type="text" id="recette" class="formo" />'
+			. association_nbrefr($recette).'" type="text" id="recette" class="formo" />'
 			. '<label for="depense"><strong>' 
 			. _T('asso:depense') . '</strong></label>'
 			. '<input name="depense" value="'
-			. $depense.'"  type="text" id="depense" class="formo" />';
+			. association_nbrefr($depense).'"  type="text" id="depense" class="formo" />';
 		}
 		$res .= association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'));
 
@@ -162,7 +162,7 @@ function exec_edit_compte() {
 						$res .= '<p class="formo" id="row'.$idIndex.'"><select name="destination_id'.$idIndex.'" id="destination_id'.$idIndex.'" >'
 						. $liste_destination_selected
 						. '</select><input name="montant_destination_id'.$idIndex.'" value="'
-						. $destMontant
+						. association_nbrefr($destMontant)
 						. '" type="text" id="montant_destination_id'.$idIndex.'" />';
 						$res .= "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
 						if ($idIndex>1)

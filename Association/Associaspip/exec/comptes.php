@@ -125,7 +125,7 @@ function exec_comptes_args($annee, $vu, $imputation, $debut)
 
 function comptes_while($where, $limit)
 {
-	$query = sql_select('*', "spip_asso_comptes", $where,'',  'date DESC', $limit);
+	$query = sql_select('*', "spip_asso_comptes", $where,'',  'date DESC,id_compte DESC', $limit);
 	$auteurs = '';
 
 	while ($data = sql_fetch($query)) {
