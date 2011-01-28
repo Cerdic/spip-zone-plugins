@@ -315,11 +315,22 @@ function ieconfig_config_locales() {
 		$match = ".+[.]yaml$";
 		foreach (array_merge(find_all_in_path('ieconfig/', $match),find_all_in_path('tmp/ieconfig/', $match)) as $fichier => $chemin) {
 			$config = yaml_decode_file($chemin);
+			// On regarde s'il y a un necessite
+			$ok = true;
+			if (isset($config['necessite'])) {
+				if (!is_array($config['necessite']))
+					$config['necessite'] = array($config['necessite']);
+				foreach($config['necessite'] as $plugin)
+					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
+						$ok = false;
+			}
 			//on vérifie s'il y a un champs nom
-			if (isset($config['nom']))
-				$liste_config[$chemin] = _T_ou_typo($config['nom']);
-			else
-				$liste_config[$chemin] = $fichier;
+			if ($ok) {
+				if (isset($config['nom']))
+					$liste_config[$chemin] = _T_ou_typo($config['nom']);
+				else
+					$liste_config[$chemin] = $fichier;
+			}
 		}
 	}
 	return $liste_config;
