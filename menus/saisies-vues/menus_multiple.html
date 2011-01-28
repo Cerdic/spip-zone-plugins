@@ -1,7 +1,3 @@
-[(#REM) datas peut être une chaine qu'on sait décomposer ]
-#SET{datas, #ENV{datas}}
-#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
-
 <B_choix>
 <ul>
 	<BOUCLE_choix(MENUS){identifiant IN #ENV**{valeur}}>
