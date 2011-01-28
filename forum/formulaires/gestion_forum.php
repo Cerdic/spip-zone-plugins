@@ -94,6 +94,12 @@ function formulaires_gestion_forum_traiter_dist($id_forum='', $id_rubrique='', $
 	include_spip('action/instituer_forum');
 	foreach ($forum_ids as $id) {
 		$row = sql_fetsel("*", "spip_forum", "id_forum=$id");
+		if($statut == "publie" and $row['statut'] == "privoff")
+			$statut = "prive";
+		if($statut == "off" and $row['statut'] == "prive")
+			$statut = "privoff";	
+		if($statut == "off" and $row['statut'] == "privrac")
+			$statut = "privoff";		
 		instituer_un_forum($statut,$row);
 	}
 

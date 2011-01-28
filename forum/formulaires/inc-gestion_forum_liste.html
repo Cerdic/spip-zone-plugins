@@ -25,7 +25,9 @@
 	<BOUCLE_forum(FORUMS){plat}{id_forum?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{id_message?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination #ENV{pagination}}{statut?}{statut LIKE #ENV{prive}}{statut !LIKE #ENV{public}}{texte LIKE #GET{vide}}{recherche?}>
 	<li class="item forum statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM'>
 		
-		<input type="checkbox" class="checkbox select_forum" name="forum_ids[]" value="#ID_FORUM"[(#ENV{id_forum}|oui) checked="checked"] />
+		[(#STATUT|in_array{[(#ARRAY{0,'privoff',1,'privadm'})]}|non) 
+		<input type="checkbox" class="checkbox select_forum" name="forum_ids&#91;&#93;" value="[(#ID_FORUM)]"[(#ENV{id_forum}|oui) checked="checked"] />
+		]
 		
 		[(#REM) etrange mais en collant le code de cet inclure
 		directement ci-dessous on a pas de probleme avec le CVT
