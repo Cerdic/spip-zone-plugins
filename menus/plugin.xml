@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Menus[de]Men&uuml;s[en]Menus[it]Men&ugrave;</multi></nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8.4</version>
+	<version>0.8.5</version>
 	<version_base>0.5</version_base>
 	<etat>test</etat>
 	<description>
@@ -40,6 +40,10 @@
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/menus_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig</nom>
+		<inclure>menus_ieconfig.php</inclure>
 	</pipeline>
 	
 	<bouton id='menus_tous' parent="naviguer">
