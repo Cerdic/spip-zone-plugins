@@ -5,7 +5,7 @@
   <version>0.1</version>
   <etat>test</etat>
   <description>Partage manuel &agrave; l'identique d'articles entre sites SPIP</description>
-  <lien></lien>
+  <lien>http://www.spip-contrib.net/Partageur</lien>
   <prefix>partageur</prefix>
   <categorie>edition</categorie>
   <icon>img/partageur.png</icon>
