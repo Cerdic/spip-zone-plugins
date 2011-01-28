@@ -23,34 +23,26 @@ include_spip('base/create');
 function abomailmans_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
-			$current_version = $GLOBALS['meta'][$nom_meta_base_version];
-		 
-			if (version_compare($current_version,'0.0','<')){
-				include_spip('base/abomailmans');
-				creer_base();
-				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-			}
-			if (version_compare($current_version,'0.30','<')){
-				sql_alter("TABLE spip_abomailmans ADD `lang` varchar(10) DEFAULT ' ' NOT NULL AFTER `email_sympa`");
-				echo 'Upgrade de la base abomailmans';
-				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
+	 
+		if (version_compare($current_version,'0.0','<')){
+			include_spip('base/abomailmans');
+			creer_base();
+		}
+		if (version_compare($current_version,'0.30','<')){
+			sql_alter("TABLE spip_abomailmans ADD `lang` varchar(10) DEFAULT ' ' NOT NULL AFTER `email_sympa`");
+		}
+		if (version_compare($current_version,'0.31','<')){
+			sql_alter("TABLE spip_abomailmans ADD `email_unsubscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
+			sql_alter("TABLE spip_abomailmans ADD `email_subscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
 
-			}
-			if (version_compare($current_version,'0.31','<')){
-				sql_alter("TABLE spip_abomailmans ADD `email_unsubscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
-				sql_alter("TABLE spip_abomailmans ADD `email_subscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
-				echo 'Upgrade de la base abomailmans';
-				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-
-			}
-			if (version_compare($current_version,'0.32','=')){
-				sql_alter("TABLE spip_abomailmans ADD `date_envoi` TIMESTAMP AFTER `maj`");
-				sql_alter("TABLE spip_abomailmans ADD `modele_defaut` varchar(255) DEFAULT ' ' NOT NULL AFTER `email_unsubscribe`");
-				sql_alter("TABLE spip_abomailmans ADD `periodicite` varchar(255) DEFAULT ' ' NOT NULL AFTER `email_unsubscribe`");
-				echo 'Upgrade de la base abomailmans';
-				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-
-			}
+		}
+		if (version_compare($current_version,'0.32','<')){
+			sql_alter("TABLE spip_abomailmans ADD `date_envoi` TIMESTAMP AFTER `maj`");
+			sql_alter("TABLE spip_abomailmans ADD `modele_defaut` varchar(255) DEFAULT ' ' NOT NULL AFTER `email_unsubscribe`");
+			sql_alter("TABLE spip_abomailmans ADD `periodicite` varchar(255) DEFAULT ' ' NOT NULL AFTER `email_unsubscribe`");
+		}
+		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 }
 
 /**
@@ -94,19 +86,5 @@ function abomailmans_declarer_tables_principales($tables_principales){
 
  	 return $tables_principales;
 }
-
-//
-// <BOUCLE(ABOMAILMANS)>
-//
-/*
-function boucle_ABOMAILMANS_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_abomailmans";
-	$email_liste = $id_table .'.email';
-	$boucle->where[]= array("'IS NOT'", "'$email_liste'", "'NULL'");
-
-	return calculer_boucle($id_boucle, $boucles); 
-}*/
 
 ?>
