@@ -2,7 +2,7 @@
 	<nom>Importeur / Exporteur de configurations</nom>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<etat>test</etat>
 	<description>Importeur / Exporteur de configurations. Ce plugin permet d'exporter la configuration de SPIP et des plugins compatibles IEconfig dans un seul et unique fichier au format YAML. Ces fichiers de configuration peuvent ensuite &ecirc;tre import&eacute;s.</description>
 	<lien>http://www.spip-contrib.net/IEconfig-Carnet-de-Developpement</lien>

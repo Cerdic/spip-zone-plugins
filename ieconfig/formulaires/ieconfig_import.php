@@ -220,6 +220,7 @@ function ieconfig_saisies_import() {
 }
 
 function formulaires_ieconfig_import_charger_dist() {
+	include_spip('inc/saisies');
 	$saisies = ieconfig_saisies_import();
 	$contexte = array(
 		'_saisies' => $saisies,
