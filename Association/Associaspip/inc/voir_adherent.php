@@ -9,19 +9,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte'); // pour nettoyer_raccourci_typo
 
-function voir_adherent_paiements($data, $lien)
+function voir_adherent_paiements($data, $lien, $type)
 {
 	foreach($data as $k => $row) {
 		$j = $lien ? $row['justification']
 		  : nettoyer_raccourcis_typo($row['justification']);
-
-		$data[$k] = '<tr style="background-color: #EEEEEE;">'
-		  . '<td class="arial11 border1" style="text-align:right;">'.$row['id']."</td>\n"
+		$id = $row['id'];
+		$data[$k] = "<tr id='$type$id' style='background-color: #EEEEEE;'>"
+		  . "<td class='arial11 border1' style='text-align:right;'>$id</td>\n"
 		  . '<td class="arial11 border1">'.$row['journal']."</td>\n"
 		  . '<td class="arial11 border1">'.association_datefr($row['date'])."</td>\n"
 		  . '<td class="arial11 border1">'.propre($j)."</td>\n"
@@ -49,7 +48,7 @@ function voir_adherent_cotisations($id_auteur, $full=false)
 	. '<th style="text-align:right;">'._T('asso:montant').'</th>'
 	. '<th style="text-align:right;">'._T('asso:validite').'</th>'
 	. '</tr>'
-	. join("\n", voir_adherent_paiements($row, $full))
+	  . join("\n", voir_adherent_paiements($row, $full, 'cotisation'))
 	. '</table>';
 }
 
@@ -71,7 +70,7 @@ function voir_adherent_dons($id_auteur, $full=false)
 	.  '<th>'._T('asso:adherent_entete_justification').'</th>'
 	.  '<th style="text-align:right;">'._T('asso:montant').'</th>'
 	. '<th style="text-align:right;">'._T('asso:validite').'</th>'
-	.  join("\n", voir_adherent_paiements($row, $full))
+	  .  join("\n", voir_adherent_paiements($row, $full, 'don'))
 	  .  '</table>';
 }
 
@@ -105,4 +104,15 @@ function voir_adherent_ventes($critere)
 	  . join("", $row)
 	  . '</table>';
 }
+
+function voir_adherent_recus($id_auteur)
+{
+	$row = array_map('array_shift', sql_allfetsel("date_format( date, '%Y' )  AS annee", "spip_asso_comptes", "id_journal=$id_auteur", 'annee', "annee ASC" ));
+	foreach($row as $k => $annee) {
+		$h = generer_url_ecrire('pdf_fiscal', "id=$id_auteur&annee=$annee");
+		$row[$k] = "<a href='$h'>$annee</a>";
+	}
+	return join("\n", $row);
+}
+
 ?>
