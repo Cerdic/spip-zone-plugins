@@ -45,6 +45,7 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 		// Si on peut bien éditer le menu, on déclare ce qu'il faut
 		if ($contexte['editable']){
 			$contexte['id_menu'] = $id_menu;
+			$contexte['nouveau'] = $nouveau;
 
 			// Les champs du menu principal
 			$contexte['titre'] = '';

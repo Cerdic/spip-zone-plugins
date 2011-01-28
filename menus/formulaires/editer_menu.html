@@ -42,7 +42,7 @@
 							</li>
 
 							[(#REM) Seulement si c'est un nouveau et qu'il y a le plugin YAML)]
-							[(#ENV{id_menu}|non)
+							[(#ENV{nouveau}|oui)
 							[(#PLUGIN{yaml}|oui)
 							#SET{name,import}
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
