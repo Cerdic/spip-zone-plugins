@@ -100,6 +100,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_pas_nouveaux' => 'Vous n\'avez pas de nouveaux messages.',
 	'msg_revenir_accueil' => 'Revenir &agrave; la liste de messages de contact re&ccedil;us.',
 	'msg_supprimer_message' => 'Supprimer le message',
+	
+	// N
+	'noisette_label_afficher_titre_noisette' => 'Afficher un titre&nbsp;?',
+	'noisette_label_titre_noisette' => 'Titre&nbsp;:',
+	'noisette_label_titre_noisette_perso' => 'Si titre personnalis&eacute;&nbsp;:',
+	'noisette_titre_perso' => 'Titre personnalis&eacute;',
 
 	// P
 	'preselection' => 'D&eacute;cocher tous les items de la liste de destinataires',
