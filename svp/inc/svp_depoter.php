@@ -261,11 +261,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
 			$insert_plugin = $champs['plugin'];
 			// On construit l'url complete du logo
-			// A REVOIR COMPLETEMENT !!!
+			// Le logo est maintenant disponible a la meme adresse que le zip et porte le nom du zip.
+			// Son extension originale est conservee
 			if ($insert_paquet['logo'])
 				$insert_paquet['logo'] = $depot['url_archives'] . '/'
-									   . $insert_paquet['src_archive'] . '/'
-									   . $insert_paquet['logo'];
+									   . basename($insert_paquet['nom_archive'], '.zip') . '.'
+									   . pathinfo($insert_paquet['logo'], PATHINFO_EXTENSION);
 
 			// On loge l'absence de categorie ou une categorie erronee et on positionne la categorie
 			// par defaut "aucune"
