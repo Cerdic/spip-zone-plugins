@@ -99,6 +99,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tri_num' => '(num&eacute;rique)',
 
 	// N
+	'noisette_description' => 'Ins&egrave;re un menu d&eacute;fini avec le plugin Menus.',
+	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu&nbsp;?',
+	'noisette_label_identifiant' => 'Menu &agrave; afficher&nbsp;:',
+	'noisette_nom_noisette' => 'Menu',
 	'nom_menu_accueil' => 'Accueil',
 	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique',
 	'nom_menu_deconnecter' => 'Se d&eacute;connecter',
