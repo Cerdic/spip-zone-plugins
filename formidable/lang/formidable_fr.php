@@ -68,6 +68,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'modele_nom_formulaire' => 'un formulaire',
 'modele_label_formulaire_formidable' => 'Quel formulaire&nbsp;?',
 
+'noisette_label_afficher_titre_formulaire' => 'Afficher le titre du formulaire&nbsp;?',
+'noisette_label_identifiant' => 'Formulaire &agrave; afficher&nbsp;:',
+'noisette_nom_noisette_formulaire' => 'Formulaire',
+
 'reponse_intro' => '@auteur@ a r&eacute;pondu au formulaire @formulaire@',
 'reponse_numero' => 'R&eacute;ponse num&eacute;ro :',
 'reponse_statut' => 'Cette r&eacute;ponse est :',
