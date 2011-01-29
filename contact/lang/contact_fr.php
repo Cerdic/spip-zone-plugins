@@ -90,6 +90,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Madame',
 	'mademoiselle' => 'Mademoiselle',
+	'modele_label_auteur' => 'Pr&eacute;-s&eacute;lectionner un auteur (facultatif)&nbsp;?',
+	'modele_nom_formulaire' => 'un formulaire de contact',
 	'monsieur' => 'Monsieur',
 	'msg_accueil' => 'Vous trouverez ici les messages de contact que vous avez re&ccedil;u.',
 	'msg_contact' => 'Message de contact',

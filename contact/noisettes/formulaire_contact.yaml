@@ -23,5 +23,5 @@ parametres:
     saisie: 'input'
     options:
       nom: 'titre_noisette_perso'
-      label: '<:formidable:noisette_label_titre_noisette_perso:>'
+      label: '<:contact:noisette_label_titre_noisette_perso:>'
       afficher_si: '@afficher_titre_noisette@ == "on" && @titre_noisette@ == "titre_perso"'
