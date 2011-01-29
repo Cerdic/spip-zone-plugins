@@ -1,5 +1,5 @@
 <?php
-define('_DIR_JQUERYUI_JS','lib/jquery-ui-1.8.5/ui/');
+define('_DIR_JQUERYUI_JS','lib/jquery-ui-1.8.9/ui/');
 
 function jqueryui_jquery_plugins($plugins){
 	$config = @unserialize($GLOBALS['meta']['jqueryui']);
