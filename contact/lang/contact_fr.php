@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_texte' => 'Texte',
 	'champ_ville' => 'Ville',
 	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.',
+	'configuration_barre_forum' => 'Afficher la barre typo des forums.',
 	'configuration_barre_oui' => 'Afficher la barre typo compl&egrave;te.',
 	'configuration_champs_message' => 'R&eacute;glage du porte-plume.',
 	'configuration_champs_message_explication' => 'R&eacute;glage de la barre typographique associ&eacute;e au texte du message.',
