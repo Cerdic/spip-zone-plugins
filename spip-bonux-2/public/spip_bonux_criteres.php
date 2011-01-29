@@ -174,6 +174,7 @@ function calcul_critere_fonctions($func, $idb, &$boucles, $crit) {
  */
 function critere_tri_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
 
 	// definition du champ par defaut
 	$_champ_defaut = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
@@ -199,7 +200,7 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 	};
 	";
 	$boucle->select[] = "\".tri_champ_select(\$tri).\"";
-	$boucle->order[] = "tri_champ_order(\$tri).\$senstri";
+	$boucle->order[] = "tri_champ_order(\$tri,'$id_table').\$senstri";
 }
 
 /**

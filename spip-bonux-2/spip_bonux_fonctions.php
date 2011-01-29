@@ -192,11 +192,13 @@ function tri_protege_champ($t){
  * @param string $t
  * @return string
  */
-function tri_champ_order($t){
+function tri_champ_order($t,$table=NULL){
+	if (!is_null($table))
+		$table = $table.'.';
 	if (strncmp($t,'num ',4)==0){
 		$t = substr($t,4);
 		$t = preg_replace(',\s,','',$t);
-		$t = "0+$t";
+		$t = "0+$table$t";
 		return $t;
 	}
 	elseif(strncmp($t,'multi ',6)==0){
