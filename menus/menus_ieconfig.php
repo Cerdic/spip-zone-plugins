@@ -77,7 +77,7 @@ function menus_ieconfig($flux){
 						'nom' => 'menus_importer_'.$identifiant,
 						'label' => $identifiant.(isset($menu['titre']) ? ' ('.typo($menu['titre']).')' : ''),
 						'cacher_option_intro' => 'oui',
-						'explication' => '<:menus:formulaire_ieconfig_menu_meme_identifiant:>',
+						'attention' => '<:menus:formulaire_ieconfig_menu_meme_identifiant:>',
 						'datas' => array(
 							'non' => '<:menus:formulaire_ieconfig_ne_pas_importer:>',
 							'renommer' => '<:menus:formulaire_ieconfig_renommer:>',
