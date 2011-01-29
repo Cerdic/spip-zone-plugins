@@ -18,8 +18,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * $user, $pass : identifiants
  * $service : quel service
  * $api : si on est vraiment desespere :-)
+ * $tokens : dans le cas de oAuth chez twitter pouvoir passer des tokens différents 
+ * de ceux de la conf générale du site
  */
-function microblog($status, $user=null, $pass=null, $service=null, $api=null){
+function microblog($status, $user=null, $pass=null, $service=null, $api=null, $tokens=null){
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
 
 	// Certains define prennent le pas sur le reste (mode TEST)
@@ -53,7 +55,9 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 		}
 		$api = $apis[$service];
 	}
-	
+	if(is_array($tokens)){
+		$cfg = array_merge($cfg,$tokens);
+	}
 	/**
 	 * Si l'API utilisée est twitter, on force le passage en oAuth
 	 */
@@ -67,7 +71,6 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 			include_spip('inc/twitteroauth');
 			$consumer_key = $cfg['twitter_consumer_key'];
 			$consumer_secret = $cfg['twitter_consumer_secret'];
-
 			$connection = new TwitterOAuth($consumer_key, $consumer_secret, $cfg['twitter_token'], $cfg['twitter_token_secret']);
 			
 			if($connection){
