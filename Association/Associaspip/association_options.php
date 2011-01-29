@@ -11,10 +11,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Gestion de l'absence eventuelle du plugin Inscription2
+// Gestion de l'absence du plugin Inscription2 (code pratiquement mort)
 
 if (!defined('_ASSOCIATION_INSCRIPTION2'))
-    define('_ASSOCIATION_INSCRIPTION2', true); // false si on sait s'en passer
+    define('_ASSOCIATION_INSCRIPTION2', false); // true si le veut
 
 define('_ASSOCIATION_AUTEURS_ELARGIS', 
        (_ASSOCIATION_INSCRIPTION2 AND @spip_query("SELECT id_auteur FROM spip_auteurs_elargis LIMIT 1")) ? 
