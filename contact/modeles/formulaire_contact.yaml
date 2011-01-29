@@ -17,3 +17,9 @@ parametres:
     options:
       nom: 'auteur'
       label: '<:contact:modele_label_auteur:>'
+      multiple: 'oui'
+      option_statut: 'oui'
+      statut:
+        - '0minirezo'
+        - '1comite'
+        - '6forum'
