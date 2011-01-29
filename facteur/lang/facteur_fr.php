@@ -21,6 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'facteur_adresse_envoi_email' => "Email :",
 	'facteur_adresse_envoi_nom' => "Nom :",
+	'facteur_bcc' => "Copie Cach&eacute;e (BCC) :",
+	'facteur_cc' => "Copie (CC) :",
+	'facteur_copies' => "Copies :",
+	'facteur_copies_descriptif' => "Un email sera envoy&eacute; en copie aux adresses d&eacute;finies. Une seule adresse en copie et/ou une seule adresse en copie cach&eacute;e.",
 	'facteur_filtre_accents' => "Transformer les accents en leur entit&eacute;s html (utile pour Hotmail notamment).",
 	'facteur_filtre_css' => "Transformer les styles contenus entre &lt;head&gt; et &lt;/head&gt; en des styles \"en ligne\", utile pour les webmails car les styles en ligne ont la priorit&eacute; sur les styles externes.",
 	'facteur_filtre_iso_8859' => "Convertir en ISO-8859-1",

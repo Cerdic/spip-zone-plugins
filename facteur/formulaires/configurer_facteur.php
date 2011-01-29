@@ -24,7 +24,9 @@ function formulaires_configurer_facteur_charger_dist(){
 		'facteur_filtre_css' => $GLOBALS['meta']['facteur_filtre_css'],
 		'facteur_filtre_iso_8859' => $GLOBALS['meta']['facteur_filtre_iso_8859'],
 		'_enable_smtp_secure' => (intval(phpversion()) == 5)?' ':'',
-		'tester' => '',
+		'facteur_cc' => $GLOBALS['meta']['facteur_cc'],
+		'facteur_bcc' => $GLOBALS['meta']['facteur_bcc'],
+	'tester' => '',
 	);
 
 	return $valeurs;
@@ -68,6 +70,15 @@ function formulaires_configurer_facteur_verifier_dist(){
 				$erreurs['facteur_smtp_password'] = _T('info_obligatoire');
 		}
 	}
+	if ($emailcc = _request('facteur_cc')
+	  AND !email_valide($emailcc)) {
+		$erreurs['facteur_cc'] = _T('form_email_non_valide');
+	}
+	if ($emailbcc = _request('facteur_bcc')
+	  AND !email_valide($emailbcc)) {
+		$erreurs['facteur_bcc'] = _T('form_email_non_valide');
+	}
+	
 	if(count($erreurs)>0){
 		$erreurs['message_erreur'] = _T('facteur:erreur_generale');
 	}
@@ -116,6 +127,13 @@ function formulaires_configurer_facteur_traiter_dist(){
 	ecrire_meta('facteur_filtre_css', intval(_request('facteur_filtre_css')));
 	ecrire_meta('facteur_filtre_iso_8859', intval(_request('facteur_filtre_iso_8859')));
 
+	$facteur_cc = _request('facteur_cc');
+	ecrire_meta('facteur_cc', $facteur_cc?$facteur_cc:'');
+
+	$facteur_bcc = _request('facteur_bcc');
+	ecrire_meta('facteur_bcc', $facteur_bcc?$facteur_bcc:'');
+	
+	
 	$res = array('message_ok'=>_T('facteur:config_info_enregistree'));
 
 	// faut-il envoyer un message de test ?
@@ -146,6 +164,8 @@ function facteur_envoyer_mail_test($destinataire,$titre){
 	$message_texte	= recuperer_fond('emails/test_email_texte', array());
 
 	$facteur = new Facteur($destinataire, $titre, $message_html, $message_texte);
+	$facteur->AddCC( $GLOBALS['meta']['facteur_cc'] );
+	$facteur->AddBCC( $GLOBALS['meta']['facteur_bcc'] );
 	if (!$facteur->Send())
 		return $test->ErrorInfo;
 	else

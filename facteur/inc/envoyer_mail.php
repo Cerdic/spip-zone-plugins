@@ -61,6 +61,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// On génère les headers
 	$head = $facteur->CreateHeader();
 	
+	// On ajoute les eventuelles copies
+	$facteur->AddCC( $GLOBALS['meta']['facteur_cc'] );
+	$facteur->AddBCC( $GLOBALS['meta']['facteur_bcc'] );
+	
 	// Et c'est parti on envoie enfin
 	spip_log("mail via facteur\n$head"."Destinataire: 
 $destinataire\n",'mail');

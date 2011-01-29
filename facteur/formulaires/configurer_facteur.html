@@ -138,6 +138,27 @@
 					</ul>
 				</fieldset>
 			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:facteur:facteur_copies:></legend>
+					<ul>
+						<li class="editer_facteur_copies editer_facteur_desc">
+							<label for="facteur_cc">&nbsp;</label>
+							<p class="explication"><:facteur:facteur_copies_descriptif:></p>
+						</li>
+						<li class="editer_facteur_copies editer_facteur_cc [ (#ENV**{erreurs}|table_valeur{facteur_cc}|oui)erreur]">
+							<label for="facteur_cc"><:facteur:facteur_cc:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_cc})</span>]
+							<input type="text" name="facteur_cc" class="text" value="#ENV**{facteur_cc}" id="facteur_cc" />
+						</li>
+						<li class="editer_facteur_copies editer_facteur_bcc [ (#ENV**{erreurs}|table_valeur{facteur_bcc}|oui)erreur]">
+							<label for="facteur_bcc"><:facteur:facteur_bcc:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_bcc})</span>]
+							<input type="text" name="facteur_bcc" class="text" value="#ENV**{facteur_bcc}" id="facteur_bcc" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="valider" class="submit" value="<:bouton_valider:>" />
