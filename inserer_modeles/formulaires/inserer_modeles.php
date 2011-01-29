@@ -94,6 +94,9 @@ function formulaires_inserer_modeles_traiter_dist() {
 				if($champ != 'modele' && $champ != 'variante' && $champ != 'classe' && $champ != 'id_modele' && $champ != 'align' && _request($champ) && _request($champ)!='') {
 					if($champ == _request($champ))
 						$code .= "|$champ";
+					// On transforme les tableaux en une liste
+					elseif (is_array(_request($champ)))
+						$code .= "|$champ=".implode(',',_request($champ));
 					else
 						$code .= "|$champ="._request($champ);
 				}

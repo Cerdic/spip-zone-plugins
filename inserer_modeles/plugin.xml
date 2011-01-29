@@ -2,7 +2,7 @@
 	<nom>Ins&eacute;rer Mod&egrave;les</nom>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.2</version>
+	<version>0.4.3</version>
 	<etat>test</etat>
 	<description>Ce plugin facilite l'insertion de mod&egrave;les dans vos textes avec des formulaires d'aide &agrave; la saisie.</description>
 	<lien>http://www.spip-contrib.net/?article3631</lien>
