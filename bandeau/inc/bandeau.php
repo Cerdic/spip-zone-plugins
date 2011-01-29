@@ -51,7 +51,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 	if (function_exists('boutons_plugins')
 	  AND is_array($liste_boutons_plugins = boutons_plugins())){
 		// On traite en premier les boutons principaux
-		// car certains enfants peuvent être définis avant leur parent dans $liste_boutons_plugins
+		// car certains enfants peuvent ï¿½tre dï¿½finis avant leur parent dans $liste_boutons_plugins
 		foreach($liste_boutons_plugins as $id => $infos){
 			// les boutons principaux ne sont pas soumis a autorisation
 			if (!($parent = $infos['parent']) 
@@ -186,23 +186,37 @@ function bando_navigation($boutons, $contexte = array())
 	
 	// Le bouton pour afficher/masque la barre d'outils
 	$display_outils = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])?$GLOBALS['visiteur_session']['prefs']['display_outils']:'oui';
+	$toggle_texte_h = attribut_html(_T('bando:label_bando_outils_masquer'));
+	$toggle_texte_s = attribut_html(_T('bando:label_bando_outils_afficher'));
+	$toggle_action_h = generer_action_auteur('preferer', 'display_outils:');
+	$toggle_action_s = generer_action_auteur('preferer', 'display_outils:oui');
 	if ($display_outils){
-		$toggle_texte_1 = _T('bando:label_bando_outils_masquer');
-		$toggle_texte_2 = _T('bando:label_bando_outils_afficher');
-		$toggle_action_1 = generer_action_auteur('preferer', 'display_outils:');
-		$toggle_action_2 = generer_action_auteur('preferer', 'display_outils:oui');
-		$toggle_class_1 = 'navigation_avec_outils';
-		$toggle_class_2 = 'navigation_sans_outils';
+		$toggle_texte = $toggle_texte_h;
+	  $toggle_action = $toggle_action_h;
 	}
 	else{
-		$toggle_texte_1 = _T('bando:label_bando_outils_afficher');
-		$toggle_texte_2 = _T('bando:label_bando_outils_masquer');
-		$toggle_action_1 = generer_action_auteur('preferer', 'display_outils:oui');
-		$toggle_action_2 = generer_action_auteur('preferer', 'display_outils:');
-		$toggle_class_1 = 'navigation_sans_outils';
-		$toggle_class_2 = 'navigation_avec_outils';
+		$toggle_texte = $toggle_texte_s;
+	  $toggle_action = $toggle_action_s;
 	}
-	$toggle_outils = "<a id='masquer_outils' href='$toggle_action_1' title='$toggle_texte_1' onclick='if (jQuery(\"body\").is(\".$toggle_class_1\")){ jQuery(\"body\").removeClass(\"$toggle_class_1\").addClass(\"$toggle_class_2\"); $(this).attr(\"href\", \"$toggle_action_1\").attr(\"title\", \"$toggle_texte_2\").children(\"span\").text(\"$toggle_texte_2\"); } else{ jQuery(\"body\").removeClass(\"$toggle_class_2\").addClass(\"$toggle_class_1\"); $(this).attr(\"href\", \"$toggle_action_2\").attr(\"title\", \"$toggle_texte_1\").children(\"span\").text(\"$toggle_texte_1\"); } $.get(this.href); return false;'><span>$toggle_texte_1</span></a>";
+	$toggle_outils = "<a
+	id='masquer_outils'
+	href='$toggle_action'
+	title='$toggle_texte'
+	onclick='if (jQuery(\"body\").is(\".navigation_avec_outils\")){
+			jQuery(\"#bando_outils\").slideUp(\"fast\");
+			$.get(this.href,function(){
+			$(\"#masquer_outils\").attr(\"href\", \"$toggle_action_s\").attr(\"title\", \"$toggle_texte_s\").children(\"span\").text(\"$toggle_texte_s\");
+			jQuery(\"body\").removeClass(\"navigation_avec_outils\").addClass(\"navigation_sans_outils\");
+			});
+		}
+		else{
+			jQuery(\"#bando_outils\").slideDown(\"fast\");
+			$.get(this.href,function(){
+			$(\"#masquer_outils\").attr(\"href\", \"$toggle_action_h\").attr(\"title\", \"$toggle_texte_h\").children(\"span\").text(\"$toggle_texte_h\");
+			jQuery(\"body\").removeClass(\"navigation_sans_outils\").addClass(\"navigation_avec_outils\");
+			});
+		} return false;'
+	><span>$toggle_texte</span></a>";
 
 	return "<div id='bando_navigation'><div class='largeur'><ul class='deroulant'>\n$res</ul>$toggle_outils<div class='nettoyeur'></div></div></div>";
 }
