@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Extension Changement de langue, pour Porte-Plume</nom>
+	<auteur>Joseph</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>Ajoute un bouton au porte-plume permettant d'indiquer un changement de langue dans le texte.</description>
+	<lien>http://www.spip-contrib.net/?article3705</lien>
+	<icon>images/chgt_lg-128.png</icon>
+	<prefix>pp_chgt_lg</prefix>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>pp_chgt_lg_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>pp_chgt_lg_pipelines.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="porte_plume" />
+</plugin>
