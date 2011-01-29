@@ -33,6 +33,7 @@ if(!function_exists('info_maj_spip')) {
 		$lien = "http://www.spip.net/".$GLOBALS['spip_lang']."_download";
 		$maj = _T('couteau:maj_rev_ok',array('revision'=>$maj, 'url'=>$lien, 'zip'=>''));
 		// derniere version de SPIP 2.0.?
+		include_spip('inc/plugin'); // pour spip_version_compare()
 		include_spip('lib/maj_auto/distant_mise_a_jour');
 		if(function_exists('info_maj_cache')) {
 			list(,,$rev) = preg_split('/\D+/', $GLOBALS['spip_version_branche']);
@@ -50,6 +51,7 @@ if(!function_exists('info_maj_spip')) {
 		return preg_replace(',\[([^[]+)->\],', '$1', $maj);
 	}
 	function compat_maj_spip($forcer=false) {
+		include_spip('inc/plugin'); // pour spip_version_compare()
 		include_spip('lib/maj_auto/distant_mise_a_jour');
 		if(function_exists('genie_mise_a_jour_dist') && $forcer) return genie_mise_a_jour_dist(0);
 	}
