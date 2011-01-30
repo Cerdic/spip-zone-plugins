@@ -74,6 +74,8 @@ function facteur_vider_tables($nom_meta_base_version) {
 	effacer_meta('facteur_adresse_envoi');
 	effacer_meta('facteur_adresse_envoi_nom');
 	effacer_meta('facteur_adresse_envoi_email');
+	effacer_meta('facteur_cc');
+	effacer_meta('facteur_bcc');
 	effacer_meta($nom_meta_base_version);
 }
 
