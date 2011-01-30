@@ -21,7 +21,7 @@
 		and <code><notation|topten></code> which gives the 10 best articles.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Notation-d-articles-SPIP</lien>
+	<lien>http://www.spip-contrib.net/Notation-d-elements-SPIP</lien>
 	<licence>GNU/GPL</licence>
 	<necessite id="spip" version="[2.0.0;]" />
 	<utilise id="cfg" version="[1.10.4;]" />
