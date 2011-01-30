@@ -19,7 +19,7 @@
 *
 **/
 // La version de l'API Geoportail qu'on utilise
-define('_API_GEOPORTAIL_VERSION', "1.1");
+define('_API_GEOPORTAIL_VERSION', "1.2");
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/config');
@@ -77,9 +77,12 @@ function geoportail_protect($action=null)
 	return calculer_action_auteur($action);
 }
 
-// RGC utilise
+// Protection des scripts
 function balise_GEOPORTAIL_PROTECT($p)
-{	$param = interprete_argument_balise(1,$p);
+{	// faire un cache par session
+	$p->descr['session'] = true; 
+	// Parametre
+	$param = interprete_argument_balise(1,$p);
 	// Code...
 	$p->code = "geoportail_protect($param)";
 	$p->interdire_scripts = false;

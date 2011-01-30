@@ -20,6 +20,13 @@ img.gpGeocodeMatchCodeMatchType
 {	max-height:350px;
 }
 
+.gpControlPanelToggleItemInactive
+{	background-image: url("picto_options_off.png");
+}
+.gpControlPanelToggleItemActive
+{	background-image: url("picto_options_on.png");
+}
+
 /** Popup sur la carte **/
 #popup
 {	font-size:0.77em;

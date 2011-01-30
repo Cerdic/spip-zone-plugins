@@ -63,7 +63,7 @@ if (_DIR_RESTREINT!="" || $geoportail_force)
 [<script type="text/javascript" src="(#CHEMIN{js/Format/Ceoconcept_rip.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{js/Layer/Locator.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{js/Layer/GXT.js})"></script>]
-<script>jQuery.geoportail.hash = "[(#GEOPORTAIL_PROTECT{geoportail})]";</script>
+<script>jQuery.geoportail.hash = "<!_SPIP_GEOPORTAIL_HASH_!>";</script>
 ]
 <script language=javascript>
 // Ajouter une nouvelle carte
@@ -75,8 +75,8 @@ jQuery.geoportail.addMap(
 		{	geoportalLoadmap#ENV{id_geoportail,0}("GeoportalMapDiv#ENV{id_geoportail,0}", "[(#MODE|sinon{normal})]", "[(#GET{zone})]"); 
 			map = this.map = map#ENV{id_geoportail,0};
 			
-			map.getMap().setProxyUrl("#CHEMIN{php/proxy.php}?url=");
-			//map.getMap().setProxyUrl("spip.php?page=geoproxy&hash=#GEOPORTAIL_PROTECT{geoproxy}&url=");
+			//map.getMap().setProxyUrl("#CHEMIN{php/proxy.php}?url=");
+			map.getMap().setProxyUrl("?action=geoproxy&hash=<!_SPIP_GEOPORTAIL_HASH_!>&url=");
 			// Affichage de la carte
 			jQuery.geoportail.showMap (map, '#GET{zone}', Number('#LON'), Number('#LAT'), Number('#ZOOM'), '#LAYERCTRL', '#TOOLBOX', '#INFOBOX', '#CARTO', '#ORTHO');
 			// Outils de recherche (un petit delais pour IE !)
