@@ -56,11 +56,9 @@ class Facteur extends PHPMailer {
 
 		if (!empty($GLOBALS['meta']['facteur_cc'])) {
 			$this->AddCC( $GLOBALS['meta']['facteur_cc'] );
-			spip_log ( "facteur_cc : ".$GLOBALS['meta']['facteur_cc'] , 'facteur' );
 		}
 		if (isset($GLOBALS['meta']['facteur_bcc'])) {
 			$this->AddBCC( $GLOBALS['meta']['facteur_bcc'] );
-			spip_log ( "facteur_bcc : ".$GLOBALS['meta']['facteur_bcc'] , 'facteur' );
 		}
 		
 		if (isset($GLOBALS['meta']['facteur_smtp']) AND $GLOBALS['meta']['facteur_smtp'] == 'oui') {
