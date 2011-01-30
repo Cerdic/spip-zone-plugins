@@ -35,14 +35,15 @@ Sinon, utiliser le comportement normal.
 [
 <dt class='spip_doc_titre #EDIT{titre}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif #EDIT{descriptif}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
-<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>
 [(#GET{player}|=={pixplayer}|?{' ',''})
 [<!--(#REM) 
 
 	Pour voir les options de configuration : http://www.1pixelout.net/code/audio-player-wordpress-plugin/
 	
 -->]
-<object type='application/x-shockwave-flash' data='#CHEMIN{flash/pixplayer.swf}' id='audioplayer#ID_DOCUMENT' height='[(#ENV{height,24})]' width='[(#ENV{width,290})]'>
+#SET{my_width,#ENV{width,290}}
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']>
+<object type='application/x-shockwave-flash' data='#CHEMIN{flash/pixplayer.swf}' id='audioplayer#ID_DOCUMENT' height='[(#ENV{height,24})]' width='[(#GET{my_width})]'>
 <param name="wmode" value="transparent" />
 <param name='movie' value='#CHEMIN{flash/pixplayer.swf}' />
 <param name='FlashVars' value='playerID=#ID_DOCUMENT&amp;bg=0x[(#ENV{bg,f8f8f8})]&amp;leftbg=0x[(#ENV{leftbg,eeeeee})]&amp;lefticon=0x[(#ENV{lefticon,666666})]&amp;rightbg=0x[(#ENV{rightbg,cccccc})]&amp;rightbghover=0x[(#ENV{rightbghover,999999})]&amp;righticon=0x[(#ENV{righticon,666666})]&amp;righticonhover=0x[(#ENV{righticonhover,FFFFFF})]&amp;text=0x[(#ENV{text,666666})]&amp;slider=0x[(#ENV{slider,666666})]&amp;track=0x[(#ENV{track,FFFFFF})]&amp;border=0x[(#ENV{border,666666})]&amp;loader=0x[(#ENV{loader,9FFFB8})]&amp;soundFile=#URL_DOCUMENT' />
@@ -55,30 +56,35 @@ Sinon, utiliser le comportement normal.
 	if(typeof(ap_instances) == "undefined"){
 		jQuery.getScript("[(#CHEMIN{javascript/audio-player.js})]");
 	}
-</script>
+</script></dd>
 ][(#GET{player}|=={neoplayer}|?{' ',''})
-<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{flash/neoplayer_maxi.swf}" height="[(#ENV{height,20})]" width="[(#ENV{width,200})]">
+#SET{my_width,#ENV{width,200}}
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']>
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{flash/neoplayer_maxi.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
 <param name="wmode" value="transparent" />
 <param name="movie" value="#CHEMIN{flash/neoplayer_maxi.swf}" />
-<param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20[&amp;autoplay=(#ENV{autostart,0})]" />
+<param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=[(#GET{my_width})]&amp;height=20[&amp;autoplay=(#ENV{autostart,0})]" />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
-</object>
+</object></dd>
 ][(#GET{player}|=={dewplayer}|?{' ',''})
-<object type="application/x-shockwave-flash" data="#CHEMIN{flash/dewplayer.swf}" height="[(#ENV{height,20})]" width="[(#ENV{width,200})]">
+#SET{my_width,#ENV{width,200}}
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']>
+<object type="application/x-shockwave-flash" data="#CHEMIN{flash/dewplayer.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
 <param name="wmode" value="transparent" />
 <param name="movie" value='#CHEMIN{flash/dewplayer.swf}' />
 <param name="FlashVars" value="son=[(#URL_DOCUMENT|url_absolue)]" />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
-</object>
+</object></dd>
 ][(#GET{player}|=={eraplayer}|?{' ',''})
-<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{flash/eraplayer.swf}" height="[(#ENV{height,20})]" width="[(#ENV{width,20})]">
+#SET{my_width,#ENV{width,20}}
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{20,[(#GET{my_width})]})px;']>
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{flash/eraplayer.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
 	<param name="wmode" value="transparent" />
 	<param name="movie" value="#CHEMIN{flash/eraplayer.swf}" />
 	<param name="FlashVars" value="mp3=#URL_DOCUMENT" />
 	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
-</object>
+</object></dd>
 ]
-</dd>
 </dl>
 })]
 
