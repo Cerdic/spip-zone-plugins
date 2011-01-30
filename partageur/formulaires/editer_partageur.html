@@ -20,6 +20,13 @@
   			[<span class='erreur_message'>(#GET{erreurs})</span>]
   			<input name='url_site' id='champ_url_site' size="32" value='[(#ENV{url_site}|?{#ENV{url_site},http://})]' />
   		</li>	
+  		
+  		#SET{erreurs,#ENV**{erreurs}|table_valeur{cle}}
+  		<li class="editer_url_site[ (#GET{erreurs}|oui)erreur]">
+  			<label for="champ_cle"><:partageur:label_cle:></label>
+  			[<span class='erreur_message'>(#GET{erreurs})</span>]
+  			<input name='cle' id='champ_cle' size="32" value='[(#ENV{cle})]' />
+  		</li>	
       
 		</ul>
 

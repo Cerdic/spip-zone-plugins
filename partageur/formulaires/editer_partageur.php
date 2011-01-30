@@ -35,8 +35,7 @@ function formulaires_editer_partageur_verifier_dist() {
     		 $erreurs['url_site'] = _T('partageur:flux_inconnu')."<br /><a href='$url'>$url</a>";
     	} else if ($row_site = sql_fetsel("url_site","spip_partageurs",'url_site='.sql_quote(_request('url_site'))))   
     	   $erreurs['url_site'] = _T('partageur:flux_doublon');
-     
-    
+ 
 
   }	                        
                          	    
@@ -55,7 +54,8 @@ function formulaires_editer_partageur_traiter_dist() {
     
     $data_sql = array (		          
 			     "titre"	=> _request('titre'),			
-			     "url_site"	=> _request('url_site')
+			     "url_site"	=> _request('url_site'),
+			     "cle"	=> _request('cle')
     );
       
    $id_partage= sql_insertq('spip_partageurs',$data_sql);

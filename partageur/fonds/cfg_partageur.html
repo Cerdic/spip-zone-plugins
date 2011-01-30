@@ -4,12 +4,38 @@
 [(#REM) icone=img/partageur-24.png]
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
+ 
+   <fieldset><legend>Diffusion de vos articles</legend>
+   <p>Si vous définissez une clé d'authentification, seuls les sites qui connaissent votre clé pourront importer vos articles.</p>
+   <p>Si vous laissez cette clé vide, tous les sites pourront importer vos articles (valeur par défault)</p>
+   <p>  
+    <label> Clé d'authentification
+    <input type="text" name="cle" class="fondl" size="32" value="[(#ENV{cle})]" /></label><br />
+    
+  </p>
+  </fieldset>
+  
+   
  <fieldset><legend>Statut des articles import&eacute;s</legend>
       <select name="import_statut">
         <option value="prop"[(#ENV{import_statut}|=={prop}|?{' selected="selected"'})]><:ecrire:info_statut_site_3:></option>
         <option value="publie"[(#ENV{import_statut}|=={publie}|?{' selected="selected"'})]><:ecrire:info_statut_site_2:></option>
       </select>
  </fieldset>
+  
+  <fieldset><legend>Mots-clés: Export</legend>
+  <p><label><input type="checkbox" name="export_mot_article"[ checked="(#ENV{export_mot_article}|!={''}|?{'checked'})"] class="fondl" />Exporter les mots-clés des articles</label></p>
+  <p><label><input type="checkbox" name="export_mot_evnt"[ checked="(#ENV{export_mot_evnt}|!={''}|?{'checked'})"] class="fondl" />Exporter les mots-clés des événements</label></p>  
+  <p>Choisissez les groupes dont vous voulez exporter les mots-clés<br />
+    #SET{which_groupe,#CONFIG{partageur/export_mot_groupe,#ARRAY{0,-1}}}[(#REM) inspi:plugin GIS]    
+    <select name="export_mot_groupe[]" multiple="multiple" size="5">
+      <option value="-1"[ (#EVAL{-1}|in_array{#GET{which_groupe}}|?{' selected="selected"'})]>Tous</option>
+    <BOUCLE_groupes0(GROUPES_MOTS){par titre}>
+      <option value="#ID_GROUPE"[ (#ID_GROUPE|in_array{#GET{which_groupe}}|?{' selected="selected"'})]>&rarr; #TITRE</option>    
+    </BOUCLE_groupes0>
+    </select> 
+  </p>
+  </fieldset>
  
  
 

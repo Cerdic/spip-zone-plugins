@@ -8,33 +8,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
   
 ]<spip2spip version="1.8">
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
-	<link>#URL_SITE_SPIP/</link>  	
-  <BOUCLE_synchro_article(ARTICLES){id_article}>
-		<item>		  
-		  [<surtitre>(#SURTITRE*|liens_absolus|supprimer_numero|partageur_respecte_img|texte_backend)</surtitre>]
-		  <titre>[(#TITRE*|liens_absolus|supprimer_numero|partageur_respecte_img|texte_backend)]</titre>
-		  [<soustitre>(#SOUSTITRE*|liens_absolus|supprimer_numero|partageur_respecte_img|texte_backend)</soustitre>]
-		  [<descriptif>(#DESCRIPTIF*|liens_absolus|supprimer_numero|partageur_respecte_ln|partageur_respecte_img|texte_backend)</descriptif>]
-		  [<chapo>(#CHAPO*|liens_absolus|supprimer_numero|partageur_respecte_ln|partageur_respecte_img|texte_backend)</chapo>]
-		  [<texte>(#TEXTE*|liens_absolus|supprimer_numero|partageur_respecte_ln|partageur_respecte_img|texte_backend)</texte>]
-		  [<ps>(#PS*|liens_absolus|supprimer_numero|partageur_respecte_ln|texte_backend)</ps>]
-		  <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
-		  <BOUCLE_trad_dispo(ARTICLES){traduction}{0,1}{exclus}> </BOUCLE_trad_dispo><BOUCLE_trad(ARTICLES){traduction}{origine_traduction}><trad>#URL_SITE_SPIP/#URL_ARTICLE</trad></BOUCLE_trad></B_trad_dispo>
-		  <date>#DATE</date>      
-      <B_doc><documents>
-                <BOUCLE_doc(DOCUMENTS){id_article}>
-                 <document>
-                     <id>#ID_DOCUMENT</id>
-                     <url>#URL_SITE_SPIP/#URL_DOCUMENT</url>
-                     [<titre>(#TITRE*|supprimer_numero|texte_backend)</titre>]
-                     [<desc>(#DESCRIPTIF*|supprimer_numero|texte_backend)</desc>]                      
-                 </document>
-                </BOUCLE_doc>
-      </documents></B_doc>            
-     <B_auteurs><auteur><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></auteur></B_auteurs> 
-		 <lang>#LANG</lang>
-		 [<logo>#URL_SITE_SPIP/(#LOGO_ARTICLE|extraire_attribut{src})</logo>]
-     [(#REM) fixme ajouter ici les mots de l'article? lesquels ?]    		
-		</item>
-	</BOUCLE_synchro_article>
+	<link>#URL_SITE_SPIP/</link> 
+  [(#CONFIG{partageur/cle}|=={#ENV{cle}}|oui)<INCLURE{fond=inc/partageur_backend-partageur}{id_article} />]
+  [(#CONFIG{partageur/cle}|=={#ENV{cle}}|non)<erreur><:partageur:cle_incorrecte:></erreur>]
 </spip2spip>

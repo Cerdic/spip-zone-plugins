@@ -16,6 +16,7 @@ function partageur_declarer_tables_principales($tables_principales){
 	  	"titre"  	      => "text NOT NULL",
 	  	"url_site" 	    => "text NOT NULL",
 	  	//"url_syndic" 	  => "text NOT NULL",
+	  	"cle" 	        => "text NOT NULL",
 		  "maj" 	        => "TIMESTAMP"
   );
 	$spip_partageur_key = array("PRIMARY KEY" 	=> "id_partageur");	

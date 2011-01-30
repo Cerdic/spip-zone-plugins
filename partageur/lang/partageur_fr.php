@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'creer_partage' => 'Importer des articles en partage',
   'creer_site_partage' => 'Ajouter un nouveau site partageur',
   'copie' => 'Partageur: Import d\'article',
+  'cle_incorrecte' => 'Mauvais clé d\'authentification',
   
   // D
   'description_partageur' => 'Vous pouvez dans cette section, définir les sites desquels vous voulez importer des articles.<br /><br />Ces sites doivent aussi avoir installés le plugin partageur',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   
   // L
+  'label_cle' => 'Clé d\'authentification',
   'label_titre' => 'Nom du site',
   'label_url' => 'Adresse du site',
   'label_effacer' => 'Effacer',

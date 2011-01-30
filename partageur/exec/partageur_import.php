@@ -15,8 +15,9 @@ function exec_partageur_import() {
 	$id_rubrique = (int) _request("id_rubrique");
 	$id_partageur = (int)_request("id_partageur");
 	$id_article = (int)_request("id_article");
+	$cle = _request("cle");
 	
-  $callback = partageur_syndiquer($id_partageur,$id_article,$id_rubrique);
+  $callback = partageur_syndiquer($id_partageur,$id_article,$id_rubrique,$cle);
   
   if (is_int($callback)) {
         // nouvel article
@@ -51,7 +52,7 @@ function exec_partageur_import() {
 //
 // effectue la syndicatioe  d'un article ($id_article) d'un site distant ($id_partageur) pour l'importer dans une rubrique ($id_rubrique) 
 //---------------------------------------
-function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0) {
+function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
     include_spip("inc/distant"); 
     include_spip("inc/syndic"); 
     include_spip("inc/getdocument"); 
@@ -60,6 +61,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0) {
 
     $log_html = "";
     $id_nouvel_article = false;
+    $cle = strip_tags($cle);
     
     //-------------------------------  
     // Recupere la config (A FAIRE...)
@@ -79,7 +81,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0) {
     if ($row_site = sql_fetsel("*","spip_partageurs",'id_partageur='.sql_quote($id_partageur))) {    
      
       $titre_site = $row_site["titre"];            
-      $url_syndic = $row_site['url_site']."/spip.php?page=backend-partageur&id_article=$id_article";
+      $url_syndic = $row_site['url_site']."/spip.php?page=backend-partageur&id_article=$id_article&cle=".urlencode($cle);
       spip_log("partageur: ".$url_syndic);
           
       // Aller chercher les donnees du flux RSS et les analyser
