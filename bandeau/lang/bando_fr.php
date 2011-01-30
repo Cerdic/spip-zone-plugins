@@ -35,7 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Ces adresses seront redirig&eacute;es automatiquement vers l\'adresse principale. Indiquez une adresse par ligne',
 	'titre_config_langage' => 'Configurer la langue',
 	'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences',
-	'titre_identite_site' => 'Identit&eacute; du site'
+	'titre_identite_site' => 'Identit&eacute; du site',
+	'titre_infos_perso' => 'Mes informations personnelles'
 );
 
 ?>
