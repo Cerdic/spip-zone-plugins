@@ -82,8 +82,8 @@ function messagerie_messager($objet, $texte, $auteurs_dest=array(),$general = fa
 	if (count($auteurs_dest) OR $general){
 		// envoyons le message
 		$id_message = sql_insertq('spip_messages',array(
-		'titre' => $objet,
-		'texte' => $texte,
+		'titre' => safehtml($objet),
+		'texte' => safehtml($texte),
 		'type' => $general?'genera':'normal',
 		'date_heure' => 'NOW()',
 		'date_fin' => 'NOW()',
