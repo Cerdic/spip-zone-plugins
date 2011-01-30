@@ -8,7 +8,8 @@
 	<etat>dev</etat>
     <description>
     SerVeur d'information sur les Plugins.
-	_ Ce plugin fournit une API permettant de collecter, d'effectuer des recherches multi-crit&egrave;res et de pr&eacute;senter les informations 
+	
+	Ce plugin fournit une API permettant de collecter, d'effectuer des recherches multi-crit&egrave;res et de pr&eacute;senter les informations 
 	sur les plugins SPIP - modules fonctionnels, th&egrave;mes et squelettes. Cette API sert aussi de base au plugin STEP.
 	</description>
 	<lien></lien>
