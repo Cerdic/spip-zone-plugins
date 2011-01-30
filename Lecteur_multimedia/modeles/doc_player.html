@@ -18,8 +18,10 @@ Sinon, utiliser le comportement normal.
 -->]
 <BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
 #SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
-
-
+[(#GET{player}|=={pixplayer}|?{' ',''})#SET{my_width,#ENV{width,290}}]
+[(#GET{player}|=={neoplayer}|?{' ',''})#SET{my_width,#ENV{width,200}}]
+[(#GET{player}|=={dewplayer}|?{' ',''})#SET{my_width,#ENV{width,200}}]
+[(#GET{player}|=={eraplayer}|?{' ',''})#SET{my_width,#ENV{width,20}}]
 [<!--(#REM) 
 
 	Document MP3 ? 
@@ -33,15 +35,14 @@ Sinon, utiliser le comportement normal.
 	''
 })]
 [
-<dt class='spip_doc_titre #EDIT{titre}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
-<dd class='spip_doc_descriptif #EDIT{descriptif}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+<dt class='spip_doc_titre #EDIT{titre}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']><strong>(#TITRE)</strong></dt>][
+<dd class='spip_doc_descriptif #EDIT{descriptif}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
 [(#GET{player}|=={pixplayer}|?{' ',''})
 [<!--(#REM) 
 
 	Pour voir les options de configuration : http://www.1pixelout.net/code/audio-player-wordpress-plugin/
 	
 -->]
-#SET{my_width,#ENV{width,290}}
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']>
 <object type='application/x-shockwave-flash' data='#CHEMIN{flash/pixplayer.swf}' id='audioplayer#ID_DOCUMENT' height='[(#ENV{height,24})]' width='[(#GET{my_width})]'>
 <param name="wmode" value="transparent" />
@@ -58,7 +59,6 @@ Sinon, utiliser le comportement normal.
 	}
 </script></dd>
 ][(#GET{player}|=={neoplayer}|?{' ',''})
-#SET{my_width,#ENV{width,200}}
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']>
 <object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{flash/neoplayer_maxi.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
 <param name="wmode" value="transparent" />
@@ -67,7 +67,6 @@ Sinon, utiliser le comportement normal.
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object></dd>
 ][(#GET{player}|=={dewplayer}|?{' ',''})
-#SET{my_width,#ENV{width,200}}
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120,[(#GET{my_width})]})px;']>
 <object type="application/x-shockwave-flash" data="#CHEMIN{flash/dewplayer.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
 <param name="wmode" value="transparent" />
@@ -76,7 +75,6 @@ Sinon, utiliser le comportement normal.
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object></dd>
 ][(#GET{player}|=={eraplayer}|?{' ',''})
-#SET{my_width,#ENV{width,20}}
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{20,[(#GET{my_width})]})px;']>
 <object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{flash/eraplayer.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
 	<param name="wmode" value="transparent" />
