@@ -164,8 +164,6 @@ function facteur_envoyer_mail_test($destinataire,$titre){
 	$message_texte	= recuperer_fond('emails/test_email_texte', array());
 
 	$facteur = new Facteur($destinataire, $titre, $message_html, $message_texte);
-	$facteur->AddCC( $GLOBALS['meta']['facteur_cc'] );
-	$facteur->AddBCC( $GLOBALS['meta']['facteur_bcc'] );
 	if (!$facteur->Send())
 		return $test->ErrorInfo;
 	else

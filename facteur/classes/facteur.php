@@ -49,11 +49,20 @@ class Facteur extends PHPMailer {
 		else
 			$this->AddAddress($email);
 
-		if (isset($GLOBALS['meta']['facteur_smtp_sender'])) {
+		if (!empty($GLOBALS['meta']['facteur_smtp_sender'])) {
 			$this->Sender = $GLOBALS['meta']['facteur_smtp_sender'];
 			$this->AddCustomHeader("Errors-To: ".$this->Sender);
 		}
 
+		if (!empty($GLOBALS['meta']['facteur_cc'])) {
+			$this->AddCC( $GLOBALS['meta']['facteur_cc'] );
+			spip_log ( "facteur_cc : ".$GLOBALS['meta']['facteur_cc'] , 'facteur' );
+		}
+		if (isset($GLOBALS['meta']['facteur_bcc'])) {
+			$this->AddBCC( $GLOBALS['meta']['facteur_bcc'] );
+			spip_log ( "facteur_bcc : ".$GLOBALS['meta']['facteur_bcc'] , 'facteur' );
+		}
+		
 		if (isset($GLOBALS['meta']['facteur_smtp']) AND $GLOBALS['meta']['facteur_smtp'] == 'oui') {
 			$this->Mailer	= 'smtp';
 			$this->Host 	= $GLOBALS['meta']['facteur_smtp_host'];
