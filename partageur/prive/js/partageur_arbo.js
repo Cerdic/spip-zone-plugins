@@ -9,20 +9,22 @@
 //---------------------------------- 
 function arbocallback(data){ 
 
-    // html
+    // html    
+    // ... recherche
+    htm = "<form id='partageur_search'><div><input type='text' name='partageur_cherche' id='partageur_cherche' value='"+recherche+"' /><input type='button' value='ok' id='partageur_search_ok' /></div></form>";
     
     // .... ariane ? 
-    htm = "<ul class='partage_ariane'>";
+    htm += "<ul class='partage_ariane'>";
     htm += "<li><a href='#' rel='-1'>&lt;</a></li>";
     htm += "<li class='url'><a href='#' rel='0'>"+url_site_partage+"</a></li>";   
     if (data.ariane) {    
        for (i=0;i<data.ariane.length;i++)            
           htm += "<li class='rub'><a href='#' rel='"+data.ariane[i].id+"'>"+data.ariane[i].titre+"</a></li>";       
     } 
-    
-    htm += "</ul><br class='nettoyeur' /><ul class='partage_contenu'>";
-    
+    htm += "</ul><br class='nettoyeur' />";
+
     // .... rubrique ?
+    htm += "<ul class='partage_contenu'>";
     if (data.rubrique) {    
        for (i=0;i<data.rubrique.length;i++)            
           htm += "<li class='rub'><a href='#' rel='"+data.rubrique[i].id+"'>"+data.rubrique[i].titre+"</a></li>";       
@@ -42,6 +44,7 @@ function arbocallback(data){
      
     $("#partageur_source").empty().append(htm); 
     
+    // comportement
     $("#partageur_source li a").click(function(){                
                if ($(this).attr("rel") !="-1") {
                     //charge_arbo($(this).attr("rel"),url_site_partage);
@@ -55,7 +58,18 @@ function arbocallback(data){
                     
                } 
                     else charge_sites();               
+    }); 
+    
+    $("#partageur_search").submit(function(){
+        return false;
+    });
+        
+    $("#partageur_search_ok").click(function(){
+          recherche = $('input[name=partageur_cherche]').val();
+          charge_recherche(recherche,url_site_partage,cle_url_site_partage);
     });  
+    
+    
         
 } 
 
@@ -65,7 +79,12 @@ function arbocallback(data){
 // charge un bout d'arbo
 // requete en json-p (requetes interdomaines)
 function charge_arbo(id_rubrique, url_site,cle_url_site_partage) {
+    recherche = "";
     $.getJSON(url_site+'/spip.php?page=partageur_arbo_json&id_rubrique='+id_rubrique+'&cle='+cle_url_site_partage+'&arbocallback=?'); 
+}
+
+function charge_recherche(recherche, url_site,cle_url_site_partage) {
+    $.getJSON(url_site+'/spip.php?page=partageur_arbo_json&recherche='+recherche+'&cle='+cle_url_site_partage+'&arbocallback=?'); 
 }
 
 
@@ -94,6 +113,7 @@ function charge_sites() {
 var url_site_partage = "";
 var id_url_site_partage = 0;
 var cle_url_site_partage = "";
+var recherche = "";
 
 //----------------------------------
 // Main

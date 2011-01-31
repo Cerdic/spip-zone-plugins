@@ -2,7 +2,7 @@
   <nom>Partageur</nom>
   <auteur>[erational->http://www.erational.org]</auteur>
   <licence>&#169; 2011 - GNU/GPL</licence>
-  <version>0.1</version>
+  <version>0.2</version>
   <etat>test</etat>
   <description>Partage manuel &agrave; l'identique d'articles entre sites SPIP</description>
   <lien>http://www.spip-contrib.net/Partageur</lien>
