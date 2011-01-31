@@ -113,7 +113,8 @@ function mots_objets_ajouter_selecteur_mots_grappes($flux) {
 		}
 		if ($source && $id_source) {
 		// grappes recup du code +prive/lister_objets.html +prive/inc-lister-auteurs.html
-			$lister_objet = charger_fonction('lister_objets','inc');
+						$lister_objet = charger_fonction('grappes_lister_objets','inc');
+
 			
 			//On affiche la liste des auteurs liés ou des documents sur la page du mot-clef (si auteur lié à groupe)
 			if($source == 'mots') {
