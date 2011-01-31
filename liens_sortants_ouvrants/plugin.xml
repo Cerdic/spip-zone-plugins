@@ -1,17 +1,17 @@
 <plugin>
-<nom>Liens sortants ouvrants</nom>
+<nom>Liens explicites</nom>
 <icon>icon.png</icon>
-<description>Il suffit d'activer ce plugin pour que tous les liens externes du site s'ouvrent dans une nouvelle fen&ecirc;tre. &Agrave;&nbsp;&eacute;viter, car c'est une mauvaise pratique.</description>
+<description>Styles et pictos explicitant les liens du site : documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc.</description>
 <lien>http://www.spip-contrib.net/liens-sortants-ouvrants</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin</auteur>
-<licence>(c) GPL 2009</licence>
-<version>1.0</version>
-<etat>stable</etat>
+<licence>(c) GPL 2011</licence>
+<version>2.0</version>
+<etat>dev</etat>
+<prefix>links</prefix>
 <necessite id='SPIP' version='[2.0.0;]' />
-<prefix>liens_sortants_ouvrants</prefix>
 <pipeline>
 	<nom>insert_head</nom>
-	<inclure>liens_sortants_ouvrants_pipelines.php</inclure>
+	<inclure>links_pipelines.php</inclure>
 </pipeline>
 <categorie>navigation</categorie>
 </plugin>
