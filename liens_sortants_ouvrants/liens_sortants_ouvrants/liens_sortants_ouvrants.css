@@ -1,0 +1,10 @@
+/* Style des liens externes
+---------------------------------------------- */
+a {}
+a.external { padding-right: 14px; background: transparent url(img/external.gif) no-repeat right; }
+a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
+
+@media print {
+a.external { padding-right: 0; background: none; text-decoration: underline; }
+a.external:after { content: " (" attr(href) ") "; font-size: 90%; font-weight: normal; }
+}
