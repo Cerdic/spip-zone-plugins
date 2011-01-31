@@ -192,19 +192,28 @@ function tri_protege_champ($t){
  * @param string $t
  * @return string
  */
-function tri_champ_order($t,$table=NULL){
-	if (!is_null($table))
-		$table = $table.'.';
+function tri_champ_order($t,$table=NULL,$field=NULL){
 	if (strncmp($t,'num ',4)==0){
 		$t = substr($t,4);
 		$t = preg_replace(',\s,','',$t);
-		$t = "0+$table$t";
+		// Lever une ambiguité possible si le champs fait partie de la table (pour compatibilité de la balise tri avec compteur, somme, etc.)
+		if (!is_null($table) && !is_null($field) && in_array($t,unserialize($field)))
+			$t = "0+$table.$t";
+		else
+			$t = "0+$t";
 		return $t;
 	}
 	elseif(strncmp($t,'multi ',6)==0){
 		return "multi";
 	}
-	return $table.preg_replace(',\s,','',$t);
+	else {
+		$t = preg_replace(',\s,','',$t);
+		// Lever une ambiguité possible si le champs fait partie de la table (pour compatibilité de la balise tri avec compteur, somme, etc.)
+		if (!is_null($table) && !is_null($field) && in_array($t,unserialize($field)))
+			return $table.'.'.$t;
+		else
+			return $t;
+	}
 }
 
 /**

@@ -199,8 +199,9 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 		\$senstri = (\$senstri<0)?' DESC':'';
 	};
 	";
+	$field = serialize(array_keys($boucle->show['field']));
 	$boucle->select[] = "\".tri_champ_select(\$tri).\"";
-	$boucle->order[] = "tri_champ_order(\$tri,'$id_table').\$senstri";
+	$boucle->order[] = "tri_champ_order(\$tri,'$id_table','$field').\$senstri";
 }
 
 /**
