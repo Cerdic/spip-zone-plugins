@@ -46,4 +46,4 @@ ced.formulaire_ecrire_message form li {clear:left;}
 .messages li .message .texte {display:none;}
 .messages li.on .message .intro {display:none}
 .messages li.on .message .texte {display:block;font-size:1em;}
-.messages li .message .repondre {clear:none;float:right;padding:0;margin:-0.8em 0 0 8px;background:url(bg-comment.gif) no-repeat right 2px;position:relative;display:inline;font-size:0.95em;}
+.messages li .message .repondre {clear:none;float:right;padding:0;margin:-0.8em 0 0 8px;position:relative;display:inline;font-size:0.95em;}
