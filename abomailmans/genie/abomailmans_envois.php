@@ -1,7 +1,7 @@
 <?php
-/*
+/**
  * Plugin Abomailmanss
- * (c) 2009 SPIP
+ * (c) 2009-2011 SPIP
  * Distribue sous licence GPL
  *
  */
@@ -10,32 +10,37 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/abomailmans');
 include_spip('inc/distant');
 
-// 20 minutes de repit avant abomailmans (+0 a 10 minutes de cron)
-#define('_DELAI_ABOMAILMANS_MESSAGERIE', 60 * 20);
-
-// Les abomailmans de chaque liste peuvent se faire par cron
-// base sur les champs remplis de chaque liste
-// automatique tout les /periodicite/ jours
-
+/**
+ * Les abomailmans de chaque liste peuvent se faire par cron
+ * base sur les champs remplis de chaque liste
+ * automatique tout les /periodicite/ jours
+ * @param unknown_type $time
+ */
 function genie_abomailmans_envois_dist($time) {
 	
-	// Les listes dont la date_envoi < maintenant+periodicite
-	//pour tester on peut mettre � MINUTE penser � remettre � DAY !!
-	//$where = "periodicite!='' AND desactive='0' AND email!=''
-	//AND date_envoi < DATE_SUB(NOW(), INTERVAL periodicite DAY)"; 
-	//$id_liste = sql_getfetsel("id_abomailman", "spip_abomailmans", $where, '', "date_envoi", "1");
+	/**
+	 * Les listes dont la date_envoi < maintenant+periodicite
+	 * pour tester on peut mettre a MINUTE penser a remettre a DAY !!
+	 */
+	$where = "periodicite!='' AND desactive='0' AND email!=''
+	AND date_envoi < DATE_SUB(NOW(), INTERVAL periodicite DAY)"; 
+	$id_liste = sql_getfetsel("id_abomailman", "spip_abomailmans", $where, '', "date_envoi", "1");
 	 
-	//if ($id_liste) {
-	//	spip_log("il faut traiter liste id=$id_liste","abomailmans");
-	//	$res2 = liste_a_jour($id_liste);
-	//} else $res2 = true;
+	if ($id_liste) {
+		spip_log("il faut traiter liste id=$id_liste","abomailmans");
+		$res2 = liste_a_jour($id_liste);
+	} else $res2 = true;
 	
-# nul, si la t�che n�a rien � faire
-# positif, si la t�che a �t� trait�e
-# n�gatif, si la t�che a commenc�, mais doit se poursuivre. Cela permet d�effectuer des t�ches par lots (pour �viter des timeout sur les ex�cutions des scripts PHP � cause de traitements trop longs).
-# Dans ce cas l�, le nombre n�gatif indiqu� correspond au nombre de secondes d�intervalle pour la prochaine ex�cution.
-
-	//return ($res1 OR $res2) ? 0 : $id_liste;
+	/**
+	 * nul, si la tache n'a rien a faire
+	 * positif, si la tache a ete traitee
+	 * negatif, si la tache a commence, mais doit se poursuivre. 
+	 * Cela permet d'effectuer des taches par lots (pour eviter des timeout sur les executions des scripts PHP 
+	 * a cause de traitements trop longs).
+	 * Dans ce cas la, le nombre negatif indique correspond au nombre de secondes d'intervalle 
+	 * pour la prochaine execution.
+	 */
+	return ($res1 OR $res2) ? 0 : $id_liste;
 }	 
 	
 	
@@ -45,7 +50,7 @@ function liste_a_jour($id_liste) {
 	if(!$t) { 
 		spip_log("requete null ...","abomailmans");
 		return;
-	} else spip_log("envoi test� avec cron abomailmans","abomailmans");
+	} else spip_log("envoi teste avec cron abomailmans","abomailmans");
 		
 	$datas = array();
 	$nom_site = lire_meta("nom_site");
@@ -60,23 +65,31 @@ function liste_a_jour($id_liste) {
 		
 		$recuptemplate = explode('&',$modele_defaut);
 			
-			include_spip('abomailmans_fonctions');
-			$paramplus = recup_param($modele_defaut); //pour url
-			$periodicite=intval($t['periodicite']);
-		//la page � envoyer doit �tre test� � maintenant moins periodicite
-			$time = time() - (3600 * 24 * $periodicite);
-		//construction du query
-		 	 	parse_str($paramplus,$query);
-		 	 	$query['id_abomailman'] = $t['id_abomailman'];
-				$query['template'] = $recuptemplate[0];
-				$query['date'] = date('Y-m-d H:i:s', $time);
-				 
-		//on peut verifier le fond grace � l'url
+		include_spip('abomailmans_fonctions');
+		$paramplus = recup_param($modele_defaut); //pour url
+		$periodicite=intval($t['periodicite']);
+
+		/**
+		 * la page a envoyer doit etre testee a maintenant moins periodicite
+		 */
+		$time = time() - (3600 * 24 * $periodicite);
+
+		/**
+		 * construction du query
+		 */
+ 	 	parse_str($paramplus,$query);
+ 	 	$query['id_abomailman'] = $t['id_abomailman'];
+		$query['template'] = $recuptemplate[0];
+		$query['date'] = date('Y-m-d H:i:s', $time);
+
+		/**
+		 * on peut verifier le fond grace à l'url
+		 */
 		$url_genere = generer_url_public('abomailman_template',$query,'&'); 
 		$fond = recuperer_fond('abomailman_template',$query);
 	
-	$body = array(
-	'html'=>$fond,
+		$body = array(
+		'html'=>$fond,
 	); 
 	
 	//Si la page renvoie un contenu
