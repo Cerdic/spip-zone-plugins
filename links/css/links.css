@@ -1,6 +1,23 @@
-/* Style des liens externes
----------------------------------------------- */
+/* --------------------------------------------------------------
+
+	link.css
+	Style des liens du site
+	romy.tetue.net - GPL - 2011
+
+-------------------------------------------------------------- */
+
 a {}
+
+/* Download */
+#content a.external[href$=".pdf"], #content a.external[href$=".PDF"], #content a.external[href*=".pdf#"], #content a.external[href*=".PDF#"], #content a.external[href*=".pdf?"], #content a.external[href*=".PDF?"], .link-document {
+    background: url(img/document.png) no-repeat scroll right center transparent;
+    padding: 0 13px 0 0;
+}
+
+/* Services */
+.spip_mail {}
+
+/* External links */
 a.external { padding-right: 14px; background: transparent url(img/external.gif) no-repeat right; }
 a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
 
