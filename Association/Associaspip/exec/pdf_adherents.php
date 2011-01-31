@@ -17,7 +17,7 @@ function exec_pdf_adherents()
 	$pdf->Open();
 	$pdf->AddPage();
 	//On définit les colonnes (champs,largeur,intitulé,alignement)
-	$pdf->AddCol($GLOBALS['association_metas']['indexation'],15,_T('asso:adherent_libelle_'.$GLOBALS['association_metas']['indexation']),'R');
+	$pdf->AddCol($GLOBALS['association_metas']['indexation'],15,_T('asso:adherent_libelle_id_adherent'),'R');
 	$pdf->AddCol('nom_famille',50,_T('asso:adherent_libelle_nom'),'L');
 	$pdf->AddCol('prenom',40,_T('asso:adherent_libelle_prenom'),'L');
 	$pdf->AddCol('ville',50,_T('asso:adherent_libelle_ville'),'L');

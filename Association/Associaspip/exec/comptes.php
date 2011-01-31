@@ -28,11 +28,13 @@ function exec_comptes() {
 
 		if ( isset ($_REQUEST['imputation'] )) { $imputation = $_REQUEST['imputation']; }
 		else { $imputation= "%"; }
+		$max = intval(_request('max'));
+		if (!$max) $max = 30;
 		exec_comptes_args($annee, $vu, $imputation, _request('debut'));
 	}
 }
 
-function exec_comptes_args($annee, $vu, $imputation, $debut) 
+function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page) 
 {
 	$where = "imputation like " . sql_quote($imputation)
 	  . (!is_numeric($vu) ? '' : (" AND vu=$vu"));
@@ -84,7 +86,7 @@ function exec_comptes_args($annee, $vu, $imputation, $debut)
 	echo '</tr></table>';
 
 	//TABLEAU
-	$max_par_page = 30;
+
 	$table = comptes_while($where, intval($debut) . "," . $max_par_page);
 
 	if ($table) {
