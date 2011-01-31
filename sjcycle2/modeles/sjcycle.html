@@ -4,7 +4,7 @@
    dans une boucle, id prenant l'id de l'objet de la boucle. Donc on evite cette ecriture)
 ]
 [(#SET{id_objet,       [(#ENV{id_sjcycle,     0})]})]
-[(#SET{id_diapo,   	  [(#ENV{id_diapo,       0})]})]
+[(#SET{id_diapo,   	  [(#ENV{id_diapo,       #VAL{id_}|uniqid})]})]
 [(#SET{img_width,      [(#ENV{width,     		 #CONFIG{sjcycle/img_width}})]})]
 [(#SET{img_height,     [(#ENV{height,    		 #CONFIG{sjcycle/img_height}})]})]
 [(#SET{img_position,   [(#ENV{position,  		 #CONFIG{sjcycle/img_position}})]})]

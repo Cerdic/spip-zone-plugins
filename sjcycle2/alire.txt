@@ -39,6 +39,9 @@ V 0.9 :
 V 1.0 :
 - Ajout de la possibilité de légender le diaporama avec un texte libre, le titre des images ou à partir d'un modèle
 
+V 1.1 :
+- Ne plus être obligé de spécifier un id_diapo pour afficher plusieurs diapos dans la même page
+
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
 - Possibilité d'afficher un diapo dans une rubrique à partir des images de la rubrique

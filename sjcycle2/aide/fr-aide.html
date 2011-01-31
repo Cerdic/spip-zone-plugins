@@ -58,11 +58,22 @@
    
         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">id_diapo=X</span>&gt;</h4>
         <strong>Param&egrave;tre &quot;<span style="color:#666">id_diapo=X</span>&quot;, optionnel :</strong> <br />
-   Permet d'afficher plusieurs diaporamas dans le même article, chacun devant avoir un id_diapo différent <br />
+   Permet d’attribuer un id sp&eacute;cifique à un diaporama afin de pouvoir le cibler en css par dsjcycle_X<br />
+Depuis la version 1.1, n’est plus n&eacute;cessaire pour afficher plusieurs diaporamas dans le m&egrave;me article <br />
    <strong>Exemple :</strong><br />
    &lt;sjcycle16|center|docs=101,102,103,104|id_diapo=1&gt;<br />
    &lt;sjcycle16|center|docs=105,106,107,108,109|id_diapo=2|opt=fx:'shuffle',timeout:2000&gt;<br />
    Ceci affiche 2 diaporamas dans le même article, le premier sur 4 images avec les paramètres par défaut du site et le second sur 5 images, avec des paramètres différents de ceux par défaut.<br />
+      </li>
+      <li>
+      	<h4>&lt;sjcycleN|ALIGN|<span style="color:red">legende=X</span>&gt;</h4>
+        <strong>Param&egrave;tre &quot;<span style="color:#666">legende=X</span>&quot;, optionnel :</strong> <br />
+	Permet d’afficher une légende sous le diaporama
+		<ul>
+          <li>Si X=1, on affiche comme légende le titre des images</li>
+          <li>Si X=modele, on affiche comme légende le texte fourni par le modèle sjcycle_modele. Ceci permet de créer une légende contenant le nomde l’auteur, le titre de l’article, enfin ce qu’on veut...
+          <li>Si X=un texte, ce texte est affiché comme légende
+          </ul>
       </li>
       <li>
         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">opt=p1:v1,p2:v2</span>&gt;</h4>
