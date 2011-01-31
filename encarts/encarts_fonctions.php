@@ -7,4 +7,10 @@
  */
 
 
+function style_encarts($letexte) {
+	$letexte = str_replace('<encart>', '<span class="encart">', $letexte);
+	$letexte = str_replace('</encart>', '</span>', $letexte);
+	return $letexte;
+}
+
 ?>

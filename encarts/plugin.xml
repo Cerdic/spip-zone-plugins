@@ -6,7 +6,7 @@
 
 	<licence>&#169; 2011 - GNU/LGPL</licence>
 
-	<version>1.0</version>
+	<version>1.0.1</version>
 	
 	<version_base>1.0</version_base>
 
@@ -19,6 +19,8 @@
 	<prefix>encarts</prefix>
 
 	<fonctions>encarts_fonctions.php</fonctions>
+
+	<options>encarts_options.php</options>
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
