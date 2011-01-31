@@ -20,22 +20,22 @@ include_spip('inc/distant');
 function genie_abomailmans_envois_dist($time) {
 	
 	// Les listes dont la date_envoi < maintenant+periodicite
-	//pour tester on peut mettre ˆ MINUTE penser ˆ remettre ˆ DAY !!
-	$where = "periodicite!='' AND desactive='0' AND email!=''
-	AND date_envoi < DATE_SUB(NOW(), INTERVAL periodicite DAY)"; 
-	$id_liste = sql_getfetsel("id_abomailman", "spip_abomailmans", $where, '', "date_envoi", "1");
+	//pour tester on peut mettre ï¿½ MINUTE penser ï¿½ remettre ï¿½ DAY !!
+	//$where = "periodicite!='' AND desactive='0' AND email!=''
+	//AND date_envoi < DATE_SUB(NOW(), INTERVAL periodicite DAY)"; 
+	//$id_liste = sql_getfetsel("id_abomailman", "spip_abomailmans", $where, '', "date_envoi", "1");
 	 
-	if ($id_liste) {
-		spip_log("il faut traiter liste id=$id_liste","abomailmans");
-		$res2 = liste_a_jour($id_liste);
-	} else $res2 = true;
+	//if ($id_liste) {
+	//	spip_log("il faut traiter liste id=$id_liste","abomailmans");
+	//	$res2 = liste_a_jour($id_liste);
+	//} else $res2 = true;
 	
-# nul, si la t‰che nÕa rien ˆ faire
-# positif, si la t‰che a ŽtŽ traitŽe
-# nŽgatif, si la t‰che a commencŽ, mais doit se poursuivre. Cela permet dÕeffectuer des t‰ches par lots (pour Žviter des timeout sur les exŽcutions des scripts PHP ˆ cause de traitements trop longs).
-# Dans ce cas lˆ, le nombre nŽgatif indiquŽ correspond au nombre de secondes dÕintervalle pour la prochaine exŽcution.
+# nul, si la tï¿½che nï¿½a rien ï¿½ faire
+# positif, si la tï¿½che a ï¿½tï¿½ traitï¿½e
+# nï¿½gatif, si la tï¿½che a commencï¿½, mais doit se poursuivre. Cela permet dï¿½effectuer des tï¿½ches par lots (pour ï¿½viter des timeout sur les exï¿½cutions des scripts PHP ï¿½ cause de traitements trop longs).
+# Dans ce cas lï¿½, le nombre nï¿½gatif indiquï¿½ correspond au nombre de secondes dï¿½intervalle pour la prochaine exï¿½cution.
 
-	return ($res1 OR $res2) ? 0 : $id_liste;
+	//return ($res1 OR $res2) ? 0 : $id_liste;
 }	 
 	
 	
@@ -45,7 +45,7 @@ function liste_a_jour($id_liste) {
 	if(!$t) { 
 		spip_log("requete null ...","abomailmans");
 		return;
-	} else spip_log("envoi testŽ avec cron abomailmans","abomailmans");
+	} else spip_log("envoi testï¿½ avec cron abomailmans","abomailmans");
 		
 	$datas = array();
 	$nom_site = lire_meta("nom_site");
@@ -63,7 +63,7 @@ function liste_a_jour($id_liste) {
 			include_spip('abomailmans_fonctions');
 			$paramplus = recup_param($modele_defaut); //pour url
 			$periodicite=intval($t['periodicite']);
-		//la page ˆ envoyer doit tre testŽ ˆ maintenant moins periodicite
+		//la page ï¿½ envoyer doit ï¿½tre testï¿½ ï¿½ maintenant moins periodicite
 			$time = time() - (3600 * 24 * $periodicite);
 		//construction du query
 		 	 	parse_str($paramplus,$query);
@@ -71,7 +71,7 @@ function liste_a_jour($id_liste) {
 				$query['template'] = $recuptemplate[0];
 				$query['date'] = date('Y-m-d H:i:s', $time);
 				 
-		//on peut verifier le fond grace ˆ l'url
+		//on peut verifier le fond grace ï¿½ l'url
 		$url_genere = generer_url_public('abomailman_template',$query,'&'); 
 		$fond = recuperer_fond('abomailman_template',$query);
 	

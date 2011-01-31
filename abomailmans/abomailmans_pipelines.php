@@ -48,7 +48,7 @@ function abomailmans_header_prive($flux) {
  * @return array 
  */
 function abomailmans_taches_generales_cron($taches_generales){
-	$taches_generales['abomailmans_envois'] = 60 * 10; // toutes les 10 minutes
+	//$taches_generales['abomailmans_envois'] = 60 * 10; // toutes les 10 minutes
 	return $taches_generales;
 }
 
