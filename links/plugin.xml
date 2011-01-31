@@ -5,10 +5,16 @@
 <lien>http://www.spip-contrib.net/liens-sortants-ouvrants</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin</auteur>
 <licence>(c) GPL 2011</licence>
-<version>2.0</version>
+<version>2.0.1</version>
 <etat>dev</etat>
 <prefix>links</prefix>
 <necessite id='SPIP' version='[2.0.0;]' />
+<necessite id="spip_bonux" version="[2.2.13;]" />
+<bouton id='links' parent='bando_squelette'>
+	<icone>icon-16.png</icone>
+	<titre>Liens explicites</titre>
+	<url>configurer_links</url>
+</bouton>
 <pipeline>
 	<nom>insert_head</nom>
 	<inclure>links_pipelines.php</inclure>

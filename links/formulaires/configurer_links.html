@@ -1,0 +1,73 @@
+<style type="text/css">
+.formulaire_spip, .formulaire_spip * { font-size: 100% !important; }
+.formulaire_spip fieldset { border: 0; }
+.formulaire_spip legend { background: none; font-weight: bold; }
+.formulaire_spip .explication { padding: 5px 10px; background: none; border: 0; }
+.formulaire_spip li .explication { padding: 0; font-size: .9em !important; line-height: 1; color: #666; }
+</style>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="_meta_casier" value="links/links" />
+		<fieldset>
+			<legend>Documents &agrave; t&eacute;l&eacute;charger (<code>rel="download"</code>)</legend>
+			<p class="explication">Les liens pointent souvent vers d'autres pages HTML mais aussi vers des documents de toute sorte. Le navigateur lance alors le lecteur adapt&eacute; ou enregistre le fichier sur le disque local.</p>
+			<ul>
+				<li class="links_donwload[ (#ENV**{erreurs}|table_valeur{donwload}|oui)erreur]">
+					<label for="donwload">Laisser l'internaute naviguer librement</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{donwload})</span>
+					]<input type="radio" class="radio" name="donwload" id="donwload"[ checked="(#ENV{ftp}|sinon{checked})"] />
+				</li>
+				<li class="links_donwload[ (#ENV**{erreurs}|table_valeur{donwload}|oui)erreur]">
+					<label for="donwload">Forcer l'ouverture des t&eacute;l&eacute;chargements dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{donwload})</span>
+					]<input type="radio" class="radio" name="donwload" id="donwload" />
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>Liens externes (<code>rel="external"</code>)</legend>
+			<ul>
+				<li class="links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">
+					<label for="external">Laisser l'internaute naviguer librement</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>
+					]<input type="radio" class="radio" name="external" id="external"[ checked="(#ENV{ftp}|sinon{checked})"] />
+				</li>
+				<li class="links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">
+					<label for="external">Forcer l'ouverture des liens sortants dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>
+					]<input type="radio" class="radio" name="external" id="external" />
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>Autres services Internet</legend>
+			<ul>
+				<li class="links_mailto[ (#ENV**{erreurs}|table_valeur{mailto}|oui)erreur]">
+					<label for="mailto">SMTP (Échange de courrier électronique)</label>
+					<p class="explication"><code>MAILTO:dest@adresse</code></p>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{mailto})</span>
+					]<input type="radio" class="radio" name="mailto" id="mailto" checked="checked" />
+				</li>
+				<li class="links_ftp[ (#ENV**{erreurs}|table_valeur{ftp}|oui)erreur]">
+					<label for="ftp">FTP (Transfert de fichiers)</label>
+					<p class="explication"><code>FTP://serveur_ftp/repertoire/...</code></p>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{ftp})</span>
+					]<input type="radio" class="radio" name="ftp" id="ftp" checked="checked" />
+				</li>
+				<li class="links_nntp[ (#ENV**{erreurs}|table_valeur{nntp}|oui)erreur]">
+					<label for="nntp">NNTP (Les forums de News)</label>
+					<p class="explication"><code>NEWS:nom_de_groupe</code></p>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{nntp})</span>
+					]<input type="radio" class="radio" name="nntp" id="nntp" checked="checked" />
+				</li>
+			</ul>
+		</fieldset>
+		<p class="boutons">
+			<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
+		</p>
+	</div></form>
+</div>
