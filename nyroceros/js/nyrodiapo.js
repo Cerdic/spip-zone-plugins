@@ -4,9 +4,7 @@
 // placer le code suivant dans le <head> du squelette SPIP
 // <script src="#CHEMIN{js/nyrodiapo.js}" type="text/javascript"></script>
 
-
-
-$(function() {
+jQuery(function($) {
  
   // customiser la ryno box
   // http://nyromodal.nyrodev.com/
@@ -74,6 +72,6 @@ function diapo(){
 function show_boutons(){
 if(typeof(BandoOuiNon) !== 'undefined')
 if(BandoOuiNon == true){
-$('#controles').show();
+jQuery('#controles').show();
 }
 }
