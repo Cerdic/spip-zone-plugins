@@ -29,8 +29,11 @@ function generer_url_microblog($id, $entite='article', $args='', $ancre='', $pub
  * @param $retour string : le retour souhaité par défaut cela renverra la chaine
  * ou l'array retourné par la commande. Sinon on peut utiliser les valeurs http_code,http_info,url
  */
-function microblog_twitter_api($command,$type='get',$params=array(),$retour=''){
+function microblog_twitter_api($command,$type='get',$params=array(),$retour='',$tokens=null){
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
+	if($tokens){
+		$cfg = array_merge($cfg,$tokens);
+	}
 	include_spip('inc/twitteroauth');
 	
 	$connection = new TwitterOAuth($cfg['twitter_consumer_key'], $cfg['twitter_consumer_secret'], $cfg['twitter_token'], $cfg['twitter_token_secret']);
