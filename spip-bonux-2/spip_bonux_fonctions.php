@@ -204,7 +204,7 @@ function tri_champ_order($t,$table=NULL){
 	elseif(strncmp($t,'multi ',6)==0){
 		return "multi";
 	}
-	return preg_replace(',\s,','',$t);
+	return $table.preg_replace(',\s,','',$t);
 }
 
 /**
