@@ -23,10 +23,13 @@ include_spip('public/geoportail_profils');
  - pseudo balise _SPIP_GEOPORATAIL_HASH_ qui doit etre calcule sur chaque page
 */
 function geoportail_affichage_final($page)
-{	// Inclure le hash code de maniere dynamique
+{	// on regarde rapidement si la page inclus un geoportail
+	if (strpos($page, '<!_SPIP_GEOPORTAIL_HASH_!>')===FALSE) return $page;
+	
+	// Inclure le hash code de maniere dynamique
 	charger_fonction('securiser_action','inc');
 	$action = calculer_action_auteur('geoportail');
-	return str_replace("<!_SPIP_GEOPORTAIL_HASH_!>",$action,$page);
+	return str_replace('<!_SPIP_GEOPORTAIL_HASH_!>', $action, $page);
 } 
 
 /**

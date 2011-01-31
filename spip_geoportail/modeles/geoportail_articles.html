@@ -49,7 +49,7 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	selectControl.activate();
 
 	// Ajouter les articles
-	<BOUCLE_geo_article(ARTICLES){geoposition}{id_article?}{id_auteur?}{id_rubrique?}{id_secteur?}{par date}{inverse}{0,#ENV{max,200}}>
+	<BOUCLE_geo_article(ARTICLES){geoposition}{id_article?}{id_auteur?}{id_rubrique?}{id_secteur?}{id_mot?}{id_groupe?}{par date}{inverse}{0,#ENV{max,200}}>
 	{	var lon = #LON;
 		var lat = #LAT;
 		<BOUCLE_mot(MOTS){id_groupe=#ENV{legende,0}}{id_article}{0,1}>

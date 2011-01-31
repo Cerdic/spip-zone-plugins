@@ -38,7 +38,7 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	selectControl.activate();
 	
 	// Ajouter les auteurs
-	<BOUCLE_a(AUTEURS){geoposition}{tout}{0,#ENV{max,200}}>
+	<BOUCLE_a(AUTEURS){geoposition}{tout}{id_auteur?}{statut?}{0,#ENV{max,200}}>
 	{	[(#SET{largeur,[(#LOGO_AUTEUR||image_reduire{40}|largeur|plus{[(#ENV{bord,4})]})]})]
 		[(#SET{hauteur,[(#LOGO_AUTEUR||image_reduire{40}|hauteur|plus{[(#ENV{bord,4})]})]})]
 		var feature = jQuery.geoportail.createFeature (#LON,#LAT, "[(#LOGO_AUTEUR||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]",#ENV{taille,20});
