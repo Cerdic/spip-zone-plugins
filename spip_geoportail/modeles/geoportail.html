@@ -76,7 +76,7 @@ jQuery.geoportail.addMap(
 			map = this.map = map#ENV{id_geoportail,0};
 			
 			//map.getMap().setProxyUrl("#CHEMIN{php/proxy.php}?url=");
-			map.getMap().setProxyUrl("?action=geoproxy&hash=<!_SPIP_GEOPORTAIL_HASH_!>&url=");
+			map.getMap().setProxyUrl("?action=geoproxy&hash="+jQuery.geoportail.hash+"&url=");
 			// Affichage de la carte
 			jQuery.geoportail.showMap (map, '#GET{zone}', Number('#LON'), Number('#LAT'), Number('#ZOOM'), '#LAYERCTRL', '#TOOLBOX', '#INFOBOX', '#CARTO', '#ORTHO');
 			// Outils de recherche (un petit delais pour IE !)

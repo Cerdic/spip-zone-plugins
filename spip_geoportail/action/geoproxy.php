@@ -26,9 +26,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
     $sReponse= '';
     // Recherche du proxy SPIP
     $http_proxy = $GLOBALS['meta']["http_proxy"];
-    $p = strrpos ($http_proxy, ':');
-    $proxy_host= $p ? substr($http_proxy,0,$p):'';
-    $proxy_port= $p ? substr($http_proxy,$p+1):80;
+    if ($http_proxy)
+    {	$t2 = @parse_url($http_proxy);
+		$proxy_host= $t2['host'];
+		if (!($proxy_port=$t2['port'])) $proxy_port=80;
+    }
     $content_types= array(
         'application/vnd.google-earth.kml+xml',
         'application/vnd.google-earth.kml',
