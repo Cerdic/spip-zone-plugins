@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
 	'entree_css' => 'Classes CSS de l\'entr&eacute;e (du conteneur)',
 	'entree_css_lien' => 'Classes CSS du lien',
+	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet',
 	'entree_id_groupe' => 'Num&eacute;ro du groupe de mot cl&eacute;',
 	'entree_id_mot' => 'Num&eacute;ro du mot cl&eacute;',
 	'entree_id_objet' => 'Num&eacute;ro',
@@ -90,6 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titre',
 
 	// I
+	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;',
+	'info_connexion_obligatoire' => 'Connexion obligatoire',
 	'info_numero_menu' => 'MENU NUM&Eacute;RO :',
 	'info_page_speciale' => 'Lien vers la page &#171; @page@ &#187;',
 	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187',
