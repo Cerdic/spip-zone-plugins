@@ -93,17 +93,17 @@ function detecte_langue($langues, $url_encours) {
 		// récupérer le tableau des langues utilisées dans le site
 			$tab_langues = explode(",",$langues);
 		// traiter (dans l'ordre !) les langues acceptées par le navigateur
-			$Tlangues_brutes = split(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+			$Tlangues_brutes = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 			foreach ($Tlangues_brutes as $l) {
 				// ne garder que le code de pays à 2 lettres pour les valeurs de langues
 				// (exemple de code langue renvoyé par le navigateur : 
 				// es,de-de;q=0.9,ca;q=0.7,fr-fr;q=0.6,en;q=0.4,fr;q=0.3,en-us;q=0.1)
 					if (strpos($l, '-') !== false) {
-					$Tl = split('-', $l);
+					$Tl = explode('-', $l);
 					$l = $Tl[0];
 					}
 					if (strpos($l, ';') !== false) {
-	 				$Tl = split(';', $l);
+	 				$Tl = explode(';', $l);
 					$l = $Tl[0];
 					}
 				// si la langue en cours est utilisée dans le site, converser() vers cette langue
