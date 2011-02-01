@@ -4,8 +4,8 @@
 .formulaire_spip legend { background: none; font-weight: bold; }
 .formulaire_spip .explication { padding: 5px 10px; background: none; border: 0; }
 .formulaire_spip li .explication { padding: 0; font-size: .9em !important; line-height: 1; color: #666; }
+.formulaire_spip .choix input { float: left; }
 </style>
-
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -13,56 +13,51 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="_meta_casier" value="links/links" />
 		<fieldset>
-			<legend>Documents &agrave; t&eacute;l&eacute;charger (<code>rel="download"</code>)</legend>
-			<p class="explication">Les liens pointent souvent vers d'autres pages HTML mais aussi vers des documents de toute sorte. Le navigateur lance alors le lecteur adapt&eacute; ou enregistre le fichier sur le disque local.</p>
-			<ul>
-				<li class="links_donwload[ (#ENV**{erreurs}|table_valeur{donwload}|oui)erreur]">
-					<label for="donwload">Laisser l'internaute naviguer librement</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{donwload})</span>
-					]<input type="radio" class="radio" name="donwload" id="donwload"[ checked="(#ENV{ftp}|sinon{checked})"] />
+			<legend>Apparence</legend>
+			<ul class="choix">
+				<li class="links_style_yes[ (#ENV**{erreurs}|table_valeur{style_yes}|oui)erreur]">
+					<label for="style_yes">Activer le style par défaut</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{style_yes})</span>
+					]<input type="radio" class="radio" name="style" id="style_yes" checked="checked" />
+					<p class="explication">Pour voir, affichez la page de test <code>?page=demo/links</code> ou mieux, ins&eacute;rez le mod&egrave;le <code>&lt;charte|links&gt;</code> dans un de vos articles. Pour toute personnalisation, compl&eacute;tez en CSS, dans votre feuille de style.</p>
 				</li>
-				<li class="links_donwload[ (#ENV**{erreurs}|table_valeur{donwload}|oui)erreur]">
-					<label for="donwload">Forcer l'ouverture des t&eacute;l&eacute;chargements dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{donwload})</span>
-					]<input type="radio" class="radio" name="donwload" id="donwload" />
-				</li>
-			</ul>
-		</fieldset>
-		<fieldset>
-			<legend>Liens externes (<code>rel="external"</code>)</legend>
-			<ul>
-				<li class="links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">
-					<label for="external">Laisser l'internaute naviguer librement</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>
-					]<input type="radio" class="radio" name="external" id="external"[ checked="(#ENV{ftp}|sinon{checked})"] />
-				</li>
-				<li class="links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">
-					<label for="external">Forcer l'ouverture des liens sortants dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>
-					]<input type="radio" class="radio" name="external" id="external" />
+				<li class="links_style_no[ (#ENV**{erreurs}|table_valeur{style_no}|oui)erreur]">
+					<label for="style_no">Aucun style</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{style_no})</span>
+					]<input type="radio" class="radio" name="style" id="style_no" />
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend>Autres services Internet</legend>
-			<ul>
-				<li class="links_mailto[ (#ENV**{erreurs}|table_valeur{mailto}|oui)erreur]">
-					<label for="mailto">SMTP (Échange de courrier électronique)</label>
-					<p class="explication"><code>MAILTO:dest@adresse</code></p>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{mailto})</span>
-					]<input type="radio" class="radio" name="mailto" id="mailto" checked="checked" />
+			<legend>Comportement</legend>
+			<ul class="choix">
+				<li class="links_window_new[ (#ENV**{erreurs}|table_valeur{window_new}|oui)erreur]">
+					<input type="radio" class="radio" name="window" id="window_new" />
+					<label for="window_new">Forcer l'ouverture de certains liens dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{window_new})</span>]
+					<p class="explication">Attention&nbsp;: ce comportement met certains internautes en difficult&eacute;.</p>
+					<ul class="choix">
+						<li class="links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">
+							<input type="checkbox" class="checkbox" name="external" id="external" checked="checked" />
+							<label for="external">Liens externes</label>[
+							<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>]
+						</li>
+						<li class="links_download[ (#ENV**{erreurs}|table_valeur{download}|oui)erreur]">
+							<input type="checkbox" class="checkbox" name="download" id="download" />
+							<label for="download">Documents &agrave; t&eacute;l&eacute;charger</label>[
+							<span class='erreur'>(#ENV**{erreurs}|table_valeur{download})</span>]
+						</li>
+						<li class="links_what[ (#ENV**{erreurs}|table_valeur{what}|oui)erreur]">
+							<input type="checkbox" class="checkbox" name="what" id="what" />
+							<label for="what">Euh... quoi d'autre&nbsp;?</label>[
+							<span class='erreur'>(#ENV**{erreurs}|table_valeur{what})</span>]
+						</li>
+					</ul>
 				</li>
-				<li class="links_ftp[ (#ENV**{erreurs}|table_valeur{ftp}|oui)erreur]">
-					<label for="ftp">FTP (Transfert de fichiers)</label>
-					<p class="explication"><code>FTP://serveur_ftp/repertoire/...</code></p>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{ftp})</span>
-					]<input type="radio" class="radio" name="ftp" id="ftp" checked="checked" />
-				</li>
-				<li class="links_nntp[ (#ENV**{erreurs}|table_valeur{nntp}|oui)erreur]">
-					<label for="nntp">NNTP (Les forums de News)</label>
-					<p class="explication"><code>NEWS:nom_de_groupe</code></p>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{nntp})</span>
-					]<input type="radio" class="radio" name="nntp" id="nntp" checked="checked" />
+				<li class="links_window_same[ (#ENV**{erreurs}|table_valeur{window_same}|oui)erreur]">
+					<input type="radio" class="radio" name="window" id="window_same"[ checked="(#ENV{window_same}|sinon{checked})"] />
+					<label for="window_same">Laisser l'internaute libre de choisir (recommand&eacute;)</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{window_same})</span>]
 				</li>
 			</ul>
 		</fieldset>
