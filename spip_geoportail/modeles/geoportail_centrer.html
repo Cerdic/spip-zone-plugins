@@ -1,0 +1,11 @@
+[(#REM) Centrer la carte sur un article/rubrique...
+ Exemple : Centrer la carte X sur l'article n 
+	<geoportailX|centrer|id_article=n>
+]
+[(#ENV{id_auteur}|oui{" "})	[(#SET{id,#ID_AUTEUR})]		[(#SET{obj,auteur})] ]
+[(#ENV{id_document}|oui{" "})	[(#SET{id,#ID_DOCUMENT})]	[(#SET{obj,document})] ]
+[(#ENV{id_rubrique}|oui{" "})	[(#SET{id,#ID_RUBRIQUE})]	[(#SET{obj,rubrique})] ]
+[(#ENV{id_article}|oui{" "})	[(#SET{id,#ID_ARTICLE})]	[(#SET{obj,article})] ]
+<BOUCLE_geo(GEOPOSITIONS){id_objet=#GET{id}}{objet=#GET{obj}}>
+<script>$.geoportail.onLoad([(#ENV{id_geoportail,0})], function centerMap(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );</script>
+</BOUCLE_geo>
