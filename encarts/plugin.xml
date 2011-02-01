@@ -18,9 +18,6 @@
 
 	<prefix>encarts</prefix>
 
-	<fonctions>encarts_fonctions.php</fonctions>
-
-	<options>encarts_options.php</options>
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
@@ -41,6 +38,11 @@
 
 	<pipeline>
 		<nom>affiche_milieu</nom>
+		<inclure>encarts_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>pre_propre</nom>
 		<inclure>encarts_pipelines.php</inclure>
 	</pipeline>
 	

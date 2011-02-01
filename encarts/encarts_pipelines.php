@@ -30,5 +30,15 @@ function encarts_affiche_milieu($flux) {
 }
 
 
+function encarts_pre_propre($texte) {
+	if (false !== strpos($texte, '<')) {
+		if (preg_match_all(',<encart>(.*?)</encart>,is', $texte, $regs, PREG_SET_ORDER)) {
+			foreach ($regs as $reg) {
+				$texte = str_replace($reg[0], "<span class='encart'>".$reg[1]."</span>", $texte);
+			}
+		}
+	}
+	return $texte;
+}
 
 ?>

@@ -19,10 +19,6 @@ function encarts_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_encarts'][]= 'articles';
 	// peut etre faut il plus de déclarations pour lier un encart à des articles ?
 	
-	// application du filtre pour le style des encarts
-	$interface['table_des_traitements']['TEXTE']['articles'] = 
-		str_replace('%s', 'style_encarts(%s)', (isset($interface['table_des_traitements']['TEXTE']['articles'] ) ? $interface['table_des_traitements']['TEXTE']['articles'] : $interface['table_des_traitements']['TEXTE'][0] ));
-
 	return $interface;
 }
 
