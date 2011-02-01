@@ -21,11 +21,7 @@ function spiplistes_utiliser_facteur()
 			&& function_exists('liste_plugin_actifs')
 			&& ($p = liste_plugin_actifs())
 			&& isset($p['FACTEUR'])
-			&& spiplistes_log('plugin facteur')
-			;
-		if(!$utiliser) syslog(LOG_WARNING, 'pas de facteur');
-		else syslog(LOG_WARNING, 'facteur ok');
-
+			&& spiplistes_log('plugin facteur');
 	}
 	return($utiliser);
 }
