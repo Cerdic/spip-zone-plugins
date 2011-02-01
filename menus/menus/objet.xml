@@ -8,4 +8,5 @@
 	<parametre nom="titre" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />
 	<parametre nom="connexion" label="menus:entree_connexion_objet" />
+	<parametre nom="trad" label="menus:entree_traduction_objet" />
 </entree>
