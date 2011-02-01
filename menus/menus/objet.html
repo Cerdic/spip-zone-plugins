@@ -1,10 +1,24 @@
 [(#SET{titre, #ENV*{titre}|typo|sinon{#INFO_TITRE{#ENV{type_objet}, #ENV{id_objet}}}|sinon{<:info_sans_titre:>}})]
 
+#SET{visible,oui}
+[(#ENV{connexion}|=={session}|oui)
+	[(#SESSION{statut}|oui)
+		#SET{visible,non}]
+	#SET{info_session,#VAL{menus:info_connexion_obligatoire}|_T}
+]
+[(#ENV{connexion}|=={nosession}|oui)
+	[(#SESSION{statut}|oui)
+		#SET{visible,non}]
+	#SET{info_session,#VAL{menus:info_deconnexion_obligatoire}|_T}
+]
+
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
-	<div class="infos">#ENV{type_objet}-#ENV{id_objet}</div>
+	<div class="infos">#ENV{type_objet}-#ENV{id_objet}[-(#GET{info_session})]</div>
 ]
-[(#ENV{appel_menu}|oui)
+
+
+[(#ENV{appel_menu}|et{#GET{visible}|=={oui}}|oui)
 	<li class="menu-entree[ (#ENV{css})][ (#ENV{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
 		<a href="#INFO_URL{#ENV{type_objet}, #ENV{id_objet}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
 ]

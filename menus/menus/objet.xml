@@ -7,4 +7,5 @@
 	<parametre nom="id_objet" label="menus:entree_id_objet" obligatoire="oui" />
 	<parametre nom="titre" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="connexion" label="menus:entree_connexion_objet" />
 </entree>
