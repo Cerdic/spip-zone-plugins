@@ -168,7 +168,7 @@ function geoportail_affiche_milieu($flux)
 	Recherche automatique d'un georef dans le ficher (si cas geoportail_geodocument_auto)
 */
 function geoportail_afficher_contenu_objet($flux)
-{
+{	
 	if ($flux['args']['type']=='case_document' && $GLOBALS['meta']['geoportail_geodocument'])
 	{	// permettre la modification du document (documents_edit)
 		$id_article = _request('id_article');
@@ -186,6 +186,7 @@ function geoportail_afficher_contenu_objet($flux)
 				$extension = $result['extensions'];
 			}
 			// Georeferencement de l'objet
+			include_spip('public/geoportail_boucles');
 			$info =_T('geoportail:georef');
 			$result = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_document AND objet='document'"));
 			if ($result)

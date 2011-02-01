@@ -116,4 +116,54 @@ function critere_departement($idb, &$boucles, $crit)
 	return;
 }
 
+/** Recherche du nom de departement 
+*/
+function geoportail_departement($d)
+{	$query = "SELECT * FROM spip_georgc WHERE feature_class = '0' AND id_dep = '".$d."'";
+	$res = spip_query($query);
+	$row = spip_fetch_array($res);
+
+	$rep = $row['name'];
+	return $rep;
+}
+
+/*========================================
+  Filtres du plugin
+========================================*/
+
+/** Transformation degre/minute/seconde
+*/
+function geoportail_dms($l, $short=false)
+{	if (!is_numeric($l)) return $l;
+	
+	$d = floor($l);
+	$p = ($l-$d)*60;
+	$m = floor($p);
+	if ($m<10) $m = "0$m";
+	$s = round((($p-$m)*600))/10;
+	if ($s<10) $s = "0$s";
+	$str = "$d&deg; $m' $s\"" ;
+	if ($short) $str = str_replace (' ','',$str);
+	return $str;
+}
+
+/** Transformation #LON|geoportail_longitude
+*/
+function geoportail_longitude ($l, $short=false)
+{	if (is_numeric($l))
+	{	if ($l<0) return geoportail_dms(-$l,$short).($short?'':' ')."W";
+		else return geoportail_dms($l,$short).($short?'':' ')."E";
+	}
+	return $l;
+}
+
+/** Transformation #LAT|geoportail_latitude
+*/
+function geoportail_latitude ($l, $short=false)
+{	if (is_numeric($l))
+	{	if ($l<0) return geoportail_dms(-$l,$short).($short?'':' ')."S";
+		else return geoportail_dms($l,$short).($short?'':' ')."N";
+	}
+	return $l;
+}
 ?>

@@ -195,6 +195,7 @@ function geoportail_chercher_adm($lon, $lat, &$adm)
 			// No INSEE
 			$adm['insee'] = $com['id_dep'].$com['id_com'];
 			// Nom du departement
+			include_spip ('public/geoportail_boucles');
 			$adm['departement'] = geoportail_departement($com['id_dep']);
 			// Distance (en km)
 			$adm['dist'] = $dmin;

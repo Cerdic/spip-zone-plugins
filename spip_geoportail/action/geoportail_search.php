@@ -56,6 +56,7 @@ function action_geoportail_search_dist()
 		// Lancer la recherche
 		$res = spip_query("SELECT * FROM spip_georgc WHERE ".$query);
 		$trouve = false;
+		include_spip ('public/geoportail_boucles');
 		while ($row =spip_fetch_array($res))
 		{	if ($trouve) echo ",\n";
 			else $trouve=true;
