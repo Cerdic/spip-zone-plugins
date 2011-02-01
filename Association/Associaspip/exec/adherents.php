@@ -38,7 +38,8 @@ function exec_adherents() {
 		$statut_interne = _request('statut_interne');
 
 		echo debut_boite_info(true);
-		echo association_date_du_jour();	
+
+		echo association_icone(_T('asso:menu2_titre_relances_cotisations'),  $url_edit_relances, 'ico_panier.png');
 		echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
 		
 		// TOTAUX	
@@ -55,16 +56,18 @@ function exec_adherents() {
 		}		
 		echo '<div style="float:right;text_align:right">'.$nombre_total.'</div>';
 		echo '<div>'._T('asso:adherent_liste_nombre_total').'</div>';
+		
+		echo association_date_du_jour();		
+
 		echo fin_boite_info(true);	
-		
-		
-		$res=association_icone(_T('asso:menu2_titre_relances_cotisations'),  $url_edit_relances, 'ico_panier.png');
-		$res.=association_icone(_T('asso:bouton_impression'), 
-					generer_url_ecrire('pdf_adherents', 'statut_interne='.$statut_interne), 
-					'print-24.png'); 
-		$res.=association_icone(_T('asso:parametres'),  $url_association, 'annonce.gif'); 
-			echo bloc_des_raccourcis($res);
-		
+
+		echo debut_cadre_enfonce('',true),
+		  '<h3 style="text-align:center;">',
+		  _T('plugins_vue_liste'), '</h3>',
+		  adherents_table(),
+		  fin_cadre_enfonce(true);
+
+
 		echo debut_droite("",true);
 		
 		echo debut_cadre_relief(  "", true, "", $titre = _T('asso:adherent_titre_liste_actifs'));		
@@ -99,17 +102,15 @@ function exec_adherents() {
 		echo '</td><td style="text-align:right;">';
 		
 		//Filtre ID
-		if ( isset ($_POST['id'])) {
-			$id=_q($_POST['id']);
-			$critere="a.id_auteur=$id";
-			if ($indexation=="id_asso") { $critere="id_asso=$id"; }
+		$id = intval(_request('id'));
+		if (!$id) {
+			$id = ($indexation=='id_asso') ? _T('asso:adherent_libelle_id_asso') : _T('asso:adherent_libelle_id_auteur');
+		} else {
+			$critere = ($indexation=="id_asso") ? $critere="id_asso=$id" : "a.id_auteur=$id";
 		}
 		
 		echo "\n<form method='post' action='".$url_adherents."'><div>";
-		echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" ';
-		if ($indexation=='id_asso') { echo ' value="'._T('asso:adherent_libelle_id_asso').'" '; }
-		else { echo ' value="'._T('asso:adherent_libelle_id_adherent').'" ';}
-		echo ' onchange="form.submit()" />';
+		echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10"  value="'. $id .'" onchange="form.submit()" />';
 		echo '</div></form>';
 		echo '</td>';
 		echo '<td style="text-align:right;">';
@@ -211,13 +212,13 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	}
 	
 	if ($indexation=="id_asso") { $t = _T('asso:adherent_libelle_id_asso');}
-	else { $t = _T('asso:adherent_libelle_id_adherent');} 
+	else { $t = _T('asso:adherent_libelle_id_auteur');} 
 
 	$res = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 	. "<tr style='background-color: #DBE1C5;'>\n"
 	. "<td><strong>$t</strong></td>\n"
 	. "<th>"._T('asso:adherent_libelle_photo')."</th>\n"
-	. "<th>"._T('asso:adherent_libelle_nom')."</th>\n"
+	. "<th>"._T('asso:adherent_libelle_nom_famille')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_prenom')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_categorie')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_validite')."</th>\n"
@@ -260,4 +261,22 @@ function affiche_categorie($c)
     ? sql_getfetsel("valeur", "spip_asso_categories", "id_categorie=$c")
     : $c;
 }
+
+function adherents_table()
+{
+  $index = ($GLOBALS['association_metas']['indexation'] == 'id_asso');
+  $champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
+  $res = '';
+  foreach ($champs as $k => $v) {
+    $libelle = 'adherent_libelle_' . $k;
+    $trad = _T('asso:' . $libelle);
+    if ($libelle != str_replace(' ', '_', $trad)) {
+      if (($k == 'id_asso' AND !$index) OR ($k == 'id_auteur' AND $index))
+	continue;
+      $res .= "<input type='checkbox' name='champs[$k]' />$trad<br />";
+    }
+  }
+  return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
+}
+
 ?>

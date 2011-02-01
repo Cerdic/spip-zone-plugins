@@ -72,7 +72,7 @@ function exec_edit_relances(){
 			. "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 			. "<tr style='background-color: #DBE1C5;'>\n"
 			. '<td><strong>'
-			. (($indexation=="id_asso") ? _T('asso:adherent_libelle_id_asso') : _T('asso:adherent_libelle_id_adherent'))
+			. (($indexation=="id_asso") ? _T('asso:adherent_libelle_id_asso') : _T('asso:adherent_libelle_id_auteur'))
 			. "</strong></td>\n"
 			. '<th>' . _T('asso:nom') . "</th>\n"
 			. '<th>' . _T('asso:telephone') . "</th>\n"

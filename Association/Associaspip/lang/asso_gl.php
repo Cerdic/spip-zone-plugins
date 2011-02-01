@@ -95,7 +95,7 @@ Gracias por non responder directamente a esta mensaxe autom&aacute;tica.
 	'adherent_libelle_utilisateur4' => 'Usuario 4',
 	'adherent_libelle_validite' => 'Validez',
 	'adherent_libelle_date_validite' => 'Data l&iacute;mite de validez',
-	'adherent_libelle_remarques' => 'Observaci&oacute;ns',
+	'adherent_libelle_commentaires' => 'Observaci&oacute;ns',
 	'adherent_libelle_identifiant' => 'Identificador',
 	'adherent_libelle_visiteur_spip' => 'Visitante SPIP',
 	'adherent_libelle_statut' => 'Estatuto de cuota',

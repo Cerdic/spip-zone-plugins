@@ -16,14 +16,18 @@ function exec_pdf_adherents()
 	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
 	$pdf->Open();
 	$pdf->AddPage();
+
 	//On définit les colonnes (champs,largeur,intitulé,alignement)
-	$pdf->AddCol($GLOBALS['association_metas']['indexation'],15,_T('asso:adherent_libelle_id_adherent'),'R');
-	$pdf->AddCol('nom_famille',50,_T('asso:adherent_libelle_nom'),'L');
-	$pdf->AddCol('prenom',40,_T('asso:adherent_libelle_prenom'),'L');
-	$pdf->AddCol('ville',50,_T('asso:adherent_libelle_ville'),'L');
-	$pdf->AddCol(unicode_to_utf_8('categorie'),30,_T('asso:adherent_libelle_categorie'),'C');
-	$pdf->AddCol('validite',20,_T('asso:adherent_libelle_validite'),'L');
-	$pdf->AddCol('statut_interne',15,_T('asso:adherent_entete_statut'),'C');
+	$champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
+	$sent = _request('champs');
+	foreach ($champs as $k => $v) {
+	  if ($sent[$k]=='on') {
+	    $type = strpos($v, 'text');
+	    $p = ($type===false) ? 'R' : (($type==0) ? 'L' : 'C');
+	    $n = ($type===false) ? 20 : (($type==0) ? 45 : 25);
+	    $pdf->AddCol($k,$n,_T('asso:adherent_libelle_' . $k), $p);
+	  }
+	}
 	$prop=array(
 		'HeaderColor'=>array(255,150,100),
 		'color1'=>array(224,235,255),
@@ -31,7 +35,8 @@ function exec_pdf_adherents()
 		'padding'=>2
 	);
 	$order = $GLOBALS['association_metas']['indexation'];
-	$order = 'nom_famille' . ($order ? (",$order") : '');
+	if ($sent['nom_famille']=='on')
+	  $order = 'nom_famille' . ($order ? (",$order") : '');
 	$pdf->Query(sql_select('*',_ASSOCIATION_AUTEURS_ELARGIS, request_statut_interne(), '', $order), $prop);
 	$pdf->Output();
 	}

@@ -89,7 +89,7 @@ PS: Please do not reply directly to this is an automated message.
 	'adherent_libelle_utilisateur3' => 'User 3',
 	'adherent_libelle_utilisateur4' => 'User 4',
 	'adherent_libelle_validite' => 'Validity',
-	'adherent_libelle_remarques' => 'Comments',
+	'adherent_libelle_commentaires' => 'Comments',
 	'adherent_libelle_identifiant' => 'Login',
 	'adherent_libelle_visiteur_spip' => 'SPIP Visitor',
 	'adherent_libelle_statut' => 'Cotisation status',

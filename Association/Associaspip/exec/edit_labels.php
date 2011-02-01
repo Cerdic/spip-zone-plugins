@@ -70,7 +70,7 @@ function exec_edit_labels(){
 			.'<td><strong>'
 			. (($indexation=="id_asso")
 			 ? _T('asso:adherent_libelle_id_asso')
-			 : _T('asso:adherent_libelle_id_adherent'))
+			 : _T('asso:adherent_libelle_id_auteur'))
 			.'</strong></td>'
 			.'<th>' . _T('asso:nom') . '</th>'
 			.'<th>' . _T('asso:adresse') . '</th>'
