@@ -19,6 +19,7 @@
 	<prefix>encarts</prefix>
 
 
+
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/encarts.php</inclure>
@@ -38,6 +39,11 @@
 
 	<pipeline>
 		<nom>afficher_fiche_objet</nom>
+		<inclure>encarts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>post_edition</nom>
 		<inclure>encarts_pipelines.php</inclure>
 	</pipeline>
 	

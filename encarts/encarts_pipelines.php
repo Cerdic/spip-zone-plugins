@@ -24,7 +24,13 @@ function encarts_afficher_fiche_objet($flux) {
 	return $flux;
 }
 
-
+/**
+ * Traiter les textes contenant des <encart> .... </encart>
+ * en les remplaçant par un span...
+ *
+ * @param string $texte à analyser 
+ * @return texte modifié
+**/
 function encarts_pre_propre($texte) {
 	if (false !== strpos($texte, '<')) {
 		if (preg_match_all(',<encart>(.*?)</encart>,is', $texte, $regs, PREG_SET_ORDER)) {
@@ -36,4 +42,16 @@ function encarts_pre_propre($texte) {
 	return $texte;
 }
 
+/**
+ * Mettre les vu=oui lorsque l'on met un modèle
+ * d'encart dans un texte.
+ *
+**/
+function encarts_post_edition($flux) {
+	if (!in_array($flux['args']['type'], array('forum','signature'))) {
+		$marquer_doublons_encart = charger_fonction('marquer_doublons_encart', 'inc');
+		$marquer_doublons_encart($flux['data'],$flux['args']['id_objet'],$flux['args']['type'],id_table_objet($flux['args']['type'], $flux['args']['serveur']),$flux['args']['table_objet'],$flux['args']['spip_table_objet'], '', $flux['args']['serveur']);
+	}
+	return $flux;
+}
 ?>
