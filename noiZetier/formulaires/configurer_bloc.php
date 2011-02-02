@@ -44,7 +44,7 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 				'options' => array(
 					'nom' => 'noizetier_css',
 					'label' => _T('noizetier:label_noizetier_css'),
-					'explication' => _T('explication_noizetier_css')
+					'explication' => _T('noizetier:explication_noizetier_css')
 				)
 			);
 		}
