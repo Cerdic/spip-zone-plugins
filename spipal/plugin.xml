@@ -1,7 +1,7 @@
 <plugin>
 	<nom>spipal</nom>
 	<auteur>
- 	[Thierry Schmit->http://www.spip-contrib.net/_madbuilder_] (V1)
+	[Thierry Schmit->http://www.spip-contrib.net/_madbuilder_] (V1)
 	[Committo Ergo Sum->http://www.spip-contrib.net/Deesse-A] (V2)
 	</auteur>
 	<version>2.0.0</version>
@@ -11,13 +11,8 @@
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;]" />
 	<meta>spipal_metas</meta>
-	<description>
-	Paiement via Paypal pour un site sous SPIP.
-
-Une fois le plugin activ&eacute;, cliquer sur l'icone des outils en face de son nom.
-Vous aurez besoin au minimum d'un identifiant d'un compte Paypal, autrement dit une adresse mail, celle du webmestre étant prise par d&eacute;faut. 
-	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<description>Paiement via Paypal</description>
+	<lien>http://www.spip-contrib.net/Plugin-SPIPAL</lien>
 	<prefix>spipal</prefix>
 	<install>base/spipal_gestion.php</install>
 	<options>spipal_options.php</options>
