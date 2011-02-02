@@ -17,7 +17,7 @@ function inc_verifier_dist($valeur, $type, $options=null){
 		$options = array();
 
 	// Si la valeur est vide, il n'y a rien a verifier donc c'est bon
-	if (!$valeur) return '';
+	if (is_null($valeur)) return '';
 
 	// On cherche si une fonction correspondant au type existe
 	if ($verifier = charger_fonction($type, 'verifier',true)){
