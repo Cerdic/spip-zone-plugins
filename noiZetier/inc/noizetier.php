@@ -623,7 +623,7 @@ function noizetier_tableau_export() {
 		'spip_noisettes',
 		'1',
 		'',
-		'type, composition, bloc, rang'
+		'type, composition, bloc, rang, css'
 	);
 	
 	// On remet au propre les parametres

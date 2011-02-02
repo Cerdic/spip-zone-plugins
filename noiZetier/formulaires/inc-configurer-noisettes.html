@@ -15,10 +15,13 @@
 					[<div class="infos">
 					(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|oui)
 						[(#VOIR_SAISIES{#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres},[(#PARAMETRES|unserialize)]})]
-					</div>]
+						<div class="afficher afficher_noizetier_css saisie_input"><strong><:noizetier:label_noizetier_css:></strong> <div class="valeur"><p>[(#CSS|sinon{<:saisies:vue_sans_reponse:>})]</p></div></div>
+					]
+					<!-- A priori n'est plus nécessaire puisqu'il y a au moins le paramètre Classes CSS
 					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|count|=={0}|oui)
 						<div class="infos"><:noizetier:formulaire_noisette_sans_parametre:></div>
 					]
+					-->
 					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|non)
 						<div class="infos"><:noizetier:warning_noisette_plus_disponible_details{squelette=noisettes/#NOISETTE.html}:></div>
 				]

@@ -39,6 +39,14 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 			// On charge les infos de la noisette choisie
 			$noisettes = noizetier_lister_noisettes();
 			$contexte['_infos_'.$noisette] = $noisettes[$noisette];
+			$contexte['_infos_'.$noisette]['parametres'][] = array(
+				'saisie' => 'input',
+				'options' => array(
+					'nom' => 'noizetier_css',
+					'label' => _T('noizetier:label_noizetier_css'),
+					'explication' => _T('explication_noizetier_css')
+				)
+			);
 		}
 	}
 	
@@ -46,12 +54,13 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	if ($id_noisette = intval(_request('modifier_noisette'))){
 		// On va chercher l'existant de cette noisette
 		$entree = sql_fetsel(
-			'noisette, parametres',
+			'noisette, parametres, css',
 			'spip_noisettes',
 			'id_noisette = '.$id_noisette
 		);
 		$noisette = $entree['noisette'];
 		$parametres = unserialize($entree['parametres']);
+		$css = $entree['css'];
 		
 		if (is_array($parametres))
 			$contexte = array_merge($contexte, $parametres);
@@ -60,6 +69,15 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 		// On charge les infos de la noisette choisie
 		$noisettes = noizetier_lister_noisettes();
 		$contexte['_infos_'.$noisette] = $noisettes[$noisette];
+		$contexte['_infos_'.$noisette]['parametres'][] = array(
+				'saisie' => 'input',
+				'options' => array(
+					'nom' => 'noizetier_css',
+					'label' => _T('noizetier:label_noizetier_css'),
+					'explication' => _T('noizetier:explication_noizetier_css'),
+					'defaut' => $css
+				)
+			);
 	}
 	
 	// Si on a validé une noisette et qu'il y a une erreur -------------------------------
@@ -134,6 +152,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette_modifiee = intval(_request('id_noisette_modifiee',$_POST))) and _request('enregistrer')!=''){
 		$rang = intval(_request('rang'));
 		$noisette = _request('noisette');
+		$css = _request('noizetier_css');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
 		$parametres_envoyes = array();
 		foreach ($infos_param as $nom=>$parametre)
@@ -155,6 +174,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 					'rang' => $rang,
 					'noisette' => $noisette,
 					'parametres' => serialize($parametres_envoyes),
+					'css' => $css
 				)
 			);
 			// On invalide le cache
@@ -169,7 +189,8 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 			$id_noisette = sql_updateq(
 				'spip_noisettes',
 				array(
-					'parametres' => serialize($parametres_envoyes)
+					'parametres' => serialize($parametres_envoyes),
+					'css' => $css
 				),
 				'id_noisette='.$id_noisette_modifiee
 			);

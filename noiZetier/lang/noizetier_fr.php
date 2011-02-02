@@ -41,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise &agrave; jour de la base de donn&eacute;e.',
 	
+	'explication_noizetier_css' => 'Vous pouvez ajouter &agrave; la noisette d\'&eacute;ventuelles classes CSS suppl&eacute;mentaires.',
+	
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
 	'formulaire_modifier_noisette' => 'Modifier cette noisette',
 	'formulaire_supprimer_noisette' => 'Supprimer cette noisette',
@@ -102,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'label_titre' => 'Titre&nbsp;:',
 	'label_niveau_titre' => 'Niveau du titre&nbsp;:',
+	'label_noizetier_css' => 'Classes CSS&nbsp;:',
 	'label_texte' => 'Texte&nbsp;:',
 	
 	'warning_noisette_plus_disponible' => 'ATTENTION&nbsp: cette noisette n\'est plus disponible.',

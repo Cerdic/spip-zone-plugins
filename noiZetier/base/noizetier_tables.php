@@ -19,7 +19,8 @@ function noizetier_declarer_tables_principales($tables_principales){
 		"composition" => "tinytext DEFAULT '' NOT NULL",
 		"bloc" => "tinytext DEFAULT '' NOT NULL",
 		"noisette" => "tinytext DEFAULT '' NOT NULL",
-		"parametres" => "text DEFAULT '' NOT NULL"
+		"parametres" => "text DEFAULT '' NOT NULL",
+		"css" => "tinytext DEFAULT '' NOT NULL"
 	);
 	
 	$noisettes_cles = array(
