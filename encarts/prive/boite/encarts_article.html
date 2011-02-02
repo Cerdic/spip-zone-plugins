@@ -1,80 +1,61 @@
-[(#SET{form,0})][(#SET{ouvrir,#ENV{ouvrir,0}})]
-[(#ENV{id_encart}|oui)
-	[(#SET{ouvrir,1})]
-	[(#SET{form,1})]
-]
+[(#SET{ouvrir,#ENV{ouvrir,0}})]
+
 <BOUCLE_article(ARTICLES){id_article}{statut?}{tout}>
-<div id="encarts", class="ajax-action editer_encart editer_encart_#ID_ARTICLE">
-	<div class="cadre cadre-e">
-	
-		<img src="#CHEMIN{img/frame_edit-22.png}" class="cadre-icone" alt="" width="24" height="24" />
+<B_encarts_article>
+<div id="encarts" class="ajax-action editer_encart editer_encart_#ID_ARTICLE">
+	<h3><:encarts:titre_bloc_encarts:></h3>
 
-		<div class='titrem[ (#GET{ouvrir}|?{deplie,replie})]' onMouseOver="jQuery(this).depliant('#encarts_edit')	;">
-			<a href='#' onClick="return jQuery(this).depliant_clicancre('#encarts_edit');" class='titremancre'></a>
-			<:encarts:titre_bloc_encarts:>
-		</div>
 
-		<div class='cadre_padding'>
-		<B_encarts_article>
-			<div class="liste-elements encarts">
-			<table class='spip liste'>
-			<tbody>
-			<BOUCLE_encarts_article(ENCARTS){id_article}{par num titre, titre}>
-				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-					<td class="texte" title="N&deg;&nbsp;#ID_ENCART">
-						<div class='titre #EDIT{titre}'>N&deg;&nbsp;#ID_ENCART[ - (#TITRE|sinon{<:encarts:sans_titre:>})]</div>
-						<div class="texte #EDIT{texte}">#TEXTE</div>
-					</td>
-					<td class='action'>
-					[(#AUTORISER{modifier,encart,#ID_ENCART})
-						[(#BOUTON_ACTION{
-						<:encarts:modifier_encart:>,
-						[(#URL_ECRIRE{editer_encart}
-							|parametre_url{id_encart,#ID_ENCART}
-							|parametre_url{retour,[(#ENV{retour,#SELF})]})],ajax})]
-					]
-					[(#AUTORISER{supprimer,encart,#ID_ENCART})
-						[(#BOUTON_ACTION{				
-							<:encarts:bouton_supprimer_encart:>,
-							[(#URL_ACTION_AUTEUR{supprimer_encart,#ID_ENCART}|parametre_url{redirect,#SELF})],
-							ajax,<:encarts:supprimer_encart_question:>})]
-					]</td>
-				</tr>
-			</BOUCLE_encarts_article>
-			</tbody>	 		
-			</table>
-			</div>
-		</B_encarts_article>
-			
-				
-			<div id="encarts_edit" class="bloc_depliable[ (#GET{ouvrir}|?{blocdeplie,blocreplie})]">
-				<a id='access-v' href='#access-v' accesskey='v'></a>
-				[(#GET{form}|oui)
-					[(#AUTORISER{modifier, encart, #ID_ENCART})
-						[(#FORMULAIRE_EDITER_ENCART{#ID_ENCART, article, #ID_ARTICLE, #ENV{retour,#SELF}})]
-					]
+		<div class="liste-elements encarts">
+		<table class='spip liste'>
+		<tbody>
+		<BOUCLE_encarts_article(ENCARTS){id_article}{par num titre, titre}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="texte" title="N&deg;&nbsp;#ID_ENCART">
+					<div class='titre #EDIT{titre}'>N&deg;&nbsp;#ID_ENCART[ - (#TITRE|sinon{<:encarts:sans_titre:>})]</div>
+					<div class="texte #EDIT{texte}">#TEXTE</div>
+				</td>
+				<td class='action'>
+				[(#AUTORISER{modifier,encart,#ID_ENCART})
+					[(#BOUTON_ACTION{
+					<:encarts:modifier_encart:>,
+					[(#URL_ECRIRE{editer_encart}
+						|parametre_url{id_encart,#ID_ENCART}
+						|parametre_url{ouvrir,1}
+						|parametre_url{retour,[(#ENV{retour,#SELF})]})],ajax})]
 				]
+				[(#AUTORISER{supprimer,encart,#ID_ENCART})
+					[(#BOUTON_ACTION{				
+						<:encarts:bouton_supprimer_encart:>,
+						[(#URL_ACTION_AUTEUR{supprimer_encart,#ID_ENCART}|parametre_url{redirect,#SELF})],
+						ajax,<:encarts:supprimer_encart_question:>})]
+				]</td>
+			</tr>
+		</BOUCLE_encarts_article>
+		</tbody>	 		
+		</table>
+		</div>	
 
-				<div class='boutons'>
-				[(#BOUTON_ACTION{[(#CHEMIN{img/encart-add-24.png}
-					|balise_img{<:encarts:ajouter_encart:>}
-					|concat{' ',<:encarts:ajouter_encart:>})],
-					[(#URL_ECRIRE{encart_edit}
-						|parametre_url{objet,#ENV{objet}}
-						|parametre_url{id_objet,#ENV{id_objet}}
-						|parametre_url{id_encart,new}
-						|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
-						<div class='nettoyeur'></div>
-				</div>
-			</div><!-- fin de encarts_edit -->
-		</div>		
-		
-	</div>
 </div>
+		
+</B_encarts_article>
+		[(#AUTORISER{modifier, article, #ID_ARTICLE})
+			[(#GET{ouvrir}|=={1}|oui)
+				<div class='nettoyeur'></div>
+				<a href='[(#SELF|parametre_url{ouvrir,''})]' class='ajax bouton_fermer'>[(#CHEMIN{img_pack/frame-close.png}|tag_img)]</a>
+				[(#FORMULAIRE_EDITER_ENCART{#ID_ENCART, article, #ID_ARTICLE, [(#ENV{retour,#SELF}|parametre_url{ouvrir,''})]})]
+				<div class='nettoyeur'></div>
+			]
+			[(#GET{ouvrir}|=={1}|non)
+				[(#SELF|parametre_url{ouvrir,1}
+					|icone{<:encarts:ajouter_encart:>,#CHEMIN{img/frame_edit-22.png},#LANG_RIGHT,creer.gif,ajax})]
+				<div class='nettoyeur'></div>
+			]
+		]
 </BOUCLE_article>
 
 
 
 <script type='text/javascript'>
-jQuery('#contenu .fiche_objet').after( jQuery('#encarts').parent() );
+jQuery('#contenu .fiche_objet .boite_onglets').append( jQuery('#encarts').parent() );
 </script>	

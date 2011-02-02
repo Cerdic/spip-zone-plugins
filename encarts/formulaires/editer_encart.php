@@ -32,7 +32,7 @@ function formulaires_editer_encart_traiter_dist($id_encart='new', $objet='', $id
 	if ($retour) refuser_traiter_formulaire_ajax();
 	$res = formulaires_editer_objet_traiter('encart', $id_encart, '', '', $retour, '');
 	if ($retour) {
-		$res['redirect'] = parametre_url(parametre_url($retour, 'id_encart', ''), 'ouvrir', 1).'#encarts';
+		$res['redirect'] = parametre_url(parametre_url($retour, 'id_encart', ''), 'ouvrir', '').'#encarts';
 	}
 	return $res;
 }
