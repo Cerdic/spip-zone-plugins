@@ -6,32 +6,37 @@
 
 -------------------------------------------------------------- */
 
-a {}
+a { background: transparent no-repeat right center; }
 
-/* Couleurs des liens de SPIP */
+/* Liens internes */
 a.spip_note {} /* liens vers notes de bas de page */
 a.spip_ancre {} /* liens internes a la page */
 a.spip_in {} /* liens internes */
-a.spip_mail { color: #900; }
-a.spip_mail:before { content: "\002709"; } /* liens vers un email */
-a.spip_out { color: #009; } /* liens sortants */
-a.spip_url { color: #009; } /* liens url sortants */
-a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
-a.spip_glossaire:hover { text-decoration: underline overline; }
-.on { font-weight: bold; } /* liens exposes */
 
-/* Download */
-#content a.external[href$=".pdf"], #content a.external[href$=".PDF"], #content a.external[href*=".pdf#"], #content a.external[href*=".PDF#"], #content a.external[href*=".pdf?"], #content a.external[href*=".PDF?"], .link-document {
-    background: url(img/document.png) no-repeat scroll right center transparent;
-    padding: 0 13px 0 0;
-}
+/* Liens externes */
+a.spip_out,
+a.spip_url,
+a.external { padding-right: 14px; background-image: url(img/external.gif); }
 
-/* Services */
-.spip_mail {}
-
-/* External links */
-a.external { padding-right: 14px; background: transparent url(img/external.gif) no-repeat right; }
+/* hreflang */
 a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
+
+/* Liens courriel */
+a.spip_mail,
+a[href ^="mailto:"] { padding-right: 14px; background-image: url(img/mail.gif); }
+a.spip_mail:before { content: ''; }
+
+/* Liens vers encyclopedie */
+a.spip_glossaire { padding-right: 14px; background-image: url(img/glossaire.gif); }
+
+/* Documents a telecharger */
+a.external[href$=".pdf"], a.external[href$=".PDF"],
+a.external[href*=".pdf#"], a.external[href*=".PDF#"],
+a.external[href*=".pdf?"], a.external[href*=".PDF?"],
+a.download { padding-right: 14px; background-image: url(img/download.gif); }
+
+/* Liens exposes */
+.on { font-weight: bold; }
 
 @media print {
 a.external { padding-right: 0; background: none; text-decoration: underline; }
