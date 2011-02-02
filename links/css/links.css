@@ -16,7 +16,7 @@ a.spip_in {} /* liens internes */
 /* Liens externes */
 a.spip_out,
 a.spip_url,
-a.external { padding-right: 14px; background-image: url(img/external.gif); }
+a.external { padding-right: 13px; background-image: url(img/external.gif); }
 
 /* hreflang */
 a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
@@ -26,14 +26,49 @@ a.spip_mail,
 a[href ^="mailto:"] { padding-right: 14px; background-image: url(img/mail.gif); }
 a.spip_mail:before { content: ''; }
 
+/* Autres services */
+a[href ^="https://"],
+a.lock { padding-right: 13px; background-image: url(img/lock.gif); }
+
+a[href ^="ftp://"],
+a.ftp { padding-right: 13px; background-image: url(img/ftp.gif); }
+
+a.gopher,
+a[href ^="gopher://"] { padding-right: 13px; background-image: url(img/external.gif); }
+
+a[href ^="news://"],
+a.news { padding-right: 13px; background-image: url(img/news.gif); }
+
+a[href ^="irc://"],
+a.extiw[href ^="irc://"],
+a.talk { padding-right: 13px; background-image: url(img/talk.gif); }
+
+a.feed { padding-right: 13px; background-image: url(img/feed.gif); }
+
 /* Liens vers encyclopedie */
-a.spip_glossaire { padding-right: 14px; background-image: url(img/glossaire.gif); }
+a.spip_glossaire { padding-right: 13px; background-image: url(img/glossaire.gif); }
 
 /* Documents a telecharger */
-a.external[href$=".pdf"], a.external[href$=".PDF"],
-a.external[href*=".pdf#"], a.external[href*=".PDF#"],
-a.external[href*=".pdf?"], a.external[href*=".PDF?"],
-a.download { padding-right: 14px; background-image: url(img/download.gif); }
+a.download { padding-right: 13px; background-image: url(img/download.gif); }
+
+a[href $=".ogg"], a[href $=".OGG"],
+a[href $=".mid"], a[href $=".MID"],
+a[href $=".midi"], a[href $=".MIDI"],
+a[href $=".mp3"], a[href $=".MP3"],
+a[href $=".wav"], a[href $=".WAV"],
+a[href $=".wma"], a[href $=".WMA"],
+a.audio { padding-right: 13px; background-image: url(img/audio.gif); }
+
+a[href $=".ogm"], a[href $=".OGM"],
+a[href $=".avi"], a[href $=".AVI"],
+a[href $=".mpeg"], a[href $=".MPEG"],
+a[href $=".mpg"], a[href $=".MPG"],
+a.video { padding-right: 13px; background-image: url(img/video.gif); }
+
+a[href$=".pdf"], a[href$=".PDF"],
+a[href*=".pdf#"], a[href*=".PDF#"],
+a[href*=".pdf?"], a[href*=".PDF?"],
+a.pdf { padding-right: 13px; background-image: url(img/pdf.gif); }
 
 /* Liens exposes */
 .on { font-weight: bold; }
@@ -42,3 +77,5 @@ a.download { padding-right: 14px; background-image: url(img/download.gif); }
 a.external { padding-right: 0; background: none; text-decoration: underline; }
 a.external:after { content: " (" attr(href) ") "; font-size: 90%; font-weight: normal; }
 }
+
+/* end */
