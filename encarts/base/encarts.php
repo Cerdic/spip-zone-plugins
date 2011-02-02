@@ -10,13 +10,12 @@ include_spip('inc/meta');
 include_spip('base/create');
 
 function encarts_declarer_tables_interfaces($interface){
-	include_spip('encarts_fonctions');
 
 	$interface['table_des_tables']['encarts'] = 'encarts';
 	
-	$interface['tables_jointures']['spip_articles'][]= 'encarts';
-	$interface['tables_jointures']['spip_articles']['id_article']= 'encarts_liens';
-	$interface['tables_jointures']['spip_encarts'][]= 'articles';
+	$interface['tables_jointures']['spip_articles'][] = 'spip_encarts';
+	$interface['tables_jointures']['spip_encarts'][] = 'spip_encarts_liens';
+	$interface['tables_jointures']['spip_encarts_liens'][] = 'spip_encarts';
 	// peut etre faut il plus de déclarations pour lier un encart à des articles ?
 	
 	return $interface;

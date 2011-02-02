@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_editer_encart_dist() {
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -41,8 +42,16 @@ function insert_encart() {
 	));
 	
 	$id_encart = sql_insertq("spip_encarts", $champs);
-	// Attention il faut aussi ici insérer le lien avec l'article
-	// sql_insertq("spip_encarts_liens", ...);
+
+	// ajouter la liaison si presente
+	if ($objet = _request('objet')
+	and $id_objet = _request('id_objet')) {
+		sql_insertq("spip_encarts_liens", array(
+			'id_encart' 	=> $id_encart,
+			'objet' 		=> $objet,
+			'id_objet'		=> $id_objet,
+		));
+	}
 	
 	return $id_encart;
 }
@@ -55,7 +64,6 @@ function revisions_encarts($id_encart, $c=false) {
 	if ($c === false) {
 		$c = array();
 		foreach (array(
-				'id_article',
 				'titre', 'texte', 'date') as $champ
 		) {
 			if (($a = _request($champ)) !== null) {
@@ -70,13 +78,6 @@ function revisions_encarts($id_encart, $c=false) {
 		),
 		$c);
 
-
-	$champs = array();
-	
-	if ($champs) {
-		sql_updateq('spip_encarts', $champs, "id_encart=$id_encart");
-		// faire un truc pour spip_enarts_liens ?
-	}
 
 	// Invalider les caches
 	include_spip('inc/invalideur');

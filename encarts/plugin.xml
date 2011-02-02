@@ -6,7 +6,7 @@
 
 	<licence>&#169; 2011 - GNU/LGPL</licence>
 
-	<version>1.0.1</version>
+	<version>1.1</version>
 	
 	<version_base>1.0</version_base>
 
@@ -37,7 +37,7 @@
 	<install>base/encarts.php</install>
 
 	<pipeline>
-		<nom>affiche_milieu</nom>
+		<nom>afficher_fiche_objet</nom>
 		<inclure>encarts_pipelines.php</inclure>
 	</pipeline>
 	
@@ -50,5 +50,7 @@
 	<categorie>outils</categorie>
 
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="afficher_objets" version="[1.1;]" />
+	<necessite id="saisies" version="[1.8;]" />
 
 </plugin>

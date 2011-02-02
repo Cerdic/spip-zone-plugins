@@ -7,7 +7,8 @@
 		<form method='post' action='[(#ENV{action})]'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<input type='hidden' name='id_encart' value='#ENV{id_encart}' />
-			<input type='hidden' name='id_article' value='#ENV{id_article}' />
+			<input type='hidden' name='objet' value='#ENV{objet}' />
+			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
 			<ul>
 				[(#SAISIE{input, titre, label=<:encarts:label_titre:>})]
 				

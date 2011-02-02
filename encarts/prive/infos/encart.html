@@ -1,0 +1,19 @@
+<BOUCLE_encart_info(ENCARTS){id_encart=#ENV{id}}{tout}>
+<div class='infos'>
+	<div class='numero'>
+		<:encarts:info_gauche_numero_encart:>
+		<p>#ID_ENCART</p>
+	</div>
+
+	<div class='utilisation'>
+		<B_encarts_utilises>
+		<:encart:info_encart_utilisee_par:>
+		<ul>
+		<BOUCLE_encarts_utilises(encarts_liens){id_encart}{par objet,id_objet}>
+			<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#OBJET / #ID_OBJET</a></li>
+		</BOUCLE_encarts_utilises>
+		</ul>
+		</B_encarts_utilises>
+	</div>
+</div>
+</BOUCLE_encart_info>
