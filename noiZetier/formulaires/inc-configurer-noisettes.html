@@ -93,7 +93,8 @@
 			update: function(event, ui) {
 				$(this).children('.editer_noisette').hide();
 				$(this).next('p.boutons').show();
-				$(this).before('<div class="notice"><:noizetier:notice_enregistrer_rang|texte_script:></div>');
+				if(!$(this).prev('div.notice').length)
+					$(this).before('<div class="notice"><:noizetier:notice_enregistrer_rang|texte_script:></div>');
 				$('#bloc-[(#ENV{bloc})] div.actions button').hide();
 			}
 		});
