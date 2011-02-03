@@ -77,11 +77,11 @@
 		<icone>images/noizetier-16.png</icone>
 	</bouton>
 	<categorie>maintenance</categorie>
-	<necessite id="SPIP" version="[2.1.0-rc;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="YAML" version="[1.4.1;]" />
 	<necessite id="saisies" version="[1.8.5;]" />
 	<necessite id="jqueryui" version="[1.8.5;]" />
-	<necessite id="verifier"  />
+	<necessite id="verifier" />
 	<utilise id="compositions" version="[1.0.1;]" />
 </plugin>
