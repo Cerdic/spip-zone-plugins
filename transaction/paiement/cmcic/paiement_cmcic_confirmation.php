@@ -95,12 +95,13 @@ switch($CMCIC_bruteVars['code-retour']) {
 						break;
 
 					case "payetest":
-						
+            // Phase paiement (test)						
 						sql_updateq('spip_formulaires_transactions', array('statut_transaction' => 1), 'ref_transaction=' . sql_quote($CMCIC_bruteVars['reference']));
 						break;
 
 					case "paiement":
-            sql_updateq('spip_formulaires_transactions', array('statut_transaction' => 1), 'ref_transaction=' . $CMCIC_bruteVars['reference']);
+					  // Phase paiement (production)
+            sql_updateq('spip_formulaires_transactions', array('statut_transaction' => 1), 'ref_transaction=' . sql_quote($CMCIC_bruteVars['reference']));
 						break;
 				}
 
