@@ -584,6 +584,14 @@ function spiplistes_calculer_balise_titre ($titre) {
 								$v = intval($params);
 								$date = plus($date, $v);
 								break;
+							case 'jour':
+							case 'mois':
+							case 'annee':
+							case 'nom_mois':
+							case 'ucfirst':
+							case 'saison':
+								$date = $filtre($date);
+								break;
 						}
 					}
 							
