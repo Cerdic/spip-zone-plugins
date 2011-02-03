@@ -105,7 +105,7 @@ function inc_article_afficher_contenu_dist($id_article){
 			" class='fondl'").'</div>';
 		}
 	
-	$retour = generer_url_ecrire("articles","id_article=$id_article",false);
+	$retour = generer_url_ecrire("articles","id_article=$id_article",false,'',true);
 	$span_content='<div class="ref">*<span>'._T('spip:trad_reference').'</span></div>';	
 	
 	foreach($langues_dispos as $key => $value){
@@ -126,7 +126,7 @@ function inc_article_afficher_contenu_dist($id_article){
 					}	
 				$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire('articles_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';
 			
-				$action=generer_action_auteur ('changer_langue',$id_article,$retour);
+				$action=redirige_action_auteur ('changer_langue',$id_article,'articles',"id_article=$id_article");
 				// Si le plugin traduction rubriques est activé on affiche pas les onglets changement de langue car la langue se change en modifiant la rubrique
 				if(!$section){
 					$changer_traduction.='<div class="lang onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></div>';					
