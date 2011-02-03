@@ -1,0 +1,6 @@
+
+titre: '<:transaction:traiter_paiement_paypal_titre:>'
+description: '<:transaction:traiter_paiement_paypal_description:>'
+options:
+  -
+    saisie: 'hidden'

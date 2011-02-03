@@ -5,13 +5,13 @@
 	<version>0.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Champs additionnels de paiement en ligne pour le plugin Formidable</description>
+	<description>Champs additionnels de paiement en ligne pour le plugin Formidable<br />
+	Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointscoeur.org/]
+	</description>
 	<lien></lien>
 	<icon>images/transaction-64.png</icon>
 	<prefix>transaction</prefix>
 	<install>base/transaction_upgrade.php</install>
-	<options></options>
-	<fonctions></fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>transaction_pipelines.php</inclure>
