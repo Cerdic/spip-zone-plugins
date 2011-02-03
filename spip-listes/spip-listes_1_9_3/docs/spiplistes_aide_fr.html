@@ -1,16 +1,21 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
-<head>
-<!-- Original From $Id: aide-fr_spiplistes.html,v 1.15 2007/09/13 17:11:05 cpaulus Exp $ --><!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <!-- Original From $Id: aide-fr_spiplistes.html,v 1.15 2007/09/13 17:11:05 cpaulus Exp $ --><!--
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
 -->
-  <title>Documentation @spiplistes_name@ [@spiplistes_version@]</title>
-  <meta http-equiv="Content-Type"
- content="text/html; charset=ISO-8859-1">
-  <meta http-equiv="Window-target" content="_blank">
-  <style type="text/css">
+    
+<title>Documentation @spiplistes_name@ [@spiplistes_version@]</title>
+
+    
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+
+    
+<meta content="_blank" http-equiv="Window-target" />
+
+    
+<style type="text/css">
 <!--
 body {
 	font-family: "Myriad Web Pro", Verdana, Arial, Helvetica, sans-serif;
@@ -58,601 +63,999 @@ img {
 }
 -->
   </style>
-</head>
+  </head>
 <body>
-<h1><a class="mozTocH1" name="mozTocId713677"></a>@spiplistes_name@</h1>
-<p class="h1">Plugin @spiplistes_name@ version @spiplistes_version@ -
-Mise
-&agrave; jour documentation: $LastChangedDate: 2008-12-05 15:31:26
-+0100 (ven., 05 d&Atilde;&copy;c. 2008) $EndLastChangedDate
-</p>
+    
+<h1><a name="mozTocId713677" class="mozTocH1"></a>@spiplistes_name@</h1>
+
+    
+<p class="h1">Plugin @spiplistes_name@ version @spiplistes_version@
+      - Mise à jour documentation: $LastChangedDate: 2008-12-05 15:31:26
+      +0100 (ven., 05 dÃ©c. 2008) $EndLastChangedDate </p>
+
+    
 <ul>
-  <ol id="mozToc">
-<!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6-->
-    <li><a href="#mozTocId713677">@spiplistes_name@</a>
-      <ol>
-        <li><a href="#mozTocId900219">Pr&eacute;sentation</a></li>
-        <li><a href="#mozTocId83179">Configuration</a></li>
-        <li><a href="#mozTocId792695">Activation des envois de
-courriers (mode
-simulation)</a></li>
-        <li><a href="#mozTocId227844">Avertissements</a></li>
-        <li><a href="#mozTocId877081">Acc&eacute;der &agrave; la
-gestion du courrier</a></li>
-        <li><a href="#mozTocId299922">Courrier ou liste de
-diffusion</a></li>
-        <li><a href="#mozTocId685565">Le casier &agrave;
-courriers</a></li>
-        <li><a href="#mozTocId338511">Configurer une liste de
-diffusion</a></li>
-        <li><a href="#mozTocId26920">Mod&eacute;rer une liste de
-diffusion</a></li>
-        <li><a href="#mozTocId197778">Adresse email de retour</a></li>
-        <li><a href="#mozTocId328117">Planifier les diffusions</a></li>
-        <li><a href="#mozTocId203956">Planifier une liste de diffusion</a></li>
-        <li><a href="#mozTocId753274">Tester l'envoi du courrier</a></li>
-        <li><a href="#mozTocId723535">Forcer le format de
-r&eacute;ception pour un abonn&eacute;</a></li>
-        <li><a href="#mozTocId746722">Forcer un abonnement pour une
-liste</a></li>
-        <li><a href="#mozTocId862843">Abonnement par le
-formulaire en espace public</a></li>
-        <li><a href="#mozTocId342886">Abonnement par la
-fiche auteur</a></li>
-        <li><a href="#mozTocId82476">Abonnement par la page des
-listes</a></li>
-        <li><a href="#mozTocId610257">Forcer tous les abonnements</a></li>
-        <li><a href="#mozTocId990283">Confirmer
-le format de r&eacute;ception</a></li>
-        <li><a href="#mozTocId568121">D&eacute;sactiver
-@spiplistes_name@</a></li>
-        <li><a href="#mozTocId381221">Personnaliser un patron</a></li>
-        <li><a href="#mozTocId91756">Un num&eacute;ro dans le sujet de
-votre message</a></li>
-        <li><a href="#mozTocId394076">D&eacute;sinstaller
-@spiplistes_name@</a></li>
-        <li><a href="#mozTocId853888">Liens compl&eacute;mentaires</a></li>
+
+      <ol id="mozToc">
+        <!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6-->
+        <li><a href="#mozTocId713677">@spiplistes_name@</a>
+          <ol>
+            <li><a href="#mozTocId900219">Présentation</a></li>
+            <li><a href="#mozTocId83179">Configuration</a></li>
+            <li><a href="#mozTocId792695">Activation des envois de
+                courriers (mode simulation)</a></li>
+            <li><a href="#mozTocId227844">Avertissements</a></li>
+            <li><a href="#mozTocId877081">Accéder à la gestion du
+                courrier</a></li>
+            <li><a href="#mozTocId299922">Courrier ou liste de diffusion</a></li>
+            <li><a href="#mozTocId685565">Le casier à courriers</a></li>
+            <li><a href="#mozTocId338511">Configurer une liste de
+                diffusion</a></li>
+            <li><a href="#mozTocId26920">Modérer une liste de diffusion</a></li>
+            <li><a href="#mozTocId197778">Adresse email de retour</a></li>
+            <li><a href="#mozTocId328117">Planifier les diffusions</a></li>
+            <li><a href="#mozTocId203956">Planifier une liste de
+                diffusion</a></li>
+            <li><a href="#mozTocId753274">Tester l'envoi du courrier</a></li>
+            <li><a href="#mozTocId723535">Forcer le format de réception
+                pour un abonné</a></li>
+            <li><a href="#mozTocId746722">Forcer un abonnement pour une
+                liste</a></li>
+            <li><a href="#mozTocId862843">Abonnement par le formulaire
+                en espace public</a></li>
+            <li><a href="#mozTocId342886">Abonnement par la fiche auteur</a></li>
+            <li><a href="#mozTocId82476">Abonnement par la page des
+                listes</a></li>
+            <li><a href="#mozTocId610257">Forcer tous les abonnements</a></li>
+            <li><a href="#mozTocId990283">Confirmer le format de
+                réception</a></li>
+            <li><a href="#mozTocId568121">Désactiver @spiplistes_name@</a></li>
+            <li><a href="#mozTocId381221">Personnaliser un patron</a></li>
+            <li><a href="#mozTocId91756">Un numéro dans le sujet de
+                votre message</a></li>
+            <li><a href="#personsujet">Personnaliser le sujet de votre message</a></li>
+            <li><a href="#mozTocId394076">Désinstaller @spiplistes_name@</a></li>
+            <li><a href="#mozTocId853888">Liens complémentaires</a></li>
+          </ol>
+        </li>
       </ol>
-    </li>
-  </ol>
+    
 </ul>
-<p>&nbsp;</p>
-<p><strong>Avertissements</strong> (version test) : cette documentation
-est en cours de r&eacute;alisation.</p>
-<h2><a class="mozTocH2" name="mozTocId900219"></a>Pr&eacute;sentation</h2>
+
+    
+<p> </p>
+
+    
+<p><strong>Avertissements</strong> (version test) : cette
+      documentation est en cours de réalisation.</p>
+
+    
+<h2><a name="mozTocId900219" class="mozTocH2"></a>Présentation</h2>
+
+    
 <p><strong>@spiplistes_name@</strong> est un plugin pour SPIP
-permettant la gestion de courriers au sein d'un groupe de travail. </p>
-@_aide@
-<p>Cette page vous pr&eacute;sente les principales
-fonctionnalit&eacute;s de <strong>@spiplistes_name@</strong>. Cette
-documentation n'est pas exhaustive, la plupart des actions sont
-comment&eacute;es dans l'interface de gestion de <strong>@spiplistes_name@</strong>.
-</p>
-<p>La derni&egrave;re version de <strong>@spiplistes_name@</strong>
-est disponible <a
- href="http://files.spip.org/spip-zone/spip-listes_1_9_2.zip">sur
-SPIP-zone</a>.</p>
-<h2><a class="mozTocH2" name="mozTocId83179"></a>Configuration</h2>
-<p>La page de configuration de <strong>@spiplistes_name@</strong> est
-accessible par le bouton du m&ecirc;me nom :</p>
-<p><img src="../img_docs/2007-09-05_185434.png" alt="" height="90"
- width="126"></p>
-<p><img src="../img_docs/2007-09-05_185228.png" alt="" height="43"
- width="549"></p>
+      permettant la gestion de courriers au sein d'un groupe de travail.
+    </p>
+
+    @_aide@
+    
+<p>Cette page vous présente les principales fonctionnalités de <strong>@spiplistes_name@</strong>.
+      Cette documentation n'est pas exhaustive, la plupart des actions
+      sont commentées dans l'interface de gestion de <strong>@spiplistes_name@</strong>.
+    </p>
+
+    
+<p>La dernière version de <strong>@spiplistes_name@</strong> est
+      disponible <a href="http://files.spip.org/spip-zone/spip-listes_1_9_2.zip">sur
+        SPIP-zone</a>.</p>
+
+    
+<h2><a name="mozTocId83179" class="mozTocH2"></a>Configuration</h2>
+
+    
+<p>La page de configuration de <strong>@spiplistes_name@</strong>
+      est accessible par le bouton du même nom :</p>
+
+    
+<p><img width="126" height="90" alt="" src="../img_docs/2007-09-05_185434.png" /></p>
+
+    
+<p><img width="549" height="43" alt="" src="../img_docs/2007-09-05_185228.png" /></p>
+
+    
 <p>Cette page vous permet de configurer :</p>
+
+    
 <ul>
-  <li>Le mode d'inscription des visiteurs ;</li>
-  <li>Le mode de transfert du courrier, la taille du paquet d'envois,
-le code des caract&egrave;res utilis&eacute;s pour l'envoi.</li>
+
+      <li>Le mode d'inscription des visiteurs ;</li>
+      <li>Le mode de transfert du courrier, la taille du paquet
+        d'envois, le code des caractères utilisés pour l'envoi.</li>
+    
 </ul>
-<p>Vous pouvez &eacute;galement <a href="#mozTocId610257">forcer ici
-tous
-les abonnements</a>.</p>
-<p>&nbsp;</p>
-<h2><a class="mozTocH2" name="mozTocId792695"></a>Activation des envois
-de courriers (mode
-simulation)</h2>
-<p>Par d&eacute;faut, &agrave; l'installation - ou lors d'unemise
-&agrave; jour - de <strong>@spiplistes_name@</strong>, l'envoi de
-courriers est simul&eacute; afin de vous permettre de valider le bon
-fonctionnement de l'outil.</p>
-<p>Lorsque vous aurez r&eacute;alis&eacute; tous les tests
-n&eacute;cessaires, vous pouvez activer les envois de courriers en
-validant <strong>Activer les envois de courriers</strong> dans le menu
-de configuration de <strong>@spiplistes_name@</strong>.</p>
-<h2><a class="mozTocH2" name="mozTocId227844"></a>Avertissements</h2>
+
+    
+<p>Vous pouvez également <a href="#mozTocId610257">forcer ici tous
+        les abonnements</a>.</p>
+
+    
+<p> </p>
+
+    
+<h2><a name="mozTocId792695" class="mozTocH2"></a>Activation des
+      envois de courriers (mode simulation)</h2>
+
+    
+<p>Par défaut, à l'installation - ou lors d'unemise à jour - de <strong>@spiplistes_name@</strong>,
+      l'envoi de courriers est simulé afin de vous permettre de valider
+      le bon fonctionnement de l'outil.</p>
+
+    
+<p>Lorsque vous aurez réalisé tous les tests nécessaires, vous
+      pouvez activer les envois de courriers en validant <strong>Activer
+
+
+
+
+        les envois de courriers</strong> dans le menu de configuration
+      de <strong>@spiplistes_name@</strong>.</p>
+
+    
+<h2><a name="mozTocId227844" class="mozTocH2"></a>Avertissements</h2>
+
+    
 <p class="avertissement">N&#8217;installez pas <strong>@spiplistes_name@</strong>
-en production sans l&#8217;avoir test&eacute; et valid&eacute; correctement.</p>
+      en production sans l&#8217;avoir testé et validé correctement.</p>
+
+    
 <p class="avertissement"><strong>@spiplistes_name@</strong> est
-diffus&eacute; gratuitement sous licence GNU/GPL, sans aucune garantie
-de bon fonctionnement. Vous &ecirc;tes seul responsable de
-l&#8217;installation et de la mise en &#339;uvre de <strong>@spiplistes_name@</strong>
-sur votre site.</p>
-<h2><a class="mozTocH2" name="mozTocId877081"></a>Acc&eacute;der
-&agrave; la
-gestion du courrier</h2>
-<p>Vous devez &ecirc;tre <em>administrateur</em> pour pouvoir
-acc&eacute;der &agrave; la gestion du courrier.</p>
-<p>Apr&egrave;s avoir activ&eacute; le plugin, s&eacute;lectionnez dans
-le menu <strong>Edition</strong> le sous-menu <strong>Listes de
-diffusion</strong> :</p>
-<p><img src="../img_docs/2007-09-05_181124.png"
- alt="Sous-menu Edition/Lettres d'information" height="119" width="180">
-</p>
-<p>Trois onglets apparaissent, ainsi qu'une bo&icirc;te de raccourcis.
-L'ensemble vous permet de g&eacute;rer le courrier :</p>
-<p><img src="../img_docs/2007-09-05_181420.png"
- alt="Les onglets du plugin" height="43" width="487"></p>
-<p><img src="../img_docs/2008-03-23_210149.png"
- alt="Les raccourcis du plugin" height="219" width="210"></p>
+      diffusé gratuitement sous licence GNU/GPL, sans aucune garantie de
+      bon fonctionnement. Vous êtes seul responsable de l&#8217;installation
+      et de la mise en &#339;uvre de <strong>@spiplistes_name@</strong> sur
+      votre site.</p>
+
+    
+<h2><a name="mozTocId877081" class="mozTocH2"></a>Accéder à la
+      gestion du courrier</h2>
+
+    
+<p>Vous devez être <em>administrateur</em> pour pouvoir accéder à
+      la gestion du courrier.</p>
+
+    
+<p>Après avoir activé le plugin, sélectionnez dans le menu <strong>Edition</strong>
+      le sous-menu <strong>Listes de diffusion</strong> :</p>
+
+    
+<p><img width="180" height="119" alt="Sous-menu
+        Edition/Lettres d'information" src="../img_docs/2007-09-05_181124.png" /> </p>
+
+    
+<p>Trois onglets apparaissent, ainsi qu'une boîte de raccourcis.
+      L'ensemble vous permet de gérer le courrier :</p>
+
+    
+<p><img width="487" height="43" alt="Les onglets du
+        plugin" src="../img_docs/2007-09-05_181420.png" /></p>
+
+    
+<p><img width="210" height="219" alt="Les raccourcis
+        du plugin" src="../img_docs/2008-03-23_210149.png" /></p>
+
+    
 <p>Le raccourci <strong>Maintenance technique</strong> n'est
-accessible qu'&agrave; l'administrateur principal du site. Si vos
-listes de courriers deviennent trop importantes, adressez-vous &agrave;
-lui, il pourra am&eacute;liorer la situation gr&acirc;ce &agrave; cette
-option.</p>
-<h2><a class="mozTocH2" name="mozTocId299922"></a>Courrier ou liste de
-diffusion</h2>
-<p>Deux modes de cr&eacute;ations vous sont propos&eacute;s :</p>
+      accessible qu'à l'administrateur principal du site. Si vos listes
+      de courriers deviennent trop importantes, adressez-vous à lui, il
+      pourra améliorer la situation grâce à cette option.</p>
+
+    
+<h2><a name="mozTocId299922" class="mozTocH2"></a>Courrier ou liste
+      de diffusion</h2>
+
+    
+<p>Deux modes de créations vous sont proposés :</p>
+
+    
 <ul>
-  <li>Courrier</li>
-  <li>Liste de diffusion</li>
+
+      <li>Courrier</li>
+      <li>Liste de diffusion</li>
+    
 </ul>
-<p>Les courriers ne peuvent pas &ecirc;tre param&eacute;tr&eacute;s
-pour &ecirc;tre envoy&eacute;s p&eacute;riodiquement. Si vous voulez
-qu'un courrier puisse &ecirc;tre envoy&eacute; tous les 3 jours ou tous
-les mois, vous devez le transformer en patron et cr&eacute;er une liste
-de diffusion.</p>
+
+    
+<p>Les courriers ne peuvent pas être paramétrés pour être envoyés
+      périodiquement. Si vous voulez qu'un courrier puisse être envoyé
+      tous les 3 jours ou tous les mois, vous devez le transformer en
+      patron et créer une liste de diffusion.</p>
+
+    
 <p>Un patron est un squelette SPIP.</p>
-<p>Les patrons fournis, et ceux que vous pouvez cr&eacute;er et
-rajouter &agrave; la liste, permettent la g&eacute;n&eacute;ration
-automatique du courrier, &agrave; la date d'exp&eacute;dition
-souhait&eacute;e. Ainsi, si vous r&eacute;alisez un patron qui
-r&eacute;sume une de vos rubriques, ce r&eacute;sum&eacute; sera
-g&eacute;n&eacute;r&eacute; &agrave; chaque date p&eacute;riodique
-d'envoi souhait&eacute;e.</p>
-<p>Il n'en est pas de m&ecirc;me avec un courrier. Le contenu du
-courrier est lui, g&eacute;n&eacute;r&eacute; &agrave; la date de sa
-cr&eacute;ation. Ce contenu peut &ecirc;tre g&eacute;n&eacute;r&eacute;
-&agrave; partir d'un patron, mais il est important de noter que le
-contenu g&eacute;n&eacute;r&eacute; ne le sera pas plus tard. Par
-contre, ce contenu est &eacute;ditable. Vous pouvez le modifier
-apr&egrave;s sa cr&eacute;ation, ce qui n'est pas possible avec une
-liste de diffusion.</p>
-<p>Lorsqu'une liste de diffusion est exp&eacute;di&eacute;e, le contenu
-g&eacute;n&eacute;r&eacute; devient &agrave; son tour un courrier qui
-appara&icirc;t dans le casier <strong>Courrier automatique
-publi&eacute;</strong>.</p>
-<h2><a class="mozTocH2" name="mozTocId685565"></a>Le casier &agrave;
-courriers</h2>
-<p>Le casier &agrave; courriers permet de lister, dans l'ordre :</p>
+
+    
+<p>Les patrons fournis, et ceux que vous pouvez créer et rajouter à
+      la liste, permettent la génération automatique du courrier, à la
+      date d'expédition souhaitée. Ainsi, si vous réalisez un patron qui
+      résume une de vos rubriques, ce résumé sera généré à chaque date
+      périodique d'envoi souhaitée.</p>
+
+    
+<p>Il n'en est pas de même avec un courrier. Le contenu du courrier
+      est lui, généré à la date de sa création. Ce contenu peut être
+      généré à partir d'un patron, mais il est important de noter que le
+      contenu généré ne le sera pas plus tard. Par contre, ce contenu
+      est éditable. Vous pouvez le modifier après sa création, ce qui
+      n'est pas possible avec une liste de diffusion.</p>
+
+    
+<p>Lorsqu'une liste de diffusion est expédiée, le contenu généré
+      devient à son tour un courrier qui apparaît dans le casier <strong>Courrier
+
+
+
+
+        automatique publié</strong>.</p>
+
+    
+<h2><a name="mozTocId685565" class="mozTocH2"></a>Le casier à
+      courriers</h2>
+
+    
+<p>Le casier à courriers permet de lister, dans l'ordre :</p>
+
+    
 <ul>
-  <li>Les courriers en cours de r&eacute;daction ;</li>
-  <li>Les courriers pr&ecirc;ts &agrave; l'envoi. La destination du
-courrier a &eacute;t&eacute; s&eacute;lectionn&eacute;e, il vous faut
-confirmer l'envoi ;</li>
-  <li>Les courriers automatiques programm&eacute;s - issus des listes
-programm&eacute;es ;</li>
-  <li>Les courriers envoy&eacute;s :
-    <ul>
-      <li>Issus des listes (programm&eacute;es) ;</li>
-      <li>Courriers directs.</li>
-    </ul>
-  </li>
-  <li>Les courriers non envoy&eacute;s :
-    <ul>
-      <li>Courriers vides, en g&eacute;n&eacute;ral
-g&eacute;n&eacute;r&eacute; par un patron mais dont le r&eacute;sultat
-ne donne rien :</li>
-      <li>Courriers ignor&eacute;s, sans destinataires - la liste n'a
-plus d'abonn&eacute;s ;</li>
-      <li>Les envois abandonn&eacute;s lors de l'exp&eacute;dition.</li>
-    </ul>
-  </li>
+
+      <li>Les courriers en cours de rédaction ;</li>
+      <li>Les courriers prêts à l'envoi. La destination du courrier a
+        été sélectionnée, il vous faut confirmer l'envoi ;</li>
+      <li>Les courriers automatiques programmés - issus des listes
+        programmées ;</li>
+      <li>Les courriers envoyés :
+        <ul>
+          <li>Issus des listes (programmées) ;</li>
+          <li>Courriers directs.</li>
+        </ul>
+      </li>
+      <li>Les courriers non envoyés :
+        <ul>
+          <li>Courriers vides, en général généré par un patron mais dont
+            le résultat ne donne rien :</li>
+          <li>Courriers ignorés, sans destinataires - la liste n'a plus
+            d'abonnés ;</li>
+          <li>Les envois abandonnés lors de l'expédition.</li>
+        </ul>
+      </li>
+    
 </ul>
-<h2><a class="mozTocH2" name="mozTocId338511"></a>Configurer une liste
-de
-diffusion</h2>
-<p>La diffusion : une liste peut &ecirc;tre priv&eacute;e (interne) ou
-publique. L'inscription &agrave; une liste priv&eacute;e n'est pas
-visible dans l'espace public.</p>
-<p>Si vous transformez une liste p&eacute;riodique en liste publique,
-elle conserve ses abonn&eacute;s, mais perd sa date de publication. Il
-vous faut programmer &agrave; nouveau un envoi automatique.</p>
-<p>Si vous transformez une liste p&eacute;riodique en liste
-priv&eacute;e, elle perd &eacute;galement sa date de publication, mais
-aussi ses abonn&eacute;s <em>invit&eacute;s</em>. </p>
-<h2><a class="mozTocH2" name="mozTocId26920"></a>Mod&eacute;rer une
-liste de diffusion</h2>
-<p>Le webmestre du site peut d&eacute;l&eacute;guer la gestion d'une
-liste de diffusion &agrave; un auteur ou un autre administrateur. </p>
-<p>Il doit avant tout cr&eacute;er une liste de diffusion et y ajouter
-le mod&eacute;rateur ainsi que les destinataires et ne pas oublier les
-patrons.</p>
-<p>Le mod&eacute;rateur peut ensuite &eacute;diter un courrier et
-l'envoyer &agrave; cette liste, ou &agrave; une adresse email.</p>
-<h2><a class="mozTocH2" name="mozTocId197778"></a>Adresse email de
-retour</h2>
-<p>Le champ de r&eacute;ponse (reply-to) est transmis lors de la
-diffusion. Il correspond &agrave; l'adresse email de retour. Lorsque
-votre correspondant r&eacute;pondra &agrave; votre courrier, sa
-r&eacute;ponse sera envoy&eacute;e &agrave; cette adresse.</p>
-<h2><a class="mozTocH2" name="mozTocId328117"></a>Planifier les
-diffusions</h2>
-<p>Le planning des diffusions des listes est disponible sur le page de
-gestion des listes.</p>
-<p><img src="../img_docs/2008-06-23_125310.png" alt="" height="49"
- width="147"></p>
-<p>Le planning appara&icirc;t graphiquement pour les 10 ou 45 jours
-suivants (cliquez sur la loupe pour passer de l'un &agrave; l'autre).
-Il vous permet d'envisager un &eacute;ventuel engorgement des envois.</p>
-<p><img src="../img_docs/2008-06-23_125824.png" alt="" height="338"
- width="288"></p>
-<p>Vous pouvez acc&eacute;der directement &agrave; la liste
-souhait&eacute;e en cliquant sur sa barre du planning.</p>
-<h2><a class="mozTocH2" name="mozTocId203956"></a>Planifier une liste
-de diffusion</h2>
-<p>Les listes de diffusion peuvent exceptionnellement &ecirc;tre
-envoy&eacute;es &agrave; une date pr&eacute;cise. Il suffit d'indiquer
-la date d'envoi souhait&eacute;e dans le formulaire de la liste
-concern&eacute;e.</p>
-<p><img src="../img_docs/2007-09-05_184833.png" alt="" height="66"
- width="493"></p>
+
+    
+<h2><a name="mozTocId338511" class="mozTocH2"></a>Configurer une
+      liste de diffusion</h2>
+
+    
+<p>La diffusion : une liste peut être privée (interne) ou publique.
+      L'inscription à une liste privée n'est pas visible dans l'espace
+      public.</p>
+
+    
+<p>Si vous transformez une liste périodique en liste publique, elle
+      conserve ses abonnés, mais perd sa date de publication. Il vous
+      faut programmer à nouveau un envoi automatique.</p>
+
+    
+<p>Si vous transformez une liste périodique en liste privée, elle
+      perd également sa date de publication, mais aussi ses abonnés <em>invités</em>.
+    </p>
+
+    
+<h2><a name="mozTocId26920" class="mozTocH2"></a>Modérer une liste
+      de diffusion</h2>
+
+    
+<p>Le webmestre du site peut déléguer la gestion d'une liste de
+      diffusion à un auteur ou un autre administrateur. </p>
+
+    
+<p>Il doit avant tout créer une liste de diffusion et y ajouter le
+      modérateur ainsi que les destinataires et ne pas oublier les
+      patrons.</p>
+
+    
+<p>Le modérateur peut ensuite éditer un courrier et l'envoyer à
+      cette liste, ou à une adresse email.</p>
+
+    
+<h2><a name="mozTocId197778" class="mozTocH2"></a>Adresse email de
+      retour</h2>
+
+    
+<p>Le champ de réponse (reply-to) est transmis lors de la diffusion.
+      Il correspond à l'adresse email de retour. Lorsque votre
+      correspondant répondra à votre courrier, sa réponse sera envoyée à
+      cette adresse.</p>
+
+    
+<h2><a name="mozTocId328117" class="mozTocH2"></a>Planifier les
+      diffusions</h2>
+
+    
+<p>Le planning des diffusions des listes est disponible sur le page
+      de gestion des listes.</p>
+
+    
+<p><img width="147" height="49" alt="" src="../img_docs/2008-06-23_125310.png" /></p>
+
+    
+<p>Le planning apparaît graphiquement pour les 10 ou 45 jours
+      suivants (cliquez sur la loupe pour passer de l'un à l'autre). Il
+      vous permet d'envisager un éventuel engorgement des envois.</p>
+
+    
+<p><img width="288" height="338" alt="" src="../img_docs/2008-06-23_125824.png" /></p>
+
+    
+<p>Vous pouvez accéder directement à la liste souhaitée en cliquant
+      sur sa barre du planning.</p>
+
+    
+<h2><a name="mozTocId203956" class="mozTocH2"></a>Planifier une
+      liste de diffusion</h2>
+
+    
+<p>Les listes de diffusion peuvent exceptionnellement être envoyées
+      à une date précise. Il suffit d'indiquer la date d'envoi souhaitée
+      dans le formulaire de la liste concernée.</p>
+
+    
+<p><img width="493" height="66" alt="" src="../img_docs/2007-09-05_184833.png" /></p>
+
+    
 <p>Lorsqu'une liste de diffusion publique est correctement
-param&eacute;tr&eacute;e (s&eacute;lection des patrons, liste
-d'abonn&eacute;s), vous pouvez choisir pour elle une diffusion
-p&eacute;riodique en jours, hebdomadaire, mensuelle ou annuelle.</p>
-<p>Vous pouvez param&eacute;trer l'exp&eacute;dition d'une liste de
-diffusion en lui d&eacute;finissant :</p>
+      paramétrée (sélection des patrons, liste d'abonnés), vous pouvez
+      choisir pour elle une diffusion périodique en jours, hebdomadaire,
+      mensuelle ou annuelle.</p>
+
+    
+<p>Vous pouvez paramétrer l'expédition d'une liste de diffusion en
+      lui définissant :</p>
+
+    
 <ul>
-  <li>un titre de diffusion, le sujet, &agrave; ne pas confondre avec
-le titre de la liste de diffusion ;</li>
-  <li>un rythme de diffusion, en jours, hebdomadaire, mensuel ou annuel
-;</li>
-  <li>une date de premier envoi.</li>
+
+      <li>un titre de diffusion, le sujet, à ne pas confondre avec le
+        titre de la liste de diffusion ;</li>
+      <li>un rythme de diffusion, en jours, hebdomadaire, mensuel ou
+        annuel ;</li>
+      <li>une date de premier envoi.</li>
+    
 </ul>
-<p>Le courrier est g&eacute;n&eacute;r&eacute; &agrave; partir des
-patrons pr&eacute;cis&eacute;s &agrave; la date planifi&eacute;e.</p>
-<p><img src="../img_docs/2008-05-03_043359.png" alt="" height="514"
- width="492"></p>
-<p>Dans l'exemple ci-dessus, le courrier sera envoy&eacute; toutes les
-semaines, le lundi, &agrave; partir du 30 juin 2008. A noter qu'il est
-inutile de calculer la date pr&eacute;cis&eacute;ment. Si vous validez
-dans cet exemple le 31 juin, qui est un mardi, la date sera
-automatiquement corrig&eacute;e pour le 30 juin 2008, qui est un lundi.</p>
-<p>Si le bouton <strong>Envoyer maintenant</strong> est gris&eacute;,
-c'est que la liste ne contient aucun abonn&eacute;.</p>
-<h2><a class="mozTocH2" name="mozTocId753274"></a>Tester l'envoi du
-courrier</h2>
-<p>Lorsque vous avez termin&eacute; la r&eacute;daction de votre
-courrier, vous pouvez l'envoyer en test &agrave; un correspond ou
-vous-m&ecirc;me, en compl&eacute;tant le champ <strong>email de test</strong>
-et en le validant par le bouton <strong>Tester par email</strong> :</p>
-<p><img src="../img_docs/2007-09-05_181643.png"
- alt="Formulaire envoi de test" height="124" width="495"></p>
-<p>Cette adresse email doit &ecirc;tre valide. En cas d'erreur, un
-message vous alerte.</p>
-<p>Pour tester l'envoi d'une liste de diffusion (chrono), cr&eacute;ez
-une liste d'abonn&eacute;s contenant votre adresse email, testez un
-premier envoi par l'envoi imm&eacute;diat, puis - si le test correspond
-&agrave; vos attentes - modifiez la liste des abonn&eacute;s.</p>
-<h2><a class="mozTocH2" name="mozTocId723535"></a>Forcer le format de
-r&eacute;ception pour un abonn&eacute;</h2>
-<p>Si un abonn&eacute; n'a pas d&eacute;fini son format de
-r&eacute;ception de courriers, texte seul ou enrichi (html), aucun
-courrier ne peut lui &ecirc;tre envoy&eacute; via <strong>@spiplistes_name@</strong>
-(liste sur abonnement ou courrier simple).</p>
-<p>Pour forcer ce format de r&eacute;ception, affichez la page de suivi
-des abonnements :</p>
-<p><img src="../img_docs/2008-03-23_211201.png"
- alt="Bouton de suivi des abonnements" height="48" width="172"></p>
-<p>En bas de page, la liste des auteurs appara&icirc;t : </p>
-<p><img src="../img_docs/2008-11-25_090519.png"
- alt="Page de suivi des abonnements" height="355" width="512"></p>
-<p>Une puce noire dans la colonne <strong>email</strong> indique que
-l'auteur ou le visiteur n'a pas pr&eacute;cis&eacute; son adresse de
-courrier &eacute;lectronique. Impossible de l'abonner !</p>
+
+    
+<p>Le courrier est généré à partir des patrons précisés à la date
+      planifiée.</p>
+
+    
+<p><img width="492" height="514" alt="" src="../img_docs/2008-05-03_043359.png" /></p>
+
+    
+<p>Dans l'exemple ci-dessus, le courrier sera envoyé toutes les
+      semaines, le lundi, à partir du 30 juin 2008. A noter qu'il est
+      inutile de calculer la date précisément. Si vous validez dans cet
+      exemple le 31 juin, qui est un mardi, la date sera automatiquement
+      corrigée pour le 30 juin 2008, qui est un lundi.</p>
+
+    
+<p>Si le bouton <strong>Envoyer maintenant</strong> est grisé,
+      c'est que la liste ne contient aucun abonné.</p>
+
+    
+<h2><a name="mozTocId753274" class="mozTocH2"></a>Tester l'envoi du
+      courrier</h2>
+
+    
+<p>Lorsque vous avez terminé la rédaction de votre courrier, vous
+      pouvez l'envoyer en test à un correspond ou vous-même, en
+      complétant le champ <strong>email de test</strong> et en le
+      validant par le bouton <strong>Tester par email</strong> :</p>
+
+    
+<p><img width="495" height="124" alt="Formulaire
+        envoi de test" src="../img_docs/2007-09-05_181643.png" /></p>
+
+    
+<p>Cette adresse email doit être valide. En cas d'erreur, un message
+      vous alerte.</p>
+
+    
+<p>Pour tester l'envoi d'une liste de diffusion (chrono), créez une
+      liste d'abonnés contenant votre adresse email, testez un premier
+      envoi par l'envoi immédiat, puis - si le test correspond à vos
+      attentes - modifiez la liste des abonnés.</p>
+
+    
+<h2><a name="mozTocId723535" class="mozTocH2"></a>Forcer le format
+      de réception pour un abonné</h2>
+
+    
+<p>Si un abonné n'a pas défini son format de réception de courriers,
+      texte seul ou enrichi (html), aucun courrier ne peut lui être
+      envoyé via <strong>@spiplistes_name@</strong> (liste sur
+      abonnement ou courrier simple).</p>
+
+    
+<p>Pour forcer ce format de réception, affichez la page de suivi des
+      abonnements :</p>
+
+    
+<p><img width="172" height="48" alt="Bouton de suivi
+        des abonnements" src="../img_docs/2008-03-23_211201.png" /></p>
+
+    
+<p>En bas de page, la liste des auteurs apparaît : </p>
+
+    
+<p><img width="512" height="355" alt="Page de suivi
+        des abonnements" src="../img_docs/2008-11-25_090519.png" /></p>
+
+    
+<p>Une puce noire dans la colonne <strong>email</strong> indique
+      que l'auteur ou le visiteur n'a pas précisé son adresse de
+      courrier électronique. Impossible de l'abonner !</p>
+
+    
 <p>La colonne <strong>qt.</strong> indique le nombre de listes
-auquelles l'abonn&eacute; est inscrit.</p>
-<p>La colonne <strong>Format</strong> pr&eacute;cise le format de
-r&eacute;ception actuel de l'abonn&eacute;.</p>
-<p>Vous pouvez modifier son format de r&eacute;ception en cliquant sur
-l'une des options pr&eacute;sentes dans la colonne <strong>Modifier</strong>.</p>
-<p>En cliquant sur le nom du compte, vous acc&eacute;dez &agrave; la
-page permettant de modifier son format de r&eacute;ception, mais
-&eacute;galement de suspendre temporairement son abonnement, de le
-d&eacute;sabonner de toutes les listes : </p>
-<p><img src="../img_docs/2008-03-23_213045.png"
- alt="Edition du compte abonn&eacute;" height="282" width="492"> </p>
-<h2><a class="mozTocH2" name="mozTocId746722"></a>Forcer un abonnement
-pour une liste</h2>
-<p>Lors de l'&eacute;dition d'une liste, vous pouvez forcer
-l'abonnement :</p>
+      auquelles l'abonné est inscrit.</p>
+
+    
+<p>La colonne <strong>Format</strong> précise le format de
+      réception actuel de l'abonné.</p>
+
+    
+<p>Vous pouvez modifier son format de réception en cliquant sur
+      l'une des options présentes dans la colonne <strong>Modifier</strong>.</p>
+
+    
+<p>En cliquant sur le nom du compte, vous accédez à la page
+      permettant de modifier son format de réception, mais également de
+      suspendre temporairement son abonnement, de le désabonner de
+      toutes les listes : </p>
+
+    
+<p><img width="492" height="282" alt="Edition du
+        compte abonné" src="../img_docs/2008-03-23_213045.png" /> </p>
+
+    
+<h2><a name="mozTocId746722" class="mozTocH2"></a>Forcer un
+      abonnement pour une liste</h2>
+
+    
+<p>Lors de l'édition d'une liste, vous pouvez forcer l'abonnement :</p>
+
+    
 <ul>
-  <li>des membres invit&eacute;s si cette liste est publique ;</li>
-  <li>de tous les membres sauf les invit&eacute;s si cette liste est
-priv&eacute;e.</li>
+
+      <li>des membres invités si cette liste est publique ;</li>
+      <li>de tous les membres sauf les invités si cette liste est
+        privée.</li>
+    
 </ul>
-<p>Pour ajouter ou retirer un abonn&eacute; d'une liste, &eacute;ditez
-la liste concern&eacute;e. La boite des abonn&eacute;s &agrave; cette
-liste se trouve dans la bas de la page :</p>
-<p><img style="width: 505px; height: 80px;"
- alt="Boite des abonn&eacute;s pour une liste"
- src="../img_docs/2009-04-20_095050.png">Dans l'exemple ci-dessus, il
-n'y a pas d'abonn&eacute; pour cette liste.</p>
-<p>D&eacute;pliez la boite en cliquant sur le petit triangle et
-s&eacute;lectionnez les comptes utilisateurs &agrave; ajouter.</p>
-<p><img style="width: 512px; height: 254px;"
- alt="Boite des abonn&eacute;s pour une liste, exemple ajout d'un abonn&eacute;"
- src="../img_docs/2009-04-20_095726.png"></p>
-<p>Notez au passage que si la liste est priv&eacute;e, les comptes <span
- style="font-style: italic;">invit&eacute;s</span> n'apparaissent pas
-dans la liste propos&eacute;e.</p>
-<p>Lorsqu'une liste publique devient priv&eacute;e, elle perd tous ces
-membres invit&eacute;s. Une confirmation vous est demand&eacute;e avant
-la modification du statut de cette liste.</p>
-<p>A noter : un membre abonn&eacute; ne re&ccedil;oit pas
-forc&eacute;ment le courrier de cette liste. Il faut parfois attendre
-qu'il confirme lui-m&ecirc;me le format de r&eacute;ception : <strong>html</strong>
-ou <strong>texte</strong> seul. C'est le cas par exemple s'il s'incrit
-via la formulaire abbonnement.</p>
-<p>Voir aussi : <a href="#mozTocId610257">Forcer tous les abonnements.</a><br>
-</p>
-<h2><a class="mozTocH2" name="mozTocId862843"></a>Abonnement par le
-formulaire en espace public</h2>
-Deux balises disponibles :<br>
+
+    
+<p>Pour ajouter ou retirer un abonné d'une liste, éditez la liste
+      concernée. La boite des abonnés à cette liste se trouve dans la
+      bas de la page :</p>
+
+    
+<p><img src="../img_docs/2009-04-20_095050.png" alt="Boite des abonnés
+        pour une liste" style="width: 505px; height: 80px;" />Dans
+      l'exemple ci-dessus, il n'y a pas d'abonné pour cette liste.</p>
+
+    
+<p>Dépliez la boite en cliquant sur le petit triangle et
+      sélectionnez les comptes utilisateurs à ajouter.</p>
+
+    
+<p><img src="../img_docs/2009-04-20_095726.png" alt="Boite des abonnés
+        pour une liste, exemple ajout d'un abonné" style="width: 512px; height: 254px;" /></p>
+
+    
+<p>Notez au passage que si la liste est privée, les comptes <span style="font-style: italic;">invités</span> n'apparaissent pas
+      dans la liste proposée.</p>
+
+    
+<p>Lorsqu'une liste publique devient privée, elle perd tous ces
+      membres invités. Une confirmation vous est demandée avant la
+      modification du statut de cette liste.</p>
+
+    
+<p>A noter : un membre abonné ne reçoit pas forcément le courrier de
+      cette liste. Il faut parfois attendre qu'il confirme lui-même le
+      format de réception : <strong>html</strong> ou <strong>texte</strong>
+      seul. C'est le cas par exemple s'il s'incrit via la formulaire
+      abbonnement.</p>
+
+    
+<p>Voir aussi : <a href="#mozTocId610257">Forcer tous les
+        abonnements.</a><br />
+    </p>
+
+    
+<h2><a name="mozTocId862843" class="mozTocH2"></a>Abonnement par le
+      formulaire en espace public</h2>
+
+    Deux balises disponibles :<br />
+
+    
 <ul>
-  <li>#FORMULAIRE_ABONNEMENT</li>
-  <li>#FORMULAIRE_SPIP_LISTES_INSCRIPTION (SPIP &gt; 2)<br>
-  </li>
+
+      <li>#FORMULAIRE_ABONNEMENT</li>
+      <li>#FORMULAIRE_SPIP_LISTES_INSCRIPTION (SPIP &gt; 2)<br />
+      </li>
+    
 </ul>
-<span style="font-style: italic; color: rgb(153, 153, 153);">Documentation
-&agrave; venir.</span><br>
-<br>
-<br>
-<h2><a class="mozTocH2" name="mozTocId342886"></a>Abonnement par la
-fiche auteur</h2>
-<p>Pour abonner un auteur &agrave; une ou plusieurs listes, cliquez sur
-l'ic&ocirc;ne <strong>Auteur</strong> :</p>
-<p><img src="../img_docs/2007-08-18_173539.png" alt="Icone auteurs"
- height="92" width="68"></p>
-<p>Dans la liste, s&eacute;lectionnez l'auteur pour faire
-appara&icirc;tre sa fiche. En bas de cette fiche se trouve la
-bo&icirc;te <strong>Abonnemens aux courriers</strong> :</p>
-<p><img src="../img_docs/2008-01-16_062732.png"
- alt="Boite des abonnements" border="0" height="63" width="510"></p>
-<p>Cliquez sur le petit triangle &agrave; gauche du titre de cette
-bo&icirc;te pour d&eacute;plier cette bo&icirc;te et laisser
-appara&icirc;tre la liste des listes de diffusion publiques
-disponibles. S&eacute;lectionnez ou d&eacute;s&eacute;lectionnez les
-abonnements n&eacute;cessaires et validez.</p>
-<p><img src="../img_docs/2008-01-16_062912.png"
- alt="Boite abonnement d&eacute;pli&eacute;e" height="258" width="513"></p>
-<p>Validez si besoin le format de r&eacute;ception pour confirmer
-l'abonnement (si pas de format de r&eacute;ception valid&eacute;, il
-n'y a pas d'envoi pour ce compte).</p>
-<p>Si vous &eacute;ditez une fiche <strong>visiteur</strong>, seules
-les listes publiques apparaissent. S'il n'y a pas de listes publiques,
-la bo&icirc;te de s&eacute;lection <strong>Abonnement</strong>
-n'appara&icirc;t pas.</p>
-<h2><a class="mozTocH2" name="mozTocId82476"></a>Abonnement par la page
-des
-listes</h2>
-<p>Pour abonner un auteur &agrave; une liste, survolez l'ic&ocirc;ne <strong>Edition</strong>
-puis cliquez sur l'ic&ocirc;ne <strong>Listes de diffusion</strong> :</p>
-<p><img src="../img_docs/2008-01-16_063516.png" alt="iconde edition"
- height="93" width="58"><img src="../img_docs/2008-01-16_063415.png"
- alt="icone listes de diffusion" height="65" width="80"></p>
-<p>Le casier des courriers appara&icirc;t. Cliquez sur l'onglet <strong>Listes
-de
-diffusion</strong> pour afficher la liste des listes de diffusion. </p>
-<p><img src="../img_docs/2008-01-16_063652.png"
- alt="onglet listes de diffusion" height="53" width="149"></p>
-<p>S'il n'y a pas de liste, cr&eacute;ez-en une puis revenez sur cette
-page.</p>
+
+    <span style="font-style: italic; color: rgb(153, 153, 153);">Documentation
+à
+
+
+
+
+
+      venir.</span><br />
+
+    <br />
+
+    <br />
+
+    
+<h2><a name="mozTocId342886" class="mozTocH2"></a>Abonnement par la
+      fiche auteur</h2>
+
+    
+<p>Pour abonner un auteur à une ou plusieurs listes, cliquez sur
+      l'icône <strong>Auteur</strong> :</p>
+
+    
+<p><img width="68" height="92" alt="Icone auteurs" src="../img_docs/2007-08-18_173539.png" /></p>
+
+    
+<p>Dans la liste, sélectionnez l'auteur pour faire apparaître sa
+      fiche. En bas de cette fiche se trouve la boîte <strong>Abonnemens
+
+
+
+
+        aux courriers</strong> :</p>
+
+    
+<p><img width="510" height="63" border="0" alt="Boite des
+        abonnements" src="../img_docs/2008-01-16_062732.png" /></p>
+
+    
+<p>Cliquez sur le petit triangle à gauche du titre de cette boîte
+      pour déplier cette boîte et laisser apparaître la liste des listes
+      de diffusion publiques disponibles. Sélectionnez ou désélectionnez
+      les abonnements nécessaires et validez.</p>
+
+    
+<p><img width="513" height="258" alt="Boite
+        abonnement dépliée" src="../img_docs/2008-01-16_062912.png" /></p>
+
+    
+<p>Validez si besoin le format de réception pour confirmer
+      l'abonnement (si pas de format de réception validé, il n'y a pas
+      d'envoi pour ce compte).</p>
+
+    
+<p>Si vous éditez une fiche <strong>visiteur</strong>, seules les
+      listes publiques apparaissent. S'il n'y a pas de listes publiques,
+      la boîte de sélection <strong>Abonnement</strong> n'apparaît pas.</p>
+
+    
+<h2><a name="mozTocId82476" class="mozTocH2"></a>Abonnement par la
+      page des listes</h2>
+
+    
+<p>Pour abonner un auteur à une liste, survolez l'icône <strong>Edition</strong>
+      puis cliquez sur l'icône <strong>Listes de diffusion</strong> :</p>
+
+    
+<p><img width="58" height="93" alt="iconde edition" src="../img_docs/2008-01-16_063516.png" /><img width="80" height="65" alt="icone listes de
+        diffusion" src="../img_docs/2008-01-16_063415.png" /></p>
+
+    
+<p>Le casier des courriers apparaît. Cliquez sur l'onglet <strong>Listes
+
+
+
+
+
+        de diffusion</strong> pour afficher la liste des listes de
+      diffusion. </p>
+
+    
+<p><img width="149" height="53" alt="onglet listes
+        de diffusion" src="../img_docs/2008-01-16_063652.png" /></p>
+
+    
+<p>S'il n'y a pas de liste, créez-en une puis revenez sur cette
+      page.</p>
+
+    
 <p>Cliquez sur le titre de la liste de diffusion pour faire
-appara&icirc;tre la page d'&eacute;dition de la liste. Apr&egrave;s le
-bloc principal se trouve le bloc des abonn&eacute;s &agrave; cette
-liste.</p>
-<p><img src="../img_docs/2008-11-25_090006.png"
- alt="Le bloc des abonn&eacute;s" height="76" width="508"></p>
-<p>Dans l'exemple ci-dessus, la liste concern&eacute;e &agrave; 7
-abonn&eacute;s dont 2 ont suspendu leur abonnement &agrave; cette liste.</p>
-<p>Cliquez sur le petit triangle pour d&eacute;plier le bloc des
-abonn&eacute;s. Ajoutez vos abonn&eacute;s.</p>
-<p>Un abonn&eacute; doit toujours avoir une adresse email valide et un
-format de r&eacute;ception (texte ou HTML). Sans ce format de
-r&eacute;ception, l'abonn&eacute; reste abonn&eacute;, mais aucun
-courrier ne lui sera envoy&eacute;. Pour confirmer le format de
-r&eacute;ception, voir le paragraphe <a href="#mozTocId990283">Confirmer
-le format de
-r&eacute;ception</a>.</p>
-<h2><a class="mozTocH2" name="mozTocId610257"></a>Forcer tous les
-abonnements</h2>
-<p>Les super-administrateurs (<em>admins toutes rubriques</em>) peuvent
-forcer les abonnements aux listes, au format <span
- style="font-weight: bold; font-style: italic;">html</span> ou <span
- style="font-weight: bold; font-style: italic;">texte seul</span>. Ils
-peuvent &eacute;galement d&eacute;sactiver tous les abonnements. </p>
+      apparaître la page d'édition de la liste. Après le bloc principal
+      se trouve le bloc des abonnés à cette liste.</p>
+
+    
+<p><img width="508" height="76" alt="Le bloc des
+        abonnés" src="../img_docs/2008-11-25_090006.png" /></p>
+
+    
+<p>Dans l'exemple ci-dessus, la liste concernée à 7 abonnés dont 2
+      ont suspendu leur abonnement à cette liste.</p>
+
+    
+<p>Cliquez sur le petit triangle pour déplier le bloc des abonnés.
+      Ajoutez vos abonnés.</p>
+
+    
+<p>Un abonné doit toujours avoir une adresse email valide et un
+      format de réception (texte ou HTML). Sans ce format de réception,
+      l'abonné reste abonné, mais aucun courrier ne lui sera envoyé.
+      Pour confirmer le format de réception, voir le paragraphe <a href="#mozTocId990283">Confirmer le format de réception</a>.</p>
+
+    
+<h2><a name="mozTocId610257" class="mozTocH2"></a>Forcer tous les
+      abonnements</h2>
+
+    
+<p>Les super-administrateurs (<em>admins toutes rubriques</em>)
+      peuvent forcer les abonnements aux listes, au format <span style="font-weight: bold; font-style: italic;">html</span> ou <span style="font-weight: bold; font-style: italic;">texte seul</span>.
+      Ils peuvent également désactiver tous les abonnements. </p>
+
+    
 <p>Forcer les abonnements ne veut pas dire <em>abonner</em> les
-comptes et donc exp&eacute;dier les courriers programm&eacute;s. Les
-utilisateurs devront valider cet abonnement en s&eacute;lectionnant un
-format de r&eacute;ception, <strong style="font-style: italic;">html</strong>
-ou <strong style="font-weight: bold; font-style: italic;">texte</strong><span
- style="font-weight: bold; font-style: italic;">
-seul</span>. Si l'utilisateur ne valide pas un format de
-r&eacute;ception, il
-reste abonn&eacute;, mais le courrier ne lui est pas envoy&eacute;.</p>
-<p>Vous pouvez toutefois forcer <em>r&eacute;ellement</em>
-l'abonnement en s&eacute;lectionnant le format de r&eacute;ception, <strong>html</strong>
-ou <strong>texte</strong>, dans la page du <strong>Suivi des
-abonnements.</strong></p>
-<p><img src="../img_docs/2007-09-06_085412.png" alt="" height="43"
- width="176"></p>
-<p>Voir aussi : <a href="#mozTocId746722">Forcer tous les abonnements
-pour une liste.</a></p>
-<h2><a class="mozTocH2" name="mozTocId990283"></a>Confirmer
-le format de r&eacute;ception</h2>
-<p>Le format de r&eacute;ception de courrier est global par
-abonn&eacute;. L'abonn&eacute; ne peut pas recevoir un courrier au
-format texte, un autre au format HTML.</p>
-<p>Si l'abonn&eacute; ne d&eacute;finit aucun format de
-r&eacute;ception, il reste abonn&eacute;, mais ne recevra aucun
-courrier.</p>
-<p>Vous pouvez forcer le format via la fiche auteur (voir <a
- href="#mozTocId342886">Abonnement via la fiche auteur</a>) ou par la
-page de la liste.</p>
-<p>Pour modifier le format de r&eacute;ception via la page de la liste,
-&eacute;ditez la liste de diffusion puis cliquez sur le nom d'un
-abonn&eacute; dans la boite des abonn&eacute;s :</p>
-<p><img src="../img_docs/2008-11-25_085348.png"
- alt="S&eacute;lection d'un abonn&eacute; dans la boite des abonn&eacute;s" height="160"
- width="509"></p>
-<p>La page d'&eacute;dition de l'abonn&eacute; appara&icirc;t et vous
-permet de valider le format, suspendre l'abonnement, etc.</p>
-<h2><a class="mozTocH2" name="mozTocId568121"></a>D&eacute;sactiver <strong>@spiplistes_name@</strong></h2>
-<p>Vous d&eacute;sirez suspendre le plugin sans pour autant supprimer
-ses donn&eacute;es ? Rendez-vous dans l'interface de gestion des
-plugins et cliquez sur la case &agrave; cocher de <strong>@spiplistes_name@</strong>.</p>
-<p><img src="../img_docs/2007-09-29_194942.png"
- alt="Cliquez sur la case &agrave; cocher pour d&eacute;sactiver le plugin"
- height="47" width="458"></p>
-<h2><a class="mozTocH2" name="mozTocId381221"></a>Personnaliser un
-patron</h2>
-<p>Un patron est un squelette au sens SPIP du terme. Plut&ocirc;t un
-morceau de squelette, proche de la noisette.</p>
+      comptes et donc expédier les courriers programmés. Les
+      utilisateurs devront valider cet abonnement en sélectionnant un
+      format de réception, <strong style="font-style: italic;">html</strong>
+      ou <strong style="font-weight: bold; font-style: italic;">texte</strong><span style="font-weight: bold; font-style: italic;"> seul</span>. Si
+      l'utilisateur ne valide pas un format de réception, il reste
+      abonné, mais le courrier ne lui est pas envoyé.</p>
+
+    
+<p>Vous pouvez toutefois forcer <em>réellement</em> l'abonnement en
+      sélectionnant le format de réception, <strong>html</strong> ou <strong>texte</strong>,
+      dans la page du <strong>Suivi des abonnements.</strong></p>
+
+    
+<p><img width="176" height="43" alt="" src="../img_docs/2007-09-06_085412.png" /></p>
+
+    
+<p>Voir aussi : <a href="#mozTocId746722">Forcer tous les
+        abonnements pour une liste.</a></p>
+
+    
+<h2><a name="mozTocId990283" class="mozTocH2"></a>Confirmer le
+      format de réception</h2>
+
+    
+<p>Le format de réception de courrier est global par abonné.
+      L'abonné ne peut pas recevoir un courrier au format texte, un
+      autre au format HTML.</p>
+
+    
+<p>Si l'abonné ne définit aucun format de réception, il reste
+      abonné, mais ne recevra aucun courrier.</p>
+
+    
+<p>Vous pouvez forcer le format via la fiche auteur (voir <a href="#mozTocId342886">Abonnement via la fiche auteur</a>) ou
+      par la page de la liste.</p>
+
+    
+<p>Pour modifier le format de réception via la page de la liste,
+      éditez la liste de diffusion puis cliquez sur le nom d'un abonné
+      dans la boite des abonnés :</p>
+
+    
+<p><img width="509" height="160" alt="Sélection d'un
+        abonné dans la boite des abonnés" src="../img_docs/2008-11-25_085348.png" /></p>
+
+    
+<p>La page d'édition de l'abonné apparaît et vous permet de valider
+      le format, suspendre l'abonnement, etc.</p>
+
+    
+<h2><a name="mozTocId568121" class="mozTocH2"></a>Désactiver <strong>@spiplistes_name@</strong></h2>
+
+    
+<p>Vous désirez suspendre le plugin sans pour autant supprimer ses
+      données ? Rendez-vous dans l'interface de gestion des plugins et
+      cliquez sur la case à cocher de <strong>@spiplistes_name@</strong>.</p>
+
+    
+<p><img width="458" height="47" alt="Cliquez sur la
+        case à cocher pour désactiver le plugin" src="../img_docs/2007-09-29_194942.png" /></p>
+
+    
+<h2><a name="mozTocId381221" class="mozTocH2"></a>Personnaliser un
+      patron</h2>
+
+    
+<p>Un patron est un squelette au sens SPIP du terme. Plutôt un
+      morceau de squelette, proche de la noisette.</p>
+
+    
 <p>Corps de votre message ou pied de page, ce patron doit se trouver
-dans
-le r&eacute;pertoire des patrons. </p>
-<p>Les diff&eacute;rents dossiers
-dans le r&eacute;pertoire du plugin :</p>
-<table border="1" cellpadding="0" cellspacing="0">
-  <tbody>
-    <tr>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/
+      dans le répertoire des patrons. </p>
 
-      </td>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Placez
-dans
-ce r&eacute;pertoire les principaux patrons, ceux du corps de
-votre message </td>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
-patron choisi sera appliqu&eacute; &agrave; la liste de
-diffusion. </td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/lien_en_tete_courriers/
+    
+<p>Les différents dossiers dans le répertoire du plugin :</p>
 
-      </td>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Patrons
+    
+<table cellspacing="0" cellpadding="0" border="1">
+
+      <tbody>
+        <tr>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/
+
+
+
+
+
+
+
+          </td>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Placez
+dans
+ce
+
+
+
+
+
+            répertoire les principaux patrons, ceux du corps de votre
+            message </td>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
+patron
+
+
+
+
+
+            choisi sera appliqué à la liste de diffusion. </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/lien_en_tete_courriers/
+
+
+
+
+
+
+
+          </td>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Patrons
 des
-en-t&ecirc;tes de messages. En g&eacute;n&eacute;ral,
-un patron plac&eacute; ici contient un lien sur le message
-permettant au lecteur de consulter le message directement sur le site. </td>
-      <td rowspan="2"
- style="border: 1px solid gray; padding: 1ex; width: 30%;">L&#8217;administrateur
-du
-site doit activer ces fonctionnalit&eacute;s via le menu de
-configuration.<br>
-Le patron choisi sera appliqu&eacute; &agrave; tous les
-courriers sortants au moment de l&#8217;envoi. </td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/tampons_courriers/
+en-têtes
 
-      </td>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
-tampon des courriers est appliqu&eacute; en fin de message. </td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/pieds_courriers/
 
-      </td>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Ce
-patron est plac&eacute; en fin de votre message. Il apparaitra
-avant le tampon si ce dernier est activ&eacute;. </td>
-      <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
-patron choisi sera appliqu&eacute; &agrave; la liste de
-diffusion. </td>
-    </tr>
-  </tbody>
+
+
+
+            de messages. En général, un patron placé ici contient un
+            lien sur le message permettant au lecteur de consulter le
+            message directement sur le site. </td>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;" rowspan="2">L&#8217;administrateur du site doit activer ces
+            fonctionnalités via le menu de configuration.<br />
+            Le patron choisi sera appliqué à tous les courriers sortants
+            au moment de l&#8217;envoi. </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/tampons_courriers/
+
+
+
+
+
+
+
+          </td>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
+tampon
+
+
+
+
+
+            des courriers est appliqué en fin de message. </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/pieds_courriers/
+
+
+
+
+
+
+
+          </td>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Ce
+patron
+
+
+
+
+
+            est placé en fin de votre message. Il apparaitra avant le
+            tampon si ce dernier est activé. </td>
+          <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
+patron
+
+
+
+
+
+            choisi sera appliqué à la liste de diffusion. </td>
+        </tr>
+      </tbody>
+    
 </table>
-<p>Il est possible d'adapter un patron au format de r&eacute;ception
-'texte seul'. Le plus simple dans ce cas est de cr&eacute;er dans
-votre&nbsp;r&eacute;pertoire de squelettes un dossier "patrons"
-puis un patron nomm&eacute;
-"&lt;mon_patron&gt;_texte.html". &nbsp;Par exemple, si vous
-d&eacute;sirez pr&eacute;parer un patron au format 'texte seul'
-pour les nouveaut&eacute;s, copiez le patron "nouveautes.html" dans
-le r&eacute;pertoire "plugins" situ&eacute; dans celui de vos
-squelettes, renommez ce patron "nouveautes_texte.html" et adaptez-le
-&agrave; ce format 'texte seul' (retirez tous les
-&eacute;l&eacute;ments HTML, etc.).</p>
-<h2><a class="mozTocH2" name="mozTocId91756"></a>Un num&eacute;ro dans
-le sujet de votre message</h2>
-Si vous d&eacute;sirez faire figurer un num&eacute;ro dans le
-titre de votre message (par exemple: Courrier de mon association
-n&deg; 24), il est possible d'ins&eacute;rer une balise
-'a-la-SPIP' dans le champ sujet. Cette pseudo balise est
-calcul&eacute;e lors de l'envoi de la liste de diffusion.<br>
-<br>
-Exemple :<br>
-Pour un courrier dont le num&eacute;ro correspond au
-num&eacute;ro de la semaine dans l'ann&eacute;e :<br>
-<br>
+
+    
+<p>Il est possible d'adapter un patron au format de réception 'texte
+      seul'. Le plus simple dans ce cas est de créer dans
+      votre répertoire de squelettes un dossier "patrons" puis un patron
+      nommé "&lt;mon_patron&gt;_texte.html".  Par exemple, si vous
+      désirez préparer un patron au format 'texte seul' pour les
+      nouveautés, copiez le patron "nouveautes.html" dans le répertoire
+      "plugins" situé dans celui de vos squelettes, renommez ce patron
+      "nouveautes_texte.html" et adaptez-le à ce format 'texte seul'
+      (retirez tous les éléments HTML, etc.).</p>
+
+    
+<h2><a name="mozTocId91756" class="mozTocH2"></a>Un numéro dans le
+      sujet de votre message</h2>
+
+    Si vous désirez faire figurer un numéro dans le titre de votre
+    message (par exemple: Courrier de mon association n° 24), il est
+    possible d'insérer une balise 'a-la-SPIP' dans le champ sujet. Cette
+    pseudo balise est calculée lors de l'envoi de la liste de diffusion.<br />
+
+    <br />
+
+    Exemple :<br />
+
+    Pour un courrier dont le numéro correspond au numéro de la semaine
+    dans l'année :<br />
+
+    <br />
+
+    
 <pre>Courrier de la semaine [(#DATE|affdate{'W'})]</pre>
-<br>
-Vous pouvez incr&eacute;menter ce num&eacute;ro via le filtre
-'plus'. Par exemple pour ajouter 100 au num&eacute;ro de la semaine
-:<br>
-<br>
-<pre>Courrier de la semaine [(#DATE|affdate{'W'}|plus{100})]</pre>
-<h2><a class="mozTocH2" name="mozTocId394076"></a>D&eacute;sinstaller <strong>@spiplistes_name@</strong></h2>
-<p>Pour d&eacute;sinstaller <strong>@spiplistes_name@</strong>,
-rendez-vous dans l'interface de gestion des plugins et cliquez sur
-l'ic&ocirc;ne spip-pack (carton ouvert) qui se trouve &agrave; droite
-de la ligne concernant <strong>@spiplistes_name@</strong>. Une
-confirmation vous est demand&eacute;e (Effacer TOUT), confirmez.<br>
-Sous SPIP &lt; 2, le carton appara&icirc;t &agrave; droite :<br>
-</p>
-<p><img src="../img_docs/2007-09-29_195046.png"
- alt="Cliquez sur le lien pour confirmer la d&eacute;sinstallation" height="57"
- width="456"><br>
-Sous SPIP 2, d&eacute;pliez le plugin pour avoir acc&egrave;s au carton
-:<br>
-</p>
-<p><img style="width: 499px; height: 152px;"
- alt="Sous SPIP 2, d&eacute;plier le plugin pour avoir acc&egrave;s au carton"
- src="../img_docs/2010-02-03-153732.png"><br>
-Attention: d&eacute;sinstaller <strong>@spiplistes_name@</strong>
-supprime les tables de <strong>@spiplistes_name@</strong> dans votre
-base de donn&eacute;es. Vous perdez vos courriers et les listes
-d'abonnement. Si vous d&eacute;sirez conserver les donn&eacute;es de
-ces tables dans votre base, s&eacute;lectionnez plut&ocirc;t la case
-&agrave; cocher &agrave; gauche de <strong>@spiplistes_name@</strong>
-pour <a href="#mozTocId568121">d&eacute;sactiver le plugin</a>.</p>
-<h2><a class="mozTocH2" name="mozTocId853888"></a>Liens
-compl&eacute;mentaires</h2>
+
+    <br />
+
+    Vous pouvez incrémenter ce numéro via le filtre 'plus'. Par exemple
+    pour ajouter 100 au numéro de la semaine :<br />
+
+    <br />
+
+    
+<pre>Courrier de la semaine [(#DATE|affdate{'W'}|plus{100})]<br /><br /></pre>
+
+    
+    
+<h2><a name="personsujet"></a>Personnaliser le sujet de votre message</h2>
+
+    
+<p>D'autres options sont disponibles pour la personnalisation du
+      sujet d'un nouveau courrier via les filtres :</p>
+
+    
 <ul>
-  <li><a href="http://files.spip.org/spip-zone/spip-listes_1_9_3.zip">Distribution
-officielle
-de <strong>@spiplistes_name@</strong> sur la zone</a> ;</li>
-  <li><a href="http://www.spip-contrib.net/SPIP-Listes">La page
-consacr&eacute;e &agrave; SPIP-Listes sur SPIP-contrib</a> ;</li>
-  <li><a
- href="http://www.spip-contrib.net/Premier-courrier-sur-SPIP-Listes">Envoyer
-mon
-premier courrier sur <strong>@spiplistes_name@</strong> sur
-SPIP-contrib</a> ;</li>
-  <li><a href="http://www.spip-contrib.net/Comment-ca-marche"><strong>@spiplistes_name@</strong>,
-comment
-&ccedil;a marche sur SPIP-contrib</a> ;</li>
-  <li><a href="http://www.spip.net/fr">Le site SPIP, outil de gestion
-de contenu (CMS)</a> ;</li>
-  <li><a href="http://www.quesaco.org/SPIP-Listes-documentation">Documentation
-technique
-compl&eacute;mentaire sur Quesaco.org</a> ;</li>
-  <li><a href="http://bloog.net/?page=forum_blg">Forum consacr&eacute;
-&agrave; <strong>@spiplistes_name@</strong></a><strong>.</strong></li>
+
+      <li>jour</li>
+      <li>mois</li>
+      <li>annee</li>
+      <li>nom_mois</li>
+      <li>ucfirst</li>
+      <li>saison</li>
+    
 </ul>
-</body>
-</html>
+
+    
+<p>Par exemple :</p>
+
+    
+<pre>Catalogue [(#DATE|saison|ucfirst)] ( [(#DATE|nom_mois|ucfirst)] )</pre>
+
+    
+<p>donnera à votre message, lors de l'envoi, le sujet du style :</p>
+
+    
+      
+<pre>Catalogue Hiver ( Février )</pre>
+
+    
+    
+<h2><a name="mozTocId394076" class="mozTocH2"></a>Désinstaller <strong>@spiplistes_name@</strong></h2>
+
+    
+<p>Pour désinstaller <strong>@spiplistes_name@</strong>,
+      rendez-vous dans l'interface de gestion des plugins et cliquez sur
+      l'icône spip-pack (carton ouvert) qui se trouve à droite de la
+      ligne concernant <strong>@spiplistes_name@</strong>. Une
+      confirmation vous est demandée (Effacer TOUT), confirmez.<br />
+      Sous SPIP &lt; 2, le carton apparaît à droite :<br />
+    </p>
+
+    
+<p><img width="456" height="57" alt="Cliquez sur le
+        lien pour confirmer la désinstallation" src="../img_docs/2007-09-29_195046.png" /><br />
+      Sous SPIP 2, dépliez le plugin pour avoir accès au carton :<br />
+    </p>
+
+    
+<p><img src="../img_docs/2010-02-03-153732.png" alt="Sous SPIP 2,
+        déplier le plugin pour avoir accès au carton" style="width: 499px; height: 152px;" /><br />
+      Attention: désinstaller <strong>@spiplistes_name@</strong>
+      supprime les tables de <strong>@spiplistes_name@</strong> dans
+      votre base de données. Vous perdez vos courriers et les listes
+      d'abonnement. Si vous désirez conserver les données de ces tables
+      dans votre base, sélectionnez plutôt la case à cocher à gauche de
+      <strong>@spiplistes_name@</strong> pour <a href="#mozTocId568121">désactiver
+
+
+
+
+        le plugin</a>.</p>
+
+    
+<h2><a name="mozTocId853888" class="mozTocH2"></a>Liens
+      complémentaires</h2>
+
+    
+<ul>
+
+      <li><a href="http://files.spip.org/spip-zone/spip-listes_1_9_3.zip">Distribution
+officielle
+de
+
+
+
+
+
+          <strong>@spiplistes_name@</strong> sur la zone</a> ;</li>
+      <li><a href="http://www.spip-contrib.net/SPIP-Listes">La page
+          consacrée à SPIP-Listes sur SPIP-contrib</a> ;</li>
+      <li><a href="http://www.spip-contrib.net/Premier-courrier-sur-SPIP-Listes">Envoyer
+mon
+premier
+
+
+
+
+
+          courrier sur <strong>@spiplistes_name@</strong> sur
+          SPIP-contrib</a> ;</li>
+      <li><a href="http://www.spip-contrib.net/Comment-ca-marche"><strong>@spiplistes_name@</strong>,
+          comment ça marche sur SPIP-contrib</a> ;</li>
+      <li><a href="http://www.spip.net/fr">Le site SPIP, outil de
+          gestion de contenu (CMS)</a> ;</li>
+      <li><a href="http://www.quesaco.org/SPIP-Listes-documentation">Documentation
+technique
+complémentaire
+
+
+
+
+
+          sur Quesaco.org</a> ;</li>
+      <li><a href="http://bloog.net/?page=forum_blg">Forum consacré à <strong>@spiplistes_name@</strong></a><strong>.</strong></li>
+    
+</ul>
+
+  
+
+</body></html>
