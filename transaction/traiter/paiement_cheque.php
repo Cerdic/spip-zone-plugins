@@ -14,9 +14,9 @@ function traiter_paiement_cheque_dist($args, $retours){
 	
 
 	if ($options['champ_adresse_cheque']){
-		$retours['message_ok'] .= "<span class='transaction_ok cheque'>" . $options['champ_adresse_cheque'] . "</span>";
+		$retours['message_ok'] .= "<div class='transaction_ok cheque'>" . $options['champ_adresse_cheque'] . "</div>";
 	} else {
-		$retours['message_ok'] .= "<span class='transaction_ok cheque defaut'>" . _T('transaction:traiter_cheque_message_defaut') . "</span>";
+		$retours['message_ok'] .= "<div class='transaction_ok cheque defaut'>" . _T('transaction:traiter_cheque_message_defaut') . "</div>";
 	}
 
 	

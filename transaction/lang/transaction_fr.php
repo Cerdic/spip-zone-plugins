@@ -1,6 +1,4 @@
 <?php
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/transaction/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -29,9 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_paiement_cheque_description' => 'Proposer le paiement par ch&egrave;que',
 	'traiter_cheque_label' => 'Message de retour',
 	'traiter_cheque_explication' => 'Indiquez ici le message de retour ainsi que l\'adresse &agrave; laquelle le ch&egrave;que devra &ecirc;tre envoy&eacute;',
-	'traiter_cheque_message_defaut' => '<h1>Paiement par ch&egrave;que.</h1><p>Veuillez envoyer votre r&egrave;glement par ch&egrave;que &agrave; l\'ordre de Mon Organisme et &agrave; l\'adresse :</p> <p>adresse de votre organisme</p>',
-	'traiter_message_cmcic' => '<h1>Paiement s&eacute;curis&eacute;</h1><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction s\'effectue via l\'&eacute;tablissement bancaire '.$_SESSION['banque_nom'].' qui seul dispose des informations bancaires fournies au moment du paiement.</p><p><a href="'.find_in_path("paiement/cmcic/paiement.php").'"  class="valider"><span>Validez le paiement</span></a></p>',
-	'traiter_message_paypal' => '<h1>Paiement Paypal</h1><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction sur le site de Paypal qui seul dispose des informations bancaires fournies au moment du paiement.</p><p><a href="'.find_in_path("paiement/paypal/paiement.php").'"  class="valider"><span>Validez le paiement</span></a></p>',
+	'traiter_cheque_message_defaut' => '<h3>Paiement par ch&egrave;que.</h3><p>Veuillez envoyer votre r&egrave;glement par ch&egrave;que &agrave; l\'ordre de Mon Organisme et &agrave; l\'adresse :</p> <p>adresse de votre organisme</p>',
+	'traiter_message_cmcic' => '<h3>Paiement s&eacute;curis&eacute;</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction s\'effectue via l\'&eacute;tablissement bancaire qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
+	'traiter_message_paypal' => '<h3>Paiement Paypal</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction sur le site de Paypal qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
 	'traiter_message_cmcic_erreur' => 'Le paiement s&eacute;curis&eacute; est actuellement en mode test, aucune transaction ne sera effectu&eacute;e sur votre carte bancaire.',
 	'statut_transaction_0' => 'Non pay&eacute;',
 	'statut_transaction_1' => 'Pay&eacute;',
@@ -40,11 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'merci' => 'Merci de nous avoir fait confiance',
 	'texte_merci' => 'Votre r&egrave;glement a bien &eacute;t&eacute; enregistr&eacute;. Notre organisme vous remercie de votre soutien. ',
 	'regret' => 'Erreur de paiement',
-	'texte_regret' => 'Nous vous informons que la proc&eacute;dure de paiement n\'a pas pu aboutir, si vous n\'&ecirc;tes pas &agrave; l\'origine de cet &eacute;chec veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.<br/><br/>Bonne navigation et &agrave; bient&ocirc;t.'
+	'texte_regret' => 'Nous vous informons que la proc&eacute;dure de paiement n\'a pas pu aboutir, si vous n\'&ecirc;tes pas &agrave; l\'origine de cet &eacute;chec veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.<br/><br/>Bonne navigation et &agrave; bient&ocirc;t.',
+	'valider_paiement' => 'Validez le paiement'
 	
 );
 
 ?>
-
-
-

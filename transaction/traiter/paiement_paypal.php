@@ -35,7 +35,7 @@ function traiter_paiement_paypal_dist($args, $retours){
 	
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
-	$retours['message_ok'] .=  "<span class='transaction_ok cmcic'>"._T('transaction:traiter_message_paypal')."</span>";
+	$retours['message_ok'] .=  "<div class='transaction_ok paypal'>"._T('transaction:traiter_message_paypal').'<p><a href="'.find_in_path("paiement/paypal/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
 
 	//enregistrement des résultats
 	$options = $args['options'];

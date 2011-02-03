@@ -55,8 +55,8 @@ function traiter_paiement_cmcic_dist($args, $retours){
 	
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
-	$retours['message_ok'] .=  "<span class='transaction_ok cmcic'>"._T('transaction:traiter_message_cmcic')."</span>";
-
+	$retours['message_ok'] .=  "<div class='transaction_ok cmcic'>"._T('transaction:traiter_message_cmcic').'<p><a href="'.find_in_path("paiement/cmcic/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
+	
 	//enregistrement des résultats
 	$options = $args['options'];
 	$formulaire = $args['formulaire'];
