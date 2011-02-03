@@ -494,50 +494,117 @@ function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignore
  * Pour le moment, uniquement #DATE et 2 filtres sont autorises 
  * @return le titre calcule'
  * @param $titre string
+ *
+ * CP-20110203
+ * Reecriture
+ * Possibilites plusieurs #DATE, avec ou sans parametres
  */
 function spiplistes_calculer_balise_titre ($titre) {
 
-	// longue comme un jour sans pain 
-	$pattern = "=((?P<a>\[)?(?P<texte_avant>[^(\[]*)(?P<b>\()?\s*(?P<balise>#DATE)(?P<filtres>(\s*\|\s*\w+\s*{?\s*\'?\w+\'?\s*}?)*)\s*(?P<c>\))?(?P<texte_apres>[^(\]]*)(?P<d>\])?)=";
+	static $i_envelop = array('a', 'b', 'c', 'd');
 	
-	if (preg_match($pattern, $titre, $match)) {
-		
-		if($match['balise'] == "#DATE") {
-			
-			$date = date('Y-m-d H:i:s');
-			
-			$texte_avant = isset($match['texte_avant']) ? $match['texte_avant'] : "";
-			$texte_apres = isset($match['texte_apres']) ? $match['texte_apres'] : "";
+	$now = $date = date('Y-m-d H:i:s');
 
-			$envelop = "";
-			foreach(array('a', 'b', 'c', 'd') as $ii) {
-				$envelop .= (isset($match[$ii])) ? $match[$ii] : "";
+	// longue comme un jour sans pain
+	$pattern = '='
+		// rechercher le bracket de gauche
+		. '(?P<a>\[)'
+		// le texte entre le bracket et la parenthese
+		. '(?P<texte_avant>[^\(]*)'
+		// la parenthese
+		. '(?P<b>\()?\s*'
+		// la balise DATE
+		. '(?P<balise>#DATE)'
+		// le ou les filtres de la balise
+		. '(?P<filtres>(\s*\|\s*\w+\s*'
+			// les parametres du filtre
+			. '(?P<params>(\{[^\}]*})?)'
+		. ')*)\s*'
+		// la parenthese de droite
+		. '(?P<c>\))?'
+		// le texte entre la parenthese et le bracket
+		. '(?P<texte_apres>[^\]]*)'
+		// le bracket de droite
+		. '(?P<d>\])'
+		. '='
+		;
+		
+	$recherche = array();
+	$remplace = array();
+	
+	if($nres = intval(preg_match_all($pattern, $titre, $matches))) {
+
+		for($ii = 0; $ii < $nres; $ii++)
+		{
+					
+			$envelop = '';
+			
+			foreach($i_envelop as $aa) {
+				$envelop .= (isset($matches[$aa][$ii])) ? $matches[$aa][$ii] : '';
+				
 			}
 			
-			if($envelop == "[()]") {
-				$filtres = explode('|', $match['filtres']);
-				foreach($filtres as $filtre) {
-					$filtre = trim($filtre);
-					if(preg_match("=(\w+)\s*(\{)?\s*(\'?\w*\'?)?\s*(\})?=", $filtre, $match)) {
-						switch($match[1]) {
+			// balise avec filtres
+			if($envelop == '[()]')
+			{
+				$date = $now;
+				
+				$filtres = trim($matches['filtres'][$ii]);
+				
+				$params = trim($matches['params'][$ii]);
+				$params = strlen($params) ? trim($params, '’\'{}') : '';
+					
+				$filtres = explode('|', $filtres);
+				
+				foreach($filtres as $ce_filtre)
+				{
+					$ce_filtre = trim($ce_filtre);
+					if(strlen($ce_filtre))
+					{
+						$filtre = $ce_filtre;
+						
+						// tout les filtres demandent parametre
+						// mais si ajout d'autres plus tard...
+						//
+						$params = false;
+						if(($pos = strpos($ce_filtre, '{')) !== false)
+						{
+							$filtre = substr($ce_filtre, 0, $pos);
+							
+							$params = substr($ce_filtre, $pos);
+							$params = strlen($params) ? trim($params, '’\'{}') : '';
+						}
+						switch($filtre) {
 							case 'affdate':
-								$v = $match[3];
-								$v = preg_replace("=[^dDjlNSwzWFmMntLoYyaABgGhHiseIOPTZcrU\: \-]=", "", $v);
+								$v = $params;
+								$v = preg_replace('=[^dDjlNSwzWFmMntLoYyaABgGhHiseIOPTZcrU\: \-]=', '', $v);
 								$date = date($v);
 								break;
 							case 'plus':
-								$v = intval($match[3]);
-								$date += $v;
+								$v = intval($params);
+								$date = plus($date, $v);
 								break;
 						}
 					}
+							
 				}
+
+				$recherche[] = $pattern;
+				$remplace[] = $matches['texte_avant'][$ii] . $date . $matches['texte_apres'][$ii];
 			}
-			
-			$titre = preg_replace($pattern, $texte_avant.$date.$texte_apres, $titre);
+		}
+		
+		if(count($remplace))
+		{
+			// remplacer les balises avec filtres
+			$titre = preg_replace($recherche, $remplace, $titre, 1);
+		}
+		
+		// reste des balises sans filtre ?
+		if(strpos($titre, $s = '#DATE') !== false)
+		{
+			$titre = str_replace($s, $now, $titre);
 		}
 	}
 	return($titre);
 }
-
-?>
