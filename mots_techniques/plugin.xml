@@ -9,6 +9,8 @@
 	<etat>
 	test
 	</etat>
+	<!-- Icone de MidTone Design : http://www.iconfinder.com/icondetails/10622/48/orange_tag_icon -->
+	<icon>images/mots-techniques-48.png</icon>
 	<description>
 	<multi>
 Ce plugin ajoute une sp&eacute;cialisation "technique" aux groupes de mots cl&eacute;s. 
