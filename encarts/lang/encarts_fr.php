@@ -22,17 +22,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Texte',
 	
 	// M
-	'message_aucun_encart' => 'Cet article ne poss&egrave;de aucun encadr&eacute; pour le moment.',
+	'message_aucun_encart' => 'Cet article ne poss&egrave;de aucun encart; pour le moment.',
 	'modifier_encart' => 'Modifier',
 	
 	// S
 	'sans_titre' => '(sans titre)',
 	'supprimer_encart_question' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer l'encart ?",
-	
-	
 
 	// T
-	'titre_bloc_encarts' => 'Encadr&eacute;s'
+	'titre_bloc_encarts' => 'Encarts'
 	
 );
 
