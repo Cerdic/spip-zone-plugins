@@ -1,15 +1,19 @@
 <div id="partager">
 	<div class="infooboto">
 		<ul id="followme">
-		<li><a href="[(#COMPOSITION|=={agenda}|oui)
+		<li><a href="
+		[(#COMPOSITION|=={agenda}|oui)
 		[(#URL_PAGE{agenda-rss}|parametre_url{id_rubrique,#ENV{this_racine}})]
 		]
 		[(#COMPOSITION|=={agenda}|non)
+		[(#ENV{type}|=={breve}|?{[(#URL_PAGE{backend-breves})]}
+		|sinon{
 		[(#URL_PAGE{backend}
 		|parametre_url{id_rubrique,#ENV{id_rubrique}}
 		|parametre_url{id_mot,#ENV{id_mot}}
 		|parametre_url{id_auteur,#ENV{id_auteur}}
 		)]
+		})]
 		]" 
 		class="forss"
 		rel="alternate" title="<:syndication_rss:>">
