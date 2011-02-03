@@ -1,0 +1,31 @@
+<plugin>
+	<nom>Partager</nom>
+	<auteur>
+	toutati@free.fr - elastick.net
+	</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>
+		<multi>[fr]Insere un bloc partager et une page speciale pour suivre la vie du site. necessite Zpip, utiliser socialtags id=#followme
+		[en]Insert a block to share and a special page to follow the website. need Zpip, use socialtags with id=#followme</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/</lien>
+	<prefix>partager</prefix>
+	<options>partager_options.php</options>
+	<fonctions>partager_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>partager_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>partager_pipelines.php</inclure>
+	</pipeline>
+    <icon>
+    partager.png
+    </icon>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id='Z' version="[1.7.9;]" />
+	<utilise id="socialtags" version="[0.9.5;]" />
+	<categorie>communication</categorie>
+</plugin>

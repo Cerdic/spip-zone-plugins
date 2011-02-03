@@ -1,0 +1,52 @@
+/*bloc partager/dist.html*/
+#navigation #partager div, #extra #partager div, #partager div {margin:0}
+#partager{background:#fbf8f3 url("img/back-rss.png") no-repeat bottom;
+font-size: 1.5em; margin: 0 auto; padding: 10px 10px 17px; width: 156px;
+}
+#partager ul {
+list-style-type: none; margin: 0; padding: 0;
+}
+#partager .infooboto{padding:12px; margin:0; background:#f7f1e7;}
+#partager .forss {background:url("img/rss-w.png") no-repeat left; color:#DFBB7D;
+display:block;
+padding:8px 0 6px 34px;
+}
+#partager .savoir{background:url("img/savoirplus.jpg") no-repeat center;
+color:#FFF;
+display:block;
+font-size:0.85em;
+padding:8px;
+text-align:center;
+}
+#partager .infooboto a:hover{color:#DF7A29; text-decoration:none;}
+
+/*socialtags*/
+div.socialtags {
+    clear: both;
+    padding: 6px 0;
+}
+
+/* contenu/page-partager.html */
+.page_partager .blocitem {
+    border-bottom: 1px solid #CCCCCC;
+    clear: both;
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+}
+
+.page_partager .spip_logos_left {
+    float: left;
+    margin: 0 1em 0.5em 0;
+}
+
+.page_partager #contenu ul {
+    list-style-type: none;
+    margin: 0 0 0 1.5em;
+    padding: 0;
+}
+
+.page_partager .h2{
+	margin-bottom:1em;
+}
+
+

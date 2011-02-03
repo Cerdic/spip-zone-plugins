@@ -1,0 +1,133 @@
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:partager:partager:></strong></p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+	<h1 class="h1"><:icone_suivi_activite:></h1>
+	</div>
+	
+	<h2 class="h2"><:ical_info1:></h2>
+
+	<div class="blocitem">
+	[(#PLUGIN{abomailmans}|oui) <h2>
+	[(#CHEMIN{img/mailing.png}|image_reduire{0,50}|inserer_attribut{class,spip_logos_left})]
+	<:abomailmans:inscription_lettres_legende:>
+	</h2>
+	<p><:partager:abonnement_lettre:></p>
+	[<div id="suivreliste">(#FORMULAIRE_ABOMAILMAN)</div>]
+	]
+	
+	</div>
+	
+	
+		<div class="blocitem">
+		<h2>[(#CHEMIN{img/ical.gif}|image_reduire{0,50}|inserer_attribut{class,spip_logos_left}|inserer_attribut{alt,-})]
+		<:icone_calendrier:> iCal</h2>
+		<p><:calendrier_synchro:></p>
+		<p><:partager:restez_informes_avec:> 
+		<a href="http://www.google.com/calendar">Google Calendar</a>, 
+		<a href="http://www.mozilla.org/projects/calendar/download.html">Firefox Calendar</a>, 
+		<a href="http://www.apple.com/fr/findouthow/mac/#subscribeical">Mac OS X Ical</a> (...)
+		</p>
+		
+		[(#PLUGIN{agenda}|oui)
+		<a href="[(#URL_PAGE{agenda-ical}|appliquer_filtre{urlical})]">
+		[(#CHEMIN{img/ical.gif}|image_reduire{0,16}|inserer_attribut{alt,ICAL})]
+		<:ical_methode_webcal:> <:agenda:evenements:>
+		</a><br />
+		]
+		
+		<a href="[(#URL_PAGE{ical}|appliquer_filtre{urlical})]">
+		[(#CHEMIN{img/ical.gif}|image_reduire{0,16}|inserer_attribut{alt,ICAL})]
+		<:ical_methode_webcal:> <:info_article_2:>
+		</a>
+		
+		<p>
+		<:ical_info2{spipnet=http://www.spip.net/fr_article2390.html}:>
+		</a>
+		</p>
+		
+		</div>
+	
+	<div class="blocitem">
+	<h2>
+	[(#CHEMIN{img/rss.png}|image_reduire{0,50}|inserer_attribut{class,spip_logos_left}|inserer_attribut{alt,-})] 
+	<:ical_titre_rss:> RSS 2.0
+	</h2>
+	<p><:ical_texte_rss:></p>
+	<p><:partager:use_rss:></p>
+	
+	<a href="#URL_PAGE{backend}">
+	[(#CHEMIN{img/rss.png}|image_reduire{0,16}|inserer_attribut{alt,<:syndiquer_site:>})]
+	<:syndiquer_site:> #NOM_SITE_SPIP
+	</a>
+	
+	<p><:ical_texte_rss_articles2:></p>
+	
+	<B_rubriques_rss>
+	<ul>
+	<BOUCLE_rubriques_rss(RUBRIQUES){racine}{par num titre}>
+	[<li><a href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" rel="alternate" title="<:syndiquer_rubrique:>">
+	[(#CHEMIN{img/rss.png}|image_reduire{0,16}|inserer_attribut{alt,<:syndiquer_rubrique:>})]
+	(#TITRE_COURT|sinon{#TITRE})</a>
+	</li>]
+	</BOUCLE_rubriques_rss>
+	</ul>
+	</B_rubriques_rss>
+	 
+	[(#CONFIG{meta::activer_breves}|=={oui}|oui)
+	<p><:ical_lien_rss_breves:></p>
+	[<ul><li>
+	<a href="(#URL_PAGE{backend-breves})">
+	[(#CHEMIN{img/rss.png}|image_reduire{0,16}|inserer_attribut{alt,<:ical_lien_rss_breves:>})]
+	<:icone_breves:></a>
+	</li></ul>]
+	]
+	
+	</div>
+	
+	<div class="blocitem">
+	<h2>
+	[(#CHEMIN{img/javascript.png}|image_reduire{0,50}|inserer_attribut{class,spip_logos_left}|inserer_attribut{alt,-})]
+	<:ical_titre_js:>
+	</h2>
+	<p>
+	<:ical_texte_js:>
+	</p>
+	<textarea class="spip_cadre" dir="ltr" rows="3" cols="50" readonly="readonly">
+	<script type="text/javascript" 
+	src="#URL_PAGE{distrib}">
+	</script>
+	</textarea>
+	
+	<br class="nettoyeur" />
+	<:partager:rendu_code:><script type="text/javascript" 
+	src="#URL_PAGE{distrib}">
+	</script><br />
+	</div>
+	
+	[(#PLUGIN{opensearch}|oui) 
+	<div class="blocitem">
+	<h2>
+	[(#CHEMIN{images/opensearch-64.png}|image_reduire{0,50}|inserer_attribut{class,spip_logos_left}|inserer_attribut{alt,-})]
+	OpenSearch
+	</h2>
+	<p>
+	<:partager:use_opensearch{nom_site=#NOM_SITE_SPIP}:>
+	<br class="nettoyeur" />
+	[(#CHEMIN{img/search_box.jpg}|image_reduire{0,150}|inserer_attribut{alt,explorer})]
+	[(#CHEMIN{img/search_box_ff.jpg}|image_reduire{0,150}|inserer_attribut{alt,explorer})]
+	</p>
+	</div>
+	]
+	
+	<div class="blocitem">
+	<h2>
+	[(#CHEMIN{img/I_heart_validator.png}|image_reduire{0,50}|inserer_attribut{class,spip_logos_left}|inserer_attribut{alt,-})]
+	W3C
+	</h2>
+	<p>
+	<:partager:confort_w3c{url_site_spip=#URL_SITE_SPIP}:>
+	</p>
+	</div>
+
+</div>
