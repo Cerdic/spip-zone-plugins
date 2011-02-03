@@ -21,8 +21,8 @@ function traiter_paiement_paypal_dist($args, $retours){
     
     
     
-    if ($_REQUEST['montant_1']) $_SESSION['total'] = $_REQUEST['montant_1'];
     if ($_REQUEST['montant_selection_1']) $_SESSION['total'] = $_REQUEST['montant_selection_1'];
+    if ($_REQUEST['montant_1']) $_SESSION['total'] = $_REQUEST['montant_1'];
     
     // ID unique de la transaction
     $_SESSION['ref'] = uniqid();
@@ -35,7 +35,7 @@ function traiter_paiement_paypal_dist($args, $retours){
 	
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
-	$retours['message_ok'] .=  "<div class='transaction_ok paypal'>"._T('transaction:traiter_message_paypal').'<p><a href="'.find_in_path("paiement/paypal/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
+	$retours['message_ok'] .=  "<div class='transaction_ok paypal' style='background: url(".find_in_path('paiement/paypal/logo.png').") no-repeat top left'>"._T('transaction:traiter_message_paypal').'<p><a href="'.find_in_path("paiement/paypal/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
 
 	//enregistrement des résultats
 	$options = $args['options'];
