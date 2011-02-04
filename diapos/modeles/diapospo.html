@@ -5,7 +5,7 @@
 				<div class="cadre_imagepo">
 					<BOUCLE_IMAGE(DOCUMENTS){id_article}{titre==^[0-9]}{extension IN png,jpg,gif}{mode=image}{par num titre}>
 						<a href="#"  rel="#TITRE">
-						[(#FICHIER|image_reduire{[(#CONFIG{diapos/largeur_imagespo}|sinon{600px})],[(#CONFIG{diapos/hauteur_imagespo}|sinon{480px})]})]
+						<img src="[(#FICHIER)]" alt="#TITRE" width="[(#CONFIG{diapos/largeur_imagespo})]" height="[(#CONFIG{diapos/hauteur_imagespo})]" />
 						</a>
 					</BOUCLE_IMAGE>      
 				</div>
@@ -18,3 +18,10 @@
 		</div>
 	</B_IMAGE>
 </BOUCLE_DIAPOS>
+
+
+
+
+
+
+

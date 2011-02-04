@@ -8,13 +8,7 @@
 .fenetrepo {padding:0;width:[(#CONFIG{diapos/largeur_imagespo})]; height:[(#CONFIG{diapos/hauteur_imagespo})];overflow:hidden; position:relative;}
 .cadre_imagepa {padding:0;position:absolute; top:0; left:0;}
 .cadre_imagepo {padding:0;position:absolute; top:0; left:0;}
-.cadre_imagepa img {padding:0;float:left;}
-.cadre_imagepo img {padding:0;float:left;}
-
-.relativer {position:absolute;}
-
+.cadre_imagepa img, .cadre_imagepo img {margin:0;padding:0;float:left;border:0;}
 .choix_image {position:absolute; bottom:0; right:0; height:20px; z-index:2000; text-align:center; line-height:20px; background:#666; display:inline-block;}  
-
 .choix_image a {display:inline-block; float:left; width:20px; height:20px; text-decoration:none; color:#fff;}
-
-.choix_image a.active{width:20px; height:20px; font-weight:bold; background:#FB5; color:#222;}
+.choix_image a.active{width:20px; height:20px; font-weight:bold; background:#FB5; color:#222;outline:none;}

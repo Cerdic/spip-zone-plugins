@@ -5,7 +5,7 @@
 				<div class="cadre_imagepa">
 					<BOUCLE_IMAGE(DOCUMENTS){id_article}{titre==^[0-9]}{extension IN png,jpg,gif}{mode=image}{par num titre}>
 						<a href="#"  rel="#TITRE">
-						<img src="[(#FICHIER)]" alt="#TITRE" />
+						<img src="[(#FICHIER)]" alt="#TITRE" width="[(#CONFIG{diapos/largeur_imagespa})]" height="[(#CONFIG{diapos/hauteur_imagespa})]" />
 						</a>
 					</BOUCLE_IMAGE>      
 				</div>
