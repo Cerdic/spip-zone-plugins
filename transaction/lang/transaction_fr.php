@@ -39,7 +39,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_merci' => 'Votre r&egrave;glement a bien &eacute;t&eacute; enregistr&eacute;. Notre organisme vous remercie de votre soutien. ',
 	'regret' => 'Erreur de paiement',
 	'texte_regret' => 'Nous vous informons que la proc&eacute;dure de paiement n\'a pas pu aboutir, si vous n\'&ecirc;tes pas &agrave; l\'origine de cet &eacute;chec veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.<br/><br/>Bonne navigation et &agrave; bient&ocirc;t.',
-	'valider_paiement' => 'Validez le paiement'
+	'valider_paiement' => 'Validez le paiement',
+	'traiter_choix_compte_paypal_label' => 'Compte Paypal',
+	'traiter_choix_compte_paypal_explication' => 'Indiquez ici le compte paypal qui recevra les paiements.',
+	'traiter_choix_compte_paypal_message_defaut' => 'compte@votredomaine.com',
+	'traiter_choix_devise_paypal_label' => 'Devise',
+	'traiter_choix_devise_paypal_explication' => 'Indiquez ici la devise &agrave; utiliser pour les paiements',
+	'traiter_choix_devise_paypal_message_defaut' => 'EUR'
 	
 );
 

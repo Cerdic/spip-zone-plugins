@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function traiter_paiement_paypal_dist($args, $retours){
+	include_spip('inc/session');
 	include_spip('inc/formidable');
 	include_spip('base/abstract_sql');
 	
@@ -26,7 +27,12 @@ function traiter_paiement_paypal_dist($args, $retours){
     
     // ID unique de la transaction
     $_SESSION['ref'] = uniqid();
+    $_SESSION['champ_compte_paypal'] = $options['champ_compte_paypal'];
+    $_SESSION['champ_devise_paypal'] = $options['champ_devise_paypal'];
 
+    $_SESSION['langue_paypal'] = strtoupper($_GET['lang']);
+    if ($_SESSION['langue_paypal'] == '') $_SESSION['langue_paypal'] = 'FR';
+	
 	$nb_paiement = 0;
     //On compte le nombre de paiement utilisé par le formulaire
     foreach($traitements as $type_traitement=>$options){

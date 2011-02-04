@@ -1,4 +1,6 @@
 <?php
+
+
 /*****************************************************************************
  *
  * Auteur   : Bruno | atnos.com (contact: contact@atnos.com)
@@ -45,24 +47,24 @@
 			Vous utilisez certainement un lien symbolique dans votre repertoire plugins.");
 	}
 
-	session_start();
+		session_start();
 	// Modifier la valeur ci-dessous avec l'e-mail de vote compte PayPal
-	$compte_paypal = 'user@domaine.com';
-	$Devise        = "EUR";
-	$Code_Langue   = "FR";
+	$compte_paypal = $_SESSION['champ_compte_paypal'];
+	$Devise        = $_SESSION['champ_devise_paypal'];
+	$Code_Langue   = $_SESSION['langue_paypal'];
 
-	$urlsite = "http://urlsite.fr";
+	$urlsite = $GLOBALS['meta']['adresse_site'];
 	
 	$serveur="https://www.paypal.com/cgi-bin/webscr";
-        $confirm = $urlsite."/client/plugins/paypal/paiement_paypal_confirmation.php";
-	$retourok = "http://urlsite/?page=transaction_merci";
-	$retournok = "http://urlsite/?transaction_regret";
+        $confirm = $urlsite.'/'.find_in_path("/paiement/paypal/paiement_paypal_confirmation.php");
+	$retourok = $urlsite."/?page=transaction_merci";
+	$retournok = $urlsite."/?transaction_regret";
 
 	$total = $_SESSION['total'];
 ?><html>
 <head>
 </head>
-<body onload="document.getElementById('formpaypal').submit()">
+<body >
 <?php
 //"
 // Référence
@@ -101,6 +103,7 @@ $Montant          = $total;
 		<input type="hidden" name="currency_code" value="<?php echo $Devise; ?>" />
 		<input type="hidden" name="payer_id" value="" />
 		<input type="hidden" name="payer_email" value="" />
+		<input type="hidden" name="lc" value="<?php echo $Code_Langue; ?>" />
 		<input type="hidden" name="return" value="<?php echo $retourok; ?>" />
 		<input type="hidden" name="notify_url" value="<?php echo $confirm; ?>" />
 		<input type="hidden" name="cancel_return" value="<?php echo $retournok; ?>" />
