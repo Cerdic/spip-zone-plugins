@@ -48,7 +48,7 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	// Supprimer les vignettes
 	if (!isset($boucle->modificateur['criteres']['mode'])
 	AND !isset($boucle->modificateur['criteres']['tout'])) {
-		array_unshift($boucle->where,array("'!='", "'$id_table.mode'", "'\\'vignette\\''"));
+		array_unshift($boucle->where,array("'IN'", "'$id_table.mode'", "'(\\'image\\',\\'document\\')'"));
 	}
 
 	// Pour une boucle generique (DOCUMENTS) sans critere de lien, verifier
@@ -88,7 +88,7 @@ function critere_DOCUMENTS_orphelins_dist($idb, &$boucles, $crit) {
 	$quoi = '@$Pile[0]["orphelins"]';
 	$cond = $crit->cond;
 	$not = $crit->not?"":"NOT";
-	
+
 	$select = sql_get_select("DISTINCT id_document","spip_documents_liens as oooo");
 	$where = "'".$boucle->id_table.".id_document $not IN ($select)'";
 	if ($cond)
