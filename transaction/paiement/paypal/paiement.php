@@ -24,19 +24,42 @@
  *
  *****************************************************************************/
 
-	include_once(realpath(dirname(__FILE__)) . "/config.php");
-		
+	//Charger SPIP
+	if (!defined('_ECRIRE_INC_VERSION')) {
+		// recherche du loader SPIP.
+		$deep = 2;
+		$lanceur ='ecrire/inc_version.php';
+		$include = '../../'.$lanceur;
+		while (!defined('_ECRIRE_INC_VERSION') && $deep++ < 6) { 
+			// attention a pas descendre trop loin tout de meme ! 
+			// plugins/zone/stable/nom/version/tests/ maximum cherche
+			$include = '../' . $include;
+			if (file_exists($include)) {
+				chdir(dirname(dirname($include)));
+				require $lanceur;
+			}
+		}	
+	}
+	if (!defined('_ECRIRE_INC_VERSION')) {
+		die("<strong>Echec :</strong> SPIP ne peut pas etre demarre.<br />
+			Vous utilisez certainement un lien symbolique dans votre repertoire plugins.");
+	}
+
 	session_start();
+	// Modifier la valeur ci-dessous avec l'e-mail de vote compte PayPal
+	$compte_paypal = 'user@domaine.com';
+	$Devise        = "EUR";
+	$Code_Langue   = "FR";
 
-	$total = 0;
+	$urlsite = "http://urlsite.fr";
+	
+	$serveur="https://www.paypal.com/cgi-bin/webscr";
+        $confirm = $urlsite."/client/plugins/paypal/paiement_paypal_confirmation.php";
+	$retourok = "http://urlsite/?page=transaction_merci";
+	$retournok = "http://urlsite/?transaction_regret";
 
-    $total = $_SESSION['total'];
-    
-
-
-?>
-
-<html>
+	$total = $_SESSION['total'];
+?><html>
 <head>
 </head>
 <body onload="document.getElementById('formpaypal').submit()">
@@ -84,8 +107,5 @@ $Montant          = $total;
 		<input type="hidden" name="invoice" value="<?php echo $Reference_Cde; ?>" />
 		
 	</form>
-	
-
-	
 </body>
 </html>
