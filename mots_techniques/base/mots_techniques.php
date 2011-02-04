@@ -17,8 +17,8 @@ function mots_techniques_declarer_champs_extras($champs = array()){
 
 function mots_techniques_declarer_tables_principales($tables_principales){
 	// ajout de la jointure pour {technique=...} sur boucle MOT
-	$tables_principales['spip_mots']['join']["id_groupe"] = "id_groupe";
 	$tables_principales['spip_mots']['join']["id_mot"] = "id_mot";
+	$tables_principales['spip_mots']['join']["id_groupe"] = "id_groupe";
 	return $tables_principales;
 }
 
