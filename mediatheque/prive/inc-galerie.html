@@ -116,7 +116,6 @@
 			[<div class="dimensions">(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})</div>]
 			[<div class="taille">(#TAILLE|taille_en_octets)</div>]
 			[<div class="date">(#DATE|affdate{d/m/Y})</div>]
-			#SET{supprimer,' '}
 			<B_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)
 			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{medias:une_utilisation,medias:des_utilisations})]</a><div style='display: none;'>
@@ -125,7 +124,6 @@
 			[(#ID_OBJET|lien_objet{#OBJET})]
 			</BOUCLE_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
-			#SET{supprimer,''}
 			</B_liens>
 		</td>
 		<td class="descriptif">
@@ -137,7 +135,7 @@
 		[(#REM) Utilisation de la galerie en mode portfolio, avec renvoi vers l'edition]
 		[(#GET{editable})
 		[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
-		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax})]</span>]
+		[<span class='supprimer'>(#AUTORISER{supprimer,document,#ID_DOCUMENT})[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax})]</span>]
 		]
 		[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,galerie},data,''}})]
 		[(#REM) Utilisation de la galerie en mode selecteur, avec un bouton choix qui appelle une fonction js passee en argument]
