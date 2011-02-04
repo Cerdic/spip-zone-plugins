@@ -1,0 +1,25 @@
+<plugin>
+
+    <nom> Retour simple </nom>
+	<licence>GPL</licence>
+    <categorie>edition</categorie>
+    <auteur> Maïeul Rouquette d'après frdm lui même d'après Jujubre</auteur>
+    <version>0.1</version>
+    <version_base>0.1</version_base>
+  
+    <etat>test</etat>
+
+    <description>Permet qu'un retour à la ligne dans le texte de l'article produise bien un retour à la ligne sur le site</description>
+      <prefix>retoursimple</prefix>
+
+
+
+    <pipeline>
+
+       <nom>pre_propre</nom>
+       <inclure>retoursimple.php</inclure>
+   </pipeline>
+
+
+
+</plugin>
