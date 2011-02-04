@@ -4,7 +4,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'saisie_montant_titre' => 'Saisie montant',
+	'saisie_montant_explication' => 'Permet la saisie d un montant libre dans le formulaire avant redirection vers API bancaire',
 	'saisie_montant_selection_titre' => 'S&eacute;lection montant',
+	'saisie_montant_selection_explication' => 'Permet la s&eacute;lection d un montant parmi une liste de montants propos&eacute;s dans le formulaire avant redirection vers API bancaire',
+	'saisie_montant_fixe_titre' => 'Montant fixe',
+	'saisie_montant_fixe_explication' => 'Associer un montant au formulaire avant redirection vers API bancaire',
 	'saisie_radio_defaut_choix1' => '15 &euro;',
 	'saisie_radio_defaut_choix2' => '50 &euro;',
 	'saisie_radio_defaut_choix3' => '100 &euro;',
@@ -51,7 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_choix_compte_paypal_message_defaut' => 'compte@votredomaine.com',
 	'traiter_choix_devise_paypal_label' => 'Devise',
 	'traiter_choix_devise_paypal_explication' => 'Indiquez ici la devise &agrave; utiliser pour les paiements',
-	'traiter_choix_devise_paypal_message_defaut' => 'EUR'
+	'traiter_choix_devise_paypal_message_defaut' => 'EUR',
+	'prix' => 'Prix'
 	
 );
 
