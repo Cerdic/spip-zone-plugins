@@ -39,8 +39,15 @@ function action_supprimer_document_dist($id_document=0) {
 		action_supprimer_document_dist($doc['id_vignette']);
 		sql_delete('spip_documents_liens', 'id_document='.$doc['id_vignette']);
 	}
+	// Si c'est un document ayant des documents annexes (sous-titre, ...)
+	// les supprimer aussi
+	$annexes = array_map('reset',sql_allfetsel("id_document","spip_documents_liens","objet='document' AND id_objet=".intval($id_document)));
+  foreach($annexes as $id){
+	  action_supprimer_document_dist($id);
+  }
 
 	// dereferencer dans la base
+  sql_delete('spip_documents_liens', 'id_document='.intval($id_document));
 	sql_delete('spip_documents', 'id_document='.intval($id_document));
 
 

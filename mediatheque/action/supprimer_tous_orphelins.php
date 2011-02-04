@@ -28,10 +28,9 @@ function action_supprimer_tous_orphelins() {
 
 	$ids_doc_orphelins = sql_select( "id_document", "spip_documents", $where );
 
-	include_spip('action/supprimer_document'); 
-
+	$supprimer_document = charger_fonction('supprimer_document','action');
 	while ($row = sql_fetch($ids_doc_orphelins)) {
-	action_supprimer_document_dist($row['id_document']); // pour les orphelins du contexte, on traite avec la fonction existante
+		$supprimer_document($row['id_document']); // pour les orphelins du contexte, on traite avec la fonction existante
 	}
 }
 

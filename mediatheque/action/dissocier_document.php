@@ -40,6 +40,7 @@ function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = fa
 	sql_delete("spip_documents_liens", "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet)." AND id_document=".$id_document);
 
 	// Si c'est une vignette, l'eliminer du document auquel elle appartient
+	// cas tordu peu probable
 	sql_updateq("spip_documents", array('id_vignette' => 0), "id_vignette=".$id_document);
 
 	pipeline('post_edition',
@@ -68,7 +69,8 @@ function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = fa
 
 	// On supprime ensuite s'il est orphelin
 	// et si demande
-	if ($supprime AND !sql_countsel('spip_documents_liens', 'id_document='.$id_document)){
+	// ici on ne bloque pas la suppression d'un document rattache a un autre
+	if ($supprime AND !sql_countsel('spip_documents_liens', "objet!='document' AND id_document=".$id_document)){
 		$supprimer_document = charger_fonction('supprimer_document','action');
 		return $supprimer_document($id_document);
 	}

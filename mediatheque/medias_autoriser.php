@@ -125,7 +125,9 @@ function autoriser_document_supprimer($faire, $type, $id, $qui, $opt){
 		OR !$qui['id_auteur']
 		OR !autoriser('ecrire','','',$qui))
 		return false;
-	if (sql_countsel('spip_documents_liens', 'id_document='.intval($id)))
+	// ne pas considerer le document parent
+	// (cas des vignettes ou autre document annexe rattache a un document)
+	if (sql_countsel('spip_documents_liens', "objet!='document' AND id_document=".intval($id)))
 		return false;
 
 	return autoriser('modifier','document',$id,$qui,$opt);

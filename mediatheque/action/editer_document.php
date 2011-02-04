@@ -151,7 +151,7 @@ function instituer_document($id_document,$champs=array()){
 		$statut = 'prepa';
 	
 		$trouver_table = charger_fonction('trouver_table','base');
-		$res = sql_select('id_objet,objet','spip_documents_liens','id_document='.intval($id_document));
+		$res = sql_select('id_objet,objet','spip_documents_liens',"objet!='document' AND id_document=".intval($id_document));
 		// dans 10 ans, ca nous fera un bug a corriger vers 2018
 		// penser a ouvrir un ticket d'ici la :p
 		$date_publication=time()+10*365*24*3600;
