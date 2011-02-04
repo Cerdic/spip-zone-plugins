@@ -283,4 +283,6 @@ Compatibilit&#224; : SPIP v1.92x, v2.0.x e v2.1.0
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.2;]" />
 	<categorie>maintenance</categorie>
+	<salvatore module="couteau" reference="fr" />
+	<salvatore module="couteauprive" reference="fr" />
 </plugin>
