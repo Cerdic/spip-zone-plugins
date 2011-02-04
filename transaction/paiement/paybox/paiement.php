@@ -24,15 +24,38 @@
 /*************************************************************************************/
 ?>
 <?php
+	//Charger SPIP
+	if (!defined('_ECRIRE_INC_VERSION')) {
+		// recherche du loader SPIP.
+		$deep = 2;
+		$lanceur ='ecrire/inc_version.php';
+		$include = '../../'.$lanceur;
+		while (!defined('_ECRIRE_INC_VERSION') && $deep++ < 6) { 
+			// attention a pas descendre trop loin tout de meme ! 
+			// plugins/zone/stable/nom/version/tests/ maximum cherche
+			$include = '../' . $include;
+			if (file_exists($include)) {
+				chdir(dirname(dirname($include)));
+				require $lanceur;
+			}
+		}	
+	}
+	if (!defined('_ECRIRE_INC_VERSION')) {
+		die("<strong>Echec :</strong> SPIP ne peut pas etre demarre.<br />
+			Vous utilisez certainement un lien symbolique dans votre repertoire plugins.");
+	}
+
+	//CONFIGURATION DU PAIEMENT PAYBOX
 	$mode = '1';
 	$site = 'SITE';
 	$rang = 'RANG';
 	$id = 'IDENTIFIANT';
-	$lang = $_SESSION['langue_paybox'];
 	$devise = '978';
-	
-	$serveur="http://www.site.com/cgi-bin/modulev2.cgi";
-    	$confirm = $GLOBALS['meta']['adresse_site'].'/'.find_in_path("/paiement/paybox/paiement_paybox_confirmation.php)";
+	$serveur = $GLOBALS['meta']['adresse_site']."/cgi-bin/modulev2.cgi";
+	//FIN CONFIGURATION DU PAIEMENT PAYBOX
+	    	
+	$lang = $_SESSION['langue_paybox'];
+	$confirm = $GLOBALS['meta']['adresse_site'].'/'.find_in_path("/paiement/paybox/paiement_paybox_confirmation.php");
 	$retourok = $GLOBALS['meta']['adresse_site']."/?page=transaction_merci";
 	$retourko = $GLOBALS['meta']['adresse_site']."/?page=transaction_regret";
 	

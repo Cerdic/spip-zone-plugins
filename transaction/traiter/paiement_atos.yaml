@@ -1,0 +1,6 @@
+
+titre: '<:transaction:traiter_paiement_atos_titre:>'
+description: '<:transaction:traiter_paiement_atos_description:>'
+options:
+  -
+    saisie: 'hidden'

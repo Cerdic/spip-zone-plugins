@@ -3,10 +3,4 @@ titre: '<:transaction:traiter_paiement_paybox_titre:>'
 description: '<:transaction:traiter_paiement_paybox_description:>'
 options:
   -
-    saisie: 'input'
-    options:
-      nom: 'champ_compte_paybox'
-      label: '<:transaction:traiter_choix_compte_paybox_label:>'
-      explication: '<:transaction:traiter_choix_compte_paybox_explication:>'
-      defaut: '<:transaction:traiter_choix_compte_paybox_message_defaut:>'
-      env: true
+    saisie: 'hidden'

@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function traiter_paiement_paybox_dist($args, $retours){
+function traiter_paiement_atos_dist($args, $retours){
 	include_spip('inc/session');
 	include_spip('inc/formidable');
 	include_spip('base/abstract_sql');
@@ -28,9 +28,7 @@ function traiter_paiement_paybox_dist($args, $retours){
     // ID unique de la transaction
     $_SESSION['ref'] = uniqid();
 
-    $_SESSION['langue_paybox'] = strtoupper($_GET['lang']);
-    if ($_SESSION['langue_paybox'] == '') $_SESSION['langue_paybox'] = 'FR';
-	
+    	
 	$nb_paiement = 0;
     //On compte le nombre de paiement utilisé par le formulaire
     foreach($traitements as $type_traitement=>$options){
@@ -39,7 +37,7 @@ function traiter_paiement_paybox_dist($args, $retours){
 	
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
-	$retours['message_ok'] .=  "<div class='transaction_ok paybox' style='background: url(".find_in_path('paiement/paybox/logo.jpg').") no-repeat top left'>"._T('transaction:traiter_message_paybox').'<p><a href="'.find_in_path("paiement/paybox/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
+	$retours['message_ok'] .=  "<div class='transaction_ok atos' style='background: url(".find_in_path('paiement/atos/logo.png').") no-repeat top left'>"._T('transaction:traiter_message_atos').'<p><a href="'.find_in_path("paiement/atos/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
 
 	//enregistrement des résultats
 	$options = $args['options'];
