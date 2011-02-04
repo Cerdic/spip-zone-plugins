@@ -13,15 +13,15 @@ ADVERT!merchant.gif!
 
 # URL de retour automatique de la reponse du paiement
 
-AUTO_RESPONSE_URL!http://www.monsite.com/client/plugins/atos/confirmation.php!
+AUTO_RESPONSE_URL!http://www.monsite.com/plugins/transaction/paiement/atos/paiement_atos_confirmation.php!
 
 # URL de retour suite a paiement refuse
 
-CANCEL_URL!http://www.monsite.com/regret.php!
+CANCEL_URL!http://www.monsite.com/?page=transaction_regret!
 
 # URL de retour suite a paiement accepte
 
-RETURN_URL!http://www.monsite.com/merci.php!
+RETURN_URL!http://www.monsite.com/?page=transaction_merci!
 
 
 # END OF FILE
