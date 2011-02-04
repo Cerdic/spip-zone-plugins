@@ -57,7 +57,14 @@ function documents_edit_ok($row, $id_document, $parent, $new)
 		);
 
 		include_spip('inc/actions');
-		ajax_retour(recuperer_fond("prive/editer/document_popup", $contexte));
+		// faire le retour ajax et le passer dans le pipeline "document_edit"
+		// (sans s a document, pour preparer la migration vers l'extension medias de SPIP core)
+		ajax_retour(
+			pipeline('affiche_milieu',
+				array('args'=>array('exec'=>'document_edit','id_document'=>$id_document),
+				'data'=>recuperer_fond("prive/editer/document_popup", $contexte))
+			)
+		);
 		return;
 	}
 
