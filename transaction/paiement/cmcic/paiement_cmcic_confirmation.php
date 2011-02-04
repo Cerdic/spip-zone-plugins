@@ -45,10 +45,11 @@ header("Content-type: text/plain");
 			// TPE Settings
 			// Warning !! CMCIC_Config contains the key, you have to protect this file with all the mechanism available in your development environment.
 			// You may for instance put this file in another directory and/or change its name. If so, don't forget to adapt the include path below.
-			require_once("plugins/transaction/paiement/cmcic/config.php");
-
+			//require_once("plugins/transaction/paiement/cmcic/config.php");
+			include_spip("paiement/cmcic/config");
+	
 			// --- PHP implementation of RFC2104 hmac sha1 ---
-			require_once("plugins/transaction/paiement/cmcic/CMCIC_Tpe.inc.php");
+			include_spip("paiement/cmcic/CMCIC_Tpe.inc");
 
 
 			// Begin Main : Retrieve Variables posted by CMCIC Payment Server 
@@ -88,14 +89,13 @@ header("Content-type: text/plain");
 				{
 switch($CMCIC_bruteVars['code-retour']) {
 					case "Annulation" :
-						
-// Payment has been refused
+						// Payment has been refused
 						// put your code here (email sending / Database update)
 						// Attention : an autorization may still be delivered for this payment
 						break;
 
 					case "payetest":
-            // Phase paiement (test)						
+				            	// Phase paiement (test)						
 						sql_updateq('spip_formulaires_transactions', array('statut_transaction' => 1), 'ref_transaction=' . sql_quote($CMCIC_bruteVars['reference']));
 						break;
 
