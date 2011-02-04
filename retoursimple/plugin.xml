@@ -14,7 +14,12 @@
 
 
 
-    <options>retoursimple.php</options>
+    <pipeline>
+
+       <nom>pre_propre</nom>
+       <inclure>retoursimple.php</inclure>
+   </pipeline>
+
 
 
 </plugin>
