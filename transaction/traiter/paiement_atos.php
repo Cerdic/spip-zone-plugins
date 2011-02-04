@@ -22,6 +22,7 @@ function traiter_paiement_atos_dist($args, $retours){
     
     
     
+    if ($_REQUEST['montant_fixe_1']) $_SESSION['total'] = $_REQUEST['montant_fixe_1'];
     if ($_REQUEST['montant_selection_1']) $_SESSION['total'] = $_REQUEST['montant_selection_1'];
     if ($_REQUEST['montant_1']) $_SESSION['total'] = $_REQUEST['montant_1'];
     

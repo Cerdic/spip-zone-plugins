@@ -59,7 +59,7 @@
 	$serveur="https://www.paypal.com/cgi-bin/webscr";
         $confirm = $urlsite.'/'.find_in_path("/paiement/paypal/paiement_paypal_confirmation.php");
 	$retourok = $urlsite."/?page=transaction_merci";
-	$retournok = $urlsite."/?transaction_regret";
+	$retournok = $urlsite."/?page=transaction_regret";
 
 	$total = $_SESSION['total'];
 ?><html>
