@@ -256,5 +256,5 @@
 		<icone>images/configuration-24.png</icone>
 		<titre>bando:icone_preferences</titre>
 	</onglet>
-
+	<salvatore module="bando" reference="fr" />
 </plugin>
