@@ -6,7 +6,7 @@
 		[<p class="explication">(#ENV{precisions_extra})</p>]
 		<select name='#ENV{champ_extra}[]'[ lang='(#LANG)'][ class='(#ENV{class_extra})'] id='#ENV{champ_extra}' multiple='multiple' size='5'>
 			<option value="0"[(#EVAL{0}|in_array{#GET{valeur}}|oui) selected="selected"]>
-				- pas d'auteur -
+				- <:cextras:pas_auteur:> -
 			</option>
 			<BOUCLE_a(AUTEURS){tous}{par statut,nom}>
 			<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#GET{valeur}}|oui) selected="selected"]>

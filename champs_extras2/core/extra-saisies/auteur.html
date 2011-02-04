@@ -11,7 +11,7 @@
 		<select name='#ENV{champ_extra}'[ lang='(#LANG)'][ class='(#ENV{class_extra})'] id='#ENV{champ_extra}'>
 			<option value="0"[
 				(#GET{valeur}|?{'','selected="selected"'})]>
-				- pas d'auteur -
+				- <:cextras:pas_auteur:> -
 			</option>
 			<BOUCLE_a(AUTEURS){tous}{par statut,nom}>
 			<option value="#ID_AUTEUR"[

@@ -3,6 +3,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cextra_par_defaut' => 'Valeur par d&eacute;faut',
+
+	//P
+	'pas_auteur' => 'pas d\'auteur',
 	
 	//T
 	'table_article' => 'Articles',

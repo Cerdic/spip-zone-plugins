@@ -3,7 +3,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cextra_par_defaut' => 'Default value',
-	
+
+	//P
+        'pas_auteur' => 'no author',
+		
 	//T
 	'table_article' => 'Articles',
 	'table_auteur' => 'Authors',
