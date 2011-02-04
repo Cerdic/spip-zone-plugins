@@ -47,7 +47,8 @@
 			Vous utilisez certainement un lien symbolique dans votre repertoire plugins.");
 	}
 
-		session_start();
+	
+	session_start();
 	// Modifier la valeur ci-dessous avec l'e-mail de vote compte PayPal
 	$compte_paypal = $_SESSION['champ_compte_paypal'];
 	$Devise        = $_SESSION['champ_devise_paypal'];
@@ -64,7 +65,7 @@
 ?><html>
 <head>
 </head>
-<body >
+<body onload="document.getElementById('formpaypal').submit()">
 <?php
 //"
 // Référence
