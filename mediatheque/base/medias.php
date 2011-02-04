@@ -13,6 +13,7 @@ function medias_declarer_tables_interfaces($interface){
 function medias_declarer_tables_principales($tables_principales){
 	
 	$tables_principales['spip_documents']['field']['fichier'] = "text NOT NULL DEFAULT ''";
+	$tables_principales['spip_documents']['field']['mode'] = "varchar(10) DEFAULT 'document' NOT NULL";
 	$tables_principales['spip_types_documents']['field']['media'] = "varchar(10) DEFAULT 'file' NOT NULL";
 	$tables_principales['spip_documents']['field']['statut'] = "varchar(10) DEFAULT '0' NOT NULL";
 	$tables_principales['spip_documents']['field']['credits'] = "varchar(255) DEFAULT '' NOT NULL";	
@@ -90,6 +91,12 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_documents CHANGE fichier fichier TEXT NOT NULL DEFAULT ''");
 			ecrire_meta($nom_meta_base_version,$current_version="0.10",'non');
+		}
+		if (version_compare($current_version,'0.11','<')){
+			// Passage du mode en varchar
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE spip_documents CHANGE mode mode varchar(10) DEFAULT 'document' NOT NULL");
+			ecrire_meta($nom_meta_base_version,$current_version="0.11",'non');
 		}
 	}
 	medias_check_statuts();
