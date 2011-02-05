@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'bouton_ajouter' => 'Hinzuf&uuml;gen',
 'bouton_chercher' => 'Suchen',
-'bouton_checkbox_qui_administrateurs' => 'Admninistratoren',
+'bouton_checkbox_qui_administrateurs' => 'Administratoren',
 'bouton_checkbox_qui_redacteurs' => 'Redakteure',
 
 // D
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modif_grappe' => 'Traube bearbeiten',
 'icone_supprimer_grappe' => 'Traube l&ouml;schen',
 'icone_voir_toutes_grappes' => 'Alle Trauben zeigen',
-'info_acces_0minirezo' => 'Admninistratoren',
+'info_acces_0minirezo' => 'Administratoren',
 'info_acces_1comite' => 'Redakteure',
 'info_changer_nom_grappe' => 'Name der Traube &auml;ndern',
 'info_creation_grappes' => 'Trauben aus Elementen zusammenstellen oder bearbeiten',
