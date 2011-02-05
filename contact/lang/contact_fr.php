@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'deplacement_possible' => 'D&eacute;placement vertical par gliss&eacute;-d&eacute;pos&eacute;',
 	'description_menu_contact' => '&Eacute;l&eacute;ment de menu vers la page du formulaire de contact',
+	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez &agrave; ajouter un lien dans vos menus).',
 
 	// F
 	'form_destinataire' => 'Choisissez un destinataire',
