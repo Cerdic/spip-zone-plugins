@@ -17,4 +17,5 @@
 	<necessite id='SPIP' version='[2.1.0;]' />
 	<options>sedna_options.php</options>
 	<categorie>squelette</categorie>
+	<salvatore module="sedna" reference="fr" />
 </plugin>
