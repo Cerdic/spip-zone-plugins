@@ -1,0 +1,5 @@
+<page>
+	<nom><:lettres:lettres_information:></nom>
+	<description><:lettres:description_page-lettres:></description>
+	<icon>prive/images/abonne.png</icon>
+</page>
