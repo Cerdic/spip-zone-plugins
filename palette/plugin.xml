@@ -31,4 +31,5 @@
 	<necessite id="lib:farbtastic_1_3_1" src="http://kent1.sklunk.net/IMG/zip/farbtastic_1_3_1.zip" />
 	<utilise id="cfg" version="[1.10.4;]" />
 	<categorie>outil</categorie>
+	<salvatore module="palette" reference="fr" />
 </plugin>

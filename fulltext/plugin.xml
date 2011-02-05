@@ -45,4 +45,5 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&eacute;me
 		<inclure>fulltext_pipelines.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
+	<salvatore module="fulltext" reference="fr" />
 </plugin>

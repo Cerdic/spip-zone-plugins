@@ -25,5 +25,6 @@
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<utilise id="yaml" />	
 	<categorie>outil</categorie>
+	<salvatore module="verifier" reference="fr" />
 </plugin>
 

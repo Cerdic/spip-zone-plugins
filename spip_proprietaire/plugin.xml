@@ -31,4 +31,6 @@ Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://ww
 	    <url>spip_proprio</url>
 	</onglet>
 	<categorie>communication</categorie>
+	<salvatore module="spip_proprio" reference="fr" />
+	<salvatore module="textes_legaux" reference="fr" />
 </plugin>

@@ -51,5 +51,6 @@
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<utilise id="afficher_objets" version="[1.1.8;]" />	
 	<utilise id="cfg" version="[ 1.15.1;]" />		
+	<salvatore module="taa" reference="fr" />
 </plugin>
 

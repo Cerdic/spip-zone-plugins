@@ -53,4 +53,5 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 	<necessite id="saisies" version='[1.1;]' />
 	<chemin dir='' />
 	<categorie>communication</categorie>
+	<salvatore module="spipicious" reference="fr" />
 </plugin>

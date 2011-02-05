@@ -68,4 +68,5 @@ The stored backups considered obsolete (according to the corresponding config se
 	<necessite id="spip_bonux" version="[1.9.1;]" />
 	<necessite id="facteur" version="[1.5.6;]" />
 	<categorie>maintenance</categorie>
+	<salvatore module="saveauto" reference="fr" />
 </plugin>

@@ -28,4 +28,5 @@
 	<necessite id='saisies' version='[1.1;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
 	<categorie>statistique</categorie>
+	<salvatore module="piwik" reference="fr" />
 </plugin>

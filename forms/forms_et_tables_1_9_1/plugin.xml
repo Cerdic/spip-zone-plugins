@@ -88,4 +88,7 @@
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.1;1.9.2]" />
 	<categorie>communication</categorie>
+	<salvatore module="form" reference="fr" />
+	<salvatore module="forms" reference="fr" />
+	<salvatore module="table" reference="fr" />
 </plugin>
