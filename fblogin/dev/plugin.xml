@@ -1,0 +1,72 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	 <multi>
+		 [fr]Authentification Facebook Connect
+		 [en]Facebook Connect Authentication
+	 </multi>
+	</nom>
+	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, Cedric Morin [->yterium.net], Fil</auteur>
+	<licence>
+		<multi>
+		[fr]_ &#169; 2007-2009 - Distribu&eacute; sous licence GNU/GPL
+		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
+		</multi>
+	</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<icon>images/facebook-64.png</icon>
+	<description>
+		<multi>
+			[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur compte Facebook.
+			<br />{Utilisation&nbsp;:} Pour un utilisateur qui souhaite utiliser son compte Facebook pour acc&#233;der au site, il suffit de cliquer sur le bouton Facebook pour se logguer.
+			[en]Authenticates users with their OpenID.
+			<br />{Using this plugin:} A user wishing to authenticate with her Facebook Account should click on Facebook button to log in.
+		 </multi>
+	</description>
+	<options>fblogin_options.php</options>
+	<lien>http://www.spip-contrib.net/</lien><!-- URI de documentation : à compléter -->
+	<prefix>fblogin</prefix>
+  	<install>base/fblogin.php</install>
+	<pipeline>
+	  	<nom>declarer_tables_principales</nom>
+	  	<inclure>base/fblogin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>social_login_links</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>social_inscription_links</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<categorie>auteur</categorie>
+</plugin>

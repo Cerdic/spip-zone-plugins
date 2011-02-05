@@ -1,0 +1,50 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 inc-inscription-fblogin
+  Distribue sous licence GPL
+
+]
+<div class="fblogin_fblogin">
+	<a id="bouton_insc_fblogin" href="#" onclick="insc_with_fblogin(true);return false;"><img src="#CHEMIN{images/fblogin_badge.png}" width="71" height="21" alt="<:fblogin:form_forum_fblogin|attribut_html:>" /></a>
+	<a id="bouton_insc_conv" href="#" onclick="insc_with_fblogin(false);return false;">Retour</a>
+</div>
+<ul>
+	<li class='saisie_url_fblogin obligatoire[ (#ENV*{erreurs}|table_valeur{url_fblogin}|oui)erreur]'>
+		<label for="url_fblogin"><:fblogin:form_pet_votre_fblogin:></label>[
+		<span class="erreur_message">(#ENV*{erreurs}|table_valeur{url_fblogin})</span>
+		]<input type="text" class="text" name="url_fblogin" id="url_fblogin" value="#ENV*{url_fblogin}" size="30" />
+		<input type="hidden" name="fblogin" value="#ENV*{fblogin}" />
+	</li>
+</ul>
+[<div class="fblogin"><img src="#CHEMIN{images/fblogin-16.png}" width="16" height="16" />(#ENV*{fblogin})</div>]
+<script type="text/javascript">
+	function initinscform(){
+		if (!jQuery('#url_fblogin').val())
+			insc_with_fblogin(false);
+		else if (!jQuery('#nom_inscription').val() && !jQuery('#mail_inscription').val())
+			insc_with_fblogin(true);
+		else
+			jQuery('#bouton_insc_conv, #bouton_insc_fblogin').hide();
+	}
+	function insc_with_fblogin(fblogin){
+		if (fblogin){
+			jQuery('#url_fblogin').parents('ul').eq(0).show().siblings('ul').hide();
+			jQuery('#bouton_insc_fblogin').hide();
+			jQuery('#bouton_insc_conv').show();
+		}
+		else{
+			jQuery('#nom_inscription').parents('ul').eq(0).show().siblings('ul').hide();
+			jQuery('#bouton_insc_fblogin').show();
+			jQuery('#bouton_insc_conv').hide();
+		}
+	}
+	jQuery(initinscform);
+	onAjaxLoad(initinscform);
+	[(#ENV{message_erreur}|non|et{#ENV{fblogin,''}|et{#ENV{nom_inscription,''}}|et{#ENV{mail_inscription,''}}})
+	jQuery(function(){setTimeout(
+		function(){jQuery('#formulaire_inscription input#EVAL{chr(91)}type=submit#EVAL{chr(93)}').get(0).click();},
+		10
+	)});
+	]
+</script>
