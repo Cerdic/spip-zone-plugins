@@ -2,10 +2,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function contact_header_prive($flux){
-	$flux .= "\n<script type=\"text/javascript\" src=\"".find_in_path('javascript/contact_sortable.js', false)."\"></script>";
-	return $flux;
+/**
+ * Pipeline jqueryui_forcer pour demander au plugin l'insertion des scripts pour .sortable()
+ *
+ * @param array $plugins
+ * @return array
+ */
+function contact_jqueryui_forcer($plugins){
+	$plugins[] = "jquery.ui.core";
+	$plugins[] = "jquery.ui.widget";
+	$plugins[] = "jquery.ui.mouse";
+	$plugins[] = "jquery.ui.sortable";
+	return $plugins;
 }
-
 
 ?>
