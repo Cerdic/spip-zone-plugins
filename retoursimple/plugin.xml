@@ -16,7 +16,7 @@
 
     <pipeline>
 
-       <nom>pre_propre</nom>
+       <nom>post_propre</nom>
        <inclure>retoursimple.php</inclure>
    </pipeline>
 

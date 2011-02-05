@@ -1,6 +1,6 @@
 <?php
 
-function retoursimple_pre_propre($texte){
+function retoursimple_post_propre($texte){
 	return post_autobr($texte);	
 }
 ?>
