@@ -1,0 +1,6 @@
+[(#SET{titre_noisette, #ENV{titre_noisette}|sinon{spiplistes:modifier_abonnement}})]
+[(#SET{titre,[(#GET{titre_noisette}|=={titre_perso}|?{[(#ENV**{titre_noisette_perso}|propre)],[(#GET{titre_noisette}|_T)]})]})]
+[(#SET{niveau_titre, #ENV{niveau_titre}|sinon{h2}})]
+
+[(#ENV{afficher_titre_noisette}|oui)[<[(#GET{niveau_titre})] class="#GET{niveau_titre}">(#GET{titre})</#GET{niveau_titre}>]]
+#FORMULAIRE_GESTION_ABONNEMENT

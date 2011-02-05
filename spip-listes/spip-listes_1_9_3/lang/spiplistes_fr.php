@@ -694,6 +694,21 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 , 'jquery_inactif' => 'jQuery non d&#233;tect&#233;. Merci de l&#8217;activer.'
 
+
+// description de la page abonnement
+, 'description_page_abonnement' => 'Page sur laquelle les abonn&eacute;s sont dirig&eacute;s pour s\'inscrire ou modifier leur abonnement.'
+, 'nom_page_abonnement' => 'Page d\'abonnement aux listes'
+
+// noisettes
+, 'noisette_formulaire_spip_listes_inscription' => 'Formulaire d\'inscription aux listes de diffusion'
+, 'noisette_formulaire_gestion_abonnement' => 'Formulaire de gestion de l\'abonnement aux listes de diffusion'
+, 'modifier_abonnement' => 'Modifier votre abonnement aux listes de diffusions'
+, 'noisette_formulaire_inscription_gestion_abonnement' => 'Formulaire d\'inscription et gestion de l\'abonnement aux listes de diffusion'
+, 'description_noisette_formulaire_inscription_gestion_abonnement' => 'Affiche le formulaire de gestion de l\'abonnement si un cookie est pr&eacute;sent ou si un auteur est identifi&eacute;, sinon affiche le formulaire d\'inscription.'
+, 'lettres_information' => 'Lettres d\'information'
+
+
+
 ///////
 // a priori, pas|plus utilise'
 , 'supprime_contact_base' => 'Supprimer d&#233;finitivement de la base'
