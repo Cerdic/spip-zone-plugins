@@ -2,7 +2,7 @@
 	<nom>noiZetier</nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.9.5</version>
+	<version>0.9.6</version>
 	<version_base>0.4</version_base>
 	<etat>test</etat>
 	<description>Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.</description>

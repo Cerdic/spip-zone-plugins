@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise &agrave; jour de la base de donn&eacute;e.',
 	
 	'explication_noizetier_css' => 'Vous pouvez ajouter &agrave; la noisette d\'&eacute;ventuelles classes CSS suppl&eacute;mentaires.',
+	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
 	
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
 	'formulaire_modifier_noisette' => 'Modifier cette noisette',
@@ -89,6 +90,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_import_remplacer' => 'Remplacer la configuration actuelle',
 	'formulaire_import_compos' => 'Importer les compositions du noizetier',
 	'formulaire_config_importee' => 'La configuration a &eacute;t&eacute; import&eacute;e.',
+	
+	'item_titre_perso' => 'titre personnalis&eacute;',
+	
+	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes&nbsp;?',
+	'label_niveau_titre' => 'Niveau du titre&nbsp;:',
+	'label_titre_noisette' => 'Titre de la noisette&nbsp;:',
+	'label_titre_noisette_perso' => 'Titre personnalis&eacute;:',
 	
 	'nom_bloc_contenu' => 'Contenu',
 	'nom_bloc_navigation' => 'Navigation',
