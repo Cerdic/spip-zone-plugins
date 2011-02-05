@@ -205,6 +205,10 @@
 		'theme_par_defaut_modifier'	=> "Modifier l'abonnement par défaut",
 		
 		'Z' => 'ZZzZZzzz'
+		
+// Noisettes
+		'noisette_formulaire_lettres' => 'Formulaire d\'abonnement aux lettres',
+
 
 	);
 
