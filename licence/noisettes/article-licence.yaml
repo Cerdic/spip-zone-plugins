@@ -1,0 +1,84 @@
+nom: '<:licence:cfg_titre_licence:>'
+icon: 'img_pack/licence_logo24.png'
+contexte: 'id_article'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_titre_noisette'
+      label: '<:licence:noisette_afficher_titre_noisette:>'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      nom: 'titre_noisette'
+      label: '<:licence:noisette_titre_noisette:>'
+      defaut: 'licence:cfg_titre_licence'
+      cacher_option_intro: 'oui'
+      datas:
+        'licence:cfg_titre_licence': '<:licence:cfg_titre_licence:>'
+        titre_perso: '<:licence:noisette_titre_perso:>'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre_noisette_perso'
+      label: '<:licence:noisette_titre_noisette_perso:>'
+      afficher_si: '@afficher_titre_noisette@ == "on" && @titre_noisette@ == "titre_perso"'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'niveau_titre'
+      label: '<:licence:noisette_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
+      datas:
+        h1: 'h1'
+        h2: 'h2'
+        h3: 'h3'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'lien'
+      label: '<:licence:noisette_lien:>'
+      defaut: 'oui'
+      datas:
+        oui: '<:ecrire:item_oui:>'
+        non: '<:ecrire:item_non:>'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'logo'
+      label: '<:licence:noisette_logo:>'
+      defaut: 'oui'
+      datas:
+        oui: '<:ecrire:item_oui:>'
+        non: '<:ecrire:item_non:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur_logo'
+      label: '<:licence:noisette_largeur_logo:>'
+      defaut: ''
+      afficher_si: '@logo@ == "oui"'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur_logo'
+      label: '<:licence:noisette_hauteur_logo:>'
+      defaut: ''
+      afficher_si: '@logo@ == "oui"'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'nom_licence'
+      label: '<:licence:noisette_nom_licence:>'
+      defaut: ''
+      datas:
+        oui: '<:ecrire:item_oui:>'
+        '': '<:ecrire:item_non:>'
