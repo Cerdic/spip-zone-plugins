@@ -1,6 +1,6 @@
 <?php
 
-function retoursimple_post_propre($texte){
-	return post_autobr($texte);	
+function retoursimple_pre_propre($texte){
+	return echappe_html(post_autobr($texte));	
 }
 ?>
