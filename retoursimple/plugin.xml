@@ -12,7 +12,7 @@
     <description>Permet qu'un retour à la ligne dans le texte de l'article produise bien un retour à la ligne sur le site</description>
       <prefix>retoursimple</prefix>
 
-
+	<icon>retoursimple.jpg</icon>
 
     <pipeline>
 
