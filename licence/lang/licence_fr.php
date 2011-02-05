@@ -34,16 +34,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 	
 	// N
-	'noisette_afficher_titre_noisette' => 'Afficher un titre de noisette&nbsp;?',
 	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels)&nbsp;:',
 	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels)&nbsp;:',
 	'noisette_lien' => 'Afficher le lien vers la description de la licence&nbsp;?',
 	'noisette_logo' => 'Afficher le logo de la licence&nbsp;?',
-	'noisette_niveau_titre' => 'Niveau du titre&nbsp;:',
 	'noisette_nom_licence' => 'Afficher le nom de la licence&nbsp;?',
-	'noisette_titre_noisette' => 'Titre de la noisette&nbsp;:',
-	'noisette_titre_noisette_perso' => 'Titre personnalis&eacute;&nbsp;:',
-	'noisette_titre_perso' => 'titre personnalis&eacute;',
 
 	// S
 	'sans_licence' => 'Sans licence',
