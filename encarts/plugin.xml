@@ -14,11 +14,9 @@
 
 	<etat>dev</etat>
 
-	<description>Permet aux r&eacute;dacteurs d'ajouter des encarts (ou encadr&eacute;s) dans leurs articles, et aux graphistes les placer n'importe o&ugrave; dans leurs mises-en-page.</description>
+	<description><multi>[fr]Permet aux r&eacute;dacteurs d'ajouter des encarts (ou encadr&eacute;s) dans leurs articles, et aux graphistes les placer n'importe o&ugrave; dans leurs mises-en-page.[en]Allows authors to add framed texts int their articles, and grpahists to place those frames anywher in their layouts.</multi></description>
 
 	<prefix>encarts</prefix>
-
-
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
