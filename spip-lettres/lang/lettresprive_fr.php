@@ -204,7 +204,7 @@
 		'theme_racine' 				=> 'Tous les thèmes',
 		'theme_par_defaut_modifier'	=> "Modifier l'abonnement par défaut",
 		
-		'Z' => 'ZZzZZzzz'
+		'Z' => 'ZZzZZzzz',
 		
 // Noisettes
 		'noisette_formulaire_lettres' => 'Formulaire d\'abonnement aux lettres',
