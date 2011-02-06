@@ -1,8 +1,8 @@
 <script>
 	$(document).ready(function() {
-		$("#responsecontainer").load("#CHEMIN{inc/timer.php}");
+		$("#responsecontainer").load("#URL_page{timer}");
 		[(#ENV{start}|oui)var refreshId = setInterval(function() {
-		$("#responsecontainer").load('#CHEMIN{inc/timer.php}?randval='+ Math.random());
+		$("#responsecontainer").load('#URL_page{timer}?randval='+ Math.random());
 		}, 100);]
 		
 		//stop the clock when this button is clicked

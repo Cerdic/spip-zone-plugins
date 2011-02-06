@@ -1,14 +1,19 @@
 <plugin>
-	<nom>Timer</nom>
+	<nom>Gestion Projets</nom>
 	<auteur>Rainer Müller</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1</version>
-	<version_base>0.1</version_base>	
+	<version>0.1.2</version>
+	<version_base>0.1.2</version_base>	
 	<description>
 		Début d'un gestionnaire de projet,en commenacant avec le timetracker, pas fonctionnel pour le moment
 	</description>
 	<etat>dev</etat>
 	<prefix>gestion_projets</prefix>
+	<bouton id="projets" parent="naviguer">
+	<!--	<icone>img/logo_boutique_24.png</icone>-->
+		<titre>Projets</titre>   
+		<url>projets</url>   
+    </bouton>	
 	<install>base/gestion_projets_install.php</install>	
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
@@ -21,5 +26,10 @@
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/gestion_projets_tables_interfaces.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>gestion_projets_pipelines.php</inclure>
 	</pipeline>	
+	<fonctions>gestion_projets_fonctions.php</fonctions>
 </plugin>

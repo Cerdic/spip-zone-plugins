@@ -28,18 +28,25 @@ function formulaires_projets_traiter_dist(){
 //$message_ok='ok';
 
 // Effectuer des traitements
-	$valeurs=array(
+	$valeurs_projet=array(
 		'nom'=>_request('nom'),
-		'id_auteur'=>_request('id_auteur'),
 		'date_creation'=>date('Y-m-d G:i:s'),				
 		);
 		
-	$id_projet=sql_insertq('spip_projets',$valeurs)	;
-    
+	$id_projet=sql_insertq('spip_projets',$valeurs_projet);
+
+    $valeurs_auteur=array(
+		'id_projet'=>$id_projet,
+		'id_auteur'=>_request('id_auteur'),				
+		);
+	$auteur=sql_insertq('spip_projets_auteur',$valeurs_auteur);
+	
+	    
     // Valeurs de retours
     return array(
         'message_ok' => $message_ok, // ou bien
         'message_erreur' => $message_erreur);
+    
 }
 	 
 ?>
