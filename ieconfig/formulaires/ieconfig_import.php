@@ -48,6 +48,7 @@ function ieconfig_saisies_import() {
 		$entrees = $config;
 		unset($entrees['nom']);
 		unset($entrees['description']);
+		unset($entrees['necessite']);
 		unset($entrees['spip_contenu']);
 		unset($entrees['spip_interactivite']);
 		$entrees = array_map('strtolower',array_keys($entrees));
