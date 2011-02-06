@@ -60,12 +60,23 @@
       <li>
         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">id_diapo=X</span>&gt;</h4>
         <strong>Parameter&quot;<span style="color:#666">id_diapo=X</span>&quot;, optional :</strong> <br />
-Allows to display several slide shows in the same article, each slide show must have a different  id_diapo<br />
+Allows to attribute a specific id to a slide show to be able to target it in css by dsjcycle_X<br />
+Since the version 1.1, not necessary any more to display several slide shows in the same article<br />
 <strong>Example :</strong><br />
 &lt;sjcycle16|center|docs=101,102,103,104|id_diapo=1&gt;<br />
 &lt;sjcycle16|center|docs=105,106,107,108,109|id_diapo=2|opt=fx:'shuffle',timeout:2000&gt;<br />
 This displays 2 slide shows in the same article, the first one on 4 images with the parameters by default of the site and the second on 5 images, with parameters different from those by default.<br />
       </li>
+      <li>
+      	<h4>&lt;sjcycleN|ALIGN|<span style="color:red">legende=X</span>&gt;</h4>
+        <strong>Parameter&quot;<span style="color:#666">legende=X</span>&quot;, optional :</strong> <br />
+	Allows to post a legend under the slide show 
+		<ul>
+          <li>If X=1, we post as legend the images'title </li>
+          <li>If X=model, we post as legend the text supplied by the model sjcycle_model. This allows to create a legend containing the author's name, the article's title, well anything we want... 
+          <li>If X=a text, this text is posted as legend 
+          </ul>
+      </li>   
       <li>
         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">opt=p1:v1,p2:v2</span>&gt;</h4>
         <strong>Parameter&quot;<span style="color:#666">opt=p1:v1,p2:v2,[...],px:vx</span>&quot;, optional :</strong> <br />
