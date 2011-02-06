@@ -56,6 +56,7 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 			'a.id_auteur ='.$id_auteur
 		);
 		$auteur['id_auteur'] = $id_auteur;
+		
 		if(in_array('naissance',$champs)){
 			if(preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",$auteur['naissance'],$date_naissance)){
 				include_spip('inc/date');
@@ -65,6 +66,12 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 			}
 		}
 		$champs = $auteur;
+		//trouver si logo
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		$logo = $chercher_logo($id_auteur, 'id_auteur', 'on');
+			if ($logo){
+			$champs['logo_auteur'] = $logo[0];
+			}		
 	} else {
 	    //si on est en mode creation et que l'utilisateur a saisi ses valeurs on les prends en compte
 	    foreach($champs as $clef =>$valeurs) {
@@ -115,6 +122,20 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && ((empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0)))) {
 			$erreurs[$valeur] = _T('inscription2:champ_obligatoire');
 			$erreurs_obligatoires = true;
+			if($valeur=='logo_auteur'){
+				//un logo existe deja ?
+				$chercher_logo = charger_fonction('chercher_logo', 'inc');
+				$logo = $chercher_logo($id_auteur, 'id_auteur', 'on');
+				if ($logo){
+				unset($erreurs['logo_auteur']);
+				$erreurs_obligatoires = false;
+				}
+				//ou un file est charge
+				elseif(isset($_FILES['logo_auteur']) && ($_FILES['logo_auteur']['error'] == 0)){
+				unset($erreurs['logo_auteur']);
+				$erreurs_obligatoires = false;
+				}
+			}
 			if($valeur == 'naissance'){
 				$annee = trim(_request('annee'));
 				$mois = trim(_request('mois'));
@@ -392,7 +413,6 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		);
 	}
 
-
 	if(isset($_FILES['logo_auteur']) && ($_FILES['logo_auteur']['error'] == 0)){
 	    $chercher_logo = charger_fonction('chercher_logo', 'inc');
 		
@@ -420,7 +440,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	);
 
     if (!$new){
-        $message = _T('inscription2:profil_modifie_ok');
+        $message .= _T('inscription2:profil_modifie_ok');
         if($mode == 'modification_auteur_simple'){
         	$message .= '<br />'._T('inscription2:mot_passe_reste_identique');
         }
@@ -448,5 +468,21 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	}
 
     return $retour;
+}
+
+/**
+ * Extraction des sources des fichiers uploades correspondant aux 2 logos (normal + survol)
+ * si leur upload s'est bien passé
+ *
+ * @return Array
+ */
+function formulaire_inscription2_logo_get_sources(){
+	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
+	if (!is_array($_FILES)) return array();
+	
+		if ($_FILES['logo_auteur']['error'] == 0) {
+			$source = $_FILES;
+		}
+	return $source;
 }
 ?>
