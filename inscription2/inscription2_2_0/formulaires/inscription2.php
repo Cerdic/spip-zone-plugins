@@ -440,7 +440,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	);
 
     if (!$new){
-        $message .= _T('inscription2:profil_modifie_ok');
+        $message = _T('inscription2:profil_modifie_ok');
         if($mode == 'modification_auteur_simple'){
         	$message .= '<br />'._T('inscription2:mot_passe_reste_identique');
         }
@@ -470,19 +470,4 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
     return $retour;
 }
 
-/**
- * Extraction des sources des fichiers uploades correspondant aux 2 logos (normal + survol)
- * si leur upload s'est bien passé
- *
- * @return Array
- */
-function formulaire_inscription2_logo_get_sources(){
-	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
-	if (!is_array($_FILES)) return array();
-	
-		if ($_FILES['logo_auteur']['error'] == 0) {
-			$source = $_FILES;
-		}
-	return $source;
-}
 ?>
