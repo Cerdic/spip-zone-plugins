@@ -7,6 +7,7 @@
  * @return array
  */
 function menus_ieconfig($flux){
+	include_spip('inc/texte');
 	$action = $flux['args']['action'];
 	
 	// Formulaire d'export
