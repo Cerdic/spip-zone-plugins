@@ -1,0 +1,24 @@
+/* Couleurs_spip */
+/* Exemples */
+/* couleurs */
+span.cs_noir {color:black;}
+span.cs_marron {color:maroon;}
+span.cs_rouge {color:red;}
+span.cs_orange {color:orange;}
+span.cs_jaune {color:yellow;}
+span.cs_vert {color:green;}
+span.cs_bleu {color:blue;}
+span.cs_violet {color:purple;}
+span.cs_gris {color:gray;}
+span.cs_blanc {color:white;}
+
+/* tailles */
+span.cs_l {font-size:1.1em;}
+span.cs_xl {font-size:1.2em; line-height:1.4em}
+span.cs_xxl {font-size:1.3em; line-height:1.6em;}
+span.cs_xxxl {font-size:1.4em; line-height:1.7em;}
+span.cs_xxxxl {font-size:1.5em; line-height:1.8em;}
+span.cs_s {font-size:0.95em;}
+span.cs_xs {font-size: 0.9em;}
+span.cs_xxs {font-size: 0.85em;}
+

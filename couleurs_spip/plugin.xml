@@ -1,0 +1,26 @@
+<plugin>
+<nom>Couleurs_Spip, couleurs et span pour les textes de spip</nom>
+<etat>stable</etat>
+<version>2.0</version>
+<auteur>Dominique Wojylac</auteur>
+<icon>couleurs_spip.png</icon>
+<description>Pour définir des span dans les éléments textes de spip (#TEXTE, #CHAPO,...) en relation avec une feuille de style.
+_ Compatible 1.9 et 2.0</description>
+<lien>http://www.spip-contrib.net/spip.php?article2408</lien>
+<prefix>couleurs_spip</prefix>
+<pipeline>
+	<nom>post_propre</nom>
+	<action>definirspan</action>
+	<inclure>couleurs_spip.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>header_prive</nom>
+	<action>inclurecss</action>
+	<inclure>couleurs_spip.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head</nom>
+	<action>inclurecss</action>
+	<inclure>couleurs_spip.php</inclure>
+</pipeline>
+</plugin>
