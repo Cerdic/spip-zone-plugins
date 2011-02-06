@@ -105,20 +105,6 @@ $cheminjoli = explode("/", $url);
 return $cheminjoli; 
 }
 
-// ---------------------------------------------
-//	Write File, line by line
-// ---------------------------------------------
-function wf($myFile, $any_string, $end_line="\n") {
-	global $display_debug_full;
-	
-	if ($display_debug_full) {
-	print "-> write string : $any_string<br />";
-	}
-	
-	if (substr($any_string, -2) != "?>") {$any_string = $any_string . $end_line;} // append end_line except ending php file
-	if ($myFile != "") {fputs($myFile, "$any_string");}
-	else {print "!! Error - File to write is undefined<br />\r";}
-}
 
 
 ///ajouts microtime inutile...
