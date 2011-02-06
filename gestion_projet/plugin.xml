@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Timer</nom>
+	<auteur>Rainer Müller</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>	
+	<description>
+		Début d'un gestionnaire de projet,en commenacant avec le timetracker, pas fonctionnel pour le moment
+	</description>
+	<etat>dev</etat>
+	<prefix>gestion_projets</prefix>
+	<install>base/gestion_projets_install.php</install>	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/gestion_projets_tables_principales.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/gestion_projets_tables_auxiliaires.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/gestion_projets_tables_interfaces.php</inclure>
+	</pipeline>	
+</plugin>
