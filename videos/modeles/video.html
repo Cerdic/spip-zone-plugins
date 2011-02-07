@@ -17,7 +17,8 @@
 })]
 
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
-	[(#SET{fichier,[(#FICHIER|replace{'IMG/',''})]})]
+
+	[(#SET{fichier,#FICHIER*})]
 
 [(#REM)
 /** Traiter DailyMotion **/
