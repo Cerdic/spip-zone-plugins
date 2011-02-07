@@ -20,7 +20,7 @@
 			|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
 })]
 
-[<p id="nb_notes_#ID_DOCUMENT" class="nb_notes">(#INCLURE{fond=liste_legende,id_document}|trim)</p>]
+<p id="nb_notes_#ID_DOCUMENT" class="nb_notes">[(#INCLURE{fond=liste_legende,id_document}|trim)]</p>
 
 [(#ENV{editable}|?{
 	#SET{editable,#ENV{editable}}
