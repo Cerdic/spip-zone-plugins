@@ -4,6 +4,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'autobr:nom' => 'Sauts de ligne automatiques',
+	'autobr:description' => 'Applique sur tous vos contenus SPIP (texte d\'articles, rubriques, etc.) le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.',
 
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
