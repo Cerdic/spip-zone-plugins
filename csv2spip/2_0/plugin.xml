@@ -1,17 +1,10 @@
 <plugin>
-        <nom> <!-- Nom du plugin -->
-          csv2spip
-        </nom>
-        <auteur>        <!-- Auteur du plugin -->
-          cy_altern
-					(c) 2006 - Licence GPL
+        <nom>csv2spip</nom>
+        <auteur>
+          cy_altern	(c) 2006 - Licence GPL
         </auteur>
-        <version>
-         3.1.0
-        </version>
-        <etat>
-          test
-        </etat>
+        <version>3.2.0</version>
+        <etat>test</etat>
         <description>
           Permet de r&#233;aliser l'int&#233;gration d'auteurs et administrateurs restreints &#224; partir de fichiers CSV. 
 					Ce plugin g&#232;re &#233;galement la cr&#233;ation de rubriques pour les admins restreints 
@@ -19,17 +12,17 @@
 					Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&#233;s avec &#233;ventuellement la sauvegarde/gestion
 					de leurs articles.
         </description>
-				<lien>http://www.spip-contrib.net/?article1550</lien> <!-- URI de documentation -->
-        <prefix>
-          csv2spip
-        </prefix>
-				<icon>
-				  img_pack/csv2spip-24.png
-				</icon>
+		<lien>http://www.spip-contrib.net/?article1550</lien>
+        <prefix>csv2spip</prefix>
+		<icon>img_pack/csv2spip-24.png</icon>
         <pipeline>
-        		<nom>ajouter_boutons</nom>
+        	<nom>ajouter_boutons</nom>
             <inclure>csv2spip_pipelines.php</inclure>
         </pipeline>
+		<bouton id='csv2spip' parent='bando_administration'>
+			<icone>img_pack/csv2spip-24.png</icone>
+			<titre>csvspip:module_titre</titre>
+		</bouton>        
 		<categorie>edition</categorie>
 		<necessite id="SPIP" version="[2.0.0;]" />
 		<install>inc/csv2spip_install.php</install>

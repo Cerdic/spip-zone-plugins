@@ -9,12 +9,21 @@
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function csv2spip_crypt_md5($input) {			
-    return md5($input);
+include_spip('auth/sha256.inc');
+
+// a partir de SPIP 2.1 il faut crypter les pass en sha256 a l place du md5 des version precedentes
+// commit de creation de la version 2.1: 14864 cf http://core.spip.org/projects/spip/repository/revisions/14864
+function csv2spip_crypt_pass($input) {			
+	global $spip_version_code;
+    if ($spip_version_code < 14864)
+		return md5($input);
+	else return sha256($input);
 }
 
 
 function exec_csv2spip() {
+	global $spip_version_code;
+
 // on assure la variable au cas où...
     $plugin_accesgroupes = 0;
 /*
@@ -436,7 +445,7 @@ function exec_csv2spip() {
         	$nb_user = $data423['nb_user'];	
         // 4.1 : l'utilisateur n'est pas inscrit dans la base spip_auteurs
         	if ($nb_user < 1) {
-        	    $pass = csv2spip_crypt_md5($pass);
+        	    $pass = csv2spip_crypt_pass($pass);
         		sql_query("INSERT INTO $Tauteurs (id_auteur, nom, email, login, pass, statut) VALUES ('', '$nom', '$mel', '$login', '$pass', '$statut')");
         		$id_spip = mysql_insert_id();
         		if (mysql_error() == '') {
@@ -466,7 +475,7 @@ function exec_csv2spip() {
         		if ($_POST['maj_gene'] == 1) {
         			  // 4.2.1 faire la maj des infos perso si nécessaire
         		    if ($_POST['maj_mdp'] == 1) {
-          		        $pass = csv2spip_crypt_md5($pass);
+          		        $pass = csv2spip_crypt_pass($pass);
           				sql_query("UPDATE $Tauteurs SET nom = '$nom', email = '$mel', statut = '$statut', pass = '$pass', alea_actuel = '' WHERE id_auteur = $id_spip LIMIT 1");
           				if (mysql_error() == '') {
             			    $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_maj[] = $login : $TresV_maj[] = $login) : $TresA_maj[] = $login;
