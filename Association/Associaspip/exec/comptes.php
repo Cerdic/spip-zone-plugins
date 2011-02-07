@@ -30,7 +30,7 @@ function exec_comptes() {
 		else { $imputation= "%"; }
 		$max = intval(_request('max'));
 		if (!$max) $max = 30;
-		exec_comptes_args($annee, $vu, $imputation, _request('debut'));
+		exec_comptes_args($annee, $vu, $imputation, _request('debut'), $max);
 	}
 }
 
