@@ -1,0 +1,23 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+
+/*# AVOID COLLISIONS #*/
+;if(window.jQuery) (function($){
+/*# AVOID COLLISIONS #*/
+
+$(document).ready(function(){ 
+
+	// ici lire la variable actunite/bloc pour remplacer le nom de la div
+	// lire aussi la variable actunite/insertion (pour remplacer after|before ou append) 
+	// voir en ligne : http://docs.jquery.com/Manipulation
+
+	//alert('fichier dayfill.js en cours de dev');
+
+	$('div#page').after('#INCLURE{fond=prive/saisie}');
+	// $('div#page').load('spip.php?page=prive/saisie');
+	
+});
+
+
+/*# AVOID COLLISIONS #*/
+})(jQuery);
+/*# AVOID COLLISIONS #*/

@@ -1,0 +1,35 @@
+<plugin>
+	<nom><multi>[en]DayFill - Time tracer[fr]D&eacute;file - Gestionnaire de temps</multi></nom>
+	<icon>images/dayfill-32.png</icon>
+	<version>0.0.0</version>
+	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
+	<licence>GPL</licence>
+	<etat>dev</etat>
+	<description>Permet de noter au fil de l'eau les actions effectu&eacute; auy cours d'une journ&eacute;e. Ce plugin n&eacute;cessite SPIPMINE pour les tables des actions et des projets.
+	</description>
+	<lien></lien>
+	<prefix>dayfill</prefix>
+	
+	<options>dayfill_options.php</options>
+	
+	<onglet id="dayfill" parent="configuration">
+		<icone>images/dayfill-24.png</icone>
+		<titre>dayfill:titre_page_dayfill</titre>
+		<url>dayfill</url>
+	</onglet>
+
+	<bouton id="dayfill21" parent="bando_configuration">
+		<icone>images/dayfill-16.png</icone>
+		<titre>dayfill:titre_page_dayfill</titre>
+		<url>dayfill</url>
+	</bouton>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>dayfill_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<utilise id="spimine" version="[1.0;]" />
+
+</plugin>

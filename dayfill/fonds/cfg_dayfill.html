@@ -1,0 +1,37 @@
+<!-- descriptif=
+<h4>
+Ici vous pouvez configurer le plugin DayFill.
+</h4>
+
+-->
+
+<!-- titre=DayFill - Time tracker-->
+<!-- icone=images/dayfill-22.png-->
+<!-- nom=dayfill-->
+
+#CACHE{0}
+
+<form method="post" action="#SELF">
+
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+
+<fieldset><legend><:dayfill:theme:></legend>
+	
+	[<p><:dayfill:theme_actuel:> : (#ENV{theme}|sinon{'dist'})</p>]
+
+	<label><:dayfill:selectionnez_theme:>
+	<select name="theme">
+		<option value="dist" [(#ENV{theme}=={'dist'}?{'checked="checked"',''})]>dist</option>
+		<option value="cym" [(#ENV{theme}=={'cym'}?{'selected="selected"',''})]>cym</option>
+	</select></label>
+	
+</fieldset>
+
+<div>
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+	<input type="reset" value="<:reset:>" class="fondo" />
+	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+
+#CFG_ARBO{dayfill}

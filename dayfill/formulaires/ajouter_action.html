@@ -1,0 +1,84 @@
+#CACHE{0}
+<!-- formulaire ajouter_action.html -->
+[(#REM)
+
+	Permet d'ajouter une ligne "action" au tableau "tableau_actions"
+
+	20/04/2009 : changement initiales en id_user
+	29/04/2009 : fin travaux
+]
+
+[<script type="text/javascript">alert('(#ENV*{message_erreur})')</script>]
+[<script type="text/javascript">alert('(#ENV*{message_ok})')</script>
+
+<script type="text/javascript" language="javascript">
+	document.forms.formulaire_ajouter_action.reset();
+</script>
+]
+[(#EDITABLE|oui)]
+<a name="ajouter_action"></a>
+<form class="saisie_action" name="formulaire_ajouter_ligne_action" id="formulaire_ajouter_ligne_action" action="#SELF#ajouter_action" method="post">
+
+	#ACTION_FORMULAIRE{#SELF}
+
+	<input type="hidden" name="id_projet" value="[(#EVAL{_request('id_projet')})]" />
+
+	<table class="tableau_actions" summary="<:spipmine:tableau_ajouter_actions:>">
+	
+	<tr>
+		<td class="date_action"><input type="text" name="date_projet" value="[(#DATE|affdate{'d/m/Y'})]"/></td>
+		<td class="heure_debut"><input type="text" name="heure_debut" value="#ENV{heure_debut}"/></td>
+		<td class="heure_fin"><input type="text" name="heure_fin" value="#ENV{heure_fin}"/></td>
+		<td class="type_action">
+			<select name="id_type_action" class="type_action" >
+				<option value="0">---</option>
+			<BOUCLE_presta(TYPES_ACTIONS){tout}{par num nom_type_action}>
+				[<option value="#ID_TYPE_ACTION">(#NOM_TYPE_ACTION|supprimer_numero)</option>]
+			</BOUCLE_presta>
+			</select>
+		</td>
+		<td class="action"><textarea class="action" name="action_projet" rows="1" cols="30">#ENV{action_projet}</textarea></td>
+		<td class="initiales">
+		
+			#SET{user,#SESSION{login}}
+			<BOUCLE_p(USERS){login=#GET{user}}>
+				#SET{id,#ID_USER}
+			</BOUCLE_p>
+			
+			<select name="id_user" class="initiales" onchange="check_input(this.value)" >
+				<option value="">---</option>
+				<BOUCLE_auteur(USERS){statut = 'actif'}{par id_user}>
+					[<option value="#ID_USER" [(#GET{id}|=={#ID_USER}|?{'selected="selected"'})]>(#INITIALES)</option>]
+				</BOUCLE_auteur>
+			</select>
+		</td>
+		<td class="heures_passees"><input class="heures_passees" type="text" name="nb_heures_passees" value="#ENV{nb_heures_passees}" onfocus="calcule_temps('formulaire_ajouter_ligne_action')" /></td>
+		<td class="heures_facturees"><input class="heures_facturees" type="text" value="#ENV{nb_heures_facturees}" name="nb_heures_facturees" /></td>
+		<td class="facture">
+			
+			[(#REM) Ici on devra afficher seulement la liste des factures sur lesquelles il reste des heures ]
+			<BOUCLE_j(PROJETS){id_projet=#EVAL{_request('id_projet')}}>
+			<BOUCLE_c(CLIENTS){id_client}>
+			<B_f>
+			<select name="id_facture">
+				<option value="">---</option>
+				<BOUCLE_f(FACTURES){id_client}{!par date_facture}{id_type_document=1}{date_facture >= '2008-07-01'}>
+				<option value="#ID_FACTURE">#NUM_FACTURE</option>
+				</BOUCLE_f>
+			</select>
+			</B_f>			
+			<span class="alerte">Attention, aucune facture imputable !</span>
+			<//B_f>
+			</BOUCLE_c>
+			</BOUCLE_j>
+			
+		</td>
+		<td><input type="image" src="#CHEMIN{images/gif/bouton_ok.gif}" name="submit" alt="Go" onclick="document.form.submit();" /></td>
+	</tr>
+	
+	</table>
+	
+	<p class="nota">* Les heures de d&eacute;but et de fin doivent &ecirc;tre saisies sous la forme hh:mm</p>
+
+</form>
+
