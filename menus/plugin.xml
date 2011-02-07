@@ -47,7 +47,7 @@
 	</pipeline>
 	<pipeline>
 		<nom>menus_lister_disponibles</nom>
-		<inclure>menus_piplines.php</inclure>
+		<inclure>menus_pipelines.php</inclure>
 	</pipeline>
 	
 	<bouton id='menus_tous' parent="naviguer">
