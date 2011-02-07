@@ -11,6 +11,7 @@ function cvt_upload_formulaire_charger($flux){
 		foreach ($contexte['_champs_fichiers'] as $champ){
 			$contexte['_hidden'] .= '<input type="hidden" name="_champs_fichiers[]" value="'.$champ.'" />';
 		}
+		// S'il n'y a pas déjà une action de configurée, on en force une pour avoir un hash unique par visiteur
 		if (!$contexte['_action'])
 			$contexte['_action'] = array('cvt_upload');
 	}
@@ -47,13 +48,13 @@ function cvt_upload_formulaire_verifier($flux){
 		if ($erreurs)
 			$erreurs = array_merge($erreurs, $infos_fichiers);
 	}
-	var_dump($erreurs);
+	//var_dump($erreurs);
 	
 	return $flux;
 }
 
-function cvt_upload_formulaire_traiter($retours){
-	// On supprime tous les fichiers maintenant de les traitements sont faits
+function cvt_upload_formulaire_traiter($flux){
+	// On supprime tous les fichiers maintenant que les traitements sont faits
 	if ($champs_fichiers = _request('_champs_fichiers') and is_array($champs_fichiers)){
 		$repertoire = _DIR_TMP.'cvt_upload/'._request('hash').'/';
 		if (is_dir($repertoire)){
@@ -71,7 +72,7 @@ function cvt_upload_formulaire_traiter($retours){
 		}
 	}
 	
-	return $retours;
+	return $flux;
 }
 
 function cvt_upload_editer_contenu_cvt_upload($flux){
