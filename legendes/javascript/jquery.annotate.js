@@ -77,6 +77,12 @@
 			});
 		}
 
+		if(this.listtarget){
+			if(($(this.listtarget).html().length == 0) && ($(this.listtarget).not(':hidden'))){
+				$(this.listtarget).addClass('annotate-hide').hide();
+			}
+		}
+		
 		// Hide the original
 		this.hide();
 
@@ -133,6 +139,9 @@
 			$.get(image.listUrl, function(data) {
 				image.listtarget.html(data);
 			});
+			if($(image.listtarget).hasClass('annotate-hide')){
+				$(image.listtarget).removeClass('annotate-hide').slideDown();
+			}
 		}
 	}
 	
