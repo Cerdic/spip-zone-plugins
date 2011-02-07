@@ -11,6 +11,8 @@
 				]
 				[
 				(#ENV*{vignette}|image_reduire{#CONFIG{taille_preview}})
+				<div class="infos"><span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})] -
+				][(#TAILLE|taille_en_octets|texte_backend)]</span></div>
 				][(#ENV*{vignette}|non)<:medias:aucune_vignette:>]
 				<p class='actions'>
 				[(#ENV{id_vignette}|oui)  <input type='submit' class='submit' name='supprimer' value='<:medias:bouton_supprimer|attribut_html:>' />]
