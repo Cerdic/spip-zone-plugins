@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.',
 	'description_menu_rubriques' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 	'description_menu_secteurlangue' => 'Cette entr&eacute;e est sp&eacute;cifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant &agrave; la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
+	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez',
 
 	// E
 	'editer_menus_editer' => 'Modifier ce menu',
@@ -29,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Aucun',
 	'entree_bloc' => 'Bloc Zpip',
 	'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
+	'entree_contenu' => 'Contenu',
 	'entree_css' => 'Classes CSS de l\'entr&eacute;e (du conteneur)',
 	'entree_css_lien' => 'Classes CSS du lien',
 	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet',
@@ -121,7 +123,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip',
 	'nom_menu_rubriques' => 'Liste ou arborescence de rubriques',
 	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques',
-	'nom_menu_secteurlangue' => 'Secteurs de langue'
+	'nom_menu_secteurlangue' => 'Secteurs de langue',
+	'nom_menu_texte_libre' => 'Texte libre'
 );
 
 ?>
