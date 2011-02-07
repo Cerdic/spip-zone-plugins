@@ -14,7 +14,7 @@
 		if ($spip_version_code < 14864) {
 			if ($GLOBALS['connect_statut'] == "0minirezo") {
 			  // on voit le bouton comme  sous-menu de "auteurs"
-				$boutons_admin['auteur']->sousmenu['csv2spip']= new Bouton("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.png", _T('csvspip:module_titre') );
+				$boutons_admin['auteurs']->sousmenu['csv2spip']= new Bouton("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.png", _T('csvspip:module_titre') );
 			}
 		}
 
