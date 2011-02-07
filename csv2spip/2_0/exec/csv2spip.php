@@ -114,7 +114,7 @@ function exec_csv2spip() {
         //				echo "<h2>"._T('csvspip:titre_etape2')."</h2>";
         //				spip_query("DROP TABLE IF EXISTS $tmp_csv2spip");
         @sql_query("TRUNCATE TABLE spip_tmp_csv2spip");
-	$err = csv2spip_insert(file($nom_fich));
+	$err = csv2spip_insert(csv2spip_normalise($nom_fich));
 	if ($err)
 	  echo "<br><span class=\"Cerreur\">", join("<br />", $err), "</span>";
 	else echo "<br>"._T('csvspip:ok_etape2.2')."<br />";
