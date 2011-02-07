@@ -19,6 +19,8 @@
 	// auquel cas on lui sert la version bien francaise
 	// sinon bye bye le referencement !
 
+	// faire plutôt un test sur le useragent que sur une eventuelle ip ou Hostname
+
 		function dcpoison_IsGooglebot() {
 			$googleip = $_SERVER ['REMOTE_ADDR'];
 			// souvent un nom de serveur du style crawl-66-249-66-1.googlebot.com
@@ -29,6 +31,24 @@
 				return true; // ce n'est pas googlebot
 			}
 		}
+
+
+// Quelques pistes :
+
+
+// $ua = $_SERVER['HTTP_USER_AGENT'];
+// $uaGoogle="Googlebot/2.1 (+http://www.google.com/bot.html)";
+//
+// if($ua==$uaGoogle){
+//  print("Salut Google Bot");
+// }else{
+//  print("Salut Visiteur");
+// }
+
+
+// liste des UA
+
+// http://www.useragentstring.com/pages/useragentstring.php
 
 ?>
 

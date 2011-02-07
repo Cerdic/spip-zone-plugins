@@ -12,12 +12,11 @@
 	
 	// Remplacement via affichage_final de tous les "a" et les "i"
 	// par leurs homographes dans l'alphabet cyrillique
-	// si et seulement si on est sur que ce n'est pas Googlebot qui demande la page
-	// principe a etendre pour les autres bot (cf todo.txt)
+	// si et seulement si on est sur que ce n'est pas un robot d'indexation qui demande la page
 	
 		function dcpoison_affichage_final( $texte ) {
 			global $notice;    
-				if( !dcpoison_IsGooglebot() ) {
+				if( !_IS_BOT ) {
 				        $texte = preg_replace("'(?!<.*?)i(?![^<>]*?>)'s", "і", $texte); 
 					$texte = preg_replace("'(?!<.*?)a(?![^<>]*?>)'s", "а", $texte); 
         				$texte = str_replace(array('&lаquo;', '&rаquo;', 'аre_PаyPаl_LogіnPleаse'), array('&laquo;', '&raquo;', 'Are_PayPal_LoginPlease'), $texte);

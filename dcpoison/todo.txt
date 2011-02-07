@@ -12,26 +12,7 @@ BUGS :
 
 
 
-TODO :
 
-dcpoison_options.php :
+NOTES :
 
-	1. a terme, voir s'il est possible d'utiliser une base (même externe) des IPs des differents DataCenters de Google au cas ou ce petit malin de bot s'amuserait a utiliser autre chose que ".googlebot.com" comme nom
-
-	2. voir egalement comment integrer les autres moteurs de recherches sur la base du ...
-
-	/*
-	 * detecteur de robot d'indexation
-	 * utilise en divers endroits, centralise ici 
-	 */
-	if (!defined('_IS_BOT'))
-					define('_IS_BOT',
-									isset($_SERVER['HTTP_USER_AGENT'])
-									AND preg_match(',bot|slurp|crawler|spider|webvac|yandex,i',
-													$_SERVER['HTTP_USER_AGENT'])
-					);
-					
-
-	propose dans ecrire/inc-version.php
-
-	J'ai pas trop vu comment je pouvais l'exploiter celui là...
+- ajout de _IS_BOT pour etendre le traitement à l'ensemble des moteurs de recherche (merci _fil_)
