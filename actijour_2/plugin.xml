@@ -8,13 +8,13 @@
 	</nom>
 	<icon>img_pack/activ_jour.gif</icon>
 	<auteur>scoty@koakidi.com ordilibre@yahoo.fr</auteur>
-	<version>2.0</version>
+	<version>2.1</version>
 	<etat>dev</etat>
 	<description>
 		<multi>
-		[fr]Activit&eacute; du jour et de la veille : Visites, petitions, referers ... (spip 2.0)
-		[es]Actividad del d&iacute;a y de la v&iacute;spera: visitas, peticiones, referers ... (spip 2.0)
-		[en]Daily activity of today and the eve: visits, petitions, referers... (spip 2.0)
+		[fr]Activit&eacute; du jour et de la veille : Visites, petitions, referers ... (spip 2.x)
+		[es]Actividad del d&iacute;a y de la v&iacute;spera: visitas, peticiones, referers ... (spip 2.x)
+		[en]Daily activity of today and the eve: visits, petitions, referers... (spip 2.x)
 		</multi>
 	</description>
 	<prefix>actijour</prefix>
