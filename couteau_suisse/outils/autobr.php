@@ -1,18 +1,23 @@
 <?php
 
-function autobr_pre_typo($flux) {
-	// Laisser les formulaires
-	if(strpos($flux, '<input')!==false) return $flux;
-	// Bug du filtre post_autobr sur les echappements :-(
-	$flux = str_replace('base64', '@ABR@', $flux);
-	if(!defined('_CS_AUTOBR_RACC'))
-		$flux = post_autobr($flux, '<br />');
-	else while ($fin = strpos($flux, '</alinea>')) {
-			$zone = substr($flux, 0, $fin);
-			if(($deb = strpos($zone, '<alinea>'))!==false)	$zone = substr($zone, $deb + 8);
-			$flux = substr($flux, 0, $deb) . post_autobr(trim($zone), '<br />') . substr($flux, $fin + strlen('</alinea>'));
-		}
-	return str_replace('@ABR@', 'base64', $flux);
+// pipeline pre_typo, appel si defined('_CS_AUTOBR_RACC')
+function autobr_alinea($flux) {
+	while ($fin = strpos($flux, '</alinea>')) {
+		$zone = substr($flux, 0, $fin);
+		if(($deb = strpos($zone, '<alinea>'))!==false)	$zone = substr($zone, $deb + 8);
+		$flux = substr($flux, 0, $deb) 
+			// protection des echappement eventuels
+			. str_replace('@ABR@', 'base64', post_autobr(trim(str_replace('base64', '@ABR@', $zone)), '<br />')) 
+			. substr($flux, $fin + strlen('</alinea>'));
+	}
+	return $flux;
+}
+
+// traitement #TEXTE/article
+function autobr_pre_propre($flux) {
+	// post_autobr() est une fonction de traitement qui possede son propre systeme d'echappement
+	if(!defined('_CS_AUTOBR_RACC'))	$flux = post_autobr($flux, '<br />');
+	return $flux;
 }
 
 if(defined('_CS_AUTOBR_RACC')) {
@@ -21,6 +26,10 @@ if(defined('_CS_AUTOBR_RACC')) {
 	function autobr_raccourcis() {
 		return _T('couteauprive:autobr_racc');
 	}
+}
+
+function autobr_nettoyer_raccourcis($texte) {
+	return str_replace(array('<alinea>','</alinea>'), '', $texte);
 }
 
 function autobr_PP_icones($flux) {

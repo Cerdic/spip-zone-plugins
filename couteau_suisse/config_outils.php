@@ -38,10 +38,14 @@ add_outil( array(
 	'id' => 'autobr',
 	'code:options' => '%%alinea%%',
 	'categorie' => 'typo-corr',
-	// 'traitement:TEXTE/articles:pre_propre' => 'autobr_pre_typo',
-	'pipeline:pre_typo' => 'autobr_pre_typo',
+	'traitement:TEXTE/articles:pre_propre' => 'autobr_pre_propre',
+	'pipelinecode:pre_typo' => 'if(!%%alinea%%) { $flux = autobr_alinea($flux); }',
+	'pipeline:nettoyer_raccourcis_typo' => 'autobr_nettoyer_raccourcis',
 	'pipeline:porte_plume_cs_pre_charger' => 'autobr_CS_pre_charger',
 	'pipeline:porte_plume_lien_classe_vers_icone' => 'autobr_PP_icones',
+	'code:fonctions' => "// pour le traitement TEXTE/articles et la balise #INTRODUCTION
+include_spip('outils/autobr');
+\$GLOBALS['cs_introduire'][] = 'autobr_nettoyer_raccourcis';",
 ));
 
 // ici on a besoin d'une case input. La variable est : dossier_squelettes
