@@ -23,4 +23,5 @@ _ Compatible 1.9 et 2.0</description>
 	<action>inclurecss</action>
 	<inclure>couleurs_spip.php</inclure>
 </pipeline>
+<categorie>redaction</categorie>
 </plugin>
