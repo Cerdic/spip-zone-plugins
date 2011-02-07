@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('auth/sha256.inc');
+include_spip('inc/csv2spip_import');
 
 // a partir de SPIP 2.1 il faut crypter les pass en sha256 a l place du md5 des version precedentes
 // commit de creation de la version 2.1: 14864 cf http://core.spip.org/projects/spip/repository/revisions/14864
@@ -47,6 +48,11 @@ function exec_csv2spip() {
     }
     
     include_spip('base/abstract_sql');
+# 
+#	include_spip('inc/csv2spip_tables');
+#	include_spip('base/create');
+#	include_spip('base/abstract_sql');
+#	creer_base();
     
      echo "\r\n<style type=\"text/css\">				 
     	\r\n.Cerreur { background-color: #f33; display: block; padding: 10px; }
@@ -107,85 +113,14 @@ function exec_csv2spip() {
         echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape2'));
         //				echo "<h2>"._T('csvspip:titre_etape2')."</h2>";
         //				spip_query("DROP TABLE IF EXISTS $tmp_csv2spip");
-        if (!sql_query("TRUNCATE TABLE spip_tmp_csv2spip")) {  
-        	 echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape2.1')."</span>";
-        	 echo fin_cadre_couleur(true);
-           	 exit();
-        }
-        else {
-            echo "<br>"._T('csvspip:ok_etape2.1')."<br>";
-        }
-        
-        $ok = 0;
-        $Tlignes = file($nom_fich);
-        //print '<br>Tlignes départ = ';
-        //print_r($Tlignes);				
-        $Terr_sql_temp = array();
-        $ligne1 = 0;
-        foreach ($Tlignes as $l) {
-            $l = str_replace('"', '', $l);
-            $Tuser_ec = explode(';', $l);
-          // traiter la première ligne pour récupérer les noms des champs dc la position des colonnes
-            if ($ligne1 == 0) {
-                $Tchamps = array();
-                $Tref_champs = array('login', 'prenom', 'pass', 'groupe', 'ss_groupe', 'pseudo_spip', 'email');
-                foreach ($Tuser_ec as $champ_ec) {
-                    $champ_ec = strtolower(trim($champ_ec));
-                    if (in_array($champ_ec, $Tref_champs)) {
-                        $Tchamps[] = $champ_ec;
-                    }
-                }
-                        //echo '<br><br>$Tchamps = ';
-                        //print_r($Tchamps);					
-                if (count($Tchamps) < 7) {
-                    $Tvides = array();
-                    foreach ($Tref_champs as $cref) {
-                        if (!in_array($cref, $Tchamps)) {
-                            $Tvides[] = $cref;
-                        }
-                    }  
-                    echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape2.1');
-                    foreach ($Tvides as $cec) {
-                        echo " $cec ";
-                    } 
-                    echo "</span>";
-                    exit;
-                }
-            }								 
-            for ($i = 0; $i < 7; $i ++) {
-                $var = $Tchamps[$i].'_ec';
-                $$var = trim($Tuser_ec[$i]);
-                 //echo "<br>$$Tchamps[$i].'_ec' = $Tuser_ec[$i]";
-            } 
-            if ($pass_ec == '') {
-                $pass_ec = $login_ec;
-            }
-          // ne pas intégrer la première ligne comme un utilisateur
-            if ($ligne1 == 0) {
-                $ligne1 = 1;
-            }
-            else {
-              // passage des lignes du fichier dans la table $tmp_csv2spip
-                sql_query("INSERT INTO spip_tmp_csv2spip (id, nom, prenom, groupe, ss_groupe, mdp, mel, pseudo_spip) 
-                    		VALUES ('', '$login_ec', '$prenom_ec', '$groupe_ec', '$ss_groupe_ec', '$pass_ec', '$email_ec', '$pseudo_spip_ec')");
-            }
-            if (mysql_error() != '') {
-                $Terr_sql_temp[] = array('nom' => $nom_ec, 'erreur' => mysql_error());
-            }
-        }
-        if (count($Terr_sql_tmp) > 0) { 
-        	echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape2.2');
-        	foreach ($Terr_sql_temp as $e) {
-        	    echo "<br>"._T('csvspip:utilisateur').$e['nom']._T('csvspip:erreur').$e['erreur'];
-            }  
-            echo "</span>";
-            $err_total ++;
-        }			
-        else {
-            echo "<br>"._T('csvspip:ok_etape2.2')."<br>";
-        }
+        @sql_query("TRUNCATE TABLE spip_tmp_csv2spip");
+	$err = csv2spip_insert(file($nom_fich));
+	if ($err)
+	  echo "<br><span class=\"Cerreur\">", join("<br />", $err), "</span>";
+	else echo "<br>"._T('csvspip:ok_etape2.2')."<br />";
         echo fin_cadre_couleur(true);
-        
+        if ($err) exit;
+
         // étape 3 : si nécessaire création des rubriques pour les admins restreints et des groupes pour accesgroupes
         $_POST['groupe_admins'] != '' ? $groupe_admins = strtolower($_POST['groupe_admins']) : $groupe_admins = '-1';
         $_POST['groupe_visits'] != '' ? $groupe_visits = strtolower($_POST['groupe_visits']) : $groupe_visits = '-1';
@@ -200,9 +135,9 @@ function exec_csv2spip() {
         	$Tch_rub = explode(',', $_POST['rub_parent']);
         	$rubrique_parent = $Tch_rub[0];
         	$secteur = $Tch_rub[1];
-        	$sql8 = sql_query("SELECT ss_groupe FROM spip_tmp_csv2spip WHERE LOWER(groupe) = '$groupe_admins' AND ss_groupe != '' GROUP BY ss_groupe");
-        	if (isset($sql8)) {
-                while ($data8 = mysql_fetch_array($sql8)) {
+        	$sql8 = sql_select('ss_groupe', 'spip_tmp_csv2spip', "LOWER(groupe) = '$groupe_admins' AND ss_groupe != ''", "ss_groupe");
+		if(true)
+                while ($data8 = sql_fetch($sql8)) {
         		    $rubrique_ec = $data8['ss_groupe']; 
             		$sql7 = sql_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_ec' LIMIT 1");
             		$data7 = mysql_fetch_array($sql7);
@@ -226,11 +161,11 @@ function exec_csv2spip() {
         		}
         		echo "</span>";
                 $err_total ++;
-        	}			
+        	}		
         	else {
         	    echo "<br>"._T('csvspip:ok_etape3.1_debut').count($Tres_rub)._T('csvspip:ok_etape3.1_fin')."<br>";
         	}
-        }
+        
         // gestion de la rubrique par défaut des admins restreints
         if ($groupe_admins != '-1') {
           // faut-il créer la rubrique par défaut?
