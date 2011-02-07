@@ -14,11 +14,7 @@
 
 	<icon>retoursimple.png</icon>
 
-    <pipeline>
-
-       <nom>pre_propre</nom>
-       <inclure>retoursimple.php</inclure>
-   </pipeline>
+    <options>retoursimple.php</options>
 
 
 
