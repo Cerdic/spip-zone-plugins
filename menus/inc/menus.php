@@ -100,7 +100,8 @@ function menus_charger_infos($type, $info=""){
 						list($balise, $attributs) = spip_xml_decompose_tag($parametre);
 						$entree['parametres'][$attributs['nom']] = array(
 							'label' => $attributs['label'] ? _T($attributs['label']) : $attributs['nom'],
-							'obligatoire' => $attributs['obligatoire'] == 'oui' ? true : false
+							'obligatoire' => $attributs['obligatoire'] == 'oui' ? true : false,
+							'class' => $attributs['class'] ? $attributs['class'] : ''
 						);
 					}
 				}
