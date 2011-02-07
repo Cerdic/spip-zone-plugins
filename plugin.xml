@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Duplicate Content Poison pour SPIP</nom>
+	<auteur>Etienne BRACKERS (http://www.loiseau2nuit.net/) d&apos;apr&egrave;s un plugin wordpress de 512Banque (http://www.deliciouscadaver.com/)</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.1</version>
+	<description>
+	<multi>
+	[fr]Duplicate Content Poison remplace certaines lettres dans vos contenus par leurs &quot;homographes&quot; &eacute;quivalents dans l'alphabet cyrillique, afin de pi&eacute;ger les voleurs de contenus et d'&eacute;viter les p&eacute;nalit&eacute;s de r&eacute;f&eacute;rencement li&eacute;es aux contenus dupliqu&eacute; (Duplicate Content).
+	[en]Duplicate Content Poison replaces some letters in your texts with their visual equivalents, picked from the Cyrillic alphabet, in order to trap content stealers while avoiding SEO bad issues due to duplicate content.
+	</multi>
+	</description>
+	<icon>dcpoison.jpg</icon>
+	<lien>http://www.deliciouscadaver.com/duplicate-content-poison-tuez-definitivement-tous-les-copieurs.html</lien>
+	<etat>dev</etat>
+	<prefix>dcpoison</prefix>
+	<options>dcpoison_options.php</options>
+  <pipeline>
+		<nom>affichage_final</nom>
+		<inclure>dcpoison_pipelines.php</inclure>
+  </pipeline>
+</plugin>
