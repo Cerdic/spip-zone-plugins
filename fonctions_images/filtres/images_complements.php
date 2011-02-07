@@ -1137,4 +1137,93 @@ function image_monochrome($img,$largeur=20,$seuil=13){
 	else 
 		return true;
 }
+
+// une fonction importee du plugin fotoremix (qui d'ailleurs devrait très prochainement faire son
+// entree sur la spip-zone, je l'espere) qui permettait a la base de "decorer" une image avec une
+// autre image. J'ai (Yohann Prigent) modifie la fonction pour que l'image s'incluse entierement dans l'image originale
+// (avant, il y avait un decalage fait expres)
+// http://www.fotoremix.net/
+function image_merge($im, $masque, $v='left', $h='top')
+	{
+	// SPIP
+	$image = image_valeurs_trans($im, "merge-$masque-$v-$h");
+	
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	$creer = $image["creer"];
+	
+	if ($creer)
+		{
+		// init
+		$enfoncement = 2/3;
+		
+		// on definit l'image de masque
+		$im_masque = @imagecreatefrompng($masque);
+		//imagealphablending($im_masque, false);
+		//imagesavealpha($im_masque, true);
+		$x_masque = 0;
+		$y_masque = 0;
+		
+		// on definit les images sources et destination
+		// l'image de destination est plus grande de la moitie du masque
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = @imagecreatetruecolor($x_i + $x_masque, $y_i + $y_masque);
+
+		// reglage des options de transparence
+		imagealphablending($im_, false);
+		imagesavealpha($im_, true);
+		
+		// on remplit l'image avec la couleur transparente
+		imagefilledrectangle($im_, 0, 0, $x_i + $x_masque, $y_i + $y_masque, imagecolorallocatealpha($im_, 255, 255, 255, 127));
+
+		// estimation du decalage en fonction de $h et $v
+		if ($v == 'left')
+			{
+			$dest_x = $x_masque;
+			$dest_x_masque = 0;
+			}
+		else
+			{
+			$dest_x = 0;
+			$dest_x_masque = imagesx($im_) - imagesx($im_masque);
+			}
+		
+		if ($h == 'top')
+			{
+			$dest_y = $y_masque;
+			$dest_y_masque = 0;
+			}
+		else
+			{
+			$dest_y = 0;
+			$dest_y_masque = imagesy($im_) - imagesy($im_masque);
+			}
+		
+		// on copie l'image source
+		imagecopymerge($im_, $im, 0, 0, 0, 0, $x_i, $y_i, 100);
+		
+		// on copie le masque
+		imagealphablending($im_, true);
+		imagecopy($im_, $im_masque, $dest_x_masque, $dest_y_masque, 0, 0, imagesx($im_masque), imagesy($im_masque));
+		
+		// liberation memoire
+		imagedestroy($im_masque);
+		
+		// SPIP
+		$image["fonction_image"]($im_, "$dest");	
+		}
+
+	// SPIP
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	
+	return "<img src='$dest'$tags />";
+	}
 ?>
