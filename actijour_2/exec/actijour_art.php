@@ -50,16 +50,16 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 
 
-debut_gauche();
+echo debut_gauche("", true);
 	echo entete_page();
 
 	echo signature_plugin();
 
 
-creer_colonne_droite();
+echo creer_colonne_droite("", true);
 
 
-debut_droite();
+echo debut_droite("", true);
 
 /*---------------------------------------------------------------------------*\
 Onglets pages sup.

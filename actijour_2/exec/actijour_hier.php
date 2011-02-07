@@ -84,7 +84,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 }
 
 
-debut_gauche();
+echo debut_gauche("", true);
 	echo entete_page();
 	
 /*---------------------------------------------------------------------------*\
@@ -96,7 +96,7 @@ selecteur date d affichage
 
 
 
-creer_colonne_droite();
+echo creer_colonne_droite("", true);
 echo "<br /><br /><br />";
 
 /*---------------------------------------------------------------------------*\

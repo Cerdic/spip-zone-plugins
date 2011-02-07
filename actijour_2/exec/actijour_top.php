@@ -48,15 +48,15 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 }
 
 
-debut_gauche();
+echo debut_gauche("", true);
 	echo entete_page();
 
 /*---------------------------------------------------------------------------*\
 info colonnes tableaux
 \*---------------------------------------------------------------------------*/
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo _T('acjr:info_colonnes_topten')."\n";
-	fin_boite_info();
+	echo fin_boite_info(true);
 
 /*---------------------------------------------------------------------------*\
 scoty signe son mefait

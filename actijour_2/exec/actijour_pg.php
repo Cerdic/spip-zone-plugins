@@ -109,7 +109,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 
 
-debut_gauche();
+echo debut_gauche("", true);
 	echo entete_page();
 
 /*---------------------------------------------------------------------------*\
@@ -128,20 +128,20 @@ Elements de stats generales : visites, pages, global, moyenne gen.
 /*---------------------------------------------------------------------------*\
 ouvrir popup stats-spip d'un article choisi ( par son num spip )
 \*---------------------------------------------------------------------------*/
-	debut_cadre_couleur(_DIR_IMG_ACJR."activ_jour.gif");
+	echo debut_cadre_couleur(_DIR_IMG_ACJR."activ_jour.gif", true);
 	echo "\n<span class='verdana3 bold'>"._T('acjr:afficher_stats_art')."</span>\n"
 	. "<form action='".generer_url_ecrire("actijour_graph")."' method='post' id='graph' onsubmit=\"actijourpop('graph');\">\n"
 	. _T('acjr:numero_')
 	. "<input type='text' name='id_article' size='4' maxlength='10' class='fondl'>&nbsp;&nbsp;\n"
 	. "<input type='submit' value='"._T('acjr:voir')."' class='fondo'>\n"
 	. "</form>\n";
-	fin_cadre_couleur();
+	echo fin_cadre_couleur(true);
 
  
 /*---------------------------------------------------------------------------*\
 ouvrir popup du bargraph-spip : visites du trimestre 
 \*---------------------------------------------------------------------------*/
-	debut_cadre_couleur("");
+	echo debut_cadre_couleur("", true);
 	echo "<div class='bouton_droite'>".
 		"<a href=\"".generer_url_ecrire("actijour_graph")."\" target=\"graph_article\" 
 		onclick=\"javascript:window.open(this.href, 'graph_article', 
@@ -149,7 +149,7 @@ ouvrir popup du bargraph-spip : visites du trimestre
 		title=\""._T('acjr:bargraph_trimestre_popup')."\">\n".
 		http_img_pack('cal-mois.gif','ico','','')."\n</a>\n</div>\n";
 	echo "<span class='verdana3'>"._T('acjr:graph_trimestre')."</span>";
-	fin_cadre_couleur();
+	echo fin_cadre_couleur(true);
 
 
 
@@ -173,7 +173,7 @@ Modif 05/05/08 .. -> les connectes du jour !
 
 
 
-creer_colonne_droite();
+echo creer_colonne_droite("", true);
 echo "<p class='space_20'></p>";
 
 /*---------------------------------------------------------------------------*\
@@ -210,20 +210,20 @@ signatures petitions aujourd'hui
 atteindre page php info
 \*---------------------------------------------------------------------------*/
 	echo "<p class='space_10'></p>";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo "\n<a href='".generer_url_ecrire("info")."'>"._T('acjr:page_phpinfo')."</a>\n";
-	fin_boite_info();
+	echo fin_boite_info(true);
 
 
 /*---------------------------------------------------------------------------*\
 version de mysql du serveur :
 \*---------------------------------------------------------------------------*/
 	echo "<p class='space_10'></p>";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		$vers = mysql_query("select version()");
 		$rep = mysql_fetch_array($vers);
 		echo "MySQL v. ".$rep[0];
-	fin_boite_info();
+	echo fin_boite_info(true);
 
 
 /*---------------------------------------------------------------------------*\

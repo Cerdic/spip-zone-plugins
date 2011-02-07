@@ -128,7 +128,7 @@ else {
 # affichage bloc page ##########################################################
 # 
 echo "<div style='margin:5px;'>"; // (marge) ferme en fin de page !
-	gros_titre($titre);
+	echo gros_titre($titre, "", false);
 	
 	# acces page : admin principal
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {

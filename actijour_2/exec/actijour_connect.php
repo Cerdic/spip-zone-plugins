@@ -50,7 +50,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 
 
-debut_gauche();
+echo debut_gauche("", true);
 	echo entete_page();
 
 /*---------------------------------------------------------------------------*\
@@ -60,7 +60,7 @@ scoty signe son mefait
 
 
 
-creer_colonne_droite();
+echo creer_colonne_droite("", true);
 
 debut_droite();
 

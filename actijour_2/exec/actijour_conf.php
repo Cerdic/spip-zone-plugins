@@ -45,7 +45,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	exit;
 }
 
-debut_gauche();
+echo debut_gauche("", true);
 	echo entete_page();
 	echo signature_plugin();
 

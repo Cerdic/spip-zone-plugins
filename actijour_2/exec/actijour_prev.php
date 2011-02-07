@@ -50,13 +50,13 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 
 
-debut_gauche();
+echo debut_gauche("", true);
 	echo entete_page();
 	
 	echo "<p class='space_10'></p>";
-	debut_boite_info();
+	echo debut_boite_info(true);
 	echo _T('acjr:info_page_actijour_prev');
-	fin_boite_info();
+	echo fin_boite_info(true);
 
 /*---------------------------------------------------------------------------*\
 scoty signe son mefait
