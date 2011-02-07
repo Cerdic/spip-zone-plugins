@@ -20,4 +20,7 @@ function menus_pre_boucle($boucle){
 	return $boucle;
 }
 
+function menus_menus_lister_disponibles($flux){
+	return $flux;
+}
 ?>

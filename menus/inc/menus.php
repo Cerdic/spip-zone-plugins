@@ -46,6 +46,11 @@ function menus_lister_disponibles($informer=true){
 				}
 			}
 		}
+		$resultats[$informer] = pipeline('menus_lister_disponibles',array(
+			'args' => array(),
+			'data' => $resultats[$informer]
+			)
+		);
 	}
 	return $resultats[$informer];
 }

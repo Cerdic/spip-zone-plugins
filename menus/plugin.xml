@@ -1,16 +1,16 @@
 <plugin>
-	<nom><multi>[fr]Menus[de]Men&uuml;s[en]Menus[it]Men&ugrave;</multi></nom>
+	<nom><multi>[fr]Menus[de]Men&#252;s[en]Menus[it]Men&#249;</multi></nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8.7</version>
+	<version>0.8.8</version>
 	<version_base>0.5</version_base>
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Cr&eacute;ez enfin vos menus dans la partie priv&eacute;e !
-			[de]Men&uuml;s bequem im Redaktionssystem gestalten.
+			[fr]Cr&#233;ez vos menus personnalis&#233;s.
+			[de]Men&#252;s bequem im Redaktionssystem gestalten.
 			[en]Create your own custom menus.
-			[it]Crea i tuoi men&ugrave; in redazione!
+			[it]Crea i tuoi men&#249; in redazione.
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Menus</lien>
@@ -44,6 +44,10 @@
 	<pipeline>
 		<nom>ieconfig</nom>
 		<inclure>menus_ieconfig.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>menus_lister_disponibles</nom>
+		<inclure>menus_piplines.php</inclure>
 	</pipeline>
 	
 	<bouton id='menus_tous' parent="naviguer">
