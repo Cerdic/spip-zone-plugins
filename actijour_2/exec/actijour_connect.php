@@ -62,7 +62,7 @@ scoty signe son mefait
 
 echo creer_colonne_droite("", true);
 
-debut_droite();
+echo debut_droite("", true);
 
 
 /*---------------------------------------------------------------------------*\

@@ -66,7 +66,7 @@ scoty signe son mefait
 
 
 
-debut_droite();
+echo debut_droite("", true);
 
 /*---------------------------------------------------------------------------*\
 Onglets pages sup.

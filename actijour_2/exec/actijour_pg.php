@@ -232,7 +232,7 @@ scoty signe son mefait
 	echo signature_plugin();
 
 
-debut_droite();
+echo debut_droite("", true);
 
 
 /*---------------------------------------------------------------------------*\

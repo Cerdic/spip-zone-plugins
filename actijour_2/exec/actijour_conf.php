@@ -50,7 +50,7 @@ echo debut_gauche("", true);
 	echo signature_plugin();
 
 
-debut_droite();
+echo debut_droite("", true);
 
 /*---------------------------------------------------------------------------*\
 Onglets pages sup.
