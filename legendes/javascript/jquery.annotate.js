@@ -138,10 +138,12 @@
 		if(image.listUrl && image.listtarget){
 			$.get(image.listUrl, function(data) {
 				image.listtarget.html(data);
+				if($(image.listtarget).hasClass('annotate-hide')){
+					$(image.listtarget).removeClass('annotate-hide').slideDown();
+				}else if((data.length == 0) && ($(image.listtarget).not(':hidden'))){
+					$(image.listtarget).addClass('annotate-hide').slideUp();
+				}
 			});
-			if($(image.listtarget).hasClass('annotate-hide')){
-				$(image.listtarget).removeClass('annotate-hide').slideDown();
-			}
 		}
 	}
 	
