@@ -2,6 +2,7 @@
 @define('_decoupe_NB_CARACTERES', 60);
 
 define('_onglets_CONTENU', '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">');
+define('_onglets_CONTENU2', '</a></h2>'); // sans le </div> !
 define('_onglets_DEBUT', '<div class="onglets_bloc_initial">');
 define('_onglets_REGEXPR', ',<onglets([0-9]*)>(.*?)</onglets\1>,ms');
 
@@ -33,7 +34,7 @@ function onglets_callback($matches) {
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$t = array(trim(textebrut(nettoyer_raccourcis_typo(echappe_retour($t[0],'CS')))), cs_safebalises($t[1]));
-		if(strlen($t[0].$t[1])) $contenus[] = _onglets_CONTENU.$t[0]."</a></h2><div>\n\n".$t[1]."\n\n</div></div>";
+		if(strlen($t[0].$t[1])) $contenus[] = _onglets_CONTENU.$t[0]._onglets_CONTENU2."<div>\n\n".$t[1]."\n\n</div></div>";
 	}
 	return _onglets_DEBUT.join('', $contenus).'</div>'._onglets_FIN;
 }
@@ -205,9 +206,9 @@ function calcul_balise_onglet($arg, $type) {
 	if($type==2 && !isset($onglets_stade)) $type = 1;
 	switch($type) {
 		// #ONGLETS_DEBUT
-		case 1:$onglets_stade=1; return _onglets_DEBUT._onglets_CONTENU.$arg.'</a></h2>';
+		case 1:$onglets_stade=1; return _onglets_DEBUT._onglets_CONTENU.$arg._onglets_CONTENU2;
 		// #ONGLETS_TITRE
-		case 2:$onglets_stade=1; return '</div>'._onglets_CONTENU.$arg.'</a></h2>';
+		case 2:$onglets_stade=1; return '</div>'._onglets_CONTENU.$arg._onglets_CONTENU2;
 		// #ONGLETS_FIN
 		case 3:unset($onglets_stade); return '</div></div>';
 	}
