@@ -29,37 +29,13 @@ add_outil( array(
 add_outil( array(
 	'id' => 'autobr',
 	'categorie'	 => 'typo-corr',
-	'pipelinecode:pre_typo' => '
-// Bug du filtre post_autobr sur les echappements :-(
+	'pipelinecode:pre_typo' => '// Bug du filtre post_autobr sur les echappements :-(
 $flux=str_replace(\'="base64"\', \'@ABR@\', $flux);
 //$flux=cs_echappe_balises("","post_autobr",$flux);
 $flux=post_autobr($flux,\'<br />\');
 $flux=str_replace(\'@ABR@\', \'="base64"\', $flux);
 ',
 ));
-
-/*
-
-$x=" <html>A
-_ B !</html> 
-
-A
-B ";
-
-$y=post_autobr($x);
-$z=cs_echappe_balises("","post_autobr", $x);
-$x2=propre($x);
-$y2=propre(post_autobr($x));
-$z2=propre(cs_echappe_balises("","post_autobr", $x));
-
-echo "1. ", $x, "\n\n"
-	,"2. ", $y, "\n\n"
-	,"3. ", $z, "\n\n"
-	,"1. ", $x2, "\n\n"
-	,"2. ", $y2, "\n\n"
-	,"3. ", $z2, "\n\n"
-;//die();
-*/
 
 // ici on a besoin d'une case input. La variable est : dossier_squelettes
 // a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['dossier_squelettes']
