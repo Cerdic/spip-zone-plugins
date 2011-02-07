@@ -108,6 +108,7 @@ Compatibilit&#233; : SPIP v1.92x, v2.0.x et v2.1.x',
 	'pp_un_titre' => 'Un titre',
 	'pp_votre_texte' => 'Placez votre texte ici',
 	'pp_votre_titre' => 'Titre @nb@',
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',

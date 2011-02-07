@@ -26,15 +26,22 @@ add_outil( array(
 */
 
 
+add_variable( array(
+	'nom' => 'alinea',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'couteauprive:autobr_oui', 0 => 'couteauprive:autobr_non'),
+	'defaut' => 1,
+	'radio/ligne' => 1,
+	'code:!%s' => "define('_CS_AUTOBR_RACC', 1);",
+));
 add_outil( array(
 	'id' => 'autobr',
-	'categorie'	 => 'typo-corr',
-	'pipelinecode:pre_typo' => '// Bug du filtre post_autobr sur les echappements :-(
-$flux=str_replace(\'="base64"\', \'@ABR@\', $flux);
-//$flux=cs_echappe_balises("","post_autobr",$flux);
-$flux=post_autobr($flux,\'<br />\');
-$flux=str_replace(\'@ABR@\', \'="base64"\', $flux);
-',
+	'code:options' => '%%alinea%%',
+	'categorie' => 'typo-corr',
+	// 'traitement:TEXTE/articles:pre_propre' => 'autobr_pre_typo',
+	'pipeline:pre_typo' => 'autobr_pre_typo',
+	'pipeline:porte_plume_cs_pre_charger' => 'autobr_CS_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'autobr_PP_icones',
 ));
 
 // ici on a besoin d'une case input. La variable est : dossier_squelettes
