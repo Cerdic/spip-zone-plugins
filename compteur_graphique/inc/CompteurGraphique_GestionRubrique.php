@@ -44,7 +44,7 @@ if ( isset($_GET['id_rubrique']) AND is_numeric($_GET['id_rubrique']) ) {$id_rub
     if (isset($_POST['interdiction_compteur']) && ($_POST['interdiction_compteur']==2)) {
         $resultat_interdiction_compteur = sql_insertq($CG_nom_table,array("id_rubrique" => $id_rubrique,"statut" => 5));
     }
-    
+    if ($id_rubrique) {
     $retour .= debut_cadre_relief($icone, true, "", "Le compteur de visites d&eacute;fini pour les articles de cette rubrique");
     $resultat1 = sql_select("id_compteur,statut,longueur,habillage",$CG_nom_table,"id_rubrique = $id_rubrique");
     $resultat1_tableau = sql_fetch($resultat1);
@@ -205,6 +205,7 @@ if ( isset($_GET['id_rubrique']) AND is_numeric($_GET['id_rubrique']) ) {$id_rub
         }
     }
     $retour .= fin_cadre_relief(true);
+	}
 	return $retour;
 }
 ?>
