@@ -56,7 +56,6 @@
 			 });
 	});
 
-[(#GET{img_height}|>{0}|oui)height:#GET{img_height}px;]
 	</script>
 	[(#REM) diaporama documents images conteneur jquery cycle ]
 	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height})px;][background:(#GET{div_background})]})]
