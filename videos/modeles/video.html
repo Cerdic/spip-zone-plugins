@@ -4,6 +4,7 @@
 #SET{document,#ID|sinon{#ENV{document}}}
 #SET{largeur,#ENV{largeur,#CONFIG{videos/largeur,'560'}}}
 #SET{hauteur,#ENV{hauteur,#CONFIG{videos/hauteur,'315'}}}
+#SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{videos/titre_descriptif,'non'}}}
 
 [(#REM) "Extensions" gérées ou rajoutées par le plugin
 <!--
@@ -19,6 +20,8 @@
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
 
 	[(#SET{fichier,#FICHIER*})]
+   <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+   <dt class='spip_doc_titre'>
 
 [(#REM)
 /** Traiter DailyMotion **/
@@ -32,7 +35,7 @@
 	- enableApi			|| Values: 0 or 1. Default is 0. Enable the Javascript API by setting this parameter to 1. For more information and instructions on using the Javascript API, see the JavaScript API documentation.
 	- playerapiid		|| This value may be any alphanumeric string; it is used in conjunction with the JavaScript API. For details see the JavaScript API documentation.
 	- chromeless		|| Values: 0 or 1. Default is 0. Determines if the player should display controls or not during video playback.
-	- expendVideo		|| Values: 0 or 1. Default is 0. Determines if the vidoe should be expended to fit the whole player's size.
+	- expendVideo		|| Values: 0 or 1. Default is 0. Determines if the video should be expended to fit the whole player's size.
 	- colors			|| Player color changes may be set using color codes. A color is described by its hexadecimal value (eg: FF0000 for red).
 							The player refers to 3 colors named :
 							- foreground
@@ -44,7 +47,6 @@
 	
 		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&theme=none&foreground=%23F7FFFD&highlight=%23FFC300&background=%23171D1B&start=[&animatedTitle=(#TITRE)]&iframe=1&additionalInfos=0&autoPlay=0&hideInfos=0"></iframe>
 	]
-	
 [(#REM)
 /** Traiter Viméo **/
 	http://vimeo.com/api
@@ -111,5 +113,15 @@
 	[(#GET{lesExtensions}|find{#EXTENSION}|non)
 		[(#INCLURE{fond=prive/modeles/video,id=#GET{document},env,emb=' '})]
 	]]
+
+	[(#GET{titre_descriptif}|=={oui}|oui)
+      [<br /><strong>(#TITRE)</strong>]
+   ]
+   </dt>
+	[(#GET{titre_descriptif}|=={oui}|oui)
+      [<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)</dd>]
+   ]
+	</dl>
+
 
 </BOUCLE_LaVideo>
