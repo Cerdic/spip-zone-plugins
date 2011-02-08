@@ -39,7 +39,7 @@ add_outil( array(
 	'code:options' => '%%alinea%%',
 	'categorie' => 'typo-corr',
 	'traitement:TEXTE/articles:pre_propre' => 'autobr_pre_propre',
-	'pipelinecode:pre_typo' => 'if(!%%alinea%%) { $flux = autobr_alinea($flux); }',
+	'pipelinecode:pre_typo' => 'if(!%%alinea%%) { include_spip(\'outils/autobr\'); $flux = autobr_alinea($flux); }',
 	'pipeline:nettoyer_raccourcis_typo' => 'autobr_nettoyer_raccourcis',
 	'pipeline:porte_plume_cs_pre_charger' => 'autobr_CS_pre_charger',
 	'pipeline:porte_plume_lien_classe_vers_icone' => 'autobr_PP_icones',
