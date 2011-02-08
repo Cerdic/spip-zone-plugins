@@ -2,8 +2,6 @@
 /** Valeurs communes surchargeables **/
 ]
 #SET{document,#ID|sinon{#ENV{document}}}
-#SET{largeur,#ENV{largeur,#CONFIG{videos/largeur,'560'}}}
-#SET{hauteur,#ENV{hauteur,#CONFIG{videos/hauteur,'315'}}}
 #SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{videos/titre_descriptif,'non'}}}
 
 [(#REM) "Extensions" gérées ou rajoutées par le plugin
@@ -19,6 +17,15 @@
 })]
 
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
+
+	[(#REM) Si une dimension est fournie avec le modele on la prend,
+   			sinon celle du document si elle n'est pas nulle,
+            sinon celle de la config,
+            sinon une valeur en dur]
+	[(#LARGEUR|>{0}|oui) #SET{larg,#LARGEUR} ]
+   #SET{largeur,#ENV{largeur,#GET{larg,#CONFIG{videos/largeur,'560'}}}}
+	[(#HAUTEUR|>{0}|oui) #SET{haut,#HAUTEUR} ]
+   #SET{hauteur,#ENV{hauteur,#GET{haut,#CONFIG{videos/hauteur,'560'}}}}
 
 	[(#SET{fichier,#FICHIER*})]
    <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
