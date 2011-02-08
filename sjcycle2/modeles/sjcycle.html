@@ -56,10 +56,10 @@
 			 });
 	});
 
-
+[(#GET{img_height}|>{0}|oui)height:#GET{img_height}px;]
 	</script>
 	[(#REM) diaporama documents images conteneur jquery cycle ]
-	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height}|>{0}|oui)px;][background:(#GET{div_background})]})]
+	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height})px;][background:(#GET{div_background})]})]
    
 	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='#GET{style}'>
 
