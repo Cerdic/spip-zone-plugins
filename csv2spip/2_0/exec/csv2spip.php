@@ -79,24 +79,40 @@ function exec_csv2spip() {
 		echo fin_cadre_couleur(true);
 	} else {
 	// Etape 1 : analyser le fichier 
-		$f = $_FILES['userfile']['tmp_name'];
 
 		echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape1'));
 		echo "<br />"._T('csvspip:ok_etape1'). $_FILES['userfile']['name']."<br />";
 		echo fin_cadre_couleur(true);
-
+		$f = $_FILES['userfile']['tmp_name'];
 		$res = csv2spip_analyse(csv2spip_normalise($f));
 
         // Etape 2 : transfert des données vers une table SQL temporaire
+
 		if (is_string($res))
-		  echo "<br /><span class=\"Cerreur\">", $res, "</span>";
+			echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape2')), "<br /><span class=\"Cerreur\">", $res, "</span>", fin_cadre_couleur(true);
 		else {
-			include_spip('inc/csv2spip_tables');
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			// ignorer les lignes vides rencontrees
+			$spip_tmp_csv2spip = array(
+	        "id" 	      => "INT(11) NOT NULL", 
+		"nom" 	      => "TEXT NOT NULL", 
+		"prenom"      => "TEXT NOT NULL", 
+		"groupe"      => "TEXT NOT NULL", 
+		"ss_groupe"   => "TEXT NOT NULL", 
+		"mdp" 	      => "TEXT NOT NULL", 
+		"pseudo_spip" => "TEXT NOT NULL", 
+		"mel" 	      => "TEXT NOT NULL", 
+		"id_spip"     => "INT(11) NOT NULL"
+					     );
+
+			$spip_tmp_csv2spip_key = array(
+						 "PRIMARY KEY" 	=> "id"
+						 );
+			$create = sql_create('spip_tmp_csv2spip', $spip_tmp_csv2spip, $spip_tmp_csv2spip_key, true, true);
+			  
+			echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape2')), "<br />", _T('info_auteurs_nombre'), ' ', count($res) , fin_cadre_couleur(true);
+			if (!$create) {echo _T('csvspip:err_etape2.2');exit;}
+
 			foreach($res as $insert) 
+			  // ignorer les lignes vides rencontrees
 			  if (is_array($insert))
 			    sql_insertq('spip_tmp_csv2spip', $insert);
 
@@ -104,7 +120,7 @@ function exec_csv2spip() {
 			csv2spip_etapes();
 
 	// Fin: suppresion de la table temporaire
-			sql_drop_table('spip_tmp_csv');
+			sql_drop_table('spip_tmp_csv2spip');
 		}
 	}
 
@@ -366,26 +382,10 @@ function csv2spip_etapes()
         
         // gestion de la rubrique par défaut des admins restreints
         if ($groupe_admins != '-1') {
-          // faut-il créer la rubrique par défaut?
-        	$cree_rub_adm_defaut = 0;
-        	if ($_POST['rub_prof'] == 0) {
-        	    $sql20 = sql_query("SELECT COUNT(*) AS nb_admins FROM spip_tmp_csv2spip WHERE LOWER(groupe) = '$groupe_admins'");
-        		$rows20 = mysql_fetch_array($sql20);
-        		if ($rows20['nb_admins'] > 0) {
-        		    $cree_rub_adm_defaut = 1;
-        		}							 
-        	}
-        	else {
-        	    $sql19 = sql_query("SELECT COUNT(*) AS nb_sans_ssgrpe FROM spip_tmp_csv2spip WHERE LOWER(groupe) = '$groupe_admins' AND ss_groupe = ''");
-        		$rows19 = mysql_fetch_array($sql19);
-        		if ($rows19['nb_sans_ssgrpe'] > 0) {
-        		    $cree_rub_adm_defaut = 1;
-        		}
-        	}
-        //print '<br>$cree_rub_adm_defaut	= '.$cree_rub_adm_defaut;
-             // création de la rubrique par défaut
-        	if ($cree_rub_adm_defaut == 1) {
-        	    $date_rub_defaut = date("Y-m-j H:i:s");
+           // création de la rubrique par défaut au besoin
+		$where = ($_POST['rub_prof'] == 0) ? '' : " AND ss_groupe = ''";
+		if (sql_countsel('spip_tmp_csv2spip', "LOWER(groupe) = '$groupe_admins'$where")) {
+		  	$date_rub_defaut = date("Y-m-j H:i:s");
         		$Tch_rub_defaut = explode(',', $_POST['rub_parent_admin_defaut']);
         		$rubrique_parent_defaut = $Tch_rub_defaut[0];
         		$secteur_defaut = $Tch_rub_defaut[1];
@@ -555,8 +555,8 @@ function csv2spip_etapes()
         $Terr_maj_rub_admin = array();
         
         // LA boucle : gère 1 à 1 les utilisateurs de spip_tmp_csv2spip en fonction des options => TOUS !
-        $sql157 = sql_query("SELECT * FROM spip_tmp_csv2spip");
-	echo "<br>", sql_count($sql157), " entrees*****";
+        $sql157 = sql_select('*', "spip_tmp_csv2spip");
+
         while ($data157 = sql_fetch($sql157)) {
             if ($data157['pseudo_spip'] != '') {
         	    $nom = ucwords($data157['pseudo_spip']);
@@ -589,7 +589,7 @@ function csv2spip_etapes()
                     include_spip("inc/acces");
                     ecrire_acces();
         	  // insertion de l'id_spip dans la base tmp
-        		    sql_query("UPDATE spip_tmp_csv2spip SET id_spip = '$id_spip' WHERE LOWER(nom) = '$login_minuscules' LIMIT 1");
+		    sql_updateq('spip_tmp_csv2spip', array('id_spip' => $id_spip), "LOWER(nom) = '$login_minuscules'");
         		    $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_nvx[] = $login: $TresV_nvx[] = $login) : $TresA_nvx[] = $login;
         		}
         		else {
@@ -603,7 +603,7 @@ function csv2spip_etapes()
         	    if (mysql_num_rows($sql44) > 0) {
         	        $result44 = mysql_fetch_array($sql44);
         		    $id_spip = $result44['id_auteur'];
-        			sql_query("UPDATE spip_tmp_csv2spip SET id_spip = '$id_spip' WHERE LOWER(nom) = '$login_minuscules' LIMIT 1");											 
+			    sql_updateq('spip_tmp_csv2spip', array('id_spip' => $id_spip), "LOWER(nom) = '$login_minuscules'");
         	    } 
           // faut il faire la maj des existants ?
         		if ($_POST['maj_gene'] == 1) {
@@ -749,11 +749,8 @@ function csv2spip_etapes()
       			while ($data1591 = mysql_fetch_array($sql1591)) {
         		    $login_sp = strtolower($data1591['login']);
       				$id_auteur_ec = $data1591['id_auteur'];
-        			$sql4561 = sql_query("SELECT COUNT(*) AS nb FROM spip_tmp_csv2spip WHERE LOWER(nom) = '$login_sp' LIMIT 1");
-        			$data4561 = mysql_fetch_array($sql4561);
-             // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
-          			if ($data4561['nb'] == 0) {
-      				  // traitement des visiteurs à effacer												
+        			if (!sql_countsel('spip_tmp_csv2spip',"LOWER(nom) = '$login_sp'")) {
+         // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
       					sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '6forum' LIMIT 1");
       					if (mysql_error() == 0) {
           				    $TresV_eff[] = $login;
@@ -799,12 +796,10 @@ function csv2spip_etapes()
         		$cteur_articles_supprimesR = 0;
         		$cteur_articles_modif_auteurR = 0;
         		while ($data159 = mysql_fetch_array($sql159)) {
-          		    $login_sp = strtolower($data159['login']);
+				$login_sp = strtolower($data159['login']);
         			$id_auteur_ec = $data159['id_auteur'];
-          			$sql456 = sql_query("SELECT COUNT(*) AS nb FROM spip_tmp_csv2spip WHERE nom = '$login_sp' LIMIT 1");
-          			$data456 = mysql_fetch_array($sql456);
                   // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
-            		if ($data456['nb'] == 0) {
+				if (sql_countsel('spip_tmp_csv2spip', "nom = '$login_sp'")) {
         			  // traitement éventuel des articles de l'auteur à supprimer
         			    $sql757 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
         				$data757 = mysql_fetch_array($sql757);
@@ -889,10 +884,9 @@ function csv2spip_etapes()
     			while ($data1593 = mysql_fetch_array($sql1593)) {
       			    $login_sp = strtolower($data1593['login']);
     				$id_auteur_ec = $data1593['id_auteur'];
-      				$sql4563 = sql_query("SELECT COUNT(*) AS nbA FROM spip_tmp_csv2spip WHERE nom = '$login_sp' LIMIT 1");
-      				$data4563 = mysql_fetch_array($sql4563);
-                  // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
-        			if ($data4563['nbA'] == 0) {
+      				
+// l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
+        			if (!sql_countsel('spip_tmp_csv2spip', "nom = '$login_sp'")) {
     				  // traitement éventuel des articles de l'admin à supprimer
     					$sql7573 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
     					$data7573 = mysql_fetch_array($sql7573);
@@ -1171,11 +1165,11 @@ function csv2spip_etapes()
     	    if ($groupe_admins != '-1') {
     		    $Terr_adm_rub = array();
     			$Tres_adm_rub = array();
-    		    $sql54 = sql_query("SELECT ss_groupe, nom, id_spip FROM spip_tmp_csv2spip WHERE LOWER(groupe) = '$groupe_admins'");
-    		    while ($data54 = mysql_fetch_array($sql54)) {
-    		        $login_adm_ec = strtolower($data54['nom']);
-    			    $id_adm_ec = $data54['id_spip'];
-    			    if ($_POST['rub_prof'] == 1) {
+			$sql54 = sql_select("ss_groupe, nom, id_spip", "spip_tmp_csv2spip", "LOWER(groupe) = '$groupe_admins'");
+			while ($data54 = sql_fetch($sql54)) {
+				$login_adm_ec = strtolower($data54['nom']);
+				$id_adm_ec = $data54['id_spip'];
+				if ($_POST['rub_prof'] == 1) {
     					if ($data54['ss_groupe'] != '') {
     				        $ss_grpe_ec = $data54['ss_groupe'];
       						$sql55 = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
@@ -1220,9 +1214,9 @@ function csv2spip_etapes()
             if ($_POST['art_rub'] == 1 AND $_POST['rub_prof'] == 1) {
                 $Terr_art_rub = array();
             	$Tres_art_rub = array();
-            	$sql57 = sql_query("SELECT ss_groupe, nom FROM spip_tmp_csv2spip WHERE groupe = '$groupe_admins' AND ss_groupe != '' GROUP BY ss_groupe");
-            	while ($data57 = mysql_fetch_array($sql57)) {
-            	    $titre_rub_ec = $data57['ss_groupe'];
+            	$sql57 = sql_select('ss_groupe, nom', "spip_tmp_csv2spip", "groupe = '$groupe_admins' AND ss_groupe != ''", "ss_groupe");
+            	while ($data57 = sql_fetch($sql57)) {
+			$titre_rub_ec = $data57['ss_groupe'];
             		$sql58 = sql_query("SELECT id_rubrique, id_parent, id_secteur FROM spip_rubriques WHERE titre = '$titre_rub_ec' AND id_parent = '$rubrique_parent' LIMIT 1");
             		$data58 = mysql_fetch_array($sql58);
             		$id_rub_ec = $data58['id_rubrique'];

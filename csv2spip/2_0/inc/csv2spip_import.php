@@ -33,9 +33,9 @@ function csv2spip_analyse($csv)
 		}
 		$i = 0;
 		$insert = array();
-		foreach($Tchamps as $k => $v) 
+		foreach($Tchamps as $v) 
 		  $insert[$v] = trim(str_replace('"', '', $cols[$i++]));
-		if (isset($insert['mdp']) AND !$insert['mdp']) 
+		if (isset($insert['mdp']) AND !$insert['mdp'])
 		  $insert['mdp'] = $insert['nom'];
 		$csv[$k] = $insert;
 		$l++;
