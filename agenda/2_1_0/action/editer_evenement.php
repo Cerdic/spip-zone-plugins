@@ -204,7 +204,7 @@ function agenda_action_insert_evenement($id_article,$id_evenement_source = 0){
 	}
 
 	// nouvel evenement
-	$id_evenement = sql_insertq("spip_evenements", array("id_evenement_source"=>intval($id_evenement_source), "maj"=>"NOW()", 'id_article'=>intval($id_article)));
+	$id_evenement = sql_insertq("spip_evenements", array("id_evenement_source"=>intval($id_evenement_source), "maj"=>date("Y-m-d H:i:s"), 'id_article'=>intval($id_article)));
 
 	if (!$id_evenement){
 		spip_log("agenda action formulaire article : impossible d'ajouter un evenement",'agenda');
