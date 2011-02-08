@@ -89,7 +89,7 @@ Sinon, utiliser le comportement normal.
 
 [<!--(#REM) 
 
-	Document Flash (.flv) ?
+	Document Flash (.flv) ou (.f4v) ?
 	
 	Documentation:
 	- player_flv_js.swf -> http://flv-player.net/players/js/documentation/
@@ -99,7 +99,7 @@ Sinon, utiliser le comportement normal.
 	- player_flv_mini.swf -> http://flv-player.net/players/mini/documentation/
 
 
--->][(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
+-->][(#TYPE_DOCUMENT|match{^(Flash Video|Video for Adobe Flash Player)$}|?{' '})
 #SET{largeur,#ENV{largeur,#LARGEUR|=={0}|?{400,#LARGEUR}}}
 #SET{hauteur,#ENV{hauteur,#HAUTEUR|=={0}|?{300,#HAUTEUR}}}
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
@@ -122,7 +122,7 @@ Sinon, utiliser le comportement normal.
 
 	Sinon : document normal 
 	
--->][(#TYPE_DOCUMENT|match{^(Flash Video|MP3)$}|?{'',' '})
+-->][(#TYPE_DOCUMENT|match{^(Flash Video|Video for Adobe Flash Player|MP3)$}|?{'',' '})
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"]><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' /></a>
 [
