@@ -3,6 +3,6 @@
 	<rang>21</rang>
 	<description><:menus:description_menu_deconnecter:></description>
 	<icone>images/menus_logout.png</icone>
-	<parametre nom="titre" label="menus:entree_titre" />
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />
 </entree>

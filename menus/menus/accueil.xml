@@ -3,6 +3,6 @@
 	<rang>01</rang>
 	<description><:menus:description_menu_accueil:></description>
 	<icone>images/menus_accueil.png</icone>
-	<parametre nom="titre" label="menus:entree_titre" />
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />
 </entree>
