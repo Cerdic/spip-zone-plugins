@@ -54,6 +54,8 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	// Pouvoir interdire l'affichage de l'inscription (puisque ce n'est pas traite' par le plugin)
 	$valeurs['affiche_inscription'] = $GLOBALS['agenda_affiche_inscription'];
 
+	$valeurs['places'] = intval($valeurs['places']);
+
 	return $valeurs;
 }
 
@@ -95,22 +97,24 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 
 function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 
-	$message = "";
+	$res = array();
 	$action_editer = charger_fonction("editer_evenement",'action');
 	list($id,$err) = $action_editer();
 	if ($err){
-		$message .= $err;
+		$res['message_erreur'] = $err;
 	}
-	elseif ($retour) {
-		include_spip('inc/headers');
-		$retour = parametre_url($retour,'id_evenement',$id);
-		if (strpos($retour,'article')!==FALSE){
-			$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id));
-			$retour = parametre_url($retour,'id_article',$id_article);
+	else {
+		$res['message_ok'] = _L('ok');
+		if ($retour) {
+			$retour = parametre_url($retour,'id_evenement',$id);
+			if (strpos($retour,'article')!==FALSE){
+				$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id));
+				$retour = parametre_url($retour,'id_article',$id_article);
+			}
+			$res['redirect'] = $retour;
 		}
-		$message .= redirige_formulaire($retour);
 	}
-	return $message;
+	return $res;
 }
 
 ?>

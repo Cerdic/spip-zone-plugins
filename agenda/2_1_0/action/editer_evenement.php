@@ -198,13 +198,16 @@ function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){
 // creer un nouvel evenement
 function agenda_action_insert_evenement($id_article,$id_evenement_source = 0){
 	include_spip('inc/autoriser');
-	if (!autoriser('creerevenementdans','article',$id_article))
+	if (!autoriser('creerevenementdans','article',$id_article)){
+		spip_log("agenda action formulaire article : auteur ".$GLOBALS['visiteur_session']['id_auteur']." n'a pas le droit de creer un evenement dans article $id_article",'agenda');
 		return false;
+	}
+
 	// nouvel evenement
 	$id_evenement = sql_insertq("spip_evenements", array("id_evenement_source"=>intval($id_evenement_source), "maj"=>"NOW()", 'id_article'=>intval($id_article)));
 
 	if (!$id_evenement){
-		spip_log("agenda action formulaire article : impossible d'ajouter un evenement");
+		spip_log("agenda action formulaire article : impossible d'ajouter un evenement",'agenda');
 		return false;
 	}
 	return $id_evenement;

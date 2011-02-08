@@ -7,7 +7,7 @@
 
 function agenda_verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs){
 	include_spip('inc/date_gestion');
-	return verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs);
+	return verifier_corriger_date_saisie($suffixe,$horaire,$erreurs);
 }
 
 

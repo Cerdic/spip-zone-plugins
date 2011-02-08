@@ -53,7 +53,7 @@ function agenda_affiche_milieu($flux) {
 		if ($voir)
 			$res .= "<p><a href='".generer_url_ecrire('calendrier',"id_rubrique=$id_rubrique")."'>$voir</a></p>";
 		if ($res)
-			$flux['data'] .= "<div class='verdana2'><img src='".find_in_path("img_pack/agenda$statut.png")."' class='agenda-statut' />$res<div class='nettoyeur'></div></div>";
+			$flux['data'] .= "<div class='verdana2'><img src='".find_in_path("img_pack/agenda$statut.png")."' class='agenda-statut' alt='' />$res<div class='nettoyeur'></div></div>";
 	}
 	elseif ($exec=='articles'){
 		$id_article = $flux['args']['id_article'];
