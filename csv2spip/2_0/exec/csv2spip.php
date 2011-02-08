@@ -92,15 +92,19 @@ function exec_csv2spip() {
 			echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape2')), "<br /><span class=\"Cerreur\">", $res, "</span>", fin_cadre_couleur(true);
 		else {
 			$spip_tmp_csv2spip = array(
-	        "id" 	      => "INT(11) NOT NULL", 
-		"nom" 	      => "TEXT NOT NULL", 
-		"prenom"      => "TEXT NOT NULL", 
-		"groupe"      => "TEXT NOT NULL", 
-		"ss_groupe"   => "TEXT NOT NULL", 
-		"mdp" 	      => "TEXT NOT NULL", 
-		"pseudo_spip" => "TEXT NOT NULL", 
-		"mel" 	      => "TEXT NOT NULL", 
-		"id_spip"     => "INT(11) NOT NULL"
+				"id" 	      => "INT(11) NOT NULL", 
+				"id_spip"     => "INT(11) NOT NULL",
+				"pseudo_spip" => "TEXT NOT NULL", 
+				"groupe"      => "TEXT NOT NULL", 
+				"ss_groupe"   => "TEXT NOT NULL",
+				"prenom"      => "TEXT NOT NULL", 
+
+				// champs homonymes a la table auteur
+				// a terme, prendre la declaration de celle-ci
+				"nom" 	      => "TEXT NOT NULL", 
+				"pass" 	      => "TEXT NOT NULL", 
+				"email"	      => "TEXT NOT NULL", 
+				"bio" 	      => "TEXT NOT NULL", 
 					     );
 
 			$spip_tmp_csv2spip_key = array(
@@ -324,9 +328,6 @@ function csv2spip_formulaire()
 
 function csv2spip_etapes()
 {
-// Etape 0 : définition des noms de tables SPIP
-
-	$Tauteurs = 'spip_auteurs';
 	$Tauteurs_rubriques = 'spip_auteurs_rubriques';
 	$Tarticles =  'spip_articles';
 	$Tauteurs_articles = 'spip_auteurs_articles';
@@ -554,70 +555,59 @@ function csv2spip_etapes()
         $Tres_maj_rub_admin = array();
         $Terr_maj_rub_admin = array();
         
+	include_spip('action/editer_auteur');
         // LA boucle : gère 1 à 1 les utilisateurs de spip_tmp_csv2spip en fonction des options => TOUS !
         $sql157 = sql_select('*', "spip_tmp_csv2spip");
 
-        while ($data157 = sql_fetch($sql157)) {
-            if ($data157['pseudo_spip'] != '') {
-        	    $nom = ucwords($data157['pseudo_spip']);
-        //print '<br>pseudo_spip existe : $data157[pseudo_spip] = '.$data157['pseudo_spip'].' $nom = '.$nom;									
-        	}
-        	else {
-        	    $nom = strtoupper($data157['nom']).' '.ucfirst($data157['prenom']);
-        	}
-        //print '<br>$nom = '.$nom.' $data157[nom] = '.$data157['nom'].' $data157[pseudo_spip] = _'.$data157['pseudo_spip'].'_';							 
+	while ($data157 = sql_fetch($sql157)) {
+		$champs = $data157;
+
         	$groupe = strtolower($data157['groupe']);
         	$ss_groupe = $data157['ss_groupe'];
-        	$pass = $data157['mdp'];
-        	$mel = $data157['mel'];
         	$login = $data157['nom'];
-        	$login_minuscules = strtolower($login);
-        	$groupe != $groupe_admins ? ($groupe != $groupe_visits ? $statut = '1comite' : $statut = '6forum') : $statut = '0minirezo';
-        			 
-        	$sql423 = sql_query("SELECT COUNT(*) AS nb_user FROM $Tauteurs WHERE LOWER(login) = '$login_minuscules' LIMIT 1");
-        	$data423 = mysql_fetch_array($sql423);							 
-        	$nb_user = $data423['nb_user'];	
+
+		unset($champs['id']);
+		unset($champs['id_spip']);
+		unset($champs['pseudo_spip']);
+		unset($champs['ss_groupe']);
+		unset($champs['groupe']);
+		unset($champs['prenom']);
+		$champs['pass'] = csv2spip_crypt_pass($data157['pass']);
+        	$champs['login'] = $data157['nom'];
+		$champs['nom'] = $data157['pseudo_spip'] ?
+		  ucwords($data157['pseudo_spip'])
+		  : (strtoupper($data157['nom']).' '.ucfirst($data157['prenom']));
+		$champs['statut'] = ($groupe == $groupe_admins)  ?'0minirezo' : (($groupe != $groupe_visits) ?  '1comite' : '6forum');
+		$champs['alea_actuel'] = '';
+
+		$id_spip = sql_getfetsel('id_auteur', 'spip_auteurs', "LOWER(login) = " . sql_quote(strtolower($login)));
         // 4.1 : l'utilisateur n'est pas inscrit dans la base spip_auteurs
-        	if ($nb_user < 1) {
-        	    $pass = csv2spip_crypt_pass($pass);
-        		sql_query("INSERT INTO $Tauteurs (id_auteur, nom, email, login, pass, statut) VALUES ('', '$nom', '$mel', '$login', '$pass', '$statut')");
-        		$id_spip = mysql_insert_id();
-        		if (mysql_error() == '') {
-//        		    include_spip("inc/indexation");
-//        		    marquer_indexer('spip_auteurs', $id_auteur);
-                  // Mettre a jour les fichiers .htpasswd et .htpasswd-admin
-                    include_spip("inc/acces");
-                    ecrire_acces();
+		if (!$id_spip) {
+		    $id_spip = insert_auteur('spip_auteurs');
+		    if ($id_spip) {
+			auteurs_set($id_spip, $champs);
         	  // insertion de l'id_spip dans la base tmp
-		    sql_updateq('spip_tmp_csv2spip', array('id_spip' => $id_spip), "LOWER(nom) = '$login_minuscules'");
+			sql_updateq('spip_tmp_csv2spip', array('id_spip' => $id_spip), "id=" . $data157['id']);
         		    $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_nvx[] = $login: $TresV_nvx[] = $login) : $TresA_nvx[] = $login;
-        		}
-        		else {
+		    } else {
         	        $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Terr_nvx[] = array('login' => $login, 'erreur' => mysql_error()) : $TerrV_nvx[] = array('login' => $login, 'erreur' => mysql_error()) ) :  $TerrA_nvx[] = array('login' => $login, 'erreur' => mysql_error());
         	    }
-            }
-            else {
+		} else {
         // 4.2 : l'utilisateur est déja inscrit dans la base spip_auteurs
-             // trouver l'id_auteur spip
-        	    $sql44 = sql_query("SELECT id_auteur FROM $Tauteurs WHERE LOWER(login) = '$login_minuscules' LIMIT 1");
-        	    if (mysql_num_rows($sql44) > 0) {
-        	        $result44 = mysql_fetch_array($sql44);
-        		    $id_spip = $result44['id_auteur'];
-			    sql_updateq('spip_tmp_csv2spip', array('id_spip' => $id_spip), "LOWER(nom) = '$login_minuscules'");
-        	    } 
+			sql_updateq('spip_tmp_csv2spip', array('id_spip' => $id_spip), "id=" . $data157['id']);
+
           // faut il faire la maj des existants ?
         		if ($_POST['maj_gene'] == 1) {
-        			  // 4.2.1 faire la maj des infos perso si nécessaire
+       			  // 4.2.1 faire la maj des infos perso si nécessaire
         		    if ($_POST['maj_mdp'] == 1) {
-          		        $pass = csv2spip_crypt_pass($pass);
-          				sql_query("UPDATE $Tauteurs SET nom = '$nom', email = '$mel', statut = '$statut', pass = '$pass', alea_actuel = '' WHERE id_auteur = $id_spip LIMIT 1");
+				sql_updateq('spip_auteurs', $champs, "id_auteur = $id_spip");
           				if (mysql_error() == '') {
             			    $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_maj[] = $login : $TresV_maj[] = $login) : $TresA_maj[] = $login;
               			}
               			else {
               			    $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Terr_maj[] = array('login' => $login, 'erreur' => mysql_error()) : $TerrV_maj[] = array('login' => $login, 'erreur' => mysql_error())) : $TerrA_maj[] = array('login' => $login, 'erreur' => mysql_error());
               			}
-          			}
+			    }
 /*
 // pas d'acces_groupe pour cette version    
         	  // 4.2.2 réinitialisation des groupes acces_groupes si nécessaire
@@ -645,7 +635,6 @@ function csv2spip_etapes()
         		    }
         	    }
             }
-        
 /*
 // pas d'acces_groupe pour cette version            								 
         // 4.3 : intégrer l'auteur dans son ss-groupe acces_groupes si nécessaire 
@@ -671,7 +660,11 @@ function csv2spip_etapes()
         	}
 */         
         }  // fin du while traitant les comptes 1 à 1
-        
+
+	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
+	include_spip("inc/acces");
+	ecrire_acces();
+
     // 4.4 : gestion des suppressions
     // VERSION 2.3 de effacer les absents
         $ch_maj = 0;
@@ -696,13 +689,13 @@ function csv2spip_etapes()
     		  // si auteurs supprimés (pas de poubelle), récupérer l'id du rédacteur affecté aux archives + si nécessaire, créer cet auteur (groupe = poubelle)
       	    if ($_POST['auteurs_poubelle'] != 1) {
       		    $nom_auteur_archives = $_POST['nom_auteur_archives'];
-      			$sql615 = sql_query("SELECT id_auteur FROM $Tauteurs WHERE login = '$nom_auteur_archives' LIMIT 1");
+      			$sql615 = sql_query("SELECT id_auteur FROM spip_auteurs WHERE login = '$nom_auteur_archives' LIMIT 1");
       			if (mysql_num_rows($sql615) > 0) {
       			    $data615 = mysql_fetch_array($sql615);
       				$id_auteur_archives = $data615['id_auteur'];
       			}
       			else {
-      			    sql_query("INSERT INTO $Tauteurs (id_auteur, nom, login, pass, statut) VALUES ('', '$nom_auteur_archives', '$nom_auteur_archives', '$nom_auteur_archives', '5poubelle')");
+      			    sql_query("INSERT INTO spip_auteurs (id_auteur, nom, login, pass, statut) VALUES ('', '$nom_auteur_archives', '$nom_auteur_archives', '$nom_auteur_archives', '5poubelle')");
       				$id_auteur_archives = mysql_insert_id();
       			}
       			$nom_rub_archivesR = $nom_auteur_archives;
@@ -741,17 +734,17 @@ function csv2spip_etapes()
     			        						
       // 4.4.1 : traitement des visiteurs actuels de la base spip_auteurs => si effacer les absV = OK
         if ($eff_absv == 1) {
-    	    $sql1471 = sql_query("SELECT COUNT(*) AS nb_redacsV FROM $Tauteurs WHERE statut = '6forum'");
+    	    $sql1471 = sql_query("SELECT COUNT(*) AS nb_redacsV FROM spip_auteurs WHERE statut = '6forum'");
         	$data1471 = mysql_fetch_array($sql1471);
         	if ($data1471['nb_redacsV'] > 0) {
       		  // pas de poubelle pour les visiteurs => suppression puisque pas d'articles
-        		$sql1591 = sql_query("SELECT id_auteur, login FROM $Tauteurs WHERE statut = '6forum'");
+        		$sql1591 = sql_query("SELECT id_auteur, login FROM spip_auteurs WHERE statut = '6forum'");
       			while ($data1591 = mysql_fetch_array($sql1591)) {
         		    $login_sp = strtolower($data1591['login']);
       				$id_auteur_ec = $data1591['id_auteur'];
         			if (!sql_countsel('spip_tmp_csv2spip',"LOWER(nom) = '$login_sp'")) {
          // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
-      					sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '6forum' LIMIT 1");
+      					sql_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '6forum' LIMIT 1");
       					if (mysql_error() == 0) {
           				    $TresV_eff[] = $login;
 /*
@@ -769,13 +762,13 @@ function csv2spip_etapes()
       				}
       			}
               // optimisation de la table après les effacements
-      			sql_query("OPTIMIZE TABLE $Tauteurs, $Taccesgroupes_auteurs");
+      			sql_query("OPTIMIZE TABLE spip_auteurs, $Taccesgroupes_auteurs");
       		}	
         }
         
       // 4.4.2 : traitement des rédacteurs actuels de la base spip_auteurs => si effacer les absents redac = OK
         if ($eff_absr == 1) {
-            $sql147 = sql_query("SELECT COUNT(*) AS nb_redacsR FROM $Tauteurs WHERE statut = '1comite'");
+            $sql147 = sql_query("SELECT COUNT(*) AS nb_redacsR FROM spip_auteurs WHERE statut = '1comite'");
           	$data147 = mysql_fetch_array($sql147);
           	if ($data147['nb_redacsR'] > 0) {
         	  // si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
@@ -791,7 +784,7 @@ function csv2spip_etapes()
     				    $id_rub_archivesR = mysql_insert_id();
         			}
         		}
-          		$sql159 = sql_query("SELECT id_auteur, login FROM $Tauteurs WHERE statut = '1comite' AND bio != 'archive'");
+          		$sql159 = sql_query("SELECT id_auteur, login FROM spip_auteurs WHERE statut = '1comite' AND bio != 'archive'");
           		$cteur_articles_deplacesR = 0;
         		$cteur_articles_supprimesR = 0;
         		$cteur_articles_modif_auteurR = 0;
@@ -837,7 +830,7 @@ function csv2spip_etapes()
         				}
         			  // traitement des auteurs à effacer												
         				if ($auteurs_poubeller != 1) {
-        				    sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '1comite' LIMIT 1");
+        				    sql_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '1comite' LIMIT 1");
             				if (mysql_error() == 0) {
                 			    $TresR_eff[] = $login;
 /*
@@ -854,7 +847,7 @@ function csv2spip_etapes()
                   			}
         				}
         				else {
-        				    sql_query("UPDATE $Tauteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
+        				    sql_query("UPDATE spip_auteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
               				if (mysql_error() == 0) {
                   			    $TresR_poub[] = $id_auteur_ec;
                     		}
@@ -865,19 +858,19 @@ function csv2spip_etapes()
         			}
         		}
               // optimisation de la table après les effacements
-        		sql_query("OPTIMIZE TABLE $Tauteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
+        		sql_query("OPTIMIZE TABLE spip_auteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
         	}		
         }
      // 4.4.3 : traitement des administrateurs restreints actuels de la base spip_auteurs => si effacer les absA = OK
         if ($eff_absa == 1) {
-    	    $sql1473 = sql_query("SELECT COUNT(*) AS nb_redacsA FROM $Tauteurs
+    	    $sql1473 = sql_query("SELECT COUNT(*) AS nb_redacsA FROM spip_auteurs
     								 LEFT JOIN $Tauteurs_rubriques
-    								 ON $Tauteurs_rubriques.id_auteur = $Tauteurs.id_auteur
+    								 ON $Tauteurs_rubriques.id_auteur = spip_auteurs.id_auteur
     								 WHERE statut = '0minirezo'");
     //echo '<br>mysql_error 1473 = '.mysql_error();
       		$data1473 = mysql_fetch_array($sql1473);
       		if ($data1473['nb_redacsA'] > 0) {
-      		    $sql1593 = sql_query("SELECT Tauteurs.id_auteur, Tauteurs.login FROM $Tauteurs AS Tauteurs, $Tauteurs_rubriques AS Tauteurs_rubriques WHERE statut = '0minirezo' AND Tauteurs.id_auteur = Tauteurs_rubriques.id_auteur");
+      		    $sql1593 = sql_query("SELECT Tauteurs.id_auteur, Tauteurs.login FROM spip_auteurs AS Tauteurs, $Tauteurs_rubriques AS Tauteurs_rubriques WHERE statut = '0minirezo' AND Tauteurs.id_auteur = Tauteurs_rubriques.id_auteur");
       			$cteur_articles_deplacesA = 0;
     			$cteur_articles_supprimesA = 0;
     			$cteur_articles_modif_auteurA = 0;
@@ -918,7 +911,7 @@ function csv2spip_etapes()
     						}
     				      // traitement des admins à effacer												
     						if ($auteurs_poubellea != 1) {
-    						    sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '0minirezo' LIMIT 1");
+    						    sql_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '0minirezo' LIMIT 1");
         						if (mysql_error() == 0) {
             					    $TresA_eff[] = $login;
 /*
@@ -940,7 +933,7 @@ function csv2spip_etapes()
               					}
     						}
     						else {
-    						    sql_query("UPDATE $Tauteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
+    						    sql_query("UPDATE spip_auteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
           						if (mysql_error() == 0) {
               					    $TresA_poub[] = $id_auteur_ec;
                 				}
@@ -951,7 +944,7 @@ function csv2spip_etapes()
     					}
     				}
                   // optimisation de la table après les effacements
-    				sql_query("OPTIMIZE TABLE $Tauteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
+    				sql_query("OPTIMIZE TABLE spip_auteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
     			}
             }   //   fin effacer les abs (4.4)  V 2.3
         
