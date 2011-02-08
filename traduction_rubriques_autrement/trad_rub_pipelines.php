@@ -17,10 +17,9 @@ function trad_rub_header_prive($flux){
 		$trads=destination_traduction($flux['data']['lang_dest'],$id_trad);	 		
  		if($trads)$id_parent=$trads;
 		$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="'.$id_parent.'"/>';	
-		
+		$flux['data']['id_parent'] = _request('id_parent');	
 		}
 	$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'._request('lang_dest').'"/>';
-	$flux['data']['id_parent'] = _request('id_parent');
     }
     return $flux;
 }
