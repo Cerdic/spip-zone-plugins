@@ -1,5 +1,5 @@
 <?php
-function csv2spip_insert($csv)
+function csv2spip_analyse($csv)
 {
 	$Tchamps = $err = array();
 	$Tref_champs = array('nom' => 'login',
@@ -40,11 +40,7 @@ function csv2spip_insert($csv)
 		$csv[$k] = $insert;
 		$l++;
 	}
-	if (!$err)
-	  // Fichier correct, on y va, en ignorant les lignes vides rencontrees
-	  foreach($csv as $insert) 
-	    if (is_array($insert)) sql_insertq('spip_tmp_csv2spip', $insert);
-	return $err;
+	return $err ? join("<br />", $err) : $csv;
 }
 
 function csv2spip_normalise($file)

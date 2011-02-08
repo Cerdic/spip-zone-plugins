@@ -9,6 +9,8 @@
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define('_LOGO_CSV2SPIP', _DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif");
+
 include_spip('auth/sha256.inc');
 include_spip('inc/csv2spip_import');
 
@@ -45,11 +47,6 @@ function exec_csv2spip() {
 	  echo minipres();
 	} else {
     
-	include_spip('inc/csv2spip_tables');
-	include_spip('base/create');
-	include_spip('base/abstract_sql');
-	creer_base();
-
 	$commencer_page = charger_fonction('commencer_page', 'inc');
         echo $commencer_page(_T('csvspip:titre_page'));
 	echo "\r\n<style type=\"text/css\">				 
@@ -74,11 +71,45 @@ function exec_csv2spip() {
 	echo fin_boite_info(true);
 	echo debut_droite('',true);
 				 
-	if ($_FILES['userfile']['name'] != '')
-	  csv2spip_etapes();
-	else csv2spip_formulaire();
+	if (empty($_FILES['userfile']['name']))
+	    csv2spip_formulaire();
+ 	elseif ($_FILES['userfile']['error'] != 0) { 
+		echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape1'));
+        	echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape1.1_debut').$_FILES['userfile']['tmp_name']._T('csvspip:err_etape1.1_fin').$_FILES['userfile']['error']."</span>";
+		echo fin_cadre_couleur(true);
+	} else {
+	// Etape 1 : analyser le fichier 
+		$f = $_FILES['userfile']['tmp_name'];
+
+		echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape1'));
+		echo "<br />"._T('csvspip:ok_etape1'). $_FILES['userfile']['name']."<br />";
+		echo fin_cadre_couleur(true);
+
+		$res = csv2spip_analyse(csv2spip_normalise($f));
+
+        // Etape 2 : transfert des données vers une table SQL temporaire
+		if (is_string($res))
+		  echo "<br /><span class=\"Cerreur\">", $res, "</span>";
+		else {
+			include_spip('inc/csv2spip_tables');
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			// ignorer les lignes vides rencontrees
+			foreach($res as $insert) 
+			  if (is_array($insert))
+			    sql_insertq('spip_tmp_csv2spip', $insert);
+
+	// Passer aux etapes suivantes
+			csv2spip_etapes();
+
+	// Fin: suppresion de la table temporaire
+			sql_drop_table('spip_tmp_csv');
+		}
+	}
+
 	echo fin_grand_cadre(true),fin_page();
-	}		 
+	}
 }
 
 // Formulaire de saisie du fichier CSV et des options de config		
@@ -158,7 +189,7 @@ function csv2spip_formulaire()
            	echo "<input type=\"radio\" name=\"archivage\" value=\"1\" checked=\"checked\" onClick=\"aff_masq('rub_transfert', 1);\">"._T('csvspip:oui');   
             echo "<input type=\"radio\" name=\"archivage\" value=\"0\" onClick=\"aff_masq('rub_transfert', 0);\">"._T('csvspip:non'); 
             echo "<div id=\"rub_transfert\" class=\"ss_cadre\"><br>";
-            $sql9 = sql_query("SELECT COUNT(*) AS nb_rubriques FROM $Trubriques");
+            $sql9 = sql_query("SELECT COUNT(*) AS nb_rubriques FROM spip_rubriques");
     		$data9 = mysql_fetch_array($sql9);
     		$nb_rubriques = $data9['nb_rubriques'];
     		$annee = date("Y"); 
@@ -167,7 +198,7 @@ function csv2spip_formulaire()
     		echo "";
             if ($nb_rubriques > 0) {   		
                 echo"<br><br><strong>"._T('csvspip:choix_parent_archive')."</strong>"; 
-                $sql10 = sql_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY titre");
+                $sql10 = sql_query("SELECT id_rubrique, titre, id_secteur FROM spip_rubriques ORDER BY titre");
                 echo "<select name=\"rub_parent_archivage\">";
                 echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
             		
@@ -198,7 +229,7 @@ function csv2spip_formulaire()
                 echo "<br /><strong>"._T('csvspip:choix_parent_rubriques')."</strong>"; 
               	echo "<select name=\"rub_parent\">";
               	echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
-                $sql10 = sql_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY titre");
+                $sql10 = sql_query("SELECT id_rubrique, titre, id_secteur FROM spip_rubriques ORDER BY titre");
             	while ($data10 = mysql_fetch_array($sql10)) { 
              	    echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
             	}  	
@@ -220,7 +251,7 @@ function csv2spip_formulaire()
                 echo "<br/><br/><strong>"._T('csvspip:choix_parent_rub_admin_defaut')."</strong>"; 
               	echo "<select name=\"rub_parent_admin_defaut\">";
               	echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
-                $sql108 = sql_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY titre");
+                $sql108 = sql_query("SELECT id_rubrique, titre, id_secteur FROM spip_rubriques ORDER BY titre");
             	while ($data108 = mysql_fetch_array($sql108)) { 
              	    echo "<option value=\"".$data108['id_rubrique'].",".$data108['id_secteur']."\">".$data108['titre']."</option>";
             	}  	
@@ -278,7 +309,7 @@ function csv2spip_formulaire()
 function csv2spip_etapes()
 {
 // Etape 0 : définition des noms de tables SPIP
-	$Trubriques = 'spip_rubriques';
+
 	$Tauteurs = 'spip_auteurs';
 	$Tauteurs_rubriques = 'spip_auteurs_rubriques';
 	$Tarticles =  'spip_articles';
@@ -288,42 +319,11 @@ function csv2spip_etapes()
 		
 	$err_total = 0;
 
-// étape 1 : téléchargement du fichier sur le serveur		
-  // si $_POST d'un fichier on lance le traitement => if maxi long!!!
-
-	echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape1'));
-	if ($_FILES['userfile']['error'] != 0) { 
-        	echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape1.1_debut').$_FILES['userfile']['tmp_name']._T('csvspip:err_etape1.1_fin').$_FILES['userfile']['error']."</span>";				 							 
-		echo fin_cadre_couleur(true);
-		exit();
-	} 
-	$nom_fich = _DIR_TMP."tmp_fich.csv";	
-	if (!move_uploaded_file($_FILES['userfile']['tmp_name'], $nom_fich)) {  
-		echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape1.2_debut').$_FILES['userfile']['tmp_name']._T('csvspip:err_etape1.2_fin').$nom_fich."</span>";
-		exit();
-	}
-	$tmp_csv_slh = addslashes($nom_fich);	
-	echo "<br>"._T('csvspip:ok_etape1').$_FILES['userfile']['name']."<br>";
-	echo fin_cadre_couleur(true);
-        
-        
-        // étape 2 : passage des données du fichier dans la base temporaire			
-	echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape2'));
-        //				echo "<h2>"._T('csvspip:titre_etape2')."</h2>";
-        //				spip_query("DROP TABLE IF EXISTS $tmp_csv2spip");
-	@sql_query("TRUNCATE TABLE spip_tmp_csv2spip");
-	$err = csv2spip_insert(csv2spip_normalise($nom_fich));
-	if ($err)
-		echo "<br><span class=\"Cerreur\">", join("<br />", $err), "</span>";
-	else echo "<br>"._T('csvspip:ok_etape2.2')."<br />";
-	echo fin_cadre_couleur(true);
-	if ($err) exit;
-
         // étape 3 : si nécessaire création des rubriques pour les admins restreints et des groupes pour accesgroupes
         $_POST['groupe_admins'] != '' ? $groupe_admins = strtolower($_POST['groupe_admins']) : $groupe_admins = '-1';
         $_POST['groupe_visits'] != '' ? $groupe_visits = strtolower($_POST['groupe_visits']) : $groupe_visits = '-1';
         $_POST['groupe_redacs'] != '' ? $groupe_redacs = strtolower($_POST['groupe_redacs']) : $groupe_redacs = '-1';
-        echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape3'));
+        echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape3'));
         
         // étape 3.1 : création des rubriques pour les admins restreints
         if ($_POST['rub_prof'] == 1 AND $groupe_admins != '-1') {
@@ -337,13 +337,13 @@ function csv2spip_etapes()
 		if(true)
                 while ($data8 = sql_fetch($sql8)) {
         		    $rubrique_ec = $data8['ss_groupe']; 
-            		$sql7 = sql_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_ec' LIMIT 1");
+            		$sql7 = sql_query("SELECT COUNT(*) AS rub_existe FROM spip_rubriques WHERE titre = '$rubrique_ec' LIMIT 1");
             		$data7 = mysql_fetch_array($sql7);
             		if ($data7['rub_existe'] > 0) {
         //print '<br>etape3 : rubrique '.$rubrique_ec.' existe';
             		    continue;
             		}
-            		sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$rubrique_parent', '$rubrique_ec', '$secteur', 'publie', '$date_rub_ec')" );
+            		sql_query("INSERT INTO spip_rubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$rubrique_parent', '$rubrique_ec', '$secteur', 'publie', '$date_rub_ec')" );
               		if (mysql_error() != '') {
               		    $Terr_rub[] = array('ss_groupe' => $rubrique_ec, 'erreur' => mysql_error());
               		}
@@ -390,10 +390,10 @@ function csv2spip_etapes()
         		$rubrique_parent_defaut = $Tch_rub_defaut[0];
         		$secteur_defaut = $Tch_rub_defaut[1];
         	 	$rubrique_defaut = ($_POST['rub_admin_defaut'] != '' ? $_POST['rub_admin_defaut'] : _T('csvspip:nom_rub_admin_defaut') );
-        		$sq21 = sql_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
+        		$sq21 = sql_query("SELECT COUNT(*) AS rub_existe FROM spip_rubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
         		$rows21 = mysql_fetch_array($sq21);
         		if ($rows21['rub_existe'] < 1) {
-        		    sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) 
+        		    sql_query("INSERT INTO spip_rubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) 
         			 		    VALUES ('', '$rubrique_parent_defaut', '$rubrique_defaut', '$secteur_defaut', 'prive', '$date_rub_defaut')" );
         	 		if (mysql_error() != '') {
         			    echo "<br><span class=\"Cerreur\">"._T('csvspip:err_cree_rub_defaut').mysql_error()."</span>";
@@ -405,7 +405,7 @@ function csv2spip_etapes()
             		}
         		}
         		else {
-        		    $sql1001 = sql_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
+        		    $sql1001 = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
         			$rows1001 = mysql_fetch_array($sql1001);
         			$id_rub_admin_defaut = $rows1001['id_rubrique'];
         		}
@@ -556,7 +556,8 @@ function csv2spip_etapes()
         
         // LA boucle : gère 1 à 1 les utilisateurs de spip_tmp_csv2spip en fonction des options => TOUS !
         $sql157 = sql_query("SELECT * FROM spip_tmp_csv2spip");
-        while ($data157 = mysql_fetch_array($sql157)) {
+	echo "<br>", sql_count($sql157), " entrees*****";
+        while ($data157 = sql_fetch($sql157)) {
             if ($data157['pseudo_spip'] != '') {
         	    $nom = ucwords($data157['pseudo_spip']);
         //print '<br>pseudo_spip existe : $data157[pseudo_spip] = '.$data157['pseudo_spip'].' $nom = '.$nom;									
@@ -725,13 +726,13 @@ function csv2spip_etapes()
     				$id_rub_parent_archives = $Tids_parent_rub_archives[0];
     				$id_sect_parent_archives = $Tids_parent_rub_archives[1];
     				$date_rub_archives = date("Y-m-j H:i:s");
-    				$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM $Trubriques WHERE titre = '$nom_rub_archives' AND id_parent = '$id_rub_parent_archives' LIMIT 1");
+    				$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM spip_rubriques WHERE titre = '$nom_rub_archives' AND id_parent = '$id_rub_parent_archives' LIMIT 1");
     				if (mysql_num_rows($sql613) > 0) {
     				    $data613 = mysql_fetch_array($sql613);
     					$id_rub_archives = $data613['id_rubrique'];
     				}
     				else {
-    				    sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archives', '$nom_rub_archives', '$id_sect_parent_archives', 'publie', '$date_rub_archives')" );
+    				    sql_query("INSERT INTO spip_rubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archives', '$nom_rub_archives', '$id_sect_parent_archives', 'publie', '$date_rub_archives')" );
     					$id_rub_archives = mysql_insert_id();
     				}
       			}
@@ -783,13 +784,13 @@ function csv2spip_etapes()
         	  // si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
         		if ($supprimer_articlesr != 1 AND $archivager != 0) {
         		    $nom_rub_archivesR = $rub_archivager;
-        			$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM $Trubriques WHERE titre = '$nom_rub_archivesR' AND id_parent = '$id_rub_parent_archivesR' LIMIT 1");
+        			$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM spip_rubriques WHERE titre = '$nom_rub_archivesR' AND id_parent = '$id_rub_parent_archivesR' LIMIT 1");
         			if (mysql_num_rows($sql613) > 0) {
         			    $data613 = mysql_fetch_array($sql613);
         				$id_rub_archivesR = $data613['id_rubrique'];
         			}
         			else {
-        			    sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archivesR', '$nom_rub_archivesR', '$id_sect_parent_archivesR', 'publie', '$date_rub_archivesR')" );
+        			    sql_query("INSERT INTO spip_rubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archivesR', '$nom_rub_archivesR', '$id_sect_parent_archivesR', 'publie', '$date_rub_archivesR')" );
     				    $id_rub_archivesR = mysql_insert_id();
         			}
         		}
@@ -961,7 +962,7 @@ function csv2spip_etapes()
             }   //   fin effacer les abs (4.4)  V 2.3
         
           // résultats étape 4
-            echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape4'));
+            echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape4'));
             echo "<br>"._T('csvspip:etape4.1')."<br>";
             if (count($TerrV_nvx) > 0) {		
         	    echo "<span class=\"Cerreur\">"._T('csvspip:err_visit');
@@ -1177,7 +1178,7 @@ function csv2spip_etapes()
     			    if ($_POST['rub_prof'] == 1) {
     					if ($data54['ss_groupe'] != '') {
     				        $ss_grpe_ec = $data54['ss_groupe'];
-      						$sql55 = sql_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
+      						$sql55 = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
       						$data55 = mysql_fetch_array($sql55);
       						$id_rubrique_adm_ec = $data55['id_rubrique'];									 		
     				    }
@@ -1199,7 +1200,7 @@ function csv2spip_etapes()
     				    }
     			    }
     		    }
-    		    echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape5'));
+    		    echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape5'));
         //						 echo "<h2>"._T('csvspip:titre_etape5')."</h2>";
     	        if (count($Terr_adm_rub) > 0) {
     		        echo "<span class=\"Cerreur\">"._T('csvspip:err_admin_rubrique');
@@ -1222,7 +1223,7 @@ function csv2spip_etapes()
             	$sql57 = sql_query("SELECT ss_groupe, nom FROM spip_tmp_csv2spip WHERE groupe = '$groupe_admins' AND ss_groupe != '' GROUP BY ss_groupe");
             	while ($data57 = mysql_fetch_array($sql57)) {
             	    $titre_rub_ec = $data57['ss_groupe'];
-            		$sql58 = sql_query("SELECT id_rubrique, id_parent, id_secteur FROM $Trubriques WHERE titre = '$titre_rub_ec' AND id_parent = '$rubrique_parent' LIMIT 1");
+            		$sql58 = sql_query("SELECT id_rubrique, id_parent, id_secteur FROM spip_rubriques WHERE titre = '$titre_rub_ec' AND id_parent = '$rubrique_parent' LIMIT 1");
             		$data58 = mysql_fetch_array($sql58);
             		$id_rub_ec = $data58['id_rubrique'];
             		$id_parent_ec = $data58['id_parent'];
@@ -1241,7 +1242,7 @@ function csv2spip_etapes()
             			}
             		}
             	}
-            	echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape6'));
+            	echo debut_cadre_couleur(_LOGO_CSV2SPIP, true, "", _T('csvspip:titre_etape6'));
             //						 echo "<h3>"._T('csvspip:titre_etape6')."</h3>";
             	if (count($Terr_art_rub) > 0) {
             	    echo "<span class=\"Cerreur\">"._T('csvspip:err_article');
@@ -1256,11 +1257,6 @@ function csv2spip_etapes()
             	}
             	echo fin_cadre_couleur(true);
             }
-
-            	
-          // vidage de la table temporaire
-            if ($err_total == 0) { 
-//                sql_query("TRUNCATE TABLE spip_tmp_csv2spip");
-            }
 }
+
 ?>
