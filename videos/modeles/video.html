@@ -14,7 +14,8 @@
 [(#SET{lesExtensions,
 	#ARRAY{	1,dist_daily,
 			2,dist_youtu,
-			3,dist_vimeo}
+			3,dist_vimeo,
+         4,dist_cubox}
 })]
 
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
@@ -84,7 +85,17 @@
 	<iframe title="YouTube video player" class="youtube-player" type="text/html" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1" frameborder="0"></iframe>
 	]
 	
+[(#REM)
+/** Traiter CultureBox france3 **/
+	http://culturebox.france3.fr
+]
+
+	[(#EXTENSION|=={dist_cubox}|oui)
+	<iframe src="http://culturebox.france3.fr/player.swf?video=#GET{fichier}" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+	]
 	
+
+
 [(#REM)
 /** Traiter les vidéos H264 en HTML5 **/
 <!--
@@ -114,6 +125,9 @@
 		[(#INCLURE{fond=prive/modeles/video,id=#GET{document},env,emb=' '})]
 	]]
 
+[(#REM)
+/** Titre et Descriptif **/
+]
 	[(#GET{titre_descriptif}|=={oui}|oui)
       [<br /><strong>(#TITRE)</strong>]
    ]
