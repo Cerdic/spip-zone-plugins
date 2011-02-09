@@ -1,0 +1,62 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=flattr -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		
+	<form method="post" action="#ENV{action}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend"><:flattr:cfg_legend_vous:></h3>
+				<ul>
+					<li class="editer_uid">
+						<label for="uid"><:flattr:cfg_label_uid:></label>
+						<p class="explication"><:flattr:cfg_explication_uid:></p>
+						<input type="text" name="uid" class="text" id="uid" size="60" value="#ENV{uid}" />
+					</li>
+				</ul>
+			</li>
+			<!--
+			TODO
+			
+			<fieldset><legend>Insertion des boutons Flattr dans vos pages</legend>
+			
+			
+			</fieldset>
+			
+			-->
+			<li class="fieldset">
+				<h3 class="legend"><:flattr:cfg_legend_reglages:></h3>
+				<ul>
+					<li class="editer_category">
+						<label for="category"><:flattr:cfg_label_category:></label>
+						<select name="category">
+							<option value="text"><:flattr:cfg_value_text:></option>
+							<option value="images"[ selected="(#ENV{category}|=={images})"]><:flattr:cfg_value_images:></option>
+							<option value="video"[ selected="(#ENV{category}|=={video})"]><:flattr:cfg_value_video:></option>
+							<option value="audio"[ selected="(#ENV{category}|=={audio})"]><:flattr:cfg_value_audio:></option>
+							<option value="software"[ selected="(#ENV{category}|=={software})"]><:flattr:cfg_value_software:></option>
+							<option value="rest"[ selected="(#ENV{category}|=={rest})"]><:flattr:cfg_value_rest:></option>
+						</select>
+					</li>
+					<li class="editer_hidden">
+						<label for="hidden"><:flattr:cfg_label_showthings:></label>
+						<select name="hidden">
+							<option value="false"><:flattr:cfg_value_show:></option>
+							<option value="true"[ selected=(#ENV{hidden}|=={true}|?{selected})"]><:flattr:cfg_value_hide:></option>
+						</select>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+		</div>
+	</form>
+</div>

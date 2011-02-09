@@ -2,16 +2,20 @@
 	<nom>Flattr</nom>
 	<auteur>
 	Fil
-	&#169; 2010 - GNU/GPL
 	</auteur>
 	<version>
-	0.2.1
+	0.2.2
 	</version>
+	<licence>
+		&#169; 2010 - GNU/GPL
+	</licence>
 	<etat>
 	test
 	</etat>
 	<description>
-	Int&#233;gration des microdons Flattr
+		<multi>
+			[fr]Int&#233;gration des microdons Flattr
+			[en]Integration of the Flattr micro gifts
 	</description>
 	<lien>http://zzz.rezo.net/Plugin-Flattr-pour-SPIP.html</lien>
 	<prefix>

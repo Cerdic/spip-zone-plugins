@@ -1,58 +1,7 @@
-[(#REM) descriptif=]
-
 [(#REM) titre=Flattr]
 [(#REM) icone=img/flattr-20.png]
-
 #CACHE{0}
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-
-<fieldset><legend>Vous</legend>
-<p>
-
-<label>User ID&nbsp;:
-<input type="text" name="uid" value="#ENV{uid}"] />
-<br /><small>Vous trouverez cette information sur <a href="https://flattr.com/dashboard" target="flattr">la page de votre compte Flattr</a>.</small>
-</label>
-
-</p>
-</fieldset>
-
-<!--
-
-TODO
-
-<fieldset><legend>Insertion des boutons Flattr dans vos pages</legend>
-
-
-</fieldset>
-
--->
-
-<fieldset><legend>R&#233;glages divers</legend>
-
-<p>
-<label>Cat&#233;gorie par d&#233;faut&nbsp;:
-<select name="category">
-<option value="text">text</option>
-<option value="images"[ selected="(#ENV{category}|=={images})"]>images</option>
-<option value="video"[ selected="(#ENV{category}|=={video})"]>video</option>
-<option value="audio"[ selected="(#ENV{category}|=={audio})"]>audio</option>
-<option value="software"[ selected="(#ENV{category}|=={software})"]>software</option>
-<option value="rest"[ selected="(#ENV{category}|=={rest})"]>rest (divers)</option>
-</select>
-
-<br />
-
-<label>Afficher les &#8216;things&#8217; sur flattr.com&nbsp;:
-<select name="hidden">
-<option value="false">Oui, afficher</option>
-<option value="true"[ selected=(#ENV{hidden}|=={true}|?{selected})"]>Masquer</option>
-</select>
-
-</p>
-</fieldset>
-
-<input type="submit" name="_cfg_ok" value="<:OK:>" style="float:#LANG_RIGHT;" />
-</form>
-
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_FLATTR
+</div>
