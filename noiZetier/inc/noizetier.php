@@ -3,11 +3,46 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 define('_CACHE_AJAX_NOISETTES', 'noisettes_ajax.php');
 define('_CACHE_CONTEXTE_NOISETTES', 'noisettes_contextes.php');
 define('_CACHE_DESCRIPTIONS_NOISETTES', 'noisettes_descriptions.php');
 
+// Pour compatibilité avec PHP4
+
+if (!function_exists('array_intersect_key'))
+{
+	function array_intersect_key($isec, $keys)
+	{
+		$argc = func_num_args();
+		if ($argc > 2)
+		{
+			for ($i = 1; !empty($isec) && $i < $argc; $i++)
+			{
+				$arr = func_get_arg($i);
+				foreach (array_keys($isec) as $key)
+				{
+					if (!isset($arr[$key]))
+					{
+						unset($isec[$key]);
+					}
+				}
+			}
+			return $isec;
+		}
+		else
+		{
+			$res = array();
+			foreach (array_keys($isec) as $key)
+			{
+				if (isset($keys[$key]))
+				{
+					$res[$key] = $isec[$key];
+				}
+			}
+			return $res;
+		}
+	}
+}
 
 /**
  * Lister les noisettes disponibles dans les dossiers noisettes/
@@ -181,7 +216,7 @@ function noizetier_charger_contexte_noisette($noisette){
 
 	if (is_null($contexte_noisettes[$noisette])){
 		$noisettes = noizetier_lister_noisettes();
-		$contexte_noisettes[$noisette] =  $noisettes[$noisette]['contexte'];
+		$contexte_noisettes[$noisette] = $noisettes[$noisette]['contexte'];
 	}
 	return $contexte_noisettes[$noisette];
 }
