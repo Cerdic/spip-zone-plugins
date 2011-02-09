@@ -15,7 +15,7 @@
 
 #SET{visible,oui}
 [(#ENV{connexion}|=={session}|oui)
-	[(#SESSION{statut}|oui)
+	[(#SESSION{statut}|non)
 		#SET{visible,non}]
 	#SET{info_session,#VAL{menus:info_connexion_obligatoire}|_T}
 ]
