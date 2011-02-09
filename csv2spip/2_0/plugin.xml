@@ -1,9 +1,9 @@
 <plugin>
         <nom>csv2spip</nom>
         <auteur>
-          cy_altern	(c) 2006 - Licence GPL
+          cy_altern, Emmanuel Saint-James	(c) 2006 - Licence GPL
         </auteur>
-        <version>3.2.0</version>
+        <version>3.2.1</version>
         <etat>test</etat>
         <description>
           Permet de r&#233;aliser l'int&#233;gration d'auteurs et administrateurs restreints &#224; partir de fichiers CSV. 
