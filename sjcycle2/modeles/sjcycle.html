@@ -3,6 +3,7 @@
 	(A noter que CROCHET(# MODELE{sjcycle}{id=XX})CROCHET ne fonctionne pas si le modele se trouve
    dans une boucle, id prenant l'id de l'objet de la boucle. Donc on evite cette ecriture)
 ]
+
 [(#SET{id_objet,       [(#ENV{id_sjcycle,     0})]})]
 [(#SET{id_diapo,   	  [(#ENV{id_diapo,       #VAL{id_}|uniqid})]})]
 [(#SET{img_width,      [(#ENV{width,     		 #CONFIG{sjcycle/img_width}})]})]
@@ -15,6 +16,9 @@
 [(#SET{legende,        [(#ENV{legende,        0})]})]
 [(#REM) largeur div = largeur image + 2*bordure ]
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
+
+[(#REM) Je ne sais plus a quoi ca sert, mais ca gene pour l'affichage des legendes à partir des titres des dcuments 
+		  C'etait auparavant dans le style de la div principale ]
 [(#SET{div_height, #GET{img_bordure}|mult{2}|plus{#GET{img_height}} })]
 
 [(#SET{cssbox,	[(#EVAL{8}|randomString)]})]
@@ -59,7 +63,7 @@
 
 	</script>
 	[(#REM) diaporama documents images conteneur jquery cycle ]
-	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height})px;][background:(#GET{div_background})]})]
+	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][background:(#GET{div_background})]})]
    
 	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='#GET{style}'>
 
