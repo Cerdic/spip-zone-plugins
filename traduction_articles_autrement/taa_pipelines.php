@@ -25,6 +25,11 @@ function taa_pre_insertion($flux){
 			$flux['data']['lang'] =  $lang;
 			$flux['data']['langue_choisie'] =  $lang;		 	
 			}
+		elseif(test_plugin_actif('tradrub')){
+			$lang=sql_getfetsel('lang','spip_rubriques','id_rubrique='.sql_quote(_request('id_rubrique')));
+			$flux['data']['lang'] =  $lang;
+			$flux['data']['langue_choisie'] =  $lang;	
+			}
     	}
 return $flux;
 }
