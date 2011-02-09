@@ -1,5 +1,5 @@
 [(#REM)  L'appel depuis un article se fait par < sjcycleXX >, alors id_sjcycle=XX
-	ou par un modele  CROCHET(# MODELE{sjcycle}{id_article=XX})CROCHET , alors id_article=XX
+	ou par un modele  CROCHET(# MODELE{sjcycle}{id_sjcycle=XX})CROCHET , alors id_article=XX
 	(A noter que CROCHET(# MODELE{sjcycle}{id=XX})CROCHET ne fonctionne pas si le modele se trouve
    dans une boucle, id prenant l'id de l'objet de la boucle. Donc on evite cette ecriture)
 ]
@@ -51,8 +51,9 @@
 			 speed:		"#CONFIG{sjcycle/speed}",
 			 sync:		"#CONFIG{sjcycle/sync}",
 			 pause:		"#CONFIG{sjcycle/pause}",
+			 random:		"#CONFIG{sjcycle/random}",
 			 cleartype: 1
-			 [,(#ENV{opt}|html_entity_decode)]
+			 [,(#ENV{opt}|replace{';',','}html_entity_decode)]
 			 });
 	});
 

@@ -42,6 +42,10 @@ V 1.0 :
 V 1.1 :
 - Ne plus être obligé de spécifier un id_diapo pour afficher plusieurs diapos dans la même page
 
+V 1.2 :
+- Changement du séparateur des options du script (point virgule à la place de virgule) sinon ca ne fonctionne pas en modèle. Mais ca continue a fonctionner avec la virgule pour l'appel classique depuis un article.
+- Le paramètre random de la configuration générale n'était pas pris en compte
+
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
 - Possibilité d'afficher un diapo dans une rubrique à partir des images de la rubrique
