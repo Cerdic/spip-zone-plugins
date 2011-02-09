@@ -10,12 +10,18 @@
   <categorie>edition</categorie>
   <icon>img/partageur.png</icon>
   <install>base/partageur_upgrade.php</install>
+  <!-- bouton selon les versions spip -->
   <bouton id="partageurs" parent="naviguer">
 	   <icone>img/partageur-24.png</icone>
 	   <titre>partageur:partageur</titre>		
   </bouton>
+  <bouton id='partageurs' parent='bando_edition'>
+		<titre>partageur:partageur</titre>
+		<icone>img/partageur-16.png</icone>
+		<url>partageurs</url>
+	</bouton>  
   <!-- pipelines -->
-   <pipeline>
+  <pipeline>
       <nom>autoriser</nom> 
       <inclure>partageur_autoriser.php</inclure> 
   </pipeline>
