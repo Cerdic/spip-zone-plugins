@@ -324,27 +324,39 @@ function critere_evenement_en_cours_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * {evenement_relatif #ENV{choix}}
- * #ENV{choix} peut prendre 4 valeurs : tout, a_venir, en_cours ou passe
+ * {evenementrelatif #ENV{choix}}
+ * {evenementrelatif #ENV{choix}, #ENV{date}}
+ * #ENV{choix} peut prendre 6 valeurs : tout, a_venir, en_cours, passe, en_cours_a_venir ou passe_en_cours
  * 
  * @param <type> $idb
  * @param <type> $boucles
  * @param <type> $crit
  */
-function critere_evenement_relatif_dist($idb, &$boucles, $crit) {
+function critere_evenementrelatif_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$id_table = $boucle->id_table;
-	$_dateref = "date('Y-m-d H:i:00')";
+	if (isset($crit->param[1]))
+		$_dateref = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		$_dateref = "date('Y-m-d H:i:00')";
 	$not = $crit->not ? 'oui' : '';
 	$choix = isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) : '';
 	$horaire = array_key_exists('horaire', $boucle->show['field']) ? 'oui' : '';
 	
-	$boucle->where[] = "agenda_calculer_critere_evenement_relatif('$id_table',$_dateref,'$not',$choix,'$horaire')";
+	$boucle->where[] = "agenda_calculer_critere_evenementrelatif('$id_table',$_dateref,'$not',$choix,'$horaire')";
 }
 
-function agenda_calculer_critere_evenement_relatif($id_table,$_dateref,$not,$choix,$horaire){
+function agenda_calculer_critere_evenementrelatif($id_table,$_dateref,$not,$choix,$horaire){
 	$_date_debut = "$id_table.date_debut";
 	$_date_fin = "$id_table.date_fin";
+	if ($choix == 'en_cours_a_venir') {
+		$choix = 'passe';
+		$not = ($not) ? '' : 'oui';
+	}
+	if ($choix == 'passe_en_cours') {
+		$choix = 'a_venir';
+		$not = ($not) ? '' : 'oui';
+	}
 	
 	switch($choix) {
 		case 'a_venir':
