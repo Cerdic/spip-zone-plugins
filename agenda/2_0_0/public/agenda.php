@@ -322,6 +322,118 @@ function critere_evenement_en_cours_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $where;
 }
 
+/**
+ * {evenementrelatif #ENV{choix}}
+ * {evenementrelatif #ENV{choix}, #ENV{date}}
+ * #ENV{choix} peut prendre 6 valeurs : tout, a_venir, en_cours, passe, en_cours_a_venir ou passe_en_cours
+ * 
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ */
+function critere_evenementrelatif_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+	if (isset($crit->param[1]))
+		$_dateref = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		$_dateref = "date('Y-m-d H:i:00')";
+	$not = $crit->not ? 'oui' : '';
+	$choix = isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) : '';
+	$horaire = array_key_exists('horaire', $boucle->show['field']) ? 'oui' : '';
+	
+	$boucle->where[] = "agenda_calculer_critere_evenementrelatif('$id_table',$_dateref,'$not',$choix,'$horaire')";
+}
+
+function agenda_calculer_critere_evenementrelatif($id_table,$_dateref,$not,$choix,$horaire){
+	$_date_debut = "$id_table.date_debut";
+	$_date_fin = "$id_table.date_fin";
+	if ($choix == 'en_cours_a_venir') {
+		$choix = 'passe';
+		$not = ($not) ? '' : 'oui';
+	}
+	if ($choix == 'passe_en_cours') {
+		$choix = 'a_venir';
+		$not = ($not) ? '' : 'oui';
+	}
+	
+	switch($choix) {
+		case 'a_venir':
+			$op_a_venir = $not ? "<=":">";
+			$where_a_venir_sans_heure =
+				array($op_a_venir, $_date_debut, sql_quote(date('Y-m-d 23:59:59', strtotime($_dateref))));
+			if ($horaire) {
+				$where =
+				array('OR',
+					array('AND',
+						array('=', 'horaire', sql_quote('oui')),
+						array($op_a_venir,$_date_debut,sql_quote($_dateref))
+					),		
+					array('AND',
+						array('!=', 'horaire', sql_quote('oui')),
+						$where_a_venir_sans_heure
+					)
+				);
+			} else {
+				$where_a_venir = $where_a_venir_sans_heure;
+			}
+			return $where;
+			break;
+
+		case 'passe':
+			$op_passe = $not ? ">=":"<";
+			$where_passe_sans_heure =
+				array($op_passe, $_date_fin, sql_quote(date('Y-m-d 00:00:00', strtotime($_dateref))));
+			if ($horaire) {
+				$where =
+					array('OR',
+						array('AND',
+							array('=', 'horaire', sql_quote('oui')),
+							array($op_passe,$_date_fin,sql_quote($_dateref))
+						),		
+						array('AND',
+							array('!=', 'horaire', sql_quote('oui')),
+							$where_passe_sans_heure
+						)
+					);
+			} else {
+				$where = $where_passe_sans_heure;
+			}
+			return $where;
+			break;
+
+		case 'en_cours':
+			$where_en_cours_sans_heure =
+				array('AND',
+					array('<=', $_date_debut, sql_quote(date('Y-m-d 23:59:59', strtotime($_dateref)))),
+					array('>=', $_date_fin, sql_quote(date('Y-m-d 00:00:00', strtotime($_dateref))))
+				);
+						if ($horaire) {
+				$where =
+					array('OR',
+						array('AND',
+							array('=', 'horaire', sql_quote('oui')),
+							array('AND',
+								array('<=', $_date_debut, sql_quote($_dateref)),
+								array('>=', $_date_fin, sql_quote($_dateref))
+							)
+						),		
+						array('AND',
+							array('!=', 'horaire', sql_quote('oui')),
+							$where_en_cours_sans_heure
+						)
+					);
+			} else {
+				$where = $where_en_cours_sans_heure;
+			}
+			return ($not) ? array('NOT' , $where) : $where;
+			break;
+
+		default:
+			return array();
+			break;
+	}
+}
 
 /**
  * Fonction privee pour mutualiser de code des criteres_evenement_*
