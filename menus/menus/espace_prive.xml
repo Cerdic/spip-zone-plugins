@@ -6,4 +6,5 @@
 	<parametre nom="titre" class="multilang" label="menus:entree_titre_prive" />
 	<parametre nom="titre_connecter" class="multilang" label="menus:entree_titre_connecter" />
 	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="url" label="menus:entree_url_public" />
 </entree>

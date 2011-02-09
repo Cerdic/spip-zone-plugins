@@ -15,6 +15,6 @@
 	]
 	[(#SESSION{id_auteur}|>{0}|non)
 		<li class="menu-entree[ (#ENV{css})]">
-			<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" title="[(#GET{titre_connecter}|attribut_html)]">#GET{titre_connecter}</a>
+			<a href="[(#URL_PAGE{login}|parametre_url{url,#ENV{url,#SELF}})]" title="[(#GET{titre_connecter}|attribut_html)]">#GET{titre_connecter}</a>
 	]
 ]
