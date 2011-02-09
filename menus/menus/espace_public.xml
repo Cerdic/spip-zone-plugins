@@ -1,0 +1,9 @@
+<entree>
+	<nom><:menus:nom_menu_espace_public:></nom>
+	<rang>10</rang>
+	<description><:menus:description_menu_espace_public:></description>
+	<icone>images/menus_logout.png</icone>
+	<parametre nom="url" label="menus:entree_url_public" />
+	<parametre nom="titre_connecter" class="multilang" label="menus:entree_titre_connecter" />
+	<parametre nom="css" label="menus:entree_css" />
+</entree>
