@@ -35,6 +35,7 @@ function auth_fblogin ($login, $pass, $serveur='') {
 	// On ne trouve pas de cookie, on renvoie vers FB
 	if (!$session) {
 		header('Location:'.$facebook->getLoginUrl(array('req_perms'=>'email','locale'=>'fr_FR')));
+		return false;
 	}
 	// On a trouvé un cookie, on a donc les infos sur l'auteur. Je les stocke dans $fbme
 	else {
