@@ -136,6 +136,21 @@ function exec_get_infos_spip_dist() {
 					. '</noscript>' . $eol
 			, 'Place disque libre' => gins_decodeSize(disk_free_space(_DIR_RACINE))
 		);
+		if(function_exists('memory_get_usage'))
+		{
+			$peak = function_exists('memory_get_peak_usage')
+				? ' / ' . gins_decodeSize(memory_get_peak_usage())
+				: ''
+				;
+			$ini = function_exists('ini_get')
+				? ' / ' . ini_get('memory_limit')
+				: ''
+				;
+			$infos['M&#233;moire allou&#233;e'] = gins_decodeSize(memory_get_usage())
+				. $peak
+				. $ini
+				;
+		}
 		$corps[$ii] = gins_lister_values(
 			$infos
 			, _T('gins:'.$ii)
