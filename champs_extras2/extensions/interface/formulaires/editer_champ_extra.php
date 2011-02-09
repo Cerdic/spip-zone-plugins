@@ -64,9 +64,9 @@ function formulaires_editer_champ_extra_verifier_dist($extra_id='new', $redirect
 		}
 	}
 	
-	// 'champ' correctement ecrit
+	// 'champ' correctement ecrit (pas de majuscule ni de tiret)
 	if ($champ = trim($extra['champ'])) {
-		if (!preg_match('/^[a-zA-Z0-9_-]+$/',$champ)) {
+		if (!preg_match('/^[a-z0-9_]+$/',$champ)) {
 			$erreurs['champ'] = _T('iextras:caracteres_interdits');
 		}
 	}
