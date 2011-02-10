@@ -9,7 +9,7 @@
 			<div class="meta">[[(#DATE|affdate)] - [(#DATE|heures)]:[(#DATE|minutes)] | <a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a>]</div>
 				<a title="[(#TITRE|attribut_html)]" rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]">
 				[(#DESCRIPTIF|extraire_balise{img}||?{[(#DESCRIPTIF|extraire_balise{img}|image_passe_partout{300,275,center}|image_recadre{300,275,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})],
-				[(#LOGO_SITE_SPIP||image_passe_partout{300,275,center}|image_recadre{300,275,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})]})]</a>
+				[(#LOGO_SITE||image_passe_partout{300,275,center}|image_recadre{300,275,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})]})]</a>
 			<p>[(#DESCRIPTIF|couper{630}|sinon{<:site_pas_description:>})]</p>
 			<a title="<:lire_la_suite:><:lire_la_suite_de:>[(#TITRE|attribut_html)]" rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]"><:lire_la_suite:></a>
 	</div></BOUCLE_syndiclist>
@@ -21,7 +21,7 @@
 		<BOUCLE_syndiclist_petit(SYNDIC_ARTICLES){annee ?} {mois ?} {!par date} {unique}{doublons}{0,4}><div class="clearfloat">
 				<a title="[(#TITRE|attribut_html)]" rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]">
 				[(#DESCRIPTIF|extraire_balise{img}||?{[(#DESCRIPTIF|extraire_balise{img}|image_passe_partout{100,65,center}|image_recadre{100,65,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})],
-					[(#LOGO_SITE_SPIP||image_passe_partout{100,65,center}|image_recadre{100,65,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})]})]</a>
+					[(#LOGO_SITE||image_passe_partout{100,65,center}|image_recadre{100,65,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})]})]</a>
 				<div class="info"><a class="title" rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]">[(#TITRE|couper{50})]</a>
 				<div class="meta">[[(#DATE|affdate)] - [(#DATE|heures)]:[(#DATE|minutes)] | <a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a>]</div>	
 				</div>
