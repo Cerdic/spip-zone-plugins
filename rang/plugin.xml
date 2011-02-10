@@ -2,27 +2,27 @@
 	<nom>Plugin Rang</nom>
 	<auteur>Camille Lafitte</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.2</version>
+	<version>0.3.0</version>
+	<version_base>0.02</version_base>
 	<etat>stable</etat>
-    <description>
-    G&#233;rer les rang des objets SPIP.
-	</description>
-	<prefix>prang</prefix>
+	<description>G&#233;rer les rang des objets SPIP.</description>
+	<prefix>rang</prefix>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/prang.php</inclure>
+		<inclure>base/rang.php</inclure>
 	</pipeline>
-	<install>base/prang_installer.php</install>
- 	<pipeline>
-	    <nom>formulaire_charger</nom>
-	    <inclure>rang_pipelines.php</inclure>
-    </pipeline>	
- 	<pipeline>
-	    <nom>formulaire_traiter</nom>
-	    <inclure>rang_pipelines.php</inclure>
-    </pipeline>	
- 	<pipeline>
-	    <nom>formulaire_verifier</nom>
-	    <inclure>rang_pipelines.php</inclure>
-    </pipeline>	
+	<install>base/rang_installer.php</install>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>rang_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>rang_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>rang_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;]" >
 </plugin>
