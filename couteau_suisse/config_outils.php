@@ -596,12 +596,14 @@ if(!defined('_SPIP19300') && isset(\$_GET['var_recherche'])) {
 	// pour les articles, breves et rubriques : $table_des_traitements['TEXTE']['articles'] = 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE:post_propre,
 	 traitement:TEXTE/articles:post_propre,
+	 traitement:TEXTE/forums:post_propre,
 	 traitement:TEXTE/breves:post_propre,
 	 traitement:TEXTE/rubriques:post_propre' => 'cs_decoupe',
 	// pour les balises #TEXTE : $table_des_traitements['TEXTE'] = 'propre(cs_onglets(%s))';
 	// pour les articles, breves et rubriques : $table_des_traitements['TEXTE']['articles'] = 'propre(cs_onglets(%s))';
 	'traitement:TEXTE:pre_propre,
 	 traitement:TEXTE/articles:pre_propre,
+	 traitement:TEXTE/forums:pre_propre,
 	 traitement:TEXTE/breves:pre_propre,
 	 traitement:TEXTE/rubriques:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
@@ -1007,12 +1009,13 @@ add_outil( array(
 	'contrib'	=> 2206,
 	'code:options' => "@define('_CS_SANS_GLOSSAIRE', '[!glossaire]');\n%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
 //	'traitement:LIEU:post_propre' => 'cs_glossaire',
-	// sans oublier les articles, les breves et les rubriques :
-	// SPIP ne considere pas que la definition precedente est un tronc commun...
+	// sans oublier les articles, les breves, les forums et les rubriques !
+	// SPIP ne considere pas que la premiere definition est un tronc commun...
 	// meme traitement au chapo des articles...
 	'traitement:TEXTE:post_propre,
 	 traitement:TEXTE/articles:post_propre,
 	 traitement:TEXTE/breves:post_propre,
+	 traitement:TEXTE/forums:post_propre,
 	 traitement:TEXTE/rubriques:post_propre,
 	 traitement:CHAPO:post_propre' => 'cs_glossaire',
 	// Precaution pour les articles virtuels
@@ -1145,11 +1148,12 @@ add_outil( array(
 	'id' => 'insertions',
 	'categorie'	 => 'typo-corr',
 	'code:options' => "%%insertions%%",
-	'traitement:TEXTE:pre_propre' => 'insertions_pre_propre',
-	// sans oublier les articles, les breves et les rubriques :
-	// SPIP ne considere pas que la definition precedente est un tronc commun...
-	'traitement:TEXTE/articles:pre_propre,
+	// sans oublier les articles, les breves, les forums et les rubriques !
+	// SPIP ne considere pas que la premiere definition est un tronc commun :
+	'traitement:TEXTE:pre_propre,
+	 traitement:TEXTE/articles:pre_propre,
 	 traitement:TEXTE/breves:pre_propre,
+	 traitement:TEXTE/forums:post_propre,
 	 traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
 ));
 

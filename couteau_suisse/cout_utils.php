@@ -450,8 +450,8 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 		?array(
 			// Fonctions pivots : on peut en avoir plusieurs pour un meme traitement
 			// Exception : 'typo' et 'propre' ne cohabitent pas ensemble
-			'typo' => 'typo(%s,"TYPO",$connect)',
-			'propre' => 'propre(%s,$connect)',
+			'typo' => defined('_TRAITEMENT_TYPO')?_TRAITEMENT_TYPO:'typo(%s,"TYPO",$connect)',
+			'propre' => defined('_TRAITEMENT_RACCOURCIS')?_TRAITEMENT_RACCOURCIS:'propre(%s,$connect)',
 		):array(
 			'typo' => 'typo(%s)',
 			'propre' => 'propre(%s)',
@@ -478,17 +478,21 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 						$traitements_type_objet[$f] = cs_fermer_parentheses(join('(', $fonction['post']) . '(' . $traitements_type_objet[$f]);
 				}
 			}
+			// nombre de fonctions pivot ?
 			if(count($traitements_type_objet)===1) $temp = join('', $traitements_type_objet);
 			else {
+				// compilation de plusieurs pivots
 				$temp = '%s';
-				foreach($traitements_type_objet as $t)	
-					$temp = str_replace('%s', $t, $temp);
+				foreach($traitements_type_objet as $t) $temp = str_replace('%s', $t, $temp);
 			}
-			if(strpos($temp, '(propre')) {
+			// detection d'un traitement post_propre
+			if(strpos($temp, '(propre(')) {
 				$traitements_post_propre = 1;
-				$temp = 'cs_nettoie('.$temp.')';
+				$temp = "cs_nettoie($temp)";
 			}
-			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='" . $temp . "';";
+			// traitement particulier des forums (SPIP>=2.1)
+			if(defined('_SPIP20100') && $obj==='forums') $temp = "safehtml($temp)";
+			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='" . addslashes($temp) . "';";
 		}
 		$traitements_utilises[$bal] = join("\n", $traitements_utilises[$bal]);		
 	}
