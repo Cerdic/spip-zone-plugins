@@ -111,6 +111,8 @@ select {
 	padding:0px 10px;
 	text-transform:uppercase;
 	background:#2c2c2c url(images/navbar.png);
+	background-repeat: repeat-x;
+	background-position: top center;
 	}
 
 #page-bar {
@@ -154,6 +156,9 @@ select {
 	padding-top:8px;
 	margin-right:10px;
 	}
+#searchform label {
+	display: none;
+}
 
 /* Dropdown Menus */		
 #page-bar li {
