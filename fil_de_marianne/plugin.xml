@@ -4,9 +4,9 @@
 	<licence>GPL</licence>
 	<version>2.0</version>
 	<etat>stable</etat>
-	<description>Squelettes d&eacute;di&eacute; &agrave; la syndication d articles bas&eacute; sur le th&egrave;me Arthemia de Wordpress. <br />
+	<description><multi>[fr]Squelettes d&eacute;di&eacute; &agrave; la syndication d articles bas&eacute; sur le th&egrave;me Arthemia de Wordpress. <br />
 	Adaptation de la premi&egrave;re version du Fil de Marianne par Kaiser <br />
-	Mise en plugin et corrections par Teddy Payet
+	Mise en plugin et corrections par Teddy Payet</multi>
 	</description>
 	<prefix>fildemarianne</prefix>
 	<necessite id='spip' version='[2.0.10;]' />
