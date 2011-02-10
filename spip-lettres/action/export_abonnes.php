@@ -18,17 +18,14 @@ include_spip('base/abstract_sql');
  */
 function action_export_abonnes() {
 	if (autoriser('exporterabonnes', 'lettres')
-//		AND $id_parent = _request('id_parent')
 		) {
-
+		$id_parent = _request('id_parent');
 		$exporter_csv = charger_fonction('exporter_csv','inc');
 
 		$delim = _request('delim')?_request('delim'):";";
 		$res = sql_select('A.email,A.nom', 'spip_abonnes as A JOIN spip_abonnes_rubriques AS AR ON A.id_abonne=AR.id_abonne', 'AR.statut="valide" AND AR.id_rubrique='.intval($id_parent));
 		$exporter_csv("abonnes-$id_parent", $res, $delim);
-
 	}
 }
-
 
 ?>
