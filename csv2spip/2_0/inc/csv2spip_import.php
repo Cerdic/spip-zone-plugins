@@ -21,13 +21,13 @@ function csv2spip_analyse($contenu)
 		    $err[]= _L("Champ inconnu @champ@", 
 			       array('champ' => $champ_ec));
 	}
-	$n = count($Tchamps)+1;
+	$n = count($Tchamps);
 	$l = 1;
 
 	foreach ($csv as $k => $cols) {
 		if (($m=count($cols)) != $n)  {
-			$err[]= _L("ligne @ligne@: @faute@ champs sur @bon@: $ligne",
-				   array('ligne' => $l, 'faute' => $m, 'bon' =>$n));
+			$err[]= _L("ligne @ligne@: @faute@ champs sur @bon@: @source@",
+				   array('ligne' => $k, 'faute' => $m, 'bon' =>$n, 'source' => '"' . join('" "', $cols) . '"'));
 			continue;
 		}
 		$i = 0;

@@ -210,7 +210,7 @@ function csv2spip_formulaire()
             echo "<input type=\"radio\" name=\"archivage\" value=\"0\" onClick=\"aff_masq('rub_transfert', 0);\">"._T('csvspip:non'); 
             echo "<div id=\"rub_transfert\" class=\"ss_cadre\"><br>";
             $sql9 = sql_query("SELECT COUNT(*) AS nb_rubriques FROM spip_rubriques");
-    		$data9 = mysql_fetch_array($sql9);
+    		$data9 = sql_fetch($sql9);
     		$nb_rubriques = $data9['nb_rubriques'];
     		$annee = date("Y"); 
     		echo "<strong>"._T('csvspip:nom_rubrique_archives')."</strong>";
@@ -222,7 +222,7 @@ function csv2spip_formulaire()
                 echo "<select name=\"rub_parent_archivage\">";
                 echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
             		
-             	while ($data10 = mysql_fetch_array($sql10)) { 
+             	while ($data10 = sql_fetch($sql10)) { 
              	    echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
             	}				 						
                	echo "</select><br>";
@@ -250,7 +250,7 @@ function csv2spip_formulaire()
               	echo "<select name=\"rub_parent\">";
               	echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
                 $sql10 = sql_query("SELECT id_rubrique, titre, id_secteur FROM spip_rubriques ORDER BY titre");
-            	while ($data10 = mysql_fetch_array($sql10)) { 
+            	while ($data10 = sql_fetch($sql10)) { 
              	    echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
             	}  	
                 echo "</select>";
@@ -272,7 +272,7 @@ function csv2spip_formulaire()
               	echo "<select name=\"rub_parent_admin_defaut\">";
               	echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
                 $sql108 = sql_query("SELECT id_rubrique, titre, id_secteur FROM spip_rubriques ORDER BY titre");
-            	while ($data108 = mysql_fetch_array($sql108)) { 
+            	while ($data108 = sql_fetch($sql108)) { 
              	    echo "<option value=\"".$data108['id_rubrique'].",".$data108['id_secteur']."\">".$data108['titre']."</option>";
             	}  	
                 echo "</select><br />";
@@ -355,7 +355,7 @@ function csv2spip_etapes()
                 while ($data8 = sql_fetch($sql8)) {
         		    $rubrique_ec = $data8['ss_groupe']; 
             		$sql7 = sql_query("SELECT COUNT(*) AS rub_existe FROM spip_rubriques WHERE titre = '$rubrique_ec' LIMIT 1");
-            		$data7 = mysql_fetch_array($sql7);
+            		$data7 = sql_fetch($sql7);
             		if ($data7['rub_existe'] > 0) {
         //print '<br>etape3 : rubrique '.$rubrique_ec.' existe';
             		    continue;
@@ -392,7 +392,7 @@ function csv2spip_etapes()
         		$secteur_defaut = $Tch_rub_defaut[1];
         	 	$rubrique_defaut = ($_POST['rub_admin_defaut'] != '' ? $_POST['rub_admin_defaut'] : _T('csvspip:nom_rub_admin_defaut') );
         		$sq21 = sql_query("SELECT COUNT(*) AS rub_existe FROM spip_rubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
-        		$rows21 = mysql_fetch_array($sq21);
+        		$rows21 = sql_fetch($sq21);
         		if ($rows21['rub_existe'] < 1) {
         		    sql_query("INSERT INTO spip_rubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) 
         			 		    VALUES ('', '$rubrique_parent_defaut', '$rubrique_defaut', '$secteur_defaut', 'prive', '$date_rub_defaut')" );
@@ -407,7 +407,7 @@ function csv2spip_etapes()
         		}
         		else {
         		    $sql1001 = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
-        			$rows1001 = mysql_fetch_array($sql1001);
+        			$rows1001 = sql_fetch($sql1001);
         			$id_rub_admin_defaut = $rows1001['id_rubrique'];
         		}
         	}
@@ -437,7 +437,7 @@ function csv2spip_etapes()
         //echo '<br>$ch_sql = '."SELECT ss_groupe FROM spip_tmp_csv2spip ".$sql_sup." GROUP BY ss_groupe";							 
         		$sql18= sql_query("SELECT ss_groupe FROM spip_tmp_csv2spip ".$sql_sup." GROUP BY ss_groupe");
         //echo '<br>mysql_error $sql18 = '.mysql_error();							 
-        		while ($data18 = mysql_fetch_array($sql18)) {
+        		while ($data18 = sql_fetch($sql18)) {
         		  // créer les sous-groupes
         		    if ($data18['ss_groupe'] != '') {
         			    $grpe_ec = $data18['ss_groupe']; 				
@@ -445,9 +445,9 @@ function csv2spip_etapes()
             			$sql17 = sql_query("SELECT id_grpacces FROM $Taccesgroupes_groupes WHERE nom = '$grpe_ec' LIMIT 1");
         //echo '<br>mysql_error $sql17 = '.mysql_error();											 
             		  // le groupe existe déja
-        				if (mysql_num_rows($sql17) > 0) {
+        				if (sql_count($sql17) > 0) {
             			  // stocker l'id_grpacces du groupe dans $Tgrpes_accesgroupes[$nom_ss-grpe]
-        					$data17 = mysql_fetch_array($sql17);
+        					$data17 = sql_fetch($sql17);
         					$Tgroupes_accesgroupes[$grpe_ec] = $data17['id_grpacces'];
         			      // si nécessaire vider le groupe de ses utilisateurs
         					if ($_POST['ss_grpes_reinitialiser'] == 1) {
@@ -641,7 +641,7 @@ function csv2spip_etapes()
         	if (($ss_groupes_redac == 1 AND $statut == '1comite') OR ($ss_groupes_admin == 1 AND $statut == '0minirezo') OR ($ss_groupes_visit == 1 AND $statut == '6forum')) {
         	    if ($id_grpacces_ec = $Tgroupes_accesgroupes[$ss_groupe]) {
         		    $sql55 = sql_query("SELECT COUNT(*) AS existe_auteur FROM $Taccesgroupes_auteurs WHERE id_grpacces = $id_grpacces_ec AND id_auteur = $id_spip LIMIT 1");
-        		    $result55 = mysql_fetch_array($sql55);
+        		    $result55 = sql_fetch($sql55);
         	  // l'utilisateur n'existe pas dans la table _accesgroupes_auteurs
         		    if ($result55['existe_auteur'] == 0) {
         		        sql_query("INSERT INTO $Taccesgroupes_auteurs (id_grpacces, id_auteur, dde_acces, proprio)
@@ -690,8 +690,8 @@ function csv2spip_etapes()
       	    if ($_POST['auteurs_poubelle'] != 1) {
       		    $nom_auteur_archives = $_POST['nom_auteur_archives'];
       			$sql615 = sql_query("SELECT id_auteur FROM spip_auteurs WHERE login = '$nom_auteur_archives' LIMIT 1");
-      			if (mysql_num_rows($sql615) > 0) {
-      			    $data615 = mysql_fetch_array($sql615);
+      			if (sql_count($sql615) > 0) {
+      			    $data615 = sql_fetch($sql615);
       				$id_auteur_archives = $data615['id_auteur'];
       			}
       			else {
@@ -720,8 +720,8 @@ function csv2spip_etapes()
     				$id_sect_parent_archives = $Tids_parent_rub_archives[1];
     				$date_rub_archives = date("Y-m-j H:i:s");
     				$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM spip_rubriques WHERE titre = '$nom_rub_archives' AND id_parent = '$id_rub_parent_archives' LIMIT 1");
-    				if (mysql_num_rows($sql613) > 0) {
-    				    $data613 = mysql_fetch_array($sql613);
+    				if (sql_count($sql613) > 0) {
+    				    $data613 = sql_fetch($sql613);
     					$id_rub_archives = $data613['id_rubrique'];
     				}
     				else {
@@ -735,11 +735,11 @@ function csv2spip_etapes()
       // 4.4.1 : traitement des visiteurs actuels de la base spip_auteurs => si effacer les absV = OK
         if ($eff_absv == 1) {
     	    $sql1471 = sql_query("SELECT COUNT(*) AS nb_redacsV FROM spip_auteurs WHERE statut = '6forum'");
-        	$data1471 = mysql_fetch_array($sql1471);
+        	$data1471 = sql_fetch($sql1471);
         	if ($data1471['nb_redacsV'] > 0) {
       		  // pas de poubelle pour les visiteurs => suppression puisque pas d'articles
         		$sql1591 = sql_query("SELECT id_auteur, login FROM spip_auteurs WHERE statut = '6forum'");
-      			while ($data1591 = mysql_fetch_array($sql1591)) {
+      			while ($data1591 = sql_fetch($sql1591)) {
         		    $login_sp = strtolower($data1591['login']);
       				$id_auteur_ec = $data1591['id_auteur'];
         			if (!sql_countsel('spip_tmp_csv2spip',"LOWER(nom) = '$login_sp'")) {
@@ -769,14 +769,14 @@ function csv2spip_etapes()
       // 4.4.2 : traitement des rédacteurs actuels de la base spip_auteurs => si effacer les absents redac = OK
         if ($eff_absr == 1) {
             $sql147 = sql_query("SELECT COUNT(*) AS nb_redacsR FROM spip_auteurs WHERE statut = '1comite'");
-          	$data147 = mysql_fetch_array($sql147);
+          	$data147 = sql_fetch($sql147);
           	if ($data147['nb_redacsR'] > 0) {
         	  // si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
         		if ($supprimer_articlesr != 1 AND $archivager != 0) {
         		    $nom_rub_archivesR = $rub_archivager;
         			$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM spip_rubriques WHERE titre = '$nom_rub_archivesR' AND id_parent = '$id_rub_parent_archivesR' LIMIT 1");
-        			if (mysql_num_rows($sql613) > 0) {
-        			    $data613 = mysql_fetch_array($sql613);
+        			if (sql_count($sql613) > 0) {
+        			    $data613 = sql_fetch($sql613);
         				$id_rub_archivesR = $data613['id_rubrique'];
         			}
         			else {
@@ -788,14 +788,14 @@ function csv2spip_etapes()
           		$cteur_articles_deplacesR = 0;
         		$cteur_articles_supprimesR = 0;
         		$cteur_articles_modif_auteurR = 0;
-        		while ($data159 = mysql_fetch_array($sql159)) {
+        		while ($data159 = sql_fetch($sql159)) {
 				$login_sp = strtolower($data159['login']);
         			$id_auteur_ec = $data159['id_auteur'];
                   // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
 				if (sql_countsel('spip_tmp_csv2spip', "nom = '$login_sp'")) {
         			  // traitement éventuel des articles de l'auteur à supprimer
         			    $sql757 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-        				$data757 = mysql_fetch_array($sql757);
+        				$data757 = sql_fetch($sql757);
     //print '<br><br>id_auteur = '.$id_auteur_ec;
     //print '<br>nb_articles_auteur = '.$data757['nb_articles_auteur'];
     //print '<br>$supprimer_articlesr = '.$supprimer_articlesr;
@@ -804,23 +804,23 @@ function csv2spip_etapes()
             			    if ($supprimer_articlesr != 1) {
                 			    if ($archivager != 0) {
         						    $sql612 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = $id_auteur_ec");
-                					if (mysql_num_rows($sql612) > 0) {
+                					if (sql_count($sql612) > 0) {
     //print '<br>départ UPDATE';
-                					    while ($data612 = mysql_fetch_array($sql612)) {
+                					    while ($data612 = sql_fetch($sql612)) {
                 						    $id_article_ec = $data612['id_article'];
-        									sql_query("UPDATE $Tarticles SET id_rubrique = '$id_rub_archivesR', id_secteur = '$id_sect_parent_archivesR' WHERE id_article = '$id_article_ec' LIMIT 1");
+        									sql_updateq("$Tarticles", array("id_rubrique" => '$id_rub_archivesR', "id_secteur" => '$id_sect_parent_archivesR'), "id_article = '$id_article_ec' LIMIT 1");
         									$cteur_articles_deplacesR ++;
                 						}
                 					} 
                    					if ($auteurs_poubeller != 1) {
-                  					    sql_query("UPDATE $Tauteurs_articles SET id_auteur = '$id_auteur_archivesR' WHERE id_auteur = '$id_auteur_ec'");
+                  					    sql_updateq("$Tauteurs_articles", array("id_auteur" => '$id_auteur_archivesR'), "id_auteur = '$id_auteur_ec'");
                   					}	   														
                 				}
             				}
             				else {
             				    $sql756 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
     //print '<br>départ DELETE';
-            					while ($data756 = mysql_fetch_array($sql756)) {
+            					while ($data756 = sql_fetch($sql756)) {
             					    $id_article_a_effac = $data756['id_article'];
             						sql_query("DELETE FROM $Tarticles WHERE id_article = '$id_article_a_effac' LIMIT 1");
         							$cteur_articles_supprimesR ++;
@@ -847,7 +847,7 @@ function csv2spip_etapes()
                   			}
         				}
         				else {
-        				    sql_query("UPDATE spip_auteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
+        				    sql_updateq("spip_auteurs", array("statut" => '5poubelle'), "id_auteur = '$id_auteur_ec' LIMIT 1");
               				if (mysql_error() == 0) {
                   			    $TresR_poub[] = $id_auteur_ec;
                     		}
@@ -868,13 +868,13 @@ function csv2spip_etapes()
     								 ON $Tauteurs_rubriques.id_auteur = spip_auteurs.id_auteur
     								 WHERE statut = '0minirezo'");
     //echo '<br>mysql_error 1473 = '.mysql_error();
-      		$data1473 = mysql_fetch_array($sql1473);
+      		$data1473 = sql_fetch($sql1473);
       		if ($data1473['nb_redacsA'] > 0) {
       		    $sql1593 = sql_query("SELECT Tauteurs.id_auteur, Tauteurs.login FROM spip_auteurs AS Tauteurs, $Tauteurs_rubriques AS Tauteurs_rubriques WHERE statut = '0minirezo' AND Tauteurs.id_auteur = Tauteurs_rubriques.id_auteur");
       			$cteur_articles_deplacesA = 0;
     			$cteur_articles_supprimesA = 0;
     			$cteur_articles_modif_auteurA = 0;
-    			while ($data1593 = mysql_fetch_array($sql1593)) {
+    			while ($data1593 = sql_fetch($sql1593)) {
       			    $login_sp = strtolower($data1593['login']);
     				$id_auteur_ec = $data1593['id_auteur'];
       				
@@ -882,26 +882,26 @@ function csv2spip_etapes()
         			if (!sql_countsel('spip_tmp_csv2spip', "nom = '$login_sp'")) {
     				  // traitement éventuel des articles de l'admin à supprimer
     					$sql7573 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-    					$data7573 = mysql_fetch_array($sql7573);
+    					$data7573 = sql_fetch($sql7573);
     					if ($data7573['nb_articles_auteur'] > 0) {
         				    if ($supprimer_articlesa != 1) {
             				    if ($archivagea != 0) {
     							    $sql6123 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-            						    if (mysql_num_rows($sql6123) > 0) {
-            							    while ($data6123 = mysql_fetch_array($sql6123)) {
+            						    if (sql_count($sql6123) > 0) {
+            							    while ($data6123 = sql_fetch($sql6123)) {
             								    $id_article_ec = $data6123['id_article'];
-    											sql_query("UPDATE $Tarticles SET id_rubrique = '$id_rub_archivesA', id_secteur = '$id_sect_parent_archivesA' WHERE id_article = '$id_article_ec' LIMIT 1");
+    											sql_updateq("$Tarticles", array("id_rubrique" => '$id_rub_archivesA', "id_secteur" => '$id_sect_parent_archivesA'), "id_article = '$id_article_ec' LIMIT 1");
     											$cteur_articles_deplacesA ++;
             								}
             							} 
                							if ($auteurs_poubellea != 1) {
-              							    sql_query("UPDATE $Tauteurs_articles SET id_auteur = '$id_auteur_archivesA' WHERE id_auteur = '$id_auteur_ec'");
+              							    sql_updateq("$Tauteurs_articles", array("id_auteur" => '$id_auteur_archivesA'), "id_auteur = '$id_auteur_ec'");
               							}	   														
             						}
         						}
         						else {
         						    $sql7563 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-        							while ($data7563 = mysql_fetch_array($sql7563)) {
+        							while ($data7563 = sql_fetch($sql7563)) {
         							    $id_article_a_effac = $data7563['id_article'];
         								sql_query("DELETE FROM $Tarticles WHERE id_article = '$id_article_a_effac' LIMIT 1");
     									$cteur_articles_supprimesA ++;
@@ -933,7 +933,7 @@ function csv2spip_etapes()
               					}
     						}
     						else {
-    						    sql_query("UPDATE spip_auteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
+    						    sql_updateq("spip_auteurs", array("statut" => '5poubelle'), "id_auteur = '$id_auteur_ec' LIMIT 1");
           						if (mysql_error() == 0) {
               					    $TresA_poub[] = $id_auteur_ec;
                 				}
@@ -1166,7 +1166,7 @@ function csv2spip_etapes()
     					if ($data54['ss_groupe'] != '') {
     				        $ss_grpe_ec = $data54['ss_groupe'];
       						$sql55 = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
-      						$data55 = mysql_fetch_array($sql55);
+      						$data55 = sql_fetch($sql55);
       						$id_rubrique_adm_ec = $data55['id_rubrique'];									 		
     				    }
     				    else {
@@ -1175,7 +1175,7 @@ function csv2spip_etapes()
     				    }
     			    }
     			    $sql57 = sql_query("SELECT COUNT(*) AS existe_adm_rub FROM $Tauteurs_rubriques WHERE id_auteur = '$id_adm_ec' AND id_rubrique = '$id_rubrique_adm_ec' LIMIT 1");
-    			    $data57 = mysql_fetch_array($sql57);
+    			    $data57 = sql_fetch($sql57);
     			    if ($data57['existe_adm_rub'] == 0) {
         //print '<br>rubrique $ss_grpe_ec = '.$ss_grpe_ec.' $id_rubrique_adm_ec = '.$id_rubrique_adm_ec.'$id_adm_ec = '.$id_adm_ec;								 
     			        sql_query("INSERT INTO $Tauteurs_rubriques (id_auteur, id_rubrique) VALUES ('$id_adm_ec', '$id_rubrique_adm_ec')");
@@ -1211,15 +1211,15 @@ function csv2spip_etapes()
             	while ($data57 = sql_fetch($sql57)) {
 			$titre_rub_ec = $data57['ss_groupe'];
             		$sql58 = sql_query("SELECT id_rubrique, id_parent, id_secteur FROM spip_rubriques WHERE titre = '$titre_rub_ec' AND id_parent = '$rubrique_parent' LIMIT 1");
-            		$data58 = mysql_fetch_array($sql58);
+            		$data58 = sql_fetch($sql58);
             		$id_rub_ec = $data58['id_rubrique'];
             		$id_parent_ec = $data58['id_parent'];
             		$id_sect_ec = $data58['id_secteur'];
             		$date_ec = date("Y-m-d H:i:s");
             		$titre_ec = 'Bienvenue dans la rubrique '.$titre_rub_ec;
             		$sql432 = sql_query("SELECT id_article FROM $Tarticles WHERE id_rubrique = '$id_rub_ec' AND titre = '$titre_ec' LIMIT 1");
-            		if (mysql_num_rows($sql432) < 1) {
-            		    $data432 = mysql_fetch_array($sql432);
+            		if (sql_count($sql432) < 1) {
+            		    $data432 = sql_fetch($sql432);
             			sql_query("INSERT INTO $Tarticles (id_article, id_rubrique, id_secteur, titre, date, statut ) VALUES ('', '$id_rub_ec', '$id_sect_ec', '$titre_ec', '$date_ec', 'publie')");
             			if (mysql_error() != '') {
             			    $Terr_art_rub[] = array('rubrique' => $titre_rub_ec, 'erreur' => mysql_error());
