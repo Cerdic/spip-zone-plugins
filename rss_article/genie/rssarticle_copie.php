@@ -44,9 +44,9 @@ function genie_rssarticle_copie_dist($t){
           else    $u = sql_select("id_syndic,id_rubrique,id_secteur","spip_syndic","statut='publie' AND rssarticle='oui'");
   
   while ($b = sql_fetch($u)) {
-       $id_syndic = $b['id_syndic'];
-       $id_rubrique = $b['id_rubrique'];
-       $id_secteur = $b['id_secteur'];
+       $id_syndic = (int) $b['id_syndic'];
+       $id_rubrique = (int) $b['id_rubrique'];
+       $id_secteur = (int) $b['id_secteur'];
   
        // sur chaque site copie les derniers syndication
        $s = sql_select("*", "spip_syndic_articles", "statut='publie' AND id_syndic='$id_syndic'","","maj DESC","10");  // par flot de 10 articles / site pour limiter la charge
@@ -63,7 +63,17 @@ function genie_rssarticle_copie_dist($t){
             $tags =  $a['tags'];
           
             if ($lang=="") 	
-                $lang = $GLOBALS['spip_lang'];    
+                $lang = $GLOBALS['spip_lang'];  
+                
+            // cas particulier: 
+            // site multilingue avec la configuration: 1 lang par rubrique  
+            // on force l'article a avoir la langue de la rubrique ds lequel il est importee(pour omaidi)            
+            if ($GLOBALS['meta']['multi_rubriques']=='oui') {
+                  $s_lang = sql_select("lang", "spip_rubriques", "id_rubrique=$id_rubrique");
+                  while ($a_lang = sql_fetch($s_lang)) 
+                      $lang = $a_lang['lang'];                   
+            }
+            
         
             $lsDate = date('Y-m-d H:i:s');
             // creation de l'article
