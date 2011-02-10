@@ -19,7 +19,7 @@ function difference($date_debut,$date_fin){
    		$date_debut = mktime($split_heures_debut[0], $split_heures_debut[1], $split_heures_debut[2], $split_jours_debut[1], $split_jours_debut[0], $split_jours_debut[2]) ;   	
  		$date_difference = ($date_f-$date_debut)/60;
 		
-		return $date_difference;
+		return number_format($date_difference,2);
 		
 		
 
@@ -29,16 +29,16 @@ function difference($date_debut,$date_fin){
 function duree($id_projet,$difference=''){
 
 	$sql=sql_select('duree','spip_projets_timetracker','id_projet='.sql_quote($id_projet));
-	$duree=0;
+	$duree=0;	
+	$date_fin=date('Y-m-d G:i:s');		
 	while($r = sql_fetch($sql)){
 		$duree=$duree+$r['duree'];
 		}
 	if($difference){
-		$date_fin=date('Y-m-d G:i:s');	
 		$date_debut=sql_getfetsel('date_debut','spip_projets_timetracker','date_fin="0000-00-00 00:00:00" AND id_projet='.sql_quote($id_projet));
 		$difference=difference($date_debut,$date_fin);
 		$duree=$duree+$difference;
 	}
-return $duree;
+return number_format($duree,2);
 }
 ?>
