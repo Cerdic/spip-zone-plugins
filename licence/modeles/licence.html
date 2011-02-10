@@ -8,6 +8,7 @@
 	-* largeur_logo : int la largeur maximale du logo (passer un entier uniquement)
 	-* hauteur_logo : int la hauteur maximale du logo (passer un entier uniquement)
 	-* nom_licence : force l'affichage du nom de la licence dans le lien
+	-* desc_licence : force l'affichage de la description de la licence
 	-* cacher_defaut : si la valeur est oui, on n'affiche pas de texte par défaut si aucune licence
 	-* modele_type : la seule valeur possible est mrss, permet d'afficher la licence pour l'inclure dans un feed mrss
 	même si un logo est présent
@@ -48,6 +49,9 @@
 	[<media:license type="text/html"[ href="(#GET{link_licence})"]>(#GET{name_licence})</media:license>]
 	]
 	[(#ENV{modele_type}|=={mrss}|non)
+		[(#ENV{desc_licence}|oui)
+			<p>#GET{desc_licence}</p>
+		]
 		[<a href="(#GET{link_licence})" class="spip_out" rel="external" [title="(#GET{desc_licence}|attribut_html)"]>]
 			[(#GET{logo})]
 			[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}})#GET{name_licence}]
