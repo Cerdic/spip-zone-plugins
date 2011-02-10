@@ -290,7 +290,7 @@ function formulaires_ieconfig_export_traiter_dist() {
 	
 	// On encode en yaml
 	include_spip('inc/yaml');
-	$export = yaml_encode($export);
+	$export = yaml_encode($export,array('inline'=>20));
 	
 	// Nom du fichier
 	include_spip('inc/texte');
