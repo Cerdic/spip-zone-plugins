@@ -450,7 +450,7 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 		?array(
 			// Fonctions pivots : on peut en avoir plusieurs pour un meme traitement
 			// Exception : 'typo' et 'propre' ne cohabitent pas ensemble
-			'typo' => defined('_TRAITEMENT_TYPO')?_TRAITEMENT_TYPO:'typo(%s,"TYPO",$connect)',
+			'typo' => defined('_TRAITEMENT_TYPO')?_TRAITEMENT_TYPO:'typo(%s,"TYPO",$connect)', // guillemets doubles requises pour le compilo
 			'propre' => defined('_TRAITEMENT_RACCOURCIS')?_TRAITEMENT_RACCOURCIS:'propre(%s,$connect)',
 		):array(
 			'typo' => 'typo(%s)',
@@ -492,7 +492,7 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 			}
 			// traitement particulier des forums (SPIP>=2.1)
 			if(defined('_SPIP20100') && $obj==='forums') $temp = "safehtml($temp)";
-			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='" . addslashes($temp) . "';";
+			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='$temp';";
 		}
 		$traitements_utilises[$bal] = join("\n", $traitements_utilises[$bal]);		
 	}

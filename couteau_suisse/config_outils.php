@@ -38,7 +38,9 @@ add_outil( array(
 	'id' => 'autobr',
 	'code:options' => '%%alinea%%',
 	'categorie' => 'typo-corr',
-	'traitement:TEXTE/articles:pre_propre' => 'autobr_pre_propre',
+	// traitement automatique des TEXTE/articles, et TEXTE/forums (standard pour SPIP>=2.1)
+	'traitement:TEXTE/articles:pre_propre,
+	 .(!defined('_SPIP20100')?',traitement:TEXTE/forums:pre_propre':'') => 'autobr_pre_propre',
 	'pipelinecode:pre_typo' => 'if(!%%alinea%%) { include_spip(\'outils/autobr\'); $flux = autobr_alinea($flux); }',
 	'pipeline:nettoyer_raccourcis_typo' => 'autobr_nettoyer_raccourcis',
 	'pipeline:porte_plume_cs_pre_charger' => 'autobr_CS_pre_charger',
