@@ -18,7 +18,8 @@ include_spip('base/abstract_sql');
  */
 function action_export_abonnes() {
 	if (autoriser('exporterabonnes', 'lettres')
-		AND $id_parent = _request('id_parent')) {
+//		AND $id_parent = _request('id_parent')
+		) {
 
 		$exporter_csv = charger_fonction('exporter_csv','inc');
 

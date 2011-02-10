@@ -14,11 +14,12 @@
 include_spip('base/abstract_sql');
 
 /**
- * Exporter les abonnes
+ * Exporter les desabonnes
  */
-function action_export_abonnes() {
+function action_export_desabonnes() {
 	if (autoriser('exporterdesabonnes', 'lettres')
-		AND $id_parent = _request('id_parent')) {
+//		AND $id_parent = _request('id_parent')
+		) {
 
 		$exporter_csv = charger_fonction('exporter_csv','inc');
 
