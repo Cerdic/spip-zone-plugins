@@ -133,6 +133,9 @@ function teste_mois($date, $date_test) {
 function est_aujourdhui($date) {
 	return affdate($date, 'Y-m-d') == date('Y-m-d') ? $date : '';
 }
+function est_passee($date){
+	return strtotime($date) - time() < 1 ? ' ' : '';
+}
 
 //compat SPIP 1.9.2
 if(!function_exists('push')) {
