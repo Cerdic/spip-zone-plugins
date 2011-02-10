@@ -81,7 +81,6 @@ function lettres_envoyer_une_lettre_email ($id_lettre, $email, $champs=array(), 
 	};
 	
 	foreach ($champs as $c => $v) {
-		$c = strtoupper($c);
 		$objet = lettres_remplacer_raccourci($c, $v, $objet);
 		$message_html = lettres_remplacer_raccourci($c, $v, $message_html);
 		$message_texte = lettres_remplacer_raccourci($c, $v, $message_texte);
