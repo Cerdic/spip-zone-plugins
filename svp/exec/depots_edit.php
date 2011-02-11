@@ -65,7 +65,7 @@ function exec_depots_edit_args($id_depot) {
 		$contexte = array(
 			'id_depot' => $id_depot,
 			'titre' => $titre,
-			'icone_retour' => icone_inline(_T('icone_retour'), generer_url_ecrire('depots',"id_depot=$id_depot"), chemin('prive/themes/spip/images/depot-24.png'), 'rien.gif', $spip_lang_left),
+			'icone_retour' => icone_inline(_T('icone_retour'), generer_url_ecrire('depots',"id_depot=$id_depot"), find_in_path('prive/themes/spip/images/depot-24.png'), 'rien.gif', $spip_lang_left),
 			'redirect' => generer_url_ecrire('depots')
 		);
 	

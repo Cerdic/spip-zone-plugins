@@ -91,7 +91,7 @@ function afficher_depot($id_depot, $depot) {
 		. pipeline('affiche_droite',array('args'=>array('exec'=>'depots','id_depot'=>$id_depot),'data'=>''))
 		. debut_droite('',true);
 
-	$actions = icone_inline(_T('svp:bouton_modifier_depot'), generer_url_ecrire("depots_edit","id_depot=$id_depot"), chemin("prive/themes/spip/images/depot-24.png"), "edit.gif", $spip_lang_right);
+	$actions = icone_inline(_T('svp:bouton_modifier_depot'), generer_url_ecrire("depots_edit","id_depot=$id_depot"), find_in_path("prive/themes/spip/images/depot-24.png"), "edit.gif", $spip_lang_right);
 
 	$haut = "<div class='bandeau_actions'>$actions</div>" . gros_titre($titre, '' , false);
 
