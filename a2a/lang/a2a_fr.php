@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// L
 	'lier_cet_article' => 'Lier',
+	'lier_cet_article_deux_cotes' => 'Lier des deux cot&eacute;s',
 	
 	// P
 	'pas_articles_lies' => 'Pas d\'articles li&eacute;s',
