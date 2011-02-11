@@ -9,7 +9,7 @@
 <BOUCLE_article(DOCUMENTS) {id_article=(#ENV{id_article})}><center><a href="#URL_ARTICLE">#TITRE</a></center></BOUCLE_article>
 
 <BOUCLE_image(DOCUMENTS) {id_document=(#ENV{id_document})}><center>
-<img src="[(#URL_DOCUMENT||reduire_image{550,0}||extraire_attribut{src})]" height="[(#URL_DOCUMENT||reduire_image{550,0}||extraire_attribut{height})]" width="[(#URL_DOCUMENT||reduire_image{550,0}||extraire_attribut{width})]" alt="[(#TITRE|textebrut|sinon{doc#ID_DOCUMENT})]" class="image" />
+<img src="[(#URL_DOCUMENT||image_reduire{550,0}||extraire_attribut{src})]" height="[(#URL_DOCUMENT||image_reduire{550,0}||extraire_attribut{height})]" width="[(#URL_DOCUMENT||image_reduire{550,0}||extraire_attribut{width})]" alt="[(#TITRE|textebrut|sinon{doc#ID_DOCUMENT})]" class="image" />
 [<br /><strong class="image">(#TITRE)<strong>
 ][<br /><em class="image">(#DESCRIPTIF)</em>
 ]</center></BOUCLE_image>

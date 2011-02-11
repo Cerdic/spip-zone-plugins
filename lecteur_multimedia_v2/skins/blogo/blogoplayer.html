@@ -138,7 +138,7 @@ En ce moment vous &eacute;coutez :
 <BOUCLE_logo_art(ARTICLES){id_article}>
 <BOUCLE_doc_mp3(DOCUMENTS){id_article}{extension==mp3}>
 <li class="play_">
-[(#_logo_art:LOGO_ARTICLE||reduire_image{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art:URL_ARTICLE" title="lire : #_logo_art:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+[(#_logo_art:LOGO_ARTICLE||image_reduire{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art:URL_ARTICLE" title="lire : #_logo_art:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
 <a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
 </BOUCLE_doc_mp3>
 </BOUCLE_logo_art>
@@ -152,7 +152,7 @@ En ce moment vous &eacute;coutez :
 <BOUCLE_logo_art_tout(ARTICLES){id_article}>
 <BOUCLE_doc_mp3_tout(DOCUMENTS){id_article}{extension==mp3}>
 <li class="title play_">
-[(#_logo_art_tout:LOGO_ARTICLE||reduire_image{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art_tout:URL_ARTICLE" title="lire : #_logo_art_tout:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+[(#_logo_art_tout:LOGO_ARTICLE||image_reduire{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art_tout:URL_ARTICLE" title="lire : #_logo_art_tout:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
 <a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
 </BOUCLE_doc_mp3_tout>
 </BOUCLE_logo_art_tout>

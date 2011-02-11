@@ -6,7 +6,7 @@
 <BOUCLE_doc (DOCUMENTS) {id_document}>
 #SET{lien, #ENV{lien}|sinon{#URL_DOCUMENT}}
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-[(#MODELE{emb}{lien=#GET{lien}}|reduire_image{200,400})]
+[(#MODELE{emb}{lien=#GET{lien}}|image_reduire{200,400})]
 [<div class='spip_doc_titre' style='width:200px;'><strong>(#TITRE)</strong></div>]
 [<div class='spip_doc_descriptif' style='width:200px;'>
 	(#EXIF|sinon{#DESCRIPTIF}|?{' '})

@@ -1,3 +1,17 @@
 [(#REM) Une capture d'ecran d'un site pris au hasard dans l'herbier 
 
-]<BOUCLE_herbier(SYNDIC_ARTICLES){id_syndic=#CONFIG{id_syndic_herbier}}{par hasard}{0,1}>[<div id="herbier">	<a href="http://www.spip-herbier.net/">SPIP-Herbier</a>	<a href="#URL_ARTICLE"[ title="(#TITRE|textebrut|entites_html)"]>	(#DESCRIPTIF		|extraire_balise{img}		|reduire_image{175,132}		|inserer_attribut{alt,[(#TITRE|textebrut)]}		|inserer_attribut{'align','center'})	</a></div>]</BOUCLE_herbier>
+]<BOUCLE_herbier(SYNDIC_ARTICLES){id_syndic=#CONFIG{id_syndic_herbier}}{par hasard}{0,1}>
+[<div id="herbier">
+
+	<a href="http://www.spip-herbier.net/">SPIP-Herbier</a>
+
+	<a href="#URL_ARTICLE"[ title="(#TITRE|textebrut|entites_html)"]>
+	(#DESCRIPTIF
+		|extraire_balise{img}
+		|image_reduire{175,132}
+		|inserer_attribut{alt,[(#TITRE|textebrut)]}
+		|inserer_attribut{'align','center'})
+	</a>
+
+</div>]
+</BOUCLE_herbier>

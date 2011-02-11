@@ -6,7 +6,7 @@
 [(#ENV{gerer_sutitre})
     [<div class="titre4">(#SURTITRE)</div>]
 ]
-    [<h1 class="titre1">[(#LOGO_ARTICLE||reduire_image{#ENV{logo_size,70}}|inserer_attribut{'alt',#TITRE}|inserer_attribut{'title',#TITRE})](#TITRE|supprimer_numero)</h1>]
+    [<h1 class="titre1">[(#LOGO_ARTICLE||image_reduire{#ENV{logo_size,70}}|inserer_attribut{'alt',#TITRE}|inserer_attribut{'title',#TITRE})](#TITRE|supprimer_numero)</h1>]
 [(#ENV{gerer_soustitre})
     [<div class="titre3">(#SOUSTITRE)</div>] 	
 ]

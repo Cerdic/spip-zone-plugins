@@ -194,7 +194,7 @@ h4 {
 				]
 				[<h3>(#SURTITRE|textebrut|supprimer_numero) :</h3>]
 				 <h2>[(#TITRE|textebrut|supprimer_numero)]</h2>
-				[(#LOGO_ARTICLE||reduire_image{300, 0}|liens_absolus|inserer_attribut{class,logo})]
+				[(#LOGO_ARTICLE||image_reduire{300, 0}|liens_absolus|inserer_attribut{class,logo})]
 				[<p><b>(#CHAPO|liens_absolus)</b></p>] 
 				<!-- SI PAS agenda -->
 				[(#GET{type}|=={'agenda'}|?{'',' '})<p class="date">[(#DATE|affdate)]</p>]

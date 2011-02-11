@@ -754,7 +754,7 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 	else $placer = false;
 
 	if ($creer) {
-		include_spip('inc/logos'); // bicoz presence reduire_image
+		include_spip('inc/logos'); // bicoz presence image_reduire
 
 		$masque = find_in_path($masque);
 		$mask = valeurs_image_trans($masque,"");
@@ -829,7 +829,7 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 			$y_dec = round(($y_d - $y_m) /2);
 		}
 
-		$nouveau = valeurs_image_trans(reduire_image($im, $x_d, $y_d),"");
+		$nouveau = valeurs_image_trans(image_reduire($im, $x_d, $y_d),"");
 		$im_n = $nouveau["fichier"];
 		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
 		$im_ = imagecreatetruecolor($x_dest, $y_dest);

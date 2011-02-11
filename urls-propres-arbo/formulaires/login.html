@@ -30,7 +30,7 @@
 		<input type="text" class="forml" id="var_login" name="var_login" value="" size="40" /></p>]
 		
 [
-[(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})]
+[(#LOGO_AUTEUR||image_reduire{100,80}|inserer_attribut{alt,#ENV{login_alt}})]
 <input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
 document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a href='[(#ENV{action2}

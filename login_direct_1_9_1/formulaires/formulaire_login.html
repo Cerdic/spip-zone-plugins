@@ -21,7 +21,7 @@
 	<legend><:form_forum_identifiants:></legend>
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
 
-[(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})]
+[(#LOGO_AUTEUR||image_reduire{100,80}|inserer_attribut{alt,#ENV{login_alt}})]
 	<input type="hidden" name="session_login_hidden" value="" />
 	<p><label for="var_login"><:login_login2:></label><br />
 		<input type="text" class="forml" id="var_login" name="var_login" value="[(#ENV{login})]" size="40" /><br />

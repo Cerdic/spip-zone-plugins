@@ -8,7 +8,7 @@
 	[(#ANCRE_PAGINATION)]
     <ul>
 <BOUCLE_bulletin(DOCUMENTS){id_article}{par #ENV{partri}}{inverse #GET{sens}}{par num titre, date}{inverse #GET{sens}}{date<=#ENV{date}}{pagination #GET{increment}}>
-	<li[(#ENV{logo}|=={on}|?{' '})[ style="list-style-image:url('(#LOGO_DOCUMENT||reduire_image{12,12}|extraire_attribut{src})');"]]><a [href="(#URL_DOCUMENT)"][ title="(#DESCRIPTIF|textebrut)"] class="spip_in">#TITRE</a> <:album:du:> [(#DATE|affdate)]</li>
+	<li[(#ENV{logo}|=={on}|?{' '})[ style="list-style-image:url('(#LOGO_DOCUMENT||image_reduire{12,12}|extraire_attribut{src})');"]]><a [href="(#URL_DOCUMENT)"][ title="(#DESCRIPTIF|textebrut)"] class="spip_in">#TITRE</a> <:album:du:> [(#DATE|affdate)]</li>
 </BOUCLE_bulletin>
 	</ul>
 	[<p class="pagination">(#PAGINATION)</p>]

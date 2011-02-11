@@ -61,12 +61,12 @@
       </div><!-- cartouche -->
 
 
-		[<div class="#EDIT{chapo} chapo">(#CHAPO|reduire_image{440,0})</div>]
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{440,0})</div>]
 		[<div id="sommaire">
 			<h4><:icone_brouteur:></h4> [(#REM) = "Navigation rapide" on aurait prefere "Sommaire", mais pas de traduction ]
 			(#TEXTE*|sommaire_article|propre)
 		</div>]
-		[<div class="#EDIT{texte} texte">(#TEXTE*|decouper_en_page{#ID_ARTICLE}|propre|reduire_image{440,0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE*|decouper_en_page{#ID_ARTICLE}|propre|image_reduire{440,0})</div>]
 		[<div class="#EDIT{ps} ps">(#PS)</div>]
 		[<div class="notes">(#NOTES)</div>]
 		[(#TEXTE|?{""})]
@@ -86,7 +86,7 @@
 
 			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
 			<div class="spip_documents spip_documents_center" id="document_actif">
-				[<a href="[(#URL_DOCUMENT|url_absolue)]">(#FICHIER|reduire_image{450,0}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
+				[<a href="[(#URL_DOCUMENT|url_absolue)]">(#FICHIER|image_reduire{450,0}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
 				[<div  class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
 				[<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
 			</div>
