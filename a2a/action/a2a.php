@@ -68,11 +68,27 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type=nul
 		sql_update('spip_articles_lies', array('rang' => sql_quote(--$r["rang"])), 'id_article=' . sql_quote($r["id_article"]) . 'AND id_article_lie=' . sql_quote($r["id_article_lie"]));
 	}
 	
-	return sql_delete('spip_articles_lies',  array(
+	sql_delete('spip_articles_lies',  array(
 		'id_article = ' . sql_quote($id_article), 
 		'id_article_lie = ' . sql_quote($id_article_cible)
 		));
 	
+	if($type == 'both'){
+		$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article_cible) . 'AND id_article_lie=' . sql_quote($id_article));
+
+		// on recupere les articles lies dont le rang est superieur a celui a supprimer
+		$res = sql_select('*', 'spip_articles_lies', 'id_article=' . sql_quote($id_article_cible) . 'AND rang>' . sql_quote($rang));
+		//on boucle sur le resultat et on met a jour le rang des articles lies avant suppression
+		while($r = sql_fetch($res)){
+			sql_update('spip_articles_lies', array('rang' => sql_quote(--$r["rang"])), 'id_article=' . sql_quote($r["id_article"]) . 'AND id_article_lie=' . sql_quote($r["id_article_lie"]));
+		}
+	
+		sql_delete('spip_articles_lies',  array(
+			'id_article = ' . sql_quote($id_article_cible), 
+			'id_article_lie = ' . sql_quote($id_article)
+			));
+	}
+	return true;
 }
 
 

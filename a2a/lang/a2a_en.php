@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// S
 	'supprimer_le_lien' => 'Unlink',
+	'supprimer_le_lien_deux_cotes' => 'Unlink both sides',
 	
 	// V
 	'voir' => 'See',

@@ -1,11 +1,16 @@
 <plugin>
     <nom>A2A</nom>
     <auteur>Collectif SPIP</auteur>
-    <version>0.3</version>
+    <version>0.4</version>
     <version_base>0.3</version_base>
     <etat>stable</etat>
     <icon>images/a2a-64.png</icon>
-    <description>Petit plugin qui permet de lier un article &agrave; un ou plusieurs autre(s)</description>
+    <description>
+    	<multi>
+    		[fr]Petit plugin qui permet de lier un article &#224; un ou plusieurs autre(s)
+			[en]Plugin to link an article to one or some others
+		</multi>
+	</description>
     <lien>http://www.spip-contrib.net/a2a</lien>
     <prefix>a2a</prefix>
     <fonctions>a2a_fonctions.php</fonctions>
