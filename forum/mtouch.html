@@ -1,0 +1,260 @@
+#CACHE{0}
+#HTTP_HEADER{content-type:text/html}
+<html>
+<head>
+#INSERT_HEAD
+
+[(#REM) <--! faire marcher le squelette en tant que web app dans iPhone et iPad]
+	<title>Modération mobile</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--  Full screen -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=max-device-width" />
+	<!--  start-up image must be exactly 320x460 for iPhone and 1004x768 for iPad -->
+	<link rel="apple-touch-startup-image" href="#CHEMIN{touch/forum-320.png}" />
+	<!--  your icon size should be 57x57.  -->
+	<link rel="apple-touch-icon" href="#CHEMIN{touch/forum-57.png}" />
+	<script type="text/javascript">
+		$(function(){
+			
+			$("a").click(function(e){
+				e.preventDefault();
+				window.document.location = this.href ;
+			});
+		 
+			$("img").each(function(){
+				var orig_width = $(this).width();
+				if(orig_width > 200){
+					var orig_height = $(this).height();
+					$(this).width(200);
+					var xfactor = orig_height / orig_width ;
+					$(this).height(200 * xfactor);
+				}	
+			});
+		 
+		});
+		
+		function updateOrientation() {
+			switch(window.orientation) {
+			case 0:
+				orient = "portrait";
+				break;
+			case -90:
+				orient = "landscape";
+				break;
+			case 90:
+				orient = "landscape";
+				break;
+			case 180:
+				orient = "portrait";
+				break;
+			}
+			
+			if(orient){
+				
+			}
+			
+			document.body.setAttribute("orient", orient);
+		}
+	</script>
+	<style type="text/css">
+	/*
+	Reset iPhone mode vertical - padding de 5px
+	  Largeur max avant scroll horizontal de 315px, 
+	  ce réglage génère un padding-right de 5px par defaut, 
+	  les padding suivants s'ajoutent à la largeur ...         
+	*/
+	body{	
+		margin:0px;
+		padding:0px;
+		width:310px;
+		padding-left:5px;
+	}
+	/* Vue paysage */
+	@media only screen and (max-device-width:640px) and (orientation:landscape)  { 
+	    /*	Largeur max avant scroll horizontal de 315px,  
+	    	les padding suivants s'ajoutent à la largeur ...    */
+	    body { 	
+	    width:470px;
+	    padding-right:5px;
+	    } 
+	}
+	</style>
+	
+[(#REM) //-> et voila c'est tout, il suffit maintenant depuis safari mobile de mettre un signet de la page sur le bureau de l'iphone / iPad pour démarrer l'appli]
+
+
+[(#REM) js et css spécifique à l'appli de modération des forum ]
+<script type="text/javascript">
+$(function() {
+
+	$("input").attr('size','');
+	
+	var label = $('label[for="recherche"]').html();
+	$('label[for="recherche"]').remove();
+	[(#ENV{recherche}|non)
+		$('#recherche').val("Rechercher :").focus(function(){
+			$(this).val("");
+		});
+	]
+
+});
+</script>
+
+<style type="text/css">
+/* Styles */
+
+.formulaire_login{
+}
+ul, li{
+margin:0;
+padding:0;
+list-style-type:none;
+}
+input[type="text"], input[type="password"]{
+display:block;
+margin : 10px 0px;
+padding: 0;
+width:100%;
+}
+input, .details{
+font-size:1em;
+}
+input[type="checkbox"]{
+width: 1em; 
+height: 1em;
+padding:0px;
+margin:0px;
+vertical-align:top;
+}
+label,legend{
+font-size:1em;
+}
+.formulaire_login .boutons{
+margin:50px 0px;
+}
+.section{padding: 0 10px;}
+.unit{
+float:left;
+}
+.size2of4{
+width:50%;
+}
+.size3of4{
+width:75%;
+}
+.size1of4{
+width:25%;
+}
+.size1of2{
+width:50%;
+}
+.align-right{
+text-align:right}
+.ajax{clear:both}
+.boutons .submit{
+font-size:0.5em;
+}
+
+li.item{
+position:relative;
+margin-left:20px;
+}
+.checkbox.select_forum{
+position:absolute;
+font-size:1em;
+left:-20px;
+}
+h1 {
+clear:both;
+}
+#formulaire_recherche input.image{display:none}
+#formulaire_recherche{margin:O;}
+
+.par {display:inline}
+
+.actions_moderation input.submit { font-size:0.70em }
+
+.statut{ float:right; width:20%; font-style:italic; text-align:right; }
+
+#menu{
+   background-color: #3B5998;
+   height: 40px;	
+}
+
+#menu a{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+#search{
+	background-color: #F2F2F2;
+	height: 50px;
+	padding: 0 5px;
+}
+
+ul.forums li.statut_publie { background-image: none; border-color: #B2BF6B; }
+ul.forums li.statut_off,
+ul.forums li.statut_privoff,
+ul.forums li.statut_off.odd,
+ul.forums li.statut_privoff.odd { background-color: #edd3d3; border-color: #FF5F5F; }
+ul.forums li.statut_spam,
+ul.forums li.statut_spam.odd { background-color: #ddd; border-color: #666; }
+ul.forums li.statut_prop,
+ul.forums li.statut_prop.odd { background-color: #FFFBEF; border-color: #EFCA68; }
+
+</style>
+
+</head>
+<body onorientationchange="updateOrientation();">
+
+<div id="moderation" class="mobile">
+
+[(#AUTORISER{ecrire}|non) 
+
+#FORMULAIRE_LOGIN
+
+]
+
+#SET{self,#SELF|parametre_url{id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum,''}}
+<BOUCLE_repart(ARTICLES){id_article}><a class='annule_filtre' href='[(#GET{self}|parametre_url{id_article,''})]' title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|balise_img|inserer_attribut{alt,<:forum:tout_voir:>})]</a>
+<:texte_messages_publics:><h1><a href='[(#URL_ARTICLE|ancre_url{forum#ID_FORUM})]'>#TITRE</a></h1>
+</BOUCLE_repart>
+
+[(#AUTORISER{ecrire}|oui)
+<div id="menu" class="section">
+	<div class="unit size1of4">
+		<p><a href="#SELF">Rafraichir</a></p> 
+	</div>
+	<div class="unit size3of4 align-right">
+		[<p><a href="(#URL_LOGOUT)">Déconnexion</a></p>] 
+	</div>
+</div>
+
+<div id="search" class="section">
+	<div style="clear:both;">
+		#FORMULAIRE_RECHERCHE_ECRIRE_FORUM{#SELF}
+	</div>
+</div>
+
+[<h1><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h1>]
+
+[<div class="ajax">
+(#FORMULAIRE_GESTION_FORUM{
+	id_forum = #ENV{id_forum},
+	id_rubrique = #ENV{id_rubrique},
+	id_article = #ENV{id_article},
+	id_breve = #ENV{id_breve},
+	id_syndic = #ENV{id_syndic},
+	id_message = #ENV{id_message},
+	id_auteur = #ENV{id_auteur},
+	auteur = #ENV{auteur},
+	email_auteur = #ENV{email_auteur},
+	ip = #ENV{ip},
+	recherche = #ENV{recherche}
+})
+</div>]
+
+]
+</div>
+</body>
