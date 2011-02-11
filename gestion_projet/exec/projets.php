@@ -9,6 +9,10 @@ function exec_projets_dist(){
 	$contexte = Array();
 	$contexte = calculer_contexte();
 	
+	$voir= _request('voir');
+	
+	
+	
 	// si pas autorise : message d'erreur
 	if (!autoriser('modifier', 'article')) {
 		include_spip('inc/minipres');
@@ -40,14 +44,24 @@ function exec_projets_dist(){
 
 	// colonne droite
 	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite', array('args'=>array('exec'=>'projets'),'data'=>''));
+	$bloc = '<div>';
+	$bloc .=recuperer_fond('prive/colonne_droite/raccourcis',$contexte,Array("ajax"=>true));
+	$bloc .= pipeline('affiche_droite', array('args'=>array('exec'=>'projets'),'data'=>''));
+	$bloc .= '</div>';
+	echo bloc_des_raccourcis($bloc);
 	
 	// centre
 	echo debut_droite('', true);
+
 	// contenu
 	// ...
-
-	echo recuperer_fond('prive/contenu/projets',$contexte,Array("ajax"=>true));
+	
+	switch($voir){
+		case 'ajouter_projet':
+			echo recuperer_fond('prive/editer/ajouter_projet',$contexte,Array("ajax"=>true));
+			break;
+		 default: echo recuperer_fond('prive/contenu/projets',$contexte,Array("ajax"=>true));
+		};
 
 	// ...
 	// fin contenu

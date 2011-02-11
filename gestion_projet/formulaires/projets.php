@@ -1,7 +1,24 @@
 <?php
+
+function definitions(){
+	$valeurs=array(
+		'nom'=>'',
+		'id_parent'=>'',
+		'id_chef_projet'=>'',
+		'descriptif'=>'',				
+		'montant_estime'=>'',	
+		'duree_estimee'=>'',
+		'date_debut'=>'',	
+		'date_fin_estimee'=>'',																	
+		);
+	return $valeurs;
+
+}
+
 function formulaires_projets_charger_dist(){
 
-	$valeurs=array('nom'=>'','id_parent'=>'','id_auteur'=>'');
+$valeurs=definitions();
+
 	$valeurs['_hidden'].='<input type="hidden" name="id_auteur" value="'.$GLOBALS['visiteur_session']['id_auteur'].'"/>';
 
 
@@ -11,7 +28,7 @@ return $valeurs;
 function formulaires_projets_verifier_dist(){
 
     $erreurs = array();
-    foreach(array('nom') as $champ) {
+    foreach(array('nom','id_chef_projet') as $champ) {
         if (!_request($champ)) {
             $erreurs[$champ] = "Cette information est obligatoire !";
         }
@@ -27,19 +44,26 @@ function formulaires_projets_traiter_dist(){
 
 //$message_ok='ok';
 
-// Effectuer des traitements
-	$valeurs_projet=array(
-		'nom'=>_request('nom'),
-		'date_creation'=>date('Y-m-d G:i:s'),				
-		);
-		
-	$id_projet=sql_insertq('spip_projets',$valeurs_projet);
+$champs=definitions();
+$valeurs=array();
+foreach($champs as $key=>$val){
+		$valeurs[$key]=_request($key);
+	}
+	
+	$date_debut = explode('/',$valeurs['date_debut']);
+	$valeurs['date_debut']= $date_debut[2].'-'.$date_debut[1].'-'.$date_debut[0];
+	
+	$date_fin_estimee = explode('/',$valeurs['date_fin_estimee']);
+	$valeurs['date_fin_estimee']= $date_fin_estimee[2].'-'.$date_fin_estimee[1].'-'.$date_fin_estimee[0];
+	$valeurs['date_creation']= date('Y-m-d G-i-s');
+	$valeurs['statut']= 'desactive';
 
-    $valeurs_auteur=array(
-		'id_projet'=>$id_projet,
-		'id_auteur'=>_request('id_auteur'),				
-		);
-	$auteur=sql_insertq('spip_projets_auteur',$valeurs_auteur);
+// Effectuer des traitements
+
+		
+	$id_projet=sql_insertq('spip_projets',$valeurs);
+
+
 	
 	    
     // Valeurs de retours
