@@ -2,15 +2,15 @@
  
 <script type="text/javascript">
         jQuery(document).ready(function() {
-                [MINI_GROUPCHATS = (#ENV{salons}|liste_js{;}|sinon{#CONFIG{jappix_mini/salons}|liste_js});
-                ][MINI_PASSWORDS = (#ENV{pass_salons}|liste_js{;}|sinon{#CONFIG{jappix_mini/pass_salons}|liste_js});
-                ][MINI_NICKNAME = "(#ENV{pseudo}|sinon{#CONFIG{jappix_mini/pseudo}})";
-                ][MINI_RESOURCE = "(#ENV{ressource}|sinon{#CONFIG{jappix_mini/ressource}})";
+                [MINI_GROUPCHATS = (#ENV{salons}|liste_js{;}|sinon{#CONFIG{jappix_mini/salons}|extraire_multi|liste_js});
+                ][MINI_PASSWORDS = (#ENV{pass_salons}|liste_js{;}|sinon{#CONFIG{jappix_mini/pass_salons}|extraire_multi|liste_js});
+                ][MINI_NICKNAME = "(#ENV{pseudo}|sinon{#CONFIG{jappix_mini/pseudo}}|extraire_multi)";
+                ][MINI_RESOURCE = "(#ENV{ressource}|sinon{#CONFIG{jappix_mini/ressource}}|extraire_multi)";
                 ][(#SET{conn,[(#ENV{connecter}|sinon{#CONFIG{jappix_mini/autojoin}|?{true,false}})]})
                 ][(#SET{pann,[(#ENV{ouvert}|sinon{#CONFIG{jappix_mini/ouvrir_auto}|?{true,false}})]})
-                ][(#SET{domaine,[(#ENV{domaine}|sinon{#CONFIG{jappix_mini/domaine_jabber}}|sinon{'anonymous.jappix.com'})]})
-                ][(#SET{user,[(#ENV{user}|sinon{#CONFIG{jappix_mini/user_jabber}})]})
-                ][(#SET{pass,[(#ENV{pass}|sinon{#CONFIG{jappix_mini/pass_jabber}})]})
+                ][(#SET{domaine,[(#ENV{domaine}|sinon{#CONFIG{jappix_mini/domaine_jabber}}|sinon{'anonymous.jappix.com'}|extraire_multi)]})
+                ][(#SET{user,[(#ENV{user}|sinon{#CONFIG{jappix_mini/user_jabber}}|extraire_multi)]})
+                ][(#SET{pass,[(#ENV{pass}|sinon{#CONFIG{jappix_mini/pass_jabber}}|extraire_multi)]})
                 ]launchMini(#GET{conn}, #GET{pann}, "#GET{domaine}"[, "(#GET{user})", "#GET{pass}"]);
         });
 </script>
