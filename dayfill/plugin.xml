@@ -30,6 +30,7 @@
 	</pipeline>
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="cfg" version="[1.16.0;]" />
 	<utilise id="spimine" version="[1.0;]" />
 
 </plugin>
