@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'This page allows you to configure the style of the magnifier. A personal style can be configured: see the <a href="http://plugins.spip.net/?page=article&amp;id_article=48">online documentation</a>.',
 
 	// E
-	'example' => 'Graphical Result',
+	'example' => 'Graphical result',
 
 	// N
-	'nostyle' => 'No Style',
+	'nostyle' => 'No style',
 
 	// O
 	'other' => 'Other',
