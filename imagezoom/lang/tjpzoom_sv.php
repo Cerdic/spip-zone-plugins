@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'style' => 'Style de la Loupe', # NEW
 
 	// T
-	'titre' => 'Configuration de la Loupe', # NE
+	'titre' => 'Configuration de la Loupe' # NEW
 );
 
 ?>
