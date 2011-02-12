@@ -216,7 +216,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verif_web' => 'v&eacute;rifier l\'existence du site Web', # NEW
 	'vider' => 'Vider', # NEW
 	'voir_article' => 'Gwelet ar pennad',
-	'voir_resultats' => 'Voir les r&eacute;sultats', # NE
+	'voir_resultats' => 'Voir les r&eacute;sultats' # NEW
 );
 
 ?>
