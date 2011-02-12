@@ -3,16 +3,16 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
+	'activation_barre_impossible' => 'Hai otru complementu que torga l\'usu del portaplumes nel espaciu p&uacute;blicu.',
 	'annuler' => 'Anular',
 
 	// B
-	'bouton_supprimer' => 'Supprimer', # NEW
+	'bouton_supprimer' => 'Desaniciar',
 
 	// D
 	'deja_modifie' => 'Ya ta modificao',
@@ -23,37 +23,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_@type@_@id@' => 'Editar @type@ @id@ dafechu',
 	'editer_tout' => 'Editalo ensembre',
 	'effets' => 'Efeutos',
-	'explication_exec_autorise' => 'Pages autoris&eacute;es &agrave; la modification
-		(?exec=...) : (, pour s&eacute;parer les exec).', # NEW
-	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
-	'explication_reduire_logo' => 'R&#233;duire le logo s\'il d&#233;passe
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
+	'explication_exec_autorise' => 'P&aacute;xines que se permite camudar
+  (?exec=...) : (, pa xebrar los exec).',
+	'explication_introduction_article' => 'La introducci&oacute;n d\'un art&iacute;culu amuesa la descripci&oacute;n del art&iacute;culu, sin&oacute;n amuesa los sos primeros 600 car&aacute;uteres (la entrada sigu&iacute;a pol testu).',
+	'explication_reduire_logo' => 'Amenorgar el logo si pasa del
+  tama&ntilde;u m&aacute;ximu indic&aacute;u en pixels. Exemplu: 100. (0 = enxam&aacute;s)',
 
 	// L
-	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
-	'label_activer_crayons_prive' => 'Activer crayons pour la partie priv&eacute;e.', # NEW
-	'label_barre_typo' => 'Barre typographique', # NEW
-	'label_clickhide' => 'Un clic en-dehors masque les crayons', # NEW
-	'label_effets' => 'Choix des effets', # NEW
-	'label_espaceprive' => 'Crayons dans le priv&eacute; ?', # NEW
-	'label_exec_autorise' => 'Pages autoris&eacute;es', # NEW
+	'label_activer_barre_typo' => '&iquest;Activar la barra tipogr&aacute;fica nos ll&aacute;pices?',
+	'label_activer_crayons_prive' => 'Activar los ll&aacute;pices pa la parte privada.',
+	'label_barre_typo' => 'Barra tipogr&aacute;fica',
+	'label_clickhide' => 'Calcar una vegada per fuera anubre los ll&aacute;pices',
+	'label_effets' => 'Esbilla de los efeutos',
+	'label_espaceprive' => '&iquest;Ll&aacute;pices nel espaciu priv&aacute;u?',
+	'label_exec_autorise' => 'P&aacute;xines autorizaes',
 	'label_filet' => 'Filet', # NEW
-	'label_message' => 'Obtenir un message', # NEW
+	'label_message' => 'Escoyer un mensaxe',
 	'label_msg_abandon' => 'Sur abandon', # NEW
-	'label_msg_no_change' => 'Si pas de changement', # NEW
-	'label_reduire_logo' => 'R&eacute;duire les logos', # NEW
+	'label_msg_no_change' => 'Si nun hai cambeos',
+	'label_reduire_logo' => 'Amenorgar los logos',
 	'label_yellow_fade' => 'Fade', # NEW
-	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
-	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
-	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
-	'legend_controleur_qui' => 'Qui ?', # NEW
+	'legend_controleur_hyperlien' => 'Hiperenllaz',
+	'legend_controleur_logo' => 'Escoyer un logo:',
+	'legend_controleur_logo_remplacer' => 'Trocar esti logo',
+	'legend_controleur_qui' => '&iquest;Qui&eacute;n?',
 	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
 	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
-	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)', # NEW
-	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
+	'legend_editer_prive' => 'Editar l\'espaciu priv&aacute;u (esperimental)',
+	'legend_introduction_article' => 'Testu introductoriu del art&iacute;culu',
 
 	// M
-	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
+	'message_image_obligatoire' => 'Hai qu\'escoyer una imaxe',
 	'messages' => 'Mensaxes',
 	'modifie_par_ailleurs' => 'Modificao n\'otru llau',
 
@@ -70,8 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'svp_copier_coller' => 'Sentimoslo, copia/pega los camb&eacute;os y torna a entamar',
 
 	// T
-	'titre_config_crayons' => 'Configurer les crayons', # NEW
-	'titre_crayons' => 'Crayons', # NEW
+	'titre_config_crayons' => 'Configurar los ll&aacute;pices',
+	'titre_crayons' => 'Ll&aacute;pices',
 
 	// U
 	'update_impossible' => 'Fall&oacute; l\'anovaci&oacute;n.',
