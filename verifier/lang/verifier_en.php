@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -29,9 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_max' => 'The value must have no more than @max@ characters.',
 	'erreur_taille_min' => 'The value must have no less than @min@ characters.',
 	'erreur_telephone' => 'The telephone number is invalid.',
-	'erreur_url' => 'The URL address is invalid.', # MODIF
-	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # NEW
-	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # NEW
+	'erreur_url' => 'The URL address <em>@url@</em> is invalid.',
+	'erreur_url_protocole' => 'The address entered <em>(@url@)</em> must start with @protocole@',
+	'erreur_url_protocole_exact' => 'The address entered <em>(@url@)</em> does not start with a valid protocol (e.g. http://)',
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Number of decimal places',
@@ -49,17 +49,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_siren_siret_mode_siret' => 'SIRET number',
 	'option_taille_max_label' => 'Maximum size',
 	'option_taille_min_label' => 'Minimum size',
-	'option_url_mode_complet' => 'V&eacute;rification compl&egrave;te de l\'url', # NEW
-	'option_url_mode_label' => 'Mode de v&eacute;rification des urls', # NEW
-	'option_url_mode_php_filter' => 'V&eacute;rification compl&egrave;te de l\'url via le filtre FILTER_VALIDATE_URL de php', # NEW
-	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole', # NEW
-	'option_url_protocole_label' => 'Nom du protocole &agrave; v&eacute;rifier', # NEW
-	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous&nbsp;:', # NEW
-	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp', # NEW
-	'option_url_type_protocole_label' => 'Type de protocole &agrave; v&eacute;rifier', # NEW
-	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp', # NEW
-	'option_url_type_protocole_tous' => 'Tous protocoles accept&eacute;s', # NEW
-	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
+	'option_url_mode_complet' => 'Full verification of the URL',
+	'option_url_mode_label' => 'URL verification mode',
+	'option_url_mode_php_filter' => 'Full URL verification using the PHP filter FILTER_VALIDATE_URL',
+	'option_url_mode_protocole_seul' => 'Verification of the existence of a protocol only',
+	'option_url_protocole_label' => 'Name of the protocol to be verified',
+	'option_url_type_protocole_exact' => 'Enter a protocol below:',
+	'option_url_type_protocole_ftp' => 'File transfer protocols: FTP or SFTP',
+	'option_url_type_protocole_label' => 'Type of protocol to be verified',
+	'option_url_type_protocole_mail' => 'Mail protocols: IMAP, POP3 or SMTP',
+	'option_url_type_protocole_tous' => 'All accepted protocols',
+	'option_url_type_protocole_web' => 'Web protocols: HTTP or HTTPS',
 
 	// T
 	'type_date' => 'Date',
@@ -80,8 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_taille_description' => 'Check that the size of the value corresponds to the minimum and/or maximum specified.',
 	'type_telephone' => 'Telephone number',
 	'type_telephone_description' => 'Check that the telephone number matches a recognised telephone number format.',
-	'type_url' => 'URL', # NEW
-	'type_url_description' => 'V&eacute;rifie que l\'url correspond &agrave; un sch&eacute;ma reconnu.', # NE
+	'type_url' => 'URL',
+	'type_url_description' => 'Verify that the URL matches a recognised format.'
 );
 
 ?>
