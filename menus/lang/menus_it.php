@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_rubriques' => 'Lista o gerarchia di rubriche',
 	'nom_menu_rubriques_evenements' => 'Eventi delle rubriche',
 	'nom_menu_secteurlangue' => 'Settore di lingua',
-	'nom_menu_texte_libre' => 'Texte libre', # NE
+	'nom_menu_texte_libre' => 'Texte libre' # NEW
 );
 
 ?>
