@@ -3,13 +3,13 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Los acentos nun se tienen en cuenta (&laquo;cu&aacute;nto&raquo; o &laquo;cuanto&raquo;, devuelven el mesmu &laquo;cu&aacute;nto&raquo;, &laquo;cuanto&raquo;, &laquo;cuant&oacute;&raquo;...)',
-	'asie' => 'asie', # NEW
+	'asie' => 'asia',
 	'asterisque_terminale' => 'nun devolver&aacute; nada: l\'asteriscu * tien que tar al final',
 	'aussi' => 'tami&eacute;n',
 
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfantillage' => 'enfantillage', # NEW
 	'enfants' => 'enfants', # NEW
 	'et' => 'Y',
-	'etranger' => '&eacute;tranger', # NEW
+	'etranger' => 'estranxeru',
 	'exemples' => 'Exemplos d\'usu',
 
 	// F
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'fai falta MyISAM',
 	'incoherence_charset' => 'Una incoherencia ente\'l xuegu de carauteres del to sitiu y el de les tables de la base de datos amenaza con dar fallos nes guetes con carauteres acentuaos:',
 	'index_regenere' => '&iacute;ndices de la tabla rexeneraos',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s', # NEW
+	'index_reinitialise' => 'Los documentos en error se reaniciaron',
 	'index_supprime' => 'indiz desanici&aacute;u',
 
 	// L
@@ -54,11 +54,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'Ensin indiz FULLTEXT',
-	'premier_soit' => 'SOIT', # NEW
+	'premier_soit' => 'O',
 
 	// R
 	'regenerer_tous' => 'Rexenerar tolos &iacute;ndices FULLTEXT',
-	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur', # NEW
+	'reinitialise_index_doc' => 'Reaniciar l\'indizamientu de los documentos en error',
 	'reserve_webmestres' => 'P&aacute;xina acutada pa los webmasters',
 	'retourne' => 'Tornar los testos que contengan',
 
