@@ -3,14 +3,14 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer' => 'Effacer', # NEW
+	'bouton_effacer' => 'Excluir',
 	'bouton_mettre_a_jour' => 'Atualizar',
-	'bouton_reset' => 'Reset', # NEW
+	'bouton_reset' => 'Limpar',
 
 	// C
 	'cfg' => 'CFG',
@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_lib_192' => 'Para instalar uma biblioteca, expanda manualmente o zip e copie o seu conte&uacute;do no diret&oacute;rio @dir@.',
 
 	// L
-	'label_activer' => 'Activer', # NEW
-	'label_obligatoire' => 'Saisie obligatoire', # NEW
+	'label_activer' => 'Ativar',
+	'label_obligatoire' => 'Campo obrigat&oacute;rio',
 
 	// N
 	'nom_table_manquant' => 'Nome da tabela faltando',
@@ -49,16 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Nenhum campo encontrado em @nom@', # MODIF
+	'pas_de_champs_dans' => 'Nenhum campo encontrado em @nom@',
 	'pas_de_changement' => 'Nenhuma altera&ccedil;&atilde;o em <b>@nom@</b>',
 
 	// R
-	'refus_configuration_administrateur' => 'Seuls les administrateurs du site sont autoris&#233;s &#224; modifier ces param&#232;tres.', # NEW
-	'refus_configuration_webmestre' => 'Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres.', # NEW
+	'refus_configuration_administrateur' => 'Apenas os administradores do site est&atilde;o autorizados a modificar estes par&acirc;metros.',
+	'refus_configuration_webmestre' => 'Apenas os webmasters do site est&atilde;o autorizados a modificar estes par&acirc;metros.',
 	'reset' => 'Apagar',
 
 	// S
-	'supprimer' => 'Excluir', # MODI
+	'supprimer' => 'Voltar aos valores padr&atilde;o'
 );
 
 ?>

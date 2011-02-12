@@ -3,14 +3,14 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer' => 'Effacer', # NEW
+	'bouton_effacer' => 'Desaniciar',
 	'bouton_mettre_a_jour' => 'Actualizar',
-	'bouton_reset' => 'Reset', # NEW
+	'bouton_reset' => 'Reaniciar',
 
 	// C
 	'cfg' => 'CFG',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'Val',
 
 	// P
-	'pas_de_champs_dans' => 'Nun s\'alcuentra deng&uacute;n campu en @nom@', # MODIF
+	'pas_de_champs_dans' => 'Nun s\'alcontr&oacute; deng&uacute;n campu en @nom@',
 	'pas_de_changement' => 'Ensin camb&eacute;os en <b>@nom@</b>',
 
 	// R
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Desaniciar',
 
 	// S
-	'supprimer' => 'Desaniciar', # MODI
+	'supprimer' => 'Tornar a los valores predeterminaos'
 );
 
 ?>
