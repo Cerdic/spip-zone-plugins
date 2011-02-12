@@ -4,8 +4,8 @@
 <a class="ajax" href="[(#SELF|parametre_url{tri_todo,cle})]"><:todo:tri_cle:></a>
 <ul class="todo">
 	<BOUCLE_todo(POUR){tableau #ENV{liste}}{par #ENV{tri_todo,cle}}>
-	<li class="[(#VALEUR|table_valeur{statut})]" title="[(#VALEUR|table_valeur{statut})]">
-	[(#CLE|plus{1})] - [(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)] - [(#VALEUR|table_valeur{titre})]
+	<li class="[(#VALEUR|table_valeur{statut})]" title="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]">
+		<span class="rang">[#(#CLE|plus{1})]</span> [<img src="(#CHEMIN{[(#VAL{images/todo-}|concat{#VALEUR|table_valeur{statut}}|concat{-16.png})]})" alt="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]" />] [(#VALEUR|table_valeur{statut}|=={termine}|oui)<del>] [(#VALEUR|table_valeur{titre})][(#VALEUR|table_valeur{statut}|=={termine}|oui)</del>]
 	</li>
 	</BOUCLE_todo>
 </ul>

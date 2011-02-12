@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'statut_afaire' => '&Agrave; faire',
 'statut_encours' => 'En cours',
 'statut_termine' => 'Termin&eacute;',
-'tri_cle' => 'Trier dans l\'ordre',
+'tri_cle' => 'Remettre dans l\'ordre',
 'tri_statut' => 'Trier par statut',
 'tri_titre' => 'Trier par titre',
 );

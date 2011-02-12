@@ -10,6 +10,15 @@
 	
 	<options>todo_options.php</options>
 	
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>todo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>todo_pipelines.php</inclure>
+	</pipeline>
+	
 	<bouton id='configurer_todo' parent="bando_configuration">
 		<titre>todo:configurer_bando</titre>
 		<icone></icone>

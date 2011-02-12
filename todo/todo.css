@@ -1,0 +1,15 @@
+ul.todo{
+	list-style:none;
+	padding:0;
+	line-height:2.5em;
+}
+
+ul.todo img{
+	vertical-align:middle;
+}
+
+ul.todo .rang{
+	opacity:0.3;
+	-moz-opacity:0.3;
+	-webkit-opacity:0.3;
+}
