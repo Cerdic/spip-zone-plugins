@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).', # NEW
 	'description_menu_secteurlangue' => 'Cette entr&eacute;e est sp&eacute;cifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant &agrave; la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).', # NEW
+	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
 
 	// E
 	'editer_menus_editer' => '&#1056;&#1077;&#1076;&#1072;&#1082;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1101;&#1090;&#1086; &#1084;&#1077;&#1085;&#1102;',
@@ -31,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Aucun', # NEW
 	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => '&#1042;&#1099;&#1073;&#1088;&#1072;&#1090;&#1100; &#1090;&#1080;&#1087; &#1087;&#1091;&#1085;&#1082;&#1090;&#1072; &#1084;&#1077;&#1085;&#1102;:',
+	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet', # NEW
+	'entree_contenu' => 'Contenu', # NEW
 	'entree_css' => 'CSS &#1082;&#1083;&#1072;&#1089;&#1089;', # MODIF
 	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => 'Num&eacute;ro du groupe de mot cl&eacute;', # NEW
@@ -49,10 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => '&#1053;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077;',
 	'entree_titre_connecter' => 'Titre pour l\'acc&egrave;s au formulaire d\'identification', # NEW
 	'entree_titre_prive' => 'Titre pour acc&eacute;der &agrave; l\'espace priv&eacute;', # NEW
+	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
 	'entree_tri_alpha' => 'Crit&egrave;re de tri (alphab&eacute;tique)', # NEW
 	'entree_tri_num' => 'Crit&egrave;re de tri (num&eacute;rique)', # NEW
 	'entree_type_objet' => '&#1058;&#1080;&#1087; &#1086;&#1073;&#1098;&#1077;&#1082;&#1090;&#1072;',
 	'entree_url' => '&#1057;&#1089;&#1099;&#1083;&#1082;&#1072; (URL)',
+	'entree_url_public' => 'Adresse de retour après la connexion', # NEW
 	'erreur_aucun_type' => '&#1053;&#1080;&#1095;&#1077;&#1075;&#1086; &#1085;&#1077; &#1085;&#1072;&#1081;&#1076;&#1077;&#1085;&#1086;.',
 	'erreur_autorisation' => '&#1059; &#1074;&#1072;&#1089; &#1085;&#1077;&#1090; &#1087;&#1088;&#1072;&#1074; &#1076;&#1083;&#1103; &#1088;&#1077;&#1076;&#1072;&#1082;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103; &#1101;&#1090;&#1086;&#1075;&#1086; &#1084;&#1077;&#1085;&#1102;.',
 	'erreur_identifiant_deja' => '&#1069;&#1090;&#1086;&#1090; &#1080;&#1076;&#1077;&#1085;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1088; &#1091;&#1078;&#1077; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1077;&#1090;&#1089;&#1103; &#1074; &#1076;&#1088;&#1091;&#1075;&#1086;&#1084; &#1084;&#1077;&#1085;&#1102;.',
@@ -72,6 +77,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_facultatif' => '&#1053;&#1077; &#1086;&#1073;&#1103;&#1079;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;',
 	'formulaire_identifiant' => '&#1048;&#1076;&#1077;&#1085;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1088;',
 	'formulaire_identifiant_explication' => '&#1053;&#1072;&#1079;&#1085;&#1072;&#1095;&#1100;&#1090;&#1077; &#1084;&#1077;&#1085;&#1102; &#1091;&#1085;&#1080;&#1082;&#1072;&#1083;&#1100;&#1085;&#1086;&#1077; &#1082;&#1083;&#1102;&#1095;&#1077;&#1074;&#1086;&#1077; &#1089;&#1083;&#1086;&#1074;&#1086;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1086;&#1077; &#1087;&#1086;&#1079;&#1074;&#1086;&#1083;&#1080;&#1090; &#1074; &#1076;&#1072;&#1083;&#1100;&#1085;&#1077;&#1081;&#1096;&#1077;&#1084; &#1083;&#1077;&#1075;&#1082;&#1086; &#1077;&#1075;&#1086; &#1074;&#1099;&#1079;&#1099;&#1074;&#1072;&#1090;&#1100;.',
+	'formulaire_ieconfig_choisir_menus_a_importer' => 'Choisissez quel(s) menu(s) vous souhaitez importer.', # NEW
+	'formulaire_ieconfig_importer' => 'Importer', # NEW
+	'formulaire_ieconfig_menu_meme_identifiant' => 'ATTENTION&nbsp;: un menu avec le m&ecirc;me identifiant existe d&eacute;j&agrave; sur votre votre site&nbsp;!', # NEW
+	'formulaire_ieconfig_menus_a_exporter' => 'Menus &agrave; exporter&nbsp;:', # NEW
+	'formulaire_ieconfig_ne_pas_importer' => 'Ne pas importer', # NEW
+	'formulaire_ieconfig_remplacer' => 'Remplacer le menu actuel par le menu import&eacute;', # NEW
+	'formulaire_ieconfig_renommer' => 'Renommer ce menu avant import', # NEW
 	'formulaire_importer' => '&#1048;&#1084;&#1087;&#1086;&#1088;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1084;&#1077;&#1085;&#1102;',
 	'formulaire_importer_explication' => '&#1045;&#1089;&#1083;&#1080; &#1074;&#1099; &#1101;&#1082;&#1089;&#1087;&#1086;&#1088;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1083;&#1080; &#1084;&#1077;&#1085;&#1102; &#1074; &#1092;&#1072;&#1081;&#1083;, &#1074;&#1099; &#1084;&#1086;&#1078;&#1077;&#1090;&#1077; &#1080;&#1084;&#1087;&#1086;&#1088;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1077;&#1075;&#1086; &#1089;&#1077;&#1081;&#1095;&#1072;&#1089;.',
 	'formulaire_modifier_entree' => '&#1056;&#1077;&#1076;&#1072;&#1082;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1101;&#1090;&#1086;&#1090; &#1087;&#1091;&#1085;&#1082;&#1090; &#1084;&#1077;&#1085;&#1102;',
@@ -85,15 +97,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => '&#1053;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077;',
 
 	// I
+	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
+	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;', # NEW
 	'info_numero_menu' => '&#1053;&#1054;&#1052;&#1045;&#1056; &#1052;&#1045;&#1053;&#1070;:',
 	'info_page_speciale' => 'Lien vers la page &#171; @page@ &#187;', # NEW
 	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => 'Tous les groupes de mots', # NEW
+	'info_traduction_recuperee' => 'Le contexte d&eacute;cidera de la traduction choisie', # NEW
 	'info_tri' => 'Tri :', # NEW
 	'info_tri_alpha' => '(alphab&eacute;tique)', # NEW
 	'info_tri_num' => '(num&eacute;rique)', # NEW
 
 	// N
+	'noisette_description' => 'Ins&egrave;re un menu d&eacute;fini avec le plugin Menus.', # NEW
+	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu&nbsp;?', # NEW
+	'noisette_label_identifiant' => 'Menu &agrave; afficher&nbsp;:', # NEW
+	'noisette_nom_noisette' => 'Menu', # NEW
 	'nom_menu_accueil' => '&#1043;&#1083;&#1072;&#1074;&#1085;&#1072;&#1103; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072;',
 	'nom_menu_articles_rubrique' => 'Articles d\'une rubrique', # NEW
 	'nom_menu_deconnecter' => 'Se d&eacute;connecter', # NEW
@@ -107,7 +126,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Liste ou arborescence de rubriques', # NEW
 	'nom_menu_rubriques_evenements' => '&Eacute;v&eacute;nements de rubriques', # NEW
-	'nom_menu_secteurlangue' => 'Secteurs de langue', # NE
+	'nom_menu_secteurlangue' => 'Secteurs de langue', # NEW
+	'nom_menu_texte_libre' => 'Texte libre', # NE
 );
 
 ?>

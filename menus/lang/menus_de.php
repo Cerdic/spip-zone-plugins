@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Zeigt eine Liste der Rubriken und, wen gew&uuml;nscht, der Unterrubriken &uuml;ber mehreer Niveaus an. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
 	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Men&uuml; mit allen Rubriken des Sektors, die mit der Sprache &uuml;bereinstimmen, wenn erfordelich auf &uuml;ber mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
+	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
 
 	// E
 	'editer_menus_editer' => 'Men&uuml; bearbeiten',
@@ -31,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Keiner',
 	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'W&auml;hlen sie die Art EIntrag, die sie hinzuf&uuml;gen wollen:',
+	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet', # NEW
+	'entree_contenu' => 'Contenu', # NEW
 	'entree_css' => 'CSS-Klassen des Eintrags', # MODIF
 	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => 'Nummer der Schlagwortgruppe',
@@ -49,10 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Titel',
 	'entree_titre_connecter' => 'Titel f&uuml;r den Zugang zum Anmeldeformular',
 	'entree_titre_prive' => 'Titel f&uuml;r den Redaktionszugang',
+	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
 	'entree_tri_alpha' => 'Sortierkriterium (alphanumerisch)',
 	'entree_tri_num' => 'Sortierkriterium (numerisch)',
 	'entree_type_objet' => 'Objekttyp',
 	'entree_url' => 'Adresse',
+	'entree_url_public' => 'Adresse de retour après la connexion', # NEW
 	'erreur_aucun_type' => 'Kein Eintragstyp gefunden.',
 	'erreur_autorisation' => 'Sie d&uuml;rfen Men&uuml;s nicht &auml;ndern.',
 	'erreur_identifiant_deja' => 'Deise Bezeichnung wird bereits von einem Men&uuml; verwendet.',
@@ -72,6 +77,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_facultatif' => 'Fakultatif',
 	'formulaire_identifiant' => 'Bezeichnung',
 	'formulaire_identifiant_explication' => 'Vergeben sie ein Schlagwort, mit dem sie das Men&uuml; leicht aufrufen k&ouml;nnen..',
+	'formulaire_ieconfig_choisir_menus_a_importer' => 'Choisissez quel(s) menu(s) vous souhaitez importer.', # NEW
+	'formulaire_ieconfig_importer' => 'Importer', # NEW
+	'formulaire_ieconfig_menu_meme_identifiant' => 'ATTENTION&nbsp;: un menu avec le m&ecirc;me identifiant existe d&eacute;j&agrave; sur votre votre site&nbsp;!', # NEW
+	'formulaire_ieconfig_menus_a_exporter' => 'Menus &agrave; exporter&nbsp;:', # NEW
+	'formulaire_ieconfig_ne_pas_importer' => 'Ne pas importer', # NEW
+	'formulaire_ieconfig_remplacer' => 'Remplacer le menu actuel par le menu import&eacute;', # NEW
+	'formulaire_ieconfig_renommer' => 'Renommer ce menu avant import', # NEW
 	'formulaire_importer' => 'Men&uuml; importieren',
 	'formulaire_importer_explication' => 'Wenn sie ein Men&uuml; in eine Datei exportiert haben, können sie es jetzt importieren.',
 	'formulaire_modifier_entree' => 'Eintrag bearbeiten',
@@ -85,15 +97,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titel',
 
 	// I
+	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
+	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;', # NEW
 	'info_numero_menu' => 'MEN&Uuml; NUMMER:',
 	'info_page_speciale' => 'Link zu Seite &#171; @page@ &#187;',
 	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => 'Alle Schlagwortgruppen',
+	'info_traduction_recuperee' => 'Le contexte d&eacute;cidera de la traduction choisie', # NEW
 	'info_tri' => 'Sortierung:',
 	'info_tri_alpha' => '(alphabetisch)',
 	'info_tri_num' => '(numerische)',
 
 	// N
+	'noisette_description' => 'Ins&egrave;re un menu d&eacute;fini avec le plugin Menus.', # NEW
+	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu&nbsp;?', # NEW
+	'noisette_label_identifiant' => 'Menu &agrave; afficher&nbsp;:', # NEW
+	'noisette_nom_noisette' => 'Menu', # NEW
 	'nom_menu_accueil' => 'Startseite',
 	'nom_menu_articles_rubrique' => 'Artikel einer Rubrik',
 	'nom_menu_deconnecter' => 'Abmelden',
@@ -107,7 +126,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Liste oder Baumansicht der Rubriken',
 	'nom_menu_rubriques_evenements' => 'Ereignisse der Rubriken',
-	'nom_menu_secteurlangue' => 'Hauptrubriken nach Sprache'
+	'nom_menu_secteurlangue' => 'Hauptrubriken nach Sprache',
+	'nom_menu_texte_libre' => 'Texte libre', # NE
 );
 
 ?>

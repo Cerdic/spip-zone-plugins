@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -18,9 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Automatically shows a menu listing the articles linked to a keyword.',
 	'description_menu_objet' => 'Creates a link to s SPIP object: article, section or other. By default, the entry will bear the the title of the object.',
 	'description_menu_page_speciale' => 'Adds a link to a page template using a URL of the form <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Such pages are often used by plugins.',
-	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
+	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> This requires a Z type template and the <a href="http://www.spip-contrib.net/MediaBox">m&eacute;diabox</a> plugin.',
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
+	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
 
 	// E
 	'editer_menus_editer' => 'Edit this menu',
@@ -29,10 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => 'Create a new menu',
 	'editer_menus_titre' => 'Site menus',
 	'entree_aucun' => 'None',
-	'entree_bloc' => 'Bloc Zpip', # NEW
+	'entree_bloc' => 'Zpip block',
 	'entree_choisir' => 'Choose the type of item you want to add:',
-	'entree_css' => 'CSS classes of this item', # MODIF
-	'entree_css_lien' => 'Classes CSS du lien', # NEW
+	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet', # NEW
+	'entree_contenu' => 'Contenu', # NEW
+	'entree_css' => 'CSS classes of this (container) item',
+	'entree_css_lien' => 'CSS classes of the link',
 	'entree_id_groupe' => 'Number of the keyword group',
 	'entree_id_mot' => 'Number of the keyword',
 	'entree_id_objet' => 'Number',
@@ -49,10 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Title',
 	'entree_titre_connecter' => 'The title for accessing the identification form',
 	'entree_titre_prive' => 'The title for accessing the private zone',
+	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
 	'entree_tri_alpha' => 'Sort criterion (alphabetic)',
 	'entree_tri_num' => 'Sort criterion (numeric)',
 	'entree_type_objet' => 'Object type',
 	'entree_url' => 'URL',
+	'entree_url_public' => 'Adresse de retour après la connexion', # NEW
 	'erreur_aucun_type' => 'No item type was found.',
 	'erreur_autorisation' => 'You are not allowed to modify menus.',
 	'erreur_identifiant_deja' => 'This identifier is already used by another menu.',
@@ -72,6 +77,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_facultatif' => 'Optional',
 	'formulaire_identifiant' => 'Identifier',
 	'formulaire_identifiant_explication' => 'Give a unique keyword which let you call your menu easly.',
+	'formulaire_ieconfig_choisir_menus_a_importer' => 'Choisissez quel(s) menu(s) vous souhaitez importer.', # NEW
+	'formulaire_ieconfig_importer' => 'Importer', # NEW
+	'formulaire_ieconfig_menu_meme_identifiant' => 'ATTENTION&nbsp;: un menu avec le m&ecirc;me identifiant existe d&eacute;j&agrave; sur votre votre site&nbsp;!', # NEW
+	'formulaire_ieconfig_menus_a_exporter' => 'Menus &agrave; exporter&nbsp;:', # NEW
+	'formulaire_ieconfig_ne_pas_importer' => 'Ne pas importer', # NEW
+	'formulaire_ieconfig_remplacer' => 'Remplacer le menu actuel par le menu import&eacute;', # NEW
+	'formulaire_ieconfig_renommer' => 'Renommer ce menu avant import', # NEW
 	'formulaire_importer' => 'Import menu',
 	'formulaire_importer_explication' => 'If you exported a menu in a file, you can import now.',
 	'formulaire_modifier_entree' => 'Modify this menu item',
@@ -85,15 +97,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Title',
 
 	// I
+	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
+	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;', # NEW
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page &laquo; @page@ &raquo;',
-	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
+	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
 	'info_tous_groupes_mots' => 'All keyword groups',
+	'info_traduction_recuperee' => 'Le contexte d&eacute;cidera de la traduction choisie', # NEW
 	'info_tri' => 'Sort:',
 	'info_tri_alpha' => '(alphabetical)',
 	'info_tri_num' => '(numerical)',
 
 	// N
+	'noisette_description' => 'Ins&egrave;re un menu d&eacute;fini avec le plugin Menus.', # NEW
+	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu&nbsp;?', # NEW
+	'noisette_label_identifiant' => 'Menu &agrave; afficher&nbsp;:', # NEW
+	'noisette_nom_noisette' => 'Menu', # NEW
 	'nom_menu_accueil' => 'Home Page',
 	'nom_menu_articles_rubrique' => 'Articles of a section',
 	'nom_menu_deconnecter' => 'Disconnect',
@@ -104,10 +123,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Articles of a keyword',
 	'nom_menu_objet' => 'Article, section or other SPIP object',
 	'nom_menu_page_speciale' => 'Link to a page template',
-	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
+	'nom_menu_page_speciale_zajax' => 'A block in a Zpip page',
 	'nom_menu_rubriques' => 'List or tree of sections',
 	'nom_menu_rubriques_evenements' => 'Section-related events',
-	'nom_menu_secteurlangue' => 'Language sectors'
+	'nom_menu_secteurlangue' => 'Language sectors',
+	'nom_menu_texte_libre' => 'Texte libre', # NE
 );
 
 ?>

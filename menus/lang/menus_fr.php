@@ -1,7 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/menus/lang/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -30,10 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Aucun',
 	'entree_bloc' => 'Bloc Zpip',
 	'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
+	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet',
 	'entree_contenu' => 'Contenu',
 	'entree_css' => 'Classes CSS de l\'entr&eacute;e (du conteneur)',
 	'entree_css_lien' => 'Classes CSS du lien',
-	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet',
 	'entree_id_groupe' => 'Num&eacute;ro du groupe de mot cl&eacute;',
 	'entree_id_mot' => 'Num&eacute;ro du mot cl&eacute;',
 	'entree_id_objet' => 'Num&eacute;ro',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_tri_num' => 'Crit&egrave;re de tri (num&eacute;rique)',
 	'entree_type_objet' => 'Type de l\'objet',
 	'entree_url' => 'Adresse',
-	'entree_url_public'=>'Adresse de retour après la connexion',
+	'entree_url_public' => 'Adresse de retour après la connexion',
 	'erreur_aucun_type' => 'Aucun type d\'entr&eacute;e n\'a &eacute;t&eacute; trouv&eacute;.',
 	'erreur_autorisation' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; modifier les menus.',
 	'erreur_identifiant_deja' => 'Cet identifiant est d&eacute;j&agrave; utilis&eacute; par un menu.',
@@ -95,13 +95,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titre',
 
 	// I
-	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;',
 	'info_connexion_obligatoire' => 'Connexion obligatoire',
+	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;',
 	'info_numero_menu' => 'MENU NUM&Eacute;RO :',
 	'info_page_speciale' => 'Lien vers la page &#171; @page@ &#187;',
 	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187',
-	'info_traduction_recuperee' => 'Le contexte d&eacute;cidera de la traduction choisie',
 	'info_tous_groupes_mots' => 'Tous les groupes de mots',
+	'info_traduction_recuperee' => 'Le contexte d&eacute;cidera de la traduction choisie',
 	'info_tri' => 'Tri :',
 	'info_tri_alpha' => '(alphab&eacute;tique)',
 	'info_tri_num' => '(num&eacute;rique)',

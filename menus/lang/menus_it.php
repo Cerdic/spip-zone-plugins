@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Mostra una lista di rubriche e, se si vuole, le sotto rubriche su pi&ugrave; livelli. Normalmente, mostra tutte le rubriche dalla radice, ordinate per titolo (numericamente e poi alfabeticamente).',
 	'description_menu_secteurlangue' => 'Questa voce &egrave; specifica per i siti che utilizzano un settore per lingua. Mostra automaticamente un men&ugrave; che elenca le rubriche del settore corrispondente alla lingua della pagina e, se si vuole, le sotto rubriche su pi&ugrave; livelli. Normalmente, mostra tutte le rubriche dalla radice, ordinate per titolo (numericamente e poi alfabeticamente).',
+	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
 
 	// E
 	'editer_menus_editer' => 'Modifica questo men&ugrave;',
@@ -31,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Nessun',
 	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Scegli il tipo di voce che vuoi aggiungere:',
+	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet', # NEW
+	'entree_contenu' => 'Contenu', # NEW
 	'entree_css' => 'Classi CSS della voce', # MODIF
 	'entree_css_lien' => 'Classes CSS du lien', # NEW
 	'entree_id_groupe' => 'Numero di gruppo della parola chiave',
@@ -49,10 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Titolo',
 	'entree_titre_connecter' => 'Titolo per l\'accesso al form di login',
 	'entree_titre_prive' => 'Titolo per accedere alla redazione',
+	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
 	'entree_tri_alpha' => 'Criterio di ordinamento (alfabetico)',
 	'entree_tri_num' => 'Criterio di ordinamento (numerico)',
 	'entree_type_objet' => 'Tipo di oggetto',
 	'entree_url' => 'Indirizzo',
+	'entree_url_public' => 'Adresse de retour après la connexion', # NEW
 	'erreur_aucun_type' => 'Nessun tipo di voce trovata.',
 	'erreur_autorisation' => 'Non sei autorizzato a modificare i men&ugrave;.',
 	'erreur_identifiant_deja' => 'Questo identificativo &egrave; gi&agrave; utilizzato da un men&ugrave;.',
@@ -72,6 +77,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_facultatif' => 'Facoltativo',
 	'formulaire_identifiant' => 'Identificativo',
 	'formulaire_identifiant_explication' => 'Inserisci una parola chiave unica che ti permetter&agrave; di richiamare il tuo men&ugrave; facilmente.',
+	'formulaire_ieconfig_choisir_menus_a_importer' => 'Choisissez quel(s) menu(s) vous souhaitez importer.', # NEW
+	'formulaire_ieconfig_importer' => 'Importer', # NEW
+	'formulaire_ieconfig_menu_meme_identifiant' => 'ATTENTION&nbsp;: un menu avec le m&ecirc;me identifiant existe d&eacute;j&agrave; sur votre votre site&nbsp;!', # NEW
+	'formulaire_ieconfig_menus_a_exporter' => 'Menus &agrave; exporter&nbsp;:', # NEW
+	'formulaire_ieconfig_ne_pas_importer' => 'Ne pas importer', # NEW
+	'formulaire_ieconfig_remplacer' => 'Remplacer le menu actuel par le menu import&eacute;', # NEW
+	'formulaire_ieconfig_renommer' => 'Renommer ce menu avant import', # NEW
 	'formulaire_importer' => 'Importa un men&ugrave;',
 	'formulaire_importer_explication' => 'Se hai esportato un men&ugrave; in un file, ora lo puoi importare.',
 	'formulaire_modifier_entree' => 'Modifica questa voce',
@@ -85,15 +97,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titolo',
 
 	// I
+	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
+	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;', # NEW
 	'info_numero_menu' => 'MENU NUMERO:',
 	'info_page_speciale' => 'Link verso la pagina "@page@"',
 	'info_page_speciale_zajax' => 'Modalbox de la page &#171; @page@ &#187; pour le bloc &#171; @bloc@ &#187', # NEW
 	'info_tous_groupes_mots' => 'Tutti i gruppi di parole chiave',
+	'info_traduction_recuperee' => 'Le contexte d&eacute;cidera de la traduction choisie', # NEW
 	'info_tri' => 'Ordina:',
 	'info_tri_alpha' => '(alfabetico)',
 	'info_tri_num' => '(numerico)',
 
 	// N
+	'noisette_description' => 'Ins&egrave;re un menu d&eacute;fini avec le plugin Menus.', # NEW
+	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu&nbsp;?', # NEW
+	'noisette_label_identifiant' => 'Menu &agrave; afficher&nbsp;:', # NEW
+	'noisette_nom_noisette' => 'Menu', # NEW
 	'nom_menu_accueil' => 'Pannello di controllo',
 	'nom_menu_articles_rubrique' => 'Articoli di una rubrica',
 	'nom_menu_deconnecter' => 'Disconnettersi',
@@ -107,7 +126,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Lista o gerarchia di rubriche',
 	'nom_menu_rubriques_evenements' => 'Eventi delle rubriche',
-	'nom_menu_secteurlangue' => 'Settore di lingua'
+	'nom_menu_secteurlangue' => 'Settore di lingua',
+	'nom_menu_texte_libre' => 'Texte libre', # NE
 );
 
 ?>
