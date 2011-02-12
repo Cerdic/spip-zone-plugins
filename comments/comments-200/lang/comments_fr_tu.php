@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'submit2' => 'Confirmer l\'envoi',
 
 	// T
-	'titre_comments' => 'Comments', # NE
+	'titre_comments' => 'Comments' # NEW
 );
 
 ?>
