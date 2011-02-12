@@ -5,41 +5,31 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<form action="#ENV{action}" method="post"><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
-			[(#SAISIE{input,nom,
-					label=<:nom:>,
-					obligatoire=oui,		
+																						
+	<BOUCLE_fieldsets(POUR){tableau #ENV{fieldsets}}{par cle}>
+	<B_champs>
+	<fieldset><label><h3 class="legend">#VALEUR</h3></label>
+		<ul>
+		<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{#VALEUR})}{par cle}>
+		#SET{valeurs,#VALEUR|serialize|table_valeur{form}}
+		[(#SAISIE{
+			[(#GET{valeurs}|table_valeur{field})],
+			[(#GET{valeurs}|table_valeur{name})],
+			label=[(#GET{valeurs}|table_valeur{label})],
+			explication=[(#GET{valeurs}|table_valeur{explication})],			
+			obligatoire=[(#GET{valeurs}|table_valeur{obligatoire})],
+			option_statut=[(#GET{valeurs}|table_valeur{option_statut})],			
+			multiple=[(#GET{valeurs}|table_valeur{multiple})],
+			statut=[(#GET{valeurs}|table_valeur{statut})],
+											
 					})]
+		</BOUCLE_champs>
+		</ul>
+	</fieldset>
+	</B_champs>
 
-			[(#SAISIE{auteurs,id_chef_projet,
-				option_statut=oui,
-				obligatoire=oui,
-				defaut=#SESSION{id_auteur},
-				label=<:gestpro:chef_projet:>,
-				multiple=oui
-				statut=0minirezo})]
-			[(#SAISIE{textarea,descriptif,
-					label=<:info_descriptif:>,	
-					})]				
-			[(#SAISIE{input,montant_estime,
-					label=<:gestpro:montant_estime:> &euro;,	
-					})]	
-			[(#SAISIE{input,duree_estimee,
-					label=<:gestpro:duree_estimee:>,	
-					explication=<:gestpro:explication_heure:>,						
-					})]	
-			[(#SAISIE{date,date_debut,
-					label=<:gestpro:date_debut:>,						
-					})]	
-			[(#SAISIE{date,date_fin_estimee,
-					label=<:gestpro:date_fin_estimee:>,						
-					})]																					
-																				
-															
-										
-					
+	</BOUCLE_fieldsets>
 
-			</ul>
 			<p class="boutons"><input type="submit" class="submit" value="<:ok:>" /></p>				
 				
 				

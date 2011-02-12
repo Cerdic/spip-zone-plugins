@@ -1,15 +1,102 @@
 <?php
 
-function definitions(){
-	$valeurs=array(
-		'nom'=>'',
-		'id_parent'=>'',
-		'id_chef_projet'=>'',
-		'descriptif'=>'',				
-		'montant_estime'=>'',	
-		'duree_estimee'=>'',
-		'date_debut'=>'',	
-		'date_fin_estimee'=>'',																	
+function definitions($tout=''){
+
+	//Définition des fieldset
+
+	$fieldsets=array(
+		0=>_T('donnees'),
+		1=>_T('options')
+		);	
+		
+
+	//Définition des champs
+
+	$champs=array(
+		'nom'=>array(
+			'valeur'=>'',
+			'fieldset'=>_T('donnees'),
+			'rang'=>0,
+			'form'=>array(
+				'field'=>'input',
+				'name'=>'nom',
+				'label'=>_T('gestpro:nom'),
+				'obligatoire'=>'oui')),
+		'id_chef_projet'=>array(
+			'valeur'=> session_get('id_auteur'),
+			'fieldset'=>_T('donnees'),	
+			'rang'=>2,		
+			'form'=>array(
+				'field'=>'auteurs',
+				'name'=>'id_chef_projet',
+				'option_statut'=>'oui',
+				'obligatoire'=>'oui',
+				'label'=>_T('gestpro:chef_projet'),
+				),			
+			),
+		'descriptif'=>array(
+			'fieldset'=>_T('donnees'),
+			'rang'=>1,
+			'form'=>array(
+				'field'=>'textarea',
+				'name'=>'descriptif',
+				'label'=>_T('info_descriptif')
+				),
+			),				
+		'montant_estime'=>array(
+			'fieldset'=>_T('options'),	
+			'rang'=>0,	
+			'form'=>array(
+					'field'=>'input',
+					'name'=>'montant_estime',
+					'label'=>_T('gestpro:montant_estime').' €',	
+				),								
+			),	
+		'duree_estimee'=>array(
+			'fieldset'=>_T('options'),	
+			'rang'=>1,	
+			'form'=>array(
+					'field'=>'input',
+					'name'=>'duree_estimee',
+					'label'=>_T('gestpro:duree_estimee'),
+					'explication'=>_T('gestpro:explication_heure'),						
+				),								
+			),	
+		'date_debut'=>array(
+			'fieldset'=>_T('options'),	
+			'rang'=>2,	
+			'form'=>array(
+					'field'=>'date',
+					'name'=>'date_debut',
+					'label'=>_T('gestpro:date_debut'),	
+				),								
+			),	
+		'date_fin_estimee'=>array(
+			'fieldset'=>_T('options'),	
+			'rang'=>3,	
+			'form'=>array(
+					'field'=>'date',
+					'name'=>'date_fin_estimee',
+					'label'=>_T('gestpro:date_fin_estimee'),	
+				),								
+			),		
+		);
+		
+
+	$formulaire=array();
+		
+	foreach ($champs AS $champ =>$valeur){
+
+		if(in_array($valeur['fieldset'],$fieldsets)){
+			$formulaire[$valeur['fieldset']][$valeur['rang']]=$valeur;
+			}
+	
+		}	
+	if(!$tout)	$valeurs=$champs;
+	else $valeurs=array(
+		'valeurs'=>$champs,
+		'formulaire'=>$formulaire,
+		'fieldsets'=>$fieldsets		
 		);
 	return $valeurs;
 
@@ -17,9 +104,25 @@ function definitions(){
 
 function formulaires_projets_charger_dist(){
 
-$valeurs=definitions();
+	$defs='tout';
+	$definitions=definitions($defs);
+	
+	$valeurs=$definitions['valeurs'];
+	
+	foreach($valeurs AS $key=>$champs){
+		$valeurs[$key]=$valeurs[$key]['valeur'];
+	}
+	
+	$valeurs['formulaire']=$definitions['formulaire'];
+	$valeurs['fieldsets']=$definitions['fieldsets'];	
+	
 
 	$valeurs['_hidden'].='<input type="hidden" name="id_auteur" value="'.$GLOBALS['visiteur_session']['id_auteur'].'"/>';
+	
+	$valeurs['essai']=array('field'=>'input',
+							'name'=>'nom',
+							'label'=>_T('gestpro:nom'),
+							'obligatoire'=>'oui');
 
 
 return $valeurs;

@@ -14,13 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_heure'=>'En heures',	
 	
 	// D
-	'date_debut'=>'Date d&eacute;but',
-	'date_fin_estimee'=>'Date fin estim&eacute;e',			
-	'duree_estimee'=>'Duree estim&eacute;e',	
+	'date_debut'=>'Date début',
+	'date_fin_estimee'=>'Date fin estimée',			
+	'duree_estimee'=>'Duree estimée',	
 	
 	
 	//M
-	'montant_estime'=>'Montant estim&eacute;',
+	'montant_estime'=>'Montant estimée',
+	
+	//N
+	'nom'=>'Nom',	
 		
 		
 	
