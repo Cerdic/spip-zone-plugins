@@ -12,7 +12,7 @@ function tw_todo($t){
 	foreach ($liste as $ligne){
 		if(preg_match('/([+-o])(.*)/', $ligne, $chose)){
 			$todo[] = array(
-				'statut' => str_replace(array('+', '-', 'o'), array('afaire', 'fait', 'encours'), $chose[1]),
+				'statut' => str_replace(array('+', 'o', '-'), array('afaire', 'encours', 'termine'), $chose[1]),
 				'titre' => trim($chose[2])
 			);
 		}
