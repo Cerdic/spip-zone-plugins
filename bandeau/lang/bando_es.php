@@ -3,13 +3,13 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_accueil' => 'Mis tareas',
-	'icone_administration' => 'Wartung',
+	'icone_administration' => 'Mantenimiento',
 	'icone_configuration' => 'Configuraci&oacute;n',
 	'icone_edition' => 'Edici&oacute;n',
 	'icone_langage' => 'Mi lengua',
@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_adresses_secondaires' => 'Direcciones ALIAS del sitio p&uacute;blico',
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+	'label_bando_outils' => 'Barra de herramientas',
+	'label_bando_outils_afficher' => 'Mostrar las herramientas',
+	'label_bando_outils_masquer' => 'Esconder las herramientas',
 	'label_choix_langue' => 'Seleccine su lengua',
 	'label_slogan_site' => 'Slogan del sitio',
 	'label_taille_ecran' => 'Largo de la pantalla',
@@ -37,7 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Estas direcciones son automaticamente redirigidas hacia la direcci&oacute;n principal. Indicar una direcci&oacute;n por linea.',
 	'titre_config_langage' => 'Configurar la lengua',
 	'titre_configurer_preferences' => 'Configurar sus preferencias',
-	'titre_identite_site' => 'Identidad del sitio'
+	'titre_identite_site' => 'Identidad del sitio',
+	'titre_infos_perso' => 'Mes informations personnelles', # NE
 );
 
 ?>

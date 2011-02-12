@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -37,7 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Ces adresses seront redirig&eacute;es automatiquement vers l\'adresse principale. Indiquez une adresse par ligne', # NEW
 	'titre_config_langage' => 'Configurer la langue', # MODIF
 	'titre_configurer_preferences' => 'Configure your preferences', # MODIF
-	'titre_identite_site' => 'Site\'s identity', # MODI
+	'titre_identite_site' => 'Site\'s identity', # MODIF
+	'titre_infos_perso' => 'Mes informations personnelles', # NE
 );
 
 ?>

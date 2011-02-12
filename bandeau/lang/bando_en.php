@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_adresses_secondaires' => 'ALIAS addresses for the public site',
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+	'label_bando_outils' => 'Toolbar',
+	'label_bando_outils_afficher' => 'Show tools',
+	'label_bando_outils_masquer' => 'Hide tools',
 	'label_choix_langue' => 'Manage your language ',
 	'label_slogan_site' => 'Slogan',
 	'label_taille_ecran' => 'Display',
@@ -37,7 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   These addresses will be automatically redirected to you principal address. Enter one address per line',
 	'titre_config_langage' => 'Configurer la langue',
 	'titre_configurer_preferences' => 'Configure your preferences',
-	'titre_identite_site' => 'Site\'s identity'
+	'titre_identite_site' => 'Site\'s identity',
+	'titre_infos_perso' => 'Mes informations personnelles', # NE
 );
 
 ?>

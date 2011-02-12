@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_visiter_site' => 'Veure el lloc p&uacute;blic',
 
 	// L
-	'label_adresses_secondaires' => 'Adresses ALIAS du site public', # NEW
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+	'label_adresses_secondaires' => 'Adreces &Agrave;LIES del lloc p&uacute;blic',
+	'label_bando_outils' => 'Barra d\'eines',
+	'label_bando_outils_afficher' => 'Mostrar les eines',
+	'label_bando_outils_masquer' => 'Amagar les eines',
 	'label_choix_langue' => 'Seleccioneu la vostra llengua',
 	'label_slogan_site' => 'Esl&ograve;gan del lloc',
 	'label_taille_ecran' => 'Amplada de la pantalla',
@@ -33,11 +33,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte_et_icones_page' => 'Visualitzaci&oacute; a la p&agrave;gina',
 
 	// T
-	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'acc&egrave;der à votre site.
-		Ces adresses seront redirig&eacute;es automatiquement vers l\'adresse principale. Indiquez une adresse par ligne', # NEW
+	'texte_redirection_adresses_secondaires' => 'Els &Agrave;lies s&oacute;n URL alternatives que tamb&eacute; permeten accedir al vostre lloc.
+  Aquestes adreces seran redirigides autom&agrave;ticament cap a l\'adre&ccedil;a principal. Indiqueu una adre&ccedil;a per l&iacute;nia ',
 	'titre_config_langage' => 'Configurar la llengua',
 	'titre_configurer_preferences' => 'Configurar les teves prefer&egrave;ncies',
-	'titre_identite_site' => 'Identitat del lloc'
+	'titre_identite_site' => 'Identitat del lloc',
+	'titre_infos_perso' => 'Mes informations personnelles', # NE
 );
 
 ?>
