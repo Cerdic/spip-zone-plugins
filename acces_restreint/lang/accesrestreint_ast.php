@@ -3,13 +3,13 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Axuntame a los que tienen permit&iacute;o entrar n\'esta estaya',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => 'Denguna zona',
 	'auteurs' => 'autores',
 
 	// B
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
+	'confirmer_ajouter_auteurs' => '&iquest;Tas seguru de que quies amestar esti autor a la zona?',
 	'confirmer_retirer_auteur_zone' => '&iquest;Tas seguru de que qui&eacute;s retirar esti autor de la zona?',
 	'confirmer_retirer_auteurs' => '&iquest;Tas seguru de que qui&eacute;s retirar toos los autores d\'esta zona?',
 	'confirmer_supprimer_zone' => '&iquest;Tas seguru que quies desaniciar esta zona?',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Accesu Torg&aacute;o',
 	'icone_supprimer_zone' => 'Desaniciar esta estaya',
-	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
+	'info_acces_restreint' => 'L\'accesu a esta p&aacute;xina ta llend&aacute;u. Identificate pa poder entrar',
 	'info_ajouter_auteur' => 'Amestar esti autor',
 	'info_ajouter_auteurs' => 'Amestar toos los autores',
 	'info_ajouter_zones' => 'A&ntilde;adir toes les estayes',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'T&iacute;tulu',
 	'titre_ajouter_zone' => 'Amestar la estaya',
 	'titre_cadre_modifier_zone' => 'Iguar una zona',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_page_config' => 'Configuraci&oacute;n de los accesos',
 	'titre_table' => 'Toes les estayes d\'accesu',
 	'titre_zones_acces' => 'Estayes d\'accesu torg&aacute;o',
 	'toutes' => 'Toes',

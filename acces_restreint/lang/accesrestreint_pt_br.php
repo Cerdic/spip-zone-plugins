@@ -3,13 +3,13 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Conceder-me direitos de acesso a esta &aacute;rea',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => 'Nenhuma zona',
 	'auteurs' => 'autores',
 
 	// B
@@ -17,10 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'N&amp;ordm;.',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
+	'confirmer_ajouter_auteurs' => 'Voc&ecirc; quer realmente incluir este autor na zona?',
 	'confirmer_retirer_auteur_zone' => 'Voc&ecirc; quer mesmo retirar este autor da zona?',
 	'confirmer_retirer_auteurs' => 'Voc6e quer mesmo retirar todos os autores da zona?',
-	'confirmer_supprimer_zone' => '&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette zone ?', # NEW
+	'confirmer_supprimer_zone' => 'Voc&ecirc; quer realmente excluir esta zona?',
 	'creer_zone' => 'Criar uma nova &aacute;rea',
 
 	// D
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Acesso Restrito',
 	'icone_supprimer_zone' => 'Excluir est&aacute; &aacute;rea',
-	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
+	'info_acces_restreint' => 'O acesso a esta p&aacute;gina &eacute; restrito. Identifique-se para acess&aacute;-la',
 	'info_ajouter_auteur' => 'Incluir este autor',
 	'info_ajouter_auteurs' => 'Incluir todos os autores',
 	'info_ajouter_zones' => 'Incluir todas as &aacute;reas',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'T&iacute;tulo',
 	'titre_ajouter_zone' => 'Aderir &agrave; &aacute;rea',
 	'titre_cadre_modifier_zone' => 'Alterar uma zona',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_page_config' => 'Configura&ccedil;&atilde;o dos acessos',
 	'titre_table' => 'Todas as &aacute;reas de acesso',
 	'titre_zones_acces' => '&Aacute;reas de acesso restrito',
 	'toutes' => 'Todas',
