@@ -24,7 +24,7 @@
 		 
 			$("img").each(function(){
 				var orig_width = $(this).width();
-				if(orig_width > 200){
+				if(orig_width > 200 || orig_width == 0){
 					var orig_height = $(this).height();
 					$(this).width(200);
 					var xfactor = orig_height / orig_width ;
