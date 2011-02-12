@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Diverka&ntilde;',
 
 	// S
-	'supprimer' => 'Dilemel', # MODI
+	'supprimer' => 'Dilemel' # MODIF
 );
 
 ?>
