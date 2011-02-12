@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'zone_numero' => 'ZONE NUM&Eacute;RO&nbsp;:', # NEW
 	'zone_restreinte_espace_prive' => 'Restreindre l\'acc&egrave;s &agrave; cette zone dans l\'espace priv&eacute;', # NEW
-	'zone_restreinte_publique' => 'Restreindre l\'acc&egrave;s &agrave; cette zone dans la partie publique', # NE
+	'zone_restreinte_publique' => 'Restreindre l\'acc&egrave;s &agrave; cette zone dans la partie publique' # NEW
 );
 
 ?>
