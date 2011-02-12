@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'update_impossible' => 'La mise &agrave; jour a &eacute;chou&eacute;.', # NEW
 
 	// V
-	'veuillez_patienter' => '&#35831;&#31245;&#21518;...', # MODI
+	'veuillez_patienter' => '&#35831;&#31245;&#21518;...' # MODIF
 );
 
 ?>
