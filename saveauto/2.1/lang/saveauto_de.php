@@ -99,7 +99,7 @@ Die Backupdateien <strong>xxxx.gz</strong> bzw. <strong>xxx.sql</strong> enthalt
 	'titre_saveauto' => 'Sauvegarde automatique', # NEW
 
 	// V
-	'valeur_jours' => ' jours', # NE
+	'valeur_jours' => ' jours' # NEW
 );
 
 ?>
