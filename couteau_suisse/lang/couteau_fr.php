@@ -1,7 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -89,6 +89,7 @@ D&#233;couvrez dans ce plugin vos outils favoris : {Supprime le num&#233;ro}, {F
 N\'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilit&#233; : SPIP v1.92x, v2.0.x et v2.1.x',
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques',
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;',
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;',
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',
@@ -108,7 +109,6 @@ Compatibilit&#233; : SPIP v1.92x, v2.0.x et v2.1.x',
 	'pp_un_titre' => 'Un titre',
 	'pp_votre_texte' => 'Placez votre texte ici',
 	'pp_votre_titre' => 'Titre @nb@',
-	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',

@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev' => 'Ver.&nbsp;@revision@',
 	'maj_rev_ko' => 'The [remote version->@url@] could not be found.',
 	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].',
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
+	'maj_spip' => 'After having carefully updated all of your plugins, it is highly recommended to update SPIP itself by clicking on the link above and following the suggested instructions.',
 	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
 	'maj_verif' => 'First check which file is right for you:',
 	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.',
@@ -90,7 +90,8 @@ Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Su
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x and v2.0.x and v2.1.x',
+Compatibility: SPIP 1.92x and v2.0.x and v2.1.x', # MODIF
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',
 	'pp_chatons_inserer' => 'Insert the "&nbsp;@chaton@&nbsp;" emoticon/smiley',

@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -90,7 +90,8 @@ W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Ziffern entfernen}, {T
 
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.xKompatibel mit: SPIP 1.9x und v2.0',
+Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.xKompatibel mit: SPIP 1.9x und v2.0', # MODIF
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Eingeklappten Block einf&uuml;gen',
 	'pp_blocs_visible' => 'Ge&ouml;ffneten Block einf&uuml;gen',
 	'pp_chatons_inserer' => 'Smiley &laquo;&nbsp;@chaton@&nbsp;&raquo; einf&uuml;gen',

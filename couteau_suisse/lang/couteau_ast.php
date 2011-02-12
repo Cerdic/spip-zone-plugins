@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -91,6 +91,7 @@ Descubre nesti plugin les tos ferramientes favorites: {Suprime\'l n&uacute;mberu
 Si quies consultar los art&iacute;culos de la documentaci&oacute;n del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilid&aacute;: SPIP v1.9x y v2.0', # MODIF
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW

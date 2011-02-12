@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -91,6 +91,7 @@ Kavit en adveziant-ma&ntilde; un nebeud binvio&ugrave; :  {Diverka&ntilde; an ni
 Gallout a rit teurel ur sell war ar pennado&ugrave; titouri&ntilde; diwar-benn an advezianto&ugrave; war : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Kenglotus gant : SPIP v1.92x ha v2.0.x', # MODIF
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW

@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -14,45 +14,45 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Aguardando confirma&ccedil;&atilde;o',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'base_donnees' => 'Base de dados',
+	'bloc_deplier' => 'Expandir',
+	'bloc_replier' => 'Contrair',
 
 	// C
-	'colorer_fond' => 'Colorer le fond', # NEW
-	'colorer_texte' => 'Colorer le texte', # NEW
-	'configurer' => 'Configurer le Couteau Suisse', # NEW
-	'connections' => 'Connexions', # NEW
+	'colorer_fond' => 'Colorir o fundo',
+	'colorer_texte' => 'Colorir o texto',
+	'configurer' => 'Configurar o Canivete Sui&ccedil;o',
+	'connections' => 'Conex&otilde;es',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => '&Uacute;ltimos conectados:',
 
 	// E
-	'email_forum' => 'Merci de sp&eacute;cifier votre email !', # NEW
+	'email_forum' => 'Obrigado por informar o seu e-mail!',
 	'explique_spam' => 'Aten&ccedil;&atilde;o: voc&ecirc; usou tags, caracteres ou palavras proibidas.<br /><br />Retorne!',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => 'Iniciar o teste!',
 	'lutte_spam' => 'Lute contra o SPAM',
 
 	// M
-	'maj_actu' => 'Forcer l\'actualisation distante', # NEW
-	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :', # NEW
-	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;', # NEW
-	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].', # NEW
-	'maj_rev' => 'R&eacute;v.&nbsp;@revision@', # NEW
-	'maj_rev_ko' => 'La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.', # NEW
-	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].', # NEW
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
-	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].', # NEW
-	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :', # NEW
-	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.', # NEW
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_actu' => 'For&ccedil;ar a atualiza&ccedil;&atilde;o remota',
+	'maj_liste' => 'Lista dos plugins detectados:',
+	'maj_maj' => 'Atualizar o plugin selecionado',
+	'maj_ok' => 'Este [plugin->@zip@] parece estar [em dia->@url@].',
+	'maj_rev' => 'Rev.&nbsp;@revision@',
+	'maj_rev_ko' => 'A [revis&atilde;o remota->@url@] n&atilde;o foi encontrada.',
+	'maj_rev_ok' => 'A revis&atilde;o [@revision@->@url@] est&aacute; [dispon&iacute;vel->@zip@].',
+	'maj_spip' => 'Ap&oacute;s ter atualizado todos os seus plugins com precau&ccedil;&atilde;o, &eacute; fortemente aconselh&aacute;vel atualizar o pr&oacute;prio SPIP, clicando no link abaixo e seguindo as instru&ccedil;&otilde;es apresentadas.',
+	'maj_svn' => 'Este plugin SVN parece estar [em dia->@url@].',
+	'maj_verif' => 'Verifique previamente o arquivo que lhe conv&eacute;m:',
+	'maj_verif2' => 'Aten&ccedil;&atilde;o: ap&oacute;s ter clicado no bot&atilde;o abaixo, certifique-se que o arquivo transferido corresponde ao plugin que deseja atualizar.',
+	'maj_zip_ko' => 'O arquivo .zip remoto n&atilde;o pode ser identificado.',
+	'msg_publies' => 'Unicamente as mensagens publicadas',
 
 	// N
-	'nom_email_forum' => 'Merci de sp&eacute;cifier votre nom ou votre email !', # NEW
+	'nom_email_forum' => 'Obrigado por ter informado o seu nome ou e-mail!',
 	'nom_forum' => 'Obrigado por informar o seu nome!',
 	'non_confirmes' => 'Nomes confirmados:',
 
@@ -78,9 +78,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;gina @page@: @title@',
 	'page_precedente' => 'P&aacute;gina anterior',
 	'page_suivante' => 'Pr&oacute;xima p&aacute;gina',
-	'plug_actifs' => 'Plugins actifs', # NEW
-	'plug_inactifs' => 'Plugins inactifs', # NEW
-	'plugin_xml' => 'Re&uacute;ne, em um &uacute;nico plugin, diversas pequenas e &uacute;teis funcionalidades, que melhoram o gerenciamento do seu site SPIP.
+	'plug_actifs' => 'Plugins ativos',
+	'plug_inactifs' => 'Plugins inativos',
+	'plugin_xml' => 'Re&uacute;ne num &uacute;nico plugin uma lista de pequenas e &uacute;teis funcionalidades, que melhoram o gerenciamento do seu site SPIP.
 
 Cada uma destas ferramentas pode ser ativada ou desativada pelo usu&aacute;rio na [p&aacute;gina de administra&ccedil;&atilde;o do plugin->./?exec=admin_couteau_suisse] e gerar um certo n&uacute;mero de vari&aacute;veis: clique em {{Configuration}}, e depois escolha a guia {{Le Couteau Suisse}}.
 
@@ -91,25 +91,26 @@ Descobra neste plugin as suas ferramentas favoritas: {Suprime o n&uacute;mero}, 
 N&atilde;o deixe de consultar os artigos de documenta&ccedil;&atilde;o do plugin, publicados em: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilidade: SPIP v1.9x e v2.0', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques', # NEW
+	'pp_blocs_bloc' => 'Inserir um bloco comprimido',
+	'pp_blocs_visible' => 'Inserir um bloco expandido',
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
 	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
+	'pp_couleur_fond' => 'Fundo @couleur@',
+	'pp_couleur_icone_fond' => 'F',
+	'pp_couleur_icone_texte' => 'T',
+	'pp_couleur_texte' => 'Texto @couleur@',
+	'pp_couteau_suisse_drop' => 'Usar uma ferramenta do Canivete Sui&ccedil;o',
+	'pp_decoration_inserer' => 'Decora&ccedil;&atilde;o &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;',
+	'pp_decoration_inserer_drop' => 'Aplicar ao texto uma &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personalizada',
+	'pp_decoupe_onglets' => 'Inserir um sistema de guias',
+	'pp_decoupe_separateur' => 'Inserir um separador de p&aacute;gina ou de guia',
+	'pp_filets_inserer' => 'Inserir um fio do tipo &laquo;&nbsp;@filet@&nbsp;&raquo;',
+	'pp_filets_inserer_drop' => 'Inserir um fio de separa&ccedil;&atilde;o',
+	'pp_smileys_inserer' => 'Inserir um emoticon @smiley@',
+	'pp_un_titre' => 'Um t&iacute;tulo',
+	'pp_votre_texte' => 'Coloque o seu texto aqui',
+	'pp_votre_titre' => 'T&iacute;tulo @nb@',
 
 	// S
 	'smileys_dispos' => 'Caricaturas dispon&iacute;veis:',
@@ -120,8 +121,8 @@ Compatibilidade: SPIP v1.9x e v2.0', # MODIF
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&agrave;s&nbsp;@h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
-	'test_manuel' => 'Test manuel', # NEW
+	'test_base' => 'Teste da base de dados',
+	'test_manuel' => 'Teste manual',
 	'texte_formatspip' => 'TEXTO ORIGINAL EM FORMATO SPIP',
 	'textes_formatspip' => 'TEXTOS ORIGINAIS EM FORMATO SPIP',
 	'titre' => 'Canivete Su&iacute;&ccedil;o',
@@ -141,7 +142,7 @@ Compatibilidade: SPIP v1.9x e v2.0', # MODIF
 	'visiteurs_connectes' => 'Visitantes online: @nb@',
 
 	// W
-	'webmestres' => 'Webmestres SPIP', # NE
+	'webmestres' => 'Webmasters SPIP'
 );
 
 ?>
