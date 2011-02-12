@@ -3,30 +3,30 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_fichier_recu' => 'You must select a file',
+	'aucun_fichier_recu' => 'You must select a file.',
 
 	// C
 	'changer_document' => 'Change the document',
-	'confirmer_suppression' => 'The removal has been completed',
+	'confirmer_suppression' => 'The deletion has been completed.',
 
 	// D
 	'document_ajoute' => 'The document has been added.',
 
 	// E
-	'erreur_ajout_document' => 'An error has occured while adding the document.',
+	'erreur_ajout_document' => 'An error has occurred while adding the document.',
 
 	// L
 	'logo' => 'Logo',
 	'logo_maj' => 'The logo has been updated.',
-	'logo_survol' => 'Rollover Logo',
+	'logo_survol' => 'Hover logo',
 
 	// M
-	'mauvaise_reception' => 'Oups ! Error in receiving the file. Please try again ...'
+	'mauvaise_reception' => 'Oops! An error occurred when receiving the file. Please try again ...'
 );
 
 ?>
