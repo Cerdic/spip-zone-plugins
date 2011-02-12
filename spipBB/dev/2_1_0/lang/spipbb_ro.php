@@ -489,7 +489,7 @@ _ &bull; [de tout le plugin->@plugin@]</p>', # NEW
 	'votre_signature' => 'Votre signature', # NEW
 	'votre_site' => 'Le nom de votre site', # NEW
 	'votre_url_avatar' => 'URL de votre Avatar (http://...)', # NEW
-	'votre_url_site' => 'L\'adresse (URL) de votre site', # NE
+	'votre_url_site' => 'L\'adresse (URL) de votre site' # NEW
 );
 
 ?>
