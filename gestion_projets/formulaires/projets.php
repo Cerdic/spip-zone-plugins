@@ -82,7 +82,7 @@ function definitions($tout=''){
 			),		
 		);
 		
-
+	//Préparation d l'array qui sert à construire le formulaire
 	$formulaire=array();
 		
 	foreach ($champs AS $champ =>$valeur){
@@ -92,6 +92,9 @@ function definitions($tout=''){
 			}
 	
 		}	
+		
+	//Définition du retour
+		
 	if(!$tout)	$valeurs=$champs;
 	else $valeurs=array(
 		'valeurs'=>$champs,
@@ -104,31 +107,35 @@ function definitions($tout=''){
 
 function formulaires_projets_charger_dist(){
 
+	//On charge les définitions
+
 	$defs='tout';
 	$definitions=definitions($defs);
 	
+	//On définit les valeurs du formulaire
 	$valeurs=$definitions['valeurs'];
 	
 	foreach($valeurs AS $key=>$champs){
 		$valeurs[$key]=$valeurs[$key]['valeur'];
 	}
 	
+	//Le valeurs pour la construction du formulaire
 	$valeurs['formulaire']=$definitions['formulaire'];
+	
+	// Les fieldsets
 	$valeurs['fieldsets']=$definitions['fieldsets'];	
 	
 
+	// Les valeurs spécifiques
 	$valeurs['_hidden'].='<input type="hidden" name="id_auteur" value="'.$GLOBALS['visiteur_session']['id_auteur'].'"/>';
 	
-	$valeurs['essai']=array('field'=>'input',
-							'name'=>'nom',
-							'label'=>_T('gestpro:nom'),
-							'obligatoire'=>'oui');
-
 
 return $valeurs;
 }
 
 function formulaires_projets_verifier_dist(){
+
+// to do: automatiser les champs obligatoires
 
     $erreurs = array();
     foreach(array('nom','id_chef_projet') as $champ) {
