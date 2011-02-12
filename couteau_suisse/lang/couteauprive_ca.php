@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -12,16 +12,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => '&nbsp;:&nbsp;si',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tots els enlla&ccedil;os del lloc s\'obren, per defecte, a la mateixa finestra de navegaci&oacute; que esteu. Per&ograve; pot ser &uacute;til obrir els enlla&ccedil;os externs al lloc en una nova finestra --es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP de les classes {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser &uacute;til afegir una d\'aquestes classes als enlla&ccedil;os de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al m&agrave;xim aquesta funcionalitat.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tots els enlla&ccedil;os del lloc s\'obren, per defecte, a la mateixa finestra de navegaci&oacute; en la que esteu. Per&ograve; pot ser &uacute;til obrir els enlla&ccedil;os externs al lloc en una nova finestra --es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP de les classes {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser &uacute;til afegir una d\'aquestes classes als enlla&ccedil;os de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al m&agrave;xim aquesta funcionalitat.[[%radio_target_blank3%]]
 
 
 
-@puce@ SPIP permet lligar paraules amb la seva definici&oacute; gr&agrave;cies a la drecera tipogr&agrave;fica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de m&eacute;s avall), el glossari extern us envia cap a l\'enciclop&egrave;dia lliure wikipedia.org. Us toca a vosaltres decidir quina adre&ccedil;a voleu utilitzar. <br />Enlla&ccedil; de prova: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
-	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enlla&ccedil;os &laquo;~mailto:~&raquo;: un petit sobre hauria d\'apar&egrave;ixer al davant de cada enlla&ccedil; lligat a un correu electr&ograve;nic; per&ograve; com que tots els navegadors no el poden mostrar (sobretot IE6, IE7 i SAF3), us toca a vosaltres decidir si &eacute;s necessari conservar aquest afegit.
+@puce@ SPIP permet lligar paraules amb la seva definici&oacute; gr&agrave;cies a la drecera tipogr&agrave;fica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de m&eacute;s avall), el glossari extern us envia cap a l\'enciclop&egrave;dia lliure wikipedia.org. Us toca a vosaltres escolir quina adre&ccedil;a voleu utilitzar. <br />Enlla&ccedil; de prova: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
+	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enlla&ccedil;os &laquo;~mailto:~&raquo;: un petit sobre hauria d\'apar&egrave;ixer al davant de cada enlla&ccedil; lligat a un correu electr&ograve;nic; per&ograve; com que no tots els navegadors el poden mostrar (sobretot IE6, IE7 i SAF3), heu de veure si voleu conservar aquest afegit.
 
 _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina completament).[[%enveloppe_mails%]]', # MODIF
 	'SPIP_liens:nom' => 'SPIP i els enlla&ccedil;os externs',
-	'SPIP_tailles:description' => '@puce@ Per tal d\'alleugerir la mem&ograve;ria del vostre servidor, SPIP us permet limitar les dimensions (amplada i llargada) i la mida del fitxer de les imatges, logos o documents adjunts als diversos continguts del vostre lloc. Si un fitxer sobrepassa la mida indicada, el formulari enviar&agrave; b&eacute; les dades per&ograve; seran destru&iuml;des  i SPIP no les tindr&agrave; en compte ni a dins del directori IMG/, ni a la base de dades. Llavors s\'enviar&agrave; un missatge d\'advert&egrave;ncia a l\'usuari.
+	'SPIP_tailles:description' => '@puce@ Per tal d\'alleugerir la mem&ograve;ria del vostre servidor, SPIP us permet limitar les dimensions (amplada i llargada) i la mida del fitxer de les imatges, logos o documents adjunts als diversos continguts del vostre lloc. Si un fitxer sobrepassa la mida indicada, el formulari enviar&agrave; b&eacute; les dades per&ograve; seran destru&iuml;des i SPIP no les tindr&agrave; en compte ni a dins del directori IMG/, ni a la base de dades. Llavors s\'enviar&agrave; un missatge d\'advert&egrave;ncia a l\'usuari.
 
 
 
@@ -35,11 +35,11 @@ Un valor nul o no informat correspon a un valor il&middot;limitat.
 
 
 
-@puce@ Definiu aqu&iacute; l\'espai m&agrave;xim reservat als fitxer distants que SPIP podria descarregar (de servidor a servidor) i emmagatzemar al vostre lloc. El valor per defecte &eacute;s aqu&iacute; de 16 Mb.[[%copie_Smax% Mo]]
+@puce@ Definiu aqu&iacute; l\'espai m&agrave;xim reservat als fitxer distants que SPIP podria descarregar (de servidor a servidor) i emmagatzemar al vostre lloc. Aqu&iacute;, el valor per defecte &eacute;s de 16 Mb.[[%copie_Smax% Mo]]
 
 
 
-@puce@ Per tal d\'evitar un depassament de mem&ograve;ria PHP en el tractament de grans imatges per la llibreria GD2, SPIP prova les capacitats del servidor i, per tant, pot refusar tractar les imatges massa grans. &Eacute;s possible desactivar aquest test definint manualment el nombre m&agrave;xim de p&iacute;xels suportats pels c&agrave;lculs.
+@puce@ Per tal d\'evitar un depassament de mem&ograve;ria PHP en el tractament per la llibreria GD2 de grans imatges,PIP prova les capacitats del servidor i, per tant, pot refusar tractar les imatges massa grans. &Eacute;s possible desactivar aquest test definint manualment el nombre m&agrave;xim de p&iacute;xels suportats pels c&agrave;lculs.
 
 
 
@@ -60,7 +60,7 @@ El valor de 1~000~000 p&iacute;xels sembla correcte per una configuraci&oacute; 
 	'action_rapide_non' => 'Acci&oacute; r&agrave;pida, disponible un cop aquesta eina siga activada :',
 	'admins_seuls' => 'Nom&eacute;s els administradors',
 	'attente' => 'Espera...',
-	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) un nom i/o un correu electr&ograve;nic per tal d\'evitar les contribucions totalment an&ograve;nimes. Feixeu-vos que aquesta eina fa una verificaci&oacute; del JavaScript al lloc del visitant.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
+	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) un nom i/o un correu electr&ograve;nic per tal d\'evitar les contribucions totalment an&ograve;nimes. Fixeu-vos que aquesta eina fa una verificaci&oacute; del JavaScript al lloc del visitant.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 
 {Alerta: Escollir la tercera opci&oacute; anul&middot;la les 2 primeres. &Eacute;s important verificar que els formularis del vostre esquelet s&oacute;n compatibles completament amb aquesta eina.}', # MODIF
 	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
@@ -71,14 +71,19 @@ El valor de 1~000~000 p&iacute;xels sembla correcte per una configuraci&oacute; 
 
 
 
-@puce@ Defineix aqu&iacute; el nombre m&agrave;xim d\'autors a mostrar en el quadre central de la p&agrave;gina d\'autors. M&eacute;s enll&agrave;, trobem una paginaci&oacute;.[[%max_auteurs_page%]]
+@puce@ Definiu aqu&iacute; el nombre m&agrave;xim d\'autors a mostrar en el quadre central de la p&agrave;gina d\'autors. M&eacute;s enll&agrave;, trobem una paginaci&oacute;.[[%max_auteurs_page%]]
 
 
 
-@puce@ Quins estats d\'autors es poden llistar en aquesta p&agrave;gina? 
+@puce@ Quins estats d\'autors es poden llistar en aquesta p&agrave;gina?
 
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
 	'auteurs:nom' => 'P&agrave;gina d\'autors',
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]', # NEW
+	'autobr:nom' => 'Retours de ligne automatiques', # NEW
+	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>', # NEW
+	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)', # NEW
+	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>', # NEW
 
 	// B
 	'balise_set:description' => 'Per simplificar l\'escriptura del tipus  <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la seg&uuml;ent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
@@ -169,7 +174,7 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 
 @puce@ {{Selecci&oacute; d\'autors}}. L\'afegit d\'un autor es fa per mini-navegador a dins de la forquilla seg&uuml;ent:
 <q1>• Una llista de selecci&oacute; per menys de %select_min_auteurs% autor(s).
-_ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>', # MODIF
+_ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>',
 	'brouteur:nom' => 'Regulaci&oacute; dels selectors',
 
 	// C
@@ -181,7 +186,7 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>', # MODIF
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interf&iacute;cie privada',
 	'categ:public' => '40. Visualitzaci&oacute; p&uacute;blica',
-	'categ:securite' => '5. S&eacute;curit&eacute;', # NEW
+	'categ:securite' => '5. Seguretat',
 	'categ:spip' => '50. Etiquetes, filtres, criteris',
 	'categ:typo-corr' => '20. Millora dels textos',
 	'categ:typo-racc' => '30. Dreceres tipogr&agrave;fiques',
@@ -189,7 +194,7 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>', # MODIF
 	'chatons:aide' => 'Emoticones: @liste@',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
 
-_ Aquesta eina substitueix aquestes dreceres per les imatges del mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.', # MODIF
+_ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Emoticones',
 	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes &lt;quote&gt; per les etiquetes &lt;q&gt; quan no hi ha salt de l&iacute;nia. Efectivament, les citacions curtes han d\'estar envoltades per &lt;q&gt; i les citacions que contenen par&agrave;grafs per &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citacions ben etiquetades',
@@ -257,6 +262,7 @@ Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave
 	'compacte_prive' => 'No compactar res a la part privada',
 	'compacte_tout' => 'No compactar res de res (fa caducar les opcions anteriors)',
 	'contrib' => 'M&eacute;s informacions: @url@',
+	'copie_vers' => 'Copie vers : @dir@', # NEW
 	'corbeille:description' => 'SPIP suprimeix autom&agrave;ticament els objectes llen&ccedil;ats a la paperera les &uacute;ltimes 24 hores, en general des de les 4 de la matinada, gr&agrave;cies a una tasca &laquo;CRON&raquo; (llan&ccedil;ament peri&ograve;dic i/o autom&agrave;tic dels processos programats pr&egrave;viament). Aqu&iacute; podeu impedir aquest proc&eacute;s per tal de gestionar millor la vostra paperera. [[%arret_optimisation%]]',
 	'corbeille:nom' => 'La paperera',
 	'corbeille_objets' => '@nb@ objecte(s) a la paperera. ',
@@ -312,7 +318,7 @@ Si els requeriments externs del vostre servidor us posen problemes o teniu probl
 	'decoration:aide' => 'Decoraci&oacute;: <b>&lt;etiqueta&gt;test&lt;/etiqueta&gt;</b>, amb <b>etiqueta</b> = @liste@',
 	'decoration:description' => 'De nou estils parametrables a dins dels vostres textos i accessibles gr&agrave;cies a les etiquetes &agrave; chevrons. Exemple: 
 
-&lt;lamevaetiqueta&gt;text&lt;/lamevaetiqueta&gt; o : &lt;lamevaetiqueta/&gt;.<br />Definiu m&eacute;s avall els estils CSS que necessiteu, una etiqueta per l&igrave;nia, segons les seg&uuml;ents sintaxis:
+&lt;lamevaetiqueta&gt;text&lt;/lamevaetiqueta&gt; o : &lt;lamevaetiqueta/&gt;.<br />Definiu m&eacute;s avall els estils CSS que necessiteu, una etiqueta per l&iacute;nia, segons les seg&uuml;ents sintaxis:
 
 - {tipus.lamevaetiqueta = el meu estil CSS}
 
@@ -395,7 +401,8 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', # 
 
 	// E
 	'ecran_activer' => 'Activer l\'&eacute;cran de s&eacute;curit&eacute;', # NEW
-	'ecran_conflit' => 'Attention : le fichier &laquo;@file@&raquo; entre en conflit et doit &ecirc;tre supprim&eacute; !', # NEW
+	'ecran_conflit' => 'Attention : le fichier &laquo;@file@&raquo; entre en conflit et doit &ecirc;tre supprim&eacute; !', # MODIF
+	'ecran_conflit2' => 'Note : un fichier statique &laquo;@file@&raquo; a &eacute;t&eacute; d&eacute;tect&eacute; et activ&eacute;. Le Couteau Suisse ne pourra le mettre &agrave; jour ou le configurer.', # NEW
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'&eacute;cran de s&eacute;curit&eacute; est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
 	'ecran_maj_ok' => '(semble &agrave; jour).', # NEW
@@ -569,6 +576,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 
 	// L
 	'label:admin_travaux' => 'Tancar el lloc p&uacute;blic per:',
+	'label:alinea' => 'Champ d\'application :', # NEW
 	'label:arret_optimisation' => 'Impedir que SPIP buidi la paperera autom&agrave;ticament:',
 	'label:auteur_forum_nom' => 'El visitant ha d\'especificar:',
 	'label:auto_sommaire' => 'Creaci&oacute; sistem&agrave;tica del sumari:',

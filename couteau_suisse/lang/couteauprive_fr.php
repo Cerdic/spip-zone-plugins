@@ -1,15 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'autobr:nom' => 'Retours de ligne automatiques',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]',
-	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)',
-	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>',
-	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
-	'label:alinea' => 'Champ d\'application :',
 
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
@@ -59,6 +53,11 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 @puce@ Quels statuts d\'auteurs peuvent &ecirc;tre list&eacute;s sur cette page ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Page des auteurs',
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]',
+	'autobr:nom' => 'Retours de ligne automatiques',
+	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>',
+	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)',
+	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
 	'balise_set:description' => 'Afin d\'all&eacute;ger les &eacute;critures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqu&eacute; &agrave; une variable passe donc dans le nom de la balise.
@@ -179,6 +178,7 @@ Notez bien : en modifiant ce deuxi&egrave;me style, vous perdez alors les styles
 	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e',
 	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)',
 	'contrib' => 'Plus d\'infos : @url@',
+	'copie_vers' => 'Copie vers : @dir@',
 	'corbeille:description' => 'SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]',
 	'corbeille:nom' => 'La corbeille',
 	'corbeille_objets' => '@nb@ objet(s) dans la corbeille.',
@@ -280,7 +280,6 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 
 	// E
-	'copie_vers' => 'Copie vers : @dir@',
 	'ecran_activer' => 'Activer l\'&eacute;cran de s&eacute;curit&eacute;',
 	'ecran_conflit' => 'Attention : le fichier statique &laquo;@file@&raquo; peut entrer en conflit. Choisissez votre m&eacute;thode de protection !',
 	'ecran_conflit2' => 'Note : un fichier statique &laquo;@file@&raquo; a &eacute;t&eacute; d&eacute;tect&eacute; et activ&eacute;. Le Couteau Suisse ne pourra le mettre &agrave; jour ou le configurer.',
@@ -417,6 +416,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 
 	// L
 	'label:admin_travaux' => 'Fermer le site public pour :',
+	'label:alinea' => 'Champ d\'application :',
 	'label:arret_optimisation' => 'Emp&ecirc;cher SPIP de vider la corbeille automatiquement&nbsp;:',
 	'label:auteur_forum_nom' => 'Le visiteur doit sp&eacute;cifier :',
 	'label:auto_sommaire' => 'Cr&eacute;ation syst&eacute;matique du sommaire :',

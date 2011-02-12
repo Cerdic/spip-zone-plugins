@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -52,11 +52,14 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 @puce@ Which kinds of authors should be listed on the spages?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
 	'auteurs:nom' => '<NEW>Autorsk&aacute; str&aacute;nka',
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]', # NEW
+	'autobr:nom' => 'Retours de ligne automatiques', # NEW
+	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>', # NEW
+	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)', # NEW
+	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>', # NEW
 
 	// B
 	'balise_set:description' => 'Afin d\'all&eacute;ger les &eacute;critures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqu&eacute; &agrave; une variable passe donc dans le nom de la balise.
-
-
 
 Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPLACE{x,ons,ez}</code>.', # NEW
 	'balise_set:nom' => 'Balise #SET &eacute;tendue', # NEW
@@ -164,6 +167,7 @@ N.B.: by changing the second parameter you will lose any standard styles associa
 	'compacte_prive' => 'Ne rien compacter en partie priv&eacute;e', # NEW
 	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options pr&eacute;c&eacute;dentes)', # NEW
 	'contrib' => 'More information: @url@', # MODIF
+	'copie_vers' => 'Copie vers : @dir@', # NEW
 	'corbeille:description' => 'SPIP automatically deletes objets which have been put in the dustbin after one day. This is done by a "Cron" job, usually at 4 am. Here, you can block this process taking place in order to regulate the dustbin emptying yourself. [[%arret_optimisation%]]', # MODIF
 	'corbeille:nom' => 'Wastebin', # MODIF
 	'corbeille_objets' => '@nb@ object(s) in the wastebin.', # MODIF
@@ -263,7 +267,8 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 
 	// E
 	'ecran_activer' => 'Activer l\'&eacute;cran de s&eacute;curit&eacute;', # NEW
-	'ecran_conflit' => 'Attention : le fichier &laquo;@file@&raquo; entre en conflit et doit &ecirc;tre supprim&eacute; !', # NEW
+	'ecran_conflit' => 'Attention : le fichier statique &laquo;@file@&raquo; peut entrer en conflit. Choisissez votre m&eacute;thode de protection !', # NEW
+	'ecran_conflit2' => 'Note : un fichier statique &laquo;@file@&raquo; a &eacute;t&eacute; d&eacute;tect&eacute; et activ&eacute;. Le Couteau Suisse ne pourra le mettre &agrave; jour ou le configurer.', # NEW
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'&eacute;cran de s&eacute;curit&eacute; est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
 	'ecran_maj_ok' => '(semble &agrave; jour).', # NEW
@@ -396,6 +401,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 
 	// L
 	'label:admin_travaux' => 'Close the public site for:', # MODIF
+	'label:alinea' => 'Champ d\'application :', # NEW
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:', # MODIF
 	'label:auteur_forum_nom' => 'The visitor must specify:', # MODIF
 	'label:auto_sommaire' => 'Systematic creation of a summary:', # MODIF
