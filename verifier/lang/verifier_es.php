@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_telephone' => 'N&uacute;mero de tel&eacute;fono',
 	'type_telephone_description' => 'Comprueba que el n&uacute;mero de tel&eacute;fono corresponde a un patr&oacute;n reconocido.',
 	'type_url' => 'URL', # NEW
-	'type_url_description' => 'V&eacute;rifie que l\'url correspond &agrave; un sch&eacute;ma reconnu.', # NE
+	'type_url_description' => 'V&eacute;rifie que l\'url correspond &agrave; un sch&eacute;ma reconnu.' # NEW
 );
 
 ?>
