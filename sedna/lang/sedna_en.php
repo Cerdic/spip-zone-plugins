@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -31,18 +31,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Last month',
 
 	// P
-	'pas_articles' => 'No post within this period of time!',
-	'pas_synchro' => 'Do not synchronize',
+	'pas_articles' => 'No posts within this time period!',
+	'pas_synchro' => 'Do not synchronise',
 	'preferences' => 'Preferences',
 	'probleme_de_syndication' => 'Syndication problem',
 
 	// S
 	'semaine' => 'Last week',
 	'sources' => 'Feeds',
-	'synchro' => 'Synchronize',
-	'synchro_titre' => 'Save the list of read posts on website',
+	'synchro' => 'Synchronise',
+	'synchro_titre' => 'Save on the website the list of posts already read',
 	'syndication_ajour' => 'Update now',
-	'syndication_fait' => 'Syndication done',
+	'syndication_fait' => 'Syndication completed',
 
 	// T
 	'toutes' => 'All'
