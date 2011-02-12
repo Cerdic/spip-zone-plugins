@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -18,16 +18,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fermer' => 'Schliessen',
 
 	// L
-	'lier_traduction' => 'Eine Übersetzung anfügen',
+	'lier_traduction' => 'Eine übersetzung anhängen',
 
 	// M
-	'modifier_options_langue' => 'Sprachoption verändern', # NEW
+	'modifier_options_langue' => 'options', # NEW
 
 	// N
 	'necesite_afficher_objet' => 'Diese Fuktion erfordert die Installierung des Plugins',
 
 	// O
-	'options' => 'Optionen',
+	'options' => 'Optionen', # MODIF
 
 	// T
 	'titre_plugin' => 'Artikel Übersetzung mal Anders',

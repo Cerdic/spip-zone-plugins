@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -21,13 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_traduction' => 'Añadir una traducción',
 
 	// M
-	'modifier_options_langue' => 'Modificar las opciones de idioma', # NEW
+	'modifier_options_langue' => 'options', # NEW
 
 	// N
 	'necesite_afficher_objet' => 'Esta opción necesita la instalación del plugin',
 
 	// O
-	'options' => 'Opciones',
+	'options' => 'Opciones', # MODIF
 
 	// T
 	'titre_plugin' => 'Traducción de articulos repensada',
