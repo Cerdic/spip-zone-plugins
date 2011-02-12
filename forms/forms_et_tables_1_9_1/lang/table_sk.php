@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_des_tables' => 'Tables', # MODIF
 
 	// U
-	'une_reponse' => 'One data item', # MODI
+	'une_reponse' => 'One data item' # MODIF
 );
 
 ?>

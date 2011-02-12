@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_des_tables' => 'Tables', # NEW
 
 	// U
-	'une_reponse' => 'Une donn&eacute;e', # NE
+	'une_reponse' => 'Une donn&eacute;e' # NEW
 );
 
 ?>
