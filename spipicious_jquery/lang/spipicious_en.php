@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -42,12 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipicious' => 'Spip.icio.us',
 
 	// T
-	'tag_ajoute' => 'You added a tag :<br />@name@',
+	'tag_ajoute' => 'You added a tag :<br />@name@', # MODIF
 	'tag_deja_present' => 'You ever added this tag.',
-	'tag_supprime' => 'You deleted the tag :<br />@name@',
+	'tag_supprime' => 'You deleted the tag :<br />@name@', # MODIF
 	'tags' => 'Tags :',
-	'tags_ajoutes' => 'You added several tags :<br />@name@',
-	'tags_supprimes' => 'You deleted several tags :<br />@name@',
+	'tags_ajoutes' => 'You added several tags :<br />@name@', # MODIF
+	'tags_supprimes' => 'You deleted several tags :<br />@name@', # MODIF
 	'title_tag_utilise_nb' => 'This tag has been associated by @nb@ people.',
 	'title_tag_utilise_un' => 'This tag has been associated by one people.',
 	'to' => 'with',

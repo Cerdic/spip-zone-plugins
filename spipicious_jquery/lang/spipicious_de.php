@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -42,12 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipicious' => 'Spip.icio.us',
 
 	// T
-	'tag_ajoute' => 'Sie haben ein Tag zugeordnet:<br />@name@',
+	'tag_ajoute' => 'Sie haben ein Tag zugeordnet:<br />@name@', # MODIF
 	'tag_deja_present' => 'Sie haben dieses Tag bereits zugeordnet.',
-	'tag_supprime' => 'Sie haben das Tag gel&ouml;scht:<br />@name@',
+	'tag_supprime' => 'Sie haben das Tag gel&ouml;scht:<br />@name@', # MODIF
 	'tags' => 'Tags:',
-	'tags_ajoutes' => 'Sie haben mehrere Tags zugeordnet:<br />@name@',
-	'tags_supprimes' => 'Sie haben mehrere Tags gel&ouml;scht:<br />@name@',
+	'tags_ajoutes' => 'Sie haben mehrere Tags zugeordnet:<br />@name@', # MODIF
+	'tags_supprimes' => 'Sie haben mehrere Tags gel&ouml;scht:<br />@name@', # MODIF
 	'title_tag_utilise_nb' => 'Dieses Schlagwort wurde von @nb@ Besuchern zugeordnet.',
 	'title_tag_utilise_un' => 'Dieses Schlagwort wurde von einem Besucher zugeordnet.',
 	'to' => 'mit',

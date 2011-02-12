@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -42,12 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipicious' => 'Spip.icio.us',
 
 	// T
-	'tag_ajoute' => 'Heu afegit una etiqueta:<br />@name@',
+	'tag_ajoute' => 'Heu afegit una etiqueta:<br />@name@', # MODIF
 	'tag_deja_present' => 'Ja havies afegit aquesta etiqueta.',
-	'tag_supprime' => 'Heu suprimit el tag:<br />@name@',
+	'tag_supprime' => 'Heu suprimit el tag:<br />@name@', # MODIF
 	'tags' => 'Etiquetes:',
-	'tags_ajoutes' => 'Heu afegit diverses etiquetes:<br />@name@',
-	'tags_supprimes' => 'Heu suprimit diverses etiquetes:<br />@name@',
+	'tags_ajoutes' => 'Heu afegit diverses etiquetes:<br />@name@', # MODIF
+	'tags_supprimes' => 'Heu suprimit diverses etiquetes:<br />@name@', # MODIF
 	'title_tag_utilise_nb' => 'Aquesta paraula clau est&agrave; associada per @nb@ persones.',
 	'title_tag_utilise_un' => 'Aquesta paraula clau est&agrave; associada per una persona.',
 	'to' => 'amb',
