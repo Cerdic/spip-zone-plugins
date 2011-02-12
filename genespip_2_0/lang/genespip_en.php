@@ -3,12 +3,12 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_ete_mise_a_la_poubelle' => 'a &eacute;t&eacute; mise &agrave; la poubelle', # NEW
+	'a_ete_mise_a_la_poubelle' => 'has been put in the wastebin',
 	'acces_non' => 'Access rights &raquo; Restricted',
 	'acces_oui' => 'Access rights &raquo; Details of the files',
 	'acces_restreint' => 'Access to this site is restricted',
