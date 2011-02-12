@@ -3,14 +3,14 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'config_desc' => '<strong>Palette</strong> adds automatically a color picker wheel to an input field,
-		if you add to it a CSS class &laquo;palette&raquo;',
-	'config_exemple' => 'Sample :',
+	'config_desc' => '<strong>Palette</strong> automatically adds a colour picker wheel to an input field,
+  by simply applying the CSS class "palette" to it',
+	'config_exemple' => 'Example:',
 	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Cf. documentation</a>',
 
 	// F
@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'palette' => 'Palette',
-	'palette_ecrire' => 'Activate Palette for private area',
-	'palette_public' => 'Activate Palette for public area'
+	'palette_ecrire' => 'Activate Palette for the private area',
+	'palette_public' => 'Activate Palette for the public area'
 );
 
 ?>
