@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'title' => 'SimpleCart', # NEW
 
 	// Y
-	'your_cart' => 'Votre panier', # NE
+	'your_cart' => 'Votre panier' # NEW
 );
 
 ?>
