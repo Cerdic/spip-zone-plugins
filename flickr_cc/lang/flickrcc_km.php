@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher_flickr' => 'Rechercher sur Flickr', # NEW
 	'resultat_par_date' => 'par date', # NEW
 	'resultat_par_interet' => 'par int&eacute;r&ecirc;t', # NEW
-	'resultat_par_pertinence' => 'par pertinence', # NE
+	'resultat_par_pertinence' => 'par pertinence' # NEW
 );
 
 ?>
