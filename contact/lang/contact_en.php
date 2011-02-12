@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'Phone Number',
 	'champ_texte' => 'Text',
 	'champ_ville' => 'City',
+	'configuration_barre_forum' => 'Afficher la barre typo des forums.', # NEW
 	'configuration_barre_impossible' => 'Another plugin is blocking the use of porte-plume in the public space - the settings below will not have any effect.',
 	'configuration_barre_oui' => 'View the complete bar typo.',
 	'configuration_champs_message' => 'PenHolder Settings.',
@@ -66,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'deplacement_possible' => 'Vertical displacement by drag and drop',
 	'description_menu_contact' => 'Menu entry pointing to the contact form page',
+	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez &agrave; ajouter un lien dans vos menus).', # NEW
 
 	// F
 	'form_destinataire' => 'Choose a recipient',
@@ -92,6 +94,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Madam',
 	'mademoiselle' => 'Miss',
+	'modele_label_auteur' => 'Pr&eacute;-s&eacute;lectionner un auteur (facultatif)&nbsp;?', # NEW
+	'modele_nom_formulaire' => 'un formulaire de contact', # NEW
 	'monsieur' => 'Mister',
 	'msg_accueil' => 'Here are messages from contacts you have received.',
 	'msg_contact' => 'Message from contact',
@@ -102,6 +106,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_pas_nouveaux' => 'You haven\'t new messages.',
 	'msg_revenir_accueil' => 'Return to the list of contact messages.',
 	'msg_supprimer_message' => 'Delete this message',
+
+	// N
+	'noisette_label_afficher_titre_noisette' => 'Afficher un titre&nbsp;?', # NEW
+	'noisette_label_titre_noisette' => 'Titre&nbsp;:', # NEW
+	'noisette_label_titre_noisette_perso' => 'Si titre personnalis&eacute;&nbsp;:', # NEW
+	'noisette_titre_perso' => 'Titre personnalis&eacute;', # NEW
 
 	// P
 	'preselection' => 'Uncheck all the entries in the list of recipients',

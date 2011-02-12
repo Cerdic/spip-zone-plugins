@@ -1,7 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/contact/lang/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -32,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'T&eacute;l&eacute;phone',
 	'champ_texte' => 'Texte',
 	'champ_ville' => 'Ville',
-	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.',
 	'configuration_barre_forum' => 'Afficher la barre typo des forums.',
+	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.',
 	'configuration_barre_oui' => 'Afficher la barre typo compl&egrave;te.',
 	'configuration_champs_message' => 'R&eacute;glage du porte-plume.',
 	'configuration_champs_message_explication' => 'R&eacute;glage de la barre typographique associ&eacute;e au texte du message.',
@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_pas_nouveaux' => 'Vous n\'avez pas de nouveaux messages.',
 	'msg_revenir_accueil' => 'Revenir &agrave; la liste de messages de contact re&ccedil;us.',
 	'msg_supprimer_message' => 'Supprimer le message',
-	
+
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre&nbsp;?',
 	'noisette_label_titre_noisette' => 'Titre&nbsp;:',

@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'T&eacute;l&eacute;phone',
 	'champ_texte' => 'Text',
 	'champ_ville' => 'Stadt',
+	'configuration_barre_forum' => 'Afficher la barre typo des forums.', # NEW
 	'configuration_barre_impossible' => 'Ein anderes Plugin verhindert die Benutzung des Federhalters im &ouml;ffentlichen Bereich. Die unten stehenden Einstellungen haben keine Auswirkungen.',
 	'configuration_barre_oui' => 'Vollst&auml;ndige Funktionsleiste anzeigen.',
 	'configuration_champs_message' => 'Einstellungen des Federhalters.',
@@ -66,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'deplacement_possible' => 'Vertikale Verschiebung per Drag and Drop',
 	'description_menu_contact' => 'Eintrag im Men&uuml; zum Kontaktformular',
+	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez &agrave; ajouter un lien dans vos menus).', # NEW
 
 	// F
 	'form_destinataire' => 'W&auml;hlen Sie ein Reiseziel',
@@ -92,6 +94,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Frau',
 	'mademoiselle' => 'Fr&auml;ulein',
+	'modele_label_auteur' => 'Pr&eacute;-s&eacute;lectionner un auteur (facultatif)&nbsp;?', # NEW
+	'modele_nom_formulaire' => 'un formulaire de contact', # NEW
 	'monsieur' => 'Herr',
 	'msg_accueil' => 'Hier finden Sie die Kontaktdaten Nachrichten, die Sie erhalten haben.',
 	'msg_contact' => 'Kontakt Botschaft',
@@ -102,6 +106,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_pas_nouveaux' => 'Sie haben keine neuen Nachrichten.',
 	'msg_revenir_accueil' => 'Zur&uuml;ck zur Liste der empfangenen Nachrichten zu kontaktieren.',
 	'msg_supprimer_message' => 'L&ouml;schen Sie die Nachricht',
+
+	// N
+	'noisette_label_afficher_titre_noisette' => 'Afficher un titre&nbsp;?', # NEW
+	'noisette_label_titre_noisette' => 'Titre&nbsp;:', # NEW
+	'noisette_label_titre_noisette_perso' => 'Si titre personnalis&eacute;&nbsp;:', # NEW
+	'noisette_titre_perso' => 'Titre personnalis&eacute;', # NEW
 
 	// P
 	'preselection' => 'Alle Eintr&auml;ge in der Empf&auml;ngerliste abw&auml;hlen',
