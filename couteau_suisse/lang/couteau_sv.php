@@ -142,7 +142,7 @@ Compatibility: SPIP 1.9x (all versions)', # MODIF
 	'visiteurs_connectes' => 'Inloggade bes&ouml;kare: @nb@',
 
 	// W
-	'webmestres' => 'Webmestres SPIP', # NE
+	'webmestres' => 'Webmestres SPIP' # NEW
 );
 
 ?>

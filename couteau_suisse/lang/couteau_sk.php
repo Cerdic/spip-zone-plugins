@@ -142,7 +142,7 @@ Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'visiteurs_connectes' => 'Logged in visitors: @nb@', # MODIF
 
 	// W
-	'webmestres' => 'SPIP webmasters', # MODI
+	'webmestres' => 'SPIP webmasters' # MODIF
 );
 
 ?>
