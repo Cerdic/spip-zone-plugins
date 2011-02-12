@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,6 +34,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.en',
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.en',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+
+	// N
+	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels)&nbsp;:', # NEW
+	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels)&nbsp;:', # NEW
+	'noisette_lien' => 'Afficher le lien vers la description de la licence&nbsp;?', # NEW
+	'noisette_logo' => 'Afficher le logo de la licence&nbsp;?', # NEW
+	'noisette_nom_licence' => 'Afficher le nom de la licence&nbsp;?', # NEW
 
 	// S
 	'sans_licence' => 'No license',

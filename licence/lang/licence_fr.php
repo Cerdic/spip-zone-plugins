@@ -1,7 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/licence/lang/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.fr',
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.fr',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
-	
+
 	// N
 	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels)&nbsp;:',
 	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels)&nbsp;:',
