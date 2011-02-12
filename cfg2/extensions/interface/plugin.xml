@@ -11,6 +11,7 @@
 		</multi>
     </description>
     <prefix>cfg_interface</prefix>
+	<icon>images/cfg-128.png</icon>
     <chemin dir='' />
 
 	<bouton id='configurer' parent="configuration">
