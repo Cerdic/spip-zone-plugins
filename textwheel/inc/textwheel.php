@@ -18,10 +18,20 @@ include_spip('engine/textwheel');
 // Definition des principales wheels de SPIP
 //
 
-$GLOBALS['spip_wheels']['raccourcis'] = array(
-	'spip/spip.yaml',
-	'spip/spip-paragrapher.yaml'
-);
+// Si le tableau des raccourcis existe déjà
+if (!is_array($GLOBALS['spip_wheels']['raccourcis']))
+	$GLOBALS['spip_wheels']['raccourcis'] = array(
+		'spip/spip.yaml',
+		'spip/spip-paragrapher.yaml'
+	);
+else
+	$GLOBALS['spip_wheels']['raccourcis'] = array_merge(
+		array(
+			'spip/spip.yaml',
+			'spip/spip-paragrapher.yaml'
+		),
+		$GLOBALS['spip_wheels']['raccourcis']
+	);
 
 if (test_espace_prive ())
 	$GLOBALS['spip_wheels']['raccourcis'][] = 'spip/ecrire.yaml';

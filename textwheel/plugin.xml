@@ -3,7 +3,7 @@
 	<auteur>Fil &amp; Cerdic</auteur>
 	<icon></icon>
 	<licence>GNU/GPL</licence>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<etat>test</etat>
 	<description>Integrer TextWheel dans SPIP</description>
 	<prefix>tw</prefix>

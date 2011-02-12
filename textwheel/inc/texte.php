@@ -18,6 +18,9 @@ include_spip('inc/lien');
 
 include_spip('inc/textwheel');
 
+// Avec cette surcharge, cette globale n'est plus définie, et du coup ça plante dans les plugins qui font un foreach dessus comme ZPIP
+$GLOBALS['spip_raccourcis_typo'] = array();
+
 // Raccourcis dependant du sens de la langue
 function definir_raccourcis_alineas() {
 	global $ligne_horizontale;
