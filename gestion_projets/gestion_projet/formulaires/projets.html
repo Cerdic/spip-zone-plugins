@@ -1,0 +1,49 @@
+
+
+<div class="formulaire_spip formulaire_projets">
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<form action="#ENV{action}" method="post"><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+			[(#SAISIE{input,nom,
+					label=<:nom:>,
+					obligatoire=oui,		
+					})]
+
+			[(#SAISIE{auteurs,id_chef_projet,
+				option_statut=oui,
+				obligatoire=oui,
+				defaut=#SESSION{id_auteur},
+				label=<:gestpro:chef_projet:>,
+				multiple=oui
+				statut=0minirezo})]
+			[(#SAISIE{textarea,descriptif,
+					label=<:info_descriptif:>,	
+					})]				
+			[(#SAISIE{input,montant_estime,
+					label=<:gestpro:montant_estime:> &euro;,	
+					})]	
+			[(#SAISIE{input,duree_estimee,
+					label=<:gestpro:duree_estimee:>,	
+					explication=<:gestpro:explication_heure:>,						
+					})]	
+			[(#SAISIE{date,date_debut,
+					label=<:gestpro:date_debut:>,						
+					})]	
+			[(#SAISIE{date,date_fin_estimee,
+					label=<:gestpro:date_fin_estimee:>,						
+					})]																					
+																				
+															
+										
+					
+
+			</ul>
+			<p class="boutons"><input type="submit" class="submit" value="<:ok:>" /></p>				
+				
+				
+			</div></form>
+</div>
+
+ 
