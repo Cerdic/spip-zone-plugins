@@ -846,7 +846,7 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 
 	// X
 	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.', # NEW
-	'xml:nom' => 'Validateur XML', # NE
+	'xml:nom' => 'Validateur XML' # NEW
 );
 
 ?>
