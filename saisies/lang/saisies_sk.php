@@ -129,7 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vue_sans_reponse' => '<i>Sans r&eacute;ponse</i>', # NEW
 
 	// Z
-	'z' => 'zzz', # MODI
+	'z' => 'zzz' # MODIF
 );
 
 ?>
