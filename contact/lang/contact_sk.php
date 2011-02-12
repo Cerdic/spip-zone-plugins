@@ -124,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre' => 'Contact Form', # MODIF
-	'titre_court' => 'Contact', # N
+	'titre_court' => 'Contact' # NE
 );
 
 ?>
