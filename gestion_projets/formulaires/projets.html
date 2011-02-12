@@ -1,5 +1,3 @@
-
-
 <div class="formulaire_spip formulaire_projets">
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -11,7 +9,7 @@
 	<fieldset><label><h3 class="legend">#VALEUR</h3></label>
 		<ul>
 		<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{#VALEUR})}{par cle}>
-		#SET{valeurs,#VALEUR|serialize|table_valeur{form}}
+		#SET{valeurs,#VALEUR|table_valeur{form}}
 		[(#SAISIE{
 			[(#GET{valeurs}|table_valeur{field})],
 			[(#GET{valeurs}|table_valeur{name})],
