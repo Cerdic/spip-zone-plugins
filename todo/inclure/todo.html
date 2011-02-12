@@ -1,0 +1,12 @@
+<B_todo>
+<a class="ajax" href="[(#SELF|parametre_url{tri_todo,statut})]">Classer par statut</a> /
+<a class="ajax" href="[(#SELF|parametre_url{tri_todo,titre})]">Classer par titre</a> /
+<a class="ajax" href="[(#SELF|parametre_url{tri_todo,cle})]">Classer par clé</a>
+<ul class="todo">
+	<BOUCLE_todo(POUR){tableau #ENV{liste}}{par #ENV{tri_todo,cle}}>
+	<li class="[(#VALEUR|table_valeur{statut})]" title="[(#VALEUR|table_valeur{statut})]">
+	[(#VALEUR|table_valeur{statut})] - [(#VALEUR|table_valeur{titre})]
+	</li>
+	</BOUCLE_todo>
+</ul>
+</B_todo>
