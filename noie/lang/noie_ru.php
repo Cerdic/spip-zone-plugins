@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toocool_alt' => 'Too Cool for IE', # NEW
 	'toocool_info' => 'The site you are trying to view has been deemed "Too Cool for Internet Explorer".
 <br />Please Take a Moment to Try One of These Great Browsers: <a href="http://www.w3junkies.com/toocool/index.php?language=en">http://www.w3junkies.com/toocool/</a>', # NEW
-	'toocool_titre' => 'Too Cool for Internet Explorer', # NE
+	'toocool_titre' => 'Too Cool for Internet Explorer' # NEW
 );
 
 ?>

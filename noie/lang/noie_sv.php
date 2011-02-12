@@ -18,7 +18,7 @@ Sitter du p&aring; jobb och inte har kontroll &ouml;ver din dator sj&auml;lv b&o
 	'toocool_alt' => 'Trop cool pour IE', # NEW
 	'toocool_info' => 'Le site que vous tentez d\'afficher a &eacute;t&eacute; jug&eacute; &laquo;&nbsp;trop bien pour Internet Explorer&nbsp;&raquo;.
 <br />Prenez, s\'il vous pla&icirc;t, un moment afin d\'essayer l\'un de ces excellents navigateurs : <a href="http://www.w3junkies.com/toocool/index.php?language=fr">http://www.w3junkies.com/toocool/</a>', # NEW
-	'toocool_titre' => 'Trop Cool pour Internet Explorer', # NE
+	'toocool_titre' => 'Trop Cool pour Internet Explorer' # NEW
 );
 
 ?>
