@@ -25,7 +25,7 @@ function boussole_header_prive($flux){
  * @return $flux
  */
 function boussole_affiche_milieu($flux){
-	if ($flux['args']['exec'] == 'sites') {
+	if (($flux['args']['exec'] == 'sites') AND $flux['args']['id_syndic']) {
 		$id_syndic = $flux['args']['id_syndic'];
 		$flux['data'] .= recuperer_fond('prive/milieu/site_boussole', array('id_syndic'=>$id_syndic));
 	}
