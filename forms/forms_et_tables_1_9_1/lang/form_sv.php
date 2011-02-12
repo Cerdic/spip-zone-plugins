@@ -50,7 +50,7 @@ Voulez-vous vraiment le supprimer ?', # NEW
 	'type_des_tables' => 'Formulaires', # NEW
 
 	// U
-	'une_reponse' => 'Une r&eacute;ponse', # NE
+	'une_reponse' => 'Une r&eacute;ponse' # NEW
 );
 
 ?>
