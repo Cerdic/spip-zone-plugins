@@ -6,7 +6,7 @@
 		</multi>
 	</nom>
 	<auteur>BoOz, kent1</auteur>
-	<version>0.3</version>
+	<version>0.3.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>lm2</prefix>
@@ -37,7 +37,7 @@
 		<nom>affichage_final</nom>
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="lib:soundmanagerv296a-20100624" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv296a-20100624.zip" />
+	<necessite id="lib:soundmanagerv297a-20110123" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv297a-20110123.zip" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="saisies" version="[1.7.7;]" />
