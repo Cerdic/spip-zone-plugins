@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_config_langage' => 'Configurar la llengua',
 	'titre_configurer_preferences' => 'Configurar les teves prefer&egrave;ncies',
 	'titre_identite_site' => 'Identitat del lloc',
-	'titre_infos_perso' => 'Mes informations personnelles', # NE
+	'titre_infos_perso' => 'Mes informations personnelles' # NEW
 );
 
 ?>
