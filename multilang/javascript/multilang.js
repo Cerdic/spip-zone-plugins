@@ -304,7 +304,7 @@ function multilang_init_field(el,lang,force) {
 	var langs;
 	
 	// On enlève les espaces, retours à la ligne et tabulations de début et de fin de chaine
-	el.value.trim();
+	el.value.replace(/(?:^\s+|\s+$)/g, "");
 	
 	// Modif Yffic : ne pas considerer comme multi les champs qui contiennent du texte
 	// en dehors des multi sauf un numero (\d+\.\s+)
@@ -598,19 +598,18 @@ function multilang_attach_submit() {
 	}
 }
 
-jQuery.fn.in_set = function(set) {
-	var elements = this.get();
-	var result = $.grep(set,function(i){
-		var found = false;
-		$.each(elements,function(){
-			if(this==i) found=true;
-		})
-		return found;
+(function($) {
+	$.extend($.fn, {
+		in_set: function(set) {
+			var elements = this.get();
+			var result = $.grep(set,function(i){
+				var found = false;
+				$.each(elements,function(){
+					if(this==i) found=true;
+				})
+				return found;
+			});
+			return jQuery(result);
+		}
 	});
-	return jQuery(result);
-}
-
-String.prototype.trim = function()
-{
-    return this.replace(/(?:^\s+|\s+$)/g, "");
-}
+})(jQuery);
