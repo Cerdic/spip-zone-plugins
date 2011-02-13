@@ -57,7 +57,7 @@ class Facteur extends PHPMailer {
 		if (!empty($GLOBALS['meta']['facteur_cc'])) {
 			$this->AddCC( $GLOBALS['meta']['facteur_cc'] );
 		}
-		if (isset($GLOBALS['meta']['facteur_bcc'])) {
+		if (!empty($GLOBALS['meta']['facteur_bcc'])) {
 			$this->AddBCC( $GLOBALS['meta']['facteur_bcc'] );
 		}
 		
