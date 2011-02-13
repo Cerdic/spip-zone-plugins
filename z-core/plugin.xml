@@ -3,21 +3,11 @@
 	<slogan><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></slogan>
 	<auteur>Matthieu Marcillaud, C&#233;dric Morin, Romy Tetue, Collectif SPIP</auteur>
 	<icon>img/zcore-32.png</icon>
+	<lien>http://www.yterium.net/108</lien>
 	<licence>GNU/GPL</licence>
 	<version>2.0.0-dev</version>
 	<etat>dev</etat>
-	<description>
-		<multi>
-			[fr]Syst&#232;me de squelette
-_ Un squelette comme <code>squelettes-dist/</code> de SPIP,
-avec une organisation et une modularit&#233; optimis&#233;e, 
-et qui permet d'utiliser les th&#232;mes de [->http://www.spip-contrib.net/Themes]
-			[en]Skeleton system
-_ A skeleton like <code>squelettes-dist/</code> of SPIP,
-with an optimized organization and modularity,
-and which can use the themes of [-> http://www.spip-contrib.net/Themes]
-		</multi>
-	</description>
+	<description><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></description>
 	<prefix>Zcore</prefix>
 	<fonctions>zcore_pipelines.php</fonctions>
 	<options>zcore_options.php</options>
