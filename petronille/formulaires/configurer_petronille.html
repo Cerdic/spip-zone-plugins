@@ -35,7 +35,7 @@
 				<li class="petronille_margin-bottom[ (#ENV**{erreurs}|table_valeur{margin-bottom}|oui)erreur]">
 					<label for="margin-bottom">Paragraphe</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{margin-bottom})</span>
-					]<input type="text" class="text" name="margin-bottom" id="margin-bottom" [ value="(#ENV{margin-bottom}|sinon{[(#ENV{line-height})]})"] style="width: 6em;" />
+					]<input type="text" class="text" name="margin-bottom" id="margin-bottom" [ value="(#ENV{margin-bottom}|sinon{[(#ENV{line-height})]}|sinon{1.5em})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_text-indent[ (#ENV**{erreurs}|table_valeur{text-indent}|oui)erreur]">
 					<label for="text-indent">Alin&eacute;a</label>[
