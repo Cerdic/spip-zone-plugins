@@ -6,9 +6,9 @@
 																						
 	<BOUCLE_fieldsets(POUR){tableau #ENV{fieldsets}}{par cle}>
 	<B_champs>
-	<fieldset><label><h3 class="legend">#VALEUR</h3></label>
+	<fieldset[ id="(#VALEUR|table_valeur{id})"]><legend>[(#VALEUR|table_valeur{titre})]</legend>
 		<ul>
-		<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{#VALEUR})}{par cle}>
+		<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{(#VALEUR|table_valeur{titre})})}{par cle}>
 		#SET{valeurs,#VALEUR|table_valeur{form}}
 		[(#SAISIE{
 			[(#GET{valeurs}|table_valeur{field})],
@@ -22,7 +22,7 @@
 			})]
 		</BOUCLE_champs>
 		</ul>
-	</fieldset>
+	</fieldset[>
 	</B_champs>
 	</BOUCLE_fieldsets>
 			<p class="boutons"><input type="submit" class="submit" value="<:ok:>" /></p>				

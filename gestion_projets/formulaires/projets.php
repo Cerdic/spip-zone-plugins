@@ -1,12 +1,18 @@
 <?php
 
-function definitions($tout=''){
+function definitions($use=''){
 
 	//Définition des fieldset
 
 	$fieldsets=array(
-		0=>_T('donnees'),
-		1=>_T('options')
+		0=>array(
+			'titre'=>_T('gestpro:infos_obligatoires'),
+			'id'=>'obligatoire'
+			),
+		1=>array(
+			'titre'=>_T('gestpro:options_avancees'),
+			'id'=>'avance'
+			),			
 		);	
 		
 
@@ -15,8 +21,8 @@ function definitions($tout=''){
 	$champs=array(
 		'nom'=>array(
 			'valeur'=>'',
-			'fieldset'=>_T('donnees'),
-			'rang'=>0,
+			'fieldset'=>0,
+			'rang'=>50,
 			'form'=>array(
 				'field'=>'input',
 				'name'=>'nom',
@@ -24,8 +30,8 @@ function definitions($tout=''){
 				'obligatoire'=>'oui')),
 		'id_chef_projet'=>array(
 			'valeur'=> session_get('id_auteur'),
-			'fieldset'=>_T('donnees'),	
-			'rang'=>2,		
+			'fieldset'=>0,	
+			'rang'=>150,		
 			'form'=>array(
 				'field'=>'auteurs',
 				'name'=>'id_chef_projet',
@@ -35,8 +41,8 @@ function definitions($tout=''){
 				),			
 			),
 		'descriptif'=>array(
-			'fieldset'=>_T('donnees'),
-			'rang'=>1,
+			'fieldset'=>0,
+			'rang'=>250,
 			'form'=>array(
 				'field'=>'textarea',
 				'name'=>'descriptif',
@@ -44,8 +50,8 @@ function definitions($tout=''){
 				),
 			),				
 		'montant_estime'=>array(
-			'fieldset'=>_T('options'),	
-			'rang'=>0,	
+			'fieldset'=>1,	
+			'rang'=>50,	
 			'form'=>array(
 					'field'=>'input',
 					'name'=>'montant_estime',
@@ -53,8 +59,8 @@ function definitions($tout=''){
 				),								
 			),	
 		'duree_estimee'=>array(
-			'fieldset'=>_T('options'),	
-			'rang'=>1,	
+			'fieldset'=>1,	
+			'rang'=>150,	
 			'form'=>array(
 					'field'=>'input',
 					'name'=>'duree_estimee',
@@ -63,8 +69,8 @@ function definitions($tout=''){
 				),								
 			),	
 		'date_debut'=>array(
-			'fieldset'=>_T('options'),	
-			'rang'=>2,	
+			'fieldset'=>1,	
+			'rang'=>250,	
 			'form'=>array(
 					'field'=>'date',
 					'name'=>'date_debut',
@@ -72,8 +78,8 @@ function definitions($tout=''){
 				),								
 			),	
 		'date_fin_estimee'=>array(
-			'fieldset'=>_T('options'),	
-			'rang'=>3,	
+			'fieldset'=>1,	
+			'rang'=>350,	
 			'form'=>array(
 					'field'=>'date',
 					'name'=>'date_fin_estimee',
@@ -81,26 +87,34 @@ function definitions($tout=''){
 				),								
 			),		
 		);
-		
-	//Préparation d l'array qui sert à construire le formulaire
-	$formulaire=array();
-		
-	foreach ($champs AS $champ =>$valeur){
-
-		if(in_array($valeur['fieldset'],$fieldsets)){
-			$formulaire[$valeur['fieldset']][$valeur['rang']]=$valeur;
-			}
 	
-		}	
+	switch($use){
+		case 'charger':
+		//Préparation d l'array qui sert à construire le formulaire
+		$formulaire=array();
+			
+		foreach ($champs AS $champ =>$valeur){
+			$formulaire[$fieldsets[$valeur['fieldset']]['titre']][$valeur['rang']]=$valeur;
+			}	
 		
-	//Définition du retour
+		$valeurs=array(
+			'valeurs'=>$champs,
+			'formulaire'=>$formulaire,
+			'fieldsets'=>$fieldsets
+			);		
+		break;
+		case 'verifier' :
 		
-	if(!$tout)	$valeurs=$champs;
-	else $valeurs=array(
-		'valeurs'=>$champs,
-		'formulaire'=>$formulaire,
-		'fieldsets'=>$fieldsets		
-		);
+		$valeurs=array();
+		
+		foreach ($champs AS $champ =>$valeur){
+			if($valeur['form']['obligatoire']=='oui')$valeurs[]=$champ;
+			}
+		break;
+		default:	$valeurs=$champs;
+		}
+	
+
 	return $valeurs;
 
 }
@@ -109,8 +123,7 @@ function formulaires_projets_charger_dist(){
 
 	//On charge les définitions
 
-	$defs='tout';
-	$definitions=definitions($defs);
+	$definitions=definitions($use='charger');
 	
 	//On définit les valeurs du formulaire
 	$valeurs=$definitions['valeurs'];
@@ -135,10 +148,11 @@ return $valeurs;
 
 function formulaires_projets_verifier_dist(){
 
-// to do: automatiser les champs obligatoires
+	$obligatoire=definitions($use='verifier');
+
 
     $erreurs = array();
-    foreach(array('nom','id_chef_projet') as $champ) {
+    foreach($obligatoire as $champ) {
         if (!_request($champ)) {
             $erreurs[$champ] = "Cette information est obligatoire !";
         }
@@ -151,14 +165,13 @@ function formulaires_projets_verifier_dist(){
 }
 
 function formulaires_projets_traiter_dist(){
-
-//$message_ok='ok';
-
-$champs=definitions();
-$valeurs=array();
-foreach($champs as $key=>$val){
-		$valeurs[$key]=_request($key);
-	}
+   	refuser_traiter_formulaire_ajax(); 	
+	$champs=definitions();
+	$valeurs=array();
+	
+	foreach($champs as $key=>$val){
+			$valeurs[$key]=_request($key);
+		}
 	
 	$date_debut = explode('/',$valeurs['date_debut']);
 	$valeurs['date_debut']= $date_debut[2].'-'.$date_debut[1].'-'.$date_debut[0];
@@ -168,18 +181,14 @@ foreach($champs as $key=>$val){
 	$valeurs['date_creation']= date('Y-m-d G-i-s');
 	$valeurs['statut']= 'desactive';
 
-// Effectuer des traitements
+	// Effectuer des traitements
 
 		
 	$id_projet=sql_insertq('spip_projets',$valeurs);
-
-
 	
-	    
-    // Valeurs de retours
-    return array(
-        'message_ok' => $message_ok, // ou bien
-        'message_erreur' => $message_erreur);
+	header('Location:'.generer_url_ecrire("projets","voir=projet&id_projet=$id_projet",true));
+
+return;
     
 }
 	 

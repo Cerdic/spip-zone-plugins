@@ -1,7 +1,7 @@
 <?php
 
 function gestion_projets_header_prive($flux){
-$flux .= '
+/*$flux .= '
 	<script>
 	$(document).ready(function() {
 	$("#responsecontainer").load("'.find_in_path('inc/timer.php').'");
@@ -15,7 +15,7 @@ $flux .= '
 	clearInterval(refreshId);
 	});			
 	});
-</script>';
+</script>';*/
 return $flux;
 }
 ?>

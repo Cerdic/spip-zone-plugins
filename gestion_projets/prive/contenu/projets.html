@@ -17,7 +17,7 @@
 			<BOUCLE_projets(PROJETS){par nom}>
 			<tr>
 				<td>#STATUT</td>
-				<td>#NOM</td>
+				<td><a href="[(#URL_ECRIRE{projets,voir=projet&id_projet=#ID_PROJET})]">#NOM</a></td>
 				<td>
 					<BOUCLE_aut(AUTEURS){id_auteur=#ID_CHEF_PROJET}>
 					#NOM

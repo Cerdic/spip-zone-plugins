@@ -34,7 +34,8 @@ function exec_projets_dist(){
 	echo debut_gauche('', true);
 	echo debut_boite_info(true);
 	echo '<div class="infos">';
-	echo '<h2 style="text-align:center;">'._T('gestpro:projet').'</h2>';
+	echo '<h2 style="text-align:center;">'._T('gestpro:gestion_projets').'</h2>';
+	if($id_projet=_request('id_projet'))echo '<div class="numero">'._T('gestpro:numero_projet').'<p>'.$id_projet.'</p></div>';
 	echo	'</div>';
 	echo fin_boite_info(true);
 	
@@ -60,6 +61,8 @@ function exec_projets_dist(){
 		case 'ajouter_projet':
 			echo recuperer_fond('prive/editer/ajouter_projet',$contexte,Array("ajax"=>true));
 			break;
+		case 'projet': recuperer_fond('prive/voir/projet',$contexte,Array("ajax"=>true));
+		break;
 		 default: echo recuperer_fond('prive/contenu/projets',$contexte,Array("ajax"=>true));
 		};
 
