@@ -191,8 +191,8 @@ class getid3_write_apetag
 		}
 
 		// 0: Item contains text information coded in UTF-8
-		// 1: Item contains binary information °)
-		// 2: Item is a locator of external stored information °°)
+		// 1: Item contains binary information ï¿½)
+		// 2: Item is a locator of external stored information ï¿½ï¿½)
 		// 3: reserved
 		$APEtagFlags[3] |= ($encodingid << 1);
 
@@ -204,7 +204,7 @@ class getid3_write_apetag
 	}
 
 	function CleanAPEtagItemKey($itemkey) {
-		$itemkey = eregi_replace("[^\x20-\x7E]", '', $itemkey);
+		$itemkey = preg_replace("/[^\x20-\x7E]/i", '', $itemkey);
 
 		// http://www.personal.uni-jena.de/~pfk/mpp/sv8/apekey.html
 		switch (strtoupper($itemkey)) {
