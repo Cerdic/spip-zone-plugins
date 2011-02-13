@@ -19,38 +19,38 @@
 				<li class="petronille_font-family[ (#ENV**{erreurs}|table_valeur{font-family}|oui)erreur]">
 					<label for="font-family">Police</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-family})</span>
-					]<input type="text" class="text" name="font-family" id="font-family" [ value="(#ENV{font-family}|sinon{'Verdana, Geneva, sans-serif'})"] />
+					]<input type="text" class="text" name="font-family" id="font-family" [ value="(#ENV{font-family,'Verdana, Geneva, sans-serif'})"] />
 					<p class="explication">Exemple :  Verdana, Geneva, sans-serif</p>
 				</li>
 				<li class="petronille_font-size[ (#ENV**{erreurs}|table_valeur{font-size}|oui)erreur]">
 					<label for="font-size">Taille</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{font-size})</span>
-					]<input type="text" class="text" name="font-size" id="font-size" [ value="(#ENV{font-size}|sinon{1em})"] style="width: 6em;" />
+					]<input type="text" class="text" name="font-size" id="font-size" [ value="(#ENV{font-size,1em})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_line-height[ (#ENV**{erreurs}|table_valeur{line-height}|oui)erreur]">
 					<label for="line-height">Interligne</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{line-height})</span>
-					]<input type="text" class="text" name="line-height" id="line-height" [ value="(#ENV{line-height}|sinon{1.5em})"] style="width: 6em;" />
+					]<input type="text" class="text" name="line-height" id="line-height" [ value="(#ENV{line-height,1.5em})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_margin-bottom[ (#ENV**{erreurs}|table_valeur{margin-bottom}|oui)erreur]">
 					<label for="margin-bottom">Paragraphe</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{margin-bottom})</span>
-					]<input type="text" class="text" name="margin-bottom" id="margin-bottom" [ value="(#ENV{margin-bottom}|sinon{[(#ENV{line-height})]}|sinon{1.5em})"] style="width: 6em;" />
+					]<input type="text" class="text" name="margin-bottom" id="margin-bottom" [ value="(#ENV{margin-bottom,[(#ENV{line-height,1.5em})]})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_text-indent[ (#ENV**{erreurs}|table_valeur{text-indent}|oui)erreur]">
 					<label for="text-indent">Alin&eacute;a</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{text-indent})</span>
-					]<input type="text" class="text" name="text-indent" id="text-indent" [ value="(#ENV{text-indent}|sinon{50px})"] style="width: 6em;" />
+					]<input type="text" class="text" name="text-indent" id="text-indent" [ value="(#ENV{text-indent,50px})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_color[ (#ENV**{erreurs}|table_valeur{color}|oui)erreur]">
 					<label for="color">Couleur du texte</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{color})</span>
-					]<input type="text" class="text" name="color" id="color" [ value="(#ENV{color}|sinon{#666666})"] style="width: 6em;" />
+					]<input type="text" class="text" name="color" id="color" [ value="(#ENV{color,#666666})"] style="width: 6em;" />
 				</li>
 				<li class="petronille_background-color[ (#ENV**{erreurs}|table_valeur{background-color}|oui)erreur]">
 					<label for="background-color">Couleur du fond</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{background-color})</span>
-					]<input type="text" class="text" name="background-color" id="background-color" [ value="(#ENV{background-color}|sinon{#FFFFFF})"] style="width: 6em;" />
+					]<input type="text" class="text" name="background-color" id="background-color" [ value="(#ENV{background-color,#FFFFFF})"] style="width: 6em;" />
 				</li>
 			</ul>
 		</fieldset>
