@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//M
 	'montant_estime'=>'Montant estimée',
+	'montant_heure'=>'Montant par heure',	
 	
 	//N
 	'nom'=>'Nom',

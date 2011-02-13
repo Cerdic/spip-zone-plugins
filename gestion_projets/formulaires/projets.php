@@ -1,6 +1,6 @@
 <?php
 
-function definitions($use=''){
+function definitions($use='',$valeurs=''){
 
 	//Définition des fieldset
 
@@ -20,7 +20,7 @@ function definitions($use=''){
 
 	$champs=array(
 		'nom'=>array(
-			'valeur'=>'',
+			'valeur'=>$valeurs['nom'],
 			'fieldset'=>0,
 			'rang'=>50,
 			'form'=>array(
@@ -41,6 +41,7 @@ function definitions($use=''){
 				),			
 			),
 		'descriptif'=>array(
+			'valeur'=>$valeurs['descriptif'],		
 			'fieldset'=>0,
 			'rang'=>250,
 			'form'=>array(
@@ -48,10 +49,21 @@ function definitions($use=''){
 				'name'=>'descriptif',
 				'label'=>_T('info_descriptif')
 				),
-			),				
+			),	
+		'montant_heure'=>array(
+			'valeur'=>$valeurs['montant_heure'],		
+			'fieldset'=>1,
+			'rang'=>50,
+			'form'=>array(
+					'field'=>'input',
+					'name'=>'montant_heure',
+					'label'=>_T('gestpro:montant_heure').' €',	
+				),					
+			),			
 		'montant_estime'=>array(
+			'valeur'=>$valeurs['montant_estime'],		
 			'fieldset'=>1,	
-			'rang'=>50,	
+			'rang'=>150,	
 			'form'=>array(
 					'field'=>'input',
 					'name'=>'montant_estime',
@@ -59,8 +71,9 @@ function definitions($use=''){
 				),								
 			),	
 		'duree_estimee'=>array(
+			'valeur'=>$valeurs['duree_estimee'],		
 			'fieldset'=>1,	
-			'rang'=>150,	
+			'rang'=>250,	
 			'form'=>array(
 					'field'=>'input',
 					'name'=>'duree_estimee',
@@ -69,8 +82,9 @@ function definitions($use=''){
 				),								
 			),	
 		'date_debut'=>array(
+			'valeur'=>$valeurs['date_debut'],		
 			'fieldset'=>1,	
-			'rang'=>250,	
+			'rang'=>350,	
 			'form'=>array(
 					'field'=>'date',
 					'name'=>'date_debut',
@@ -78,8 +92,9 @@ function definitions($use=''){
 				),								
 			),	
 		'date_fin_estimee'=>array(
+			'valeur'=>$valeurs['date_fin_estimee'],	
 			'fieldset'=>1,	
-			'rang'=>350,	
+			'rang'=>450,	
 			'form'=>array(
 					'field'=>'date',
 					'name'=>'date_fin_estimee',
@@ -119,11 +134,17 @@ function definitions($use=''){
 
 }
 
-function formulaires_projets_charger_dist(){
+function formulaires_projets_charger_dist($id_projet){
 
 	//On charge les définitions
+	
+	// Si l'id projet est connu, on charge les données
 
-	$definitions=definitions($use='charger');
+	if($id_projet){	
+		$val=sql_fetsel('*','spip_projets','id_projet='.sql_quote($id_projet));	
+		}
+
+	$definitions=definitions($use='charger',$val);
 	
 	//On définit les valeurs du formulaire
 	$valeurs=$definitions['valeurs'];
@@ -138,7 +159,7 @@ function formulaires_projets_charger_dist(){
 	// Les fieldsets
 	$valeurs['fieldsets']=$definitions['fieldsets'];	
 	
-
+	
 	// Les valeurs spécifiques
 	$valeurs['_hidden'].='<input type="hidden" name="id_auteur" value="'.$GLOBALS['visiteur_session']['id_auteur'].'"/>';
 	
@@ -146,7 +167,7 @@ function formulaires_projets_charger_dist(){
 return $valeurs;
 }
 
-function formulaires_projets_verifier_dist(){
+function formulaires_projets_verifier_dist($id_projet){
 
 	$obligatoire=definitions($use='verifier');
 
@@ -164,7 +185,7 @@ function formulaires_projets_verifier_dist(){
     return $erreurs;
 }
 
-function formulaires_projets_traiter_dist(){
+function formulaires_projets_traiter_dist($id_projet){
    	refuser_traiter_formulaire_ajax(); 	
 	$champs=definitions();
 	$valeurs=array();
@@ -183,8 +204,12 @@ function formulaires_projets_traiter_dist(){
 
 	// Effectuer des traitements
 
+	//Si il n'ya pas l'id_projet on crée un nouveau
+	if(!$id_projet)	$id_projet=sql_insertq('spip_projets',$valeurs);
 		
-	$id_projet=sql_insertq('spip_projets',$valeurs);
+	//Sinon on modifie
+	
+	else sql_updateq('spip_projets',$valeurs,'id_projet='.sql_quote($id_projet));
 	
 	header('Location:'.generer_url_ecrire("projets","voir=projet&id_projet=$id_projet",true));
 

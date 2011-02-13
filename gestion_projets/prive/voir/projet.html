@@ -1,0 +1,69 @@
+<BOUCLE_afficher_contenu(PROJETS){id_projet}>
+	<div class="fiche_objet">
+		<div class="bandeau_actions">#ACTIONS</div>
+		<h1>#NOM</h1>
+		<div class='nettoyeur'></div>	
+		<div id="wysiwyg">
+			<div class="champ contenu_titre[ (#NOM*|strlen|?{'',vide})]">
+				<div class='label'><:info_nom:></div>
+				<div dir='#LANG_DIR' class='#EDIT{nom} titre'>#NOM</div>
+			</div>
+			<div class="champ contenu_chef_projet">
+				<div dir='#LANG_DIR'>
+				<label><:gestpro:chef_projet:> :</label>					
+					<BOUCLE_chef_projet(AUTEURS){id_auteur=#ID_CHEF_PROJET}{tout}>
+					#NOM
+					</BOUCLE_chef_projet>
+				</div>
+			</div>			
+			
+			[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+				<div class='label'><:info_descriptif:></div>
+					<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
+			</div>]
+			[<div class="champ contenu_dates">
+				<span class="date_debut">
+				<label><:gestpro:date_debut:></label>
+					<div dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT|affdate{'d-m-Y'})</div>
+				</span>
+				[<span>
+					<label><:gestpro:date_fin_estimee:></label>
+						<div dir='#LANG_DIR' class='#EDIT{date_fin_estimee} date_fin_estimee'>(#DATE_FIN_ESTIMEE|affdate{d-m-Y})</div>
+				</span>	]
+				[<span>
+					<label><:gestpro:date_fin_reelle:></label>
+						<div dir='#LANG_DIR' class='#EDIT{date_fin_reelle} date_fin_reelle'>(#DATE_FIN_REELLE|affdate{d-m-Y})</div>
+				</span>]					
+			</div>]			
+			
+			[<div class="champ contenu_duree">
+				<span class="duree_estimee">
+				<label><:gestpro:duree_estimee:></label>
+					<div dir='#LANG_DIR' class='#EDIT{duree_estimee} duree_estimee'>(#DUREE_ESTIMEE)</div>
+				</span>
+				[<span>
+				<label><:gestpro:duree_reelle:></label>
+					<div dir='#LANG_DIR' class='#EDIT{duree_reelle} duree_reelle'>(#DUREE_REELLE)</div>
+				</span>]			
+			</div>]
+			
+			[<div class="champ contenu_montants">
+				<span class="montant_heure">
+					<label><:gestpro:montant_heure:></label>
+						<div dir='#LANG_DIR' class='#EDIT{montant_heure} montant_heure'>(#MONTANT_HEURE)</div>
+				</span>
+				[<span>
+					<label><:gestpro:montant_estime:></label>
+						<div dir='#LANG_DIR' class='#EDIT{montant_estime} montant_estime'>(#MONTANT_ESTIME)</div>
+				</span>]
+				[<span>
+					<label><:gestpro:montant_reel:></label>
+						<div dir='#LANG_DIR' class='#EDIT{montant_reel} montant_reel'>(#MONTANT_REEL)</div>
+				</span>]					
+			</div>]			
+			<br class="nettoyeur" />
+
+		</div>
+	</div>
+
+</BOUCLE_afficher_contenu>

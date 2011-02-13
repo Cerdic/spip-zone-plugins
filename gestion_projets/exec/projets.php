@@ -5,7 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('public/assembler');
 
+
 function exec_projets_dist(){
+
 	$contexte = Array();
 	$contexte = calculer_contexte();
 	
@@ -27,7 +29,7 @@ function exec_projets_dist(){
 
 
 	// titre, partie, sous_partie (pour le menu)
-	echo $commencer_page(_T('gestpro:projets'), "editer", "editer");
+	echo $commencer_page(_T('gestpro:projets'),_T('gestpro:projets'),_T('gestpro:projets'));
 	
 	
 	// colonne gauche
@@ -59,9 +61,32 @@ function exec_projets_dist(){
 	
 	switch($voir){
 		case 'ajouter_projet':
-			echo recuperer_fond('prive/editer/ajouter_projet',$contexte,Array("ajax"=>true));
+			echo recuperer_fond('prive/editer/projet',$contexte,Array("ajax"=>true));
 			break;
-		case 'projet': recuperer_fond('prive/voir/projet',$contexte,Array("ajax"=>true));
+		case 'projet': 
+			$contexte['id_projet']=_request('id_projet');
+			$contexte['actions'] = icone_inline(_T('gestpro:editer_projet'),
+			generer_url_ecrire("projets",
+				"voir=editer_projet&id_projet=$id_projet"),'racine-site-24.gif', "edit.gif",'right');
+			$contenu=recuperer_fond('prive/voir/projet',$contexte,array('ajax'=>true));
+				 
+			echo	 (_INTERFACE_ONGLETS? 
+			afficher_onglets_pages(
+				array(
+					'projet'=> _T('gestpro:projet'),
+				),
+				array(
+					'projet'=>$contenu,
+				)
+				):
+				$contenu);
+		
+		break;
+		case 'editer_projet': 
+			$contexte['id_projet']=_request('id_projet');
+			echo recuperer_fond('prive/editer/projet',$contexte,array('ajax'=>true));
+
+		
 		break;
 		 default: echo recuperer_fond('prive/contenu/projets',$contexte,Array("ajax"=>true));
 		};
