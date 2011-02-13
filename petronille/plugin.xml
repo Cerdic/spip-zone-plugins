@@ -3,7 +3,7 @@
 <icon>icon.png</icon>
 <description>Framework CSS pour SPIP, P&eacute;tronille fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.</description>
 <lien>http://www.spip-contrib.net/petronille</lien>
-<version>1.0</version>
+<version>1.0.1</version>
 <etat>stable</etat>
 <categorie>outil</categorie>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
