@@ -20,7 +20,7 @@ class getid3_lib
 			if ($hex) {
 				$returnstring .= str_pad(dechex(ord($string{$i})), 2, '0', STR_PAD_LEFT);
 			} else {
-				$returnstring .= ' '.(ereg("[\x20-\x7E]", $string{$i}) ? $string{$i} : '¤');
+				$returnstring .= ' '.(preg_match("/[\x20-\x7E]/", $string{$i}) ? $string{$i} : 'ï¿½');
 			}
 			if ($spaces) {
 				$returnstring .= ' ';
@@ -359,7 +359,7 @@ class getid3_lib
 
 
 	function array_merge_clobber($array1, $array2) {
-		// written by kcØhireability*com
+		// written by kcï¿½hireability*com
 		// taken from http://www.php.net/manual/en/function.array-merge-recursive.php
 		if (!is_array($array1) || !is_array($array2)) {
 			return false;
@@ -530,7 +530,7 @@ class getid3_lib
 				}
 			}
 			$commandline = GETID3_HELPERAPPSDIR.'md5sum.exe "'.str_replace('/', DIRECTORY_SEPARATOR, $file).'"';
-			if (ereg("^[\\]?([0-9a-f]{32})", strtolower(`$commandline`), $r)) {
+			if (preg_match("/^[\\]?([0-9a-f]{32})/", strtolower(`$commandline`), $r)) {
 				return $r[1];
 			}
 
@@ -538,7 +538,7 @@ class getid3_lib
 
 			// The following works under UNIX only
 			$file = str_replace('`', '\\`', $file);
-			if (ereg("^([0-9a-f]{32})[ \t\n\r]", `md5sum "$file"`, $r)) {
+			if (preg_match("/^([0-9a-f]{32})[ \t\n\r]/", `md5sum "$file"`, $r)) {
 				return $r[1];
 			}
 
@@ -565,14 +565,14 @@ class getid3_lib
 				}
 			}
 			$commandline = GETID3_HELPERAPPSDIR.'sha1sum.exe "'.str_replace('/', DIRECTORY_SEPARATOR, $file).'"';
-			if (ereg("^sha1=([0-9a-f]{40})", strtolower(`$commandline`), $r)) {
+			if (preg_match("/^sha1=([0-9a-f]{40})/", strtolower(`$commandline`), $r)) {
 				return $r[1];
 			}
 
 		} else {
 
 			$commandline = 'sha1sum '.escapeshellarg($file).'';
-			if (ereg("^([0-9a-f]{40})[ \t\n\r]", strtolower(`$commandline`), $r)) {
+			if (preg_match("/^([0-9a-f]{40})[ \t\n\r]/", strtolower(`$commandline`), $r)) {
 				return $r[1];
 			}
 
@@ -582,7 +582,7 @@ class getid3_lib
 	}
 
 
-	// Allan Hansen <ahØartemis*dk>
+	// Allan Hansen <ahï¿½artemis*dk>
 	// getid3_lib::md5_data() - returns md5sum for a file from startuing position to absolute end position
 	function hash_data($file, $offset, $end, $algorithm) {
 
