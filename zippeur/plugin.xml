@@ -1,7 +1,7 @@
 <plugin>
     <nom>Zippeur</nom>
     <auteur>Maïeul ROUQUETTE</auteur>
-    <version>0.4</version>
+    <version>0.5</version>
     <version_base>0.2</version_base>
   	<categorie>multimedia</categorie>
     <etat>stable</etat>

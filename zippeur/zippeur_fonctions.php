@@ -32,6 +32,9 @@ function zippeur_zipper($chemin,$array){
 	$fichiers = 0;
 	$zip = new PclZip($chemin);
 	foreach ($array as $fichier){
+		if (test_espace_prive()){
+			$fichier = '../'.$fichier;
+		}
 		$erreur = $zip->add($fichier,PCLZIP_OPT_REMOVE_ALL_PATH);
 		if ($erreur == 0){
 			spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur");
