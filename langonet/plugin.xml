@@ -27,33 +27,33 @@ et d'effectuer des recherches d'items dans les fichiers de langue de SPIP.
 		<titre>langonet:bouton_langonet</titre>
 		<url>langonet_verifier</url>
 	</bouton>
-	<bouton id='langonet_21' parent='bando_edition'>
+	<bouton id="langonet_21" parent="bando_edition">
 		<icone>images/langonet-16.png</icone>
 		<titre>langonet:bouton_langonet</titre>
 		<url>langonet_verifier</url>
 	</bouton>
-	<onglet id='langonet_verifier' parent='langonet'>
+	<onglet id="langonet_verifier" parent="langonet">
 		<icone>prive/themes/spip/images/langonet-verifier.png</icone>
 		<titre>langonet:onglet_verifier</titre>
 		<url>langonet_verifier</url>
 	</onglet>
-	<onglet id='langonet_generer' parent='langonet'>
+	<onglet id="langonet_generer" parent="langonet">
 		<icone>prive/themes/spip/images/langonet-generer.png</icone>
 		<titre>langonet:onglet_generer</titre>
 		<url>langonet_generer</url>
 	</onglet>	
-	<onglet id='langonet_lister' parent='langonet'>
+	<onglet id="langonet_lister" parent="langonet">
 		<icone>prive/themes/spip/images/langonet-afficher.png</icone>
 		<titre>langonet:onglet_lister</titre>
 		<url>langonet_lister</url>
 	</onglet>	
-	<onglet id='langonet_rechercher' parent='langonet'>
+	<onglet id="langonet_rechercher" parent="langonet">
 		<icone>prive/themes/spip/images/langonet-rechercher.png</icone>
 		<titre>langonet:onglet_rechercher</titre>
 		<url>langonet_rechercher</url>
 	</onglet>	
 
-	<necessite id="SPIP" version='[2.0.0;]' />
-	<necessite id='spip_bonux' version='[1.0;]' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="Iterateurs" version="[0.2.5;]" />
 	<categorie>outil</categorie>
 </plugin>
