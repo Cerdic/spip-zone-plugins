@@ -1,5 +1,6 @@
 <plugin>
-	<nom><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></nom>
+	<nom>Z-core</nom>
+	<slogan><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></slogan>
 	<auteur>Matthieu Marcillaud, C&#233;dric Morin, Romy Tetue, Collectif SPIP</auteur>
 	<icon>img/zcore-128.png</icon>
 	<licence>GNU/GPL</licence>
@@ -37,5 +38,5 @@ and which can use the themes of [-> http://www.spip-contrib.net/Themes]
 		<inclure>zcore_pipelines.php</inclure>
 	</pipeline>
 	<categorie>squelette</categorie>
-	<necessite id="SPIP" version="[2.1.2;]" />
+	<necessite id="SPIP" version="[2.1.8;]" />
 </plugin>
