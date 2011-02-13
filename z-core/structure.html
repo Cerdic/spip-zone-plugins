@@ -1,18 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-[(#SET{class,[page_#ENV({type,page})[ #ENV{type,page}_(#ENV{composition,''})] ]})]
+[(#EVAL{_Z_DOCTYPE}|sinon{'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'})]
+[(#SET{class,[page_#ENV({type,page})[ #ENV{type,page}_(#ENV{composition,''})]]})]
 [(#REM) http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/]
-<!--[if lt IE 7 ]> <html class="#GET{class} ie ie6 lte9 lte8 lte7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
-<!--[if IE 7 ]>    <html class="#GET{class} ie ie7 lte9 lte8 lte7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
-<!--[if IE 8 ]>    <html class="#GET{class} ie ie8 lte9 lte8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
-<!--[if IE 9 ]>    <html class="#GET{class} ie ie9 lte9" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <html class="[(#GET{class})][ (#LANG_DIR)][ (#LANG)] no-js ie ie6 lte9 lte8 lte7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if IE 7 ]>    <html class="[(#GET{class})][ (#LANG_DIR)][ (#LANG)] no-js ie ie7 lte9 lte8 lte7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if IE 8 ]>    <html class="[(#GET{class})][ (#LANG_DIR)][ (#LANG)] no-js ie ie8 lte9 lte8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if IE 9 ]>    <html class="[(#GET{class})][ (#LANG_DIR)][ (#LANG)] no-js ie ie9 lte9" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="[(#GET{class})][ (#LANG_DIR)][ (#LANG)] no-js" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<!--<![endif]-->
 	<head>
-		[(#REM) Debut du head particulier a chaque page]
-		<INCLURE{fond=head/#ENV{type},env}>
-		[(#REM) Partie commune a toutes les pages, sans env]
-		<INCLURE{fond=inclure/head}>
-		[(#REM) Fin du head particulier a chaque page, pour inserer des js specifiques par exemple]
-		<INCLURE{fond=head_js/#ENV{type},env}>
+		<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>[
+
+		(#REM) Debut du head particulier a chaque page
+		pour inserer un title, des css particulieres(mais surchargees), ou des js *inline*
+		]<INCLURE{fond=head/#ENV{type},env}>[
+
+		(#REM) Partie commune a toutes les pages, sans env
+		]<INCLURE{fond=inclure/head}>[
+
+		(#REM) Fin du head particulier a chaque page, pour inserer des js specifiques par exemple
+		pour inserer des js *externes*
+		]<INCLURE{fond=head_js/#ENV{type},env}>
 	</head>
 	<INCLURE{fond=body,env}>
 </html>
