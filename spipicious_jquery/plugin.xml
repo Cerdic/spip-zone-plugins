@@ -6,7 +6,7 @@ _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://
 	<licence>
 		&#169; 2007-2010 - GNU/GPL v2
 	</licence>
-	<version>0.6.1</version>
+	<version>0.6.2</version>
 	<version_base>0.6</version_base>
 	<etat>stable</etat>
 	<description>
@@ -47,6 +47,10 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 		<nom>autoriser</nom>
 		<inclure>spipicious_autoriser.php</inclure>
     </pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>spipicious_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<necessite id='cfg' version='[1.10.1;]' />
 	<necessite id="SPIP" version='[2.0.9;]' />
