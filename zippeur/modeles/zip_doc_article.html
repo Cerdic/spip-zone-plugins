@@ -4,12 +4,13 @@
 [(#SET{doc,#GET{doc}|push{#FICHIER|copie_locale}})]
 </BOUCLE_doc>
 <BOUCLE_date(DOCUMENTS){!par maj}{id_article=#GET{id_article}}{0,1}>
+[(#SET{urlzip,#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]}})]
 <dl class='spip_documents'>
 	<dt>
-		<a type="application/zip" href="[(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]})]" title="<:zippeur:ensemble_fichier:> [(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]}|filesize|taille_en_octets)])">
-		<img src='#CHEMIN{vignettes/zip.png}' alt="<:zippeur:ensemble_fichier:> [(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]}|filesize|taille_en_octets)])" /></a>
+		<a type="application/zip" href="[(#GET{urlzip})]" title="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])">
+		<img src='#CHEMIN{vignettes/zip.png}' alt="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])" /></a>
 	</dt>
-	<dt class='spip_doc_titre'><strong>(<:zippeur:ensemble_fichier:> - [(#GET{doc}|zippeur{#MAJ,article_#GET{id_article}[_(#ENV{mode})]}|filesize|taille_en_octets)])</strong></dt>
+	<dt class='spip_doc_titre'><strong>(<:zippeur:ensemble_fichier:> - [(#GET{urlzip}|filesize|taille_en_octets)])</strong></dt>
 </dl>
 </BOUCLE_date>
 </B_doc>
