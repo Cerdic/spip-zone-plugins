@@ -58,13 +58,9 @@ if (_DIR_RESTREINT!="" || $geoportail_force)
 [(#REM) N'inclure l'engin qu'une seule fois... ]
 <script src="http://api.ign.fr/geoportail/api?#MAPKEY&instance=map#ENV{id_geoportail,0}&includeEngine=false"></script>
 
-[(#GEOPORTAIL_ENGINE{#ENV{id_geoportail,0}})
-<!-- Format d'import -->
-[<script type="text/javascript" src="(#CHEMIN{js/Format/Ceoconcept_rip.js})"></script>]
-[<script type="text/javascript" src="(#CHEMIN{js/Layer/Locator.js})"></script>]
-[<script type="text/javascript" src="(#CHEMIN{js/Layer/GXT.js})"></script>]
-<script>jQuery.geoportail.hash = "<!_SPIP_GEOPORTAIL_HASH_!>";</script>
-]
+[(#REM) Balise d'inclusion du geoportail ]
+<!--_SPIP_GEOPORTAIL_#MODE-->
+
 <script language=javascript>
 // Ajouter une nouvelle carte
 jQuery.geoportail.addMap(
@@ -72,31 +68,33 @@ jQuery.geoportail.addMap(
 		formulaire : #ENV{formulaire,false},
 		map : null,
 		geoportalLoadmap : function () 
-		{	geoportalLoadmap#ENV{id_geoportail,0}("GeoportalMapDiv#ENV{id_geoportail,0}", "[(#MODE|sinon{normal})]", "[(#GET{zone})]"); 
+		{	geoportalLoadmap#ENV{id_geoportail,0}("GeoportalMapDiv#ENV{id_geoportail,0}", "normal", "[(#GET{zone})]"); 
 			map = this.map = map#ENV{id_geoportail,0};
 			
 			//map.getMap().setProxyUrl("#CHEMIN{php/proxy.php}?url=");
 			map.getMap().setProxyUrl("?action=geoproxy&hash="+jQuery.geoportail.hash+"&url=");
 			// Affichage de la carte
-			jQuery.geoportail.showMap (map, '#GET{zone}', Number('#LON'), Number('#LAT'), Number('#ZOOM'), '#LAYERCTRL', '#TOOLBOX', '#INFOBOX', '#CARTO', '#ORTHO');
-			// Outils de recherche (un petit delais pour IE !)
-			if ("[(#SEARCHTOOLS|sinon{1})]"=="1") 
-			{	if (jQuery.browser["msie"]) setTimeout("jQuery.geoportail.addSearchTools(map#ENV{id_geoportail,0})", 1000);
-				else jQuery.geoportail.addSearchTools(this.map);
-			}
-			// Outils de mesure
-			if ("[(#MEASURETOOLS)]"=="1") 
-			{	jQuery.geoportail.addMeasureTools(this.map);
-			}
+			jQuery.geoportail.showMap (map,
+				'#MODE',
+				{	zone: '#GET{zone}', 
+					lon: Number('#LON'), 
+					lat: Number('#LAT'), 
+					zoom: Number('#ZOOM')
+				},
+				{	layer:'#LAYERCTRL', 
+					tools:'#TOOLBOX', 
+					info:'#INFOBOX',
+					search:'#SEARCHTOOLS',
+					measure:'#MEASURETOOLS',
+					overview:'#OVERVIEW'
+				}, 
+				{	carto:'#CARTO', 
+					ortho:'#ORTHO',
+					minZ: '#MIN_ZOOM',
+					maxZ:'#MAX_ZOOM'
+				});
 			// Style d'affichage par defaut
 			OpenLayers.Feature.Vector.style['default'].externalGraphic = "#CHEMIN{img/punaise.gif}";
-			// Limiter le zoom
-			[map.getMap().minZoomLevel = (#MIN_ZOOM);]
-			[map.getMap().maxZoomLevel = (#MAX_ZOOM);]
-			// Afficher la vue globale
-			if ("[(#OVERVIEW)]"=="1") 
-			{	jQuery.geoportail.setOverview(this.map);
-			}
 			
 			<B_poubelle>
 			// Supprimer les layers Geoportail dans un geoservice refuse
@@ -229,7 +227,8 @@ jQuery.geoportail.addMap(
             {
                 singleTile:true,
                 projection:'EPSG:4326',
-                units:'degrees',
+				srs:{'EPSG:4326':'EPSG:4326', 'EPSG:3785':'EPSG:3785'},//some supported SRS from capabilities
+				units:'degrees',
                 // maxExtent expressed in EPSG:4326 :
                 maxExtent: new OpenLayers.Bounds(#MAXEXTENT),
                 minZoomLevel: #MINZOOM,

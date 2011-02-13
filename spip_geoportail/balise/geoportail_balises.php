@@ -93,6 +93,7 @@ function balise_GEOPORTAIL_PROTECT($p)
 * #GEOPORTAIL_ENGINE{#ID_GEOPORTAIL}
 * La balise doit necessairement contenir l'identifiant de la carte 
 * pour n'ajouter l'engin qu'une seule fois
+* (obsolete)
 *
 **/
 global $geoportail_engine;

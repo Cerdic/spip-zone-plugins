@@ -14,6 +14,7 @@
 
 include_spip('inc/presentation');
 include_spip('inc/config');
+include_spip('inc/geoportail_autorisations');
 
 function exec_geoservice_edit()
 {	// Gestion 

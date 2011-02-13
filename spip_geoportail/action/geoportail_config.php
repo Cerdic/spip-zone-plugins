@@ -123,11 +123,11 @@ function action_geoportail_config_dist()
 			}
 */			
 			// Tenter un import ligne par ligne...
-			if (!$row) redirige_par_entete ('./?exec=geoportail_importrgc');//generer_url_ecrire('geoportail_importrgc'));
+			if (!$row) redirige_par_entete (_DIR_RESTREINT.'./?exec=geoportail_importrgc');//generer_url_ecrire('geoportail_importrgc'));
 		}
 	}
-		
-	redirige_par_entete(urldecode(_request('redirect')));
+	
+	redirige_par_entete(_DIR_RESTREINT.urldecode(_request('redirect')));
 
 }
 

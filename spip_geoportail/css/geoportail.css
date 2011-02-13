@@ -1,8 +1,40 @@
-@media print
-{	/* Autoriser l'impression des cartes ! */
-	body { display:inherit !important; }
+/** Pseudo styles pour l'affichage des GPX */
+#geoportailDefaultStyle
+{	width: 2px;									/* pointRadius */
+	background-image: url(../img/punaise.png);	/* externalGraphic */
+	border-style: solid;						/* strokeDashstyle : solid, dashed ou dotted */
+	border-width: 2px;							/* strokeWidth */
+	border-color: blue;							/* strokeColor */
+}
+#geoportailSelectStyle
+{	width: 4px;									/* pointRadius */
+	background-image: url(../img/punaise.png);	/* externalGraphic */
+	border-style: solid;						/* strokeDashstyle : solid, dashed ou dotted */
+	border-width: 4px;							/* strokeWidth */
+	border-color: red;							/* strokeColor */
 }
 
+/** Autoriser l'impression des cartes ! 
+	Par defaut, l'API l'interdit (voir les CGU)
+*/
+@media print
+{	body { display:inherit !important; }
+}
+
+/** Thickbox au dessus ! */
+#TB_overlay
+{	z-index:2000;
+}
+#TB_window
+{	z-index:2001;
+}
+
+/** GMAP : afficher le (c) au dessus */
+.olLayerGooglePoweredBy {
+	bottom:15px !important;
+}
+
+/** Geoportail */
 .GeoportalMapDiv
 {	width:100%;
 	height:500px;

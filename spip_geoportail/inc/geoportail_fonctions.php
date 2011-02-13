@@ -19,19 +19,6 @@ include_spip('public/assembler');
 include_spip('inc/compat_192');
 include_spip('public/geoportail_profils');
 
-/** Recalcule sur chaque page (hors cache) 
- - pseudo balise _SPIP_GEOPORATAIL_HASH_ qui doit etre calcule sur chaque page
-*/
-function geoportail_affichage_final($page)
-{	// on regarde rapidement si la page inclus un geoportail
-	if (strpos($page, '<!_SPIP_GEOPORTAIL_HASH_!>')===FALSE) return $page;
-	
-	// Inclure le hash code de maniere dynamique
-	charger_fonction('securiser_action','inc');
-	$action = calculer_action_auteur('geoportail');
-	return str_replace('<!_SPIP_GEOPORTAIL_HASH_!>', $action, $page);
-} 
-
 /**
  Fonction pour placer le menu geoportail
 */

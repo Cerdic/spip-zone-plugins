@@ -25,9 +25,10 @@ _ <a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
 	<prefix>
 		geoportail
 	</prefix>
-	<options> <!-- definition des options -->
-		options.php
-	</options>
+	<pipeline> <!-- definition des autorisations -->
+		<nom>autoriser</nom>
+		<inclure>inc/geoportail_autorisations.php</inclure>
+	</pipeline>
 	<fonctions> <!-- definition des balises -->
 		balise/geoportail_balises.php
 	</fonctions>
@@ -57,9 +58,9 @@ _ <a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
 		<nom>affiche_milieu</nom>
 		<inclure>geoportail.php</inclure>
 	</pipeline>
-	<pipeline> 
+	<pipeline>
 		<nom>affichage_final</nom>
-		<inclure>geoportail.php</inclure>
+		<inclure>geoportail_final.php</inclure>
 	</pipeline>
 	<pipeline> <!-- seulement en SPIP v2 -->
 		<nom>afficher_contenu_objet</nom>
@@ -70,4 +71,5 @@ _ <a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
 		<inclure>geoportail.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
+
 </plugin>

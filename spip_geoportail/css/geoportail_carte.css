@@ -1,13 +1,14 @@
-/** Thickbox au dessus ! */
-#TB_overlay
-{	z-index:2000;
+/** Modification des styles de la carte * /
+.gpControlFloating
+{	font-size:12px;
 }
-#TB_window
-{	z-index:2001;
+.gpControlFloating .gpControlFloatingBody label, 
+.gpControlFloating .gpControlFloatingBody input, 
+.gpControlFloating .gpControlFloatingBody select 
+{	font-size:1em;
 }
 
-
-/** Modification des styles de la carte */
+/** */
 .gpMap, div.olMap
 {	cursor:default !important;
 }
@@ -21,10 +22,10 @@ img.gpGeocodeMatchCodeMatchType
 }
 
 .gpControlPanelToggleItemInactive
-{	background-image: url("picto_options_off.png");
+{	background-image: url("picto_options_off.png") !important;
 }
 .gpControlPanelToggleItemActive
-{	background-image: url("picto_options_on.png");
+{	background-image: url("picto_options_on.png") !important;
 }
 
 /** Popup sur la carte **/

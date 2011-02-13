@@ -249,6 +249,7 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 	$id = #ID_OBJET;
 	if ($objet == 'auteur') $action = 'positionner';
 	else $action = 'modifier';
+	include_spip('inc/geoportail_autorisations');
 	if (autoriser($action, $objet, $id)) {  
 ?>
 

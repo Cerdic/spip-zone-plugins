@@ -17,6 +17,7 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/documents');
 include_spip('public/assembler');
+include_spip('inc/geoportail_autorisations');
 
 function exec_geoservice()
 {	// Gestion 
@@ -54,7 +55,7 @@ function exec_geoservice()
 			// Logo de la rubrique
 			$iconifier = charger_fonction('iconifier', 'inc');
 			$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_service');
-			echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', true);
+			echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', false);
 			
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'geoservice','id_geoservice'=>$id_geoservice),'data'=>''))
 		.creer_colonne_droite('', true)

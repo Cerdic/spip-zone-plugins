@@ -1,6 +1,4 @@
-<BOUCLE_img(DOCUMENTS){id_document=#ID_DOC}{extension IN (jpg,png,gif)}>
-<script language=javascript>
-/**
+[(#REM)/**
 * Plugin SPIP Geoportail
 *
 * @author:
@@ -11,11 +9,18 @@
 *
 * Exemple d'affichage d'une couche image en superposition sur une carte geoportail
 * L'exemple defini une fonction initSpipMapX (ne marche qu'une seule fois !)
-*	<geoportailX|image|id_doc=YY|xmin=2.444775|ymin=48.92170|xmax=2.448227|ymax=48.92357>
+*	<geoportailX|image|id_document=YY|xmin=2.444775|ymin=48.92170|xmax=2.448227|ymax=48.92357>
+* - center : se centrer sur la zone
+* - id_document : identifiant du document
+* - xmin, ymin, xmax, ymax : coins du doc
+* - opacity : transparence
+* - visibility : visible
+* - minz, maxz : zoom mini et maxi
 **/
-
+]<BOUCLE_img(DOCUMENTS){id_document=#ID_DOCUMENT}{extension IN (jpg,png,gif)}>
+<script language=javascript>
 $.geoportail.onLoad([(#ENV{id_geoportail,0})] ,
-function onloadSpipMap[(#ENV{id_geoportail,0})](map,id)
+function (map,id)
 {	
 	var xmin = [(#ENV{xmin,2.444775})];
 	var ymin = [(#ENV{ymin,48.92170})];
@@ -28,12 +33,12 @@ function onloadSpipMap[(#ENV{id_geoportail,0})](map,id)
 	pt2.transform(new OpenLayers.Projection('IGNF:RGF93G'), map.getMap().getProjection());
 
 	var options = 
-	{	minZoomLevel:0, 
-		maxZoomLevel:18, 
+	{	minZoomLevel:[(#ENV{minz,0})], 
+		maxZoomLevel:[(#ENV{maxz,18})], 
 		maxResolution:100, 
-		opacity: 0.65, 
+		opacity: [(#ENV{opacity,0.65})], 
 		isBaseLayer:false, 
-		visibility:true, 
+		visibility:[(#ENV{visibility,true})], 
 		maxExtent: new OpenLayers.Bounds(pt1.x, pt1.y, pt2.x, pt2.y),
 		originators: jQuery.geoportail.originators,
 		view:{ zoomToExtent:true } 
@@ -47,7 +52,14 @@ function onloadSpipMap[(#ENV{id_geoportail,0})](map,id)
                 options
             );
 	map.getMap().addLayer(graphic);
-	map.getMap().setCenterAtLonLat((xmin+xmax)/2,( ymin+ymax)/2, [(#ENV{zoom,15})]);
+	
+	[(#ALIGN|=={center}|?{' '})
+		// Centrer
+		var extent = new OpenLayers.Bounds();
+		extent.extend(pt1);
+		extent.extend(pt2);
+		map.getMap().zoomToExtent(extent);
+	]
 }
 );
 </script>

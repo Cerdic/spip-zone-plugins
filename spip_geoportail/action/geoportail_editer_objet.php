@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return "{error:'inc_version'}";
 include_spip('base/abstract_sql');
 include_spip('inc/geoupload');
 include_spip('public/geoportail_boucles');
+include_spip('public/geoportail_autorisations');
 		
 function action_geoportail_editer_objet_dist()
 {	//header("Content-Type: text/json; charset:UTF-8; ");

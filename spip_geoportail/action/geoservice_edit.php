@@ -18,6 +18,7 @@ include_spip('inc/auth');
 include_spip("inc/lang");
 include_spip("base/abstract_sql");
 include_spip('inc/compat_192');
+include_spip('inc/geoportail_autorisations');
 
 function action_geoservice_edit_dist() 
 {
@@ -75,7 +76,7 @@ function action_geoservice_edit_dist()
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_geoservice', $id_geoservice, '&');
 
-	redirige_par_entete($redirect);
+	redirige_par_entete(_DIR_RESTREINT.$redirect);
 
 }
 
