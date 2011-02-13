@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'detail_surcharge' => 'Outil surcharg&eacute; :',
+
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
@@ -53,10 +55,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 @puce@ Quels statuts d\'auteurs peuvent &ecirc;tre list&eacute;s sur cette page ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Page des auteurs',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]',
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]][[->%alinea2%]]',
 	'autobr:nom' => 'Retours de ligne automatiques',
-	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>',
-	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)',
+	'autobr_non' => '&Agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>',
+	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
 	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B

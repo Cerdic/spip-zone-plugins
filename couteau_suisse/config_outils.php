@@ -26,28 +26,33 @@ add_outil( array(
 */
 
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'alinea',
-	'format' => _format_NOMBRE,
-	'radio' => array(1 => 'couteauprive:autobr_oui', 0 => 'couteauprive:autobr_non'),
+	'check' => 'couteauprive:autobr_oui',
 	'defaut' => 1,
-	'radio/ligne' => 1,
-	'code:!%s' => "define('_CS_AUTOBR_RACC', 1);",
+	'code:%s' => "define('_CS_AUTOBR_TRAIT', 1);",
+) ,array(
+	'nom' => 'alinea2',
+	'check' => 'couteauprive:autobr_non',
+	'defaut' => 0,
+	'code:%s' => "define('_CS_AUTOBR_RACC', 1);",
 ));
 add_outil( array(
 	'id' => 'autobr',
-	'code:options' => '%%alinea%%',
+	'code:options' => '%%alinea%%%%alinea2%%',
 	'categorie' => 'typo-corr',
 	// traitement automatique des TEXTE/articles, et TEXTE/forums (standard pour SPIP>=2.1)
 	'traitement:TEXTE/articles:pre_propre'
 	 .(!defined('_SPIP20100')?',traitement:TEXTE/forums:pre_propre':'') => 'autobr_pre_propre',
-	'pipelinecode:pre_typo' => 'if(!%%alinea%%) { include_spip(\'outils/autobr\'); $flux = autobr_alinea($flux); }',
+	'pipelinecode:pre_typo' => 'if(%%alinea2%%) { include_spip(\'outils/autobr\'); $flux = autobr_alinea($flux); }',
 	'pipeline:nettoyer_raccourcis_typo' => 'autobr_nettoyer_raccourcis',
 	'pipeline:porte_plume_cs_pre_charger' => 'autobr_CS_pre_charger',
 	'pipeline:porte_plume_lien_classe_vers_icone' => 'autobr_PP_icones',
 	'code:fonctions' => "// pour le traitement TEXTE/articles et la balise #INTRODUCTION
 include_spip('outils/autobr');
 \$GLOBALS['cs_introduire'][] = 'autobr_nettoyer_raccourcis';",
+	'pipelinecode:pre_description_outil' => 'if($id=="autobr")
+		$texte=str_replace("@BALISES@",cs_balises_traitees("autobr"),$texte);',
 ));
 
 // ici on a besoin d'une case input. La variable est : dossier_squelettes
