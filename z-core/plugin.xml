@@ -2,7 +2,7 @@
 	<nom>Z-core</nom>
 	<slogan><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></slogan>
 	<auteur>Matthieu Marcillaud, C&#233;dric Morin, Romy Tetue, Collectif SPIP</auteur>
-	<icon>img/zcore-32.png</icon>
+	<icon>img/z-core-32.png</icon>
 	<lien>http://www.yterium.net/108</lien>
 	<licence>GNU/GPL</licence>
 	<version>2.0.0-dev</version>
