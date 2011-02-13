@@ -28,6 +28,7 @@ function exec_geoportail_config()
  	
 	if ($GLOBALS['connect_statut'] == "0minirezo" AND $connect_toutes_rubriques)
 	{	$geoportail_key = $GLOBALS['meta']['geoportail_key'];
+ 		$yahoo_key = $GLOBALS['meta']['geoportail_yahoo_key'];
  		$garticle = ($GLOBALS['meta']['geoportail_geoarticle'])?"CHECKED":"";
  		$gauteur = ($GLOBALS['meta']['geoportail_geoauteur'])?"CHECKED":"";
  		$gdocument = ($GLOBALS['meta']['geoportail_geodocument'])?"CHECKED":"";
@@ -52,12 +53,22 @@ function exec_geoportail_config()
 			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
 
 			/* Geoservices */
-			."<br/><input type='checkbox' name='service' id='service' $gservice><label for=service>"._T('geoportail:geoportail_services')."</label>"
+			."<p><input type='checkbox' name='service' id='service' $gservice><label for=service>"._T('geoportail:geoportail_services')."</label></p>"
 	
 			.debut_cadre_trait_couleur("warning-24.gif", true, "", "")
 			._T('geoportail:geoportail_print')
-			. fin_cadre_trait_couleur(true)
+			. fin_cadre_trait_couleur(true);
 			
+		/* Cle Yahoo */
+		$form .= debut_cadre_trait_couleur("groupe-mot-24.gif", true, "", _T('geoportail:cle_yahoo'))
+			.'<p>'._T('geoportail:geoportail_yahoo_key').'</p>'
+
+			._T('geoportail:cle').' : '
+			."&nbsp;<input type='text' name='yahoo_key' class='fondl' value=\"$yahoo_key\" size=30>"
+
+			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+
+			.fin_cadre_trait_couleur(true)
 			.fin_cadre_trait_couleur(true);
 		
 		/* Type d'objet a georef */

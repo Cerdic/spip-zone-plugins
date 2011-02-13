@@ -37,7 +37,9 @@ function action_geoportail_config_dist()
 	{
 		// Modif de la cle
  		if (isset($_POST['modifier']))
-		{	ecrire_meta('geoportail_key',$_POST['geoportail_key']);
+		{	// Cles d'utilisation
+			ecrire_meta('geoportail_key',$_POST['geoportail_key']);
+			ecrire_meta('geoportail_yahoo_key',$_POST['yahoo_key']);
  			// Services
  			ecrire_meta('geoportail_service',isset($_POST['service']));
  			ecrire_metas();

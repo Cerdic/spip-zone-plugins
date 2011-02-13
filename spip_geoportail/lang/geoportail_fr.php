@@ -6,8 +6,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'geoportail'	=> 'G&eacute;oportail',
 
-'cle'			=> 'Cl&eacute; d\'utilisation',
+'cle'				=> 'Cl&eacute; d\'utilisation',
 'geoportail_key'	=> 'Pour pouvoir utiliser l\'API G&eacute;oportail, vous devez d\'abord vous inscrire et avoir une cl&eacute; d\'utilisation sur le site <a href="http://api.ign.fr/geoportail/" title="API Geoportail">http://api.ign.fr/geoportail/</a>.',
+'cle_yahoo'				=> 'Cl&eacute; d\'utilisation YAHOO',
+'geoportail_yahoo_key'	=> 'Pour pouvoir utiliser les service Yahoo! Map, vous devez d\'abord vous inscrire et avoir une cl&eacute; d\'utilisation sur le site <a href="http://developer.yahoo.com/maps/" title="API Yahoo Map">http://developer.yahoo.com/maps/</a>.',
 'geoportail_print'	=> '<b>Attention :</b> vous devez adh&eacute;rer aux conditions g&eacute;n&eacute;rales d\'utilisation (CGU) de l\'API. En particulier, l\'impression des cartes g&eacute;oportail n\'est autoris&eacute;e que dans le cadre d\'un <i>usage documentaire</i>.<br/>Le plugin active par d&eacute;faut l\'impression des cartes g&eacute;oportail. Vous devez le d&eacute;sactiver dans le fichier /css/geoportail.css dans le cas contraire...', 
 'geoportail_services'=> 'Permettre l\'ajout de G&eacute;oservices.',
 'geoportail_objet'	=> 'Types d\'objets &agrave; g&eacute;or&eacute;f&eacute;rencer',
