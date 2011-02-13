@@ -8,7 +8,7 @@ function zippeur($array,$date,$nom=''){
 	include_spip('inc/flock');
 	$enbase = sql_fetsel('id_zip,fichiers,date_modif','spip_zippeur',"`nom`='$nom'");
 	/* On vérifie si le zip existe*/
-	if (count(preg_files(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.'cache-zip/',$nom.".zip"))==0 or!$enbase['id_zip'] or $enbase['date_modif']!=$date or count($array)!=$enbase['fichiers']){
+	if (count(preg_files($chemin))==0 or!$enbase['id_zip'] or $enbase['date_modif']!=$date or count($array)!=$enbase['fichiers']){
 		
 		zippeur_zipper($chemin,$array);
 		spip_log("Zippage de $nom.zip","zippeur");
