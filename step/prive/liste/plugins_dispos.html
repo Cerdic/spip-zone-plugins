@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_plugins(PLUGINS){!par points}{par multi nom}{etat?}{categorie?}{tags?}{actif?}{recherche?}{superieur?}{obsolete?}{id_zone?}{recent?}{present?}>
-		<tr id="plug#ID_PLUGIN" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ actif_(#ACTIF)][ etat_(#ETAT)][ maj_(#MAJ_VERSION|?{oui,''})][ zone_(#ID_ZONE)][ (#ID_ZONE|>{0}|?{absent})]">
+		<tr id="plug#ID_PLUGIN" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ actif_(#ACTIF)][ etat_(#ETAT)][ maj_(#MAJ_VERSION|?{oui,''})][ zone_(#ID_ZONE)][ (#ID_ZONE|>{0}|?{absent})][ (#CONSTANTE|=={_DIR_EXTENSIONS}|?{extension,plugin})]">
 			[(#SET{todo,[(#GET*{totodo}|table_valeur{#ID_PLUGIN})]})]
 			<td class='logo'>
 				[(#DOSSIER|et{#CHAMP_SQL{logo}})
