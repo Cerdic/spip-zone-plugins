@@ -42,8 +42,6 @@ This plugin adds two talbes to the database, one named {{spip_gis}} and the othe
 
  <options>gis_options.php</options>
 
- <fonctions>base/gis.php</fonctions>
-
  <prefix>gis</prefix>
 	<pipeline>
 		<nom>affichage_final</nom>

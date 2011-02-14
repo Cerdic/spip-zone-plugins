@@ -9,6 +9,6 @@
  *
  */
 
-
+include_spip('base/gis');
 
 ?>
