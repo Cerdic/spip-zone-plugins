@@ -7,7 +7,7 @@
 
 [(#REM) On construit un tableau avec tous les types de documents; clause "id_type_facture IN" de la boucle ]
 	#SET{type,#ARRAY}
-	<BOUCLE_t(type_facture)>
+	<BOUCLE_t(types_facture)>
 	#SET{type, #GET{type}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_type_facture}}}
 	</BOUCLE_t>
 
@@ -47,7 +47,7 @@
 	
 	<select name="id_type_facture" onchange="this.form.submit()" >
 		<option value="">---</option>
-		<BOUCLE_t2(type_facture)>
+		<BOUCLE_t2(types_facture)>
 		<option value="#ID_type_facture" [(#GET{type}|=={#ID_type_facture}|?{'selected="selected"'})]>#NOM_type_facture</option>
 		</BOUCLE_t2>
 	</select>
@@ -81,8 +81,8 @@
 	</tr>
 	</thead>
 	<tbody>
-<BOUCLE_factures(factures){id_contact IN #GET{contacts}}{id_type_facture IN #GET{type}}{!par date_facture}{!par num_facture}{pagination 20}>
-	<tr[ id="ligne_(#NUM_FACTURE)"][ class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]><BOUCLE_n(spipmine_contacts){id_client}>
+<BOUCLE_factures(FACTURES){id_contact IN #GET{contacts}}{id_type_facture IN #GET{type}}{!par date_facture}{!par num_facture}{pagination 20}>
+	<tr[ id="ligne_(#NUM_FACTURE)"][ class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]><BOUCLE_n(CONTACTS){id_client}>
 		<td class="num #EDIT{nom}"><a href="[(#URL_PAGE{contact}|parametre_url{id_client,#ID_CLIENT})]" title="Fiche client N&deg;#ID_CLIENT, #NOM_CLIENT">#NOM_COURT</a></td></BOUCLE_n>
 		<td class="num #EDIT{num_facture}"><a href="[(#URL_PAGE{fiche_facture}|parametre_url{'id_facture',#ID_FACTURE})]">#NUM_FACTURE</a></td>
 		<td class="date #EDIT{date_facture}">[(#DATE_FACTURE|affdate{'d/m/Y'})]</td>
