@@ -24,12 +24,20 @@ function factures_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 
+
+	if (version_compare($current_version,"1.0.1","<")){
+		maj_tables('spip_types_facture');
+		sql_alter("TABLE spip_factures CHANGE id_type_document id_type_facture int(11) default NULL");
+		ecrire_meta($nom_meta_base_version, $current_version="1.0.1");
+	}
+
 }
 
 function factures_vider_tables($nom_meta_base_version) {
 	
 	sql_drop_table("spip_factures");
 	sql_drop_table("spip_lignes_factures");
+	sql_drop_table("spip_types_facture");
 
 	effacer_meta($nom_meta_base_version);
 }
