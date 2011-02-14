@@ -23,9 +23,6 @@ function formulaires_gerer_plugins_charger_dist(){
 		if ($do) {
 			spip_log('Mise a jour auto de la liste des plugins locaux !','step');
 			step_actualiser_plugins_locaux();
-			// vider la table spip_resultats qui n'est alors plus a jour des identifiants
-			// je ne sais pas comment faire autrement. C'est dommage de tout vider !
-			sql_delete('spip_resultats');
 		}
 	}
 	$_todo = _request('_todo') ? _request('_todo') : serialize(array());
