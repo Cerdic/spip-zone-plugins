@@ -6,6 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configurer_bando' => 'Choses à faire',
 'configurer_titre' => 'Configurer les listes de choses à faire',
+'label_statut' => 'Statut',
+'label_titre' => 'Titre',
 'statut_afaire' => '&Agrave; faire',
 'statut_encours' => 'En cours',
 'statut_termine' => 'Termin&eacute;',

@@ -9,6 +9,20 @@ ul.todo img{
 }
 
 ul.todo .rang{
+	display:block;
+	float:left;
+	width:3em;
+	margin-right:1em;
+	text-align:right;
+	opacity:0.3;
+	-moz-opacity:0.3;
+	-webkit-opacity:0.3;
+}
+
+table.todo td, table.todo th{
+	padding:0.2em 0.5em;
+}
+table.todo td.rang{
 	opacity:0.3;
 	-moz-opacity:0.3;
 	-webkit-opacity:0.3;
