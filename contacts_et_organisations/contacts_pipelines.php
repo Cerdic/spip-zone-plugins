@@ -171,7 +171,7 @@ function contacts_affiche_milieu($flux){
 function contacts_rechercher_liste_des_champs($tables){
 	
 	// ajouter la recherche sur contact
-	$tables['contact']['id_auteur'] = 12;
+	$tables['contact']['id_contact'] = 12;
 	$tables['contact']['nom'] = 4;
 	$tables['contact']['prenom'] = 2;
 	
