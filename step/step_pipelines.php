@@ -15,4 +15,14 @@ function step_rechercher_liste_des_champs($tables){
 	return $tables;
 }
 
+/**
+ * Insertion dans le pipeline taches_generales_cron (SPIP)
+ *
+ * @return L'array des taches complété
+ * @param array $taches_generales Un array des tâches du cron de SPIP
+ */
+function step_taches_generales_cron($taches_generales){
+	$taches_generales['step_actualise'] = 24*60*60;
+	return $taches_generales;
+}
 ?>
