@@ -11,14 +11,13 @@
 
 #SET{id_articles,#ARRAY}
 
-<BOUCLE_liste_art_trie(ARTICLES){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{!lang_select}{par id_article}>
+<BOUCLE_liste_art_trie(ARTICLES){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{!lang_select}{!par id_article}>
 	[(#ID_TRAD|>{0}|?{
-		#SET{id_articles,#GET{id_articles}|array_merge{#ARRAY{#ID_TRAD,#ID_ARTICLE}}}
+		#SET{id_articles,#GET{id_articles}|array_merge{#ARRAY{#ID_TRAD,#ID_TRAD}}}
 		,
 		#SET{id_articles,#GET{id_articles}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}}		
 		})]
 </BOUCLE_liste_art_trie>
-
 
 <B_liste_art>
 #ANCRE_PAGINATION
@@ -38,7 +37,7 @@
 	<tbody>
 	<BOUCLE_liste_art(ARTICLES){id_article IN #GET{id_articles}}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 	#SET{class,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<INCLURE{fond=prive/liste/inc-articles_row}{env}{trads=oui}{id_article}{class=#GET{class}}/>
+		<INCLURE{fond=prive/liste/inc-articles_row}{env}{trads=oui}{id_article}{class=#GET{class}}{exclus=}/>
 	</BOUCLE_liste_art>
 	</tbody>
 </table>
