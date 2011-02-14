@@ -14,14 +14,10 @@
 	<description>
 	Affiche les mots cle du site sous la forme d'un nuage 3D 
 	</description>
-	<lien>http://bidouilleur.com/nuage-de-tags-mots-cles-3d-dynamique-en-jquery/</lien>
-	<icon>
-	tagsphere.png
-	</icon>
+	<lien>http://www.spip-contrib.net/Plugin-TagSphere</lien>
 	<prefix>
 	tagsphere
 	</prefix>
-	<categorie>navigation</categorie>
 	<necessite id='SPIP' version='[1.9.0;]' />
 
 
