@@ -8,7 +8,8 @@
 		<a href="[(#ENV{mode}|=={edition_seule}|?{[(#ID_ARTICLE|generer_url_entite{article})],[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]})]">#ID_ARTICLE</a>,
 		#ID_ARTICLE
 		})]</td>
-	[(#ENV{trads}|oui)<td>]		
+	[(#ENV{trads}|oui)<td>]	
+		
 	<BOUCLE_art_trads(ARTICLES){traduction}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut IN prepa,publie,prop}{id_article!=#ID_ARTICLE}>
 	[(#ENV{trads}|oui)	
 		[(#ENV{voir}|!={#ID_TRAD}|?{
@@ -19,13 +20,14 @@
 			</span>,
 			&nbsp;
 			})]
-		[(#ID_ARTICLE|!={#ENV{id_article}}|oui)<div>
-			[(#ENV{voir}|=={#ID_TRAD}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="[(#CHEMIN{prive/images/deplierbas.gif})]" alt="replier"/></a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#ID_TRAD})]" title="<:taa:voir_traductions:>"><img src="[(#CHEMIN{prive/images/deplierhaut.gif})]" alt="deplier"/></a>})]
-			</div>
-			]
 		]
 	</BOUCLE_art_trads>		
-	[(#ENV{trads}|oui)</td>]
+	[(#ENV{trads}|oui)
+			<div>
+			[(#ENV{voir}|=={#ID_TRAD}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="[(#CHEMIN{prive/images/deplierbas.gif})]" alt="replier"/></a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#ID_TRAD})]" title="<:taa:voir_traductions:>"><img src="[(#CHEMIN{prive/images/deplierhaut.gif})]" alt="deplier"/></a>})]
+			</div>
+	</td>]
+	</B_art_trads>		
 </BOUCLE_art>
 <tr>
 
