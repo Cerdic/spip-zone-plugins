@@ -11,11 +11,11 @@
 
 #SET{id_articles,#ARRAY}
 
-<BOUCLE_liste_art_trie(ARTICLES){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{!lang_select}{!par id_article}>
+<BOUCLE_liste_art_trie(ARTICLES){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{!par id_article}>
 	[(#ID_TRAD|>{0}|?{
-		#SET{id_articles,#GET{id_articles}|array_merge{#ARRAY{#ID_TRAD,#ID_TRAD}}}
+		#SET{id_articles,#GET{id_articles}|array_merge{#ARRAY{#ID_TRAD-1,#ID_ARTICLE}}}
 		,
-		#SET{id_articles,#GET{id_articles}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}}		
+		#SET{id_articles,#GET{id_articles}|array_merge{#ARRAY{#ID_ARTICLE-1,#ID_ARTICLE}}}		
 		})]
 </BOUCLE_liste_art_trie>
 
