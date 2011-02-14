@@ -1,12 +1,19 @@
 <plugin>
 
-	<version>0.3</version>
+	<version>0.4</version>
 	
-	<nom>Colorscope - Colorise les codes hexa</nom>
+	<nom>Colorscope</nom>
+
+	<shortdesc>
+		<multi>
+		[fr] Colorise les codes hexa
+		[en] Give colours to hex codes
+		</multi>
+	</shortdesc>
 	
 	<prefix>colorscope</prefix>
 
-	<auteur>Cyril MARION - &#169; 2010 - [Ateliers CYM->http://www.cym.fr]</auteur>
+	<auteur>Cyril MARION - &#169; 2010-2011 - [Ateliers CYM->http://www.cym.fr]</auteur>
 	
     <licence>Licence GNU/GPL</licence>
 
@@ -16,7 +23,12 @@
 	
 	<lien>http://www.spip-contrib.net/Colorscope</lien>
 
-	<description>Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en rappelant son code &agrave; l'interieur.</description>
+	<description>
+		<multi>
+		[fr]Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en rappelant son code &agrave; l'interieur.
+		[en]Replaces hexadecimal color codes in a SPIP text, with a bloc with the relevant color in background, mentionning its hexa code.
+		</multi>
+	</description>
 
 	<pipeline>
 		<nom>post_typo</nom>
