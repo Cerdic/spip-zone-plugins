@@ -49,9 +49,9 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 
 	$titre = "";
 	$descriptif = "";
-	
+
 	// On tente de récupérer titre et description à l'aide de Videopian
-	if(!preg_match('/culture/',$url) && (phpversion() >= 5.2)) {
+	if(!preg_match('/culture/',$url) && (version_compare(PHP_VERSION, '5.2') >= 0)) {
 
 		include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
 		$Videopian = new Videopian();
@@ -61,7 +61,7 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 			$descriptif = $infosVideo->description;
 			// $logoDocument = $infosVideo->thumbnails->0->url; // A brancher sur la copie de document
 		} catch (Exception $e) {
-			echo 'Exception reçue : ',  $e->getMessage(), "\n";
+			//echo 'Exception reçue : ',  $e->getMessage(), "\n";
 			spip_log("L\'ajout automatique du titre et de la description a echoue","Plugin Videos");
 		}
 	}
