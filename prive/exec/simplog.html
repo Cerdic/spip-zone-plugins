@@ -1,0 +1,48 @@
+
+<h1><:simplog:consultation_logs:></h1>
+
+
+[
+<h2><:simplog:fichier:> : (#ENV{fic})</h2>
+
+<p><a href="#SELF" class='ajax'><:simplog:clic_rafraichir:></a></p>
+]
+
+
+<div class='cadre'>
+<BOUCLE_fic(DATA){source file, #EVAL{_DIR_TMP}/#ENV{fic}}>
+<p>#VALEUR</p>
+</BOUCLE_fic>
+</div>
+
+<!--#navigation-->
+
+<div class='cadre cadre-info'>
+<h2><:simplog:plugin_simplog:></h2>
+<p><:simplog:description_simplog:></p>
+</div>
+
+
+<div class="cadre-info">
+<span><:simplog:clic_rafraichir:></span>
+<form action="#SELF" method="post">
+<input value="<:simplog:actualiser:>" class="fondo" type="submit">
+</form>
+</div>
+
+<!--/#navigation-->
+
+<!--#extra-->
+
+
+<div class='cadre-info'>
+<h2><:simplog:liste_fic:></h2>
+<dl><BOUCLE_fics(DATA){source ls, #EVAL{_DIR_TMP}/*.log*}{par file}>
+<dt><a href="#URL_ECRIRE{#ENV{exec},fic=#FILE}">#FILE</a></dt>
+</BOUCLE_fics>
+</dl>
+
+<h2><:simplog:rep_tmp:></h2>
+#EVAL{_DIR_TMP}
+</div>
+<!--/#extra-->
