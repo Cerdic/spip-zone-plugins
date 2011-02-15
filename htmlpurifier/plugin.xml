@@ -20,4 +20,5 @@
   </prefix>
 	<icon>htmlpurifier.png</icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>

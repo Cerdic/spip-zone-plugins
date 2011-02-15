@@ -21,4 +21,5 @@
   <lien>http://leafo.net/lessphp/</lien>
 
   <fonctions>lessphp/gen_styles.php</fonctions>
+	<categorie>outil</categorie>
 </plugin>

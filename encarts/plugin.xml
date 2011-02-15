@@ -51,7 +51,7 @@
 	</pipeline>
 	
 
-	<categorie>outils</categorie>
+	<categorie>edition</categorie>
 
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="afficher_objets" version="[1.1;]" />
