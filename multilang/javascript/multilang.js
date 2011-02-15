@@ -54,10 +54,10 @@ var multilang_jq_root, //root of the search (jQuery object)
  * - form_menu (optional): a jQuery selector to set the container for the form menus.
  */
 function multilang_init_lang(options) {
-
+	var init_done = options.init_done || multilang_init;
 	//Detect if we're on the right page and if multilinguism is activated. If not return.
 	if((options.page && window.location.search.indexOf(options.page)==-1) || multilang_avail_langs.length<=1) return;
-
+	
 	//set the root element of all processing
 
 	var root = options.root || document;
@@ -90,11 +90,11 @@ function multilang_init_lang(options) {
 	//store all the internationalized forms
 	multilang_forms_selector = options.forms || "form";
 
-	if(multilang_init){
+	if(init_done){
 		multilang_forms_toadd = $(multilang_forms_selector,multilang_jq_root).not($(multilang_forms));
 	}
 	multilang_forms = $(multilang_forms_selector,multilang_jq_root);
-	if(!multilang_init){
+	if(!init_done){
 		multilang_forms_toadd = multilang_forms;
 	}
 
@@ -137,11 +137,14 @@ function multilang_init_multi(options) {
 	//init the value of the field to current lang
 	//add a container for the language menu inside the form
 	init_forms.each(function() {
-		$(this).find('input[type=submit],button').click(function(){
-			$(this).parents('form').get(0).multilang_multi_submit();
+		/*
+		 * Je ne sais pas à quoi cela sert particulièrement, désactivé pour l'instant
+		 */
+		//$(this).find('input[type=submit],button').click(function(){
+			//multilang_multi_submit.apply($(this).parents('form').get(0));
 			//$(this).parents('form').submit();
 			//return false;
-		});
+		//});
 		this.isfull = false;
 		this.form_lang = multilang_lang_courante;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
@@ -587,6 +590,8 @@ function multilang_multi_submit(params) {
 function multilang_attach_submit() {
 	if($(this).parents('.ajax').size() && $(this).find('input[name=var_ajax]')){
 		$(this).bind('form-pre-serialize',multilang_multi_submit);
+	}else if($(this).is('.formulaire_crayon')){
+		cQuery(this).bind('form-pre-serialize',function(){multilang_multi_submit.apply(this);});
 	}else{
 		var oldsubmit = this.onsubmit;
 		this.onsubmit = "";

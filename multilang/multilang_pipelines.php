@@ -142,4 +142,66 @@ function multilang_inserer_head($config=array()){
 	}
 	return $data;
 }
+
+function multilang_affichage_final($flux){
+	if($_REQUEST['page'] == 'crayons.js'){
+		$root = '' ;
+		$config = lire_config('multilang',array());
+		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
+		
+			if($config['article']) { // Articles
+				$root .= ',input[type=hidden][name*=name_][value|=article]';
+			}
+			if($config['breve']) { // Breves
+				$root .= ',input[type=hidden][name*=name_][value|=breve]';
+			}
+			if($config['rubrique']) { // Rubriques
+				$root .= ',input[type=hidden][name*=name_][value|=rubrique]';
+			}
+			if($config['auteur']) { // Auteurs
+				$root .= ',input[type=hidden][name*=name_][value|=auteur]';
+			}
+			if($config['document']) {  // Docs dans page de presentation rubrique ou article,
+				$root .= ',input[type=hidden][name*=name_][value|=document]' ;
+			}
+			if($config['site']) { // Sites
+				$root .= ',input[type=hidden][name*=name_][value|=site]';
+			}
+			if($config['evenement']) { // Evenements
+				$root .= ',input[type=hidden][name*=name_][value|=evenement]';
+			}
+			if($config['motcle']) { // Mots
+				$root .= ',input[type=hidden][name*=name_][value|=mot]';
+			}
+			$flux .= 'var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
+		multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
+		multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
+		multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
+	
+		// On trie les langues. Langue de l environnement en premier,
+		// puis langue principale du site puis les autres en ordre alphabetique
+		// Un utilisateur de langue anglaise souhaite logiquement traduire en anglais
+		multilang_avail_langs = jQuery.grep(multilang_avail_langs, function(value) {
+			return (value != multilang_def_lang && value != multilang_lang_courante);
+		});
+		multilang_avail_langs.sort();
+		if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang);
+		multilang_avail_langs.unshift(multilang_lang_courante);
+		var crayons_multilang_init = function(){
+			var crayons_root = ".formulaire_spip:has('.$root.')";
+			var fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti),.multilang";
+			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
+			var root_opt = "form:has(.multilang)";
+			var fields_selector_opt = ".multilang";
+			multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
+		}
+		jQuery(document).ready(function(){
+			crayons_multilang_init();
+			if(typeof onAjaxLoad == "function") onAjaxLoad(crayons_multilang_init);
+		});';
+		$flux = str_replace('jQuery', 'cQuery',$flux);
+		}
+	}
+	return $flux;
+}
 ?>
