@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return <type>
  */
  
-function auth_fblogin ($login, $pass, $serveur='') {
+function auth_fblogin_dist ($login, $pass, $serveur='') {
 
 // il faut vérifier que l'on détecte une session FB, on commence par inclure la bibliothèque FB
 	include_spip('inc/facebook');
@@ -47,6 +47,8 @@ function auth_fblogin ($login, $pass, $serveur='') {
 		catch (FacebookApiException $erreurs_fblogin){return $erreurs_fblogin;};
 	}
 	
+	$password = sha1(uniqid());
+	
 	// On va vérifier que l'uid est bien présent dans la table auteurs
 	if (!sql_countsel("spip_auteurs","fb_uid=$uid")) {
 		//Il n'y a pas d'uid. On verifie si l'auteur avait déjà un compte SPIP en s'appuyant sur son e-mail
@@ -57,63 +59,62 @@ function auth_fblogin ($login, $pass, $serveur='') {
 					array('nom'=> $fbme['name'], 
 						  'email' => $fbme['email'],
 						  'login' => $fbme['email'],
-						  'pass' => '',
+						  'pass' => $password,
 						  'statut' => "1comite",
 						  'source' => "fblogin",
 						  'fb_uid' => $uid));
-				return $auteur=sql_fetsel("*", "spip_auteurs", "id_auteur=".sql_quote($id_auteur),'','','','',$serveur);
+				$auteur=sql_fetsel("*", "spip_auteurs", "id_auteur=".sql_quote($id_auteur),'','','','',$serveur);
 				}
 				// SPIP a trouvé un e-mail correspondant, on va juste ajouter l'uid à l'auteur existant
 			else {
 				$auteur = sql_updateq("spip_auteurs",array('source'=>"fblogin",'fb_uid' => $uid),"email =".sql_quote($fbme['email']));
-				return $auteur=sql_fetsel("*", "spip_auteurs", "fb_uid=".sql_quote($uid),'','','','',$serveur);
+				$auteur=sql_fetsel("*", "spip_auteurs", "fb_uid=".sql_quote($uid),'','','','',$serveur);
 				}
 		}
 	else {
 		// l'uid Facebook de l'auteur existe, il faut juste retrouver ses informations pour le logguer
 		$auteur = sql_fetsel("*", "spip_auteurs", "fb_uid=" . sql_quote($uid) . " AND source='fblogin'",'','','','',$serveur);
-		return $auteur;
 	}
 	
-
 	$login = $auteur['login'];
-
-	
-	// * Si la session existe, la procedure continue en redirigeant
-	// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
-	// sur la page login, en cas de reussite, sur l'action controler_openid
-	// * S'il la session n'existe pas, on est de retour ici, et on continue
-	// pour d'autres methodes d'identification
-	include_spip('inc/fblogin');
-	$retour = auth_url_retour_login('fblogin', $login, url_absolue(self()));
-	// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
-	// on la renvoie
-	return $erreurs_fblogin;
+	return $auteur;
 }
  
-
 function auth_fblogin_terminer_identifier_login($login, $serveur=''){
-	include_spip('inc/fblogin');
-	$retour = auth_url_retour_login('fblogin', $login);
-	$auteur = terminer_authentification_fblogin($retour);
+	// Création de l'objet Facebook
+	$facebook = new Facebook(array(
+	  'appId'  => '_FB_APP_ID',
+	  'secret' => '_FB_SECRET_ID',
+	  'cookie' => true,
+	));
+	
+	$session = $facebook->getSession();
 
-	if (is_string($auteur))
-		return $auteur; // erreur !
+	$_SESSION['fb_session'] = $session;
+	$uid = $facebook->getUser();
+	$fbme = $facebook->api('/me');
+	
+	$auteur = sql_fetsel("*", "spip_auteurs", "fb_uid=" . sql_quote($uid) . " AND source='fblogin'",'','','','',$serveur);
 
-	if (is_array($auteur)
-		AND isset($auteur['fb_uid'])
-		AND $fb_uid = $auteur['fb_uid']
-	  AND $auteur = sql_fetsel("*", "spip_auteurs", "fb_uid=" . sql_quote($uid) . " AND source='fblogin'",'','','','',$serveur)){
-
-		$auteur['auth'] = 'fblogin'; // on se log avec cette methode, donc
-		return $auteur;
-	}
-	return false;
+	return $auteur;
 }
 
-
 function auth_fblogin_retrouver_login($login, $serveur='') {
-	if($auteur = sql_fetsel("*", "spip_auteurs", "login=".sql_quote($login),'','','','',$serveur)) {
+	// Création de l'objet Facebook
+	$facebook = new Facebook(array(
+	  'appId'  => '_FB_APP_ID',
+	  'secret' => '_FB_SECRET_ID',
+	  'cookie' => true,
+	));
+	
+	$session = $facebook->getSession();
+
+	$_SESSION['fb_session'] = $session;
+	$uid = $facebook->getUser();
+	$fbme = $facebook->api('/me');
+
+	
+	if($auteur = sql_fetsel("*", "spip_auteurs", "fb_uid=".sql_quote($uid),'','','','',$serveur)) {
 		return $auteur;
 	}
 	
@@ -125,5 +126,6 @@ function auth_fblogin_formulaire_login($flux){
 	$flux['data'] = fblogin_login_form($flux['data'],$flux['args']['contexte']);
 	return $flux;
 }
+
 
 ?>
