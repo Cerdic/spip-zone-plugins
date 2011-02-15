@@ -31,6 +31,11 @@
 		<nom>header_prive</nom>
 		<inclure>gestion_projets_pipelines.php</inclure>
 	</pipeline>	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>gestion_projets_autoriser.php</inclure>
+	</pipeline>		
+	
 	<fonctions>gestion_projets_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="saisies" version="[1.8.12;]" />	

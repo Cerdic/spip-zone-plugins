@@ -1,6 +1,7 @@
 <BOUCLE_afficher_contenu(PROJETS){id_projet}>
 	<div class="fiche_objet">
-		<div class="bandeau_actions">#ACTIONS</div>
+		[(#AUTORISER{editer,projet,#ID_PROJET})
+		<div class="bandeau_actions">#ACTIONS</div>]
 		<h1>#NOM</h1>
 		<div class='nettoyeur'></div>	
 		<div id="wysiwyg">
