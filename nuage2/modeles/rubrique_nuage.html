@@ -5,7 +5,7 @@
 ]<B_tags>
 
 
-<ul class="nuage">
+<ul class="nuage menu-liste">
 <BOUCLE_tags(MOTS){id_groupe=#ENV{id_groupe}}{compteur rubriques}{par num titre,titre}>
     [(#REM) définir les mot exposés]
     #SET{expose,''}
@@ -16,11 +16,11 @@
         #SET{expose,' '}   
     ]
 
- <li [class="(#GET{expose}|oui) expose"]>
+ <li class="menu-entree [(#GET{expose}|oui) expose"]>
   <span class="frequence">
     [(#COMPTEUR{rubriques})/#GET{max}]
   </span>    
-  <a rel="tag" href="#URL_MOT" class="nuage[(#COMPTEUR{rubriques}|nuage_note{#GET{max},10})]">#TITRE</a>
+  <a rel="tag" href="#URL_MOT" class="nuage[(#COMPTEUR{rubriques}|nuage_note{#GET{max},10})] [(#GET{expose}|oui) on"]">#TITRE</a>
  </li>
 </BOUCLE_tags>
 </ul>
