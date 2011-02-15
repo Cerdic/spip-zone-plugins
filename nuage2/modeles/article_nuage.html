@@ -1,15 +1,26 @@
 [
-(#REM) Noter les mots de l'article
-]<BOUCLE_mots(MOTS){id_article?}{doublons}></BOUCLE_mots>[
 (#REM) Noter la frequence maxi
-]<BOUCLE_max(MOTS){frequence article}{!doublons}{!par frequence}{0,1}>#SET{max,#FREQUENCE}</BOUCLE_max>[
+]<BOUCLE_max(MOTS){id_groupe=#ENV{id_groupe}}{compteur articles}{par compteur_articles}>#SET{max,#COMPTEUR{articles}}</BOUCLE_max>[
 (#REM) afficher le nuage
 ]<B_tags>
+
+
 <ul class="nuage">
-<BOUCLE_tags(MOTS){frequence article}{!doublons}{par num titre,titre}>
- <li>
-  <span class="frequence">(#FREQUENCE/#GET{max})</span>
-  <a rel="tag" href="#URL_MOT" class="nuage[(#FREQUENCE|nuage_note{#GET{max},10})]">#TITRE</a>
+<BOUCLE_tags(MOTS){id_groupe=#ENV{id_groupe}}{compteur articles}{par num titre,titre}>
+    [(#REM) définir les mot exposés]
+    #SET{expose,''}
+    <BOUCLE_expose(ARTICLES){id_article}{id_mot}{0,1}>
+        #SET{expose,' '}
+    </BOUCLE_expose>
+    [(#ENV{id_mot}|=={#ID_MOT}|oui)
+        #SET{expose,' '}   
+    ]
+
+ <li [class="(#GET{expose}|oui) expose"]>
+  <span class="frequence">
+    [(#COMPTEUR{articles})/#GET{max}]
+  </span>    
+  <a rel="tag" href="#URL_MOT" class="nuage[(#COMPTEUR{articles}|nuage_note{#GET{max},10})]">#TITRE</a>
  </li>
 </BOUCLE_tags>
 </ul>
