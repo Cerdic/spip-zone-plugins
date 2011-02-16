@@ -34,13 +34,14 @@ function qrcode_insert_head($flux) {
 	if (lire_config("qrcode/documents")) {
 		( $taille = lire_config('qrcode/taille') ) || ( $taille = 1 ) ;
 		( $ecc = lire_config('qrcode/ecc') ) || ( $ecc = 'L' ) ;
+		( $cssid = lire_config('qrcode/remplacecssid') ) || ( $cssid = '.documents_joints' ) ;
 		if ($class = lire_config('qrcode/css')) { $class = ' class="'.$class.'"' ; }
 		if ($style = lire_config('qrcode/style')) { $style = ' style="'.$style.'"' ; }
 		$flux .= "<script type='text/javascript'>
 var url_site_spip = '".$GLOBALS['meta']['adresse_site']."' ;
 
 $().ready(function() {
-	$('.documents_joints a').each(function(ndx,item) {
+	$('$cssid a').each(function(ndx,item) {
 		var re = new RegExp('^(https?|ftp)://') ;
 		var url = $(this).attr('href') ;
 		if (!re.test(url)) {

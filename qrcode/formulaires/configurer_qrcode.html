@@ -42,6 +42,11 @@
 				<td colspan="2"><input type="checkbox" name="documents"[(#ENV{documents}|?{' checked'})]/><:qrcode:utiliser_pour_documents_joints:></td>
 			</tr>
 			<tr>
+				<th><label for="remplacecssid"><:qrcode:remplace_css_id:></label></th>
+				<td><input type="text" name="remplacecssid" value="#ENV{remplacecssid}"/></td>
+				<td><:qrcode:remplace_css_id_aide:></td>
+			</tr>
+			<tr>
 				<th><label for="css"><:qrcode:css:></label></th>
 				<td><input type="text" name="css" value="#ENV{css}"/></td>
 				<td><:qrcode:css_aide:></td>

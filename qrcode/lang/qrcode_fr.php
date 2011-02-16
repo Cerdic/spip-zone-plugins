@@ -15,7 +15,9 @@ peuvent contenir diverses informations par exemple : des URL permettant de tél�
 	'style_aide' => 'Tous les qrcodes insérés auront ce style',
 	'taille' => 'Taille :',
 	'taille_aide' => 'Chaque élément du QRcode fera la taille spécifiée.',
-	'utiliser_pour_documents_joints' => 'Utiliser les QRcode pour permettre les téléchargements des documents joints'
+	'utiliser_pour_documents_joints' => 'Utiliser les QRcode pour permettre les téléchargements des documents joints',
+	'remplace_css_id' => 'Identifiant CSS du conteneur commun des documents joints&nbsp;:',
+	'remplace_css_id_aide' => 'Par défaut, c\'est&nbsp;: <code>.documents_joints</code>'
 
 );
 
