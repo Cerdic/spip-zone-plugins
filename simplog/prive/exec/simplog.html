@@ -1,3 +1,4 @@
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{'voir','simplog'}}>
 
 <h1><:simplog:consultation_logs:></h1>
 
@@ -13,9 +14,7 @@
 <BOUCLE_control(DATA){source ls, #EVAL{_DIR_TMP}/*.log*} {file==#ENV{fic}}>
 
 <BOUCLE_fic(DATA){source file, #EVAL{_DIR_TMP}/#FILE}>
-    [(#AUTORISER{'voir','simplog'}|oui)
     <p>#VALEUR</p>
-    ]
 </BOUCLE_fic>
 
 </BOUCLE_control>
@@ -29,7 +28,6 @@
 <div class='cadre cadre-info'>
 <h2><:simplog:plugin_simplog:></h2>
 <p><:simplog:description_simplog:></p>
-[(#AUTORISER{'voir','simplog'}|non) <p><b><:simplog:autoriser_non:></b></p> ]
 </div>
 
 
@@ -48,15 +46,17 @@
 <div class='cadre-info'>
 <h2><:simplog:liste_fic:></h2>
 <dl><BOUCLE_fics(DATA){source ls, #EVAL{_DIR_TMP}/*.log*}{par file}>
-[(#AUTORISER{'voir','simplog'}|oui)
 <dt><a href="#URL_ECRIRE{#ENV{exec},fic=#FILE}">#FILE</a></dt>
-]
 </BOUCLE_fics>
 </dl>
 
-[(#AUTORISER{'voir','simplog'}|oui)
+
 <h2><:simplog:rep_tmp:></h2>
 #EVAL{_DIR_TMP}
-]
+
 </div>
 <!--/#extra-->
+
+</BOUCLE_autoriser>
+<p><b><:simplog:autoriser_non:></b></p>
+<//B_autoriser> 
