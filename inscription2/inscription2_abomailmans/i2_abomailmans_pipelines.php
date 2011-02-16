@@ -43,7 +43,8 @@ function i2_abomailmans_i2_traiter_formulaire($flux)
 	// Pour l'envoi de l'email
 	include_spip('inc/abomailmans');
 	
-	$nom = _request('nom');
+	$nom = _request('nom_famille');
+	$prenom = _request('prenom');
 	$email = _request('email');
 	$listes = _request('listes', true);
 	
@@ -58,7 +59,10 @@ function i2_abomailmans_i2_traiter_formulaire($flux)
 		$proprio_email=$traiter[1];
 		$liste_email=$traiter[2];
 		$sujet=$traiter[3];
-		$body="$nom - $email ".$traiter[4];
+		$body= array(
+			'texte' => $traiter[4],
+			'nom_envoyeur' => $prenom . ' ' . $nom
+		);
 		$headers=$traiter[5];
 
 		abomailman_mail($nom, $email, $proprio_email,$liste_email, $sujet, $body,'',$headers);
