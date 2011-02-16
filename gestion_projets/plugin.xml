@@ -2,8 +2,8 @@
 	<nom>Gestion Projets</nom>
 	<auteur>Rainer Müller</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1.4</version>
-	<version_base>0.1.4</version_base>	
+	<version>0.1.5</version>
+	<version_base>0.1.5</version_base>	
 	<description>
 		Début d'un gestionnaire de projet, pas encore fonctionnel
 	</description>

@@ -1,6 +1,6 @@
 <?php
 
-function definitions_projet($use='',$valeurs=''){
+function definitions_taches($use='',$valeurs=''){
 
 	//Définition des fieldset
 
@@ -17,10 +17,15 @@ function definitions_projet($use='',$valeurs=''){
 		
 
 	//Définition des champs
-	
-	
 
 	$champs=array(
+		'id_projet'=>array(
+			'id_projet'=>$valeurs['id_projet'],
+			'fieldset'=>0,
+			'rang'=>50,
+			'form'=>array(
+				'field'=>'hidden',
+				'name'=>'id_projet',)),	
 		'nom'=>array(
 			'valeur'=>$valeurs['nom'],
 			'fieldset'=>0,
@@ -30,16 +35,15 @@ function definitions_projet($use='',$valeurs=''){
 				'name'=>'nom',
 				'label'=>_T('gestpro:nom'),
 				'obligatoire'=>'oui')),
-		'id_chef_projet'=>array(
-			'valeur'=> $valeurs['id_chef_projet'],
+		'id_parent'=>array(
+			'valeur'=> $valeurs['id_parent'],
 			'fieldset'=>0,	
 			'rang'=>150,		
 			'form'=>array(
-				'field'=>'auteurs',
-				'name'=>'id_chef_projet',
-				'option_statut'=>'oui',
-				'obligatoire'=>'oui',
-				'label'=>_T('gestpro:chef_projet'),
+				'field'=>'selection',
+				'name'=>'id_parent',
+				'label'=>_T('gestpro:tache_parente'),
+				'datas'=>$valeurs['taches_projet']
 				),			
 			),
 		'descriptif'=>array(
@@ -52,6 +56,20 @@ function definitions_projet($use='',$valeurs=''){
 				'label'=>_T('info_descriptif')
 				),
 			),	
+		'participants'=>array(
+			'valeur'=>$valeurs['participants'],		
+			'fieldset'=>0,
+			'rang'=>350,
+			'form'=>array(
+				'field'=>'auteurs_limites',
+				'name'=>'participants',
+				'label'=>_T('gestpro:participants'),
+				'datas'=>$valeurs['participants_parent'],
+				'obligatoire'=>'oui',				
+				'multiple'=>'oui'
+				),
+			),				
+			
 		'montant_heure'=>array(
 			'valeur'=>$valeurs['montant_heure'],		
 			'fieldset'=>1,
@@ -131,54 +149,77 @@ function definitions_projet($use='',$valeurs=''){
 		default:	$valeurs=$champs;
 		}
 	
+
 	return $valeurs;
+
 }
 
-function formulaires_projets_charger_dist($id_projet=''){
+function formulaires_taches_charger_dist(){
 
+	$id_projet=_request('id_projet');
+	$id_tache=_request('id_tache');
+
+	
+
+	
 	//On charge les définitions
 	
-	// Si l'id projet est connu, on charge les données
+	// Si l'id tache est connu, on charge les données de la tâche
 
-	if($id_projet){	
-		$val=sql_fetsel('*','spip_projets','id_projet='.sql_quote($id_projet));	
+	if($id_tache){	
+		$val=sql_fetsel('*','spip_projets_taches','id_tache='.sql_quote($id_tache));
+		$id_projet=$val['id_projet'];
+		$val['participants_parent'] = unserialize(sql_getfetsel('participants','spip_projets','id_projet='.sql_quote($id_projet)));
+		$val['participants']	= unserialize($val['participants']);
+
 		}
-	else $val['id_chef_projet']=session_get('id_auteur');
+	else{
+		$val['participants_parent'] = unserialize(sql_getfetsel('participants','spip_projets','id_projet='.sql_quote($id_projet)));
+		$val['participants']=$val['participants_parent'];	
+		}
+		
 
+	$taches= sql_select('id_tache,nom','spip_projets_taches','id_projet='.sql_quote($id_projet));
+
+	$val['taches_projet']=array();
+	
+	while($data=sql_fetch($taches)){
+		if($id_tache!=$data['id_tache'])$val['taches_projet'][$data['id_tache']]=$data['nom'];
+		}
+	
 	$dates= array('date_debut','date_fin_estimee');
 	
 	foreach($dates as $champ){
 		if(idate('U',$val[$champ])==0)$val[$champ]=date('Y-m-d G:i:s');
 	}
 	
-	$definitions=definitions_projet($use='charger',$val);
-	
+	$val['id_projet'] = _request('id_projet');
 	//On définit les valeurs du formulaire
+	
+	$definitions=definitions_taches($use='charger',$val);
+	
+
 	$valeurs=$definitions['valeurs'];
+
 	
 	foreach($valeurs AS $key=>$champs){
 		$valeurs[$key]=$valeurs[$key]['valeur'];
 	}
-	
 	//Le valeurs pour la construction du formulaire
 	$valeurs['formulaire']=$definitions['formulaire'];
 	
 	// Les fieldsets
 	$valeurs['fieldsets']=$definitions['fieldsets'];	
 	
-	
-	// Les valeurs spécifiques
-	$valeurs['_hidden'].='<input type="hidden" name="id_auteur" value="'.$GLOBALS['visiteur_session']['id_auteur'].'"/>';
-	
+	$valeurs['_hidden'].='<input type="hidden" name="id_projet" value="'.$id_projet.'"/>';
 
 return $valeurs;
 }
 
-function formulaires_projets_verifier_dist($id_projet=''){
+function formulaires_taches_verifier_dist(){
 	include_spip('gestion_projets_fonctions');
-
-	$obligatoire=definitions_projet($use='verifier');
-
+	
+	$obligatoire=definitions_taches($use='verifier');
 
     $erreurs = array();
     foreach($obligatoire as $champ) {
@@ -186,6 +227,7 @@ function formulaires_projets_verifier_dist($id_projet=''){
             $erreurs[$champ] = "Cette information est obligatoire !";
         }
     }
+    
     if(_request('date_debut') OR _request('date_fin_estimee') ){
    	 $date_debut = explode('/',_request('date_debut'));
   	$date_debut= $date_debut[2].'-'.$date_debut[1].'-'.$date_debut[0];
@@ -193,6 +235,7 @@ function formulaires_projets_verifier_dist($id_projet=''){
   	$date_fin_estimee= $date_fin_estimee[2].'-'.$date_fin_estimee[1].'-'.$date_fin_estimee[0];	
   	if (difference($date_debut,$date_fin_estimee,3600)<=0)$erreurs['date_fin_estimee'] = _T('gestpro:erreur_date');
     }
+    
     if (count($erreurs)) {
         $erreurs['message_erreur'] = _T('spip:avis_erreur');
     }
@@ -200,15 +243,19 @@ function formulaires_projets_verifier_dist($id_projet=''){
     return $erreurs;
 }
 
-function formulaires_projets_traiter_dist($id_projet=''){
+function formulaires_taches_traiter_dist(){
    	refuser_traiter_formulaire_ajax(); 	
-	$champs=definitions_projet();
+   	
+   	$id_projet=_request('id_projet');
+	$id_tache=_request('id_tache');
+	   	
+	$champs=definitions_taches();
 	$valeurs=array();
 	
 	foreach($champs as $key=>$val){
 			$valeurs[$key]=_request($key);
 		}
-	
+	$valeurs['id_projet']=$id_projet;
 	$date_debut = explode('/',$valeurs['date_debut']);
 	$valeurs['date_debut']= $date_debut[2].'-'.$date_debut[1].'-'.$date_debut[0];
 	
@@ -216,15 +263,17 @@ function formulaires_projets_traiter_dist($id_projet=''){
 	$valeurs['date_fin_estimee']= $date_fin_estimee[2].'-'.$date_fin_estimee[1].'-'.$date_fin_estimee[0];
 	$valeurs['date_creation']= date('Y-m-d G-i-s');
 	$valeurs['statut']= 'desactive';
+	$valeurs['participants']=serialize(_request('participants'));
+	$valeurs['id_projet']=$id_projet;	
 
 	// Effectuer des traitements
 
 	//Si il n'ya pas l'id_projet on crée un nouveau
-	if(!$id_projet)	$id_projet=sql_insertq('spip_projets',$valeurs);
+	if(!$id_tache)	$id_tache=sql_insertq('spip_projets_taches',$valeurs);
 		
 	//Sinon on modifie
 	
-	else sql_updateq('spip_projets',$valeurs,'id_projet='.sql_quote($id_projet));
+	else sql_updateq('spip_projets_taches',$valeurs,'id_tache='.sql_quote($id_tache));
 	
 	header('Location:'.generer_url_ecrire("projets","voir=projet&id_projet=$id_projet",true));
 

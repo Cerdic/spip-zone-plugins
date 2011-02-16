@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'duree_estimee'=>'Duree estimée',	
 	
 	// E
+	'editer_projet'=>'Editer le projet',		
+	'editer_tache'=>'Editer la tâche',			
+	'erreur_date'=>'Votre date fin estimée doit être postérieure à celle du début',	
 	'explication_heure'=>'En heures',	
 			
 	//G
@@ -30,13 +33,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//N
 	'nom'=>'Nom',
-	'numero_projet'=>'PROJET NUMÉRO',			
+	'numero_projet'=>'PROJET NUMÉRO',	
+	'numero_tache'=>'TACHE NUMÉRO',				
 			
 		
 	//O
 	'options_avancees'=>'Options avancées',		
 	
 	//P
+	'participants'=>'Participants',	
+	'participants_projet'=>'Les Participants du projet',			
 	'projet'=>'Projet',	
 	'projets'=>'Projets',
 			

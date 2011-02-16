@@ -14,13 +14,15 @@ function gestion_projets_upgrade($nom_meta_base_version,$version_cible){
                 		include_spip('base/create');	
 						creer_base();               	
 						maj_tables("spip_projets");
-						maj_tables("spip_projets_timetracker");			
+						maj_tables("spip_projets_timetracker");	
+						maj_tables("spip_projets_taches");			
 				}
 			else{
 				include_spip('base/create');			
 				creer_base();		
 				maj_tables("spip_projets");
-				maj_tables("spip_projets_timetracker");						
+				maj_tables("spip_projets_timetracker");
+				maj_tables("spip_projets_taches");							
 				}
                }
 
@@ -31,6 +33,7 @@ function gestion_projets_upgrade($nom_meta_base_version,$version_cible){
 function gestion_projets_vider_tables($nom_meta_base_version) {
        sql_drop_table("spip_projets");
        sql_drop_table("spip_projets_timetracker");
+       sql_drop_table("spip_projets_taches");        
        effacer_meta($nom_meta_base_version);
 }
 ?>

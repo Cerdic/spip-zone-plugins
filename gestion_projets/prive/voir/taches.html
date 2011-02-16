@@ -1,0 +1,57 @@
+<div>
+	<B_projets>
+	<div class="liste-elements articles">
+	<p class="pagination">#PAGINATION</p>
+		<table class='spip liste'>
+		<caption><strong class="caption"><:gestpro:projets:></strong></caption>
+			<thead>
+				<tr class='first_row'>
+					<th class='statut'><:gestpro:id:></span></th>				
+					<th class='statut'><:gestpro:statut:></span></th>
+					<th class='auteur'><:gestpro:nom:></th>
+					<th class='temps'><:gestpro:duree_estimee:></th>
+					<th class='temps'><:gestpro:duree_reelle:></th>
+					<th class='temps'><:gestpro:montant_estimee:></th>
+					<th class='temps'><:gestpro:montant_reelle:></th>										
+					<th class='active'><:gestpro:action:></th>									
+				</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_projets(PROJETS_TACHES){par nom}{id_projet}{id_parent=0}{pagination}>
+			<tr>
+				<td>#ID_TACHE</td>			
+				<td>#STATUT</td>
+				<td><a href="[(#URL_ECRIRE{projets,voir=tache&id_tache=#ID_TACHE})]">#NOM</a></td>
+				<td>
+				[(#DUREE_ESTIMEE)]
+				</td>					
+				<td>
+				[(#DUREE_REELLE)]
+				</td>
+				<td>
+				[(#MONTANT_ESTIMEE)]
+				</td>					
+				<td>
+				[(#MONTANT_REELLE)]
+				</td>				
+				
+				<td>
+					[(#STATUT|=={active}|non)
+						<a href="#URL_ACTION_AUTEUR{activer,#ID_PROJET-active,#SELF}"><:gestpro:activer:></a>
+						]
+					[(#STATUT|=={active}|oui)
+						<a href="#URL_ACTION_AUTEUR{activer,#ID_PROJET-desactive,#SELF}"><:gestpro:desactiver:></a>
+						]
+				</td>						
+			</tr>
+			</BOUCLE_projets>
+			</tbody>
+			</table>
+		</div>		
+	</B_projets>
+</div>
+<p>
+<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,ajouter_tache}|parametre_url{id_projet,#ID_PROJET})]"><:gestpro:ajouter_tache:></a>
+</p>
+
+
