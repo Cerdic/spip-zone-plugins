@@ -1,22 +1,21 @@
 <plugin>
-	<nom>
-	tagsphere
-	</nom>
+	<nom>tagsphere</nom>
 	<icon>icone.png</icon>
-	<auteur>
-    christophe vallois
-	</auteur>
-	<version>
-		0.1
-	</version>
+	<auteur>christophe vallois</auteur>
+	<version>0.1</version>
 	<etat>stable</etat>
 	<description>
 	Affiche les mots cle du site sous la forme d'un nuage 3D 
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-TagSphere</lien>
-	<prefix>
-	tagsphere
-	</prefix>
+	
+	<prefix>tagsphere</prefix>
+	
+	<pipeline>
+	<nom>insert_head</nom>
+	<inclure>head.php</inclure>
+	</pipeline>
+	
 	<necessite id='SPIP' version='[1.9.0;]' />
 
 	<categorie>navigation</categorie>
