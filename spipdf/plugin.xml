@@ -6,15 +6,20 @@
 	<icon>img_pack/spipdf.png</icon>
 	<licence>(c) 2010 GPL</licence>
 	<lien>http://www.spip-contrib.net/spiPDF-generer-des-contenus-sur-mesure-en-PDF</lien>
-	<version>0.1.1</version>
+	<version>0.2.1</version>
 	<etat>test</etat>
 	<description>
-		Conversion d'un article au format PDF par le biais d'un simple squelette cod&eacute; en HTML 4.01.<br />
-		Utilise la librairie [html2pdf->http://www.html2pdf.fr]<br />
-		N&eacute;cessite PHP 5.
+		Conversion d'un article au format PDF par le biais d'un simple squelette cod&eacute; en HTML 4.01.<br /><br />
+		Utilise la librairie [HTML2PDF->http://www.html2pdf.fr] ou la librairie [mPDF->http://mpdf.bpm1.com]<br /><br />
+		N&eacute;cessite PHP 5 et <strong>l'installation obligatoire</strong> de [HTML2PDF->http://www.html2pdf.fr] et/ou de [mPDF->http://mpdf.bpm1.com] dans le répertoire lib/ 
+        à la racine de SPIP ou dans le répertoire lib/ du plugin.
 	</description>
 	<prefix>spipdf</prefix>
 	<necessite id="SPIP" version='[2.0.0;]' />
+	<pipeline>
+		<nom>pre_typo</nom>
+		<inclure>spipdf.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>recuperer_fond</nom>
 		<inclure>spipdf.php</inclure>
@@ -24,4 +29,6 @@
 		<inclure>spipdf.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
+    <!--<necessite id="lib:html2pdf" src="http://sourceforge.net/projects/phphtml2pdf/files/current release PHP5/html2pdf_v4.01_php5.zip/download?use_mirror=freefr" />
+    <necessite id="lib:mpdf" src="http://mpdf1.com/repos/download.php?file=MPDF50" />-->
 </plugin>
