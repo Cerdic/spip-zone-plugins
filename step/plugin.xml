@@ -62,5 +62,5 @@ _ &#169; 2008 2010
 	<necessite id="SPIP" version="[2.1.0;]" />
 
 	<categorie>maintenance</categorie>
-	<tags>admin,plugins,install</tags>
+
 </plugin>
