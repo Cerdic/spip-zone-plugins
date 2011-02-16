@@ -5,6 +5,10 @@
 /*
  * @requires OpenLayers.Layer.Vector
  */
+ 
+// Fonction de chargement
+function GeoportailInitLayerLocator()
+{
 /**
  * Class: OpenLayers.Layer.Vector.Locator
  * Couche pour la localisation
@@ -12,9 +16,6 @@
  * Inherits from:
  * - <OpenLayers.Layer.Vector>
  */
-
-// Test pour inclusion si API pas chargee (bug IE)
-if (typeof(Geoportal)!='undefined') {
 
 OpenLayers.Layer.Vector.Locator = OpenLayers.Class(OpenLayers.Layer.Vector, 
 {	

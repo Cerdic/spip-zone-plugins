@@ -47,6 +47,11 @@ function geoportail_install($action){
 			{	spip_query("ALTER TABLE spip_geopositions ADD id_dep char(3)");
 				spip_query("ALTER TABLE spip_geopositions ADD id_com char(3)");
 			}
+			// Mettre a jour le niveau d'affichage des geoservices
+			$desc = sql_showtable("spip_geoservices", true, '');
+			if (isset($desc['field']['id_geoservice']) && !isset($desc['field']['niveau']))
+			{	spip_query("ALTER TABLE spip_geoservices ADD niveau INTEGER DEFAULT '0' NOT NULL");
+			}
 			
 			// Charger la base
 			$desc = sql_showtable("spip_geopositions", true, '');

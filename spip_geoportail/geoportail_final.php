@@ -25,12 +25,15 @@ function geoportail_affichage_final($page)
     // ]]></script>
 
 ';
-	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
-		$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>';
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
 	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
-		$engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>'
-			.'<style>.gpControlTermsOfService { margin:2px !important; bottom:38px !important; }</style>';
+		$engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
+	}
+	if (strpos($page, '<!--_SPIP_GEOPORTAIL_BING-->'))
+	{	// $engine .= '<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>';
+	}
+	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
+	{	$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>';
 	}
 		
 	// Inclure l'API dans le Header

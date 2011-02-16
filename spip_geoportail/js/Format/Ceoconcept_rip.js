@@ -5,6 +5,10 @@
 /*
  * @requires Geoportal.Format.Geoconcept.js
  */
+ 
+// Fonction de chargement
+function GeoportailInitFormatCeoconcept()
+{
 /**
  * Class: Geoportal.Format.Geoconcept.rip
  * Write support for Geoconcept export text files.
@@ -12,9 +16,6 @@
  * Inherits from:
  * - <Geoportal.Format.Geoconcept>
  */
-
-// Test pour inclusion si API pas chargee (bug IE)
-if (typeof(Geoportal)!='undefined') {
 
 Geoportal.Format.Geoconcept.rip = OpenLayers.Class(Geoportal.Format.Geoconcept, 
 {

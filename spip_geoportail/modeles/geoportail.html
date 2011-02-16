@@ -270,7 +270,7 @@ FIN gestion de l'espace prive
 ]<?php } ?>
 
 <!-- La carte #[(#ENV{id_geoportail,0})]-->
-<div class='GeoportalMapDiv' id='GeoportalMapDiv#ENV{id_geoportail,0}' style="[float:(#ALIGN|match{left|right}); ][width:(#ENV{width}|replace{pc,%}); ][height:(#ENV{height}|replace{pc,%}); ]" ><!-- --></div>
+<div class='GeoportalMapDiv #MODE' id='GeoportalMapDiv#ENV{id_geoportail,0}' style="[float:(#ALIGN|match{left|right}); ][width:(#ENV{width}|replace{pc,%}); ][height:(#ENV{height}|replace{pc,%}); ]" ><!-- --></div>
 [(#REM) Surcharger l'affichage du viewer]
 <link type="text/css" href="#CHEMIN{css/geoportail_carte.css}" rel="stylesheet" />
 

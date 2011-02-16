@@ -55,7 +55,7 @@ function exec_geoservice()
 			// Logo de la rubrique
 			$iconifier = charger_fonction('iconifier', 'inc');
 			$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_service');
-			echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', false);
+			echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', autoriser('modifier', 'geoservice'));
 			
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'geoservice','id_geoservice'=>$id_geoservice),'data'=>''))
 		.creer_colonne_droite('', true)

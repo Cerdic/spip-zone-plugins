@@ -39,18 +39,22 @@ function action_geoportail_search_dist()
 	include_spip('inc/compat_192');
 	include_spip('inc/geoupload');
 
-	function select_match ($q, $zone, $code, $extended=false)
-	{	// Recherche etendue
-		if ($extended) $query = "MATCH(asciiname,cpostal) AGAINST ('*".addslashes($q)."*' IN BOOLEAN MODE) ";
-		// recherche stricte mais avec notion de pertinence
-		else $query = "MATCH(asciiname,cpostal) AGAINST ('".addslashes($q)."') ";
+	function select_match ($q, $zone, $code, $extended='normal')
+	{	switch ($extended)
+		{	// Recherche etendue
+			case 'extended': $query = "MATCH(asciiname,cpostal) AGAINST ('*".addslashes($q)."*' IN BOOLEAN MODE) "; break;
+			// recherche stricte mais avec notion de pertinence
+			case 'normal': $query = "MATCH(asciiname,cpostal) AGAINST ('".addslashes($q)."') "; break;
+			// Strict
+			default : $query = "asciiname = '".addslashes($q)."' "; break;
+		}
 		// Limiter la recheche
 		if ($zone && $zone !='') $query .= " AND zone = '".$zone."' ";
 		if ($code && $code !='') $query .= " AND feature_class = '".$code."' ";
 		// Recherche une commune
 		else $query .= " AND feature_class != '0' ";
 		// Proposer un classement en mode etendu
-		if ($extended) $query .= " ORDER BY population DESC";
+		if ($extended == 'extended') $query .= " ORDER BY population DESC";
 		// Pas trop !
 		$query .= " LIMIT 0,100";
 		// Lancer la recherche
@@ -80,7 +84,7 @@ function action_geoportail_search_dist()
 		echo "[\n";//.$q."\n";
 
 		// Recherche de la commune 
-		if (!select_match ($q, $zone, $code)) select_match ($q, $zone, $code, true);
+		if (!select_match ($q, $zone, $code)) if (!select_match ($q, $zone, $code, 'extended')) select_match ($q, $zone, $code, 'strict');
 
 		// FIN
 		echo "]";

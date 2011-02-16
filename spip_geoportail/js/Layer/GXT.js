@@ -8,6 +8,9 @@
  * @requires OpenLayers/Request/XMLHttpRequest.js
  */
 
+// Fonction de chargement
+function GeoportailInitLayerGXT()
+{
 /**
  * Class: OpenLayers.Layer.GXT
  * Create a vector layer by parsing a GXT file. The GXT file is
@@ -156,3 +159,4 @@ OpenLayers.Layer.GXT = OpenLayers.Class(OpenLayers.Layer.Vector, {
 
     CLASS_NAME: "OpenLayers.Layer.GXT"
 });
+}

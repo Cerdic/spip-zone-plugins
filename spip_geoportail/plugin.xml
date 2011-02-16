@@ -13,8 +13,9 @@
 		test
 	</etat>
 	<description>
-Int&eacute;gration de l'API G&eacute;oportail dans SPIP
-- cr&eacute;ation d'une table de GEOPOSITIONS d'objets SPIP
+Affichage de cartes dans SPIP (G&eacute;oportail, OpenStreetMap, Google Maps, Yahoo!...).
+_ Utilisation de l'API G&eacute;oportail (Openlayers) et g&eacute;or&eacute;f&eacute;rencement des objets SPIP :
+- cr&eacute;ation d'une table de GEOPOSITIONS de position pour les objets SPIP
 - formulaire pour la saisie du geopositionnement des objets SPIP (articles, auteurs, etc.)
 - int&eacute;gration de geoservices WMS,WFS,...
 - crit&egrave;re geoposition pour jointure avec les tables SPIP

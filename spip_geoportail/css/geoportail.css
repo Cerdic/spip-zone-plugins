@@ -29,11 +29,6 @@
 {	z-index:2001;
 }
 
-/** GMAP : afficher le (c) au dessus */
-.olLayerGooglePoweredBy {
-	bottom:15px !important;
-}
-
 /** Geoportail */
 .GeoportalMapDiv
 {	width:100%;
@@ -148,4 +143,33 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 	-moz-border-radius : 5px;
 	padding:4px;
 
+}
+
+/** Cartes Yahoo! **/
+/** Decaler les conditions d'utilisation vers le haut */
+.YHOO .gpControlTermsOfService 
+{	margin:2px !important; 
+	bottom:38px !important; 
+} 
+
+/** Ne pas masquer le logo yahoo */
+.YHOO .gpControlLogo 
+{	bottom:20px!important; 
+}
+
+/** Cartes Google **/
+/** Decaler les conditions d'utilisation vers le haut */
+.GMAP .gpControlTermsOfService 
+{	margin:4px !important; 
+	bottom:14px !important; 
+} 
+
+/** Decaler le logo Google */
+.GMAP .olLayerGooglePoweredBy {
+	bottom:26px !important;
+}
+
+/** Ne pas masquer les conditions d'utilisation */
+.GMAP .gpControlLogo 
+{	bottom:12px !important; 
 }

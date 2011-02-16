@@ -36,22 +36,21 @@ jQuery.geoportail =
 	// Fonction d'initialisation des cartes
 	initMap: function(dirPlug) 
 	{	//alert ("initMap '"+typeof(Geoportal)+"'");
-		// IE demande une attente
-		if (jQuery.browser["msie"]) {	// API chargee ?
-			if (typeof (Geoportal) == 'undefined' ||
-				typeof (Geoportal.Viewer) == 'undefined' ||
-				typeof (Geoportal.Viewer.Standard) == 'undefined' ||
-				typeof (document.namespaces) != 'object')
-			//if (typeof(Geoportal) == "undefined") 
-			{
-				setTimeout("jQuery.geoportail.initMap()", 500); //500 millisecondes
-				return;
-			}
-		}
-		// Chargement des classes Geoportail (pour IE)
-		Geoportal.Util.loadJS(dirPlug + "js/Format/Ceoconcept_rip.js");
-		Geoportal.Util.loadJS(dirPlug + "js/Layer/Locator.js");
-		Geoportal.Util.loadJS(dirPlug + "js/Layer/GXT.js");
+		if (typeof(OpenLayers)=='undefined' ||
+			typeof (Geoportal) == 'undefined' ||
+			typeof (Geoportal.Viewer) == 'undefined' ||
+			typeof (Geoportal.Viewer.Standard) == 'undefined' ||
+			(jQuery.browser["msie"] && typeof (document.namespaces) != 'object'))        
+		{
+            window.setTimeout('jQuery.geoportail.initMap();', 300);
+            return;
+        }
+        // ready !
+
+		// Chargement des classes Geoportail 
+		GeoportailInitLayerLocator();			// Geoportal.Util.loadJS(dirPlug + "js/Layer/Locator.js");
+		GeoportailInitLayerGXT();				// Geoportal.Util.loadJS(dirPlug + "js/Layer/GXT.js");
+		GeoportailInitFormatCeoconcept();		// Geoportal.Util.loadJS(dirPlug + "js/Format/Ceoconcept_rip.js");
 
 		//
 		var i;
@@ -410,7 +409,7 @@ jQuery.geoportail =
 		// Ne pas afficher...
 		g.displayInLayerSwitcher= false;
 		g.setVisibility(false);
-		l.setVisibility(true);
+		//l.setVisibility(true);
 	},
 
 	// Ajouter un layer OSM
@@ -419,8 +418,7 @@ jQuery.geoportail =
 		if (!options) options={};
 		var l = new OpenLayers.Layer.OSM(
 			titre,
-			[
-				"http://a."+server+"/${z}/${x}/${y}.png",
+			[	"http://a."+server+"/${z}/${x}/${y}.png",
 				"http://b."+server+"/${z}/${x}/${y}.png",
 				"http://c."+server+"/${z}/${x}/${y}.png"
 			],
@@ -441,7 +439,37 @@ jQuery.geoportail =
 		map.getMap().addLayer(l);
 		return l;
 	},
-	
+
+	// Ajouter un layer MapQuest
+	addMQSTLayer: function (map, titre, server, info, options)
+	{	if (!info) info={};
+		if (!options) options={};
+		var l = new OpenLayers.Layer.OSM(
+			titre,
+			[	"http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png",
+				"http://otile2.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png",
+				"http://otile3.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png",
+				"http://otile4.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png"
+			],
+    		{	projection: new OpenLayers.Projection("EPSG:900913"),
+				units: "m",
+				numZoomLevels: (options.numZoom ? options.numZoom : 19),
+				minZoomLevel: (options.minZoom ? options.minZoom : 1),
+				maxZoomLevel: (options.maxZoom ? options.maxZoom : 19),
+				maxResolution: 156543.0339,
+				maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
+				visibility: (typeof(options.visibility)=='undefined' ? false : options.visibility),
+				opacity: (typeof(options.opacity)=='undefined' ? 1 : options.opacity),
+				description: info.descriptif,
+				metadataURL: info.url,
+				isBaseLayer: false,
+				originators: [{ logo: "osm", pictureUrl: "http://wiki.openstreetmap.org/Wiki.png", url: "http://wiki.openstreetmap.org/wiki/WikiProject_France"},
+					{ logo: "mquest", pictureUrl: "http://www.mapquestapi.com/cdn/common/images/large-logo.png", url: "http://www.mapquest.com/"}]
+			});
+		map.getMap().addLayer(l);
+		return l;
+	},
+		
 	// Ajouter un layer Google Map
 	addGMAPLayer: function (map, titre, type, info, options)
 	{	if (!info) info={};
@@ -455,7 +483,8 @@ jQuery.geoportail =
 				maxResolution: 156543.0339,
 				maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
 				visibility: (typeof(options.visibility)=='undefined' ? false : options.visibility),
-				opacity: (typeof(options.opacity)=='undefined' ? 1 : options.opacity),
+				// opacity: (typeof(options.opacity)=='undefined' ? 1 : options.opacity),
+				opacity:'none',
 				description: info.descriptif,
 				metadataURL: info.url,
 				isBaseLayer: false,
@@ -465,7 +494,7 @@ jQuery.geoportail =
 		return l;
 	},
 	
-	// Ajouter un layer Yahoo Map
+	// Ajouter un layer Yahoo! Map
 	addYHOOLayer: function (map, titre, type, info, options)
 	{	if (!info) info={};
 		if (!options) options={};
@@ -490,9 +519,34 @@ jQuery.geoportail =
 		return l;
 	},
 	
+	// Ajouter un layer Bing Map
+	addBINGLayer: function (map, titre, type, info, options)
+	{	if (!info) info={};
+		if (!options) options={};
+		var l ;
+		l = new OpenLayers.Layer.VirtualEarth(
+			titre,
+			{	type: VEMapStyle[type],
+    			projection: new OpenLayers.Projection("EPSG:900913"),
+				units: "m",
+				numZoomLevels: (options.numZoom ? options.numZoom : 18),
+				//minZoomLevel: (options.minZoom ? options.minZoom : 1),
+				//maxZoomLevel: (options.maxZoom ? options.maxZoom : 18),
+				maxResolution: 156543.0339,
+				maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
+				visibility: (typeof(options.visibility)=='undefined' ? false : options.visibility),
+				// opacity: (typeof(options.opacity)=='undefined' ? 1 : options.opacity),
+				description: info.descriptif,
+				metadataURL: info.url,
+				isBaseLayer: false,
+				sphericalMercator: true
+		});
+		map.getMap().addLayer(l);
+		return l;
+	},
+	
 	// Fonction principale pour l'affichage de la carte
-	//showMap: function(map, zone, lon, lat, ech, layerctrl, toolbox, infobox, carto, ortho) 
-	showMap: function(map, mode, pos, box, visu) //zone, lon, lat, ech, layerctrl, toolbox, infobox, carto, ortho) 
+	showMap: function(map, mode, pos, box, visu) 
 	{	var lon = pos.lon;
 		var lat = pos.lat;
 		var ech = pos.zoom;
@@ -571,21 +625,36 @@ jQuery.geoportail =
 			else
 			*/
 			
+			// Forcer l'affichage ortho/carto
+			var ortho = (this.getParam("ortho")) ? Number(this.getParam("ortho")) : (visu.ortho=='' ? 1 : Number(visu.ortho));
+			var carto = (this.getParam("carto")) ? Number(this.getParam("carto")) : (visu.carto=='' ? (mode=='OSM' ? 1:0.3) : Number(visu.carto));
+			var mixte = (ortho>0 && carto>0);
+
 			switch (mode)
 			{	// OpenStreetMap
 				case 'OSM':
 					var l;
+					l = this.addMQSTLayer ( map, "OSM (MapQuest)", 
+						"",
+						{	url: "http://developer.mapquest.com/web/products/open/map",
+							descriptif: "<p style='margin:0 1em'>MapQuest OSM Open Tile.<br/>Tiles Courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'><br/>Map data (c) OpenStreetMap (and) contributors, CC-BY-SA</p>"
+						}
+					);
+					
 					l = this.addOSMLayer ( map, "OSM (Tiles&#064;Home)", 
 						"tah.openstreetmap.org/Tiles/tile",
 						{	url: "http://tah.openstreetmap.org",
-							descriptif: "<p style='margin:0 1em'>The Tiles@home server is the central hub of the Tiles@home distributed rendering system. Clients running all over the world talk to this server to get new rendering jobs, and upload their rendered results.</p>"
+							descriptif: "<p style='margin:0 1em'>The Tiles@home server is the central hub of the Tiles@home distributed rendering system. Clients running all over the world talk to this server to get new rendering jobs, and upload their rendered results.<br/>Map data (c) OpenStreetMap (and) contributors, CC-BY-SA</p>"
 						}
 					);
 					
 					l = this.addOSMLayer ( map, "OSM (Mapnik)", 
 						"tile.openstreetmap.org",
 						{	url: "http://wiki.openstreetmap.org/wiki/Mapnik",
-							descriptif: "<p style='margin:0 1em'>Mapnik is the software we use to render the main Slippy Map layer for OSM, along with other layers such as the 'cycle map' layer and 'noname' layer. It is also the name given to the main layer, so things get a bit confusing sometimes.</p>"
+							descriptif: "<p style='margin:0 1em'>Mapnik is the software we use to render the main Slippy Map layer for OSM, along with other layers such as the 'cycle map' layer and 'noname' layer. It is also the name given to the main layer, so things get a bit confusing sometimes.<br/>Map data (c) OpenStreetMap (and) contributors, CC-BY-SA</p>"
+						},
+						{	visibility : (carto>0),
+							opacity: carto
 						}
 					);
 					/*
@@ -602,26 +671,49 @@ jQuery.geoportail =
 				// Google Map
 				case 'GMAP':
 					var l;
-					l = this.addGMAPLayer ( map, "Google Satellite", 'SATELLITE');
-					l = this.addGMAPLayer ( map, "Google Map", 'ROADMAP');
-					l = this.addGMAPLayer ( map, "Google Hybrid", 'HYBRID');
+					l = this.addGMAPLayer ( map, "Google Satellite", 'SATELLITE', {}, { visibility : (!mixte && ortho>0) });
+					l = this.addGMAPLayer ( map, "Google Map", 'ROADMAP', {}, { visibility : (!mixte && carto>0) });
+					l = this.addGMAPLayer ( map, "Google Hybrid", 'HYBRID', {}, { visibility : mixte });
 					jQuery.geoportail.setBaseLayer(map,l);
 					// Pas d'info (masque le copyright)
 					box.info = 0;
 				break;
-				// Yahoo Map
+				// Yahoo! Map
 				case 'YHOO':
 					var l;
-					l = this.addYHOOLayer ( map, "Yahoo Satelitte", YAHOO_MAP_SAT);
-					l = this.addYHOOLayer ( map, "Yahoo Hybrid", YAHOO_MAP_HYB);
-					l = this.addYHOOLayer ( map, "Yahoo Map", YAHOO_MAP_REG);
+					l = this.addYHOOLayer ( map, "Yahoo Satelitte", YAHOO_MAP_SAT, {}, { visibility : (!mixte && ortho>0) });
+					l = this.addYHOOLayer ( map, "Yahoo Map", YAHOO_MAP_REG, {}, { visibility : (!mixte && carto>0) });
+					l = this.addYHOOLayer ( map, "Yahoo Hybrid", YAHOO_MAP_HYB, {}, { visibility : mixte });
 					jQuery.geoportail.setBaseLayer(map,l);
 					// Pas d'info (masque le copyright)
 					box.info = 0;
 				break;
+				// Bing Map
+				/* marche po => attendre prochaine version d'OL et layers.Bing * /
+				case 'BING':
+					var l;
+					l = this.addBINGLayer ( map, "Bing Satelitte", 'Aerial');
+					jQuery.geoportail.setBaseLayer(map,l);
+					// Pas d'info (masque le copyright)
+					box.info = 0;
+				break;
+				/* */
 				case 'mini': box.info = box.tools = box.layer = 0				
 				default: 
 					map.addGeoportalLayers(); 
+					// Affichage des des couches ORTHO et CARTO
+					for (i = 0; i < map.getMap().layers.length; i++) 
+					{	var lyr = map.getMap().layers[i];
+						if (lyr.name == 'geoportal.catalogue.maps.theme.name' || lyr.name == "GEOGRAPHICALGRIDSYSTEMS.MAPS") 
+						{	if (carto==0) lyr.setVisibility(false); 
+							else lyr.setOpacity(carto); 
+						}
+						if (lyr.name == 'geoportal.catalogue.orthophotos.theme.name' || lyr.name == 'ORTHOIMAGERY.ORTHOPHOTOS') 
+						{	if (ortho==0) lyr.setVisibility(false); 
+							else lyr.setOpacity(ortho); 
+						}
+					}
+			
 				break;
 			};
 
@@ -648,29 +740,6 @@ jQuery.geoportail =
 				default: map.setInformationPanelVisibility(true); break;
 			}
 
-			// Forcer l'affichage ortho/carto
-			var ortho = (this.getParam("ortho")) ? this.getParam("ortho") : visu.ortho;
-			var carto = (this.getParam("carto")) ? this.getParam("carto") : visu.carto;
-
-			// Affichage des des couches ORTHO et CARTO
-			for (i = 0; i < map.getMap().layers.length; i++) 
-			{	var lyr = map.getMap().layers[i];
-				if (lyr.name == 'geoportal.catalogue.maps.theme.name' || lyr.name == "GEOGRAPHICALGRIDSYSTEMS.MAPS") 
-				{	switch (carto) 
-					{	case '0': lyr.setVisibility(false); break;
-						case '': break;
-						default: lyr.setOpacity(carto); break;
-					}
-				}
-				if (lyr.name == 'geoportal.catalogue.orthophotos.theme.name' || lyr.name == 'ORTHOIMAGERY.ORTHOPHOTOS') 
-				{	switch (ortho) 
-					{	case '0': lyr.setVisibility(false); break;
-						case '': break;
-						default: lyr.setOpacity(ortho); break;
-					}
-				}
-			}
-			
 			// Outils de recherche (un petit delais pour IE !)
 			if (box.search=='' || box.search=='1') jQuery.geoportail.addSearchTools(map);
 			// Outils de mesure
@@ -806,9 +875,49 @@ jQuery.geoportail =
 		Geoportal.Control.unselectFeature(feature);
 		feature.layer.drawFeature(feature, 'default');
 		feature.popup = null;
+	},
+	
+	/** Synchronisation de cartes */
+	synchro: function (id_map)
+	{	if (!jQuery.isArray(id_map)) return;
+		var c = new Array;
+		var i;
+		for (i=0; i<id_map.length; i++) 
+		{	var ci = this.getCarte(id_map[i]);
+			if (ci)
+			{	// Attendre le chargement de toutes les cartes...
+				if (!ci.map) 
+				{	var ids = "";
+					for (k=0; k<id_map.length; k++) ids += (k!=0 ? ',':'')+id_map[k];
+					window.setTimeout('jQuery.geoportail.synchro(['+ids+']);', 300);
+					return;
+				}
+				c[i] = ci;
+			}
+		}
+		for (i=0; i<c.length; i++) 
+		{	if (!c[i].synchro) c[i].synchro = {}
+			c[i].map.getMap().events.register('moveend', c[i], geoportail_moveSynchro);
+			for (j=0; j<c.length; j++)
+				if (c[i].id != id_map[j]) c[i].synchro[id_map[j]] = c[j];
+		}
+//		registerMouseMove();
 	}
+}
 
-
+function geoportail_moveSynchro (e)
+{	if (!this.synchro) return;
+	var i;	// $.geoportail.synchro([1,2,3])
+	for (i in this.synchro)
+	{	var c = this.synchro[i].map.getMap()
+		var sav = this.synchro[i].synchro;
+		this.synchro[i].synchro = null;
+			c.zoomTo(this.map.getMap().getZoom());
+			var pt = this.map.getMap().getCenter().clone();
+			pt.transform(this.map.getMap().getProjectionObject(),c.getProjectionObject());
+			c.setCenter(pt);
+		this.synchro[i].synchro = sav;
+	}
 }
 
 /** Fonction de telechargement
