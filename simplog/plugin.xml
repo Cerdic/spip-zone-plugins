@@ -2,14 +2,18 @@
 	<nom>Simples Logs</nom>
 	<auteur>luc.tech@free.fr</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<description>
-	Visualisation des logs SPIP
+	Visualisation des logs SPIP par les administrateurs
 	</description>
 	<etat>dev</etat>
 	<icon>asuivre-24.gif</icon>
 	<prefix>simplog</prefix>
-	<bouton id="simplog_bt" parent="configuration">
+        <pipeline>
+            <nom>autoriser</nom>
+            <inclure>inc/simplog_autoriser.php</inclure>
+        </pipeline>
+        <bouton id="simplog_bt" parent="configuration">
 		<icone>asuivre-24.gif</icone>
 		<titre>simplog:logs</titre>   
 		<url>simplog</url>   

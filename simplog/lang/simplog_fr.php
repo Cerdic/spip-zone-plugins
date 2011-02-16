@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'actualiser' => 'Actualiser',
+'autoriser_non' => 'Vous n\'&ecirc;tes pas autoris&eacute;.',
 
 // B
 
@@ -21,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier' => 'Fichier',
+'fichier_inconnu' => 'Fichier inconnu',
 
 // G
 
