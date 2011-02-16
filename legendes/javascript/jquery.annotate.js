@@ -193,7 +193,7 @@
 		///	</summary>
 		var cancel = $('#image-annotate-edit-form form input[name=annuler]');
 		cancel.click(function() {
-			editable.destroy();
+			editable.destroy('cancel');
 			image.mode = 'view';
 		});
 	};
@@ -310,10 +310,12 @@
 	$.fn.getannotateEdit = function(){
 		return this.data("annotateEdit");
 	}
-
-	$.fn.annotateEdit.prototype.destroy = function() {
+	
+	$.fn.annotateEdit.prototype.destroy = function(e) {
 		///	<summary>
 		///		Destroys an editable annotation area.
+		///     e is the action, only used for cancel, permit to not load any content
+		///		and fall back to the old state
 		///	</summary>
 		this.image.canvas.children('.image-annotate-edit').hide();
 		this.area.resizable('destroy');
@@ -325,9 +327,11 @@
 		this.form.remove();
 		// destroy est appele au retour du formulaire, donc si creation ou suppression
 		// on efface donc toutes les notes et on recharge
-		$.fn.annotateImage.clear(this.image);
-		$.fn.annotateImage.ajaxLoad(this.image);
-		$.fn.annotateImage.ajaxDestroy(this.image);
+		if(e != 'cancel'){
+			$.fn.annotateImage.clear(this.image);
+			$.fn.annotateImage.ajaxLoad(this.image);
+			$.fn.annotateImage.ajaxDestroy(this.image);
+		}
 	}
 
 	$.fn.annotateView = function(image, note) {
