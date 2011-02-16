@@ -2,15 +2,14 @@
 	<nom>
 	tagsphere
 	</nom>
+	<icon>icone.png</icon>
 	<auteur>
     christophe vallois
 	</auteur>
 	<version>
 		0.1
 	</version>
-	<etat>
-		dev
-	</etat>
+	<etat>stable</etat>
 	<description>
 	Affiche les mots cle du site sous la forme d'un nuage 3D 
 	</description>
