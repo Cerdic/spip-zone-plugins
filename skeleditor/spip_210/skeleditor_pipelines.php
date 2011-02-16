@@ -50,7 +50,7 @@ function skeleditor_extraire_css($texte){
 
 function skeleditor_affichage_final($texte){
 	if (isset($_COOKIE['spip_admin']) AND $GLOBALS['html']){
-		if ($GLOBALS['var_inclure']){
+		if ((defined('_VAR_INCLURE') AND _VAR_INCLURE) OR $GLOBALS['var_inclure']){
 			$retour = self();
 			$url = generer_url_ecrire('skeleditor','retour='.$retour.'&f=');			
 			$inserer = "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
