@@ -1,0 +1,29 @@
+<plugin>
+	<nom>Tester les urls d'un site SPIP</nom>
+	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]
+	&copy; 2011</auteur>
+	<licence>Distribu&eacute; sous licence GPL</licence>
+	<version>0.1</version>
+	<description>
+	Tester les liens syndiques dans un site SPIP afin de connaître les liens brisés ou défectueux.
+	</description>
+	<lien></lien>
+	<etat>dev</etat>
+	<icon>prive/themes/spip/images/test-ok_24.png</icon>
+	<prefix>testurl</prefix>
+
+	<bouton id='testurl' parent='configuration'>
+	<icone>prive/themes/spip/images/test-ok_24.png</icone>
+		<titre>testurl:tester_url</titre>
+		<url>test_url</url>
+	</bouton>
+	<bouton id="testurl21" parent="bando_administration">
+	<icone>prive/themes/spip/images/test-ok_16.png</icone>
+		<titre>testurl:tester_url</titre>
+		<url>test_url</url>
+	</bouton>
+
+	<categorie>squelette</categorie>
+	<necessite id='SPIP' version='[2.0.10;]' />
+	<salvatore module="testurl" reference="fr" />
+</plugin>
