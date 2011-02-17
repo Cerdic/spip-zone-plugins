@@ -88,13 +88,13 @@ function action_ajouter_comptes() {
 		/* on recupere dans $_POST toutes les keys des entrees commencant par destination_id */
 		$toutesDestinationsPOST = array_filter(array_keys($_POST), "destination_post_filter");
 		
-		/* on boucle sur toutes les cles trouvees, les montant ont des noms de champs identiques mais prefixes par montant_ */
+		/* on boucle sur toutes les cles trouvees, les montants ont des noms de champs identiques mais prefixes par montant_ */
 		$total_destination = 0;
 		$id_inserted = array();
 		foreach ($toutesDestinationsPOST as $destination_id)
 		{
 			$id_destination = _request($destination_id);
-			/* on verifie qu'on n'a pas deja inserer une destination avec cette id */
+			/* on verifie qu'on n'a pas deja insere une destination avec cette id */
 			if (!array_key_exists($id_destination,$id_inserted)) {
 				$id_inserted[$id_destination]=0;
 			}

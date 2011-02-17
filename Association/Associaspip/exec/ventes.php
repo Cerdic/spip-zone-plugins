@@ -42,7 +42,7 @@ function exec_ventes(){
 		// TOTAUX
 		$critere = $GLOBALS['association_metas']['pc_ventes'];
 		if ($critere) $critere = " AND imputation=". sql_quote($critere);
-		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) =$annee$critere");
+		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) =$annee$critere", "imputation");
 		while ($data = sql_fetch($query)) {
 			$solde= $data['somme_depenses'] + $data['somme_recettes'];
 			$imputation = $data['imputation'];

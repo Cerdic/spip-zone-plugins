@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_plugin' => 'Options du plugin',
 	'config_libelle_classe_banques' => 'Classe des comptes financiers',
 	'config_libelle_dons'=> 'Gestion des dons et colis',
+	'config_libelle_cotisations'=> 'R&eacute;f&eacute;rence des cotisations',
 	'config_libelle_ventes'=> 'Gestion des ventes associatives',
 	'config_libelle_comptes'=> 'Gestion comptable',
 	'config_libelle_destinations'=> 'Gestion des destinations comptables',
@@ -423,6 +424,8 @@ Commentaire: @commentaire@
 			'erreur_montant_destination' => 'La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l\'op&eacute;ration',
 			'erreur_destination_dupliquee' => 'Une meme destination a &eacute;t&eacute; s&eacute;lectionn&eacute;e plusieurs fois',
 			'erreur_code_plan' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-etre d&eacute;sactiv&eacute;e)',
+			'erreur_configurer_association_titre' => 'Votre saisie contient des erreurs!',
+			'erreur_configurer_association_reference_multiple' => 'Une meme r&eacute;f&eacute;rence comptable ne doit pas etre utilis&eacute;e pour plusieurs fonctions activ&eacute;es(ventes, dons, prets, activit&eacute;s) ou cotisations',
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',
