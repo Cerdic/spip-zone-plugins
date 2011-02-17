@@ -298,6 +298,94 @@ jQuery.geoportail =
 		}
 	},
 
+	/** Supprimer une couche de la carte
+	*/
+	removeGeoservice: function (map, type, layers)
+	{	if (type != "GeoPortail") return;
+		var tab, couches, i, j;
+		tab = new Array();
+		couches = layers.split(/,/g);
+		var i,j;
+		for (i=map.getMap().layers.length-1; i>=0; i--)
+		{	for(j=0; j<couches.length; j++)
+			{	if (map.getMap().layers[i].name == couches[j]) 
+				{	map.getMap().removeLayer(map.getMap().layers[i]);
+					break;
+				}
+			}
+		}
+	},
+	
+	/** Ajouter un geoservice a la carte
+	*/
+	addGeoservice: function (map, type, titre, desc, service, options)
+	{	// Originator (logo ign par defaut)
+		var orig = { logo: (options.logo ? options.logo:'ign') };
+		if (options.picture) 
+		{	if (!options.logo) orig.logo = 'logo'+service.id_geoservice;
+			orig.pictureUrl = options.picture;
+			orig.url = options.link;
+		}
+		// Creer le layer
+		switch (type)
+		{	case "GeoPortail":
+				{	var tab, couches, i, j;
+					tab = new Array();
+					couches = service.layers.split(/,/g);
+					for (i=0; i<map.getMap().layers.length; i++)
+					{	if (map.getMap().layers[i].territory == map.territory) 
+						{	for(j=0; j<couches.length; j++)
+							{	if (map.getMap().layers[i].name == couches[j]) 
+								{	tab[tab.length] = map.getMap().layers[i];
+									map.getMap().layers[i].setOpacity(options.opacity);
+								}
+							}
+						}
+					}
+					if (tab.length>0)
+					{	var l = new Geoportal.Layer.Aggregate (titre, tab, 
+						{	opacity:options.opacity, 
+							visibility:options.visibility, 
+							description: desc,
+							metadataURL: options.link,
+							displayInLayerSwitcher:true 
+						});
+						map.getMap().addLayer ( l );
+					}
+				}
+				break;
+			case "WMS":
+				map.getMap().addLayer(
+					type, titre, service.url,
+					{	//map: (service.map ? service.map : null),
+						layers:	service.layers,
+						format: service.format,
+						transparent:'true'
+					},
+					{	singleTile:true,
+						projection: 'EPSG:4326',
+						srs:{'EPSG:4326':'EPSG:4326', 'EPSG:3785':'EPSG:3785'},//some supported SRS from capabilities
+						units:'degrees',
+						// maxExtent expressed in EPSG:4326 :
+						maxExtent: options.maxextent,
+						minZoomLevel: options.minzoom,
+						maxZoomLevel: options.maxzoom,
+						opacity: options.opacity,
+						isBaseLayer: false,
+						description: desc,
+						metadataURL: options.link,
+						visibility: options.visibility,
+						originators: [ orig ]
+					}
+				);
+				break;
+			case "WMS-C":
+			case "WFS":
+			case "KML":
+			default: break;
+		}
+	},
+	
 	/** Ajouter un fichier GPX,KML,GXT
 	Zoom sur l'extension du fichier
 	*/

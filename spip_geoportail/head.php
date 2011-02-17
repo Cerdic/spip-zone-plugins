@@ -2,6 +2,11 @@
 
 function geoportail_insert_head($flux)
 {
+	$logo = find_in_path(_DIR_IMG."geoserviceon0.png");
+	if (!$logo) $logo = find_in_path(_DIR_IMG."geoserviceon0.gif");
+	if (!$logo) $logo = find_in_path(_DIR_IMG."geoserviceon0.jpg");
+	if ($logo) $logo = "jQuery.geoportail.setOriginator ('$logo','".$GLOBALS['meta']['adresse_site']."')"; 
+
 	$flux .= 
 '
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/geoportail.js"></script>
@@ -10,8 +15,11 @@ function geoportail_insert_head($flux)
 <script language="javascript" type="text/javascript">
 '
 .($GLOBALS['meta']['geoportail_osm_tah'] ? "jQuery.geoportail.osm_tah=true;" : "jQuery.geoportail.osm_tah=false;")
+."\n"
 .($GLOBALS['meta']['geoportail_osm_mquest'] ? "jQuery.geoportail.osm_mquest=true;" : "jQuery.geoportail.osm_mquest=false;")
+."\n"
 .($GLOBALS['meta']['geoportail_osm_layer'] ? "jQuery.geoportail.osm_layer='".$GLOBALS['meta']['geoportail_osm_layer']."';" : "jQuery.geoportail.osm_mquest='mapnik';")
+."\n".$logo
 .'
 </script>
 <!--_GEOPORTAIL_HEADER_-->

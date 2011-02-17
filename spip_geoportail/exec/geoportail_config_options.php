@@ -23,16 +23,28 @@ function exec_geoportail_config_options()
 	{	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('geoportail:geoportail'), "", "");
+		echo gros_titre("Plugin "._T('geoportail:geoportail'), '', false);
 
 		echo debut_gauche('',true);
 
+		// Logo de la rubrique
+		$iconifier = charger_fonction('iconifier', 'inc');
+		$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_spip');
+		if ($GLOBALS['spip_version_code']>2) $b=false;
+		else $b=autoriser('modifier', 'geoservice');
+		echo debut_cadre_trait_couleur("", true)
+			.$iconifier('id_geoservice', 0, 'geoservice', $b)
+			._T("geoportail:logo_info")
+			.fin_cadre_trait_couleur(true);
+	
+		echo creer_colonne_droite('', true);
+		 
 		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), "racine-site-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), "administration-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:rgc'), generer_url_ecrire("geoportail_config_rgc"), "breve-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);
 
 		echo debut_droite('',true);
-		echo gros_titre("<p>Plugin "._T('geoportail:geoportail')."</p>", '', false);
 		
  		$garticle = ($GLOBALS['meta']['geoportail_geoarticle'])?"CHECKED":"";
  		$gauteur = ($GLOBALS['meta']['geoportail_geoauteur'])?"CHECKED":"";

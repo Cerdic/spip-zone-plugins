@@ -14,7 +14,7 @@
 **/
 ]<B_serv>
 <table class=arial2 cellpadding=2 cellspacing=0 width=100% style="margin:0; border:1px solid black;" >
-<BOUCLE_serv(GEOSERVICES){id_rubrique?}>
+<BOUCLE_serv(GEOSERVICES){id_rubrique?}{par niveau}>
 	<tr class=tr_liste >
 	<td class=arial11 width=1%>
 		[(#SPIP_VERSION|>{2}|?{
@@ -22,12 +22,18 @@
 		,
 		[<img src="(#CHEMIN{images/puce-[(#STATUT|puce_statut)].gif})" />]
 		})]
+	</td><td class=arial11 width=1% style="text-align:right"	>
+		#ID_GEOSERVICE
+	</td>
 	</td><td class=arial1 width=1%>
 		[(#LOGO_GEOSERVICE||image_reduire{30})]
 	</td><td class=arial11>
 		[(#MODIFIER)<a href="[(#URL_ECRIRE{geoservice,id_geoservice=#ID_GEOSERVICE})]" [title="(#DESCRIPTIF|couper{100})"]>]#TITRE[(#MODIFIER)</a>]
 	</td><td class=arial11 width=1%>
 		#TYPE
+	</td>
+	</td><td class=arial11 style="text-align:right; padding-right:1em; width:3em;">
+		#NIVEAU
 	</td>
 	</tr>
 </BOUCLE_serv>

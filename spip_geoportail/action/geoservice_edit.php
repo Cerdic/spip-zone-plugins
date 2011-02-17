@@ -38,6 +38,7 @@ function action_geoservice_edit_dist()
 		$map = addslashes(_request('map'));
 		$layers = _request('layers');
 		$format = _request('format');
+		$niveau = intval(_request('niveau'));
 		$maxextent = _request('extent');
 		$minzoom = _request('minzoom');
 		$maxzoom = _request('maxzoom');
@@ -49,19 +50,21 @@ function action_geoservice_edit_dist()
 
 		$link = addslashes(_request('link'));
 		
+		if (!$titre) $titre = _T("ecrire:info_sans_titre");
+		
 		// Modifier ?
 		if ($id_geoservice)
 		{	if (autoriser('modifier','geoservice',$id_geoservice, NULL, array('id_rubrique'=>$id_rubrique)))
 			{	spip_query("UPDATE spip_geoservices SET "
-					."id_rubrique='$id_rubrique',type='$type',titre='$titre',descriptif='$descriptif',url_geoservice='$url',map='$map',layers='$layers',format='$format',maxextent='$maxextent',minzoom='$minzoom',maxzoom='$maxzoom',opacity='$opacity',visibility='$visibility',logo='$logo',link='$link' "
+					."id_rubrique='$id_rubrique',type='$type',titre='$titre',descriptif='$descriptif',url_geoservice='$url',map='$map',layers='$layers',format='$format',niveau='$niveau',maxextent='$maxextent',minzoom='$minzoom',maxzoom='$maxzoom',opacity='$opacity',visibility='$visibility',logo='$logo',link='$link' "
 					."WHERE id_geoservice=$id_geoservice");
 			}
 		}
 		// Nouveau service demande
 		elseif (autoriser ('creer', "geoservice", $id_geoservice, NULL, array('id_rubrique'=>$id_rubrique))) 
 			$id_geoservice = sql_insert("spip_geoservices", 
-				"(id_rubrique,type,titre,descriptif,url_geoservice,map,layers,format,maxextent,minzoom,maxzoom,opacity,visibility,logo,link)", 
-				"('$id_rubrique','$type','$titre','$descriptif','$url','$map','$layers','$format','$maxextent','$minzoom','$maxzoom','$opacity','$visibility','$logo','$link')"
+				"(id_rubrique,type,titre,descriptif,url_geoservice,map,layers,format,niveau,maxextent,minzoom,maxzoom,opacity,visibility,logo,link)", 
+				"('$id_rubrique','$type','$titre','$descriptif','$url','$map','$layers','$format','$niveau','$maxextent','$minzoom','$maxzoom','$opacity','$visibility','$logo','$link')"
 				);
 	}	
 	// Modifier le statut d'un service

@@ -98,158 +98,30 @@ jQuery.geoportail.addMap(
 			
 			<B_poubelle>
 			// Supprimer les layers Geoportail dans un geoservice refuse
-			{	var tab, couches, i, j;
 			<BOUCLE_poubelle(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='Geoportail'}{statut=refuse}>
-				tab = new Array();
-				couches = "#LAYERS";
-				couches = couches.split(/,/g);
-				var i,j;
-				for (i=map.getMap().layers.length-1; i>=0; i--)
-				{	for(j=0; j<couches.length; j++)
-					{	if (map.getMap().layers[i].name == couches[j]) 
-						{	map.getMap().removeLayer(map.getMap().layers[i]);
-							break;
-						}
-					}
-				}
+				jQuery.geoportail.removeGeoservice ( map, "#TYPE", "#LAYERS" );
 			</BOUCLE_poubelle>
-			}
-			</B_poubelle>
-			
-			<B_couches>
-			// Regrouper les layers Geoportail places dans le meme geoservice
-			{	var tab, couches, i, j;
-			<BOUCLE_couches(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='Geoportail'}{statut=publie}>
-				tab = new Array();
-				couches = "#LAYERS";
-				couches = couches.split(/,/g);
-				for (i=0; i<map.getMap().layers.length; i++)
-				{	if (map.getMap().layers[i].territory == map.territory) 
-					{	for(j=0; j<couches.length; j++)
-						{	if (map.getMap().layers[i].name == couches[j]) 
-							{	tab[tab.length] = map.getMap().layers[i];
-								map.getMap().layers[i].setOpacity(#OPACITY);
-							}
-						}
-					}
-				}
-				if (tab.length>0)
-				{	var l = new Geoportal.Layer.Aggregate ("#TITRE", tab, { opacity:#OPACITY, visibility:#VISIBILITY, displayInLayerSwitcher:true });
-					map.getMap().addLayer ( l );
-				}
-			</BOUCLE_couches>
-			}
-			</B_couches>
-			
-			<B_service_WFS>
-			// Ajouter les services WFS disponibles dans les geoservices
-			<BOUCLE_service_WFS(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='WFS'}{statut=afaire}>
-			map.getMap().addLayer
-			(
-            "#TYPE",
-            "#TITRE",
-            "#URL_GEOSERVICE",
-            {
-                typename: '#LAYERS'
-            },
-            {
-                projection: 'EPSG:4326',
-                units:'degrees',
-                // maxExtent expressed in EPSG:4326 :
-                maxExtent: new OpenLayers.Bounds(#MAXEXTENT),
-                minZoomLevel: #MINZOOM,
-                maxZoomLevel: #MAXZOOM,
-                opacity: #OPACITY,
-                isBaseLayer: false,
-                visibility: #VISIBILITY,
-                originators: [
-                    {	logo:'ign', 
-                       [,logo:'logo#ID_GEOSERVICE',
-                        pictureUrl: '(#LOGO_GEOSERVICE||extraire_attribut{src}|url_absolue)',
-                        url: '#LINK']
-                    }
-                ]
-            }
-			);
-        	</BOUCLE_service_WFS>
 
-			<B_service_WMSC>
-			// Ajouter les services WMS-C disponibles
-			<BOUCLE_service_WMSC(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='WMS-C'}{statut=afaire}>
-			map.getMap().addLayer
-			(
-            "#TYPE",
-            "#TITRE",
-            "#URL_GEOSERVICE",
-            {
-				[map:'(#MAP)',]
-                layers:'#LAYERS',
-                format:'#FORMAT',
-                transparent:'true'
-            },
-            {
-                singleTile:false,
-                projection:'EPSG:4326',
-                units:'degrees',
-                // maxExtent expressed in EPSG:4326 :
-                maxExtent: new OpenLayers.Bounds(#MAXEXTENT),
-//				nativeResolutions:ideeResolutions.slice(0),
-                minZoomLevel: #MINZOOM,
-                maxZoomLevel: #MAXZOOM,
-                opacity: #OPACITY,
-                isBaseLayer: false,
-                visibility: #VISIBILITY,
-                originators:[
-                    {	logo:'ign'
-                        [,logo:'logo#ID_GEOSERVICE',
-                        pictureUrl: '(#LOGO_GEOSERVICE||extraire_attribut{src}|url_absolue)',
-                        url: '#LINK']
-                    }
-                ]
-            }
-			);
-        	</BOUCLE_service_WMSC>
-
-			<B_service>
-			// Ajouter les services WMS disponibles
-			<BOUCLE_service(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='WMS'}{statut=publie}>
-			map.getMap().addLayer
-			(
-            "#TYPE",
-            "#TITRE",
-            "#URL_GEOSERVICE",
-            {
-				[map:'(#MAP)',]
-                layers:'#LAYERS',
-                format:'#FORMAT',
-                transparent:'true'
-            },
-            {
-                singleTile:true,
-                projection:'EPSG:4326',
-				srs:{'EPSG:4326':'EPSG:4326', 'EPSG:3785':'EPSG:3785'},//some supported SRS from capabilities
-				units:'degrees',
-                // maxExtent expressed in EPSG:4326 :
-                maxExtent: new OpenLayers.Bounds(#MAXEXTENT),
-                minZoomLevel: #MINZOOM,
-                maxZoomLevel: #MAXZOOM,
-                opacity: #OPACITY,
-                isBaseLayer: false,
-                visibility: #VISIBILITY,
-                originators:[
-                    {	[(#REM) par defaut : le logo IGN]
-						logo:'ign'
-						[(#REM) substituer le logo du service]
-                        [,logo:'logo#ID_GEOSERVICE',
-                        pictureUrl: '(#LOGO_GEOSERVICE||extraire_attribut{src}|url_absolue)',
-                        url: '#LINK']
-						[(#REM) Substituer un logo commun ]
-						[,logo:'(#LOGO)']
-                    }
-                ]
-            }
-			);
-			</BOUCLE_service>
+			<B_services>
+			// Ajouter les services disponibles dans les geoservices en fonction de son niveau d'affichage
+			<BOUCLE_services(GEOSERVICES){id_rubrique IN #GET{rubriques}}{statut=publie}{par niveau}>
+				jQuery.geoportail.addGeoservice ( map, "#TYPE", "#TITRE", "[(#DESCRIPTIF|texte_script)]",
+					{	id: #ID_GEOSERVICE,
+						url: "#URL_GEOSERVICE",
+						map: "#MAP",
+						layers: "#LAYERS",
+						format: "#FORMAT"
+					},
+					{	maxentent: new OpenLayers.Bounds(#MAXEXTENT),
+						minzoom: #MINZOOM,
+						maxzoom: #MAXZOOM,
+						opacity: #OPACITY,
+						visibility: #VISIBILITY,
+						logo: "#LOGO",
+						picture: "[(#LOGO_GEOSERVICE||extraire_attribut{src}|url_absolue)]",
+						link: "#LINK"
+					});
+			</BOUCLE_services>
 		}
 	}
 );

@@ -40,22 +40,24 @@ function exec_geoservice()
 	{	echo debut_gauche('', true);
 			//gros_titre(_T('geoportail:geoservice'), "racine-site-24.gif");
 
-			echo "<br/>";
-			echo debut_boite_info(true);
-				$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
-					._T('geoportail:numero')
-					." :<br /><span class='spip_xx-large'>"
-					.$id_geoservice
-					.'</span></div>'
-					. icone_horizontale(_T("geoportail:voir_services"), generer_url_ecrire('geoservice_tous',"id_rubrique=$id_rubrique"), "racine-site-24.gif", "rien.gif","")
-				;
-				echo $res;
-			echo fin_boite_info(true)."<br/>";
+		echo "<br/>";
+		echo debut_boite_info(true);
+			$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
+				._T('geoportail:numero')
+				." :<br /><span class='spip_xx-large'>"
+				.$id_geoservice
+				.'</span></div>'
+				. icone_horizontale(_T("geoportail:voir_services"), generer_url_ecrire('geoservice_tous',"id_rubrique=$id_rubrique"), "racine-site-24.gif", "rien.gif","")
+			;
+			echo $res;
+		echo fin_boite_info(true)."<br/>";
 
-			// Logo de la rubrique
-			$iconifier = charger_fonction('iconifier', 'inc');
-			$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_service');
-			echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', autoriser('modifier', 'geoservice'));
+		// Logo de la rubrique
+		$iconifier = charger_fonction('iconifier', 'inc');
+		$GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_service');
+		if ($GLOBALS['spip_version_code']>2) $b=false;
+		else $b=autoriser('modifier', 'geoservice');
+		echo $iconifier('id_geoservice', $id_geoservice, 'geoservice', $b);
 			
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'geoservice','id_geoservice'=>$id_geoservice),'data'=>''))
 		.creer_colonne_droite('', true)
@@ -79,6 +81,7 @@ function exec_geoservice()
 			$rub = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_parent'"));
 			if ($rub) echo "<br/>"._T("geoportail:dans_rubrique")." : ".$rub['titre'];
 			else echo "<br/>"._T("geoportail:toutes_rubriques");
+			echo "<br/>"._T("geoportail:niveau")." : ".$row['niveau'];
 			echo "<div align='$spip_lang_left' style='clear:both; padding: 5px; border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>"
 				. propre($row['descriptif']."~"). "</div>\n";
 			

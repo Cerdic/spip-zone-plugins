@@ -23,6 +23,7 @@ function exec_geoportail_config_rgc()
 	{	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('geoportail:geoportail'), "", "");
+		echo gros_titre("Plugin "._T('geoportail:geoportail'), '', false);
 
 		echo debut_gauche('',true);
 
@@ -32,7 +33,6 @@ function exec_geoportail_config_rgc()
 		echo bloc_des_raccourcis($res);
 
 		echo debut_droite('',true);
-		echo gros_titre("<p>Plugin "._T('geoportail:geoportail')."</p>", '', false);
 		
 		/* RGC */
 		// Pas de RGC installe
