@@ -20,7 +20,7 @@ function exec_test_url()
 				400 => _T("testurl:erreur_requete_http"),
 				401 => _T("testurl:authentification_requise"),
 				402 => _T("testurl:acces_page_payant"),
-				403 => _T("testurl:acces_page_refuse"),
+				403 => _T("testurl:acces_page_refuser"),
 				404 => _T("testurl:page_inexistante"),
 				405 => _T("testurl:methode_requete_non_autorise"),
 				500 => _T("testurl:erreur_interne_serveur"),
@@ -86,7 +86,7 @@ function exec_test_url()
 	echo _T("testurl:voici_liste_sites_erreur").'<p />';
 	if($result_url)
 	{
-		echo _T("testurl:analyse_de"). ' ' . count($result_url) . ' ' ._T("sites").'.<br/>';
+		echo _T("testurl:analyse_de"). ' ' . count($result_url) . ' ' ._T("testurl:sites").'.<br/>';
 		foreach($result_url as $result)
 		{
 			if($erreur = check_url($result['url_site'], $result['id_syndic'], $result['nom_site']))

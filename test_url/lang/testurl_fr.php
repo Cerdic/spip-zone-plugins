@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_page_payant' => 'L\'acc&egrave;s &agrave; la page est payant !',
 	'acces_page_refuser' => 'Acc&egrave;s &agrave; la page refus&eacute; !',
 	'analyse_de' => 'Analyse de',
-	'autentification_requise' => 'Authentification requise !',
+	'authentification_requise' => 'Authentification requise !',
 
 	//C
 	'cette_page_contient_rien' => 'Cette page ne contient rien !',
@@ -30,8 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'site_incorrect_code_erreur' => 'Le site est incorrect ! Code d\'erreur',
+	'sites' => 'sites',
 	
 	//T
+	'tester_url' => 'Tester les urls',
 	'tester_url_sites_syndiques' => 'Tester les urls des sites syndiqu&eacute;s',
 
 	//V
