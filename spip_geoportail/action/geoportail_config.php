@@ -40,11 +40,14 @@ function action_geoportail_config_dist()
 		{	// Cles d'utilisation
 			ecrire_meta('geoportail_key',$_POST['geoportail_key']);
 			ecrire_meta('geoportail_yahoo_key',$_POST['yahoo_key']);
- 			// Services
+ 		}
+ 		// Autoriser les services
+ 		if (isset($_POST['geoservice']))
+ 		{	// Services
  			ecrire_meta('geoportail_service',isset($_POST['service']));
  			ecrire_metas();
  		}
- 		// Modif des objets a georef
+		// Modif des objets a georef
  		if (isset($_POST['objet']))
 		{	ecrire_meta('geoportail_geoarticle',isset($_POST['article']));
 			ecrire_meta('geoportail_geoauteur',isset($_POST['auteur']));
@@ -54,6 +57,17 @@ function action_geoportail_config_dist()
 			ecrire_meta('geoportail_geomot',isset($_POST['mot']));
 			ecrire_meta('geoportail_geobreve',isset($_POST['breve']));
 			ecrire_meta('geoportail_geosyndic',isset($_POST['syndic']));
+ 			ecrire_metas();
+ 		}
+		// Modif des objets a georef
+ 		if (isset($_POST['osmtile']))
+		{	ecrire_meta('geoportail_osm_tah',isset($_POST['tah']));
+			ecrire_meta('geoportail_osm_mquest',isset($_POST['mquest']));
+			// Verfifier que la couche a affciher est active
+			$osmlayer = $_POST['osmlayer'];
+			if ($osmlayer=='tah' && !isset($_POST['tah'])) $osmlayer = 'mapnik';
+			if ($osmlayer=='mquest' && !isset($_POST['mquest'])) $osmlayer = 'mapnik';
+			ecrire_meta('geoportail_osm_layer',$osmlayer);
  			ecrire_metas();
  		}
  		

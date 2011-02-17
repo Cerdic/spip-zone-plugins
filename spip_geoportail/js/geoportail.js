@@ -634,17 +634,26 @@ jQuery.geoportail =
 			{	// OpenStreetMap
 				case 'OSM':
 					var l;
+					if (this.osm_mquest)
 					l = this.addMQSTLayer ( map, "OSM (MapQuest)", 
 						"",
 						{	url: "http://developer.mapquest.com/web/products/open/map",
 							descriptif: "<p style='margin:0 1em'>MapQuest OSM Open Tile.<br/>Tiles Courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'><br/>Map data (c) OpenStreetMap (and) contributors, CC-BY-SA</p>"
+						},
+						{	visibility : (this.osm_layer=='mquest' && carto>0),
+							opacity: carto
 						}
 					);
 					
+					if (this.osm_tah)
 					l = this.addOSMLayer ( map, "OSM (Tiles&#064;Home)", 
 						"tah.openstreetmap.org/Tiles/tile",
 						{	url: "http://tah.openstreetmap.org",
 							descriptif: "<p style='margin:0 1em'>The Tiles@home server is the central hub of the Tiles@home distributed rendering system. Clients running all over the world talk to this server to get new rendering jobs, and upload their rendered results.<br/>Map data (c) OpenStreetMap (and) contributors, CC-BY-SA</p>"
+						},
+						{	numZoom:18,
+							visibility : (this.osm_layer=='tah' && carto>0),
+							opacity: carto
 						}
 					);
 					
@@ -653,10 +662,11 @@ jQuery.geoportail =
 						{	url: "http://wiki.openstreetmap.org/wiki/Mapnik",
 							descriptif: "<p style='margin:0 1em'>Mapnik is the software we use to render the main Slippy Map layer for OSM, along with other layers such as the 'cycle map' layer and 'noname' layer. It is also the name given to the main layer, so things get a bit confusing sometimes.<br/>Map data (c) OpenStreetMap (and) contributors, CC-BY-SA</p>"
 						},
-						{	visibility : (carto>0),
+						{	visibility : (this.osm_layer=='mapnik' && carto>0),
 							opacity: carto
 						}
 					);
+					
 					/*
 					l = this.addOSMLayer ( map, "OSM CycleMap", 
 						"tile.opencyclemap.org/cycle",
@@ -736,8 +746,10 @@ jQuery.geoportail =
 			switch (box.info) 
 			{	case 0:
 				case 'false': map.setInformationPanelVisibility(false); break;
-				//case 'mini': map.openInformationPanel(false); break;
-				default: map.setInformationPanelVisibility(true); break;
+				case 1:
+				case 'true': 
+				case 'mini': 
+				default : map.setInformationPanelVisibility(true); break;
 			}
 
 			// Outils de recherche (un petit delais pour IE !)
@@ -905,6 +917,7 @@ jQuery.geoportail =
 	}
 }
 
+/** Fonction de gestion de la synchronisation */
 function geoportail_moveSynchro (e)
 {	if (!this.synchro) return;
 	var i;	// $.geoportail.synchro([1,2,3])
@@ -912,10 +925,9 @@ function geoportail_moveSynchro (e)
 	{	var c = this.synchro[i].map.getMap()
 		var sav = this.synchro[i].synchro;
 		this.synchro[i].synchro = null;
-			c.zoomTo(this.map.getMap().getZoom());
 			var pt = this.map.getMap().getCenter().clone();
 			pt.transform(this.map.getMap().getProjectionObject(),c.getProjectionObject());
-			c.setCenter(pt);
+			c.setCenter(pt,this.map.getMap().getZoom());
 		this.synchro[i].synchro = sav;
 	}
 }
