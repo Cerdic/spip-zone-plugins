@@ -3,42 +3,30 @@
 /* Le plugin orientation ajoute le critere {portrait} , {carre} ou {paysage} pour le classement des photos */
 
 // {portrait}
-
-
-
-function critere_portrait($idb, &$boucles) {
-  $boucle = &$boucles[$idb];
-  $table = $boucle->id_table;
-  $not = $param->not;
-
-  if ($not) 
-	$boucle->where[] = "'$table.hauteur <= $table.largeur'";
-  else
-	$boucle->where[] = "'$table.hauteur > $table.largeur'";
+function critere_portrait($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$table = $boucle->id_table;
+	$boucle->where[] = $crit->not
+		?"'$table.hauteur <= $table.largeur'"
+		:"'$table.hauteur > $table.largeur'";
 }
+
 // {paysage}
-
-function critere_paysage($idb, &$boucles) {
-  $boucle = &$boucles[$idb];
-  $table = $boucle->id_table;
-  $not = $param->not;
-
-  if ($not) 
-	$boucle->where[] = "'$table.largeur <= $table.hauteur'";
-  else 
-	$boucle->where[] = "'$table.largeur > $table.hauteur'";
+function critere_paysage($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$table = $boucle->id_table;
+	$boucle->where[] = $crit->not
+		?"'$table.largeur <= $table.hauteur'"
+		:"'$table.largeur > $table.hauteur'";
 }
+
 // {carre}
-function critere_carre($idb, &$boucles) {
-  $boucle = &$boucles[$idb];
-  $table = $boucle->id_table;
-  $not = $param->not;
-
-  if ($not) 
-	$boucle->where[] = "'$table.largeur != $table.hauteur'";
-  else
-	$boucle->where[] = "'$table.largeur = $table.hauteur'";
+function critere_carre($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$table = $boucle->id_table;
+	$boucle->where[] = $crit->not
+	?"'$table.largeur != $table.hauteur'"
+	:"'$table.largeur = $table.hauteur'";
 }
-
 
 ?>
