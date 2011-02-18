@@ -33,5 +33,5 @@
 
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id="CFG" version='[1.15.2;]' />
-	<salvatore module="genespip" reference="fr" />
+	<traduire gestionnaire="salvatore" module="genespip" reference="fr" />
 </plugin>

@@ -181,5 +181,5 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 	<necessite id="cfg" version="[1.0.0;]" />
 	<necessite id="saisies" version="[1.7.7;]" />
 	<categorie>communication</categorie>
-	<salvatore module="spipbb" reference="fr" />
+	<traduire gestionnaire="salvatore" module="spipbb" reference="fr" />
 </plugin>

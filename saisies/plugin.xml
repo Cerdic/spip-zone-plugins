@@ -47,5 +47,5 @@
     
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="verifier" />
-	<salvatore module="saisies" reference="fr" />
+	<traduire gestionnaire="salvatore" module="saisies" reference="fr" />
 </plugin>

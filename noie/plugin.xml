@@ -14,5 +14,5 @@
 </pipeline>
 <categorie>performance</categorie>
 <necessite id='SPIP' version='[1.9.0;]' />
-	<salvatore module="noie" reference="fr" />
+	<traduire gestionnaire="salvatore" module="noie" reference="fr" />
 </plugin>

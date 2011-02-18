@@ -40,5 +40,5 @@
 	<fonctions>ajaxform_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>outil</categorie>
-	<salvatore module="ajaxform" reference="fr" />
+	<traduire gestionnaire="salvatore" module="ajaxform" reference="fr" />
 </plugin>

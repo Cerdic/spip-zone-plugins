@@ -86,5 +86,5 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden �berladen, und um die �b
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id='spip_bonux' version='[1.0;]' />
 	<categorie>auteur</categorie>
-	<salvatore module="accesrestreint" reference="fr" />
+	<traduire gestionnaire="salvatore" module="accesrestreint" reference="fr" />
 </plugin>

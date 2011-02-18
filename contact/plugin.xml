@@ -52,5 +52,5 @@
 	<utilise id="facteur" />
 	<utilise id="inserer_modeles" version="[0.4.3;]" />
 	<categorie>communication</categorie>
-	<salvatore module="contact" reference="fr" />
+	<traduire gestionnaire="salvatore" module="contact" reference="fr" />
 </plugin>

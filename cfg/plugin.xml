@@ -72,5 +72,5 @@ Es kann auch f&uuml; die Konfiguration von Skeletten verwendet werden.
     </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>outil</categorie>
-	<salvatore module="cfg" reference="fr" />
+	<traduire gestionnaire="salvatore" module="cfg" reference="fr" />
 </plugin>

@@ -39,5 +39,5 @@
 	<titre>comments:titre_comments</titre>
 	<url>configurer_comments</url>
 </bouton>
-	<salvatore module="comments" reference="fr" />
+	<traduire gestionnaire="salvatore" module="comments" reference="fr" />
 </plugin>

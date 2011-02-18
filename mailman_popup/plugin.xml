@@ -21,5 +21,5 @@ _ s'utilise par une url spip.php?page=mailman_inscriptions&amp;liste=test&amp;la
 	MailmanPopup
 	</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
-	<salvatore module="listes" reference="fr" />
+	<traduire gestionnaire="salvatore" module="listes" reference="fr" />
 </plugin>

@@ -20,6 +20,6 @@ Ce produit utilise l'API Flickr mais n'est ni soutenu, ni certifi&eacute; par Fl
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>multimedia</categorie>
-	<salvatore module="flickrcc" reference="fr" />
+	<traduire gestionnaire="salvatore" module="flickrcc" reference="fr" />
 </plugin>
 

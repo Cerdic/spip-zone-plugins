@@ -38,6 +38,6 @@
 	<necessite id="saisies" version="[1.8.12;]" />		
 	<utilise id="afficher_objets" version="[1.1.8;]" />	
 	<utilise id="taa" version="[0.1.5;]" />		
-	<salvatore module="tra" reference="fr" />
+	<traduire gestionnaire="salvatore" module="tra" reference="fr" />
 </plugin>
 

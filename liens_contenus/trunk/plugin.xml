@@ -40,5 +40,5 @@ Reste &agrave; faire :
 	</pipeline>
 	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
-	<salvatore module="lienscontenus" reference="fr" />
+	<traduire gestionnaire="salvatore" module="lienscontenus" reference="fr" />
 </plugin>

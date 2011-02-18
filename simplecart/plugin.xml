@@ -32,5 +32,5 @@
 
     <necessite id="SPIP" version="[2.0.0;]" />
     <necessite id="cfg" version="[1.14.1;]" />
-	<salvatore module="simplecart" reference="es" />
+	<traduire gestionnaire="salvatore" module="simplecart" reference="es" />
 </plugin>

@@ -40,5 +40,5 @@ _ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&
 
 	<chemin dir='' />
 	<categorie>multimedia</categorie>
-	<salvatore module="thumbsites" reference="fr" />
+	<traduire gestionnaire="salvatore" module="thumbsites" reference="fr" />
 </plugin>
