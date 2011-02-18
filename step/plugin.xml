@@ -12,7 +12,7 @@ _ &#169; 2008 2010
 	</auteur>
 	<licence>GPL</licence>
 	<lien></lien>
-	<version>0.13.1</version>
+	<version>0.13.2</version>
 	<version_base>0.5</version_base>
 	<install>base/step_install.php</install>
 

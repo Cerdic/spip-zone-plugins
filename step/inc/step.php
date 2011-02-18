@@ -631,6 +631,7 @@ function step_selectionner_maj() {
 	if ($res = sql_select('id_plugin','spip_plugins',array(
 		'maj_version<>' .sql_quote(''),
 		'id_zone='.sql_quote(0),
+		'constante<>'.sql_quote('_DIR_EXTENSIONS'), // On ne permet pas de mettre à jour directement ce qui se trouve dans EXTENSIONS
 		'obsolete='.sql_quote('non')))) {
 			while ($r = sql_fetch($res)) {
 				$ids[] = $r['id_plugin'];
