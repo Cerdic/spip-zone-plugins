@@ -52,7 +52,9 @@ function taa_affiche_gauche($flux){
 	$exec= $flux['args']['exec'];
 	$id = $flux['args']['id_article'];
 	
-	if($exec=='articles' AND test_plugin_actif('medias') AND lire_config('taa/edition_seule') AND autoriser('joindredocument','article',$id)){
+	if(test_plugin_actif('medias') or test_plugin_actif('gest_doc')) $mediatheque='ok';
+	
+	if($exec=='articles' AND $mediatheque AND lire_config('taa/edition_seule') AND autoriser('joindredocument','article',$id)){
 		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_taa',array('objet'=>'article','id_objet'=>$id));
 		}
 

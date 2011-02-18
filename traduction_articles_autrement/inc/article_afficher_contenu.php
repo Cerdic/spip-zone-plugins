@@ -188,7 +188,12 @@ function inc_article_afficher_contenu_dist($id_article){
 	;
 	
 	$documenter_objet = charger_fonction('documenter_objet','inc');
-	if(!$edition_seule) $onglet_documents = $documenter_objet($id_article,'article','articles',$flag_editable);
+	
+	if(test_plugin_actif('medias') or test_plugin_actif('gest_doc')) $mediatheque='ok';
+	
+	// On n'affiche pas le fomulaire upload en bas de page si on l'affiche à gauche
+	
+	if(!$edition_seule or !$mediatheque) $onglet_documents = $documenter_objet($id_article,'article','articles',$flag_editable);
 	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
 	
 	$onglet_discuter = !$statut_forum ? '' : ($discuter($id_article, 'articles', 'id_article', $statut_forum, $debut_forum));
