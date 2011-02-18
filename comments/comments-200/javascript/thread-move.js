@@ -39,7 +39,7 @@
 		if ((id=ancre.match(/^#(forum|comment|reply)([0-9]+$)/)) && jQuery("#comment"+id[2]).length==0){
 			var a = jQuery('.comments-thread a.lien_pagination').last();
 			var href = a.attr('href');
-			href = href.replace(/debut_comments-list=[0-9]+#.*$/,'debut_comments-list=@@'+id[2]+ancre);
+			href = href.replace(/debut_comments-list=[0-9]+#.*$/,'debut_comments-list=@'+id[2]+ancre);
 			a.after("<a href='"+href+"' style='visibility:hidden' id='comment"+id[2]+"' class='lien_pagination'>Go</a>");
 			jQuery(a.parents('div.ajaxbloc').first()).ajaxbloc();
 			if (id[1]=='reply')
