@@ -30,7 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'site_incorrect_code_erreur' => 'Le site est incorrect ! Code d\'erreur',
-	'sites' => 'sites',
+	'sites_dans_rubrique' => 'sites dans la rubrique',
+	'sites_tous_site' => 'sites dans tous le site',
 	
 	//T
 	'tester_url' => 'Tester les urls',

@@ -86,7 +86,11 @@ function exec_test_url()
 	echo _T("testurl:voici_liste_sites_erreur").'<p />';
 	if($result_url)
 	{
-		echo _T("testurl:analyse_de"). ' ' . count($result_url) . ' ' ._T("testurl:sites").'.<br/>';
+		if ($id_rubrique = _request('id_rubrique')) {
+			echo _T("testurl:analyse_de"). ' ' . count($result_url) . ' ' ._T("testurl:sites_dans_rubrique").' '.intval($id_rubrique).'.<br/>';
+		} else {
+			echo _T("testurl:analyse_de"). ' ' . count($result_url) . ' ' ._T("testurl:sites_tous_site").'.<br/>';
+		}
 		foreach($result_url as $result)
 		{
 			if($erreur = check_url($result['url_site'], $result['id_syndic'], $result['nom_site']))
