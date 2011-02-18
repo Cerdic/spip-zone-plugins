@@ -58,8 +58,6 @@ function inc_article_afficher_contenu_dist($id_article){
 							'row' => $row
 								)
 							));
-	if($edition_seule)$form_docs=recuperer_fond('prive/editer/docs',array('objet'=>'articles','id_objet'=>$id_article,'editable'=>'ok'),array('ajax'=>true)) ;
-	
 	
 	// affecter les globales dictant les regles de typographie de la langue
 	changer_typo($row['lang']);

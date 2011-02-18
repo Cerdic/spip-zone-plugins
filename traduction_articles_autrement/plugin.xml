@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Traduction d'articles autrement[en]Article translations differently[es]Traducción de artículos repensada[de]Artikel Übersetzung mal Anders</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -49,11 +49,16 @@
 		<nom>pre_insertion</nom>
 		<inclure>taa_pipelines.php</inclure>
 	</pipeline>	
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>taa_pipelines.php</inclure>
+        </pipeline>	
 	<fonctions>taa_fonctions.php</fonctions>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<utilise id="afficher_objets" version="[1.1.8;]" />	
-	<utilise id="cfg" version="[ 1.15.1;]" />		
+	<utilise id="cfg" version="[ 1.15.1;]" />	
+	<utilise id="medias" version='[1.6.1;]'/>	
 	<salvatore module="taa" reference="fr" />
 </plugin>
 

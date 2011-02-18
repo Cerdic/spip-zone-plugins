@@ -47,4 +47,14 @@ return $flux;
 return $flux;
 }
 
+function taa_affiche_gauche($flux){
+	$exec= $flux['args']['exec'];
+	
+	if($exec=='articles' AND test_plugin_actif('medias') AND lire_config('taa/edition_seule')){
+		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_taa',array('objet'=>'article','id_objet'=>$flux['args']['id_article']));
+		}
+
+return $flux;
+}
+
 ?>
