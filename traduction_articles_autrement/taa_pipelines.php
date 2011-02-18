@@ -47,11 +47,13 @@ return $flux;
 return $flux;
 }
 
+// affichage du formulaire de téléchargement des docs
 function taa_affiche_gauche($flux){
 	$exec= $flux['args']['exec'];
+	$id = $flux['args']['id_article'];
 	
-	if($exec=='articles' AND test_plugin_actif('medias') AND lire_config('taa/edition_seule')){
-		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_taa',array('objet'=>'article','id_objet'=>$flux['args']['id_article']));
+	if($exec=='articles' AND test_plugin_actif('medias') AND lire_config('taa/edition_seule') AND autoriser('joindredocument','article',$id)){
+		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_taa',array('objet'=>'article','id_objet'=>$id));
 		}
 
 return $flux;
