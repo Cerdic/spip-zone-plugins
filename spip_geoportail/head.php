@@ -25,6 +25,7 @@ function geoportail_insert_head($flux)
 <!--_GEOPORTAIL_HEADER_-->
 <link rel="stylesheet" href="'._DIR_PLUGIN_GEOPORTAIL.'css/jqdialog.css" type="text/css"  />
 <link rel="stylesheet" href="'._DIR_PLUGIN_GEOPORTAIL.'css/geoportail.css" type="text/css" />
+<link rel="stylesheet" href="'._DIR_PLUGIN_GEOPORTAIL.'css/geoportail_carte.css" rel="stylesheet" />
 <!-- IE8 compatibility mode pour la version 1.0b4 -->
 <!--[if IE 8]>
 <meta http-equiv="X-UA-Compatible" content="IE=7"/>

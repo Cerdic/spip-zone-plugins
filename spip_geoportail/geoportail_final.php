@@ -24,6 +24,13 @@ function geoportail_affichage_final($page)
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Layer/GXT.js">// <![CDATA[
     // ]]></script>
 
+<script src="http://api.ign.fr/geoportail/api?'.geoportail_key().'&includeEngine=false"></script>
+
+
+<!-- OpenLayers styles : -->
+<link id="__OpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/style.css"/>
+<link id="__FramedCloudOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/framedCloud.css"/>
+<link id="__GeoportalCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/geoportal/style.css"/>
 ';
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
 	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
@@ -33,7 +40,8 @@ function geoportail_affichage_final($page)
 	{	// $engine .= '<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>';
 	}
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
-	{	$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>';
+	{	$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>'
+				.'<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/google.css"/>';
 	}
 		
 	// Inclure l'API dans le Header

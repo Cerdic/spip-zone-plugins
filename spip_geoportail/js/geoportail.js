@@ -48,14 +48,45 @@ jQuery.geoportail =
         // ready !
 
 		// Chargement des classes Geoportail 
-		GeoportailInitLayerLocator();			// Geoportal.Util.loadJS(dirPlug + "js/Layer/Locator.js");
-		GeoportailInitLayerGXT();				// Geoportal.Util.loadJS(dirPlug + "js/Layer/GXT.js");
-		GeoportailInitFormatCeoconcept();		// Geoportal.Util.loadJS(dirPlug + "js/Format/Ceoconcept_rip.js");
+		if (!OpenLayers.Layer.Vector.Locator) GeoportailInitLayerLocator();			// Geoportal.Util.loadJS(dirPlug + "js/Layer/Locator.js");
+		if (!OpenLayers.Layer.GXT) GeoportailInitLayerGXT();						// Geoportal.Util.loadJS(dirPlug + "js/Layer/GXT.js");
+		if (!Geoportal.Format.Geoconcept.rip) GeoportailInitFormatCeoconcept();		// Geoportal.Util.loadJS(dirPlug + "js/Format/Ceoconcept_rip.js");
 
 		//
 		var i;
-		for (i = 0; i < this.cartes.length; i++) {
-			var carte = this.cartes[i];
+		for (i = 0; i < this.cartes.length; i++)
+		{	var carte = this.cartes[i];
+			
+			var fview = (typeof (Geoportal.Viewer[carte.type]) == 'function') ? Geoportal.Viewer[carte.type] : Geoportal.Viewer.Default;
+			// Declarer une nouvelle carte
+			carte.map = new fview
+			(	"GeoportalMapDiv"+carte.id,
+				OpenLayers.Util.extend({
+					mode:'normal',
+                    territory:carte.zone,
+					nameInstance: "map"+carte.id
+					},
+					gGEOPORTALRIGHTSMANAGEMENT
+				)
+			);
+		}
+		//Attente du chargement des cartes...
+		this.initMap2();
+	},
+		
+	initMap2: function() 
+	{	var i;
+		this.count++;
+		// Verifier que les cartes sont pretes
+		for (i = 0; i < this.cartes.length; i++)
+		{	if (this.cartes[i].map.ready.h<0) 
+			{	window.setTimeout('jQuery.geoportail.initMap2();', 100);
+				return;
+			}
+		}
+		// OK !
+		for (i = 0; i < this.cartes.length; i++)
+		{	var carte = this.cartes[i];
 			// Charger
 			carte.geoportalLoadmap();
 
@@ -81,14 +112,15 @@ jQuery.geoportail =
 			for (k = 0; k < carte.doc.length; k++)
 				this.addLayer(carte, carte.doc[k]['extension'], carte.doc[k]['id_document'], carte.doc[k]['titre'], carte.doc[k]['fichier'], carte.doc[k]['nozoom']);
 			// Afficher des images
-			if (carte.img.length) {	// Rajoute une couche pour les points
+			if (carte.img.length) 
+			{	// Rajoute une couche pour les points
 				var t = carte.img[0].titre;
 				var l = new OpenLayers.Layer.Vector(t ? t : "IMG", { opacity: 1, visibility: 1, originators: jQuery.geoportail.originators });
 				map.spip_img = l;
 				map.getMap().addLayer(l);
 				for (k = 0; k < carte.img.length; k++) {
 					var img = carte.img[k];
-					var feature = jQuery.geoportail.createFeature(Number(img.lon), Number(img.lat), img.logo, img.taille, null, img.align);
+					var feature = jQuery.geoportail.createFeature(map, Number(img.lon), Number(img.lat), img.logo, img.taille, null, img.align);
 					feature.attributes = img.attributes;
 					l.addFeatures(feature);
 				}
@@ -291,8 +323,8 @@ jQuery.geoportail =
 	},
 
 	// Ajouter une image
-	addImg: function(id_map, id_document, titre, lon, lat, logo, align, taille, attributes) {
-		var carte = this.getCarte(id_map);
+	addImg: function(id_map, id_document, titre, lon, lat, logo, align, taille, attributes) 
+	{	var carte = this.getCarte(id_map);
 		if (carte) {
 			carte.img[carte.img.length] = { titre: titre, lon: lon, lat: lat, id_document: id_document, attributes: attributes, logo: logo, align: align, taille: Number(taille) };
 		}
@@ -450,8 +482,8 @@ jQuery.geoportail =
 		}
 	},
 
-	// Creation d'une feature openlayer
-	createFeature: function(lon, lat, logo, size, ol, align) {
+	// Creation d'une feature openlayer a mettre dans une carte
+	createFeature: function(map, lon, lat, logo, size, ol, align) {
 		if (!ol) ol = OpenLayers;
 		if (!align) align = 'center'
 		if (!size) size = 15;
@@ -682,38 +714,7 @@ jQuery.geoportail =
 
 		// Rechercher les couches a afficher
 		if (map.getMap().allowedGeoportalLayers) 
-		{
-			var i;
-			// BUG IExplorer (fort ralentissement)
-			/*
-			if (false)//!jQuery.browser["msie"])
-			{
-				var olayersId = map.getMap().catalogue._orderLayersStack(map.getMap().allowedGeoportalLayers);
-				// Ne pas afficher tous les layers
-				for (i = 0; i < olayersId.length; i++) {
-					switch (olayersId[i]) {	// Ne pas afficher
-						case 'SEAREGIONS.LEVEL0:WMSC':
-						case 'ELEVATION.SLOPS:WMSC':
-						case 'CADASTRALPARCELS.PARCELS:WMSC':
-						case 'HYDROGRAPHY.HYDROGRAPHY:WMSC':
-						case 'TRANSPORTNETWORKS.ROADS:WMSC':
-						case 'TRANSPORTNETWORKS.RAILWAYS:WMSC':
-						case 'TRANSPORTNETWORKS.RUNWAYS:WMSC':
-						case 'BUILDINGS.BUILDINGS:WMSC':
-						case 'UTILITYANDGOVERNMENTALSERVICES.ALL:WMSC':
-						case 'ADMINISTRATIVEUNITS.BOUNDARIES:WMSC':
-							break;
-						// Afficher           
-						default:
-							map.addGeoportalLayer(olayersId[i]);
-							break;
-					}
-				}
-			}
-			else
-			*/
-			
-			// Forcer l'affichage ortho/carto
+		{	// Forcer l'affichage ortho/carto
 			var ortho = (this.getParam("ortho")) ? Number(this.getParam("ortho")) : (visu.ortho=='' ? 1 : Number(visu.ortho));
 			var carto = (this.getParam("carto")) ? Number(this.getParam("carto")) : (visu.carto=='' ? (mode=='OSM' ? 1:0.3) : Number(visu.carto));
 			var mixte = (ortho>0 && carto>0);
@@ -820,24 +821,25 @@ jQuery.geoportail =
 
 			// Gestion des controles
 			switch (box.layer) 
-			{	case 0:
+			{	case '0':
 				case 'false': map.setLayersPanelVisibility(false); break;
+				case '1': map
 				case 'true': map.setLayersPanelVisibility(true); break;
 				default: map.openLayersPanel(false); break;
 			}
 			switch (box.tools) 
-			{	case 0:
+			{	case '0':
 				case 'false': map.setToolsPanelVisibility(false); break;
 				case 'mini': map.openToolsPanel(false); break;
 				default: map.setToolsPanelVisibility(true); break;
 			}
 			switch (box.info) 
-			{	case 0:
+			{	case '0':
 				case 'false': map.setInformationPanelVisibility(false); break;
-				case 1:
-				case 'true': 
+				case '1':
+				case 'true': map.setInformationPanelVisibility(true); break;
 				case 'mini': 
-				default : map.setInformationPanelVisibility(true); break;
+				default : map.infoCntrl.minimizeControl();  break;
 			}
 
 			// Outils de recherche (un petit delais pour IE !)

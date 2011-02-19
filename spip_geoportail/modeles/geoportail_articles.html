@@ -53,12 +53,12 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	{	var lon = #LON;
 		var lat = #LAT;
 		<BOUCLE_mot(MOTS){id_groupe=#ENV{legende,0}}{id_article}{0,1}>
-			var feature = jQuery.geoportail.createFeature (lon,lat);
+			var feature = jQuery.geoportail.createFeature (map,lon,lat);
 			feature.attributes.mot_cle = "[(#TITRE**|attribut_html)]";
 		</BOUCLE_mot>
 			[(#SET{largeur,[(#LOGO_ARTICLE||image_reduire{40}|largeur|plus{[(#ENV{bord,4})]})]})]
 			[(#SET{hauteur,[(#LOGO_ARTICLE||image_reduire{40}|hauteur|plus{[(#ENV{bord,4})]})]})]
-			var feature = jQuery.geoportail.createFeature (lon,lat, "[(#LOGO_ARTICLE||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]",#ENV{taille,20});
+			var feature = jQuery.geoportail.createFeature (map, lon,lat, "[(#LOGO_ARTICLE||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]",#ENV{taille,20});
 		<//B_mot>
 		feature.attributes.img = "[(#LOGO_ARTICLE||image_reduire{40}|replace{'"',"'"})]";
 		feature.attributes.name = "[(#TITRE|attribut_html)]";

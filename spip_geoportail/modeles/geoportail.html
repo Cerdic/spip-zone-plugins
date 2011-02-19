@@ -17,17 +17,19 @@
 * - id_rubrique			: affichage des services lies a une rubrique
 * - id_secteur			: affichage des services lies a un secteur
 * - width, height		: largeur, hauteur (utiliser pc au lieu de % dans les URI) par defaut, ceux du css
-* - mode				: normal/mini
+* - mode				: normal/mini, GEOP(Geoportail), GMAP(Google Maps), OSM(OpenStreetMap), YHOO(Yahoo! Maps)
+* - type				: Default/Standard
 * - lon, lat, zoom		: centrage sur la zone 
 * - zone				: la zone geoportail (FXX)
-* - layerctrl			: affichage du gestionnaire de couche (0,1,mini)
-* - toolbox				: affichage des outils (0,1,mini)
-* - infobox				: affichage des infos (0,1)
+* - layerctrl			: affichage du gestionnaire de couche (1,true,0,false,mini) par defaut: mini
+* - toolbox				: affichage des outils (1,true,0,false,mini) par defaut: 1
+* - infobox				: affichage des infos (1,true,0,false,mini) par defaut: mini
 * - searchtools			: afficher les outils de recherche (0,1) par defaut:1
 * - measuretools		: afficher les outils de mesure (0,1) par defaut : 0
 * - overview			: afficher une vue globale (0,1) par defaut : 0. 
 						  La vue s'affiche dans la div id="overViewMap" ou est cree dans la div id="navigation"
 * - min_zoom			: zoom mini
+* - max_zoom			: zoom maxi
 * - carto				: opacite de la carte (0->1)
 * - ortho				: opacite de l'image (0->1)
 * - formulaire			: la carte est un formulaire (ajoute un controleur pour faire le lien avec le formulaire)
@@ -55,25 +57,27 @@ if (_DIR_RESTREINT!="" || $geoportail_force)
 [(#REM) Rubriques pour les geoservices ]
 #SET{rubriques,#ARRAY{site,0,rub,#ID_RUBRIQUE,sect,#ID_SECTEUR}}
 
-[(#REM) N'inclure l'engin qu'une seule fois... ]
-<script src="http://api.ign.fr/geoportail/api?#MAPKEY&instance=map#ENV{id_geoportail,0}&includeEngine=false"></script>
 
 [(#REM) Balise d'inclusion du geoportail ]
 <!--_SPIP_GEOPORTAIL_#MODE-->
 
 <script language=javascript>
 // Ajouter une nouvelle carte
+var map#ENV{id_geoportail,0} = null;
+
 jQuery.geoportail.addMap(
 	{	id : '#ENV{id_geoportail,0}',
 		formulaire : #ENV{formulaire,false},
+		zone: "[(#GET{zone})]",
+		type: "[(#ENV{type,Default})]",
 		map : null,
 		geoportalLoadmap : function () 
-		{	geoportalLoadmap#ENV{id_geoportail,0}("GeoportalMapDiv#ENV{id_geoportail,0}", "normal", "[(#GET{zone})]"); 
-			map = this.map = map#ENV{id_geoportail,0};
-			
-			//map.getMap().setProxyUrl("#CHEMIN{php/proxy.php}?url=");
+		{	// Definir la carte
+			var map = map#ENV{id_geoportail,0} = this.map;
+		
+			// Proxy pour la recherche
 			map.getMap().setProxyUrl("?action=geoproxy&hash="+jQuery.geoportail.hash+"&url=");
-			// Affichage de la carte
+			// Afficher de la carte
 			jQuery.geoportail.showMap (map,
 				'#MODE',
 				{	zone: '#GET{zone}', 
@@ -144,5 +148,4 @@ FIN gestion de l'espace prive
 <!-- La carte #[(#ENV{id_geoportail,0})]-->
 <div class='GeoportalMapDiv #MODE' id='GeoportalMapDiv#ENV{id_geoportail,0}' style="[float:(#ALIGN|match{left|right}); ][width:(#ENV{width}|replace{pc,%}); ][height:(#ENV{height}|replace{pc,%}); ]" ><!-- --></div>
 [(#REM) Surcharger l'affichage du viewer]
-<link type="text/css" href="#CHEMIN{css/geoportail_carte.css}" rel="stylesheet" />
 

@@ -1,13 +1,3 @@
-/** Modification des styles de la carte * /
-.gpControlFloating
-{	font-size:12px;
-}
-.gpControlFloating .gpControlFloatingBody label, 
-.gpControlFloating .gpControlFloatingBody input, 
-.gpControlFloating .gpControlFloatingBody select 
-{	font-size:1em;
-}
-
 /** */
 .gpMap, div.olMap
 {	cursor:default !important;
