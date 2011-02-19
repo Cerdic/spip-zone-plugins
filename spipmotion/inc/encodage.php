@@ -315,7 +315,11 @@ function encodage($source,$doc_attente){
 		 * ffmpeg2theora lui a besoin d'une estimation de bitrate
 		 */
 		if(intval($source['videobitrate']) && (intval($source['videobitrate']) < (lire_config("spipmotion/bitrate_$extension_attente","448"))*1000)){
-			$vbitrate = null;
+			if(lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora'){
+				$vbitrate = $source['videobitrate'];
+			}else{
+				$vbitrate = null;
+			}
 			$infos_sup_normal .= ' -sameq ';
 			$bitrate = "--bitrate ".$source['videobitrate'];
 		}else{
