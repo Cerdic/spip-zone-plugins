@@ -36,9 +36,12 @@ function autoriser_projet_editer_dist($faire, $type, $id, $qui, $opt='') {
 function autoriser_tache_creer_dist($faire, $type, $id, $qui, $opt='') {
 
 
-	$participants= sql_getfetsel('participants','spip_projets','id_projet='.sql_quote($id));
+	$projet= sql_fetsel('participants,id_chef_projet','spip_projets','id_projet='.sql_quote($id));
 	
-	if(in_array($qui['id_auteur'],unserialize($participants))) $retour=true;
+	if(is_array($projet['participants'])){
+		if(in_array($qui['id_auteur'],unserialize($participants)) or $qui['id_auteur']=$projet['id_chef_projet']) $retour=true;
+		}
+	elseif($qui['id_auteur']=$projet['id_chef_projet'])$retour=true;
 
 	return $retour;
 

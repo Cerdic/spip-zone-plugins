@@ -1,33 +1,13 @@
 <div class="formulaire_spip formulaire_projets">
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	<form action="#ENV{action}" method="post"><div>
-			#ACTION_FORMULAIRE{#ENV{action}}
-																						
-	<BOUCLE_fieldsets(POUR){tableau #ENV{fieldsets}}{par cle}>
-	<B_champs>
-	<fieldset[ id="(#VALEUR|table_valeur{id})"]><legend>[(#VALEUR|table_valeur{titre})]</legend>
-		<ul>
-		<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{(#VALEUR|table_valeur{titre})})}{par cle}>
-		#SET{valeurs,#VALEUR|table_valeur{form}}
-		[(#SAISIE{
-			[(#GET{valeurs}|table_valeur{field})],
-			[(#GET{valeurs}|table_valeur{name})],
-			label=[(#GET{valeurs}|table_valeur{label})],
-			explication=[(#GET{valeurs}|table_valeur{explication})],			
-			obligatoire=[(#GET{valeurs}|table_valeur{obligatoire})],
-			option_statut=[(#GET{valeurs}|table_valeur{option_statut})],			
-			multiple=[(#GET{valeurs}|table_valeur{multiple})],
-			statut=[(#GET{valeurs}|table_valeur{statut})],
-			})]
-		</BOUCLE_champs>
-		</ul>
-	</fieldset>	
-	</B_champs>
-	</BOUCLE_fieldsets>
+	<form action="#ENV{action}" method="post">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}															
+			<INCLURE{fond=formulaires/inc-formulaire}{env}/>
 			<p class="boutons"><input type="submit" class="submit" value="<:ok:>" /></p>				
-	
-			</div></form>
+		</div>
+	</form>
 </div>
 
  

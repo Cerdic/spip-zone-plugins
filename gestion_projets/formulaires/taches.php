@@ -158,27 +158,54 @@ function formulaires_taches_charger_dist(){
 
 	$id_projet=_request('id_projet');
 	$id_tache=_request('id_tache');
-
+	if($id_tache){
+		$valeurs_taches=sql_fetsel('*','spip_projets_taches','id_tache='.sql_quote($id_tache));
+		$id_projet=$valeurs_taches['id_projet'];
+		}
 	
+	
+	$champs=array('montant_heure','montant_estime','duree_estimee','date_debut','date_fin_estimee');
 
+	$projet =sql_fetsel($champs,'spip_projets','id_projet='.sql_quote($id_projet));
+	
+	$taches =sql_select('montant_estime,duree_estimee','spip_projets_taches','id_projet='.sql_quote($id_projet));
+	
+	
+	// on détermine les sommes des montants estimés et duree estimée des autres tâches du projet	
+	$compteur=array();
+	while($data = sql_fetch($taches)){
+		foreach($data as $champ=>$valeur){
+			$compteur[$champ][]=$valeur;
+			}
+		}
+		
+		
+	foreach($projet as $champ=>$valeur){
+		$val[$champ]=$valeur;
+		}
+
+	$val['montant_estime']=	$val['montant_estime']-array_sum($compteur['montant_estime']);
+	$val['duree_estimee']=	$val['duree_estimee']-array_sum($compteur['duree_estimee']);	
 	
 	//On charge les définitions
 	
 	// Si l'id tache est connu, on charge les données de la tâche
 
 	if($id_tache){	
-		$val=sql_fetsel('*','spip_projets_taches','id_tache='.sql_quote($id_tache));
-		$id_projet=$val['id_projet'];
-		$val['participants_parent'] = unserialize(sql_getfetsel('participants','spip_projets','id_projet='.sql_quote($id_projet)));
+		$val=$valeurs_taches;
+		if($val['participants'])$val['participants_parent'] = unserialize($val['participants']);
+		else $val['participants_parent'] = array(0=>$val['id_chef_projet']);
 		$val['participants']	= unserialize($val['participants']);
-
 		}
 	else{
-		$val['participants_parent'] = unserialize(sql_getfetsel('participants','spip_projets','id_projet='.sql_quote($id_projet)));
+		$projet=sql_fetsel('participants,id_chef_projet','spip_projets','id_projet='.sql_quote($id_projet));
+		
+		if($projet['participants'])$val['participants_parent'] = unserialize($projet['participants']);
+		else $val['participants_parent'] = array(0=>$projet['id_chef_projet']);
+		
 		$val['participants']=$val['participants_parent'];	
 		}
 		
-
 	$taches= sql_select('id_tache,nom','spip_projets_taches','id_projet='.sql_quote($id_projet));
 
 	$val['taches_projet']=array();
