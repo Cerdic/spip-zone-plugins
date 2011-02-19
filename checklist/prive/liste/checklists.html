@@ -1,0 +1,82 @@
+<h2>Checklist pre-prod</h2>
+
+<div class="formulaire_spip formulaire_todo ajax" id="formulaire_todo">
+
+
+  <fieldset>
+  <legend>Les indispensables</legend>
+  <form action="#" method="post">
+	<ul>
+		[(#SAISIE{checkbox, 
+			indispensables, 
+			label="Tous ces éléments sont ils bien présents ?", 
+			datas=#ARRAY{
+				1, 'Page 404',
+				2, 'Favicon',
+				3, 'Formulaire de contact',
+				4, 'Forumaire + page de recherche',
+				5, 'Feuille de style print',
+				6, 'Mentions légales'
+			}})]
+	</ul>
+  </form>
+  </fieldset>
+
+  <fieldset>
+  <legend>Pages</legend>
+  <form action="#" method="post">
+	<ul>
+		[(#SAISIE{checkbox,
+			pages,
+			label="Toutes ces pages sont elles conformes à la maquette ?",
+			datas=#ARRAY{
+				1, 'Page accueil/sommaire',
+				2, 'Page rubrique',
+				3, 'Page article',
+				4, 'Page auteur',
+				5, 'Page mot/tag',
+				6, 'Page site syndiqué',
+				7, 'Flux RSS',
+				8, 'Forums',
+				9, 'Login'
+			}})]
+	</ul>
+  </form>
+  </fieldset>
+
+  <fieldset>
+  <legend>Code</legend>
+  <form action="#" method="post">
+	<ul>
+		[(#SAISIE{checkbox,
+			code_html,
+			label="Pour chacune des pages est-ce que tous ces éléments sont vérifiés ?",
+			datas=#ARRAY{
+				1, 'Titre de la page OK',
+				2, 'Les metas OK dans le code source',
+				3, 'Aucune erreur de code',
+				4, 'Aucun warning structure',
+				5, 'Aucun lien manquant',
+				6, 'Temps de chargement OK'
+			}})]
+	</ul>
+  </form>
+  </fieldset>
+
+  <fieldset>
+  <legend>SPIP</legend>
+  <form action="#" method="post">
+	<ul>
+		[(#SAISIE{checkbox,
+			conformite_spip,
+			label="Le site est-il conforme aux conventions SPIP ?",
+			datas=#ARRAY{
+				1, 'Peut il supporter un autre thème SPIP',
+				2, '',
+				3, 'Les champs d\'aide sont présents',
+			}})]
+	</ul>
+  </form>
+  </fieldset>
+  
+</div>

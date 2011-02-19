@@ -1,0 +1,51 @@
+<plugin>
+
+	<nom>Checklist</nom>
+
+	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
+
+	<version>0.0.1</version>
+	
+	<etat>test</etat>
+	
+	<shortdesc>
+		<multi>
+			[fr]pas fini, pas taper !
+			[en]not finished, dont hit me !
+		</multi>
+	</shortdesc>
+	
+	<description>
+		<multi>
+			[fr]Permet d'&eacute;tablir et d'afficher des tickets sous forme de checklists simples.
+			
+			Ce plugin n&eacute;cessite les plugins tickets et mots_objets pour fonctionner.
+			
+			[en]Allows to create and use tickets as simple checklists.
+	
+			This plugin requires tickets and mots_objets plugins to operate.
+		</multi>
+	</description>
+
+	<lien></lien>
+	
+	<icon></icon>
+
+	<prefix>checklist</prefix>
+	
+	<!--pipeline>
+		<nom>declarer_liaison_mots</nom>
+		<inclure>checklist_pipelines.php</inclure>
+	</pipeline-->
+	
+
+	<categorie>divers</categorie>
+	
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="spip_bonux" version="[2.2.0;]" />
+	<necessite id="saisies" version="[1.8.0;]" />
+	<necessite id="tickets" version="[1.6.0;]" />
+	<necessite id="mots_objets" version="[0.3;]" />
+	
+</plugin>
+
