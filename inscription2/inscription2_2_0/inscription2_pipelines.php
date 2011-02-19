@@ -17,7 +17,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inscription2_ajouter_boutons($boutons_admin){
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-		unset($boutons_admin['auteurs']->sousmenu['auteurs']);
+		if (is_object($boutons_admin['auteurs']->sousmenu['auteurs']))
+			unset($boutons_admin['auteurs']->sousmenu['auteurs']);
 		if (is_object($boutons_admin['bando_reactions']))
 			unset($boutons_admin['bando_reactions']->sousmenu['visiteurs']);
 	}
