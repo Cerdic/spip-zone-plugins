@@ -211,7 +211,7 @@ function multilang_make_menu_lang(container,target) {
 		multilang_save_lang(this,this.form.form_lang);
 	});
 	// Maj du menu de langues
-	multilang_mark_empty_langs(container,target)
+	multilang_mark_empty_langs(container,target);
 }
 
 /**
@@ -410,7 +410,6 @@ function multilang_change_lang(el,container,target) {
 			multilang_save_lang(this,this.form.form_lang);
 		});
 		// Maj du menu de langues apres multilang_save_lang
-		multilang_mark_empty_langs(container,target);
 	}
 
 	//change current lang
@@ -420,6 +419,7 @@ function multilang_change_lang(el,container,target) {
 	multilang_forms_fields[target_id].each(function(){
 		multilang_set_lang(this,lang);
 	});
+	multilang_mark_empty_langs(container,target);
 }
 
 /**
@@ -430,7 +430,6 @@ function multilang_change_lang(el,container,target) {
  *
  */
 function multilang_mark_empty_langs(container,target) {
-
 	var langs_empty = [];
 	var target_id = multilang_init_target_id(target);
 
@@ -455,8 +454,9 @@ function multilang_mark_empty_langs(container,target) {
 
 	// On indique dans le menu de langue, celles qui ont au moins un champ non renseigne
 	if(container!='') {
+		container.find('a').removeClass('empty');
 		$.each(langs_empty,function(i,name){
-			container.find('a[class~='+name+']').addClass('empty') ;
+			container.find('a[class~='+name+']').addClass('empty');
 		});
 	}
 }
