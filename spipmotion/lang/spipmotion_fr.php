@@ -153,6 +153,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_flvtool'=>'Installer FLVTool2',
 	'lien_forcer_ffmpeg_infos' => 'Forcer la mise &agrave; de ces informations',
 	'lien_recuperer_logo_fichier' => 'le fichier lui-m&ecirc;me',
+	'lien_supprimer_versions' => 'Supprimer toutes les versions du document',
+	'lien_supprimer_version' => 'Supprimer la version @version@',
 
 	// M
 	'message_document_encours_encodage_version' => 'Ce document est actuellement en attente d\'encodage en @version@.',

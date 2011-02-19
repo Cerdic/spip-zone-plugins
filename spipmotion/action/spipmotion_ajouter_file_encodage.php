@@ -50,12 +50,17 @@ function action_spipmotion_ajouter_file_encodage_post($r){
  *
  * Cette fonction n'est plus utilisée puisqu'on supprime uniquement au niveau du
  * lancement de l'encodage
- *
+ * 
  * @param int $id_document L'id_document original
+ * @param string $extension L'extension spécifique à supprimer
  */
-function spipmotion_supprimer_versions($id_document){
-
-	$v = sql_select("id_document,id_vignette,fichier","spip_documents","id_orig=".intval($id_document));
+function spipmotion_supprimer_versions($id_document,$extension=null){
+	
+	if($extension){
+		$v = sql_select("id_document,id_vignette,fichier","spip_documents","id_orig=".intval($id_document)." AND extension=".sql_quote($extension));
+	}else{
+		$v = sql_select("id_document,id_vignette,fichier","spip_documents","id_orig=".intval($id_document));
+	}
 
 	include_spip('inc/documents');
 	/**

@@ -1,8 +1,9 @@
 <plugin>
 	<nom>SPIPmotion</nom>
 	<icon>images/spipmotion.png</icon>
-	<auteur>Quentin Drouet (kent1)</auteur>
-	<version>0.7.1</version>
+	<auteur>kent1 (kent1@arscenic.info)</auteur>
+	<licence>GNU/GPL v3</licence>
+	<version>0.7.2</version>
 	<version_base>0.7.5</version_base>
 	<etat>test</etat>
 	<description>
