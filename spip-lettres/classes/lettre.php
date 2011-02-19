@@ -143,7 +143,8 @@
 		}
 
 
-		function enregistrer_statut($statut, $avec_envoi_aux_abonnes=true) {
+
+		function enregistrer_statut($statut, $impacte_queue_envois=true) {
 			$ancien_statut = $this->statut;
 			switch ($statut) {
 				case 'brouillon':
@@ -160,19 +161,26 @@
 							propager_les_secteurs();
 							calculer_langues_rubriques();
 						}
-						if ($avec_envoi_aux_abonnes) {
-						// appel a passer en job qeue
-						include_spip('inc/delivrer');
-						lettres_programmer_envois($this->id_lettre);
+
+						if ($impacte_queue_envois) {
+							// appel a passer en job qeue
+							include_spip('inc/delivrer');
+							lettres_programmer_envois($this->id_lettre);
 						};
 					}
 					break;
 				case 'envoyee':
 					if ($ancien_statut == 'envoi_en_cours') {
 						$this->statut = 'envoyee';
-						$this->date_fin_envoi = date('Y-m-d h:i:s');
+//						$this->date_fin_envoi = date('Y-m-d h:i:s');
 						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
 						sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
+						
+						if ($impacte_queue_envois) {
+							include_spip('inc/delivrer'); 
+							$nb = lettres_annuler_envois_restants (intval($this->id_lettre));
+							spip_log ("$nb envois annulés", "_lettres_arreter_envois");
+						};
 					}
 					break;
 				case 'poubelle':

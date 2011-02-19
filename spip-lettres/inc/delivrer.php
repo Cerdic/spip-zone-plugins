@@ -57,7 +57,7 @@ function lettres_envoyer_une_lettre($id_lettre,$id_abonne,$try=1){
 		// attention, il reste encore le job en cours dans la table
 		if (lettres_envois_restants($id_lettre)<=1){
 			$lettre = new lettre($id_lettre);
-			$lettre->enregistrer_statut('envoyee');
+			$lettre->enregistrer_statut('envoyee', false);
 		}
 	}
 	else {
@@ -81,6 +81,20 @@ function lettres_envois_restants($id_lettre){
 			sql_delete("spip_jobs_liens", 'id_job='.$row['id_job']);
 	}
 	return $c;
+}
+
+function lettres_annuler_envois_restants ($id_lettre){
+	$id_lettre = intval($id_lettre);
+	
+	$jobs = array_map('reset',sql_allfetsel('id_job', 'spip_jobs_liens',"objet='lettre' AND id_objet=$id_lettre"));
+	
+	$m = sql_delete('spip_jobs', sql_in('id_job',$jobs));
+	spip_log ("$m jobs deleted dans spip_jobs", "lettres_delivrer_stop");
+	
+	$n = sql_delete ('spip_jobs_liens',"objet='lettre' AND id_objet=$id_lettre");
+	spip_log ("$n liens deleted dans spip_jobs_liens", "lettres_delivrer_stop");
+
+	return $m;
 }
 
 function lettres_delivrer_surveille_ajax($id_lettre,$end_url){
