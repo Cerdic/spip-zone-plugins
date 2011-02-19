@@ -179,7 +179,7 @@
 						if ($impacte_queue_envois) {
 							include_spip('inc/delivrer'); 
 							$nb = lettres_annuler_envois_restants (intval($this->id_lettre));
-							spip_log ("$nb envois annulés", "_lettres_arreter_envois");
+							// un petit message serait bienvenu
 						};
 					}
 					break;
