@@ -670,47 +670,32 @@ jQuery.geoportail =
 	{	var lon = pos.lon;
 		var lat = pos.lat;
 		var ech = pos.zoom;
-		// Parametres de la vue
-		switch (pos.zone) {
-			case "MTQ":
-				{	if (!lon) lon = -61;
-					if (!lat) lat = 14.65;
-					if (!ech) ech = 9;
-					break;
-				}
-			case "REU":
-				{	if (!lon) lon = 55.5;
-					if (!lat) lat = -21.1;
-					if (!ech) ech = 8;
-					break;
-				}
-			case "GUF":
-				{	if (!lon) lon = -53;
-					if (!lat) lat = 4.8;
-					if (!ech) ech = 7;
-					break;
-				}
-			case "GLP":
-				{	if (!lon) lon = -61.42;
-					if (!lat) lat = 16.17;
-					if (!ech) ech = 8;
-					break;
-				}
-			case "MYT":
-				{	if (!lon) lon = 45.13;
-					if (!lat) lat = -12.82;
-					if (!ech) ech = 9;
-					break;
-				}
-			case "FXX":
-				{	if (!lon) lon = 1.7;
-					if (!lat) lat = 46.95;
-					if (!ech) ech = 5;
-					break;
-				}
-			default:
-				break;
-		}
+		var geocentre =
+		{
+			"FXX": { lon:1.7, lat:46.95, ech:5 },
+			"GLP": { lon:-61.42, lat:16.17, ech:8 },
+			"GUF": { lon:-53, lat:4.8, ech:7 },
+			"MTQ": { lon:-61, lat:14.65, ech:9 },
+			"MYT": { lon:45.13, lat:-12.82, ech:9 },
+			"NCL": { lon:165.9, lat:-21.2, ech:6 },
+			"PYF": { lon:-149.5, lat:-17.66, ech:8 },
+			"REU": { lon:55.5, lat:-21.1, ech:8 },
+			"SPM": { lon:-56.3,	 lat:46.94,	 ech:9 },
+			"WLF": { lon:-176.2, lat:-13.285,ech:11 },
+			
+			"ATF": { lon:140, lat:-66.7, ech:8 },
+			"CRZ": { lon:Geoportal.Catalogue.TERRITORIES[pos.zone].geocenter[0], 
+						lat:Geoportal.Catalogue.TERRITORIES[pos.zone].geocenter[1], 
+						ech:9 },
+			"KER": { lon:69.7, lat:-49.25,  ech:8 },
+			"SMA": { lon:-63.08, lat:18.07,  ech:11 },
+			"SBA": { lon:-62.85, lat:17.91, ech:11 },
+			"ANF": { lon:-64.34, lat:15.78, ech:6 },
+			"EUE": { lon:9.4, lat:48.94, ech:2 },
+		};
+		if (!lon) lon = geocentre[pos.zone].lon;
+		if (!lat) lat = geocentre[pos.zone].lat;
+		if (!ech) ech = geocentre[pos.zone].ech;
 
 		// Rechercher les couches a afficher
 		if (map.getMap().allowedGeoportalLayers) 

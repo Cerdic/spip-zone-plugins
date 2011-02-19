@@ -65,13 +65,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reu'		=> 'R&eacute;union',
 'spm'		=> 'St Pierre et Miquelon',
 'wlf'		=> 'Wallis et Futuna',
+'anf'		=> 'Antilles Française',
+'crz'		=> 'Crozet',
+'eue'		=> 'Union Européenne',
+'ker'		=> 'Kerguelen',
+'sba'		=> 'Saint-Barthélémy',
+'sma'		=> 'Saint-Martin',
+'asp'		=> 'Saint-Paul-Amsterdam (non encore en ligne)',
 
 // Code des zones Geoportail :
-'tzone'		=> '"FXX","ATF","GLP","GUF","MTQ","MYT","NCL","PYF","REU","SPM","WLF"',
-// Nom des zones Geoportail :
-'tzonetxt'	=> '"France m&eacute;tropolitaine","Terres Art. Australes","Guadeloupe","Guyane","Martinique","Mayotte","Nouvelle Cal&eacute;donie","Polyn&eacute;sie Fran&ccedil;aise","R&eacute;union","St Pierre et Miquelon","Wallis et Futuna"',
-// Disponibilite des zones Geoportail :
-'tzoned'	=> '1,0,1,1,1,1,0,0,1,0,0',
+'tzone'		=> '"FXX","ATF","GLP","GUF","MTQ","MYT","NCL","PYF","REU","SPM","WLF","SBA","SMA","CRZ","KER"', 
 
 // Gestion des projections courantes
 'proj'		=> 'Projections',

@@ -18,14 +18,9 @@ function geoportail_popup_zone ($name, $selected=null, $class='', $options="")
 
 	$s = "<select class='$class' name='$name' id='$name' $options >";
 	eval ('$p = array('._T("geoportail:tzone").');');
-	eval ('$px = array('._T("geoportail:tzonetxt").');');
-	eval ('$pd = array('._T("geoportail:tzoned").');');
 	$i=0;
-	foreach ($px as $v) 
-	{	$s.= "<option value='".$p[$i]."'";
-		if ($p[$i]==$selected) $s.= ' SELECTED';
-		if ($pd[$i++]==0) $s.= ' disabled style="color:graytext" '; 
-		$s.= ">$v</option>";
+	foreach ($p as $v)
+	{	$s .= "<option value='$v'".($v==$selected ? ' SELECTED':'').">"._T("geoportail:".strtolower($v))."</option>";
 	}
 	$s.= "</select>\n";
 	return $s;
