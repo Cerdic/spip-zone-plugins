@@ -1,7 +1,7 @@
 <plugin>
 	<nom>S&eacute;ances</nom>
 	<auteur>Dominique Wojylac</auteur>
-	<version>1.1.2</version>
+	<version>1.2</version>
 	<etat>stable</etat>
 	<icon>images/seances-48.png</icon>
 	<licence>GPL 3 - &#169; 2010</licence>
@@ -19,12 +19,22 @@
 	</pipeline>
 	<version_base>0.0</version_base>
 	<install>seances_installations.php</install>
-	<bouton id='seances_endroits' parent='naviguer'>
+	<bouton id="seances_endroits" parent="naviguer">
 		<icone>images/seances-24.png</icone>
 		<titre>seances:seances_endroits</titre>
 		<url>seances_endroits</url>
 	</bouton>
-	<bouton id='seances_config' parent='configuration'>
+	<bouton id="bando_seances_endroits" parent="bando_edition">
+		<icone>images/seances-24.png</icone>
+		<titre>seances:seances_endroits</titre>
+		<url>seances_endroits</url>
+	</bouton>
+	<bouton id="seances_config" parent="configuration">
+		<icone>images/seances-24.png</icone>
+		<titre>seances:seances_configuration</titre>
+		<url>seances_configuration</url>
+	</bouton>
+	<bouton id="bando_seances_config" parent="bando_configuration">
 		<icone>images/seances-24.png</icone>
 		<titre>seances:seances_configuration</titre>
 		<url>seances_configuration</url>

@@ -14,7 +14,7 @@
 				|parametre_url{id_seance,new}
 				|parametre_url{id_article,#ENV{id_article}}
 				|parametre_url{duplicate,#ID_SEANCE})" title="<:seances:action_dupliquer:>"><:seances:action_dupliquer_court:></a>]
-			[ | <a href="(#URL_ACTION_AUTEUR{supprimer_seance,#ID_SEANCE,#SELF})" onclick="return confirm('<:seances:confimer_action_supprimer_seance:>')" title="<:seances:action_supprimer:>"><:seances:action_supprimer_court:></a>]
+			[ | <a href="(#URL_ACTION_AUTEUR{supprimer_seance,#ID_SEANCE,#SELF})" onclick="return confirm('<:seances:confirmer_action_supprimer_seance:>')" title="<:seances:action_supprimer:>"><:seances:action_supprimer_court:></a>]
 		]</span>
 	</li>
 </BOUCLE_seances>
@@ -24,10 +24,10 @@
 </B_seances>
 [(#AUTORISER{modifier,seance})
 	<p>[<a class="seances_action" href="(#URL_ECRIRE{seance_edit}
-		|parametre_url{id_seance,new}
+		|parametre_url{new,oui}
 		|parametre_url{id_article,#ENV{id_article}})"><:seances:nouvelle_seance:></a>]
 		
-	[(#GET{total_seances}|>{1}|oui)[ | <a class="seances_action" href="(#URL_ACTION_AUTEUR{supprimer_seances_article,#ENV{id_article},#SELF})" onclick="return confirm('<:seances:confimer_action_supprimer_toutes_seances:>')"><:seances:action_supprimer_toutes_seances:></a>]]
+	[(#GET{total_seances}|>{1}|oui)[ | <a class="seances_action" href="(#URL_ACTION_AUTEUR{supprimer_seances_article,#ENV{id_article},#SELF})" onclick="return confirm('<:seances:confirmer_action_supprimer_toutes_seances:>')"><:seances:action_supprimer_toutes_seances:></a>]]
 	</p>
 ]
 </div>

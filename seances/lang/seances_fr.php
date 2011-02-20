@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article_rattachement' => 'ID article de rattachement (facultatif)',
 
 // C
-'confimer_action_supprimer_seance' => 'Supprimer cette séance ?',
-'confimer_action_supprimer_toutes_seances' => 'Supprimer toutes les séances liées à cet article ?',
+'confirmer_action_supprimer_seance' => 'Supprimer cette séance ?',
+'confirmer_action_supprimer_toutes_seances' => 'Supprimer toutes les séances liées à cet article ?',
 'confirmer_desactiver_seances_rubrique' => 'Cela supprime toutes les séances enregistrées pour tous les articles de cette rubrique !',
 'confirmer_reinitialiser_seances' => 'Voulez-vous vriment supprimer toutes les séances enregistrées ? Cette action est irréversible.',
 
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'endroits_seances' => 'LIEUX DES SÉANCES',
 'erreur_nom_endroit_vide' => 'Erreur ! Le nom ne peut être vide.',
 'explications_activer_rubrique_seances' => 'Activer la gestion des séances pour les articles de cette rubrique.',
-'explications_desactiver_rubrique_seances' => 'Désactiver la gestion des séances pour les articles de cette rubrique. <strong>(Attention ! Cela supprime toutes les séances enregistrées pour tous les articles de cette rubrique).</strong>',
+'explications_desactiver_rubrique_seances' => 'Désactiver la gestion des séances pour les articles de cette rubrique.',
 
 // I
 'info_modifier_seances_endroit' => 'Renseignements sur l\'endroit, le lieu. (Titre seul obligatoire).',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'seances_extra2' => 'Séances',
 'seances_endroits_extra2' => 'Séances_endroits',
 'seances_activer_rubrique' => 'SÉANCES POUR CETTE RUBRIQUE',
-'seances_configuration' => 'Configuration plugin Séances',
+'seances_configuration' => 'Réinitialiser les séances',
 'seances_endroit' => 'Endroit',
 'seances_endroits' => 'Séances / Endroits',
 'symbole_heure' => 'h',
