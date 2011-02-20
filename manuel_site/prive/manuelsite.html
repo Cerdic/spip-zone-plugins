@@ -1,0 +1,66 @@
+<div id="manuelsite_divbouton" >
+   <a id="manuelsite_bouton" href="#" title="<:manuelsite:titre_manuel:>">
+      [(#CHEMIN{images/manuelsite-32.png}|balise_img{<:manuelsite:titre_manuel:>})] 
+   </a>
+</div>
+<div id="manuelsite_contenu" style="background-color:#CONFIG{manuelsite/background_color};width:#CONFIG{manuelsite/largeur}px;">
+   <BOUCLE_contenu_article(ARTICLES){id_article}>
+      <div class="contenu-principal">
+         <div class="cartouche">
+            [(#LOGO_ARTICLE||image_reduire{200,200})]
+            [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+            <h1 class="h1 #EDIT{titre}">#TITRE</h1>
+            [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+         </div>
+      
+         <div class="surlignable">
+            [<div class="intro">(#CONFIG{manuelsite/intro}|typo|propre)</div>]
+            [<div class="email"><:manuelsite:help:><a href="mailto:#CONFIG{manuelsite/email}">(#CONFIG{manuelsite/email})</a></div>]
+            [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+            [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+         </div>
+      
+         [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+      
+         [<div class="ps">
+            <h2 class="h2"><:info_ps:></h2>
+            <div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
+         </div>]
+      
+      </div>
+   </BOUCLE_contenu_article>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		
+		// Ouvrir le Manuel
+		$( "#manuelsite_bouton" ).click(function() {
+			$( "#manuelsite_contenu" ).toggle( 'Blind' );
+			return false;
+		});
+		
+		// Cacher le contenu
+		$( "#manuelsite_contenu" ).hide();
+
+		// Traiter les h3 et h4
+		$.each( ['h3','h4'], function(i,hi){
+
+			$( "#manuelsite_contenu" ).find(hi).each(function(index) {
+				// Créer un div après le h3 et y placer tout ce qui se trouve après et jusqu'au hi suivant
+				$(this).after("<div></div>").next().append($(this).next().nextUntil(hi));
+				// Déplier le contenu du hi
+				$(this).next().hide();
+				$(this).click(function(){
+						$(this).next().slideToggle();
+						$(this).toggleClass('open');
+						return false;
+					});
+			 });
+
+		 });
+
+
+	});
+</script>
+

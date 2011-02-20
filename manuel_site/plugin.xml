@@ -1,0 +1,28 @@
+<plugin>
+	<nom>Manuel de r&eacute;daction du site</nom>
+	<auteur>
+		Yffic
+	</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description>
+	<multi>[fr]Ce plugin installe une ic&ocirc;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&eacute; le manuel de r&eacute;daction du site. Ce manuel est un article du site</multi>
+	</description>
+	<icon>images/manuelsite-32.png</icon>
+	<lien></lien>
+	<prefix>manuelsite</prefix>
+	<pipeline>
+		<nom>body_prive</nom>
+		<inclure>manuelsite_prive_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>manuelsite_prive_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="cfg" version="[1.10;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="saisies" version="[1.1;]" />
+	<utilise id="palette" version="[1.2.2;]" />
+	<categorie>edition</categorie>
+</plugin>

@@ -1,0 +1,79 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=manuelsite -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_manuelsite">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   <form name="formulaire_config_manuelsite" method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+
+      <ul>
+          [(#SAISIE{fieldset,fcontenu_manuelsite,env,
+             label=<:manuelsite:legende_contenu:>,
+             saisies=#ARRAY{
+             	0, #ARRAY{
+                	saisie, input,
+                   options, #ARRAY{
+                   	 nom, id_article,
+                      label, <:manuelsite:label_id_article:>,
+                      defaut, 0,
+                      obligatoire, oui,
+                      explication, <:manuelsite:explication_id_article:>
+                   }
+                },
+             	1, #ARRAY{
+                	saisie, textarea,
+                   options, #ARRAY{
+                   	 nom, intro,
+                      class, porte_plume_partout,
+                      label, <:manuelsite:label_intro:>,
+                      defaut, <:manuelsite:intro:>,
+                      explication, <:manuelsite:explication_intro:>
+                   }
+                },
+             	2, #ARRAY{
+                	saisie, email,
+                   options, #ARRAY{
+                   	 nom, email,
+                      label, <:manuelsite:label_email:>,
+                      explication, <:manuelsite:explication_email:>
+                   }
+                }
+             }
+          })]
+          [(#SAISIE{fieldset,fapparence_manuelsite,env,
+             label=<:manuelsite:legende_apparence:>,
+             saisies=#ARRAY{
+             	0, #ARRAY{
+                	saisie, input,
+                   options, #ARRAY{
+                   	 nom, largeur,
+                      label, <:manuelsite:label_largeur:>,
+                      defaut, 300,
+                      obligatoire, oui,
+                      explication, <:manuelsite:explication_largeur:>
+                   }
+                },
+             	1, #ARRAY{
+                	saisie, couleur,
+                   options, #ARRAY{
+                   	 nom, background_color,
+                      label, <:manuelsite:label_background_color:>,
+                      defaut, #D6DDE5,
+                      obligatoire, oui,
+                      explication, <:manuelsite:explication_background_color:>
+                   }
+                }
+             }
+          })]
+      </ul>
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>
