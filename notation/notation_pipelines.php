@@ -21,7 +21,7 @@ function notation_affichage_final($flux){
 	if(function_exists('compacte_head')){
 		$incHead = compacte_head($incHead);
 	}
-	return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
+	return substr_replace($flux, $incHead, strpos($flux, '</body>'), 0);
 
 }
 
