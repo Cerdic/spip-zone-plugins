@@ -111,7 +111,7 @@ function definitions_projet($use='',$valeurs=''){
 		$formulaire=array();
 			
 		foreach ($champs AS $champ =>$valeur){
-			$formulaire[$fieldsets[$valeur['fieldset']]['titre']][$valeur['rang']]=$valeur;
+			$formulaire[$valeur['fieldset']][$valeur['rang']]=$valeur;
 			}	
 		
 		$valeurs=array(
@@ -148,7 +148,7 @@ function formulaires_projets_charger_dist($id_projet=''){
 	$dates= array('date_debut','date_fin_estimee');
 	
 	foreach($dates as $champ){
-		if(idate('U',$val[$champ])==0)$val[$champ]=date('Y-m-d G:i:s');
+		if(idate('U',$val[$champ])==0)$val[$champ]='';
 	}
 	
 	$definitions=definitions_projet($use='charger',$val);

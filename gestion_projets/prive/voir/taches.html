@@ -11,8 +11,8 @@
 					<th class='auteur'><:gestpro:nom:></th>
 					<th class='temps'><:gestpro:duree_estimee:></th>
 					<th class='temps'><:gestpro:duree_reelle:></th>
-					<th class='temps'><:gestpro:montant_estimee:></th>
-					<th class='temps'><:gestpro:montant_reelle:></th>										
+					<th class='temps'><:gestpro:montant_estime:></th>
+					<th class='temps'><:gestpro:montant_reell:></th>										
 					<th class='active'><:gestpro:action:></th>									
 				</tr>
 			</thead>
@@ -29,19 +29,20 @@
 				[(#DUREE_REELLE)]
 				</td>
 				<td>
-				[(#MONTANT_ESTIMEE)]
+				[(#MONTANT_ESTIME)]
 				</td>					
 				<td>
-				[(#MONTANT_REELLE)]
+				[(#MONTANT_REEL)]
 				</td>				
 				
 				<td>
 					[(#STATUT|=={active}|non)
-						<a href="#URL_ACTION_AUTEUR{activer,#ID_PROJET-active,#SELF}"><:gestpro:activer:></a>
+						<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_TACHE-tache-active,#SELF}"><:gestpro:activer:></a>
 						]
 					[(#STATUT|=={active}|oui)
-						<a href="#URL_ACTION_AUTEUR{activer,#ID_PROJET-desactive,#SELF}"><:gestpro:desactiver:></a>
+						<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_TACHE-tache-desactive,#SELF}"><:gestpro:desactiver:></a>
 						]
+					#ACTIONS	
 				</td>						
 			</tr>
 			</BOUCLE_projets>

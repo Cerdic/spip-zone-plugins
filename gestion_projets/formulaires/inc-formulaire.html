@@ -1,8 +1,10 @@
+
+
 <BOUCLE_fieldsets(POUR){tableau #ENV{fieldsets}}{par cle}>
 	<B_champs>
 		<fieldset[ id="(#VALEUR|table_valeur{id})"]><legend>[(#VALEUR|table_valeur{titre})]</legend>
 			<ul>
-				<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{(#VALEUR|table_valeur{titre})})}{par cle}>
+				<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{#CLE})}{par cle}>
 					#SET{valeurs,#VALEUR|table_valeur{form}}
 					[(#SAISIE{
 					[(#GET{valeurs}|table_valeur{field})],

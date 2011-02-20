@@ -100,11 +100,14 @@ function exec_projets_dist(){
 			$haut='<div class="fiche_objet">'.$bandeau.'<h1>'.$contexte['nom'].'</h1><div class="nettoyeur"></div>';	
 				
 			$contenu=recuperer_fond('prive/voir/projet',$contexte,array('ajax'=>true));
+			$actions ='';
 			
 			$participants  = recuperer_fond('prive/voir/participants', $contexte);
 			$participants = cadre_depliable('',_T('gestpro:participants_projet'),$deplie,$participants ,'form_participants','e');    
 			
-			$taches  = recuperer_fond('prive/voir/taches', $contexte);
+			$deplie=_request('deplie_taches');
+			
+			$taches  = recuperer_fond('prive/voir/taches', $contexte,array('ajax'=>true));
 			$taches = cadre_depliable('',_T('gestpro:taches_projet'),$deplie,$taches ,'form_taches','e');    
 				 
 			echo	

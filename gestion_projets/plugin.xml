@@ -35,8 +35,8 @@
 		<nom>autoriser</nom>
 		<inclure>gestion_projets_autoriser.php</inclure>
 	</pipeline>		
-	
 	<fonctions>gestion_projets_fonctions.php</fonctions>
+	<options>gestion_projets_options.php</options>	
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="saisies" version="[1.8.12;]" />	
 	<necessite id="spip_bonux" version="[2.2.15;]" />		

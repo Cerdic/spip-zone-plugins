@@ -5,15 +5,23 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
+	'action'=>'Action',
+	'actif'=>'Actif',
+	'active'=>'Active',	
+	'activer'=>'Activer',		
 	'ajouter_projet'=>'Ajouter un projet',
+	'ajouter_tache'=>'Ajouter une tâche',		
 	
 	// C
 	'chef_projet'=>'Chef du projet',
 	
 	// D
 	'date_debut'=>'Date début',
-	'date_fin_estimee'=>'Date fin estimée',			
-	'duree_estimee'=>'Duree estimée',	
+	'date_fin_estimee'=>'Date fin estimée',	
+	'desactiver'=>'Désactiver',
+	'duree'=>'Durée',						
+	'duree_estimee'=>'Durée estimée',	
+	'duree_reelle'=>'Durée réelle',		
 	
 	// E
 	'editer_projet'=>'Editer le projet',		
@@ -29,7 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//M
 	'montant_estime'=>'Montant estimée',
-	'montant_heure'=>'Montant par heure',	
+	'montant_heure'=>'Montant par heure',
+	'montant_reel'=>'Montant réel',		
 	
 	//N
 	'nom'=>'Nom',
@@ -52,6 +61,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'start'=>'Start',
 	'stop'=>'Stop',	
+	
+	//T
+	'taches_projet'=>'Les tâches tu projet',
 	
 
 
