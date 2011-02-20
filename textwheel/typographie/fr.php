@@ -33,6 +33,7 @@ function typographie_fr($t) {
 				$trans["\xc2\xa0"] = '~';
 				$trans["\xc2\xbb"] = '&#187;';
 				$trans["\xc2\xab"] = '&#171;';
+				$trans["\xe2\x80\x94"] = '--';
 				$trans["\xe2\x80\x9d"] = '&#8221;';
 				$trans["\xe2\x80\x9c"] = '&#8220;';
 				$trans["\xc2\xb0"] = '&#176;';
