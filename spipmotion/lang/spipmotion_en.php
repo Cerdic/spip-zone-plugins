@@ -157,6 +157,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_supprimer_version' => 'Remove the @version@ version',
 
 	// M
+	'message_confirmation_encodage' => 'Are you sure you want to (re)encode this document in the @version@ format?',
+	'message_confirmation_encodages' => 'Are you sure you want to (re)encode this document in all the formats?',
+	'message_confirmation_suppression_version' => 'Are you sure you want to remove the @version@ version of this document?',
+	'message_confirmation_suppression_versions' => 'Are you sure you want to remove all the encoded versions of this document?',
 	'message_document_encours_encodage_version' => 'This document is currently awaiting encoding in @version@.',
 	'message_encodage_erreur_log' => 'The log file is as follows :',
 	'message_encodage_objet_lie' => 'It is associated with the object @objet@ #@id_objet@ :',
