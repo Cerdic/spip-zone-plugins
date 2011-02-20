@@ -13,7 +13,7 @@ function exclure_sect_pre_boucle(&$boucle){
     
         $crit = $boucle->criteres;
         $exclut = exclure_sect_choisir($crit,$type);       
-        $boucle->where[] = array("'NOT IN'", "'$type.id_secteur'",sql_quote($exclut));    
+        $boucle->where[] = array("'NOT'",array("'IN'", "'$type.id_secteur'",sql_quote($exclut)));    
          
     }
     
@@ -21,7 +21,7 @@ function exclure_sect_pre_boucle(&$boucle){
     
         $crit = $boucle->criteres;
         $exclut = exclure_sect_choisir($crit,$type);       
-        $boucle->where[] = array("'NOT IN'", "'$type.id_rubrique'",sql_quote($exclut));    
+        $boucle->where[] = array("'NOT'",array("'IN'", "'$type.id_rubrique'",sql_quote($exclut)));    
          
     }
     
@@ -30,7 +30,7 @@ function exclure_sect_pre_boucle(&$boucle){
         $exclut = exclure_sect_choisir($crit,$type);        
         global $table_prefix;
         $boucle->from['L1']=$table_prefix.'_articles';
-        $boucle->where[] = array("'NOT IN'", "'L1.id_secteur'",sql_quote($exclut));  
+        $boucle->where[] = array("'NOT'",array("'IN'", "'L1.id_secteur'",sql_quote($exclut)));  
         $boucle->join['L1'] = array('forum','id_article');
     }
 
