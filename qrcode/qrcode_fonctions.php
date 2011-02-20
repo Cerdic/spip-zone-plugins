@@ -45,7 +45,7 @@ $().ready(function() {
 		var re = new RegExp('^(https?|ftp)://') ;
 		var url = $(this).attr('href') ;
 		if (!re.test(url)) {
-			url = url_site_spip + url ;
+			url = url_site_spip + '/' + url ;
 		}
 		$(this).parent().prepend('<img$class$style src=\""._DIR_RACINE."?page=qrcode&data='+encodeURIComponent(url)+'&size=$taille&level=$ecc\" alt=\"qrcode:'+url+'\" title=\""._T('qrcode:aide')."\"/>') ;
 	}) ;
