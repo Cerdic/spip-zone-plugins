@@ -27,12 +27,14 @@
     <description>
 	<multi>
 	[fr] 
-	Ce plugin est destin&eacute; &agrave; la gestion int&eacute;grale d\'un syst&egrave;me d\'&eactue; change local (SEL).
-	Que ce soit un SEl qui travaille sur des &eacute;changes simples, un SEL de stages, un SEL d \'h&eacute;bergement ou tout autre syst&egrave;.
-	Que ce soit un SEL qui fonctionne avec un carnet d\'&eacute;change, un syst&egrave;me de JEU.
+	Ce plugin est destin&eacute; &agrave; la gestion int&eacute;grale d'un syst&egrave;me d'&eacute;change local (SEL).
+	Que ce soit un SEl qui travaille sur des &eacute;changes simples, des &eacute;changes d'objets, des &eacute;changes de savoir, un SEL de stages, un SEL d 'h&eacute;bergement ou tout autre syst&egrave;.
+	Que ce soit un SEL qui fonctionne avec un carnet d'&eacute;change, un syst&egrave;me de JEU.
 	Il est destin&eacute; &agrave; tout type de SEL.
-	La publication en ligne des annonces est pr&eacute;vue.
-	La gestion en ligne de la comptabilit&eacute; est pr&eacute;vue.
+	La publication en ligne des annonces, avec cr&eacute;ation, changement ou suppression est pr&eacute;vue.
+	La publication autonome du catalogue, &agrave; partir des annonces en ligne, est pr&eacute;vue.
+	La gestion en ligne des &eacute;changes avec gestion autonome par les deux &eacute;changeurs, est pr&eacute;vue.
+	La gestion en ligne des adh&eacute;sions, leur renouvellement, leur caducit&eacute;, est pr&eacute;vue.
 	</multi>
 	</description>
     <!-- URL de documentation http://www.spip-contrib.net/ -->
