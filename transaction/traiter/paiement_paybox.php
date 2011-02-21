@@ -25,6 +25,10 @@ function traiter_paiement_paybox_dist($args, $retours){
     if ($_REQUEST['montant_fixe_1']) $_SESSION['total'] = $_REQUEST['montant_fixe_1'];
     if ($_REQUEST['montant_selection_1']) $_SESSION['total'] = $_REQUEST['montant_selection_1'];
     if ($_REQUEST['montant_1']) $_SESSION['total'] = $_REQUEST['montant_1'];
+        
+    if (intval($_REQUEST['montant_multiplicateur_1']) > 0) {
+	$_SESSION['total'] = $_SESSION['total'] * intval($_REQUEST['montant_multiplicateur_1']);
+    } 
     
     // ID unique de la transaction
     $_SESSION['ref'] = uniqid();
