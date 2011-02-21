@@ -1,0 +1,129 @@
+<!-- titre=<:jsonp:title:>--> 
+<!-- descriptif=<:jsonp:description:>--> 
+<!-- icone=images/jsonp-24.png -->
+<!-- logo=images/jsonp-32.png -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_config_crayons">
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+
+<h3 class="legend"><:jsonp:selecciona_rubrique:></h3>
+<ul>
+	<li class="editer_secteur">#SET{secteurs,#CONFIG{jsonp/secteurs,#ARRAY{0,0}}}
+		<label><:jsonp:selecciona_rubrique_label:></label>
+		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{secteurs})</span>]
+		<select name="secteurs[]" multiple="multiple" size="9">
+			<BOUCLE_racine(RUBRIQUES){racine}{tout}>
+			<option value="#ID_SECTEUR"[ (#ID_SECTEUR|in_array{#GET{secteurs}}|?{'selected="selected"'})]>#TITRE</option>
+			</BOUCLE_racine>
+		</select>
+	</li>
+
+	<li class="editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+		<label><:jsonp:numero_articulos:></label>
+		<p class='explication'><:jsonp:explication_numero_articulos:></p>
+		<input type="text" name="paginacion_jsonp" class="text" size="3" id='reduire_logo' value="[(#ENV{paginacion_jsonp}|intval)]" />
+	</li>
+
+</ul>
+
+<h3 class="legend"><:jsonp:configuracion_article:></h3>
+<ul>
+	<li class="choix">
+        <input type="checkbox" name="incluir_surtitre" class="checkbox" value='on' [(#ENV{incluir_surtitre}|oui)checked="checked"] />
+        <label><:jsonp:incluir_surtitre:></label>
+	</li>
+	
+	<li class="choix">
+        <input type="checkbox" name="incluir_titre" class="checkbox" value='on' [(#ENV{incluir_titre}|oui)checked="checked"] />
+        <label><:jsonp:incluir_titre:></label>
+	</li>
+    
+	<li class="choix">
+        <input type="checkbox" name="incluir_soustitre" class="checkbox" value='on' [(#ENV{incluir_soustitre}|oui)checked="checked"] />
+        <label><:jsonp:incluir_soustitre:></label>
+	</li>
+
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_descriptif" class="checkbox" value='on' [(#ENV{incluir_descriptif}|oui)checked="checked"] />
+        <label><:jsonp:incluir_descriptif:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_chapo" class="checkbox" value='on' [(#ENV{incluir_chapo}|oui)checked="checked"] />
+        <label><:jsonp:incluir_chapo:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_ps" class="checkbox" value='on' [(#ENV{incluir_ps}|oui)checked="checked"] />
+        <label><:jsonp:incluir_ps:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_visites" class="checkbox" value='on' [(#ENV{incluir_visites}|oui)checked="checked"] />
+        <label><:jsonp:incluir_visites:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_popularite" class="checkbox" value='on' [(#ENV{incluir_popularite}|oui)checked="checked"] />
+        <label><:jsonp:incluir_popularite:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_lang" class="checkbox" value='on' [(#ENV{incluir_lang}|oui)checked="checked"] />
+        <label><:jsonp:incluir_lang:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_notes" class="checkbox" value='on' [(#ENV{incluir_notes}|oui)checked="checked"] />
+        <label><:jsonp:incluir_notes:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_introduction" class="checkbox" value='on' [(#ENV{incluir_introduction}|oui)checked="checked"] />
+        <label><:jsonp:incluir_introduction:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_url_article" class="checkbox" value='on' [(#ENV{incluir_url_article}|oui)checked="checked"] />
+        <label><:jsonp:incluir_url_article:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_logo_article" class="checkbox" value='on' [(#ENV{incluir_logo_article}|oui)checked="checked"] />
+        <label><:jsonp:incluir_logo_article:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_logo_article_survol" class="checkbox" value='on' [(#ENV{incluir_logo_article_survol}|oui)checked="checked"] />
+        <label><:jsonp:incluir_logo_article_survol:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_mots" class="checkbox" value='on' [(#ENV{incluir_mots}|oui)checked="checked"] />
+        <label><:jsonp:incluir_mots:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_audios" class="checkbox" value='on' [(#ENV{incluir_audios}|oui)checked="checked"] />
+        <label><:jsonp:incluir_audios:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_images" class="checkbox" value='on' [(#ENV{incluir_images}|oui)checked="checked"] />
+        <label><:jsonp:incluir_images:></label>
+	</li>
+
+	<li class="choix">
+        <input type="checkbox" name="incluir_docs" class="checkbox" value='on' [(#ENV{incluir_docs}|oui)checked="checked"] />
+        <label><:jsonp:incluir_docs:></label>
+	</li>
+</ul>
+
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+</p>
+</div>
+</form>
+
+</div>

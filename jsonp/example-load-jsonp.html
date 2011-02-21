@@ -1,0 +1,51 @@
+#CACHE{3600}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>Example load jsonp - Jsonp SPIP plugin</title>
+	
+	<INCLURE{fond=inc-head}>
+	
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.getJSON('[(#URL_PAGE{jsonp})&callback=?]', function(data){
+			$.each(data, function(entryIndex, entry){
+				var li_id = "articulo_" + entry['id_article'];
+	         	$("ul#warper").append(
+	         		"<li class='articulo' id='" + li_id + "'><ul></ul></li>"
+	         	);
+	         	$("li#" + li_id + " ul").append(
+	         		"<li><span>titulo: </span>" + entry['titre'] + "</li>"
+	         		+"<li><span>id: </span>" + entry['id_article'] + "</li>"
+	         		+"<li><span>sobretitulo: </span>" + entry['surtitre'] + "</li>"
+	         		+"<li><span>subtitulo: </span>" + entry['soustitre'] + "</li>"
+	         		+"<li><span>url: </span>" + entry['url_article'] + "</li>"
+	         		+"<li><span>descriptivo: </span>" + entry['descriptif'] + "</li>"
+	         		+"<li><span>cabeceira: </span>" + entry['chapo'] + "</li>"
+	         		+"<li><span>pe de artigo: </span>" + entry['ps'] + "</li>"
+	         		+"<li><span>visitas: </span>" + entry['visites'] + "</li>"
+	         		+"<li><span>popularidade: </span>" + entry['popularite'] + "</li>"
+	         		+"<li><span>idioma: </span>" + entry['lang'] + "</li>"
+	         		+"<li><span>notas: </span>" + entry['notes'] + "</li>"
+	         		+"<li><span>introduccion: </span>" + entry['introduction'] + "</li>"
+	         		+"<li><span>logo: </span>" + entry['logo_article'] + "</li>"
+	         		+"<li><span>logo de substitucion: </span>" + entry['logo_article_survol'] + "</li>"
+	         	);
+	      	});
+	   	});
+	});
+</script>
+	
+<style>
+ul#warper{background-color:#fff; padding:20px}
+li.articulo{border-bottom:1px solid #999; padding:20px}
+li.articulo ul li{line-height:18px}
+span{font-weight:bold}
+</style>
+</head>
+
+<body>
+<ul id="warper">
+</ul>
+</body>
+</html>

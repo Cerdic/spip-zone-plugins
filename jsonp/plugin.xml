@@ -1,0 +1,21 @@
+<plugin>
+	<nom>jsonp</nom>
+	<auteur>Berio Molina (escoitar.com)</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<licence>
+		&#169; 2006-2011 - GNU/GPL
+	</licence>
+	<description>
+	<multi>
+	[gl]Xenera dous arquivos jsonp similares ao rss. Un deles permite acceder a todos os campos dos artigos e o outro &eacute; configurable, permitindo seleccionar estes campos.
+	</multi>
+  	</description>
+	<icon>
+	images/jsonp-128.png
+	</icon>
+	<lien>http://imasd.escoitar.com/plugin-jsonp-para-spip/</lien>
+	<prefix>jsonp</prefix>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0;]" />
+</plugin>

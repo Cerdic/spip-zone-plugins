@@ -1,0 +1,30 @@
+[(#REM)
+
+  Plugin Jsonp
+  (c) 2010 Berio Molina. Escoitando.com
+  Distribue sous licence GPL
+
+]
+[(#HTTP_HEADER{Content-Type: application/json[; charset=(#CHARSET)]})][(#ENV{callback}|oui)[(#ENV{callback})(]][<BOUCLE_art(ARTICLES){par date}{inverse}{0,10}{','}>
+	{
+		['surtitre': '(#SURTITRE|texte_backend|texte_script)',]
+		['titre': '(#TITRE|supprimer_numero|texte_backend|texte_script)',]
+		['soustitre': '(#SOUSTITRE|texte_backend|texte_script)',]
+		['descriptif': '(#DESCRIPTIF|texte_backend|texte_script)',]
+		['chapo': '(#CHAPO|texte_backend|texte_script)',]
+		['ps': '(#PS|texte_backend|texte_script)',]
+		['visites': '(#VISITES)',]
+		['popularite': '(#POPULARITE)',]
+		['lang': '(#LANG)',]
+		['notes': '(#NOTES|texte_backend|texte_script)',]
+		['introduction': '(#INTRODUCTION|texte_backend|texte_script)',]
+		['url_article': '(#URL_ARTICLE|url_absolue)',]
+		['logo_article': '(#LOGO_ARTICLE_NORMAL|extraire_attribut{src}|url_absolue)',]
+		['logo_article_survol': '(#LOGO_ARTICLE_SURVOL|extraire_attribut{src}|url_absolue)',]
+		<B_mots>'mots': [<BOUCLE_mots(MOTS){id_article}{","}>{'id_mot': '#ID_MOT', 'titre': '[(#TITRE|texte_backend|texte_script)]', 'url_mot': '#URL_MOT', 'id_groupe': '#ID_GROUPE'}</BOUCLE_mots>],</B_mots>
+		<B_sons>'audios': [<BOUCLE_sons(DOCUMENTS){id_article}{extension==mp3}{doublons}{","}>{'id_document': '#ID_DOCUMENT',[ 'titre': '(#TITRE|texte_backend|texte_script)',][ 'descripcion': '(#DESCRIPTIF|texte_backend|texte_script)',][ 'fichier': '(#FICHIER|basename)',][ 'extension': '(#EXTENSION)',][ 'taille': '(#TAILLE)',] 'url_document': '[(#URL_DOCUMENT|url_absolue)]'}</BOUCLE_sons>],</B_sons>
+		<B_imx>'images': [<BOUCLE_imx(DOCUMENTS){id_article}{extension==jpg|jpeg|gif|png}{doublons}{","}>{'id_document': '#ID_DOCUMENT',[ 'titre': '(#TITRE|texte_backend|texte_script)',][ 'descripcion': '(#DESCRIPTIF|texte_backend|texte_script)',][ 'fichier': '(#FICHIER|basename)',][ 'extension': '(#EXTENSION)',][ 'taille': '(#TAILLE)',][ 'largeur': '(#LARGEUR)',][ 'hauteur': '(#HAUTEUR)',][ 'logo_document': '(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)',] 'url_document': '[(#URL_DOCUMENT|url_absolue)]'}</BOUCLE_imx>],</B_imx>
+		<B_docs>'docs': [<BOUCLE_docs(DOCUMENTS){id_article}{doublons}{","}>{'id_document': '#ID_DOCUMENT',[ 'titre': '(#TITRE|texte_backend|texte_script)',][ 'descripcion': '(#DESCRIPTIF|texte_backend|texte_script)',][ 'fichier': '(#FICHIER|basename)',][ 'extension': '(#EXTENSION)',][ 'taille': '(#TAILLE)',] 'url_document': '[(#URL_DOCUMENT|url_absolue)]'}</BOUCLE_docs>],</B_docs>
+		'id_article': '#ID_ARTICLE'
+	}</BOUCLE_art>		
+][(#ENV{callback}|oui))]

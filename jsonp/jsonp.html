@@ -1,0 +1,30 @@
+[(#REM)
+
+  Plugin Jsonp
+  (c) 2010 Berio Molina. Escoitando.com
+  Distribue sous licence GPL
+
+]
+[(#HTTP_HEADER{Content-Type: application/json[; charset=(#CHARSET)]})][(#ENV{callback}|oui)[(#ENV{callback})(]][<BOUCLE_art(ARTICLES){id_rubrique IN #CONFIG{jsonp/secteurs,0}}{par date}{inverse}{pagination #CONFIG{jsonp/paginacion_jsonp,15}}{','}>
+	{[
+		(#CONFIG{jsonp/incluir_surtitre}|oui)['surtitre': '(#SURTITRE|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_titre}|oui)['titre': '(#TITRE|supprimer_numero|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_soustitre}|oui)['soustitre': '(#SOUSTITRE|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_descriptif}|oui)['descriptif': '(#DESCRIPTIF|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_chapo}|oui)['chapo': '(#CHAPO|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_ps}|oui)['ps': '(#PS|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_visites}|oui)['visites': '(#VISITES)',]][
+		(#CONFIG{jsonp/incluir_popularite}|oui)['popularite': '(#POPULARITE)',]][
+		(#CONFIG{jsonp/incluir_lang}|oui)['lang': '(#LANG)',]][
+		(#CONFIG{jsonp/incluir_notes}|oui)['notes': '(#NOTES|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_introduction}|oui)['introduction': '(#INTRODUCTION|texte_backend|texte_script)',]][
+		(#CONFIG{jsonp/incluir_url_article}|oui)['url_article': '(#URL_ARTICLE|url_absolue)',]][
+		(#CONFIG{jsonp/incluir_logo_article}|oui)['logo_article': '(#LOGO_ARTICLE_NORMAL|extraire_attribut{src}|url_absolue)',]][
+		(#CONFIG{jsonp/incluir_logo_article_survol}|oui)['logo_article_survol': '(#LOGO_ARTICLE_SURVOL|extraire_attribut{src}|url_absolue)',]][
+		(#CONFIG{jsonp/incluir_mots}|oui)[(#INCLURE{fond=inc/inc-mots}{id_article})]][
+		(#CONFIG{jsonp/incluir_audios}|oui)[(#INCLURE{fond=inc/inc-audios}{id_article})]][
+		(#CONFIG{jsonp/incluir_images}|oui)[(#INCLURE{fond=inc/inc-images}{id_article})]][
+		(#CONFIG{jsonp/incluir_docs}|oui)[(#INCLURE{fond=inc/inc-docs}{id_article})]]
+		'id_article': '#ID_ARTICLE'
+	}</BOUCLE_art>		
+][(#ENV{callback}|oui))]
