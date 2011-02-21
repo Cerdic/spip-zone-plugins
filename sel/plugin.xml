@@ -36,7 +36,7 @@
 	</multi>
 	</description>
     <!-- URL de documentation http://www.spip-contrib.net/ -->
-    <lien></lien>
+    <lien>http://www.spip-contrib.net/SEL-systeme-d-echange-local</lien>
 
     <!-- pr?se le prefixe utilis?our toutes les fonctions du plugin, en g?ral le nom du plugin -->
     <prefix>sel</prefix>
