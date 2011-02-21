@@ -38,16 +38,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_paiement_cheque_description' => 'Proposer le paiement par ch&egrave;que',
 	'traiter_cheque_label' => 'Message de retour',
 	'traiter_cheque_explication' => 'Indiquez ici le message de retour ainsi que l\'adresse &agrave; laquelle le ch&egrave;que devra &ecirc;tre envoy&eacute;',
-	'traiter_cheque_message_defaut' => '<h3>Paiement par ch&egrave;que.</h3><p>Veuillez envoyer votre r&egrave;glement par ch&egrave;que &agrave; l\'ordre de Mon Organisme et &agrave; l\'adresse :</p> <p>adresse de votre organisme</p>',
+	'traiter_cheque_message_defaut' => '<h3>Paiement par ch&egrave;que.</h3><p>Veuillez envoyer votre r&egrave;glement de %montant% &euro; par ch&egrave;que &agrave; l\'ordre de Mon Organisme et &agrave; l\'adresse :</p> <p>adresse de votre organisme</p>',
 	'traiter_paiement_virement_titre' => 'Paiement par virement',
 	'traiter_paiement_virement_description' => 'Proposer le paiement par virement',
 	'traiter_virement_label' => 'Message de retour',
 	'traiter_virement_explication' => 'Indiquez ici le message de retour ainsi que les coordonn&eacute;es du compte sur lequel le virement devra &ecirc;tre effectu&eacute;',
-	'traiter_virement_message_defaut' => '<h3>Paiement par virement.</h3><p>Veuillez effectuer votre virement bancaire sur le compte suivant :</p> <p>coordonn&eacute;es bancaires de votre organisme</p>',
+	'traiter_virement_message_defaut' => '<h3>Paiement par virement.</h3><p>Veuillez effectuer votre virement bancaire de %montant% &euro; sur le compte suivant :</p> <p>coordonn&eacute;es bancaires de votre organisme</p>',
 	'traiter_message_cmcic' => '<h3>Paiement s&eacute;curis&eacute;</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction s\'effectue via l\'&eacute;tablissement bancaire qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
 	'traiter_message_atos' => '<h3>Paiement s&eacute;curis&eacute;</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction s\'effectue via l\'&eacute;tablissement bancaire qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
-	'traiter_message_paypal' => '<h3>Paiement Paypal</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction sur le site de Paypal qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
-	'traiter_message_paybox' => '<h3>Paiement Paybox</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction sur le site de Paybox qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
+	'traiter_message_paypal' => '<h3>Paiement Paypal</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction s\'effectue  sur le site de Paypal qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
+	'traiter_message_paybox' => '<h3>Paiement Paybox</h3><p>Notre organisme met en oeuvre tous les moyens pour assurer la s&eacute;curit&eacute; et la confidentialit&eacute; des donn&eacute;es transmises en ligne.</p><p>Dans ce but, la transaction s\'effectue  sur le site de Paybox qui seul dispose des informations bancaires fournies au moment du paiement.</p>',
 	'traiter_message_cmcic_erreur' => 'Le paiement s&eacute;curis&eacute; est actuellement en mode test, aucune transaction ne sera effectu&eacute;e sur votre carte bancaire.',
 	'statut_transaction_0' => 'Non pay&eacute;',
 	'statut_transaction_1' => 'Pay&eacute;',
@@ -64,7 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_choix_devise_paypal_label' => 'Devise',
 	'traiter_choix_devise_paypal_explication' => 'Indiquez ici la devise &agrave; utiliser pour les paiements',
 	'traiter_choix_devise_paypal_message_defaut' => 'EUR',
-	'prix' => 'Prix'
+	'prix' => 'Prix',
+	'montant_transaction' => 'Montant de la transaction'
 	
 );
 
