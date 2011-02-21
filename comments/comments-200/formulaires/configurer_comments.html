@@ -1,3 +1,7 @@
+<style type="text/css">
+.todo { opacity: 0.5; }
+.todo:hover { opacity: 1; }
+</style>
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -5,7 +9,7 @@
 
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<fieldset>
+	<fieldset class="todo">
 		<legend><:comments:cfg_forum_longueur:></legend>
 		<ul>
 			<li class="comments_forum_longueur_mini[ (#ENV**{erreurs}|table_valeur{forum_longueur_mini}|oui)erreur]">
@@ -17,7 +21,7 @@
 			<li class="comments_forum_longueur_maxi[ (#ENV**{erreurs}|table_valeur{forum_longueur_maxi}|oui)erreur]">
 				<label for="forum_longueur_maxi"><:comments:cfg_forum_longueur_maxi:><br /><b>SANS EFFET&nbsp;!</b></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_maxi})</span>
-				]<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" />
+				]<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" disabled="disabled" />
 			</li>
 		</ul>
 	</fieldset>
@@ -28,9 +32,9 @@
 				<label for="comments_fil">Pr&eacute;sentation du&nbsp;fil de discussion</label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="comments_fil" id="comments_fil">
-						<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
-						<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
-						<option value="thread-1"[(#ENV{comments_fil,list}|=={thread-1}|oui) selected="selected"]>Enfilade de commentaires (en thread) &agrave; un niveau</option>
+						<option value="list"[(#env{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
+						<option value="thread"[(#env{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
+						<option value="thread-1"[(#env{comments_fil,list}|=={thread-1}|oui) selected="selected"]>Enfilade de commentaires (en thread) &agrave; un niveau</option>
 				</select>
 			</li>
 		</ul>
@@ -42,25 +46,25 @@
 				<label for="permalink">Apparence du lien permanent vers le commentaire</label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="permalink" id="permalink" style="width: 12em;">
-					<option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
-					<option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
-					<option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
-					<option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
+					<option value="aucun"[(#env{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
+					<option value="diese"[(#env{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
+					<option value="compteur"[(#env{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
+					<option value="picto"[(#env{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
 				</select>
 			</li>
 		</ul>
 	</fieldset>
-	<fieldset>
+	<fieldset class="todo">
 		<legend>Style</legend>
 		<ul>
 			<li class="comments_style[ (#ENV**{erreurs}|table_valeur{comments_style}|oui)erreur]">
 				<label for="style">Style des commentaires<br /><b>SANS EFFET&nbsp;!</b></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
-				]<select name="style" id="style" style="width: 12em;">
-					<option value="aucun"[(#ENV{style,defaut}|=={picto}|oui) selected="selected"]>Aucun</option>
-					<option value="defaut"[(#ENV{style,defaut}|=={compteur}|oui) selected="selected"]>D&eacute;faut</option>
-					<option value="style-1"[(#ENV{style,defaut}|=={diese}|oui) selected="selected"]>Style 1</option>
-					<option value="style-2"[(#ENV{style,defaut}|=={aucun}|oui) selected="selected"]>Style 2</option>
+				]<select name="style" id="style" style="width: 12em;" disabled="disabled">
+					<option value="aucun"[(#env{style,defaut}|=={picto}|oui) selected="selected"]>Aucun</option>
+					<option value="defaut"[(#env{style,defaut}|=={compteur}|oui) selected="selected"]>D&eacute;faut</option>
+					<option value="style-1"[(#env{style,defaut}|=={diese}|oui) selected="selected"]>Style 1</option>
+					<option value="style-2"[(#env{style,defaut}|=={aucun}|oui) selected="selected"]>Style 2</option>
 				</select>
 			</li>
 		</ul>
