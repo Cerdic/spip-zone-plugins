@@ -1,0 +1,94 @@
+<plugin>
+    <!-- Nom du plugin -->
+    <nom>
+	<multi>
+	[fr]Sel (Syst&egrave;me d'&eacute;change local)
+	[en]Lets (Local Exchange Trading Systems)
+	[de]Tauschkreis
+	[es]Sistema de cambio local
+	[eo]Loka intersanga sistemo
+	[fi]Vaihtoty (talous)
+	[il]????? ??????
+	[hu]Kalákakör
+	[nl]Lokale ruileconomie
+	[no]Byttering
+	[po]Sistema de intercambio local
+	[pl]Lokalny System Wymiany i Handlu
+	[ru]???????? ??????? ???????? ??????
+	[se]Lets
+	</multi>
+	</nom>
+    <!-- Auteur du plugin -->
+    <auteur> Val&eacute;rie Journet, [Perline->http://perline.org/] </auteur>
+    <version>0.1</version>
+    <version_base>0.1</version_base> 
+    <etat>experimental</etat>
+    <icon>img_pack/sel-vignette.png</icon>
+    <description>
+	<multi>
+	[fr] 
+	Ce plugin est destin&eacute; &agrave; la gestion int&eacute;grale d\'un syst&egrave;me d\'&eactue; change local (SEL).
+	Que ce soit un SEl qui travaille sur des &eacute;changes simples, un SEL de stages, un SEL d \'h&eacute;bergement ou tout autre syst&egrave;.
+	Que ce soit un SEL qui fonctionne avec un carnet d\'&eacute;change, un syst&egrave;me de JEU.
+	Il est destin&eacute; &agrave; tout type de SEL.
+	La publication en ligne des annonces est pr&eacute;vue.
+	La gestion en ligne de la comptabilit&eacute; est pr&eacute;vue.
+	</multi>
+	</description>
+    <!-- URL de documentation http://www.spip-contrib.net/ -->
+    <lien></lien>
+
+    <!-- pr?se le prefixe utilis?our toutes les fonctions du plugin, en g?ral le nom du plugin -->
+    <prefix>sel</prefix>
+
+    <!-- pr?se le fichier ?harger ?haque recalcul, partie publique-->
+    <fonctions>sel_fonctions.php</fonctions>
+    <!-- pr?se le fichier ?harger ?haque appel de la page, partie publique -->
+    <options>sel_options.php</options>
+
+    <!-- Chemin du fichier d'installation et de mise ?our -->
+    <install>base/sel_install.php</install>
+
+    <!--pipeline, surcharge de fonction ?es moments pr?s de la g?ration d'une page SPIP -->
+    <pipeline>
+       <!-- pour conna?e l'ensemble des pipelines voir :
+      http://doc.spip.org/@Les-points-d-entree-pipelines
+      http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc_version.php -->
+		<nom>point_entree</nom>
+       <!-- nom de la fonction ?ppeler sans son prefixe -->
+       <action>fonction</action>
+       <!-- chemin du fichier contenant la fonction -->
+       <inclure>fichier.php</inclure>
+   </pipeline>
+
+   <!-- pr?se les d?ndances vis-?is de d'autres plugins (ou de spip), voir plus bas <necessite id="nomplugin" version="[versionminimale;versionmax]" />-->
+   
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="cfg" version='[1.15.2;]' />
+
+
+   <!-- indique un zip externe n?ssaire 
+      branche 1.9.3 ?artir de spip svn 98xx 
+      id indique le r?rtoire o?st charg?e zip,  /lib/nom
+   <necessite id="lib:nom" src="http://url-complete-du/fichier.zip" /> -->
+
+   <!-- Indique si le plugin concerne tout le site ou seulement l'espace priv?
+       <chemin dir="./repertoire_public" type="public">
+       <chemin dir="./repertoire_prive" type="prive"> 
+       <chemin dir="./repertoire_ouvert" > 
+	-->
+   <bouton id='mon_bouton_1' parent=''>
+       <icone>images/xml-valid-24.png</icone>
+       <titre>Valider le site</titre>
+       <url>w3c_go_home</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+       <args>type=resume&id=1</args>
+   </bouton>
+
+   <onglet id='mon_onglet_1' parent='configuration'>
+       <icone>images/img-24.png</icone>
+       <titre>Onglet dans configuration</titre>
+       <url>mon_onglet</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+       <args></args>
+   </onglet>
+
+</plugin>
