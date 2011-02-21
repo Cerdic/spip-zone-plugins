@@ -157,10 +157,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_supprimer_version' => 'Supprimer la version @version@',
 
 	// M
-	'message_confirmation_encodage' => '&Ecirc;tes vous s&ucirc; de vouloir relancer l\'encodage de ce document au format @version@&nbsp;?',
-	'message_confirmation_encodages' => '&Ecirc;tes vous s&ucirc; de vouloir relancer l\'encodage de ce document dans tous les formats&nbsp;?',
-	'message_confirmation_suppression_version' => '&Ecirc;tes vous s&ucirc; de vouloir supprimer la version @version@ de ce document?',
-	'message_confirmation_suppression_versions' => '&Ecirc;tes vous s&ucirc; de vouloir supprimer tous les encodages de ce document?',
+	'message_confirmation_encodage' => '&Ecirc;tes vous s&ucirc;r de vouloir relancer l\'encodage de ce document au format @version@&nbsp;?',
+	'message_confirmation_encodages' => '&Ecirc;tes vous s&ucirc;r de vouloir relancer l\'encodage de ce document dans tous les formats&nbsp;?',
+	'message_confirmation_suppression_version' => '&Ecirc;tes vous s&ucirc;r de vouloir supprimer la version @version@ de ce document?',
+	'message_confirmation_suppression_versions' => '&Ecirc;tes vous s&ucirc;r de vouloir supprimer tous les encodages de ce document?',
 	'message_document_encours_encodage_version' => 'Ce document est actuellement en attente d\'encodage en @version@.',
 	'message_encodage_erreur_log' => 'Le fichier de log est le suivant :',
 	'message_encodage_objet_lie' => 'Il est associ&eacute; &agrave; l\'objet @objet@ #@id_objet@ :',
