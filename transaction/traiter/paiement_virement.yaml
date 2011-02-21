@@ -1,0 +1,13 @@
+
+titre: '<:transaction:traiter_paiement_virement_titre:>'
+description: '<:transaction:traiter_paiement_virement_description:>'
+options:
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'champ_adresse_virement'
+      label: '<:transaction:traiter_virement_label:>'
+      explication: '<:transaction:traiter_virement_explication:>'
+      defaut: '<:transaction:traiter_virement_message_defaut:>'
+      env: true
+

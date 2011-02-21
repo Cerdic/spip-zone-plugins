@@ -1,5 +1,6 @@
 .transaction_ok { display:block; padding:20px 20px 20px 150px; }
 .cheque { color: #000; font-weight: normal; font-size: 12px; background: url('../images/cheque.png') no-repeat top left; }
+.virement { color: #000; font-weight: normal; font-size: 12px; background: url('../images/virement.png') no-repeat top left; }
 .cmcic { color: #000; font-weight: normal; font-size: 12px; background: url('../paiement/cmcic/logo.png') no-repeat top left; }
 .paypal { color: #000; font-weight: normal; font-size: 12px; background: url('../paiement/paypal/logo.png') no-repeat top left; }
 .transaction_info { font-size: 0.6em; }
