@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<plugin>
+	<nom>Gestion ML</nom>
+	<auteur>Yffic</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description>Gestion de Mailling Lists externes. Ne fonctionne actuellement que chez OVH avec le robot ezmlm via SoAPI</description>
+	<prefix>gestionml</prefix>
+	<install>base/gestionml_install.php</install>
+	<icon>images/gestionml-64.png</icon>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>gestionml_pipelines.php</inclure>
+	</pipeline>
+   <pipeline>
+   	<nom>autoriser</nom>
+		<inclure>inc/gestionml_autoriser.php</inclure>
+   </pipeline>
+	<bouton id='gestionml' parent='naviguer'>
+		<titre>gestionml:titre</titre>
+		<icone>images/gestionml-24.png</icone>
+		<url>gestionml</url>
+	</bouton>
+	<bouton id='gestionml21' parent='bando_edition'>
+		<titre>gestionml:titre</titre>
+		<icone>images/gestionml-16.png</icone>
+		<url>gestionml</url>
+	</bouton>
+	<fonctions>inc/gestionml_api.php</fonctions>
+	<necessite id="SPIP" version="[2.0.x;]" />
+	<necessite id="cfg" version="[1.10;]" />
+	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+</plugin>

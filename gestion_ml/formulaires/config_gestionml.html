@@ -1,0 +1,115 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=gestionml -->
+
+#SET{ret, #INCLURE{fond=prive/inc-gestionml-tablistes, env}|explode{','}}
+
+#SET{tab_pour_select, #ARRAY}
+<BOUCLE_contenu(POUR){tableau #GET{ret} }>
+  [(#SET{tab_pour_select,
+      #GET{tab_pour_select}|array_merge{#ARRAY{
+          #VALEUR, #VALEUR
+      }}
+  })]
+</BOUCLE_contenu>
+
+#SET{les_saisies,#ARRAY}
+<BOUCLE_admins(AUTEURS){statut='0minirezo'}{par nom}>
+   [(#SET{les_saisies,
+      #GET{les_saisies}|array_merge{#ARRAY{
+         #COMPTEUR_BOUCLE, #ARRAY{
+            saisie, selection_multiple,
+            options, #ARRAY{
+               nom, listes_auteur_#ID_AUTEUR,
+               label, <:gestionml:liste_de{nom=#NOM}:>,
+               explication, <:gestionml:explication_liste_de{nom=#NOM}:>,
+               cacher_option_intro, oui,
+               datas, #GET{tab_pour_select}
+            }
+         }
+      }}
+   })]
+</BOUCLE_admins>
+
+   
+<div class="formulaire_spip formulaire_configurer formulaire_gestionml">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+   
+
+   <form method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+
+      <ul>
+
+         [(#SAISIE{radio, hebergeur,
+                 label=<:gestionml:afficher_hebergeurs:>,
+        			  defaut=0,
+                 datas=#ARRAY{
+                 			 0,local,
+                         1,OVH}
+         })]
+
+         [(#SAISIE{fieldset,config_ovh,env,
+         	pliable=on,
+            plie=on,
+            label=<:gestionml:config_ovh_legend:>,
+            saisies=#ARRAY{
+               0, #ARRAY{
+                  saisie, input,
+                  options, #ARRAY{
+                     nom, serveur_distant,
+                     label, <:gestionml:serveur_distant:>,
+                     defaut, https://www.ovh.com/soapi/soapi-re-1.11.wsdl,
+                     obligatoire, oui,
+                     explication, <:gestionml:explication_serveur_distant:>
+                  }
+               },
+               1, #ARRAY{
+                  saisie, input,
+                  options, #ARRAY{
+                     nom, domaine,
+                     label, <:gestionml:domaine:>,
+                     defaut, mondomaine.tld,
+                     obligatoire, oui,
+                     explication, <:gestionml:explication_domaine:>
+                  }
+               },
+               2, #ARRAY{
+                  saisie, input,
+                  options, #ARRAY{
+                     nom, identifiant,
+                     label, <:gestionml:identifiant:>,
+                     obligatoire, oui,
+                     explication, <:gestionml:explication_identifiant:>
+                  }
+               },
+               3, #ARRAY{
+                  saisie, input,
+                  options, #ARRAY{
+                     nom, mot_de_passe,
+                     type, password,
+                     label, <:gestionml:mot_de_passe:>,
+                     obligatoire, oui,
+                     explication, <:gestionml:explication_mot_de_passe:>
+                  }
+               }
+            }
+         })]
+        
+
+         [(#SAISIE{fieldset,auteurs_listes,env,
+                     label=<:gestionml:auteurs_listes_legend:>,
+                     saisies=#GET{les_saisies}
+         })]
+
+      </ul>
+
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>

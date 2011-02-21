@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+
+.formulaire_gestionml_ajouter{
+	margin-top:30px;
+	width: 300px ;
+}
+#ajouter_abonne {
+	border:#000 thin solid ;
+}
+.gestionml_liste {
+	margin:10px;
+}
+
+.gestionml_details {
+	padding:5px;
+	border:#999 thin solid ;
+	margin:10px;
+}
+
+.gestionml_liste .liste {
+	margin-left:20px;
+	border-spacing:0;
+}
+.gestionml_liste .liste tr:hover {
+	background:#CCC;
+}
+.gestionml_liste .liste td {
+	padding:5px;;
+}

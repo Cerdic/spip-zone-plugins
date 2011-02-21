@@ -1,0 +1,18 @@
+<div class="gestionml-details">
+   <h2>Abonn&eacute;s de la liste #ENV{liste}</h2>
+   <table class="liste">
+      <BOUCLE_contenu(POUR){tableau #ENV{tab} }>
+         <tr>
+            <td>#VALEUR</td>
+            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','userdel'}|parametre_url{'nameML',#ENV{liste}}|parametre_url{'email',#VALEUR})]"
+               onclick="return(confirm('Etes-vous sûr de vouloir supprimer cet email ?'));" title="<:gestionml:supprimer:>">
+               <img width="12" height="12" src="#CHEMIN{images/gestionml-supprimer.png}" alt="<:gestionml:supprimer:>" />
+            </a></td>
+         </tr>
+      </BOUCLE_contenu>
+   </table>
+   
+   <div class="ajax">
+   	#FORMULAIRE_AJOUTER_ABONNE{#ENV{liste}}
+   </div>
+</div>

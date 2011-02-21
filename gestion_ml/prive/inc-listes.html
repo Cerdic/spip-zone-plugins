@@ -1,0 +1,23 @@
+<div class="gestionml_liste">
+   <B_contenu>
+   <h2>Listes disponibles</h2>
+   <table class="liste">
+      <BOUCLE_contenu(POUR){tableau #ENV{tab} }>
+         <tr>
+            <td>#CLE (#VALEUR abonn&eacute;s)</td> 
+            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','infos'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:infos:>">
+            <img width="16" height="16" src="#CHEMIN{images/gestionml-infos.png}" alt="<:gestionml:infos:>" />
+            </a></td>
+            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','users'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:abonnes:>">
+            <img width="16" height="16" src="#CHEMIN{images/gestionml-abonnes.png}" alt="<:gestionml:abonnes:>" />
+            </a></td>
+            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','sendlist'}|parametre_url{'nameML',#CLE}|parametre_url{'email',#SESSION{email}})]" title="<:gestionml:envoyermail:>">
+            <img width="16" height="16" src="#CHEMIN{images/gestionml-envoyermail.png}" alt="<:gestionml:envoyermail:>" />
+            </a></td>
+         </tr>
+      </BOUCLE_contenu>
+   </table>
+   </B_contenu>
+   <h2>Aucune liste disponible</h2>
+   <//B_contenu>
+</div>

@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_gestionml_ajouter">
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{erreurs}|table_valeur{oubli})</p>]
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+<form id="ajouter_abonne" action="[(#ENV{action})]" method="post">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+
+      <ul>
+         [(#SAISIE{hidden,liste,
+            defaut=#ENV{liste}}
+         )]
+         [(#SAISIE{input,email,
+            label='Ajouter un email',
+            size=20}
+         )]
+      </ul>
+
+      <p class="boutons">
+         <input type="submit" name="ok" class="submit" value="Ajouter" />
+      </p>
+   </div>
+
+</form>
+
+</div>

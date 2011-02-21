@@ -1,0 +1,25 @@
+
+#SET{requete,#ARRAY{}|gestionml_api_listes}
+
+<BOUCLE_contenu(POUR){tableau #GET{requete}}>
+[(#CLE|=={listes}|oui)
+   <INCLURE{fond=prive/inc-listes}{tab=#VALEUR}>
+   <br />
+]
+[(#CLE|=={users}|oui)
+	
+   <INCLURE{fond=prive/inc-users}{tab=#VALEUR} {liste=#GET{requete}|table_valeur{liste}}>
+   <br />
+]
+[(#CLE|=={message_ok}|oui)
+	#VALEUR<br />
+]
+[(#CLE|=={infos}|oui)
+   <INCLURE{fond=prive/inc-infos}{infos=#VALEUR}>
+   <br />
+]
+[(#CLE|=={message_erreur}|oui)
+	#VALEUR<br />
+]
+
+</BOUCLE_contenu>
