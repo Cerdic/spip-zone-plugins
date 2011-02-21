@@ -1,0 +1,39 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_ajouter formulaire_ajouter_paragraphe formulaire_ajouter_paragraphe-#ENV{id_article,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>
+
+	<script type="text/javascript">
+		this.parent.$.fn.colorbox.close();
+		parent.location.href = ['(#EVAL{_request('url')})?var_mode=recalcul']; 
+	</script>
+	
+	]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<input type="hidden" name="id_rubrique" id="id_rubrique" value="#EVAL{_request('id_rubrique')}" />
+		<input type="hidden" name="statut" id="statut" value="publie" />
+		<input type="hidden" name="id_auteur" id="statut" value="#SESSION{id_auteur}" />
+		
+
+		<ul>
+
+			<li class="editer_titre obligatoire[ (#GET{erreurs}|oui)erreur]">
+				<label for="titre">Titre</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" class="text multilang" name="titre" id="titre" size="40" value="#ENV{#GET{name}}" />
+			</li>
+
+		</ul>	  
+
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div>
+	</form>
+	]
+</div>
