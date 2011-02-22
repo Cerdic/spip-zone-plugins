@@ -78,6 +78,9 @@ function formulaires_cite_inserer_modeles_traiter_dist($champs){
 			// year
 			elseif ($champ=='year' && !in_array(_request('variante'),array('book','chapter','journal','report','thesis')))
 				$code .= '';
+			// cover
+			elseif ($champ=='cover' && !in_array(_request('variante'),array('book','chapter','journal','report','thesis','web')))
+				$code .= '';
 			// accessdate
 			if ($champ=='accessdate' && !in_array(_request('variante'),array('web')))
 				$code .= '';

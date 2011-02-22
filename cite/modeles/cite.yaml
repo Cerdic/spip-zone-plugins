@@ -182,3 +182,10 @@ parametres:
       nom: 'issn'
       label: '<:cite:label_issn:>'
       afficher_si: '@variante@ == "journal"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'cover'
+      label: '<:cite:label_cover:>'
+      explication: '<:cite:explication_cover:>'
+      afficher_si: '@variante@ == "book" || @variante@ == "chapter" || @variante@ == "journal" || @variante@ == "report" || @variante@ == "thesis" || @variante@ == "web"'
