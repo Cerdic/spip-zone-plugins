@@ -19,7 +19,7 @@
 	</multi>
 	</nom>
     <!-- Auteur du plugin -->
-    <auteur> Val&eacute;rie Journet, [Perline->http://perline.org/] </auteur>
+    <auteur> [Val&eacute;rie Journet-Texier->http://valerie.journet.free.fr], [Perline->http://perline.org/] </auteur>
     <version>0.1</version>
     <version_base>0.1</version_base> 
     <etat>experimental</etat>
