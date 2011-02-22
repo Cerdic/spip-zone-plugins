@@ -19,7 +19,7 @@ function mots_objets_declarer_tables_interfaces($tables_interface){
 		// -- Liaisons mots/auteurs
 		// $tables_interface['tables_jointures']['spip_auteurs']['id_auteur']= 'mots_auteurs';
 		$tables_interface['tables_jointures'][ $objet->table_sql ][ $objet->_id_objet ]= $liaison;
-		$tables_interface['tables_jointures']['spip_mots']['id_mot']= $liaison;
+		$tables_interface['tables_jointures']['spip_mots'][]= $liaison;
 		$tables_interface['tables_jointures'][ $objet->table_sql ][]= 'mots';		
 	}
 

@@ -1,0 +1,67 @@
+<h1>Tests de mots objets</h1>
+
+<h2>les mots d'un article (MOTS){id_article=1}</h2>
+
+<B_mots_art>
+<ul>
+<BOUCLE_mots_art(MOTS){id_article=1}>
+	<li>#ID_MOT - #TITRE</li>
+</BOUCLE_mots_art>
+</ul>
+</B_mots_art>
+
+<h2>les articles d'un mot (ARTICLES){id_mot=258}</h2>
+
+<B_art_mots>
+<ul>
+<BOUCLE_art_mots(ARTICLES){id_mot=258}>
+	<li>#ID_ARTICLE - #TITRE</li>
+</BOUCLE_art_mots>
+</ul>
+</B_art_mots>
+
+
+<hr />
+
+<h2>les mots d'un auteur (MOTS){id_auteur=1}</h2>
+
+<B_mots_aut>
+<ul>
+<BOUCLE_mots_aut(MOTS){id_auteur=1}>
+	<li>#ID_MOT - #TITRE</li>
+</BOUCLE_mots_aut>
+</ul>
+</B_mots_aut>
+
+<h2>les auteurs d'un mot (AUTEURS){id_mot=258}</h2>
+
+<B_aut_mots>
+<ul>
+<BOUCLE_aut_mots(AUTEURS){id_mot=258}>
+	<li>#ID_AUTEUR - #NOM - #LOGIN</li>
+</BOUCLE_aut_mots>
+</ul>
+</B_aut_mots>
+
+
+<hr />
+
+<h2>les mots d'un document (MOTS){id_document=1}</h2>
+
+<B_mots_doc>
+<ul>
+<BOUCLE_mots_doc(MOTS){id_document=1}>
+	<li>#ID_MOT - #TITRE</li>
+</BOUCLE_mots_doc>
+</ul>
+</B_mots_doc>
+
+<h2>les auteurs d'un mot (DOCUMENTS){id_mot=258}</h2>
+
+<B_doc_mots>
+<ul>
+<BOUCLE_doc_mots(DOCUMENTS){id_mot=258}>
+	<li>#ID_DOCUMENT - #FICHIER</li>
+</BOUCLE_doc_mots>
+</ul>
+</B_doc_mots>
