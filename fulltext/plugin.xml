@@ -3,7 +3,7 @@
 	Fulltext
 	</nom>
 	<auteur>Fil</auteur>
-	<version>0.5.1</version>
+	<version>0.6.0</version>
 	<version_base>0.2</version_base>
 	<etat>
 	dev
@@ -27,7 +27,7 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&eacute;me
 	<prefix>
 	Fulltext
 	</prefix>
-  <fonctions>fulltext_fonctions.php</fonctions>
+	<fonctions>fulltext_fonctions.php</fonctions>
 	<icon>fulltext.png</icon>
 	<install>base/fulltext.php</install>
 	<chemin dir='' />
