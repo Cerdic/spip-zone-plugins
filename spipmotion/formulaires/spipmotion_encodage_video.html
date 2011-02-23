@@ -69,14 +69,14 @@
 		]
 		#SET{acodecs_possibles,#ARRAY|push{libmp3lame}|push{libfaac}|push{libspeex}}
 		#SET{vcodecs_possibles,#ARRAY|push{flv}|push{libx264}}
-		#SET{presets_qualite,#ARRAY|push{normal}|push{medium}|push{placebo}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}}
+		#SET{presets_qualite,#ARRAY|push{main}|push{medium}|push{placebo}|push{ultrafast}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}|push{veryslow}}
 		#SET{2_passes,oui}
 	</BOUCLE_flv>
 	<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{mov}|push{mp4}|push{m4v}}|oui}>
 		#SET{acodecs_possibles,#ARRAY|push{libfaac}|push{libmp3lame}}
 		#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{libxvid}|push{mpeg4}}
 		#SET{formats_possibles,#ARRAY|push{ipod}|push{psp}|push{mp4}|push{m4v}}
-		#SET{presets_qualite,#ARRAY|push{normal}|push{medium}|push{placebo}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}}
+		#SET{presets_qualite,#ARRAY|push{main}|push{medium}|push{placebo}|push{ultrafast}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}|push{veryslow}}
 		#SET{2_passes,oui}
 	</BOUCLE_mp4>
 	<//B_flv>
