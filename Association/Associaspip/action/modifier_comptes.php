@@ -12,13 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/* callback pour filtrer tout $_POST et ne recuperer que les destinations */
-function destination_post_filter($var)
-{
-	if (preg_match ('/^destination_id/', $var)>0) return TRUE;
-	return FALSE;
-}
-
 function action_modifier_comptes() {
 		
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -29,7 +22,7 @@ function action_modifier_comptes() {
 	if ($GLOBALS['association_metas']['comptes_stricts']=="on") {
 		if ($montant_req = _request('montant')){
 			$montant = floatval(preg_replace("/,/",".",$montant_req));
-		}
+		} else $montant = 0;
 		$r = sql_fetsel('direction', 'spip_asso_plan', "code=$imputation");
 		if ($r['direction'] == "credit")
 		{
@@ -46,13 +39,14 @@ function action_modifier_comptes() {
 	{
 		if ($recette_req = _request('recette')){
 			$recette = floatval(preg_replace("/,/",".",$recette_req));
-		}
+		} else $recette = 0;
 		if ($depense_req = _request('depense')){
 			$depense = floatval(preg_replace("/,/",".",$depense_req));
-		}
+		} else $depense = 0;
 	}
 	$justification= _request('justification');
 	$journal= _request('journal');
+	$id_journal= _request('id_journal');
 
 	/* on verifie les valeurs de recette et depense: positif et pas d'entree recette et depense simultanees */
 	if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0))
@@ -62,7 +56,10 @@ function action_modifier_comptes() {
 		echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_recette_depense').'<br/><h1><a href="'.$url_retour.'">Retour</a><h1>');
 		exit;
 	}
+	
+	association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_compte);
 
+/*
 	include_spip('base/association');		
 
 	sql_updateq('spip_asso_comptes', array(
@@ -74,13 +71,13 @@ function action_modifier_comptes() {
 		    'justification' => $justification),
 		    "id_compte=$id_compte");
 
-	/* Si on doit gerer les destinations */
+	/* Si on doit gerer les destinations *//*
 	if ($GLOBALS['association_metas']['destinations']=="on")
 	{
-		/* on efface de la table destination_op toutes les entrees correspondant a cette operation */
+		/* on efface de la table destination_op toutes les entrees correspondant a cette operation *//*
 		sql_delete("spip_asso_destination_op", "id_compte=$id_compte");
 
-		/* et on reentre les nouvelles entrees */
+		/* et on reentre les nouvelles entrees *//*
 		if ($recette>0) {
 			$attribution_montant = "recette";
 		}
@@ -89,20 +86,20 @@ function action_modifier_comptes() {
 			$attribution_montant = "depense";
 		}
 
-		/* on recupere dans $_POST toutes les keys des entrees commencant par destination_id */
+		/* on recupere dans $_POST toutes les keys des entrees commencant par destination_id *//*
 		$toutesDestinationsPOST = array_filter(array_keys($_POST), "destination_post_filter");
 		
-		/* on boucle sur toutes les cles trouvees, les montant ont des noms de champs identiques mais prefixes par montant_ */
+		/* on boucle sur toutes les cles trouvees, les montant ont des noms de champs identiques mais prefixes par montant_ *//*
 		$total_destination = 0;
 		$id_inserted = array();
 		foreach ($toutesDestinationsPOST as $destination_id)
 		{
 			$id_destination = _request($destination_id);
-			/* on verifie qu'on n'a pas deja inserer une destination avec cette id */
+			/* on verifie qu'on n'a pas deja inserer une destination avec cette id *//*
 			if (!array_key_exists($id_destination,$id_inserted)) {
 				$id_inserted[$id_destination]=0;
 			}
-			else {/* on a deja insere cette destination: erreur */
+			else {/* on a deja insere cette destination: erreur *//*
 				include_spip('inc/minipres');
 				$url_retour = generer_url_ecrire('edit_compte','id='.$id_compte);
 				echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_destination_dupliquee').'<br/><h1><a href="'.$url_retour.'">Retour</a><h1>');
@@ -116,7 +113,7 @@ function action_modifier_comptes() {
 			    $attribution_montant => $montant));
 		}
 
-		/* on verifie que la somme des montants des destinations correspond au montant de l'operation */
+		/* on verifie que la somme des montants des destinations correspond au montant de l'operation *//*
 		if (($recette>0 && $total_destination != $recette) || ($depense>0 && $total_destination != $depense))
 		{
 			include_spip('inc/minipres');
@@ -124,6 +121,6 @@ function action_modifier_comptes() {
 			echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_montant_destination').'<br/><h1><a href="'.$url_retour.'">Retour</a><h1>');
 			exit;
 		}
-	}
+	}*/
 }
 ?>

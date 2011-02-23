@@ -21,9 +21,15 @@ function action_ajouter_dons() {
 	$date_don = _request('date_don');
 	$bienfaiteur = _request('bienfaiteur');
 	$id_adherent = _request('id_adherent');
-	$argent = _request('argent');
+	if ($argent_req =  _request('argent')) {
+		$argent = floatval(preg_replace("/,/",".",$argent_req));
+	}
+	else $argent = 0;
 	$colis = _request('colis');
-	$valeur = _request('valeur');
+	if ($valeur_req =  _request('valeur')) {
+		$valeur = floatval(preg_replace("/,/",".",$valeur_req));
+	}
+	else $valeur = 0;
 	$contrepartie = _request('contrepartie');
 	$commentaire = _request('commentaire');
 
@@ -51,14 +57,7 @@ function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='
 					    'valeur' => $valeur,
 					    'contrepartie' => $contrepartie,
 					    'commentaire' => $commentaire));
-
-	sql_insertq('spip_asso_comptes', array(
-		    'date' => $date,
-		    'vu' => $vu,
-		    'imputation' => $GLOBALS['association_metas']['pc_dons'],
-		    'recette' => $argent,
-		    'journal' => $journal,
-		    'id_journal' => $id_don,
-		    'justification' => "[->don$id_don] - $bienfaiteur"));
+	
+	association_ajouter_operation_comptable($date, $argent, 0, "[->don$id_don] - $bienfaiteur", $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
 }
 ?>

@@ -40,8 +40,14 @@ function exec_edit_don(){
 			$journal=$data['journal'];
 			$contrepartie=$data['contrepartie'];
 			$commentaire=$data['commentaire'];
+			if ($GLOBALS['association_metas']['destinations']=="on")
+			{
+				$id_compte = sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_dons']." AND id_journal=$id_don");
+				$destination = association_liste_destinations_associees($id_compte);
+			}
+			else $id_compte = NULL;
 		} else {
-		  $bienfaiteur=$id_adherent=$argent=$colis=$valeur=$journal=$contrepartie=$commentaire='';
+		  $bienfaiteur=$id_adherent=$argent=$colis=$valeur=$journal=$contrepartie=$commentaire=$destination=$id_compte='';
 		  $date_don=date('Y-m-d');
 		}
 		$titre = _T('asso:dons_titre_mise_a_jour');
@@ -66,6 +72,7 @@ function exec_edit_don(){
 		debut_cadre_relief(  "", false, "", $titre);
 
 		$res = '<label for="date_don"><strong>' . _T('asso:date_aaaa_mm_jj') . '</strong></label>';
+		$res .= '<input name="id_compte" type="hidden" value="'.$id_compte.'" id="id_compte"/>';
 		$res .= '<input name="date_don" type="text" value="'.$date_don.'" id="date_don" class="formo" />';
 		$res .= '<label for="bienfaiteur"><strong>' . _T('asso:nom_du_bienfaiteur') . '</strong></label>';
 		$res .= '<input name="bienfaiteur" type="text" value="'.$bienfaiteur.'" id="bienfaiteur" class="formo" />';
@@ -73,8 +80,12 @@ function exec_edit_don(){
 		$res .= '<input name="id_adherent" type="text" value="'.$id_adherent.'" id="id_adherent" class="formo" />';
 		$res .= '<label for="argent"><strong>' . _T('asso:don_financier_en_e__') . '</strong></label>';
 		$res .= '<input name="argent" type="text" value="'.$argent.'" id="argent" class="formo" />'
-		. association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'))
-		. "<label for='colis'><strong>" . _T('asso:colis') . "&nbsp;:</strong></label>\n"
+		. association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'));
+		if ($GLOBALS['association_metas']['destinations']=="on")
+		{
+			$res .= association_editeur_destinations($destination);
+		}
+		$res .= "<label for='colis'><strong>" . _T('asso:colis') . "&nbsp;:</strong></label>\n"
 		. "<input name='colis' type='text' value='$colis' id='colis' class='formo' />\n"
 		. '<label for="valeur"><strong>' . _T('asso:contre_valeur_en_e__') . "</strong></label>\n"
 		. '<input name="valeur" type="text" value="'.$valeur.'" id="valeur" class="formo" />'

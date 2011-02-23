@@ -33,7 +33,6 @@ function exec_edit_compte() {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 	
-		echo "<script type='text/javascript' src='".find_in_path("javascript/jquery.destinations_form.js")."'></script>";
 		association_onglets();
 		
 		echo debut_gauche("", true);
@@ -56,19 +55,7 @@ function exec_edit_compte() {
 			$justification=$data['justification'];
 			if ($GLOBALS['association_metas']['destinations']=="on")
 			{
-				if ($destination_query = sql_select('spip_asso_destination_op.id_destination, spip_asso_destination_op.recette, spip_asso_destination_op.depense, spip_asso_destination.intitule', 'spip_asso_destination_op RIGHT JOIN spip_asso_destination ON spip_asso_destination.id_destination=spip_asso_destination_op.id_destination', "id_compte=$id_compte", '', 'spip_asso_destination.intitule'))
-				{
-					$destination = array();
-					while ($destination_op = sql_fetch($destination_query))
-					{	/* soit recette soit depense est egal a 0, donc pour l'affichage du montant on se contente les additionner */
-						$destination[$destination_op[id_destination]] = $destination_op[recette]+$destination_op[depense]; 
-					
-					}
-				}
-				else
-				{
-					$destination='';
-				}
+				$destination = association_liste_destinations_associees($id_compte);
 			}
 		} else {
 			$imputation=$recette=$depense=$journal=$justification=$destination='';
@@ -137,54 +124,7 @@ function exec_edit_compte() {
 
 		if ($GLOBALS['association_metas']['destinations']=="on")
 		{
-			// recupere la liste de toutes les destination
-			$liste_destination = '';
-			$sql = sql_select('id_destination,intitule', 'spip_asso_destination', "", "", "intitule");
-			while ($destination_info = sql_fetch($sql)) {
-				$id_destination = $destination_info['id_destination'];
-			 	$liste_destination .= "<option value='$id_destination'>".$destination_info['intitule'].'</option>';
-			}
-
-			if ($liste_destination)
-			{
-				
-			 	$res .= '<label for="destination"><strong>'
-				. _T('asso:destination')
-				. '&nbsp;:</strong></label>'
-				. '<div id="divTxtDestination">';
-
-				$idIndex=1;
-				if ($destination != '') /* si on a une liste de destinations (on edite une operation) */
-				{
-					foreach ($destination as $destId => $destMontant)
-					{						
-						$liste_destination_selected = preg_replace('/(value=\''.$destId.'\')/', '$1 selected="selected"', $liste_destination);
-						$res .= '<p class="formo" id="row'.$idIndex.'"><select name="destination_id'.$idIndex.'" id="destination_id'.$idIndex.'" >'
-						. $liste_destination_selected
-						. '</select><input name="montant_destination_id'.$idIndex.'" value="'
-						. association_nbrefr($destMontant)
-						. '" type="text" id="montant_destination_id'.$idIndex.'" />';
-						$res .= "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
-						if ($idIndex>1)
-						{
-							$res .= "<button class='destButton' type='button' onClick='removeFormField(\"#row".$idIndex."\"); return false;'>-</button>";
-						}
-						$res .= '</p>';
-						$idIndex++;
-					}
-				}
-				else /* pas de destination deja definies pour cette operation */
-				{
-					$res .= '<p id="row1" class="formo"><select name="destination_id1" id="destination_id1" >'
-					. $liste_destination
-					. '</select><input name="montant_destination_id1" value="'
-					. ''
-					. '" type="text" id="montant_destination_id1"/>'
-					. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button></p>";
-				}
-
-				$res .= '<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'"></div>';
-			}
+			$res .= association_editeur_destinations($destination);
 		}
 
 		$res .= '<div style="float:right;"><input type="submit" value="'

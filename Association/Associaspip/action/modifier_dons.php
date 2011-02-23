@@ -21,19 +21,31 @@ function action_modifier_dons() {
 	$date_don = _request('date_don');
 	$bienfaiteur = _request('bienfaiteur');
 	$id_adherent = _request('id_adherent');
-	$argent = _request('argent');
+	if ($argent_req =  _request('argent')) {
+		$argent = floatval(preg_replace("/,/",".",$argent_req));
+	}
+	else $argent = 0;
 	$colis = _request('colis');
-	$valeur = _request('valeur');
+	if ($valeur_req =  _request('valeur')) {
+		$valeur = floatval(preg_replace("/,/",".",$valeur_req));
+	}
+	else $valeur = 0;
 	$contrepartie = _request('contrepartie');
 	$commentaire = _request('commentaire');
+	$id_compte = _request('id_compte');
 
 	include_spip('base/association');
+
+	association_modifier_operation_comptable($date_don, $argent, 0, "[->don$id_don] [->membre$id_adherent]", $GLOBALS['association_metas']['pc_dons'], $journal, '', $id_compte);
+/*
 	sql_updateq('spip_asso_comptes', array(
 		    'date' => $date_don,
 		    'recette' => $argent,
 		    'journal' => $journal,
 		    'justification' => "[->don$id_don] [->membre$id_adherent]"),
 		    "id_journal=$id_don AND imputation=".sql_quote($GLOBALS['association_metas']['pc_dons']));
+*/
+
 	sql_updateq('spip_asso_dons', array(
 			'date_don' => $date_don,
 			'bienfaiteur' => $bienfaiteur,
