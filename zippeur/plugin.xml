@@ -1,7 +1,7 @@
 <plugin>
     <nom>Zippeur</nom>
     <auteur>Maïeul ROUQUETTE, Julien Coste-Louret</auteur>
-    <version>0.6</version>
+    <version>1.0</version>
     <version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
     <etat>stable</etat>
