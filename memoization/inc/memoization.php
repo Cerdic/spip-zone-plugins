@@ -42,7 +42,10 @@ class MCache {
 			case 'apc':
 				return function_exists('apc_exists');
 			case 'xcache':
-				return function_exists('xcache_set');
+				if (!function_exists('xcache_set'))
+					return false;
+				@xcache_set('xcache_autodetect',1234);
+				return @xcache_get('xcache_autodetect')==1234;
 			case 'memcache':
 				return function_exists('memcache_set');
 			case 'eaccelerator':
