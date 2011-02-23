@@ -1,0 +1,28 @@
+<!-- titre= Zippeur -->
+<!-- autoriser=modification  -->
+<!-- boite= <:zippeur:cfg_titre:> -->
+<!-- descriptif= Cela va vous permettre de configurer les options pour zipper vos fichiers.<br />
+Vous avez le choix entre :<br />
+<ul>
+<li>Utiliser la librairies Php PclZip</li>
+<li>Utiliser le programme 7-zip qui créera le fichier au lieu de php(installation de <a href="http://www.7-zip.org/" class="spip_out">7-zip</a> obligatoire)</li>
+<li>[plus rapide] Utiliser le programme zip qui créera le fichier au lieu de php(installation de <a href="http://sourceforge.net/projects/infozip/" class="spip_out">zip</a> obligatoire)</li>
+</ul> -->
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset>
+<legend><:zippeur:choix_module:></legend>
+	<select name="zippeur_cmd">
+		<option value="PclZip" [(#CONFIG{zippeur/zippeur_cmd}|=={PclZip}|?{'selected="selected"',''})]>Lib php PclZip</option>
+		<option value="7zip" [(#CONFIG{zippeur/zippeur_cmd}|=={7zip}|?{'selected="selected"',''})]>Utilisation de 7-Zip</option>
+		<option value="zip" [(#CONFIG{zippeur/zippeur_cmd}|=={zip}|?{'selected="selected"',''})]>Utilisation de Zip</option>
+	</select>
+	<br />
+	#CONFIG{zippeur/zippeur_cmd}
+	<br />
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="reset" value="<:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</fieldset>
+</form>
