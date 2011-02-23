@@ -253,6 +253,9 @@ function encodage($source,$doc_attente){
 		spip_log($retour_int,'spipmotion');
 		if($retour_int == 0){
 			$encodage_ok = true;
+		}else if($retour_int >= 126){
+			$erreur = _T('spipmotion:erreur_script_spipmotion_non_executable');
+			ecrire_fichier($fichier_log,$erreur);
 		}
 	}
 
@@ -419,6 +422,9 @@ function encodage($source,$doc_attente){
 
 		if($retour_int == 0){
 			$encodage_ok = true;
+		}else if($retour_int >= 126){
+			$erreur = _T('spipmotion:erreur_script_spipmotion_non_executable');
+			ecrire_fichier($fichier_log,$erreur);
 		}
 		if(is_readable($fichier_temp) && ($extension_attente == 'flv') && $encodage_ok){
 			/**

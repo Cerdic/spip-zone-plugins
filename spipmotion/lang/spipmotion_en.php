@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_binaire' => 'One or several softwares needed for the plugin are not available on the system.',
 	'erreur_chemin_ffmpeg' => 'No encoding can be performed because the path does not work.',
 	'erreur_document_plus_disponible' => 'This document is not available on the website anymore',
+	'erreur_script_spipmotion_non_executable' => 'The script spipmotion.sh was not found or is not executable.',
 	'erreur_verifier_droits' => 'The encoding script "script_bash/spipmotion.sh" is not executable.',
 	'explication_encodeur' => 'If you choose the ffmpeg2theora encoder to your Ogg video, the choice of audio and video codecs become useless.',
 	'explication_framerate' => 'Leave this field blank to keep the same framerate than the original',
