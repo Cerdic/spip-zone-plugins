@@ -381,6 +381,7 @@
 		sql_drop_table('spip_mots_lettres', true);
 		effacer_meta('spip_lettres_version');
 		effacer_meta('spip_lettres_fond_formulaire_lettres');
+		effacer_meta('spip_lettres_fond_lettre_titre');
 		effacer_meta('spip_lettres_fond_lettre_html');
 		effacer_meta('spip_lettres_fond_lettre_texte');
 		effacer_meta('spip_lettres_notifier_suppression_abonne');
@@ -389,7 +390,9 @@
 		effacer_meta('spip_lettres_utiliser_chapo');
 		effacer_meta('spip_lettres_utiliser_ps');
 		effacer_meta('spip_lettres_envois_recurrents');
+		effacer_meta('derniere_modif_lettre');
 		effacer_meta('spip_lettres_cron');
+		effacer_meta('spip_lettres_abonnement_par_defaut');
 		include_spip('inc/getdocument');
 		effacer_repertoire_temporaire(_DIR_LETTRES);
 		effacer_meta($nom_meta_base_version);
