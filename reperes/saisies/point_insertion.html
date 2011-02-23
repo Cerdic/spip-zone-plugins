@@ -1,0 +1,26 @@
+[(#REM)
+
+	Paramètres :
+    - insertion : valeurs avant, dans , apres
+    - bloc : nom du bloc (class ou id)
+   
+]
+
+
+#SET{insertion, #ENV{insertion, apres}}
+#SET{bloc, #ENV{bloc, '#page'}}
+<p><:reperes:cfg_inf_insertion:></p>
+
+<input type="radio" name="insertion" value="avant" class="radio" [(#GET{insertion}=={avant}?{'checked="checked"',''})] />
+<label for="champ_avant"><:reperes:cfg_lbl_avant:></label><br />
+
+<input type="radio" name="insertion" value="dans"  class="radio" [(#GET{insertion}=={dans}?{'checked="checked"',''})] />
+<label for="champ_dans"><:reperes:cfg_lbl_dans:></label><br />
+
+<input type="radio" name="insertion" value="apres" class="radio" [(#GET{insertion}=={apres}?{'checked="checked"',''})] />
+<label for="champ_apres"><:reperes:cfg_lbl_apres:></label><br />
+
+<label><:reperes:cfg_lbl_bloc:></label>
+<input type="text" name="bloc" value="[(#GET{bloc})]" />
+
+<p><:reperes:cfg_help_insertion:></p>

@@ -16,6 +16,18 @@ $(document).ready(function(){
 	$('div#page').after('<div class="invisible trait vertical bord_droite"></div>');
 	$('div#page').after('<div class="invisible trait vertical droite"></div>');
 	$('div#page').after('<div class="invisible trait horizontal centre"></div>');
+    
+    // tant qu'il y a des repères dans le tableau
+    // je lis le #EME
+    // je commence à écrire  						 = '<div id="repere_#EME" class="invisible trait';
+    // s'il est H je continue avec 					.= ' horizontal"';
+    // s'il est V je continue avec 					.= ' vertical"';
+    // j'ajoute la propriété style avec 			.= ' style="';
+    // s'il est H j'ajoute la propriété top avec	.= 'top:#TOP';
+    // s'il est V j'ajoute la propriété left avec	.= 'left:#LEFT';
+    // j'ajoute la couleur							.= ' background-color:#COULEUR';
+    // je ferme										.= '></div>';
+    // je boucle
 	
 });
 

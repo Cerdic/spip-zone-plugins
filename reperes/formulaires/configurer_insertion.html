@@ -1,0 +1,21 @@
+<!-- nom=insertion -->
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+<h3 class='titrem'><:reperes:configurer_insertion:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE
+        <ul>
+			[(#SAISIE{point_insertion,point_insertion,
+                insersion:#ENV{insertion},
+                bloc:{#ENV{bloc}}
+             )]         
+        
+        </ul>
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+
+</div>

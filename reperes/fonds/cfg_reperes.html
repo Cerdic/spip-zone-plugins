@@ -10,6 +10,12 @@
 
 <div class="cfg_reperes">
 
+<div class="ajax">
+    #FORMULAIRE_CONFIGURER_INSERTION
+</div>
+
+
+
 <form method="post" action="#SELF">
 [(#ENV{_cfg_}|form_hidden)]
 
@@ -70,7 +76,6 @@
 
 
 
-
 <fieldset class="ajouter">
 
 	<legend><:reperes:cfg_lbl_ajouter:></legend>
@@ -113,6 +118,14 @@
 </div>
 
 </form>
+
+<div class="test">
+#CFG_ARBO{reperes}
+#CONFIG{reperes}
+#FORMULAIRE_CFG{reperes}
+</div>
+
+
 
 #CFG_ARBO{reperes}
 </div>
