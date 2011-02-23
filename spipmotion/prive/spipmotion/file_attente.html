@@ -8,7 +8,7 @@
 #SET{total,#GRAND_TOTAL}
 [<p>(#GET{total}|singulier_ou_pluriel{<:spipmotion:info_nombre_encodage_attente:>,<:spipmotion:info_nombre_encodages_attentes:>})</p>]
 #ANCRE_PAGINATION
-<table class="spipmotion">
+<table class="spipmotion" id="spipmotion_file">
 	<thead>
 		<tr class="row_first">
 			<th><:spipmotion:thead_id_file:></th>
@@ -60,3 +60,10 @@
 </B_spipmotion_file>
 <p><:spipmotion:info_aucun_resultat_attente:></p>
 <//B_spipmotion_file>
+<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]#spipmotion_file" id="spipmotion_recharge_file" class="ajax"><:spipmotion:lien_recharger:></a>
+<script type="text/javascript">
+	var refresh = function(){
+		$('#spipmotion_recharge_file').click();
+	}
+	setTimeout(refresh,30000);
+</script>
