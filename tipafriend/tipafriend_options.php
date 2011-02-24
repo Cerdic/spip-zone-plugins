@@ -96,6 +96,8 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 	'modele' 				=> 'tipafriend.html',
 	// Afficher les en-tetes ?
 	'header' 				=> 'oui',
+	// Afficher le bouton 'Fermer' ?
+	'close_button'			=> 'oui',
 	// options ajoutees comme attributs au lien
 	'options' 				=> '',
 	// fonctions JS standards (ouverture de popup) ?

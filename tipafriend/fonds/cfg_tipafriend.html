@@ -80,10 +80,18 @@
 		<p class="forml">
 			<label for="header"><strong><:tipafriend:cfgform_titre_header:>&nbsp;:</strong></label>
 			<br />&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="radio" name="header" value="oui"[(#GET{config}|table_valeur{header}|=={oui}|oui) checked="checked"] />&nbsp;<:item_oui:>
+				<input type="radio" name="header" value="oui"[(#GET{config}|table_valeur{header}|=={oui}|oui) checked="checked"] onClick="jQuery('input[name=close_button]').removeAttr('disabled');" />&nbsp;<:item_oui:>
 				&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
-				<input type="radio" name="header" value="non"[(#GET{config}|table_valeur{header}|=={non}|oui) checked="checked"] />&nbsp;<:item_non:>
+				<input type="radio" name="header" value="non"[(#GET{config}|table_valeur{header}|=={non}|oui) checked="checked"] onClick="jQuery('input[name=close_button]').attr({disabled: 'disable'});" />&nbsp;<:item_non:>
 			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_header:></span>
+		</p>
+		<p class="forml">
+			<label for="close_button"><strong><:tipafriend:cfgform_titre_close_button:>&nbsp;:</strong></label>
+			<br />&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="close_button" value="oui"[(#GET{config}|table_valeur{close_button}|=={oui}|oui) checked="checked"] />&nbsp;<:item_oui:>
+				&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+				<input type="radio" name="close_button" value="non"[(#GET{config}|table_valeur{close_button}|=={non}|oui) checked="checked"] />&nbsp;<:item_non:>
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_close_button:></span>
 		</p>
 	</div>
 </fieldset>

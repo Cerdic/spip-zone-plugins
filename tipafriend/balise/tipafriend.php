@@ -166,6 +166,7 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 	if(_TIPAFRIEND_TEST) $url_args .= "&var_mode=recalcul";
 	$contexte['lien_href_accessible'] = generer_url_public($skel, $url_args);
 	if($config['header'] == 'non') $url_args .= "&header=non";
+	if($config['close_button'] == 'non') $url_args .= "&close_button=non";
 	$contexte['lien_href'] = generer_url_public($skel, $url_args);
 
 	if(_TIPAFRIEND_TEST){

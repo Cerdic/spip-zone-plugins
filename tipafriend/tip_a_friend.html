@@ -18,13 +18,13 @@
 	</div>
 
 [(#ENV{header}|=={non}|non)
-<script type='text/javascript'>
+	[(#ENV{close_button}|=={non}|non)<script type='text/javascript'>
 <!--
 var close_div = document.getElementById("footer_popup");
 if (close_div)
 	close_div.innerHTML = "<a class=\"popup_liens\" href=\"javascript:window.close();window.opener.focus();\"><:tipafriend:bouton_fermer:><\/a>";
 //-->
-</script>
+</script>]
 </div>
 </body>
 </html>
