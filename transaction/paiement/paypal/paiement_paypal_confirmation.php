@@ -16,15 +16,15 @@
 		}	
 	}
 	if (!defined('_ECRIRE_INC_VERSION')) {
-		die("<strong>Echec :</strong> SPIP ne peut pas etre demarre.<br />
-			Vous utilisez certainement un lien symbolique dans votre repertoire plugins.");
+		die("<strong>Echec :</strong> SPIP ne peut pas etre demarr&eacute;.<br />
+			Vous utilisez certainement un lien symbolique dans votre r&eacute;pertoire plugins.");
 	}
 
 
 	include_spip('base/abstract_sql');
 
 
-require_once("plugins/transaction/paiement/paypal/config.php");
+require_once("plugins/transaction/paiement/paypal/paiement.php");
 
 
 

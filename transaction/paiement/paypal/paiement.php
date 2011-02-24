@@ -56,8 +56,26 @@
 
 	$urlsite = $GLOBALS['meta']['adresse_site'];
 	
+/*****************************************************************************
+
+Test sur l'Environnement de test
+L'Environnement de test PayPal permet de tester la plupart des aspects du système PayPal incluant la notification instantanée de paiement. Pour effectuer un test sur l'Environnement de test :
+
+   1. Créez un compte développeur dans l'Espace Intégration http://developer.paypal.com
+   2. Créez un compte Personnel dans l'Environnement de test et ajoutez une carte bancaire.
+   3. Créez un compte Business dans l'Environnement de test puis ajoutez et confirmez un compte bancaire.
+   4. Dans votre bouton PayPal et le script de gestion NPI, utilisez l'URL https://www.sandbox.paypal.com/cgi-bin/webscr là où vous utiliseriez normalement https://www.paypal.com/cgi-bin/webscr.
+   5. Procédez à un paiement en utilisant l'email et le mot de passe du compte Personnel pour la connexion.
+
+****************************************************************************/
+
+	//Serveur de test
+	//$serveur="https://www.sandbox.paypal.com/cgi-bin/webscr";
+	
+	// Serveur de prod
 	$serveur="https://www.paypal.com/cgi-bin/webscr";
-        $confirm = $urlsite.'/'.find_in_path("/paiement/paypal/paiement_paypal_confirmation.php");
+	
+    $confirm = $urlsite.'/'.find_in_path("paiement/paypal/paiement_paypal_confirmation.php");
 	$retourok = $urlsite."/?page=transaction_merci";
 	$retournok = $urlsite."/?page=transaction_regret";
 
