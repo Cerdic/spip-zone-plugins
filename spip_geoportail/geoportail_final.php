@@ -24,7 +24,7 @@ function geoportail_affichage_final($page)
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Layer/GXT.js">// <![CDATA[
     // ]]></script>
 
-<script src="http://api.ign.fr/geoportail/api?'.geoportail_key().'&includeEngine=false"></script>
+<script src="http://api.ign.fr/geoportail/api?v=1.2-e&key='.$GLOBALS['meta']['geoportail_key'].'&includeEngine=false"></script>
 
 
 <!-- OpenLayers styles : -->
@@ -34,7 +34,8 @@ function geoportail_affichage_final($page)
 ';
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
 	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
-		$engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
+		if ($ykey) $engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
+		else $engine .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
 	}
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_BING-->'))
 	{	// $engine .= '<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>';

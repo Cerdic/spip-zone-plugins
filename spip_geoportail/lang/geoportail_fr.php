@@ -126,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_supprimer'	=> 'Supprimer',
 'bouton_centrer'	=> 'Placer au centre de la carte',
 'bouton_geocode'	=> 'Rechercher une adresse',
+'verrouiller'		=> 'Verrouiller la destination',
 'centrer_doc'	=> 'Utiliser le g&eacute;opositionnement du document',
 'centrer_art'	=> 'Utiliser le g&eacute;opositionnement de l&acute;article',
 'lon'			=> 'Longitude',

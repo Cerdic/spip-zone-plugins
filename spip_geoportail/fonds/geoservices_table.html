@@ -29,6 +29,8 @@
 		[(#LOGO_GEOSERVICE||image_reduire{30})]
 	</td><td class=arial11>
 		[(#MODIFIER)<a href="[(#URL_ECRIRE{geoservice,id_geoservice=#ID_GEOSERVICE})]" [title="(#DESCRIPTIF|couper{100})"]>]#TITRE[(#MODIFIER)</a>]
+	</td><td class=arial11>
+		<BOUCLE_r(RUBRIQUES){id_rubrique}{tout}>(<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:meme_rubrique:>...">#TITRE</a>)</BOUCLE_r>
 	</td><td class=arial11 width=1%>
 		#TYPE
 	</td>

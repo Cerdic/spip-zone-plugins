@@ -3,6 +3,23 @@
 {	cursor:default !important;
 }
 
+/** Affichage des palettes */
+.gpControlFloating
+{	font-size:12px;
+}
+.gpControlFloating .gpControlFloatingBody label, 
+.gpControlFloating .gpControlFloatingBody input, 
+.gpControlFloating .gpControlFloatingBody select,
+.gpControlFloating .gpControlFloatingBody input[type="button"],
+.gpControlLocationUtilityServiceGeoNamesResults,
+.gpControlLocationUtilityServiceGeocodeResults
+{	font-size:1em;
+}
+span.gpFormSmall 
+{	font-size:0.8em;
+}
+
+/** */
 img.gpGeocodeMatchCodeMatchType
 {	position:static;
 }

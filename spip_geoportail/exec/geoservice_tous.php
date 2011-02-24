@@ -16,7 +16,8 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 
 function exec_geoservice_tous()
-{
+{	$id_rubrique = _request('id_rubrique');
+
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('geoportail:geoservice'), "", "");
 
@@ -35,7 +36,16 @@ function exec_geoservice_tous()
 	.debut_droite('',true);
 	
 	echo gros_titre(_T('geoportail:geoservice'), "", false);
-	echo geoportail_table_geoservices ();
+	if ($id_rubrique) 
+	{	echo icone_inline(_T('ecrire:icone_retour'), 
+					generer_url_ecrire('geoservice_tous'), 
+					"site-24.gif",
+					"",
+					"right", 
+					false);
+		echo gros_titre(_T('ecrire:titre_cadre_interieur_rubrique')." : ".$id_rubrique, "", false)."<br/>";
+	}
+	echo geoportail_table_geoservices ($id_rubrique);
 	
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'geoservice_tous'),'data'=>''));
 

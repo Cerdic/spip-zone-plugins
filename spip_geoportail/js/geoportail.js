@@ -11,6 +11,7 @@
 *
 **/
 
+
 /** Gestion de l'initialisation des Maps */
 jQuery.geoportail =
 {	// La liste des cartes
@@ -671,8 +672,7 @@ jQuery.geoportail =
 		var lat = pos.lat;
 		var ech = pos.zoom;
 		var geocentre =
-		{
-			"FXX": { lon:1.7, lat:46.95, ech:5 },
+		{	"FXX": { lon:1.7, lat:46.95, ech:5 },
 			"GLP": { lon:-61.42, lat:16.17, ech:8 },
 			"GUF": { lon:-53, lat:4.8, ech:7 },
 			"MTQ": { lon:-61, lat:14.65, ech:9 },
@@ -691,7 +691,7 @@ jQuery.geoportail =
 			"SMA": { lon:-63.08, lat:18.07,  ech:11 },
 			"SBA": { lon:-62.85, lat:17.91, ech:11 },
 			"ANF": { lon:-64.34, lat:15.78, ech:6 },
-			"EUE": { lon:9.4, lat:48.94, ech:2 },
+			"EUE": { lon:9.4, lat:48.94, ech:2 }
 		};
 		if (!lon) lon = geocentre[pos.zone].lon;
 		if (!lat) lat = geocentre[pos.zone].lat;
@@ -819,7 +819,7 @@ jQuery.geoportail =
 				default: map.setToolsPanelVisibility(true); break;
 			}
 			switch (box.info) 
-			{	case '0':
+			{	case '0': case 0:
 				case 'false': map.setInformationPanelVisibility(false); break;
 				case '1':
 				case 'true': map.setInformationPanelVisibility(true); break;
@@ -829,6 +829,11 @@ jQuery.geoportail =
 
 			// Outils de recherche (un petit delais pour IE !)
 			if (box.search=='' || box.search=='1') jQuery.geoportail.addSearchTools(map);
+			// Outils d'impression
+			if (box.toolprint=="1") 
+			{	var nv= map.getMap().getControlsByClass('Geoportal.Control.NavToolbar')[0];
+				nv.addControls([new Geoportal.Control.PrintMap()]);
+			}
 			// Outils de mesure
 			if (box.measure=="1") jQuery.geoportail.addMeasureTools(map);
 			// Afficher la vue globale
@@ -966,7 +971,7 @@ jQuery.geoportail =
 	
 	/** Synchronisation de cartes */
 	synchro: function (id_map)
-	{	if (!jQuery.isArray(id_map)) return;
+	{	if (id_map.constructor.toString().indexOf("Array") == -1) return;
 		var c = new Array;
 		var i;
 		for (i=0; i<id_map.length; i++) 
@@ -994,16 +999,15 @@ jQuery.geoportail =
 
 /** Fonction de gestion de la synchronisation */
 function geoportail_moveSynchro (e)
-{	if (!this.synchro) return;
+{	if (this.moving) return;
 	var i;	// $.geoportail.synchro([1,2,3])
 	for (i in this.synchro)
 	{	var c = this.synchro[i].map.getMap()
-		var sav = this.synchro[i].synchro;
-		this.synchro[i].synchro = null;
+		this.synchro[i].moving = true;
 			var pt = this.map.getMap().getCenter().clone();
 			pt.transform(this.map.getMap().getProjectionObject(),c.getProjectionObject());
 			c.setCenter(pt,this.map.getMap().getZoom());
-		this.synchro[i].synchro = sav;
+		this.synchro[i].moving = false;
 	}
 }
 

@@ -26,6 +26,7 @@
 * - infobox				: affichage des infos (1,true,0,false,mini) par defaut: mini
 * - searchtools			: afficher les outils de recherche (0,1) par defaut:1
 * - measuretools		: afficher les outils de mesure (0,1) par defaut : 0
+* - toolprint			: outil d'impression (0,1) par defaut : 0
 * - overview			: afficher une vue globale (0,1) par defaut : 0. 
 						  La vue s'affiche dans la div id="overViewMap" ou est cree dans la div id="navigation"
 * - min_zoom			: zoom mini
@@ -90,7 +91,8 @@ jQuery.geoportail.addMap(
 					info:'#INFOBOX',
 					search:'#SEARCHTOOLS',
 					measure:'#MEASURETOOLS',
-					overview:'#OVERVIEW'
+					overview:'#OVERVIEW',
+					toolprint:'#TOOLPRINT'
 				}, 
 				{	carto:'#CARTO', 
 					ortho:'#ORTHO',
@@ -109,7 +111,7 @@ jQuery.geoportail.addMap(
 			<B_services>
 			// Ajouter les services disponibles dans les geoservices en fonction de son niveau d'affichage
 			<BOUCLE_services(GEOSERVICES){id_rubrique IN #GET{rubriques}}{statut=publie}{par niveau}>
-				jQuery.geoportail.addGeoservice ( map, "#TYPE", "#TITRE", "[(#DESCRIPTIF|texte_script)]",
+				jQuery.geoportail.addGeoservice ( map, "#TYPE", "#TITRE", '[(#DESCRIPTIF|texte_script)]',
 					{	id: #ID_GEOSERVICE,
 						url: "#URL_GEOSERVICE",
 						map: "#MAP",

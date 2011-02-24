@@ -166,6 +166,19 @@ function geoportail_formulaire_lon_lat(x, y,zoom)
 	geoportail_formulaire_centrer (x,y,zoom);
 }
 
+// Verrouiller la localisation (interdir la modif des noms)
+function verrou_location()
+{	var b = ($('#verrou').val()=='1');
+	if (b) 
+	{	$('.verrou_location').css('background-position','bottom left');
+		$('#verrou').val('0');
+	}
+	else
+	{	$('.verrou_location').css('background-position','top left');
+		$('#verrou').val('1');
+	}	
+}
+
 function geoportail_formulaire_show()
 {	var uri = '[(#URL_PAGE{geop,id=[(#ENV{id,0})]&hash=[(#GEOPORTAIL_PROTECT{geoformulaire[(#ENV{id,0})]})]&formulaire=1&toolbox=mini&carto=0.4&ortho=0&height=100pc&zone=[(#GET{zone})]&zoom=[(#GET{zoom})]&infobox=false})]';
 	uri = uri.replace (/amp;/g,'');
@@ -207,10 +220,15 @@ uri = uri.replace (/&amp;/g,'&');
 					else
 					{	$('#alon').html (t.alon);
 						$('#alat').html (t.alat);
-						$('.com').html (t.nom_com);
-						if (t.id_dep) $('.dep').html ("("+t.id_dep+")");
-						else $('.dep').html("");
-						if (t.alon=='-' && $('.[(#ENV{class,carto})]_slide').css('display')!='none') jqToogleClass('.[(#ENV{class,carto})]')
+						// Deverrouiller
+						if (t.alon=='-' && $("#verrou").val()=='1' ) verrou_location();
+						// Verrouille ?
+						if ($("#verrou").val()!='1' && t.nom_com!='')
+						{	$('.com').html (t.nom_com);
+							if (t.id_dep) $('.dep').html ("("+t.id_dep+")");
+							else $('.dep').html("");
+						}
+						if (t.alon=='-' && $('.[(#ENV{class,carto})]_slide').css('display')!='none') jqToogleClass('.[(#ENV{class,carto})]');
 					}
 					$('#geoportail_edit_objet').css('opacity',1);
 				},
@@ -236,7 +254,7 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 ]
 <div class=[(#ENV{class,carto})]_show style='display:none; text-align:right;'>
 <span style="float:left; padding:0 1em;">
-<span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span>
+<span class='verrou_location' title='<:geoportail:verrouiller:>' onclick='javascript:verrou_location();'><span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span></span>
 </span>
 [<form class=zone_geo>(#MODELE{geoportail_geozone}{selected=#GET{zone}}{class=fondl})</form>]
 </div>
@@ -254,9 +272,10 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 ?>
 
 <form id=geoportail_edit_objet method=POST action='javascript:geoportail_editer_objet("valider")' >
-	<input type=hidden name=id_objet value='#ID_OBJET' />
-	<input type=hidden name=objet value='#OBJET' />
-	<input type=hidden name=idzone id=id_zone value='#GET{zone}' />
+	<input type=hidden name='id_objet' value='#ID_OBJET' />
+	<input type=hidden name='objet' value='#OBJET' />
+	<input type=hidden name='verrou' id='verrou' value='0' />
+	<input type=hidden name='idzone' id='id_zone' value='#GET{zone}' />
 	<span class='[(#ENV{class,carto})]_show' style='display:none; margin-left:0.25em;' >
 		<input name=valider class='fondo' style='float:right; margin:0.25em; ' type=submit value='<:bouton_valider:>'  title='<:bouton_valider:>' />
 		<input name=supprimer class='fondo' style='float:right; margin:0.25em; ' type=button onclick='javascript:geoportail_editer_objet("supprimer")' value='<:geoportail:bouton_supprimer:>'  title='<:geoportail:info_supprimer:>' />
@@ -300,7 +319,7 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 	</span>
 	[<div class='[(#ENV{class,carto})]_show' style='margin-left:1em; padding:0; clear:both; display '>
 		<input name=supprimer class='fondo' style='float:right;' type=button onclick='javascript:geoportail_editer_objet("supprimer")' value='<:geoportail:bouton_supprimer:>') title='<:geoportail:info_supprimer:>' />
-		<span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span>
+		<span><span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span></span>
 		<span style='padding:0.25em 0em; display:block;'>
 		<:geoportail:lon:> : <span id="alon">(#GET{lon}|geoportail_longitude)</span> &nbsp; ][<:geoportail:lat:> : <span id="alat">(#GET{lat}|geoportail_latitude)</span>
 		</span>

@@ -31,6 +31,7 @@ function action_geoportail_editer_objet_dist()
 		$action = 'modifier';
 		$alon = addslashes(geoportail_longitude($lon));
 		$alat = addslashes(geoportail_latitude($lat));
+		$verrou = _request('verrou');
 		// Quoi modifier
 		if ($lon && $lat && $zone)
 		{	$objet = _request ('objet');
@@ -42,7 +43,7 @@ function action_geoportail_editer_objet_dist()
 			return;
 		}
 		// Rechercher la commune la plus proche
-		geoportail_chercher_adm ($lon, $lat, $adm);
+		if (!$verrou) geoportail_chercher_adm ($lon, $lat, $adm);
 		if ($adm)
 		{	$id_dep = $adm['id_dep'];
 			$id_com = $adm['id_com'];
@@ -60,9 +61,10 @@ function action_geoportail_editer_objet_dist()
 			{	if (isset($_POST['valider']))
 				{	$row = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet='$id' AND objet='$objet'"));
 					if ($row)
-					{	
+					{	$req = "";
+						if (!$verrou) $req = ",id_dep='$id_dep',id_com='$id_com'";
 						spip_query("UPDATE spip_geopositions SET "
-							."lon=$lon,lat=$lat,zoom=$zoom,zone='$zone',id_dep='$id_dep',id_com='$id_com'"
+							."lon=$lon,lat=$lat,zoom=$zoom,zone='$zone'".$req
 							."WHERE id_geoposition=".$row['id_geoposition']." AND id_objet=$id AND objet='$objet'");
 					}
 					else

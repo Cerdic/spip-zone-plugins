@@ -18,6 +18,15 @@ label.geoservice
 	padding-right:0.5em;
 }
 
+.verrou_location
+{	background:url(verrou.png) bottom left no-repeat;
+	padding:0 16px;
+	line-height:16px;
+	display:block;
+	cursor:pointer;
+	margin-bottom:2px;
+}
+
 /* Pour faire patienter */
 #query_back
 {	background-position:center center;
