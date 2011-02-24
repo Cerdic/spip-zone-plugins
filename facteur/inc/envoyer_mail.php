@@ -22,6 +22,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$message_texte	= nettoyer_caracteres_mail($corps['texte']);
 		$pieces_jointes	= $corps['pieces_jointes'];
 		$nom_envoyeur = $corps['nom_envoyeur'];
+		$cc = $corps['cc'];
+		$bcc = $corps['bcc'];
 	} 
 	// si $corps est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
@@ -41,14 +43,40 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		else
 			$destinataire = _TEST_EMAIL_DEST;
 	}
-
+	
+	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
+	
+	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
 	if (!empty($from))
 		$facteur->From = $from;
+	
+	// On ajoute le nom de l'envoyeur s'il fait partie des options
 	if ($nom_envoyeur)
 		$facteur->FromName = $nom_envoyeur;
+	// Sinon on met le courriel
 	else
 		$facteur->FromName = $from;
+	
+	// S'il y a des copies à envoyer
+	if ($cc){
+		if (is_array($cc))
+			foreach ($cc as $courriel)
+				$facteur->AddCC($courriel);
+		else
+			$facteur->AddCC($cc);
+	}
+	
+	// S'il y a des copies cachées à envoyer
+	if ($bcc){
+		if (is_array($bcc))
+			foreach ($bcc as $courriel)
+				$facteur->AddBCC($courriel);
+		else
+			$facteur->AddBCC($bcc);
+	}
+	
+	// S'il y a des pièces jointes on les ajoute proprement
 	if (count($pieces_jointes)) {
 		foreach ($pieces_jointes as $piece) {
 			$facteur->AddAttachment($piece['chemin'], $piece['nom'], $piece['encodage'], $piece['mime']);
