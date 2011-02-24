@@ -1,0 +1,45 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	analyclick
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+		[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]
+	</auteur>
+	<version>0.1</version>
+	<icon>anaclic.png</icon>
+	<etat>test</etat>
+	<description>
+		Compteur de t&eacute;l&eacute;chargements pour les documents SPIP.
+	</description>
+	<prefix>
+	anaclic
+	</prefix>
+	<!-- Installation de la base -->
+	<install>base/anaclic_install.php</install>
+	<fonctions>base/anaclic.php</fonctions>
+	<!-- les balises -->
+	<fonctions>balise/anaclic_balise.php</fonctions>
+	<!-- boucle doc_compteurs -->
+	<fonctions>
+		public/anaclic_boucles.php
+	</fonctions>
+	<!-- boutons -->
+	<bouton id="statistiques_anaclic_nav" parent='naviguer'>
+		<icone>images/statistiques-24.gif</icone>
+		<url>statistiques_anaclic</url>
+		<titre>anaclic:statistiques_documents</titre>
+	</bouton>
+	<bouton id="statistiques_anaclic" parent='statistiques_visites'>
+		<icone>images/statistiques-24.gif</icone>
+		<titre>anaclic:statistiques_documents</titre>
+	</bouton>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/anaclic_autorisations.php</inclure>
+	</pipeline>
+	<categorie>statistique</categorie>
+</plugin>
