@@ -52,7 +52,7 @@ function inc_afficher_objets($type, $titre,$requete,$formater='', $force=false){
 		}
 
 		// cas particuliers tordus avec jointures, en attendant la recriture
-		if (preg_match(",(A|articles).id_article=(?:lien|L).id_article AND (?:lien|L).id_auteur=([0-9]+),i",$contexte['where'],$regs)
+		if (preg_match(",(?:A|articles).id_article=(?:lien|L).id_article AND (?:lien|L).id_auteur=([0-9]+),i",$contexte['where'],$regs)
 		OR preg_match(",(?:lien|L).id_auteur=([0-9]+),i",$contexte['where'],$regs)){
 			$contexte['id_auteur'] = $regs[1];
 			$contexte['where'] = str_replace($regs[0],"(1=1)",$contexte['where']);
