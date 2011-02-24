@@ -20,9 +20,11 @@ function traiter_paiement_virement_dist($args, $retours){
     	} 
  
 	if ($options['champ_adresse_virement']){
-		$retours['message_ok'] .= "<div class='transaction_ok virement'>" . str_replace("%montant%", $montant, $options['champ_adresse_virement']) . "</div>";
+	// Si aucun montant n'a été saisie le message pour le paiement n'est pas affiché
+	if ($_REQUEST['montant_selection_1'] OR $_REQUEST['montant_fixe_1'] OR $_REQUEST['montant_1']) $retours['message_ok'] .= "<div class='transaction_ok virement'>" . str_replace("%montant%", $montant, $options['champ_adresse_virement']) . "</div>";
 	} else {
-		$retours['message_ok'] .= "<div class='transaction_ok virement defaut'>" . _T('transaction:traiter_virement_message_defaut', array('montant'=>$montant)) . "</div>";
+	// Si aucun montant n'a été saisie le message pour le paiement n'est pas affiché
+	if ($_REQUEST['montant_selection_1'] OR $_REQUEST['montant_fixe_1'] OR $_REQUEST['montant_1']) $retours['message_ok'] .= "<div class='transaction_ok virement defaut'>" . _T('transaction:traiter_virement_message_defaut', array('montant'=>$montant)) . "</div>";
 	}
 
 	

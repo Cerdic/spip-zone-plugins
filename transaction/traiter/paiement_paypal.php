@@ -47,7 +47,8 @@ function traiter_paiement_paypal_dist($args, $retours){
 	
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
-	$retours['message_ok'] .=  "<div class='transaction_ok paypal' style='background: url(".find_in_path('paiement/paypal/logo.png').") no-repeat top left'>"._T('transaction:traiter_message_paypal').'<p><a href="'.find_in_path("paiement/paypal/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
+	// Si aucun montant n'a été saisie le message pour le paiement n'est pas affiché
+	if ($_REQUEST['montant_selection_1'] OR $_REQUEST['montant_fixe_1'] OR $_REQUEST['montant_1']) $retours['message_ok'] .=  "<div class='transaction_ok paypal' style='background: url(".find_in_path('paiement/paypal/logo.png').") no-repeat top left'>"._T('transaction:traiter_message_paypal').'<p><a href="'.find_in_path("paiement/paypal/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
 
 	//enregistrement des résultats
 	$options = $args['options'];

@@ -44,7 +44,8 @@ function traiter_paiement_paybox_dist($args, $retours){
 	
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
-	$retours['message_ok'] .=  "<div class='transaction_ok paybox' style='background: url(".find_in_path('paiement/paybox/logo.jpg').") no-repeat top left'>"._T('transaction:traiter_message_paybox').'<p><a href="'.find_in_path("paiement/paybox/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
+	// Si aucun montant n'a été saisie le message pour le paiement n'est pas affiché
+	if ($_REQUEST['montant_selection_1'] OR $_REQUEST['montant_fixe_1'] OR $_REQUEST['montant_1']) $retours['message_ok'] .=  "<div class='transaction_ok paybox' style='background: url(".find_in_path('paiement/paybox/logo.jpg').") no-repeat top left'>"._T('transaction:traiter_message_paybox').'<p><a href="'.find_in_path("paiement/paybox/paiement.php").'"  class="valider"><span>'._T('transaction:valider_paiement').'</span></a></p></div>';
 
 	//enregistrement des résultats
 	$options = $args['options'];

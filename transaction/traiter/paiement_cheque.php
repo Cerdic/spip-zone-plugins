@@ -20,9 +20,11 @@ function traiter_paiement_cheque_dist($args, $retours){
     	} 
 
 	if ($options['champ_adresse_cheque']){
-		$retours['message_ok'] .= "<div class='transaction_ok cheque'>" . str_replace("%montant%", $montant, $options['champ_adresse_cheque']) . "</div>";
+	// Si aucun montant n'a été saisie le message pour le paiement n'est pas affiché
+	if ($_REQUEST['montant_selection_1'] OR $_REQUEST['montant_fixe_1'] OR $_REQUEST['montant_1']) $retours['message_ok'] .= "<div class='transaction_ok cheque'>" . str_replace("%montant%", $montant, $options['champ_adresse_cheque']) . "</div>";
 	} else {
-		$retours['message_ok'] .= "<div class='transaction_ok cheque defaut'>" . _T('transaction:traiter_cheque_message_defaut', array('montant'=>$montant)) . "</div>";
+	// Si aucun montant n'a été saisie le message pour le paiement n'est pas affiché
+	if ($_REQUEST['montant_selection_1'] OR $_REQUEST['montant_fixe_1'] OR $_REQUEST['montant_1']) $retours['message_ok'] .= "<div class='transaction_ok cheque defaut'>" . _T('transaction:traiter_cheque_message_defaut', array('montant'=>$montant)) . "</div>";
 	}
 
 	// Le formulaire a été validé, on le masque
