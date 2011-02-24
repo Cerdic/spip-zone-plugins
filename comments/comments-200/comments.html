@@ -4,7 +4,7 @@
 	<INCLURE{fond=comments-#CONFIG{comments/comments_fil,list}}{env}/>
 	[<div class="comment-form">
 		<h2 class="h2"><:repondre_article:></h2>
-		(#FORMULAIRE_FORUM)
+		(#FORMULAIRE_FORUM{#SELF})
 	</div>]
 	[(#PARAMETRES_FORUM|oui)<INCLURE{fond=comments-feed}{env}>]
 </div>
