@@ -107,11 +107,17 @@ function exec_spiplistes_courrier_gerer () {
 		// effectue les modifications demandees si retour local ou retour editeur
 		if($id_courrier > 0) {
 
-			if($btn_dupliquer_courrier > 0) {
-				if($row = sql_fetsel('titre,texte', 'spip_courriers', "id_courrier=".sql_quote($id_courrier),'','',1)) {
+			if($btn_dupliquer_courrier > 0)
+			{
+				if($row = sql_fetsel('titre,texte', 'spip_courriers', 'id_courrier='.sql_quote($id_courrier),'','',1))
+				{
 					$titre = typo($row['titre']);
+					
 					$texte = typo($row['texte']);
-					$texte = typo($row['message_texte']);
+					//
+					// @see: http://www.spip-contrib.net/SPIP-Listes#comment441566
+					//$texte = typo($row['message_texte']);
+					
 					$str_log = "id_courrier #$id_courrier";
 					$statut = _SPIPLISTES_COURRIER_STATUT_REDAC;
 					$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
