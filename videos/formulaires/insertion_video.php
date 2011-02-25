@@ -47,22 +47,27 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	$fichier = _request('lavideo');
 	$url = _request('video_url');
 
-	$titre = "";
-	$descriptif = "";
+	$titre = ""; $descriptif = ""; $id_vignette = "";
 
 	// On tente de récupérer titre et description à l'aide de Videopian
 	if(!preg_match('/culture/',$url) && (version_compare(PHP_VERSION, '5.2') >= 0)) {
+		/*
+			TODO
+			Question ouverte : pourquoi ne pas utiliser => http://oohembed.com/ ? Nécessite quand même PHP5 (json) et semble faire pareil (mieux ?)
+			- Inconvénient : dépend d'un service distant alors que là, c'est dans le plugin, ça marche direct
+			- Avantage : sûrement mieux maintenu à jour, utilise JSON donc boucle DATA envisageables, réponse plus propre
+		*/
 
 		include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
 		$Videopian = new Videopian();
 		try {
-			$infosVideo = $Videopian->get($url);		
+			$infosVideo = $Videopian->get($url);
 			$titre = $infosVideo->title;
 			$descriptif = $infosVideo->description;
-			// $logoDocument = $infosVideo->thumbnails->0->url; // A brancher sur la copie de document
+			$logoDocument = $infosVideo->thumbnails[0]->url;
 		} catch (Exception $e) {
 			//echo 'Exception reçue : ',  $e->getMessage(), "\n";
-			spip_log("L\'ajout automatique du titre et de la description a echoue","Plugin Videos");
+			spip_log("L'ajout automatique du titre et de la description a echoué","Plugin Vidéo(s)");
 		}
 	}
 
@@ -77,19 +82,34 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 		'distant'=>'oui'
 	);
 	
-	/** Gérer le cas de la présence de Médiathèque (parce que Mediatheque c'est le BIEN) **/
-	if(filtre_info_plugin_dist('medias','est_actif')){
-		if($infosVideo) {
-			// Récupérer les infos
-			$taille = $infosVideo->duration;
-			$auteur = $infosVideo->author;
-			// Remplir quelques champs de plus
-			$champs['taille'] = $taille;
-			$champs['credits'] = $auteur;
-		}
-		$champs['statut'] = 'publie';
-	}
+	/** Gérer le cas de la présence des champs de Médiathèque (parce que Mediatheque c'est le BIEN mais c'est pas toujours activé) **/
+	$trouver_table=charger_fonction('trouver_table','base');	
+	$desc = $trouver_table('spip_documents');
+	if(array_key_exists('taille',$desc['field'])) if($infosVideo) $champs['taille'] = $infosVideo->duration;
+	if(array_key_exists('credits',$desc['field'])) if($infosVideo) $champs['credits'] = $infosVideo->author;
+	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'prepa';
 
+	/* Cas de la présence d'une vignette à attacher */
+	if($logoDocument){
+		include_spip('inc/distant');
+		if($fichier = preg_replace("#IMG/#", '', copie_locale($logoDocument))){ // set_spip_doc ne fonctionne pas... Je ne sais pas pourquoi
+			$champsVignette['fichier'] = $fichier;
+			$champsVignette['mode'] = 'vignette';
+			
+			// Recuperer les tailles
+			$champsVignette['taille'] = @intval(filesize($fichier));
+			$size_image = @getimagesize($fichier);
+			$champsVignette['largeur'] = intval($size_image[0]);
+			$champsVignette['hauteur'] = intval($size_image[1]);
+			// $infos['type_image'] = decoder_type_image($size_image[2]);
+			
+			// Ajouter
+			$id_vignette = sql_insertq('spip_documents',$champsVignette);
+			if($id_vignette) $champs['id_vignette'] = $id_vignette;
+		}
+		else{ spip_log("Echec du lien vers le document $logoDocument, abandon"); return $champs; }
+	}
+	
 	$document = sql_insertq('spip_documents',$champs);
 	if($document){
 		$document_lien = sql_insertq(
