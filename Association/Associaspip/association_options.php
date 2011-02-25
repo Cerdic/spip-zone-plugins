@@ -145,8 +145,11 @@ function association_toutes_destination_option_list()
 }
 
 // retourne dans un <div> le code HTML/javascript correspondant au selecteur de destinations dynamique
-// le parametre permet de donner un tableau de destinations deja selectionnees
-function association_editeur_destinations($destination)
+// le premier parametre permet de donner un tableau de destinations deja selectionnees(ou '' si on ajoute une operation)
+// le second parametre (optionnel) permet de specifier si on veut associer une destination unique, par default on peut ventiler sur
+// plusieurs destinations
+// le troisieme parametre permet de regler une destination par defaut[contient l'id de la destination] - quand $destination est vide
+function association_editeur_destinations($destination, $unique=false, $defaut='')
 {
 	// recupere la liste de toutes les destination dans un code HTML <option value="destinatio_id">destination</option>
 	$liste_destination = association_toutes_destination_option_list();
@@ -166,27 +169,38 @@ function association_editeur_destinations($destination)
 				$liste_destination_selected = preg_replace('/(value=\''.$destId.'\')/', '$1 selected="selected"', $liste_destination);
 				$res .= '<p class="formo" id="row'.$idIndex.'"><select name="destination_id'.$idIndex.'" id="destination_id'.$idIndex.'" >'
 				. $liste_destination_selected
-				. '</select><input name="montant_destination_id'.$idIndex.'" value="'
-				. association_nbrefr($destMontant)
-				. '" type="text" id="montant_destination_id'.$idIndex.'" />';
-				$res .= "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
-				if ($idIndex>1)	{
-					$res .= "<button class='destButton' type='button' onClick='removeFormField(\"#row".$idIndex."\"); return false;'>-</button>";
+				. '</select>';
+				if ($unique==false) {
+					$res .= '<input name="montant_destination_id'.$idIndex.'" value="'
+					. association_nbrefr($destMontant)
+					. '" type="text" id="montant_destination_id'.$idIndex.'" />'
+					. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
+					if ($idIndex>1)	{
+						$res .= "<button class='destButton' type='button' onClick='removeFormField(\"#row".$idIndex."\"); return false;'>-</button>";
+					}
 				}
 				$res .= '</p>';
 				$idIndex++;
 			}
 		}
 		else {/* pas de destination deja definies pour cette operation */
+			if ($defaut!='') {
+				$liste_destination = preg_replace('/(value=\''.$defaut.'\')/', '$1 selected="selected"', $liste_destination);
+			}
 			$res .= '<p id="row1" class="formo"><select name="destination_id1" id="destination_id1" >'
 			. $liste_destination
-			. '</select><input name="montant_destination_id1" value="'
-			. ''
-			. '" type="text" id="montant_destination_id1"/>'
-			. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button></p>";
+			. '</select>';
+			if ($unique==false) {
+				$res .= '<input name="montant_destination_id1" value="'
+				. ''
+				. '" type="text" id="montant_destination_id1"/>'
+				. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
+			}
+			$res .= '</p>';
 		}
 
-		$res .= '<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'"></div>';
+		if ($unique==false) $res .= '<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'">';
+		$res .= '</div>';
 	}
 	return $res;
 }
@@ -275,9 +289,12 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 	/* on boucle sur toutes les cles trouvees, les montants ont des noms de champs identiques mais prefixes par montant_ */
 	$total_destination = 0;
 	$id_inserted = array();
+
+
 	foreach ($toutesDestinationsPOST as $destination_id)
 	{
 		$id_destination = _request($destination_id);
+			
 		/* on verifie qu'on n'a pas deja insere une destination avec cette id */
 		if (!array_key_exists($id_destination,$id_inserted)) {
 			$id_inserted[$id_destination]=0;
@@ -288,16 +305,21 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 			echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_destination_dupliquee').'<br/><h1><a href="'.$url_retour.'">Retour</a><h1>');
 			exit;
 		}
-		$montant = floatval(preg_replace("/,/",".",_request('montant_'.$destination_id)));
+		/* si on a une seule destination, on insere meme sans montant avec directement la somme recette+depense vu qu'au moins
+		une des deux est egale a 0 */
+		if (count($toutesDestinationsPOST) == 1) {
+			$montant = $recette+$depense;
+		} else {
+			$montant = floatval(preg_replace("/,/",".",_request('montant_'.$destination_id)));
+		}
 		$total_destination += $montant;
 		sql_insertq('spip_asso_destination_op', array(
 		    'id_compte' => $id_compte,
 		    'id_destination' => $id_destination,
 		    $attribution_montant => $montant));
 	}
-	
-	/* on verifie que la somme des montants des destinations correspond au montant de l'operation */
-	if (($recette>0 && $total_destination != $recette) || ($depense>0 && $total_destination != $depense)) {
+	/* on verifie que la somme des montants des destinations correspond au montant de l'operation($recette+$depense) dont l'un des deux est egal a 0 */
+	if ($recette+$depense != $total_destination) {
 		include_spip('inc/minipres');
 		$url_retour = generer_url_ecrire('edit_compte','id='.$id_compte);
 		echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_montant_destination').'<br/><h1><a href="'.$url_retour.'">Retour</a><h1>');
@@ -380,6 +402,15 @@ function generer_url_asso_membre($id, $param='', $ancre='') {
 function generer_url_membre($id, $param='', $ancre='') {
 	return  array('asso_membre', $id);
 }
+
+function generer_url_asso_vente($id, $param='', $ancre='') {
+	return  generer_url_ecrire('edit_vente', "id=" . intval($id));
+}
+
+function generer_url_vente($id, $param='', $ancre='') {
+	return  array('asso_vente', $id);
+}
+
 
 // pour executer les squelettes comportant la balise Meta
 include_spip('balise/meta');

@@ -36,15 +36,8 @@ function action_modifier_dons() {
 
 	include_spip('base/association');
 
+	// on modifie l'operation comptable associe au don
 	association_modifier_operation_comptable($date_don, $argent, 0, "[->don$id_don] [->membre$id_adherent]", $GLOBALS['association_metas']['pc_dons'], $journal, '', $id_compte);
-/*
-	sql_updateq('spip_asso_comptes', array(
-		    'date' => $date_don,
-		    'recette' => $argent,
-		    'journal' => $journal,
-		    'justification' => "[->don$id_don] [->membre$id_adherent]"),
-		    "id_journal=$id_don AND imputation=".sql_quote($GLOBALS['association_metas']['pc_dons']));
-*/
 
 	sql_updateq('spip_asso_dons', array(
 			'date_don' => $date_don,

@@ -26,10 +26,18 @@ function formulaires_configurer_association_verifier_dist() {
 
 	if (_request('ventes') == 'on') {
 		$ref_ventes = _request('pc_ventes');
+		$ref_frais_envoi = _request('pc_frais_envoi');
 		if (!array_key_exists($ref_ventes,$ref_attribuee)) {
 			$ref_attribuee[$ref_ventes]=0;
 		}
 		else $erreur = true;
+		if ($ref_ventes != $ref_frais_envoi) {
+			/* vente et frais_envoi peuvent etre associés a la meme reference comptable meme si c'est deconseille d'un point de vue comptable */
+			if (!array_key_exists($ref_frais_envoi,$ref_attribuee)) {
+				$ref_attribuee[$ref_frais_envoi]=0;
+			}
+			else $erreur = true;
+		}
 	}
 
 	if (_request('prets') == 'on') {

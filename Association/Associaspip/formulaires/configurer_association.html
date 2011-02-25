@@ -56,6 +56,16 @@
 		</BOUCLE_pc_cotisations>
 		</select>
 		</B_pc_cotisations>
+		<br/><label><strong><:asso:config_libelle_num_dc:></strong> </label>	
+		<B_dc_cotisations>
+		<select name="dc_cotisations" id="dc_cotisations"> 
+		<BOUCLE_dc_cotisations(spip_asso_destination){par intitule}>
+		<option value="#ID_DESTINATION" [(#ENV{dc_cotisations}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+		</BOUCLE_dc_cotisations>
+		</select>
+		</B_dc_cotisations>
+		<span class="spip_form_erreur">Aucune destination comptable définie !</span>
+		<//B_dc_cotisations>
 		</p>
 		<p>
 		<input type="checkbox" name="dons" [(#ENV{dons}|?{checked="checked"})] id="dons" />
@@ -70,6 +80,16 @@
 		</B_pc_dons>
 		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
 		<//B_pc_dons>
+		<br/><label><strong><:asso:config_libelle_num_dc:></strong> </label>	
+		<B_dc_dons>
+		<select name="dc_dons" id="dc_dons"> 
+		<BOUCLE_dc_dons(spip_asso_destination){par intitule}>
+		<option value="#ID_DESTINATION" [(#ENV{dc_dons}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+		</BOUCLE_dc_dons>
+		</select>
+		</B_dc_dons>
+		<span class="spip_form_erreur">Aucune destination comptable définie !</span>
+		<//B_dc_dons>
 		</p>
 		<p>
 		<input type="checkbox" name="ventes" [(#ENV{ventes}|?{checked="checked"})] id="ventes" />
@@ -84,6 +104,26 @@
 		</B_pc_ventes>
 		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
 		<//B_pc_ventes>
+		<br/><label><strong><:asso:config_libelle_num_pc:>&nbsp;<:asso:config_libelle_frais_envoi:></strong> </label>	
+		<B_pc_frais_envoi>
+		<select name="pc_frais_envoi" id="pc_frais_envoi"> 
+		<BOUCLE_pc_frais_envoi(ASSO_PLAN){par classe}{par code}>
+		<option value="#CODE" [(#ENV{pc_frais_envoi}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
+		</BOUCLE_pc_frais_envoi>
+		</select>
+		</B_pc_frais_envoi>
+		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
+		<//B_pc_frais_envoi>
+		<br/><label><strong><:asso:config_libelle_num_dc:></strong> </label>	
+		<B_dc_ventes>
+		<select name="dc_ventes" id="dc_ventes"> 
+		<BOUCLE_dc_ventes(spip_asso_destination){par intitule}>
+		<option value="#ID_DESTINATION" [(#ENV{dc_ventes}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+		</BOUCLE_dc_ventes>
+		</select>
+		</B_dc_ventes>
+		<span class="spip_form_erreur">Aucune destination comptable définie !</span>
+		<//B_dc_ventes>
 		</p>
 		<p>
 		<input type="checkbox" name="activites" [(#ENV{activites}|?{checked="checked"})] id="activites" />

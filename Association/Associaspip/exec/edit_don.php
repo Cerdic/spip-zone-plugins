@@ -83,7 +83,7 @@ function exec_edit_don(){
 		. association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'));
 		if ($GLOBALS['association_metas']['destinations']=="on")
 		{
-			$res .= association_editeur_destinations($destination);
+			$res .= association_editeur_destinations($destination, false, $GLOBALS['association_metas']['dc_dons']);
 		}
 		$res .= "<label for='colis'><strong>" . _T('asso:colis') . "&nbsp;:</strong></label>\n"
 		. "<input name='colis' type='text' value='$colis' id='colis' class='formo' />\n"

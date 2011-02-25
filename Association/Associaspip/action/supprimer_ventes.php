@@ -19,7 +19,17 @@ function action_supprimer_ventes() {
 
 	$w = sql_in('id_vente', $_REQUEST['drop']);
 	sql_delete('spip_asso_ventes', $w);
+
+	// on recupere les id_compte correspondant aux ventes dans la table des comptes
 	$w = sql_in('id_journal', $_REQUEST['drop']);
+	$where = sql_in_select("id_compte", "id_compte", "spip_asso_comptes", $w . " AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']));
+	sql_delete('spip_asso_destination_op', $where);
 	sql_delete('spip_asso_comptes', $w . " AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']));
+	/* si ventes et frais d'envoi ne sont pas associes a la meme reference, on repete l'operation pour les operation associes aux frais d'envoi */
+	if ($GLOBALS['association_metas']['pc_ventes']!=$GLOBALS['association_metas']['pc_frais_envoi']) {
+		$where = sql_in_select("id_compte", "id_compte", "spip_asso_comptes", $w . " AND imputation=".sql_quote($GLOBALS['association_metas']['pc_frais_envoi']));
+		sql_delete('spip_asso_destination_op', $where);
+		sql_delete('spip_asso_comptes', $w . " AND imputation=".sql_quote($GLOBALS['association_metas']['pc_frais_envoi']));
+	}	
 }
 ?>

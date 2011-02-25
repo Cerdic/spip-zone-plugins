@@ -43,9 +43,14 @@ function exec_edit_vente() {
 			$date_envoi=$data['date_envoi'];
 			$frais_envoi=$data['frais_envoi'];
 			$commentaire=$data['commentaire'];
+			if ($GLOBALS['association_metas']['destinations']=="on")
+			{
+				$id_compte = sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_ventes']." AND id_journal=$id_vente");
+				$destination = association_liste_destinations_associees($id_compte);
+			} else $id_compte = NULL;
 		} else {
 			$date_envoi=$date_vente=date('Y-m-d');
-			$article=$code=$acheteur=$id_acheteur=$quantite=$prix_vente=$journal=$don=$frais_envoi=$commentaire='';
+			$article=$code=$acheteur=$id_acheteur=$quantite=$prix_vente=$journal=$don=$frais_envoi=$commentaire=$destination=$id_compte='';
 		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -72,7 +77,8 @@ function exec_edit_vente() {
 		
 		echo debut_cadre_relief(  "", false, "", _T('asso:ressources_titre_mise_a_jour'));
 		
-		echo '<form method="post" action="'.$url_agir_ventes.'"><div>';	
+		echo '<form method="post" action="'.$url_agir_ventes.'"><div>';
+		echo '<input name="id_compte" type="hidden" value="'.$id_compte.'" id="id_compte"/>';
 		echo '<label for="date_vente"><strong>' . _T('asso:date_aaaa_mm_jj') . '</strong></label>';
 		echo '<input name="date_vente" type="text" value="'.$date_vente."\" id='date_vente' class='formo' />\n";
 		echo '<label for="article"><strong>' . _T('asso:article') . "&nbsp;:</strong></label>\n";
@@ -88,6 +94,10 @@ function exec_edit_vente() {
 		echo '<label for="prix_vente"><strong>' . _T('asso:prix_de_vente_en_e__') . '</strong></label>';
 		echo '<input name="prix_vente"  type="text" value="'.$prix_vente."\" id='prix_vente' class='formo' />\n";
 		echo association_mode_de_paiement($journal, _T('asso:prets_libelle_mode_paiement'));
+		if ($GLOBALS['association_metas']['destinations']=="on")
+		{
+			echo association_editeur_destinations($destination, true, $GLOBALS['association_metas']['dc_ventes']);
+		}
 		echo '<label for="don"><strong>' . _T('asso:don') . '</strong></label>';
 		echo '<input name="don" type="text" value="'.$don."\" id='don' class='formo' />\n";
 		echo '<label for="date_envoi"><strong>' . _T('asso:envoye_le_aaaa_mm_jj') . '</strong></label>';
