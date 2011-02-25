@@ -1,5 +1,5 @@
 <!--formulaire_notation-->
-<BOUCLE_note(spip_notations_objets){objet=(#ENV*{_objet}|objet_type)}{id_objet=#ENV*{_id_objet}}>
+<BOUCLE_note(NOTATIONS_OBJETS){objet=(#ENV*{_objet}|objet_type)}{id_objet=#ENV*{_id_objet}}>
 #SET{note_ponderee,#NOTE_PONDEREE}
 #SET{total,#NOMBRE_VOTES}
 </BOUCLE_note>
