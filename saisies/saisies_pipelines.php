@@ -17,7 +17,9 @@ function saisies_affichage_final($flux){
 		if (!$pi)
 			$pi = $p; // si pas de <script inserer comme un goret entre 2 <li> de saisies
 		$css = generer_url_public('saisies.css');
+		$js = find_in_path('javascript/saisies.js');
 		$ins = "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
+		$ins .= "\n<script type='text/javascript' src='$js'></script>\n";
 		$flux = substr_replace($flux, $ins, $pi, 0);
 	}
 	return $flux;
