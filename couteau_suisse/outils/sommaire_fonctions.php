@@ -180,9 +180,28 @@ function sommaire_d_article_balise($texte) {
 
 // si on veut la balise #CS_SOMMAIRE
 if (defined('_sommaire_BALISE')) {
+	// renvoie le texte d'un article en base
+	function cs_texte_sql($id) {
+		// Utiliser la bonne requete en fonction de la version de SPIP
+		if(function_exists('sql_getfetsel')) {
+			// SPIP 2.0
+			if($r = sql_getfetsel('texte', 'spip_articles', 'id_article='.intval($id)))
+				return $r;
+		} else {
+			if($r = spip_query('SELECT texte FROM spip_articles WHERE id_article='.intval($id)))
+				// s'il existe un champ, on le retourne
+				if($row = spip_fetch_array($r)) return $row['texte'];
+		}
+		// sinon, rien !
+		return '';
+	}
+
+	// fonction traitant la balise
 	function balise_CS_SOMMAIRE_dist($p) {
-		if ($p->type_requete == 'articles') {
-			$p->code = 'cs_supprime_notes('.champ_sql('texte', $p).')';
+		// id de l'objet a trouver pour retourner son titre
+		$texte = ($v = interprete_argument_balise(1,$p))!==NULL ? 'cs_texte_sql('.$v.')' : champ_sql('texte', $p);
+		if ($p->type_requete == 'articles' || $v!==NULL) {
+			$p->code = 'cs_supprime_notes('.$texte.')';
 		} else {
 			$p->code = "''";
 		}
