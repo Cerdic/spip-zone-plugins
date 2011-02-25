@@ -408,6 +408,7 @@ function step_selectionner_champs_sql_plugin($p) {
 		'logo' => $p['icon'],
 		'categorie' => $p['categorie'] ? $p['categorie'] : ' ',
 		'tags' => $p['tags'],
+		'lien' => $p['lien'],
 	);
 }
 
