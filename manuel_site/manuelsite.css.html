@@ -14,15 +14,19 @@
 }
 
 #manuelsite_contenu{
-	position:absolute;
-   top:45px;
+	position:fixed;
+   top:0;
    left:0;
    z-index:100;
    display:none;
-   padding:10px;
    border:thin solid #999;
    overflow:auto;
    font-size:11px;
+   max-height:100%;
+}
+
+#manuelsite_contenu .contenu-principal {
+   padding:1em;
 }
 
 #manuelsite_contenu .intro, #manuelsite_contenu .email{
@@ -48,4 +52,4 @@
    font-style: normal;
 }
 
-#manuelsite_bouton_fermer { display:block; width:1em; height:1em; line-height: 1em; float:right; background:#fff; font-weight: 700; padding: 0.3em; text-align: center; }
+#manuelsite_bouton_fermer { display:block; position:fixed; top:0; left:0; width:1em; height:1em; line-height: 1em; background:#fff; font-weight: 700; padding: 0.3em; text-align: center; }
