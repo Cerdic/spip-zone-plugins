@@ -14,6 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_intro'=>'Texte d\'introduction au manuel (sera plac&eacute; avant le chapo)',
 	'explication_largeur'=>'Entrez la largeur de la zone d\'affichage du manuel',
 
+	// F
+	'fermer_le_manuel' => 'fermer le manuel',
+	
 	// H
 	'help' => 'Au secours : ' ,
 	
