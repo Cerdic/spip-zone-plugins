@@ -8,8 +8,8 @@
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
 	
-	<version>0.5.0</version>
-	<version_base>0.2</version_base>
+	<version>0.5.1</version>
+	<version_base>0.3</version_base>
 	
 	<icon>theme/img/videos-32.png</icon>
 	<etat>dev</etat>
@@ -18,13 +18,15 @@
 			[fr]Interface de gestion et modèles d'insertion de(s) vidéo(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
 			-* Fichiers H264/OGG
 			-* Dailymotion
-			-* Viméo
+			-* Vimeo
 			-* Youtube
-			[en]Management interface and integration models of video(s) (HTML5, multi navs, iPad, iPhone, Android, etc..)
+			-* CultureBox
+			[en]Management interface and integration models of video(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
 			-* H264/OGG files
 			-* Dailymotion
 			-* Vimeo
 			-* Youtube
+			-* CultureBox
 		</multi></description>
 	<lien>http://www.spip-contrib.net/?article3636</lien>
 	<prefix>videos</prefix>
