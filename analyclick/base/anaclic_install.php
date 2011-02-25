@@ -1,11 +1,16 @@
 <?php
+/**
+* Plugin Analyclick
+*
+* @author: Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+**/
 
 function anaclic_install($action)
-{	/*
-	include_spip('inc/meta');
-	include_spip('inc/plugin');
-	$t = plugin_get_infos('anaclic');
-	*/
+{
 	switch ($action)
 	{	case 'test':
 			// Table existe ?
@@ -22,7 +27,6 @@ function anaclic_install($action)
 			sql_drop_table("spip_doc_compteurs_fix");
 			break;
 	}
-	
 }
 
 ?>

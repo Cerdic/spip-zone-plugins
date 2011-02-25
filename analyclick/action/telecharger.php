@@ -1,4 +1,15 @@
 <?php
+/**
+* Plugin Analyclick
+*
+* @author: Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Fonction comptage + renvoie du document
+*
+**/
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 

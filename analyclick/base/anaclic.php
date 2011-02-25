@@ -1,4 +1,13 @@
 <?php
+/**
+* Plugin Analyclick
+*
+* @author: Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+**/
 
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 

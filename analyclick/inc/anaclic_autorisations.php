@@ -1,11 +1,20 @@
 <?php
+/**
+* Plugin Analyclick
+*
+* @author: Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Autorisation des boutons
+* Si les stats sont activees => dans stat
+* sinon => edition
+*
+**/
 
 function anaclic_autoriser(){}
 
-/** autorisation des boutons
-	Si les stats sont activees => dans stat
-	sinon => edition
-*/
 function autoriser_statistiques_anaclic_bouton_dist($faire, $type, $id, $qui, $opt) 
 {	// Les memes que pour les stats
     return autoriser('voirstats', $type, $id, $qui, $opt);

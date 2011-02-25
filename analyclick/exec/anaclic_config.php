@@ -1,5 +1,15 @@
 <?php
-/** Configuration des stats de telechargement */
+/**
+* Plugin Analyclick
+*
+* @author: Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Configuration des stats de telechargement 
+*
+**/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

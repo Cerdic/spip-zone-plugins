@@ -1,3 +1,19 @@
+[(#REM)
+/**
+* Plugin Analyclick
+*
+* @author: Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Modele <docxx> avec compteur de temechargement.
+*
+* Affichage d'un bouton de telechargemnent.
+*	<docXX|bouton|compteur=1>
+*
+**/
+]
 <BOUCLE_doc(DOCUMENTS){id_document}>
 <table class="doc_bouton [doc_bouton_(#ENV{couleur})] [doc_bouton_(#ENV{align})]" cellpadding=0 cellspacing=0><tr><td class="left">
 <a class="spip" href="[(#ENV{compteur}|choixsivide{#URL_DOCUMENT,#URL_DOC_COMPTEUR})]">
