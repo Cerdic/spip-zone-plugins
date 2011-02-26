@@ -8,8 +8,10 @@
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
 	
-	<version>0.6</version>
+	<version>0.7</version>
 	<version_base>0.3</version_base>
+	<!-- <version_html5media>1.1.3</version_html5media> -->
+	<!-- <necessite id="lib:html5media" src="https://github.com/downloads/etianen/html5media/html5media-1.1.3.zip" /> -->
 	
 	<icon>theme/img/videos-32.png</icon>
 	<etat>dev</etat>

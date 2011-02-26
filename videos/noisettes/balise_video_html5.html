@@ -1,0 +1,12 @@
+<video width="#ENV{largeur}" height="#ENV{hauteur}" preload="metadata" tabindex="-1" controls autobuffer[(#ENV{autoplay}|oui)autoplay]>
+	[(#REM) 3 boucles pour donner la préférence au H264 qui a besoin d'être en premier pour iPad notamment et pour bien nommer les types ]
+	<BOUCLE_h264(DOCUMENTS){fichier==#ENV{nomVideo}}{mime_type=="m4v"}{par num titre}>
+		<source src="#FICHIER" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'> [(#REM) Peut être virer le type, il va peut être bloquer sur certains encodages ]
+	</BOUCLE_h264>
+	<BOUCLE_webm(DOCUMENTS){fichier==#ENV{nomVideo}}{mime_type=="webm"}{par num titre}>
+		<source src="#FICHIER" type='video/webm; codecs="vp8, vorbis"'>
+	</BOUCLE_webm>
+	<BOUCLE_ogg(DOCUMENTS){fichier==#ENV{nomVideo}}{mime_type=="ogg"}{par num titre}>
+		<source src="#FICHIER" type='video/ogg; codecs="theora, vorbis"'>
+	</BOUCLE_ogg>
+</video>

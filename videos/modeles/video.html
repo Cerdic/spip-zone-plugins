@@ -13,11 +13,11 @@
 	#ARRAY{	1,dist_daily,
 			2,dist_youtu,
 			3,dist_vimeo,
-         4,dist_cubox}
+			4,dist_cubox
+	}
 })]
 
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
-
 	[(#REM) Si une dimension est fournie avec le modele on la prend,
    			sinon celle du document si elle n'est pas nulle,
             sinon celle de la config,
@@ -104,20 +104,19 @@
 
 
 [(#REM)
-/** Traiter les vidéos H264 en HTML5 **/
-<!--
-	TODO Automatiser intelligement l'appel à html5=oui, voir comment identifier le H264 qui est le seul qui pourra être lu par Flash > 9.
--->
+/** Traiter les vidéos H264/WebM/Ogg en HTML5 **/
 ]
-	[(#ENV{html5}|=={oui}|oui)
+	[(#MIME_TYPE|match{m4v|webm|ogg}|oui)
 	<div class="playerVideo">
 		<section>
 		<figure>
-			<video src="#FICHIER" width="#GET{largeur}" height="#GET{hauteur}" preload="metadata" tabindex="-1" controls autobuffer>
-			</video>
-			<!-- <figcaption>
-				Commentaire au besoin 
-			</figcaption> -->
+			[(#SET{nomVideo,[(#FICHIER|basename|pathinfo|table_valeur{filename})]})]
+			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},env} />
+			[(#REM)
+			<figcaption>
+				Commentaire au besoin, ou titre ou descriptif ou what else 
+			</figcaption>
+			]
 		</figure>
 		</section>
 	</div> <!-- Fermeture de ID : playerVideo -->
@@ -127,7 +126,7 @@
 [(#REM)
 /** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
 ]
-	[(#ENV{html5}|=={oui}|non)
+	[(#MIME_TYPE|match{m4v|webm|ogg}|non)
 	[(#GET{lesExtensions}|find{#EXTENSION}|non)
 		[(#INCLURE{fond=prive/modeles/video,id=#GET{document},env,emb=' '})]
 	]]

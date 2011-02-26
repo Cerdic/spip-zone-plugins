@@ -4,7 +4,6 @@
 	TODO Tester si insertion est activée dans CONFIG, pas la peine d'insérer des scripts sur les pages qui contiennent pas de vidéos
 */
 function videos_jquery_plugins($scripts){
-	$scripts[] = "javascript/html5media/flowplayer.js";
-	$scripts[] = "javascript/html5media/html5media.js";
+	$scripts[] = "javascript/html5media/html5media.min.js";
     return $scripts;
 }
