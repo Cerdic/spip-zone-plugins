@@ -8,6 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_manuelsite' => 'Manuel de r&eacute;daction du site',
 	
 	// E
+	'erreur_article'=>'L\'article du manuel d&eacute;fini dans la configuration du plugin est introuvable',
+	'erreur_pas_darticle'=>'L\'article du manuel n\'est pas d&eacute;fini dans la configuration du plugin',
 	'explication_background_color'=>'Entrez la couleur de fond de la zone d\'affichage du manuel',
 	'explication_email'=>'Email de contact pour les rédacteurs',
 	'explication_id_article'=>'Entrez le num&eacute;ro de l\'article qui contient le manuel',

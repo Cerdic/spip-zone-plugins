@@ -3,7 +3,7 @@
 	<auteur>
 		Yffic
 	</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
@@ -12,6 +12,7 @@
 	<icon>images/manuelsite-32.png</icon>
 	<lien></lien>
 	<prefix>manuelsite</prefix>
+	<install>base/manuelsite_install.php</install>
 	<pipeline>
 		<nom>body_prive</nom>
 		<inclure>manuelsite_prive_pipelines.php</inclure>
@@ -24,5 +25,6 @@
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<utilise id="palette" version="[1.2.2;]" />
+	<utilise id="pages" version="[0.3.5;]" />
 	<categorie>edition</categorie>
 </plugin>
