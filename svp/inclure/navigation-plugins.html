@@ -8,17 +8,19 @@
 
 ]
 <B_plugins>
-#ANCRE_PAGINATION
-[<h2 class="h2">(#ENV{titre})</h2>]
-<ul class="menu-liste">
+<div class="liste plugins">
+	#ANCRE_PAGINATION
+	[<h2 class="h2">(#ENV{titre})</h2>]
+	<ul class="liste-items">
 <BOUCLE_plugins(PLUGINS) {categorie}{pagination 10}{par nom}>
-	<li class="menu-entree">
-		[<(#EXPOSE{span, a[ href="(#URL_PLUGIN)"]})][ class="(#EXPOSE)"] title="<:svp:bulle_aller_plugin:>">
-			#NOM
-		</#EXPOSE{span, a}>
-	</li>
+		<li class="item">
+			[<(#EXPOSE{span, a[ href="(#URL_PLUGIN)"]})][ class="(#EXPOSE)"] title="<:svp:bulle_aller_plugin:>">
+				#NOM
+			</#EXPOSE{span, a}>
+		</li>
 </BOUCLE_plugins>
-</ul>
-[<p class="pagination">(#PAGINATION)</p>]
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
 </B_plugins>
 <//B_plugins>

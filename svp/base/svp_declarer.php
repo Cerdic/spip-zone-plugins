@@ -54,7 +54,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"description"	=> "text DEFAULT '' NOT NULL",
 		"auteur"		=> "text DEFAULT '' NOT NULL",
 		"licence"		=> "text DEFAULT '' NOT NULL",
-		"lien"			=> "text DEFAULT '' NOT NULL",
+		"lien"			=> "text DEFAULT '' NOT NULL", // lien vers la documentation
 		"etat"			=> "varchar(16) DEFAULT '' NOT NULL",
 		"etatnum"		=> "int(1) DEFAULT 0 NOT NULL", // 0 aucune indication - 1 exp - 2 dev - 3 test - 4 stable
 		"dependances"	=> "text DEFAULT '' NOT NULL",
@@ -64,7 +64,10 @@ function svp_declarer_tables_principales($tables_principales) {
 		"nom_archive"	=> "VARCHAR(255) DEFAULT '' NOT NULL", // nom du zip du paquet, depuis l'adresse de la zone
 		"nbo_archive"	=> "integer DEFAULT 0 NOT NULL", // taille de l'archive en octets
 		"maj_archive"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // date de mise a jour de l'archive
-		"src_archive"	=> "VARCHAR(255) DEFAULT '' NOT NULL" // source de l'archive sur le depot
+		"src_archive"	=> "VARCHAR(255) DEFAULT '' NOT NULL", // source de l'archive sur le depot
+		"lang_ref"		=> "varchar(10) DEFAULT '' NOT NULL", // abreviation de la langue de reference
+		"traductions"	=> "text DEFAULT '' NOT NULL", // tableau serialise des langues traduites et de leurs traducteurs
+		"trad_gest"		=> "varchar(32) DEFAULT '' NOT NULL" // outil de traduction utilise
 	);
 	
 	$paquets_key = array(

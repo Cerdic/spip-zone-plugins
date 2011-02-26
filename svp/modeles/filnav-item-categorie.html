@@ -1,4 +1,4 @@
-<li class="menu-entree">
+<li class="item">
 [(#ENV{categorie}|!={#ENV{cle}}|?{ 
 	<a[ href="(#ENV{url_lien}|parametre_url{categorie, #ENV{cle}})"][ title="(#ENV{bulle_lien})"]>,
 	<span class="on">})]
