@@ -4,6 +4,19 @@
 #SET{document,#ID|sinon{#ENV{document}}}
 #SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{videos/titre_descriptif,'non'}}}
 
+[(#REM) "Extensions" gérées ou rajoutées par le plugin
+<!--
+	TODO Foutre ça dans une globale ou un autre truc histoire de pas oublier de le modifier...
+-->
+]
+[(#SET{lesExtensions,
+	#ARRAY{	1,dist_daily,
+			2,dist_youtu,
+			3,dist_vimeo,
+			4,dist_cubox
+	}
+})]
+
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
 	[(#REM) Si une dimension est fournie avec le modele on la prend,
    			sinon celle du document si elle n'est pas nulle,
@@ -114,7 +127,7 @@
 /** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
 ]
 	[(#MIME_TYPE|match{m4v|webm|ogg}|non)
-	[(#GET{lesExtensions}|match{dist_}|non)
+	[(#EXTENSION|match{dist_}|non)
 		[(#INCLURE{fond=prive/modeles/video,id=#GET{document},env,emb=' '})]
 	]]
 
