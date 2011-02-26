@@ -5,9 +5,7 @@
 	<auteur>	<!-- Auteur du plugin -->
 	  [Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]
 	</auteur>
-	<version>
-	0.6
-	</version>
+	<version>1.0</version>
 	<icon>img/geoportail.gif</icon>
 	<etat>
 		test
@@ -19,10 +17,15 @@ _ Utilisation de l'API G&eacute;oportail (Openlayers) et g&eacute;or&eacute;f&ea
 - formulaire pour la saisie du geopositionnement des objets SPIP (articles, auteurs, etc.)
 - int&eacute;gration de geoservices WMS,WFS,...
 - crit&egrave;re geoposition pour jointure avec les tables SPIP
-----
+
 Vous devez param&eacute;trer l'API G&eacute;oportail avant utilisation : 
-_ <a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
+<a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
 	</description>
+	<lien>
+		[Plugin SPIP-Geoportail ->http://www.spip-contrib.net/Plugin-SPIP-Geoportail] :
+		affichage de carte Geoportail, OSM, Google Maps, Yahoo!..
+		([exemples->http://grafreex.free.fr/?-Geoportail-])
+	</lien>
 	<prefix>
 		geoportail
 	</prefix>
