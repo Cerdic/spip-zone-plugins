@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Dates relatives dynamiques</nom>
+	<auteur>ARNO* / [Seenthis.net->http://seenthis.net]</auteur>
+	<version>1</version>
+	<etat>stable</etat>
+	<licence>GPL</licence>	
+	<description>Ce plugin affiche dynamiquement les dates relatives. Les affichages concernés doivent adopter la syntaxe:
+	<cadre>
+	<div class="calcul_date" title="[(#DATE|date_u)]">[(#DATE|affdate_court)]</div>
+	</cadre>
+	</description>
+	<prefix>calcul_date</prefix>
+	<fonctions>calcul_date.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;)" />
+</plugin>
+

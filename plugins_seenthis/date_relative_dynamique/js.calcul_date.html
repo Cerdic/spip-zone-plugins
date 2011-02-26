@@ -1,0 +1,122 @@
+[(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
+
+
+var date_now = 0;
+
+
+var date_debut = new Date();
+date_debut = Math.floor(date_debut.getTime()/1000);
+
+var chaines_lang = new Array();
+chaines_lang['date_il_y_a'] = '<:date_il_y_a:>';
+chaines_lang['date_une_seconde'] = '<:date_une_seconde:>';
+chaines_lang['date_secondes'] = '<:date_secondes:>';
+chaines_lang['date_une_minute'] = '<:date_une_minute:>';
+chaines_lang['date_minutes'] = '<:date_minutes:>';
+chaines_lang['date_une_heure'] = '<:date_une_heure:>';
+chaines_lang['date_heures'] = '<:date_heures:>';
+
+chaines_lang['date_hier'] = '<:date_hier:>';
+chaines_lang['date_jours'] = '<:date_jours:>';
+
+chaines_lang['date_une_semaine'] = '<:date_une_semaine:>';
+chaines_lang['date_semaines'] = '<:date_semaines:>';
+
+chaines_lang['date_un_mois'] = '<:date_un_mois:>';
+chaines_lang['date_mois'] = '<:date_mois:>';
+
+
+function _T(chaine, nom_val, val) {
+	return chaines_lang[chaine].replace("@"+nom_val+"@", val);
+}
+
+
+function afficher_dates() {
+	var date_maintenant = new Date();
+	date_maintenant = Math.floor(date_maintenant.getTime() / 1000);
+	
+	var date_diff = date_maintenant - date_debut;
+	setTimeout("afficher_dates()", 1000);
+	
+	$(".calcul_date").each(function() {
+		var date = Math.floor($(this).attr("title")) - date_diff;
+		
+		// L'age de l'article depend du serveur
+		// l'age affichee depend du client
+		age = date_now - date;
+		
+		if (age < 1) age = false;
+		else if (age < 2) age = _T( "date_il_y_a", "delai",  age + " " + _T("date_une_seconde") );
+		else if (age < 60) age = _T( "date_il_y_a", "delai",  age + " " + _T("date_secondes") );
+		else {
+			// passer en minutes
+			var age_min = Math.floor(age / 60);
+			if (age_min < 2) age = _T( "date_il_y_a", "delai",  age_min + " " + _T("date_une_minute") );
+			else if (age_min < 60) age = _T( "date_il_y_a", "delai",  age_min + " " + _T("date_minutes") );
+			else {
+				// passer en heures
+				var age_heure = Math.floor(age / (60 * 60));
+				if (age_heure < 2) age = _T( "date_il_y_a", "delai",  age_heure + " " + _T("date_une_heure") );
+				else if (age_heure < 24) age = _T( "date_il_y_a", "delai",  age_heure + " " + _T("date_heures") );
+				
+				else {
+					// passer en jours
+					var age_jour = Math.floor(age/ (60*60*24));
+					if (age_jour < 2) age = _T("date_hier");
+					else if (age_jour < 8) age = _T( "date_il_y_a", "delai",  age_jour + " " + _T("date_jours") );
+					
+					else {
+						// passer en semaines
+						var age_sem = Math.floor(age/ (60*60*24*7));
+						if (age_sem < 2) age = _T( "date_il_y_a", "delai",  age_sem + " " + _T("date_une_semaine") );
+						else if (age_sem < 4) age = _T( "date_il_y_a", "delai",  age_sem + " " + _T("date_semaines") );
+						
+						else {
+							// passer en mois
+							var age_mois = Math.floor(age/ (60*60*24*28));
+							if (age_mois < 1) age_mois = 1;
+							if (age_mois < 2) age = _T( "date_il_y_a", "delai",  age_mois + " " + _T("date_un_mois") );
+							else if (age_mois < 13) age = _T( "date_il_y_a", "delai",  age_mois + " " + _T("date_mois") );
+							
+							else {
+								// passer en mois
+								var age_annee = Math.floor(age/ (60*60*24*364));
+								if (age_annee < 1) age_annee = 1;
+								//if (age_annee < 2) age = "last year";
+								//else age = age_annee + " years ago";
+												
+								age = false;
+							}
+						}
+					}
+				}
+				
+				
+			}
+		}
+		
+		if (age) $(this).html(age);
+		
+	});
+}
+
+// Masquer les dateServer
+// puis recuperer date serveur
+// donc reafficher dates pour calcul
+$(document).ready(function() {
+	$(".calcul_date").css({"visibility": "hidden"});
+
+	$.ajax({
+		type: "POST",
+		url: "[(#CHEMIN{vide_date.html}|url_absolue)]",
+		complete: function(data, textStatus) {
+			var dateStr = data.getResponseHeader('Date');
+			var dateServer =  Date.parse(new Date(Date.parse(dateStr)).toUTCString());
+			date_now = Math.floor(dateServer/1000);
+			$(".calcul_date").css({"visibility": "visible"});
+			afficher_dates();
+		}
+	});	
+
+});
+
