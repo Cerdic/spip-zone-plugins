@@ -15,10 +15,10 @@ x Personnaliser l'affichage de la carte (fenêtre, navigation)
 x Modèle pour synchroniser deux (ou plus) cartes.
 
 x Niveau d'affichage des geoservices pour définir plus finement l'empilement des couches
-- Afficher les geoservices dans les rubriques associées (pipeline afficher_milieu)
+x Afficher les geoservices dans les rubriques associées (pipeline afficher_milieu) => reporte dans la page geoservice
 - geoservice OSM (pour affichage de cycle map par ex.)
 
-- Accès sélectif au RGC
+x Accès sélectif au RGC
 
 - Vérifier la compatibilité avec le plugin crayon (div no-edit pour le geoportail ?)
 

@@ -15,7 +15,7 @@ function geoportail_affichage_final($page)
 <script language=javascript>jQuery(document).ready(	function() { jQuery.geoportail.initMap("'._DIR_PLUGIN_GEOPORTAIL.'"); });</script>
 
 <!-- API Geoportail -->
-<script type="text/javascript" src="http://api.ign.fr/geoportail/api/js/'._API_GEOPORTAIL_VERSION.'/GeoportalExtended.js" charset=utf-8>// <![CDATA[
+<script type="text/javascript" src="http://api.ign.fr/geoportail/api/js/1.2/GeoportalExtended.js" charset=utf-8>// <![CDATA[
     // ]]></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Layer/Locator.js">// <![CDATA[
     // ]]></script>
@@ -32,14 +32,17 @@ function geoportail_affichage_final($page)
 <link id="__FramedCloudOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/framedCloud.css"/>
 <link id="__GeoportalCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/geoportal/style.css"/>
 ';
-	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
-	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
-		if ($ykey) $engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
-		else $engine .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
+	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
+	if ($ykey) 
+	{	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
+			$engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
 	}
+	else $engine .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
+	/*
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_BING-->'))
 	{	// $engine .= '<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>';
 	}
+	*/
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
 	{	$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>'
 				.'<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/google.css"/>';
