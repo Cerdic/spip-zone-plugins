@@ -168,6 +168,7 @@ function geoportail_afficher_contenu_objet($flux)
 			$fichier = $document['fichier'];
 			$descriptif = $document['descriptif'];
 			$extension = $document['extension'];
+			$distant = $document['distant'];
 			if (!$extension)
 			{	$result = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE id_type=".$document['id_type']));
 				$extension = $result['extensions'];
@@ -184,7 +185,7 @@ function geoportail_afficher_contenu_objet($flux)
 			// Rechercher le georeferencement sur le fichier
 			else if ($GLOBALS['meta']['geoportail_geodocument_auto'])
 			{	include_spip('inc/geoupload');
-				if (geoportail_get_coord(_DIR_IMG.$fichier,$extension,$lon,$lat))
+				if ($distant != 'oui' && geoportail_get_coord(_DIR_IMG.$fichier,$extension,$lon,$lat))
 					$info = "(".geoportail_longitude($lon,true).", ".geoportail_latitude($lat,true).")";
 				$id_position = sql_insert("spip_geopositions",
 						"(id_objet, objet, lon, lat, zoom, zone)",

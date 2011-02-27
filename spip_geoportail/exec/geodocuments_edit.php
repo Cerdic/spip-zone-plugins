@@ -31,6 +31,7 @@ function exec_geodocuments_edit_dist()
 	$fichier = $document['fichier'];
 	$descriptif = $document['descriptif'];
 	$extension = $document['extension'];
+	$distant = $document['distant'];
 	if (!$extension)
 	{	$result = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE id_type=".$document['id_type']));
 		$extension = $result['extension'];
@@ -93,7 +94,7 @@ function exec_geodocuments_edit_dist()
 							'zone'			=> _request('zone')
 						);
 			// Rechercher le georef dans le fichier (s'il existe)...
-			if (geoportail_get_coord(_DIR_IMG.$fichier,$extension,$lon,$lat))
+			if ($distant != 'oui' && geoportail_get_coord(_DIR_IMG.$fichier,$extension,$lon,$lat))
 				$contexte['pos_fichier'] = "$lon,$lat,12";
 			
 			// Recuperer l'article
