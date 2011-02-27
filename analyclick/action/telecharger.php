@@ -27,10 +27,12 @@ function action_telecharger()
 	// DEBUG : echo "DATE : ".date("h:i:s")."<br/>";
 	
 	// Le document
+	
 	$doc = sql_fetsel("id_document, fichier, distant", "spip_documents", "id_document='$id'");
 	if ($doc)
-	{	$url = $doc['fichier'];
-		$adr_site= _DIR_IMG;
+	{	// Adresse du document
+		if($doc['distant'] == 'oui') $url = $doc['fichier'];
+		else $url = _DIR_IMG ."/". $doc['fichier'];
 
 		// ip du visiteur 
 		$ip = $_SERVER["REMOTE_ADDR"];
@@ -54,10 +56,9 @@ function action_telecharger()
 			}
 		}
 
-		if($distant=='oui') @header ("Location: $url");
-		else @header ("Location: $adr_site/$url"); 
+		@header ("Location: $url"); 
 
-		echo "$distant <a href='$adr_site/$url'>$adr_site/$url</a>";
+		echo "<a href='$url'>$url</a>";
 	}
 }
 ?>
