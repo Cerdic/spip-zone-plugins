@@ -56,6 +56,9 @@ function creer_sprites($flux) {
 			
 			
 			if ($creer) { 
+			
+				include_spip('inc/filtres_images_mini');
+			
 				$im = imagecreatetruecolor($largeur, $hauteur);		
 				imagepalettetotruecolor($im);
 				@imagealphablending($im, false); 
