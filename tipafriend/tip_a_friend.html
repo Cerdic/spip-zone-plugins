@@ -5,9 +5,13 @@
 <head>
 <title><:tipafriend:popup_name|textebrut:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
 <INCLURE{fond=inc-head}>
+[(#REM) Feuille de style TipAFriend ]
+[(#ENV{taf_css}|=={non}|non)
+[<link rel="stylesheet" href="(#CHEMIN{tipafriend.css}|direction_css)" type="text/css" media="all" />]
+]
 <meta name="robots" content="none" />
 </head>
-<body>
+<body class="page_tipafriend">
 <div id="taf_page">
 ]
 	<div id="conteneur">

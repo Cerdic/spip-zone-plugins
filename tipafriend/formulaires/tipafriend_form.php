@@ -25,6 +25,7 @@ function formulaires_tipafriend_form_charger(){
 		'message_text' => '',
 		'form_reset' => tipafriend_config('form_reset'),
 		'header_deja' => _request('header') ? _request('header') : 'oui',
+		'taf_css' => _request('taf_css') ? _request('taf_css') : 'oui',
 	);
 	if(isset($GLOBALS["visiteur_session"]) && $GLOBALS["visiteur_session"]['statut']) {
 		if (!strlen($valeurs['expediteur']))
