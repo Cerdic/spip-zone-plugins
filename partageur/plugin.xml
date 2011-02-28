@@ -15,7 +15,7 @@
 	   <icone>img/partageur-24.png</icone>
 	   <titre>partageur:partageur</titre>		
   </bouton>
-  <bouton id='partageurs' parent='bando_edition'>
+  <bouton id='partageurs2' parent='bando_edition'>
 		<titre>partageur:partageur</titre>
 		<icone>img/partageur-16.png</icone>
 		<url>partageurs</url>
@@ -42,6 +42,6 @@
 		<inclure>partageur_pipelines.php</inclure>
 	</pipeline>    
   <!-- requis -->
-	<necessite id="SPIP" version="[2.1.6;]" />
+	<necessite id="SPIP" version="[2.1.8;]" />
 	<necessite id="cfg" version="[1.16;]" />
 </plugin>
