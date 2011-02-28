@@ -32,12 +32,12 @@ function geoportail_affichage_final($page)
 <link id="__FramedCloudOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/framedCloud.css"/>
 <link id="__GeoportalCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/geoportal/style.css"/>
 ';
-	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
-	if ($ykey) 
-	{	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
+	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
+	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
+		if ($ykey) 
 			$engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
+		else $engine .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
 	}
-	else $engine .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
 	/*
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_BING-->'))
 	{	// $engine .= '<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>';
