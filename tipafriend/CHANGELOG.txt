@@ -6,6 +6,30 @@
 +------------------------------------------------------------------+
 dev sur le SVN de spip-zone :
 <http://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend>
+=============================================
+Ce fichier recense quelques pistes, bugs ou 'choses à faire' pour l'évolution du 
+plugin, n'hésitez pas à y jeter un oeil, ajouter des bugs ou toute autre information.
+
+Vous pouvez suivre en ligne les modifications du plugin à l'adresse suivante :
+
+<http://zone.spip.org/trac/spip-zone/log/_plugins_/tipafriend>
+Une documentation complète est disponible sur Spip-Contrib à l'adresse :
+
+<http://www.spip-contrib.net/?article3638>
+
+=============================================
+Pour toute modification du repository '_plugins_/tipafriend', veuillez contacter au préalable 
+le responsable du plugin :
+
+<piero.wbmstr@gmail.com>
+
+
+
+=============================================
+- REGLES D'INTERVENTION DANS CE FICHIER -
+Vous pouvez ajouter ce que bon vous semble ;-)
+Indiquez simplement votre contact (adresse email) avec chaque message.
+=============================================
 
 -----
 [ TODOS ]
@@ -16,6 +40,7 @@ dev sur le SVN de spip-zone :
 
 -----
 [ CHANGELOG ]
+(la suite du ChangeLog est disponible sur la Timeline du plugin sur SPIP-Zone)
 
 [ version 1.0 ]
 passage en état 'stable'
@@ -103,3 +128,11 @@ Safari (?) sur iPodTouch (iOS4)
 	=> bouton "Fermer" ok
 	=> problème de zoom après remplissage des champs (zoom automatique mais dézoom pas automatique)
 	=> mais fonctionne correctement
+
+
+
+-----------------------------------------------------
+<piero.wbmstr@gmail.com>
+
+
+

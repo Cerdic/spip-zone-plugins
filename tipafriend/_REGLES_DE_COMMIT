@@ -11,9 +11,10 @@ dev sur le SVN de spip-zone :
 
 Ce plugin est en développement ouvert à toutes les propositions !
 N'hésitez pas à intervenir, corriger ou apporter des idées d'évolution, en les soumettant avant 
-toute intervention sur le repository à l'adresse mail en fin de ce fichier.
-
-
+toute intervention sur le repository à l'adresse mail en fin de ce fichier ou sur le forum de
+la documentation du plugin sur Spip-Contrib.
+Le fichier 'CHANGELOG.txt' recense quelques pistes, bugs ou 'choses à faire' pour l'évolution du 
+plugin, n'hésitez pas à y jeter un oeil, ajouter des bugs ou toute autre information.
 
 Si votre modification concerne la traduction d'une chaîne de langue ou du fichier de langue complet, 
 il n'est pas nécessaire que vous demandiez l'autorisation au préalable 
