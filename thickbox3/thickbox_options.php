@@ -23,6 +23,7 @@ define('_DIR_THICKBOX',(_DIR_PLUGINS.end($p)));
 // -------------------------------------------------------------
 // Globales
 
+$GLOBALS['THICKBOX_DOCUMENTATION'] = 'doc_thickbox3';
 $GLOBALS['THICKBOX_TEST_IMAGE'] = _DIR_THICKBOX.'/images/single.jpg';
 $GLOBALS['THICKBOX_LOGO'] = _DIR_THICKBOX.'/images/thickbox.png';
 $GLOBALS['THICKBOX_DEFAULTS'] = array(

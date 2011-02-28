@@ -5,13 +5,9 @@
 	</refnamediv>
 	<refsynopsisdiv>
 		<author>
-			Crea Design
-			<authorblurb>{@link mailto:creadesignweb@free.fr creadesignweb@free.fr}</authorblurb>
-			<authorblurb>{@link http://creadesignweb.free.fr creadesignweb.free.fr}</authorblurb>
+			il, Izo, BoOz, PieroWbmstr
+			<authorblurb>{@link http://www.spip-contrib.net/Thickbox}</authorblurb>
 		</author>
-		<copyright>
-			&copy; 2009 CreaDesign
-		</copyright>
 		<license>
 			{@link http://www.opensource.org/licenses/gpl-3.0.html GNU GPL v3}
 		</license>
@@ -30,7 +26,7 @@
 				Le plugin 'Thickbox', de la biblioth&egrave;que javascript 'jQuery', d&eacute;velopp&eacute; par <b>Cody Lindley</b> (<i><a href="http://jquery.com/demo/thickbox/" title="Le plugin thickbox sur le web" target="_blank">site du plugin</a></i>), offre la possibilit&eacute; d'ouvrir une fen&ecirc;tre javascript directement dans la page du navigateur, sans ouvrir de r&eacute;elle nouvelle fen&ecirc;tre.
 			</p></div>
 		</p>
-		<p>Par exemple #THICKBOX{link,'',Fen&#234;tre javascript,comme ceci,250,200,inline,plugin_tb}.</p>
+		<p>Par exemple #THICKBOX{link,'',Fen&ecirc;tre javascript,comme ceci,250,200,inline,plugin_tb}.</p>
 			<p>Cette fen&ecirc;tre peut &ecirc;tre utilis&eacute;e pour pr&eacute;senter ce que vous voulez : un texte de la page en cours, un texte d'une page secondaire, une image, un formulaire etc.
 				<br />La pr&eacute;sentation de la thickbox se fait en utilisant les attributs du lien ouvrant, notamment :
 				<ul>

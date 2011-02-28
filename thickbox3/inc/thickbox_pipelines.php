@@ -38,9 +38,9 @@ function thickbox_header_prive($flux) {
 	$previouser = texte_backend(_T('thickbox:next'));
 
 	if( $th_meta['include_css'] == 'oui')
-		$flux .= "<link rel='stylesheet' href='".url_absolue(find_in_path('css/thickbox.css'))."' type='text/css' media='projection, screen, tv' />";
-	$flux .= "<script src='".url_absolue(find_in_path('javascript/thickbox-3.1.js'))."' type='text/javascript'></script>"
-		."<!--[if lte IE 6]><link rel='stylesheet' href='".url_absolue(find_in_path('css/thickbox_ie6.css'))."' type='text/css' media='projection, screen, tv' /><![endif]-->";
+		$flux .= "\n<link rel='stylesheet' href='".url_absolue(find_in_path('css/thickbox.css'))."' type='text/css' media='projection, screen, tv' />";
+	$flux .= "\n<script src='".url_absolue(find_in_path('javascript/thickbox-3.1.js'))."' type='text/javascript'></script>"
+		."\n<!--[if lte IE 6]><link rel='stylesheet' href='".url_absolue(find_in_path('css/thickbox_ie6.css'))."' type='text/css' media='projection, screen, tv' /><![endif]-->";
 	$flux .=
 '
 <script type="text/javascript"><!--

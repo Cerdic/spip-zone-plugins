@@ -41,13 +41,16 @@ function balise_thickbox_dyn($_type, $_url, $title='', $text='', $_width=false, 
 
 	if($type == 'dialogbox') $url = $GLOBALS['meta']['adresse_site'].'/?'.$str_dialogbox.$_url;
 	else {
-		$url = (eregi("^http://[_A-Z0-9-]+\.[_A-Z0-9-]+[.A-Z0-9-]*(/~|/?)[/_.A-Z0-9#?&=+-]*$", $_url) OR substr_count($_url, 'localhost:8888') ) ? 
+//		$url = (eregi("^http://[_A-Z0-9-]+\.[_A-Z0-9-]+[.A-Z0-9-]*(/~|/?)[/_.A-Z0-9#?&=+-]*$", $_url) 
+		$url = (preg_match("/^[http|https]+[:\/\/]+[A-Za-z0-9\-_]+\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i", $_url)
+			OR substr_count($_url, ':8888') ) ? 
 			$_url 
 			: 
-			( eregi("[/_.A-Z0-9-]*[_.A-Z0-9-]+\.(jpg|gif|png|jpeg|html)$", $_url) ?
+//			( eregi("[/_.A-Z0-9-]*[_.A-Z0-9-]+\.(jpg|gif|png|jpeg|html)$", $_url) ?
+			( preg_match("/[A-Za-z0-9\-_]+\.(jpg|gif|png|jpeg|html)$/i", $_url) ?
 				$GLOBALS['meta']['adresse_site'].'/'.$_url
 				:
-				( ($_url[0] == '?') ? 
+				( strlen($_url) && ($_url[0] == '?') ? 
 					$GLOBALS['meta']['adresse_site'].'/'.$_url 
 					: 
 					$GLOBALS['meta']['adresse_site'].'/?'.$_url 
@@ -99,6 +102,9 @@ function balise_thickbox_dyn($_type, $_url, $title='', $text='', $_width=false, 
 			$div = sprintf("<a href='%s' type='%s' %s><img src='%s' %s /></a>", $str_href, $file['mime'], $str_titre, $str_href, $str_dim_img);
 			break;
 		case 'gallery' :
+			static $gal_id;
+			if (!isset($gal_id)) $gal_id = uniqid();
+			if (!strlen($text)) $text = $gal_id;
 			$str_rel = " rel='gallery-".$text."'";
 			$div = sprintf("<a href='%s' type='%s' %s><img src='%s' %s /></a>", $str_href, $file['mime'], $str_rel.$str_titre, $str_href, $str_dim_img);
 			break;
