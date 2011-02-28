@@ -36,6 +36,12 @@
 <!-- boite=<:tipafriend:cfg_titre_descr:> -->
 #CACHE{0}
 
+<script type="text/javascript"><!--
+$(document).ready(function(){
+	var closestate=$('input[name=header]:checked').val();
+	if (closestate=='non'){$('input[name=close_button]').attr({disabled: 'disable'});}
+});
+// --></script>
 <form method="post" action="#SELF" id="top_taf_form"><div>
 [(#SET{config,#EVAL{tipafriend_config()}})]
 	<div>
@@ -76,6 +82,14 @@
 			<label for="squelette"><strong><:tipafriend:cfgform_titre_squelette:>&nbsp;:</strong></label>
 			<br /><input type="text" name="squelette" id="squelette" value="[(#GET{config}|table_valeur{squelette})]" size="50" />
 			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_squelette:></span>
+		</p>
+		<p class="forml">
+			<label for="taf_css"><strong><:tipafriend:cfgform_titre_taf_css:>&nbsp;:</strong></label>
+			<br />&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="taf_css" value="oui"[(#GET{config}|table_valeur{taf_css}|=={oui}|oui) checked="checked"] />&nbsp;<:item_oui:>
+				&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+				<input type="radio" name="taf_css" value="non"[(#GET{config}|table_valeur{taf_css}|=={non}|oui) checked="checked"] />&nbsp;<:item_non:>
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_taf_css:></span>
 		</p>
 		<p class="forml">
 			<label for="header"><strong><:tipafriend:cfgform_titre_header:>&nbsp;:</strong></label>
