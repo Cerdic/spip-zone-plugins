@@ -64,6 +64,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_jsparams' => 'Param&egrave;tres javascript jQuery Cycle',
 	'legend_tooltipfancy' => 'Param&egrave;tres tooltip, fancybox et mediabox',	
 	
+	// N
+	'noisette_description' => 'Affiche un diaporama al&eacute;atoirejcycle des images du site',
+	'noisette_duree' => 'Dur&eacute;e (ms)&nbsp;:',
+	'noisette_fx' => 'Effet&nbsp;:',
+	'noisette_hauteur' => 'Hauteur (px)&nbsp;:',
+	'noisette_label_afficher_titre_menu' => 'Afficher le titre&nbsp;:',
+	'noisette_largeur' => 'Largeur (px)&nbsp;:',
+	'noisette_nom_noisette' => 'Diaporama al&eacute;atoire',
+	'noisette_nb' => 'Nombre d\'images&nbsp;:',
+	'noisette_titre_noisette' => 'Titre&nbsp;:',
+
 	// V
 	'valeur_hex' => 'Valeur hexadecimale ou "transparent"',
 	'valeur_px' => 'Valeur en pixels',
