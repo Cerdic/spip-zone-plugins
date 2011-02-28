@@ -96,6 +96,8 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 	'modele' 				=> 'tipafriend.html',
 	// Afficher les en-tetes ?
 	'header' 				=> 'oui',
+	// Ajouter le CSS tipafriend ?
+	'taf_css' 				=> 'oui',
 	// Afficher le bouton 'Fermer' ?
 	'close_button'			=> 'oui',
 	// options ajoutees comme attributs au lien
@@ -114,11 +116,11 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 
 /**
  * Insertion de 'tipafriend.css'
- */
 function tipafriend_insert_head($flux){
 	$flux .= "\n<link rel='stylesheet' href='".find_in_path("tipafriend.css")."' type='text/css' media='all' />";
 	return $flux;
 }
+ */
 
 /**
  * Fonction renvoyant la configuration courante.
@@ -161,7 +163,7 @@ function tipafriend_config($var=''){
 function taf_dbg_block($tab_dbg=null) {
 	if(is_null($tab_dbg)) return;
 	if(_TIPAFRIEND_TEST) {
-		$str_dbg = '';
+		$str_dbg = taf_dbg_block_css();
 		foreach($tab_dbg as $ttl=>$val) {
 			if (is_string($ttl))
 				$str_dbg .= "<li><b>$ttl</b><br />$val</li>";
@@ -172,6 +174,19 @@ function taf_dbg_block($tab_dbg=null) {
 			."<pre class=\"taf_dbg_pre\"><ul>".$str_dbg."</ul></pre></div>";
 	}
 	return '';
+}
+
+function taf_dbg_block_css() {
+	static $TAF_dbg_cssOK=false;
+	if ($TAF_dbg_cssOK==true) return '';
+	$TAF_dbg_cssOK=true;
+	return "<style type=\"text/css\">
+/* ---- Blocs de debug ... ---- */
+.taf_dbg_global {color:black;border:1px solid #ddd;margin:.1em;padding:0;background:#fff}
+.taf_dbg_title {height:20px;background-color:#ddd;border-bottom:1px solid #ddd;padding-left:1em;padding-top:.4em}
+pre.taf_dbg_pre {max-height:280px;overflow:auto;color:black;padding:.6em;margin:0}
+pre.taf_dbg_pre ul li {margin-bottom:.6em}
+</style>";
 }
 
 // Info _CDC
