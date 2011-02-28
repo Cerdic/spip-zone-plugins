@@ -1,22 +1,36 @@
++------------------------------------------------------------------+
+|  TIP A FRIEND , plugin pour SPIP 2.0                             |
+|                                                                  |
+|  par Piero Wbmstr, Licence GPLv3 (c) 2009-2011                   |
+|  <http://www.opensource.org/licenses/gpl-3.0.html>               |
++------------------------------------------------------------------+
+dev sur le SVN de spip-zone :
+<http://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend>
 
-Tip A Friend - Règles d'intervention SVN
 =============================================
 
-Ce plugin est en développement ouvert à toutes les propositions ! 
+Ce plugin est en d√©veloppement ouvert √† toutes les propositions !
+N'h√©sitez pas √† intervenir, corriger ou apporter des id√©es d'√©volution, en les soumettant avant 
+toute intervention sur le repository √† l'adresse mail en fin de ce fichier.
 
-N'hésitez pas à intervenir, corriger ou apporter des idées d'évolution, en les soumettant avant toute intervention sur le repository à l'adresse mail en fin de ce fichier.
 
-Si votre modification concerne la traduction d'une chaîne de langue ou du fichier de langue complet, il n'est pas nécessaire que vous demandiez l'autorisation au préalable (et merci pour cette intervention ;-).
 
-Vous pouvez suivre en ligne les modifications du plugin à l'adresse suivante :
+Si votre modification concerne la traduction d'une cha√Æne de langue ou du fichier de langue complet, 
+il n'est pas n√©cessaire que vous demandiez l'autorisation au pr√©alable 
+(et merci pour cette intervention ;-).
+
+Vous pouvez suivre en ligne les modifications du plugin √† l'adresse suivante :
+
 <http://zone.spip.org/trac/spip-zone/log/_plugins_/tipafriend>
 
-Une documentation complète est disponible sur Spip-Contrib à l'adresse :
+Une documentation compl√®te est disponible sur Spip-Contrib √† l'adresse :
+
 <http://www.spip-contrib.net/?article3638>
 
-=============================================
 
-Pour toute modification du repository '_plugins_/tipafriend', veuillez contacter au préalable le responsable du plugin :
+=============================================
+Pour toute modification du repository '_plugins_/tipafriend', veuillez contacter au pr√©alable 
+le responsable du plugin :
 
 <piero.wbmstr@gmail.com>
 

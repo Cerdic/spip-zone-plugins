@@ -5,7 +5,7 @@
  * Ce fichier n'est pas indiqué dans le fichier 'plugin.xml' car il n'est nécessaire que
  * pour le traitement du formulaire. Il est donc inclus par ce fichier.
  * @name 		Fonctions
- * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @author 		Piero Wbmstr <http://www.spip-contrib.net/PieroWbmstr>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  * @package		Tip-a-friend
  */

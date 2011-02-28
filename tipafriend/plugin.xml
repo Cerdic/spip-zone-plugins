@@ -15,12 +15,6 @@ Logo et certaines images du plugin : [->http://pixel-mixer.com/]
 	<icon>img/letter_32.png</icon>
 	<options>tipafriend_options.php</options>
 	<prefix>tipafriend</prefix>
-<!--
-	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>tipafriend_options.php</inclure>
-	</pipeline>
--->
 	<categorie>communication</categorie>
 	<necessite id='SPIP' version='[2.0.0;]' />
 	<utilise id='cfg' version='[1.0;]' />

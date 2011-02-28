@@ -2,7 +2,7 @@
 /**
  * @access 		private
  * @name 		LanguageFR
- * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @author 		Piero Wbmstr <http://www.spip-contrib.net/PieroWbmstr>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  * @package		Tip-a-friend
  */
@@ -27,6 +27,7 @@ $GLOBALS['i18n_tipafriend_fr'] = array(
 	'cfgform_info_patrons' => 'Vos patrons personnels sont &agrave; placer dans le sous-r&eacute;pertoire "<strong>patrons/</strong>" de votre r&eacute;pertoire de squelettes.',
 	'cfgform_titre_patron' => 'Patron du mail envoy&eacute;',
 	'cfgform_comment_patron' => 'patron par d&eacute;faut du mail dans sa version classique (<i>texte brut</i>).',
+// TODO !!
 //	'cfgform_comment_patron' => 'vous pouvez en cr&eacute;er plusieurs selon le type de page envoy&eacute;e ou la langue, vous devez pour cela cr&eacute;er des patrons portant le nom indiqu&eacute; ci-dessus, suivi par exemple de \'<b>_article</b>\' pour un article, de \'<b>_en</b>\' pour un patron anglais, ou de \'<b>_article_en</b>\' pour un patron d\'article en anglais.',
 	'cfgform_titre_patron_html' => 'Patron du mail au format HTML',
 	'cfgform_info_patron_html' => '<strong>Si le plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> est install&eacute; et actif sur votre site</strong>, il est possible de construire une version HTML du mail envoy&eacute;.',

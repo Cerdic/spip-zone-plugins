@@ -1,8 +1,9 @@
-+------------------------------------------------------------------------+
-|  TIP A FRIEND , plugin pour SPIP 2.0                                   |
-|                                                                        |
-|  Copyright (c) 2009 | Piero Wbmstr                                     |
-+------------------------------------------------------------------------+
++------------------------------------------------------------------+
+|  TIP A FRIEND , plugin pour SPIP 2.0                             |
+|                                                                  |
+|  par Piero Wbmstr, Licence GPLv3 (c) 2009-2011                   |
+|  <http://www.opensource.org/licenses/gpl-3.0.html>               |
++------------------------------------------------------------------+
 dev sur le SVN de spip-zone :
 <http://zone.spip.org/trac/spip-zone/browser/_plugins_/tipafriend>
 

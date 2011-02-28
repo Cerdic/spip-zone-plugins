@@ -60,7 +60,7 @@
  * <br /><b>!! - À n'utiliser que pour vérifications !!</b>
  *
  * @name 		OptionsConfiguration
- * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @author 		Piero Wbmstr <http://www.spip-contrib.net/PieroWbmstr>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  * @package		Tip-a-friend
  */
@@ -113,14 +113,6 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 // -----------------------------
 // FONCTIONS
 // -----------------------------
-
-/**
- * Insertion de 'tipafriend.css'
-function tipafriend_insert_head($flux){
-	$flux .= "\n<link rel='stylesheet' href='".find_in_path("tipafriend.css")."' type='text/css' media='all' />";
-	return $flux;
-}
- */
 
 /**
  * Fonction renvoyant la configuration courante.
@@ -189,9 +181,4 @@ pre.taf_dbg_pre ul li {margin-bottom:.6em}
 </style>";
 }
 
-// Info _CDC
-if(isset($GLOBALS['_CDC_PLUGINS'])) {
-	$GLOBALS['_CDC_PLUGINS']['plugins'][] = 'tipafriend';
-	$GLOBALS['_CDC_PLUGINS']['set']['tipafriend'] = array('texte' => _T('tipafriend:tipafriend'),'fond' => find_in_path("img/mail_22.png"),'lien' => array("cfg","cfg=tipafriend"),);
-}
 ?>
