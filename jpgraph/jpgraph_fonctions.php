@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
-define('_DIR_JPGRAPH_LIB', _DIR_LIB . 'jpgraph-3.0.7/');
+define('_DIR_JPGRAPH_LIB', _DIR_LIB . 'jpgraph-3.0.7/src/');
 
 
 //
@@ -122,23 +122,21 @@ function filtre_jpgraph($str,
 
     
     // retrouver jpgraph 
-  	$cwd = getcwd();
-  	chdir(realpath(_DIR_JPGRAPH_LIB));
-    require_once ('src/jpgraph.php');
+    include_spip(_DIR_JPGRAPH_LIB.'jpgraph');
     switch($type_graphe) {
-        case "courbe":      require_once ('src/jpgraph_line.php'); break;
-        case "barre":       require_once ('src/jpgraph_bar.php');  break;
-	case "accbarre":       require_once ('src/jpgraph_bar.php');  break;
-        case "camembert":   require_once ('src/jpgraph_pie.php');  break;
-	case "camembert3d":   require_once ('src/jpgraph_pie.php'); require_once ('src/jpgraph_pie3d.php'); break;
-	case "baton":   require_once ('src/jpgraph_scatter.php');  break;
-	case "point":   require_once ('src/jpgraph_scatter.php');  break;
-	case "radar": require_once ('src/jpgraph_radar.php');  break;
+        case "courbe":      include_spip(_DIR_JPGRAPH_LIB.'jpgraph_line'); break;
+        case "barre":       include_spip(_DIR_JPGRAPH_LIB.'jpgraph_bar');  break;
+	      case "accbarre":    include_spip(_DIR_JPGRAPH_LIB.'jpgraph_bar');  break;
+        case "camembert":   include_spip(_DIR_JPGRAPH_LIB.'jpgraph_pie');  break;
+	      case "camembert3d": include_spip(_DIR_JPGRAPH_LIB.'jpgraph_pie'); 
+                            include_spip(_DIR_JPGRAPH_LIB.'jpgraph_pie3d'); break;
+      	case "baton":       include_spip(_DIR_JPGRAPH_LIB.'jpgraph_scatter');  break;
+      	case "point":       include_spip(_DIR_JPGRAPH_LIB.'jpgraph_scatter');  break;
+      	case "radar":       include_spip(_DIR_JPGRAPH_LIB.'jpgraph_radar');  break;
         default:            $type_graphe = "courbe";
-                            require_once ('src/jpgraph_line.php');  
+                            include_spip(_DIR_JPGRAPH_LIB.'jpgraph_line');  
                             break;        
     }
-    chdir($cwd);
     
      // constantes
 	  $marqueur_formes = array("carre"=>MARK_SQUARE,
