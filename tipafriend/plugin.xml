@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>Tip A Friend[fr]Tip A Friend : Envoyer une page par e-mail[en]Tip A Friend : Send a page by e-mail</multi></nom>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<version>1.01</version>
+	<version>1.02</version>
 	<licence>&#169; 2009-2011 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
 	<etat>stable</etat>
 	<description>
