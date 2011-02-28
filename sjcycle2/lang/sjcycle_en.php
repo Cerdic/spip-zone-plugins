@@ -65,13 +65,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_tooltipfancy' => 'Tooltip & fancybox Parameters',
 
 	// N
-	'noisette_description' => 'Display a random slideshow',
+	'noisette_alea_description' => 'Display a random slideshow',
+	'noisette_alea_nom_noisette' => 'Random slideshow',
+	'noisette_description' => 'Display a slideshow with the images of an article',
 	'noisette_duree' => 'Duration (ms)&nbsp;:',
 	'noisette_fx' => 'Effect&nbsp;:',
 	'noisette_hauteur' => 'Height (px)&nbsp;:',
+	'noisette_id_sjcycle' => 'Number of the article with the images',
 	'noisette_label_afficher_titre_menu' => 'Display title&nbsp;:',
 	'noisette_largeur' => 'Width (px)&nbsp;:',
-	'noisette_nom_noisette' => 'Random slideshow',
+	'noisette_nom_noisette' => 'Slideshow',
 	'noisette_nb' => 'Number of images&nbsp;:',
 	'noisette_titre_noisette' => 'Title&nbsp;:',
 

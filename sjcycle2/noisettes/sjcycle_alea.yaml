@@ -1,24 +1,24 @@
-nom: '<:sjcycle:noisette_nom_noisette:>'
-description: '<:sjcycle:noisette_description:>'
+nom: '<:sjcycle:noisette_alea_nom_noisette:>'
+description: '<:sjcycle:noisette_alea_description:>'
 icon: 'images/sjcycle-24.png'
 parametres:
   -
     saisie: 'oui_non'
     options:
-      nom: 'afficher_titre_noisette'
+      nom: 'sjcycle_alea_afficher_titre_noisette'
       label: '<:sjcycle:noisette_label_afficher_titre_menu:>'
       defaut: 'on'
   -
     saisie: 'input'
     options:
-      nom: 'titre_noisette_perso'
+      nom: 'sjcycle_alea_titre_noisette'
       label: '<:sjcycle:noisette_titre_noisette:>'
       explication: '<:aveline:explication_raccourcis_typo:>'
-      afficher_si: '@afficher_titre_noisette@ == "on"'  -
+      afficher_si: '@sjcycle_alea_afficher_titre_noisette@ == "on"'  -
   -
     saisie: 'input'
     options:
-      nom: 'nombre'
+      nom: 'sjcycle_alea_nombre'
       defaut: '10'
       label: '<:sjcycle:noisette_nb:>'
     verifier:
@@ -26,7 +26,7 @@ parametres:
   -
     saisie: 'selection'
     options:
-      nom: 'fx'
+      nom: 'sjcycle_alea_fx'
       defaut: 'fade'
       label: '<:sjcycle:noisette_fx:>'
       datas:
@@ -60,7 +60,7 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'duree'
+      nom: 'sjcycle_alea_duree'
       defaut: '5000'
       label: '<:sjcycle:noisette_duree:>'
     verifier:
@@ -68,7 +68,7 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'largeur'
+      nom: 'sjcycle_alea_largeur'
       defaut: '200'
       label: '<:sjcycle:noisette_largeur:>'
     verifier:
@@ -76,7 +76,7 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'hauteur'
+      nom: 'sjcycle_alea_hauteur'
       defaut: '0'
       label: '<:sjcycle:noisette_hauteur:>'
     verifier:

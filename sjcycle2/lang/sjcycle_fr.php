@@ -65,14 +65,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_tooltipfancy' => 'Param&egrave;tres tooltip, fancybox et mediabox',	
 	
 	// N
-	'noisette_description' => 'Affiche un diaporama al&eacute;atoirejcycle des images du site',
+	'noisette_alea_description' => 'Affiche un diaporama al&eacute;atoire jcycle des images du site',
+	'noisette_alea_nom_noisette' => 'Diaporama al&eacute;atoire',
+	'noisette_description' => 'Affiche un diaporama jcycle des images d\'un article',
 	'noisette_duree' => 'Dur&eacute;e (ms)&nbsp;:',
 	'noisette_fx' => 'Effet&nbsp;:',
 	'noisette_hauteur' => 'Hauteur (px)&nbsp;:',
+	'noisette_id_sjcycle' => 'Num&eacute;ro de l\'article contenant les images',
 	'noisette_label_afficher_titre_menu' => 'Afficher le titre&nbsp;:',
 	'noisette_largeur' => 'Largeur (px)&nbsp;:',
-	'noisette_nom_noisette' => 'Diaporama al&eacute;atoire',
 	'noisette_nb' => 'Nombre d\'images&nbsp;:',
+	'noisette_nom_noisette' => 'Diaporama',
 	'noisette_titre_noisette' => 'Titre&nbsp;:',
 
 	// V
