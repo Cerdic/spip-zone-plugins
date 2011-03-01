@@ -1,0 +1,30 @@
+<plugin>
+	<nom>
+		Nivo Slider
+	</nom>
+	<auteur>
+		[Grégory Pascal->http://www.spip-contrib.net/ngombe] basé sur [Nivo Slider v2.4->http://nivo.dev7studios.com/]<br/>
+		<br/>
+		Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<version>
+		0.0.1
+	</version>
+	<etat>
+		test
+	</etat>
+	<description>
+		Affiche un diaporama en JQuery.<br/>
+ 		<h4>[Configuration->.?exec=cfg&amp;cfg=nivoslider]</h4>
+	</description>
+		<icon>img_pack/logo.png</icon>
+	<prefix>
+	nivoslider
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id='cfg' version='[1.0.4;]' />
+</plugin>

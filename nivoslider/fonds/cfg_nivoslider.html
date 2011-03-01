@@ -1,0 +1,119 @@
+<!-- titre=Configuration de NivoSlider -->
+<!-- icone=img_pack/logo.png -->
+[(#REM) descriptif=Configuration de NivoSlider]
+
+#CACHE{0}
+
+<div class="formulaire_spip formulaire_config formulaire_config_palette">
+	<div class="cadre_padding">
+	
+		<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+		<p>
+		<label for="_ir_width">Largeur :</label>
+		<input type="text" name="width" class="type_txt" id="_ir_width" size="5"
+			value="#ENV{width,500}" /> px
+		</p>
+		<p>
+		<label for="_ir_height">Hauteur :</label>
+		<input type="text" name="height" class="type_txt" id="_ir_height" size="5"
+			value="#ENV{height,300}" /> px
+		</p>
+		<p>
+			<label for="_ir_effect" title='effect'>Effet de transition :</label>
+			<select name="effect" id="_ir_effect" style="width:142px">	
+				<option value="random" [(#CONFIG{nivoslider/effect}|=={#VAL{'random'}}|?{selected="selected",''})]>random</option>
+				<option value="sliceDown" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceDown'}}|?{selected="selected",''})]>sliceDown</option>
+				<option value="sliceDownLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceDownLeft'}}|?{selected="selected",''})]>sliceDownLeft</option>
+				<option value="sliceUp" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUp'}}|?{selected="selected",''})]>sliceUp</option>
+				<option value="sliceUpLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUpLeft'}}|?{selected="selected",''})]>sliceUpLeft</option>
+				<option value="sliceUpDown" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUpDown'}}|?{selected="selected",''})]>sliceUpDown</option>
+				<option value="sliceUpDownLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUpDownLeft'}}|?{selected="selected",''})]>sliceUpDownLeft</option>
+				<option value="fold" [(#CONFIG{nivoslider/effect}|=={#VAL{'fold'}}|?{selected="selected",''})]>fold</option>
+				<option value="fade" [(#CONFIG{nivoslider/effect}|=={#VAL{'fade'}}|?{selected="selected",''})]>fade</option>
+				<option value="slideInRight" [(#CONFIG{nivoslider/effect}|=={#VAL{'slideInRight'}}|?{selected="selected",''})]>slideInRight</option>
+				<option value="slideInLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'slideInLeft'}}|?{selected="selected",''})]>slideInLeft</option>
+			</select>
+		</p>
+		<p>
+		<label for="_ir_slices" title="slices">Nombre de tranches :</label>
+		<input type="text" name="slices" class="type_txt" id="_ir_slices" size="5"
+			value="#ENV{slices,15}" />
+		</p>
+		<p>
+		<label for="_ir_animSpeed" title="animSpeed">Vitesse de l'animation :</label>
+		<input type="text" name="animSpeed" class="type_txt" id="_ir_animSpeed" size="5"
+			value="#ENV{animSpeed,500}" /> ms
+		</p>
+		<p>
+		<label for="_ir_pauseTime" title="pauseTime">Pause entre les images :</label>
+		<input type="text" name="pauseTime" class="type_txt" id="_ir_pauseTime" size="5"
+			value="#ENV{pauseTime,3000}" /> ms
+		</p>
+		<p>
+			<label for="_ir_directionNav" title="directionNav">Utiliser les flèches :</label>
+			<select name="directionNav" id="_ir_directionNav" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/directionNav}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>
+				<option value="false" [(#CONFIG{nivoslider/directionNav}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+			</select> 
+		</p>
+		<p>
+			<label for="_ir_directionNavHide" title="directionNavHide">Cacher les fl&egrave;ches (afficher au survol) :</label>
+			<select name="directionNavHide" id="_ir_directionNavHide" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/directionNavHide}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>
+				<option value="false" [(#CONFIG{nivoslider/directionNavHide}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+			</select>
+		</p>
+		<p>
+			<label for="_ir_controlNav" title="controlNav">Afficher les puces :</label>
+			<select name="controlNav" id="_ir_controlNav" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>
+				<option value="false" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+			</select>
+		</p>
+		<!--
+		<p>
+			<label for="_ir_controlNavThumbs" title="controlNavThumbs">Miniatures comme puces :</label>
+			<select name="controlNavThumbs" id="_ir_controlNavThumbs" style="width:70px">
+			    <option value="false" [(#CONFIG{nivoslider/controlNavThumbs}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+				<option value="true" [(#CONFIG{nivoslider/controlNavThumbs}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>				
+			</select>
+		</p>
+		<p>
+			<label for="_ir_controlNavThumbsFromRel" title="controlNavThumbsFromRel">Utiliser rel comme miniature :</label>
+			<select name="controlNavThumbsFromRel" id="_ir_controlNavThumbsFromRel" style="width:70px">
+			    <option value="false" [(#CONFIG{nivoslider/controlNavThumbsFromRel}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+				<option value="true" [(#CONFIG{nivoslider/controlNavThumbsFromRel}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>				
+			</select>
+		</p>
+		-->
+		<p>
+			<label for="_ir_keyboardNav" title="keyboardNav">Utiliser les fl&eacute;ches droite &amp; gauche du clavier :</label>
+			<select name="keyboardNav" id="_ir_keyboardNav" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/keyboardNav}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>
+				<option value="false" [(#CONFIG{nivoslider/keyboardNav}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+			</select>
+		</p>
+		<p>
+			<label for="_ir_pauseOnHover" title="pauseOnHover">Pause au survol :</label>
+			<select name="pauseOnHover" id="_ir_pauseOnHover" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/pauseOnHover}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>
+				<option value="false" [(#CONFIG{nivoslider/pauseOnHover}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+			</select>
+		</p>
+		<p>
+		<label for="_ir_captionOpacity">captionOpacity</label>
+		<input type="text" name="captionOpacity" class="type_txt" id="_ir_captionOpacity" size="5"
+			value="#ENV{captionOpacity,0.8}" />
+		</p>
+
+		</div>
+
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+	</div>
+
+	</form>
+
+</div>

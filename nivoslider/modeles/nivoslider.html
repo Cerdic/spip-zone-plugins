@@ -1,0 +1,39 @@
+<?php
+/* * * * * * * * * * * * * * * * * * * *
+ * 
+ *     - NivoSlider pour SPIP -
+ * 
+ * modele pour l'inclusion d'un nivoslider
+ * 
+ * Auteur : Grégory PASCAL - ngombe at gmail dot com
+ * Modifs : 28/02/2011
+ * 
+ */
+?>
+
+[(#SET{param,[(#ENV{id}|sinon{#ID_ARTICLE})] })]
+
+<B_doc>
+<div id="slider" class="nivoSlider">
+<BOUCLE_doc (DOCUMENTS) {id_article=#GET{param}} {mode=document} {extension IN png,jpg,gif} {par num titre} {doublons} {vu=non}>
+	[(#FICHIER|image_recadre{#CONFIG{nivoslider/width,500},#CONFIG{nivoslider/height,300}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]})]
+</BOUCLE_doc>
+</div>
+<br/><br/>
+<script type="text/javascript">
+	$(window).load(function() {
+		$('#slider').nivoSlider({
+        [effect:'(#CONFIG{nivoslider/effect,random})',]
+        [slices:(#CONFIG{nivoslider/slices,15}),]
+        [animSpeed:(#CONFIG{nivoslider/animSpeed,500}),]
+        [pauseTime:(#CONFIG{nivoslider/pauseTime,3000}),]
+        [directionNav:(#CONFIG{nivoslider/directionNav,true}),]
+        [directionNavHide:(#CONFIG{nivoslider/directionNavHide,true}),]
+        [controlNav:(#CONFIG{nivoslider/controlNav,true}),]
+        [keyboardNav:(#CONFIG{nivoslider/keyboardNav,true}),]
+        [pauseOnHover:(#CONFIG{nivoslider/pauseOnHover,true}),]
+        [captionOpacity:(#CONFIG{nivoslider/captionOpacity,0.8})]
+		});
+	});
+</script>
+</B_doc>
