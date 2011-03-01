@@ -1,0 +1,40 @@
+<plugin>
+	<nom>
+		JQuery FullCalendar pour SPIP
+	</nom>
+	<auteur>
+		[Grégory Pascal->http://www.spip-contrib.net/ngombe] basé sur [FullCalendar v1.4.10->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/]<br/>
+		<br/>
+		Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<version>
+		0.1
+	</version>
+	<etat>
+		test
+	</etat>
+	<description>
+		Affiche un calendrier dans l'espace public .<br/>
+ 		<h4>[Configuration->.?exec=cfg&amp;cfg=fullcalendar]</h4>
+	</description>
+	<prefix>fullcalendar</prefix>
+	<icon>img_pack/ir-22.png</icon>
+	<lien></lien>
+	<install>base/fullcalendar_init.php</install>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<bouton id='config_fullcalendar' parent='configuration'>
+	      <icone>img_pack/ir-22.png</icone>
+	      <titre>FullCalendar</titre>
+	      <url>cfg</url>
+	      <args>cfg=fullcalendar</args>
+	</bouton>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id='cfg' version='[1.0.4;]' />
+</plugin>

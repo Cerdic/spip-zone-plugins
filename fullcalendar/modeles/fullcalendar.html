@@ -1,0 +1,211 @@
+<?php
+
+/* * * * * * * * * * * * * * * * * * * *
+ * 
+ *     - FullCalendar pour SPIP -
+ * 
+ * modele pour l'inclusion d'un fullcalendar
+ * 
+ * Auteur : Grégory PASCAL - ngombe at gmail dot com
+ * Modifs : 28/02/2011
+ * 
+ */
+
+	# Récupère l'id du calendrier
+	$id = '[(#ID|texte_script)]';
+
+	# Quelle source de donnée ?
+	$sql = "SELECT type FROM spip_fullcalendar_main WHERE id_fullcalendar='".$id."'";
+	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+	$num_calendar = mysql_num_rows($req);
+
+	if(!$num_calendar) return; # il n'y as pas de gabonnais au numéro demandé...
+
+	else {
+
+		$row=mysql_fetch_array($req);
+
+		switch($row['type']){
+
+			# AGENDA BASE SUR LES ARTICLES
+
+			case 'article':
+			
+			# Récupère l'id du mot clé de cet agenda ...
+			$query = "SELECT lien FROM spip_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
+			$result = mysql_query($query) or print ($query." ".mysql_error());
+			$row = mysql_fetch_array($result);
+			if(!strlen($row['lien'])) return;
+			
+			# Récupère les article liés à ce mot clé
+			$events='events: [
+			
+			';
+			$sql = "SELECT
+				 A.id_article,
+				 A.titre,
+				 A.date,
+				 A.date_redac
+				FROM
+				 spip_articles A,
+				 spip_mots_articles M
+				WHERE
+				 M.id_mot='".$row['lien']."' AND
+				 A.id_article=M.id_article
+				 ORDER BY A.date ASC";
+			$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+			$num_events = mysql_num_rows($req);
+			if($num_events)
+				while ($row = spip_fetch_array($req)) {
+					
+					$date = explode('-',substr($row['date'],0,10));
+					$date_fin = explode('-',substr($row['date_redac'],0,10));
+					$start = explode(':',substr($row['date'],11,5));
+					$end = explode(':',substr($row['date_redac'],11,5));
+
+					$url="url:'spip.php?article".$row['id_article']."',";
+					if($date!='0000-00-00'&&$date_fin!='0000-00-00')
+					$events.="
+					{title: '".mysql_real_escape_string(supprimer_numero($row['titre']))."',start: new Date(".$date[0].", ".($date[1]-1).", ".$date[2].", ".$start[0].", ".$start[1]."),end: new Date(".$date_fin[0].", ".($date_fin[1]-1).", ".$date_fin[2].", ".$end[0].", ".$end[1]."),$url allDay: false},";
+
+				}
+			$events=substr($events,0,strlen($events)-1);
+			$events.=']';
+			
+			break;
+			
+			# AGENDA MySQL
+
+			case 'mysql': 
+
+			$events='events: [
+			
+			';
+			$query = "SELECT titre, start, end, lien, id_style FROM spip_fullcalendar_events WHERE id_fullcalendar='".$id."' ORDER BY start ASC;" ;
+			$result = mysql_query($query) or die ($query." ".mysql_error());
+
+			while ( $row = mysql_fetch_array($result)){
+
+				$date = explode('-',substr($row['1'],0,10));
+				$date_fin = explode('-',substr($row['2'],0,10));
+				$start = explode(':',substr($row['1'],11,5));
+				$end = explode(':',substr($row['2'],11,5));
+
+				if(strlen(trim($row['lien'])))
+					$url="url:'".mysql_real_escape_string(trim($row['lien']))."',";
+				else
+					$url='';
+
+				if(strlen($row['id_style']))
+					$class=",className: 'f_".mysql_real_escape_string(trim($row['id_style']))."'";
+				else
+					$class='';
+
+				$events.="{title: '".mysql_real_escape_string($row['titre'])."',start: new Date(".$date[0].", ".($date[1]-1).", ".$date[2].", ".$start[0].", ".$start[1]."),end: new Date(".$date_fin[0].", ".($date_fin[1]-1).", ".$date_fin[2].", ".$end[0].", ".$end[1]."),$url allDay: false $class},";
+
+			}
+			$events=substr($events,0,strlen($events)-1);
+			$events.=']';
+			break;
+
+			# AGENDA GOOGLE
+
+			case 'google':
+
+			# Choppe la clé Google dans le seul évènement de cet agenda ...
+			$query = "SELECT lien FROM spip_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
+			$result = mysql_query($query) or die ($query." ".mysql_error());
+			$row = mysql_fetch_array($result);
+			if(!strlen($row['lien'])) return;
+
+			$URL_AGENDA = "http://www.google.com/calendar/feeds/".$row['lien']."/public/basic";
+
+			$events = "events: $.fullCalendar.gcalFeed('".$URL_AGENDA."'),
+
+			eventClick: function(event) {
+			// opens events in a popup window
+			window.open(event.url, 'gcalevent', 'width=700,height=600');
+			return false;
+			},
+
+			loading: function(bool) {
+			if (bool) {
+				$('#loading').show();
+			}else{
+				$('#loading').hide();
+			}
+			}
+			";
+
+			break;
+			default:
+		}
+		
+		# Récupère les variable CFG 
+		
+		$aspectRatio 				= "[(#CONFIG{fullcalendar/aspectRatio, '1.35'}|texte_script)]";
+		$useTheme 					= "[(#CONFIG{fullcalendar/useTheme, 'true'}|texte_script)]";
+		$useTheme					= ($useTheme=='true')? 'theme: true,' : '' ;
+		$weekends 					= "[(#CONFIG{fullcalendar/weekends, 'true'}|texte_script)]";
+		$defaultView 				= "[(#CONFIG{fullcalendar/defaultView, 'month'}|texte_script)]";
+		$headerLeft 				= "[(#CONFIG{fullcalendar/headerLeft, 'prev,next'}|texte_script)]";
+		$headerCenter 				= "[(#CONFIG{fullcalendar/headerCenter, 'title'}|texte_script)]";
+		$headerRight 				= "[(#CONFIG{fullcalendar/headerRight, 'month,agendaWeek,agendaDay'}|texte_script)]";
+		$firstDay					= "[(#CONFIG{fullcalendar/firstDay, '1'}|texte_script)]";
+		$month_titleFormat 			= "[(#CONFIG{fullcalendar/month_titleFormat, 'MMMM yyyy'}|texte_script)]";
+		$month_columnFormat 		= "[(#CONFIG{fullcalendar/month_columnFormat, 'dddd'}|texte_script)]";
+		$month_timeFormat 			= "[(#CONFIG{fullcalendar/month_timeFormat, ''}|texte_script)]";
+		#$week_titleFormat 			= "[(#CONFIG{fullcalendar/week_titleFormat, 'd [(#VAL{91}|chr)]MMMM[(#VAL{93}|chr)] [(#VAL{91}|chr)] yyyy[(#VAL{93}|chr)][(#VAL{123}|chr)]  -  d MMMM yyyy[(#VAL{125}|chr)]' }|texte_script)]";
+		$week_titleFormat 			= "[(#CONFIG{fullcalendar/week_titleFormat, 'd MMMM  yyyy{  -  d MMMM yyyy}'}|texte_script)]";
+		$week_columnFormat 			= "[(#CONFIG{fullcalendar/week_columnFormat, 'dddd d'}|texte_script)]";
+		$week_timeFormat_basic	 	= "[(#CONFIG{fullcalendar/week_timeFormat_basic, 'H(:mm)'}|texte_script)]";
+		$week_timeFormat_agenda 	= "[(#CONFIG{fullcalendar/week_timeFormat_agenda, 'H(:mm)'}|texte_script)]";
+		$day_titleFormat 			= "[(#CONFIG{fullcalendar/day_titleFormat, 'dddd d MMMM yyyy'}|texte_script)]";
+		$day_columnFormat			= "[(#CONFIG{fullcalendar/day_columnFormat, 'dddd d MMMM'}|texte_script)]";
+		$day_timeFormat_basic 		= "[(#CONFIG{fullcalendar/day_timeFormat_basic, 'H:mm{ - H:mm}'}|texte_script)]";
+		$day_timeFormat_agenda		= "[(#CONFIG{fullcalendar/day_timeFormat_agenda, 'H:mm{ - H:mm}'}|texte_script)]";
+
+		# Génère le fullcalendar avec tous ses paramètres ...
+		print "
+		<script type='text/javascript'>
+		$(document).ready(function() {
+			$('#calendar".$id."').fullCalendar({
+					".$useTheme."
+					firstDay: ".$firstDay.",
+					defaultView: '".$defaultView."',
+					aspectRatio: ".$aspectRatio.",
+					header: { left: '".$headerLeft."', center: '".$headerCenter."', right: '".$headerRight."' },
+					editable: false,
+					allDayText: 'Journée',
+					".$events.",
+					weekends: ".$weekends.",
+					titleFormat: {
+						month: '".$month_titleFormat."',
+						week: \"".$week_titleFormat."\",
+						day: '".$day_titleFormat."'
+					},
+					columnFormat: {
+						month: '".$month_columnFormat."',
+						week: '".$week_columnFormat."',
+						day: '".$day_columnFormat."'
+					},
+					timeFormat: {
+						month:      \"".$month_timeFormat."\",
+						agendaDay:  \"".$day_timeFormat_agenda."\",
+						agendaWeek: \"".$week_timeFormat_agenda."\",
+						basicWeek:  \"".$week_timeFormat_basic."\",
+						basicDay:   \"".$day_timeFormat_basic."\",
+						'': 'H(:mm)'
+					},
+				});
+		});
+		</script>
+		".$CSS."
+		<br/><br/><br/>
+		<div id='calendar".$id."'></div>
+		<br/><br/><br/>
+		";
+
+	}
+
+?>

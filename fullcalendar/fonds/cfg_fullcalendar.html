@@ -1,0 +1,167 @@
+<!-- titre=Configuration de Fullcalendar -->
+<!-- icone=img_pack/ir-22.png -->
+[(#REM) descriptif=&nbsp;]
+
+<style type='text/css'>.clear {clear:both;}</style>
+
+#CACHE{0}
+
+<!-- boite=JQUERY Fullcalendar pour SPIP -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#navigation .cadre_padding').empty().append('<center><h4>CFG Fullcalendar</h4><img src="#EVAL{_DIR_PLUGIN_FULLCALENDAR}img_pack/fullcalendar.jpg"><br/><br/>Configuration du plugin FullCalendar</center><ul class="formulaire_spip"><li><a href="&#35;CFG_options">Affichage global</a></li><li><a href="&#35;CFG_header">En-tête</a></li><li><a href="&#35;CFG_month">Vue mensuelle</a></li><li><a href="&#35;CFG_week">Vue par semaines</a></li><li><a href="&#35;CFG_day">Calendrier journalier</a></li></ul>');
+		$('#navigation').append('<div class="cadre cadre-e" style=""><div class="cadre_padding"><table class="cellule-h-table" style="vertical-align: middle;" cellpadding="0"><tbody><tr><td><a href="?exec=fullcalendar_add" class="cellule-h"><span class="cell-i"><img src="#EVAL{_DIR_PLUGIN_FULLCALENDAR}img_pack/calendar.png" alt="Agenda fullcalendar : configuration"></span></a></td><td class="cellule-h-lien"><a href="?exec=fullcalendar_add" class="cellule-h">FullCalendar - Gestion</a></td></tr></tbody></table><div class="nettoyeur"></div></div></div>');
+		$('#navigation').append('<div class="cadre cadre-e" style=""><div class="cadre_padding"><table class="cellule-h-table" style="vertical-align: middle;" cellpadding="0"><tbody><tr><td><a href="?exec=fullcalendar_css" class="cellule-h"><span class="cell-i"><img src="#EVAL{_DIR_PLUGIN_FULLCALENDAR}/img_pack/edit_css.png" alt="Styles de fullcalendar : configuration"></span></a></td><td class="cellule-h-lien"><a href="?exec=fullcalendar_css" class="cellule-h">CSS - configuration</a></td></tr></tbody></table><div class="nettoyeur"></div></div></div>');
+	});
+</script>
+
+<form method="post" action="#SELF">
+
+	[(#ENV{_cfg_}|form_hidden)]
+
+	<p><a name="CFG_options"><h1>Affichage global</h1></a></p>
+	<hr>
+	<p>
+		<label for="_ir_defaultView">Vue par défaut :</label>
+		<select name="defaultView" id="_ir_defaultView">
+			<option value="month" [(#CONFIG{fullcalendar/defaultView}|=={#VAL{'month'}}|?{selected="selected",''})]>Mois</option>
+			<option value="basicWeek" [(#CONFIG{fullcalendar/defaultView}|=={#VAL{'basicWeek'}}|?{selected="selected",''})]>Semaines</option>
+			<option value="agendaWeek" [(#CONFIG{fullcalendar/defaultView}|=={#VAL{'agendaWeek'}}|?{selected="selected",''})]>Semaines et heures</option>
+			<option value="basicDay" [(#CONFIG{fullcalendar/defaultView}|=={#VAL{'basicDay'}}|?{selected="selected",''})]>Jours</option>
+			<option value="agendaDay" [(#CONFIG{fullcalendar/defaultView}|=={#VAL{'agendaDay'}}|?{selected="selected",''})]>Jours et heures</option>
+		</select> <a href="http://arshaw.com/fullcalendar/docs/views/Available_Views/" target="_blank">[aide]</a>
+	</p>
+	<p>
+		<label for="_ir_theme">theme :</label>
+		<select name="useTheme" id="_ir_theme">
+			<option value="true" [(#CONFIG{fullcalendar/useTheme}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>
+			<option value="false" [(#CONFIG{fullcalendar/useTheme}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+		</select> <a href="http://arshaw.com/fullcalendar/docs/display/theme/" target="_blank">[aide]</a>
+	</p>
+	<p>
+	 <label for="_ir_aspectRatio">aspectRatio :</label>
+	 <input type="text" name="aspectRatio" class="type_txt" value="#ENV{aspectRatio, '1.35'}" id="_ir_aspectRatio" style="width:20%" />
+	  <a href="http://arshaw.com/fullcalendar/docs/display/aspectRatio/" target="_blank">[aide]</a>
+	</p>
+	<p>
+		<label for="_ir_weekends">Afficher les weekends :</label>
+		<select name="weekends" id="_ir_weekends">
+			<option value="true" [(#CONFIG{fullcalendar/weekends}|=={#VAL{'true'}}|?{selected="selected",''})]>oui</option>
+			<option value="false" [(#CONFIG{fullcalendar/weekends}|=={#VAL{'false'}}|?{selected="selected",''})]>non</option>
+		</select> <a href="http://arshaw.com/fullcalendar/docs/display/weekends/" target="_blank">[aide]</a>
+	</p>
+	<p>
+		<label for="_ir_firstDay">La semaine commence :</label>
+		<select name="firstDay" id="_ir_firstDay">
+			<option value="1" [(#CONFIG{fullcalendar/firstDay}|=={#VAL{'1'}}|?{selected="selected",''})]>Lundi</option>
+			<option value="2" [(#CONFIG{fullcalendar/firstDay}|=={#VAL{'2'}}|?{selected="selected",''})]>Mardi</option>
+			<option value="3" [(#CONFIG{fullcalendar/firstDay}|=={#VAL{'3'}}|?{selected="selected",''})]>Mercredi</option>
+			<option value="4" [(#CONFIG{fullcalendar/firstDay}|=={#VAL{'4'}}|?{selected="selected",''})]>Jeudi</option>
+			<option value="5" [(#CONFIG{fullcalendar/firstDay}|=={#VAL{'5'}}|?{selected="selected",''})]>Vendredi</option>
+			<option value="6" [(#CONFIG{fullcalendar/firstDay}|=={#VAL{'6'}}|?{selected="selected",''})]>Samedi</option>
+			<option value="7" [(#CONFIG{fullcalendar/firstDay}|=={#VAL{'7'}}|?{selected="selected",''})]>Dimanche</option>
+		</select>
+	</p>
+
+
+	
+	<br/><br/>
+	<p><a name="CFG_header"><h1>En-tête</h1></a></p>
+	<hr>
+	<div class="formulaire_spip" style="width:47%;float:right">
+		<div class="cadre_padding">
+			<p><b>Options :</b> <a href="http://arshaw.com/fullcalendar/docs/display/header/" target="_blank">[aide]</a></p>
+			<hr>
+			<p><b>title</b> : Titre</p>
+			<p><b>prev, next</b>  : Reculer, avancer</p>
+			<p><b>prevYear</b> : Reculer d'un an</p>
+			<p><b>nextYear</b> : Avancer d'un an</p>
+			<p><b>today</b> : Aller sur aujourd'hui</p>
+			<p><b>month</b> : Afficher la vue par mois</p>
+			<p><b>agendaWeek</b> : Afficher la vue par semaines</p>
+			<p><b>agendaDay</b> : Afficher la vue par jours</p>
+		</div>
+	</div>
+	<div style="width:52%;float:left">
+		<p>
+			<label for='_ir_left'>Gauche :</label>
+			<input type="text" name="headerLeft" class="type_txt" value="#ENV{headerLeft, 'prev,next'}" id="_ir_left" style="width:90%" />
+		</p>
+		<p>
+			<label for='_ir_center'>Centre :</label>
+			<input type="text" name="headerCenter" class="type_txt" value="#ENV{headerCenter, 'title'}" id="_ir_center" style="width:90%" />
+		</p>
+		<p>
+			<label for='_ir_right'>Droite :</label>
+			<input type="text" name="headerRight" class="type_txt" value="#ENV{headerRight, 'month,agendaWeek,agendaDay'}" id="_ir_right" style="width:90%" />
+		</p>
+		
+	</div>
+	<br class='clear'/>
+	
+	<br/><br/>
+	<p><a name="CFG_month"><h1>Vue mensuelle</h1></a></p>
+	<hr> <a href="http://arshaw.com/fullcalendar/docs/utilities/formatDate/" target="_blank">[aide]</a></p>
+	<p>
+		<label for='_ir_month_titleFormat'>Titre : </label>
+		<input type="text" name="month_titleFormat" class="type_txt" value="#ENV{month_titleFormat, 'MMMM yyyy'}" id="_ir_month_titleFormat" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_month_columnFormat'>Colonnes : </label>
+		<input type="text" name="month_columnFormat" class="type_txt" value="#ENV{month_columnFormat, 'dddd'}" id="_ir_month_columnFormat" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_month_timeFormat'>Temps : </label>
+		<input type="text" name="month_timeFormat" class="type_txt" value="#ENV{month_timeFormat, ''}" id="_ir_month_timeFormat" style="width:98%" />
+	</p>
+
+	<br/><br/>
+	<p><h1>Vue par semaines</h1></p><a name="CFG_week"></a>
+	<hr> <a href="http://arshaw.com/fullcalendar/docs/utilities/formatDate/" target="_blank">[aide]</a></p>
+	<p>
+		<label for='_ir_week_titleFormat'>Titre : </label>
+		<input type="text" name="week_titleFormat" class="type_txt" value="#ENV{week_titleFormat, 'd [MMMM] [ yyyy]{  -  d MMMM yyyy}'}" id="_ir_week_titleFormat" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_week_columnFormat'>Colonnes : </label>
+		<input type="text" name="week_columnFormat" class="type_txt" value="#ENV{week_columnFormat, 'dddd d'}" id="_ir_week_columnFormat" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_week_timeFormat_basic'>Temps (basic) : </label>
+		<input type="text" name="week_timeFormat_basic" class="type_txt" value="#ENV{week_timeFormat_basic, 'H(:mm)'}" id="_ir_week_timeFormat_basic" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_week_timeFormat_agenda'>Temps (agenda) : </label>
+		<input type="text" name="week_timeFormat_agenda" class="type_txt" value="#ENV{week_timeFormat_agenda, 'H(:mm)'}" id="_ir_week_timeFormat_agenda" style="width:98%" />
+	</p>
+
+	<br/><br/>
+	<p><h1>Calendrier journalier</h1></p><a name="CFG_day"></a>
+	<hr> <a href="http://arshaw.com/fullcalendar/docs/utilities/formatDate/" target="_blank">[aide]</a></p>
+	<p>
+		<label for='_ir_day_titleFormat'>Titre : </label>
+		<input type="text" name="day_titleFormat" class="type_txt" value="#ENV{day_titleFormat, 'dddd d MMMM yyyy'}" id="_ir_day_titleFormat" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_day_columnFormat'>Colonnes : </label>
+		<input type="text" name="day_columnFormat" class="type_txt" value="#ENV{day_columnFormat, 'dddd d MMMM'}" id="_ir_day_columnFormat" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_day_timeFormat_basic'>Temps (basic) : </label>
+		<input type="text" name="day_timeFormat_basic" class="type_txt" value="#ENV{day_timeFormat_basic, 'H:mm{ - H:mm}'}" id="_ir_day_timeFormat_basic" style="width:98%" />
+	</p>
+	<p>
+		<label for='_ir_day_timeFormat_agenda'>Temps (agenda) : </label>
+		<input type="text" name="day_timeFormat_agenda" class="type_txt" value="#ENV{day_timeFormat_agenda, 'H:mm{ - H:mm}'}" id="_ir_day_timeFormat_agenda" style="width:98%" />
+	</p>
+
+	<br/><br/>
+	<div class="formulaire_spip formulaire_config">
+		<div class="boutons">
+			<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+			<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+		</div>
+	</div>
+
+</form>
