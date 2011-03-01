@@ -72,7 +72,7 @@ function formulaires_configurer_metas_recense($form, $opt='')
 // Attention a l'ordre:
 // si l'un des 3 est un sous-rep d'un autre, le mettre avant.
 
-define('_EXTRAIRE_PLUGIN', '@(' .  _DIR_PLUGINS_AUTO . '|' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')/?([^/]+)/@');
+define('_EXTRAIRE_PLUGIN', '@(' .  _DIR_PLUGINS_AUTO . '|' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')(.+)/formulaires/[^/]+$@');
 
 // Recuperer la version compilee de plugin.xml et normaliser
 // Si ce n'est pas un plugin, dire qu'il faut prendre la table std des meta.
@@ -82,7 +82,7 @@ function formulaires_configurer_metas_infos($form){
 	if (!$path) return ''; // cas traite en amont normalement.
 	if (!preg_match(_EXTRAIRE_PLUGIN, $path, $m))
 		return array('path' => $path, 'meta' => 'meta');
-	$plugin = $m[2];
+	$plugin = basename($m[2]);
 	$get_infos = charger_fonction('get_infos','plugins');
 	$infos = $get_infos($plugin, false, $m[1]);
 	if (!is_array($infos)) return _T('erreur_plugin_nom_manquant');
