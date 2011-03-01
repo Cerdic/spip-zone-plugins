@@ -184,6 +184,7 @@ function formulaires_taches_charger_dist(){
 
 	$id_projet=_request('id_projet');
 	$id_tache=_request('id_tache');
+	$id_parent=_request('id_parent');
 	if($id_tache){
 		$valeurs_taches=sql_fetsel('*','spip_projets_taches','id_tache='.sql_quote($id_tache));
 		$id_projet=$valeurs_taches['id_projet'];
@@ -229,6 +230,7 @@ function formulaires_taches_charger_dist(){
 		else $val['participants_parent'] = array(0=>$projet['id_chef_projet']);
 		
 		$val['participants']=$val['participants_parent'];	
+		$val['id_parent']=$id_parent;			
 		}
 		
 	$taches= sql_select('id_tache,nom','spip_projets_taches','id_projet='.sql_quote($id_projet));
@@ -244,6 +246,7 @@ function formulaires_taches_charger_dist(){
 		}	
 	
 	$val['id_projet']=$id_projet;
+	
 	//Les taches existants du projet
 
 	$val['taches_projet']=array();
@@ -333,7 +336,7 @@ function formulaires_taches_traiter_dist(){
 	$date_fin_estimee = explode('/',$valeurs['date_fin_estimee']);
 	$valeurs['date_fin_estimee']= $date_fin_estimee[2].'-'.$date_fin_estimee[1].'-'.$date_fin_estimee[0];
 	$valeurs['date_creation']= date('Y-m-d G-i-s');
-	$valeurs['statut']= 'active';
+	$valeurs['statut']= 'incomplet';
 	$valeurs['participants']=serialize(_request('participants'));
 	$valeurs['id_projet']=$id_projet;	
 	

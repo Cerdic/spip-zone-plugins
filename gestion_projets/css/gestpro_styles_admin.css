@@ -3,3 +3,8 @@
 .champ span label {font-weight:bold;}
 
 .champ{clear:left;}
+
+table.sous_liste tr{margin-left:5px;}
+
+.taches a.icon{margin-left:3px;}
+

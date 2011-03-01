@@ -1,8 +1,56 @@
 [(#ENV{voir}|oui)
 <div>
-<a href="[(#URL_ECRIRE{projets})]"><:gestpro:retour:>  <:gestpro:gestion_projets:></a>
+<a href="[(#URL_ECRIRE{projets})]" title="<:gestpro:retour:>  <:gestpro:gestion_projets:>"><img src="#CHEMIN{img/logo_32.png}"  alt="<:gestpro:projets:>"/></a>
 </div>]
+
+
+
+
+
+<BOUCLE_tache(PROJETS_TACHES){id_tache}>
+<div class="titre"><b><:gestpro:projet:></b></div>
+<div>
+	<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,projet}|parametre_url{id_projet,#ID_PROJET})]" title="<:gestpro:retour:>  <:gestpro:projet:>"><img src="[(#CHEMIN{img/projet_32.png})]"  alt="<:gestpro:projet:>"/></a>
+</div>
+
 [(#AUTORISER{creer,projet})
 <div>
-<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,ajouter_projet})]"><:gestpro:ajouter_projet:></a>
+<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,ajouter_projet})]" title="<:gestpro:ajouter_projet:>"><img src="#CHEMIN{img/plus_16.png}"   alt="<:gestpro:ajouter_projet:>"/></a>
 </div>]
+
+	<div>
+	<div  class="titre"><b><:gestpro:tache:></b></div>
+	<img src="#CHEMIN{img/taches_32.png}" alt="<:gestpro:tache:>"/>
+	</div>
+	[(#AUTORISER{editer,taches})
+		<div>
+		<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,ajouter_tache}|parametre_url{id_projet,#ID_PROJET})]" title="<:gestpro:ajouter_tache:>"><img src="#CHEMIN{img/plus_16.png}" alt="<:gestpro:ajouter_tache:>"/></a>
+		</div>
+		]
+</BOUCLE_tache>
+
+<div class="titre"><b><:gestpro:projet:></b></div>
+<div>
+	<img src="[(#CHEMIN{img/projet_32.png})]" alt="<:gestpro:projet:>"/>
+</div>
+
+[(#AUTORISER{creer,projet})
+<div>
+<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,ajouter_projet})]" title="<:gestpro:ajouter_projet:>"><img src="#CHEMIN{img/plus_16.png}" alt="<:gestpro:ajouter_projet:>"/></a>
+</div>]
+
+
+[(#ENV{id_projet}|oui)
+
+
+	<div>
+	<div  class="titre"><b><:gestpro:tache:></b></div>
+	<img src="#CHEMIN{img/taches_32.png}" alt="<:gestpro:taches:>"/>
+	</div>
+	[(#AUTORISER{editer,taches})
+		<div>
+		<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,ajouter_tache}|parametre_url{id_projet,#ID_PROJET})]" title="<:gestpro:ajouter_tache:>"><img src="#CHEMIN{img/plus_16.png}" alt="<:gestpro:ajouter_tache:>"/></a>
+		</div>
+		]
+	]
+<//B_tache>

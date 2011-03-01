@@ -1,21 +1,23 @@
 <div class="formulaire_spip formulaire_projets_participants">
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	<form action="#ENV{action}" method="post"><div>
-			#ACTION_FORMULAIRE{#ENV{action}}
-																				
-	<B_champs>
-		<ul>
-	[(#SAISIE{auteurs,participants,
-		defaut=#ENV{participants},
-		label=<:gestpro:participants:>,
-		multiple=oui,
-		option_statut=oui,
-		})]
-		</ul>
-	</B_champs>
+	<form action="#ENV{action}" method="post">
+		<div>
+				#ACTION_FORMULAIRE{#ENV{action}}
+																					
 
-			<p class="boutons"><input type="submit" class="submit" value="<:ok:>" /></p>				
+			<ul>
+		[(#SAISIE{auteurs,participants,
+			defaut=#ENV{participants},
+			label=<:gestpro:participants:>,
+			multiple=oui,
+			option_statut=oui,
+			})]
+			</ul>
+
 	
-			</div></form>
+				<p class="boutons"><input type="submit" class="submit" value="<:ok:>" /></p>				
+		
+		</div>
+	</form>
 </div>

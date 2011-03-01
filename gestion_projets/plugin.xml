@@ -10,10 +10,11 @@
 	<etat>dev</etat>
 	<prefix>gestion_projets</prefix>
 	<bouton id="projets" parent="naviguer">
-	<!--	<icone>img/logo_boutique_24.png</icone>-->
+		<icone>img/logo_24.png</icone>
 		<titre>Projets</titre>   
 		<url>projets</url>   
-    </bouton>	
+    	</bouton>
+	<icon>img/logo_32.png</icon>
 	<install>base/gestion_projets_install.php</install>	
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
