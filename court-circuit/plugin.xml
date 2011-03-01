@@ -3,10 +3,10 @@
 <icon>icon.png</icon>
 <description>Acc&eacute;s direct aux articles et reset des squelettes par d&eacute;faut pour &eacute;viter les diffusions intempestives.</description>
 <lien>http://www.spip-contrib.net/court-circuit</lien>
-<version>0.0.1</version>
+<version>0.0.2</version>
 <etat>dev</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2011</auteur>
 <prefix>court-circuit</prefix>
-<necessite id='SPIP' version='[2.1.0;]' />
+<necessite id='SPIP' version='[2.0.0;]' />
 <categorie>outil</categorie>
 </plugin>
