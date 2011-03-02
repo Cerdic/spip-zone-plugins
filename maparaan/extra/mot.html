@@ -1,0 +1,40 @@
+<BOUCLE_principale(MOTS) {id_mot} {doublons}>
+	[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
+  <B_mots_freres>
+	<div class="padd-box padd-box-popular-posts">
+		#ANCRE_PAGINATION
+		<h2><:mots_clefs_meme_groupe:></h2>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">	
+				<ul>
+					<BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 15}>
+					<li><span class="padd-wrap"><a href="#URL_MOT" rel="tag">#TITRE</a></span></li>
+					</BOUCLE_mots_freres>
+				</ul>
+			</div>
+		</div>
+		[<p class="pagination">(#PAGINATION)</p>]
+	</div>
+  </B_mots_freres>
+
+  [(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
+  <B_groupes_freres>
+	<div class="padd-box padd-box-popular-posts padd-post-item-index-2">
+		<h2><:autres_groupes_mots_clefs:></h2>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">	
+				<ul>
+					<BOUCLE_groupes_freres(GROUPES_MOTS) {!id_groupe} {par titre} {doublons}>
+					<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
+					<li><span class="padd-wrap breves-rub"><a href="#URL_MOT">#TYPE</a>
+					<BOUCLE_mots_nb(MOTS) {id_groupe}>#SET{nbmots,#COMPTEUR_BOUCLE}</BOUCLE_mots_nb>
+					[<small class="breves-rub-texte">(#GET{nbmots}) [(#GET{nbmots}|<={1}|?{'mot', 'mots'})]</small>]
+					</span> </li>
+					</BOUCLE_mot_cousin>
+					</BOUCLE_groupes_freres>
+				</ul>
+			</div>
+		</div>
+	</div>
+  </B_groupes_freres>
+</BOUCLE_principale>

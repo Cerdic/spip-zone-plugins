@@ -1,0 +1,58 @@
+<div id="padd-content" class="contenu-principal">
+
+<div class="padd-post-item cartouche">
+	<div class="title-page">
+		<h1><:poster_message:></h1>
+	</div>
+</div>
+
+<div class="resume articles">
+	<div class="title-page">
+	    <h2><:en_reponse:></h2>
+	</div>
+
+    <BOUCLE_forum_parent(FORUMS) {id_forum}>
+    	<div class="padd-post-item padd-post-item-result">
+			[<div class="info-publi info-publi-article" title="[(#DATE|affdate_heure)]">(#DATE|affdate_jourcourt)[ &agrave; (#DATE|heures)][:(#DATE|minutes)][<br />(#LESAUTEURS)]</div>]			
+			<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|lignes_longues)</div>]
+			<div class="nettoyeur"></div>
+	</div>
+    </BOUCLE_forum_parent>
+    
+    <BOUCLE_article(ARTICLES) {id_article}>
+	<ul class="liste-items">
+	#INCLURE{fond=inclure/article-resume,id_article}
+	</ul>
+    </BOUCLE_article>
+    
+    <BOUCLE_breve(BREVES) {id_breve}>
+    	<div class="padd-post-item padd-post-item-result">
+			[<div class="info-publi" title="[(#DATE|affdate_heure)]">(#DATE|affdate_jourcourt)[ &agrave; (#DATE|heures)][:(#DATE|minutes)]</div>]			
+			<h2><a href="#URL_BREVE">#TITRE</a></h2>
+			[<a href="#URL_BREVE">(#LOGO_BREVE||image_reduire{150,100})</a>]
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
+			<div class="nettoyeur"></div>
+	</div>
+    </BOUCLE_breve>
+    
+    <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+    	<div class="padd-post-item padd-post-item-result">			
+		<h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+		[<div class="texte">(#TEXTE)</div>]
+	</div>
+    </BOUCLE_rubrique>
+    
+    <BOUCLE_syndic(SITES) {id_syndic}>
+    	<div class="padd-post-item padd-post-item-result">	
+		<h2><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a></h2>
+		[<div class="texte">(#DESCRIPTIF)</div>]
+	</div>
+    </BOUCLE_syndic>
+    
+    <//B_forum_parent>
+
+</div>
+
+#FORMULAIRE_FORUM
+</div>

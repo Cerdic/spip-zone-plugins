@@ -1,0 +1,19 @@
+
+<BOUCLE_menu(MENUS){id_menu?}{identifiant?}>
+	<B_entrees>
+	<ul class="menu-liste[ (#CSS)]">
+		<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
+		#MENUS_AFFICHER_ENTREE
+			<BOUCLE_sous_menu(MENUS){id_menus_entree}>
+				#INCLURE{fond=inclure/menu, env, id_menu, identifiant}
+			</BOUCLE_sous_menu>
+		[(#REM)
+			On ferme le li si le type d'entrée accepte des sous-menus
+			et si on a bien quelque chose dans le li (cas des menus sur #SESSION)
+		][(#TYPE_ENTREE|menus_type_refuser_sous_menu|non)
+			[(#MENUS_AFFICHER_ENTREE|trim|oui)</li>]
+		]
+		</BOUCLE_entrees>
+	</ul>
+	</B_entrees>
+</BOUCLE_menu>

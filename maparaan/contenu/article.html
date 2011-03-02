@@ -1,0 +1,75 @@
+<BOUCLE_contenu_article(ARTICLES){id_article}>
+
+<div class="padd-post-item padd-post-item-single" id="post-#ID_ARTICLE">
+	<div class="padd-post-item-title cartouche">
+		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+		[<div class="info-publi info-publi-article" title="[(#DATE|affdate_heure)]">(#DATE|affdate)<br />#LESAUTEURS</div>]	
+		<h2><a href="#URL_ARTICLE" rel="bookmark" title="#TITRE">[(#LOGO_ARTICLE||image_reduire{32, 19})]#TITRE</a></h2>
+		[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+	</div>
+	[<div class='padd-traductions'>
+		[(#REM) Inclure le modele des liens de traductions ]
+		(#MODELE{article_traductions})
+	</div>]
+	<div class="padd-post-item-entry">
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+	</div>		
+	[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80, '...'})]})]</a></p>]
+
+	[<div class="ps">
+		<div class="padd-post-box titre-sans-icone">
+			<h3><:info_ps:></h3>
+		</div>
+		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
+	</div>]
+	
+	[(#REM) Gestion du portfolio et des documents ]
+	[(#INCLURE{fond=inclure/documents}{id_article})]
+	
+	[(#REM) NOTES ]
+	[<div>
+		<div class="padd-post-box titre-sans-icone surlignable">
+			<h3><:info_notes:></h3>
+		</div>
+		<div class="surlignable">(#NOTES)</div>
+	</div>
+	<div class="nettoyeur"></div>
+	]
+	
+	[(#REM) Petition :
+	La petition ayant une PAGINATION il faut absolument {env}
+	et pourquoi pas ajax
+	][
+	<div class="padd-post-box padd-post-box-signature">
+		<div class="padd-post-box-title">
+			<h3><:maparaan:petition:></h3>
+		</div>
+		<div class="padd-post-box-interior">
+			(#PETITION|oui)<INCLURE{fond=inclure/petition}{id_article}{env}{ajax}>
+		</div>
+	</div>
+	]
+	
+	[(#REM) Plugin SOCIAL TAGS ]
+	[<div class="padd-post-box padd-post-box-sb">
+		<div class="padd-post-box-title">
+			<h3><:maparaan:partager:></h3>
+		</div>
+		(#PLUGIN{socialtags}|oui) [(#INCLURE{fond=noisettes/socialtags}{id_article})]
+	</div>
+	]
+	
+	[(#REM) Forum de l'article ]
+	[<div class="padd-post-box padd-post-box-replies padd-post-box-comments">
+		<div class="padd-post-box-title">
+			<h3><:maparaan:commentaires:></h3>
+		</div>
+		<a href="#forum" name="forum" id="forum"></a>
+		<INCLURE{fond=inclure/forum}{id_article} />
+		<p class="repondre repondre-article"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_article:></a></p>
+	</div>]
+	
+</div>
+
+</BOUCLE_contenu_article>

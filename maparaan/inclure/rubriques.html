@@ -1,0 +1,32 @@
+[(#REM)
+	Barre de navigation, ouverte sur la hierarchie courante
+
+	On fait un plan, et, quand on avance vers une rubrique,
+	on l'affiche si son parent est expose ou est la racine du site. ]
+<B_rubriques>
+
+<div class="padd-box padd-box-popular-posts">
+	<h2><:rubriques:></h2>
+	<div class="padd-interior">
+		<div class="padd-interior-wrapper">	
+			<ul>
+				<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+				<li>
+					<span class="surliste"><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a></span>
+						<B_sous_rubriques>
+						<ul>
+							<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+								<li><span class="padd-wrap"><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a></span>
+									<BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>
+								</li>
+							</BOUCLE_sous_rubriques>
+						</ul>
+						</B_sous_rubriques>
+				</li>
+				</BOUCLE_rubriques>
+			</ul>
+		</div>
+	</div>
+</div>
+
+</B_rubriques>

@@ -1,0 +1,108 @@
+<BOUCLE_principale(MOTS) {id_mot} {doublons}>
+
+<div class="padd-post-item padd-post-item-single">
+	<div class="padd-post-item-title cartouche">
+			
+		<h2>[<div class="info-publi"><small><small>(#TYPE)</small></small></div>][(#LOGO_MOT||image_reduire{32, 19})]#TITRE</h2>
+	</div>
+	
+
+	  [<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+
+	  [(#REM) Articles lies au mot-cle ]
+	  <B_articles>
+	  <div class="liste articles">
+	      #ANCRE_PAGINATION
+		<div class="padd-post-box titre-sans-icone">
+			<h3><:articles:></h3>
+		</div>
+		<div class="padd-post-item-index-2">	
+		      <ul class="liste-items">
+			  <BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse} {pagination 10}>
+			  <li><span class="padd-wrap breves-rub">
+				[<div class="info-publi info-publi-mots" title="[(#DATE|affdate_heure)]"><small>(#DATE|affdate)<br />#LESAUTEURS</small></div>]	
+				<a href="#URL_ARTICLE" rel="bookmark" title="#TITRE">#TITRE</a><BOUCLE_articles_rub(RUBRIQUES) {id_rubrique}><small>#TITRE</small></BOUCLE_articles_rub>
+			  </span></li>
+			  </BOUCLE_articles>
+		      </ul>
+		</div>
+	      [<p class="pagination">(#PAGINATION)</p>]
+	  </div>
+	  </B_articles>
+
+	  [(#REM) Rubriques liees au mot-cle ]
+	  <B_rubriques>
+	  <div class="liste rubriques">
+		<div class="padd-post-box titre-sans-icone">
+			<h3><:rubriques:></h3>
+		</div>
+		<div class="padd-post-item-index-2">	
+		      <ul class="liste-items">
+			<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre}>
+			  <li><span class="padd-wrap breves-rub">	
+				<a href="#URL_RUBRIQUE" title="#TITRE">#TITRE</a>
+			  </span></li>
+			  </BOUCLE_rubriques>
+		      </ul>
+		</div>	      
+	  </div>
+	  </B_rubriques>
+
+	  [(#REM) Breves liees au mot-cle ]
+	  <B_breves>
+	  <div class="liste breves">
+		<div class="padd-post-box titre-sans-icone">
+			<h3><:breves:></h3>
+		</div>
+		<div class="padd-post-item-index-2">	
+		      <ul class="liste-items">
+			<BOUCLE_breves(BREVES) {id_mot} {par titre}>
+			  <li><span class="padd-wrap breves-rub">	
+				<a href="#URL_BREVE" title="#TITRE">#TITRE</a>
+			  </span></li>
+			  </BOUCLE_breves>
+		      </ul>
+		</div>
+	  </div>
+	  </B_breves>
+
+	  [(#REM) Liens des forums ]
+	  <B_forums_liens>
+	  <div class="liste forums">
+		<div class="padd-post-box titre-sans-icone">
+			<h3><:messages_forum:></h3>
+		</div>
+		<div class="padd-post-item-index-2">	
+		      <ul class="liste-items">
+			<BOUCLE_forums_liens(FORUMS) {id_mot} {plat} {par date}{inverse}>
+			  <li><span class="padd-wrap breves-rub">
+				[<div class="info-publi info-publi-mots" title="[(#DATE|affdate_heure)]"><small>(#DATE|affdate)<br />#NOM</small></div>]	
+				<a href="#URL_FORUM">[(#TEXTE|couper{60, '...'})]</a><BOUCLE_forums_art(ARTICLES) {id_article}><small><a href="#URL_ARTICLE">#TITRE</a></small></BOUCLE_forums_art>
+			  </span></li>
+			  </BOUCLE_forums_liens>
+		      </ul>
+		</div>
+	  </div>
+	  </B_forums_liens>
+
+	  [(#REM) Sites web lies au mot-cle ]
+	  <B_sites>
+	  <div class="liste sites">	  
+		<div class="padd-post-box titre-sans-icone">
+			<h3><:sites_web:></h3>
+		</div>
+		<div class="padd-post-item-index-2">	
+		      <ul class="liste-items">
+		  <BOUCLE_sites(SITES) {id_mot} {par nom_site}>
+			  <li><span class="padd-wrap breves-rub">	
+				<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
+			  </span></li>
+			  </BOUCLE_sites>
+		      </ul>
+		</div>
+	  </div>
+	  </B_sites>
+</div>
+
+[<div class="notes"><h3><:info_notes:></h3>(#NOTES)</div>]
+</BOUCLE_principale>

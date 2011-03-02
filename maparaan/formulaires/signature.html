@@ -1,0 +1,75 @@
+<div class="formulaire_spip formulaire_signature ajax" id="sp#ENV{id_article}">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok,#ENV*{_confirm}|affiche_reponse_confirmation})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+
+<div class="padd-interior padd-post-box-reply-interior">
+	<form method="post" action="#ENV{action}#sp#ENV{id_article}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<input type="hidden" name="url_page" value="[(#SELF|url_absolue)]" />
+
+		<ul>
+			<li class='saisie_nom_email[ (#ENV*{erreurs}|table_valeur{session_nom}|oui)erreur] obligatoire'>				
+				<p class="input">
+					<label for="session_nom"><:form_pet_votre_nom:></label>
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_nom})</span>]
+					<input name="session_nom" id="session_nom" value="[(#ENV{session_nom}|sinon{<:form_pet_votre_nom:>})]" size="30" tabindex="1" type="text" />
+					<small>Required</small>
+				</p>
+			</li>
+			<li class='saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{session_email}|oui)erreur] obligatoire'>				
+				<p class="input">
+					<label for="session_email"><:form_pet_votre_email:></label>
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_email})</span>]
+					<input name="session_email" id="session_email" value="[(#ENV{session_email}|sinon{<:form_pet_votre_email:>})]" size="30" tabindex="2" type="text" />
+					<small>Required</small>
+				</p>
+			</li>
+		</ul>
+		
+		[<p class='explication'>(#ENV{site_obli})<:form_pet_votre_site:></p>]
+		<ul>
+			<li class='saisie_signature_nom_site[ (#ENV*{erreurs}|table_valeur{signature_nom_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>					
+				<p class="input">
+					<label for="signature_nom_site"><:form_pet_nom_site2:></label>
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{signature_nom_site})</span>]
+					<input name="signature_nom_site" id="signature_nom_site" value="[(#ENV{signature_nom_site}|sinon{<:form_pet_nom_site2:>})]" size="30" tabindex="3" type="text" />
+					[(#ENV{site_obli})<small>Required</small>]
+				</p>
+			</li>
+			<li class='saisie_signature_url_site[ (#ENV*{erreurs}|table_valeur{signature_url_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>				
+				<p class="input">
+					<label for="signature_url_site"><:form_pet_adresse_site:></label>
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{signature_url_site})</span>]
+					<input name="signature_url_site" id="signature_url_site" value="[(#ENV{signature_url_site}|sinon{<:form_pet_adresse_site:>})]" size="30" tabindex="4" type="text" />
+					[(#ENV{site_obli})<small>Required</small>]
+				</p>
+			</li>
+		</ul>
+
+		[(#REM) Piege a robots spammeurs ]
+		<p style="display: none;">
+			<label for="nobot_signature#ENV{id_article}"><:antispam_champ_vide:></label>
+			<input type="text" class="text" name="nobot" id="nobot_signature#ENV{id_article}" value="#ENV{nobot}" size="10" />
+		</p>
+
+		[(#ENV{_message})
+			<ul>
+				<li class='saisie_message'>
+					<p><textarea name="message" id="message" cols="60" rows="6" tabindex="5">[(#ENV{message}|sinon{<:maparaan:form_pet_message_commentaire:>})]</textarea></p>
+				</li>
+			</ul>
+		]
+
+		<div class="comment-notify-submit">
+			<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" tabindex="[(#ENV{_message}|?{6,5})]" /></p>
+			<div class="nettoyeur"></div>
+		</div>
+	</div>
+	</form>
+</div>
+
+]
+</div>

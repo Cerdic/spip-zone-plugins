@@ -1,0 +1,50 @@
+<BOUCLE_site(SITES){id_syndic}>
+
+<div class="padd-post-box-comments padd-post-item[ (#LOGO_SITE|oui)padd-post-item-result]">
+
+	[<a href="#URL_SITE">(#LOGO_SITE||image_reduire{115}|image_recadre{115})</a>]	
+	<div class="padd-post-item-title cartouche">		
+		<div>	
+			<h2 class="#EDIT{nom_site}">#NOM_SITE</h2>
+			[<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF)</div>]
+			
+			[<p class="#EDIT{url_site} repondre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+		</div>
+	</div>
+</div>
+
+  [(#REM) Articles issus de la syndication ]
+  <B_articles>
+
+<div class="padd-post-group padd-post-group-result">
+	<div class="padd-post-group-title cartouche">
+		[(#LOGO_RUBRIQUE||image_reduire{32,32}|sinon{<div class='pas-de-logo'></div>})]
+		<h1 class="#EDIT{titre}"><:articles:></h1>
+	</div>
+</div>
+
+  
+#ANCRE_PAGINATION
+<div class="padd-post-item padd-post-item-site">
+	<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>      
+	<div class="padd-post-site">
+		<div class="padd-post-item-title">
+			[<div class="info-publi info-publi-article" title="[(#DATE|affdate_heure)]">(#DATE|affdate_jourcourt)[<br />(#LESAUTEURS)]</div>]
+			<h3><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+			<div class="nettoyeur"></div>
+		</div>
+		<div class="padd-post-item-entry">
+		      [<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
+		      [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+		      [<div class="tags-site"><em>(#TAGS|afficher_tags)</em></div>]
+			<div class="nettoyeur"></div>
+		</div>
+	</div>
+	</BOUCLE_articles>
+</div>
+[<p class="pagination">(#PAGINATION)</p>]
+			  
+  </B_articles>
+
+  [<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_site>

@@ -1,0 +1,63 @@
+<BOUCLE_extra_rubrique(RUBRIQUES){id_rubrique}>
+
+	<INCLURE{fond=navigation/#ENV{type},env}>
+			
+	[(#REM) Menu de navigation mots-cles ]
+	<B_mots>
+	<div class="padd-box padd-box-popular-posts">
+		<h2><:mots_clefs:></h2>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">	
+				<ul>
+					<BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
+					<li><span class="padd-wrap"><a href="#URL_MOT" rel="tag">#TITRE</a></span></li>
+					</BOUCLE_mots>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</B_mots>
+
+
+	[(#REM) Breves du secteur ]
+	<B_breves>
+	<div class="padd-box padd-box-popular-posts">
+		<h2><:breves:></h2>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">	
+				<ul>
+					<BOUCLE_breves(BREVES) {id_rubrique} {!par date} {0,5}>
+					<li><span class="padd-wrap">[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_BREVE">#TITRE</a></span></li>
+					</BOUCLE_breves>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</B_breves>
+	
+
+	[(#REM) Sites de la rubrique ]
+	<B_sites>
+	<div class="padd-box padd-box-popular-posts">
+		<h2><:sur_web:></h2>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">	
+				<ul>
+					<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{0,3}>
+					<li>
+						<span class="surliste"><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></span>
+							<B_syndic>
+							<ul>
+									<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
+									<li><span class="padd-wrap"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></span></li>
+									</BOUCLE_syndic>
+							</ul>
+							</B_syndic>
+					</li>
+					</BOUCLE_sites>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</B_sites>
+</BOUCLE_extra_rubrique>

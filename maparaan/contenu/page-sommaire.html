@@ -1,0 +1,118 @@
+<div class="contenu-principal">
+	<div class="cartouche invisible">
+		<h1 class="h1 invisible">#NOM_SITE_SPIP</h1>
+	</div>
+</div>
+
+
+<B_articles>	
+<div id="padd-featsubs">
+	<div id="padd-featsubs-wrapper">
+		<div id="padd-featured" class="padd-box">
+			<h2><:derniers_articles:></h2>
+			<div class="padd-interior">
+			
+				[(#REM) Affiche les 4 articles les plus récents ]					
+				<div id="s3slider">
+					<ul id="s3sliderContent">
+						<BOUCLE_articles(ARTICLES) {!par date} {0, 4}>
+							<li class="s3sliderImage" id="featured-#ID_ARTICLE">
+								<a href="#URL_ARTICLE">#LOGO_ARTICLE_RUBRIQUE" </a>
+								[<span class="right"><strong><a href="#URL_ARTICLE">#TITRE</a></strong><br /><br />(#INTRODUCTION|couper{370, '...'})</span>]
+							</li>
+						</BOUCLE_articles>
+						<div class="clear s3sliderImage"></div>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		<div id="padd-subscribed">
+			<h2><:maparaan:suivre_site:></h2>
+			<div class="padd-interior">
+			
+				[(#INCLURE{fond=inclure/menu, env, identifiant=menuslide}|oui)<INCLURE{fond=inclure/menu, env, identifiant=menuslide}>]
+				[(#INCLURE{fond=inclure/menu, env, identifiant=menuslide}|non)
+				<ul>
+					<li class="rss">
+						<a href="spip.php?page=backend" title="Flux RSS">Flux RSS</a>
+					</li>
+					<li class="contact">
+						<a href="spip.php?auteur1" title="Contactez-nous">Contactez-nous</a>
+					</li>
+					<li class="twitter">
+						<a href="#" title="#NOM_SITE_SPIP sur Twitter">Suivre mes Tweets</a>
+					</li>
+					<li class="facebook">
+						<a href="#" title="#NOM_SITE_SPIP sur Facebook">Suivez-nous sur Facebook</a>
+					</li>
+				</ul>
+				]
+			</div>
+		</div>
+		<div class="padd-clear"></div>
+	</div>
+</div>
+
+
+<div id="padd-content">
+	<div id="padd-content-wrapper">
+		<div class="padd-post-group padd-post-group-index">
+			<div class="padd-post-group-title">
+				<h2><:accueil_site:></h2>
+			</div>
+			
+			<div class="padd-post-list">
+			
+				<BOUCLE_articles2(ARTICLES) {!par date} {4, 2} {"<div class='marge'></div>"}>
+				<div class="padd-post-item padd-post-item-index">
+					<div class="padd-post-item-title">
+						<h2>#TITRE</h2>
+					</div>
+					<div class="padd-post-item-entry">
+						[(#INTRODUCTION|couper{400, '...'})]
+						<p class="lirelasuite"><a href="#URL_ARTICLE"><:zpip:lire_la_suite:></a></p>
+					</div>
+				</div>
+				</BOUCLE_articles2>
+				
+				<B_breves>
+					<div class="padd-post-item padd-post-item-index padd-post-item-index-2">
+						<div class="padd-post-item-title">
+							<h2><:dernieres_breves:></h2>
+						</div>
+						<div class="padd-interior">
+							<div class="padd-interior-wrapper">	
+								<ul>
+									<BOUCLE_breves(BREVES) {tout}{!par date}{0, 5}>
+									<li><span class="padd-wrap breves-rub"><a href="#URL_BREVE">#TITRE</a>[  &ndash;  (#DATE|affdate_jourcourt)]<BOUCLE_breves_rub(RUBRIQUES) {id_rubrique}><small class="breves-rub-texte">#TITRE</small></BOUCLE_breves_rub></span></li>
+									</BOUCLE_breves>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</B_breves>
+				
+					<BOUCLE_articles3(ARTICLES) {!par date} {6, 1} {"<div class='marge'></div>"}>
+					<div class="padd-post-item padd-post-item-index padd-post-item-index-2">
+						<div class="padd-post-item-title">
+							<h2>#TITRE</h2>
+						</div>
+						<div class="padd-post-item-entry">
+							[(#INTRODUCTION|couper{400, '...'})]
+							<p class="readmore"><a href="#URL_ARTICLE"><:zpip:lire_la_suite:></a></p>
+						</div>
+					</div>
+					</BOUCLE_articles3>
+				
+				<//B_breves>				
+				
+				<div class="nettoyeur"></div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+		
+		
+</B_articles>

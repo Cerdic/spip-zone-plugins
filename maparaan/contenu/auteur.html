@@ -1,0 +1,50 @@
+<BOUCLE_contenu_auteur(AUTEURS){id_auteur}>
+    
+<div class="marge-bottom">
+
+	<div class="padd-post-box-comments padd-post-item padd-post-item-auteur">
+		[(#LOGO_AUTEUR||sinon{#CHEMIN{gravatar.png}})]
+		<div class="padd-post-item-title cartouche">		
+			<div>	
+				[<p class="#EDIT{url_site} repondre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+				<h2 class="#EDIT{qui}">#NOM</h2>
+				[<div class="#EDIT{bio}">(#BIO)</div>]
+			</div>
+		</div>
+	</div>
+	
+	<div class="nettoyeur"></div>
+
+	[(#REM) Articles de l'auteur ]
+	<B_articles>
+	<div class="liste articles">
+	      #ANCRE_PAGINATION
+		<div class="padd-post-box titre-sans-icone">
+			<h3><:articles_auteur:> (#GRAND_TOTAL)</h3>
+		</div>
+		<div class="padd-post-item padd-post-item-index-2">	
+		      <ul class="liste-items">
+			<BOUCLE_articles(ARTICLES) {id_auteur} {!par popularite} {pagination 10}>
+			  <li><span class="padd-wrap breves-rub">
+				<a href="#URL_ARTICLE" rel="bookmark" title="#TITRE">#TITRE</a><BOUCLE_articles_rub(RUBRIQUES) {id_rubrique}><small>#TITRE</small></BOUCLE_articles_rub>
+				[<small title="[(#DATE|affdate_heure)]" class="breves-rub-texte">(#DATE|affdate)</small>]
+			  </span></li>
+			  </BOUCLE_articles>
+		      </ul>
+		</div>
+	      [<p class="pagination">(#PAGINATION)</p>]
+	</div>
+	</B_articles>
+
+</div>
+
+#FORMULAIRE_ECRIRE_AUTEUR
+
+[<div>
+	<div class="padd-post-box titre-sans-icone surlignable">
+		<h3><:info_notes:></h3>
+	</div>
+	<div class="surlignable">(#NOTES)</div>
+</div>]
+
+</BOUCLE_contenu_auteur>

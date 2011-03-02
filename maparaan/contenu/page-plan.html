@@ -1,0 +1,55 @@
+<div class="padd-post-item padd-post-item-single">
+	<div class="padd-post-item-title cartouche">
+		<h2><:plan_site:></h2>
+	</div>
+
+<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+<div class="plan">
+	<div class="padd-post-box titre-sans-icone">
+		<h3 class="ttr-rub"><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+	</div>
+
+	[(#REM) Articles et sous-rubriques ]
+	<div class="padd-post-item-index-2">
+		<B_articles_racine>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">
+				<ul>
+					<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+					<li><span class="padd-wrap"><a href="#URL_ARTICLE">#TITRE</a></span></li>
+					</BOUCLE_articles_racine>
+				</ul>
+			</div>
+		</div>
+		</B_articles_racine>
+
+		<B_rubriques>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">	
+				<ul>
+					<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+					<li class="plan-ss-rub">
+						<div class="padd-post-box titre-sans-icone">
+							<h3 class="ttr-rub"><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+						</div>
+						<!-- <span class="surliste"><a href="#URL_RUBRIQUE">#TITRE</a> \\rubrique\\</span> -->
+						
+						<B_articles>
+						<ul>
+							<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+							<li><span class="padd-wrap"><a href="#URL_ARTICLE">#TITRE</a></span></li>
+							</BOUCLE_articles>
+						</ul>
+						</B_articles>
+						
+						<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+					</li>
+					</BOUCLE_rubriques>
+				</ul>
+			</div>
+		</div>
+		</B_rubriques>
+	</div>
+</div>
+</BOUCLE_secteurs>
+</div>

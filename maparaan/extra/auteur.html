@@ -1,0 +1,23 @@
+<BOUCLE_extra_auteur(AUTEURS){id_auteur}>
+	[(#REM) Autres auteurs ]
+	<B_auteurs>
+	<div class="padd-box padd-box-popular-posts padd-post-item-index-2">
+		#ANCRE_PAGINATION
+		<h2><:info_auteurs:></h2>
+		<div class="padd-interior">
+			<div class="padd-interior-wrapper">	
+				<ul>
+					<BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
+					<li><span class="padd-wrap breves-rub"><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a>
+					
+					<BOUCLE_nb_art(ARTICLES) {id_auteur}></BOUCLE_nb_art>[<small class="breves-rub-texte">(#TOTAL_BOUCLE|>{1}|?{#TOTAL_BOUCLE articles, #TOTAL_BOUCLE article})</small>]<//B_nb_art>
+					
+					</span></li>
+					</BOUCLE_auteurs>
+				</ul>
+			</div>
+		</div>
+		[<p class="pagination">(#PAGINATION)</p>]
+	</div>
+	</B_auteurs>
+</BOUCLE_extra_auteur>

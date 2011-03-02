@@ -1,0 +1,31 @@
+<BOUCLE_breve_principal(BREVES) {id_breve}>
+<div class="padd-post-item padd-post-item-single" id="post-#ID_ARTICLE">
+	<div class="padd-post-item-title cartouche">
+		<div class="info-publi info-publi-article" title="[(#DATE|affdate_heure)]">
+		<BOUCLE_ariane(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|couper{60, '...'})]</a><br /></BOUCLE_ariane>
+		[(#DATE|affdate)]</div>	
+		<h2><a href="#URL_BREVE" rel="bookmark" title="#TITRE" class="#EDIT{titre}">[(#LOGO_BREVE||image_reduire{32, 19})]#TITRE</a></h2>
+	</div>
+	<div class="padd-post-item-entry">
+		[<div class="#EDIT{texte} texte">[<div class="logo-breve">(#LOGO_BREVE||image_reduire{120})</div>](#TEXTE|image_reduire{500,0})</div>
+		<div class="nettoyeur"></div>
+		]
+	</div>		
+	[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80, '...'})]})]</a></p>]
+	
+	[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</div>
+
+
+[(#REM) Forum de la breve
+NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
+[<div class="padd-post-box padd-post-box-replies padd-post-box-comments">
+	<div class="padd-post-box-title">
+		<h3><:maparaan:commentaires:></h3>
+	</div>
+	<a href="#forum" name="forum" id="forum"></a>
+	<INCLURE{fond=inclure/forum}{id_breve}>
+	<p class="repondre repondre-article"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_breve:></a></p>
+</div>
+]
+</BOUCLE_breve_principal>

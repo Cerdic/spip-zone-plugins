@@ -1,0 +1,104 @@
+[(#REM) Cette balise (invisible) provoque le recalcul du forum
+la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+[(#PARAMETRES_FORUM|?{''})]
+
+<div class="comments" id="comments">
+	<div class="padd-interior padd-post-box-comments-interior">
+		[(#REM) Nombre total de messages ]
+		<BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} />[<h4 class="no-border">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+		[(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]</h4>]<//B_decompte>
+		
+		[(#REM) Messages du forum ]
+		<B_forums>
+		<ul class="padd-comments-list">
+		
+			<BOUCLE_forums(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {par date}>			
+			<li class="comment even thread-even depth-1 forum-fil comment[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+				<div class="padd-comment">
+					<div class="padd-comment-details">
+						<strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM" class="ancre permalink comment-number">#TITRE</a></strong>
+						<div class="padd-comment-author">
+							<div class="padd-comment-avatar">
+								[(#LOGO_AUTEUR||image_reduire{80})]
+							</div>
+							[<span class="padd-author #EDIT{qui}">(#NOM)</span>]
+							[(#DATE|oui)<span class="padd-time">
+								[(#DATE|affdate_jourcourt)]
+								[<br />(#DATE|heures)][:(#DATE|minutes)]
+								</span>
+							]
+						</div>
+						<div class="padd-comment-details-interior">
+							<div class="padd-tb"></div>
+							<div class="padd-comment-details-interior-wrapper">
+								[<div class="#EDIT{texte} comment-texte">(#TEXTE|lignes_longues)</div>]
+								[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+								[<p class="#EDIT{hyperlien} comment-external-link hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80, '...'})]})]</a></p>]
+								<BOUCLE_doc(DOCUMENTS){id_forum}>
+								[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+									[(#EMBED_DOCUMENT|image_reduire{300})]
+								,
+									[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+								})]
+								</BOUCLE_doc>
+							</div>
+							<div class="padd-tb"></div>
+						</div>
+						[<p class="comment-reply repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
+						<div class="padd-clear"></div>
+					</div>
+				</div>
+				
+				<B_forums_fils>
+				<ul class='sous-forum'>
+					<BOUCLE_forums_fils(FORUMS) {id_parent} {par date}>
+					<li class="comment even thread-even depth-1 forum-fil comment[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+						<div class="padd-comment">
+							<div class="padd-comment-details">
+								<strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM" class="ancre permalink comment-number">#TITRE</a></strong>
+								<div class="padd-comment-author">
+									<div class="padd-comment-avatar">
+										[(#LOGO_AUTEUR||image_reduire{80})]
+									</div>
+									[<span class="padd-author #EDIT{qui}">(#NOM)</span>]
+									[(#DATE|oui)<span class="padd-time">
+										[(#DATE|affdate_jourcourt)]
+										[<br />(#DATE|heures)][:(#DATE|minutes)]
+										</span>
+									]
+								</div>
+								<div class="padd-comment-details-interior-sous-forum">
+									<div class="padd-comment-details-interior-wrapper">
+										<div class="cadre-msg-sous-forum">
+											<div class="cadre-msg-sous-forum-bg"></div>
+											[<div class="#EDIT{texte} comment-texte">(#TEXTE|lignes_longues)</div>]
+											[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+											[<p class="#EDIT{hyperlien} comment-external-link hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80, '...'})]})]</a></p>]
+											<BOUCLE_doc2(DOCUMENTS){id_forum}>
+											[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+												[(#EMBED_DOCUMENT|image_reduire{300})]
+											,
+												[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+											})]
+											</BOUCLE_doc2>
+										</div>
+									</div>
+								</div>
+								[<p class="comment-reply repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
+								<div class="padd-clear"></div>
+							</div>
+						</div>
+
+						<BOUCLE_forums_boucle(boucle_forums_fils)></BOUCLE_forums_boucle>
+					</li>
+					</BOUCLE_forums_fils>
+				</ul>
+				</B_forums_fils>
+				
+			</li>
+			</BOUCLE_forums>
+
+		</ul>
+		</B_forums>
+	</div>
+</div>

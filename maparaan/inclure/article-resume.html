@@ -1,0 +1,30 @@
+[(#REM)
+
+  Squelette Presentation d'un article dans une liste
+  (c) 2009 Zpip
+  Distribue sous licence GPL
+
+]
+<BOUCLE_articles(ARTICLES) {id_article} {statut?}>
+
+	<div class="padd-post-item padd-post-item-result">
+		[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{115}|sinon{<div class="pas-de-logo-article-resume"></div>})</a>]
+		<div class="padd-post-item-title">
+			[<div class="info-publi" title="[(#DATE|affdate_heure)]">(#DATE|affdate_jourcourt)</div>]
+			<h2><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h2>
+		</div>
+		<div class="padd-post-item-entry">
+			<?php 
+				/*if (function_exists('tweetmeme')) {
+					echo padd_tm_generate_button(); 
+				}
+				echo padd_theme_summary(get_the_content());*/
+				//TWEETMEME
+			?>
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{360, '...'})</div>]
+			
+			<div class="nettoyeur"></div>
+		</div>
+	</div>
+	
+</BOUCLE_articles>
