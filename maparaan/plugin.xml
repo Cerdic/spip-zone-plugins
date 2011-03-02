@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Squelette Maparaan</nom>
+	<version>1.0</version>
+	<etat>stable</etat>
+  	<auteur>Guillaume Michard ([OpenStudio->http://www.openstudio.fr/]), d'apr&egrave;s le th&egrave;me [Maparaan->http://www.paddsolutions.com/wordpress-theme-maparaan/]
+ chez [Padd Solutions->http://www.paddsolutions.com/]</auteur>
+  	<licence><a href='http://www.gnu.org/licenses/gpl.html' rel='licence'>GNU General Public License</a></licence>
+  	<description>
+	Un squelette 3 colonnes, gris et rouge. Conçu pour fonctionner avec le thème du même nom.
+  	</description>
+  	<icon>vignette.jpg</icon>
+	<prefix>squelette_maparaan</prefix>
+	<necessite id="Z" version="[1.2.0;]" />
+	<utilise id="menus" />
+	<utilise id="cfg" />
+	<utilise id="socialtags" />
+	<utilise id="gravatar" />
+	<utilise id="slogan" />
+</plugin>
