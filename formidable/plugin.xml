@@ -2,7 +2,7 @@
 	<nom>Formidable, g&eacute;n&eacute;rateur de formulaires</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.5</version>
+	<version>0.5.6</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>Cr&eacute;ation de formulaires avec une interface graphique et configuration des traitements associ&eacute;s (envoyer par courriel, enregistrer les r&eacute;ponses, etc).</description>

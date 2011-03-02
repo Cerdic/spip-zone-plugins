@@ -23,7 +23,7 @@
 			]
 			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-				[(#VALEUR|formidable_generer_saisie_configurable{#ENV**|unserialize})]
+				[(#VALEUR**|formidable_generer_saisie_configurable{#ENV**|unserialize})]
 			]
 			</BOUCLE_contenu>
 			<li class="aucun"><em class="attention"><:formidable:construire_aucun_champs:></em></li>
