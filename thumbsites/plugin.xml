@@ -14,8 +14,8 @@
 	<icon>images/thumbsites.png</icon>
 
 	<description>
-Thumbsites fournit un syst&egrave;me de capture d’&eacute;cran de site g&eacute;n&eacute;r&eacute;e par des serveurs d&eacute;di&eacute;s. Le plugin propose des balises, des filtres et des mod&egrave;les pour afficher la vignette d’un site donn&eacute;.
-_ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&eacute;s fr&eacute;quentes des serveurs et d’acc&eacute;l&eacute;rer les affichages. Une configuration est disponible dans l’espace priv&eacute;.
+Thumbsites fournit un syst&egrave;me de capture d'&eacute;cran de site g&eacute;n&eacute;r&eacute;e par des serveurs d&eacute;di&eacute;s. Le plugin propose des balises, des filtres et des mod&egrave;les pour afficher la vignette d'un site donn&eacute;.
+_ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&eacute;s fr&eacute;quentes des serveurs et d'acc&eacute;l&eacute;rer les affichages. Une configuration est disponible dans l'espace priv&eacute;.
 	</description>
 
     <!-- URI de documentation -->
