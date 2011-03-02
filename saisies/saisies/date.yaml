@@ -91,5 +91,5 @@ options:
           label: '<:saisies:option_obligatoire_label:>'
 defaut:
   options:
-    label: '<:saisies:saisie_input_titre:>'
+    label: '<:saisies:saisie_date_titre:>'
     size: 40
