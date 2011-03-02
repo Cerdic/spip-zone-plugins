@@ -30,8 +30,8 @@ function Crayons_insert_head($head) {
 	// verifie que l'edition de l'espace prive est autorisee
 	if ($config_espace_prive['espaceprive'] == 'on') {
 		// determine les pages (exec) crayonnables
-		if (in_array(_request('exec'),
-		explode(',',$config_espace_prive['exec_autorise']))) {
+		if (($config_espace_prive['exec_autorise'] == '*') ||
+	       in_array(_request('exec'),explode(',',$config_espace_prive['exec_autorise']))) {
 			// Calcul des droits
 			include_spip('inc/crayons');
 			$res = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
