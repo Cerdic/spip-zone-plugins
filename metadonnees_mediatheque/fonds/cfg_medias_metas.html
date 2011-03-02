@@ -1,0 +1,82 @@
+<!-- titre=<:medias_metas:medias_metas:> -->
+
+<!-- icone=img_pack/logo24.png -->
+
+<!-- boite=<:medias_metas:config:> -->
+
+[(#PLUGIN{autorite}|oui)
+
+<!-- autoriser=webmestre -->
+
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+
+modifier les param&#232;tres. Pour en savoir plus, 
+
+voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
+
+]
+
+[(#PLUGIN{autorite}|non)
+
+<!-- autoriser=0minirezo -->
+
+<!-- refus=Seuls les administrateurs du site sont autoris&#233;s &#224; 
+
+modifier ces param&#232;tres.  -->
+
+]
+
+
+
+<!-- descriptif=
+
+<h4><:medias_metas:help_titre:></h4>
+
+-->
+
+
+
+<!-- head=
+
+	
+
+	<style type="text/css">
+
+	table.def td{padding-left:1em; padding-right:1em;}
+
+   fieldset { background-color: #ddd; margin-bottom: 10px;  }
+
+	 legend { font-weight: bold; }
+
+	 .help { font-size: 0.8em; }
+
+	</style>
+
+
+
+-->
+
+#CACHE{0} 
+
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+        <fieldset><legend><:medias_metas:choix_meta:></legend>
+        
+            <:medias_metas:oui:> 
+
+					 <input type="radio" name="meta_off" id="meta_off_false" value="false" [(#ENV{meta_off}|!={true}|?{checked="checked",''})] />
+
+				     <input type="radio" name="meta_off" id="meta_off_true" value="true" [(#ENV{meta_off}|=={true}|?{checked="checked",''})] /> 
+
+					 <:medias_metas:non:>
+
+				   <br /><span class="help"><:medias_metas:help_choix_meta:></span>
+
+				</fieldset>
+
+				<input type="reset" value="<:Reset:>" style="float: right;" />
+
+				<input type="submit" name="_cfg_ok" value="<:OK:>" />
+
+</form>

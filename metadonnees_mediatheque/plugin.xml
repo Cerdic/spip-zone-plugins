@@ -1,0 +1,34 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]M&#233;tas M&#233;dias glue
+			[en]Metas Medias glue
+		</multi>
+	</nom>
+	<auteur>Thom</auteur>
+	<version>0.1</version>
+	<icon>img_pack/logo64.png</icon>
+	<etat>stable</etat>
+	<description>
+		<multi>
+			[fr]Ce plugin constitue une glue entre le plugin m&#233;diath&egrave;que et le plugins Metadonn&#233;es photo.
+      Il permet d'afficher les informations EXIF, GPS et IPTC d'un fichier JPEG dans l'arborescence de la m&#233;diath&egrave;que.
+
+Les informations EXIF, IPTC, GPS et histogramme sont extraite grace au plugin Metadonn&#233;es photo de ARNO*.
+
+			[en]This plugin is a glue between the media library and  the plugin metadata
+It allows to view EXIF, IPTC and GPS data from a JPEG file in the plugin Media Library.
+
+EXIF, IPTC, GPS informations are extract with the plugin Photo metadata by ARNO*
+		</multi>
+	</description>
+	<licence>LGPL</licence>
+	<lien></lien>
+	<prefix>medias_metas</prefix>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
+  <necessite id="medias" version="[1.6.1;]" />
+  <necessite id="photo_infos" version="[1.2;]" />
+  <utilise id="cfg">
+</plugin>
+
