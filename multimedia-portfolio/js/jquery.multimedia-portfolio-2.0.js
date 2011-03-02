@@ -17,8 +17,7 @@ $.fn.multimedia_portfolio = function(options) {
 		var defaultwidth = 320, defaultheight = 210;
 		$(this).wrap("<div class='portfolio-container'></div>");
 		var portfolio = $(this);
-		var portfolio_container = $(this).parent();
-		var settings = { width: 700, baseDir: '.', nbelem: 3, managePdf: true
+		var settings = { width: 700, baseDir: '.', nbelem: 3
 		};
 		if(options) $.extend(settings, options);
 		
@@ -28,11 +27,11 @@ $.fn.multimedia_portfolio = function(options) {
 		var elements = $(this).children().not('.portfolio-loading-bar');
 		var borderwidth = parseInt(((settings.width)/900)*7);
 		var titlesize = (def_element_width/366);
-		portfolio_container.prepend("<div class='portfolio-bg-left'>&nbsp;</div><div class='portfolio-bg-right'>&nbsp;</div>").append("<div class='masque-left'>&nbsp;</div><div class='masque-right'>&nbsp;</div>");
-		if (elements.length > settings.nbelem) portfolio_container.append("<div class='portfolio-bg-bottom-left'>&nbsp;</div><div class='portfolio-bg-bottom-right'>&nbsp;</div>");
+		$('.portfolio-container').prepend("<div class='portfolio-bg-left'>&nbsp;</div><div class='portfolio-bg-right'>&nbsp;</div>").append("<div class='masque-left'>&nbsp;</div><div class='masque-right'>&nbsp;</div>");
+		if (elements.length > settings.nbelem) $('.portfolio-container').append("<div class='portfolio-bg-bottom-left'>&nbsp;</div><div class='portfolio-bg-bottom-right'>&nbsp;</div>");
 		var ratio_largeur = ((elements.length*def_element_width - settings.width) / (elements.length*def_element_width));
-		portfolio_container.css("width", settings.width+'px');
-		if (elements.length > settings.nbelem) portfolio_container.css("height", portfolio_height+'px'); else portfolio_container.css("height", parseInt(portfolio_height-30)+'px');
+		$(".portfolio-container").css("width", settings.width+'px');
+		if (elements.length > settings.nbelem) $(".portfolio-container").css("height", portfolio_height+'px'); else $(".portfolio-container").css("height", parseInt(portfolio_height-30)+'px');
 		for ( var i = 0; i < elements.length; i++ ) {
 				$(elements[i]).css('width', def_element_width+'px');
 				$(elements[i]).find('img').removeAttr('class').removeAttr('style').not('.portfolio-mp3, .portfolio-loading-bar').each(function(){
@@ -47,11 +46,10 @@ $.fn.multimedia_portfolio = function(options) {
 					if (currentwidth > def_element_width-(borderwidth*2+6)) currentwidth = def_element_width-(borderwidth*2+6);
 					currentheight = parseInt(currentheight/ratio);
 					var currentstartimage = $(elements[i]).find('img').attr('src'); if (currentstartimage==null) currentstartimage='';
-					var currenttitle = $(elements[i]).find('a').html();
-					if (currenttitle==null) currenttitle = $(elements[i]).find('a').attr('title'); if (currenttitle==null) currenttitle='';
+					var currenttitle = $(elements[i]).find('a').attr('title'); if (currenttitle==null) currenttitle='';
 						
 					
-					if ((currenthref.toLowerCase().indexOf('.pdf') > 0) && settings.managePdf) {
+					if (currenthref.toLowerCase().indexOf('.pdf') > 0) {
 						$(elements[i]).html("<iframe title='"+currenttitle+"' src='http://docs.google.com/gview?url="+currenthref+"&embedded=true' style='width:"+currentwidth+"px; height:"+currentheight+"px;' frameborder='0' />");
 						elementclass = 'portfolio-pdf';
 						
@@ -61,12 +59,7 @@ $.fn.multimedia_portfolio = function(options) {
 						elementclass = 'portfolio-flv';
 						
 					} else if (currenthref.toLowerCase().indexOf('youtube') > 0) {
-						var videoref;
-						if (currenthref.indexOf('v=')>=0) {
-						      videoref=currenthref.substr(currenthref.lastIndexOf('v=')+2);
-						} else {
-						     videoref=currenthref.substr(currenthref.lastIndexOf('v/')+2);
-						}
+						var videoref=currenthref.substr(currenthref.lastIndexOf('v=')+2);
 						$(elements[i]).empty().flash({swf: 'http://www.youtube.com/v/'+videoref+'&amp;fs=1&amp;rel=0', width: currentwidth, height: currentheight, allowfullscreen: true});
 						$(elements[i]).find('object').addClass('flv-type').attr('title', currenttitle);
 						elementclass = 'portfolio-youtube';
@@ -74,22 +67,13 @@ $.fn.multimedia_portfolio = function(options) {
 				      
 					} else if (currenthref.toLowerCase().indexOf('.mp3') > 0) {
 						$(elements[i]).empty().flash({swf: settings.baseDir+"/player_mp3_maxi.swf", flashvars: {mp3: currenthref, showslider: '1', width: (currentwidth-10), height: 20, bgcolor1: 'f2f2f2', bgcolor2: 'e6e6e6', buttoncolor: '000000', buttonovercolor: '00ad00'}, wmode: 'transparent', width: (currentwidth-10), height: 20});
-						if ($(elements[i]).find('img').length == 0){
-						    $(elements[i]).prepend("<img class='img-type' src='"+settings.baseDir+"/css/bg-objects.gif' width='"+currentwidth+"' height='"+currentheight+"' alt='' />").find('object').addClass('mp3-type').attr('title', currenttitle).wrap("<span class='portfolio-mp3-container' style='top: "+(currentheight-20)+"px; margin-top: 0; margin-left: -"+parseInt((currentwidth-10)/2)+"px;'></span>");
-						} else {
-						    $(elements[i]).prepend("<img class='img-type' src='"+currentstartimage+"' width='"+currentwidth+"' height='"+currentheight+"' /></span>").find('object').addClass('mp3-type').attr('title', currenttitle).wrap("<span class='portfolio-mp3-container' style='top: "+(currentheight-20)+"px; margin-top: 0; margin-left: -"+parseInt((currentwidth-10)/2)+"px;'></span>");
-						}
+						$(elements[i]).prepend("<img class='img-type' src='"+currentstartimage+"' width='"+currentwidth+"' height='"+currentheight+"' /></span>").find('object').addClass('mp3-type').attr('title', currenttitle).wrap("<span class='portfolio-mp3-container' style='top: "+(currentheight-20)+"px; margin-top: 0; margin-left: -"+parseInt((currentwidth-10)/2)+"px;'></span>");
 						elementclass = 'portfolio-mp3';
-					} else if ((currenthref.toLowerCase().indexOf('.jpg') > 0) || (currenthref.toLowerCase().indexOf('.png') > 0) || (currenthref.toLowerCase().indexOf('.gif') > 0)) {
+					} else {
 						if ($(elements[i]).find('img').length == 0){
 						      $(elements[i]).find('a').html("<img class='img-type' src='"+currenthref+"' width='"+currentwidth+"' height='"+currentheight+"' alt='' />");
 						}
 						elementclass = 'portfolio-img';
-					} else {
-						if ($(elements[i]).find('img').length == 0){
-						      $(elements[i]).find('a').html("<img class='img-type' src='"+settings.baseDir+"/css/bg-objects.gif' width='"+currentwidth+"' height='"+currentheight+"' alt='' />");
-						}
-						elementclass = 'portfolio-other';
 					}
 					$(elements[i]).find('.img-type, .flv-type, iframe').attr("width", currentwidth).attr("height", currentheight).wrap("<div class='portfolio-object-border' style='border-width: "+borderwidth+"px; width:"+currentwidth+"px;'></div>");
 				}			
@@ -100,14 +84,14 @@ $.fn.multimedia_portfolio = function(options) {
 		};
 		
 		if (elements.length > settings.nbelem) {
-		      portfolio_container.append("<div class='slider-container' style='left: 66px; width:"+parseInt(settings.width-137)+"px'></div>");
-		      portfolio_container.find(".slider-container").append("<div class='ui-slider-1'></div>");
-		      portfolio_container.find(".ui-slider-1").css('width', '100%').append("<div class='ui-slider-handle'></div>");
-		      portfolio_container.find(".ui-slider-1").slider({steps: elements.length*settings.nbelem, start: 0, slide: function(e,ui) {
+		      $(".portfolio-container").append("<div class='slider-container' style='left: 66px; width:"+parseInt(settings.width-137)+"px'></div>");
+		      $(".slider-container").append("<div class='ui-slider-1'></div>");
+		      $(".ui-slider-1").css('width', '100%').append("<div class='ui-slider-handle'></div>");
+		      $(".ui-slider-1").slider({steps: elements.length*settings.nbelem, start: 0, slide: function(e,ui) {
 				    mousewheelposition = (elements.length * ui.value /100);
 				    caroussel_portfolio_vue(mousewheelposition, portfolio, elements, settings, ratio_largeur, true);
 		      }});
-		      portfolio_container.mousewheel(function(event, delta) {
+		      $(".portfolio-container").mousewheel(function(event, delta) {
 						      if (delta > 0) { mousewheelposition+=.3; if(mousewheelposition>elements.length) mousewheelposition = elements.length;
 						      } else if (delta < 0) { mousewheelposition-=.3; if(mousewheelposition<0) mousewheelposition = 0;
 						      }
@@ -129,7 +113,7 @@ $.fn.multimedia_portfolio = function(options) {
 		      });
 		}
 		
-		portfolio_container.find(".portfolio-img a").attr('rel','gallery-'+rel_id).fancybox({'onStart' : function() {portfolio_container.find('.flv-type').css('visibility','hidden');}, 'onClosed': function(){caroussel_portfolio_vue(mousewheelposition, portfolio, elements, settings, ratio_largeur, false);}});
+		$(".portfolio-img a").attr('rel','gallery-'+rel_id).fancybox({'onStart' : function() {$('.flv-type').css('visibility','hidden');}, 'onClosed': function(){caroussel_portfolio_vue(mousewheelposition, portfolio, elements, settings, ratio_largeur, false);}});
 		
 	});
 };
@@ -146,7 +130,7 @@ function caroussel_portfolio_vue(current, portfolio, elements, settings, ratio_l
 		});
 	}
 	portfolio.css('left',(-decalage)+'px');
-	if (!bslider) portfolio.parent().find('.ui-slider-handle').css('left', parseInt((current/elements.length)*100)+'%');
+	if (!bslider) $('.ui-slider-handle').css('left', parseInt((current/elements.length)*100)+'%');
 };
 })(jQuery);
 

@@ -3,11 +3,26 @@
 <BOUCLE_documentsassocies(DOCUMENTS){id_article=#ENV{id}}{doublons}{tous}>
     [(#EXTENSION|strtolower|=={pdf}|oui)
 	    [(#CONFIG{multimediaportfolio/docs_pdf}|=={oui})
-		    <li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT)]</a></li>
+		    <li><a href="#URL_DOCUMENT"
+		 	type="#MIME_TYPE"
+		 	rel="documents_portfolio[-a(#ID_ARTICLE)][-r(#ID_RUBRIQUE)]"
+		 	title="[(#TITRE|attribut_html|couper{80}|sinon{<:info_document:>})]">[(#TITRE|attribut_html|couper{80}|sinon{<:info_document:>})]</a></li>
 	    ]
     ]
     [(#EXTENSION|strtolower|=={pdf}|non)
-	<li><a href="#URL_DOCUMENT" title="[(#TITRE|texte_backend)]">[(#LOGO_DOCUMENT)]</a></li>
+	<li><a href="#URL_DOCUMENT"
+		 	type="#MIME_TYPE"
+		 	rel="documents_portfolio[-a(#ID_ARTICLE)][-r(#ID_RUBRIQUE)]"
+		 	title="[(#TITRE|attribut_html|couper{80}|sinon{<:info_document:>})]">
+				[(#MIME_TYPE|=={application/octet-stream}|non)
+					[(#LOGO_DOCUMENT)]
+				]
+				[(#MIME_TYPE|=={application/octet-stream}|oui)
+					[(#TITRE|attribut_html|couper{80}|sinon{<:info_document:>})]
+						
+				]
+				
+			</a></li>
     ]
 </BOUCLE_documentsassocies>
 </ul>
