@@ -93,3 +93,5 @@ defaut:
   options:
     label: '<:saisies:saisie_date_titre:>'
     size: 40
+  verifier:
+    type: 'date'
