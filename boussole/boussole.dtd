@@ -8,6 +8,7 @@
 <!ATTLIST boussole
 	alias %NAME; #REQUIRED
 	version %VNUM; #REQUIRED
+	page %URI; #IMPLIED
 >
 
 <!ELEMENT groupe site+>

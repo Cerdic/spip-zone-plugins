@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_core' => 'Description du site SPIP-Core',
 	'descriptif_site_spip_demo' => 'Description du site SPIP D&eacute;mo',
 	'descriptif_site_spip_doc' => 'Description du site SPIP Doc',
+	'descriptif_site_spip_edgard' => 'Bonjour, c\'est moi Edgard le petit robot, l\'ami d\'IRC. &Agrave; l\'origine, j\'&eacute;tais un robot qui r&eacute;pondait aux questions fr&eacute;quentes sur le canal IRC de SPIP. Derni&egrave;rement, mes ma&icirc;tres ont d&eacute;cid&eacute; de faire mon coming out sur le net. Me voici donc !
+	<p>Vous pouvez maintenant communiquer des liens comme http://edgard.spip.org/@ticket pour r&eacute;pondre &agrave; des questions fr&eacute;quentes.
+	Je suis donc une FAQ (Frequently Asked Questions) collaborative, &eacute;ditable à l\'aide des crayons. La syntaxe est la suivante : &#171; @question ;r&eacute;ponse &#187;.</p>',
 	'descriptif_site_spip_forum' => 'Description du site SPIP Forums',
 	'descriptif_site_spip_herbier' => 'Description du site L\'Herbier de SPIP',
 	'descriptif_site_spip_info' => 'Description du site SPIP info',
@@ -130,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_core' => 'SPIP Core',
 	'nom_site_spip_demo' => 'SPIP D&eacute;mo',
 	'nom_site_spip_doc' => 'SPIP Doc',
+	'nom_site_spip_edgard' => 'Edgard',
 	'nom_site_spip_forum' => 'SPIP Forums',
 	'nom_site_spip_herbier' => 'L\'Herbier de SPIP',
 	'nom_site_spip_info' => 'SPIP info',
@@ -166,6 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_core' => 'L\'espace de d&eacute;veloppement des versions de SPIP',
 	'slogan_site_spip_demo' => 'Tester la derni&egrave;re version stable de SPIP',
 	'slogan_site_spip_doc' => 'La r&eacute;f&eacute;rence technique du code de SPIP',
+	'slogan_site_spip_edgard' => 'Un coup de bot et ça repart !',
 	'slogan_site_spip_forum' => 'Le forum des utilisateurs de SPIP',
 	'slogan_site_spip_herbier' => 'Une s&eacute;lection de sites remarquables en SPIP',
 	'slogan_site_spip_info' => 'Pour d&eacute;couvrir SPIP et sa communaut&eacute;',
