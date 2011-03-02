@@ -1,13 +1,35 @@
-[
-(#REM) Noter la popularite relative (somme des popularites des articles associes) maxi 
-]<BOUCLE_max(MOTS){popularite article}{id_groupe?}{!par popularite_relative}{0,1}>#SET{max,#POPULARITE_RELATIVE}</BOUCLE_max>[
-(#REM) afficher le nuage
-]<B_tags>
-<ul class="nuage">
-<BOUCLE_tags(MOTS){popularite article>0}{id_groupe?}{par num titre,titre}>
- <li>
-  <span class="frequence">(#POPULARITE_RELATIVE/#GET{max})</span>
-  <a rel="tag" href="#URL_MOT" class="nuage[(#POPULARITE_RELATIVE|nuage_note{#GET{max},10})]">#TITRE</a>
+#SET{max,0}
+<BOUCLE_maxmot(MOTS) {id_groupe=#ENV{id_groupe}}>
+        #SET{pop,0}
+        <BOUCLE_pop(ARTICLES) {id_mot}>
+                [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
+        </BOUCLE_pop>
+        [(#GET{pop}|>{[(#GET{max})]}|oui)
+                [(#SET{max,[(#GET{pop})]})]
+        ]
+</BOUCLE_maxmot>
+
+<ul class="nuage menu-liste">
+<BOUCLE_tags(MOTS){id_groupe=#ENV{id_groupe}}{par num titre,titre}>
+    [(#REM) définir les mot exposés]
+    #SET{expose,''}
+    <BOUCLE_expose(ARTICLES){id_article}{id_mot}{0,1}>
+        #SET{expose,' '}
+    </BOUCLE_expose>
+    [(#ENV{id_mot}|=={#ID_MOT}|oui)
+        #SET{expose,' '}
+    ]
+
+    #SET{pop,0}
+    <BOUCLE_popularite(ARTICLES) {id_mot}>
+        [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
+    </BOUCLE_popularite>
+
+ <li class="menu-entree [(#GET{expose}|oui) expose]">
+  <span class="frequence">
+    [(#GET{pop})/#GET{max}]
+  </span>
+  <a rel="tag" href="#URL_MOT" class="nuage[(#GET{pop}|nuage_note{#GET{max},10})] [(#GET{expose}|oui) on]">#TITRE</a>
  </li>
 </BOUCLE_tags>
 </ul>
