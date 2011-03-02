@@ -42,6 +42,7 @@ function gestion_projets_declarer_tables_principales($tables_principales){
 	
 	$spip_projets_taches = array(
 		"id_tache" 		=> "int(21) NOT NULL",
+		"id_tache_source" 		=> "int(21) NOT NULL",		
 		"id_parent" 		=> "int(21) NOT NULL",	
 		"id_projet" 		=> "int(21) NOT NULL",	
 		"participants"		=> "text NOT NULL",			
@@ -64,7 +65,8 @@ function gestion_projets_declarer_tables_principales($tables_principales){
 	
 	$spip_projets_taches_key = array(
 		"PRIMARY KEY" 	=> "id_tache",
-		"KEY id_parent"	=> "id_projet",	
+		"KEY id_parent"	=> "id_projet",
+		"KEY id_tache_source"	=> "id_tache_source",			
 		);
 		
 	$spip_projets_taches_join = array(

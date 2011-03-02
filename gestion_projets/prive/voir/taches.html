@@ -16,7 +16,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			<BOUCLE_taches(PROJETS_TACHES){par nom}{id_projet}{id_parent=0}{pagination}>
+			<BOUCLE_taches(PROJETS_TACHES){id_projet}{id_parent=0}{statut!=50poubelle}{par statut,nom}{pagination}>
 			<tr>
 				<td>#ID_TACHE</td>			
 				<td><a href="[(#URL_ECRIRE{projets,voir=tache&id_tache=#ID_TACHE})]">#NOM</a></td>
@@ -34,20 +34,25 @@
 				</td>				
 				
 				<td>
-					[(#STATUT|=={complet}|oui)
-						<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_TACHE-tache-incomplet,#SELF}" title="<:gestpro:ouvrir:>"><img src="#CHEMIN{img/coche_16.png}" alt="checked"/></a>
+				[(#AUTORISER{editer,taches}|oui)
+					[(#STATUT|=={20complet}|oui)
+						<a class="ajax" href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-10incomplet,#SELF}" title="<:gestpro:ouvrir:>"><img src="#CHEMIN{img/coche_16.png}" alt="checked"/></a>
 						]
-					[(#STATUT|=={complet}|non)
-						<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_TACHE-tache-complet,#SELF}" title="<:gestpro:cloturer:>"><img src="#CHEMIN{img/case_16.png}" alt="unchecked"/></a>
+					[(#STATUT|=={20complet}|non)
+						<a class="ajax" href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-20complet,#SELF}" title="<:gestpro:cloturer:>"><img src="#CHEMIN{img/case_16.png}" alt="unchecked"/></a>
 						]
-					#ACTIONS	
+					]
+					#ACTIONS
+				[(#AUTORISER{editer,taches}|oui)
+					<a  href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-50poubelle,#SELF}" title="<:gestpro:supprimer:>"><img src="#CHEMIN{img/delete_16.png}" alt="unchecked"/></a>	
+						]
 				</td>						
 			</tr>
 			<B_sous_taches>
 			<tr>
 				<td colspan="8">
 				<div class="liste-elements sous_taches">
-						<strong class="caption"><:gestpro:sous_taches:></strong>
+				<strong class="caption"><:gestpro:sous_taches:></strong>
 				<table class='spip liste sous_liste'>
 				<thead>
 						<tr class='first_row'>
@@ -61,7 +66,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<BOUCLE_sous_taches(PROJETS_TACHES){id_parent=#ID_TACHE}>
+					<BOUCLE_sous_taches(PROJETS_TACHES){statut!=50poubelle}{id_parent=#ID_TACHE}{par statut,nom}>
 					<tr>
 						<td>#ID_TACHE</td>			
 						<td><a href="[(#URL_ECRIRE{projets,voir=tache&id_tache=#ID_TACHE})]">#NOM</a></td>
@@ -79,13 +84,18 @@
 						</td>				
 						
 						<td>
-							[(#STATUT|=={complet}|oui)
-								<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_TACHE-tache-incomplet,#SELF}" title="<:gestpro:ouvrir:>"><img src="#CHEMIN{img/coche_16.png}" alt="checked"/></a>
+						[(#AUTORISER{editer,taches}|oui)
+							[(#STATUT|=={20complet}|oui)
+								<a class="ajax" href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-10incomplet,#SELF}" title="<:gestpro:ouvrir:>"><img src="#CHEMIN{img/coche_16.png}" alt="checked"/></a>
 								]
-							[(#STATUT|=={complet}|non)
-								<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_TACHE-tache-complet,#SELF}" title="<:gestpro:cloturer:>"><img src="#CHEMIN{img/case_16.png}" alt="not_checked"/></a>
+							[(#STATUT|=={20complet}|non)
+								<a class="ajax" href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-20complet,#SELF}" title="<:gestpro:cloturer:>"><img src="#CHEMIN{img/case_16.png}" alt="not_checked"/></a>
 								]
-							#ACTIONS	
+							]		
+							#ACTIONS
+							[(#AUTORISER{editer,taches}|oui)
+								<a  href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-50poubelle,#SELF}" title="<:gestpro:supprimer:>"><img src="#CHEMIN{img/delete_16.png}" alt="unchecked"/></a>	
+								]	
 						</td>						
 					</tr>
 					<BOUCLE_rec(BOUCLE_sous_taches)> </BOUCLE_rec>

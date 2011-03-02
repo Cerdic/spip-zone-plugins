@@ -19,6 +19,14 @@ function definitions_taches($use='',$valeurs=''){
 	//Définition des champs
 
 	$champs=array(
+		'id_tache_source'=>array(
+			'valeur'=>$valeurs['id_tache_source'],
+			'fieldset'=>0,
+			'rang'=>0,
+			'form'=>array(
+				'field'=>'hidden',
+				'name'=>'id_tache_source'
+				)),		
 		'nom'=>array(
 			'valeur'=>$valeurs['nom'],
 			'fieldset'=>0,
@@ -45,7 +53,7 @@ function definitions_taches($use='',$valeurs=''){
 			'fieldset'=>0,	
 			'rang'=>250,		
 			'form'=>array(
-				'field'=>'selection',
+				'field'=>'selection_taches',
 				'name'=>'id_parent',
 				'label'=>_T('gestpro:tache_parente'),
 				'datas'=>$valeurs['taches_projet']
@@ -193,7 +201,7 @@ function formulaires_taches_charger_dist(){
 		// on détermine les sommes des montants estimés et duree estimée des autres tâches du projet	
 		$champs=array('montant_heure','montant_estime','duree_estimee','date_debut','date_fin_estimee');
 		$projet =sql_fetsel($champs,'spip_projets','id_projet='.sql_quote($id_projet));
-		$taches =sql_select('montant_estime,duree_estimee','spip_projets_taches','id_projet='.sql_quote($id_projet));
+		$taches =sql_select('montant_estime,duree_estimee','spip_projets_taches','statut != "50poubelle" AND id_projet='.sql_quote($id_projet));
 		
 		$compteur=array();
 		while($data = sql_fetch($taches)){
@@ -233,7 +241,7 @@ function formulaires_taches_charger_dist(){
 		$val['id_parent']=$id_parent;			
 		}
 		
-	$taches= sql_select('id_tache,nom','spip_projets_taches','id_projet='.sql_quote($id_projet));
+	$taches= sql_select('id_tache,nom','spip_projets_taches','statut != "50poubelle" AND  id_projet='.sql_quote($id_projet));
 	
 	//Les projets existants
 	
@@ -246,7 +254,7 @@ function formulaires_taches_charger_dist(){
 		}	
 	
 	$val['id_projet']=$id_projet;
-	
+	$val['id_tache_source']=_request('id_tache_source');	
 	//Les taches existants du projet
 
 	$val['taches_projet']=array();
@@ -336,38 +344,34 @@ function formulaires_taches_traiter_dist(){
 	$date_fin_estimee = explode('/',$valeurs['date_fin_estimee']);
 	$valeurs['date_fin_estimee']= $date_fin_estimee[2].'-'.$date_fin_estimee[1].'-'.$date_fin_estimee[0];
 	$valeurs['date_creation']= date('Y-m-d G-i-s');
-	$valeurs['statut']= 'incomplet';
+	$valeurs['statut']= '10incomplet';
 	$valeurs['participants']=serialize(_request('participants'));
 	$valeurs['id_projet']=$id_projet;	
+	
+	if ($valeurs['id_parent']>0){
+		$valeurs['id_tache_source'] = sql_getfetsel('id_tache_source','spip_projets_taches','id_tache='.sql_quote($valeurs['id_parent']));
+		}
+	
+	
 	
 
 	// Effectuer des traitements
 
 	//Si il n'ya pas l'id_projet on crée un nouveau
-	if(!$id_tache)	$id_tache=sql_insertq('spip_projets_taches',$valeurs);
+	if(!$id_tache)	{
+		$id_tache=sql_insertq('spip_projets_taches',$valeurs);
+		if(!$valeurs['id_tache_source'] AND $valeurs['id_parent']<1) $valeurs['id_tache_source']=$id_tache;
+		sql_updateq('spip_projets_taches',array('id_tache_source'=>$valeurs['id_tache_source']),'id_tache='.sql_quote($id_tache));
+		}
 		
 	//Sinon on modifie
 	
 	else sql_updateq('spip_projets_taches',$valeurs,'id_tache='.sql_quote($id_tache));
 	
+	// Si le montant réelle ou la duréé réelle sont modifié on actualise les données du projet
 	if(_request('montant_reel') or _request('duree_reelle')){
-		$taches=sql_select('montant_reel,duree_reelle','spip_projets_taches','id_projet='.sql_quote($id_projet));
-	
-		$compteur=array();
-		while($data = sql_fetch($taches)){
-			foreach($data as $champ=>$valeur){
-				$compteur[$champ][]=$valeur;
-				}
-			}
-
-		if(is_array($compteur['montant_reel']))$montant_reel=array_sum($compteur['montant_reel']);
-		if(is_array($compteur['duree_reelle']))$duree_reelle=array_sum($compteur['duree_reelle']);		
-		
-		$val_projet=array(
-			'montant_reel'=>$montant_reel,
-			'duree_reelle'=>$duree_reelle,			
-			);
-		sql_updateq('spip_projets',$val_projet,'id_projet='.sql_quote($id_projet));
+		$actualiser=charger_fonction('actualiser', 'inc');
+		$actualiser($id_projet);
 		}
 	
 	header('Location:'.generer_url_ecrire("projets","voir=projet&id_projet=$id_projet&deplie_taches=true#taches",true));

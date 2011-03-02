@@ -23,16 +23,17 @@
 				<td>
 				[(#DUREE_REELLE)]
 				<td>
-						
-					[(#STATUT|=={complet}|oui)
-						<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_PROJET-projet-incomplet,#SELF}" title="<:gestpro:ouvrir:>"><img src="#CHEMIN{img/coche_16.png}" alt="checked"/></a>
+				[(#AUTORISER{editer,projet}|oui)		
+					[(#STATUT|=={20complet}|oui)
+						<a class="ajax" href="#URL_ACTION_AUTEUR{changer_statut,#ID_PROJET-projet-10incomplet,#SELF}" title="<:gestpro:ouvrir:>"><img src="#CHEMIN{img/coche_16.png}" alt="checked"/></a>
 						]
-					[(#STATUT|=={complet}|non)
-						<a class="ajax" href="#URL_ACTION_AUTEUR{activer,#ID_PROJET-projet-complet,#SELF}" title="<:gestpro:cloturer:>"><img src="#CHEMIN{img/case_16.png}" alt="unchecked"/></a>
+					[(#STATUT|=={20complet}|non)
+						<a class="ajax" href="#URL_ACTION_AUTEUR{changer_statut,#ID_PROJET-projet-20complet,#SELF}" title="<:gestpro:cloturer:>"><img src="#CHEMIN{img/case_16.png}" alt="unchecked"/></a>
 						]	
+					]	
 				</td>
 				<td>
-						<BOUCLE_taches(PROJETS_TACHES){id_projet}/>
+						<BOUCLE_taches(PROJETS_TACHES){id_projet} {statut!=50poubelle}/>
 						#TOTAL_BOUCLE
 						<//B_taches>
 				</td>						

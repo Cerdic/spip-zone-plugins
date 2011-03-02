@@ -215,7 +215,7 @@ function formulaires_projets_traiter_dist($id_projet=''){
 	$date_fin_estimee = explode('/',$valeurs['date_fin_estimee']);
 	$valeurs['date_fin_estimee']= $date_fin_estimee[2].'-'.$date_fin_estimee[1].'-'.$date_fin_estimee[0];
 	$valeurs['date_creation']= date('Y-m-d G-i-s');
-	$valeurs['statut']= 'incomplet';
+	$valeurs['statut']= '10incomplet';
 
 	// Effectuer des traitements
 
