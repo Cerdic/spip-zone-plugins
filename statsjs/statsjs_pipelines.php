@@ -38,21 +38,24 @@ if (!function_exists('balise_SPIP_CRON')) {
 
 
 function statsjs_mouchard() {
-	$urljs = generer_url_public('stats.js', 'callback=dostats');
+	$urljs = generer_url_public('stats.js');
 	$urlhit = generer_url_action('stats');
 	$mouchard = "
 <!-- MOUCHARD STATS SPIP -->
 <script type='text/javascript'>
-function dostats () {
-	var obj = $('meta[name=SPIP.identifier]').attr('content')||'';
-	try {
-		var piwikTracker = Piwik.getTracker('${urlhit}\\x26obj='+obj);
-		piwikTracker.setDocumentTitle(document.title);
-		piwikTracker.trackPageView();
-	} catch( err ) {}
-}
+$(function(){setTimeout(function(){
+  $.ajax({url: '${urljs}', dataType: 'script', cache: true,
+    success: function() {
+      var obj = $('meta[name=SPIP.identifier]').attr('content')||'';
+      try {
+        var piwikTracker = Piwik.getTracker('${urlhit}\\x26obj='+obj);
+        piwikTracker.setDocumentTitle(document.title);
+        piwikTracker.trackPageView();
+      } catch( err ) {}
+    }
+  });
+}, 100);});
 </script>
-<script type='text/javascript' src='${urljs}'></script>
 <noscript><p><img src='${urlhit}' style='border:0' alt='' /></p></noscript>
 <!-- / MOUCHARD -->\n";
 

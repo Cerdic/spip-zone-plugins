@@ -11,7 +11,7 @@
 	<prefix>
 	StatsJS
 	</prefix>
-	<icon>statsjs.png</icon>
+	<icon>statsjs.png</icon><!-- by Sergio Sanchez Lopez http://www.iconfinder.com/icondetails/7554/128/javascript_js_icon -->
 	<options>statsjs_pipelines.php</options>
 	<pipeline>
 		<nom>affichage_final</nom>
