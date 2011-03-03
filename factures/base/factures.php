@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin factures - Facturer avec Spip 2.0
- * Licence GPL (c) 2010
+ * Licence GPL (c) 2010 - 2011
  * par Cyril Marion - Camille Lafitte
  */
 
@@ -29,8 +29,13 @@ function factures_declarer_tables_interfaces($interface){
 	$interface['table_titre']['contacts'] = "CONCAT(nom,' ',prenom) AS titre, '' AS lang";
 	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang";
 
+	// -- traitemnets sur les champs texte
+	$interface['table_des_traitements']['DESIGNATION'][] = _TRAITEMENT_RACCOURCIS;
+
 	return $interface;
 }
+
+
 
 /***********************************************************************************/
 /* DECLARATION DES TABLES PRINCIPALES
