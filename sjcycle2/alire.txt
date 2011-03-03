@@ -49,6 +49,9 @@ V 1.2 :
 V 1.3 :
 - Une noisette pour le Noizetier
 
+V 1.4 :
+- MAJ de la librairie jsycle
+
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
 - Possibilité d'afficher un diapo dans une rubrique à partir des images de la rubrique
