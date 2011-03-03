@@ -24,7 +24,7 @@ function action_changer_statut_dist(){
     		
     		if($projet['id_tache_source'] == $id) sql_updateq('spip_projets_taches',array('statut' =>$statut),'id_projet='.sql_quote($projet['id_projet']).' AND id_tache_source='.sql_quote($projet['id_tache_source']));
     		else{
-    			adapter_dependances($projet['id_projet'],$statut);
+    			adapter_dependances($id,$statut);
     			}
     		
 		$actualiser=charger_fonction('actualiser', 'inc');
@@ -33,7 +33,7 @@ function action_changer_statut_dist(){
     }
     
 function adapter_dependances($id_tache,$statut){
-	$enfants=sql_fetsel('id_tache','spip_projets_taches','id_parent='.sql_quote($id_tache));
+	$enfants=sql_select('id_tache','spip_projets_taches','id_parent='.sql_quote($id_tache));
 	if($enfants){
 		sql_updateq('spip_projets_taches',array('statut' => $statut),'id_parent='.sql_quote($id_tache));
 		while ($enfant=sql_fetch($enfants)){
