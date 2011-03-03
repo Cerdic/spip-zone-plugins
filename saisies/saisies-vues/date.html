@@ -1,1 +1,3 @@
-[<span class="date">(#ENV{valeur})</span>]
+#SET{valeur,#ENV{valeur}}
+[(#ENV{valeur}|strpos{-}|oui) #SET{valeur,#ENV{valeur}|affdate{'d/m/Y'}]
+[<span class="date">(#GET{valeur})</span>]
