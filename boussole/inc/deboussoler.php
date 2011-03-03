@@ -104,23 +104,23 @@ function boussole_supprimer($aka_boussole) {
  * @param string $xml
  * @return string
  */
-function boussole_localiser_xml($xml, $mode) {
+function boussole_localiser_xml(&$xml, $mode) {
 
 	include_spip('inc/distant');
 	$retour = '';
 
-	// On calcul une url absolue dans tous les cas
+	// La boussole SPIP
 	if ($mode == 'standard')
-		// La boussole SPIP
-		$url = url_absolue('http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole_spip.xml');
+		$xml = url_absolue('http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml');
+
+	// On calcul une url absolue dans tous les cas
+	if (preg_match(",^(http|ftp)://,",$xml))
+		// Mode standard ou mode perso : on a passe une url
+		$url = url_absolue($xml);
 	else
-		if (preg_match(",^(http|ftp)://,",$xml))
-			// Mode perso : on a passe une url
-			$url = url_absolue($xml);
-		else
-			// Mode perso : on a passe un fichier seul, 
-			// on calcule l'url sachant que le fichier doit etre dans a la racine
-			$url = url_absolue(find_in_path($xml));
+		// Mode perso : on a passe un fichier seul, 
+		// on calcule l'url sachant que le fichier doit etre dans a la racine
+		$url = url_absolue(find_in_path($xml));
 
 	// On verifie que le fichier existe
 	if (recuperer_page($url, false, false))
