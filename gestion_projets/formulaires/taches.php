@@ -53,10 +53,10 @@ function definitions_taches($use='',$valeurs=''){
 			'fieldset'=>0,	
 			'rang'=>250,		
 			'form'=>array(
-				'field'=>'selection_taches',
+				'field'=>'selection',
 				'name'=>'id_parent',
 				'label'=>_T('gestpro:tache_parente'),
-				'datas'=>$valeurs['taches_projet']
+				'datas'=>$valeurs['taches_projet'],
 				),			
 			),
 		'descriptif'=>array(

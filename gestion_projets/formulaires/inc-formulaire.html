@@ -6,6 +6,7 @@
 			<ul>
 				<BOUCLE_champs(POUR){tableau (#ENV{formulaire}|table_valeur{#CLE})}{par cle}>
 					#SET{valeurs,#VALEUR|table_valeur{form}}
+					[(#GET{valeurs}|table_valeur{options}|table_valeur{id_projet})]
 					[(#SAISIE{
 					[(#GET{valeurs}|table_valeur{field})],
 					[(#GET{valeurs}|table_valeur{name})],

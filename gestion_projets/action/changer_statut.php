@@ -22,15 +22,26 @@ function action_changer_statut_dist(){
     	
     		$projet=sql_fetsel('id_projet,id_tache_source','spip_projets_taches',array('id_tache='.sql_quote($id)));
     		
-    		if($projet['id_tache_source'] == $id) sql_updateq('spip_projets_taches',array('statut' => $statut),'id_projet='.sql_quote($projet['id_projet']).' AND id_tache_source='.sql_quote($projet['id_tache_source']));
+    		if($projet['id_tache_source'] == $id) sql_updateq('spip_projets_taches',array('statut' =>$statut),'id_projet='.sql_quote($projet['id_projet']).' AND id_tache_source='.sql_quote($projet['id_tache_source']));
     		else{
-    		
-    		}
+    			adapter_dependances($projet['id_projet'],$statut);
+    			}
     		
 		$actualiser=charger_fonction('actualiser', 'inc');
-		$actualiser($projet['id_projet']);
+		$actualiser($id);
     		}
     }
+    
+function adapter_dependances($id_tache,$statut){
+	$enfants=sql_fetsel('id_tache','spip_projets_taches','id_parent='.sql_quote($id_tache));
+	if($enfants){
+		sql_updateq('spip_projets_taches',array('statut' => $statut),'id_parent='.sql_quote($id_tache));
+		while ($enfant=sql_fetch($enfants)){
+			adapter_dependances($enfant['id_tache'],$statut);
+			}
+		}
+	else return;
+}
     
     
 ?>
