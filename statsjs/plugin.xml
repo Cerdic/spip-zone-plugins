@@ -1,0 +1,21 @@
+<plugin>
+	<nom>StatsJS</nom>
+	<auteur>Fil</auteur>
+	<version>0.1</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Compter les visites via un mouchard javascript
+	</description>
+	<prefix>
+	StatsJS
+	</prefix>
+	<icon>statsjs.png</icon>
+	<options>statsjs_pipelines.php</options>
+	<pipeline>
+		<nom>affichage_final</nom>
+	</pipeline>
+	<categorie>outil</categorie>
+	<chemin dir='' />
+</plugin>
