@@ -740,7 +740,7 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 	
 	try {	
 	
-	$tresultat['id'] = $id_notice;
+		  $tresultat['id'] = $id_notice;
 		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
 		  $cpt=0;
 		  if (is_array($r)) {
