@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Gestion Projets Timetracker</nom>
+	<auteur>Rainer Müller</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.0.1</version>
+	<version_base>0.0.1</version_base>	
+	<description>
+		Timetracker pour le plugin gestion de projets
+	</description>
+	<etat>dev</etat>
+	<prefix>gestion_projets_timetracker</prefix>
+	<icon>img/logo_32.png</icon>
+	<install>base/projets_tt_install.php</install>	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/projets_tt_tables_principales.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="saisies" version="[1.8.12;]" />	
+	<necessite id="spip_bonux" version="[2.2.15;]" />	
+	<necessite id="gestion_projets" version="[0.1.7;]" />		
+</plugin>
