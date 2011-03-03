@@ -11,7 +11,7 @@
 <p class="traductions">
 	<BOUCLE_traductions(ARTICLES) {traduction} {par lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
 	<span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR"[ class="(#EXPOSE)"]>
-		[(#EXPOSE{'',<a href="#URL_ARTICLE" rel="alternate" hreflang="#LANG"[ title="(#TITRE|attribut_html|couper{80})"]>})][(#LANG|traduire_nom_langue)]#EXPOSE{'',</a>}</span>
+		[(#EXPOSE{'',<a href="#URL_ARTICLE" rel="alternate" lang="#LANG"[ title="(#TITRE|attribut_html|couper{80})"]>})][(#LANG|traduire_nom_langue)]#EXPOSE{'',</a>}</span>
 	]</BOUCLE_traductions>
 </p>
 </B_traductions>

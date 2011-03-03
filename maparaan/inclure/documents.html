@@ -5,11 +5,19 @@
 		<h3><:info_portfolio:></h3>
 	</div>
 	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article?}{id_rubrique?} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{vu=non}>[
+	
+	#SET{taille, 100}
+	#SET{ratio_x,#LARGEUR|div{#GET{taille}}}
+	#SET{ratio_y,#HAUTEUR|div{#GET{taille}}}
+	#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+		
 	<a href="(#URL_DOCUMENT)"
 		 type="#MIME_TYPE"
 		 rel="documents_portfolio[-a(#ID_ARTICLE)][-r(#ID_RUBRIQUE)]"
-	[ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
-		|image_reduire{0,100}
+	[ title="(#TITRE|attribut_html|couper{80})"]>
+		[(#FICHIER
+		|image_reduire_par{#GET{ratio}}
+		|image_recadre{#GET{taille},#GET{taille},center}
 		|inserer_attribut{class,spip_logos}
 		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
 	]</BOUCLE_documents_portfolio>

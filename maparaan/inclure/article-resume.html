@@ -8,7 +8,14 @@
 <BOUCLE_articles(ARTICLES) {id_article} {statut?}>
 
 	<div class="padd-post-item padd-post-item-result">
-		[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{115}|sinon{<div class="pas-de-logo-article-resume"></div>})</a>]
+		#SET{largeur,(#LOGO_ARTICLE_RUBRIQUE|hauteur)}
+		#SET{hauteur,(#LOGO_ARTICLE_RUBRIQUE|hauteur)}
+		#SET{taille, 115}
+		#SET{ratio_x,#GET{largeur}|div{#GET{taille}}}
+		#SET{ratio_y,#GET{hauteur}|div{#GET{taille}}}
+		#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+		[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE||image_reduire_par{#GET{ratio}}|image_recadre{115,115,center}|sinon{<div class="pas-de-logo-article-resume"></div>})</a>]
+		
 		<div class="padd-post-item-title">
 			[<div class="info-publi" title="[(#DATE|affdate_heure)]">(#DATE|affdate_jourcourt)</div>]
 			<h2><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h2>
