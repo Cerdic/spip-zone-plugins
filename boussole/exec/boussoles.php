@@ -60,6 +60,7 @@ function afficher_boussole($alias, $boussole) {
 	$version = $boussole['version'];
 	$nbr_sites = $boussole['nbr_sites'];
 	$maj = $boussole['maj'];
+	$demo = $boussole['demo'];
 
 	$boite = pipeline ('boite_infos', 
 				array('data' => '', 'args' => array('type'=>'boussole', 
@@ -81,7 +82,7 @@ function afficher_boussole($alias, $boussole) {
 	$actions = '';
 	$haut = "<div class='bandeau_actions'>$actions</div>" . gros_titre($nom, '' , false);
 
-	$onglet_contenu = afficher_corps_boussole($alias, $slogan, $descriptif, $url);
+	$onglet_contenu = afficher_corps_boussole($alias, $slogan, $descriptif, $url, $demo);
 	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :"")
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'boussoles', 'alias' => $alias),'data'=>''));
 
@@ -112,10 +113,10 @@ function afficher_autres_boussoles($alias) {
 	return $bloc;
 }
 
-function afficher_corps_boussole($alias, $slogan, $descriptif, $url) {
+function afficher_corps_boussole($alias, $slogan, $descriptif, $url, $demo) {
 	$corps = '';
 	$type = 'boussole';
-	$contexte = array('alias' => $alias, 'slogan'=>$slogan, 'descriptif'=>$descriptif, 'url'=>$url);
+	$contexte = array('alias' => $alias, 'slogan'=>$slogan, 'descriptif'=>$descriptif, 'url'=>$url, 'demo'=>$demo);
 	$fond = recuperer_fond("prive/contenu/$type",$contexte);
 	// Permettre a d'autres plugins de faire des modifs ou des ajouts
 	$fond = pipeline('afficher_contenu_objet',

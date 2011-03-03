@@ -71,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ariane_separateur' => 'S&eacute;parateur&nbsp;:',
 	'label_boussole' => 'Boussole &agrave; afficher',
 	'label_cartouche_boussole' => 'Afficher le cartouche de la boussole ?',
+	'label_demo' => 'Retrouvez la page de d&eacute;mo de cette boussole &agrave; l\'adresse',
 	'label_descriptif' => 'Descriptif',
 	'label_div_class' => 'Classe du div englobant',
 	'label_div_id' => 'Id du div englobant',

@@ -10,3 +10,8 @@
 	<div class="label"><:label_descriptif:></div>
 	<div dir="#LANG_DIR" class="texte">(#ENV{descriptif})</div>
 </div>]
+[<br /><div class="champ contenu_texte[ (#ENV*{demo}|strlen|?{'',vide})]">
+	<div dir="#LANG_DIR" class="texte">
+		<:boussole:label_demo:>&nbsp;<a[ href="(#ENV{demo})"]>(#ENV{demo})</a>
+	</div>
+</div>]
