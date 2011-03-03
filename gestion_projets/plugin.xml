@@ -2,10 +2,14 @@
 	<nom>Gestion Projets</nom>
 	<auteur>Rainer Müller</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1.6</version>
-	<version_base>0.1.6</version_base>	
+	<version>0.1.7</version>
+	<version_base>0.1.7</version_base>	
 	<description>
-		Début d'un gestionnaire de projet, pas encore fonctionnel
+		Gestionnaitre de projet. 
+		
+		Plugin de base sur le quelles peuvent se greffer d'autre plugins. 
+		
+		Disponible pour le moment :gestion_projets_timetracker (en dev)
 	</description>
 	<etat>dev</etat>
 	<prefix>gestion_projets</prefix>
