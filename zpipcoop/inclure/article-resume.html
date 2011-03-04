@@ -1,23 +1,70 @@
-[(#REM)
-
-  Squelette Presentation d'un article dans une liste
-  (c) 2009 Zpip
-  Distribue sous licence GPL
-
-]
-<BOUCLE_articles(ARTICLES) {id_article} {statut?}>
-<li class="item hentry">
-	<h3 class="h3 entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#LOGO_ARTICLE_RUBRIQUE||image_reduire{150,100})]#TITRE</a></h3>
-	[(#PLUGIN{notation}|oui)#FORMULAIRE_NOTATION]
-	<div class="info-publi">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>][<span class="sep">, </span><span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>]</div>
-	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
-	<div class="meta-publi">
-	<a class="lire-la-suite" href="#URL_ARTICLE"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>#TITRE</em></span></a>
-	<BOUCLE_nb_commentaires(FORUMS) {id_article}{plat} />	[(#TOTAL_BOUCLE|oui)
-		<span class="sep">|</span>
-		<a[ href="(#URL_ARTICLE|ancre_url{forum})"] class="nb_commentaires">[(#TOTAL_BOUCLE)]&nbsp;[(#TOTAL_BOUCLE|=={1}|?{<:zpip:commentaire:>,<:zpip:commentaires:>})]</a>
-		]
-	<//B_nb_commentaires>
+[(#REM) Re pris du theme maparaan ]
+<?php if ($auteur_session) { ?>
+	[(#REM)  Liste les plus populaires ]
+	<B_hitparade>
+	<div class="padd-box padd-footer-popular-posts">
+	  <h2><:maparaan:articles_populaires:></h2>
+	  <div class="padd-interior">
+		<ul>
+		  <BOUCLE_hitparade(ARTICLES){id_rubrique?}{!par popularite}{0,5}>
+			<li><span class="padd-wrap"><a href="#URL_ARTICLE">[(#TITRE)]</a>
+			  <B_auteurhitparade>
+			  <:maparaan:par:>
+			  <BOUCLE_auteurhitparade(AUTEURS){id_article}{', '}>#NOM</BOUCLE_auteurhitparade>
+			  </B_auteurhitparade>
+			  [(#POPULARITE|>{0}|oui) &#40;#POPULARITE %&#41;]
+			</span></li>
+		  </BOUCLE_hitparade>
+		</ul>
+	  </div>
 	</div>
-</li>
-</BOUCLE_articles>
+	</B_hitparade>
+	  
+	[(#REM)  Liste les plus r�cents commentaires ]
+	<B_comsrecents>
+	<div class="padd-box padd-footer-recent-comments">
+	  <h2><:maparaan:commentaires_recents:></h2>
+	  <div class="padd-interior">
+		<ul class="padd-comments-recent">
+		  <BOUCLE_comsrecents(FORUMS){!par date}{0,5}>
+			<li class="padd-comments-recent"><span class="padd-wrap">[(#DATE*|affdate_court)] -
+			[(#ID_AUTEUR|oui)
+			<a href="#URL_AUTEUR">#NOM</a>
+			]
+			[(#ID_AUTEUR|non)
+			  #NOM
+			]
+			<:maparaan:sur:> <a href="#URL_FORUM">[(#TITRE)]</a></span></li>
+		  </BOUCLE_comsrecents>
+		<!--<li class="padd-comments-recent"><span class="padd-wrap">' . sprintf(__('%1$s on %2$s'), get_comment_author_link(), '<a href="'. get_comment_link($comment->comment_ID) . '">' . get_the_title($comment->comment_post_ID) . '</a>') . '</span></li>
+		--></ul>
+	  </div>
+	</div>
+	</B_comsrecents>
+
+	[(#REM)  Pages / PLUGIN MENUS ]
+	[(#PLUGIN{menus}|oui)
+	  [(#INCLURE{fond=inclure/menu, env, identifiant=piednav}|oui)
+	  <div class="padd-box padd-box-small padd-footer-pages">
+		<h2><:maparaan:liens:></h2>
+		<div class="padd-interior">
+		  <div id="nav"><INCLURE{fond=inclure/menu, env, identifiant=piednav}></div>
+		</div>
+	  </div>
+	  ]
+	]
+
+	<B_sites>
+	<div class="padd-box padd-box-small padd-footer-blogroll">
+	  <h2><:maparaan:sites:></h2>
+	  <div class="padd-interior">
+		<ul>
+		  <BOUCLE_sites(SITES){par nom_site}>
+			<li class="padd-comments-recent"><span class="padd-wrap"><a href="[(#ID_SYNDIC|generer_url_entite{site})]">[(#NOM_SITE|couper{30})]</a></span></li>
+		  </BOUCLE_sites>
+		</ul>
+	  </div>
+	</div>
+	</B_sites>
+	<div class="nettoyeur"></div>
+<?php } ?>
