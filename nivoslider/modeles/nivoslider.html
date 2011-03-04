@@ -1,17 +1,8 @@
-<?php
-/* * * * * * * * * * * * * * * * * * * *
- * 
- *     - NivoSlider pour SPIP -
- * 
- * modele pour l'inclusion d'un nivoslider
- * 
- * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 28/02/2011
- * 
- */
-?>
+[(#REM) L'appel depuis un article se fait par < nivosliderXX >, alors id_nivoslider=XX
+ ou par un modele CROCHET(# MODELE{nivoslider}{id_nivoslider=XX})CROCHET , alors id_article=XX
+]
 
-[(#SET{param,[(#ENV{id}|sinon{#ID_ARTICLE})] })]
+[(#SET{param,[(#ENV{id_nivoslider,0})]})]
 
 <B_doc>
 <div id="slider" class="nivoSlider">
