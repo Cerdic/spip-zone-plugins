@@ -6,7 +6,7 @@
 		  La date est proposée au format jj/mm/aaaa
 ]
 #SET{valeur,#ENV{valeur,#ENV{defaut}}}
-[(#GET{valeur}|strpos{-}|oui) #SET{valeur,#GET{valeur}|affdate{'d/m/Y'}]
+[(#GET{valeur}|match{([0-9]{4})-([0-9]{2})-([0-9]{2})}|oui) #SET{valeur,#GET{valeur}|affdate{'d/m/Y'}]
 [(#INCLURE{	fond=saisies/input,
 				env,
             valeur=#GET{valeur},
