@@ -1,0 +1,39 @@
+<plugin>
+	<nom>Personnaliser l'espace privé</nom>
+	<auteur>Sébastien Zamith</auteur>
+	<icon>images/priveperso-24.png</icon>
+	<version>0.1</version>
+	<licence>GNU/GPL v3</licence>
+	<etat>test</etat>
+	<description>Personnalisation de l'espace priv&eacute; par rubriques.</description>
+	<lien>http://www.spip-contrib.net/</lien>
+	<install>base/install_priveperso.php</install>
+	<prefix>priveperso</prefix>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0;]" />
+	<onglet id='priveperso' parent='configuration'>
+		<url>priveperso</url>
+   	<icone>images/priveperso-24.png</icone>
+    	<titre>priveperso:Prive_perso</titre>
+	</onglet>
+	<pipeline>
+       <nom>declarer_tables_principales</nom>
+       <inclure>base/pipelines_priveperso.php</inclure>
+       <action>init_tables_principales</action>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_interfaces</nom>
+        <inclure>base/pipelines_priveperso.php</inclure>
+        <action>init_tables_interfaces</action>
+	</pipeline>
+		<pipeline>
+		<nom>exec_init</nom>
+		<inclure>base/pipelines_priveperso.php</inclure>
+	</pipeline>
+
+	<bouton id='priveperso' parent='bando_configuration'>
+		<icone>images/priveperso-24.png</icone>
+		<titre>priveperso:Prive_perso</titre>
+	</bouton>
+
+</plugin>
