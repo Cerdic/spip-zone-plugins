@@ -91,8 +91,8 @@
 							[(#STATUT|=={20complet}|non)
 								<a class="ajax" href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-20complet,#SELF}" title="<:gestpro:cloturer:>"><img src="#CHEMIN{img/case_16.png}" alt="not_checked"/></a>
 								]
-							]		
-							#ACTIONS
+							]
+							[(#PIPELINE{actions_projets,#ARRAY{id_tache,#ID_TACHE,}})]
 							[(#AUTORISER{editer,taches}|oui)
 								<a  href="#URL_ACTION_AUTEUR{changer_statut,#ID_TACHE-tache-50poubelle,#SELF}" title="<:gestpro:supprimer:>"><img src="#CHEMIN{img/delete_16.png}" alt="unchecked"/></a>	
 								]	

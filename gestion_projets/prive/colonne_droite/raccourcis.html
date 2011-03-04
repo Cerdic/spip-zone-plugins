@@ -1,6 +1,6 @@
 [(#ENV{voir}|oui)
 <div>
-<a href="[(#URL_ECRIRE{projets})]" title="<:gestpro:retour:>  <:gestpro:gestion_projets:>"><img src="#CHEMIN{img/logo_32.png}"  alt="<:gestpro:projets:>"/></a>
+<a href="[(#URL_ECRIRE{projets})]" title="<:gestpro:retour:>  <:gestpro:gestion_projets:>"><img src="#CHEMIN{img/logo_projet_32.png}"  alt="<:gestpro:projets:>"/></a>
 </div>]
 
 
@@ -10,7 +10,7 @@
 <BOUCLE_tache(PROJETS_TACHES){id_tache}>
 <div class="titre"><b><:gestpro:projet:></b></div>
 <div>
-	<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,projet}|parametre_url{id_projet,#ID_PROJET})]" title="<:gestpro:retour:>  <:gestpro:projet:>"><img src="[(#CHEMIN{img/projet_32.png})]"  alt="<:gestpro:projet:>"/></a>
+	<a href="[(#URL_ECRIRE{projets}|parametre_url{voir,projet}|parametre_url{id_projet,#ID_PROJET})]" title="<:gestpro:retour:>  <:gestpro:projet:>"><img src="[(#CHEMIN{img/logo_projet_32.png})]"  alt="<:gestpro:projet:>"/></a>
 </div>
 
 [(#AUTORISER{creer,projet})
