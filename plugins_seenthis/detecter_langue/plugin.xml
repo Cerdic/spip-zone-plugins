@@ -9,7 +9,7 @@
 		et indique la langue dans laquelle ce texte est rédigé.
 	</description>
 	<prefix>detecter_langue</prefix>
-	<fonctions>detecter_langue_fonctions.php</fonctions>
+	<options>detecter_langue_fonctions.php</options>
 	<necessite id="SPIP" version="[2.0.0;)" />
 </plugin>
 
