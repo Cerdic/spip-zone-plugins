@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Détecter la langue du texte</nom>
+	<auteur>ARNO* / [Seenthis.net->http://seenthis.net]</auteur>
+	<version>1</version>
+	<etat>stable</etat>
+	<licence>GPL</licence>	
+	<description>
+		Ajoute la fonction <code>detecter_langue($texte)</code>, qui analyse le <code>$texte</code> 
+		et indique la langue dans laquelle ce texte est rédigé.
+	</description>
+	<prefix>detecter_langue</prefix>
+	<fonctions>detecter_langue_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.0.0;)" />
+</plugin>
+
