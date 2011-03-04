@@ -97,6 +97,15 @@
 	[<itunes:explicit>(#EXPLICIT)</itunes:explicit>]
 	<media:thumbnail url="(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)" />]
 	#MODELE{licence,id_licence=#ID_LICENCE,modele_type=mrss,cacher_defaut=oui}
+	<BOUCLE_point(GIS?){id_article}{0,1}>
+	<media:location[ description="(#TITRE|texte_script)"]>
+		<georss:where>
+			<gml:Point>
+				<gml:pos>#LAT #LON</gml:pos>
+			</gml:Point>
+		</georss:where>
+	</media:location>
+	</BOUCLE_point>
 	</BOUCLE_article>
 </item>
 </B_article>
