@@ -17,5 +17,6 @@
 		<nom>affichage_final</nom>
 	</pipeline>
 	<categorie>outil</categorie>
+	<lien>http://www.spip-contrib.net/3753</lien>
 	<chemin dir='' />
 </plugin>
