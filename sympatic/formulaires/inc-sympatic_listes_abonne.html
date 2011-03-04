@@ -1,0 +1,11 @@
+<li class="editer editer_listes saisie_checkbox">
+	<p class="explication"><:sympatic:explication_listes:></p>
+	<BOUCLE_listes(SYMPATIC_LISTES){par num titre, titre}>
+	<div class="choix">
+		<input type="checkbox" name="listes[#ID_LISTE]" class="checkbox" id="champ_listes_#COMPTEUR_BOUCLE"
+		<BOUCLE_test(SYMPATIC_ABONNES){id_liste}{id_auteur=#ENV{id_auteur}}> checked="checked"</BOUCLE_test>
+		value="#ID_LISTE" />
+		<label for="champ_listes_#COMPTEUR_BOUCLE">[<strong>(#TITRE|supprimer_numero)</strong>][ : (#DESCRIPTIF*)]</label>
+	</div>
+	</BOUCLE_listes>
+</li>

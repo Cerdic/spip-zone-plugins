@@ -1,0 +1,9 @@
+<li class="editer editer_listes saisie_selection">
+	<label for="liste"><:sympatic:label_importer_liste:></label>
+	<select name="liste" id="liste">
+		<option value=""></option>
+	<BOUCLE_listes(SYMPATIC_LISTES){par num titre, titre}>
+		<option value="#ID_LISTE">[(#TITRE|supprimer_numero)]</option>
+	</BOUCLE_listes>
+	</select>
+</li>

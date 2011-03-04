@@ -1,0 +1,22 @@
+#CACHE{0}
+<B_listes>
+<div class="cadre cadre-liste">
+	<table width='100%' cellpadding='4' cellspacing='0' border='0'>
+		<BOUCLE_listes(SYMPATIC_LISTES){par titre}{pagination 10}>
+		<tr class="tr_liste">
+			<td>[#(#ID_LISTE)]</td>
+			<td>
+				[<a href="(#URL_ECRIRE{sympatic_edit}|parametre_url{id_liste,#ID_LISTE})">#TITRE</a>]
+			</td>
+			<td>
+				<BOUCLE_abos(SYMPATIC_ABONNES){id_liste} />[<a href="[(#URL_ECRIRE{sympatic_abonnes}|parametre_url{id_liste,#ID_LISTE})]">(#TOTAL_BOUCLE|singulier_ou_pluriel{sympatic:abonnes_un,sympatic:abonnes_nb}|sinon{<:sympatic:abonne_0:>})</a>]<//B_abos>
+			</td>
+			<td class='action'>[(#AUTORISER{supprimer,sympatic,#ID_LISTE}|oui)
+				[(#BOUTON_ACTION{<:sympatic:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_sympatic,#ID_LISTE,#SELF},ajax,<:sympatic:supprimer_confirmation:>})]
+			]</td>
+		</tr>
+		</BOUCLE_listes>
+	</table>
+	[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_listes>

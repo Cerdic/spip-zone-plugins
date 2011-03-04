@@ -1,0 +1,46 @@
+<plugin>
+	<nom>Sympatic</nom>
+	<auteur>b_b</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<prefix>sympatic</prefix>
+	<icon>images/sympatic.png</icon>
+	<description>Gestion des abonnements à des listes sympa depuis SPIP.</description>
+	<install>base/sympatic_upgrade.php</install>
+	<bouton id='sympatic_tous' parent='naviguer'>
+	    <icone>images/sympatic-24.png</icone>
+	    <titre>sympatic:icone_sympatic_tous</titre>
+	</bouton>
+	<bouton id='bando_sympatic_tous' parent='bando_edition'>
+		<url>sympatic_tous</url>
+	    <icone>images/sympatic-16.png</icone>
+	    <titre>sympatic:icone_sympatic_tous</titre>
+	</bouton>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/sympatic.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/sympatic.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/sympatic.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/sympatic_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>sympatic_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>sympatic_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.8;]' />
+	<necessite id="saisies" version="[1.1;]" />
+</plugin>

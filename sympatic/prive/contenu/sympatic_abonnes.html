@@ -1,0 +1,16 @@
+#CACHE{0}
+<B_abos>
+<div class="cadre cadre-liste">
+	<table width='100%' cellpadding='4' cellspacing='0' border='0'>
+		<BOUCLE_abos(AUTEURS){id_liste}{par nom}{pagination 150}>
+		<tr class="tr_liste">
+			<td>[#(#ID_AUTEUR)]</td>
+			<td>[(#NOM)]</td>
+			<td>[(#EMAIL)]</td>
+			<td class='action'></td>
+		</tr>
+		</BOUCLE_abos>
+	</table>
+	[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_abos>
