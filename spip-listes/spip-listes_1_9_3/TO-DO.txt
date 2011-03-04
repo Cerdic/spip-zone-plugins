@@ -6,6 +6,7 @@
 
 TO-DO:
 
++ permettre de forcer le mode debug qui n'est pour l'instant accessible que via le lan.
 
 Si supprimer courrier, supprimer documents attachés ?
 
