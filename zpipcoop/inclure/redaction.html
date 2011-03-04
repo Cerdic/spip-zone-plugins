@@ -4,7 +4,7 @@
 	<ul class="liste-items">
 	[(#REM) Concernant les articles]
 	[(#ENV{id_article}|oui)[(#ENV{id_article}|=={oui}|non)[(#AUTORISER{modifier, article, #ID_ARTICLE})
-	[(#ENV{page_article-edit}|oui)<li class="item"><a href="[(#URL_PAGE{articles_edit,id_article=#ID_ARTICLE,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_ARTICLE})]" class="edit" title="<:zpipcoop:editer_message|attribut_html:>"><:zpipcoop:editer_message:></a></li>]]]]
+	[(##ENV{page}|=={sommaire}|?{' on',' '})<li class="item"><a href="[(#URL_PAGE{articles_edit,id_article=#ID_ARTICLE,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_ARTICLE})]" class="edit" title="<:zpipcoop:editer_message|attribut_html:>"><:zpipcoop:editer_message:></a></li>]]]]
 	[(#AUTORISER{ecrire})<li class="item"><a href="[(#URL_PAGE{articles_edit,id_article=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,[(#URL_PAGE{articles_page})]})]" class="add" title="<:zpipcoop:nouveau_message|attribut_html:>"><:zpipcoop:nouveau_message:></a></li>]
 
 	[(#REM) Consernant les breves]
