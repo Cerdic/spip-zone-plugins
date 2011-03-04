@@ -1,30 +1,32 @@
 <plugin>
-	<nom>
-		Nivo Slider
-	</nom>
+	<nom>Nivo Slider</nom>
 	<auteur>
-		[Grégory Pascal->http://www.spip-contrib.net/ngombe] basé sur [Nivo Slider v2.4->http://nivo.dev7studios.com/]<br/>
-		<br/>
-		Distribu&#233; sous licence GNU/GPL
+		[Grégory Pascal->http://www.spip-contrib.net/ngombe]
 	</auteur>
-	<version>
-		0.0.1
-	</version>
-	<etat>
-		test
-	</etat>
+	<version>0.0.2</version>
+	<etat>test</etat>
 	<description>
-		Affiche un diaporama en JQuery.<br/>
- 		<h4>[Configuration->.?exec=cfg&amp;cfg=nivoslider]</h4>
+Diaporama param&#233;trable pour Spip.<br/>Bas&#233; sur la librairie javascript <a href="http://nivo.dev7studios.com/" title="dev7studio">Nivo Slider</a> et le plugin <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+
+	<h4>[Configuration->.?exec=cfg&amp;cfg=nivoslider]</h4>
 	</description>
-		<icon>img_pack/logo.png</icon>
-	<prefix>
-	nivoslider
-	</prefix>
+		<icon>img_pack/nivoslider-32.png</icon>
+	<prefix>nivoslider</prefix>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>nivoslider_pipelines.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>nivoslider_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>nivoslider_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id='cfg' version='[1.0.4;]' />
+	<necessite id='cfg' version='[1.0.0;]' />
+	<categorie>multimedia</categorie>
 </plugin>
