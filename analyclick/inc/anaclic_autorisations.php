@@ -15,12 +15,19 @@
 
 function anaclic_autoriser(){}
 
+/** Affichage des statistiques */
 function autoriser_statistiques_anaclic_bouton_dist($faire, $type, $id, $qui, $opt) 
 {	// Les memes que pour les stats
     return autoriser('voirstats', $type, $id, $qui, $opt);
 }
 
-// Mettre dans edition si les stats ne sont pas actives
+/** Pour le plugin bandeau */
+function autoriser_statistiques_anaclic_bando_bouton_dist($faire, $type, $id, $qui, $opt) 
+{	// Les memes que pour les stats
+    return autoriser('voirstats', $type, $id, $qui, $opt);
+}
+
+/** Mettre dans edition si les stats ne sont pas actives */
 function autoriser_statistiques_anaclic_nav_bouton_dist($faire, $type, $id, $qui, $opt) 
 {	return ($GLOBALS['meta']['activer_statistiques']!='oui' && autoriser('statistiques_anaclic_bouton', $type, $id, $qui, $opt));
 }

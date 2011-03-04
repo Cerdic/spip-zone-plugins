@@ -33,6 +33,11 @@
 		<icone>images/statistiques-24.gif</icone>
 		<titre>anaclic:statistiques_documents</titre>
 	</bouton>
+	<bouton id="statistiques_anaclic_bando" parent='bando_reactions'>
+		<icone>images/statistique-16.png</icone>
+		<url>statistiques_anaclic</url>
+		<titre>anaclic:statistiques_documents</titre>
+	</bouton>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
