@@ -5,6 +5,4 @@
 ]#HTTP_HEADER{'Content-Type: text/javascript'}
 #CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Vary: Accept-Encoding'}
-[(#INCLURE{javascript/piwik.js}|compacte_js)]
-
-[(#ENV{callback}|sinon{dostats})();]
+[(#INCLURE{javascript/piwik.mini.js}|compacte_js)]

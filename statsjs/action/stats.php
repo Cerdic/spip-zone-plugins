@@ -24,6 +24,7 @@ function action_stats() {
 function do_stats() {
 	// attention a un bug de piwik http://dev.piwik.org/trac/ticket/2115
 	// (corrige en piwik 1.2)
+	$obj = preg_replace(',[?].*,', '', _request('obj'));
 
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
 	if (_IS_BOT) return;
@@ -70,7 +71,7 @@ function do_stats() {
 	if (count($content) < 200) {
 
 		// Identification de l'element
-		if (preg_match(',^([a-z]+)(\d+)$,', $_GET['obj'], $r))
+		if (preg_match(',^([a-z]+)(\d+)$,', $obj, $r))
 			$log_type = $r[1]."\t" .$r[2];
 		else
 			$log_type = "autre\t0";
