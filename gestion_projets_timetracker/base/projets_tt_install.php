@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function gestion_projets_timetracker_upgrade($nom_meta_base_version,$version_cible){
+function projets_tt_upgrade($nom_meta_base_version,$version_cible){
         $current_version = 0.0;
         if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
         || (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
@@ -25,7 +25,7 @@ function gestion_projets_timetracker_upgrade($nom_meta_base_version,$version_cib
 	ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	ecrire_metas();        
 }
-function gestion_projets_timetracker_vider_tables($nom_meta_base_version) {
+function projets_tt_vider_tables($nom_meta_base_version) {
        sql_drop_table("spip_projets_timetracker");
         effacer_meta($nom_meta_base_version);
 }
