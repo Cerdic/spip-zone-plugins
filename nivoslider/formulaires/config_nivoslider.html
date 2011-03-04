@@ -1,0 +1,106 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- depot=metapack -->
+<!-- nom=nivoslider -->
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_nivoslider">
+
+	<div class="cadre_padding">
+	
+		<form name="formulaire_config_nivoslider" method="post"  action="#SELF"><div>#ACTION_FORMULAIRE{#SELF}
+
+		<p>
+		<label for="_ir_width"><:nivoslider:width:> :</label>
+		<input type="text" name="width" class="type_txt" id="_ir_width" size="5"
+			value="#ENV{width,500}" /> px
+		</p>
+		<p>
+		<label for="_ir_height"><:nivoslider:height:> :</label>
+		<input type="text" name="height" class="type_txt" id="_ir_height" size="5"
+			value="#ENV{height,300}" /> px
+		</p>
+		<p>
+			<label for="_ir_effect" title='effect'><:nivoslider:effect:> :</label>
+			<select name="effect" id="_ir_effect" style="width:142px">	
+				<option value="random" [(#CONFIG{nivoslider/effect}|=={#VAL{'random'}}|?{selected="selected",''})]>random</option>
+				<option value="sliceDown" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceDown'}}|?{selected="selected",''})]>sliceDown</option>
+				<option value="sliceDownLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceDownLeft'}}|?{selected="selected",''})]>sliceDownLeft</option>
+				<option value="sliceUp" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUp'}}|?{selected="selected",''})]>sliceUp</option>
+				<option value="sliceUpLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUpLeft'}}|?{selected="selected",''})]>sliceUpLeft</option>
+				<option value="sliceUpDown" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUpDown'}}|?{selected="selected",''})]>sliceUpDown</option>
+				<option value="sliceUpDownLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'sliceUpDownLeft'}}|?{selected="selected",''})]>sliceUpDownLeft</option>
+				<option value="fold" [(#CONFIG{nivoslider/effect}|=={#VAL{'fold'}}|?{selected="selected",''})]>fold</option>
+				<option value="fade" [(#CONFIG{nivoslider/effect}|=={#VAL{'fade'}}|?{selected="selected",''})]>fade</option>
+				<option value="slideInRight" [(#CONFIG{nivoslider/effect}|=={#VAL{'slideInRight'}}|?{selected="selected",''})]>slideInRight</option>
+				<option value="slideInLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'slideInLeft'}}|?{selected="selected",''})]>slideInLeft</option>
+			</select>
+		</p>
+		<p>
+		<label for="_ir_slices" title="slices"><:nivoslider:slices:> :</label>
+		<input type="text" name="slices" class="type_txt" id="_ir_slices" size="5"
+			value="#ENV{slices,15}" />
+		</p>
+		<p>
+		<label for="_ir_animSpeed" title="animSpeed"><:nivoslider:animspeed:> :</label>
+		<input type="text" name="animSpeed" class="type_txt" id="_ir_animSpeed" size="5"
+			value="#ENV{animSpeed,500}" /> ms
+		</p>
+		<p>
+		<label for="_ir_pauseTime" title="pauseTime"><:nivoslider:pausetime:> :</label>
+		<input type="text" name="pauseTime" class="type_txt" id="_ir_pauseTime" size="5"
+			value="#ENV{pauseTime,3000}" /> ms
+		</p>
+		<p>
+			<label for="_ir_directionNav" title="directionNav"><:nivoslider:directionnav:> :</label>
+			<select name="directionNav" id="_ir_directionNav" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/directionNav}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
+				<option value="false" [(#CONFIG{nivoslider/directionNav}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+			</select> 
+		</p>
+		<p>
+			<label for="_ir_directionNavHide" title="directionNavHide"><:nivoslider:directionnavhide:> :</label>
+			<select name="directionNavHide" id="_ir_directionNavHide" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/directionNavHide}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
+				<option value="false" [(#CONFIG{nivoslider/directionNavHide}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+			</select>
+		</p>
+		<p>
+			<label for="_ir_controlNav" title="controlNav"><:nivoslider:controlnav:> :</label>
+			<select name="controlNav" id="_ir_controlNav" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
+				<option value="false" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+			</select>
+		</p>
+		<p>
+			<label for="_ir_keyboardNav" title="keyboardNav"><:nivoslider:keyboardnav:> :</label>
+			<select name="keyboardNav" id="_ir_keyboardNav" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/keyboardNav}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
+				<option value="false" [(#CONFIG{nivoslider/keyboardNav}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+			</select>
+		</p>
+		<p>
+			<label for="_ir_pauseOnHover" title="pauseOnHover"><:nivoslider:pauseonhover:> :</label>
+			<select name="pauseOnHover" id="_ir_pauseOnHover" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/pauseOnHover}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
+				<option value="false" [(#CONFIG{nivoslider/pauseOnHover}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+			</select>
+		</p>
+		<p>
+		<label for="_ir_captionOpacity"><:nivoslider:caption_opacity:></label>
+		<input type="text" name="captionOpacity" class="type_txt" id="_ir_captionOpacity" size="5"
+			value="#ENV{captionOpacity,0.8}" />
+		</p>
+
+		</div>
+
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:nivoslider:bouton_effacer:>" class="fondo" />
+	</div>
+
+	</div></form>
+
+</div>
