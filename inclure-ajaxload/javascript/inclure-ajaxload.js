@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(document).ready(function($) {
 	$('.includeajax').each(function() {
 		var me = $(this);
 		var env = $('a', this).attr('rel');
