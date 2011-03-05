@@ -881,8 +881,8 @@ jQuery.geoportail =
 			{
 				div: OpenLayers.Util.getElement(tbx.id + '_search'),
 				geonamesOptions: {
-					//					setZoom: Geoportal.Control.LocationUtilityService.GeoNames.setZoomForBDNyme,
-					onSelectAddress: this.selectAdresse,
+					// setZoom: Geoportal.Control.LocationUtilityService.GeoNames.setZoomForBDNyme,
+					onSelectLocation: this.selectAdresse,
 					layerOptions: {
 						name: 'TOPONYMS.ALL:OPENLS',
 						formatOptions: {
@@ -891,7 +891,7 @@ jQuery.geoportail =
 					}
 				},
 				geocodeOptions: {
-					onSelectAddress: this.selectAdresse,
+					onSelectLocation: this.selectAdresse,
 					layerOptions: {
 						name: 'ADDRESSES.CROSSINGS:OPENLS',
 						formatOptions: {
