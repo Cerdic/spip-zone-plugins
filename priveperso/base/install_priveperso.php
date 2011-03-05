@@ -64,8 +64,8 @@ function priveperso_installer(){
 	
 function priveperso_desinstaller() {
 
-		spip_query("DROP TABLE spip_priveperso");
-		spip_query("DROP TABLE spip_priveperso_texte");
+		sql_drop_table('spip_priveperso');
+		sql_drop_table('spip_priveperso_texte');
 		effacer_meta('priveperso_version');
 		ecrire_metas();
 }
