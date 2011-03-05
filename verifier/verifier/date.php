@@ -25,8 +25,6 @@ function verifier_date_dist($valeur, $options=array()){
 	// On vérifie la validité du format
 	$format = isset($options['format']) ? $options['format'] : 'jma'; 
 	
-	print_r($format);
-	
 	if ($format=='mja') {
 		if(!preg_match('#^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$#',$valeur)) return $erreur;
 		list($mois,$jour,$annee) = explode('-',$valeur);
