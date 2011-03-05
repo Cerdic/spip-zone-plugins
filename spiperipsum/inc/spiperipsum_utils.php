@@ -128,8 +128,32 @@ function charger_lectures($langue, $jour){
 		$tableau['psaume'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['psaume']);
 		$tableau['psaume'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['psaume']);
 		$tableau['psaume'] = str_replace('©', '&copy;', $tableau['psaume']);
+		// Traitement du commentaire
+		// -- titre du commentaire
+		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment_t&date=".date("Ymd", strtotime($date));
+		$page = recuperer_page($url);
+		$tableau['commentaire']['titre'] = $page;
+		// -- auteur du commentaire
+		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment_a&date=".date("Ymd", strtotime($date));
+		$page = recuperer_page($url);
+		$tableau['commentaire']['auteur'] = $page;
+		// -- source du commentaire
+		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment_s&date=".date("Ymd", strtotime($date));
+		$page = recuperer_page($url);
+		$tableau['commentaire']['source'] = $page;
+		$tableau['commentaire'] = preg_replace(',</?br\b.*>,UimsS', '', $tableau['commentaire']);
+		$tableau['commentaire'] = preg_replace(',<p\b.*>.*</p\b.*>,UimsS', '', $tableau['commentaire']);
+		// -- texte du commentaire
+		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=comment&date=".date("Ymd", strtotime($date));
+		$page = recuperer_page($url);
+		$tableau['commentaire']['texte'] = $page;
+		$tableau['commentaire']['texte'] = preg_replace('#(</?br\b.*>)#UimsS', '<br />', $tableau['commentaire']['texte']);
+ 		$tableau['commentaire']['texte'] = preg_replace('#(&nbsp;){2,}#UimsS', '', $tableau['commentaire']['texte']);
+		$tableau['commentaire']['texte'] = preg_replace(',<p\b.*>.*</p\b.*>,UimsS', '', $tableau['commentaire']['texte']);
+		$tableau['commentaire']['texte'] = preg_replace(',œ,UimsS', '&oelig;', $tableau['commentaire']['texte']);
+		$tableau['commentaire']['texte'] = trim($tableau['commentaire']['texte']);
 
-		// traitement du saint du jour
+		// Traitement du saint du jour
 		// -- Traitement du nom seul et de l'url permettant de recuperer les textes
 		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=saint&date=".date("Ymd", strtotime($date));
 		$page = recuperer_page($url);

@@ -17,6 +17,8 @@ function spiperipsum_afficher($langue, $jour, $lecture, $mode){
 	
 	if ($lecture == _SPIPERIPSUM_LECTURE_SAINT)
 		$texte = recuperer_fond("modeles/saint", $contexte);
+	else if ($lecture == _SPIPERIPSUM_LECTURE_COMMENTAIRE)
+		$texte = recuperer_fond("modeles/commentaire", $contexte);
 	else
 		$texte = recuperer_fond("modeles/lecture", $contexte);
 	

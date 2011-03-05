@@ -1,14 +1,15 @@
 [(#REM)<!-- 
 	Afficher:
-		- le commentaire
+		- la lecture demandee
 		- pour le jour requis
 		- dans la langue du contexte courant
 		- et suivant le mode d'appel article ou page
  -->]
 [(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
-	[<h3 class="spip">(#ENV{titre}|trim)&nbsp;-&nbsp;[(#ENV{verset}|trim)]</h3>]
+	[<h3 class="spip">(#ENV{titre}|trim)</h3>]
 ]
 [(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
-	[<h2 class="h2">(#ENV{titre}|trim)&nbsp;-&nbsp;[(#ENV{verset}|trim)]</h2>]
+	[<h2 class="h2">(#ENV{titre}|trim)</h2>]
 ]
+[<p>(#ENV{auteur})<br />#ENV{source}</p>]
 [<p>(#ENV*{texte})</p>]
