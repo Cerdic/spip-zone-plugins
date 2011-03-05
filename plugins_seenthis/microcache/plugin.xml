@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Microcache</nom>
+	<auteur>ARNO* / Fil</auteur>
+	<version>1</version>
+	<etat>stable</etat>
+	<licence>GPL</licence>	
+	<description>
+		Le microcache est un fichier cache totalement statique, de longue durée et dont le nom est facilement accessible.
+	</description>
+	<prefix>microcache</prefix>
+	<options>microcache_options.php</options>
+	<necessite id="SPIP" version="[2.0.0;)" />
+</plugin>
+
