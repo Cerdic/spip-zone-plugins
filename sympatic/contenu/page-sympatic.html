@@ -5,9 +5,11 @@
 	<div class="cartouche">
 		<h1 class="h1"><:sympatic:titre_page_sympatic:></h1>
 	</div>
-
-	<div class="surlignable">
+	
+	[(#SESSION{id_auteur}|oui)
 		[(#FORMULAIRE_SYMPATIC_ABONNEMENTS{#SESSION{id_auteur}})]
-	</div>
+	][(#SESSION{id_auteur}|non)
+		#FORMULAIRE_LOGIN
+	]
 
 </div> <!-- /.contenu-principal -->
