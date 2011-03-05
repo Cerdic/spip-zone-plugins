@@ -30,6 +30,59 @@ function saisies_affichage_final($flux){
 	return $flux;
 }
 
-// declaration du pipeline
-function saisies_saisies_autonomes($flux) { return $flux;}
+// Déclaration du pipeline
+function saisies_saisies_autonomes($flux) { return $flux; }
+
+// Déclarer automatiquement les champs d'un CVT si on les trouve dans un tableau de saisies et s'ils ne sont pas déjà déclarés
+function saisies_formulaire_charger($flux){
+	// Il faut que la fonction existe et qu'elle retourne bien un tableau
+	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$flux['args']['form'], true)
+		and $saisies = call_user_func_array($fonction_saisies, $flux['args']['args'])
+		and is_array($saisies)
+	){
+		include_spip('inc/saisies');
+		
+		// On ajoute au contexte les champs à déclarer
+		$contexte = saisies_charger_champs($saisies);
+		$flux['data'] = array_merge($contexte, $flux['data']);
+		
+		// On ajoute le tableau complet des saisies
+		$flux['data']['_saisies'] = $saisies;
+	}
+	return $flux;
+}
+
+// Aiguiller CVT vers un squelette propre à Saisies lorsqu'on a déclaré des saisies et qu'il n'y a pas déjà un HTML
+function saisies_styliser($flux){
+	// Si on cherche un squelette de formulaire
+	if (strncmp($flux['args']['fond'],'formulaires/',12)==0
+		// Et qu'il y a des saisies dans le contexte
+		and isset($flux['args']['contexte']['_saisies'])
+		// Et que le fichier choisi est vide ou n'existe pas
+		and include_spip('inc/flock')
+		and $ext = $flux['args']['ext']
+		and lire_fichier($flux['data'].'.'.$ext, $contenu_squelette)
+		and !trim($contenu_squelette)
+	)
+		$flux['data'] = preg_replace("/\.$ext$/", '', find_in_path("formulaires/inc-saisies-cvt.$ext"));
+	return $flux;
+}
+
+// Ajouter les vérifications déclarées dans la fonction "saisies" du CVT
+function saisies_formulaire_verifier($flux){
+	// Il faut que la fonction existe et qu'elle retourne bien un tableau
+	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$flux['args']['form'], true)
+		and $saisies = call_user_func_array($fonction_saisies, $flux['args']['args'])
+		and is_array($saisies)
+	){
+		include_spip('inc/saisies');
+		
+		// On ajoute au contexte les champs à déclarer
+		$erreurs = saisies_verifier($saisies);
+		$flux['data'] = array_merge($erreurs, $flux['data']);
+	}
+	
+	return $flux;
+}
+
 ?>
