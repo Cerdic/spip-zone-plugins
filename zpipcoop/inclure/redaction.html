@@ -18,8 +18,8 @@
 	[(#AUTORISER{activer_sites})<li class="item"><a href="[(#URL_PAGE{sites_edit,id_syndic=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#SELF})]" class="add" title="<:zpipcoop:nouveau_site|attribut_html:>"><:zpipcoop:nouveau_site:></a></li>]
 
 	[(#REM) Consernant les rubriques]
-	[(#ENV{id_rubrique}|oui)[(#ENV{id_rubrique}|=={oui}|non)[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
-	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=#ID_RUBRIQUE,id_parent=[(#ID_PARENT|sinon{'0'})]}|parametre_url{retour,[(#URL_RUBRIQUE|url_absolue)]})]" class="edit" title="<:zpipcoop:editer_groupe|attribut_html:>"><:zpipcoop:editer_groupe:></a></li>]]]
+	[(#ENV{type}|=={rubrique}|oui)[(#ENV{id_rubrique}|oui)[(#ENV{id_rubrique}|=={oui}|non)[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
+	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=#ID_RUBRIQUE,id_parent=[(#ID_PARENT|sinon{'0'})]}|parametre_url{retour,[(#URL_RUBRIQUE|url_absolue)]})]" class="edit" title="<:zpipcoop:editer_groupe|attribut_html:>"><:zpipcoop:editer_groupe:></a></li>]]]]
 	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_RUBRIQUE})]" class="add" title="<:zpipcoop:nouveau_groupe|attribut_html:>"><:zpipcoop:nouveau_groupe:></a></li>
 
 	[(#REM) Cree un ticket]
@@ -27,3 +27,6 @@
 	<li class="item"><a href="[(#URL_PAGE{tickets_edit,id_ticket=news}|parametre_url{retour,tickets_edit})]" class="add" title="<:zpipcoop:nouveau_ticket|attribut_html:>"><:zpipcoop:nouveau_ticket:></a></li>]
 </ul>
 </div>]
+ <pre style="background:orange;color:black;position:fixed;top:0;left:0;text-align:left;padding:8px">
+ [(#ENV**|unserialize|print_r{1})]
+ </pre>
