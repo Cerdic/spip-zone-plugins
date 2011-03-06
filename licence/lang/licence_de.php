@@ -16,11 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'description_art_libre' => 'Lizenz Freie Kunst',
 	'description_cc_by' => 'Creative Commons - Namensnennung',
-	'description_cc_by_nc' => 'Creative Commons - Namensnennung-NichtKommerziell',
-	'description_cc_by_nc_nd' => 'Creative Commons - Namensnennung-NichtKommerziell-KeineBearbeitung',
-	'description_cc_by_nc_sa' => 'Creative Commons - Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen',
-	'description_cc_by_nd' => 'Creative Commons - Namensnennung-KeineBearbeitung',
-	'description_cc_by_sa' => 'Creative Commons - Namensnennung-Weitergabe unter gleichen Bedingungen',
+	'description_cc_by_nc' => 'Creative Commons - Namensnennung, keine kommerzielle Nutzung',
+	'description_cc_by_nc_nd' => 'Creative Commons -  Namensnennung, keine kommerzielle Nutzung, keine Bearbeitung',
+	'description_cc_by_nc_sa' => 'Creative Commons - Namensnennung, keine kommerzielle Nutzung, Weitergabe unter gleichen Bedingungen',
+	'description_cc_by_nd' => 'Creative Commons - Namensnennung, keine Bearbeitung',
+	'description_cc_by_sa' => 'Creative Commons - Namensnennung, Weitergabe unter gleichen Bedingungen',
 	'description_copyright' => '&copy; Copyright liegt beim Autor des Artikels',
 	'description_gpl' => 'GPL-Lizenz',
 
@@ -32,21 +32,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.de',
 	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de',
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.de',
-	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.ca',
+	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.de',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 
 	// N
-	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels)&nbsp;:', # NEW
-	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels)&nbsp;:', # NEW
-	'noisette_lien' => 'Afficher le lien vers la description de la licence&nbsp;?', # NEW
-	'noisette_logo' => 'Afficher le logo de la licence&nbsp;?', # NEW
-	'noisette_nom_licence' => 'Afficher le nom de la licence&nbsp;?', # NEW
+	'noisette_hauteur_logo' => 'Maximale H&ouml;he des Logos (in Pixel):',
+	'noisette_largeur_logo' => 'Maximale Breite des Logos (in Pixel):',
+	'noisette_lien' => 'Link zur Breschreibung der Lizenz anzeigen?',
+	'noisette_logo' => 'Logo der Lizenz anzeigen?',
+	'noisette_nom_licence' => 'Bezeichnung der Lizenz anzeigen?',
 
 	// S
 	'sans_licence' => 'ohne Lizenz',
 
 	// T
-	'titre_art_libre' => 'LZK',
+	'titre_art_libre' => 'LFK',
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
 	'titre_cc_by_nc_nd' => 'CC by-nc-nd',
