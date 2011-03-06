@@ -1,0 +1,43 @@
+nom: '<:cite:couverture:>'
+logo: 'images/couv-24.png'
+icone_barre: 'couv.png'
+traiter: 'cite_inserer_modeles_traiter'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'couv'
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'id_modele'
+      label: '<:cite:label_id_document:>'
+      defaut: ''
+      env: 'oui'
+      media: 'image'
+      obligatoire: 'oui'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'align'
+      label: '<:inserer_modeles:label_alignement:>'
+      defaut: 'left'
+      cacher_option_intro: 'on'
+      datas:
+        left: '<:inserer_modeles:item_left:>'
+        center: '<:inserer_modeles:item_center:>'
+        right: '<:inserer_modeles:item_right:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'taille'
+      label: '<:cite:label_taille:>'
+      size: 5
+    verifier:
+      type: 'entier'
+      options:
+        min: 1
+  - 'inclure:inc-yaml/cite.yaml'

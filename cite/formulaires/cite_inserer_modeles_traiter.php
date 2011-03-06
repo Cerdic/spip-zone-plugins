@@ -2,14 +2,14 @@
 
 function formulaires_cite_inserer_modeles_traiter_dist($champs){
 	$code = '<'._request('modele');
-	//if (_request('id_modele') && _request('id_modele')!='')
-		//$code .= _request('id_modele');
+	if (_request('id_modele') && _request('id_modele')!='')
+		$code .= _request('id_modele');
+	if (_request('align') && _request('align')!='')
+		$code .= '|'._request('align');
 	if (_request('variante') && _request('variante')!='')
 		$code .= '|'._request('variante');
 	//if (_request('classe') && _request('classe')!='')
 		//$code .= '|'._request('classe');
-	//if (_request('align') && _request('align')!='')
-		//$code .= '|'._request('align');
 	// On accole le titre à la variante (car il ne faut surtout pas d'espace après la variante)
 	if (_request('title'))
 		$code .= '|title='._request('title');
@@ -77,9 +77,6 @@ function formulaires_cite_inserer_modeles_traiter_dist($champs){
 				$code .= '';
 			// year
 			elseif ($champ=='year' && !in_array(_request('variante'),array('book','chapter','journal','report','thesis')))
-				$code .= '';
-			// cover
-			elseif ($champ=='cover' && !in_array(_request('variante'),array('book','chapter','journal','report','thesis','web')))
 				$code .= '';
 			// accessdate
 			if ($champ=='accessdate' && !in_array(_request('variante'),array('web')))

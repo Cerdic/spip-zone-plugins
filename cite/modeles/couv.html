@@ -1,0 +1,9 @@
+<B_couverture>
+<div class="couv">
+	<BOUCLE_couverture(DOCUMENTS){id_document=#ENV{id}}>
+		[<span class="spip_documents[ spip_documents_(#ENV{align})]">(#FICHIER|image_reduire{#ENV{taille,100}}|inserer_attribut{alt,#ENV{title}|trim|typo})</span>]
+	</BOUCLE_couverture>
+	#INCLURE{fond=modeles/cite_#ENV{class},env}
+	<br class="nettoyeur" />
+</div>
+</B_couverture>
