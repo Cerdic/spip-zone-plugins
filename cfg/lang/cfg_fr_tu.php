@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer' => 'Effacer', # NEW
+	'bouton_effacer' => 'Effacer',
 	'bouton_mettre_a_jour' => 'Mettre &agrave; jour',
-	'bouton_reset' => 'Reset', # NEW
+	'bouton_reset' => 'Reset',
 
 	// C
 	'cfg' => 'CFG',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Aucun champs trouv&eacute; dans @nom@', # MODIF
+	'pas_de_champs_dans' => 'Aucun champ trouv&eacute; dans @nom@',
 	'pas_de_changement' => 'Pas de changement dans <b>@nom@</b>',
 
 	// R
