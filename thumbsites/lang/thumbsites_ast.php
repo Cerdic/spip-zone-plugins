@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -18,32 +18,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_girafa_description' => 'Les vi&ntilde;etes xeneraes tendr&aacute;n un m&aacute;simu de 160 x 120 pixels (esti valor puede camudase nel sitiu de Girafa)',
 	'cfg_inf_girafa_parametres' => 'Escriba los sos datos personales:',
 	'cfg_inf_girafa_presentation' => 'Pa utilizar esti serviciu tien d\'inscribise nel sitiu <a href="http://www.girafa.com">Girafa</a>. Esiste una versi&oacute;n de baldre si necesita menos de 2000 captures por d&iacute;a.',
-	'cfg_inf_miwin_parametres' => 'Veuillez saisir vos donn&eacute;es personnelles:', # NEW
-	'cfg_inf_miwin_presentation' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwin</a>. La pr&eacute;sence de ce lien est v&eacute;rifi&eacute; p&eacute;riodiquement par un script.', # NEW
-	'cfg_inf_rotothumb_parametres' => 'Veuillez saisir vos donn&eacute;es personnelles:', # NEW
-	'cfg_inf_rotothumb_presentation' => 'Pour utiliser ce service vous ne devez pas vous enregistrer mais vous devez mettre un lien vers le site <a href="http://www.robothumb.com">Robothumb</a>. La pr&eacute;sence de ce lien est v&eacute;rifi&eacute; p&eacute;riodiquement par leur soin.', # NEW
-	'cfg_inf_thumbshots_de_description' => 'Les vignettes g&eacute;n&eacute;r&eacute;es seront de 120 x 90 pixels.', # NEW
-	'cfg_inf_thumbshots_de_presentation' => '<a href="http://www.thumbshots.de">Thumbshots.de</a> propose un service &eacute;quivalent &agrave; Thumbshots.com. Bien que les services soient identiques, ce sont bien 2 sites distincts.', # NEW
-	'cfg_inf_thumbshots_description' => 'Les vignettes g&eacute;n&eacute;r&eacute;es seront de 120 x 90 pixels.', # NEW
-	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> propose un service gratuit qui ne n&eacute;cessite pas d\'identification.', # NEW
-	'cfg_inf_websnapr_parametres' => 'Veuillez saisir vos donn&eacute;es personnelles:', # NEW
-	'cfg_inf_websnapr_presentation' => 'Pour utiliser ce service vous devez &ecirc;tre inscrit sur le site <a href="http://www.websnapr.com">Websnapr</a>. La version gratuite permet de traiter de 250.000 captures de site par mois, &agrave; un rythme de 80 captures par heure.', # NEW
-	'cfg_itm_serveur_girafa' => 'Girafa', # NEW
-	'cfg_itm_serveur_miwin' => 'Miwin', # NEW
-	'cfg_itm_serveur_robothumb' => 'Robothumb', # NEW
-	'cfg_itm_serveur_thumbshots' => 'Thumbshots.com', # NEW
-	'cfg_itm_serveur_thumbshots_de' => 'Thumbshots.de', # NEW
-	'cfg_itm_serveur_websnapr' => 'Websnapr', # NEW
-	'cfg_itm_taille_vignette' => '@taille@ pixels', # NEW
-	'cfg_lbl_choix_serveur' => 'Choisissez le serveur de vignettes', # NEW
-	'cfg_lbl_cle' => 'Votre cl&eacute;', # NEW
-	'cfg_lbl_identifiant' => 'Votre identifiant', # NEW
-	'cfg_lbl_signature' => 'Votre signature', # NEW
-	'cfg_lbl_taille_vignette' => 'Taille des vignettes', # NEW
-	'cfg_lgd_choix_serveur' => 'Serveur', # NEW
+	'cfg_inf_miwin_parametres' => 'Tienes d\'editar los tos datos personales:',
+	'cfg_inf_miwin_presentation' => 'Pa utilizar esti serviciu tienes de poner un enllaz al sitiu <a href="http://thumbs.miwim.fr">Miwin</a>. La presencia d\'esti enllaz se comprueba peri&oacute;dicamente con un script.',
+	'cfg_inf_rotothumb_parametres' => 'Tienes d\'editar los tos datos personales:',
+	'cfg_inf_rotothumb_presentation' => 'Pa utilizar esti serviciu nun necesites rexistrate, pero tienes de poner un enllaz al sitiu <a href="http://www.robothumb.com">Robothumb</a>. La presencia d\'esti enllaz se comprueba de vezu polos sos medios.',
+	'cfg_inf_thumbshots_de_description' => 'Les miniatures xeneraes ser&aacute;n de 120 x 90 pixels.',
+	'cfg_inf_thumbshots_de_presentation' => '<a href="http://www.thumbshots.de">Thumbshots.de</a> ufre un serviciu equivalente a Thumbshots.com. Anque los servicios son id&eacute;nticos, se trata de 2 sitios distintos.',
+	'cfg_inf_thumbshots_description' => 'Les miniatures xeneraes ser&aacute;n de 120 x 90 pixels.',
+	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> ufre un serviciu de baldre que nun necesita identificaci&oacute;n.',
+	'cfg_inf_websnapr_parametres' => 'Por favor edita los tos datos personales:',
+	'cfg_inf_websnapr_presentation' => 'Pa utilizar esti serviciu tienes de tar rexistr&aacute;u nel sitiu <a href="http://www.websnapr.com">Websnapr</a>. La versi&oacute;n de baldre permite tratar 250.000 imaxes del sitiu al mes, a un ritmu de 80 imaxes por hora.',
+	'cfg_itm_serveur_girafa' => 'Girafa',
+	'cfg_itm_serveur_miwin' => 'Miwin',
+	'cfg_itm_serveur_robothumb' => 'Robothumb',
+	'cfg_itm_serveur_thumbshots' => 'Thumbshots.com',
+	'cfg_itm_serveur_thumbshots_de' => 'Thumbshots.de',
+	'cfg_itm_serveur_websnapr' => 'Websnapr',
+	'cfg_itm_taille_vignette' => '@taille@ pixels',
+	'cfg_lbl_choix_serveur' => 'Escueye\'l sirvidor de miniatures',
+	'cfg_lbl_cle' => 'La to clave',
+	'cfg_lbl_identifiant' => 'El to identificador',
+	'cfg_lbl_signature' => 'La to robla',
+	'cfg_lbl_taille_vignette' => 'Tama&ntilde;u de les miniatures',
+	'cfg_lgd_choix_serveur' => 'Sirvidor',
 
 	// T
-	'titre_thumbshot_site' => 'VIGNETTE DU SITE', # NE
+	'titre_thumbshot_site' => 'MINIATURA DEL SITIU'
 );
 
 ?>
