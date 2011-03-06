@@ -18,7 +18,10 @@ function action_cotisation() {
 	$id_auteur = $securiser_action();
 	$date= $_POST['date'];
 	$journal= $_POST['journal'];
-	$montant= $_POST['montant'];
+	if ($montant_req =  _request('montant')) {
+		$montant = floatval(preg_replace("/,/",".",$montant_req));
+	}
+	else $montant = 0;
 	$justification =$_POST['justification'];
 	$imputation=$GLOBALS['association_metas']['pc_cotisations'];
 	$validite =$_POST['validite'];
@@ -29,7 +32,8 @@ function action_cotisation() {
 function cotisation_insert($id_auteur, $montant, $journal, $justification, $imputation, $date, $validite)
 {
 	include_spip('base/association');
-	sql_insertq('spip_asso_comptes', array(
+	association_ajouter_operation_comptable($date, $montant, 0, $justification, $imputation, $journal, $id_auteur);
+/*	sql_insertq('spip_asso_comptes', array(
 				       'date' => $date,
 				       'journal' => $journal,
 				       'recette' => $montant,
@@ -37,6 +41,7 @@ function cotisation_insert($id_auteur, $montant, $journal, $justification, $impu
 				       'imputation' => $imputation,
 				       'id_journal' => $id_auteur)
 		    );
+*/
 	sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
 				   array(
 					 "validite" => $validite,

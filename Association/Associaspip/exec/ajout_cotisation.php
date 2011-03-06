@@ -74,8 +74,12 @@ function ajout_cotisation($id_auteur, $row)
 	}
 
 	$res .= '<option value="don"> Don </option>'
-	. '</select>'
-	. '<label for="validite"><strong>'._T('asso:Validite').' :</strong></label>'
+	. '</select>';
+	if ($GLOBALS['association_metas']['destinations']=="on")
+	{
+		$res .= association_editeur_destinations('', false, $GLOBALS['association_metas']['dc_cotisations']);
+	}
+	$res .= '<label for="validite"><strong>'._T('asso:Validite').' :</strong></label>'
 	. '<input name="validite" type="text" value="'.$validite.'" id="validite" class="formo" />'
 	. '<label for="justification"><strong>'._T('asso:Justification').' :</strong></label>'
 	. '<input name="justification" type="text" value="'. htmlspecialchars($justification) . '" id="justification" class="formo" />'

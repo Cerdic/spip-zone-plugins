@@ -132,16 +132,6 @@ function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, 
 		association_modifier_operation_comptable($date_vente, $recette, 0, $justification, $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
 		association_modifier_operation_comptable($date_vente, $frais_envoi, 0, $justification.' - frais d\'envoi', $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_frais_envoi']." AND id_journal=$id_vente"));
 	}
-
-/*
-	sql_updateq('spip_asso_comptes', array(
-		"date" => $date_vente,
-		"journal" => $journal,
-		"recette" => $prix_vente,
-		"depense" => $frais_envoi,
-		"justification" => $justification),
-		   "id_journal=$id_vente AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']));
-*/
 }
 
 function ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette)
