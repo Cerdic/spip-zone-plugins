@@ -20,7 +20,7 @@
 		'lettres_information' => "Lettres d'information",
 		'themes' => "Thèmes",
 		'racine' => "Racine du site",
-		'tout_le_site' => "Tout le site",
+		'tout_le_site' => "Toutes les th&eacute;matiques",
 		'email' => "Email",
 		'nom' => "Nom",
 		'format' => "Format",

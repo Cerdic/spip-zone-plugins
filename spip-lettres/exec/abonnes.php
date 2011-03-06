@@ -112,13 +112,20 @@
 		if (sql_count($abonnements) > 0) {
 			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', true, "", _T('lettresprive:boite_abonnements'));
 			echo '<table cellpadding="2" cellspacing="0" width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
-			while ($abo = sql_fetch($abonnements)) {	
+			while ($abo = sql_fetch($abonnements)) {
 				$id_rubrique = $abo['id_rubrique'];
 				$statut = $abo['statut'];
+				if ($GLOBALS['meta']['spip_lettres_admin_abo_toutes_rubriques']=='oui') {
+					$rubouthem = "spip_rubriques";
+					$titre0 = _T('lettresprive:racine_du_site');
+				} else {
+					$rubouthem = "spip_themes";
+					$titre0 = _T('lettres:tout_le_site');
+				};
 				if ($id_rubrique == 0)
-					$titre = _T('lettresprive:racine_du_site');
+					$titre = $titre0;
 				else
-					$titre = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
+					$titre = sql_getfetsel('titre', $rubouthem, 'id_rubrique='.intval($id_rubrique));
 				echo "<tr style='background-color: #eeeeee;'>";
 				echo '<td width="12">'.http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '').'</td>';
 				echo '<td><a href="'.generer_url_ecrire("naviguer","id_rubrique=".$id_rubrique).'">'.typo($titre).'</a></td>';
@@ -135,18 +142,14 @@
 		if (!$test_racine) {
 			echo '<form method="post" action="'.generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne).'">';
 			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', true, "", _T('lettresprive:nouvel_abonnement'));
-			$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-			echo $selecteur_rubrique(0, 'rubrique', false);
-			echo "<table width='100%'><tr>";
-			echo "<td class='arial2' width='80%'>";
-			echo _T('lettresprive:selectionnez_rubrique');
-			echo "</td>\n";
-			echo '<td>';
-			echo '<div align="right">';
-			echo "<input type='submit' name='abonner' class='fondo' value='"._T('lettresprive:abonner')."' STYLE='font-size:10px'>";
+			echo "<div class='arial2'>";
+			if (($GLOBALS['meta']['spip_lettres_admin_abo_toutes_rubriques']=='oui')
+				or (lettres_nombre_themes()>1))
+				echo _T('lettresprive:selectionnez_rubrique')."<br>";
+			echo choisir_thematique();
+			echo "<input type='submit' name='abonner' class='fondo'
+					value='"._T('lettresprive:abonner')."' style='float:right; font-size:10px'>";
 			echo "</div>";
-			echo "</td>";
-			echo "</tr></table>";
 			echo fin_cadre_enfonce(true);
 			echo '</form>';
 		}

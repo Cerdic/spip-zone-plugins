@@ -1,0 +1,17 @@
+#CACHE{0}
+<style type="text/css">
+.thematique_defaut {
+	background-color: lightgrey;
+};
+</style>
+
+<select class='thematique' name='id_parent'>
+<option value='0'>[(#VAL{lettres:tout_le_site}|_T)]</option>
+<BOUCLE_sel(THEMES)>
+<option 
+	[(#CONFIG{spip_lettres_abonnement_par_defaut}|=={#ID_RUBRIQUE}|oui) class='thematique_defaut' selected]
+	value='#ID_RUBRIQUE'>
+	#TITRE
+</option>
+</BOUCLE_sel>
+</select>

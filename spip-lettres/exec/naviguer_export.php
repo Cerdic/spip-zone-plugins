@@ -68,8 +68,7 @@ TODO
 
 		echo '<form action="'.generer_url_action('export_abonnes', '', false, true).'" method="post">';
 		echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/export.png', true, "", _T('lettresprive:depuis_rubrique'));
-		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-		echo $selecteur_rubrique($id_rubrique, 'rubrique', false);
+		echo choisir_thematique($id_rubrique);
 		echo '<div align="right">';
 		echo '<input type="submit" name="telecharger" class="fondo" value="'._T('lettresprive:telecharger').'" />';
 		echo '</div>';

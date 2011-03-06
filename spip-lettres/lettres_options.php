@@ -15,4 +15,6 @@ define('_DIR_LETTRES', _DIR_IMG.'lettres/');
 // libelle pour le logo des lettres
 $GLOBALS['logo_libelles']['id_lettre'] = _T('lettresprive:logo_lettre');
 #define('_DEBUG_BLOCK_QUEUE',true);
+
+include_spip ("inc/choisir_thematique");
 ?>

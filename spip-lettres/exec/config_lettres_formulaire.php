@@ -126,14 +126,19 @@
 			echo debut_cadre_trait_couleur("", true, "", _T('lettresprive:theme_par_defaut'));
 						
 			echo '<p>'._T('lettresprive:theme_par_defaut_actuel')
-						.lettres_titre_theme_par_defaut();;
+						.lettres_titre_theme_par_defaut();
 			if ($GLOBALS['meta']['spip_lettres_abonnement_par_defaut']>=0)
-				echo '<input class="fondo" style="float: right;" name="supprimer" type="submit" value="'._T('lettresprive:supprimer').'" />';
-			echo '</p><p>';
-			echo '<label for="id_parent">'._T('lettresprive:theme_par_defaut_modifier').'</label>';
-			echo $selecteur_rubrique(0, 'rubrique', false);
+				echo '<input class="fondo" style="float: right;" 
+					name="supprimer" type="submit" value="'._T('lettresprive:supprimer').'" />';
 			echo '</p>';
-			echo '<p style="text-align: right;"><input class="fondo" name="enregistrer" type="submit" value="'._T('lettresprive:enregistrer').'" /></p>';
+			if (sql_countsel("spip_themes")>1) {
+				echo '<p style="margin-top:1em;">';
+				echo '<label for="id_parent">'._T('lettresprive:theme_par_defaut_modifier').':</label>';
+				echo choisir_thematique();
+				echo '<input class="fondo" style="float: right;" 
+					name="enregistrer" type="submit" value="'._T('lettresprive:enregistrer').'" />
+				</p>';
+			};
 			echo fin_cadre_trait_couleur(true);
 			echo '</form>';
 		};

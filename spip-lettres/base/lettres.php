@@ -349,9 +349,12 @@
 				sql_alter("TABLE spip_lettres CHANGE extra extra longtext NULL");
 				ecrire_meta($nom_meta_base_version,$current_version='4.0.2','non');
 			}
+			if (version_compare($current_version,'4.5.4','<'))
+				ecrire_meta('spip_lettres_cliquer_anonyme', 'oui');
+			if (version_compare($current_version,'4.5.5','<'))
+				ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', 'non');
 		}
 	}
-
 
 	function lettres_vider_tables($nom_meta_base_version) {
 		include_spip('inc/meta');
@@ -393,6 +396,8 @@
 		effacer_meta('derniere_modif_lettre');
 		effacer_meta('spip_lettres_cron');
 		effacer_meta('spip_lettres_abonnement_par_defaut');
+		effacer_meta('spip_lettres_cliquer_anonyme');
+		effacer_meta('spip_lettres_admin_abo_toutes_rubriques');
 		include_spip('inc/getdocument');
 		effacer_repertoire_temporaire(_DIR_LETTRES);
 		effacer_meta($nom_meta_base_version);

@@ -167,8 +167,7 @@ TODO
 			echo fin_cadre_enfonce(true);
 		} else {
 			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/import.png', true, "", _T('lettresprive:rubrique_destination'));
-			$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-			echo $selecteur_rubrique($id_rubrique, 'rubrique', false);
+			echo choisir_thematique($id_rubrique);
 			echo fin_cadre_enfonce(true);
 			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/preferences.png', true, "", _T('lettresprive:boite_format'));
 			echo _T('lettresprive:changer_format').'&nbsp;&nbsp;';

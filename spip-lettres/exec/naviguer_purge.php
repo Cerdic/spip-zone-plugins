@@ -75,8 +75,8 @@
 			echo fin_cadre_enfonce(true);
 		} else {
 			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/purge.png', true, "", _T('lettresprive:selectionnez_rubrique'));
-			$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-			echo $selecteur_rubrique($id_rubrique, 'rubrique', false);
+			echo choisir_thematique($id_rubrique);
+
 			echo '<input type="hidden" name="id_rubrique" value="'.$id_rubrique.'" />';
 			echo '<div align="right">';
 			echo '<input type="submit" name="purger" class="fondo" value="'._T('lettresprive:purger').'" />';

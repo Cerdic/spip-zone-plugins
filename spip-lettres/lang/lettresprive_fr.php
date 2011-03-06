@@ -54,7 +54,7 @@
 		'aller_liste_abonnes' => "Aller à la liste des abonnés",
 		'ajouter_abonne' => "Ajouter un abonné",
 		'aller_liste_lettres' => "Aller à la liste des lettres d'information",
-		'configurer_formulaire_abonnement' => "Configuration du formulaire d'abonnement",
+		'configurer_formulaire_abonnement' => "Configurer", // lien dans bloc raccourcis
 		'import_abonnes' => "Importer des abonnés",
 		'export_abonnes' => "Exporter des abonnés",
 		'purge_abonnes' => "Supprimer des abonnés",
@@ -62,16 +62,16 @@
 		'abonnements' => "Abonnements",
 		'aller_au_formulaire_abonnement' => "Aller au formulaire d'abonnement",
 		'aide_config_lettres_formulaire' => "Pour rappel : un internaute s'abonne à une ou plusieurs rubriques de votre site. Pour un abonné, chacune de ces rubriques correspond à un abonnement.<br /><br />Les thèmes disponibles suivants sont les rubriques dans lesquelles les internautes ont le droit de s'abonner.<br /><br />Cette restriction n'est valable que sur la partie publique puisque vous êtes libres de gérer les abonnements comme bon vous semble dans l'espace privé.<br /><br />Si vous proposez aux internautes de s'abonner à la racine du site, alors ces abonnés recevront <strong>toutes</strong> les lettres d'information rédigées sur ce site.",
-		'themes_disponibles' => "Thèmes disponibles",
-		'supprimer_theme' => "supprimer ce thème",
-		'aucun_theme_selectionne' => "Aucun thème sélectionné",
-		'ajouter_theme' => "Ajouter un thème",
+		'themes_disponibles' => "Thématiques disponibles",
+		'supprimer_theme' => "supprimer cette thématique",
+		'aucun_theme_selectionne' => "Aucune thématique sélectionnée",
+		'ajouter_theme' => "Ajouter une thématique",
 		'titre' => "Titre",
 		'choix_rubrique' => "Choix de la rubrique",
 		'ajouter' => "Ajouter",
 		'aide_config_lettres_squelettes' => "Indiquez le nom des squelettes sans leur extension",
 		'logo_lettres' => "LOGO PAR DEFAUT DES LETTRES",
-		'configuration_squelettes' => "Configuration des squelettes",
+		'configuration_squelettes' => "Choix des squelettes",
 		'squelette_formulaire_abonnement' => "Formulaire d'abonnement",
 		'squelette_titre_lettre' => "Titre des lettres",
 		'squelette_version_html_lettre' => "Version HTML des lettres",
@@ -81,6 +81,7 @@
 		'previsualiser_texte' => "Prévisualiser la version texte",
 		'voir_en_ligne' => "Voir en ligne",
 		'logo_lettre' => "LOGO DE LA LETTRE",
+
 		'statistiques' => "Statistiques",
 		'envoi' => "Envoi",
 		'debut' => "début",
@@ -92,6 +93,8 @@
 		'audience' => "Audience",
 		'taux_ouverture' => "taux d'ouverture",
 		'clics' => "Clics",
+		'cliquer_anonyme' => "Les statistiques de clics dans les lettres doivent-elles respecter l'anonymat des destinataires ?",
+
 		'creer_nouvelle_lettre' => "Créer une nouvelle lettre",
 		'aide_lettres_envoi_en_cours' => "L'envoi de votre lettre est en cours et peut prendre plusieurs minutes selon le nombre d'abonnés, merci de patienter.",
 		'modifier_lettre' => "Modifier cette lettre",
@@ -148,8 +151,8 @@
 		
 		Seuls les abonnés \"directs\" seront supprimés.",
 		'nb_abonnements_supprimes' => "Nombre d'abonnements supprimés",
-		'config_formulaire' => "Configuration du formulaire d'abonnement",
-		'config_squelettes' => "Configuration avancée du plugin",
+		'config_formulaire' => "Thématiques des abonnements",
+		'config_squelettes' => "Configuration avancée",
 		'tous_abonnes_rubrique' => "Tous les abonnés de cette rubrique",
 		'en_cours_redaction' => "en cours de rédaction",
 		'envoi_en_cours' => "envoi en cours",
@@ -189,7 +192,7 @@
 		'ou_abonne' => "ou à un abonné : ",
 		'abonne_inexistant' => "Abonné inexistant",
 
-		'config_cron' => "Configuration des envois récurrents",
+		'config_cron' => "Envois récurrents",
 		'spip_lettres_envois_recurrents' => "Activer les envois récurrents",
 		'note_code_cron' => "Votre crontab devra exécuter le script :",
 		'cet_intitule_sera_titre_lettres_envoyees_par_cron' => "Cet intitulé sera le titre des lettres envoyées par votre tâche cron.",
@@ -198,11 +201,12 @@
 		'ajouter_rubrique' => "Ajouter une rubrique",
 		'aucun_envoi_programme' => "Aucun envoi programmé.",
 		
-// Themes par defaut
+// Thematiques et abonnement par defaut
 		'theme_par_defaut' 			=> 'Abonnement par défaut',
 		'theme_par_defaut_actuel' 	=> 'Abonnement par défaut actuel : ',
-		'theme_racine' 				=> 'Tous les thèmes',
+		'theme_racine' 				=> 'Toutes les thématiques',
 		'theme_par_defaut_modifier'	=> "Modifier l'abonnement par défaut",
+		'admin_abo_toutes_rubriques' => 'Les administrateurs peuvent ils attribuer des abonnements en dehors des th&eacute;matiques publiques ?',
 		
 		'Z' => 'ZZzZZzzz',
 		

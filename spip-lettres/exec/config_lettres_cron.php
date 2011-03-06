@@ -115,8 +115,7 @@
 			echo '</p>';
 		    echo '<p>';
 			echo '<label for="id_parent">'._T('lettresprive:choix_rubrique').'</label>';
-			$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-			echo $selecteur_rubrique(0, 'rubrique', false);
+			echo choisir_thematique();
 			echo '</p>';
 			echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('lettresprive:ajouter').'" /></p>';
 			echo fin_cadre_trait_couleur(true);
