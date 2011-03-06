@@ -1,0 +1,31 @@
+[(#REM)
+Modèle jcaroussel_meme_rubrique :  liste les articles d'une rubrique sous forme de caroussel
+]
+<B_articles_rubrique>
+	<div class="carousel SliderArticlesMemeRubrique">
+		<h2>
+		<a href="#URL_RUBRIQUE{]#ENV{id_rubrique}}" class="couleur_[(]#ENV{id_rubrique})]"><:meme_rubrique:></a>
+		</h2>
+		<div class="jCarouselLite">
+			<ul class="liste-items">
+				<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique}{!id_article} {par date}{inverse} {0,10}>
+					<li class="item">
+						<h3>
+						<a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a>
+						</h3>
+						[(#LOGO_ARTICLE|image_reduire{220}|image_recadre{180,180})]
+						[<div class="description">
+							(#INTRODUCTION{280})
+						</div>]
+					</li>
+					</BOUCLE_articles_rubrique>
+			</ul>
+		</div>
+		<button class="prev disabled">
+			Précédent
+		</button>
+		<button class="next">
+			Suivant
+		</button>
+	</div>
+</B_articles_rubrique>

@@ -1,0 +1,27 @@
+<plugin>
+    <nom>jCarouselLite</nom>
+    <auteur>d'après Ganeshji Marwaha http://www.gmarwaha.com/blog/2007/08/09/jcarousel-lite-a-jquery-plugin/ - mis en plugin par jfefe </auteur>
+    <version>1.0</version>
+    <etat>stable</etat>
+   <!--  <icon>images/jCarouselLite-64.png</icon> -->
+    <description>
+    	<multi>
+    		[fr]Plugin qui permet d'afficher un carousel d'article avec un modèle
+    		
+    		Dans un article, insérer le tag <jcarousel_meme_rubrique|id_rubrique=XX> en remplacant XX par un id_rubrique de votre site.
+
+		</multi>
+	</description>
+    <lien>http://www.spip-contrib.net/?article</lien>
+    <prefix>jcarousellite</prefix>
+	<necessite id="SPIP" version="[2.0;]" />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>jcarousellite_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>jcarousellite_pipelines.php</inclure>
+	</pipeline>
+	<categorie>navigation</categorie>
+</plugin>
