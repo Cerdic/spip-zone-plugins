@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annuler',
 
 	// B
-	'bouton_supprimer' => 'Supprimer', # NEW
+	'bouton_supprimer' => 'Supprimer',
 
 	// D
 	'deja_modifie' => 'D&eacute;j&agrave; modifi&eacute;',
@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => '&Eacute;diter tout',
 	'effets' => 'Effets',
 	'explication_exec_autorise' => 'Pages autoris&eacute;es &agrave; la modification
-  (?exec=...) : (, pour s&eacute;parer les exec).',
-	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
+  (?exec=...) : (, pour s&eacute;parer les exec).', # MODIF
+	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).',
 	'explication_reduire_logo' => 'R&eacute;duire le logo s\'il d&eacute;passe
-  la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)',
+  la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # MODIF
 
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?',
@@ -43,17 +43,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si pas de changement',
 	'label_reduire_logo' => 'R&eacute;duire les logos',
 	'label_yellow_fade' => 'Fade',
-	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
-	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
-	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
-	'legend_controleur_qui' => 'Qui ?', # NEW
-	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
-	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
+	'legend_controleur_hyperlien' => 'Hyperlien',
+	'legend_controleur_logo' => 'Choisir un logo&nbsp;:',
+	'legend_controleur_logo_remplacer' => 'Remplacer ce logo',
+	'legend_controleur_qui' => 'Qui ?',
+	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:',
+	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette',
 	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)',
-	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
+	'legend_introduction_article' => 'Texte introductif de l\'article',
 
 	// M
-	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
+	'message_image_obligatoire' => 'Il faut choisir une image',
 	'messages' => 'Messages',
 	'modifie_par_ailleurs' => 'Modifi&eacute; par ailleurs',
 
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configurer les crayons',
-	'titre_crayons' => 'Crayons', # NEW
+	'titre_crayons' => 'Crayons',
 
 	// U
 	'update_impossible' => 'La mise &agrave; jour a &eacute;chou&eacute;.',

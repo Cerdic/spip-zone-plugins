@@ -24,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Editar tot',
 	'effets' => 'Efectes',
 	'explication_exec_autorise' => 'P&agrave;gines autoritzades a ser modificades
-  (?exec=...) : (, per separar les exec).',
+  (?exec=...) : (, per separar les exec).', # MODIF
 	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
-	'explication_reduire_logo' => 'Reduir el logotip si sobrepassa la mida m&agrave;xima indicada en p&iacute;xels. Exemple: 100. (0 = mai)',
+	'explication_reduire_logo' => 'Reduir el logotip si sobrepassa la mida m&agrave;xima indicada en p&iacute;xels. Exemple: 100. (0 = mai)', # MODIF
 
 	// L
 	'label_activer_barre_typo' => 'Activar la barra tipogr&agrave;fica a els llapis?',

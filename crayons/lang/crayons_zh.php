@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => '&#32534;&#36753;&#25152;&#26377;&#20869;&#23481;', # MODIF
 	'effets' => 'Effets', # NEW
 	'explication_exec_autorise' => 'Pages autoris&eacute;es &agrave; la modification
-		(?exec=...) : (, pour s&eacute;parer les exec).',
+		(?exec=...) : (, pour s&eacute;parer les exec).', # MODIF
 	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'R&#233;duire le logo s\'il d&#233;passe
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)',
+		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # MODIF
 
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW

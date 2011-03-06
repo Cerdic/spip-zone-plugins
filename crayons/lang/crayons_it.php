@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Modifica tutto',
 	'effets' => 'Effetti',
 	'explication_exec_autorise' => 'Pagine autorizzate per la modifica
-  (?exec=...) : (, per separare gli exec).',
+  (?exec=...) : (, per separare gli exec).', # MODIF
 	'explication_introduction_article' => 'L\'introduzione di un articolo mostra la descrizione di un articolo, altrimenti mostra i suoi primi 600 caratteri (cappello pi&ugrave; testo)',
 	'explication_reduire_logo' => 'Riduci il logo se supera
-  la dimensione massima indicata in pixel. Esempio: 100. (0 = mai)',
+  la dimensione massima indicata in pixel. Esempio: 100. (0 = mai)', # MODIF
 
 	// L
 	'label_activer_barre_typo' => 'Attivare la barra tipografica per i pennarelli?',

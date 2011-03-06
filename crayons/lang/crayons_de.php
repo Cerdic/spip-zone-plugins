@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Alles bearbeiten',
 	'effets' => 'Effekte',
 	'explication_exec_autorise' => 'Zur Bearbeitung zugelassene Seiten
-  (?exec=...) : (exec-Skripte mit Komma trennen).',
+  (?exec=...) : (exec-Skripte mit Komma trennen).', # MODIF
 	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'Logo verkleinern wenn es
- gr&amp;ouml;&amp;szlig;er als x Pixel ist.Beispiel: 100. (0 = niemals)',
+ gr&amp;ouml;&amp;szlig;er als x Pixel ist.Beispiel: 100. (0 = niemals)', # MODIF
 
 	// L
 	'label_activer_barre_typo' => 'Funktionsleisten f&amp;uuml;r die Stifte aktivieren?',

@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Editalo ensembre',
 	'effets' => 'Efeutos',
 	'explication_exec_autorise' => 'P&aacute;xines que se permite camudar
-  (?exec=...) : (, pa xebrar los exec).',
+  (?exec=...) : (, pa xebrar los exec).', # MODIF
 	'explication_introduction_article' => 'La introducci&oacute;n d\'un art&iacute;culu amuesa la descripci&oacute;n del art&iacute;culu, sin&oacute;n amuesa los sos primeros 600 car&aacute;uteres (la entrada sigu&iacute;a pol testu).',
 	'explication_reduire_logo' => 'Amenorgar el logo si pasa del
-  tama&ntilde;u m&aacute;ximu indic&aacute;u en pixels. Exemplu: 100. (0 = enxam&aacute;s)',
+  tama&ntilde;u m&aacute;ximu indic&aacute;u en pixels. Exemplu: 100. (0 = enxam&aacute;s)', # MODIF
 
 	// L
 	'label_activer_barre_typo' => '&iquest;Activar la barra tipogr&aacute;fica nos ll&aacute;pices?',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Sur abandon', # NEW
 	'label_msg_no_change' => 'Si nun hai cambeos',
 	'label_reduire_logo' => 'Amenorgar los logos',
-	'label_yellow_fade' => 'Fade', # NEW
+	'label_yellow_fade' => 'Dilir',
 	'legend_controleur_hyperlien' => 'Hiperenllaz',
 	'legend_controleur_logo' => 'Escoyer un logo:',
 	'legend_controleur_logo_remplacer' => 'Trocar esti logo',

@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Editar todo',
 	'effets' => 'Efectos',
 	'explication_exec_autorise' => 'P&aacute;ginas cuya modificaci&oacute;n es permitida
-  (?exec=...) : (, para separar los exec).',
+  (?exec=...) : (, para separar los exec).', # MODIF
 	'explication_introduction_article' => 'La introducci&oacute;n de un art&iacute;culo ense&ntilde;a la descripci&oacute;n del art&iacute;culo, o los primeros 600 car&aacute;cteres (ep&iacute;grafe y luego texto).',
 	'explication_reduire_logo' => 'Reducir el logotipo si va mas all&aacute;
-  del tama&ntilde;o indicado en p&iacute;xeles.Ejemplo: 100. (0 = nunca)',
+  del tama&ntilde;o indicado en p&iacute;xeles.Ejemplo: 100. (0 = nunca)', # MODIF
 
 	// L
 	'label_activer_barre_typo' => '&iquest;Activar la barra tipogr&aacute;fica en los l&aacute;pices?',
