@@ -35,19 +35,9 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	var l = new OpenLayers.Layer.Vector("<:spip:icone_articles:>",{ styleMap: styleMap, opacity:1, visibility:1, originators: jQuery.geoportail.originators });
 	map.rlayer = l;
 	map.getMap().addLayer(l);
-
-	// Controle pour la selection
-	options = {
-		clickout: true, toggle: false,
-		multiple: false, hover: false,
-		onSelect: $.geoportail.popupFeature,
-		onUnselect: $.geoportail.unpopupFeature
-		}
-	var selectControl = new OpenLayers.Control.SelectFeature(map.rlayer, options);
-	map.getMap().addControl(selectControl);
-	map.rlayer.selectControl = selectControl;
-	selectControl.activate();
-
+	// Couche selectable
+	map.selectionnable(l);
+				
 	// Ajouter les articles
 	<BOUCLE_geo_article(ARTICLES){geoposition}{id_article?}{id_auteur?}{id_rubrique?}{id_secteur?}{id_mot?}{id_groupe?}{par date}{inverse}{0,#ENV{max,200}}>
 	{	var lon = #LON;
@@ -60,10 +50,10 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 			[(#SET{hauteur,[(#LOGO_ARTICLE||image_reduire{40}|hauteur|plus{[(#ENV{bord,4})]})]})]
 			var feature = jQuery.geoportail.createFeature (map, lon,lat, "[(#LOGO_ARTICLE||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]",#ENV{taille,20});
 		<//B_mot>
-		feature.attributes.img = "[(#LOGO_ARTICLE||image_reduire{40}|replace{'"',"'"})]";
+		feature.attributes.logo = "[(#LOGO_ARTICLE||image_reduire{60}|replace{'"',"'"})]";
 		feature.attributes.name = "[(#TITRE|attribut_html)]";
-		feature.attributes.link = "[(#URL_ARTICLE|url_absolue)]";
-		feature.attributes.description = "[(#INTRODUCTION|attribut_html|replace{\n,''}|replace{\r,''}|couper{100})]";
+		feature.attributes.url = "[(#URL_ARTICLE|url_absolue)]";
+		feature.attributes.description = "[(#INTRODUCTION|addslashes|replace{\n,''}|replace{\r,''}|couper{100})]";
 		map.rlayer.addFeatures(feature);
 	}
 	</BOUCLE_geo_article>

@@ -1,6 +1,11 @@
 /** */
 .gpMap, div.olMap
 {	cursor:default !important;
+	font-size:12px;
+}
+
+.gpMainDivClass
+{	font-size:12px;
 }
 
 /** Affichage des palettes */
@@ -37,24 +42,17 @@ img.gpGeocodeMatchCodeMatchType
 
 /** Popup sur la carte **/
 #popup
-{	font-size:0.77em;
-	line-height:1.3em;
+{	font-size:1em;
+	/* background: transparent url(popup.png) no-repeat bottom right; */
+	background-color:#FFC!important;
 }
 #popup p
-{	padding:0 0.5em ;
-	margin:0;	
-}
-#popup_contentDiv
-{	background: transparent url(guillemetg.png) no-repeat;
-}
-#popup p.guillemet
-{	padding:0.5em 0 0 1em;
+{	margin:0;
 }
 #popup .titre
-{	padding:0 0 0 20px;
-	margin:0;
-	font-size:1em;
+{	font-size:1em;
 	font-weight:bold;
+	margin:0;
 }
 #popup .spip_logos
 {	margin:0 0.5em 0 0;
@@ -66,6 +64,14 @@ img.gpGeocodeMatchCodeMatchType
 }
 #popup a
 {	color:Navy;
+}
+
+#popup .document
+{	text-align:center;
+}
+#popup .document .spip_logos
+{	margin:auto;
+	float:none;
 }
 
 #popup .olPopupCloseBox 

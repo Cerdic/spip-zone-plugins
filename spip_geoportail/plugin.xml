@@ -5,7 +5,7 @@
 	<auteur>	<!-- Auteur du plugin -->
 	  [Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]
 	</auteur>
-	<version>1.0</version>
+	<version>1.01</version>
 	<icon>img/geoportail.gif</icon>
 	<etat>
 		test

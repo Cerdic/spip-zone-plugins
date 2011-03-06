@@ -96,6 +96,8 @@ jQuery.geoportail =
 			var id = carte.id;
 			// Ajouter une fonction d'export
 			map.downloadData = geoportail_loadData;
+			// Ajouter une fonction de selection de layer
+			map.selectionnable = geoportail_selectionnable;
 			// Recherche du placement dans l'adresse
 			var lon = Number(this.getParam("lon"));
 			var lat = Number(this.getParam("lat"));
@@ -108,19 +110,27 @@ jQuery.geoportail =
 				map.getMap().zoomTo(zoom);
 				carte.fixe = true;
 			}
-			// Afficher les documents
+			// Afficher les documents associes
 			var k;
 			for (k = 0; k < carte.doc.length; k++)
 				this.addLayer(carte, carte.doc[k]['extension'], carte.doc[k]['id_document'], carte.doc[k]['titre'], carte.doc[k]['fichier'], carte.doc[k]['nozoom']);
 			// Afficher des images
 			if (carte.img.length) 
-			{	// Rajoute une couche pour les points
+			{	// Style de la couche
+				var symbolizer = OpenLayers.Util.applyDefaults(
+						{ pointRadius: 10, graphicXOffset: -2, graphicYOffset: -17 },
+						OpenLayers.Feature.Vector.style["default"]);
+				var styleMap = new OpenLayers.StyleMap({"default": symbolizer, "select": {pointRadius: 15, graphicXOffset: -4, graphicYOffset: -26}});
+				// Rajoute une couche pour les points
 				var t = carte.img[0].titre;
-				var l = new OpenLayers.Layer.Vector(t ? t : "IMG", { opacity: 1, visibility: 1, originators: jQuery.geoportail.originators });
+				var l = new OpenLayers.Layer.Vector(t ? t : "IMG", { styleMap: styleMap, opacity: 1, visibility: 1, originators: jQuery.geoportail.originators, view:{ zoomToExtent:1 } });
 				map.spip_img = l;
 				map.getMap().addLayer(l);
-				for (k = 0; k < carte.img.length; k++) {
-					var img = carte.img[k];
+				// couche selectionnable
+				map.selectionnable (l);
+				// Ajouter les documents dans la couche
+				for (k = 0; k < carte.img.length; k++) 
+				{	var img = carte.img[k];
 					var feature = jQuery.geoportail.createFeature(map, Number(img.lon), Number(img.lat), img.logo, img.taille, null, img.align);
 					feature.attributes = img.attributes;
 					l.addFeatures(feature);
@@ -144,7 +154,7 @@ jQuery.geoportail =
 			jQuery("#GeoportalMapDiv" + i).css("background-image", "none");
 		}
 	},
-
+	
 	/** Ajouter une fonction d'initialisation
 	permet d'empiler plusieurs fonctions a executer lorsque la carte est chargee
 	*/
@@ -448,6 +458,9 @@ jQuery.geoportail =
 		{	// Recherche des styles
 			setStyle(l.styleMap.styles['default'], 'geoportailDefaultStyle');
 			setStyle(l.styleMap.styles['select'], 'geoportailSelectStyle');
+			
+			// Permettre la selection du layer
+			map.selectionnable (l);
 		
 			// Sauvegarder l'id du document
 			l.id_document = id_document;
@@ -484,8 +497,8 @@ jQuery.geoportail =
 	},
 
 	// Creation d'une feature openlayer a mettre dans une carte
-	createFeature: function(map, lon, lat, logo, size, ol, align) {
-		if (!ol) ol = OpenLayers;
+	createFeature: function(map, lon, lat, logo, size, ol, align) 
+	{	if (!ol) ol = OpenLayers;
 		if (!align) align = 'center'
 		if (!size) size = 15;
 		var pt = new ol.Geometry.Point(lon, lat);
@@ -844,6 +857,7 @@ jQuery.geoportail =
 
 			// Style d'affichage par defaut
 			OpenLayers.Feature.Vector.style['default'].fillOpacity = 1;
+			OpenLayers.Feature.Vector.style['default'].cursor = 'pointer';
 			OpenLayers.Feature.Vector.style['select'].fillOpacity = 1;
 		}
 	},
@@ -941,25 +955,34 @@ jQuery.geoportail =
 	},
 
 	// Fonction d'affichage d'un popup sur une carte
-	popupFeature: function(feature) {
-		//    popup = new OpenLayers.Popup.FramedCloud("popup", 
-		popup = new OpenLayers.Popup.AnchoredBubble("popup",
-										feature.geometry.getBounds().getCenterLonLat(),
-										new OpenLayers.Size(200, 100),
-										feature.attributes.img +
-										"<p class=titre><a href='" + feature.attributes.link + "'>" + feature.attributes.name + "</a></p>"
-										+ feature.attributes.description
-										,
-										null, true,
-										function(evt) {
-											if (this.feature) $.geoportail.unpopupFeature(this.feature);
-										});
+	popupFeature: function(feature) 
+	{	// OpenLayers.Popup.FramedCloud 
+		// OpenLayers.Popup.AnchoredBubble
+		var spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true });
+		var html = "";
+		var att = feature.attributes;
+		var lien = null;
+		if (att.url) lien = "<a href='" + att.url + "'>";
+		if (att.logo) html += att.logo;
+		if (att.img) html += (lien ? lien : "") + "<img src='"+att.img+"' class='spip_logos' />" + (lien ? "</a>" : "");
+		if (att.name) html += "<p class=titre>"+ (lien ? lien : "") + att.name + (lien ? "</a>" : "") + "</p>";
+		if (att.description) html += att.description;
+		if (!html) return;
+		html = "<div class='"+(att.classe ? att.classe : "")+"'>"+html+"</div>";
+		popup = new spip_popup("popup",
+							feature.geometry.getBounds().getCenterLonLat(),
+							new OpenLayers.Size(400,400),
+							html,
+							null, true,
+							function(evt) {
+								if (this.feature) $.geoportail.unpopupFeature(this.feature);
+						});
 
 		popup.maxSize = new OpenLayers.Size(400, 200);
 		popup.minSize = new OpenLayers.Size(220, 0);
 		popup.feature = feature; //mimic Geoportal.Popup (See closeFeatureInfo)
 		feature.popup = popup;
-		popup.setBackgroundColor("#ffffcc");
+		//popup.setBackgroundColor("#ffffcc");
 		feature.layer.map.addPopup(popup);
 	},
 
@@ -1009,6 +1032,32 @@ function geoportail_moveSynchro (e)
 			c.setCenter(pt,this.map.getMap().getZoom());
 		this.synchro[i].moving = false;
 	}
+}
+
+
+/** Ajoute un layer selectionnable a une carte
+@param l : le layer
+*/
+function geoportail_selectionnable (l)
+{	// Controle pour la selection
+	options = {
+		clickout: true, toggle: false,
+		multiple: false, hover: false,
+		onSelect: $.geoportail.popupFeature,
+		onUnselect: $.geoportail.unpopupFeature
+		}
+	var layers;
+	if (this.selectControl) 
+	{	this.selectControl.deactivate();
+		layers = this.selectControl.layers;
+		if (!layers) layers = [ this.selectControl.layer ];
+	}
+	else layers = new Array();
+	layers[layers.length] = l;
+	var selectControl = new OpenLayers.Control.SelectFeature(layers, options);
+	this.getMap().addControl(selectControl);
+	this.selectControl = selectControl;
+	selectControl.activate();
 }
 
 /** Fonction de telechargement

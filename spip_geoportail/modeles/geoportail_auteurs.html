@@ -42,10 +42,10 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	{	[(#SET{largeur,[(#LOGO_AUTEUR||image_reduire{40}|largeur|plus{[(#ENV{bord,4})]})]})]
 		[(#SET{hauteur,[(#LOGO_AUTEUR||image_reduire{40}|hauteur|plus{[(#ENV{bord,4})]})]})]
 		var feature = jQuery.geoportail.createFeature (map, #LON,#LAT, "[(#LOGO_AUTEUR||image_reduire{40}|image_recadre{#GET{largeur},#GET{hauteur},center,#ENV{couleur,#FFFFFF}}|extraire_attribut{src})]",#ENV{taille,20});
-		feature.attributes.img = "[(#LOGO_AUTEUR||image_reduire{40}|replace{'"',"'"})]";
+		feature.attributes.logo = "[(#LOGO_AUTEUR|#URL_AUTEUR|image_reduire{60}|replace{'"',"'"})]";
 		feature.attributes.name = "[(#NOM|attribut_html)]";
-		feature.attributes.link = "[(#URL_AUTEUR|url_absolue)]";
-		feature.attributes.description = "[(#BIO**|attribut_html|replace{\n,''}|replace{\r,''}|couper{100})]";
+		feature.attributes.url = "[(#URL_AUTEUR|url_absolue)]";
+		feature.attributes.description = "[(#BIO|couper{200}|addslashes|replace{\n,''}|replace{\r,''})]";
 		feature.attributes.statut = "#STATUT";
 		map.rlayer.addFeatures(feature);
 	}
