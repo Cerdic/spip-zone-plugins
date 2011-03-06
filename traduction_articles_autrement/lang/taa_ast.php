@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'necesite_afficher_objet' => 'Pa poder utilizar esta funci&oacute;n tienes d\'instalar el complementu',
 
 	// O
-	'options' => 'Opciones', # MODIF
+	'options' => 'Camudar les opciones de llingua',
 
 	// T
 	'titre_plugin' => 'Traducci&oacute;n d\'art&iacute;culos d\'otra miente',
