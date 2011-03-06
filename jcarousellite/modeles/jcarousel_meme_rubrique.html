@@ -21,11 +21,13 @@ Modèle jcaroussel_meme_rubrique :  liste les articles d'une rubrique sous forme
 					</BOUCLE_articles_rubrique>
 			</ul>
 		</div>
-		<button class="prev disabled">
-			Précédent
-		</button>
-		<button class="next">
-			Suivant
-		</button>
+		[(#TOTAL_BOUCLE|>{1}|oui) 
+			<button class="prev disabled">
+				Précédent
+			</button>
+			<button class="next">
+				Suivant
+			</button>
+		]
 	</div>
 </B_articles_rubrique>

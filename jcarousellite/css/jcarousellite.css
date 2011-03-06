@@ -49,7 +49,7 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
-.carousel .disabled {
+.carousel .disabled, .carousel .disabled:hover  {
 	cursor: normal;
 	text-decoration: none;
 	color: #DDDDDD;

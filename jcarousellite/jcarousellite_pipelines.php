@@ -10,8 +10,8 @@ function jcarousellite_insert_head($flux){
 			* 	Modèle <jcarousel_meme_rubrique>
 			*/
 			$(".SliderArticlesMemeRubrique .jCarouselLite").jCarouselLite({
-				 btnNext: ".articleSlider .next",
-			    btnPrev: ".articleSlider .prev",
+				 btnNext: ".SliderArticlesMemeRubrique .next",
+			    btnPrev: ".SliderArticlesMemeRubrique .prev",
 			    circular: false
 			});
 			
