@@ -6,7 +6,7 @@
 	<icon>images/tradrub-128.png</icon>
 	<licence>GNU/GPL</licence>
 	
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<version_base>1.0</version_base>
 	<etat>stable</etat>
 	<description>
@@ -22,10 +22,6 @@
 
 	<install>base/tradrub_install.php</install>
 	
-	<pipeline>
-		<nom>autoriser</nom>
-		<inclure>tradrub_autorisations.php</inclure>
-	</pipeline>
 		
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
