@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_forum_longueur' => 'Longueur des messages', # NEW
-	'cfg_forum_longueur_maxi' => 'Longueur maximale', # NEW
-	'cfg_forum_longueur_mini' => 'Longueur minimale', # NEW
+	'cfg_forum_longueur' => 'Longueur des messages',
+	'cfg_forum_longueur_maxi' => 'Longueur maximale',
+	'cfg_forum_longueur_mini' => 'Longueur minimale',
 	'comment' => 'commentaire',
 	'comments' => 'commentaires',
 	'comments_h' => 'Tes commentaires',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'submit2' => 'Confirmer l\'envoi',
 
 	// T
-	'titre_comments' => 'Comments' # NEW
+	'titre_comments' => 'Comments'
 );
 
 ?>
