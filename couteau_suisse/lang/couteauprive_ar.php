@@ -55,10 +55,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 @puce@ &#1575;&#1610; &#1601;&#1574;&#1577; &#1605;&#1606; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601;&#1610;&#1606; &#1610;&#1580;&#1576; &#1575;&#1606; &#1578;&#1592;&#1607;&#1585; &#1601;&#1610; &#1607;&#1584;&#1607; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577;&#1567;
 [[%auteurs_tout_voir%]][[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
 	'auteurs:nom' => '&#1589;&#1601;&#1581;&#1577; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601;&#1610;&#1606;',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]', # NEW
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]][[->%alinea2%]]', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>', # NEW
-	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)', # NEW
+	'autobr_non' => '&Agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>', # NEW
+	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
 	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>', # NEW
 
 	// B
@@ -257,6 +257,7 @@ _ {{&#1634;.}} &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &lt;tabl
 	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
 	'detail_spip_options2' => 'Il est recommand&eacute; de placer les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;[.->cs_comportement]&raquo;.', # NEW
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.', # NEW
+	'detail_surcharge' => 'Outil surcharg&eacute; :', # NEW
 	'detail_traitements' => '&#1575;&#1604;&#1605;&#1593;&#1575;&#1604;&#1580;&#1575;&#1578;:',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.', # NEW
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)', # NEW

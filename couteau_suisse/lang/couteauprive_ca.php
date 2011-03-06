@@ -12,46 +12,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => '&nbsp;:&nbsp;si',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tots els enlla&ccedil;os del lloc s\'obren, per defecte, a la mateixa finestra de navegaci&oacute; en la que esteu. Per&ograve; pot ser &uacute;til obrir els enlla&ccedil;os externs al lloc en una nova finestra --es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP de les classes {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser &uacute;til afegir una d\'aquestes classes als enlla&ccedil;os de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al m&agrave;xim aquesta funcionalitat.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tots els enlla&ccedil;os del lloc s\'obren, per defecte, a la mateixa finestra de navegaci&oacute; en la que esteu. Per&ograve; pot ser &uacute;til obrir els enlla&ccedil;os externs al lloc en una nova finestra -- aix&ograve; es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enlla&ccedil;os de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al m&agrave;xim aquesta funcionalitat.[[%radio_target_blank3%]]
 
-
-
-@puce@ SPIP permet lligar paraules amb la seva definici&oacute; gr&agrave;cies a la drecera tipogr&agrave;fica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de m&eacute;s avall), el glossari extern us envia cap a l\'enciclop&egrave;dia lliure wikipedia.org. Us toca a vosaltres escolir quina adre&ccedil;a voleu utilitzar. <br />Enlla&ccedil; de prova: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
+@puce@ SPIP permet lligar paraules amb la seva definici&oacute; gr&agrave;cies a la drecera tipogr&agrave;fica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de m&eacute;s avall), el glossari extern us envia cap a l\'enciclop&egrave;dia lliure wikipedia.org. Us toca a vosaltres escollir quina adre&ccedil;a voleu utilitzar. <br />Enlla&ccedil; de prova: [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enlla&ccedil;os &laquo;~mailto:~&raquo;: un petit sobre hauria d\'apar&egrave;ixer al davant de cada enlla&ccedil; lligat a un correu electr&ograve;nic; per&ograve; com que no tots els navegadors el poden mostrar (sobretot IE6, IE7 i SAF3), heu de veure si voleu conservar aquest afegit.
-
-_ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina completament).[[%enveloppe_mails%]]', # MODIF
+_ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina completament).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP i els enlla&ccedil;os externs',
-	'SPIP_tailles:description' => '@puce@ Per tal d\'alleugerir la mem&ograve;ria del vostre servidor, SPIP us permet limitar les dimensions (amplada i llargada) i la mida del fitxer de les imatges, logos o documents adjunts als diversos continguts del vostre lloc. Si un fitxer sobrepassa la mida indicada, el formulari enviar&agrave; b&eacute; les dades per&ograve; seran destru&iuml;des i SPIP no les tindr&agrave; en compte ni a dins del directori IMG/, ni a la base de dades. Llavors s\'enviar&agrave; un missatge d\'advert&egrave;ncia a l\'usuari.
-
-
+	'SPIP_tailles:description' => '@puce@ Per tal d\'alleugerir la mem&ograve;ria del vostre servidor, SPIP us permet limitar les dimensions (amplada i llargada) i la mida del fitxer de les imatges, logos o documents adjunts als diversos continguts del vostre lloc. Si un fitxer sobrepassa la mida indicada, el formulari enviar&agrave; b&eacute; les dades per&ograve; seran destru&iuml;des i SPIP no les tindr&agrave; en compte, ni a dins del directori IMG/, ni a la base de dades. Llavors s\'enviar&agrave; un missatge d\'advert&egrave;ncia a l\'usuari.
 
 Un valor nul o no informat correspon a un valor il&middot;limitat.
-
-[[Al&ccedil;ada: %img_Hmax% pixels]][[->Amplada: %img_Wmax% pixels]][[->Pes del fitxer: %img_Smax% Ko]]
-
-[[Al&ccedil;ada: %logo_Hmax% pixels]][[->Amplada: %logo_Wmax% pixels]][[->Pes del fitxer: %logo_Smax% Ko]]
-
+[[Al&ccedil;ada: %img_Hmax% p&iacute;xels]][[->Amplada: %img_Wmax% p&iacute;xels]][[->Pes del fitxer: %img_Smax% Ko]]
+[[Al&ccedil;ada: %logo_Hmax% p&iacute;xels]][[->Amplada: %logo_Wmax% p&iacute;xels]][[->Pes del fitxer: %logo_Smax% Ko]]
 [[Pes del fitxer: %doc_Smax% Ko]]
-
-
 
 @puce@ Definiu aqu&iacute; l\'espai m&agrave;xim reservat als fitxer distants que SPIP podria descarregar (de servidor a servidor) i emmagatzemar al vostre lloc. Aqu&iacute;, el valor per defecte &eacute;s de 16 Mb.[[%copie_Smax% Mo]]
 
-
-
-@puce@ Per tal d\'evitar un depassament de mem&ograve;ria PHP en el tractament per la llibreria GD2 de grans imatges,PIP prova les capacitats del servidor i, per tant, pot refusar tractar les imatges massa grans. &Eacute;s possible desactivar aquest test definint manualment el nombre m&agrave;xim de p&iacute;xels suportats pels c&agrave;lculs.
-
-
+@puce@ Per tal d\'evitar un depassament de mem&ograve;ria PHP en el tractament per la llibreria GD2 de grans imatges, SPIP prova les capacitats del servidor i, per tant, pot refusar tractar les imatges massa grans. &Eacute;s possible desactivar aquest test definint manualment el nombre m&agrave;xim de p&iacute;xels suportats pels c&agrave;lculs.
 
 El valor de 1~000~000 p&iacute;xels sembla correcte per una configuraci&oacute; amb poca mem&ograve;ria. Un valor nul o no indicat activar&agrave; el test del servidor.
-
 [[%img_GDmax% p&iacute;xels com a m&agrave;xim]]
 
-
-
 @puce@ La llibreria GD2 permet ajustar la qualitat de la compressi&oacute; de les imatges JPG. Un percentatge elevat equival a una qualitat elevada.
-
-[[%img_GDqual% %]]', # MODIF
+[[%img_GDqual% %]]',
 	'SPIP_tailles:nom' => 'L&iacute;mits de la mem&ograve;ria',
 
 	// A
@@ -61,36 +43,28 @@ El valor de 1~000~000 p&iacute;xels sembla correcte per una configuraci&oacute; 
 	'admins_seuls' => 'Nom&eacute;s els administradors',
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) un nom i/o un correu electr&ograve;nic per tal d\'evitar les contribucions totalment an&ograve;nimes. Fixeu-vos que aquesta eina fa una verificaci&oacute; del JavaScript al lloc del visitant.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
-
-{Alerta: Escollir la tercera opci&oacute; anul&middot;la les 2 primeres. &Eacute;s important verificar que els formularis del vostre esquelet s&oacute;n compatibles completament amb aquesta eina.}', # MODIF
+{Alerta: Escollir la tercera opci&oacute; anul&middot;la les 2 primeres. &Eacute;s important verificar que els formularis del vostre esquelet s&oacute;n compatibles completament amb aquesta eina.}',
 	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
 	'auteur_forum_deux' => 'O, al menys un dels dos camps precedents',
 	'auteur_forum_email' => 'El camp &laquo;@_CS_FORUM_EMAIL@&raquo;',
 	'auteur_forum_nom' => 'El camp &laquo;@_CS_FORUM_NOM@&raquo;',
 	'auteurs:description' => 'Aquesta eina configura l\'aparen&ccedil;a de [la p&agrave;gina autors->./?exec=auteurs], a la part privada.
 
-
-
 @puce@ Definiu aqu&iacute; el nombre m&agrave;xim d\'autors a mostrar en el quadre central de la p&agrave;gina d\'autors. M&eacute;s enll&agrave;, trobem una paginaci&oacute;.[[%max_auteurs_page%]]
 
-
-
 @puce@ Quins estats d\'autors es poden llistar en aquesta p&agrave;gina?
-
-[[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
+[[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'P&agrave;gina d\'autors',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]', # NEW
-	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>', # NEW
-	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)', # NEW
-	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>', # NEW
+	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de l&iacute;nia simples per un salt de l&iacute;nia HTML &lt;br />.[[%alinea%]]', # MODIF
+	'autobr:nom' => 'Retorns de l&iacute;nia autom&agrave;tics',
+	'autobr_non' => 'Tots els textos del lloc, per&ograve; nom&eacute;s a l\'interior d\'etiquetes &lt;alinea>&lt;/alinea>', # MODIF
+	'autobr_oui' => 'Tots els textos d\'article i missatges p&uacute;blics (etiqueta #TEXTE)', # MODIF
+	'autobr_racc' => 'Retorns de l&iacute;nia: <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
-	'balise_set:description' => 'Per simplificar l\'escriptura del tipus  <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la seg&uuml;ent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
+	'balise_set:description' => 'Per simplificar les escriptures del tipus <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la seg&uuml;ent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
 
-
-
-Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLACE{x,ons,ez}</code>.', # MODIF
+Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLACE{x,ons,ez}</code>.',
 	'balise_set:nom' => 'Etiqueta #SET ampliada',
 	'barres_typo_edition' => 'Edici&oacute; dels continguts',
 	'barres_typo_forum' => 'Missatges del F&ograve;rum',
@@ -99,72 +73,41 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (&agrave;lies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
 	'blocs:description' => 'Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
 
-
-
 @puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos d\'aquesta manera: 
 
-
-
 <quote><code>
-
 <bloc>
  Un t&iacute;tol que esdevindr&agrave; clicable
 
- 
-
  El text a amagar/mostrar, despr&eacute;s de dos salts de l&iacute;nia...
-
  </bloc>
-
 </code></quote>
-
-
 
 @puce@ {{En els esquelets}}: teniu disponibles les noves etiquetes #BLOC_TITRE, #BLOC_DEBUT i #BLOC_FIN per utilitzar d\'aquesta manera: 
 
 <quote><code> #BLOC_TITRE o #BLOC_TITRE{mon_URL}
-
  El meu t&iacute;tol
-
  #BLOC_RESUME    (facultatiu)
-
  una versi&oacute; resumida del bloc seg&uuml;ent
-
  #BLOC_DEBUT
-
  El meu bloc desplegable (que contindr&agrave; el URL al que apunta si &eacute;s necessari)
-
  #BLOC_FIN</code></quote>
-
-
 
 @puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'obertura d\'un bloc provocar&agrave; el tancament de tots els altres blocs de la p&agrave;gina, per tal de tenir-ne nom&eacute;s un d\'obert a la vegada.[[%bloc_unique%]]
 
-
-
 @puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'estat dels blocs enumerats ser&agrave; emmagatzemat a una galeta el temps de la sessi&oacute;, per tal de conservar l\'aspecte de la p&agrave;gina en cas de retorn.[[%blocs_cookie%]]
-
-
 
 @puce@ El Ganivet Su&iacute;s utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel t&iacute;tol dels blocs desplegables. Escolliu aqu&iacute; una altra etiqueta &lt;hN&gt;&nbsp;:[[%bloc_h4%]]
 
-
-
-@puce@ Per tal d\'obtenir un efecte m&eacute;s agradable al moment del clic, els vostres blocs desplegables es poden animar com si "llisquessin".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
+@puce@ Per tal d\'obtenir un efecte m&eacute;s agradable al moment del clic, els vostres blocs desplegables es poden animar com si "llisquessin".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits m&eacute;s avall apareixen aqu&iacute; o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
-
 - {{Les revisions del Ganivet Su&iacute;s}}: un quadre a la p&agrave;gina actual de configuraci&oacute;, indicant les &uacute;ltimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).
-
 - {{Els articles en format SPIP}}: un quadre desplegable suplementari pels vostres articles que permet con&egrave;ixer el codi font utilitzat pels seus autors.
-
 - {{Els autors en estat}}: un quadre desplegable sobre [la page des auteurs->./?exec=auteurs] que indica els 10 &uacute;ltims connectats i les inscripcions no confirmades. Aquestes informacions nom&eacute;s les veuen els administradors.
-
 - {{Els Webmestres SPIP}}: un quadre desplegable a [la page des auteurs->./?exec=auteurs] que indica els administradors que tenen el nivell de Webmestre SPIP. Nom&eacute;s els administradors veuen aquestes informacions. Si tu mateix ets Webmestre, mira tamb&eacute; l\'eina &laquo;&nbsp;[.->webmestres]&nbsp;&raquo;.
-
 - {{Els URLs propis}}: un quadre desplegable per cada objecte de contingut (article, secci&oacute;, autor,...) indicant el URL propi associat aix&iacute; com el seu &agrave;lies eventual. L\'eina &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; us permet una configuraci&oacute; dels URLs del vostre lloc Web.
-
-- {{Les classificacions d\'autors}}: un quadre desplegable pels articles que contenen m&eacute;s d\'un autor i que permet simplement ajustar-ne l\'ordre de visualitzaci&oacute;. ', # MODIF
+- {{Les classificacions d\'autors}}: un quadre desplegable pels articles que contenen m&eacute;s d\'un autor i que permet simplement ajustar-ne l\'ordre de visualitzaci&oacute;. ',
 	'boites_privees:nom' => 'Requadres privats',
 	'bp_tri_auteurs' => 'Les classificacions d\'autors',
 	'bp_urls_propres' => 'Els URLs propis',
@@ -193,63 +136,38 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>',
 	'certaines_couleurs' => 'Nom&eacute;s les etiquetes definides m&eacute;s avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
-
-_ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.', # MODIF
+_ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Emoticones',
 	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes &lt;quote&gt; per les etiquetes &lt;q&gt; quan no hi ha salt de l&iacute;nia. Efectivament, les citacions curtes han d\'estar envoltades per &lt;q&gt; i les citacions que contenen par&agrave;grafs per &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citacions ben etiquetades',
 	'class_spip:description1' => 'Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a utilitzar el valor per defecte.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Les dreceres d\'SPIP}}.
 
-
-
-Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer servir el valor per defecte.[[%racc_hr%]][[%puce%]]', # MODIF
+Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer servir el valor per defecte.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
-
-
 
 {Atenci&oacute;: si l\'eina &laquo;&nbsp;[.->pucesli]&nbsp;&raquo; est&agrave; activada, la substituci&oacute; del guionet &laquo;&nbsp;-&nbsp;&raquo; no es far&agrave;; al seu lloc s\'utilitzar&agrave; una llista del tipus &lt;ul>&lt;li>.}
 
-
-
-SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subt&iacute;tols. Escolliu aqu&iacute; un altre empla&ccedil;ament:[[%racc_h1%]][[->%racc_h2%]]', # MODIF
+SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subt&iacute;tols. Escolliu aqu&iacute; un altre empla&ccedil;ament:[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
-
-
 
 SPIP ha escollit utilitzar l\'etiqueta &lt;strong> per transcriure les negretes. Per&ograve; &lt;b> tamb&eacute; hauria pogut anar b&eacute;, amb o sense estil. Vosaltres decidiu:[[%racc_g1%]][[->%racc_g2%]]
 
-
-
 SPIP ha escollit utilitzar l\'etiqueta &lt;i> per transcriure les it&agrave;liques. Per&ograve; &lt;em> tamb&eacute; hauria pogut anar b&eacute;, amb o sense estil. Vosaltres decidiu: [[%racc_i1%]][[->%racc_i2%]]
-
-
 
  Podeu tamb&eacute; definir el codi obrint i tancant per les crides de notas a peu de p&agrave;gina (Atenci&oacute;! Les modificacions nom&eacute;s seran visibles a l\'espai p&uacute;blic: [[%ouvre_ref%]][[->%ferme_ref%]]
 
- 
-
  Podeu definir el codi obrint i tancant per les notes de peu de p&agrave;gina: [[%ouvre_note%]][[->%ferme_note%]]
-
-
 
 @puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versi&oacute; 1.92 d\'SPIP, les dreceres tipogr&agrave;fiques produeixen etiquetes sistem&agrave;ticament vestides de l\'estil "spip". Per exemple: <code><p class="spip"></code>. Aqu&iacute; podeu definir l\'estil d\'aquestes etiquetes en funci&oacute; dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicar&agrave; cap estil en particular.
 
-
-
 {Atenci&oacute;: si algunes dreceres (l&iacute;nia horitzontal, subt&iacute;tol, it&agrave;lica, negreta) s\'han modificat m&eacute;s amunt, els estils posteriors no s\'aplicaran.}
 
-
-
 <q1>
-
 _ {{1.}} Etiquetes &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
-
 _ {{2.}} Etiquetes &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; i les llistes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
-
-
-Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave;ndards d\'SPIP associats a aquestes etiquetes.</q1>', # MODIF
+Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave;ndards d\'SPIP associats a aquestes etiquetes.</q1>',
 	'class_spip:nom' => 'SPIP i les seves dreceres…',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funcions',
@@ -262,7 +180,7 @@ Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave
 	'compacte_prive' => 'No compactar res a la part privada',
 	'compacte_tout' => 'No compactar res de res (fa caducar les opcions anteriors)',
 	'contrib' => 'M&eacute;s informacions: @url@',
-	'copie_vers' => 'Copie vers : @dir@', # NEW
+	'copie_vers' => 'Copia cap a: @dir@',
 	'corbeille:description' => 'SPIP suprimeix autom&agrave;ticament els objectes llen&ccedil;ats a la paperera les &uacute;ltimes 24 hores, en general des de les 4 de la matinada, gr&agrave;cies a una tasca &laquo;CRON&raquo; (llan&ccedil;ament peri&ograve;dic i/o autom&agrave;tic dels processos programats pr&egrave;viament). Aqu&iacute; podeu impedir aquest proc&eacute;s per tal de gestionar millor la vostra paperera. [[%arret_optimisation%]]',
 	'corbeille:nom' => 'La paperera',
 	'corbeille_objets' => '@nb@ objecte(s) a la paperera. ',
@@ -273,38 +191,24 @@ Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave
 	'couleurs:aide' => 'Acolorir el text: <b>[coul]text[/coul]</b>@fond@ amb <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet aplicar f&agrave;cilment colors a tots els textos del lloc (articles, breus, t&iacute;tols, f&ograve;rum, …) utilitzant etiquetes entre claud&agrave;tors en dreceres: <code>[couleur]texte[/couleur]</code>.
 
-
-
 Dos exemples id&egrave;ntics per canviar el color del text:@_CS_EXEMPLE_COULEURS2@
-
-
 
 &Iacute;dem per canviar el fons, si la opci&oacute; de m&eacute;s avall ho permet:@_CS_EXEMPLE_COULEURS3@
 
-
-
 [[%couleurs_fonds%]]
-
 [[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
-
-@_CS_ASTER@El format d\'aquestes etiquetes personalitzades ha de llistar colors existents o definir parelles &laquo;balise=couleur&raquo;, separats tots per comes. Exemples: &laquo;gris, vermell&raquo;, &laquo;fluix=groc, fort=vermell&raquo;, &laquo;baix=#99CC11, alt=marr&oacute;&raquo; o fins i tot &laquo;gris=#DDDDCC, vermell=#EE3300&raquo;. Pel primer i l\'&uacute;ltim exemple, les etiquetes autoritzades s&oacute;n: <code>[gris]</code> i <code>[rouge]</code> (<code>[fond gris]</code> i <code>[fond rouge]</code> si els fons estan permesos).', # MODIF
+@_CS_ASTER@El format d\'aquestes etiquetes personalitzades ha de llistar colors existents o definir parelles &laquo;balise=couleur&raquo;, separats tots per comes. Exemples: &laquo;gris, vermell&raquo;, &laquo;fluix=groc, fort=vermell&raquo;, &laquo;baix=#99CC11, alt=marr&oacute;&raquo; o fins i tot &laquo;gris=#DDDDCC, vermell=#EE3300&raquo;. Pel primer i l\'&uacute;ltim exemple, les etiquetes autoritzades s&oacute;n: <code>[gris]</code> i <code>[rouge]</code> (<code>[fond gris]</code> i <code>[fond rouge]</code> si els fons estan permesos).',
 	'couleurs:nom' => 'Tot en colors',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Podeu obtenir molta informaci&oacute; sobre el funcionament del Ganivet Su&iacute;s als fitxers {spip.log} que es poden trobar a dins del directori: {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
-
-
 
 @puce@ {{Opcions SPIP.}} SPIP ordena els connectors en un ordre espec&iacute;fic. Si voleu estar segurs que el Ganivet Su&iacute;s estigui al capdamunt i gestioni abans certes opcions d\'SPIP, marqueu la seg&uuml;ent opci&oacute;. Si els drets del vostre servidor ho permeten, el fitxer {<html>@_CS_FILE_OPTIONS@</html>} ser&agrave; modificat autom&agrave;ticament per incloure el fitxer {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
 [[%spip_options_on%]]@_CS_FILE_OPTIONS_ERR@
 
-
-
 @puce@ {{Peticions externes.}} D\'una banda, el Ganivet Su&iacute;s verifica regularment si existeix una versi&oacute; m&eacute;s recent del seu codi i informa a la seva p&agrave;gina de configuraci&oacute; que hi ha una actualitzaci&oacute; disponible. Per l\'altra, aquest connector necessita per funcionar certes eines que poden necessitar la importaci&oacute; de llibreries distants.
 
-
-
-Si els requeriments externs del vostre servidor us posen problemes o teniu problemes de millora de seguretat, marqueu les seg&uuml;ents caselles.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
+Si els requeriments externs del vostre servidor us posen problemes o teniu problemes de millora de seguretat, marqueu les seg&uuml;ents caselles.[[%distant_off%]][[->%distant_outils_off%]]',
 	'cs_comportement:nom' => 'Comportaments del Ganivet Su&iacute;s',
 	'cs_distant_off' => 'Les verificacions de versions distants',
 	'cs_distant_outils_off' => 'Les eines del Ganivet Su&iacute;s que tenen fitxers distants',
@@ -316,54 +220,32 @@ Si els requeriments externs del vostre servidor us posen problemes o teniu probl
 
 	// D
 	'decoration:aide' => 'Decoraci&oacute;: <b>&lt;etiqueta&gt;test&lt;/etiqueta&gt;</b>, amb <b>etiqueta</b> = @liste@',
-	'decoration:description' => 'De nou estils parametrables a dins dels vostres textos i accessibles gr&agrave;cies a les etiquetes &agrave; chevrons. Exemple: 
-
-&lt;lamevaetiqueta&gt;text&lt;/lamevaetiqueta&gt; o : &lt;lamevaetiqueta/&gt;.<br />Definiu m&eacute;s avall els estils CSS que necessiteu, una etiqueta per l&iacute;nia, segons les seg&uuml;ents sintaxis:
-
+	'decoration:description' => 'Nous estils parametrables a dins dels vostres textos i accessibles gr&agrave;cies a les etiquetes &agrave; chevrons. Exemple: 
+&lt;lamevaetiqueta&gt;text&lt;/lamevaetiqueta&gt; o: &lt;lamevaetiqueta/&gt;.<br />Definiu m&eacute;s avall els estils CSS que necessiteu, una etiqueta per l&iacute;nia, segons les seg&uuml;ents sintaxis:
 - {tipus.lamevaetiqueta = el meu estil CSS}
-
 - {tipus.lamevaetiqueta.class = la meva  classe CSS}
-
 - {tipus.lamevaetiqueta.lang = la meva llengua (ex: ca)}
-
 - {unalies = lamevaetiqueta}
 
-
-
 El par&agrave;metre {tipus} de m&eacute;s amunt pot agafar tres valors:
-
 - {span}: etiqueta a l\'interior d\'un par&agrave;graf (tipus Inline)
-
 - {div}: etiqueta que crea un par&agrave;graf nou (tipus Block)
-
 - {auto}: etiqueta determinada autom&agrave;ticament pel plugin
 
-
-
-[[%decoration_styles%]]', # MODIF
+[[%decoration_styles%]]',
 	'decoration:nom' => 'Decoraci&oacute;',
 	'decoupe:aide' => 'Bloc de pestanyes: <b>&lt;pestanyes>&lt;/pestanyes></b><br />Separador de p&agrave;gines o de pestanyes&nbsp;: @sep@',
 	'decoupe:aide2' => '&Agrave;lies:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ Talla la visualitzaci&oacute; p&uacute;blica d\'un article en diverses p&agrave;gines gr&agrave;cies a una paginaci&oacute; autom&agrave;tica. Situeu simplement a dins del vostre article quatre signes m&eacute;s consecutius (<code>++++</code>) a l\'indret on s\'hagi de realitzar el tall.
 
-
-
 Per defecte, el Ganivet Su&iacute;s insereix la paginaci&oacute; al capdamunt i al peu de l\'article autom&agrave;ticament. Per&ograve; teniu la possibilitat de situar aquesta paginaci&oacute; all&agrave; on us interessi del vostre esquelet gr&agrave;cies a una etiqueta #CS_DECOUPE que podeu activar aqu&iacute;:
-
 [[%balise_decoupe%]]
-
-
-
 
 @puce@ Si feu servir aquest separador a l\'interior d\'etiquetes &lt;onglets&gt; i &lt;/onglets&gt; obtindreu aleshores un joc de pestanyes.
 
-
-
 A dins dels esquelets: teniu a la vostra disposici&oacute; les noves etiquetes #ONGLETS_DEBUT, #ONGLETS_TITRE i #ONGLETS_FIN.
 
-
-
-Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', # MODIF
+Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'decoupe:nom' => 'Talla en p&agrave;gines i pestanyes',
 	'desactiver_flash:description' => 'Suprimeix els objectes flash de les p&agrave;gines del vostre lloc i les substitueix pel contingut alternatiu associat.',
 	'desactiver_flash:nom' => 'Desactiva els objectes flash',
@@ -376,9 +258,10 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', # 
 	'detail_jquery3' => '{{Atenci&oacute;}} : aquesta eina necessita el plugin [jQuery per SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] per funcionar correctament amb aquesta versi&oacute; d\'SPIP.',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_raccourcis' => 'Llista de dreceres tipogr&agrave;fiques reconegudes per aquesta eina.',
-	'detail_spip_options' => '{{Nota}}: En cas de disfunci&oacute; d\'aquesta eina, poseu abans les opcions SPIP gr&agrave;cies a l\'eina &laquo;@lien@&raquo;.', # MODIF
-	'detail_spip_options2' => 'Il est recommand&eacute; de placer les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;[.->cs_comportement]&raquo;.', # NEW
-	'detail_spip_options_ok' => '{{Nota}}: Aquesta eina posa actualment les opcions SPIP amunt gr&agrave;cies a l\'eina &laquo;@lien@&raquo;.', # MODIF
+	'detail_spip_options' => '{{Nota}}: En cas de disfunci&oacute; d\'aquesta eina, poseu abans les opcions SPIP gr&agrave;cies a l\'eina &laquo;@lien@&raquo;.',
+	'detail_spip_options2' => '&Eacute;s recomanable posar m&eacute;s amunt les opcions gr&agrave;cies a l\'eina &laquo;[.->cs_comportement]&raquo;.',
+	'detail_spip_options_ok' => '{{Nota}}: Aquesta eina posa actualment les opcions SPIP m&eacute;s amunt gr&agrave;cies a l\'eina &laquo;@lien@&raquo;.',
+	'detail_surcharge' => 'Outil surcharg&eacute; :', # NEW
 	'detail_traitements' => 'Tractaments :',
 	'devdebug:description' => '{{Aquesta eina us permet veure els errors PHP a la pantalla.}}<br />Podeu escollir el nivell d\'errors d\'execuci&oacute; PHP que es mostrar&agrave; si el depurador est&agrave; actiu, aix&iacute; com l\'espai SPIP sobre el que s\'aplicaran aquests par&agrave;metres.',
 	'devdebug:item_e_all' => 'Tots els missatges d\'error (all)',
@@ -400,24 +283,24 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', # 
 	'dossier_squelettes:nom' => 'Carpeta de l\'esquelet',
 
 	// E
-	'ecran_activer' => 'Activer l\'&eacute;cran de s&eacute;curit&eacute;', # NEW
-	'ecran_conflit' => 'Attention : le fichier &laquo;@file@&raquo; entre en conflit et doit &ecirc;tre supprim&eacute; !', # MODIF
-	'ecran_conflit2' => 'Note : un fichier statique &laquo;@file@&raquo; a &eacute;t&eacute; d&eacute;tect&eacute; et activ&eacute;. Le Couteau Suisse ne pourra le mettre &agrave; jour ou le configurer.', # NEW
-	'ecran_ko' => 'Ecran inactif !', # NEW
-	'ecran_maj_ko' => 'La version {{@n@}} de l\'&eacute;cran de s&eacute;curit&eacute; est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
-	'ecran_maj_ok' => '(semble &agrave; jour).', # NEW
-	'ecran_securite:description' => 'L\'&eacute;cran de s&eacute;curit&eacute; est un fichier PHP directement t&eacute;l&eacute;charg&eacute; du site officiel de SPIP, qui prot&egrave;ge vos sites en bloquant certaines attaques li&eacute;es &agrave; des trous de s&eacute;curit&eacute;. Ce syst&egrave;me permet de r&eacute;agir tr&egrave;s rapidement lorsqu\'un probl&egrave;me est d&eacute;couvert, en colmatant le trou sans pour autant devoir mettre &agrave; niveau tout son site ni appliquer un &laquo; patch &raquo; complexe.
+	'ecran_activer' => 'Activar la pantalla de seguretat',
+	'ecran_conflit' => 'Atenci&oacute;: el fitxer &laquo;@file@&raquo; entra en conflicte i s\'ha de suprimir!',
+	'ecran_conflit2' => 'Nota: s\'ha detectat i activat un fitxer est&agrave;tic &laquo;@file@&raquo;. El Ganivet Su&iacute;s no podr&agrave; ni actualitzar-lo ni configurar-lo.',
+	'ecran_ko' => 'Pantalla inactiva!',
+	'ecran_maj_ko' => 'Hi ha disponible la versi&oacute; {{@n@}} de la pantalla de seguretat. Actualitzeu el fitxer distant d\'aquesta eina.',
+	'ecran_maj_ok' => '(sembla actualitzat).',
+	'ecran_securite:description' => 'La pantalla de seguretat &eacute;s un fitxer PHP que es pot descarregar directament del lloc oficial d\'SPIP, que protegeix els vostres llocs bloquejant certs atacs lligats a forats de seguretat. Aquest sistema permet reaccionar molt r&agrave;pidament quan es descobreix un problema de seguretat, tapant el forat sense necessitat d\'actualitzar tot el lloc ni aplicar un &laquo; patch &raquo; complexe.
 
-A savoir : l\'&eacute;cran verrouille certaines variables. Ainsi, par exemple, les  variables nomm&eacute;es <code>id_xxx</code> sont toutes  contr&ocirc;l&eacute;es comme &eacute;tant obligatoirement des valeurs num&eacute;riques enti&egrave;res, afin d\'&eacute;viter toute injection de code SQL via ce genre de variable tr&egrave;s courante. Certains plugins ne sont pas compatibles avec toutes les r&egrave;gles de l\'&eacute;cran, utilisant par exemple <code>&id_x=new</code> pour cr&eacute;er un objet {x}.
+A tenir en compte: la pantalla tanca algunes variables. D\'aquesta manera, per exemple, les  variables anomenades <code>id_xxx</code> estan totes controlades com si fossin obligat&ograve;riament valors num&egrave;rics sencers, per tal d\'evitar qualsevol injecci&oacute; de codi SQL via aquest tipus de variable molt corrent. Alguns connectors no s&oacute;n compatibles amb amb totes les regles de la pantalla, utilitzant per exemple <code>&amp;id_x=new</code> per crear un objecte {x}.
 
-Outre la s&eacute;curit&eacute;, cet &eacute;cran a la capacit&eacute; r&eacute;glable de moduler les acc&egrave;s des robots  d\'indexation aux scripts PHP, de mani&egrave;re &agrave; leur dire de &laquo;&nbsp;revenir plus tard&nbsp;&raquo;  lorsque le serveur est satur&eacute;.[[ %ecran_actif%]][[->
-@puce@ R&eacute;gler la protection anti-robots quand la charge du serveur (load)  exc&egrave;de la valeur : %ecran_load%
-_ {La valeur par d&eacute;faut est 4. Mettre 0 pour d&eacute;sactiver ce processus.}@_ECRAN_CONFLIT@]]
+A m&eacute;s a m&eacute;s de la seguretat, aquesta pantalla t&eacute; la capacitat de modular els accessos dels robots d\'infacc&egrave;s des robots  d\'indexaci&oacute; als scripts PHP, per tal de dir-los-hi de &laquo;&nbsp;tornar m&eacute;s tard&nbsp;&raquo; quan el servidor est&agrave; saturat.[[ %ecran_actif%]][[->
+@puce@ Regular la protecci&oacute; anti-robots quan la c&agrave;rrega del servidor (load) excedeix el valor: %ecran_load%
+_ {El valor, per defecte, &eacute;s 4. Posar 0 per desactivar aquest proc&egrave;s.}@_ECRAN_CONFLIT@]]
 
-En cas de mise &agrave; jour officielle, actualisez le fichier distant associ&eacute; (cliquez ci-dessus sur [actualiser]) afin de b&eacute;n&eacute;ficier de la protection la plus r&eacute;cente.
+En cas d\'actualitzaci&oacute; oficial, actualitzeu el fitxer distant associat (cliqueu m&eacute;s amunt sobre [actualitzar]) per tal de beneficiar-vos de la protecci&oacute; m&eacute;s recent.
 
-- Version du fichier local : ', # NEW
-	'ecran_securite:nom' => 'Ecran de s&eacute;curit&eacute;', # NEW
+- Versi&oacute; del fitxer local: ',
+	'ecran_securite:nom' => 'Pantalla de seguretat',
 	'effaces' => 'Esborrats',
 	'en_travaux:description' => 'Durant un per&iacute;ode de manteniment, permet mostrar un missatge personalitzat a tot el lloc p&uacute;blic, eventualment a la part privada.
 

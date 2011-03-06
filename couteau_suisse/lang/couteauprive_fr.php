@@ -5,8 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'detail_surcharge' => 'Outil surcharg&eacute; :',
-
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
@@ -261,6 +259,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, placez les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.',
 	'detail_spip_options2' => 'Il est recommand&eacute; de placer les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;[.->cs_comportement]&raquo;.',
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.',
+	'detail_surcharge' => 'Outil surcharg&eacute; :',
 	'detail_traitements' => 'Traitements :',
 	'devdebug:description' => '{{Cet outil vous permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Vous pouvez choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.',
 	'devdebug:item_e_all' => 'Tous les messages d&#039;erreur (all)',
