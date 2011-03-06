@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev' => 'R&eacute;v.&nbsp;@revision@',
 	'maj_rev_ko' => 'La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
 	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
+	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous tes plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.',
 	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
 	'maj_verif' => 'V&eacute;rifie pr&eacute;alablement l\'archive qui te convient :',
 	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifie bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il te faut mettre &agrave; jour.',
@@ -90,8 +90,8 @@ D&eacute;couvre dans ce plugin tes outils favoris : {Supprime le num&eacute;ro},
 
 N\'h&eacute;site pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&eacute; : SPIP v1.92x et v2.0.x', # MODIF
-	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques', # NEW
+Compatibilit&eacute; : SPIP v1.92x et v2.0.x et v2.1.x',
+	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques',
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;',
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;',
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',

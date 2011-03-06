@@ -80,18 +80,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Next page',
 	'plug_actifs' => 'Active plugins',
 	'plug_inactifs' => 'Inactive plugins',
-	'plugin_xml' => 'Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
+	'plugin_xml' => 'Gathers together a collection of small, useful tools in one plugin for facilitating the management of your SPIP site.
 
-Each tool can be activated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
+Each tool can be activated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set numerous site options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
 
-Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria.
+Available categories are: Administration, Typographical improvements, Typographical shortcuts, Public site display options, Tags, Filters, Criteria.
 
-Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Friendly URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
+Some of your already familiar favourite tools are included in this plugin: {Delete the number}, {URL formats}, {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Friendly URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x and v2.0.x and v2.1.x', # MODIF
-	'pp_autobr' => 'Ins&eacute;rer un bloc o&ugrave; les retours &aacute; la ligne sont automatiques', # NEW
+Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
+	'pp_autobr' => 'Insert a block with automatic line returns',
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',
 	'pp_chatons_inserer' => 'Insert the "&nbsp;@chaton@&nbsp;" emoticon/smiley',
