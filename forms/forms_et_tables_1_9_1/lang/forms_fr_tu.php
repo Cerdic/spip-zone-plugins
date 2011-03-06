@@ -135,88 +135,88 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_supprimer_formulaire_reponses' => 'Des donn&eacute;es sont associ&eacute;es &agrave; ce formulaire. Veux-tu vraiment le supprimer ?',
 
 	// L
-	'lien_apercu' => 'Aper&ccedil;u', # NEW
-	'lien_champ' => 'Champs', # NEW
-	'lien_propriete' => 'Propri&eacute;t&eacute;s', # NEW
-	'lien_retirer_donnee_liante' => 'Retirer le lien', # NEW
-	'lien_retirer_donnee_liee' => 'Retirer le lien', # NEW
-	'lier_articles' => 'Permettre d\'associer les donn&eacute;es aux articles', # NEW
-	'lier_documents' => 'Permettre de joindre des documents aux donn&eacute;es', # NEW
-	'lier_documents_mail' => 'Joindre les documents &agrave; l\'email', # NEW
-	'liste_choix' => 'Liste des choix propos&eacute;s', # NEW
+	'lien_apercu' => 'Aper&ccedil;u',
+	'lien_champ' => 'Champs',
+	'lien_propriete' => 'Propri&eacute;t&eacute;s',
+	'lien_retirer_donnee_liante' => 'Retirer le lien',
+	'lien_retirer_donnee_liee' => 'Retirer le lien',
+	'lier_articles' => 'Permettre d\'associer les donn&eacute;es aux articles',
+	'lier_documents' => 'Permettre de joindre des documents aux donn&eacute;es',
+	'lier_documents_mail' => 'Joindre les documents &agrave; l\'email',
+	'liste_choix' => 'Liste des choix propos&eacute;s',
 
 	// M
-	'moderation_donnees' => 'Valider les donn&eacute;es avant publication :', # NEW
-	'modifiable_donnees' => 'Donn&eacute;s modifiables dans l\'espace public&nbsp;:', # NEW
-	'monetaire_invalide' => 'Champ mon&eacute;taire invalide', # NEW
-	'monnaie_euro' => 'Euro (&euro;)', # NEW
-	'multiple_donnees' => 'Saisie des donn&eacute;es dans l\'espace public&nbsp;:', # NEW
+	'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
+	'modifiable_donnees' => 'Donn&eacute;s modifiables dans l\'espace public&nbsp;:',
+	'monetaire_invalide' => 'Champ mon&eacute;taire invalide',
+	'monnaie_euro' => 'Euro (&euro;)',
+	'multiple_donnees' => 'Saisie des donn&eacute;es dans l\'espace public&nbsp;:',
 
 	// N
-	'nb_decimales' => 'Nombre de d&eacute;cimales', # NEW
-	'nombre_reponses' => '@nombre@ donn&eacute;es', # NEW
-	'nouveau_champ' => 'Nouveau champ', # NEW
-	'nouveau_choix' => 'Nouveau choix', # NEW
-	'nouveau_formulaire' => 'Nouveau formulaire', # NEW
-	'numerique_invalide' => 'Champ num&eacute;rique invalide', # NEW
+	'nb_decimales' => 'Nombre de d&eacute;cimales',
+	'nombre_reponses' => '@nombre@ donn&eacute;es',
+	'nouveau_champ' => 'Nouveau champ',
+	'nouveau_choix' => 'Nouveau choix',
+	'nouveau_formulaire' => 'Nouveau formulaire',
+	'numerique_invalide' => 'Champ num&eacute;rique invalide',
 
 	// P
-	'page' => 'Page', # NEW
-	'pas_mail_confirmation' => 'Pas de mail confirmation', # NEW
-	'probleme_technique' => 'Probl&egrave;me technique. Votre saisie n\'a pas pu &ecirc;tre prise en compte.', # NEW
-	'probleme_technique_upload' => 'Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.', # NEW
-	'publication_donnees' => 'Publication des donn&eacute;es', # NEW
+	'page' => 'Page',
+	'pas_mail_confirmation' => 'Pas de mail confirmation',
+	'probleme_technique' => 'Probl&egrave;me technique. Ta saisie n\'a pas pu &ecirc;tre prise en compte.',
+	'probleme_technique_upload' => 'Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.',
+	'publication_donnees' => 'Publication des donn&eacute;es',
 
 	// R
-	'rang' => 'Rang', # NEW
-	'remplir_un_champ' => 'Veuillez remplir au moins un champ.', # NEW
-	'reponse' => 'Reponse @id_reponse@', # NEW
-	'reponse_depuis' => 'Depuis la page ', # NEW
-	'reponse_enregistree' => 'Votre saisie a &eacute;t&eacute; enregistr&eacute;e.', # NEW
-	'reponse_envoyee' => 'R&eacute;ponse envoy&eacute;e le ', # NEW
-	'reponse_envoyee_a' => '&agrave;', # NEW
-	'reponse_retrovez' => 'Retrouvez cette r&eacute;ponse dans l\'interface d\'administration :', # NEW
-	'reponses' => 'r&eacute;ponses', # NEW
-	'resultats' => 'R&eacute;sultats : ', # NEW
+	'rang' => 'Rang',
+	'remplir_un_champ' => 'Remplis au moins un champ.',
+	'reponse' => 'Reponse @id_reponse@',
+	'reponse_depuis' => 'Depuis la page ',
+	'reponse_enregistree' => 'Ta saisie a &eacute;t&eacute; enregistr&eacute;e.',
+	'reponse_envoyee' => 'R&eacute;ponse envoy&eacute;e le ',
+	'reponse_envoyee_a' => '&agrave;',
+	'reponse_retrovez' => 'Retrouves cette r&eacute;ponse dans l\'interface d\'administration :',
+	'reponses' => 'r&eacute;ponses',
+	'resultats' => 'R&eacute;sultats : ',
 
 	// S
-	'site_introuvable' => 'Ce site n\'a pas &eacute;t&eacute; trouv&eacute;.', # NEW
-	'sondage_deja_repondu' => 'Vous avez d&eacute;j&agrave; r&eacute;pondu a ce sondage.', # NEW
-	'sondage_non' => 'Ce formulaire n\'est pas un sondage', # NEW
-	'sondage_oui' => 'Ce formulaire est un sondage.', # NEW
-	'suivi_formulaire' => 'Suivi du formulaire', # NEW
-	'suivi_formulaires' => 'Suivi des formulaires', # NEW
-	'suivi_reponses' => 'Suivi des r&eacute;ponses', # NEW
-	'supprimer' => 'Supprimer', # NEW
-	'supprimer_champ' => 'Supprimer ce champ', # NEW
-	'supprimer_choix' => 'supprimer ce choix', # NEW
-	'supprimer_formulaire' => 'Supprimer ce formulaire', # NEW
-	'supprimer_reponse' => 'Supprimer cette r&eacute;ponse', # NEW
+	'site_introuvable' => 'Ce site n\'a pas &eacute;t&eacute; trouv&eacute;.',
+	'sondage_deja_repondu' => 'Tu as d&eacute;j&agrave; r&eacute;pondu a ce sondage.',
+	'sondage_non' => 'Ce formulaire n\'est pas un sondage',
+	'sondage_oui' => 'Ce formulaire est un sondage.',
+	'suivi_formulaire' => 'Suivi du formulaire',
+	'suivi_formulaires' => 'Suivi des formulaires',
+	'suivi_reponses' => 'Suivi des r&eacute;ponses',
+	'supprimer' => 'Supprimer',
+	'supprimer_champ' => 'Supprimer ce champ',
+	'supprimer_choix' => 'supprimer ce choix',
+	'supprimer_formulaire' => 'Supprimer ce formulaire',
+	'supprimer_reponse' => 'Supprimer cette r&eacute;ponse',
 
 	// T
-	'tables' => 'Tables', # NEW
-	'taille_max' => 'Taille maximale (en ko)', # NEW
-	'telecharger' => 'T&eacute;l&eacute;charger', # NEW
-	'telecharger_reponses' => 'T&eacute;l&eacute;charger les r&eacute;ponses', # NEW
-	'titre_formulaire' => 'Titre du formulaire', # NEW
-	'total_votes' => 'Total des votes', # NEW
-	'tous_formulaires' => 'Tous les formulaires', # NEW
-	'tous_sondages' => 'Tous les sondages', # NEW
-	'tous_sondages_proteges' => 'Tous les sondages prot&eacute;g&eacute;s', # NEW
-	'tous_sondages_public' => 'Tous les sondages publics', # NEW
-	'toutes_tables' => 'Tous les formulaires', # NEW
-	'type_form' => 'Type de formulaire', # NEW
+	'tables' => 'Tables',
+	'taille_max' => 'Taille maximale (en ko)',
+	'telecharger' => 'T&eacute;l&eacute;charger',
+	'telecharger_reponses' => 'T&eacute;l&eacute;charger les r&eacute;ponses',
+	'titre_formulaire' => 'Titre du formulaire',
+	'total_votes' => 'Total des votes',
+	'tous_formulaires' => 'Tous les formulaires',
+	'tous_sondages' => 'Tous les sondages',
+	'tous_sondages_proteges' => 'Tous les sondages prot&eacute;g&eacute;s',
+	'tous_sondages_public' => 'Tous les sondages publics',
+	'toutes_tables' => 'Tous les formulaires',
+	'type_form' => 'Type de formulaire',
 
 	// U
-	'une_reponse' => 'une donn&eacute;e', # NEW
-	'unite_monetaire' => 'Unit&eacute; mon&eacute;taire', # NEW
+	'une_reponse' => 'une donn&eacute;e',
+	'unite_monetaire' => 'Unit&eacute; mon&eacute;taire',
 
 	// V
-	'valider' => 'Valider', # NEW
-	'verif_web' => 'v&eacute;rifier l\'existence du site Web', # NEW
-	'vider' => 'Vider', # NEW
-	'voir_article' => 'Voir l\'article', # NEW
-	'voir_resultats' => 'Voir les r&eacute;sultats' # NEW
+	'valider' => 'Valider',
+	'verif_web' => 'v&eacute;rifier l\'existence du site Web',
+	'vider' => 'Vider',
+	'voir_article' => 'Voir l\'article',
+	'voir_resultats' => 'Voir les r&eacute;sultats'
 );
 
 ?>
