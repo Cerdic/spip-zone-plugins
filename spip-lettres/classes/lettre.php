@@ -194,7 +194,6 @@
 			return $redirection;
 		}
 		
-		
 		function callback_clic_html($matches) {
 			$url = $matches[2];
 			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')!=0 AND strncmp($url, 'mailto:',7)!=0)	{
@@ -205,15 +204,16 @@
 				} else {
 					$id_clic = sql_insertq('spip_clics', array('id_lettre' => $this->id_lettre, 'url' => html_entity_decode($url)));
 				}
-				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', false, true);
+				if ($GLOBALS['meta']['spip_lettres_cliquer_anonyme']=='non')
+					$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', false, true);
+				else
+					$url_clic = generer_url_action('clic', 'id_clic='.$id_clic, false, true);
 				return 'href="'.$url_clic.'"';
 			}
 			else {		
 					return 'href="'.$url.'"';
 			}
 		}
-		
-		
 		function callback_clic_texte($matches) {
 			$url = $matches[0];
 			if (strcmp($url, '%%URL_VALIDATION_DESABONNEMENTS%%')!=0 AND strncmp($url, 'mailto:',7)!=0)	{
@@ -224,14 +224,16 @@
 				} else {
 					$id_clic = sql_insertq('spip_clics', array('id_lettre' => $this->id_lettre, 'url' => html_entity_decode($url)));
 				}
-				$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', true, true);
+				if ($GLOBALS['meta']['spip_lettres_cliquer_anonyme']=='non')
+					$url_clic = generer_url_action('clic', 'id_clic='.$id_clic.'&code=%%CODE%%&email=%%EMAIL%%', true, true);
+				else
+					$url_clic = generer_url_action('clic', 'id_clic='.$id_clic, true, true);
 				return $url_clic;
 			}
 			else {
 				return $url;
 			}
 		}
-		
 		
 		function callback_images($matches) {
 			global $image_index;
@@ -252,7 +254,7 @@
 			$this->message_texte = recuperer_fond($GLOBALS['meta']['spip_lettres_fond_lettre_texte'], array('id_lettre' => $this->id_lettre, 'lang' => $this->lang));
 			
 			if ($vidange) {
-				// petite vidange due à l'envoi de test
+				// petite vidange des envois de test
 				sql_delete('spip_clics', 'id_lettre='.intval($this->id_lettre));
 				sql_delete('spip_abonnes_clics', 'id_lettre='.intval($this->id_lettre));
 			}

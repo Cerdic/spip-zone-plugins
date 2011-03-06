@@ -212,25 +212,32 @@
 
 
 		function enregistrer_clic($id_clic) {
-			$verification_abonne = sql_select('C.url', 'spip_clics AS C INNER JOIN spip_abonnes_lettres AS AL ON AL.id_lettre=C.id_lettre', 'AL.id_abonne='.intval($this->id_abonne).' AND C.id_clic='.intval($id_clic));
-			$verification_url = sql_select('url', 'spip_clics', 'id_clic='.intval($id_clic));
-			if (sql_count($verification_abonne) == 1) {
-				sql_insertq('spip_abonnes_clics', array('id_abonne' => $this->id_abonne, 'id_clic' => intval($id_clic)));
-				$url = sql_fetch($verification_abonne);
-				$redirection = $url['url'];
-				$this->enregistrer_maj();
-			} else if (sql_count($verification_url) == 1) {
+			$verification_url = sql_select('url, id_lettre', 'spip_clics', 'id_clic='.intval($id_clic));
+			if (sql_count($verification_url) == 1) {
 				$url = sql_fetch($verification_url);
 				$redirection = $url['url'];
-			}
-			
+				$id_lettre = intval($url['id_lettre']);
+			};
+			if ($GLOBALS['meta']['spip_lettres_cliquer_anonyme']=='non') {
+				$verification_abonne = sql_select('C.url', 'spip_clics AS C INNER JOIN spip_abonnes_lettres AS AL ON AL.id_lettre=C.id_lettre', 'AL.id_abonne='.intval($this->id_abonne).' AND C.id_clic='.intval($id_clic));
+				if (sql_count($verification_abonne) == 1) {
+					sql_insertq('spip_abonnes_clics', array('id_abonne' => $this->id_abonne, 'id_clic' => intval($id_clic), 'id_lettre' => $id_lettre)); // le champ id_lettre pourrait être supprimé de la bdd, mais comme il est là on le renseigne
+					$urldeja = $url;
+					$url = sql_fetch($verification_abonne);		// inutile semblerait-il
+					$redirection = $url['url']; 				// inutile semblerait-il
+					if ($urldeja != $url) 						// pour détecter si jamais c'est utile
+						spip_log ("Ya un truc à piger dans spip-lettres : urldeja=$urldeja different de url=$url", "enquete"); 
+					$this->enregistrer_maj();
+				}
+			} else	// on enregistre tout sur le compte du non-abonné '0'
+				sql_insertq('spip_abonnes_clics', array('id_abonne' => 0, 'id_clic' => intval($id_clic), 'id_lettre' => $id_lettre));
+
 			if ($redirection)
 				return $redirection;
 			else
 				return $GLOBALS['meta']['adresse_site'];
 		}
 		
-
 		function envoyer_notification($action, $arguments=array()) {
 
 			if (isset($arguments['rubriques'])) {

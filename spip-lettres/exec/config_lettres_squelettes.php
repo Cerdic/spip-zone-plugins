@@ -66,6 +66,9 @@
 			$spip_lettres_notifier_suppression_abonne = $_POST['spip_lettres_notifier_suppression_abonne'];
 			ecrire_meta('spip_lettres_notifier_suppression_abonne', $spip_lettres_notifier_suppression_abonne);
 
+			$spip_lettres_cliquer_anonyme = $_POST['spip_lettres_cliquer_anonyme'];
+			ecrire_meta('spip_lettres_cliquer_anonyme', $spip_lettres_cliquer_anonyme);
+			
 			ecrire_metas();
 
 			$url = generer_url_ecrire('config_lettres_squelettes');
@@ -82,6 +85,7 @@
 		$spip_lettres_utiliser_chapo				= $GLOBALS['meta']['spip_lettres_utiliser_chapo'];
 		$spip_lettres_utiliser_ps					= $GLOBALS['meta']['spip_lettres_utiliser_ps'];
 		$spip_lettres_notifier_suppression_abonne	= $GLOBALS['meta']['spip_lettres_notifier_suppression_abonne'];
+		$spip_lettres_cliquer_anonyme				= $GLOBALS['meta']['spip_lettres_cliquer_anonyme'];
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_configuration'), "configuration", "configuration");
@@ -179,6 +183,15 @@
 		echo '<input type="radio" class="radio" name="spip_lettres_notifier_suppression_abonne" value="oui" id="spip_lettres_notifier_suppression_abonne_oui" '.($spip_lettres_notifier_suppression_abonne == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_notifier_suppression_abonne_oui">'._T('lettresprive:oui').'</label>';
 		echo '&nbsp;';
 		echo '<input type="radio" class="radio" name="spip_lettres_notifier_suppression_abonne" value="non" id="spip_lettres_notifier_suppression_abonne_non" '.($spip_lettres_notifier_suppression_abonne == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_notifier_suppression_abonne_non">'._T('lettresprive:non').'</label>';
+		echo '</td>';
+		echo '</tr>';
+
+	    echo '<tr>';
+		echo '<td><label>'._T("Statistiques anonymes sur les clics de liens").'</label></td>';
+		echo '<td>';
+		echo '<input type="radio" class="radio" name="spip_lettres_cliquer_anonyme" value="oui" id="spip_lettres_cliquer_anonyme_oui" '.($spip_lettres_cliquer_anonyme == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_cliquer_anonyme_oui">'._T('lettresprive:oui').'</label>';
+		echo '&nbsp;';
+		echo '<input type="radio" class="radio" name="spip_lettres_cliquer_anonyme" value="non" id="spip_lettres_cliquer_anonyme_non" '.($spip_lettres_cliquer_anonyme == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_cliquer_anonyme_non">'._T('lettresprive:non').'</label>';
 		echo '</td>';
 		echo '</tr>';
 
