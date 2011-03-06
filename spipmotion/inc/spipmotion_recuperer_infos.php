@@ -28,7 +28,6 @@ function inc_spipmotion_recuperer_infos($id_document){
 	 * Si c'est un mov ou MP4 on applique qt-faststart
 	 */
 	if(($document['extension'] == 'flv') && !$GLOBALS['meta']['spipmotion_flvtool_casse']){
-		spip_log('on lance flvtool pour être sûr','spipmotion');
 		$metadatas = @shell_exec("flvtool2 -xUP $movie_chemin");
 	}
 	if(in_array($document['extension'],array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
@@ -38,50 +37,55 @@ function inc_spipmotion_recuperer_infos($id_document){
 		}
 	}
 
-	$movie = new ffmpeg_movie($movie_chemin, 0);
-
-	$infos['bitrate'] = $movie->getBitRate();
-	$infos['duree'] = $movie->getDuration();
-	$infos['framecount'] = $movie->getFrameCount();
-	$infos['hauteur'] = $movie->getFrameHeight();
-	$infos['largeur'] = $movie->getFrameWidth();
-	$infos['hasvideo'] = '';
-	$infos['hasaudio'] = '';
-
-	if($movie->hasVideo()){
-		$infos['videocodec'] = @$movie->getVideoCodec();
-		$infos['pixelformat'] = $movie->getPixelFormat();
-		$infos['videobitrate'] = $movie->getVideoBitRate();
-		$infos['framerate'] = $movie->getFrameRate();
-		$infos['hasvideo'] = 'oui';
+	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
+		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
+		$infos = $mediainfo($movie_chemin);
 	}else{
-		$infos['hasvideo'] = 'non';
-	}
-	if($movie->hasAudio()){
-		$infos['hasaudio'] = 'oui';
-		$infos['audiocodec'] = @$movie->getAudioCodec();
-		$infos['audiobitrate'] = $movie->getAudioBitRate();
-		$infos['audiosamplerate'] = $movie->getAudioSampleRate();
-		$infos['audiochannels'] = $movie->getAudioChannels();
-	}else{
-		$infos['hasaudio'] = 'non';
-	}
-	if((($infos['videobitrate'] == 0)||($infos['audiobitrate'] == 0)|| ($infos['videocodec'] == 'flv')) && ($document['extension'] == 'flv')){
-		include_spip('inc/xml');
-		$arbre = spip_xml_parse($metadatas);
-		if(($infos['videobitrate'] == 0)||($infos['videocodec'] == 'flv')){
-			spip_xml_match_nodes(",^videocodecid,",$arbre, $videocodec_array);
-			$infos['videocodec'] = $videocodec_array['videocodecid'][0];
-
-			spip_xml_match_nodes(",^videodatarate,",$arbre, $videobitrate_array);
-			$infos['videobitrate'] = floor($videobitrate_array['videodatarate'][0]*1000);
+		$movie = new ffmpeg_movie($movie_chemin, 0);
+	
+		$infos['bitrate'] = $movie->getBitRate();
+		$infos['duree'] = $movie->getDuration();
+		$infos['framecount'] = $movie->getFrameCount();
+		$infos['hauteur'] = $movie->getFrameHeight();
+		$infos['largeur'] = $movie->getFrameWidth();
+		$infos['hasvideo'] = '';
+		$infos['hasaudio'] = '';
+	
+		if($movie->hasVideo()){
+			$infos['videocodec'] = @$movie->getVideoCodec();
+			$infos['pixelformat'] = $movie->getPixelFormat();
+			$infos['videobitrate'] = $movie->getVideoBitRate();
+			$infos['framerate'] = $movie->getFrameRate();
+			$infos['hasvideo'] = 'oui';
+		}else{
+			$infos['hasvideo'] = 'non';
 		}
 		if($movie->hasAudio()){
-			spip_xml_match_nodes(",^audiocodecid,",$arbre, $audiocodec_array);
-			$infos['audiocodec'] = $audiocodec_array['audiocodecid'][0];
-
-			spip_xml_match_nodes(",^audiodatarate,",$arbre, $audiobitrate_array);
-			$infos['audiobitrate'] = floor($audiobitrate_array['audiodatarate'][0]*1000);
+			$infos['hasaudio'] = 'oui';
+			$infos['audiocodec'] = @$movie->getAudioCodec();
+			$infos['audiobitrate'] = $movie->getAudioBitRate();
+			$infos['audiosamplerate'] = $movie->getAudioSampleRate();
+			$infos['audiochannels'] = $movie->getAudioChannels();
+		}else{
+			$infos['hasaudio'] = 'non';
+		}
+		if((($infos['videobitrate'] == 0)||($infos['audiobitrate'] == 0)|| ($infos['videocodec'] == 'flv')) && ($document['extension'] == 'flv')){
+			include_spip('inc/xml');
+			$arbre = spip_xml_parse($metadatas);
+			if(($infos['videobitrate'] == 0)||($infos['videocodec'] == 'flv')){
+				spip_xml_match_nodes(",^videocodecid,",$arbre, $videocodec_array);
+				$infos['videocodec'] = $videocodec_array['videocodecid'][0];
+	
+				spip_xml_match_nodes(",^videodatarate,",$arbre, $videobitrate_array);
+				$infos['videobitrate'] = floor($videobitrate_array['videodatarate'][0]*1000);
+			}
+			if($movie->hasAudio()){
+				spip_xml_match_nodes(",^audiocodecid,",$arbre, $audiocodec_array);
+				$infos['audiocodec'] = $audiocodec_array['audiocodecid'][0];
+	
+				spip_xml_match_nodes(",^audiodatarate,",$arbre, $audiobitrate_array);
+				$infos['audiobitrate'] = floor($audiobitrate_array['audiodatarate'][0]*1000);
+			}
 		}
 	}
 	
@@ -90,10 +94,10 @@ function inc_spipmotion_recuperer_infos($id_document){
 			unset($infos[$key]);
 		}	
 	}
-	spip_log($infos,'spipmotion');
-	include_spip('inc/modifier');
-	
-	revision_document($id_document, $infos);
+	if(count($infos) > 0){
+		include_spip('inc/modifier');
+		revision_document($id_document, $infos);
+	}
 	return true;
 }
 ?>
