@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> This requires a Z type template and the <a href="http://www.spip-contrib.net/MediaBox">m&eacute;diabox</a> plugin.',
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
-	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
+	'description_menu_texte_libre' => 'Just the text that you would like',
 
 	// E
 	'editer_menus_editer' => 'Edit this menu',
@@ -32,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'None',
 	'entree_bloc' => 'Zpip block',
 	'entree_choisir' => 'Choose the type of item you want to add:',
-	'entree_connexion_objet' => 'Obliger &agrave; &ecirc;tre connect&eacute; (mettre "session") ou d&eacute;connect&eacute; (mettre "nosession") pour voir l\'objet', # NEW
-	'entree_contenu' => 'Contenu', # NEW
+	'entree_connexion_objet' => 'Requires being connected (insert "session") or disconnected (insert "nosession") in order to see the object',
+	'entree_contenu' => 'Content',
 	'entree_css' => 'CSS classes of this (container) item',
 	'entree_css_lien' => 'CSS classes of the link',
 	'entree_id_groupe' => 'Number of the keyword group',
@@ -52,12 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Title',
 	'entree_titre_connecter' => 'The title for accessing the identification form',
 	'entree_titre_prive' => 'The title for accessing the private zone',
-	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
+	'entree_traduction_objet' => 'For an article, select the translation depending on the context (insert "trad" to accomplish this)',
 	'entree_tri_alpha' => 'Sort criterion (alphabetic)',
 	'entree_tri_num' => 'Sort criterion (numeric)',
 	'entree_type_objet' => 'Object type',
 	'entree_url' => 'URL',
-	'entree_url_public' => 'Adresse de retour après la connexion', # NEW
+	'entree_url_public' => 'Return address after logging in',
 	'erreur_aucun_type' => 'No item type was found.',
 	'erreur_autorisation' => 'You are not allowed to modify menus.',
 	'erreur_identifiant_deja' => 'This identifier is already used by another menu.',
@@ -77,13 +77,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_facultatif' => 'Optional',
 	'formulaire_identifiant' => 'Identifier',
 	'formulaire_identifiant_explication' => 'Give a unique keyword which let you call your menu easly.',
-	'formulaire_ieconfig_choisir_menus_a_importer' => 'Choisissez quel(s) menu(s) vous souhaitez importer.', # NEW
-	'formulaire_ieconfig_importer' => 'Importer', # NEW
-	'formulaire_ieconfig_menu_meme_identifiant' => 'ATTENTION&nbsp;: un menu avec le m&ecirc;me identifiant existe d&eacute;j&agrave; sur votre votre site&nbsp;!', # NEW
-	'formulaire_ieconfig_menus_a_exporter' => 'Menus &agrave; exporter&nbsp;:', # NEW
-	'formulaire_ieconfig_ne_pas_importer' => 'Ne pas importer', # NEW
-	'formulaire_ieconfig_remplacer' => 'Remplacer le menu actuel par le menu import&eacute;', # NEW
-	'formulaire_ieconfig_renommer' => 'Renommer ce menu avant import', # NEW
+	'formulaire_ieconfig_choisir_menus_a_importer' => 'Select which menu(s) you would like to import.',
+	'formulaire_ieconfig_importer' => 'Import',
+	'formulaire_ieconfig_menu_meme_identifiant' => 'WARNING: there is already a menu with the same name on your site!',
+	'formulaire_ieconfig_menus_a_exporter' => 'Menus to export:',
+	'formulaire_ieconfig_ne_pas_importer' => 'Do not import',
+	'formulaire_ieconfig_remplacer' => 'Overwrite the current menu with the imported menu',
+	'formulaire_ieconfig_renommer' => 'Rename this menu before importing',
 	'formulaire_importer' => 'Import menu',
 	'formulaire_importer_explication' => 'If you exported a menu in a file, you can import now.',
 	'formulaire_modifier_entree' => 'Modify this menu item',
@@ -97,22 +97,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Title',
 
 	// I
-	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
-	'info_deconnexion_obligatoire' => 'Uniquement d&eacute;connect&eacute;', # NEW
+	'info_connexion_obligatoire' => 'Connection required',
+	'info_deconnexion_obligatoire' => 'Only when disconnected',
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page &laquo; @page@ &raquo;',
 	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
 	'info_tous_groupes_mots' => 'All keyword groups',
-	'info_traduction_recuperee' => 'Le contexte d&eacute;cidera de la traduction choisie', # NEW
+	'info_traduction_recuperee' => 'The context will determine the selected translation',
 	'info_tri' => 'Sort:',
 	'info_tri_alpha' => '(alphabetical)',
 	'info_tri_num' => '(numerical)',
 
 	// N
-	'noisette_description' => 'Ins&egrave;re un menu d&eacute;fini avec le plugin Menus.', # NEW
-	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu&nbsp;?', # NEW
-	'noisette_label_identifiant' => 'Menu &agrave; afficher&nbsp;:', # NEW
-	'noisette_nom_noisette' => 'Menu', # NEW
+	'noisette_description' => 'Insert a menu defined with the Menus plugin.',
+	'noisette_label_afficher_titre_menu' => 'Show the menu title?',
+	'noisette_label_identifiant' => 'Menu to display:',
+	'noisette_nom_noisette' => 'Menu',
 	'nom_menu_accueil' => 'Home Page',
 	'nom_menu_articles_rubrique' => 'Articles of a section',
 	'nom_menu_deconnecter' => 'Disconnect',
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_rubriques' => 'List or tree of sections',
 	'nom_menu_rubriques_evenements' => 'Section-related events',
 	'nom_menu_secteurlangue' => 'Language sectors',
-	'nom_menu_texte_libre' => 'Texte libre' # NEW
+	'nom_menu_texte_libre' => 'Free text'
 );
 
 ?>
