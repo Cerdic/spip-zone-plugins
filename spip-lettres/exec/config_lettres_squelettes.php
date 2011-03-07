@@ -198,7 +198,7 @@
 		echo '<input type="radio" class="radio" name="spip_lettres_cliquer_anonyme" value="non" id="spip_lettres_cliquer_anonyme_non" '.($spip_lettres_cliquer_anonyme == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_cliquer_anonyme_non">'._T('lettresprive:non').'</label>';
 		echo '</td>';
 		echo '</tr>';
- 
+
 	    echo '<tr>';
 		echo '<td><label>'._T("lettresprive:admin_abo_toutes_rubriques").'</label></td>';
 		echo '<td>';
