@@ -11,7 +11,7 @@
 ]
 <div>
 <div class="padd-post-box titre-sans-icone">
-	<h3><:maparaan:forum_qui_etes_vous:></h3>
+	<h3><:maparaan:forum_qui_etes_vous:> <small>(<:maparaan:optionnel:>)</small></h3>
 </div>
 [(#SESSION{auth}|?{' '})
 	[<p class='explication'><:forum_votre_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]

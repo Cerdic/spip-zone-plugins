@@ -1,7 +1,0 @@
-<div class="formulaire_spip formulaire_menu_lang" id="formulaire_menu_lang">
-	<form method="post" action="#ENV{url}"><div>
-		[(#ENV{url}|form_hidden)]
-		<select name="#ENV{nom}" id="#ENV{nom}" onchange="this.parentNode.parentNode.submit()">#ENV*{langues}</select>
-		<noscript><p class="boutons"><input type="submit" class="submit" value="&gt;&gt;" /></p></noscript>
-	</div></form>
-</div>

@@ -1,9 +1,11 @@
 <BOUCLE_principale(MOTS) {id_mot} {doublons}>
 
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
 <div class="padd-post-item padd-post-item-single">
-	<div class="padd-post-item-title cartouche">
-			
-		<h2>[<div class="info-publi"><small><small>(#TYPE)</small></small></div>][(#LOGO_MOT||image_reduire{32, 19})]#TITRE</h2>
+	<div class="padd-post-item-title cartouche page-recherche">			
+		<h2>[<div class="info-publi">(#TYPE)</div>][(#LOGO_MOT||image_reduire{32, 19})]#TITRE</h2>
 	</div>
 	
 

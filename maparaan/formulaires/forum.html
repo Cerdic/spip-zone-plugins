@@ -84,7 +84,7 @@
 
 [(#CONFIG{forums_urlref}|!={non}|?{
 	<div class="padd-post-box titre-sans-icone">
-		<h3><:maparaan:forum_lien_hyper:></h3>
+		<h3><:maparaan:forum_lien_hyper:> <small>(<:maparaan:optionnel:>)</small></h3>
 	</div>
 	<p class='explication'><:forum_page_url:></p>
 	<ul>
@@ -107,7 +107,7 @@
 
 [
 	<div class="padd-post-box titre-sans-icone">
-		<h3><:bouton_ajouter_document:> <small>(optionnel)</small></h3>
+		<h3><:bouton_ajouter_document:> <small>(<:maparaan:optionnel:>)</small></h3>
 	</div>
 	<ul>
 		<li class='saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>

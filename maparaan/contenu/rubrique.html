@@ -1,5 +1,8 @@
 <BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
 
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
 <div class="padd-post-group padd-post-group-result">
 	<div class="padd-post-group-title cartouche">
 		[(#LOGO_RUBRIQUE||image_reduire{32,32}|sinon{<div class='pas-de-logo'></div>})]

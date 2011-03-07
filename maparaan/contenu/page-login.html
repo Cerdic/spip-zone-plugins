@@ -1,0 +1,17 @@
+[(#REM)
+	Est-ce qu'on se connecte a l'espace prive ou pas ?
+]
+[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
+[(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>[ &gt; <strong class="on">(#GET{prive}|?{<:login_acces_prive:>,<:lien_connecter:>})</strong>]</p>
+
+<div class="padd-post-item padd-post-item-single">
+	<div class="padd-post-item-title cartouche page-recherche">			
+		<h2><div class="info-publi">#NOM_SITE_SPIP</div>[(#GET{prive}|?{<:login_acces_prive:>,<:lien_connecter:>})]</h2>
+	</div>
+	#MENU_LANG_ECRIRE
+	
+	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
+</div>

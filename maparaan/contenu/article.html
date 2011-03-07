@@ -1,5 +1,9 @@
 <BOUCLE_contenu_article(ARTICLES){id_article}>
 
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+
 <div class="padd-post-item padd-post-item-single" id="post-#ID_ARTICLE">
 	<div class="padd-post-item-title cartouche">
 		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]

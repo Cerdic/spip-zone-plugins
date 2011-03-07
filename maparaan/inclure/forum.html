@@ -31,16 +31,19 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 						<div class="padd-comment-details-interior">
 							<div class="padd-tb"></div>
 							<div class="padd-comment-details-interior-wrapper">
-								[<div class="#EDIT{texte} comment-texte">(#TEXTE|lignes_longues)</div>]
-								[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
-								[<p class="#EDIT{hyperlien} comment-external-link hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80, '...'})]})]</a></p>]
-								<BOUCLE_doc(DOCUMENTS){id_forum}>
-								[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
-									[(#EMBED_DOCUMENT|image_reduire{300})]
-								,
-									[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-								})]
-								</BOUCLE_doc>
+								<div class="cadre-msg-sous-forum">
+									<div class="cadre-msg-sous-forum-bg"></div>
+									[<div class="#EDIT{texte} comment-texte">(#TEXTE|lignes_longues)</div>]
+									[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+									[<p class="#EDIT{hyperlien} comment-external-link hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80, '...'})]})]</a></p>]
+									<BOUCLE_doc(DOCUMENTS){id_forum}>
+									[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+										[(#EMBED_DOCUMENT|image_reduire{300})]
+									,
+										[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+									})]
+									</BOUCLE_doc>
+								</div>
 							</div>
 							<div class="padd-tb"></div>
 						</div>
