@@ -154,4 +154,9 @@
 	function styler_pournavigateur ($html) {
 		return str_replace ('pouremail', 'invisiblepournavigateur', $html);
 	};
+	
+	function prepare_format_texte ($html) {
+		$pat = "!<a[^>]+href\s*=\s*['\"]([^'\"]*)['\"][^>]*>([^<]*)<\/a>!i";
+		return textebrut (preg_replace ($pat, "$2 ($1)", $html));
+	};
 ?>
