@@ -150,19 +150,19 @@ function multilang_affichage_final($flux){
 		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
 		
 			if($config['article']) { // Articles
-				$root .= ',input[type=hidden][name*=name_][value|=article]';
+				$root .= ',input[type=hidden][name*=name_][value|=article]:not(input[value|=article-logo])';
 			}
 			if($config['breve']) { // Breves
-				$root .= ',input[type=hidden][name*=name_][value|=breve]';
+				$root .= ',input[type=hidden][name*=name_][value|=breve]:not(input[value|=breve-logo])';
 			}
 			if($config['rubrique']) { // Rubriques
-				$root .= ',input[type=hidden][name*=name_][value|=rubrique]';
+				$root .= ',input[type=hidden][name*=name_][value|=rubrique]:not(input[value|=rubrique-logo])';
 			}
 			if($config['auteur']) { // Auteurs
-				$root .= ',input[type=hidden][name*=name_][value|=auteur]';
+				$root .= ',input[type=hidden][name*=name_][value|=auteur]:not(input[value|=auteur-logo])';
 			}
 			if($config['document']) {  // Docs dans page de presentation rubrique ou article,
-				$root .= ',input[type=hidden][name*=name_][value|=document]' ;
+				$root .= ',input[type=hidden][name*=name_][value|=document]:not(input[value|=document-vignette])' ;
 			}
 			if($config['site']) { // Sites
 				$root .= ',input[type=hidden][name*=name_][value|=site]';
@@ -171,25 +171,12 @@ function multilang_affichage_final($flux){
 				$root .= ',input[type=hidden][name*=name_][value|=evenement]';
 			}
 			if($config['motcle']) { // Mots
-				$root .= ',input[type=hidden][name*=name_][value|=mot]';
+				$root .= ',input[type=hidden][name*=name_][value|=mot]:not(input[value|=mot-logo])';
 			}
-			$flux .= 'var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
-		multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
-		multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
-		multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
-	
-		// On trie les langues. Langue de l environnement en premier,
-		// puis langue principale du site puis les autres en ordre alphabetique
-		// Un utilisateur de langue anglaise souhaite logiquement traduire en anglais
-		multilang_avail_langs = jQuery.grep(multilang_avail_langs, function(value) {
-			return (value != multilang_def_lang && value != multilang_lang_courante);
-		});
-		multilang_avail_langs.sort();
-		if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang);
-		multilang_avail_langs.unshift(multilang_lang_courante);
+			$flux .= '
 		var crayons_multilang_init = function(){
 			var crayons_root = ".formulaire_spip:has('.$root.')";
-			var fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti),.multilang";
+			var fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)";
 			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 			var root_opt = "form:has(.multilang)";
 			var fields_selector_opt = ".multilang";
