@@ -52,7 +52,7 @@ function priveperso_init_tables_principales($tables_principales){
         );
 	
         $priveperso = array(
-               "rub_id" => "BIGINT(21) NOT NULL",
+               "rub_id" => "BIGINT(21) NOT NULL",          
                "sousrub" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
                "textperso" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
                "articles_surtitre" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
@@ -66,7 +66,10 @@ function priveperso_init_tables_principales($tables_principales){
 					"rubriques_descriptif" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
 					"rubriques_texte" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
 					"activer_breves" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
-					"activer_sites" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'"
+					"activer_sites" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
+					"autoriser_articles" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
+					"activer_perso" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'"
+					
         );
 
         $priveperso_cles = array(
