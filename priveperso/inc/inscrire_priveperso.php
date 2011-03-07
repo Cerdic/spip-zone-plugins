@@ -51,10 +51,10 @@ function priveperso_texte_recuperer_valeurs($rub_id) {
 
 function priveperso_rubrique_deja_perso($rub_id) {
 
-	$u = sql_select("rub_id","spip_priveperso","rub_id='$rub_id'");
+	$u = sql_select("rub_id, activer_perso","spip_priveperso","rub_id='$rub_id'");
 	$b = sql_fetch($u);
 
-	if ($b) {$res = true;}
+	if ($b['activer_perso']==='oui') {$res = true;}
 	else {$res = false;}
 	
 		return $res;
@@ -67,9 +67,9 @@ function priveperso_trouver_rubrique_parent_perso($rub_id) {
 	$b = sql_fetch($u);
 	$id_parent = $b['id_parent'];
 	$id_secteur = $b['id_secteur'];
-	$v = sql_select("rub_id,sousrub","spip_priveperso",'rub_id='.intval($id_parent));
+	$v = sql_select("rub_id,sousrub, activer_perso","spip_priveperso",'rub_id='.intval($id_parent));
 	$c = sql_fetch($v);
-	if ( ($c) && ($c['sousrub']==='oui') ){
+	if ( ($c) && ($c['sousrub']==='oui') && ($c['activer_perso']==='oui') ){
 		return $id_parent;}
 	else{
 		if ($id_parent==='0'){

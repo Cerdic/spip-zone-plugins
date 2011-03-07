@@ -4,6 +4,8 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
+<input type="hidden" name="activer_perso" value="[(#ENV{activer_perso}|sinon{'oui'})]" />
+
 <fieldset><legend><h3><:priveperso:personnaliser_espace_prive:></h3> </legend>
    <label><:priveperso:choix_rubrique:></label>
    <select name="rub_id">
@@ -24,6 +26,11 @@
    <input type="radio" name="sousrub" value="non" [checked="(#ENV{sousrub}|=={non}|oui)"] /><label><:priveperso:non:></label>   
    <input type="radio" name="sousrub" value="oui" [checked="(#ENV{sousrub}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
    </td></tr>
+	<tr><td align='left' class='verdana2'>
+   <label><:priveperso:autoriser_les_articles:></label><td align='left' class='verdana2'>
+   <input type="radio" name="autoriser_articles" value="non" [checked="(#ENV{autoriser_articles}|=={non}|oui)"] /><label><:priveperso:non:></label>   
+   <input type="radio" name="autoriser_articles" value="oui" [checked="(#ENV{autoriser_articles}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
+   </td></tr>
    <tr><td align='left' class='verdana2'>  
    <label><:priveperso:personnaliser_texte_interro:></label><td align='left' class='verdana2'>
    <input type="radio" name="textperso" value="non" [checked="(#ENV{textperso}|=={non}|oui)"] /><label><:priveperso:non:></label>
@@ -33,7 +40,8 @@
 </fieldset>
 
 <BOUCLE_aff(RUBRIQUES){id_rubrique=#ENV{rub_id}}{tout}>
-<fieldset>
+
+[<fieldset>
 	<legend><h4><:priveperso:info_contenu_articles:></h4></legend>
 <table border='0' cellspacing='1' cellpadding='3' width="100%">
 	<tr><td align='left' class='verdana2'>
@@ -77,7 +85,7 @@
    <input type="radio" name="articles_urlref" value="oui" [checked="(#ENV{articles_urlref}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
    </td></tr>
 </table>
-</fieldset>
+</fieldset>(#ENV{autoriser_articles}|=={oui}|oui)]
 
 <fieldset><legend><h4><:priveperso:info_contenu_rubriques:></h4></legend>
 <table border='0' cellspacing='1' cellpadding='3' width="100%">
@@ -103,7 +111,7 @@
    </td></tr>
 </table>
 </fieldset>
-<BOUCLE_affbreves(RUBRIQUES){id_secteur=#ENV{rub_id}}>
+<BOUCLE_affbreves(RUBRIQUES){id_secteur=#ENV{rub_id}}{tout}>
 </BOUCLE_affbreves>
 <fieldset>
 	<label><:priveperso:les_articles_syndiques:></label>
@@ -114,7 +122,7 @@
 [
 <fieldset><legend><h3><:priveperso:personnaliser_texte:></h3> </legend></fieldset>
 
-
+[
 <fieldset><legend><h4><:priveperso:info_contenu_articles:></h4></legend>
 
 	<label><:icone_modifier_article:></label>
@@ -162,7 +170,7 @@
    [<label><:info_post_scriptum:></label>
 	<input type="text" class="text" name="info_post_scriptum" value="#ENV{info_post_scriptum}" size="40" />
 	<br>(#ENV{articles_ps}|=={oui}|oui)]
-</fieldset>
+</fieldset>(#ENV{autoriser_articles}|=={oui}|oui)]
 <fieldset><legend><h4><:priveperso:info_contenu_rubriques:></h4></legend>
 	<label><:icone_creer_rubrique:></label>
 	<input type="text" class="text" name="icone_creer_rubrique" value="#ENV{icone_creer_rubrique}" size="40" />
