@@ -7,7 +7,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'appliquer_sous_rubriques' => 'Appliquer aux sous-rubriques?',
 	'action_supprimer' => 'supprimer',
 	'action_supprimer_title' => 'Supprimer la personnalisation de la base de donn&eacute;es',
-
+	'action_activer' => 'activer',
+	'action_activer_title' => 'Activer la personnalisation de rubrique',
+	'action_desactiver' => 'd&eacute;sactiver',
+	'action_desactiver_title' => 'D&eacute;sactiver la personnalisation de rubrique',
+	'autoriser_les_articles' => 'Utiliser les articles?',	
+	
 	//B
 	
 	'bouton_supprimer' => 'Supprimer',
