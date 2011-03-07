@@ -9,8 +9,8 @@
 		#ID_ARTICLE
 		})]</td>
 	[(#ENV{trads}|oui)<td>]	
-		
-	<BOUCLE_art_trads(ARTICLES){traduction}{id_mot?}{id_auteur?}{where?}{statut IN prepa,publie,prop}{id_article!=#ID_ARTICLE}>
+	
+	<BOUCLE_art_trads(ARTICLES){traduction}{id_mot?}{id_auteur?}{statut IN prepa,publie,prop}{id_article!=#ID_ARTICLE}>
 	[(#ENV{trads}|oui)	
 		[(#ENV{voir}|!={#ID_TRAD}|?{
 			<span>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]&nbsp;[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
