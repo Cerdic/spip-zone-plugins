@@ -20,7 +20,7 @@ function action_priveperso_dist() {
 
 	// actions possibles
 	if (!in_array($arg, array(
-		'supp_rub'
+		'supp_rub','activer','desactiver'
 		))){
 			include_spip('inc/minipres');
 			echo minipres(_T('priveperso:erreur_action',array("action"=>$arg)));
@@ -33,7 +33,15 @@ function action_priveperso_dist() {
 		action_supprimer_rubrique_perso($rub_id);
 	}
 
+	// Activer une personnalisation de rubrique
+	if ($arg == 'activer'){
+		action_activer_rubrique_perso($rub_id);
+	}
 
+	// Désactiver une personnalisation de rubrique
+	if ($arg == 'desactiver'){
+		action_desactiver_rubrique_perso($rub_id);
+	}
 
 }
 
@@ -46,5 +54,17 @@ function action_supprimer_rubrique_perso($rub_id){
 	
 	}
 
+function action_activer_rubrique_perso($rub_id){
+
+	sql_updateq('spip_priveperso', array('activer_perso'=>'oui'), 'rub_id = ' . intval($rub_id));
+	
+	}
+
+function action_desactiver_rubrique_perso($rub_id){
+
+	sql_updateq('spip_priveperso', array('activer_perso'=>'non'), 'rub_id = ' . intval($rub_id));
+	
+	
+	}
 
 ?>
