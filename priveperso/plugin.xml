@@ -2,7 +2,8 @@
 	<nom>Personnaliser l'espace privé</nom>
 	<auteur>Sébastien Zamith</auteur>
 	<icon>images/priveperso-24.png</icon>
-	<version>0.1</version>
+	<version>0.2</version>
+	<version_base>0.2</version_base>
 	<licence>GNU/GPL v3</licence>
 	<etat>test</etat>
 	<description>Personnalisation de l'espace priv&eacute; par rubriques.</description>
@@ -29,6 +30,10 @@
 		<pipeline>
 		<nom>exec_init</nom>
 		<inclure>base/pipelines_priveperso.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/priveperso_autoriser.php</inclure>
 	</pipeline>
 
 	<bouton id='priveperso' parent='bando_configuration'>
