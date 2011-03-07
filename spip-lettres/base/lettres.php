@@ -271,6 +271,8 @@
 				ecrire_meta('spip_lettres_utiliser_ps', 'non');
 				ecrire_meta('spip_lettres_envois_recurrents', 'non');
 				ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
+				if (!strpos($GLOBALS['meta']['preview'],',0minirezo,'))
+					ecrire_meta('preview',',0minirezo,');
 				ecrire_metas();
 				include_spip('inc/getdocument');
 				creer_repertoire_documents('lettres');
