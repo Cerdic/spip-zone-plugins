@@ -118,7 +118,7 @@ jQuery.geoportail =
 			if (carte.img.length) 
 			{	// Style de la couche
 				var symbolizer = OpenLayers.Util.applyDefaults(
-						{ pointRadius: 10, graphicXOffset: -2, graphicYOffset: -17 },
+						{ pointRadius: 10, graphicXOffset: -2, graphicYOffset: -17, cursor:'pointer' },
 						OpenLayers.Feature.Vector.style["default"]);
 				var styleMap = new OpenLayers.StyleMap({"default": symbolizer, "select": {pointRadius: 15, graphicXOffset: -4, graphicYOffset: -26}});
 				// Rajoute une couche pour les points
@@ -515,6 +515,7 @@ jQuery.geoportail =
 			// Par defaut : centre
 			feature.style.graphicXOffset = -size;
 			feature.style.graphicYOffset = -size;
+			feature.style.cursor = 'pointer';
 			// Alignement
 			align = align.split('-');
 			for (i = 0; i < align.length; i++) switch (align[i]) {
@@ -857,7 +858,6 @@ jQuery.geoportail =
 
 			// Style d'affichage par defaut
 			OpenLayers.Feature.Vector.style['default'].fillOpacity = 1;
-			OpenLayers.Feature.Vector.style['default'].cursor = 'pointer';
 			OpenLayers.Feature.Vector.style['select'].fillOpacity = 1;
 		}
 	},
@@ -954,6 +954,18 @@ jQuery.geoportail =
 		return false;
 	},
 
+	showImg : function (link, width, height)
+	{	jQuery.jqDialog("",
+			{	dialog: "<img src='"+link+"' width='100%'/>",
+				classe:'viewer',
+				width: width,
+				height: height,
+				clickout:true,
+				undo: false,
+				ok: false
+			});
+	},
+	
 	// Fonction d'affichage d'un popup sur une carte
 	popupFeature: function(feature) 
 	{	// OpenLayers.Popup.FramedCloud 
@@ -962,7 +974,11 @@ jQuery.geoportail =
 		var html = "";
 		var att = feature.attributes;
 		var lien = null;
-		if (att.url) lien = "<a href='" + att.url + "'>";
+		if (att.url) 
+		{	// Affichage des images
+			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.showImg('" + att.url + "',"+att.width+","+att.heigth+")\">";
+			else lien = "<a href='" + att.url + "'>";
+		}
 		if (att.logo) html += att.logo;
 		if (att.img) html += (lien ? lien : "") + "<img src='"+att.img+"' class='spip_logos' />" + (lien ? "</a>" : "");
 		if (att.name) html += "<p class=titre>"+ (lien ? lien : "") + att.name + (lien ? "</a>" : "") + "</p>";

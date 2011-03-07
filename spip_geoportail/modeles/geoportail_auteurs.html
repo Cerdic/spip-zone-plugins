@@ -11,7 +11,7 @@ Parametres issus du modele GEOPORTAIL :
 function initSpipMap#ENV{id_geoportail,0} (map,id)
 {	
 	// Definition des styles pour l'affichage sous forme de punaises
-	var styleMap = new OpenLayers.StyleMap({"default": {pointRadius: 6, graphicXOffset: -6, graphicYOffset: -6}, "select": {pointRadius: 10, graphicXOffset: -10, graphicYOffset: -10}});
+	var styleMap = new OpenLayers.StyleMap({"default": {pointRadius: 6, graphicXOffset: -6, graphicYOffset: -6, cursor:'pointer'}, "select": {pointRadius: 10, graphicXOffset: -10, graphicYOffset: -10}});
 	// Affichage en fonction de l'attribut statut
 	var lookup = {
 		'0minirezo' : { externalGraphic:"#CHEMIN{images/admin-12.gif}" },

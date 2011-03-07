@@ -41,18 +41,21 @@ img.gpGeocodeMatchCodeMatchType
 }
 
 /** Popup sur la carte **/
-#popup
+#popup, .gpPopup
 {	font-size:1em;
 	/* background: transparent url(popup.png) no-repeat bottom right; */
 	background-color:#FFC!important;
+	border:0!important;
 }
 #popup p
 {	margin:0;
+	padding:0;
 }
-#popup .titre
+#popup .titre, .gpPopup .gpPopupContent .gpPopupHead
 {	font-size:1em;
 	font-weight:bold;
 	margin:0;
+	background:transparent;
 }
 #popup .spip_logos
 {	margin:0 0.5em 0 0;
@@ -74,10 +77,29 @@ img.gpGeocodeMatchCodeMatchType
 	float:none;
 }
 
-#popup .olPopupCloseBox 
+#popup .olPopupCloseBox, .gpPopupCloseBox
 {	background:transparent url(close.png) no-repeat scroll 0 0;
 	overflow:hidden;
 }
-#popup .olPopupCloseBox:hover
+#popup .olPopupCloseBox:hover, .gpPopupCloseBox:hover
 {	background:transparent url(close.png) no-repeat scroll 0 -17px
 }
+
+/** Affichage des images */
+#jqDialog.viewer
+{	border:0;
+}
+#jqDialog.viewer .jqCloseButton
+{	top:-5px;
+	right:-5px;
+}
+#jqDialog.viewer .jqDialogBlock
+{	margin:0!important;
+	padding:0!important;
+}
+#jqDialog.viewer .jqDialogInner
+{	border:10px solid white;
+	margin:0;
+	padding:0;
+}
+	

@@ -40,7 +40,7 @@ OpenLayers.Layer.Vector.Locator = OpenLayers.Class(OpenLayers.Layer.Vector,
 		if (options.drag_feature) this.drag_feature = options.drag_feature;
 		// Style du calque :
 		var symbolizer = OpenLayers.Util.applyDefaults(
-			{pointRadius: 20, graphicXOffset: -6, graphicYOffset: -35},
+			{ pointRadius: 20, graphicXOffset: -6, graphicYOffset: -35, cursor:'move'}, 
 			OpenLayers.Feature.Vector.style["default"]);
 		this.styleMap = new OpenLayers.StyleMap({"default": symbolizer, "select": {pointRadius: 20}});
     },

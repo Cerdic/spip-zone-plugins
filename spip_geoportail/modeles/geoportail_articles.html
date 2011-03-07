@@ -16,7 +16,7 @@ Parametres issus du modele GEOPORTAIL :
 function initSpipMap#ENV{id_geoportail,0} (map,id)
 {	// Definition des styles pour l'affichage sous forme de punaises
 	var symbolizer = OpenLayers.Util.applyDefaults(
-			{pointRadius: 10, graphicXOffset: -2, graphicYOffset: -17},
+			{pointRadius: 10, graphicXOffset: -2, graphicYOffset: -17, cursor:'pointer'},
 			OpenLayers.Feature.Vector.style["default"]);
 	var styleMap = new OpenLayers.StyleMap({"default": symbolizer, "select": {pointRadius: 15, graphicXOffset: -4, graphicYOffset: -26}});
 	<B_gmot>

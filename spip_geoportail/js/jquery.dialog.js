@@ -42,17 +42,39 @@
 		var back = $("<div class=jqDialog_back id=jqDialog_back "
 			+"style='position:absolute; background-color:black; z-index:2000; display:block; ' >"
 			+"</div>").width(wt).height(ht).css("left",0).css("top",0).css("opacity",0.4).appendTo("body");
+		// Fermer si clickout
+		if (param.clickout) back.click(jQuery.jqDialog.action);
+		
+		// Fenetre proportionnelle
+		var dw=param.width;
+		var dh=param.height;
+		var prop="";
+		if (dw && dh)
+		{	if (dw>$(window).width()*0.9) 
+			{	dw = Math.round($(window).width()*0.9);
+				dh = Math.round(param.height * dw / param.width );
+			}
+			if (dh>$(window).height()*0.9)
+			{	dh = Math.round($(window).height()*0.9);
+				dw = Math.round(param.width * dh / param.height);
+			}
+			prop = "width:"+dw+"px; height:"+dh+"px; ";
+		}
 		
 		if (jQuery('#jqDialog').length != 0) jQuery('#jqDialog').remove();
 		var dialog = "<div class='"+param.classe+"' id=jqDialog "
-			+"style='position:absolute; z-index:2001; display:block; ' >"
-			+"<div class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")'></div>"
+			+"style='position:absolute; z-index:2001; display:block; "+prop+"' >"
+			+"<div class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' style='position:absolute; z-index:1'></div>"
 //			+"<input type=image class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' value='' />"
-			+"<p>"+title+"</p>"
-			+"<div class=jqDialogBlock ><table width=100% border=0><tr valign=top>";
-		if (param.icon) dialog += "<td width=1%><img class=jqDialogImg src='"+param.icon+"' style='float:left' /></td>"
-		dialog += "<td><div class=jqDialogInner style='padding-bottom:1em;' >"+param.dialog+"</div></td></tr></table>"
-			+"<div style='text-align:right; '>";
+			+(title ? "<p>"+title+"</p>" : "")
+			+"<div class=jqDialogBlock >";
+		if (param.icon) 
+		{	dialog += "<table width=100% border=0 ><tr valign=top>"
+					+ "<td width=1%><img class=jqDialogImg src='"+param.icon+"' style='float:left' /></td><td>";
+		}
+		if (param.dialog) dialog += "<div class=jqDialogInner>"+param.dialog+"</div>"
+		if (param.icon) dialog += "</tr></table>"
+		dialog += "<div class=button style='text-align:right; '>";
 		if (param.ok) dialog += "<input class=jqDialogButton onclick='javascript:jQuery.jqDialog.action(\"ok\")' type=button value='"+param.ok.replace("\'","&acute;")+"' />";
 		if (param.no) dialog += "<input class=jqDialogButton onclick='javascript:jQuery.jqDialog.action(\"no\")' type=button value='"+param.no.replace("\'","&acute;")+"' />";
 		if (param.undo) dialog += "<input class=jqDialogButton onclick='javascript:jQuery.jqDialog.action(\"undo\")' type=button value='"+param.undo.replace("\'","&acute;")+"' />";
@@ -103,6 +125,9 @@
  		icon	: null,				// Icon file
  		classe	: 'jqDialog',		// Dialog class (for css manipulation)
  		dialog	: '...',			// The dialog
+ 		width	: null,				// Dialog size (proportion)
+ 		height	: null,				// 
+ 		clickout: false,			// Close de dialog when clickout
  		callback : function(action)	// Function to callback when closing
  		{	// NB: $('#jqDialog') is not destroy at this step, 
  			// You can access the input you put in the dialog param
