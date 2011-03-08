@@ -68,6 +68,10 @@ function cvtm_recuperer_post_precedents($form){
 		foreach($c as $k=>$v)
 			if (!isset($store[$k])) // on ecrase pas si saisi a nouveau !
 				$_REQUEST[$k] = $store[$k] = $v;
+
+		// vider pour eviter un second appel a verifier_n
+		// en cas de double implementation (unipotence)
+		set_request('cvtm_prev_post');
 		return array($c['_etape'],$c['_etapes']);
 	}
 	return false;
@@ -83,20 +87,24 @@ function cvtm_recuperer_post_precedents($form){
  * @return array
  */
 function cvtm_sauver_post($form, $je_suis_poste, &$valeurs){
-	$post = array('_etape'=>$valeurs['_etape'],'_etapes'=>$valeurs['_etapes']);
-	foreach(array_keys($valeurs) as $champ){
-		if (substr($champ,0,1)!=='_'){
-			if ($je_suis_poste || (isset($valeurs['_forcer_request']) && $valeurs['_forcer_request'])) {
-				if (($v = _request($champ))!==NULL)
-					$post[$champ] = $v;
+	if (!isset($valeurs['_cvtm_prev_post'])){
+		$post = array('_etape'=>$valeurs['_etape'],'_etapes'=>$valeurs['_etapes']);
+		foreach(array_keys($valeurs) as $champ){
+			if (substr($champ,0,1)!=='_'){
+				if ($je_suis_poste || (isset($valeurs['_forcer_request']) && $valeurs['_forcer_request'])) {
+					if (($v = _request($champ))!==NULL)
+						$post[$champ] = $v;
+				}
 			}
 		}
+		include_spip('inc/filtres');
+		$c = encoder_contexte_ajax($post,$form);
+		if (!isset($valeurs['_hidden']))
+			$valeurs['_hidden'] = '';
+		$valeurs['_hidden'] .= "<input type='hidden' name='cvtm_prev_post' value='$c' />";
+		// marquer comme fait, pour eviter double encodage (unipotence)
+		$valeurs['_cvtm_prev_post'] = true;
 	}
-	include_spip('inc/filtres');
-	$c = encoder_contexte_ajax($post,$form);
-	if (!isset($valeurs['_hidden']))
-		$valeurs['_hidden'] = '';
-	$valeurs['_hidden'] .= "<input type='hidden' name='cvtm_prev_post' value='$c' />";
 	return $valeurs;
 }
 
