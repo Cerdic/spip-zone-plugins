@@ -1,0 +1,21 @@
+<plugin>
+	<nom>MailChimp</nom>
+	<auteur>[Ben->http://www.nursit.net]</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Gerer une mailing liste à l'aide de [mailchimp->http://www.mailchimp.com]. Utilisation du plugin mes_abonnes pour garder les abonnés en local, mais inscription également des emails chez mailchimp ( pour l'envoi ultérieur de mailing par l'interface mailchimp)</description>
+	<lien>http://www.spip-contrib.net/mailchimp</lien>
+	<prefix>mailchimp</prefix>
+	<icon>images/light_freddie.png</icon>
+	<install></install>
+	<necessite id="SPIP" version="[2.1;]" />	
+	<necessite id="mesabonnes" version="[0.2;]" />
+	
+	<pipeline>
+		<nom>formulaire_traiter</nom>		
+		<inclure>mailchimp_pipelines.php</inclure>
+	</pipeline>
+		
+	<categorie>communication</categorie>
+</plugin>
