@@ -13,7 +13,7 @@ include_spip('inc/meta');
  * @param string $version_cible
  */
 function manuelsite_upgrade($nom_meta_base_version,$version_cible){
-	$current_version = 0.1;
+	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		$config = lire_config('manuelsite');
@@ -22,13 +22,14 @@ function manuelsite_upgrade($nom_meta_base_version,$version_cible){
 		}
 		$config = array_merge(array(
 				'id_article' => '0',
+				'cacher_public' => '',
 				'intro' => '',
 				'email' => '',
 				'largeur' => '300',
 				'background_color' => '#D6DDE5'
 		), $config);
 		ecrire_meta('manuelsite', serialize($config));
-		ecrire_meta($nom_meta_base_version,$current_version='0.1','non');
+		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 	}
 }
 

@@ -26,13 +26,13 @@
 
 	</div>
 </BOUCLE_contenu_article>
-	<:manuelsite:erreur_article:>
+	<:manuelsite:erreur_article{idart=#ID_ARTICLE}:>
 <//B_contenu_article>
 
 <script type="text/javascript">
 	$(function() {
 		// Traiter les h3 et h4
-		$.each( ['h3','h4'], function(i,hi){
+		$.each( ['h2','h3','h4'], function(i,hi){
 
 			$( ".contenu-principal" ).find(hi).each(function(index) {
 				// Creer un div apres le h3 et y placer tout ce qui se trouve apres et jusqu'au hi suivant

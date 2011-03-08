@@ -8,9 +8,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_manuelsite' => 'Manuel de r&eacute;daction du site',
 	
 	// E
-	'erreur_article'=>'L\'article du manuel d&eacute;fini dans la configuration du plugin est introuvable',
+	'erreur_article'=>'L\'article du manuel d&eacute;fini dans la configuration du plugin est introuvable : @idart@',
 	'erreur_pas_darticle'=>'L\'article du manuel n\'est pas d&eacute;fini dans la configuration du plugin',
 	'explication_background_color'=>'Entrez la couleur de fond de la zone d\'affichage du manuel',
+	'explication_cacher_public'=>'Cacher cet article dans l\'espace public, flux rss compris',
 	'explication_email'=>'Email de contact pour les rédacteurs',
 	'explication_id_article'=>'Entrez le num&eacute;ro de l\'article qui contient le manuel',
 	'explication_intro'=>'Texte d\'introduction au manuel (sera plac&eacute; avant le chapo)',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_background_color' => 'Couleur de fond',
+	'label_cacher_public' => 'Cacher',
 	'label_email' => 'Email',
 	'label_id_article' => 'N&deg; de l\'article',
 	'label_intro' => 'Introduction',
