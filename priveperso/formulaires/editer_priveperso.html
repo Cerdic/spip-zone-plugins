@@ -31,6 +31,11 @@
    <input type="radio" name="autoriser_articles" value="non" [checked="(#ENV{autoriser_articles}|=={non}|oui)"] /><label><:priveperso:non:></label>   
    <input type="radio" name="autoriser_articles" value="oui" [checked="(#ENV{autoriser_articles}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
    </td></tr>
+   <tr><td align='left' class='verdana2'>
+   <label><:priveperso:autoriser_les_sous_rubriques:></label><td align='left' class='verdana2'>
+   <input type="radio" name="autoriser_sous_rubriques" value="non" [checked="(#ENV{autoriser_sous_rubriques}|=={non}|oui)"] /><label><:priveperso:non:></label>   
+   <input type="radio" name="autoriser_sous_rubriques" value="oui" [checked="(#ENV{autoriser_sous_rubriques}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
+   </td></tr>
    <tr><td align='left' class='verdana2'>  
    <label><:priveperso:personnaliser_texte_interro:></label><td align='left' class='verdana2'>
    <input type="radio" name="textperso" value="non" [checked="(#ENV{textperso}|=={non}|oui)"] /><label><:priveperso:non:></label>
@@ -117,6 +122,12 @@
 	<label><:priveperso:les_articles_syndiques:></label>
    <input type="radio" name="activer_sites" value="non" [checked="(#ENV{activer_sites}|=={non}|oui)"] /><label><:priveperso:non:></label>   
    <input type="radio" name="activer_sites" value="oui" [checked="(#ENV{activer_sites}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
+</fieldset>
+
+<fieldset>
+	<label><:priveperso:les_mots_cles:></label>
+   <input type="radio" name="articles_mots" value="non" [checked="(#ENV{articles_mots}|=={non}|oui)"] /><label><:priveperso:non:></label>   
+   <input type="radio" name="aarticles_mots" value="oui" [checked="(#ENV{articles_mots}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
 </fieldset>
 
 [

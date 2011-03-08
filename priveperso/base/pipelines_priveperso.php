@@ -68,7 +68,9 @@ function priveperso_init_tables_principales($tables_principales){
 					"activer_breves" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
 					"activer_sites" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
 					"autoriser_articles" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
-					"activer_perso" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'"
+					"activer_perso" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
+					"autoriser_sous_rubriques" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
+					"articles_mots" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'"
 					
         );
 

@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_activer_title' => 'Activer la personnalisation de rubrique',
 	'action_desactiver' => 'd&eacute;sactiver',
 	'action_desactiver_title' => 'D&eacute;sactiver la personnalisation de rubrique',
-	'autoriser_les_articles' => 'Utiliser les articles?',	
+	'autoriser_les_articles' => 'Utiliser les articles?',
+	'autoriser_les_sous_rubriques' => 'Utiliser les sous-rubriques?',		
 	
 	//B
 	
@@ -33,15 +34,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_priveperso' => 'Personnaliser une rubrique',
 	'info_modif_priveperso' => 'Modification de la personnalisation de la rubrique @rubrique@ :',
 	'info_nouveau_priveperso' => 'Nouvelle personnalisation de rubrique',
-	'info_description_priveperso' => "Cette page permet de personnaliser l'espace priv&eacute; par rubriques. Possibilit&eacute; d'appliquer aux sous-rubriques ou non.",
-	'info_description_priveperso_creer' => "Vous pouvez choisir le type d'objets &agrave; afficher, utiliser ou non les br&egrave;ves, la syndication de site, rubrique par rubrique. Il est aussi possible de modifier les champs de saisie pour les articles, les rubriques et les br&egarve;ves.",		
+	'info_description_priveperso' => "Cette page permet de personnaliser l'espace priv&eacute; par rubriques. Une fois votre personnalisation de rubrique cr&eacute;&eacute;e, elle apparaitra ici. Voua avez alors la possibilit&eacute; de la modifier, la supprimer ou juste la d&eacute;sactiver temporairement.",
+	'info_description_priveperso_creer' => "Vous pouvez choisir le type d'objets &agrave; afficher, utiliser ou non les articles, les sous-rubriques, les br&egrave;ves, la syndication de site, rubrique par rubrique. Il est aussi possible de modifier les champs de saisie pour les articles, les rubriques et les br&egrave;ves.",		
 		
 				
 	//L
 
 	'liste_des_rubriques_perso' => 'Liste des rubriques personnalis&eacute;es',
 	'les_breves' => 'Utiliser les br&egrave;ves?',
-	'les_articles_syndiques' => 'Utliser les sites syndiqu&eacute;s?', 
+	'les_articles_syndiques' => 'Utliser les sites syndiqu&eacute;s?',
+	'les_mots_cles' => 'Utiliser les mots cl&eacute;s?',
 
 	//N
 	

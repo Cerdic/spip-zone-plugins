@@ -108,6 +108,8 @@ function priveperso_post_formulaire() {
 	else $priveperso['autoriser_articles'] = _request('autoriser_articles');
 	if (!_request('activer_perso')) $priveperso['activer_perso']='oui';
 	else $priveperso['activer_perso'] = _request('activer_perso');
+	if (!_request('autoriser_sous_rubriques')) $priveperso['autoriser_sous_rubriques']='oui';
+	else $priveperso['autoriser_sous_rubriques'] = _request('autoriser_sous_rubriques');
 
 	
 	return $priveperso;	

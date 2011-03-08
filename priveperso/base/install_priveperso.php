@@ -14,10 +14,10 @@ function priveperso_upgrade($nom_meta_base_version, $version_cible){
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-	if (version_compare($current_version,"0.2","<")){
+	if (version_compare($current_version,"0.3","<")){
 		// ajout des champs "autoriser_articles" et "activer_perso" dans la table priveperso
 		maj_tables('spip_priveperso');
-		ecrire_meta($nom_meta_base_version,$current_version="0.2");
+		ecrire_meta($nom_meta_base_version,$current_version="0.3");
 	}
 
 }
