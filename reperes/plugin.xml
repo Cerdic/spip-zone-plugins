@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>beta</version>
+	<version>0.0.1</version>
 	
 	<nom>Rep&egrave;res - Des squelettes au pixel pr&egrave;s !</nom>
 	
@@ -26,9 +26,6 @@
 	<lien>
 	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Reperes?var_mode=preview]
 	</lien>
-	
-	
-	<fonctions>reperes.php</fonctions>
 	
 	<pipeline>
 		<nom>insert_head</nom>
