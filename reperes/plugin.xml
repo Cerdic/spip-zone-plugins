@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	
 	<nom>Rep&egrave;res - Des squelettes au pixel pr&egrave;s !</nom>
 	
@@ -30,7 +30,7 @@
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
-		<inclure>reperes_fonctions.php</inclure>
+		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
 
 	<necessite id='cfg' version='[1.0;]' />
