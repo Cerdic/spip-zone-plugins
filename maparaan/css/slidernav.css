@@ -1,0 +1,10 @@
+/*****  Feuille de Style : "slidernav"  *****/
+/**  
+Mise en forme du menu latéral du Slider en page d'accueil. 
+Taille des images : 30 x 30px.
+**/
+
+div#padd-subscribed ul li.rss a:link{ background-image:url('../img/slidernav-rss.png'); }
+div#padd-subscribed ul li.contact a:link{ background-image:url('../img/slidernav-contact.png'); }
+div#padd-subscribed ul li.twitter a:link{ background-image:url('../img/slidernav-twitter.png'); }
+div#padd-subscribed ul li.facebook a:link{ background-image:url('../img/slidernav-facebook.png'); }
