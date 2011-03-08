@@ -373,7 +373,7 @@ function jeux_qcm($texte, $indexJeux, $form=true) {
   if (!isset($_POST["var_correction_".$indexJeux])) {
 	if($form) {
 		$pied = '<br />'.jeux_bouton_corriger().jeux_form_fin();
-		$tete .= jeux_form_debut('qcm', $indexJeux);
+		$tete .= jeux_form_debut('qcm', $indexJeux, 'post', self());
 	}
   } else {
 	$pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], _request('id_jeu'), join(', ', $qcm_score_detaille), $categ_score);
