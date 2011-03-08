@@ -1,5 +1,14 @@
 <?php
 
+function inc_lien_court($url) {
+	$long_url = defined('_MAX_LONG_URL') ? _MAX_LONG_URL : 40;
+	$coupe_url = defined('_MAX_COUPE_URL') ? _MAX_COUPE_URL : 35;
+	if (mb_strlen($url)>$long_url) {
+		$url = lien_court($url, $coupe_url, true);
+	}
+	return $url;
+}
+
 // $masquer = false raccourcis les URL "en dur"
 // $masquer = true se contente d'integrer les parties a masquer dans des span
 function lien_court($url, $longueur = 50, $masquer = true) {

@@ -9,10 +9,10 @@
 		Par ailleurs, le lien est intégralement préservé, les éléments «supprimés» sont simplement masqués par CSS; ce qui fait que le lien tronqué lorsqu'il est sélectionné contient en réalité l'intitulé complet, ce qui préserve les possibilités de copier-coller.
 	</description>
 	<prefix>lien_court</prefix>
-	<fonctions>lien_court_fonctions.php</fonctions>
+	<fonctions>inc/lien_court.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>lien_court_fonctions.php</inclure>
+		<inclure>inc/lien_court.php</inclure>
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.0.0;]" />
