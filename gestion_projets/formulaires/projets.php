@@ -1,6 +1,6 @@
 <?php
 
-function definitions_projet($use='',$valeurs=''){
+function definitions($use='',$valeurs=''){
 
 	//Définition des fieldset
 
@@ -17,8 +17,6 @@ function definitions_projet($use='',$valeurs=''){
 		
 
 	//Définition des champs
-	
-	
 
 	$champs=array(
 		'nom'=>array(
@@ -29,7 +27,8 @@ function definitions_projet($use='',$valeurs=''){
 				'field'=>'input',
 				'name'=>'nom',
 				'label'=>_T('gestpro:nom'),
-				'obligatoire'=>'oui')),
+				'obligatoire'=>'oui'),
+				),
 		'id_chef_projet'=>array(
 			'valeur'=> $valeurs['id_chef_projet'],
 			'fieldset'=>0,	
@@ -84,7 +83,7 @@ function definitions_projet($use='',$valeurs=''){
 				),								
 			),	
 		'date_debut'=>array(
-			'valeur'=>$valeurs['date_debut'],		
+			//'valeur'=>$valeurs['date_debut'],		
 			'fieldset'=>1,	
 			'rang'=>350,	
 			'form'=>array(
@@ -94,7 +93,7 @@ function definitions_projet($use='',$valeurs=''){
 				),								
 			),	
 		'date_fin_estimee'=>array(
-			'valeur'=>$valeurs['date_fin_estimee'],	
+			//'valeur'=>$valeurs['date_fin_estimee'],	
 			'fieldset'=>1,	
 			'rang'=>450,	
 			'form'=>array(
@@ -151,7 +150,7 @@ function formulaires_projets_charger_dist($id_projet=''){
 		if(idate('U',$val[$champ])==0)$val[$champ]='';
 	}
 	
-	$definitions=definitions_projet($use='charger',$val);
+	$definitions=definitions($use='charger',$val);
 	
 	//On définit les valeurs du formulaire
 	$valeurs=$definitions['valeurs'];
@@ -177,19 +176,20 @@ return $valeurs;
 function formulaires_projets_verifier_dist($id_projet=''){
 	include_spip('gestion_projets_fonctions');
 
-	$obligatoire=definitions_projet($use='verifier');
+	$obligatoire=definitions($use='verifier');
 
 
     $erreurs = array();
     foreach($obligatoire as $champ) {
-        if (!_request($champ)) {
+        if (!trim(_request($champ))) {
             $erreurs[$champ] = "Cette information est obligatoire !";
         }
     }
-    if(_request('date_debut') OR _request('date_fin_estimee') ){
-   	 $date_debut = explode('/',_request('date_debut'));
+    if($date_debut=trim(_request('date_debut')) AND $date_fin_estimee=trim(_request('date_fin_estimee'))){
+    echo _request('date_debut').'ok' ;
+   	 $date_debut = explode('/',$date_debut);
   	$date_debut= $date_debut[2].'-'.$date_debut[1].'-'.$date_debut[0];
- 	$date_fin_estimee = explode('/',_request('date_fin_estimee'));
+ 	$date_fin_estimee = explode('/',$date_fin_estimee);
   	$date_fin_estimee= $date_fin_estimee[2].'-'.$date_fin_estimee[1].'-'.$date_fin_estimee[0];	
   	if (difference($date_debut,$date_fin_estimee,3600)<=0)$erreurs['date_fin_estimee'] = _T('gestpro:erreur_date');
     }
@@ -202,7 +202,7 @@ function formulaires_projets_verifier_dist($id_projet=''){
 
 function formulaires_projets_traiter_dist($id_projet=''){
    	refuser_traiter_formulaire_ajax(); 	
-	$champs=definitions_projet();
+	$champs=definitions();
 	$valeurs=array();
 	
 	foreach($champs as $key=>$val){
