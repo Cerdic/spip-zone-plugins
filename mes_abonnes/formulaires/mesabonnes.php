@@ -48,6 +48,7 @@ function formulaires_mesabonnes_verifier_dist()
 // Traiter
 function formulaires_mesabonnes_traiter_dist()
 {
+	$res = array();
 	$message = "action inconnue";
 
 	$nom = strip_tags(strtolower(trim(_request('mesabos_nom'))));
@@ -69,20 +70,35 @@ function formulaires_mesabonnes_traiter_dist()
 		                                                 'date_modif' => "$date_motif",
 		                                                 'liste' => "$liste",
 		                                                 'statut' => "$statut"));
-		$message = _T('mesabonnes:merci', array('email' => "$email"));
+		if ($id_abonne){
+			$message = _T('mesabonnes:merci', array('email' => "$email"));
+			$res = array('message_ok' => $message, 'id_abonne' => $id_abonne);
+		}
+		else {
+			$message = _T('mesabonnes:erreur');
+			$res = array('message_erreur' => $message);
+		}
 	}
 
-	// deabonnement
+	// desabonnement
 	if ($statut=="unsubscribe"){
-		// pour l'instant on efface vraiment de la base
-		// alternative: faire un update et jouer sur le statut (poubelle)
-		sql_delete('spip_mesabonnes', "email = '$email'");
-		$message = _T('mesabonnes:bye', array('email' => "$email"));
+		//on recupere l'id par l email
+		$id_abonne = sql_getfetsel('id_abonne', 'spip_mesabonnes', 'email='.sql_quote($email));
+		if ($id_abonne){
+			//TODO message en cas d echec de lupdate
+			sql_updateq('spip_mesabonnes',
+			            array('statut' => "poubelle"),
+			            'id_abonne='.intval($id_abonne));
+			$message = _T('mesabonnes:bye', array('email' => "$email"));
+			$res = array('message_ok' => $message, 'id_abonne' => $id_abonne);
+		}
+		else {
+			$message = _T('mesabonnes:erreur_pas_trouve', array('email' => "$email"));
+			$res = array('message_erreur' => $message);
+		}
 	}
-
-
-	return array('message_ok' => $message);
+	
+	return $res;
 }
-
 
 ?>

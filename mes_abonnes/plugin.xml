@@ -2,7 +2,7 @@
 	<nom>Mes abonnes</nom>
 	<auteur>[erational->http://www.erational.org]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>test</etat>
 	<description>module d'abonnement pour logiciels de publipostages de type MaxBulker Mailer</description>
 	<lien>http://www.spip-contrib.net/Mes-abonnes</lien>
