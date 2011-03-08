@@ -16,13 +16,16 @@
 
 			    // cfg
 
-						 'medias_metas' => 'Métas Médias glue',
-             'config' => 'Plugin Métas Médias glue: configuration',
-             'help_titre' => 'Cette page vous permet de configurer les options du plugin Métas Médias glue.',
+						 'medias_metas' => 'Métadonnées pour la médiathèque',
+             'config' => 'Plugin Métadonnées pour la médiathèque: configuration',
+             'help_titre' => 'Cette page vous permet de configurer les options du plugin.',
              'oui' => 'oui',
              'non' => 'non',
-             'choix_meta' => 'Utiliser l\'affichage modifiées',
-             'help_choix_meta' => '(Sinon, utilisation de l\'affichage officiel du plugin métadonnées photos)'
+             'choix_meta' => 'Utiliser l\'affichage modifiées (dans la médiathèque)',
+             'help_choix_meta' => '(Sinon, utilisation de l\'affichage officiel du plugin métadonnées photos)',
+             'inclure_meta' => 'Inclure les metas dans',
+             'articles' => 'les articles (dans l\'espace privé)',
+             'mediatheque' => 'la médiathèque'
              
   );
 

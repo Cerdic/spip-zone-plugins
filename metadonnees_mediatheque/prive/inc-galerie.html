@@ -126,8 +126,11 @@
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
 			</B_liens>
 
-[(#CONFIG{medias_metas/meta_off}|=={true}|?{
-[(#INCLURE{fond=pave_exif}{id_document})],[(#INCLURE{fond=pave_exif_medias}{id_document})]})]
+[(#CONFIG{medias_metas/meta_mediatheque}|!={false}|?{
+  [(#CONFIG{medias_metas/meta_off}|=={true}|?{
+    [(#INCLURE{fond=pave_exif}{id_document})],[(#INCLURE{fond=pave_exif_arts}{id_document})]
+  })]
+})]
       
 
 		</td>

@@ -61,6 +61,14 @@ modifier ces param&#232;tres.  -->
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
+        <fieldset><legend><:medias_metas:inclure_meta:></legend>
+
+					<input type="checkbox" name="meta_art" id="meta_art_true" value="true" [(#ENV{meta_art}|!={false}|?{checked="checked",''})] /><:medias_metas:articles:> <br />
+
+					<input type="checkbox" name="meta_mediatheque" id="meta_art_true" value="true" [(#ENV{meta_mediatheque}|!={false}|?{checked="checked",''})] /><:medias_metas:mediatheque:>
+
+				</fieldset>
+
         <fieldset><legend><:medias_metas:choix_meta:></legend>
         
             <:medias_metas:oui:> 

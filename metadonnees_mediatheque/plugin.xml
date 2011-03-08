@@ -1,12 +1,12 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]M&#233;tas M&#233;dias glue
-			[en]Metas Medias glue
+			[fr]M&#233;tadonn&#233;ess pour la M&#233;diath&egrave;que.
+			[en]Metadata for the media library
 		</multi>
 	</nom>
 	<auteur>Thom</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<icon>img_pack/logo64.png</icon>
 	<etat>stable</etat>
 	<description>
