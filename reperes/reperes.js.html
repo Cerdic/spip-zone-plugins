@@ -4,34 +4,33 @@
 ;if(window.jQuery) (function($){
 /*# AVOID COLLISIONS #*/
 
-$(document).ready(function(){ 
+$(document).ready(function(){
+    // ici lire la variable reperes/bloc pour remplacer le nom de la div
+    // lire aussi la variable reperes/insertion (pour remplacer after|before ou append)
+    // voir en ligne : http://docs.jquery.com/Manipulation
+    // lire enfin le tableau de valeurs pour construire les divs
 
-	// ici lire la variable reperes/bloc pour remplacer le nom de la div
-	// lire aussi la variable reperes/insertion (pour remplacer after|before ou append) 
-	// voir en ligne : http://docs.jquery.com/Manipulation
-	// lire enfin le tableau de valeurs pour construire les divs
-	$('div#page').after('<div class="invisible trait vertical gauche"></div>');
-	$('div#page').after('<div class="invisible trait vertical bord_gauche"></div>');
-	$('div#page').after('<div class="invisible trait vertical milieu"></div>');
-	$('div#page').after('<div class="invisible trait vertical bord_droite"></div>');
-	$('div#page').after('<div class="invisible trait vertical droite"></div>');
-	$('div#page').after('<div class="invisible trait horizontal centre"></div>');
+    $('div#page').after('<div id="repere_01" class="invisible trait horizontal" style="top:221px"><span class="repere">Rep.01 H></span></div>');
+    $('div#page').after('<div id="repere_02" class="invisible trait horizontal" style="top:238px"><span class="repere">Rep.02 H></span></div>');
+    $('div#page').after('<div id="repere_03" class="invisible trait horizontal" style="top:247px"><span class="repere">Rep.03 H></span></div>');
     
     // tant qu'il y a des repères dans le tableau
     // je lis le #EME
-    // je commence à écrire  						 = '<div id="repere_#EME" class="invisible trait';
-    // s'il est H je continue avec 					.= ' horizontal"';
-    // s'il est V je continue avec 					.= ' vertical"';
-    // j'ajoute la propriété style avec 			.= ' style="';
-    // s'il est H j'ajoute la propriété top avec	.= 'top:#TOP';
-    // s'il est V j'ajoute la propriété left avec	.= 'left:#LEFT';
-    // j'ajoute la couleur							.= ' background-color:#COULEUR';
-    // je ferme										.= '></div>';
+    // je commence à écrire								= '<div id="repere_#EME" class="invisible trait';
+    // s'il est H je continue avec						.= ' horizontal"';
+    // s'il est V je continue avec						.= ' vertical"';
+    // j'ajoute la propriété style avec					.= ' style="';
+    // s'il est H j'ajoute la propriété top avec        .= 'top:#TOP';
+    // s'il est V j'ajoute la propriété left avec       .= 'left:#LEFT';
+    // j'ajoute la couleur								.= ' background-color:#COULEUR';
+    // je ferme											.= '></div>';
     // je boucle
-	
 });
 
 
 /*# AVOID COLLISIONS #*/
 })(jQuery);
 /*# AVOID COLLISIONS #*/
+
+
+

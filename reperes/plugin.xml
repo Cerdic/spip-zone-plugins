@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	
 	<nom>Rep&egrave;res - Des squelettes au pixel pr&egrave;s !</nom>
 	
@@ -28,8 +28,12 @@
 	</lien>
 	
 	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>reperes_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
 		<nom>insert_head</nom>
-		<action>insert_head</action>
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
 
