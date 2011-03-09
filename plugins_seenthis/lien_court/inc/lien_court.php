@@ -14,7 +14,7 @@ function inc_lien_court($url) {
 function lien_court($url, $longueur = 50, $masquer = true) {
 	//$masquer = false;
 
-	$intitule = trim(sucrer_utm($url));
+	$intitule = trim($url);
 	$intitule = preg_replace(",/$,", "", $intitule);
 
 	$intitule = explode("/", $intitule);
