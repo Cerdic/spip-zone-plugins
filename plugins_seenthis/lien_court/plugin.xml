@@ -1,12 +1,12 @@
 <plugin>
 	<nom>Lien court</nom>
 	<auteur>ARNO* pour [Seenthis.net->http://seenthis.net]</auteur>
-	<version>1.0</version>
+	<version>1.1</version>
 	<licence>GPL</licence>
 	<etat>stable</etat>
 	<description>
-		Le filtre <code>|lien_court</code> permet de fabriquer des versions courtes des URL, de manière aussi «intelligente» que possible (en coupant en priorité «au milieu» plutôt qu'«à la fin» de l'URL).
-		Par ailleurs, le lien est intégralement préservé, les éléments «supprimés» sont simplement masqués par CSS; ce qui fait que le lien tronqué lorsqu'il est sélectionné contient en réalité l'intitulé complet, ce qui préserve les possibilités de copier-coller.
+		Le filtre <code>|lien_court</code> permet de fabriquer des versions courtes des URL, de mani&#232;re aussi &#171;intelligente&#187; que possible (en coupant en priorit&#233; &#171;au milieu&#187; plut&#244;t qu'&#171;&#224; la fin&#187; de l'URL).
+		Par ailleurs, le lien est int&#233;gralement pr&#233;serv&#233;, les &#233;l&#233;ments &#171;supprim&#233;s&#187; sont simplement masqu&#233;s par CSS; ce qui fait que le lien tronqu&#233; lorsqu'il est s&#233;lectionn&#233; contient en r&#233;alit&#233; l'intitul&#233; complet, ce qui pr&#233;serve les possibilit&#233;s de copier-coller.
 	</description>
 	<prefix>lien_court</prefix>
 	<fonctions>inc/lien_court.php</fonctions>
