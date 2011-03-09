@@ -4,27 +4,71 @@
 	</div>
 </div>
 
-
-<B_articles>	
+	
 <div id="padd-featsubs">
 	<div id="padd-featsubs-wrapper">
 		<div id="padd-featured" class="padd-box">
 			<h2><:derniers_articles:></h2>
-			<div class="padd-interior">
-			
-				[(#REM) Affiche les 4 articles les plus récents ]					
+			<div class="padd-interior">				
 				<div id="s3slider">
 					<ul id="s3sliderContent">
-						<BOUCLE_articles(ARTICLES) {!par date} {0, 4}>
+						[(#REM) Affiche les 4 articles les plus récents associés au mot-clé : slider]	
+						<BOUCLE_articles(ARTICLES) {titre_mot=slider} {!par date} {0, 4}>
 							<li class="s3sliderImage" id="featured-#ID_ARTICLE">
-								<a href="#URL_ARTICLE">#LOGO_ARTICLE_RUBRIQUE" </a>
-								[<span class="right"><strong><a href="#URL_ARTICLE">#TITRE</a></strong><br /><br />(#INTRODUCTION|couper{370, '...'})</span>]
+								<a href="#URL_ARTICLE">							
+									#SET{largeur,(#LOGO_ARTICLE_RUBRIQUE|largeur)}
+									#SET{hauteur,(#LOGO_ARTICLE_RUBRIQUE|hauteur)}								
+									#SET{l_slider,650}							
+									#SET{h_slider,280}
+									#SET{ratio_slider,#GET{l_slider}|div{#GET{h_slider}}}
+									#SET{ratio_logo,#GET{largeur}|div{#GET{hauteur}}}
+									#SET{ratio_logo_inv,#GET{hauteur}|div{#GET{largeur}}}
+									
+									#SET{new_h_logo,#GET{ratio_logo_inv}|mult{#GET{l_slider}}}
+									#SET{new_l_logo, #GET{ratio_logo}|mult{#GET{h_slider}}}
+									
+									[(#GET{largeur}|<{#GET{l_slider}}|ou{#GET{hauteur}|<{#GET{h_slider}}}|?{										
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|oui) [(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{style, width:650px; height:#GET{new_h_logo}px})]]
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|non) [(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{style, height:280px; width:#GET{new_l_logo}px})]]
+										,
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|oui) [(#LOGO_ARTICLE_RUBRIQUE||image_reduire{650,0}|image_recadre{650, 280, center})]]
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|non) [(#LOGO_ARTICLE_RUBRIQUE||image_reduire{0,280}|image_recadre{650, 280, center})]]
+									})]
+								</a>
+								[<span class="right"><strong><a href="#URL_ARTICLE">#TITRE</a></strong>(#INTRODUCTION|couper{370, '...'})</span>]
 							</li>
 						</BOUCLE_articles>
+						</B_articles>
+						[(#REM) Sinon : Affiche les 4 articles les plus récents ]
+						<BOUCLE_articles_sec(ARTICLES) {!par date} {0, 4}>
+							<li class="s3sliderImage" id="featured-#ID_ARTICLE">
+								<a href="#URL_ARTICLE">															
+									#SET{largeur,(#LOGO_ARTICLE_RUBRIQUE|largeur)}
+									#SET{hauteur,(#LOGO_ARTICLE_RUBRIQUE|hauteur)}								
+									#SET{l_slider,650}							
+									#SET{h_slider,280}
+									#SET{ratio_slider,#GET{l_slider}|div{#GET{h_slider}}}
+									#SET{ratio_logo,#GET{largeur}|div{#GET{hauteur}}}
+									#SET{ratio_logo_inv,#GET{hauteur}|div{#GET{largeur}}}
+									
+									#SET{new_h_logo,#GET{ratio_logo_inv}|mult{#GET{l_slider}}}
+									#SET{new_l_logo, #GET{ratio_logo}|mult{#GET{h_slider}}}
+									
+									[(#GET{largeur}|<{#GET{l_slider}}|ou{#GET{hauteur}|<{#GET{h_slider}}}|?{										
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|oui) [(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{style, width:650px; height:#GET{new_h_logo}px})]]
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|non) [(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{style, height:280px; width:#GET{new_l_logo}px})]]
+										,
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|oui) [(#LOGO_ARTICLE_RUBRIQUE||image_reduire{650,0}|image_recadre{650, 280, center})]]
+										[(#GET{ratio_logo}|<={#GET{ratio_slider}}|non) [(#LOGO_ARTICLE_RUBRIQUE||image_reduire{0,280}|image_recadre{650, 280, center})]]
+									})]
+								</a>
+								[<span class="right"><strong><a href="#URL_ARTICLE">#TITRE</a></strong>(#INTRODUCTION|couper{370, '...'})</span>]
+							</li>
+						</BOUCLE_articles_sec>
+						<//B_articles>
 						<div class="clear s3sliderImage"></div>
 					</ul>
 				</div>
-				
 			</div>
 		</div>
 		<div id="padd-subscribed">
@@ -113,6 +157,3 @@
 		</div>
 	</div>
 </div>
-		
-		
-</B_articles>
