@@ -7,6 +7,7 @@
 	<description>
 		Ce plugin permet d'afficher un tweet provenant de Twitter comme sur Twitter avec un simple mod&#232;le &#224; utiliser : &#60;displaytweet|id=xxx&#62; o&#249; xxx est l'id du tweet.
 	</description>
+	<fonctions>displaytweet_fonctions.php</fonctions>
 	<licence>GNU/GPL</licence>
 	<necessite id="spip" version="[2.1.0;]" />
 	<necessite id="Iterateurs" version="[0.2.6;]" />

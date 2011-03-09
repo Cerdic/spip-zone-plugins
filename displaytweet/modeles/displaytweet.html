@@ -7,7 +7,7 @@
 	<div id="tweet_[(#GET{tweet}|table_valeur{id})]" class="tweet" style="padding: 20px; margin: 5px 0pt; background-color: [(#GET{tweet}|table_valeur{user}|table_valeur{profile_background_color}|table_valeur{0})]; background-image: url([(#GET{tweet}|table_valeur{user}|table_valeur{profile_background_image_url}|table_valeur{0})]);">
 		<div style="background: none repeat scroll 0% 0% #FFFFFF; padding: 10px; margin: 0pt; min-height: 48px; color: [(#GET{tweet}|table_valeur{user}|table_valeur{profile_text_color}|table_valeur{0})]; -moz-border-radius: 5px 5px 5px 5px;">
 			<span style="width: 100%; font-size: 18px; line-height: 22px;">
-				[(#GET{tweet}|table_valeur{text})]
+				[(#GET{tweet}|table_valeur{text}|d_tweet_twitt_propre)]
 			</span>
 			<div style="font-size: 12px; width: 100%; padding: 5px 0pt; margin: 0pt 0pt 10px; border-bottom: 1px solid [(#GET{tweet}|table_valeur{user}|table_valeur{profile_sidebar_border_color}|table_valeur{0})];">
 				<a title="twitt&eacute; le [(#VAL{'d M Y H:m:s'}|date{[(#GET{tweet}|table_valeur{created_at}|strtotime)]})]" href="http://twitter.com/[(#GET{tweet}|table_valeur{user}|table_valeur{screen_name}|table_valeur{0})]/status/[(#GET{tweet}|table_valeur{id})]" style="text-decoration:none; color:##GET{link} !important;">
