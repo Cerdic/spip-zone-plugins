@@ -20,12 +20,7 @@ Diaporama param&#233;trable pour Spip.<br/>Bas&#233; sur la librairie javascript
 		<nom>insert_head</nom>
 		<inclure>nivoslider_pipelines.php</inclure>
 	</pipeline>
-
-	<pipeline>
-		<nom>header_prive</nom>
-		<action>insert_head</action>
-		<inclure>nivoslider_pipelines.php</inclure>
-	</pipeline>
+	<noisette>modeles/nivoslider.html</noisette>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id='cfg' version='[1.0.0;]' />
 	<categorie>multimedia</categorie>
