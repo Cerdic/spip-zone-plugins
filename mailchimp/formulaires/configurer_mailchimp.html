@@ -1,37 +1,29 @@
-<style type="text/css">
-.formulaire_spip, .formulaire_spip * { font-size: 100% !important; }
-.formulaire_spip fieldset { border: 0; }
-.formulaire_spip legend { background: none; font-weight: bold; }
-.formulaire_spip .explication { padding: 5px 10px; background: none; border: 0; }
-.formulaire_spip li .explication { padding: 2px; font-size: .9em !important; line-height: 1; color: #666; }
-</style>
-
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
-			<legend>Paramétrages des identifiants MailChimp </legend>
-			<p class="explication">Vous retrouvez toutes les infos sur la page mailchimp ... </p>
+			<legend><:mailchimp:configurer_legend:></legend>
 			<ul>
 				<li class="mailchimp_apikey[ (#ENV**{erreurs}|table_valeur{apikey}|oui)erreur]">
-					<label for="font-family">apiKey</label>[
+					<label ><:mailchimp:configurer_apikey:></label>
+					[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{apiKey})</span>
 					]<input type="text" class="text" name="apiKey" id="apiKey" [ value="(#ENV{apiKey})"] />
-					<p class="explication">API Key - see http://admin.mailchimp.com/account/api</p>
+					<p class="explication"><:mailchimp:configurer_apikey_explication:></p>
 				</li>
 
 				<li class="mailchimp_listId[ (#ENV**{erreurs}|table_valeur{listId}|oui)erreur]">
-					<label for="font-family">listId</label>[
+					<label for="font-family"><:mailchimp:configurer_listid:></label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{listId})</span>
 					]<input type="text" class="text" name="listId" id="listId" [ value="(#ENV{listId})"] />
-					<p class="explication">A List Id to run examples against. use lists() to view all. Also, login to MC account, go to List, then List Tools, and look for the List ID entry</p>
+					<p class="explication"><:mailchimp:configurer_listid_explication:></p>
 				</li>
 			</ul>
 		</fieldset>
 		<p class="boutons">
-			<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
+			<input type="submit" name="enregistrer" class="submit" value="<:mailchimp:enregistrer_et_tester:>" />
 		</p>
 	</div></form>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 </div>

@@ -59,10 +59,10 @@ function mailchimp_formulaire_traiter($flux)
 
 				if ($api->errorCode){
 					spip_log(__LINE__);
-					$messageErreur = _T('mailchimp:api_errorcode')." : ErroCode Mailchimp:".$api->errorCode." / Error message".$api->errorMessage;
+					$messageErreur = _T('mailchimp:api_errorcode')."<br/><b>".$api->errorCode."</b><br/>".$api->errorMessage;
 					if (autoriser("configurer", "mailchimp")){
 						spip_log(__LINE__);
-						$flux['data'] = array('message_erreur' => "Plugin mes_abonnes : $message_ok <br/> Plugin Mailchimp: $messageErreur");
+						$flux['data'] = array('message_erreur' => "Plugin mes_abonnes : $message_ok <br/><br/> Plugin Mailchimp: $messageErreur");
 						spip_log("Admin $messageErreur");
 						return $flux;
 					} // fin message pour admin
@@ -74,7 +74,7 @@ function mailchimp_formulaire_traiter($flux)
 					} // autoriser
 				} else {
 					spip_log(__LINE__);
-					$message_ok .="<br>"._T('mailchimp:demande_inscription_envoyee', array('email' => "$email",'from'=>'pas dispo par api'));
+					$message_ok .="<br/><br/>"._T('mailchimp:demande_inscription_envoyee', array('email' => "$email",'from'=>'pas dispo par api'));
 					$flux['data']['message_ok']=$message_ok ;
 					return $flux;
 				}
@@ -87,7 +87,7 @@ function mailchimp_formulaire_traiter($flux)
 
 				if ($api->errorCode){
 					spip_log(__LINE__);
-					$messageErreur = _T('mailchimp:api_errorcode')." : ErroCode Mailchimp:".$api->errorCode." / Error message".$api->errorMessage;
+					$messageErreur = _T('mailchimp:api_errorcode')."<br/><b>".$api->errorCode."</b><br/>".$api->errorMessage;
 					if (autoriser("configurer", "mailchimp")){
 						spip_log(__LINE__);
 						$flux['data'] = array('message_erreur' => "Plugin mes_abonnes : $message_ok <br/> Plugin Mailchimp: $messageErreur");
@@ -139,6 +139,8 @@ function mailchimp_formulaire_traiter($flux)
 		spip_log(__LINE__);
 	}
 	spip_log(__LINE__);
+	return $flux ;
+	
 }
 
 
