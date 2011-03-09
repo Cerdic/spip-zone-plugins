@@ -41,6 +41,10 @@
 		<nom>post_edition</nom>
 		<inclure>sympatic_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>sympatic_pipelines.php</inclure>
+	</pipeline>
 	<necessite id='SPIP' version='[2.1.8;]' />
 	<necessite id="saisies" version="[1.1;]" />
 </plugin>

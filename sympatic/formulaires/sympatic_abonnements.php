@@ -12,6 +12,9 @@ function formulaires_sympatic_abonnements_charger_dist($id_auteur){
 	$valeurs['editable'] = true;
 	$valeurs['id_auteur'] = $id_auteur;
 	
+	if (!autoriser('modifier','auteur',$id_auteur,null))
+		$valeurs['editable'] = false;
+	
 	return $valeurs;
 }
 
