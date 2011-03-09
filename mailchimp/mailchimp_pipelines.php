@@ -25,7 +25,7 @@ function mailchimp_formulaire_traiter($flux)
 		spip_log(__LINE__);
 
 		# API mailchimp
-		require_once 'inc/1.3/MCAPI.class.php';
+		include_spip('inc/1.3/MCAPI.class');
 
 		// necessaire pour utiliser lire_config
 		include_spip('inc/config');

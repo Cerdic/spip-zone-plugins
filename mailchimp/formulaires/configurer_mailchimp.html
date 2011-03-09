@@ -28,13 +28,6 @@
 					]<input type="text" class="text" name="listId" id="listId" [ value="(#ENV{listId})"] />
 					<p class="explication">A List Id to run examples against. use lists() to view all. Also, login to MC account, go to List, then List Tools, and look for the List ID entry</p>
 				</li>
-
-				<li class="mailchimp_campaignId[ (#ENV**{erreurs}|table_valeur{campaignId}|oui)erreur]">
-					<label for="font-family">campaignId</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{campaignId})</span>
-					]<input type="text" class="text" name="campaignId" id="campaignId" [ value="(#ENV{campaignId})"] />
-					<p class="explication">A Campaign Id to run examples against. use campaigns() to view all</p>
-				</li>
 			</ul>
 		</fieldset>
 		<p class="boutons">
