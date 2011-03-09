@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Readability</nom>
+	<auteur>Arc90, Keyvan Minoukadeh, Fil</auteur>
+	<licence>Apache License, Version 2.0.</licence>
+	<version>0.1</version>
+	<etat>
+	test
+	</etat>
+	<lien>http://www.spip-contrib.net/</lien>
+	<description>
+	Extraire le contenu principal d'une page Web.
+	</description>
+	<prefix>
+	Readability
+	</prefix>
+	<icon>readability.png</icon><!-- by Lothar Grimme http://www.iconfinder.com/icondetails/56/128/eye_wear_glasses_read_view_icon -->
+	<fonctions>inc/readability.php</fonctions>
+	<categorie>outil</categorie>
+	<chemin dir='' />
+</plugin>
