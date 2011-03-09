@@ -12,7 +12,7 @@
 	<prefix>squelette_maparaan</prefix>
 	<necessite id="Z" version="[1.2.0;]" />
 	<utilise id="menus" />
-	<utilise id="cfg" />
+	<utilise id="typoenluminee" />
 	<utilise id="socialtags" />
 	<utilise id="gravatar" />
 	<utilise id="slogan" />
