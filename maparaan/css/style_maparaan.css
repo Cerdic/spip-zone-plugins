@@ -10,9 +10,6 @@ div.logo-breve{ float:left; margin:0 20px 20px 0; }
 
 div.padd-post-site { margin:0 0 30px 0; padding:0 0 10px 0; border-bottom:1px dashed #CCC;}
 
-div.padd-post-item-auteur img { float:left;  }
-div.padd-post-item-auteur p.repondre { float:right; margin-left:20px; margin:10px 0 0 0; }
-div.padd-post-item-auteur div.padd-post-item-title { margin:0 0 0 100px; }
 div.marge-bottom { margin:0 0 20px 0; }
 
 
@@ -223,6 +220,11 @@ div.padd-post-item-index-2 ul li span.surliste:hover { background-color: #ebebd9
 
 div.titre-sans-icone { margin: 0 0 10px; }
 div.titre-sans-icone h3 { padding:0px; border-width:1px;}
+
+
+div.padd-post-item-auteur img { float:left; margin: 0 20px 20px 0;  }
+div.padd-post-item-auteur p.repondre { float:right; margin-left:20px; margin:10px 0 0 0; }
+div.padd-post-item-auteur div.padd-post-item-title { margin:0 0 0 100px; }
 
 
 /*
