@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Display Tweet</nom>
+	<auteur>Yohann Prigent</auteur>
+	<version>1.0.0</version>
+	<etat>dev</etat>
+	<prefix>d_tweet</prefix>
+	<description>
+		Ce plugin permet d'afficher un tweet provenant de Twitter comme sur Twitter avec un simple mod&#232;le &#224; utiliser : &#60;displaytweet|id=xxx&#62; o&#249; xxx est l'id du tweet.
+	</description>
+	<licence>GNU/GPL</licence>
+	<necessite id="spip" version="[2.1.0;]" />
+	<necessite id="Iterateurs" version="[0.2.6;]" />
+	<icon>img_pack/d_tweet.png</icon>
+	<categorie>communication</categorie>
+</plugin>
