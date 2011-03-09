@@ -64,22 +64,23 @@ function priveperso_trouver_rubrique_parent_perso($rub_id) {
 
 
 	$u = sql_select("id_parent, id_secteur","spip_rubriques",'id_rubrique='.intval($rub_id));
-	$b = sql_fetch($u);
-	$id_parent = $b['id_parent'];
-	$id_secteur = $b['id_secteur'];
-	$v = sql_select("rub_id,sousrub, activer_perso","spip_priveperso",'rub_id='.intval($id_parent));
-	$c = sql_fetch($v);
-	if ( ($c) && ($c['sousrub']==='oui') && ($c['activer_perso']==='oui') ){
-		return $id_parent;}
-	else{
-		if ($id_parent==='0'){
-			return '0';			
-			}
-			else{
-				return priveperso_trouver_rubrique_parent_perso($id_parent);
+	if ($b = sql_fetch($u)){
+		$id_parent = $b['id_parent'];
+		$id_secteur = $b['id_secteur'];
+		$v = sql_select("rub_id,sousrub, activer_perso","spip_priveperso",'rub_id='.intval($id_parent));
+		$c = sql_fetch($v);
+		if ( ($c) && ($c['sousrub']==='oui') && ($c['activer_perso']==='oui') ){
+			return $id_parent;}
+		else{
+			if ($id_parent==='0'){
+				return '0';			
 				}
-		}
-
+				else{
+					return priveperso_trouver_rubrique_parent_perso($id_parent);
+					}
+			}
+	}
+	
 }
 
 function priveperso_recupere_id_rubrique(){
