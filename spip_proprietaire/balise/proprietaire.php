@@ -2,6 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_PROPRIETAIRE($p) {
+	spip_proprio_proprietaire_texte();
    return calculer_balise_dynamique($p,PROPRIETAIRE,array());
 }
 
@@ -18,7 +19,7 @@ function balise_PROPRIETAIRE_dyn($wich='', $who='', $separator='<br />') {
 			$nom_site = typo($conf['proprietaire_nom'])
 				.( strlen($conf['adresse_pays']) ? ' - '.$conf['adresse_pays'] : '');
 			if($wich == 'footer') $div .= '<small>';
-			$div = _T('textes_legaux:copyright_info', array(
+			$div = _T('proprietaire:copyright_info', array(
 				'nom_site' => $nom_site,
 				'date' => ( strlen($conf['copyright_annee']) ? $conf['copyright_annee'].'-' : '').date("Y"),
 			));
@@ -32,7 +33,7 @@ function balise_PROPRIETAIRE_dyn($wich='', $who='', $separator='<br />') {
 			if($google = make_google_map_proprietaire($conf)) $div .= $google;
 			break;
 		case 'vcard' :
-			$div .= propre( _T('textes_legaux:vcard_info', array(
+			$div .= propre( _T('proprietaire:vcard_info', array(
 				'vcard_url'=>url_absolue(generer_url_public('vcard')),
 				'vcard_url_download'=>url_absolue(generer_url_public('vcard','telechargement=oui')),
 			)));
@@ -46,10 +47,10 @@ function balise_PROPRIETAIRE_dyn($wich='', $who='', $separator='<br />') {
 			);
 			if( isset($GLOBALS['meta']['email_webmaster']) AND strlen($GLOBALS['meta']['email_webmaster']) )
 				$cartes_visite_urls['webmaster'] = url_absolue(generer_url_public('carte_visite','type=webmaster'));
-			$div .= propre( _T('textes_legaux:carte_visite_info', $cartes_visite_urls) );
+			$div .= propre( _T('proprietaire:carte_visite_info', $cartes_visite_urls) );
 			break;
 		case 'business_cards' :
-			$div .= propre( _T('textes_legaux:business_cards') );
+			$div .= propre( _T('proprietaire:business_cards') );
 			$cartes_visite_urls = array(
 				'classique'=>url_absolue(generer_url_public('carte_visite')),
 				'complete'=>url_absolue(generer_url_public('carte_visite','type=site')),
@@ -58,8 +59,8 @@ function balise_PROPRIETAIRE_dyn($wich='', $who='', $separator='<br />') {
 			);
 			if( isset($GLOBALS['meta']['email_webmaster']) AND strlen($GLOBALS['meta']['email_webmaster']) )
 				$cartes_visite_urls['webmaster'] = url_absolue(generer_url_public('carte_visite','type=webmaster'));
-			$div .= propre( _T('textes_legaux:carte_visite_info', $cartes_visite_urls) );
-			$div .= propre( _T('textes_legaux:vcard_info', array(
+			$div .= propre( _T('proprietaire:carte_visite_info', $cartes_visite_urls) );
+			$div .= propre( _T('proprietaire:vcard_info', array(
 				'vcard_url'=>url_absolue(generer_url_public('vcard')),
 				'vcard_url_download'=>url_absolue(generer_url_public('vcard','telechargement=oui')),
 			)));
