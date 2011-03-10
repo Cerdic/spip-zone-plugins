@@ -16,7 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_apikey_explication' => 'API Key que l\'on trouve dans l\'administration : <a href="http://admin.mailchimp.com/account/api">MailChimp API</a>',
 
 //A
-	'demande_inscription_envoyee' => 'Un mail vous a été envoyé a l\'adresse "@email@" . Pour valider votre abonnement vous devez cliquer sur le lien que vous avez reçu. Vérifiez éventuellement dans votre dossier SPAM ou dans votre corbeille si jamais vous ne trouvez pas cet email de confirmation.',
+	'demande_inscription_envoyee1' => 'Un mail vous a été envoyé a l\'adresse "@email@".',
+	'demande_inscription_envoyee2' => 'Pour valider votre abonnement vous devez cliquer sur le lien dans l\'email que vous avez reçu.',
+	'demande_inscription_envoyee3' => 'Vérifiez éventuellement dans votre dossier SPAM ou dans votre corbeille si jamais vous ne trouvez pas cet email.',
 	'demande_desincription_ok' => 'Votre adresse "@email@" a également été retirée de Mailchimp. Au revoir.',
 
 

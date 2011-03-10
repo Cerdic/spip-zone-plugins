@@ -74,7 +74,9 @@ function mailchimp_formulaire_traiter($flux)
 					} // autoriser
 				} else {
 					spip_log(__LINE__);
-					$message_ok .="<br/><br/>"._T('mailchimp:demande_inscription_envoyee', array('email' => "$email",'from'=>'pas dispo par api'));
+					$message_ok .="<br/><br/>"._T('mailchimp:demande_inscription_envoyee1', array('email' => "$email"));
+					$message_ok .="<br/><br/>"._T('mailchimp:demande_inscription_envoyee2');
+					$message_ok .="<br/><br/><i>"._T('mailchimp:demande_inscription_envoyee3')."</i>";
 					$flux['data']['message_ok']=$message_ok ;
 					return $flux;
 				}
