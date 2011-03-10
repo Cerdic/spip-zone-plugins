@@ -483,3 +483,6 @@ spiplistes_log("version: ".$spiplistes_version . " "
 	, _SPIPLISTES_LOG_DEBUG);
 */
 
+//$opt_console_debug = (spiplistes_pref_lire ('opt_console_debug' == 'oui') ?  true : false);
+
+//($opt_console_debug && spiplistes_log('-- starting spiplistes plugin'));

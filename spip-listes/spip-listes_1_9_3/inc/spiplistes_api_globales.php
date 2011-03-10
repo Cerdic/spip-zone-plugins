@@ -38,39 +38,47 @@ if(!defined("LOG_WARNING")) {
 	define("LOG_DEBUG", 7);
 }
 
-function spiplistes_log($texte, $level = LOG_WARNING) {
-	static $lan, $syslog; 
-	if($lan === null) {
+function spiplistes_log ($texte, $level = LOG_WARNING) {
+	
+	static $lan, $syslog, $debug;
+	
+	if ($lan === null) {
 		$lan = spiplistes_server_rezo_local();
-		$syslog = (($s = spiplistes_pref_lire('opt_console_syslog')) && ($s == 'oui'));
+		$syslog = (spiplistes_pref_lire('opt_console_syslog') == 'oui');
+		$debug = (spiplistes_pref_lire('opt_console_debug') == 'oui');
 	}
-	if($lan) {
-		if($syslog) {
-			$tag = "_";
-			if(empty($tag)) { 
+	if ($debug || $lan)
+	{
+		if($syslog)
+		{
+			$tag = '_';
+			if (empty($tag))
+			{ 
 				$tag = basename ($_SERVER['PHP_SELF']); 
 			}
-			else if($level == LOG_DEBUG) {
-				$tag = "DEBUG: ".$tag; 
+			else if ($level == LOG_DEBUG)
+			{
+				$tag = 'DEBUG: ' . $tag; 
 			}
-			return(
+			return (
 				openlog ($tag, LOG_PID | LOG_CONS, LOG_USER) 
 					&& syslog ($level, (string)$texte) 
 					&&	closelog()
 			);
 		}
 		else {
-			spip_log($texte, _SPIPLISTES_PREFIX);
+			spip_log ($texte, _SPIPLISTES_PREFIX);
 		}
 		
 	}
-	else if($level <= LOG_WARNING) {
+	else if($level <= LOG_WARNING)
+	{
 		// Taille du log SPIP trop courte en 192
 		// Ne pas envoyer si DEBUG sinon tronque sans cesse
 		// En SPIP 193, modifier globale $taille_des_logs pour la rotation
-		spip_log($texte, _SPIPLISTES_PREFIX);
+		spip_log ($texte, _SPIPLISTES_PREFIX);
 	}
-	return(true);
+	return (true);
 }
 
 function spiplistes_server_rezo_local () {
@@ -254,7 +262,7 @@ function spiplistes_current_version_base_get ($prefix) {
 
 function spiplistes_sqlerror_log ($trace = "") {
 	if($trace) $trace = " ($trace) ";
-	spiplistes_log("DB ERROR".$trace.": [" . sql_errno() . "] " . sql_error());
+	spiplistes_log('DB ERROR'.$trace.": [" . sql_errno() . "] " . sql_error());
 	return(true);
 }
 
