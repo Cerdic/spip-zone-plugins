@@ -105,22 +105,27 @@ function spiplistes_spip_est_inferieur_193 () {
 }
 
 
-/*
+/**
  * ecrire dans la table 'spip_meta' le champ...
  * en general pour les preferences
  * @return true
  */
 function spiplistes_ecrire_metas() {
 	if(spiplistes_spip_est_inferieur_193()) { 
-		include_spip("inc/meta");
+		include_spip('inc/meta');
 		ecrire_metas();
 	}
-	return(true);
+	return (true);
 }
 
-//CP-20080512
-function spiplistes_pref_lire ($key) { 
-	return(spiplistes_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES));
+/**
+ * Lecture d'une pref (meta)
+ * @param $key string
+ * @return string or null
+ */
+function spiplistes_pref_lire ($key) {
+	$s = spiplistes_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
+	return ($s);
 }
 
 /*

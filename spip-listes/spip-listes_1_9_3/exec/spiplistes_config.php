@@ -96,7 +96,8 @@ function exec_spiplistes_config () {
 			);
 				
 		$keys_console_syslog = array(
-			'opt_console_syslog' // permet d'envoyer le journal sur syslog
+			'opt_console_debug'	// console en mode verbose
+			, 'opt_console_syslog' // envoyer le journal sur syslog
 			, 'opt_log_voir_destinataire' // ecrire adresse mail des destinataires dans les journaux
 			);
 				
@@ -506,10 +507,21 @@ function exec_spiplistes_config () {
 		$page_result .= ''
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'console-24.gif', true, '', _T('spiplistes:log_console'))
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
+			//
+			// la console en mode debug ?
+			. debut_cadre_relief('', true, '', _T('spiplistes:log_console_debug'))
+			. spiplistes_form_input_checkbox (
+				'opt_console_debug'
+				, 'oui'
+				, _T('spiplistes:log_console_debug_activer')
+				, (spiplistes_pref_lire('opt_console_debug') == 'oui'), true, false)
+			. fin_cadre_relief(true)
+			// 
 			. debut_cadre_relief('', true, '', _T('spiplistes:log_details_console'))
 			. spiplistes_form_input_checkbox (
 				'opt_log_voir_destinataire'
-				, 'oui', _T('spiplistes:log_voir_destinataire')
+				, 'oui'
+				, _T('spiplistes:log_voir_destinataire')
 				, (spiplistes_pref_lire('opt_log_voir_destinataire') == 'oui'), true, false)
 			. fin_cadre_relief(true)
 			;
