@@ -1,11 +1,14 @@
 <B_Recherche>
-	<ul>
+	<ul class="resultats">
 <BOUCLE_Recherche(ARTICLES){recherche}{!id_article IN #ENV{exclure}}{tout}{!lang_select}>
-	[<li>(#TITRE) : 
-	<a href="[(#URL_ARTICLE|url_absolue)]"><:a2a:voir:></a> - 
-	<a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG,#SELF})]" class="ajax"><:a2a:lier_cet_article:></a> - 
-	<a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG/both,#SELF})]" class="ajax"><:a2a:lier_cet_article_deux_cotes:></a>
-	</li>]
+	<li>
+		[<span class="titre">(#TITRE)</span>]
+		<span class="actions">
+			<a href="[(#URL_ARTICLE|url_absolue)]"><:a2a:voir:></a> - 
+			<a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG,#SELF})]" class="ajax"><:a2a:lier_cet_article:></a> - 
+			<a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG/both,#SELF})]" class="ajax"><:a2a:lier_cet_article_deux_cotes:></a>
+		</span>
+	</li>
 </BOUCLE_Recherche>
 	</ul>
 </B_Recherche>
