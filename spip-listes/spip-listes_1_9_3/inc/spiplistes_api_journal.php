@@ -55,43 +55,59 @@ include_spip('inc/texte');
  */
 function spiplistes_raccourci_journal ($envelopper = true) {
 
+	static $eol = PHP_EOL;
+
 	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
 	
-	$result = "";
+	$result = '';
 	
 	if($envelopper) {
-		$result .= ""
+		$result .= ''
 			. debut_cadre_enfonce('', true)
-			. "<span class='verdana2' style='font-size:80%;text-transform: uppercase;font-weight:bold;'>"
+			. '<span class="verdana2" style="font-size:80%;text-transform: uppercase;font-weight:bold;">'
 				. _T('titre_cadre_raccourcis')
-				. "</span>\n"
-			. "<ul class='verdana2' style='list-style:none;padding:1ex;margin:0;'>\n"
+				. '</span>'.$eol
+			. '<ul class="verdana2" style="list-style:none;padding:1ex;margin:0;">'.$eol
 			;
 	}
-	$result .= ""
-		. "<li id='spiplistes-log-raccourci'>"
+	$result .= ''
+		. '<li id="spiplistes-log-raccourci">'
 		. icone_horizontale(
 			_T('spiplistes:log_voir_le_journal')
 			, generer_url_ecrire('spiplistes_voir_journal')
-			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."log-24.png"
+			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'log-24.png'
 			, ''
 			,false
 			)
-		.	(
-				(spiplistes_server_rezo_local())
-				? "<span class='verdana2' style='display:block;padding:0.5ex;text-align:center'>" 
-					// avertir qu'on est en mode debug
-					. "<span style='display:block;font-weight:700;color:white;background-color:red;'>" . _T('spiplistes:mode_debug_actif') . "</span>\n"
-					// l'adresse IP pour info
-					. "<span style='display:block;'>" . $_SERVER['SERVER_ADDR'] . "</span>\n"
-					. "</span>\n"
-				: ""
-			)
-		. "</li>\n"
+		. '</li>'.$eol
+		. '<li>'.$eol
+		;
+		
+	if (spiplistes_pref_lire('opt_console_debug') == 'oui')
+	{
+		$ancre = '#regler-console';
+		if (_request('exec') != _SPIPLISTES_EXEC_CONFIGURE)
+		{
+			$ancre = generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE) . $ancre;
+		}
+		$result .= ''
+			. '<span class="verdana2" style="display:block;padding:0.5ex;text-align:center">'.$eol
+			. '<a href="'.$ancre.'" title="'._T('spiplistes:log_configurer').'" class="cellule-h" style="text-align:center">'.$eol
+				// avertir qu'on est en mode debug
+				. '<span style="display:block;font-weight:700;color:white;background-color:red;">'.$eol
+						. _T('spiplistes:mode_debug_actif') . '</span>'
+			. '</a>'.$eol
+			// l'adresse IP pour info
+			. '<span style="display:block;">' . $_SERVER['SERVER_ADDR'] . '</span>'.$eol
+			. '</span>'.$eol
+			;
+	}
+		
+	$result .= '</li>'.$eol
 		;
 	if($envelopper) {
-		$result .= ""
-			. "</ul>\n"
+		$result .= ''
+			. '</ul>'.$eol
 			;
 	}
 	
@@ -340,4 +356,3 @@ function spiplistes_journal_titre() {
 	return(_T('spiplistes:titre_page_voir_journal'));
 }
  
-?>

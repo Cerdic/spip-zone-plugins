@@ -506,7 +506,7 @@ function exec_spiplistes_config () {
 
 	//////////////////////////////////////////////////////
 	// La console
-		$page_result .= ''
+		$page_result .= '<a id="regler-console" name="regler-console"></a>'
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'console-24.gif', true, '', _T('spiplistes:log_console'))
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 			//

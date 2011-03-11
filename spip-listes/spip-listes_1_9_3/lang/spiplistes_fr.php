@@ -148,6 +148,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'log_console_syslog_texte' => 'Activer les journaux syst&egrave;mes (renvoi sur syslog)'
 , 'log_console_syslog' => 'Console syslog'
 , 'log_voir_le_journal' => 'Voir le journal de SPIP-Listes'
+, 'log_configurer' => 'Configurer la console'
 , 'recharger_journal' => 'Recharger le journal'
 , 'fermer_journal' => 'Fermer le journal'
 , 'methode_envoi' => 'M&#233;thode d&#8217;envoi'

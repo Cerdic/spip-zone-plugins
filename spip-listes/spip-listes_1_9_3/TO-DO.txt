@@ -6,8 +6,6 @@
 
 TO-DO:
 
-+ permettre de forcer le mode debug qui n'est pour l'instant accessible que via le lan.
-
 Si supprimer courrier, supprimer documents attachés ?
 
 + a verifier: semble ne pas tenir compte des options d habillage dans le calcul du poids du mail. cf.:
