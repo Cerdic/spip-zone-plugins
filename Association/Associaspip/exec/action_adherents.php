@@ -48,9 +48,9 @@ function supprimer_adherents($delete_tab)
 	$res ='<table>';
 	foreach ($delete_tab as $id) {
 		$id = intval($id);
-		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id");
+		$query = sql_select("id_auteur, prenom, nom_famille",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id");
 		while($data = sql_fetch($query)) {
-			$res .="\n<tr><td><strong>".$data['nom_famille'].' '.$data['prenom'].'</strong></td><td><input type="checkbox" name="drop[]" value="'.$id.'" checked="checked" /></td></tr>';
+			$res .="\n<tr><td>" . $data['id_auteur'] . " <strong>".$data['nom_famille'].' '.$data['prenom'].'</strong></td><td><input type="checkbox" name="drop[]" value="'.$id.'" checked="checked" /></td></tr>';
 		}
 	}
 	$res .='<tr>';
