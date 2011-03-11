@@ -31,6 +31,11 @@
       <titre>skeleditor:editer_skel</titre>   
       <url>skeleditor</url>   
   </bouton> 
+  <bouton id="skeleditor21" parent="bando_squelette" position="0">
+      <icone>img_pack/icon.png</icone>
+      <titre>skeleditor:editer_skel</titre>
+      <url>skeleditor</url>
+  </bouton>
   <!-- pipeline -->
   <pipeline>
       <nom>autoriser</nom>
