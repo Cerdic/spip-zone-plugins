@@ -2,7 +2,7 @@
 	<nom>Personnaliser l'espace privé</nom>
 	<auteur>Sébastien Zamith</auteur>
 	<icon>images/priveperso-24.png</icon>
-	<version>0.3</version>
+	<version>0.4</version>
 	<version_base>0.3</version_base>
 	<licence>GNU/GPL v3</licence>
 	<etat>test</etat>

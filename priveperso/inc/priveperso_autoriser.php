@@ -2,6 +2,7 @@
 
 function priveperso_autoriser(){}
 
+if (!function_exists('autoriser_rubrique_creerrubriquedans')) {
 function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt){
 
 	include_spip('inc/inscrire_priveperso');
@@ -20,9 +21,13 @@ function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt){
 			if ($priveperso['autoriser_articles']=='non') return false;
 		}
 	}
-	return true;
+	return
+		$id
+		AND autoriser('voir','rubrique',$id);
+}
 }
 
+if (!function_exists('autoriser_rubrique_creerrubriquedans')) {
 function autoriser_rubrique_creerrubriquedans($faire, $type, $id, $qui, $opt){
 	
 	include_spip('inc/inscrire_priveperso');
@@ -41,8 +46,11 @@ function autoriser_rubrique_creerrubriquedans($faire, $type, $id, $qui, $opt){
 			if ($priveperso['autoriser_sous_rubriques']=='non') return false;
 		}
 	}	
-	return true;
+
+	return	($id OR ($qui['statut'] == '0minirezo' AND !$qui['restreint']))
+		AND autoriser('voir','rubrique',$id)
+		AND autoriser('publierdans','rubrique',$id);
 	
 }
-
+}
 ?>

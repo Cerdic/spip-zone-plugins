@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']]['entree_liens_sites_breves'] = _T('entree_liens_s
 $GLOBALS[$GLOBALS['idx_lang']]['info_url_breves'] = _T('info_url');
 
 include_spip('inc/inscrire_priveperso');
+include_spip('inc/filtre');
 
 
 $id_rubrique = priveperso_recupere_id_rubrique();
@@ -27,7 +28,8 @@ if ($id_rubrique!==NULL){
 		$priveperso_texte =priveperso_texte_recuperer_valeurs($id_rubrique);
 		foreach($priveperso_texte as $j => $w) {
 			if (($priveperso_texte[$j]!==$id_rubrique) && ($priveperso_texte[$j]!==NULL))
-			$GLOBALS[$GLOBALS['idx_lang']][$j] = $priveperso_texte[$j];
+			$GLOBALS[$GLOBALS['idx_lang']][$j] = extraire_multi($priveperso_texte[$j], $lang=$GLOBALS['spip_lang']);
+			
 		}
 	}
 }   
