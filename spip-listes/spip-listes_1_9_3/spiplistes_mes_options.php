@@ -476,11 +476,10 @@ $spiplistes_items = array(
 		spiplistes_upgrade();
 	}
 /*
-spiplistes_log("version: ".$spiplistes_version . " "
+spiplistes_debug_log("version: ".$spiplistes_version . " "
 	. "real_version: ".$spiplistes_real_version . " "
 	. "base_version: ".$spiplistes_base_version . " "
-	. "real_base_version: ".$spiplistes_real_base_version
-	, _SPIPLISTES_LOG_DEBUG);
+	. "real_base_version: ".$spiplistes_real_base_version);
 */
 
 //$opt_console_debug = (spiplistes_pref_lire ('opt_console_debug' == 'oui') ?  true : false);

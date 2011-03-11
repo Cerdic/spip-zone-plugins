@@ -23,12 +23,12 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 }
 
 function formulaires_gestion_abonnement_verifier($id_liste=''){
-	spiplistes_log('formulaires_gestion_abonnement_verifier()', LOG_DEBUG);
+	spiplistes_debug_log('formulaires_gestion_abonnement_verifier()');
 	$erreurs = array();
 	return $erreurs;
 }
 function formulaires_gestion_abonnement_traiter_dist($id_liste=''){
-	spiplistes_log('formulaires_gestion_abonnement_traiter_dist()', LOG_DEBUG);
+	spiplistes_debug_log('formulaires_gestion_abonnement_traiter_dist()');
 	$d = _request('d');
 	$listes = _request('listes');
 	$format = _request('suppl_abo');

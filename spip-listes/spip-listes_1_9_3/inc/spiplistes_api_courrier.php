@@ -300,7 +300,7 @@ function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste, $id_
 	$id_courrier = intval($id_courrier);
 	$id_liste = intval($id_liste);
 	
-spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur: #$id_auteur", _SPIPLISTES_LOG_DEBUG);
+	spiplistes_debug_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur: #$id_auteur");
 	
 	if($id_courrier > 0) {
 	
@@ -361,9 +361,10 @@ spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur:
 			return(true);
 		}
 	}
-spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur) valeur nulle ?"
-		, _SPIPLISTES_LOG_DEBUG);
-	return(false);
+	else {
+		spiplistes_debug_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur) valeur nulle ?");
+	}
+	return (false);
 }
 
 //CP-20080509: upadte sql sur un courrier

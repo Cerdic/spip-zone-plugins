@@ -183,7 +183,7 @@ function spiplistes_lire_serialized_meta ($meta_name) {
 		if(!empty($GLOBALS['meta'][$meta_name])) {
 			return(unserialize($GLOBALS['meta'][$meta_name]));
 		}
-		else spiplistes_log("erreur sur meta $meta_name (vide)", _SPIPLISTES_LOG_DEBUG);
+		else spiplistes_debug_log ("erreur sur meta $meta_name (vide)");
 	}
 	return(false);
 }

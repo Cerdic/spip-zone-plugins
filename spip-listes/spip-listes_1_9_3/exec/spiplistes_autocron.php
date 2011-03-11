@@ -18,7 +18,7 @@ function exec_spiplistes_autocron () {
 
 	include_spip('inc/spiplistes_api');
 
-	spiplistes_log("exec_autocron() <<", _SPIPLISTES_LOG_DEBUG); 	
+	spiplistes_debug_log ("exec_autocron()"); 	
 
 	$sql_result = sql_select(
 		"id_courrier,total_abonnes,nb_emails_envoyes"
@@ -48,9 +48,8 @@ function exec_spiplistes_autocron () {
 	$action = generer_url_action('cron','&var='.time());
 	echo ' <div style="background-image: url(\''. $action . '\');"> </div> ';
 
-	spiplistes_log("exec_autocron ACTION: $action", _SPIPLISTES_LOG_DEBUG);	
-	spiplistes_log("exec_autocron() >>", _SPIPLISTES_LOG_DEBUG);	
+	spiplistes_debug_log ("exec_autocron ACTION: $action");	
+	spiplistes_debug_log("fin exec_autocron()");	
  
 }
 
-?>

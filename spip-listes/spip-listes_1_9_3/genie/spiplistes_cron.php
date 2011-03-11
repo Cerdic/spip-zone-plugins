@@ -105,7 +105,7 @@ function cron_spiplistes_cron ($last_time) {
 	
 	$nb_listes_ok = sql_count($listes_privees_et_publiques);
 	
-//spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
+	spiplistes_debug_log($prefix_log.'nb listes depart: '.$nb_listes_ok);
 
 	if($nb_listes_ok > 0) {
 	
@@ -196,7 +196,7 @@ function cron_spiplistes_cron ($last_time) {
 				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
 			
 			$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($courrier_html))) > 10);
-spiplistes_log($prefix_log."taille courrier pour la liste $id_liste : $n", _SPIPLISTES_LOG_DEBUG);
+			spiplistes_debug_log($prefix_log."taille courrier pour la liste $id_liste : $n");
 
 			if($taille_courrier_ok) {
 				include_spip('inc/filtres');
@@ -205,10 +205,9 @@ spiplistes_log($prefix_log."taille courrier pour la liste $id_liste : $n", _SPIP
 				$statut = _SPIPLISTES_COURRIER_STATUT_ENCOURS;
 			}
 			else {
-//spiplistes_log($prefix_log."courrier vide !!", _SPIPLISTES_LOG_DEBUG);
 				$date_debut_envoi = $date_fin_envoi = "NOW()";
 				$statut = _SPIPLISTES_COURRIER_STATUT_VIDE;
-spiplistes_log($prefix_log."envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
+				spiplistes_debug_log($prefix_log."envoi mail nouveautes : courrier vide");
 			}
 			
 			// Place le courrier dans le casier
@@ -255,13 +254,13 @@ spiplistes_log($prefix_log."envoi mail nouveautes : courrier vide", _SPIPLISTES_
 			spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
 	){
 
-spiplistes_log($prefix_log."$n job(s), appel meleuse", _SPIPLISTES_LOG_DEBUG);
+		spiplistes_debug_log($prefix_log."$n job(s), appel meleuse");
 
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse($last_time));
 	}
 	else {
-		spiplistes_log($prefix_log."NO JOB", _SPIPLISTES_LOG_DEBUG);
+		spiplistes_debug_log($prefix_log."NO JOB");
 	}
 	return ($last_time); 
 } // cron_spiplistes_cron()
@@ -271,7 +270,7 @@ spiplistes_log($prefix_log."$n job(s), appel meleuse", _SPIPLISTES_LOG_DEBUG);
 
 function genie_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');
-// spiplistes_log("GENI: genie_spiplistes_cron() 193", _SPIPLISTES_LOG_DEBUG);
+// spiplistes_debug_log("GENI: genie_spiplistes_cron() 193");
 	cron_spiplistes_cron ($last_time);
 }
 
@@ -295,4 +294,3 @@ function genie_spiplistes_cron ($last_time) {
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.                   */
 /******************************************************************************************/
 
-?>

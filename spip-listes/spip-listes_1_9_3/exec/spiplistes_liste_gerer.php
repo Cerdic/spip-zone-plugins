@@ -203,7 +203,7 @@ function exec_spiplistes_liste_gerer () {
 					$date_depuis = $envoyer_quand;
 					$envoyer_quand = false;
 				}
-				// spiplistes_log("nb vrais abos : ".spiplistes_listes_vrais_abos_compter($id_liste), _SPIPLISTES_LOG_DEBUG);
+				// spiplistes_debug_log("nb vrais abos : ".spiplistes_listes_vrais_abos_compter($id_liste));
 				if($envoyer_maintenant && ($message_auto != 'non')) {
 					if(!spiplistes_listes_vrais_abos_compter($id_liste)) {
 						$boite_pour_confirmer_envoi_maintenant .= 

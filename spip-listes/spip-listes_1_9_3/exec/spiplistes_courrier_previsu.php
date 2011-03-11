@@ -90,7 +90,7 @@ function exec_spiplistes_courrier_previsu () {
 		// méfiance sur jQuery 1.4.4 qui semble
 		// ne plus transmettre les vars qu'en 1.4.2
 		// @todo: a creuser, verifier les autres vars ajax transmises
-		//spiplistes_log('PREVISU: '.$key.': '.$$key, _SPIPLISTES_LOG_DEBUG);
+		//spiplistes_debug_log('PREVISU: '.$key.': '.$$key);
 	}
 	foreach($int_values as $key) {
 		$$key = intval($$key);
@@ -189,7 +189,7 @@ function exec_spiplistes_courrier_previsu () {
 	// si nouveau courrier (pas dans la base), generer un apercu
 	else {
 		
-		//spiplistes_log('ACTION: generate preview', _SPIPLISTES_LOG_DEBUG);
+		//spiplistes_debug_log('ACTION: generate preview');
 
 		$intro_html = $intro_texte = 
 			$sommaire_html = $sommaire_texte = '';
@@ -304,7 +304,7 @@ function exec_spiplistes_courrier_previsu () {
 		$message_html = liens_absolus($intro_html . $message_html);
 		$message_texte = liens_absolus($intro_texte . $message_texte);
 		
-		spiplistes_log('ACTION: generate page', _SPIPLISTES_LOG_DEBUG);
+		spiplistes_debug_log('ACTION: generate page');
 
 		$page_result = ''
 			// boite courrier au format html

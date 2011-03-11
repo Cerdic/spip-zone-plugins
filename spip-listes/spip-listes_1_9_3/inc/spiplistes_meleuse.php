@@ -61,7 +61,7 @@ include_spip('inc/spiplistes_api_globales');
 	
 function spiplistes_meleuse ($last_time) { 
 
-	spiplistes_debug_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
+	spiplistes_debug_log('spiplistes_meleuse()');
 	
 	include_spip('inc/meta');
 	include_spip('inc/texte');
@@ -104,7 +104,7 @@ function spiplistes_meleuse ($last_time) {
 		$body_html_debut = '<html>'.$eol2.'<body>'.$eol2;
 		$body_html_fin = $eol2.'</body></html>';						
 
-		spiplistes_log($prefix_log.$nb_etiquettes.' job(s), distribution...', _SPIPLISTES_LOG_DEBUG);
+		spiplistes_log($prefix_log.$nb_etiquettes.' job(s), distribution...');
 		
 		$log_voir_destinataire = ($opt_log_voir_destinataire == 'oui');
 		$simuler_envoi = ($opt_simuler_envoi == 'oui');
@@ -138,7 +138,7 @@ function spiplistes_meleuse ($last_time) {
 				  $sql_courrier_select
 				, 'id_courrier='.sql_quote($id_courrier)
 			);
-			spiplistes_log($prefix_log.'etiquette en cours pour id_courrier #'.$id_courrier, _SPIPLISTES_LOG_DEBUG);
+			spiplistes_log($prefix_log.'etiquette en cours pour id_courrier #'.$id_courrier);
 		} else {
 			// un vieux bug dans une ancienne version, eradique depuis (j'espere ;-)
 			//spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
@@ -349,11 +349,10 @@ function spiplistes_meleuse ($last_time) {
 				}
 					
 				$nb_destinataires = sql_count($sql_adresses_dest);
-				spiplistes_log($prefix_log.'nb etiquettes a traiter: '.$nb_destinataires, _SPIPLISTES_LOG_DEBUG);
+				spiplistes_log($prefix_log.'nb etiquettes a traiter: '.$nb_destinataires);
 				if($nb_destinataires > 0) {
 
-					spiplistes_log($prefix_log.'total_abos: '.$total_abonnes.', en cours: '.$nb_destinataires.', limit: '.$limit
-						, _SPIPLISTES_LOG_DEBUG);
+					spiplistes_debug_log($prefix_log.'total_abos: '.$total_abonnes.', en cours: '.$nb_destinataires.', limit: '.$limit);
 
 /*
 // CP:20100215: inutile de compter AVANT
@@ -496,7 +495,7 @@ function spiplistes_meleuse ($last_time) {
 					} // fin while
 					
 					// supprime la liasse de la queue d'envois
-					spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_LOG_DEBUG);
+					spiplistes_debug_log($prefix_log."envoi OK. Supprimer queue $id_process");
 					spiplistes_courriers_en_queue_supprimer('etat='.sql_quote($id_process));
 					
 					// si c'est un test on repasse le courrier en redac
@@ -509,7 +508,7 @@ function spiplistes_meleuse ($last_time) {
 			}
 			else {
 				//aucun destinataire connu pour ce message
-				//spiplistes_log($prefix_log._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), _SPIPLISTES_LOG_DEBUG);
+				spiplistes_debug_log($prefix_log._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'));
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_IGNORE);
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				$str_log .= ' END #'.$id_courrier;
@@ -547,7 +546,7 @@ function spiplistes_meleuse ($last_time) {
 				}
 				else {
 					$statut = ($type == _SPIPLISTES_COURRIER_TYPE_NEWSLETTER) ? _SPIPLISTES_COURRIER_STATUT_PUBLIE : _SPIPLISTES_COURRIER_STATUT_AUTO;
-					//spiplistes_log($prefix_log."nouveau statut $statut", _SPIPLISTES_LOG_DEBUG);
+					spiplistes_debug_log($prefix_log."nouveau statut $statut");
 					$sql_set_array['statut'] = sql_quote($statut);
 					$sql_set_array['date_fin_envoi'] = 'NOW()';
 					$str_log .= ' END #'.$id_courrier;
@@ -647,7 +646,7 @@ function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur,
 		$result_texte = preg_replace($pattern, $replace, $page_texte);
 		$result_texte = spiplistes_personnaliser_courrier_urls($result_texte, $url);
 		
-		spiplistes_log($prefix_log."personnalisation du courrier pour id_auteur #$id_auteur", _SPIPLISTES_LOG_DEBUG);
+		spiplistes_debug_log($prefix_log."personnalisation du courrier pour id_auteur #$id_auteur");
 	} 
 	return(array($result_html, $result_texte));
 }
@@ -667,7 +666,7 @@ function spiplistes_courriers_statut_redac ($id_courrier) {
 			, 'statut' => _SPIPLISTES_COURRIER_STATUT_REDAC
 		)						
 	);
-	spiplistes_log(_SPIPLISTES_PREFIX_LOG.'repasse document en statut redac', _SPIPLISTES_LOG_DEBUG);
+	spiplistes_debug_log(_SPIPLISTES_PREFIX_LOG.'repasse document en statut redac');
 	return(true);
 }
 

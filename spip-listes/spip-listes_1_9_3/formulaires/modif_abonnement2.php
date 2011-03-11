@@ -54,13 +54,13 @@ function formulaires_modif_abonnement2_charger_dist(){
 }
 
 function formulaires_modif_abonnement2_verifier(){
-	spiplistes_log('formulaires_modif_abonnement2_verifier()', LOG_DEBUG);
+	spiplistes_debug_log('formulaires_modif_abonnement2_verifier()');
 	$erreurs = array();
 	return $erreurs;
 }
 // effectuez_modif_validez
 function formulaires_modif_abonnement2_traiter_dist(){
-	spiplistes_log('formulaires_modif_abonnement2_traiter_dist()', LOG_DEBUG);
+	spiplistes_debug_log('formulaires_modif_abonnement2_traiter_dist()');
 	$d = _request('d');
 	$list = _request('list');
 	$email_desabo = _request('email_desabo');
