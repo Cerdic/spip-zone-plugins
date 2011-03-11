@@ -24,19 +24,20 @@ body {
 h1 {
 	color: #333333;
 }
-.h1 {
+p ,table {
+	margin:0.5em 4em;
+	padding:0;
+}
+p.h1 {
 	display:block;
 	color: #fff;
 	background: #666;
-	font-size: 40%;
+	font-size: 70%;
 	line-height:1.4em;
 	padding:0 1ex;
 	font-style: normal;
 	font-weight: normal;
-}
-p ,table {
-	margin:0.5em 4em;
-	padding:0;
+	overflow:hidden;
 }
 ul {
 	list-style: square;
@@ -70,8 +71,7 @@ img {
 
     
 <p class="h1">Plugin @spiplistes_name@ version @spiplistes_version@
-      - Mise à jour documentation: $LastChangedDate: 2008-12-05 15:31:26
-      +0100 (ven., 05 dÃ©c. 2008) $EndLastChangedDate </p>
+      - Mise à jour documentation: $LastChangedDate$EndLastChangedDate </p>
 
     
 <ul>
@@ -824,75 +824,22 @@ img {
       <tbody>
         <tr>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/
-
-
-
-
-
-
-
-
-
-
-
-
           </td>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Placez
 dans
 ce
-
-
-
-
-
-
-
-
-
-
             répertoire les principaux patrons, ceux du corps de votre
             message </td>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
 patron
-
-
-
-
-
-
-
-
-
-
             choisi sera appliqué à la liste de diffusion. </td>
         </tr>
         <tr>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/lien_en_tete_courriers/
-
-
-
-
-
-
-
-
-
-
-
-
           </td>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Patrons
 des
 en-têtes
-
-
-
-
-
-
-
-
-
 
             de messages. En général, un patron placé ici contient un
             lien sur le message permettant au lecteur de consulter le
@@ -904,74 +851,20 @@ en-têtes
         </tr>
         <tr>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/tampons_courriers/
-
-
-
-
-
-
-
-
-
-
-
-
           </td>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
 tampon
-
-
-
-
-
-
-
-
-
-
             des courriers est appliqué en fin de message. </td>
         </tr>
         <tr>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/pieds_courriers/
-
-
-
-
-
-
-
-
-
-
-
-
           </td>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Ce
 patron
-
-
-
-
-
-
-
-
-
-
             est placé en fin de votre message. Il apparaitra avant le
             tampon si ce dernier est activé. </td>
           <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
 patron
-
-
-
-
-
-
-
-
-
-
             choisi sera appliqué à la liste de diffusion. </td>
         </tr>
       </tbody>
@@ -1079,15 +972,6 @@ patron
       d'abonnement. Si vous désirez conserver les données de ces tables
       dans votre base, sélectionnez plutôt la case à cocher à gauche de
       <strong>@spiplistes_name@</strong> pour <a href="#mozTocId568121">désactiver
-
-
-
-
-
-
-
-
-
         le plugin</a>.</p>
 
     
@@ -1100,32 +984,12 @@ patron
       <li><a href="http://files.spip.org/spip-zone/spip-listes_1_9_3.zip">Distribution
 officielle
 de
-
-
-
-
-
-
-
-
-
-
           <strong>@spiplistes_name@</strong> sur la zone</a> ;</li>
       <li><a href="http://www.spip-contrib.net/SPIP-Listes">La page
           consacrée à SPIP-Listes sur SPIP-contrib</a> ;</li>
       <li><a href="http://www.spip-contrib.net/Premier-courrier-sur-SPIP-Listes">Envoyer
 mon
 premier
-
-
-
-
-
-
-
-
-
-
           courrier sur <strong>@spiplistes_name@</strong> sur
           SPIP-contrib</a> ;</li>
       <li><a href="http://www.spip-contrib.net/Comment-ca-marche"><strong>@spiplistes_name@</strong>,
@@ -1135,16 +999,6 @@ premier
       <li><a href="http://www.quesaco.org/SPIP-Listes-documentation">Documentation
 technique
 complémentaire
-
-
-
-
-
-
-
-
-
-
           sur Quesaco.org</a> ;</li>
       <li><a href="http://bloog.net/?page=forum_blg">Forum consacré à <strong>@spiplistes_name@</strong></a><strong>.</strong></li>
     
