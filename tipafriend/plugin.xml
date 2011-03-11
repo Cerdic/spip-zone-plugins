@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>Tip A Friend[fr]Tip A Friend : Envoyer une page par e-mail[en]Tip A Friend : Send a page by e-mail</multi></nom>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<version>1.02</version>
+	<version>1.03</version>
 	<licence>&#169; 2009-2011 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
 	<etat>stable</etat>
 	<description>
@@ -18,4 +18,5 @@ Logo et certaines images du plugin : [->http://pixel-mixer.com/]
 	<categorie>communication</categorie>
 	<necessite id='SPIP' version='[2.0.0;]' />
 	<utilise id='cfg' version='[1.0;]' />
+	<traduire gestionnaire="salvatore" module="tipafriend" reference="fr" />
 </plugin>
