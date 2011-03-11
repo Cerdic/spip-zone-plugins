@@ -36,13 +36,15 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-	
+
+if(!defined('_ECRIRE_INC_VERSION')) return;
+
 include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/texte');
 
 /*
- * Afficher le journal (log) en espace privé. Voir:
+ * Afficher le journal (log) en espace prive. Voir:
  * - exec/*_voir_journal.php
  * - action/*_voir_journal.php
  * Ajouter dans la page exec/* spiplistes_raccourci_journal()
@@ -93,10 +95,9 @@ function spiplistes_raccourci_journal ($envelopper = true) {
 			;
 	}
 	
-	if($envelopper) {
-		$result .= ""
-			. fin_cadre_enfonce(true)
-			;
+	if($envelopper)
+	{
+		$result .= fin_cadre_enfonce(true);
 	}
 
 	return($result);

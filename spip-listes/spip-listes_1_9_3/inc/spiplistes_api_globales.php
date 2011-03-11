@@ -33,17 +33,19 @@ if(!defined('_ECRIRE_INC_VERSION')) return;
 
 // Certains hebergeurs ont desactive l'acces a syslog (free,...)
 // Recreer les constantes pour trier les journaux
-if(!defined("LOG_WARNING")) {
-	define("LOG_WARNING", 4);
-	define("LOG_DEBUG", 7);
+if(!defined('LOG_WARNING')) {
+	define('LOG_WARNING', 4);
+	define('LOG_DEBUG', 7);
 }
 
 function spiplistes_log ($texte, $level = LOG_WARNING) {
 	
 	static $lan, $syslog, $debug;
 	
-	if ($lan === null) {
+	if ($syslog === null)
+	{
 		$lan = spiplistes_server_rezo_local();
+		
 		$syslog = (spiplistes_pref_lire('opt_console_syslog') == 'oui');
 		$debug = (spiplistes_pref_lire('opt_console_debug') == 'oui');
 	}
@@ -81,20 +83,29 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 	return (true);
 }
 
+/**
+ * CP-20110311
+ * Détecter si reseau local
+ * @return boolean
+ */
 function spiplistes_server_rezo_local () {
 	
 	static $islan;
 	
-	if($islan === null) {
+	if ($islan === null)
+	{
 		$adr = $_SERVER['SERVER_ADDR'];
+		
 		$islan =
 			($adr && (
-					  (strpos($adr, '192.168') !== false)
-				   || (strpos($adr, '127.0') !== false)
+					  $adr == '127.0.0.1'
+				   || (substr ($adr, 0, 8) == '192.168.')
+				   || (substr ($adr, 0, 4) == '172.')
+				   || (substr ($adr, 0, 3) == '10.')
 				   )
 			);
 	}
-	return($islan);
+	return ($islan);
 }
 
 // CP-20080324
@@ -209,9 +220,9 @@ function spiplistes_current_version_get ($prefix) {
 }
 
 function spiplistes_real_tag_get ($prefix, $s) {
-	include_spip("inc/plugin");
+	include_spip('inc/plugin');
 	$dir = spiplistes_get_meta_dir($prefix);
-	$f = _DIR_PLUGINS.$dir."/"._FILE_PLUGIN_CONFIG;
+	$f = _DIR_PLUGINS.$dir.'/'._FILE_PLUGIN_CONFIG;
 	if(is_readable($f) && ($c = file_get_contents($f))) {
 		$p = array("/<!--(.*?)-->/is","/<\/".$s.">.*/s","/.*<".$s.">/s");
 		$r = array("","","");
@@ -294,7 +305,7 @@ function spiplistes_email_from_default () {
 			}
 		}
 		else {
-			spiplistes_log("ERROR: sender email address missing");
+			spiplistes_log('ERROR: sender email address missing');
 		}
 	}
 	return($result);
@@ -315,4 +326,3 @@ if(!function_exists('array_combine')) {
 	}
 }
 
-?>

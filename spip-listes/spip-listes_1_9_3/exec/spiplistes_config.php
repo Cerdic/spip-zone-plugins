@@ -611,7 +611,7 @@ function spiplistes_boite_select_de_formulaire ($array_values, $selected, $selec
 		. $result
 		. "</select>" . $eol
 		;
-	return($result);
+	return ($result);
 } // spiplistes_boite_select_de_formulaire()
 
 /*
