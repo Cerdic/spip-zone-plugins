@@ -19,7 +19,7 @@ include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
 function balise_FORMULAIRE_ABONNEMENT ($p) {
 
-spiplistes_log("balise_FORMULAIRE_ABONNEMENT()", _SPIPLISTES_LOG_DEBUG);
+	spiplistes_debug_log('balise_FORMULAIRE_ABONNEMENT()');
 
 	return(calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('id_liste')));
 }
@@ -51,7 +51,7 @@ function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 
 function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 
-	//spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() -$id_liste-", _SPIPLISTES_LOG_DEBUG);
+	//spiplistes_debug_log("balise_FORMULAIRE_ABONNEMENT_dyn() -$id_liste-");
 
 	include_spip ("inc/meta");
 	include_spip ("inc/session");
@@ -208,7 +208,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 			);
 	}
 	else {
-		spiplistes_log(_T('pass_erreur')." acces visiteurs non autorises", _SPIPLISTES_LOG_DEBUG);
+		spiplistes_debug_log (_T('pass_erreur').' acces visiteurs non autorises');
 	}
 	
 	return array($formulaire, $GLOBALS['delais'],
@@ -316,7 +316,7 @@ function spiplistes_formulaire_abonnement (
 		
 		else if($listes_demande)
 		{
-			//spiplistes_log("demande modification abonnements listes " . implode(",", $listes_demande), _SPIPLISTES_LOG_DEBUG);
+			//spiplistes_debug_log("demande modification abonnements listes " . implode(",", $listes_demande));
 			
 			if(is_array($listes_demande) && count($listes_demande))
 			{
@@ -343,7 +343,7 @@ function spiplistes_formulaire_abonnement (
 		}
 		else
 		{
-			//spiplistes_log("pas de demande, afficher formulaire de modif au complet", _SPIPLISTES_LOG_DEBUG);
+			//spiplistes_debug_log("pas de demande, afficher formulaire de modif au complet");
 			$reponse_formulaire = ""
 				. "<span class='nom'>" . $abonne['nom'] . "</span>\n"
 				. "<span class='souhait'>" . _T('spiplistes:effectuez_modif_validez', array('s'=>$abonne['nom'])). "</span>\n"

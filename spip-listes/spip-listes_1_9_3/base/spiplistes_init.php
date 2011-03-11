@@ -22,7 +22,7 @@ include_spip('inc/spiplistes_api');
 function spiplistes_install ($action) {
 
 include_spip('inc/spipliste_api_globales');
-spiplistes_log("spiplistes_install()", _SPIPLISTES_LOG_DEBUG);
+spiplistes_debug_log('spiplistes_install()');
 
 	switch($action) {
 		case 'test':
@@ -35,7 +35,7 @@ spiplistes_log("spiplistes_install()", _SPIPLISTES_LOG_DEBUG);
 				&& ($spiplistes_version >= spiplistes_real_version_get(_SPIPLISTES_PREFIX))
 				&& sql_showtable("spip_listes",true)
 				);
-			//spiplistes_log("TEST: ".($result ? "OK" : "NO"), _SPIPLISTES_LOG_DEBUG);
+			//spiplistes_debug_log("TEST: ".($result ? "OK" : "NO"));
 			return($result);
 			break;
 		case 'install':
@@ -82,7 +82,7 @@ spiplistes_log("spiplistes_install()", _SPIPLISTES_LOG_DEBUG);
 
 function spiplistes_base_creer () {
 
-	//spiplistes_log("spiplistes_base_creer() <<", _SPIPLISTES_LOG_DEBUG);
+	//spiplistes_debug_log("spiplistes_base_creer()");
 	global $tables_principales;
 	
 	// demande a SPIP de creer les tables (base/create.php)

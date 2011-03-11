@@ -99,7 +99,7 @@ function spiplistes_upgrade_base (
 	, $spiplistes_current_version_base
 	, $spiplistes_real_version_base
 ) {
-//spiplistes_log("spiplistes_upgrade_base() <<", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_debug_log("spiplistes_upgrade_base(),);
 	
 	if($spiplistes_current_version_base && ($spiplistes_current_version_base >= $spiplistes_real_version_base)) {
 	// La base est a jour
@@ -107,7 +107,7 @@ function spiplistes_upgrade_base (
 	}
 	
 	// faire la mise a jour
-	spiplistes_log("UPGRADING DATABASE $spiplistes_name $spiplistes_current_version_base TO $spiplistes_real_version_base", _SPIPLISTES_LOG_DEBUG);
+	spiplistes_debug_log("UPGRADING DATABASE $spiplistes_name $spiplistes_current_version_base TO $spiplistes_real_version_base");
 	
 
 	// 'version_base' n'apparait que dans SPIP-Listes 1.98001
@@ -135,7 +135,7 @@ function spiplistes_upgrade_base (
 
 		if ($current_version==0.0){
 			// Verifie que les tables spip_listes existent, sinon les creer
-//spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_debug_log("UPGRADE: current_version: $current_version");
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			
@@ -261,14 +261,14 @@ function spiplistes_upgrade_base (
 		}
 		
 		if ($current_version<1.92){
-//spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_debug_log("UPGRADE: current_version: $current_version");
 			echo "SpipListes Maj 1.92<br />";
 			sql_alter("TABLE spip_listes ADD titre_message varchar(255) NOT NULL default ''");
 			sql_alter("TABLE spip_listes ADD pied_page longblob NOT NULL");
 			ecrire_meta('spiplistes_version', $current_version=1.92);
 		}
 		if ($current_version<1.94){
-//spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_debug_log("UPGRADE: current_version: $current_version");
 			echo "SpipListes Maj 1.94<br />";
 			include_spip('base/abstract_sql');
 			if (($res = sql_select('id_auteur', 'spip_auteurs_mod_listes'))
@@ -285,7 +285,7 @@ function spiplistes_upgrade_base (
 			ecrire_meta('spiplistes_version', $current_version=1.94);
 		}
 		if ($current_version<1.95){
-//spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_debug_log("UPGRADE: current_version: $current_version");
 			echo "SpipListes Maj 1.95<br />";
 			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_auteurs_courriers ADD etat varchar(5) NOT NULL default '' AFTER statut");
@@ -293,7 +293,7 @@ function spiplistes_upgrade_base (
 		}
 		
 		if ($current_version<1.96){
-//spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_debug_log("UPGRADE: current_version: $current_version");
 			echo "SpipListes Maj 1.96<br />";
 			include_spip('base/abstract_sql');
 			
@@ -342,7 +342,7 @@ function spiplistes_upgrade_base (
 		}
 		
 		if ($current_version<1.97) {
-//spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_debug_log("UPGRADE: current_version: $current_version");
 			echo "SpipListes Maj 1.97<br />";
 			include_spip('base/abstract_sql');
 
@@ -405,7 +405,7 @@ function spiplistes_upgrade_base (
 	// la base, (plugin.xml: <version_base>)
 	if($spiplistes_current_version_base < $spiplistes_real_version_base) {
 
-spiplistes_log("UPGRADING DATABASE version_base: $spiplistes_current_version_base TO $spiplistes_real_version_base", _SPIPLISTES_LOG_DEBUG);
+spiplistes_debug_log("UPGRADING DATABASE version_base: $spiplistes_current_version_base TO $spiplistes_real_version_base");
 
 
 
@@ -421,4 +421,3 @@ spiplistes_log("UPGRADING DATABASE version_base: $spiplistes_current_version_bas
 	return($spiplistes_current_version_base);
 }
 
-?>
