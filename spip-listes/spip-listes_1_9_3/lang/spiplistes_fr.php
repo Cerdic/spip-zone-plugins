@@ -307,8 +307,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'texte_contenu_pied' => '<br />(Message ajout&#233; en bas de chaque email au moment de l&#8217;envoi)<br />'
 , 'texte_pied' => '<p><strong>Texte du pied de page</strong>'
 , 'modifier_liste' => 'Modifier cette liste '
-, 'txt_abonnement' => '(Indiquez ici le texte pour l&#8217;abonnement &#224; cette liste, affich&#233; 
-	sur le site public si la liste est active)'
+, 'txt_abonnement' => 'Indiquez ici le texte pour l&#8217;abonnement &#224; cette liste, affich&#233; 
+	sur le site public si la liste est active.'
 
 // exec/spiplistes_liste_gerer.php
 , 'forcer_les_abonnement_liste' => 'Forcer les abonnements pour cette liste'
@@ -595,7 +595,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Liste_de_destination' => 'Liste de destination'
 , 'Listes_1_du_mois' => 'Publiques, 1<sup><small>er</small></sup> du mois.'
 , 'Liste_diffusee_le_premier_de_chaque_mois' => 'Liste diffus&#233;e le premier de chaque mois. '
-, 'Listes_autre' => 'Autre pr&#233;riodicit&#233;'
+, 'Listes_autre' => 'Autre p&#233;riodicit&#233;'
 , 'Listes_autre_periode' => 'Listes publiques autre pr&#233;riodicit&#233;'
 , 'Listes_diffusion_prive' => 'Listes priv&#233;es'
 , 'Liste_hebdo' => 'Liste hebdomadaire'
