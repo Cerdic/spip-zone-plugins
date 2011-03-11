@@ -51,8 +51,6 @@ include_spip('inc/spiplistes_api_globales');
 
 function exec_spiplistes_courrier_previsu () {
 
-	//spiplistes_log('ACTION: exec_spiplistes_courrier_previsu()', _SPIPLISTES_LOG_DEBUG);
-
 	global $meta;
 
 	include_spip('base/abstract_sql');
@@ -68,6 +66,8 @@ function exec_spiplistes_courrier_previsu () {
 	include_spip('inc/spiplistes_api_abstract_sql');
 	include_spip('public/assembler');
 	
+	spiplistes_debug_log ('ACTION: exec_spiplistes_courrier_previsu()');
+
 	$eol = PHP_EOL;
 	
 	$int_values = array(

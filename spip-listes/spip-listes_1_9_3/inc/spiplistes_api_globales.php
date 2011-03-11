@@ -42,6 +42,10 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 	
 	static $lan, $syslog, $debug;
 	
+	$texte = trim ($texte);
+	
+	if (empty ($texte)) { return (false); }
+	
 	if ($syslog === null)
 	{
 		$lan = spiplistes_server_rezo_local();
@@ -51,7 +55,7 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 	}
 	if ($debug || $lan)
 	{
-		if($syslog)
+		if ($syslog)
 		{
 			$tag = '_';
 			if (empty($tag))
@@ -64,7 +68,7 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 			}
 			return (
 				openlog ($tag, LOG_PID | LOG_CONS, LOG_USER) 
-					&& syslog ($level, (string)$texte) 
+					&& syslog ($level, $texte) 
 					&&	closelog()
 			);
 		}
@@ -99,7 +103,7 @@ function spiplistes_debug_log ($msg)
 	}
 	if ($debug)
 	{
-		spiplistes_log ($msg);
+		spiplistes_log ($msg, LOG_DEBUG);
 	}
 	
 	return ($debug);

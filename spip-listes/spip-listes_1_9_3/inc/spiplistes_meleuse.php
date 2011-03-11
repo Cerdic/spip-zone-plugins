@@ -61,9 +61,7 @@ include_spip('inc/spiplistes_api_globales');
 	
 function spiplistes_meleuse ($last_time) { 
 
-	//$opt_console_debug = (spiplistes_pref_lire('opt_console_debug') == 'oui'), true, false);
-
-	//($opt_console_debug && spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG));
+	spiplistes_debug_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 	
 	include_spip('inc/meta');
 	include_spip('inc/texte');
