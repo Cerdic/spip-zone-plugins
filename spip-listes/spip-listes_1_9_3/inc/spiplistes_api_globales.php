@@ -85,6 +85,28 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 
 /**
  * CP-20110311
+ * Envoyer un message dans la console (debug)
+ * Le mode debug doit etre selectionne' dans la page de configuration
+ * @return bool
+ */
+function spiplistes_debug_log ($msg)
+{
+	static $debug;
+		
+	if ($debug === null)
+	{
+		$debug = (spiplistes_pref_lire('opt_console_debug') == 'oui');
+	}
+	if ($debug)
+	{
+		spiplistes_log ($msg);
+	}
+	
+	return ($debug);
+}
+
+/**
+ * CP-20110311
  * Détecter si reseau local
  * @return boolean
  */

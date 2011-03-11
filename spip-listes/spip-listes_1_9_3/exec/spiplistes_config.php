@@ -37,6 +37,8 @@ function exec_spiplistes_config () {
 	include_spip('inc/meta');
 	include_spip('inc/config');
 
+	spiplistes_debug_log ('Appel page de configuration');
+	
 	global $connect_statut
 		, $connect_toutes_rubriques
 		, $connect_id_auteur
