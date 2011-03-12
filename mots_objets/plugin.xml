@@ -5,7 +5,7 @@
 	<icon>images/tag_purple-32.png</icon>
 	
 	<licence>GNU/GPL</licence>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<version_base>0.2</version_base>
 	
 	<etat>test</etat>
@@ -64,8 +64,11 @@
 	</pipeline>
 
 	
-	<!-- gouverneur_de_mots -->
-	<options>mots_objets_options.php</options>
+	<!-- declarer l'existance du pipeline gouverneur_de_mots -->
+	<pipeline>
+		<nom>declarer_liaison_mots</nom>
+		<action></action>
+	</pipeline>
 
 
 	
