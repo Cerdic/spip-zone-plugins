@@ -1,0 +1,62 @@
+		
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><:info_rechercher:>[<span class="sep"> &gt; </span><strong class="on">(#RECHERCHE)</strong>]</p>
+
+<div class="contenu-principal">
+	[<div class="cartouche">
+		<h1 class="h1"><:resultats_recherche:></h1>
+		<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
+	</div>]
+
+	[(#REM) Rubriques trouvees ]
+	<B_rubriques>
+	<fieldset>
+	<div class="menu rubriques">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:rubriques:> (#GRAND_TOTAL)</h2>
+		<ul>
+			<BOUCLE_rubriques(RUBRIQUES) {recherche} {!par points} {pagination #CONFIG{annuaire_recherche/pas_pagination_recherche, 5}}>
+			<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+			</BOUCLE_rubriques>
+		</ul>
+		[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+	</div>
+	</fieldset>
+	</B_rubriques>
+
+	[(#REM) Mots-cles trouves ]
+	<B_mots>
+	<fieldset>
+	<div class="menu">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:mots_clefs:> (#GRAND_TOTAL)</h2>
+		<ul>
+			<BOUCLE_mots(MOTS) {recherche} {type !IN _META,Affichage}{!par points} {pagination #CONFIG{annuaire_recherche/pas_pagination_recherche, 5}}>
+			<p /><li>#TYPE <br /><a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a></li>
+			</BOUCLE_mots>
+		</ul>
+		[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+	</div>
+	</fieldset>
+	</B_mots>
+
+	[(#REM) Sites web trouves ]
+	<B_sites>
+	<fieldset>
+	<div class="menu">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:sites_web:> (#GRAND_TOTAL)</h2>
+		<ul>
+			<BOUCLE_sites(SITES) {recherche} {!par points} {pagination #CONFIG{annuaire_recherche/pas_pagination_recherche, 5}}>
+			<li>
+				<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
+				<BOUCLE_logo(MOTS){id_syndic} {'  '}>[(#LOGO_MOT||inserer_attribut{title, #TITRE|supprimer_numero}|inserer_attribut{alt, #TITRE|supprimer_numero})]</BOUCLE_logo>
+				#FORMULAIRE_NOTATION<p />
+			</li>
+			</BOUCLE_sites>
+		</ul>
+		[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+	</div>
+	</fieldset>
+	</B_sites>
+</div>

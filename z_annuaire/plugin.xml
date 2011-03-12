@@ -1,0 +1,49 @@
+<plugin>
+	<nom>Un annuaire de sites en Z</nom>
+	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]
+	&copy; 2011</auteur>
+	<licence>GPL</licence>
+	<version>0.1</version>
+	<description>
+	<multi>
+	[fr]Faire un annuaire de sites suivant votre th&egrave;me avec le concept Z.
+	</multi>
+	</description>
+	<lien>[Documentation->http://www.spip-contrib.net/]</lien>
+	<etat>dev</etat>
+	<icon>img/annuaire.jpg</icon>
+	<prefix>annuaire</prefix>
+	<fonctions>annuaire_fonctions.php</fonctions>
+
+	<bouton id='annuaire' parent='configuration'>
+	<icone>img/annuaire.jpg</icone>
+		<titre>annuaire:bouton_configurer</titre>
+		<url>cfg</url>
+		<args>cfg=annuaire_accueil</args>
+	</bouton>
+	<bouton id="annuaire21" parent="bando_squelette">
+		<icone>img/annuaire-16.jpg</icone>
+		<titre>annuaire:bouton_configurer</titre>
+		<url>cfg</url>
+		<args>cfg=annuaire_accueil</args>
+	</bouton>
+
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="Z" version="[1.5.1;]" />
+	<necessite id="cfg" version='[1.14.3;]' />
+	<necessite id="notation" version='[0.7.0;]' />
+	<necessite id="thumbsites" version='[0.3;]' />
+	<utilise id="autorite" version='[0.9.6;]' />
+	<utilise id="clevermail" version='[2.3.5;]' />
+	<utilise id="contact" version='[0.61;]' />
+	<utilise id="facteur" version='[1.1;]' />
+	<utilise id="noie" version='[1.1;]' />
+	<utilise id="pb_pagerank" version='[0.2;]' />
+	<utilise id="porte_plume" version='[1.3;]' />
+	<utilise id="slogan" version='[2.0.2;]' />
+	<utilise id="spiplistes" version='[2.0135;]' />
+	<utilise id="visiteurs_connectes" version='[0.2;]' />
+
+	<salvatore module="annuaire" reference="fr" />
+</plugin>

@@ -1,0 +1,15 @@
+	<div id="nav_haut">
+	[(#REM) Pour afficher les options]
+	<INCLURE{fond=inclure/nav/nav-options}>
+	
+	[(#REM) Pour se connecter]
+	<INCLURE{fond=inclure/nav/nav-connect,env}>
+	</div><!--#nav_haut-->
+
+	<BOUCLE_pub1(BREVES){titre_mot=pub-nav}>
+	<div id="nav_pub">
+	<fieldset>
+		#TEXTE
+	</fieldset>
+	</div><!--#nav_pub-->
+	</BOUCLE_pub1>

@@ -1,0 +1,17 @@
+[(#CONFIG{annuaire_colonne/cache_titre_zard}|=={on}|non)<h2><:annuaire:hasard:></h2>]
+<B_zard>
+<ul>
+<BOUCLE_zard(SITES){doublons}{par hasard}{pagination #CONFIG{annuaire_sommaire/pas_pagination_hasard, 3}}>
+<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="prems"]>
+	<fieldset class="zard">
+	<a href="[(#ID_SYNDIC|generer_url_entite{site})]"><object>#NOM_SITE</object></a>
+	[<a class="img" href="[(#ID_SYNDIC|generer_url_entite{site})]"[ title="(#NOM_SITE|texte_backend)"]>(#THUMBSHOT{#URL_SITE})</a>]
+	[(#COMPTEUR_BOUCLE|=={1}|oui)[<br />(#DESCRIPTIF|sinon{<:annuaire:pas_descriptif:>}|couper{#CONFIG{annuaire_taille/descriptif_zard_prems_nav,100}, <br /><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><b><:annuaire:lire_suite:></b></a>})]]
+	[(#COMPTEUR_BOUCLE|=={1}|non)[<br />(#DESCRIPTIF|sinon{<:annuaire:pas_descriptif:>}|couper{#CONFIG{annuaire_taille/descriptif_zard_suivants_nav,100}, <br /><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><b><:annuaire:lire_suite:></b></a>})]]
+	</fieldset>
+</li>
+</BOUCLE_zard>
+</ul>
+</B_zard>
+<h4 class="pas_de"><:annuaire:pas_zard:></h4>
+<//B_zard>

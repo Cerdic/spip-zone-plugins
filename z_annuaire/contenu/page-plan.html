@@ -1,0 +1,52 @@
+      
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:plan_site:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:plan_site:></h1>
+</div>
+
+	[(#REM) Contenu principal : affichage du plan ]
+	<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre} {titre !=squelette}>
+       	<fieldset>
+		<h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+
+		[(#REM) Sur le Web ]
+   		<B_sites1>
+   		<ul>
+			<BOUCLE_sites1(SITES) {id_rubrique} {par nom_site}{doublons}>
+			<p /><li>
+				[<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]" title="#NOM_SITE">(#NOM_SITE|couper{120})</a>]
+				[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank}{url=#URL_SITE}>]
+			</li>
+			</BOUCLE_sites1>
+		</ul>
+		</B_sites1>
+
+		[(#REM) Sous-rubriques ]
+		<B_rubriques>
+		<ul>
+			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+			<p /><li>
+				<strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
+				<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+
+				[(#REM) Sur le Web ]
+        		<B_sites>
+        		<ul>
+					<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{doublons}>
+					<li>
+						[<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]" title="#NOM_SITE">(#NOM_SITE|couper{120})&nbsp;</a>]
+						[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank}{url=#URL_SITE}>]
+					</li>
+					</BOUCLE_sites>
+				</ul>
+				</B_sites>
+			</li>
+			</BOUCLE_rubriques>
+		</ul>
+		</B_rubriques>
+		</fieldset>
+	</BOUCLE_secteurs>
+</div>

@@ -1,0 +1,14 @@
+	[(#REM) lien vers la synthése des flux rss si j'ai des articles]
+	<BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {0,1}>
+	<img src="#CHEMIN{feed.png}" title="<:icone_suivi_activite:>" alt="<:icone_suivi_activite:>" width="16" height="16" />
+	<a href="#URL_PAGE{herbier}"><:annuaire:synthese_flux:></a>
+	<br />
+	</BOUCLE_syndic>
+	[(#REM) Un rss]
+	<img src="#CHEMIN{feed.png}" title="<:icone_suivi_activite:>" alt="<:icone_suivi_activite:>" width="16" height="16" />
+	<a href="#URL_PAGE{backend-annuaire}" rel="alternate" title="<:syndiquer_site:>">RSS&nbsp;2.0</a>
+	<br />
+	[(#REM) Le igoogle]
+	<a  href="http://fusion.google.com/add?source=atgs&amp;feedurl=#URL_SITE_SPIP/spip.php?page=backend" class="spip_out">
+	<img src="http://www.gmodules.com/ig/images/plus_google.gif" title="<:annuaire:ajouter_google:>" alt="<:annuaire:ajouter_google:>" />
+	</a>

@@ -1,0 +1,71 @@
+[(#REM)
+	Ce fichier sert à créer les flux RSS
+	qui permettent aux visiteurs de suivre l'actualité
+	de votre site depuis un lecteur de news.
+
+	Cette page génère un code XML/RSS adapté
+
+][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+>
+
+<channel[ xml:lang="(#LANG)"]>
+	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	[<description><BOUCLE_descr(MOTS){titre=description}>#TEXTE*</BOUCLE_descr></description>]
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+	<atom:link href="[(#SELF|url_absolue)]" rel="self" type="application/rss+xml" />
+
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
+	</image>
+]
+
+<BOUCLE_syndic(SYNDIC_ARTICLES) {age_relatif<180} {par date}{inverse}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>#URL_ARTICLE</link>
+		[<guid isPermaLink="true">(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+
+[(#REM)
+	Le bloc qui suit diffuse les mots-cles a la mode RSS
+]
+	<BOUCLE_mots_rss(MOTS){id_syndic}>
+		[<dc:subject>(#TITRE|texte_backend|supprimer_numero)</dc:subject>]
+	</BOUCLE_mots_rss>
+
+		<description>[(#DESCRIPTIF|texte_backend)]
+
+		[(#REM)
+			Le bloc qui suit diffuse la rubrique et les mots-cles
+			sous forme de "microformats"
+		]
+		<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
+			[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_tags|texte_backend)&lt;/a&gt;]
+		</BOUCLE_rubrique_mf><B_mots_mf>
+		/ <BOUCLE_mots_mf(MOTS){id_syndic}{", "}>
+			[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend|supprimer_numero)&lt;/a&gt;]
+		</BOUCLE_mots_mf>
+
+		</description>
+
+	</item>
+</BOUCLE_syndic>
+
+</channel>
+
+</rss>
+

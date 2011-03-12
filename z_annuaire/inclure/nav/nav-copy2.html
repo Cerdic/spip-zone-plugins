@@ -1,0 +1,7 @@
+#CACHE{0}
+	&copy;<BOUCLE_copy(SITES) {par date} {0,1}>
+	[(#DATE|annee|unique)][-(#ENV{date}|>{#DATE}|?{#ENV{date},''}|annee|unique)]
+	</BOUCLE_copy>
+	[<strong>(#NOM_SITE_SPIP|textebrut)</strong>]
+	<br /><:annuaire:conception|ucfirst:>:&nbsp;<a href="http://www.pierre-kuhn.org" title="<:annuaire:conception:>" class="spip_out">Pierre KUHN</a>
+	[<br /><:annuaire:style:>&nbsp;(#CONFIG{annuaire_general/styliste}|propre|ptobr|trim)]

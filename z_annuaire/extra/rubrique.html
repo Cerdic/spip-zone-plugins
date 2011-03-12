@@ -1,0 +1,8 @@
+	<div id="nav_bas">
+	[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|oui)
+		<INCLURE{fond=inclure/nav/inc-nav_bas,env}>
+	]
+	[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|non)
+		<INCLURE{fond=inclure/boucle/b_zard_nav,env}>
+	]
+	</div><!--#nav_bas-->

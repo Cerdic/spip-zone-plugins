@@ -1,0 +1,22 @@
+[(#REM) Afficher les nouveautés :]
+<div id="new">
+	<INCLURE{fond=inclure/boucle/b_news, doublons}>
+</div><!--#new-->
+
+[(#REM) Afficher les mieux notés :]
+[(#CONFIG{annuaire_sommaire/config_boucle_plus_votes, defaut}|=={defaut}|oui)
+<div id="plus_votes">
+	<INCLURE{fond=inclure/boucle/b_plus_votes, doublons}>
+</div><!--#plus_votes-->
+]
+[(#CONFIG{annuaire_sommaire/config_boucle_plus_votes, vertical}|=={vertical}|oui)
+<div id="plus_votes_verti">
+	<INCLURE{fond=inclure/boucle/b_plus_votes_verti, doublons}>
+</div><!--#plus_votes_verti-->
+]
+
+[(#REM) Afficher au hasard :]
+[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|oui)
+<div id="zard">
+	<INCLURE{fond=inclure/boucle/b_zard, doublons}>
+</div><!--#zard-->]

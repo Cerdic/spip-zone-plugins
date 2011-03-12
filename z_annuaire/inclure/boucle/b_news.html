@@ -1,0 +1,24 @@
+[(#CONFIG{annuaire_sommaire/cache_titre_news}|=={on}|non)<h2><:nouveautes:></h2>]
+<ul>
+<BOUCLE_news(SITES){!par date}{doublons}{pagination #CONFIG{annuaire_sommaire/pas_pagination_nouveaute, 3}}>
+<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="prems"]>
+	<fieldset>
+	<a href="[(#ID_SYNDIC|generer_url_entite{site})]"><object>#NOM_SITE</object></a>
+	<B_tags_news>
+	<br />tags:&nbsp;<BOUCLE_tags_news(MOTS){id_syndic} {', '}>[(#TITRE|texte_backend|supprimer_numero)]</BOUCLE_tags_news>
+	</B_tags_news>
+	[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank}{url=#URL_SITE}>]
+	[<a class="img" href="[(#ID_SYNDIC|generer_url_entite{site})]"[ title="(#NOM_SITE|texte_backend)"]>(#THUMBSHOT{#URL_SITE})</a>]
+    <br />#FORMULAIRE_NOTATION<br />
+	[(#REM) Nombre total de messages ]
+		<BOUCLE_forum_news(FORUMS){id_syndic}{plat}{0,1}>
+			<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]#forum" title="<:annuaire:ajouter_commentaire:>">[(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:commentaire,annuaire:commentaires})]</a>
+		</BOUCLE_forum_news>
+			[(#CONFIG{forums_publics, non}|=={non}|oui)<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]#forum" title="<:annuaire:ajouter_commentaire:>"><:annuaire:pas_commentaire:></a>]
+		<//B_forum_news>
+	[(#COMPTEUR_BOUCLE|=={1}|oui)[<p>(#DESCRIPTIF|sinon{<:annuaire:pas_descriptif:>}|couper{#CONFIG{annuaire_taille/descriptif_news_prems,300}, <br /><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><b><:annuaire:lire_suite:></b></a>})</p>]]
+	[(#COMPTEUR_BOUCLE|=={1}|non)[<p>(#DESCRIPTIF|sinon{<:annuaire:pas_descriptif:>}|couper{#CONFIG{annuaire_taille/descriptif_news_suivants,300}, <br /><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><b><:annuaire:lire_suite:></b></a>})</p>]]
+	</fieldset>
+</li>
+</BOUCLE_news>
+</ul>

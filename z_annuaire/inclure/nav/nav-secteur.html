@@ -1,0 +1,6 @@
+	<h2 class="h2"><:rubriques:></h2>
+	[(#REM) Afficher les secteurs du site]
+	<BOUCLE_secteur(RUBRIQUES){racine} {par num titre, titre}{titre !IN squelette}>
+	<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
+	</BOUCLE_secteur>
+	<br />

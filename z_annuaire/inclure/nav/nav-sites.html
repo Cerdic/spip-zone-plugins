@@ -1,0 +1,8 @@
+	[(#REM) Afficher le nombre de sites syndiquer, page rank du site, date du dernier site référencé]
+	<BOUCLE_total(SITES)> </BOUCLE_total>
+	[<:annuaire:actuellement:>(#TOTAL_BOUCLE)&nbsp;<:sites_web:> <:annuaire:epingle_site:>
+	<a class="link" href="#URL_SITE_SPIP">#NOM_SITE_SPIP**</a>]
+	[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank}{url=#URL_SITE_SPIP}>]</B_total>
+	<br class="nettoyeur" />
+	[<:annuaire:popu_site:>&nbsp;(#POPULARITE_SITE|>={0}).]<br />
+	<BOUCLE_maj(SITES){!par date}{0,1}><:dernier_ajout:>&nbsp;: [(#DATE|affdate).]</BOUCLE_maj><br />

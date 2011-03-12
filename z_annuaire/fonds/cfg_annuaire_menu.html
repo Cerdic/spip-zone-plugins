@@ -1,0 +1,98 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_menu|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_menu:> -->
+<!-- boite=<:annuaire:annuaire_menu:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) Explication]
+<fieldset>
+	<legend><:annuaire:menu_lien_afficher:></legend>
+	[(#REM) Lien vers le sommaire]
+	<p /><:annuaire:menu_lien_sommaire:>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_sommaire" value="defaut" [(#ENV{menu_lien_sommaire, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:config_defaut_menu_lien:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_sommaire" value="non" [(#ENV{menu_lien_sommaire, defaut}|=={non}|?{checked="checked"})] />
+		<:annuaire:config_non_menu_lien:>
+	</label>
+
+	[(#REM) Lien vers le plan du site]
+	<p /><:annuaire:menu_lien_plan:>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_plan" value="defaut" [(#ENV{menu_lien_plan, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:config_defaut_menu_lien:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_plan" value="non" [(#ENV{menu_lien_plan, defaut}|=={non}|?{checked="checked"})] />
+		<:annuaire:config_non_menu_lien:>
+	</label>
+
+	[(#REM) Lien vers le plan complet du site]
+	<BOUCLE_toutes(RUBRIQUES) {1,1}>
+	<p /><:annuaire:menu_lien_plan_complet:>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_plan_complet" value="defaut" [(#ENV{menu_lien_plan_complet, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:config_defaut_menu_lien:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_plan_complet" value="non" [(#ENV{menu_lien_plan_complet, defaut}|=={non}|?{checked="checked"})] />
+		<:annuaire:config_non_menu_lien:>
+	</label>
+	</BOUCLE_toutes>
+
+	[(#REM) Lien vers la page partenaire]
+	<p /><:annuaire:menu_lien_partenaire:>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_partenaire" value="defaut" [(#ENV{menu_lien_partenaire, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:config_defaut_menu_lien:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_partenaire" value="non" [(#ENV{menu_lien_partenaire, defaut}|=={non}|?{checked="checked"})] />
+		<:annuaire:config_non_menu_lien:>
+	</label>
+
+	[(#REM) Lien vers la page contact]
+	[(#PLUGIN{contact}|oui)
+	<p /><:annuaire:menu_lien_contact:>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_contact" value="defaut" [(#ENV{menu_lien_contact, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:config_defaut_menu_lien:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_contact" value="non" [(#ENV{menu_lien_contact, defaut}|=={non}|?{checked="checked"})] />
+		<:annuaire:config_non_menu_lien:>
+	</label>
+	]
+
+	[(#REM) Lien vers la page abonnement]
+	[(#PLUGIN{spiplistes}|ou{#PLUGIN{clevermail}}|oui)
+	<p /><:annuaire:menu_lien_abonnement:>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_abonnement" value="defaut" [(#ENV{menu_lien_abonnement, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:config_defaut_menu_lien:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="menu_lien_abonnement" value="non" [(#ENV{menu_lien_abonnement, defaut}|=={non}|?{checked="checked"})] />
+		<:annuaire:config_non_menu_lien:>
+	</label>
+	]
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</form>

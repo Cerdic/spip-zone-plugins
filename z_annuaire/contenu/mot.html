@@ -1,0 +1,40 @@
+<BOUCLE_principale(MOTS) {id_mot} {doublons}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"><span class="sep"> &gt; </span></span><span><:mots_clefs:></span><BOUCLE_ariane(GROUPES_MOTS){id_groupe}><span class="sep"> &gt; </span>[(#TITRE|couper{80}|supprimer_numero)]</BOUCLE_ariane>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80}|supprimer_numero)</strong>]</p>
+
+<div class="contenu-principal">
+
+	[(#REM) Contenu principal : affichage du site ]
+        <div class="cartouche">
+            <h1 class="#EDIT{titre}">[(#TITRE|supprimer_numero)]</h1>
+			[(#LOGO_MOT||image_reduire{100,100})]
+        </div><!--#cartouche-->
+        [<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+	
+	[(#REM) Sites web lies au mot-cle ]
+        <B_sites>
+        <div class="menu">
+            #ANCRE_PAGINATION
+            <ul>
+                <BOUCLE_sites(SITES) {id_mot}{notation}{!par nombre_votes}{par nom_site} {pagination #CONFIG{annuaire_mot/pas_pagination_site, 10}}>
+				<li class="site">
+				<fieldset>
+				[<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]" title="(#NOM_SITE|texte_backend)">#NOM_SITE</a>]
+				[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank}{url=#URL_SITE}><br />]
+				[<a class="img spip_out"[ href="(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})"][ title="(#NOM_SITE|texte_backend)"][ alt="(#NOM_SITE|texte_backend)"]>
+				(#THUMBSHOT{#URL_SITE})</a>]
+				#FORMULAIRE_NOTATION<br />
+				[(#DESCRIPTIF|sinon{<p><:annuaire:pas_descriptif:></p>})]
+				</fieldset>
+				</li><!--#site-->
+				</BOUCLE_sites>
+            </ul>
+            [<p id="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+			[<p id="grand_total"><:annuaire:le_mot:> &#148;[(#TITRE|supprimer_numero)]&#148; <:annuaire:est_rattache:> (#GRAND_TOTAL{pagination #CONFIG{annuaire_mot/pas_pagination_site, 10}}|singulier_ou_pluriel{annuaire:site,annuaire:sites}).</p>]
+			</p>
+        </div><!--#menu-->
+        </B_sites>
+</div>
+
+[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_principale>

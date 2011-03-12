@@ -1,0 +1,25 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_bandeau|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_bandeau:> -->
+<!-- boite=<:annuaire:annuaire_bandeau:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<fieldset><!--#bandeau-->
+	<legend><:annuaire:aff_date|ucfirst:></legend>
+	<:annuaire:aff_date_expli:><br />
+	<br />
+	<label>
+		<input type="radio" name="aff_date" value="defaut" [(#ENV{aff_date, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:non:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="aff_date" value="oui" [(#ENV{aff_date, defaut}|=={oui}|?{checked="checked"})] />
+		<:annuaire:oui:>
+	</label>
+</fieldset><!--#bandeau-->
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</form>

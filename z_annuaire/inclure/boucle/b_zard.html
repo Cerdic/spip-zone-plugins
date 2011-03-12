@@ -1,0 +1,30 @@
+[(#CONFIG{annuaire_sommaire/cache_titre}|=={on}|non)<h2><:annuaire:hasard:></h2>]
+<B_zard>
+<ul>
+<BOUCLE_zard(SITES){doublons}{par hasard}{pagination #CONFIG{annuaire_sommaire/pas_pagination_hasard, 3}}>
+<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="prems"]>
+	<fieldset>
+	<a href="[(#ID_SYNDIC|generer_url_entite{site})]"><object>#NOM_SITE</object></a>
+	<B_tags_zard>
+	<br />tags:&nbsp;<BOUCLE_tags_zard(MOTS){id_syndic} {', '}>[(#TITRE|texte_backend|supprimer_numero)]</BOUCLE_tags_zard>
+	</B_tags_zard>
+	[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank}{url=#URL_SITE}>]
+	[<a class="img" href="[(#ID_SYNDIC|generer_url_entite{site})]"[ title="(#NOM_SITE|texte_backend)"]>(#THUMBSHOT{#URL_SITE})</a>]
+	<br />#FORMULAIRE_NOTATION<br />
+	[(#REM) Nombre total de messages ]
+		<BOUCLE_forum_zard(FORUMS){id_syndic}{plat}{0,1}>
+			<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]#forum" title="<:annuaire:ajouter_commentaire:>">[(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:commentaire,annuaire:commentaires})]</a>
+		</BOUCLE_forum_zard>
+			[(#CONFIG{forums_publics, non}|=={non}|oui)<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]#forum" title="<:annuaire:ajouter_commentaire:>"><:annuaire:pas_commentaire:></a>]
+		<//B_forum_zard>
+	[(#COMPTEUR_BOUCLE|=={1}|oui)[<p>(#DESCRIPTIF|sinon{<:annuaire:pas_descriptif:>}|couper{#CONFIG{annuaire_taille/descriptif_zard_prems,300}, <br /><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><b><:annuaire:lire_suite:></b></a>})</p>]]
+	[(#COMPTEUR_BOUCLE|=={1}|non)[<p>(#DESCRIPTIF|sinon{<:annuaire:pas_descriptif:>}|couper{#CONFIG{annuaire_taille/descriptif_zard_suivants,300}, <br /><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><b><:annuaire:lire_suite:></b></a>})</p>]]
+	</fieldset>
+</li>
+</BOUCLE_zard>
+</ul>
+</B_zard>
+<h4 class="pas_de"><:annuaire:pas_zard:></h4>
+<//B_zard>
+
+

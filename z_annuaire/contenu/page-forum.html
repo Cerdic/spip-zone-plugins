@@ -1,0 +1,53 @@
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+
+	<BOUCLE_contexte_site(SITES) {id_syndic}>
+	<BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
+	&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a>
+	</BOUCLE_ariane_site>
+	&gt; <a href="[(#ID_SYNDIC|generer_url_entite{site})]">[(#NOM_SITE|couper{80})]</a>
+	</BOUCLE_contexte_site>
+
+	<BOUCLE_contexte_forum(FORUMS) {id_forum}>
+	&gt; <a href="#URL_FORUM">[(#TITRE|couper{80}|supprimer_numero)]</a>
+	</BOUCLE_contexte_forum>
+
+	&gt; <strong class="on"><:poster_message:></strong> 
+  
+</p><!--#hierarchie-->
+
+<div class="contenu-principal">
+
+<div class="cartouche">
+    <h1 class="h1"><:poster_message:></h1>
+</div>
+
+<div class="resume articles">
+   	[(#REM) Contenu principal : affichage du forum ]
+	<h2 class="h2"><:en_reponse:></h2>
+
+	<h2 class="h2"><:en_reponse:></h2>
+
+	<BOUCLE_syndic(SITES) {id_syndic}>
+		<div id="nom_site">
+			<fieldset>
+			<object>#NOM_SITE**</object>
+			<BOUCLE_logo(MOTS){id_syndic} {'  '}>[(#LOGO_MOT||inserer_attribut{title, #TITRE|supprimer_numero}|inserer_attribut{alt, #TITRE|supprimer_numero})]</BOUCLE_logo>
+			[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank, url=#URL_SITE}>]
+			[<a class="img spip_out"[ href="(#URL_SITE)"][ title="(#NOM_SITE|texte_backend)"]>
+			(#THUMBSHOT{#URL_SITE})</a>]
+			#FORMULAIRE_NOTATION <br />
+			[(#DESCRIPTIF|sinon{<p><:annuaire:pas_descriptif:></p>})]
+			</fieldset>
+		</div><!--#nom_site-->
+	</BOUCLE_syndic>
+
+</div>
+<div id="leave_a_comment_wrap">
+	<div class="leave_a_comment">
+	<h2 class="h2"><:annuaire:laissez_commentaire:></h2>
+	</div>
+</div>
+
+#FORMULAIRE_FORUM
+</div>

@@ -1,0 +1,31 @@
+<BOUCLE_un_site(SITES){id_syndic}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#NOM_SITE|supprimer_tags|texte_backend)]</title>
+		<link>[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT}|url_absolue)]</link>
+		[<guid isPermaLink="true">(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+
+[(#REM)
+	Le bloc qui suit diffuse les mots-cles a la mode RSS
+]<BOUCLE_mots_rss(MOTS){id_syndic}>
+		[<dc:subject>(#TITRE|texte_backend|supprimer_numero)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>[(#DESCRIPTIF|texte_backend)]
+
+[(#REM)
+	Le bloc qui suit diffuse la rubrique et les mots-cles
+	sous forme de "microformats"
+
+]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_tags|texte_backend)&lt;/a&gt;]
+</BOUCLE_rubrique_mf><B_mots_mf>
+/ <BOUCLE_mots_mf(MOTS){id_syndic}{", "}>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend|supprimer_numero)&lt;/a&gt;]</BOUCLE_mots_mf>
+
+		</description>
+
+	</item>
+</BOUCLE_un_site>

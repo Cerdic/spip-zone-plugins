@@ -1,0 +1,30 @@
+[(#CONFIG{annuaire_sommaire/cache_titre_plus_votes_vertical}|=={on}|non)<h2><:annuaire:plus_votes:></h2>]
+<B_sites_plus_votes>
+<table border="0" width="100%">
+	<BOUCLE_sites_plus_votes(SITES notations_objets){doublons}{nombre_votes>0}{!par nombre_votes}{pagination #CONFIG{annuaire_sommaire/pas_pagination_plus_vote_verti, 3}}>
+	[(#COMPTEUR_BOUCLE|alterner{'<tr>','',''})]
+		[(#COMPTEUR_BOUCLE|alterner{'<td class="prems">','<td class="second">','<td class="tiers">'})]
+		<fieldset>
+			[<a class="img" href="[(#ID_SYNDIC|generer_url_entite{site})]"[ title="(#NOM_SITE|texte_backend)"]>(#THUMBSHOT{#URL_SITE})</a>]
+			<a href="[(#ID_SYNDIC|generer_url_entite{site})]"><object>#NOM_SITE</object></a>
+			<B_tags_plus_votes>
+			<br />tags:&nbsp;<BOUCLE_tags_plus_votes(MOTS){id_syndic} {', '}>[(#TITRE|texte_backend|supprimer_numero)]</BOUCLE_tags_plus_votes>
+			</B_tags_plus_votes>
+			[(#PLUGIN{pb_pagerank}|oui)<br /><INCLURE{fond=afficher_minipagerank}{url=#URL_SITE}>]
+			<br />[(#NOMBRE_VOTES|singulier_ou_pluriel{annuaire:vote,annuaire:votes})]<br />
+			[(#REM) Nombre total de messages ]
+				<BOUCLE_forum_plus_votes(FORUMS){id_syndic}{plat}{0,1}>
+					<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]#forum" title="<:annuaire:ajouter_commentaire:>">[(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:commentaire,annuaire:commentaires})]</a>
+				</BOUCLE_forum_plus_votes>
+					[(#CONFIG{forums_publics, non}|=={non}|oui)<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]#forum" title="<:annuaire:ajouter_commentaire:>"><:annuaire:pas_commentaire:></a>]
+				<//B_forum_plus_votes>
+			[<p>(#DESCRIPTIF|sinon{<:annuaire:pas_descriptif:>}|couper{#CONFIG{annuaire_taille/descriptif_plus_vote_verti,300}, <br /><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><b><:annuaire:lire_suite:></b></a>})</p>]
+		</fieldset>
+		</td>
+		[(#COMPTEUR_BOUCLE|alterner{'','','</tr>'})]
+	</BOUCLE_sites_plus_votes>
+[(#TOTAL_BOUCLE|alterner{'<td></td></tr>','</tr>', ''})]
+</table>
+</B_sites_plus_votes>
+<h4 class="pas_de"><:annuaire:pas_votes:></h4>
+<//B_sites_plus_votes>

@@ -1,0 +1,20 @@
+	<h2 class="h2"><:mots_clefs:></h2>
+	[(#REM) Afficher les mots clef du site syndiques]
+	<B_mot>
+		<BOUCLE_mot(MOTS){id_syndic}{par num titre, titre}>
+			<h3>[(#TYPE|supprimer_numero)]</h3>
+			<BOUCLE_mots(MOTS){id_groupe}{id_syndic}{par num titre, titre}{doublons}>
+			<br /><a href="#URL_MOT">[(#TITRE|supprimer_numero|ucfirst)]</a>
+			<BOUCLE_site_mot1(SITES) {id_mot}> </BOUCLE_site_mot1>([(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:site,annuaire:sites})])</B_site_mot1>
+			</BOUCLE_mots>
+		</BOUCLE_mot>
+	</B_mot>
+	[(#REM) affichage de tout les mots de l'annuaire]
+		<BOUCLE_mot1(GROUPES_MOTS){par num titre, titre}{titre !IN _META,Affichage,#CONFIG{annuaire_colonne/groupe_mots}}>
+			<h3>[(#TITRE|supprimer_numero)]</h3>
+			<BOUCLE_mots2(MOTS){id_groupe}{par num titre, titre}{id_syndic>0}>
+			<br /><a href="#URL_MOT">[(#TITRE|supprimer_numero|ucfirst)]</a>
+			<BOUCLE_site_mot2(SITES) {id_mot}> </BOUCLE_site_mot2>([(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:site,annuaire:sites})])</B_site_mot2>
+			</BOUCLE_mots2>
+		</BOUCLE_mot1>
+	<//B_mot>

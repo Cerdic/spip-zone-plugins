@@ -1,0 +1,18 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_rubrique|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_rubrique:>-->
+<!-- boite=<:annuaire:annuaire_rubrique:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) Boucles]
+<fieldset>
+	<legend><:annuaire:boucles:></legend>
+	[(#REM) Nbr articles page rubrique]
+	<p><b><:annuaire:nbr_articles:></b></p>
+	<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=5}{suffixe=_art}{env}>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</form>

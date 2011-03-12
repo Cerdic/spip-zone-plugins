@@ -1,0 +1,18 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_recherche|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_recherche:> -->
+<!-- boite=<:annuaire:annuaire_recherche:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) Boucles]
+<fieldset>
+	<legend><:annuaire:boucles:></legend>
+	[(#REM) Les boucles de recherche]
+	<p><b><:annuaire:resultats:></b></p>
+	<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=5}{suffixe=_recherche}{env}>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</form>

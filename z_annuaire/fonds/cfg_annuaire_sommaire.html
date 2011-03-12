@@ -1,0 +1,115 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_sommaire|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_sommaire:>-->
+<!-- boite=<:annuaire:annuaire_sommaire:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{config_boucle_plus_votes, vertical}|=={vertical}|oui)
+			jQuery(".bloc_plus_votes_defaut").hide();
+		]
+		[(#ENV{config_boucle_plus_votes, defaut}|=={defaut}|oui)
+			jQuery(".bloc_plus_votes_vertical").hide();
+		]
+
+		jQuery("input[name='config_boucle_plus_votes']").change(function() {
+			if (jQuery("input[name='config_boucle_plus_votes']:checked").val() == "defaut") {
+				jQuery(".bloc_plus_votes_defaut").show();
+			}
+			else {
+				jQuery(".bloc_plus_votes_defaut").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='config_boucle_plus_votes']").change(function() {
+			if (jQuery("input[name='config_boucle_plus_votes']:checked").val() == "vertical") {
+				jQuery(".bloc_plus_votes_vertical").show();
+			}
+			else {
+				jQuery(".bloc_plus_votes_vertical").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>
+
+<form method="post" action="#SELF"><div>
+[(#ENV{_cfg_}|form_hidden)]
+	[(#REM) Boucles]
+	<fieldset>
+		<legend><:annuaire:boucles:></legend>
+		
+		[(#REM) La boucle des sites references]
+		<p><b><:annuaire:nouveaute:></b></p>
+		<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=3}{suffixe=_nouveaute}{env}>
+
+		[(#REM) La boucle des sites les plus votes]
+		<p><b><:annuaire:plus_votes:></b></p>
+		<label>
+			<input type="radio" name="config_boucle_plus_votes" value="cache" [(#ENV{config_boucle_plus_votes, defaut}|=={cache}|?{checked="checked"})] />
+			<:annuaire:config_cache_boucle:>
+		</label>
+		<br />
+		<label>
+			<input type="radio" name="config_boucle_plus_votes" value="defaut" [(#ENV{config_boucle_plus_votes, defaut}|=={defaut}|?{checked="checked"})] />
+			<:annuaire:config_defaut_boucle:>
+		</label>
+		<br />
+		<label>
+			<input type="radio" name="config_boucle_plus_votes" value="vertical" [(#ENV{config_boucle_plus_votes, defaut}|=={vertical}|?{checked="checked"})] />
+			<:annuaire:config_boucle_vertical:>
+		</label><p />
+		<div class="bloc_plus_votes_defaut">
+			<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=3}{suffixe=_plus_vote}{env}>
+		</div>
+		<div class="bloc_plus_votes_vertical">
+			<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=3}{suffixe=_plus_vote_verti}{env}>
+		</div>
+
+		[(#REM) La boucle des sites au hasard]
+		<p><b><:annuaire:hasard:></b></p>
+		[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|oui)
+		<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=3}{suffixe=_hasard}{env}>]
+		[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|non)<:annuaire:afficher_colonne_nav:>]
+
+		[(#REM) Commun aux boucles]
+		<p><b><:annuaire:cache_titre:></b></p>
+		<label>
+			<input type="checkbox" name="cache_titre_news" [checked="(#ENV{cache_titre_news}|=={on}|?{checked})"] />
+			<:annuaire:cache_titre_news:>
+		</label>
+		<br />
+		<div class="bloc_plus_votes_defaut">
+		<label>
+			<input type="checkbox" name="cache_titre_plus_votes_defaut" [checked="(#ENV{cache_titre_plus_votes_defaut}|=={on}|?{checked})"] />
+			<:annuaire:cache_titre_plus_votes_defaut:>
+		</label>
+		</div>
+		<br />
+		<div class="bloc_plus_votes_vertical">
+		<label>
+			<input type="checkbox" name="cache_titre_plus_votes_vertical" [checked="(#ENV{cache_titre_plus_votes_vertical}|=={on}|?{checked})"] />
+			<:annuaire:cache_titre_plus_votes_vertical:>
+		</label>
+		</div>
+		<br />
+		[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|oui)
+		<label>
+			<input type="checkbox" name="cache_titre_zard" [checked="(#ENV{cache_titre_zard}|=={on}|?{checked})"] />
+			<:annuaire:cache_titre_zard:>
+		</label>]
+	</fieldset>
+
+	[(#REM) Couleurs]
+	<fieldset><!--#fond-->
+		[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|non)
+		<p><b><:annuaire:css_couleurs_zard:></b><p />
+		<:annuaire:afficher_colonne_nav:>]
+	</fieldset><!--#boucles-->
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</div></form>

@@ -1,0 +1,34 @@
+<div class="#ENV{class} menu">
+<table>
+	<tr>
+	<td class="#ENV{class}2">
+	<ul class="menu-items menu-liste">
+		[(#CONFIG{annuaire_menu/menu_lien_sommaire, non}|=={non}|non)
+		<li class="item menu-entree"><a href="#URL_SITE_SPIP/"><:accueil_site:></a></li>]
+		
+		[(#CONFIG{annuaire_menu/menu_lien_plan, non}|=={non}|non)
+		<li class="item menu-entree"><a href="#URL_PAGE{plan}"><:plan_site:></a></li>]
+		
+		<BOUCLE_toutes(RUBRIQUES) {1,1}>
+		[(#CONFIG{annuaire_menu/menu_lien_plan_complet, non}|=={non}|non)
+		<li class="item menu-entree"><a href="#URL_PAGE{plan_complet}"><:annuaire:toutes_rubriques:></a></li>]
+		</BOUCLE_toutes>
+		
+		[(#CONFIG{annuaire_menu/menu_lien_partenaire, non}|=={non}|non)
+		<li class="item menu-entree"><a href="#URL_PAGE{partenaire}"><:annuaire:partenaire|ucfirst:></a></li>]
+		
+		[(#CONFIG{annuaire_menu/menu_lien_contact, non}|=={non}|non)
+		[(#PLUGIN{contact}|oui)<li class="item menu-entree"><a href="#URL_PAGE{contact}"><:annuaire:annuaire_contact:></a></li>]]
+		
+		[(#CONFIG{annuaire_menu/menu_lien_abonnement, non}|=={non}|non)
+		[(#PLUGIN{spiplistes}|ou{#PLUGIN{clevermail}}|oui)<li class="item menu-entree"><a href="#URL_PAGE{abonnement}"><:annuaire:annuaire_abonnement:></a></li>]]
+	</ul>
+	</td>
+	[(#CONFIG{annuaire_colonne/config_copy, pied}|=={pied}|oui)
+	<td class="#ENV{class}3"><br />
+	[(#ENV{class}|=={pied}|oui)<INCLURE{fond=inclure/nav/nav-copy2, env}>]
+	</td>
+	]
+	</tr>
+</table>
+</div>

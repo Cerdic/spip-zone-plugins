@@ -1,0 +1,28 @@
+      
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:annuaire:toutes_rubriques:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:plan_site:></h1>
+</div>
+
+	[(#REM) Contenu principal : affichage du plan ]
+	<BOUCLE_secteurs(RUBRIQUES) {racine} {tout}{par titre} {titre !=squelette}>
+        <fieldset>
+		<h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+
+		[(#REM) Sous-rubriques ]
+		<B_rubriques>
+		<ul class="rubri">
+			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {tout}{par titre}>
+			<li>
+				<strong><a href="#URL_RUBRIQUE">#TITRE&nbsp;<BOUCLE_site_ssrub11(SITES) {id_rubrique}> </BOUCLE_site_ssrub11>([(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:site,annuaire:sites})])</B_site_ssrub11></a></strong>
+				<BOUCLE_sous_rubriques(BOUCLE_rubriques) {tout}></BOUCLE_sous_rubriques>
+			</li>
+			</BOUCLE_rubriques>
+		</ul>
+		</B_rubriques>
+		</fieldset>
+	</BOUCLE_secteurs>
+</div>

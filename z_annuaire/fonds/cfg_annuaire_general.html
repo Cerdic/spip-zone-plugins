@@ -1,0 +1,21 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_general|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_general:>-->
+<!-- boite=<:annuaire:annuaire_general:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset><!--#affichage-->
+		<legend><:annuaire:affichage:></legend>
+		<p /><:annuaire:styliste:><br />
+		<input type="text" name="styliste" value="[(#ENV{styliste})]" size="63" class="fondl" />
+		<p /><:annuaire:hebergement:><br />
+		<input type="text" name="hebergement" value="[(#ENV{hebergement})]" size="63" class="fondl" />
+		<p /><:annuaire:infos:><br />
+		<label>
+			<textarea name="infos" rows="4" cols="40" style="width:100%;">[(#ENV{infos})]</textarea>
+		</label>
+	</fieldset><!--#affichage-->
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</form>

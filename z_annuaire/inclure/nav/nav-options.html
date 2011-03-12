@@ -1,0 +1,5 @@
+	[(#PLUGIN{visiteurs_connectes}|ou{#VAL{_CS_visiteurs_connectes}|defined})
+	[(#PLUGIN{visiteurs_connectes}|oui)<INCLURE{fond=inc-visiteurs}>]
+	[(#VAL{_CS_visiteurs_connectes}|defined|oui)<INCLURE{fond=fonds/visiteurs_connectes}{p=0}>] 
+	#FORMULAIRE_RECHERCHE
+	]

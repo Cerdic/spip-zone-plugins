@@ -1,0 +1,36 @@
+     
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:annuaire:partenaire|ucfirst:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:annuaire:partenaire|ucfirst:></h1>
+</div>
+
+	[(#REM) Contenu principal : les partenaires ]
+		<B_partenaires>
+		<ul>
+            #ANCRE_PAGINATION
+		<BOUCLE_partenaires(SITES){titre_mot=partenaire}{notation}{!par nombre_votes} {pagination #CONFIG{annuaire_partenaire/pas_pagination_partenaire, 5}}>
+		<li>
+			<fieldset>
+			<a href="[(#ID_SYNDIC|generer_url_entite{site})]"><object>#NOM_SITE</object></a>
+			<BOUCLE_logo(MOTS){id_syndic} {'  '}>[(#LOGO_MOT||inserer_attribut{title, #TITRE|supprimer_numero}|inserer_attribut{alt, #TITRE|supprimer_numero})]</BOUCLE_logo>
+			[(#PLUGIN{pb_pagerank}|oui)<INCLURE{fond=afficher_minipagerank}{url=#URL_SITE}>]
+			[<a class="img" href="[(#ID_SYNDIC|generer_url_entite{site})]"[ title="(#NOM_SITE|texte_backend)"][ alt="(#NOM_SITE|texte_backend)"]>
+			(#LOGO_SITE||image_reduire{150,100}||inserer_attribut{title,#NOM_SITE|texte_backend})</a>]
+			#FORMULAIRE_JAIME_JAIMEPAS
+			[(#REM) Nombre total de messages ]
+			<BOUCLE_decompte(FORUMS) {id_syndic ?} {plat} />[(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+			[(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]]<//B_decompte>
+			[<p class="texte_chapo">(#DESCRIPTIF|ptobr)</p>]
+			</fieldset>
+		</li>
+		</BOUCLE_partenaires>
+		</ul>
+		</B_partenaires>
+            [<p id="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+			[<:annuaire:nous_avons:> (#GRAND_TOTAL{pagination #CONFIG{annuaire_partenaire/pas_pagination_partenaire, 5}}|singulier_ou_pluriel{annuaire:partenaire,annuaire:partenaires}).]
+		<h4 id="pas_de"><:annuaire:pas_partenaire:></h4>
+		<//B_partenaires>
+</div>

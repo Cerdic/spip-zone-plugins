@@ -1,0 +1,18 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire:> - <:annuaire:configuration_herbier:>-->
+<!-- descriptif=<:annuaire:descriptif_herbier:>-->
+<!-- boite=<:annuaire:annuaire_herbier:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) Boucles]
+<fieldset>
+	<legend><:annuaire:boucles:></legend>
+	[(#REM) Nbr articles]
+	<p><b><:annuaire:nbr_articles:></b></p>
+	<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=10}{suffixe=_herbier}{env}>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</form>

@@ -1,0 +1,75 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_colonne_pied|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_colonne:> -->
+<!-- boite=<:annuaire:annuaire_colonne:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{config_boucle_zard, defaut}|=={defaut}|oui)
+			jQuery(".nav_hasard").hide();
+		]
+		[(#ENV{config_boucle_zard, defaut}|=={defaut}|non)
+			jQuery(".nav_inclure").hide();
+		]
+
+		jQuery("input[name='config_boucle_zard']").change(function() {
+			if (jQuery("input[name='config_boucle_zard']:checked").val() == "nav")
+				jQuery(".nav_hasard").show();
+			else {
+				jQuery(".nav_hasard").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='config_boucle_zard']").change(function() {
+			if (jQuery("input[name='config_boucle_zard']:checked").val() == "defaut")
+				jQuery(".nav_inclure").show();
+			else {
+				jQuery(".nav_inclure").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>
+<form method="post" action="#SELF"><div>
+	[(#ENV{_cfg_}|form_hidden)]
+
+	[(#REM) Afficher une boucle ou les inclure dans la navigation]
+	<fieldset><!--#copy-->
+	<legend><:annuaire:config_boucle_zard|ucfirst:></legend>
+	<:annuaire:config_boucle_zard_expli:>
+	<br />
+	<label>
+		<input type="radio" name="config_boucle_zard" value="defaut" [(#ENV{config_boucle_zard, defaut}|=={defaut}|?{checked="checked"})] />
+		<:annuaire:config_defaut_inclure:>
+	</label>
+	<br />
+	<label>
+		<input type="radio" name="config_boucle_zard" value="nav" [(#ENV{config_boucle_zard, defaut}|=={nav}|?{checked="checked"})] />
+		<:annuaire:config_boucle_zard:>
+	</label>
+		[(#REM) La boucle des sites au hasard]
+		<div class="nav_hasard">
+		<p><b><:annuaire:hasard:></b></p>
+		<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=3}{suffixe=_hasard}{env}>
+		<br />
+		<:annuaire:cache_titre:>
+		<label>
+			<input type="checkbox" name="cache_titre_zard" [checked="(#ENV{cache_titre_zard}|=={on}|?{checked})"] />
+			<:annuaire:cache_titre_zard:>
+		</label>
+		</div><!--.nav_hasard-->
+	</fieldset><!--#copy-->
+
+	[(#REM) Groupes a ne pas affiche]
+	<fieldset><!--#groupe-->
+		<legend><:annuaire:groupe_mots:></legend>
+		<p /><:annuaire:groupe_mots_expli:>
+		<input type="text" name="groupe_mots" value="[(#ENV{groupe_mots})]" size="61" class="fondl" />
+	</fieldset><!--#groupe-->
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</div></form>

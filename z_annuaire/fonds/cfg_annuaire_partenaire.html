@@ -1,0 +1,18 @@
+#CACHE{0}
+<!-- titre=<:annuaire:annuaire|ucfirst:> - <:annuaire:configuration_partenaire|ucfirst:>-->
+<!-- descriptif=<:annuaire:descriptif_partenaire|ucfirst:>-->
+<!-- boite=<:annuaire:annuaire_partenaire:> -->
+
+<INCLURE{fond=inclure/cfg/inc-cfg_header}>
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) Boucles]
+<fieldset>
+	<legend><:annuaire:boucles:></legend>
+	[(#REM) Nbr articles page partenaire]
+	<p><b><:annuaire:nbr_sites:></b></p>
+	<INCLURE{fond=inclure/cfg/inc-cfg_pagination}{defaut_pas=5}{suffixe=_art}{env}>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</form>

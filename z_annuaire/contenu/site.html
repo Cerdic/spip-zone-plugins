@@ -1,0 +1,47 @@
+<BOUCLE_site(SITES){id_syndic}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}><span class="sep"> &gt; </span><a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[<span class="sep"> &gt; </span><strong class="on">(#NOM_SITE|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+
+	<div class="cartouche">
+		<a href="#URL_SITE"[ title="(#NOM_SITE|texte_backend)"]>[(#LOGO_SITE||image_reduire{150,100})]</a>
+		<h1 class="h1 #EDIT{nom_site}">#NOM_SITE</h1>
+		<B_tags_news>
+			<br />tags:&nbsp;<BOUCLE_tags_news(MOTS){id_syndic} {', '}>[(#TITRE|texte_backend|supprimer_numero)]</BOUCLE_tags_news>
+		</B_tags_news>
+		[(#PLUGIN{pb_pagerank}|oui)<br /><INCLURE{fond=afficher_minipagerank, url=#URL_SITE}>]
+		#FORMULAIRE_NOTATION <br />
+  </div>
+
+  [<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF|sinon{<p><:annuaire:pas_descriptif:></p>})</div>]
+  [<p class="#EDIT{url_site} hyperlien"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+</div>
+
+	[(#REM) Articles issus de la syndication ]
+	<B_articles>
+	<fieldset class="menu">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:articles:></h2>
+		<ul>
+			<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {! par date} {pagination #CONFIG{annuaire_site/pas_pagination_rss, 5}}>
+			<li>
+				<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+				<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+				[<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
+			</li>
+			</BOUCLE_articles>
+		</ul>
+		[<p id="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+		[<p id="grand_total"><:annuaire:le_site:>&nbsp;(#GRAND_TOTAL{pagination #CONFIG{annuaire_site/pas_pagination_rss, 5}}|singulier_ou_pluriel{annuaire:article_syndic,annuaire:articles_syndic}).</p>]
+	</fieldset><!--#menu-->
+	</B_articles>
+	[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+
+  [<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+
+[(#REM) Forum du site ]
+<a href="#forum" name="forum" id="forum"></a>
+<INCLURE{fond=inclure/forum}{id_syndic} />
+[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:commenter_site:></a></p>]
+</BOUCLE_site>
