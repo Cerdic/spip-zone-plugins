@@ -208,4 +208,28 @@ function mots_objets_afficher_nombre_objets_associes_a($flux){
 }
 
 
+/**
+ * Enlever les liaisons d'objets qui ont ete supprimes 
+**/
+function mots_objets_optimiser_base_disparus($flux){
+	
+	$objets_mots = gouverneur_de_mots();
+	
+	foreach ($objets_mots as $objet) {
+		$liaison = 'spip_mots_' . $objet->nom;
+		$_id = $objet->_id_objet;
+		
+		# les liens de mots affectes a des objets effaces
+		$res = sql_select(
+			"L.$_id AS id",
+			"$liaison AS L LEFT JOIN {$objet->table_sql} AS O ON L.$_id = O.$_id",
+			"O.$_id IS NULL");
+
+		$flux['data'] += optimiser_sansref($liaison, $_id, $res);
+	}
+	
+	return $flux;
+}
+
+
 ?>
