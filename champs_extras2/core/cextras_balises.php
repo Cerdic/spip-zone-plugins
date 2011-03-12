@@ -145,47 +145,24 @@ function balise_LISTER_VALEURS_dist($p) {
 
 // retourne un tableau de la liste des valeurs choisies pour un champ extra de table donne
 function calculer_balise_LISTER_VALEURS($objet, $_id_objet, $colonne, $id_objet, $cles) {
-	// recuperer la liste des champs extras existants
-	static $champs = false;
-	if ($champs === false) {
-		$champs = pipeline('declarer_champs_extras', array());
-	}
-
 	// exploser les cles !
 	$cles = explode(',', $cles);
 
 	// si pas de cles, on part aussi gentiment
 	if (!$cles) return array();
-		
+
+	// recuperer les choix possibles
+	$choix = calculer_balise_LISTER_CHOIX($objet, $colonne);
+
 	// sortir gentiment si pas de champs declares
 	// on ne peut pas traduire les cles
-	if (!is_array($champs)) return $cles;
-	
-	// initialiser les noms corrects d'objet
-	$objet = objet_type(table_objet($objet));
-	$vals = array();
-	
-	// on cherche les champs s'appliquant a la meme table	
-	foreach ($champs as $c) {
-		
-		if ($c->enum // sinon pas la peine de continuer
-		and $objet == $c->_type // attention aux cas compliques site->syndic !
-		and ($colonne == $c->champ)
-		and $c->sql) {
-			// HOP on a trouve le champs extra
-			// il faut calculer le bon retour...
-			// comparer $c->enum aux $cles
-			include_spip('cextras_pipelines');
-			$liste = cextras_enum_array($c->enum);
-			foreach($liste as $cle=>$valeur) {
-				if (in_array($cle, $cles)) $vals[$cle] = $valeur; // et on suppose que c'est deja traduit
-			}
+	if (!$choix) return $cles;
 
-			// sortir si trouve
-			break;
-		}
+	// correspondances...
+	foreach($choix as $cle=>$valeur) {
+		if (in_array($cle, $cles)) $vals[$cle] = $valeur;
 	}
-	
+
 	// et voici les valeurs !
 	return $vals ? $vals : $cles;
 }
