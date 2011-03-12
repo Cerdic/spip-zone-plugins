@@ -219,13 +219,22 @@ function mots_objets_optimiser_base_disparus($flux){
 		$liaison = 'spip_mots_' . $objet->nom;
 		$_id = $objet->_id_objet;
 		
-		# les liens de mots affectes a des objets effaces
+		# les liens de mots-objets affectes a des objets effaces
 		$res = sql_select(
 			"L.$_id AS id",
 			"$liaison AS L LEFT JOIN {$objet->table_sql} AS O ON L.$_id = O.$_id",
 			"O.$_id IS NULL");
 
 		$flux['data'] += optimiser_sansref($liaison, $_id, $res);
+
+
+		# les liens de mots-objets sur des mots effaces
+		$res = sql_select(
+			"L.id_mot AS id",
+			"$liaison AS L LEFT JOIN spip_mots AS mots ON L.id_mot = mots.id_mot",
+			"mots.id_mot IS NULL");
+
+		$n+= optimiser_sansref($liaison, 'id_mot', $res);
 	}
 	
 	return $flux;
