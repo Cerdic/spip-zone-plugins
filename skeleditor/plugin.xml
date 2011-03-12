@@ -71,7 +71,7 @@
       <url>skeleditor</url>
   </bouton>
   <bouton id="skeleditor21" parent="bando_squelette" position="0">
-      <icone>images/skeleditor-16.png</icone>
+      <icone>img_pack/skeleditor-24.png</icone>
       <titre>skeleditor:editer_skel</titre>
       <url>skeleditor</url>
   </bouton>
