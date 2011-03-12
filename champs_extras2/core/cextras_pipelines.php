@@ -5,8 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cextras');
 
 
-// Creer les item d'un select a partir des enum
-function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
+// recuperer un tableau des indications fournies pour des selections (enum, radio...)
+function cextras_enum_array($enum) {
 	$enums = array();
 	// 2 possibilites : enum deja un tableau (vient certainement d'un plugin),
 	// sinon texte a decouper (vient certainement de interfaces pour champs extra).
@@ -18,6 +18,14 @@ function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
 			$enums[$cle] = _T($desc);
 		}
 	}
+	return $enums;	
+}
+
+// Creer les item d'un select a partir des enum
+function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
+
+	// transformer la saisie utilisateur en tableau
+	$enums = cextras_enum_array($enum);
 
 	$val_t = explode(',', $val);
 	$class = $class ? " class='$class'" : '';
@@ -122,6 +130,10 @@ function ce_calculer_saisie_externe($c, $contexte, $prefixe='') {
 	$contexte['label'] = _T($c->label);
 	if (isset($contexte[$nom_champ]) and $contexte[$nom_champ]) {
 		$contexte['valeur'] = $contexte[$nom_champ];
+	}
+	// enum -> data
+	if ($c->enum) {
+		$contexte['datas'] = cextras_enum_array($c->enum);
 	}
 
 	$params = $c->saisie_parametres;
@@ -305,8 +317,13 @@ function cextras_afficher_contenu_objet($flux){
 				if($c->saisie_externe && find_in_path(
 				($f = 'saisies-vues/'.$c->type).'.html')){
 					$contexte['valeur'] = $contexte[$c->champ];
-					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas'])
+					// ajouter les listes d'éléments possibles
+					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
 						$contexte['datas'] = $c->saisie_parametres['datas'];
+					// sinon peut provenir du plugin d'interface, directement dans enum.
+					} elseif ($c->enum) {
+						$contexte['datas'] = cextras_enum_array($c->enum);
+					}
 						
 					$saisie_externe = true;
 				}
