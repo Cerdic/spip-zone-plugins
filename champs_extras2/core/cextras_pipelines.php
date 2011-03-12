@@ -180,22 +180,45 @@ function cextra_quete_valeurs_extras($extras, $type, $id){
 }
 
 // recuperer tous les extras qui verifient le critere demande :
-// l'objet sur lequel s'applique l'extra est comparee a $nom
-function cextras_get_extras_match($nom) {
+// l'objet sur lequel s'applique l'extra est comparee a $type
+function cextras_get_extras_match($type) {
+	static $champs = false;
+	if ($champs === false) {
+		$champs = pipeline('declarer_champs_extras', array());
+	}
+	
 	$extras = array();
-	if ($champs = pipeline('declarer_champs_extras', array())) {
-		$nom = objet_type(table_objet($nom));
+	if ($champs) {
+		$type = objet_type(table_objet($type));
 		foreach ($champs as $c) {
 			// attention aux cas compliques site->syndic !
-			if ($nom == $c->_type and $c->champ and $c->sql) {
+			if ($type == $c->_type and $c->champ and $c->sql) {
 				$extras[] = $c;
 			}
 		}
 	}
+	
 	return $extras;
 }
 
 
+/**
+ * Retourne la description (classe ChampExtra) d'un champ extra d'un objet donné.
+ *
+ * @param $type : type d'objet (article)
+ * @param $champ : nom du champ (puissance)
+ * 
+ * @return ChampExtra|false
+**/
+function cextras_get_extra($type, $champ) {
+	$extras = cextras_get_extras_match($type);
+	foreach ($extras as $c) {
+		if ($c->champ == $champ) {
+			return $c;
+		}
+	}
+	return false;
+}
 
 
 // ---------- pipelines -----------
