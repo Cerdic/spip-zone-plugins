@@ -1,4 +1,4 @@
-
+#SET{taille_max_image,#CONFIG{manuelsite/largeur,300}|moins{20}}
 <a id="manuelsite_bouton_fermer" href="#" title="<:manuelsite:fermer_le_manuel:>">X</a>
 
 <BOUCLE_contenu_article(ARTICLES){id_article}>
@@ -13,15 +13,15 @@
 		<div class="surlignable">
 		[<div class="intro">(#CONFIG{manuelsite/intro}|typo|propre)</div>]
 		[<div class="email"><:manuelsite:help:><a href="mailto:#CONFIG{manuelsite/email}">(#CONFIG{manuelsite/email})</a></div>]
-		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
-		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{#GET{taille_max_image},0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#GET{taille_max_image},0})</div>]
 		</div>
 
 		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 
 		[<div class="ps">
 		<h2 class="h2"><:info_ps:></h2>
-		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
+		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{#GET{taille_max_image},0})</div>
 		</div>]
 
 	</div>
