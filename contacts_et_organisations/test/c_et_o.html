@@ -1,0 +1,75 @@
+<h1>Orgas, Contacts, Liaisons</h1>
+
+
+<B_o>
+<ul>
+<BOUCLE_o(ORGANISATIONS){par nom}>
+	<li>#NOM, #ID_ORGANISATION (auteur: #ID_AUTEUR)
+		<B_c>
+		<ul>
+		<BOUCLE_c(CONTACTS){id_organisation}{par nom}>
+			<li>#NOM #PRENOM, #ID_CONTACT
+				<B_cl>
+				<ul>
+				<BOUCLE_cl(spip_contacts_liens){id_contact}{par objet, id_objet}>
+					<li>(#OBJET: #ID_OBJET)</li>
+				</BOUCLE_cl>
+				</ul>
+				</B_cl>
+			</li>
+		</BOUCLE_c>
+		</ul>
+		</B_c>
+	</li>
+</BOUCLE_o>
+</ul>
+</B_o>
+
+
+
+
+<h1>Contacts, Orgas</h1>
+
+
+<B__c>
+<ul>
+<BOUCLE__c(CONTACTS){par nom}>
+	<li>#NOM #PRENOM, #ID_CONTACT
+		<B__o>
+		<ul>
+		<BOUCLE__o(ORGANISATIONS){id_contact}{par nom}>
+			<li>#NOM, #ID_ORGANISATION</li>
+		</BOUCLE__o>
+		</ul>
+		</B__o>
+	</li>
+</BOUCLE__c>
+</ul>
+</B__c>
+
+
+<h1>Auteurs / contacts : (AUTEURS){id_contact>0}</h1>
+
+Ajouter «contacts_liens» à la boucle pour avoir accès à # ID_CONTACT.
+On n'a pas accès aux infos de la boucle contact
+<B_a>
+<ul>
+<BOUCLE_a(AUTEURS){id_contact>0}>
+	<li>#LOGIN / #NOM / (id_contact: [(#ID_CONTACT)] ) (prenom: [(#PRENOM)] )</li>
+</BOUCLE_a>
+</ul>
+</B_a>
+
+
+<h1>Contacts / auteurs : (CONTACTS){id_auteur>0}</h1>
+
+Ajouter «contacts_liens auteurs» à la boucle pour
+avoir accès à # ID_AUTEUR ET aux infos de la boucle auteur
+
+<B__a>
+<ul>
+<BOUCLE__a(CONTACTS contacts_liens auteurs){id_auteur>0}>
+	<li>#ID_CONTACT / #NOM / #PRENOM (id_auteur: [(#ID_AUTEUR)] ) (login: [(#LOGIN)] )</li>
+</BOUCLE__a>
+</ul>
+</B__a>

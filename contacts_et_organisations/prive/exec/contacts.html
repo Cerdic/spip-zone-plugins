@@ -21,6 +21,4 @@
 
 <h1><:contacts:titre_page_contacts:></h1>
 
-<div><:contacts:explications_page_contacts:>
-
-[(#INCLURE{fond=prive/liste/contacts}{env})]
+[(#INCLURE{fond=prive/liste/contacts, env, sinon=<:contacts:aucun_contact:>})]

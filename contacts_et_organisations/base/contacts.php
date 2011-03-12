@@ -4,8 +4,7 @@
  * Licence GPL (c) 2009 - 2010- Ateliers CYM
  */
 
-function contacts_declarer_tables_interfaces($interface){
-	
+function contacts_declarer_tables_interfaces($interface){	
 	$interface['table_des_tables']['organisations'] = 'organisations';
 	$interface['table_des_tables']['contacts'] = 'contacts';
 	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
@@ -19,6 +18,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
 	$interface['tables_jointures']['spip_contacts'][]= 'organisations_contacts';
 	$interface['tables_jointures']['spip_organisations'][]= 'organisations_contacts';
+
 
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
@@ -59,12 +59,12 @@ function contacts_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"		=> "id_organisation",
 		"UNIQUE KEY id_auteur" => "id_auteur"
 		);
-	$organisations_join = array(
+/*	$organisations_join = array(
 		"id_auteur" 		=> "id_auteur",
 		"id_organisation" 	=> "id_organisation"
-	);
+	);*/
 	$tables_principales['spip_organisations'] =
-		array('field' => &$organisations, 'key' => &$organisations_key, 'join' => &$organisations_join);
+		array('field' => &$organisations, 'key' => &$organisations_key, /*'join' => &$organisations_join*/);
 
 	//-- Table contacts ------------------------------------------
 	$contacts = array(
@@ -80,11 +80,11 @@ function contacts_declarer_tables_principales($tables_principales){
 	$contacts_key = array(
 		"PRIMARY KEY"	=> "id_contact",
 		);
-	$contacts_join = array(
+/*	$contacts_join = array(
 		"id_contact" => "id_contact"
-	);
+	);*/
 	$tables_principales['spip_contacts'] =
-		array('field' => &$contacts, 'key' => &$contacts_key, 'join' => &$contacts_join);
+		array('field' => &$contacts, 'key' => &$contacts_key, /*'join' => &$contacts_join*/);
 
 	return $tables_principales;
 

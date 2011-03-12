@@ -4,7 +4,7 @@
 	nom,1,
 	id_contact,1
 }})
-]<B_liste_orga>
+]<B_liste_contacts>
 #ANCRE_PAGINATION
 <div class="liste-elements contacts">
 <table class='spip liste'>
@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_orga(CONTACTS contacts_liens){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
+	<BOUCLE_liste_contacts(CONTACTS contacts_liens){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#LOGO_{#OBJET}|sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}|image_reduire{20,26})]</a>
 			<td class='pseudo'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#MODELE{nom_auteur}</a></td>
@@ -33,11 +33,11 @@
 				#ID_OBJET
 			})]</td>
 		</tr>
-	</BOUCLE_liste_orga>
+	</BOUCLE_liste_contacts>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_orga>[
+</B_liste_contacts>[
 <div class="liste-elements contacts"><strong class="caption">(#ENV*{sinon,''})</strong></div>
-]<//B_liste_bre>
+]<//B_liste_contacts>

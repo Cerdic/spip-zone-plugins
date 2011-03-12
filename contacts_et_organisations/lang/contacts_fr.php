@@ -3,6 +3,11 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'aucun_contact' => "Il n'y a aucun contact !",
+	'aucune_organisation' => "Il n'y a aucune organisation !",
+	
 	// B
 	'bouton_rechercher' => "Rechercher",
 	'bouton_contacts' => 'Contacts',
@@ -35,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_supprimer_organisation' => "La suppression de l'organisation supprimera
 		toutes les informations suppl&eacute;mentaires renseign&eacute;es sur l'auteur.",
 	'explication_identification' => 'Identifiant de l\'organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
+
 	'explications_page_contacts' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
 	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 	'explications_page_organisations' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
@@ -75,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'organisations' => 'Organisations',
-		
+	
 	// S
 	'supprimer_contact' => "Supprimer ce contact",
 	'supprimer_organisation' => "Supprimer cette organisation",

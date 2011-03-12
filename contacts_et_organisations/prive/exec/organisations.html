@@ -20,6 +20,4 @@
 
 <h1><:contacts:titre_page_organisations:></h1>
 
-<div><:contacts:explications_page_organisations:>
-
-[(#INCLURE{fond=prive/liste/organisations}{env})]
+[(#INCLURE{fond=prive/liste/organisations, env, sinon=<:contacts:aucune_organisation:>})]
