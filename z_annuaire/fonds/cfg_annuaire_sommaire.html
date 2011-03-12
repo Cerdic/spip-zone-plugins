@@ -106,9 +106,7 @@
 
 	[(#REM) Couleurs]
 	<fieldset><!--#fond-->
-		[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|non)
-		<p><b><:annuaire:css_couleurs_zard:></b><p />
-		<:annuaire:afficher_colonne_nav:>]
+		[(#CONFIG{annuaire_colonne/config_boucle_zard, defaut}|=={defaut}|non)<:annuaire:afficher_colonne_nav:>]
 	</fieldset><!--#boucles-->
 <input type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
 <input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
