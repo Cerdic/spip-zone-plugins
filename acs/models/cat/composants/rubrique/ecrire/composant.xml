@@ -38,7 +38,15 @@
     <option>right</option>
     <valeur>right</valeur>
   </variable>
-  
+
+  <variable>
+    <nom>Article</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+    
   <variable>
     <nom>MaJ</nom>
     <type>choix</type>

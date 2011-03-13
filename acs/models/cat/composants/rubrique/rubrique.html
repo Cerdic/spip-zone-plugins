@@ -2,6 +2,9 @@
 
 Rubrique #ID_RUBRIQUE
 
+Affiche l'article unique si la rubrique n'en contient qu'un seul
+
 ][(#SET{id_rubrique, #ENV{id_rubrique,1}})]<div id="rubrique" class="#PINCEAU{rubrique}">
-<INCLURE{fond=composants/rubrique/inc-rubrique}{lang=#LANG}{self}{env}{id_rubrique=#GET{id_rubrique}}>
+[(#VAR{acsRubriqueArticle}|!={non}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rub_ou_art}{lang=#LANG}{self}{env}{id_rubrique=#GET{id_rubrique}}>]
+[(#VAR{acsRubriqueArticle}|=={non}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rubrique}{lang=#LANG}{self}{env}{id_rubrique=#GET{id_rubrique}}>]
 </div>

@@ -1,0 +1,11 @@
+#CACHE{0}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+  <B_articles_multiples>
+  <BOUCLE_articles_multiples(ARTICLES) {id_rubrique} {1,1}></BOUCLE_articles_multiples>
+    [(#TOTAL_BOUCLE|<{2}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rubrique}{lang=#LANG}{self}{env}{id_rubrique=#ID_RUBRIQUE}>]
+  </B_articles_multiples>
+    <BOUCLE_article_unique(ARTICLES) {id_rubrique}{0,1}>
+      [(#TOTAL_BOUCLE|<{2}|?{' ',''})<INCLURE{fond=composants/articles/article}{id_article=#ID_ARTICLE}>]
+    </BOUCLE_article_unique>
+  <//B_articles_multiples>
+</BOUCLE_principale>

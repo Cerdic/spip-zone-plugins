@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Rubrique du site',
 
 'MaJ'=>'Dernier ajout',
+'LogoAlign'=>'Alignement du logo',
+'Article'=>'Remplacer par l\'article s\'il est unique',
+'Souligne' => 'Souligner le titre avec la couleur dominante du logo'
 
 );
 ?>
