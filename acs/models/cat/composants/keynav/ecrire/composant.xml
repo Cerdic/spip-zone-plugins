@@ -1,0 +1,34 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Keynav</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.7.2</version>
+  <necessite id='acs' version='[0.7.2;]' />
+  
+  <param>
+    <nom>preview</nom>
+    <valeur>160</valeur>
+  </param>
+  
+  <variable>
+    <nom>Key1</nom>
+    <type>key</type>
+  </variable>  
+  <variable>
+    <nom>Key2</nom>
+    <type>key</type>
+  </variable>
+  <variable>
+    <nom>Key3</nom>
+    <type>key</type>
+  </variable>
+  <variable>
+    <nom>Key4</nom>
+    <type>key</type>
+  </variable>
+  <variable>
+    <nom>Key5</nom>
+    <type>key</type>
+  </variable>
+</composant>
