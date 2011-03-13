@@ -24,10 +24,9 @@ function action_editer_seance_dist() {
 	return array($id_seance,$err);
 }
 
-// inserer seances_endroit
+// inserer seances
 function insert_seance() {
 	$champs = array(
-		/* 'id_article' => 0, */
 		'date_seance' => '0000-00-00 00:00:00'
 	);
 

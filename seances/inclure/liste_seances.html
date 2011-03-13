@@ -11,7 +11,7 @@
 				|parametre_url{id_seance,#ID_SEANCE}
 				|parametre_url{id_article,#ENV{id_article}})" title="<:seances:action_modifier:>"><:seances:action_modifier_court:></a>]
 			[ | <a href="(#URL_ECRIRE{seance_edit}
-				|parametre_url{id_seance,new}
+				|parametre_url{new,oui}
 				|parametre_url{id_article,#ENV{id_article}}
 				|parametre_url{duplicate,#ID_SEANCE})" title="<:seances:action_dupliquer:>"><:seances:action_dupliquer_court:></a>]
 			[ | <a href="(#URL_ACTION_AUTEUR{supprimer_seance,#ID_SEANCE,#SELF})" onclick="return confirm('<:seances:confirmer_action_supprimer_seance:>')" title="<:seances:action_supprimer:>"><:seances:action_supprimer_court:></a>]
