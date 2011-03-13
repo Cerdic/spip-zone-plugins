@@ -46,7 +46,7 @@
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<categorie>outil</categorie>
 </plugin>
-<plugin version="[2.1.0-beta;]" >
+<plugin version="[2.1.0;]" >
 	<nom>SkelEditor</nom>
 	<icon>spip_210/img_pack/skeleditor-32.png</icon>
 	<auteur>[erational->http://www.erational.org], [C&eacute;dric Morin->http://www.yterium.net]</auteur>
@@ -64,14 +64,15 @@
 	<prefix>skeleditor</prefix>
 	<options>spip_210/skeleditor_pipelines.php</options>
 
-	<!-- bouton prive -->
+	<!-- bouton prive spip sans bando -->
   <bouton id="skeleditor" parent="naviguer">
       <icone>img_pack/skeleditor-24.png</icone>
       <titre>skeleditor:editer_skel</titre>
       <url>skeleditor</url>
   </bouton>
+	<!-- bouton prive spip avec bando -->
   <bouton id="skeleditor21" parent="bando_squelette" position="0">
-      <icone>img_pack/skeleditor-24.png</icone>
+			<icone>images/skeleditor-16.png</icone>
       <titre>skeleditor:editer_skel</titre>
       <url>skeleditor</url>
   </bouton>
