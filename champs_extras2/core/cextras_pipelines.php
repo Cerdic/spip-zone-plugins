@@ -153,6 +153,12 @@ function ce_calculer_saisie_externe($c, $contexte, $prefixe='') {
 	// tout inserer le reste des champs
 	$contexte = array_merge($contexte, $params);
 
+	// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
+	// Champs Extra les stocke separes par des virgule.
+	if ($contexte['datas']) {
+		$contexte['valeur'] = explode(',', $contexte['valeur']);
+	}
+
 	return array('saisies/_base', $contexte);
 }
 
@@ -346,6 +352,12 @@ function cextras_afficher_contenu_objet($flux){
 					// sinon peut provenir du plugin d'interface, directement dans enum.
 					} elseif ($c->enum) {
 						$contexte['datas'] = cextras_enum_array($c->enum);
+					}
+
+					// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
+					// Champs Extra les stocke separes par des virgule.
+					if ($contexte['datas']) {
+						$contexte['valeur'] = explode(',', $contexte['valeur']);
 					}
 						
 					$saisie_externe = true;
