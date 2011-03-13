@@ -436,6 +436,7 @@ class Actionneur {
 		// il faudra prendre en compte les autres _DIR_xx
 		if ($i['constante'] == '_DIR_PLUGINS') {
 			include_spip('inc/plugin');
+			include_spip('inc/step');
 			$dossier = rtrim($i['dossier'],'/');
 			$plugin_get_infos = charger_fonction('get_infos', 'plugins');
 			$infos = $plugin_get_infos($dossier);
@@ -622,6 +623,7 @@ class Actionneur {
 		$infos = $plugin_get_infos($dossier);
 		if (isset($infos['install'])) {
 			ob_start();
+			include_spip('inc/step');
 			if (installe_un_plugin($dossier, $infos)) {
 				$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
 				if (!$meta_plug_installes) $meta_plug_installes=array();

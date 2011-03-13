@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 
 include_spip('inc/plugin'); // pour spip_version_compare(), plugin_version_compatible()
-// 2 fonctions du inc/plugin de SPIP2.1 absentes de SPIP 2.2
+// 3 fonctions du inc/plugin de SPIP2.1 absentes de SPIP 2.2
 if (!function_exists('actualise_plugins_actifs')) {
   function actualise_plugins_actifs() {
     ecrire_plugin_actifs('',false, 'force');
@@ -15,7 +15,18 @@ if (!function_exists('actualise_plugins_actifs')) {
 if (!function_exists('installe_un_plugin')) {
 	function installe_un_plugin($plug,$infos,$dir = '_DIR_PLUGINS'){
 	  $f = charger_fonction('installer', 'plugins');
-	  return $f($plug, 'install', $dir);
+	  $f = $f($plug, 'install', $dir);
+	  return is_array($f) ? $f['install_test'][0] : $f;
+	}
+}
+				
+if (!function_exists('desinstalle_un_plugin')) {
+	function desinstalle_un_plugin($plug,$infos,$dir = '_DIR_PLUGINS'){
+	  $f = charger_fonction('installer', 'plugins');
+	  spip_log("exec $f");
+	  $f = $f($plug, 'uninstall');
+	  spip_log("$plug $f");
+	  return is_array($f) ? $f['install_test'][0] : $f;
 	}
 }
 				
