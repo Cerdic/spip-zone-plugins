@@ -39,7 +39,7 @@ Modele Cat pour ACS vesion 0.7 :
  - Mail : dimensionnement automatique pour spip 2.1.2
  - Module : remplacé par le composant Cadre, qui permet en plus du contenu de définir l'apparence
  - Ours : suppression des stats, isolees dans un composant specifique : Stats
- - Rubrique : nouveau composant apparence d'une rubrique
+ - Rubrique : nouveau composant apparence et comportement d'une rubrique
  - Stats : nouveau composant avec les stats globales du site
  - Syndic : correction style du composant dans le contexte d'une rubrique ou d'un site syndiqué
  - Tags : fonction animation (nuage de mots-clefs animes)

@@ -40,6 +40,7 @@
     <nom>FondAlign</nom>
     <type>choix</type>
     <option>left</option>
+    <option>center</option>
     <option>right</option>
     <valeur>left</valeur>
   </variable>
@@ -47,6 +48,7 @@
     <nom>FondVerticalAlign</nom>
     <type>choix</type>
     <option>top</option>
+    <option>middle</option>    
     <option>bottom</option>
     <valeur>top</valeur>
   </variable>
@@ -70,7 +72,7 @@
     <option>top</option>
     <option>middle</option>
     <option>bottom</option>
-    <valeur>center</valeur>
+    <valeur>middle</valeur>
   </variable>
   <variable>
     <nom>Hauteur</nom>

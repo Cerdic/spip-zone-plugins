@@ -1,0 +1,27 @@
+#CACHE{0}
+.cCarte#NIC .olMapViewport {
+  min-height: 400px;
+  min-width: 400px;
+  height: 100%;
+}
+.cCarte#NIC .olFramedCloudPopupContent {
+  max-width: 300px;
+  max-height: 200px;
+  overflow: auto;
+  z-index: 1004;
+}
+.cCarte#NIC .olFramedCloudPopupContent p, .cCarte#NIC .olFramedCloudPopupContent div {
+  margin: 0;
+  font-family: [(#VAR{acsCarte[(#NIC)]TextFont, Arial}),][ (#VAR{acsCarte[(#NIC)]TextFontFamily, sans-serif})];
+  font-size: [(#VAR{acsCarte[(#NIC)]TextFontSize, 0.88em})];
+  text-align: justify;
+}
+.cCarte#NIC .olFramedCloudPopupContent div {
+  text-align: #LANG_RIGHT;
+
+}
+.cCarte#NIC .olFramedCloudPopupContent p.titre {
+  text-align: center;
+  font-family: [(#VAR{acsCarte[(#NIC)]TitreFont, Arial}),][ (#VAR{acsCarte[(#NIC)]TitreFontFamily, sans-serif})];
+  font-size: [(#VAR{acsCarte[(#NIC)]TitreFontSize, 1.09em})];
+}

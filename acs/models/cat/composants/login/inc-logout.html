@@ -1,7 +1,8 @@
 <div class="cLogin">
-  <BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}>[
-  <a href="#URL_AUTEUR">(#LOGO_AUTEUR|left|image_reduire{50,50})</a>]
   <div class="bloc-title bsize"><:spip:icone_informations_personnelles:></div>
+  <div class="logout">
+  <BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>[
+  <a href="#URL_AUTEUR">(#LOGO_AUTEUR|left|image_reduire{50,50})</a>]
   [ <a href="#URL_AUTEUR" class="bsize">(#NOM)</a>]
     <div>
     <B_articles><BOUCLE_articles(ARTICLES){id_auteur}></BOUCLE_articles></B_articles>
@@ -12,6 +13,7 @@
     <//B_forums>
     </div>
   </BOUCLE_auteur>
+  </div>
   <div class="logout_link right nsize"><a href="[(#URL_LOGOUT)]" rel="nofollow"><:icone_deconnecter:></a></div>
 </div>
 [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]

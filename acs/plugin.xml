@@ -20,7 +20,7 @@
 			 - palette 1.3.1 (&gt;40258) : choix visuel des couleurs.<br />
 			 - en option :<br />
 			 		- notation 0.7.1 : publication par notation pour le mod&egrave;le Cat.<br />
-			 		- recommander 0.2 : recommander un article &#224; un-e ami-e<br />
+			 		- recommander 1.0.0 : recommander un article &#224; un-e ami-e<br />
 			 <br />
 		 [en]
  - <a href="?exec=acs&amp;detail=2">ACS Site Design Wizard</a>
@@ -37,7 +37,7 @@
 	</description>
 	<lien>[Documentation->http://acs.geomaticien.org]</lien>
 	<auteur>	<!-- Auteur du plugin -->
- 	Daniel FAIVRE &copy; 2007-2010 - <multi>[fr]licence GPL[en]GPL license</multi>
+ 	Daniel FAIVRE &copy; 2007-2011 - <multi>[fr]licence GPL[en]GPL license</multi>
 	</auteur>
   <version>0.7.2</version>
 	<etat>stable</etat>

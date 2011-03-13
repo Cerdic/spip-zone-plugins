@@ -114,9 +114,11 @@ function balise_HEADER_COMPOSANTS($p) {
   return $p; 
 }
 
-// Cache de la fonction composants_head.
+// Cache de la fonction composants_head. On force le recalcul car de toute façon SPIP (récent) cache habillage.css.html
+// ça ferait double-emploi, avec de sérieux soucis de debug liés a un double cache css sinon.
+// TODO : garder la mise en cache pour les "vieux" Spip ?
 function composants_head_cache($type) {
-  $r = cache('composants_head', 'head_'.$GLOBALS['meta']['acsModel'].'_'.$type, array("$type"));
+  $r = cache('composants_head', 'head_'.$GLOBALS['meta']['acsModel'].'_'.$type, array("$type"), true);
   return $r[0];
 }
 

@@ -1,0 +1,54 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Carte</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
+  <version>0.7.2</version>
+  <necessite id='acs' version='[0.7.1;]' />
+  <necessite id='gis' version='[0.7.1;]' />
+  <necessite id='openlayers' version='[0.7.1;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>300</valeur>
+  </param>
+  <param>
+    <nom>instanciable</nom>
+  </param>
+
+  <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>TitreFontSize</nom>
+    <type>nombre</type>
+    <valeur>1.09em</valeur>
+  </variable>
+  <variable>
+    <nom>TitreFontFamily</nom>
+    <type>fontFamily</type>
+    <valeur>sans-serif</valeur>
+  </variable>
+  <variable>
+    <nom>TitreFont</nom>
+    <type>text</type>
+  </variable>
+  
+  <variable>
+    <nom>TextFontSize</nom>
+    <type>nombre</type>
+    <valeur>0.88em</valeur>
+  </variable>
+  <variable>
+    <nom>TextFontFamily</nom>
+    <type>fontFamily</type>
+    <valeur>sans-serif</valeur>
+  </variable>
+  <variable>
+    <nom>TextFont</nom>
+    <type>text</type>
+  </variable>
+
+</composant>
