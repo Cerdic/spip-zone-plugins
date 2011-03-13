@@ -2,7 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/svp_depoter');
 
 function formulaires_ajouter_depot_charger_dist(){
 	// On ne renvoie pas les valeurs saisies mais on fait un raz systematique
@@ -10,6 +9,8 @@ function formulaires_ajouter_depot_charger_dist(){
 }
 
 function formulaires_ajouter_depot_verifier_dist(){
+	include_spip('inc/svp_outiller');
+	
 	$erreurs = array();
 	$xml = _request('xml_paquets');
 
@@ -29,6 +30,8 @@ function formulaires_ajouter_depot_verifier_dist(){
 }
 
 function formulaires_ajouter_depot_traiter_dist(){
+	include_spip('inc/svp_depoter');
+
 	$retour = array();
 	$xml = _request('xml_paquets');
 

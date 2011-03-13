@@ -6,20 +6,6 @@ include_spip('inc/plugin');
 // ----------------------- Traitements des depots ---------------------------------
 
 /**
- * Teste la validite d'une url d'un depot de paquets
- *
- * @param string $url
- * @return boolean
- */
-
-// $url	=> url du fichier xml de description du depot
-function svp_verifier_adresse_depot($url){
-	include_spip('inc/distant');
-	return (!$xml = recuperer_page($url)) ? false : true;
-}
-
-
-/**
  * Ajout du depot et de ses extensions dans la base de donnees
  *
  * @param string $url
@@ -228,7 +214,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		return false;
 		
 	// On initialise l'url de base des logos du depot et son type afin de calculer l'url complete de chaque logo
-	// A REVOIR COMPLETEMENT !!!!
 	$depot = sql_fetsel('url_archives, type', 'spip_depots', 'id_depot=' . sql_quote($id_depot));
 	
 	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
@@ -255,6 +240,9 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		$insert_paquet['date_modif'] = $_infos['last_commit'];
 
 		// On verifie si le paquet est celui d'un plugin ou pas
+		// -- Les traitements du XML dependent de la DTD utilisee
+		$traiteur =  'svp_dtd_' . _SVP_DTD_PLUGIN;
+		include_spip('inc/'. $traiteur);
 		if ($champs = svp_remplir_champs_sql($_infos['plugin'])) {
 			$paquet_plugin = true;
 			// On complete les informations du paquet et du plugin
@@ -483,149 +471,16 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 }
 
 
-// Les archives xml sont deja applaties, pas la peine de se compliquer.
-function svp_remplir_champs_sql($p) {
-
-	if (!$p)
-		return array();
-
-	// On passe le prefixe en lettres majuscules comme ce qui est fait dans SPIP
-	// Ainsi les valeurs dans la table spip_plugins coincideront avec celles de la meta plugin
-	$p['prefix'] = strtoupper($p['prefix']);
-
-	// calcul du tableau de dependances
-	$dependances = array();
-	$v_spip = '';
-	if (is_array($p['necessite'])) {
-		foreach ($p['necessite'] as $c=>$n) {
-			$p['necessite'][$c]['id'] = strtoupper($n['id']);
-			if ($n['id'] == 'SPIP') {
-				$v_spip = $n['version'];
-			}
-		}
-		$dependances['necessite'] = $p['necessite'];
-	}
-	
-	if (is_array($p['utilise'])) {
-		foreach ($p['utilise'] as $c=>$n) {
-			$p['utilise'][$c]['id'] = strtoupper($n['id']);
-		}
-		$dependances['utilise'] = $p['utilise'];
-	}
-
-	// Etat numerique (pour simplifier la recherche de maj)
-	$num = array('stable'=>4, 'test'=>3, 'dev'=>2, 'experimental'=>1);
-	$etatnum = isset($num[$p['etat']]) ? $num[$p['etat']] : 0;
-	
-	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
-	$p['description'] = unicode2charset(html2unicode($p['description']));
-	$p['slogan'] = unicode2charset(html2unicode($p['slogan']));
-	$p['nom'] = unicode2charset(html2unicode($p['nom']));
-	$p['auteur'] = unicode2charset(html2unicode($p['auteur']));
-	$p['licence'] = unicode2charset(html2unicode($p['licence']));
-
-	// Nom, slogan et branche
-	if ($p['prefix'] == _SVP_PREFIXE_PLUGIN_THEME) {
-		// Traitement specifique des themes qui aujourd'hui sont consideres comme des paquets
-		// d'un plugin unique de prefixe "theme"
-		$nom = _SVP_NOM_PLUGIN_THEME;
-		$slogan = _SVP_SLOGAN_PLUGIN_THEME;
-	}
-	else {
-		// Calcul *temporaire* de la nouvelles balise slogan si celle-ci n'est
-		// pas renseignee et de la balise nom. Ceci devrait etre temporaire jusqu'a la nouvelle ere
-		// glaciaire des plugins
-		// - Slogan	:	si vide alors on prend la premiere phrase de la description limitee a 255
-		$slogan = (!$p['slogan']) ? svp_remplir_slogan($p['description']) : $p['slogan'];
-		// - Nom :	on repere dans le nom du plugin un chiffre en fin de nom
-		//			et on l'ampute de ce numero pour le normaliser
-		//			et on passe tout en unicode avec le charset du site
-		$nom = svp_normaliser_nom($p['nom']);
-	}
-	
-	return array(
-		'plugin' => array(
-			'prefixe' => $p['prefix'],
-			'nom' => $nom,
-			'slogan' => $slogan,
-			'categorie' => $p['categorie'],
-			'tags' => $p['tags']),
-		'paquet' => array(
-			'logo' => $p['icon'],
-			'description' => $p['description'],
-			'auteur' => $p['auteur'],
-			'version' => $p['version'],
-			'version_base' => $p['version_base'],
-			'version_spip' => $v_spip,
-			'etat' => $p['etat'],
-			'etatnum' => $etatnum,
-			'licence' => $p['licence'],
-			'lien' => $p['lien'],
-			'dependances' => serialize($dependances))
-	);
-}
-
-function svp_remplir_slogan($description) {
-	include_spip('inc/texte');
-
-	// On extrait les traductions de l'eventuel multi
-	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
-	$descriptions = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $description, $nbr_replace));
-	$multi = ($nbr_replace > 0) ? true : false;
-
-	// On boucle sur chaque multi ou sur la chaine elle-meme en extrayant le slogan
-	// dans les differentes langues
-	$slogan = '';
-	foreach ($descriptions as $_lang => $_descr) {
-		$_descr = trim($_descr);
-		if (!$_lang)
-			$_lang = 'fr';
-		$nbr_matches = preg_match(',^(.+)[.!?\r\n\f],Um', $_descr, $matches);
-		$slogan .= (($multi) ? '[' . $_lang . ']' : '') . 
-					(($nbr_matches > 0) ? trim($matches[1]) : couper($_descr, 150, ''));
-	}
-
-	if ($slogan)
-		// On renvoie un nouveau slogan multi ou pas
-		$slogan = (($multi) ? '<multi>' : '') . $slogan . (($multi) ? '</multi>' : '');
-
-	return $slogan;
-}
-
-function svp_normaliser_nom($nom) {
-	include_spip('inc/texte');
-
-	// On extrait les traductions de l'eventuel multi
-	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
-	$noms = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $nom, $nbr_replace));
-	$multi = ($nbr_replace > 0) ? true : false;
-	
-	$nouveau_nom = '';
-	foreach ($noms as $_lang => $_nom) {
-		$_nom = trim($_nom);
-		if (!$_lang)
-			$_lang = 'fr';
-		$nbr_matches = preg_match(',(.+)(\s+[\d._]*)$,Um', $_nom, $matches);
-		$nouveau_nom .= (($multi) ? '[' . $_lang . ']' : '') . 
-						(($nbr_matches > 0) ? trim($matches[1]) : $_nom);
-	}
-	
-	if ($nouveau_nom)
-		// On renvoie un nouveau nom multi ou pas sans la valeur de la branche 
-		$nouveau_nom = (($multi) ? '<multi>' : '') . $nouveau_nom . (($multi) ? '</multi>' : '');
-		
-	return $nouveau_nom;
-}
-
-
-// ----------------------- Analyses XML ---------------------------------
-
 // parse un fichier de source dont l'url est donnee
 // ce fichier est un fichier XML contenant <depot>...</depot>
 // et <archives>...</archives>
 function svp_xml_parse_depot($url){
 	include_spip('inc/xml');
 	include_spip('inc/distant');
+	include_spip('inc/svp_outiller');
+	// -- Les traitements du XML dependent de la DTD utilisee
+	$traiteur =  'svp_dtd_' . _SVP_DTD_PLUGIN;
+	include_spip('inc/'. $traiteur);
 
 	// On lit le fichier xml
 	if (!$xml = recuperer_page($url)) {
@@ -660,8 +515,8 @@ function svp_xml_parse_depot($url){
 		// - cas 1 : c'est un plugin donc on integre les infos du plugin
 		// - cas 2 : c'est une archive non plugin, pas d'infos autres que celles de l'archive
 		if ($url = $c['file'][0]) {
-			if (is_array($c['plugin']))
-				$plugin = svp_xml_parse_plugin($c['plugin'][0]);
+			if (is_array($c[_SVP_DTD_PLUGIN]))
+				$plugin = svp_xml_parse_plugin($c[_SVP_DTD_PLUGIN][0]);
 			else
 				$plugin = array();
 			// On remplit les infos dans les deux cas
@@ -677,269 +532,6 @@ function svp_xml_parse_depot($url){
 	}
 	
 	return $infos;
-}
-
-
-// aplatit plusieurs cles d'un arbre xml dans un tableau
-// effectue un trim() au passage
-function svp_xml_aplatit_multiple($array, $arbre){
-	$a = array();
-	// array('uri','archive'=>'zip',...)
-	foreach ($array as $i=>$n){
-		if (is_string($i)) $cle = $i;
-		else $cle = $n;
-		$a[$n] = trim(spip_xml_aplatit($arbre[$cle]));
-	}
-	return $a;	
-}
-
-
-// parse un plugin.xml genere par spip_xml_parse()
-// en un tableau plus facilement utilisable
-// cette fonction doit permettre de mapper des changements 
-// de syntaxe entre plugin.xml et step
-function svp_xml_parse_plugin($arbre){
-
-	if (!is_array($arbre)) 
-		return false;
-	
-	// on commence par les simples !
-	$plug_arbre = svp_xml_aplatit_multiple(
-				array('nom','icon','auteur','licence','version','version_base','etat','slogan','categorie','tags',
-				'description','lien','options','fonctions','prefix','install'), 
-				$arbre);
-	$plug_arbre['prefix'] = strtolower($plug_arbre['prefix']);
-	
-	// on continue avec les plus complexes...	
-	// 1) balises avec attributs
-	foreach (array(
-			'necessite'=>array('necessite', null),
-			'utilise'=>array('utilise', null),
-			'chemin'=>array('path', array('dir'=>'')))
-				as $balise=>$p){
-		$params = $res = array();
-		// recherche de la balise et extraction des attributs
-		if (spip_xml_match_nodes(",^$balise,",$arbre, $res)){
-			foreach(array_keys($res) as $tag){
-				list($tag,$att) = spip_xml_decompose_tag($tag);
-				$params[] = $att;
-			}
-		} 
-		// valeur par defaut
-		else {
-			if ($p[1]!==null)
-				$params[] = $p[1];
-		}
-		$plug_arbre[$p[0]] = $params;		
-	}
-
-	return $plug_arbre;
-}
-
-
-// ----------------------- Recherches de plugins ---------------------------------
-
-function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $version_spip='',
-									$exclusions=array(), $afficher_exclusions=false, $doublon=false, $tri='nom') {
-
-	include_spip('inc/rechercher');
-	
-	$plugins = array();
-	$scores = array();
-	$ids_paquets = array();
-
-	// On prepare l'utilisation de la recherche en base SPIP en la limitant aux tables spip_plugins
-	// et spip_paquets  si elle n'est pas vide
-	if ($phrase) {
-		$liste = liste_des_champs();
-		$tables = array('plugin' => $liste['plugin'], 'paquet' => $liste['paquet']);
-		$options = array('jointures' => true, 'score' => true);
-	
-		// On cherche dans tous les enregistrements de ces tables des correspondances les plugins qui
-		// correspondent a la phrase recherchee
-		// -- On obtient une liste d'id de plugins et d'id de paquets
-		$resultats = array('plugin' => array(), 'paquet' => array());
-		$resultats = recherche_en_base($phrase, $tables, $options);
-		// -- On prepare le tableau des scores avec les paquets trouves par la recherche
-		if ($resultats) {
-			// -- On convertit les id de plugins en id de paquets
-			$ids = array();
-			if ($resultats['plugin']) {
-				$ids_plugin = array_keys($resultats['plugin']);
-				$where[] = sql_in('id_plugin', $ids_plugin);
-				$ids = sql_allfetsel('id_paquet, id_plugin', 'spip_paquets', $where);
-			}
-			// -- On prepare les listes des id de paquet et des scores de ces memes paquets
-			if ($resultats['paquet']) {
-				$ids_paquets = array_keys($resultats['paquet']);
-				foreach ($resultats['paquet'] as $_id => $_score) {
-					$scores[$_id] = intval($resultats['paquet'][$_id]['score']);
-				}
-			}
-			// -- On merge les deux tableaux de paquets sans doublon en mettant a jour un tableau des scores
-			foreach ($ids as $_ids) {
-				$id_paquet = intval($_ids['id_paquet']);
-				$id_plugin = intval($_ids['id_plugin']);
-				if (array_search($id_paquet, $ids_paquets) === false) {
-					$ids_paquets[] = $id_paquet;
-					$scores[$id_paquet] = intval($resultats['plugin'][$id_plugin]['score']);
-				}
-				else {
-					$scores[$id_paquet] = intval($resultats['paquet'][$id_paquet]['score']) 
-										+ intval($resultats['plugin'][$id_plugin]['score']);
-				}
-			}
-		}
-	}
-
-	// Maintenant, on continue la recherche en appliquant, sur la liste des id de paquets,
-	// les filtres complementaires : categorie, etat, exclusions et compatibilite spip
-	// si on a bien trouve des resultats precedemment ou si aucune phrase n'a ete saisie
-	// -- Preparation de la requete
-	if (!$phrase OR $resultats) {
-		$from = array('spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3');
-		$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 't1.id_plugin AS id_plugin', 
-						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.version_spip AS version_spip',
-						't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
-						't2.logo AS logo', 't2.version AS version', 't2.nom_archive AS nom_archive',
-						't3.url_archives AS url_archives', );
-		$where = array('t1.id_plugin=t2.id_plugin', 't2.id_depot=t3.id_depot');
-		if ($ids_paquets)
-			$where[] = sql_in('t2.id_paquet', $ids_paquets);
-		if (($categorie) AND ($categorie != 'toute_categorie'))
-			$where[] = 't1.categorie=' . sql_quote($categorie);
-		if (($etat) AND ($etat != 'tout_etat'))
-			$where[] = 't2.etat=' . sql_quote($etat);
-		if (($depot) AND ($depot != 'tout_depot'))
-			$where[] = 't2.id_depot=' . sql_quote($depot);
-		if ($exclusions AND !$afficher_exclusions)
-			$where[] = sql_in('t2.id_plugin', $exclusions, 'NOT');
-	
-		if ($resultats = sql_select($select, $from, $where)) {
-			while ($paquets = sql_fetch($resultats)) {
-				$prefixe = $paquets['prefixe'];
-				$version = $paquets['version'];
-				$nom = extraire_multi($paquets['nom']);
-				$slogan = extraire_multi($paquets['slogan']);
-				$description = extraire_multi($paquets['description']);
-				if (svp_verifier_compatibilite_spip($paquets['version_spip'], $version_spip)) {
-					// Le paquet remplit tous les criteres, on peut le selectionner
-					// -- on utilise uniquement la langue du site
-					$paquets['nom'] = $nom;
-					$paquets['slogan'] = $slogan;
-					$paquets['description'] = $description;
-					// -- on ajoute le score si on a bien saisi une phrase
-					if ($phrase)
-						$paquets['score'] = $scores[intval($paquets['id_paquet'])];
-					else
-						$paquets['score'] = 0;
-					// -- on construit l'url de l'archive
-					$paquets['url_archive'] = $paquets['url_archives'] . '/' . $paquets['nom_archive'];
-					// -- on gere les exclusions si elle doivent etre affichees
-					if ($afficher_exclusions AND in_array($paquets['id_plugin'], $exclusions))
-						$paquets['installe'] = true;
-					else
-						$paquets['installe'] = false;
-					// -- On traite les doublons (meme plugin, versions differentes)
-					if ($doublon)
-						// ajout systematique du paquet
-						$plugins[] = $paquets;
-					else {
-						// ajout 
-						// - si pas encore trouve 
-						// - ou si sa version est inferieure (on garde que la derniere version)
-						if (!$plugins[$prefixe]
-						OR ($plugins[$prefixe] AND spip_version_compare($plugins[$prefixe]['version'], $version, '<'))) {
-							$plugins[$prefixe] = $paquets;
-						}
-					}
-				}
-			}
-		}
-		
-		// On trie le tableau par score décroissant ou nom croissant
-		$fonction = 'svp_trier_par_' . $tri;
-		if ($doublon)
-			usort($plugins, $fonction);
-		else
-			uasort($plugins, $fonction);
-	}
-	
-	return $plugins;
-}
-
-
-/**
- * Recuperation des id des plugins a exclure car deja installes
- *
- * @return array
- */
-function svp_lister_plugins_installes(){
-
-	$ids = array();
-
-	// On recupere la liste des plugins installes physiquement sur le site
-	// Pour l'instant ce n'est pas possible avec les fonctions natives de SPIP
-	// donc on se contente des plugins actifs
-	// - liste des prefixes en lettres majuscules des plugins actifs
-	include_spip('inc/plugin');
-	$plugins = liste_plugin_actifs();
-
-	// - liste des id de plugin correspondants
-	//   Il se peut que certains plugins ne soient pas trouves dans la bdd car aucun zip n'est disponible
-	//   (donc pas inclus dans archives.xml). C'est le cas des extensions du core
-	$ids = sql_allfetsel('id_plugin', 'spip_plugins', sql_in('prefixe', array_keys($plugins)));
-	$ids = array_map('reset', $ids);
-	$ids = array_map('intval', $ids);
-
-	return $ids;
-}
-
-
-/**
- * Test de la compatibilite du plugin avec une version donnee de SPIP
- *
- * @return boolean
- */
-function svp_verifier_compatibilite_spip($version, $version_spip) {
-	include_spip('inc/plugin');
-	if (!$version_spip)
-		$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	return plugin_version_compatible($version, $version_spip);
-}
-
-
-/**
- * Tri decroissant des resultats par score. 
- * Cette fonction est appelee par un usort ou uasort
- *
- * @return int
- */
-function svp_trier_par_score($p1, $p2){
-	if ($p1['score'] == $p2['score']) 
-		$retour = 0;
-	else 
-		$retour = ($p1['score'] < $p2['score']) ? 1 : -1;
-	return $retour;
-}
-
-
-/**
- * Tri croissant des resultats par nom. 
- * Si le nom est identique on classe par version decroissante 
- * Cette fonction est appelee par un usort ou uasort
- *
- * @return int
- */
-function svp_trier_par_nom($p1, $p2){
-	$c1 = strcasecmp($p1['nom'], $p2['nom']);
-	if ($c1 == 0) {
-		$c2 = spip_version_compare($p1['version'], $p1['version'], '<');
-		$retour = ($c2) ? 1 : -1;
-	}
-	else 
-		$retour = ($c1 < 0) ? -1 : 1;
-	return $retour;
 }
 
 ?>

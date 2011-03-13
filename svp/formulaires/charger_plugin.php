@@ -2,8 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/svp_depoter');
-
 function formulaires_charger_plugin_charger_dist(){
 	return array('phrase' => _request('phrase'),
 				'categorie' => _request('categorie'),
@@ -18,6 +16,8 @@ function formulaires_charger_plugin_verifier_dist(){
 }
 
 function formulaires_charger_plugin_traiter_dist(){
+	include_spip('inc/svp_rechercher');
+
 	$retour = array();
 	$phrase = _request('phrase');
 	$categorie = _request('categorie');
