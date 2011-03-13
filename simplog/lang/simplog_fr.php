@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 'liste_fic' => 'Liste des fichiers',
-'logs' => 'Traces',
+'logs' => 'Consultation des journaux',
 
 
 // M
