@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Un annuaire de sites en Z</nom>
+	<nom>Annuaire pour le concept Z</nom>
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]
 	&copy; 2011</auteur>
 	<licence>GPL</licence>
@@ -9,7 +9,7 @@
 	[fr]Faire un annuaire de sites suivant votre th&egrave;me avec le concept Z.
 	</multi>
 	</description>
-	<lien>[Documentation->http://www.spip-contrib.net/]</lien>
+	<lien>[Documentation->http://www.spip-contrib.net/?article3762]</lien>
 	<etat>dev</etat>
 	<icon>img/annuaire.jpg</icon>
 	<prefix>annuaire</prefix>
