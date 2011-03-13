@@ -26,9 +26,6 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 }
 
-/*address,caption,cite,code,dfn,em,strong,th,var { font-style: normal; font-weight: normal; }*/
-abbr,acronym { border: 0; }
-
 ol,ul { list-style: none; }
 table { border-collapse: collapse; border-spacing: 0; }
 caption,th { text-align: left; }
