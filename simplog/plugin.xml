@@ -6,7 +6,7 @@
 	<description>
 	Visualisation des logs SPIP par les administrateurs
 	</description>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<icon>asuivre-24.gif</icon>
 	<prefix>simplog</prefix>
         <pipeline>
