@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']]['entree_liens_sites_breves'] = _T('entree_liens_s
 $GLOBALS[$GLOBALS['idx_lang']]['info_url_breves'] = _T('info_url');
 
 include_spip('inc/inscrire_priveperso');
-include_spip('inc/filtre');
+include_spip('inc/filtres');
 
 
 $id_rubrique = priveperso_recupere_id_rubrique();
